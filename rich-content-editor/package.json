@@ -13,7 +13,7 @@
   "scripts": {
     "clean": "rm -rf dist/",
     "pretranspile": "npm run clean",
-    "transpile": "babel -q src -d dist/src",
+    "transpile": "babel -q src -d dist/src --copy-files",
     "prebuild": "npm run transpile",
     "build": "npm run build:santa && webpack --config webpack.prod.js ",
     "build:santa": "webpack --config webpack.santa.js",
