@@ -100,6 +100,13 @@ module.exports = {
     /^pro-gallery-renderer.*$/,
     'mobx',
     {
+      'draft-js': {
+        root: 'Draft',
+        commonjs2: '@wix/draft-js',
+        commonjs: '@wix/draft-js',
+        amd: '@wix/draft-js',
+        umd: '@wix/draft-js',
+      },
       '@wix/draft-js': {
         root: 'Draft',
         commonjs2: '@wix/draft-js',
