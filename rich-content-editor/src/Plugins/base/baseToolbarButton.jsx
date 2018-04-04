@@ -52,7 +52,7 @@ class BaseToolbarButton extends React.Component {
 
   handleClick = event => {
     event.preventDefault();
-    const { componentState, keyName, helpers, pubsub, theme, t, onClick, anchorTarget, ...otherProps } = this.props;
+    const { componentState, keyName, helpers, pubsub, theme, t, onClick, anchorTarget, relValue, ...otherProps } = this.props;
 
     if (this.props.type === BUTTONS.FILES && helpers && helpers.handleFileSelection) {
       const multiple = !!this.props.multiple;
@@ -75,6 +75,7 @@ class BaseToolbarButton extends React.Component {
           helpers,
           pubsub,
           anchorTarget,
+          relValue,
           t,
           theme: theme || {},
           ...otherProps,
@@ -249,6 +250,7 @@ BaseToolbarButton.propTypes = {
   t: PropTypes.func,
   tooltipTextKey: PropTypes.string,
   anchorTarget: PropTypes.string,
+  relValue: PropTypes.string,
   dataHook: PropTypes.string,
 };
 

@@ -22,6 +22,7 @@ class BlockLinkButton extends Component {
       keyName,
       componentState,
       anchorTarget,
+      relValue,
       t
     } = this.props;
     const modalStyles = getModalStyles({ fullScreen: false });
@@ -36,6 +37,7 @@ class BlockLinkButton extends Component {
           t,
           theme,
           anchorTarget,
+          relValue,
           modalName: MODALS.MOBILE_BLOCK_LINK_MODAL,
           hidePopup: helpers.closeModal
         };
@@ -49,6 +51,7 @@ class BlockLinkButton extends Component {
         onExtendContent,
         onOverrideContent,
         anchorTarget,
+        relValue,
         theme,
         t,
       };
@@ -80,6 +83,7 @@ BlockLinkButton.propTypes = {
   keyName: PropTypes.string,
   componentState: PropTypes.object,
   anchorTarget: PropTypes.string,
+  relValue: PropTypes.string,
   t: PropTypes.func,
 };
 

@@ -6,7 +6,7 @@ import * as Styles from './styles.scss';
 const createExternalEmojiPlugin = (config = {}) => {
   const plugin = createEmojiPlugin({ theme: Styles, useNativeArt: false });
   const type = EXTERNAL_EMOJI_TYPE;
-  const { decorator, helpers, theme, isMobile, t, anchorTarget, tooltipTextKey } = config;
+  const { decorator, helpers, theme, isMobile, t, anchorTarget, relValue, tooltipTextKey } = config;
 
   const InsertToolbarButton = plugin.EmojiSelect;
   let toolbar;
@@ -36,6 +36,7 @@ const createExternalEmojiPlugin = (config = {}) => {
     helpers,
     isMobile,
     anchorTarget,
+    relValue,
     t
   }, plugin);
 };

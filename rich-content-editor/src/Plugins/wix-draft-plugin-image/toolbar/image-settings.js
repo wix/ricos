@@ -100,7 +100,7 @@ class ImageSettings extends Component {
   };
 
   render() {
-    const { componentData, helpers, theme, t, anchorTarget, isMobile } = this.props;
+    const { componentData, helpers, theme, t, anchorTarget, relValue, isMobile } = this.props;
     const { config = {} } = componentData;
     const { src, metadata = {} } = this.state;
 
@@ -166,6 +166,7 @@ class ImageSettings extends Component {
               nofollow={nofollow}
               isImageSettings
               anchorTarget={anchorTarget}
+              relValue={relValue}
               t={t}
             />
           </div>
@@ -190,6 +191,7 @@ ImageSettings.propTypes = {
   pubsub: PropTypes.any,
   t: PropTypes.func,
   anchorTarget: PropTypes.string,
+  relValue: PropTypes.string,
   isMobile: PropTypes.bool,
 };
 

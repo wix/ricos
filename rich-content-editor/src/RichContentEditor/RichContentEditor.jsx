@@ -45,11 +45,11 @@ class RichContentEditor extends Component {
     const {
       helpers,
       anchorTarget,
+      relValue,
       hideFooterToolbar,
       sideToolbarOffset,
       textButtons,
       textToolbarType,
-      relValue,
       isMobile,
       t,
     } = this.props;

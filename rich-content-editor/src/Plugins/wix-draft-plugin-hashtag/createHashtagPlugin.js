@@ -5,7 +5,7 @@ import decorateComponentWithProps from 'decorate-component-with-props';
 
 const createHashtagPlugin = (config = {}) => {
   const type = HASHTAG_TYPE;
-  const { decorator, helpers, theme, isMobile, t, anchorTarget, hashtag } = config;
+  const { decorator, helpers, theme, isMobile, t, anchorTarget, relValue, hashtag } = config;
   const plugin = { decorators: [] };
 
   const hashtagConfig = hashtag || {};
@@ -27,6 +27,7 @@ const createHashtagPlugin = (config = {}) => {
     helpers,
     isMobile,
     anchorTarget,
+    relValue,
     t
   }, plugin);
 };

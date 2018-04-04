@@ -4,7 +4,7 @@ import { Component } from './gallery-component';
 import { GALLERY_TYPE } from './types';
 
 const createGalleryPlugin = (config = {}) => {
-  const { decorator, helpers, theme, isMobile, t, anchorTarget, gallery: settings } = config;
+  const { decorator, helpers, theme, isMobile, t, anchorTarget, relValue, gallery: settings } = config;
 
   return createBasePlugin({
     component: Component,
@@ -20,6 +20,7 @@ const createGalleryPlugin = (config = {}) => {
     helpers,
     isMobile,
     anchorTarget,
+    relValue,
   });
 };
 

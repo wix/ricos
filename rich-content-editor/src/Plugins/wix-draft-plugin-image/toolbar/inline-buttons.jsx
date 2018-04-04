@@ -6,7 +6,7 @@ import SettingsIcon from '~/Plugins/base/icons/block-settings.svg';
 
 const modalStyles = getModalStyles();
 
-export default({ t, anchorTarget }) => {
+export default({ t, anchorTarget, relValue }) => {
   return [
     { keyName: 'sizeOriginal', type: BUTTONS.SIZE_ORIGINAL, mobile: false },
     { keyName: 'sizeSmallCenter', type: BUTTONS.SIZE_SMALL_CENTER, mobile: false },
@@ -24,6 +24,7 @@ export default({ t, anchorTarget }) => {
       modalName: MODALS.IMAGE_SETTINGS,
       modalStyles,
       anchorTarget,
+      relValue,
       t,
       mobile: true,
       tooltipTextKey: 'SettingsButton_Tooltip',

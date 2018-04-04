@@ -22,6 +22,7 @@ const createLinkPlugin = (config = {}) => {
     helpers,
     isMobile,
     anchorTarget,
+    relValue,
     t
   }, plugin);
 };

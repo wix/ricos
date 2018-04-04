@@ -4,7 +4,7 @@ import { Component } from './video-component';
 import { VIDEO_TYPE, VIDEO_TYPE_LEGACY } from './types';
 
 const createVideoPlugin = (config = {}) => {
-  const { decorator, helpers, theme, t, isMobile, anchorTarget, video: settings } = config;
+  const { decorator, helpers, theme, t, isMobile, anchorTarget, relValue, video: settings } = config;
 
   return createBasePlugin({
     component: Component,
@@ -20,6 +20,7 @@ const createVideoPlugin = (config = {}) => {
     helpers,
     isMobile,
     anchorTarget,
+    relValue,
     t,
   });
 };

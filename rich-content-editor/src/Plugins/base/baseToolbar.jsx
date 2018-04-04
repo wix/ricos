@@ -46,7 +46,7 @@ const getStructure = (buttons, isMobile) => {
   return structure;
 };
 
-export default function createToolbar({ buttons, theme, pubsub, helpers, isMobile, anchorTarget, t }) {
+export default function createToolbar({ buttons, theme, pubsub, helpers, isMobile, anchorTarget, relValue, t }) {
   class BaseToolbar extends Component {
     constructor(props) {
       super(props);
@@ -259,6 +259,7 @@ export default function createToolbar({ buttons, theme, pubsub, helpers, isMobil
             componentState={this.state.componentState}
             closeModal={helpers.closeModal}
             anchorTarget={anchorTarget}
+            relValue={relValue}
             t={t}
           />);
         case BUTTONS.DELETE:

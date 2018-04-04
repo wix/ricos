@@ -64,6 +64,7 @@ const createEditorToolbars = config => {
   } else {
     toolbars.mobile = createMobileToolbar({
       anchorTarget,
+      relValue,
       buttons,
       helpers,
       pubsub,

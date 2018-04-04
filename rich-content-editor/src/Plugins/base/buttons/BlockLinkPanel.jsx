@@ -6,7 +6,7 @@ import LinkPanelContainer from '~/Components/LinkPanelContainer';
 
 class BlockLinkPanel extends Component {
   componentDidMount() {
-    const { anchorTarget, theme, t } = this.props;
+    const { anchorTarget, relValue, theme, t } = this.props;
     const componentLink = this.props.pubsub.get('componentLink');
     const { url, targetBlank, nofollow } = componentLink || {};
     const linkContainerProps = {
@@ -15,6 +15,7 @@ class BlockLinkPanel extends Component {
       nofollow,
       theme,
       anchorTarget,
+      relValue,
       t,
       isActive: !!componentLink,
       onDone: this.wrapBlockInLink,
@@ -57,6 +58,7 @@ BlockLinkPanel.propTypes = {
   onOverrideContent: PropTypes.func.isRequired,
   theme: PropTypes.object.isRequired,
   anchorTarget: PropTypes.string,
+  relValue: PropTypes.string,
   t: PropTypes.func,
 };
 
