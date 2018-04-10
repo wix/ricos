@@ -49,7 +49,9 @@ const normalizeComponentData = componentData => {
 
   if (oembed) {
     delete componentData.url;
+    delete componentData.oembed;
     patch.src = oembed.video_url;
+    patch.metadata = { oembed };
   }
 
   return Object.assign({}, componentData, patch);
