@@ -9,10 +9,10 @@ const vimeoRegex = /(?:www\.|player\.)?vimeo.com\/(?:(?:channels|ondemand)\/(?:\
 /* eslint-enable max-len, no-useless-escape */
 
 const isYoutube = url => youtubeRegex.test(url);
-const isFacebook = url => facebookRegex.test(url);
+const isFacebook = url => facebookRegex.test(url); // eslint-disable-line no-unused-vars
 const isVimeo = url => vimeoRegex.test(url);
 
-export const isVideoUrl = url => [isYoutube, isFacebook, isVimeo].some(f => f(url));
+export const isVideoUrl = url => [isYoutube, /*isFacebook, */isVimeo].some(f => f(url));
 
 export const isValidUrl = url => validUrlRegex.test(url);
 
