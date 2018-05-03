@@ -145,7 +145,7 @@ const createBaseComponent = ({ PluginComponent, theme, type, settings, pubsub, h
 
     updateComponentData = newData => {
       const { blockProps } = this.props;
-      const newComponentData = merge(this.state.componentData, newData);
+      const newComponentData = merge({}, this.state.componentData, newData);
       this.setState({ componentData: newComponentData });
       const { setData } = blockProps;
       setData(newComponentData);
