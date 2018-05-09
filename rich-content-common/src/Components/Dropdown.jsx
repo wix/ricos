@@ -11,7 +11,15 @@ const DEFAULT_PLACEHOLDER_STRING = 'Select...';
 class Dropdown extends Component {
 
   static propTypes = {
-    options: PropTypes.array.isRequired,
+    options: PropTypes.arrayOf(PropTypes.shape({
+      name: PropTypes.string,
+      type: PropTypes.type,
+      items: PropTypes.array,
+      value: PropTypes.any.isRequired,
+      label: PropTypes.string,
+      icon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+      component: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+    })).isRequired,
     onChange: PropTypes.func.isRequired,
     theme: PropTypes.object.isRequired,
     value: PropTypes.number,
@@ -82,11 +90,12 @@ class Dropdown extends Component {
     }
   }
 
-  setValue(value, label) {
+  setValue(value, label, component) {
     const newState = {
       selected: {
         value,
-        label
+        label,
+        component,
       },
       isOpen: false
     };
@@ -107,17 +116,18 @@ class Dropdown extends Component {
       [styles['Dropdown-option-selected']]: option === this.state.selected
     });
 
-    const { value, label, icon: Icon } = option;
+    const { value, label, icon: Icon, component: OptionComponent } = option;
 
     return (
       <div
         key={value}
         className={optionClass}
-        onMouseDown={this.setValue.bind(this, value, label)}
-        data-hook={`${label}_dropdown_option`} onClick={this.setValue.bind(this, value, label)}
+        onMouseDown={this.setValue.bind(this, value, label, OptionComponent)}
+        data-hook={`${label || value}_dropdown_option`} onClick={this.setValue.bind(this, value, label, OptionComponent)}
       >
         {Icon && <Icon className={styles['Dropdown-option-icon']} />}
-        <span className={styles['Dropdown-option-label']}>{label}</span>
+        {label && <span className={styles['Dropdown-option-label']}>{label}</span>}
+        {OptionComponent && <OptionComponent/>}
       </div>
     );
   }
@@ -162,11 +172,13 @@ class Dropdown extends Component {
     const placeHolderValue = typeof selected === 'string' ? selected : (() => {
       const label = selected.label || '';
       const Icon = selected.icon || null;
+      const OptionComponent = selected.component || null;
 
       return (
         <span>
           {Icon ? <Icon className={styles['Dropdown-option-icon']} /> : null}
-          <span className={styles['Dropdown-option-label']}>{label}</span>
+          {label && <span className={styles['Dropdown-option-label']}>{label}</span>}
+          {OptionComponent && <OptionComponent/>}
         </span>
       );
     })();
