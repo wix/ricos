@@ -1,0 +1,62 @@
+.divider {
+  width: 740px;
+  height: 1px;
+  padding: 14px 0;
+
+  &.mobile {
+    width: 320px;
+  }
+}
+
+.divider__line {
+  display: block;
+  height: 10px;
+
+  line {
+    stroke-width: 1;
+    shape-rendering: crispEdges;
+  }
+
+  &.dropdownOption {
+    width: 60px;
+    height: 10px;
+    position: relative;
+    top: 8px;
+  }
+}
+
+.divider__line--small {
+  width: 74px;
+}
+
+.divider__line--small--mobile {
+  width: 74px;
+}
+
+.divider__line--medium {
+  width: 284px;
+}
+
+.divider__line--medium--mobile {
+  width: 142px;
+}
+
+.divider__line--large {
+  width: 740px;
+}
+
+.divider__line--large--mobile {
+  width: 284px;
+}
+
+.divider__line--left {
+  margin-right: auto;
+}
+
+.divider__line--center {
+  margin: 0 auto;
+}
+
+.divider__line--right {
+  margin-left: auto;
+}
