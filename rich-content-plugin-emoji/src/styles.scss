@@ -3,27 +3,6 @@
 }
 
 .emojiSelectButton, .emojiSelectButtonPressed {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  line-height: 1em;
-  font-size: 1em;
-  border: 0;
-  background: transparent;
-  cursor: pointer;
-
-  &:hover {
-    background: #f3f3f3;
-  }
-  &:active {
-   background: #e6e6e6;
-  }
-}
-
-
-
-.emojiSelectButtonPressed {
-  background: #ededed;
 }
 
 .emojiSelectPopover {

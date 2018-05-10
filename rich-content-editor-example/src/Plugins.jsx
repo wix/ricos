@@ -1,6 +1,6 @@
 import { createLinkPlugin } from 'wix-rich-content-plugin-link';
 import { createHashtagPlugin } from 'wix-rich-content-plugin-hashtag';
-//import { createExternalEmojiPlugin } from 'wix-rich-content-plugin-emoji';
+import { createExternalEmojiPlugin } from 'wix-rich-content-plugin-emoji';
 import { createImagePlugin } from 'wix-rich-content-plugin-image';
 import { createVideoPlugin } from 'wix-rich-content-plugin-video';
 import { createGalleryPlugin } from 'wix-rich-content-plugin-gallery';
@@ -22,7 +22,7 @@ const plugins = [
   createVideoPlugin,
   createHTMLPlugin,
   createDividerPlugin,
-  //createExternalEmojiPlugin
+  createExternalEmojiPlugin,
   createLinkPlugin,
   createHashtagPlugin,
 ];

@@ -43,7 +43,7 @@
     "webpack": "^3.11.0"
   },
   "dependencies": {
-    "draft-js-emoji-plugin": "^2.0.2",
+    "@wix/draft-js-emoji-plugin": "^2.0.2",
     "wix-rich-content-common": "^1.0.0"
   },
   "unpkg": true,

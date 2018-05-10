@@ -1,13 +1,21 @@
-import { createBasePlugin } from 'wix-rich-content-common';
+import React from 'react';
+import { createBasePlugin, SimpleInsertPluginButton } from 'wix-rich-content-common';
 import { EXTERNAL_EMOJI_TYPE } from './types';
-import createEmojiPlugin from 'draft-js-emoji-plugin';
+import createEmojiPlugin from '@wix/draft-js-emoji-plugin';
 // import 'draft-js-emoji-plugin/lib/plugin.css';
+import Smile from './smile.svg';
 import * as Styles from './styles.scss';
 
 const createExternalEmojiPlugin = (config = {}) => {
-  const plugin = createEmojiPlugin({ theme: Styles, useNativeArt: false });
-  const type = EXTERNAL_EMOJI_TYPE;
   const { decorator, helpers, theme, isMobile, t, anchorTarget, relValue, tooltipTextKey } = config;
+  const buttonStyles = {
+    buttonWrapper: theme.footerToolbarButton_wrapper,
+    icon: theme.footerToolbarButton_icon,
+  };
+
+  const InsertButton = ({ ...props }) => (<SimpleInsertPluginButton name="Emoji" theme={{ buttonStyles }} Icon={Smile} {...props} />);
+  const plugin = createEmojiPlugin({ theme: Styles, selectButton: InsertButton, useNativeArt: false });
+  const type = EXTERNAL_EMOJI_TYPE;
 
   const InsertToolbarButton = plugin.EmojiSelect;
   let toolbar;
