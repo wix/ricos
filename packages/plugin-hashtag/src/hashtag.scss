@@ -1,0 +1,10 @@
+@import "../../common/src/Styles/palette.scss";
+
+.hashtag {
+  color: $accent-color;
+  text-decoration: none;
+}
+
+.hashtag_hover:hover {
+  text-decoration: underline;
+}

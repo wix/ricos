@@ -3,7 +3,8 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = env => {
   const FILE_NAME = env.FILE_NAME;
-  const BASE_PATH = path.resolve(__dirname, '..', FILE_NAME.replace('wix-', ''));
+  const BASE_PATH = path.resolve(__dirname, '..', 'packages', FILE_NAME.replace('wix-rich-content-', ''));
+
   return {
     entry: './src/index.js',
     output: {
@@ -89,7 +90,7 @@ module.exports = env => {
       modules: ['node_modules', path.resolve(BASE_PATH, 'src')],
       extensions: ['.js', '.json', '.jsx', '.css'],
       alias: {
-        'draft-js': path.resolve(BASE_PATH, '..', 'node_modules', '@wix', 'draft-js'),
+        'draft-js': path.resolve(__dirname, '..', 'node_modules', '@wix', 'draft-js'),
       },
     },
     context: BASE_PATH,

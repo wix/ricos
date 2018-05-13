@@ -1,7 +1,7 @@
 {
   "lerna": "2.10.0",
   "packages": [
-    "rich-content-*"
+    "packages/*"
   ],
   "npmClientArgs": [
     "--no-lockfile"

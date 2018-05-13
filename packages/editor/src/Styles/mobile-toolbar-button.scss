@@ -1,0 +1,20 @@
+@import '../../../common/src/Styles/mixins';
+@import '../../../common/src/Styles/palette';
+
+.mobileToolbarButton_wrapper {
+  flex: 0 0 12vw;
+  text-align: center;
+  padding: 0;
+  margin-right: 0;
+}
+
+.mobileToolbarButton {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+}
+
+.mobileToolbarButton_icon {
+  width: 50%;
+  margin: 0 auto;
+}

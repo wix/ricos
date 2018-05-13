@@ -1,0 +1,25 @@
+@import "../../common/src/Styles/palette";
+
+@mixin divider($type) {
+  width: 100%;
+  height: 25px;
+  background: url('./dividers/' + $type + '.svg') center repeat-x;
+  background-size: 100%;
+}
+
+.divider1 {
+  @include divider('dots');
+}
+
+.divider2 {
+  @include divider('dashed-line');
+}
+
+.divider3 {
+  @include divider('single-line');
+}
+
+.divider4 {
+  @include divider('double-line');
+  height: 66px;
+}
