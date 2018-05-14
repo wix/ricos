@@ -80,16 +80,8 @@ export default ({ blockType, button, helpers, pubsub, t }) => {
       const { name, Icon, ButtonElement } = button;
       if (ButtonElement) {
         /* eslint-disable jsx-a11y/no-static-element-interactions */
-        return (
-          <div className={styles.button} data-hook={`${name.replace(' ', '_')}_insert_plugin_button`} onClick={this.onClick}>
-            <div className={styles.icon}>
-              <ButtonElement key="0" />
-            </div>
-            {showName && <span key="1" className={styles.label}>{name}</span>}
-          </div>
-        );
+        return <ButtonElement showName={showName} key="0"/>;
         /* eslint-enable jsx-a11y/no-static-element-interactions */
-
       } else {
         return (
           <button
@@ -185,3 +177,17 @@ export default ({ blockType, button, helpers, pubsub, t }) => {
 
   return InsertPluginButton;
 };
+
+export const SimpleInsertPluginButton = ({ name, showName, Icon, theme, onClick }) => {
+  console.log('pre', styles, theme)
+  const mergedStyles = mergeStyles({ styles, theme: theme.buttonStyles })
+  console.log('post', mergedStyles);
+  return (
+  <button className={mergedStyles.button} data-hook={`${name.replace(' ', '_')}_insert_plugin_button`} onClick={onClick}>
+    <div className={mergedStyles.icon}>
+      <Icon key="0" />
+    </div>
+    {showName && <span key="1" className={mergedStyles.label}>{name}</span>}
+  </button>
+);
+}
