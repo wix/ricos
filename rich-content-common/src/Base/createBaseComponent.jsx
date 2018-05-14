@@ -251,27 +251,14 @@ const createBaseComponent = ({ PluginComponent, theme, settings, pubsub, helpers
         Styles.anchor, {
           [Styles.isImage]: getDisplayName(PluginComponent).toLowerCase().indexOf('image') !== -1,
         });
+      /* eslint-disable jsx-a11y/anchor-has-content */
       return (
         <div style={{ position: 'relative' }} className={ContainerClassNames}>
-          {!isNil(link) ?
-            (
-              <div>
-                {component}
-                <a
-                  className={anchorClass}
-                  {...anchorProps}
-                />
-              </div>
-            ) :
-            (
-              component
-            )}
-          {!this.state.readOnly && (
-            <div data-hook={'componentOverlay'} onClick={onClick} className={overlayClassNames} />
-          )
-          }
+          {!isNil(link) ? <div>{component}<a className={anchorClass} {...anchorProps}/></div> : component}
+          {!this.state.readOnly && <div role="none" data-hook={'componentOverlay'} onClick={onClick} className={overlayClassNames} />}
         </div>
       );
+      /* eslint-enable jsx-a11y/anchor-has-content */
     };
   }
 

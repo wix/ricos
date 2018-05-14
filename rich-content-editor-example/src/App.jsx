@@ -182,7 +182,7 @@ class App extends Component {
     return (
       <div className="wrapper">
         <div className="container">
-          {!this.isMobile() &&
+        {!this.isMobile() &&
             <div className="header">
               <h1 onClick={() => this.setState({showDevToggles: !showDevToggles})}>Wix Rich Content Editor</h1>
               <div className="toggle-container" style={{ display: this.state.showDevToggles ? 'block' : 'none' }}>
@@ -243,6 +243,7 @@ class App extends Component {
               isOpen={this.state.showModal}
               contentLabel="External Modal Example"
               style={modalStyles}
+              role="dialog"
               onRequestClose={this.closeModal}
             >
               {this.state.showModal && <RichContentModal {...this.state.modalProps} />}

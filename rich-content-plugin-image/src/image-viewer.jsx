@@ -106,6 +106,18 @@ class ImageViewer extends React.Component {
     );
   }
 
+  onKeyDown = (e, handler) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      handler();
+    }
+  };
+
+  handleRef = e => {
+    if (!this.state.container) {
+      this.setState({ container: e }); //saving the container on the state to trigger a new render
+    }
+  };
+
   render() {
     const { styles } = this;
     const { componentData, className, onClick, isFocused, readOnly, settings, t } = this.props;
@@ -122,13 +134,11 @@ class ImageViewer extends React.Component {
     const imageSrc = this.getImageSrc(data.src);
     const imageProps = data.src && isFunction(settings.imageProps) ? settings.imageProps(data.src) : settings.imageProps;
 
+    /* eslint-disable jsx-a11y/no-static-element-interactions */
     return (
       <div
-        data-hook="imageViewer" onClick={onClick} className={itemClassName} ref={ele => {
-          if (!this.state.container) {
-            this.setState({ container: ele }); //saving the container on the state to trigger a new render
-          }
-        }}
+        data-hook="imageViewer" onClick={onClick} className={itemClassName} onKeyDown={e => this.onKeyDown(e, onClick)}
+        ref={e => this.handleRef(e)}
       >
         <div className={styles.imageWrapper}>
           {imageSrc && this.renderImage(imageClassName, imageSrc, metadata.alt, imageProps)}
@@ -139,6 +149,7 @@ class ImageViewer extends React.Component {
         {shouldRenderCaption && this.renderCaption(metadata.caption, isFocused, readOnly, styles, t)}
       </div>
     );
+    /* eslint-enable jsx-a11y/no-static-element-interactions */
   }
 }
 

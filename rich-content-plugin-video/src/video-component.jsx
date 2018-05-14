@@ -95,17 +95,25 @@ class VideoComponent extends React.Component {
     );
   };
 
+  onKeyDown = (e, handler) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      handler();
+    }
+  };
+
   render() {
     const { styles } = this;
     const { className, onClick, t } = this.props;
     const { isPlayable } = this.state;
     const containerClassNames = classNames(styles.video_container, className || '');
+    /* eslint-disable jsx-a11y/no-static-element-interactions */
     return (
-      <div data-hook="videoPlayer" onClick={onClick} className={containerClassNames}>
+      <div data-hook="videoPlayer" onClick={onClick} className={containerClassNames} onKeyDown={e => this.onKeyDown(e, onClick)}>
         {!isPlayable && this.renderOverlay(styles, t)}
         {this.renderPlayer(styles)}
       </div>
     );
+    /* eslint-enable jsx-a11y/no-static-element-interactions */
   }
 }
 
