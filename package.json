@@ -10,7 +10,7 @@
 		"build:dev": "lerna run --parallel build:dev",
 		"build": "lerna run --scope=wix-rich-content-* --parallel build",
 		"watch": "lerna run --parallel watch",
-		"customPublish": "lerna exec --concurrency 1 -- npm run customPublish",
+		"customPublish": "node scripts/customPublish",
 		"createVersion": "node scripts/createVersion"
 	},
 	"devDependencies": {
