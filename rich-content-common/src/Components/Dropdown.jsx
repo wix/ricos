@@ -28,6 +28,7 @@ class Dropdown extends Component {
     onFocus: PropTypes.func,
     disabled: PropTypes.bool,
     dataHook: PropTypes.string,
+    controlClassName: PropTypes.string,
   };
 
   constructor(props) {
@@ -38,7 +39,6 @@ class Dropdown extends Component {
     };
     this.mounted = true;
     this.styles = mergeStyles({ styles, theme: props.theme });
-
   }
 
   componentWillReceiveProps(newProps) {
@@ -194,7 +194,7 @@ class Dropdown extends Component {
     return (
       <div className={dropdownClass}>
         <div
-          className={classNames(styles['Dropdown-control'], disabledClass)}
+          className={classNames(styles['Dropdown-control'], this.props.controlClassName, disabledClass)}
           data-hook={dataHook} onMouseDown={this.handleMouseDown.bind(this)} onTouchEnd={this.handleMouseDown.bind(this)}
         >
           {value}
