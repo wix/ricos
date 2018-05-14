@@ -5,28 +5,33 @@
 ## Bootstrap
 1. `cd rich-content`
 2. `npm run bootstrap` - installs all dependencies and links any cross-dependencies.
-4. Build the modules by running one of the following:
+3. Build the modules by running one of the following:
     1. `npm run build:dev` - build once
     2. `npm run watch` - rebuild on changes
+4. Choose an example from the [examples](https://github.com/wix-incubator/rich-content/tree/master/examples).
+    1. `npm i`
+    2. `npm start`
 
 
 ## Modules
 
 
-[rich-content-editor](https://github.com/wix-incubator/rich-content/tree/master/rich-content-editor) is the rich content editor React Component.  
-[rich-content-editor-example](https://github.com/wix-incubator/rich-content/tree/master/rich-content-editor-example) to see how to consume the Component as an editor.  
-[rich-content-viewer-example](https://github.com/wix-incubator/rich-content/tree/master/rich-content-viewer-example) to see how to consume the Component as a viewer.  
-[rich-content-editor-tpa](https://github.com/wix-incubator/rich-content/tree/master/rich-content-editor-tpa) to see how to consume the Component as a Wix Third Party Application.  
-[rich-content-common](https://github.com/wix-incubator/rich-content/tree/master/rich-content-common) is a shared library utilized by the rest of the modules.  
+[wix-rich-content-editor](https://github.com/wix-incubator/rich-content/tree/master/packages/editor) is the rich content editor React Component.  
+[wix-rich-content-common](https://github.com/wix-incubator/rich-content/tree/master/pacakges/common) is a shared library utilized by the rest of the modules.  
 [config](https://github.com/wix-incubator/rich-content/tree/master/config) build config for rich-content-common and all plugins.  
 
 ##### Plugins
 
-[rich-content-plugin-link](https://github.com/wix-incubator/rich-content/tree/master/rich-content-plugin-link) convert plain text URLs into `<a>` tags.  
-[rich-content-plugin-hashtag](https://github.com/wix-incubator/rich-content/tree/master/rich-content-plugin-hashtag) convert plain text #hastags into dynamic elements.  
-[rich-content-plugin-emoji](https://github.com/wix-incubator/rich-content/tree/master/rich-content-plugin-emoji) add emojis to your content.  
-[rich-content-plugin-image](https://github.com/wix-incubator/rich-content/tree/master/rich-content-plugin-image) add images to your content.  
-[rich-content-plugin-video](https://github.com/wix-incubator/rich-content/tree/master/rich-content-plugin-video) add videos to your content.  
-[rich-content-plugin-gallery](https://github.com/wix-incubator/rich-content/tree/master/rich-content-plugin-gallery) add pro galleries to your content!!!  
-[rich-content-plugin-html](https://github.com/wix-incubator/rich-content/tree/master/rich-content-plugin-html) embed html code or sites in your content.  
-[rich-content-plugin-divider](https://github.com/wix-incubator/rich-content/tree/master/rich-content-plugin-divider) add dividers to your content.  
+[wix-rich-content-plugin-link](https://github.com/wix-incubator/rich-content/tree/master/pacakges/plugin-link) convert plain text URLs into `<a>` tags.  
+[wix-rich-content-plugin-hashtag](https://github.com/wix-incubator/rich-content/tree/master/pacakges/plugin-hashtag) convert plain text #hastags into dynamic elements.  
+[wix-rich-content-plugin-emoji](https://github.com/wix-incubator/rich-content/tree/master/pacakges/plugin-emoji) add emojis to your content.  
+[wix-rich-content-plugin-image](https://github.com/wix-incubator/rich-content/tree/master/pacakges/plugin-image) add images to your content.  
+[wix-rich-content-plugin-video](https://github.com/wix-incubator/rich-content/tree/master/pacakges/plugin-video) add videos to your content.  
+[wix-rich-content-plugin-gallery](https://github.com/wix-incubator/rich-content/tree/master/pacakges/plugin-gallery) add pro galleries to your content!!!  
+[wix-rich-content-plugin-html](https://github.com/wix-incubator/rich-content/tree/master/pacakges/plugin-html) embed html code or sites in your content.  
+[wix-rich-content-plugin-divider](https://github.com/wix-incubator/rich-content/tree/master/pacakges/plugin-divider) add dividers to your content.  
+
+##### Examples
+[rich-content-editor-example](https://github.com/wix-incubator/rich-content/tree/master/pacakges/editor-example) to see how to consume the Component as an editor.  
+[rich-content-viewer-example](https://github.com/wix-incubator/rich-content/tree/master/pacakges/viewer-example) to see how to consume the Component as a viewer.  
+[rich-content-editor-tpa](https://github.com/wix-incubator/rich-content/tree/master/pacakges/editor-tpa) to see how to consume the Component as an editor within a Wix Third Party Application.  
