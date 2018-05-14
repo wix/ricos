@@ -37,7 +37,7 @@ class ThumbnailPlacementSelector extends Component {
     const thumbnailPlacementLabel = t('GallerySettings_Thumbnail_Placement');
     return (
       <div>
-        <label className={this.styles.thumbnailPlacementSelector_label}>{thumbnailPlacementLabel}</label>
+        <span className={this.styles.thumbnailPlacementSelector_label}>{thumbnailPlacementLabel}</span>
         <SelectionList
           theme={this.props.theme}
           className={this.styles.thumbnailPlacementSelector_grid}

@@ -11,6 +11,7 @@ class SettingsModal extends React.Component {
     componentData: PropTypes.object.isRequired,
     store: PropTypes.object.isRequired,
     t: PropTypes.func,
+    tabIndex: PropTypes.number,
   };
 
   constructor(props) {
@@ -43,28 +44,32 @@ class SettingsModal extends React.Component {
   };
 
   render = () => {
-    const { t } = this.props;
+    const { t, tabIndex } = this.props;
     const widthLabel = t('HtmlPlugin_Width');
     const heightLabel = t('HtmlPlugin_Height');
     const pixelsLabel = t('HtmlPlugin_Pixels');
     return (
       <div>
         <div>
-          <label htmlFor="width">{widthLabel}</label>
-          <input
-            type="range" min="10" max="1000" value={this.state.width} id="width" step="10"
-            data-hook="htmlSettingsWidth" onChange={this.changeWidth}
-          />
+          <label htmlFor="width">
+            <input
+              type="range" min="10" max="1000" value={this.state.width} id="width" step="10"
+              data-hook="htmlSettingsWidth" onChange={this.changeWidth} tabIndex={tabIndex}
+            />
+            {widthLabel}
+          </label>
           <output htmlFor="width" id="widthVal">
             {this.state.width}{pixelsLabel}
           </output>
         </div>
         <div>
-          <label htmlFor="height">{heightLabel}</label>
-          <input
-            type="range" min="10" max="1000" value={this.state.height} id="height" step="10"
-            data-hook="htmlSettingsHeight" onChange={this.changeHeight}
-          />
+          <label htmlFor="height">
+            <input
+              type="range" min="10" max="1000" value={this.state.height} id="height" step="10"
+              data-hook="htmlSettingsHeight" onChange={this.changeHeight} tabIndex={tabIndex}
+            />
+            {heightLabel}
+          </label>
           <output htmlFor="height" id="widthVal">
             {this.state.height}{pixelsLabel}
           </output>
@@ -120,15 +125,15 @@ class EditModal extends React.Component {
 
   updateContent = () => {
     const componentData = { ...this.props.componentData };
+    componentData.config = componentData.config || {};
     componentData.src = this.state.src;
     componentData.content = this.state.content;
     componentData.config.isSrc = this.state.isSrc;
-
     this.props.store.set('componentData', componentData);
   };
 
   render = () => {
-    const { t } = this.props;
+    const { t, tabIndex } = this.props;
     const sourceLabel = t('HtmlPlugin_Source');
     const codeLabel = t('HtmlPlugin_Code');
     const updateLabel = t('HtmlPlugin_Update');
@@ -136,34 +141,40 @@ class EditModal extends React.Component {
       <div>
         <div className={Styles.tabs}>
           <div className={Styles.tab}>
-            <input
-              type="radio" id="tab-1" name="tab-group-1" checked={this.state.isSrc}
-              data-hook="htmlPluginFirstRadio" onChange={this.changeIsSrc}
-            />
-            <label htmlFor="tab-1">{sourceLabel}</label>
+            <label htmlFor="tab-1">
+              <input
+                aria-label={sourceLabel} aria-checked={this.state.isSrc} tabIndex={tabIndex}
+                type="radio" id="tab-1" name="tab-group-1" checked={this.state.isSrc}
+                data-hook="htmlPluginFirstRadio" onChange={this.changeIsSrc}
+              />
+              {sourceLabel}
+            </label>
 
             <div className={Styles.content}>
-              <input type="text" value={this.state.src} id="src" data-hook="htmlPluginFirstInput" onChange={this.changeSrc} />
+              <input type="text" value={this.state.src} id="src" data-hook="htmlPluginFirstInput" onChange={this.changeSrc} tabIndex={tabIndex}/>
             </div>
           </div>
 
           <div className={Styles.tab}>
-            <input
-              type="radio" id="tab-2" name="tab-group-1" checked={!this.state.isSrc}
-              data-hook="htmlPluginSecondRadio" onChange={this.changeIsContent}
-            />
-            <label htmlFor="tab-2">{codeLabel}</label>
+            <label htmlFor="tab-2">
+              <input
+                aria-label={codeLabel} aria-checked={!this.state.isSrc} tabIndex={tabIndex}
+                type="radio" id="tab-2" name="tab-group-1" checked={!this.state.isSrc}
+                data-hook="htmlPluginSecondRadio" onChange={this.changeIsContent}
+              />
+              {codeLabel}
+            </label>
 
             <div className={Styles.content}>
               <textarea
-                value={this.state.content} id="content"
-                data-hook="htmlPluginTextarea" onChange={this.changeContent}
+                tabIndex={tabIndex} value={this.state.content}
+                id="htmlPluginTextarea" data-hook="htmlPluginTextarea" onChange={this.changeContent}
               />
             </div>
           </div>
         </div>
         <div>
-          <input type="button" data-hook="htmlPluginButton" onClick={this.updateContent} value={updateLabel} />
+          <input tabIndex={tabIndex} type="button" data-hook="htmlPluginButton" onClick={this.updateContent} value={updateLabel} />
         </div>
       </div>
     );
@@ -176,6 +187,7 @@ EditModal.propTypes = {
   componentData: PropTypes.object.isRequired,
   componentState: PropTypes.object.isRequired,
   t: PropTypes.func,
+  tabIndex: PropTypes.number,
 };
 
 export default({ t }) => {

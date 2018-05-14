@@ -1,41 +1,38 @@
 @import "../../../rich-content-common/src/Styles/mixins";
 @import "../../../rich-content-common/src/Styles/palette";
-
 .sideToolbar_floatingContainer {
-  position: relative;
+    position: relative;
 }
 
 .sideToolbar_floatingIcon {
-  border: none;
-  background-color: transparent;
-  padding: 0;
-  box-sizing: border-box;
-  cursor: pointer;
-  height: 25px;
-  width: 25px;
-  line-height: 25px;
-  text-align: center;
-
-  svg {
-    fill: $secondary-text-color;
-  }
-
-  &:hover {
+    border: none;
+    background-color: transparent;
+    padding: 0;
+    box-sizing: border-box;
+    cursor: pointer;
+    height: 25px;
+    width: 25px;
+    line-height: normal;
+    text-align: center;
     svg {
-      fill: $accent-color;
+        fill: $secondary-text-color;
     }
-  }
+    &:hover {
+        svg {
+            fill: $accent-color;
+        }
+    }
 }
 
 .sideToolbar {
-  position: absolute;
-  top: -15px;
-  transform: translate(-50%);
-  color: $secondary-text-color;
-  border: 1px solid #ededed;
-  background: #fff;
-  border-radius: 6px;
-  padding: 9px 19px;
-  box-sizing: border-box;
-  white-space: nowrap;
+    position: absolute;
+    top: -15px;
+    transform: translate(-50%);
+    color: $secondary-text-color;
+    border: 1px solid #ededed;
+    background: #fff;
+    border-radius: 6px;
+    padding: 9px 19px;
+    box-sizing: border-box;
+    white-space: nowrap;
 }

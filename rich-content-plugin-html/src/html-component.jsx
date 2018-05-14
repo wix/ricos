@@ -66,6 +66,12 @@ class HtmlComponent extends React.Component {
     );
   };
 
+  onKeyDown(e, handler) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      handler();
+    }
+  }
+
   render() {
     const { styles } = this;
     const { blockProps, selection, t } = this.props;
@@ -90,14 +96,9 @@ class HtmlComponent extends React.Component {
           className={classNames(this.props.className, itemClassName)}
         >
           <iframe
-            src={data.src}
-            allowTransparency
-            scrolling="no"
-            frameBorder="0"
-            sandbox="allow-presentation allow-forms allow-same-origin allow-scripts"
-            width={width}
-            height={height}
-            style={{ border: 'none', overflow: 'hidden', position: 'absolute', top: '0', left: '0' }}
+            title="remote content" tabIndex={readOnly ? -1 : 0}
+            src={data.src} allowTransparency scrolling="no" frameBorder="0" sandbox="allow-presentation allow-forms allow-same-origin allow-scripts"
+            width={width} height={height} style={{ border: 'none', overflow: 'hidden', position: 'absolute', top: '0', left: '0' }}
           />
           <HTMLOverlay />
         </div>
@@ -110,27 +111,25 @@ class HtmlComponent extends React.Component {
           className={classNames(this.props.className, itemClassName)}
         >
           <iframe
-            ref={this.setIframe}
-            onLoad={this.handleIframeLoad}
-            srcDoc={this.baseIframeContent(window.origin)}
-            sandbox="allow-presentation allow-forms allow-scripts"
-            allowTransparency
-            scrolling="no"
-            frameBorder="0"
-            width={width}
-            height={height}
-            style={{ border: 'none', overflow: 'hidden', position: 'absolute', top: '0', left: '0' }}
+            title="remote content" tabIndex={readOnly ? -1 : 0} scrolling="no" ref={this.setIframe} onLoad={this.handleIframeLoad}
+            srcDoc={this.baseIframeContent(window.origin)} sandbox="allow-presentation allow-forms allow-scripts" allowTransparency
+            frameBorder="0" width={width} height={height} style={{ border: 'none', overflow: 'hidden', position: 'absolute', top: '0', left: '0' }}
           />
           <HTMLOverlay />
         </div>
       );
     } else {
       const initLabel = t('HtmlComponent_Init_Text');
+      /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
       return (
-        <div data-hook="htmlComponent" onClick={this.props.onClick} className={classNames(this.props.className, styles.html_invalidGalleryItems)}>
+        <div
+          data-hook="htmlComponent" onClick={this.props.onClick} onKeyDown={e => this.onKeyDown(e, this.props.onClick)}
+          className={classNames(this.props.className, styles.html_invalidGalleryItems)} role="alert"
+        >
           {initLabel}
         </div>
       );
+      /* eslint-enable jsx-a11y/no-noninteractive-element-interactions */
     }
   }
 }

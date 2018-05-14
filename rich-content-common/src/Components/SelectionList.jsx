@@ -41,11 +41,13 @@ class SelectionList extends Component {
     value: PropTypes.any.isRequired,
     onChange: PropTypes.func.isRequired,
     optionClassName: PropTypes.string,
+    readOnly: PropTypes.bool,
   };
 
   static defaultProps = {
     dataMapper: defaultDataMapper,
-    renderItem: defaultRenderItem
+    renderItem: defaultRenderItem,
+    readOnly: false
   };
 
   mapItemToOptionData(item) {
@@ -58,7 +60,7 @@ class SelectionList extends Component {
   }
 
   onKeyDown(event) {
-    if (this.props.dataSource.length < 2) {
+    if (this.props.dataSource.length < 2 || this.props.readOnly) {
       return;
     }
     const index = this.state.focusIndex === -1 ? 0 : this.state.focusIndex;
@@ -89,22 +91,18 @@ class SelectionList extends Component {
   }
 
   render() {
-    const { dataSource, className, onChange, renderItem, theme, optionClassName } = this.props;
+    const { dataSource, className, onChange, renderItem, theme, optionClassName, readOnly } = this.props;
     return (
       <div
-        ref={el => this.ref = el}
-        role={'listbox'}
-        aria-orientation={'horizontal'}
-        className={classnames(styles.selectionList, className)}
+        ref={el => this.ref = el} className={classnames(styles.selectionList, className)}
+        role={'listbox'} aria-disabled={readOnly} aria-orientation={'horizontal'}
       >
         {dataSource.map(item => this.mapItemToOptionData(item))
           .map(({ item, option, selected }, i) => (
             <SelectionListOption
-              tabIndex={i === 0 ? 0 : -1}
-              selected={selected}
-              focused={i === this.state.focusIndex}
+              tabIndex={(i === 0 && !readOnly) ? 0 : -1} selected={selected} focused={i === this.state.focusIndex}
               dataHook={item.dataHook} onChange={onChange} key={i} theme={theme} value={option.value} optionClassName={optionClassName}
-              onKeyDown={e => this.onKeyDown(e)}
+              onKeyDown={e => this.onKeyDown(e)} readOnly={readOnly}
             >
               {renderItem({ item, option, selected })}
             </SelectionListOption>)
@@ -125,6 +123,7 @@ class SelectionListOption extends Component {
     dataHook: PropTypes.string,
     tabIndex: PropTypes.number,
     onKeyDown: PropTypes.func,
+    readOnly: PropTypes.bool,
   };
 
   constructor(props) {
@@ -139,15 +138,12 @@ class SelectionListOption extends Component {
   }
 
   render() {
-    const { selected, onChange, children, value, optionClassName, dataHook, tabIndex, onKeyDown } = this.props;
+    const { selected, onChange, children, value, optionClassName, dataHook, tabIndex, onKeyDown, readOnly } = this.props;
 
     return (
       <div
-        tabIndex={tabIndex}
-        role={'option'}
-        aria-selected={selected}
-        ref={el => this.ref = el}
-        onKeyDown={e => onKeyDown(e)}
+        tabIndex={tabIndex} role={'option'} aria-selected={selected} aria-disabled={readOnly}
+        ref={el => this.ref = el} onKeyDown={e => onKeyDown(e)}
         className={classnames(this.styles.selectionListOption,
           { [this.styles.selectionListOption_selected]: selected }, optionClassName)}
         data-hook={dataHook} onClick={() => onChange(value)}

@@ -19,26 +19,28 @@ class GallerySettingsMobileHeader extends Component {
     const saveLabel = saveName || t('GallerySettings_MobileHeader_Save');
 
     return (
-      <div>
+      <div role="menu">
         <div className={this.styles.gallerySettingsMobileHeader_headerPlaceholder} />
         <div className={this.styles.gallerySettingsMobileHeader_header}>
-          <a
+          <button
             data-hook="gallerySettingsMobileHeaderCanel" onClick={() => cancel()}
-            className={classNames(this.styles.gallerySettingsMobileHeader_button,
-              this.styles.gallerySettingsMobileHeader_cancel)}
+            aria-label={cancelLabel} role="menuitem"
+            className={classNames(this.styles.gallerySettingsMobileHeader_button, this.styles.gallerySettingsMobileHeader_cancel)}
           >{cancelLabel}
-          </a>
+          </button>
           {otherTab ?
-            <a
+            <button
               data-hook="gallerySettingsMobileHeaderMore" onClick={() => this.setState({ showMenu: !this.state.showMenu })}
+              aria-label="More" role="menuitem"
               className={classNames(this.styles.gallerySettingsMobileHeader_button, this.styles.gallerySettingsMobileHeader_menuIcon)}
             ><MoreIcon/>
-            </a> : null}
-          <a
-            data-hook="gallerySettingsMobileHeaderDone" onClick={() => save()} className={classNames(this.styles.gallerySettingsMobileHeader_button,
-              this.styles.gallerySettingsMobileHeader_done)}
+            </button> : null}
+          <button
+            data-hook="gallerySettingsMobileHeaderDone" onClick={() => save()}
+            aria-label={saveLabel} role="menuitem"
+            className={classNames(this.styles.gallerySettingsMobileHeader_button, this.styles.gallerySettingsMobileHeader_done)}
           >{saveLabel}
-          </a>
+          </button>
         </div>
         {this.state.showMenu ? (
           <div className={this.styles.gallerySettingsMobileHeader_menu}>

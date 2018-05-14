@@ -5,6 +5,11 @@
     "node": true
   },
   "plugins": ["lodash", "fp", "jsx-a11y"],
+  "settings": {
+    "react": {
+      "version": "15.5.4"
+    }
+  },
   "rules": {
     "semi": "error",
     "quotes": [

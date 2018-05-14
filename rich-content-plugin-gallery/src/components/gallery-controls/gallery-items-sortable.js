@@ -15,6 +15,12 @@ import Fab from '../../icons/fab.svg';
 //eslint-disable-next-line no-unused-vars
 const EMPTY_SMALL_PLACEHOLDER = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
 
+const onKeyDown = (e, handler) => {
+  if (e.key === 'Enter' || e.key === ' ') {
+    handler();
+  }
+};
+
 const SortableItem = sortableElement(props => {
   const {
     item,
@@ -59,6 +65,7 @@ const SortableItem = sortableElement(props => {
 
     return (
       <div
+        role="gridcell" tabIndex="0" aria-selected={item.selected}
         className={classNames(styles.itemContainer, {
           [styles.itemContainerSelected]: item.selected && !isMobile,
           [styles.itemContainerSelectedMobile]: item.selected && isMobile,
@@ -66,12 +73,14 @@ const SortableItem = sortableElement(props => {
           [styles.sorting]: isMobileSorting
         })}
         data-hook="galleryItemsSortable" onClick={() => clickAction(itemIdx)}
+        onKeyDown={e => onKeyDown(e, () => clickAction(itemIdx))}
         style={{
           width: imageSize + 'px',
           height: imageSize + 'px',
         }}
       >
         {url ? <img
+          alt="Gallery Item Thumbnail"
           className={styles.itemImage}
           src={url}
           style={{
@@ -100,6 +109,7 @@ const SortableList = sortableContainer(props => {
   const styles = mergeStyles({ styles: Styles, theme });
   return (
     <div
+      role="grid" aria-label="Gallery Media Management" aria-multiselectable="true"
       className={classNames(styles.sortableContainer, { [styles.mobile]: isMobile })}
     >
       {items.map((item, itemIdx) => (
@@ -176,60 +186,71 @@ const ItemActionsMenu = props => {
 
   const separator = <span className={styles.seperator}>·</span>;
   const buttons = [];
-  const toggleSortingAnchor = (
-    <a
-      className={styles.topBarLink} data-hook="galleryItemsSortableToggleSorting" onClick={toggleSorting}
-    >{isMobileSorting ? finishSortingLabel : sortItemsLabel}
-    </a>
+  const toggleSortingLabel = isMobileSorting ? finishSortingLabel : sortItemsLabel;
+  const toggleSortingButton = (
+    <button
+      className={styles.topBarLink} data-hook="galleryItemsSortableToggleSorting"
+      onClick={toggleSorting} aria-label={toggleSortingLabel} role="menuitem"
+    >
+      {toggleSortingLabel}
+    </button>
   );
-  const selectAllAnchor = (
-    <a
-      className={styles.topBarLink} data-hook="galleryItemsSortableSelectAll" onClick={() => setAllItemsValue('selected', true)}
-    >{selectAllLabel}
-    </a>
+  const selectAllButton = (
+    <button
+      className={styles.topBarLink} data-hook="galleryItemsSortableSelectAll"
+      onClick={() => setAllItemsValue('selected', true)} aria-label={selectAllLabel} role="menuitem"
+    >
+      {selectAllLabel}
+    </button>
   );
-  const deselectAllAnchor = (
-    <a
-      className={styles.topBarLink} data-hook="galleryItemsSortableDeselectAll" onClick={() => setAllItemsValue('selected', false)}
+  const deselectAllButton = (
+    <button
+      className={styles.topBarLink} data-hook="galleryItemsSortableDeselectAll"
+      onClick={() => setAllItemsValue('selected', false)} aria-label={deselectLabel} role="menuitem"
     >{deselectLabel}
-    </a>
+    </button>
   );
 
-  const deleteAnchor = (
-    <a
-      className={styles.topBarLink} data-hook="galleryItemsSortableDelete" onClick={() => deleteSelectedItems()}
+  const deleteButton = (
+    <button
+      className={styles.topBarLink} data-hook="galleryItemsSortableDelete"
+      onClick={() => deleteSelectedItems()} aria-label={deleteLabel} role="menuitem"
     >{deleteLabel}
-    </a>
+    </button>
   );
 
-  const itemSettingsAnchor = (
-    <a className={styles.topBarLink} data-hook="galleryItemsSortableItemSettings" onClick={() => toggleImageSettings(true)}>{itemSettingsLabel}
-    </a>
+  const itemSettingsButton = (
+    <button
+      className={styles.topBarLink} data-hook="galleryItemsSortableItemSettings"
+      onClick={() => toggleImageSettings(true)} aria-label={itemSettingsLabel} role="menuitem"
+    >
+      {itemSettingsLabel}
+    </button>
   );
   if (isMobile && selectedItems.length === 0) {
-    buttons.push(toggleSortingAnchor);
+    buttons.push(toggleSortingButton);
     buttons.push(separator);
   }
   if (!isMobileSorting) {
     if (hasUnselectedItems) {
-      buttons.push(selectAllAnchor);
+      buttons.push(selectAllButton);
       buttons.push(separator);
     }
     if (hasSelectedItems) {
-      buttons.push(deselectAllAnchor);
+      buttons.push(deselectAllButton);
       buttons.push(separator);
-      buttons.push(deleteAnchor);
+      buttons.push(deleteButton);
       buttons.push(separator);
     }
     if (selectedItems.length === 1) {
-      buttons.push(itemSettingsAnchor);
+      buttons.push(itemSettingsButton);
       buttons.push(separator);
     }
   }
   buttons.splice(buttons.length - 1, 1);
 
   return (
-    <div className={classNames(styles.topBar, { [styles.mobile]: isMobile })}>
+    <div role="menu" className={classNames(styles.topBar, { [styles.mobile]: isMobile })}>
       {buttons}
       {(hasSelectedItems || isMobileSorting) ? null : addItemButton}
     </div>

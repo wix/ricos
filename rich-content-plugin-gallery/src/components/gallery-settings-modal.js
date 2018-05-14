@@ -5,7 +5,8 @@ import {
   SettingsPanelFooter,
   SettingsSection,
   Tabs,
-  Tab
+  Tab,
+  FocusManager
 } from 'wix-rich-content-common';
 import LayoutSelector from './gallery-controls/layouts-selector';
 import styles from './gallery-settings-modal.scss';
@@ -198,7 +199,7 @@ export class GallerySettingsModal extends Component {
     } else {
       const headerText = t('GallerySettings_Header');
       return (
-        <div className={styles.gallerySettings}>
+        <FocusManager focusTrapOptions={{ initialFocus: `#${activeTab}` }} className={styles.gallerySettings}>
           <h3 className={styles.gallerySettings_title}>{headerText}</h3>
           <div>
             <Tabs value={activeTab} theme={this.props.theme}>
@@ -211,7 +212,7 @@ export class GallerySettingsModal extends Component {
             </Tabs>
           </div>
           <SettingsPanelFooter fixed cancel={() => this.revertComponentData()} save={() => helpers.closeModal()} theme={this.props.theme} t={t}/>
-        </div>
+        </FocusManager>
       );
     }
   }

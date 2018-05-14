@@ -2,7 +2,7 @@ import React from 'react';
 import ReactPlayer from 'react-player';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-
+import { findDOMNode } from 'react-dom';
 import { mergeStyles } from 'wix-rich-content-common';
 import styles from './default-video-styles.scss';
 
@@ -30,6 +30,23 @@ class VideoComponent extends React.Component {
   setPlayer = player => {
     this.player = player;
   };
+
+  componentDidMount() {
+    this.handlePlayerFocus();
+  }
+
+  componentDidUpdate() {
+    this.handlePlayerFocus();
+  }
+
+  /* eslint-disable react/no-find-dom-node */
+  // TODO: get rid of this ASAP!
+  // Currently, there's no other means to access the player inner iframe
+  handlePlayerFocus() {
+    return !this.state.isPlayable && this.player && findDOMNode(this.player).querySelector('iframe') &&
+      (findDOMNode(this.player).querySelector('iframe').tabIndex = -1);
+  }
+  /* eslint-enable react/no-find-dom-node */
 
   handlePlay = event => {
     event.preventDefault();

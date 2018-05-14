@@ -12,7 +12,8 @@ import createEditorToolbars from './Toolbars';
 import { getStaticTextToolbarId } from './Toolbars/toolbar-id';
 import createPlugins from './createPlugins';
 import { keyBindingFn, COMMANDS } from './keyBindings';
-import { normalizeInitialState, MODALS, hasLinksInSelection, removeLinksInSelection, getModalStyles } from 'wix-rich-content-common';
+import { MODALS, hasLinksInSelection, removeLinksInSelection, getModalStyles } from 'wix-rich-content-common';
+import normalizeInitialState from './normalizeInitialState';
 import styles from '~/Styles/rich-content-editor.scss';
 import draftStyles from '~/Styles/draft.scss';
 import 'wix-rich-content-common/dist/styles.css';
@@ -151,7 +152,7 @@ class RichContentEditor extends Component {
         } else {
           this.openLinkModal();
         }
-        break;
+        return 'handled';
       case COMMANDS.ALIGN_RIGHT:
       case COMMANDS.ALIGN_LEFT:
       case COMMANDS.ALIGN_CENTER:
@@ -171,8 +172,11 @@ class RichContentEditor extends Component {
         if (this.getToolbars().TextToolbar) {
           const staticToolbarButton = this.findFocusableChildForElement(`${getStaticTextToolbarId(this.refId)}`);
           staticToolbarButton && staticToolbarButton.focus();
+          return 'handled';
+        } else {
+          this.editor.blur();
+          return 'not-handled';
         }
-        break;
       default:
         newState = RichUtils.handleKeyCommand(editorState, command);
         break;

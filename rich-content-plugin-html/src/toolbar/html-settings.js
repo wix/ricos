@@ -48,21 +48,27 @@ class HTMLSettings extends Component {
     return (
       <div>
         <div>
-          <label htmlFor="width">{widthLabel}</label>
-          <input
-            type="range" min="10" max="1000" value={this.state.width} id="width" step="10"
-            data-hook="htmlSettingsWidth" onChange={this.changeWidth}
-          />
+          <label id="width_lbl" htmlFor="width">
+            <input
+              type="range" min="10" max="1000" value={this.state.width} id="width" step="10"
+              role="spinbutton" aria-valuemin="10" aria-valuemax="1000" aria-valuenow={this.state.height} aria-labelledby="width_lbl"
+              data-hook="htmlSettingsWidth" onChange={this.changeWidth}
+            />
+            {widthLabel}
+          </label>
           <output htmlFor="width" id="widthVal">
             {this.state.width}{pixelsLabel}
           </output>
         </div>
         <div>
-          <label htmlFor="height">{heightLabel}</label>
-          <input
-            type="range" min="10" max="1000" value={this.state.height} id="height" step="10"
-            data-hook="htmlSettingsHeight" onChange={this.changeHeight}
-          />
+          <label id="height_lbl" htmlFor="height">
+            <input
+              type="range" min="10" max="1000" value={this.state.height} id="height" step="10"
+              role="spinbutton" aria-valuemin="10" aria-valuemax="1000" aria-valuenow={this.state.height} aria-labelledby="height_lbl"
+              data-hook="htmlSettingsHeight" onChange={this.changeHeight}
+            />
+            {heightLabel}
+          </label>
           <output htmlFor="height" id="widthVal">
             {this.state.height}{pixelsLabel}
           </output>

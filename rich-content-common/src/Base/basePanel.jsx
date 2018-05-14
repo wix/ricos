@@ -13,6 +13,7 @@ export default class BasePanel extends Component {
     const { keyName, boundingRect, isActive } = componentState.activeButton || {};
     if (keyName === this.props.keyName && boundingRect && isActive) {
       return {
+        visible: true,
         style: {
           top: boundingRect.height,
           left: 0,
@@ -21,6 +22,7 @@ export default class BasePanel extends Component {
       };
     } else {
       return {
+        visible: false,
         style: {
           transform: 'translate(-50%) scale(0)',
         },
@@ -43,6 +45,7 @@ export default class BasePanel extends Component {
           componentData={this.props.componentData}
           componentState={this.props.componentState}
           t={this.props.t}
+          tabIndex={this.state.visible ? 0 : -1}
         />
       </div>
     );

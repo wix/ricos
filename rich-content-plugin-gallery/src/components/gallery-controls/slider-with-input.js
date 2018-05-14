@@ -9,21 +9,36 @@ class SliderWithInput extends Component {
   constructor(props) {
     super(props);
     this.styles = mergeStyles({ styles, theme: props.theme });
+    this.id = `sld_${Math.floor(Math.random() * 9999)}`;
   }
   render() {
     const { readOnly, label, value, min, max, onChange, theme, sliderDataHook, inputDataHook } = this.props;
+    let ariaProps = label ? { 'aria-labelledby': `${this.id}_lbl` } : {};
+    ariaProps = Object.assign({}, ariaProps, {
+      'aria-disabled': readOnly,
+      'aria-valuemin': min,
+      'aria-valuemax': max,
+      'aria-valuenow': value
+    });
+
+    /* eslint-disable jsx-a11y/role-has-required-aria-props */
     return (
-      <div className={readOnly ? this.styles.sliderWithInput_readOnly : null}>
-        {label ? <label className={this.styles.sliderWithInput_label}>{label}</label> : null}
+      <div className={readOnly ? this.styles.sliderWithInput_readOnly : null} >
+        {label ? <span id={`${this.id}_lbl`} className={this.styles.sliderWithInput_label}>{label}</span> : null}
         <div className={this.styles.sliderWithInput_content}>
           <Slider
-            theme={theme} value={value} dataHook={sliderDataHook} onChange={onChange}
-            min={min} max={max} className={this.styles.sliderWithInput_slider}
+            theme={theme} value={value} dataHook={sliderDataHook} onChange={onChange} readOnly={readOnly}
+            min={min} max={max} className={this.styles.sliderWithInput_slider} ariaProps={ariaProps}
           />
-          <input value={Math.floor(value)} data-hook={inputDataHook} onChange={onChange} className={this.styles.sliderWithInput_input}/>
+          <input
+            tabIndex={readOnly ? -1 : 0} type="number" value={value} data-hook={inputDataHook} {...ariaProps}
+            onChange={e => onChange(e.target.valueAsNumber)} className={this.styles.sliderWithInput_input}
+            min={min} max={max} step="1" role="spinbutton"
+          />
         </div>
       </div>
     );
+    /* eslint-enable jsx-a11y/role-has-required-aria-props */
   }
 }
 

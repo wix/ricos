@@ -125,7 +125,7 @@ class BaseToolbarButton extends React.Component {
       <div className={buttonWrapperClassNames} onMouseDown={this.preventBubblingUp}>
         <button
           className={buttonClassNames} aria-label={tooltipText} tabIndex={tabIndex} aria-pressed={this.state.isActive}
-          data-hook={dataHookText} onMouseDown={this.handleClick} children={this.props.children || [this.getIcon()]}
+          data-hook={dataHookText} onClick={this.handleClick} children={this.props.children || [this.getIcon()]}
         >
           {this.getIcon()}
         </button>

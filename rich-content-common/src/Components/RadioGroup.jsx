@@ -13,6 +13,7 @@ class RadioGroup extends Component {
     className: PropTypes.string,
     theme: PropTypes.object.isRequired,
     ariaLabelledBy: PropTypes.string,
+    readOnly: PropTypes.bool,
   };
 
   constructor(props) {
@@ -24,7 +25,7 @@ class RadioGroup extends Component {
   }
 
   onKeyDown(event) {
-    if (this.props.dataSource.length < 2) {
+    if (this.props.dataSource.length < 2 || this.props.readOnly) {
       return;
     }
     const index = this.state.focusIndex === -1 ? 0 : this.state.focusIndex;
@@ -67,11 +68,11 @@ class RadioGroup extends Component {
   }
 
   render() {
-    const { dataSource, value, className, onChange, ariaLabelledBy } = this.props;
+    const { dataSource, value, className, onChange, ariaLabelledBy, readOnly } = this.props;
     const { styles } = this;
     return (
       <div
-        aria-labelledby={ariaLabelledBy} role="radiogroup" tabIndex="-1"
+        aria-labelledby={ariaLabelledBy} role="radiogroup" tabIndex="-1" aria-disabled={readOnly}
         className={classnames(styles.radioGroup, className)} onKeyDown={e => this.onKeyDown(e)}
       >
         {dataSource
@@ -79,12 +80,13 @@ class RadioGroup extends Component {
             const checked = option.value === value ? { checked: 'checked' } : {};
             const a11yProps = {
               'aria-checked': option.value === value,
-              'aria-label': option.labelText
+              'aria-label': option.labelText,
+              'aria-disabled': readOnly
             };
             const inputId = `${this.id}_${i}`;
             return (
               <label
-                htmlFor={inputId} tabIndex={i === 0 ? 0 : -1} name={`${this.id}`} key={option.value}
+                htmlFor={inputId} tabIndex={(i === 0 && !readOnly) ? 0 : -1} name={`${this.id}`} key={option.value}
                 ref={el => this.saveInputRef(el, inputId)} className={styles.radioGroup} data-hook={option.dataHook}
               >
                 <input

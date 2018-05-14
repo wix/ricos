@@ -21,7 +21,7 @@ class ImageRatioSelector extends Component {
             item.ratioClass, { [this.styles.imageRatioSelector_ratioIcon_selected]: selected })}
         />
       </div>
-      <label className={this.styles.imageRatioSelector_ratioLabel}>{item.name}</label>
+      <span className={this.styles.imageRatioSelector_ratioLabel}>{item.name}</span>
     </div>
   );
 
@@ -40,8 +40,9 @@ class ImageRatioSelector extends Component {
 
     return (
       <div className={options.readOnly ? styles.imageRatioSelector_readOnly : null}>
-        <label className={styles.imageRatioSelector_label}>{imageRatioLabel}</label>
+        <span className={styles.imageRatioSelector_label}>{imageRatioLabel}</span>
         <SelectionList
+          readOnly={options.readOnly}
           theme={theme}
           className={styles.imageRatioSelector_grid}
           dataSource={dataSource}

@@ -24,7 +24,7 @@ class LayoutSelector extends Component {
   renderOption = ({ item, selected }) => (
     <div className={this.styles.layoutsSelector_tile}>
       <item.icon className={classNames(this.styles.layoutsSelector_icon, { [this.styles.layoutsSelector_icon_selected]: selected })}/>
-      <label className={this.styles.layoutsSelector_tile_label}>{item.name}</label>
+      <span className={this.styles.layoutsSelector_tile_label}>{item.name}</span>
     </div>
   );
 
@@ -34,7 +34,7 @@ class LayoutSelector extends Component {
     const layoutsLabel = t('GalleryPlugin_Layouts_Title');
     return (
       <div>
-        <label className={styles.layoutsSelector_label}>{layoutsLabel}</label>
+        <span className={styles.layoutsSelector_label}>{layoutsLabel}</span>
         <SelectionList
           theme={theme}
           className={styles.layoutsSelector_grid}

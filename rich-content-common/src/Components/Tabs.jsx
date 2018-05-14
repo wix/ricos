@@ -57,14 +57,11 @@ export class Tabs extends Component {
           {headers.map(({ label, value }) => {
             return (
               <button
-                role="tab"
-                tabIndex={0}
-                name={`tabs`}
-                key={value}
+                id={value} role="tab" tabIndex={0} name={`tabs`} key={value}
                 className={classNames(styles.tabs_headers_option, value === this.state.activeTab ? styles.tabs_headers_option_selected : '')}
-                data-hook={`${value}_Tab`} onClick={() => {
-                  this.setState({ activeTab: value });
-                  this.renderTabs();
+                data-hook={`${value}_Tab`}
+                onClick={() => {
+                  this.setState({ activeTab: value }); this.renderTabs();
                 }}
               >
                 <span className={this.styles.tabs_headers_option_label}>{label}</span>
