@@ -5,11 +5,15 @@ import DividerLine from '../components/divider-line';
 
 const createDropdownOptionComponent = ({ type, styles }) => () => {
   return (
-    <DividerLine
-      type={type}
-      className={styles.dropdownOption}
-      styles={styles}
-    />
+    <div className={styles['divider-dropdown__option']}>
+      <DividerLine
+        type={type}
+        styles={styles}
+        width={60}
+        multilineDinstance={4}
+        className={styles['divider-dropdown__divider']}
+      />
+    </div>
   );
 };
 

@@ -32,8 +32,6 @@ import {
   createDropdownValueGetter
 } from './dropdown-options';
 
-//TODO: fix styling issues
-
 const dataHook = key => `divider-button__${key}`;
 
 export default ({ styles }) => {
@@ -45,6 +43,7 @@ export default ({ styles }) => {
       options: dropdownOptions,
       onChange: changeType,
       getValue: createDropdownValueGetter(dropdownOptions),
+      controlClassName: styles['divider-dropdown__control'],
       tooltipTextKey: 'DividerPlugin_SelectType_Tooltip',
       mobile: true,
       dataHook: dataHook('line-type'),

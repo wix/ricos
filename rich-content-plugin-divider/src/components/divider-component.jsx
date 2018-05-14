@@ -31,10 +31,10 @@ class DividerComponent extends PureComponent {
     const styles = this.styles;
     const { type, size, alignment } = this.state;
     const className = classNames(
-      styles.divider,
-      this.props.className,
-      this.styles[type],
-      this.props.isMobile && this.styles.mobile
+      styles['divider-container'],
+      this.styles[`divider-container--${type}`],
+      this.props.isMobile && this.styles['divider-container--mobile'],
+      this.props.className
     );
     return (
       <div
