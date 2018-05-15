@@ -6,7 +6,8 @@
 		"url": "git+https://github.com/wix-incubator/rich-content.git"
 	},
 	"scripts": {
-		"bootstrap": "npm i && lerna bootstrap --hoist",
+		"bootstrap": "lerna bootstrap --hoist",
+		"postinstall": "npm run bootstrap",
 		"build:dev": "lerna run --parallel build:dev",
 		"build": "lerna run --scope=wix-rich-content-* --parallel build",
 		"watch": "lerna run --parallel watch",
