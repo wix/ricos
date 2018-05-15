@@ -2,10 +2,10 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.wixpress.npm</groupId>
-    <artifactId>wix-rich-content-plugin-divider</artifactId>
+    <artifactId>wix-rich-content</artifactId>
     <packaging>pom</packaging>
-    <name>Wix Rich Content Divider Plugin</name>
-    <description>Wix Rich Content Divider Plugin</description>
+    <name>Wix Rich Content</name>
+    <description>Wix Rich Content Monorepo</description>
     <version>1.0.0-SNAPSHOT</version>
 
     <parent>
@@ -13,7 +13,6 @@
         <artifactId>wix-master-parent</artifactId>
         <version>100.0.0-SNAPSHOT</version>
     </parent>
-
 
     <developers>
         <developer>
@@ -24,8 +23,8 @@
             </roles>
         </developer>
         <developer>
-            <name>ronny</name>
-            <email>ronny@wix.com</email>
+            <name>Alex Greenstein</name>
+            <email>alexgr@wix.com</email>
             <roles>
                 <role>dev</role>
             </roles>
