@@ -10,6 +10,7 @@ class Image extends Component {
     src: PropTypes.string.isRequired,
     theme: PropTypes.object.isRequired,
     className: PropTypes.string,
+    alt: PropTypes.string,
   };
 
   static defaultProps = {
@@ -23,14 +24,14 @@ class Image extends Component {
 
   render() {
     const { styles } = this;
-    const { src, resizeMode, className } = this.props;
+    const { src, resizeMode, className, alt } = this.props;
     const imageStyle = {
       backgroundImage: `url(${src})`,
       backgroundSize: resizeMode
     };
     return (
       <div className={classNames(styles.image_container, className)} style={imageStyle}>
-        <img src={src} className={styles.image_placeholder} />
+        <img src={src} className={styles.image_placeholder} alt={alt}/>
       </div>);
   }
 }

@@ -53,8 +53,9 @@ class SettingsModal extends React.Component {
         <div>
           <label htmlFor="width">
             <input
+              aria-valuemin="10" aria-valuemax="1000" aria-valuenow={this.state.width}
               type="range" min="10" max="1000" value={this.state.width} id="width" step="10"
-              data-hook="htmlSettingsWidth" onChange={this.changeWidth} tabIndex={tabIndex}
+              data-hook="htmlSettingsWidth" onChange={this.changeWidth} tabIndex={tabIndex} aria-label={widthLabel}
             />
             {widthLabel}
           </label>
@@ -65,8 +66,9 @@ class SettingsModal extends React.Component {
         <div>
           <label htmlFor="height">
             <input
+              aria-valuemin="10" aria-valuemax="1000" aria-valuenow={this.state.height}
               type="range" min="10" max="1000" value={this.state.height} id="height" step="10"
-              data-hook="htmlSettingsHeight" onChange={this.changeHeight} tabIndex={tabIndex}
+              data-hook="htmlSettingsHeight" onChange={this.changeHeight} tabIndex={tabIndex} aria-label={heightLabel}
             />
             {heightLabel}
           </label>
@@ -174,7 +176,10 @@ class EditModal extends React.Component {
           </div>
         </div>
         <div>
-          <input tabIndex={tabIndex} type="button" data-hook="htmlPluginButton" onClick={this.updateContent} value={updateLabel} />
+          <input
+            tabIndex={tabIndex} type="button" data-hook="htmlPluginButton"
+            onClick={this.updateContent} aria-label={updateLabel} value={updateLabel}
+          />
         </div>
       </div>
     );

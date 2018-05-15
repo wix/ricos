@@ -12,6 +12,7 @@ class Button extends Component {
     onClick: PropTypes.func.isRequired,
     children: PropTypes.node,
     dataHook: PropTypes.string,
+    ariaProps: PropTypes.object,
   };
 
   static defaultProps = {
@@ -24,8 +25,11 @@ class Button extends Component {
   }
 
   render() {
-    const { onClick, className, type, children, dataHook } = this.props;
-    return <button data-hook={dataHook} onClick={onClick} className={classNames(this.styles[`button_${type}`], className)}>{children}</button>;
+    const { onClick, className, type, children, dataHook, ariaProps } = this.props;
+    return (
+      <button {...ariaProps} data-hook={dataHook} onClick={onClick} className={classNames(this.styles[`button_${type}`], className)}>
+        {children}
+      </button>);
   }
 }
 

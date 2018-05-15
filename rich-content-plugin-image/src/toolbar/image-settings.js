@@ -130,15 +130,13 @@ class ImageSettings extends Component {
           <h3 className={this.styles.imageSettingsTitle}>{headerText}</h3>
         }
         <div className={classNames(styles.imageSettings_scrollContainer, { [styles.imageSettings_mobile]: isMobile })}>
-          <SettingsSection theme={theme}>
+          <SettingsSection theme={theme} ariaProps={{ 'aria-label': 'image preview', role: 'region' }}>
             <Image
-              resizeMode={'contain'}
-              className={this.styles.imageSettingsImage}
-              src={getImageSrc(src, helpers, { requiredWidth: 1000, requiredHeight: 250, requiredQuality: 80 })}
-              theme={theme}
+              alt={metadata.alt || 'image preview'} resizeMode={'contain'} className={this.styles.imageSettingsImage}
+              src={getImageSrc(src, helpers, { requiredWidth: 1000, requiredHeight: 250, requiredQuality: 80 })} theme={theme}
             />
           </SettingsSection>
-          <SettingsSection theme={theme} className={this.styles.imageSettingsSection}>
+          <SettingsSection theme={theme} className={this.styles.imageSettingsSection} ariaProps={{ 'aria-label': 'image caption', role: 'region' }}>
             <InputWithLabel
               theme={theme}
               id="imageSettingsCaptionInput"
@@ -149,7 +147,7 @@ class ImageSettings extends Component {
               dataHook="imageSettingsCaptionInput"
             />
           </SettingsSection >
-          <SettingsSection theme={theme} className={this.styles.imageSettingsSection}>
+          <SettingsSection theme={theme} className={this.styles.imageSettingsSection} ariaProps={{ 'aria-label': 'image alt text', role: 'region' }}>
             <InputWithLabel
               theme={theme}
               id="imageSettingsAltInput"
@@ -160,22 +158,13 @@ class ImageSettings extends Component {
               dataHook="imageSettingsAltInput"
             />
           </SettingsSection>
-          <SettingsSection theme={theme} className={this.styles.imageSettingsSection}>
-            <span className={this.styles.inputWithLabel_label}>{linkLabel}</span>
-          </SettingsSection>
-          <div className={this.styles.imageSettingsLinkContainer}>
+          <SettingsSection theme={theme} className={this.styles.imageSettingsSection} ariaProps={{ 'aria-label': 'image link', role: 'region' }}>
+            <span id="image_settings_link_lbl" className={this.styles.inputWithLabel_label}>{linkLabel}</span>
             <LinkPanel
-              ref={this.setLinkPanel}
-              theme={theme}
-              url={url}
-              targetBlank={targetBlank}
-              nofollow={nofollow}
-              isImageSettings
-              anchorTarget={anchorTarget}
-              relValue={relValue}
-              t={t}
+              ref={this.setLinkPanel} theme={theme} url={url} targetBlank={targetBlank} nofollow={nofollow}
+              isImageSettings anchorTarget={anchorTarget} relValue={relValue} t={t} ariaProps={{ 'aria-labelledby': 'image_settings_link_lbl' }}
             />
-          </div>
+          </SettingsSection>
         </div>
         {isMobile ? null : <SettingsPanelFooter
           fixed

@@ -100,7 +100,7 @@ export default class AddPluginFloatingToolbar extends Component {
     const popoupClassNames = classNames(Styles.sideToolbar, toolbarStyles && toolbarStyles.sideToolbar);
     return (
       <FocusManager
-        role="toolbar" active={this.state.isActive}
+        role="toolbar" active={this.state.isActive} aria-orientation="horizontal"
         focusTrapOptions={{ escapeDeactivates: false, clickOutsideDeactivates: true, initialFocus: this.getFirstFocusableChildSelector(this.id) }}
         className={floatingContainerClassNames} onKeyDown={e => this.onKeyDown(e)}
       >

@@ -13,16 +13,22 @@ class SettingsPanelFooter extends Component {
 
   render() {
     const { save, cancel, theme, cancelLabel, saveLabel, fixed, className, t } = this.props;
+    const saveText = saveLabel || t('SettingsPanelFooter_Done');
+    const cancelText = cancelLabel || t('SettingsPanelFooter_Cancel');
+
     return (
       <div className={classNames(this.styles.settingsPanel_footer, className, { [this.styles.settingsPanel_footer_fixed]: (fixed || false) })}>
         <Button
-          theme={theme}
+          theme={theme} ariaProps={{ 'aria-label': cancelText }}
           dataHook="settingPanelFooterCancel" onClick={() => cancel()} className={this.styles.settingsPanel_cancel} type={'secondary'}
         >
-          {cancelLabel || t('SettingsPanelFooter_Cancel')}
+          {cancelText}
         </Button>
-        <Button theme={theme} className={this.styles.settingsPanel_save} dataHook="settingPanelFooterDone" onClick={() => save()}>
-          {saveLabel || t('SettingsPanelFooter_Done')}
+        <Button
+          ariaProps={{ 'aria-label': saveText }} theme={theme}
+          className={this.styles.settingsPanel_save} dataHook="settingPanelFooterDone" onClick={() => save()}
+        >
+          {saveText}
         </Button>
       </div>
     );

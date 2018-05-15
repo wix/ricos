@@ -9,34 +9,29 @@ class InputWithLabel extends Component {
     super(props);
     this.styles = mergeStyles({ styles, theme: props.theme });
   }
+
+  renderInput = () => {
+    const { styles } = this;
+    const { id, placeholder, value, onChange, isTextArea, dataHook } = this.props;
+    const inputClassName = classNames(styles.inputWithLabel_input, { [styles.inputWithLabel_textArea]: isTextArea });
+    if (isTextArea) {
+      return <textarea className={inputClassName} placeholder={placeholder} id={id} value={value} data-hook={dataHook} onChange={onChange}/>;
+    } else {
+      return <input className={inputClassName} placeholder={placeholder} id={id} value={value} data-hook={dataHook} onChange={onChange}/>;
+    }
+  };
+
   render() {
     const { styles } = this;
-    const { id, label, placeholder, value, onChange, isTextArea, dataHook } = this.props;
-    const inputClassName = classNames(styles.inputWithLabel_input,
-      {
-        [styles.inputWithLabel_textArea]: isTextArea
-      }
-    );
-    return (
-      <div>
-        {label ? <label className={this.styles.inputWithLabel_label} htmlFor={id}>{label}</label> : null}
-        {isTextArea ? <textarea
-          className={inputClassName}
-          placeholder={placeholder}
-          id={id}
-          value={value}
-          data-hook={dataHook} onChange={onChange}
-        /> : <input
-          className={styles.inputWithLabel_input}
-          placeholder={placeholder}
-          id={id}
-          value={value}
-          data-hook={dataHook} onChange={onChange}
-        />}
-      </div>
-    );
+    const { id, label } = this.props;
+    if (label) {
+      return <label htmlFor={id}><span className={styles.inputWithLabel_label}>{label}</span>{this.renderInput()}</label>;
+    } else {
+      return this.renderInput();
+    }
   }
 }
+
 InputWithLabel.propTypes = {
   id: PropTypes.string.isRequired,
   label: PropTypes.string,

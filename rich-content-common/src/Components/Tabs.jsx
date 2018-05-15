@@ -25,10 +25,10 @@ export class Tab extends Component {
 
   render = () => this.props.selected &&
     <div
-      role="tabPanel"
-      key={this.props.value}
-      className={this.styles.tabs_panel}
-    >{this.props.children}
+      role="tabpanel" key={this.props.value} aria-labelledby={`${this.props.value}_header`}
+      id={`${this.props.value}_panel`} className={this.styles.tabs_panel}
+    >
+      {this.props.children}
     </div>;
 }
 
@@ -52,14 +52,15 @@ export class Tabs extends Component {
     const headers = this.getTabHeaders(props.children);
 
     return (
-      <div role="tablist" className={styles.tabs}>
+      <div role="tablist" className={styles.tabs} aria-orientation="horizontal">
         <div className={styles.tabs_headers}>
           {headers.map(({ label, value }) => {
+            const isSelected = value === this.state.activeTab;
             return (
               <button
-                id={value} role="tab" tabIndex={0} name={`tabs`} key={value}
-                className={classNames(styles.tabs_headers_option, value === this.state.activeTab ? styles.tabs_headers_option_selected : '')}
-                data-hook={`${value}_Tab`}
+                id={`${value}_header`} role="tab" tabIndex={0} name={`tabs`} key={value}
+                className={classNames(styles.tabs_headers_option, { [styles.tabs_headers_option_selected]: isSelected })}
+                data-hook={`${value}_Tab`} aria-controls={`${value}_panel`} aria-label={label} aria-selected={isSelected}
                 onClick={() => {
                   this.setState({ activeTab: value }); this.renderTabs();
                 }}

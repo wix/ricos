@@ -28,21 +28,12 @@ export default class MobileLinkModal extends Component {
           <div className={styles.mobileLinkModal_linkIconContainer} >
             <LinkIcon />
           </div>
-          <h3 className={styles.mobileLinkModal_title}>{mobileLinkModalTitle}</h3>
+          <h3 id="mob_link_modal_hdr" className={styles.mobileLinkModal_title}>{mobileLinkModalTitle}</h3>
         </div>
         <LinkPanelContainer
-          url={url}
-          targetBlank={targetBlank}
-          anchorTarget={anchorTarget}
-          relValue={relValue}
-          nofollow={nofollow}
-          theme={theme}
-          isActive={isActive}
-          isMobile={isMobile}
-          onDone={onDone}
-          onCancel={onCancel}
-          onDelete={onDelete}
-          t={t}
+          url={url} targetBlank={targetBlank} anchorTarget={anchorTarget} relValue={relValue} nofollow={nofollow} theme={theme}
+          isActive={isActive} isMobile={isMobile} onDone={onDone} onCancel={onCancel} onDelete={onDelete} t={t}
+          ariaProps={{ 'aria-labelledby': 'mob_link_modal_hdr' }}
         />
       </div>
     );

@@ -206,6 +206,7 @@ export default class InlineToolbar extends Component {
     return (
       <div
         role="toolbar"
+        aria-orientation="horizontal"
         className={toolbarClassNames}
         style={this.getStyle()}
         ref={this.handleToolbarRef}

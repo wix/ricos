@@ -79,16 +79,17 @@ export default ({ blockType, button, helpers, pubsub, t }) => {
       const { showName, tabIndex } = this.props;
       const { name, Icon, ButtonElement } = button;
       if (ButtonElement) {
-        /* eslint-disable jsx-a11y/no-static-element-interactions */
         return (
-          <div className={styles.button} data-hook={`${name.replace(' ', '_')}_insert_plugin_button`} onClick={this.onClick}>
+          <button
+            className={styles.button} data-hook={`${name.replace(' ', '_')}_insert_plugin_button`}
+            onClick={this.onClick}
+          >
             <div className={styles.icon}>
               <ButtonElement key="0" />
             </div>
             {showName && <span key="1" className={styles.label}>{name}</span>}
-          </div>
+          </button>
         );
-        /* eslint-enable jsx-a11y/no-static-element-interactions */
 
       } else {
         return (

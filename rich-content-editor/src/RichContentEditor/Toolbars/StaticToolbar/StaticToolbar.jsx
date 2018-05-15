@@ -105,11 +105,8 @@ export default class StaticToolbar extends React.Component {
     };
 
     return (
-      <div role="toolbar" id={id} className={toolbarClassNames} data-hook={dataHook}>
-        <div
-          className={buttonClassNames}
-          ref={this.handleButtonsRef}
-        >
+      <div role="toolbar" aria-orientation="horizontal" id={id} className={toolbarClassNames} data-hook={dataHook}>
+        <div className={buttonClassNames} ref={this.handleButtonsRef} >
           {
             showLeftArrow &&
             <button

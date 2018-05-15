@@ -5,7 +5,7 @@ import Styles from '../Styles/toolbar-separator.scss';
 
 const Separator = ({ className = '', horizontal = false }) => {
   const separatorClassNames = classNames((horizontal ? Styles.horizontalSeparator : Styles.separator), className);
-  return <div className={separatorClassNames} />;
+  return <div className={separatorClassNames} role="separator" aria-orientation={horizontal ? 'horizontal' : 'vertical'}/>;
 };
 
 Separator.propTypes = {

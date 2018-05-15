@@ -12,7 +12,11 @@ class SettingsSection extends React.Component {
 
   render() {
     const { styles } = this;
-    return <div className={classNames(styles.section, this.props.className)}>{this.props.children}</div>;
+    const { children, ariaProps, className } = this.props;
+    return (
+      <div className={classNames(styles.section, className)} {...ariaProps}>
+        {children}
+      </div>);
   }
 }
 
@@ -20,6 +24,7 @@ SettingsSection.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
   theme: PropTypes.object.isRequired,
+  ariaProps: PropTypes.object,
 };
 
 export default SettingsSection;
