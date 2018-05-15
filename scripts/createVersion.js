@@ -8,9 +8,11 @@ const path = require('path');
 const cp = require('child_process');
 const chalk = require('chalk');
 const prompts = require('prompts');
+const argv = require('yargs').argv;
 const pkg = require('../package.json');
 
 const lernaPath = path.resolve(__dirname, '../node_modules/.bin/lerna');
+const scope = argv.scope || 'wix-rich-content-*';
 
 // resets the console
 process.stdout.write('\x1Bc');
@@ -33,7 +35,7 @@ prompts({
     console.log(chalk.red('Release aborted'));
   } else {
     try {
-      cp.execSync(`${lernaPath} publish --skip-npm --scope=wix-rich-content-*`, { stdio: 'inherit' });
+      cp.execSync(`${lernaPath} publish --skip-npm --scope=${scope} --message="chore(version bump):" --independent`, { stdio: 'inherit' });
 
       console.log();
       console.log(chalk.green('Release was created locally'));
@@ -46,7 +48,7 @@ prompts({
       console.log();
       console.log(
         chalk.cyan(
-          'http://ci.dev.wix/project.html?projectId=RichContent',
+          'http://ci.dev.wix/viewType.html?buildTypeId=WixRichContent_WixRichContent_O',
         ),
       );
     } catch (error) {

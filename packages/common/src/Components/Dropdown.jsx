@@ -39,6 +39,7 @@ class Dropdown extends Component {
     };
     this.mounted = true;
     this.styles = mergeStyles({ styles, theme: props.theme });
+    this.id = `cmbx_${Math.floor(Math.random() * 9999)}`;
   }
 
   componentWillReceiveProps(newProps) {
@@ -119,16 +120,15 @@ class Dropdown extends Component {
     const { value, label, icon: Icon, component: OptionComponent } = option;
 
     return (
-      <div
-        key={value}
-        className={optionClass}
-        onMouseDown={this.setValue.bind(this, value, label, OptionComponent)}
+      <button
+        key={value} className={optionClass} onMouseDown={this.setValue.bind(this, value, label, OptionComponent)}
         data-hook={`${label || value}_dropdown_option`} onClick={this.setValue.bind(this, value, label, OptionComponent)}
+        role="option" aria-selected={option === this.state.selected} aria-label={label}
       >
         {Icon && <Icon className={styles['Dropdown-option-icon']} />}
         {label && <span className={styles['Dropdown-option-label']}>{label}</span>}
         {OptionComponent && <OptionComponent/>}
-      </div>
+      </button>
     );
   }
 
@@ -182,8 +182,8 @@ class Dropdown extends Component {
         </span>
       );
     })();
-    const value = (<div className={styles['Dropdown-placeholder']}>{placeHolderValue}</div>);
-    const menu = this.state.isOpen ? <div className={styles['Dropdown-menu']}>{this.buildMenu()}</div> : null;
+    const value = (<div className={styles['Dropdown-placeholder']} role="textbox">{placeHolderValue}</div>);
+    const menu = this.state.isOpen ? <div className={styles['Dropdown-menu']} role="listbox" id={`${this.id}_menu`}>{this.buildMenu()}</div> : null;
 
     const dropdownClass = classNames({
       [styles['Dropdown-root']]: true,
@@ -193,9 +193,10 @@ class Dropdown extends Component {
 
     return (
       <div className={dropdownClass}>
-        <div
+        <button
+          role="combobox" aria-controls={`${this.id}_menu`} aria-expanded={this.state.isOpen}
           className={classNames(styles['Dropdown-control'], this.props.controlClassName, disabledClass)}
-          data-hook={dataHook} onMouseDown={this.handleMouseDown.bind(this)} onTouchEnd={this.handleMouseDown.bind(this)}
+          data-hook={dataHook} onClick={this.handleMouseDown.bind(this)} onTouchEnd={this.handleMouseDown.bind(this)}
         >
           {value}
           <span
@@ -205,7 +206,7 @@ class Dropdown extends Component {
           >
             <DropdownArrow />
           </span>
-        </div>
+        </button>
         {menu}
       </div>
     );

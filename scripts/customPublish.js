@@ -66,7 +66,7 @@ function getTag(pkg) {
 }
 
 function publish(pkg) {
-  const publishCommand = `npm publish --tag=${getTag(pkg)} --registry=${pkg.registry}`;
+  const publishCommand = `npm publish ${pkg.path} --tag=${getTag(pkg)} --registry=${pkg.registry}`;
 
   if (!process.env.IS_BUILD_AGENT) {
     console.log(
@@ -124,6 +124,7 @@ lernaConfig.packages.forEach(pacakagesGlob => {
         name: get(pkg, 'name'),
         version: get(pkg, 'version'),
         registry: get(pkg, 'publishConfig.registry', DEFAULT_REGISTRY),
+        path: pkgPath,
       });
     }
   });

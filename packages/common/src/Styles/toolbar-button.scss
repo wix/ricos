@@ -35,8 +35,11 @@
 }
 
 .fileUploadButton {
-  padding: 10px 7px 0 7px;
+  padding: 0 7px;
   line-height: normal;
+  display: inline-block;
+  font-family: Helvetica;
+  font-weight: normal;
 }
 
 .icon {
@@ -62,7 +65,7 @@
     width: 100%;
     height: 100%;
     box-sizing: border-box;
-    padding: 15px 0;
+    padding: 22px 0;
   }
 
   .icon {

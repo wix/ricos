@@ -25,10 +25,10 @@ $dropdown-font-size: 14px;
 }
 
 .Dropdown-control {
+    border: none;
     position: relative;
     overflow: hidden;
     background-color: white;
-    border-radius: 2px;
     box-sizing: border-box;
     cursor: pointer;
     transition: all 200ms ease;
@@ -79,8 +79,10 @@ $dropdown-font-size: 14px;
 }
 
 .Dropdown-option {
+    border: none;
+    background-color: transparent;
     box-sizing: border-box;
-    color: $dropdown-color;;
+    color: $dropdown-color;
     cursor: pointer;
     display: block;
     padding: 0 12px;

@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import { FocusManager } from 'wix-rich-content-common';
 import PlusIcon from '../icons/plus-default.svg';
 import PlusActiveIcon from '../icons/plus-active.svg';
-import Styles from '~/Styles/side-toolbar.scss';
+import Styles from '../../../Styles/side-toolbar.scss';
 
 export default class AddPluginFloatingToolbar extends Component {
   state = {

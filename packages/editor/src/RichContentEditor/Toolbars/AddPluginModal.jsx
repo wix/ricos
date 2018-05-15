@@ -20,7 +20,7 @@ export default class AddPluginModal extends Component {
     const tileClassNames = classNames(Styles.addPluginModal_tile, theme && theme.addPluginModal_tile);
     const placeHolderCount = getPlaceHolderCount(structure.length);
     return (
-      <ul className={classNames(Styles.addPluginModal_list, theme && theme.addPluginModal_list)}>
+      <ul role="toolbar" aria-label="Add Plugin" className={classNames(Styles.addPluginModal_list, theme && theme.addPluginModal_list)}>
         {structure.map((Component, index) => (
           <li key={index} className={tileClassNames}>
             <Component

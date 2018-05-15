@@ -1,5 +1,5 @@
 {
-  "extends": ["wix/react"],
+  "extends": ["wix/react", "plugin:jsx-a11y/strict"],
   "env": {
     "browser": true,
     "node": true
