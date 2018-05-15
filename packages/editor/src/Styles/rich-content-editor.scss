@@ -1,0 +1,171 @@
+@import "../../../common/src/Styles/palette.scss";
+@import "../../../common/src/Styles/consts.scss";
+@import "../../../common/src/Styles/global.scss";
+@import "../../../common/src/Styles/fonts.scss";
+
+.wrapper {
+  @extend .fontElementMap;
+  position: relative;
+  height: 100%;
+  box-sizing: border-box;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  * {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  }
+
+  &.desktop {
+    .editor {
+      :global(.DraftEditor-root) {
+        box-sizing: border-box;
+        padding-bottom: 60px;
+        &::after {
+          content: '';
+          display: table;
+          clear: both;
+        }
+      }
+
+      :global(.public-DraftEditorPlaceholder-root) {
+        margin: 0 calc((100% - #{$textWidth}) /2);
+      }
+    }
+  }
+
+  &.android {
+    padding-top: 50px;
+  }
+}
+
+.editor {
+  width: 100%;
+  height: 100%;
+  line-height: 1.5;
+  font-size: 16px;
+  font-family: 'Roboto', sans-serif;
+  color: $primary-text-color;
+
+  &::after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+}
+
+.atomic {
+  margin: 2px 0;
+}
+
+.toolbar {
+  margin-top: 20px;
+}
+
+.block {
+  & + & {
+    margin-top: 20px;
+  }
+}
+
+.elementSpacing {
+  margin: 0 calc((100% - #{$textWidth}) /2);
+  @include phone {
+    margin: 0;
+  }
+}
+
+.blockStyleSpacing {
+  margin: 15px calc((18px + (100% - #{$textWidth}) /2));
+  @include phone {
+    margin: 15px calc((18px + (100% - #{$textMobileWidth}) /2));
+  }
+}
+
+.text {
+  composes: elementSpacing;
+
+  &:empty {
+    height: 24px;
+  }
+
+}
+
+.left {
+  & > * {
+    text-align: left !important;
+  }
+}
+
+.center {
+  & > * {
+    text-align: center !important;
+  }
+}
+
+.right {
+  & > * {
+    text-align: right !important;
+  }
+}
+.justify {
+  & > * {
+    text-align: justify !important;
+  }
+}
+
+.quote {
+  composes: blockStyleSpacing;
+  border-left-width: 3px;
+  border-left-style: solid;
+  font-size: 18px;
+  line-height: 26px;
+  padding: 6px 0 6px 18px;
+  font-style: normal;
+
+}
+
+.headerOne,
+.headerTwo,
+.headerThree {
+  composes: elementSpacing;
+  font: inherit;
+}
+
+.headerOne {
+  font-size: 28px;
+  line-height: 36px;
+}
+
+.headerTwo {
+  font-size: 22px;
+  line-height: 30px;
+}
+
+.headerThree {
+  font-size: 18px;
+  line-height: 26px;
+}
+
+.indent {
+  composes: elementSpacing;
+  text-indent: 5%;
+}
+
+.orderedList {
+  composes: elementSpacing;
+}
+
+.unorderedList {
+  composes: elementSpacing;
+}
+
+.code, .codeBlock {
+  composes: blockStyleSpacing;
+  background-color: rgba(0, 0, 0, 0.05);
+  font-family: "Inconsolata", "Menlo", "Consolas", monospace;
+  font-size: 16px;
+  line-height: 26px;
+  padding: 2px 25px;
+  white-space: pre-wrap;
+}

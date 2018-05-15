@@ -1,0 +1,56 @@
+{
+  "name": "wix-rich-content-plugin-gallery",
+  "version": "1.0.0",
+  "author": {
+    "name": "Jonathan Bachman",
+    "email": "jonathanb@wix.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wix-incubator/rich-content.git"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wix-incubator/rich-content/issues"
+  },
+  "homepage": "https://github.com/wix-incubator/rich-content/tree/master/rich-content-plugin-gallery",
+  "files": [
+    "dist"
+  ],
+  "main": "dist/wix-rich-content-plugin-gallery.js",
+  "scripts": {
+    "clean": "rm -rf dist/",
+    "transpile": "babel -q src -d dist",
+    "webpack": "webpack --env.FILE_NAME=wix-rich-content-plugin-gallery",
+    "prebuild": "npm run transpile",
+    "build:dev": "npm run transpile && npm run webpack -- --config ../../config/webpack.dev.js",
+    "build": "npm run webpack -- --config ../../config/webpack.prod.js",
+    "watch": "npm run build:dev -- --watch",
+    "release": "wnpm-release --no-shrinkwrap",
+    "test": "eslint 'src/**/*.{js,jsx}'"
+  },
+  "peerDependencies": {
+    "@wix/draft-js": "^0.10.105",
+    "classnames": "^2.0.0",
+    "lodash": "^4.0.0",
+    "prop-types": "^15.0.0",
+    "react": "^15.0.0 || ^16.0.0",
+    "react-dom": "^15.0.0 || ^16.0.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "eslint": "^4.19.1",
+    "webpack": "^3.11.0"
+  },
+  "dependencies": {
+    "focus-trap-react": "^3.1.2",
+    "image-client-api": "^1.195.0",
+    "pro-gallery-renderer": "^1.0.177",
+    "react-sortable-hoc": "^0.6.8",
+    "wix-rich-content-common": "^1.0.0"
+  },
+  "unpkg": true,
+  "publishConfig": {
+    "registry": "http://repo.dev.wix/artifactory/api/npm/npm-local/"
+  }
+}

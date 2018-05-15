@@ -1,0 +1,52 @@
+@import "../../../common/src/Styles/consts";
+@import "../../../common/src/Styles/mixins";
+
+.wrapper {
+  :global {
+    .DraftEditor-editorContainer,
+    .DraftEditor-root,
+    .public-DraftEditor-content {
+      height: inherit;
+      text-align: initial;
+    }
+
+    .public-DraftEditor-content[contenteditable=true] {
+      -webkit-user-modify: read-write-plaintext-only;
+    }
+
+    .DraftEditor-root {
+      position: relative;
+    }
+
+    .public-DraftStyleDefault-block {
+      position: relative;
+      white-space: pre-wrap;
+    }
+
+    .public-DraftStyleDefault-ltr {
+      direction: ltr;
+      text-align: left;
+    }
+
+    .public-DraftStyleDefault-rtl {
+      direction: rtl;
+      text-align: right;
+    }
+
+    .public-DraftStyleDefault-listLTR {
+      direction: ltr;
+    }
+
+    .public-DraftStyleDefault-listRTL {
+      direction: rtl;
+    }
+
+    .public-DraftStyleDefault-ol,
+    .public-DraftStyleDefault-ul {
+      margin: 0 calc((100% - #{$textWidth}) /2);
+      @include phone {
+        margin: 0;
+      }
+    }
+  }
+}
