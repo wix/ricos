@@ -22,8 +22,8 @@ class DividerComponent extends PureComponent {
     const config = getConfig(componentData);
     return {
       type: getType(componentData),
-      size: config.dividerSize,
-      alignment: config.dividerAlignment,
+      size: config.size,
+      alignment: config.alignment,
     };
   };
 

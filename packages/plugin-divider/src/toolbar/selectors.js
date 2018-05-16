@@ -24,35 +24,35 @@ export const getConfigFromStore = store =>
 
 export const getConfig = (componentData = {}) => {
   const config = componentData.config || {};
-  if (!config.dividerSize) {
-    config.dividerSize = DEFAULTS.config.dividerSize;
+  if (!config.size) {
+    config.size = DEFAULTS.config.size;
   }
-  if (!config.dividerAlignment) {
-    config.dividerAlignment = DEFAULTS.config.dividerAlignment;
+  if (!config.alignment) {
+    config.alignment = DEFAULTS.config.alignment;
   }
   return config;
 };
 
 export const isAligmentDisabled = (componentData = {}) =>
-  getConfig(componentData).dividerSize === SIZE_LARGE;
+  getConfig(componentData).size === SIZE_LARGE;
 
 export const getNextValue = (array, currentValue) =>
   array[(array.indexOf(currentValue) + 1) % array.length];
 
 export const getNextSizeIcon = componentData => {
-  const { dividerSize } = getConfig(componentData);
+  const { size } = getConfig(componentData);
   return {
     [SIZE_LARGE]: SizeMediumIcon,
     [SIZE_MEDIUM]: SizeSmallIcon,
     [SIZE_SMALL]: SizeLargeIcon,
-  }[dividerSize];
+  }[size];
 };
 
 export const getNextAlignmentIcon = componentData => {
-  const { dividerAlignment } = getConfig(componentData);
+  const { alignment } = getConfig(componentData);
   return {
     [ALIGN_LEFT]: AlignCenterIcon,
     [ALIGN_CENTER]: AlignRightIcon,
     [ALIGN_RIGHT]: AlignLeftIcon,
-  }[dividerAlignment];
+  }[alignment];
 };

@@ -8,12 +8,18 @@ import Separator from '../Components/Separator';
 import BaseToolbarButton from './baseToolbarButton';
 import {
   BUTTONS,
+  SizeSmallButton,
+  SizeMediumButton,
+  SizeLargeButton,
   SizeOriginalButton,
   SizeSmallCenterButton,
   SizeSmallLeftButton,
   SizeSmallRightButton,
   SizeContentButton,
   SizeFullWidthButton,
+  AlignmentLeftButton,
+  AlignmentCenterButton,
+  AlignmentRightButton,
   BlockLinkButton,
   DeleteButton,
 } from './buttons';
@@ -204,6 +210,42 @@ export default function createToolbar({ buttons, theme, pubsub, helpers, isMobil
     renderButton = (button, key, themedStyle, separatorClassNames, tabIndex) => {
       const { alignment, size } = this.state;
       switch (button.type) {
+        case BUTTONS.SIZE_SMALL:
+          return (
+            <SizeSmallButton
+              size={size}
+              setSize={this.setSize}
+              theme={themedStyle}
+              isMobile={isMobile}
+              key={key}
+              t={t}
+              tabIndex={tabIndex}
+            />
+          );
+        case BUTTONS.SIZE_MEDIUM:
+          return (
+            <SizeMediumButton
+              size={size}
+              setSize={this.setSize}
+              theme={themedStyle}
+              isMobile={isMobile}
+              key={key}
+              t={t}
+              tabIndex={tabIndex}
+            />
+          );
+        case BUTTONS.SIZE_LARGE:
+          return (
+            <SizeLargeButton
+              size={size}
+              setSize={this.setSize}
+              theme={themedStyle}
+              isMobile={isMobile}
+              key={key}
+              t={t}
+              tabIndex={tabIndex}
+            />
+          );
         case BUTTONS.SIZE_ORIGINAL:
           return (
             <SizeOriginalButton
@@ -211,6 +253,42 @@ export default function createToolbar({ buttons, theme, pubsub, helpers, isMobil
               alignment={alignment}
               setAlignmentAndSize={this.setAlignmentAndSize}
               theme={themedStyle}
+              key={key}
+              t={t}
+              tabIndex={tabIndex}
+            />
+          );
+        case BUTTONS.ALIGNMENT_LEFT:
+          return (
+            <AlignmentLeftButton
+              size={size}
+              setAlignment={this.setAlignment}
+              theme={themedStyle}
+              isMobile={isMobile}
+              key={key}
+              t={t}
+              tabIndex={tabIndex}
+            />
+          );
+        case BUTTONS.ALIGNMENT_CENTER:
+          return (
+            <AlignmentCenterButton
+              size={size}
+              setAlignment={this.setAlignment}
+              theme={themedStyle}
+              isMobile={isMobile}
+              key={key}
+              t={t}
+              tabIndex={tabIndex}
+            />
+          );
+        case BUTTONS.ALIGNMENT_RIGHT:
+          return (
+            <AlignmentRightButton
+              size={size}
+              setAlignment={this.setAlignment}
+              theme={themedStyle}
+              isMobile={isMobile}
               key={key}
               t={t}
               tabIndex={tabIndex}

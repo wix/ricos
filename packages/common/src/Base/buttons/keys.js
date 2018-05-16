@@ -11,6 +11,12 @@ export default {
   SIZE_SMALL_RIGHT: 'size-small-right',
   SIZE_CONTENT: 'size-content',
   SIZE_FULL_WIDTH: 'size-full-width',
+  SIZE_SMALL: 'size-small',
+  SIZE_MEDIUM: 'size-medium',
+  SIZE_LARGE: 'size-large',
+  ALIGNMENT_LEFT: 'alignment-left',
+  ALIGNMENT_CENTER: 'alignment-center',
+  ALIGNMENT_RIGHT: 'alignment-right',
   LINK: 'link',
   DELETE: 'delete',
 };
