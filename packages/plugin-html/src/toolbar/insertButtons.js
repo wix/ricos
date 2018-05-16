@@ -1,4 +1,4 @@
-import { DEFAULTS } from './../html-component';
+import { DEFAULTS } from '../HTMLComponent';
 import InsertPluginIcon from './../icons/insert-plugin.svg';
 
 export default ({ helpers, t }) => {
