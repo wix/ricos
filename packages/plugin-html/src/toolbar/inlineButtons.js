@@ -33,7 +33,6 @@ export default({ t }) => {
         onChange: ({ store }) => width => store.update('componentData', { config: { width } }),
       }),
       icon: WidthIcon,
-      onClick: pubsub => console.log('*** click settings *** '), //eslint-disable-line no-console, no-unused-vars,
       tooltipTextKey: 'HtmlPlugin_Width',
     },
     {
@@ -46,7 +45,6 @@ export default({ t }) => {
         onChange: ({ store }) => height => store.update('componentData', { config: { height } }),
       }),
       icon: HeightIcon,
-      onClick: pubsub => console.log('*** click settings *** '), //eslint-disable-line no-console, no-unused-vars,
       tooltipTextKey: 'HtmlPlugin_Height',
     },
     { type: BUTTONS.SEPARATOR },
