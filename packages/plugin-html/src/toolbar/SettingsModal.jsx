@@ -12,7 +12,6 @@ export default class SettingsModal extends Component {
   constructor(props) {
     super(props);
     this.state = this.stateFromProps(props);
-    console.log('SettingsModal');
   }
 
   componentWillReceiveProps(nextProps) {
