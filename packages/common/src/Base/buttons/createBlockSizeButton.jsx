@@ -7,6 +7,7 @@ import ToolbarButton from '../../Components/ToolbarButton';
 export default ({ size, Icon, tooltipTextKey }) =>
   class BlockSizeButton extends Component {
     static propTypes = {
+      disabled: PropTypes.bool,
       setSize: PropTypes.func.isRequired,
       size: PropTypes.string,
       theme: PropTypes.object.isRequired,
@@ -18,15 +19,25 @@ export default ({ size, Icon, tooltipTextKey }) =>
 
     isActive = () => this.props.size === size;
 
-    handleClick = () => this.props.setSize(size);
+    handleClick = event => {
+      event.preventDefault();
+      if (this.props.disabled) {
+        return;
+      }
+      this.props.setSize(size);
+    };
 
     preventBubblingUp = event => {
       event.preventDefault();
     };
 
     render() {
-      const { theme, isMobile, t, tabIndex } = this.props;
-      const className = this.isActive() ? classNames(theme.button, theme.active) : theme.button;
+      const { disabled, theme, isMobile, t, tabIndex } = this.props;
+      const className = classNames({
+        [theme.button]: true,
+        [theme.active]: this.isActive(),
+        [theme.disabled]: disabled,
+      });
       const tooltipText = t(tooltipTextKey);
       const showTooltip = !isMobile && !isEmpty(tooltipText);
       const textForHooks = tooltipText.replace(/\s+/, '');

@@ -39,7 +39,6 @@ class DividerComponent extends PureComponent {
     return (
       <div
         className={className}
-        onClick={this.props.onClick}
         data-hook={`divider-${type}`}
       >
         <DividerLine
@@ -61,7 +60,6 @@ DividerComponent.propTypes = {
   blockProps: PropTypes.object.isRequired,
   className: PropTypes.string.isRequired,
   theme: PropTypes.object.isRequired,
-  onClick: PropTypes.func,
   isMobile: PropTypes.bool
 };
 

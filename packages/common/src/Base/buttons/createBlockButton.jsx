@@ -7,6 +7,7 @@ export default ({ Icon, tooltipTextKey }) =>
   class BlockButton extends Component {
     static propTypes = {
       onClick: PropTypes.func,
+      disabled: PropTypes.bool,
       theme: PropTypes.object.isRequired,
       isMobile: PropTypes.bool,
       tooltipText: PropTypes.string,
@@ -14,8 +15,12 @@ export default ({ Icon, tooltipTextKey }) =>
       tabIndex: PropTypes.number,
     };
 
-    handleClick = () => {
-      const { onClick } = this.props;
+    handleClick = event => {
+      event.preventDefault();
+      const { onClick, disabled } = this.props;
+      if (disabled) {
+        return;
+      }
       onClick && onClick();
     };
 

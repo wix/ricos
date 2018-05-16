@@ -14,7 +14,6 @@ class BlockLinkButton extends Component {
   showLinkPanel = () => {
     const {
       pubsub,
-      onExtendContent,
       onOverrideContent,
       theme,
       isMobile,
@@ -48,7 +47,6 @@ class BlockLinkButton extends Component {
     } else {
       const linkPanelProps = {
         pubsub,
-        onExtendContent,
         onOverrideContent,
         anchorTarget,
         relValue,
@@ -76,7 +74,6 @@ class BlockLinkButton extends Component {
 
 BlockLinkButton.propTypes = {
   pubsub: PropTypes.object.isRequired,
-  onExtendContent: PropTypes.func.isRequired,
   onOverrideContent: PropTypes.func.isRequired,
   theme: PropTypes.object.isRequired,
   isMobile: PropTypes.bool,

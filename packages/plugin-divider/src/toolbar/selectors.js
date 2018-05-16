@@ -1,4 +1,13 @@
 import {
+  SizeLargeIcon,
+  SizeMediumIcon,
+  SizeSmallIcon,
+  AlignmentLeftIcon,
+  AlignmentCenterIcon,
+  AlignmentRightIcon,
+} from 'wix-rich-content-common';
+
+import {
   DEFAULTS,
   SIZE_LARGE,
   SIZE_MEDIUM,
@@ -7,14 +16,6 @@ import {
   ALIGN_CENTER,
   ALIGN_RIGHT
 } from '../constants';
-import {
-  SizeLargeIcon,
-  SizeMediumIcon,
-  SizeSmallIcon,
-  AlignLeftIcon,
-  AlignCenterIcon,
-  AlignRightIcon
-} from '../icons';
 
 export const getType = (componentData = {}) =>
   componentData.type || DEFAULTS.type;
@@ -51,8 +52,8 @@ export const getNextSizeIcon = componentData => {
 export const getNextAlignmentIcon = componentData => {
   const { alignment } = getConfig(componentData);
   return {
-    [ALIGN_LEFT]: AlignCenterIcon,
-    [ALIGN_CENTER]: AlignRightIcon,
-    [ALIGN_RIGHT]: AlignLeftIcon,
+    [ALIGN_LEFT]: AlignmentLeftIcon,
+    [ALIGN_CENTER]: AlignmentCenterIcon,
+    [ALIGN_RIGHT]: AlignmentRightIcon,
   }[alignment];
 };

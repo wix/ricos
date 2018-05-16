@@ -1,32 +1,18 @@
-import { BUTTONS } from 'wix-rich-content-common';
-// import {
-//   ALIGN_LEFT,
-//   ALIGN_CENTER,
-//   ALIGN_RIGHT,
-//   SIZE_SMALL,
-//   SIZE_MEDIUM,
-//   SIZE_LARGE
-// } from '../constants';
-// import {
-//   AlignLeftIcon,
-//   AlignCenterIcon,
-//   AlignRightIcon,
-//   SizeSmallIcon,
-//   SizeMediumIcon,
-//   SizeLargeIcon
-// } from '../icons';
+import {
+  BUTTONS,
+  AlignmentCenterIcon,
+  SizeLargeIcon
+} from 'wix-rich-content-common';
 import {
   changeType,
-//   changeAlignment,
-//   changeSize,
-//   changeAlignmentMobile,
-//   changeSizeMobile
+  changeAlignmentMobile,
+  changeSizeMobile
 } from './actions';
-// import {
-//   isAligmentDisabled,
-//   getNextSizeIcon,
-//   getNextAlignmentIcon
-// } from './selectors';
+import {
+  isAligmentDisabled,
+  getNextSizeIcon,
+  getNextAlignmentIcon
+} from './selectors';
 import {
   getDropdownOptions,
   createDropdownValueGetter
@@ -46,95 +32,53 @@ export default ({ styles }) => {
       controlClassName: styles['divider-dropdown__control'],
       tooltipTextKey: 'DividerPlugin_SelectType_Tooltip',
       mobile: true,
-      dataHook: dataHook('line-type'),
+      dataHook: dataHook('line-type')
     },
     { keyName: 'separator1', type: BUTTONS.SEPARATOR, mobile: true },
-    // {
-    //   keyName: 'sizeSmall',
-    //   type: 'custom',
-    //   icon: SizeSmallIcon,
-    //   onClick: changeSize(SIZE_SMALL),
-    //   tooltipTextKey: 'DividerPlugin_SizeSmallButton_Tooltip',
-    //   dataHook: dataHook('size-small'),
-    // },
-    { keyName: 'sizeSmall', type: BUTTONS.SIZE_SMALL, mobile: false },
-    // { keyName: 'sizeMedium', type: BUTTONS.SIZE_MEDIUM, mobile: false },
-    // { keyName: 'sizeLarge', type: BUTTONS.SIZE_LARGE, mobile: false },
-    // {
-    //   keyName: 'sizeMedium',
-    //   type: 'custom',
-    //   icon: SizeMediumIcon,
-    //   onClick: changeSize(SIZE_MEDIUM),
-    //   tooltipTextKey: 'DividerPlugin_SizeMediumButton_Tooltip',
-    //   dataHook: dataHook('size-medium'),
-    // },
-    // {
-    //   keyName: 'sizeLarge',
-    //   type: 'custom',
-    //   icon: SizeLargeIcon,
-    //   onClick: changeSize(SIZE_LARGE),
-    //   tooltipTextKey: 'DividerPlugin_SizeLargeButton_Tooltip',
-    //   dataHook: dataHook('size-large'),
-    // },
-    // {
-    //   keyName: 'sizeMobile',
-    //   type: 'custom',
-    //   icon: SizeLargeIcon,
-    //   onClick: changeSizeMobile,
-    //   mobile: true,
-    //   desktop: false,
-    //   mapComponentDataToButtonProps: componentData => ({
-    //     icon: getNextSizeIcon(componentData),
-    //   }),
-    //   dataHook: dataHook('size-mobile'),
-    // },
+    { keyName: 'sizeSmall', type: BUTTONS.SIZE_SMALL },
+    { keyName: 'sizeMedium', type: BUTTONS.SIZE_MEDIUM },
+    { keyName: 'sizeLarge', type: BUTTONS.SIZE_LARGE },
+    {
+      keyName: 'sizeMobile',
+      type: 'custom',
+      icon: SizeLargeIcon,
+      onClick: changeSizeMobile,
+      tooltipTextKey: 'DividerPlugin_SizeMobileButton_Tooltip',
+      mobile: true,
+      desktop: false,
+      mapComponentDataToButtonProps: componentData => ({
+        icon: getNextSizeIcon(componentData),
+      }),
+      dataHook: dataHook('size-mobile'),
+    },
     { keyName: 'separator2', type: BUTTONS.SEPARATOR, mobile: true },
-    { keyName: 'alignLeft', type: BUTTONS.ALIGN_LEFT, mobile: false },
-    { keyName: 'alignCenter', type: BUTTONS.ALIGN_CENTER, mobile: false },
-    { keyName: 'alignRight', type: BUTTONS.ALIGN_RIGHT, mobile: false },
-    // {
-    //   keyName: 'alignLeft',
-    //   type: 'custom',
-    //   icon: AlignLeftIcon,
-    //   tooltipTextKey: 'DividerPlugin_AlignLeftButton_Tooltip',
-    //   onClick: changeAlignment(ALIGN_LEFT),
-    //   mapComponentDataToButtonProps: componentData => ({
-    //     disabled: isAligmentDisabled(componentData),
-    //   }),
-    //   dataHook: dataHook('align-left'),
-    // },
-    // {
-    //   keyName: 'alignCenter',
-    //   type: 'custom',
-    //   icon: AlignCenterIcon,
-    //   onClick: changeAlignment(ALIGN_CENTER),
-    //   tooltipTextKey: 'DividerPlugin_AlignCenterButton_Tooltip',
-    //   dataHook: dataHook('align-center'),
-    // },
-    // {
-    //   keyName: 'alignRight',
-    //   type: 'custom',
-    //   icon: AlignRightIcon,
-    //   onClick: changeAlignment(ALIGN_RIGHT),
-    //   tooltipTextKey: 'DividerPlugin_AlignRightButton_Tooltip',
-    //   mapComponentDataToButtonProps: componentData => ({
-    //     disabled: isAligmentDisabled(componentData),
-    //   }),
-    //   dataHook: dataHook('align-right'),
-    // },
-    // {
-    //   keyName: 'alignMobile',
-    //   type: 'custom',
-    //   icon: AlignCenterIcon,
-    //   onClick: changeAlignmentMobile,
-    //   mobile: true,
-    //   desktop: false,
-    //   mapComponentDataToButtonProps: componentData => ({
-    //     icon: getNextAlignmentIcon(componentData),
-    //     disabled: isAligmentDisabled(componentData),
-    //   }),
-    //   dataHook: dataHook('align-mobile'),
-    // },
+    {
+      keyName: 'alignLeft',
+      type: BUTTONS.ALIGNMENT_LEFT,
+      mapComponentDataToButtonProps: componentData => ({
+        disabled: isAligmentDisabled(componentData)
+      })
+    },
+    { keyName: 'alignCenter', type: BUTTONS.ALIGNMENT_CENTER },
+    { keyName: 'alignRight', type: BUTTONS.ALIGNMENT_RIGHT,
+      mapComponentDataToButtonProps: componentData => ({
+        disabled: isAligmentDisabled(componentData)
+      })
+    },
+    {
+      keyName: 'alignMobile',
+      type: 'custom',
+      icon: AlignmentCenterIcon,
+      onClick: changeAlignmentMobile,
+      mobile: true,
+      desktop: false,
+      tooltipTextKey: 'DividerPlugin_AlignMobileButton_Tooltip',
+      mapComponentDataToButtonProps: componentData => ({
+        icon: getNextAlignmentIcon(componentData),
+        disabled: isAligmentDisabled(componentData),
+      }),
+      dataHook: dataHook('align-mobile'),
+    },
     { keyName: 'separator3', type: BUTTONS.SEPARATOR, mobile: true },
     { keyName: 'delete', type: BUTTONS.DELETE, mobile: true }
   ];

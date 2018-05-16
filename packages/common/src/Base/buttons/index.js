@@ -4,19 +4,21 @@ import createBlockAlignmentButton from './createBlockAlignmentButton';
 import createBlockSizeButton from './createBlockSizeButton';
 import BUTTONS from '../buttons/keys';
 import BlockLinkButton from '../buttons/BlockLinkButton';
-import SizeSmallIcon from '../icons/size-small.svg';
-import SizeMediumIcon from '../icons/size-medium.svg';
-import SizeLargeIcon from '../icons/size-large.svg';
-import SizeOriginalIcon from '../icons/size-original.svg';
-import SizeSmallCenterIcon from '../icons/size-small-center.svg';
-import SizeSmallLeftIcon from '../icons/size-small-left.svg';
-import SizeSmallRightIcon from '../icons/size-small-right.svg';
-import SizeContentIcon from '../icons/size-best-fit.svg';
-import SizeFullWidthIcon from '../icons/size-full-width.svg';
-import AlignmentLeftIcon from '../icons/align-left.svg';
-import AlignmentCenterIcon from '../icons/align-center.svg';
-import AlignmentRightIcon from '../icons/align-right.svg';
-import DeleteIcon from '../icons/trash.svg';
+import {
+  SizeSmallIcon,
+  SizeMediumIcon,
+  SizeLargeIcon,
+  SizeOriginalIcon,
+  SizeSmallCenterIcon,
+  SizeSmallLeftIcon,
+  SizeSmallRightIcon,
+  SizeContentIcon,
+  SizeFullWidthIcon,
+  AlignmentLeftIcon,
+  AlignmentCenterIcon,
+  AlignmentRightIcon,
+  DeleteIcon
+} from '../icons';
 
 export { BUTTONS };
 
@@ -43,19 +45,19 @@ export const SizeLargeButton = createBlockSizeButton({
 export const AlignmentLeftButton = createBlockAlignmentButton({
   alignment: 'left',
   Icon: AlignmentLeftIcon,
-  tooltipTextKey: 'AlignmentLeftButton_Tooltip',
+  tooltipTextKey: 'AlignTextLeftButton_Tooltip',
 });
 
 export const AlignmentCenterButton = createBlockAlignmentButton({
   alignment: 'center',
   Icon: AlignmentCenterIcon,
-  tooltipTextKey: 'AlignmentCenterButton_Tooltip',
+  tooltipTextKey: 'AlignTextCenterButton_Tooltip',
 });
 
 export const AlignmentRightButton = createBlockAlignmentButton({
   alignment: 'right',
   Icon: AlignmentRightIcon,
-  tooltipTextKey: 'AlignmentRightButton_Tooltip',
+  tooltipTextKey: 'AlignTextRightButton_Tooltip',
 });
 
 export const SizeOriginalButton = createBlockAlignmentAndSizeButton({

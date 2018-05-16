@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { mergeStyles, Slider } from 'wix-rich-content-common';
-import styles from './slider-with-input.scss';
+import { mergeStyles } from '../Utils/mergeStyles';
+import Slider from './Slider';
+import styles from '../Styles/slider-with-input.scss';
 
 class SliderWithInput extends Component {
 

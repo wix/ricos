@@ -8,9 +8,9 @@
 	"scripts": {
 		"bootstrap": "lerna bootstrap --hoist",
 		"postinstall": "npm run bootstrap",
-		"build:dev": "lerna run --parallel build:dev",
-		"build": "lerna run --scope=wix-rich-content-* build",
-		"watch": "lerna run --parallel watch",
+		"build:dev": "lerna run --stream build:dev",
+		"build": "lerna run --stream --scope=wix-rich-content-* build",
+		"watch": "lerna run --stream watch",
 		"customPublish": "node scripts/customPublish",
 		"createVersion": "node scripts/createVersion"
 	},

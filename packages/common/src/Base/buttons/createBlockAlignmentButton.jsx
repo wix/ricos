@@ -7,6 +7,7 @@ import ToolbarButton from '../../Components/ToolbarButton';
 export default ({ alignment, Icon, tooltipTextKey }) =>
   class BlockAlignmentButton extends Component {
     static propTypes = {
+      disabled: PropTypes.bool,
       setAlignment: PropTypes.func.isRequired,
       alignment: PropTypes.string,
       theme: PropTypes.object.isRequired,
@@ -18,15 +19,25 @@ export default ({ alignment, Icon, tooltipTextKey }) =>
 
     isActive = () => this.props.alignment === alignment;
 
-    handleClick = () => this.props.setAlignment(alignment);
+    handleClick = event => {
+      event.preventDefault();
+      if (this.props.disabled) {
+        return;
+      }
+      this.props.setAlignment(alignment);
+    };
 
     preventBubblingUp = event => {
       event.preventDefault();
     };
 
     render() {
-      const { theme, isMobile, t, tabIndex } = this.props;
-      const className = this.isActive() ? classNames(theme.button, theme.active) : theme.button;
+      const { disabled, theme, isMobile, t, tabIndex } = this.props;
+      const className = classNames({
+        [theme.button]: true,
+        [theme.active]: this.isActive(),
+        [theme.disabled]: disabled,
+      });
       const tooltipText = t(tooltipTextKey);
       const showTooltip = !isMobile && !isEmpty(tooltipText);
       const textForHooks = tooltipText.replace(/\s+/, '');

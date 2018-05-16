@@ -12,11 +12,6 @@ export const changeType = (type, _componentData, store) => {
   store.update('componentData', { type: type.value });
 };
 
-export const changeAlignment = alignment => ({ store }) => {
-  const config = getConfigFromStore(store);
-  store.update('componentData', { config: { ...config, alignment } });
-};
-
 export const changeSize = size => ({ store }) => {
   const config = getConfigFromStore(store);
   store.update('componentData', { config: { ...config, size } });

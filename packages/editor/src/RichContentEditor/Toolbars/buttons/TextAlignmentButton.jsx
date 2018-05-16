@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { getTextAlignment } from 'wix-rich-content-common';
+import {
+  getTextAlignment,
+  AlignmentLeftIcon,
+  AlignmentCenterIcon,
+  AlignmentRightIcon,
+  AlignmentJustifyIcon,
+} from 'wix-rich-content-common';
 import TextButton from './TextButton';
 import TextAlignmentPanel from './TextAlignmentPanel';
-import AlignTextLeftIcon from '../icons/align-text-left.svg';
-import AlignTextCenterIcon from '../icons/align-text-center.svg';
-import AlignTextRightIcon from '../icons/align-text-right.svg';
-import AlignTextJustifyIcon from '../icons/align-text-justify.svg';
 
 class TextAlignmentButton extends Component {
 
@@ -22,14 +24,14 @@ class TextAlignmentButton extends Component {
     const textAlignment = getTextAlignment(getEditorState());
     switch (textAlignment) {
       case 'center':
-        return <AlignTextCenterIcon />;
+        return <AlignmentCenterIcon />;
       case 'right':
-        return <AlignTextRightIcon />;
+        return <AlignmentRightIcon />;
       case 'justify':
-        return <AlignTextJustifyIcon />;
+        return <AlignmentJustifyIcon />;
       case 'left':
       default:
-        return <AlignTextLeftIcon />;
+        return <AlignmentLeftIcon />;
     }
   };
 

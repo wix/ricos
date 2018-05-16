@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Styles from '../Styles/global.scss';
 
-export default class BasePanel extends Component {
+export default class Panel extends Component {
   constructor(props) {
     super(props);
     this.state = this.stateFromProps(props.componentState);
@@ -15,8 +15,6 @@ export default class BasePanel extends Component {
       return {
         visible: true,
         style: {
-          top: boundingRect.height,
-          left: 0,
           transition: 'transform 0.15s cubic-bezier(.3,1.2,.2,1)',
         },
       };
@@ -35,15 +33,16 @@ export default class BasePanel extends Component {
   };
 
   render = () => {
-    const Element = this.props.element;
+    const Content = this.props.content;
     const modalClasses = classNames(Styles.panelContainer, this.props.theme.panelContainer);
     return (
       <div className={modalClasses} style={this.state.style}>
-        <Element
+        <Content
           store={this.props.store}
           helpers={this.props.helpers}
           componentData={this.props.componentData}
           componentState={this.props.componentState}
+          theme={this.props.theme}
           t={this.props.t}
           tabIndex={this.state.visible ? 0 : -1}
         />
@@ -52,8 +51,8 @@ export default class BasePanel extends Component {
   };
 }
 
-BasePanel.propTypes = {
-  element: PropTypes.func.isRequired,
+Panel.propTypes = {
+  content: PropTypes.func.isRequired,
   keyName: PropTypes.string.isRequired,
   theme: PropTypes.object.isRequired,
   store: PropTypes.object.isRequired,

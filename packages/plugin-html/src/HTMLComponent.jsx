@@ -5,7 +5,7 @@ import decorateComponentWithProps from 'decorate-component-with-props';
 import { translate } from 'react-i18next';
 import { mergeStyles } from 'wix-rich-content-common';
 
-import Overlay from './overlay';
+import Overlay from './Overlay';
 import styles from './default-html-styles.scss';
 
 const DEFAULTS = {
@@ -18,7 +18,7 @@ const DEFAULTS = {
   },
 };
 
-class HtmlComponent extends React.Component {
+class HTMLComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = this.stateFromProps(props);
@@ -134,7 +134,7 @@ class HtmlComponent extends React.Component {
   }
 }
 
-HtmlComponent.propTypes = {
+HTMLComponent.propTypes = {
   componentData: PropTypes.object.isRequired,
   componentState: PropTypes.object.isRequired,
   blockProps: PropTypes.object.isRequired,
@@ -145,5 +145,5 @@ HtmlComponent.propTypes = {
   t: PropTypes.func,
 };
 
-const translatedHtmlComponent = translate(null)(HtmlComponent);
-export { translatedHtmlComponent as Component, DEFAULTS };
+const translatedHTMLComponent = translate(null)(HTMLComponent);
+export { translatedHTMLComponent as Component, DEFAULTS };
