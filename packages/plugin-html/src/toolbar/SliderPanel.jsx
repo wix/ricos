@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { SliderWithInput } from 'wix-rich-content-common';
-import styles from '../default-html-styles.scss';
+import styles from './SliderPanel.scss';
 
 const SliderPanel = props => {
   const { min, max, theme, getValue, onChange } = props;
