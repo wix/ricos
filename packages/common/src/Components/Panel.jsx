@@ -33,11 +33,11 @@ export default class Panel extends Component {
   };
 
   render = () => {
-    const Element = this.props.element;
+    const Content = this.props.content;
     const modalClasses = classNames(Styles.panelContainer, this.props.theme.panelContainer);
     return (
       <div className={modalClasses} style={this.state.style}>
-        <Element
+        <Content
           store={this.props.store}
           helpers={this.props.helpers}
           componentData={this.props.componentData}
@@ -51,7 +51,7 @@ export default class Panel extends Component {
 }
 
 Panel.propTypes = {
-  element: PropTypes.func.isRequired,
+  content: PropTypes.func.isRequired,
   keyName: PropTypes.string.isRequired,
   theme: PropTypes.object.isRequired,
   store: PropTypes.object.isRequired,

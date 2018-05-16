@@ -16,7 +16,7 @@ export default({ t }) => {
     {
       keyName: 'edit',
       type: BUTTONS.PANEL,
-      panelElement: translate(null)(EditModal),
+      panelContent: translate(null)(EditModal),
       icon: EditIcon,
       onClick: pubsub => console.log('*** click edit *** '), //eslint-disable-line no-console, no-unused-vars,
       mobile: true,
@@ -26,7 +26,7 @@ export default({ t }) => {
     {
       keyName: 'width',
       type: BUTTONS.PANEL,
-      panelElement: decorateComponentWithProps(SliderPanel, {
+      panelContent: decorateComponentWithProps(SliderPanel, {
         min: 35,
         max: 940,
         getValue: ({ componentData }) => componentData.config.width,
@@ -38,7 +38,7 @@ export default({ t }) => {
     {
       keyName: 'height',
       type: BUTTONS.PANEL,
-      panelElement: decorateComponentWithProps(SliderPanel, {
+      panelContent: decorateComponentWithProps(SliderPanel, {
         min: 35,
         max: 1200,
         getValue: ({ componentData }) => componentData.config.height,
@@ -51,7 +51,7 @@ export default({ t }) => {
     {
       keyName: 'settings',
       type: BUTTONS.PANEL,
-      panelElement: translate(null)(SettingsModal),
+      panelContent: translate(null)(SettingsModal),
       icon: PluginSettingsIcon,
       onClick: pubsub => console.log('*** click settings *** '), //eslint-disable-line no-console, no-unused-vars,
       mobile: true,

@@ -66,7 +66,7 @@ class BaseToolbarButton extends React.Component {
     pubsub.set('componentState', componentState);
 
     if (this.props.type === BUTTONS.PANEL) {
-      this.props.displayPanel({ PanelElement: this.props.panelElement, keyName });
+      this.props.displayPanel({ PanelContent: this.props.panelContent, keyName });
     }
 
     if (this.props.type === BUTTONS.EXTERNAL_MODAL && isActive) {
@@ -205,7 +205,7 @@ class BaseToolbarButton extends React.Component {
 BaseToolbarButton.propTypes = {
   type: PropTypes.string,
   keyName: PropTypes.string.isRequired,
-  panelElement: PropTypes.func,
+  panelContent: PropTypes.func,
   theme: PropTypes.object.isRequired,
   pubsub: PropTypes.object.isRequired,
   componentData: PropTypes.object.isRequired,

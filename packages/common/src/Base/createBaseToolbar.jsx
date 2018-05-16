@@ -290,7 +290,7 @@ export default function createToolbar({ buttons, theme, pubsub, helpers, isMobil
       }
     };
 
-    displayPanel = ({ PanelElement, keyName }) => this.setState({ panel: { PanelElement, keyName } });
+    displayPanel = ({ PanelContent, keyName }) => this.setState({ panel: { PanelContent, keyName } });
 
     renderPanel() {
       const { panel, componentData, componentState } = this.state;
@@ -305,7 +305,7 @@ export default function createToolbar({ buttons, theme, pubsub, helpers, isMobil
             t={t}
             componentData={componentData}
             componentState={componentState}
-            element={panel.PanelElement}
+            content={panel.PanelContent}
             keyName={panel.keyName}
           />
         </div>
