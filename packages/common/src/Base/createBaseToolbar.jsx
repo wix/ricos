@@ -125,6 +125,8 @@ export default function createToolbar({ buttons, theme, pubsub, helpers, isMobil
       } else {
         this.hideToolbar();
       }
+
+      this.hidePanels();
     };
 
     hideToolbar = () => {
