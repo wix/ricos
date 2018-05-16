@@ -1,6 +1,8 @@
 import { translate } from 'react-i18next';
 import { BUTTONS, PluginSettingsIcon } from 'wix-rich-content-common';
 import EditIcon from '../icons/icon-edit.svg';
+import WidthIcon from '../icons/width.svg';
+import HeightIcon from '../icons/height.svg';
 import HTMLSettingsModal from './HTMLSettings';
 import SettingsModal from './SettingsModal';
 import EditModal from './EditModal';
@@ -17,6 +19,23 @@ export default({ t }) => {
       onClick: pubsub => console.log('*** click edit *** '), //eslint-disable-line no-console, no-unused-vars,
       mobile: true,
       tooltipTextKey: 'EditButton_Tooltip',
+    },
+    { type: BUTTONS.SEPARATOR },
+    {
+      keyName: 'width',
+      type: BUTTONS.PANEL,
+      panelElement: translate(null)(SettingsModal),
+      icon: WidthIcon,
+      onClick: pubsub => console.log('*** click settings *** '), //eslint-disable-line no-console, no-unused-vars,
+      tooltipTextKey: 'HtmlPlugin_Width',
+    },
+    {
+      keyName: 'height',
+      type: BUTTONS.PANEL,
+      panelElement: translate(null)(SettingsModal),
+      icon: HeightIcon,
+      onClick: pubsub => console.log('*** click settings *** '), //eslint-disable-line no-console, no-unused-vars,
+      tooltipTextKey: 'HtmlPlugin_Height',
     },
     { type: BUTTONS.SEPARATOR },
     {

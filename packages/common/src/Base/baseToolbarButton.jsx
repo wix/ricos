@@ -8,7 +8,6 @@ import Dropdown from '../Components/Dropdown';
 import FileInput from '../Components/FileInput';
 import ToolbarButton from '../Components/ToolbarButton';
 import { BUTTONS } from './buttons';
-import Panel from './basePanel';
 
 class BaseToolbarButton extends React.Component {
 
@@ -65,6 +64,10 @@ class BaseToolbarButton extends React.Component {
     const isActive = !isToggleButton ? activeButton.keyName === keyName : !(activeButton.keyName === keyName && activeButton.isActive);
     componentState.activeButton = { ...activeButton, keyName, isActive, boundingRect: this.getBoundingRectForModalButton(isActive) };
     pubsub.set('componentState', componentState);
+
+    if (this.props.type === BUTTONS.PANEL) {
+      this.props.displayPanel({ PanelElement: this.props.panelElement, keyName });
+    }
 
     if (this.props.type === BUTTONS.EXTERNAL_MODAL && isActive) {
       if (helpers && helpers.openModal) {
@@ -132,41 +135,6 @@ class BaseToolbarButton extends React.Component {
     return <ToolbarButton theme={theme} showTooltip={showTooltip} tooltipText={tooltipText} button={toggleButton} />;
   };
 
-  renderPanelButton = (buttonWrapperClassNames, buttonClassNames) => {
-    const { theme, isMobile, t, tooltipTextKey, tabIndex } = this.props;
-    const tooltipText = t(tooltipTextKey);
-    const showTooltip = !isMobile && !isEmpty(tooltipText);
-    const textForHooks = tooltipText.replace(/\s+/, '');
-    const dataHookText = `baseToolbarButtonPanelButton_${textForHooks}`;
-
-    /* eslint-disable jsx-a11y/no-static-element-interactions */
-    const panelButton = (
-      <div>
-        <div className={buttonWrapperClassNames} data-hook={dataHookText} onMouseDown={this.preventBubblingUp}>
-          <button
-            className={buttonClassNames} onMouseDown={this.handleClick} children={this.props.children || [this.getIcon()]}
-            aria-label={tooltipText} tabIndex={tabIndex}
-          >
-            {this.getIcon()}
-          </button>
-        </div>
-        <Panel
-          element={this.props.panelElement}
-          theme={this.props.theme}
-          keyName={this.props.keyName}
-          store={this.props.pubsub.store}
-          componentData={this.props.componentData}
-          componentState={this.props.componentState}
-          helpers={this.props.helpers}
-          t={t}
-        />
-      </div>
-    );
-    /* eslint-enable jsx-a11y/no-static-element-interactions */
-
-    return <ToolbarButton theme={theme} showTooltip={showTooltip} tooltipText={tooltipText} button={panelButton} />;
-  };
-
   renderFilesButton = (buttonClassNames, styles) => {
     const { theme, isMobile, t, tooltipTextKey, dataHook, tabIndex } = this.props;
     const tooltipText = t(tooltipTextKey);
@@ -226,9 +194,6 @@ class BaseToolbarButton extends React.Component {
       case BUTTONS.DROPDOWN:
         toolbarButton = this.renderDropdownButton(buttonClassNames, themedStyles);
         break;
-      case BUTTONS.PANEL:
-        toolbarButton = this.renderPanelButton(buttonWrapperClassNames, buttonClassNames);
-        break;
       default:
         toolbarButton = this.renderToggleButton(buttonWrapperClassNames, buttonClassNames);
         break;
@@ -262,6 +227,7 @@ BaseToolbarButton.propTypes = {
   relValue: PropTypes.string,
   dataHook: PropTypes.string,
   tabIndex: PropTypes.number,
+  displayPanel: PropTypes.func.isRequired,
 };
 
 export default BaseToolbarButton;

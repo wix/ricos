@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Styles from '../Styles/global.scss';
 
-export default class BasePanel extends Component {
+export default class Panel extends Component {
   constructor(props) {
     super(props);
     this.state = this.stateFromProps(props.componentState);
@@ -15,8 +15,6 @@ export default class BasePanel extends Component {
       return {
         visible: true,
         style: {
-          top: boundingRect.height,
-          left: 0,
           transition: 'transform 0.15s cubic-bezier(.3,1.2,.2,1)',
         },
       };
@@ -52,7 +50,7 @@ export default class BasePanel extends Component {
   };
 }
 
-BasePanel.propTypes = {
+Panel.propTypes = {
   element: PropTypes.func.isRequired,
   keyName: PropTypes.string.isRequired,
   theme: PropTypes.object.isRequired,

@@ -4,103 +4,109 @@
 $borderRadius: 6px;
 
 .pluginToolbar {
-    min-height: 50px;
-    left: 50%;
-    transform: translate(-50%) scale(0);
-    position: absolute;
-    border: 1px solid #ddd;
-    background: #fff;
-    border-radius: $borderRadius;
-    z-index: 4;
-    box-sizing: border-box;
-    max-width: 100%;
-    padding: 0 19px;
-    direction: ltr;
+  min-height: 50px;
+  left: 50%;
+  transform: translate(-50%) scale(0);
+  position: absolute;
+  border: 1px solid #ddd;
+  background: #fff;
+  border-radius: $borderRadius;
+  z-index: 4;
+  box-sizing: border-box;
+  max-width: 100%;
+  padding: 0 19px;
+  direction: ltr;
 }
 
 .pluginToolbar_buttons {
-    display: flex;
-    height: 48px;
+  display: flex;
+  height: 48px;
 
-    &::-webkit-scrollbar {
-        display: none;
-        width: 0 !important;
-    }
+  &::-webkit-scrollbar {
+    display: none;
+    width: 0 !important;
+  }
 
+}
+
+.pluginToolbar_panel {
+  display: flex;
+  justify-content: center;
+  margin-top: -8px;
 }
 
 .pluginToolbar_overrideContent {
-    height: auto;
-    padding: 0;
+  height: auto;
+  padding: 0;
 }
 
 .pluginToolbar_responsiveSpacer {
-    display: none;
-    flex: 0 0 24px;
+  display: none;
+  flex: 0 0 24px;
 }
 
 .pluginToolbar_responsiveArrow {
-    display: none;
-    position: absolute;
-    top: 0;
-    height: 100%;
-    width: 40px;
-    line-height: 48px;
-    text-align: center;
-    background: white;
-    font-size: 12px;
-    cursor: pointer;
-    z-index: 9999;
-    border: none;
+  display: none;
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 40px;
+  line-height: 48px;
+  text-align: center;
+  background: white;
+  font-size: 12px;
+  cursor: pointer;
+  z-index: 9999;
+  border: none;
 
-    >i {
-        display: inline-block;
-        width: 6px;
-        height: 6px;
-        border: 1px solid $toolbar-font-color;
-        border-width: 0 0 1px 1px;
-    }
+  > i {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border: 1px solid $toolbar-font-color;
+    border-width: 0 0 1px 1px;
+  }
 }
 
 .pluginToolbar_responsiveArrowLeft {
-    right: 0;
-    border-left: 1px solid $toolbar-border-color;
-    border-radius: 0 $borderRadius $borderRadius 0;
-    >i {
-        margin-right: 3px;
-        transform: rotate(45deg);
-    }
+  right: 0;
+  border-left: 1px solid $toolbar-border-color;
+  border-radius: 0 $borderRadius $borderRadius 0;
+  > i {
+    margin-right: 3px;
+    transform: rotate(45deg);
+  }
 }
 
 .pluginToolbar_responsiveArrowRight {
-    right: 0;
-    border-left: 1px solid $toolbar-border-color;
-    border-radius: 0 $borderRadius $borderRadius 0;
-    >i {
-        margin-right: 3px;
-        transform: rotate(225deg);
-    }
+  right: 0;
+  border-left: 1px solid $toolbar-border-color;
+  border-radius: 0 $borderRadius $borderRadius 0;
+  > i {
+    margin-right: 3px;
+    transform: rotate(225deg);
+  }
 }
 
 .pluginToolbar_extend {
-    border-top: 1px solid rgba(117, 117, 117, 0.2);
+  border-top: 1px solid rgba(117, 117, 117, 0.2);
 }
 
 @include phone {
-    .pluginToolbar_buttons {
-        display: flex;
-        width: auto;
-        max-width: 100%;
-        overflow-x: scroll;
-        scroll-behavior: smooth;
-        -webkit-overflow-scrolling: auto;
+  .pluginToolbar_buttons {
+    display: flex;
+    width: auto;
+    max-width: 100%;
+    overflow-x: scroll;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: auto;
 
-        .pluginToolbar_responsiveSpacer {
-            display: block;
-        }
-
-        .pluginToolbar_responsiveArrow {
-            display: block;
-        }
+    .pluginToolbar_responsiveSpacer {
+      display: block;
     }
+
+    .pluginToolbar_responsiveArrow {
+      display: block;
+    }
+  }
 }

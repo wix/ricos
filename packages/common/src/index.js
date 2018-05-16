@@ -17,7 +17,6 @@ export { default as createBaseComponent } from './Base/createBaseComponent';
 export { default as createBaseInsertPluginButton } from './Base/createBaseInsertPluginButton';
 export { default as createBaseToolbar } from './Base/createBaseToolbar';
 export { default as baseToolbarButton } from './Base/baseToolbarButton';
-export { default as basePanel } from './Base/basePanel';
 
 // Components
 export { default as Button } from './Components/Button';
@@ -31,6 +30,7 @@ export { default as InputWithLabel } from './Components/InputWithLabel';
 export { default as LinkButton } from './Components/LinkButton';
 export { default as LinkPanel } from './Components/LinkPanel';
 export { default as LinkPanelContainer } from './Components/LinkPanelContainer';
+export { default as Panel } from './Components/Panel';
 export { default as RadioGroup } from './Components/RadioGroup';
 export { default as RadioGroupHorizontal } from './Components/RadioGroupHorizontal';
 export { default as SelectionList } from './Components/SelectionList';
