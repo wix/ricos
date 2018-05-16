@@ -43,7 +43,6 @@ class BlockLinkPanel extends Component {
   }
 
   hideLinkPanel = () => {
-    this.props.onExtendContent(undefined);
     this.props.onOverrideContent(undefined);
   };
 
@@ -54,7 +53,6 @@ class BlockLinkPanel extends Component {
 
 BlockLinkPanel.propTypes = {
   pubsub: PropTypes.object.isRequired,
-  onExtendContent: PropTypes.func.isRequired,
   onOverrideContent: PropTypes.func.isRequired,
   theme: PropTypes.object.isRequired,
   anchorTarget: PropTypes.string,

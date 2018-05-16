@@ -15,11 +15,9 @@ export default({ t }) => {
   // Edit - open a small dialog that has an option to add src for the iframe or code
     {
       keyName: 'edit',
-      type: BUTTONS.PANEL,
+      type: BUTTONS.INLINE_PANEL,
       panelContent: translate(null)(EditModal),
       icon: EditIcon,
-      onClick: pubsub => console.log('*** click edit *** '), //eslint-disable-line no-console, no-unused-vars,
-      mobile: true,
       tooltipTextKey: 'EditButton_Tooltip',
     },
     { type: BUTTONS.SEPARATOR },

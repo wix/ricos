@@ -85,8 +85,6 @@ export default function createToolbar({ buttons, theme, pubsub, helpers, isMobil
       });
     }
 
-    onExtendContent = extendContent => this.setState({ extendContent });
-
     onComponentStateChanged = contentState => {
       this.setState({ contentState });
     };
@@ -257,7 +255,6 @@ export default function createToolbar({ buttons, theme, pubsub, helpers, isMobil
           return (<BlockLinkButton
             tabIndex={tabIndex}
             pubsub={pubsub}
-            onExtendContent={this.onExtendContent}
             onOverrideContent={this.onOverrideContent}
             theme={themedStyle}
             key={key}
@@ -284,13 +281,43 @@ export default function createToolbar({ buttons, theme, pubsub, helpers, isMobil
               t={t}
               isMobile={isMobile}
               displayPanel={this.displayPanel}
+              displayInlinePanel={this.displayInlinePanel}
               {...button}
             />
           );
       }
     };
 
-    displayPanel = ({ PanelContent, keyName }) => this.setState({ panel: { PanelContent, keyName } });
+    hidePanels = () => this.setState({ panel: null, inlinePanel: null });
+
+    displayPanel = panel => {
+      this.hidePanels();
+      this.setState({ panel });
+    };
+
+    displayInlinePanel = inlinePanel => {
+      this.hidePanels();
+      this.setState({ inlinePanel });
+    };
+
+    renderInlinePanel() {
+      const { inlinePanel, componentData, componentState } = this.state;
+      const { PanelContent, keyName } = inlinePanel || {};
+
+      return inlinePanel ? (
+        <div className={toolbarStyles.pluginToolbar_inlinePanel}>
+          <PanelContent
+            key={keyName}
+            theme={theme}
+            store={pubsub}
+            helpers={helpers}
+            t={t}
+            componentData={componentData}
+            componentState={componentState}
+          />
+        </div>
+      ) : null;
+    }
 
     renderPanel() {
       const { panel, componentData, componentState } = this.state;
@@ -331,7 +358,6 @@ export default function createToolbar({ buttons, theme, pubsub, helpers, isMobil
       };
       const separatorClassNames = classNames(toolbarStyles.pluginToolbarSeparator, separatorTheme && separatorTheme.pluginToolbarSeparator);
       const overrideProps = { onOverrideContent: this.onOverrideContent };
-      const extendProps = { onExtendContent: this.onExtendContent };
 
       return (
         <div style={this.state.position} className={containerClassNames} data-hook={name ? `${name}PluginToolbar` : null}>
@@ -367,11 +393,7 @@ export default function createToolbar({ buttons, theme, pubsub, helpers, isMobil
               </button>
             }
           </div>
-          {ExtendContent && (
-            <div className={classNames(toolbarStyles.pluginToolbar_extend, toolbarTheme.pluginToolbar_extend)}>
-              <ExtendContent {...extendProps} />
-            </div>
-          )}
+          {this.renderInlinePanel()}
           {this.renderPanel()}
         </div>
       );

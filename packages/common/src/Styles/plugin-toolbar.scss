@@ -14,25 +14,29 @@ $borderRadius: 6px;
   z-index: 4;
   box-sizing: border-box;
   max-width: 100%;
-  padding: 0 19px;
   direction: ltr;
 }
 
 .pluginToolbar_buttons {
   display: flex;
   height: 48px;
+  padding: 0 19px;
 
   &::-webkit-scrollbar {
     display: none;
     width: 0 !important;
   }
-
 }
 
 .pluginToolbar_panel {
   display: flex;
   justify-content: center;
   margin-top: -8px;
+}
+
+.pluginToolbar_inlinePanel {
+  padding: 0 23px;
+  border-top: 1px solid rgba(117, 117, 117, 0.2);
 }
 
 .pluginToolbar_overrideContent {
@@ -86,10 +90,6 @@ $borderRadius: 6px;
     margin-right: 3px;
     transform: rotate(225deg);
   }
-}
-
-.pluginToolbar_extend {
-  border-top: 1px solid rgba(117, 117, 117, 0.2);
 }
 
 @include phone {
