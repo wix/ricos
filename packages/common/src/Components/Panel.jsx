@@ -42,6 +42,7 @@ export default class Panel extends Component {
           helpers={this.props.helpers}
           componentData={this.props.componentData}
           componentState={this.props.componentState}
+          theme={this.props.theme}
           t={this.props.t}
           tabIndex={this.state.visible ? 0 : -1}
         />
