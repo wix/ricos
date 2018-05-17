@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { mergeStyles } from 'wix-rich-content-common';
+import { mergeStyles, isValidUrl, normalizeURL } from 'wix-rich-content-common';
 
 import { SRC_TYPE_HTML, SRC_TYPE_URL, DEFAULT_COMPONENT_DATA } from './constants';
 import IframeHtml from './IframeHtml';
@@ -20,14 +20,14 @@ class HtmlComponent extends React.Component {
     return (
       <div className={styles.htmlComponent} style={{ width, height }} data-hook="HtmlComponent">
         {srcType === SRC_TYPE_HTML && src && (
-          <IframeHtml tabIndex={readOnly ? -1 : 0} html={src}/>
+          <IframeHtml key={SRC_TYPE_HTML} tabIndex={readOnly ? -1 : 0} html={src}/>
         )}
 
-        {srcType === SRC_TYPE_URL && src && (
-          <IframeUrl tabIndex={readOnly ? -1 : 0} src={src}/>
+        {srcType === SRC_TYPE_URL && isValidUrl(src) && (
+          <IframeUrl key={SRC_TYPE_URL} tabIndex={readOnly ? -1 : 0} src={normalizeURL(src)}/>
         )}
 
-        {!src && (
+        {!src && !isValidUrl(src) && (
           <div className={styles.htmlComponent_placeholder}/>
         )}
       </div>

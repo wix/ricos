@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import debounce from 'lodash/debounce';
 import { RadioGroupHorizontal } from 'wix-rich-content-common';
 import { SRC_TYPE_HTML, SRC_TYPE_URL } from '../constants';
 import TextArea from './TextArea';
@@ -22,13 +23,13 @@ class HtmlEditPanel extends Component {
     this.setState({ [name]: value }, this.updateComponentData);
   };
 
-  updateComponentData = () => {
+  updateComponentData = debounce(() => {
     const { srcType } = this.state;
     this.props.store.update('componentData', {
       srcType,
-      src: this.state[srcType],
+      src: this.state[srcType] || '',
     });
-  };
+  }, 100);
 
   handleCancelClick = () => {
     this.props.store.update('componentData', this.initialData);
@@ -54,7 +55,7 @@ class HtmlEditPanel extends Component {
 
         <div className={styles.htmlEditPanel_input}>
           {srcType === SRC_TYPE_HTML && (
-            <TextArea name={SRC_TYPE_HTML} onChange={this.handleSrcChange} tabIndex={tabIndex}>{this.state.code}</TextArea>
+            <TextArea name={SRC_TYPE_HTML} onChange={this.handleSrcChange} tabIndex={tabIndex} value={this.state.html}/>
           )}
 
           {srcType === SRC_TYPE_URL && (
