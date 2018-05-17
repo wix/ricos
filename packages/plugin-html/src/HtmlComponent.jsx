@@ -8,7 +8,7 @@ import IframeUrl from './IframeUrl';
 import htmlComponentStyles from './HtmlComponent.scss';
 
 const HtmlComponent = props => {
-  const styles = mergeStyles({ styles: htmlComponentStyles, theme: this.props.theme });
+  const styles = mergeStyles({ styles: htmlComponentStyles, theme: props.theme });
   const {
     blockProps: { readOnly },
     componentData: { src, srcType, config: { width, height } },
