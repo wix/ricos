@@ -1,7 +1,7 @@
 import { translate } from 'react-i18next';
 import { BUTTONS, PluginSettingsIcon } from 'wix-rich-content-common';
 import decorateComponentWithProps from 'decorate-component-with-props';
-import EditIcon from '../icons/icon-edit.svg';
+import EditIcon from '../icons/edit.svg';
 import WidthIcon from '../icons/width.svg';
 import HeightIcon from '../icons/height.svg';
 import HtmlSettingsModal from './HtmlSettings';
