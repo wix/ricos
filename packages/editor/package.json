@@ -48,7 +48,7 @@
     "focus-trap-react": "^3.1.2",
     "i18next": "^10.5.0",
     "linkify-it": "^2.0.3",
-    "lodash": "^4.17.4",
+    "lodash": "^4.17.10",
     "photography-client-lib": "^1.0.69",
     "react-i18next": "^7.6.1",
     "redraft": "^0.9.0",

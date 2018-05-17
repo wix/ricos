@@ -1,14 +1,15 @@
-# Wix Rich Content Editor
+# Wix Rich Content
+[![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lernajs.io/)
 
 #### A super charged rich text editor with an extensible plugin system.
 
 ## Bootstrap
 1. `cd rich-content`
-2. `npm i` - installs all dependencies and links any cross-dependencies using lerna.
+2. `npm i` - installs all dependencies and links any cross-dependencies.
 3. Build the modules by running one of the following:
     1. `npm run build:dev` - build once
     2. `npm run watch` - rebuild on changes
-4. Choose an example from the and run `npm start`.
+4. Choose an example and run `npm start`.
 
 
 ## Modules

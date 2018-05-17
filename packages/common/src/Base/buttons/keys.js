@@ -2,6 +2,7 @@ export default {
   FILES: 'file',
   TOGGLE: 'toggle',
   PANEL: 'panel',
+  INLINE_PANEL: 'inline-panel',
   EXTERNAL_MODAL: 'external-modal',
   DROPDOWN: 'dropdown',
   SEPARATOR: 'separator',

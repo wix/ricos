@@ -17,6 +17,7 @@ import {
   BlockLinkButton,
   DeleteButton,
 } from './buttons';
+import Panel from '../Components/Panel';
 import toolbarStyles from '../Styles/plugin-toolbar.scss';
 import buttonStyles from '../Styles/plugin-toolbar-button.scss';
 
@@ -82,8 +83,6 @@ export default function createToolbar({ buttons, theme, pubsub, helpers, isMobil
       });
     }
 
-    onExtendContent = extendContent => this.setState({ extendContent });
-
     onComponentStateChanged = contentState => {
       this.setState({ contentState });
     };
@@ -124,6 +123,8 @@ export default function createToolbar({ buttons, theme, pubsub, helpers, isMobil
       } else {
         this.hideToolbar();
       }
+
+      this.hidePanels();
     };
 
     hideToolbar = () => {
@@ -254,7 +255,6 @@ export default function createToolbar({ buttons, theme, pubsub, helpers, isMobil
           return (<BlockLinkButton
             tabIndex={tabIndex}
             pubsub={pubsub}
-            onExtendContent={this.onExtendContent}
             onOverrideContent={this.onOverrideContent}
             theme={themedStyle}
             key={key}
@@ -280,6 +280,8 @@ export default function createToolbar({ buttons, theme, pubsub, helpers, isMobil
               key={key}
               t={t}
               isMobile={isMobile}
+              displayPanel={this.displayPanel}
+              displayInlinePanel={this.displayInlinePanel}
               {...this.mapComponentDataToButtonProps(button, this.state.componentData)}
             />
           );
@@ -292,6 +294,57 @@ export default function createToolbar({ buttons, theme, pubsub, helpers, isMobil
       }
       return { ...button, ...button.mapComponentDataToButtonProps(componentData) };
     };
+
+    hidePanels = () => this.setState({ panel: null, inlinePanel: null });
+
+    displayPanel = panel => {
+      this.hidePanels();
+      this.setState({ panel });
+    };
+
+    displayInlinePanel = inlinePanel => {
+      this.hidePanels();
+      this.setState({ inlinePanel });
+    };
+
+    renderInlinePanel() {
+      const { inlinePanel, componentData, componentState } = this.state;
+      const { PanelContent, keyName } = inlinePanel || {};
+
+      return inlinePanel ? (
+        <div className={toolbarStyles.pluginToolbar_inlinePanel}>
+          <PanelContent
+            key={keyName}
+            theme={theme}
+            store={pubsub}
+            helpers={helpers}
+            t={t}
+            componentData={componentData}
+            componentState={componentState}
+          />
+        </div>
+      ) : null;
+    }
+
+    renderPanel() {
+      const { panel, componentData, componentState } = this.state;
+
+      return panel ? (
+        <div className={toolbarStyles.pluginToolbar_panel}>
+          <Panel
+            key={panel.keyName}
+            theme={theme}
+            store={pubsub}
+            helpers={helpers}
+            t={t}
+            componentData={componentData}
+            componentState={componentState}
+            content={panel.PanelContent}
+            keyName={panel.keyName}
+          />
+        </div>
+      ) : null;
+    }
 
     render = () => {
       const { showLeftArrow, showRightArrow, overrideContent: OverrideContent, extendContent: ExtendContent, tabIndex } = this.state;
@@ -313,7 +366,6 @@ export default function createToolbar({ buttons, theme, pubsub, helpers, isMobil
       };
       const separatorClassNames = classNames(toolbarStyles.pluginToolbarSeparator, separatorTheme && separatorTheme.pluginToolbarSeparator);
       const overrideProps = { onOverrideContent: this.onOverrideContent };
-      const extendProps = { onExtendContent: this.onExtendContent };
 
       return (
         <div style={this.state.position} className={containerClassNames} data-hook={name ? `${name}PluginToolbar` : null}>
@@ -349,11 +401,8 @@ export default function createToolbar({ buttons, theme, pubsub, helpers, isMobil
               </button>
             }
           </div>
-          {ExtendContent && (
-            <div className={classNames(toolbarStyles.pluginToolbar_extend, toolbarTheme.pluginToolbar_extend)}>
-              <ExtendContent {...extendProps} />
-            </div>
-          )}
+          {this.renderInlinePanel()}
+          {this.renderPanel()}
         </div>
       );
     };
