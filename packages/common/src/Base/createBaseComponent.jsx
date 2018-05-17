@@ -17,22 +17,31 @@ const DEFAULTS = {
   alignment: null,
   size: 'content',
   url: undefined,
+  textWrap: null,
 };
 
 const alignmentClassName = (alignment, theme) => {
   if (!alignment) {
     return '';
-  } else {
-    return classNames(Styles[`align${upperFirst(alignment)}`], theme[`align${upperFirst(alignment)}`]);
   }
+  const key = `align${upperFirst(alignment)}`;
+  return classNames(Styles[key], theme[key]);
 };
 
 const sizeClassName = (size, theme) => {
   if (!size) {
     return '';
-  } else {
-    return classNames(Styles[`size${upperFirst(camelCase(size))}`], theme[`size${upperFirst(camelCase(size))}`]);
   }
+  const key = `size${upperFirst(camelCase(size))}`;
+  return classNames(Styles[key], theme[key]);
+};
+
+const textWrapClassName = (textWrap, theme) => {
+  if (!textWrap) {
+    return '';
+  }
+  const key = `textWrap${upperFirst(camelCase(textWrap))}`;
+  return classNames(Styles[key], theme[key]);
 };
 
 const createBaseComponent = ({ PluginComponent, theme, settings, pubsub, helpers, anchorTarget, t, isMobile }) => {
@@ -68,6 +77,7 @@ const createBaseComponent = ({ PluginComponent, theme, settings, pubsub, helpers
       pubsub.subscribe('componentState', this.onComponentStateChange);
       pubsub.subscribe('componentAlignment', this.onComponentAlignmentChange);
       pubsub.subscribe('componentSize', this.onComponentSizeChange);
+      pubsub.subscribe('componentTextWrap', this.onComponentTextWrapChange);
       pubsub.subscribe('componentLink', this.onComponentLinkChange);
     }
 
@@ -82,6 +92,7 @@ const createBaseComponent = ({ PluginComponent, theme, settings, pubsub, helpers
       pubsub.unsubscribe('componentState', this.onComponentStateChange);
       pubsub.unsubscribe('componentAlignment', this.onComponentAlignmentChange);
       pubsub.unsubscribe('componentSize', this.onComponentSizeChange);
+      pubsub.unsubscribe('componentTextWrap', this.onComponentTextWrapChange);
       pubsub.unsubscribe('componentLink', this.onComponentLinkChange);
       pubsub.set('visibleBlock', null);
     }
@@ -115,6 +126,12 @@ const createBaseComponent = ({ PluginComponent, theme, settings, pubsub, helpers
     onComponentSizeChange = size => {
       if (size && this.isMeAndIdle) {
         this.updateComponentData({ config: { size } });
+      }
+    };
+
+    onComponentTextWrapChange = textWrap => {
+      if (textWrap && this.isMeAndIdle) {
+        this.updateComponentData({ config: { textWrap } });
       }
     };
 
@@ -172,6 +189,7 @@ const createBaseComponent = ({ PluginComponent, theme, settings, pubsub, helpers
         batchUpdates.componentState = {};
         batchUpdates.componentSize = config.size;
         batchUpdates.componentAlignment = config.alignment;
+        batchUpdates.componentTextWrap = config.textWrap;
         batchUpdates.deleteBlock = this.deleteBlock;
         batchUpdates.visibleBlock = visibleBlock;
         pubsub.set(batchUpdates);
@@ -190,13 +208,14 @@ const createBaseComponent = ({ PluginComponent, theme, settings, pubsub, helpers
       batchUpdates.componentState = {};
       batchUpdates.componentSize = null;
       batchUpdates.componentAlignment = null;
+      batchUpdates.componentTextWrap = null;
       pubsub.set(batchUpdates);
     }
 
     render = () => {
       const { blockProps, className, onClick, selection } = this.props;
       const { componentData, readOnly } = this.state;
-      const { alignment, size, link } = componentData.config || {};
+      const { alignment, size, textWrap, link } = componentData.config || {};
       const isEditorFocused = selection.getHasFocus();
       const { isFocused } = blockProps;
       const isActive = isFocused && isEditorFocused && !readOnly;
@@ -214,6 +233,9 @@ const createBaseComponent = ({ PluginComponent, theme, settings, pubsub, helpers
         isFunction(PluginComponent.WrappedComponent.sizeClassName) ?
           PluginComponent.WrappedComponent.sizeClassName(this.state.componentData, theme, Styles, isMobile) :
           sizeClassName(size, theme),
+        isFunction(PluginComponent.WrappedComponent.textWrapClassName) ?
+          PluginComponent.WrappedComponent.textWrapClassName(this.state.componentData, theme, Styles, isMobile) :
+          textWrapClassName(textWrap, theme),
         className || '',
         {
           [Styles.hasFocus]: isActive,

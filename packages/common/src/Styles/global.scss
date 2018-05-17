@@ -56,45 +56,61 @@
 .alignLeft {
   float: left;
   z-index: 1;
-  margin-right: $innerSpacing;
-  margin-left: calc((100% - #{$textWidth}) / 2);
-  @include phone {
-    margin-left: calc((100% - #{$textMobileWidth}) / 2);
+
+  &:not(.textWrapNowrap) {
+    margin-right: $innerSpacing;
+    margin-left: calc((100% - #{$textWidth}) / 2);
+    @include phone {
+      margin-left: calc((100% - #{$textMobileWidth}) / 2);
+    }
   }
 }
 
 .alignCenter {
   display: block;
-  margin-left: auto;
-  margin-right: auto;
+
+  &:not(.textWrapNowrap) {
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 .alignRight {
   float: right;
   z-index: 1;
-  margin-left: $innerSpacing;
-  margin-right: calc((100% - #{$textWidth}) / 2);
-  @include phone {
-    margin-right: calc((100% - #{$textMobileWidth}) / 2);
+
+  &:not(.textWrapNowrap) {
+    margin-left: $innerSpacing;
+    margin-right: calc((100% - #{$textWidth}) / 2);
+    @include phone {
+      margin-right: calc((100% - #{$textMobileWidth}) / 2);
+    }
   }
 }
 
-.sizeFullWidth {
+.sizeFullWidth,
+.textWrapNowrap {
   width: 100%;
 }
 
 .sizeContent {
-  max-width: 740px;
-  margin: 0 auto;
+  &:not(.textWrapNowrap) {
+    max-width: 740px;
+    margin: 0 auto;
+  }
 }
 
 .sizeSmall {
-  width: 350px;
+  &:not(.textWrapNowrap) {
+    width: 350px;
+  }
 }
 
 .sizeSmallCenter {
-  width: 350px;
-  margin: 0 auto;
+  &:not(.textWrapNowrap) {
+    width: 350px;
+    margin: 0 auto;
+  }
 }
 
 //*** PANEL ***//

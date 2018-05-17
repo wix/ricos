@@ -43,7 +43,6 @@ export default ({ styles }) => {
       type: 'custom',
       icon: SizeLargeIcon,
       onClick: changeSizeMobile,
-      tooltipTextKey: 'DividerPlugin_SizeMobileButton_Tooltip',
       mobile: true,
       desktop: false,
       mapComponentDataToButtonProps: componentData => ({
@@ -72,7 +71,6 @@ export default ({ styles }) => {
       onClick: changeAlignmentMobile,
       mobile: true,
       desktop: false,
-      tooltipTextKey: 'DividerPlugin_AlignMobileButton_Tooltip',
       mapComponentDataToButtonProps: componentData => ({
         icon: getNextAlignmentIcon(componentData),
         disabled: isAligmentDisabled(componentData),

@@ -15,10 +15,13 @@ export const SIZE_SMALL = 'small';
 export const SIZE_MEDIUM = 'medium';
 export const SIZE_LARGE = 'large';
 
+export const NO_WRAP = 'nowrap';
+
 export const DEFAULTS = {
   type: LINE_SINGLE,
   config: {
     size: SIZE_LARGE,
-    alignment: ALIGN_CENTER
+    alignment: ALIGN_CENTER,
+    textWrap: NO_WRAP,
   }
 };

@@ -7,9 +7,9 @@ import ToolbarButton from '../../Components/ToolbarButton';
 export default ({ size, Icon, tooltipTextKey }) =>
   class BlockSizeButton extends Component {
     static propTypes = {
-      disabled: PropTypes.bool,
-      setSize: PropTypes.func.isRequired,
       size: PropTypes.string,
+      setLayoutProps: PropTypes.func.isRequired,
+      disabled: PropTypes.bool,
       theme: PropTypes.object.isRequired,
       isMobile: PropTypes.bool,
       tooltipText: PropTypes.string,
@@ -24,7 +24,7 @@ export default ({ size, Icon, tooltipTextKey }) =>
       if (this.props.disabled) {
         return;
       }
-      this.props.setSize(size);
+      this.props.setLayoutProps({ size });
     };
 
     preventBubblingUp = event => {

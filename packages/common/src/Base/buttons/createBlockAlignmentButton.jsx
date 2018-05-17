@@ -7,9 +7,9 @@ import ToolbarButton from '../../Components/ToolbarButton';
 export default ({ alignment, Icon, tooltipTextKey }) =>
   class BlockAlignmentButton extends Component {
     static propTypes = {
-      disabled: PropTypes.bool,
-      setAlignment: PropTypes.func.isRequired,
       alignment: PropTypes.string,
+      setLayoutProps: PropTypes.func.isRequired,
+      disabled: PropTypes.bool,
       theme: PropTypes.object.isRequired,
       isMobile: PropTypes.bool,
       tooltipText: PropTypes.string,
@@ -24,7 +24,7 @@ export default ({ alignment, Icon, tooltipTextKey }) =>
       if (this.props.disabled) {
         return;
       }
-      this.props.setAlignment(alignment);
+      this.props.setLayoutProps({ alignment });
     };
 
     preventBubblingUp = event => {

@@ -7,10 +7,10 @@ import ToolbarButton from '../../Components/ToolbarButton';
 export default ({ alignment, size, Icon, tooltipTextKey }) =>
   class BlockAlignmentAndSizeButton extends Component {
     static propTypes = {
-      disabled: PropTypes.bool,
-      setAlignmentAndSize: PropTypes.func.isRequired,
-      alignment: PropTypes.string,
       size: PropTypes.string,
+      alignment: PropTypes.string,
+      setLayoutProps: PropTypes.func.isRequired,
+      disabled: PropTypes.bool,
       theme: PropTypes.object.isRequired,
       isMobile: PropTypes.bool,
       tooltipText: PropTypes.string,
@@ -25,7 +25,7 @@ export default ({ alignment, size, Icon, tooltipTextKey }) =>
       if (this.props.disabled) {
         return;
       }
-      this.props.setAlignmentAndSize(alignment, size);
+      this.props.setLayoutProps({ alignment, size });
     };
 
     preventBubblingUp = event => {

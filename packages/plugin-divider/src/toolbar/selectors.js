@@ -31,6 +31,9 @@ export const getConfig = (componentData = {}) => {
   if (!config.alignment) {
     config.alignment = DEFAULTS.config.alignment;
   }
+  if (!config.textWrap) {
+    config.textWrap = DEFAULTS.config.textWrap;
+  }
   return config;
 };
 

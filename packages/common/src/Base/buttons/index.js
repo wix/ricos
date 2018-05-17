@@ -106,3 +106,18 @@ export const DeleteButton = createBlockButton({
   Icon: DeleteIcon,
   tooltipTextKey: 'DeleteButton_Tooltip',
 });
+
+export const BUTTONS_BY_KEY = {
+  [BUTTONS.SIZE_SMALL]: SizeSmallButton,
+  [BUTTONS.SIZE_MEDIUM]: SizeMediumButton,
+  [BUTTONS.SIZE_LARGE]: SizeLargeButton,
+  [BUTTONS.SIZE_ORIGINAL]: SizeOriginalButton,
+  [BUTTONS.SIZE_CONTENT]: SizeContentButton,
+  [BUTTONS.SIZE_FULL_WIDTH]: SizeFullWidthButton,
+  [BUTTONS.SIZE_SMALL_LEFT]: SizeSmallLeftButton,
+  [BUTTONS.SIZE_SMALL_CENTER]: SizeSmallCenterButton,
+  [BUTTONS.SIZE_SMALL_RIGHT]: SizeSmallRightButton,
+  [BUTTONS.ALIGNMENT_LEFT]: AlignmentLeftButton,
+  [BUTTONS.ALIGNMENT_CENTER]: AlignmentCenterButton,
+  [BUTTONS.ALIGNMENT_RIGHT]: AlignmentRightButton,
+};
