@@ -31,7 +31,6 @@ const getInitialState = () => (
     componentData: {},
     componentState: {},
     overrideContent: undefined,
-    extendContent: undefined,
     tabIndex: -1
   }
 );
@@ -344,7 +343,7 @@ export default function createToolbar({ buttons, theme, pubsub, helpers, isMobil
     }
 
     render = () => {
-      const { showLeftArrow, showRightArrow, overrideContent: OverrideContent, extendContent: ExtendContent, tabIndex } = this.state;
+      const { showLeftArrow, showRightArrow, overrideContent: OverrideContent, tabIndex } = this.state;
       const hasArrow = showLeftArrow || showRightArrow;
       const { toolbarStyles: toolbarTheme } = theme || {};
       const { buttonStyles: buttonTheme, separatorStyles: separatorTheme } = theme || {};
