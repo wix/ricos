@@ -316,6 +316,7 @@ export default function createToolbar({ buttons, theme, pubsub, helpers, isMobil
             t={t}
             componentData={componentData}
             componentState={componentState}
+            close={this.hidePanels}
           />
         </div>
       ) : null;
@@ -336,6 +337,7 @@ export default function createToolbar({ buttons, theme, pubsub, helpers, isMobil
             componentState={componentState}
             content={panel.PanelContent}
             keyName={panel.keyName}
+            close={this.hidePanels}
           />
         </div>
       ) : null;

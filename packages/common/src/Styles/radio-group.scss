@@ -30,7 +30,7 @@
   height: 0.1px;
 }
 
-.radioGroup_input:checked ~ .radioGroup_button {
+.radioGroup_input:checked + .radioGroup_button {
   border-color: #0261ff;
 
   &::after {

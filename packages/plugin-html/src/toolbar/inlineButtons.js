@@ -6,7 +6,7 @@ import WidthIcon from '../icons/width.svg';
 import HeightIcon from '../icons/height.svg';
 import HTMLSettingsModal from './HTMLSettings';
 import SettingsModal from './SettingsModal';
-import EditModal from './EditModal';
+import EditPanel from './HtmlEditPanel';
 import SliderPanel from './SliderPanel';
 
 export default({ t }) => {
@@ -16,7 +16,7 @@ export default({ t }) => {
     {
       keyName: 'edit',
       type: BUTTONS.INLINE_PANEL,
-      panelContent: translate(null)(EditModal),
+      panelContent: translate(null)(EditPanel),
       icon: EditIcon,
       tooltipTextKey: 'EditButton_Tooltip',
     },

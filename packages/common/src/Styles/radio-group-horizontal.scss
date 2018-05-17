@@ -4,10 +4,14 @@
 }
 
 .radioGroupHorizontal_group {
+  display: flex;
+  align-items: center;
+  line-height: normal;
 
   label {
     width: 50%;
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
   }
 
   span {

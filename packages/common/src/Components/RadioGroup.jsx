@@ -77,9 +77,9 @@ class RadioGroup extends Component {
       >
         {dataSource
           .map((option, i) => {
-            const checked = option.value === value ? { checked: 'checked' } : {};
+            const checked = option.value === value;
             const a11yProps = {
-              'aria-checked': option.value === value,
+              'aria-checked': checked,
               'aria-label': option.labelText,
               'aria-disabled': readOnly
             };
@@ -91,7 +91,7 @@ class RadioGroup extends Component {
               >
                 <input
                   tabIndex="-1" {...a11yProps} id={inputId} className={styles.radioGroup_input}
-                  type={'radio'} {...checked} onChange={() => onChange(option.value)}
+                  type={'radio'} checked={checked} onChange={() => onChange(option.value)}
                 />
                 <span className={styles.radioGroup_button}/>
                 <span className={styles.radioGroup_label}>{option.labelText}</span>
