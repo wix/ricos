@@ -1,5 +1,5 @@
-import { DEFAULTS } from './../divider-component';
-import InsertPluginIcon from './../icons/insert-plugin.svg';
+import { InsertPluginIcon } from '../icons';
+import { DEFAULTS } from '../constants';
 
 export default ({ helpers, t }) => {
   return [
@@ -9,7 +9,7 @@ export default ({ helpers, t }) => {
       Icon: InsertPluginIcon,
       data: DEFAULTS,
       helpers,
-      t,
-    },
+      t
+    }
   ];
 };

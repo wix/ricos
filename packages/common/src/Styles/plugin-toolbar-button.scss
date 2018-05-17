@@ -15,7 +15,7 @@
 .pluginToolbarButton {
   display: inline-block;
   background: transparent;
-  color: $toolbar-font-color;;
+  color: $toolbar-font-color;
   padding: 5px;
   border: none;
   cursor: pointer;
@@ -35,10 +35,16 @@
     @include svg-fill;
   }
 
-  &:hover,
-  &:focus,
-  &.pluginToolbarButton_active {
-    color: $accent-color;
-    @include svg-fill;
+  &:not(.pluginToolbarButton_disabled) {
+    &:hover,
+    &:focus,
+    &.pluginToolbarButton_active {
+      color: $accent-color;
+      @include svg-fill;
+    }
+  }
+
+  &.pluginToolbarButton_disabled {
+    opacity: 0.4;
   }
 }

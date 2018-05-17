@@ -41,10 +41,8 @@ const getStructure = (buttons, isMobile) => {
   if (!isEmpty(hidden)) {
     structure = structure.filter(button => !includes(hidden, button.keyName));
   }
-  if (isMobile) {
-    structure = structure.filter(button => button.mobile);
-  }
-  return structure;
+  const predicate = isMobile ? button => button.mobile : button => button.desktop !== false;
+  return structure.filter(predicate);
 };
 
 export default function createToolbar({ buttons, theme, pubsub, helpers, isMobile, anchorTarget, relValue, t, name }) {
@@ -283,10 +281,17 @@ export default function createToolbar({ buttons, theme, pubsub, helpers, isMobil
               isMobile={isMobile}
               displayPanel={this.displayPanel}
               displayInlinePanel={this.displayInlinePanel}
-              {...button}
+              {...this.mapComponentDataToButtonProps(button, this.state.componentData)}
             />
           );
       }
+    };
+
+    mapComponentDataToButtonProps = (button, componentData) => {
+      if (!button.mapComponentDataToButtonProps) {
+        return button;
+      }
+      return { ...button, ...button.mapComponentDataToButtonProps(componentData) };
     };
 
     hidePanels = () => this.setState({ panel: null, inlinePanel: null });
@@ -357,6 +362,7 @@ export default function createToolbar({ buttons, theme, pubsub, helpers, isMobil
         button: classNames(buttonStyles.pluginToolbarButton, buttonTheme && buttonTheme.pluginToolbarButton),
         icon: classNames(buttonStyles.pluginToolbarButton_icon, buttonTheme && buttonTheme.pluginToolbarButton_icon),
         active: classNames(buttonStyles.pluginToolbarButton_active, buttonTheme && buttonTheme.pluginToolbarButton_active),
+        disabled: classNames(buttonStyles.pluginToolbarButton_disabled, buttonTheme && buttonTheme.pluginToolbarButton_disabled),
         ...theme
       };
       const separatorClassNames = classNames(toolbarStyles.pluginToolbarSeparator, separatorTheme && separatorTheme.pluginToolbarSeparator);

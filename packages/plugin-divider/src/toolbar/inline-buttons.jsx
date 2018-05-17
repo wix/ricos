@@ -1,184 +1,135 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import EditIcon from '../icons/icon-edit.svg';
-import { BUTTONS, PluginSettingsIcon } from 'wix-rich-content-common';
-import { DEFAULTS } from '../divider-component';
-import Styles from '../default-divider-styles.scss';
+import { BUTTONS } from 'wix-rich-content-common';
+import {
+  ALIGN_LEFT,
+  ALIGN_CENTER,
+  ALIGN_RIGHT,
+  SIZE_SMALL,
+  SIZE_MEDIUM,
+  SIZE_LARGE
+} from '../constants';
+import {
+  AlignLeftIcon,
+  AlignCenterIcon,
+  AlignRightIcon,
+  SizeSmallIcon,
+  SizeMediumIcon,
+  SizeLargeIcon
+} from '../icons';
+import {
+  changeType,
+  changeAlignment,
+  changeSize,
+  changeAlignmentMobile,
+  changeSizeMobile
+} from './actions';
+import {
+  isAligmentDisabled,
+  getNextSizeIcon,
+  getNextAlignmentIcon
+} from './selectors';
+import {
+  getDropdownOptions,
+  createDropdownValueGetter
+} from './dropdown-options';
 
-class SettingsModal extends React.Component {
-  static propTypes = {
-    componentData: PropTypes.object.isRequired,
-    store: PropTypes.object.isRequired,
-    t: PropTypes.func,
-    tabIndex: PropTypes.number,
-  };
+const dataHook = key => `divider-button__${key}`;
 
-  constructor(props) {
-    super(props);
-    this.state = this.stateFromProps(props);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.setState(this.stateFromProps(nextProps));
-  }
-
-  stateFromProps = props => {
-    return {
-      width: (props.componentData && props.componentData && props.componentData.width) || DEFAULTS.width,
-      t: props.t,
-    };
-  };
-
-  changeWidth = event => {
-    const width = event.target.valueAsNumber;
-    const componentData = { ...this.props.componentData, width };
-    this.props.store.set('componentData', componentData);
-  };
-
-  render = () => {
-    const { t, tabIndex } = this.props;
-    const widthLabel = t('DividerPlugin_Width');
-    return (
-      <div>
-        <div>
-          <label htmlFor="width">
-            <input
-              type="range" min="10" max="100" value={this.state.width} id="width" step="1" aria-label={widthLabel}
-              data-hook="dividerPluginWidth" onChange={this.changeWidth} tabIndex={tabIndex}
-              aria-valuemin="10" aria-valuemax="100" aria-valuenow={this.state.width}
-            />
-            {widthLabel}
-          </label>
-          <output htmlFor="width" id="widthVal">
-            {this.state.width}%
-          </output>
-        </div>
-      </div>
-    );
-  };
-}
-
-class EditModal extends React.Component {
-  static propTypes = {
-    componentData: PropTypes.object.isRequired,
-    store: PropTypes.object.isRequired,
-    t: PropTypes.func,
-    tabIndex: PropTypes.number,
-  };
-
-  constructor(props) {
-    super(props);
-    this.state = this.stateFromProps(props);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.setState(this.stateFromProps(nextProps));
-  }
-
-  stateFromProps = props => {
-    return {
-      type: (props.componentData && props.componentData.type) || 'divider1',
-      t: props.t,
-    };
-  };
-
-  changeType = event => {
-    this.setState({ type: event.target.value }, () => {
-      const componentData = { ...this.props.componentData };
-      componentData.type = this.state.type;
-      this.props.store.set('componentData', componentData);
-    });
-  };
-
-  render = () => {
-    const { t, tabIndex } = this.props;
-    const dividerType1 = t('DividerPlugin_DividerType_1');
-    const dividerType2 = t('DividerPlugin_DividerType_2');
-    const dividerType3 = t('DividerPlugin_DividerType_3');
-    const dividerType4 = t('DividerPlugin_DividerType_4');
-
-    return (
-      <div style={{ width: 90 + 'px' }}>
-        <div className={Styles.tabs}>
-          <div className={Styles.tab}>
-            <div>
-              <label htmlFor="divider1">
-                <input
-                  type="radio" name="type" id="divider1" value="divider1"
-                  checked={this.state.type === 'divider1'} aria-checked={this.state.type === 'divider1'}
-                  data-hook="dividerTypeOne" onChange={this.changeType} tabIndex={tabIndex} aria-label={dividerType1}
-                />
-                {dividerType1}
-              </label>
-            </div>
-            <div>
-              <label htmlFor="divider2">
-                <input
-                  aria-checked={this.state.type === 'divider2'} aria-label={dividerType2}
-                  type="radio" name="type" id="divider2" value="divider2" checked={this.state.type === 'divider2'}
-                  data-hook="dividerTypeTwo" onChange={this.changeType} tabIndex={tabIndex}
-                />
-                {dividerType2}
-              </label>
-            </div>
-            <div>
-              <label htmlFor="divider3">
-                <input
-                  aria-checked={this.state.type === 'divider3'} aria-label={dividerType3}
-                  type="radio" name="type" id="divider3" value="divider3" checked={this.state.type === 'divider3'}
-                  data-hook="dividerTypeThree" onChange={this.changeType} tabIndex={tabIndex}
-                />
-                {dividerType3}
-              </label>
-            </div>
-            <div>
-              <label htmlFor="divider4">
-                <input
-                  aria-checked={this.state.type === 'divider4'} aria-label={dividerType4}
-                  type="radio" name="type" id="divider4" value="divider4" checked={this.state.type === 'divider4'}
-                  data-hook="dividerTypeFour" onChange={this.changeType} tabIndex={tabIndex}
-                />
-                {dividerType4}
-              </label>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  };
-}
-
-export default({ t }) => {
+export default ({ styles }) => {
+  const dropdownOptions = getDropdownOptions(styles);
   return [
     {
-      keyName: 'edit',
-      type: BUTTONS.INLINE_PANEL,
-      panelContent: EditModal,
-      icon: EditIcon,
-      onClick: pubsub => console.log('*** click edit *** '), //eslint-disable-line no-console, no-unused-vars
+      keyName: 'type',
+      type: BUTTONS.DROPDOWN,
+      options: dropdownOptions,
+      onChange: changeType,
+      getValue: createDropdownValueGetter(dropdownOptions),
+      controlClassName: styles['divider-dropdown__control'],
+      tooltipTextKey: 'DividerPlugin_SelectType_Tooltip',
       mobile: true,
-      tooltipTextKey: 'EditButton_Tooltip',
-      t,
+      dataHook: dataHook('line-type'),
     },
     { keyName: 'separator1', type: BUTTONS.SEPARATOR, mobile: true },
-    { keyName: 'sizeSmallLeft', type: BUTTONS.SIZE_SMALL_LEFT, mobile: true },
-    { keyName: 'sizeSmallCenter', type: BUTTONS.SIZE_SMALL_CENTER, mobile: true },
-    { keyName: 'sizeSmallRight', type: BUTTONS.SIZE_SMALL_RIGHT, mobile: true },
-    { keyName: 'sizeContent', type: BUTTONS.SIZE_CONTENT, mobile: true },
-    { keyName: 'sizeFullWidth', type: BUTTONS.SIZE_FULL_WIDTH, mobile: true },
+    {
+      keyName: 'sizeSmall',
+      type: 'custom',
+      icon: SizeSmallIcon,
+      onClick: changeSize(SIZE_SMALL),
+      tooltipTextKey: 'DividerPlugin_SizeSmallButton_Tooltip',
+      dataHook: dataHook('size-small'),
+    },
+    {
+      keyName: 'sizeMedium',
+      type: 'custom',
+      icon: SizeMediumIcon,
+      onClick: changeSize(SIZE_MEDIUM),
+      tooltipTextKey: 'DividerPlugin_SizeMediumButton_Tooltip',
+      dataHook: dataHook('size-medium'),
+    },
+    {
+      keyName: 'sizeLarge',
+      type: 'custom',
+      icon: SizeLargeIcon,
+      onClick: changeSize(SIZE_LARGE),
+      tooltipTextKey: 'DividerPlugin_SizeLargeButton_Tooltip',
+      dataHook: dataHook('size-large'),
+    },
+    {
+      keyName: 'sizeMobile',
+      type: 'custom',
+      icon: SizeLargeIcon,
+      onClick: changeSizeMobile,
+      mobile: true,
+      desktop: false,
+      mapComponentDataToButtonProps: componentData => ({
+        icon: getNextSizeIcon(componentData),
+      }),
+      dataHook: dataHook('size-mobile'),
+    },
     { keyName: 'separator2', type: BUTTONS.SEPARATOR, mobile: true },
     {
-      keyName: 'settings',
-      type: BUTTONS.INLINE_PANEL,
-      panelContent: SettingsModal,
-      icon: PluginSettingsIcon,
-      onClick: pubsub => console.log('*** click settings *** '), //eslint-disable-line no-console, no-unused-vars,
-      mobile: true,
-      tooltipTextKey: 'SettingsButton_Tooltip',
-      t,
+      keyName: 'alignLeft',
+      type: 'custom',
+      icon: AlignLeftIcon,
+      tooltipTextKey: 'DividerPlugin_AlignLeftButton_Tooltip',
+      onClick: changeAlignment(ALIGN_LEFT),
+      mapComponentDataToButtonProps: componentData => ({
+        disabled: isAligmentDisabled(componentData),
+      }),
+      dataHook: dataHook('align-left'),
     },
-    { keyName: 'link', type: BUTTONS.LINK, mobile: true },
-    { keyName: 'delete', type: BUTTONS.DELETE, mobile: true },
+    {
+      keyName: 'alignCenter',
+      type: 'custom',
+      icon: AlignCenterIcon,
+      onClick: changeAlignment(ALIGN_CENTER),
+      tooltipTextKey: 'DividerPlugin_AlignCenterButton_Tooltip',
+      dataHook: dataHook('align-center'),
+    },
+    {
+      keyName: 'alignRight',
+      type: 'custom',
+      icon: AlignRightIcon,
+      onClick: changeAlignment(ALIGN_RIGHT),
+      tooltipTextKey: 'DividerPlugin_AlignRightButton_Tooltip',
+      mapComponentDataToButtonProps: componentData => ({
+        disabled: isAligmentDisabled(componentData),
+      }),
+      dataHook: dataHook('align-right'),
+    },
+    {
+      keyName: 'alignMobile',
+      type: 'custom',
+      icon: AlignCenterIcon,
+      onClick: changeAlignmentMobile,
+      mobile: true,
+      desktop: false,
+      mapComponentDataToButtonProps: componentData => ({
+        icon: getNextAlignmentIcon(componentData),
+        disabled: isAligmentDisabled(componentData),
+      }),
+      dataHook: dataHook('align-mobile'),
+    },
+    { keyName: 'separator3', type: BUTTONS.SEPARATOR, mobile: true },
+    { keyName: 'delete', type: BUTTONS.DELETE, mobile: true }
   ];
 };
-

@@ -51,6 +51,10 @@ class BaseToolbarButton extends React.Component {
 
   handleClick = event => {
     event.preventDefault();
+    if (this.props.disabled) {
+      return;
+    }
+
     const { componentState, keyName, helpers, pubsub, theme, t, onClick, anchorTarget, relValue, ...otherProps } = this.props;
 
     if (this.props.type === BUTTONS.FILES && helpers && helpers.handleFileSelection) {
@@ -178,12 +182,13 @@ class BaseToolbarButton extends React.Component {
   };
 
   render = () => {
-    const { helpers, theme: themedStyles } = this.props;
+    const { helpers, disabled, theme: themedStyles } = this.props;
     const { isActive } = this.state;
     const buttonWrapperClassNames = classNames(themedStyles.buttonWrapper);
     const buttonClassNames = classNames({
       [themedStyles.button]: true,
-      [themedStyles.active]: isActive
+      [themedStyles.active]: isActive,
+      [themedStyles.disabled]: disabled,
     });
 
     let toolbarButton;
@@ -225,6 +230,7 @@ BaseToolbarButton.propTypes = {
   icon: PropTypes.oneOfType([PropTypes.string, PropTypes.func, PropTypes.element]),
   modalStyles: PropTypes.object,
   isMobile: PropTypes.bool,
+  disabled: PropTypes.bool,
   t: PropTypes.func,
   tooltipTextKey: PropTypes.string,
   anchorTarget: PropTypes.string,

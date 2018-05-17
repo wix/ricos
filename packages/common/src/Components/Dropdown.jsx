@@ -11,7 +11,15 @@ const DEFAULT_PLACEHOLDER_STRING = 'Select...';
 class Dropdown extends Component {
 
   static propTypes = {
-    options: PropTypes.array.isRequired,
+    options: PropTypes.arrayOf(PropTypes.shape({
+      name: PropTypes.string,
+      type: PropTypes.type,
+      items: PropTypes.array,
+      value: PropTypes.any.isRequired,
+      label: PropTypes.string,
+      icon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+      component: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+    })).isRequired,
     onChange: PropTypes.func.isRequired,
     theme: PropTypes.object.isRequired,
     value: PropTypes.number,
@@ -20,6 +28,7 @@ class Dropdown extends Component {
     onFocus: PropTypes.func,
     disabled: PropTypes.bool,
     dataHook: PropTypes.string,
+    controlClassName: PropTypes.string,
   };
 
   constructor(props) {
@@ -31,7 +40,6 @@ class Dropdown extends Component {
     this.mounted = true;
     this.styles = mergeStyles({ styles, theme: props.theme });
     this.id = `cmbx_${Math.floor(Math.random() * 9999)}`;
-
   }
 
   componentWillReceiveProps(newProps) {
@@ -83,11 +91,12 @@ class Dropdown extends Component {
     }
   }
 
-  setValue(value, label) {
+  setValue(value, label, component) {
     const newState = {
       selected: {
         value,
-        label
+        label,
+        component,
       },
       isOpen: false
     };
@@ -108,16 +117,17 @@ class Dropdown extends Component {
       [styles['Dropdown-option-selected']]: option === this.state.selected
     });
 
-    const { value, label, icon: Icon } = option;
+    const { value, label, icon: Icon, component: OptionComponent } = option;
 
     return (
       <button
-        key={value} className={optionClass} onMouseDown={this.setValue.bind(this, value, label)}
-        data-hook={`${label}_dropdown_option`} onClick={this.setValue.bind(this, value, label)}
+        key={value} className={optionClass} onMouseDown={this.setValue.bind(this, value, label, OptionComponent)}
+        data-hook={`${label || value}_dropdown_option`} onClick={this.setValue.bind(this, value, label, OptionComponent)}
         role="option" aria-selected={option === this.state.selected} aria-label={label}
       >
         {Icon && <Icon className={styles['Dropdown-option-icon']} />}
-        <span className={styles['Dropdown-option-label']}>{label}</span>
+        {label && <span className={styles['Dropdown-option-label']}>{label}</span>}
+        {OptionComponent && <OptionComponent/>}
       </button>
     );
   }
@@ -162,11 +172,13 @@ class Dropdown extends Component {
     const placeHolderValue = typeof selected === 'string' ? selected : (() => {
       const label = selected.label || '';
       const Icon = selected.icon || null;
+      const OptionComponent = selected.component || null;
 
       return (
         <span>
           {Icon ? <Icon className={styles['Dropdown-option-icon']} /> : null}
-          <span className={styles['Dropdown-option-label']}>{label}</span>
+          {label && <span className={styles['Dropdown-option-label']}>{label}</span>}
+          {OptionComponent && <OptionComponent/>}
         </span>
       );
     })();
@@ -183,7 +195,7 @@ class Dropdown extends Component {
       <div className={dropdownClass}>
         <button
           role="combobox" aria-controls={`${this.id}_menu`} aria-expanded={this.state.isOpen}
-          className={classNames(styles['Dropdown-control'], disabledClass)}
+          className={classNames(styles['Dropdown-control'], this.props.controlClassName, disabledClass)}
           data-hook={dataHook} onClick={this.handleMouseDown.bind(this)} onTouchEnd={this.handleMouseDown.bind(this)}
         >
           {value}

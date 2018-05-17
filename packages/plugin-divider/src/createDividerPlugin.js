@@ -1,19 +1,24 @@
-import { createBasePlugin } from 'wix-rich-content-common';
+import { createBasePlugin, mergeStyles } from 'wix-rich-content-common';
+
+import { DIVIDER_TYPE } from './constants';
+import DividerComponent from './components/divider-component';
 import createToolbar from './toolbar';
-import { Component } from './divider-component';
-import { DIVIDER_TYPE } from './types';
+import Styles from './default-styles.scss';
 
 const createDividerPlugin = (config = {}) => {
   const { decorator, helpers, theme, isMobile, t, anchorTarget, relValue, divider: settings } = config;
+  const styles = mergeStyles({ styles: Styles, theme });
 
   return createBasePlugin({
-    component: Component,
+    component: DividerComponent,
     decorator,
     settings,
     theme,
     type: DIVIDER_TYPE,
     toolbar: createToolbar({
       helpers,
+      styles,
+      theme,
       t
     }),
     helpers,
