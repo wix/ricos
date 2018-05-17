@@ -5,35 +5,31 @@ import { mergeStyles, isValidUrl, normalizeURL } from 'wix-rich-content-common';
 import { SRC_TYPE_HTML, SRC_TYPE_URL, DEFAULT_COMPONENT_DATA } from './constants';
 import IframeHtml from './IframeHtml';
 import IframeUrl from './IframeUrl';
-import styles from './HtmlComponent.scss';
+import htmlComponentStyles from './HtmlComponent.scss';
 
-class HtmlComponent extends React.Component {
-  styles = mergeStyles({ styles, theme: this.props.theme });
+const HtmlComponent = props => {
+  const styles = mergeStyles({ styles: htmlComponentStyles, theme: this.props.theme });
+  const {
+    blockProps: { readOnly },
+    componentData: { src, srcType, config: { width, height } },
+  } = props;
 
-  render() {
-    const { styles } = this;
-    const {
-      blockProps: { readOnly },
-      componentData: { src, srcType, config: { width, height } },
-    } = this.props;
+  return (
+    <div className={styles.htmlComponent} style={{ width, height }} data-hook="HtmlComponent">
+      {srcType === SRC_TYPE_HTML && src && (
+        <IframeHtml key={SRC_TYPE_HTML} tabIndex={readOnly ? -1 : 0} html={src}/>
+      )}
 
-    return (
-      <div className={styles.htmlComponent} style={{ width, height }} data-hook="HtmlComponent">
-        {srcType === SRC_TYPE_HTML && src && (
-          <IframeHtml key={SRC_TYPE_HTML} tabIndex={readOnly ? -1 : 0} html={src}/>
-        )}
+      {srcType === SRC_TYPE_URL && isValidUrl(src) && (
+        <IframeUrl key={SRC_TYPE_URL} tabIndex={readOnly ? -1 : 0} src={normalizeURL(src)}/>
+      )}
 
-        {srcType === SRC_TYPE_URL && isValidUrl(src) && (
-          <IframeUrl key={SRC_TYPE_URL} tabIndex={readOnly ? -1 : 0} src={normalizeURL(src)}/>
-        )}
-
-        {!src && !isValidUrl(src) && (
-          <div className={styles.htmlComponent_placeholder}/>
-        )}
-      </div>
-    );
-  }
-}
+      {!src && !isValidUrl(src) && (
+        <div className={styles.htmlComponent_placeholder}/>
+      )}
+    </div>
+  );
+};
 
 HtmlComponent.propTypes = {
   componentData: PropTypes.object.isRequired,
