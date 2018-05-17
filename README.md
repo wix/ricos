@@ -9,7 +9,7 @@
 3. Build the modules by running one of the following:
     1. `npm run build:dev` - build once
     2. `npm run watch` - rebuild on changes
-4. Choose an example from the and run `npm start`.
+4. Choose an example and run `npm start`.
 
 
 ## Modules
