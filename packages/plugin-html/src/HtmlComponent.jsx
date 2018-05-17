@@ -4,21 +4,12 @@ import classNames from 'classnames';
 import decorateComponentWithProps from 'decorate-component-with-props';
 import { translate } from 'react-i18next';
 import { mergeStyles } from 'wix-rich-content-common';
-import { SRC_TYPE_HTML, SRC_TYPE_URL } from './constants';
+import { SRC_TYPE_HTML, SRC_TYPE_URL, DEFAULT_COMPONENT_DATA } from './constants';
 
 import Overlay from './Overlay';
 import styles from './default-html-styles.scss';
 
-const DEFAULTS = {
-  srcType: SRC_TYPE_HTML,
-  src: null,
-  config: {
-    width: 740,
-    height: 242,
-  },
-};
-
-class HTMLComponent extends React.Component {
+class HtmlComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = this.stateFromProps(props);
@@ -69,17 +60,13 @@ class HTMLComponent extends React.Component {
     const isEditorFocused = selection && selection.getHasFocus();
     const { isFocused, readOnly } = blockProps || { readOnly: true };
     const data = this.props.componentData;
-    const { src, srcType } = data;
-    data.config = data.config || {};
+    const { src, srcType, config: { width, height } } = data;
 
     const itemClassName = classNames(this.props.className, styles.html_itemContainer, {
       [styles.html_inChange]: this.state.inEditMode && isFocused && isEditorFocused,
     });
 
-    const width = data.config.width || DEFAULTS.config.width;
-    const height = data.config.height || DEFAULTS.config.height;
-
-    const HTMLOverlay = decorateComponentWithProps(Overlay, { isVisible: readOnly, width, height });
+    const HtmlOverlay = decorateComponentWithProps(Overlay, { isVisible: readOnly, width, height });
 
     return (
       <div className={classNames(this.props.className, itemClassName)} style={{ width, height, position: 'relative', margin: 'auto' }}>
@@ -90,7 +77,7 @@ class HTMLComponent extends React.Component {
               srcDoc={this.baseIframeContent(window.origin)} sandbox="allow-presentation allow-forms allow-scripts" allowTransparency
               frameBorder="0" width={width} height={height} style={{ border: 'none', overflow: 'hidden', position: 'absolute', top: '0', left: '0' }}
             />
-            <HTMLOverlay />
+            <HtmlOverlay />
           </div>
         )}
 
@@ -101,12 +88,12 @@ class HTMLComponent extends React.Component {
               src={src} allowTransparency scrolling="no" frameBorder="0" sandbox="allow-presentation allow-forms allow-same-origin allow-scripts"
               width={width} height={height} style={{ border: 'none', overflow: 'hidden', position: 'absolute', top: '0', left: '0' }}
             />
-            <HTMLOverlay />
+            <HtmlOverlay />
           </div>
         )}
 
         {!src && (
-          <div data-hook="htmlComponent" className={classNames(this.props.className, styles.html_invalidGalleryItems)}>
+          <div data-hook="HtmlComponent" className={classNames(this.props.className, styles.html_invalidGalleryItems)}>
             {t('HtmlComponent_Init_Text')}
           </div>
         )}
@@ -115,7 +102,7 @@ class HTMLComponent extends React.Component {
   }
 }
 
-HTMLComponent.propTypes = {
+HtmlComponent.propTypes = {
   componentData: PropTypes.object.isRequired,
   componentState: PropTypes.object.isRequired,
   blockProps: PropTypes.object.isRequired,
@@ -126,5 +113,5 @@ HTMLComponent.propTypes = {
   t: PropTypes.func,
 };
 
-const translatedHTMLComponent = translate(null)(HTMLComponent);
-export { translatedHTMLComponent as Component, DEFAULTS };
+const translatedHtmlComponent = translate(null)(HtmlComponent);
+export { translatedHtmlComponent as Component, DEFAULT_COMPONENT_DATA as DEFAULTS };

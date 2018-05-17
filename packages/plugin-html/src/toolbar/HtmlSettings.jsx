@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-class HTMLSettings extends Component {
+class HtmlSettings extends Component {
   static propTypes = {
     componentData: PropTypes.object.isRequired,
     store: PropTypes.object.isRequired,
@@ -52,7 +52,7 @@ class HTMLSettings extends Component {
             <input
               type="range" min="10" max="1000" value={this.state.width} id="width" step="10"
               role="spinbutton" aria-valuemin="10" aria-valuemax="1000" aria-valuenow={this.state.height} aria-labelledby="width_lbl"
-              data-hook="htmlSettingsWidth" onChange={this.changeWidth}
+              data-hook="HtmlSettingsWidth" onChange={this.changeWidth}
             />
             {widthLabel}
           </label>
@@ -65,7 +65,7 @@ class HTMLSettings extends Component {
             <input
               type="range" min="10" max="1000" value={this.state.height} id="height" step="10"
               role="spinbutton" aria-valuemin="10" aria-valuemax="1000" aria-valuenow={this.state.height} aria-labelledby="height_lbl"
-              data-hook="htmlSettingsHeight" onChange={this.changeHeight}
+              data-hook="HtmlSettingsHeight" onChange={this.changeHeight}
             />
             {heightLabel}
           </label>
@@ -78,5 +78,5 @@ class HTMLSettings extends Component {
   };
 }
 
-// const translatedHtmlSettings = translate(null)(HTMLSettings);
-export default HTMLSettings;
+// const translatedHtmlSettings = translate(null)(HtmlSettings);
+export default HtmlSettings;

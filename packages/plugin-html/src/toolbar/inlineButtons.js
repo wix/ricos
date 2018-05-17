@@ -4,7 +4,7 @@ import decorateComponentWithProps from 'decorate-component-with-props';
 import EditIcon from '../icons/icon-edit.svg';
 import WidthIcon from '../icons/width.svg';
 import HeightIcon from '../icons/height.svg';
-import HTMLSettingsModal from './HTMLSettings';
+import HtmlSettingsModal from './HtmlSettings';
 import SettingsModal from './SettingsModal';
 import EditPanel from './HtmlEditPanel';
 import SliderPanel from './SliderPanel';
@@ -58,7 +58,7 @@ export default({ t }) => {
     {
       keyName: 'external_settings',
       type: BUTTONS.EXTERNAL_MODAL,
-      modalElement: HTMLSettingsModal,
+      modalElement: HtmlSettingsModal,
       icon: PluginSettingsIcon,
       onClick: pubsub => console.log('*** click external settings *** '), //eslint-disable-line no-console, no-unused-vars,
       mobile: true,
