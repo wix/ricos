@@ -3,7 +3,7 @@ import { createBasePlugin } from 'wix-rich-content-common';
 import { Component } from './HtmlComponent';
 import { HTML_TYPE } from './types';
 
-const createHTMLPlugin = (config = {}) => {
+const createHtmlPlugin = (config = {}) => {
   const { decorator, helpers, theme, isMobile, t, anchorTarget, relValue, html: settings } = config;
 
   return createBasePlugin({
@@ -24,4 +24,4 @@ const createHTMLPlugin = (config = {}) => {
   });
 };
 
-export { createHTMLPlugin, HTML_TYPE };
+export { createHtmlPlugin, HTML_TYPE };

@@ -4,7 +4,7 @@ import { createHashtagPlugin } from 'wix-rich-content-plugin-hashtag';
 import { createImagePlugin } from 'wix-rich-content-plugin-image';
 import { createVideoPlugin } from 'wix-rich-content-plugin-video';
 import { createGalleryPlugin } from 'wix-rich-content-plugin-gallery';
-import { createHTMLPlugin } from 'wix-rich-content-plugin-html';
+import { createHtmlPlugin } from 'wix-rich-content-plugin-html';
 import { createDividerPlugin } from 'wix-rich-content-plugin-divider';
 
 import 'wix-rich-content-plugin-link/dist/styles.css';
@@ -20,7 +20,7 @@ const plugins = [
   createImagePlugin,
   createGalleryPlugin,
   createVideoPlugin,
-  createHTMLPlugin,
+  createHtmlPlugin,
   createDividerPlugin,
   //createExternalEmojiPlugin
   createLinkPlugin,
