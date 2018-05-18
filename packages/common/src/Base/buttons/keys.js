@@ -18,6 +18,8 @@ export default {
   ALIGNMENT_LEFT: 'alignment-left',
   ALIGNMENT_CENTER: 'alignment-center',
   ALIGNMENT_RIGHT: 'alignment-right',
+  WIDTH: 'width',
+  HEIGHT: 'height',
   LINK: 'link',
   DELETE: 'delete',
 };

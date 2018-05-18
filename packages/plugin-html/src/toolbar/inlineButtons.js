@@ -1,13 +1,9 @@
 import { translate } from 'react-i18next';
 import { BUTTONS, PluginSettingsIcon } from 'wix-rich-content-common';
-import decorateComponentWithProps from 'decorate-component-with-props';
 import EditIcon from '../icons/edit.svg';
-import WidthIcon from '../icons/width.svg';
-import HeightIcon from '../icons/height.svg';
 import HtmlSettingsModal from './HtmlSettings';
 import SettingsModal from './SettingsModal';
 import EditPanel from './HtmlEditPanel';
-import SliderPanel from './SliderPanel';
 
 export default({ t }) => {
   return [
@@ -22,28 +18,15 @@ export default({ t }) => {
     },
     { type: BUTTONS.SEPARATOR },
     {
-      keyName: 'width',
-      type: BUTTONS.PANEL,
-      panelContent: decorateComponentWithProps(SliderPanel, {
-        min: 35,
-        max: 940,
-        getValue: ({ componentData }) => componentData.config.width,
-        onChange: ({ store }) => width => store.update('componentData', { config: { width } }),
-      }),
-      icon: WidthIcon,
-      tooltipTextKey: 'HtmlPlugin_Width',
+      type: BUTTONS.WIDTH,
+      min: 35,
+      max: 940,
     },
     {
       keyName: 'height',
-      type: BUTTONS.PANEL,
-      panelContent: decorateComponentWithProps(SliderPanel, {
-        min: 35,
-        max: 1200,
-        getValue: ({ componentData }) => componentData.config.height,
-        onChange: ({ store }) => height => store.update('componentData', { config: { height } }),
-      }),
-      icon: HeightIcon,
-      tooltipTextKey: 'HtmlPlugin_Height',
+      type: BUTTONS.HEIGHT,
+      min: 35,
+      max: 1200,
     },
     { type: BUTTONS.SEPARATOR },
     {

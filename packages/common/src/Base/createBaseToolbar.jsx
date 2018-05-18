@@ -283,7 +283,7 @@ export default function createToolbar({ buttons, theme, pubsub, helpers, isMobil
           );
         default:
           return (
-            <BaseToolbarButton
+            <Button
               tabIndex={tabIndex}
               theme={themedStyle}
               componentData={this.state.componentData}
