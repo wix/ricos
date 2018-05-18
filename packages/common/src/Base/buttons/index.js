@@ -114,7 +114,7 @@ export const DeleteButton = createBlockButton({
 export const WidthButton = createSliderPanelButton({
   keyName: 'width',
   Icon: WidthIcon,
-  tooltipTextKey: 'HtmlPlugin_Width', // TODO: change translation key
+  tooltipTextKey: 'WidthButton_Tooltip',
   getValue: ({ componentData }) => componentData.config.width,
   onChange: ({ store }) => width => store.update('componentData', { config: { width } }),
 });
@@ -122,7 +122,7 @@ export const WidthButton = createSliderPanelButton({
 export const HeightButton = createSliderPanelButton({
   keyName: 'height',
   Icon: HeightIcon,
-  tooltipTextKey: 'HtmlPlugin_Height', // TODO: change translation key
+  tooltipTextKey: 'HeightButton_Tooltip',
   getValue: ({ componentData }) => componentData.config.height,
   onChange: ({ store }) => height => store.update('componentData', { config: { height } }),
 });
