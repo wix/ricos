@@ -35,7 +35,6 @@ export default({ t }) => {
       panelContent: translate(null)(SettingsModal),
       icon: PluginSettingsIcon,
       onClick: pubsub => console.log('*** click settings *** '), //eslint-disable-line no-console, no-unused-vars,
-      mobile: true,
       tooltipTextKey: 'SettingsButton_Tooltip',
     },
     {
@@ -44,10 +43,13 @@ export default({ t }) => {
       modalElement: HtmlSettingsModal,
       icon: PluginSettingsIcon,
       onClick: pubsub => console.log('*** click external settings *** '), //eslint-disable-line no-console, no-unused-vars,
-      mobile: true,
       tooltipTextKey: 'SettingsButton_Tooltip',
       t,
     },
-    { keyName: 'delete', type: BUTTONS.DELETE },
+    {
+      keyName: 'delete',
+      type: BUTTONS.DELETE,
+      mobile: true,
+    },
   ];
 };
