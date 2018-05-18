@@ -210,7 +210,7 @@ const createBaseComponent = ({ PluginComponent, theme, settings, pubsub, helpers
     render = () => {
       const { blockProps, className, onClick, selection } = this.props;
       const { componentData, readOnly } = this.state;
-      const { alignment, size, textWrap, link } = componentData.config || {};
+      const { alignment, size, textWrap, link, width, height } = componentData.config || {};
       const isEditorFocused = selection.getHasFocus();
       const { isFocused } = blockProps;
       const isActive = isFocused && isEditorFocused && !readOnly;
@@ -271,7 +271,7 @@ const createBaseComponent = ({ PluginComponent, theme, settings, pubsub, helpers
         });
       /* eslint-disable jsx-a11y/anchor-has-content */
       return (
-        <div style={{ position: 'relative' }} className={ContainerClassNames}>
+        <div style={{ position: 'relative' }} className={ContainerClassNames} style={{ width, height }}>
           {!isNil(link) ? <div>{component}<a className={anchorClass} {...anchorProps}/></div> : component}
           {!this.state.readOnly && <div role="none" data-hook={'componentOverlay'} onClick={onClick} className={overlayClassNames} />}
         </div>
