@@ -33,7 +33,7 @@ export default () => {
     { type: BUTTONS.ALIGNMENT_CENTER },
     {
       type: BUTTONS.ALIGNMENT_RIGHT,
-      mapComponentDataToProps: getAlignmentButtonProps,
+      mapComponentDataToButtonProps: getAlignmentButtonProps,
     },
     { type: BUTTONS.SEPARATOR },
     { type: BUTTONS.DELETE, keyName: 'delete', mobile: true },

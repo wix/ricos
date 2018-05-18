@@ -45,6 +45,7 @@
   }
 
   &.pluginToolbarButton_disabled {
+    cursor: default;
     opacity: 0.4;
   }
 }

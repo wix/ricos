@@ -15,7 +15,6 @@ export default ({ alignment, Icon, tooltipTextKey }) =>
       tooltipText: PropTypes.string,
       t: PropTypes.func,
       tabIndex: PropTypes.number,
-      disabled: PropTypes.bool,
     };
 
     isActive = () => this.props.alignment === alignment;
