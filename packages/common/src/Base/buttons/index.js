@@ -116,7 +116,13 @@ export const WidthButton = createSliderPanelButton({
   Icon: WidthIcon,
   tooltipTextKey: 'WidthButton_Tooltip',
   getValue: ({ componentData }) => componentData.config.width,
-  onChange: ({ store }) => width => store.update('componentData', { config: { width } }),
+  onChange: ({ store }) => width => {
+    if (width >= 740 && store.get('componentAlignment')) {
+      store.set('componentAlignment', 'center');
+    } else {
+      store.update('componentData', { config: { width } });
+    }
+  },
 });
 
 export const HeightButton = createSliderPanelButton({

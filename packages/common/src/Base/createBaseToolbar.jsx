@@ -117,7 +117,11 @@ export default function createToolbar({ buttons, theme, pubsub, helpers, isMobil
         this.hideToolbar();
       }
 
-      this.hidePanels();
+      if (visibleBlock !== this.visibleBlock) {
+        this.hidePanels();
+      }
+
+      this.visibleBlock = visibleBlock;
     };
 
     hideToolbar = () => {
@@ -311,7 +315,9 @@ export default function createToolbar({ buttons, theme, pubsub, helpers, isMobil
       };
     };
 
-    hidePanels = () => this.setState({ panel: null, inlinePanel: null });
+    hidePanels = () => {
+      this.setState({ panel: null, inlinePanel: null });
+    }
 
     displayPanel = panel => {
       this.hidePanels();
