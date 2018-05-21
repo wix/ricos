@@ -1,7 +1,6 @@
 import createBlockButton from './createBlockButton';
 import createBlockAlignmentButton from './createBlockAlignmentButton';
 import createBlockAlignmentAndSizeButton from './createBlockAlignmentAndSizeButton';
-import createBlockAlignmentButton from './createBlockAlignmentButton';
 import createBlockSizeButton from './createBlockSizeButton';
 import createSliderPanelButton from './createSliderPanelButton';
 import BUTTONS from '../buttons/keys';

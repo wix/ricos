@@ -13,5 +13,7 @@ export { default as AlignmentLeftIcon } from './align-left.svg';
 export { default as AlignmentCenterIcon } from './align-center.svg';
 export { default as AlignmentRightIcon } from './align-right.svg';
 export { default as AlignmentJustifyIcon } from './align-justify.svg';
+export { default as WidthIcon } from './width.svg';
+export { default as HeightIcon } from './height.svg';
 export { default as DeleteIcon } from './trash.svg';
 
