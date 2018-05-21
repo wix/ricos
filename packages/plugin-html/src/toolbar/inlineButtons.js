@@ -21,6 +21,7 @@ const getAlignmentButtonProps = componentData => ({ disabled: get(componentData,
 export default () => {
   return [
     {
+      keyName: 'edit',
       type: BUTTONS.INLINE_PANEL,
       panelContent: translate(null)(EditPanel),
       icon: EditIcon,
