@@ -165,7 +165,6 @@ const createBaseComponent = ({ PluginComponent, theme, settings, pubsub, helpers
       this.setState({ componentData: newComponentData });
       const { setData } = blockProps;
       setData(newComponentData);
-      pubsub.set('componentData', newComponentData);
     };
 
     getBoundingClientRectAsObject = element => {

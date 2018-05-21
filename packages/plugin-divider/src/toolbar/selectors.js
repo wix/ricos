@@ -37,7 +37,7 @@ export const getConfig = (componentData = {}) => {
   return config;
 };
 
-export const isAligmentDisabled = (componentData = {}) =>
+export const isAlignmentDisabled = (componentData = {}) =>
   getConfig(componentData).size === SIZE_LARGE;
 
 export const getNextValue = (array, currentValue) =>

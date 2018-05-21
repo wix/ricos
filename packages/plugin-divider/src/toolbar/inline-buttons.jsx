@@ -9,7 +9,7 @@ import {
   changeSizeMobile
 } from './actions';
 import {
-  isAligmentDisabled,
+  isAlignmentDisabled,
   getNextSizeIcon,
   getNextAlignmentIcon
 } from './selectors';
@@ -55,13 +55,13 @@ export default ({ styles }) => {
       keyName: 'alignLeft',
       type: BUTTONS.ALIGNMENT_LEFT,
       mapComponentDataToButtonProps: componentData => ({
-        disabled: isAligmentDisabled(componentData)
+        disabled: isAlignmentDisabled(componentData)
       })
     },
     { keyName: 'alignCenter', type: BUTTONS.ALIGNMENT_CENTER },
     { keyName: 'alignRight', type: BUTTONS.ALIGNMENT_RIGHT,
       mapComponentDataToButtonProps: componentData => ({
-        disabled: isAligmentDisabled(componentData)
+        disabled: isAlignmentDisabled(componentData)
       })
     },
     {
@@ -73,7 +73,7 @@ export default ({ styles }) => {
       desktop: false,
       mapComponentDataToButtonProps: componentData => ({
         icon: getNextAlignmentIcon(componentData),
-        disabled: isAligmentDisabled(componentData),
+        disabled: isAlignmentDisabled(componentData),
       }),
       dataHook: dataHook('align-mobile'),
     },
