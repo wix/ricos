@@ -15,6 +15,7 @@ export default ({ alignment, Icon, tooltipTextKey }) =>
       tooltipText: PropTypes.string,
       t: PropTypes.func,
       tabIndex: PropTypes.number,
+      icon: PropTypes.func,
     };
 
     isActive = () => this.props.alignment === alignment;
@@ -42,13 +43,14 @@ export default ({ alignment, Icon, tooltipTextKey }) =>
       const showTooltip = !isMobile && !isEmpty(tooltipText);
       const textForHooks = tooltipText.replace(/\s+/, '');
       const dataHookText = `blockAlignmentButton_${textForHooks}`;
+      const IconComponent = this.props.icon || Icon;
 
       /* eslint-disable jsx-a11y/no-static-element-interactions */
       const blockButton = (
         <div className={theme.buttonWrapper} onMouseDown={this.preventBubblingUp}>
           <button tabIndex={tabIndex} className={className} data-hook={dataHookText} onClick={this.handleClick}>
             <div className={theme.icon}>
-              <Icon />
+              <IconComponent />
             </div>
           </button>
         </div>

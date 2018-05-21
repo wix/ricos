@@ -1,6 +1,11 @@
 import get from 'lodash/get';
 import { translate } from 'react-i18next';
-import { BUTTONS } from 'wix-rich-content-common';
+import {
+  BUTTONS,
+  SizeSmallLeftIcon,
+  SizeSmallCenterIcon,
+  SizeSmallRightIcon,
+} from 'wix-rich-content-common';
 import EditIcon from '../icons/edit.svg';
 import {
   MAX_ALIGNMENT_WIDTH,
@@ -17,7 +22,6 @@ export default () => {
   return [
     {
       type: BUTTONS.INLINE_PANEL,
-      keyName: 'edit',
       panelContent: translate(null)(EditPanel),
       icon: EditIcon,
       tooltipTextKey: 'EditButton_Tooltip',
@@ -28,11 +32,16 @@ export default () => {
     { type: BUTTONS.SEPARATOR },
     {
       type: BUTTONS.ALIGNMENT_LEFT,
+      icon: SizeSmallLeftIcon,
       mapComponentDataToButtonProps: getAlignmentButtonProps,
     },
-    { type: BUTTONS.ALIGNMENT_CENTER },
+    {
+      type: BUTTONS.ALIGNMENT_CENTER,
+      icon: SizeSmallCenterIcon,
+    },
     {
       type: BUTTONS.ALIGNMENT_RIGHT,
+      icon: SizeSmallRightIcon,
       mapComponentDataToButtonProps: getAlignmentButtonProps,
     },
     { type: BUTTONS.SEPARATOR },
