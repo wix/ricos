@@ -118,9 +118,9 @@ export const WidthButton = createSliderPanelButton({
   onChange: ({ store }) => width => {
     if (width >= 740 && store.get('componentAlignment')) {
       store.set('componentAlignment', 'center');
-    } else {
-      store.update('componentData', { config: { width } });
     }
+
+    store.update('componentData', { config: { width } });
   },
 });
 
