@@ -18,6 +18,7 @@
   "HtmlPlugin_Source" : "Source",
   "HtmlPlugin_Code" : "Code",
   "HtmlPlugin_Update" : "Update",
+  "HtmlPlugin_Cancel" : "Cancel",
   "ImagePlugin_InsertButton_Tooltip" : "Add an Image",
   "ImageSettings_MobileHeader_Cancel" : "Cancel",
   "ImageSettings_MobileHeader_Save" : "Save",

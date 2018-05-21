@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import debounce from 'lodash/debounce';
 import { RadioGroupHorizontal } from 'wix-rich-content-common';
 import { SRC_TYPE_HTML, SRC_TYPE_URL } from '../constants';
@@ -64,8 +65,24 @@ class HtmlEditPanel extends Component {
         </div>
 
         <div className={styles.htmlEditPanel_buttons}>
-          <button onClick={this.handleCancelClick}>{t('HtmlPlugin_Cancel')}</button>
-          <button onClick={this.props.close}>{t('HtmlPlugin_Update')}</button>
+          <button
+            className={classNames(
+              styles.htmlEditPanel_button,
+              styles.htmlEditPanel_secondaryButton
+            )}
+            onClick={this.handleCancelClick}
+          >
+            {t('HtmlPlugin_Cancel')}
+          </button>
+          <button
+            className={classNames(
+              styles.htmlEditPanel_button,
+              styles.htmlEditPanel_primaryButton
+            )}
+            onClick={this.props.close}
+          >
+            {t('HtmlPlugin_Update')}
+          </button>
         </div>
       </div>
     );
