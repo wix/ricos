@@ -1,9 +1,8 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import CameraIcon from './icons/video-camera.svg';
-import ErrorIcon from './icons/error.svg';
 import classNames from 'classnames';
-import { mergeStyles, isVideoUrl, Tooltip, SettingsPanelFooter } from 'wix-rich-content-common';
+import { mergeStyles, isVideoUrl, SettingsPanelFooter, TextInput } from 'wix-rich-content-common';
 import styles from './video-url-input-modal.scss';
 
 export default class VideoURLInputModal extends Component {
@@ -13,13 +12,12 @@ export default class VideoURLInputModal extends Component {
     const { componentData } = this.props;
     this.state = {
       url: componentData.src || '',
-      isValidUrl: props.url ? isVideoUrl(props.url) : true,
     };
   }
 
   onUrlChange = e => {
     const url = e.target.value;
-    this.setState({ url, isValidUrl: true });
+    this.setState({ url });
   };
 
   afterOpenModal = () => this.input.focus();
@@ -40,7 +38,7 @@ export default class VideoURLInputModal extends Component {
 
       this.onCloseRequested();
     } else {
-      this.setState({ isValidUrl: false });
+      this.setState({ submitted: true });
     }
   };
 
@@ -56,41 +54,32 @@ export default class VideoURLInputModal extends Component {
   };
 
   render() {
+    const { url, submitted } = this.state;
     const { theme, doneLabel, cancelLabel, t } = this.props;
     const { styles } = this;
-    const headerText = t('VideoUploadModal_Header');
-    const videoInputPlaceholder = t('VideoUploadModal_Input_Placeholder');
 
     return (
       <div className={styles.container} data-hook="videoUploadModal">
         <div role="heading" aria-labelledby="video_modal_hdr" className={classNames(styles.header)}>
           <CameraIcon className={classNames(styles.cameraIcon, styles.header_icon)} />
-          <h3 id="video_modal_hdr" className={styles.header_text}>{headerText}</h3>
+          <h3 id="video_modal_hdr" className={styles.header_text}>
+            {t('VideoUploadModal_Header')}
+          </h3>
         </div>
-        <div className={styles.textInput}>
-          <input
+        <div className={styles.videoUrlInputModal_textInput}>
+          <TextInput
+            inputRef={ref => {
+              this.input = ref;
+            }}
             type="url"
             onKeyPress={this.handleKeyPress}
-            ref={ref => (this.input = ref)}
-            className={classNames(styles.textInput_input, { [styles.textInput_input_invalid]: !this.state.isValidUrl })}
-            placeholder={videoInputPlaceholder}
-            data-hook="videoUploadModalInput" onChange={this.onUrlChange}
-            value={this.state.url}
-            onDoubleClick={() =>
-              this.setState({
-                url: 'https://www.youtube.com/watch?v=_OBlgSz8sSM'
-              })
-            }
+            onChange={this.onUrlChange}
+            value={url}
+            error={!isVideoUrl(url) && submitted ? t('VideoUploadModal_Input_InvalidUrl') : null}
+            placeholder={t('VideoUploadModal_Input_Placeholder')}
+            theme={theme}
+            data-hook="videoUploadModalInput"
           />
-          {this.state.isValidUrl ? null : (
-            <Tooltip
-              content={'Invalid URL'}
-              moveBy={{ x: -23, y: -5 }}
-              theme={theme}
-            >
-              <span><ErrorIcon className={styles.errorIcon} /></span>
-            </Tooltip>
-          )}
         </div>
         <SettingsPanelFooter
           className={styles.modal_footer}

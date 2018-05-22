@@ -33,6 +33,7 @@
   "VideoPlugin_InsertButton_Tooltip" : "Add a Video",
   "VideoUploadModal_Header" : "Add a video from YouTube, Vimeo or Facebook",
   "VideoUploadModal_Input_Placeholder" : "e.g., https://youtu.be/6sx-xGiFIjk",
+  "VideoUploadModal_Input_InvalidUrl" : "Invalid URL",
   "VideoComponent_Overlay" : "To play this video, view this post from your live site.",
   "GalleryPlugin_InsertButton_Tooltip" : "Add a Gallery",
   "GalleryPlugin_Layout_Grid" : "Grid",
