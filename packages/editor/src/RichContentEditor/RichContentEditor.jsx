@@ -292,7 +292,32 @@ class RichContentEditor extends Component {
   };
 
   renderEditor = () => {
-    const { helpers, placeholder, editorKey } = this.props;
+    const { 
+      helpers, 
+      editorKey, 
+      tabIndex,
+      placeholder,
+      spellCheck,
+      stripPastedStyles,
+      autoCapitalize,
+      autoComplete,
+      autoCorrect,
+      ariaActiveDescendantID,
+      ariaAutoComplete,
+      ariaControls,
+      ariaDescribedBy,
+      ariaExpanded,
+      ariaLabel,
+      ariaMultiline,
+      onEscape,
+      onTab,
+      onUpArrow,
+      onDownArrow,
+      onRightArrow,
+      onLeftArrow,
+      onBlur,
+      onFocus,
+    } = this.props;
     const { editorState, readOnly } = this.state;
     return (
       <Editor
@@ -302,12 +327,30 @@ class RichContentEditor extends Component {
         plugins={this.plugins}
         blockStyleFn={this.blockStyleFn}
         handleKeyCommand={this.handleKeyCommand}
-        placeholder={placeholder || ''}
-        readOnly={!!readOnly}
-        helpers={helpers}
-        spellCheck
         editorKey={editorKey}
         keyBindingFn={keyBindingFn}
+        helpers={helpers}
+        tabIndex={tabIndex}
+        placeholder={placeholder || ''}
+        readOnly={!!readOnly}
+        spellCheck={spellCheck || true}
+        stripPastedStyles={stripPastedStyles}
+        autoCapitalize={autoCapitalize}
+        autoComplete={autoComplete}
+        autoCorrect={autoCorrect}
+        ariaControls={ariaControls}
+        ariaDescribedBy={ariaDescribedBy}
+        ariaExpanded={ariaExpanded}
+        ariaLabel={ariaLabel}
+        ariaMultiline={ariaMultiline}
+        onEscape={onEscape}
+        onTab={onTab}
+        onUpArrow={onUpArrow}
+        onDownArrow={onDownArrow}
+        onRightArrow={onRightArrow}
+        onLeftArrow={onLeftArrow}
+        onBlur={onBlur}
+        onFocus={onFocus}
       />
     );
   };
@@ -340,14 +383,12 @@ class RichContentEditor extends Component {
 }
 
 RichContentEditor.propTypes = {
+  editorKey: PropTypes.string,
   editorState: PropTypes.object,
   initialState: PropTypes.object,
   theme: PropTypes.object,
-  onChange: PropTypes.func,
   isMobile: PropTypes.bool,
-  readOnly: PropTypes.bool,
   helpers: PropTypes.object,
-  placeholder: PropTypes.string,
   t: PropTypes.func,
   sideToolbarOffset: PropTypes.object,
   hideFooterToolbar: PropTypes.bool,
@@ -357,8 +398,31 @@ RichContentEditor.propTypes = {
   config: PropTypes.object,
   anchorTarget: PropTypes.string,
   relValue: PropTypes.string,
-  editorKey: PropTypes.string,
-  style: PropTypes.object
+  style: PropTypes.object,
+  onChange: PropTypes.func,
+  tabIndex: PropTypes.number,
+  readOnly: PropTypes.bool,
+  placeholder: PropTypes.string,
+  spellCheck: PropTypes.bool,
+  stripPastedStyles: PropTypes.bool,
+  autoCapitalize: PropTypes.string,
+  autoComplete: PropTypes.string,
+  autoCorrect: PropTypes.string,
+  ariaActiveDescendantID: PropTypes.string,
+  ariaAutoComplete: PropTypes.string,
+  ariaControls: PropTypes.string,
+  ariaDescribedBy: PropTypes.string,
+  ariaExpanded: PropTypes.bool,
+  ariaLabel: PropTypes.string,
+  ariaMultiline: PropTypes.bool,
+  onEscape: PropTypes.func,
+  onTab: PropTypes.func,
+  onUpArrow: PropTypes.func,
+  onDownArrow: PropTypes.func,
+  onRightArrow: PropTypes.func,
+  onLeftArrow: PropTypes.func,
+  onBlur: PropTypes.func,
+  onFocus: PropTypes.func,
 };
 
 export default translate(null, { withRef: true })(RichContentEditor);
