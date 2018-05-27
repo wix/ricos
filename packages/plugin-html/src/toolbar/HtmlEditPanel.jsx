@@ -51,9 +51,9 @@ class HtmlEditPanel extends Component {
     let error = null;
 
     if (!isHttpsUrl(url)) {
-      error = 'HtmlPlugin_HttpsError';
+      error = 'HtmlEditPanel_HttpsError';
     } else if (!isValidUrl(url)) {
-      error = 'HtmlPlugin_UrlError';
+      error = 'HtmlEditPanel_UrlError';
     }
 
     return error;
@@ -71,8 +71,8 @@ class HtmlEditPanel extends Component {
           value={this.state.srcType}
           onChange={this.handleSrcTypeChange}
           dataSource={[
-            { value: SRC_TYPE_HTML, labelText: t('HtmlPlugin_Code') },
-            { value: SRC_TYPE_URL, labelText: t('HtmlPlugin_Source') },
+            { value: SRC_TYPE_HTML, labelText: t('HtmlEditPanel_Code') },
+            { value: SRC_TYPE_URL, labelText: t('HtmlEditPanel_Source') },
           ]}
           inline
         />
@@ -107,7 +107,7 @@ class HtmlEditPanel extends Component {
             )}
             onClick={this.handleCancelClick}
           >
-            {t('HtmlPlugin_Cancel')}
+            {t('HtmlEditPanel_Cancel')}
           </button>
           <button
             className={classNames(
@@ -116,7 +116,7 @@ class HtmlEditPanel extends Component {
             )}
             onClick={this.handleUpdateClick}
           >
-            {t('HtmlPlugin_Update')}
+            {t('HtmlEditPanel_Update')}
           </button>
         </div>
       </div>
