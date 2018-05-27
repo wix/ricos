@@ -16,10 +16,6 @@ class HtmlEditPanel extends Component {
     submitted: false,
   };
 
-  componentWillUnmount() {
-    this.handleUpdateClick();
-  }
-
   handleSrcTypeChange = srcType => {
     this.setState({ srcType }, this.updateComponentData);
   };
