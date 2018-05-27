@@ -17,12 +17,13 @@
   line-height: 1.5;
   border: 0;
   background: transparent;
+  cursor: pointer;
 }
 
 .htmlEditPanel_primaryButton {
-
+  padding-right: 0;
 }
 
 .htmlEditPanel_secondaryButton {
-
+  padding-left: 0;
 }

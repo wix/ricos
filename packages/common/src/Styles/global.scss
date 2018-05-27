@@ -121,7 +121,7 @@
   padding: 10px;
   background: $primary-color-light;
   color: $secondary-text-color;
-  border-radius: 0 2px 2px;
+  border-radius: $toolbarBorderRadius;
   box-shadow: rgb(220, 220, 220) 1px 1px 3px 1px;
 }
 

@@ -1,7 +1,6 @@
-@import "./palette";
+@import './consts';
+@import './palette';
 @import './mixins';
-
-$borderRadius: 6px;
 
 .pluginToolbar {
   min-height: 50px;
@@ -10,7 +9,7 @@ $borderRadius: 6px;
   position: absolute;
   border: 1px solid #ddd;
   background: #fff;
-  border-radius: $borderRadius;
+  border-radius: $toolbarBorderRadius;
   z-index: 4;
   box-sizing: border-box;
   max-width: 100%;
@@ -35,7 +34,7 @@ $borderRadius: 6px;
 }
 
 .pluginToolbar_inlinePanel {
-  padding: 0 23px;
+  padding: 0 24px;
   border-top: 1px solid rgba(117, 117, 117, 0.2);
 }
 
@@ -75,7 +74,7 @@ $borderRadius: 6px;
 .pluginToolbar_responsiveArrowLeft {
   right: 0;
   border-left: 1px solid $toolbar-border-color;
-  border-radius: 0 $borderRadius $borderRadius 0;
+  border-radius: 0 $toolbarBorderRadius $toolbarBorderRadius 0;
   > i {
     margin-right: 3px;
     transform: rotate(45deg);
@@ -85,7 +84,7 @@ $borderRadius: 6px;
 .pluginToolbar_responsiveArrowRight {
   right: 0;
   border-left: 1px solid $toolbar-border-color;
-  border-radius: 0 $borderRadius $borderRadius 0;
+  border-radius: 0 $toolbarBorderRadius $toolbarBorderRadius 0;
   > i {
     margin-right: 3px;
     transform: rotate(225deg);
