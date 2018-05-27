@@ -15,6 +15,7 @@ const createHtmlPlugin = (config = {}) => {
     toolbar: createToolbar({
       helpers,
       t,
+      isMobile,
     }),
     helpers,
     isMobile,
