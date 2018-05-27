@@ -19,6 +19,8 @@
   "HtmlPlugin_Code" : "Code",
   "HtmlPlugin_Update" : "Update",
   "HtmlPlugin_Cancel" : "Cancel",
+  "HtmlPlugin_HttpsError" : "URL must start with HTTPS.",
+  "HtmlPlugin_UrlError" : "Check the URL and try again.",
   "ImagePlugin_InsertButton_Tooltip" : "Add an Image",
   "ImageSettings_MobileHeader_Cancel" : "Cancel",
   "ImageSettings_MobileHeader_Save" : "Save",

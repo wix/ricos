@@ -16,3 +16,5 @@ export const isVideoUrl = url => [isYoutube, isFacebook, isVimeo].some(f => f(ur
 export const isValidUrl = url => linkify.test(url);
 
 export const normalizeURL = url => (linkify.match(url) || [{}])[0].url;
+
+export const isHttpsUrl = url => /^https:/.test(url);

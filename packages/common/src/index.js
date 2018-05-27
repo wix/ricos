@@ -71,7 +71,8 @@ export { default as normalizeInitialState } from './Utils/normalizeInitialState'
 export {
   isValidUrl,
   isVideoUrl,
-  normalizeURL
+  normalizeURL,
+  isHttpsUrl
 } from './Utils/urlValidators';
 export {
   insertLink,

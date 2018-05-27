@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import debounce from 'lodash/debounce';
-import { RadioGroupHorizontal } from 'wix-rich-content-common';
+import { RadioGroupHorizontal, TextInput, isHttpsUrl, isValidUrl } from 'wix-rich-content-common';
 import { SRC_TYPE_HTML, SRC_TYPE_URL } from '../constants';
 import TextArea from './TextArea';
 import styles from './HtmlEditPanel.scss';
@@ -13,6 +13,7 @@ class HtmlEditPanel extends Component {
   state = {
     srcType: this.initialData.srcType,
     [this.initialData.srcType]: this.initialData.src,
+    submitted: false,
   };
 
   handleSrcTypeChange = srcType => {
@@ -37,8 +38,29 @@ class HtmlEditPanel extends Component {
     this.props.close();
   };
 
+  handleUpdateClick = () => {
+    if (this.state.srcType !== SRC_TYPE_URL || !this.getUrlError()) {
+      this.props.close();
+    }
+
+    this.setState({ submitted: true });
+  };
+
+  getUrlError() {
+    const { url } = this.state;
+    let error = null;
+
+    if (!isHttpsUrl(url)) {
+      error = 'HtmlPlugin_HttpsError';
+    } else if (!isValidUrl(url)) {
+      error = 'HtmlPlugin_UrlError';
+    }
+
+    return error;
+  }
+
   render = () => {
-    const { srcType } = this.state;
+    const { srcType, submitted } = this.state;
     const { t, tabIndex, theme } = this.props;
 
     return (
@@ -56,11 +78,23 @@ class HtmlEditPanel extends Component {
 
         <div className={styles.htmlEditPanel_input}>
           {srcType === SRC_TYPE_HTML && (
-            <TextArea name={SRC_TYPE_HTML} onChange={this.handleSrcChange} tabIndex={tabIndex} value={this.state.html}/>
+            <TextArea
+              name={SRC_TYPE_HTML}
+              onChange={this.handleSrcChange}
+              tabIndex={tabIndex}
+              value={this.state.html}
+            />
           )}
 
           {srcType === SRC_TYPE_URL && (
-            <input name={SRC_TYPE_URL} onChange={this.handleSrcChange} tabIndex={tabIndex} value={this.state.url}/>
+            <TextInput
+              name={SRC_TYPE_URL}
+              onChange={this.handleSrcChange}
+              tabIndex={tabIndex}
+              value={this.state.url}
+              error={submitted ? this.getUrlError() : null}
+              theme={theme}
+            />
           )}
         </div>
 
@@ -79,7 +113,7 @@ class HtmlEditPanel extends Component {
               styles.htmlEditPanel_button,
               styles.htmlEditPanel_primaryButton
             )}
-            onClick={this.props.close}
+            onClick={this.handleUpdateClick}
           >
             {t('HtmlPlugin_Update')}
           </button>
