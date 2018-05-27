@@ -13,11 +13,16 @@ import {
   MAX_WIDTH,
   MIN_HEIGHT,
   MAX_HEIGHT,
+  SRC_TYPE_HTML,
+  SRC_TYPE_URL,
 } from '../constants';
 import EditPanel from './HtmlEditPanel';
 
 const getAlignmentButtonProps = componentData => ({ disabled: get(componentData, 'config.width', 0) > MAX_ALIGNMENT_WIDTH });
-
+const TOOLTIP_TEXT_BY_SRC_TYPE = {
+  [SRC_TYPE_HTML]: 'HtmlPlugin_EditHtml_Tooltip',
+  [SRC_TYPE_URL]: 'HtmlPlugin_EditUrl_Tooltip',
+};
 export default () => {
   return [
     {
@@ -25,7 +30,8 @@ export default () => {
       keyName: 'edit',
       panelContent: translate(null)(EditPanel),
       icon: EditIcon,
-      tooltipTextKey: 'EditButton_Tooltip',
+      mapComponentDataToButtonProps: ({ src, srcType }) =>
+        ({ tooltipTextKey: src ? TOOLTIP_TEXT_BY_SRC_TYPE[srcType] : 'HtmlPlugin_EditEmpty_Tooltip' }),
     },
     { type: BUTTONS.SEPARATOR },
     { type: BUTTONS.WIDTH, min: MIN_WIDTH, max: MAX_WIDTH },
