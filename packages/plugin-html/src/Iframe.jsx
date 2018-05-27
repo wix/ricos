@@ -7,8 +7,6 @@ const Iframe = ({ iframeRef, ...otherProps }) => (
     ref={iframeRef}
     className={styles.iframe}
     title="remote content"
-    frameBorder="0"
-    scrolling="no"
     allowTransparency
     {...otherProps}
   />
