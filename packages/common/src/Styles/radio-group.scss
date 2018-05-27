@@ -27,9 +27,7 @@
 }
 
 .radioGroup_input {
-  opacity: 0;
-  width: 0.1px;
-  height: 0.1px;
+  display: none;
 }
 
 .radioGroup_input:checked + .radioGroup_button {

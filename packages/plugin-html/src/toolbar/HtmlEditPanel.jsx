@@ -74,6 +74,7 @@ class HtmlEditPanel extends Component {
             { value: SRC_TYPE_HTML, labelText: t('HtmlPlugin_Code') },
             { value: SRC_TYPE_URL, labelText: t('HtmlPlugin_Source') },
           ]}
+          inline
         />
 
         <div className={styles.htmlEditPanel_input}>

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import RadioGroup from './RadioGroup';
 import { mergeStyles } from '../Utils/mergeStyles';
 import styles from '../Styles/radio-group-horizontal.scss';
@@ -13,11 +14,17 @@ class RadioGroupHorizontal extends Component {
   }
 
   render() {
-    const { label, readOnly, ...props } = this.props;
+    const { label, readOnly, inline, ...props } = this.props;
+    const { styles } = this;
+    const groupClassName = classNames(
+      styles.radioGroupHorizontal_group,
+      inline && styles.radioGroupHorizontal_groupInline,
+      !inline && styles.radioGroupHorizontal_groupTwoColumns,
+    );
     return (
-      <div className={readOnly ? this.styles.radioGroupHorizontal_readOnly : ''}>
-        {label ? <span id={`${this.id}_label`} className={this.styles.radioGroupHorizontal_title}>{label}</span> : null}
-        <RadioGroup ariaLabelledBy={`${this.id}_label`} {...props} readOnly={readOnly} className={this.styles.radioGroupHorizontal_group} />
+      <div className={readOnly ? styles.radioGroupHorizontal_readOnly : ''}>
+        {label ? <span id={`${this.id}_label`} className={styles.radioGroupHorizontal_title}>{label}</span> : null}
+        <RadioGroup ariaLabelledBy={`${this.id}_label`} {...props} readOnly={readOnly} className={groupClassName} />
       </div>
     );
   }
@@ -31,6 +38,7 @@ RadioGroupHorizontal.propTypes = {
   theme: PropTypes.object.isRequired,
   onChange: PropTypes.func.isRequired,
   value: PropTypes.string.isRequired,
+  inline: PropTypes.bool,
 };
 
 export default RadioGroupHorizontal;
