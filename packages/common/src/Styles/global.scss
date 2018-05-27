@@ -41,6 +41,13 @@
   display: none;
 }
 
+.pluginContainer,
+.pluginContainerReadOnly {
+  @include phone {
+    max-width: 100%;
+  }
+}
+
 .pluginContainerReadOnly {
   @extend .fontElementMap;
 }
