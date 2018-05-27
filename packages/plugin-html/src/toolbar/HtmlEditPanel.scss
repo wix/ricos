@@ -1,3 +1,6 @@
+@import '../../../common/src/Styles/palette';
+@import '../../../common/src/Styles/fonts';
+
 .htmlEditPanel {
   padding: 18px 0 15px;
 }
@@ -12,8 +15,12 @@
 }
 
 .htmlEditPanel_button {
+  @extend %regularText;
+
   height: 21px;
+  padding: 0;
   font-size: 14px;
+  font-weight: 300;
   line-height: 1.5;
   border: 0;
   background: transparent;
@@ -21,9 +28,9 @@
 }
 
 .htmlEditPanel_primaryButton {
-  padding-right: 0;
+  color: $accent-color;
 }
 
 .htmlEditPanel_secondaryButton {
-  padding-left: 0;
+  color: $modal-input-color;
 }
