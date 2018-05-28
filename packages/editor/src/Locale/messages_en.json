@@ -23,6 +23,8 @@
   "HtmlEditPanel_Cancel" : "Cancel",
   "HtmlEditPanel_HttpsError" : "URL must start with HTTPS.",
   "HtmlEditPanel_UrlError" : "Check the URL and try again.",
+  "HtmlEditPanel_HtmlInput_Placeholder": "Add your code here (HTTPS only)",
+  "HtmlEditPanel_UrlInput_Placeholder": "HTTPS only",
   "ImagePlugin_InsertButton_Tooltip" : "Add an Image",
   "ImageSettings_MobileHeader_Cancel" : "Cancel",
   "ImageSettings_MobileHeader_Save" : "Save",

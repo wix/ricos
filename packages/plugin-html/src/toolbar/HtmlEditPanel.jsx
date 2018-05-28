@@ -47,13 +47,14 @@ class HtmlEditPanel extends Component {
   };
 
   getUrlError() {
+    const { t } = this.props;
     const { url } = this.state;
     let error = null;
 
     if (!isHttpsUrl(url)) {
-      error = 'HtmlEditPanel_HttpsError';
+      error = t('HtmlEditPanel_HttpsError');
     } else if (!isValidUrl(url)) {
-      error = 'HtmlEditPanel_UrlError';
+      error = t('HtmlEditPanel_UrlError');
     }
 
     return error;
@@ -84,6 +85,7 @@ class HtmlEditPanel extends Component {
               onChange={this.handleSrcChange}
               tabIndex={tabIndex}
               value={this.state.html}
+              placeholder={t('HtmlEditPanel_HtmlInput_Placeholder')}
             />
           )}
 
@@ -95,6 +97,7 @@ class HtmlEditPanel extends Component {
               value={this.state.url}
               error={submitted ? this.getUrlError() : null}
               theme={theme}
+              placeholder={t('HtmlEditPanel_UrlInput_Placeholder')}
             />
           )}
         </div>
