@@ -43,6 +43,8 @@
 
 .pluginContainer,
 .pluginContainerReadOnly {
+  position: relative;
+
   @include phone {
     max-width: 100%;
   }

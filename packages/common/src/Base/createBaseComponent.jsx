@@ -271,7 +271,7 @@ const createBaseComponent = ({ PluginComponent, theme, settings, pubsub, helpers
         });
       /* eslint-disable jsx-a11y/anchor-has-content */
       return (
-        <div style={{ position: 'relative', width, height }} className={ContainerClassNames}>
+        <div style={{ width, height }} className={ContainerClassNames}>
           {!isNil(link) ? <div>{component}<a className={anchorClass} {...anchorProps}/></div> : component}
           {!this.state.readOnly && <div role="none" data-hook={'componentOverlay'} onClick={onClick} className={overlayClassNames} />}
         </div>
