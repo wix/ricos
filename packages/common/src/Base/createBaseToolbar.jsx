@@ -315,9 +315,7 @@ export default function createToolbar({ buttons, theme, pubsub, helpers, isMobil
       };
     };
 
-    hidePanels = () => {
-      this.setState({ panel: null, inlinePanel: null });
-    }
+    hidePanels = () => this.setState({ panel: null, inlinePanel: null });
 
     displayPanel = panel => {
       this.hidePanels();
