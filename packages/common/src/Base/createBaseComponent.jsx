@@ -219,8 +219,10 @@ const createBaseComponent = ({ PluginComponent, theme, settings, pubsub, helpers
         {
           [Styles.pluginContainer]: !readOnly,
           [Styles.pluginContainerReadOnly]: readOnly,
+          [Styles.pluginContainerMobile]: isMobile,
           [theme.pluginContainer]: !readOnly,
           [theme.pluginContainerReadOnly]: readOnly,
+          [theme.pluginContainerMobile]: isMobile,
         },
         isFunction(PluginComponent.WrappedComponent.alignmentClassName) ?
           PluginComponent.WrappedComponent.alignmentClassName(this.state.componentData, theme, Styles, isMobile) :

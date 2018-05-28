@@ -44,10 +44,6 @@
 .pluginContainer,
 .pluginContainerReadOnly {
   position: relative;
-
-  @include phone {
-    max-width: 100%;
-  }
 }
 
 .pluginContainerReadOnly {
@@ -60,6 +56,10 @@
   &:hover {
     @include block-select;
   }
+}
+
+.pluginContainerMobile {
+  max-width: 100%;
 }
 
 .alignLeft {
