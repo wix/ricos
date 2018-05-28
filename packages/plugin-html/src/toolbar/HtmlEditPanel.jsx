@@ -51,10 +51,10 @@ class HtmlEditPanel extends Component {
     const { url } = this.state;
     let error = null;
 
-    if (!isHttpsUrl(url)) {
-      error = t('HtmlEditPanel_HttpsError');
-    } else if (!isValidUrl(url)) {
+    if (!url || !isValidUrl(url)) {
       error = t('HtmlEditPanel_UrlError');
+    } else if (!isHttpsUrl(url)) {
+      error = t('HtmlEditPanel_HttpsError');
     }
 
     return error;
