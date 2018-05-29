@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import debounce from 'lodash/debounce';
-import { RadioGroupHorizontal, TextInput, isHttpsUrl, isValidUrl } from 'wix-rich-content-common';
+import { RadioGroupHorizontal, TextInput, startsWithHttps, isValidUrl } from 'wix-rich-content-common';
 import { SRC_TYPE_HTML, SRC_TYPE_URL } from '../constants';
 import TextArea from './TextArea';
 import styles from './HtmlEditPanel.scss';
@@ -53,7 +53,7 @@ class HtmlEditPanel extends Component {
 
     if (!url || !isValidUrl(url)) {
       error = t('HtmlEditPanel_UrlError');
-    } else if (!isHttpsUrl(url)) {
+    } else if (!startsWithHttps(url)) {
       error = t('HtmlEditPanel_HttpsError');
     }
 

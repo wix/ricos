@@ -72,7 +72,7 @@ export {
   isValidUrl,
   isVideoUrl,
   normalizeURL,
-  isHttpsUrl
+  startsWithHttps
 } from './Utils/urlValidators';
 export {
   insertLink,
