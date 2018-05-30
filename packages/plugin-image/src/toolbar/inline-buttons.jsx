@@ -1,5 +1,5 @@
 import { BUTTONS, PluginSettingsIcon, getModalStyles } from 'wix-rich-content-common';
-import ImageSettingsModal from './image-settings';
+import { Modals } from '../modals';
 import MediaReplaceIcon from '../icons/toolbar/media-replace.svg';
 
 const modalStyles = getModalStyles();
@@ -19,7 +19,7 @@ export default ({ t, anchorTarget, relValue }) => {
       keyName: 'settings',
       type: BUTTONS.EXTERNAL_MODAL,
       icon: PluginSettingsIcon,
-      modalElement: ImageSettingsModal,
+      modalName: Modals.IMAGE_SETTINGS,
       modalStyles,
       anchorTarget,
       relValue,

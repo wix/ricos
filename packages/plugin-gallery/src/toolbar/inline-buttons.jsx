@@ -1,5 +1,5 @@
 import { BUTTONS, PluginSettingsIcon, getModalStyles } from 'wix-rich-content-common';
-import GallerySettingsModal from '../components/gallery-settings-modal';
+import { Modals } from '../modals';
 import AddIcon from '../icons/toolbar/icon-upload.svg';
 import ManageMediaIcon from '../icons/manageMedia.svg';
 import { galleryLayoutsDropdown, switchLayout, getCurrentLayout } from '../helpers';
@@ -45,7 +45,7 @@ export default({ t }) => {
       keyName: 'manage_media',
       type: BUTTONS.EXTERNAL_MODAL,
       icon: ManageMediaIcon,
-      modalElement: GallerySettingsModal,
+      modalName: Modals.GALLERY_SETTINGS,
       activeTab: 'manage_media',
       modalStyles,
       t,
@@ -56,7 +56,7 @@ export default({ t }) => {
       keyName: 'advanced_settings',
       type: BUTTONS.EXTERNAL_MODAL,
       icon: PluginSettingsIcon,
-      modalElement: GallerySettingsModal,
+      modalName: Modals.GALLERY_SETTINGS,
       activeTab: 'advanced_settings',
       modalStyles,
       switchLayout,

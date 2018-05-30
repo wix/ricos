@@ -12,8 +12,9 @@ const Modals = {
   [MODALS.MOBILE_TEXT_LINK_MODAL]: MobileTextLinkModal,
 };
 
-const RichContentEditorModal = ({ modalName, modalElement, ...modalProps }) => {
-  const element = Modals[modalName] || modalElement;
+const RichContentEditorModal = ({ modalName, modalElement, modalsMap, ...modalProps }) => {
+  const ModalsMap = Object.assign({}, Modals, modalsMap);
+  const element = ModalsMap[modalName] || modalElement;
   if (!element) {
     console.error(`Attempted to open unknown external modal '${modalName}'`); //eslint-disable-line no-console
     return null;
@@ -24,6 +25,7 @@ const RichContentEditorModal = ({ modalName, modalElement, ...modalProps }) => {
 RichContentEditorModal.propTypes = {
   modalName: PropTypes.string,
   modalElement: PropTypes.func,
+  modalsMap: PropTypes.object,
   modalProps: PropTypes.object,
 };
 

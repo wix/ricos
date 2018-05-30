@@ -2,7 +2,8 @@
 import React, { Component } from 'react';
 import ReactModal from 'react-modal';
 import MobileDetect from 'mobile-detect';
-import plugins from './Plugins';
+import Plugins from './Plugins';
+import ModalsMap from './ModalsMap';
 import * as WixRichContentEditor from 'wix-rich-content-editor';
 import { testImages, testVideos } from './mock';
 // import testData from './testData/initialState';
@@ -37,7 +38,7 @@ class App extends Component {
   }
 
   initEditorProps() {
-    this.plugins = plugins;
+    this.plugins = Plugins;
     this.config = {
       hashtag: {
         createHref: decoratedText =>
@@ -246,7 +247,12 @@ class App extends Component {
               role="dialog"
               onRequestClose={this.closeModal}
             >
-              {this.state.showModal && <RichContentEditorModal {...this.state.modalProps} />}
+              {this.state.showModal &&
+                <RichContentEditorModal
+                  modalsMap={ModalsMap}
+                  {...this.state.modalProps}
+                />
+              }
             </ReactModal>
           </div>
         </div>
