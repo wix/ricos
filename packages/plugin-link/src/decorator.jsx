@@ -10,9 +10,9 @@ const findLinkEntities = (contentBlock, callback, contentState) => {
 };
 
 const Link = ({ entityKey, contentState, className, children, anchorTarget, relValue }) => {
-  const entity = contentState.getEntity(entityKey);
+  const componentData = contentState.getEntity(entityKey).getData();
   return (
-    <LinkViewer componentData={entity} className={className} anchorTarget={anchorTarget} relValue={relValue}>
+    <LinkViewer componentData={componentData} className={className} anchorTarget={anchorTarget} relValue={relValue}>
       {children}
     </LinkViewer>);
 };
