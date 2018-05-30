@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import { EditorState, Modifier } from '@wix/draft-js';
 import {
   getTextAlignment,
   AlignmentLeftIcon,
@@ -7,60 +6,51 @@ import {
   AlignmentRightIcon,
   AlignmentJustifyIcon,
 } from 'wix-rich-content-common';
-import TextButton from './TextButton';
-import TextAlignmentPanel from './TextAlignmentPanel';
+import {
+  AlignTextLeftButton,
+  AlignTextCenterButton,
+  AlignTextRightButton,
+  AlignTextJustifyButton,
+} from './TextButtons';
+import { createTextDropdownButton } from './utils';
 
-class TextAlignmentButton extends Component {
-
-  handleClick = () => this.props.onOverrideContent(TextAlignmentPanel);
-
-  getActiveIcon = () => {
-    const { getEditorState } = this.props;
-    // if the button is rendered before the editor
-    if (!getEditorState) {
-      return false;
-    }
-
-    const textAlignment = getTextAlignment(getEditorState());
-    switch (textAlignment) {
-      case 'center':
-        return <AlignmentCenterIcon />;
-      case 'right':
-        return <AlignmentRightIcon />;
-      case 'justify':
-        return <AlignmentJustifyIcon />;
-      case 'left':
-      default:
-        return <AlignmentLeftIcon />;
-    }
-  };
-
-  render() {
-    const { theme, isMobile, t, tabIndex } = this.props;
-    const alignmentButtonTooltip = t('TextAlignmentButton_Tooltip');
-    const textForHooks = alignmentButtonTooltip.replace(/\s+/, '');
-    const dataHookText = `textAlignmentButton_${textForHooks}`;
-
-    return (
-      <TextButton
-        icon={this.getActiveIcon}
-        theme={theme}
-        isMobile={isMobile}
-        dataHook={dataHookText} onClick={this.handleClick}
-        tooltipText={alignmentButtonTooltip}
-        tabIndex={tabIndex}
-      />
-    );
+const activeIcon = textAlignment => {
+  switch (textAlignment) {
+    case 'center':
+      return AlignmentCenterIcon;
+    case 'right':
+      return AlignmentRightIcon;
+    case 'justify':
+      return AlignmentJustifyIcon;
+    case 'left':
+    default:
+      return AlignmentLeftIcon;
   }
-}
-
-TextAlignmentButton.propTypes = {
-  getEditorState: PropTypes.func.isRequired,
-  onOverrideContent: PropTypes.func.isRequired,
-  theme: PropTypes.object,
-  isMobile: PropTypes.bool,
-  t: PropTypes.func,
-  tabIndex: PropTypes.number,
 };
 
-export default TextAlignmentButton;
+export default createTextDropdownButton({
+  buttons: [
+    AlignTextLeftButton,
+    AlignTextCenterButton,
+    AlignTextRightButton,
+    AlignTextJustifyButton,
+  ],
+  activeItem: ({ getEditorState, value }) => {
+    const alignment = value || getTextAlignment(getEditorState());
+    return {
+      alignment,
+      Icon: activeIcon(alignment),
+    };
+  },
+  onChange: (getEditorState, setEditorState, textAlignment) => {
+    const editorState = getEditorState();
+    const contentState = Modifier.mergeBlockData(
+      editorState.getCurrentContent(),
+      editorState.getSelection(),
+      { textAlignment }
+    );
+    const newEditorState = EditorState.push(editorState, contentState, 'change-block-data');
+    setEditorState(newEditorState);
+  },
+  tooltipTextKey: 'AlignTextDropdownButton_Tooltip',
+});

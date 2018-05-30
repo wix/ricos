@@ -95,6 +95,7 @@
   "IndentButton_Tooltip" : "Indent",
   "TitleButton_Tooltip" : "Title",
   "QuoteButton_Tooltip" : "Quote",
+  "AlignTextDropdownButton_Tooltip" : "Alignment",
   "AlignTextLeftButton_Tooltip" : "Align Left",
   "AlignTextCenterButton_Tooltip" : "Center",
   "AlignTextRightButton_Tooltip" : "Align Right",
