@@ -12,7 +12,7 @@ import createEditorToolbars from './Toolbars';
 import { getStaticTextToolbarId } from './Toolbars/toolbar-id';
 import createPlugins from './createPlugins';
 import { keyBindingFn, COMMANDS } from './keyBindings';
-import { MODALS, hasLinksInSelection, removeLinksInSelection, getModalStyles } from 'wix-rich-content-common';
+import { EditorModals, hasLinksInSelection, removeLinksInSelection, getModalStyles } from 'wix-rich-content-common';
 import normalizeInitialState from './normalizeInitialState';
 import styles from '~/Styles/rich-content-editor.scss';
 import draftStyles from '~/Styles/draft.scss';
@@ -131,7 +131,7 @@ class RichContentEditor extends Component {
     if (helpers && helpers.openModal) {
       const modalProps = { helpers, modalStyles, isMobile, getEditorState: () => this.state.editorState,
         setEditorState: editorState => this.setState({ editorState }), t, theme, anchorTarget,
-        relValue, modalName: MODALS.MOBILE_TEXT_LINK_MODAL, hidePopup: helpers.closeModal };
+        relValue, modalName: EditorModals.MOBILE_TEXT_LINK_MODAL, hidePopup: helpers.closeModal };
       helpers.openModal(modalProps);
     }
   }

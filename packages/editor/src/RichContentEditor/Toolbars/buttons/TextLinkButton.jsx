@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import decorateComponentWithProps from 'decorate-component-with-props';
-import { hasLinksInSelection, getModalStyles, LinkButton, MODALS } from 'wix-rich-content-common';
+import { hasLinksInSelection, getModalStyles, LinkButton, EditorModals } from 'wix-rich-content-common';
 import TextLinkPanel from './TextLinkPanel';
 
 export default class TextLinkButton extends Component {
@@ -33,7 +33,7 @@ export default class TextLinkButton extends Component {
           theme,
           anchorTarget,
           relValue,
-          modalName: MODALS.MOBILE_TEXT_LINK_MODAL,
+          modalName: EditorModals.MOBILE_TEXT_LINK_MODAL,
           hidePopup: helpers.closeModal
         };
         helpers.openModal(modalProps);

@@ -57,7 +57,7 @@ export { default as ToolbarButton } from './Components/ToolbarButton';
 export { default as Tooltip } from './Components/Tooltip';
 
 //Modals
-export { default as MODALS } from './Modals/keys';
+export { default as EditorModals } from './Modals/EditorModals';
 export { default as RichContentModal } from './Modals/RichContentModal';
 
 //Utils

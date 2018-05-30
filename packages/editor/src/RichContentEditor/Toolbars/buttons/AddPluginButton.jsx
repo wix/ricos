@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import TextButton from './TextButton';
-import { MODALS, getModalStyles } from 'wix-rich-content-common';
+import { EditorModals, getModalStyles } from 'wix-rich-content-common';
 import PlusIcon from '../icons/plus-default.svg';
 
 export default class AddPluginButton extends Component {
@@ -15,7 +15,7 @@ export default class AddPluginButton extends Component {
   openAddPluginModal = () => {
     const { getEditorState, setEditorState, pluginButtons, pubsub, theme, t } = this.props;
     this.props.openModal({
-      modalName: MODALS.MOBILE_ADD_PLUGIN,
+      modalName: EditorModals.MOBILE_ADD_PLUGIN,
       modalStyles: getModalStyles({ fullScreen: false }),
       structure: pluginButtons,
       theme,

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import decorateComponentWithProps from 'decorate-component-with-props';
-import MODALS from '../../Modals/keys';
+import EditorModals from '../../Modals/EditorModals';
 import { getModalStyles } from '../../Utils/getModalStyles';
 import LinkButton from '../../Components/LinkButton';
 import BlockLinkPanel from './BlockLinkPanel';
@@ -37,7 +37,7 @@ class BlockLinkButton extends Component {
           theme,
           anchorTarget,
           relValue,
-          modalName: MODALS.MOBILE_BLOCK_LINK_MODAL,
+          modalName: EditorModals.MOBILE_BLOCK_LINK_MODAL,
           hidePopup: helpers.closeModal
         };
         helpers.openModal(modalProps);
