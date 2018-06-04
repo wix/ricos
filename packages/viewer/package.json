@@ -48,7 +48,7 @@
     "focus-trap-react": "^3.1.2",
     "i18next": "^10.5.0",
     "linkify-it": "^2.0.3",
-    "lodash": "^4.17.4",
+    "lodash": "^4.17.10",
     "photography-client-lib": "^1.0.69",
     "react-i18next": "^7.6.1",
     "redraft": "^0.9.0",
@@ -75,10 +75,7 @@
     "prop-types": "^15.5.10",
     "react": "15.5.4",
     "react-dom": "15.5.4",
-    "react-test-renderer": "^15.6.1",
-    "webpack": "^3.11.0",
-    "webpack-bundle-analyzer": "^2.11.1",
-    "webpack-merge": "^4.1.2"
+    "react-test-renderer": "^15.6.1"
   },
   "unpkg": true,
   "publishConfig": {

@@ -1,25 +1,20 @@
 /* eslint-disable */
 const merge = require('webpack-merge');
-const webpack = require('webpack');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const prodConfig = {
-  plugins: [
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': '"production"',
-    }),
-    new UglifyJsPlugin({
-      parallel: true,
-      uglifyOptions: {
-        output: {
-          beautify: false,
-        },
-      },
-    }),
-    new OptimizeCssAssetsPlugin(),
-  ],
+  mode: 'production',
+  optimization: {
+    minimizer: [
+      new UglifyJsPlugin({
+        cache: true,
+        parallel: true,
+      }),
+      new OptimizeCSSAssetsPlugin({})
+    ]
+  },
 };
 
 module.exports = env => {

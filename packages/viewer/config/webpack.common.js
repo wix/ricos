@@ -1,5 +1,5 @@
 const path = require('path');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const FILE_NAME = 'wix-rich-content-viewer';
 const BASE_PATH = path.resolve(__dirname, '..');
 const ROOT_DIR = path.resolve(BASE_PATH, '..', '..');
@@ -22,17 +22,20 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: ['css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]', 'sass-loader'],
-        }),
+        use: [
+          'style-loader',
+          MiniCssExtractPlugin.loader,
+          'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]',
+          'sass-loader'
+        ]
       },
       {
         test: /\.css$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: ['css-loader'],
-        }),
+        use: [
+          'style-loader',
+          MiniCssExtractPlugin.loader,
+          'css-loader'
+        ]
       },
       {
         test: /\.(png|jpg|gif|svg)$/,
@@ -119,5 +122,9 @@ module.exports = {
     }
   ],
   stats: 'errors-only',
-  plugins: [new ExtractTextPlugin(`${FILE_NAME}.css`)],
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: `${FILE_NAME}.css`,
+    })
+  ],
 };

@@ -1,17 +1,18 @@
 const path = require('path');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const FILE_NAME = 'wix-rich-content-editor';
 const BASE_PATH = path.resolve(__dirname, '..');
 const ROOT_DIR = path.resolve(BASE_PATH, '..', '..');
 
 module.exports = {
-  entry: path.resolve(BASE_PATH, 'src', 'index.js'),
   output: {
     path: path.resolve(BASE_PATH, 'dist'),
     filename: `${FILE_NAME}.js`,
-    publicPath: '/assets/',
     library: FILE_NAME,
     libraryTarget: 'umd',
+  },
+  optimization: {
+    namedModules: false,
   },
   module: {
     rules: [
@@ -22,17 +23,25 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: ['css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]', 'sass-loader'],
-        }),
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              importLoaders: 1,
+              localIdentName: '[name]__[local]___[hash:base64:5]'
+            }
+          },
+          'sass-loader'
+        ]
       },
       {
         test: /\.css$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: ['css-loader'],
-        }),
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader'
+        ]
       },
       {
         test: /\.(png|jpg|gif|svg)$/,
@@ -83,7 +92,7 @@ module.exports = {
   },
   resolve: {
     modules: ['node_modules', path.resolve(BASE_PATH, 'src')],
-    extensions: ['.js', '.json', '.jsx', '.css'],
+    extensions: ['.js', '.json', '.jsx', '.scss', '.css'],
     alias: {
       'draft-js': path.resolve(ROOT_DIR, 'node_modules', '@wix', 'draft-js'),
     },
@@ -119,5 +128,9 @@ module.exports = {
     }
   ],
   stats: 'errors-only',
-  plugins: [new ExtractTextPlugin(`${FILE_NAME}.css`)],
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: `${FILE_NAME}.css`,
+    })
+  ],
 };

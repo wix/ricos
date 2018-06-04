@@ -39,8 +39,9 @@
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
+    "babel-plugin-dynamic-import-webpack": "^1.0.2",
     "eslint": "^4.19.1",
-    "webpack": "^3.11.0"
+    "webpack": "^4.10.2"
   },
   "dependencies": {
     "focus-trap-react": "^3.1.2",

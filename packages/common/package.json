@@ -39,7 +39,7 @@
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "eslint": "^4.19.1",
-    "webpack": "^3.11.0"
+    "webpack": "^4.10.2"
   },
   "dependencies": {
     "classnames": "^2.2.5",

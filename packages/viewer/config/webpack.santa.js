@@ -2,29 +2,34 @@
 const merge = require('webpack-merge');
 const prod = require('./webpack.prod.js');
 const webpack = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const FILE_NAME = 'wix-rich-content-viewer';
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const FILE_NAME = 'wix-rich-content-editor';
 
 const santaConfig = {
+  mode: 'production',
   module: {
     rules: [
       {
         test: /\.scss$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: ['css-loader?modules&importLoaders=1&localIdentName=[local]', 'sass-loader'],
-        }),
+        use: [
+          'style-loader',
+          MiniCssExtractPlugin.loader,
+          'css-loader?modules&importLoaders=1&localIdentName=[local]',
+          'sass-loader'
+        ]
       }
     ]
   },
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
-        NODE_ENV: JSON.stringify("production"),
+        NODE_ENV: JSON.stringify('production'),
         SANTA: JSON.stringify(true),
       }
     }),
-    new ExtractTextPlugin(`${FILE_NAME}-santa.css`)
+    new MiniCssExtractPlugin({
+      filename: `${FILE_NAME}-santa.css`
+    })
   ]
 };
 
