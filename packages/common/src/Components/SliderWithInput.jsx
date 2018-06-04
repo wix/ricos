@@ -6,12 +6,17 @@ import Slider from './Slider';
 import styles from '../Styles/slider-with-input.scss';
 
 class SliderWithInput extends Component {
+  styles = mergeStyles({ styles, theme: this.props.theme });
+  id = `sld_${Math.floor(Math.random() * 9999)}`;
 
-  constructor(props) {
-    super(props);
-    this.styles = mergeStyles({ styles, theme: props.theme });
-    this.id = `sld_${Math.floor(Math.random() * 9999)}`;
-  }
+  handleInputChange = event => {
+    const { max, min } = this.props;
+    const value = event.target.valueAsNumber || 0;
+    const normalizedValue = Math.min(Math.max(min, value), max);
+
+    this.props.onChange(normalizedValue);
+  };
+
   render() {
     const { readOnly, label, value, min, max, onChange, theme, sliderDataHook, inputDataHook } = this.props;
     let ariaProps = label ? { 'aria-labelledby': `${this.id}_lbl` } : {};
@@ -33,7 +38,7 @@ class SliderWithInput extends Component {
           />
           <input
             tabIndex={readOnly ? -1 : 0} type="number" value={value} data-hook={inputDataHook} {...ariaProps}
-            onChange={e => onChange(e.target.valueAsNumber)} className={this.styles.sliderWithInput_input}
+            onChange={this.handleInputChange} className={this.styles.sliderWithInput_input}
             min={min} max={max} step="1" role="spinbutton"
           />
         </div>
@@ -46,8 +51,8 @@ class SliderWithInput extends Component {
 SliderWithInput.propTypes = {
   label: PropTypes.string,
   value: PropTypes.number.isRequired,
-  min: PropTypes.number,
-  max: PropTypes.number,
+  min: PropTypes.number.isRequired,
+  max: PropTypes.number.isRequired,
   readOnly: PropTypes.bool,
   theme: PropTypes.object.isRequired,
   onChange: PropTypes.func.isRequired,
