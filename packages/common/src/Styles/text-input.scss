@@ -14,15 +14,20 @@
   border: 1px solid rgba(51, 51, 51, 0.1);
   padding-left: 18px;
   box-sizing: border-box;
+
+  &::placeholder {
+    opacity: 0.4;
+  }
 }
 
 .textInput_input_invalid {
+  padding-right: 39px;
   border-color: red;
 }
 
 .textInput_errorIcon {
   position: absolute;
-  right: 12px;
+  right: 13px;
   bottom: 0;
   top: 0;
   margin: auto;

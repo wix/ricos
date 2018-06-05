@@ -2,13 +2,21 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import debounce from 'lodash/debounce';
-import { RadioGroupHorizontal, TextInput, startsWithHttps, isValidUrl } from 'wix-rich-content-common';
+import {
+  RadioGroupHorizontal,
+  TextInput,
+  InputWithLabel,
+  startsWithHttps,
+  isValidUrl,
+  mergeStyles,
+} from 'wix-rich-content-common';
 import { SRC_TYPE_HTML, SRC_TYPE_URL } from '../constants';
-import TextArea from './TextArea';
 import styles from './HtmlEditPanel.scss';
 
 class HtmlEditPanel extends Component {
   initialData = this.props.componentData;
+
+  style = mergeStyles({ styles, theme: this.props.theme });
 
   state = {
     srcType: this.initialData.srcType,
@@ -80,13 +88,17 @@ class HtmlEditPanel extends Component {
 
         <div className={styles.htmlEditPanel_input}>
           {srcType === SRC_TYPE_HTML && (
-            <TextArea
-              name={SRC_TYPE_HTML}
-              onChange={this.handleSrcChange}
-              tabIndex={tabIndex}
-              value={this.state.html}
-              placeholder={t('HtmlEditPanel_HtmlInput_Placeholder')}
-            />
+            <div className={styles.htmlEditPanel_textArea}>
+              <InputWithLabel
+                name={SRC_TYPE_HTML}
+                onChange={this.handleSrcChange}
+                tabIndex={tabIndex}
+                value={this.state.html}
+                placeholder={t('HtmlEditPanel_HtmlInput_Placeholder')}
+                isTextArea
+                isFullHeight
+              />
+            </div>
           )}
 
           {srcType === SRC_TYPE_URL && (

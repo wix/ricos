@@ -12,8 +12,14 @@ class InputWithLabel extends Component {
 
   renderInput = () => {
     const { styles } = this;
-    const { id, placeholder, value, onChange, isTextArea, dataHook } = this.props;
-    const inputClassName = classNames(styles.inputWithLabel_input, { [styles.inputWithLabel_textArea]: isTextArea });
+    const { id, placeholder, value, onChange, isTextArea, isFullHeight, dataHook } = this.props;
+    const inputClassName = classNames(
+      styles.inputWithLabel_input,
+      {
+        [styles.inputWithLabel_textArea]: isTextArea,
+        [styles.inputWithLabel_fullHeight]: isFullHeight,
+      }
+    );
     if (isTextArea) {
       return <textarea className={inputClassName} placeholder={placeholder} id={id} value={value} data-hook={dataHook} onChange={onChange}/>;
     } else {
@@ -40,6 +46,7 @@ InputWithLabel.propTypes = {
   value: PropTypes.string,
   onChange: PropTypes.func.isRequired,
   isTextArea: PropTypes.bool,
+  isFullHeight: PropTypes.bool,
   dataHook: PropTypes.string,
 };
 
