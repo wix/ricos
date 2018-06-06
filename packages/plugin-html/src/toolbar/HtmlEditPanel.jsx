@@ -16,7 +16,7 @@ import styles from './HtmlEditPanel.scss';
 class HtmlEditPanel extends Component {
   initialData = this.props.componentData;
 
-  style = mergeStyles({ styles, theme: this.props.theme });
+  styles = mergeStyles({ styles, theme: this.props.theme });
 
   state = {
     srcType: this.initialData.srcType,
@@ -69,6 +69,7 @@ class HtmlEditPanel extends Component {
   }
 
   render = () => {
+    const { styles } = this;
     const { srcType, submitted } = this.state;
     const { t, tabIndex, theme } = this.props;
 
