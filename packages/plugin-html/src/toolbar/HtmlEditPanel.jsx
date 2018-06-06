@@ -13,6 +13,21 @@ import {
 import { SRC_TYPE_HTML, SRC_TYPE_URL } from '../constants';
 import styles from './HtmlEditPanel.scss';
 
+const VALIDATORS = {
+  [SRC_TYPE_HTML]: () => null,
+  [SRC_TYPE_URL]: url => {
+    let error = null;
+
+    if (!url || !isValidUrl(url)) {
+      error = 'HtmlEditPanel_UrlError';
+    } else if (!startsWithHttps(url)) {
+      error = 'HtmlEditPanel_HttpsError';
+    }
+
+    return error;
+  },
+};
+
 class HtmlEditPanel extends Component {
   initialData = this.props.componentData;
 
@@ -30,7 +45,10 @@ class HtmlEditPanel extends Component {
 
   handleSrcChange = event => {
     const { name, value } = event.target;
-    this.setState({ [name]: value }, this.updateComponentData);
+
+    if (!VALIDATORS[name](value)) {
+      this.setState({ [name]: value }, this.updateComponentData);
+    }
   };
 
   updateComponentData = debounce(() => {
@@ -47,26 +65,14 @@ class HtmlEditPanel extends Component {
   };
 
   handleUpdateClick = () => {
-    if (this.state.srcType !== SRC_TYPE_URL || !this.getUrlError()) {
+    const { srcType } = this.state;
+
+    if (!VALIDATORS[srcType](this.state[srcType])) {
       this.props.close();
     }
 
     this.setState({ submitted: true });
   };
-
-  getUrlError() {
-    const { t } = this.props;
-    const { url } = this.state;
-    let error = null;
-
-    if (!url || !isValidUrl(url)) {
-      error = t('HtmlEditPanel_UrlError');
-    } else if (!startsWithHttps(url)) {
-      error = t('HtmlEditPanel_HttpsError');
-    }
-
-    return error;
-  }
 
   render = () => {
     const { styles } = this;
@@ -94,7 +100,7 @@ class HtmlEditPanel extends Component {
                 name={SRC_TYPE_HTML}
                 onChange={this.handleSrcChange}
                 tabIndex={tabIndex}
-                value={this.state.html}
+                value={this.state[SRC_TYPE_HTML]}
                 placeholder={t('HtmlEditPanel_HtmlInput_Placeholder')}
                 theme={theme}
                 isTextArea
@@ -108,8 +114,8 @@ class HtmlEditPanel extends Component {
               name={SRC_TYPE_URL}
               onChange={this.handleSrcChange}
               tabIndex={tabIndex}
-              value={this.state.url}
-              error={submitted ? this.getUrlError() : null}
+              value={this.state[SRC_TYPE_URL]}
+              error={submitted ? VALIDATORS[SRC_TYPE_URL](this.state.url) : null}
               theme={theme}
               placeholder={t('HtmlEditPanel_UrlInput_Placeholder')}
             />
