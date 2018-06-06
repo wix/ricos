@@ -96,6 +96,7 @@ class HtmlEditPanel extends Component {
                 tabIndex={tabIndex}
                 value={this.state.html}
                 placeholder={t('HtmlEditPanel_HtmlInput_Placeholder')}
+                theme={theme}
                 isTextArea
                 isFullHeight
               />
