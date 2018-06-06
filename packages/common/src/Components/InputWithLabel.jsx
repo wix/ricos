@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import omit from 'lodash/omit';
 import classNames from 'classnames';
 import { mergeStyles } from '../Utils/mergeStyles';
 import styles from '../Styles/input-with-label.scss';
@@ -12,7 +13,8 @@ class InputWithLabel extends Component {
 
   renderInput = () => {
     const { styles } = this;
-    const { id, placeholder, value, onChange, isTextArea, isFullHeight, dataHook } = this.props;
+    const { id, isTextArea, isFullHeight, dataHook, ...otherProps } = this.props;
+    const inputProps = omit(otherProps, ['theme']);
     const inputClassName = classNames(
       styles.inputWithLabel_input,
       {
@@ -20,11 +22,9 @@ class InputWithLabel extends Component {
         [styles.inputWithLabel_fullHeight]: isFullHeight,
       }
     );
-    if (isTextArea) {
-      return <textarea className={inputClassName} placeholder={placeholder} id={id} value={value} data-hook={dataHook} onChange={onChange}/>;
-    } else {
-      return <input className={inputClassName} placeholder={placeholder} id={id} value={value} data-hook={dataHook} onChange={onChange}/>;
-    }
+    const InputComponent = isTextArea ? 'textarea' : 'input';
+
+    return <InputComponent className={inputClassName} id={id} data-hook={dataHook} {...inputProps}/>;
   };
 
   render() {
@@ -39,12 +39,9 @@ class InputWithLabel extends Component {
 }
 
 InputWithLabel.propTypes = {
-  id: PropTypes.string.isRequired,
+  id: PropTypes.string,
   label: PropTypes.string,
-  placeholder: PropTypes.string,
   theme: PropTypes.object.isRequired,
-  value: PropTypes.string,
-  onChange: PropTypes.func.isRequired,
   isTextArea: PropTypes.bool,
   isFullHeight: PropTypes.bool,
   dataHook: PropTypes.string,
