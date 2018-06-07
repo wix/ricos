@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import debounce from 'lodash/debounce';
 import {
   RadioGroupHorizontal,
   TextInput,
@@ -39,25 +38,22 @@ class HtmlEditPanel extends Component {
     submitted: false,
   };
 
+  shouldSaveOnUnmount = true;
+
+  componentWillUnmount() {
+    if (this.shouldSaveOnUnmount && this.isValid()) {
+      this.updateComponentData();
+    }
+  }
+
   handleSrcTypeChange = srcType => {
-    this.setState({ srcType }, this.updateComponentData);
+    this.setState({ srcType });
   };
 
   handleSrcChange = event => {
     const { name, value } = event.target;
-
-    if (!VALIDATORS[name](value)) {
-      this.setState({ [name]: value }, this.updateComponentData);
-    }
+    this.setState({ [name]: value });
   };
-
-  updateComponentData = debounce(() => {
-    const { srcType } = this.state;
-    this.props.store.update('componentData', {
-      srcType,
-      src: this.state[srcType] || '',
-    });
-  }, 100);
 
   handleCancelClick = () => {
     this.props.store.update('componentData', this.initialData);
@@ -65,14 +61,33 @@ class HtmlEditPanel extends Component {
   };
 
   handleUpdateClick = () => {
-    const { srcType } = this.state;
-
-    if (!VALIDATORS[srcType](this.state[srcType])) {
-      this.props.close();
+    if (this.isValid()) {
+      this.updateComponentData();
+      this.close();
     }
 
     this.setState({ submitted: true });
   };
+
+  close = () => {
+    this.shouldSaveOnUnmount = false;
+    this.props.close();
+  };
+
+  updateComponentData = () => {
+    const { srcType } = this.state;
+    this.props.store.update('componentData', {
+      srcType,
+      src: this.state[srcType] || '',
+    });
+  };
+
+  getError = () => {
+    const { srcType } = this.state;
+    return VALIDATORS[srcType](this.state[srcType]);
+  };
+
+  isValid = () => !this.getError();
 
   render = () => {
     const { styles } = this;
@@ -115,7 +130,7 @@ class HtmlEditPanel extends Component {
               onChange={this.handleSrcChange}
               tabIndex={tabIndex}
               value={this.state[SRC_TYPE_URL]}
-              error={submitted ? VALIDATORS[SRC_TYPE_URL](this.state.url) : null}
+              error={submitted ? t(this.getError()) : null}
               theme={theme}
               placeholder={t('HtmlEditPanel_UrlInput_Placeholder')}
             />
