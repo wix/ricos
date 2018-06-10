@@ -9,6 +9,20 @@ import toolbarStyles from '~/Styles/mobile-toolbar.scss';
 import buttonStyles from '~/Styles/mobile-toolbar-button.scss';
 import separatorStyles from '~/Styles/mobile-toolbar-separator.scss';
 
+const createMobileToolbar = ({ buttons, helpers, pubsub, getEditorState, setEditorState, anchorTarget, relValue, theme, t }) => {
+  const mobileTheme = getMobileTheme(theme);
+  return createStaticToolbar({
+    helpers,
+    t,
+    name: 'MobileToolbar',
+    theme: mobileTheme,
+    structure: getMobileButtons({ buttons, helpers, pubsub, getEditorState, setEditorState, mobileTheme, t }),
+    anchorTarget,
+    relValue,
+    isMobile: true
+  });
+};
+
 const getMobileTheme = theme => {
   const {
     toolbarStyles: toolbarTheme,
@@ -111,16 +125,4 @@ const getMobileButtons = ({ buttons, helpers, pubsub, getEditorState, setEditorS
   return structure;
 };
 
-export default ({ buttons, helpers, pubsub, getEditorState, setEditorState, anchorTarget, relValue, theme, t }) => {
-  const mobileTheme = getMobileTheme(theme);
-  return createStaticToolbar({
-    helpers,
-    t,
-    name: 'MobileToolbar',
-    theme: mobileTheme,
-    structure: getMobileButtons({ buttons, helpers, pubsub, getEditorState, setEditorState, mobileTheme, t }),
-    anchorTarget,
-    relValue,
-    isMobile: true
-  });
-};
+export default createMobileToolbar;
