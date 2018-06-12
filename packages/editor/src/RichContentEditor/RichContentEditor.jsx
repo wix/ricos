@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { EditorState, convertFromRaw } from '@wix/draft-js';
 import Editor from 'draft-js-plugins-editor';
-import isUndefined from 'lodash/isUndefined';
 import get from 'lodash/get';
 import includes from 'lodash/includes';
 import { translate } from 'react-i18next';
@@ -23,7 +22,6 @@ class RichContentEditor extends Component {
     super(props);
     this.state = {
       editorState: this.getInitialEditorState(),
-      readOnly: props.readOnly || false,
       theme: props.theme || {}
     };
     this.refId = Math.floor(Math.random() * 9999);
@@ -113,9 +111,6 @@ class RichContentEditor extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (!isUndefined(nextProps.readOnly) && this.props.readOnly !== nextProps.readOnly) {
-      this.setState({ readOnly: nextProps.readOnly });
-    }
     if (this.props.editorState !== nextProps.editorState) {
       this.setState({ editorState: nextProps.editorState });
     }
@@ -159,7 +154,7 @@ class RichContentEditor extends Component {
   setEditor = ref => this.editor = get(ref, 'editor', ref);
 
   renderToolbars = () => {
-    if (!this.state.readOnly) {
+    if (!this.props.readOnly) {
       const toolbarsToIgnore = [
         'MobileToolbar',
         'StaticTextToolbar',
@@ -180,7 +175,7 @@ class RichContentEditor extends Component {
   };
 
   renderInlineModals = () => {
-    if (!this.state.readOnly) {
+    if (!this.props.readOnly) {
       //eslint-disable-next-line array-callback-return
       const modals = this.plugins.map((plugin, index) => {
         if (plugin.InlineModals && plugin.InlineModals.length > 0) {
@@ -214,8 +209,9 @@ class RichContentEditor extends Component {
       onBlur,
       onFocus,
       textAlignment,
+      readOnly,
     } = this.props;
-    const { editorState, readOnly, theme } = this.state;
+    const { editorState, theme } = this.state;
     return (
       <Editor
         ref={this.setEditor}
