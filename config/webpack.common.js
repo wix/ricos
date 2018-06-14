@@ -12,7 +12,7 @@ module.exports = env => {
     },
     output: {
       path: path.resolve(BASE_PATH, 'dist'),
-      filename: `[name].js`,
+      filename: '[name].js',
       library: FILE_NAME,
       libraryTarget: 'umd',
       globalObject: 'typeof self !== \'undefined\' ? self : this', //https://github.com/webpack/webpack/issues/6522

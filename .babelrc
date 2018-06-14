@@ -1,7 +1,16 @@
 {
-  "presets": ["env", "stage-0", "react"],
+  "presets": [
+    ["env", {
+      "modules": false,
+      "loose": true
+    }],
+    "stage-0",
+    "react"
+  ],
   "plugins": [
-    "transform-class-properties",
+    ["transform-class-properties", {
+      "loose": true
+    }],
     "transform-runtime",
     [
       "module-resolver",
@@ -11,5 +20,20 @@
         }
       }
     ]
-  ]
+  ],
+  "env": {
+    "commonjs": {
+      "presets": [
+        ["env", {
+          "modules": "commonjs",
+          "loose": true
+        }],
+        "stage-0",
+        "react"
+      ]
+    },
+    "test": {
+      "plugins": ["transform-es2015-modules-commonjs"]
+    }
+  }
 }

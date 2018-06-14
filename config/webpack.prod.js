@@ -12,8 +12,11 @@ const prodConfig = {
       new UglifyJsPlugin({
         cache: true,
         parallel: true,
+        include: /\.min\.js$/,
       }),
-      new OptimizeCSSAssetsPlugin({})
+      new OptimizeCSSAssetsPlugin({
+        assetNameRegExp: /\.min\.css$/
+      })
     ]
   },
 };
@@ -23,5 +26,8 @@ module.exports = env => {
     prodConfig.plugins.push(new BundleAnalyzerPlugin());
   }
   const common = require('./webpack.common.js')(env);
+  prodConfig.entry = {
+    [`${env.FILE_NAME}.min`]: common.entry[env.FILE_NAME],
+  };
   return merge(common, prodConfig);
 };

@@ -5,9 +5,12 @@ const BASE_PATH = path.resolve(__dirname, '..');
 const ROOT_DIR = path.resolve(BASE_PATH, '..', '..');
 
 module.exports = {
+  entry: {
+    [FILE_NAME]: path.resolve(BASE_PATH, 'src'),
+  },
   output: {
     path: path.resolve(BASE_PATH, 'dist'),
-    filename: `${FILE_NAME}.js`,
+    filename: '[name].js',
     library: FILE_NAME,
     libraryTarget: 'umd',
     globalObject: 'typeof self !== \'undefined\' ? self : this', //https://github.com/webpack/webpack/issues/6522
@@ -129,7 +132,7 @@ module.exports = {
   stats: 'errors-only',
   plugins: [
     new MiniCssExtractPlugin({
-      filename: `${FILE_NAME}.css`,
+      filename: '[name].css',
     })
   ],
 };

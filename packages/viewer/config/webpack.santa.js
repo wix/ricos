@@ -28,7 +28,7 @@ const santaConfig = {
       }
     }),
     new MiniCssExtractPlugin({
-      filename: `${FILE_NAME}-santa.css`
+      filename: 'santa-[name].css',
     })
   ]
 };
@@ -36,7 +36,7 @@ const santaConfig = {
 module.exports = function(env) {
   const prodConfig = prod(env);
   prodConfig.module.rules = prodConfig.module.rules.filter(rule => rule.test.toString() !== /\.scss$/.toString())
-  prodConfig.output.filename = `${FILE_NAME}-santa.js`;
+  prodConfig.output.filename = 'santa-[name].js';
 
   return merge(prodConfig, santaConfig);
 };

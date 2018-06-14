@@ -5,10 +5,12 @@ const BASE_PATH = path.resolve(__dirname, '..');
 const ROOT_DIR = path.resolve(BASE_PATH, '..', '..');
 
 module.exports = {
-  entry: path.resolve(BASE_PATH, 'src', 'index.js'),
+  entry: {
+    [FILE_NAME]: path.resolve(BASE_PATH, 'src'),
+  },
   output: {
     path: path.resolve(BASE_PATH, 'dist'),
-    filename: `${FILE_NAME}.js`,
+    filename: '[name].js',
     publicPath: '/assets/',
     library: FILE_NAME,
     libraryTarget: 'umd',
@@ -128,7 +130,7 @@ module.exports = {
   stats: 'errors-only',
   plugins: [
     new MiniCssExtractPlugin({
-      filename: 'styles.css',
+      filename: '[name].css',
     })
   ],
 };
