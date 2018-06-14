@@ -1,7 +1,7 @@
-@import "../../../common/src/Styles/palette.scss";
-@import "../../../common/src/Styles/consts.scss";
-@import "../../../common/src/Styles/global.scss";
-@import "../../../common/src/Styles/fonts.scss";
+@import "~wix-rich-content-common/src/Styles/palette.scss";
+@import "~wix-rich-content-common/src/Styles/consts.scss";
+@import "~wix-rich-content-common/src/Styles/global.scss";
+@import "~wix-rich-content-common/src/Styles/fonts.scss";
 
 .wrapper {
   @extend .fontElementMap;

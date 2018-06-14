@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import isEmpty from 'lodash/isEmpty';
 
 import { mergeStyles, ToolbarButton } from 'wix-rich-content-common';
-import styles from 'wix-rich-content-common/dist/Styles/inline-toolbar-button.scss';
+import styles from 'wix-rich-content-common/dist/lib/Styles/inline-toolbar-button.scss';
 
 export default class TextButton extends Component {
 

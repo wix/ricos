@@ -44,7 +44,7 @@ module.exports = {
         ]
       },
       {
-        test: /\.(png|jpg|gif|svg)$/,
+        test: /\.(png|jpg|gif)$/,
         issuer: /\.(s)?css$/,
         use: [
           {
@@ -66,8 +66,6 @@ module.exports = {
       },
       {
         test: /\.svg$/,
-        issuer: /\.js(x)?$/,
-        include: [path.resolve(BASE_PATH, 'src')],
         loaders: [
           {
             loader: 'babel-loader',

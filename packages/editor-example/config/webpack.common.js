@@ -19,6 +19,9 @@ module.exports = env => ({
   },
   resolve: {
     extensions: ['.js', '.jsx', '.json', '.scss', '.css'],
+    alias: {
+      'draft-js': path.resolve(__dirname, '..', '..', '..', 'node_modules', '@wix', 'draft-js'),
+    },
   },
   module: {
     rules: [
@@ -59,15 +62,49 @@ module.exports = env => ({
         ]
       },
       {
-        exclude: [
-          /\.(js|jsx)$/,
-          /\.html$/,
-          /\.json$/,
-          /\.css$/,
-          /\.scss$/,
+        test: /\.(png|jpg|gif)$/,
+        issuer: /\.(s)?css$/,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 8192,
+            },
+          },
         ],
-        loader: "url-loader",
-      }
+      },
+      {
+        test: /\.(woff|eot|ttf|svg|woff2)$/,
+        issuer: /\.(s)?css$/,
+        use: [
+          {
+            loader: 'url-loader',
+          },
+        ],
+      },
+      {
+        test: /\.svg$/,
+        issuer: /\.js(x)?$/,
+        loaders: [
+          {
+            loader: 'babel-loader',
+            query: 'presets=react',
+          },
+          {
+            loader: 'react-svg-loader',
+            query: JSON.stringify({
+              jsx: true,
+              svgo: {
+                plugins: [
+                  { cleanupIDs: false },
+                  { removeViewBox: false },
+                  { removeDimensions: true },
+                ],
+              },
+            }),
+          },
+        ],
+      },
     ]
   },
   plugins: [

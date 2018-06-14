@@ -17,10 +17,11 @@
   "files": [
     "dist"
   ],
-  "main": "dist/wix-rich-content-plugin-link.js",
+  "main": "dist/lib/index.js",
+  "module": "dist/es/index.js",
   "scripts": {
     "clean": "rm -rf dist/",
-    "transpile": "babel -q src -d dist",
+    "transpile": "babel -q src -d dist/lib --copy-files",
     "webpack": "webpack --env.FILE_NAME=wix-rich-content-plugin-link",
     "prebuild": "npm run transpile",
     "build:dev": "npm run transpile && npm run webpack -- --config ./config/webpack.dev.js",

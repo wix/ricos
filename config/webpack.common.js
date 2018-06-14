@@ -50,7 +50,7 @@ module.exports = env => {
           ]
         },
         {
-          test: /\.(png|jpg|gif|svg)$/,
+          test: /\.(png|jpg|gif)$/,
           issuer: /\.(s)?css$/,
           use: [
             {
@@ -62,7 +62,7 @@ module.exports = env => {
           ],
         },
         {
-          test: /\.(woff|eot|ttf|woff2)$/,
+          test: /\.(woff|eot|ttf|svg|woff2)$/,
           issuer: /\.(s)?css$/,
           use: [
             {
@@ -73,9 +73,6 @@ module.exports = env => {
         {
           test: /\.svg$/,
           issuer: /\.js(x)?$/,
-          include: [
-            path.resolve(BASE_PATH, 'src'),
-          ],
           loaders: [
             {
               loader: 'babel-loader',

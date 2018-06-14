@@ -1,5 +1,6 @@
-@import '../../../common/src/Styles/palette';
-@import '../../../common/src/Styles/mixins';
+@import '~wix-rich-content-common/src/Styles/palette';
+@import '~wix-rich-content-common/src/Styles/mixins';
+
 $borderRadius: 6px;
 .inlineToolbar {
   min-height: 50px;

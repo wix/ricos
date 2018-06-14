@@ -5,14 +5,15 @@
     "name": "Jonathan Bachman",
     "email": "jonathanb@wix.com"
   },
-  "main": "dist/wix-rich-content-viewer.js",
+  "main": "dist/lib/index.js",
+  "module": "dist/es/index.js",
   "files": [
     "dist"
   ],
   "scripts": {
     "clean": "rm -rf dist/",
     "pretranspile": "npm run clean",
-    "transpile": "babel -q src -d dist/src --copy-files",
+    "transpile": "babel -q src -d dist/lib --copy-files",
     "prebuild": "npm run transpile",
     "build": "npm run build:santa && npm run build:prod",
     "build:santa": "webpack --config ./config/webpack.santa.js",
