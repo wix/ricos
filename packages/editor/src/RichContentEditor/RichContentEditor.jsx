@@ -21,7 +21,6 @@ class RichContentEditor extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      editorState: this.getInitialEditorState(),
       theme: props.theme || {}
     };
     this.refId = Math.floor(Math.random() * 9999);
@@ -71,8 +70,8 @@ class RichContentEditor extends Component {
       hideFooterToolbar,
       sideToolbarOffset,
       theme: theme || {},
-      getEditorState: () => this.state.editorState,
-      setEditorState: editorState => this.setState({ editorState }),
+      getEditorState: () => this.getEditorState(),
+      setEditorState: editorState => this.updateEditorState(editorState),
       t,
       refId: this.refId
     });
@@ -84,11 +83,9 @@ class RichContentEditor extends Component {
       TextToolbar: this.props.textToolbarType === 'static' ? this.toolbars.textStatic.Toolbar : null
     }
   )
+
   getInitialEditorState() {
-    const { editorState, initialState } = this.props;
-    if (editorState) {
-      return editorState;
-    }
+    const { initialState } = this.props;
     if (initialState) {
       const rawContentState = normalizeInitialState(initialState);
       return EditorState.createWithContent(
@@ -111,9 +108,6 @@ class RichContentEditor extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.editorState !== nextProps.editorState) {
-      this.setState({ editorState: nextProps.editorState });
-    }
     if (this.props.theme !== nextProps.theme) {
       this.setState({ theme: nextProps.theme });
     }
@@ -126,8 +120,8 @@ class RichContentEditor extends Component {
     const { helpers, isMobile, anchorTarget, relValue, t, theme } = this.props;
     const modalStyles = getModalStyles({ fullScreen: false });
     if (helpers && helpers.openModal) {
-      const modalProps = { helpers, modalStyles, isMobile, getEditorState: () => this.state.editorState,
-        setEditorState: editorState => this.setState({ editorState }), t, theme, anchorTarget,
+      const modalProps = { helpers, modalStyles, isMobile, getEditorState: () => this.getEditorState(),
+        setEditorState: editorState => this.updateEditorState(editorState), t, theme, anchorTarget,
         relValue, modalName: EditorModals.MOBILE_TEXT_LINK_MODAL, hidePopup: helpers.closeModal };
       helpers.openModal(modalProps);
     }
@@ -140,12 +134,9 @@ class RichContentEditor extends Component {
     return element && element.querySelector('*[tabindex="0"]');
   }
 
-  getEditorState = () => this.state.editorState;
+  getEditorState = () => this.props.editorState || this.getInitialEditorState();
 
-  updateEditorState = editorState => {
-    this.setState({ editorState });
-    this.props.onChange && this.props.onChange(editorState);
-  };
+  updateEditorState = editorState => this.props.onChange(editorState);
 
   focus = () => this.editor.focus();
 
@@ -213,7 +204,8 @@ class RichContentEditor extends Component {
       handleBeforeInput,
       handlePastedText,
     } = this.props;
-    const { editorState, theme } = this.state;
+    const { theme } = this.state;
+    const editorState = this.getEditorState();
     return (
       <Editor
         ref={this.setEditor}
@@ -281,7 +273,7 @@ class RichContentEditor extends Component {
 
 RichContentEditor.propTypes = {
   editorKey: PropTypes.string,
-  editorState: PropTypes.object,
+  editorState: PropTypes.object.isRequired,
   initialState: PropTypes.object,
   theme: PropTypes.object,
   isMobile: PropTypes.bool,
@@ -296,7 +288,7 @@ RichContentEditor.propTypes = {
   anchorTarget: PropTypes.string,
   relValue: PropTypes.string,
   style: PropTypes.object,
-  onChange: PropTypes.func,
+  onChange: PropTypes.func.isRequired,
   tabIndex: PropTypes.number,
   readOnly: PropTypes.bool,
   placeholder: PropTypes.string,
