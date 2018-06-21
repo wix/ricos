@@ -8,6 +8,8 @@
   "scripts": {
     "bootstrap": "lerna bootstrap --hoist",
     "postinstall": "npm run bootstrap",
+    "clean": "lerna run clean",
+    "rebuild:dev": "lerna clean && rm package-lock.json && npm i && npm run clean && npm run build:dev",
     "build:dev": "lerna run --stream --scope=wix-rich-content-* build:dev",
     "build": "lerna run --stream --scope=wix-rich-content-* build",
     "watch": "lerna run --stream watch",
