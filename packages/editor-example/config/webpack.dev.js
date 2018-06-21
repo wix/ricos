@@ -3,7 +3,7 @@ const merge = require('webpack-merge');
 
 const devConfig = {
   mode: 'development',
-  devtool: 'cheap-module-eval-source-map',
+  devtool: 'eval-source-map',
   optimization: {
     namedModules: false
   },
