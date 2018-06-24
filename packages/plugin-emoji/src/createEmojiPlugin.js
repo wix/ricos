@@ -4,7 +4,9 @@ import createEmojiPlugin from 'draft-js-emoji-plugin';
 import { EXTERNAL_EMOJI_TYPE } from './types';
 import SelectButton from './SelectButton';
 import { getEmojiGroups } from './emojiGroups';
-import * as Styles from './styles.scss';
+import * as Styles from '../statics/styles.scss';
+
+// import 'draft-js-emoji-plugin/lib/plugin.css';
 
 const createExternalEmojiPlugin = (config = {}) => {
   const type = EXTERNAL_EMOJI_TYPE;
