@@ -1,4 +1,4 @@
-import { InsertPluginIcon } from '../icons';
+import { InsertPluginIcon } from '../../statics/icons';
 import { DEFAULTS } from '../constants';
 
 export default ({ helpers, t }) => {

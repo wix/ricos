@@ -3,7 +3,7 @@ import { createBasePlugin, mergeStyles } from 'wix-rich-content-common';
 import { DIVIDER_TYPE } from './constants';
 import DividerComponent from './components/divider-component';
 import createToolbar from './toolbar';
-import Styles from './default-styles.scss';
+import Styles from '../statics/styles/default-styles.scss';
 
 const createDividerPlugin = (config = {}) => {
   const { decorator, helpers, theme, isMobile, t, anchorTarget, relValue, divider: settings } = config;
