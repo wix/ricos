@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import CameraIcon from './icons/video-camera.svg';
+import CameraIcon from '../../statics/icons/video-camera.svg';
 import classNames from 'classnames';
 import { mergeStyles, isVideoUrl, SettingsPanelFooter, TextInput } from 'wix-rich-content-common';
-import styles from './video-url-input-modal.scss';
+import styles from '../../statics/styles/video-url-input-modal.scss';
 
 export default class VideoURLInputModal extends Component {
   constructor(props) {
