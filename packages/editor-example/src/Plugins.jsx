@@ -8,16 +8,6 @@ import { createHtmlPlugin } from 'wix-rich-content-plugin-html';
 import { createDividerPlugin } from 'wix-rich-content-plugin-divider';
 import { createExternalMentionsPlugin } from 'wix-rich-content-plugin-mentions';
 
-import 'wix-rich-content-plugin-link/dist/wix-rich-content-plugin-link.css';
-import 'wix-rich-content-plugin-hashtag/dist/wix-rich-content-plugin-hashtag.css';
-import 'wix-rich-content-plugin-emoji/dist/wix-rich-content-plugin-emoji.css';
-import 'wix-rich-content-plugin-image/dist/wix-rich-content-plugin-image.css';
-import 'wix-rich-content-plugin-video/dist/wix-rich-content-plugin-video.css';
-import 'wix-rich-content-plugin-gallery/dist/wix-rich-content-plugin-gallery.css';
-import 'wix-rich-content-plugin-html/dist/wix-rich-content-plugin-html.css';
-import 'wix-rich-content-plugin-divider/dist/wix-rich-content-plugin-divider.css';
-import 'wix-rich-content-plugin-mentions/dist/wix-rich-content-plugin-mentions.css';
-
 const plugins = [
   createImagePlugin,
   createGalleryPlugin,

@@ -10,7 +10,6 @@ import { Button, normalizeInitialState } from 'wix-rich-content-common';
 import { testImages, testVideos } from './mock';
 // import testData from './testData/initialState';
 import './App.css';
-import 'wix-rich-content-editor/dist/wix-rich-content-editor.css';
 import theme from './theme/theme'; // must import after custom styles
 import RichContentRawDataViewer from './RichContentRawDataViewer';
 

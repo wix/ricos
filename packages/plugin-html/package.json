@@ -21,17 +21,13 @@
   "module": "dist/es/index.js",
   "scripts": {
     "clean": "rm -rf dist/",
-    "transpile:es": "babel -q src -d dist/es --copy-files",
-    "transpile:commonjs": "BABEL_ENV=commonjs babel -q src -d dist/lib --copy-files",
-    "transpile": "npm run transpile:es && npm run transpile:commonjs",
-    "webpack": "webpack --env.FILE_NAME=wix-rich-content-plugin-html",
-    "prebuild:dev": "npm run transpile",
-    "prebuild": "npm run transpile",
-    "build:dev": "npm run webpack -- --config ./config/webpack.dev.js",
-    "build:analyze": "npm run build -- --env.analyzeBundle",
-    "build": "npm run webpack -- --config ./config/webpack.prod.js",
-    "watch": "npm run build:dev -- --watch",
-    "watch:prod": "npm run build -- --watch",
+    "babel:es": "babel -q src -d dist/es --source-maps --copy-files",
+    "babel:commonjs": "BABEL_ENV=commonjs babel -q src -d dist/lib --copy-files",
+    "prebuild": "npm run clean",
+    "build": "npm run babel:es && npm run babel:commonjs",
+    "postbuild": "cp -R statics dist/statics",
+    "prewatch": "npm run clean && mkdir dist && cp -R statics dist/statics",
+    "watch": "npm run babel:es -- --watch",
     "release": "wnpm-release --no-shrinkwrap",
     "test": "eslint 'src/**/*.{js,jsx}'"
   },
@@ -45,10 +41,7 @@
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
-    "copy-webpack-plugin": "^4.5.1",
-    "eslint": "^4.19.1",
-    "webpack": "^4.12.0",
-    "webpack-cli": "^3.0.4"
+    "eslint": "^4.19.1"
   },
   "dependencies": {
     "react-i18next": "^7.6.1",

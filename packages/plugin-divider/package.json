@@ -21,17 +21,14 @@
   "module": "dist/es/index.js",
   "scripts": {
     "clean": "rm -rf dist/",
-    "transpile:es": "babel -q src -d dist/es --copy-files",
-    "transpile:commonjs": "BABEL_ENV=commonjs babel -q src -d dist/lib --copy-files",
-    "transpile": "npm run transpile:es && npm run transpile:commonjs",
-    "webpack": "webpack --env.FILE_NAME=wix-rich-content-plugin-divider",
-    "prebuild:dev": "npm run transpile",
-    "prebuild": "npm run transpile",
-    "build:dev": "npm run webpack -- --config ./config/webpack.dev.js",
-    "build:analyze": "npm run build -- --env.analyzeBundle",
-    "build": "npm run webpack -- --config ./config/webpack.prod.js",
-    "watch": "npm run build:dev -- --watch",
-    "watch:prod": "npm run build -- --watch",
+    "babel:es": "babel -q src -d dist/es --source-maps --copy-files",
+    "babel:commonjs": "BABEL_ENV=commonjs babel -q src -d dist/lib --copy-files",
+    "prebuild:dev": "npm run clean",
+    "build:dev": "npm run babel:es",
+    "prebuild": "npm run clean",
+    "build": "npm run babel:es && npm run babel:commonjs",
+    "prewatch": "npm run clean",
+    "watch": "npm run babel:es -- --watch",
     "release": "wnpm-release --no-shrinkwrap",
     "test": "eslint 'src/**/*.{js,jsx}'"
   },
@@ -47,9 +44,7 @@
     "babel-cli": "^6.26.0",
     "eslint": "^4.19.1",
     "eslint-import-resolver-lerna": "^1.0.0",
-    "eslint-plugin-import": "2.8.0",
-    "webpack": "^4.12.0",
-    "webpack-cli": "^3.0.4"
+    "eslint-plugin-import": "2.8.0"
   },
   "dependencies": {
     "wix-rich-content-common": "^1.0.27"

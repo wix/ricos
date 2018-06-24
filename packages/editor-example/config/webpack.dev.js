@@ -7,6 +7,15 @@ const devConfig = {
   optimization: {
     namedModules: false
   },
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        use: ['source-map-loader'],
+        enforce: 'pre'
+      }
+    ]
+  },
   serve: {
     port: 3000,
     hot: true,
