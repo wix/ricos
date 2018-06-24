@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import hashtagRegexes from './hashtagRegexes';
-import styles from './hashtag.scss';
+import styles from '../statics/hashtag.scss';
 
 const findHashtagEntities = (contentBlock, callback) => {
   const text = contentBlock.getText();
