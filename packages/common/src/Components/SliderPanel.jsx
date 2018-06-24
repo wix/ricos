@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import SliderWithInput from './SliderWithInput';
-import styles from '../Styles/slider-panel.scss';
+import styles from '../../statics/styles/slider-panel.scss';
 
 const SliderPanel = props => {
   const { theme, getValue, onChange, ...otherProps } = props;

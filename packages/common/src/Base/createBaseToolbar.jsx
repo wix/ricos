@@ -14,8 +14,8 @@ import {
   DeleteButton,
 } from './buttons';
 import Panel from '../Components/Panel';
-import toolbarStyles from '../Styles/plugin-toolbar.scss';
-import buttonStyles from '../Styles/plugin-toolbar-button.scss';
+import toolbarStyles from '../../statics/styles/plugin-toolbar.scss';
+import buttonStyles from '../../statics/styles/plugin-toolbar-button.scss';
 
 const toolbarOffset = 12;
 

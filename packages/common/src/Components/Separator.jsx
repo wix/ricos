@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import Styles from '../Styles/toolbar-separator.scss';
+import Styles from '../../statics/styles/toolbar-separator.scss';
 
 const Separator = ({ className = '', horizontal = false }) => {
   const separatorClassNames = classNames((horizontal ? Styles.horizontalSeparator : Styles.separator), className);

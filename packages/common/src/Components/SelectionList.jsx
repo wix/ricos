@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { mergeStyles } from '../Utils/mergeStyles';
-import styles from '../Styles/selection-list.scss';
+import styles from '../../statics/styles/selection-list.scss';
 
 function defaultDataMapper(item) {
   switch (typeof item) {

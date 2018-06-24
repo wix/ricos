@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { mergeStyles } from '../Utils/mergeStyles';
-import styles from '../Styles/settings-section.scss';
+import styles from '../../statics/styles/settings-section.scss';
 
 class SettingsSection extends React.Component {
   constructor(props) {

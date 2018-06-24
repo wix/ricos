@@ -21,7 +21,7 @@ import {
   WidthIcon,
   HeightIcon,
   DeleteIcon
-} from '../icons';
+} from '../../../statics/icons';
 
 export { BUTTONS };
 

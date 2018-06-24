@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { mergeStyles } from '../Utils/mergeStyles';
-import styles from '../Styles/tooltip.scss';
+import styles from '../../statics/styles/tooltip.scss';
 
 const isValidProperty = property => /^--\S+$/.test(property);
 

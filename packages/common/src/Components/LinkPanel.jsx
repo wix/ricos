@@ -7,8 +7,8 @@ import { mergeStyles } from '../Utils/mergeStyles';
 import { isValidUrl } from '../Utils/urlValidators';
 import Tooltip from './Tooltip';
 import Checkbox from './Checkbox';
-import ErrorIcon from './icons/error.svg';
-import styles from '../Styles/link-panel.scss';
+import { ErrorIcon } from '../../statics/icons';
+import styles from '../../statics/styles/link-panel.scss';
 
 class LinkPanel extends Component {
   constructor(props) {

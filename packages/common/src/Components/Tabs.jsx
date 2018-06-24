@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { mergeStyles } from '../Utils/mergeStyles';
-import styles from '../Styles/tabs.scss';
+import styles from '../../statics/styles/tabs.scss';
 
 const tabPropTypes = {
   theme: PropTypes.object.isRequired,

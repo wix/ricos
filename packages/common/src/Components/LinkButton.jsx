@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import isEmpty from 'lodash/isEmpty';
 import ToolbarButton from './ToolbarButton';
-import LinkIcon from './icons/link.svg';
-import styles from '../Styles/inline-toolbar-button.scss';
+import { LinkIcon } from '../../statics/icons';
+import styles from '../../statics/styles/inline-toolbar-button.scss';
 
 export default class LinkButton extends Component {
 

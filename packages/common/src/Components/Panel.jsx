@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import Styles from '../Styles/global.scss';
+import Styles from '../../statics/styles/global.scss';
 
 export default class Panel extends Component {
   constructor(props) {

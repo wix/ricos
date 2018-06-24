@@ -9,7 +9,7 @@ import createHocName from '../Utils/createHocName';
 import getDisplayName from '../Utils/getDisplayName';
 import { alignmentClassName, sizeClassName, textWrapClassName } from '../Utils/classNameStrategies';
 import { normalizeUrl } from '../Utils/urlValidators';
-import Styles from '../Styles/global.scss';
+import Styles from '../../statics/styles/global.scss';
 
 const DEFAULTS = {
   alignment: null,

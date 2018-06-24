@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Button from './Button';
 import { mergeStyles } from '../Utils/mergeStyles';
-import styles from '../Styles/settings-panel-footer.scss';
+import styles from '../../statics/styles/settings-panel-footer.scss';
 
 class SettingsPanelFooter extends Component {
   constructor(props) {

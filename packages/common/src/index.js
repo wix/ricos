@@ -10,19 +10,7 @@ export {
   SizeFullWidthButton,
   DeleteButton
 } from './Base/buttons';
-export {
-  SizeLargeIcon,
-  SizeMediumIcon,
-  SizeSmallIcon,
-  SizeSmallLeftIcon,
-  SizeSmallCenterIcon,
-  SizeSmallRightIcon,
-  AlignmentLeftIcon,
-  AlignmentCenterIcon,
-  AlignmentRightIcon,
-  AlignmentJustifyIcon,
-  PluginSettingsIcon,
-} from './Base/icons';
+export * from '../statics/icons';
 export { default as BUTTONS } from './Base/buttons/keys';
 export { default as createBasePlugin } from './Base/createBasePlugin';
 export { default as createBaseComponent } from './Base/createBaseComponent';

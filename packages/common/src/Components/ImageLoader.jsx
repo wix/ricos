@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { mergeStyles } from '../Utils/mergeStyles';
-import styles from '../Styles/loaders.scss';
+import styles from '../../statics/styles/loaders.scss';
 
 class ImageLoader extends React.Component {
 

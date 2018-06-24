@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import RadioGroup from './RadioGroup';
 import { mergeStyles } from '../Utils/mergeStyles';
-import styles from '../Styles/radio-group-horizontal.scss';
+import styles from '../../statics/styles/radio-group-horizontal.scss';
 
 class RadioGroupHorizontal extends Component {
 
