@@ -8,7 +8,7 @@ $MOBILE_HEADER_HEIGHT: 50px;
     margin-right: 8.5px;
     width: 19px;
     height: 19px;
-    background: url('./icons/' + $icon + '.svg') center no-repeat;
+    background: url('../icons/' + $icon + '.svg') center no-repeat;
 }
 
 .galleryImageSettings {
@@ -132,13 +132,13 @@ $MOBILE_HEADER_HEIGHT: 50px;
 .galleryImageSettings_next {
     @extend %nav;
     right: 0;
-    background-image: url('./icons/next.svg');
+    background-image: url('../icons/next.svg');
 }
 
 .galleryImageSettings_previous {
     @extend %nav;
     left: 0;
-    background-image: url('./icons/previous.svg');
+    background-image: url('../icons/previous.svg');
 }
 
 .galleryImageSettings_hidden {

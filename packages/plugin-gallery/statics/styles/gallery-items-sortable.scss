@@ -75,7 +75,7 @@
     margin: 2.5px;
 
     &:after {
-      content: url(../../icons/mobile-image-default.svg);
+      content: url(../icons/mobile-image-default.svg);
       position: absolute;
       top: 6px;
       right: 6px;
@@ -85,7 +85,7 @@
 
     &.itemContainerSelectedMobile {
       &:after {
-        content: url(../../icons/mobile-image-selected.svg);
+        content: url(../icons/mobile-image-selected.svg);
       }
     }
 

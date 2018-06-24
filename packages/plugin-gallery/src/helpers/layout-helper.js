@@ -1,21 +1,21 @@
 
-import GridIconLarge from '../components/gallery-controls/icons/layout_grid.svg';
-import MasonryIconLarge from '../components/gallery-controls/icons/layout_masonry.svg';
-import CollageIconLarge from '../components/gallery-controls/icons/layout_collage.svg';
-import ThumbnailsIconLarge from '../components/gallery-controls/icons/layout_thumbnails.svg';
-import SlideshowIconLarge from '../components/gallery-controls/icons/layout_slideshow.svg';
-import PanoramaIconLarge from '../components/gallery-controls/icons/layout_panorama.svg';
-import ColumnsIconLarge from '../components/gallery-controls/icons/layout_columns.svg';
-import SlidesIconLarge from '../components/gallery-controls/icons/layout_slides.svg';
+import GridIconLarge from '../../statics/icons/layout_grid.svg';
+import MasonryIconLarge from '../../statics/icons/layout_masonry.svg';
+import CollageIconLarge from '../../statics/icons/layout_collage.svg';
+import ThumbnailsIconLarge from '../../statics/icons/layout_thumbnails.svg';
+import SlideshowIconLarge from '../../statics/icons/layout_slideshow.svg';
+import PanoramaIconLarge from '../../statics/icons/layout_panorama.svg';
+import ColumnsIconLarge from '../../statics/icons/layout_columns.svg';
+import SlidesIconLarge from '../../statics/icons/layout_slides.svg';
 
-import GridIconSmall from '../icons/toolbar/Grid.svg';
-import MasonryIconSmall from '../icons/toolbar/Masonry.svg';
-import CollageIconSmall from '../icons/toolbar/Collage.svg';
-import ThumbnailsIconSmall from '../icons/toolbar/Thumbnails.svg';
-import SlideshowIconSmall from '../icons/toolbar/Slideshow.svg';
-import PanoramaIconSmall from '../icons/toolbar/Panorama.svg';
-import ColumnsIconSmall from '../icons/toolbar/Columns.svg';
-import SlidesIconSmall from '../icons/toolbar/Slides.svg';
+import GridIconSmall from '../../statics/icons/toolbar/Grid.svg';
+import MasonryIconSmall from '../../statics/icons/toolbar/Masonry.svg';
+import CollageIconSmall from '../../statics/icons/toolbar/Collage.svg';
+import ThumbnailsIconSmall from '../../statics/icons/toolbar/Thumbnails.svg';
+import SlideshowIconSmall from '../../statics/icons/toolbar/Slideshow.svg';
+import PanoramaIconSmall from '../../statics/icons/toolbar/Panorama.svg';
+import ColumnsIconSmall from '../../statics/icons/toolbar/Columns.svg';
+import SlidesIconSmall from '../../statics/icons/toolbar/Slides.svg';
 
 import layoutData from './layout-data-provider';
 

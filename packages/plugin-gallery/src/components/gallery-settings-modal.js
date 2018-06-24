@@ -9,7 +9,7 @@ import {
   FocusManager
 } from 'wix-rich-content-common';
 import LayoutSelector from './gallery-controls/layouts-selector';
-import styles from './gallery-settings-modal.scss';
+import styles from '../../statics/styles/gallery-settings-modal.scss';
 import LayoutControlsSection from './layout-controls-section';
 import { SortableComponent } from './gallery-controls/gallery-items-sortable';
 import layoutData from '../helpers/layout-data-provider';

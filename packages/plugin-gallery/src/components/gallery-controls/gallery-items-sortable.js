@@ -5,12 +5,12 @@ import classNames from 'classnames';
 import findIndex from 'lodash/findIndex';
 import { getScaleToFillImageURL } from 'image-client-api/dist/imageClientSDK';
 
-import Styles from './gallery-items-sortable.scss';
+import Styles from '../../../statics/styles/gallery-items-sortable.scss';
 import ImageSettings from './gallery-image-settings';
 import { mergeStyles, FileInput, ImageLoader } from 'wix-rich-content-common';
 
-import UploadIcon from '../../icons/upload.svg';
-import Fab from '../../icons/fab.svg';
+import UploadIcon from '../../../statics/icons/upload.svg';
+import Fab from '../../../statics/icons/fab.svg';
 
 //eslint-disable-next-line no-unused-vars
 const EMPTY_SMALL_PLACEHOLDER = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';

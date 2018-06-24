@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import { mergeStyles, SelectionList } from 'wix-rich-content-common';
-import styles from './thumbnail-placement-selector.scss';
+import styles from '../../../statics/styles/thumbnail-placement-selector.scss';
 
-import ThumbnailIcon from './icons/layout_thumbnails.svg';
+import ThumbnailIcon from '../../../statics/icons/layout_thumbnails.svg';
 class ThumbnailPlacementSelector extends Component {
 
   constructor(props) {
