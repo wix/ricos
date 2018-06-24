@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { mergeStyles, SelectionList } from 'wix-rich-content-common';
-import styles from './image-settings-mobile-header.scss';
-import MoreIcon from './icons/more.svg';
+import styles from '../../statics/styles/image-settings-mobile-header.scss';
+import MoreIcon from '../../statics/icons/more.svg';
 
 class ImageSettingsMobileHeader extends Component {
   constructor(props) {

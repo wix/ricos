@@ -9,7 +9,7 @@ import isEqual from 'lodash/isEqual';
 
 import schema from './data-schema.json';
 import getImageSrc from './get-image-source';
-import styles from './image-viewer.scss';
+import styles from '../statics/styles/image-viewer.scss';
 
 const getDefault = () => ({
   config: {

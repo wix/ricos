@@ -13,7 +13,7 @@ import {
 } from 'wix-rich-content-common';
 import getImageSrc from '../get-image-source';
 import ImageSettingsMobileHeader from './image-settings-mobile-header';
-import styles from './image-settings.scss';
+import styles from '../../statics/styles/image-settings.scss';
 
 class ImageSettings extends Component {
   constructor(props) {
