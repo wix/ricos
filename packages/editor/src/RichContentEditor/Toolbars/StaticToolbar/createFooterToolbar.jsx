@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import createStaticToolbar from './createStaticToolbar';
-import toolbarStyles from '~/Styles/footer-toolbar.scss';
+import toolbarStyles from '../../../../statics/styles/footer-toolbar.scss';
 
 const getFooterTheme = theme => {
   const {

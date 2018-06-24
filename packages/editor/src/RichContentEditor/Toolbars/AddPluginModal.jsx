@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import Styles from '~/Styles/add-plugin-modal.scss';
+import Styles from '../../../statics/styles/add-plugin-modal.scss';
 
 const getPlaceHolderCount = buttonCount => {
   const diff = buttonCount % 3;

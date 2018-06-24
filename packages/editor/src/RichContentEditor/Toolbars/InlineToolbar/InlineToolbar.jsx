@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { getVisibleSelectionRect } from '@wix/draft-js';
-import Styles from '~/Styles/inline-toolbar.scss';
 import Measure from 'react-measure';
+import Styles from '../../../../statics/styles/inline-toolbar.scss';
 
 const toolbarOffset = 5;
 

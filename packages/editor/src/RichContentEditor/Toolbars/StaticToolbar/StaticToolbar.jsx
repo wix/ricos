@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import Styles from '~/Styles/static-toolbar.scss';
 import Measure from 'react-measure';
+import Styles from '../../../../statics/styles/static-toolbar.scss';
 
 export default class StaticToolbar extends React.Component {
   static propTypes = {

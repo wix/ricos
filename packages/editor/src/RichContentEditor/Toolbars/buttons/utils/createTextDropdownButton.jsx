@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import TextButton from '../TextButton';
 import { mergeStyles } from 'wix-rich-content-common';
-import styles from '~/Styles/inline-toolbar-dropdown-button.scss';
+import styles from '../../../../../statics/styles/inline-toolbar-dropdown-button.scss';
 
 export default ({ buttons, activeItem, onChange, tooltipTextKey }) =>
   class TextDropdownButton extends PureComponent {

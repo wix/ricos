@@ -5,9 +5,9 @@ import { baseUtils } from 'photography-client-lib/dist/src/utils/baseUtils';
 import createStaticToolbar from './createStaticToolbar';
 import { AddPluginButton, MobileTextButtonList } from '../buttons';
 import { getTextButtonsFromList } from '../buttons/utils';
-import toolbarStyles from '~/Styles/mobile-toolbar.scss';
-import buttonStyles from '~/Styles/mobile-toolbar-button.scss';
-import separatorStyles from '~/Styles/mobile-toolbar-separator.scss';
+import toolbarStyles from '../../../../statics/styles/mobile-toolbar.scss';
+import buttonStyles from '../../../../statics/styles/mobile-toolbar-button.scss';
+import separatorStyles from '../../../../statics/styles/mobile-toolbar-separator.scss';
 
 const createMobileToolbar = ({ buttons, helpers, pubsub, getEditorState, setEditorState, anchorTarget, relValue, theme, t }) => {
   const mobileTheme = getMobileTheme(theme);

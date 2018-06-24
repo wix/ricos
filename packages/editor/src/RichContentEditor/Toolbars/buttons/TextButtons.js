@@ -4,16 +4,16 @@ import {
   AlignmentRightIcon,
   AlignmentJustifyIcon,
 } from 'wix-rich-content-common';
-import BoldIcon from '../icons/bold.svg';
-import ItalicIcon from '../icons/italic.svg';
-import UnderlineIcon from '../icons/underline.svg';
-import IndentIcon from '../icons/indent.svg';
-import TitleIcon from '../icons/title.svg';
-import TitleOneIcon from '../icons/title-one.svg';
-import TitleTwoIcon from '../icons/title-two.svg';
-import BlockquoteIcon from '../icons/block-quote.svg';
-import OrderedListIcon from '../icons/ordered-list.svg';
-import UnorderedListIcon from '../icons/unordered-list.svg';
+import BoldIcon from '../../../../statics/icons/bold.svg';
+import ItalicIcon from '../../../../statics/icons/italic.svg';
+import UnderlineIcon from '../../../../statics/icons/underline.svg';
+import IndentIcon from '../../../../statics/icons/indent.svg';
+import TitleIcon from '../../../../statics/icons/title.svg';
+import TitleOneIcon from '../../../../statics/icons/title-one.svg';
+import TitleTwoIcon from '../../../../statics/icons/title-two.svg';
+import BlockquoteIcon from '../../../../statics/icons/block-quote.svg';
+import OrderedListIcon from '../../../../statics/icons/ordered-list.svg';
+import UnorderedListIcon from '../../../../statics/icons/unordered-list.svg';
 import createTextInlineStyleButton from './utils/createTextInlineStyleButton';
 import createTextBlockStyleButton from './utils/createTextBlockStyleButton';
 import createTextAlignmentButton from './utils/createTextAlignmentButton';
