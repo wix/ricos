@@ -6,7 +6,7 @@ import { SRC_TYPE_HTML, SRC_TYPE_URL, DEFAULT_COMPONENT_DATA } from './constants
 import schema from './data-schema.json';
 import IframeHtml from './IframeHtml';
 import IframeUrl from './IframeUrl';
-import htmlComponentStyles from './HtmlComponent.scss';
+import htmlComponentStyles from '../statics/styles/HtmlComponent.scss';
 
 const HtmlComponent = props => {
   const styles = mergeStyles({ styles: htmlComponentStyles, theme: props.theme });
