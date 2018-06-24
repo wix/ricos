@@ -21,8 +21,8 @@
   "module": "dist/es/index.js",
   "scripts": {
     "clean": "rm -rf dist/",
-    "babel:es": "babel -q src -d dist/es --source-maps --copy-files",
-    "babel:commonjs": "BABEL_ENV=commonjs babel -q src -d dist/lib --copy-files",
+    "babel:es": "babel -q src -d dist/es --source-maps",
+    "babel:commonjs": "BABEL_ENV=commonjs babel -q src -d dist/lib",
     "prebuild": "npm run clean",
     "statics": "mkdir -p dist && cp -R statics dist/statics",
     "build": "npm run babel:es && npm run babel:commonjs",

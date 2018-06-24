@@ -11,7 +11,7 @@
     ["transform-class-properties", {
       "loose": true
     }],
-    "transform-runtime",
+    "transform-runtime"
   ],
   "env": {
     "commonjs": {
