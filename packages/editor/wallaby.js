@@ -23,15 +23,7 @@ module.exports = function (wallaby) {
         presets: ['es2015', 'react', 'stage-0'],
         plugins: [
           'transform-class-properties',
-          'transform-runtime',
-          [
-            'module-resolver',
-            {
-              alias: {
-                '~': './src'
-              }
-            }
-          ]
+          'transform-runtime'
         ],
         babel
         // babel options

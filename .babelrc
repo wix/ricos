@@ -12,14 +12,6 @@
       "loose": true
     }],
     "transform-runtime",
-    [
-      "module-resolver",
-      {
-        "alias": {
-          "~": "./src"
-        }
-      }
-    ]
   ],
   "env": {
     "commonjs": {
