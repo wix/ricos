@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { I18nextProvider } from 'react-i18next';
-import translations from '~/Locale';
-import i18n from '~/i18n';
+import translations from '../Locale';
+import i18n from '../i18n';
 import RichContentEditor from './RichContentEditor';
 
 class I18nRichContentEditor extends PureComponent {
