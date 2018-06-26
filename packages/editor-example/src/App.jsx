@@ -95,6 +95,10 @@ class App extends Component {
       }, 500);
     }
     this.helpers = {
+      onReady: () => {
+        const { MobileToolbar, TextToolbar } = this.editor.getToolbars();
+        this.setState({ MobileToolbar, TextToolbar });
+      }
       onFilesChange: (files, updateEntity) => mockUpload(files, updateEntity),
       // handleFileSelection: (index, multiple, updateEntity, removeEntity) => {
       //   const count = multiple ? [1,2,3] : [1];
@@ -151,15 +155,9 @@ class App extends Component {
 
   componentDidMount() {
     ReactModal.setAppElement('body');
-    this.setEditorToolbars();
   }
 
   setEditor = editor => this.editor = editor;
-
-  setEditorToolbars = () => {
-    const { MobileToolbar, TextToolbar } = this.editor.getToolbars();
-    this.setState({ MobileToolbar, TextToolbar });
-  }
 
   onMountedChange = event => this.setState({ mounted: event.target.checked });
 
