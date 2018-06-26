@@ -11,8 +11,7 @@
     ["transform-class-properties", {
       "loose": true
     }],
-    "transform-runtime",
-    "dynamic-import-node"
+    "transform-runtime"
   ],
   "env": {
     "commonjs": {
@@ -26,7 +25,10 @@
       ]
     },
     "test": {
-      "plugins": ["transform-es2015-modules-commonjs"]
+      "plugins": [
+        "transform-es2015-modules-commonjs",
+        "dynamic-import-node"
+      ]
     }
   }
 }

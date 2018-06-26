@@ -93,6 +93,7 @@ class RichContentEditor extends Component {
       TextToolbar: this.props.textToolbarType === 'static' ? this.toolbars.textStatic.Toolbar : null
     }
   )
+
   getInitialEditorState() {
     const { editorState, initialState, anchorTarget, relValue } = this.props;
     if (editorState) {
