@@ -2,8 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import isEqual from 'lodash/isEqual';
 import { validate } from 'wix-rich-content-common';
-
-import schema from './data-schema.json';
+import schema from '../statics/data-schema.json';
 
 const { ProGallery } = process.env.SANTA ? {} : require('pro-gallery-renderer');
 

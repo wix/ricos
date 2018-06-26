@@ -3,10 +3,9 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { mergeStyles, validate } from 'wix-rich-content-common';
 import isEqual from 'lodash/isEqual';
-
-import schema from '../data-schema.json';
 import { getType, getConfig } from '../toolbar/selectors';
 import DividerLine from './divider-line';
+import schema from '../../statics/data-schema.json';
 import styles from '../../statics/styles/divider-viewer.scss';
 
 class DividerComponent extends PureComponent {
