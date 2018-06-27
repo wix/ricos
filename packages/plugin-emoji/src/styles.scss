@@ -11,23 +11,24 @@
   border: 0;
   background: transparent;
   cursor: pointer;
+  color: inherit;
 
-  &:hover {
-    background: #f3f3f3;
-  }
-  &:active {
-   background: #e6e6e6;
-  }
+  // &:hover {
+  //   background: #f3f3f3;
+  // }
+  // &:active {
+  //  background: #e6e6e6;
+  // }
 }
 
 
 
 .emojiSelectButtonPressed {
-  background: #ededed;
+  // background: #ededed;
 }
 
 .emojiSelectPopover {
-  margin-top: 10px;
+  bottom: 30px;
   padding: 0 .3em;
   position: absolute;
   z-index: 1000;
@@ -42,6 +43,8 @@
 }
 
 .emojiSelectPopoverTitle {
+  position: relative;
+  text-align: left;
   margin: 0 0 .3em;
   padding-left: 1em;
   height: 2.5em;
@@ -49,6 +52,15 @@
   font-weight: normal;
   font-size: 1em;
   color: #9e9e9e;
+}
+
+.emojiSelectPopoverTitle::before {
+  position: absolute;
+  top: 0;
+  left: 200px;
+  font-style: italic;
+  font-size: 12px;
+  content: "By EmojiOne"
 }
 
 .emojiSelectPopoverGroups {

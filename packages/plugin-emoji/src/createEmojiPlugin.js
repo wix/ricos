@@ -1,13 +1,15 @@
+import React from 'react';
 import { createBasePlugin } from 'wix-rich-content-common';
 import { EXTERNAL_EMOJI_TYPE } from './types';
 import createEmojiPlugin from 'draft-js-emoji-plugin';
 // import 'draft-js-emoji-plugin/lib/plugin.css';
 import * as Styles from './styles.scss';
+import { InsertPluginIcon } from './icons';
 
 const createExternalEmojiPlugin = (config = {}) => {
-  const plugin = createEmojiPlugin({ theme: Styles, useNativeArt: false });
+  const plugin = createEmojiPlugin({ theme: Styles, useNativeArt: false, selectButtonContent: <InsertPluginIcon/> });
   const type = EXTERNAL_EMOJI_TYPE;
-  const { decorator, helpers, theme, isMobile, t, anchorTarget, relValue, tooltipTextKey } = config;
+  const { decorator, helpers, theme, isMobile, t, anchorTarget, relValue } = config;
 
   const InsertToolbarButton = plugin.EmojiSelect;
   let toolbar;
@@ -16,7 +18,7 @@ const createExternalEmojiPlugin = (config = {}) => {
       InsertButtons: [
         {
           name: 'Emoji',
-          tooltipText: t(tooltipTextKey),
+          tooltipText: 'Hello world!',
           ButtonElement: InsertToolbarButton,
           helpers,
           t
