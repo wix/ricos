@@ -8,10 +8,9 @@
     "react"
   ],
   "plugins": [
-    ["transform-class-properties", {
-      "loose": true
-    }],
-    "transform-runtime"
+    ["transform-class-properties", { "loose": true }],
+    "transform-runtime",
+    "syntax-dynamic-import"
   ],
   "env": {
     "commonjs": {

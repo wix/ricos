@@ -98,7 +98,7 @@ class App extends Component {
       onReady: () => {
         const { MobileToolbar, TextToolbar } = this.editor.getToolbars();
         this.setState({ MobileToolbar, TextToolbar });
-      }
+      },
       onFilesChange: (files, updateEntity) => mockUpload(files, updateEntity),
       // handleFileSelection: (index, multiple, updateEntity, removeEntity) => {
       //   const count = multiple ? [1,2,3] : [1];
