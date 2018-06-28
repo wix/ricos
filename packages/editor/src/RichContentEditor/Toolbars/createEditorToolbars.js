@@ -22,16 +22,22 @@ const createEditorToolbars = config => {
     refId
   } = config;
   const { pluginButtons, textButtons } = buttons;
+  const sideToolbarPluginButtons = pluginButtons && pluginButtons
+    .filter(({ originalConfig }) => originalConfig.addToSideToolbar !== false)
+    .map(({ component }) => component);
+  const footerToolbarPluginButtons = pluginButtons && pluginButtons
+    .filter(({ originalConfig }) => originalConfig.addToFooterToolbar !== false)
+    .map(({ component }) => component);
   const pubsub = simplePubsub();
-  const shouldCreatePluginToolbars = pluginButtons && pluginButtons.length;
+  const shouldCreateSidePluginToolbar = pluginButtons && sideToolbarPluginButtons.length;
+  const shouldCreateFooterPluginToolbar = pluginButtons && footerToolbarPluginButtons.length;
   const shouldCreateTextToolbar = !isMobile || baseUtils.isiOS();
 
   const toolbars = {};
-
-  if (shouldCreatePluginToolbars) {
+  if (shouldCreateSidePluginToolbar) {
     toolbars.side = createSideToolbar({
       refId,
-      buttons: pluginButtons,
+      buttons: sideToolbarPluginButtons,
       offset: sideToolbarOffset,
       theme: { ...getToolbarTheme(theme, 'side'), ...theme },
       pubsub,
@@ -66,10 +72,10 @@ const createEditorToolbars = config => {
   }
 
   if (!isMobile) {
-    if (shouldCreatePluginToolbars && !hideFooterToolbar) {
+    if (shouldCreateFooterPluginToolbar && !hideFooterToolbar) {
       toolbars.footer = createFooterToolbar({
         refId,
-        buttons: pluginButtons,
+        buttons: footerToolbarPluginButtons,
         theme: { ...getToolbarTheme(theme, 'footer'), ...theme },
       });
     }
