@@ -7,13 +7,13 @@ import * as Styles from './styles.scss';
 import { InsertPluginIcon } from './icons';
 
 const createExternalEmojiPlugin = (config = {}) => {
-  const plugin = createEmojiPlugin({ theme: Styles, useNativeArt: false, selectButtonContent: <InsertPluginIcon/> });
+  const plugin = createEmojiPlugin({ theme: Styles, useNativeArt: false, selectButtonContent: <InsertPluginIcon/>, toneSelectOpenDelay: 250 });
   const type = EXTERNAL_EMOJI_TYPE;
   const { decorator, helpers, theme, isMobile, t, anchorTarget, relValue } = config;
 
   const InsertToolbarButton = plugin.EmojiSelect;
   let toolbar;
-  if (InsertToolbarButton) {
+  if (InsertToolbarButton && !isMobile) {
     toolbar = {
       InsertButtons: [
         {

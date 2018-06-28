@@ -3,33 +3,20 @@
 }
 
 .emojiSelectButton, .emojiSelectButtonPressed {
-  margin: 0;
   padding: 0;
   box-sizing: border-box;
-  line-height: 1em;
-  font-size: 1em;
   border: 0;
   background: transparent;
   cursor: pointer;
   color: inherit;
-
-  // &:hover {
-  //   background: #f3f3f3;
-  // }
-  // &:active {
-  //  background: #e6e6e6;
-  // }
 }
 
-
-
 .emojiSelectButtonPressed {
-  // background: #ededed;
 }
 
 .emojiSelectPopover {
   bottom: 30px;
-  padding: 0 .3em;
+  padding: 0 5px;
   position: absolute;
   z-index: 1000;
   box-sizing: content-box;
@@ -45,34 +32,34 @@
 .emojiSelectPopoverTitle {
   position: relative;
   text-align: left;
-  margin: 0 0 .3em;
-  padding-left: 1em;
-  height: 2.5em;
-  line-height: 2.5em;
+  margin: 0 0 5px;
+  padding-left: 15px;
+  height: 38px;
+  line-height: 38px;
   font-weight: normal;
-  font-size: 1em;
+  font-size: 14px;
   color: #9e9e9e;
 }
 
 .emojiSelectPopoverTitle::before {
   position: absolute;
   top: 0;
-  left: 200px;
+  left: 235px;
   font-style: italic;
   font-size: 12px;
   content: "By EmojiOne"
 }
 
 .emojiSelectPopoverGroups {
-  margin: 0 0 .3em;
+  margin: 0 0 5px;
   position: relative;
   z-index: 0;
-  width: 21em;
-  height: 20em;
+  width: 320px;
+  height: 300px;
 }
 
 .emojiSelectPopoverGroup {
-  padding: 0 .5em;
+  padding: 0 6px;
 }
 
 .emojiSelectPopoverGroup:first-child .emojiSelectPopoverGroupTitle {
@@ -80,25 +67,25 @@
 }
 
 .emojiSelectPopoverGroupTitle {
-  margin: 1em 0;
-  padding-left: .5em;
+  margin: 15px 0;
+  padding-left: 8px;
   font-weight: normal;
-  font-size: 1em;
+  font-size: 14px;
   color: #9e9e9e;
+  text-align: left;
 }
 
 .emojiSelectPopoverGroupList {
   margin: 0;
   padding: 0;
-  display: -webkit-box;
   display: flex;
   list-style: none;
   flex-wrap: wrap;
 }
 
 .emojiSelectPopoverGroupItem {
-  width: 2.5em;
-  height: 2.5em;
+  width: 38px;
+  height: 38px;
 }
 
 .emojiSelectPopoverToneSelect {
@@ -111,21 +98,20 @@
 }
 
 .emojiSelectPopoverToneSelectList {
-  margin: .3em;
-  padding: .3em;
+  margin: 5px;
+  padding: 5px;
   position: absolute;
-  display: -webkit-box;
   display: flex;
   list-style: none;
   border: 1px solid #e0e0e0;
-  border-radius: .5em;
+  border-radius: 8px;
   background: #fff;
-  box-shadow: 0 0 0.3em rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
 
 .emojiSelectPopoverToneSelectItem {
-  width: 2.5em;
-  height: 2.5em;
+  width: 38px;
+  height: 38px;
 
   &:first-child {
     border-right: 1px solid #e0e0e0;
@@ -147,23 +133,27 @@
 }
 
 .emojiSelectPopoverEntryIcon {
-  width: 1.5em;
-  height: 1.5em;
+  width: 23px;
+  height: 23px;
   vertical-align: middle;
 }
 
 .emojiSelectPopoverNav {
   margin: 0;
-  padding: 0 .5em;
+  padding: 0 6px;
   display: -webkit-box;
   display: flex;
-  width: 20em;
   list-style: none;
 }
 
 .emojiSelectPopoverNavItem {
-  width: 2.5em;
-  height: 2.5em;
+  width: 38px;
+  height: 38px;
+
+  svg {
+    width: 18px !important;
+    height: 18px !important;
+  }
 }
 
 .emojiSelectPopoverNavEntry, .emojiSelectPopoverNavEntryActive {
@@ -183,18 +173,18 @@
 .emojiSelectPopoverScrollbar {
   position: absolute;
   right: 0;
-  top: .3em;
-  bottom: .3em;
-  width: .25em;
+  top: 5px;
+  bottom: 5px;
+  width: 4px;
   background-color: #e0e0e0;
-  border-radius: .125em;
+  border-radius: 2px;
   opacity: .1;
   transition: opacity .4s;
 }
 
 .emojiSelectPopoverScrollbarThumb {
   background-color: #000;
-  border-radius: .125em;
+  border-radius: 2px;
   cursor: pointer;
 }
 
@@ -237,8 +227,10 @@
   */
   color: transparent;
 }
-.emojiSuggestionsEntry {
-  padding: 5px 10px 1px 10px;
+.emojiSuggestionsEntry, .emojiSuggestionsEntryFocused {
+  padding: 5px 10px;
+  display: flex;
+  align-items: center;
   transition: background-color 0.4s cubic-bezier(.27,1.27,.48,.56);
 }
 
@@ -257,14 +249,14 @@
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 368px;
-  font-size: 0.9em;
+  font-size: 14px;
 }
 
 .emojiSuggestionsEntryIcon {
-  width: 1em;
-  height: 1em;
-  margin-left: 0.25em;
-  margin-right: 0.25em;
+  width: 15px;
+  height: 15px;
+  margin-left: 4px;
+  margin-right: 4px;
   display: inline-block;
 }
 .emojiSuggestions {
