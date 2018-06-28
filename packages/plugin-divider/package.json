@@ -21,12 +21,17 @@
   "module": "dist/es/index.js",
   "scripts": {
     "clean": "rm -rf dist/",
+    "babel:icons": "BABEL_ENV=commonjs babel -q dist/statics -d dist/statics",
+    "postbabel:icons": "find dist/statics/icons -name \"*.svg\" -type f -delete",
     "babel:es": "babel -q src -d dist/es --source-maps",
     "babel:commonjs": "BABEL_ENV=commonjs babel -q src -d dist/lib",
     "prebuild": "npm run clean",
-    "statics": "mkdir -p dist && cp -R statics dist/statics",
     "build": "npm run babel:es && npm run babel:commonjs",
     "postbuild": "npm run statics",
+    "statics": "mkdir -p dist && cp -R statics dist/statics",
+    "poststatics": "npm run icons",
+    "icons": "svgr -d dist/statics/icons dist/statics/icons",
+    "posticons": "create-index ./dist/statics/icons && npm run babel:icons",
     "prewatch": "npm run clean && npm run statics",
     "watch": "npm run babel:es -- --watch",
     "release": "wnpm-release --no-shrinkwrap",
@@ -41,7 +46,9 @@
     "react-dom": "^15.0.0 || ^16.0.0"
   },
   "devDependencies": {
+    "@svgr/cli": "^2.0.0",
     "babel-cli": "^6.26.0",
+    "create-index": "^2.3.0",
     "eslint": "^4.19.1",
     "eslint-import-resolver-lerna": "^1.0.0",
     "eslint-plugin-import": "2.8.0"

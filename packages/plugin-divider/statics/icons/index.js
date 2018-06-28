@@ -1,1 +1,4 @@
-export { default as InsertPluginIcon } from './insert-plugin.svg';
+// @create-index
+
+export { default as InsertPluginIcon } from './InsertPluginIcon.js';
+
