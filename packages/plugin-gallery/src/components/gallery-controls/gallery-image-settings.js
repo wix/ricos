@@ -15,7 +15,7 @@ import {
   SettingsPanelFooter,
   FocusManager
 } from 'wix-rich-content-common';
-import BackIcon from '../../../statics/icons/back.svg';
+import { BackIcon } from '../../../statics/icons';
 import styles from '../../../statics/styles/gallery-image-settings.scss';
 import GallerySettingsMobileHeader from './gallery-settings-mobile-header';
 import { isUndefined } from 'util';

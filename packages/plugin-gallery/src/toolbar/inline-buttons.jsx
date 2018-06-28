@@ -1,7 +1,6 @@
 import { BUTTONS, PluginSettingsIcon, getModalStyles } from 'wix-rich-content-common';
 import { Modals } from '../modals';
-import AddIcon from '../../statics/icons/toolbar/icon-upload.svg';
-import ManageMediaIcon from '../../statics/icons/manageMedia.svg';
+import { ManageMediaIcon, UploadIcon } from '../../statics/icons';
 import { galleryLayoutsDropdown, switchLayout, getCurrentLayout } from '../helpers';
 
 const modalStyles = getModalStyles();
@@ -11,7 +10,7 @@ export default({ t, anchorTarget, relValue }) => {
     {
       keyName: 'add',
       type: BUTTONS.FILES,
-      icon: AddIcon,
+      icon: UploadIcon,
       onFilesSelected: (pubsub, files) => {
         if (files.length > 0) {
           const handleFilesSelected = pubsub.store.get('handleFilesSelected');

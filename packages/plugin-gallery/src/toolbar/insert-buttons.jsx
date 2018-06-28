@@ -1,5 +1,5 @@
 import { getDefault } from './../gallery-component';
-import InsertPluginIcon from '../../statics/icons/insert-plugin.svg';
+import { InsertPluginIcon } from '../../statics/icons';
 
 export default ({ helpers, t }) => {
   return [

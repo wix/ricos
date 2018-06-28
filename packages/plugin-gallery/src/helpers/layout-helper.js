@@ -1,21 +1,24 @@
+import {
+  LayoutGridIcon,
+  LayoutMasonryIcon,
+  LayoutCollageIcon,
+  LayoutThumbnailsIcon,
+  LayoutSlideshowIcon,
+  LayoutPanoramaIcon,
+  LayoutColumnsIcon,
+  LayoutSlidesIcon,
+} from '../../statics/icons';
+import {
+  Grid as GridIconSmall,
+  Masonry as MasonryIconSmall,
+  Collage as CollageIconSmall,
+  Thumbnails as ThumbnailsIconSmall,
+  Slideshow as SlideshowIconSmall,
+  Panorama as PanoramaIconSmall,
+  Columns as ColumnsIconSmall,
+  Slides as SlidesIconSmall,
+} from '../../statics/icons/toolbar';
 
-import GridIconLarge from '../../statics/icons/layout_grid.svg';
-import MasonryIconLarge from '../../statics/icons/layout_masonry.svg';
-import CollageIconLarge from '../../statics/icons/layout_collage.svg';
-import ThumbnailsIconLarge from '../../statics/icons/layout_thumbnails.svg';
-import SlideshowIconLarge from '../../statics/icons/layout_slideshow.svg';
-import PanoramaIconLarge from '../../statics/icons/layout_panorama.svg';
-import ColumnsIconLarge from '../../statics/icons/layout_columns.svg';
-import SlidesIconLarge from '../../statics/icons/layout_slides.svg';
-
-import GridIconSmall from '../../statics/icons/toolbar/Grid.svg';
-import MasonryIconSmall from '../../statics/icons/toolbar/Masonry.svg';
-import CollageIconSmall from '../../statics/icons/toolbar/Collage.svg';
-import ThumbnailsIconSmall from '../../statics/icons/toolbar/Thumbnails.svg';
-import SlideshowIconSmall from '../../statics/icons/toolbar/Slideshow.svg';
-import PanoramaIconSmall from '../../statics/icons/toolbar/Panorama.svg';
-import ColumnsIconSmall from '../../statics/icons/toolbar/Columns.svg';
-import SlidesIconSmall from '../../statics/icons/toolbar/Slides.svg';
 
 import layoutData from './layout-data-provider';
 
@@ -40,14 +43,14 @@ export const getCurrentLayout = (store, t) => {
 
 export const getGalleryLayouts = t => {
   return [
-    { value: 2, label: t('GalleryPlugin_Layout_Grid'), icon: GridIconLarge },
-    { value: 1, label: t('GalleryPlugin_Layout_Masonry'), icon: MasonryIconLarge },
-    { value: 0, label: t('GalleryPlugin_Layout_Collage'), icon: CollageIconLarge },
-    { value: 3, label: t('GalleryPlugin_Layout_Thumbnails'), icon: ThumbnailsIconLarge },
-    { value: 9, label: t('GalleryPlugin_Layout_Slideshow'), icon: SlideshowIconLarge },
-    { value: 6, label: t('GalleryPlugin_Layout_Panorama'), icon: PanoramaIconLarge },
-    { value: 7, label: t('GalleryPlugin_Layout_Columns'), icon: ColumnsIconLarge },
-    { value: 4, label: t('GalleryPlugin_Layout_Slides'), icon: SlidesIconLarge },
+    { value: 2, label: t('GalleryPlugin_Layout_Grid'), icon: LayoutGridIcon },
+    { value: 1, label: t('GalleryPlugin_Layout_Masonry'), icon: LayoutMasonryIcon },
+    { value: 0, label: t('GalleryPlugin_Layout_Collage'), icon: LayoutCollageIcon },
+    { value: 3, label: t('GalleryPlugin_Layout_Thumbnails'), icon: LayoutThumbnailsIcon },
+    { value: 9, label: t('GalleryPlugin_Layout_Slideshow'), icon: LayoutSlideshowIcon },
+    { value: 6, label: t('GalleryPlugin_Layout_Panorama'), icon: LayoutPanoramaIcon },
+    { value: 7, label: t('GalleryPlugin_Layout_Columns'), icon: LayoutColumnsIcon },
+    { value: 4, label: t('GalleryPlugin_Layout_Slides'), icon: LayoutSlidesIcon },
   ];
 };
 

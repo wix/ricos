@@ -9,8 +9,7 @@ import Styles from '../../../statics/styles/gallery-items-sortable.scss';
 import ImageSettings from './gallery-image-settings';
 import { mergeStyles, FileInput, ImageLoader } from 'wix-rich-content-common';
 
-import UploadIcon from '../../../statics/icons/upload.svg';
-import Fab from '../../../statics/icons/fab.svg';
+import { FabIcon, UploadIcon } from '../../../statics/icons';
 
 //eslint-disable-next-line no-unused-vars
 const EMPTY_SMALL_PLACEHOLDER = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
@@ -180,7 +179,7 @@ const ItemActionsMenu = props => {
       handleFileSelection={handleFileSelection}
       multiple theme={theme}
     >
-      {(isMobile ? <Fab className={styles.fab} /> : `+ ${addMediaLabel}`)}
+      {(isMobile ? <FabIcon className={styles.fab} /> : `+ ${addMediaLabel}`)}
     </FileInput>
   );
 
