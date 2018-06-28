@@ -13,11 +13,11 @@ import {
   SizeSmallCenterIcon,
   SizeSmallLeftIcon,
   SizeSmallRightIcon,
-  SizeContentIcon,
+  SizeBestFitIcon,
   SizeFullWidthIcon,
-  AlignmentLeftIcon,
-  AlignmentCenterIcon,
-  AlignmentRightIcon,
+  AlignLeftIcon,
+  AlignCenterIcon,
+  AlignRightIcon,
   WidthIcon,
   HeightIcon,
   DeleteIcon
@@ -47,19 +47,19 @@ export const SizeLargeButton = createBlockSizeButton({
 
 export const AlignmentLeftButton = createBlockAlignmentButton({
   alignment: 'left',
-  Icon: AlignmentLeftIcon,
+  Icon: AlignLeftIcon,
   tooltipTextKey: 'AlignTextLeftButton_Tooltip',
 });
 
 export const AlignmentCenterButton = createBlockAlignmentButton({
   alignment: 'center',
-  Icon: AlignmentCenterIcon,
+  Icon: AlignCenterIcon,
   tooltipTextKey: 'AlignTextCenterButton_Tooltip',
 });
 
 export const AlignmentRightButton = createBlockAlignmentButton({
   alignment: 'right',
-  Icon: AlignmentRightIcon,
+  Icon: AlignRightIcon,
   tooltipTextKey: 'AlignTextRightButton_Tooltip',
 });
 
@@ -94,7 +94,7 @@ export const SizeSmallRightButton = createBlockAlignmentAndSizeButton({
 export const SizeContentButton = createBlockAlignmentAndSizeButton({
   size: 'content',
   alignment: 'center',
-  Icon: SizeContentIcon,
+  Icon: SizeBestFitIcon,
   tooltipTextKey: 'SizeContentButton_Tooltip',
 });
 

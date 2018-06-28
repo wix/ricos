@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { FocusManager } from 'wix-rich-content-common';
-import PlusIcon from '../../../../statics/icons/plus-default.svg';
-import PlusActiveIcon from '../../../../statics/icons/plus-active.svg';
+import { PlusIcon, PlusActiveIcon } from '../../../../statics/icons';
 import Styles from '../../../../statics/styles/side-toolbar.scss';
 
 export default class AddPluginFloatingToolbar extends Component {

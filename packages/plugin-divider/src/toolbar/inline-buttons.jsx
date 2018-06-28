@@ -1,6 +1,6 @@
 import {
   BUTTONS,
-  AlignmentCenterIcon,
+  AlignCenterIcon,
   SizeLargeIcon
 } from 'wix-rich-content-common';
 import {
@@ -63,7 +63,7 @@ export default ({ styles }) => {
     {
       keyName: 'alignMobile',
       type: 'custom',
-      icon: AlignmentCenterIcon,
+      icon: AlignCenterIcon,
       onClick: changeAlignmentMobile,
       mobile: true,
       desktop: false,
