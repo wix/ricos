@@ -68,12 +68,11 @@ export default class StaticToolbar extends React.Component {
       const spaceLeft = this.buttons.scrollLeft;
       const eleWidth = this.buttons.clientWidth;
       const fullWidth = this.buttons.scrollWidth;
-
       const spaceRight = fullWidth - eleWidth - spaceLeft;
 
       this.setState({
         showLeftArrow: (spaceLeft > 2),
-        showRightArrow: (spaceRight > 26)
+        showRightArrow: (spaceRight > 0)
       });
     }
   }
@@ -87,10 +86,20 @@ export default class StaticToolbar extends React.Component {
     const { showLeftArrow, showRightArrow, overrideContent: OverrideContent, extendContent: ExtendContent } = this.state;
     const hasArrow = showLeftArrow || showRightArrow;
     const { toolbarStyles } = theme || {};
+
     const toolbarClassNames = classNames(Styles.toolbar, toolbarStyles && toolbarStyles.toolbar);
     const scrollableClassNames = classNames(Styles.scrollableContainer, toolbarStyles && toolbarStyles.scrollableContainer);
     const buttonClassNames = classNames(Styles.buttons, toolbarStyles && toolbarStyles.buttons);
     const extendClassNames = classNames(Styles.extend, toolbarStyles && toolbarStyles.extend);
+    const leftArrowClassNames = classNames(Styles.responsiveArrow, Styles.responsiveArrowLeft,
+      toolbarStyles && toolbarStyles.responsiveArrow, toolbarStyles && toolbarStyles.responsiveArrowLeft);
+    const leftArrowIconClassNames = classNames(Styles.responsiveArrowLeft_icon, toolbarStyles && toolbarStyles.responsiveArrowLeft_icon);
+    const rightArrowClassNames = classNames(Styles.responsiveArrow, Styles.responsiveArrowRight,
+      toolbarStyles && toolbarStyles.responsiveArrow, toolbarStyles && toolbarStyles.responsiveArrowRight);
+    const rightArrowIconClassNames = classNames(Styles.responsiveArrowRight_icon, toolbarStyles && toolbarStyles.responsiveArrowRight_icon);
+
+    const spacerClassNames = classNames(Styles.responsiveSpacer, toolbarStyles && toolbarStyles.responsiveSpacer);
+
     const childrenProps = {
       theme,
       helpers,
@@ -111,10 +120,10 @@ export default class StaticToolbar extends React.Component {
           {
             showLeftArrow &&
             <button
-              className={classNames(toolbarStyles.responsiveArrow, toolbarStyles.responsiveArrowLeft)}
+              className={leftArrowClassNames}
               data-hook="staticToolbarLeftArrow" onMouseDown={e => this.scrollToolbar(e, 'left')}
             >
-              <i className={toolbarStyles.responsiveArrowLeft_icon}/>
+              <i className={leftArrowIconClassNames}/>
             </button>
           }
           <div className={scrollableClassNames} ref={this.handleButtonsRef}>
@@ -124,14 +133,14 @@ export default class StaticToolbar extends React.Component {
                 structure.map((Button, index) => <Button key={index} {...childrenProps} />)
             }
           </div>
-          {hasArrow && <div className={toolbarStyles.responsiveSpacer} />}
+          {hasArrow && <div className={spacerClassNames} />}
           {
             showRightArrow &&
             <button
-              className={classNames(toolbarStyles.responsiveArrow, toolbarStyles.responsiveArrowRight)}
+              className={rightArrowClassNames}
               data-hook="staticToolbarRightArrow" onMouseDown={e => this.scrollToolbar(e, 'right')}
             >
-              <i className={toolbarStyles.responsiveArrowRight_icon}/>
+              <i className={rightArrowIconClassNames}/>
             </button>
           }
         </div>

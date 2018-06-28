@@ -18,7 +18,7 @@ class ToolbarButton extends Component {
       return (
         <Tooltip
           content={tooltipText}
-          moveBy={{ x: 10, y: 5 }}
+          moveBy={{ x: 12, y: 0 }}
           theme={theme}
         >
           {button}

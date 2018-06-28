@@ -136,6 +136,21 @@ class RichContentEditor extends Component {
   }
 
   // TODO: get rid of this ASAP!
+  // this is done to ensure fixed tooltips have transformed parent for scrolling
+  componentDidMount() {
+    if (this.getToolbars().TextToolbar && !document.body.className.includes(styles.transformed)) {
+      document.body.className += ` ${styles.transformed}`;
+    }
+  }
+
+  componentDidUpdate() {
+    if (this.getToolbars().TextToolbar && !document.body.className.includes(styles.transformed)) {
+      document.body.className += ` ${styles.transformed}`;
+    }
+  }
+
+
+  // TODO: get rid of this ASAP!
   // Currently, there's no way to get a static toolbar ref without consumer interference
   findFocusableChildForElement(id) {
     const element = document.getElementById(id);

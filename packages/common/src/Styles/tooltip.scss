@@ -1,80 +1,82 @@
+%tooltip {
+  position: relative;
+  &:hover::before {
+    content: var(--content);
+    text-align: center;
+    font-family: "HelveticaNeueW01-55Roma", "HelveticaNeueW02-55Roma", "HelveticaNeueW10-55Roma", "Helvetica Neue", "Helvetica", "Arial", "\30E1\30A4\30EA\30AA, meiryo", "\30D2\30E9\30AE\30CE\89D2\30B4 pro w3", "hiragino kaku gothic pro", "sans-serif";
+    position: absolute;
+    top: var(--moveContentByY);
+    left: var(--moveContentByX);
+    background-color: #000;
+    color: #fff;
+    animation: fadeInTooltip 0.3s cubic-bezier(0.23, 1, 0.32, 1) both;
+    animation-delay: 300ms;
+    display: inline-block;
+    z-index: 2000;
+    border-radius: 8px;
+    padding: 12px 24px;
+    box-sizing: border-box;
+    font-size: 14px;
+    line-height: 1.29;
+    box-shadow: 0 6px 6px 0 rgba(22, 45, 60, 0.06), 0 0 18px 0 rgba(22, 45, 60, 0.12);
+    white-space: nowrap;
+    -webkit-font-smoothing: antialiased;
+    font-weight: 400;
+    font-style: normal;
+    font-stretch: normal;
+  }
+  &:hover::after {
+    content: '';
+    position: absolute;
+    top: var(--moveArrowByY);
+    left: var(--moveArrowByX);
+    z-index: 1999;
+    height: 10px;
+    width: 10px;
+    background: #000;
+    animation: fadeInArrow 0.3s cubic-bezier(0.23, 1, 0.32, 1) both;
+    animation-delay: 300ms;
+  }
+}
+
 .tooltip {
-    position: relative;
-
-    &:hover::before {
-        content: var(--content);
-        text-align: center;
-        font-family: "HelveticaNeueW01-55Roma", "HelveticaNeueW02-55Roma", "HelveticaNeueW10-55Roma", "Helvetica Neue", "Helvetica", "Arial", "\30E1\30A4\30EA\30AA, meiryo", "\30D2\30E9\30AE\30CE\89D2\30B4 pro w3", "hiragino kaku gothic pro", "sans-serif";
-        position: absolute;
-        top: var(--moveByY);
-        left: var(--moveByX);
-        background-color: #000;
-        color: #fff;
-        animation: fadeInTooltip 0.3s cubic-bezier(0.23, 1, 0.32, 1) both;
-        animation-delay: 300ms;
-        display: inline-block;
-        z-index: 2000;
-        border-radius: 8px;
-        padding: 12px 24px;
-        box-sizing: border-box;
-        font-size: 14px;
-        line-height: 1.29;
-        box-shadow: 0 6px 6px 0 rgba(22, 45, 60, 0.06), 0 0 18px 0 rgba(22, 45, 60, 0.12);
-        white-space: nowrap;
-        -webkit-font-smoothing: antialiased;
-        font-weight: 400;
-        font-style: normal;
-        font-stretch: normal;
-    }
-
-    &:hover::after {
-        content: '';
-        position: absolute;
-        top: var(--moveByY);
-        left: var(--moveByX);
-        z-index: 1999;
-        height: 10px;
-        width: 10px;
-        background: #000;
-        animation: fadeInArrow 0.3s cubic-bezier(0.23, 1, 0.32, 1) both;
-        animation-delay: 300ms;
-    }
+  @extend %tooltip;
 }
 
 @keyframes fadeInTooltip {
-    0% {
-        opacity: 0;
-        transform: scale(0.9) translateY(-45px) translateX(-45%);
-    }
-    49% {
-        opacity: 0;
-        transform: scale(0.9) translateY(-45px) translateX(-45%);
-    }
-    50% {
-        opacity: .85;
-        transform: scale(0.9) translateY(-45px) translateX(-45%);
-    }
-    100% {
-        opacity: 1;
-        transform: scale(1) translateY(-45px) translateX(-45%);
-    }
+  0% {
+    opacity: 0;
+    transform: scale(0.9) translateY(-45px) translateX(-45%);
+  }
+  49% {
+    opacity: 0;
+    transform: scale(0.9) translateY(-45px) translateX(-45%);
+  }
+  50% {
+    opacity: .85;
+    transform: scale(0.9) translateY(-45px) translateX(-45%);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(-45px) translateX(-45%);
+  }
 }
 
 @keyframes fadeInArrow {
-    0% {
-        opacity: 0;
-        transform: scale(0.9) translateY(-9px) rotateZ(45deg);
-    }
-    49% {
-        opacity: 0;
-        transform: scale(0.9) translateY(-9px) rotateZ(45deg);
-    }
-    50% {
-        opacity: .85;
-        transform: scale(0.9) translateY(-9px) rotateZ(45deg);
-    }
-    100% {
-        opacity: 1;
-        transform: scale(1) translateY(-9px) rotateZ(45deg);
-    }
+  0% {
+    opacity: 0;
+    transform: scale(0.9) translateY(-9px) rotateZ(45deg);
+  }
+  49% {
+    opacity: 0;
+    transform: scale(0.9) translateY(-9px) rotateZ(45deg);
+  }
+  50% {
+    opacity: .85;
+    transform: scale(0.9) translateY(-9px) rotateZ(45deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(-9px) rotateZ(45deg);
+  }
 }

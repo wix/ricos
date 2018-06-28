@@ -5,6 +5,12 @@
   padding: 11px 0;
 }
 
-.footerToolbar_scrollableContainer {
+.footerToolbar_buttons {
+  height: 100%;
+  padding: 0;
+  overflow: initial;
+}
 
+.footerToolbar_scrollableContainer {
+  overflow: initial;
 }

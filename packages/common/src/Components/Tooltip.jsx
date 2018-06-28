@@ -17,21 +17,35 @@ class Tooltip extends React.Component {
   constructor(props) {
     super(props);
     this.styles = mergeStyles({ styles, theme: props.theme });
-    const { content, moveBy, textAlign, maxWidth } = props;
+    const { content, moveBy, moveArrowBy, moveContentBy, textAlign, maxWidth } = props;
     this.components = [];
     this.customStyle = {
       '--content': `'${content}'`,
-      '--moveByX': `${moveBy.x || 0}px`,
-      '--moveByY': `${moveBy.y || 0}px`,
       '--textAlign': textAlign,
       '--maxWidth': maxWidth ? `${maxWidth}px` : '100%'
     };
+    if (moveArrowBy) {
+      this.customStyle = { ...this.customStyle, '--moveArrowByX': `${moveArrowBy.x}px`, '--moveArrowByY': `${moveArrowBy.y}px` };
+    }
+    if (moveContentBy) {
+      this.customStyle = { ...this.customStyle, '--moveContentByX': `${moveContentBy.x}px`, '--moveContentByY': `${moveContentBy.y}px` };
+    }
+    if (moveBy) {
+      this.customStyle = Object.assign({}, this.customStyle,
+        { '--moveArrowByX': `${moveBy.x}px`,
+          '--moveArrowByY': `${moveBy.y}px`,
+          '--moveContentByX': `${moveBy.x}px`,
+          '--moveContentByY': `${moveBy.y}px` }
+      );
+    }
   }
 
   static propTypes = {
     theme: PropTypes.object.isRequired,
     content: PropTypes.string.isRequired,
     moveBy: PropTypes.shape({ x: PropTypes.number, y: PropTypes.number }),
+    moveArrowBy: PropTypes.shape({ x: PropTypes.number, y: PropTypes.number }),
+    moveContentBy: PropTypes.shape({ x: PropTypes.number, y: PropTypes.number }),
     textAlign: PropTypes.oneOf(['center', 'left', 'right']),
     maxWidth: PropTypes.number,
     children: PropTypes.node.isRequired,
