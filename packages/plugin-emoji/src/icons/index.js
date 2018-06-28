@@ -1,1 +1,1 @@
-export { default as InsertPluginIcon } from './insert-plugin.svg';
+export { default as EmojiPluginIcon } from './emoji-plugin.svg';
