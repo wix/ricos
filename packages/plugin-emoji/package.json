@@ -46,6 +46,7 @@
   },
   "dependencies": {
     "draft-js-emoji-plugin": "^2.0.2",
+    "react-icons": "^2.2.7",
     "wix-rich-content-common": "^1.0.18"
   },
   "unpkg": true,

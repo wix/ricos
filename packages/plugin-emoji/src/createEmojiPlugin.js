@@ -1,8 +1,9 @@
 import React from 'react';
 import { createBasePlugin } from 'wix-rich-content-common';
 import createEmojiPlugin from 'draft-js-emoji-plugin';
-import SelectButton from './SelectButton';
 import { EXTERNAL_EMOJI_TYPE } from './types';
+import SelectButton from './SelectButton';
+import { getEmojiGroups } from './emojiGroups';
 import * as Styles from './styles.scss';
 
 const createExternalEmojiPlugin = (config = {}) => {
@@ -13,6 +14,7 @@ const createExternalEmojiPlugin = (config = {}) => {
     useNativeArt: false,
     selectButtonContent: <SelectButton t={t} theme={theme} />,
     toneSelectOpenDelay: 250,
+    selectGroups: getEmojiGroups(t),
   });
 
   const InsertToolbarButton = plugin.EmojiSelect;

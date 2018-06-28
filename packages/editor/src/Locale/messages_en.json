@@ -120,5 +120,13 @@
   "ManageMediaButton_Tooltip" : "Organize Media",
   "ReplaceVideoButton_Tooltip" : "Replace Video",
   "ReplaceImageButton_Tooltip" : "Replace Image",
-  "EmojiPlugin_InsertButton_Tooltip": "Add an Emoji"
+  "EmojiPlugin_InsertButton_Tooltip": "Add an Emoji",
+  "EmojiPlugin_EmojiGroups_People": "People",
+  "EmojiPlugin_EmojiGroups_Nature": "Nature",
+  "EmojiPlugin_EmojiGroups_Food": "Food & Drink",
+  "EmojiPlugin_EmojiGroups_Activity": "Activity",
+  "EmojiPlugin_EmojiGroups_Travel": "Travel & Places",
+  "EmojiPlugin_EmojiGroups_Objects": "Objects",
+  "EmojiPlugin_EmojiGroups_Symbols": "Symbols",
+  "EmojiPlugin_EmojiGroups_Flags": "Flags"
 }
