@@ -11,7 +11,7 @@ const SelectButton = ({ t, theme }) => {
       theme={theme}
     >
       <div>
-        <InsertPluginIcon style={{ pointerEvents: 'all' }}/>
+        <InsertPluginIcon/>
       </div>
     </Tooltip>
   );
