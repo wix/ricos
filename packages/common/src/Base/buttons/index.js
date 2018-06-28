@@ -20,7 +20,7 @@ import {
   AlignRightIcon,
   WidthIcon,
   HeightIcon,
-  DeleteIcon
+  TrashIcon
 } from '../../../statics/icons';
 
 export { BUTTONS };
@@ -106,7 +106,7 @@ export const SizeFullWidthButton = createBlockAlignmentAndSizeButton({
 });
 
 export const DeleteButton = createBlockButton({
-  Icon: DeleteIcon,
+  Icon: TrashIcon,
   tooltipTextKey: 'DeleteButton_Tooltip',
 });
 
