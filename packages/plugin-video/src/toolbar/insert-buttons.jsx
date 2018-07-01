@@ -1,7 +1,7 @@
 import { DEFAULTS } from '../video-component';
 import { getModalStyles } from 'wix-rich-content-common';
 import VideoURLInputModal from './videoURLInputModal';
-import InsertPluginIcon from '../../statics/icons/insert-plugin.svg';
+import { InsertPluginIcon } from '../../statics/icons';
 
 export default ({ helpers, t }) => {
   return [
