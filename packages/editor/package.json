@@ -23,7 +23,7 @@
     "statics": "mkdir -p dist && cp -R statics dist/statics",
     "poststatics": "npm run icons",
     "icons": "svgr -d dist/statics/icons dist/statics/icons",
-    "posticons": "create-index ./dist/statics/icons && npm run babel:icons",
+    "posticons": "create-index -r ./dist/statics/icons && npm run babel:icons",
     "prewatch": "npm run clean && npm run statics",
     "watch": "npm run babel:es -- --watch",
     "release": "wnpm-release --no-shrinkwrap",
