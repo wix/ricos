@@ -1,5 +1,5 @@
 import { DEFAULTS } from '../HtmlComponent';
-import InsertPluginIcon from '../../statics/icons/insert-plugin.svg';
+import { InsertPluginIcon } from '../../statics/icons';
 
 export default ({ helpers, t }) => {
   return [
