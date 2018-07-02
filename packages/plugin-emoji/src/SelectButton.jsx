@@ -5,13 +5,17 @@ import { EmojiPluginIcon } from './icons';
 
 const SelectButton = ({ t, theme }) => {
   return (
-    <Tooltip
-      content={t('EmojiPlugin_InsertButton_Tooltip')}
-      moveBy={{ x: 5, y: 0 }}
-      theme={theme}
-    >
-      <div>
-        <EmojiPluginIcon/>
+    <Tooltip content={t('EmojiPlugin_InsertButton_Tooltip')} moveBy={{ x: 5, y: -5 }} theme={theme}>
+      <div
+        style={{
+          width: '19px',
+          height: '19px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        <EmojiPluginIcon style={{ width: '15px', height: '15px', paddingBottom: '2px' }} />
       </div>
     </Tooltip>
   );
