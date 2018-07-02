@@ -4,7 +4,7 @@ import decorateComponentWithProps from 'decorate-component-with-props';
 import { EXTERNAL_MENTIONS_TYPE } from './types';
 import MentionComponent from './MentionComponent';
 import MentionSuggestionsWrapper from './MentionSuggestionsWrapper';
-import Styles from './styles.scss';
+import Styles from '../statics/mentions.scss';
 
 /*
 Interface Mention {
