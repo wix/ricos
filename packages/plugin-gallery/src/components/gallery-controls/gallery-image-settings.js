@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import isEmpty from 'lodash/isEmpty';
 import findIndex from 'lodash/findIndex';
+import pick from 'lodash/pick';
 import { getScaleToFillImageURL } from 'image-client-api/dist/imageClientSDK';
 import {
   mergeStyles,
@@ -17,6 +18,7 @@ import {
 import BackIcon from './icons/back.svg';
 import styles from './gallery-image-settings.scss';
 import GallerySettingsMobileHeader from './gallery-settings-mobile-header';
+import { isUndefined } from 'util';
 
 class ImageSettings extends Component {
 
@@ -24,6 +26,14 @@ class ImageSettings extends Component {
     super(props);
     this.styles = mergeStyles({ styles, theme: props.theme });
     this.state = this.propsToState(this.props);
+    const { t } = props;
+    this.updateLabel = t('GalleryImageSettings_Update');
+    this.headerLabel = t('GalleryImageSettings_Header');
+    this.ReplaceLabel = t('GalleryImageSettings_Replace_Label');
+    this.deleteLabel = t('GalleryImageSettings_Delete_Label');
+    this.titleLabel = t('GalleryImageSettings_Title_Label');
+    this.titleInputPlaceholder = t('GalleryImageSettings_Title_Input_Placeholder');
+    this.linkLabel = t('GalleryImageSettings_Link_Label');
   }
 
   propsToState(props) {
@@ -44,8 +54,6 @@ class ImageSettings extends Component {
     this.initialImageState = this.props.images.map(i => ({ ...i }));
   }
 
-  setLinkPanel = linkPanel => this.linkPanel = linkPanel;
-
   deleteImage(selectedImage) {
     const images = this.state.images.filter(i => i.itemId !== selectedImage.itemId);
     this.setState({
@@ -65,49 +73,92 @@ class ImageSettings extends Component {
     handleFileChange(event, itemIdx);
   }
 
-  onDoneClick = selectedImage => {
+  onDoneClick = () => {
     const { onSave } = this.props;
-    if (this.linkPanel.state.isValidUrl && this.linkPanel.state.url) {
-      const { url, targetBlank, nofollow } = this.linkPanel.state;
-      this.imageMetadataUpdated(selectedImage, { link: { url, targetBlank, nofollow } });
-    } else if (this.linkPanel.state.intermediateUrl === '') {
-      this.imageMetadataUpdated(selectedImage, { link: {} });
-    }
-    onSave(this.state.images);
+    const images = this.state.images.reduce(
+      (resultImages, image) => {
+        if (image.metadata && image.metadata.link && image.metadata.link.url) {
+          resultImages.push({ ...image,
+            metadata: {
+              ...image.metadata,
+              link: pick(image.metadata.link, 'url', 'rel', 'target')
+            }
+          });
+        } else {
+          resultImages.push({ ...image, metadata: { ...image.metadata, link: null } });
+        }
+        return resultImages;
+      }, []);
+    onSave(images);
   }
 
   getImageUrl = image => getScaleToFillImageURL(('media/' + image.url), image.metadata.width, image.metadata.height, 420, 240);
+
+  onImageIntermediateUrlChange = intermediateUrl => {
+    const selectedImage = this.state.images[this.state.selectedIndex];
+    selectedImage.metadata = selectedImage.metadata || {};
+    selectedImage.metadata.link = selectedImage.metadata.link || {};
+    selectedImage.metadata.link.intermediateUrl = intermediateUrl;
+    this.setState({ images: this.state.images });
+  };
+
+  onImageUrlChange = () => {
+    const selectedImage = this.state.images[this.state.selectedIndex];
+    selectedImage.metadata = selectedImage.metadata || {};
+    selectedImage.metadata.link = selectedImage.metadata.link || {};
+    selectedImage.metadata.link.url = selectedImage.metadata.link.intermediateUrl;
+    this.setState({ images: this.state.images });
+  };
+
+  onImageTargetChange = isBlank => {
+    const selectedImage = this.state.images[this.state.selectedIndex];
+    selectedImage.metadata = selectedImage.metadata || {};
+    selectedImage.metadata.link = selectedImage.metadata.link || {};
+    selectedImage.metadata.link.target = isBlank ? '_blank' : '_self'; // TODO: anchorTarget prop
+    this.setState({ images: this.state.images });
+  };
+
+  onImageRelChange = isNofollow => {
+    const selectedImage = this.state.images[this.state.selectedIndex];
+    selectedImage.metadata = selectedImage.metadata || {};
+    selectedImage.metadata.link = selectedImage.metadata.link || {};
+    selectedImage.metadata.link.rel = isNofollow ? 'nofollow' : 'noopener';
+    this.setState({ images: this.state.images });
+  };
+
+  onValidateUrl = isValid => {
+    const selectedImage = this.state.images[this.state.selectedIndex];
+    selectedImage.metadata = selectedImage.metadata || {};
+    selectedImage.metadata.link = selectedImage.metadata.link || {};
+    selectedImage.metadata.link.isValidUrl = isValid;
+    this.setState({ images: this.state.images });
+  };
 
   render() {
     const styles = this.styles;
     const { handleFileSelection, onCancel, theme, isMobile, t } = this.props;
     const { images } = this.state;
     const selectedImage = images[this.state.selectedIndex];
-    const { url, targetBlank, nofollow } = (!isEmpty(selectedImage.metadata.link) ? selectedImage.metadata.link : {});
-    const updateLabel = t('GalleryImageSettings_Update');
-    const headerLabel = t('GalleryImageSettings_Header');
-    const ReplaceLabel = t('GalleryImageSettings_Replace_Label');
-    const deleteLabel = t('GalleryImageSettings_Delete_Label');
-    const titleLabel = t('GalleryImageSettings_Title_Label');
-    const titleInputPlaceholder = t('GalleryImageSettings_Title_Input_Placeholder');
-    const linkLabel = t('GalleryImageSettings_Link_Label');
+    const { url, target, rel, intermediateUrl } = (!isEmpty(selectedImage.metadata.link) ? selectedImage.metadata.link : {});
+    const targetBlank = target === '_blank' || isUndefined(target);
+    const nofollow = rel === 'nofollow';
 
     return (
       <FocusManager className={styles.galleryImageSettings}>
         <div className={styles.galleryImageSettings_content}>
-          { isMobile ?
+          {isMobile ?
             <GallerySettingsMobileHeader
               theme={theme}
               cancel={() => onCancel(this.initialImageState)}
               save={() => this.onDoneClick(selectedImage)}
-              saveName={updateLabel}
+              saveName={this.updateLabel}
               t={t}
             /> :
             <h3
               className={classNames(styles.galleryImageSettings_backButton, styles.galleryImageSettings_title)}
               data-hook="galleryImageSettingsHeader"
             >
-              <BackIcon className={styles.galleryImageSettings_backIcon} />{headerLabel}
+              <BackIcon className={styles.galleryImageSettings_backIcon} />{this.headerLabel}
             </h3>
           }
           <div
@@ -137,13 +188,13 @@ class ImageSettings extends Component {
                 className={styles.galleryImageSettings_replace} handleFileSelection={handleFileSelection}
                 dataHook="galleryImageSettingsFileInput" onChange={this.replaceItem} theme={theme} title="Replace Image"
               >
-                <span className={styles.galleryImageSettings_replace_text}>{ReplaceLabel}</span>
+                <span className={styles.galleryImageSettings_replace_text}>{this.ReplaceLabel}</span>
               </FileInput>
               <button
                 className={styles.galleryImageSettings_delete} aria-label="delete image"
                 data-hook="galleryImageSettingsDeleteImage" onClick={() => this.deleteImage(selectedImage)}
               >
-                <span className={styles.galleryImageSettings_delete_text}>{deleteLabel}</span>
+                <span className={styles.galleryImageSettings_delete_text}>{this.deleteLabel}</span>
               </button>
             </div>
             <SettingsSection
@@ -153,8 +204,8 @@ class ImageSettings extends Component {
               <InputWithLabel
                 theme={theme}
                 id="galleryImageTitleInput"
-                label={titleLabel}
-                placeholder={titleInputPlaceholder}
+                label={this.titleLabel}
+                placeholder={this.titleInputPlaceholder}
                 value={selectedImage.metadata.title || ''}
                 dataHook="galleryImageTitleInput" onChange={event => this.imageMetadataUpdated(selectedImage, { title: event.target.value })}
               />
@@ -163,10 +214,12 @@ class ImageSettings extends Component {
               ariaProps={{ 'aria-label': 'image link', role: 'region' }}
               theme={theme} className={this.styles.galleryImageSettings_section}
             >
-              <span id="gallery_image_link_lbl" className={this.styles.inputWithLabel_label}>{linkLabel}</span>
+              <span id="gallery_image_link_lbl" className={this.styles.inputWithLabel_label}>{this.linkLabel}</span>
               <LinkPanel
-                ref={this.setLinkPanel} theme={theme} url={url} targetBlank={targetBlank} nofollow={nofollow}
-                isImageSettings t={t} ariaProps={{ 'aria-labelledby': 'gallery_image_link_lbl' }}
+                theme={theme} url={url} targetBlank={targetBlank} nofollow={nofollow}
+                isImageSettings t={t} ariaProps={{ 'aria-labelledby': 'gallery_image_link_lbl' }} intermediateUrl={intermediateUrl}
+                onIntermediateUrlChange={this.onImageIntermediateUrlChange} onValidateUrl={this.onValidateUrl}
+                onUrlChange={this.onImageUrlChange} onTargetBlankChange={this.onImageTargetChange} onNofollowChange={this.onImageRelChange}
               />
             </SettingsSection>
 

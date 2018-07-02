@@ -8,6 +8,12 @@
 
 .textToolbar_scrollableContainer {
     width: 100%;
+    padding: 80px 0;
+    margin: -80px 0;
+    pointer-events: none;
+    & > * {
+        pointer-events: initial;
+    }
 }
 
 .textToolbar_buttons {

@@ -34,6 +34,7 @@
     "wix-rich-content-plugin-html": "^1.0.0",
     "wix-rich-content-plugin-image": "^1.0.0",
     "wix-rich-content-plugin-link": "^1.0.0",
+    "wix-rich-content-plugin-mentions": "^1.0.0",
     "wix-rich-content-plugin-video": "^1.0.0"
   },
   "scripts": {

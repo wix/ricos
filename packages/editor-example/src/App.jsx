@@ -56,6 +56,17 @@ class App extends Component {
         htmlIframeSrc: 'http://localhost:3000/static/html-plugin-embed.html',
         // showInsertButtons: false,
       },
+      mentions: {
+        onMentionClick: mention => console.log({mention}),
+        getMentions: (searchQuery) => new Promise(resolve =>
+          setTimeout(() =>  resolve([
+            {name: searchQuery, slug: searchQuery},
+            {name: 'Test One', slug: 'testone'},
+            {name: 'Test Two', slug: 'testwo', avatar: 'https://via.placeholder.com/100x100?text=Image=50'}
+           ]),
+            250)
+          ),
+      }
       // image: {
       // imageProps: src => ({
       //   'data-pin-media': `https://static.wixstatic.com/media/${src.file_name}`,

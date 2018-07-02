@@ -73,7 +73,7 @@ export default ({ buttons, activeItem, onChange, tooltipTextKey }) =>
       };
       return (
         <div className={this.styles.inlineToolbarDropdown_options}>
-          {buttons.map((Button, i) => <Button key={i} tabIndex={i} {...buttonProps} />)}
+          {buttons.map((Button, i) => <Button key={i} tabIndex="0" {...buttonProps} />)}
         </div>
       );
     };

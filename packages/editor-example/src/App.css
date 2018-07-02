@@ -67,6 +67,7 @@
 }
 
 .column.main {
+  max-width: 100%;
   width: 740px;
   margin: 0 auto;
 }

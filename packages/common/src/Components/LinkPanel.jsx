@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import isUndefined from 'lodash/isUndefined';
+import isEqual from 'lodash/isEqual';
 import { mergeStyles } from '../Utils/mergeStyles';
 import { isValidUrl } from '../Utils/urlValidators';
 import Tooltip from './Tooltip';
@@ -12,15 +13,7 @@ import styles from '../Styles/link-panel.scss';
 class LinkPanel extends Component {
   constructor(props) {
     super(props);
-    const { url, targetBlank, nofollow } = props;
-    const intermediateUrl = url || '';
-    this.state = {
-      intermediateUrl,
-      url: url || '',
-      isValidUrl: true,
-      targetBlank: isUndefined(targetBlank) ? true : targetBlank,
-      nofollow: isUndefined(nofollow) ? false : nofollow,
-    };
+    this.state = this.propsToState(props);
     this.styles = mergeStyles({ styles, theme: props.theme });
   }
 
@@ -30,21 +23,58 @@ class LinkPanel extends Component {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (!isEqual(this.props, nextProps)) {
+      this.setState(this.propsToState(nextProps));
+    }
+  }
+
+  propsToState = props => {
+    const state = {
+      url: props.url || '',
+      intermediateUrl: props.intermediateUrl || props.url || '',
+      targetBlank: isUndefined(props.targetBlank) ? true : props.targetBlank,
+      nofollow: isUndefined(props.nofollow) ? false : props.nofollow
+    };
+    state.isValidUrl = isValidUrl(state.intermediateUrl) || (state.intermediateUrl === '');
+    return state;
+  };
+
   handleIntermediateUrlChange = event => {
-    this.setState({ intermediateUrl: event.target.value });
+    const { onIntermediateUrlChange } = this.props;
+    if (onIntermediateUrlChange) {
+      onIntermediateUrlChange(event.target.value);
+    } else {
+      this.setState({ intermediateUrl: event.target.value });
+    }
   };
 
   handleUrlChange = () => {
-    const { intermediateUrl } = this.state;
-    this.setState({ url: intermediateUrl });
+    const { onUrlChange } = this.props;
+    if (onUrlChange) {
+      onUrlChange();
+    } else {
+      const { intermediateUrl } = this.state;
+      this.setState({ url: intermediateUrl });
+    }
   };
 
   handleTargetChange = event => {
-    this.setState({ targetBlank: event.target.checked });
+    const { onTargetBlankChange } = this.props;
+    if (onTargetBlankChange) {
+      onTargetBlankChange(event.target.checked);
+    } else {
+      this.setState({ targetBlank: event.target.checked });
+    }
   };
 
   handleNofollowChange = event => {
-    this.setState({ nofollow: event.target.checked });
+    const { onNofollowChange } = this.props;
+    if (onNofollowChange) {
+      onNofollowChange(event.target.checked);
+    } else {
+      this.setState({ nofollow: event.target.checked });
+    }
   };
 
   validateUrl = () => {
@@ -53,12 +83,17 @@ class LinkPanel extends Component {
     if (isValidUrlConst) {
       this.handleUrlChange();
     }
-    this.setState({ isValidUrl: isValidUrlConst });
+    const { onValidateUrl } = this.props;
+    if (onValidateUrl) {
+      onValidateUrl(isValidUrlConst);
+    } else {
+      this.setState({ isValidUrl: isValidUrlConst });
+    }
   };
 
   handleKeyPress = e => {
     if (e.charCode === 13) {
-      this.validateUrl(e);
+      this.validateUrl();
     }
   };
 
@@ -87,7 +122,7 @@ class LinkPanel extends Component {
           />
           {this.state.isValidUrl ? null : (
             <Tooltip data-hook="linkPanelTooltip" content={errorTooltipText} moveBy={{ x: -23, y: -5 }} theme={theme}>
-              <span><ErrorIcon data-hook="linkPanelError" className={styles.linkPanel_errorIcon}/></span>
+              <span><ErrorIcon data-hook="linkPanelError" className={styles.linkPanel_errorIcon} /></span>
             </Tooltip>
           )}
         </div>
@@ -112,6 +147,7 @@ class LinkPanel extends Component {
 
 LinkPanel.propTypes = {
   url: PropTypes.string,
+  intermediateUrl: PropTypes.string,
   targetBlank: PropTypes.bool,
   nofollow: PropTypes.bool,
   isImageSettings: PropTypes.bool,
@@ -120,5 +156,10 @@ LinkPanel.propTypes = {
   relValue: PropTypes.string,
   t: PropTypes.func,
   ariaProps: PropTypes.object,
+  onUrlChange: PropTypes.func,
+  onIntermediateUrlChange: PropTypes.func,
+  onTargetBlankChange: PropTypes.func,
+  onNofollowChange: PropTypes.func,
+  onValidateUrl: PropTypes.func,
 };
 export default LinkPanel;

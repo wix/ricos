@@ -23,6 +23,7 @@
     -webkit-font-smoothing: antialiased;
     font-weight: 400;
     font-style: normal;
+    pointer-events: none;
     font-stretch: normal;
   }
   &:hover::after {
@@ -36,6 +37,7 @@
     background: #000;
     animation: fadeInArrow 0.3s cubic-bezier(0.23, 1, 0.32, 1) both;
     animation-delay: 300ms;
+    pointer-events: none;
   }
 }
 
