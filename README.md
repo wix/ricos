@@ -7,7 +7,7 @@
 1. `cd rich-content`
 2. `npm i` - installs all dependencies and links any cross-dependencies.
 3. Build the modules by running one of the following:
-    1. `npm run build:dev` - build once
+    1. `npm run build` - build once
     2. `npm run watch` - rebuild on changes
 4. Choose an example and run `npm start`.
 
