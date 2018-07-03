@@ -26,6 +26,7 @@ const createExternalEmojiPlugin = (config = {}) => {
           name: 'Emoji',
           addToSideToolbar: false,
           ButtonElement: InsertToolbarButton,
+          wrappingComponent: 'div',
           helpers,
           t,
         },
