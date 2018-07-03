@@ -26,7 +26,7 @@ class MentionSuggestionsWrapper extends Component {
 }
 
 MentionSuggestionsWrapper.propTypes = {
-  component: PropTypes.node,
+  component: PropTypes.func,
   settings: PropTypes.object,
 };
 
