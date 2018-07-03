@@ -16,19 +16,21 @@
 
 
 [wix-rich-content-editor](https://github.com/wix-incubator/rich-content/tree/master/packages/editor) is the rich content editor React Component.  
+[wix-rich-content-viewer](https://github.com/wix-incubator/rich-content/tree/master/packages/viewer) is the rich content viewer React Component.  
 [wix-rich-content-common](https://github.com/wix-incubator/rich-content/tree/master/pacakges/common) is a shared library utilized by the rest of the modules.  
-[config](https://github.com/wix-incubator/rich-content/tree/master/config) build config for rich-content-common and all plugins.  
 
 ##### Plugins
 
-[wix-rich-content-plugin-link](https://github.com/wix-incubator/rich-content/tree/master/pacakges/plugin-link) convert plain text URLs into `<a>` tags.  
-[wix-rich-content-plugin-hashtag](https://github.com/wix-incubator/rich-content/tree/master/pacakges/plugin-hashtag) convert plain text #hastags into dynamic elements.  
-[wix-rich-content-plugin-emoji](https://github.com/wix-incubator/rich-content/tree/master/pacakges/plugin-emoji) add emojis to your content.  
-[wix-rich-content-plugin-image](https://github.com/wix-incubator/rich-content/tree/master/pacakges/plugin-image) add images to your content.  
-[wix-rich-content-plugin-video](https://github.com/wix-incubator/rich-content/tree/master/pacakges/plugin-video) add videos to your content.  
-[wix-rich-content-plugin-gallery](https://github.com/wix-incubator/rich-content/tree/master/pacakges/plugin-gallery) add pro galleries to your content!!!  
-[wix-rich-content-plugin-html](https://github.com/wix-incubator/rich-content/tree/master/pacakges/plugin-html) embed html code or sites in your content.  
 [wix-rich-content-plugin-divider](https://github.com/wix-incubator/rich-content/tree/master/pacakges/plugin-divider) add dividers to your content.  
+[wix-rich-content-plugin-emoji](https://github.com/wix-incubator/rich-content/tree/master/pacakges/plugin-emoji) add emojis to your content.  
+[wix-rich-content-plugin-gallery](https://github.com/wix-incubator/rich-content/tree/master/pacakges/plugin-gallery) add pro galleries to your content!!!  
+[wix-rich-content-plugin-hashtag](https://github.com/wix-incubator/rich-content/tree/master/pacakges/plugin-hashtag) convert plain text #hastags into dynamic elements.  
+[wix-rich-content-plugin-html](https://github.com/wix-incubator/rich-content/tree/master/pacakges/plugin-html) embed html code or sites in your content.  
+[wix-rich-content-plugin-image](https://github.com/wix-incubator/rich-content/tree/master/pacakges/plugin-image) add images to your content.  
+[wix-rich-content-plugin-link](https://github.com/wix-incubator/rich-content/tree/master/pacakges/plugin-link) convert plain text URLs into `<a>` tags.  
+[wix-rich-content-plugin-mentions](https://github.com/wix-incubator/rich-content/tree/master/pacakges/plugin-video) add videos to your content.  
+[wix-rich-content-plugin-video](https://github.com/wix-incubator/rich-content/tree/master/pacakges/plugin-mentions) mention users in your content.  
+
 
 ##### Examples
 [rich-content-editor-example](https://github.com/wix-incubator/rich-content/tree/master/pacakges/editor-example) to see how to consume the Component as an editor.  
