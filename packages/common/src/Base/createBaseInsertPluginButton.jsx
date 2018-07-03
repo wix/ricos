@@ -77,10 +77,11 @@ export default ({ blockType, button, helpers, pubsub, t }) => {
     renderButton = () => {
       const { styles } = this;
       const { showName, tabIndex } = this.props;
-      const { name, Icon, ButtonElement } = button;
+      const { name, Icon, ButtonElement, wrappingComponent } = button;
+      const WrappingComponent = wrappingComponent || 'button';
       if (ButtonElement) {
         return (
-          <button
+          <WrappingComponent
             className={styles.button} data-hook={`${name.replace(' ', '_')}_insert_plugin_button`}
             onClick={this.onClick}
           >
@@ -88,12 +89,12 @@ export default ({ blockType, button, helpers, pubsub, t }) => {
               <ButtonElement key="0" />
             </div>
             {showName && <span key="1" className={styles.label}>{name}</span>}
-          </button>
+          </WrappingComponent>
         );
 
       } else {
         return (
-          <button
+          <WrappingComponent
             aria-label={`Add ${name}`} tabIndex={tabIndex}
             className={styles.button} data-hook={`${name.replace(' ', '_')}_insert_plugin_button`} onClick={this.onClick}
           >
@@ -101,7 +102,7 @@ export default ({ blockType, button, helpers, pubsub, t }) => {
               <Icon key="0" />
             </div>
             {showName && <span key="1" className={styles.label}>{name}</span>}
-          </button>
+          </WrappingComponent>
         );
       }
     };
