@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Tooltip } from 'wix-rich-content-common';
-import { EmojiPluginIcon } from './icons';
+import { EmojiPluginIcon } from '../statics/icons';
 
 const SelectButton = ({ t, theme }) => {
   return (
