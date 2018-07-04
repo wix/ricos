@@ -42,9 +42,15 @@
   },
   "devDependencies": {
     "@svgr/cli": "^2.0.0",
+    "@wix/draft-js": "^0.10.163",
     "babel-cli": "^6.26.0",
+    "classnames": "^2.2.6",
     "create-index": "^2.3.0",
-    "eslint": "^4.19.1"
+    "eslint": "^4.19.1",
+    "lodash": "^4.17.10",
+    "prop-types": "^15.6.2",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1"
   },
   "dependencies": {
     "decorate-component-with-props": "^1.1.0",

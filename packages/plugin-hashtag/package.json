@@ -41,8 +41,15 @@
     "react-dom": "^15.0.0 || ^16.0.0"
   },
   "devDependencies": {
+    "@wix/draft-js": "^0.10.163",
     "babel-cli": "^6.26.0",
-    "eslint": "^4.19.1"
+    "classnames": "^2.2.6",
+    "decorate-component-with-props": "^1.1.0",
+    "eslint": "^4.19.1",
+    "lodash": "^4.17.10",
+    "prop-types": "^15.6.2",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1"
   },
   "dependencies": {
     "wix-rich-content-common": "^1.0.27"
