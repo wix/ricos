@@ -1,4 +1,6 @@
 
+import { WixUtils } from 'wix-rich-content-common';
+
 class WixMediaUrl {
   constructor() {
     // default small quality for performance (should get exact size after first render and then the right quality)
@@ -11,6 +13,9 @@ class WixMediaUrl {
   }
 
   testWebP = () => {
+    if (WixUtils.isTestEnv()) {
+      return false;
+    }
     //sync test
     const canvas = typeof document === 'object' ? document.createElement('canvas') : {};
     canvas.width = canvas.height = 1;
