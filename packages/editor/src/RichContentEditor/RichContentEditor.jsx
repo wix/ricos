@@ -11,6 +11,7 @@ import createEditorToolbars from './Toolbars';
 import createPlugins from './createPlugins';
 import { keyBindingFn, COMMANDS } from './keyBindings';
 import handleKeyCommand from './handleKeyCommand';
+import handleReturnCommand from './handleReturnCommand';
 import blockStyleFn from './blockStyleFn';
 import { EditorModals, AccessibilityListener, getModalStyles,
   normalizeInitialState, hasLinksInSelection, removeLinksInSelection } from 'wix-rich-content-common';
@@ -257,6 +258,7 @@ class RichContentEditor extends Component {
             }
           }
         })}
+        handleReturn={handleReturnCommand(this.updateEditorState)}
         editorKey={editorKey}
         keyBindingFn={keyBindingFn}
         helpers={helpers}
