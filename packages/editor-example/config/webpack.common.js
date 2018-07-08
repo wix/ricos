@@ -3,6 +3,7 @@ const HtmlWebPackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const PATHS = {
+  root: path.join(__dirname, '..'),
   src: path.join(__dirname, '../src'),
   dist: path.join(__dirname, '../dist')
 };
@@ -33,16 +34,7 @@ module.exports = env => ({
           loader: "babel-loader",
           options: {
             compact: true,
-            presets: [
-              ["@babel/preset-env"],
-              ["@babel/preset-stage-2", { "decoratorsLegacy": true }],
-              "@babel/preset-react"
-            ],
-            plugins: [
-              ["@babel/plugin-proposal-class-properties"],
-              "@babel/transform-runtime",
-              "dynamic-import-node"
-            ]
+            extends: path.resolve(PATHS.root, '..', '..', '.babelrc.js')
           }
         }
       },
