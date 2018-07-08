@@ -7,13 +7,12 @@
     "email": "jonathanb@wix.com"
   },
   "dependencies": {
-    "@wix/draft-js": "^0.10.105",
-    "babel-core": "^6.26.0",
-    "babel-eslint": "7.2.3",
-    "babel-jest": "^23.0.1",
-    "babel-runtime": "^6.26.0",
+    "@wix/draft-js": "^0.10.163",
+    "@babel/core": "^7.0.0-beta.52",
+    "babel-eslint": "8.1.0",
+    "babel-jest": "^23.2.0",
     "chalk": "^2.4.1",
-    "classnames": "^2.2.5",
+    "classnames": "^2.2.6",
     "decorate-component-with-props": "^1.1.0",
     "jest": "^23.1.0",
     "mobile-detect": "^1.4.1",

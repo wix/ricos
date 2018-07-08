@@ -19,7 +19,7 @@ module.exports = env => ({
       publicPath: '/'
   },
   resolve: {
-    extensions: ['.js', '.jsx', '.json', '.scss', '.css'],
+    extensions: ['.js', '.jsx', '.json'],
     alias: {
       'draft-js': path.resolve(__dirname, '..', '..', '..', 'node_modules', '@wix', 'draft-js'),
     },
@@ -33,6 +33,16 @@ module.exports = env => ({
           loader: "babel-loader",
           options: {
             compact: true,
+            presets: [
+              ["@babel/preset-env"],
+              ["@babel/preset-stage-2", { "decoratorsLegacy": true }],
+              "@babel/preset-react"
+            ],
+            plugins: [
+              ["@babel/plugin-proposal-class-properties"],
+              "@babel/transform-runtime",
+              "dynamic-import-node"
+            ]
           }
         }
       },
@@ -89,7 +99,9 @@ module.exports = env => ({
         loaders: [
           {
             loader: 'babel-loader',
-            query: 'presets=react',
+            options: {
+              presets: ["@babel/preset-react"]
+            }
           },
           {
             loader: 'react-svg-loader',
