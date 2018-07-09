@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-plugin-hashtag",
-  "version": "1.0.27",
+  "version": "1.0.30",
   "author": {
     "name": "Jonathan Bachman",
     "email": "jonathanb@wix.com"
@@ -45,7 +45,7 @@
     "webpack-cli": "^3.0.4"
   },
   "dependencies": {
-    "wix-rich-content-common": "^1.0.27"
+    "wix-rich-content-common": "~1.0.30"
   },
   "unpkg": true,
   "publishConfig": {
