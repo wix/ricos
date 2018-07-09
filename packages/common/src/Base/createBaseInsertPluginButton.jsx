@@ -7,7 +7,7 @@ import classNames from 'classnames';
 import { mergeStyles } from '../Utils/mergeStyles';
 import FileInput from '../Components/FileInput';
 import ToolbarButton from '../Components/ToolbarButton';
-import styles from '../../statics/styles/toolbar-button.scss';
+import styles from '../Styles/toolbar-button.scss';
 
 export default ({ blockType, button, helpers, pubsub, t }) => {
   class InsertPluginButton extends Component {

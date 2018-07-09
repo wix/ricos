@@ -6,9 +6,10 @@ import get from 'lodash/get';
 import isFunction from 'lodash/isFunction';
 import { mergeStyles, ImageLoader, validate } from 'wix-rich-content-common';
 import isEqual from 'lodash/isEqual';
+
+import schema from './data-schema.json';
 import getImageSrc from './get-image-source';
-import schema from '../statics/data-schema.json';
-import styles from '../statics/styles/image-viewer.scss';
+import styles from './image-viewer.scss';
 
 const getDefault = () => ({
   config: {

@@ -13,7 +13,7 @@ import {
 import identity from 'lodash/identity';
 import trimStart from 'lodash/trimStart';
 import { SRC_TYPE_HTML, SRC_TYPE_URL } from '../constants';
-import styles from '../../statics/styles/HtmlEditPanel.scss';
+import styles from './HtmlEditPanel.scss';
 
 const VALIDATORS = {
   [SRC_TYPE_HTML]: () => null,

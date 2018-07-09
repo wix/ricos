@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import { findDOMNode } from 'react-dom';
 import { mergeStyles } from 'wix-rich-content-common';
 import VideoViewer from './video-viewer';
-import styles from '../statics/styles/default-video-styles.scss';
+import styles from './default-video-styles.scss';
 import { VIDEO_TYPE_LEGACY, VIDEO_TYPE } from './types';
 
 const DEFAULTS = {

@@ -6,7 +6,7 @@ import {
   SizeSmallCenterIcon,
   SizeSmallRightIcon,
 } from 'wix-rich-content-common';
-import { EditIcon } from '../../statics/icons';
+import EditIcon from '../icons/edit.svg';
 import {
   MAX_ALIGNMENT_WIDTH,
   MIN_WIDTH,

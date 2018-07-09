@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import omit from 'lodash/omit';
 import classNames from 'classnames';
 import { mergeStyles } from '../Utils/mergeStyles';
-import styles from '../../statics/styles/input-with-label.scss';
+import styles from '../Styles/input-with-label.scss';
 
 class InputWithLabel extends Component {
   constructor(props) {

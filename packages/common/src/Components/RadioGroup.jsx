@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import styles from '../../statics/styles/radio-group.scss';
+import styles from '../Styles/radio-group.scss';
 import { mergeStyles } from '../Utils/mergeStyles';
 
 class RadioGroup extends Component {

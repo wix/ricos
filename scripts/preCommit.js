@@ -12,7 +12,7 @@ const dirsWithModifiedFiles = execSync('git status --porcelain=1')
   .toString()
   .split('\n')
   .filter(s => {
-    if (!s.startsWith(' ') && !s.startsWith('?') && s.indexOf(baseDir) !== -1) {
+    if (!s.startsWith(' ') && s.indexOf(baseDir) !== -1) {
       let isValidPkg = true;
       for (const i of ignoredPackages) {
         if (s.indexOf(i) !== -1) {

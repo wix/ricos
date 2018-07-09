@@ -5,7 +5,7 @@ import LinkPanel from './LinkPanel';
 import FocusManager from './FocusManager';
 import { mergeStyles } from '../Utils/mergeStyles';
 import RadioGroupHorizontal from './RadioGroupHorizontal';
-import styles from '../../statics/styles/link-panel.scss';
+import styles from '../Styles/link-panel.scss';
 const LinkType = props => (
   <RadioGroupHorizontal
     dataSource={[{ value: 'url', labelText: 'Website address (URL)' }, { value: 'page', labelText: 'Site Page' }]}

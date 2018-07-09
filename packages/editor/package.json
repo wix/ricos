@@ -1,31 +1,29 @@
 {
   "private": false,
   "name": "wix-rich-content-editor",
-  "version": "1.2.0",
+  "version": "1.1.27",
   "author": {
     "name": "Jonathan Bachman",
     "email": "jonathanb@wix.com"
   },
-  "main": "dist/lib/index.js",
-  "module": "dist/es/index.js",
+  "main": "dist/wix-rich-content-editor.js",
   "files": [
     "dist"
   ],
   "scripts": {
     "clean": "rm -rf dist/",
-    "babel:icons": "babel --config-file ../../.babelrc.js --env-name commonjs dist/statics -d dist/statics",
-    "postbabel:icons": "find dist/statics/icons -name \"*.svg\" -type f -delete",
-    "babel:es": "babel --config-file ../../.babelrc.js --env-name es src -d dist/es --source-maps",
-    "babel:commonjs": "babel --config-file ../../.babelrc.js --env-name commonjs src -d dist/lib",
-    "prebuild": "npm run clean",
-    "build": "mkdir -p dist && npm run babel:es && npm run babel:commonjs",
-    "postbuild": "npm run statics",
-    "statics": "cp -R statics dist/statics",
-    "poststatics": "npm run icons",
-    "icons": "svgr -d dist/statics/icons dist/statics/icons",
-    "posticons": "create-index -r ./dist/statics/icons && npm run babel:icons",
-    "prewatch": "npm run clean && npm run statics",
-    "watch": "npm run babel:es -- --watch",
+    "pretranspile": "npm run clean",
+    "transpile": "babel -q src -d dist/src --copy-files",
+    "prebuild": "npm run transpile",
+    "build": "npm run build:santa && npm run build:prod",
+    "build:santa": "webpack --config ./config/webpack.santa.js",
+    "build:analyze": "npm run build:prod -- --env.analyzeBundle",
+    "build:dev": "npm run transpile && webpack --config ./config/webpack.dev.js",
+    "build:prod": "webpack --config ./config/webpack.prod.js",
+    "prewatch": "npm run clean",
+    "watch": "npm run build:dev -- --watch",
+    "watch:prod": "npm run build -- --watch",
+    "watch:remote": "webpack --config ./config/webpack.remote.js --watch",
     "release": "wnpm-release --no-shrinkwrap",
     "lint": "eslint 'src/**/*.{js,jsx}'",
     "lint:fix": "npm run lint -- --fix",
@@ -33,9 +31,6 @@
     "test": "jest --verbose"
   },
   "jest": {
-    "globals": {
-      "NODE_ENV": "test"
-    },
     "moduleNameMapper": {
       "\\.(jpg|jpeg|png|gif|svg)$": "<rootDir>/__mocks__/fileMock.js",
       "\\.(css|scss)$": "<rootDir>/__mocks__/styleMock.js",
@@ -45,7 +40,8 @@
     }
   },
   "dependencies": {
-    "classnames": "^2.2.6",
+    "babel-runtime": "^6.26.0",
+    "classnames": "^2.2.5",
     "decorate-component-with-props": "^1.1.0",
     "draft-js-drag-n-drop-plugin": "^2.0.1",
     "draft-js-focus-plugin": "^2.0.1",
@@ -58,7 +54,7 @@
     "react-i18next": "^7.6.1",
     "react-measure": "^2.0.2",
     "redraft": "^0.9.0",
-    "wix-rich-content-common": "^1.1.0",
+    "wix-rich-content-common": "^1.0.27",
     "wnpm-ci": "latest"
   },
   "peerDependencies": {
@@ -66,25 +62,24 @@
     "react-dom": "^15.0.0 || ^16.0.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.0.0-beta.52",
-    "@babel/core": "^7.0.0-beta.52",
-    "@babel/runtime": "^7.0.0-beta.52",
-    "@svgr/cli": "^2.0.0",
-    "@wix/draft-js": "^0.10.163",
-    "babel-jest": "^23.2.0",
-    "create-index": "^2.3.0",
+    "@wix/draft-js": "^0.10.105",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-jest": "^21.2.0",
     "enzyme": "^2.9.1",
     "eslint": "^4.19.1",
     "eslint-config-wix": "^1.1.18",
     "eslint-plugin-fp": "^2.3.0",
     "eslint-plugin-lodash": "^2.7.0",
     "eslint-plugin-react": "^7.7.0",
-    "jest": "^23.1.0",
+    "jest": "^21.2.1",
     "node-sass": "^4.8.3",
-    "prop-types": "^15.6.2",
+    "prop-types": "^15.5.10",
     "react": "15.5.4",
     "react-dom": "15.5.4",
-    "react-test-renderer": "^15.6.1"
+    "react-test-renderer": "^15.6.1",
+    "webpack": "^4.12.0",
+    "webpack-cli": "^3.0.4"
   },
   "unpkg": true,
   "publishConfig": {

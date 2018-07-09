@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { mergeStyles } from '../Utils/mergeStyles';
-import { CheckIcon } from '../../statics/icons';
-import styles from '../../statics/styles/checkbox.scss';
-import globalStyles from '../../statics/styles/global.scss';
+import CheckIcon from './icons/check.svg';
+import styles from '../Styles/checkbox.scss';
+import globalStyles from '../Styles/global.scss';
 
 export default class Checkbox extends React.Component {
 

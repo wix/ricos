@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styles from '../statics/styles/Iframe.scss';
+import styles from './Iframe.scss';
 
 const Iframe = ({ iframeRef, ...otherProps }) => (
   <iframe

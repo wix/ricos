@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import styles from '../../statics/styles/image.scss';
+import styles from '../Styles/image.scss';
 import { mergeStyles } from '../Utils/mergeStyles';
 
 class Image extends Component {

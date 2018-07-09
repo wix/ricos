@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import ReactPlayer from 'react-player';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+
 import { mergeStyles, validate } from 'wix-rich-content-common';
 import isEqual from 'lodash/isEqual';
-import schema from '../statics/data-schema.json';
-import styles from '../statics/styles/video-viewer.scss';
+
+import schema from './data-schema.json';
+import styles from './video-viewer.scss';
 
 class VideoViewer extends Component {
   constructor(props) {

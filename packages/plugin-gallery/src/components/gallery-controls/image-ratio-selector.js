@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import { mergeStyles, SelectionList } from 'wix-rich-content-common';
-import styles from '../../../statics/styles/image-ratio-selector.scss';
+import styles from './image-ratio-selector.scss';
 class ImageRatioSelector extends Component {
 
   constructor(props) {

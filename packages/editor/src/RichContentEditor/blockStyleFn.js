@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import styles from '../../statics/styles/rich-content-editor.scss';
+import styles from '~/Styles/rich-content-editor.scss';
 
 export default theme => (
   contentBlock => {

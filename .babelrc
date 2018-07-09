@@ -1,0 +1,15 @@
+{
+  "presets": ["env", "stage-0", "react"],
+  "plugins": [
+    "transform-class-properties",
+    "transform-runtime",
+    [
+      "module-resolver",
+      {
+        "alias": {
+          "~": "./src"
+        }
+      }
+    ]
+  ]
+}

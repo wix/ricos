@@ -1,6 +1,0 @@
-{
-  "plugins": [
-    { "removeViewBox": false },
-    { "cleanupIDs": false }
-  ]
-}

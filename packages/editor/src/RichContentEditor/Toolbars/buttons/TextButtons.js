@@ -1,21 +1,19 @@
 import {
-  AlignLeftIcon,
-  AlignCenterIcon,
-  AlignRightIcon,
-  AlignJustifyIcon,
+  AlignmentLeftIcon,
+  AlignmentCenterIcon,
+  AlignmentRightIcon,
+  AlignmentJustifyIcon,
 } from 'wix-rich-content-common';
-import {
-  BoldIcon,
-  ItalicIcon,
-  UnderlineIcon,
-  IndentIcon,
-  TitleIcon,
-  TitleOneIcon,
-  TitleTwoIcon,
-  BlockQuoteIcon,
-  OrderedListIcon,
-  UnorderedListIcon,
-} from '../../../../statics/icons';
+import BoldIcon from '../icons/bold.svg';
+import ItalicIcon from '../icons/italic.svg';
+import UnderlineIcon from '../icons/underline.svg';
+import IndentIcon from '../icons/indent.svg';
+import TitleIcon from '../icons/title.svg';
+import TitleOneIcon from '../icons/title-one.svg';
+import TitleTwoIcon from '../icons/title-two.svg';
+import BlockquoteIcon from '../icons/block-quote.svg';
+import OrderedListIcon from '../icons/ordered-list.svg';
+import UnorderedListIcon from '../icons/unordered-list.svg';
 import createTextInlineStyleButton from './utils/createTextInlineStyleButton';
 import createTextBlockStyleButton from './utils/createTextBlockStyleButton';
 import createTextAlignmentButton from './utils/createTextAlignmentButton';
@@ -59,31 +57,31 @@ export const InlineTitleButton = createTextInlineStyleButton({
 
 export const BlockquoteButton = createTextBlockStyleButton({
   blockTypes: ['blockquote'],
-  Icons: [BlockQuoteIcon],
+  Icons: [BlockquoteIcon],
   tooltipTextKey: 'QuoteButton_Tooltip',
 });
 
 export const AlignTextLeftButton = createTextAlignmentButton({
   alignment: 'left',
-  Icon: AlignLeftIcon,
+  Icon: AlignmentLeftIcon,
   tooltipTextKey: 'AlignTextLeftButton_Tooltip',
 });
 
 export const AlignTextCenterButton = createTextAlignmentButton({
   alignment: 'center',
-  Icon: AlignCenterIcon,
+  Icon: AlignmentCenterIcon,
   tooltipTextKey: 'AlignTextCenterButton_Tooltip',
 });
 
 export const AlignTextRightButton = createTextAlignmentButton({
   alignment: 'right',
-  Icon: AlignRightIcon,
+  Icon: AlignmentRightIcon,
   tooltipTextKey: 'AlignTextRightButton_Tooltip',
 });
 
 export const AlignTextJustifyButton = createTextAlignmentButton({
   alignment: 'justify',
-  Icon: AlignJustifyIcon,
+  Icon: AlignmentJustifyIcon,
   tooltipTextKey: 'AlignTextJustifyButton_Tooltip',
 });
 

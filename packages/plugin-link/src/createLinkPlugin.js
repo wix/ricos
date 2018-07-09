@@ -3,7 +3,7 @@ import decorateComponentWithProps from 'decorate-component-with-props';
 import { createBasePlugin } from 'wix-rich-content-common';
 import { EXTERNAL_LINK_TYPE } from './types';
 import { Strategy, Component } from './decorator';
-import styles from '../statics/link-viewer.scss';
+import styles from './link-viewer.scss';
 
 const createLinkPlugin = (config = {}) => {
   const type = EXTERNAL_LINK_TYPE;

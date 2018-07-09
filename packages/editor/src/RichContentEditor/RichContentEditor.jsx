@@ -13,18 +13,13 @@ import { keyBindingFn, COMMANDS } from './keyBindings';
 import handleKeyCommand from './handleKeyCommand';
 import handleReturnCommand from './handleReturnCommand';
 import blockStyleFn from './blockStyleFn';
+import { EditorModals, AccessibilityListener, getModalStyles,
+  normalizeInitialState, hasLinksInSelection, removeLinksInSelection } from 'wix-rich-content-common';
+import styles from '../Styles/rich-content-editor.scss';
+import draftStyles from '../Styles/draft.scss';
+import 'wix-rich-content-common/dist/wix-rich-content-common.css';
 import { getStaticTextToolbarId } from './Toolbars/toolbar-id';
-import {
-  EditorModals,
-  AccessibilityListener,
-  getModalStyles,
-  normalizeInitialState,
-  hasLinksInSelection,
-  removeLinksInSelection
-} from 'wix-rich-content-common';
 import createInlineStyleDecorators from './Decorators/inline-style-decorators';
-import styles from '../../statics/styles/rich-content-editor.scss';
-import draftStyles from '../../statics/styles/draft.scss';
 
 class RichContentEditor extends Component {
   constructor(props) {
@@ -93,7 +88,6 @@ class RichContentEditor extends Component {
       TextToolbar: this.props.textToolbarType === 'static' ? this.toolbars.textStatic.Toolbar : null
     }
   )
-
   getInitialEditorState() {
     const { editorState, initialState, anchorTarget, relValue } = this.props;
     if (editorState) {

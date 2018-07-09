@@ -20,10 +20,18 @@ module.exports = function (wallaby) {
     ],
     compilers: {
       '**/*.{js,jsx}': wallaby.compilers.babel({
-        presets: ['es2015', 'react', 'stage-2'],
+        presets: ['es2015', 'react', 'stage-0'],
         plugins: [
           'transform-class-properties',
-          'transform-runtime'
+          'transform-runtime',
+          [
+            'module-resolver',
+            {
+              alias: {
+                '~': './src'
+              }
+            }
+          ]
         ],
         babel
         // babel options

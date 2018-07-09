@@ -5,7 +5,7 @@ import isNumber from 'lodash/isNumber';
 
 import { mergeStyles } from '../Utils/mergeStyles';
 import Slider from './Slider';
-import styles from '../../statics/styles/slider-with-input.scss';
+import styles from '../Styles/slider-with-input.scss';
 
 class SliderWithInput extends Component {
   styles = mergeStyles({ styles, theme: this.props.theme });

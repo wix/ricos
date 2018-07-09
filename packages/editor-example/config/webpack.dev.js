@@ -3,18 +3,9 @@ const merge = require('webpack-merge');
 
 const devConfig = {
   mode: 'development',
-  devtool: 'eval-source-map',
+  devtool: 'cheap-module-eval-source-map',
   optimization: {
     namedModules: false
-  },
-  module: {
-    rules: [
-      {
-        test: /\.js$/,
-        use: ['source-map-loader'],
-        enforce: 'pre'
-      }
-    ]
   },
   serve: {
     port: 3000,

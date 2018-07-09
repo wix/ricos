@@ -1,0 +1,15 @@
+@import "../../../common/src/Styles/consts.scss";
+
+.footerToolbar {
+  height: $footer-toolbar-height;
+}
+
+.footerToolbar_buttons {
+  height: 100%;
+  padding: 0;
+  overflow: initial;
+}
+
+.footerToolbar_scrollableContainer {
+  overflow: initial;
+}

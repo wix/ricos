@@ -4,10 +4,10 @@ import createStaticToolbar from './createStaticToolbar';
 import { DesktopTextButtonList } from '../buttons/';
 import { getTextButtonsFromList } from '../buttons/utils';
 import { getStaticTextToolbarId } from '../toolbar-id';
-import toolbarStyles from '../../../../statics/styles/text-static-toolbar.scss';
-import buttonStyles from '../../../../statics/styles/text-static-toolbar-button.scss';
-import separatorStyles from '../../../../statics/styles/text-static-toolbar-separator.scss';
-import tooltipStyles from '../../../../statics/styles/tooltip.scss';
+import toolbarStyles from '~/Styles/text-static-toolbar.scss';
+import buttonStyles from '~/Styles/text-static-toolbar-button.scss';
+import separatorStyles from '~/Styles/text-static-toolbar-separator.scss';
+import tooltipStyles from '~/Styles/tooltip.scss';
 
 const getStaticTextTheme = theme => {
   const {

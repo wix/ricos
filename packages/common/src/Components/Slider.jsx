@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { mergeStyles } from '../Utils/mergeStyles';
-import styles from '../../statics/styles/slider.scss';
+import styles from '../Styles/slider.scss';
 
 class Slider extends Component {
 

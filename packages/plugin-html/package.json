@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-plugin-html",
-  "version": "1.1.0",
+  "version": "1.0.27",
   "author": {
     "name": "Jonathan Bachman",
     "email": "jonathanb@wix.com"
@@ -17,28 +17,21 @@
   "files": [
     "dist"
   ],
-  "main": "dist/lib/index.js",
-  "module": "dist/es/index.js",
+  "main": "dist/wix-rich-content-plugin-html.js",
   "scripts": {
     "clean": "rm -rf dist/",
-    "babel:icons": "babel --config-file ../../.babelrc.js --env-name commonjs dist/statics -d dist/statics",
-    "postbabel:icons": "find dist/statics/icons -name \"*.svg\" -type f -delete",
-    "babel:es": "babel --config-file ../../.babelrc.js --env-name es src -d dist/es --source-maps",
-    "babel:commonjs": "babel --config-file ../../.babelrc.js --env-name commonjs src -d dist/lib",
-    "prebuild": "npm run clean",
-    "build": "mkdir -p dist && npm run babel:es && npm run babel:commonjs",
-    "postbuild": "npm run statics",
-    "statics": "cp -R statics dist/statics",
-    "poststatics": "npm run icons",
-    "icons": "svgr -d dist/statics/icons dist/statics/icons",
-    "posticons": "create-index -r ./dist/statics/icons && npm run babel:icons",
-    "prewatch": "npm run clean && npm run statics",
-    "watch": "npm run babel:es -- --watch",
+    "transpile": "babel -q src -d dist",
+    "webpack": "webpack --env.FILE_NAME=wix-rich-content-plugin-html",
+    "prebuild": "npm run transpile",
+    "build:dev": "npm run transpile && npm run webpack -- --config ./config/webpack.dev.js",
+    "build": "npm run webpack -- --config ./config/webpack.prod.js",
+    "watch": "npm run build:dev -- --watch",
+    "watch:prod": "npm run build -- --watch",
     "release": "wnpm-release --no-shrinkwrap",
     "test": "eslint 'src/**/*.{js,jsx}'"
   },
   "peerDependencies": {
-    "@wix/draft-js": "^0.10.163",
+    "@wix/draft-js": "^0.10.105",
     "classnames": "^2.0.0",
     "lodash": "^4.0.0",
     "prop-types": "^15.0.0",
@@ -46,21 +39,15 @@
     "react-dom": "^15.0.0 || ^16.0.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.0.0-beta.52",
-    "@babel/runtime": "^7.0.0-beta.52",
-    "@svgr/cli": "^2.0.0",
-    "@wix/draft-js": "^0.10.163",
-    "classnames": "^2.2.6",
-    "create-index": "^2.3.0",
+    "babel-cli": "^6.26.0",
+    "copy-webpack-plugin": "^4.5.1",
     "eslint": "^4.19.1",
-    "lodash": "^4.17.10",
-    "prop-types": "^15.6.2",
-    "react": "15.5.4",
-    "react-dom": "15.5.4"
+    "webpack": "^4.12.0",
+    "webpack-cli": "^3.0.4"
   },
   "dependencies": {
     "react-i18next": "^7.6.1",
-    "wix-rich-content-common": "^1.1.0"
+    "wix-rich-content-common": "^1.0.27"
   },
   "unpkg": true,
   "publishConfig": {

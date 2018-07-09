@@ -1,10 +1,10 @@
 import { EditorState, Modifier } from '@wix/draft-js';
 import {
   getTextAlignment,
-  AlignLeftIcon,
-  AlignCenterIcon,
-  AlignRightIcon,
-  AlignJustifyIcon,
+  AlignmentLeftIcon,
+  AlignmentCenterIcon,
+  AlignmentRightIcon,
+  AlignmentJustifyIcon,
 } from 'wix-rich-content-common';
 import {
   AlignTextLeftButton,
@@ -17,14 +17,14 @@ import { createTextDropdownButton } from './utils';
 const activeIcon = textAlignment => {
   switch (textAlignment) {
     case 'center':
-      return AlignCenterIcon;
+      return AlignmentCenterIcon;
     case 'right':
-      return AlignRightIcon;
+      return AlignmentRightIcon;
     case 'justify':
-      return AlignJustifyIcon;
+      return AlignmentJustifyIcon;
     case 'left':
     default:
-      return AlignLeftIcon;
+      return AlignmentLeftIcon;
   }
 };
 

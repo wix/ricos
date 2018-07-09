@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import isFunction from 'lodash/isFunction';
 import { sizeClassName, alignmentClassName, textWrapClassName, mergeStyles, normalizeUrl } from 'wix-rich-content-common';
-import styles from '../statics/rich-content-viewer.scss';
+import styles from './Styles/rich-content-viewer.scss';
 
 const renderLink = (componentData, anchorTarget, relValue) => {
   if (componentData.config && componentData.config.link) {

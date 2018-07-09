@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { Component } from 'react';
-import styles from '../../statics/styles/global.scss';
+import styles from '../Styles/global.scss';
 
 export default class AccessibilityListener extends Component {
 

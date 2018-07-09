@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import { mergeStyles, SelectionList } from 'wix-rich-content-common';
-import styles from '../../../statics/styles/thumbnail-placement-selector.scss';
+import styles from './thumbnail-placement-selector.scss';
 
-import { LayoutThumbnailIcon } from '../../../statics/icons';
+import ThumbnailIcon from './icons/layout_thumbnails.svg';
 class ThumbnailPlacementSelector extends Component {
 
   constructor(props) {
@@ -23,7 +23,7 @@ class ThumbnailPlacementSelector extends Component {
   renderOption({ item, selected }) {
     return (
       <div className={this.styles.thumbnailPlacementSelector_tile}>
-        <LayoutThumbnailIcon
+        <ThumbnailIcon
           className={classNames(this.styles.thumbnailPlacementSelector_icon,
             this.styles[`thumbnailPlacementSelector_${item.alignment}`],
             { [this.styles.thumbnailPlacementSelector_icon_selected]: selected })}

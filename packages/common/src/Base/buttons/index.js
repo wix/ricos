@@ -13,15 +13,15 @@ import {
   SizeSmallCenterIcon,
   SizeSmallLeftIcon,
   SizeSmallRightIcon,
-  SizeBestFitIcon,
+  SizeContentIcon,
   SizeFullWidthIcon,
-  AlignLeftIcon,
-  AlignCenterIcon,
-  AlignRightIcon,
+  AlignmentLeftIcon,
+  AlignmentCenterIcon,
+  AlignmentRightIcon,
   WidthIcon,
   HeightIcon,
-  TrashIcon
-} from '../../../statics/icons';
+  DeleteIcon
+} from '../icons';
 
 export { BUTTONS };
 
@@ -47,19 +47,19 @@ export const SizeLargeButton = createBlockSizeButton({
 
 export const AlignmentLeftButton = createBlockAlignmentButton({
   alignment: 'left',
-  Icon: AlignLeftIcon,
+  Icon: AlignmentLeftIcon,
   tooltipTextKey: 'AlignTextLeftButton_Tooltip',
 });
 
 export const AlignmentCenterButton = createBlockAlignmentButton({
   alignment: 'center',
-  Icon: AlignCenterIcon,
+  Icon: AlignmentCenterIcon,
   tooltipTextKey: 'AlignTextCenterButton_Tooltip',
 });
 
 export const AlignmentRightButton = createBlockAlignmentButton({
   alignment: 'right',
-  Icon: AlignRightIcon,
+  Icon: AlignmentRightIcon,
   tooltipTextKey: 'AlignTextRightButton_Tooltip',
 });
 
@@ -94,7 +94,7 @@ export const SizeSmallRightButton = createBlockAlignmentAndSizeButton({
 export const SizeContentButton = createBlockAlignmentAndSizeButton({
   size: 'content',
   alignment: 'center',
-  Icon: SizeBestFitIcon,
+  Icon: SizeContentIcon,
   tooltipTextKey: 'SizeContentButton_Tooltip',
 });
 
@@ -106,7 +106,7 @@ export const SizeFullWidthButton = createBlockAlignmentAndSizeButton({
 });
 
 export const DeleteButton = createBlockButton({
-  Icon: TrashIcon,
+  Icon: DeleteIcon,
   tooltipTextKey: 'DeleteButton_Tooltip',
 });
 

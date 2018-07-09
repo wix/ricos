@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import DraftOffsetKey from '@wix/draft-js/lib/DraftOffsetKey';
-import Styles from '../../../../statics/styles/side-toolbar-wrapper.scss';
+import Styles from '~/Styles/side-toolbar-wrapper.scss';
 
 export default class SideToolbar extends Component {
   static propTypes = {

@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { VideoCameraIcon } from '../../statics/icons';
+import CameraIcon from './icons/video-camera.svg';
 import classNames from 'classnames';
 import { mergeStyles, isVideoUrl, SettingsPanelFooter, TextInput } from 'wix-rich-content-common';
-import styles from '../../statics/styles/video-url-input-modal.scss';
+import styles from './video-url-input-modal.scss';
 
 export default class VideoURLInputModal extends Component {
   constructor(props) {
@@ -61,7 +61,7 @@ export default class VideoURLInputModal extends Component {
     return (
       <div className={styles.container} data-hook="videoUploadModal">
         <div role="heading" aria-labelledby="video_modal_hdr" className={classNames(styles.header)}>
-          <VideoCameraIcon className={classNames(styles.cameraIcon, styles.header_icon)} />
+          <CameraIcon className={classNames(styles.cameraIcon, styles.header_icon)} />
           <h3 id="video_modal_hdr" className={styles.header_text}>
             {t('VideoUploadModal_Header')}
           </h3>

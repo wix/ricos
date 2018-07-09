@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { CompositeDecorator } from '@wix/draft-js';
 import classNames from 'classnames';
-import styles from '../../../statics/styles/rich-content-editor.scss';
+import styles from '../../Styles/rich-content-editor.scss';
 
 const propTypes = {
   children: PropTypes.node,

@@ -1,5 +1,3 @@
-import get from 'lodash/get';
-
 class WixUtils {
   constructor() {
     this._cache = {};
@@ -174,10 +172,6 @@ class WixUtils {
     } else {
       return this.getOrPutFromCache('isMobile', _isMobile);
     }
-  }
-
-  isTestEnv() {
-    return get(process, ['env', 'NODE_ENV'], '') === 'test';
   }
 }
 

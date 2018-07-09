@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { mergeStyles, AccessibilityListener, normalizeInitialState } from 'wix-rich-content-common';
-import styles from '../statics/rich-content-viewer.scss';
+import styles from './Styles/rich-content-viewer.scss';
 import Preview from './Preview';
 
 export default class RichContentViewer extends Component {

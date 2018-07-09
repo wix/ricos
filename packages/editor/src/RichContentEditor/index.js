@@ -1,1 +1,1 @@
-export { default } from './I18nRichContentEditor';
+export { default } from './I18nRichContentEditor.jsx';

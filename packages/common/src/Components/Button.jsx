@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { mergeStyles } from '../Utils/mergeStyles';
-import styles from '../../statics/styles/button.scss';
+import styles from '../Styles/button.scss';
 
 class Button extends Component {
   static propTypes = {

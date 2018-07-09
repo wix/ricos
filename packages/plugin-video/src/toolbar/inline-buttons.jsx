@@ -1,6 +1,6 @@
 import { BUTTONS, getModalStyles } from 'wix-rich-content-common';
 import { Modals } from '../modals';
-import { MediaReplaceIcon } from '../../statics/icons';
+import MediaReplaceIcon from './icons/media-replace.svg';
 
 export default({ t }) => {
   return [

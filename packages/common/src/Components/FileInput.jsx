@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { mergeStyles } from '../Utils/mergeStyles';
 
-import styles from '../../statics/styles/global.scss';
+import styles from '../Styles/global.scss';
 
 class FileInput extends Component {
 

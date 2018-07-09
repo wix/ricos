@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { mergeStyles } from '../Utils/mergeStyles';
-import { ErrorIcon } from '../../statics/icons';
+import ErrorIcon from './icons/error.svg';
 import Tooltip from './Tooltip';
-import textInputStyles from '../../statics/styles/text-input.scss';
+import textInputStyles from '../Styles/text-input.scss';
 
 const TextInput = ({ inputRef, error, theme, ...otherProps }) => {
   const styles = mergeStyles({ styles: textInputStyles, theme });
