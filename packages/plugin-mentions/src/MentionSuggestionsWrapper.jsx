@@ -19,9 +19,14 @@ class MentionSuggestionsWrapper extends Component {
       .then(mentions => this.setState({ mentions: ensureDataStructure(mentions) }));
   };
 
+  onAddMention = m => {
+    m.avatar = undefined; // we don't want to save avatar url into editor state
+    this.setState({ mentions: [] });
+  }
+
   render() {
     const Comp = this.props.component;
-    return <Comp onSearchChange={this.handleSearchChange} suggestions={this.state.mentions} />;
+    return <Comp onSearchChange={this.handleSearchChange} onAddMention={this.onAddMention} suggestions={this.state.mentions} />;
   }
 }
 
