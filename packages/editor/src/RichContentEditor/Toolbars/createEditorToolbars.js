@@ -1,8 +1,7 @@
-import { baseUtils } from 'photography-client-lib/dist/src/utils/baseUtils';
 import { createSideToolbar } from './SideToolbar';
 import { createMobileToolbar, createFooterToolbar, createStaticTextToolbar } from './StaticToolbar';
 import { createInlineTextToolbar } from './InlineToolbar';
-import { simplePubsub, getToolbarTheme } from 'wix-rich-content-common';
+import { simplePubsub, getToolbarTheme, WixUtils } from 'wix-rich-content-common';
 
 const createEditorToolbars = config => {
   const {
@@ -31,7 +30,7 @@ const createEditorToolbars = config => {
   const pubsub = simplePubsub();
   const shouldCreateSidePluginToolbar = pluginButtons && sideToolbarPluginButtons.length;
   const shouldCreateFooterPluginToolbar = pluginButtons && footerToolbarPluginButtons.length;
-  const shouldCreateTextToolbar = !isMobile || baseUtils.isiOS();
+  const shouldCreateTextToolbar = !isMobile || WixUtils.isiOS();
 
   const toolbars = {};
   if (shouldCreateSidePluginToolbar) {

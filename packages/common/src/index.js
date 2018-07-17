@@ -52,6 +52,7 @@ export { default as RichContentModal } from './Modals/RichContentModal';
 //Utils
 export { default as createHocName } from './Utils/createHocName';
 export { default as getDisplayName } from './Utils/getDisplayName';
+export { default as decorateComponentWithProps } from './Utils/decorateComponentWithProps';
 export { getToolbarTheme } from './Utils/getToolbarTheme';
 export { simplePubsub } from './Utils/simplePubsub';
 export { getModalStyles } from './Utils/getModalStyles';

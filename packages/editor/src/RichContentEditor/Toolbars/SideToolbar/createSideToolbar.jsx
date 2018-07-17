@@ -1,10 +1,8 @@
 import React from 'react';
-import decorateComponentWithProps from 'decorate-component-with-props';
 import get from 'lodash/get';
-import { baseUtils } from 'photography-client-lib/dist/src/utils/baseUtils';
 import SideToolbar from './SideToolbar';
 import AddPluginFloatingToolbar from './AddPluginFloatingToolbar';
-import { simplePubsub } from 'wix-rich-content-common';
+import { simplePubsub, decorateComponentWithProps, WixUtils } from 'wix-rich-content-common';
 
 const createSideToolbar = (config = {}) => {
   const {
@@ -22,7 +20,7 @@ const createSideToolbar = (config = {}) => {
     isMobile,
   } = config;
 
-  const offsetPath = !isMobile ? 'desktop' : baseUtils.isiOS() ? 'mobile.ios' : 'mobile.android';
+  const offsetPath = !isMobile ? 'desktop' : WixUtils.isiOS() ? 'mobile.ios' : 'mobile.android';
 
   const toolbarProps = {
     pubsub,

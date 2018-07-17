@@ -1,6 +1,5 @@
-import { createBasePlugin, mergeStyles } from 'wix-rich-content-common';
+import { createBasePlugin, mergeStyles, decorateComponentWithProps } from 'wix-rich-content-common';
 import createMentionPlugin from 'draft-js-mention-plugin';
-import decorateComponentWithProps from 'decorate-component-with-props';
 import { EXTERNAL_MENTIONS_TYPE } from './types';
 import MentionComponent from './MentionComponent';
 import MentionSuggestionsWrapper from './MentionSuggestionsWrapper';

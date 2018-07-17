@@ -32,6 +32,8 @@
     "poststatics": "npm run icons",
     "icons": "svgr -d dist/statics/icons dist/statics/icons",
     "posticons": "create-index -r ./dist/statics/icons && npm run babel:icons",
+    "bundle": "MODULE_NAME=common rollup -c ../../rollup.config.js",
+    "bundle:analyze": "ANALYZE_BUNDLE=1 npm run bundle && open stats.html",
     "prewatch": "npm run clean && mkdir -p dist && npm run statics",
     "watch": "npm run babel:es -- --watch",
     "release": "wnpm-release --no-shrinkwrap",
@@ -59,7 +61,6 @@
   },
   "dependencies": {
     "classnames": "^2.2.6",
-    "decorate-component-with-props": "^1.1.0",
     "focus-trap": "^2.4.5",
     "jsonschema": "^1.2.4",
     "linkify-it": "^2.0.3",

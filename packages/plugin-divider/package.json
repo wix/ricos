@@ -32,6 +32,8 @@
     "poststatics": "npm run icons",
     "icons": "svgr -d dist/statics/icons dist/statics/icons",
     "posticons": "create-index -r ./dist/statics/icons && npm run babel:icons",
+    "bundle": "MODULE_NAME=plugin-divider rollup -c ../../rollup.config.js",
+    "bundle:analyze": "ANALYZE_BUNDLE=1 npm run bundle && open stats.html",
     "prewatch": "npm run clean && mkdir -p dist && npm run statics",
     "watch": "npm run babel:es -- --watch",
     "release": "wnpm-release --no-shrinkwrap",

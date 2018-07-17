@@ -1,13 +1,13 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
-import decorateComponentWithProps from 'decorate-component-with-props';
 import { EditorState } from '@wix/draft-js';
 import isEmpty from 'lodash/isEmpty';
 import {
   insertLink,
   getLinkDataInSelection,
   removeLinksInSelection,
-  LinkPanelContainer
+  LinkPanelContainer,
+  decorateComponentWithProps,
 } from 'wix-rich-content-common';
 
 export default class TextLinkPanel extends Component {

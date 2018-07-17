@@ -7,9 +7,6 @@ import get from 'lodash/get';
 import includes from 'lodash/includes';
 import Measure from 'react-measure';
 import { translate } from 'react-i18next';
-import { baseUtils } from 'photography-client-lib/dist/src/utils/baseUtils';
-import { AccessibilityListener, normalizeInitialState, createInlineStyleDecorators, mergeStyles } from 'wix-rich-content-common';
-
 import createEditorToolbars from './Toolbars';
 import createPlugins from './createPlugins';
 import { keyBindingFn, initPluginKeyBindings } from './keyBindings';
@@ -17,7 +14,13 @@ import handleKeyCommand from './handleKeyCommand';
 import handleReturnCommand from './handleReturnCommand';
 import blockStyleFn from './blockStyleFn';
 import { getStaticTextToolbarId } from './Toolbars/toolbar-id';
-
+import {
+  AccessibilityListener,
+  normalizeInitialState,
+  createInlineStyleDecorators,
+  mergeStyles,
+  WixUtils
+} from 'wix-rich-content-common';
 import { getStrategyByStyle } from './getStrategyByStyle';
 import styles from '../../statics/styles/rich-content-editor.scss';
 import draftStyles from '../../statics/styles/draft.scss';
@@ -295,7 +298,7 @@ class RichContentEditor extends Component {
   render() {
     const { isMobile } = this.props;
     const { theme } = this.state;
-    const isAndroid = isMobile && !baseUtils.isiOS();
+    const isAndroid = isMobile && !WixUtils.isiOS();
     const wrapperClassName = classNames(
       draftStyles.wrapper,
       styles.wrapper,

@@ -1,4 +1,4 @@
-import decorateComponentWithProps from 'decorate-component-with-props';
+import { decorateComponentWithProps } from 'wix-rich-content-common';
 import {
   BoldButton,
   ItalicButton,

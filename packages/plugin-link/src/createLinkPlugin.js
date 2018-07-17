@@ -1,6 +1,5 @@
 import createLinkifyPlugin from 'draft-js-linkify-plugin';
-import decorateComponentWithProps from 'decorate-component-with-props';
-import { createBasePlugin } from 'wix-rich-content-common';
+import { createBasePlugin, decorateComponentWithProps } from 'wix-rich-content-common';
 import { EXTERNAL_LINK_TYPE } from './types';
 import { Strategy, Component } from './decorator';
 import styles from '../statics/link-viewer.scss';

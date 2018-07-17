@@ -1,5 +1,4 @@
-import decorateComponentWithProps from 'decorate-component-with-props';
-import { Separator } from 'wix-rich-content-common';
+import { Separator, decorateComponentWithProps } from 'wix-rich-content-common';
 
 export default ({ theme = {}, horizontal = false }) => {
   const separatorProps = { name: 'Separator', horizontal };

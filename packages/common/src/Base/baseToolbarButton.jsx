@@ -7,7 +7,7 @@ import isEmpty from 'lodash/isEmpty';
 import Dropdown from '../Components/Dropdown';
 import FileInput from '../Components/FileInput';
 import ToolbarButton from '../Components/ToolbarButton';
-import { BUTTONS } from './buttons';
+import BUTTONS from './buttons/keys';
 
 class BaseToolbarButton extends React.Component {
 

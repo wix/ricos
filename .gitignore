@@ -6,6 +6,7 @@ node_modules
 lerna-debug.log
 target
 maven
+stats.html
 
 #Webstorm
 **/.idea/*

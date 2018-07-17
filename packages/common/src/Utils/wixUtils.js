@@ -176,6 +176,16 @@ class WixUtils {
     }
   }
 
+  isiOS() {
+    return this.getOrPutFromCache('isiOS', () => {
+      try {
+        return (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream);
+      } catch (e) {
+        return false;
+      }
+    });
+  }
+
   isTestEnv() {
     return get(process, ['env', 'NODE_ENV'], '') === 'test';
   }

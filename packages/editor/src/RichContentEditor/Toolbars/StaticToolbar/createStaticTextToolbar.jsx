@@ -5,7 +5,6 @@ import { DesktopTextButtonList } from '../buttons/';
 import { getTextButtonsFromList, reducePluginTextButtons, reducePluginTextButtonNames, mergeButtonLists } from '../buttons/utils';
 import { getStaticTextToolbarId } from '../toolbar-id';
 import toolbarStyles from '../../../../statics/styles/text-static-toolbar.scss';
-import buttonStyles from '../../../../statics/styles/text-static-toolbar-button.scss';
 import separatorStyles from '../../../../statics/styles/text-static-toolbar-separator.scss';
 import tooltipStyles from '../../../../statics/styles/tooltip.scss';
 
@@ -59,18 +58,9 @@ const getStaticTextTheme = theme => {
       ),
     },
     buttonStyles: {
-      inlineToolbarButton_wrapper: classNames( //eslint-disable-line camelcase
-        buttonStyles.textToolbarButton_wrapper,
-        buttonTheme && buttonTheme.textToolbarButton_wrapper
-      ),
-      inlineToolbarButton: classNames(
-        buttonStyles.textToolbarButton,
-        buttonTheme && buttonTheme.textToolbarButton
-      ),
-      inlineToolbarButton_icon: classNames( //eslint-disable-line camelcase
-        buttonStyles.textToolbarButton_icon,
-        buttonTheme && buttonTheme.textToolbarButton_icon
-      ),
+      inlineToolbarButton_wrapper: buttonTheme && buttonTheme.textToolbarButton_wrapper, //eslint-disable-line camelcase
+      inlineToolbarButton: buttonTheme && buttonTheme.textToolbarButton, //eslint-disable-line camelcase
+      inlineToolbarButton_icon: buttonTheme && buttonTheme.textToolbarButton_icon, //eslint-disable-line camelcase
     },
     separatorStyles: {
       separator: classNames(

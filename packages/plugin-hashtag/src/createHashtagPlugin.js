@@ -1,7 +1,6 @@
-import { createBasePlugin } from 'wix-rich-content-common';
+import { createBasePlugin, decorateComponentWithProps } from 'wix-rich-content-common';
 import { HASHTAG_TYPE } from './types';
 import { Strategy, Component } from './decorator';
-import decorateComponentWithProps from 'decorate-component-with-props';
 
 const createHashtagPlugin = (config = {}) => {
   const type = HASHTAG_TYPE;

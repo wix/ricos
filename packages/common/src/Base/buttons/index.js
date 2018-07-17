@@ -3,7 +3,7 @@ import createBlockAlignmentButton from './createBlockAlignmentButton';
 import createBlockAlignmentAndSizeButton from './createBlockAlignmentAndSizeButton';
 import createBlockSizeButton from './createBlockSizeButton';
 import createSliderPanelButton from './createSliderPanelButton';
-import BUTTONS from '../buttons/keys';
+import BUTTONS from './keys';
 import BlockLinkButton from '../buttons/BlockLinkButton';
 import {
   SizeSmallIcon,

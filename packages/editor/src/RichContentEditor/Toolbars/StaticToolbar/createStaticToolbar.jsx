@@ -1,7 +1,6 @@
-import decorateComponentWithProps from 'decorate-component-with-props';
 import camelCase from 'lodash/camelCase';
 import StaticToolbar from './StaticToolbar';
-import { simplePubsub } from 'wix-rich-content-common';
+import { simplePubsub, decorateComponentWithProps } from 'wix-rich-content-common';
 
 export default (config = {}) => {
   const pubsub = simplePubsub();

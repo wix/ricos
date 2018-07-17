@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { GalleryViewer, getDefault } from './gallery-viewer';
-//import { baseUtils } from 'photography-client-lib/dist/src/utils/baseUtils'; [for dev only]
 
 //eslint-disable-next-line no-unused-vars
 const EMPTY_SMALL_PLACEHOLDER = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
@@ -18,7 +17,6 @@ class GalleryComponent extends React.PureComponent {
   }
 
   componentWillReceiveProps(nextProps) {
-    //console.log('Gallery Props Changed!', baseUtils.printableObjectsDiff(this.props, nextProps)); [for dev only]
     this.setState(this.stateFromProps(nextProps));
   }
 

@@ -1,7 +1,6 @@
-import decorateComponentWithProps from 'decorate-component-with-props';
 import classNames from 'classnames';
 import get from 'lodash/get';
-import { baseUtils } from 'photography-client-lib/dist/src/utils/baseUtils';
+import { decorateComponentWithProps, WixUtils } from 'wix-rich-content-common';
 import createStaticToolbar from './createStaticToolbar';
 import { AddPluginButton, MobileTextButtonList } from '../buttons';
 import { getTextButtonsFromList, reducePluginTextButtons, reducePluginTextButtonNames, mergeButtonLists } from '../buttons/utils';
@@ -40,8 +39,8 @@ const getMobileTheme = theme => {
         toolbarStyles.mobileToolbar,
         toolbarTheme && toolbarTheme.mobileToolbar,
         {
-          [toolbarStyles.mobileToolbar_fixed]: !baseUtils.isiOS(),
-          [toolbarTheme.mobileToolbar_fixed]: (toolbarTheme && toolbarTheme.mobileToolbar_fixed) && !baseUtils.isiOS(),
+          [toolbarStyles.mobileToolbar_fixed]: !WixUtils.isiOS(),
+          [toolbarTheme.mobileToolbar_fixed]: (toolbarTheme && toolbarTheme.mobileToolbar_fixed) && !WixUtils.isiOS(),
         }
       ),
       scrollableContainer: classNames(

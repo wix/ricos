@@ -12,7 +12,7 @@ import {
   AlignTextRightButton,
   AlignTextJustifyButton,
 } from './TextButtons';
-import { createTextDropdownButton } from './utils';
+import createTextDropdownButton from './utils/createTextDropdownButton';
 
 const activeIcon = textAlignment => {
   switch (textAlignment) {
