@@ -1,12 +1,9 @@
 import i18next from 'i18next';
 
-const fallbackLng = 'en';
-
-export default function i18n({ locale, translations }) {
+export default function i18n({ localeName, localeResource }) {
   return i18next
     .init({
-      lng: locale || fallbackLng,
-      fallbackLng,
+      lng: localeName,
       keySeparator: '$',
       interpolation: {
         escapeValue: false
@@ -14,6 +11,8 @@ export default function i18n({ locale, translations }) {
       react: {
         wait: true,
       },
-      resources: translations,
+      resources: {
+        [localeName]: { translation: localeResource }
+      },
     });
 }

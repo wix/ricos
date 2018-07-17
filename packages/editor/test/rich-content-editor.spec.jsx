@@ -1,27 +1,52 @@
 import React from 'react';
 import { RichContentEditor } from '../src/index';
+import localeResource from '../statics/locale/messages_en.json';
 import { shallow } from 'enzyme';
 import TestData from './TestData/initial-state';
+
+const localeName = 'en';
 
 describe('RichContentEditor', () => {
 
   it('should render', async () => {
-    const wrapper = shallow(<RichContentEditor/>);
+    const wrapper = shallow(
+      <RichContentEditor
+        localeName={localeName}
+        localeResource={localeResource}
+      />
+    );
     expect(wrapper.html()).toEqual(expect.stringContaining('class="DraftEditor-root"'));
   });
 
   it('should render edit mode', async () => {
-    const wrapper = shallow(<RichContentEditor />);
+    const wrapper = shallow(
+      <RichContentEditor
+        localeName={localeName}
+        localeResource={localeResource}
+      />
+    );
     expect(wrapper.html()).toEqual(expect.stringContaining('contenteditable="true"'));
   });
 
   it('should render read only mode', async () => {
-    const wrapper = shallow(<RichContentEditor readOnly />);
+    const wrapper = shallow(
+      <RichContentEditor
+        localeName={localeName}
+        localeResource={localeResource}
+        readOnly
+      />
+    );
     expect(wrapper.html()).toEqual(expect.stringContaining('contenteditable="false"'));
   });
 
   it('should render text only', async () => {
-    const wrapper = shallow(<RichContentEditor initialState={TestData.onlyText} />);
+    const wrapper = shallow(
+      <RichContentEditor
+        localeName={localeName}
+        localeResource={localeResource}
+        initialState={TestData.onlyText}
+      />
+    );
     expect(wrapper.html()).toEqual(expect.stringContaining('Hello text only'));
   });
   // it('should render legacy image', () => {
