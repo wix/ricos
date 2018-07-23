@@ -1,9 +1,9 @@
 import i18next from 'i18next';
 
-export default function i18n({ localeName, localeResource }) {
+export default function i18n({ locale, localeResource }) {
   return i18next
     .init({
-      lng: localeName,
+      lng: locale,
       keySeparator: '$',
       interpolation: {
         escapeValue: false
@@ -12,7 +12,7 @@ export default function i18n({ localeName, localeResource }) {
         wait: true,
       },
       resources: {
-        [localeName]: { translation: localeResource }
+        [locale]: { translation: localeResource }
       },
     });
 }

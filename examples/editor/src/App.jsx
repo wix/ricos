@@ -6,7 +6,6 @@ import { EditorState, convertFromRaw, convertToRaw } from '@wix/draft-js';
 import Plugins from './Plugins';
 import ModalsMap from './ModalsMap';
 import * as WixRichContentEditor from 'wix-rich-content-editor';
-import englishTexts from 'wix-rich-content-editor/dist/statics/locale/messages_en.json';
 import { Button, normalizeInitialState } from 'wix-rich-content-common';
 import { testImages, testVideos } from './mock';
 // import testData from './testData/initialState';
@@ -279,8 +278,6 @@ class App extends Component {
                     isMobile={this.isMobile()}
                     textToolbarType={this.state.textToolbarType}
                     theme={theme}
-                    localeName={en}
-                    localeResource={englishTexts}
                     editorKey={'random-editorKey-ssr'}
                     anchorTarget={anchorTarget}
                     relValue={relValue}

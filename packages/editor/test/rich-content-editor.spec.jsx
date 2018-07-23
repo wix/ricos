@@ -1,38 +1,23 @@
 import React from 'react';
 import { RichContentEditor } from '../src/index';
-import localeResource from '../statics/locale/messages_en.json';
 import { shallow } from 'enzyme';
 import TestData from './TestData/initial-state';
-
-const localeName = 'en';
 
 describe('RichContentEditor', () => {
 
   it('should render', async () => {
-    const wrapper = shallow(
-      <RichContentEditor
-        localeName={localeName}
-        localeResource={localeResource}
-      />
-    );
+    const wrapper = shallow(<RichContentEditor />);
     expect(wrapper.html()).toEqual(expect.stringContaining('class="DraftEditor-root"'));
   });
 
   it('should render edit mode', async () => {
-    const wrapper = shallow(
-      <RichContentEditor
-        localeName={localeName}
-        localeResource={localeResource}
-      />
-    );
+    const wrapper = shallow(<RichContentEditor />);
     expect(wrapper.html()).toEqual(expect.stringContaining('contenteditable="true"'));
   });
 
   it('should render read only mode', async () => {
     const wrapper = shallow(
       <RichContentEditor
-        localeName={localeName}
-        localeResource={localeResource}
         readOnly
       />
     );
@@ -42,8 +27,6 @@ describe('RichContentEditor', () => {
   it('should render text only', async () => {
     const wrapper = shallow(
       <RichContentEditor
-        localeName={localeName}
-        localeResource={localeResource}
         initialState={TestData.onlyText}
       />
     );
