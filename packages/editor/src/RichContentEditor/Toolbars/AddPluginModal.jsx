@@ -22,7 +22,7 @@ export default class AddPluginModal extends Component {
     /* eslint-disable jsx-a11y/no-noninteractive-element-to-interactive-role */
     return (
       <ul role="toolbar" aria-label="Add Plugin" className={classNames(Styles.addPluginModal_list, theme && theme.addPluginModal_list)}>
-        {structure.map((Component, index) => (
+        {structure.map(({ component: Component }, index) => (
           <li key={index} className={tileClassNames}>
             <Component
               key={index}
