@@ -151,7 +151,7 @@ class App extends Component {
 
   componentDidMount() {
     ReactModal.setAppElement('body');
-    this.setEditorToolbars();
+    this.setEditorToolbars()
   }
 
   setEditor = editor => this.editor = editor;
