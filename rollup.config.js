@@ -2,11 +2,11 @@ import resolve from 'rollup-plugin-node-resolve';
 import builtins from 'rollup-plugin-node-builtins';
 import globals from 'rollup-plugin-node-globals';
 import commonjs from 'rollup-plugin-commonjs';
-import sass from 'rollup-plugin-sass';
 import { terser as uglify } from 'rollup-plugin-terser';
 import progress from 'rollup-plugin-progress';
 import visualizer from 'rollup-plugin-visualizer';
 import json from 'rollup-plugin-json';
+import postcss from 'rollup-plugin-postcss';
 
 const NAME = 'WixRichContent' + (process.env.MODULE_NAME ?
   process.env.MODULE_NAME.replace(/^\w/, c => c.toUpperCase()) :
@@ -37,7 +37,11 @@ const plugins = [
   json({
     include: 'dist/**',
   }),
-  sass(),
+  postcss({
+    modules: true,
+    extract: 'dist/styles.css',
+    inject: false,
+  }),
   uglify(),
 ];
 
