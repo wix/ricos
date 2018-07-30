@@ -13,6 +13,7 @@ import 'wix-rich-content-plugin-link/dist/styles.min.css';
 import 'wix-rich-content-plugin-image/dist/styles.min.css';
 import 'wix-rich-content-plugin-video/dist/styles.min.css';
 import 'wix-rich-content-plugin-mentions/dist/styles.min.css';
+import 'wix-rich-content-plugin-gallery/dist/styles.min.css';
 
 ReactDOM.render(<App />, document.getElementById('root'));
 registerServiceWorker();

@@ -22,6 +22,7 @@
   "scripts": {
     "clean": "rm -rf dist/",
     "babel:icons": "babel --config-file ../../.babelrc.js --env-name es dist/statics -d dist/statics",
+    "postbabel:icons": "find dist/statics/icons -name \"*.svg\" -type f -delete",
     "babel:es": "babel --config-file ../../.babelrc.js --env-name es src -d dist/es --source-maps",
     "prebuild": "npm run clean",
     "build": "mkdir -p dist && npm run babel:es",
@@ -29,7 +30,7 @@
     "statics": "cp -R statics dist/statics",
     "poststatics": "npm run icons",
     "icons": "svgr -d dist/statics/icons dist/statics/icons",
-    "posticons": "create-index -r ./dist/statics/icons && npm run babel:icons",
+    "posticons": "create-index --ignoreUnsafe -r ./dist/statics/icons && npm run babel:icons",
     "prewatch": "npm run clean && mkdir -p dist && npm run statics",
     "watch": "npm run babel:es -- --watch",
     "release": "wnpm-release --no-shrinkwrap",
