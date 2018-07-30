@@ -115,14 +115,15 @@ function release(pkg) {
 lernaConfig.packages.forEach(pacakagesGlob => {
   glob.sync(pacakagesGlob).forEach(pkgPath => {
     const pkgJsonPath = path.resolve(pkgPath, 'package.json');
-      const pkg = JSON.parse(fs.readFileSync(pkgJsonPath));
-      if (!pkg.private) {
-        release({
-          name: get(pkg, 'name'),
-          version: get(pkg, 'version'),
-          registry: get(pkg, 'publishConfig.registry', DEFAULT_REGISTRY),
-          path: pkgPath,
-        });
-      }
+    const pkg = JSON.parse(fs.readFileSync(pkgJsonPath));
+
+    if (!pkg.private) {
+      release({
+        name: get(pkg, 'name'),
+        version: get(pkg, 'version'),
+        registry: get(pkg, 'publishConfig.registry', DEFAULT_REGISTRY),
+        path: pkgPath,
+      });
+    }
   });
 });

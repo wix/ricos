@@ -38,6 +38,7 @@ const plugins = [
     include: 'dist/**',
   }),
   postcss({
+    minimize: true,
     modules: true,
     extract: 'dist/styles.css',
     inject: false,
@@ -49,10 +50,20 @@ if (process.env.ANALYZE_BUNDLE) {
   plugins.push(
     visualizer({
       sourcemaps: true,
-    })
+    }),
   );
 }
 
+const BUNDLE_GLOBALS = {
+  '@wix/draft-js': 'Draft',
+  assert: 'assert',
+  'core-js': 'core-js',
+  classnames: 'classNames',
+  lodash: '_',
+  'prop-types': 'PropTypes',
+  react: 'React',
+  'react-dom': 'ReactDOM',
+};
 
 export default [
   {
@@ -61,35 +72,17 @@ export default [
       {
         name: NAME,
         format: 'iife',
-        file: `dist/bundle.js`,
-        globals: {
-          '@wix/draft-js': 'Draft',
-          assert: 'assert',
-          'core-js': 'core-js',
-          classnames: 'classNames',
-          lodash: '_',
-          'prop-types': 'PropTypes',
-          react: 'React',
-          'react-dom': 'ReactDOM',
-        },
+        file: `dist/${process.env.MODULE_NAME}.min.js`,
+        globals: BUNDLE_GLOBALS,
+      },
+      {
+        name: NAME,
+        format: 'umd',
+        file: `dist/bundle.umd.js`,
+        globals: BUNDLE_GLOBALS,
       },
     ],
     plugins,
-    external: id => {
-      // if (/\0/.test(id)) {
-      //   return true;
-      // }
-
-      let isExternal = false;
-      //eslint-disable-next-line fp/no-loops
-      for (const external of externals) {
-        isExternal = new RegExp(external).test(id);
-        //console.log({ id, isExternal });
-        if (isExternal) {
-          break;
-        }
-      }
-      return isExternal;
-    },
-  }
+    external: id => !!externals.find(externalName => new RegExp(externalName).test(id)),
+  },
 ];
