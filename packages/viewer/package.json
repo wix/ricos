@@ -13,9 +13,8 @@
   "scripts": {
     "clean": "rm -rf dist/",
     "babel:es": "babel --config-file ../../.babelrc.js --env-name es src -d dist/es --source-maps",
-    "babel:commonjs": "babel --config-file ../../.babelrc.js --env-name commonjs src -d dist/lib",
     "prebuild": "npm run clean",
-    "build": "mkdir -p dist && npm run babel:es && npm run babel:commonjs",
+    "build": "mkdir -p dist && npm run babel:es",
     "postbuild": "npm run statics",
     "statics": "cp -R statics dist/statics",
     "prewatch": "npm run clean && mkdir -p dist && npm run statics",
@@ -24,7 +23,9 @@
     "lint": "eslint 'src/**/*.{js,jsx}'",
     "lint:fix": "npm run lint -- --fix",
     "pretest": "npm run lint",
-    "test": "echo 'There are no tests configured for this project!' && exit 0"
+    "test": "echo 'There are no tests configured for this project!' && exit 0",
+    "bundle": "MODULE_NAME=plugin-divider rollup -c ../../rollup.config.js",
+    "bundle:analyze": "ANALYZE_BUNDLE=1 npm run bundle && open stats.html"
   },
   "jest": {
     "moduleNameMapper": {

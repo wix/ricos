@@ -10,6 +10,7 @@
     "postinstall": "npm run bootstrap",
     "rebuild": "lerna clean --yes && rm -f package-lock.json && npm i && npm run build",
     "build": "lerna run --parallel --scope=wix-rich-content-* build",
+    "postbuild": "lerna run --parallel --scope=wix-rich-content-* bundle",
     "watch": "lerna run --parallel watch",
     "customPublish": "node scripts/customPublish",
     "createVersion": "node scripts/createVersion"
@@ -20,6 +21,7 @@
     }
   },
   "devDependencies": {
+    "pascal-case": "2.0.1",
     "@babel/cli": "^7.0.0-beta.52",
     "@babel/core": "^7.0.0-beta.52",
     "@babel/plugin-proposal-class-properties": "^7.0.0-beta.52",

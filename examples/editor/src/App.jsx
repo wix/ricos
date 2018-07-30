@@ -2,14 +2,12 @@
 import React, { Component } from 'react';
 import ReactModal from 'react-modal';
 import MobileDetect from 'mobile-detect';
-import { EditorState, convertFromRaw, convertToRaw } from '@wix/draft-js';
+import { convertFromRaw, convertToRaw, EditorState } from '@wix/draft-js';
 import Plugins from './Plugins';
 import ModalsMap from './ModalsMap';
-import WixRichContentEditor from 'wix-rich-content-editor';
-import 'wix-rich-content-editor/dist/bundle.umd.js';
+import { EditorState as RichEditorState, RichContentEditor, RichContentEditorModal } from 'wix-rich-content-editor';
 import { Button, normalizeInitialState } from 'wix-rich-content-common';
 import { testImages, testVideos } from './mock';
-// import testData from './testData/initialState';
 import './App.css';
 import theme from './theme/theme'; // must import after custom styles
 import RichContentRawDataViewer from './RichContentRawDataViewer';
@@ -21,8 +19,8 @@ const modalStyleDefaults = {
     right: 'auto',
     bottom: 'auto',
     marginRight: '-50%',
-    transform: 'translate(-50%, -50%)'
-  }
+    transform: 'translate(-50%, -50%)',
+  },
 };
 
 const anchorTarget = '_blank';
@@ -33,7 +31,7 @@ class App extends Component {
     super(props);
     this.state = {
       lastSave: new Date(),
-      editorState: WixRichContentEditor.EditorState.createEmpty(),
+      editorState: RichEditorState.createEmpty(),
       readOnly: false,
       mounted: true,
       textToolbarType: 'inline',
@@ -53,23 +51,23 @@ class App extends Component {
         onClick: (event, text) => {
           event.preventDefault();
           console.log(`'${text}' hashtag clicked!`);
-        }
+        },
       },
       html: {
         htmlIframeSrc: 'http://localhost:3000/static/html-plugin-embed.html',
         // showInsertButtons: false,
       },
       mentions: {
-        onMentionClick: mention => console.log({mention}),
+        onMentionClick: mention => console.log({ mention }),
         getMentions: (searchQuery) => new Promise(resolve =>
-          setTimeout(() =>  resolve([
-            {name: searchQuery, slug: searchQuery},
-            {name: 'Test One', slug: 'testone'},
-            {name: 'Test Two', slug: 'testwo', avatar: 'https://via.placeholder.com/100x100?text=Image=50'}
-           ]),
-            250)
-          ),
-      }
+          setTimeout(() => resolve([
+              { name: searchQuery, slug: searchQuery },
+              { name: 'Test One', slug: 'testone' },
+              { name: 'Test Two', slug: 'testwo', avatar: 'https://via.placeholder.com/100x100?text=Image=50' },
+            ]),
+            250),
+        ),
+      },
       // image: {
       // imageProps: src => ({
       //   'data-pin-media': `https://static.wixstatic.com/media/${src.file_name}`,
@@ -94,7 +92,7 @@ class App extends Component {
         updateEntity({ data, files });
         console.log('consumer uploaded', data);
       }, 500);
-    }
+    };
     this.helpers = {
       onFilesChange: (files, updateEntity) => mockUpload(files, updateEntity),
       // handleFileSelection: (index, multiple, updateEntity, removeEntity) => {
@@ -146,7 +144,7 @@ class App extends Component {
           modalProps: null,
           modalStyles: null,
         });
-      }
+      },
     };
   }
 
@@ -160,7 +158,7 @@ class App extends Component {
   setEditorToolbars = () => {
     const { MobileToolbar, TextToolbar } = this.editor.getToolbars();
     this.setState({ MobileToolbar, TextToolbar });
-  }
+  };
 
   onMountedChange = event => this.setState({ mounted: event.target.checked });
 
@@ -177,20 +175,20 @@ class App extends Component {
   onChange = editorState => {
     this.setState({
       lastSave: new Date(),
-      editorState
+      editorState,
     });
   };
 
   closeModal = () => {
     this.setState({
       showModal: false,
-      modalContent: null
+      modalContent: null,
     });
   };
 
   isMobile = () => {
     return this.md && this.md.mobile() !== null;
-  }
+  };
 
   generateEditorState() {
     if (this.state.content && this.state.content.jsObject) {
@@ -201,10 +199,6 @@ class App extends Component {
   }
 
   render() {
-    const {
-      RichContentEditor,
-      RichContentEditorModal,
-    } = WixRichContentEditor;
     const modalStyles = {
       content: Object.assign({}, (this.state.modalStyles || modalStyleDefaults).content, theme.modalTheme.content),
       overlay: Object.assign({}, (this.state.modalStyles || modalStyleDefaults).overlay, theme.modalTheme.overlay),
@@ -216,81 +210,82 @@ class App extends Component {
       <div className="wrapper">
         <div className="container">
           {!this.isMobile() &&
-            <div className="header">
-              <h1 onClick={() => this.setState({ showDevToggles: !showDevToggles })}>Wix Rich Content Editor</h1>
-              <div className="toggle-container" style={{ display: this.state.showDevToggles ? 'block' : 'none' }}>
-                <div className="toggle">
-                  <input
-                    type="checkbox"
-                    id="mountedToggle"
-                    onChange={this.onMountedChange}
-                    defaultChecked={this.state.mounted}
-                  />
-                  <label htmlFor="mountedToggle">Mounted</label>
-                </div>
-                <div className="toggle">
-                  <input
-                    type="checkbox"
-                    id="textToolbarType"
-                    onChange={this.onTextToolbarTypeChange}
-                    defaultChecked={this.state.textToolbarType === 'static'}
-                  />
-                  <label htmlFor="textToolbarType">Static Text Toolbar</label>
-                </div>
-                <div className="toggle">
-                  <input
-                    type="checkbox"
-                    id="readOnlyToggle"
-                    onChange={this.onReadOnlyChange}
-                    defaultChecked={this.state.readOnly}
-                  />
-                  <label htmlFor="readOnlyToggle">Read Only</label>
-                </div>
-                <div className="toggle">
-                  <input
-                    type="checkbox"
-                    id="showContentStateEditorToggle"
-                    onChange={this.onShowContentStateEditorChange}
-                    defaultChecked={this.state.showContentStateEditor}
-                  />
-                  <label htmlFor="showContentStateEditorToggle">Show Content State Editor</label>
-                </div>
+          <div className="header">
+            <h1 onClick={() => this.setState({ showDevToggles: !showDevToggles })}>Wix Rich Content Editor</h1>
+            <div className="toggle-container" style={{ display: this.state.showDevToggles ? 'block' : 'none' }}>
+              <div className="toggle">
+                <input
+                  type="checkbox"
+                  id="mountedToggle"
+                  onChange={this.onMountedChange}
+                  defaultChecked={this.state.mounted}
+                />
+                <label htmlFor="mountedToggle">Mounted</label>
               </div>
-              <span className="intro">
+              <div className="toggle">
+                <input
+                  type="checkbox"
+                  id="textToolbarType"
+                  onChange={this.onTextToolbarTypeChange}
+                  defaultChecked={this.state.textToolbarType === 'static'}
+                />
+                <label htmlFor="textToolbarType">Static Text Toolbar</label>
+              </div>
+              <div className="toggle">
+                <input
+                  type="checkbox"
+                  id="readOnlyToggle"
+                  onChange={this.onReadOnlyChange}
+                  defaultChecked={this.state.readOnly}
+                />
+                <label htmlFor="readOnlyToggle">Read Only</label>
+              </div>
+              <div className="toggle">
+                <input
+                  type="checkbox"
+                  id="showContentStateEditorToggle"
+                  onChange={this.onShowContentStateEditorChange}
+                  defaultChecked={this.state.showContentStateEditor}
+                />
+                <label htmlFor="showContentStateEditorToggle">Show Content State Editor</label>
+              </div>
+            </div>
+            <span className="intro">
                 Last saved on {this.state.lastSave.toTimeString()}
               </span>
-            </div>
+          </div>
           }
-          {MobileToolbar && <MobileToolbar />}
+          {MobileToolbar && <MobileToolbar/>}
           <div className="content">
             {this.state.mounted &&
-              <div className="columns">
-                <div className="column main">
-                  {TextToolbar && <TextToolbar />}
-                  <RichContentEditor
-                    ref={this.setEditor}
-                    onChange={this.onChange}
-                    helpers={this.helpers}
-                    plugins={this.plugins}
-                    config={this.config}
-                    editorState={this.state.editorState}
-                    // initialState={this.state.initialState}
-                    readOnly={this.state.readOnly}
-                    isMobile={this.isMobile()}
-                    textToolbarType={this.state.textToolbarType}
-                    theme={theme}
-                    editorKey={'random-editorKey-ssr'}
-                    anchorTarget={anchorTarget}
-                    relValue={relValue}
-                  />
-                </div>
-                {this.state.showContentStateEditor &&
-                  <div className="column side">
-                    <RichContentRawDataViewer onChange={content => this.setState({ content })} content={convertToRaw(this.state.editorState.getCurrentContent())} width="740px"/>
-                    <Button className="raw_input_button submit" theme={theme} onClick={() => this.generateEditorState()}>Apply Rich Content</Button>
-                  </div>
-                }
+            <div className="columns">
+              <div className="column main">
+                {TextToolbar && <TextToolbar/>}
+                <RichContentEditor
+                  ref={this.setEditor}
+                  onChange={this.onChange}
+                  helpers={this.helpers}
+                  plugins={this.plugins}
+                  config={this.config}
+                  editorState={this.state.editorState}
+                  // initialState={this.state.initialState}
+                  readOnly={this.state.readOnly}
+                  isMobile={this.isMobile()}
+                  textToolbarType={this.state.textToolbarType}
+                  theme={theme}
+                  editorKey={'random-editorKey-ssr'}
+                  anchorTarget={anchorTarget}
+                  relValue={relValue}
+                />
               </div>
+              {this.state.showContentStateEditor &&
+              <div className="column side">
+                <RichContentRawDataViewer onChange={content => this.setState({ content })}
+                                          content={convertToRaw(this.state.editorState.getCurrentContent())} width="740px"/>
+                <Button className="raw_input_button submit" theme={theme} onClick={() => this.generateEditorState()}>Apply Rich Content</Button>
+              </div>
+              }
+            </div>
             }
             <ReactModal
               isOpen={this.state.showModal}
@@ -300,10 +295,10 @@ class App extends Component {
               onRequestClose={this.closeModal}
             >
               {this.state.showModal &&
-                <RichContentEditorModal
-                  modalsMap={ModalsMap}
-                  {...this.state.modalProps}
-                />
+              <RichContentEditorModal
+                modalsMap={ModalsMap}
+                {...this.state.modalProps}
+              />
               }
             </ReactModal>
           </div>

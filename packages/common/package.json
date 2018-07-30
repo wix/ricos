@@ -17,12 +17,11 @@
   "files": [
     "dist"
   ],
-  "style": "dist/styles.css",
-  "main": "dist/bundle.umd.js",
-  "module": "dist/es/index.js",
+  "module": "dist/index.module.js",
+  "style": "dist/styles.min.scss",
   "scripts": {
     "clean": "rm -rf dist/",
-    "babel:icons": "babel --config-file ../../.babelrc --env-name commonjs dist/statics -d dist/statics",
+    "babel:icons": "babel --config-file ../../.babelrc --env-name es dist/statics -d dist/statics",
     "postbabel:icons": "find dist/statics/icons -name \"*.svg\" -type f -delete",
     "babel:es": "babel --config-file ../../.babelrc --env-name es src -d dist/es --source-maps",
     "prebuild": "npm run clean",

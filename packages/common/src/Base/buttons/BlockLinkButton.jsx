@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { decorateComponentWithProps } from 'wix-rich-content-common';
+import decorateComponentWithProps from '../../Utils/decorateComponentWithProps';
 import EditorModals from '../../Modals/EditorModals';
 import { getModalStyles } from '../../Utils/getModalStyles';
 import LinkButton from '../../Components/LinkButton';

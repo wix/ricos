@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import resolve from 'rollup-plugin-node-resolve';
 import builtins from 'rollup-plugin-node-builtins';
 import globals from 'rollup-plugin-node-globals';
@@ -7,10 +9,17 @@ import progress from 'rollup-plugin-progress';
 import visualizer from 'rollup-plugin-visualizer';
 import json from 'rollup-plugin-json';
 import postcss from 'rollup-plugin-postcss';
+import pascalCase from 'pascal-case';
 
-const NAME = 'WixRichContent' + (process.env.MODULE_NAME ?
-  process.env.MODULE_NAME.replace(/^\w/, c => c.toUpperCase()) :
-  'Module');
+if (!process.env.MODULE_NAME) {
+  console.error(`Environment variable "MODULE_NAME" is missing!`);
+
+  process.exit(1);
+}
+
+const NAME = `WixRichContent${pascalCase(process.env.MODULE_NAME)}`;
+
+console.log(`Building module: ${NAME}`);
 
 const externals = [
   '@babel/runtime',
@@ -29,10 +38,14 @@ const externals = [
 const plugins = [
   progress(),
   resolve({
-    preferBuiltins: false,
+    preferBuiltins: true,
   }),
-  commonjs(),
-  globals(),
+  commonjs({
+    namedExports: {
+      'node_modules/image-client-api/dist/imageClientSDK.js': ['getScaleToFillImageURL'],
+      '../../node_modules/image-client-api/dist/imageClientSDK.js': ['getScaleToFillImageURL'],
+    },
+  }),
   builtins(),
   json({
     include: 'dist/**',
@@ -40,7 +53,7 @@ const plugins = [
   postcss({
     minimize: true,
     modules: true,
-    extract: 'dist/styles.css',
+    extract: 'dist/styles.min.css',
     inject: false,
   }),
   uglify(),
@@ -72,15 +85,13 @@ export default [
       {
         name: NAME,
         format: 'iife',
-        file: `dist/${process.env.MODULE_NAME}.min.js`,
+        file: `dist/index.min.js`,
         globals: BUNDLE_GLOBALS,
       },
       {
-        name: NAME,
-        format: 'umd',
-        file: `dist/bundle.umd.js`,
-        globals: BUNDLE_GLOBALS,
-      },
+        file: 'dist/index.module.js',
+        format: 'es'
+      }
     ],
     plugins,
     external: id => !!externals.find(externalName => new RegExp(externalName).test(id)),
