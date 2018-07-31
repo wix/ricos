@@ -3,7 +3,7 @@
   width: 100%;
   height: 29px;
   padding-top: 14px;
-  max-width: 740px;
+  max-width: 100%;
   margin: 0 auto;
 
   &--double {
@@ -35,20 +35,20 @@
 
   &--small,
   &--small--mobile {
-    width: 74px;
+    width: 10%;
   }
 
   &--medium,
   &--large--mobile {
-    width: 284px;
+    width: 40%;
   }
 
   &--medium--mobile {
-    width: 142px;
+    width: 20%;
   }
 
   &--large {
-    width: 740px;
+    width: 100%;
   }
 
   &--left {

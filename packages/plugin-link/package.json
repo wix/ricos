@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-plugin-link",
-  "version": "1.1.5",
+  "version": "1.1.7",
   "author": {
     "name": "Jonathan Bachman",
     "email": "jonathanb@wix.com"
@@ -34,7 +34,7 @@
     "bundle:analyze": "ANALYZE_BUNDLE=1 npm run bundle && open stats.html"
   },
   "peerDependencies": {
-    "@babel/runtime": "^7.0.0-beta.52",
+    "@babel/runtime": "7.0.0-beta.55",
     "@wix/draft-js": "^0.10.163",
     "classnames": "^2.0.0",
     "lodash": "^4.0.0",
@@ -43,8 +43,8 @@
     "react-dom": "^15.0.0 || ^16.0.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.0.0-beta.52",
-    "@babel/runtime": "^7.0.0-beta.52",
+    "@babel/cli": "7.0.0-beta.55",
+    "@babel/runtime": "7.0.0-beta.55",
     "@wix/draft-js": "^0.10.163",
     "classnames": "^2.2.6",
     "eslint": "^4.19.1",
@@ -55,7 +55,7 @@
   },
   "dependencies": {
     "draft-js-linkify-plugin": "^2.0.1",
-    "wix-rich-content-common": "^1.1.5"
+    "wix-rich-content-common": "^1.1.7"
   },
   "unpkg": true,
   "publishConfig": {

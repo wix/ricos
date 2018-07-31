@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-common",
-  "version": "1.1.5",
+  "version": "1.1.7",
   "author": {
     "name": "Jonathan Bachman",
     "email": "jonathanb@wix.com"
@@ -39,7 +39,7 @@
     "test": "eslint 'src/**/*.{js,jsx}'"
   },
   "peerDependencies": {
-    "@babel/runtime": "^7.0.0-beta.52",
+    "@babel/runtime": "7.0.0-beta.55",
     "@wix/draft-js": "^0.10.163",
     "lodash": "^4.0.0",
     "prop-types": "^15.0.0",
@@ -47,8 +47,8 @@
     "react-dom": "^15.0.0 || ^16.0.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.0.0-beta.52",
-    "@babel/runtime": "^7.0.0-beta.52",
+    "@babel/cli": "7.0.0-beta.55",
+    "@babel/runtime": "7.0.0-beta.55",
     "@svgr/cli": "^2.0.0",
     "@wix/draft-js": "^0.10.163",
     "create-index": "^2.3.0",

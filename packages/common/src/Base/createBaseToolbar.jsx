@@ -5,6 +5,7 @@ import classNames from 'classnames';
 import isEmpty from 'lodash/isEmpty';
 import includes from 'lodash/includes';
 import pickBy from 'lodash/pickBy';
+import Measure from 'react-measure';
 import Separator from '../Components/Separator';
 import BaseToolbarButton from './baseToolbarButton';
 import {
@@ -59,7 +60,6 @@ export default function createToolbar({ buttons, theme, pubsub, helpers, isMobil
       pubsub.subscribe('componentTextWrap', this.onComponentTextWrapChange);
       pubsub.subscribe('componentLink', this.onComponentLinkChange);
       pubsub.subscribe('editorBounds', this.onEditorBoundsChange);
-      this.handleToolbarScroll();
     }
 
     componentWillUnmount() {
@@ -71,9 +71,6 @@ export default function createToolbar({ buttons, theme, pubsub, helpers, isMobil
       pubsub.unsubscribe('componentTextWrap', this.onComponentTextWrapChange);
       pubsub.unsubscribe('componentLink', this.onComponentLinkChange);
       pubsub.unsubscribe('editorBounds', this.onEditorBoundsChange);
-      this.buttons && this.buttons.removeEventListener('scroll', this.handleToolbarScroll);
-      window && window.removeEventListener('resize', this.handleToolbarScroll);
-      window && window.removeEventListener('orientationchange', this.handleToolbarScroll);
     }
 
     onEditorBoundsChange = editorBounds => {
@@ -81,9 +78,7 @@ export default function createToolbar({ buttons, theme, pubsub, helpers, isMobil
     };
 
     onOverrideContent = overrideContent => {
-      this.setState({ overrideContent }, () => {
-        this.handleToolbarScroll();
-      });
+      this.setState({ overrideContent });
     };
 
     onComponentStateChanged = contentState => {
@@ -143,7 +138,7 @@ export default function createToolbar({ buttons, theme, pubsub, helpers, isMobil
 
     showToolbar = () => {
       const toolbarNode = findDOMNode(this);
-      const toolbarHeight = this.buttons.offsetHeight;
+      const toolbarHeight = toolbarNode.offsetHeight;
       const offsetParentRect = toolbarNode.offsetParent.getBoundingClientRect();
       const offsetParentTop = offsetParentRect.top;
       const offsetParentLeft = offsetParentRect.left;
@@ -165,52 +160,11 @@ export default function createToolbar({ buttons, theme, pubsub, helpers, isMobil
       });
     };
 
-    handleButtonsRef = node => {
-      this.buttons = node;
-      if (this.buttons) {
-        this.buttons.addEventListener('scroll', this.handleToolbarScroll);
-        window && window.addEventListener('resize', this.handleToolbarScroll);
-        window && window.addEventListener('orientationchange', this.handleToolbarScroll);
-        this.handleToolbarScroll();
-      }
-    };
-
-    scrollToolbar(event, direction) {
+    scrollToolbar(event, leftDirection) {
       event.preventDefault();
-      switch (direction) {
-        case 'right':
-          this.buttons.scrollLeft += 200;
-          break;
-        case 'left':
-          this.buttons.scrollLeft -= 200;
-          break;
-        default:
-          break;
-      }
+      const { clientWidth, scrollWidth } = this.scrollContainer;
+      this.scrollContainer.scrollLeft = leftDirection ? 0 : scrollWidth - clientWidth;
     }
-
-    handleToolbarScroll = () => {
-      if (this.state.overrideContent) {
-        this.setState({
-          showLeftArrow: false,
-          showRightArrow: false
-        });
-        return;
-      }
-
-      if (this.buttons) {
-        const spaceLeft = this.buttons.scrollLeft;
-        const eleWidth = this.buttons.clientWidth;
-        const fullWidth = this.buttons.scrollWidth;
-
-        const spaceRight = fullWidth - eleWidth - spaceLeft;
-
-        this.setState({
-          showLeftArrow: (spaceLeft > 2),
-          showRightArrow: (spaceRight > 26)
-        });
-      }
-    };
 
     renderButton = (button, key, themedStyle, separatorClassNames, tabIndex) => {
       const { alignment, size } = this.state;
@@ -330,6 +284,17 @@ export default function createToolbar({ buttons, theme, pubsub, helpers, isMobil
       };
     };
 
+    setToolbarScrollButton = (scrollLeft, scrollWidth, clientWidth) => {
+      const currentScrollButtonWidth = this.state.showLeftArrow || this.state.showRightArrow ? 20 : 0;
+
+      const isScroll = scrollWidth - clientWidth - currentScrollButtonWidth > 8;
+
+      this.setState({
+        showLeftArrow: isScroll && scrollLeft > 2,
+        showRightArrow: isScroll && scrollLeft <= 2
+      });
+    };
+
     hidePanels = () => this.setState({ panel: null, inlinePanel: null });
 
     displayPanel = panel => {
@@ -389,6 +354,8 @@ export default function createToolbar({ buttons, theme, pubsub, helpers, isMobil
       const { toolbarStyles: toolbarTheme } = theme || {};
       const { buttonStyles: buttonTheme, separatorStyles: separatorTheme } = theme || {};
       const containerClassNames = classNames(toolbarStyles.pluginToolbar, toolbarTheme && toolbarTheme.pluginToolbar);
+      const scrollableContainerClasses = classNames(toolbarStyles.pluginToolbar_scrollableContainer,
+        toolbarTheme && toolbarTheme.pluginToolbar_scrollableContainer);
       const buttonContainerClassnames = classNames(toolbarStyles.pluginToolbar_buttons, toolbarTheme && toolbarTheme.pluginToolbar_buttons, {
         [toolbarStyles.pluginToolbar_overrideContent]: !!OverrideContent,
         [toolbarTheme.pluginToolbar_overrideContent]: !!OverrideContent,
@@ -401,40 +368,42 @@ export default function createToolbar({ buttons, theme, pubsub, helpers, isMobil
         disabled: classNames(buttonStyles.pluginToolbarButton_disabled, buttonTheme && buttonTheme.pluginToolbarButton_disabled),
         ...theme
       };
+
+      const arrowClassNames = classNames(toolbarStyles.pluginToolbar_responsiveArrow, toolbarTheme && toolbarTheme.pluginToolbar_responsiveArrow);
+
+      const leftArrowIconClassNames = classNames(toolbarStyles.pluginToolbar_responsiveArrowLeft_icon,
+        toolbarTheme && toolbarTheme.responsiveArrowLeft_icon);
+      const rightArrowIconClassNames = classNames(toolbarStyles.pluginToolbar_responsiveArrowRight_icon,
+        toolbarTheme && toolbarTheme.responsiveArrowRight_icon);
+
       const separatorClassNames = classNames(toolbarStyles.pluginToolbarSeparator, separatorTheme && separatorTheme.pluginToolbarSeparator);
       const overrideProps = { onOverrideContent: this.onOverrideContent };
 
       return (
         <div style={this.state.position} className={containerClassNames} data-hook={name ? `${name}PluginToolbar` : null}>
-          <div
-            className={buttonContainerClassnames}
-            ref={this.handleButtonsRef}
-          >
+          <div className={buttonContainerClassnames}>
+            <Measure
+              client scroll innerRef={ref => this.scrollContainer = ref}
+              onResize={({ scroll, client }) => this.setToolbarScrollButton(scroll.left, scroll.width, client.width)}
+            >
+              {({ measure, measureRef }) => (
+                <div className={scrollableContainerClasses} ref={measureRef} onScroll={() => measure()}>
+                  {OverrideContent ?
+                    <OverrideContent {...overrideProps} /> :
+                    this.structure.map((button, index) => (
+                      this.renderButton(button, index, themedButtonStyle, separatorClassNames, tabIndex)
+                    ))
+                  }
+                </div>)}
+            </Measure>
             {
-              showLeftArrow &&
+              hasArrow &&
               <button
-                className={classNames(toolbarStyles.pluginToolbar_responsiveArrow, toolbarStyles.pluginToolbar_responsiveArrowLeft,
-                  toolbarTheme.pluginToolbar_responsiveArrow, toolbarTheme.pluginToolbar_responsiveArrowLeft)}
-                data-hook="baseToolbarLeftArrow" onMouseDown={e => this.scrollToolbar(e, 'left')} tabIndex={tabIndex}
+                tabIndex={tabIndex}
+                className={arrowClassNames}
+                data-hook="pluginToolbarRightArrow" onMouseDown={e => this.scrollToolbar(e, showLeftArrow)}
               >
-                <i />
-              </button>
-            }
-            {OverrideContent ?
-              <OverrideContent {...overrideProps} /> :
-              this.structure.map((button, index) => (
-                this.renderButton(button, index, themedButtonStyle, separatorClassNames, tabIndex)
-              ))
-            }
-            {hasArrow && <div className={toolbarStyles.pluginToolbar_responsiveSpacer} />}
-            {
-              showRightArrow &&
-              <button
-                className={classNames(toolbarStyles.pluginToolbar_responsiveArrow, toolbarStyles.pluginToolbar_responsiveArrowRight,
-                  toolbarTheme.pluginToolbar_responsiveArrow, toolbarTheme.pluginToolbar_responsiveArrowRight)}
-                data-hook="baseToolbarRightArrow" onMouseDown={e => this.scrollToolbar(e, 'right')} tabIndex={tabIndex}
-              >
-                <i />
+                <i className={showLeftArrow ? leftArrowIconClassNames : rightArrowIconClassNames}/>
               </button>
             }
           </div>

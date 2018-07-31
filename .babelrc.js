@@ -14,7 +14,6 @@ const presetEnvCommonJS =  [
 ];
 
 const commonPresets = [
-  ['@babel/preset-stage-2', { decoratorsLegacy: true }],
   '@babel/preset-react'
 ];
 

@@ -7,7 +7,7 @@
     "email": "jonathanb@wix.com"
   },
   "dependencies": {
-    "@babel/core": "^7.0.0-beta.52",
+    "@babel/core": "7.0.0-beta.55",
     "babel-eslint": "8.1.0",
     "babel-jest": "^23.2.0",
     "chalk": "^2.4.1",
@@ -32,6 +32,7 @@
     "wix-rich-content-plugin-image": "file:../../packages/plugin-image",
     "wix-rich-content-plugin-link": "file:../../packages/plugin-link",
     "wix-rich-content-plugin-mentions": "file:../../packages/plugin-mentions",
+    "wix-rich-content-plugin-code-block": "file:../../packages/plugin-code-block",
     "wix-rich-content-plugin-video": "file:../../packages/plugin-video"
   },
   "scripts": {

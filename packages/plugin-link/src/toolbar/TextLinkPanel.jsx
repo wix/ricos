@@ -37,9 +37,10 @@ export default class TextLinkPanel extends Component {
   }
 
   createLinkEntity = ({ url, targetBlank, nofollow }) => {
+    const { anchorTarget, relValue } = this.props;
     if (!isEmpty(url)) {
       const { getEditorState, setEditorState } = this.props;
-      const newEditorState = insertLink(getEditorState(), { url, targetBlank, nofollow });
+      const newEditorState = insertLink(getEditorState(), { url, targetBlank, nofollow, anchorTarget, relValue });
       setEditorState(newEditorState);
     }
     this.hideLinkPanel();

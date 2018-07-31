@@ -22,6 +22,7 @@ export { default as baseToolbarButton } from './Base/baseToolbarButton';
 export { default as AccessibilityListener } from './Components/AccessibilityListener';
 export { default as Button } from './Components/Button';
 export { default as Checkbox } from './Components/Checkbox';
+export { default as InlineToolbarButton } from './Components/InlineToolbarButton';
 export { default as Dropdown } from './Components/Dropdown';
 export { default as FileInput } from './Components/FileInput';
 export { default as FocusManager } from './Components/FocusManager';

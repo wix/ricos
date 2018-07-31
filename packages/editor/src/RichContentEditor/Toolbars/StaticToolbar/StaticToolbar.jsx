@@ -57,7 +57,7 @@ export default class StaticToolbar extends React.Component {
     const { toolbarStyles } = theme || {};
 
     const toolbarClassNames = classNames(Styles.staticToolbar, toolbarStyles.toolbar);
-    const buttonClassNames = classNames(Styles.staticToolbar_buttons, toolbarStyles.scrollContainer);
+    const buttonClassNames = classNames(Styles.staticToolbar_buttons, toolbarStyles.buttons);
     const extendClassNames = classNames(Styles.staticToolbar_extend, toolbarStyles.extend);
     const scrollableClassNames = classNames(Styles.staticToolbar_scrollableContainer, toolbarStyles.scrollableContainer);
 

@@ -7,6 +7,7 @@ import { createGalleryPlugin } from 'wix-rich-content-plugin-gallery';
 import { createHtmlPlugin } from 'wix-rich-content-plugin-html';
 import { createDividerPlugin } from 'wix-rich-content-plugin-divider';
 import { createExternalMentionsPlugin } from 'wix-rich-content-plugin-mentions';
+import { createCodeBlockPlugin } from 'wix-rich-content-plugin-code-block';
 
 const plugins = [
   createImagePlugin,
@@ -18,6 +19,7 @@ const plugins = [
   createLinkPlugin,
   createHashtagPlugin,
   createExternalMentionsPlugin,
+  createCodeBlockPlugin
 ];
 
 export default plugins;

@@ -138,5 +138,6 @@
   "HeadingOneButton_tooltip": "Heading 1",
   "HeadingTwoButton_tooltip": "Heading 2",
   "HeadingThreeButton_tooltip": "Heading 3",
-  "NormalTextButton_tooltip": "Normal Text"
+  "NormalTextButton_tooltip": "Normal Text",
+  "TextCodeBlockButton_Tooltip": "Code Block"
 }

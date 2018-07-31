@@ -1,9 +1,9 @@
 {
-  "name": "wix-rich-content-plugin-gallery",
-  "version": "1.1.7",
+  "name": "wix-rich-content-plugin-code-block",
+  "version": "1.1.6",
   "author": {
-    "name": "Jonathan Bachman",
-    "email": "jonathanb@wix.com"
+    "name": "Šarūnas Dubinskas",
+    "email": "sarunasd@wix.com"
   },
   "repository": {
     "type": "git",
@@ -13,30 +13,29 @@
   "bugs": {
     "url": "https://github.com/wix-incubator/rich-content/issues"
   },
-  "homepage": "https://github.com/wix-incubator/rich-content/tree/master/rich-content-plugin-gallery",
+  "homepage": "https://github.com/wix-incubator/rich-content/tree/master/packages/plugin-code-block",
   "files": [
     "dist"
   ],
-  "module": "dist/index.module.js",
-  "style": "dist/styles.min.scss",
+  "main": "dist/lib/index.js",
+  "module": "dist/es/index.js",
   "scripts": {
     "clean": "rm -rf dist/",
-    "babel:icons": "babel --config-file ../../.babelrc.js --env-name es dist/statics -d dist/statics",
+    "babel:icons": "babel --config-file ../../.babelrc --env-name commonjs dist/statics -d dist/statics",
     "postbabel:icons": "find dist/statics/icons -name \"*.svg\" -type f -delete",
-    "babel:es": "babel --config-file ../../.babelrc.js --env-name es src -d dist/es --source-maps",
+    "babel:es": "babel --config-file ../../.babelrc --env-name es src -d dist/es --source-maps",
+    "babel:commonjs": "babel --config-file ../../.babelrc --env-name commonjs src -d dist/lib",
     "prebuild": "npm run clean",
-    "build": "mkdir -p dist && npm run babel:es",
+    "build": "mkdir -p dist && npm run babel:es && npm run babel:commonjs",
     "postbuild": "npm run statics",
     "statics": "cp -R statics dist/statics",
     "poststatics": "npm run icons",
     "icons": "svgr -d dist/statics/icons dist/statics/icons",
-    "posticons": "create-index --ignoreUnsafe -r ./dist/statics/icons && npm run babel:icons",
+    "posticons": "create-index -r ./dist/statics/icons && npm run babel:icons",
     "prewatch": "npm run clean && mkdir -p dist && npm run statics",
     "watch": "npm run babel:es -- --watch",
     "release": "wnpm-release --no-shrinkwrap",
-    "test": "eslint 'src/**/*.{js,jsx}'",
-    "bundle": "MODULE_NAME=plugin-gallery rollup -c ../../rollup.config.js",
-    "bundle:analyze": "ANALYZE_BUNDLE=1 npm run bundle && open stats.html"
+    "test": "eslint 'src/**/*.{js,jsx}' --fix"
   },
   "peerDependencies": {
     "@babel/runtime": "7.0.0-beta.55",
@@ -61,11 +60,8 @@
     "react-dom": "15.5.4"
   },
   "dependencies": {
-    "axios": "^0.18.0",
-    "focus-trap-react": "^3.1.2",
-    "image-client-api": "1.452.0",
-    "pro-gallery-renderer": "1.0.267",
-    "react-sortable-hoc": "^0.6.8",
+    "draft-js-code": "^0.3.0",
+    "prismjs": "^1.15.0",
     "wix-rich-content-common": "^1.1.7"
   },
   "unpkg": true,

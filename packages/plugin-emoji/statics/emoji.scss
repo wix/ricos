@@ -18,9 +18,9 @@
 }
 
 .emojiSelectPopover {
-  bottom: 30px;
+  bottom: 50px;
   padding: 0 5px;
-  position: absolute;
+  position: fixed;
   z-index: 1000;
   box-sizing: content-box;
   background: #fff;

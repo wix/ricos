@@ -49,20 +49,14 @@
 }
 
 .pluginToolbar_responsiveArrow {
-  display: none;
-  position: absolute;
-  top: 0;
+  margin-right: -19px;
+  flex: 0 0 40px;
   height: 100%;
-  width: 40px;
-  line-height: 48px;
-  text-align: center;
-  background: white;
-  font-size: 12px;
+  background: transparent;
   cursor: pointer;
-  z-index: 9999;
   border: none;
-
-  > i {
+  border-left: 1px solid $toolbar-border-color;
+  >i {
     display: inline-block;
     width: 6px;
     height: 6px;
@@ -75,21 +69,24 @@
   right: 0;
   border-left: 1px solid $toolbar-border-color;
   border-radius: 0 $toolbarBorderRadius $toolbarBorderRadius 0;
-  > i {
-    margin-right: 3px;
-    transform: rotate(45deg);
-  }
+}
+
+.pluginToolbar_responsiveArrowLeft_icon {
+  margin-right: 3px;
+  transform: rotate(45deg);
 }
 
 .pluginToolbar_responsiveArrowRight {
   right: 0;
   border-left: 1px solid $toolbar-border-color;
   border-radius: 0 $toolbarBorderRadius $toolbarBorderRadius 0;
-  > i {
-    margin-right: 3px;
-    transform: rotate(225deg);
-  }
 }
+
+.pluginToolbar_responsiveArrowRight_icon {
+  margin-right: 3px;
+  transform: rotate(225deg);
+}
+
 
 @include phone {
   .pluginToolbar_buttons {
@@ -107,5 +104,25 @@
     .pluginToolbar_responsiveArrow {
       display: block;
     }
+  }
+}
+
+.pluginToolbar_scrollableContainer {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  overflow: hidden;
+  width: 100%;
+  padding: 90px 0;
+  margin: -90px 0;
+  pointer-events: none;
+  & > * {
+      pointer-events: initial;
+  }
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: auto;
+  &::-webkit-scrollbar {
+    display: none;
+    width: 0 !important;
   }
 }

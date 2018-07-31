@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-viewer",
-  "version": "1.2.5",
+  "version": "1.2.7",
   "author": {
     "name": "Jonathan Bachman",
     "email": "jonathanb@wix.com"
@@ -40,18 +40,18 @@
     "classnames": "^2.2.6",
     "lodash": "^4.17.10",
     "redraft": "^0.9.0",
-    "wix-rich-content-common": "^1.1.5",
+    "wix-rich-content-common": "^1.1.7",
     "wnpm-ci": "latest"
   },
   "peerDependencies": {
-    "@babel/runtime": "^7.0.0-beta.52",
+    "@babel/runtime": "7.0.0-beta.55",
     "react": "^15.0.0 || ^16.0.0",
     "react-dom": "^15.0.0 || ^16.0.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.0.0-beta.52",
-    "@babel/core": "^7.0.0-beta.52",
-    "@babel/runtime": "^7.0.0-beta.52",
+    "@babel/cli": "7.0.0-beta.55",
+    "@babel/core": "7.0.0-beta.55",
+    "@babel/runtime": "7.0.0-beta.55",
     "@svgr/cli": "^2.0.0",
     "enzyme": "^2.9.1",
     "eslint": "^4.19.1",

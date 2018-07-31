@@ -18,14 +18,12 @@ const getImageSrc = (src, helpers, options = {}) => {
         }
       }
     } else if (src.file_name) {
-      return wixMediaUrl.createUrl(
-        src,
-        options.requiredWidth,
-        options.requiredHeight,
-        options.requiredQuality,
-        options.resizeType,
-        options.allowWebp
-      );
+      const url = wixMediaUrl.createUrl(src, options.requiredWidth, options.requiredHeight, options.requiredQuality);
+      if (options.allowWebp === false && url.endsWith('.webp')) {
+        const extension = src.file_name.slice((Math.max(0, src.file_name.lastIndexOf('.')) || Infinity) + 1);
+        return url.replace('.webp', `.${extension}`);
+      }
+      return url;
     }
   }
 
