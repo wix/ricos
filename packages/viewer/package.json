@@ -5,8 +5,8 @@
     "name": "Jonathan Bachman",
     "email": "jonathanb@wix.com"
   },
-  "main": "dist/lib/index.js",
-  "module": "dist/es/index.js",
+  "module": "dist/index.module.js",
+  "style": "dist/styles.min.scss",
   "files": [
     "dist"
   ],

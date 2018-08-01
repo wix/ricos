@@ -18,6 +18,19 @@ import TestData from './TestData/initial-state';
 import theme from './theme/theme';
 import styles from './App.scss';
 
+import 'wix-rich-content-common/dist/styles.min.css';
+import 'wix-rich-content-viewer/dist/styles.min.css';
+import 'wix-rich-content-plugin-code-block/dist/styles.min.css';
+import 'wix-rich-content-plugin-divider/dist/styles.min.css';
+import 'wix-rich-content-plugin-emoji/dist/styles.min.css';
+import 'wix-rich-content-plugin-gallery/dist/styles.min.css';
+import 'wix-rich-content-plugin-html/dist/styles.min.css';
+import 'wix-rich-content-plugin-hashtag/dist/styles.min.css';
+import 'wix-rich-content-plugin-image/dist/styles.min.css';
+import 'wix-rich-content-plugin-link/dist/styles.min.css';
+import 'wix-rich-content-plugin-mentions/dist/styles.min.css';
+import 'wix-rich-content-plugin-video/dist/styles.min.css';
+
 const modalStyleDefaults = {
   content: {
     top: '50%',
