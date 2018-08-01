@@ -46,6 +46,9 @@ const plugins = [
         'getScaleToFillImageURL',
         'getScaleToFitImageURL'
       ],
+      '../../node_modules/immutable/dist/immutable.js': [
+        'List',
+      ]
     },
   }),
   builtins(),
