@@ -2,7 +2,6 @@
 
 import resolve from 'rollup-plugin-node-resolve';
 import builtins from 'rollup-plugin-node-builtins';
-import globals from 'rollup-plugin-node-globals';
 import commonjs from 'rollup-plugin-commonjs';
 import { terser as uglify } from 'rollup-plugin-terser';
 import visualizer from 'rollup-plugin-visualizer';
@@ -10,7 +9,6 @@ import json from 'rollup-plugin-json';
 import postcss from 'rollup-plugin-postcss';
 import postcssURL from 'postcss-url';
 import pascalCase from 'pascal-case';
-import path from 'path';
 
 if (!process.env.MODULE_NAME) {
   console.error(`Environment variable "MODULE_NAME" is missing!`);
