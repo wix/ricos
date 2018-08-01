@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { FocusManager } from 'wix-rich-content-common';
+import { FocusManager, EditorModals, getModalStyles } from 'wix-rich-content-common';
 import { PlusIcon, PlusActiveIcon } from '../../../../statics/icons';
 import Styles from '../../../../statics/styles/side-toolbar.scss';
 
@@ -30,14 +30,29 @@ export default class AddPluginFloatingToolbar extends Component {
     }
   }
 
+  openAddPluginModal = () => {
+    const { getEditorState, setEditorState, structure, pubsub, theme, helpers, t } = this.props;
+    helpers.openModal({
+      modalName: EditorModals.MOBILE_ADD_PLUGIN,
+      modalStyles: getModalStyles({ fullScreen: false }),
+      structure: structure.map(Button => ({ component: Button })),
+      theme,
+      hidePopup: helpers.closeModal,
+      getEditorState,
+      setEditorState,
+      pubsub,
+      t,
+    });
+  }
+
   onClick = event => {
     event.preventDefault();
     event.stopPropagation();
-    const { isMobile, pubsub } = this.props;
+    const { isMobile } = this.props;
     if (!isMobile) {
       this.togglePopup();
     } else {
-      pubsub.get('openAddPluginModal')();
+      this.openAddPluginModal();
     }
   };
 
@@ -137,5 +152,7 @@ AddPluginFloatingToolbar.propTypes = {
   structure: PropTypes.array.isRequired,
   pubsub: PropTypes.object.isRequired,
   theme: PropTypes.object.isRequired,
-  isMobile: PropTypes.bool
+  isMobile: PropTypes.bool,
+  helpers: PropTypes.object,
+  t: PropTypes.func,
 };

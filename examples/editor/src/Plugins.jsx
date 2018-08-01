@@ -21,6 +21,7 @@ import 'wix-rich-content-plugin-image/dist/styles.min.css';
 import 'wix-rich-content-plugin-link/dist/styles.min.css';
 import 'wix-rich-content-plugin-mentions/dist/styles.min.css';
 import 'wix-rich-content-plugin-video/dist/styles.min.css';
+import 'wix-rich-content-plugin-code-block/dist/styles.min.css';
 
 const plugins = [
   createImagePlugin,

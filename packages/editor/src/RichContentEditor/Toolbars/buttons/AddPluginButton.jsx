@@ -5,10 +5,6 @@ import { EditorModals, getModalStyles } from 'wix-rich-content-common';
 import { PlusIcon } from '../../../../statics/icons';
 
 export default class AddPluginButton extends Component {
-  constructor(props) {
-    super(props);
-    props.pubsub.set('openAddPluginModal', this.openAddPluginModal);
-  }
 
   handleClick = () => this.openAddPluginModal();
 

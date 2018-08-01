@@ -40,7 +40,9 @@ const createEditorToolbars = config => {
       offset: sideToolbarOffset,
       theme: { ...getToolbarTheme(theme, 'side'), ...theme },
       pubsub,
-      isMobile
+      isMobile,
+      helpers,
+      t
     });
   }
 
