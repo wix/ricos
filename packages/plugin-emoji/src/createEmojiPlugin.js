@@ -9,7 +9,7 @@ import * as Styles from '../statics/emoji.scss';
 const createExternalEmojiPlugin = (config = {}) => {
   const type = EXTERNAL_EMOJI_TYPE;
   const { decorator, helpers, theme, isMobile, t, anchorTarget, relValue } = config;
-  const styles = mergeStyles({ styles: Styles, theme });
+  const styles = mergeStyles({ styles: Styles.default, theme });
 
   const plugin = createEmojiPlugin({
     theme: styles,
