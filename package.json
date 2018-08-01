@@ -54,7 +54,7 @@
     "postcss-url": "^7.3.2",
     "prompts": "^0.1.8",
     "react-svg-loader": "^2.1.0",
-    "rollup": "^0.62.0",
+    "rollup": "^0.63.5",
     "rollup-plugin-analyzer": "^2.1.0",
     "rollup-plugin-commonjs": "^9.1.3",
     "rollup-plugin-json": "^3.0.0",
