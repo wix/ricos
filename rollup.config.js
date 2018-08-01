@@ -5,11 +5,12 @@ import builtins from 'rollup-plugin-node-builtins';
 import globals from 'rollup-plugin-node-globals';
 import commonjs from 'rollup-plugin-commonjs';
 import { terser as uglify } from 'rollup-plugin-terser';
-import progress from 'rollup-plugin-progress';
 import visualizer from 'rollup-plugin-visualizer';
 import json from 'rollup-plugin-json';
 import postcss from 'rollup-plugin-postcss';
+import postcssURL from 'postcss-url';
 import pascalCase from 'pascal-case';
+import path from 'path';
 
 if (!process.env.MODULE_NAME) {
   console.error(`Environment variable "MODULE_NAME" is missing!`);
@@ -36,14 +37,15 @@ const externals = [
 ];
 
 const plugins = [
-  progress(),
   resolve({
     preferBuiltins: true,
   }),
   commonjs({
     namedExports: {
-      'node_modules/image-client-api/dist/imageClientSDK.js': ['getScaleToFillImageURL'],
-      '../../node_modules/image-client-api/dist/imageClientSDK.js': ['getScaleToFillImageURL'],
+      '../../node_modules/image-client-api/dist/imageClientSDK.js': [
+        'getScaleToFillImageURL',
+        'getScaleToFitImageURL'
+      ],
     },
   }),
   builtins(),
@@ -55,6 +57,11 @@ const plugins = [
     modules: true,
     extract: 'dist/styles.min.css',
     inject: false,
+    plugins: [
+      postcssURL({
+        url: asset => asset.url.replace('../', '/statics/')
+      }),
+    ],
   }),
   uglify(),
 ];

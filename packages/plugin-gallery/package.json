@@ -22,7 +22,6 @@
   "scripts": {
     "clean": "rm -rf dist/",
     "babel:icons": "babel --config-file ../../.babelrc.js --env-name es dist/statics -d dist/statics",
-    "postbabel:icons": "find dist/statics/icons -name \"*.svg\" -type f -delete",
     "babel:es": "babel --config-file ../../.babelrc.js --env-name es src -d dist/es --source-maps",
     "prebuild": "npm run clean",
     "build": "mkdir -p dist && npm run babel:es",
