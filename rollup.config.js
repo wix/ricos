@@ -102,11 +102,11 @@ export default [
       {
         name: NAME,
         format: 'iife',
-        file: `dist/index.min.js`,
+        file: `dist/${process.env.MODULE_NAME}.js`,
         globals: BUNDLE_GLOBALS,
       },
       {
-        file: 'dist/index.module.js',
+        file: 'dist/module.js',
         format: 'es'
       }
     ],

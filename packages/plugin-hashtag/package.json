@@ -17,7 +17,7 @@
   "files": [
     "dist"
   ],
-  "module": "dist/index.module.js",
+  "module": "dist/module.js",
   "style": "dist/styles.min.scss",
   "scripts": {
     "clean": "rm -rf dist/",
