@@ -62,6 +62,7 @@ class RichContentEditor extends Component {
       helpers,
       anchorTarget,
       relValue,
+      alwaysShowSideToolbar,
       hideFooterToolbar,
       sideToolbarOffset,
       textButtons,
@@ -81,6 +82,7 @@ class RichContentEditor extends Component {
       isMobile,
       textToolbarType,
       textAlignment,
+      alwaysShowSideToolbar,
       hideFooterToolbar,
       sideToolbarOffset,
       theme: theme || {},
@@ -334,6 +336,7 @@ RichContentEditor.propTypes = {
   isMobile: PropTypes.bool,
   helpers: PropTypes.object,
   t: PropTypes.func,
+  alwaysShowSideToolbar: PropTypes.bool,
   sideToolbarOffset: PropTypes.object,
   hideFooterToolbar: PropTypes.bool,
   textButtons: PropTypes.shape({

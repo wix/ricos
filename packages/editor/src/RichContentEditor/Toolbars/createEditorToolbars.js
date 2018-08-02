@@ -9,6 +9,7 @@ const createEditorToolbars = config => {
     anchorTarget,
     relValue,
     // textToolbarType,
+    alwaysShowSideToolbar,
     hideFooterToolbar,
     sideToolbarOffset,
     helpers,
@@ -37,6 +38,7 @@ const createEditorToolbars = config => {
     toolbars.side = createSideToolbar({
       refId,
       buttons: sideToolbarPluginButtons,
+      alwaysShow: alwaysShowSideToolbar,
       offset: sideToolbarOffset,
       theme: { ...getToolbarTheme(theme, 'side'), ...theme },
       pubsub,

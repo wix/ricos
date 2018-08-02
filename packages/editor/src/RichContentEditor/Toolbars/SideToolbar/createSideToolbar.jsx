@@ -10,6 +10,7 @@ const createSideToolbar = (config = {}) => {
     pubsub = simplePubsub({ isVisible: false }),
     theme,
     structure = [],
+    alwaysShow = false,
     offset = {
       desktop: { x: -40, y: 0 },
       mobile: {
@@ -27,6 +28,7 @@ const createSideToolbar = (config = {}) => {
     structure,
     theme,
     isMobile,
+    alwaysShow,
     offset: get(offset, offsetPath),
   };
 
@@ -44,7 +46,7 @@ const createSideToolbar = (config = {}) => {
   };
 };
 
-export default ({ buttons, offset, pubsub, theme, isMobile, helpers, t }) => {
+export default ({ buttons, offset, pubsub, theme, alwaysShow, isMobile, helpers, t }) => {
 
   const { buttonStyles, ...rest } = theme;
   const toolbarButtonTheme = {
@@ -59,6 +61,7 @@ export default ({ buttons, offset, pubsub, theme, isMobile, helpers, t }) => {
   return createSideToolbar({
     offset,
     theme,
+    alwaysShow,
     isMobile,
     structure: [
       ({ getEditorState, setEditorState, theme }) => //eslint-disable-line

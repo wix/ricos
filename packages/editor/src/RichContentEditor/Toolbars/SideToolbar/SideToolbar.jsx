@@ -10,6 +10,7 @@ export default class SideToolbar extends Component {
     structure: PropTypes.array.isRequired,
     offset: PropTypes.object,
     theme: PropTypes.object.isRequired,
+    alwaysShow: PropTypes.bool,
     isMobile: PropTypes.bool
   };
 
@@ -32,7 +33,9 @@ export default class SideToolbar extends Component {
     const currentContent = editorState.getCurrentContent();
     const currentBlock = currentContent.getBlockForKey(selection.getStartKey());
     const selectionHasContent = currentBlock.getLength() > 0;
-    if (selectionHasContent) {
+    const { alwaysShow } = this.props;
+
+    if (!alwaysShow && selectionHasContent) {
       this.setState({
         position: {
           transform: 'scale(0)',
