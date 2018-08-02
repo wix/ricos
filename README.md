@@ -193,14 +193,23 @@ You can find a full list of classes you can override in [here](./examples/editor
 ##### Plugins
 
 [wix-rich-content-plugin-divider](./pacakges/plugin-divider) add dividers to your content.
+
 [wix-rich-content-plugin-emoji](./pacakges/plugin-emoji) add emojis to your content.
+
 [wix-rich-content-plugin-gallery](./pacakges/plugin-gallery) add pro galleries to your content!!!
+
 [wix-rich-content-plugin-hashtag](./pacakges/plugin-hashtag) convert plain text #hastags into dynamic elements.
+
 [wix-rich-content-plugin-html](./pacakges/plugin-html) embed html code or sites in your content.
+
 [wix-rich-content-plugin-image](./pacakges/plugin-image) add images to your content.
+
 [wix-rich-content-plugin-link](./pacakges/plugin-link) convert plain text URLs into `<a>` tags.
+
 [wix-rich-content-plugin-mentions](./pacakges/plugin-video) add videos to your content.
+
 [wix-rich-content-plugin-video](./pacakges/plugin-mentions) mention users in your content.
+
 [wix-rich-content-plugin-code-block](./pacakges/plugin-code-block) displays code block
 
 
@@ -230,12 +239,17 @@ The compiled package also contains a CommonJS bundle, which you can consume usin
 4. Choose an [example](./examples/) and run `npm start`.
 
 ##### Examples
+
 [rich-content-editor-example](./examples/editor) to see how to consume the Component as an editor.
+
 [rich-content-viewer-example](./examples/viewer) to see how to consume the Component as a viewer.
+
 [rich-content-editor-tpa](./examples/editor-tpa) to see how to consume the Component as an editor within a Wix Third Party Application.
 
 #### Modules
 
 [wix-rich-content-editor](./packages/editor) is the rich content editor React Component.
+
 [wix-rich-content-viewer](./packages/viewer) is the rich content viewer React Component.
+
 [wix-rich-content-common](./pacakges/common) is a shared library utilized by the rest of the modules.
