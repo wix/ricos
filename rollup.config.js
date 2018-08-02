@@ -104,11 +104,7 @@ export default [
       {
         file: 'dist/module.js',
         format: 'es'
-      },
-      {
-        file: 'dist/module.cjs.js',
-        format: 'cjs'
-      },
+      }
     ],
     plugins,
     external: id => !!externals.find(externalName => new RegExp(externalName).test(id)),

@@ -17,7 +17,6 @@
   "files": [
     "dist"
   ],
-  "main": "dist/module.cjs.js",
   "module": "dist/module.js",
   "style": "dist/styles.min.scss",
   "scripts": {
