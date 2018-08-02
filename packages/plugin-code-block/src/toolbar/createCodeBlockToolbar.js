@@ -8,7 +8,7 @@ export default ({ setEditorState, settings }) => ({
     CodeBlock: {
       component: TextCodeBlockButton,
       isMobile: true,
-      position: { mobile: settings.positionInToolbarMobile || 7 },
+      position: settings.position,
       keyBindings: [{
         keyCommand: {
           command: 'code-block',
