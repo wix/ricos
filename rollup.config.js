@@ -11,13 +11,11 @@ import postcssURL from 'postcss-url';
 import pascalCase from 'pascal-case';
 
 if (!process.env.MODULE_NAME) {
-  console.error(`Environment variable "MODULE_NAME" is missing!`);
-
+  console.error('Environment variable "MODULE_NAME" is missing!');
   process.exit(1);
 }
 
 const NAME = `WixRichContent${pascalCase(process.env.MODULE_NAME)}`;
-
 console.log(`Building module: ${NAME}`);
 
 const externals = [
@@ -34,6 +32,16 @@ const externals = [
   'wix-rich-content-common',
 ];
 
+const BUNDLE_GLOBALS = {
+  '@wix/draft-js': 'Draft',
+  assert: 'assert',
+  'core-js': 'core-js',
+  classnames: 'classNames',
+  lodash: '_',
+  'prop-types': 'PropTypes',
+  react: 'React',
+  'react-dom': 'ReactDOM',
+};
 
 const NAMED_EXPORTS = {
   imageClientAPI: [
@@ -43,8 +51,7 @@ const NAMED_EXPORTS = {
   immutable: [
     'List',
   ]
-}
-
+};
 
 const plugins = [
   resolve({
@@ -83,17 +90,6 @@ if (process.env.ANALYZE_BUNDLE) {
     }),
   );
 }
-
-const BUNDLE_GLOBALS = {
-  '@wix/draft-js': 'Draft',
-  assert: 'assert',
-  'core-js': 'core-js',
-  classnames: 'classNames',
-  lodash: '_',
-  'prop-types': 'PropTypes',
-  react: 'React',
-  'react-dom': 'ReactDOM',
-};
 
 export default [
   {
