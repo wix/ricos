@@ -55,7 +55,18 @@ const createUnderlyingPlugin = ({ theme }) => ({
 
 const createCodeBlockPlugin = (config = {}) => {
   const type = CODE_BLOCK_TYPE;
-  const { decorator, helpers, theme, isMobile, t, anchorTarget, relValue, getEditorState, setEditorState } = config;
+  const {
+    decorator,
+    helpers,
+    theme,
+    isMobile,
+    t,
+    anchorTarget,
+    relValue,
+    getEditorState,
+    setEditorState,
+    codeBlock: settings = {},
+  } = config;
   const plugin = createUnderlyingPlugin({ theme });
   const toolbar = createCodeBlockToolbar({
     helpers,
@@ -65,20 +76,24 @@ const createCodeBlockPlugin = (config = {}) => {
     anchorTarget,
     relValue,
     getEditorState,
-    setEditorState
+    setEditorState,
+    settings,
   });
 
-  return createBasePlugin({
-    decorator,
-    theme,
-    toolbar,
-    type,
-    helpers,
-    isMobile,
-    anchorTarget,
-    relValue,
-    t
-  }, plugin);
+  return createBasePlugin(
+    {
+      decorator,
+      theme,
+      toolbar,
+      type,
+      helpers,
+      isMobile,
+      anchorTarget,
+      relValue,
+      t,
+    },
+    plugin,
+  );
 };
 
 export { createCodeBlockPlugin };
