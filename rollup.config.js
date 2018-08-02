@@ -34,19 +34,28 @@ const externals = [
   'wix-rich-content-common',
 ];
 
+
+const NAMED_EXPORTS = {
+  imageClientAPI: [
+    'getScaleToFillImageURL',
+    'getScaleToFitImageURL'
+  ],
+  immutable: [
+    'List',
+  ]
+}
+
+
 const plugins = [
   resolve({
     preferBuiltins: true,
   }),
   commonjs({
     namedExports: {
-      '../../node_modules/image-client-api/dist/imageClientSDK.js': [
-        'getScaleToFillImageURL',
-        'getScaleToFitImageURL'
-      ],
-      '../../node_modules/immutable/dist/immutable.js': [
-        'List',
-      ]
+      '../../node_modules/image-client-api/dist/imageClientSDK.js': [...NAMED_EXPORTS.imageClientAPI],
+      'node_modules/image-client-api/dist/imageClientSDK.js': [...NAMED_EXPORTS.imageClientAPI],
+      '../../node_modules/immutable/dist/immutable.js': [...NAMED_EXPORTS.immutable],
+      'node_modules/immutable/dist/immutable.js': [...NAMED_EXPORTS.immutable],
     },
   }),
   builtins(),
