@@ -5,6 +5,7 @@
     "name": "Jonathan Bachman",
     "email": "jonathanb@wix.com"
   },
+  "main": "dist/module.cjs.js",
   "module": "dist/module.js",
   "style": "dist/styles.min.scss",
   "files": [
