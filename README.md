@@ -9,14 +9,14 @@
 
 To install this package as editor, use the following command:
 
-```
-    npm install --save wix-rich-content-editor
+```bash
+$ npm install --save wix-rich-content-editor
 ```
 
 To install this package as viewer, use the following command:
 
-```
-    npm install --save wix-rich-content-viewer
+```bash
+$ npm install --save wix-rich-content-viewer
 ```
 
 ## Getting Started
@@ -25,7 +25,7 @@ To install this package as viewer, use the following command:
 
 To get started with the editor, create a simple React component, and add the following imports:
 
-```js
+```jsx
 import { EditorState, RichContentEditor } from 'wix-rich-content-editor';
 ```
 
@@ -72,7 +72,7 @@ export class MyApp extends React.Component {
 Now, in order to make sure you are getting the most of the rich-content editor, make sure to include the compiled CSS files from `` in your app.
 
 `app.js`
-```
+```jsx
 import 'wix-rich-content-common/dist/styles.min.css';
 import 'wix-rich-content-editor/dist/styles.min.css';
 ```
@@ -85,13 +85,13 @@ To add plugins to your editor, choose one of the implemented plugins from [the l
 
 Then, install the plugin you wish use from NPM:
 
-```
-    npm install wix-rich-content-plugin-divider
+```bash
+$ npm install wix-rich-content-plugin-divider
 ```
 
 Import the plugin's stylesheet file:
 
-```
+```jsx
 import 'wix-rich-content-plugin-divider/dist/styles.min.css';
 ```
 
@@ -226,7 +226,7 @@ import 'wix-rich-content-editor/dist/styles.min.global.css';
 
 ### SSR support
 
-The compiled package also contains a CommonJS bundle, which you can consume using SSR.
+The compiled package also contains a CommonJS bundle, which you can consume if you are using SSR.
 
 ## Development
 
@@ -252,4 +252,4 @@ The compiled package also contains a CommonJS bundle, which you can consume usin
 
 [wix-rich-content-viewer](./packages/viewer) is the rich content viewer React Component.
 
-[wix-rich-content-common](./pacakges/common) is a shared library utilized by the rest of the modules.
+[wix-rich-content-common](./packages/common) is a shared library utilized by the rest of the modules.
