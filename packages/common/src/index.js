@@ -10,7 +10,7 @@ export {
   SizeFullWidthButton,
   DeleteButton
 } from './Base/buttons';
-export * from '../statics/icons';
+export * from './Icons';
 export { default as BUTTONS } from './Base/buttons/keys';
 export { default as createBasePlugin } from './Base/createBasePlugin';
 export { default as createBaseComponent } from './Base/createBaseComponent';

@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import classNames from 'classnames';
 import { mergeStyles } from '../Utils/mergeStyles';
 import styles from '../../statics/styles/dropdown.scss';
-import { DropdownArrowIcon } from '../../statics/icons';
+import { DropdownArrowIcon } from '../Icons';
 
 const DEFAULT_PLACEHOLDER_STRING = 'Select...';
 

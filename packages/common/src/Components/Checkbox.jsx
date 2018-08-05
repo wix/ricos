@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { mergeStyles } from '../Utils/mergeStyles';
-import { CheckIcon } from '../../statics/icons';
+import { CheckIcon } from '../Icons';
 import styles from '../../statics/styles/checkbox.scss';
 import globalStyles from '../../statics/styles/global.scss';
 

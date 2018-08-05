@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import InlineToolbarButton from './InlineToolbarButton';
-import { LinkIcon } from '../../statics/icons';
+import { LinkIcon } from '../Icons';
 
 const LinkButton = props => <InlineToolbarButton icon={LinkIcon} {...props}/>;
 
