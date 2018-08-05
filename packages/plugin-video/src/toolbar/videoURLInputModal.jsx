@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { VideoCameraIcon } from '../../statics/icons';
+import { VideoCameraIcon } from '../icons';
 import classNames from 'classnames';
 import { mergeStyles, isVideoUrl, SettingsPanelFooter, TextInput } from 'wix-rich-content-common';
 import styles from '../../statics/styles/video-url-input-modal.scss';
