@@ -1,6 +1,6 @@
 import { BUTTONS, PluginSettingsIcon, getModalStyles } from 'wix-rich-content-common';
 import { Modals } from '../modals';
-import { ManageMediaIcon, UploadIcon } from '../../statics/icons';
+import { ManageMediaIcon, UploadIcon } from '../icons';
 import { galleryLayoutsDropdown, switchLayout, getCurrentLayout } from '../helpers';
 
 const modalStyles = getModalStyles();

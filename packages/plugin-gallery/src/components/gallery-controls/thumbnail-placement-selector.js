@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import { mergeStyles, SelectionList } from 'wix-rich-content-common';
 import styles from '../../../statics/styles/thumbnail-placement-selector.scss';
 
-import { LayoutThumbnailsIcon } from '../../../statics/icons';
+import { LayoutThumbnailsIcon } from '../../icons';
 class ThumbnailPlacementSelector extends Component {
 
   constructor(props) {

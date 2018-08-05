@@ -15,7 +15,7 @@ import {
   Panorama as PanoramaIconSmall,
   Columns as ColumnsIconSmall,
   Slides as SlidesIconSmall,
-} from '../../statics/icons';
+} from '../icons';
 
 
 import layoutData from './layout-data-provider';

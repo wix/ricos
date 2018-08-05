@@ -9,7 +9,7 @@ import Styles from '../../../statics/styles/gallery-items-sortable.scss';
 import ImageSettings from './gallery-image-settings';
 import { mergeStyles, FileInput, ImageLoader } from 'wix-rich-content-common';
 
-import { FabIcon, UploadIcon } from '../../../statics/icons';
+import { FabIcon, UploadIcon } from '../../icons';
 
 //eslint-disable-next-line no-unused-vars
 const EMPTY_SMALL_PLACEHOLDER = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
