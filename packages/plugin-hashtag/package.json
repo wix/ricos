@@ -22,17 +22,13 @@
   "style": "dist/styles.min.scss",
   "scripts": {
     "clean": "rm -rf dist/",
-    "babel:es": "babel --config-file ../../.babelrc.js --env-name es src -d dist/es --source-maps",
-    "prebuild": "npm run clean",
-    "statics": "cp -R statics dist/statics",
-    "build": "mkdir -p dist && npm run babel:es",
-    "postbuild": "npm run statics",
-    "prewatch": "npm run clean && mkdir -p dist && npm run statics",
-    "watch": "npm run babel:es -- --watch",
+    "statics": "mkdir -p dist && cp -R statics dist/statics",
+    "prebuild": "npm run statics",
+    "build": "rollup --environment MODULE_NAME:plugin-hashtag -c ../../rollup.config.js",
+    "build:analyze": "npm run build -- --environment MODULE_ANALYZE && open stats.html",
+    "watch": "npm run build -- --watch",
     "release": "wnpm-release --no-shrinkwrap",
-    "test": "eslint 'src/**/*.{js,jsx}'",
-    "bundle": "MODULE_NAME=plugin-hashtag rollup -c ../../rollup.config.js",
-    "bundle:analyze": "ANALYZE_BUNDLE=1 npm run bundle && open stats.html"
+    "test": "eslint 'src/**/*.{js,jsx}'"
   },
   "peerDependencies": {
     "@babel/runtime": "7.0.0-beta.55",
@@ -44,7 +40,6 @@
     "react-dom": "^15.0.0 || ^16.0.0"
   },
   "devDependencies": {
-    "@babel/cli": "7.0.0-beta.55",
     "@babel/runtime": "7.0.0-beta.55",
     "@wix/draft-js": "^0.10.163",
     "classnames": "^2.2.6",
