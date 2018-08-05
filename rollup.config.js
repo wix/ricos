@@ -1,8 +1,9 @@
 /* eslint-disable */
-
+import path from 'path';
 import resolve from 'rollup-plugin-node-resolve';
 import builtins from 'rollup-plugin-node-builtins';
 import commonjs from 'rollup-plugin-commonjs';
+import babel from 'rollup-plugin-babel';
 import { terser as uglify } from 'rollup-plugin-terser';
 import visualizer from 'rollup-plugin-visualizer';
 import json from 'rollup-plugin-json';
@@ -15,8 +16,8 @@ if (!process.env.MODULE_NAME) {
   process.exit(1);
 }
 
-const NAME = `WixRichContent${pascalCase(process.env.MODULE_NAME)}`;
-console.log(`Building module: ${NAME}`);
+const MODULE_NAME = pascalCase(process.env.MODULE_NAME);
+const NAME = `WixRichContent${MODULE_NAME}`;
 
 const externals = [
   '@babel/runtime',
@@ -56,6 +57,16 @@ const NAMED_EXPORTS = {
 const plugins = [
   resolve({
     preferBuiltins: true,
+    extensions: ['.js', '.jsx', '.json'],
+  }),
+  builtins(),
+  babel({
+    configFile: path.resolve(__dirname, '.babelrc.js'),
+    include: [
+      'src/**',
+      'statics/icons/**',
+    ],
+    runtimeHelpers: true,
   }),
   commonjs({
     namedExports: {
@@ -65,9 +76,8 @@ const plugins = [
       'node_modules/immutable/dist/immutable.js': [...NAMED_EXPORTS.immutable],
     },
   }),
-  builtins(),
   json({
-    include: 'dist/**',
+    include: 'statics/**',
   }),
   postcss({
     minimize: true,
@@ -83,7 +93,7 @@ const plugins = [
   uglify(),
 ];
 
-if (process.env.ANALYZE_BUNDLE) {
+if (process.env.MODULE_ANALYZE) {
   plugins.push(
     visualizer({
       sourcemaps: true,
@@ -93,17 +103,18 @@ if (process.env.ANALYZE_BUNDLE) {
 
 export default [
   {
-    input: 'dist/es/index.js',
+    input: 'src/index.js',
     output: [
       {
         name: NAME,
         format: 'iife',
-        file: `dist/${process.env.MODULE_NAME}.js`,
+        file: `dist/${MODULE_NAME}.js`,
         globals: BUNDLE_GLOBALS,
       },
       {
         file: 'dist/module.js',
-        format: 'es'
+        format: 'es',
+        sourcemap: true,
       },
       {
         file: 'dist/module.cjs.js',
@@ -112,5 +123,9 @@ export default [
     ],
     plugins,
     external: id => !!externals.find(externalName => new RegExp(externalName).test(id)),
+    watch: {
+      exclude: ['node_modules/**'],
+      clearScreen: false,
+    }
   },
 ];

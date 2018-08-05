@@ -1,4 +1,4 @@
-const presetEnvESM =  [
+const presetEnvESM = [
   '@babel/preset-env',
   {
     modules: false,
@@ -6,7 +6,7 @@ const presetEnvESM =  [
   }
 ];
 
-const presetEnvCommonJS =  [
+const presetEnvCommonJS = [
   '@babel/preset-env',
   {
     loose: true
