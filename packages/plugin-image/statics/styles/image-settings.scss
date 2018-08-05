@@ -1,17 +1,6 @@
 $TITLE_HEIGHT: 100px;
 $FOOTER_HEIGHT: 100px;
 $MOBILE_HEADER_HEIGHT: 50px;
-
-@mixin image-management-button($icon) {
-  content: '';
-  display: inline-block;
-  vertical-align: bottom;
-  margin-right: 8.5px;
-  width: 19px;
-  height: 19px;
-  background: url('../icons/' + $icon + '-icon.svg') center no-repeat;
-}
-
 .imageSettings {
   position: absolute;
   left: 0;
@@ -26,7 +15,6 @@ $MOBILE_HEADER_HEIGHT: 50px;
 
 .imageSettingsTitle {
   position: fixed;
-
   margin: 46px 0 27px 30px;
   font-size: 18px;
 }

@@ -1,6 +1,6 @@
 import { BUTTONS, PluginSettingsIcon, getModalStyles } from 'wix-rich-content-common';
 import { Modals } from '../modals';
-import { MediaReplaceIcon } from '../../statics/icons/toolbar';
+import { MediaReplaceIcon } from '../icons';
 
 const modalStyles = getModalStyles();
 
