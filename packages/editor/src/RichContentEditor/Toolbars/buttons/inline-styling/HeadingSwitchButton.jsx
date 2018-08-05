@@ -1,7 +1,7 @@
 import { RichUtils } from '@wix/draft-js';
 import { HEADING, getSelectionStyles } from 'wix-rich-content-common';
 import createInlineStyleSwitchButton from './createInlineStyleSwitchButton';
-import { TitleIcon, TitleOneIcon, TitleTwoIcon } from '../../../../../statics/icons';
+import { TitleIcon, TitleOneIcon, TitleTwoIcon } from '../../../Icons';
 
 const styles = Object.keys(HEADING).map(k => HEADING[k]).filter(style => style !== HEADING.TITLE);
 const HeadingSwitchButton = createInlineStyleSwitchButton({

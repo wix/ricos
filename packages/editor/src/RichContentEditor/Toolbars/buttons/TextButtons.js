@@ -12,7 +12,7 @@ import {
   BlockQuoteIcon,
   OrderedListIcon,
   UnorderedListIcon,
-} from '../../../../statics/icons';
+} from '../../Icons';
 import createTextInlineStyleButton from './utils/createTextInlineStyleButton';
 import createTextBlockStyleButton from './utils/createTextBlockStyleButton';
 import createTextAlignmentButton from './utils/createTextAlignmentButton';
