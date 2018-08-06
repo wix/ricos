@@ -16,6 +16,7 @@
     "clean": "rm -rf dist/",
     "statics": "mkdir -p dist && cp -R statics dist/statics",
     "prebuild": "npm run statics",
+    "postbuild": "cat ../common/dist/styles.min.css >> dist/styles.min.css",
     "build": "rollup --environment MODULE_NAME:editor -c ../../rollup.config.js",
     "build:analyze": "npm run build -- --environment MODULE_ANALYZE && open stats.html",
     "watch": "npm run build -- --watch",
