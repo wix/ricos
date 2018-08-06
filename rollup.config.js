@@ -112,17 +112,17 @@ export default [
         format: 'iife',
         file: `dist/${MODULE_NAME}.js`,
         globals: BUNDLE_GLOBALS,
-        sourcemap: 'inline',
+        sourcemap: true,
       },
       {
         file: 'dist/module.js',
         format: 'es',
-        sourcemap: 'inline'
+        sourcemap: true,
       },
       {
         file: 'dist/module.cjs.js',
         format: 'cjs',
-        sourcemap: 'inline',
+        sourcemap: true,
       },
     ],
     plugins,
