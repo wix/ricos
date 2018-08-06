@@ -5,6 +5,8 @@
 
 ![Demo](https://media.giphy.com/media/2rAwp4zLCrtGn2Tlbq/giphy.gif)
 
+You can try it here: [http://rich-content-editor-example.surge.sh/](http://rich-content-editor-example.surge.sh/)
+
 ## Installation
 
 To install this package as editor, use the following command:
@@ -23,13 +25,13 @@ $ npm install --save wix-rich-content-viewer
 
 ### 1. Basic Editor
 
-To get started with the editor, create a simple React component, and add the following imports:
+To get started with the editor, create a simple `React.Component`, and import the editor component:
 
 ```jsx
 import { EditorState, RichContentEditor } from 'wix-rich-content-editor';
 ```
 
-Then, add an empty `editorState` to your state:
+Then, create an empty `editorState` in your state:
 
 ```jsx
 export class MyApp extends React.Component {
@@ -39,7 +41,7 @@ export class MyApp extends React.Component {
 }
 ```
 
-And use the `RichContentEditor` component in your `render` function, and implement `onChange` function:
+Use the `RichContentEditor` component in your `render` function, and implement `onChange` function:
 
 ```jsx
 import React from 'react';
@@ -69,7 +71,7 @@ export class MyApp extends React.Component {
 }
 ```
 
-Now, in order to make sure you are getting the most of the rich-content editor, make sure to include the compiled CSS files from `` in your app.
+Now, to make sure you are getting the most of the rich-content editor, include the compiled CSS files in your app's main file:
 
 `app.js`
 ```jsx
@@ -79,17 +81,17 @@ import 'wix-rich-content-editor/dist/styles.min.css';
 
 > You can also import the CSS files using `@import '~...`;` from a SCSS file.
 
-### 2. Add plugins
+### 2. Add Plugins
 
 To add plugins to your editor, choose one of the implemented plugins from [the list of available plugins](`./pacakges/`).
 
-Then, install the plugin you wish use from NPM:
+Install the plugin you wish use from NPM:
 
 ```bash
 $ npm install wix-rich-content-plugin-divider
 ```
 
-Import the plugin's stylesheet file:
+Import the plugin's stylesheet file in your main app's file:
 
 ```jsx
 import 'wix-rich-content-plugin-divider/dist/styles.min.css';
@@ -131,11 +133,11 @@ export class MyApp extends React.Component {
 }
 ```
 
-### 3. Theme and custom styling
+### 3. Theme and Custom Styling
 
 To customize the look and feel of the editor, you can use `theme` prop, and override the styles as you wish.
 
-Use a `className` to override it as you with. It also support css-modules imports.
+Use the style's `className` to override. It also support css-modules imports.
 
 `my-style.css`
 ```css
@@ -215,14 +217,14 @@ You can find a full list of classes you can override in [here](./examples/editor
 
 ### Usage with [Yoshi](https://github.com/wix/yoshi)
 
-To use this package with Yoshi, you should do the same bootstrapping process, but make sure to include the package's `.css` files from a `.scss` file, or add `.global` to the import:
+To use the editor with Yoshi, you should do the same bootstrapping process, but make sure to include the package's `.css` files from a `.scss` file, or add `.global` to the import:
 
 ```
 import 'wix-rich-content-common/dist/styles.min.global.css';
 import 'wix-rich-content-editor/dist/styles.min.global.css';
 ```
 
-> This workaround is required because Yoshi re-compiles CSS files, and add css-modules.
+> This workaround is required because Yoshi re-compiles CSS files, and applies css-modules again.
 
 ### SSR support
 
