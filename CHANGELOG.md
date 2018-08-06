@@ -8,7 +8,16 @@
 
 ## [Unreleased]
 
-## 1.3.0
+## 1.2.10
+
+#### :bug: Bug Fix
+* `common` 
+  * [#70](https://github.com/wix-incubator/rich-content/issues/70) use `button.componentData` to be consistent with `InlineButtons`
+* `plugin-image`
+  * update editorState as well as componentData on upload
+* `plugin-gallery`
+  * update editorState as well as componentData on upload
+  * invoke `stateFromProps` only when a change has occured
 
 #### :house: Internal
 * `general`

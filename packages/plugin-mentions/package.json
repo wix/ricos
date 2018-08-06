@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-plugin-mentions",
-  "version": "1.1.9",
+  "version": "1.1.10",
   "author": {
     "name": "Vytenis Butkevicius",
     "email": "vytenisb@wix.com"
@@ -49,7 +49,7 @@
   },
   "dependencies": {
     "draft-js-mention-plugin": "^3.0.4",
-    "wix-rich-content-common": "^1.1.9"
+    "wix-rich-content-common": "^1.1.10"
   },
   "unpkg": true,
   "publishConfig": {
