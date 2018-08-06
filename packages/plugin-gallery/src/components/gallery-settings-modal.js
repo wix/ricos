@@ -31,9 +31,16 @@ class ManageMediaSection extends Component {
     event.target.value = ''; //reset the input
   };
 
+  handleFileSelection = (index, multiple, handleFilesAdded, deleteBlock) => {
+    const { helpers, data } = this.props;
+
+    if (helpers.handleFileSelection) {
+      helpers.handleFileSelection(index, multiple, handleFilesAdded, deleteBlock, data);
+    }
+  };
+
   render() {
-    const { helpers, store, t, relValue, anchorTarget, isMobile } = this.props;
-    const { handleFileSelection } = helpers;
+    const { store, t, relValue, anchorTarget, isMobile } = this.props;
 
     return (
       <div>
@@ -42,7 +49,7 @@ class ManageMediaSection extends Component {
           items={this.props.data.items}
           onItemsChange={this.applyItems}
           handleFileChange={this.handleFileChange}
-          handleFileSelection={handleFileSelection}
+          handleFileSelection={this.handleFileSelection}
           handleFilesAdded={store.get('handleFilesAdded')}
           deleteBlock={store.get('deleteBlock')}
           t={t}

@@ -127,7 +127,7 @@ export default ({ blockType, button, helpers, pubsub, t }) => {
       const { handleFileSelection } = helpers || {};
       if (handleFileSelection) {
         const multiple = !!button.multi;
-        handleFileSelection(undefined, multiple, this.handleExternalFileChanged);
+        handleFileSelection(undefined, multiple, this.handleExternalFileChanged, undefined, button.componentData);
       }
     }
 
