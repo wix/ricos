@@ -8,7 +8,8 @@
   "scripts": {
     "bootstrap": "lerna bootstrap --hoist",
     "postinstall": "npm run bootstrap",
-    "rebuild": "lerna clean --yes && rm -f package-lock.json && npm i && npm run build",
+    "reinstall": "lerna clean --yes && rm -f package-lock.json && rm -rf node_modules && npm i",
+    "rebuild": "npm run reinstall && npm run build",
     "build": "lerna run --parralel --stream build",
     "watch": "lerna exec --parralel -- npm run watch",
     "customPublish": "node scripts/customPublish",
