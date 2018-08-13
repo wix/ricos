@@ -1,22 +1,3 @@
-/* eslint-disable no-undef */
-
-// Viewer mapping
-declare type ElementType = "inline" | "block";
-
-declare type PluginMapping = {
-  component: Function,
-  classNameStrategies?: {
-    size?: Function,
-    alignment?: Function,
-    textWrap?: Function,
-    container?: Function
-  },
-  elementType?: ElementType
-};
-
-declare type PluginTypeMapper = () => { [type: string]: PluginMapping };
-
-// TextButton mapping
 declare type MODIFIER_KEYS = 'command' | 'shift' | 'ctrl' | 'option';
 
 declare type CommandHandler = (editorState : any) => any;
@@ -41,10 +22,7 @@ declare type TextButtonMapping = {
 };
 
 declare type TextButtonMappingParams = {
-  helpers: {
-    openModal?: (props: any) => void,
-    closeModal?: Function
-  },
+  helpers: Helpers,
   isMobile: boolean,
   anchorTarget: string,
   relValue: string,
@@ -58,5 +36,3 @@ declare type TextButtonMappingParams = {
  declare type TextButtonMapper = (params: TextButtonMappingParams) => {
   TextButtonMapper: () => { [type: string]: TextButtonMapping }
 };
-
-/* eslint-enable no-undef */

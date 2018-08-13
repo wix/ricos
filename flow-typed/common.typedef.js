@@ -1,7 +1,22 @@
-declare module 'wix-rich-content-common' {
-  declare export function hasLinksInSelection(editorState: any): boolean;
-  declare export function removeLinksInSelection(editorState: any): void;
-  declare export function getModalStyles(value : any) : any;
-  declare export var EditorModals;
-  declare export var MODIFIERS;
-}
+import type { Element } from 'react';
+
+declare type Helpers = {
+  openModal?: (props: any) => void,
+  closeModal?: Function,
+  onFilesChange?: (files: Array<any>, updateEntity: ({ data: any, error?: any })) => void,
+  handleFileSelection?: (index?: ?number, multiple: boolean,
+    updateEntity: ({ data: any, error?: any }) => void, removeEntity?: Function) => void,
+  onVideoSelected?: (url: string, updateEntity: ({ data: any, error?: any }) => void) => void
+};
+
+declare type Translate = (key: string) => string;
+
+declare type Component = (props: any) => Element;
+
+declare type TOOLBARS = {
+  SIDE: 'SIDE',
+  MOBILE: 'MOBILE',
+  FOOTER: 'FOOTER',
+  STATIC: 'TEXT',
+  INLINE: 'INLINE'
+};
