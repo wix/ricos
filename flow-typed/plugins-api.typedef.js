@@ -51,7 +51,12 @@ declare type TextButtonMappingParams = {
   t: Function,
   theme: any,
   getEditorState: () => any,
-  setEditorState: (editorState: any) => void
+  setEditorState: (editorState: any) => void,
+  settings: any
  };
+
+ declare type TextButtonMapper = (params: TextButtonMappingParams) => {
+  TextButtonMapper: () => { [type: string]: TextButtonMapping }
+};
 
 /* eslint-enable no-undef */
