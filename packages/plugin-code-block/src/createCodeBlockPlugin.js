@@ -3,7 +3,7 @@ import merge from 'lodash/merge';
 import { createBasePlugin } from 'wix-rich-content-common';
 import { CODE_BLOCK_TYPE } from './types';
 import PrismDecorator from './PrismDecorator';
-import createCodeBlockToolbar from './toolbar/createCodeBlockToolbar';
+import { codeBlockTextButtonMapper } from './toolbar/codeBlockTextButtonMapper';
 
 const defaultSettings = {
   position: {
@@ -76,7 +76,7 @@ const createCodeBlockPlugin = (config = {}) => {
   } = config;
   const settings = merge(defaultSettings, userSettings);
   const plugin = createUnderlyingPlugin({ theme });
-  const toolbar = createCodeBlockToolbar({
+  const toolbar = codeBlockTextButtonMapper({
     helpers,
     theme,
     isMobile,
