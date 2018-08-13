@@ -11,6 +11,7 @@
     "rebuild": "lerna clean --yes && rm -f package-lock.json && npm i && npm run build",
     "build": "lerna run --parallel --stream build",
     "watch": "lerna exec --parallel -- npm run watch",
+    "test": "lerna run --parallel test && echo 'flow: type checking...' && flow",
     "customPublish": "node scripts/customPublish",
     "createVersion": "node scripts/createVersion"
   },
@@ -43,6 +44,7 @@
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-lodash": "^2.7.0",
     "eslint-plugin-react": "^7.7.0",
+    "flow-bin": "^0.78.0",
     "husky": "^1.0.0-rc.6",
     "lerna": "^3.0.3",
     "loader-utils": "^1.1.0",

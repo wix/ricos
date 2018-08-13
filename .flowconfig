@@ -1,0 +1,17 @@
+[ignore]
+node_modules
+.*/dist/.*
+.*/node_modules/.*
+.*/.history/.*
+.*/.vscode/.*
+
+[include]
+
+[libs]
+flow-typed
+
+[lints]
+
+[options]
+
+[strict]
