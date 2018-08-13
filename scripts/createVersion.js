@@ -36,27 +36,18 @@ prompts({
     console.log(chalk.red('Release aborted'));
   } else {
     try {
-      const publishCmd = `${lernaPath} publish`;
-      let publishFlags = `--skip-npm --scope=${scope} --message="version bump:" --independent`;
-      if (force) {
-        publishFlags = `--force-publish ${publishFlags}`;
+      let lernaCmd = `${lernaPath} version --no-commit-hooks --message="version bump:"`;
+      if (argv.force) {
+        let forceFlag = '--force-publish';
+        if (typeof argv.force === 'string') {
+          forceFlag = `${forceFlag}=${argv.force}`;
+        }
+        lernaCmd = `${lernaCmd} ${forceFlag}`;
       }
-      cp.execSync(`${publishCmd} ${publishFlags}`, { stdio: 'inherit' });
-
-      console.log();
-      console.log(chalk.green('Release was created locally'));
-      console.log();
-      console.log('Please push your changes to origin');
-      console.log();
-      console.log(chalk.cyan('git push --follow-tags'));
-      console.log();
-      console.log('Head over to the CI and wait for rich-content build to pass 👇');
-      console.log();
-      console.log(
-        chalk.cyan(
-          'http://ci.dev.wix/viewType.html?buildTypeId=WixRichContent_WixRichContent_O',
-        ),
-      );
+      if (argv.version) {
+        lernaCmd = `${lernaCmd} ${argv.version}`;
+      }
+      cp.execSync(lernaCmd, { stdio: 'inherit' });
     } catch (error) {
       throw error;
     }

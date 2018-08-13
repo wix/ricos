@@ -31,6 +31,11 @@ export default class InlineToolbar extends Component {
     anchorTarget: PropTypes.string,
     relValue: PropTypes.string,
     t: PropTypes.func,
+    visibilityFn: PropTypes.func,
+    offset: PropTypes.shape({
+      x: PropTypes.number,
+      y: PropTypes.number,
+    })
   };
 
   state = {
@@ -88,6 +93,11 @@ export default class InlineToolbar extends Component {
         left = relativeRect.width - halfToolbarWidth;
       }
 
+      if (this.props.offset) {
+        top += this.props.offset.y || 0;
+        left += this.props.offset.x || 0;
+      }
+
       this.setState({ position: { top, left } });
     });
   };
@@ -95,11 +105,17 @@ export default class InlineToolbar extends Component {
   getTabIndexByVisibility = () => this.isVisible() ? 0 : -1;
 
   isVisible = () => {
-    const { pubsub } = this.props;
+    const { pubsub, visibilityFn } = this.props;
     const { overrideContent, extendContent } = this.state;
-    const selection = pubsub.get('getEditorState')().getSelection();
+
+    let isVisible = false;
+    if (visibilityFn) {
+      const editorState = pubsub.get('getEditorState')();
+      isVisible = visibilityFn(editorState);
+    }
+
     // TODO: Test readonly mode and possibly set isVisible to false if the editor is readonly
-    return (!selection.isCollapsed() && selection.getHasFocus()) || overrideContent || extendContent;
+    return isVisible || overrideContent || extendContent;
   };
 
   getStyle() {

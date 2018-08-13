@@ -1,5 +1,10 @@
 {
-  "lerna": "2.10.0",
+  "lerna": "3.0.3",
+  "command": {
+    "version": {
+      "allowBranch": ["develop"]
+    }
+  },
   "packages": [
     "packages/*"
   ],

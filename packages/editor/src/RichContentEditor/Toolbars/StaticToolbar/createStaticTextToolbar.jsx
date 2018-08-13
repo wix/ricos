@@ -71,7 +71,7 @@ const getStaticTextTheme = theme => {
   };
 };
 
-export default ({ buttons, pluginTextButtonMappers, pubsub, theme, isMobile, helpers, anchorTarget, relValue, t, refId }) => {
+export default ({ buttons, pluginTextButtonMappers, pubsub, theme, isMobile, helpers, anchorTarget, relValue, t, refId, offset, visibilityFn }) => {
   const staticTextTheme = getStaticTextTheme(theme);
 
   const appendSeparator = ({ mergedList, sourceList, buttonData, formFactor }) => {
@@ -102,6 +102,8 @@ export default ({ buttons, pluginTextButtonMappers, pubsub, theme, isMobile, hel
     anchorTarget,
     relValue,
     t,
-    id
+    id,
+    offset,
+    visibilityFn
   });
 };

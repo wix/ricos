@@ -19,3 +19,11 @@ export const MODIFIERS = {
   OPTION: 'option',
   SHIFT: 'shift',
 };
+
+export const TOOLBARS = {
+  SIDE: 'SIDE',
+  MOBILE: 'MOBILE',
+  FOOTER: 'FOOTER',
+  STATIC: 'TEXT',
+  INLINE: 'INLINE'
+};

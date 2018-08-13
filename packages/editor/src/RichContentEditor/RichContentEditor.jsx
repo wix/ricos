@@ -20,7 +20,8 @@ import {
   createInlineStyleDecorators,
   mergeStyles,
   WixUtils,
-  TooltipHost
+  TooltipHost,
+  TOOLBARS
 } from 'wix-rich-content-common';
 import { getStrategyByStyle } from './getStrategyByStyle';
 import styles from '../../statics/styles/rich-content-editor.scss';
@@ -63,14 +64,12 @@ class RichContentEditor extends Component {
       helpers,
       anchorTarget,
       relValue,
-      alwaysShowSideToolbar,
-      hideFooterToolbar,
-      sideToolbarOffset,
       textButtons,
       textToolbarType,
-      textAlignment,
       isMobile,
       t,
+      config,
+      textAlignment
     } = this.props;
     const { theme } = this.state;
     const buttons = { textButtons, pluginButtons, pluginTextButtonMappers };
@@ -83,21 +82,19 @@ class RichContentEditor extends Component {
       isMobile,
       textToolbarType,
       textAlignment,
-      alwaysShowSideToolbar,
-      hideFooterToolbar,
-      sideToolbarOffset,
       theme: theme || {},
       getEditorState: () => this.state.editorState,
       setEditorState: editorState => this.setState({ editorState }),
       t,
-      refId: this.refId
+      refId: this.refId,
+      getToolbarSettings: config.getToolbarSettings
     });
   }
 
   getToolbars = () => (
     {
-      MobileToolbar: this.toolbars.mobile ? this.toolbars.mobile.Toolbar : null,
-      TextToolbar: this.props.textToolbarType === 'static' ? this.toolbars.textStatic.Toolbar : null
+      MobileToolbar: this.toolbars[TOOLBARS.MOBILE] ? this.toolbars[TOOLBARS.MOBILE].Toolbar : null,
+      TextToolbar: this.props.textToolbarType === 'static' ? this.toolbars[TOOLBARS.STATIC].Toolbar : null
     }
   )
 
@@ -340,9 +337,6 @@ RichContentEditor.propTypes = {
   isMobile: PropTypes.bool,
   helpers: PropTypes.object,
   t: PropTypes.func,
-  alwaysShowSideToolbar: PropTypes.bool,
-  sideToolbarOffset: PropTypes.object,
-  hideFooterToolbar: PropTypes.bool,
   textButtons: PropTypes.shape({
     desktop: PropTypes.arrayOf(PropTypes.string),
     mobile: PropTypes.arrayOf(PropTypes.string)

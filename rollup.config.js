@@ -94,6 +94,10 @@ const plugins = [
   }),
   uglify({
     mangle: false,
+    sourceMap: {
+      filename: "out.js",
+      url: "out.js.map"
+    }
   }),
 ];
 

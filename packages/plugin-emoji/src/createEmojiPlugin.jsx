@@ -1,5 +1,5 @@
 import React from 'react';
-import { createBasePlugin, mergeStyles } from 'wix-rich-content-common';
+import { createBasePlugin, mergeStyles, TOOLBARS } from 'wix-rich-content-common';
 import createEmojiPlugin from 'draft-js-emoji-plugin';
 import { EXTERNAL_EMOJI_TYPE } from './types';
 import SelectButton from './SelectButton';
@@ -26,7 +26,7 @@ const createExternalEmojiPlugin = (config = {}) => {
       InsertButtons: [
         {
           name: 'Emoji',
-          addToSideToolbar: false,
+          toolbars: [TOOLBARS.FOOTER],
           ButtonElement: InsertToolbarButton,
           wrappingComponent: 'div',
           helpers,

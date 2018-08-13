@@ -8,9 +8,12 @@ export default class SideToolbar extends Component {
   static propTypes = {
     pubsub: PropTypes.object.isRequired,
     structure: PropTypes.array.isRequired,
-    offset: PropTypes.object,
+    offset: PropTypes.shape({
+      x: PropTypes.number,
+      y: PropTypes.number,
+    }),
     theme: PropTypes.object.isRequired,
-    alwaysShow: PropTypes.bool,
+    visibilityFn: PropTypes.func,
     isMobile: PropTypes.bool
   };
 
@@ -29,13 +32,14 @@ export default class SideToolbar extends Component {
   }
 
   onEditorStateChange = editorState => {
-    const selection = editorState.getSelection();
-    const currentContent = editorState.getCurrentContent();
-    const currentBlock = currentContent.getBlockForKey(selection.getStartKey());
-    const selectionHasContent = currentBlock.getLength() > 0;
-    const { alwaysShow } = this.props;
+    const { visibilityFn } = this.props;
 
-    if (!alwaysShow && selectionHasContent) {
+    let isVisible = false;
+    if (visibilityFn) {
+      isVisible = visibilityFn(editorState);
+    }
+
+    if (!isVisible) {
       this.setState({
         position: {
           transform: 'scale(0)',
@@ -43,6 +47,10 @@ export default class SideToolbar extends Component {
       });
       return;
     }
+
+    const selection = editorState.getSelection();
+    const currentContent = editorState.getCurrentContent();
+    const currentBlock = currentContent.getBlockForKey(selection.getStartKey());
 
     // TODO verify that always a key-0-0 exists
     const offsetKey = DraftOffsetKey.encode(currentBlock.getKey(), 0, 0);

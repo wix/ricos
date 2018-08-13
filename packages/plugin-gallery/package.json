@@ -37,7 +37,8 @@
     "lodash": "^4.0.0",
     "prop-types": "^15.0.0",
     "react": "^15.0.0 || ^16.0.0",
-    "react-dom": "^15.0.0 || ^16.0.0"
+    "react-dom": "^15.0.0 || ^16.0.0",
+    "react-i18next": "^7.0.0"
   },
   "devDependencies": {
     "@babel/runtime": "7.0.0-beta.55",
@@ -48,11 +49,10 @@
     "prop-types": "^15.6.2",
     "react": "15.5.4",
     "react-dom": "15.5.4",
-    "rollup": "^0.63.5"
+    "rollup": "^0.64.1"
   },
   "dependencies": {
     "axios": "^0.18.0",
-    "focus-trap-react": "^3.1.2",
     "react-sortable-hoc": "^0.6.8",
     "wix-rich-content-common": "^1.1.14"
   },

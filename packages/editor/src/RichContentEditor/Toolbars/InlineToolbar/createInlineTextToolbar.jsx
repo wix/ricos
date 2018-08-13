@@ -1,4 +1,5 @@
 import get from 'lodash/get';
+
 import createInlineToolbar from './createInlineToolbar';
 import { MobileTextButtonList, DesktopTextButtonList } from '../buttons/';
 import { getTextButtonsFromList, reducePluginTextButtons, reducePluginTextButtonNames, mergeButtonLists } from '../buttons/utils';
@@ -15,6 +16,8 @@ export default config => {
     anchorTarget,
     relValue,
     t,
+    offset,
+    visibilityFn
   } = config;
 
   const appendSeparator = ({ mergedList, sourceList, buttonData, formFactor }) => {
@@ -45,6 +48,8 @@ export default config => {
     helpers,
     anchorTarget,
     relValue,
-    t
+    t,
+    offset,
+    visibilityFn
   });
 };

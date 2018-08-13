@@ -5,8 +5,24 @@
 > - :rocket:     [New Feature]
 > - :bug:        [Bug Fix]
 > - :house:      [Internal]
+> - :book:       [Documentation]
 
 ## [Unreleased]
+
+#### :rocket: New Feature
+* `editor`
+  * RCE `config.getToolbarSettings` API allows to customize toolbar instantiation, visibility, offset point, and buttons. Check `/docs/ToolbarCustomization.md` for more details
+
+#### :boom: Breaking Change
+* `editor`
+  * `RichContentEditor`'s `alwaysShowSideToolbar`, `sideToolbarOffset`, `hideFooterToolbar` props removed
+* `general`
+  * `InsertButtons` API: `addToSideToolbar` property removed; `toolbars` property is required
+
+#### :book: Documentation
+* Toolbar Customization doc added
+
+<br/>
 
 ## 1.2.14 (Aug 8, 2018)
 

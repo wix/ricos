@@ -1,3 +1,4 @@
+import { TOOLBARS } from 'wix-rich-content-common';
 import { DEFAULTS } from '../HtmlComponent';
 import { InsertPluginIcon } from '../icons';
 
@@ -9,6 +10,7 @@ export default ({ helpers, t }) => {
       Icon: InsertPluginIcon,
       componentData: DEFAULTS,
       helpers,
+      toolbars: [TOOLBARS.FOOTER, TOOLBARS.SIDE],
     },
   ];
 };

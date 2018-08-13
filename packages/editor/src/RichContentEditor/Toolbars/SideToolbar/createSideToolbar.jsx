@@ -1,8 +1,7 @@
 import React from 'react';
-import get from 'lodash/get';
 import SideToolbar from './SideToolbar';
 import AddPluginFloatingToolbar from './AddPluginFloatingToolbar';
-import { simplePubsub, decorateComponentWithProps, WixUtils } from 'wix-rich-content-common';
+import { simplePubsub, decorateComponentWithProps } from 'wix-rich-content-common';
 
 const createSideToolbar = (config = {}) => {
   const {
@@ -10,26 +9,18 @@ const createSideToolbar = (config = {}) => {
     pubsub = simplePubsub({ isVisible: false }),
     theme,
     structure = [],
-    alwaysShow = false,
-    offset = {
-      desktop: { x: -40, y: 0 },
-      mobile: {
-        ios: { x: 0, y: 0 },
-        android: { x: 0, y: 50 },
-      }
-    },
+    visibilityFn,
+    offset,
     isMobile,
   } = config;
-
-  const offsetPath = !isMobile ? 'desktop' : WixUtils.isiOS() ? 'mobile.ios' : 'mobile.android';
 
   const toolbarProps = {
     pubsub,
     structure,
     theme,
     isMobile,
-    alwaysShow,
-    offset: get(offset, offsetPath),
+    offset,
+    visibilityFn,
   };
 
   return {
@@ -46,7 +37,7 @@ const createSideToolbar = (config = {}) => {
   };
 };
 
-export default ({ buttons, offset, pubsub, theme, alwaysShow, isMobile, helpers, t }) => {
+export default ({ buttons, offset, pubsub, theme, visibilityFn, isMobile, helpers, t }) => {
 
   const { buttonStyles, ...rest } = theme;
   const toolbarButtonTheme = {
@@ -61,7 +52,7 @@ export default ({ buttons, offset, pubsub, theme, alwaysShow, isMobile, helpers,
   return createSideToolbar({
     offset,
     theme,
-    alwaysShow,
+    visibilityFn,
     isMobile,
     structure: [
       ({ getEditorState, setEditorState, theme }) => //eslint-disable-line

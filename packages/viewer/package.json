@@ -31,27 +31,28 @@
     }
   },
   "dependencies": {
-    "classnames": "^2.2.6",
-    "lodash": "^4.17.10",
     "redraft": "^0.9.0",
     "wix-rich-content-common": "^1.1.14",
     "wnpm-ci": "latest"
   },
   "peerDependencies": {
     "@babel/runtime": "7.0.0-beta.55",
+    "lodash": "^4.0.0",
     "react": "^15.0.0 || ^16.0.0",
     "react-dom": "^15.0.0 || ^16.0.0"
   },
   "devDependencies": {
     "@babel/runtime": "7.0.0-beta.55",
+    "classnames": "^2.2.6",
     "enzyme": "^2.9.1",
     "eslint": "^4.19.1",
     "jest": "^23.1.0",
+    "lodash": "^4.17.10",
     "prop-types": "^15.6.2",
     "react": "15.5.4",
     "react-dom": "15.5.4",
     "react-test-renderer": "^15.6.1",
-    "rollup": "^0.63.5"
+    "rollup": "^0.64.1"
   },
   "unpkg": true,
   "publishConfig": {

@@ -13,6 +13,8 @@ const createInlineToolbar = (config = {}) => {
     anchorTarget,
     relValue,
     t,
+    offset,
+    visibilityFn
   } = config;
 
   const toolbarProps = {
@@ -24,7 +26,9 @@ const createInlineToolbar = (config = {}) => {
     helpers,
     anchorTarget,
     relValue,
-    t
+    t,
+    offset,
+    visibilityFn
   };
 
   return {

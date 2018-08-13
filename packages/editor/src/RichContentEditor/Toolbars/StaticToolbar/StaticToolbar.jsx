@@ -17,6 +17,11 @@ export default class StaticToolbar extends React.Component {
     t: PropTypes.func,
     dataHook: PropTypes.string,
     id: PropTypes.string,
+    offset: PropTypes.shape({
+      x: PropTypes.number,
+      y: PropTypes.number,
+    }),
+    visibilityFn: PropTypes.func
   };
 
   constructor(props) {
@@ -54,7 +59,16 @@ export default class StaticToolbar extends React.Component {
   onExtendContent = extendContent => this.setState({ extendContent });
 
   render() {
-    const { theme, pubsub, structure, helpers, isMobile, linkModal, anchorTarget, relValue, t, dataHook, id } = this.props;
+
+    const { visibilityFn, pubsub } = this.props;
+    if (visibilityFn) {
+      const editorState = pubsub.get('getEditorState');
+      if (!visibilityFn(editorState)) {
+        return null;
+      }
+    }
+
+    const { theme, structure, helpers, isMobile, linkModal, anchorTarget, relValue, t, dataHook, id, offset } = this.props;
     const { showLeftArrow, showRightArrow, overrideContent: OverrideContent, extendContent: ExtendContent } = this.state;
     const hasArrow = showLeftArrow || showRightArrow;
     const { toolbarStyles } = theme || {};
@@ -88,8 +102,13 @@ export default class StaticToolbar extends React.Component {
       onExtendContent: this.onExtendContent,
     };
 
+    let style = {};
+    if (offset) {
+      style = { top: offset.y || 0, left: offset.x || 0 };
+    }
+
     return (
-      <div role="toolbar" aria-orientation="horizontal" id={id} className={toolbarClassNames} data-hook={dataHook}>
+      <div role="toolbar" aria-orientation="horizontal" id={id} className={toolbarClassNames} data-hook={dataHook} style={style}>
         <div className={buttonClassNames}>
           <Measure
             client
