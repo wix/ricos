@@ -22,8 +22,7 @@
     "release": "wnpm-release --no-shrinkwrap",
     "lint": "eslint 'src/**/*.{js,jsx}'",
     "lint:fix": "npm run lint -- --fix",
-    "pretest": "npm run lint",
-    "test": "jest --verbose"
+    "test": "npm run lint"
   },
   "jest": {
     "globals": {
