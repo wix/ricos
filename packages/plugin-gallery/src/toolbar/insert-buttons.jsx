@@ -1,8 +1,9 @@
+// @flow
 import { TOOLBARS } from 'wix-rich-content-common';
 import { getDefault } from './../gallery-component';
 import { InsertPluginIcon } from '../icons';
 
-export default ({ helpers, t }) => {
+export const createInsertButtons /*: CreateInsertButtons */ = ({ helpers, t }) => {
   return [
     {
       type: 'file',

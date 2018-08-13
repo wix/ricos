@@ -1,9 +1,10 @@
+// @flow
 import { DEFAULTS } from '../video-component';
 import { getModalStyles, TOOLBARS } from 'wix-rich-content-common';
 import VideoURLInputModal from './videoURLInputModal';
 import { InsertPluginIcon } from '../icons';
 
-export default ({ helpers, t }) => {
+export const createInsertButtons /*: CreateInsertButtons */ = ({ helpers, t }) => {
   return [
     {
       type: 'modal',
