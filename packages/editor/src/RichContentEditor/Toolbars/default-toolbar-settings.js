@@ -1,3 +1,4 @@
+// @flow
 import { TOOLBARS } from 'wix-rich-content-common';
 import { createSideToolbar } from './SideToolbar';
 import { createMobileToolbar, createFooterToolbar, createStaticTextToolbar } from './StaticToolbar';
@@ -15,7 +16,15 @@ const defaultSideToolbarVisibilityFn = editorState => {
   return currentBlock.getLength() === 0;
 };
 
-export const getDefaultToolbarSettings = ({ pluginButtons, textButtons }) => [
+const defaultOffset = {
+  desktop: { x: 0, y: 0 },
+  mobile: {
+    ios: { x: 0, y: 0 },
+    android: { x: 0, y: 0 },
+  }
+};
+
+export const getDefaultToolbarSettings /*: GetToolbarSettings*/ = ({ pluginButtons, textButtons }) => [
   {
     name: TOOLBARS.SIDE,
     shouldCreate: () => {
@@ -64,7 +73,7 @@ export const getDefaultToolbarSettings = ({ pluginButtons, textButtons }) => [
         android: true,
       }
     }),
-    getPositionOffset: () => {},
+    getPositionOffset: () => defaultOffset,
     getButtons: () => {
       const buttons = { textButtons, pluginButtons };
       return {
@@ -93,15 +102,15 @@ export const getDefaultToolbarSettings = ({ pluginButtons, textButtons }) => [
         android: false,
       }
     }),
-    getPositionOffset: () => {},
+    getPositionOffset: () => defaultOffset,
     getButtons: () => {
       const buttons = pluginButtons.filter(({ buttonSettings }) => buttonSettings.toolbars.includes(TOOLBARS.FOOTER))
         .map(({ component }) => component);
       return {
         desktop: buttons,
         mobile: {
-          ios: [],
-          android: [],
+          ios: buttons,
+          android: buttons,
         }
       };
     },
@@ -123,12 +132,12 @@ export const getDefaultToolbarSettings = ({ pluginButtons, textButtons }) => [
         android: false,
       }
     }),
-    getPositionOffset: () => {},
+    getPositionOffset: () => defaultOffset,
     getButtons: () => ({
       desktop: textButtons,
       mobile: {
         ios: textButtons,
-        android: [],
+        android: textButtons,
       }
     }),
     getVisibilityFn: () => ({
@@ -149,12 +158,12 @@ export const getDefaultToolbarSettings = ({ pluginButtons, textButtons }) => [
         android: false,
       }
     }),
-    getPositionOffset: () => {},
+    getPositionOffset: () => defaultOffset,
     getButtons: () => ({
       desktop: textButtons,
       mobile: {
         ios: textButtons,
-        android: [],
+        android: textButtons,
       }
     }),
     getVisibilityFn: () => ({

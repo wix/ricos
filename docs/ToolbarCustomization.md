@@ -6,12 +6,12 @@ As it turns out, various `RichContentEditor` consumers have different customizat
 This document focuses on a specific `config` API `getToolbarSettings` that is responsible for the toolbar customization.
 ## `getToolbarSettings` API
 ### Signature
-The `getToolbarSettings` is defined as follows: `{ textButtons, pluginButtons } => Array<Setting>`.
+The `getToolbarSettings` is defined as follows: `{ textButtons: Array<any>, pluginButtons: Array<any> } => Array<ToolbarSettings>`.
 
-The `Setting` type is defined as follows:
+The `ToolbarSettings` type is defined as follows:
 ```
 {
-  name: TOOBAR_TYPE,
+  name: TOOLBARS,
   shouldCreate: () => {
     desktop: boolean,
     mobile: {
@@ -19,11 +19,11 @@ The `Setting` type is defined as follows:
       android: boolean
     }
   },
-  getVisiblityFn: () => {
-    desktop: editorState => boolean,
+  getVisibilityFn: () => {
+    desktop: (editorState: any) => boolean,
     mobile: {
-      ios: editorState => boolean,
-      android: editorState => boolean
+      ios: (editorState: any) => boolean,
+      android: (editorState: any) => boolean
     }
   },
   getPositionOffset: () => {
@@ -34,15 +34,15 @@ The `Setting` type is defined as follows:
     }
   },
   getButtons: () => {
-    desktop: Array<Component>,
+    desktop: Array<Component> | any,
     mobile: {
-      ios: Array<Component>,
-      android: Array<Component>
+      ios: Array<Component> | any,
+      android: Array<Component> | any
     }
   }
 }
 ```
-As you can see, the `Settings` is form-factor aware, i.e. it defines different behaviors for desktop/mobile views.
+As you can see, the `ToolbarSettings` is form-factor aware, i.e. it defines different behaviors for desktop/mobile views.
 ### Toolbar types
 The following toolbar types are available:
   * Plugin insertion toolbars:
@@ -68,7 +68,7 @@ All the toolbar types are exposed by the `TOOLBARS` const found in `/packages/co
 `getButtons` : defines a list of the toolbar buttons
 
 ## References and examples
-The `/packages/editor/src/RichContentEditor/Toolbars/default-toolbar-settings.js` contains the default toolbar settings, and the `getToolbarSettings` code example could be found in `/examples/editor/src/App.jsx` (commented by default).
+The `/packages/editor/src/RichContentEditor/Toolbars/default-toolbar-settings.js` contains the default toolbar settings, and the `getToolbarSettings` code example could be found in `/examples/editor/src/App.jsx` (commented by default). If you're using `flow` typing system, you can benefit from type definition `GetToolbarSettings` found in `/flow-typed/toolbar-settings.typedef.js`, to validate your function.
 
 ## Notes
 The plugin toolbar customization is not available yet.
