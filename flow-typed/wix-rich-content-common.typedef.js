@@ -4,6 +4,13 @@ declare module 'wix-rich-content-common' {
   declare export function getModalStyles(value : any) : any;
   declare export function mergeStyles<T>(value : { styles: T, theme: any}) : T;
   declare export var EditorModals;
-  declare export var MODIFIERS;
-  declare export var TOOLBARS;
+  declare export var MODIFIERS: MODIFIERS;
+  declare export var TOOLBARS: TOOLBARS;
+  declare export var BUTTONS: BUTTONS;
+  declare export var SizeSmallLeftIcon: Component;
+  declare export var SizeSmallCenterIcon: Component;
+  declare export var SizeSmallRightIcon: Component;
+  declare export var AlignCenterIcon: Component;
+  declare export var SizeLargeIcon: Component;
+  declare export var PluginSettingsIcon: Component;
 }

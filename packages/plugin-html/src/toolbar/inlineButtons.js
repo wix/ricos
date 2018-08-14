@@ -1,3 +1,4 @@
+// @flow
 import get from 'lodash/get';
 import { translate } from 'react-i18next';
 import {
@@ -24,12 +25,12 @@ const TOOLTIP_TEXT_BY_SRC_TYPE = {
   [SRC_TYPE_HTML]: 'HtmlPlugin_EditHtml_Tooltip',
   [SRC_TYPE_URL]: 'HtmlPlugin_EditUrl_Tooltip',
 };
-export default () => {
+export const createInlineButtons /*: CreateInlineButtons*/ = () => {
   return [
     {
       type: BUTTONS.INLINE_PANEL,
       keyName: 'edit',
-      panelContent: translate(null)(EditPanel),
+      panelContent: translate('')(EditPanel),
       icon: EditIcon,
       mapComponentDataToButtonProps: ({ src, srcType }) =>
         ({ tooltipTextKey: src ? TOOLTIP_TEXT_BY_SRC_TYPE[srcType] : 'HtmlPlugin_EditEmpty_Tooltip' }),

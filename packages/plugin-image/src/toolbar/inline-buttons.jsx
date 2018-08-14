@@ -1,10 +1,11 @@
+// @flow
 import { BUTTONS, PluginSettingsIcon, getModalStyles } from 'wix-rich-content-common';
 import { Modals } from '../modals';
 import { MediaReplaceIcon } from '../icons';
 
 const modalStyles = getModalStyles();
 
-export default ({ t, anchorTarget, relValue }) => {
+export const createInlineButtons /*: CreateInlineButtons*/ = ({ t, anchorTarget, relValue }) => {
   return [
     { keyName: 'sizeOriginal', type: BUTTONS.SIZE_ORIGINAL, mobile: false },
     { keyName: 'sizeSmallCenter', type: BUTTONS.SIZE_SMALL_CENTER, mobile: false },

@@ -1,4 +1,4 @@
-import createInlineButtons from './inlineButtons';
+import { createInlineButtons } from './inlineButtons';
 import { createInsertButtons } from './insertButtons';
 
 export default function createToolbar({ helpers, t, isMobile }) {
