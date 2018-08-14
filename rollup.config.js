@@ -10,6 +10,7 @@ import json from 'rollup-plugin-json';
 import postcss from 'rollup-plugin-postcss';
 import postcssURL from 'postcss-url';
 import pascalCase from 'pascal-case';
+import { externals, globals } from './rollup.externals';
 
 if (!process.env.MODULE_NAME) {
   console.error('Environment variable "MODULE_NAME" is missing!');
@@ -18,31 +19,6 @@ if (!process.env.MODULE_NAME) {
 
 const MODULE_NAME = pascalCase(process.env.MODULE_NAME);
 const NAME = `WixRichContent${MODULE_NAME}`;
-
-const externals = [
-  '@babel/runtime',
-  '@wix/draft-js',
-  'assert',
-  'core-js',
-  'classnames',
-  'draft-js',
-  'lodash',
-  'prop-types',
-  'react',
-  'react-dom',
-  'wix-rich-content-common',
-];
-
-const BUNDLE_GLOBALS = {
-  '@wix/draft-js': 'Draft',
-  assert: 'assert',
-  'core-js': 'core-js',
-  classnames: 'classNames',
-  lodash: '_',
-  'prop-types': 'PropTypes',
-  react: 'React',
-  'react-dom': 'ReactDOM',
-};
 
 const NAMED_EXPORTS = {
   imageClientAPI: [
@@ -92,13 +68,13 @@ const plugins = [
       }),
     ],
   }),
-  uglify({
-    mangle: false,
-    sourceMap: {
-      filename: "out.js",
-      url: "out.js.map"
-    }
-  }),
+  // uglify({
+  //   mangle: false,
+  //   sourceMap: {
+  //     filename: "out.js",
+  //     url: "out.js.map"
+  //   }
+  // }),
 ];
 
 if (process.env.MODULE_ANALYZE) {
@@ -117,7 +93,7 @@ export default [
         name: NAME,
         format: 'iife',
         file: `dist/${MODULE_NAME}.js`,
-        globals: BUNDLE_GLOBALS,
+        globals,
         sourcemap: true,
       },
       {
