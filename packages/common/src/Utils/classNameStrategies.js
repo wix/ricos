@@ -1,8 +1,10 @@
+// @flow
+
 import classNames from 'classnames';
 import upperFirst from 'lodash/upperFirst';
 import camelCase from 'lodash/camelCase';
 
-export const alignmentClassName = (componentData, theme, styles) => {
+export const alignmentClassName /*: ClassNameStrategy*/ = (componentData, theme, styles) => {
   const { alignment } = componentData.config || {};
   if (!alignment) {
     return '';
@@ -11,7 +13,7 @@ export const alignmentClassName = (componentData, theme, styles) => {
   return classNames(styles[key], theme[key]);
 };
 
-export const sizeClassName = (componentData, theme, styles) => {
+export const sizeClassName /*: ClassNameStrategy*/ = (componentData, theme, styles) => {
   const { size } = componentData.config || {};
   if (!size) {
     return '';
@@ -20,7 +22,7 @@ export const sizeClassName = (componentData, theme, styles) => {
   return classNames(styles[key], theme[key]);
 };
 
-export const textWrapClassName = (componentData, theme, styles) => {
+export const textWrapClassName /*: ClassNameStrategy*/ = (componentData, theme, styles) => {
   const { textWrap } = componentData.config || {};
   if (!textWrap) {
     return '';

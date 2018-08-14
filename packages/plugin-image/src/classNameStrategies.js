@@ -1,9 +1,10 @@
+// @flow
 import classNames from 'classnames';
 import upperFirst from 'lodash/upperFirst';
 import camelCase from 'lodash/camelCase';
 import isNumber from 'lodash/isNumber';
 
-export const alignmentClassName = (componentData, theme, styles, isMobile) => {
+export const alignmentClassName /*: ClassNameStrategy*/ = (componentData, theme, styles, isMobile) => {
   const { alignment, size } = componentData.config || {};
   if (!alignment || isMobile) {
     return '';
@@ -19,7 +20,7 @@ export const alignmentClassName = (componentData, theme, styles, isMobile) => {
 };
 
 
-export const sizeClassName = (componentData, theme, styles, isMobile) => {
+export const sizeClassName /*: ClassNameStrategy*/ = (componentData, theme, styles, isMobile) => {
   const { size } = componentData.config || {};
   if (!size) {
     return '';

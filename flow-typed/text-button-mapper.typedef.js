@@ -12,7 +12,7 @@ declare type KeyBinding = {
 };
 
 declare type TextButtonMapping = {
-    component: Function,
+    component: Component,
     isMobile?: boolean,
     position?: {
       mobile?: number,
@@ -26,7 +26,7 @@ declare type TextButtonMappingParams = {
   isMobile: boolean,
   anchorTarget: string,
   relValue: string,
-  t: Function,
+  t: Translate,
   theme: any,
   getEditorState: () => any,
   setEditorState: (editorState: any) => void,

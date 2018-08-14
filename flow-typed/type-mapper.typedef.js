@@ -3,10 +3,10 @@ declare type ElementType = "inline" | "block";
 declare type PluginMapping = {
   component: Component,
   classNameStrategies?: {
-    size?: Function,
-    alignment?: Function,
-    textWrap?: Function,
-    container?: Function
+    size?: ClassNameStrategy,
+    alignment?: ClassNameStrategy,
+    textWrap?: ClassNameStrategy,
+    container?: ClassNameStrategy
   },
   elementType?: ElementType
 };
