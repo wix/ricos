@@ -22,6 +22,7 @@
     "release": "wnpm-release --no-shrinkwrap",
     "lint": "eslint 'src/**/*.{js,jsx}'",
     "lint:fix": "npm run lint -- --fix",
+    "pretest": "css-modules-flow-types statics/styles --extension scss && css-modules-flow-types src --extension scss",
     "test": "npm run lint"
   },
   "jest": {

@@ -6,15 +6,18 @@ node_modules
 .*/.vscode/.*
 
 [include]
-flow-typed/common.typedef.js
 
 [libs]
-flow-typed
+.*/statics/styles/.*
 
 [lints]
 
 [options]
-module.name_mapper.extension='scss' -> 'CSSModule'
-module.name_mapper.extension='css' -> 'CSSModule'
+module.file_ext=.js
+module.file_ext=.jsx
+module.file_ext=.json
+module.file_ext=.css
+module.file_ext=.scss
+
 
 [strict]

@@ -1,9 +1,5 @@
 import type { Element } from 'react';
 
-declare module CSSModule {
-  declare var exports: { [key: string]: string };
-}
-
 declare type Helpers = {
   openModal?: (props: any) => void,
   closeModal?: Function,
@@ -24,5 +20,3 @@ declare type TOOLBARS = {
   STATIC: 'TEXT',
   INLINE: 'INLINE'
 };
-
-declare type ClassNameStrategy = (componentData: any, theme: any, styles: any, isMobile: boolean) => string;

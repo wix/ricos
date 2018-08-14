@@ -19,6 +19,7 @@
     "build:analyze": "npm run build -- --environment MODULE_ANALYZE && open stats.html",
     "watch": "npm run build -- --watch",
     "release": "wnpm-release --no-shrinkwrap",
+    "pretest": "css-modules-flow-types statics/styles --extension scss && css-modules-flow-types src --extension scss",
     "test": "eslint 'src/**/*.{js,jsx}'"
   },
   "jest": {
