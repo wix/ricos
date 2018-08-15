@@ -11,7 +11,8 @@
     "reinstall": "lerna clean --yes && rm -rf node_modules && rm -f package-lock.json && npm i",
     "rebuild": "npm run reinstall && npm run build",
     "build": "lerna run --parallel --stream build",
-    "watch": "lerna exec --parallel -- npm run watch",
+    "prewatch": "lerna run build --scope wix-rich-content-common",
+    "watch": "lerna exec --no-sort --concurrency 30 -- npm run watch",
     "customPublish": "node scripts/customPublish",
     "createVersion": "node scripts/createVersion"
   },
