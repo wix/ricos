@@ -2,8 +2,6 @@
 @import './mixins';
 @import './palette';
 @import './fonts';
-
-
 //*** GENERIC ***//
 .flex {
   display: flex;
@@ -23,8 +21,8 @@
 
 .visuallyHidden {
   width: 0.1px;
-	height: 0.1px;
-	overflow: hidden;
+  height: 0.1px;
+  overflow: hidden;
   position: absolute;
   opacity: 0;
   z-index: -1;
@@ -59,7 +57,6 @@
 
 .pluginContainer {
   @extend .fontElementMap;
-
   &:hover {
     @include block-select;
   }
@@ -72,10 +69,9 @@
 .alignLeft {
   float: left;
   z-index: 1;
-
   &:not(.textWrapNowrap) {
     margin-right: $innerSpacing;
-    margin-left: calc((100% - #{$textWidth}) / 2);
+    margin-left: 0;
     @include phone {
       margin-left: calc((100% - #{$textMobileWidth}) / 2);
     }
@@ -84,7 +80,6 @@
 
 .alignCenter {
   display: block;
-
   &:not(.textWrapNowrap) {
     margin-left: auto;
     margin-right: auto;
@@ -94,10 +89,9 @@
 .alignRight {
   float: right;
   z-index: 1;
-
   &:not(.textWrapNowrap) {
     margin-left: $innerSpacing;
-    margin-right: calc((100% - #{$textWidth}) / 2);
+    margin-right: 0;
     @include phone {
       margin-right: calc((100% - #{$textMobileWidth}) / 2);
     }
@@ -146,12 +140,10 @@
   .ReactModal__Body--open {
     overflow-y: hidden;
   }
-
   .ReactModal__Content {
     font-weight: 300;
     direction: ltr;
   }
-
   .ReactModalPortal {
     @extend .glob_fontElementMap;
   }

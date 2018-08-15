@@ -74,3 +74,7 @@ export const globals = {
   'react-sortable-hoc': 'reactSortableHoc',
   'wix-rich-content-common': 'WixRichContentCommon',
 };
+
+export const excludedExternals = [
+  /wix-rich-content-common\/.*?\.scss/
+];

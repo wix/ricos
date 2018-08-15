@@ -9,6 +9,14 @@
 
 ## [Unreleased]
 
+#### :bug: Bug Fix
+* `editor`
+  * Toolbar settings functionality
+
+<br/>
+
+## 1.3.0 (Aug 14, 2018)
+
 #### :boom: Breaking Change
 * `editor`
   * `RichContentEditor`'s `alwaysShowSideToolbar`, `sideToolbarOffset`, `hideFooterToolbar` props removed
@@ -19,8 +27,17 @@
 * `editor`
   * RCE `config.getToolbarSettings` API allows to customize toolbar instantiation, visibility, offset point, and buttons. Check [documentation](https://github.com/wix-incubator/rich-content/blob/develop/docs/ToolbarCustomization.md) for more details
 
+#### :bug: Bug Fix
+* `plugin-gallery`
+  * Add Media and Replace button UI and functionality
+  * Image Settings header is clickable
+
+#### :house: Internal
+* `general`
+  * Published to public npm registry
+
 #### :book: Documentation
-* Toolbar Customization [doc](https://github.com/wix-incubator/rich-content/blob/develop/docs/ToolbarCustomization.md) added
+* [Toolbar Customization](https://github.com/wix-incubator/rich-content/blob/develop/docs/ToolbarCustomization.md) added
 
 <br/>
 

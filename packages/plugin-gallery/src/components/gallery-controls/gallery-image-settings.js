@@ -145,6 +145,7 @@ class ImageSettings extends Component {
     const targetBlank = target === '_blank' || isUndefined(target);
     const nofollow = rel === 'nofollow';
 
+    /* eslint-disable jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/click-events-have-key-events */
     return (
       <FocusManager className={styles.galleryImageSettings}>
         <div className={styles.galleryImageSettings_content}>
@@ -158,7 +159,7 @@ class ImageSettings extends Component {
             /> :
             <h3
               className={classNames(styles.galleryImageSettings_backButton, styles.galleryImageSettings_title)}
-              data-hook="galleryImageSettingsHeader"
+              data-hook="galleryImageSettingsHeader" onClick={() => onCancel(this.initialImageState)}
             >
               <BackIcon className={styles.galleryImageSettings_backIcon} />{this.headerLabel}
             </h3>
@@ -238,6 +239,7 @@ class ImageSettings extends Component {
         </div>
       </FocusManager>
     );
+    /* eslint-enable jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/click-events-have-key-events */
   }
 }
 

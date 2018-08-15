@@ -1,6 +1,5 @@
 .wrapper {
   height: 100%;
-
 }
 
 .container {
@@ -54,7 +53,7 @@
 
 .columns {
   width: 100%;
-  height: calc(100% - 52px);
+  height: 100%;
   display: flex;
   flex: 1;
   flex-direction: row;
@@ -72,8 +71,8 @@
   margin: 0 auto;
 }
 
-.column + .column {
-  border-left: 1px solid rgba(0,0,0,0.3);
+.column+.column {
+  border-left: 1px solid rgba(0, 0, 0, 0.3);
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
@@ -91,6 +90,7 @@
 }
 
 /*** MOBILE ***/
+
 @media only screen and (max-width: 740px) {
   .content {
     width: 100%;

@@ -40,7 +40,8 @@ class ManageMediaSection extends Component {
   };
 
   render() {
-    const { store, t, relValue, anchorTarget, isMobile } = this.props;
+    const { helpers, store, t, relValue, anchorTarget, isMobile } = this.props;
+    const { handleFileSelection } = helpers;
 
     return (
       <div>
@@ -49,7 +50,7 @@ class ManageMediaSection extends Component {
           items={this.props.data.items}
           onItemsChange={this.applyItems}
           handleFileChange={this.handleFileChange}
-          handleFileSelection={this.handleFileSelection}
+          handleFileSelection={handleFileSelection && this.handleFileSelection}
           handleFilesAdded={store.get('handleFilesAdded')}
           deleteBlock={store.get('deleteBlock')}
           t={t}

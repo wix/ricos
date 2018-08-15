@@ -1,7 +1,7 @@
 @import "~wix-rich-content-common/dist/statics/styles/consts";
-
 .footerToolbar {
   height: $footer-toolbar-height;
+  margin-top: 60px;
 }
 
 .footerToolbar_buttons {
@@ -16,7 +16,7 @@
   margin: -90px 0;
   pointer-events: none;
   pointer-events: none;
-    & > * {
-        pointer-events: initial;
-    }
+  &>* {
+    pointer-events: initial;
+  }
 }

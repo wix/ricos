@@ -1,4 +1,5 @@
 /* eslint-disable */
+
 import path from 'path';
 import resolve from 'rollup-plugin-node-resolve';
 import builtins from 'rollup-plugin-node-builtins';
@@ -10,7 +11,7 @@ import json from 'rollup-plugin-json';
 import postcss from 'rollup-plugin-postcss';
 import postcssURL from 'postcss-url';
 import pascalCase from 'pascal-case';
-import { externals, globals } from './rollup.externals';
+import { externals, globals, excludedExternals } from './rollup.externals';
 
 if (!process.env.MODULE_NAME) {
   console.error('Environment variable "MODULE_NAME" is missing!');
@@ -68,13 +69,13 @@ const plugins = [
       }),
     ],
   }),
-  // uglify({
-  //   mangle: false,
-  //   sourceMap: {
-  //     filename: "out.js",
-  //     url: "out.js.map"
-  //   }
-  // }),
+  uglify({
+    mangle: false,
+    sourceMap: {
+      filename: "out.js",
+      url: "out.js.map"
+    }
+  }),
 ];
 
 if (process.env.MODULE_ANALYZE) {
@@ -85,33 +86,37 @@ if (process.env.MODULE_ANALYZE) {
   );
 }
 
-export default [
-  {
-    input: 'src/index.js',
-    output: [
-      {
-        name: NAME,
-        format: 'iife',
-        file: `dist/${MODULE_NAME}.js`,
-        globals,
-        sourcemap: true,
-      },
-      {
-        file: 'dist/module.js',
-        format: 'es',
-        sourcemap: true,
-      },
-      {
-        file: 'dist/module.cjs.js',
-        format: 'cjs',
-        sourcemap: true,
-      },
-    ],
-    plugins,
-    external: id => !!externals.find(externalName => new RegExp(externalName).test(id)),
-    watch: {
-      exclude: ['node_modules/**'],
-      clearScreen: false,
-    }
-  },
-];
+const config = {
+  input: 'src/index.js',
+  output: [
+    {
+      file: 'dist/module.js',
+      format: 'es',
+      sourcemap: true,
+    },
+    {
+      name: NAME,
+      format: 'iife',
+      file: `dist/${MODULE_NAME}.js`,
+      globals,
+      sourcemap: true,
+    },
+    {
+      file: 'dist/module.cjs.js',
+      format: 'cjs',
+      sourcemap: true,
+    },
+  ],
+  plugins,
+  external: id => !excludedExternals.find(regex => regex.test(id)) && !!externals.find(externalName => new RegExp(externalName).test(id)),
+};
+
+if (process.env.MODULE_WATCH) {
+  config.output = config.output.filter(o => o.format === 'es');
+  config.watch = {
+    exclude: ['node_modules/**'],
+    clearScreen: false,
+  };
+}
+
+export default config;
