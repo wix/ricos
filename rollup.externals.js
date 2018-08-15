@@ -27,7 +27,6 @@ export const globals = {
   'draft-js-mention-plugin/lib/modifiers/addMention': 'addMention',
   'draft-js-focus-plugin': 'createFocusPlugin',
   'draft-js-linkify-plugin': 'createLinkifyPlugin',
-  'draft-js-plugins-editor': 'Editor',
   lodash: '_',
   'lodash/camelCase': '_.camelCase',
   'lodash/cloneDeep': '_.cloneDeep',

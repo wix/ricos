@@ -125,7 +125,8 @@ const config = {
     },
   ],
   plugins,
-  external: id => !excludedExternals.find(regex => typeof regex === 'string' ? regex === id : regex.test(id)) && !!externals.find(externalName => new RegExp(externalName).test(id)),
+  external: id => !excludedExternals.find(regex => typeof regex === 'string' ? regex === id : regex.test(id)) &&
+    !!externals.find(externalName => new RegExp(externalName).test(id)),
 };
 
 if (process.env.MODULE_WATCH) {
