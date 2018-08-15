@@ -33,6 +33,10 @@ const externals = [
   'wix-rich-content-common',
 ];
 
+const excludedExternals = [
+  /wix-rich-content-common\/.*?\.scss/
+];
+
 const BUNDLE_GLOBALS = {
   '@wix/draft-js': 'Draft',
   assert: 'assert',
@@ -131,7 +135,7 @@ const config = {
     },
   ],
   plugins,
-  external: id => !!externals.find(externalName => new RegExp(externalName).test(id)),
+  external: id => !excludedExternals.find(regex => regex.test(id)) && !!externals.find(externalName => new RegExp(externalName).test(id)),
 };
 
 if (process.env.MODULE_WATCH) {
