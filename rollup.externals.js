@@ -13,16 +13,6 @@ export const externals = [
 ];
 
 export const globals = {
-  '@babel/runtime/core-js/array/from': '_Array$from',
-  '@babel/runtime/core-js/object/assign': '_Object$assign',
-  '@babel/runtime/core-js/object/keys': '_Object$keys',
-  '@babel/runtime/core-js/object/values': '_Object$values',
-  '@babel/runtime/core-js/json/stringify': 'JSON.stringify',
-  '@babel/runtime/helpers/assertThisInitialized': '_assertThisInitialized',
-  '@babel/runtime/helpers/createClass': '_createClass',
-  '@babel/runtime/helpers/extends': '_extends',
-  '@babel/runtime/helpers/inheritsLoose': '_inheritsLoose',
-  '@babel/runtime/helpers/objectWithoutPropertiesLoose': '_objectWithoutPropertiesLoose',
   '@wix/draft-js': 'Draft',
   '@wix/draft-js/lib/DraftOffsetKey': 'DraftOffsetKey',
   '@wix/draft-js/lib/isSoftNewlineEvent': 'isSoftNewlineEvent',

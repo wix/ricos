@@ -11,6 +11,7 @@ import json from 'rollup-plugin-json';
 import postcss from 'rollup-plugin-postcss';
 import postcssURL from 'postcss-url';
 import pascalCase from 'pascal-case';
+import nodeGlobalsPolyfill from 'rollup-plugin-node-globals';
 import { externals, globals, excludedExternals } from './rollup.externals';
 
 if (!process.env.MODULE_NAME) {
@@ -43,6 +44,7 @@ const plugins = [
       'src/**',
       'statics/icons/**',
     ],
+    externalHelpers: true,
     runtimeHelpers: true,
   }),
   commonjs({
@@ -69,6 +71,8 @@ const plugins = [
       }),
     ],
   }),
+  nodeGlobalsPolyfill(),
+
   uglify({
     mangle: false,
     sourceMap: {
