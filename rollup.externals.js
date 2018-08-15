@@ -1,5 +1,4 @@
 export const externals = [
-  '@babel/runtime',
   '@wix/draft-js',
   'assert',
   'core-js',
@@ -19,7 +18,6 @@ export const excludedGlobals = [
 
 export const globals = {
   '@wix/draft-js': 'Draft',
-  assert: 'assert',
   'core-js': 'core-js',
   classnames: 'classNames',
   'draft-js': 'Draft',
