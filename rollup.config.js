@@ -12,7 +12,7 @@ import postcss from 'rollup-plugin-postcss';
 import postcssURL from 'postcss-url';
 import pascalCase from 'pascal-case';
 import nodeGlobalsPolyfill from 'rollup-plugin-node-globals';
-import { externals, globals, excludedExternals } from './rollup.externals';
+import { externals, globals, excludedExternals, excludedGlobals } from './rollup.externals';
 
 if (!process.env.MODULE_NAME) {
   console.error('Environment variable "MODULE_NAME" is missing!');
@@ -102,7 +102,20 @@ const config = {
       name: NAME,
       format: 'iife',
       file: `dist/${MODULE_NAME}.js`,
-      globals,
+      globals: id => {
+        const isExcluded = excludedGlobals.find(p => p === id);
+
+        if (!isExcluded) {
+          const globalKey = Object.keys(globals).find(externalName => new RegExp(externalName).test(id));
+
+          if (globalKey) {
+            return globals[globalKey];
+          }
+        }
+
+
+        return false;
+      },
       sourcemap: true,
     },
     {
@@ -112,7 +125,7 @@ const config = {
     },
   ],
   plugins,
-  external: id => !excludedExternals.find(regex => regex.test(id)) && !!externals.find(externalName => new RegExp(externalName).test(id)),
+  external: id => !excludedExternals.find(regex => typeof regex === 'string' ? regex === id : regex.test(id)) && !!externals.find(externalName => new RegExp(externalName).test(id)),
 };
 
 if (process.env.MODULE_WATCH) {

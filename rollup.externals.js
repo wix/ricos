@@ -12,10 +12,13 @@ export const externals = [
   'wix-rich-content-common',
 ];
 
+export const excludedGlobals = [
+  '@wix/draft-js/lib/DraftOffsetKey',
+  '@wix/draft-js/lib/isSoftNewlineEvent',
+];
+
 export const globals = {
   '@wix/draft-js': 'Draft',
-  '@wix/draft-js/lib/DraftOffsetKey': 'DraftOffsetKey',
-  '@wix/draft-js/lib/isSoftNewlineEvent': 'isSoftNewlineEvent',
   assert: 'assert',
   'core-js': 'core-js',
   classnames: 'classNames',
@@ -66,5 +69,7 @@ export const globals = {
 };
 
 export const excludedExternals = [
+  '@wix/draft-js/lib/DraftOffsetKey',
+  '@wix/draft-js/lib/isSoftNewlineEvent',
   /wix-rich-content-common\/.*?\.scss/
 ];
