@@ -1,7 +1,6 @@
 export const externals = [
   '@wix/draft-js',
   'assert',
-  'core-js',
   'classnames',
   'draft-js',
   'lodash',
@@ -9,6 +8,7 @@ export const externals = [
   'react',
   'react-dom',
   'wix-rich-content-common',
+  'react-i18next'
 ];
 
 export const excludedGlobals = [
@@ -18,7 +18,6 @@ export const excludedGlobals = [
 
 export const globals = {
   '@wix/draft-js': 'Draft',
-  'core-js': 'core-js',
   classnames: 'classNames',
   'draft-js': 'Draft',
   'draft-js-code': 'CodeUtils',

@@ -106,7 +106,7 @@ const config = {
         const isExcluded = excludedGlobals.find(p => p === id);
 
         if (!isExcluded) {
-          const globalKey = Object.keys(globals).find(externalName => new RegExp(externalName).test(id));
+          const globalKey = Object.keys(globals).find(externalName => externalName === id || new RegExp(externalName + '\/').test(id));
 
           if (globalKey) {
             return globals[globalKey];
