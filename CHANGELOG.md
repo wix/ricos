@@ -9,9 +9,19 @@
 
 ## [Unreleased]
 
-#### :rocket: New Feature
+## 1.3.1 (Aug 16, 2018)
+
+#### :bug: Bug Fix
 * `editor`
-  * RCE `config.getToolbarSettings` API allows to customize toolbar instantiation, visibility, offset point, and buttons. Check `/docs/ToolbarCustomization.md` for more details
+  * Toolbar settings functionality
+  * CSS is extracted from TextButton
+  * Moved padding from wrapper div to toolbar margin
+* `image`
+  * Check if mounted before assuming error in image src
+
+<br/>
+
+## 1.3.0 (Aug 14, 2018)
 
 #### :boom: Breaking Change
 * `editor`
@@ -19,8 +29,21 @@
 * `general`
   * `InsertButtons` API: `addToSideToolbar` property removed; `toolbars` property is required
 
+#### :rocket: New Feature
+* `editor`
+  * RCE `config.getToolbarSettings` API allows to customize toolbar instantiation, visibility, offset point, and buttons. Check [documentation](https://github.com/wix-incubator/rich-content/blob/develop/docs/ToolbarCustomization.md) for more details
+
+#### :bug: Bug Fix
+* `plugin-gallery`
+  * Add Media and Replace button UI and functionality
+  * Image Settings header is clickable
+
+#### :house: Internal
+* `general`
+  * Published to public npm registry
+
 #### :book: Documentation
-* Toolbar Customization doc added
+* [Toolbar Customization](https://github.com/wix-incubator/rich-content/blob/develop/docs/ToolbarCustomization.md) added
 
 <br/>
 

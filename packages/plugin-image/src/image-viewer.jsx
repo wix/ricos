@@ -28,6 +28,10 @@ class ImageViewer extends React.Component {
     this.state = {};
   }
 
+  componentDidMount() {
+    this._isMounted = true;
+  }
+
   componentWillReceiveProps(nextProps) {
     if (!isEqual(nextProps.componentData, this.props.componentData)) {
       validate(nextProps.componentData, schema);
@@ -57,7 +61,7 @@ class ImageViewer extends React.Component {
       }
       //keep the image's original ratio
       let requiredHeight = (src.height && src.width) ? Math.ceil((src.height / src.width) * requiredWidth) : 2048;
-      requiredWidth = Math.ceil(requiredWidth);
+      requiredWidth = Math.ceil(requiredWidth);x
       requiredHeight = Math.ceil(requiredHeight);
 
       //do not render webp on preload - the SSR never renders webp and the same format should be kept
@@ -65,7 +69,7 @@ class ImageViewer extends React.Component {
       imageUrl.highres = getImageSrc(src, helpers, { requiredWidth, requiredHeight, requiredQuality: 90 });
     }
 
-    if (!imageUrl.preload) {
+    if (this._isMounted && !imageUrl.preload) {
       console.error(`image plugin mounted with invalid image source!`, src); //eslint-disable-line no-console
     }
 

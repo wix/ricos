@@ -4,6 +4,7 @@ dist
 node_modules
 *npm-debug.log
 lerna-debug.log
+yarn-error.log
 target
 maven
 stats.html
