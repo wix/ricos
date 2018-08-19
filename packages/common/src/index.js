@@ -61,14 +61,17 @@ export { getModalStyles } from './Utils/getModalStyles';
 export { mergeStyles } from './Utils/mergeStyles';
 export { default as normalizeInitialState } from './Utils/normalizeInitialState';
 export { validate } from './Utils/component-data-validator';
+
 export {
   isValidUrl,
+  isSoundcloudUrl,
   isVideoUrl,
   normalizeUrl,
   getUrlMatches,
   startsWithHttps,
   hasProtocol,
 } from './Utils/urlValidators';
+
 export {
   insertLink,
   hasLinksInSelection,

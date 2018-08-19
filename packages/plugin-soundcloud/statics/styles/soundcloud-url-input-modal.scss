@@ -1,0 +1,48 @@
+@import '~wix-rich-content-common/dist/statics/styles/mixins';
+@import '~wix-rich-content-common/dist/statics/styles/palette';
+
+.container {
+    padding: 50px 60px 60px;
+    @include phone {
+        padding: 24px 18px 30px;
+    }
+}
+
+.closeIcon {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    width: 18px;
+    cursor: pointer;
+}
+
+.cameraIcon {
+    width: 18px;
+}
+
+.errorIcon {
+    width: 13px;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+}
+
+.header_text {
+    font-size: 16px;
+}
+
+.header_icon {
+    margin-right: 11px;
+}
+
+.soundcloudUrlInputModal_textInput {
+    margin: 18px 0 24px 0;
+}
+
+.modal_footer {
+    border: none !important;
+    padding: 0 !important;
+    height: 36px !important;
+}
