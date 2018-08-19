@@ -28,6 +28,10 @@ class ImageViewer extends React.Component {
     this.state = {};
   }
 
+  componentDidMount() {
+    this._isMounted = true;
+  }
+
   componentWillReceiveProps(nextProps) {
     if (!isEqual(nextProps.componentData, this.props.componentData)) {
       validate(nextProps.componentData, schema);
@@ -47,25 +51,26 @@ class ImageViewer extends React.Component {
 
     if (this.props.dataUrl) {
       imageUrl.preload = imageUrl.highres = this.props.dataUrl;
-    } else if (this.state.container) {
-      const { width } = this.state.container.getBoundingClientRect();
-      let requiredWidth = width || src.width || 1;
-      if (this.props.isMobile) {
+    } else {
+      imageUrl.preload = getImageSrc(src, helpers);
+      if (this.state.container) {
+        const { width } = this.state.container.getBoundingClientRect();
+        let requiredWidth = width || src.width || 1;
+        if (this.props.isMobile) {
         //adjust the image width to viewport scaling and device pixel ratio
-        requiredWidth *= (window && window.devicePixelRatio) || 1;
-        requiredWidth *= (window && (window.screen.width / document.body.clientWidth)) || 1;
-      }
-      //keep the image's original ratio
-      let requiredHeight = (src.height && src.width) ? Math.ceil((src.height / src.width) * requiredWidth) : 2048;
-      requiredWidth = Math.ceil(requiredWidth);
-      requiredHeight = Math.ceil(requiredHeight);
+          requiredWidth *= (window && window.devicePixelRatio) || 1;
+          requiredWidth *= (window && (window.screen.width / document.body.clientWidth)) || 1;
+        }
+        //keep the image's original ratio
+        let requiredHeight = (src.height && src.width) ? Math.ceil((src.height / src.width) * requiredWidth) : 2048;
+        requiredWidth = Math.ceil(requiredWidth);
+        requiredHeight = Math.ceil(requiredHeight);
 
-      //do not render webp on preload - the SSR never renders webp and the same format should be kept
-      imageUrl.preload = getImageSrc(src, helpers, { requiredWidth, requiredHeight, requiredQuality: 50, allowWebp: false });
-      imageUrl.highres = getImageSrc(src, helpers, { requiredWidth, requiredHeight, requiredQuality: 90 });
+        imageUrl.highres = getImageSrc(src, helpers, { requiredWidth, requiredHeight, requiredQuality: 90, imageType: 'highRes' });
+      }
     }
 
-    if (!imageUrl.preload) {
+    if (this._isMounted && !imageUrl.preload) {
       console.error(`image plugin mounted with invalid image source!`, src); //eslint-disable-line no-console
     }
 

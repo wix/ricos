@@ -1,15 +1,12 @@
 @import './fonts.theme.scss';
-
 .focused,
 *:focus {
   //outline: 1px dashed fuchsia;
 }
 
-.hasFocus {
-}
+.hasFocus {}
 
-.overlay {
-}
+.overlay {}
 
 .pluginContainerReadOnly {
   @extend .fontElementMap !optional;
@@ -27,39 +24,29 @@
   .ReactModalPortal {
     @extend .glob_fontElementMap !optional;
   }
-
-  .ReactModal__Body--open {
-  }
-
-  .ReactModal__Content {
-  }
+  .ReactModal__Body--open {}
+  .ReactModal__Content {}
 }
 
-.flex {
-}
+.flex {}
 
-.hidden {
+.hidden {}
 
-}
+.alignLeft {}
 
-.alignLeft {
+.alignCenter {}
 
-}
-
-.alignCenter {
-}
-
-.alignRight {
-}
+.alignRight {}
 
 .sizeFullWidth {
+  &:not(.textWrapNowrap) {
+    width: auto;
+    margin: 0 -100px;
+  }
 }
 
-.sizeContent {
-}
+.sizeContent {}
 
-.sizeSmall {
-}
+.sizeSmall {}
 
-.sizeSmallCenter {
-}
+.sizeSmallCenter {}

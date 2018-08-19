@@ -68,7 +68,7 @@ class RichContentEditor extends Component {
       textToolbarType,
       isMobile,
       t,
-      config,
+      config = {},
       textAlignment
     } = this.props;
     const { theme } = this.state;
