@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import TextButton from '../TextButton';
 import { mergeStyles, Tooltip } from 'wix-rich-content-common';
 import styles from '../../../../../statics/styles/inline-toolbar-dropdown-button.scss';
+import ClickOutside from 'react-click-outside';
 
 export default ({ buttons, activeItem, onChange, tooltipTextKey }) =>
   class TextDropdownButton extends PureComponent {
@@ -51,6 +52,7 @@ export default ({ buttons, activeItem, onChange, tooltipTextKey }) =>
     componentWillReceiveProps(nextProps) {
       if (this.props.isVisible === true && nextProps.isVisible === false) {
         this.setState({ isOpen: false });
+
       }
     }
 
@@ -72,9 +74,9 @@ export default ({ buttons, activeItem, onChange, tooltipTextKey }) =>
         theme: this.theme,
       };
       return (
-        <div className={this.styles.inlineToolbarDropdown_options}>
+        <ClickOutside onClickOutside={() => this.setState({ isOpen: false })} className={this.styles.inlineToolbarDropdown_options}>
           {buttons.map((Button, i) => <Button key={i} tabIndex="0" {...buttonProps} />)}
-        </div>
+        </ClickOutside>
       );
     };
 
