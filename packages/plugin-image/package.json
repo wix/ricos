@@ -32,7 +32,7 @@
   },
   "peerDependencies": {
     "@babel/runtime": "7.0.0-rc.1",
-    "@wix/draft-js": "^0.10.163",
+    "@wix/draft-js": "0.10.163",
     "classnames": "^2.0.0",
     "lodash": "^4.0.0",
     "prop-types": "^15.0.0",
@@ -41,7 +41,7 @@
   },
   "devDependencies": {
     "@babel/runtime": "7.0.0-rc.1",
-    "@wix/draft-js": "^0.10.163",
+    "@wix/draft-js": "0.10.163",
     "classnames": "^2.2.6",
     "eslint": "^4.19.1",
     "lodash": "^4.17.10",
