@@ -9,6 +9,10 @@
 
 ## [Unreleased]
 
+#### :house: Internal
+* `examples`
+  * [#101](https://github.com/wix-incubator/rich-content/pull/101) `npm run bootstrap` links all the modules to the examples
+
 <br/>
 
 ## 1.3.4 (Aug 20, 2018)
