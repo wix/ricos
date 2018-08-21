@@ -1,6 +1,17 @@
 import merge from 'lodash/merge';
 import { simplePubsub, getToolbarTheme, getConfigByFormFactor } from 'wix-rich-content-common';
 import { getDefaultToolbarSettings } from './default-toolbar-settings';
+import { MobileTextButtonList, DesktopTextButtonList } from './buttons';
+import { reducePluginTextButtonNames, mergeButtonLists } from './buttons/utils';
+
+const appendSeparator = ({ mergedList, sourceList, buttonData, formFactor }) => {
+  if (mergedList.length === sourceList.length &&
+    (!buttonData.position || buttonData.position[formFactor] === undefined ||
+      buttonData.position[formFactor] < 0 || buttonData.position[formFactor] > mergedList.length)) {
+    return [...mergedList, 'Separator'];
+  }
+  return mergedList;
+};
 
 const createEditorToolbars = config => {
   const {
@@ -18,12 +29,18 @@ const createEditorToolbars = config => {
     refId,
     getToolbarSettings = () => []
   } = config;
-  const { pluginButtons, pluginTextButtons, textButtons } = buttons;
+  const { pluginButtons, pluginTextButtons } = buttons;
 
   const pubsub = simplePubsub();
 
-  const defaultToolbarSettings = getDefaultToolbarSettings({ isMobile, pluginButtons, textButtons });
-  const customSettings = getToolbarSettings({ isMobile, pluginButtons, textButtons });
+  const textButtons = {
+    mobile: mergeButtonLists(MobileTextButtonList, reducePluginTextButtonNames(pluginTextButtons), 'mobile', appendSeparator),
+    desktop: mergeButtonLists(DesktopTextButtonList,
+      reducePluginTextButtonNames(pluginTextButtons, ({ isMobile }) => isMobile !== false), 'desktop', appendSeparator)
+  };
+
+  const defaultToolbarSettings = getDefaultToolbarSettings({ pluginButtons, textButtons });
+  const customSettings = getToolbarSettings({ pluginButtons, textButtons });
 
   const toolbarSettings = defaultToolbarSettings.reduce((mergedSettings, defaultSetting) => {
     const customSettingsByName = customSettings.filter(s => s.name === defaultSetting.name);
