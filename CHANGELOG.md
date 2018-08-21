@@ -9,6 +9,10 @@
 
 ## [Unreleased]
 
+#### :bug: Bug Fix
+* `common`
+  * [#104](https://github.com/wix-incubator/rich-content/pull/104) Add block after file change `initialState` is set
+
 #### :house: Internal
 * `examples`
   * [#101](https://github.com/wix-incubator/rich-content/pull/101) `npm run bootstrap` links all the modules to the examples
