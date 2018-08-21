@@ -61,8 +61,10 @@ export default class InlineToolbar extends Component {
 
   onExtendContent = extendContent => this.setState({ extendContent });
 
-  closeOverrideContent = () => {
-    this.state.overrideContent && this.setState({ overrideContent: null });
+  onClickOutside = () => {
+    if (this.state.overrideContent || this.state.extendContent) {
+      this.setState({ overrideContent: null, extendContent: null });
+    }
   }
 
   onSelectionChanged = () => {
@@ -217,7 +219,7 @@ export default class InlineToolbar extends Component {
         data-hook="inlineToolbar"
         tabIndex={tabIndex}
       >
-        <ClickOutside onClickOutside={this.closeOverrideContent}>
+        <ClickOutside onClickOutside={this.onClickOutside}>
           <div
             className={buttonClassNames}
           >
