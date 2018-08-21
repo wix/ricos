@@ -1,9 +1,7 @@
 import classNames from 'classnames';
-import get from 'lodash/get';
 
 import createStaticToolbar from './createStaticToolbar';
-import { DesktopTextButtonList } from '../buttons/';
-import { getTextButtonsFromList, reducePluginTextButtons, reducePluginTextButtonNames, mergeButtonLists } from '../buttons/utils';
+import { getTextButtonsFromList } from '../buttons/utils';
 import { getStaticTextToolbarId } from '../toolbar-id';
 import toolbarStyles from '../../../../statics/styles/text-static-toolbar.scss';
 import separatorStyles from '../../../../statics/styles/text-static-toolbar-separator.scss';
@@ -71,24 +69,9 @@ const getStaticTextTheme = theme => {
   };
 };
 
-export default ({ buttons, pluginTextButtons, pubsub, theme, isMobile, helpers, anchorTarget, relValue, t, refId, offset, visibilityFn }) => {
+export default ({ buttons, textPluginButtons, pubsub, theme, isMobile, helpers, anchorTarget, relValue, t, refId, offset, visibilityFn }) => {
   const staticTextTheme = getStaticTextTheme(theme);
-
-  const appendSeparator = ({ mergedList, sourceList, buttonData, formFactor }) => {
-    if (mergedList.length === sourceList.length &&
-      (!buttonData.position || buttonData.position[formFactor] === undefined ||
-        buttonData.position[formFactor] < 0 || buttonData.position[formFactor] > mergedList.length)) {
-      return [...mergedList, 'Separator'];
-    }
-    return mergedList;
-  };
-
-  const pluginButtons = reducePluginTextButtons(pluginTextButtons);
-  const pluginButtonNames = reducePluginTextButtonNames(pluginTextButtons);
-  const mergedList = mergeButtonLists(DesktopTextButtonList, pluginButtonNames, 'desktop', appendSeparator);
-  const textButtons = get(buttons, 'desktop', mergedList);
-  const structure = getTextButtonsFromList({ buttons: textButtons, pluginButtons, pubsub, theme: staticTextTheme, t });
-
+  const structure = getTextButtonsFromList({ buttons, textPluginButtons, pubsub, theme: staticTextTheme, t });
   const id = getStaticTextToolbarId(refId);
 
   return createStaticToolbar({
