@@ -34,9 +34,9 @@ const createEditorToolbars = config => {
   const pubsub = simplePubsub();
 
   const textButtons = {
-    mobile: mergeButtonLists(MobileTextButtonList, reducePluginTextButtonNames(pluginTextButtons), 'mobile', appendSeparator),
-    desktop: mergeButtonLists(DesktopTextButtonList,
-      reducePluginTextButtonNames(pluginTextButtons, ({ isMobile }) => isMobile !== false), 'desktop', appendSeparator)
+    mobile: mergeButtonLists(MobileTextButtonList,
+      reducePluginTextButtonNames(pluginTextButtons, ({ isMobile }) => isMobile !== false), 'mobile', appendSeparator),
+    desktop: mergeButtonLists(DesktopTextButtonList, reducePluginTextButtonNames(pluginTextButtons), 'desktop', appendSeparator)
   };
 
   const defaultToolbarSettings = getDefaultToolbarSettings({ pluginButtons, textButtons, pluginTextButtons });
