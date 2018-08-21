@@ -64,7 +64,6 @@ class RichContentEditor extends Component {
       helpers,
       anchorTarget,
       relValue,
-      textButtons,
       textToolbarType,
       isMobile,
       t,
@@ -72,7 +71,7 @@ class RichContentEditor extends Component {
       textAlignment
     } = this.props;
     const { theme } = this.state;
-    const buttons = { textButtons, pluginButtons, pluginTextButtons };
+    const buttons = { pluginButtons, pluginTextButtons };
 
     this.toolbars = createEditorToolbars({
       buttons,
@@ -337,10 +336,6 @@ RichContentEditor.propTypes = {
   isMobile: PropTypes.bool,
   helpers: PropTypes.object,
   t: PropTypes.func,
-  textButtons: PropTypes.shape({
-    desktop: PropTypes.arrayOf(PropTypes.string),
-    mobile: PropTypes.arrayOf(PropTypes.string)
-  }),
   textToolbarType: PropTypes.oneOf(['inline', 'static']),
   plugins: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.func])),
   config: PropTypes.object,
