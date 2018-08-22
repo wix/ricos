@@ -9,6 +9,16 @@
 
 ## [Unreleased]
 
+#### :rocket: New Feature
+* `general`
+  * `flow` types defined for major plugin-related APIs. Check [documentation](https://github.com/wix-incubator/rich-content/blob/develop/docs/FlowTypes.md) for more details
+
+#### :book: Documentation
+* [Toolbar Customization](https://github.com/wix-incubator/rich-content/blob/develop/docs/ToolbarCustomization.md) updated
+* [Flow Types](https://github.com/wix-incubator/rich-content/blob/develop/docs/FlowTypes.md) added
+
+<br/>
+
 ## 1.4.0 (Aug 22, 2018)
 
 #### :boom: Breaking Change
@@ -48,7 +58,7 @@
 
 #### :bug: Bug Fix
 * `general`
-  * Theme supports empty css classes 
+  * Theme supports empty css classes
 * `editor`
   * Firefox text editing
   * Close alignment dropdown when clicke d outside
