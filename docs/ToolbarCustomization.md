@@ -11,7 +11,7 @@ The `getToolbarSettings` is defined as follows: `{ textButtons, pluginButtons } 
 The `Setting` type is defined as follows:
 ```
 {
-  name: TOOBARS.TYPE,
+  name: TOOLBARS.TYPE,
   shouldCreate: () => {
     desktop: boolean,
     mobile: {
