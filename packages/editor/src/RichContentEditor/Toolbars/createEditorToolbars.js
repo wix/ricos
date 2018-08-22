@@ -1,6 +1,17 @@
 import merge from 'lodash/merge';
 import { simplePubsub, getToolbarTheme, getConfigByFormFactor } from 'wix-rich-content-common';
 import { getDefaultToolbarSettings } from './default-toolbar-settings';
+import { MobileTextButtonList, DesktopTextButtonList } from './buttons';
+import { reducePluginTextButtonNames, mergeButtonLists } from './buttons/utils';
+
+const appendSeparator = ({ mergedList, sourceList, buttonData, formFactor }) => {
+  if (mergedList.length === sourceList.length &&
+    (!buttonData.position || buttonData.position[formFactor] === undefined ||
+      buttonData.position[formFactor] < 0 || buttonData.position[formFactor] > mergedList.length)) {
+    return [...mergedList, 'Separator'];
+  }
+  return mergedList;
+};
 
 const createEditorToolbars = config => {
   const {
@@ -18,12 +29,18 @@ const createEditorToolbars = config => {
     refId,
     getToolbarSettings = () => []
   } = config;
-  const { pluginButtons, pluginTextButtons, textButtons } = buttons;
+  const { pluginButtons, pluginTextButtons } = buttons;
 
   const pubsub = simplePubsub();
 
-  const defaultToolbarSettings = getDefaultToolbarSettings({ isMobile, pluginButtons, textButtons });
-  const customSettings = getToolbarSettings({ isMobile, pluginButtons, textButtons });
+  const textButtons = {
+    mobile: mergeButtonLists(MobileTextButtonList,
+      reducePluginTextButtonNames(pluginTextButtons, ({ isMobile }) => isMobile !== false), 'mobile', appendSeparator),
+    desktop: mergeButtonLists(DesktopTextButtonList, reducePluginTextButtonNames(pluginTextButtons), 'desktop', appendSeparator)
+  };
+
+  const defaultToolbarSettings = getDefaultToolbarSettings({ pluginButtons, textButtons, pluginTextButtons });
+  const customSettings = getToolbarSettings({ pluginButtons, textButtons, pluginTextButtons });
 
   const toolbarSettings = defaultToolbarSettings.reduce((mergedSettings, defaultSetting) => {
     const customSettingsByName = customSettings.filter(s => s.name === defaultSetting.name);
@@ -38,16 +55,17 @@ const createEditorToolbars = config => {
   const toolbars = {};
 
   toolbarSettings.filter(({ shouldCreate }) => getConfigByFormFactor({ config: shouldCreate(), isMobile, defaultValue: true }))
-    .forEach(({ name, getButtons, getPositionOffset, getVisibilityFn, getInstance }) => {
+    .forEach(({ name, getButtons, getTextPluginButtons, getPositionOffset, getVisibilityFn, getInstance }) => {
       toolbars[name] = getInstance({
         buttons: getConfigByFormFactor({ config: getButtons(), isMobile, defaultValue: [] }),
+        textPluginButtons: getConfigByFormFactor({ config: getTextPluginButtons(), isMobile, defaultValue: [] }),
         offset: getConfigByFormFactor({ config: getPositionOffset(), isMobile, defaultValue: { x: 0, y: 0 } }),
         visibilityFn: getConfigByFormFactor({ config: getVisibilityFn(), isMobile, defaultValue: () => true }),
         theme: { ...getToolbarTheme(theme, name.toLowerCase()), ...theme },
         defaultTextAlignment: textAlignment,
-        pluginTextButtons,
         getEditorState,
         setEditorState,
+        pluginButtons,
         anchorTarget,
         relValue,
         isMobile,

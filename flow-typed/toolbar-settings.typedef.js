@@ -22,12 +22,25 @@ declare type ToolbarSettings = {
     }
   },
   getButtons: () => {
-    desktop: Array<Component> | any,
+    desktop: Array<any>,
     mobile: {
-      ios: Array<Component> | any,
-      android: Array<Component> | any
+      ios: Array<any>,
+      android: Array<any>
+    }
+  },
+  getTextPluginButtons: () => {
+    desktop: { [key:string]: Component },
+    mobile: {
+      ios: { [key:string]: Component },
+      android: { [key:string]: Component }
     }
   }
 };
 
-declare type GetToolbarSettings = ({ textButtons: Array<any>, pluginButtons: Array<any> }) => Array<ToolbarSettings>;
+declare type TextButtons = {
+  desktop: Array<string>,
+  mobile: Array<string>
+};
+
+declare type GetToolbarSettings =
+  ({ textButtons: TextButtons, pluginButtons: Array<any>, pluginTextButtons: Array<any> }) => Array<ToolbarSettings>;

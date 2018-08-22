@@ -1,13 +1,10 @@
-import get from 'lodash/get';
-
 import createInlineToolbar from './createInlineToolbar';
-import { MobileTextButtonList, DesktopTextButtonList } from '../buttons/';
-import { getTextButtonsFromList, reducePluginTextButtons, reducePluginTextButtonNames, mergeButtonLists } from '../buttons/utils';
+import { getTextButtonsFromList } from '../buttons/utils';
 
 export default config => {
   const {
     buttons,
-    pluginTextButtons,
+    textPluginButtons,
     defaultTextAlignment,
     pubsub,
     theme,
@@ -20,23 +17,7 @@ export default config => {
     visibilityFn
   } = config;
 
-  const appendSeparator = ({ mergedList, sourceList, buttonData, formFactor }) => {
-    if (mergedList.length === sourceList.length &&
-      (!buttonData.position || buttonData.position[formFactor] === undefined ||
-        buttonData.position[formFactor] < 0 || buttonData.position[formFactor] > mergedList.length)) {
-      return [...mergedList, 'Separator'];
-    }
-    return mergedList;
-  };
-
-  const pluginButtons = reducePluginTextButtons(pluginTextButtons);
-  const pluginButtonNames = reducePluginTextButtonNames(pluginTextButtons);
-  const buttonList = isMobile ? MobileTextButtonList : DesktopTextButtonList;
-  const platformStr = isMobile ? 'mobile' : 'desktop';
-  const requestedButtons = get(buttons, platformStr);
-  const textButtonsList = requestedButtons || buttonList;
-  const textButtons = mergeButtonLists(textButtonsList, pluginButtonNames, platformStr, appendSeparator);
-  const structure = getTextButtonsFromList({ buttons: textButtons, pluginButtons, pubsub, theme, t });
+  const structure = getTextButtonsFromList({ buttons, textPluginButtons, pubsub, theme, t });
 
   return createInlineToolbar({
     name: 'InlineTextToolbar',

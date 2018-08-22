@@ -9,11 +9,34 @@
 
 ## [Unreleased]
 
+#### :boom: Breaking Change
+* `editor`
+  * `RichContentEditor`'s `textButtons` prop removed
+
+#### :rocket: New Feature
+* `editor`
+  * RCE `config.getToolbarSettings` API now allows to customize the plugin text buttons. Check [documentation](https://github.com/wix-incubator/rich-content/blob/develop/docs/ToolbarCustomization.md) for more details
+
+#### :bug: Bug Fix
+* `common`
+  * [#109](https://github.com/wix-incubator/rich-content/pull/109) Normalize text for atomic blocks
+
+#### :book: Documentation
+* [Toolbar Customization](https://github.com/wix-incubator/rich-content/blob/develop/docs/ToolbarCustomization.md) updated
+
+<br/>
+
+## 1.3.5 (Aug 22, 2018)
+
 #### :bug: Bug Fix
 * `common`
   * [#104](https://github.com/wix-incubator/rich-content/pull/104) Add block after file change `initialState` is set
+* `editor`
+  * [#103](https://github.com/wix-incubator/rich-content/pull/103) Close link panel on click outside
 
 #### :house: Internal
+* `general`
+  * [#105](https://github.com/wix-incubator/rich-content/pull/105) Require `@wix/draft-js@0.10.163` fixed version peer dependecy
 * `examples`
   * [#101](https://github.com/wix-incubator/rich-content/pull/101) `npm run bootstrap` links all the modules to the examples
 
@@ -51,7 +74,6 @@
   * lack of `config` prop no longer crashes
 * `video`
   * prevent content overflow in mobile
-
 
 <br/>
 
