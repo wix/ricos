@@ -9,6 +9,8 @@
 
 ## [Unreleased]
 
+## 1.4.0 (Aug 22, 2018)
+
 #### :boom: Breaking Change
 * `editor`
   * `RichContentEditor`'s `textButtons` prop removed

@@ -12,6 +12,7 @@
     "rebuild": "npm run reinstall && npm run build",
     "build": "lerna run --parallel --stream build",
     "test": "lerna run --parallel test && echo 'flow: type checking...' && flow",
+    "build:dev": "lerna run --parallel --stream build:dev",
     "prewatch": "lerna run build --scope wix-rich-content-common",
     "watch": "lerna exec --no-sort --concurrency 30 -- npm run watch",
     "customPublish": "node scripts/customPublish",
