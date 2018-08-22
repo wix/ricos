@@ -54,7 +54,7 @@ export const getDefaultToolbarSettings = ({ pluginButtons, textButtons, pluginTe
         desktop: { x: -40, y: 0 },
         mobile: {
           ios: { x: 0, y: 0 },
-          android: { x: 0, y: 50 },
+          android: { x: 0, y: 0 },
         }
       }),
       getButtons: () => {
