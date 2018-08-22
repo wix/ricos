@@ -8,7 +8,6 @@
   },
   "dependencies": {
     "@babel/core": "7.0.0-rc.1",
-    "@wix/draft-js": "0.10.163",
     "babel-eslint": "8.1.0",
     "babel-jest": "^23.2.0",
     "chalk": "^2.4.1",
