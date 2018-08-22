@@ -9,6 +9,12 @@
 
 ## [Unreleased]
 
+#### :bug: Bug Fix
+* `common`
+  * [#109](https://github.com/wix-incubator/rich-content/pull/109) Normalize text for atomic blocks
+
+  <br/>
+
 ## 1.3.5 (Aug 22, 2018)
 
 #### :bug: Bug Fix

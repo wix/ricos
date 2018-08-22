@@ -79,17 +79,19 @@ export default (initialState, config) => {
     }
   };
 
+  const { blocks, entityMap } = initialState;
+
   return {
-    ...initialState,
+    blocks: blocks.map(b => b.type !== 'atomic' ? b : { ...b, text: ' ' }),
     entityMap: mapValues(
-      initialState.entityMap,
+      entityMap,
       entity => shouldNormalizeEntityConfig(entity, Object.keys(entityTypeMap.configNormalization)) ? {
         ...entity,
-        type: normalizeEntityType(entity.type, entityTypeMap),
+        type: normalizeEntityType(entity.type, entityTypeMap.configNormalization),
         data: normalizeComponentConfig(cloneDeep(entity.data), config)
       } : shouldNormalizeEntityData(entity, Object.keys(entityTypeMap.dataNormalization)) ? {
         ...entity,
-        type: normalizeEntityType(entity.type, entityTypeMap),
+        type: normalizeEntityType(entity.type, entityTypeMap.dataNormalization),
         data: normalizeComponentData(cloneDeep(entity.data), config)
       } : entity
     ),
