@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import { getVisibleSelectionRect } from '@wix/draft-js';
 import Measure from 'react-measure';
 import Styles from '../../../../statics/styles/inline-toolbar.scss';
+import ClickOutside from 'react-click-outside';
 
 const toolbarOffset = 5;
 
@@ -59,6 +60,12 @@ export default class InlineToolbar extends Component {
   }
 
   onExtendContent = extendContent => this.setState({ extendContent });
+
+  onClickOutside = () => {
+    if (this.state.overrideContent || this.state.extendContent) {
+      this.setState({ overrideContent: null, extendContent: null });
+    }
+  }
 
   onSelectionChanged = () => {
     // need to wait a tick for window.getSelection() to be accurate
@@ -212,41 +219,43 @@ export default class InlineToolbar extends Component {
         data-hook="inlineToolbar"
         tabIndex={tabIndex}
       >
-        <div
-          className={buttonClassNames}
-        >
-          <Measure
-            client
-            scroll
-            innerRef={ref => this.scrollContainer = ref}
-            onResize={({ scroll, client }) => this.setToolbarScrollButton(scroll.left, scroll.width, client.width)}
+        <ClickOutside onClickOutside={this.onClickOutside}>
+          <div
+            className={buttonClassNames}
           >
-            {({ measure, measureRef }) => (
-              <div className={scrollableClassNames} ref={measureRef} onScroll={() => measure()}>
-                {
-                  OverrideContent ?
-                    <OverrideContent {...childrenProps} /> :
-                    structure.map((Button, index) => <Button key={index} {...childrenProps} />)
-                }
-              </div>
-            )}
-          </Measure>
-          {
-            hasArrow &&
-            <button
-              tabIndex={tabIndex}
-              className={arrowClassNames}
-              data-hook="inlineToolbarRightArrow" onMouseDown={e => this.scrollToolbar(e, showLeftArrow)}
+            <Measure
+              client
+              scroll
+              innerRef={ref => this.scrollContainer = ref}
+              onResize={({ scroll, client }) => this.setToolbarScrollButton(scroll.left, scroll.width, client.width)}
             >
-              <i className={showLeftArrow ? leftArrowIconClassNames : rightArrowIconClassNames}/>
-            </button>
-          }
-        </div>
-        {ExtendContent && (
-          <div className={extendClassNames}>
-            <ExtendContent {...childrenProps} />
+              {({ measure, measureRef }) => (
+                <div className={scrollableClassNames} ref={measureRef} onScroll={() => measure()}>
+                  {
+                    OverrideContent ?
+                      <OverrideContent {...childrenProps} /> :
+                      structure.map((Button, index) => <Button key={index} {...childrenProps} />)
+                  }
+                </div>
+              )}
+            </Measure>
+            {
+              hasArrow &&
+              <button
+                tabIndex={tabIndex}
+                className={arrowClassNames}
+                data-hook="inlineToolbarRightArrow" onMouseDown={e => this.scrollToolbar(e, showLeftArrow)}
+              >
+                <i className={showLeftArrow ? leftArrowIconClassNames : rightArrowIconClassNames}/>
+              </button>
+            }
           </div>
-        )}
+          {ExtendContent && (
+            <div className={extendClassNames}>
+              <ExtendContent {...childrenProps} />
+            </div>
+          )}
+        </ClickOutside>
       </div>
     );
   }

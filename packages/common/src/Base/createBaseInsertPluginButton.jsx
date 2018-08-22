@@ -18,7 +18,9 @@ export default ({ blockType, button, helpers, pubsub, t }) => {
       this.styles = mergeStyles({ styles, theme: buttonStyles });
     }
 
-    addBlock = data => {
+    addBlock = data => this.createBlock(data, true);
+
+    createBlock = (data, shouldSetEditorState = false) => {
       const { getEditorState, setEditorState, hidePopup } = this.props;
       const contentState = getEditorState().getCurrentContent();
       const contentStateWithEntity = contentState.createEntity(blockType, 'IMMUTABLE', cloneDeep(data));
@@ -38,8 +40,12 @@ export default ({ blockType, button, helpers, pubsub, t }) => {
         focusKey: newBlock.getKey(),
         focusOffset: 0,
       });
-      setEditorState(EditorState.forceSelection(newEditorState, newSelection));
-      return newBlock;
+
+      if (shouldSetEditorState) {
+        setEditorState(EditorState.forceSelection(newEditorState, newSelection));
+      }
+
+      return { newBlock, newSelection, newEditorState };
     };
 
     onClick = event => {
@@ -59,9 +65,10 @@ export default ({ blockType, button, helpers, pubsub, t }) => {
     handleFileChange = event => {
       if (event.target.files.length > 0) {
         const files = Array.from(event.target.files);
-        const recentlyCreated = this.addBlock(button.componentData);
+        const { newBlock, newSelection, newEditorState } = this.createBlock(button.componentData);
         const state = { userSelectedFiles: { files } };
-        pubsub.set('initialState_' + recentlyCreated.getKey(), state);
+        pubsub.set('initialState_' + newBlock.getKey(), state);
+        this.props.setEditorState(EditorState.forceSelection(newEditorState, newSelection));
       }
     };
 

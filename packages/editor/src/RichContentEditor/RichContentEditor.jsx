@@ -299,7 +299,6 @@ class RichContentEditor extends Component {
   render() {
     const { isMobile } = this.props;
     const { theme } = this.state;
-    const isAndroid = isMobile && !WixUtils.isiOS();
     const wrapperClassName = classNames(
       draftStyles.wrapper,
       styles.wrapper,
@@ -307,8 +306,6 @@ class RichContentEditor extends Component {
       {
         [styles.desktop]: !isMobile,
         [theme.desktop]: !isMobile && theme && theme.desktop,
-        [styles.android]: isAndroid,
-        [theme.android]: isAndroid
       }
     );
     return (
