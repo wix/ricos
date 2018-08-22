@@ -239,7 +239,9 @@ The compiled package also contains a CommonJS bundle, which you can consume if y
 3. Build the modules by running one of the following:
     1. `npm run build` - build once and bundles
     2. `npm run watch` - rebuild on changes
-4. Choose an [example](./examples/) and run `npm start`.
+4. Choose an [example](./examples/) and run:
+    1. `npm run bootstrap`
+    2. `npm start`
 
 ##### Examples
 

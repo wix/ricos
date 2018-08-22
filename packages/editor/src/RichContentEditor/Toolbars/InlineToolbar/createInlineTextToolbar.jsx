@@ -7,7 +7,7 @@ import { getTextButtonsFromList, reducePluginTextButtons, reducePluginTextButton
 export default config => {
   const {
     buttons,
-    pluginTextButtonMappers,
+    pluginTextButtons,
     defaultTextAlignment,
     pubsub,
     theme,
@@ -29,8 +29,8 @@ export default config => {
     return mergedList;
   };
 
-  const pluginButtons = reducePluginTextButtons(pluginTextButtonMappers);
-  const pluginButtonNames = reducePluginTextButtonNames(pluginTextButtonMappers);
+  const pluginButtons = reducePluginTextButtons(pluginTextButtons);
+  const pluginButtonNames = reducePluginTextButtonNames(pluginTextButtons);
   const buttonList = isMobile ? MobileTextButtonList : DesktopTextButtonList;
   const platformStr = isMobile ? 'mobile' : 'desktop';
   const requestedButtons = get(buttons, platformStr);

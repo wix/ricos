@@ -9,9 +9,65 @@
 
 ## [Unreleased]
 
-#### :rocket: New Feature
+#### :bug: Bug Fix
+* `common`
+  * [#104](https://github.com/wix-incubator/rich-content/pull/104) Add block after file change `initialState` is set
+
+#### :house: Internal
+* `examples`
+  * [#101](https://github.com/wix-incubator/rich-content/pull/101) `npm run bootstrap` links all the modules to the examples
+
+<br/>
+
+## 1.3.4 (Aug 20, 2018)
+
+#### :bug: Bug Fix
+* `general`
+  * Theme supports empty css classes 
 * `editor`
-  * RCE `config.getToolbarSettings` API allows to customize toolbar instantiation, visibility, offset point, and buttons. Check `/docs/ToolbarCustomization.md` for more details
+  * Firefox text editing
+  * Close alignment dropdown when clicke d outside
+* `image`
+  * Transition between `preLoad` and `hiRes` images
+
+#### :house: Internal
+* `general`
+  * Seperate bundle for viewer portions of plugins
+
+<br/>
+
+## 1.3.3 (Aug 19, 2018)
+
+#### :bug: Bug Fix
+* `image`
+  * preload image URL supports SSR
+
+<br/>
+
+## 1.3.2 (Aug 19, 2018)
+
+#### :bug: Bug Fix
+* `editor`
+  * lack of `config` prop no longer crashes
+* `video`
+  * prevent content overflow in mobile
+
+
+<br/>
+
+## 1.3.1 (Aug 16, 2018)
+
+#### :bug: Bug Fix
+* `editor`
+  * Toolbar settings functionality
+  * CSS is extracted from TextButton
+  * Moved padding from wrapper div to toolbar margin
+* `image`
+  * Check if mounted before assuming error in image src
+
+<br/>
+
+## 1.3.0 (Aug 14, 2018)
 
 #### :boom: Breaking Change
 * `editor`
@@ -19,8 +75,21 @@
 * `general`
   * `InsertButtons` API: `addToSideToolbar` property removed; `toolbars` property is required
 
+#### :rocket: New Feature
+* `editor`
+  * RCE `config.getToolbarSettings` API allows to customize toolbar instantiation, visibility, offset point, and buttons. Check [documentation](https://github.com/wix-incubator/rich-content/blob/develop/docs/ToolbarCustomization.md) for more details
+
+#### :bug: Bug Fix
+* `plugin-gallery`
+  * Add Media and Replace button UI and functionality
+  * Image Settings header is clickable
+
+#### :house: Internal
+* `general`
+  * Published to public npm registry
+
 #### :book: Documentation
-* Toolbar Customization doc added
+* [Toolbar Customization](https://github.com/wix-incubator/rich-content/blob/develop/docs/ToolbarCustomization.md) added
 
 <br/>
 

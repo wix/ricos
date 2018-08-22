@@ -16,16 +16,24 @@ const createEditorToolbars = config => {
     setEditorState,
     t,
     refId,
-    getToolbarSettings = () => {}
+    getToolbarSettings = () => []
   } = config;
-  const { pluginButtons, pluginTextButtonMappers, textButtons } = buttons;
+  const { pluginButtons, pluginTextButtons, textButtons } = buttons;
 
   const pubsub = simplePubsub();
 
   const defaultToolbarSettings = getDefaultToolbarSettings({ isMobile, pluginButtons, textButtons });
   const customSettings = getToolbarSettings({ isMobile, pluginButtons, textButtons });
 
-  const toolbarSettings = merge(defaultToolbarSettings, customSettings);
+  const toolbarSettings = defaultToolbarSettings.reduce((mergedSettings, defaultSetting) => {
+    const customSettingsByName = customSettings.filter(s => s.name === defaultSetting.name);
+    if (customSettingsByName.length > 0) {
+      mergedSettings.push(merge(defaultSetting, customSettingsByName[0]));
+    } else {
+      mergedSettings.push(defaultSetting);
+    }
+    return mergedSettings;
+  }, []);
 
   const toolbars = {};
 
@@ -37,7 +45,7 @@ const createEditorToolbars = config => {
         visibilityFn: getConfigByFormFactor({ config: getVisibilityFn(), isMobile, defaultValue: () => true }),
         theme: { ...getToolbarTheme(theme, name.toLowerCase()), ...theme },
         defaultTextAlignment: textAlignment,
-        pluginTextButtonMappers,
+        pluginTextButtons,
         getEditorState,
         setEditorState,
         anchorTarget,

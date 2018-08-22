@@ -1,4 +1,5 @@
 /* eslint-disable */
+import fs from 'fs';
 import path from 'path';
 import resolve from 'rollup-plugin-node-resolve';
 import builtins from 'rollup-plugin-node-builtins';
@@ -10,6 +11,7 @@ import json from 'rollup-plugin-json';
 import postcss from 'rollup-plugin-postcss';
 import postcssURL from 'postcss-url';
 import pascalCase from 'pascal-case';
+import cloneDeep from 'lodash/cloneDeep';
 
 if (!process.env.MODULE_NAME) {
   console.error('Environment variable "MODULE_NAME" is missing!');
@@ -31,6 +33,10 @@ const externals = [
   'react',
   'react-dom',
   'wix-rich-content-common',
+];
+
+const excludedExternals = [
+  /wix-rich-content-common\/.*?\.scss/
 ];
 
 const BUNDLE_GLOBALS = {
@@ -109,33 +115,69 @@ if (process.env.MODULE_ANALYZE) {
   );
 }
 
-export default [
+const external = id =>
+  !excludedExternals.find(regex => regex.test(id))
+  && !!externals.find(externalName => new RegExp(externalName).test(id));
+
+let output = [
   {
-    input: 'src/index.js',
-    output: [
-      {
-        name: NAME,
-        format: 'iife',
-        file: `dist/${MODULE_NAME}.js`,
-        globals: BUNDLE_GLOBALS,
-        sourcemap: true,
-      },
-      {
-        file: 'dist/module.js',
-        format: 'es',
-        sourcemap: true,
-      },
-      {
-        file: 'dist/module.cjs.js',
-        format: 'cjs',
-        sourcemap: true,
-      },
-    ],
-    plugins,
-    external: id => !!externals.find(externalName => new RegExp(externalName).test(id)),
-    watch: {
-      exclude: ['node_modules/**'],
-      clearScreen: false,
-    }
+    file: 'dist/module.js',
+    format: 'es',
+    sourcemap: true,
+  },
+  {
+    name: NAME,
+    format: 'iife',
+    file: `dist/${MODULE_NAME}.js`,
+    globals: BUNDLE_GLOBALS,
+    sourcemap: true,
+  },
+  {
+    file: 'dist/module.cjs.js',
+    format: 'cjs',
+    sourcemap: true,
   },
 ];
+
+if (process.env.MODULE_WATCH) {
+  output = output.filter(o => o.format === 'es');
+}
+
+const watch = {
+  exclude: ['node_modules/**'],
+  clearScreen: false,
+};
+
+const editorEntry = {
+  input: 'src/index.js',
+  output: cloneDeep(output),
+  plugins,
+  external,
+  watch,
+};
+
+let viewerEntry;
+try {
+  fs.accessSync('./src/viewer.js');
+  viewerEntry = {
+    input: 'src/viewer.js',
+    output: cloneDeep(output).map(o => {
+      const anchor = o.file.indexOf('.');
+      o.file = `${o.file.slice(0, anchor)}.viewer${o.file.slice(anchor)}`;
+      return o;
+    }),
+    plugins,
+    external,
+    watch,
+  };
+} catch (_) {}
+
+const config = [
+  editorEntry,
+];
+
+if (viewerEntry) {
+  config.push(viewerEntry);
+}
+
+export default config;

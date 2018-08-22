@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-plugin-html",
-  "version": "1.1.14",
+  "version": "1.2.4",
   "author": {
     "name": "Jonathan Bachman",
     "email": "jonathanb@wix.com"
@@ -26,14 +26,14 @@
     "prebuild": "npm run statics",
     "build": "rollup --environment MODULE_NAME:plugin-html -c ../../rollup.config.js",
     "build:analyze": "npm run build -- --environment MODULE_ANALYZE && open stats.html",
-    "watch": "npm run build -- --watch",
+    "watch": "MODULE_WATCH=1 npm run build -- --watch",
     "release": "wnpm-release --no-shrinkwrap",
     "pretest": "css-modules-flow-types statics/styles --extension scss && css-modules-flow-types src --extension scss",
     "test": "eslint 'src/**/*.{js,jsx}'"
   },
   "peerDependencies": {
-    "@babel/runtime": "7.0.0-beta.55",
-    "@wix/draft-js": "^0.10.163",
+    "@babel/runtime": "7.0.0-rc.1",
+    "@wix/draft-js": "0.10.163",
     "classnames": "^2.0.0",
     "lodash": "^4.0.0",
     "prop-types": "^15.0.0",
@@ -42,8 +42,8 @@
     "react-i18next": "^7.0.0"
   },
   "devDependencies": {
-    "@babel/runtime": "7.0.0-beta.55",
-    "@wix/draft-js": "^0.10.163",
+    "@babel/runtime": "7.0.0-rc.1",
+    "@wix/draft-js": "0.10.163",
     "classnames": "^2.2.6",
     "eslint": "^4.19.1",
     "lodash": "^4.17.10",
@@ -53,7 +53,7 @@
     "rollup": "^0.64.1"
   },
   "dependencies": {
-    "wix-rich-content-common": "^1.1.14"
+    "wix-rich-content-common": "^1.2.4"
   },
   "unpkg": true,
   "publishConfig": {

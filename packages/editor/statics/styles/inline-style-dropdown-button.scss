@@ -10,7 +10,9 @@
   display: block;
 }
 
-.inlineStyleDropdownButton_icon {}
+.inlineStyleDropdownButton_icon {
+  outline: none;
+}
 
 .inlineStyleDropdown_options {
   position: absolute;

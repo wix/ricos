@@ -9,7 +9,7 @@ import buttonStyles from '../../../../statics/styles/mobile-toolbar-button.scss'
 import separatorStyles from '../../../../statics/styles/mobile-toolbar-separator.scss';
 
 const createMobileToolbar = ({
-  buttons, pluginTextButtonMappers, helpers, pubsub, getEditorState, setEditorState,
+  buttons, pluginTextButtons, helpers, pubsub, getEditorState, setEditorState,
   anchorTarget, relValue, theme, t, offset, visibilityFn
 }) => {
   const mobileTheme = getMobileTheme(theme);
@@ -18,7 +18,7 @@ const createMobileToolbar = ({
     t,
     name: 'MobileToolbar',
     theme: mobileTheme,
-    structure: getMobileButtons({ buttons, pluginTextButtonMappers, helpers, pubsub, getEditorState, setEditorState, mobileTheme, t }),
+    structure: getMobileButtons({ buttons, pluginTextButtons, helpers, pubsub, getEditorState, setEditorState, mobileTheme, t }),
     anchorTarget,
     relValue,
     isMobile: true,
@@ -103,9 +103,9 @@ const getMobileTheme = theme => {
   };
 };
 
-const getMobileButtons = ({ buttons, pluginTextButtonMappers, helpers, pubsub, getEditorState, setEditorState, mobileTheme, t }) => {
-  const pluginButtons = reducePluginTextButtons(pluginTextButtonMappers, buttonData => buttonData.isMobile !== false);
-  const pluginButtonNames = reducePluginTextButtonNames(pluginTextButtonMappers, buttonData => buttonData.isMobile !== false);
+const getMobileButtons = ({ buttons, pluginTextButtons, helpers, pubsub, getEditorState, setEditorState, mobileTheme, t }) => {
+  const pluginButtons = reducePluginTextButtons(pluginTextButtons, buttonData => buttonData.isMobile !== false);
+  const pluginButtonNames = reducePluginTextButtonNames(pluginTextButtons, buttonData => buttonData.isMobile !== false);
   const requestedButtons = get(buttons, 'textButtons.mobile');
   const textButtonsList = requestedButtons || MobileTextButtonList;
   const textButtons = mergeButtonLists(textButtonsList, pluginButtonNames, 'mobile');

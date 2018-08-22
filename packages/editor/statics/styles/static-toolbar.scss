@@ -18,10 +18,11 @@
   display: flex;
   align-items: center;
   height: 100%;
-  padding: 0 9px;
+  padding: 90px 9px;
   overflow: hidden;
   scroll-behavior: smooth;
   &.mobile {
+    padding: 0 9px;
     transform: translateZ(0);
     overflow-x: scroll;
     -webkit-overflow-scrolling: touch;
@@ -67,4 +68,6 @@
   transform: rotate(225deg);
 }
 
-.staticToolbar_extend {}
+.staticToolbar_extend {
+  outline: none;
+}

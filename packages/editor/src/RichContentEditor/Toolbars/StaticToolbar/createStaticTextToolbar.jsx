@@ -71,7 +71,7 @@ const getStaticTextTheme = theme => {
   };
 };
 
-export default ({ buttons, pluginTextButtonMappers, pubsub, theme, isMobile, helpers, anchorTarget, relValue, t, refId, offset, visibilityFn }) => {
+export default ({ buttons, pluginTextButtons, pubsub, theme, isMobile, helpers, anchorTarget, relValue, t, refId, offset, visibilityFn }) => {
   const staticTextTheme = getStaticTextTheme(theme);
 
   const appendSeparator = ({ mergedList, sourceList, buttonData, formFactor }) => {
@@ -83,8 +83,8 @@ export default ({ buttons, pluginTextButtonMappers, pubsub, theme, isMobile, hel
     return mergedList;
   };
 
-  const pluginButtons = reducePluginTextButtons(pluginTextButtonMappers);
-  const pluginButtonNames = reducePluginTextButtonNames(pluginTextButtonMappers);
+  const pluginButtons = reducePluginTextButtons(pluginTextButtons);
+  const pluginButtonNames = reducePluginTextButtonNames(pluginTextButtons);
   const mergedList = mergeButtonLists(DesktopTextButtonList, pluginButtonNames, 'desktop', appendSeparator);
   const textButtons = get(buttons, 'desktop', mergedList);
   const structure = getTextButtonsFromList({ buttons: textButtons, pluginButtons, pubsub, theme: staticTextTheme, t });

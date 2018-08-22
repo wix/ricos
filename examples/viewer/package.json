@@ -7,18 +7,19 @@
     "email": "jonathanb@wix.com"
   },
   "dependencies": {
-    "@babel/core": "7.0.0-beta.55",
+    "@babel/core": "7.0.0-rc.1",
     "babel-eslint": "8.1.0",
     "babel-jest": "^23.2.0",
     "chalk": "^2.4.1",
     "jest": "^23.1.0",
     "mobile-detect": "^1.4.2",
     "object-assign": "4.1.1",
+    "object.values": "^1.0.4",
     "promise": "8.0.1",
     "raf": "3.4.0",
     "react": "15.5.4",
     "react-dom": "15.5.4",
-    "react-json-editor-ajrm": "^2.4.4",
+    "react-json-editor-ajrm": "^2.5.3",
     "react-modal": "^3.1.11",
     "whatwg-fetch": "2.0.3",
     "wix-rich-content-common": "file:../../packages/common",
@@ -41,6 +42,7 @@
     "wix-rich-content-viewer": "^1.0.6"
   },
   "scripts": {
+    "bootstrap": "yarn --no-lockfile && node ../../scripts/linkExample",
     "start": "webpack-serve ./config/webpack.dev.js",
     "test": "echo 'There are no tests configured for this project!' && exit 0",
     "build": "webpack --config ./config/webpack.prod.js",
