@@ -42,10 +42,12 @@
     "wix-rich-content-viewer": "^1.0.6"
   },
   "scripts": {
-    "bootstrap": "yarn --no-lockfile && node ../../scripts/linkExample",
+    "bootstrap": "yarn && node ../../scripts/linkExample",
+    "clean": "rm -rf dist/",
     "start": "webpack-serve ./config/webpack.dev.js",
     "test": "echo 'There are no tests configured for this project!' && exit 0",
     "build": "webpack --config ./config/webpack.prod.js",
+    "build:dev": "webpack --config ./config/webpack.dev.js",
     "build:analyze": "npm run build -- --progress --env.analyzeBundle"
   },
   "devDependencies": {
