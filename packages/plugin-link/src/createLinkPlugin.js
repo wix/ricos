@@ -7,10 +7,10 @@ import createLinkToolbar from './toolbar/createLinkToolbar';
 
 const createLinkPlugin = (config = {}) => {
   const type = EXTERNAL_LINK_TYPE;
-  const { decorator, helpers, theme, isMobile, t, anchorTarget, relValue, getEditorState, setEditorState } = config;
+  const { decorator, helpers, theme, isMobile, t, anchorTarget, relValue, getEditorState, setEditorState, link: settings } = config;
   const plugin = createLinkifyPlugin({ target: anchorTarget, rel: relValue, theme: theme || styles });
 
-  const toolbar = createLinkToolbar({ helpers, theme, isMobile, t, anchorTarget, relValue, getEditorState, setEditorState });
+  const toolbar = createLinkToolbar({ helpers, theme, isMobile, t, anchorTarget, relValue, getEditorState, setEditorState, settings });
 
   plugin.decorators.push({
     strategy: Strategy,

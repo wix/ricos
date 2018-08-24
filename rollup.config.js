@@ -97,15 +97,20 @@ const plugins = [
         url: asset => asset.url.replace('../', '/statics/')
       }),
     ],
-  }),
-  uglify({
-    mangle: false,
-    sourceMap: {
-      filename: "out.js",
-      url: "out.js.map"
-    }
-  }),
+  })
 ];
+
+if (process.env.NODE_ENV !== 'development') {
+  plugins.push(
+    uglify({
+      mangle: false,
+      sourceMap: {
+        filename: 'out.js',
+        url: 'out.js.map'
+      }
+    }),
+  )
+}
 
 if (process.env.MODULE_ANALYZE) {
   plugins.push(
