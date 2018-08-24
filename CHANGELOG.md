@@ -9,6 +9,12 @@
 
 ## [Unreleased]
 
+#### :boom: Breaking Change
+* `code-block`:
+  * `config.codeBlock.position` property is obsolete; use `config.getToolbarSettings` to override plugin text button settings
+
+<br/>
+
 ## 1.4.0 (Aug 22, 2018)
 
 #### :boom: Breaking Change
@@ -48,7 +54,7 @@
 
 #### :bug: Bug Fix
 * `general`
-  * Theme supports empty css classes 
+  * Theme supports empty css classes
 * `editor`
   * Firefox text editing
   * Close alignment dropdown when clicke d outside

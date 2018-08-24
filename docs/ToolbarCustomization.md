@@ -6,7 +6,7 @@ As it turns out, various `RichContentEditor` consumers have different customizat
 This document focuses on a specific `config` API `getToolbarSettings` that is responsible for the toolbar customization.
 ## `getToolbarSettings` API
 ### Signature
-The `getToolbarSettings` is defined as follows: `{ textButtons, pluginButtons } => Array<Setting>`.
+The `getToolbarSettings` is defined as follows: `{ textButtons, pluginButtons, pluginTextButtons } => Array<Setting>`.
 
 The `Setting` type is defined as follows:
 ```
