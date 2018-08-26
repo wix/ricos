@@ -19,7 +19,7 @@ const RichContentEditorModal = ({ modalName, modalElement, modalsMap, ...modalPr
     console.error(`Attempted to open unknown external modal '${modalName}'`); //eslint-disable-line no-console
     return null;
   }
-  return <RichContentModal modalElement={element} {...modalProps} />;
+  return <RichContentModal modalElement={element} {...modalProps}/>;
 };
 
 RichContentEditorModal.propTypes = {
