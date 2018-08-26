@@ -1,5 +1,4 @@
 /* eslint-disable max-len */
-//C:/Users/nzanabeet/AppData/Local/Microsoft/TypeScript/2.9/node_modules/@types/react
 import React from 'react';
 
 const InsertPluginIcon = props => (
