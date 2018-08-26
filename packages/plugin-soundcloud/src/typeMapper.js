@@ -1,4 +1,4 @@
-import SoundcloudV from './soundcloud-v';
+import SoundcloudV from './soundcloud-viewer';
 import { SOUNDCLOUD_TYPE_LEGACY, SOUNDCLOUD_TYPE } from './types';
 import { containerClassName } from './classNameStrategies';
 
