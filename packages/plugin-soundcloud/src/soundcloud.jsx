@@ -62,7 +62,7 @@ class Soundcloud extends Component {
     setTimeout(() => this.handleReady(), MAX_WAIT_TIME);
   };
 
-  handlesoundcloudStart = player => {
+  handleSoundcloudStart = player => {
     if (this.player !== player) {
       this.setState({
         isLoading: false,
