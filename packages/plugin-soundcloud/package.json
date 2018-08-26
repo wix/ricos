@@ -1,9 +1,9 @@
 {
   "name": "wix-rich-content-plugin-soundcloud",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": {
-    "name": "Jonathan Bachman",
-    "email": "jonathanb@wix.com"
+    "name": "Nabeel Zanabeet",
+    "email": "nabeelz@wix.com"
   },
   "repository": {
     "type": "git",
@@ -13,7 +13,7 @@
   "bugs": {
     "url": "https://github.com/wix-incubator/rich-content/issues"
   },
-  "homepage": "https://github.com/wix-incubator/rich-content/tree/master/rich-content-plugin-soundcloud",
+  "homepage": "https://github.com/wix-incubator/rich-content/tree/master/packages/plugin-soundcloud",
   "files": [
     "dist"
   ],
