@@ -1,3 +1,2 @@
 const SOUNDCLOUD_TYPE = 'wix-draft-plugin-soundcloud';
-const SOUNDCLOUD_TYPE_LEGACY = 'SOUNDCLOUD-EMBED';
-export { SOUNDCLOUD_TYPE_LEGACY, SOUNDCLOUD_TYPE };
+export { SOUNDCLOUD_TYPE };

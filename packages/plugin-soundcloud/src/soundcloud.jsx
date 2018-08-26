@@ -5,7 +5,7 @@ import { findDOMNode } from 'react-dom';
 import { mergeStyles } from 'wix-rich-content-common';
 import SoundCloudViewer from './soundcloud-viewer';
 import styles from '../statics/styles/default-soundcloud-styles.scss';
-import { SOUNDCLOUD_TYPE_LEGACY, SOUNDCLOUD_TYPE } from './types';
+import { SOUNDCLOUD_TYPE } from './types';
 
 const DEFAULTS = {
   config: {
@@ -19,7 +19,6 @@ const MAX_WAIT_TIME = 5000;
 class Soundcloud extends Component {
 
   static type = {
-    SOUNDCLOUD_TYPE_LEGACY,
     SOUNDCLOUD_TYPE
   };
 
