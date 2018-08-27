@@ -1,0 +1,37 @@
+html, body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+#root {
+    height: 100%;
+}
+
+.wrapper {
+    height: 100%;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.header {
+    font-family: 'Roboto', 'Helvetica';
+    font-weight: 300;
+    padding-bottom: 20px;
+    background-color: #338de8;
+    color: white;
+    text-align: center;
+}
+
+.header h1 {
+    font-weight: 300;
+    cursor: pointer;
+}

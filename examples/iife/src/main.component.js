@@ -14,9 +14,18 @@ class DemoExample extends React.Component {
 
   render() {
     return (
-      <RichContentEditor
-        onChange={this.onChange}
-        editorState={this.state.editorState}/>
+      <div className="wrapper">
+        <div className="container">
+          <div className="header">
+            <h1>Wix Rich Content Editor</h1>
+          </div>
+          <div className="content">
+            <RichContentEditor
+              onChange={this.onChange}
+              editorState={this.state.editorState}/>
+          </div>
+        </div>
+      </div>
     );
   }
 }
