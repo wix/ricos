@@ -16,7 +16,7 @@ import {
 import createThemedSeparator from './createThemedSeparator';
 import HeadingSwitchButton from '../inline-styling/HeadingSwitchButton';
 
-export default ({ buttons, theme, t, isMobile, pluginButtons }) => {
+export default ({ buttons, theme, t, isMobile, textPluginButtons }) => {
   const themedSeparator = horizontal => createThemedSeparator({ theme, horizontal });
 
   const buttonByName = {
@@ -38,8 +38,8 @@ export default ({ buttons, theme, t, isMobile, pluginButtons }) => {
   };
 
   let buttonMap = buttonByName;
-  if (pluginButtons) {
-    buttonMap = Object.assign(buttonMap, pluginButtons);
+  if (textPluginButtons) {
+    buttonMap = Object.assign(buttonMap, textPluginButtons);
   }
 
   const structure = buttons.map(buttonName => buttonMap[buttonName]).filter(b => b !== undefined);

@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-plugin-link",
-  "version": "1.2.1",
+  "version": "1.3.0",
   "author": {
     "name": "Jonathan Bachman",
     "email": "jonathanb@wix.com"
@@ -25,6 +25,7 @@
     "statics": "mkdir -p dist && cp -R statics dist/statics",
     "prebuild": "npm run statics",
     "build": "rollup --environment MODULE_NAME:plugin-link -c ../../rollup.config.js",
+    "build:dev": "NODE_ENV=development npm run build",
     "build:analyze": "npm run build -- --environment MODULE_ANALYZE && open stats.html",
     "watch": "MODULE_WATCH=1 npm run build -- --watch",
     "release": "wnpm-release --no-shrinkwrap",
@@ -32,7 +33,7 @@
   },
   "peerDependencies": {
     "@babel/runtime": "7.0.0-rc.1",
-    "@wix/draft-js": "^0.10.163",
+    "@wix/draft-js": "0.10.163",
     "classnames": "^2.0.0",
     "lodash": "^4.0.0",
     "prop-types": "^15.0.0",
@@ -41,7 +42,7 @@
   },
   "devDependencies": {
     "@babel/runtime": "7.0.0-rc.1",
-    "@wix/draft-js": "^0.10.163",
+    "@wix/draft-js": "0.10.163",
     "classnames": "^2.2.6",
     "eslint": "^4.19.1",
     "lodash": "^4.17.10",
@@ -52,7 +53,7 @@
   },
   "dependencies": {
     "draft-js-linkify-plugin": "^2.0.1",
-    "wix-rich-content-common": "^1.2.1"
+    "wix-rich-content-common": "^1.3.0"
   },
   "unpkg": true,
   "publishConfig": {

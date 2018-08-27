@@ -27,9 +27,6 @@
       }
     }
   }
-  &.android {
-    padding-top: 50px;
-  }
 }
 
 .editor {
@@ -103,6 +100,7 @@
 
 .justify {
   &>* {
+    white-space: pre-line !important;
     text-align: justify !important;
   }
 }

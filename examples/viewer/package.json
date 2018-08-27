@@ -14,6 +14,7 @@
     "jest": "^23.1.0",
     "mobile-detect": "^1.4.2",
     "object-assign": "4.1.1",
+    "object.values": "^1.0.4",
     "promise": "8.0.1",
     "raf": "3.4.0",
     "react": "15.5.4",
@@ -41,9 +42,12 @@
     "wix-rich-content-viewer": "^1.0.6"
   },
   "scripts": {
+    "bootstrap": "yarn && node ../../scripts/linkExample",
+    "clean": "rm -rf dist/",
     "start": "webpack-serve ./config/webpack.dev.js",
     "test": "echo 'There are no tests configured for this project!' && exit 0",
     "build": "webpack --config ./config/webpack.prod.js",
+    "build:dev": "webpack --config ./config/webpack.dev.js",
     "build:analyze": "npm run build -- --progress --env.analyzeBundle"
   },
   "devDependencies": {

@@ -38,15 +38,19 @@
 
 .alignRight {}
 
-.sizeFullWidth {
-  &:not(.textWrapNowrap) {
-    width: auto;
-    margin: 0 -100px;
-  }
-}
+.sizeFullWidth {}
 
 .sizeContent {}
 
 .sizeSmall {}
 
 .sizeSmallCenter {}
+
+@media only screen and (min-width: 640px) {
+  .sizeFullWidth {
+    &:not(.textWrapNowrap) {
+      width: auto;
+      margin: 0 -100px;
+    }
+  }
+}

@@ -19,7 +19,6 @@ import {
   normalizeInitialState,
   createInlineStyleDecorators,
   mergeStyles,
-  WixUtils,
   TooltipHost,
   TOOLBARS
 } from 'wix-rich-content-common';
@@ -51,20 +50,19 @@ class RichContentEditor extends Component {
     const { theme } = this.state;
     const getEditorState = () => this.state.editorState;
     const setEditorState = editorState => this.setState({ editorState });
-    const { pluginInstances, pluginButtons, pluginTextButtonMappers, pubsubs } =
+    const { pluginInstances, pluginButtons, pluginTextButtons, pubsubs } =
       createPlugins({ plugins, config, helpers, theme, t, isMobile, anchorTarget, relValue, getEditorState, setEditorState });
-    this.initEditorToolbars(pluginButtons, pluginTextButtonMappers);
-    this.pluginKeyBindings = initPluginKeyBindings(pluginTextButtonMappers);
+    this.initEditorToolbars(pluginButtons, pluginTextButtons);
+    this.pluginKeyBindings = initPluginKeyBindings(pluginTextButtons);
     this.plugins = [...pluginInstances, ...Object.values(this.toolbars)];
     this.subscriberPubsubs = pubsubs || [];
   }
 
-  initEditorToolbars(pluginButtons, pluginTextButtonMappers) {
+  initEditorToolbars(pluginButtons, pluginTextButtons) {
     const {
       helpers,
       anchorTarget,
       relValue,
-      textButtons,
       textToolbarType,
       isMobile,
       t,
@@ -72,7 +70,7 @@ class RichContentEditor extends Component {
       textAlignment
     } = this.props;
     const { theme } = this.state;
-    const buttons = { textButtons, pluginButtons, pluginTextButtonMappers };
+    const buttons = { pluginButtons, pluginTextButtons };
 
     this.toolbars = createEditorToolbars({
       buttons,
@@ -300,7 +298,6 @@ class RichContentEditor extends Component {
   render() {
     const { isMobile } = this.props;
     const { theme } = this.state;
-    const isAndroid = isMobile && !WixUtils.isiOS();
     const wrapperClassName = classNames(
       draftStyles.wrapper,
       styles.wrapper,
@@ -308,8 +305,6 @@ class RichContentEditor extends Component {
       {
         [styles.desktop]: !isMobile,
         [theme.desktop]: !isMobile && theme && theme.desktop,
-        [styles.android]: isAndroid,
-        [theme.android]: isAndroid
       }
     );
     return (
@@ -337,10 +332,6 @@ RichContentEditor.propTypes = {
   isMobile: PropTypes.bool,
   helpers: PropTypes.object,
   t: PropTypes.func,
-  textButtons: PropTypes.shape({
-    desktop: PropTypes.arrayOf(PropTypes.string),
-    mobile: PropTypes.arrayOf(PropTypes.string)
-  }),
   textToolbarType: PropTypes.oneOf(['inline', 'static']),
   plugins: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.func])),
   config: PropTypes.object,
