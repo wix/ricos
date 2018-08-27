@@ -18,8 +18,7 @@ const commonPresets = [
 ];
 
 const commonPlugins = [
-  ['@babel/plugin-proposal-class-properties', { loose: true }],
-  '@babel/external-helpers'
+  ['@babel/plugin-proposal-class-properties', { loose: true }]
 ];
 
 const testPlugins = [

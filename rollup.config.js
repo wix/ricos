@@ -46,7 +46,6 @@ const plugins = [
       'src/**',
       'statics/icons/**',
     ],
-    externalHelpers: true,
     runtimeHelpers: true,
   }),
   commonjs({
