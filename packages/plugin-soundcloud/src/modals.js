@@ -1,4 +1,4 @@
-import SoundcloudModal from './toolbar/soundcloudURLInputModal';
+import SoundcloudModal from './toolbar/soundCloudURLInputModal';
 
 const Modals = {
   SOUNDCLOUD_URL_INPUT: 'soundcloud-url-input'

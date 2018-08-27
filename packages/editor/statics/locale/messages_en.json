@@ -123,7 +123,7 @@
   "UploadMediaButton_Tooltip" : "Upload Media",
   "ManageMediaButton_Tooltip" : "Organize Media",
   "ReplaceVideoButton_Tooltip" : "Replace Video",
-  "ReplaceSoundcloudButton_Tooltip" : "Replace Soundcloud",
+  "ReplaceSoundCloudButton_Tooltip" : "Replace SoundCloud",
   "ReplaceImageButton_Tooltip" : "Replace Image",
   "EmojiPlugin_InsertButton_Tooltip": "Add an Emoji",
   "EmojiPlugin_EmojiGroups_People": "People",

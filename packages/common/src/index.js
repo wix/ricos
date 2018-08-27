@@ -64,7 +64,7 @@ export { validate } from './Utils/component-data-validator';
 
 export {
   isValidUrl,
-  isSoundcloudUrl,
+  isSoundCloudUrl,
   isVideoUrl,
   normalizeUrl,
   getUrlMatches,

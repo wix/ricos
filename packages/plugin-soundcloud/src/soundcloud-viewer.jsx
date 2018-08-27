@@ -7,7 +7,7 @@ import isEqual from 'lodash/isEqual';
 import schema from '../statics/data-schema.json';
 import styles from '../statics/styles/soundcloud-viewer.scss';
 
-class SoundcloudViewer extends Component {
+class SoundCloudViewer extends Component {
   constructor(props) {
     super(props);
     validate(props.componentData, schema);
@@ -32,7 +32,7 @@ class SoundcloudViewer extends Component {
   }
 }
 
-SoundcloudViewer.propTypes = {
+SoundCloudViewer.propTypes = {
   componentData: PropTypes.object.isRequired,
   theme: PropTypes.object,
   onReady: PropTypes.func,
@@ -42,10 +42,10 @@ SoundcloudViewer.propTypes = {
   height: PropTypes.string,
 };
 
-SoundcloudViewer.defaultProps = {
+SoundCloudViewer.defaultProps = {
   width: '100%',
   height: '100%',
   controls: true,
 };
 
-export default SoundcloudViewer;
+export default SoundCloudViewer;

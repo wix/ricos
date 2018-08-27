@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import { mergeStyles, isSoundcloudUrl, SettingsPanelFooter, TextInput } from 'wix-rich-content-common';
 import styles from '../../statics/styles/soundcloud-url-input-modal.scss';
 
-export default class SoundcloudURLInputModal extends Component {
+export default class SoundCloudURLInputModal extends Component {
   constructor(props) {
     super(props);
     this.styles = mergeStyles({ styles, theme: props.theme });
@@ -98,7 +98,7 @@ export default class SoundcloudURLInputModal extends Component {
   }
 }
 
-SoundcloudURLInputModal.propTypes = {
+SoundCloudURLInputModal.propTypes = {
   onConfirm: PropTypes.func,
   pubsub: PropTypes.object,
   helpers: PropTypes.object.isRequired,
@@ -110,7 +110,7 @@ SoundcloudURLInputModal.propTypes = {
   t: PropTypes.func,
 };
 
-SoundcloudURLInputModal.defaultProps = {
+SoundCloudURLInputModal.defaultProps = {
   doneLabel: 'Add Now',
   cancelLabel: 'Cancel',
 };

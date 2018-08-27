@@ -1,6 +1,6 @@
 import { DEFAULTS } from '../soundcloud';
 import { getModalStyles, TOOLBARS } from 'wix-rich-content-common';
-import soundcloudURLInputModal from './soundcloudURLInputModal';
+import soundcloudURLInputModal from './soundCloudURLInputModal';
 import { InsertPluginIcon } from '../icons';
 
 export default ({ helpers, t }) => {
