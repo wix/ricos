@@ -35,3 +35,31 @@ body {
     font-weight: 300;
     cursor: pointer;
 }
+
+.columns {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+.column {
+    min-height: 650px;
+    padding: 0 10px;
+}
+
+.column.main {
+    max-width: 100%;
+    width: 740px;
+    margin: 0 auto;
+}
+
+.column+.column {
+    border-left: 1px solid rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+}
+

@@ -20,9 +20,14 @@ class DemoExample extends React.Component {
             <h1>Wix Rich Content Editor</h1>
           </div>
           <div className="content">
-            <RichContentEditor
-              onChange={this.onChange}
-              editorState={this.state.editorState}/>
+            <div className="columns">
+              <div className="column main">
+                <RichContentEditor
+                  onChange={this.onChange}
+                  editorState={this.state.editorState}
+                />
+              </div>
+            </div>
           </div>
         </div>
       </div>
