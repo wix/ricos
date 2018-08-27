@@ -11,6 +11,8 @@
 #### :boom: Breaking Change
 * `code-block`:
   * `config.codeBlock.position` property is obsolete; use `config.getToolbarSettings` to override plugin text button settings
+* `general`:
+  * `config` plugin-specific section keys are standardized -- now the plugin types should be used as keys. Check [example](https://github.com/wix-incubator/rich-content/blob/develop/examples/editor/src/App.jsx) for reference
 
 #### :rocket: New Feature
 * `general`:
