@@ -4,6 +4,18 @@ import ReactModal from 'react-modal';
 import MobileDetect from 'mobile-detect';
 import { convertFromRaw, convertToRaw, EditorState } from '@wix/draft-js';
 import Plugins from './Plugins';
+
+import { CODE_BLOCK_TYPE } from 'wix-rich-content-plugin-code-block';
+import { DIVIDER_TYPE } from 'wix-rich-content-plugin-divider';
+import { EXTERNAL_EMOJI_TYPE } from 'wix-rich-content-plugin-emoji';
+import { GALLERY_TYPE } from 'wix-rich-content-plugin-gallery';
+import { HASHTAG_TYPE } from 'wix-rich-content-plugin-hashtag';
+import { HTML_TYPE } from 'wix-rich-content-plugin-html';
+import { IMAGE_TYPE } from 'wix-rich-content-plugin-image';
+import { LINK_TYPE } from 'wix-rich-content-plugin-link';
+import { VIDEO_TYPE } from 'wix-rich-content-plugin-video';
+import { EXTERNAL_MENTIONS_TYPE } from 'wix-rich-content-plugin-mentions';
+
 import ModalsMap from './ModalsMap';
 import { EditorState as RichEditorState, RichContentEditor, RichContentEditorModal } from 'wix-rich-content-editor';
 import { Button, normalizeInitialState, TOOLBARS } from 'wix-rich-content-common';
@@ -23,8 +35,13 @@ const modalStyleDefaults = {
   },
 };
 
-const anchorTarget = '_blank';
+const anchorTarget = '_blink';
 const relValue = 'nofollow';
+
+const uiSettings = {
+  blankTargetToggleVisibilityFn: () => false,
+  nofollowRelToggleVisibilityFn: () => true
+};
 
 class App extends Component {
   constructor(props) {
@@ -45,7 +62,7 @@ class App extends Component {
   initEditorProps() {
     this.plugins = Plugins;
     this.config = {
-      hashtag: {
+      [HASHTAG_TYPE]: {
         createHref: decoratedText =>
           `/search/posts?query=${encodeURIComponent('#')}${decoratedText}`,
         onClick: (event, text) => {
@@ -53,11 +70,11 @@ class App extends Component {
           console.log(`'${text}' hashtag clicked!`);
         },
       },
-      html: {
+      [HTML_TYPE]: {
         htmlIframeSrc: 'http://localhost:3000/static/html-plugin-embed.html',
         // showInsertButtons: false,
       },
-      mentions: {
+      [EXTERNAL_MENTIONS_TYPE]: {
         onMentionClick: mention => console.log({ mention }),
         getMentions: (searchQuery) => new Promise(resolve =>
           setTimeout(() => resolve([
@@ -68,6 +85,14 @@ class App extends Component {
             250),
         ),
       },
+      [LINK_TYPE]: { },
+      [CODE_BLOCK_TYPE]: { },
+      [DIVIDER_TYPE]: { },
+      [EXTERNAL_EMOJI_TYPE]: { },
+      [GALLERY_TYPE]: { },
+      [IMAGE_TYPE]: { },
+      [VIDEO_TYPE]: { },
+      uiSettings,
       // getToolbarSettings: ({ pluginButtons, textButtons }) => [
       //   {
       //     name: TOOLBARS.SIDE,

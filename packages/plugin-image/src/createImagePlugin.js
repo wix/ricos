@@ -4,13 +4,11 @@ import { Component } from './image-component';
 import { IMAGE_TYPE, IMAGE_TYPE_LEGACY } from './types';
 
 const createImagePlugin = (config = {}) => {
-  const { decorator, helpers, t, theme, isMobile, anchorTarget, relValue, image: settings } = config;
+  const type = IMAGE_TYPE;
+  const { helpers, t, anchorTarget, relValue, [type]: settings = {}, uiSettings, ...rest } = config;
 
   return createBasePlugin({
     component: Component,
-    decorator,
-    settings,
-    theme,
     type: IMAGE_TYPE,
     legacyType: IMAGE_TYPE_LEGACY,
     toolbar: createToolbar({
@@ -18,12 +16,15 @@ const createImagePlugin = (config = {}) => {
       anchorTarget,
       relValue,
       t,
+      uiSettings
     }),
     helpers,
-    isMobile,
     anchorTarget,
     relValue,
+    settings,
+    uiSettings,
     t,
+    ...rest
   });
 };
 

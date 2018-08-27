@@ -1,16 +1,30 @@
 import { MODIFIERS, hasLinksInSelection, removeLinksInSelection, EditorModals, getModalStyles } from 'wix-rich-content-common';
 import TextLinkButton from './TextLinkButton';
 
-const openLinkModal = (helpers, isMobile, anchorTarget, relValue, t, theme, getEditorState, setEditorState) => {
+const openLinkModal = ({ helpers, isMobile, anchorTarget, relValue, t, theme, getEditorState, setEditorState, uiSettings }) => {
   const modalStyles = getModalStyles({ fullScreen: false });
   if (helpers && helpers.openModal) {
-    const modalProps = { helpers, modalStyles, isMobile, getEditorState, setEditorState, t, theme, anchorTarget,
-      relValue, modalName: EditorModals.MOBILE_TEXT_LINK_MODAL, hidePopup: helpers.closeModal };
+    const modalProps = {
+      helpers,
+      modalStyles,
+      isMobile,
+      getEditorState,
+      setEditorState,
+      t,
+      theme,
+      anchorTarget,
+      relValue,
+      modalName: EditorModals.MOBILE_TEXT_LINK_MODAL,
+      hidePopup: helpers.closeModal,
+      uiSettings,
+    };
     helpers.openModal(modalProps);
+  } else {
+    console.error('Link plugin: failed to display Link modal dialog since helpers.openModal is not defined'); // eslint-disable-line no-console
   }
 };
 
-export default ({ helpers, isMobile, anchorTarget, relValue, t, theme, getEditorState, setEditorState }) => ({
+export default config => ({
   TextButtonMapper: () => ({
     Link: {
       component: TextLinkButton,
@@ -26,7 +40,7 @@ export default ({ helpers, isMobile, anchorTarget, relValue, t, theme, getEditor
           if (hasLinksInSelection(editorState)) {
             return removeLinksInSelection(editorState);
           } else {
-            openLinkModal(helpers, isMobile, anchorTarget, relValue, t, theme, getEditorState, setEditorState);
+            openLinkModal(config);
           }
         }
       }]

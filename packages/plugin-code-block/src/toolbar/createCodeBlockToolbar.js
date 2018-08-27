@@ -3,12 +3,14 @@ import TextCodeBlockButton from './TextCodeBlockButton';
 import { CODE_BLOCK_TYPE } from '../types';
 import { toggleBlockTypeAndEnsureSpaces } from './blockTypeModifiers';
 
-export default ({ setEditorState, settings }) => ({
+export default ({ setEditorState }) => ({
   TextButtonMapper: () => ({
     CodeBlock: {
       component: TextCodeBlockButton,
       isMobile: true,
-      position: settings.position,
+      position: {
+        mobile: 7
+      },
       keyBindings: [{
         keyCommand: {
           command: 'code-block',

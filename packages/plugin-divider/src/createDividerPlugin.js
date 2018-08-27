@@ -6,15 +6,14 @@ import createToolbar from './toolbar';
 import Styles from '../statics/styles/default-styles.scss';
 
 const createDividerPlugin = (config = {}) => {
-  const { decorator, helpers, theme, isMobile, t, anchorTarget, relValue, divider: settings } = config;
+  const type = DIVIDER_TYPE;
+  const { helpers, theme, t, [type]: settings = {}, ...rest } = config;
   const styles = mergeStyles({ styles: Styles, theme });
-
   return createBasePlugin({
     component: DividerComponent,
-    decorator,
     settings,
     theme,
-    type: DIVIDER_TYPE,
+    type,
     toolbar: createToolbar({
       helpers,
       styles,
@@ -22,10 +21,8 @@ const createDividerPlugin = (config = {}) => {
       t
     }),
     helpers,
-    isMobile,
-    anchorTarget,
-    relValue,
     t,
+    ...rest
   });
 };
 

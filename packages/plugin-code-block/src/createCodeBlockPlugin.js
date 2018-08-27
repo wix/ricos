@@ -1,15 +1,8 @@
 import CodeUtils from 'draft-js-code';
-import merge from 'lodash/merge';
 import { createBasePlugin } from 'wix-rich-content-common';
 import { CODE_BLOCK_TYPE } from './types';
 import PrismDecorator from './PrismDecorator';
 import createCodeBlockToolbar from './toolbar/createCodeBlockToolbar';
-
-const defaultSettings = {
-  position: {
-    mobile: 7,
-  },
-};
 
 const createUnderlyingPlugin = ({ theme }) => ({
   keyBindingFn: (event, { getEditorState }) => {
@@ -63,7 +56,6 @@ const createUnderlyingPlugin = ({ theme }) => ({
 const createCodeBlockPlugin = (config = {}) => {
   const type = CODE_BLOCK_TYPE;
   const {
-    decorator,
     helpers,
     theme,
     isMobile,
@@ -72,9 +64,10 @@ const createCodeBlockPlugin = (config = {}) => {
     relValue,
     getEditorState,
     setEditorState,
-    codeBlock: userSettings = {},
+    [type]: settings = {},
+    ...rest
   } = config;
-  const settings = merge(defaultSettings, userSettings);
+
   const plugin = createUnderlyingPlugin({ theme });
   const toolbar = createCodeBlockToolbar({
     helpers,
@@ -85,12 +78,10 @@ const createCodeBlockPlugin = (config = {}) => {
     relValue,
     getEditorState,
     setEditorState,
-    settings,
   });
 
   return createBasePlugin(
     {
-      decorator,
       theme,
       toolbar,
       type,
@@ -99,6 +90,8 @@ const createCodeBlockPlugin = (config = {}) => {
       anchorTarget,
       relValue,
       t,
+      settings,
+      ...rest
     },
     plugin,
   );

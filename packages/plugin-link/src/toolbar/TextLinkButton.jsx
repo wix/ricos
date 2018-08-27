@@ -17,7 +17,8 @@ export default class TextLinkButton extends Component {
       keyName,
       anchorTarget,
       relValue,
-      t
+      t,
+      uiSettings
     } = this.props;
     const modalStyles = getModalStyles({ fullScreen: false });
     if (isMobile || linkModal) {
@@ -33,7 +34,8 @@ export default class TextLinkButton extends Component {
           anchorTarget,
           relValue,
           modalName: EditorModals.MOBILE_TEXT_LINK_MODAL,
-          hidePopup: helpers.closeModal
+          hidePopup: helpers.closeModal,
+          uiSettings,
         };
         helpers.openModal(modalProps);
       } else {
@@ -47,6 +49,7 @@ export default class TextLinkButton extends Component {
         relValue,
         theme,
         t,
+        uiSettings
       };
       const TextLinkPanelWithProps = decorateComponentWithProps(TextLinkPanel, linkPanelProps);
       onOverrideContent(TextLinkPanelWithProps);
@@ -91,4 +94,5 @@ TextLinkButton.propTypes = {
   relValue: PropTypes.string,
   t: PropTypes.func,
   tabIndex: PropTypes.number,
+  uiSettings: PropTypes.object,
 };

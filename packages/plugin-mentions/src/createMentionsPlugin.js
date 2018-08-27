@@ -29,18 +29,9 @@ const defaultSettings = {
 
 const createExternalMentionsPlugin = (config = {}) => {
   const type = EXTERNAL_MENTIONS_TYPE;
-  const {
-    decorator,
-    helpers,
-    theme,
-    isMobile,
-    t,
-    anchorTarget,
-    relValue,
-    mentions = {},
-  } = config;
+  const { theme, [type]: mentionSettings = {}, ...rest } = config;
   const styles = mergeStyles({ styles: Styles, theme });
-  const settings = Object.assign({}, defaultSettings, mentions);
+  const settings = Object.assign({}, defaultSettings, mentionSettings);
 
   const plugin = createMentionPlugin({
     mentionComponent: decorateComponentWithProps(MentionComponent, { settings, styles }),
@@ -59,15 +50,11 @@ const createExternalMentionsPlugin = (config = {}) => {
 
   return createBasePlugin(
     {
-      decorator,
       theme,
       type,
-      helpers,
-      isMobile,
-      anchorTarget,
       inlineModals,
-      relValue,
-      t,
+      settings,
+      ...rest
     },
     plugin,
   );

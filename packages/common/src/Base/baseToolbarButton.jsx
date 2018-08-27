@@ -55,7 +55,7 @@ class BaseToolbarButton extends React.Component {
       return;
     }
 
-    const { componentState, keyName, helpers, pubsub, theme, t, onClick, anchorTarget, relValue, ...otherProps } = this.props;
+    const { componentState, keyName, helpers, pubsub, theme, t, onClick, anchorTarget, relValue, uiSettings, ...otherProps } = this.props;
 
     if (this.props.type === BUTTONS.FILES && helpers && helpers.handleFileSelection) {
       const multiple = !!this.props.multiple;
@@ -91,6 +91,7 @@ class BaseToolbarButton extends React.Component {
           relValue,
           t,
           theme: theme || {},
+          uiSettings,
           ...otherProps,
         };
         helpers.openModal(modalProps);
@@ -241,6 +242,7 @@ BaseToolbarButton.propTypes = {
   displayPanel: PropTypes.func.isRequired,
   displayInlinePanel: PropTypes.func.isRequired,
   hideInlinePanel: PropTypes.func.isRequired,
+  uiSettings: PropTypes.object,
 };
 
 export default BaseToolbarButton;

@@ -4,15 +4,15 @@ import { Component } from './gallery-component';
 import { GALLERY_TYPE } from './types';
 
 const createGalleryPlugin = (config = {}) => {
-  const { decorator, helpers, theme, isMobile, t, anchorTarget, relValue, gallery: settings } = config;
+  const type = GALLERY_TYPE;
+  const { helpers, theme, t, anchorTarget, relValue, [type]: settings = {}, ...rest } = config;
 
   return createBasePlugin({
     component: Component,
-    decorator,
     settings,
     theme,
     t,
-    type: GALLERY_TYPE,
+    type,
     toolbar: createToolbar({
       helpers,
       t,
@@ -20,9 +20,9 @@ const createGalleryPlugin = (config = {}) => {
       relValue,
     }),
     helpers,
-    isMobile,
     anchorTarget,
     relValue,
+    ...rest
   });
 };
 

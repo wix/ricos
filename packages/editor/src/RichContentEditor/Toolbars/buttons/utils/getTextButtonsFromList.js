@@ -16,7 +16,7 @@ import {
 import createThemedSeparator from './createThemedSeparator';
 import HeadingSwitchButton from '../inline-styling/HeadingSwitchButton';
 
-export default ({ buttons, theme, t, isMobile, textPluginButtons }) => {
+export default ({ buttons, theme, t, isMobile, textPluginButtons, uiSettings }) => {
   const themedSeparator = horizontal => createThemedSeparator({ theme, horizontal });
 
   const buttonByName = {
@@ -44,5 +44,5 @@ export default ({ buttons, theme, t, isMobile, textPluginButtons }) => {
 
   const structure = buttons.map(buttonName => buttonMap[buttonName]).filter(b => b !== undefined);
 
-  return structure.map(b => decorateComponentWithProps(b, { t, isMobile }));
+  return structure.map(b => decorateComponentWithProps(b, { t, isMobile, uiSettings }));
 };

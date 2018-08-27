@@ -9,7 +9,7 @@ import separatorStyles from '../../../../statics/styles/mobile-toolbar-separator
 
 const createMobileToolbar = ({
   buttons, textPluginButtons, pluginButtons, helpers, pubsub, getEditorState, setEditorState,
-  anchorTarget, relValue, theme, t, offset, visibilityFn
+  anchorTarget, relValue, theme, t, offset, visibilityFn, uiSettings
 }) => {
   const mobileTheme = getMobileTheme(theme);
   return createStaticToolbar({
@@ -17,12 +17,24 @@ const createMobileToolbar = ({
     t,
     name: 'MobileToolbar',
     theme: mobileTheme,
-    structure: getMobileButtons({ buttons, textPluginButtons, pluginButtons, helpers, pubsub, getEditorState, setEditorState, mobileTheme, t }),
+    structure: getMobileButtons({
+      buttons,
+      textPluginButtons,
+      pluginButtons,
+      helpers,
+      pubsub,
+      getEditorState,
+      setEditorState,
+      mobileTheme,
+      t,
+      uiSettings
+    }),
     anchorTarget,
     relValue,
     isMobile: true,
     offset,
-    visibilityFn
+    visibilityFn,
+    uiSettings
   });
 };
 
@@ -102,13 +114,24 @@ const getMobileTheme = theme => {
   };
 };
 
-const getMobileButtons = ({ buttons, textPluginButtons, pluginButtons, helpers, pubsub, getEditorState, setEditorState, mobileTheme, t }) => {
+const getMobileButtons = ({
+  buttons,
+  textPluginButtons,
+  pluginButtons,
+  helpers,
+  pubsub,
+  getEditorState,
+  setEditorState,
+  mobileTheme,
+  t,
+  uiSettings
+}) => {
   const addPluginIndex = buttons.findIndex(b => b === 'AddPlugin');
   if (addPluginIndex !== -1) {
     buttons.splice(addPluginIndex, 1);
   }
 
-  const structure = getTextButtonsFromList({ buttons, textPluginButtons, theme: mobileTheme, isMobile: true, t });
+  const structure = getTextButtonsFromList({ buttons, textPluginButtons, theme: mobileTheme, isMobile: true, t, uiSettings });
 
   if (addPluginIndex !== -1) {
     const addAddPluginButton = pluginButtons && pluginButtons.length;
