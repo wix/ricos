@@ -15,15 +15,34 @@
 
   <script src="http://localhost:8080/packages/common/dist/Common.js"></script>
   <script src="http://localhost:8080/packages/editor/dist/Editor.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js" crossorigin></script>
 </head>
 
 <body>
-  <div id="root">
-  </div>
-  <script type="text/babel">
-    ReactDOM.render(
-    <div>Hello world</div>, document.getElementById('root') );
-  </script>
+<div id="root"></div>
+<script type="text/babel">
+  class DemoExample extends React.Component {
+    state = {
+      editorState: WixRichContentEditor.EditorState.createEmpty(),
+    };
+
+    onChange = editorState => {
+      this.setState({
+        editorState,
+      });
+    };
+
+    render() {
+      return (
+        <WixRichContentEditor.RichContentEditor
+          onChange={this.onChange}
+          editorState={this.state.editorState}/>
+      );
+    }
+  }
+
+  ReactDOM.render(<DemoExample />, document.getElementById('root'));
+</script>
 </body>
 
 </html>
