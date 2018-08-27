@@ -25,14 +25,14 @@ const createEditorToolbars = config => {
   const defaultToolbarSettings = getDefaultToolbarSettings({ isMobile, pluginButtons, textButtons });
   const customSettings = getToolbarSettings({ isMobile, pluginButtons, textButtons });
 
-    const toolbarSettings = defaultToolbarSettings.reduce((mergedSettings, defaultSetting) => {
-    const customSettingsByName = customSettings.filter(s => s.name === defaultSetting.name);
-    if (customSettingsByName.length > 0) {
-      mergedSettings.push(merge(defaultSetting, customSettingsByName[0]));
-    } else {
-      mergedSettings.push(defaultSetting);
-    }
-    return mergedSettings;
+  const toolbarSettings = defaultToolbarSettings.reduce((mergedSettings, defaultSetting) => {
+  const customSettingsByName = customSettings.filter(s => s.name === defaultSetting.name);
+  if (customSettingsByName.length > 0) {
+    mergedSettings.push(merge(defaultSetting, customSettingsByName[0]));
+  } else {
+    mergedSettings.push(defaultSetting);
+  }
+  return mergedSettings;
   }, []);
 
   const toolbars = {};
