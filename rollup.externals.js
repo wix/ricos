@@ -8,12 +8,16 @@ export const externals = [
   'react',
   'react-dom',
   'wix-rich-content-common',
-  'react-i18next'
+  'react-i18next',
 ];
 
-export const excludedGlobals = [
+export const excludedExternals = [
+  /draft-js-plugins-editor/,
+  /draft-js-.*?-plugin/,
+  /react-click-outside/,
   '@wix/draft-js/lib/DraftOffsetKey',
   '@wix/draft-js/lib/isSoftNewlineEvent',
+  /wix-rich-content-common\/.*?\.scss/
 ];
 
 export const globals = {
@@ -21,12 +25,6 @@ export const globals = {
   classnames: 'classNames',
   'draft-js': 'Draft',
   'draft-js-code': 'CodeUtils',
-  'draft-js-drag-n-drop-plugin': 'createBlockDndPlugin',
-  'draft-js-emoji-plugin': 'createEmojiPlugin',
-  'draft-js-mention-plugin': 'createMentionPlugin',
-  'draft-js-mention-plugin/lib/modifiers/addMention': 'addMention',
-  'draft-js-focus-plugin': 'createFocusPlugin',
-  'draft-js-linkify-plugin': 'createLinkifyPlugin',
   lodash: '_',
   'lodash/camelCase': '_.camelCase',
   'lodash/cloneDeep': '_.cloneDeep',
@@ -61,11 +59,13 @@ export const globals = {
   'react-measure': 'Measure',
   'react-player': 'ReactPlayer',
   'react-sortable-hoc': 'reactSortableHoc',
-  'wix-rich-content-common': 'WixRichContentCommon',
+  'wix-rich-content-common': 'WixRichContentCommon'
 };
 
-export const excludedExternals = [
+export const excludedGlobals = [
+  'draft-js-plugins-editor',
+  /draft-js-.*?-plugin/,
+  'react-click-outside',
   '@wix/draft-js/lib/DraftOffsetKey',
   '@wix/draft-js/lib/isSoftNewlineEvent',
-  /wix-rich-content-common\/.*?\.scss/
 ];

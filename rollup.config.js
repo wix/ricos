@@ -95,7 +95,11 @@ if (process.env.MODULE_ANALYZE) {
   );
 }
 
-const external = id => !excludedExternals.find(regex => typeof regex === 'string' ? regex === id : regex.test(id)) &&
+const external = id =>
+  !id.startsWith('\0') &&
+  !id.startsWith('.') &&
+  !id.startsWith('/') &&
+  !excludedExternals.find(regex => typeof regex === 'string' ? regex === id : regex.test(id)) &&
   !!externals.find(externalName => new RegExp(externalName).test(id));
 
 let output = [
