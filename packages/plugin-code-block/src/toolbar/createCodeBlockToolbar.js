@@ -9,7 +9,7 @@ export default ({ setEditorState }) => ({
       component: TextCodeBlockButton,
       isMobile: true,
       position: {
-        mobile: 7
+        mobile: 7,
       },
       keyBindings: [{
         keyCommand: {
