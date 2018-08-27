@@ -61,7 +61,7 @@ export default class VideoURLInputModal extends Component {
     return (
       <div className={styles.container} data-hook="videoUploadModal">
           <div type="button" className={styles.closeIcon} aria-label="Close" onClick = {() => this.onCloseRequested()}>
-              <span aria-hidden="true">X</span>
+              <span aria-hidden="true"><b>X</b></span>
           </div>
         <div role="heading" aria-labelledby="video_modal_hdr" className={classNames(styles.header)}>
           <VideoCameraIcon className={classNames(styles.cameraIcon, styles.header_icon)} />

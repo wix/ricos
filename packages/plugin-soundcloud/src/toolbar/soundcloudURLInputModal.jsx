@@ -61,7 +61,7 @@ export default class SoundcloudURLInputModal extends Component {
     return (
       <div className={styles.container} data-hook="soundcloudUploadModal">
           <div type="button" className={styles.closeIcon} aria-label="Close" onClick = {() => this.onCloseRequested()}>
-              <span aria-hidden="true">X</span>
+              <span aria-hidden="true"><b>X</b></span>
           </div>
         <div role="heading" aria-labelledby="soundcloud_modal_hdr" className={classNames(styles.header)}>
           <SoundCloudIcon className={classNames(styles.header_icon)} />
