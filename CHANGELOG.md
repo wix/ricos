@@ -8,6 +8,22 @@
 > - :book:       [Documentation]
 
 ## [Unreleased]
+#### :boom: Breaking Change
+* `code-block`:
+  * `config.codeBlock.position` property is obsolete; use `config.getToolbarSettings` to override plugin text button settings
+
+#### :rocket: New Feature
+* `general`:
+  * RCE `config.uiSettings` API allows to customize the link option UI (e.g. 'Open link in a new tab', 'Add a nofollow tag'). Check [documentation](https://github.com/wix-incubator/rich-content/blob/develop/docs/UiSettings.md) for more details
+
+#### :bug: Bug Fix
+* `common`
+  * `Tooltip` performance: `rebuild` is called only if `shouldRebuildOnUpdate` returns true
+
+#### #### :book: Documentation
+* [UI Settings](https://github.com/wix-incubator/rich-content/blob/develop/docs/UiSettings.md) added
+
+<br/>
 
 ## 1.4.0 (Aug 22, 2018)
 
@@ -48,7 +64,7 @@
 
 #### :bug: Bug Fix
 * `general`
-  * Theme supports empty css classes 
+  * Theme supports empty css classes
 * `editor`
   * Firefox text editing
   * Close alignment dropdown when clicke d outside

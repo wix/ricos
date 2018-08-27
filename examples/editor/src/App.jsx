@@ -39,7 +39,7 @@ const anchorTarget = '_blink';
 const relValue = 'nofollow';
 
 const uiSettings = {
-  blankTargetToggleVisibilityFn: () => false,
+  blankTargetToggleVisibilityFn: () => true,
   nofollowRelToggleVisibilityFn: () => true
 };
 
