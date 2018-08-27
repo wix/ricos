@@ -32,8 +32,7 @@ export default ({ t, anchorTarget, relValue }) => {
       type: BUTTONS.FILES,
       onFilesSelected: (pubsub, files) => {
         if (files.length > 0) {
-          const handleFilesSelected = pubsub.store.get('handleFilesSelected');
-          handleFilesSelected(files);
+          pubsub.getBlockHandler('handleFilesSelected')(files);
         }
       },
       icon: MediaReplaceIcon,
