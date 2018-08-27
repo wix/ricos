@@ -2,7 +2,7 @@
 @import '~wix-rich-content-common/dist/statics/styles/palette';
 
 .container {
-    padding: 50px 60px 60px;
+    padding: 50px 50px 50px;
     @include phone {
         padding: 24px 18px 30px;
     }
@@ -31,18 +31,19 @@
 
 .header_text {
     font-size: 16px;
+    margin: 8px 0 8px 0;
 }
 
 .header_icon {
-    margin-right: 11px;
+    margin-right: 12px;
 }
 
 .soundcloudUrlInputModal_textInput {
-    margin: 18px 0 24px 0;
+    margin: 8px 0 24px 0;
 }
 
 .modal_footer {
     border: none !important;
     padding: 0 !important;
-    height: 36px !important;
+    height: 40px !important;
 }

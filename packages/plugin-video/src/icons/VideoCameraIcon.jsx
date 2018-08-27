@@ -5,8 +5,8 @@ const VideoCameraIcon = props => (
   <svg
     xmlnsXlink="http://www.w3.org/1999/xlink"
     width={17}
-    height={11}
-    viewBox="0 0 17 11"
+    height={12}
+    viewBox="0 0 17 12"
     {...props}
   >
     <defs>

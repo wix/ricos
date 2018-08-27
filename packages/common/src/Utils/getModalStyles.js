@@ -84,8 +84,9 @@ const desktopSideBarStyles = {
     borderRadius: 0,
     padding: 0,
     height: '100%',
+    maxHeight: '262px',
     width: '100%',
-    maxWidth: '420px',
+    maxWidth: '460px',
     direction: 'ltr',
     zIndex: 6
   }
@@ -99,7 +100,6 @@ const desktopModalOverrideStyles = {
     transform: 'translateY(-50%)',
     left: 0,
     right: 0,
-    height: 'auto',
     marginLeft: 'auto',
     marginRight: 'auto',
     direction: 'ltr'
