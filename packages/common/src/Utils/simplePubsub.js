@@ -22,29 +22,29 @@ export const simplePubsub = initialState => {
     set(key, newItem);
   };
 
-  const set = (...args) => {
-    const _setSingle = (key, item) => {
-      state = {
-        ...state,
-        [key]: item,
-      };
+  const _setSingle = (key, item) => {
+    state = {
+      ...state,
+      [key]: item,
+    };
+    if (listeners[key]) {
+      listeners[key].forEach(listener => listener(state[key]));
+    }
+  };
+
+  const _setBatch = updates => {
+    state = {
+      ...state,
+      ...updates,
+    };
+    Object.keys(updates).forEach(key => {
       if (listeners[key]) {
         listeners[key].forEach(listener => listener(state[key]));
       }
-    };
+    });
+  };
 
-    const _setBatch = updates => {
-      state = {
-        ...state,
-        ...updates,
-      };
-      Object.keys(updates).forEach(key => {
-        if (listeners[key]) {
-          listeners[key].forEach(listener => listener(state[key]));
-        }
-      });
-    };
-
+  const set = (...args) => {
     if (args.length === 1) {
       _setBatch(args[0]);
     } else if (args.length === 2) {
@@ -54,12 +54,19 @@ export const simplePubsub = initialState => {
     }
   };
 
+  const setBlockHandler = (key, blockKey, item) => _setSingle(blockHandlerKey(key, blockKey), item);
+
   const get = key => state[key];
+
+  const getBlockHandler = (key, blockKey = state.visibleBlock) => state[blockHandlerKey(key, blockKey)];
+
+  const blockHandlerKey = (key, blockKey) => `${blockKey}_${key}`;
 
   const store = {
     get,
     update,
     set,
+    setBlockHandler,
   };
 
   return {
@@ -67,7 +74,9 @@ export const simplePubsub = initialState => {
     unsubscribe,
     update,
     set,
+    setBlockHandler,
     get,
+    getBlockHandler,
     store,
   };
 };
