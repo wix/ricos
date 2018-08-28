@@ -77,7 +77,7 @@ All the toolbar types are exposed by the `TOOLBARS` const found in [`consts.js`]
 `getTextPluginButtons`: defines a map of inline buttons added by plugins. The keys are derived from the `PluginTextButtonMappers` -- see the `link-plugin`'s [`createLinkToolbar`](https://github.com/wix-incubator/rich-content/blob/develop/packages/plugin-link/src/toolbar/createLinkToolbar.js) for reference
 
 ## References and examples
-The [`default-toolbar-settings.js`](https://github.com/wix-incubator/rich-content/blob/develop/packages/editor/src/RichContentEditor/Toolbars/default-toolbar-settings.js) contains the default toolbar settings, and the `getToolbarSettings` code example could be found in [`App.jsx`](https://github.com/wix-incubator/rich-content/blob/develop/examples/editor/src/App.jsx) (commented by default).
+The [`default-toolbar-settings.js`](https://github.com/wix-incubator/rich-content/blob/develop/packages/editor/src/RichContentEditor/Toolbars/default-toolbar-settings.js) contains the default toolbar settings, and the `getToolbarSettings` code example could be found in [`PluginsConfig.js`](https://github.com/wix-incubator/rich-content/blob/develop/examples/editor/src/PluginsConfig.js) (commented by default).
 
 ## Notes
 The plugin toolbar customization is not available yet.
