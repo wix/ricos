@@ -3,6 +3,14 @@ import { getModalStyles, TOOLBARS } from 'wix-rich-content-common';
 import VideoURLInputModal from './videoURLInputModal';
 import { InsertPluginIcon } from '../icons';
 
+const modalCustomStyle = {
+  content:
+  {
+    maxWidth: '460px',
+    minHeight: '262px'
+  }
+};
+
 export default ({ helpers, t }) => {
   return [
     {
@@ -13,7 +21,7 @@ export default ({ helpers, t }) => {
       componentData: DEFAULTS,
       toolbars: [TOOLBARS.FOOTER, TOOLBARS.SIDE],
       modalElement: VideoURLInputModal,
-      modalStyles: getModalStyles({ fullScreen: false }),
+      modalStyles: getModalStyles({ customStyles: modalCustomStyle, fullScreen: false }),
       helpers,
     },
   ];

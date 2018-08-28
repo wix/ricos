@@ -40,6 +40,9 @@
 
 .soundcloudUrlInputModal_textInput {
     margin: 8px 0 24px 0;
+    input[type = 'url'] {
+        padding-right: 18px;
+    } 
 }
 
 .modal_footer {

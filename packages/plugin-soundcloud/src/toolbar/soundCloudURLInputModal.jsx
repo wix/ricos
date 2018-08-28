@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { SoundCloudIcon } from '../icons';
 import classNames from 'classnames';
-import { mergeStyles, isSoundcloudUrl, SettingsPanelFooter, TextInput } from 'wix-rich-content-common';
+import { mergeStyles, isSoundCloudUrl, SettingsPanelFooter, TextInput } from 'wix-rich-content-common';
 import styles from '../../statics/styles/soundcloud-url-input-modal.scss';
 
 export default class SoundCloudURLInputModal extends Component {
@@ -24,7 +24,7 @@ export default class SoundCloudURLInputModal extends Component {
 
   onConfirm = () => {
     const { url } = this.state;
-    if (url && isSoundcloudUrl(url)) {
+    if (url && isSoundCloudUrl(url)) {
       const { componentData, helpers, pubsub, onConfirm } = this.props;
       if (onConfirm) {
         onConfirm({ ...componentData, src: url });
@@ -78,9 +78,9 @@ export default class SoundCloudURLInputModal extends Component {
             onKeyPress={this.handleKeyPress}
             onChange={this.onUrlChange}
             value={url}
-            error={!isSoundcloudUrl(url) && submitted ? t('SoundCloudUploadModal_Input_InvalidUrl') : null}
+            error={!isSoundCloudUrl(url) && submitted ? t('SoundCloudUploadModal_Input_InvalidUrl') : null}
             placeholder={t('SoundCloudUploadModal_Input_Placeholder')}
-            theme={theme}
+            theme={styles}
             data-hook="soundcloudUploadModalInput"
           />
         </div>

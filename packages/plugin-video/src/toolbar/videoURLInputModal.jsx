@@ -80,7 +80,7 @@ export default class VideoURLInputModal extends Component {
             value={url}
             error={!isVideoUrl(url) && submitted ? t('VideoUploadModal_Input_InvalidUrl') : null}
             placeholder={t('VideoUploadModal_Input_Placeholder')}
-            theme={theme}
+            theme={styles}
             data-hook="videoUploadModalInput"
           />
         </div>

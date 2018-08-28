@@ -1,7 +1,15 @@
 import { DEFAULTS } from '../soundcloud';
 import { getModalStyles, TOOLBARS } from 'wix-rich-content-common';
-import soundcloudURLInputModal from './soundCloudURLInputModal';
+import SoundCloudURLInputModal from './soundCloudURLInputModal';
 import { InsertPluginIcon } from '../icons';
+
+const modalCustomStyle = {
+  content:
+  {
+    maxWidth: '460px',
+    minHeight: '262px'
+  }
+};
 
 export default ({ helpers, t }) => {
   return [
@@ -12,8 +20,8 @@ export default ({ helpers, t }) => {
       Icon: InsertPluginIcon,
       componentData: DEFAULTS,
       toolbars: [TOOLBARS.FOOTER, TOOLBARS.SIDE],
-      modalElement: soundcloudURLInputModal,
-      modalStyles: getModalStyles({ fullScreen: false }),
+      modalElement: SoundCloudURLInputModal,
+      modalStyles: getModalStyles({ customStyles: modalCustomStyle, fullScreen: false }),
       helpers,
     },
   ];

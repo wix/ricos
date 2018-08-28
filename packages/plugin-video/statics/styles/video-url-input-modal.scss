@@ -2,7 +2,7 @@
 @import '~wix-rich-content-common/dist/statics/styles/palette';
 
 .container {
-    padding: 43px 40px 50px;
+    padding: 50px 40px 50px;
     @include phone {
         padding: 24px 18px 30px;
     }
@@ -40,6 +40,9 @@
 
 .videoUrlInputModal_textInput {
     margin: 8px 0 24px 0;
+    input[type = 'url'] {
+        padding-right: 18px;
+    } 
 }
 
 .modal_footer {
