@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { findDOMNode } from 'react-dom';
 import { mergeStyles } from 'wix-rich-content-common';
-import SoundCloudViewer from './soundcloud-viewer';
-import styles from '../statics/styles/default-soundcloud-styles.scss';
-import { SOUNDCLOUD_TYPE } from './types';
+import SoundCloudViewer from './soundCloud-viewer';
+import styles from '../statics/styles/default-sound-cloud-styles.scss';
+import { SOUND_CLOUD_TYPE } from './types';
 
 const DEFAULTS = {
   config: {
@@ -16,10 +16,10 @@ const DEFAULTS = {
 
 const MAX_WAIT_TIME = 5000;
 
-class Soundcloud extends Component {
+class SoundCloud extends Component {
 
   static type = {
-    SOUNDCLOUD_TYPE
+    SOUND_CLOUD_TYPE
   };
 
   constructor(props) {
@@ -61,7 +61,7 @@ class Soundcloud extends Component {
     setTimeout(() => this.handleReady(), MAX_WAIT_TIME);
   };
 
-  handleSoundcloudStart = player => {
+  handleSoundCloudStart = player => {
     if (this.player !== player) {
       this.setState({
         isLoading: false,
@@ -80,8 +80,8 @@ class Soundcloud extends Component {
     const { isLoaded } = this.state;
     const overlayText = t('SoundCloudComponent_Overlay');
     return (
-      <div className={classNames(styles.soundcloud_overlay)}>
-        {isLoaded && <span className={styles.soundcloud_overlay_message}>{overlayText}</span>}
+      <div className={classNames(styles.soundcCoud_overlay)}>
+        {isLoaded && <span className={styles.soundCloud_overlay_message}>{overlayText}</span>}
       </div>);
   };
 
@@ -107,10 +107,10 @@ class Soundcloud extends Component {
     const { styles } = this;
     const { className, onClick, t } = this.props;
     const { isPlayable } = this.state;
-    const containerClassNames = classNames(styles.soundcloud_container, className || '');
+    const containerClassNames = classNames(styles.soundCloud_container, className || '');
     /* eslint-disable jsx-a11y/no-static-element-interactions */
     return (
-      <div data-hook="soundcloudPlayer" onClick={onClick} className={containerClassNames} onKeyDown={e => this.onKeyDown(e, onClick)}>
+      <div data-hook="soundCloudPlayer" onClick={onClick} className={containerClassNames} onKeyDown={e => this.onKeyDown(e, onClick)}>
         {!isPlayable && this.renderOverlay(styles, t)}
         {this.renderPlayer()}
       </div>
@@ -119,7 +119,7 @@ class Soundcloud extends Component {
   }
 }
 
-Soundcloud.propTypes = {
+SoundCloud.propTypes = {
   componentData: PropTypes.object.isRequired,
   componentState: PropTypes.object.isRequired,
   store: PropTypes.object.isRequired,
@@ -130,4 +130,4 @@ Soundcloud.propTypes = {
   t: PropTypes.func,
 };
 
-export { Soundcloud as Component, DEFAULTS };
+export { SoundCloud as Component, DEFAULTS };

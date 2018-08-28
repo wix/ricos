@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { SoundCloudIcon } from '../icons';
 import classNames from 'classnames';
 import { mergeStyles, isSoundCloudUrl, SettingsPanelFooter, TextInput } from 'wix-rich-content-common';
-import styles from '../../statics/styles/soundcloud-url-input-modal.scss';
+import styles from '../../statics/styles/sound-cloud-url-input-modal.scss';
 
 export default class SoundCloudURLInputModal extends Component {
   constructor(props) {
@@ -51,6 +51,9 @@ export default class SoundCloudURLInputModal extends Component {
     if (e.charCode === 13) {
       this.onConfirm();
     }
+    if (e.charCode === 27) {
+      this.onCloseRequested();
+    }
   };
 
   render() {
@@ -59,17 +62,24 @@ export default class SoundCloudURLInputModal extends Component {
     const { styles } = this;
 
     return (
-      <div className={styles.container} data-hook="soundcloudUploadModal">
-          <div type="button" className={styles.closeIcon} aria-label="Close" onClick = {() => this.onCloseRequested()}>
-              <span aria-hidden="true"><b>X</b></span>
-          </div>
-        <div role="heading" aria-labelledby="soundcloud_modal_hdr" className={classNames(styles.header)}>
+      <div className={styles.container} data-hook="soundCloudUploadModal">
+        <div
+          role="button"
+          tabIndex={0}
+          className={styles.closeIcon}
+          aria-label="Close"
+          onClick={() => this.onCloseRequested()}
+          onKeyPress={() => this.handleKeyPress}
+        >
+          <span aria-hidden="true"><b>X</b></span>
+        </div>
+        <div role="heading" aria-labelledby="sound_cloud_modal_hdr" className={classNames(styles.header)}>
           <SoundCloudIcon className={classNames(styles.header_icon)} />
-          <h3 id="soundcloud_modal_hdr" className={styles.header_text}>
+          <h3 id="sound_cloud_modal_hdr" className={styles.header_text}>
             {t('SoundCloudUploadModal_Header')}
           </h3>
         </div>
-        <div className={styles.soundcloudUrlInputModal_textInput}>
+        <div className={styles.soundCloudUrlInputModal_textInput}>
           <TextInput
             inputRef={ref => {
               this.input = ref;
@@ -81,7 +91,7 @@ export default class SoundCloudURLInputModal extends Component {
             error={!isSoundCloudUrl(url) && submitted ? t('SoundCloudUploadModal_Input_InvalidUrl') : null}
             placeholder={t('SoundCloudUploadModal_Input_Placeholder')}
             theme={styles}
-            data-hook="soundcloudUploadModalInput"
+            data-hook="soundCloudUploadModalInput"
           />
         </div>
         <SettingsPanelFooter

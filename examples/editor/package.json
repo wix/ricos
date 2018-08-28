@@ -34,7 +34,7 @@
     "wix-rich-content-plugin-mentions": "file:../../packages/plugin-mentions",
     "wix-rich-content-plugin-code-block": "file:../../packages/plugin-code-block",
     "wix-rich-content-plugin-video": "file:../../packages/plugin-video",
-    "wix-rich-content-plugin-soundcloud": "file:../../packages/plugin-soundcloud"
+    "wix-rich-content-plugin-sound-cloud": "file:../../packages/plugin-sound-cloud"
   },
   "scripts": {
     "start": "webpack-serve ./config/webpack.dev.js",

@@ -1,4 +1,4 @@
-import { DEFAULTS } from '../soundcloud';
+import { DEFAULTS } from '../soundCloud';
 import { getModalStyles, TOOLBARS } from 'wix-rich-content-common';
 import SoundCloudURLInputModal from './soundCloudURLInputModal';
 import { InsertPluginIcon } from '../icons';
@@ -15,7 +15,7 @@ export default ({ helpers, t }) => {
   return [
     {
       type: 'modal',
-      name: 'Soundcloud',
+      name: 'soundCloud',
       tooltipText: t('SoundCloudPlugin_InsertButton_Tooltip'),
       Icon: InsertPluginIcon,
       componentData: DEFAULTS,

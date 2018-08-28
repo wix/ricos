@@ -1,5 +1,5 @@
 @import '~wix-rich-content-common/dist/statics/styles/mixins';
-.soundcloud_player {
+.soundCloud_player {
   position: absolute;
   top: 0;
   left: 0;
@@ -9,7 +9,7 @@
   z-index: 0;
 }
 
-.soundcloud_container {
+.soundCloud_container {
   position: relative;
   overflow: hidden;
   min-width: 350px;

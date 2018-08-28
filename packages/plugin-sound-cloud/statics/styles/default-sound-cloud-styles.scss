@@ -1,6 +1,6 @@
 @import "~wix-rich-content-common/dist/statics/styles/palette";
-@import "soundcloud-viewer";
-.soundcloud_overlay {
+@import "sound-cloud-viewer";
+.soundCloud_overlay {
     position: absolute;
     top: 0;
     bottom: 0;
@@ -10,7 +10,7 @@
     background: rgba(0, 0, 0, 0.5);
 }
 
-.soundcloud_overlay_message {
+.soundCloud_overlay_message {
     position: absolute;
     top: 38%;
     left: 50%;
