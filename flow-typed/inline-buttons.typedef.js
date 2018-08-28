@@ -1,3 +1,4 @@
+/*::
 declare type InlineButton = {
   type: BUTTONS,
   keyName: string,
@@ -21,3 +22,4 @@ declare type InlineButton = {
 };
 
 declare type CreateInlineButtons = ({ t: Translate, styles: any, anchorTarget: string, relValue: string }) => Array<InlineButton>;
+*/

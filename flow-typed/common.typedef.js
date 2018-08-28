@@ -1,3 +1,4 @@
+/*::
 import type { Element } from 'react';
 
 declare type Helpers = {
@@ -61,3 +62,4 @@ declare type Pubsub = (initialState: any) => {|
   get: (key: string) => any,
   store: Store
 |};
+*/

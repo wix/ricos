@@ -1,3 +1,4 @@
+/*::
 declare type InsertButton = {
   type?: string,
   name: string,
@@ -13,3 +14,4 @@ declare type InsertButton = {
 
 declare type CreateInsertButtons = ({ helpers: Helpers, t: Translate }) =>
   Array<InsertButton>;
+*/

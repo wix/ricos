@@ -1,3 +1,4 @@
+/*::
 declare type ElementType = "inline" | "block";
 
 declare type PluginMapping = {
@@ -12,3 +13,4 @@ declare type PluginMapping = {
 };
 
 declare type PluginTypeMapper = () => { [type: string]: PluginMapping };
+*/

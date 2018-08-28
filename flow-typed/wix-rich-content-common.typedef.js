@@ -1,3 +1,4 @@
+/*::
 declare module 'wix-rich-content-common' {
   declare export function hasLinksInSelection(editorState: any): boolean;
   declare export function removeLinksInSelection(editorState: any): void;
@@ -14,3 +15,4 @@ declare module 'wix-rich-content-common' {
   declare export var SizeLargeIcon: Component;
   declare export var PluginSettingsIcon: Component;
 }
+*/

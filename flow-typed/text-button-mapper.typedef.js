@@ -1,3 +1,4 @@
+/*::
 declare type MODIFIER_KEYS = 'command' | 'shift' | 'ctrl' | 'option';
 
 declare type CommandHandler = (editorState : any) => any;
@@ -36,3 +37,4 @@ declare type TextButtonMappingParams = {
  declare type TextButtonMapper = (params: TextButtonMappingParams) => {
   TextButtonMapper: () => { [type: string]: TextButtonMapping }
 };
+*/

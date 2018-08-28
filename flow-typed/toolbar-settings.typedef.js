@@ -1,3 +1,4 @@
+/*::
 declare type ToolbarSettings = {
   name: TOOLBARS,
   shouldCreate: () => {
@@ -44,3 +45,4 @@ declare type TextButtons = {
 
 declare type GetToolbarSettings =
   ({ textButtons: TextButtons, pluginButtons: Array<any>, pluginTextButtons: Array<any> }) => Array<ToolbarSettings>;
+*/
