@@ -8,14 +8,17 @@
 > - :book:       [Documentation]
 
 ## [Unreleased]
-#### :bug: Bug Fix
-* `common`
-  * `Tooltip` performance: `rebuild` is called only if `shouldRebuildOnUpdate` returns true
-<br/>
-
 #### :boom: Breaking Change
 * `code-block`:
   * `config.codeBlock.position` property is obsolete; use `config.getToolbarSettings` to override plugin text button settings
+
+#### :bug: Bug Fix
+* `common`
+  * `Tooltip` performance: `rebuild` is called only if `shouldRebuildOnUpdate` returns true
+* `gallery` 
+  * [#120](https://github.com/wix-incubator/rich-content/pull/120) file handlers register with block key in order to target the correct plugin instance
+* `image` 
+  * [#120](https://github.com/wix-incubator/rich-content/pull/120) file handlers register with block key in order to target the correct plugin instance
 
 <br/>
 
