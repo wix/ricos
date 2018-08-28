@@ -35,7 +35,7 @@ const modalStyleDefaults = {
   },
 };
 
-const anchorTarget = '_blink';
+const anchorTarget = '_blank';
 const relValue = 'nofollow';
 
 const uiSettings = {

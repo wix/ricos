@@ -1,7 +1,7 @@
 # Toolbar Customization
 
 ## Motivation
-As it turns out, various `RichContentEditor` consumers have different customization needs. On other hand, it is important to keep the public API clean, while providing the desired customability. In order to meet these requirements, the `RichContentEditor` exposes `config` object prop.
+As it turns out, various `RichContentEditor` consumers have different customization needs. On the other hand, it is important to keep the public API clean, while providing the desired customability. In order to meet these requirements, the `RichContentEditor` exposes `config` object prop.
 
 This document focuses on a specific `config` API `uiSettings` that is responsible for  UI customization.
 
