@@ -25,7 +25,7 @@ class ManageMediaSection extends Component {
 
   handleFileChange = (event, itemPos) => {
     if (event.target.files.length > 0) {
-      const handleFilesSelected = this.props.store.get('handleFilesSelected');
+      const handleFilesSelected = this.props.store.getBlockHandler('handleFilesSelected');
       handleFilesSelected(event.target.files, itemPos);
     }
     event.target.value = ''; //reset the input
@@ -51,7 +51,7 @@ class ManageMediaSection extends Component {
           onItemsChange={this.applyItems}
           handleFileChange={this.handleFileChange}
           handleFileSelection={handleFileSelection && this.handleFileSelection}
-          handleFilesAdded={store.get('handleFilesAdded')}
+          handleFilesAdded={store.getBlockHandler('handleFilesAdded')}
           deleteBlock={store.get('deleteBlock')}
           t={t}
           relValue={relValue}
