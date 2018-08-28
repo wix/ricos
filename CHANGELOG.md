@@ -8,21 +8,22 @@
 > - :book:       [Documentation]
 
 ## [Unreleased]
-#### :boom: Breaking Change
-* `code-block`:
-  * `config.codeBlock.position` property is obsolete; use `config.getToolbarSettings` to override plugin text button settings
-* `general`:
-  * `config` plugin-specific section keys are standardized -- now the plugin types should be used as keys. Check [example](https://github.com/wix-incubator/rich-content/blob/develop/examples/editor/src/App.jsx) for reference
 
-#### :rocket: New Feature
+#### :boom: Breaking Change
 * `general`:
-  * RCE `config.uiSettings` API allows to customize the link option UI (e.g. 'Open link in a new tab', 'Add a nofollow tag'). Check [documentation](https://github.com/wix-incubator/rich-content/blob/develop/docs/UiSettings.md) for more details
+  * [#116](https://github.com/wix-incubator/rich-content/pull/116) `config` plugin-specific section keys are standardized -- now the plugin types should be used as keys. Check [example](https://github.com/wix-incubator/rich-content/blob/develop/examples/editor/src/PluginConfig.js) for reference
+* `code-block`:
+  * [#113](https://github.com/wix-incubator/rich-content/pull/113) `config.codeBlock.position` property is obsolete; use `config.getToolbarSettings` to override plugin text button settings
 
 #### :bug: Bug Fix
 * `common`
-  * `Tooltip` performance: `rebuild` is called only if `shouldRebuildOnUpdate` returns true
+  * [#115](https://github.com/wix-incubator/rich-content/pull/1153) `Tooltip` performance: `rebuild` is called only if `shouldRebuildOnUpdate` returns true
+* `gallery` 
+  * [#120](https://github.com/wix-incubator/rich-content/pull/120) file handlers register with block key in order to target the correct plugin instance
+* `image` 
+  * [#120](https://github.com/wix-incubator/rich-content/pull/120) file handlers register with block key in order to target the correct plugin instance
 
-#### #### :book: Documentation
+#### :book: Documentation
 * [UI Settings](https://github.com/wix-incubator/rich-content/blob/develop/docs/UiSettings.md) added
 
 <br/>

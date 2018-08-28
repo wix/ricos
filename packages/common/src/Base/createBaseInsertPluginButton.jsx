@@ -75,7 +75,7 @@ export default ({ blockType, button, helpers, pubsub, t }) => {
     handleExternalFileChanged = data => {
       if (data) {
         this.addBlock(button.componentData || {});
-        setTimeout(() => pubsub.get('handleFilesAdded')(data));
+        setTimeout(() => pubsub.getBlockHandler('handleFilesAdded')(data));
       }
     }
 

@@ -37,9 +37,14 @@ class ImageSettings extends Component {
   }
 
   propsToState(props) {
+    let selectedIndex = -1;
+    if (this.isReplacing) {
+      selectedIndex = this.state.selectedIndex;
+    } else {
+      selectedIndex = findIndex(props.images, i => props.selectedImage.url === i.url);
+    }
     return {
-      selectedIndex: props.selectedImage ?
-        findIndex(props.images, i => props.selectedImage.url === i.url) : -1,
+      selectedIndex,
       images: props.images
     };
   }
@@ -70,6 +75,7 @@ class ImageSettings extends Component {
   replaceItem = event => {
     const { handleFileChange } = this.props;
     const itemIdx = this.state.selectedIndex;
+    this.isReplacing = true;
     handleFileChange(event, itemIdx);
   }
 
@@ -136,6 +142,11 @@ class ImageSettings extends Component {
     this.setState({ images: this.state.images });
   };
 
+  setSelectedIndex = selectedIndex => {
+    this.isReplacing = false;
+    this.setState({ selectedIndex });
+  }
+
   render() {
     const styles = this.styles;
     const { handleFileSelection, onCancel, theme, isMobile, t, anchorTarget, relValue, uiSettings } = this.props;
@@ -177,12 +188,12 @@ class ImageSettings extends Component {
                 <button
                   className={classNames(styles.galleryImageSettings_previous,
                     { [styles.galleryImageSettings_hidden]: this.state.selectedIndex === 0 })} aria-label="previous image"
-                  data-hook="galleryImageSettingsPrevious" onClick={() => this.setState({ selectedIndex: this.state.selectedIndex - 1 })}
+                  data-hook="galleryImageSettingsPrevious" onClick={() => this.setSelectedIndex(this.state.selectedIndex - 1)}
                 />
                 <button
                   className={classNames(styles.galleryImageSettings_next,
                     { [styles.galleryImageSettings_hidden]: this.state.selectedIndex === images.length - 1 })} aria-label="next image"
-                  data-hook="galleryImageSettingsNext" onClick={() => this.setState({ selectedIndex: this.state.selectedIndex + 1 })}
+                  data-hook="galleryImageSettingsNext" onClick={() => this.setSelectedIndex(this.state.selectedIndex + 1)}
                 />
               </div>
             </SettingsSection>
