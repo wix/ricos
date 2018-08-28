@@ -8,10 +8,17 @@
 > - :book:       [Documentation]
 
 ## [Unreleased]
+#### :boom: Breaking Change
+* `code-block`:
+  * `config.codeBlock.position` property is obsolete; use `config.getToolbarSettings` to override plugin text button settings
 
 #### :rocket: New Feature
 * `general`
   * `flow` types defined for major plugin-related APIs. Check [documentation](https://github.com/wix-incubator/rich-content/blob/develop/docs/FlowTypes.md) for more details
+
+#### :bug: Bug Fix
+* `common`
+  * `Tooltip` performance: `rebuild` is called only if `shouldRebuildOnUpdate` returns true
 
 #### :book: Documentation
 * [Toolbar Customization](https://github.com/wix-incubator/rich-content/blob/develop/docs/ToolbarCustomization.md) updated

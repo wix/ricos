@@ -1,15 +1,8 @@
 import CodeUtils from 'draft-js-code';
-import merge from 'lodash/merge';
 import { createBasePlugin } from 'wix-rich-content-common';
 import { CODE_BLOCK_TYPE } from './types';
 import PrismDecorator from './PrismDecorator';
 import { codeBlockTextButtonMapper } from './toolbar/codeBlockTextButtonMapper';
-
-const defaultSettings = {
-  position: {
-    mobile: 7,
-  },
-};
 
 const createUnderlyingPlugin = ({ theme }) => ({
   keyBindingFn: (event, { getEditorState }) => {
@@ -72,9 +65,7 @@ const createCodeBlockPlugin = (config = {}) => {
     relValue,
     getEditorState,
     setEditorState,
-    codeBlock: userSettings = {},
   } = config;
-  const settings = merge(defaultSettings, userSettings);
   const plugin = createUnderlyingPlugin({ theme });
   const toolbar = codeBlockTextButtonMapper({
     helpers,
@@ -85,7 +76,6 @@ const createCodeBlockPlugin = (config = {}) => {
     relValue,
     getEditorState,
     setEditorState,
-    settings,
   });
 
   return createBasePlugin(

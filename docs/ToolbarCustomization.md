@@ -6,7 +6,7 @@ As it turns out, various `RichContentEditor` consumers have different customizat
 This document focuses on a specific `config` API `getToolbarSettings` that is responsible for the toolbar customization.
 ## `getToolbarSettings` API
 ### Signature
-The `getToolbarSettings` is defined as follows: `{ textButtons: Array<any>, pluginButtons: Array<any> } => Array<ToolbarSettings>`.
+The `getToolbarSettings` is defined as follows: `{ textButtons: { desktop: Array<string>, mobile: Array<string> }, pluginButtons: Array<any>, pluginTextButtons: Array<any> } => Array<Setting>`.
 
 The `ToolbarSettings` type is defined as follows:
 ```
@@ -74,10 +74,10 @@ All the toolbar types are exposed by the `TOOLBARS` const found in [`consts.js`]
 
 `getButtons` : defines a list of the toolbar button components (for plugin insertion toolbars), or a list of inline button names (for text editing toolbars)
 
-`getTextPluginButtons`: defines a map of inline buttons added by plugins. The keys are derived from the `PluginTextButtonMappers` -- see the `link-plugin`'s [`createLinkToolbar`](https://github.com/wix-incubator/rich-content/blob/develop/packages/plugin-link/src/toolbar/createLinkToolbar.js) for reference
+`getTextPluginButtons`: defines a map of inline buttons added by plugins. The keys are derived from the `PluginTextButtonMappers` -- see the `link-plugin`'s [linkTextButtonMapper](https://github.com/wix-incubator/rich-content/blob/develop/packages/plugin-link/src/toolbar/linkTextButtonMapper.js) for reference
 
 ## References and examples
-The [`default-toolbar-settings.js`](https://github.com/wix-incubator/rich-content/blob/develop/packages/editor/src/RichContentEditor/Toolbars/default-toolbar-settings.js) contains the default toolbar settings, and the `getToolbarSettings` code example could be found in [`App.jsx`](https://github.com/wix-incubator/rich-content/blob/develop/examples/editor/src/App.jsx) (commented by default). If you're using `flow` typing system, you can benefit from type definition `GetToolbarSettings` found in [`toolbar-settings.typedef.js`](`https://github.com/wix-incubator/rich-content/blob/develop/flow-typed/toolbar-settings.typedef.js`), to validate your function.
+The [default-toolbar-settings.js](https://github.com/wix-incubator/rich-content/blob/develop/packages/editor/src/RichContentEditor/Toolbars/default-toolbar-settings.js) contains the default toolbar settings, and the `getToolbarSettings` code example could be found in [App.jsx](https://github.com/wix-incubator/rich-content/blob/develop/examples/editor/src/App.jsx) (commented by default). If you're using `flow` typing system, you can benefit from type definition `GetToolbarSettings` found in [toolbar-settings.typedef.js](`https://github.com/wix-incubator/rich-content/blob/develop/flow-typed/toolbar-settings.typedef.js`), to validate your function.
 
 ## Notes
 The plugin toolbar customization is not available yet.

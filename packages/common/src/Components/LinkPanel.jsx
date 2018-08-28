@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import isUndefined from 'lodash/isUndefined';
 import isEqual from 'lodash/isEqual';
+
 import { mergeStyles } from '../Utils/mergeStyles';
 import { isValidUrl } from '../Utils/urlValidators';
 import Tooltip from './Tooltip';
@@ -132,7 +133,14 @@ class LinkPanel extends Component {
             data-hook="linkPanelInput" onChange={this.handleIntermediateUrlChange} onBlur={this.validateUrl} value={this.state.intermediateUrl}
           />
           {!this.state.isValidUrl && (
-            <Tooltip data-hook="linkPanelTooltip" content={this.errorTooltipText} theme={theme} moveBy={{ y: 0 }} type={'error'}>
+            <Tooltip
+              shouldRebuildOnUpdate={() => !this.state.isValidUrl}
+              data-hook="linkPanelTooltip"
+              content={this.errorTooltipText}
+              theme={theme}
+              moveBy={{ y: 0 }}
+              type={'error'}
+            >
               <ErrorIcon data-hook="linkPanelError" className={styles.linkPanel_errorIcon} />
             </Tooltip>
           )}
