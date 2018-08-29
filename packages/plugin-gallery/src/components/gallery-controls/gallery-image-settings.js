@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import isEmpty from 'lodash/isEmpty';
-import findIndex from 'lodash/findIndex';
-import pick from 'lodash/pick';
 import { getScaleToFillImageURL } from 'image-client-api/dist/imageClientSDK';
 import {
   mergeStyles,
@@ -25,7 +23,6 @@ class ImageSettings extends Component {
   constructor(props) {
     super(props);
     this.styles = mergeStyles({ styles, theme: props.theme });
-    this.state = this.propsToState(this.props);
     const { t } = props;
     this.updateLabel = t('GalleryImageSettings_Update');
     this.headerLabel = t('GalleryImageSettings_Header');
@@ -36,115 +33,90 @@ class ImageSettings extends Component {
     this.linkLabel = t('GalleryImageSettings_Link_Label');
   }
 
-  propsToState(props) {
-    return {
-      selectedIndex: props.selectedImage ?
-        findIndex(props.images, i => props.selectedImage.url === i.url) : -1,
-      images: props.images
-    };
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (this.props !== nextProps) {
-      this.setState(this.propsToState(nextProps));
-    }
-  }
-
   componentDidMount() {
     this.initialImageState = this.props.images.map(i => ({ ...i }));
   }
 
-  deleteImage(selectedImage) {
-    const images = this.state.images.filter(i => i.itemId !== selectedImage.itemId);
-    this.setState({
-      images,
-      selectedIndex: Math.min(this.state.selectedIndex, images.length - 1)
-    });
+  deleteImage() {
+    this.props.onDeleteImage();
   }
-
-  imageMetadataUpdated = (image, value) => {
-    image.metadata = Object.assign({}, image.metadata, value);
-    this.setState({ images: this.state.images });
-  };
 
   replaceItem = event => {
     const { handleFileChange } = this.props;
-    const itemIdx = this.state.selectedIndex;
-    handleFileChange(event, itemIdx);
+    handleFileChange(event);
   }
 
   onDoneClick = () => {
-    const { onSave } = this.props;
-    const images = this.state.images.reduce(
-      (resultImages, image) => {
-        if (image.metadata && image.metadata.link && image.metadata.link.url) {
-          resultImages.push({ ...image,
-            metadata: {
-              ...image.metadata,
-              link: pick(image.metadata.link, 'url', 'rel', 'target')
-            }
-          });
-        } else {
-          resultImages.push({ ...image, metadata: { ...image.metadata, link: null } });
-        }
-        return resultImages;
-      }, []);
-    onSave(images);
+    this.props.onSave();
   }
 
   getImageUrl = image => getScaleToFillImageURL(('media/' + image.url), image.metadata.width, image.metadata.height, 420, 240);
 
   onImageIntermediateUrlChange = intermediateUrl => {
-    const selectedImage = this.state.images[this.state.selectedIndex];
-    selectedImage.metadata = selectedImage.metadata || {};
-    selectedImage.metadata.link = selectedImage.metadata.link || {};
-    selectedImage.metadata.link.intermediateUrl = intermediateUrl;
-    this.setState({ images: this.state.images });
+    const { onUpdateImage, selectedImage } = this.props;
+    const metadata = selectedImage.metadata || {};
+    metadata.link = selectedImage.metadata.link || {};
+    metadata.link.intermediateUrl = intermediateUrl;
+    onUpdateImage(metadata);
   };
 
   onImageUrlChange = () => {
-    const selectedImage = this.state.images[this.state.selectedIndex];
-    selectedImage.metadata = selectedImage.metadata || {};
-    selectedImage.metadata.link = selectedImage.metadata.link || {};
-    selectedImage.metadata.link.url = selectedImage.metadata.link.intermediateUrl;
-    this.setState({ images: this.state.images });
+    const { onUpdateImage, selectedImage } = this.props;
+    const metadata = selectedImage.metadata || {};
+    metadata.link = selectedImage.metadata.link || {};
+    metadata.link.url = selectedImage.metadata.link.intermediateUrl;
+    onUpdateImage(metadata);
   };
 
   onImageTargetChange = isBlank => {
-    const selectedImage = this.state.images[this.state.selectedIndex];
-    selectedImage.metadata = selectedImage.metadata || {};
-    selectedImage.metadata.link = selectedImage.metadata.link || {};
-    selectedImage.metadata.link.target = isBlank ? '_blank' :
+    const { onUpdateImage, selectedImage } = this.props;
+    const metadata = selectedImage.metadata || {};
+    metadata.link = selectedImage.metadata.link || {};
+    metadata.link.target = isBlank ? '_blank' :
       this.props.anchorTarget ? this.props.anchorTarget : '_self';
-    this.setState({ images: this.state.images });
+    onUpdateImage(metadata);
   };
 
   onImageRelChange = isNofollow => {
-    const selectedImage = this.state.images[this.state.selectedIndex];
-    selectedImage.metadata = selectedImage.metadata || {};
-    selectedImage.metadata.link = selectedImage.metadata.link || {};
-    selectedImage.metadata.link.rel = isNofollow ? 'nofollow' :
+    const { onUpdateImage, selectedImage } = this.props;
+    const metadata = selectedImage.metadata || {};
+    metadata.link = selectedImage.metadata.link || {};
+    metadata.link.rel = isNofollow ? 'nofollow' :
       this.props.relValue ? this.props.relValue : 'noopener';
-    this.setState({ images: this.state.images });
+    onUpdateImage(metadata);
   };
 
   onValidateUrl = isValid => {
-    const selectedImage = this.state.images[this.state.selectedIndex];
-    selectedImage.metadata = selectedImage.metadata || {};
-    selectedImage.metadata.link = selectedImage.metadata.link || {};
-    selectedImage.metadata.link.isValidUrl = isValid;
-    this.setState({ images: this.state.images });
+    const { onUpdateImage, selectedImage } = this.props;
+    const metadata = selectedImage.metadata || {};
+    metadata.link = selectedImage.metadata.link || {};
+    metadata.link.isValidUrl = isValid;
+    onUpdateImage(metadata);
   };
 
   render() {
     const styles = this.styles;
-    const { handleFileSelection, onCancel, theme, isMobile, t, anchorTarget, relValue } = this.props;
-    const { images } = this.state;
-    const selectedImage = images[this.state.selectedIndex];
+    const {
+      selectedImage,
+      handleFileSelection,
+      onCancel,
+      onSave,
+      theme,
+      isMobile,
+      t,
+      anchorTarget,
+      relValue,
+      onNextImage,
+      onPreviousImage,
+      onDeleteImage,
+      onUpdateImage,
+    } = this.props;
+
     const { url, target, rel, intermediateUrl } = (!isEmpty(selectedImage.metadata.link) ? selectedImage.metadata.link : {});
     const targetBlank = target === '_blank' || isUndefined(target);
     const nofollow = rel === 'nofollow';
 
+    // TODO: hide nav buttons on first/last image
     /* eslint-disable jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/click-events-have-key-events */
     return (
       <FocusManager className={styles.galleryImageSettings}>
@@ -152,8 +124,8 @@ class ImageSettings extends Component {
           {isMobile ?
             <GallerySettingsMobileHeader
               theme={theme}
-              cancel={() => onCancel(this.initialImageState)}
-              save={() => this.onDoneClick(selectedImage)}
+              cancel={() => onCancel()}
+              save={() => onSave()}
               saveName={this.updateLabel}
               t={t}
             /> :
@@ -176,13 +148,13 @@ class ImageSettings extends Component {
               <div className={classNames(styles.galleryImageSettings_nav, { [styles.galleryImageSettings_nav_mobile]: isMobile })}>
                 <button
                   className={classNames(styles.galleryImageSettings_previous,
-                    { [styles.galleryImageSettings_hidden]: this.state.selectedIndex === 0 })} aria-label="previous image"
-                  data-hook="galleryImageSettingsPrevious" onClick={() => this.setState({ selectedIndex: this.state.selectedIndex - 1 })}
+                    { [styles.galleryImageSettings_hidden]: true })} aria-label="previous image"
+                  data-hook="galleryImageSettingsPrevious" onClick={() => onPreviousImage()}
                 />
                 <button
                   className={classNames(styles.galleryImageSettings_next,
-                    { [styles.galleryImageSettings_hidden]: this.state.selectedIndex === images.length - 1 })} aria-label="next image"
-                  data-hook="galleryImageSettingsNext" onClick={() => this.setState({ selectedIndex: this.state.selectedIndex + 1 })}
+                    { [styles.galleryImageSettings_hidden]: true })} aria-label="next image"
+                  data-hook="galleryImageSettingsNext" onClick={() => onNextImage()}
                 />
               </div>
             </SettingsSection>
@@ -195,7 +167,7 @@ class ImageSettings extends Component {
               </FileInput>
               <button
                 className={styles.galleryImageSettings_delete} aria-label="delete image"
-                data-hook="galleryImageSettingsDeleteImage" onClick={() => this.deleteImage(selectedImage)}
+                data-hook="galleryImageSettingsDeleteImage" onClick={() => onDeleteImage()}
               >
                 <span className={styles.galleryImageSettings_delete_text}>{this.deleteLabel}</span>
               </button>
@@ -210,7 +182,7 @@ class ImageSettings extends Component {
                 label={this.titleLabel}
                 placeholder={this.titleInputPlaceholder}
                 value={selectedImage.metadata.title || ''}
-                dataHook="galleryImageTitleInput" onChange={event => this.imageMetadataUpdated(selectedImage, { title: event.target.value })}
+                dataHook="galleryImageTitleInput" onChange={event => onUpdateImage({ title: event.target.value })}
               />
             </SettingsSection>
             <SettingsSection
@@ -248,6 +220,10 @@ ImageSettings.propTypes = {
   images: PropTypes.arrayOf(PropTypes.object).isRequired,
   onCancel: PropTypes.func.isRequired,
   onSave: PropTypes.func.isRequired,
+  onDeleteImage: PropTypes.func.isRequired,
+  onUpdateImage: PropTypes.func.isRequired,
+  onNextImage: PropTypes.func.isRequired,
+  onPreviousImage: PropTypes.func.isRequired,
   theme: PropTypes.object.isRequired,
   handleFileSelection: PropTypes.func,
   handleFileChange: PropTypes.func,

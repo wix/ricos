@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { SortableContainer as sortableContainer, SortableElement as sortableElement, arrayMove } from 'react-sortable-hoc';
 import classNames from 'classnames';
 import findIndex from 'lodash/findIndex';
+import pick from 'lodash/pick';
 import { getScaleToFillImageURL } from 'image-client-api/dist/imageClientSDK';
 
 import Styles from '../../../statics/styles/gallery-items-sortable.scss';
@@ -376,7 +377,21 @@ export class SortableComponent extends Component {
   }
 
   saveImageSettings(items) {
-    this.props.onItemsChange(items);
+    const processedItems = items.reduce(
+      (resultImages, image) => {
+        if (image.metadata && image.metadata.link && image.metadata.link.url) {
+          resultImages.push({ ...image,
+            metadata: {
+              ...image.metadata,
+              link: pick(image.metadata.link, 'url', 'rel', 'target')
+            }
+          });
+        } else {
+          resultImages.push({ ...image, metadata: { ...image.metadata, link: null } });
+        }
+        return resultImages;
+      }, []);
+    this.props.onItemsChange(processedItems);
     this.toggleImageSettings(false);
   }
 
@@ -386,6 +401,22 @@ export class SortableComponent extends Component {
     const index = editedImage ? findIndex(items, i => editedImage.url === i.url) : undefined;
     handleFileSelection(index, multiple, handleFilesAdded, deleteBlock);
   }
+
+  onNextImage = () => {
+
+  };
+
+  onPreviousImage = () => {
+
+  };
+
+  onUpdateImage = data => {
+    return data;
+  };
+
+  onDeleteImage = () => {
+    this.deleteSelectedItems();
+  };
 
   render() {
     const { handleFileSelection: shouldHandleFileSelection, theme, t, relValue, anchorTarget } = this.props;
@@ -425,10 +456,13 @@ export class SortableComponent extends Component {
         <div>
           <ImageSettings
             theme={theme}
-            images={this.state.items}
             selectedImage={this.state.editedImage}
             onCancel={items => this.saveImageSettings(items)}
             onSave={items => this.saveImageSettings(items)}
+            onNextImage={() => this.onNextImage()}
+            onPreviousImage={() => this.onPreviousImage()}
+            onDeleteImage={() => this.onDeleteImage()}
+            onUpdateImage={data => this.onUpdateImage(data)}
             handleFileSelection={shouldHandleFileSelection ? this.handleFileSelection : null}
             handleFileChange={this.props.handleFileChange}
             t={t}
