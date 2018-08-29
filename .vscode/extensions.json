@@ -1,0 +1,7 @@
+{
+  "recommendations": [
+    "mgmcdermott.vscode-language-babel",
+    "flowtype.flow-for-vscode",
+    "gcazaciuc.vscode-flow-ide"
+  ]
+}
