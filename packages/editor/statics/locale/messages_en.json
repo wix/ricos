@@ -40,6 +40,7 @@
   "VideoUploadModal_Header" : "Add a video from YouTube, Vimeo or Facebook",
   "VideoUploadModal_Input_Placeholder" : "e.g., https://youtu.be/6sx-xGiFIjk",
   "VideoUploadModal_Input_InvalidUrl" : "Invalid URL",
+  "VideoComponent_Overlay" : "To play this video, view this post from your live site.",
   "SoundCloudPlugin_InsertButton_Tooltip" : "Add a SoundCloud",
   "SoundCloudUploadModal_Header" : "Add a SoundCloud track",
   "SoundCloudUploadModal_Input_Placeholder" : "e.g., https://soundcloud.com/wix_music",

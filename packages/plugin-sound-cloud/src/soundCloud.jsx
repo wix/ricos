@@ -80,7 +80,7 @@ class SoundCloud extends Component {
     const { isLoaded } = this.state;
     const overlayText = t('SoundCloudComponent_Overlay');
     return (
-      <div className={classNames(styles.soundcCoud_overlay)}>
+      <div className={classNames(styles.soundCloud_overlay)}>
         {isLoaded && <span className={styles.soundCloud_overlay_message}>{overlayText}</span>}
       </div>);
   };
