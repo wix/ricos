@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { SoundCloudIcon } from '../icons';
 import classNames from 'classnames';
-import { mergeStyles, isSoundCloudUrl, SettingsPanelFooter, TextInput } from 'wix-rich-content-common';
+import { mergeStyles, isSoundCloudUrl, SettingsPanelFooter, TextInput, CloseIcon } from 'wix-rich-content-common';
 import styles from '../../statics/styles/sound-cloud-url-input-modal.scss';
 
 export default class SoundCloudURLInputModal extends Component {
@@ -63,16 +63,7 @@ export default class SoundCloudURLInputModal extends Component {
 
     return (
       <div className={styles.container} data-hook="soundCloudUploadModal">
-        <div
-          role="button"
-          tabIndex={0}
-          className={styles.closeIcon}
-          aria-label="Close"
-          onClick={() => this.onCloseRequested()}
-          onKeyPress={() => this.handleKeyPress}
-        >
-          <span aria-hidden="true"><b>X</b></span>
-        </div>
+        <CloseIcon className={classNames(styles.closeIcon)} onClick={() => this.onCloseRequested()} />
         <div role="heading" aria-labelledby="sound_cloud_modal_hdr" className={classNames(styles.header)}>
           <SoundCloudIcon className={classNames(styles.header_icon)} />
           <h3 id="sound_cloud_modal_hdr" className={styles.header_text}>
@@ -100,7 +91,7 @@ export default class SoundCloudURLInputModal extends Component {
           cancel={() => this.onCloseRequested()}
           saveLabel={doneLabel}
           cancelLabel={cancelLabel}
-          theme={theme}
+          theme={styles}
           t={t}
         />
       </div>

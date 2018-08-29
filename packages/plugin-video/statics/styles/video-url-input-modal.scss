@@ -2,7 +2,7 @@
 @import '~wix-rich-content-common/dist/statics/styles/palette';
 
 .container {
-    padding: 50px 40px 50px;
+    padding: 51px 60px 60px;
     @include phone {
         padding: 24px 18px 30px;
     }
@@ -10,9 +10,8 @@
 
 .closeIcon {
     position: absolute;
-    right: 20px;
-    top: 20px;
-    width: 18px;
+    right: 30px;
+    top: 30px;
     cursor: pointer;
 }
 
@@ -49,4 +48,13 @@
     border: none !important;
     padding: 0 !important;
     height: 40px !important;
+}
+
+button {
+    border-style: none;
+}
+
+button.settingsPanel_cancel {
+    background: #fff !important;
+    color: #4990e2 !important;
 }
