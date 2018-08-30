@@ -33,21 +33,12 @@ class ImageSettings extends Component {
     this.linkLabel = t('GalleryImageSettings_Link_Label');
   }
 
-  componentDidMount() {
-    this.initialImageState = this.props.images.map(i => ({ ...i }));
-  }
-
   deleteImage() {
     this.props.onDeleteImage();
   }
 
   replaceItem = event => {
-    const { handleFileChange } = this.props;
-    handleFileChange(event);
-  }
-
-  onDoneClick = () => {
-    this.props.onSave();
+    this.props.handleFileChange(event);
   }
 
   getImageUrl = image => getScaleToFillImageURL(('media/' + image.url), image.metadata.width, image.metadata.height, 420, 240);
@@ -110,9 +101,11 @@ class ImageSettings extends Component {
       onPreviousImage,
       onDeleteImage,
       onUpdateImage,
+      visibleLeftArrow,
+      visibleRightArrow,
     } = this.props;
 
-    const { url, target, rel, intermediateUrl } = (!isEmpty(selectedImage.metadata.link) ? selectedImage.metadata.link : {});
+    const { url, target, rel, intermediateUrl } = selectedImage && !isEmpty(selectedImage.metadata.link) ? selectedImage.metadata.link : {};
     const targetBlank = target === '_blank' || isUndefined(target);
     const nofollow = rel === 'nofollow';
 
@@ -124,14 +117,14 @@ class ImageSettings extends Component {
           {isMobile ?
             <GallerySettingsMobileHeader
               theme={theme}
-              cancel={() => onCancel()}
-              save={() => onSave()}
+              cancel={onCancel}
+              save={onSave}
               saveName={this.updateLabel}
               t={t}
             /> :
             <h3
               className={classNames(styles.galleryImageSettings_backButton, styles.galleryImageSettings_title)}
-              data-hook="galleryImageSettingsHeader" onClick={() => onCancel(this.initialImageState)}
+              data-hook="galleryImageSettingsHeader" onClick={onCancel}
             >
               <BackIcon className={styles.galleryImageSettings_backIcon} />{this.headerLabel}
             </h3>
@@ -140,71 +133,74 @@ class ImageSettings extends Component {
             className={classNames(styles.galleryImageSettings_scrollContainer,
               { [styles.galleryImageSettings_scrollContainer_mobile]: isMobile })}
           >
-            <SettingsSection theme={theme} ariaProps={{ 'aria-label': 'image navigation', role: 'region' }}>
-              <Image
-                alt={selectedImage.metadata.title || 'gallery image preview'} resizeMode={'contain'}
-                className={styles.galleryImageSettings_image} src={this.getImageUrl(selectedImage)} theme={theme}
-              />
-              <div className={classNames(styles.galleryImageSettings_nav, { [styles.galleryImageSettings_nav_mobile]: isMobile })}>
-                <button
-                  className={classNames(styles.galleryImageSettings_previous,
-                    { [styles.galleryImageSettings_hidden]: true })} aria-label="previous image"
-                  data-hook="galleryImageSettingsPrevious" onClick={() => onPreviousImage()}
+            {selectedImage &&
+            <div>
+              <SettingsSection theme={theme} ariaProps={{ 'aria-label': 'image navigation', role: 'region' }}>
+                <Image
+                  alt={selectedImage.metadata.title || 'gallery image preview'} resizeMode={'contain'}
+                  className={styles.galleryImageSettings_image} src={this.getImageUrl(selectedImage)} theme={theme}
                 />
+                <div className={classNames(styles.galleryImageSettings_nav, { [styles.galleryImageSettings_nav_mobile]: isMobile })}>
+                  <button
+                    className={classNames(styles.galleryImageSettings_previous,
+                      { [styles.galleryImageSettings_hidden]: !visibleLeftArrow })} aria-label="previous image"
+                    data-hook="galleryImageSettingsPrevious" onClick={onPreviousImage}
+                  />
+                  <button
+                    className={classNames(styles.galleryImageSettings_next,
+                      { [styles.galleryImageSettings_hidden]: !visibleRightArrow })} aria-label="next image"
+                    data-hook="galleryImageSettingsNext" onClick={onNextImage}
+                  />
+                </div>
+              </SettingsSection>
+              <div className={styles.galleryImageSettings_manageImageGrid}>
+                <FileInput
+                  className={styles.galleryImageSettings_replace} handleFileSelection={handleFileSelection}
+                  dataHook="galleryImageSettingsFileInput" onChange={this.replaceItem} theme={theme} title={this.ReplaceLabel}
+                >
+                  <span className={styles.galleryImageSettings_replace_text}>{this.ReplaceLabel}</span>
+                </FileInput>
                 <button
-                  className={classNames(styles.galleryImageSettings_next,
-                    { [styles.galleryImageSettings_hidden]: true })} aria-label="next image"
-                  data-hook="galleryImageSettingsNext" onClick={() => onNextImage()}
-                />
+                  className={styles.galleryImageSettings_delete} aria-label="delete image"
+                  data-hook="galleryImageSettingsDeleteImage" onClick={onDeleteImage}
+                >
+                  <span className={styles.galleryImageSettings_delete_text}>{this.deleteLabel}</span>
+                </button>
               </div>
-            </SettingsSection>
-            <div className={styles.galleryImageSettings_manageImageGrid}>
-              <FileInput
-                className={styles.galleryImageSettings_replace} handleFileSelection={handleFileSelection}
-                dataHook="galleryImageSettingsFileInput" onChange={this.replaceItem} theme={theme} title="Replace Image"
+              <SettingsSection
+                ariaProps={{ 'aria-label': 'image properties', role: 'region' }}
+                theme={theme} className={styles.galleryImageSettings_section}
               >
-                <span className={styles.galleryImageSettings_replace_text}>{this.ReplaceLabel}</span>
-              </FileInput>
-              <button
-                className={styles.galleryImageSettings_delete} aria-label="delete image"
-                data-hook="galleryImageSettingsDeleteImage" onClick={() => onDeleteImage()}
+                <InputWithLabel
+                  theme={theme}
+                  id="galleryImageTitleInput"
+                  label={this.titleLabel}
+                  placeholder={this.titleInputPlaceholder}
+                  value={selectedImage.metadata.title || ''}
+                  dataHook="galleryImageTitleInput" onChange={event => onUpdateImage({ title: event.target.value })}
+                />
+              </SettingsSection>
+              <SettingsSection
+                ariaProps={{ 'aria-label': 'image link', role: 'region' }}
+                theme={theme} className={this.styles.galleryImageSettings_section}
               >
-                <span className={styles.galleryImageSettings_delete_text}>{this.deleteLabel}</span>
-              </button>
-            </div>
-            <SettingsSection
-              ariaProps={{ 'aria-label': 'image properties', role: 'region' }}
-              theme={theme} className={styles.galleryImageSettings_section}
-            >
-              <InputWithLabel
-                theme={theme}
-                id="galleryImageTitleInput"
-                label={this.titleLabel}
-                placeholder={this.titleInputPlaceholder}
-                value={selectedImage.metadata.title || ''}
-                dataHook="galleryImageTitleInput" onChange={event => onUpdateImage({ title: event.target.value })}
-              />
-            </SettingsSection>
-            <SettingsSection
-              ariaProps={{ 'aria-label': 'image link', role: 'region' }}
-              theme={theme} className={this.styles.galleryImageSettings_section}
-            >
-              <span id="gallery_image_link_lbl" className={this.styles.inputWithLabel_label}>{this.linkLabel}</span>
-              <LinkPanel
-                theme={theme} url={url} targetBlank={targetBlank} nofollow={nofollow} anchorTarget={anchorTarget} relValue={relValue}
-                isImageSettings t={t} ariaProps={{ 'aria-labelledby': 'gallery_image_link_lbl' }} intermediateUrl={intermediateUrl}
-                onIntermediateUrlChange={this.onImageIntermediateUrlChange} onValidateUrl={this.onValidateUrl}
-                onUrlChange={this.onImageUrlChange} onTargetBlankChange={this.onImageTargetChange} onNofollowChange={this.onImageRelChange}
-              />
-            </SettingsSection>
+                <span id="gallery_image_link_lbl" className={this.styles.inputWithLabel_label}>{this.linkLabel}</span>
+                <LinkPanel
+                  theme={theme} url={url} targetBlank={targetBlank} nofollow={nofollow} anchorTarget={anchorTarget} relValue={relValue}
+                  isImageSettings t={t} ariaProps={{ 'aria-labelledby': 'gallery_image_link_lbl' }} intermediateUrl={intermediateUrl}
+                  onIntermediateUrlChange={this.onImageIntermediateUrlChange} onValidateUrl={this.onValidateUrl}
+                  onUrlChange={this.onImageUrlChange} onTargetBlankChange={this.onImageTargetChange} onNofollowChange={this.onImageRelChange}
+                />
+              </SettingsSection>
+            </div>}
 
           </div>
           {isMobile ? null : <SettingsPanelFooter
             fixed
             theme={theme}
             className={styles.galleryImageSettings_footer}
-            cancel={() => onCancel(this.initialImageState)}
-            save={() => this.onDoneClick(selectedImage)}
+            cancel={onCancel}
+            save={onSave}
             t={t}
           />
           }
@@ -216,8 +212,7 @@ class ImageSettings extends Component {
 }
 
 ImageSettings.propTypes = {
-  selectedImage: PropTypes.any.isRequired,
-  images: PropTypes.arrayOf(PropTypes.object).isRequired,
+  selectedImage: PropTypes.any,
   onCancel: PropTypes.func.isRequired,
   onSave: PropTypes.func.isRequired,
   onDeleteImage: PropTypes.func.isRequired,
@@ -231,6 +226,8 @@ ImageSettings.propTypes = {
   t: PropTypes.func,
   anchorTarget: PropTypes.string,
   relValue: PropTypes.string,
+  visibleLeftArrow: PropTypes.bool,
+  visibleRightArrow: PropTypes.bool,
 };
 
 export default ImageSettings;

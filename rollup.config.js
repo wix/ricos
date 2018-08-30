@@ -87,7 +87,8 @@ const plugins = [
   }),
   postcss({
     minimize: {
-      reduceIdents: false
+      reduceIdents: false,
+      safe: true
     },
     modules: true,
     extract: 'dist/styles.min.css',

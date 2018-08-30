@@ -8,7 +8,7 @@ $MOBILE_HEADER_HEIGHT: 50px;
     margin-right: 8.5px;
     width: 19px;
     height: 19px;
-    background: url('../icons/' + $icon + '-icon.svg') center no-repeat;
+    background: url('../icons' + $icon + '-icon.svg') center no-repeat;
 }
 
 .galleryImageSettings {
@@ -21,7 +21,7 @@ $MOBILE_HEADER_HEIGHT: 50px;
     right: 0;
     color: #333333;
     background: #fff;
-    z-index: 6;
+    z-index: 7;
 }
 
 .galleryImageSettings_content {
@@ -134,12 +134,15 @@ $MOBILE_HEADER_HEIGHT: 50px;
     @extend %nav;
     right: 0;
     background-image: url('../icons/next-icon.svg');
+    background-color: #333333;
+
 }
 
 .galleryImageSettings_previous {
     @extend %nav;
     left: 0;
     background-image: url('../icons/previous-icon.svg');
+    background-color: #333333;
 }
 
 .galleryImageSettings_hidden {
@@ -162,5 +165,5 @@ $MOBILE_HEADER_HEIGHT: 50px;
 }
 
 .galleryImageSettings_footer {
-    z-index: 6;
+    z-index: 7;
 }

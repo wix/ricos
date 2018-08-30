@@ -307,9 +307,11 @@ export class SortableComponent extends Component {
     const item = items[itemIdx];
     item.selected = !item.selected;
     const selectedItems = items.filter(i => i.selected);
+
     this.setState({
       items,
-      editedImage: selectedItems.length ? selectedItems[0] : null
+      editedImage: selectedItems.length ? selectedItems[0] : null,
+      editedImageIndex: selectedItems.length === 1 ? findIndex(items, i => i.itemId === selectedItems[0].itemId) : -1
     });
   }
 
@@ -327,6 +329,7 @@ export class SortableComponent extends Component {
   toggleImageSettings = (imageSettingsVisible, itemIdx) => {
     const { items } = this.state;
     let editedImage;
+    let editedItemIndex;
 
     if (itemIdx >= 0) {
       items.map((item, idx) => {
@@ -334,14 +337,23 @@ export class SortableComponent extends Component {
         return item;
       });
       editedImage = this.state.items[itemIdx];
+      editedItemIndex = itemIdx;
     } else {
       editedImage = this.state.editedImage;
+      editedItemIndex = this.state.editedItemIndex;
+    }
+
+    if (imageSettingsVisible) {
+      this.initialImageState = items;
+    } else {
+      items.forEach(i => i.selected = false);
     }
 
     this.setState({
       items,
       imageSettingsVisible,
-      editedImage
+      editedImage,
+      editedItemIndex
     });
   }
 
@@ -366,9 +378,7 @@ export class SortableComponent extends Component {
 
   componentDidMount() {
     const newState = this.propsToState(this.props);
-    if (newState.items.length > 0) {
-      newState.items.forEach(i => i.selected = false);
-    }
+    newState.items.forEach(i => i.selected = false);
     this.setState(newState);
   }
 
@@ -376,8 +386,16 @@ export class SortableComponent extends Component {
     this.setState(this.propsToState(props));
   }
 
-  saveImageSettings(items) {
-    const processedItems = items.reduce(
+  onCancel = () => {
+    this.props.onItemsChange(this.initialImageState);
+    this.setState({ items: this.initialImageState }, () => {
+      this.state.items.forEach(i => i.selected = false);
+    });
+    this.toggleImageSettings(false);
+  }
+
+  saveImageSettings = () => {
+    const processedItems = this.state.items.reduce(
       (resultImages, image) => {
         if (image.metadata && image.metadata.link && image.metadata.link.url) {
           resultImages.push({ ...image,
@@ -392,6 +410,9 @@ export class SortableComponent extends Component {
         return resultImages;
       }, []);
     this.props.onItemsChange(processedItems);
+    this.setState({ items: processedItems }, () => {
+      this.state.items.forEach(i => i.selected = false);
+    });
     this.toggleImageSettings(false);
   }
 
@@ -403,20 +424,66 @@ export class SortableComponent extends Component {
   }
 
   onNextImage = () => {
-
+    const { editedImageIndex, items } = this.state;
+    if (editedImageIndex >= 0) {
+      const newIndex = Math.min(editedImageIndex + 1, items.length - 1);
+      items[editedImageIndex].selected = false;
+      items[newIndex].selected = true;
+      this.setState({
+        editedImage: items[newIndex],
+        editedImageIndex: newIndex,
+        items
+      });
+    }
   };
 
   onPreviousImage = () => {
-
+    const { editedImageIndex, items } = this.state;
+    if (editedImageIndex >= 0) {
+      const newIndex = Math.max(editedImageIndex - 1, 0);
+      items[editedImageIndex].selected = false;
+      items[newIndex].selected = true;
+      this.setState({
+        editedImage: items[newIndex],
+        editedImageIndex: newIndex,
+        items
+      });
+    }
   };
 
-  onUpdateImage = data => {
-    return data;
+  onUpdateImage = metadata => {
+    const { editedImage } = this.state;
+    Object.assign(editedImage.metadata, metadata);
+    this.setState({ editedImage });
   };
 
   onDeleteImage = () => {
-    this.deleteSelectedItems();
+    const { editedImageIndex, items } = this.state;
+    if (editedImageIndex === 0 && items.length === 1) {
+      this.setState({
+        editedImageIndex: -1,
+        editedImage: null,
+        items: []
+      });
+      return;
+    }
+    const newItems = items.filter(item => !item.selected);
+    const newIndex = Math.min(editedImageIndex, newItems.length - 1);
+    const newEditedImage = newItems[newIndex];
+    newEditedImage.selected = true;
+    this.props.onItemsChange(newItems);
+    this.setState({
+      editedImageIndex: newIndex,
+      editedImage: newEditedImage,
+      items: newItems
+    });
   };
+
+  handleFileChange = event => {
+    const { editedImageIndex } = this.state;
+    this.props.handleFileChange(event, editedImageIndex);
+    this.props.onItemsChange(this.state.items);
+  }
 
   render() {
     const { handleFileSelection: shouldHandleFileSelection, theme, t, relValue, anchorTarget } = this.props;
@@ -457,18 +524,20 @@ export class SortableComponent extends Component {
           <ImageSettings
             theme={theme}
             selectedImage={this.state.editedImage}
-            onCancel={items => this.saveImageSettings(items)}
-            onSave={items => this.saveImageSettings(items)}
-            onNextImage={() => this.onNextImage()}
-            onPreviousImage={() => this.onPreviousImage()}
-            onDeleteImage={() => this.onDeleteImage()}
+            onCancel={this.onCancel}
+            onSave={this.saveImageSettings}
+            onNextImage={this.onNextImage}
+            onPreviousImage={this.onPreviousImage}
+            onDeleteImage={this.onDeleteImage}
             onUpdateImage={data => this.onUpdateImage(data)}
             handleFileSelection={shouldHandleFileSelection ? this.handleFileSelection : null}
-            handleFileChange={this.props.handleFileChange}
+            handleFileChange={this.handleFileChange}
             t={t}
             isMobile={this.props.isMobile}
             relValue={relValue}
             anchorTarget={anchorTarget}
+            visibleLeftArrow={this.state.editedImageIndex > 0}
+            visibleRightArrow={this.state.editedImageIndex < this.state.items.length - 1}
           />
         </div>
       )
