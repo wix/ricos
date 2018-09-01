@@ -1,0 +1,9 @@
+{
+  "recommendations": [
+    "davidanson.vscode-markdownlint",
+    "yzhang.markdown-all-in-one",
+    "mgmcdermott.vscode-language-babel",
+    "flowtype.flow-for-vscode",
+    "gcazaciuc.vscode-flow-ide",
+  ]
+}
