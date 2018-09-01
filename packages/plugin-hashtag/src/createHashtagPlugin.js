@@ -4,15 +4,14 @@ import { Strategy, Component } from './decorator';
 
 const createHashtagPlugin = (config = {}) => {
   const type = HASHTAG_TYPE;
-  const { decorator, helpers, theme, isMobile, t, anchorTarget, relValue, hashtag } = config;
+  const { theme, [type]: settings = {}, ...rest } = config;
   const plugin = { decorators: [] };
 
-  const hashtagConfig = hashtag || {};
   const hashtagTheme = {
     hashtag: theme && theme.hashtag,
     hashtag_hover: theme && theme.hashtag_hover, //eslint-disable-line camelcase
   };
-  const hashtagProps = Object.assign({}, hashtagConfig, { theme: hashtagTheme });
+  const hashtagProps = Object.assign({}, settings, { theme: hashtagTheme });
 
   plugin.decorators.push({
     strategy: Strategy,
@@ -20,14 +19,10 @@ const createHashtagPlugin = (config = {}) => {
   });
 
   return createBasePlugin({
-    decorator,
     theme,
     type,
-    helpers,
-    isMobile,
-    anchorTarget,
-    relValue,
-    t
+    settings,
+    ...rest
   }, plugin);
 };
 

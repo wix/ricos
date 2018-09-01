@@ -6,7 +6,7 @@ import LinkPanelContainer from '../../Components/LinkPanelContainer';
 
 class BlockLinkPanel extends Component {
   componentDidMount() {
-    const { anchorTarget, relValue, theme, t } = this.props;
+    const { anchorTarget, relValue, theme, t, uiSettings } = this.props;
     const componentLink = this.props.pubsub.get('componentLink');
     const { url, targetBlank, nofollow } = componentLink || {};
     const linkContainerProps = {
@@ -22,6 +22,7 @@ class BlockLinkPanel extends Component {
       onCancel: this.hideLinkPanel,
       onDelete: this.deleteLink,
       onOverrideContent: this.props.onOverrideContent,
+      uiSettings,
     };
 
     const LinkPanelContainerWithProps = decorateComponentWithProps(LinkPanelContainer, linkContainerProps);
@@ -58,6 +59,7 @@ BlockLinkPanel.propTypes = {
   anchorTarget: PropTypes.string,
   relValue: PropTypes.string,
   t: PropTypes.func,
+  uiSettings: PropTypes.object,
 };
 
 export default BlockLinkPanel;

@@ -112,9 +112,9 @@ class LinkPanel extends Component {
 
   render() {
     const { styles } = this;
-    const { isImageSettings, theme, anchorTarget, relValue, ariaProps } = this.props;
-    const showTargetBlankCheckbox = anchorTarget !== '_blank';
-    const showRelValueCheckbox = relValue !== 'nofollow';
+    const { isImageSettings, theme, anchorTarget, relValue, ariaProps, uiSettings } = this.props;
+    const showTargetBlankCheckbox = uiSettings.blankTargetToggleVisibilityFn(anchorTarget);
+    const showRelValueCheckbox = uiSettings.nofollowRelToggleVisibilityFn(relValue);
 
     const textInputClassName = classNames(styles.linkPanel_textInput,
       {
@@ -182,5 +182,6 @@ LinkPanel.propTypes = {
   onValidateUrl: PropTypes.func,
   onEnter: PropTypes.func,
   onEscape: PropTypes.func,
+  uiSettings: PropTypes.object,
 };
 export default LinkPanel;

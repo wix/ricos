@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import { EditorState, convertFromRaw, CompositeDecorator } from '@wix/draft-js';
 import Editor from 'draft-js-plugins-editor';
 import get from 'lodash/get';
+import merge from 'lodash/merge';
 import includes from 'lodash/includes';
 import Measure from 'react-measure';
 import { translate } from 'react-i18next';
@@ -34,6 +35,12 @@ class RichContentEditor extends Component {
       theme: props.theme || {}
     };
     this.refId = Math.floor(Math.random() * 9999);
+
+    props.config.uiSettings = merge({
+      blankTargetToggleVisibilityFn: anchorTarget => anchorTarget !== '_blank',
+      nofollowRelToggleVisibilityFn: relValue => relValue !== 'nofollow'
+    }, props.config.uiSettings || {});
+
     this.initPlugins();
   }
 
@@ -47,6 +54,7 @@ class RichContentEditor extends Component {
       relValue,
       t,
     } = this.props;
+
     const { theme } = this.state;
     const getEditorState = () => this.state.editorState;
     const setEditorState = editorState => this.setState({ editorState });
@@ -85,7 +93,8 @@ class RichContentEditor extends Component {
       setEditorState: editorState => this.setState({ editorState }),
       t,
       refId: this.refId,
-      getToolbarSettings: config.getToolbarSettings
+      getToolbarSettings: config.getToolbarSettings,
+      uiSettings: config.uiSettings
     });
   }
 
@@ -359,6 +368,10 @@ RichContentEditor.propTypes = {
   textAlignment: PropTypes.oneOf(['left', 'right', 'center']),
   handleBeforeInput: PropTypes.func,
   handlePastedText: PropTypes.func,
+};
+
+RichContentEditor.defaultProps = {
+  config: {}
 };
 
 export default translate(null, { withRef: true })(RichContentEditor);

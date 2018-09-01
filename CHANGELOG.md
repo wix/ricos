@@ -4,18 +4,38 @@
 > - :boom:       [Breaking Change]
 > - :rocket:     [New Feature]
 > - :bug:        [Bug Fix]
-> - :house:      [Internal]
 > - :book:       [Documentation]
+> - :house:      [Internal]
 
 ## [Unreleased]
-#### :bug: Bug Fix
-* `common`
-  * `Tooltip` performance: `rebuild` is called only if `shouldRebuildOnUpdate` returns true
+
 <br/>
 
+## 1.5.0 (Aug 28, 2018)
+
 #### :boom: Breaking Change
+* `general`:
+  * [#116](https://github.com/wix-incubator/rich-content/pull/116) `config` plugin-specific section keys are standardized -- now the plugin types should be used as keys. Check [example](https://github.com/wix-incubator/rich-content/blob/develop/examples/editor/src/PluginsConfig.js) for reference
 * `code-block`:
-  * `config.codeBlock.position` property is obsolete; use `config.getToolbarSettings` to override plugin text button settings
+  * [#113](https://github.com/wix-incubator/rich-content/pull/113) `config.codeBlock.position` property is obsolete; use `config.getToolbarSettings` to override plugin text button settings
+
+#### :bug: Bug Fix
+* `common`
+  * [#115](https://github.com/wix-incubator/rich-content/pull/1153) `Tooltip` performance: `rebuild` is called only if `shouldRebuildOnUpdate` returns true
+* `editor`
+  * Text justify no longer stretches the last line of text
+* `gallery` 
+  * [#120](https://github.com/wix-incubator/rich-content/pull/120) file handlers register with block key in order to target the correct plugin instance
+* `image` 
+  * [#120](https://github.com/wix-incubator/rich-content/pull/120) file handlers register with block key in order to target the correct plugin instance
+  * String `src` is acceptable and passes validation
+
+#### :book: Documentation
+* [UI Settings](https://github.com/wix-incubator/rich-content/blob/develop/docs/UiSettings.md) added
+
+#### :house: Internal
+* `general`
+  * [#111](https://github.com/wix-incubator/rich-content/pull/111) auto deploy to `surge.sh`
 
 <br/>
 

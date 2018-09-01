@@ -115,6 +115,7 @@ class GalleryViewer extends React.Component {
           galleryDataSrc={'manuallySetImages'}
           container={size}
           settings={this.props.settings}
+          ignoreWixScrollEvent
         />
       </div>);
   }

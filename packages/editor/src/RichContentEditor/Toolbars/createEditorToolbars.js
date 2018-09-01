@@ -27,7 +27,8 @@ const createEditorToolbars = config => {
     setEditorState,
     t,
     refId,
-    getToolbarSettings = () => []
+    getToolbarSettings = () => [],
+    uiSettings,
   } = config;
   const { pluginButtons, pluginTextButtons } = buttons;
 
@@ -67,6 +68,7 @@ const createEditorToolbars = config => {
         setEditorState,
         pluginButtons,
         anchorTarget,
+        uiSettings,
         relValue,
         isMobile,
         helpers,

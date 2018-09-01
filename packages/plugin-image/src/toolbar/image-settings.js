@@ -99,7 +99,7 @@ class ImageSettings extends Component {
   };
 
   render() {
-    const { componentData, helpers, theme, t, anchorTarget, relValue, isMobile } = this.props;
+    const { componentData, helpers, theme, t, anchorTarget, relValue, isMobile, uiSettings } = this.props;
     const { config = {} } = componentData;
     const { src, metadata = {} } = this.state;
 
@@ -148,7 +148,7 @@ class ImageSettings extends Component {
               onChange={event => this.metadataUpdated(metadata, { caption: event.target.value })}
               dataHook="imageSettingsCaptionInput"
             />
-          </SettingsSection >
+          </SettingsSection>
           <SettingsSection theme={theme} className={this.styles.imageSettingsSection} ariaProps={{ 'aria-label': 'image alt text', role: 'region' }}>
             <InputWithLabel
               theme={theme}
@@ -163,7 +163,7 @@ class ImageSettings extends Component {
           <SettingsSection theme={theme} className={this.styles.imageSettingsSection} ariaProps={{ 'aria-label': 'image link', role: 'region' }}>
             <span id="image_settings_link_lbl" className={this.styles.inputWithLabel_label}>{linkLabel}</span>
             <LinkPanel
-              ref={this.setLinkPanel} theme={theme} url={url} targetBlank={targetBlank} nofollow={nofollow}
+              ref={this.setLinkPanel} theme={theme} url={url} targetBlank={targetBlank} nofollow={nofollow} uiSettings={uiSettings}
               isImageSettings anchorTarget={anchorTarget} relValue={relValue} t={t} ariaProps={{ 'aria-labelledby': 'image_settings_link_lbl' }}
             />
           </SettingsSection>
@@ -190,6 +190,7 @@ ImageSettings.propTypes = {
   anchorTarget: PropTypes.string,
   relValue: PropTypes.string,
   isMobile: PropTypes.bool,
+  uiSettings: PropTypes.object,
 };
 
 export default ImageSettings;

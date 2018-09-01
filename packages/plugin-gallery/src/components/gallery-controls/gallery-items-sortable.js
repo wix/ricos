@@ -488,7 +488,7 @@ export class SortableComponent extends Component {
   }
 
   render() {
-    const { handleFileSelection: shouldHandleFileSelection, theme, t, relValue, anchorTarget } = this.props;
+    const { handleFileSelection: shouldHandleFileSelection, theme, t, relValue, anchorTarget, uiSettings } = this.props;
     return !!this.state.items && (
       !this.state.imageSettingsVisible ? (
         <div>
@@ -540,6 +540,7 @@ export class SortableComponent extends Component {
             anchorTarget={anchorTarget}
             visibleLeftArrow={this.state.editedImageIndex > 0}
             visibleRightArrow={this.state.editedImageIndex < this.state.items.length - 1}
+            uiSettings={uiSettings}
           />
         </div>
       )
@@ -560,4 +561,5 @@ SortableComponent.propTypes = {
   t: PropTypes.func,
   relValue: PropTypes.string,
   anchorTarget: PropTypes.string,
+  uiSettings: PropTypes.object,
 };

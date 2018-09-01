@@ -85,6 +85,11 @@ class ImageSettings extends Component {
     onUpdateImage(metadata);
   };
 
+  setSelectedIndex = selectedIndex => {
+    this.isReplacing = false;
+    this.setState({ selectedIndex });
+  }
+
   render() {
     const styles = this.styles;
     const {
@@ -103,13 +108,13 @@ class ImageSettings extends Component {
       onUpdateImage,
       visibleLeftArrow,
       visibleRightArrow,
+      uiSettings
     } = this.props;
 
     const { url, target, rel, intermediateUrl } = selectedImage && !isEmpty(selectedImage.metadata.link) ? selectedImage.metadata.link : {};
     const targetBlank = target === '_blank' || isUndefined(target);
     const nofollow = rel === 'nofollow';
 
-    // TODO: hide nav buttons on first/last image
     /* eslint-disable jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/click-events-have-key-events */
     return (
       <FocusManager className={styles.galleryImageSettings}>
@@ -194,7 +199,7 @@ class ImageSettings extends Component {
                 <LinkPanel
                   theme={theme} url={url} targetBlank={targetBlank} nofollow={nofollow} anchorTarget={anchorTarget} relValue={relValue}
                   isImageSettings t={t} ariaProps={{ 'aria-labelledby': 'gallery_image_link_lbl' }} intermediateUrl={intermediateUrl}
-                  onIntermediateUrlChange={this.onImageIntermediateUrlChange} onValidateUrl={this.onValidateUrl}
+                  onIntermediateUrlChange={this.onImageIntermediateUrlChange} onValidateUrl={this.onValidateUrl} uiSettings={uiSettings}
                   onUrlChange={this.onImageUrlChange} onTargetBlankChange={this.onImageTargetChange} onNofollowChange={this.onImageRelChange}
                 />
               </SettingsSection>
@@ -234,6 +239,7 @@ ImageSettings.propTypes = {
   relValue: PropTypes.string,
   visibleLeftArrow: PropTypes.bool,
   visibleRightArrow: PropTypes.bool,
+  uiSettings: PropTypes.object,
 };
 
 export default ImageSettings;

@@ -11,9 +11,11 @@ class GalleryComponent extends React.PureComponent {
     super(props);
     this.state = this.stateFromProps(props);
 
-    if (this.props.store) {
-      this.props.store.set('handleFilesSelected', this.handleFilesSelected.bind(this));
-      this.props.store.set('handleFilesAdded', this.handleFilesAdded.bind(this));
+    const { block, store } = this.props;
+    if (store) {
+      const blockKey = block.getKey();
+      store.setBlockHandler('handleFilesSelected', blockKey, this.handleFilesSelected.bind(this));
+      store.setBlockHandler('handleFilesAdded', blockKey, this.handleFilesAdded.bind(this));
     }
   }
 
@@ -163,6 +165,7 @@ GalleryComponent.propTypes = {
   componentState: PropTypes.object.isRequired,
   store: PropTypes.object.isRequired,
   blockProps: PropTypes.object.isRequired,
+  block: PropTypes.object.isRequired,
   onClick: PropTypes.func.isRequired,
   className: PropTypes.string.isRequired,
   theme: PropTypes.object.isRequired,

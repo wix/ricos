@@ -64,6 +64,7 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
   const helpers = config.helpers || {};
   const isMobile = config.isMobile || false;
   const { t, anchorTarget, relValue } = config;
+
   const toolbarTheme = { ...getToolbarTheme(config.theme, 'plugin'), ...config.theme };
   const Toolbar = config.toolbar && config.toolbar.InlineButtons && createToolbar({
     buttons: {
@@ -78,6 +79,7 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
     relValue,
     t,
     name: config.toolbar.name,
+    uiSettings: config.uiSettings,
   });
   const InsertPluginButtons =
     settings.showInsertButtons && config.toolbar && config.toolbar.InsertButtons && config.toolbar.InsertButtons.map(button => ({

@@ -42,7 +42,7 @@
     "wix-rich-content-viewer": "^1.0.6"
   },
   "scripts": {
-    "bootstrap": "yarn && node ../../scripts/linkExample",
+    "bootstrap": "yarn && node ../../scripts/linkExample viewer",
     "clean": "rm -rf dist/",
     "start": "webpack-serve ./config/webpack.dev.js",
     "test": "echo 'There are no tests configured for this project!' && exit 0",

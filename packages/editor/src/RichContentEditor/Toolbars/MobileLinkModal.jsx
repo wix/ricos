@@ -19,7 +19,8 @@ export default class MobileLinkModal extends Component {
       onDone,
       onCancel,
       onDelete,
-      t
+      t,
+      uiSettings
     } = this.props;
     const mobileLinkModalTitle = t('MobileLinkModal_Title');
     return (
@@ -33,7 +34,7 @@ export default class MobileLinkModal extends Component {
         <LinkPanelContainer
           url={url} targetBlank={targetBlank} anchorTarget={anchorTarget} relValue={relValue} nofollow={nofollow} theme={theme}
           isActive={isActive} isMobile={isMobile} onDone={onDone} onCancel={onCancel} onDelete={onDelete} t={t}
-          ariaProps={{ 'aria-labelledby': 'mob_link_modal_hdr' }}
+          ariaProps={{ 'aria-labelledby': 'mob_link_modal_hdr' }} uiSettings={uiSettings}
         />
       </div>
     );
@@ -53,4 +54,5 @@ MobileLinkModal.propTypes = {
   relValue: PropTypes.string,
   nofollow: PropTypes.bool,
   t: PropTypes.func,
+  uiSettings: PropTypes.object,
 };

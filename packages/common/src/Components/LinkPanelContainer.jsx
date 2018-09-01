@@ -49,7 +49,7 @@ class LinkPanelContainer extends PureComponent {
 
   render() {
     const { styles } = this;
-    const { url, targetBlank, nofollow, theme, isActive, anchorTarget, relValue, isMobile, t, ariaProps, tabIndex } = this.props;
+    const { url, targetBlank, nofollow, theme, isActive, anchorTarget, relValue, isMobile, t, ariaProps, tabIndex, uiSettings } = this.props;
     const doneButtonText = t('LinkPanelContainer_DoneButton');
     const cancelButtonText = t('LinkPanelContainer_CancelButton');
     const removeButtonText = t('LinkPanelContainer_RemoveButton');
@@ -68,7 +68,7 @@ class LinkPanelContainer extends PureComponent {
           <LinkPanel
             onEnter={this.onDoneClick.bind(this)} onEscape={this.onCancelClick.bind(this)}
             ref={this.setLinkPanel} theme={theme} url={url} targetBlank={targetBlank} anchorTarget={anchorTarget}
-            relValue={relValue} nofollow={nofollow} t={t} ariaProps={linkPanelAriaProps}
+            relValue={relValue} nofollow={nofollow} t={t} ariaProps={linkPanelAriaProps} uiSettings={uiSettings}
           />
           <div className={styles.linkPanel_actionsDivider} role="separator"/>
         </div>
@@ -118,6 +118,7 @@ LinkPanelContainer.propTypes = {
   t: PropTypes.func,
   ariaProps: PropTypes.object,
   tabIndex: PropTypes.number,
+  uiSettings: PropTypes.object,
 };
 
 export default LinkPanelContainer;
