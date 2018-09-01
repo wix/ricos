@@ -35,4 +35,10 @@ export { default as Slides } from './Slides';
 export { default as Slideshow } from './Slideshow';
 export { default as Thumbnails } from './Thumbnails';
 export { default as UploadIcon } from './UploadIcon';
+export { default as DeleteIcon } from './DeleteIcon';
+export { default as ReplaceIcon } from './ReplaceIcon';
+export { default as NextIcon } from './NextIcon';
+export { default as PreviousIcon } from './PreviousIcon';
+export { default as SelectedIcon } from './SelectedIcon';
+export { default as NotSelectedIcon } from './NotSelectedIcon';
 

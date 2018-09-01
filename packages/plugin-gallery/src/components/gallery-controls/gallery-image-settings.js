@@ -13,7 +13,7 @@ import {
   SettingsPanelFooter,
   FocusManager
 } from 'wix-rich-content-common';
-import { BackIcon } from '../../icons';
+import { BackIcon, DeleteIcon, ReplaceIcon, NextIcon, PreviousIcon } from '../../icons';
 import styles from '../../../statics/styles/gallery-image-settings.scss';
 import GallerySettingsMobileHeader from './gallery-settings-mobile-header';
 import { isUndefined } from 'util';
@@ -145,12 +145,16 @@ class ImageSettings extends Component {
                     className={classNames(styles.galleryImageSettings_previous,
                       { [styles.galleryImageSettings_hidden]: !visibleLeftArrow })} aria-label="previous image"
                     data-hook="galleryImageSettingsPrevious" onClick={onPreviousImage}
-                  />
+                  >
+                    <PreviousIcon />
+                  </button>
                   <button
                     className={classNames(styles.galleryImageSettings_next,
                       { [styles.galleryImageSettings_hidden]: !visibleRightArrow })} aria-label="next image"
                     data-hook="galleryImageSettingsNext" onClick={onNextImage}
-                  />
+                  >
+                    <NextIcon />
+                  </button>
                 </div>
               </SettingsSection>
               <div className={styles.galleryImageSettings_manageImageGrid}>
@@ -158,12 +162,14 @@ class ImageSettings extends Component {
                   className={styles.galleryImageSettings_replace} handleFileSelection={handleFileSelection}
                   dataHook="galleryImageSettingsFileInput" onChange={this.replaceItem} theme={theme} title={this.ReplaceLabel}
                 >
+                  <ReplaceIcon className={styles.galleryImageSettings_replace_icon}/>
                   <span className={styles.galleryImageSettings_replace_text}>{this.ReplaceLabel}</span>
                 </FileInput>
                 <button
                   className={styles.galleryImageSettings_delete} aria-label="delete image"
                   data-hook="galleryImageSettingsDeleteImage" onClick={onDeleteImage}
                 >
+                  <DeleteIcon className={styles.galleryImageSettings_delete_icon}/>
                   <span className={styles.galleryImageSettings_delete_text}>{this.deleteLabel}</span>
                 </button>
               </div>

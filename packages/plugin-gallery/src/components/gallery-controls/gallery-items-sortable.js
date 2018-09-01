@@ -10,7 +10,7 @@ import Styles from '../../../statics/styles/gallery-items-sortable.scss';
 import ImageSettings from './gallery-image-settings';
 import { mergeStyles, FileInput, ImageLoader } from 'wix-rich-content-common';
 
-import { FabIcon, UploadIcon } from '../../icons';
+import { FabIcon, UploadIcon, SelectedIcon, NotSelectedIcon } from '../../icons';
 
 //eslint-disable-next-line no-unused-vars
 const EMPTY_SMALL_PLACEHOLDER = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
@@ -79,6 +79,8 @@ const SortableItem = sortableElement(props => {
           height: imageSize + 'px',
         }}
       >
+        {item.selected && isMobile && !isMobileSorting && <SelectedIcon className={styles.itemContainerSelected_icon}/> }
+        {!item.selected && isMobile && !isMobileSorting && <NotSelectedIcon className={styles.itemContainerNotSelected_icon}/> }
         {url ? <img
           alt="Gallery Item Thumbnail"
           className={styles.itemImage}
