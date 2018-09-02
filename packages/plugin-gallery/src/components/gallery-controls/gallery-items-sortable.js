@@ -331,7 +331,7 @@ export class SortableComponent extends Component {
   toggleImageSettings = (imageSettingsVisible, itemIdx) => {
     const { items } = this.state;
     let editedImage;
-    let editedItemIndex;
+    let editedImageIndex;
 
     if (itemIdx >= 0) {
       items.map((item, idx) => {
@@ -339,10 +339,10 @@ export class SortableComponent extends Component {
         return item;
       });
       editedImage = this.state.items[itemIdx];
-      editedItemIndex = itemIdx;
+      editedImageIndex = itemIdx;
     } else {
       editedImage = this.state.editedImage;
-      editedItemIndex = this.state.editedItemIndex;
+      editedImageIndex = this.state.editedImageIndex;
     }
 
     if (imageSettingsVisible) {
@@ -355,7 +355,7 @@ export class SortableComponent extends Component {
       items,
       imageSettingsVisible,
       editedImage,
-      editedItemIndex
+      editedImageIndex
     });
   }
 
@@ -550,7 +550,7 @@ export class SortableComponent extends Component {
 
 SortableComponent.propTypes = {
   onItemsChange: PropTypes.func.isRequired,
-  addItems: PropTypes.func.isRequired,
+  addItems: PropTypes.func,
   items: PropTypes.arrayOf(PropTypes.object).isRequired,
   handleFileChange: PropTypes.func,
   handleFileSelection: PropTypes.func,
