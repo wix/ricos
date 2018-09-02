@@ -7,6 +7,7 @@
   },
   "scripts": {
     "bootstrap": "lerna bootstrap --hoist",
+    "install:public": "npm_config_cache_min=999999 npm_config_prefer_offline=true npm run bootstrap",
     "postinstall": "npm run bootstrap",
     "reinstall": "lerna clean --yes && rm -rf node_modules && rm -f package-lock.json && npm i",
     "rebuild": "npm run reinstall && npm run build",
