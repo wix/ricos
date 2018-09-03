@@ -54,11 +54,23 @@ export const simplePubsub = initialState => {
     }
   };
 
-  const setBlockHandler = (key, blockKey, item) => _setSingle(blockHandlerKey(key, blockKey), item);
+  const setBlockHandler = (key, blockKey, item) => {
+    _setSingle(blockHandlerKey(key, blockKey), item);
+  };
+
+  const setBlockData = ({ key, blockKey = state.visibleBlock, item }) => {
+    _setSingle(blockHandlerKey(key, blockKey), item);
+  };
 
   const get = key => state[key];
 
-  const getBlockHandler = (key, blockKey = state.visibleBlock) => state[blockHandlerKey(key, blockKey)];
+  const getBlockHandler = (key, blockKey = state.visibleBlock) => {
+    return state[blockHandlerKey(key, blockKey)];
+  };
+
+  const getBlockData = ({ key, blockKey = state.visibleBlock }) => {
+    return state[blockHandlerKey(key, blockKey)];
+  };
 
   const blockHandlerKey = (key, blockKey) => `${blockKey}_${key}`;
 
@@ -79,5 +91,7 @@ export const simplePubsub = initialState => {
     get,
     getBlockHandler,
     store,
+    getBlockData,
+    setBlockData
   };
 };
