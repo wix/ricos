@@ -9,7 +9,9 @@
     "packages/*"
   ],
   "npmClientArgs": [
-    "--no-lockfile"
+    "--no-lockfile",
+    "--prefer-offline",
+    "--cache-min 9999999"
   ],
   "version": "independent"
 }

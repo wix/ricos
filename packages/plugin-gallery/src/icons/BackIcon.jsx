@@ -18,3 +18,4 @@ const BackIcon = props => (
 );
 
 export default BackIcon;
+/* eslint-enable max-len */

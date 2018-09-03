@@ -43,7 +43,7 @@ const getStructure = (buttons, isMobile) => {
     button => button.desktop !== false);
 };
 
-export default function createToolbar({ buttons, theme, pubsub, helpers, isMobile, anchorTarget, relValue, t, name }) {
+export default function createToolbar({ buttons, theme, pubsub, helpers, isMobile, anchorTarget, relValue, t, name, uiSettings }) {
   class BaseToolbar extends Component {
     constructor(props) {
       super(props);
@@ -240,6 +240,7 @@ export default function createToolbar({ buttons, theme, pubsub, helpers, isMobil
               anchorTarget={anchorTarget}
               relValue={relValue}
               t={t}
+              uiSettings={uiSettings}
             />
           );
         case BUTTONS.DELETE:
@@ -269,6 +270,7 @@ export default function createToolbar({ buttons, theme, pubsub, helpers, isMobil
               displayInlinePanel={this.displayInlinePanel}
               hideInlinePanel={this.hidePanels}
               {...buttonProps}
+              uiSettings={uiSettings}
             />
           );
       }

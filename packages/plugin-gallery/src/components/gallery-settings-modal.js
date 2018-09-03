@@ -25,7 +25,7 @@ class ManageMediaSection extends Component {
 
   handleFileChange = (event, itemPos) => {
     if (event.target.files.length > 0) {
-      const handleFilesSelected = this.props.store.get('handleFilesSelected');
+      const handleFilesSelected = this.props.store.getBlockHandler('handleFilesSelected');
       handleFilesSelected(event.target.files, itemPos);
     }
     event.target.value = ''; //reset the input
@@ -40,7 +40,7 @@ class ManageMediaSection extends Component {
   };
 
   render() {
-    const { helpers, store, t, relValue, anchorTarget, isMobile } = this.props;
+    const { helpers, store, t, relValue, anchorTarget, isMobile, uiSettings } = this.props;
     const { handleFileSelection } = helpers;
 
     return (
@@ -51,12 +51,13 @@ class ManageMediaSection extends Component {
           onItemsChange={this.applyItems}
           handleFileChange={this.handleFileChange}
           handleFileSelection={handleFileSelection && this.handleFileSelection}
-          handleFilesAdded={store.get('handleFilesAdded')}
+          handleFilesAdded={store.getBlockHandler('handleFilesAdded')}
           deleteBlock={store.get('deleteBlock')}
           t={t}
           relValue={relValue}
           anchorTarget={anchorTarget}
           isMobile={isMobile}
+          uiSettings={uiSettings}
         />
       </div>
     );
@@ -72,6 +73,7 @@ ManageMediaSection.propTypes = {
   t: PropTypes.func,
   anchorTarget: PropTypes.string,
   relValue: PropTypes.string,
+  uiSettings: PropTypes.object,
 };
 
 class AdvancedSettingsSection extends Component {
@@ -186,7 +188,7 @@ export class GallerySettingsModal extends Component {
 
   render() {
     const styles = this.styles;
-    const { pubsub, helpers, t, isMobile, anchorTarget, relValue } = this.props;
+    const { pubsub, helpers, t, isMobile, anchorTarget, relValue, uiSettings } = this.props;
     const { activeTab } = this.state;
     const componentData = pubsub.get('componentData');
     // console.log('MODAL_RENDER: ', componentData);
@@ -214,6 +216,7 @@ export class GallerySettingsModal extends Component {
               isMobile
               anchorTarget={anchorTarget}
               relValue={relValue}
+              uiSettings={uiSettings}
             /> : null }
           {activeTab === 'advanced_settings' ? <AdvancedSettingsSection theme={this.props.theme} data={componentData} store={pubsub.store} helpers={helpers} t={t} isMobile/> : null }
         </div>
@@ -234,6 +237,7 @@ export class GallerySettingsModal extends Component {
                   t={t}
                   anchorTarget={anchorTarget}
                   relValue={relValue}
+                  uiSettings={uiSettings}
                 />
               </Tab>
               <Tab label={this.tabName('advanced_settings', t)} value={'advanced_settings'} theme={this.props.theme}>
@@ -258,6 +262,7 @@ GallerySettingsModal.propTypes = {
   t: PropTypes.func,
   relValue: PropTypes.string,
   anchorTarget: PropTypes.string,
+  uiSettings: PropTypes.object,
 };
 
 export default GallerySettingsModal;

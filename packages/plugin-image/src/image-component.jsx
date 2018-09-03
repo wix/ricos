@@ -15,9 +15,11 @@ class ImageComponent extends React.Component {
       super(props);
       this.state = Object.assign({ isMounted: false }, this.stateFromProps(props));
 
-      if (this.props.store) {
-        this.props.store.set('handleFilesSelected', this.handleFilesSelected.bind(this));
-        this.props.store.set('handleFilesAdded', this.handleFilesAdded.bind(this));
+      const { block, store } = this.props;
+      if (store) {
+        const blockKey = block.getKey();
+        store.setBlockHandler('handleFilesSelected', blockKey, this.handleFilesSelected.bind(this));
+        store.setBlockHandler('handleFilesAdded', blockKey, this.handleFilesAdded.bind(this));
       }
     }
 
@@ -87,7 +89,7 @@ class ImageComponent extends React.Component {
     const { helpers } = this.props;
     const hasFileChangeHelper = helpers && helpers.onFilesChange;
     if (hasFileChangeHelper && fileList.length > 0) {
-      helpers.onFilesChange(fileList[0], ({ data, error }) => this.handleFilesAdded({ files: fileList[0], data, error }));
+      helpers.onFilesChange(fileList[0], ({ data, error }) => this.handleFilesAdded({ data, error }));
     } else {
       this.resetLoadingState({ msg: 'Missing upload function' });
     }
@@ -107,11 +109,12 @@ class ImageComponent extends React.Component {
     //when updating componentData on an async method like this one,
     // we need to use a sync method to change the EditorState.
     // The broadcast is good if the toolbar is displaying some status or image
-    this.props.componentData.src = data;
+    const imageData = data.length ? data[0] : data;
+    this.props.componentData.src = imageData;
     const { setData } = this.props.blockProps;
     setData(this.props.componentData);
 
-    this.props.store.update('componentData', { src: data });
+    this.props.store.update('componentData', { src: imageData });
     this.resetLoadingState(error);
   };
 

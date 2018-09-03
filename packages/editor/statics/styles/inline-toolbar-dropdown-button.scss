@@ -1,7 +1,7 @@
 .inlineToolbarDropdown_wrapper {
   position: relative;
   margin-right: 10px;
-  padding: 10px 0 6px;
+  padding: 10px 0;
 }
 
 .inlineToolbarDropdown_options {
@@ -18,6 +18,10 @@
   padding: 0 !important;
 }
 
-.inlineToolbarDropdownButton {}
+.inlineToolbarDropdownButton {
+  outline: none;
+}
 
-.inlineToolbarDropdownButton_icon {}
+.inlineToolbarDropdownButton_icon {
+  outline: none;
+}

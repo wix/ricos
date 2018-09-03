@@ -6,11 +6,13 @@
 .inlineStyleDropdownButton_wrapper {
   position: relative;
   margin-right: 10px;
-  padding: 10px 0 6px;
+  padding: 10px 0;
   display: block;
 }
 
-.inlineStyleDropdownButton_icon {}
+.inlineStyleDropdownButton_icon {
+  outline: none;
+}
 
 .inlineStyleDropdown_options {
   position: absolute;

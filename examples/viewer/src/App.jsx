@@ -5,12 +5,12 @@ import { RichContentModal, mergeStyles, Button, normalizeInitialState } from 'wi
 import { RichContentViewer } from 'wix-rich-content-viewer';
 import RichContentRawDataViewer from './RichContentRawDataViewer';
 
-import { videoTypeMapper } from 'wix-rich-content-plugin-video';
-import { imageTypeMapper } from 'wix-rich-content-plugin-image';
-import { galleryTypeMapper } from 'wix-rich-content-plugin-gallery';
-import { dividerTypeMapper } from 'wix-rich-content-plugin-divider';
-import { htmlTypeMapper } from 'wix-rich-content-plugin-html';
-import { linkTypeMapper, LinkViewer, LinkParseStrategy } from 'wix-rich-content-plugin-link';
+import { videoTypeMapper } from 'wix-rich-content-plugin-video/dist/module.viewer';
+import { imageTypeMapper } from 'wix-rich-content-plugin-image/dist/module.viewer';
+import { galleryTypeMapper } from 'wix-rich-content-plugin-gallery/dist/module.viewer';
+import { dividerTypeMapper } from 'wix-rich-content-plugin-divider/dist/module.viewer';
+import { htmlTypeMapper } from 'wix-rich-content-plugin-html/dist/module.viewer';
+import { linkTypeMapper, LinkViewer, LinkParseStrategy } from 'wix-rich-content-plugin-link/dist/module.viewer';
 
 import { Strategy as HashTagStrategy, Component as HashTag } from 'wix-rich-content-plugin-hashtag';
 

@@ -1,3 +1,4 @@
+$opacityTransition: opacity 0.8s ease;
 .imageContainer {
   display: block;
   position: relative;
@@ -5,9 +6,7 @@
 }
 
 .imageWrapper {
-  overflow: hidden;
-
-  // &:before {
+  overflow: hidden; // &:before {
   //   content: " ";
   //   position: absolute;
   //   z-index: 0;
@@ -37,11 +36,9 @@
   bottom: 0;
 }
 
-.imageDescription {
-}
+.imageDescription {}
 
-.imageTitle {
-}
+.imageTitle {}
 
 .imageCaption {
   text-align: center;
@@ -52,6 +49,7 @@
 
 .imagePreload {
   position: relative;
+  transition: $opacityTransition;
   filter: blur(8px);
 }
 
@@ -61,11 +59,11 @@
   top: 0;
   left: 0;
   opacity: 0;
-  transition: opacity 0.8s ease;
+  transition: $opacityTransition;
 }
 
 @keyframes image_loading {
-  0%   {
+  0% {
     width: 5%;
     left: -5%;
   }
@@ -73,7 +71,7 @@
     width: 50%;
     left: 25%;
   }
-  100%   {
+  100% {
     width: 5%;
     left: 100%;
   }

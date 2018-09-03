@@ -3,13 +3,14 @@ import PropTypes from 'prop-types';
 import { SortableContainer as sortableContainer, SortableElement as sortableElement, arrayMove } from 'react-sortable-hoc';
 import classNames from 'classnames';
 import findIndex from 'lodash/findIndex';
+import pick from 'lodash/pick';
 import { getScaleToFillImageURL } from 'image-client-api/dist/imageClientSDK';
 
 import Styles from '../../../statics/styles/gallery-items-sortable.scss';
 import ImageSettings from './gallery-image-settings';
 import { mergeStyles, FileInput, ImageLoader } from 'wix-rich-content-common';
 
-import { FabIcon, UploadIcon } from '../../icons';
+import { FabIcon, UploadIcon, SelectedIcon, NotSelectedIcon } from '../../icons';
 
 //eslint-disable-next-line no-unused-vars
 const EMPTY_SMALL_PLACEHOLDER = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
@@ -78,6 +79,8 @@ const SortableItem = sortableElement(props => {
           height: imageSize + 'px',
         }}
       >
+        {item.selected && isMobile && !isMobileSorting && <SelectedIcon className={styles.itemContainerSelected_icon}/> }
+        {!item.selected && isMobile && !isMobileSorting && <NotSelectedIcon className={styles.itemContainerNotSelected_icon}/> }
         {url ? <img
           alt="Gallery Item Thumbnail"
           className={styles.itemImage}
@@ -306,9 +309,11 @@ export class SortableComponent extends Component {
     const item = items[itemIdx];
     item.selected = !item.selected;
     const selectedItems = items.filter(i => i.selected);
+
     this.setState({
       items,
-      editedImage: selectedItems.length ? selectedItems[0] : null
+      editedImage: selectedItems.length ? selectedItems[0] : null,
+      editedImageIndex: selectedItems.length === 1 ? findIndex(items, i => i.itemId === selectedItems[0].itemId) : -1
     });
   }
 
@@ -326,6 +331,7 @@ export class SortableComponent extends Component {
   toggleImageSettings = (imageSettingsVisible, itemIdx) => {
     const { items } = this.state;
     let editedImage;
+    let editedImageIndex;
 
     if (itemIdx >= 0) {
       items.map((item, idx) => {
@@ -333,14 +339,23 @@ export class SortableComponent extends Component {
         return item;
       });
       editedImage = this.state.items[itemIdx];
+      editedImageIndex = itemIdx;
     } else {
       editedImage = this.state.editedImage;
+      editedImageIndex = this.state.editedImageIndex;
+    }
+
+    if (imageSettingsVisible) {
+      this.initialImageState = items;
+    } else {
+      items.forEach(i => i.selected = false);
     }
 
     this.setState({
       items,
       imageSettingsVisible,
-      editedImage
+      editedImage,
+      editedImageIndex
     });
   }
 
@@ -365,9 +380,7 @@ export class SortableComponent extends Component {
 
   componentDidMount() {
     const newState = this.propsToState(this.props);
-    if (newState.items.length > 0) {
-      newState.items.forEach(i => i.selected = false);
-    }
+    newState.items.forEach(i => i.selected = false);
     this.setState(newState);
   }
 
@@ -375,8 +388,33 @@ export class SortableComponent extends Component {
     this.setState(this.propsToState(props));
   }
 
-  saveImageSettings(items) {
-    this.props.onItemsChange(items);
+  onCancel = () => {
+    this.props.onItemsChange(this.initialImageState);
+    this.setState({ items: this.initialImageState }, () => {
+      this.state.items.forEach(i => i.selected = false);
+    });
+    this.toggleImageSettings(false);
+  }
+
+  saveImageSettings = () => {
+    const processedItems = this.state.items.reduce(
+      (resultImages, image) => {
+        if (image.metadata && image.metadata.link && image.metadata.link.url) {
+          resultImages.push({ ...image,
+            metadata: {
+              ...image.metadata,
+              link: pick(image.metadata.link, 'url', 'rel', 'target')
+            }
+          });
+        } else {
+          resultImages.push({ ...image, metadata: { ...image.metadata, link: null } });
+        }
+        return resultImages;
+      }, []);
+    this.props.onItemsChange(processedItems);
+    this.setState({ items: processedItems }, () => {
+      this.state.items.forEach(i => i.selected = false);
+    });
     this.toggleImageSettings(false);
   }
 
@@ -387,8 +425,70 @@ export class SortableComponent extends Component {
     handleFileSelection(index, multiple, handleFilesAdded, deleteBlock);
   }
 
+  onNextImage = () => {
+    const { editedImageIndex, items } = this.state;
+    if (editedImageIndex >= 0) {
+      const newIndex = Math.min(editedImageIndex + 1, items.length - 1);
+      items[editedImageIndex].selected = false;
+      items[newIndex].selected = true;
+      this.setState({
+        editedImage: items[newIndex],
+        editedImageIndex: newIndex,
+        items
+      });
+    }
+  };
+
+  onPreviousImage = () => {
+    const { editedImageIndex, items } = this.state;
+    if (editedImageIndex >= 0) {
+      const newIndex = Math.max(editedImageIndex - 1, 0);
+      items[editedImageIndex].selected = false;
+      items[newIndex].selected = true;
+      this.setState({
+        editedImage: items[newIndex],
+        editedImageIndex: newIndex,
+        items
+      });
+    }
+  };
+
+  onUpdateImage = metadata => {
+    const { editedImage } = this.state;
+    Object.assign(editedImage.metadata, metadata);
+    this.setState({ editedImage });
+  };
+
+  onDeleteImage = () => {
+    const { editedImageIndex, items } = this.state;
+    if (editedImageIndex === 0 && items.length === 1) {
+      this.setState({
+        editedImageIndex: -1,
+        editedImage: null,
+        items: []
+      });
+      return;
+    }
+    const newItems = items.filter(item => !item.selected);
+    const newIndex = Math.min(editedImageIndex, newItems.length - 1);
+    const newEditedImage = newItems[newIndex];
+    newEditedImage.selected = true;
+    this.props.onItemsChange(newItems);
+    this.setState({
+      editedImageIndex: newIndex,
+      editedImage: newEditedImage,
+      items: newItems
+    });
+  };
+
+  handleFileChange = event => {
+    const { editedImageIndex } = this.state;
+    this.props.handleFileChange(event, editedImageIndex);
+    this.props.onItemsChange(this.state.items);
+  }
+
   render() {
-    const { handleFileSelection: shouldHandleFileSelection, theme, t, relValue, anchorTarget } = this.props;
+    const { handleFileSelection: shouldHandleFileSelection, theme, t, relValue, anchorTarget, uiSettings } = this.props;
     return !!this.state.items && (
       !this.state.imageSettingsVisible ? (
         <div>
@@ -425,16 +525,22 @@ export class SortableComponent extends Component {
         <div>
           <ImageSettings
             theme={theme}
-            images={this.state.items}
             selectedImage={this.state.editedImage}
-            onCancel={items => this.saveImageSettings(items)}
-            onSave={items => this.saveImageSettings(items)}
+            onCancel={this.onCancel}
+            onSave={this.saveImageSettings}
+            onNextImage={this.onNextImage}
+            onPreviousImage={this.onPreviousImage}
+            onDeleteImage={this.onDeleteImage}
+            onUpdateImage={data => this.onUpdateImage(data)}
             handleFileSelection={shouldHandleFileSelection ? this.handleFileSelection : null}
-            handleFileChange={this.props.handleFileChange}
+            handleFileChange={this.handleFileChange}
             t={t}
             isMobile={this.props.isMobile}
             relValue={relValue}
             anchorTarget={anchorTarget}
+            visibleLeftArrow={this.state.editedImageIndex > 0}
+            visibleRightArrow={this.state.editedImageIndex < this.state.items.length - 1}
+            uiSettings={uiSettings}
           />
         </div>
       )
@@ -444,7 +550,7 @@ export class SortableComponent extends Component {
 
 SortableComponent.propTypes = {
   onItemsChange: PropTypes.func.isRequired,
-  addItems: PropTypes.func.isRequired,
+  addItems: PropTypes.func,
   items: PropTypes.arrayOf(PropTypes.object).isRequired,
   handleFileChange: PropTypes.func,
   handleFileSelection: PropTypes.func,
@@ -455,4 +561,5 @@ SortableComponent.propTypes = {
   t: PropTypes.func,
   relValue: PropTypes.string,
   anchorTarget: PropTypes.string,
+  uiSettings: PropTypes.object,
 };

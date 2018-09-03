@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import LinkPanel from './LinkPanel';
@@ -18,7 +18,7 @@ LinkType.propTypes = {
   value: PropTypes.string.isRequired,
 };
 
-class LinkPanelContainer extends Component {
+class LinkPanelContainer extends PureComponent {
   constructor(props) {
     super(props);
     this.styles = mergeStyles({ styles, theme: props.theme });
@@ -49,7 +49,7 @@ class LinkPanelContainer extends Component {
 
   render() {
     const { styles } = this;
-    const { url, targetBlank, nofollow, theme, isActive, anchorTarget, relValue, isMobile, t, ariaProps, tabIndex } = this.props;
+    const { url, targetBlank, nofollow, theme, isActive, anchorTarget, relValue, isMobile, t, ariaProps, tabIndex, uiSettings } = this.props;
     const doneButtonText = t('LinkPanelContainer_DoneButton');
     const cancelButtonText = t('LinkPanelContainer_CancelButton');
     const removeButtonText = t('LinkPanelContainer_RemoveButton');
@@ -60,13 +60,15 @@ class LinkPanelContainer extends Component {
       {
         [styles.linkPanel_container_isMobile]: isMobile,
       });
+
+    const linkPanelAriaProps = { 'aria-label': 'Link management' };
     return (
       <FocusManager className={linkPanelContainerClassName} data-hook="linkPanelContainer" role="form" {...ariaProps}>
         <div className={styles.linkPanel_content}>
           <LinkPanel
-            onEnter={e => this.onDoneClick(e)} onEscape={e => this.onCancelClick(e)}
+            onEnter={this.onDoneClick.bind(this)} onEscape={this.onCancelClick.bind(this)}
             ref={this.setLinkPanel} theme={theme} url={url} targetBlank={targetBlank} anchorTarget={anchorTarget}
-            relValue={relValue} nofollow={nofollow} t={t} ariaProps={{ 'aria-label': 'Link management' }}
+            relValue={relValue} nofollow={nofollow} t={t} ariaProps={linkPanelAriaProps} uiSettings={uiSettings}
           />
           <div className={styles.linkPanel_actionsDivider} role="separator"/>
         </div>
@@ -116,6 +118,7 @@ LinkPanelContainer.propTypes = {
   t: PropTypes.func,
   ariaProps: PropTypes.object,
   tabIndex: PropTypes.number,
+  uiSettings: PropTypes.object,
 };
 
 export default LinkPanelContainer;

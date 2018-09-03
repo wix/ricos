@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import isUndefined from 'lodash/isUndefined';
 import isEqual from 'lodash/isEqual';
+
 import { mergeStyles } from '../Utils/mergeStyles';
 import { isValidUrl } from '../Utils/urlValidators';
 import Tooltip from './Tooltip';
@@ -111,9 +112,9 @@ class LinkPanel extends Component {
 
   render() {
     const { styles } = this;
-    const { isImageSettings, theme, anchorTarget, relValue, ariaProps } = this.props;
-    const showTargetBlankCheckbox = anchorTarget !== '_blank';
-    const showRelValueCheckbox = relValue !== 'nofollow';
+    const { isImageSettings, theme, anchorTarget, relValue, ariaProps, uiSettings } = this.props;
+    const showTargetBlankCheckbox = uiSettings.blankTargetToggleVisibilityFn(anchorTarget);
+    const showRelValueCheckbox = uiSettings.nofollowRelToggleVisibilityFn(relValue);
 
     const textInputClassName = classNames(styles.linkPanel_textInput,
       {
@@ -132,7 +133,14 @@ class LinkPanel extends Component {
             data-hook="linkPanelInput" onChange={this.handleIntermediateUrlChange} onBlur={this.validateUrl} value={this.state.intermediateUrl}
           />
           {!this.state.isValidUrl && (
-            <Tooltip data-hook="linkPanelTooltip" content={this.errorTooltipText} theme={theme} moveBy={{ y: 0 }} type={'error'}>
+            <Tooltip
+              shouldRebuildOnUpdate={() => !this.state.isValidUrl}
+              data-hook="linkPanelTooltip"
+              content={this.errorTooltipText}
+              theme={theme}
+              moveBy={{ y: 0 }}
+              type={'error'}
+            >
               <ErrorIcon data-hook="linkPanelError" className={styles.linkPanel_errorIcon} />
             </Tooltip>
           )}
@@ -174,5 +182,6 @@ LinkPanel.propTypes = {
   onValidateUrl: PropTypes.func,
   onEnter: PropTypes.func,
   onEscape: PropTypes.func,
+  uiSettings: PropTypes.object,
 };
 export default LinkPanel;

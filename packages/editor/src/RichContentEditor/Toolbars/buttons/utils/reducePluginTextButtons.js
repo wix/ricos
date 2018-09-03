@@ -1,46 +1,45 @@
 /**
- * @param {function[]} pluginTextButtonMappers array of mapper functions
- * @param {function} filterMap [optional] filter function mappedValue => boolean
+ * @param {Array<any>} pluginTextButtons array of button data entries
+ * @param {Function} filterButtons [optional] filter function button data => boolean
  * @returns {object} { buttonName1: button1, ... }
  */
-export const reducePluginTextButtons = (pluginTextButtonMappers, filterMap = () => true) => {
-  // iterate plugin button mappers
-  return pluginTextButtonMappers.reduce((buttons, mapper, i) => {
-    const map = mapper();
-    if (map) {
-      // iterate each map
-      const mapButtons = Object.keys(map).reduce((mapButtons, key) => {
-        if (filterMap(map[key])) {
+export const reducePluginTextButtons = (pluginTextButtons, filterButtons = () => true) => {
+  // iterate plugin buttons
+  return pluginTextButtons.reduce((buttons, buttonData, i) => {
+    if (buttonData) {
+      // iterate each button set
+      const buttonSet = Object.keys(buttonData).reduce((singlePluginButtons, key) => {
+        if (filterButtons(buttonData[key])) {
           // index appended to avoid cross-plugin name conflicts
-          return Object.assign(mapButtons, { [`${key}_${i}`]: map[key].component });
+          return Object.assign(singlePluginButtons, { [`${key}_${i}`]: buttonData[key].component });
         }
-        return mapButtons;
+        return singlePluginButtons;
       }, {});
-      return Object.assign(buttons, mapButtons);
+      return Object.assign(buttons, buttonSet);
     }
     return buttons;
   }, {});
 };
 
 /**
- * @param {function[]} pluginTextButtonMappers array of mapper functions
- * @param {function} filterMap [optional] filter function mappedValue => boolean
- * @returns {object[]} [{ name1, position1 }, ...]
+ * @param {Array<any>} pluginTextButtons array of button data entries
+ * @param {Function} filterButtons [optional] filter function button data => boolean
+ * @returns {Array<any>} [{ name1, position1 }, ...]
  */
-export const reducePluginTextButtonNames = (pluginTextButtonMappers, filterMap = () => true) => {
+export const reducePluginTextButtonNames = (pluginTextButtons, filterButtons = () => true) => {
   // iterate plugin button mappers
-  return pluginTextButtonMappers.reduce((buttonNames, mapper, i) => {
-    const map = mapper();
-    if (map) {
-      // iterate each map
-      const mapButtonNames = Object.keys(map).reduce((mapButtonNames, key) => {
-        if (filterMap(map[key])) {
+  return pluginTextButtons.reduce((buttonNames, buttonData, i) => {
+
+    if (buttonData) {
+      // iterate each buttonData
+      const singlePluginButtonNames = Object.keys(buttonData).reduce((names, key) => {
+        if (filterButtons(buttonData[key])) {
           // index appended to avoid cross-plugin name conflicts
-          return [...mapButtonNames, { name: `${key}_${i}`, position: map[key].position }];
+          return [...names, { name: `${key}_${i}`, position: buttonData[key].position }];
         }
-        return mapButtonNames;
+        return names;
       }, []);
-      return [...buttonNames, ...mapButtonNames];
+      return [...buttonNames, ...singlePluginButtonNames];
     }
     return buttonNames;
   }, []);

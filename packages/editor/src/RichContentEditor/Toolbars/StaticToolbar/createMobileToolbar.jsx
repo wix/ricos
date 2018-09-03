@@ -1,16 +1,15 @@
 import classNames from 'classnames';
-import get from 'lodash/get';
 import { decorateComponentWithProps, WixUtils } from 'wix-rich-content-common';
 import createStaticToolbar from './createStaticToolbar';
-import { AddPluginButton, MobileTextButtonList } from '../buttons';
-import { getTextButtonsFromList, reducePluginTextButtons, reducePluginTextButtonNames, mergeButtonLists } from '../buttons/utils';
+import { AddPluginButton } from '../buttons';
+import { getTextButtonsFromList } from '../buttons/utils';
 import toolbarStyles from '../../../../statics/styles/mobile-toolbar.scss';
 import buttonStyles from '../../../../statics/styles/mobile-toolbar-button.scss';
 import separatorStyles from '../../../../statics/styles/mobile-toolbar-separator.scss';
 
 const createMobileToolbar = ({
-  buttons, pluginTextButtonMappers, helpers, pubsub, getEditorState, setEditorState,
-  anchorTarget, relValue, theme, t, offset, visibilityFn
+  buttons, textPluginButtons, pluginButtons, helpers, pubsub, getEditorState, setEditorState,
+  anchorTarget, relValue, theme, t, offset, visibilityFn, uiSettings
 }) => {
   const mobileTheme = getMobileTheme(theme);
   return createStaticToolbar({
@@ -18,12 +17,24 @@ const createMobileToolbar = ({
     t,
     name: 'MobileToolbar',
     theme: mobileTheme,
-    structure: getMobileButtons({ buttons, pluginTextButtonMappers, helpers, pubsub, getEditorState, setEditorState, mobileTheme, t }),
+    structure: getMobileButtons({
+      buttons,
+      textPluginButtons,
+      pluginButtons,
+      helpers,
+      pubsub,
+      getEditorState,
+      setEditorState,
+      mobileTheme,
+      t,
+      uiSettings
+    }),
     anchorTarget,
     relValue,
     isMobile: true,
     offset,
-    visibilityFn
+    visibilityFn,
+    uiSettings
   });
 };
 
@@ -103,27 +114,32 @@ const getMobileTheme = theme => {
   };
 };
 
-const getMobileButtons = ({ buttons, pluginTextButtonMappers, helpers, pubsub, getEditorState, setEditorState, mobileTheme, t }) => {
-  const pluginButtons = reducePluginTextButtons(pluginTextButtonMappers, buttonData => buttonData.isMobile !== false);
-  const pluginButtonNames = reducePluginTextButtonNames(pluginTextButtonMappers, buttonData => buttonData.isMobile !== false);
-  const requestedButtons = get(buttons, 'textButtons.mobile');
-  const textButtonsList = requestedButtons || MobileTextButtonList;
-  const textButtons = mergeButtonLists(textButtonsList, pluginButtonNames, 'mobile');
-  const addPluginIndex = textButtons.findIndex(b => b === 'AddPlugin');
-
+const getMobileButtons = ({
+  buttons,
+  textPluginButtons,
+  pluginButtons,
+  helpers,
+  pubsub,
+  getEditorState,
+  setEditorState,
+  mobileTheme,
+  t,
+  uiSettings
+}) => {
+  const addPluginIndex = buttons.findIndex(b => b === 'AddPlugin');
   if (addPluginIndex !== -1) {
-    textButtons.splice(addPluginIndex, 1);
+    buttons.splice(addPluginIndex, 1);
   }
 
-  const structure = getTextButtonsFromList({ buttons: textButtons, pluginButtons, theme: mobileTheme, isMobile: true, t });
+  const structure = getTextButtonsFromList({ buttons, textPluginButtons, theme: mobileTheme, isMobile: true, t, uiSettings });
 
   if (addPluginIndex !== -1) {
-    const addAddPluginButton = buttons.pluginButtons && buttons.pluginButtons.length;
+    const addAddPluginButton = pluginButtons && pluginButtons.length;
     if (addAddPluginButton) {
       structure.splice(addPluginIndex, 0, decorateComponentWithProps(AddPluginButton, {
         openModal: helpers.openModal,
         closeModal: helpers.closeModal,
-        pluginButtons: buttons.pluginButtons,
+        pluginButtons,
         getEditorState,
         setEditorState,
         pubsub,

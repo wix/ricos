@@ -4,13 +4,11 @@ import { VIDEO_TYPE, VIDEO_TYPE_LEGACY } from './types';
 import { createBasePlugin } from 'wix-rich-content-common';
 
 const createVideoPlugin = (config = {}) => {
-  const { decorator, helpers, theme, t, isMobile, anchorTarget, relValue, video: settings } = config;
+  const type = VIDEO_TYPE;
+  const { helpers, t, [type]: settings = {}, ...rest } = config;
 
   return createBasePlugin({
     component: Component,
-    decorator,
-    settings,
-    theme,
     type: VIDEO_TYPE,
     legacyType: VIDEO_TYPE_LEGACY,
     toolbar: createToolbar({
@@ -18,10 +16,9 @@ const createVideoPlugin = (config = {}) => {
       t,
     }),
     helpers,
-    isMobile,
-    anchorTarget,
-    relValue,
+    settings,
     t,
+    ...rest
   });
 };
 

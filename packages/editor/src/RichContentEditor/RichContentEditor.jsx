@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import { EditorState, convertFromRaw, CompositeDecorator } from '@wix/draft-js';
 import Editor from 'draft-js-plugins-editor';
 import get from 'lodash/get';
+import merge from 'lodash/merge';
 import includes from 'lodash/includes';
 import Measure from 'react-measure';
 import { translate } from 'react-i18next';
@@ -19,7 +20,6 @@ import {
   normalizeInitialState,
   createInlineStyleDecorators,
   mergeStyles,
-  WixUtils,
   TooltipHost,
   TOOLBARS
 } from 'wix-rich-content-common';
@@ -35,6 +35,12 @@ class RichContentEditor extends Component {
       theme: props.theme || {}
     };
     this.refId = Math.floor(Math.random() * 9999);
+
+    props.config.uiSettings = merge({
+      blankTargetToggleVisibilityFn: anchorTarget => anchorTarget !== '_blank',
+      nofollowRelToggleVisibilityFn: relValue => relValue !== 'nofollow'
+    }, props.config.uiSettings || {});
+
     this.initPlugins();
   }
 
@@ -48,31 +54,31 @@ class RichContentEditor extends Component {
       relValue,
       t,
     } = this.props;
+
     const { theme } = this.state;
     const getEditorState = () => this.state.editorState;
     const setEditorState = editorState => this.setState({ editorState });
-    const { pluginInstances, pluginButtons, pluginTextButtonMappers, pubsubs } =
+    const { pluginInstances, pluginButtons, pluginTextButtons, pubsubs } =
       createPlugins({ plugins, config, helpers, theme, t, isMobile, anchorTarget, relValue, getEditorState, setEditorState });
-    this.initEditorToolbars(pluginButtons, pluginTextButtonMappers);
-    this.pluginKeyBindings = initPluginKeyBindings(pluginTextButtonMappers);
+    this.initEditorToolbars(pluginButtons, pluginTextButtons);
+    this.pluginKeyBindings = initPluginKeyBindings(pluginTextButtons);
     this.plugins = [...pluginInstances, ...Object.values(this.toolbars)];
     this.subscriberPubsubs = pubsubs || [];
   }
 
-  initEditorToolbars(pluginButtons, pluginTextButtonMappers) {
+  initEditorToolbars(pluginButtons, pluginTextButtons) {
     const {
       helpers,
       anchorTarget,
       relValue,
-      textButtons,
       textToolbarType,
       isMobile,
       t,
-      config,
+      config = {},
       textAlignment
     } = this.props;
     const { theme } = this.state;
-    const buttons = { textButtons, pluginButtons, pluginTextButtonMappers };
+    const buttons = { pluginButtons, pluginTextButtons };
 
     this.toolbars = createEditorToolbars({
       buttons,
@@ -87,7 +93,8 @@ class RichContentEditor extends Component {
       setEditorState: editorState => this.setState({ editorState }),
       t,
       refId: this.refId,
-      getToolbarSettings: config.getToolbarSettings
+      getToolbarSettings: config.getToolbarSettings,
+      uiSettings: config.uiSettings
     });
   }
 
@@ -300,7 +307,6 @@ class RichContentEditor extends Component {
   render() {
     const { isMobile } = this.props;
     const { theme } = this.state;
-    const isAndroid = isMobile && !WixUtils.isiOS();
     const wrapperClassName = classNames(
       draftStyles.wrapper,
       styles.wrapper,
@@ -308,8 +314,6 @@ class RichContentEditor extends Component {
       {
         [styles.desktop]: !isMobile,
         [theme.desktop]: !isMobile && theme && theme.desktop,
-        [styles.android]: isAndroid,
-        [theme.android]: isAndroid
       }
     );
     return (
@@ -337,10 +341,6 @@ RichContentEditor.propTypes = {
   isMobile: PropTypes.bool,
   helpers: PropTypes.object,
   t: PropTypes.func,
-  textButtons: PropTypes.shape({
-    desktop: PropTypes.arrayOf(PropTypes.string),
-    mobile: PropTypes.arrayOf(PropTypes.string)
-  }),
   textToolbarType: PropTypes.oneOf(['inline', 'static']),
   plugins: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.func])),
   config: PropTypes.object,
@@ -368,6 +368,10 @@ RichContentEditor.propTypes = {
   textAlignment: PropTypes.oneOf(['left', 'right', 'center']),
   handleBeforeInput: PropTypes.func,
   handlePastedText: PropTypes.func,
+};
+
+RichContentEditor.defaultProps = {
+  config: {}
 };
 
 export default translate(null, { withRef: true })(RichContentEditor);

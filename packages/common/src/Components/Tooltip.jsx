@@ -7,16 +7,22 @@ class Tooltip extends React.Component {
     content: PropTypes.string.isRequired,
     moveBy: PropTypes.shape({ x: PropTypes.number, y: PropTypes.number }),
     children: PropTypes.node.isRequired,
-    type: PropTypes.oneOf(['success', 'warning', 'error', 'info', 'light', 'dark'])
+    type: PropTypes.oneOf(['success', 'warning', 'error', 'info', 'light', 'dark']),
+    shouldRebuildOnUpdate: PropTypes.func
   };
 
   static defaultProps = {
     moveBy: { x: 0, y: 0 },
-    type: 'dark'
+    type: 'dark',
+    shouldRebuildOnUpdate: () => false
   };
 
   componentDidMount() {
-    ReactTooltip.rebuild();
+    this.props.shouldRebuildOnUpdate() && ReactTooltip.rebuild();
+  }
+
+  componentDidUpdate() {
+    this.props.shouldRebuildOnUpdate() && ReactTooltip.rebuild();
   }
 
   render() {

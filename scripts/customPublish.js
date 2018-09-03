@@ -1,21 +1,17 @@
 /* eslint-disable no-console */
-
-const path = require('path');
 const execSync = require('child_process').execSync;
-const fs = require('fs');
-const glob = require('glob');
 const chalk = require('chalk');
 const semver = require('semver');
 const memoize = require('lodash/memoize');
 const get = require('lodash/get');
+const lernaPackages = require('lerna-packages');
+const deployExamples = require('./deployExamples');
 
-const DEFAULT_REGISTRY = 'https://registry.npmjs.org/';
 const LATEST_TAG = 'latest';
 const NEXT_TAG = 'next';
 const OLD_TAG = 'old';
 
-const lernaJsonPath = path.resolve('./lerna.json');
-const lernaConfig = require(lernaJsonPath);
+const publishedPackages = [];
 
 const getPackageDetails = memoize(pkg => {
   try {
@@ -77,6 +73,7 @@ function publish(pkg) {
   );
 
   execSync(publishCommand, { stdio: 'inherit' });
+  publishedPackages.push(pkg);
   return true;
 }
 
@@ -103,27 +100,45 @@ function release(pkg) {
   }
 }
 
-// 1. load all non-private pacakges from lerna.json
-// 2. verify that each package can be published by checking the registry.
-//   (Can only publish versions that doesn't already exist)
-// 3. choose a tag ->
-// * `old` for a release that is less than latest (semver).
-// * `next` for a prerelease (beta/alpha/rc).
-// * `latest` as default.
-// 4. perform npm publish using the chosen tag.
+function publishPackages() {
+  lernaPackages()
+    .filter(p => !p.private)
+    .forEach(p => release(p));
+}
 
-lernaConfig.packages.forEach(pacakagesGlob => {
-  glob.sync(pacakagesGlob).forEach(pkgPath => {
-    const pkgJsonPath = path.resolve(pkgPath, 'package.json');
-    const pkg = JSON.parse(fs.readFileSync(pkgJsonPath));
+function publishExamples() {
+  if (publishedPackages.length) {
+    const packagesWithExamples = [
+      {
+        packageName: 'wix-rich-content-editor',
+        exampleName: 'rich-content-editor',
+        examplePath: 'examples/editor'
+      },
+      {
+        packageName: 'wix-rich-content-viewer',
+        exampleName: 'rich-content-viewer',
+        examplePath: 'examples/viewer'
+      },
+    ];
 
-    if (!pkg.private) {
-      release({
-        name: get(pkg, 'name'),
-        version: get(pkg, 'version'),
-        registry: get(pkg, 'publishConfig.registry', DEFAULT_REGISTRY),
-        path: pkgPath,
-      });
-    }
-  });
-});
+    const examplesToDeploy = [];
+    packagesWithExamples.forEach(packageWithExample => {
+      const pkg = publishedPackages.find(p => packageWithExample.packageName === p.name);
+      if (pkg) {
+        const { exampleName: name, examplePath: path } = packageWithExample;
+        const { version } = pkg;
+        examplesToDeploy.push({
+          name,
+          path,
+          version
+        });
+      }
+    });
+    deployExamples(examplesToDeploy);
+  } else {
+    console.log('No examples to publish');
+  }
+}
+
+publishPackages();
+publishExamples();

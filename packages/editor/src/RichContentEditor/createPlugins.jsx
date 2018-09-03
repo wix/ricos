@@ -14,11 +14,11 @@ const createPlugins = ({ plugins, config, helpers, theme, t, isMobile, anchorTar
   const wixPlugins = (plugins || []).map(createPlugin => createPlugin(wixPluginConfig));
 
   let pluginButtons = [];
-  let pluginTextButtonMappers = [];
+  let pluginTextButtons = [];
   let pubsubs = [];
   wixPlugins.forEach(wixPlugin => {
     pluginButtons = [...pluginButtons, ...(wixPlugin.InsertPluginButtons || [])];
-    pluginTextButtonMappers = [...pluginTextButtonMappers, ...(wixPlugin.TextButtonMapper ? [wixPlugin.TextButtonMapper] : [])];
+    pluginTextButtons = [...pluginTextButtons, ...(wixPlugin.TextButtonMapper ? [wixPlugin.TextButtonMapper()] : [])]; // eslint-disable-line new-cap
     pubsubs = [...pubsubs, ...(wixPlugin.pubsub ? [wixPlugin.pubsub] : [])];
   });
 
@@ -31,7 +31,7 @@ const createPlugins = ({ plugins, config, helpers, theme, t, isMobile, anchorTar
   return {
     pluginInstances,
     pluginButtons,
-    pluginTextButtonMappers,
+    pluginTextButtons,
     pubsubs
   };
 };

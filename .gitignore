@@ -16,7 +16,6 @@ stats.html
 **/.project
 **/.settings/*
 *.code-workspace
-**/.vscode/**
 
 .history/**
 *.todo

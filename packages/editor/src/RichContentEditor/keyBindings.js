@@ -77,37 +77,36 @@ export const keyBindingFn = customCommands => {
   };
 };
 
-// merges all plugin TextButtonMappers keyBindings int an object { commands: [{ cmd1 }, ...], commandHandlers: { cmd1: handler1, ... } }
-export const initPluginKeyBindings = pluginTextButtonMappers =>
-  pluginTextButtonMappers.reduce((bindings, mapper, i) => {
-    const map = mapper();
-    if (map) {
-      // iterate each map
-      const mapBindings = Object.keys(map).reduce((mapBindings, key) => {
-        if (map[key].keyBindings && map[key].keyBindings.length > 0) {
-          // array of commands per map
-          const mapCommands = map[key].keyBindings.map(binding => ({
+// merges all plugin TextButton keyBindings into an object { commands: [{ cmd1 }, ...], commandHandlers: { cmd1: handler1, ... } }
+export const initPluginKeyBindings = pluginTextButtons =>
+  pluginTextButtons.reduce((bindings, buttonData, i) => {
+    if (buttonData) {
+      // iterate each button
+      const buttonBindings = Object.keys(buttonData).reduce((buttonBindings, key) => {
+        if (buttonData[key].keyBindings && buttonData[key].keyBindings.length > 0) {
+          // array of commands per button
+          const buttonCommands = buttonData[key].keyBindings.map(binding => ({
             ...binding.keyCommand,
             // avoid cross-plugin name collisions
             command: `${binding.keyCommand.command}_${i}`
           }));
-          // handlers per map
-          const mapCommandHandlers = {};
-          map[key].keyBindings.forEach(binding => {
-            Object.assign(mapCommandHandlers, { [`${binding.keyCommand.command}_${i}`]: binding.commandHandler });
+          // handlers per button
+          const buttonCommandHandlers = {};
+          buttonData[key].keyBindings.forEach(binding => {
+            Object.assign(buttonCommandHandlers, { [`${binding.keyCommand.command}_${i}`]: binding.commandHandler });
           });
-          // merge all map commands and handlers
+          // merge all button commands and handlers
           return {
-            commands: [...mapBindings.commands, ...mapCommands],
-            commandHandlers: { ...mapBindings.commandHandlers, ...mapCommandHandlers }
+            commands: [...buttonBindings.commands, ...buttonCommands],
+            commandHandlers: { ...buttonBindings.commandHandlers, ...buttonCommandHandlers }
           };
         }
-        return mapBindings;
+        return buttonBindings;
       }, { commands: [], commandHandlers: {} });
       // merge all commands and handlers
       return {
-        commands: [...bindings.commands, ...mapBindings.commands],
-        commandHandlers: { ...bindings.commandHandlers, ...mapBindings.commandHandlers }
+        commands: [...bindings.commands, ...buttonBindings.commands],
+        commandHandlers: { ...bindings.commandHandlers, ...buttonBindings.commandHandlers }
       };
     }
     return bindings;
