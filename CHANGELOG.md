@@ -18,7 +18,7 @@
 ### :bug: Bug Fix
 
 - `image`
-  - image component links now are handled individually
+  - [#125](https://github.com/wix-incubator/rich-content/pull/125) image component links now are handled individually
 - `viewer`
   - SSR support improved [WIP]
   - `RichContentViewer`: default props prevent crash
