@@ -81,7 +81,7 @@ export default class SoundCloudURLInputModal extends Component {
             value={url}
             error={!isSoundCloudUrl(url) && submitted ? t('SoundCloudUploadModal_Input_InvalidUrl') : null}
             placeholder={t('SoundCloudUploadModal_Input_Placeholder')}
-            theme={styles}
+            theme={theme}
             data-hook="soundCloudUploadModalInput"
           />
         </div>
@@ -91,7 +91,7 @@ export default class SoundCloudURLInputModal extends Component {
           cancel={() => this.onCloseRequested()}
           saveLabel={doneLabel}
           cancelLabel={cancelLabel}
-          theme={styles}
+          theme={theme}
           t={t}
         />
       </div>

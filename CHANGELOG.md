@@ -18,8 +18,8 @@
 ### :bug: Bug Fix
 
 - `viewer`
-  - SSR supported
-  - default props provided
+  - SSR support improved [WIP]
+  - `RichContentViewer`: default props prevent crash
 
 <br/>
 

@@ -10,6 +10,7 @@ import { imageTypeMapper } from 'wix-rich-content-plugin-image/dist/module.viewe
 import { galleryTypeMapper } from 'wix-rich-content-plugin-gallery/dist/module.viewer';
 import { dividerTypeMapper } from 'wix-rich-content-plugin-divider/dist/module.viewer';
 import { htmlTypeMapper } from 'wix-rich-content-plugin-html/dist/module.viewer';
+import { soundCloudTypeMapper } from 'wix-rich-content-plugin-sound-cloud/dist/module.viewer';
 import { linkTypeMapper, LinkViewer, LinkParseStrategy } from 'wix-rich-content-plugin-link/dist/module.viewer';
 
 import { Strategy as HashTagStrategy, Component as HashTag } from 'wix-rich-content-plugin-hashtag';
@@ -30,6 +31,7 @@ import 'wix-rich-content-plugin-image/dist/styles.min.css';
 import 'wix-rich-content-plugin-link/dist/styles.min.css';
 import 'wix-rich-content-plugin-mentions/dist/styles.min.css';
 import 'wix-rich-content-plugin-video/dist/styles.min.css';
+import 'wix-rich-content-plugin-sound-cloud/dist/styles.min.css';
 
 const modalStyleDefaults = {
   content: {
@@ -61,7 +63,8 @@ class App extends Component {
       galleryTypeMapper,
       dividerTypeMapper,
       htmlTypeMapper,
-      linkTypeMapper];
+      linkTypeMapper,
+      soundCloudTypeMapper];
 
     this.decorators = [{
         strategy: LinkParseStrategy,

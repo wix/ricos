@@ -4,23 +4,17 @@ import { SOUND_CLOUD_TYPE } from './types';
 import { createBasePlugin } from 'wix-rich-content-common';
 
 const createSoundCloudPlugin = (config = {}) => {
-  const { decorator, helpers, theme, t, isMobile, anchorTarget, relValue, soundCloud: settings } = config;
+  const type = SOUND_CLOUD_TYPE;
+  const { helpers, t, [type]: settings = {}, ...rest } = config;
 
   return createBasePlugin({
     component: Component,
-    decorator,
     settings,
-    theme,
-    type: SOUND_CLOUD_TYPE,
-    toolbar: createToolbar({
-      helpers,
-      t,
-    }),
+    type,
+    toolbar: createToolbar({ helpers, t }),
     helpers,
-    isMobile,
-    anchorTarget,
-    relValue,
     t,
+    ...rest
   });
 };
 

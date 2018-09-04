@@ -46,17 +46,18 @@ function setBlockTypeAndMerge(blockType, blocks, contentState) {
 
   const blockGroup = blocks.skipWhile(isAtomic).takeWhile(isNotAtomic);
 
+  let modifiedContentState = contentState;
   if (blockGroup.count()) {
     const firstKey = blockGroup.first().getKey();
     const lastKey = blockGroup.last().getKey();
     const afterMove = moveTextToFirstBlock(blockGroup, contentState);
     const afterTypeChange = setBlockType(firstKey, blockType, afterMove);
-    contentState = replaceSelectedBlocksWithCodeBlock(firstKey, lastKey, afterTypeChange);
+    modifiedContentState = replaceSelectedBlocksWithCodeBlock(firstKey, lastKey, afterTypeChange);
   }
 
-  blocks = blocks.skipWhile(isAtomic).skipWhile(isNotAtomic);
+  const filteredBlocks = blocks.skipWhile(isAtomic).skipWhile(isNotAtomic);
 
-  return setBlockTypeAndMerge(blockType, blocks, contentState);
+  return setBlockTypeAndMerge(blockType, filteredBlocks, modifiedContentState);
 }
 
 function moveTextToFirstBlock(blocks, contentState) {
