@@ -20,7 +20,16 @@ class ImageSettings extends Component {
     super(props);
     this.state = this.propsToState(props);
     this.initialState = { ...this.state };
-    this.styles = mergeStyles({ styles, theme: props.theme });
+    const { t, theme } = props;
+    this.styles = mergeStyles({ styles, theme });
+
+    this.updateLabel = t('ImageSettings_Update');
+    this.headerText = t('ImageSettings_Header');
+    this.captionLabel = t('ImageSettings_Caption_Label');
+    this.captionInputPlaceholder = t('ImageSettings_Caption_Input_Placeholder');
+    this.altLabel = t('ImageSettings_Alt_Label');
+    this.altInputPlaceholder = t('ImageSettings_Alt_Input_Placeholder');
+    this.linkLabel = t('ImageSettings_Link_Label');
   }
 
   propsToState(props) {
@@ -61,9 +70,9 @@ class ImageSettings extends Component {
   wrapBlockInLink = ({ url, targetBlank, nofollow }) => {
     const { pubsub } = this.props;
     if (!isEmpty(url)) {
-      pubsub.set('componentLink', { url, targetBlank, nofollow });
+      pubsub.setBlockData({ key: 'componentLink', item: { url, targetBlank, nofollow } });
     } else {
-      pubsub.set('componentLink', null);
+      pubsub.setBlockData({ key: 'componentLink', item: null });
     }
   };
 
@@ -81,7 +90,7 @@ class ImageSettings extends Component {
   };
 
   deleteLink = () => {
-    this.props.pubsub.set('componentLink', null);
+    this.props.pubsub.setBlockData({ key: 'componentLink', item: null });
   }
 
   onDoneClick = () => {
@@ -110,13 +119,7 @@ class ImageSettings extends Component {
     const { url, target, rel } = (!isEmpty(config.link) ? config.link : {});
     const targetBlank = target === '_blank';
     const nofollow = rel === 'nofollow';
-    const updateLabel = t('ImageSettings_Update');
-    const headerText = t('ImageSettings_Header');
-    const captionLabel = t('ImageSettings_Caption_Label');
-    const captionInputPlaceholder = t('ImageSettings_Caption_Input_Placeholder');
-    const altLabel = t('ImageSettings_Alt_Label');
-    const altInputPlaceholder = t('ImageSettings_Alt_Input_Placeholder');
-    const linkLabel = t('ImageSettings_Link_Label');
+
 
     return (
       <div className={this.styles.imageSettings} data-hook="imageSettings">
@@ -127,9 +130,9 @@ class ImageSettings extends Component {
             theme={theme}
             cancel={() => this.revertComponentData()}
             save={() => this.onDoneClick()}
-            saveName={updateLabel}
+            saveName={this.updateLabel}
           /> :
-          <h3 className={this.styles.imageSettingsTitle}>{headerText}</h3>
+          <h3 className={this.styles.imageSettingsTitle}>{this.headerText}</h3>
         }
         <div className={classNames(styles.imageSettings_scrollContainer, { [styles.imageSettings_mobile]: isMobile })}>
           <SettingsSection theme={theme} ariaProps={{ 'aria-label': 'image preview', role: 'region' }}>
@@ -142,8 +145,8 @@ class ImageSettings extends Component {
             <InputWithLabel
               theme={theme}
               id="imageSettingsCaptionInput"
-              label={captionLabel}
-              placeholder={captionInputPlaceholder}
+              label={this.captionLabel}
+              placeholder={this.captionInputPlaceholder}
               value={metadata.caption || ''}
               onChange={event => this.metadataUpdated(metadata, { caption: event.target.value })}
               dataHook="imageSettingsCaptionInput"
@@ -153,15 +156,15 @@ class ImageSettings extends Component {
             <InputWithLabel
               theme={theme}
               id="imageSettingsAltInput"
-              label={altLabel}
-              placeholder={altInputPlaceholder}
+              label={this.altLabel}
+              placeholder={this.altInputPlaceholder}
               value={metadata.alt || ''}
               onChange={event => this.metadataUpdated(metadata, { alt: event.target.value })}
               dataHook="imageSettingsAltInput"
             />
           </SettingsSection>
           <SettingsSection theme={theme} className={this.styles.imageSettingsSection} ariaProps={{ 'aria-label': 'image link', role: 'region' }}>
-            <span id="image_settings_link_lbl" className={this.styles.inputWithLabel_label}>{linkLabel}</span>
+            <span id="image_settings_link_lbl" className={this.styles.inputWithLabel_label}>{this.linkLabel}</span>
             <LinkPanel
               ref={this.setLinkPanel} theme={theme} url={url} targetBlank={targetBlank} nofollow={nofollow} uiSettings={uiSettings}
               isImageSettings anchorTarget={anchorTarget} relValue={relValue} t={t} ariaProps={{ 'aria-labelledby': 'image_settings_link_lbl' }}

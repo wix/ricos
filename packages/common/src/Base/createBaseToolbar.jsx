@@ -58,7 +58,7 @@ export default function createToolbar({ buttons, theme, pubsub, helpers, isMobil
       pubsub.subscribe('componentAlignment', this.onComponentAlignmentChange);
       pubsub.subscribe('componentSize', this.onComponentSizeChange);
       pubsub.subscribe('componentTextWrap', this.onComponentTextWrapChange);
-      pubsub.subscribe('componentLink', this.onComponentLinkChange);
+      this.unsubscribeOnBlock = pubsub.subscribeOnBlock({ key: 'componentLink', callback: this.onComponentLinkChange });
       pubsub.subscribe('editorBounds', this.onEditorBoundsChange);
     }
 
@@ -69,8 +69,8 @@ export default function createToolbar({ buttons, theme, pubsub, helpers, isMobil
       pubsub.unsubscribe('componentAlignment', this.onComponentAlignmentChange);
       pubsub.unsubscribe('componentSize', this.onComponentSizeChange);
       pubsub.unsubscribe('componentTextWrap', this.onComponentTextWrapChange);
-      pubsub.unsubscribe('componentLink', this.onComponentLinkChange);
       pubsub.unsubscribe('editorBounds', this.onEditorBoundsChange);
+      this.unsubscribeOnBlock && this.unsubscribeOnBlock();
     }
 
     onEditorBoundsChange = editorBounds => {

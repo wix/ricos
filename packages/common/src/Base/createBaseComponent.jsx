@@ -46,14 +46,13 @@ const createBaseComponent = ({ PluginComponent, theme, settings, pubsub, helpers
     }
 
     componentDidMount() {
-      const { block } = this.props;
       this.updateComponent();
       pubsub.subscribe('componentData', this.onComponentDataChange);
       pubsub.subscribe('componentState', this.onComponentStateChange);
       pubsub.subscribe('componentAlignment', this.onComponentAlignmentChange);
       pubsub.subscribe('componentSize', this.onComponentSizeChange);
       pubsub.subscribe('componentTextWrap', this.onComponentTextWrapChange);
-      pubsub.subscribe(`${block.getKey()}_componentLink`, this.onComponentLinkChange);
+      this.unsubscribeOnBlock = pubsub.subscribeOnBlock({ key: 'componentLink', callback: this.onComponentLinkChange });
       pubsub.subscribe('editorBounds', this.onEditorBoundsChange);
     }
 
@@ -64,15 +63,14 @@ const createBaseComponent = ({ PluginComponent, theme, settings, pubsub, helpers
     }
 
     componentWillUnmount() {
-      const { block } = this.props;
       pubsub.unsubscribe('componentData', this.onComponentDataChange);
       pubsub.unsubscribe('componentState', this.onComponentStateChange);
       pubsub.unsubscribe('componentAlignment', this.onComponentAlignmentChange);
       pubsub.unsubscribe('componentSize', this.onComponentSizeChange);
       pubsub.unsubscribe('componentTextWrap', this.onComponentTextWrapChange);
-      pubsub.unsubscribe(`${block.getKey()}_componentLink`, this.onComponentLinkChange);
       pubsub.unsubscribe('editorBounds', this.onEditorBoundsChange);
       pubsub.set('visibleBlock', null);
+      this.unsubscribeOnBlock && this.unsubscribeOnBlock();
     }
 
     isMe = () => {

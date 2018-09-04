@@ -10,10 +10,19 @@ export const simplePubsub = initialState => {
     }
     listeners[key] = listeners[key] || [];
     listeners[key].push(callback);
+    return () => {
+      listeners[key] = listeners[key].filter(listener => listener !== callback);
+    };
   };
 
   const unsubscribe = (key, callback) => {
     listeners[key] = listeners[key].filter(listener => listener !== callback);
+  };
+
+  // If unsubscribe is called on componentWillUnmount, the state.visibleBlock key is null
+  // so, the return value is used for unsubscribe
+  const subscribeOnBlock = ({ key, blockKey = state.visibleBlock, callback }) => {
+    return subscribe(blockHandlerKey(key, blockKey), callback);
   };
 
   const update = (key, newData) => {
@@ -92,6 +101,7 @@ export const simplePubsub = initialState => {
     getBlockHandler,
     store,
     getBlockData,
-    setBlockData
+    setBlockData,
+    subscribeOnBlock,
   };
 };
