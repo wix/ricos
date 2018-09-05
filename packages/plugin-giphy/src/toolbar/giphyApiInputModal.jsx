@@ -3,7 +3,8 @@ import React, { Component } from 'react';
 import classNames from 'classnames';
 import { mergeStyles, TextInput, CloseIcon } from 'wix-rich-content-common';
 import styles from '../../statics/styles/giphy-api-input-modal.scss';
-//import getGifs SDK
+import GphApiClient from 'giphy-js-sdk-core';
+import { SEARCH_TYPE, GIPHY_API_KEY } from '../constants';
 
 export default class GiphyApiInputModal extends Component {
   constructor(props) {
@@ -14,17 +15,24 @@ export default class GiphyApiInputModal extends Component {
       searchText: '',
       gifs: [],
       url: componentData.src || '',
+      isLoaded: false
     };
   }
 
-  getGifs = (searchText) => {
-    //send request and store gifs in state 
-  }
+  getGifs = searchText => {
+    let client = GphApiClient(GIPHY_API_KEY);
+    client
+      .search(SEARCH_TYPE, { q: searchText })
+      .then(response => {
+        this.setState({ gifs: response.data, isLoaded:true });
+      })
+      .catch(err => {});
+  };
 
-  onChange = () => {
+  onChange = e => {
     const { url } = this.state.url;
-
-    //update the serachText & call getGifs
+    this.setState({ searchText: e.target.value });
+    this.getGifs(this.state.searchText);
     this.onCloseRequested();
     this.setState({ submitted: true });
   };
@@ -43,9 +51,9 @@ export default class GiphyApiInputModal extends Component {
     }
   };
 
-  onClick= () => {
+  onClick = () => {
     // read div's url and store it into component data url
-  }
+  };
 
   render() {
     const { url, submitted } = this.state;
@@ -68,7 +76,7 @@ export default class GiphyApiInputModal extends Component {
             data-hook="giphyUploadModalInput"
           />
         </div>
-        {/* Map the gifs into divs with onClick event */}
+        { /* Map the gifs into divs with onClick event */}
       </div>
     );
   }
