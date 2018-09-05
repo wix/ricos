@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import classNames from 'classnames';
 import { mergeStyles, TextInput, CloseIcon } from 'wix-rich-content-common';
 import styles from '../../statics/styles/giphy-api-input-modal.scss';
+//import getGifs SDK
 
 export default class GiphyApiInputModal extends Component {
   constructor(props) {
