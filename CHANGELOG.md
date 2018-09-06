@@ -10,6 +10,19 @@
 
 ## [Unreleased]
 
+### :boom: Breaking Change
+
+- `general`
+  - `image` and `gallery` plugins are moved to a [separate repository](https://github.com/wix-incubator/rich-content-plugins-wix) since they have Wix private dependencies
+
+## 1.5.2 (Sep 5, 2018)
+
+~~### :rocket: New Feature~~
+
+~~- `soundcloud`~~
+
+  ~~- [#92](https://github.com/wix-incubator/rich-content/pull/92) `plugin-sound-cloud` implemented~~
+
 ### :bug: Bug Fix
 
 - `image`
