@@ -6,8 +6,6 @@ import { RichContentViewer } from 'wix-rich-content-viewer';
 import RichContentRawDataViewer from './RichContentRawDataViewer';
 
 import { videoTypeMapper } from 'wix-rich-content-plugin-video/dist/module.viewer';
-import { imageTypeMapper } from 'wix-rich-content-plugin-image/dist/module.viewer';
-import { galleryTypeMapper } from 'wix-rich-content-plugin-gallery/dist/module.viewer';
 import { dividerTypeMapper } from 'wix-rich-content-plugin-divider/dist/module.viewer';
 import { htmlTypeMapper } from 'wix-rich-content-plugin-html/dist/module.viewer';
 import { linkTypeMapper, LinkViewer, LinkParseStrategy } from 'wix-rich-content-plugin-link/dist/module.viewer';
@@ -23,10 +21,8 @@ import 'wix-rich-content-viewer/dist/styles.min.css';
 import 'wix-rich-content-plugin-code-block/dist/styles.min.css';
 import 'wix-rich-content-plugin-divider/dist/styles.min.css';
 import 'wix-rich-content-plugin-emoji/dist/styles.min.css';
-import 'wix-rich-content-plugin-gallery/dist/styles.min.css';
 import 'wix-rich-content-plugin-html/dist/styles.min.css';
 import 'wix-rich-content-plugin-hashtag/dist/styles.min.css';
-import 'wix-rich-content-plugin-image/dist/styles.min.css';
 import 'wix-rich-content-plugin-link/dist/styles.min.css';
 import 'wix-rich-content-plugin-mentions/dist/styles.min.css';
 import 'wix-rich-content-plugin-video/dist/styles.min.css';
@@ -57,11 +53,10 @@ class App extends Component {
 
     this.typeMappers = [
       videoTypeMapper,
-      imageTypeMapper,
-      galleryTypeMapper,
       dividerTypeMapper,
       htmlTypeMapper,
-      linkTypeMapper];
+      linkTypeMapper,
+    ];
 
     this.decorators = [{
         strategy: LinkParseStrategy,

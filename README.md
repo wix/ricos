@@ -199,13 +199,9 @@ You can find a full list of classes you can override in [here](./examples/editor
 
 [wix-rich-content-plugin-emoji](./pacakges/plugin-emoji) add emojis to your content.
 
-[wix-rich-content-plugin-gallery](./pacakges/plugin-gallery) add pro galleries to your content!!!
-
 [wix-rich-content-plugin-hashtag](./pacakges/plugin-hashtag) convert plain text #hastags into dynamic elements.
 
 [wix-rich-content-plugin-html](./pacakges/plugin-html) embed html code or sites in your content.
-
-[wix-rich-content-plugin-image](./pacakges/plugin-image) add images to your content.
 
 [wix-rich-content-plugin-link](./pacakges/plugin-link) convert plain text URLs into `<a>` tags.
 
