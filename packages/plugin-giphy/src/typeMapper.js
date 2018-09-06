@@ -1,5 +1,5 @@
 import GiphyViewer from './giphy-viewer';
-import { GIPHY_TYPE } from './types';
+import { GIPHY_TYPE } from './constants';
 import { containerClassName } from './classNameStrategies';
 
 export const typeMapper = () => ({

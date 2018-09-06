@@ -1,4 +1,4 @@
-import { DEFAULTS } from '../giphy-component';
+import { DEFAULTS } from '../constants';
 import { getModalStyles, TOOLBARS } from 'wix-rich-content-common';
 import GiphyApiInputModal from './giphyApiInputModal';
 import { InsertPluginIcon } from '../icons';

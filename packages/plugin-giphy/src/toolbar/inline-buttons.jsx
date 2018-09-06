@@ -2,7 +2,7 @@ import { BUTTONS, getModalStyles } from 'wix-rich-content-common';
 import { Modals } from '../modals';
 import { MediaReplaceIcon } from '../icons';
 
-export default({ t }) => {
+export default ({ t }) => {
   return [
     { keyName: 'sizeSmallCenter', type: BUTTONS.SIZE_SMALL_CENTER, mobile: false },
     { keyName: 'sizeContent', type: BUTTONS.SIZE_CONTENT, mobile: false },
@@ -15,7 +15,7 @@ export default({ t }) => {
       keyName: 'replace',
       type: BUTTONS.EXTERNAL_MODAL,
       icon: MediaReplaceIcon,
-      modalName: Modals.SOUND_CLOUD_URL_INPUT,
+      modalName: Modals.GIPHY_API_INPUT,
       modalStyles: getModalStyles({ fullScreen: false }),
       mobile: true,
       tooltipTextKey: 'ReplaceGiphyButton_Tooltip',
