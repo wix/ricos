@@ -55,7 +55,8 @@
     "focus-trap": "^2.4.5",
     "jsonschema": "^1.2.4",
     "linkify-it": "^2.0.3",
-    "react-tooltip": "^3.6.1"
+    "react-tooltip": "^3.6.1",
+    "react-measure": "^2.0.2"
   },
   "unpkg": true,
   "publishConfig": {
