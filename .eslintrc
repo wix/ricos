@@ -25,14 +25,7 @@
       "line-aligned"
     ],
     "react/jsx-space-before-closing": "off",
-    "react/jsx-tag-spacing": {
-      "closingSlash": "never",
-      "beforeSelfClosing": [
-        1,
-        "always"
-      ],
-      "afterOpening": "never"
-    },
+    "react/jsx-tag-spacing": "warn",
     "react/style-prop-object": "off",
     "react/jsx-handler-names": "off",
     "camelcase": "warn",

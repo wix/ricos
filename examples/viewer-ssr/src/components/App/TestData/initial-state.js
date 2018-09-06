@@ -534,11 +534,23 @@ const TestData = {
               url: "8bb438_ac190df97cfe4c6d8bcd9ca8b6b3c100.jpg"
             }
           ],
-          config: { layout: "small" }          
+          config: { layout: "small" },
+          styles: {
+
+          }
         }
       }
     },
     blocks: [
+      {
+        key: "5g8yu",
+        text: "Hello text only #hashtag test.com",
+        type: "unstyled",
+        depth: 0,
+        inlineStyleRanges: [],
+        entityRanges: [],
+        data: {}
+      },
       {
         key: "ov8f",
         text: " ",

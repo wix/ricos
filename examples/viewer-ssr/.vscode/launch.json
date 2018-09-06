@@ -1,0 +1,10 @@
+{
+  "version": "0.2.0",
+  "configurations": [{
+    "name": "Launch Mocha",
+    "type": "node",
+    "request": "launch",
+    "program": "${workspaceRoot}/node_modules/yoshi/debug/mocha",
+    "cwd": "${workspaceRoot}"
+  }]
+}

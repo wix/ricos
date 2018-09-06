@@ -94,10 +94,19 @@ const Preview = ({ raw, typeMappers, theme, isMobile, decorators, anchorTarget, 
   const mergedStyles = mergeStyles({ styles, theme });
   const isEmpty = isEmptyRaw(raw);
   const typeMap = combineTypeMappers(typeMappers);
-  const combinedDecorators = [
-    ...decorators,
-    ...createInlineStyleDecorators(getStrategyByStyle, mergedStyles)
-  ];
+
+  let combinedDecorators;
+  if (typeof window !== 'undefined') {
+    combinedDecorators = [
+      ...decorators,
+      ...createInlineStyleDecorators(getStrategyByStyle, mergedStyles)
+    ];
+  } else {
+    combinedDecorators = [
+      // ...createInlineStyleDecorators(getStrategyByStyle, mergedStyles)
+    ];
+  }
+
 
   return (
     <div className={mergedStyles.preview}>
