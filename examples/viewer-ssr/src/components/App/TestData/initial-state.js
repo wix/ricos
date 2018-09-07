@@ -14,6 +14,274 @@ const TestData = {
       }
     ]
   },
+  textStyled: {
+    blocks: [
+      {
+        key: "foo",
+        text: "H2 center",
+        type: "header-two",
+        depth: 0,
+        inlineStyleRanges: [],
+        entityRanges: [],
+        data: {
+          textAlignment: "center"
+        }
+      },
+      {
+        key: "1fu1i",
+        text: "H2 Bold",
+        type: "header-two",
+        depth: 0,
+        inlineStyleRanges: [
+          {
+            offset: 0,
+            length: 7,
+            style: "BOLD"
+          }
+        ],
+        entityRanges: [],
+        data: {
+          textAlignment: "left"
+        }
+      },
+      {
+        key: "bp80a",
+        text: "H2 italic",
+        type: "header-two",
+        depth: 0,
+        inlineStyleRanges: [
+          {
+            offset: 0,
+            length: 9,
+            style: "ITALIC"
+          }
+        ],
+        entityRanges: [],
+        data: {}
+      },
+      {
+        key: "4c07a",
+        text: "H2 underline right",
+        type: "header-two",
+        depth: 0,
+        inlineStyleRanges: [
+          {
+            offset: 0,
+            length: 18,
+            style: "UNDERLINE"
+          }
+        ],
+        entityRanges: [],
+        data: {
+          textAlignment: "right"
+        }
+      },
+      {
+        key: "5tu09",
+        text: "H2 numbered",
+        type: "ordered-list-item",
+        depth: 0,
+        inlineStyleRanges: [
+          {
+            offset: 0,
+            length: 11,
+            style: "inline-header-two"
+          }
+        ],
+        entityRanges: [],
+        data: {
+          textAlignment: "left"
+        }
+      },
+      {
+        key: "dmo5o",
+        text: "H2 bullet",
+        type: "unordered-list-item",
+        depth: 0,
+        inlineStyleRanges: [
+          {
+            offset: 0,
+            length: 9,
+            style: "inline-header-two"
+          }
+        ],
+        entityRanges: [],
+        data: {}
+      },
+      {
+        key: "7tcj1",
+        text: "H3 center",
+        type: "header-three",
+        depth: 0,
+        inlineStyleRanges: [],
+        entityRanges: [],
+        data: {
+          textAlignment: "center"
+        }
+      },
+      {
+        key: "7vk99",
+        text: "H3 Bold",
+        type: "header-three",
+        depth: 0,
+        inlineStyleRanges: [
+          {
+            offset: 0,
+            length: 7,
+            style: "BOLD"
+          }
+        ],
+        entityRanges: [],
+        data: {}
+      },
+      {
+        key: "f8vre",
+        text: "H3 italic",
+        type: "header-three",
+        depth: 0,
+        inlineStyleRanges: [
+          {
+            offset: 0,
+            length: 9,
+            style: "ITALIC"
+          }
+        ],
+        entityRanges: [],
+        data: {}
+      },
+      {
+        key: "5s7kr",
+        text: "H3 underline right",
+        type: "header-three",
+        depth: 0,
+        inlineStyleRanges: [
+          {
+            offset: 0,
+            length: 18,
+            style: "UNDERLINE"
+          }
+        ],
+        entityRanges: [],
+        data: {
+          textAlignment: "right"
+        }
+      },
+      {
+        key: "bpodd",
+        text: "H3 numbered",
+        type: "ordered-list-item",
+        depth: 0,
+        inlineStyleRanges: [
+          {
+            offset: 0,
+            length: 11,
+            style: "inline-header-three"
+          }
+        ],
+        entityRanges: [],
+        data: {
+          textAlignment: "left"
+        }
+      },
+      {
+        key: "cdtes",
+        text: "H3 bullet",
+        type: "unordered-list-item",
+        depth: 0,
+        inlineStyleRanges: [
+          {
+            offset: 0,
+            length: 9,
+            style: "inline-header-three"
+          }
+        ],
+        entityRanges: [],
+        data: {}
+      },
+      {
+        key: "3vlvl",
+        text: "Text center",
+        type: "unstyled",
+        depth: 0,
+        inlineStyleRanges: [],
+        entityRanges: [],
+        data: {
+          textAlignment: "center"
+        }
+      },
+      {
+        key: "bkfej",
+        text: "Text bold",
+        type: "unstyled",
+        depth: 0,
+        inlineStyleRanges: [],
+        entityRanges: [],
+        data: {}
+      },
+      {
+        key: "4l1s1",
+        text: "Text italic",
+        type: "unstyled",
+        depth: 0,
+        inlineStyleRanges: [
+          {
+            offset: 0,
+            length: 11,
+            style: "ITALIC"
+          }
+        ],
+        entityRanges: [],
+        data: {}
+      },
+      {
+        key: "2bdfj",
+        text: "Text underline right",
+        type: "unstyled",
+        depth: 0,
+        inlineStyleRanges: [
+          {
+            offset: 0,
+            length: 20,
+            style: "UNDERLINE"
+          }
+        ],
+        entityRanges: [],
+        data: {
+          textAlignment: "right"
+        }
+      },
+      {
+        key: "5imgj",
+        text: "Quote1",
+        type: "blockquote",
+        depth: 0,
+        inlineStyleRanges: [],
+        entityRanges: [],
+        data: {
+          textAlignment: "left"
+        }
+      },
+      {
+        key: "b47af",
+        text: "Quote2",
+        type: "blockquote",
+        depth: 0,
+        inlineStyleRanges: [],
+        entityRanges: [],
+        data: {}
+      },
+      {
+        key: "5g8yu",
+        text: "Text with #hashtag",
+        type: "unstyled",
+        depth: 0,
+        inlineStyleRanges: [],
+        entityRanges: [],
+        data: {}
+      },
+    ],
+    entityMap: {}
+  },
   softNewLine: {
     blocks: [
       {
@@ -535,9 +803,7 @@ const TestData = {
             }
           ],
           config: { layout: "small" },
-          styles: {
-
-          }
+          styles: {}
         }
       }
     },
