@@ -58,14 +58,16 @@ const modalStyleDefaults = {
 
 const anchorTarget = '_top';
 const relValue = 'noreferrer';
+const INITIAL_TEST_DATA_KEY = 'textStyled';
 
 class App extends Component {
+  state = {
+    testDataKey: INITIAL_TEST_DATA_KEY,
+    raw: TestData[INITIAL_TEST_DATA_KEY],
+  };
+
   constructor(props) {
     super(props);
-    this.state = {
-      raw: TestData.gallery,
-    };
-
     this.md = null;
     try {
       this.md = new MobileDetect(window.navigator.userAgent);
@@ -131,6 +133,7 @@ class App extends Component {
   handleContentChange = () => {
     const value = document.getElementById('testData').value;
     this.setState({
+      testDataKey: value,
       raw: TestData[value],
     });
     //console.log('on change are', TestData[value]);
@@ -160,7 +163,11 @@ class App extends Component {
 
   render() {
     const contentOptions = Object.keys(TestData).map(key => (
-      <option value={key} key={key}>
+      <option
+        value={key}
+        key={key}
+        selected={key === this.state.testDataKey ? 'selected' : ''}
+      >
         {' '}
         {key}
       </option>
