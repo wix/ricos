@@ -50,7 +50,7 @@ RichContentViewer.propTypes = {
   isMobile: PropTypes.bool,
   helpers: PropTypes.object,
   platform: PropTypes.string,
-  typeMappers: PropTypes.arrayOf(PropTypes.func).isRequired,
+  typeMappers: PropTypes.arrayOf(PropTypes.func),
   decorators: PropTypes.arrayOf(PropTypes.shape({
     component: PropTypes.func.isRequired,
     strategy: PropTypes.func.isRequired,
@@ -58,4 +58,10 @@ RichContentViewer.propTypes = {
   theme: PropTypes.object,
   anchorTarget: PropTypes.string,
   relValue: PropTypes.string,
+};
+
+RichContentViewer.defaultProps = {
+  theme: {},
+  decorators: [],
+  typeMappers: []
 };

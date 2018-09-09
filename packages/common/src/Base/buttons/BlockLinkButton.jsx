@@ -8,7 +8,7 @@ import BlockLinkPanel from './BlockLinkPanel';
 
 class BlockLinkButton extends Component {
   get isActive() {
-    return !!this.props.pubsub.get('componentLink');
+    return !!this.props.pubsub.getBlockData({ key: 'componentLink' });
   }
 
   showLinkPanel = () => {

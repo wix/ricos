@@ -1,7 +1,8 @@
 # Wix Rich Content
+
 [![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lernajs.io/)
 
-#### A super charged rich text editor with an extensible plugin system.
+## A super charged rich text editor with an extensible plugin system
 
 ![Demo](https://media.giphy.com/media/2rAwp4zLCrtGn2Tlbq/giphy.gif)
 
@@ -12,13 +13,13 @@ You can try it here: [http://rich-content-editor-example.surge.sh/](http://rich-
 To install this package as editor, use the following command:
 
 ```bash
-$ npm install --save wix-rich-content-editor
+npm install --save wix-rich-content-editor
 ```
 
 To install this package as viewer, use the following command:
 
 ```bash
-$ npm install --save wix-rich-content-viewer
+npm install --save wix-rich-content-viewer
 ```
 
 ## Getting Started
@@ -74,6 +75,7 @@ export class MyApp extends React.Component {
 Now, to make sure you are getting the most of the rich-content editor, include the compiled CSS files in your app's main file:
 
 `app.js`
+
 ```jsx
 import 'wix-rich-content-common/dist/styles.min.css';
 import 'wix-rich-content-editor/dist/styles.min.css';
@@ -89,7 +91,7 @@ To add plugins to your editor, choose one of the implemented plugins from [the l
 Install the plugin you wish use from NPM:
 
 ```bash
-$ npm install wix-rich-content-plugin-divider
+npm install wix-rich-content-plugin-divider
 ```
 
 Import the plugin's stylesheet file in your main app's file:
@@ -141,6 +143,7 @@ To customize the look and feel of the editor, you can use `theme` prop, and over
 Use the style's `className` to override. It also support css-modules imports.
 
 `my-style.css`
+
 ```css
 .divider {
     backgorund-color: red;
@@ -193,34 +196,37 @@ export class MyApp extends React.Component {
 
 You can find a full list of classes you can override in [here](./examples/editor/src/theme).
 
-##### Plugins
+#### Plugins
 
-[wix-rich-content-plugin-divider](./pacakges/plugin-divider) add dividers to your content.
+[wix-rich-content-plugin-divider](./pacakges/plugin-divider) add dividers to your content
 
-[wix-rich-content-plugin-emoji](./pacakges/plugin-emoji) add emojis to your content.
+[wix-rich-content-plugin-emoji](./pacakges/plugin-emoji) add emojis to your content
 
-[wix-rich-content-plugin-gallery](./pacakges/plugin-gallery) add pro galleries to your content!!!
+[wix-rich-content-plugin-hashtag](./pacakges/plugin-hashtag) convert plain text #hastags into dynamic elements
 
-[wix-rich-content-plugin-hashtag](./pacakges/plugin-hashtag) convert plain text #hastags into dynamic elements.
+[wix-rich-content-plugin-html](./pacakges/plugin-html) embed html code or sites in your content
 
-[wix-rich-content-plugin-html](./pacakges/plugin-html) embed html code or sites in your content.
+[wix-rich-content-plugin-link](./pacakges/plugin-link) convert plain text URLs into `<a>` tags
 
-[wix-rich-content-plugin-image](./pacakges/plugin-image) add images to your content.
+[wix-rich-content-plugin-mentions](./pacakges/plugin-video) add videos to your content
 
-[wix-rich-content-plugin-link](./pacakges/plugin-link) convert plain text URLs into `<a>` tags.
-
-[wix-rich-content-plugin-mentions](./pacakges/plugin-video) add videos to your content.
-
-[wix-rich-content-plugin-video](./pacakges/plugin-mentions) mention users in your content.
+[wix-rich-content-plugin-video](./pacakges/plugin-mentions) mention users in your content
 
 [wix-rich-content-plugin-code-block](./pacakges/plugin-code-block) displays code block
 
+##### Private Wix Plugins
+
+[wix-rich-content-plugin-image](https://github.com/wix-incubator/rich-content-plugins-wix/tree/master/packages/plugin-image) embed images in your content
+
+[wix-rich-content-plugin-gallery](https://github.com/wix-incubator/rich-content-plugins-wix/tree/master/packages/plugin-gallery) embed Wix `pro-gallery` component in your content
+
+Note: these plugins are found in a [separate repository](https://github.com/wix-incubator/rich-content-plugins-wix) since they are dependent on private Wix code
 
 ### Usage with [Yoshi](https://github.com/wix/yoshi)
 
 To use the editor with Yoshi, you should do the same bootstrapping process, but make sure to include the package's `.css` files from a `.scss` file, or add `.global` to the import:
 
-```
+```es6
 import 'wix-rich-content-common/dist/styles.min.global.css';
 import 'wix-rich-content-editor/dist/styles.min.global.css';
 ```
@@ -233,7 +239,8 @@ The compiled package also contains a CommonJS bundle, which you can consume if y
 
 ## Development
 
-#### Run Locally
+### Run Locally
+
 1. `cd rich-content`
 2. `npm i` - installs all dependencies and links any cross-dependencies.
 3. Build the modules by running one of the following:
@@ -243,7 +250,7 @@ The compiled package also contains a CommonJS bundle, which you can consume if y
     1. `npm run bootstrap`
     2. `npm start`
 
-##### Examples
+#### Examples
 
 [rich-content-editor-example](./examples/editor) to see how to consume the Component as an editor.
 
@@ -251,7 +258,7 @@ The compiled package also contains a CommonJS bundle, which you can consume if y
 
 [rich-content-editor-tpa](./examples/editor-tpa) to see how to consume the Component as an editor within a Wix Third Party Application.
 
-#### Modules
+### Modules
 
 [wix-rich-content-editor](./packages/editor) is the rich content editor React Component.
 

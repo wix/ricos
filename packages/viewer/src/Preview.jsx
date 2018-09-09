@@ -74,7 +74,8 @@ const getEntities = (typeMap, pluginProps) => ({
 
 const combineTypeMappers = mappers => {
   if (!mappers || !mappers.length || mappers.some(resolver => typeof resolver !== 'function')) {
-    throw new TypeError('typeMappers is expected to be a function array');
+    console.error('typeMappers is expected to be a function array'); // eslint-disable-line no-console
+    return {};
   }
   return mappers.reduce((map, mapper) => Object.assign(map, mapper()), {});
 };
@@ -97,7 +98,7 @@ const Preview = ({ raw, typeMappers, theme, isMobile, decorators, anchorTarget, 
     ...decorators,
     ...createInlineStyleDecorators(getStrategyByStyle, mergedStyles)
   ];
-  window.redraft = redraft;
+
   return (
     <div className={mergedStyles.preview}>
       {isEmpty && <div>There is nothing to render...</div>}
@@ -117,7 +118,7 @@ Preview.propTypes = {
     blocks: PropTypes.array.isRequired, // eslint-disable-line react/no-unused-prop-types
     entityMap: PropTypes.object.isRequired, // eslint-disable-line react/no-unused-prop-types
   }).isRequired,
-  typeMappers: PropTypes.arrayOf(PropTypes.func).isRequired,
+  typeMappers: PropTypes.arrayOf(PropTypes.func),
   theme: PropTypes.object,
   isMobile: PropTypes.bool,
   decorators: PropTypes.arrayOf(PropTypes.shape({

@@ -16,7 +16,8 @@
     "prewatch": "lerna run build --scope wix-rich-content-common",
     "watch": "lerna exec --no-sort --concurrency 30 -- npm run watch",
     "customPublish": "node scripts/customPublish",
-    "createVersion": "node scripts/createVersion"
+    "createVersion": "node scripts/createVersion",
+    "test": "lerna run --parallel --stream test"
   },
   "husky": {
     "hooks": {

@@ -1,10 +1,8 @@
 import { CODE_BLOCK_TYPE } from 'wix-rich-content-plugin-code-block';
 import { DIVIDER_TYPE } from 'wix-rich-content-plugin-divider';
 import { EXTERNAL_EMOJI_TYPE } from 'wix-rich-content-plugin-emoji';
-import { GALLERY_TYPE } from 'wix-rich-content-plugin-gallery';
 import { HASHTAG_TYPE } from 'wix-rich-content-plugin-hashtag';
 import { HTML_TYPE } from 'wix-rich-content-plugin-html';
-import { IMAGE_TYPE } from 'wix-rich-content-plugin-image';
 import { LINK_TYPE } from 'wix-rich-content-plugin-link';
 import { VIDEO_TYPE } from 'wix-rich-content-plugin-video';
 import { EXTERNAL_MENTIONS_TYPE } from 'wix-rich-content-plugin-mentions';
@@ -42,8 +40,6 @@ export default {
   [CODE_BLOCK_TYPE]: { },
   [DIVIDER_TYPE]: { },
   [EXTERNAL_EMOJI_TYPE]: { },
-  [GALLERY_TYPE]: { },
-  [IMAGE_TYPE]: { },
   [VIDEO_TYPE]: { },
   uiSettings,
   // getToolbarSettings: ({ pluginButtons, textButtons }) => [

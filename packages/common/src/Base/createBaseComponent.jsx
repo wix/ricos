@@ -52,7 +52,7 @@ const createBaseComponent = ({ PluginComponent, theme, settings, pubsub, helpers
       pubsub.subscribe('componentAlignment', this.onComponentAlignmentChange);
       pubsub.subscribe('componentSize', this.onComponentSizeChange);
       pubsub.subscribe('componentTextWrap', this.onComponentTextWrapChange);
-      pubsub.subscribe('componentLink', this.onComponentLinkChange);
+      this.unsubscribeOnBlock = pubsub.subscribeOnBlock({ key: 'componentLink', callback: this.onComponentLinkChange });
       pubsub.subscribe('editorBounds', this.onEditorBoundsChange);
     }
 
@@ -68,9 +68,9 @@ const createBaseComponent = ({ PluginComponent, theme, settings, pubsub, helpers
       pubsub.unsubscribe('componentAlignment', this.onComponentAlignmentChange);
       pubsub.unsubscribe('componentSize', this.onComponentSizeChange);
       pubsub.unsubscribe('componentTextWrap', this.onComponentTextWrapChange);
-      pubsub.unsubscribe('componentLink', this.onComponentLinkChange);
       pubsub.unsubscribe('editorBounds', this.onEditorBoundsChange);
       pubsub.set('visibleBlock', null);
+      this.unsubscribeOnBlock && this.unsubscribeOnBlock();
     }
 
     isMe = () => {
@@ -121,8 +121,8 @@ const createBaseComponent = ({ PluginComponent, theme, settings, pubsub, helpers
       if (this.isMeAndIdle) {
         const link = url ? {
           url,
-          target: targetBlank ? '_blank' : (anchorTarget || '_self'),
-          rel: nofollow ? 'nofollow' : (relValue || 'noopener')
+          target: targetBlank === true ? '_blank' : (anchorTarget || '_self'),
+          rel: nofollow === true ? 'nofollow' : (relValue || 'noopener')
         } : null;
 
         this.updateComponentConfig({ link });
