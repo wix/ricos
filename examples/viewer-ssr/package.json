@@ -8,6 +8,7 @@
     "email": "odeds@wix.com"
   },
   "scripts": {
+    "bootstrap": "yarn && node ../../scripts/linkExample viewer",
     "start": "yoshi start",
     "precommit": "lint-staged",
     "pretest": "yoshi build",

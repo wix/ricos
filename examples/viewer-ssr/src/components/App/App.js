@@ -8,7 +8,6 @@ import {
   normalizeInitialState,
 } from 'wix-rich-content-common';
 import { RichContentViewer } from 'wix-rich-content-viewer';
-// import RichContentRawDataViewer from './RichContentRawDataViewer';
 
 import { videoTypeMapper } from 'wix-rich-content-plugin-video/dist/module.viewer.cjs';
 import { imageTypeMapper } from 'wix-rich-content-plugin-image/dist/module.viewer.cjs';
@@ -16,11 +15,7 @@ import { galleryTypeMapper } from 'wix-rich-content-plugin-gallery/dist/module.v
 import { dividerTypeMapper } from 'wix-rich-content-plugin-divider/dist/module.viewer.cjs';
 import { htmlTypeMapper } from 'wix-rich-content-plugin-html/dist/module.viewer.cjs';
 import { soundCloudTypeMapper } from 'wix-rich-content-plugin-sound-cloud/dist/module.viewer.cjs';
-import {
-  linkTypeMapper,
-  LinkViewer,
-  LinkParseStrategy,
-} from 'wix-rich-content-plugin-link/dist/module.viewer.cjs';
+import { linkTypeMapper } from 'wix-rich-content-plugin-link/dist/module.viewer.cjs';
 
 import {
   Strategy as HashTagStrategy,
@@ -58,12 +53,23 @@ const modalStyleDefaults = {
 
 const anchorTarget = '_top';
 const relValue = 'noreferrer';
-const INITIAL_TEST_DATA_KEY = 'textStyled';
 
 class App extends Component {
   state = {
-    testDataKey: INITIAL_TEST_DATA_KEY,
-    raw: TestData[INITIAL_TEST_DATA_KEY],
+    raw: {
+      entityMap: {},
+      blocks: [
+        {
+          key: '5g8yu',
+          text: 'Hello text only #hashtag test.com',
+          type: 'unstyled',
+          depth: 0,
+          inlineStyleRanges: [],
+          entityRanges: [],
+          data: {},
+        },
+      ],
+    },
   };
 
   constructor(props) {
@@ -74,43 +80,37 @@ class App extends Component {
     } catch (e) {}
     this.initViewerProps();
     this.styles = mergeStyles({ styles, theme });
-
-    this.typeMappers = [
-      videoTypeMapper,
-      imageTypeMapper,
-      galleryTypeMapper,
-      dividerTypeMapper,
-      htmlTypeMapper,
-      linkTypeMapper,
-      soundCloudTypeMapper,
-    ];
+    this.state = {
+      raw: {
+        entityMap: {},
+        blocks: [
+          {
+            key: '5g8yu',
+            text: 'Hello text only #hashtag test.com',
+            type: 'unstyled',
+            depth: 0,
+            inlineStyleRanges: [],
+            entityRanges: [],
+            data: {},
+          },
+        ],
+      },
+    };
 
     const isSSR = typeof window !== 'undefined';
 
-    const hashtagProps = {
-      theme,
-      createHref: this.createHref,
-      onClick: () => {},
-    };
+    this.typeMappers = [];
 
     this.decorators = [
-      // {
-      //   strategy: LinkParseStrategy,
-      //   component: ({ children, decoratedText, rel, target }) => (
-      //     <LinkViewer
-      //       componentData={{ rel, target, url: decoratedText }}
-      //       anchorTarget={anchorTarget}
-      //       relValue={relValue}
-      //     >
-      //       {' '}
-      //       {children}{' '}
-      //     </LinkViewer>
-      //   ),
-      // },
       {
         strategy: HashTagStrategy,
         component: ({ children, decoratedText }) => (
-          <HashTag decoratedText={decoratedText} {...hashtagProps}>
+          <HashTag
+            decoratedText={decoratedText}
+            theme={theme}
+            onHashTagClick={this.onHashTagClick}
+            createHref={this.createHref}
+          >
             {children}
           </HashTag>
         ),
@@ -130,15 +130,6 @@ class App extends Component {
   };
 
   /* eslint-disable no-console */
-  handleContentChange = () => {
-    const value = document.getElementById('testData').value;
-    this.setState({
-      testDataKey: value,
-      raw: TestData[value],
-    });
-    //console.log('on change are', TestData[value]);
-  };
-
   isMobile = () => {
     return this.md && this.md.mobile() !== null;
   };
@@ -162,17 +153,6 @@ class App extends Component {
     `/search/posts?query=${encodeURIComponent('#')}${decoratedText}`;
 
   render() {
-    const contentOptions = Object.keys(TestData).map(key => (
-      <option
-        value={key}
-        key={key}
-        selected={key === this.state.testDataKey ? 'selected' : ''}
-      >
-        {' '}
-        {key}
-      </option>
-    ));
-
     const { styles } = this;
 
     return (
@@ -182,26 +162,10 @@ class App extends Component {
             <div className={styles.header}>
               <h1>Wix Rich Content Viewer</h1>
               <div className={styles['toggle-container']}>
-                <div className={styles.toggle}>
-                  <select
-                    id="testData"
-                    name="testData"
-                    onChange={() => this.handleContentChange(this)}
-                  >
-                    {contentOptions}
-                  </select>
-                </div>
+                <div className={styles.toggle} />
               </div>
             </div>
-          ) : (
-            <select
-              id="testData"
-              name="testData"
-              onChange={() => this.handleContentChange(this)}
-            >
-              {contentOptions}
-            </select>
-          )}
+          ) : null}
           <div className={styles.content}>
             <div className={styles.columns}>
               <div className={styles.column}>
@@ -215,20 +179,6 @@ class App extends Component {
                   anchorTarget={anchorTarget}
                   relValue={relValue}
                 />
-              </div>
-              <div className={styles.column}>
-                {/* <RichContentRawDataViewer
-                  onChange={content => this.setState({ content })}
-                  content={this.state.raw}
-                  width="740px"
-                /> */}
-                <Button
-                  className={styles.raw_input_button}
-                  theme={theme}
-                  onClick={() => this.generateViewerState()}
-                >
-                  Apply Rich Content
-                </Button>
               </div>
             </div>
             <ReactModal
