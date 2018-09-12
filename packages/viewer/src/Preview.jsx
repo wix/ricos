@@ -90,7 +90,7 @@ const options = {
   },
 };
 
-const Preview = ({ raw, typeMappers, theme, isMobile, decorators, anchorTarget, relValue }) => {
+const Preview = ({ raw, typeMappers, theme, isMobile, decorators, anchorTarget, relValue, config }) => {
   const mergedStyles = mergeStyles({ styles, theme });
   const isEmpty = isEmptyRaw(raw);
   const typeMap = combineTypeMappers(typeMappers);
@@ -106,7 +106,7 @@ const Preview = ({ raw, typeMappers, theme, isMobile, decorators, anchorTarget, 
         redraft(raw, {
           inline: getInline(mergedStyles),
           blocks: getBlocks(mergedStyles),
-          entities: getEntities(typeMap, { theme, isMobile, anchorTarget, relValue }),
+          entities: getEntities(typeMap, { theme, isMobile, anchorTarget, relValue, config }),
           decorators: combinedDecorators },
         options)}
     </div>
@@ -127,6 +127,7 @@ Preview.propTypes = {
   })),
   anchorTarget: PropTypes.string,
   relValue: PropTypes.string,
+  config: PropTypes.object,
 };
 
 export default Preview;
