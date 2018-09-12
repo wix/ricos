@@ -14,6 +14,352 @@ const TestData = {
       }
     ]
   },
+  'basic styles': {
+    blocks: [
+      {
+        key: '61u53',
+        text: 'H2 center',
+        type: 'unstyled',
+        depth: 0,
+        inlineStyleRanges: [
+          {
+            offset: 0,
+            length: 9,
+            style: 'inline-header-two'
+          }
+        ],
+        entityRanges: [],
+        data: {
+          textAlignment: 'center'
+        }
+      },
+      {
+        key: 'b69na',
+        text: 'H2 bold',
+        type: 'unstyled',
+        depth: 0,
+        inlineStyleRanges: [
+          {
+            offset: 0,
+            length: 7,
+            style: 'inline-header-two'
+          },
+          {
+            offset: 0,
+            length: 7,
+            style: 'BOLD'
+          }
+        ],
+        entityRanges: [],
+        data: {}
+      },
+      {
+        key: '2qet3',
+        text: 'H2 italic',
+        type: 'unstyled',
+        depth: 0,
+        inlineStyleRanges: [
+          {
+            offset: 0,
+            length: 9,
+            style: 'inline-header-two'
+          },
+          {
+            offset: 0,
+            length: 9,
+            style: 'ITALIC'
+          }
+        ],
+        entityRanges: [],
+        data: {}
+      },
+      {
+        key: '3sg5e',
+        text: 'H2 underline right',
+        type: 'unstyled',
+        depth: 0,
+        inlineStyleRanges: [
+          {
+            offset: 0,
+            length: 18,
+            style: 'inline-header-two'
+          },
+          {
+            offset: 0,
+            length: 18,
+            style: 'UNDERLINE'
+          }
+        ],
+        entityRanges: [],
+        data: {
+          textAlignment: 'right'
+        }
+      },
+      {
+        key: 'b8b0u',
+        text: 'H2 numbered',
+        type: 'ordered-list-item',
+        depth: 0,
+        inlineStyleRanges: [
+          {
+            offset: 0,
+            length: 11,
+            style: 'inline-header-two'
+          }
+        ],
+        entityRanges: [],
+        data: {}
+      },
+      {
+        key: '9skn5',
+        text: 'H2 bullet',
+        type: 'unordered-list-item',
+        depth: 0,
+        inlineStyleRanges: [
+          {
+            offset: 0,
+            length: 9,
+            style: 'inline-header-two'
+          }
+        ],
+        entityRanges: [],
+        data: {}
+      },
+      {
+        key: 'fbp7d',
+        text: 'H3 center',
+        type: 'unstyled',
+        depth: 0,
+        inlineStyleRanges: [
+          {
+            offset: 0,
+            length: 9,
+            style: 'inline-header-three'
+          }
+        ],
+        entityRanges: [],
+        data: {
+          textAlignment: 'center'
+        }
+      },
+      {
+        key: 'aq7ob',
+        text: 'H3 bold',
+        type: 'unstyled',
+        depth: 0,
+        inlineStyleRanges: [
+          {
+            offset: 0,
+            length: 7,
+            style: 'inline-header-three'
+          },
+          {
+            offset: 0,
+            length: 7,
+            style: 'BOLD'
+          }
+        ],
+        entityRanges: [],
+        data: {}
+      },
+      {
+        key: 'clcev',
+        text: 'H3 italic',
+        type: 'unstyled',
+        depth: 0,
+        inlineStyleRanges: [
+          {
+            offset: 0,
+            length: 9,
+            style: 'inline-header-three'
+          },
+          {
+            offset: 0,
+            length: 9,
+            style: 'ITALIC'
+          }
+        ],
+        entityRanges: [],
+        data: {}
+      },
+      {
+        key: 'ag9to',
+        text: 'H3 underline right',
+        type: 'unstyled',
+        depth: 0,
+        inlineStyleRanges: [
+          {
+            offset: 0,
+            length: 18,
+            style: 'inline-header-three'
+          },
+          {
+            offset: 0,
+            length: 18,
+            style: 'UNDERLINE'
+          }
+        ],
+        entityRanges: [],
+        data: {
+          textAlignment: 'right'
+        }
+      },
+      {
+        key: '3mbj4',
+        text: 'H3 numbered',
+        type: 'ordered-list-item',
+        depth: 0,
+        inlineStyleRanges: [
+          {
+            offset: 0,
+            length: 11,
+            style: 'inline-header-three'
+          }
+        ],
+        entityRanges: [],
+        data: {}
+      },
+      {
+        key: 'bcsbh',
+        text: 'H3 bullet',
+        type: 'unordered-list-item',
+        depth: 0,
+        inlineStyleRanges: [
+          {
+            offset: 0,
+            length: 9,
+            style: 'inline-header-three'
+          }
+        ],
+        entityRanges: [],
+        data: {}
+      },
+      {
+        key: '2fdkb',
+        text: 'Text center',
+        type: 'unstyled',
+        depth: 0,
+        inlineStyleRanges: [],
+        entityRanges: [],
+        data: {
+          textAlignment: 'center'
+        }
+      },
+      {
+        key: '6ebba',
+        text: 'Text bold',
+        type: 'unstyled',
+        depth: 0,
+        inlineStyleRanges: [
+          {
+            offset: 0,
+            length: 9,
+            style: 'BOLD'
+          }
+        ],
+        entityRanges: [],
+        data: {}
+      },
+      {
+        key: '9tadl',
+        text: 'Text italic',
+        type: 'unstyled',
+        depth: 0,
+        inlineStyleRanges: [
+          {
+            offset: 0,
+            length: 11,
+            style: 'ITALIC'
+          }
+        ],
+        entityRanges: [],
+        data: {}
+      },
+      {
+        key: 'it2e',
+        text: 'Text underline right',
+        type: 'unstyled',
+        depth: 0,
+        inlineStyleRanges: [
+          {
+            offset: 0,
+            length: 20,
+            style: 'UNDERLINE'
+          }
+        ],
+        entityRanges: [],
+        data: {
+          textAlignment: 'right'
+        }
+      },
+      {
+        key: '8utpq',
+        text: 'Text numbered',
+        type: 'ordered-list-item',
+        depth: 0,
+        inlineStyleRanges: [],
+        entityRanges: [],
+        data: {}
+      },
+      {
+        key: 'f60gq',
+        text: 'Text bullet',
+        type: 'unordered-list-item',
+        depth: 0,
+        inlineStyleRanges: [],
+        entityRanges: [],
+        data: {}
+      },
+      {
+        key: '8vk72',
+        text: 'Quote1',
+        type: 'blockquote',
+        depth: 0,
+        inlineStyleRanges: [],
+        entityRanges: [],
+        data: {}
+      },
+      {
+        key: '6mlr2',
+        text: 'Quote2',
+        type: 'blockquote',
+        depth: 0,
+        inlineStyleRanges: [],
+        entityRanges: [],
+        data: {}
+      },
+      {
+        key: '7c1rt',
+        text: '',
+        type: 'unstyled',
+        depth: 0,
+        inlineStyleRanges: [],
+        entityRanges: [],
+        data: {}
+      },
+      {
+        key: 'c3m22',
+        text: 'var x = 5;\nvar y = 8;\nvar z = Math.min(x,y);',
+        type: 'code-block',
+        depth: 0,
+        inlineStyleRanges: [],
+        entityRanges: [],
+        data: {
+          textAlignment: 'left'
+        }
+      },
+      {
+        key: '5ej',
+        text: '',
+        type: 'unstyled',
+        depth: 0,
+        inlineStyleRanges: [],
+        entityRanges: [],
+        data: {}
+      }
+    ],
+    entityMap: {}
+  },
   softNewLine: {
     blocks: [
       {
