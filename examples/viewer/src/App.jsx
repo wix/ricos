@@ -7,7 +7,7 @@ import RichContentRawDataViewer from './RichContentRawDataViewer';
 
 import { videoTypeMapper } from 'wix-rich-content-plugin-video/dist/module.viewer';
 import { dividerTypeMapper } from 'wix-rich-content-plugin-divider/dist/module.viewer';
-import { htmlTypeMapper } from 'wix-rich-content-plugin-html/dist/module.viewer';
+import { htmlTypeMapper, HTML_TYPE } from 'wix-rich-content-plugin-html/dist/module.viewer';
 import { linkTypeMapper, LinkViewer, LinkParseStrategy } from 'wix-rich-content-plugin-link/dist/module.viewer';
 
 import { Strategy as HashTagStrategy, Component as HashTag } from 'wix-rich-content-plugin-hashtag';
@@ -68,6 +68,12 @@ class App extends Component {
           <HashTag theme={theme} onClick={this.onHashTagClick} createHref={this.createHref} decoratedText={decoratedText}>{children}</HashTag>
       }
     ];
+
+    this.config = {
+      [HTML_TYPE]: {
+        htmlIframeSrc: 'http://localhost:3001/static/html-plugin-embed.html',
+      }
+    }
   }
 
   initViewerProps() {
@@ -161,6 +167,7 @@ class App extends Component {
                   isMobile={this.isMobile()}
                   anchorTarget={anchorTarget}
                   relValue={relValue}
+                  config={this.config}
                 />
               </div>
               <div className={styles.column}>
