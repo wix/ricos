@@ -8,10 +8,8 @@ import List from './List';
 import { getStrategyByStyle } from './decorators/getStrategyByStyle';
 import styles from '../statics/rich-content-viewer.scss';
 
-const withTextAlignment = (element, blockProps, mergedStyles) => {
-  const { data } = blockProps || [];
-  const dataEntry = data.length > 0 ? data[0] : {};
-  const alignmentClass = dataEntry.textAlignment ? dataEntry.textAlignment : 'left';
+const withTextAlignment = (element, data, mergedStyles) => {
+  const alignmentClass = data.textAlignment ? data.textAlignment : 'left';
   const elementProps = {
     ...element.props,
     className: element.props.className ?
@@ -38,9 +36,9 @@ const getList = (ordered, mergedStyles) =>
       <List key={blockProps.keys[0]} keys={blockProps.keys} depth={blockProps.depth} ordered={ordered}>
         {fixedChildren.map((child, i) => {
           // NOTE: list block data is an array of data entries per list item
-          const dataEntry = blockProps.data.length > i ? [blockProps.data[i]] : [{}];
+          const dataEntry = blockProps.data.length > i ? blockProps.data[i] : {};
           return withTextAlignment(<li className={mergedStyles[`${className}List`]} key={blockProps.keys[i]}><div>{child}</div></li>,
-            { ...blockProps, data: dataEntry }, mergedStyles);
+            dataEntry, mergedStyles);
         })}
       </List>
     );
@@ -53,16 +51,17 @@ const getBlocks = mergedStyles => {
   // Rendering blocks like this along with cleanup results in a single p tag for each paragraph
   // adding an empty block closes current paragraph and starts a new one
   return {
-    unstyled: (children, blockProps) => withTextAlignment(<p key={blockProps.keys[0]}><div>{children}</div></p>, blockProps, mergedStyles),
-    blockquote: (children, blockProps) =>
-      withTextAlignment(<blockquote className={mergedStyles.quote} key={blockProps.keys[0]}><div>{children}</div></blockquote>,
-        blockProps, mergedStyles),
+    unstyled: (children, blockProps) => children.map((child, i) =>
+      withTextAlignment(<div key={blockProps.keys[i]}><div>{child}</div></div>, blockProps.data[i], mergedStyles)),
+    blockquote: (children, blockProps) => children.map((child, i) =>
+      withTextAlignment(<blockquote className={mergedStyles.quote} key={blockProps.keys[i]}><div>{child}</div></blockquote>,
+        blockProps.data[i], mergedStyles)),
     'header-two': (children, blockProps) => children.map((child, i) =>
-      withTextAlignment(<h2 className={mergedStyles.headerTwo} key={blockProps.keys[i]}>{child}</h2>, blockProps, mergedStyles)),
+      withTextAlignment(<h2 className={mergedStyles.headerTwo} key={blockProps.keys[i]}>{child}</h2>, blockProps.data[i], mergedStyles)),
     'header-three': (children, blockProps) => children.map((child, i) =>
-      withTextAlignment(<h3 className={mergedStyles.headerThree} key={blockProps.keys[i]}>{child}</h3>, blockProps, mergedStyles)),
-    'code-block': (children, blockProps) =>
-      withTextAlignment(<pre key={blockProps.keys[0]} className={mergedStyles.codeBlock}>{children}</pre>, blockProps, mergedStyles),
+      withTextAlignment(<h3 className={mergedStyles.headerThree} key={blockProps.keys[i]}>{child}</h3>, blockProps.data[i], mergedStyles)),
+    'code-block': (children, blockProps) => children.map((child, i) =>
+      withTextAlignment(<pre key={blockProps.keys[i]} className={mergedStyles.codeBlock}>{child}</pre>, blockProps.data[i], mergedStyles)),
     'unordered-list-item': getList(false, mergedStyles),
     'ordered-list-item': getList(true, mergedStyles),
   };
