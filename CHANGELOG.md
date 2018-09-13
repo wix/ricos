@@ -10,6 +10,8 @@
 
 ## [Unreleased]
 
+## 1.6.0 (Sep 7, 2018)
+
 ### :boom: Breaking Change
 
 - `general`
