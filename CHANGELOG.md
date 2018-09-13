@@ -10,6 +10,19 @@
 
 ## [Unreleased]
 
+### :rocket: New Feature
+
+- `viewer`
+  - `RichContentViewer` accepts `config` prop for plugin configuration
+
+- `examples`
+  - `viewer-ssr` example added
+
+### :bug: Bug Fix
+
+- `viewer`
+  - block rendering and text alignment fixed
+
 ## 1.6.0 (Sep 7, 2018)
 
 ### :boom: Breaking Change

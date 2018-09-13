@@ -76,7 +76,7 @@ class App extends Component {
               key={i}
               decoratedText={decoratedText}
               theme={theme}
-              onHashTagClick={this.onHashTagClick}
+              onClick={this.onHashTagClick}
               createHref={this.createHref}
             >
               {child}
