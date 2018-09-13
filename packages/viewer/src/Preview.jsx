@@ -73,7 +73,7 @@ const getEntities = (typeMap, pluginProps) => ({
 
 const combineTypeMappers = mappers => {
   if (!mappers || !mappers.length || mappers.some(resolver => typeof resolver !== 'function')) {
-    console.error('typeMappers is expected to be a function array'); // eslint-disable-line no-console
+    console.warn('typeMappers is expected to be a function array'); // eslint-disable-line no-console
     return {};
   }
   return mappers.reduce((map, mapper) => Object.assign(map, mapper()), {});

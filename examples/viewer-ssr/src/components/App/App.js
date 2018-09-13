@@ -4,41 +4,31 @@ import MobileDetect from 'mobile-detect';
 import {
   RichContentModal,
   mergeStyles,
-  Button,
   normalizeInitialState,
 } from 'wix-rich-content-common';
+
 import { RichContentViewer } from 'wix-rich-content-viewer';
 
 import { videoTypeMapper } from 'wix-rich-content-plugin-video/dist/module.viewer.cjs';
-import { imageTypeMapper } from 'wix-rich-content-plugin-image/dist/module.viewer.cjs';
-import { galleryTypeMapper } from 'wix-rich-content-plugin-gallery/dist/module.viewer.cjs';
 import { dividerTypeMapper } from 'wix-rich-content-plugin-divider/dist/module.viewer.cjs';
-import { htmlTypeMapper } from 'wix-rich-content-plugin-html/dist/module.viewer.cjs';
-import { soundCloudTypeMapper } from 'wix-rich-content-plugin-sound-cloud/dist/module.viewer.cjs';
-import { linkTypeMapper } from 'wix-rich-content-plugin-link/dist/module.viewer.cjs';
-
+import {
+  htmlTypeMapper,
+  HTML_TYPE,
+} from 'wix-rich-content-plugin-html/dist/module.viewer.cjs';
+import {
+  linkTypeMapper,
+  LinkViewer,
+  LinkParseStrategy,
+} from 'wix-rich-content-plugin-link/dist/module.viewer.cjs';
 import {
   Strategy as HashTagStrategy,
   Component as HashTag,
 } from 'wix-rich-content-plugin-hashtag';
 
 import TestData from './TestData/initial-state';
+
 import theme from './theme/theme';
 import styles from './App.scss';
-
-import 'wix-rich-content-common/dist/styles.min.css';
-import 'wix-rich-content-viewer/dist/styles.min.css';
-import 'wix-rich-content-plugin-code-block/dist/styles.min.css';
-import 'wix-rich-content-plugin-divider/dist/styles.min.css';
-import 'wix-rich-content-plugin-emoji/dist/styles.min.css';
-import 'wix-rich-content-plugin-gallery/dist/styles.min.css';
-import 'wix-rich-content-plugin-html/dist/styles.min.css';
-import 'wix-rich-content-plugin-hashtag/dist/styles.min.css';
-import 'wix-rich-content-plugin-image/dist/styles.min.css';
-import 'wix-rich-content-plugin-link/dist/styles.min.css';
-import 'wix-rich-content-plugin-mentions/dist/styles.min.css';
-import 'wix-rich-content-plugin-video/dist/styles.min.css';
-import 'wix-rich-content-plugin-sound-cloud/dist/styles.min.css';
 
 const modalStyleDefaults = {
   content: {
@@ -54,24 +44,9 @@ const modalStyleDefaults = {
 const anchorTarget = '_top';
 const relValue = 'noreferrer';
 
-class App extends Component {
-  state = {
-    raw: {
-      entityMap: {},
-      blocks: [
-        {
-          key: '5g8yu',
-          text: 'Hello text only #hashtag test.com',
-          type: 'unstyled',
-          depth: 0,
-          inlineStyleRanges: [],
-          entityRanges: [],
-          data: {},
-        },
-      ],
-    },
-  };
+const INITIAL_TEST_DATA_KEY = 'onlyText';
 
+class App extends Component {
   constructor(props) {
     super(props);
     this.md = null;
@@ -81,41 +56,54 @@ class App extends Component {
     this.initViewerProps();
     this.styles = mergeStyles({ styles, theme });
     this.state = {
-      raw: {
-        entityMap: {},
-        blocks: [
-          {
-            key: '5g8yu',
-            text: 'Hello text only #hashtag test.com',
-            type: 'unstyled',
-            depth: 0,
-            inlineStyleRanges: [],
-            entityRanges: [],
-            data: {},
-          },
-        ],
-      },
+      testDataKey: INITIAL_TEST_DATA_KEY,
+      raw: TestData[INITIAL_TEST_DATA_KEY],
     };
 
-    const isSSR = typeof window !== 'undefined';
-
-    this.typeMappers = [];
+    this.typeMappers = [
+      videoTypeMapper,
+      dividerTypeMapper,
+      htmlTypeMapper,
+      linkTypeMapper,
+    ];
 
     this.decorators = [
       {
         strategy: HashTagStrategy,
-        component: ({ children, decoratedText }) => (
-          <HashTag
-            decoratedText={decoratedText}
-            theme={theme}
-            onHashTagClick={this.onHashTagClick}
-            createHref={this.createHref}
-          >
-            {children}
-          </HashTag>
-        ),
+        component: ({ children, decoratedText }) =>
+          children.map((child, i) => (
+            <HashTag
+              key={i}
+              decoratedText={decoratedText}
+              theme={theme}
+              onHashTagClick={this.onHashTagClick}
+              createHref={this.createHref}
+            >
+              {child}
+            </HashTag>
+          )),
+      },
+      {
+        strategy: LinkParseStrategy,
+        component: ({ children, decoratedText, rel, target }) =>
+          children.map((child, i) => (
+            <LinkViewer
+              key={i}
+              componentData={{ rel, target, url: decoratedText }}
+              anchorTarget={anchorTarget}
+              relValue={relValue}
+            >
+              {child}
+            </LinkViewer>
+          )),
       },
     ];
+
+    this.config = {
+      [HTML_TYPE]: {
+        htmlIframeSrc: 'http://localhost:3001/static/html-plugin-embed.html',
+      },
+    };
   }
 
   initViewerProps() {
@@ -129,7 +117,14 @@ class App extends Component {
     });
   };
 
-  /* eslint-disable no-console */
+  handleContentChange = () => {
+    const value = document.getElementById('testData').value;
+    this.setState({
+      testDataKey: value,
+      raw: TestData[value],
+    });
+  };
+
   isMobile = () => {
     return this.md && this.md.mobile() !== null;
   };
@@ -146,15 +141,21 @@ class App extends Component {
 
   onHashTagClick = (event, text) => {
     event.preventDefault();
-    console.log(`'${text}' hashtag clicked!`);
+    console.log(`'${text}' hashtag clicked!`); // eslint-disable-line no-console
   };
 
   createHref = decoratedText =>
     `/search/posts?query=${encodeURIComponent('#')}${decoratedText}`;
 
   render() {
-    const { styles } = this;
+    const contentOptions = Object.keys(TestData).map(key => (
+      <option value={key} key={key}>
+        {key}
+      </option>
+    ));
 
+    const { styles } = this;
+    /* eslint-disable jsx-a11y/no-onchange */
     return (
       <div className={styles.wrapper}>
         <div className={styles.container}>
@@ -162,25 +163,40 @@ class App extends Component {
             <div className={styles.header}>
               <h1>Wix Rich Content Viewer</h1>
               <div className={styles['toggle-container']}>
-                <div className={styles.toggle} />
+                <div className={styles.toggle}>
+                  <select
+                    id="testData"
+                    name="testData"
+                    onChange={() => this.handleContentChange(this)}
+                    value={this.state.testDataKey}
+                  >
+                    {contentOptions}
+                  </select>
+                </div>
               </div>
             </div>
-          ) : null}
+          ) : (
+            <select
+              id="testData"
+              name="testData"
+              onChange={() => this.handleContentChange(this)}
+              value={this.state.testDataKey}
+            >
+              {contentOptions}
+            </select>
+          )}
           <div className={styles.content}>
-            <div className={styles.columns}>
-              <div className={styles.column}>
-                <RichContentViewer
-                  helpers={this.helpers}
-                  typeMappers={this.typeMappers}
-                  decorators={this.decorators}
-                  initialState={this.state.raw}
-                  theme={theme}
-                  isMobile={this.isMobile()}
-                  anchorTarget={anchorTarget}
-                  relValue={relValue}
-                />
-              </div>
-            </div>
+            <RichContentViewer
+              helpers={this.helpers}
+              typeMappers={this.typeMappers}
+              decorators={this.decorators}
+              initialState={this.state.raw}
+              theme={theme}
+              isMobile={this.isMobile()}
+              anchorTarget={anchorTarget}
+              relValue={relValue}
+              config={this.config}
+            />
             <ReactModal
               isOpen={this.state.showModal}
               contentLabel="External Modal Example"
@@ -195,6 +211,7 @@ class App extends Component {
         </div>
       </div>
     );
+    /* eslint-enable jsx-a11y/no-onchange */
   }
 }
 

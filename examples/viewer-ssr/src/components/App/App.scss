@@ -1,3 +1,16 @@
+:global {
+  @import 'wix-rich-content-common/dist/styles.min';
+  @import 'wix-rich-content-viewer/dist/styles.min';
+  @import 'wix-rich-content-plugin-code-block/dist/styles.min';
+  @import 'wix-rich-content-plugin-divider/dist/styles.min';
+  @import 'wix-rich-content-plugin-emoji/dist/styles.min';
+  @import 'wix-rich-content-plugin-html/dist/styles.min';
+  @import 'wix-rich-content-plugin-hashtag/dist/styles.min';
+  @import 'wix-rich-content-plugin-link/dist/styles.min';
+  @import 'wix-rich-content-plugin-mentions/dist/styles.min';
+  @import 'wix-rich-content-plugin-video/dist/styles.min';
+}
+
 .wrapper {
   height: 100%;
 }
@@ -44,7 +57,7 @@
 
 .content {
   flex: 1;
-  width: 100%;
+  width: 740px;
   margin: 0 auto;
   background: white;
   padding: 20px 40px;
