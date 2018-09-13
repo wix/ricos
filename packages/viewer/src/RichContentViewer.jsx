@@ -39,7 +39,7 @@ export default class RichContentViewer extends Component {
             theme={theme} isMobile={isMobile} anchorTarget={anchorTarget} relValue={relValue}
           />
         </div>
-        <AccessibilityListener isMobile={isMobile}/>
+        <AccessibilityListener isMobile={isMobile} />
       </div>
     );
   }

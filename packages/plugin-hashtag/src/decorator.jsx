@@ -24,7 +24,8 @@ const findHashtagEntities = (contentBlock, callback) => {
   tags.forEach(hashtag => callback(hashtag.indices[0], hashtag.indices[1]));
 };
 
-const Hashtag = ({ children, decoratedText, createHref, onClick, target = '_self', theme = {} }) => {
+const Hashtag = ({ children, decoratedText, createHref, onHashTagClick, target = '_self', theme = {} }) => {
+
   const text = decoratedText.slice(1);
   const href = createHref ? createHref(text) : null;
   const Component = href ? 'a' : 'span';
@@ -34,9 +35,9 @@ const Hashtag = ({ children, decoratedText, createHref, onClick, target = '_self
       [styles.hashtag_hover]: !!href,
       [theme.hashtag_hover]: theme && theme.hashtag_hover && !!href,
     });
-  const decoratedOnClick = event => onClick(event, text);
-  const props = href ? { className, href, target, onClick: decoratedOnClick } : { className };
 
+  const decoratedOnClick = onHashTagClick ? event => onHashTagClick(event, text) : null;
+  const props = href ? { className, href, target, onClick: decoratedOnClick } : { className };
   return <Component {...props} >{children}</Component>;
 };
 
@@ -44,7 +45,7 @@ Hashtag.propTypes = {
   children: PropTypes.node,
   decoratedText: PropTypes.string,
   createHref: PropTypes.func,
-  onClick: PropTypes.func,
+  onHashTagClick: PropTypes.func,
   target: PropTypes.oneOf(['_self', '_blank']),
   theme: PropTypes.object,
 };

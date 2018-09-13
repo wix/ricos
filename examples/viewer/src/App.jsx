@@ -77,23 +77,7 @@ class App extends Component {
   }
 
   initViewerProps() {
-    this.helpers = {
-      openModal: data => {
-        const { modalStyles, ...modalProps } = data;
-        this.setState({
-          showModal: true,
-          modalProps,
-          modalStyles,
-        });
-      },
-      closeModal: () => {
-        this.setState({
-          showModal: false,
-          modalProps: null,
-          modalStyles: null,
-        });
-      }
-    };
+    this.helpers = {};      
   }
 
   closeModal = () => {

@@ -1,0 +1,23 @@
+@import './fonts.theme.scss';
+
+.wrapper {
+  @extend .fontElementMap !optional;
+}
+
+.container {
+}
+
+.header {
+}
+
+.header h1 {
+}
+
+.toggle-container {
+}
+
+.toggle {
+}
+
+.content {
+}
