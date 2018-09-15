@@ -1,4 +1,4 @@
-import { DEFAULTS } from '../constants';
+import { DEFAULTS, MODAL_TYPE } from '../constants';
 import { getModalStyles, TOOLBARS } from 'wix-rich-content-common';
 import GiphyApiInputModal from './giphyApiInputModal';
 import { InsertPluginIcon } from '../icons';
@@ -19,7 +19,7 @@ export default ({ helpers, t }) => {
       componentData: DEFAULTS,
       toolbars: [TOOLBARS.FOOTER, TOOLBARS.SIDE],
       modalElement: GiphyApiInputModal,
-      modalStyles: getModalStyles({ customStyles: modalCustomStyle, fullScreen: false }),
+      modalStyles: getModalStyles({ customStyles: modalCustomStyle, fullScreen: true, modalType: MODAL_TYPE }),
       helpers,
     },
   ];

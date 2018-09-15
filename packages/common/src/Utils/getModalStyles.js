@@ -106,7 +106,22 @@ const desktopModalOverrideStyles = {
   },
 };
 
-export const getModalStyles = ({ customStyles = null, fullScreen = true } = {}) => {
+const desktopFlyOutModalStyles = {
+  overlay: {
+  },
+  content: {
+    width: '500px',
+    boxSizing: 'border-box',
+    height: '600px',
+    overflow:'hidden',
+    border: '1px solid #ccc',
+    padding: '20px',
+    display: 'block',
+    position: 'absolute',
+  },
+}
+
+export const getModalStyles = ({ customStyles = null, fullScreen = true, modalType = null } = {}) => {
   const overrideStyles = [];
   if (customStyles) {
     overrideStyles.push(customStyles);
@@ -118,6 +133,9 @@ export const getModalStyles = ({ customStyles = null, fullScreen = true } = {}) 
     }
     return merge({}, mobileModalStyles, ...overrideStyles);
   } else {
+    if (modalType == 'flyOutModal') {
+      return merge({}, desktopFlyOutModalStyles, ...overrideStyles);
+    }
     if (!fullScreen) {
       overrideStyles.push(desktopModalOverrideStyles);
     }
