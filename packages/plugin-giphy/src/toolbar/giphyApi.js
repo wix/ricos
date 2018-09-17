@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { SEARCH_TYPE, giphyApiClient } from '../constants';
+import { SEARCH_TYPE, giphyApiClient, PAGE_SIZE } from '../constants';
 import InfiniteScroll from 'react-infinite-scroller';
 import PropTypes from 'prop-types';
 import styles from '../../statics/styles/giphy-api.scss';
@@ -21,13 +21,13 @@ class GiphyApi extends Component {
   getGifs = (searchTag, page) => {
     if (searchTag) {
       giphyApiClient
-        .search(SEARCH_TYPE, { q: searchTag, offset: page })
+        .search(SEARCH_TYPE, { q: searchTag, offset: page * PAGE_SIZE, limit: PAGE_SIZE })
         .then(response => {
           if (page > 1) {
-            this.setState({ gifs: this.state.gifs.concat(response.data), hasMoreItems: true, page: this.state.page + 26 });
+            this.setState({ gifs: this.state.gifs.concat(response.data), hasMoreItems: true, page: this.state.page + 1 });
           } else {
             this.setState({
-              gifs: response.data, hasMoreItems: true, page: this.state.page + 26
+              gifs: response.data, hasMoreItems: true, page: this.state.page + 1
             });
           }
         });
@@ -46,12 +46,12 @@ class GiphyApi extends Component {
   }
 
   onClick = gif => {
-    const url = gif.images.original.gif_url;
+    const gifObj = gif.images.original;
     const { componentData, helpers, pubsub, onConfirm, onCloseRequested } = this.props;
     if (onConfirm) {
-      onConfirm({ ...componentData, src: url });
+      onConfirm({ ...componentData, gif: gifObj });
     } else {
-      pubsub.update('componentData', { src: url });
+      pubsub.update('componentData', { gif: gifObj });
     }
 
     if (helpers) {
@@ -86,7 +86,7 @@ class GiphyApi extends Component {
           {this.state.gifs.map((gif, i) => {
             return (
               <div
-                key={JSON.stringify(gif.id) + i}
+                key={gif.id.toString() + i}
                 role="button"
                 tabIndex="0"
                 className={styles.gif_player}
