@@ -59,7 +59,18 @@ class RichContentEditor extends Component {
     const getEditorState = () => this.state.editorState;
     const setEditorState = editorState => this.setState({ editorState });
     const { pluginInstances, pluginButtons, pluginTextButtons, pubsubs } =
-      createPlugins({ plugins, config, helpers, theme, t, isMobile, anchorTarget, relValue, getEditorState, setEditorState });
+      createPlugins({
+        plugins,
+        config,
+        helpers,
+        theme,
+        t,
+        isMobile,
+        anchorTarget,
+        relValue,
+        getEditorState,
+        setEditorState,
+      });
     this.initEditorToolbars(pluginButtons, pluginTextButtons);
     this.pluginKeyBindings = initPluginKeyBindings(pluginTextButtons);
     this.plugins = [...pluginInstances, ...Object.values(this.toolbars)];

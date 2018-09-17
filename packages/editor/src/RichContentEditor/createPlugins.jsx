@@ -2,7 +2,18 @@ import { composeDecorators } from 'draft-js-plugins-editor';
 import createFocusPlugin from 'draft-js-focus-plugin';
 import createBlockDndPlugin from 'draft-js-drag-n-drop-plugin';
 
-const createPlugins = ({ plugins, config, helpers, theme, t, isMobile, anchorTarget, relValue, getEditorState, setEditorState }) => {
+const createPlugins = ({
+  plugins,
+  config,
+  helpers,
+  theme,
+  t,
+  isMobile,
+  anchorTarget,
+  relValue,
+  getEditorState,
+  setEditorState,
+}) => {
   const focusPlugin = createFocusPlugin();
   const dndPlugin = createBlockDndPlugin();
 

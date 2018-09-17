@@ -1,5 +1,5 @@
 import merge from 'lodash/merge';
-import { simplePubsub, getToolbarTheme, getConfigByFormFactor } from 'wix-rich-content-common';
+import { simplePubsub, getToolbarTheme, getConfigByFormFactor, TOOLBARS } from 'wix-rich-content-common';
 import { getDefaultToolbarSettings } from './default-toolbar-settings';
 import { MobileTextButtonList, DesktopTextButtonList } from './buttons';
 import { reducePluginTextButtonNames, mergeButtonLists } from './buttons/utils';
@@ -55,7 +55,9 @@ const createEditorToolbars = config => {
 
   const toolbars = {};
 
-  toolbarSettings.filter(({ shouldCreate }) => getConfigByFormFactor({ config: shouldCreate(), isMobile, defaultValue: true }))
+  toolbarSettings
+    .filter(({ name }) => name !== TOOLBARS.PLUGIN)
+    .filter(({ shouldCreate }) => getConfigByFormFactor({ config: shouldCreate(), isMobile, defaultValue: true }))
     .forEach(({ name, getButtons, getTextPluginButtons, getPositionOffset, getVisibilityFn, getInstance }) => {
       toolbars[name] = getInstance({
         buttons: getConfigByFormFactor({ config: getButtons(), isMobile, defaultValue: [] }),
