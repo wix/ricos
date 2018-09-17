@@ -1,26 +1,29 @@
 import { DEFAULTS, MODAL_TYPE } from '../constants';
-import { getModalStyles, TOOLBARS } from 'wix-rich-content-common';
+import { getModalStyles, TOOLBARS, WixUtils } from 'wix-rich-content-common';
 import GiphyApiInputModal from './giphyApiInputModal';
-import { InsertPluginIcon } from '../icons';
+import { InsertPluginIcon, InsertPluginIconMobile } from '../icons';
 
 const modalCustomStyle = {
-  content:
-  {
-  }
+  content: {}
 };
+const icon = WixUtils.isMobile() ? InsertPluginIconMobile : InsertPluginIcon;
 
 export default ({ helpers, t }) => {
   return [
     {
       type: 'modal',
-      name: 'giphy',
+      name: 'GIF',
       tooltipText: t('GiphyPlugin_InsertButton_Tooltip'),
-      Icon: InsertPluginIcon,
+      Icon: icon,
       componentData: DEFAULTS,
       toolbars: [TOOLBARS.FOOTER, TOOLBARS.SIDE],
       modalElement: GiphyApiInputModal,
-      modalStyles: getModalStyles({ customStyles: modalCustomStyle, fullScreen: true, modalType: MODAL_TYPE }),
-      helpers,
-    },
+      modalStyles: getModalStyles({
+        customStyles: modalCustomStyle,
+        fullScreen: true,
+        modalType: MODAL_TYPE
+      }),
+      helpers
+    }
   ];
 };
