@@ -93,7 +93,7 @@ class RadioGroup extends Component {
                   tabIndex="-1" {...a11yProps} id={inputId} className={styles.radioGroup_input}
                   type={'radio'} checked={checked} onChange={() => onChange(option.value)}
                 />
-                <span className={styles.radioGroup_button}/>
+                <span className={styles.radioGroup_button} />
                 <span className={styles.radioGroup_label}>{option.labelText}</span>
               </label>);
           })}

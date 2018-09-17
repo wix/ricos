@@ -54,7 +54,7 @@ export default class PrismDecorator {
     return props => {
       const { type } = props; // eslint-disable-line react/prop-types
       const className = classNames(CODE_TOKEN_CLASS_NAMES[type], this.theme[`codeBlock_${type}`]);
-      return <span {...props} className={className}/>;
+      return <span {...props} className={className} />;
     };
   }
 

@@ -27,7 +27,7 @@ export default class RichContentViewer extends Component {
 
   render() {
     const { styles } = this;
-    const { theme, isMobile, typeMappers, decorators, anchorTarget, relValue } = this.props;
+    const { theme, isMobile, typeMappers, decorators, anchorTarget, relValue, config } = this.props;
     const wrapperClassName = classNames(styles.wrapper, {
       [styles.desktop]: !this.props.platform || this.props.platform === 'desktop',
     });
@@ -35,11 +35,11 @@ export default class RichContentViewer extends Component {
       <div className={wrapperClassName}>
         <div className={styles.editor}>
           <Preview
-            raw={this.state.raw} decorators={decorators} typeMappers={typeMappers}
+            raw={this.state.raw} decorators={decorators} typeMappers={typeMappers} config={config}
             theme={theme} isMobile={isMobile} anchorTarget={anchorTarget} relValue={relValue}
           />
         </div>
-        <AccessibilityListener isMobile={isMobile}/>
+        <AccessibilityListener isMobile={isMobile} />
       </div>
     );
   }
@@ -58,6 +58,7 @@ RichContentViewer.propTypes = {
   theme: PropTypes.object,
   anchorTarget: PropTypes.string,
   relValue: PropTypes.string,
+  config: PropTypes.object,
 };
 
 RichContentViewer.defaultProps = {

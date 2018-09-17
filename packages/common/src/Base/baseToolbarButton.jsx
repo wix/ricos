@@ -163,7 +163,7 @@ class BaseToolbarButton extends React.Component {
       </div>
     );
 
-    return <ToolbarButton theme={theme} showTooltip={showTooltip} tooltipText={tooltipText} button={filesButton} tooltipOffset={{ y: -20 }}/>;
+    return <ToolbarButton theme={theme} showTooltip={showTooltip} tooltipText={tooltipText} button={filesButton} tooltipOffset={{ y: -20 }} />;
   };
 
   renderDropdownButton = (buttonWrapperClassNames, buttonClassNames) => {

@@ -26,11 +26,11 @@ const HtmlComponent = props => {
       )}
 
       {srcType === SRC_TYPE_URL && isValidUrl(src) && (
-        <IframeUrl key={SRC_TYPE_URL} tabIndex={readOnly ? -1 : 0} src={normalizeUrl(src)}/>
+        <IframeUrl key={SRC_TYPE_URL} tabIndex={readOnly ? -1 : 0} src={normalizeUrl(src)} />
       )}
 
       {!src && !isValidUrl(src) && (
-        <div className={styles.htmlComponent_placeholder}/>
+        <div className={styles.htmlComponent_placeholder} />
       )}
     </div>
   );

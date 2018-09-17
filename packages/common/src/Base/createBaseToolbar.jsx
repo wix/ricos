@@ -404,7 +404,7 @@ export default function createToolbar({ buttons, theme, pubsub, helpers, isMobil
                 className={arrowClassNames}
                 data-hook="pluginToolbarRightArrow" onMouseDown={e => this.scrollToolbar(e, showLeftArrow)}
               >
-                <i className={showLeftArrow ? leftArrowIconClassNames : rightArrowIconClassNames}/>
+                <i className={showLeftArrow ? leftArrowIconClassNames : rightArrowIconClassNames} />
               </button>
             }
           </div>

@@ -246,7 +246,7 @@ export default class InlineToolbar extends Component {
                 className={arrowClassNames}
                 data-hook="inlineToolbarRightArrow" onMouseDown={e => this.scrollToolbar(e, showLeftArrow)}
               >
-                <i className={showLeftArrow ? leftArrowIconClassNames : rightArrowIconClassNames}/>
+                <i className={showLeftArrow ? leftArrowIconClassNames : rightArrowIconClassNames} />
               </button>
             }
           </div>

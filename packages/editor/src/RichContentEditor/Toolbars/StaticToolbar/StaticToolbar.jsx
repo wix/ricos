@@ -134,7 +134,7 @@ export default class StaticToolbar extends React.Component {
               className={arrowClassNames}
               data-hook="toolbarArrow" onMouseDown={e => this.scrollToolbar(e, showLeftArrow)}
             >
-              <i className={showLeftArrow ? leftArrowIconClassNames : rightArrowIconClassNames}/>
+              <i className={showLeftArrow ? leftArrowIconClassNames : rightArrowIconClassNames} />
             </button>
           }
         </div>

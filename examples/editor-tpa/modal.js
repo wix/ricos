@@ -3,6 +3,6 @@ import { render } from 'react-dom';
 import Modal from './src/Modal';
 
 render(
-  <Modal/>,
+  <Modal />,
   document.getElementById('modalroot')
 );

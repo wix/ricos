@@ -222,12 +222,12 @@ class App extends Component {
               </span>
           </div>
           }
-          {MobileToolbar && <MobileToolbar/>}
+          {MobileToolbar && <MobileToolbar />}
           <div className="content">
             {this.state.mounted &&
             <div className="columns">
               <div className="column main">
-                {TextToolbar && <TextToolbar/>}
+                {TextToolbar && <TextToolbar />}
                 <RichContentEditor
                   ref={this.setEditor}
                   onChange={this.onChange}

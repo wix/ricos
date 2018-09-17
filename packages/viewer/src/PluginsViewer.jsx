@@ -20,10 +20,11 @@ const renderLink = (componentData, anchorTarget, relValue) => {
   return null;
 };
 
-const AtomicBlock = ({ type, typeMap, componentData, children, theme, isMobile, anchorTarget, relValue, ...props }) => {
+const AtomicBlock = ({ type, typeMap, componentData, children, theme, isMobile, anchorTarget, relValue, config, ...props }) => {
   const mergedStyles = mergeStyles({ theme, styles });
   const { component: Component, elementType } = typeMap[type];
   const { size, alignment, textWrap, container } = typeMap[type].classNameStrategies || {};
+  const settings = (config && config[type]) || {};
 
   if (Component) {
     if (elementType !== 'inline') {
@@ -40,17 +41,17 @@ const AtomicBlock = ({ type, typeMap, componentData, children, theme, isMobile, 
         <div className={containerClassNames}>
           {isFunction(container) ?
             <div className={container(theme)}>
-              <Component componentData={componentData} theme={theme} {...props}>
+              <Component componentData={componentData} theme={theme} settings={settings} {...props}>
                 {children}
               </Component>
             </div> :
-            <Component componentData={componentData} theme={theme} {...props}>
+            <Component componentData={componentData} theme={theme} settings={settings} {...props}>
               {children}
             </Component>}
           {renderLink(componentData, anchorTarget, relValue)}
         </div>);
     } else {
-      return <Component componentData={componentData} theme={theme} {...props}> {children} </Component>;
+      return <Component componentData={componentData} theme={theme} settings={settings} {...props}> {children} </Component>;
     }
   }
   return null;
@@ -65,6 +66,7 @@ AtomicBlock.propTypes = {
   isMobile: PropTypes.bool,
   anchorTarget: PropTypes.string,
   relValue: PropTypes.string,
+  config: PropTypes.object,
 };
 
 //return a list of types with a function that wraps the viewer
