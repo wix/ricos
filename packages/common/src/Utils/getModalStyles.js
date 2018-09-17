@@ -113,15 +113,27 @@ const desktopFlyOutModalStyles = {
     width: '500px',
     boxSizing: 'border-box',
     height: '600px',
-    overflow:'hidden',
+    overflow: 'visible',
     border: '1px solid #ccc',
     padding: '20px',
     display: 'block',
     position: 'absolute',
   },
+  arrow: {
+    border: 'solid #ccc',
+    borderWidth: '0 1px 1px 0',
+    display: 'inline - block',
+    padding: '8px',
+    position: 'absolute',
+    background: '#fff',
+    display: 'block',
+    left: '15px',
+    bottom: '-10px',
+    WebkitTransform: 'rotate(45deg)'
+  },
 }
 
-export const getModalStyles = ({ customStyles = null, fullScreen = true, modalType = null } = {}) => {
+export const getModalStyles = ({ customStyles = null, fullScreen = true, isFlyOutModal = false } = {}) => {
   const overrideStyles = [];
   if (customStyles) {
     overrideStyles.push(customStyles);
@@ -133,7 +145,7 @@ export const getModalStyles = ({ customStyles = null, fullScreen = true, modalTy
     }
     return merge({}, mobileModalStyles, ...overrideStyles);
   } else {
-    if (modalType == 'flyOutModal') {
+    if (isFlyOutModal) {
       return merge({}, desktopFlyOutModalStyles, ...overrideStyles);
     }
     if (!fullScreen) {

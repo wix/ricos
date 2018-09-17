@@ -59,6 +59,6 @@
     }
   },
   "required": [
-    "src"
+    "gif"
   ]
 }

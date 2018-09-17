@@ -18,12 +18,9 @@ export default ({ helpers, t }) => {
       componentData: DEFAULTS,
       toolbars: [TOOLBARS.FOOTER, TOOLBARS.SIDE],
       modalElement: GiphyApiInputModal,
-      modalStyles: getModalStyles({
-        customStyles: modalCustomStyle,
-        fullScreen: true,
-        modalType: MODAL_TYPE
-      }),
-      helpers
+      modalStyles: getModalStyles({ customStyles: modalCustomStyle, fullScreen: true, isFlyOutModal: true }),
+      isFlyOutModal: true,
+      helpers,
     }
   ];
 };

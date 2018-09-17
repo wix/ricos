@@ -1,7 +1,6 @@
 import { BUTTONS, getModalStyles } from 'wix-rich-content-common';
 import { Modals } from '../modals';
 import { MediaReplaceIcon } from '../icons';
-import { MODAL_TYPE } from '../constants';
 
 export default ({ t }) => {
   return [
@@ -18,9 +17,11 @@ export default ({ t }) => {
       type: BUTTONS.EXTERNAL_MODAL,
       icon: MediaReplaceIcon,
       modalName: Modals.GIPHY_API_INPUT,
-      modalStyles: getModalStyles({ fullScreen: false, modalType: MODAL_TYPE }),
+      modalStyles: getModalStyles({ fullScreen: true, isFlyOutModal: true }),
+      style: getModalStyles({ fullScreen: true, isFlyOutModal: true }),
       mobile: true,
       tooltipTextKey: 'ReplaceGiphyButton_Tooltip',
+      isFlyOutModal: true,
       t,
     },
     { keyName: 'delete', type: BUTTONS.DELETE, mobile: true },

@@ -123,6 +123,8 @@ export default ({ blockType, button, helpers, pubsub, t }) => {
           theme: this.props.theme,
           componentData: button.componentData,
           onConfirm: this.addBlock,
+          isFlyOutModal: button.isFlyOutModal,
+          style: button.modalStyles,
           pubsub,
           helpers,
           t,
@@ -171,11 +173,11 @@ export default ({ blockType, button, helpers, pubsub, t }) => {
 
       const Button = (
         <div className={buttonWrapperClassNames}>
-          { shouldRenderFileUploadButton ? this.renderFileUploadButton() : this.renderButton()}
+          {shouldRenderFileUploadButton ? this.renderFileUploadButton() : this.renderButton()}
         </div>
       );
 
-      return <ToolbarButton theme={theme} showTooltip={showTooltip} tooltipText={tooltipText} button={Button} tooltipOffset={{ y: -10 }}/>;
+      return <ToolbarButton theme={theme} showTooltip={showTooltip} tooltipText={tooltipText} button={Button} tooltipOffset={{ y: -10 }} />;
     }
   }
 
