@@ -112,12 +112,12 @@ const desktopFlyOutModalStyles = {
     zIndex: 3
   },
   content: {
-    width: '500px',
+    width: '265px',
     boxSizing: 'border-box',
-    height: '600px',
+    height: '357px',
     overflow: 'visible',
     border: '1px solid #ccc',
-    padding: '20px',
+    padding: '18px',
     display: 'block',
     position: 'absolute',
     zIndex: 6

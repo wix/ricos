@@ -8,12 +8,9 @@ const mobileFullScreenCustomStyle = {
     backgroundColor: 'transparent'
   },
   content: {
-    margin: '200px',
-    width: '265px',
-    height: '367px',
     overflow: 'hidden',
-    top: 0,
-    left: 0
+    top: 200,
+    left: 200
   }
 };
 const icon = WixUtils.isMobile() ? InsertPluginIconMobile : InsertPluginIcon;
