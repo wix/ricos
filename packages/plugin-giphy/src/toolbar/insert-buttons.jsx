@@ -10,7 +10,8 @@ const mobileFullScreenCustomStyle = {
   content: {
     overflow: 'hidden',
     top: 200,
-    left: 200
+    left: 200,
+    paddingRight: '6px'
   }
 };
 const icon = WixUtils.isMobile() ? InsertPluginIconMobile : InsertPluginIcon;

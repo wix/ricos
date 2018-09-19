@@ -2,7 +2,7 @@
 @import '~wix-rich-content-common/dist/statics/styles/palette';
 
 .infinite_scroll {
-   height: 290px;
+   height: 285px;
    overflow: auto;
    overflow-x: hidden;
    @include phone {
@@ -43,7 +43,7 @@
     }  
     cursor: pointer;
     margin-bottom: 18px;
-    margin-right: 8px;
+    margin-right: 6px;
   }
   
   .spinner{

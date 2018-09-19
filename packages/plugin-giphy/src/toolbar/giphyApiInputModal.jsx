@@ -51,13 +51,13 @@ export default class GiphyApiInputModal extends Component {
             theme={theme}
             data-hook="giphyUploadModalInput"
           />
-          <div className={styles.searchIcon}>
-            {!this.state.searchTag ? <SearchIcon /> :
+          <div >
+            {!this.state.searchTag ? <SearchIcon className={styles.searchIcon} /> :
               <div onClick={this.handleClearText} role="button" tabIndex="0" onKeyPress={null}>
                 <CloseIcon className={styles.closeIcon} />
               </div>}
           </div>
-          <hr className={styles.line} />
+          <div className={styles.line} />
           {!this.state.searchTag ?
             <div>
               <div className={styles.trending}>Trending</div>
