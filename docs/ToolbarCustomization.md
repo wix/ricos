@@ -61,35 +61,47 @@ As you can see, the `Settings` is form-factor aware, i.e. it defines different b
 
 The following toolbar types are available:
 
-- Plugin insertion toolbars:
-  - Side toolbar
-  - Footer toolbar
 - Text editing toolbars:
   - Static text toolbar
   - Inline text toolbar
   - Mobile toolbar
-- Plugin toolbars [WIP]
+- Plugin insertion toolbars:
+  - Side toolbar
+  - Footer toolbar
+- Plugin functionality toolbars
 
-All the toolbar types are exposed by the `TOOLBARS` const found in [`consts.js`](https://github.com/wix-incubator/rich-content/blob/develop/packages/common/src/consts.js).
+All the toolbar types are exposed by the `TOOLBARS` const found in [consts.js](https://github.com/wix-incubator/rich-content/blob/master/packages/common/src/consts.js).
 
 ### `Settings` properties
 
-`name` : one of the toolbar types (see `TOOLBARS` const for details)
+| property | description | scope |
+|----------|-------------|-------|
+| `name` | one of the toolbar types (see `TOOLBARS` const for details) | all toolbars |
+| `shouldCreate` | determines whether the toolbar should be created at the first place |  all toolbars |
+|`getVisibilityFn` | toolbar visibility function | all toolbars |
+|`getPositionOffset` | toolbar offset point in pixels, relatively to the default toolbar position | all toolbars |
+|`getButtons` (1) | a list of the toolbar button components | plugin insertion and functionality toolbars |
+|`getButtons` (2) | a list of inline button names | text editing toolbars |
+|`getTextPluginButtons` | a map of inline buttons added by plugins. The keys are derived from the `PluginTextButtonMappers` -- see the `link-plugin`'s [createLinkToolbar](https://github.com/wix-incubator/rich-content/blob/master/packages/plugin-link/src/toolbar/createLinkToolbar.js) for reference | text editing toolbars
 
-`shouldCreate` : determines whether the toolbar should be created at the first place
+## Plugin functionality toolbar customization
 
-`getVisibilityFn` : defines the toolbar visibility based on given `editorState`
+The `getButtons` property, when applied on `TOOLBARS.PLUGIN`, will affect ALL the plugin functionality toolbars. This can be used, for example, to hide size-related buttons for *all* the plugin toolbars.
 
-`getPositionOffset` : defines the toolbar offset point in pixels, relatively to the default toolbar position
+In order to hide a specific button in a specific plugin toolbar, please use the `config.`*`plugin_type_name`*.`toolbar.hidden` property. For example, to hide the `Replace` button of the `video-plugin` toobar, the following `config` should be provided to the `RichContentEditor`:
 
-`getButtons` : defines a list of the toolbar button components (for plugin insertion toolbars), or a list of inline button names (for text editing toolbars)
+```javascript
+const config = {
+  [VIDEO_TYPE]: {
+    toolbar: {
+      hidden: ['replace']
+    }
+  }
+};
+```
 
-`getTextPluginButtons`: defines a map of inline buttons added by plugins. The keys are derived from the `PluginTextButtonMappers` -- see the `link-plugin`'s [`createLinkToolbar`](https://github.com/wix-incubator/rich-content/blob/develop/packages/plugin-link/src/toolbar/createLinkToolbar.js) for reference
+The `hidden` value is expected to be a string array, where every string is the plugin toolbar button `keyName`.
 
 ## References and examples
 
-The [`default-toolbar-settings.js`](https://github.com/wix-incubator/rich-content/blob/develop/packages/editor/src/RichContentEditor/Toolbars/default-toolbar-settings.js) contains the default toolbar settings, and the `getToolbarSettings` code example could be found in [`App.jsx`](https://github.com/wix-incubator/rich-content/blob/develop/examples/editor/src/App.jsx) (commented by default).
-
-## Notes
-
-The plugin toolbar customization is not available yet.
+The [default-toolbar-settings.js](https://github.com/wix-incubator/rich-content/blob/master/packages/editor/src/RichContentEditor/Toolbars/default-toolbar-settings.js) contains the default toolbar settings, and the `getToolbarSettings` code example could be found in [PluginConfig.js](https://github.com/wix-incubator/rich-content/blob/master/examples/editor/src/PluginConfig.js) (commented by default).
