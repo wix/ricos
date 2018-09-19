@@ -29,8 +29,10 @@
 .line {
   width: 100%;
   size: 0px;
-  border: solid 1px #c8c8c8;
+  height: 2px;
+  background-color: #c8c8c8;
   margin-top: 6px;
+
 }
 
 .trending {
@@ -58,6 +60,8 @@
 }
 
 .giphyUrlInputModal_textInput {
+  top: 0;
+  left: 0;
   // margin: 8px 0 6px 0;
   margin-bottom: 6px;
   input[type="url"] {

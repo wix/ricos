@@ -9,8 +9,8 @@ const mobileFullScreenCustomStyle = {
   },
   content: {
     overflow: 'hidden',
-    top: 200,
-    left: 200,
+    top: 0,
+    left: 0,
     paddingRight: '6px'
   }
 };
