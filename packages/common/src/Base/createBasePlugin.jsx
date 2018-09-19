@@ -80,6 +80,7 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
     t,
     name: config.toolbar.name,
     uiSettings: config.uiSettings,
+    getToolbarSettings: config.getToolbarSettings
   });
   const InsertPluginButtons =
     settings.showInsertButtons && config.toolbar && config.toolbar.InsertButtons && config.toolbar.InsertButtons.map(button => ({
