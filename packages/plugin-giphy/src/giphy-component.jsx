@@ -7,7 +7,6 @@ import styles from '../statics/styles/default-giphy-styles.scss';
 import { GIPHY_TYPE } from './constants';
 
 class GiphyComponent extends Component {
-
   static type = {
     GIPHY_TYPE
   };
@@ -18,18 +17,14 @@ class GiphyComponent extends Component {
     this.state = {
       isLoading: false,
       isLoaded: false,
-      isPlayable,
+      isPlayable
     };
     this.styles = mergeStyles({ styles, theme: this.props.theme });
   }
 
-  componentDidMount() {
+  componentDidMount() {}
 
-  }
-
-  componentDidUpdate() {
-
-  }
+  componentDidUpdate() {}
 
   handleReady = () => {
     if (!this.state.isLoaded) {
@@ -59,7 +54,12 @@ class GiphyComponent extends Component {
     const containerClassNames = classNames(styles.giphy_container, className || '');
     /* eslint-disable jsx-a11y/no-static-element-interactions */
     return (
-      <div data-hook="giphyPlayer" onClick={onClick} className={containerClassNames} onKeyDown={e => this.onKeyDown(e, onClick)}>
+      <div
+        data-hook="giphyPlayer"
+        onClick={onClick}
+        className={containerClassNames}
+        onKeyDown={e => this.onKeyDown(e, onClick)}
+      >
         {this.renderPlayer()}
       </div>
     );
@@ -75,7 +75,7 @@ GiphyComponent.propTypes = {
   onClick: PropTypes.func.isRequired,
   className: PropTypes.string.isRequired,
   theme: PropTypes.object.isRequired,
-  t: PropTypes.func,
+  t: PropTypes.func
 };
 
 export { GiphyComponent as Component };

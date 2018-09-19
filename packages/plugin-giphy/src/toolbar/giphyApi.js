@@ -3,7 +3,7 @@ import { SEARCH_TYPE, giphyApiClient, PAGE_SIZE } from '../constants';
 import InfiniteScroll from 'react-infinite-scroller';
 import PropTypes from 'prop-types';
 import styles from '../../statics/styles/giphy-api.scss';
-import Loader from 'react-loader-spinner';
+import MDSpinner from 'react-md-spinner';
 
 class GiphyApi extends Component {
   constructor(props) {
@@ -43,7 +43,7 @@ class GiphyApi extends Component {
   getMoreGifs = () => {
     const searchTag = this.props.searchTag;
     this.getGifs(searchTag, this.state.page);
-  }
+  };
 
   onClick = gif => {
     const gifObj = gif.images.original;
@@ -72,10 +72,10 @@ class GiphyApi extends Component {
   }
 
   render() {
-    const loader = <Loader type="Oval" color="#d3d3d3" height="30" width="30" />;
+    const loader = <div className={styles.spinner}> <MDSpinner singleColor="#000000" /></div>;
 
     return (
-      <div style={{ height: '490px', overflow: 'auto' }}>
+      <div className={styles.infinite_scroll}>
         <InfiniteScroll
           pageStart={0}
           loadMore={this.getMoreGifs.bind(this)}
@@ -89,7 +89,7 @@ class GiphyApi extends Component {
                 key={gif.id.toString() + i}
                 role="button"
                 tabIndex="0"
-                className={styles.gif_player}
+                className={styles.gif_img}
                 onKeyPress={this.handleKeyPress}
                 onClick={() => this.onClick(gif)}
               >
@@ -101,7 +101,6 @@ class GiphyApi extends Component {
       </div>
     );
   }
-
 }
 
 GiphyApi.propTypes = {
@@ -111,8 +110,7 @@ GiphyApi.propTypes = {
   searchTag: PropTypes.string,
   gifs: PropTypes.array,
   onCloseRequested: PropTypes.func,
-  onConfirm: PropTypes.func,
+  onConfirm: PropTypes.func
 };
-
 
 export default GiphyApi;
