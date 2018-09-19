@@ -10,17 +10,40 @@
     margin-top: 12px;
 
   }
+  
 }
+
+/* width */
+.infinite_scroll::-webkit-scrollbar {
+  width: 4px;
+  border-radius: 100px;
+}
+
+/* Track */
+.infinite_scroll::-webkit-scrollbar-track {
+  background: #ffffff; 
+}
+
+.infinite_scroll::-webkit-scrollbar-thumb {
+  background: #000000; 
+  border-radius: 100px;
+  height: 90px;
+}
+
 
 .gif_img {
     img {
         width: 100%;
         height: 168px;
          @include phone {
+           width: 100%;
             height:205px;
+            margin-bottom: 21px;
          }
     }  
-    margin-bottom: 21px;
+    cursor: pointer;
+    margin-bottom: 18px;
+    margin-right: 8px;
   }
   
   .spinner{
