@@ -8,8 +8,9 @@ import { mergeStyles } from '../Utils/mergeStyles';
 import FileInput from '../Components/FileInput';
 import ToolbarButton from '../Components/ToolbarButton';
 import styles from '../../statics/styles/toolbar-button.scss';
+import merge from 'lodash/merge';
 
-export default ({ blockType, button, helpers, pubsub, t }) => {
+export default ({ blockType, button, helpers, pubsub, t, anchorTarget }) => {
   class InsertPluginButton extends Component {
     constructor(props) {
       super(props);
@@ -55,7 +56,7 @@ export default ({ blockType, button, helpers, pubsub, t }) => {
           this.toggleFileSelection();
           break;
         case 'modal':
-          this.toggleButtonModal();
+          this.toggleButtonModal(event);
           break;
         default:
           this.addBlock(button.componentData || {});
@@ -114,22 +115,42 @@ export default ({ blockType, button, helpers, pubsub, t }) => {
       }
     };
 
-    toggleButtonModal = () => {
+    toggleButtonModal = (event) => {
+      const modalWidth = parseFloat(button.modalStyles.content.width);
+      const modalHeight = parseFloat(button.modalStyles.content.height);
+      const flyOutModalPosition = (button.isFlyOutModal) ? this.getFlyOutModalPosition(event, modalWidth, modalHeight) : {};
+      const flyOutArrowModalPosition = (button.isFlyOutModal) ? this.getFlyOutArrowModalPosition(event, flyOutModalPosition.left, flyOutModalPosition.top, modalWidth) : {};
+      const modalStyles = merge({}, button.modalStyles, { content: { ...flyOutModalPosition }, arrow: { ...flyOutArrowModalPosition } });
+
       if (helpers && helpers.openModal) {
         helpers.openModal({
           modalName: button.modalName,
           modalElement: button.modalElement,
-          modalStyles: button.modalStyles,
+          modalStyles: modalStyles,
           theme: this.props.theme,
           componentData: button.componentData,
           onConfirm: this.addBlock,
           isFlyOutModal: button.isFlyOutModal,
-          style: button.modalStyles,
+          style: modalStyles,
           pubsub,
           helpers,
           t,
         });
       }
+    }
+
+    getFlyOutModalPosition = (event, modalWidth, modalHeight) => {
+      const btnHeight = event.target.clientHeight, btnWidth = event.target.clientWidth;
+      const y = (pubsub.store.get("editorBounds").height - (event.clientY - pubsub.store.get("editorBounds").top) > modalHeight) ? event.clientY + btnHeight + 15 : event.clientY - modalHeight - 15,
+        x = (pubsub.store.get("editorBounds").width - (event.clientX - pubsub.store.get("editorBounds").left) > modalWidth) ? event.clientX + btnWidth / 2 : event.clientX - modalWidth / 2 - 1 * btnWidth;
+      return { left: x, top: y, postion: 'absolute' };
+    }
+
+    getFlyOutArrowModalPosition = (event, x, y, modalWidth) => {
+      const btnWidth = event.target.clientWidth;
+      const top = event.clientY - pubsub.store.get("editorBounds").top, left = event.clientX - pubsub.store.get("editorBounds").left;
+      const arrowX = (x > left) ? 15 : modalWidth - btnWidth / 4;
+      return (y < top) ? { WebkitTransform: "rotate(45deg)", left: arrowX, transform: "rotate(45deg)", bottom: "-10px" } : { WebkitTransform: "rotate(-135deg)", left: arrowX, transform: "rotate(-135deg)", top: "-10px" };
     }
 
     toggleFileSelection = () => {

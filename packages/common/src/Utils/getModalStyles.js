@@ -108,6 +108,8 @@ const desktopModalOverrideStyles = {
 
 const desktopFlyOutModalStyles = {
   overlay: {
+    backgroundColor: 'rgba(0, 0, 0, 0)',
+    zIndex: 3
   },
   content: {
     width: '500px',
@@ -118,6 +120,7 @@ const desktopFlyOutModalStyles = {
     padding: '20px',
     display: 'block',
     position: 'absolute',
+    zIndex: 6
   },
   arrow: {
     border: 'solid #ccc',
@@ -127,9 +130,6 @@ const desktopFlyOutModalStyles = {
     position: 'absolute',
     background: '#fff',
     display: 'block',
-    left: '15px',
-    bottom: '-10px',
-    WebkitTransform: 'rotate(45deg)'
   },
 }
 

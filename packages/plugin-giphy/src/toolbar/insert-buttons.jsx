@@ -16,7 +16,7 @@ export default ({ helpers, t }) => {
       tooltipText: t('GiphyPlugin_InsertButton_Tooltip'),
       Icon: icon,
       componentData: DEFAULTS,
-      toolbars: [TOOLBARS.FOOTER, TOOLBARS.SIDE],
+      toolbars: [TOOLBARS.FOOTER],
       modalElement: GiphyApiInputModal,
       modalStyles: getModalStyles({ customStyles: modalCustomStyle, fullScreen: true, isFlyOutModal: true }),
       isFlyOutModal: true,
