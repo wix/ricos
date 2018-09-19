@@ -10,6 +10,10 @@
 
 ## [Unreleased]
 
+### :book: Documentation
+
+- [Theming Guidelines](https://github.com/wix-incubator/rich-content/blob/develop/docs/plugin-development-guidelines/Theming.md) added
+
 <br/>
 
 ## 1.6.1 (Sep 13, 2018)
