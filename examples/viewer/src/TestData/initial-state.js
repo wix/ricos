@@ -668,8 +668,8 @@ const TestData = {
           src: "https://www.youtube.com/embed/owsfdh4gxyc",
           srcType: "url",
           config: {
-            width: 500,
-            height: 200,
+            width: 560,
+            height: 340,
             safe: true
           }
         }

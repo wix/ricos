@@ -11,11 +11,12 @@ import htmlComponentStyles from '../statics/styles/HtmlComponent.scss';
 const HtmlComponent = props => {
   const styles = mergeStyles({ styles: htmlComponentStyles, theme: props.theme });
   validate(props.componentData, schema);
-  const { blockProps, componentData: { src, srcType } } = props;
+  const { blockProps, componentData: { src, srcType, config: { width, height } = {} } } = props;
+  const style = { width, height };
   const readOnly = blockProps ? blockProps.readOnly : true;
 
   return (
-    <div className={styles.htmlComponent} data-hook="HtmlComponent">
+    <div className={styles.htmlComponent} style={style} data-hook="HtmlComponent">
       {srcType === SRC_TYPE_HTML && src && (
         <IframeHtml
           key={SRC_TYPE_HTML}
