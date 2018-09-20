@@ -10,9 +10,15 @@
 
 ## [Unreleased]
 
+### :rocket: New Feature
+
+- `general`
+  - [#142](https://github.com/wix-incubator/rich-content/pull/142) RCE `config.getToolbarSettings` API now allows to customize the plugin functionality toolbars. Check [documentation](https://github.com/wix-incubator/rich-content/blob/master/docs/ToolbarCustomization.md) for more details
+
 ### :book: Documentation
 
-- [Theming Guidelines](https://github.com/wix-incubator/rich-content/blob/develop/docs/plugin-development-guidelines/Theming.md) added
+- [#142](https://github.com/wix-incubator/rich-content/pull/142) [Toolbar Customization](https://github.com/wix-incubator/rich-content/blob/master/docs/ToolbarCustomization.md) updated
+- [Theming Guidelines](https://github.com/wix-incubator/rich-content/blob/master/docs/plugin-development-guidelines/Theming.md) added
 
 <br/>
 
@@ -92,7 +98,7 @@
 ### :boom: Breaking Change
 
 - `general`
-  - [#116](https://github.com/wix-incubator/rich-content/pull/116) `config` plugin-specific section keys are standardized -- now the plugin types should be used as keys. Check [example](https://github.com/wix-incubator/rich-content/blob/develop/examples/editor/src/PluginsConfig.js) for reference
+  - [#116](https://github.com/wix-incubator/rich-content/pull/116) `config` plugin-specific section keys are standardized -- now the plugin types should be used as keys. Check [example](https://github.com/wix-incubator/rich-content/blob/master/examples/editor/src/PluginsConfig.js) for reference
 - `code-block`
   - [#113](https://github.com/wix-incubator/rich-content/pull/113) `config.codeBlock.position` property is obsolete; use `config.getToolbarSettings` to override plugin text button settings
 
@@ -110,7 +116,7 @@
 
 ### :book: Documentation
 
-- [UI Settings](https://github.com/wix-incubator/rich-content/blob/develop/docs/UiSettings.md) added
+- [UI Settings](https://github.com/wix-incubator/rich-content/blob/master/docs/UiSettings.md) added
 
 ### :house: Internal
 
@@ -129,7 +135,7 @@
 ### :rocket: New Feature
 
 - `editor`
-  - RCE `config.getToolbarSettings` API now allows to customize the plugin text buttons. Check [documentation](https://github.com/wix-incubator/rich-content/blob/develop/docs/ToolbarCustomization.md) for more details
+  - RCE `config.getToolbarSettings` API now allows to customize the plugin text buttons. Check [documentation](https://github.com/wix-incubator/rich-content/blob/master/docs/ToolbarCustomization.md) for more details
 
 ### :bug: Bug Fix
 
@@ -138,7 +144,7 @@
 
 ### :book: Documentation
 
-- [Toolbar Customization](https://github.com/wix-incubator/rich-content/blob/develop/docs/ToolbarCustomization.md) updated
+- [Toolbar Customization](https://github.com/wix-incubator/rich-content/blob/master/docs/ToolbarCustomization.md) updated
 
 <br/>
 
@@ -224,7 +230,7 @@
 ### :rocket: New Feature
 
 - `editor`
-  - RCE `config.getToolbarSettings` API allows to customize toolbar instantiation, visibility, offset point, and buttons. Check [documentation](https://github.com/wix-incubator/rich-content/blob/develop/docs/ToolbarCustomization.md) for more details
+  - RCE `config.getToolbarSettings` API allows to customize toolbar instantiation, visibility, offset point, and buttons. Check [documentation](https://github.com/wix-incubator/rich-content/blob/master/docs/ToolbarCustomization.md) for more details
 
 ### :bug: Bug Fix
 
@@ -239,7 +245,7 @@
 
 ### :book: Documentation
 
-- [Toolbar Customization](https://github.com/wix-incubator/rich-content/blob/develop/docs/ToolbarCustomization.md) added
+- [Toolbar Customization](https://github.com/wix-incubator/rich-content/blob/master/docs/ToolbarCustomization.md) added
 
 <br/>
 

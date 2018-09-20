@@ -25,5 +25,6 @@ export const TOOLBARS = {
   MOBILE: 'MOBILE',
   FOOTER: 'FOOTER',
   STATIC: 'TEXT',
-  INLINE: 'INLINE'
+  INLINE: 'INLINE',
+  PLUGIN: 'PLUGIN',
 };

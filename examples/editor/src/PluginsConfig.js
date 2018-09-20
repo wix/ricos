@@ -1,11 +1,12 @@
-import { CODE_BLOCK_TYPE } from 'wix-rich-content-plugin-code-block';
-import { DIVIDER_TYPE } from 'wix-rich-content-plugin-divider';
-import { EXTERNAL_EMOJI_TYPE } from 'wix-rich-content-plugin-emoji';
-import { HASHTAG_TYPE } from 'wix-rich-content-plugin-hashtag';
-import { HTML_TYPE } from 'wix-rich-content-plugin-html';
-import { LINK_TYPE } from 'wix-rich-content-plugin-link';
-import { VIDEO_TYPE } from 'wix-rich-content-plugin-video';
-import { EXTERNAL_MENTIONS_TYPE } from 'wix-rich-content-plugin-mentions';
+import { CODE_BLOCK_TYPE } from "wix-rich-content-plugin-code-block";
+import { DIVIDER_TYPE } from "wix-rich-content-plugin-divider";
+import { EXTERNAL_EMOJI_TYPE } from "wix-rich-content-plugin-emoji";
+import { HASHTAG_TYPE } from "wix-rich-content-plugin-hashtag";
+import { HTML_TYPE } from "wix-rich-content-plugin-html";
+import { LINK_TYPE } from "wix-rich-content-plugin-link";
+import { VIDEO_TYPE } from "wix-rich-content-plugin-video";
+import { EXTERNAL_MENTIONS_TYPE } from "wix-rich-content-plugin-mentions";
+// import { TOOLBARS, BUTTONS } from "wix-rich-content-common";
 
 const uiSettings = {
   blankTargetToggleVisibilityFn: () => true,
@@ -15,34 +16,73 @@ const uiSettings = {
 export default {
   [HASHTAG_TYPE]: {
     createHref: decoratedText =>
-      `/search/posts?query=${encodeURIComponent('#')}${decoratedText}`,
+      `/search/posts?query=${encodeURIComponent("#")}${decoratedText}`,
     onClick: (event, text) => {
       event.preventDefault();
       console.log(`'${text}' hashtag clicked!`);
-    },
+    }
   },
   [HTML_TYPE]: {
-    htmlIframeSrc: 'http://localhost:3000/static/html-plugin-embed.html',
+    htmlIframeSrc: "http://localhost:3000/static/html-plugin-embed.html"
     // showInsertButtons: false,
   },
   [EXTERNAL_MENTIONS_TYPE]: {
     onMentionClick: mention => console.log({ mention }),
-    getMentions: (searchQuery) => new Promise(resolve =>
-      setTimeout(() => resolve([
-          { name: searchQuery, slug: searchQuery },
-          { name: 'Test One', slug: 'testone' },
-          { name: 'Test Two', slug: 'testwo', avatar: 'https://via.placeholder.com/100x100?text=Image=50' },
-        ]),
-        250),
-    ),
+    getMentions: searchQuery =>
+      new Promise(resolve =>
+        setTimeout(
+          () =>
+            resolve([
+              { name: searchQuery, slug: searchQuery },
+              { name: "Test One", slug: "testone" },
+              {
+                name: "Test Two",
+                slug: "testwo",
+                avatar: "https://via.placeholder.com/100x100?text=Image=50"
+              }
+            ]),
+          250
+        )
+      )
   },
-  [LINK_TYPE]: { },
-  [CODE_BLOCK_TYPE]: { },
-  [DIVIDER_TYPE]: { },
-  [EXTERNAL_EMOJI_TYPE]: { },
-  [VIDEO_TYPE]: { },
+  [LINK_TYPE]: {},
+  [CODE_BLOCK_TYPE]: {},
+  [DIVIDER_TYPE]: {},
+  [EXTERNAL_EMOJI_TYPE]: {},
+  [VIDEO_TYPE]: {
+    toolbar: {
+      hidden: []
+    }
+  },
   uiSettings,
   // getToolbarSettings: ({ pluginButtons, textButtons }) => [
+  //   {
+  //     name: TOOLBARS.PLUGIN,
+  //     getVisibilityFn: () => ({
+  //       desktop: () => true,
+  //       mobile: {
+  //         ios: () => true,
+  //         android: () => true
+  //       }
+  //     }),
+  //     getPositionOffset: () => ({
+  //       desktop: { x: 100, y: 50 },
+  //       mobile: {
+  //         ios: { x: 100, y: -100 },
+  //         android: { x: -100, y: -100 }
+  //       }
+  //     }),
+  //     getButtons: () => {
+  //       const buttons = pluginButtons.filter(({ type }) => type !== BUTTONS.DELETE);
+  //       return {
+  //         desktop: buttons,
+  //         mobile: {
+  //           ios: buttons,
+  //           android: buttons
+  //         }
+  //       };
+  //     }
+  //   },
   //   {
   //     name: TOOLBARS.SIDE,
   //     getVisibilityFn: () => ({
