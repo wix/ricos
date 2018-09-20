@@ -154,12 +154,6 @@ class RichContentEditor extends Component {
     }
   }
 
-  componentDidUpdate() {
-    if (this.getToolbars().TextToolbar && !document.body.className.includes(styles.transformed)) {
-      document.body.className += ` ${styles.transformed}`;
-    }
-  }
-
   // TODO: get rid of this ASAP!
   // Currently, there's no way to get a static toolbar ref without consumer interference
   findFocusableChildForElement(id) {

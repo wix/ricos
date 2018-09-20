@@ -17,7 +17,8 @@ export default (config = {}) => {
     t,
     id,
     offset,
-    visibilityFn
+    visibilityFn,
+    displayOptions,
   } = config;
 
   const toolbarProps = {
@@ -33,7 +34,8 @@ export default (config = {}) => {
     id,
     dataHook: camelCase(name),
     offset,
-    visibilityFn
+    visibilityFn,
+    displayOptions,
   };
 
   return {

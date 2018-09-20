@@ -12,6 +12,7 @@ const createSideToolbar = (config = {}) => {
     visibilityFn,
     offset,
     isMobile,
+    displayOptions
   } = config;
 
   const toolbarProps = {
@@ -21,6 +22,7 @@ const createSideToolbar = (config = {}) => {
     isMobile,
     offset,
     visibilityFn,
+    displayOptions
   };
 
   return {
@@ -37,7 +39,7 @@ const createSideToolbar = (config = {}) => {
   };
 };
 
-export default ({ buttons, offset, pubsub, theme, visibilityFn, isMobile, helpers, t }) => {
+export default ({ buttons, offset, pubsub, theme, visibilityFn, isMobile, helpers, t, displayOptions }) => {
 
   const { buttonStyles, ...rest } = theme;
   const toolbarButtonTheme = {
@@ -54,8 +56,9 @@ export default ({ buttons, offset, pubsub, theme, visibilityFn, isMobile, helper
     theme,
     visibilityFn,
     isMobile,
+    displayOptions,
     structure: [
-      ({ getEditorState, setEditorState, theme }) => //eslint-disable-line
+      ({ getEditorState, setEditorState }) => //eslint-disable-line
         (<AddPluginFloatingToolbar
           getEditorState={getEditorState}
           setEditorState={setEditorState}

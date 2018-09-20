@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Measure from 'react-measure';
+import { DISPLAY_MODE } from 'wix-rich-content-common';
 import Styles from '../../../../statics/styles/static-toolbar.scss';
 
 export default class StaticToolbar extends React.Component {
@@ -22,8 +23,17 @@ export default class StaticToolbar extends React.Component {
       y: PropTypes.number,
     }),
     visibilityFn: PropTypes.func,
+    displayOptions: PropTypes.shape({
+      displayMode: PropTypes.string,
+    }),
     uiSettings: PropTypes.object,
   };
+
+  static defaultProps = {
+    displayOptions: {
+      displayMode: DISPLAY_MODE.NORMAL
+    }
+  }
 
   constructor(props) {
     super(props);
@@ -69,7 +79,21 @@ export default class StaticToolbar extends React.Component {
       }
     }
 
-    const { theme, structure, helpers, isMobile, linkModal, anchorTarget, relValue, t, dataHook, id, offset, uiSettings } = this.props;
+    const {
+      theme,
+      structure,
+      helpers,
+      isMobile,
+      linkModal,
+      anchorTarget,
+      relValue,
+      t,
+      dataHook,
+      id,
+      offset,
+      uiSettings,
+      displayOptions,
+    } = this.props;
     const { showLeftArrow, showRightArrow, overrideContent: OverrideContent, extendContent: ExtendContent } = this.state;
     const hasArrow = showLeftArrow || showRightArrow;
     const { toolbarStyles } = theme || {};
@@ -108,6 +132,12 @@ export default class StaticToolbar extends React.Component {
     if (offset) {
       style = { top: offset.y || 0, left: offset.x || 0 };
     }
+    if (displayOptions.displayMode === DISPLAY_MODE.FLOATING) {
+      style.position = 'fixed';
+      style.zIndex = 7;
+    }
+
+
 
     return (
       <div role="toolbar" aria-orientation="horizontal" id={id} className={toolbarClassNames} data-hook={dataHook} style={style}>

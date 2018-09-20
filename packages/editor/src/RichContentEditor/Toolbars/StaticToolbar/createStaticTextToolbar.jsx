@@ -82,6 +82,7 @@ export default ({
   refId,
   offset,
   visibilityFn,
+  displayOptions,
   uiSettings
 }) => {
   const staticTextTheme = getStaticTextTheme(theme);
@@ -102,6 +103,7 @@ export default ({
     id,
     offset,
     visibilityFn,
+    displayOptions,
     uiSettings,
   });
 };

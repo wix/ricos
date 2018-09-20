@@ -1,4 +1,4 @@
-import { TOOLBARS } from 'wix-rich-content-common';
+import { TOOLBARS, DISPLAY_MODE } from 'wix-rich-content-common';
 import { createSideToolbar } from './SideToolbar';
 import { createMobileToolbar, createFooterToolbar, createStaticTextToolbar } from './StaticToolbar';
 import { createInlineTextToolbar } from './InlineToolbar';
@@ -14,6 +14,14 @@ const defaultSideToolbarVisibilityFn = editorState => {
   const currentContent = editorState.getCurrentContent();
   const currentBlock = currentContent.getBlockForKey(selection.getStartKey());
   return currentBlock.getLength() === 0;
+};
+
+const defaultDisplayOptions = {
+  desktop: { displayMode: DISPLAY_MODE.NORMAL },
+  mobile: {
+    ios: { displayMode: DISPLAY_MODE.NORMAL },
+    android: { displayMode: DISPLAY_MODE.NORMAL },
+  }
 };
 
 const defaultOffset = {
@@ -57,6 +65,7 @@ export const getDefaultToolbarSettings = ({ pluginButtons, textButtons, pluginTe
           android: { x: 0, y: 0 },
         }
       }),
+      getDisplayOptions: () => defaultDisplayOptions,
       getButtons: () => {
         const buttons = pluginButtons.filter(({ buttonSettings }) => buttonSettings.toolbars.includes(TOOLBARS.SIDE))
           .map(({ component }) => component);
@@ -88,6 +97,7 @@ export const getDefaultToolbarSettings = ({ pluginButtons, textButtons, pluginTe
         }
       }),
       getPositionOffset: () => defaultOffset,
+      getDisplayOptions: () => defaultDisplayOptions,
       getButtons: () => {
         return {
           desktop: [],
@@ -123,6 +133,7 @@ export const getDefaultToolbarSettings = ({ pluginButtons, textButtons, pluginTe
         }
       }),
       getPositionOffset: () => defaultOffset,
+      getDisplayOptions: () => defaultDisplayOptions,
       getButtons: () => {
         const buttons = pluginButtons.filter(({ buttonSettings }) => buttonSettings.toolbars.includes(TOOLBARS.FOOTER))
           .map(({ component }) => component);
@@ -154,6 +165,7 @@ export const getDefaultToolbarSettings = ({ pluginButtons, textButtons, pluginTe
         }
       }),
       getPositionOffset: () => defaultOffset,
+      getDisplayOptions: () => defaultDisplayOptions,
       getButtons: () => ({
         desktop: textButtons.desktop,
         mobile: {
@@ -187,6 +199,7 @@ export const getDefaultToolbarSettings = ({ pluginButtons, textButtons, pluginTe
         }
       }),
       getPositionOffset: () => defaultOffset,
+      getDisplayOptions: () => defaultDisplayOptions,
       getButtons: () => ({
         desktop: textButtons.desktop,
         mobile: {

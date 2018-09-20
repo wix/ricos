@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { DISPLAY_MODE } from 'wix-rich-content-common';
 import DraftOffsetKey from '@wix/draft-js/lib/DraftOffsetKey';
 import Styles from '../../../../statics/styles/side-toolbar-wrapper.scss';
 
@@ -14,8 +15,17 @@ export default class SideToolbar extends Component {
     }),
     theme: PropTypes.object.isRequired,
     visibilityFn: PropTypes.func,
-    isMobile: PropTypes.bool
+    isMobile: PropTypes.bool,
+    displayOptions: PropTypes.shape({
+      displayMode: PropTypes.string
+    })
   };
+
+  static defaultProps = {
+    displayOptions: {
+      displayMode: DISPLAY_MODE.NORMAL
+    }
+  }
 
   state = {
     position: {
@@ -48,6 +58,7 @@ export default class SideToolbar extends Component {
       return;
     }
 
+    const { displayOptions, offset, isMobile } = this.props;
     const selection = editorState.getSelection();
     const currentContent = editorState.getCurrentContent();
     const currentBlock = currentContent.getBlockForKey(selection.getStartKey());
@@ -56,18 +67,29 @@ export default class SideToolbar extends Component {
     const offsetKey = DraftOffsetKey.encode(currentBlock.getKey(), 0, 0);
     // Note: need to wait on tick to make sure the DOM node has been create by Draft.js
     setTimeout(() => {
-      const { isMobile } = this.props;
-      const node = document.querySelectorAll(`[data-offset-key="${offsetKey}"]`)[0];
-      if (node) {
-        const top = node.getBoundingClientRect().top;
-        const parentTop = node.offsetParent.getBoundingClientRect().top;
-        const { offset } = this.props;
+      if (displayOptions.displayMode === DISPLAY_MODE.NORMAL) {
+        const node = document.querySelectorAll(`[data-offset-key="${offsetKey}"]`)[0];
+        if (node) {
+          const top = node.getBoundingClientRect().top;
+          const parentTop = node.offsetParent.getBoundingClientRect().top;
+          this.setState({
+            position: {
+              top: top - parentTop + offset.y,
+              [!isMobile ? 'left' : 'right']: offset.x,
+              transform: `scale(${isMobile ? 0.76 : 1})`, //mobile plus is smaller
+              transition: 'transform 0.15s cubic-bezier(.3,1.2,.2,1)',
+            },
+          });
+        }
+      } else if (displayOptions.displayMode === DISPLAY_MODE.FLOATING) {
         this.setState({
           position: {
-            top: top - parentTop + offset.y,
+            top: offset.y,
             [!isMobile ? 'left' : 'right']: offset.x,
             transform: `scale(${isMobile ? 0.76 : 1})`, //mobile plus is smaller
             transition: 'transform 0.15s cubic-bezier(.3,1.2,.2,1)',
+            position: 'fixed',
+            zIndex: 7
           },
         });
       }

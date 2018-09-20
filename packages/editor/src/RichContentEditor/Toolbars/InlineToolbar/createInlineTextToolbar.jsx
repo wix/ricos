@@ -15,6 +15,7 @@ export default config => {
     t,
     offset,
     visibilityFn,
+    displayOptions,
     uiSettings,
   } = config;
 
@@ -33,6 +34,7 @@ export default config => {
     t,
     offset,
     visibilityFn,
+    displayOptions,
     uiSettings
   });
 };
