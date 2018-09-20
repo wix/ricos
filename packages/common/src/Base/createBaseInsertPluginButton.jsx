@@ -116,10 +116,11 @@ export default ({ blockType, button, helpers, pubsub, t, anchorTarget }) => {
     };
 
     toggleButtonModal = (event) => {
+      const { isMobile } = this.props;
       const modalWidth = parseFloat(button.modalStyles.content.width);
       const modalHeight = parseFloat(button.modalStyles.content.height);
-      const flyOutModalPosition = (button.isFlyOutModal) ? this.getFlyOutModalPosition(event, modalWidth, modalHeight) : {};
-      const flyOutArrowModalPosition = (button.isFlyOutModal) ? this.getFlyOutArrowModalPosition(event, flyOutModalPosition.left, flyOutModalPosition.top, modalWidth) : {};
+      const flyOutModalPosition = (button.isFlyOutModal && !isMobile) ? this.getFlyOutModalPosition(event, modalWidth, modalHeight) : {};
+      const flyOutArrowModalPosition = (button.isFlyOutModal && !isMobile) ? this.getFlyOutArrowModalPosition(event, flyOutModalPosition.left, flyOutModalPosition.top, modalWidth) : {};
       const modalStyles = merge({}, button.modalStyles, { content: { ...flyOutModalPosition }, arrow: { ...flyOutArrowModalPosition } });
 
       if (helpers && helpers.openModal) {
