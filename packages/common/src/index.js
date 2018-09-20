@@ -86,7 +86,8 @@ export { default as WixUtils } from './Utils/wixUtils';
 export { sizeClassName, alignmentClassName, textWrapClassName } from './Utils/classNameStrategies';
 export { getSelectionStyles } from './Utils/inlineStyleUtils';
 export { getConfigByFormFactor } from './Utils/getConfigByFormFactor';
+export { mergeToolbarSettings } from './Utils/mergeToolbarSettings';
 export { default as createInlineStyleDecorators } from './Decorators/inline-style-decorators';
 
 export { HEADING } from './Decorators/inline-styles';
-export { COMMANDS, MODIFIERS, TOOLBARS } from './consts';
+export { COMMANDS, MODIFIERS, TOOLBARS, DISPLAY_MODE } from './consts';

@@ -28,3 +28,8 @@ export const TOOLBARS = {
   INLINE: 'INLINE',
   PLUGIN: 'PLUGIN',
 };
+
+export const DISPLAY_MODE = {
+  NORMAL: 'NORMAL',
+  FLOATING: 'FLOATING'
+};

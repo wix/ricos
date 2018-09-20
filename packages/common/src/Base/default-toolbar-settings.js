@@ -1,4 +1,4 @@
-import { TOOLBARS } from '../consts';
+import { TOOLBARS, DISPLAY_MODE } from '../consts';
 
 export const getDefaultToolbarSettings = ({ pluginButtons }) => {
 
@@ -19,6 +19,13 @@ export const getDefaultToolbarSettings = ({ pluginButtons }) => {
         mobile: {
           ios: { x: 0, y: 0 },
           android: { x: 0, y: 0 },
+        }
+      }),
+      getDisplayOptions: () => ({
+        desktop: { displayMode: DISPLAY_MODE.NORMAL },
+        mobile: {
+          ios: { displayMode: DISPLAY_MODE.NORMAL },
+          android: { displayMode: DISPLAY_MODE.NORMAL },
         }
       }),
       getButtons: () => {

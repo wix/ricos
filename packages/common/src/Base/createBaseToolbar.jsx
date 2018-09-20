@@ -2,11 +2,11 @@
 import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
 import classNames from 'classnames';
-import merge from 'lodash/merge';
 import pickBy from 'lodash/pickBy';
 import Measure from 'react-measure';
-import { TOOLBARS } from '../consts';
+import { TOOLBARS, DISPLAY_MODE } from '../consts';
 import { getConfigByFormFactor } from '../Utils/getConfigByFormFactor';
+import { mergeToolbarSettings } from '../Utils/mergeToolbarSettings';
 
 import Separator from '../Components/Separator';
 import BaseToolbarButton from './baseToolbarButton';
@@ -49,25 +49,19 @@ export default function createToolbar({
 
       const { all, hidden } = buttons;
       const visibleButtons = all.filter(({ keyName }) => !hidden.includes(keyName));
-      const defaultToolbarSettings = getDefaultToolbarSettings({ pluginButtons: visibleButtons });
+
+      const defaultSettings = getDefaultToolbarSettings({ pluginButtons: visibleButtons });
       const customSettings = getToolbarSettings({ pluginButtons: visibleButtons }).filter(({ name }) => name === TOOLBARS.PLUGIN);
+      const toolbarSettings = mergeToolbarSettings({ defaultSettings, customSettings })
+        .filter(({ name }) => name === TOOLBARS.PLUGIN)[0];
 
-      const toolbarSettings = defaultToolbarSettings.reduce((mergedSettings, defaultSetting) => {
-        const customSettingsByName = customSettings.filter(s => s.name === defaultSetting.name);
-        if (customSettingsByName.length > 0) {
-          mergedSettings.push(merge(defaultSetting, customSettingsByName[0]));
-        } else {
-          mergedSettings.push(defaultSetting);
-        }
-        return mergedSettings;
-      }, []).filter(({ name }) => name === TOOLBARS.PLUGIN)[0] || {};
-
-      const { shouldCreate, getPositionOffset, getButtons, getVisibilityFn } = toolbarSettings;
+      const { shouldCreate, getPositionOffset, getButtons, getVisibilityFn, getDisplayOptions } = toolbarSettings;
 
       this.structure = getConfigByFormFactor({ config: getButtons(), isMobile, defaultValue: [] });
       this.offset = getConfigByFormFactor({ config: getPositionOffset(), isMobile, defaultValue: { x: 0, y: 0 } });
       this.shouldCreate = getConfigByFormFactor({ config: shouldCreate(), isMobile, defaultValue: true });
       this.visibilityFn = getConfigByFormFactor({ config: getVisibilityFn(), isMobile, defaultValue: () => true });
+      this.displayOptions = getConfigByFormFactor({ config: getDisplayOptions(), isMobile, defaultValue: { displayMode: DISPLAY_MODE.NORMAL } });
 
       this.state = getInitialState();
     }
@@ -157,11 +151,7 @@ export default function createToolbar({
       this.setState(getInitialState());
     };
 
-    showToolbar = () => {
-      if (!this.visibilityFn()) {
-        return;
-      }
-
+    getRelativePositionStyle() {
       const { x, y } = this.offset;
       const toolbarNode = findDOMNode(this);
       const toolbarHeight = toolbarNode.offsetHeight;
@@ -170,12 +160,32 @@ export default function createToolbar({
       const offsetParentLeft = offsetParentRect.left;
 
       const boundingRect = pubsub.get('boundingRect');
-      const position = {
+      return {
         top: boundingRect.top - toolbarHeight - toolbarOffset - offsetParentTop + y,
         left: boundingRect.left + boundingRect.width / 2 - offsetParentLeft + x,
         transform: 'translate(-50%) scale(1)',
         transition: 'transform 0.15s cubic-bezier(.3,1.2,.2,1)',
       };
+    }
+
+    showToolbar = () => {
+      if (!this.visibilityFn()) {
+        return;
+      }
+
+      let position;
+      if (this.displayOptions.displayMode === DISPLAY_MODE.NORMAL) {
+        position = this.getRelativePositionStyle();
+      } else if (this.displayOptions.displayMode === DISPLAY_MODE.FLOATING) {
+        position = {
+          top: this.offset.y,
+          left: this.offset.x,
+          transform: 'translate(-50%) scale(1)',
+          position: 'fixed',
+          zIndex: 7
+        };
+      }
+
       const componentData = pubsub.get('componentData') || {};
       const componentState = pubsub.get('componentState') || {};
       this.setState({
