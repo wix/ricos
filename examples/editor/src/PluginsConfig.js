@@ -6,7 +6,7 @@ import { HTML_TYPE } from "wix-rich-content-plugin-html";
 import { LINK_TYPE } from "wix-rich-content-plugin-link";
 import { VIDEO_TYPE } from "wix-rich-content-plugin-video";
 import { EXTERNAL_MENTIONS_TYPE } from "wix-rich-content-plugin-mentions";
-// import { TOOLBARS, BUTTONS } from "wix-rich-content-common";
+import { TOOLBARS, BUTTONS, DISPLAY_MODE } from "wix-rich-content-common";
 
 const uiSettings = {
   blankTargetToggleVisibilityFn: () => true,
@@ -55,7 +55,7 @@ export default {
     }
   },
   uiSettings,
-  // getToolbarSettings: ({ pluginButtons, textButtons }) => [
+  getToolbarSettings: ({ pluginButtons, textButtons }) => [
   //   {
   //     name: TOOLBARS.PLUGIN,
   //     getVisibilityFn: () => ({
@@ -66,11 +66,14 @@ export default {
   //       }
   //     }),
   //     getPositionOffset: () => ({
-  //       desktop: { x: 100, y: 50 },
+  //       desktop: { x: 850, y: 20 },
   //       mobile: {
   //         ios: { x: 100, y: -100 },
   //         android: { x: -100, y: -100 }
   //       }
+  //     }),
+  //     getDisplayOptions: () => ({
+  //       desktop: { displayMode:  DISPLAY_MODE.FLOATING },
   //     }),
   //     getButtons: () => {
   //       const buttons = pluginButtons.filter(({ type }) => type !== BUTTONS.DELETE);
@@ -85,6 +88,41 @@ export default {
   //   },
   //   {
   //     name: TOOLBARS.SIDE,
+  //     getDisplayOptions: () => ({
+  //       desktop: { displayMode:  DISPLAY_MODE.FLOATING },
+  //     }),
+  //     getPositionOffset: () => ({
+  //       desktop: { x: 1000, y: 780 },
+  //       mobile: {
+  //         ios: { x: 0, y: 0 },
+  //         android: { x: 0, y: 0 },
+  //       }
+  //     })
+  //   },
+  //   {
+  //     name: TOOLBARS.MOBILE,
+  //     getDisplayOptions: () => ({
+  //       mobile: {
+  //         ios: { displayMode:  DISPLAY_MODE.FLOATING },
+  //         android: { displayMode:  DISPLAY_MODE.FLOATING },
+  //       }
+  //     }),
+  //     getPositionOffset: () => ({
+  //       desktop: { x: 850, y: 50 },
+  //       mobile: {
+  //         ios: { x: 0, y: 0 },
+  //         android: { x: 0, y: 0 },
+  //       }
+  //     })
+  //   },
+  //   {
+  //     name: TOOLBARS.FOOTER,
+  //     getPositionOffset: () => ({
+  //       desktop: { x: 0, y: 700 },
+  //       mobile: {
+  //         ios: { x: 0, y: 500 },
+  //       }
+  //     }),
   //     getVisibilityFn: () => ({
   //       desktop: () => true,
   //       mobile: {
@@ -92,37 +130,8 @@ export default {
   //         android: () => true,
   //       }
   //     }),
-  //   },
-  //   {
-  //     name: TOOLBARS.MOBILE,
-  //     shouldCreate: () => ({
-  //       desktop: false,
-  //       mobile: {
-  //         ios: false,
-  //         android: false,
-  //       }
-  //     }),
-  //   },
-  //   {
-  //     name: TOOLBARS.FOOTER,
-  //     getPositionOffset: () => ({
-  //       mobile: {
-  //         ios: { x: 0, y: 500 },
-  //       }
-  //     }),
-  //     getVisibilityFn: () => ({
-  //       desktop: () => false,
-  //       mobile: {
-  //         ios: () => true,
-  //         android: () => true,
-  //       }
-  //     }),
-  //     shouldCreate: () => ({
-  //       desktop: () => false,
-  //       mobile: {
-  //         ios: () => true,
-  //         android: () => true,
-  //       }
+  //     getDisplayOptions: () => ({
+  //       desktop: { displayMode:  DISPLAY_MODE.FLOATING },
   //     }),
   //     getButtons: () => ({
   //       desktop: () => [],
@@ -135,20 +144,39 @@ export default {
   //   },
   //   {
   //     name: TOOLBARS.STATIC,
-  //     getPositionOffset: () => ({
-  //       desktop: { x: 40, y: 40 },
-  //       mobile: {
-  //         ios: { x: 40, y: 40 },
-  //         android: { x: 50, y: 50 },
-  //       }
-  //     }),
   //     getVisibilityFn: () => ({
-  //       desktop: () => false,
+  //       desktop: () => true,
+  //     }),
+  //     getDisplayOptions: () => ({
+  //       desktop: { displayMode:  DISPLAY_MODE.FLOATING },
+  //     }),
+  //     getPositionOffset: () => ({
+  //       desktop: { x: 0, y: 0 },
+  //     }),
+  //   },
+  //   {
+  //     name: TOOLBARS.INLINE,
+  //     getVisibilityFn: () => ({
+  //       desktop: () => true,
   //       mobile: {
   //         ios: () => true,
   //         android: () => true,
   //       }
   //     }),
+  //     getDisplayOptions: () => ({
+  //       desktop: { displayMode:  DISPLAY_MODE.FLOATING },
+  //       mobile: {
+  //         ios: { displayMode:  DISPLAY_MODE.FLOATING },
+  //         android: { displayMode:  DISPLAY_MODE.FLOATING },
+  //       }
+  //     }),
+  //     getPositionOffset: () => ({
+  //       desktop: { x: 850, y: 50 },
+  //       mobile: {
+  //         ios: { x: 180, y: 50 },
+  //         android: { x: 180, y: 50 },
+  //       }
+  //     }),
   //   }
-  // ]
+   ]
 };
