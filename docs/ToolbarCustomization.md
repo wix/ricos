@@ -38,6 +38,13 @@ The `Setting` type is defined as follows:
       android: { x: number, y: number }
     }
   },
+  getDisplayOptions: () => {
+    desktop: { displayMode: DISPLAY_MODE.NORMAL | DISPLAY_MODE.FLOATING },
+    mobile: {
+      ios: { displayMode: DISPLAY_MODE.NORMAL | DISPLAY_MODE.FLOATING },
+      android: { displayMode: DISPLAY_MODE.NORMAL | DISPLAY_MODE.FLOATING },
+    }
+  }
   getButtons: () => {
     desktop: Array<Component> | Array<string>,
     mobile: {
@@ -80,9 +87,19 @@ All the toolbar types are exposed by the `TOOLBARS` const found in [consts.js](h
 | `shouldCreate` | determines whether the toolbar should be created at the first place |  all toolbars |
 |`getVisibilityFn` | toolbar visibility function | all toolbars |
 |`getPositionOffset` | toolbar offset point in pixels, relatively to the default toolbar position | all toolbars |
+| `getDisplayOptions` | toolbar display options (see next section for details) | all toolbars |
 |`getButtons` (1) | a list of the toolbar button components | plugin insertion and functionality toolbars |
 |`getButtons` (2) | a list of inline button names | text editing toolbars |
 |`getTextPluginButtons` | a map of inline buttons added by plugins. The keys are derived from the `PluginTextButtonMappers` -- see the `link-plugin`'s [createLinkToolbar](https://github.com/wix-incubator/rich-content/blob/master/packages/plugin-link/src/toolbar/createLinkToolbar.js) for reference | text editing toolbars
+
+#### Display Options
+
+At the moment, the `getDisplayOptions` API consists of a single property `displayMode`. This property accepts two values (defined in [consts.js](https://github.com/wix-incubator/rich-content/blob/master/packages/common/src/consts.js)):
+
+- `DISPLAY_MODE.NORMAL` is the default; the toolbars are normally-positioned
+- `DISPLAY_MODE.FLOATING` the toolbars are in fixed position. This, combined with `getVisibilityFn` and `getPositionOffset` properties, causes toolbars to "float".
+
+**Note**: while in `DISPLAY_MODE.FLOATING` mode, the `getPositionOffset` property denotes absolute screen coordinates.
 
 ## Plugin functionality toolbar customization
 
