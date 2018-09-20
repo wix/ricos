@@ -14,7 +14,16 @@ const mobileFullScreenCustomStyle = {
     paddingRight: '6px'
   }
 };
-const icon = WixUtils.isMobile() ? InsertPluginIconMobile : InsertPluginIcon;
+
+let icon, modalStyles;
+if (WixUtils.isMobile()) {
+  icon = InsertPluginIconMobile;
+  modalStyles = getModalStyles({ customStyles: mobileFullScreenCustomStyle, fullScreen: true });
+}
+else {
+  icon = InsertPluginIcon;
+  modalStyles = getModalStyles({ isFlyOutModal: true });
+}
 
 export default ({ helpers, t }) => {
   return [
@@ -26,7 +35,7 @@ export default ({ helpers, t }) => {
       componentData: DEFAULTS,
       toolbars: [TOOLBARS.FOOTER],
       modalElement: GiphyApiInputModal,
-      modalStyles: getModalStyles({ customStyles: mobileFullScreenCustomStyle, fullScreen: true, isFlyOutModal: true }),
+      modalStyles: modalStyles,
       isFlyOutModal: true,
       helpers
     }
