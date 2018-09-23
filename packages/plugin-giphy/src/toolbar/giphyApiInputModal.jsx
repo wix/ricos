@@ -36,7 +36,7 @@ export default class GiphyApiInputModal extends Component {
     const { styles } = this;
     const { t, theme } = this.props;
     const searchTag = this.state.searchTag;
-    let navbar;
+    let navbar = null;
     const backButton = <div className={styles.backButton} onClick={this.onCloseRequested} role="button" tabIndex="0" onKeyPress={null} />;
     if (WixUtils.isMobile()) {
       navbar = (
@@ -46,8 +46,6 @@ export default class GiphyApiInputModal extends Component {
           </div>
           {backButton}
         </div>);
-    } else {
-      navbar = null;
     }
 
     return (

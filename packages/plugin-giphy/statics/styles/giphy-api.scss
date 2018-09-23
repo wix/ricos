@@ -1,6 +1,10 @@
 @import '~wix-rich-content-common/dist/statics/styles/mixins';
 @import '~wix-rich-content-common/dist/statics/styles/palette';
 
+.container {
+  padding-right: 8px;
+  padding-bottom: 6px; 
+}
 .infinite_scroll {
    height: 285px;
    overflow: auto;
@@ -39,7 +43,7 @@
 .line {
   width: 100%;
   size: 0px;
-  height: 1px;
+  height: 2px;
   background-color: #c8c8c8;
   margin-top: 0px;
 
@@ -65,7 +69,6 @@
 }
 
 .gif_img {
-  // margin-right: 6px;
     img {
         width: 100%;
         margin-bottom: 18px;
@@ -73,18 +76,17 @@
          @include phone {
            width: 100%;
             margin-bottom: 21px;
-         }
-       
-
+         }    
     }  
+
     @include phone {
       margin-right: 0px;
      }
     cursor: pointer;
   }
   
-  .spinner{
-      @include phone{
+  .spinner {
+      @include phone {
         padding-top: 35vh;
       }   
       text-align: center;

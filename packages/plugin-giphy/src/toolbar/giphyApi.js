@@ -73,15 +73,10 @@ class GiphyApi extends Component {
 
   render() {
     const loader = <div className={styles.spinner}> <MDSpinner singleColor="#000000" /></div>;
-    let trending = null;
-    if (!this.props.searchTag) {
-      trending = 'Trending';
-    } else {
-      trending = null;
-    }
+    const trending = (!this.props.searchTag) ? 'Trending' : null;
     return (
       <div>
-        <div style={{ paddingRight: '8px', paddingBottom: '6px' }} >
+        <div className={styles.container}>
           <div className={styles.line} />
           <div>
             <div className={styles.trending}>{trending}</div>
