@@ -19,10 +19,9 @@ let icon, modalStyles;
 if (WixUtils.isMobile()) {
   icon = InsertPluginIconMobile;
   modalStyles = getModalStyles({ customStyles: mobileFullScreenCustomStyle, fullScreen: true });
-}
-else {
+} else {
   icon = InsertPluginIcon;
-  modalStyles = getModalStyles({ isFlyOutModal: true });
+  modalStyles = getModalStyles({ customStyles: mobileFullScreenCustomStyle, isFlyOutModal: true });
 }
 
 export default ({ helpers, t }) => {

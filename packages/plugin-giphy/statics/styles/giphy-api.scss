@@ -5,21 +5,27 @@
    height: 285px;
    overflow: auto;
    overflow-x: hidden;
+   padding-right: 6px;
    @include phone {
      height: 87vh;
-    margin-top: 12px;
+    margin-top:6px;
 
   }
   
 }
 
-/* width */
+.headerInfiniteScroll{
+  padding-right: '18px';
+  padding-bottom: '6px';
+}
 .infinite_scroll::-webkit-scrollbar {
   width: 4px;
   border-radius: 100px;
+  @include phone {
+    width: 0px;
+  }
 }
 
-/* Track */
 .infinite_scroll::-webkit-scrollbar-track {
   background: #ffffff; 
 }
@@ -30,20 +36,51 @@
   height: 90px;
 }
 
+.line {
+  width: 100%;
+  size: 0px;
+  height: 1px;
+  background-color: #c8c8c8;
+  margin-top: 0px;
+
+}
+
+.trending {
+  font-family: Helvetica;
+  font-size: 10px;
+  font-style: oblique;
+  color: rgba(0, 0, 0, 0.3);
+  width: 49%;
+  display: inline-block;
+}
+
+.powerdByGiphy {
+  font-family: Helvetica;
+  font-size: 10px;
+  font-style: oblique;
+  color: rgba(0, 0, 0, 0.3);
+  width: 50%;
+  direction: rtl;
+  display: inline-block;
+}
 
 .gif_img {
+  // margin-right: 6px;
     img {
         width: 100%;
-        height: 168px;
+        margin-bottom: 18px;
+       
          @include phone {
            width: 100%;
-            height:205px;
             margin-bottom: 21px;
          }
+       
+
     }  
+    @include phone {
+      margin-right: 0px;
+     }
     cursor: pointer;
-    margin-bottom: 18px;
-    margin-right: 6px;
   }
   
   .spinner{

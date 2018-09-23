@@ -73,10 +73,23 @@ class GiphyApi extends Component {
 
   render() {
     const loader = <div className={styles.spinner}> <MDSpinner singleColor="#000000" /></div>;
-
+    let trending = null;
+    if (!this.props.searchTag) {
+      trending = 'Trending';
+    } else {
+      trending = null;
+    }
     return (
-      <div className={styles.infinite_scroll}>
+      <div>
+        <div style={{ paddingRight: '8px', paddingBottom: '6px' }} >
+          <div className={styles.line} />
+          <div>
+            <div className={styles.trending}>{trending}</div>
+            <div className={styles.powerdByGiphy}>Powerd by giphy</div>
+          </div>
+        </div>
         <InfiniteScroll
+          className={styles.infinite_scroll}
           pageStart={0}
           loadMore={this.getMoreGifs.bind(this)}
           hasMore={this.state.hasMoreItems}
