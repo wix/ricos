@@ -80,29 +80,30 @@ class GiphyApi extends Component {
           <div className={styles.trending}>{trending}</div>
           <div className={styles.powerdByGiphy}>Powerd by giphy</div>
         </div>
-        <InfiniteScroll
-          className={styles.infinite_scroll}
-          pageStart={0}
-          loadMore={this.getMoreGifs.bind(this)}
-          hasMore={this.state.hasMoreItems}
-          loader={loader}
-          useWindow={false}
-        >
-          {this.state.gifs.map((gif, i) => {
-            return (
-              <div
-                key={gif.id.toString() + i}
-                role="button"
-                tabIndex="0"
-                className={styles.gif_img}
-                onKeyPress={this.handleKeyPress}
-                onClick={() => this.onClick(gif)}
-              >
-                <img src={gif.images.fixed_width_downsampled.gif_url} alt={'gif'} />
-              </div>
-            );
-          })}
-        </InfiniteScroll>
+        <div className={styles.infinite_scroll}>
+          <InfiniteScroll
+            pageStart={0}
+            loadMore={this.getMoreGifs.bind(this)}
+            hasMore={this.state.hasMoreItems}
+            loader={loader}
+            useWindow={false}
+          >
+            {this.state.gifs.map((gif, i) => {
+              return (
+                <div
+                  key={gif.id.toString() + i}
+                  role="button"
+                  tabIndex="0"
+                  className={styles.gif_img}
+                  onKeyPress={this.handleKeyPress}
+                  onClick={() => this.onClick(gif)}
+                >
+                  <img src={gif.images.fixed_width_downsampled.gif_url} alt={'gif'} />
+                </div>
+              );
+            })}
+          </InfiniteScroll>
+        </div>
       </div>
     );
   }

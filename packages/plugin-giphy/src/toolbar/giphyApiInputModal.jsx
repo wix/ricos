@@ -41,8 +41,10 @@ export default class GiphyApiInputModal extends Component {
     if (WixUtils.isMobile()) {
       navbar = (
         <div>
+          <div className={styles.header}>
+          </div>
           <div className={styles.navbar}>
-            <p>Choose a gif</p>
+            Choose a gif
           </div>
           {backButton}
         </div>);
