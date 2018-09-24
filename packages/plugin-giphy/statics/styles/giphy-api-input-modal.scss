@@ -7,14 +7,19 @@
   }
 }
 
+.group_form{
+  border-bottom: 2px solid #cccccc;
+  width: 227px;
+  padding-bottom: 5px;
+}
 .search {
-  width: 90%;
+  width: auto;
   height: 17px;
   font-family: Helvetica;
   font-size: 14px;
   font-weight: 300;
   color: black;
-  border: 0px solid red;
+  border: none;
   float: left;
 }
 
@@ -23,7 +28,8 @@
 }
 
 .searchIcon {
-  direction: rtl;
+  width: auto;
+  text-align: right;
 }
 
 .closeIcon {
@@ -60,10 +66,12 @@
   border-left: solid 1px #ffffff;
 }
 .giphyUrlInputModal_textInput {
-  top: 0;
-  left: 0;
+  // top: 0;
+  // left: 0;
   // margin: 8px 0 6px 0;
-  margin-bottom: 6px;
+  border-bottom: 2px solid #cccccc;
+  width: 229px;
+  padding-bottom: 5px;
   input[type="url"] {
     padding-right: 0px;
   }

@@ -2,8 +2,11 @@
 @import '~wix-rich-content-common/dist/statics/styles/palette';
 
 .container {
-  padding-right: 8px;
-  padding-bottom: 6px; 
+  padding-bottom: 17px; 
+  width: 100%;
+  padding-top: 5px;
+  display: block;
+
 }
 .infinite_scroll {
    height: 285px;
@@ -54,8 +57,8 @@
   font-size: 10px;
   font-style: oblique;
   color: rgba(0, 0, 0, 0.3);
-  width: 49%;
-  display: inline-block;
+  width: auto;
+ float: left;
 }
 
 .powerdByGiphy {
@@ -63,9 +66,11 @@
   font-size: 10px;
   font-style: oblique;
   color: rgba(0, 0, 0, 0.3);
-  width: 50%;
-  direction: rtl;
-  display: inline-block;
+  width: auto;
+  text-align: right;
+  float: right;
+  padding-right: 12px;
+  
 }
 
 .gif_img {

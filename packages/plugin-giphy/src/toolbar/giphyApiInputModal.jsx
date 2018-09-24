@@ -52,7 +52,7 @@ export default class GiphyApiInputModal extends Component {
       <div>
         {navbar}
         <div className={styles.container} data-hook="giphyUploadModal">
-          <div className={styles.giphyUrlInputModal_textInput}>
+          <div className={styles.group_form} >
             <TextInput
               inputRef={ref => {
                 this.input = ref;
@@ -65,8 +65,8 @@ export default class GiphyApiInputModal extends Component {
               theme={theme}
               data-hook="giphyUploadModalInput"
             />
-            <div >
-              {!this.state.searchTag ? <SearchIcon className={styles.searchIcon} /> :
+            <div className={styles.searchIcon} >
+              {!this.state.searchTag ? <SearchIcon /> :
                 <div onClick={this.handleClearText} role="button" tabIndex="0" onKeyPress={null}>
                   <CloseIcon className={styles.closeIcon} />
                 </div>}

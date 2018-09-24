@@ -117,10 +117,12 @@ const desktopFlyOutModalStyles = {
     height: '357px',
     overflow: 'visible',
     border: '1px solid #ccc',
-    padding: '18px',
+    paddingRight: '8px',
+    paddingLeft: '18px',
     display: 'block',
     position: 'absolute',
-    zIndex: 6
+    zIndex: 6,
+    paddingTop: '8px'
   },
   arrow: {
     border: 'solid #ccc',

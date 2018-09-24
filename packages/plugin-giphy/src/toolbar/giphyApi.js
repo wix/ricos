@@ -77,11 +77,8 @@ class GiphyApi extends Component {
     return (
       <div>
         <div className={styles.container}>
-          <div className={styles.line} />
-          <div>
-            <div className={styles.trending}>{trending}</div>
-            <div className={styles.powerdByGiphy}>Powerd by giphy</div>
-          </div>
+          <div className={styles.trending}>{trending}</div>
+          <div className={styles.powerdByGiphy}>Powerd by giphy</div>
         </div>
         <InfiniteScroll
           className={styles.infinite_scroll}
