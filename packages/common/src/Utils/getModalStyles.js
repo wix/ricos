@@ -109,7 +109,7 @@ const desktopModalOverrideStyles = {
 const desktopFlyOutModalStyles = {
   overlay: {
     backgroundColor: 'rgba(0, 0, 0, 0)',
-    zIndex: 3
+    zIndex: 10
   },
   content: {
     width: '265px',
@@ -128,10 +128,11 @@ const desktopFlyOutModalStyles = {
     border: 'solid #ccc',
     borderWidth: '0 1px 1px 0',
     display: 'inline - block',
-    padding: '8px',
+    padding: '6px',
     position: 'absolute',
     background: '#fff',
-    display: 'block',
+    display: 'none',
+    zIndex: 20
   },
 }
 

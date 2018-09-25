@@ -1,6 +1,26 @@
-import { BUTTONS, getModalStyles } from 'wix-rich-content-common';
+import { BUTTONS, getModalStyles, WixUtils } from 'wix-rich-content-common';
 import { Modals } from '../modals';
 import { MediaReplaceIcon } from '../icons';
+
+const mobileFullScreenCustomStyle = {
+  overlay: {
+    backgroundColor: 'transparent'
+  },
+  content: {
+    overflow: 'hidden',
+    top: 0,
+    left: 0,
+    paddingRight: '6px'
+  }
+};
+
+let modalStyles;
+if (WixUtils.isMobile()) {
+  modalStyles = getModalStyles({ customStyles: mobileFullScreenCustomStyle, fullScreen: true });
+}
+else {
+  modalStyles = getModalStyles({ isFlyOutModal: true });
+}
 
 export default ({ t }) => {
   return [
@@ -17,8 +37,8 @@ export default ({ t }) => {
       type: BUTTONS.EXTERNAL_MODAL,
       icon: MediaReplaceIcon,
       modalName: Modals.GIPHY_API_INPUT,
-      modalStyles: getModalStyles({ fullScreen: true, isFlyOutModal: true }),
-      style: getModalStyles({ fullScreen: true, isFlyOutModal: true }),
+      modalStyles: modalStyles,
+      style: modalStyles,
       mobile: true,
       tooltipTextKey: 'ReplaceGiphyButton_Tooltip',
       isFlyOutModal: true,

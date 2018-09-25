@@ -8,13 +8,22 @@
   display: block;
 
 }
-.infinite_scroll {
-   height: 285px;
+.infinite_scroll_container  {
+   position: absolute;
+   width: calc(100% - 30px);
+   left: 18px;
+   bottom: 2px;
+   z-index: 30;
+   height: calc(100% - 59px);
    overflow: auto;
-   overflow-x: hidden;
    padding-right: 6px;
    @include phone {
-     height: 87vh;
+    position: relative;
+    width: auto;
+    left: auto;
+    bottom: auto;
+    transform: none;
+    height: calc(100vh - 140px);
     margin-top:6px;
 
   }
@@ -25,21 +34,20 @@
   padding-right: '18px';
   padding-bottom: '6px';
 }
-.infinite_scroll::-webkit-scrollbar {
+.infinite_scroll_container::-webkit-scrollbar {
   width: 4px;
-  border-radius: 100px;
   @include phone {
     width: 0px;
   }
 }
 
-.infinite_scroll::-webkit-scrollbar-track {
+.infinite_scroll_container::-webkit-scrollbar-track {
   background: #ffffff; 
 }
 
-.infinite_scroll::-webkit-scrollbar-thumb {
+.infinite_scroll_container::-webkit-scrollbar-thumb {
   background: #000000; 
-  border-radius: 100px;
+  border-radius: 4px;
 }
 
 .line {
@@ -69,14 +77,16 @@
   text-align: right;
   float: right;
   padding-right: 12px;
-  
+
 }
 
 .gif_img {
+  margin-bottom: 18px;
     img {
+      background: #eee;
+        min-height: 50px;
         width: 100%;
-        margin-bottom: 18px;
-       
+        display: block;
          @include phone {
            width: 100%;
             margin-bottom: 21px;
@@ -94,4 +104,15 @@
         padding-top: 35vh;
       }   
       text-align: center;
+  }
+
+  .error_msg{
+    line-height: 30px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 12px;
+    color: #aaa;
+    transform: translateX(-50%) translateY(-50%);
+    padding: 5px 10px;
   }

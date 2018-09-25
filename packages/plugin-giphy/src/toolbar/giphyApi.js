@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { SEARCH_TYPE, giphyApiClient, PAGE_SIZE } from '../constants';
+import { SEARCH_TYPE, giphyApiClient, PAGE_SIZE, WAIT_INTERVAL } from '../constants';
 import InfiniteScroll from 'react-infinite-scroller';
 import PropTypes from 'prop-types';
 import styles from '../../statics/styles/giphy-api.scss';
@@ -14,7 +14,8 @@ class GiphyApi extends Component {
       isLoaded: false,
       hasMoreItems: true,
       gifs: [],
-      page: 0
+      page: 0,
+      didFail: false
     };
   }
 
@@ -24,18 +25,24 @@ class GiphyApi extends Component {
         .search(SEARCH_TYPE, { q: searchTag, offset: page * PAGE_SIZE, limit: PAGE_SIZE })
         .then(response => {
           if (page > 1) {
-            this.setState({ gifs: this.state.gifs.concat(response.data), hasMoreItems: true, page: this.state.page + 1 });
+            this.setState({ gifs: this.state.gifs.concat(response.data), hasMoreItems: true, page: this.state.page + 1, didFail: false });
           } else {
             this.setState({
-              gifs: response.data, hasMoreItems: true, page: this.state.page + 1
+              gifs: response.data, hasMoreItems: true, page: this.state.page + 1, didFail: false
             });
           }
+        }).catch((err) => {
+          console.log(err);
+          this.setState({ didFail: true, hasMoreItems: false });
         });
     } else {
       giphyApiClient
         .trending(SEARCH_TYPE, { limit: 100 })
         .then(response => {
-          this.setState({ gifs: response.data, hasMoreItems: false });
+          this.setState({ gifs: response.data, hasMoreItems: false, didFail: false });
+        }).catch((err) => {
+          console.log(err);
+          this.setState({ didFail: true, hasMoreItems: false });
         });
     }
   };
@@ -68,7 +75,16 @@ class GiphyApi extends Component {
   };
 
   componentWillReceiveProps(nextProps) {
-    this.getGifs(nextProps.searchTag, 0);
+    if (this.timer !== null) {
+      clearTimeout(this.timer);
+    } else {
+      this.getGifs(nextProps.searchTag)
+    }
+    this.timer = setTimeout(() => this.getGifs(nextProps.searchTag), WAIT_INTERVAL);
+  }
+
+  componentDidMount() {
+    this.timer = null;
   }
 
   render() {
@@ -80,12 +96,12 @@ class GiphyApi extends Component {
           <div className={styles.trending}>{trending}</div>
           <div className={styles.powerdByGiphy}>Powerd by giphy</div>
         </div>
-        <div className={styles.infinite_scroll}>
+        <div className={styles.infinite_scroll_container}>
           <InfiniteScroll
             pageStart={0}
             loadMore={this.getMoreGifs.bind(this)}
             hasMore={this.state.hasMoreItems}
-            loader={loader}
+            loader={(!this.state.didFail) ? loader : null}
             useWindow={false}
           >
             {this.state.gifs.map((gif, i) => {
@@ -102,8 +118,10 @@ class GiphyApi extends Component {
                 </div>
               );
             })}
+
           </InfiniteScroll>
         </div>
+        {(this.state.didFail) ? <div className={styles.error_msg}> Somthing went wrong </div> : null}
       </div>
     );
   }

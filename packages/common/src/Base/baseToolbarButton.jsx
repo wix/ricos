@@ -8,6 +8,8 @@ import Dropdown from '../Components/Dropdown';
 import FileInput from '../Components/FileInput';
 import ToolbarButton from '../Components/ToolbarButton';
 import BUTTONS from './buttons/keys';
+import { getFlyOutModalPosition, getFlyOutArrowModalPosition } from '../Utils/flyOutModalPositioning';
+import merge from 'lodash/merge';
 
 class BaseToolbarButton extends React.Component {
 
@@ -54,9 +56,7 @@ class BaseToolbarButton extends React.Component {
     if (this.props.disabled) {
       return;
     }
-
-    const { componentState, keyName, helpers, pubsub, theme, t, onClick, anchorTarget, relValue, uiSettings, ...otherProps } = this.props;
-
+    const { componentState, keyName, helpers, pubsub, theme, t, onClick, anchorTarget, relValue, uiSettings, modalStyles, style, isFlyOutModal, ...otherProps } = this.props;
     if (this.props.type === BUTTONS.FILES && helpers && helpers.handleFileSelection) {
       const multiple = !!this.props.multiple;
       helpers.handleFileSelection(undefined, multiple, pubsub.getBlockHandler('handleFilesAdded'), undefined, this.props.componentData);
@@ -80,6 +80,11 @@ class BaseToolbarButton extends React.Component {
     }
 
     if (this.props.type === BUTTONS.EXTERNAL_MODAL && isActive) {
+      const modalWidth = parseFloat(this.props.modalStyles.content.width);
+      const modalHeight = parseFloat(this.props.modalStyles.content.height);
+      const flyOutModalPosition = (this.props.isFlyOutModal && !this.props.isMobile) ? getFlyOutModalPosition(event, modalWidth, modalHeight, pubsub) : {};
+      const flyOutArrowModalPosition = (this.props.isFlyOutModal && !this.props.isMobile) ? getFlyOutArrowModalPosition(event, flyOutModalPosition.left, flyOutModalPosition.top, modalWidth, pubsub) : {};
+      const Styles = merge({}, modalStyles, { content: { ...flyOutModalPosition }, arrow: { ...flyOutArrowModalPosition } });
       if (helpers && helpers.openModal) {
         const keyName = BUTTONS.EXTERNAL_MODAL;
         const modalProps = {
@@ -92,6 +97,9 @@ class BaseToolbarButton extends React.Component {
           t,
           theme: theme || {},
           uiSettings,
+          modalStyles: Styles,
+          style: Styles,
+          isFlyOutModal:this.props.isFlyOutModal,
           ...otherProps,
         };
         helpers.openModal(modalProps);
