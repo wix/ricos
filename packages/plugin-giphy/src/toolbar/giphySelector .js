@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import styles from '../../statics/styles/giphy-api.scss';
 import MDSpinner from 'react-md-spinner';
 
-class GiphyApi extends Component {
+class GiphySelector extends Component {
   constructor(props) {
     super(props);
     const { componentData } = this.props;
@@ -31,8 +31,7 @@ class GiphyApi extends Component {
               gifs: response.data, hasMoreItems: true, page: this.state.page + 1, didFail: false
             });
           }
-        }).catch((err) => {
-          console.log(err);
+        }).catch(() => {
           this.setState({ didFail: true, hasMoreItems: false });
         });
     } else {
@@ -40,8 +39,7 @@ class GiphyApi extends Component {
         .trending(SEARCH_TYPE, { limit: 100 })
         .then(response => {
           this.setState({ gifs: response.data, hasMoreItems: false, didFail: false });
-        }).catch((err) => {
-          console.log(err);
+        }).catch(() => {
           this.setState({ didFail: true, hasMoreItems: false });
         });
     }
@@ -53,8 +51,14 @@ class GiphyApi extends Component {
   };
 
   onClick = gif => {
-    const gifObj = gif.images.original;
+    const gifObj = {
+      originalUrl: gif.images.original.gif_url,
+      stillUrl: gif.images.original_still.gif_url,
+      height: parseInt(gif.images.original.height),
+      width: parseInt(gif.images.original.width)
+    };
     const { componentData, helpers, pubsub, onConfirm, onCloseRequested } = this.props;
+
     if (onConfirm) {
       onConfirm({ ...componentData, gif: gifObj });
     } else {
@@ -75,12 +79,14 @@ class GiphyApi extends Component {
   };
 
   componentWillReceiveProps(nextProps) {
-    if (this.timer !== null) {
-      clearTimeout(this.timer);
-    } else {
-      this.getGifs(nextProps.searchTag)
+    if (!this.state.didFail) {
+      if (this.timer !== null) {
+        clearTimeout(this.timer);
+      } else {
+        this.getGifs(nextProps.searchTag);
+      }
+      this.timer = setTimeout(() => this.getGifs(nextProps.searchTag), WAIT_INTERVAL);
     }
-    this.timer = setTimeout(() => this.getGifs(nextProps.searchTag), WAIT_INTERVAL);
   }
 
   componentDidMount() {
@@ -88,8 +94,9 @@ class GiphyApi extends Component {
   }
 
   render() {
+    const { t } = this.props;
     const loader = <div className={styles.spinner}> <MDSpinner singleColor="#000000" /></div>;
-    const trending = (!this.props.searchTag) ? 'Trending' : null;
+    const trending = (!this.props.searchTag) ? t('GiphyPlugin_Trending') : null;
     return (
       <div>
         <div className={styles.container}>
@@ -118,23 +125,23 @@ class GiphyApi extends Component {
                 </div>
               );
             })}
-
           </InfiniteScroll>
         </div>
-        {(this.state.didFail) ? <div className={styles.error_msg}> Somthing went wrong </div> : null}
+        {(this.state.didFail) ? <div className={styles.error_msg}> {t('GiphyPlugin_ApiErrorMsg')}</div> : null}
       </div>
     );
   }
 }
 
-GiphyApi.propTypes = {
+GiphySelector.propTypes = {
   pubsub: PropTypes.object,
   helpers: PropTypes.object.isRequired,
   componentData: PropTypes.object.isRequired,
   searchTag: PropTypes.string,
   gifs: PropTypes.array,
   onCloseRequested: PropTypes.func,
-  onConfirm: PropTypes.func
+  onConfirm: PropTypes.func,
+  t: PropTypes.func
 };
 
-export default GiphyApi;
+export default GiphySelector;

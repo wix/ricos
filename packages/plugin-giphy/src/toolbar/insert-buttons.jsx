@@ -1,7 +1,7 @@
 import { DEFAULTS } from '../constants';
 import { getModalStyles, TOOLBARS, WixUtils } from 'wix-rich-content-common';
 import GiphyApiInputModal from './giphyApiInputModal';
-import { InsertPluginIcon, InsertPluginIconMobile } from '../icons';
+import { InsertPluginIcon, InsertPluginMobileIcon } from '../icons';
 
 const mobileFullScreenCustomStyle = {
   overlay: {
@@ -15,26 +15,18 @@ const mobileFullScreenCustomStyle = {
   }
 };
 
-let icon, modalStyles;
-if (WixUtils.isMobile()) {
-  icon = InsertPluginIconMobile;
-  modalStyles = getModalStyles({ customStyles: mobileFullScreenCustomStyle, fullScreen: true });
-} else {
-  icon = InsertPluginIcon;
-  modalStyles = getModalStyles({ isFlyOutModal: true });
-}
-
 export default ({ helpers, t }) => {
   return [
     {
       type: 'modal',
       name: 'GIF',
       tooltipText: t('GiphyPlugin_InsertButton_Tooltip'),
-      Icon: icon,
+      Icon: WixUtils.isMobile() ? InsertPluginMobileIcon : InsertPluginIcon,
       componentData: DEFAULTS,
       toolbars: [TOOLBARS.FOOTER],
       modalElement: GiphyApiInputModal,
-      modalStyles: modalStyles,
+      modalStyles: WixUtils.isMobile() ?
+        getModalStyles({ customStyles: mobileFullScreenCustomStyle, fullScreen: true }) : getModalStyles({ isFlyOutModal: true }),
       isFlyOutModal: true,
       helpers
     }

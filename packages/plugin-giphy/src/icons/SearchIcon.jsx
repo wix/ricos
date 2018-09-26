@@ -5,8 +5,8 @@ const SearchIcon = props => (
   <svg
     {...props}
     xmlns="http://www.w3.org/2000/svg"
-    width="13"
-    height="13"
+    width={13}
+    height={13}
     viewBox="0 0 13 13"
   >
     <g fill="none" fillRule="evenodd">

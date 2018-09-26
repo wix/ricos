@@ -11,7 +11,7 @@ import styles from '../../statics/styles/toolbar-button.scss';
 import merge from 'lodash/merge';
 import { getFlyOutModalPosition, getFlyOutArrowModalPosition } from '../Utils/flyOutModalPositioning';
 
-export default ({ blockType, button, helpers, pubsub, t, anchorTarget }) => {
+export default ({ blockType, button, helpers, pubsub, t }) => {
   class InsertPluginButton extends Component {
     constructor(props) {
       super(props);
@@ -116,24 +116,24 @@ export default ({ blockType, button, helpers, pubsub, t, anchorTarget }) => {
       }
     };
 
-    toggleButtonModal = (event) => {
+    toggleButtonModal = event => {
       const { isMobile } = this.props;
       const modalWidth = parseFloat(button.modalStyles.content.width);
       const modalHeight = parseFloat(button.modalStyles.content.height);
-      const flyOutModalPosition = (button.isFlyOutModal && !isMobile) ? getFlyOutModalPosition(event, modalWidth, modalHeight, pubsub) : {};
-      const flyOutArrowModalPosition = (button.isFlyOutModal && !isMobile) ? getFlyOutArrowModalPosition(event, flyOutModalPosition.left, flyOutModalPosition.top, modalWidth, pubsub) : {};
-      const modalStyles = merge({}, button.modalStyles, { content: { ...flyOutModalPosition }, arrow: { ...flyOutArrowModalPosition } });
-
+      const flyOutModalPosition = (button.isFlyOutModal && !isMobile) ?
+        getFlyOutModalPosition(event, modalWidth, modalHeight, pubsub) : {};
+      const flyOutArrowModalPosition = (button.isFlyOutModal && !isMobile) ?
+        getFlyOutArrowModalPosition(event, flyOutModalPosition.left, flyOutModalPosition.top, modalWidth, pubsub) : {};
       if (helpers && helpers.openModal) {
         helpers.openModal({
           modalName: button.modalName,
           modalElement: button.modalElement,
-          modalStyles: modalStyles,
+          modalStyles: merge({}, button.modalStyles, { content: { ...flyOutModalPosition }, arrow: { ...flyOutArrowModalPosition } }),
           theme: this.props.theme,
           componentData: button.componentData,
           onConfirm: this.addBlock,
           isFlyOutModal: button.isFlyOutModal,
-          style: modalStyles,
+          style: merge({}, button.modalStyles, { content: { ...flyOutModalPosition }, arrow: { ...flyOutArrowModalPosition } }),
           pubsub,
           helpers,
           t,

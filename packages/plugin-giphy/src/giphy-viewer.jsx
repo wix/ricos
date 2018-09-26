@@ -25,7 +25,8 @@ class GiphyViewer extends Component {
     return (
       <GifPlayer
         className={classNames(this.styles.giphy_player)}
-        gif={componentData.gif.gif_url}
+        gif={componentData.gif.originalUrl}
+        still={componentData.gif.stillUrl}
         autoplay
         {...rest}
       />

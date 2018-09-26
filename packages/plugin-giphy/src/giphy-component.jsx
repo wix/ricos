@@ -22,10 +22,6 @@ class GiphyComponent extends Component {
     this.styles = mergeStyles({ styles, theme: this.props.theme });
   }
 
-  componentDidMount() {}
-
-  componentDidUpdate() {}
-
   handleReady = () => {
     if (!this.state.isLoaded) {
       this.setState({ isLoaded: true });

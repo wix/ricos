@@ -1,10 +1,11 @@
 /* eslint-disable max-len */
 import React from 'react';
-const InsertPluginIconMobile = props => (
+
+const InsertPluginMobileIcon = props => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="11"
-    height="14"
+    width={11}
+    height={14}
     viewBox="0 0 11 14"
     {...props}
   >
@@ -19,4 +20,4 @@ const InsertPluginIconMobile = props => (
   </svg>
 );
 
-export default InsertPluginIconMobile;
+export default InsertPluginMobileIcon;

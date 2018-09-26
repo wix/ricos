@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { mergeStyles, TextInput, WixUtils } from 'wix-rich-content-common';
 import { SearchIcon, CloseIcon } from '../icons';
 import styles from '../../statics/styles/giphy-api-input-modal.scss';
-import GiphyApi from './giphyApi';
+import GiphySelector from './giphySelector ';
 
 export default class GiphyApiInputModal extends Component {
   constructor(props) {
@@ -36,23 +36,11 @@ export default class GiphyApiInputModal extends Component {
     const { styles } = this;
     const { t, theme } = this.props;
     const searchTag = this.state.searchTag;
-    let navbar = null;
     const backButton = <div className={styles.backButton} onClick={this.onCloseRequested} role="button" tabIndex="0" onKeyPress={null} />;
-    if (WixUtils.isMobile()) {
-      navbar = (
-        <div>
-          <div className={styles.header}>
-          </div>
-          <div className={styles.navbar}>
-            Choose a gif
-          </div>
-          {backButton}
-        </div>);
-    }
-
+    const mobileNavbar = <div><div className={styles.header} /> <div className={styles.navbar}>Choose a gif</div></div>;
     return (
       <div>
-        {navbar}
+        {(WixUtils.isMobile()) ? <div>{mobileNavbar}{backButton}</div> : null}
         <div className={styles.container} data-hook="giphyUploadModal">
           <div className={styles.group_form} >
             <TextInput
@@ -68,15 +56,14 @@ export default class GiphyApiInputModal extends Component {
               data-hook="giphyUploadModalInput"
             />
             <div className={styles.searchIcon} >
-              {!this.state.searchTag ? <SearchIcon /> :
+              {(!this.state.searchTag) ?
+                <SearchIcon /> :
                 <div onClick={this.handleClearText} role="button" tabIndex="0" onKeyPress={null}>
                   <CloseIcon className={styles.closeIcon} />
                 </div>}
             </div>
-
           </div>
-
-          <GiphyApi
+          <GiphySelector
             searchTag={searchTag}
             onCloseRequested={this.onCloseRequested}
             {...this.props}

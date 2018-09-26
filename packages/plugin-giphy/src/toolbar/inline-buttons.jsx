@@ -7,20 +7,12 @@ const mobileFullScreenCustomStyle = {
     backgroundColor: 'transparent'
   },
   content: {
-    overflow: 'hidden',
     top: 0,
     left: 0,
+    overflow: 'hidden',
     paddingRight: '6px'
   }
 };
-
-let modalStyles;
-if (WixUtils.isMobile()) {
-  modalStyles = getModalStyles({ customStyles: mobileFullScreenCustomStyle, fullScreen: true });
-}
-else {
-  modalStyles = getModalStyles({ isFlyOutModal: true });
-}
 
 export default ({ t }) => {
   return [
@@ -37,8 +29,10 @@ export default ({ t }) => {
       type: BUTTONS.EXTERNAL_MODAL,
       icon: MediaReplaceIcon,
       modalName: Modals.GIPHY_API_INPUT,
-      modalStyles: modalStyles,
-      style: modalStyles,
+      modalStyles: WixUtils.isMobile() ?
+        getModalStyles({ customStyles: mobileFullScreenCustomStyle, fullScreen: true }) : getModalStyles({ isFlyOutModal: true }),
+      style: WixUtils.isMobile() ?
+        getModalStyles({ customStyles: mobileFullScreenCustomStyle, fullScreen: true }) : getModalStyles({ isFlyOutModal: true }),
       mobile: true,
       tooltipTextKey: 'ReplaceGiphyButton_Tooltip',
       isFlyOutModal: true,

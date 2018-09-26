@@ -127,14 +127,13 @@ const desktopFlyOutModalStyles = {
   arrow: {
     border: 'solid #ccc',
     borderWidth: '0 1px 1px 0',
-    display: 'inline - block',
     padding: '6px',
     position: 'absolute',
     background: '#fff',
     display: 'none',
     zIndex: 20
   },
-}
+};
 
 export const getModalStyles = ({ customStyles = null, fullScreen = true, isFlyOutModal = false } = {}) => {
   const overrideStyles = [];

@@ -70,7 +70,7 @@ class LinkPanelContainer extends PureComponent {
             ref={this.setLinkPanel} theme={theme} url={url} targetBlank={targetBlank} anchorTarget={anchorTarget}
             relValue={relValue} nofollow={nofollow} t={t} ariaProps={linkPanelAriaProps} uiSettings={uiSettings}
           />
-          <div className={styles.linkPanel_actionsDivider} role="separator"/>
+          <div className={styles.linkPanel_actionsDivider} role="separator" />
         </div>
         <div className={styles.linkPanel_Footer}>
           <div className={styles.linkPanel_LeftActions}>
