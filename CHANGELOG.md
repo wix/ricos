@@ -15,6 +15,8 @@
 - `html`
   - [#141](https://github.com/wix-incubator/rich-content/pull/141) width and height component data is now applied on HTML viewer component
 
+- `viewer`
+  - [#145](https://github.com/wix-incubator/rich-content/pull/145) pass `isMobile` prop to plugins
 <br/>
 
 ## 1.6.2 (Sep 25, 2018)
