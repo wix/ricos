@@ -3,6 +3,7 @@
 
 .sideToolbar_floatingContainer {
     position: relative;
+    pointer-events: none;
 }
 
 .sideToolbar_floatingIcon {
@@ -15,13 +16,11 @@
     width: 25px;
     line-height: normal;
     text-align: center;
-    svg {
-        fill: $secondary-text-color;
-    }
+    color: $secondary-text-color;
+    pointer-events: initial;
+
     &:hover {
-        svg {
-            fill: $accent-color;
-        }
+        color: $accent-color;
     }
 }
 

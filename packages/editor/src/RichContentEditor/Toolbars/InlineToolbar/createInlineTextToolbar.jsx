@@ -17,6 +17,7 @@ export default config => {
     visibilityFn,
     displayOptions,
     uiSettings,
+    toolbarDecorationFn,
   } = config;
 
   const structure = getTextButtonsFromList({ buttons, textPluginButtons, pubsub, theme, t, uiSettings });
@@ -35,6 +36,7 @@ export default config => {
     offset,
     visibilityFn,
     displayOptions,
-    uiSettings
+    uiSettings,
+    toolbarDecorationFn,
   });
 };

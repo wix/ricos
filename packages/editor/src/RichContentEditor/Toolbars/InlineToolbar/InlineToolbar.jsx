@@ -22,6 +22,11 @@ const getRelativeParent = element => {
   return getRelativeParent(element.parentElement);
 };
 
+const displayOptionStyles = {
+  [DISPLAY_MODE.NORMAL]: {},
+  [DISPLAY_MODE.FLOATING]: { position: 'fixed' }
+};
+
 export default class InlineToolbar extends Component {
   static propTypes = {
     pubsub: PropTypes.object.isRequired,
@@ -40,13 +45,15 @@ export default class InlineToolbar extends Component {
     offset: PropTypes.shape({
       x: PropTypes.number,
       y: PropTypes.number,
-    })
+    }),
+    toolbarDecorationFn: PropTypes.func,
   };
 
   static defaultProps = {
     displayOptions: {
       displayMode: DISPLAY_MODE.NORMAL
-    }
+    },
+    toolbarDecorationFn: () => null
   };
 
   constructor(props) {
@@ -163,11 +170,6 @@ export default class InlineToolbar extends Component {
       transition: this.isVisible() ? 'transform 0.15s cubic-bezier(.3,1.2,.2,1)' : ''
     };
 
-    const displayOptionStyles = {
-      [DISPLAY_MODE.NORMAL]: {},
-      [DISPLAY_MODE.FLOATING]: { position: 'fixed' }
-    };
-
     Object.assign(style, defaultDispayStyles, displayOptionStyles[displayOptions.displayMode]);
 
     return style;
@@ -197,12 +199,15 @@ export default class InlineToolbar extends Component {
     });
   };
 
-  render() {
+  renderToolbarContent() {
     const { theme, pubsub, structure, defaultTextAlignment, helpers, isMobile, anchorTarget, relValue, t } = this.props;
     const { showLeftArrow, showRightArrow, overrideContent: OverrideContent, extendContent: ExtendContent } = this.state;
+
+    const tabIndex = this.isVisible() ? 0 : -1;
+    const toolbarStyle = this.getStyle();
     const hasArrow = showLeftArrow || showRightArrow;
     const { toolbarStyles } = theme || {};
-    const toolbarClassNames = classNames(Styles.inlineToolbar, toolbarStyles && toolbarStyles.inlineToolbar);
+
     const buttonClassNames = classNames(Styles.inlineToolbar_buttons, toolbarStyles && toolbarStyles.inlineToolbar_buttons, {
       [Styles.inlineToolbar_overrideContent]: !!OverrideContent,
       [toolbarStyles.inlineToolbar_overrideContent]: !!OverrideContent,
@@ -221,10 +226,6 @@ export default class InlineToolbar extends Component {
     const leftArrowIconClassNames = classNames(Styles.inlineToolbar_responsiveArrowLeft_icon, toolbarStyles.responsiveArrowLeft_icon);
     const rightArrowIconClassNames = classNames(Styles.inlineToolbar_responsiveArrowRight_icon, toolbarStyles.responsiveArrowRight_icon);
 
-    const toolbarStyle = this.getStyle();
-
-    const tabIndex = this.isVisible() ? 0 : -1;
-
     const childrenProps = {
       theme,
       getEditorState: pubsub.get('getEditorState'),
@@ -242,6 +243,64 @@ export default class InlineToolbar extends Component {
     };
 
     return (
+      <ClickOutside onClickOutside={this.onClickOutside}>
+        <div
+          className={buttonClassNames}
+        >
+          <Measure
+            client
+            scroll
+            innerRef={ref => this.scrollContainer = ref}
+            onResize={({ scroll, client }) => this.setToolbarScrollButton(scroll.left, scroll.width, client.width)}
+          >
+            {({ measure, measureRef }) => (
+              <div className={scrollableClassNames} ref={measureRef} onScroll={() => measure()}>
+                {
+                  OverrideContent ?
+                    <OverrideContent {...childrenProps} /> :
+                    structure.map((Button, index) => <Button key={index} {...childrenProps} />)
+                }
+              </div>
+            )}
+          </Measure>
+          {
+            hasArrow &&
+              <button
+                tabIndex={tabIndex}
+                className={arrowClassNames}
+                data-hook="inlineToolbarRightArrow" onMouseDown={e => this.scrollToolbar(e, showLeftArrow)}
+              >
+                <i className={showLeftArrow ? leftArrowIconClassNames : rightArrowIconClassNames} />
+              </button>
+          }
+        </div>
+        {ExtendContent && (
+          <div className={extendClassNames}>
+            <ExtendContent {...childrenProps} />
+          </div>
+        )}
+      </ClickOutside>
+    );
+  }
+
+  render() {
+    const { theme, toolbarDecorationFn } = this.props;
+    const { toolbarStyles } = theme || {};
+    const toolbarClassNames = classNames(Styles.inlineToolbar, toolbarStyles && toolbarStyles.inlineToolbar);
+    const toolbarStyle = this.getStyle();
+    const tabIndex = this.isVisible() ? 0 : -1;
+
+    const ToolbarDecoration = toolbarDecorationFn();
+
+    if (ToolbarDecoration) {
+      return (
+        <ToolbarDecoration position={this.state.position} style={toolbarStyle}>
+          {this.renderToolbarContent()}
+        </ToolbarDecoration>
+      );
+    }
+
+    return (
       <div
         role="toolbar"
         aria-orientation="horizontal"
@@ -251,43 +310,7 @@ export default class InlineToolbar extends Component {
         data-hook="inlineToolbar"
         tabIndex={tabIndex}
       >
-        <ClickOutside onClickOutside={this.onClickOutside}>
-          <div
-            className={buttonClassNames}
-          >
-            <Measure
-              client
-              scroll
-              innerRef={ref => this.scrollContainer = ref}
-              onResize={({ scroll, client }) => this.setToolbarScrollButton(scroll.left, scroll.width, client.width)}
-            >
-              {({ measure, measureRef }) => (
-                <div className={scrollableClassNames} ref={measureRef} onScroll={() => measure()}>
-                  {
-                    OverrideContent ?
-                      <OverrideContent {...childrenProps} /> :
-                      structure.map((Button, index) => <Button key={index} {...childrenProps} />)
-                  }
-                </div>
-              )}
-            </Measure>
-            {
-              hasArrow &&
-              <button
-                tabIndex={tabIndex}
-                className={arrowClassNames}
-                data-hook="inlineToolbarRightArrow" onMouseDown={e => this.scrollToolbar(e, showLeftArrow)}
-              >
-                <i className={showLeftArrow ? leftArrowIconClassNames : rightArrowIconClassNames} />
-              </button>
-            }
-          </div>
-          {ExtendContent && (
-            <div className={extendClassNames}>
-              <ExtendContent {...childrenProps} />
-            </div>
-          )}
-        </ClickOutside>
+        {this.renderToolbarContent()}
       </div>
     );
   }

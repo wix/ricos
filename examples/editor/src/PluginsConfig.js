@@ -8,6 +8,8 @@ import { VIDEO_TYPE } from "wix-rich-content-plugin-video";
 import { EXTERNAL_MENTIONS_TYPE } from "wix-rich-content-plugin-mentions";
 import { TOOLBARS, BUTTONS, DISPLAY_MODE } from "wix-rich-content-common";
 
+import InlineToolbarDecoration from './InlineToolbarDecoration';
+
 const uiSettings = {
   blankTargetToggleVisibilityFn: () => true,
   nofollowRelToggleVisibilityFn: () => true
@@ -154,29 +156,11 @@ export default {
   //       desktop: { x: 0, y: 0 },
   //     }),
   //   },
-  //   {
-  //     name: TOOLBARS.INLINE,
-  //     getVisibilityFn: () => ({
-  //       desktop: () => true,
-  //       mobile: {
-  //         ios: () => true,
-  //         android: () => true,
-  //       }
-  //     }),
-  //     getDisplayOptions: () => ({
-  //       desktop: { displayMode:  DISPLAY_MODE.FLOATING },
-  //       mobile: {
-  //         ios: { displayMode:  DISPLAY_MODE.FLOATING },
-  //         android: { displayMode:  DISPLAY_MODE.FLOATING },
-  //       }
-  //     }),
-  //     getPositionOffset: () => ({
-  //       desktop: { x: 850, y: 50 },
-  //       mobile: {
-  //         ios: { x: 180, y: 50 },
-  //         android: { x: 180, y: 50 },
-  //       }
-  //     }),
-  //   }
+    {
+      name: TOOLBARS.INLINE,
+      getToolbarDecorationFn: () => ({
+        desktop: () => InlineToolbarDecoration
+      })
+    }
    ]
 };

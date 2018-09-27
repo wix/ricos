@@ -24,6 +24,14 @@ const defaultDisplayOptions = {
   }
 };
 
+const defaultToolbarDecorationFn = {
+  desktop: () => null,
+  mobile: {
+    ios: () => null,
+    android: () => null,
+  }
+};
+
 const defaultOffset = {
   desktop: { x: 0, y: 0 },
   mobile: {
@@ -39,7 +47,6 @@ const defaultTextPluginButtons = {
     android: {},
   }
 };
-
 
 export const getDefaultToolbarSettings = ({ pluginButtons, textButtons, pluginTextButtons }) => {
   const desktopTextPluginButtons = reducePluginTextButtons(pluginTextButtons);
@@ -66,6 +73,7 @@ export const getDefaultToolbarSettings = ({ pluginButtons, textButtons, pluginTe
         }
       }),
       getDisplayOptions: () => defaultDisplayOptions,
+      getToolbarDecorationFn: () => defaultToolbarDecorationFn,
       getButtons: () => {
         const buttons = pluginButtons.filter(({ buttonSettings }) => buttonSettings.toolbars.includes(TOOLBARS.SIDE))
           .map(({ component }) => component);
@@ -98,6 +106,7 @@ export const getDefaultToolbarSettings = ({ pluginButtons, textButtons, pluginTe
       }),
       getPositionOffset: () => defaultOffset,
       getDisplayOptions: () => defaultDisplayOptions,
+      getToolbarDecorationFn: () => defaultToolbarDecorationFn,
       getButtons: () => {
         return {
           desktop: [],
@@ -134,6 +143,7 @@ export const getDefaultToolbarSettings = ({ pluginButtons, textButtons, pluginTe
       }),
       getPositionOffset: () => defaultOffset,
       getDisplayOptions: () => defaultDisplayOptions,
+      getToolbarDecorationFn: () => defaultToolbarDecorationFn,
       getButtons: () => {
         const buttons = pluginButtons.filter(({ buttonSettings }) => buttonSettings.toolbars.includes(TOOLBARS.FOOTER))
           .map(({ component }) => component);
@@ -166,6 +176,7 @@ export const getDefaultToolbarSettings = ({ pluginButtons, textButtons, pluginTe
       }),
       getPositionOffset: () => defaultOffset,
       getDisplayOptions: () => defaultDisplayOptions,
+      getToolbarDecorationFn: () => defaultToolbarDecorationFn,
       getButtons: () => ({
         desktop: textButtons.desktop,
         mobile: {
@@ -200,6 +211,7 @@ export const getDefaultToolbarSettings = ({ pluginButtons, textButtons, pluginTe
       }),
       getPositionOffset: () => defaultOffset,
       getDisplayOptions: () => defaultDisplayOptions,
+      getToolbarDecorationFn: () => defaultToolbarDecorationFn,
       getButtons: () => ({
         desktop: textButtons.desktop,
         mobile: {

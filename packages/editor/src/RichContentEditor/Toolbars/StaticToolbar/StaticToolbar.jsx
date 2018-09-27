@@ -5,6 +5,11 @@ import Measure from 'react-measure';
 import { DISPLAY_MODE } from 'wix-rich-content-common';
 import Styles from '../../../../statics/styles/static-toolbar.scss';
 
+const displayOptionStyles = {
+  [DISPLAY_MODE.NORMAL]: {},
+  [DISPLAY_MODE.FLOATING]: { position: 'fixed', zIndex: 7 }
+};
+
 export default class StaticToolbar extends React.Component {
   static propTypes = {
     pubsub: PropTypes.object.isRequired,
@@ -132,12 +137,8 @@ export default class StaticToolbar extends React.Component {
     if (offset) {
       style = { top: offset.y || 0, left: offset.x || 0 };
     }
-    if (displayOptions.displayMode === DISPLAY_MODE.FLOATING) {
-      style.position = 'fixed';
-      style.zIndex = 7;
-    }
 
-
+    Object.assign(style, displayOptionStyles[displayOptions.displayMode]);
 
     return (
       <div role="toolbar" aria-orientation="horizontal" id={id} className={toolbarClassNames} data-hook={dataHook} style={style}>

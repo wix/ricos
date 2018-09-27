@@ -47,13 +47,23 @@ const createEditorToolbars = config => {
   toolbarSettings
     .filter(({ name }) => name !== TOOLBARS.PLUGIN)
     .filter(({ shouldCreate }) => getConfigByFormFactor({ config: shouldCreate(), isMobile, defaultValue: true }))
-    .forEach(({ name, getButtons, getTextPluginButtons, getPositionOffset, getVisibilityFn, getInstance, getDisplayOptions }) => {
+    .forEach(({
+      name,
+      getButtons,
+      getTextPluginButtons,
+      getPositionOffset,
+      getVisibilityFn,
+      getInstance,
+      getDisplayOptions,
+      getToolbarDecorationFn
+    }) => {
       toolbars[name] = getInstance({
-        buttons: getConfigByFormFactor({ config: getButtons(), isMobile, defaultValue: [] }),
+        displayOptions: getConfigByFormFactor({ config: getDisplayOptions(), isMobile, defaultValue: { displayMode: DISPLAY_MODE.NORMAL } }),
+        toolbarDecorationFn: getConfigByFormFactor({ config: getToolbarDecorationFn(), isMobile, defaultValue: () => null }),
         textPluginButtons: getConfigByFormFactor({ config: getTextPluginButtons(), isMobile, defaultValue: [] }),
         offset: getConfigByFormFactor({ config: getPositionOffset(), isMobile, defaultValue: { x: 0, y: 0 } }),
         visibilityFn: getConfigByFormFactor({ config: getVisibilityFn(), isMobile, defaultValue: () => true }),
-        displayOptions: getConfigByFormFactor({ config: getDisplayOptions(), isMobile, defaultValue: { displayMode: DISPLAY_MODE.NORMAL } }),
+        buttons: getConfigByFormFactor({ config: getButtons(), isMobile, defaultValue: [] }),
         theme: { ...getToolbarTheme(theme, name.toLowerCase()), ...theme },
         defaultTextAlignment: textAlignment,
         getEditorState,

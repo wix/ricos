@@ -25,6 +25,7 @@
   border: 0;
   vertical-align: bottom;
   height: 100%;
+  pointer-events: initial;
 
   &:hover, &:focus {
     cursor: pointer;
