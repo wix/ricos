@@ -458,6 +458,15 @@ const TestData = {
         data: {}
       },
       {
+        key: '3ipk5',
+        text: '',
+        type: 'ordered-list-item',
+        depth: 0,
+        inlineStyleRanges: [],
+        entityRanges: [],
+        data: {},
+      },
+      {
         key: "3k78h",
         text: "",
         type: "unstyled",
@@ -525,6 +534,15 @@ const TestData = {
         ],
         entityRanges: [],
         data: {}
+      },
+      {
+        key: '4clif',
+        text: '',
+        type: 'unordered-list-item',
+        depth: 0,
+        inlineStyleRanges: [],
+        entityRanges: [],
+        data: {},
       }
     ],
     entityMap: {}

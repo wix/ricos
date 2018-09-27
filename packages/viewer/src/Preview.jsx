@@ -84,8 +84,8 @@ const isEmptyRaw = raw => (!raw || !raw.blocks || (raw.blocks.length === 1 && ra
 const options = {
   cleanup: {
     after: 'all',
-    types: 'all',
     split: true,
+    except: ['unordered-list-item', 'ordered-list-item'],
   },
 };
 
