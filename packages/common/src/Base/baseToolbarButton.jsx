@@ -68,6 +68,8 @@ class BaseToolbarButton extends React.Component {
       relValue,
       uiSettings,
       modalStyles,
+      style,
+      isFlyOutModal,
       ...otherProps } = this.props;
     if (this.props.type === BUTTONS.FILES && helpers && helpers.handleFileSelection) {
       const multiple = !!this.props.multiple;
@@ -99,6 +101,7 @@ class BaseToolbarButton extends React.Component {
       const flyOutArrowModalPosition = (this.props.isFlyOutModal && !this.props.isMobile) ?
         getFlyOutArrowModalPosition(event, flyOutModalPosition.left, flyOutModalPosition.top, modalWidth, pubsub) : {};
       const Styles = merge({}, modalStyles, { content: { ...flyOutModalPosition }, arrow: { ...flyOutArrowModalPosition } });
+      console.log(Styles);
       if (helpers && helpers.openModal) {
         const keyName = BUTTONS.EXTERNAL_MODAL;
         const modalProps = {
