@@ -42,7 +42,7 @@ export default class GiphyApiInputModal extends Component {
       <div>
         {(WixUtils.isMobile()) ? <div>{mobileNavbar}{backButton}</div> : null}
         <div className={styles.container} data-hook="giphyUploadModal">
-          <div className={styles.group_form} >
+          <div className={styles.serch_textinput_group} >
             <TextInput
               inputRef={ref => {
                 this.input = ref;

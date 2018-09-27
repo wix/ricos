@@ -52,6 +52,7 @@
   },
   "dependencies": {
     "giphy-js-sdk-core": "^1.0.5",
+    "react-custom-scrollbars": "^4.2.1",
     "react-gif-player": "^0.4.1",
     "react-infinite-scroller": "^1.2.0",
     "react-md-spinner": "^0.3.0",

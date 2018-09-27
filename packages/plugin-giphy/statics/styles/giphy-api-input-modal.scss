@@ -3,22 +3,22 @@
 
 .container {
   @include phone {
-    padding: 24px 18px 30px;
+    padding: 11px 18px 30px;
   }
 }
 
-.group_form {
+.serch_textinput_group{
   border-bottom: 2px solid #cccccc;
   width: 227px;
   padding-bottom: 5px;
 
   @include phone {
-    width: 98%;
-  }
+    width: 100%;
+    }
 }
 
 .search {
-  width: auto;
+  width: calc(100% - 20px);
   height: 17px;
   font-family: Helvetica;
   font-size: 14px;
@@ -72,16 +72,9 @@
   width: 200px;
   width: 12px;
   height: 12px;
+  background: none;
+  border: none;
   transform: rotate(45deg);
   border-bottom: solid 1px #ffffff;
   border-left: solid 1px #ffffff;
-}
-
-.giphyUrlInputModal_textInput {
-  border-bottom: 2px solid #cccccc;
-  width: 229px;
-  padding-bottom: 5px;
-  input[type="url"] {
-    padding-right: 0px;
-  }
 }

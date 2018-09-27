@@ -10,7 +10,7 @@
 
 .infinite_scroll_container {
   position: absolute;
-  width: calc(100% - 30px);
+  width:calc(100% - 20px);
   left: 18px;
   bottom: 2px;
   z-index: 30;
@@ -24,38 +24,37 @@
     bottom: auto;
     transform: none;
     height: calc(100vh - 140px);
-    margin-top: 6px;
+    margin-top:6px;
+    padding-right: 0px;    
+    overflow: hidden;
   }
+}
+
+.infinite_scroll {
+  width: calc(100% - 15px);
+  @include phone {
+    width: 100%;
+  }
+}
+
+.customize_scrollbar_container{
+  height: 100%;
 }
 
 .headerInfiniteScroll {
-  padding-right: "18px";
-  padding-bottom: "6px";
+  padding-right: 18px;
+  padding-bottom: 6px;
 }
 
-.infinite_scroll_container::-webkit-scrollbar {
-  width: 4px;
-  @include phone {
-    width: 0px;
-  }
-}
-
-.infinite_scroll_container::-webkit-scrollbar-track {
-  background: #ffffff;
-}
-
-.infinite_scroll_container::-webkit-scrollbar-thumb {
-  background: #000000;
+.scrollbarThumb {
+  background: #000000; 
   border-radius: 4px;
+  width: 4px;
+  margin-left: -2px;
+
 }
 
-.line {
-  width: 100%;
-  size: 0px;
-  height: 2px;
-  background-color: #c8c8c8;
-  margin-top: 0px;
-}
+
 
 .trending {
   font-family: Helvetica;
@@ -75,6 +74,9 @@
   text-align: right;
   float: right;
   padding-right: 12px;
+  @include phone {
+    padding-right: 0px;
+  }
 }
 
 .gif_img {
@@ -98,7 +100,10 @@
 
 .spinner {
   @include phone {
-    padding-top: 35vh;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
   }
   text-align: center;
 }

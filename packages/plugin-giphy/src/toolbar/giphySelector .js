@@ -4,6 +4,7 @@ import InfiniteScroll from 'react-infinite-scroller';
 import PropTypes from 'prop-types';
 import styles from '../../statics/styles/giphy-api.scss';
 import MDSpinner from 'react-md-spinner';
+import { Scrollbars } from 'react-custom-scrollbars';
 
 class GiphySelector extends Component {
   constructor(props) {
@@ -104,28 +105,34 @@ class GiphySelector extends Component {
           <div className={styles.powerdByGiphy}>Powerd by giphy</div>
         </div>
         <div className={styles.infinite_scroll_container}>
-          <InfiniteScroll
-            pageStart={0}
-            loadMore={this.getMoreGifs.bind(this)}
-            hasMore={this.state.hasMoreItems}
-            loader={(!this.state.didFail) ? loader : null}
-            useWindow={false}
+          <Scrollbars
+            renderThumbVertical={() => <div className={styles.scrollbarThumb} />}
+            className={styles.customize_scrollbar_container}
           >
-            {this.state.gifs.map((gif, i) => {
-              return (
-                <div
-                  key={gif.id.toString() + i}
-                  role="button"
-                  tabIndex="0"
-                  className={styles.gif_img}
-                  onKeyPress={this.handleKeyPress}
-                  onClick={() => this.onClick(gif)}
-                >
-                  <img src={gif.images.fixed_width_downsampled.gif_url} alt={'gif'} />
-                </div>
-              );
-            })}
-          </InfiniteScroll>
+            <InfiniteScroll
+              pageStart={0}
+              loadMore={this.getMoreGifs.bind(this)}
+              hasMore={this.state.hasMoreItems}
+              loader={(!this.state.didFail) ? loader : null}
+              useWindow={false}
+              className={styles.infinite_scroll}
+            >
+              {this.state.gifs.map((gif, i) => {
+                return (
+                  <div
+                    key={gif.id.toString() + i}
+                    role="button"
+                    tabIndex="0"
+                    className={styles.gif_img}
+                    onKeyPress={this.handleKeyPress}
+                    onClick={() => this.onClick(gif)}
+                  >
+                    <img src={gif.images.fixed_width_downsampled.gif_url} alt={'gif'} />
+                  </div>
+                );
+              })}
+            </InfiniteScroll>
+          </Scrollbars>
         </div>
         {(this.state.didFail) ? <div className={styles.error_msg}> {t('GiphyPlugin_ApiErrorMsg')}</div> : null}
       </div>
