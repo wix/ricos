@@ -7,25 +7,26 @@
   }
 }
 
-.serch_textinput_group{
+.serch_textinput_group {
   border-bottom: 2px solid #cccccc;
   width: 227px;
   padding-bottom: 5px;
-
+  position: relative;
   @include phone {
     width: 100%;
-    }
+  }
 }
 
 .search {
-  width: calc(100% - 20px);
+  width: 100%;
+  box-sizing: border-box;
+  padding-right: 20px;
   height: 17px;
   font-family: Helvetica;
   font-size: 14px;
   font-weight: 300;
   color: black;
   border: none;
-  float: left;
 }
 
 .search::placeholder {
@@ -34,7 +35,10 @@
 
 .searchIcon {
   width: auto;
-  text-align: right;
+  display: inline-block;
+  position: absolute;
+  right: 0px;
+  top: 2px;
 }
 
 .closeIcon {
