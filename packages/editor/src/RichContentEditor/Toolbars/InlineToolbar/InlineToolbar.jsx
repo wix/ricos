@@ -71,6 +71,8 @@ export default class InlineToolbar extends Component {
       showRightArrow: false,
       showLeftArrow: false
     };
+
+    this.ToolbarDecoration = props.toolbarDecorationFn();
   }
 
   componentWillMount() {
@@ -284,32 +286,28 @@ export default class InlineToolbar extends Component {
   }
 
   render() {
-    const { theme, toolbarDecorationFn } = this.props;
+    const { theme } = this.props;
     const { toolbarStyles } = theme || {};
-    const toolbarClassNames = classNames(Styles.inlineToolbar, toolbarStyles && toolbarStyles.inlineToolbar);
-    const toolbarStyle = this.getStyle();
-    const tabIndex = this.isVisible() ? 0 : -1;
 
-    const ToolbarDecoration = toolbarDecorationFn();
+    const props = {
+      className: classNames(Styles.inlineToolbar, toolbarStyles && toolbarStyles.inlineToolbar),
+      style: this.getStyle(),
+      tabIndex: this.isVisible() ? 0 : -1,
+      role: 'toolbar',
+      'aria-orientation': 'horizontal',
+      'data-hook': 'inlineToolbar',
+    };
 
-    if (ToolbarDecoration) {
+    if (this.ToolbarDecoration) {
+      const { ToolbarDecoration } = this;
       return (
-        <ToolbarDecoration position={this.state.position} style={toolbarStyle}>
+        <ToolbarDecoration refCallback={this.handleToolbarRef} {...props}>
           {this.renderToolbarContent()}
-        </ToolbarDecoration>
-      );
+        </ToolbarDecoration>);
     }
 
     return (
-      <div
-        role="toolbar"
-        aria-orientation="horizontal"
-        className={toolbarClassNames}
-        style={toolbarStyle}
-        ref={this.handleToolbarRef}
-        data-hook="inlineToolbar"
-        tabIndex={tabIndex}
-      >
+      <div ref={this.handleToolbarRef} {...props}>
         {this.renderToolbarContent()}
       </div>
     );
