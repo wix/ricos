@@ -10,6 +10,10 @@
 
 ## [Unreleased]
 
+<br/>
+
+## 1.6.3 (Sep 27, 2018)
+
 ### :rocket: New Feature
 
 - `soundcloud`
