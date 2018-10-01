@@ -44,7 +44,14 @@ The `Setting` type is defined as follows:
       ios: { displayMode: DISPLAY_MODE.NORMAL | DISPLAY_MODE.FLOATING },
       android: { displayMode: DISPLAY_MODE.NORMAL | DISPLAY_MODE.FLOATING },
     }
-  }
+  },
+  getToolbarDecorationFn: () => {
+    desktop: () => Component,
+    mobile: {
+      ios: () => Component,
+      android: () => Component,
+    }
+  },
   getButtons: () => {
     desktop: Array<Component> | Array<string>,
     mobile: {
@@ -81,13 +88,14 @@ All the toolbar types are exposed by the `TOOLBARS` const found in [consts.js](h
 
 ### `Settings` properties
 
-| property | description | scope |
-|----------|-------------|-------|
-| `name` | one of the toolbar types (see `TOOLBARS` const for details) | all toolbars |
-| `shouldCreate` | determines whether the toolbar should be created at the first place |  all toolbars |
-|`getVisibilityFn` | toolbar visibility function | all toolbars |
-|`getPositionOffset` | toolbar offset point in pixels, relatively to the default toolbar position | all toolbars |
-| `getDisplayOptions` | toolbar display options (see next section for details) | all toolbars |
+| property | description | affected toolbars |
+|----------|-------------|-------------------|
+| `name` | one of the toolbar types (see `TOOLBARS` const for details) | all |
+| `shouldCreate` | determines whether the toolbar should be created at the first place |  all |
+|`getVisibilityFn` | toolbar visibility function | all |
+|`getPositionOffset` | toolbar offset point in pixels, relatively to the default toolbar position | all |
+| `getDisplayOptions` | toolbar display options (see next section for details) | all |
+| `getToolbarDecorationFn` | component to be rendered instead of default toolbar container (see the following sections for details) | all |
 |`getButtons` (1) | a list of the toolbar button components | plugin insertion and functionality toolbars |
 |`getButtons` (2) | a list of inline button names | text editing toolbars |
 |`getTextPluginButtons` | a map of inline buttons added by plugins. The keys are derived from the `PluginTextButtonMappers` -- see the `link-plugin`'s [createLinkToolbar](https://github.com/wix-incubator/rich-content/blob/master/packages/plugin-link/src/toolbar/createLinkToolbar.js) for reference | text editing toolbars
@@ -100,6 +108,16 @@ At the moment, the `getDisplayOptions` API consists of a single property `displa
 - `DISPLAY_MODE.FLOATING` the toolbars are in fixed position. This, combined with `getVisibilityFn` and `getPositionOffset` properties, causes toolbars to "float".
 
 **Note**: while in `DISPLAY_MODE.FLOATING` mode, the `getPositionOffset` property denotes absolute screen coordinates.
+
+#### Toolbar Decoration
+
+Sometimes, a static theme is not enough. For example, consider the case when the inline toolbar is required to display a "chevron" right above the selected text.
+
+![toolbar-with-chevron](./assets/chevron.png)
+
+Such behavior involves multiple dynamic values to be calculated within toolbar rendering.
+
+So, the `getToolbarDecorationFn` comes to rescue. This function is expected to return a `Component` to be rendered instead of the default toolbar container. This `Component` will be provided with the toolbar container props. For reference, check out the [InlineToolbarDecoration.jsx](../examples/editor/src/InlineToolbarDecoration.jsx)
 
 ## Plugin functionality toolbar customization
 
