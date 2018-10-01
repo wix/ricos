@@ -156,11 +156,11 @@ export default {
   //       desktop: { x: 0, y: 0 },
   //     }),
   //   },
-    {
-      name: TOOLBARS.INLINE,
-      getToolbarDecorationFn: () => ({
-        desktop: () => InlineToolbarDecoration
-      })
-    }
+  //   {
+  //     name: TOOLBARS.INLINE,
+  //     getToolbarDecorationFn: () => ({
+  //       desktop: () => InlineToolbarDecoration
+  //     })
+  //   }
    ]
 };
