@@ -66,3 +66,9 @@ RichContentViewer.defaultProps = {
   decorators: [],
   typeMappers: []
 };
+
+RichContentViewer.defaultProps = {
+  theme: {},
+  decorators: [],
+  typeMappers: []
+};

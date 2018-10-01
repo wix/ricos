@@ -8,6 +8,7 @@ import RichContentRawDataViewer from './RichContentRawDataViewer';
 import { videoTypeMapper } from 'wix-rich-content-plugin-video/dist/module.viewer';
 import { dividerTypeMapper } from 'wix-rich-content-plugin-divider/dist/module.viewer';
 import { htmlTypeMapper, HTML_TYPE } from 'wix-rich-content-plugin-html/dist/module.viewer';
+import { soundCloudTypeMapper } from 'wix-rich-content-plugin-sound-cloud/dist/module.viewer';
 import { linkTypeMapper, LinkViewer, LinkParseStrategy } from 'wix-rich-content-plugin-link/dist/module.viewer';
 
 import { Strategy as HashTagStrategy, Component as HashTag } from 'wix-rich-content-plugin-hashtag';
@@ -26,6 +27,7 @@ import 'wix-rich-content-plugin-hashtag/dist/styles.min.css';
 import 'wix-rich-content-plugin-link/dist/styles.min.css';
 import 'wix-rich-content-plugin-mentions/dist/styles.min.css';
 import 'wix-rich-content-plugin-video/dist/styles.min.css';
+import 'wix-rich-content-plugin-sound-cloud/dist/styles.min.css';
 
 const modalStyleDefaults = {
   content: {
@@ -56,7 +58,7 @@ class App extends Component {
       dividerTypeMapper,
       htmlTypeMapper,
       linkTypeMapper,
-    ];
+      soundCloudTypeMapper];
 
     this.decorators = [{
         strategy: LinkParseStrategy,
@@ -77,7 +79,7 @@ class App extends Component {
   }
 
   initViewerProps() {
-    this.helpers = {};      
+    this.helpers = {};
   }
 
   closeModal = () => {
