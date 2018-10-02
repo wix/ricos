@@ -10,6 +10,11 @@
 
 ## [Unreleased]
 
+### :rocket: New Feature
+
+- `general`
+  - RCE `config.getToolbarSettings` API now allows to provide decoration component for toolbar containers. Check [documentation](https://github.com/wix-incubator/rich-content/blob/master/docs/ToolbarCustomization.md) for more details
+
 <br/>
 
 ## 1.6.4 (Oct 2, 2018)
