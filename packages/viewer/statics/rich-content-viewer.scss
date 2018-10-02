@@ -146,8 +146,16 @@
   composes: elementSpacing;
 }
 
+.orderedListContainer {
+  outline: none;
+}
+
 .unorderedList {
   composes: elementSpacing;
+}
+
+.unorderedListContainer {
+  outline: none;
 }
 
 .code,

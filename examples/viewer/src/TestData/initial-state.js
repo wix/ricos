@@ -717,12 +717,41 @@ const TestData = {
         type: "wix-draft-plugin-divider",
         mutability: "IMMUTABLE",
         data: {
-          type: "double",
+          type: "single",
           config: {
-            size: "large"
+            size: "small",
+            alignment: "center",
+            textWrap: "nowrap",
+            key: "ov8f"
           }
         }
-      }
+      },
+      "1": {
+        type: "wix-draft-plugin-divider",
+        mutability: "IMMUTABLE",
+        data: {
+          type: "dashed",
+          config: {
+            size: "medium",
+            alignment: "center",
+            textWrap: "nowrap",
+            key: "7poao"
+          }
+        }
+      },
+      "2": {
+        type: "wix-draft-plugin-divider",
+        mutability: "IMMUTABLE",
+        data: {
+          type: "double",
+          config: {
+            size: "large",
+            alignment: "center",
+            textWrap: "nowrap",
+            key: "6gci3"
+          }
+        }
+      },
     },
     blocks: [
       {
@@ -736,6 +765,36 @@ const TestData = {
             offset: 0,
             length: 1,
             key: 0
+          }
+        ],
+        data: {}
+      },
+      {
+        key: "7poao",
+        text: " ",
+        type: "atomic",
+        depth: 0,
+        inlineStyleRanges: [],
+        entityRanges: [
+          {
+            offset: 0,
+            length: 1,
+            key: 1
+          }
+        ],
+        data: {}
+      },
+      {
+        key: "6gci3",
+        text: " ",
+        type: "atomic",
+        depth: 0,
+        inlineStyleRanges: [],
+        entityRanges: [
+          {
+            offset: 0,
+            length: 1,
+            key: 2
           }
         ],
         data: {}
