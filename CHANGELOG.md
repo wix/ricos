@@ -10,6 +10,11 @@
 
 ## [Unreleased]
 
+### :rocket: New Feature
+
+- `mentions-plugin`
+  - add option `repositionSuggestions` to support better suggestions popup positioning in iframes
+
 ### :bug: Bug Fix
 
 - `viewer`
