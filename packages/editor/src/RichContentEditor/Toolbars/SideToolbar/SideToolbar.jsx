@@ -18,20 +18,26 @@ export default class SideToolbar extends Component {
     isMobile: PropTypes.bool,
     displayOptions: PropTypes.shape({
       displayMode: PropTypes.string
-    })
+    }),
+    toolbarDecorationFn: PropTypes.func,
   };
 
   static defaultProps = {
     displayOptions: {
       displayMode: DISPLAY_MODE.NORMAL
-    }
+    },
+    toolbarDecorationFn: () => null
   }
 
-  state = {
-    position: {
-      transform: 'scale(0)',
-    },
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      position: {
+        transform: 'scale(0)',
+      },
+    };
+    this.ToolbarDecoration = props.toolbarDecorationFn();
+  }
 
   componentDidMount() {
     this.props.pubsub.subscribe('editorState', this.onEditorStateChange);
@@ -96,20 +102,39 @@ export default class SideToolbar extends Component {
     });
   };
 
-  render() {
+  renderToolbarContent() {
     const { theme, pubsub } = this.props;
+    return this.props.structure.map((Component, index) => (
+      <Component
+        key={index}
+        getEditorState={pubsub.get('getEditorState')}
+        setEditorState={pubsub.get('setEditorState')}
+        theme={theme}
+      />
+    ));
+  }
+
+
+  render() {
+    const { theme } = this.props;
     const { wrapperStyles } = theme || {};
-    const wrapperClassNames = classNames(Styles.sideToolbarWrapper, wrapperStyles && wrapperStyles.sideToolbarWrapper);
+
+    const props = {
+      className: classNames(Styles.sideToolbarWrapper, wrapperStyles && wrapperStyles.sideToolbarWrapper),
+      style: this.state.position
+    };
+
+    if (this.ToolbarDecoration) {
+      const { ToolbarDecoration } = this;
+      return (
+        <ToolbarDecoration {...props}>
+          {this.renderToolbarContent()}
+        </ToolbarDecoration>);
+    }
+
     return (
-      <div className={wrapperClassNames} style={this.state.position}>
-        {this.props.structure.map((Component, index) => (
-          <Component
-            key={index}
-            getEditorState={pubsub.get('getEditorState')}
-            setEditorState={pubsub.get('setEditorState')}
-            theme={theme}
-          />
-        ))}
+      <div {...props}>
+        {this.renderToolbarContent()}
       </div>
     );
   }

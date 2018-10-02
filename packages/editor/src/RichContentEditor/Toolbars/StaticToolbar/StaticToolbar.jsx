@@ -32,12 +32,14 @@ export default class StaticToolbar extends React.Component {
       displayMode: PropTypes.string,
     }),
     uiSettings: PropTypes.object,
+    toolbarDecorationFn: PropTypes.func,
   };
 
   static defaultProps = {
     displayOptions: {
       displayMode: DISPLAY_MODE.NORMAL
-    }
+    },
+    toolbarDecorationFn: () => null
   }
 
   constructor(props) {
@@ -48,6 +50,8 @@ export default class StaticToolbar extends React.Component {
       showRightArrow: false,
       showLeftArrow: false
     };
+
+    this.ToolbarDecoration = props.toolbarDecorationFn();
   }
 
   scrollToolbar(event, leftDirection) {
@@ -74,8 +78,56 @@ export default class StaticToolbar extends React.Component {
 
   onExtendContent = extendContent => this.setState({ extendContent });
 
-  render() {
+  renderToolbarContent(childrenProps) {
+    const { theme, structure, isMobile } = this.props;
+    const { toolbarStyles } = theme || {};
+    const { showLeftArrow, showRightArrow, overrideContent: OverrideContent } = this.state;
+    const hasArrow = showLeftArrow || showRightArrow;
+    const arrowClassNames = classNames(Styles.staticToolbar_responsiveArrow, toolbarStyles.responsiveArrow);
+    const leftArrowIconClassNames = classNames(Styles.staticToolbar_responsiveArrowLeft_icon, toolbarStyles.responsiveArrowLeft_icon);
+    const rightArrowIconClassNames = classNames(Styles.staticToolbar_responsiveArrowRight_icon, toolbarStyles.responsiveArrowRight_icon);
 
+    const buttonClassNames = classNames(Styles.staticToolbar_buttons, toolbarStyles.buttons);
+    const scrollableClassNames = classNames(
+      Styles.staticToolbar_scrollableContainer,
+      toolbarStyles.scrollableContainer,
+      {
+        [Styles.mobile]: isMobile,
+      }
+    );
+
+    return (
+      <div className={buttonClassNames}>
+        <Measure
+          client
+          scroll
+          innerRef={ref => this.scrollContainer = ref}
+          onResize={({ scroll, client }) => this.setToolbarScrollButton(scroll.left, scroll.width, client.width)}
+        >
+          {({ measure, measureRef }) => (
+            <div className={scrollableClassNames} ref={measureRef} onScroll={() => measure()}>
+              {
+                OverrideContent ?
+                  <OverrideContent {...childrenProps} /> :
+                  structure.map((Button, index) => <Button key={index} {...childrenProps} />)
+              }
+            </div>
+          )}
+        </Measure>
+        {
+          hasArrow &&
+            <button
+              className={arrowClassNames}
+              data-hook="toolbarArrow" onMouseDown={e => this.scrollToolbar(e, showLeftArrow)}
+            >
+              <i className={showLeftArrow ? leftArrowIconClassNames : rightArrowIconClassNames} />
+            </button>
+        }
+      </div>
+    );
+  }
+
+  render() {
     const { visibilityFn, pubsub } = this.props;
     if (visibilityFn) {
       const editorState = pubsub.get('getEditorState');
@@ -86,7 +138,6 @@ export default class StaticToolbar extends React.Component {
 
     const {
       theme,
-      structure,
       helpers,
       isMobile,
       linkModal,
@@ -99,24 +150,10 @@ export default class StaticToolbar extends React.Component {
       uiSettings,
       displayOptions,
     } = this.props;
-    const { showLeftArrow, showRightArrow, overrideContent: OverrideContent, extendContent: ExtendContent } = this.state;
-    const hasArrow = showLeftArrow || showRightArrow;
+    const { extendContent: ExtendContent } = this.state;
+
     const { toolbarStyles } = theme || {};
-
-    const toolbarClassNames = classNames(Styles.staticToolbar, toolbarStyles.toolbar);
-    const buttonClassNames = classNames(Styles.staticToolbar_buttons, toolbarStyles.buttons);
     const extendClassNames = classNames(Styles.staticToolbar_extend, toolbarStyles.extend);
-    const scrollableClassNames = classNames(
-      Styles.staticToolbar_scrollableContainer,
-      toolbarStyles.scrollableContainer,
-      {
-        [Styles.mobile]: isMobile,
-      }
-    );
-
-    const arrowClassNames = classNames(Styles.staticToolbar_responsiveArrow, toolbarStyles.responsiveArrow);
-    const leftArrowIconClassNames = classNames(Styles.staticToolbar_responsiveArrowLeft_icon, toolbarStyles.responsiveArrowLeft_icon);
-    const rightArrowIconClassNames = classNames(Styles.staticToolbar_responsiveArrowRight_icon, toolbarStyles.responsiveArrowRight_icon);
 
     const childrenProps = {
       theme,
@@ -137,38 +174,33 @@ export default class StaticToolbar extends React.Component {
     if (offset) {
       style = { top: offset.y || 0, left: offset.x || 0 };
     }
-
     Object.assign(style, displayOptionStyles[displayOptions.displayMode]);
 
+    const props = {
+      style,
+      className: classNames(Styles.staticToolbar, toolbarStyles.toolbar),
+      role: 'toolbar',
+      'aria-orientation': 'horizontal',
+      id,
+      'data-hook': dataHook,
+    };
+
+    if (this.ToolbarDecoration) {
+      const { ToolbarDecoration } = this;
+      return (
+        <ToolbarDecoration {...props}>
+          {this.renderToolbarContent(childrenProps)}
+          {ExtendContent && (
+            <div className={extendClassNames}>
+              <ExtendContent {...childrenProps} />
+            </div>
+          )}
+        </ToolbarDecoration>);
+    }
+
     return (
-      <div role="toolbar" aria-orientation="horizontal" id={id} className={toolbarClassNames} data-hook={dataHook} style={style}>
-        <div className={buttonClassNames}>
-          <Measure
-            client
-            scroll
-            innerRef={ref => this.scrollContainer = ref}
-            onResize={({ scroll, client }) => this.setToolbarScrollButton(scroll.left, scroll.width, client.width)}
-          >
-            {({ measure, measureRef }) => (
-              <div className={scrollableClassNames} ref={measureRef} onScroll={() => measure()}>
-                {
-                  OverrideContent ?
-                    <OverrideContent {...childrenProps} /> :
-                    structure.map((Button, index) => <Button key={index} {...childrenProps} />)
-                }
-              </div>
-            )}
-          </Measure>
-          {
-            hasArrow &&
-            <button
-              className={arrowClassNames}
-              data-hook="toolbarArrow" onMouseDown={e => this.scrollToolbar(e, showLeftArrow)}
-            >
-              <i className={showLeftArrow ? leftArrowIconClassNames : rightArrowIconClassNames} />
-            </button>
-          }
-        </div>
+      <div {...props}>
+        {this.renderToolbarContent(childrenProps)}
         {ExtendContent && (
           <div className={extendClassNames}>
             <ExtendContent {...childrenProps} />

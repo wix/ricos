@@ -9,7 +9,7 @@ import separatorStyles from '../../../../statics/styles/mobile-toolbar-separator
 
 const createMobileToolbar = ({
   buttons, textPluginButtons, pluginButtons, helpers, pubsub, getEditorState, setEditorState,
-  anchorTarget, relValue, theme, t, offset, visibilityFn, uiSettings, displayOptions
+  anchorTarget, relValue, theme, t, offset, visibilityFn, uiSettings, displayOptions, toolbarDecorationFn
 }) => {
   const mobileTheme = getMobileTheme(theme);
   return createStaticToolbar({
@@ -35,7 +35,8 @@ const createMobileToolbar = ({
     offset,
     visibilityFn,
     uiSettings,
-    displayOptions
+    displayOptions,
+    toolbarDecorationFn
   });
 };
 

@@ -19,6 +19,7 @@ export default (config = {}) => {
     offset,
     visibilityFn,
     displayOptions,
+    toolbarDecorationFn,
   } = config;
 
   const toolbarProps = {
@@ -36,6 +37,7 @@ export default (config = {}) => {
     offset,
     visibilityFn,
     displayOptions,
+    toolbarDecorationFn,
   };
 
   return {

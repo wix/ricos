@@ -83,7 +83,8 @@ export default ({
   offset,
   visibilityFn,
   displayOptions,
-  uiSettings
+  uiSettings,
+  toolbarDecorationFn,
 }) => {
   const staticTextTheme = getStaticTextTheme(theme);
   const structure = getTextButtonsFromList({ buttons, textPluginButtons, pubsub, theme: staticTextTheme, t, uiSettings });
@@ -105,5 +106,6 @@ export default ({
     visibilityFn,
     displayOptions,
     uiSettings,
+    toolbarDecorationFn,
   });
 };

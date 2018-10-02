@@ -44,6 +44,13 @@ export const getDefaultToolbarSettings = ({ pluginButtons }) => {
           android: () => true,
         }
       }),
+      getToolbarDecorationFn: () => ({
+        desktop: () => null,
+        mobile: {
+          ios: () => null,
+          android: () => null,
+        }
+      })
     }
   ];
 };

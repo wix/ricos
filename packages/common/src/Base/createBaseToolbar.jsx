@@ -55,13 +55,15 @@ export default function createToolbar({
       const toolbarSettings = mergeToolbarSettings({ defaultSettings, customSettings })
         .filter(({ name }) => name === TOOLBARS.PLUGIN)[0];
 
-      const { shouldCreate, getPositionOffset, getButtons, getVisibilityFn, getDisplayOptions } = toolbarSettings;
+      const { shouldCreate, getPositionOffset, getButtons, getVisibilityFn, getDisplayOptions, getToolbarDecorationFn } = toolbarSettings;
 
       this.structure = getConfigByFormFactor({ config: getButtons(), isMobile, defaultValue: [] });
       this.offset = getConfigByFormFactor({ config: getPositionOffset(), isMobile, defaultValue: { x: 0, y: 0 } });
       this.shouldCreate = getConfigByFormFactor({ config: shouldCreate(), isMobile, defaultValue: true });
       this.visibilityFn = getConfigByFormFactor({ config: getVisibilityFn(), isMobile, defaultValue: () => true });
       this.displayOptions = getConfigByFormFactor({ config: getDisplayOptions(), isMobile, defaultValue: { displayMode: DISPLAY_MODE.NORMAL } });
+      const toolbarDecorationFn = getConfigByFormFactor({ config: getToolbarDecorationFn(), isMobile, defaultValue: () => null });
+      this.ToolbarDecoration = toolbarDecorationFn();
 
       this.state = getInitialState();
     }
@@ -385,17 +387,11 @@ export default function createToolbar({
       ) : null;
     }
 
-    /* eslint-disable complexity */
-    render() {
-      if (!this.shouldCreate) {
-        return null;
-      }
-
+    renderToolbarContent() {
       const { showLeftArrow, showRightArrow, overrideContent: OverrideContent, tabIndex } = this.state;
       const hasArrow = showLeftArrow || showRightArrow;
       const { toolbarStyles: toolbarTheme } = theme || {};
       const { buttonStyles: buttonTheme, separatorStyles: separatorTheme } = theme || {};
-      const containerClassNames = classNames(toolbarStyles.pluginToolbar, toolbarTheme && toolbarTheme.pluginToolbar);
       const scrollableContainerClasses = classNames(toolbarStyles.pluginToolbar_scrollableContainer,
         toolbarTheme && toolbarTheme.pluginToolbar_scrollableContainer);
       const buttonContainerClassnames = classNames(toolbarStyles.pluginToolbar_buttons, toolbarTheme && toolbarTheme.pluginToolbar_buttons, {
@@ -412,45 +408,72 @@ export default function createToolbar({
       };
 
       const arrowClassNames = classNames(toolbarStyles.pluginToolbar_responsiveArrow, toolbarTheme && toolbarTheme.pluginToolbar_responsiveArrow);
-
       const leftArrowIconClassNames = classNames(toolbarStyles.pluginToolbar_responsiveArrowLeft_icon,
         toolbarTheme && toolbarTheme.responsiveArrowLeft_icon);
       const rightArrowIconClassNames = classNames(toolbarStyles.pluginToolbar_responsiveArrowRight_icon,
         toolbarTheme && toolbarTheme.responsiveArrowRight_icon);
-
       const separatorClassNames = classNames(toolbarStyles.pluginToolbarSeparator, separatorTheme && separatorTheme.pluginToolbarSeparator);
       const overrideProps = { onOverrideContent: this.onOverrideContent };
 
+      return (
+        <div className={buttonContainerClassnames}>
+          <Measure
+            client scroll innerRef={ref => this.scrollContainer = ref}
+            onResize={({ scroll, client }) => this.setToolbarScrollButton(scroll.left, scroll.width, client.width)}
+          >
+            {({ measure, measureRef }) => (
+              <div className={scrollableContainerClasses} ref={measureRef} onScroll={() => measure()}>
+                {OverrideContent ?
+                  <OverrideContent {...overrideProps} /> :
+                  this.structure.map((button, index) => (
+                    this.renderButton(button, index, themedButtonStyle, separatorClassNames, tabIndex)
+                  ))
+                }
+              </div>)}
+          </Measure>
+          {
+            hasArrow &&
+            <button
+              tabIndex={tabIndex}
+              className={arrowClassNames}
+              data-hook="pluginToolbarRightArrow" onMouseDown={e => this.scrollToolbar(e, showLeftArrow)}
+            >
+              <i className={showLeftArrow ? leftArrowIconClassNames : rightArrowIconClassNames} />
+            </button>
+          }
+        </div>
+      );
+    }
+
+    render() {
+      if (!this.shouldCreate) {
+        return null;
+      }
+
+      const { toolbarStyles: toolbarTheme } = theme || {};
+
       // TODO: visibilityFn params?
       if (this.visibilityFn()) {
+
+        const props = {
+          style: this.state.position,
+          className: classNames(toolbarStyles.pluginToolbar, toolbarTheme && toolbarTheme.pluginToolbar),
+          'data-hook': name ? `${name}PluginToolbar` : null
+        };
+
+        if (this.ToolbarDecoration) {
+          const { ToolbarDecoration } = this;
+          return (
+            <ToolbarDecoration {...props}>
+              {this.renderToolbarContent()}
+              {this.renderInlinePanel()}
+              {this.renderPanel()}
+            </ToolbarDecoration>);
+        }
+
         return (
-          <div style={this.state.position} className={containerClassNames} data-hook={name ? `${name}PluginToolbar` : null}>
-            <div className={buttonContainerClassnames}>
-              <Measure
-                client scroll innerRef={ref => this.scrollContainer = ref}
-                onResize={({ scroll, client }) => this.setToolbarScrollButton(scroll.left, scroll.width, client.width)}
-              >
-                {({ measure, measureRef }) => (
-                  <div className={scrollableContainerClasses} ref={measureRef} onScroll={() => measure()}>
-                    {OverrideContent ?
-                      <OverrideContent {...overrideProps} /> :
-                      this.structure.map((button, index) => (
-                        this.renderButton(button, index, themedButtonStyle, separatorClassNames, tabIndex)
-                      ))
-                    }
-                  </div>)}
-              </Measure>
-              {
-                hasArrow &&
-                <button
-                  tabIndex={tabIndex}
-                  className={arrowClassNames}
-                  data-hook="pluginToolbarRightArrow" onMouseDown={e => this.scrollToolbar(e, showLeftArrow)}
-                >
-                  <i className={showLeftArrow ? leftArrowIconClassNames : rightArrowIconClassNames} />
-                </button>
-              }
-            </div>
+          <div {...props}>
+            {this.renderToolbarContent()}
             {this.renderInlinePanel()}
             {this.renderPanel()}
           </div>
@@ -459,7 +482,7 @@ export default function createToolbar({
         return null;
       }
     }
-    /* eslint-enable complexity */
+
   }
   return BaseToolbar;
 }
