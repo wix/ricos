@@ -21,7 +21,7 @@ class VideoViewer extends Component {
   }
 
   render() {
-    const { componentData, theme, ...rest } = this.props; // eslint-disable-line no-unused-vars
+    const { componentData, theme, settings, isMobile, ...rest } = this.props; // eslint-disable-line no-unused-vars
     return (
       <ReactPlayer
         className={classNames(this.styles.video_player)}

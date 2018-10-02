@@ -12,6 +12,17 @@
 
 <br/>
 
+## 1.6.4 (Oct 2, 2018)
+
+### :bug: Bug Fix
+
+- `viewer`
+  - [#144](https://github.com/wix-incubator/rich-content/pull/144) added theme support for `List`
+  - [#145](https://github.com/wix-incubator/rich-content/pull/145) pass `isMobile` prop to plugins
+  - [#146](https://github.com/wix-incubator/rich-content/pull/146) fix: empty `List` items are not rendered
+
+<br/>
+
 ## 1.6.3 (Sep 27, 2018)
 
 ### :rocket: New Feature

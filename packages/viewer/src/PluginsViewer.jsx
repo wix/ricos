@@ -41,17 +41,17 @@ const AtomicBlock = ({ type, typeMap, componentData, children, theme, isMobile, 
         <div className={containerClassNames}>
           {isFunction(container) ?
             <div className={container(theme)}>
-              <Component componentData={componentData} theme={theme} settings={settings} {...props}>
+              <Component componentData={componentData} theme={theme} settings={settings} isMobile={isMobile} {...props}>
                 {children}
               </Component>
             </div> :
-            <Component componentData={componentData} theme={theme} settings={settings} {...props}>
+            <Component componentData={componentData} theme={theme} settings={settings} isMobile={isMobile} {...props}>
               {children}
             </Component>}
           {renderLink(componentData, anchorTarget, relValue)}
         </div>);
     } else {
-      return <Component componentData={componentData} theme={theme} settings={settings} {...props}> {children} </Component>;
+      return <Component componentData={componentData} theme={theme} settings={settings} isMobile={isMobile} {...props}> {children} </Component>;
     }
   }
   return null;

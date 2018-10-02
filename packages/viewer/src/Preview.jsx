@@ -32,8 +32,9 @@ const getList = (ordered, mergedStyles) =>
   (children, blockProps) => {
     const fixedChildren = children.map(child => child.length ? child : [' ']);
     const className = ordered ? 'ordered' : 'unordered';
+    const containerClassName = mergedStyles[`${className}ListContainer`];
     return (
-      <List key={blockProps.keys[0]} keys={blockProps.keys} depth={blockProps.depth} ordered={ordered}>
+      <List key={blockProps.keys[0]} keys={blockProps.keys} depth={blockProps.depth} ordered={ordered} className={containerClassName}>
         {fixedChildren.map((child, i) => {
           // NOTE: list block data is an array of data entries per list item
           const dataEntry = blockProps.data.length > i ? blockProps.data[i] : {};
@@ -84,8 +85,8 @@ const isEmptyRaw = raw => (!raw || !raw.blocks || (raw.blocks.length === 1 && ra
 const options = {
   cleanup: {
     after: 'all',
-    types: 'all',
     split: true,
+    except: ['unordered-list-item', 'ordered-list-item'],
   },
 };
 
