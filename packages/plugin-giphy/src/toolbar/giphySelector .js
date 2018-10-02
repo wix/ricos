@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { SEARCH_TYPE, giphyApiClient, PAGE_SIZE, WAIT_INTERVAL } from '../constants';
 import InfiniteScroll from 'react-infinite-scroller';
 import PropTypes from 'prop-types';
-import styles from '../../statics/styles/giphy-api.scss';
+import styles from '../../statics/styles/giphy-selecter.scss';
 import MDSpinner from 'react-md-spinner';
 import { Scrollbars } from 'react-custom-scrollbars';
 
