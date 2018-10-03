@@ -256,13 +256,14 @@ class RichContentEditor extends Component {
       readOnly,
       handleBeforeInput,
       handlePastedText,
+      handleReturn,
     } = this.props;
     const { editorState, theme } = this.state;
     const mergedStyles = mergeStyles({ styles, theme }); // TODO: refactor the whole class to use merged styles
     return (
       <Editor
         ref={this.setEditor}
-        handleReturn={handleReturnCommand(this.updateEditorState)}
+        handleReturn={handleReturn ? handleReturn(this.updateEditorState) : handleReturnCommand(this.updateEditorState)}
         editorState={editorState}
         onChange={this.updateEditorState}
         handleBeforeInput={handleBeforeInput}
@@ -364,6 +365,7 @@ RichContentEditor.propTypes = {
   textAlignment: PropTypes.oneOf(['left', 'right', 'center']),
   handleBeforeInput: PropTypes.func,
   handlePastedText: PropTypes.func,
+  handleReturn: PropTypes.func,
 };
 
 RichContentEditor.defaultProps = {
