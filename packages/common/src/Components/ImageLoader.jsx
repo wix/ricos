@@ -12,7 +12,7 @@ class ImageLoader extends React.Component {
   }
 
   render = () => (
-    <div className={this.styles.loaderOverlay}>
+    <div className={this.styles.loaderOverlay} data-hook="imageLoader">
       <div className={classNames(this.styles.loader, { [this.styles[this.props.type]]: this.props.type })} />
     </div>
   );
