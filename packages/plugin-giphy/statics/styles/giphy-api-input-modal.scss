@@ -2,17 +2,19 @@
 @import "~wix-rich-content-common/dist/statics/styles/palette";
 
 .container {
+  padding-top: 6px;
   @include phone {
     padding: 11px 18px 30px;
   }
 }
 
-.serch_textinput_group {
+.search_textinput_group {
   border-bottom: 2px solid #cccccc;
   width: 227px;
   padding-bottom: 5px;
   position: relative;
   @include phone {
+    padding-bottom: 13px;
     width: 100%;
   }
 }
@@ -38,12 +40,12 @@
   display: inline-block;
   position: absolute;
   right: 0px;
-  top: 2px;
+  top: 4px;
 }
 
 .closeIcon {
-  width: 11px;
-  height: 11px;
+  width: 10px;
+  height: 10px;
 }
 
 .navbar {

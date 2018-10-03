@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import styles from '../../statics/styles/giphy-selecter.scss';
 import MDSpinner from 'react-md-spinner';
 import { Scrollbars } from 'react-custom-scrollbars';
+import { PoweredByGiphy } from '../icons';
 
 class GiphySelector extends Component {
   constructor(props) {
@@ -102,7 +103,7 @@ class GiphySelector extends Component {
       <div>
         <div className={styles.container}>
           <div className={styles.trending}>{trending}</div>
-          <div className={styles.powerdByGiphy}>Powerd by giphy</div>
+          <PoweredByGiphy className={styles.powerdByGiphy} />
         </div>
         <div className={styles.infinite_scroll_container}>
           <Scrollbars

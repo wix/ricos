@@ -10,11 +10,11 @@
 
 .infinite_scroll_container {
   position: absolute;
-  width:calc(100% - 20px);
+  width: calc(100% - 20px);
   left: 18px;
   bottom: 2px;
   z-index: 30;
-  height: calc(100% - 59px);
+  height: calc(100% - 70px);
   overflow: auto;
   padding-right: 6px;
   @include phone {
@@ -24,8 +24,8 @@
     bottom: auto;
     transform: none;
     height: calc(100vh - 140px);
-    margin-top:6px;
-    padding-right: 0px;    
+    margin-top: 6px;
+    padding-right: 0px;
     overflow: hidden;
   }
 }
@@ -37,7 +37,7 @@
   }
 }
 
-.customize_scrollbar_container{
+.customize_scrollbar_container {
   height: 100%;
 }
 
@@ -47,14 +47,11 @@
 }
 
 .scrollbarThumb {
-  background: #000000; 
+  background: #000000;
   border-radius: 4px;
   width: 4px;
   margin-left: -2px;
-
 }
-
-
 
 .trending {
   font-family: Helvetica;
@@ -66,14 +63,10 @@
 }
 
 .powerdByGiphy {
-  font-family: Helvetica;
-  font-size: 10px;
-  font-style: oblique;
-  color: rgba(0, 0, 0, 0.3);
-  width: auto;
   text-align: right;
   float: right;
-  padding-right: 12px;
+  padding-top: 4px;
+  padding-right: 9px;
   @include phone {
     padding-right: 0px;
   }
