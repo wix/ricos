@@ -10,6 +10,11 @@
 
 ## [Unreleased]
 
+### :bug: Bug Fix
+
+- `viewer`
+  - [#153](https://github.com/wix-incubator/rich-content/pull/153) fix: `header-one` is not rendered
+
 ## 1.6.5 (Oct 3, 2018)
 
 ### :rocket: New Feature

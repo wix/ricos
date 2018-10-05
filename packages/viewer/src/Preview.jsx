@@ -57,6 +57,8 @@ const getBlocks = mergedStyles => {
     blockquote: (children, blockProps) => children.map((child, i) =>
       withTextAlignment(<blockquote className={mergedStyles.quote} key={blockProps.keys[i]}><div>{child}</div></blockquote>,
         blockProps.data[i], mergedStyles)),
+    'header-one': (children, blockProps) => children.map((child, i) =>
+      withTextAlignment(<h1 className={mergedStyles.headerOne} key={blockProps.keys[i]}>{child}</h1>, blockProps.data[i], mergedStyles)),
     'header-two': (children, blockProps) => children.map((child, i) =>
       withTextAlignment(<h2 className={mergedStyles.headerTwo} key={blockProps.keys[i]}>{child}</h2>, blockProps.data[i], mergedStyles)),
     'header-three': (children, blockProps) => children.map((child, i) =>
