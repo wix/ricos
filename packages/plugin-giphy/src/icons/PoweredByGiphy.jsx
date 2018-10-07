@@ -5,8 +5,8 @@ const PoweredByGiphy = props => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     xmlnsXlink="http://www.w3.org/1999/xlink"
-    width={53}
-    height={6}
+    width={79}
+    height={9}
     viewBox="0 0 53 6"
     {...props}
   >
