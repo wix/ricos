@@ -109,10 +109,10 @@ const desktopModalOverrideStyles = {
 const inlineStyles = {
   overlay: {
     background: 'transparent',
-    'pointer-events': 'none'
+    pointerEvents: 'none'
   },
   content: {
-    'pointer-events': 'initial'
+    pointerEvents: 'initial'
   }
 };
 
