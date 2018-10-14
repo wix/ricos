@@ -13,13 +13,13 @@
 ### :rocket: New Feature
 
 - `common`:
-  - `modalStylesFn` API added to `InsertButtons` structure for dynamic style support
-  - `inline` property added to `getModalStyles` util (transparent overlay)
+  - [#154](https://github.com/wix-incubator/rich-content/pull/154) `modalStylesFn` API added to `InsertButtons` structure for dynamic style support
+  - [#154](https://github.com/wix-incubator/rich-content/pull/154) `inline` property added to `getModalStyles` util (transparent overlay)
 
 ### :bug: Bug Fix
 
 - `emoji`
-  - `SelectButton` hard-coded styles are overridable by theme
+  - [#154](https://github.com/wix-incubator/rich-content/pull/154) `SelectButton` hard-coded styles are overridable by theme
 
 <br/>
 
