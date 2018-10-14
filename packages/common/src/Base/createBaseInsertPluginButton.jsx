@@ -55,7 +55,7 @@ export default ({ blockType, button, helpers, pubsub, t }) => {
           this.toggleFileSelection();
           break;
         case 'modal':
-          this.toggleButtonModal();
+          this.toggleButtonModal(event);
           break;
         default:
           this.addBlock(button.componentData || {});
@@ -114,12 +114,15 @@ export default ({ blockType, button, helpers, pubsub, t }) => {
       }
     };
 
-    toggleButtonModal = () => {
+    toggleButtonModal = event => {
       if (helpers && helpers.openModal) {
+        const modalStyles = button.modalStyles ? button.modalStyles :
+          button.modalStylesFn ?
+            button.modalStylesFn({ buttonRef: event.target, pubsub }) : {};
         helpers.openModal({
           modalName: button.modalName,
           modalElement: button.modalElement,
-          modalStyles: button.modalStyles,
+          modalStyles,
           theme: this.props.theme,
           componentData: button.componentData,
           onConfirm: this.addBlock,
