@@ -4,7 +4,6 @@ import { Tooltip, mergeStyles } from 'wix-rich-content-common';
 import { EmojiPluginIcon } from './icons';
 import styles from '../statics/SelectButton.scss';
 
-// TODO: convert all the inline styles to CSS to be themable
 const SelectButton = ({ t, theme }) => {
   const mergedStyles = mergeStyles({ styles, theme });
   return (

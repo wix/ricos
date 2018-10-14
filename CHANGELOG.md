@@ -10,6 +10,19 @@
 
 ## [Unreleased]
 
+### :rocket: New Feature
+
+- `common`:
+  - `modalStylesFn` API added to `InsertButtons` structure for dynamic style support
+  - `inline` property added to `getModalStyles` util (transparent overlay)
+
+### :bug: Bug Fix
+
+- `emoji`
+  - `SelectButton` hard-coded styles are overridable by theme
+
+<br/>
+
 ## 1.6.5 (Oct 3, 2018)
 
 ### :rocket: New Feature
