@@ -101,6 +101,7 @@
 
 .justify {
   &>* {
+    white-space: pre-line !important;
     text-align: justify !important;
   }
 }
@@ -180,5 +181,9 @@
 }
 
 .preview {
-  white-space: pre-line !important;
+  white-space: pre-wrap !important;
+}
+
+.rtl {
+  direction: rtl;
 }

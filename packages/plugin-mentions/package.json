@@ -33,14 +33,14 @@
   },
   "peerDependencies": {
     "@babel/runtime": "7.1.2",
-    "@wix/draft-js": "0.10.163",
+    "@wix/draft-js": "0.10.265",
     "prop-types": "^15.0.0",
     "react": "^15.0.0 || ^16.0.0",
     "react-dom": "^15.0.0 || ^16.0.0"
   },
   "devDependencies": {
     "@babel/runtime": "7.1.2",
-    "@wix/draft-js": "0.10.163",
+    "@wix/draft-js": "0.10.265",
     "classnames": "^2.2.6",
     "eslint": "^4.19.1",
     "lodash": "^4.17.10",

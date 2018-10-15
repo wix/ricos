@@ -20,6 +20,12 @@
 
 - `emoji`
   - [#154](https://github.com/wix-incubator/rich-content/pull/154) `SelectButton` hard-coded styles are overridable by theme
+- `mentions`
+  - [#148](https://github.com/wix-incubator/rich-content/pull/148) add option `repositionSuggestions` to support better suggestions popup positioning in iframe
+- `viewer`
+  - [#153](https://github.com/wix-incubator/rich-content/pull/153) fix: `header-one` is not rendered
+  - [#152](https://github.com/wix-incubator/rich-content/issues/152) white-space render is fixed
+  - [#157](https://github.com/wix-incubator/rich-content/pull/157) add RTL support
 
 <br/>
 
