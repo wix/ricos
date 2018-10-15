@@ -1,0 +1,108 @@
+@import "~wix-rich-content-common/dist/statics/styles/mixins";
+@import "~wix-rich-content-common/dist/statics/styles/palette";
+
+.container {
+  padding-bottom: 17px;
+  width: 100%;
+  padding-top: 5px;
+  display: block;
+}
+
+.infinite_scroll_container {
+  position: absolute;
+  width: calc(100% - 20px);
+  left: 18px;
+  bottom: 2px;
+  z-index: 30;
+  height: calc(100% - 70px);
+  overflow: auto;
+  padding-right: 6px;
+  @include phone {
+    position: relative;
+    width: auto;
+    left: auto;
+    bottom: auto;
+    transform: none;
+    height: calc(100vh - 140px);
+    margin-top: 6px;
+    padding-right: 0px;
+    overflow: hidden;
+  }
+}
+
+.infinite_scroll {
+  width: calc(100% - 15px);
+  @include phone {
+    width: 100%;
+  }
+}
+
+.customize_scrollbar_container {
+  height: 100%;
+}
+
+.headerInfiniteScroll {
+  padding-right: 18px;
+  padding-bottom: 6px;
+}
+
+.scrollbarThumb {
+  background: #000000;
+  border-radius: 4px;
+  width: 4px;
+  margin-left: -2px;
+}
+
+.trending {
+  font-family: Helvetica;
+  font-size: 10px;
+  font-style: oblique;
+  color: rgba(0, 0, 0, 0.3);
+  width: auto;
+  float: left;
+}
+
+.powerdByGiphy {
+  text-align: right;
+  float: right;
+  padding-top: 4px;
+  padding-right: 9px;
+  @include phone {
+    padding-right: 0px;
+  }
+}
+
+.gif_img {
+  margin-bottom: 18px;
+  img {
+    background: #eee;
+    min-height: 50px;
+    width: 100%;
+    display: block;
+    @include phone {
+      width: 100%;
+      margin-bottom: 21px;
+    }
+  }
+
+  @include phone {
+    margin-right: 0px;
+  }
+  cursor: pointer;
+}
+
+.spinner {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.error_msg {
+  line-height: 30px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 12px;
+  color: #aaa;
+  transform: translateX(-50%) translateY(-50%);
+  padding: 5px 10px;
+}
