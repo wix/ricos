@@ -29,7 +29,7 @@ const defaultSettings = {
   mentionPrefix: '@',
   mentionTrigger: '@',
   getMentionLink: () => '#',
-  repositionSuggestions: false,
+  repositionSuggestions: true,
   entryHeight: 34,
   additionalHeight: 17,
 };
