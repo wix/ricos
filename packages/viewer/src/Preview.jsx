@@ -8,8 +8,9 @@ import List from './List';
 import { getStrategyByStyle } from './decorators/getStrategyByStyle';
 import styles from '../statics/rich-content-viewer.scss';
 
-const withTextAlignment = (element, data, mergedStyles) => {
-  const alignmentClass = data.textAlignment ? data.textAlignment : 'left';
+const withTextAlignment = (element, data, mergedStyles, isRtl) => {
+  const defaultTextAlignment = isRtl ? 'right' : 'left';
+  const alignmentClass = data.textAlignment ? data.textAlignment : defaultTextAlignment;
   const elementProps = {
     ...element.props,
     className: element.props.className ?
@@ -28,7 +29,7 @@ const getInline = mergedStyles => {
   };
 };
 
-const getList = (ordered, mergedStyles) =>
+const getList = (ordered, mergedStyles, isRtl) =>
   (children, blockProps) => {
     const fixedChildren = children.map(child => child.length ? child : [' ']);
     const className = ordered ? 'ordered' : 'unordered';
@@ -39,7 +40,7 @@ const getList = (ordered, mergedStyles) =>
           // NOTE: list block data is an array of data entries per list item
           const dataEntry = blockProps.data.length > i ? blockProps.data[i] : {};
           return withTextAlignment(<li className={mergedStyles[`${className}List`]} key={blockProps.keys[i]}><div>{child}</div></li>,
-            dataEntry, mergedStyles);
+            dataEntry, mergedStyles, isRtl);
         })}
       </List>
     );
@@ -48,25 +49,25 @@ const getList = (ordered, mergedStyles) =>
 /**
  * Note that children can be maped to render a list or do other cool stuff
  */
-const getBlocks = mergedStyles => {
+const getBlocks = (mergedStyles, isRtl) => {
   // Rendering blocks like this along with cleanup results in a single p tag for each paragraph
   // adding an empty block closes current paragraph and starts a new one
   return {
     unstyled: (children, blockProps) => children.map((child, i) =>
-      withTextAlignment(<div key={blockProps.keys[i]}><div>{child}</div></div>, blockProps.data[i], mergedStyles)),
+      withTextAlignment(<div key={blockProps.keys[i]}><div>{child}</div></div>, blockProps.data[i], mergedStyles, isRtl)),
     blockquote: (children, blockProps) => children.map((child, i) =>
       withTextAlignment(<blockquote className={mergedStyles.quote} key={blockProps.keys[i]}><div>{child}</div></blockquote>,
-        blockProps.data[i], mergedStyles)),
+        blockProps.data[i], mergedStyles, isRtl)),
     'header-one': (children, blockProps) => children.map((child, i) =>
-      withTextAlignment(<h1 className={mergedStyles.headerOne} key={blockProps.keys[i]}>{child}</h1>, blockProps.data[i], mergedStyles)),
+      withTextAlignment(<h1 className={mergedStyles.headerOne} key={blockProps.keys[i]}>{child}</h1>, blockProps.data[i], mergedStyles, isRtl)),
     'header-two': (children, blockProps) => children.map((child, i) =>
-      withTextAlignment(<h2 className={mergedStyles.headerTwo} key={blockProps.keys[i]}>{child}</h2>, blockProps.data[i], mergedStyles)),
+      withTextAlignment(<h2 className={mergedStyles.headerTwo} key={blockProps.keys[i]}>{child}</h2>, blockProps.data[i], mergedStyles, isRtl)),
     'header-three': (children, blockProps) => children.map((child, i) =>
-      withTextAlignment(<h3 className={mergedStyles.headerThree} key={blockProps.keys[i]}>{child}</h3>, blockProps.data[i], mergedStyles)),
+      withTextAlignment(<h3 className={mergedStyles.headerThree} key={blockProps.keys[i]}>{child}</h3>, blockProps.data[i], mergedStyles, isRtl)),
     'code-block': (children, blockProps) => children.map((child, i) =>
-      withTextAlignment(<pre key={blockProps.keys[i]} className={mergedStyles.codeBlock}>{child}</pre>, blockProps.data[i], mergedStyles)),
-    'unordered-list-item': getList(false, mergedStyles),
-    'ordered-list-item': getList(true, mergedStyles),
+      withTextAlignment(<pre key={blockProps.keys[i]} className={mergedStyles.codeBlock}>{child}</pre>, blockProps.data[i], mergedStyles, isRtl)),
+    'unordered-list-item': getList(false, mergedStyles, isRtl),
+    'ordered-list-item': getList(true, mergedStyles, isRtl),
   };
 };
 
@@ -92,7 +93,7 @@ const options = {
   },
 };
 
-const Preview = ({ raw, typeMappers, theme, isMobile, decorators, anchorTarget, relValue, config }) => {
+const Preview = ({ raw, typeMappers, theme, isMobile, decorators, anchorTarget, relValue, config, isRtl }) => {
   const mergedStyles = mergeStyles({ styles, theme });
   const isEmpty = isEmptyRaw(raw);
   const typeMap = combineTypeMappers(typeMappers);
@@ -102,15 +103,15 @@ const Preview = ({ raw, typeMappers, theme, isMobile, decorators, anchorTarget, 
     ...createInlineStyleDecorators(getStrategyByStyle, mergedStyles)
   ];
 
-
+  const className = classNames(mergedStyles.preview, isRtl && mergedStyles.rtl);
 
   return (
-    <div className={mergedStyles.preview}>
+    <div className={className}>
       {isEmpty && <div>There is nothing to render...</div>}
       {!isEmpty &&
         redraft(raw, {
           inline: getInline(mergedStyles),
-          blocks: getBlocks(mergedStyles),
+          blocks: getBlocks(mergedStyles, isRtl),
           entities: getEntities(typeMap, { theme, isMobile, anchorTarget, relValue, config }),
           decorators: combinedDecorators },
         options)}
@@ -126,6 +127,7 @@ Preview.propTypes = {
   typeMappers: PropTypes.arrayOf(PropTypes.func),
   theme: PropTypes.object,
   isMobile: PropTypes.bool,
+  isRtl: PropTypes.bool,
   decorators: PropTypes.arrayOf(PropTypes.shape({
     component: PropTypes.func.isRequired,
     strategy: PropTypes.func.isRequired,
