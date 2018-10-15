@@ -10,6 +10,12 @@
 
 ## [Unreleased]
 
+
+### :bug: Bug Fix
+
+- `soundcloud`
+  - Fix soundcloud modal layout in mobile view
+
 ## 1.6.5 (Oct 3, 2018)
 
 ### :rocket: New Feature
@@ -48,10 +54,6 @@
 - `soundcloud`
   - [#92](https://github.com/wix-incubator/rich-content/pull/92) `plugin-sound-cloud` implemented
 
-### :bug: Bug Fix
-
-- `soundcloud`
-  - Fix soundcloud modal layout in mobile view
 
 ### :bug: Bug Fix
 
