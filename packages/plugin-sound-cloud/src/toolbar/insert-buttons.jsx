@@ -1,5 +1,5 @@
 import { DEFAULTS } from '../soundCloud';
-import { getModalStyles, TOOLBARS } from 'wix-rich-content-common';
+import { getModalStyles, TOOLBARS, WixUtils } from 'wix-rich-content-common';
 import SoundCloudURLInputModal from './soundCloudURLInputModal';
 import { InsertPluginIcon } from '../icons';
 
@@ -11,6 +11,9 @@ const modalCustomStyle = {
   }
 };
 
+if (WixUtils.isMobile()) {
+  modalCustomStyle.content.minHeight = '202px'
+}
 export default ({ helpers, t }) => {
   return [
     {
