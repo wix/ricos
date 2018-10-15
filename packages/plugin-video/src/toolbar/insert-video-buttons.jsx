@@ -21,7 +21,7 @@ export default ({ helpers, t }) => {
       componentData: DEFAULTS,
       toolbars: [TOOLBARS.FOOTER, TOOLBARS.SIDE],
       modalElement: VideoURLInputModal,
-      modalStyles: getModalStyles({ customStyles: modalCustomStyle, fullScreen: false, inline: false }),
+      modalStyles: getModalStyles({ customStyles: modalCustomStyle, fullScreen: false }),
       // modalStylesFn: ({ buttonRef }) => {
       //   const modalStyles = getModalStyles({ customStyles: modalCustomStyle, fullScreen: false });
       //   const { top, left } = buttonRef.getBoundingClientRect();

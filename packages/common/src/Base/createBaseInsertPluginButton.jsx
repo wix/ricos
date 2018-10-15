@@ -116,9 +116,14 @@ export default ({ blockType, button, helpers, pubsub, t }) => {
 
     toggleButtonModal = event => {
       if (helpers && helpers.openModal) {
-        const modalStyles = button.modalStyles ? button.modalStyles :
-          button.modalStylesFn ?
-            button.modalStylesFn({ buttonRef: event.target, pubsub }) : {};
+
+        let modalStyles = {};
+        if (button.modalStyles) {
+          modalStyles = button.modalStyles;
+        } else if (button.modalStylesFn) {
+          modalStyles = button.modalStylesFn({ buttonRef: event.target, pubsub });
+        }
+
         helpers.openModal({
           modalName: button.modalName,
           modalElement: button.modalElement,
