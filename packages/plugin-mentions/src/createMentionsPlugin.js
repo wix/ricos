@@ -1,6 +1,7 @@
 import { createBasePlugin, mergeStyles, decorateComponentWithProps } from 'wix-rich-content-common';
 import createMentionPlugin from 'draft-js-mention-plugin';
 import { EXTERNAL_MENTIONS_TYPE } from './types';
+import { positionSuggestions } from './positionSuggestions';
 import MentionComponent from './MentionComponent';
 import MentionSuggestionsWrapper from './MentionSuggestionsWrapper';
 import Styles from '../statics/mentions.scss';
@@ -18,6 +19,9 @@ Interface Settings {
   getMentionLink?: (mention: Mention) => string;
   getMentions: (search: string) => Promise<Mention[]>
   onMentionClick: (mention: Mention) => void;
+  repositionSuggestions: boolean, // when you are in iframe and want suggestions to be repositioned if they go out of iframe
+  entryHeight: number, // suggestion entry height
+  additionalHeight: number, // extra spacing in suggestion popup
 }
 */
 
@@ -25,6 +29,9 @@ const defaultSettings = {
   mentionPrefix: '@',
   mentionTrigger: '@',
   getMentionLink: () => '#',
+  repositionSuggestions: true,
+  entryHeight: 34,
+  additionalHeight: 17,
 };
 
 const createExternalMentionsPlugin = (config = {}) => {
@@ -38,6 +45,11 @@ const createExternalMentionsPlugin = (config = {}) => {
     theme: styles,
     mentionPrefix: settings.mentionPrefix,
     mentionTrigger: settings.mentionTrigger,
+    positionSuggestions: positionSuggestions({
+      entryHeight: settings.entryHeight,
+      additionalHeight: settings.additionalHeight,
+      reposition: settings.repositionSuggestions,
+    }),
   });
 
   const inlineModals = [
@@ -54,7 +66,7 @@ const createExternalMentionsPlugin = (config = {}) => {
       type,
       inlineModals,
       settings,
-      ...rest
+      ...rest,
     },
     plugin,
   );

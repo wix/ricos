@@ -1,21 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Tooltip } from 'wix-rich-content-common';
+import { Tooltip, mergeStyles } from 'wix-rich-content-common';
 import { EmojiPluginIcon } from './icons';
+import styles from '../statics/SelectButton.scss';
 
 const SelectButton = ({ t, theme }) => {
+  const mergedStyles = mergeStyles({ styles, theme });
   return (
     <Tooltip content={t('EmojiPlugin_InsertButton_Tooltip')} theme={theme}>
-      <div
-        style={{
-          width: '19px',
-          height: '19px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
-      >
-        <EmojiPluginIcon style={{ width: '15px', height: '15px', paddingBottom: '2px' }} />
+      <div className={mergedStyles.emoji_selectButton}>
+        <span className={mergedStyles.emoji_selectButton_icon}><EmojiPluginIcon /></span>
       </div>
     </Tooltip>
   );

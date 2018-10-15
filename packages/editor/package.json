@@ -58,7 +58,7 @@
   },
   "devDependencies": {
     "@babel/runtime": "7.1.2",
-    "@wix/draft-js": "0.10.163",
+    "@wix/draft-js": "0.10.265",
     "babel-jest": "^23.2.0",
     "classnames": "^2.2.6",
     "enzyme": "^2.9.1",

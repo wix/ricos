@@ -32,6 +32,7 @@ export default {
     // showInsertButtons: false,
   },
   [EXTERNAL_MENTIONS_TYPE]: {
+    repositionSuggestions: true,
     onMentionClick: mention => console.log({ mention }),
     getMentions: searchQuery =>
       new Promise(resolve =>
@@ -40,6 +41,10 @@ export default {
             resolve([
               { name: searchQuery, slug: searchQuery },
               { name: "Test One", slug: "testone" },
+              { name: "Test One.1", slug: "testone1" },
+              { name: "Test One.2", slug: "testone2" },
+              { name: "Test One.3", slug: "testone3" },
+              { name: "Test One.4", slug: "testone4" },
               {
                 name: "Test Two",
                 slug: "testwo",

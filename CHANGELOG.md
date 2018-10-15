@@ -10,11 +10,26 @@
 
 ## [Unreleased]
 
+### :rocket: New Feature
+
+- `common`:
+  - [#154](https://github.com/wix-incubator/rich-content/pull/154) `modalStylesFn` API added to `InsertButtons` structure for dynamic style support
+  - [#154](https://github.com/wix-incubator/rich-content/pull/154) `inline` property added to `getModalStyles` util (transparent overlay)
 
 ### :bug: Bug Fix
 
+- `emoji`
+  - [#154](https://github.com/wix-incubator/rich-content/pull/154) `SelectButton` hard-coded styles are overridable by theme
+- `mentions`
+  - [#148](https://github.com/wix-incubator/rich-content/pull/148) add option `repositionSuggestions` to support better suggestions popup positioning in iframe
 - `soundcloud`
-  - Fix soundcloud modal layout in mobile view
+  - [#156](https://github.com/wix-incubator/rich-content/pull/156) adjusted soundcloud modal layout in mobile view
+- `viewer`
+  - [#153](https://github.com/wix-incubator/rich-content/pull/153) fix: `header-one` is not rendered
+  - [#152](https://github.com/wix-incubator/rich-content/issues/152) white-space render is fixed
+  - [#157](https://github.com/wix-incubator/rich-content/pull/157) add RTL support
+
+<br/>
 
 ## 1.6.5 (Oct 3, 2018)
 

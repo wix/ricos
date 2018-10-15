@@ -17,6 +17,33 @@ const TestData = {
   'basic styles': {
     blocks: [
       {
+        key: "45ded",
+        text: "H1",
+        type: "header-one",
+        depth: 0,
+        inlineStyleRanges: [],
+        entityRanges: [],
+        data: {}
+      },
+      {
+        key: "8mis",
+        text: "H2",
+        type: "header-two",
+        depth: 0,
+        inlineStyleRanges: [],
+        entityRanges: [],
+        data: {}
+      },
+      {
+        key: "8mis",
+        text: "H3",
+        type: "header-three",
+        depth: 0,
+        inlineStyleRanges: [],
+        entityRanges: [],
+        data: {}
+      },
+      {
         key: '61u53',
         text: 'H2 center',
         type: 'unstyled',
