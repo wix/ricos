@@ -47,16 +47,16 @@
 
 - `soundcloud`
   - [#92](https://github.com/wix-incubator/rich-content/pull/92) `plugin-sound-cloud` implemented
-<br/>  
-### :bug: Bug Fix
 
-  - `common`
-    - `BaseComponent` supplies `blockKey` when subscribing for block
-<br/>
 ### :bug: Bug Fix
 
 - `soundcloud`
   - Fix soundcloud modal layout in mobile view
+
+### :bug: Bug Fix
+
+- `html`
+  - [#141](https://github.com/wix-incubator/rich-content/pull/141) width and height component data is now applied on HTML viewer component
 
 <br/>
 
