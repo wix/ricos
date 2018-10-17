@@ -14,6 +14,8 @@
 
 - `viewer`
   - [#152](https://github.com/wix-incubator/rich-content/issues/152) empty blocks are not cleaned up
+- `common`
+  - `modalStylesFn` API added to `InlineButtons` structure for dynamic styling support
 
 <br/>
 
@@ -21,8 +23,8 @@
 
 ### :rocket: New Feature
 
-- `common`:
-  - [#154](https://github.com/wix-incubator/rich-content/pull/154) `modalStylesFn` API added to `InsertButtons` structure for dynamic style support
+- `common`
+  - [#154](https://github.com/wix-incubator/rich-content/pull/154) `modalStylesFn` API added to `InsertButtons` structure for dynamic styling support
   - [#154](https://github.com/wix-incubator/rich-content/pull/154) `inline` property added to `getModalStyles` util (transparent overlay)
 
 ### :bug: Bug Fix
