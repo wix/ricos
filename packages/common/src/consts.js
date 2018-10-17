@@ -33,3 +33,9 @@ export const DISPLAY_MODE = {
   NORMAL: 'NORMAL',
   FLOATING: 'FLOATING'
 };
+
+export const DECORATION_MODE = {
+  PREPEND: 'PREPEND',
+  WRAP: 'WRAP',
+  APPEND: 'APPEND',
+};
