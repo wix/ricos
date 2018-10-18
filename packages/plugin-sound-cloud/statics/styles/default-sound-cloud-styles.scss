@@ -14,7 +14,10 @@
     position: absolute;
     top: 38%;
     left: 50%;
-    margin-left: -134px;
+    width: 100%;
+    padding: 0px 1%;
+    box-sizing: border-box;
+    transform: translateX(-50%);
     color: $primary-text-color-light;
     font-size: 12px;
 }
