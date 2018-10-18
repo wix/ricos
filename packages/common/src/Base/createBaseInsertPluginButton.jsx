@@ -127,6 +127,8 @@ export default ({ blockType, button, helpers, pubsub, t }) => {
         helpers.openModal({
           modalName: button.modalName,
           modalElement: button.modalElement,
+          modalDecorations: button.modalDecorations,
+          buttonRef: event.target,
           modalStyles,
           theme: this.props.theme,
           componentData: button.componentData,

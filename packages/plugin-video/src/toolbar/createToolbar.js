@@ -1,4 +1,4 @@
-import createInlineButtons from './inline-buttons';
+import createInlineButtons from './inline-video-buttons';
 import createInsertButtons from './insert-video-buttons';
 
 export default function createToolbar({ helpers, t }) {

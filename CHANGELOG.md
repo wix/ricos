@@ -10,10 +10,27 @@
 
 ## [Unreleased]
 
+<br/>
+
+## 1.6.7 (Oct 18, 2018)
+
+### :rocket: New Feature
+
+- `common`
+  - [#159](https://github.com/wix-incubator/rich-content/pull/159) `modalDecorations` API is added to `openModal`, `InlineButtons`, `InsertButtons` APIs. Check [documentation](./docs/plugin-development-guidelines/ModalDialogs.md) for more details
+- `link`
+  - [#158](https://github.com/wix-incubator/rich-content/pull/158) customize link behaviour by declaring `onClick` handler in link plugin config
+
 ### :bug: Bug Fix
 
 - `viewer`
   - [#152](https://github.com/wix-incubator/rich-content/issues/152) empty blocks are not cleaned up
+- `common`
+  - `modalStylesFn` API added to `InlineButtons` structure for dynamic styling support
+
+### :book: Documentation
+
+- [#159](https://github.com/wix-incubator/rich-content/pull/159) [Modal Dialogs](./docs/plugin-development-guidelines/ModalDialogs.md) doc added
 
 <br/>
 
@@ -21,8 +38,8 @@
 
 ### :rocket: New Feature
 
-- `common`:
-  - [#154](https://github.com/wix-incubator/rich-content/pull/154) `modalStylesFn` API added to `InsertButtons` structure for dynamic style support
+- `common`
+  - [#154](https://github.com/wix-incubator/rich-content/pull/154) `modalStylesFn` API added to `InsertButtons` structure for dynamic styling support
   - [#154](https://github.com/wix-incubator/rich-content/pull/154) `inline` property added to `getModalStyles` util (transparent overlay)
 
 ### :bug: Bug Fix

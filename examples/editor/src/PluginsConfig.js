@@ -55,7 +55,9 @@ export default {
         )
       )
   },
-  [LINK_TYPE]: {},
+  [LINK_TYPE]: {
+    onClick: (event, url) => console.log('link clicked!', url),
+  },
   [CODE_BLOCK_TYPE]: {},
   [DIVIDER_TYPE]: {},
   [EXTERNAL_EMOJI_TYPE]: {},

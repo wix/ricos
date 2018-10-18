@@ -22,12 +22,6 @@ export default ({ helpers, t }) => {
       toolbars: [TOOLBARS.FOOTER, TOOLBARS.SIDE],
       modalElement: VideoURLInputModal,
       modalStyles: getModalStyles({ customStyles: modalCustomStyle, fullScreen: false }),
-      // modalStylesFn: ({ buttonRef }) => {
-      //   const modalStyles = getModalStyles({ customStyles: modalCustomStyle, fullScreen: false });
-      //   const { top, left } = buttonRef.getBoundingClientRect();
-      //   const modalTop = top > 172 ? top - 172 : top + 172;
-      //   return { ...modalStyles, content: { ...modalStyles.content, top: modalTop, left, margin: 0, position: 'absolute' } };
-      // },
       helpers,
     },
   ];

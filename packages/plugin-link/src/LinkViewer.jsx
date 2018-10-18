@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { normalizeUrl, mergeStyles, validate } from 'wix-rich-content-common';
 import isEqual from 'lodash/isEqual';
+import invoke from 'lodash/invoke';
 import schema from '../statics/data-schema.json';
 import styles from '../statics/link-viewer.scss';
 
@@ -15,6 +16,7 @@ class LinkViewer extends Component {
     children: PropTypes.node,
     anchorTarget: PropTypes.string,
     relValue: PropTypes.string,
+    settings: PropTypes.object,
   };
 
   constructor(props) {
@@ -29,17 +31,26 @@ class LinkViewer extends Component {
     }
   }
 
+  handleClick = event => {
+    invoke(this, 'props.settings.onClick', event, this.getHref());
+  };
+
+  getHref() {
+    return normalizeUrl(this.props.componentData.url);
+  }
+
   render() {
     const { styles, props } = this;
     const { componentData, anchorTarget, relValue, className, children } = props;
-    const { url, target, rel } = componentData;
+    const { target, rel } = componentData;
     const anchorProps = {
-      href: normalizeUrl(url),
+      href: this.getHref(),
       target: target ? target : (anchorTarget || '_self'),
       rel: rel ? rel : (relValue || 'noopener'),
       className: classNames(styles.link, className),
+      onClick: this.handleClick,
     };
-    return <a {...anchorProps} >{children}</a>;
+    return <a {...anchorProps}>{children}</a>;
   }
 }
 
