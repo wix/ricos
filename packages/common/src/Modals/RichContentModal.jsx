@@ -42,7 +42,7 @@ RichContentModal.propTypes = {
   modalElement: PropTypes.func,
   modalProps: PropTypes.object,
   modalDecorations: PropTypes.arrayOf(PropTypes.shape({
-span class="pl-c1">     decorationMode: PropTypes.oneOf(Object.values(DECORATION_MODE)).isRequired,
+    decorationMode: PropTypes.oneOf(Object.values(DECORATION_MODE)).isRequired,
     decorator: PropTypes.func.isRequired,
   })),
 };
