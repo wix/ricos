@@ -13,7 +13,7 @@
 ### :rocket: New Feature
 
 - `common`
-  - `modalDecorations` API is added to `openModal`, `InlineButtons`, `InsertButtons` APIs. Check [documentation](./docs/plugin-development-guidelines/ModalDialogs.md) for more details
+  - [#159](https://github.com/wix-incubator/rich-content/issues/159) `modalDecorations` API is added to `openModal`, `InlineButtons`, `InsertButtons` APIs. Check [documentation](./docs/plugin-development-guidelines/ModalDialogs.md) for more details
 
 ### :bug: Bug Fix
 
@@ -24,7 +24,7 @@
 
 ### :book: Documentation
 
-- [Modal Dialogs](./docs/plugin-development-guidelines/ModalDialogs.md) doc added
+- [#159](https://github.com/wix-incubator/rich-content/issues/159) [Modal Dialogs](./docs/plugin-development-guidelines/ModalDialogs.md) doc added
 
 <br/>
 
