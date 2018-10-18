@@ -12,7 +12,7 @@ Since different consumers have different ways to display modal dialogs, the `ric
 
 ### `RichContentModal` and `RichContentEditorModal` Components
 
-Any `rich-content` consumer application should render at least one instnce of [RichContentModal](../../packages/common/src/Modals/RichContentModal.jsx) **or** [RichContentEditorModal](../../packages/editor/src/RichContentEditor/RichContentEditorModal.jsx).
+Any `rich-content` consumer application should render at least one instance of [RichContentModal](../../packages/common/src/Modals/RichContentModal.jsx) **or** [RichContentEditorModal](../../packages/editor/src/RichContentEditor/RichContentEditorModal.jsx).
 
 The `RichContentModal` is a dialog host, while the `RichContentEditorModal` is a wrapper whose responsibility is to integrate all the installed plugin dialogs into the `RichContentEditor`.
 
