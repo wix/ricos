@@ -80,6 +80,27 @@ The `buttonRef` parameter is the toolbar button DOM element. The `pubsub` parame
 
 **Note:** if both `modalStyles` and `modalStylesFn` properties are defined in the same button structure, then the `modalStyles` is applied, and the `modalStylesFn` is ignored.
 
-## Modal Decorations
+## Dialog Decorations
 
-### Decoration Modes
+Sometimes the dialog is required to have custom features like a chevron. To support this requirement, the custom modal decorations were added.
+
+The modal decorations allow to wrap the dialog content in a custom decorator, and add a custom decorator before or after the dialog content. The decorator accepts all the props passed to the dialog component.
+
+### `modalDecorations` API
+
+The decorators are provided by populating the `modalDecorations` property of the `openModal` configuration object. It also can be passed within the toolbar button definition structure. The value is expected to be an array of objects:
+
+```js
+
+modalDecorations: [{
+  decorationMode: DECORATION_MODE.PREPEND | DECORATION_MODE.APPEND | DECORATION_MODE.WRAP,
+  decorator: Component
+},]
+
+```
+
+The number of decorators is not limited, and their rendering order is defined by their order in array. The decoration mode is defined by `decorationMode` property.
+
+#### Decoration Modes
+
+The `DECORATION_MODE` emuneration is defined in [consts.js](../../packages/common/src/consts). It defines 3 possible values: PREPEND, APPEND, and WRAP. The PREPEND mode adds a decorator before the dialog content, WRAP mode wraps the dialog content in decorator, and the APPEND adds the decorator after the content.
