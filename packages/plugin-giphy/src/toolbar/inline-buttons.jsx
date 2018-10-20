@@ -1,18 +1,8 @@
-import { BUTTONS, getModalStyles, WixUtils } from 'wix-rich-content-common';
+import { BUTTONS, getModalStyles, WixUtils, DECORATION_MODE } from 'wix-rich-content-common';
 import { Modals } from '../modals';
 import { MediaReplaceIcon } from '../icons';
-
-const mobileFullScreenCustomStyle = {
-  overlay: {
-    backgroundColor: 'transparent'
-  },
-  content: {
-    top: 0,
-    left: 0,
-    overflow: 'hidden',
-    paddingRight: '6px'
-  }
-};
+import { MobileFullScreenCustomStyle, DesktopFlyOutModalStyles } from '../constants';
+import Arrow from './arrow';
 
 export default ({ t }) => {
   return [
@@ -30,12 +20,20 @@ export default ({ t }) => {
       icon: MediaReplaceIcon,
       modalName: Modals.GIPHY_API_INPUT,
       modalStyles: WixUtils.isMobile() ?
-        getModalStyles({ customStyles: mobileFullScreenCustomStyle, fullScreen: true }) : getModalStyles({ isFlyOutModal: true }),
-      style: WixUtils.isMobile() ?
-        getModalStyles({ customStyles: mobileFullScreenCustomStyle, fullScreen: true }) : getModalStyles({ isFlyOutModal: true }),
+        getModalStyles({ customStyles: MobileFullScreenCustomStyle, fullScreen: true }) : null,
+      modalStylesFn: ({ buttonRef }) => {
+        const modalStyles = getModalStyles({ customStyles: DesktopFlyOutModalStyles, fullScreen: true });
+        const { top, left } = buttonRef.getBoundingClientRect();
+        const modalLeft = left - 15;
+        const modalTop = top > 357 ? top - 365 : top + 30;
+        return { ...modalStyles, content: { ...modalStyles.content, top: modalTop, left: modalLeft, margin: 0, position: 'absolute' } };
+      },
+      modalDecorations: [{
+        decorationMode: DECORATION_MODE.APPEND,
+        decorator: Arrow
+      }],
       mobile: true,
       tooltipTextKey: 'ReplaceGiphyButton_Tooltip',
-      isFlyOutModal: true,
       t,
     },
     { keyName: 'delete', type: BUTTONS.DELETE, mobile: true },

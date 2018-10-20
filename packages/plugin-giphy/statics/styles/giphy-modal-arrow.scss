@@ -1,0 +1,30 @@
+@import "~wix-rich-content-common/dist/statics/styles/mixins";
+@import "~wix-rich-content-common/dist/statics/styles/palette";
+
+.down_arrow {
+  border: solid #ccc;
+  border-width: 0 1px 1px 0;
+  padding: 6px;
+  position: absolute;
+  background: #fff;
+  display: block;
+  z-index: 20;
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+  bottom: -7px;
+  display: block;
+}
+
+.up_arrow {
+  border: solid #ccc;
+  border-width: 0 1px 1px 0;
+  padding: 6px;
+  position: absolute;
+  background: #fff;
+  display: block;
+  z-index: 20;
+  -webkit-transform: rotate(-135deg);
+  transform: rotate(-135deg);
+  bottom: 349px;
+  display: block;
+}
