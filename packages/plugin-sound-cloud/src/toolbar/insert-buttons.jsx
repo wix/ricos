@@ -13,9 +13,6 @@ const modalCustomStyle = {
 
 if (WixUtils.isMobile()) {
   modalCustomStyle.content.minHeight = '202px';
-  modalCustomStyle.content.transform = 'translateX(-50%) translateY(-50%)';
-  modalCustomStyle.content.margin = '0px';
-  modalCustomStyle.content.left = '50%';
 }
 export default ({ helpers, t }) => {
   return [
