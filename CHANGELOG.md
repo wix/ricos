@@ -10,6 +10,11 @@
 
 ## [Unreleased]
 
+### :bug: Bug Fix
+
+- `soundcloud`
+  - fix cropped message in mobile view 
+
 ### :rocket: New Feature
 
 - `common`
