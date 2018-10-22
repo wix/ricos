@@ -17,7 +17,7 @@ class Arrow extends Component {
 
     return (
       <div>
-        <div className={(top > 357) ? styles.arrow_down : styles.arrow_up} />
+        <div className={styles[`arrow_${ top > 357 ? 'down' : 'up' }`]} />
       </div>
     );
   }
