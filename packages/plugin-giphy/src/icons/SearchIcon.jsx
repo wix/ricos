@@ -12,7 +12,7 @@ const SearchIcon = props => (
     <g fill="none" fillRule="evenodd">
       <path fill="#FFF" d="M-287-84H33v570h-320z" />
       <path
-        fill="#000"
+        fill="currentColor"
         fillRule="nonzero"
         d="M9.905 9l3.031 3.072a.2.2 0 0 1 0 .281l-.623.632a.2.2 0 0 1-.285 0L9 9.917 9.905 9zM5.5 11a5.5 5.5 0 1 1 0-11 5.5 5.5 0 0 1 0 11zm0-1a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9z"
         opacity=".7"

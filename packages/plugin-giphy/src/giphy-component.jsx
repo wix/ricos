@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { mergeStyles } from 'wix-rich-content-common';
 import GiphyViewer from './giphy-viewer';
-import styles from '../statics/styles/default-giphy-styles.scss';
 import { GIPHY_TYPE } from './constants';
+import styles from '../statics/styles/giphy-viewer.scss';
 
 class GiphyComponent extends Component {
   static type = {

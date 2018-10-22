@@ -13,6 +13,7 @@ const createGiphyPlugin = (config = {}) => {
     toolbar: createToolbar({
       helpers,
       t,
+      settings,
     }),
     helpers,
     settings,

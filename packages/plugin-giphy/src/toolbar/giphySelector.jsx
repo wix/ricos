@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
-import { SEARCH_TYPE, giphyApiClient, PAGE_SIZE, WAIT_INTERVAL } from '../constants';
-import InfiniteScroll from 'react-infinite-scroller';
 import PropTypes from 'prop-types';
-import styles from '../../statics/styles/giphy-selecter.scss';
+import { mergeStyles } from 'wix-rich-content-common';
+import InfiniteScroll from 'react-infinite-scroller';
 import MDSpinner from 'react-md-spinner';
 import { Scrollbars } from 'react-custom-scrollbars';
+import { SEARCH_TYPE, PAGE_SIZE, WAIT_INTERVAL } from '../constants';
 import { PoweredByGiphy } from '../icons';
+import styles from '../../statics/styles/giphy-selecter.scss';
+
+
 
 class GiphySelector extends Component {
   constructor(props) {
@@ -19,11 +22,14 @@ class GiphySelector extends Component {
       page: 0,
       didFail: false
     };
+    this.styles = mergeStyles({ styles, theme: this.props.theme });
+    const gphApiClient = require('giphy-js-sdk-core');
+    this.GiphySdkCore = gphApiClient(this.props.GiphySdkApiKey);
   }
 
   getGifs = (searchTag, page) => {
     if (searchTag) {
-      giphyApiClient
+      this.GiphySdkCore
         .search(SEARCH_TYPE, { q: searchTag, offset: page * PAGE_SIZE, limit: PAGE_SIZE })
         .then(response => {
           if (page > 1) {
@@ -37,7 +43,7 @@ class GiphySelector extends Component {
           this.setState({ didFail: true, hasMoreItems: false });
         });
     } else {
-      giphyApiClient
+      this.GiphySdkCore
         .trending(SEARCH_TYPE, { limit: 100 })
         .then(response => {
           this.setState({ gifs: response.data, hasMoreItems: false, didFail: false });
@@ -96,19 +102,20 @@ class GiphySelector extends Component {
   }
 
   render() {
+    const { styles } = this;
     const { t } = this.props;
-    const loader = <div className={styles.spinner}> <MDSpinner singleColor="#000000" /></div>;
+    const loader = <div className={styles.giphy_selecter_spinner}> <MDSpinner singleColor="#000000" /></div>;
     const trending = (!this.props.searchTag) ? t('GiphyPlugin_Trending') : null;
     return (
       <div>
-        <div className={styles.container}>
-          <div className={styles.trending}>{trending}</div>
-          <PoweredByGiphy className={styles.powerdByGiphy} />
+        <div className={styles.giphy_selecter_container}>
+          <div className={styles.giphy_selecter_trending}>{trending}</div>
+          <PoweredByGiphy className={styles.giphy_selecter_powerdByGiphy} />
         </div>
-        <div className={styles.infinite_scroll_container}>
+        <div className={styles.giphy_selecter_infinite_scroll_container}>
           <Scrollbars
-            renderThumbVertical={() => <div className={styles.scrollbarThumb} />}
-            className={styles.customize_scrollbar_container}
+            renderThumbVertical={() => <div className={styles.giphy_selecter_scrollbarThumb} />}
+            className={styles.giphy_selecter_customize_scrollbar_container}
           >
             <InfiniteScroll
               pageStart={0}
@@ -116,7 +123,7 @@ class GiphySelector extends Component {
               hasMore={this.state.hasMoreItems}
               loader={(!this.state.didFail) ? loader : null}
               useWindow={false}
-              className={styles.infinite_scroll}
+              className={styles.giphy_selecter_infinite_scroll}
             >
               {this.state.gifs.map((gif, i) => {
                 return (
@@ -124,18 +131,18 @@ class GiphySelector extends Component {
                     key={gif.id.toString() + i}
                     role="button"
                     tabIndex="0"
-                    className={styles.gif_img}
+                    className={styles.giphy_selecter_gif_img_container}
                     onKeyPress={this.handleKeyPress}
                     onClick={() => this.onClick(gif)}
                   >
-                    <img src={gif.images.fixed_width_downsampled.gif_url} alt={'gif'} />
+                    <img className={styles.giphy_selecter_gif_img} src={gif.images.fixed_width_downsampled.gif_url} alt={'gif'} />
                   </div>
                 );
               })}
             </InfiniteScroll>
           </Scrollbars>
         </div>
-        {(this.state.didFail) ? <div className={styles.error_msg}> {t('GiphyPlugin_ApiErrorMsg')}</div> : null}
+        {(this.state.didFail) ? <div className={styles.giphy_selecter_error_msg}> {t('GiphyPlugin_ApiErrorMsg')}</div> : null}
       </div>
     );
   }
@@ -149,7 +156,9 @@ GiphySelector.propTypes = {
   gifs: PropTypes.array,
   onCloseRequested: PropTypes.func,
   onConfirm: PropTypes.func,
-  t: PropTypes.func
+  theme: PropTypes.object.isRequired,
+  t: PropTypes.func,
+  GiphySdkApiKey: PropTypes.string.isRequired,
 };
 
 export default GiphySelector;

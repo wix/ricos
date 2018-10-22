@@ -2,14 +2,48 @@
   "$id": "http://path/to/schema.json",
   "type": "object",
   "properties": {
-    "src": {
-      "$id": "/properties/src",
-      "type": "string",
-      "title": "Giphy Source URL",
-      "default": "",
-      "examples": [
-        "https://www.youtube.com/watch?v=eqZVIiD6wSg"
-      ]
+    "gif": {
+      "$id": "/properties/gif",
+      "type": "object",
+      "title": "Giphy Source",
+      "properties": {
+        "originalUrl": {
+          "$id": "/properties/gif/properties/originalUrl",
+          "type": "string",
+          "title": "original gif url",
+          "default": "",
+          "examples": [
+            "https://media3.giphy.com/media/5BYvjhtjsQdoyx9JT9/giphy.gif"
+          ]
+        },
+        "stillUrl": {
+          "$id": "/properties/gif/properties/stillUrl",
+          "type": "string",
+          "title": "still gif image url",
+          "default": "",
+          "examples": [
+            "https://media3.giphy.com/media/5BYvjhtjsQdoyx9JT9/giphy_s.gif"
+          ]
+        },
+        "height": {
+          "$id": "/properties/gif/properties/height",
+          "type": "integer",
+          "title": "gid height",
+          "default": "",
+          "examples": [
+            "50"
+          ]
+        },
+        "width": {
+          "$id": "/properties/gif/properties/width",
+          "type": "integer",
+          "title": "gif width",
+          "default": "",
+          "examples": [
+            "50"
+          ]
+        }
+      }
     },
     "config": {
       "$id": "/properties/config",
@@ -35,15 +69,6 @@
             "left",
             "right",
             "center"
-          ]
-        },
-        "textWrap": {
-          "$id": "/properties/config/properties/textWrap",
-          "type": "string",
-          "title": "The Textwrap Schema ",
-          "default": "nowrap",
-          "examples": [
-            "nowrap"
           ]
         },
         "key": {

@@ -1,10 +1,10 @@
-import { BUTTONS, getModalStyles, WixUtils, DECORATION_MODE } from 'wix-rich-content-common';
-import { Modals } from '../modals';
+import { BUTTONS, getModalStyles, WixUtils, DECORATION_MODE, decorateComponentWithProps } from 'wix-rich-content-common';
 import { MediaReplaceIcon } from '../icons';
+import GiphyApiInputModal from './giphyApiInputModal';
 import { MobileFullScreenCustomStyle, DesktopFlyOutModalStyles } from '../constants';
 import Arrow from './arrow';
 
-export default ({ t }) => {
+export default ({ t, settings }) => {
   return [
     { keyName: 'sizeOriginal', type: BUTTONS.SIZE_ORIGINAL, mobile: false },
     { keyName: 'sizeSmallCenter', type: BUTTONS.SIZE_SMALL_CENTER, mobile: false },
@@ -18,7 +18,7 @@ export default ({ t }) => {
       keyName: 'replace',
       type: BUTTONS.EXTERNAL_MODAL,
       icon: MediaReplaceIcon,
-      modalName: Modals.GIPHY_API_INPUT,
+      modalElement: decorateComponentWithProps(GiphyApiInputModal, settings),
       modalStyles: WixUtils.isMobile() ?
         getModalStyles({ customStyles: MobileFullScreenCustomStyle, fullScreen: true }) : null,
       modalStylesFn: ({ buttonRef }) => {

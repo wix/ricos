@@ -5,6 +5,7 @@ import { HASHTAG_TYPE } from "wix-rich-content-plugin-hashtag";
 import { HTML_TYPE } from "wix-rich-content-plugin-html";
 import { LINK_TYPE } from "wix-rich-content-plugin-link";
 import { VIDEO_TYPE } from "wix-rich-content-plugin-video";
+import { GIPHY_TYPE } from "wix-rich-content-plugin-giphy";
 import { EXTERNAL_MENTIONS_TYPE } from "wix-rich-content-plugin-mentions";
 import { TOOLBARS, BUTTONS, DISPLAY_MODE } from "wix-rich-content-common";
 
@@ -65,6 +66,9 @@ export default {
     toolbar: {
       hidden: []
     }
+  },
+  [GIPHY_TYPE]: {
+    GiphySdkApiKey: "wv9cEt7t1nu5wFYinAs73zwDzrrclGqk"
   },
   uiSettings,
   getToolbarSettings: ({ pluginButtons, textButtons }) => [
@@ -181,5 +185,5 @@ export default {
     //     desktop: () => InlineToolbarDecoration
     //   })
     // }
-   ]
+  ]
 };

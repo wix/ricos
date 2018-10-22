@@ -36,18 +36,31 @@ export default class GiphyApiInputModal extends Component {
     const { styles } = this;
     const { t, theme } = this.props;
     const searchTag = this.state.searchTag;
-    const backButton = <div className={styles.backButton} onClick={this.onCloseRequested} role="button" tabIndex="0" onKeyPress={null} />;
-    const mobileNavbar = <div><div className={styles.header} /> <div className={styles.navbar}>Choose a gif</div></div>;
+    const backButton =
+      (<div
+        className={styles.giphy_api_input_modal_backButton}
+        onClick={this.onCloseRequested}
+        role="button"
+        tabIndex="0"
+        onKeyPress={null}
+      />);
+    const mobileNavbar =
+      (
+        <div>
+          <div className={styles.giphy_api_input_modal_header} />
+          <div className={styles.giphy_api_input_modal_navbar}>Choose a gif</div>
+        </div>
+      );
     return (
       <div>
         {(WixUtils.isMobile()) ? <div>{mobileNavbar}{backButton}</div> : null}
-        <div className={styles.container} data-hook="giphyUploadModal">
-          <div className={styles.search_textinput_group} >
+        <div className={styles.giphy_api_input_modal_container} data-hook="giphyUploadModal">
+          <div className={styles.giphy_api_input_modal_search_textinput_group} >
             <TextInput
               inputRef={ref => {
                 this.input = ref;
               }}
-              className={styles.search}
+              className={styles.giphy_api_input_modal_search}
               onKeyPress={this.handleKeyPress}
               onChange={this.onChange}
               value={this.state.searchTag}
@@ -55,7 +68,7 @@ export default class GiphyApiInputModal extends Component {
               theme={theme}
               data-hook="giphyUploadModalInput"
             />
-            <div className={styles.searchIcon} >
+            <div className={styles.giphy_api_input_modal_searchIcon} >
               {(!this.state.searchTag) ?
                 <SearchIcon /> :
                 <div onClick={this.handleClearText} role="button" tabIndex="0" onKeyPress={null}>

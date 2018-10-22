@@ -1,10 +1,10 @@
 import { DEFAULTS, MobileFullScreenCustomStyle, DesktopFlyOutModalStyles } from '../constants';
-import { getModalStyles, TOOLBARS, WixUtils, DECORATION_MODE } from 'wix-rich-content-common';
+import { getModalStyles, TOOLBARS, WixUtils, DECORATION_MODE, decorateComponentWithProps } from 'wix-rich-content-common';
 import GiphyApiInputModal from './giphyApiInputModal';
 import { InsertPluginIcon, InsertPluginMobileIcon } from '../icons';
 import Arrow from './arrow';
 
-export default ({ helpers, t }) => {
+export default ({ helpers, t, settings }) => {
   return [
     {
       type: 'modal',
@@ -13,7 +13,7 @@ export default ({ helpers, t }) => {
       Icon: WixUtils.isMobile() ? InsertPluginMobileIcon : InsertPluginIcon,
       componentData: DEFAULTS,
       toolbars: [TOOLBARS.FOOTER],
-      modalElement: GiphyApiInputModal,
+      modalElement: decorateComponentWithProps(GiphyApiInputModal, settings),
       modalStyles: WixUtils.isMobile() ?
         getModalStyles({ customStyles: MobileFullScreenCustomStyle, fullScreen: true }) : null,
       modalStylesFn: ({ buttonRef }) => {

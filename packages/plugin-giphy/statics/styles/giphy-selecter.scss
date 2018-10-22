@@ -1,14 +1,14 @@
 @import "~wix-rich-content-common/dist/statics/styles/mixins";
 @import "~wix-rich-content-common/dist/statics/styles/palette";
 
-.container {
+.giphy_selecter_container {
   padding-bottom: 17px;
   width: 100%;
   padding-top: 5px;
   display: block;
 }
 
-.infinite_scroll_container {
+.giphy_selecter_infinite_scroll_container {
   position: absolute;
   width: calc(100% - 20px);
   left: 18px;
@@ -30,30 +30,30 @@
   }
 }
 
-.infinite_scroll {
+.giphy_selecter_infinite_scroll {
   width: calc(100% - 15px);
   @include phone {
     width: 100%;
   }
 }
 
-.customize_scrollbar_container {
+.giphy_selecter_customize_scrollbar_container {
   height: 100%;
 }
 
-.headerInfiniteScroll {
+.giphy_selecter_headerInfiniteScroll {
   padding-right: 18px;
   padding-bottom: 6px;
 }
 
-.scrollbarThumb {
+.giphy_selecter_scrollbarThumb {
   background: #000000;
   border-radius: 4px;
   width: 4px;
   margin-left: -2px;
 }
 
-.trending {
+.giphy_selecter_trending {
   font-family: Helvetica;
   font-size: 10px;
   font-style: oblique;
@@ -62,7 +62,7 @@
   float: left;
 }
 
-.powerdByGiphy {
+.giphy_selecter_powerdByGiphy {
   text-align: right;
   float: right;
   padding-top: 4px;
@@ -72,31 +72,31 @@
   }
 }
 
-.gif_img {
+.giphy_selecter_gif_img_container {
   margin-bottom: 18px;
-  img {
-    background: #eee;
-    min-height: 50px;
-    width: 100%;
-    display: block;
-    @include phone {
-      width: 100%;
-      margin-bottom: 21px;
-    }
-  }
-
   @include phone {
     margin-right: 0px;
   }
   cursor: pointer;
 }
 
-.spinner {
+.giphy_selecter_gif_img {
+  background: #eee;
+  min-height: 50px;
+  width: 100%;
+  display: block;
+  @include phone {
+    width: 100%;
+    margin-bottom: 21px;
+  }
+}
+
+.giphy_selecter_spinner {
   margin-top: 10px;
   text-align: center;
 }
 
-.error_msg {
+.giphy_selecter_error_msg {
   line-height: 30px;
   position: absolute;
   top: 50%;
