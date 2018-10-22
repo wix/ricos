@@ -10,6 +10,10 @@
 
 ## [Unreleased]
 
+<br/>
+
+## 1.6.7 (Oct 18, 2018)
+
 ### :bug: Bug Fix
 
 - `soundcloud`
