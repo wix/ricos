@@ -28,7 +28,7 @@
         "height": {
           "$id": "/properties/gif/properties/height",
           "type": "integer",
-          "title": "gid height",
+          "title": "gif height",
           "default": "",
           "examples": [
             "50"

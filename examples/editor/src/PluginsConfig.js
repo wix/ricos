@@ -68,7 +68,7 @@ export default {
     }
   },
   [GIPHY_TYPE]: {
-    GiphySdkApiKey: "wv9cEt7t1nu5wFYinAs73zwDzrrclGqk"
+    giphySdkApiKey: "wv9cEt7t1nu5wFYinAs73zwDzrrclGqk"
   },
   uiSettings,
   getToolbarSettings: ({ pluginButtons, textButtons }) => [

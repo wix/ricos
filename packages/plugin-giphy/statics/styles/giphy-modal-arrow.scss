@@ -1,22 +1,22 @@
-%arrow {
+%giphy_modal_arrow {
   border: solid #ccc;
   border-width: 0 1px 1px 0;
   padding: 6px;
   position: absolute;
   background: #fff;
   display: block;
-  z-index: 7;
+  z-index: 6;
 }
 
-.arrow_down {
-  @extend %arrow;
+.giphy_modal_arrow_down {
+  @extend %giphy_modal_arrow;
   transform: rotate(45deg);
   bottom: -7px;
   
 }
 
-.arrow_up {
-  @extend %arrow;
+.giphy_modal_arrow_up {
+  @extend %giphy_modal_arrow;
   transform: rotate(-135deg);
   bottom: 349px;
  

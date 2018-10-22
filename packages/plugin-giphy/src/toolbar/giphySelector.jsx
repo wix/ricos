@@ -24,12 +24,12 @@ class GiphySelector extends Component {
     };
     this.styles = mergeStyles({ styles, theme: this.props.theme });
     const gphApiClient = require('giphy-js-sdk-core');
-    this.GiphySdkCore = gphApiClient(this.props.GiphySdkApiKey);
+    this.giphySdkCore = gphApiClient(this.props.giphySdkApiKey);
   }
 
   getGifs = (searchTag, page) => {
     if (searchTag) {
-      this.GiphySdkCore
+      this.giphySdkCore
         .search(SEARCH_TYPE, { q: searchTag, offset: page * PAGE_SIZE, limit: PAGE_SIZE })
         .then(response => {
           if (page > 1) {
@@ -43,7 +43,7 @@ class GiphySelector extends Component {
           this.setState({ didFail: true, hasMoreItems: false });
         });
     } else {
-      this.GiphySdkCore
+      this.giphySdkCore
         .trending(SEARCH_TYPE, { limit: 100 })
         .then(response => {
           this.setState({ gifs: response.data, hasMoreItems: false, didFail: false });
@@ -158,7 +158,7 @@ GiphySelector.propTypes = {
   onConfirm: PropTypes.func,
   theme: PropTypes.object.isRequired,
   t: PropTypes.func,
-  GiphySdkApiKey: PropTypes.string.isRequired,
+  giphySdkApiKey: PropTypes.string.isRequired,
 };
 
 export default GiphySelector;
