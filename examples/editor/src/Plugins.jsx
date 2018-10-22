@@ -7,7 +7,6 @@ import { createDividerPlugin } from 'wix-rich-content-plugin-divider';
 import { createExternalMentionsPlugin } from 'wix-rich-content-plugin-mentions';
 import { createCodeBlockPlugin } from 'wix-rich-content-plugin-code-block';
 import { createSoundCloudPlugin } from 'wix-rich-content-plugin-sound-cloud';
-import { createSoundCloudPlugin } from 'wix-rich-content-plugin-sound-cloud';
 import { createGiphyPlugin } from 'wix-rich-content-plugin-giphy';
 
 import 'wix-rich-content-common/dist/styles.min.css';
