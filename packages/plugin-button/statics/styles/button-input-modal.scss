@@ -1,0 +1,76 @@
+@import '~wix-rich-content-common/dist/statics/styles/mixins';
+@import '~wix-rich-content-common/dist/statics/styles/palette';
+
+.container {
+    padding: 20px 20px 20px;
+    @include phone {
+        padding: 24px 18px 30px;
+    }
+}
+
+.closeIcon {
+    position: absolute;
+    right: 30px;
+    top: 30px;
+    cursor: pointer;
+}
+
+.cameraIcon {
+    width: 18px;
+}
+
+.errorIcon {
+    width: 13px;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+}
+
+.header_text {
+    font-size: 16px;
+    margin: 8px 0 8px 0;
+}
+
+.header_icon {
+    margin-right: 12px;
+}
+
+.soundCloudUrlInputModal_textInput {
+    margin: 8px 0 24px 0;
+    input[type = 'url'] {
+        padding-right: 18px;
+    } 
+}
+
+.toggle{
+    padding-top: 20px;
+    width: 100%;
+    height: 50px;
+}
+.settings{
+height: auto;
+width:calc(50% - 20px) ;
+background: #F5F8FB;
+float: left;
+text-align: center;
+padding: 10px;
+border-radius: 10px 10px 0px 0px;  
+cursor: pointer;
+}
+.design{
+    height: auto;
+    width: calc(50% - 20px) ;
+    background: #F5F8FB;
+   float: right;
+   text-align: center;
+   padding: 10px;
+   border-radius: 10px 10px 0px 0px;   
+   cursor: pointer;
+}
+.modal_footer {
+    border: none !important;
+    padding: 0 !important;
+    height: 40px !important;
+}
