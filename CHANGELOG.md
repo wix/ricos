@@ -10,8 +10,6 @@
 
 ## [Unreleased]
 
-## 1.6.8 (Oct 20, 2018)
-
 ### :rocket: New Feature
 
 - `giphy`
