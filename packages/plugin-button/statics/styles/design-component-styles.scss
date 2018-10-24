@@ -1,4 +1,20 @@
 .row{
-    height: 100px;
+    height: auto;
     width: 100%;
+    border-bottom: 2px solid #f5f5f5;
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+.design_component{
+    padding: 0px 30px 30px 30px;
+}
+.radioItem {
+    label{
+        display: block;
+        padding: 8px;
+    }
+}
+.button_samples{
+    text-align: center;
+    
 }

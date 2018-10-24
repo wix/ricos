@@ -1,8 +1,50 @@
 import React, { PureComponent } from 'react'
-import { SliderWithInput, SettingsPanelFooter } from 'wix-rich-content-common';
+import { SliderWithInput, RadioGroup } from 'wix-rich-content-common';
 import { mergeStyles } from 'wix-rich-content-common';
+import classNames from 'classnames';
+import ColorPicker from '../components/color-picker';
+import ButtonSample from '../components/button-sample';
 import styles from '../../statics/styles/design-component-styles.scss';
 
+const arr =[
+    {
+        border: '1px solid #0261FF',
+        background: '#0261FF',
+        color: 'white',
+        borderRadius: '0px'
+
+    },
+    {
+        border: '1px solid #0261FF',
+        background: 'white',
+        color: '#0261FF',
+        borderRadius: '0px'
+
+    },
+    {
+        border: '1px solid #0261FF',
+        background: '#B5D1FF',
+        color: '#0261FF',
+        borderRadius: '0px'
+
+    },
+    {
+        border: '1px solid #0261FF',
+        background: '#B5D1FF',
+        color: '#0261FF',
+        borderRadius: '8px'
+
+    },
+    {
+        border: '5px solid #0261FF',
+        background: 'white',
+        color: '#0261FF',
+        borderRadius: '0px'
+
+    },
+
+
+]
 
 class DesignComponent extends PureComponent {
 
@@ -11,13 +53,12 @@ class DesignComponent extends PureComponent {
         this.styles = mergeStyles({ styles, theme: props.theme });
         const { componentData } = this.props;
         this.state = {
-            textSize: componentData.textSize || '5',
+            width: componentData.width || 20,
+            buttonSize: componentData.buttonSize || 'M',
         }
 
     }
-    onSliderStatusChange = (value) => {
-        this.setState({ textSize: value });
-    }
+
 
     onCloseRequested = () => {
         this.setState({ isOpen: false });
@@ -43,33 +84,74 @@ class DesignComponent extends PureComponent {
         this.setState({ submitted: true });
 
     };
+    onRadioButtonsChange = (value) => {
+        this.setState({ buttonSize: value });
+    }
+    onSliderStatusChange = (value) => {
+        this.setState({ textSize: value });
+    }
 
     render() {
         const styles = this.styles;
         const { theme, t } = this.props;
+        const sizeOptions = [
+            { value: 'L', labelText: 'L' },
+            { value: 'M', labelText: 'M' },
+            { value: 'S', labelText: 'S' },
+        ]
         console.log('changed', this.state.textSize);
         return (
-            <div>
+            <div className={styles.design_component}>
+                <div className={classNames(styles.row, styles.button_samples)}>
+                    <ButtonSample style={arr[0]} />
+                    <ButtonSample style={arr[1]}/>
+                    <ButtonSample style={arr[2]} />
+                    <ButtonSample style={arr[3]}/>
+                    <ButtonSample style={arr[4]}/>
+                </div>
                 <div className={styles.row} >
-                    Text Size:
-                <SliderWithInput
-                        value={100}
-                        min={5}
-                        max={200}
-                        onChange={this.onSliderStatusChange.bind(this)}
-                        theme={styles}
+                    Size
+                    <br /><br />
+                    <RadioGroup
+                        label='Size'
+                        dataSource={sizeOptions}
+                        value={this.state.buttonSize}
+                        onChange={this.onRadioButtonsChange.bind(this)}
+                        theme={theme}
+                        className={styles.radioItem}
                     />
 
                 </div>
-                <SettingsPanelFooter
-                    className={styles.modal_footer}
-                    save={() => this.onConfirm()}
-                    cancel={() => this.onCloseRequested()}
-                    saveLabel={'Add Now'}
-                    cancelLabel={'Cancel'}
-                    theme={theme}
-                    t={t}
-                />
+                <div className={styles.row} >
+                    Border
+                    <br /><br />
+                    <SliderWithInput
+                        value={parseInt(this.state.width, 10)}
+                        min={0}
+                        max={30}
+                        label="width"
+                        onChange={this.onSliderStatusChange.bind(this)}
+                        theme={theme}
+                    />
+                    <SliderWithInput
+                        value={10}
+                        min={0}
+                        max={30}
+                        label="Height"
+                        onChange={this.onSliderStatusChange.bind(this)}
+                        theme={theme}
+                    />
+
+                </div>
+                <div className={styles.row} >
+                    Color
+                    <br /><br />
+                    <ColorPicker theme={theme} initialColor={'white'}>Text</ColorPicker>
+                    <ColorPicker theme={theme} initialColor={'#0261FF'}>Border</ColorPicker>
+                    <ColorPicker theme={theme} initialColor={'#B5D1FF'}>Background</ColorPicker>
+
+
+                </div>
             </div>
         );
     }

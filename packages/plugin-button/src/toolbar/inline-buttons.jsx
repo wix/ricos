@@ -5,13 +5,11 @@ import ButtonInputModal from './buttonInputModal';
 const custumStyleSettingModal = {
   content:
   {
-    padding: '20px',
-    maxWidth: '350px',
+    maxWidth: '450px',
   }
 }
 export default ({ t, anchorTarget, relValue, styles }) => {
   return [
-    { keyName: 'separator2', type: BUTTONS.SEPARATOR, mobile: false },
     { keyName: 'sizeSmallLeft', type: BUTTONS.SIZE_SMALL_LEFT, mobile: false },
     { keyName: 'sizeSmallCenter', type: BUTTONS.SIZE_SMALL_CENTER, mobile: false },
     { keyName: 'sizeSimallRight', type: BUTTONS.SIZE_SMALL_RIGHT, mobile: false },

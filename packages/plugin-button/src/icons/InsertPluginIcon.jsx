@@ -3,7 +3,7 @@ import React from 'react';
 
 
 const InsertPluginIcon = props => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 16 16">
+  <svg xmlns="http://www.w3.org/2000/svg" width="5" height="5" viewBox="0 0 16 16" {...props}>
   <defs>
       <rect id="a" width="16" height="16" rx="3"/>
   </defs>

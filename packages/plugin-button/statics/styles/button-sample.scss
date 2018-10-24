@@ -1,0 +1,17 @@
+%panel_button {
+    padding: 8.5px 24px;
+    border-style: none;
+  }
+
+  %button {
+    font-size: 14px;
+}
+
+.button_sample{
+    @extend %button;
+    @extend %panel_button;
+    color: #fff;
+    background-color: #0261ff;
+    margin: 10px;
+    box-sizing: border-box;
+}

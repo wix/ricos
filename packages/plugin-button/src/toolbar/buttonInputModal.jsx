@@ -1,8 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { MediaReplaceIcon } from '../icons';
 import classNames from 'classnames';
-import { mergeStyles, SettingsPanelFooter, TextInput, CloseIcon } from 'wix-rich-content-common';
+import { mergeStyles, SettingsPanelFooter, TextInput, CloseIcon, Checkbox, Taps } from 'wix-rich-content-common';
 import DesignComponent from './../components/design-component';
 import styles from '../../statics/styles/button-input-modal.scss';
 
@@ -18,10 +17,11 @@ export default class ButtonInputModal extends Component {
       settings: true,
       design: false,
       inlineStyleSettings: {
-        border: '2px solid #D9D4D4',
-        width: '40%',
+        borderBottom: '2px solid #0261ff',
       },
-      inlineStyleDesign: {}
+      inlineStyleDesign: {},
+      newTap: false,
+      nonfollowTag: false
     };
   }
 
@@ -68,30 +68,34 @@ export default class ButtonInputModal extends Component {
     }
   };
 
+  onNewTapChecked = () => {
+    this.setState({newTap:!this.state.newTap});
+  }
+  onNonfollowTagChecked = () => {
+    this.setState({nonfollowTag:!this.state.nonfollowTag});
+  }
+
   onSettingClickHandler = () => {
     const style = {
-      border: '2px solid #D9D4D4',
-      width: '40%',
+      borderBottom: '2px solid #0261ff',
     }
     this.setState({ settings: true, design: false, inlineStyleSettings: style, inlineStyleDesign: {} });
   }
   onDesignClickHandler = () => {
     const style = {
-      border: '2px solid #D9D4D4',
-      width: '40%',
+      borderBottom: '2px solid #0261ff',
     }
     this.setState({ settings: false, design: true, inlineStyleSettings: {}, inlineStyleDesign: style });
   }
   render() {
-    const { url, submitted, buttonName } = this.state;
+    const { url, buttonName } = this.state;
     const { theme, doneLabel, cancelLabel, t } = this.props;
     const { styles } = this;
-    
+
     return (
       <div className={styles.container} data-hook="videoUploadModal">
         <CloseIcon className={classNames(styles.closeIcon)} onClick={() => this.onCloseRequested()} />
         <div role="heading" aria-labelledby="video_modal_hdr" className={classNames(styles.header)}>
-          <MediaReplaceIcon className={classNames(styles.cameraIcon, styles.header_icon)} />
           <h3 id="video_modal_hdr" className={styles.header_text}>
             {t('ButtonModal_Header')}
           </h3>
@@ -104,11 +108,10 @@ export default class ButtonInputModal extends Component {
             Design
         </div>
         </div>
-
         {this.state.settings ?
-          <div>
+          <div className={styles.section_content}>
             <div className={styles.header_text}>
-              What does this button say?
+              Button Text
         </div>
             <div className={styles.videoUrlInputModal_textInput}>
               <TextInput
@@ -126,7 +129,7 @@ export default class ButtonInputModal extends Component {
             </div>
             <br />
             <div >
-              what does it link to?
+              Link
         </div>
             <br />
             <div className={styles.videoUrlInputModal_textInput}>
@@ -143,19 +146,23 @@ export default class ButtonInputModal extends Component {
                 data-hook="ButtonInputModal"
               />
             </div>
-            <br />
-            <SettingsPanelFooter
-              className={styles.modal_footer}
-              save={() => this.onConfirm()}
-              cancel={() => this.onCloseRequested()}
-              saveLabel={doneLabel}
-              cancelLabel={cancelLabel}
-              theme={theme}
-              t={t}
-            />
-          </div> : 
-          <DesignComponent componentData={this.props} theme={theme}/>
+            <div className={styles.checkboxes_group}>
+              <Checkbox checked={this.state.newTap} theme={theme} onChange={this.onNewTapChecked} label='Open link in a new tab' />
+              <Checkbox checked={this.state.nonfollowTag} theme={theme} onChange={this.onNonfollowTagChecked} label='Add a nonfollow tags' />
+            </div>
+          </div> :
+          <DesignComponent componentData={this.props} theme={theme} />
         }
+          <SettingsPanelFooter
+          className={styles.modal_footer}
+            save={() => this.onConfirm()}
+            cancel={() => this.onCloseRequested()}
+            saveLabel={doneLabel}
+            cancelLabel={cancelLabel}
+            theme={theme}
+            t={t}
+          />
+
       </div>
     );
   }

@@ -7,7 +7,7 @@ class ButtonComponent extends PureComponent {
 
     constructor(props) {
         super(props);
-        this.styles = mergeStyles({ styles, theme: this.props.theme });
+        this.styles = mergeStyles({ styles, theme: props.theme });
 
     }
 
@@ -22,7 +22,6 @@ class ButtonComponent extends PureComponent {
             background: componentData.backgroundColor
         }
         let buttonName = (!componentData.buttonName) ? 'Click Me!' : componentData.buttonName;
-        console.log(componentData);
         return (
             <div className={containerClassNames}>
                 <button className={theme.button_primary} href={componentData.src}>
