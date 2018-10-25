@@ -5,10 +5,11 @@ import ButtonInputModal from './buttonInputModal';
 const custumStyleSettingModal = {
   content:
   {
-    maxWidth: '450px',
+    maxWidth: '500px',
   }
-}
-export default ({ t, anchorTarget, relValue, styles }) => {
+};
+
+export default ({ anchorTarget, relValue }) => {
   return [
     { keyName: 'sizeSmallLeft', type: BUTTONS.SIZE_SMALL_LEFT, mobile: false },
     { keyName: 'sizeSmallCenter', type: BUTTONS.SIZE_SMALL_CENTER, mobile: false },

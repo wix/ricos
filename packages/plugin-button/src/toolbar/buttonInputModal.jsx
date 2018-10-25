@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import { mergeStyles, SettingsPanelFooter, TextInput, CloseIcon, Checkbox, Taps } from 'wix-rich-content-common';
+import { mergeStyles, SettingsPanelFooter, TextInput, CloseIcon, Checkbox, Tabs, Tab, FocusManager } from 'wix-rich-content-common';
 import DesignComponent from './../components/design-component';
 import styles from '../../statics/styles/button-input-modal.scss';
 
@@ -14,14 +14,12 @@ export default class ButtonInputModal extends Component {
     this.state = {
       url: componentData.src || '',
       buttonName: componentData.buttonName || 'Click Me!',
-      settings: true,
-      design: false,
       inlineStyleSettings: {
         borderBottom: '2px solid #0261ff',
       },
       inlineStyleDesign: {},
       newTap: false,
-      nonfollowTag: false
+      nonfollowTag: false,
     };
   }
 
@@ -39,12 +37,11 @@ export default class ButtonInputModal extends Component {
 
   onConfirm = () => {
     const { url, buttonName } = this.state;
-    console.log('inputButtonComponent', this.props.pubsub);
     const { componentData, helpers, pubsub, onConfirm } = this.props;
     if (onConfirm) {
-      onConfirm({ ...componentData, src: url, buttonName: buttonName });
+      onConfirm({ ...componentData, src: url, buttonName });
     } else {
-      pubsub.update('componentData', { src: url, buttonName: buttonName });
+      pubsub.update('componentData', { src: url, buttonName });
     }
 
     if (helpers && helpers.onVideoSelected) {
@@ -69,100 +66,90 @@ export default class ButtonInputModal extends Component {
   };
 
   onNewTapChecked = () => {
-    this.setState({newTap:!this.state.newTap});
-  }
-  onNonfollowTagChecked = () => {
-    this.setState({nonfollowTag:!this.state.nonfollowTag});
-  }
+    this.setState({ newTap: !this.state.newTap });
+  };
 
-  onSettingClickHandler = () => {
-    const style = {
-      borderBottom: '2px solid #0261ff',
-    }
-    this.setState({ settings: true, design: false, inlineStyleSettings: style, inlineStyleDesign: {} });
-  }
-  onDesignClickHandler = () => {
-    const style = {
-      borderBottom: '2px solid #0261ff',
-    }
-    this.setState({ settings: false, design: true, inlineStyleSettings: {}, inlineStyleDesign: style });
-  }
+  onNonfollowTagChecked = () => {
+    this.setState({ nonfollowTag: !this.state.nonfollowTag });
+  };
+
   render() {
     const { url, buttonName } = this.state;
     const { theme, doneLabel, cancelLabel, t } = this.props;
     const { styles } = this;
-
+    const settingsSection = (
+      <div className={styles.section_content}>
+        <div className={styles.header_text}>
+          {t('ButtonModal_Button_Text')}
+        </div>
+        <div className={styles.videoUrlInputModal_textInput}>
+          <TextInput
+            inputRef={ref => {
+              this.input = ref;
+            }}
+            type="text"
+            onKeyPress={this.handleKeyPress}
+            onChange={this.onTextChanged}
+            value={buttonName}
+            placeholder={t('ButtonModal_InputName_Placeholder')}
+            theme={theme}
+            data-hook="ButtonInputModal"
+          />
+        </div>
+        <br />
+        <div >
+          {t('ButtonModal_Button_Link')}
+        </div>
+        <br />
+        <div className={styles.videoUrlInputModal_textInput}>
+          <TextInput
+            inputRef={ref => {
+              this.input = ref;
+            }}
+            type="url"
+            onKeyPress={this.handleKeyPress}
+            onChange={this.onUrlChange}
+            value={url}
+            placeholder={t('ButtonModal_InputLink_Placeholder')}
+            theme={theme}
+            data-hook="ButtonInputModal"
+          />
+        </div>
+        <div className={styles.checkboxes_group}>
+          <Checkbox checked={this.state.newTap} theme={theme} onChange={this.onNewTapChecked} label={t('ButtonModal_New_Tap')} />
+          <Checkbox checked={this.state.nonfollowTag} theme={theme} onChange={this.onNonfollowTagChecked} label={t('ButtonModal_Nofollow_Tags')} />
+        </div>
+      </div>
+    );
     return (
-      <div className={styles.container} data-hook="videoUploadModal">
+      <div className={styles.container} data-hook="ButtonInputModal">
         <CloseIcon className={classNames(styles.closeIcon)} onClick={() => this.onCloseRequested()} />
-        <div role="heading" aria-labelledby="video_modal_hdr" className={classNames(styles.header)}>
-          <h3 id="video_modal_hdr" className={styles.header_text}>
+        <div role="heading" aria-labelledby="button_modal_hdr" className={classNames(styles.header)}>
+          <h3 id="button_modal_hdr" className={styles.header_text}>
             {t('ButtonModal_Header')}
           </h3>
         </div>
-        <div className={styles.toggle}>
-          <div className={styles.settings} onClick={this.onSettingClickHandler} style={this.state.inlineStyleSettings}>
-            Settings
-        </div>
-          <div className={styles.design} onClick={this.onDesignClickHandler} style={this.state.inlineStyleDesign}>
-            Design
-        </div>
-        </div>
-        {this.state.settings ?
-          <div className={styles.section_content}>
-            <div className={styles.header_text}>
-              Button Text
-        </div>
-            <div className={styles.videoUrlInputModal_textInput}>
-              <TextInput
-                inputRef={ref => {
-                  this.input = ref;
-                }}
-                type="text"
-                onKeyPress={this.handleKeyPress}
-                onChange={this.onTextChanged}
-                value={buttonName}
-                placeholder={t('ButtonModal_InputName_Placeholder')}
-                theme={theme}
-                data-hook="ButtonInputModal"
-              />
-            </div>
-            <br />
-            <div >
-              Link
-        </div>
-            <br />
-            <div className={styles.videoUrlInputModal_textInput}>
-              <TextInput
-                inputRef={ref => {
-                  this.input = ref;
-                }}
-                type="url"
-                onKeyPress={this.handleKeyPress}
-                onChange={this.onUrlChange}
-                value={url}
-                placeholder={t('ButtonModal_InputLink_Placeholder')}
-                theme={theme}
-                data-hook="ButtonInputModal"
-              />
-            </div>
-            <div className={styles.checkboxes_group}>
-              <Checkbox checked={this.state.newTap} theme={theme} onChange={this.onNewTapChecked} label='Open link in a new tab' />
-              <Checkbox checked={this.state.nonfollowTag} theme={theme} onChange={this.onNonfollowTagChecked} label='Add a nonfollow tags' />
-            </div>
-          </div> :
-          <DesignComponent componentData={this.props} theme={theme} />
-        }
-          <SettingsPanelFooter
+        <FocusManager>
+          <div>
+            <Tabs value={'manage_setting'} theme={theme} >
+              <Tab label={t('ButtonModal_Settings_Tab')} value={'manage_setting'} theme={theme}>
+                {settingsSection}
+              </Tab>
+              <Tab label={t('ButtonModal_Design_Tab')} value={'manage_design'} theme={theme}>
+                <DesignComponent componentData={this.props} theme={theme} t={t} />
+              </Tab>
+            </Tabs>
+          </div>
+        </FocusManager>
+        <SettingsPanelFooter
           className={styles.modal_footer}
-            save={() => this.onConfirm()}
-            cancel={() => this.onCloseRequested()}
-            saveLabel={doneLabel}
-            cancelLabel={cancelLabel}
-            theme={theme}
-            t={t}
-          />
-
+          save={() => this.onConfirm()}
+          cancel={() => this.onCloseRequested()}
+          saveLabel={doneLabel}
+          cancelLabel={cancelLabel}
+          theme={theme}
+          t={t}
+        />
       </div>
     );
   }

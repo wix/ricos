@@ -1,34 +1,34 @@
 .color_picker{
-    display: block;
-    width: 100%;
-    height: 42px;
+  display: block;
+  width: 100%;
+  height: 42px;
 }
 
 .label{
-    width: 50%;
-    height: auto;
+  width: 50%;
+  height: auto;
    
 }
 
 .picker{
-    width: 50%;
-    height: auto;
-    float: right;
-   direction: rtl;
+  width: 50%;
+  height: auto;
+  float: right;
+  direction: rtl;
 
 }
 
 .pickerButton{
-    width: 30px;
-    height: 30px;
-    border: 1px solid #B8C6D2;
-    border-radius: 10px;
-    box-sizing: border-box;
+  width: 30px;
+  height: 30px;
+  border: 1px solid #B8C6D2;
+  border-radius: 10px;
+  box-sizing: border-box;
 }
 
 .swatchesPicker{
-    position: absolute;
-    top: 30;
-    right: 30;
-    z-index: 11;
+  position: absolute;
+  top: 30;
+  right: 30;
+  z-index: 11;
 }

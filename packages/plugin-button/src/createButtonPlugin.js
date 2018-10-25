@@ -4,7 +4,7 @@ import { createBasePlugin, mergeStyles } from 'wix-rich-content-common';
 import { BUTTON_TYPE, BUTTON_TYPE_LEGACY } from './constants';
 
 import Styles from '../statics/styles/default-styles.scss';
-import {Component} from './components/button-component';
+import { Component } from './components/button-component';
 
 const createButtonPlugin = (config = {}) => {
   const type = BUTTON_TYPE;
@@ -14,7 +14,6 @@ const createButtonPlugin = (config = {}) => {
     component: Component,
     settings,
     theme,
-    type,
     type: BUTTON_TYPE,
     legacyType: BUTTON_TYPE_LEGACY,
     toolbar: createToolbar({

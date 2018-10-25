@@ -20,13 +20,12 @@ class ButtonViewer extends Component {
   }
 
   render() {
-    const { componentData, theme, ...rest } = this.props; // eslint-disable-line no-unused-vars
+    const { componentData, theme } = this.props; // eslint-disable-line no-unused-vars
     return (
       <div className={classNames(this.styles.button)}>
-        <button style={userStyle} className={theme.button_primary}>
+        <button className={theme.button_primary}>
           {!componentData.buttonName ?
-            'Click Me!'
-            : componentData.buttonName
+            'Click Me!' : componentData.buttonName
           }
         </button>
       </div>

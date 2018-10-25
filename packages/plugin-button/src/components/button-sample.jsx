@@ -1,14 +1,20 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import styles from '../../statics/styles/button-sample.scss';
 
 class ButtonSample extends PureComponent {
 
-    render() {
-        return (
-            <button style={this.props.style} className={styles.button_sample}>
-                Click Me!
-            </button>
-        )
-    }
+  render() {
+    return (
+      <button style={this.props.style} className={styles.button_sample}>
+        Click Me!
+      </button>
+    );
+  }
 }
-export default ButtonSample
+
+ButtonSample.propTypes = {
+  style: PropTypes.object
+};
+
+export default ButtonSample;
