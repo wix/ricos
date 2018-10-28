@@ -14,6 +14,8 @@
 
 - `editor`
   - SEO demand: render list item content wrapped in <p> tags
+- `viewer`
+  - SEO demand: render list item content wrapped in <p> tags
 
 <br/>
 
