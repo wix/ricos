@@ -10,6 +10,11 @@
 
 ## [Unreleased]
 
+### :bug: Bug Fix
+
+- `editor`
+  - SEO demand: render list item content wrapped in <p> tags
+
 <br/>
 
 ## 1.6.10 (Oct 24, 2018)
