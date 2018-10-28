@@ -1,4 +1,4 @@
-import VideoURLInputModal from './toolbar/videoURLInputModal';
+import VideoURLInputModal from './toolbar/videoSelectionInputModal';
 
 const Modals = {
   VIDEO_URL_INPUT: 'video-url-input',

@@ -1,17 +1,10 @@
 import { DEFAULTS } from '../video-component';
-import { getModalStyles, TOOLBARS } from 'wix-rich-content-common';
-import VideoURLInputModal from './videoURLInputModal';
+import { getModalStyles, TOOLBARS, decorateComponentWithProps, WixUtils } from 'wix-rich-content-common';
+import VideoURLInputModal from './videoSelectionInputModal';
 import { InsertPluginIcon } from '../icons';
+import { InputModalCustomStyle, ExtendedInputModalCustomStyle } from './inputModalStyles';
 
-const modalCustomStyle = {
-  content:
-  {
-    maxWidth: '460px',
-    minHeight: '262px'
-  }
-};
-
-export default ({ helpers, t }) => {
+export default ({ helpers, t, settings }) => {
   return [
     {
       type: 'modal',
@@ -20,8 +13,11 @@ export default ({ helpers, t }) => {
       Icon: InsertPluginIcon,
       componentData: DEFAULTS,
       toolbars: [TOOLBARS.FOOTER, TOOLBARS.SIDE],
-      modalElement: VideoURLInputModal,
-      modalStyles: getModalStyles({ customStyles: modalCustomStyle, fullScreen: false }),
+      modalElement: decorateComponentWithProps(VideoURLInputModal, settings),
+      modalStyles: getModalStyles({
+        customStyles: (settings.handleFileSelection) ? ExtendedInputModalCustomStyle : InputModalCustomStyle,
+        fullScreen: false
+      }),
       helpers,
     },
   ];

@@ -14,6 +14,7 @@ const createVideoPlugin = (config = {}) => {
     toolbar: createToolbar({
       helpers,
       t,
+      settings
     }),
     helpers,
     settings,

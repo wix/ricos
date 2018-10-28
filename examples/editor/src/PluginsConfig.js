@@ -62,7 +62,11 @@ export default {
   [VIDEO_TYPE]: {
     toolbar: {
       hidden: []
-    }
+    },
+    handleFileSelection: (index, multiple, updateEntity, removeEntity) => {
+      console.log('The user wants to upload a cutom video');
+    },
+    enableCustomUploadOnMobile: true,
   },
   uiSettings,
   getToolbarSettings: ({ pluginButtons, textButtons }) => [
