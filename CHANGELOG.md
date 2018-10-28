@@ -13,9 +13,9 @@
 ### :bug: Bug Fix
 
 - `editor`
-  - SEO demand: render list item content wrapped in <p> tags
+  - [#171](https://github.com/wix-incubator/rich-content/pull/171) SEO demand: render list item content wrapped in <p> tags
 - `viewer`
-  - SEO demand: render list item content wrapped in <p> tags
+  - [#171](https://github.com/wix-incubator/rich-content/pull/171) SEO demand: render list item content wrapped in <p> tags
 
 <br/>
 
