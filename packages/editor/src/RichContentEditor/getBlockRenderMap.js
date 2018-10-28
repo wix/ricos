@@ -10,13 +10,15 @@ import styles from '../../statics/styles/rich-content-editor.scss';
   getBlockRenderMap util
 
   @param {Object} theme - consumer theme
-  @returns {BlockRenderMap}
+  @returns {Immutable.Map}
 
 */
 export default theme => {
   const mergedStyles = mergeStyles({ styles, theme });
   const { Map: map } = require('immutable');
-  const listClassNames = classNames(styles.orderedList, 'public-DraftStyleDefault-depth0', 'public-DraftStyleDefault-listLTR',
+  const listClassNames = classNames(
+    'public-DraftStyleDefault-depth0', // TODO: should depend on actual depth
+    'public-DraftStyleDefault-listLTR', // TODO: should depend on actual direction
     'public-DraftStyleDefault-reset');
 
   const OrderedListItem = ({ children }) => (
