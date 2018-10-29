@@ -1,11 +1,10 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { VideoCameraIcon, PlusIcon } from '../icons';
 import classNames from 'classnames';
 import { mergeStyles, isVideoUrl, TextInput, CloseIcon, Button, WixUtils } from 'wix-rich-content-common';
 import styles from '../../statics/styles/video-selection-input-modal.scss';
 
-export default class VideoURLInputModal extends Component {
+export default class VideoSelectionInputModal extends Component {
   constructor(props) {
     super(props);
     this.styles = mergeStyles({ styles, theme: props.theme });
@@ -57,24 +56,33 @@ export default class VideoURLInputModal extends Component {
     const { url, submitted } = this.state;
     const { theme, t, handleFileSelection, enableCustomUploadOnMobile } = this.props;
     const { styles } = this;
-    const uploadModalSection =
-      <div>
-        <div className={styles.video_modal_or_upload_video_fro}>Or, upload video from your computer</div>
-        <div className={styles.video_modal_upload_video}><div onClick={handleFileSelection}><PlusIcon /> Upload video</div></div>
-      </div>;
-    console.log(this.props);
+    const uploadVideoSection =
+      (
+        <div>
+          <div className={styles.video_modal_or_upload_video_from}>Or, upload video from your computer</div>
+          <div className={styles.video_modal_upload_video}>
+            <div
+              role="button" onClick={handleFileSelection}
+              tabIndex={0}
+              onKeyDown={handleFileSelection}
+            >
+              + Upload video
+            </div>
+          </div>
+        </div>
+      );
     return (
       <div>
-        <div className={styles.video_modal_custom_container} data-hook="videoUploadModal">
+        <div className={styles.video_modal_container} data-hook="videoUploadModal">
           {!WixUtils.isMobile() && <CloseIcon className={classNames(styles.video_modal_closeIcon)} onClick={() => this.onCloseRequested()} />}
           <div className={styles.video_modal_add_a_Video}>Add a Video</div>
           <div role="heading" aria-labelledby="video_modal_hdr" className={classNames(styles.video_modal_header)}>
-            <h3 id="video_modal_hdr" className={styles.video_modal_custom_header_text}>
+            <h3 id="video_modal_hdr" className={styles.video_modal_header_text}>
               {t('VideoUploadModal_Header')}
             </h3>
           </div>
           <div>
-            <div className={styles.video_modal_custom_textInput}>
+            <div className={styles.video_modal_textInput}>
               <TextInput
                 inputRef={ref => {
                   this.input = ref;
@@ -89,20 +97,22 @@ export default class VideoURLInputModal extends Component {
                 data-hook="videoUploadModalInput"
               />
             </div>
-            <Button className={styles.video_modal_add_button} onClick={() => this.onConfirm()} ariaProps={!this.state.url && { disabled: 'disabled' }}>Add Now</Button>
+            <Button
+              className={styles.video_modal_add_button}
+              onClick={() => this.onConfirm()}
+              ariaProps={!this.state.url && { disabled: 'disabled' }}
+            >
+              Add Now
+            </Button>
           </div>
-          {
-            WixUtils.isMobile() ?
-              (handleFileSelection && enableCustomUploadOnMobile &&
-                uploadModalSection) : handleFileSelection && uploadModalSection
-          }
+          {(!WixUtils.isMobile() || enableCustomUploadOnMobile) && handleFileSelection && uploadVideoSection}
         </div>
       </div>
     );
   }
 }
 
-VideoURLInputModal.propTypes = {
+VideoSelectionInputModal.propTypes = {
   onConfirm: PropTypes.func,
   pubsub: PropTypes.object,
   helpers: PropTypes.object.isRequired,
@@ -112,9 +122,11 @@ VideoURLInputModal.propTypes = {
   doneLabel: PropTypes.string,
   cancelLabel: PropTypes.string,
   t: PropTypes.func,
+  handleFileSelection: PropTypes.func,
+  enableCustomUploadOnMobile: PropTypes.bool,
 };
 
-VideoURLInputModal.defaultProps = {
+VideoSelectionInputModal.defaultProps = {
   doneLabel: 'Add Now',
   cancelLabel: 'Cancel',
 };

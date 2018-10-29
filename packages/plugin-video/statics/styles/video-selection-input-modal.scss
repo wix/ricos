@@ -2,16 +2,9 @@
 @import "~wix-rich-content-common/dist/statics/styles/palette";
 
 .video_modal_container {
-  padding: 51px 60px 60px;
-  @include phone {
-    padding: 24px 18px 30px;
-  }
-}
-
-.video_modal_custom_container {
   padding: 48px 60px 60px 60px;
   @include phone {
-    padding: 24px 18px 30px;
+    padding: 36px 32px 30px 32px;
   }
 }
 
@@ -20,10 +13,6 @@
   right: 30px;
   top: 30px;
   cursor: pointer;
-}
-
-.video_modal_cameraIcon {
-  width: 18px;
 }
 
 .video_modal_errorIcon {
@@ -37,93 +26,65 @@
 
 .video_modal_header_text {
   font-size: 16px;
-  margin: 8px 0 8px 0;
-}
-
-.video_modal_custom_header_text {
-  font-size: 16px;
   height: 24px;
   margin: 0px 0 12px 0;
   width: 460px;
   text-align: center;
   @include phone {
-    margin: 0px 0 30px 0px;
+    height: 46px;
+    margin-bottom: 12px;
   }
-}
-
-.video_modal_header_icon {
-  margin-right: 12px;
 }
 
 .video_modal_textInput {
-  margin: 8px 0 24px 0;
-  input[type="url"] {
-    padding-right: 18px;
-  }
-}
-
-.video_modal_custom_textInput {
   margin: 0px 0 48px 0px;
-  width: calc(100% - 119px);
+  width: calc(100% - 121px);
   display: inline-block;
   input[type="url"] {
     padding-right: 18px;
+    @include phone {
+      border-left: none;
+      border-right: none;
+      border-top: none;
+      border-bottom: 1px solid #000000;
+    }
   }
   @include phone {
     width: 100%;
-    margin: 0px 0 15px 0px;
+    margin: 0px 0 24px 0px;
   }
-}
-
-.video_modal_footer {
-  border: none !important;
-  padding: 0 !important;
-  height: 40px !important;
 }
 
 .video_modal_add_a_Video {
   width: 100%;
-  height: auto;
+  height: 36px;
   font-family: "Courier New", Courier, monospace;
-  font-size: 24px;
-  font-weight: 500;
-  font-style: normal;
-  font-stretch: normal;
-  letter-spacing: normal;
+  font-size: 24px; 
   text-align: center;
-  color: #333333;
   padding-bottom: 36px;
   @include phone {
-    width: 100%;
-    padding-bottom: 20px;
+    height: 34px;
+    padding-bottom: 12px;
   }
 }
 
-.video_modal_or_upload_video_fro {
-  width: 100%;
-  height: 24px;
+.video_modal_or_upload_video_from {
   font-family: Avenir;
-  font-size: 16px;
   font-weight: 500;
-  font-style: normal;
-  font-stretch: normal;
   line-height: 1.5;
-  letter-spacing: normal;
   text-align: center;
-  color: #333333;
   padding-bottom: 24px;
+  @include phone {
+    padding-top: 14px;
+    padding-bottom: 18px;
+  }
 }
 
 .video_modal_upload_video {
   width: 100%;
   height: 24px;
   font-family: Avenir;
-  font-size: 16px;
-  font-weight: 500;
-  font-style: normal;
-  font-stretch: normal;
   line-height: 1.5;
-  letter-spacing: normal;
   text-align: center;
   color: #236fff;
   display: inline-block;
@@ -136,14 +97,14 @@
   border: none;
   padding-left: 24px;
   padding-right: 24px;
-  margin-left: 10px;
+  margin-left: 12px;
   height: 40px;
   @include phone {
-    width: 40%; 
-    margin-left: 30%;
-    margin-bottom: 15px;
+    width: 45%;
+    margin-left: 27.5%;
   }
 }
+
 .video_modal_add_button:disabled {
   opacity: 0.5;
 }

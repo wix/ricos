@@ -1,8 +1,9 @@
-import { BUTTONS, getModalStyles, decorateComponentWithProps } from 'wix-rich-content-common';
-import { Modals } from '../modals';
+import { BUTTONS, getModalStyles, decorateComponentWithProps, WixUtils } from 'wix-rich-content-common';
 import { MediaReplaceIcon } from '../icons';
+import VideoSelectionInputModal from './videoSelectionInputModal';
+import { SelectionModalCustomStyle, ExtendedSelectionModalCustomStyle } from './selectionModalCustomStyles';
 
-export default({ t, setting }) => {
+export default ({ t, settings }) => {
   return [
     { keyName: 'sizeSmallCenter', type: BUTTONS.SIZE_SMALL_CENTER, mobile: false },
     { keyName: 'sizeContent', type: BUTTONS.SIZE_CONTENT, mobile: false },
@@ -15,8 +16,13 @@ export default({ t, setting }) => {
       keyName: 'replace',
       type: BUTTONS.EXTERNAL_MODAL,
       icon: MediaReplaceIcon,
-      modalName: Modals.VIDEO_URL_INPUT,
-      modalStyles: getModalStyles({ fullScreen: false }),
+      modalElement: decorateComponentWithProps(VideoSelectionInputModal, settings),
+      modalStyles: getModalStyles({
+        customStyles: (!WixUtils.isMobile() || settings.enableCustomUploadOnMobile) && settings.handleFileSelection ?
+          ExtendedSelectionModalCustomStyle :
+          SelectionModalCustomStyle,
+        fullScreen: false
+      }),
       mobile: true,
       tooltipTextKey: 'ReplaceVideoButton_Tooltip',
       t,
