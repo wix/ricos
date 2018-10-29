@@ -10,6 +10,16 @@
 
 ## [Unreleased]
 
+### :boom: Breaking Change
+
+- `viewer`
+  - RichContentViewer `isRtl` prop replaced with `textDirection` prop (accepted values are `'rtl'`, `'ltr'`)
+
+### :rocket: New Feature
+
+- `viewer`
+  - text direction applied to blocks accordingly to the text symbols
+
 ### :bug: Bug Fix
 
 - `editor`
