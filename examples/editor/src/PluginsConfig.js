@@ -5,6 +5,7 @@ import { HASHTAG_TYPE } from "wix-rich-content-plugin-hashtag";
 import { HTML_TYPE } from "wix-rich-content-plugin-html";
 import { LINK_TYPE } from "wix-rich-content-plugin-link";
 import { VIDEO_TYPE } from "wix-rich-content-plugin-video";
+import { GIPHY_TYPE } from "wix-rich-content-plugin-giphy";
 import { EXTERNAL_MENTIONS_TYPE } from "wix-rich-content-plugin-mentions";
 import { TOOLBARS, BUTTONS, DISPLAY_MODE } from "wix-rich-content-common";
 
@@ -55,7 +56,9 @@ export default {
         )
       )
   },
-  [LINK_TYPE]: {},
+  [LINK_TYPE]: {
+    onClick: (event, url) => console.log('link clicked!', url),
+  },
   [CODE_BLOCK_TYPE]: {},
   [DIVIDER_TYPE]: {},
   [EXTERNAL_EMOJI_TYPE]: {},
@@ -67,6 +70,9 @@ export default {
       console.log('The user wants to upload a cutom video');
     },
     enableCustomUploadOnMobile: true,
+  },
+  [GIPHY_TYPE]: {
+    giphySdkApiKey: "JfQziSTdnSwDZcD3w8DpUL4LMFu3zBgU"
   },
   uiSettings,
   getToolbarSettings: ({ pluginButtons, textButtons }) => [
@@ -183,5 +189,5 @@ export default {
     //     desktop: () => InlineToolbarDecoration
     //   })
     // }
-   ]
+  ]
 };

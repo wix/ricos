@@ -9,7 +9,7 @@ import { videoTypeMapper } from 'wix-rich-content-plugin-video/dist/module.viewe
 import { dividerTypeMapper } from 'wix-rich-content-plugin-divider/dist/module.viewer';
 import { htmlTypeMapper, HTML_TYPE } from 'wix-rich-content-plugin-html/dist/module.viewer';
 import { soundCloudTypeMapper } from 'wix-rich-content-plugin-sound-cloud/dist/module.viewer';
-import { linkTypeMapper, LinkViewer, LinkParseStrategy } from 'wix-rich-content-plugin-link/dist/module.viewer';
+import { linkTypeMapper, LinkViewer, LinkParseStrategy, LINK_TYPE } from 'wix-rich-content-plugin-link/dist/module.viewer';
 
 import { Strategy as HashTagStrategy, Component as HashTag } from 'wix-rich-content-plugin-hashtag';
 
@@ -40,6 +40,9 @@ const modalStyleDefaults = {
   }
 };
 
+const linkPluginSettings = {
+  onClick: (event, url) => console.log('link clicked!', url),
+};
 const anchorTarget = '_top';
 const relValue = 'noreferrer';
 
@@ -63,7 +66,14 @@ class App extends Component {
     this.decorators = [{
         strategy: LinkParseStrategy,
         component: ({ children, decoratedText, rel, target }) =>
-        <LinkViewer componentData={{ rel, target, url: decoratedText }} anchorTarget={anchorTarget} relValue={relValue}> {children} </LinkViewer>
+        <LinkViewer
+          componentData={{ rel, target, url: decoratedText }}
+          anchorTarget={anchorTarget}
+          relValue={relValue}
+          settings={linkPluginSettings}
+        >
+          {children}
+        </LinkViewer>
       }, {
         strategy: HashTagStrategy,
         component: ({children, decoratedText}) =>
@@ -74,7 +84,8 @@ class App extends Component {
     this.config = {
       [HTML_TYPE]: {
         htmlIframeSrc: 'http://localhost:3001/static/html-plugin-embed.html',
-      }
+      },
+      [LINK_TYPE]: linkPluginSettings,
     }
   }
 

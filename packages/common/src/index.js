@@ -90,4 +90,4 @@ export { mergeToolbarSettings } from './Utils/mergeToolbarSettings';
 export { default as createInlineStyleDecorators } from './Decorators/inline-style-decorators';
 
 export { HEADING } from './Decorators/inline-styles';
-export { COMMANDS, MODIFIERS, TOOLBARS, DISPLAY_MODE } from './consts';
+export { COMMANDS, MODIFIERS, TOOLBARS, DISPLAY_MODE, DECORATION_MODE } from './consts';

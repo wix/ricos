@@ -12,10 +12,67 @@
 
 ### :bug: Bug Fix
 
+- `editor`
+  - [#171](https://github.com/wix-incubator/rich-content/pull/171) SEO demand: render list item content wrapped in <p> tags
+- `viewer`
+  - [#171](https://github.com/wix-incubator/rich-content/pull/171) SEO demand: render list item content wrapped in <p> tags
+  - [#175](https://github.com/wix-incubator/rich-content/pull/175) plugin rendering: redundant whitespaces removed
+- `link`
+  - [#175](https://github.com/wix-incubator/rich-content/pull/175) `LinkParseStrategy` omits parsed range if it matches an entity range (link duplicates issue)
+
+<br/>
+
+## 1.6.10 (Oct 24, 2018)
+
+### :house: Internal
+
+- `general`
+  - `package-lock.json` files are not ignored
+
+<br/>
+
+## 1.6.9 (Oct 24, 2018)
+
+### :rocket: New Feature
+
+- `giphy`
+  - [#161](https://github.com/wix-incubator/rich-content/pull/161) `plugin-giphy` implemented
+
+<br />
+
+## 1.6.8 (Oct 18, 2018)
+
+### :bug: Bug Fix
+
+- `soundcloud`
+  - fix cropped message in mobile view
+
+### :house: Internal
+
+- `general`
+  - draft-js version updated to 0.10.272
+
+<br/>
+
+## 1.6.7 (Oct 18, 2018)
+
+### :rocket: New Feature
+
+- `common`
+  - [#159](https://github.com/wix-incubator/rich-content/pull/159) `modalDecorations` API is added to `openModal`, `InlineButtons`, `InsertButtons` APIs. Check [documentation](./docs/plugin-development-guidelines/ModalDialogs.md) for more details
+- `link`
+  - [#158](https://github.com/wix-incubator/rich-content/pull/158) customize link behaviour by declaring `onClick` handler in link plugin config
+
+### :bug: Bug Fix
+
 - `viewer`
   - [#152](https://github.com/wix-incubator/rich-content/issues/152) empty blocks are not cleaned up
 - `common`
   - `modalStylesFn` API added to `InlineButtons` structure for dynamic styling support
+
+### :book: Documentation
+
+- [#159](https://github.com/wix-incubator/rich-content/pull/159) [Modal Dialogs](./docs/plugin-development-guidelines/ModalDialogs.md) doc added
 
 <br/>
 

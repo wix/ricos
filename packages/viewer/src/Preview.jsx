@@ -39,7 +39,7 @@ const getList = (ordered, mergedStyles, isRtl) =>
         {fixedChildren.map((child, i) => {
           // NOTE: list block data is an array of data entries per list item
           const dataEntry = blockProps.data.length > i ? blockProps.data[i] : {};
-          return withTextAlignment(<li className={mergedStyles[`${className}List`]} key={blockProps.keys[i]}><div>{child}</div></li>,
+          return withTextAlignment(<li className={mergedStyles[`${className}List`]} key={blockProps.keys[i]}><p>{child}</p></li>,
             dataEntry, mergedStyles, isRtl);
         })}
       </List>

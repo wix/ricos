@@ -9,10 +9,16 @@ const findLinkEntities = (contentBlock, callback, contentState) => {
   }, callback);
 };
 
-const Link = ({ entityKey, contentState, className, children, anchorTarget, relValue }) => {
+const Link = ({ entityKey, contentState, className, children, anchorTarget, relValue, settings }) => {
   const componentData = contentState.getEntity(entityKey).getData();
   return (
-    <LinkViewer componentData={componentData} className={className} anchorTarget={anchorTarget} relValue={relValue}>
+    <LinkViewer
+      componentData={componentData}
+      className={className}
+      anchorTarget={anchorTarget}
+      relValue={relValue}
+      settings={settings}
+    >
       {children}
     </LinkViewer>);
 };
@@ -24,6 +30,7 @@ Link.propTypes = {
   className: PropTypes.string,
   anchorTarget: PropTypes.string,
   relValue: PropTypes.string,
+  settings: PropTypes.object,
 };
 
 export { findLinkEntities as Strategy, Link as Component };

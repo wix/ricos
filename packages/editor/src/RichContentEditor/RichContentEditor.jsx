@@ -14,6 +14,7 @@ import { keyBindingFn, initPluginKeyBindings } from './keyBindings';
 import handleKeyCommand from './handleKeyCommand';
 import handleReturnCommand from './handleReturnCommand';
 import blockStyleFn from './blockStyleFn';
+import getBlockRenderMap from './getblockRenderMap';
 import { getStaticTextToolbarId } from './Toolbars/toolbar-id';
 import {
   AccessibilityListener,
@@ -270,6 +271,7 @@ class RichContentEditor extends Component {
         handlePastedText={handlePastedText}
         plugins={this.plugins}
         blockStyleFn={blockStyleFn(theme)}
+        blockRenderMap={getBlockRenderMap(theme)}
         handleKeyCommand={handleKeyCommand(this.updateEditorState, this.getCustomCommandHandlers().commandHanders)}
         editorKey={editorKey}
         keyBindingFn={keyBindingFn(this.getCustomCommandHandlers().commands || [])}

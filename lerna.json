@@ -8,10 +8,5 @@
   "packages": [
     "packages/*"
   ],
-  "npmClientArgs": [
-    "--no-lockfile",
-    "--prefer-offline",
-    "--cache-min 9999999"
-  ],
   "version": "independent"
 }
