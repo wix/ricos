@@ -16,9 +16,9 @@
   - [#171](https://github.com/wix-incubator/rich-content/pull/171) SEO demand: render list item content wrapped in <p> tags
 - `viewer`
   - [#171](https://github.com/wix-incubator/rich-content/pull/171) SEO demand: render list item content wrapped in <p> tags
-  - plugin rendering: redundant whitespaces removed
+  - [#175](https://github.com/wix-incubator/rich-content/pull/175) plugin rendering: redundant whitespaces removed
 - `link`
-  - `LinkParseStrategy` omits parsed range if it matches an entity range (link duplicates issue)
+  - [#175](https://github.com/wix-incubator/rich-content/pull/175) `LinkParseStrategy` omits parsed range if it matches an entity range (link duplicates issue)
 
 <br/>
 
