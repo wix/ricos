@@ -1,8 +1,15 @@
 @import "~wix-rich-content-common/dist/statics/styles/mixins";
 @import "~wix-rich-content-common/dist/statics/styles/palette";
 
-.video_modal_container {
+.video_modal_container_big {
   padding: 48px 60px 60px 60px;
+  @include phone {
+    padding: 36px 32px 30px 32px;
+  }
+}
+
+.video_modal_container_small {
+  padding: 48px 60px 48px 60px;
   @include phone {
     padding: 36px 32px 30px 32px;
   }
@@ -36,9 +43,7 @@
   }
 }
 
-.video_modal_textInput {
-  margin: 0px 0 48px 0px;
-  width: calc(100% - 121px);
+%video_modal_textInput {
   display: inline-block;
   input[type="url"] {
     padding-right: 18px;
@@ -49,6 +54,22 @@
       border-bottom: 1px solid #000000;
     }
   }
+}
+
+.video_modal_textInput_customWidth {
+  @extend %video_modal_textInput;
+  width: calc(100% - 121px);
+  margin: 0px 0 48px 0px;
+  @include phone {
+    width: 100%;
+    margin: 0px 0 24px 0px;
+  }
+}
+
+.video_modal_textInput_fullWidth {
+  @extend %video_modal_textInput;
+  width: 420px;
+  margin: 0px 0 36px 20px;
   @include phone {
     width: 100%;
     margin: 0px 0 24px 0px;
@@ -59,7 +80,7 @@
   width: 100%;
   height: 36px;
   font-family: "Courier New", Courier, monospace;
-  font-size: 24px; 
+  font-size: 24px;
   text-align: center;
   padding-bottom: 36px;
   @include phone {
@@ -91,7 +112,7 @@
   cursor: pointer;
 }
 
-.video_modal_add_button {
+%video_modal_add_button {
   width: 108px;
   display: inline-block;
   border: none;
@@ -99,12 +120,30 @@
   padding-right: 24px;
   margin-left: 12px;
   height: 40px;
+ 
+}
+
+.video_modal_add_button_inline {
+  @extend %video_modal_add_button;
   @include phone {
     width: 45%;
     margin-left: 27.5%;
   }
 }
 
-.video_modal_add_button:disabled {
+.video_modal_add_button_inMiddle {
+  @extend %video_modal_add_button;
+  margin-left: 38.5%;
+  @include phone {
+    width: 45%;
+    margin-left: 27.5%;
+  }
+}
+
+.video_modal_add_button_inline:disabled {
+  opacity: 0.5;
+}
+
+.video_modal_add_button_inMiddle:disabled {
   opacity: 0.5;
 }

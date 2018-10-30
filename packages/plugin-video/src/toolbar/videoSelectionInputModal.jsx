@@ -10,7 +10,8 @@ export default class VideoSelectionInputModal extends Component {
     this.styles = mergeStyles({ styles, theme: props.theme });
     const { componentData } = this.props;
     this.state = {
-      url: componentData.src || '',
+      url: (!componentData.isCustomVideo && componentData.src) || '',
+      isCustomVideo: false
     };
   }
 
@@ -22,13 +23,14 @@ export default class VideoSelectionInputModal extends Component {
   afterOpenModal = () => this.input.focus();
 
   onConfirm = () => {
-    const { url } = this.state;
-    if (isVideoUrl(url)) {
+    const { url, isCustomVideo } = this.state;
+
+    if (isVideoUrl(url) || isCustomVideo) {
       const { componentData, helpers, pubsub, onConfirm } = this.props;
       if (onConfirm) {
-        onConfirm({ ...componentData, src: url });
+        onConfirm({ ...componentData, src: this.state.url, isCustomVideo: this.state.isCustomVideo });
       } else {
-        pubsub.update('componentData', { src: url });
+        pubsub.update('componentData', { src: this.state.url, isCustomVideo: this.state.isCustomVideo });
       }
 
       if (helpers && helpers.onVideoSelected) {
@@ -40,6 +42,11 @@ export default class VideoSelectionInputModal extends Component {
       this.setState({ submitted: true });
     }
   };
+
+  handleCustomVideoUpload = customUrl => {
+    this.setState({ url: customUrl, isCustomVideo: true });
+    this.onConfirm();
+  }
 
   onCloseRequested = () => {
     this.setState({ isOpen: false });
@@ -59,30 +66,31 @@ export default class VideoSelectionInputModal extends Component {
     const uploadVideoSection =
       (
         <div>
-          <div className={styles.video_modal_or_upload_video_from}>Or, upload video from your computer</div>
+          <div className={styles.video_modal_or_upload_video_from}>{t('VideoUploadModal_CustomVideoHeader')}</div>
           <div className={styles.video_modal_upload_video}>
             <div
-              role="button" onClick={handleFileSelection}
+              role="button"
+              onClick={() => handleFileSelection(customUrl => this.handleCustomVideoUpload(customUrl))}
               tabIndex={0}
-              onKeyDown={handleFileSelection}
+              onKeyDown={() => handleFileSelection(customUrl => this.handleCustomVideoUpload(customUrl))}
             >
-              + Upload video
+              + {t('VideoUploadModal_CustomVideoClickText')}
             </div>
           </div>
         </div>
       );
     return (
       <div>
-        <div className={styles.video_modal_container} data-hook="videoUploadModal">
+        <div className={styles[`video_modal_container_${handleFileSelection ? 'big' : 'small'}`]} data-hook="videoUploadModal">
           {!WixUtils.isMobile() && <CloseIcon className={classNames(styles.video_modal_closeIcon)} onClick={() => this.onCloseRequested()} />}
-          <div className={styles.video_modal_add_a_Video}>Add a Video</div>
+          <div className={styles.video_modal_add_a_Video}>{t('VideoUploadModal_Title')}</div>
           <div role="heading" aria-labelledby="video_modal_hdr" className={classNames(styles.video_modal_header)}>
             <h3 id="video_modal_hdr" className={styles.video_modal_header_text}>
               {t('VideoUploadModal_Header')}
             </h3>
           </div>
           <div>
-            <div className={styles.video_modal_textInput}>
+            <div className={styles[`video_modal_textInput_${handleFileSelection ? 'customWidth' : 'fullWidth'}`]}>
               <TextInput
                 inputRef={ref => {
                   this.input = ref;
@@ -98,11 +106,11 @@ export default class VideoSelectionInputModal extends Component {
               />
             </div>
             <Button
-              className={styles.video_modal_add_button}
+              className={styles[`video_modal_add_button_${handleFileSelection ? 'inline' : 'inMiddle'}`]}
               onClick={() => this.onConfirm()}
               ariaProps={!this.state.url && { disabled: 'disabled' }}
             >
-              Add Now
+              {t('VideoUploadModal_AddButtonText')}
             </Button>
           </div>
           {(!WixUtils.isMobile() || enableCustomUploadOnMobile) && handleFileSelection && uploadVideoSection}

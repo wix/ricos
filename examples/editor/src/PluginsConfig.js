@@ -66,8 +66,19 @@ export default {
     toolbar: {
       hidden: []
     },
+    //Here you can call your custom video upload functionality (comment function to disable custom upload)
     handleFileSelection: (updateEntity, removeEntity) => {
-      console.log('The user wants to upload a cutom video');
+      console.log('consumer wants to upload custom video');
+      setTimeout(() => {
+        const customVideourl ='http://mirrors.standaloneinstaller.com/video-sample/jellyfish-25-mbps-hd-hevc.mp4';
+        if(customVideourl){
+          updateEntity(customVideourl);
+          console.log('consumer uploaded ', testVideo.video_url);
+        }
+        else {
+          console.log('Failed to upload');
+        } 
+      }, 500);
     },
     enableCustomUploadOnMobile: true,
   },
