@@ -35,7 +35,17 @@ export default () => {
         ({ tooltipTextKey: src ? TOOLTIP_TEXT_BY_SRC_TYPE[srcType] : 'HtmlPlugin_EditEmpty_Tooltip' }),
     },
     { type: BUTTONS.SEPARATOR, keyName: 'separator1' },
-    { type: BUTTONS.WIDTH, keyName: 'width', min: MIN_WIDTH, max: MAX_WIDTH },
+    {
+      type: BUTTONS.WIDTH,
+      keyName: 'width',
+      min: MIN_WIDTH,
+      mapStoreDataToPanelProps: ({ store }) => {
+        const bounds = store.get('editorBounds');
+        return {
+          max: bounds ? bounds.width : MAX_WIDTH
+        };
+      }
+    },
     { type: BUTTONS.HEIGHT, keyName: 'height', min: MIN_HEIGHT, max: MAX_HEIGHT, inputMax: MAX_HEIGHT_INPUT },
     { type: BUTTONS.SEPARATOR, keyName: 'separator2' },
     {
