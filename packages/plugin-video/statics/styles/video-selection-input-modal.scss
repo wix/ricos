@@ -120,7 +120,6 @@
   padding-right: 24px;
   margin-left: 12px;
   height: 40px;
- 
 }
 
 .video_modal_add_button_inline {
@@ -146,4 +145,10 @@
 
 .video_modal_add_button_inMiddle:disabled {
   opacity: 0.5;
+}
+
+.video_modal_error_msg {
+  margin-top: 5px;
+  color: red;
+  font-size: 14px;
 }

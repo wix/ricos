@@ -11,7 +11,8 @@ export default class VideoSelectionInputModal extends Component {
     const { componentData } = this.props;
     this.state = {
       url: (!componentData.isCustomVideo && componentData.src) || '',
-      isCustomVideo: false
+      isCustomVideo: false,
+      errorMsg: ''
     };
   }
 
@@ -43,10 +44,14 @@ export default class VideoSelectionInputModal extends Component {
     }
   };
 
-  handleCustomVideoUpload = customUrl => {
-    this.setState({ url: customUrl, isCustomVideo: true });
-    this.onConfirm();
-  }
+  handleCustomVideoUpload = ({ data, error }) => {
+    if (error) {
+      this.setState({ errorMsg: error.msg });
+    } else {
+      this.setState({ url: data.url, isCustomVideo: true });
+      this.onConfirm();
+    }
+  };
 
   onCloseRequested = () => {
     this.setState({ isOpen: false });
@@ -60,7 +65,7 @@ export default class VideoSelectionInputModal extends Component {
   };
 
   render() {
-    const { url, submitted } = this.state;
+    const { url, submitted, errorMsg } = this.state;
     const { theme, t, handleFileSelection, enableCustomUploadOnMobile } = this.props;
     const { styles } = this;
     const uploadVideoSection =
@@ -70,19 +75,21 @@ export default class VideoSelectionInputModal extends Component {
           <div className={styles.video_modal_upload_video}>
             <div
               role="button"
-              onClick={() => handleFileSelection(customUrl => this.handleCustomVideoUpload(customUrl))}
+              onClick={() => handleFileSelection(({ data, error }) => this.handleCustomVideoUpload({ data, error }),
+                () => this.onCloseRequested())}
               tabIndex={0}
-              onKeyDown={() => handleFileSelection(customUrl => this.handleCustomVideoUpload(customUrl))}
+              onKeyDown={() => handleFileSelection(({ data, error }) => this.handleCustomVideoUpload({ data, error }))}
             >
               + {t('VideoUploadModal_CustomVideoClickText')}
             </div>
+            {errorMsg.length > 0 && (<div className={styles.video_modal_error_msg}>{errorMsg}</div>)}
           </div>
         </div>
       );
     return (
       <div>
         <div className={styles[`video_modal_container_${handleFileSelection ? 'big' : 'small'}`]} data-hook="videoUploadModal">
-          {!WixUtils.isMobile() && <CloseIcon className={classNames(styles.video_modal_closeIcon)} onClick={() => this.onCloseRequested()} />}
+          {!WixUtils.isMobile() && <CloseIcon className={styles.video_modal_closeIcon} onClick={() => this.onCloseRequested()} />}
           <div className={styles.video_modal_add_a_Video}>{t('VideoUploadModal_Title')}</div>
           <div role="heading" aria-labelledby="video_modal_hdr" className={classNames(styles.video_modal_header)}>
             <h3 id="video_modal_hdr" className={styles.video_modal_header_text}>
