@@ -8,49 +8,64 @@ class ColorPicker extends PureComponent {
   constructor(props) {
     super(props);
     this.styles = mergeStyles({ styles, theme: props.theme });
+    const { componentData } = this.props;
     this.state = {
       pickerClicked: false,
-      textColor: this.props.initialColor
+      color: componentData.color || this.props.initialColor,
+      colorFor: componentData.colorFor || ''
     };
   }
 
-    onPickerClick = () => {
-      this.setState({ pickerClicked: !this.state.pickerClicked });
-    };
+  onPickerClick = () => {
+    this.setState({ pickerClicked: !this.state.pickerClicked });
+  };
 
-    handleChangeComplete = (color, lable) => {
-      lable === this.setState({ textColor: color.hex });
-    };
+  onFocusOut = () => {
+    this.setState({ pickerClicked: false });
+  };
 
-    handleOnKeyPressed = () => {
-      this.setState({ pickerClicked: false });
-    };
+  handleChangeComplete = (color, lable) => {
+    const { componentData, pubsub, handleChangeComplete, colorFor } = this.props;
+    if (handleChangeComplete) {
+      handleChangeComplete({ ...componentData, color: color.hex, colorFor });
+    } else {
+      pubsub.update('componentData', { color: color.hex, colorFor});
+    }
 
-    render() {
-      return (
-        <div className={this.styles.color_picker}>
-          <div className={this.styles.picker}>
-            <button
-              style={{ background: this.state.textColor }}
-              onClick={this.onPickerClick}
-              onKeyDown={this.handleOnKeyPressed}
-              className={this.styles.pickerButton}
-            />
-            {this.state.pickerClicked ?
+    lable === this.setState({ color: color.hex, pickerClicked: false });
+  };
+
+  handleOnKeyPressed = () => {
+    this.setState({ pickerClicked: false });
+  };
+
+  render() {
+    return (
+      <div className={this.styles.color_picker}>
+        <div className={this.styles.picker}>
+          <button
+            style={{ background: this.state.color }}
+            onClick={this.onPickerClick}
+            onKeyDown={this.handleOnKeyPressed}
+            className={this.styles.pickerButton}
+          />
+          {this.state.pickerClicked ?
+            <div onBlur={this.onFocusOut}>
               <SwatchesPicker
                 className={this.styles.swatchesPicker}
                 onChangeComplete={this.handleChangeComplete}
-                color={this.state.textColor}
-              /> :
-              null
-            }
-          </div>
-          <div className={this.styles.label}>
-            {this.props.children}
-          </div>
+                color={this.state.color}
+              />
+            </div> :
+            null
+          }
         </div>
-      );
-    }
+        <div className={this.styles.label}>
+          {this.props.children}
+        </div>
+      </div>
+    );
+  }
 }
 
 ColorPicker.propTypes = {

@@ -1,18 +1,32 @@
-%panel_button {
-  padding: 8.5px 24px;
-  border-style: none;
-}
-
-%button {
-  font-size: 14px;
-}
-
-.button_sample{
-  @extend %button;
-  @extend %panel_button;
-  color: #fff;
-  background-color: #0261ff;
-  margin: 10px;
+.button_sample {
+  margin-right: 30px;
+  margin-bottom: 24px;
   box-sizing: border-box;
-  cursor: pointer;    
+  cursor: pointer;
+}
+.buttonSample{
+  position: relative;
+  width: fit-content;
+  display: inline-block;
+}
+.oval {
+  position: absolute;
+  right: 20px;
+  top: -8px;
+  width: 18px;
+  height: 18px;
+  border: solid 1px #ffffff;
+  background-color: #23d6b5;
+  border-radius: 100px;
+  display: none;
+}
+.active {
+  width: 5px;
+  height: 9px;
+  transform: rotate(28deg);
+  border-bottom: solid 1px #ffffff;
+  border-right: solid 1px #ffffff;
+  margin-left: 5px;
+  margin-top: 2px;
+
 }

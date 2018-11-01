@@ -32,7 +32,6 @@ export default class TextLinkPanel extends Component {
       onOverrideContent: this.props.onOverrideContent,
       uiSettings
     };
-
     const LinkPanelContainerWithProps = decorateComponentWithProps(LinkPanelContainer, linkContainerProps);
     this.props.onOverrideContent(LinkPanelContainerWithProps);
   }

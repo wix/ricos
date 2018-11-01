@@ -2,10 +2,6 @@
 @import '~wix-rich-content-common/dist/statics/styles/palette';
 
 .container {
-    // padding: 20px 20px 20px;
-    // @include phone {
-    //     padding: 24px 18px 30px;
-    // }
 }
 
 .closeIcon {
@@ -29,9 +25,6 @@
     padding: 30px;
 }
 
-.section_content{
-  
-}
 
 .header_text {
     font-size: 16px;
@@ -41,9 +34,27 @@
 .header_icon {
     margin-right: 12px;
 }
-.checkboxes_group{
-    padding-top: 35px;
+
+.errorMessage{
+    color: red;
 }
 
-.modal_footer {
+.linkPanelContainer{
+    input{
+        background: red;
+    }
+}
+.errorIcon{
+    position: absolute;
+    top: 0px;
+    right: 52px;
+}
+.tabTitle{
+   
+}
+.settingTab{
+    position: relative; 
+    width: 100%;
+    height: 18px;
+   
 }

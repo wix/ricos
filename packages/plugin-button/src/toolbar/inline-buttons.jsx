@@ -5,7 +5,7 @@ import ButtonInputModal from './buttonInputModal';
 const custumStyleSettingModal = {
   content:
   {
-    maxWidth: '500px',
+    maxWidth: '440px',
   }
 };
 

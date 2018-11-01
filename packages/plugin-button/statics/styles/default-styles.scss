@@ -1,8 +1,5 @@
-%button {
-  font-size: 14px;
-  padding: 8.5px 24px;
-  border: none;
-}
-
 .button_container {
+  box-sizing: border-box; 
+  display: inline-block; 
+  margin: 5px;
 }

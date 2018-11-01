@@ -23,11 +23,11 @@ class ButtonViewer extends Component {
     const { componentData, theme } = this.props; // eslint-disable-line no-unused-vars
     return (
       <div className={classNames(this.styles.button)}>
-        <button className={theme.button_primary}>
+        <a className={theme.button_primary}>
           {!componentData.buttonName ?
             'Click Me!' : componentData.buttonName
           }
-        </button>
+        </a>
       </div>
     );
   }
