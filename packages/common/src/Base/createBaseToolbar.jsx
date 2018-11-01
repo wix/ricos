@@ -207,7 +207,11 @@ export default function createToolbar({
     renderButton = (button, key, themedStyle, separatorClassNames, tabIndex) => {
       const { alignment, size } = this.state;
       const Button = BUTTONS_BY_KEY[button.type] || BaseToolbarButton;
-      const buttonProps = this.mapComponentDataToButtonProps(button, this.state.componentData);
+      const buttonProps = {
+        ...this.mapComponentDataToButtonProps(button, this.state.componentData),
+        ...this.mapStoreDataToButtonProps(button, pubsub.store, this.state.componentData),
+      };
+
       switch (button.type) {
         case BUTTONS.ALIGNMENT_LEFT:
         case BUTTONS.ALIGNMENT_CENTER:
@@ -321,6 +325,16 @@ export default function createToolbar({
       return {
         ...button,
         ...button.mapComponentDataToButtonProps(componentData)
+      };
+    };
+
+    mapStoreDataToButtonProps = (button, store, componentData) => {
+      if (!button.mapStoreDataToButtonProps) {
+        return button;
+      }
+      return {
+        ...button,
+        ...button.mapStoreDataToButtonProps({ store, componentData })
       };
     };
 
