@@ -14,7 +14,7 @@ import { keyBindingFn, initPluginKeyBindings } from './keyBindings';
 import handleKeyCommand from './handleKeyCommand';
 import handleReturnCommand from './handleReturnCommand';
 import blockStyleFn from './blockStyleFn';
-import getBlockRenderMap from './getblockRenderMap';
+import getBlockRenderMap from './getBlockRenderMap';
 import { getStaticTextToolbarId } from './Toolbars/toolbar-id';
 import {
   AccessibilityListener,
