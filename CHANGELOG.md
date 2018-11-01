@@ -10,6 +10,16 @@
 
 ## [Unreleased]
 
+### :rocket: New Feature
+
+- `common`
+  - `mapStoreDataToButtonProps` API exposed (to be used in toolbar button structures)
+
+### :bug: Bug Fix
+
+- `html`
+  - html component width is according to editor width rather hard-coded
+
 <br/>
 
 ## 1.7.0 (Oct 31, 2018)
