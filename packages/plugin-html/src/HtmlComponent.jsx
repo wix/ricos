@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { mergeStyles, isValidUrl, normalizeUrl, validate } from 'wix-rich-content-common';
 
@@ -8,34 +8,49 @@ import IframeHtml from './IframeHtml';
 import IframeUrl from './IframeUrl';
 import htmlComponentStyles from '../statics/styles/HtmlComponent.scss';
 
-const HtmlComponent = props => {
-  const styles = mergeStyles({ styles: htmlComponentStyles, theme: props.theme });
-  validate(props.componentData, schema);
-  const { blockProps, componentData: { src, srcType, config: { width, height } = {} } } = props;
-  const style = { width, height };
-  const readOnly = blockProps ? blockProps.readOnly : true;
+class HtmlComponent extends Component {
+  constructor(props) {
+    super(props);
+    this.styles = mergeStyles({ styles: htmlComponentStyles, theme: props.theme });
+  }
 
-  return (
-    <div className={styles.htmlComponent} style={style} data-hook="HtmlComponent">
-      {srcType === SRC_TYPE_HTML && src && (
-        <IframeHtml
-          key={SRC_TYPE_HTML}
-          tabIndex={readOnly ? -1 : 0}
-          html={src}
-          src={props.settings.htmlIframeSrc}
-        />
-      )}
+  componentDidMount() {
+    if (!this.props.componentData.width && this.element) {
+      const { width } = this.element.getBoundingClientRect();
+      this.props.componentData.config.width = width;
+    }
+  }
 
-      {srcType === SRC_TYPE_URL && isValidUrl(src) && (
-        <IframeUrl key={SRC_TYPE_URL} tabIndex={readOnly ? -1 : 0} src={normalizeUrl(src)} />
-      )}
+  render() {
+    const { styles, props } = this;
+    validate(props.componentData, schema);
+    const { blockProps, componentData: { src, srcType, config: { width, height } = {} } } = props;
+    const style = { width, height };
 
-      {!src && !isValidUrl(src) && (
-        <div className={styles.htmlComponent_placeholder} />
-      )}
-    </div>
-  );
-};
+    const readOnly = blockProps ? blockProps.readOnly : true;
+
+    return (
+      <div className={styles.htmlComponent} ref={ref => this.element = ref} style={style} data-hook="HtmlComponent">
+        {srcType === SRC_TYPE_HTML && src && (
+          <IframeHtml
+            key={SRC_TYPE_HTML}
+            tabIndex={readOnly ? -1 : 0}
+            html={src}
+            src={props.settings.htmlIframeSrc}
+          />
+        )}
+
+        {srcType === SRC_TYPE_URL && isValidUrl(src) && (
+          <IframeUrl key={SRC_TYPE_URL} tabIndex={readOnly ? -1 : 0} src={normalizeUrl(src)} />
+        )}
+
+        {!src && !isValidUrl(src) && (
+          <div className={styles.htmlComponent_placeholder} />
+        )}
+      </div>
+    );
+  }
+}
 
 HtmlComponent.propTypes = {
   componentData: PropTypes.object.isRequired,

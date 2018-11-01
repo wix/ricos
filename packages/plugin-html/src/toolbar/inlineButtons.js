@@ -19,7 +19,14 @@ import {
 } from '../constants';
 import EditPanel from './HtmlEditPanel';
 
-const getAlignmentButtonProps = componentData => ({ disabled: get(componentData, 'config.width', 0) > MAX_ALIGNMENT_WIDTH });
+const getAlignmentButtonProps = ({ store, componentData }) => {
+  const bounds = store.get('editorBounds');
+  const maxAlignmentWidth = bounds ? bounds.width - 1 : MAX_ALIGNMENT_WIDTH;
+  return {
+    disabled: get(componentData, 'config.width', 0) > maxAlignmentWidth
+  };
+};
+
 const TOOLTIP_TEXT_BY_SRC_TYPE = {
   [SRC_TYPE_HTML]: 'HtmlPlugin_EditHtml_Tooltip',
   [SRC_TYPE_URL]: 'HtmlPlugin_EditUrl_Tooltip',
@@ -42,7 +49,8 @@ export default () => {
       mapStoreDataToPanelProps: ({ store }) => {
         const bounds = store.get('editorBounds');
         return {
-          max: bounds ? bounds.width : MAX_WIDTH
+          max: bounds ? bounds.width : MAX_WIDTH,
+          inputMax: bounds ? bounds.width : MAX_WIDTH,
         };
       }
     },
@@ -52,7 +60,7 @@ export default () => {
       type: BUTTONS.ALIGNMENT_LEFT,
       keyName: 'alignLeft',
       icon: SizeSmallLeftIcon,
-      mapComponentDataToButtonProps: getAlignmentButtonProps,
+      mapStoreDataToButtonProps: getAlignmentButtonProps,
     },
     {
       type: BUTTONS.ALIGNMENT_CENTER,
@@ -63,7 +71,7 @@ export default () => {
       type: BUTTONS.ALIGNMENT_RIGHT,
       keyName: 'alignRight',
       icon: SizeSmallRightIcon,
-      mapComponentDataToButtonProps: getAlignmentButtonProps,
+      mapStoreDataToButtonProps: getAlignmentButtonProps,
     },
     { type: BUTTONS.SEPARATOR, keyName: 'separator3' },
     { type: BUTTONS.DELETE, keyName: 'delete', mobile: true },

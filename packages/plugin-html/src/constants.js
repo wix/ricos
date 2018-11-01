@@ -15,7 +15,6 @@ export const DEFAULT_COMPONENT_DATA = {
   src: '',
   config: {
     alignment: 'center',
-    width: 740,
     height: 242,
   },
 };
