@@ -23,7 +23,7 @@ class ButtonViewer extends Component {
     const { componentData, theme } = this.props; // eslint-disable-line no-unused-vars
     return (
       <div className={classNames(this.styles.button)}>
-        <a className={theme.button_primary}>
+        <a className={theme.button_primary} href={componentData.url}>
           {!componentData.buttonName ?
             'Click Me!' : componentData.buttonName
           }

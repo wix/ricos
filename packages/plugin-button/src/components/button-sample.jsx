@@ -13,7 +13,7 @@ class ButtonSample extends PureComponent {
     this.state = {
       buttonStyle: componentData.buttonStyle || {},
       index: this.props.i
-    }
+    };
   }
 
   onClick = () => {
@@ -23,7 +23,7 @@ class ButtonSample extends PureComponent {
     } else {
       pubsub.update('componentData', { buttonStyle: style, borderWidth: 0, borderRadius: 0 });
     }
-   this.props.onClickButton(this.state.index);
+    this.props.onClickButton(this.state.index);
     this.setState({ buttonStyle: this.props.style });
 
   }
@@ -31,44 +31,47 @@ class ButtonSample extends PureComponent {
 
   render() {
 
-    const { style, theme, active, i } = this.props;
+    const { style, theme, active } = this.props;
     const { styles } = this;
     let displayActive = {
       display: 'inline'
-    }
-    if(active){
+    };
+    if (active) {
       displayActive = {
         display: 'inline'
-      }
-    }
-    else {
+      };
+    } else {
       displayActive = {
         display: 'none'
-      }
+      };
     }
     return (
       <div className={styles.buttonSample}>
         <div style={displayActive} className={styles.oval}>
-        <div className={styles.active}/>
+          <div className={styles.active} />
         </div>
-      <button onClick={this.onClick} style={style.style} className={classNames(theme[style.className], styles.button_sample)}>
-        Click Me!
-      </button>
+        <button onClick={this.onClick} style={style.style} className={classNames(theme[style.className], styles.button_sample)}>
+          Click Me!
+        </button>
       </div>
     );
   }
 }
 
 ButtonSample.propTypes = {
-  style: PropTypes.object
+  style: PropTypes.object,
+  theme: PropTypes.object,
+  componentData: PropTypes.object,
+  i: PropTypes.string,
+  pubsub: PropTypes.object,
+  onConfirm: PropTypes.func,
+  onClick: PropTypes.func,
+  onClickButton: PropTypes.func,
+  active: PropTypes.bool,
+
+
+
+
 };
 
 export default ButtonSample;
-/*
-.Oval {
-  width: 18px;
-  height: 18px;
-  border: solid 1px #ffffff;
-  background-color: #23d6b5;
-}
-*/

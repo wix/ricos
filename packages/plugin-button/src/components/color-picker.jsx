@@ -20,16 +20,12 @@ class ColorPicker extends PureComponent {
     this.setState({ pickerClicked: !this.state.pickerClicked });
   };
 
-  onFocusOut = () => {
-    this.setState({ pickerClicked: false });
-  };
-
   handleChangeComplete = (color, lable) => {
     const { componentData, pubsub, handleChangeComplete, colorFor } = this.props;
     if (handleChangeComplete) {
       handleChangeComplete({ ...componentData, color: color.hex, colorFor });
     } else {
-      pubsub.update('componentData', { color: color.hex, colorFor});
+      pubsub.update('componentData', { color: color.hex, colorFor });
     }
 
     lable === this.setState({ color: color.hex, pickerClicked: false });
@@ -50,7 +46,7 @@ class ColorPicker extends PureComponent {
             className={this.styles.pickerButton}
           />
           {this.state.pickerClicked ?
-            <div onBlur={this.onFocusOut}>
+            <div>
               <SwatchesPicker
                 className={this.styles.swatchesPicker}
                 onChangeComplete={this.handleChangeComplete}
@@ -72,6 +68,11 @@ ColorPicker.propTypes = {
   theme: PropTypes.object,
   style: PropTypes.object,
   initialColor: PropTypes.string,
-  children: PropTypes.string
+  children: PropTypes.string,
+  componentData: PropTypes.object,
+  pubsub: PropTypes.object,
+  onConfirm: PropTypes.func,
+  colorFor: PropTypes.string,
+  handleChangeComplete: PropTypes.func
 };
 export default ColorPicker;

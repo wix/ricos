@@ -24,7 +24,7 @@ class DesignComponent extends PureComponent {
       borderWidth: componentData.borderWidth || 0,
       buttonSize: componentData.buttonSize || 'M',
       borderRadius: componentData.borderRadius || 0,
-      activeButton: 0
+      activeButton: componentData.activeButton || 0
     };
   }
 
@@ -67,12 +67,16 @@ class DesignComponent extends PureComponent {
       pubsub.update('componentData', { buttonSize });
     }
     onCloseRequested();
-
-
     this.setState({ submitted: true });
   };
 
   onButtonSampleClick = index => {
+    const { componentData, pubsub, onButtonSampleClick } = this.props;
+    if (onButtonSampleClick) {
+      onButtonSampleClick({ ...componentData, activeButton: index });
+    } else {
+      pubsub.update('componentData', { activeButton: index });
+    }
     this.setState({ activeButton: index });
   }
 
@@ -128,7 +132,7 @@ class DesignComponent extends PureComponent {
       },
     ];
     const buttonSampleList = arr.map((style, i) => {
-      const active = (i === this.state.activeButton) ? true : false;
+      const active = i === this.state.activeButton;
       return (<ButtonSample
         key={i.toString()}
         active={active}
