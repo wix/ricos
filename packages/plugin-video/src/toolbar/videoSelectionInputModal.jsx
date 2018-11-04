@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import classNames from 'classnames';
 import { mergeStyles, isVideoUrl, TextInput, CloseIcon, Button, WixUtils } from 'wix-rich-content-common';
 import styles from '../../statics/styles/video-selection-input-modal.scss';
 
@@ -91,7 +90,7 @@ export default class VideoSelectionInputModal extends Component {
         <div className={styles[`video_modal_container_${handleFileSelection ? 'big' : 'small'}`]} data-hook="videoUploadModal">
           {!WixUtils.isMobile() && <CloseIcon className={styles.video_modal_closeIcon} onClick={() => this.onCloseRequested()} />}
           <div className={styles.video_modal_add_a_Video}>{t('VideoUploadModal_Title')}</div>
-          <div role="heading" aria-labelledby="video_modal_hdr" className={classNames(styles.video_modal_header)}>
+          <div role="heading" aria-labelledby="video_modal_hdr" className={styles.video_modal_header}>
             <h3 id="video_modal_hdr" className={styles.video_modal_header_text}>
               {t('VideoUploadModal_Header')}
             </h3>
@@ -139,9 +138,4 @@ VideoSelectionInputModal.propTypes = {
   t: PropTypes.func,
   handleFileSelection: PropTypes.func,
   enableCustomUploadOnMobile: PropTypes.bool,
-};
-
-VideoSelectionInputModal.defaultProps = {
-  doneLabel: 'Add Now',
-  cancelLabel: 'Cancel',
 };
