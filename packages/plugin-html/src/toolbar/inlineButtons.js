@@ -31,7 +31,12 @@ const TOOLTIP_TEXT_BY_SRC_TYPE = {
   [SRC_TYPE_HTML]: 'HtmlPlugin_EditHtml_Tooltip',
   [SRC_TYPE_URL]: 'HtmlPlugin_EditUrl_Tooltip',
 };
-export default () => {
+
+/**
+ * createInlineButtons
+ */
+export default ({ settings = {} }) => {
+  const { maxWidth, minWidth = MIN_WIDTH, maxHeight = MAX_HEIGHT, minHeight = MIN_HEIGHT } = settings;
   return [
     {
       type: BUTTONS.INLINE_PANEL,
@@ -45,16 +50,23 @@ export default () => {
     {
       type: BUTTONS.WIDTH,
       keyName: 'width',
-      min: MIN_WIDTH,
+      min: minWidth,
       mapStoreDataToPanelProps: ({ store }) => {
         const bounds = store.get('editorBounds');
-        return {
-          max: bounds ? bounds.width : MAX_WIDTH,
-          inputMax: bounds ? bounds.width : MAX_WIDTH,
-        };
+        if (bounds && bounds.width) {
+          return { max: maxWidth ? Math.min(maxWidth, bounds.width) : bounds.width };
+        } else {
+          return { max: maxWidth || MAX_WIDTH };
+        }
       }
     },
-    { type: BUTTONS.HEIGHT, keyName: 'height', min: MIN_HEIGHT, max: MAX_HEIGHT, inputMax: MAX_HEIGHT_INPUT },
+    {
+      type: BUTTONS.HEIGHT,
+      keyName: 'height',
+      min: minHeight,
+      max: maxHeight,
+      inputMax: MAX_HEIGHT_INPUT,
+    },
     { type: BUTTONS.SEPARATOR, keyName: 'separator2' },
     {
       type: BUTTONS.ALIGNMENT_LEFT,

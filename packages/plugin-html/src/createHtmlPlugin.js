@@ -15,6 +15,7 @@ const createHtmlPlugin = (config = {}) => {
       helpers,
       t,
       isMobile,
+      settings,
     }),
     helpers,
     isMobile,
