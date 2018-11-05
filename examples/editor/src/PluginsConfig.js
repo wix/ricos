@@ -29,8 +29,13 @@ export default {
     }
   },
   [HTML_TYPE]: {
-    htmlIframeSrc: "http://localhost:3000/static/html-plugin-embed.html"
-    // showInsertButtons: false,
+    htmlIframeSrc: "http://localhost:3000/static/html-plugin-embed.html",
+    minWidth: 35,
+    maxWidth: 740,
+    height: 250,
+    width: 740,
+    minHeight: 50,
+    maxHeight: 350,
   },
   [EXTERNAL_MENTIONS_TYPE]: {
     repositionSuggestions: true,
