@@ -1,18 +1,26 @@
+
 .button_sample {
-  margin-right: 30px;
-  margin-bottom: 24px;
   box-sizing: border-box;
+  padding: 11px;
+  font-size: 14px;
+  padding: 11px 24px;
+  border-style: none;
   cursor: pointer;
 }
-.buttonSample{
+.button_sample_container {
   position: relative;
   width: fit-content;
   display: inline-block;
+  margin-right: 30px;
+  margin-bottom: 24px;
 }
+// .buttonSample:nth-child(3n) {
+//   margin-right: 0px;
+// }
 .oval {
   position: absolute;
-  right: 20px;
-  top: -8px;
+  left: 93px;
+  top: -6px;
   width: 18px;
   height: 18px;
   border: solid 1px #ffffff;

@@ -18,6 +18,26 @@
 
 }
 
+.palette{
+  width: 56px;
+  height: 56px;
+  border-radius: 28px;
+  display: inline-block;
+  border: solid 1px #ededed;
+  background-color: #b5d1ff;
+  margin-left: 7px;
+  cursor: pointer;
+}
+.colorBoard{
+  padding-top: 15px;
+  padding-bottom: 18px;
+}
+.palettes{
+  width: 100%;
+  text-align: right;
+  padding-bottom: 18px;
+}
+
 .pickerButton{
   width: 30px;
   height: 30px;
@@ -31,4 +51,8 @@
   top: 30;
   right: 30;
   z-index: 11;
+}
+
+.checkboard {
+ 
 }

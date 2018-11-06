@@ -1,18 +1,16 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import MyColorPicker from './custom-color-picker';
 import {
   SliderWithInput,
   RadioGroup,
   SettingsSection,
   mergeStyles,
-  SettingsPanelFooter
+  WixUtils
 } from 'wix-rich-content-common';
 import classNames from 'classnames';
-import ColorPicker from '../components/color-picker';
 import ButtonSample from '../components/button-sample';
 import styles from '../../statics/styles/design-component-styles.scss';
-
-
 
 class DesignComponent extends PureComponent {
 
@@ -24,8 +22,19 @@ class DesignComponent extends PureComponent {
       borderWidth: componentData.borderWidth || 0,
       buttonSize: componentData.buttonSize || 'M',
       borderRadius: componentData.borderRadius || 0,
-      activeButton: componentData.activeButton || 0
+      activeButton: componentData.activeButton || 0,
     };
+  }
+
+  componentDidMount = () => {
+    this.props.initailStateHandler(this.state);
+  }
+
+  componentDidUpdate = () => {
+    // const state = this.state;
+    // const initState = this.props.initailState;
+    this.props.onDesignChange(this.state);
+
   }
 
   onRadioButtonsChange = value => {
@@ -58,17 +67,7 @@ class DesignComponent extends PureComponent {
     this.setState({ borderRadius: value });
   };
 
-  onConfirm = () => {
-    const { buttonSize } = this.state;
-    const { componentData, pubsub, onConfirm, onCloseRequested } = this.props;
-    if (onConfirm) {
-      onConfirm({ ...componentData, buttonSize });
-    } else {
-      pubsub.update('componentData', { buttonSize });
-    }
-    onCloseRequested();
-    this.setState({ submitted: true });
-  };
+
 
   onButtonSampleClick = index => {
     const { componentData, pubsub, onButtonSampleClick } = this.props;
@@ -77,50 +76,67 @@ class DesignComponent extends PureComponent {
     } else {
       pubsub.update('componentData', { activeButton: index });
     }
-    this.setState({ activeButton: index });
+    this.setState({ activeButton: index, borderWidth: 0, borderRadius: 0 });
   }
 
   render() {
     const styles = this.styles;
-    const { theme, t, doneLabel, cancelLabel } = this.props;
+    const { theme, t } = this.props;
+    const { activeButton } = this.state;
     const arr = [
       {
         className: 'button_primary',
         style: {
+          border: '0px solid #0261FF',
           borderRadius: '0px',
           borderWidth: '1px',
+          // background: '#0261FF',
+          // color: 'white'
         }
       },
       {
         className: 'button_secondary',
         style: {
+          border: '1px solid #0261FF',
           borderRadius: '0px',
           borderWidth: '1px',
+          // background: 'white',
+          // color: '#0261FF'
         }
       },
       {
         className: 'button_secondary',
         style: {
+          border: '1px solid #0261FF',
           borderRadius: '0px',
           borderWidth: '1px',
+          //background: '#BCD4FD',
+          // color: '#0261FF'
         }
       },
       {
         className: 'button_secondary',
         style: {
+          border: '1px solid #0261FF',
           borderRadius: '10px',
           borderWidth: '1px',
+          //background: '#BCD4FD',
+          // color: '#0261FF'
         }
       },
       {
         className: 'button_secondary',
         style: {
+          border: '1px solid #0261FF',
           borderWidth: '5px',
           borderRadius: '0px',
+          // background: 'white',
+          // color: '#0261FF'
         }
       },
     ];
-    const sizeOptions = [
+
+    let sizeOptions = [
       {
         value: 'L', labelText: 'L'
       },
@@ -131,6 +147,10 @@ class DesignComponent extends PureComponent {
         value: 'S', labelText: 'S'
       },
     ];
+    if (WixUtils.isMobile()) {
+      sizeOptions.push({ value: 'F', labelText: 'Full width' });
+    }
+  
     const buttonSampleList = arr.map((style, i) => {
       const active = i === this.state.activeButton;
       return (<ButtonSample
@@ -142,6 +162,21 @@ class DesignComponent extends PureComponent {
         style={style}
       />);
     });
+    let color = {
+      hex: '#333',
+      rgb: {
+        r: 51,
+        g: 51,
+        b: 51,
+        a: 1,
+      },
+      hsl: {
+        h: 0,
+        s: 0,
+        l: .20,
+        a: 1,
+      },
+    }
     return (
       <div className={styles.design_component}>
         <SettingsSection theme={theme} ariaProps={{ 'aria-label': 'button sample selection', role: 'region' }}>
@@ -168,7 +203,7 @@ class DesignComponent extends PureComponent {
             {t('ButtonModal_Border_Section')}
             <br /><br />
             <SliderWithInput
-              value={parseInt(this.state.borderWidth, 10)}
+              value={parseInt(this.state.borderWidth) + parseInt(arr[activeButton].style.borderWidth)}
               min={0}
               max={30}
               label={t('ButtonModal_Width_Input')}
@@ -176,7 +211,7 @@ class DesignComponent extends PureComponent {
               theme={theme}
             />
             <SliderWithInput
-              value={parseInt(this.state.borderRadius, 10)}
+              value={parseInt(this.state.borderRadius) + parseInt(arr[activeButton].style.borderRadius)}
               min={0}
               max={30}
               label={t('ButtonModal_Radius_Input')}
@@ -189,7 +224,8 @@ class DesignComponent extends PureComponent {
           <div style={{ border: 'none' }} className={styles.row} >
             {t('ButtonModal_Color_Section')}
             <br /><br />
-            <ColorPicker {...this.props} colorFor="textColor" theme={theme} initialColor={'white'}>{t('ButtonModal_Text_Color')}</ColorPicker>
+            <MyColorPicker rgb={color.rgb} hex={color.hex} hsl={color.hsl} ></MyColorPicker>
+            {/* <ColorPicker {...this.props} colorFor="textColor" theme={theme} initialColor={'white'}>{t('ButtonModal_Text_Color')}</ColorPicker>
             <ColorPicker {...this.props} colorFor="borderColor" theme={theme} initialColor={'#0261FF'}>{t('ButtonModal_Border_Color')}</ColorPicker>
             <ColorPicker
               {...this.props}
@@ -197,18 +233,9 @@ class DesignComponent extends PureComponent {
               theme={theme}
               initialColor={'#B5D1FF'}
             >{t('ButtonModal_Background_Color')}
-            </ColorPicker>
+            </ColorPicker> */}
           </div>
         </SettingsSection>
-        <SettingsPanelFooter
-          className={styles.modal_footer}
-          save={() => this.onConfirm()}
-          cancel={() => this.props.onCloseRequested()}
-          saveLabel={doneLabel}
-          cancelLabel={cancelLabel}
-          theme={theme}
-          t={t}
-        />
       </div>
     );
   }

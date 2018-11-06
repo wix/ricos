@@ -31,15 +31,23 @@ class ButtonComponent extends PureComponent {
       S: {
         paddingLeft: '16px',
         paddingRight: '16px'
+      },
+      F: {
+        paddingLeft: '0px',
+        paddingRight: '0px',
+        width: 'calc(100vw - 58px)',
+        textAlign: 'center'
       }
     };
     let style = {
     };
     if (buttonStyle) {
       style = {
+        border: buttonStyle.style.border,
         borderRadius: buttonStyle.style.borderRadius,
         borderWidth: buttonStyle.style.borderWidth,
-        background: buttonStyle.style.background
+        background: buttonStyle.style.background,
+        color: buttonStyle.style.color,
       };
     }
     if (componentData.buttonSize) {
@@ -85,7 +93,6 @@ class ButtonComponent extends PureComponent {
     }
     const styleClassName = (buttonStyle) ? buttonStyle.className : 'button_primary';
     return (
-
       <a
         className={classNames(theme[styleClassName], containerClassNames)}
         href={componentData.url}

@@ -1,60 +1,74 @@
-@import '~wix-rich-content-common/dist/statics/styles/mixins';
-@import '~wix-rich-content-common/dist/statics/styles/palette';
+@import "~wix-rich-content-common/dist/statics/styles/mixins";
+@import "~wix-rich-content-common/dist/statics/styles/palette";
 
 .container {
+  @include phone {
+    padding: 0px 20px;
+    input {
+      border: none;
+      border-bottom: solid 1px rgba(51, 51, 51, 0.2);
+      padding-left: 0px;
+    }
+}
+
 }
 
 .closeIcon {
-    position: absolute;
-    right: 30px;
-    top: 30px;
-    cursor: pointer;
+  position: absolute;
+  right: 30px;
+  top: 30px;
+  cursor: pointer;
 }
 
 .cameraIcon {
-    width: 18px;
+  width: 18px;
 }
 
 .errorIcon {
-    width: 13px;
+  width: 13px;
 }
 
 .header {
-    display: flex;
-    align-items: center;
-    padding: 30px;
+  display: flex;
+  align-items: center;
+  padding: 30px;
 }
 
-
 .header_text {
-    font-size: 16px;
-    margin: 8px 0 8px 0;
+  font-size: 16px;
+  margin: 8px 0 8px 0;
+  @include phone{
+    padding-bottom: 24px;
+  }
 }
 
 .header_icon {
-    margin-right: 12px;
+  margin-right: 12px;
 }
 
-.errorMessage{
-    color: red;
+.errorMessage {
+  color: red;
 }
 
-.linkPanelContainer{
-    input{
-        background: red;
-    }
+.linkPanelContainer {
+  input {
+    background: red;
+  }
 }
-.errorIcon{
-    position: absolute;
-    top: 0px;
-    right: 52px;
+.errorIcon {
+  position: absolute;
+  top: 0px;
+  left: 127px;
 }
-.tabTitle{
-   
+.tabTitle {
 }
-.settingTab{
-    position: relative; 
-    width: 100%;
-    height: 18px;
-   
+
+.modal_footer {
+  padding: 30px 30px;
+}
+
+.settingTab {
+  position: relative;
+  width: 100%;
+  height: 18px;
 }

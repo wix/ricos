@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { SwatchesPicker } from 'react-color';
+import CustomColorPicker from './custom-color-picker';
 import { mergeStyles } from 'wix-rich-content-common';
 import styles from '../../statics/styles/color-picker.scss';
 
@@ -12,7 +12,8 @@ class ColorPicker extends PureComponent {
     this.state = {
       pickerClicked: false,
       color: componentData.color || this.props.initialColor,
-      colorFor: componentData.colorFor || ''
+      colorFor: componentData.colorFor || '',
+      chromePicker: false
     };
   }
 
@@ -35,30 +36,65 @@ class ColorPicker extends PureComponent {
     this.setState({ pickerClicked: false });
   };
 
+  onPaletteClick = (color, index) => {
+    console.log(color, index);
+    if (index === 5) {
+      this.setState({ chromePicker: !this.state.chromePicker });
+    }
+  }
   render() {
+    const colors = [
+      '#ffffff',
+      '#040404',
+      '#0261ff',
+      '#b5d1ff',
+      '#23d6b5',
+      'none'
+    ];
+
+    const palattes = colors.map((color, index) => {
+      return (
+        <div className={styles.palette} onClick={this.onPaletteClick.bind(this, color, index)} style={{ background: color }}>
+        </div>
+      );
+    })
+    const customPickerStyle = {
+      input:{
+        display: 'none'
+      },
+      label:{
+        display: 'none',
+      }
+    }
     return (
-      <div className={this.styles.color_picker}>
-        <div className={this.styles.picker}>
-          <button
-            style={{ background: this.state.color }}
-            onClick={this.onPickerClick}
-            onKeyDown={this.handleOnKeyPressed}
-            className={this.styles.pickerButton}
-          />
-          {this.state.pickerClicked ?
-            <div>
-              <SwatchesPicker
-                className={this.styles.swatchesPicker}
-                onChangeComplete={this.handleChangeComplete}
-                color={this.state.color}
-              />
-            </div> :
-            null
-          }
+      <div>
+        <div className={this.styles.color_picker}>
+          <div className={this.styles.picker}>
+            <button
+              style={{ background: this.state.color }}
+              onClick={this.onPickerClick}
+              onKeyDown={this.handleOnKeyPressed}
+              className={this.styles.pickerButton}
+            />
+          </div>
+          <div className={this.styles.label}>
+            {this.props.children}
+          </div>
         </div>
-        <div className={this.styles.label}>
-          {this.props.children}
-        </div>
+        {this.state.pickerClicked ?
+          <div className={styles.colorBoard}>
+            <div className={styles.palettes}>
+              {palattes}
+            </div>
+            {this.state.chromePicker ?
+              <div className={styles.checkboard}>
+              <CustomColorPicker/>
+              </div> :
+              null
+            }
+
+          </div> : null
+        }
       </div>
     );
   }

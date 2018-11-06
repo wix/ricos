@@ -31,7 +31,7 @@ class ButtonSample extends PureComponent {
 
   render() {
 
-    const { style, theme, active } = this.props;
+    const { style, theme, active, i } = this.props;
     const { styles } = this;
     let displayActive = {
       display: 'inline'
@@ -46,11 +46,11 @@ class ButtonSample extends PureComponent {
       };
     }
     return (
-      <div className={styles.buttonSample}>
+      <div className={styles.button_sample_container}>
         <div style={displayActive} className={styles.oval}>
           <div className={styles.active} />
         </div>
-        <button onClick={this.onClick} style={style.style} className={classNames(theme[style.className], styles.button_sample)}>
+        <button onClick={this.onClick} style={{...style.style}} className={classNames(theme[style.className], styles.button_sample)}>
           Click Me!
         </button>
       </div>

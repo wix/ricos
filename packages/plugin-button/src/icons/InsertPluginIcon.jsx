@@ -3,16 +3,12 @@ import React from 'react';
 
 
 const InsertPluginIcon = props => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="5" height="5" viewBox="0 0 16 16" {...props}>
-    <defs>
-      <rect id="a" width="16" height="16" rx="3" />
-    </defs>
-    <g fill="none" fillRule="evenodd">
-      <use fill="#FFF" href="#a" />
-      <rect width="15" height="15" x=".5" y=".5" stroke="currentColor" rx="3" />
+  <svg xmlns="http://www.w3.org/2000/svg" width="31" height="31" style={{ width: '31px', height: '23px' }} viewBox="0 0 19 19" {...props}>
+    <g fill="none" fillRule="evenodd" stroke="currentColor" transform="translate(1)">
+      <rect width="14.211" height="7" x="1.395" y="5.5" rx="3.5" />
+      <path d="M11.034 7.541c1.246-.305 2.063.18 2.453 1.459" />
     </g>
   </svg>
-
 );
 
 export default InsertPluginIcon;

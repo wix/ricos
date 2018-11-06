@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import {
   mergeStyles,
   TextInput,
-  SettingsPanelFooter,
   Checkbox,
   isValidUrl,
 } from 'wix-rich-content-common';
@@ -23,13 +22,22 @@ class SettingsComponent extends PureComponent {
 
     this.state = {
       url: componentData.url || '',
-      buttonName: componentData.buttonName || 'Click Me',
+      buttonName: componentData.buttonName || 'Click Me!',
       targetBlank: componentData.targetBlank || false,
       nofollow: componentData.nofollow || false,
       validUrl: componentData.validUrl || true,
       submitted: componentData.submitted || true,
     };
   }
+
+  componentDidMount = () => {
+    this.props.initailState(this.state);
+  }
+
+  componentDidUpdate = () => {
+    this.props.onSettingsChange(this.state);
+  }
+
 
   handleKeyPress = e => {
     if (e.charCode === 13) {
@@ -69,30 +77,10 @@ class SettingsComponent extends PureComponent {
     } else {
       this.setState({ validUrl: false });
     }
-
-  };
-
-
-  onConfirm = () => {
-    const { buttonName, url, targetBlank, nofollow } = this.state;
-    const { componentData, pubsub, onConfirm, onCloseRequested } = this.props;
-    if (isValidUrl(url)) {
-      this.props.onValidUrl(true);
-      if (onConfirm) {
-        onConfirm({ ...componentData, buttonName, url, targetBlank, nofollow, validUrl: isValidUrl(url) });
-      } else {
-        pubsub.update('componentData', { buttonName, url, targetBlank, nofollow, validUrl: isValidUrl(url) });
-      }
-      onCloseRequested();
-      this.setState({ submitted: true });
-    } else {
-      this.setState({ validUrl: false });
-      this.props.onValidUrl(false);
-    }
   };
 
   render() {
-    const { theme, doneLabel, cancelLabel, t } = this.props;
+    const { theme, t } = this.props;
     const { buttonName, url, validUrl } = this.state;
     const paddingTop = (!validUrl) ? '21px' : '35px';
     const errorTooltip = (!validUrl) ? 'Invalid link' : false;
@@ -154,15 +142,6 @@ class SettingsComponent extends PureComponent {
             onChange={this.handleNofollowChange}
           />
         </div>
-        <SettingsPanelFooter
-          className={styles.modal_footer}
-          save={() => this.onConfirm()}
-          cancel={() => this.props.onCloseRequested()}
-          saveLabel={doneLabel}
-          cancelLabel={cancelLabel}
-          theme={theme}
-          t={t}
-        />
       </div>
     );
   }
@@ -178,11 +157,13 @@ SettingsComponent.propTypes = {
   componentData: PropTypes.object,
   t: PropTypes.func,
   onValidUrl: PropTypes.func,
+  onSettingsChange: PropTypes.func,
   pubsub: PropTypes.object,
   onConfirm: PropTypes.func,
   onCloseRequested: PropTypes.func,
   doneLabel: PropTypes.string,
   cancelLabel: PropTypes.string,
+  initailState: PropTypes.object
 };
 
 export default SettingsComponent;

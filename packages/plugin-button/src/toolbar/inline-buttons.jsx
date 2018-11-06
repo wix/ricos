@@ -5,16 +5,16 @@ import ButtonInputModal from './buttonInputModal';
 const custumStyleSettingModal = {
   content:
   {
-    maxWidth: '440px',
+    maxWidth: '420px',
   }
 };
 
 export default ({ anchorTarget, relValue }) => {
   return [
-    { keyName: 'sizeSmallLeft', type: BUTTONS.SIZE_SMALL_LEFT, mobile: false },
-    { keyName: 'sizeSmallCenter', type: BUTTONS.SIZE_SMALL_CENTER, mobile: false },
-    { keyName: 'sizeSimallRight', type: BUTTONS.SIZE_SMALL_RIGHT, mobile: false },
-    { keyName: 'separator1', type: BUTTONS.SEPARATOR, mobile: false },
+    { keyName: 'sizeSmallLeft', type: BUTTONS.SIZE_SMALL_LEFT, mobile: true },
+    { keyName: 'sizeSmallCenter', type: BUTTONS.SIZE_SMALL_CENTER, mobile: true },
+    { keyName: 'sizeSimallRight', type: BUTTONS.SIZE_SMALL_RIGHT, mobile: true },
+    { keyName: 'separator1', type: BUTTONS.SEPARATOR, mobile: true },
     {
       keyName: 'advanced_settings',
       type: BUTTONS.EXTERNAL_MODAL,
@@ -23,7 +23,7 @@ export default ({ anchorTarget, relValue }) => {
       activeTab: 'advanced_settings',
       modalElement: ButtonInputModal,
       modalStyles: getModalStyles({ customStyles: custumStyleSettingModal }),
-      mobile: false,
+      mobile: true,
       tooltipTextKey: 'SettingsButton_Tooltip',
       anchorTarget,
       relValue
