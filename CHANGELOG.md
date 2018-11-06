@@ -16,7 +16,7 @@
   - [#179](https://github.com/wix-incubator/rich-content/pull/179) `mapStoreDataToButtonProps` API exposed (to be used in toolbar button structures)
   - [#179](https://github.com/wix-incubator/rich-content/pull/179) `width` and `height` props added to the plugin config
 - `html`
-  - [#179](https://github.com/wix-incubator/rich-content/pull/179) initial `width` and `height` values can be provided via settings. See [PluginsConfig](./examples/editor/src/PluginsConfig.js) for reference
+  - [#179](https://github.com/wix-incubator/rich-content/pull/179) `width`, `height`, `minWidth`, `minHeight`, `maxWidth`, and `maxHeight` values can be provided via settings. See [PluginsConfig](./examples/editor/src/PluginsConfig.js) for reference
 
 ### :bug: Bug Fix
 
