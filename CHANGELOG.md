@@ -12,6 +12,8 @@
 
 ### :rocket: New Feature
 
+- `custom video upload extension`
+  - [#170](https://github.com/wix-incubator/rich-content/pull/170) `plugin-video` extension added to upload custom videos
 - `common`
   - [#179](https://github.com/wix-incubator/rich-content/pull/179) `mapStoreDataToButtonProps` API exposed (to be used in toolbar button structures)
   - [#179](https://github.com/wix-incubator/rich-content/pull/179) `width` and `height` props added to the plugin config
