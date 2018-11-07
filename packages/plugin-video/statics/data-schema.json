@@ -11,6 +11,12 @@
         "https://www.youtube.com/watch?v=eqZVIiD6wSg"
       ]
     },
+    "isCustomVideo": {
+      "$id": "/properties/isCustomVideo",
+      "type": "bool",
+      "title": "Is Custom Video",
+      "default": "false"
+    },
     "config": {
       "$id": "/properties/config",
       "type": "object",

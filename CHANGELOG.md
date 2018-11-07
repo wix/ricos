@@ -25,6 +25,29 @@
 
 <br/>
 
+## 1.7.1 (Nov 7, 2018)
+
+### :rocket: New Feature
+
+- `custom video upload extension`
+  - [#170](https://github.com/wix-incubator/rich-content/pull/170) `plugin-video` extension added to upload custom videos
+- `common`
+  - [#179](https://github.com/wix-incubator/rich-content/pull/179) `mapStoreDataToButtonProps` API exposed (to be used in toolbar button structures)
+  - [#179](https://github.com/wix-incubator/rich-content/pull/179) `width` and `height` props added to the plugin config
+- `html`
+  - [#179](https://github.com/wix-incubator/rich-content/pull/179) `width`, `height`, `minWidth`, `minHeight`, `maxWidth`, and `maxHeight` values can be provided via settings. See [PluginCustomization](./docs/PluginCustomization.md) doc for reference
+
+### :bug: Bug Fix
+
+- `html`
+  - [#179](https://github.com/wix-incubator/rich-content/pull/179) html component maximum width is limited by the editor width rather set hard-coded
+
+### :book: Documentation
+
+- [PluginCustomization](./docs/PluginCustomization.md) doc added
+
+<br/>
+
 ## 1.7.0 (Oct 31, 2018)
 
 ### :boom: Breaking Change

@@ -1,11 +1,11 @@
-import VideoURLInputModal from './toolbar/videoURLInputModal';
+import VideoSelectionInputModal from './toolbar/videoSelectionInputModal';
 
 const Modals = {
-  VIDEO_URL_INPUT: 'video-url-input',
+  VIDEO_SELECTION_INPUT: 'video-selection-input',
 };
 
 const ModalsMap = {
-  [Modals.VIDEO_URL_INPUT]: VideoURLInputModal
+  [Modals.VIDEO_SELECTION_INPUT]: VideoSelectionInputModal
 };
 
 export {

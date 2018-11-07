@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-plugin-code-block",
-  "version": "1.5.7",
+  "version": "1.5.8",
   "author": {
     "name": "Šarūnas Dubinskas",
     "email": "sarunasd@wix.com"
@@ -54,7 +54,7 @@
   "dependencies": {
     "draft-js-code": "^0.3.0",
     "prismjs": "^1.15.0",
-    "wix-rich-content-common": "^1.5.7"
+    "wix-rich-content-common": "^1.5.8"
   },
   "unpkg": true,
   "publishConfig": {
