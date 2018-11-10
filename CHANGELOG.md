@@ -10,6 +10,10 @@
 
 ## [Unreleased]
 
+- `general`
+  - title and subtitle keyboard shortcuts are remapped to inline-headers
+  - data normalization now contains block-level headers conversion to inline-style headers
+
 ### :rocket: New Feature
 
 - `common`
