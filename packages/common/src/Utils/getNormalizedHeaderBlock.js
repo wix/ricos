@@ -5,11 +5,15 @@ const blockToInlineHeaderTypeMap = {
   'header-three': 'inline-header-three',
 };
 
-const getInlineHeaderStyleRanges = block => {
+const getInlineStyleRanges = block => {
   if (block.inlineStyleRanges) {
-    return block.inlineStyleRanges.filter(({ style }) => style === HEADING.TWO || style === HEADING.THREE);
+    const headerRanges = block.inlineStyleRanges.filter(({ style }) => style === HEADING.TWO || style === HEADING.THREE);
+    const otherRanges = block.inlineStyleRanges.filter(({ style }) => style !== HEADING.TWO && style !== HEADING.THREE);
+    return { headerRanges, otherRanges };
   }
-  return [];
+
+  return { headerRanges: [], otherRanges: [] };
+
 };
 
 const getCombinedRanges = (wrapRange, innerRanges) => {
@@ -46,14 +50,14 @@ const getCombinedRanges = (wrapRange, innerRanges) => {
 };
 
 export const getNormalizedHeaderBlock = block => {
-  const existingInlineHeaderRanges = getInlineHeaderStyleRanges(block);
-  const inlineStyleRanges = [];
+  const existingInlineRanges = getInlineStyleRanges(block);
+  const inlineStyleRanges = [...existingInlineRanges.otherRanges];
   const wrapRange = {
     offset: 0,
     length: block.text.length,
     style: blockToInlineHeaderTypeMap[block.type],
   };
-  inlineStyleRanges.push(...getCombinedRanges(wrapRange, existingInlineHeaderRanges));
+  inlineStyleRanges.push(...getCombinedRanges(wrapRange, existingInlineRanges.headerRanges));
 
   return { ...block, type: 'unstyled', inlineStyleRanges };
 };
