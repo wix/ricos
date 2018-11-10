@@ -10,22 +10,11 @@
 
 ## [Unreleased]
 
+### :bug: Bug Fix
+
 - `general`
   - title and subtitle keyboard shortcuts are remapped to inline-headers
   - data normalization now contains block-level headers conversion to inline-style headers
-
-### :rocket: New Feature
-
-- `common`
-  - [#179](https://github.com/wix-incubator/rich-content/pull/179) `mapStoreDataToButtonProps` API exposed (to be used in toolbar button structures)
-  - [#179](https://github.com/wix-incubator/rich-content/pull/179) `width` and `height` props added to the plugin config
-- `html`
-  - [#179](https://github.com/wix-incubator/rich-content/pull/179) `width`, `height`, `minWidth`, `minHeight`, `maxWidth`, and `maxHeight` values can be provided via settings. See [PluginsConfig](./examples/editor/src/PluginsConfig.js) for reference
-
-### :bug: Bug Fix
-
-- `html`
-  - [#179](https://github.com/wix-incubator/rich-content/pull/179) html component maximum width is limited by the editor width rather set hard-coded
 
 <br/>
 
