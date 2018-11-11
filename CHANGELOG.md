@@ -13,8 +13,7 @@
 ### :bug: Bug Fix
 
 - `general`
-  - title and subtitle keyboard shortcuts are remapped to inline-headers
-  - data normalization now contains block-level headers conversion to inline-style headers
+  - [#187](https://github.com/wix-incubator/rich-content/pull/187) title and subtitle keyboard shortcuts are remapped to inline-headers + data normalization now contains block-level headers conversion to inline-style headers
 - `soundcloud`
   - [#188](https://github.com/wix-incubator/rich-content/pull/188) Fix soundcloud regix url validator to include mobile urls + Save & Cancel Button font padding fixes on mobile
 - `video`
