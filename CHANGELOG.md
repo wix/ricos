@@ -14,10 +14,7 @@
 
 - `soundcloud`
   - [#188](https://github.com/wix-incubator/rich-content/pull/188) Fix soundcloud regix url validator to include mobile urls + Save & Cancel Button font padding fixes on mobile
-
-### :bug: Bug Fix
-
-- `plugin-video`
+- `video`
   - [#190](https://github.com/wix-incubator/rich-content/pull/190) Text input error icon padding fix + Text input shadow fix on safari
     
 <br/>
