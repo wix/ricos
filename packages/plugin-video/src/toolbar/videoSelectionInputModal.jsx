@@ -65,7 +65,7 @@ export default class VideoSelectionInputModal extends Component {
 
   render() {
     const { url, submitted, errorMsg } = this.state;
-    const { theme, t, handleFileSelection, enableCustomUploadOnMobile } = this.props;
+    const { t, handleFileSelection, enableCustomUploadOnMobile } = this.props;
     const { styles } = this;
     const uploadVideoSection =
       (
@@ -107,7 +107,7 @@ export default class VideoSelectionInputModal extends Component {
                 value={url}
                 error={!isVideoUrl(url) && submitted ? t('VideoUploadModal_Input_InvalidUrl') : null}
                 placeholder={t('VideoUploadModal_Input_Placeholder')}
-                theme={theme}
+                theme={styles}
                 data-hook="videoUploadModalInput"
               />
             </div>

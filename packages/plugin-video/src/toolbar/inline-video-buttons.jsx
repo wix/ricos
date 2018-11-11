@@ -19,7 +19,7 @@ export default ({ t, settings }) => {
       modalElement: decorateComponentWithProps(VideoSelectionInputModal, settings),
       modalStyles: getModalStyles({
         //apply the extended input modal styles if handleFileSelection is avilable in plugin config
-        //& on mobile if enableCustomUploadOnMobile is set to true, otherwise the normal modal styles is applied  
+        //& on mobile if enableCustomUploadOnMobile is set to true, otherwise the normal modal styles is applied
         customStyles: (!WixUtils.isMobile() || settings.enableCustomUploadOnMobile) && settings.handleFileSelection ?
           ExtendedSelectionModalCustomStyle :
           SelectionModalCustomStyle,

@@ -15,7 +15,11 @@
 - `general`
   - title and subtitle keyboard shortcuts are remapped to inline-headers
   - data normalization now contains block-level headers conversion to inline-style headers
-
+- `soundcloud`
+  - [#188](https://github.com/wix-incubator/rich-content/pull/188) Fix soundcloud regix url validator to include mobile urls + Save & Cancel Button font padding fixes on mobile
+- `video`
+  - [#190](https://github.com/wix-incubator/rich-content/pull/190) Text input error icon padding fix + Text input shadow fix on safari
+   
 <br/>
 
 ## 1.7.1 (Nov 7, 2018)

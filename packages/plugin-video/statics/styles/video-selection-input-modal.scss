@@ -46,7 +46,6 @@
 %video_modal_textInput {
   display: inline-block;
   input[type="url"] {
-    padding-right: 18px;
     @include phone {
       border-left: none;
       border-right: none;
@@ -127,6 +126,8 @@
   @include phone {
     width: 45%;
     margin-left: 27.5%;
+    padding-left: 10px;
+    padding-right: 10px;
   }
 }
 
@@ -136,6 +137,8 @@
   @include phone {
     width: 45%;
     margin-left: 27.5%;
+    padding-left: 10px;
+    padding-right: 10px;
   }
 }
 
@@ -151,4 +154,15 @@
   margin-top: 5px;
   color: red;
   font-size: 14px;
+}
+
+.textInput_input {
+  padding: 9px 21px 10px 12px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+ .textInput_input_invalid {
+  padding-right: 39px;
 }
