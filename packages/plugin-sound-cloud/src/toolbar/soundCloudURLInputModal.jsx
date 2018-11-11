@@ -58,16 +58,16 @@ export default class SoundCloudURLInputModal extends Component {
 
   render() {
     const { url, submitted } = this.state;
-    const { theme, doneLabel, cancelLabel, t } = this.props;
+    const { doneLabel, cancelLabel, t } = this.props;
     const { styles } = this;
 
     return (
       <div className={styles.container} data-hook="soundCloudUploadModal">
-        { !WixUtils.isMobile() && <CloseIcon className={classNames(styles.closeIcon)} onClick={() => this.onCloseRequested()} /> }
+        {!WixUtils.isMobile() && <CloseIcon className={classNames(styles.closeIcon)} onClick={() => this.onCloseRequested()} />}
         <div role="heading" aria-labelledby="sound_cloud_modal_hdr" className={classNames(styles.header)}>
           <SoundCloudIcon className={classNames(styles.header_icon)} />
           <h3 id="sound_cloud_modal_hdr" className={styles.header_text}>
-            {(!WixUtils.isMobile()) ? t('SoundCloudUploadModal_Header') : t('SoundCloudUploadModal_Header_Mobile') }
+            {(!WixUtils.isMobile()) ? t('SoundCloudUploadModal_Header') : t('SoundCloudUploadModal_Header_Mobile')}
           </h3>
         </div>
         <div className={styles.soundCloudUrlInputModal_textInput}>
@@ -81,7 +81,7 @@ export default class SoundCloudURLInputModal extends Component {
             value={url}
             error={!isSoundCloudUrl(url) && submitted ? t('SoundCloudUploadModal_Input_InvalidUrl') : null}
             placeholder={t('SoundCloudUploadModal_Input_Placeholder')}
-            theme={theme}
+            theme={styles}
             data-hook="soundCloudUploadModalInput"
           />
         </div>
@@ -91,7 +91,7 @@ export default class SoundCloudURLInputModal extends Component {
           cancel={() => this.onCloseRequested()}
           saveLabel={doneLabel}
           cancelLabel={cancelLabel}
-          theme={theme}
+          theme={styles}
           t={t}
         />
       </div>
