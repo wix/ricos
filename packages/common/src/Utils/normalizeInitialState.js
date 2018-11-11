@@ -92,6 +92,7 @@ export default (initialState, config) => {
       switch (block.type) {
         case 'atomic':
           return { ...block, text: ' ' };
+        case 'header-one':
         case 'header-two':
         case 'header-three':
           return getNormalizedHeaderBlock(block);

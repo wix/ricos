@@ -1,14 +1,15 @@
 import { HEADING } from '../Decorators/inline-styles';
 
 const blockToInlineHeaderTypeMap = {
+  'header-one': 'inline-header-one',
   'header-two': 'inline-header-two',
   'header-three': 'inline-header-three',
 };
 
 const getInlineStyleRanges = block => {
   if (block.inlineStyleRanges) {
-    const headerRanges = block.inlineStyleRanges.filter(({ style }) => style === HEADING.TWO || style === HEADING.THREE);
-    const otherRanges = block.inlineStyleRanges.filter(({ style }) => style !== HEADING.TWO && style !== HEADING.THREE);
+    const headerRanges = block.inlineStyleRanges.filter(({ style }) => style === HEADING.ONE || style === HEADING.TWO || style === HEADING.THREE);
+    const otherRanges = block.inlineStyleRanges.filter(({ style }) => style !== HEADING.ONE || style !== HEADING.TWO && style !== HEADING.THREE);
     return { headerRanges, otherRanges };
   }
 
