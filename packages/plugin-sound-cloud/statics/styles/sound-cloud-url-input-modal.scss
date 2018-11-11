@@ -49,6 +49,9 @@
 
 .textInput_input {
   padding: 9px 21px 10px 12px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }
 
 .textInput_input_invalid {
