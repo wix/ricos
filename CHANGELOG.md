@@ -13,7 +13,7 @@
 ### :bug: Bug Fix
 
 - `giphy`
-  - [#190](https://github.com/wix-incubator/rich-content/pull/190) using img tag (self closing) for viewer istead of gifplayer (as its not using a void img element tag)
+  - [#191](https://github.com/wix-incubator/rich-content/pull/191) using img tag (self closing) for viewer istead of gifplayer (as its not using a void img element tag)
 
 <br/>
 
