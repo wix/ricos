@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import GifPlayer from 'react-gif-player';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
 import { mergeStyles, validate } from 'wix-rich-content-common';
 import isEqual from 'lodash/isEqual';
 import schema from '../statics/data-schema.json';
@@ -23,13 +21,7 @@ class GiphyViewer extends Component {
   render() {
     const { componentData, theme, ...rest } = this.props; // eslint-disable-line no-unused-vars
     return (
-      <GifPlayer
-        className={classNames(this.styles.giphy_player)}
-        gif={componentData.gif.originalUrl}
-        still={componentData.gif.stillUrl}
-        autoplay
-        {...rest}
-      />
+      <img className={this.styles.giphy_player} src={componentData.gif.originalUrl} alt="gif" {...rest} />
     );
   }
 }

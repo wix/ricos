@@ -10,6 +10,11 @@
 
 ## [Unreleased]
 
+### :bug: Bug Fix
+
+- `giphy`
+  - [#190](https://github.com/wix-incubator/rich-content/pull/190) using img tag (self closing) for viewer istead of gifplayer (as its not using a void img element tag)
+
 <br/>
 
 ## 1.7.2 (Nov 11, 2018)
