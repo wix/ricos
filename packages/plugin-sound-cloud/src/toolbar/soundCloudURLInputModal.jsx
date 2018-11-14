@@ -20,6 +20,10 @@ export default class SoundCloudURLInputModal extends Component {
     this.setState({ url });
   };
 
+  onInputFocus = e => {
+    e.target.select()
+  }
+
   afterOpenModal = () => this.input.focus();
 
   onConfirm = () => {
@@ -79,6 +83,7 @@ export default class SoundCloudURLInputModal extends Component {
             type="url"
             onKeyPress={this.handleKeyPress}
             onChange={this.onUrlChange}
+            onFocus = {this.onInputFocus}
             value={url}
             error={!isSoundCloudUrl(url) && submitted ? t('SoundCloudUploadModal_Input_InvalidUrl') : null}
             placeholder={t('SoundCloudUploadModal_Input_Placeholder')}
