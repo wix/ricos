@@ -1,7 +1,7 @@
 import createToolbar from './toolbar';
 import { createBasePlugin, mergeStyles } from 'wix-rich-content-common';
 
-import { BUTTON_TYPE, BUTTON_TYPE_LEGACY } from './constants';
+import { BUTTON_TYPE } from './constants';
 
 import Styles from '../statics/styles/default-styles.scss';
 import ButtonComponent from './components/button-component';
@@ -15,7 +15,6 @@ const createButtonPlugin = (config = {}) => {
     settings,
     theme,
     type: BUTTON_TYPE,
-    legacyType: BUTTON_TYPE_LEGACY,
     toolbar: createToolbar({
       helpers,
       styles,

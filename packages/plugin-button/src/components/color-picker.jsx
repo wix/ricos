@@ -1,71 +1,79 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import CustomColorPicker from './custom-color-picker';
+import isEqual from 'lodash/isEqual';
 import { mergeStyles } from 'wix-rich-content-common';
+import CustomColorPicker from './custom-color-picker';
 import styles from '../../statics/styles/color-picker.scss';
+import EyeDropperIcon from './../icons/EyeDropperIcon';
 
 class ColorPicker extends PureComponent {
   constructor(props) {
     super(props);
     this.styles = mergeStyles({ styles, theme: props.theme });
-    const { componentData } = this.props;
     this.state = {
       pickerClicked: false,
-      color: componentData.color || this.props.initialColor,
-      colorFor: componentData.colorFor || '',
-      chromePicker: false
+      color: this.props.color,
+      picker: false
     };
   }
 
+  componentDidUpdate = () => {
+    if (!isEqual(this.state.color, this.props.color)) {
+      this.setState({ color: this.props.color });
+    }
+  }
+
   onPickerClick = () => {
+    this.props.onClick();
     this.setState({ pickerClicked: !this.state.pickerClicked });
   };
 
-  handleChangeComplete = (color, lable) => {
-    const { componentData, pubsub, handleChangeComplete, colorFor } = this.props;
-    if (handleChangeComplete) {
-      handleChangeComplete({ ...componentData, color: color.hex, colorFor });
-    } else {
-      pubsub.update('componentData', { color: color.hex, colorFor });
-    }
-
-    lable === this.setState({ color: color.hex, pickerClicked: false });
-  };
 
   handleOnKeyPressed = () => {
     this.setState({ pickerClicked: false });
   };
 
-  onPaletteClick = (color, index) => {
-    console.log(color, index);
+  onPaletteClick = (result, index) => {
+    const color = {
+      hex: result
+    };
+    this.customColorPickerChange(color);
     if (index === 5) {
-      this.setState({ chromePicker: !this.state.chromePicker });
+      this.setState({ picker: !this.state.picker });
     }
   }
+
+  customColorPickerChange = color => {
+    this.props.onChange(color.hex);
+    this.setState({ color: color.hex });
+  }
+
   render() {
+    const { flag } = this.props;
     const colors = [
       '#ffffff',
       '#040404',
       '#0261ff',
       '#b5d1ff',
       '#23d6b5',
-      'none'
+      this.state.color
     ];
-
     const palattes = colors.map((color, index) => {
+      const backColor = (index === 5) ? this.state.color : color;
       return (
-        <div className={styles.palette} onClick={this.onPaletteClick.bind(this, color, index)} style={{ background: color }}>
-        </div>
+        <button
+          key={color + index}
+          className={styles.palette}
+          onClick={this.onPaletteClick.bind(this, color, index)}
+          style={{ background: backColor }}
+        >
+          { (index === 5) ?
+            <EyeDropperIcon className={styles.dropper} /> :
+            null
+          }
+        </button>
       );
-    })
-    const customPickerStyle = {
-      input:{
-        display: 'none'
-      },
-      label:{
-        display: 'none',
-      }
-    }
+    });
     return (
       <div>
         <div className={this.styles.color_picker}>
@@ -81,14 +89,14 @@ class ColorPicker extends PureComponent {
             {this.props.children}
           </div>
         </div>
-        {this.state.pickerClicked ?
+        {this.state.pickerClicked && flag ?
           <div className={styles.colorBoard}>
             <div className={styles.palettes}>
               {palattes}
             </div>
-            {this.state.chromePicker ?
+            {this.state.picker && flag ?
               <div className={styles.checkboard}>
-              <CustomColorPicker/>
+                <CustomColorPicker color={this.state.color} onChange={this.customColorPickerChange.bind(this)} />
               </div> :
               null
             }
@@ -103,12 +111,11 @@ class ColorPicker extends PureComponent {
 ColorPicker.propTypes = {
   theme: PropTypes.object,
   style: PropTypes.object,
-  initialColor: PropTypes.string,
   children: PropTypes.string,
-  componentData: PropTypes.object,
-  pubsub: PropTypes.object,
-  onConfirm: PropTypes.func,
-  colorFor: PropTypes.string,
-  handleChangeComplete: PropTypes.func
+  color: PropTypes.string,
+  onClick: PropTypes.func,
+  onChange: PropTypes.func,
+  flag: PropTypes.bool,
 };
+
 export default ColorPicker;

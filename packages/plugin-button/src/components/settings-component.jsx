@@ -13,41 +13,35 @@ import styles from '../../statics/styles/settings-component-styles.scss';
 class SettingsComponent extends PureComponent {
   constructor(props) {
     super(props);
-    const { componentData, t } = this.props;
+    const { settingsObj, t } = this.props;
     this.styles = mergeStyles({ styles, theme: props.theme });
-    this.firstCheckboxText = t('LinkPanel_Target_Checkbox');
-    this.secondCheckboxText = t('LinkPanel_Nofollow_Checkbox');
+    this.targetCheckboxText = t('LinkPanel_Target_Checkbox');
+    this.nofollowCheckboxText = t('LinkPanel_Nofollow_Checkbox');
     this.inputPlaceholder = t('LinkPanel_InputPlaceholder');
     this.errorTooltipText = t('LinkPanel_ErrorTooltip');
-
     this.state = {
-      url: componentData.url || '',
-      buttonName: componentData.buttonName || 'Click Me!',
-      targetBlank: componentData.targetBlank || false,
-      nofollow: componentData.nofollow || false,
-      validUrl: componentData.validUrl || true,
-      submitted: componentData.submitted || true,
+      url: settingsObj.url || '',
+      buttonText: settingsObj.buttonText || 'Click Me!',
+      target: settingsObj.target || false,
+      rel: settingsObj.rel || false,
+      validUrl: settingsObj.validUrl || true,
+      submitted: settingsObj.submitted || true,
     };
   }
 
-  componentDidMount = () => {
-    this.props.initailState(this.state);
-  }
 
   componentDidUpdate = () => {
     this.props.onSettingsChange(this.state);
   }
 
 
-  handleKeyPress = e => {
-    if (e.charCode === 13) {
-      this.onConfirm();
-    }
+  handleKeyPress = () => {
+    this.props.handleKeyPress();
   };
 
   onTextChanged = e => {
-    const buttonName = e.target.value;
-    this.setState({ buttonName });
+    const buttonText = e.target.value;
+    this.setState({ buttonText });
   };
 
   onLinkChanged = e => {
@@ -61,7 +55,7 @@ class SettingsComponent extends PureComponent {
 
   handleTargetChange = event => {
     const { url } = this.state;
-    this.setState({ targetBlank: event.target.checked });
+    this.setState({ target: event.target.checked });
     if (isValidUrl(url)) {
       this.setState({ validUrl: true });
     } else {
@@ -69,9 +63,9 @@ class SettingsComponent extends PureComponent {
     }
   };
 
-  handleNofollowChange = event => {
+  handleRelChange = event => {
     const { url } = this.state;
-    this.setState({ nofollow: event.target.checked });
+    this.setState({ rel: event.target.checked });
     if (isValidUrl(url)) {
       this.setState({ validUrl: true });
     } else {
@@ -81,29 +75,29 @@ class SettingsComponent extends PureComponent {
 
   render() {
     const { theme, t } = this.props;
-    const { buttonName, url, validUrl } = this.state;
-    const paddingTop = (!validUrl) ? '21px' : '35px';
-    const errorTooltip = (!validUrl) ? 'Invalid link' : false;
+    const { buttonText, url, validUrl } = this.state;
+    const errorTooltip = (!validUrl || !this.props.validUrl) ? t('ButtonModal_Invalid_Link') : false;
     return (
       <div className={styles.section_content}>
-        <div className={styles.header_text}>
-          {t('ButtonModal_Button_Text')}
+        <div className={styles.button_name_feild}>
+          <div className={styles.header_text}>
+            {t('ButtonModal_Button_Text')}
+          </div>
+          <div>
+            <TextInput
+              inputRef={ref => {
+                this.input = ref;
+              }}
+              type="text"
+              onKeyPress={this.handleKeyPress}
+              onChange={this.onTextChanged}
+              value={buttonText}
+              placeholder={t('ButtonModal_InputName_Placeholder')}
+              theme={theme}
+              data-hook="ButtonInputModal"
+            />
+          </div>
         </div>
-        <div>
-          <TextInput
-            inputRef={ref => {
-              this.input = ref;
-            }}
-            type="text"
-            onKeyPress={this.handleKeyPress}
-            onChange={this.onTextChanged}
-            value={buttonName}
-            placeholder={t('ButtonModal_InputName_Placeholder')}
-            theme={theme}
-            data-hook="ButtonInputModal"
-          />
-        </div>
-        <br />
         <div className={styles.header_text}>
           {t('ButtonModal_Button_Link')}
         </div>
@@ -120,26 +114,26 @@ class SettingsComponent extends PureComponent {
           error={errorTooltip}
           data-hook="ButtonInputModal"
         />
-        {!this.state.validUrl ?
+        {!this.state.validUrl || !this.props.validUrl ?
           <div className={styles.errorMessage}>
             {t('ButtonModal_InputLink_ErrorMessage')}
           </div> :
           null
         }
-        <div className={styles.checkBoxes} style={{ paddingTop }}>
+        <div className={styles.checkBoxes}>
           <Checkbox
-            label={this.firstCheckboxText}
+            label={this.targetCheckboxText}
             theme={theme}
-            checked={this.state.targetBlank}
+            checked={this.state.target}
             dataHook="linkPanelBlankCheckbox"
             onChange={this.handleTargetChange}
           />
           <Checkbox
-            label={this.secondCheckboxText}
+            label={this.nofollowCheckboxText}
             theme={theme}
-            checked={this.state.nofollow}
+            checked={this.state.rel}
             dataHook="linkPanelRelCheckbox"
-            onChange={this.handleNofollowChange}
+            onChange={this.handleRelChange}
           />
         </div>
       </div>
@@ -147,23 +141,15 @@ class SettingsComponent extends PureComponent {
   }
 }
 
-SettingsComponent.defaultProps = {
-  doneLabel: 'Save',
-  cancelLabel: 'Cancel',
-};
-
 SettingsComponent.propTypes = {
   theme: PropTypes.object.isRequired,
   componentData: PropTypes.object,
   t: PropTypes.func,
   onValidUrl: PropTypes.func,
   onSettingsChange: PropTypes.func,
-  pubsub: PropTypes.object,
-  onConfirm: PropTypes.func,
-  onCloseRequested: PropTypes.func,
-  doneLabel: PropTypes.string,
-  cancelLabel: PropTypes.string,
-  initailState: PropTypes.object
+  settingsObj: PropTypes.object,
+  validUrl: PropTypes.bool,
+  handleKeyPress: PropTypes.func
 };
 
 export default SettingsComponent;

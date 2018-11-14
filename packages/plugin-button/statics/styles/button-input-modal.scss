@@ -3,14 +3,27 @@
 
 .container {
   @include phone {
-    padding: 0px 20px;
+    padding: 12px 20px;
+    padding-bottom: 12px;
     input {
       border: none;
       border-bottom: solid 1px rgba(51, 51, 51, 0.2);
       padding-left: 0px;
     }
+  }
 }
 
+.focus_manager {
+  border-top: 1px solid #ededed;
+}
+
+.separator {
+  border: solid 1px rgba(51, 51, 51, 0.2);
+}
+
+.scroll {
+  height: calc(100vh - 152px);
+  overflow-y: scroll;
 }
 
 .closeIcon {
@@ -37,7 +50,7 @@
 .header_text {
   font-size: 16px;
   margin: 8px 0 8px 0;
-  @include phone{
+  @include phone {
     padding-bottom: 24px;
   }
 }
@@ -65,10 +78,23 @@
 
 .modal_footer {
   padding: 30px 30px;
+  position: absolute;
+  bottom: 0px;
 }
 
 .settingTab {
   position: relative;
   width: 100%;
   height: 18px;
+}
+.scroll_container {
+  overflow-y: scroll;
+  height: 634px;
+}
+
+.tabs_panel {
+  height: calc(100vh - 250px);
+  overflow: hidden;
+  overflow-y: scroll;
+  box-sizing: border-box;
 }

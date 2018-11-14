@@ -1,52 +1,61 @@
-.color_picker{
+@import "~wix-rich-content-common/dist/statics/styles/palette";
+
+.color_picker {
   display: block;
   width: 100%;
   height: 42px;
 }
 
-.label{
+.label {
   width: 50%;
   height: auto;
-   
 }
 
-.picker{
+.picker {
   width: 50%;
   height: auto;
   float: right;
   direction: rtl;
-
 }
 
-.palette{
-  width: 56px;
-  height: 56px;
+.palette {
+  position: relative;
+  width: 36px;
+  height: 36px;
   border-radius: 28px;
   display: inline-block;
   border: solid 1px #ededed;
   background-color: #b5d1ff;
-  margin-left: 7px;
+  margin-left: 18px;
   cursor: pointer;
 }
-.colorBoard{
+.dropper{
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  top: 9px;
+  right: 8px;
+}
+.colorBoard {
   padding-top: 15px;
   padding-bottom: 18px;
 }
-.palettes{
+.palettes {
   width: 100%;
   text-align: right;
   padding-bottom: 18px;
 }
 
-.pickerButton{
-  width: 30px;
-  height: 30px;
-  border: 1px solid #B8C6D2;
-  border-radius: 10px;
+.pickerButton {
+  width: 36px;
+  height: 36px;
+  border-radius: 28px;
+  border: 1px solid #F3F3F3;
   box-sizing: border-box;
+  cursor: pointer;
 }
 
-.swatchesPicker{
+.swatchesPicker {
   position: absolute;
   top: 30;
   right: 30;
@@ -54,5 +63,4 @@
 }
 
 .checkboard {
- 
 }

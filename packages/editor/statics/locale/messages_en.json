@@ -112,6 +112,7 @@
   "ButtonModal_Text_Color":"Text",
   "ButtonModal_Border_Color":"Border",
   "ButtonModal_Background_Color":"Background",
+  "ButtonModal_Invalid_Link": "Invalid link",
   "TextAlignmentButton_Tooltip" : "Alignment",
   "TextLinkButton_Tooltip" : "Link",
   "BoldButton_Tooltip" : "Bold",

@@ -1,7 +1,6 @@
 /* eslint-disable max-len */
 import React from 'react';
 
-
 const InsertPluginIcon = props => (
   <svg xmlns="http://www.w3.org/2000/svg" width="31" height="31" style={{ width: '31px', height: '23px' }} viewBox="0 0 19 19" {...props}>
     <g fill="none" fillRule="evenodd" stroke="currentColor" transform="translate(1)">

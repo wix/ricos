@@ -9,16 +9,20 @@ class ButtonComponent extends PureComponent {
   constructor(props) {
     super(props);
     this.styles = mergeStyles({ styles, theme: props.theme });
+    const { componentData } = this.props;
+    this.state = {
+      style: componentData.button,
+    };
   }
 
   render() {
-    const { componentData, className, theme } = this.props;
+    const { componentData, className } = this.props;
     const { styles } = this;
     const containerClassNames = classNames(styles.button_container, className || '');
-    const buttonName = (!componentData.buttonName) ? 'Click Me!' : componentData.buttonName;
-    const buttonStyle = componentData.buttonStyle;
-    const target = (componentData.targetBlank) ? '_blank' : '_self';
-    const nofollow = (componentData.nofollow) ? 'nofollow' : '';
+    let buttonText = (!componentData.button) ? 'Click Me!' : componentData.button.buttonText;
+    let target = '_self';
+    let rel = '';
+    let url = '';
     const sizes = {
       L: {
         paddingLeft: '61px',
@@ -40,68 +44,44 @@ class ButtonComponent extends PureComponent {
       }
     };
     let style = {
+      border: '0px solid blue',
+      ...this.props.style
     };
-    if (buttonStyle) {
-      style = {
-        border: buttonStyle.style.border,
-        borderRadius: buttonStyle.style.borderRadius,
-        borderWidth: buttonStyle.style.borderWidth,
-        background: buttonStyle.style.background,
-        color: buttonStyle.style.color,
-      };
-    }
-    if (componentData.buttonSize) {
-      style = {
-        ...style,
-        ...sizes[componentData.buttonSize]
-      };
-    } else {
-      style = {
-        ...style,
-        ...sizes.M
-      };
-    }
-    if (componentData.borderWidth) {
+    target = (componentData.button.target) ? '_blank' : '_self';
+    rel = (componentData.button.rel) ? 'nofollow' : '';
+    style = {
+      ...style,
+      ...sizes[componentData.button.buttonSize],
+      borderWidth: componentData.button.borderWidth + 'px',
+      borderRadius: componentData.button.borderRadius,
+      color: componentData.button.textColor,
+      background: componentData.button.backgroundColor,
+      borderColor: componentData.button.borderColor
+    };
+    url = componentData.button.url;
+    const { buttonObj } = this.props;
+    if (buttonObj) {
       style = {
         ...style,
-        borderWidth: componentData.borderWidth + 'px'
+        ...sizes[buttonObj.design.buttonSize],
+        borderWidth: buttonObj.design.borderWidth + 'px',
+        borderRadius: buttonObj.design.borderRadius,
+        color: buttonObj.design.textColor,
+        background: buttonObj.design.backgroundColor,
+        borderColor: buttonObj.design.borderColor
       };
+      buttonText = buttonObj.data.buttonText;
     }
-    if (componentData.borderRadius) {
-      style = {
-        ...style,
-        borderRadius: componentData.borderRadius
-      };
-    }
-    if (componentData.color && componentData.colorFor === 'textColor') {
-      style = {
-        ...style,
-        color: componentData.color
-      };
-    }
-    if (componentData.color && componentData.colorFor === 'backgroundColor') {
-      style = {
-        ...style,
-        background: componentData.color
-      };
-    }
-    if (componentData.color && componentData.colorFor === 'borderColor') {
-      style = {
-        ...style,
-        borderColor: componentData.color
-      };
-    }
-    const styleClassName = (buttonStyle) ? buttonStyle.className : 'button_primary';
     return (
       <a
-        className={classNames(theme[styleClassName], containerClassNames)}
-        href={componentData.url}
+        className={containerClassNames}
+        href={url}
         style={style}
         target={target}
-        rel={nofollow}
+        rel={rel}
       >
         {
-          buttonName
+          buttonText
         }
       </a>
     );
@@ -111,6 +91,8 @@ class ButtonComponent extends PureComponent {
 ButtonComponent.propTypes = {
   theme: PropTypes.object,
   componentData: PropTypes.object,
+  style: PropTypes.object,
+  buttonObj: PropTypes.object,
   className: PropTypes.string
 };
 
