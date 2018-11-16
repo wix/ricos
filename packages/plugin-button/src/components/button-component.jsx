@@ -20,7 +20,6 @@ class ButtonComponent extends PureComponent {
     const { styles } = this;
     const containerClassNames = classNames(styles.button_container, className || '');
     let buttonText = (!componentData.button) ? 'Click Me!' : componentData.button.buttonText;
-    let target = '_self';
     let rel = '';
     let url = '';
     const sizes = {
@@ -47,7 +46,7 @@ class ButtonComponent extends PureComponent {
       border: '0px solid blue',
       ...this.props.style
     };
-    target = (componentData.button.target) ? '_blank' : '_self';
+    const target = (componentData.button.target) ? '_blank' : '_self';
     rel = (componentData.button.rel) ? 'nofollow' : '';
     style = {
       ...style,

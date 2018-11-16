@@ -2,7 +2,6 @@ export const BUTTON_TYPE = 'wix-draft-plugin-button';
 export const ALIGN_LEFT = 'left';
 
 export const BUTTON_TYPES = ['primary', 'secondary'];
-
 export const DEFAULTS = {
   config: {
     alignment: ALIGN_LEFT,
@@ -19,7 +18,7 @@ export const DEFAULTS = {
     buttonSize: 'M',
     rel: false,
     submitted: true,
-    target: false,
+    target: true,
     textColor: 'white',
     url: '',
     validUrl: true,
