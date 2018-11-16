@@ -95,6 +95,22 @@
 .tabs_panel {
   height: calc(100vh - 250px);
   overflow: hidden;
-  overflow-y: scroll;
   box-sizing: border-box;
+  padding-right: 0px;
+}
+
+.scrollbar_thumb {
+  background: #000000;
+  border-radius: 4px;
+  width: 4px;
+  opacity: 0.3;
+  cursor: pointer;
+}
+
+.scrollbar_thumb:hover {
+  opacity: 0.8;
+}
+
+.customize_scrollbar_container {
+  height: 100%;
 }

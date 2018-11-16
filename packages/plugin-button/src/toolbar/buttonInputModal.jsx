@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import isEqual from 'lodash/isEqual';
+import { Scrollbars } from 'react-custom-scrollbars';
 import {
   mergeStyles,
   CloseIcon,
@@ -35,6 +36,7 @@ export default class ButtonInputModal extends Component {
       data: { ...buttonObj },
       design: { ...buttonObj },
       initialComponentData: {},
+      isHover: false
     };
   }
 
@@ -115,6 +117,14 @@ export default class ButtonInputModal extends Component {
     this.props.helpers.closeModal();
   };
 
+  handleOnMouseEnter = () => {
+    this.setState({ isHover: true });
+  }
+
+  handleOnMouseLeave = () => {
+    this.setState({ isHover: false });
+  }
+
   render() {
     const { theme, t, uiSettings, doneLabel, cancelLabel } = this.props;
     const { styles } = this;
@@ -194,7 +204,14 @@ export default class ButtonInputModal extends Component {
                       {settingsComponent}
                     </Tab>
                     <Tab label={t('ButtonModal_Design_Tab')} value={'manage_design'} theme={this.styles}>
-                      {designComponent}
+                      <Scrollbars
+                        renderThumbVertical={() => this.state.isHover ? <div className={styles.scrollbar_thumb} /> : <div />}
+                        className={styles.customize_scrollbar_container}
+                        onMouseEnter={this.handleOnMouseEnter}
+                        onMouseLeave={this.handleOnMouseLeave}
+                      >
+                        {designComponent}
+                      </Scrollbars>
                     </Tab>
                   </Tabs>
                 </div>
