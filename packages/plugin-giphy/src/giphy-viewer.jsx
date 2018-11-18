@@ -21,7 +21,7 @@ class GiphyViewer extends Component {
   render() {
     const { componentData, theme, ...rest } = this.props; // eslint-disable-line no-unused-vars
     return (
-      <img className={this.styles.giphy_player} src={componentData.gif.originalUrl} alt="gif" {...rest} />
+      <img className={this.styles.giphy_player} src={componentData.gif.originalUrl} alt="gif" />
     );
   }
 }
