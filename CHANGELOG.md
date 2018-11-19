@@ -13,7 +13,7 @@
 ### :bug: Bug Fix
 
 - `giphy`
-  - [#192](https://github.com/wix-incubator/rich-content/pull/192) removing container styles of giphy to keep original width to height ratio + exporting giphyTypeMapper
+  - [#192](https://github.com/wix-incubator/rich-content/pull/192) removing container styles of giphy to keep original width to height ratio
   
 <br/>
 
