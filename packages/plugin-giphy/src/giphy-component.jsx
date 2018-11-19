@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { mergeStyles } from 'wix-rich-content-common';
 import GiphyViewer from './giphy-viewer';
 import { GIPHY_TYPE } from './constants';
-import styles from '../statics/styles/giphy-viewer.scss';
 
 class GiphyComponent extends Component {
   static type = {
@@ -18,7 +16,6 @@ class GiphyComponent extends Component {
       isLoaded: false,
       isPlayable
     };
-    this.styles = mergeStyles({ styles, theme: this.props.theme });
   }
 
   handleReady = () => {
