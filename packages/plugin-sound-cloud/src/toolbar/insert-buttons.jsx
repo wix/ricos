@@ -18,7 +18,7 @@ export default ({ helpers, t }) => {
   return [
     {
       type: 'modal',
-      name: 'soundCloud',
+      name: 'SoundCloud',
       tooltipText: t('SoundCloudPlugin_InsertButton_Tooltip'),
       Icon: InsertPluginIcon,
       componentData: DEFAULTS,

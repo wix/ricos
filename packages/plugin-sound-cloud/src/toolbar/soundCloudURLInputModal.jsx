@@ -20,9 +20,6 @@ export default class SoundCloudURLInputModal extends Component {
     this.setState({ url });
   };
 
-  onInputFocus = e => {
-    e.target.select()
-  }
 
   afterOpenModal = () => this.input.focus();
 
@@ -60,6 +57,17 @@ export default class SoundCloudURLInputModal extends Component {
     }
   };
 
+  //These two function needed to handle onFocus select for iphone devices
+  componentDidMount() {
+    this.input.focus();
+    this.input.setSelectionRange(0, this.input.value.length);
+  }
+
+  componentDidUpdate() {
+    this.input.focus();
+    this.input.setSelectionRange(0, this.input.value.length);
+  }
+
   render() {
     const { url, submitted } = this.state;
     const { doneLabel, cancelLabel, t } = this.props;
@@ -82,7 +90,6 @@ export default class SoundCloudURLInputModal extends Component {
             type="url"
             onKeyPress={this.handleKeyPress}
             onChange={this.onUrlChange}
-            onFocus = {this.onInputFocus}
             value={url}
             error={!isSoundCloudUrl(url) && submitted ? t('SoundCloudUploadModal_Input_InvalidUrl') : null}
             placeholder={t('SoundCloudUploadModal_Input_Placeholder')}

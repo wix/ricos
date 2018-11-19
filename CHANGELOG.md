@@ -10,6 +10,11 @@
 
 ## [Unreleased]
 
+### :bug: Bug Fix
+
+- `soundcloud`
+  - [#192](https://github.com/wix-incubator/rich-content/pull/192) handle input selection focus on iphons + mathcing soundcloud url to viewer & clip prefix url shared text 
+  
 <br/>
 
 ## 1.7.3 (Nov 13, 2018)
