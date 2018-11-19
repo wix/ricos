@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import { mergeStyles } from 'wix-rich-content-common';
 import GiphyViewer from './giphy-viewer';
 import { GIPHY_TYPE } from './constants';
-import styles from '../statics/styles/giphy-viewer.scss';
 
 class GiphyComponent extends Component {
   static type = {
@@ -19,7 +16,6 @@ class GiphyComponent extends Component {
       isLoaded: false,
       isPlayable
     };
-    this.styles = mergeStyles({ styles, theme: this.props.theme });
   }
 
   handleReady = () => {
@@ -45,15 +41,12 @@ class GiphyComponent extends Component {
   };
 
   render() {
-    const { styles } = this;
-    const { className, onClick } = this.props;
-    const containerClassNames = classNames(styles.giphy_container, className || '');
+    const { onClick } = this.props;
     /* eslint-disable jsx-a11y/no-static-element-interactions */
     return (
       <div
         data-hook="giphyPlayer"
         onClick={onClick}
-        className={containerClassNames}
         onKeyDown={e => this.onKeyDown(e, onClick)}
       >
         {this.renderPlayer()}
@@ -65,13 +58,8 @@ class GiphyComponent extends Component {
 
 GiphyComponent.propTypes = {
   componentData: PropTypes.object.isRequired,
-  componentState: PropTypes.object.isRequired,
-  store: PropTypes.object.isRequired,
   blockProps: PropTypes.object.isRequired,
   onClick: PropTypes.func.isRequired,
-  className: PropTypes.string.isRequired,
-  theme: PropTypes.object.isRequired,
-  t: PropTypes.func
 };
 
 export { GiphyComponent as Component };
