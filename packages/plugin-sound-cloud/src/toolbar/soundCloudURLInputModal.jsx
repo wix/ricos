@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { SoundCloudIcon } from '../icons';
 import classNames from 'classnames';
-import { mergeStyles, isSoundCloudUrl, SettingsPanelFooter, TextInput, CloseIcon, WixUtils, matchSoundCloudUrl} from 'wix-rich-content-common';
+import { mergeStyles, isSoundCloudUrl, SettingsPanelFooter, TextInput, CloseIcon, WixUtils } from 'wix-rich-content-common';
 import styles from '../../statics/styles/sound-cloud-url-input-modal.scss';
 
 export default class SoundCloudURLInputModal extends Component {
@@ -27,9 +27,8 @@ export default class SoundCloudURLInputModal extends Component {
   afterOpenModal = () => this.input.focus();
 
   onConfirm = () => {
-    let { url } = this.state;
+    const { url } = this.state;
     if (url && isSoundCloudUrl(url)) {
-      url = matchSoundCloudUrl(url);
       const { componentData, helpers, pubsub, onConfirm } = this.props;
       if (onConfirm) {
         onConfirm({ ...componentData, src: url });
