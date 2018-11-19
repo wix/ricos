@@ -46,6 +46,7 @@
 %video_modal_textInput {
   display: inline-block;
   input[type="url"] {
+    border-radius: 0px;
     @include phone {
       border-left: none;
       border-right: none;

@@ -12,6 +12,8 @@
 
 ### :bug: Bug Fix
 
+- `video`
+  - [#194](https://github.com/wix-incubator/rich-content/pull/194) handle input selection focus & setting border radius to 0 on iphone
 - `giphy`
   - [#192](https://github.com/wix-incubator/rich-content/pull/192) removing container styles of giphy to keep original width to height ratio
   
