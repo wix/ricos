@@ -68,10 +68,6 @@ export default class VideoSelectionInputModal extends Component {
     this.input.focus();
     this.input.setSelectionRange(0, this.input.value.length);
   }
-  componentDidUpdate() {
-    this.input.focus();
-    this.input.setSelectionRange(0, this.input.value.length);
-  }
 
   render() {
     const { url, submitted, errorMsg } = this.state;
