@@ -13,6 +13,8 @@ export default class SoundCloudURLInputModal extends Component {
     this.state = {
       url: componentData.src || '',
     };
+    this.firstRun = true;
+    console.log("modal opened")
   }
 
   onUrlChange = e => {
@@ -59,13 +61,9 @@ export default class SoundCloudURLInputModal extends Component {
 
   //These two function needed to handle onFocus select for iphone devices
   componentDidMount() {
-    this.input.focus();
-    this.input.setSelectionRange(0, this.input.value.length);
-  }
-
-  componentDidUpdate() {
-    this.input.focus();
-    this.input.setSelectionRange(0, this.input.value.length);
+      // work around for iPhone devices to select url in replace url modal
+      this.input.focus();
+      this.input.setSelectionRange(0, this.input.value.length);
   }
 
   render() {
