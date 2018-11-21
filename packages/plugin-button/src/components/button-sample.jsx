@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import isEqual from 'lodash/isEqual';
 import { mergeStyles } from 'wix-rich-content-common';
 import styles from '../../statics/styles/button-sample.scss';
 
@@ -9,10 +10,10 @@ class ButtonSample extends PureComponent {
   constructor(props) {
     super(props);
     this.styles = mergeStyles({ styles, theme: props.theme });
-    const { componentData } = this.props;
+    const { style } = this.props;
     this.state = {
-      buttonStyle: componentData.buttonStyle || {},
-      index: this.props.i
+      buttonStyle: style || {},
+      index: this.props.i,
     };
   }
 
@@ -23,26 +24,32 @@ class ButtonSample extends PureComponent {
 
 
   render() {
-
     const { style, theme, active } = this.props;
     const { styles } = this;
-    let displayActive = {
-      display: 'inline'
+    const { state } = this.props;
+    const { buttonStyle } = this.state;
+    const propsStyle = {
+      backgroundColor: state.backgroundColor,
+      borderColor: state.borderColor,
+      textColor: state.textColor,
+      borderRadius: state.borderRadius + 'px',
+      borderWidth: state.borderWidth + 'px',
     };
-    if (active) {
-      displayActive = {
-        display: 'inline'
-      };
-    } else {
-      displayActive = {
-        display: 'none'
-      };
-    }
+    const stateStyle = {
+      backgroundColor: buttonStyle.background,
+      borderColor: buttonStyle.borderColor,
+      textColor: buttonStyle.color,
+      borderRadius: buttonStyle.borderRadius,
+      borderWidth: buttonStyle.borderWidth,
+    };
+    const onStyleChanged = isEqual(propsStyle, stateStyle);
     return (
       <div className={styles.button_sample_container}>
-        <div style={displayActive} className={styles.oval}>
-          <div className={styles.active} />
-        </div>
+        {active && onStyleChanged &&
+          <div className={styles.oval}>
+            <div className={styles.active} />
+          </div>
+        }
         <button onClick={this.onClick} style={{ ...style }} className={classNames(theme[style.className], styles.button_sample)}>
           Click Me!
         </button>
@@ -60,7 +67,9 @@ ButtonSample.propTypes = {
   onClick: PropTypes.func,
   onClickButton: PropTypes.func,
   active: PropTypes.bool,
-  i: PropTypes.number
+  i: PropTypes.number,
+  state: PropTypes.object,
+
 };
 
 export default ButtonSample;

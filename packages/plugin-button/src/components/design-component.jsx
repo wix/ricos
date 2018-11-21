@@ -150,6 +150,7 @@ class DesignComponent extends PureComponent {
         onClickButton={this.onButtonSampleClick.bind(this)}
         {...this.props}
         style={style}
+        state={this.state}
       />);
     });
 
@@ -180,7 +181,7 @@ class DesignComponent extends PureComponent {
             <div className={styles.section_header}>
               {t('ButtonModal_Border_Section')}
             </div>
-            <div className={styles.input_container}>
+            <div>
               <div className={styles.slider_with_input}>
                 <SliderWithInput
                   value={parseInt(this.state.borderWidth)}

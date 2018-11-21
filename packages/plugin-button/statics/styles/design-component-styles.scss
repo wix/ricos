@@ -26,6 +26,12 @@
   }
   label:nth-child(3n) {
     padding: 0px;
+    @include phone {
+      padding: 0px 0px 16px;
+    }
+  }
+  label:nth-child(4n) {
+    padding: 0px;
   }
 }
 
@@ -46,6 +52,11 @@
     overflow-y: hidden;
     -webkit-overflow-scrolling: touch;
   }
+}
+
+.input_container {
+  padding-top: 39px;
+  padding-bottom: 29px;
 }
 
 .px_label {
