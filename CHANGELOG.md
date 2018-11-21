@@ -13,7 +13,7 @@
 ### :bug: Bug Fix
 
 - `soundcloud`
-  - [#192](https://github.com/wix-incubator/rich-content/pull/192) handle input selection focus on iphons + mathcing soundcloud url to viewer & clip prefix url shared text 
+  - [#192](https://github.com/wix-incubator/rich-content/pull/195) handle input selection focus on iphons + mathcing soundcloud url to viewer & clip prefix url shared text 
 - `giphy`
   - [#192](https://github.com/wix-incubator/rich-content/pull/192) removing container styles of giphy to keep original width to height ratio
   
