@@ -13,14 +13,12 @@ export default class SoundCloudURLInputModal extends Component {
     this.state = {
       url: componentData.src || '',
     };
-    this.firstRun = true;
   }
 
   onUrlChange = e => {
     const url = e.target.value;
     this.setState({ url });
   };
-
 
   afterOpenModal = () => this.input.focus();
 
