@@ -180,22 +180,36 @@ class DesignComponent extends PureComponent {
             <div className={styles.section_header}>
               {t('ButtonModal_Border_Section')}
             </div>
-            <SliderWithInput
-              value={parseInt(this.state.borderWidth)}
-              min={0}
-              max={30}
-              label={t('ButtonModal_Width_Input')}
-              onChange={this.onBorderWidthChange.bind(this)}
-              theme={theme}
-            />
-            <SliderWithInput
-              value={parseInt(this.state.borderRadius)}
-              min={0}
-              max={30}
-              label={t('ButtonModal_Radius_Input')}
-              onChange={this.onBorderRadiusChange.bind(this)}
-              theme={theme}
-            />
+            <div className={styles.input_container}>
+              <div className={styles.slider_with_input}>
+                <SliderWithInput
+                  value={parseInt(this.state.borderWidth)}
+                  min={0}
+                  max={30}
+                  label={t('ButtonModal_Width_Input')}
+                  onChange={this.onBorderWidthChange.bind(this)}
+                  theme={this.styles}
+                />
+              </div>
+              <div className={styles.px_label}>
+                px
+              </div>
+            </div>
+            <div className={styles.input_container}>
+              <div className={styles.slider_with_input}>
+                <SliderWithInput
+                  value={parseInt(this.state.borderRadius)}
+                  min={0}
+                  max={30}
+                  label={t('ButtonModal_Radius_Input')}
+                  onChange={this.onBorderRadiusChange.bind(this)}
+                  theme={this.styles}
+                />
+              </div>
+              <div className={styles.px_label}>
+                px
+              </div>
+            </div>
           </div>
         </SettingsSection>
         <SettingsSection theme={theme} ariaProps={{ 'aria-label': 'color selection', role: 'region' }}>

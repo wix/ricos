@@ -3,7 +3,7 @@
   box-sizing: border-box;
   padding: 11px;
   font-size: 14px;
-  padding: 11px 24px;
+  padding: 11px 23px;
   border-style: none;
   cursor: pointer;
 }
@@ -11,12 +11,14 @@
   position: relative;
   width: fit-content;
   display: inline-block;
-  margin-right: 30px;
+  margin-right: 22px;
   margin-bottom: 24px;
 }
-// .buttonSample:nth-child(3n) {
-//   margin-right: 0px;
-// }
+
+.button_sample_container:nth-child(3n) {
+  margin-right: 0px;
+}
+
 .oval {
   position: absolute;
   right: -6px;
