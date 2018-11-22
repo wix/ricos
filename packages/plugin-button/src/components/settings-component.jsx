@@ -49,7 +49,7 @@ class SettingsComponent extends PureComponent {
     this.setState({ url });
     if (isValidUrl(url) || !url) {
       this.setState({ validUrl: true });
-      this.props.onValidUrl(true);
+      this.props.isValidUrl(true);
     }
   }
 
@@ -145,7 +145,7 @@ SettingsComponent.propTypes = {
   theme: PropTypes.object.isRequired,
   componentData: PropTypes.object,
   t: PropTypes.func,
-  onValidUrl: PropTypes.func,
+  isValidUrl: PropTypes.func,
   onSettingsChange: PropTypes.func,
   settingsObj: PropTypes.object,
   validUrl: PropTypes.bool,

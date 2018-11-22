@@ -74,13 +74,9 @@
   top: 0px;
   left: 127px;
 }
-.tabTitle {
-}
 
 .modal_footer {
   padding: 30px 30px;
-  position: absolute;
-  bottom: 0px;
 }
 
 .settingTab {
@@ -94,7 +90,7 @@
 }
 
 .tabs_panel {
-  height: calc(100vh - 250px);
+  height: calc(100vh - 223px);
   overflow: hidden;
   box-sizing: border-box;
   padding-right: 0px;

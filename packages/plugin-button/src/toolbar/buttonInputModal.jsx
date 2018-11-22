@@ -146,7 +146,7 @@ export default class ButtonInputModal extends Component {
         theme={theme}
         uiSettings={uiSettings}
         {...this.props}
-        onValidUrl={this.onValidUrl.bind(this)}
+        isValidUrl={this.onValidUrl.bind(this)}
         onSettingsChange={this.onSettingsChanged.bind(this)}
         validUrl={this.state.validUrl}
         settingsObj={this.state.data}
@@ -200,7 +200,7 @@ export default class ButtonInputModal extends Component {
               <FocusManager>
                 <div className={styles.focus_mhanager}>
                   <Tabs value={'manage_setting'} theme={theme}>
-                    <Tab label={settingTabLabel} value={'manage_setting'} theme={theme}>
+                    <Tab label={settingTabLabel} value={'manage_setting'} theme={this.styles}>
                       {settingsComponent}
                     </Tab>
                     <Tab label={t('ButtonModal_Design_Tab')} value={'manage_design'} theme={this.styles}>
