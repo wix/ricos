@@ -79,9 +79,6 @@ class DesignComponent extends PureComponent {
     };
   }
 
-  componentDidMount = () => {
-
-  }
   componentDidUpdate = () => {
     this.props.onDesignChange(this.state);
   }
@@ -120,7 +117,7 @@ class DesignComponent extends PureComponent {
   }
 
   onBackgroundColorChange = color => {
-    this.setState({ backgroundColor: color, textFlag: false, borderFlag: false, backgroundFlag: true });
+    this.setState({ backgroundColor: color });
   }
 
   render() {

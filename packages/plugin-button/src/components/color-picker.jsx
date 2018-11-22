@@ -37,9 +37,10 @@ class ColorPicker extends PureComponent {
     const color = {
       hex: result
     };
+    this.setState({ selectedPaletteIndex: index });
     this.customColorPickerChange(color);
     if (index === 5) {
-      this.setState({ picker: !this.state.picker });
+      this.setState({ picker: !this.state.picker, active: false });
     }
   }
 
@@ -50,28 +51,46 @@ class ColorPicker extends PureComponent {
 
   render() {
     const { flag } = this.props;
-    const colors = [
-      '#ffffff',
+    let colors = [
+      'white',
       '#040404',
-      '#0261ff',
-      '#b5d1ff',
-      '#23d6b5',
-      this.state.color
+      '#0261FF',
+      '#B5D1FF',
+      '#23D6B5',
+      this.props.color
     ];
+    let isDropperColor = false;
+    if (colors.indexOf(this.props.color) === -1 || colors.indexOf(this.props.color) === 5) {
+      isDropperColor = true;
+    }
     const palattes = colors.map((color, index) => {
-      const backColor = (index === 5) ? this.state.color : color;
+      let backColor = (index !== 5) ? color : this.props.color;
+      const className = styles.palette;
+      let active = this.state.selectedPaletteIndex === index;
+      let isColor = false;
+      if (color === this.props.color && index !== 5) {
+        isColor = true;
+      }
+      else {
+        isColor = false;
+      }
+      if (isDropperColor && index === 5) {
+        isColor = false;
+        active = false;
+      }
       return (
-        <button
-          key={color + index}
-          className={styles.palette}
-          onClick={this.onPaletteClick.bind(this, color, index)}
-          style={{ background: backColor }}
-        >
-          { (index === 5) ?
+        <div onClick={this.onPaletteClick.bind(this, color, index)} key={color + index} style={{ background: backColor }} className={className}>
+          {
+            (active || isColor || (isDropperColor && index === 5)) &&
+            <div className={styles.oval}>
+              <div className={styles.active} />
+            </div>
+          }
+          {(index === 5) ?
             <EyeDropperIcon className={styles.dropper} /> :
             null
           }
-        </button>
+        </div>
       );
     });
     return (
@@ -89,15 +108,14 @@ class ColorPicker extends PureComponent {
             {this.props.children}
           </div>
         </div>
-        {this.state.pickerClicked && flag ?
+        {(this.state.pickerClicked && flag) || flag ?
           <div className={styles.colorBoard}>
             <div className={styles.palettes}>
               {palattes}
             </div>
             {this.state.picker && flag ?
-              <div className={styles.checkboard}>
-                <CustomColorPicker color={this.state.color} onChange={this.customColorPickerChange.bind(this)} />
-              </div> :
+              <CustomColorPicker color={this.state.color} onChange={this.customColorPickerChange.bind(this)} />
+              :
               null
             }
 
