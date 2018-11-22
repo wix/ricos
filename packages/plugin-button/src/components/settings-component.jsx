@@ -44,8 +44,7 @@ class SettingsComponent extends PureComponent {
     const buttonText = e.target.value;
     if (buttonText) {
       this.setState({ buttonText });
-    }
-    else {
+    } else {
       this.setState({ buttonText: t('ButtonModal_InputName_Placeholder') });
     }
   };
@@ -155,7 +154,7 @@ SettingsComponent.propTypes = {
   onSettingsChange: PropTypes.func,
   settingsObj: PropTypes.object,
   validUrl: PropTypes.bool,
-  handleKeyPress: PropTypes.func
+  onKeyPress: PropTypes.func
 };
 
 export default SettingsComponent;
