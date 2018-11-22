@@ -35,13 +35,19 @@ class SettingsComponent extends PureComponent {
   }
 
 
-  handleKeyPress = () => {
-    this.props.handleKeyPress();
+  handleKeyPress = e => {
+    this.props.onKeyPress(e);
   };
 
   onTextChanged = e => {
+    const { t } = this.props;
     const buttonText = e.target.value;
-    this.setState({ buttonText });
+    if (buttonText) {
+      this.setState({ buttonText });
+    }
+    else {
+      this.setState({ buttonText: t('ButtonModal_InputName_Placeholder') });
+    }
   };
 
   onLinkChanged = e => {
