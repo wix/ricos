@@ -17,6 +17,7 @@ import DesignComponent from './../components/design-component';
 import SettingsComponent from './../components/settings-component';
 import Navbar from './../components/navbar';
 import PreviewComponent from './../components/preview-component';
+import { settingsTabValue, designTabValue } from '../../src/constants';
 import styles from '../../statics/styles/button-input-modal.scss';
 
 
@@ -199,11 +200,11 @@ export default class ButtonInputModal extends Component {
               </div>
               <FocusManager>
                 <div className={styles.focus_mhanager}>
-                  <Tabs value={'manage_setting'} theme={theme}>
-                    <Tab label={settingTabLabel} value={'manage_setting'} theme={this.styles}>
+                  <Tabs value={settingsTabValue} theme={theme}>
+                    <Tab label={settingTabLabel} value={settingsTabValue} theme={this.styles}>
                       {settingsComponent}
                     </Tab>
-                    <Tab label={t('ButtonModal_Design_Tab')} value={'manage_design'} theme={this.styles}>
+                    <Tab label={t('ButtonModal_Design_Tab')} value={designTabValue} theme={this.styles}>
                       <Scrollbars
                         renderThumbVertical={() => this.state.isHover ? <div className={styles.scrollbar_thumb} /> : <div />}
                         className={styles.customize_scrollbar_container}

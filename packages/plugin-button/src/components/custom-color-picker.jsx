@@ -5,21 +5,17 @@ class CustomColorPicker extends React.Component {
   render() {
     const styles = {
       hue: {
-        height: 10,
+        height: '12px',
         position: 'relative',
-        marginTop: 10,
+        marginTop: '6px',
       },
       saturation: {
         width: '100%',
-        height: '171px',
+        height: '112px',
         position: 'relative',
       },
-      circle: {
-        width: '100%',
-        height: '171px',
-      },
       input: {
-        height: 34,
+        height: '34px',
         paddingTop: '15px',
         position: 'relative',
         width: '100%',
@@ -30,10 +26,10 @@ class CustomColorPicker extends React.Component {
     return (
       <div>
         <div style={styles.saturation}>
-          <Saturation {...this.props} />
+          <Saturation style={{ saturation: styles.saturation }} {...this.props} />
         </div>
         <div style={styles.hue}>
-          <Hue {...this.props} />
+          <Hue style={{ hue: styles.hue }} {...this.props} />
         </div>
         <div>
           <EditableInput

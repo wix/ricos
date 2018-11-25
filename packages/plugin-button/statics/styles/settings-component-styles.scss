@@ -1,3 +1,6 @@
+@import "~wix-rich-content-common/dist/statics/styles/mixins";
+@import "~wix-rich-content-common/dist/statics/styles/palette";
+
 .header_text {
   font-size: 16px;
   margin: 8px 0 8px 0;
@@ -16,4 +19,11 @@
 }
 .button_name_feild{
   padding-bottom: 6px;
+}
+.section_content{
+  padding-right: 30px;
+  @include phone {
+    padding-right: 0px;
+  }
+
 }

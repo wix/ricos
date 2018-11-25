@@ -1,3 +1,5 @@
+@import "~wix-rich-content-common/dist/statics/styles/mixins";
+@import "~wix-rich-content-common/dist/statics/styles/palette";
 
 .button_sample {
   box-sizing: border-box;
@@ -17,6 +19,9 @@
 
 .button_sample_container:nth-child(3n) {
   margin-right: 0px;
+  @include phone {
+    margin-right: 22px;
+  }
 }
 
 .oval {
@@ -37,5 +42,4 @@
   border-right: solid 1px #ffffff;
   margin-left: 5px;
   margin-top: 2px;
-
 }

@@ -11,6 +11,9 @@
 
 .design_component {
   padding-right: 30px;
+  @include phone {
+    padding-right: 0px;
+  }
 }
 
 .section_header {
@@ -51,8 +54,32 @@
     overflow-x: scroll;
     overflow-y: hidden;
     -webkit-overflow-scrolling: touch;
+    position: relative;
   }
 }
+
+.left_shadow {
+   width: 81px;
+   height: 52px;
+   background-image: linear-gradient(to left, rgba(238, 238, 238, 0), #ffffff);
+   position: absolute;
+   z-index: 1;
+   left :0px;
+ }
+ 
+ .button_samples_container{
+   position: relative;
+ }
+
+ .right_shadow {
+  width: 81px;
+   height: 52px;
+   background-image: linear-gradient(to right, rgba(238, 238, 238, 0), #ffffff);
+   position: absolute;
+   z-index: 1;
+   right :0px;
+ }
+ 
 
 .input_container {
   padding-top: 39px;

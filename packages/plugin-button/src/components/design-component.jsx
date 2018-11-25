@@ -154,8 +154,16 @@ class DesignComponent extends PureComponent {
     return (
       <div className={styles.design_component}>
         <SettingsSection theme={theme} ariaProps={{ 'aria-label': 'button sample selection', role: 'region' }}>
-          <div className={classNames(styles.button_samples)}>
-            {buttonSampleList}
+          <div className={styles.button_samples_container}>
+            {WixUtils.isMobile() &&
+              <div>
+                <div className={styles.right_shadow} />
+                <div className={styles.left_shadow} />
+              </div>
+            }
+            <div className={classNames(styles.button_samples)}>
+              {buttonSampleList}
+            </div>
           </div>
         </SettingsSection>
         <SettingsSection theme={theme} ariaProps={{ 'aria-label': 'size selection', role: 'region' }}>

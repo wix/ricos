@@ -51,7 +51,7 @@ class ColorPicker extends PureComponent {
 
   render() {
     const { flag } = this.props;
-    let colors = [
+    const colors = [
       'white',
       '#040404',
       '#0261FF',
@@ -64,14 +64,13 @@ class ColorPicker extends PureComponent {
       isDropperColor = true;
     }
     const palattes = colors.map((color, index) => {
-      let backColor = (index !== 5) ? color : this.props.color;
+      const backColor = (index !== 5) ? color : this.props.color;
       const className = styles.palette;
       let active = this.state.selectedPaletteIndex === index;
       let isColor = false;
       if (color === this.props.color && index !== 5) {
         isColor = true;
-      }
-      else {
+      } else {
         isColor = false;
       }
       if (isDropperColor && index === 5) {
@@ -79,7 +78,7 @@ class ColorPicker extends PureComponent {
         active = false;
       }
       return (
-        <div onClick={this.onPaletteClick.bind(this, color, index)} key={color + index} style={{ background: backColor }} className={className}>
+        <button onClick={this.onPaletteClick.bind(this, color, index)} key={color + index} style={{ background: backColor }} className={className}>
           {
             (active || isColor || (isDropperColor && index === 5)) &&
             <div className={styles.oval}>
@@ -87,10 +86,9 @@ class ColorPicker extends PureComponent {
             </div>
           }
           {(index === 5) ?
-            <EyeDropperIcon className={styles.dropper} /> :
-            null
+            <EyeDropperIcon className={styles.dropper} /> : null
           }
-        </div>
+        </button>
       );
     });
     return (
@@ -114,9 +112,7 @@ class ColorPicker extends PureComponent {
               {palattes}
             </div>
             {this.state.picker && flag ?
-              <CustomColorPicker color={this.state.color} onChange={this.customColorPickerChange.bind(this)} />
-              :
-              null
+              <CustomColorPicker color={this.state.color} onChange={this.customColorPickerChange.bind(this)} /> : null
             }
 
           </div> : null
