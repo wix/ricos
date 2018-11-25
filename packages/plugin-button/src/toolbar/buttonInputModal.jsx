@@ -33,7 +33,7 @@ export default class ButtonInputModal extends Component {
       };
     }
     this.state = {
-      validUrl: true,
+      isValidUrl: true,
       data: { ...buttonObj },
       design: { ...buttonObj },
       initialComponentData: {},
@@ -45,8 +45,8 @@ export default class ButtonInputModal extends Component {
     this.setState({ initialComponentData: this.props.componentData.button });
   }
 
-  onValidUrl = validUrl => {
-    this.setState({ validUrl });
+  onValidUrl = isValidUrl => {
+    this.setState({ isValidUrl });
   }
 
   onSettingsChanged = data => {
@@ -81,7 +81,7 @@ export default class ButtonInputModal extends Component {
       design: { ...this.state.design }
     };
     if (isValidUrl(url)) {
-      this.setState({ validUrl: true });
+      this.setState({ isValidUrl: true });
       if (onConfirm) {
         onConfirm({ ...componentData, button: buttonObj });
       } else {
@@ -92,7 +92,7 @@ export default class ButtonInputModal extends Component {
       this.props.helpers.closeModal();
       this.setState({ submitted: true });
     } else {
-      this.setState({ validUrl: false });
+      this.setState({ isValidUrl: false });
     }
   };
 
@@ -135,7 +135,7 @@ export default class ButtonInputModal extends Component {
           {t('ButtonModal_Settings_Tab')}
         </div>
         <div className={styles.errorIcon}>
-          {!this.state.validUrl ?
+          {!this.state.isValidUrl ?
             <ErrorIcon width="18" height="18" /> :
             null
           }
@@ -149,7 +149,7 @@ export default class ButtonInputModal extends Component {
         {...this.props}
         isValidUrl={this.onValidUrl.bind(this)}
         onSettingsChange={this.onSettingsChanged.bind(this)}
-        validUrl={this.state.validUrl}
+        validUrl={this.state.isValidUrl}
         settingsObj={this.state.data}
         onKeyPress={this.handleKeyPress}
       />);

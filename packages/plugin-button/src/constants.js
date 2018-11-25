@@ -18,10 +18,8 @@ export const DEFAULTS = {
     buttonText: 'Click Me!',
     buttonSize: 'M',
     rel: false,
-    submitted: true,
     target: true,
     textColor: 'white',
     url: '',
-    validUrl: true,
   }
 };
