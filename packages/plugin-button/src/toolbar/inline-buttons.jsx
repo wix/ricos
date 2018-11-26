@@ -9,7 +9,7 @@ const custumStyleSettingModal = {
   }
 };
 
-export default ({ anchorTarget, relValue }) => {
+export default ({ }) => {
   return [
     { keyName: 'sizeSmallLeft', type: BUTTONS.SIZE_SMALL_LEFT, mobile: true },
     { keyName: 'sizeSmallCenter', type: BUTTONS.SIZE_SMALL_CENTER, mobile: true },
@@ -25,8 +25,7 @@ export default ({ anchorTarget, relValue }) => {
       modalStyles: getModalStyles({ customStyles: custumStyleSettingModal }),
       mobile: true,
       tooltipTextKey: 'SettingsButton_Tooltip',
-      anchorTarget,
-      relValue
+      relValue: 'nofollow'
     },
     { keyName: 'delete', type: BUTTONS.DELETE, mobile: true },
   ];

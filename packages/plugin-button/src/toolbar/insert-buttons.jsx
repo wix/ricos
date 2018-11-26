@@ -2,7 +2,6 @@ import { TOOLBARS } from 'wix-rich-content-common';
 import { InsertPluginIcon } from '../icons';
 import { DEFAULTS } from '../constants';
 
-
 export default ({ helpers, t }) => {
   return [
     {

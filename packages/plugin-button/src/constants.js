@@ -17,8 +17,6 @@ export const DEFAULTS = {
     borderWidth: 0,
     buttonText: 'Click Me!',
     buttonSize: 'M',
-    rel: false,
-    target: true,
     textColor: 'white',
     url: '',
   }
