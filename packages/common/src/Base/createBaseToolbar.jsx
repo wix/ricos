@@ -313,6 +313,8 @@ export default function createToolbar({
               hideInlinePanel={this.hidePanels}
               {...buttonProps}
               uiSettings={uiSettings}
+              anchorTarget={anchorTarget}
+              relValue={relValue}
             />
           );
       }

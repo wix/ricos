@@ -91,7 +91,9 @@ ButtonComponent.propTypes = {
   componentData: PropTypes.object,
   style: PropTypes.object,
   buttonObj: PropTypes.object,
-  className: PropTypes.string
+  className: PropTypes.string,
+  anchorTarget: PropTypes.string,
+  relValue: PropTypes.string,
 };
 
 export default ButtonComponent;

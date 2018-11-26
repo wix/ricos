@@ -25,12 +25,18 @@ export default class ButtonInputModal extends Component {
   constructor(props) {
     super(props);
     this.styles = mergeStyles({ styles, theme: props.theme });
-    const { componentData } = this.props;
+    const { componentData, relValue, anchorTarget } = this.props;
     let buttonObj = {};
     if (componentData.button) {
       buttonObj = {
         ...componentData.button
       };
+    }
+    if (!('rel' in buttonObj) && relValue === 'nofollow') {
+      buttonObj.rel = true;
+    }
+    if (!('target' in buttonObj) && anchorTarget === '_blank') {
+      buttonObj.target = true;
     }
     this.state = {
       isValidUrl: true,

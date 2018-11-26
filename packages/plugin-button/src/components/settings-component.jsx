@@ -13,7 +13,7 @@ import styles from '../../statics/styles/settings-component-styles.scss';
 class SettingsComponent extends PureComponent {
   constructor(props) {
     super(props);
-    const { settingsObj, t, relValue, anchorTarget } = this.props;
+    const { settingsObj, t } = this.props;
     this.styles = mergeStyles({ styles, theme: props.theme });
     this.targetCheckboxText = t('LinkPanel_Target_Checkbox');
     this.nofollowCheckboxText = t('LinkPanel_Nofollow_Checkbox');

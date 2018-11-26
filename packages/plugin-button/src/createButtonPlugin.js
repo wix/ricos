@@ -15,16 +15,15 @@ const createButtonPlugin = (config = {}) => {
     anchorTarget,
     relValue,
     [type]: settings = {},
-    pubsub,
     ...rest
   } = config;
   const styles = mergeStyles({ styles: Styles, theme });
-  const buttonProps= {
+  const buttonProps = {
     className: theme,
     anchorTarget,
     relValue,
     settings,
-  }
+  };
   const buttonEntityComponent = decorateComponentWithProps(ButtonComponent, buttonProps);
 
   return createBasePlugin({
@@ -37,6 +36,8 @@ const createButtonPlugin = (config = {}) => {
     toolbar: createToolbar({
       helpers,
       styles,
+      anchorTarget,
+      relValue,
       theme,
       t
     }),
