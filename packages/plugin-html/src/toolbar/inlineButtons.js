@@ -19,12 +19,24 @@ import {
 } from '../constants';
 import EditPanel from './HtmlEditPanel';
 
-const getAlignmentButtonProps = componentData => ({ disabled: get(componentData, 'config.width', 0) > MAX_ALIGNMENT_WIDTH });
+const getAlignmentButtonProps = ({ store, componentData }) => {
+  const bounds = store.get('editorBounds');
+  const maxAlignmentWidth = bounds ? bounds.width - 1 : MAX_ALIGNMENT_WIDTH;
+  return {
+    disabled: get(componentData, 'config.width', 0) > maxAlignmentWidth
+  };
+};
+
 const TOOLTIP_TEXT_BY_SRC_TYPE = {
   [SRC_TYPE_HTML]: 'HtmlPlugin_EditHtml_Tooltip',
   [SRC_TYPE_URL]: 'HtmlPlugin_EditUrl_Tooltip',
 };
-export default () => {
+
+/**
+ * createInlineButtons
+ */
+export default ({ settings = {} }) => {
+  const { maxWidth, minWidth = MIN_WIDTH, maxHeight = MAX_HEIGHT, minHeight = MIN_HEIGHT } = settings;
   return [
     {
       type: BUTTONS.INLINE_PANEL,
@@ -35,14 +47,32 @@ export default () => {
         ({ tooltipTextKey: src ? TOOLTIP_TEXT_BY_SRC_TYPE[srcType] : 'HtmlPlugin_EditEmpty_Tooltip' }),
     },
     { type: BUTTONS.SEPARATOR, keyName: 'separator1' },
-    { type: BUTTONS.WIDTH, keyName: 'width', min: MIN_WIDTH, max: MAX_WIDTH },
-    { type: BUTTONS.HEIGHT, keyName: 'height', min: MIN_HEIGHT, max: MAX_HEIGHT, inputMax: MAX_HEIGHT_INPUT },
+    {
+      type: BUTTONS.WIDTH,
+      keyName: 'width',
+      min: minWidth,
+      mapStoreDataToPanelProps: ({ store }) => {
+        const bounds = store.get('editorBounds');
+        if (bounds && bounds.width) {
+          return { max: maxWidth ? Math.min(maxWidth, bounds.width) : bounds.width };
+        } else {
+          return { max: maxWidth || MAX_WIDTH };
+        }
+      }
+    },
+    {
+      type: BUTTONS.HEIGHT,
+      keyName: 'height',
+      min: minHeight,
+      max: maxHeight,
+      inputMax: MAX_HEIGHT_INPUT,
+    },
     { type: BUTTONS.SEPARATOR, keyName: 'separator2' },
     {
       type: BUTTONS.ALIGNMENT_LEFT,
       keyName: 'alignLeft',
       icon: SizeSmallLeftIcon,
-      mapComponentDataToButtonProps: getAlignmentButtonProps,
+      mapStoreDataToButtonProps: getAlignmentButtonProps,
     },
     {
       type: BUTTONS.ALIGNMENT_CENTER,
@@ -53,7 +83,7 @@ export default () => {
       type: BUTTONS.ALIGNMENT_RIGHT,
       keyName: 'alignRight',
       icon: SizeSmallRightIcon,
-      mapComponentDataToButtonProps: getAlignmentButtonProps,
+      mapStoreDataToButtonProps: getAlignmentButtonProps,
     },
     { type: BUTTONS.SEPARATOR, keyName: 'separator3' },
     { type: BUTTONS.DELETE, keyName: 'delete', mobile: true },

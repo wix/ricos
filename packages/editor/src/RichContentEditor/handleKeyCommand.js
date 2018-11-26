@@ -1,10 +1,9 @@
 import { EditorState, RichUtils, Modifier } from '@wix/draft-js';
-import { isAtomicBlockFocused, removeBlock, COMMANDS } from 'wix-rich-content-common';
+import { isAtomicBlockFocused, removeBlock, COMMANDS, HEADING } from 'wix-rich-content-common';
 
-/* eslint-disable complexity */
 export default (updateEditorState, customHandlers) =>
   (command, editorState) => {
-    let newState, contentState;
+    let newState, contentState, newContentState;
     if (customHandlers[command]) {
       newState = customHandlers[command](editorState);
     } else {
@@ -17,7 +16,15 @@ export default (updateEditorState, customHandlers) =>
           newState = EditorState.push(editorState, contentState, 'change-block-data');
           break;
         case COMMANDS.TITLE:
+          newState = RichUtils.toggleInlineStyle(editorState, HEADING.TWO);
+          newContentState = Modifier.removeInlineStyle(newState.getCurrentContent(), newState.getSelection(), HEADING.THREE);
+          newState = EditorState.push(newState, newContentState, 'change-inline-style');
+          break;
         case COMMANDS.SUBTITLE:
+          newState = RichUtils.toggleInlineStyle(editorState, HEADING.THREE);
+          newContentState = Modifier.removeInlineStyle(newState.getCurrentContent(), newState.getSelection(), HEADING.TWO);
+          newState = EditorState.push(newState, newContentState, 'change-inline-style');
+          break;
         case COMMANDS.NUMBERED_LIST:
         case COMMANDS.BULLET_LIST:
         case COMMANDS.BLOCKQUOTE:
@@ -43,5 +50,3 @@ export default (updateEditorState, customHandlers) =>
 
     return 'not-handled';
   };
-/* eslint-disable complexity */
-

@@ -16,7 +16,7 @@ HeaderTwoDecoration.propTypes =
 HeaderThreeDecoration.propTypes = propTypes;
 
 const styleToDecorationMap = {
-  [HEADING.TITLE]: HeaderOneDecoration,
+  [HEADING.ONE]: HeaderOneDecoration,
   [HEADING.TWO]: HeaderTwoDecoration,
   [HEADING.THREE]: HeaderThreeDecoration,
 };

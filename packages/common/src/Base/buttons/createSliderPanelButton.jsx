@@ -8,27 +8,30 @@ import BUTTONS from './keys';
 export default ({ Icon, tooltipTextKey, getValue, onChange, keyName }) =>
   class SliderPanelButton extends Component {
     static propTypes = {
-      min: PropTypes.number.isRequired,
-      max: PropTypes.number.isRequired,
+      min: PropTypes.number,
+      max: PropTypes.number,
       inputMin: PropTypes.number,
       inputMax: PropTypes.number,
+      mapStoreDataToPanelProps: PropTypes.func,
     };
 
-    panelContent = decorateComponentWithProps(SliderPanel, {
-      getValue,
-      onChange,
-      min: this.props.min,
-      max: this.props.max,
-      inputMin: this.props.inputMin,
-      inputMax: this.props.inputMax,
-    });
-
     render() {
+
+      const panelContent = decorateComponentWithProps(SliderPanel, {
+        getValue,
+        onChange,
+        min: this.props.min,
+        max: this.props.max,
+        inputMin: this.props.inputMin,
+        inputMax: this.props.inputMax,
+        mapStoreDataToPanelProps: this.props.mapStoreDataToPanelProps
+      });
+
       return (
         <BaseToolbarButton
           keyName={keyName}
           icon={Icon}
-          panelContent={this.panelContent}
+          panelContent={panelContent}
           tooltipTextKey={tooltipTextKey}
           {...this.props}
           type={BUTTONS.PANEL}

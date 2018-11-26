@@ -4,18 +4,21 @@ import redraft from 'redraft';
 import classNames from 'classnames';
 import { createInlineStyleDecorators, mergeStyles } from 'wix-rich-content-common';
 import getPluginsViewer from './PluginsViewer';
+import { getTextDirection } from './utils/textUtils';
 import List from './List';
 import { getStrategyByStyle } from './decorators/getStrategyByStyle';
 import styles from '../statics/rich-content-viewer.scss';
 
-const withTextAlignment = (element, data, mergedStyles, isRtl) => {
-  const defaultTextAlignment = isRtl ? 'right' : 'left';
+const withTextAlignment = (element, data, mergedStyles, textDirection) => {
+  const appliedTextDirection = textDirection || data.textDirection || 'ltr';
+  const defaultTextAlignment = appliedTextDirection === 'rtl' ? 'right' : 'left';
   const alignmentClass = data.textAlignment ? data.textAlignment : defaultTextAlignment;
   const elementProps = {
     ...element.props,
-    className: element.props.className ?
-      classNames(element.props.className, mergedStyles[alignmentClass]) :
-      mergedStyles[alignmentClass]
+    className: classNames(
+      { [element.props.className]: !!element.props.className,
+        [mergedStyles.rtl]: appliedTextDirection === 'rtl' },
+      mergedStyles[alignmentClass])
   };
   return React.cloneElement(element, elementProps, element.props.children);
 };
@@ -29,7 +32,7 @@ const getInline = mergedStyles => {
   };
 };
 
-const getList = (ordered, mergedStyles, isRtl) =>
+const getList = (ordered, mergedStyles, textDirection) =>
   (children, blockProps) => {
     const fixedChildren = children.map(child => child.length ? child : [' ']);
     const className = ordered ? 'ordered' : 'unordered';
@@ -39,35 +42,41 @@ const getList = (ordered, mergedStyles, isRtl) =>
         {fixedChildren.map((child, i) => {
           // NOTE: list block data is an array of data entries per list item
           const dataEntry = blockProps.data.length > i ? blockProps.data[i] : {};
-          return withTextAlignment(<li className={mergedStyles[`${className}List`]} key={blockProps.keys[i]}><div>{child}</div></li>,
-            dataEntry, mergedStyles, isRtl);
+          return withTextAlignment(
+            <li className={mergedStyles[`${className}List`]} key={blockProps.keys[i]}>
+              <p className={mergedStyles.elementSpacing}>
+                {child}
+              </p>
+            </li>,
+            dataEntry, mergedStyles, textDirection);
         })}
       </List>
     );
   };
 
-/**
- * Note that children can be maped to render a list or do other cool stuff
- */
-const getBlocks = (mergedStyles, isRtl) => {
+const getBlocks = (mergedStyles, textDirection) => {
   // Rendering blocks like this along with cleanup results in a single p tag for each paragraph
   // adding an empty block closes current paragraph and starts a new one
   return {
     unstyled: (children, blockProps) => children.map((child, i) =>
-      withTextAlignment(<div key={blockProps.keys[i]}><div>{child}</div></div>, blockProps.data[i], mergedStyles, isRtl)),
+      withTextAlignment(<div key={blockProps.keys[i]}><div>{child}</div></div>, blockProps.data[i], mergedStyles, textDirection)),
     blockquote: (children, blockProps) => children.map((child, i) =>
       withTextAlignment(<blockquote className={mergedStyles.quote} key={blockProps.keys[i]}><div>{child}</div></blockquote>,
-        blockProps.data[i], mergedStyles, isRtl)),
+        blockProps.data[i], mergedStyles, textDirection)),
     'header-one': (children, blockProps) => children.map((child, i) =>
-      withTextAlignment(<h1 className={mergedStyles.headerOne} key={blockProps.keys[i]}>{child}</h1>, blockProps.data[i], mergedStyles, isRtl)),
+      withTextAlignment(<h1 className={mergedStyles.headerOne} key={blockProps.keys[i]}>{child}</h1>,
+        blockProps.data[i], mergedStyles, textDirection)),
     'header-two': (children, blockProps) => children.map((child, i) =>
-      withTextAlignment(<h2 className={mergedStyles.headerTwo} key={blockProps.keys[i]}>{child}</h2>, blockProps.data[i], mergedStyles, isRtl)),
+      withTextAlignment(<h2 className={mergedStyles.headerTwo} key={blockProps.keys[i]}>{child}</h2>,
+        blockProps.data[i], mergedStyles, textDirection)),
     'header-three': (children, blockProps) => children.map((child, i) =>
-      withTextAlignment(<h3 className={mergedStyles.headerThree} key={blockProps.keys[i]}>{child}</h3>, blockProps.data[i], mergedStyles, isRtl)),
+      withTextAlignment(<h3 className={mergedStyles.headerThree} key={blockProps.keys[i]}>{child}</h3>,
+        blockProps.data[i], mergedStyles, textDirection)),
     'code-block': (children, blockProps) => children.map((child, i) =>
-      withTextAlignment(<pre key={blockProps.keys[i]} className={mergedStyles.codeBlock}>{child}</pre>, blockProps.data[i], mergedStyles, isRtl)),
-    'unordered-list-item': getList(false, mergedStyles, isRtl),
-    'ordered-list-item': getList(true, mergedStyles, isRtl),
+      withTextAlignment(<pre key={blockProps.keys[i]} className={mergedStyles.codeBlock}>{child}</pre>,
+        blockProps.data[i], mergedStyles, textDirection)),
+    'unordered-list-item': getList(false, mergedStyles, textDirection),
+    'ordered-list-item': getList(true, mergedStyles, textDirection),
   };
 };
 
@@ -93,25 +102,41 @@ const options = {
   },
 };
 
-const Preview = ({ raw, typeMappers, theme, isMobile, decorators, anchorTarget, relValue, config, isRtl }) => {
+const augmentRaw = raw => {
+  const blocks = raw.blocks || [];
+  blocks
+    .filter(({ type }) => type !== 'atomic')
+    .forEach(({ text, data }) => {
+      const direction = getTextDirection(text);
+      if (direction === 'rtl') {
+        data.textDirection = direction;
+      }
+    });
+
+  return raw;
+};
+
+const Preview = ({ raw, typeMappers, theme, isMobile, decorators, anchorTarget, relValue, config, textDirection }) => {
   const mergedStyles = mergeStyles({ styles, theme });
   const isEmpty = isEmptyRaw(raw);
   const typeMap = combineTypeMappers(typeMappers);
+
+  const augmentedRaw = augmentRaw(raw);
 
   const combinedDecorators = [
     ...decorators,
     ...createInlineStyleDecorators(getStrategyByStyle, mergedStyles)
   ];
 
-  const className = classNames(mergedStyles.preview, isRtl && mergedStyles.rtl);
+  const className = classNames(mergedStyles.preview, textDirection === 'rtl' && mergedStyles.rtl);
 
   return (
     <div className={className}>
       {isEmpty && <div>There is nothing to render...</div>}
       {!isEmpty &&
-        redraft(raw, {
+        redraft(augmentedRaw, {
           inline: getInline(mergedStyles),
-          blocks: getBlocks(mergedStyles, isRtl),
+          blocks: getBlocks(mergedStyles, textDirection),
           entities: getEntities(typeMap, { theme, isMobile, anchorTarget, relValue, config }),
           decorators: combinedDecorators },
         options)}
@@ -121,13 +146,13 @@ const Preview = ({ raw, typeMappers, theme, isMobile, decorators, anchorTarget, 
 
 Preview.propTypes = {
   raw: PropTypes.shape({
-    blocks: PropTypes.array.isRequired, // eslint-disable-line react/no-unused-prop-types
-    entityMap: PropTypes.object.isRequired, // eslint-disable-line react/no-unused-prop-types
+    blocks: PropTypes.array.isRequired,
+    entityMap: PropTypes.object.isRequired,
   }).isRequired,
   typeMappers: PropTypes.arrayOf(PropTypes.func),
   theme: PropTypes.object,
   isMobile: PropTypes.bool,
-  isRtl: PropTypes.bool,
+  textDirection: PropTypes.oneOf(['rtl', 'ltr']),
   decorators: PropTypes.arrayOf(PropTypes.shape({
     component: PropTypes.func.isRequired,
     strategy: PropTypes.func.isRequired,

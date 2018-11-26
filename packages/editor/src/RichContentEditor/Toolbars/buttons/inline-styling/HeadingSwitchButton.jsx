@@ -3,7 +3,7 @@ import { HEADING, getSelectionStyles } from 'wix-rich-content-common';
 import createInlineStyleSwitchButton from './createInlineStyleSwitchButton';
 import { TitleIcon, TitleOneIcon, TitleTwoIcon } from '../../../Icons';
 
-const styles = Object.keys(HEADING).map(k => HEADING[k]).filter(style => style !== HEADING.TITLE);
+const styles = Object.keys(HEADING).map(k => HEADING[k]).filter(style => style !== HEADING.ONE);
 const HeadingSwitchButton = createInlineStyleSwitchButton({
   Icons: [TitleIcon, TitleOneIcon, TitleTwoIcon],
   styles,

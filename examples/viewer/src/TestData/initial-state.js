@@ -36,7 +36,7 @@ const TestData = {
       },
       {
         key: "8mis",
-        text: "H3",
+        text: "כותרת H3",
         type: "header-three",
         depth: 0,
         inlineStyleRanges: [],
@@ -233,7 +233,7 @@ const TestData = {
       },
       {
         key: '3mbj4',
-        text: 'H3 numbered',
+        text: 'רשימה סדורה',
         type: 'ordered-list-item',
         depth: 0,
         inlineStyleRanges: [
@@ -248,13 +248,13 @@ const TestData = {
       },
       {
         key: 'bcsbh',
-        text: 'H3 bullet',
+        text: 'רשימה לא סדורה',
         type: 'unordered-list-item',
         depth: 0,
         inlineStyleRanges: [
           {
             offset: 0,
-            length: 9,
+            length: 14,
             style: 'inline-header-three'
           }
         ],
@@ -263,7 +263,7 @@ const TestData = {
       },
       {
         key: '2fdkb',
-        text: 'Text center',
+        text: 'טקסט ממורכז',
         type: 'unstyled',
         depth: 0,
         inlineStyleRanges: [],
@@ -348,7 +348,7 @@ const TestData = {
       },
       {
         key: '6mlr2',
-        text: 'Quote2',
+        text: 'ציטוט',
         type: 'blockquote',
         depth: 0,
         inlineStyleRanges: [],
@@ -366,7 +366,7 @@ const TestData = {
       },
       {
         key: 'c3m22',
-        text: 'var x = 5;\nvar y = 8;\nvar z = Math.min(x,y);',
+        text: '// TODO: get normal code example\nvar x = 5;\nvar y = 8;\nvar z = Math.min(x,y);',
         type: 'code-block',
         depth: 0,
         inlineStyleRanges: [],

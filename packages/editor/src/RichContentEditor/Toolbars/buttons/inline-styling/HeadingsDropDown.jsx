@@ -11,7 +11,7 @@ const headings = [{
   tooltipTextKey: 'NorNormalTextButton_tooltip',
   className: styles.normalTextButton
 }, {
-  style: HEADING.TITLE,
+  style: HEADING.ONE,
   labelKey: 'HeadingOneButton_label',
   tooltipTextKey: 'HeadingOneButton_tooltip',
   className: styles.headingOneButton

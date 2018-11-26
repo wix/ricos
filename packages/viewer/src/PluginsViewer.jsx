@@ -51,7 +51,7 @@ const AtomicBlock = ({ type, typeMap, componentData, children, theme, isMobile, 
           {renderLink(componentData, anchorTarget, relValue)}
         </div>);
     } else {
-      return <Component componentData={componentData} theme={theme} settings={settings} isMobile={isMobile} {...props}> {children} </Component>;
+      return <Component componentData={componentData} theme={theme} settings={settings} isMobile={isMobile} {...props}>{children}</Component>;
     }
   }
   return null;

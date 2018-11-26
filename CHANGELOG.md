@@ -10,6 +10,105 @@
 
 ## [Unreleased]
 
+### :bug: Bug Fix
+
+- `giphy`
+  - [#192](https://github.com/wix-incubator/rich-content/pull/192) removing container styles of giphy to keep original width to height ratio
+  
+<br/>
+
+## 1.7.4 (Nov 15, 2018)
+
+### :bug: Bug Fix
+
+- `common`
+  - [a40574b8](https://github.com/wix-incubator/rich-content/commit/a40574b8d551e40dd8d1c27b3f7b1f7bc6f05057) decreased mobile plugin add button font size 
+
+## 1.7.3 (Nov 13, 2018)
+
+### :bug: Bug Fix
+
+- `giphy`
+  - [#191](https://github.com/wix-incubator/rich-content/pull/191) using img tag (self closing) for viewer istead of gifplayer (as its not using a void img element tag)
+
+<br/>
+
+## 1.7.2 (Nov 11, 2018)
+
+### :bug: Bug Fix
+
+- `general`
+  - [#187](https://github.com/wix-incubator/rich-content/pull/187) title and subtitle keyboard shortcuts are remapped to inline-headers + data normalization now contains block-level headers conversion to inline-style headers
+- `soundcloud`
+  - [#188](https://github.com/wix-incubator/rich-content/pull/188) Fix soundcloud regix url validator to include mobile urls + Save & Cancel Button font padding fixes on mobile
+- `video`
+  - [#190](https://github.com/wix-incubator/rich-content/pull/190) Text input error icon padding fix + Text input shadow fix on safari
+
+<br/>
+
+## 1.7.1 (Nov 7, 2018)
+
+### :rocket: New Feature
+
+- `custom video upload extension`
+  - [#170](https://github.com/wix-incubator/rich-content/pull/170) `plugin-video` extension added to upload custom videos
+- `common`
+  - [#179](https://github.com/wix-incubator/rich-content/pull/179) `mapStoreDataToButtonProps` API exposed (to be used in toolbar button structures)
+  - [#179](https://github.com/wix-incubator/rich-content/pull/179) `width` and `height` props added to the plugin config
+- `html`
+  - [#179](https://github.com/wix-incubator/rich-content/pull/179) `width`, `height`, `minWidth`, `minHeight`, `maxWidth`, and `maxHeight` values can be provided via settings. See [PluginCustomization](./docs/PluginCustomization.md) doc for reference
+
+### :bug: Bug Fix
+
+- `html`
+  - [#179](https://github.com/wix-incubator/rich-content/pull/179) html component maximum width is limited by the editor width rather set hard-coded
+
+### :book: Documentation
+
+- [PluginCustomization](./docs/PluginCustomization.md) doc added
+
+<br/>
+
+## 1.7.0 (Oct 31, 2018)
+
+### :boom: Breaking Change
+
+- `viewer`
+  - [#176](https://github.com/wix-incubator/rich-content/pull/176) RichContentViewer `isRtl` prop replaced with `textDirection` prop (accepted values are `'rtl'`, `'ltr'`)
+
+### :rocket: New Feature
+
+- `viewer`
+  - [#176](https://github.com/wix-incubator/rich-content/pull/176) text direction applied to blocks accordingly to the text symbols
+
+### :bug: Bug Fix
+
+- `editor`
+  - [#171](https://github.com/wix-incubator/rich-content/pull/171) SEO demand: render list item content wrapped in `<p>` tags
+- `viewer`
+  - [#171](https://github.com/wix-incubator/rich-content/pull/171) SEO demand: render list item content wrapped in `<p>` tags
+  - [#175](https://github.com/wix-incubator/rich-content/pull/175) plugin rendering: redundant whitespaces removed
+- `link`
+  - [#175](https://github.com/wix-incubator/rich-content/pull/175) `LinkParseStrategy` omits parsed range if it matches an entity range (link duplicates issue)
+
+<br/>
+
+## 1.6.10 (Oct 24, 2018)
+
+### :house: Internal
+
+- `general`
+  - `package-lock.json` files are not ignored
+
+<br/>
+
+## 1.6.9 (Oct 24, 2018)
+
+### :rocket: New Feature
+
+- `giphy`
+  - [#161](https://github.com/wix-incubator/rich-content/pull/161) `plugin-giphy` implemented
+
 <br />
 
 ## 1.6.8 (Oct 18, 2018)
@@ -17,7 +116,7 @@
 ### :bug: Bug Fix
 
 - `soundcloud`
-  - fix cropped message in mobile view 
+  - fix cropped message in mobile view
 
 ### :house: Internal
 

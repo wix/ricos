@@ -1,3 +1,4 @@
+import { getNormalizedHeaderBlock } from './getNormalizedHeaderBlock';
 import mapValues from 'lodash/mapValues';
 import cloneDeep from 'lodash/cloneDeep';
 import isUndefined from 'lodash/isUndefined';
@@ -11,21 +12,26 @@ const normalizeEntityType = (entityType, entityTypeMap) => {
 };
 
 /* eslint-disable */
-const normalizeComponentData = (componentData, { anchorTarget, relValue }) => {
-  const { targetBlank, nofollow, target, rel } = componentData;
-  if (isUndefined(targetBlank) && isUndefined(nofollow) && !isUndefined(target) && !isUndefined(rel)) {
-    return componentData;
-  }
+const dataNormalizers = {
+  LINK: (componentData, { anchorTarget, relValue }) => {
+    const { targetBlank, nofollow, target, rel } = componentData;
+    if (isUndefined(targetBlank) && isUndefined(nofollow) && !isUndefined(target) && !isUndefined(rel)) {
+      return componentData;
+    }
 
-  delete componentData.targetBlank;
-  delete componentData.nofollow;
+    delete componentData.targetBlank;
+    delete componentData.nofollow;
 
-  return Object.assign(componentData, {
-    target: targetBlank ? '_blank' : (anchorTarget || '_self'),
-    rel: nofollow ? 'nofollow' : (relValue || 'noopener')
-  });
+    return Object.assign(componentData, {
+      target: targetBlank ? '_blank' : (anchorTarget || '_self'),
+      rel: nofollow ? 'nofollow' : (relValue || 'noopener')
+    });
+  },
 };
 
+const normalizeComponentData = (type, componentData, config) => dataNormalizers[type](componentData, config);
+
+// TODO: create configNormalizers map and separate the IMAGE and VIDEO normalizers
 const normalizeComponentConfig = componentData => {
   if (componentData.config) {
     return componentData;
@@ -75,14 +81,24 @@ export default (initialState, config) => {
       'VIDEO-EMBED': 'wix-draft-plugin-video',
     },
     dataNormalization: {
-      LINK: 'LINK'
-    }
+      LINK: 'LINK',
+    },
   };
 
   const { blocks, entityMap } = initialState;
 
   return {
-    blocks: blocks.map(b => b.type !== 'atomic' ? b : { ...b, text: ' ' }),
+    blocks: blocks.map(block => {
+      switch (block.type) {
+        case 'atomic':
+          return { ...block, text: ' ' };
+        case 'header-one':
+        case 'header-two':
+        case 'header-three':
+          return getNormalizedHeaderBlock(block);
+        default: return block;
+      }
+    }),
     entityMap: mapValues(
       entityMap,
       entity => shouldNormalizeEntityConfig(entity, Object.keys(entityTypeMap.configNormalization)) ? {
@@ -92,7 +108,7 @@ export default (initialState, config) => {
       } : shouldNormalizeEntityData(entity, Object.keys(entityTypeMap.dataNormalization)) ? {
         ...entity,
         type: normalizeEntityType(entity.type, entityTypeMap.dataNormalization),
-        data: normalizeComponentData(cloneDeep(entity.data), config)
+        data: normalizeComponentData(entity.type, cloneDeep(entity.data), config)
       } : entity
     ),
   };

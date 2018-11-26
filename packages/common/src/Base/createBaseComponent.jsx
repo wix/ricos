@@ -199,7 +199,8 @@ const createBaseComponent = ({ PluginComponent, theme, settings, pubsub, helpers
     render = () => {
       const { blockProps, className, onClick, selection } = this.props;
       const { componentData, readOnly } = this.state;
-      const { link, width, height } = componentData.config || {};
+      const { link, width: currentWidth, height: currentHeight } = componentData.config || {};
+      const { width: initialWidth, height: initialHeight } = settings || {};
       const isEditorFocused = selection.getHasFocus();
       const { isFocused } = blockProps;
       const isActive = isFocused && isEditorFocused && !readOnly;
@@ -234,6 +235,11 @@ const createBaseComponent = ({ PluginComponent, theme, settings, pubsub, helpers
         [theme.hidden]: readOnly,
       });
 
+      const sizeStyles = {
+        width: !isNil(currentWidth) ? currentWidth : initialWidth,
+        height: !isNil(currentHeight) ? currentHeight : initialHeight,
+      };
+
       const component = (
         <PluginComponent
           {...this.props}
@@ -263,7 +269,7 @@ const createBaseComponent = ({ PluginComponent, theme, settings, pubsub, helpers
         });
       /* eslint-disable jsx-a11y/anchor-has-content */
       return (
-        <div style={{ width, height }} className={ContainerClassNames}>
+        <div style={sizeStyles} className={ContainerClassNames}>
           {!isNil(link) ? <div>{component}<a className={anchorClass} {...anchorProps} /></div> : component}
           {!this.state.readOnly && <div role="none" data-hook={'componentOverlay'} onClick={onClick} className={overlayClassNames} />}
         </div>
