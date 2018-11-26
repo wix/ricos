@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import isEqual from 'lodash/isEqual';
 import { mergeStyles } from 'wix-rich-content-common';
+import PickedIcon from './../icons/pickedIcon';
 import CustomColorPicker from './custom-color-picker';
 import styles from '../../statics/styles/color-picker.scss';
 import EyeDropperIcon from './../icons/EyeDropperIcon';
@@ -81,9 +82,7 @@ class ColorPicker extends PureComponent {
         <button onClick={this.onPaletteClick.bind(this, color, index)} key={color + index} style={{ background: backColor }} className={className}>
           {
             (active || isColor || (isDropperColor && index === 5)) &&
-            <div className={styles.oval}>
-              <div className={styles.active} />
-            </div>
+            <PickedIcon className={styles.picked} width="11px" height="11px" />
           }
           {(index === 5) ?
             <EyeDropperIcon className={styles.dropper} /> : null

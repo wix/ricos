@@ -180,7 +180,7 @@ export default class ButtonInputModal extends Component {
               <div className={styles.header_text}>{t('ButtonModal_Settings_Tab')}</div>
               {settingsComponent}
             </div>
-            <hr className={styles.separator} />
+            <div className={styles.separator} />
             <div className={styles.container} data-hook="ButtonInputModal">
               <div className={styles.header_text}>{t('ButtonModal_Design_Tab')}</div>
               {designComponent}

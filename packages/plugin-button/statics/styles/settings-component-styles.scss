@@ -2,17 +2,24 @@
 @import "~wix-rich-content-common/dist/statics/styles/palette";
 
 .header_text {
-  font-size: 16px;
+  font-size: 18px;
   margin: 8px 0 8px 0;
-  font-weight: bold;
+  font-weight: 300;
 }
 .errorMessage {
   color: #ee5951;
   font-size: 12px;
   padding-top: 6px;
+  @include phone {
+    padding-top: 4px;
+  }
+
 }
 .checkBoxes{
     padding-top: 33px;
+    @include phone {
+      padding-top: 22px;
+    }
 }
 .modal_footer{
   padding: 30px 0px;

@@ -18,25 +18,10 @@
   direction: rtl;
 }
 
-.oval {
+.picked {
   position: absolute;
   right: -5px;
   top: 1px;
-  width: 11px;
-  height: 11px;
-  border: 1px solid #fff;
-  background-color: #23d6b5;
-  border-radius: 100px;
-}
-
-.active {
-  width: 4px;
-  height: 6px;
-  transform: rotate(28deg);
-  border-bottom: 1px solid #fff;
-  border-right: 1px solid #fff;
-  margin-left: 3px;
-  margin-top: 1px;
 }
 
 .palette {
@@ -58,7 +43,6 @@
   right: 8px;
 }
 .colorBoard {
-  padding-top: 15px;
   padding-bottom: 18px;
 }
 .palettes {

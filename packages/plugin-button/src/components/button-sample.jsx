@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import isEqual from 'lodash/isEqual';
 import { mergeStyles } from 'wix-rich-content-common';
+import PickedIcon from './../icons/pickedIcon';
 import styles from '../../statics/styles/button-sample.scss';
 
 class ButtonSample extends PureComponent {
@@ -46,9 +47,7 @@ class ButtonSample extends PureComponent {
     return (
       <div className={styles.button_sample_container}>
         {active && onStyleChanged &&
-          <div className={styles.oval}>
-            <div className={styles.active} />
-          </div>
+          <PickedIcon className={styles.picked} />
         }
         <button onClick={this.onClick} style={{ ...style }} className={classNames(theme[style.className], styles.button_sample)}>
           Click Me!
