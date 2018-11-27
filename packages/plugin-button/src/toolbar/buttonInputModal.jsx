@@ -42,7 +42,8 @@ export default class ButtonInputModal extends Component {
       data: { ...buttonObj },
       design: { ...buttonObj },
       initialComponentData: {},
-      isHover: false
+      isHover: false,
+      activeTab: settingsTabValue
     };
   }
 
@@ -67,6 +68,9 @@ export default class ButtonInputModal extends Component {
   }
 
   onDesignChanged = design => {
+    if (this.state.activeTab !== designTabValue) {
+      this.setState({ activeTab: designTabValue });
+    }
     const buttonObj = {
       ...this.state.data,
       ...design
@@ -97,7 +101,7 @@ export default class ButtonInputModal extends Component {
       this.props.helpers.closeModal();
       this.setState({ submitted: true });
     } else {
-      this.setState({ isValidUrl: false });
+      this.setState({ isValidUrl: false, activeTab: settingsTabValue });
     }
   };
 
@@ -123,12 +127,23 @@ export default class ButtonInputModal extends Component {
     this.props.helpers.closeModal();
   };
 
-  handleOnMouseEnter = () => {
-    this.setState({ isHover: true });
+  handleOnMouseEnterDesign = () => {
+    this.setState({ isHover: true, activeTab: designTabValue });
   }
 
-  handleOnMouseLeave = () => {
+  handleOnMouseLeaveDesign = () => {
     this.setState({ isHover: false });
+  }
+
+  handleOnMouseEnterSettings = () => {
+    this.setState({ activeTab: settingsTabValue });
+  }
+
+  tabSelected = tabValue => {
+    const { url } = this.state.data;
+    if (!isValidUrl(url) && tabValue === designTabValue) {
+      this.setState({ isValidUrl: false });
+    }
   }
 
   render() {
@@ -190,10 +205,7 @@ export default class ButtonInputModal extends Component {
     }
     return (
       <div>
-        {mobileView ?
-          mobileView :
-          null
-        }
+        {mobileView}
         <div className={styles.container} data-hook="ButtonInputModal">
           {!mobileView ?
             <div>
@@ -204,16 +216,18 @@ export default class ButtonInputModal extends Component {
               </div>
               <FocusManager>
                 <div className={styles.focus_mhanager}>
-                  <Tabs value={settingsTabValue} theme={theme}>
+                  <Tabs value={this.state.activeTab} theme={theme} tabSelected={this.tabSelected.bind(this)}>
                     <Tab label={settingTabLabel} value={settingsTabValue} theme={this.styles}>
-                      {settingsComponent}
+                      <div onMouseEnter={this.handleOnMouseEnterSettings} >
+                        {settingsComponent}
+                      </div>
                     </Tab>
                     <Tab label={t('ButtonModal_Design_Tab')} value={designTabValue} theme={this.styles}>
                       <Scrollbars
                         renderThumbVertical={() => this.state.isHover ? <div className={styles.scrollbar_thumb} /> : <div />}
                         className={styles.customize_scrollbar_container}
-                        onMouseEnter={this.handleOnMouseEnter}
-                        onMouseLeave={this.handleOnMouseLeave}
+                        onMouseEnter={this.handleOnMouseEnterDesign}
+                        onMouseLeave={this.handleOnMouseLeaveDesign}
                       >
                         {designComponent}
                       </Scrollbars>

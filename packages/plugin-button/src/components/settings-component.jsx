@@ -115,7 +115,7 @@ class SettingsComponent extends PureComponent {
           onChange={this.onLinkChanged}
           value={url}
           placeholder={t('LinkPanel_InputPlaceholder')}
-          theme={theme}
+          theme={this.styles}
           error={errorTooltip}
           data-hook="ButtonInputModal"
         />

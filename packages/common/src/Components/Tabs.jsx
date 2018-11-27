@@ -41,6 +41,12 @@ export class Tabs extends Component {
     this.state = { activeTab: props.value };
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.value != this.state.activeTab) {
+      this.setState({ activeTab: nextProps.value });
+    }
+  }
+
   getTabHeaders = tabs => React.Children.map(tabs, tab => ({ label: tab.props.label, value: tab.props.value }));
 
   renderTabs = () => React.Children.map(this.props.children, tab => React.cloneElement(tab, {
@@ -62,7 +68,11 @@ export class Tabs extends Component {
                 className={classNames(styles.tabs_headers_option, { [styles.tabs_headers_option_selected]: isSelected })}
                 data-hook={`${value}_Tab`} aria-controls={`${value}_panel`} aria-label={label} aria-selected={isSelected}
                 onClick={() => {
-                  this.setState({ activeTab: value }); this.renderTabs();
+                  this.setState({ activeTab: value });
+                  if(this.props.tabSelected){
+                    this.props.tabSelected(value);
+                  } 
+                  this.renderTabs();
                 }}
               >
                 <span className={this.styles.tabs_headers_option_label}>{label}</span>
