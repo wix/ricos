@@ -1,5 +1,7 @@
 import React from 'react';
 import { CustomPicker } from 'react-color';
+import HuePointer from '../components/hue-pointer';
+import SaturationPointer from '../components/saturation-pointer';
 import { Saturation, Hue, EditableInput } from 'react-color/lib/components/common';
 class CustomColorPicker extends React.Component {
   render() {
@@ -25,10 +27,10 @@ class CustomColorPicker extends React.Component {
     return (
       <div>
         <div style={styles.saturation}>
-          <Saturation style={{ saturation: styles.saturation }} {...this.props} />
+          <Saturation style={{ saturation: styles.saturation }} pointer={() => <SaturationPointer />} {...this.props} />
         </div>
         <div style={styles.hue}>
-          <Hue style={{ hue: styles.hue }} {...this.props} />
+          <Hue style={{ hue: styles.hue }} {...this.props} pointer={() => <HuePointer />} />
         </div>
         <div>
           <EditableInput
@@ -37,6 +39,7 @@ class CustomColorPicker extends React.Component {
             {...this.props}
           />
         </div>
+        <SaturationPointer />
       </div>
     );
   }

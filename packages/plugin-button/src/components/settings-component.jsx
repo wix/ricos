@@ -128,14 +128,14 @@ class SettingsComponent extends PureComponent {
         <div className={styles.checkBoxes}>
           <Checkbox
             label={this.targetCheckboxText}
-            theme={theme}
+            theme={this.styles}
             checked={this.state.target}
             dataHook="linkPanelBlankCheckbox"
             onChange={this.handleTargetChange}
           />
           <Checkbox
             label={this.nofollowCheckboxText}
-            theme={theme}
+            theme={this.styles}
             checked={this.state.rel}
             dataHook="linkPanelRelCheckbox"
             onChange={this.handleRelChange}

@@ -4,7 +4,6 @@ import isEqual from 'lodash/isEqual';
 import { Scrollbars } from 'react-custom-scrollbars';
 import {
   mergeStyles,
-  CloseIcon,
   Tabs,
   Tab,
   FocusManager,
@@ -198,11 +197,10 @@ export default class ButtonInputModal extends Component {
         <div className={styles.container} data-hook="ButtonInputModal">
           {!mobileView ?
             <div>
-              <CloseIcon className={styles.closeIcon} onClick={() => this.onCloseRequested()} />
               <div role="heading" aria-labelledby="button_modal_hdr" className={styles.header}>
-                <h3 id="button_modal_hdr" className={styles.header_text}>
+                <div className={styles.header_text}>
                   {t('ButtonModal_Header')}
-                </h3>
+                </div>
               </div>
               <FocusManager>
                 <div className={styles.focus_mhanager}>

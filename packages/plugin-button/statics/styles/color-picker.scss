@@ -1,5 +1,5 @@
 @import "~wix-rich-content-common/dist/statics/styles/palette";
-
+@import "~wix-rich-content-common/dist/statics/styles/mixins";
 .color_picker {
   display: block;
   width: 100%;
@@ -34,6 +34,10 @@
   background-color: #b5d1ff;
   margin-left: 18px;
   cursor: pointer;
+  @include phone{
+    width: 30px;
+    height: 30px;
+  }
 }
 .dropper {
   position: absolute;
@@ -41,6 +45,11 @@
   height: 18px;
   top: 9px;
   right: 8px;
+  @include phone{
+    top: 6px;
+    right: 5px;
+  }
+
 }
 .colorBoard {
   padding-bottom: 18px;
@@ -58,6 +67,10 @@
   border: 1px solid #F3F3F3;
   box-sizing: border-box;
   cursor: pointer;
+  @include phone{
+    width: 30px;
+    height: 30px;
+  }
 }
 
 .swatchesPicker {

@@ -18,8 +18,16 @@
 
 .section_header {
   padding-bottom: 15px;
-  font-size: 18px;
+  padding-top: 4px;
+  font-size: 16px;
   font-weight: 300;
+  height: 24px;
+  @include phone {
+    font-size: 18px;
+  }
+}
+.sliderWithInput_label {
+  font-size: 14px;
 }
 
 .radioItem {
@@ -44,7 +52,8 @@
 
 .button_samples {
   border-bottom: 1px solid #ededed;
-  padding-top: 4px;
+  padding-top: 6px;
+  padding-bottom: 6px;
   @include phone {
     width: 100%;
     height: 48px;
@@ -59,28 +68,27 @@
 }
 
 .left_shadow {
-   width: 81px;
-   height: 52px;
-   background-image: linear-gradient(to left, rgba(238, 238, 238, 0), #ffffff);
-   position: absolute;
-   z-index: 1;
-   left :0px;
- }
- 
- .button_samples_container{
-   position: relative;
-   padding-top: 5px;
- }
-
- .right_shadow {
   width: 81px;
-   height: 52px;
-   background-image: linear-gradient(to right, rgba(238, 238, 238, 0), #ffffff);
-   position: absolute;
-   z-index: 1;
-   right :0px;
- }
- 
+  height: 52px;
+  background-image: linear-gradient(to left, rgba(238, 238, 238, 0), #ffffff);
+  position: absolute;
+  z-index: 1;
+  left: 0px;
+}
+
+.button_samples_container {
+  position: relative;
+  padding-top: 5px;
+}
+
+.right_shadow {
+  width: 81px;
+  height: 52px;
+  background-image: linear-gradient(to right, rgba(238, 238, 238, 0), #ffffff);
+  position: absolute;
+  z-index: 1;
+  right: 0px;
+}
 
 .input_container {
   padding-top: 39px;
