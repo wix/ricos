@@ -11,13 +11,10 @@ export const DEFAULTS = {
   },
   button: {
     activeButton: 0,
-    backgroundColor: '#0261FF',
-    borderColor: '#0261FF',
     borderRadius: 0,
     borderWidth: 0,
     buttonText: 'Click Me!',
     buttonSize: 'M',
-    textColor: 'white',
     url: '',
   }
 };

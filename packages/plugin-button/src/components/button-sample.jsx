@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
 import isEqual from 'lodash/isEqual';
 import { mergeStyles } from 'wix-rich-content-common';
 import PickedIcon from './../icons/pickedIcon';
@@ -25,7 +24,7 @@ class ButtonSample extends PureComponent {
 
 
   render() {
-    const { style, theme, active } = this.props;
+    const { style, active } = this.props;
     const { styles } = this;
     const { state } = this.props;
     const { buttonStyle } = this.state;
@@ -49,7 +48,7 @@ class ButtonSample extends PureComponent {
         {active && onStyleChanged &&
           <PickedIcon className={styles.picked} />
         }
-        <button onClick={this.onClick} style={{ ...style }} className={classNames(theme[style.className], styles.button_sample)}>
+        <button onClick={this.onClick} style={{ ...style }} className={styles.button_sample}>
           Click Me!
         </button>
       </div>

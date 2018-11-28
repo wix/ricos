@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import styles from '../../statics/styles/default-styles.scss';
 import classNames from 'classnames';
+import styles from '../../statics/styles/default-styles.scss';
 import { mergeStyles } from 'wix-rich-content-common';
 
 class ButtonComponent extends PureComponent {
@@ -16,6 +16,7 @@ class ButtonComponent extends PureComponent {
   }
 
   render() {
+    const colors = this.props.settings.colors;
     const { componentData, buttonObj, className, anchorTarget, relValue } = this.props;
     const { styles } = this;
     const containerClassNames = classNames(styles.button_container, className || '');
@@ -53,9 +54,9 @@ class ButtonComponent extends PureComponent {
       ...sizes[componentData.button.buttonSize],
       borderWidth: componentData.button.borderWidth + 'px',
       borderRadius: componentData.button.borderRadius,
-      color: componentData.button.textColor,
-      background: componentData.button.backgroundColor,
-      borderColor: componentData.button.borderColor
+      color: componentData.button.textColor ? componentData.button.textColor : colors.color_1,
+      background: componentData.button.backgroundColor ? componentData.button.backgroundColor : colors.color_8,
+      borderColor: componentData.button.borderColor ? componentData.button.borderColor : colors.color_8
     };
     url = componentData.button.url;
     if (buttonObj) {
@@ -94,6 +95,7 @@ ButtonComponent.propTypes = {
   className: PropTypes.string,
   anchorTarget: PropTypes.string,
   relValue: PropTypes.string,
+  settings: PropTypes.object,
 };
 
 export default ButtonComponent;

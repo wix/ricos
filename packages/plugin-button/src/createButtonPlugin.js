@@ -22,8 +22,9 @@ const createButtonPlugin = (config = {}) => {
     className: theme,
     anchorTarget,
     relValue,
-    settings,
+    settings
   };
+
   const buttonEntityComponent = decorateComponentWithProps(ButtonComponent, buttonProps);
 
   return createBasePlugin({
@@ -36,6 +37,7 @@ const createButtonPlugin = (config = {}) => {
     toolbar: createToolbar({
       helpers,
       styles,
+      settings,
       anchorTarget,
       relValue,
       theme,

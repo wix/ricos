@@ -39,7 +39,6 @@ class CustomColorPicker extends React.Component {
             {...this.props}
           />
         </div>
-        <SaturationPointer />
       </div>
     );
   }

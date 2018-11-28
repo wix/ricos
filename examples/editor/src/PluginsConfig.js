@@ -6,6 +6,7 @@ import { HTML_TYPE } from "wix-rich-content-plugin-html";
 import { LINK_TYPE } from "wix-rich-content-plugin-link";
 import { VIDEO_TYPE } from "wix-rich-content-plugin-video";
 import { GIPHY_TYPE } from "wix-rich-content-plugin-giphy";
+import { BUTTON_TYPE } from "wix-rich-content-plugin-button";
 import { EXTERNAL_MENTIONS_TYPE } from "wix-rich-content-plugin-mentions";
 import { TOOLBARS, BUTTONS, DISPLAY_MODE } from "wix-rich-content-common";
 
@@ -85,6 +86,20 @@ export default {
   },
   [GIPHY_TYPE]: {
     giphySdkApiKey: "JfQziSTdnSwDZcD3w8DpUL4LMFu3zBgU"
+  },
+  [BUTTON_TYPE]: {
+    colors : {
+      color_1: '#FEFDFD',
+      color_2: '#D5D4D4',
+      color_3: '#000000',
+      color_4: '#000000',
+      color_5: '#000000',
+      color_6: '#ABCAFF',
+      color_7: '#81B0FF',
+      color_8: '#0261FF',
+      color_9: '#0141AA',
+      color_10: '#012055'
+    }
   },
   uiSettings,
   getToolbarSettings: ({ pluginButtons, textButtons }) => [

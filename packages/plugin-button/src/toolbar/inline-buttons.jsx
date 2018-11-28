@@ -1,4 +1,4 @@
-import { BUTTONS, getModalStyles, PluginSettingsIcon } from 'wix-rich-content-common';
+import { BUTTONS, getModalStyles, PluginSettingsIcon, decorateComponentWithProps } from 'wix-rich-content-common';
 import { Modals } from '../modals';
 import ButtonInputModal from './buttonInputModal';
 
@@ -9,7 +9,7 @@ const customStyleSettingModal = {
   }
 };
 
-export default () => {
+export default ({ settings }) => {
   return [
     { keyName: 'sizeSmallLeft', type: BUTTONS.SIZE_SMALL_LEFT, mobile: false },
     { keyName: 'sizeSmallCenter', type: BUTTONS.SIZE_SMALL_CENTER, mobile: false },
@@ -21,7 +21,7 @@ export default () => {
       icon: PluginSettingsIcon,
       modalName: Modals.BUTTON_SETING,
       activeTab: 'advanced_settings',
-      modalElement: ButtonInputModal,
+      modalElement: decorateComponentWithProps(ButtonInputModal, settings),
       modalStyles: getModalStyles({ customStyles: customStyleSettingModal }),
       mobile: true,
       tooltipTextKey: 'SettingsButton_Tooltip',

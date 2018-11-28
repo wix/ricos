@@ -1,5 +1,20 @@
 @import "~wix-rich-content-common/dist/statics/styles/palette";
 @import "~wix-rich-content-common/dist/statics/styles/mixins";
+.container{
+  position: relative;
+}
+
+.overlay{
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  border-radius: 28px;
+  z-index: -1;
+  width: 38px;
+  height: 38px;
+  background: #0261ff;
+}
+
 .color_picker {
   display: block;
   width: 100%;
@@ -49,11 +64,12 @@
     top: 6px;
     right: 5px;
   }
+}
 
-}
 .colorBoard {
-  padding-bottom: 18px;
+  padding-bottom: 5px;
 }
+
 .palettes {
   width: 100%;
   text-align: right;

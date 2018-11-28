@@ -12,53 +12,7 @@ import ButtonSample from '../components/button-sample';
 import ColorPicker from './color-picker';
 import styles from '../../statics/styles/design-component-styles.scss';
 
-const arr = [
-  {
-    className: 'button_primary',
-    border: '0px solid #0261FF',
-    borderRadius: '0px',
-    borderWidth: '0px',
-    background: '#0261FF',
-    color: 'white',
-    borderColor: '#0261FF'
-  },
-  {
-    className: 'button_secondary',
-    border: '1px solid #0261FF',
-    borderRadius: '0px',
-    borderWidth: '1px',
-    background: 'white',
-    color: '#0261FF',
-    borderColor: '#0261FF'
-  },
-  {
-    className: 'button_secondary',
-    border: '1px solid #0261FF',
-    borderRadius: '0px',
-    borderWidth: '1px',
-    background: '#BCD4FD',
-    color: '#0261FF',
-    borderColor: '#0261FF'
-  },
-  {
-    className: 'button_secondary',
-    border: '1px solid #0261FF',
-    borderRadius: '10px',
-    borderWidth: '1px',
-    background: '#BCD4FD',
-    color: '#0261FF',
-    borderColor: '#0261FF'
-  },
-  {
-    className: 'button_secondary',
-    border: '1px solid #0261FF',
-    borderWidth: '5px',
-    borderRadius: '0px',
-    background: 'white',
-    color: '#0261FF',
-    borderColor: '#0261FF'
-  },
-];
+
 
 
 class DesignComponent extends PureComponent {
@@ -66,15 +20,62 @@ class DesignComponent extends PureComponent {
   constructor(props) {
     super(props);
     this.styles = mergeStyles({ styles, theme: props.theme });
-    const { designObj } = this.props;
+    const { designObj, colors } = this.props;
+    this.arr = [
+      {
+        className: 'button_primary',
+        border: '0px solid #' + colors.color_8,
+        borderRadius: '0px',
+        borderWidth: '0px',
+        background: colors.color_8,
+        color: colors.color_1,
+        borderColor: colors.color_8
+      },
+      {
+        className: 'button_secondary',
+        border: '1px solid ' + colors.color_8,
+        borderRadius: '0px',
+        borderWidth: '1px',
+        background: colors.color_1,
+        color: colors.color_8,
+        borderColor: colors.color_8
+      },
+      {
+        className: 'button_secondary',
+        border: '1px solid ' + colors.color_8,
+        borderRadius: '0px',
+        borderWidth: '1px',
+        background: colors.color_7,
+        color: colors.color_8,
+        borderColor: colors.color_8
+      },
+      {
+        className: 'button_secondary',
+        border: '1px solid ' + colors.color_8,
+        borderRadius: '10px',
+        borderWidth: '1px',
+        background: colors.color_7,
+        color: colors.color_8,
+        borderColor: colors.color_8
+      },
+      {
+        className: 'button_secondary',
+        border: '1px solid ' + colors.color_8,
+        borderWidth: '5px',
+        borderRadius: '0px',
+        background: colors.color_1,
+        color: colors.color_8,
+        borderColor: colors.color_8
+      },
+    ];
     this.state = {
       borderWidth: designObj.borderWidth,
       buttonSize: designObj.buttonSize,
       borderRadius: designObj.borderRadius,
       activeButton: designObj.activeButton,
-      textColor: designObj.textColor,
-      borderColor: designObj.borderColor,
-      backgroundColor: designObj.backgroundColor,
+      textColor: designObj.textColor ? designObj.textColor : colors.color_1,
+      borderColor: designObj.borderColor ? designObj.borderColor : colors.color_8,
+      backgroundColor: designObj.backgroundColor ? designObj.backgroundColor : colors.color_8,
       url: designObj.url
     };
   }
@@ -100,11 +101,11 @@ class DesignComponent extends PureComponent {
   onButtonSampleClick = index => {
     this.setState({
       activeButton: index,
-      borderWidth: parseInt(arr[index].borderWidth),
-      borderRadius: parseInt(arr[index].borderRadius),
-      textColor: arr[index].color,
-      backgroundColor: arr[index].background,
-      borderColor: arr[index].borderColor
+      borderWidth: parseInt(this.arr[index].borderWidth),
+      borderRadius: parseInt(this.arr[index].borderRadius),
+      textColor: this.arr[index].color,
+      backgroundColor: this.arr[index].background,
+      borderColor: this.arr[index].borderColor
     });
   }
 
@@ -138,7 +139,7 @@ class DesignComponent extends PureComponent {
       sizeOptions.push({ value: 'F', labelText: 'Full width' });
     }
 
-    const buttonSampleList = arr.map((style, i) => {
+    const buttonSampleList = this.arr.map((style, i) => {
       const active = i === this.state.activeButton;
       return (<ButtonSample
         key={i.toString()}

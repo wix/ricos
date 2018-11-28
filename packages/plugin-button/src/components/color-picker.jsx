@@ -51,20 +51,20 @@ class ColorPicker extends PureComponent {
   }
 
   render() {
-    const { flag } = this.props;
-    const colors = [
-      'white',
-      '#040404',
-      '#0261FF',
-      '#B5D1FF',
+    const { flag, colors } = this.props;
+    const presetColors = [
+      colors.color_1,
+      colors.color_5,
+      colors.color_8,
+      colors.color_7,
       '#23D6B5',
       this.props.color
     ];
     let isDropperColor = false;
-    if (colors.indexOf(this.props.color) === -1 || colors.indexOf(this.props.color) === 5) {
+    if (presetColors.indexOf(this.props.color) === -1 || presetColors.indexOf(this.props.color) === 5) {
       isDropperColor = true;
     }
-    const palattes = colors.map((color, index) => {
+    const palattes = presetColors.map((color, index) => {
       const backColor = (index !== 5) ? color : this.props.color;
       const className = styles.palette;
       let active = this.state.selectedPaletteIndex === index;
@@ -91,7 +91,11 @@ class ColorPicker extends PureComponent {
       );
     });
     return (
-      <div>
+      <div className={styles.container}>
+        {((this.state.pickerClicked && flag) || flag) &&
+          <div className={styles.overlay} />
+        }
+
         <div className={this.styles.color_picker}>
           <div className={this.styles.picker}>
             <button
@@ -129,6 +133,7 @@ ColorPicker.propTypes = {
   onClick: PropTypes.func,
   onChange: PropTypes.func,
   flag: PropTypes.bool,
+  colors: PropTypes.object
 };
 
 export default ColorPicker;
