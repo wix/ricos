@@ -1,11 +1,11 @@
 export const BUTTON_TYPE = 'wix-draft-plugin-button';
-export const ALIGN_LEFT = 'left';
+export const ALIGN_CENTER = 'center';
 export const settingsTabValue = 'settings';
 export const designTabValue = 'design';
 export const BUTTON_TYPES = ['primary', 'secondary'];
 export const DEFAULTS = {
   config: {
-    alignment: ALIGN_LEFT,
+    alignment: ALIGN_CENTER,
     width: 'fit-content',
     padding: '5px'
   },
