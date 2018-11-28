@@ -6,7 +6,7 @@
   margin: 8px 0 8px 0;
   line-height: 1.5;
   height: 22px;
-  font-weight: bold;
+  font-weight: normal;
   @include phone {
     font-weight: normal;
   }
@@ -14,7 +14,7 @@
 .errorMessage {
   color: #ee5951;
   font-size: 12px;
-  padding-top: 6px;
+  padding-top: 7px;
   @include phone {
     padding-top: 4px;
     height: 36px;
@@ -22,7 +22,7 @@
   }
 }
 .checkBoxes {
-  padding-top: 33px;
+  padding-top: 35px;
   @include phone {
     padding-top: 22px;
   }
@@ -32,16 +32,17 @@
 }
 .checkbox_label {
   font-size: 14px;
-  font-weight: bold;
+  font-weight: normal;
 }
 .modal_footer {
   padding: 30px 0px;
 }
 .button_name_feild {
-  padding-bottom: 6px;
+  padding-bottom: 8px;
 }
 .section_content {
   padding-right: 30px;
+  padding-top: 4px;
   @include phone {
     padding-right: 0px;
   }

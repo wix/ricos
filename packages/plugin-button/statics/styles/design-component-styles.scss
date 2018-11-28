@@ -17,8 +17,8 @@
 }
 
 .section_header {
-  padding-bottom: 15px;
-  padding-top: 4px;
+  padding-bottom: 17px;
+  padding-top: 5px;
   font-size: 16px;
   font-weight: 300;
   height: 24px;
@@ -26,6 +26,29 @@
     font-size: 18px;
   }
 }
+
+.section_header_color {
+  padding-bottom: 8px;
+  padding-top: 5px;
+  font-size: 16px;
+  font-weight: 300;
+  height: 24px;
+  @include phone {
+    font-size: 18px;
+  }
+}
+
+.section_header_border{
+  padding-bottom: 15px;
+  padding-top: 5px;
+  font-size: 16px;
+  font-weight: 300;
+  height: 24px;
+  @include phone {
+    font-size: 18px;
+  }
+}
+
 .sliderWithInput_label {
   font-size: 14px;
 }
@@ -33,10 +56,10 @@
 .radioItem {
   label {
     display: block;
-    padding: 0px 0px 16px;
+    padding: 0px 0px 15px;
   }
   label:nth-child(3n) {
-    padding: 0px;
+    padding-bottom: 3px;
     @include phone {
       padding: 0px 0px 16px;
     }
@@ -90,9 +113,12 @@
   right: 0px;
 }
 
-.input_container {
-  padding-top: 39px;
-  padding-bottom: 29px;
+.input_container_width {
+  padding-bottom: 46px;
+}
+
+.input_container_corner {
+  padding-bottom: 30px;
 }
 
 .px_label {

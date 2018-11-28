@@ -26,17 +26,6 @@
   overflow-y: scroll;
 }
 
-.closeIcon {
-  position: absolute;
-  right: 30px;
-  top: 30px;
-  cursor: pointer;
-}
-
-.cameraIcon {
-  width: 18px;
-}
-
 .errorIcon {
   width: 13px;
 }
@@ -44,14 +33,13 @@
 .header {
   display: flex;
   align-items: center;
-  padding: 23px 30px 14px;
+  padding: 23px 30px 18px;
   border-bottom: 1px solid #ededed;
 }
 
 .header_text {
   font-size: 16px;
-  margin: 8px 0 8px 0;
-  height: 26px;
+  margin: 10px 0px;
   width: 100%;
   @include phone {
     margin: 8px 0px 1px 0;
@@ -76,7 +64,7 @@
 .errorIcon {
   position: absolute;
   top: 0px;
-  left: 127px;
+  left: 122px;
 }
 
 .modal_footer {
@@ -94,7 +82,7 @@
 }
 
 .tabs_panel {
-  height: calc(100vh - 231px);
+  height: calc(100vh - 232px);
   overflow: hidden;
   box-sizing: border-box;
   padding: 18px 30px 30px;

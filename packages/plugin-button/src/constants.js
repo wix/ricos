@@ -7,7 +7,6 @@ export const DEFAULTS = {
   config: {
     alignment: ALIGN_CENTER,
     width: 'fit-content',
-    padding: '5px'
   },
   button: {
     activeButton: 0,

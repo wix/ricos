@@ -32,8 +32,8 @@
     "test": "eslint 'src/**/*.{js,jsx}'"
   },
   "peerDependencies": {
-    "@babel/runtime": "7.0.0-rc.1",
-    "@wix/draft-js": "0.10.163",
+    "@babel/runtime": "7.1.2",
+    "@wix/draft-js": "0.10.272",
     "classnames": "^2.0.0",
     "lodash": "^4.0.0",
     "prop-types": "^15.0.0",
@@ -41,8 +41,8 @@
     "react-dom": "^15.0.0 || ^16.0.0"
   },
   "devDependencies": {
-    "@babel/runtime": "7.0.0-rc.1",
-    "@wix/draft-js": "0.10.163",
+    "@babel/runtime": "7.1.2",
+    "@wix/draft-js": "0.10.272",
     "classnames": "^2.2.6",
     "eslint": "^4.19.1",
     "eslint-import-resolver-lerna": "^1.0.0",
