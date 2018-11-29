@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import isEqual from 'lodash/isEqual';
+import classNames from 'classnames';
 import { mergeStyles } from 'wix-rich-content-common';
 import PickedIcon from './../icons/pickedIcon';
 import CustomColorPicker from './custom-color-picker';
@@ -11,11 +12,28 @@ class ColorPicker extends PureComponent {
   constructor(props) {
     super(props);
     this.styles = mergeStyles({ styles, theme: props.theme });
+    const { colors } = this.props;
+    this.presetColors = [
+      colors.color_1,
+      colors.color_5,
+      colors.color_8,
+      colors.color_7,
+      colors.color_6,
+    ];
     this.state = {
       pickerClicked: false,
       color: this.props.color,
-      picker: false
+      picker: false,
+      dropperColor: '',
+      isDropperSelected: false,
+      dropperBackColor: ''
     };
+  }
+
+  componentDidMount = () => {
+    if (this.state.color && this.presetColors.indexOf(this.state.color) === -1) {
+      this.setState({ dropperBackColor: this.state.color, isDropperSelected: true });
+    }
   }
 
   componentDidUpdate = () => {
@@ -38,54 +56,88 @@ class ColorPicker extends PureComponent {
     const color = {
       hex: result
     };
-    this.setState({ selectedPaletteIndex: index });
-    this.customColorPickerChange(color);
-    if (index === 5) {
-      this.setState({ picker: !this.state.picker, active: false });
+    this.setState({ selectedPaletteIndex: index, isDropperSelected: false, dropperBackColor: '' });
+    if (color.hex) {
+      this.customColorPickerChange(color);
     }
   }
 
+  onPaletteDropperClick = () => {
+    this.onPaletteClick(this.state.color, 5);
+    this.setState({ picker: !this.state.picker });
+  }
+
   customColorPickerChange = color => {
+    if (this.presetColors.indexOf(color.hex) === -1) {
+      this.setState({ isDropperSelected: true, dropperBackColor: color.hex });
+    }
     this.props.onChange(color.hex);
     this.setState({ color: color.hex });
   }
 
+  getDarkBrightness = colorRes => {
+    let r, g, b;
+    let color = colorRes;
+    if (color.match(/^rgb/)) {
+      color = color.match(/^rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d+(?:\.\d+)?))?\)$/);
+      r = color[1];
+      g = color[2];
+      b = color[3];
+    } else {
+      color = +('0x' + color.slice(1).replace(
+        color.length < 5 && /./g, '$&$&'));
+
+      r = color >> 16;
+      g = color >> 8 & 255;
+      b = color & 255;
+    }
+    const hsp = Math.sqrt(
+      0.299 * (r * r) +
+      0.587 * (g * g) +
+      0.114 * (b * b)
+    );
+    if (hsp > 127.5) {
+      return false;
+    } else {
+      return true;
+    }
+
+
+  }
+
   render() {
-    const { flag, colors } = this.props;
-    const presetColors = [
-      colors.color_1,
-      colors.color_5,
-      colors.color_8,
-      colors.color_7,
-      '#23D6B5',
-      this.props.color
-    ];
+    const { flag } = this.props;
+
+    let dropperColor = '';
     let isDropperColor = false;
-    if (presetColors.indexOf(this.props.color) === -1 || presetColors.indexOf(this.props.color) === 5) {
+    if (this.presetColors.indexOf(this.props.color) === -1 || this.presetColors.indexOf(this.props.color) === 5) {
       isDropperColor = true;
     }
-    const palattes = presetColors.map((color, index) => {
-      const backColor = (index !== 5) ? color : this.props.color;
-      const className = styles.palette;
-      let active = this.state.selectedPaletteIndex === index;
-      let isColor = false;
-      if (color === this.props.color && index !== 5) {
-        isColor = true;
+    if (this.state.color && this.presetColors.indexOf(this.state.color) === -1) {
+      if (this.getDarkBrightness(this.props.color)) {
+        dropperColor = '#eef1f6';
       } else {
-        isColor = false;
+        dropperColor = '#000000';
       }
-      if (isDropperColor && index === 5) {
-        isColor = false;
+    }
+    const palattes = this.presetColors.map((color, index) => {
+      const backColor = (index !== 5) ? color : this.props.color;
+      let active = this.state.selectedPaletteIndex === index;
+      if (color === this.props.color) {
+        active = true;
+      } else {
         active = false;
       }
       return (
-        <button onClick={this.onPaletteClick.bind(this, color, index)} key={color + index} style={{ background: backColor }} className={className}>
+        <button
+          onClick={this.onPaletteClick.bind(this, color, index)}
+          key={color + index}
+          style={{ background: backColor }}
+          className={classNames(styles.checkboardBackground)}
+        >
           {
-            (active || isColor || (isDropperColor && index === 5)) &&
+            (active || (isDropperColor && index === 5)) &&
             <PickedIcon className={styles.picked} width="11px" height="11px" />
-          }
-          {(index === 5) ?
-            <EyeDropperIcon className={styles.dropper} /> : null
           }
         </button>
       );
@@ -95,8 +147,10 @@ class ColorPicker extends PureComponent {
         {((this.state.pickerClicked && flag) || flag) &&
           <div className={styles.overlay} />
         }
-
         <div className={this.styles.color_picker}>
+          <div className={this.styles.label}>
+            {this.props.children}
+          </div>
           <div className={this.styles.picker}>
             <button
               style={{ background: this.state.color }}
@@ -105,14 +159,22 @@ class ColorPicker extends PureComponent {
               className={this.styles.pickerButton}
             />
           </div>
-          <div className={this.styles.label}>
-            {this.props.children}
-          </div>
         </div>
         {(this.state.pickerClicked && flag) || flag ?
           <div className={styles.colorBoard}>
             <div className={styles.palettes}>
               {palattes}
+              <button
+                onClick={this.onPaletteDropperClick.bind(this)}
+                style={{ background: this.state.dropperBackColor }}
+                className={classNames(styles.checkboardBackground)}
+              >
+                {
+                  this.state.isDropperSelected &&
+                  <PickedIcon className={styles.picked} width="11px" height="11px" />
+                }
+                <EyeDropperIcon style={{ color: dropperColor }} className={styles.dropper} />
+              </button>
             </div>
             {this.state.picker && flag ?
               <CustomColorPicker color={this.state.color} onChange={this.customColorPickerChange.bind(this)} /> : null

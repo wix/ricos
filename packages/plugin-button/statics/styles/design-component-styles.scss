@@ -28,17 +28,17 @@
 }
 
 .section_header_color {
-  padding-bottom: 8px;
+  padding-bottom: 5px;
   padding-top: 5px;
   font-size: 16px;
   font-weight: 300;
-  height: 24px;
+  height: auto;
   @include phone {
     font-size: 18px;
   }
 }
 
-.section_header_border{
+.section_header_border {
   padding-bottom: 15px;
   padding-top: 5px;
   font-size: 16px;

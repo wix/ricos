@@ -17,10 +17,10 @@ class CustomColorPicker extends React.Component {
         position: 'relative',
       },
       input: {
-        height: '34px',
         position: 'relative',
         width: '100%',
         border: 'none',
+        paddingTop: '14px'
       },
     };
 

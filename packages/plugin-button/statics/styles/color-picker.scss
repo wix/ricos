@@ -1,10 +1,11 @@
 @import "~wix-rich-content-common/dist/statics/styles/palette";
 @import "~wix-rich-content-common/dist/statics/styles/mixins";
-.container{
+.container {
   position: relative;
+  padding-bottom: 18px;
 }
 
-.overlay{
+.overlay {
   position: absolute;
   top: -1px;
   right: -1px;
@@ -18,19 +19,19 @@
 .color_picker {
   display: block;
   width: 100%;
-  height: 54px;
 }
 
 .label {
   width: 50%;
   height: auto;
+  display: inline-block;
 }
 
 .picker {
   width: 50%;
   height: auto;
-  float: right;
   direction: rtl;
+  display: inline-block;
 }
 
 .picked {
@@ -46,10 +47,9 @@
   border-radius: 28px;
   display: inline-block;
   border: solid 1px #ededed;
-  background-color: #b5d1ff;
   margin-left: 18px;
   cursor: pointer;
-  @include phone{
+  @include phone {
     width: 30px;
     height: 30px;
   }
@@ -60,30 +60,58 @@
   height: 18px;
   top: 9px;
   right: 8px;
-  @include phone{
+  @include phone {
     top: 6px;
     right: 5px;
   }
 }
 
 .colorBoard {
-  padding-bottom: 5px;
+}
+
+$color1: #fff;
+$color2: #eeeeee;
+$size: 10px;
+.checkboardBackground {
+  background-image: linear-gradient(
+      45deg,
+      $color1 25%,
+      transparent 25%,
+      transparent 75%,
+      $color1 75%
+    ),
+    linear-gradient(45deg, $color1 25%, $color2 25%, $color2 75%, $color1 75%);
+  background-size: $size $size;
+  background-position: 0 0, $size/2 $size/2;
+  position: relative;
+  width: 36px;
+  height: 36px;
+  border-radius: 28px;
+  display: inline-block;
+  border: solid 1px #ededed;
+  margin-left: 18px;
+  cursor: pointer;
+  @include phone {
+    width: 30px;
+    height: 30px;
+  }
 }
 
 .palettes {
   width: 100%;
   text-align: right;
-  padding-bottom: 18px;
+  padding-bottom: 17px;
+  padding-top: 18px;
 }
 
 .pickerButton {
   width: 36px;
   height: 36px;
   border-radius: 28px;
-  border: 1px solid #F3F3F3;
+  border: 1px solid #f3f3f3;
   box-sizing: border-box;
   cursor: pointer;
-  @include phone{
+  @include phone {
     width: 30px;
     height: 30px;
   }
@@ -95,4 +123,3 @@
   right: 30;
   z-index: 11;
 }
-
