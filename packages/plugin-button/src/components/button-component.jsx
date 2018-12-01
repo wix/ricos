@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
 import styles from '../../statics/styles/default-styles.scss';
 import { mergeStyles } from 'wix-rich-content-common';
 
@@ -16,31 +15,24 @@ class ButtonComponent extends PureComponent {
   }
 
   render() {
-    const colors = this.props.settings.colors;
-    const { componentData, buttonObj, className, anchorTarget, relValue } = this.props;
+    const { colors } = this.props.settings;
+    const { componentData, buttonObj, anchorTarget, relValue } = this.props;
     const { styles } = this;
-    const containerClassNames = classNames(styles.button_container, className || '');
     let buttonText = (!componentData.button) ? 'Click Me!' : componentData.button.buttonText;
     let rel = '';
     let url = '';
     const sizes = {
       L: {
-        paddingLeft: '61px',
-        paddingRight: '61px'
+        width: '156px'
       },
       M: {
-        paddingLeft: '42px',
-        paddingRight: '42px'
+        width: '118px'
       },
       S: {
-        paddingLeft: '16px',
-        paddingRight: '16px'
+        width: '66px'
       },
       F: {
-        paddingLeft: '0px',
-        paddingRight: '0px',
-        width: 'calc(100vw - 58px)',
-        textAlign: 'center'
+        width: 'calc(100vw - 82px)',
       }
     };
     let style = {
@@ -51,7 +43,6 @@ class ButtonComponent extends PureComponent {
     rel = (componentData.button.rel) ? relValue : '';
     style = {
       ...style,
-      ...sizes[componentData.button.buttonSize],
       borderWidth: componentData.button.borderWidth + 'px',
       borderRadius: componentData.button.borderRadius,
       color: componentData.button.textColor ? componentData.button.textColor : colors.color_1,
@@ -59,10 +50,12 @@ class ButtonComponent extends PureComponent {
       borderColor: componentData.button.borderColor ? componentData.button.borderColor : colors.color_8
     };
     url = componentData.button.url;
+    let buttonSize = {
+      ...sizes[componentData.button.buttonSize],
+    };
     if (buttonObj) {
       style = {
         ...style,
-        ...sizes[buttonObj.design.buttonSize],
         borderWidth: buttonObj.design.borderWidth + 'px',
         borderRadius: buttonObj.design.borderRadius,
         color: buttonObj.design.textColor,
@@ -70,18 +63,25 @@ class ButtonComponent extends PureComponent {
         borderColor: buttonObj.design.borderColor
       };
       buttonText = buttonObj.data.buttonText;
+      buttonSize = {
+        ...buttonSize,
+        ...sizes[buttonObj.design.buttonSize]
+      };
     }
+
     return (
       <a
-        className={containerClassNames}
+        className={styles.button_container}
         href={url}
         style={style}
         target={target}
         rel={rel}
       >
-        {
-          buttonText
-        }
+        <div className={styles.button_text} style={buttonSize}>
+          {
+            buttonText
+          }
+        </div>
       </a>
     );
   }
@@ -92,7 +92,6 @@ ButtonComponent.propTypes = {
   componentData: PropTypes.object,
   style: PropTypes.object,
   buttonObj: PropTypes.object,
-  className: PropTypes.string,
   anchorTarget: PropTypes.string,
   relValue: PropTypes.string,
   settings: PropTypes.object,

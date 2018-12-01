@@ -12,7 +12,7 @@ class ColorPicker extends PureComponent {
   constructor(props) {
     super(props);
     this.styles = mergeStyles({ styles, theme: props.theme });
-    const { colors } = this.props;
+    const { colors } = this.props.settings;
     this.presetColors = [
       colors.color_1,
       colors.color_5,

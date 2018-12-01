@@ -25,6 +25,7 @@ export default ({ settings }) => {
       modalStyles: getModalStyles({ customStyles: customStyleSettingModal }),
       mobile: true,
       tooltipTextKey: 'SettingsButton_Tooltip',
+      settings
     },
     { keyName: 'delete', type: BUTTONS.DELETE, mobile: true },
   ];

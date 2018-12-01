@@ -20,7 +20,8 @@ class DesignComponent extends PureComponent {
   constructor(props) {
     super(props);
     this.styles = mergeStyles({ styles, theme: props.theme });
-    const { designObj, colors } = this.props;
+    const { designObj } = this.props;
+    const { colors } = this.props.settings;
     this.arr = [
       {
         className: 'button_primary',
