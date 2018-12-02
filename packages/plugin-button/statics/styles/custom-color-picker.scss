@@ -1,0 +1,9 @@
+@import "~wix-rich-content-common/dist/statics/styles/mixins";
+@import "~wix-rich-content-common/dist/statics/styles/palette";
+
+.editable_input_label {
+  @include phone {
+    padding-top: 13px;
+    padding-bottom: 7px;
+  }
+}

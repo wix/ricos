@@ -21,13 +21,20 @@ class ColorPicker extends PureComponent {
       colors.color_6,
     ];
     this.state = {
-      pickerClicked: false,
+      pickerClicked: this.props.flag,
       color: this.props.color,
       picker: false,
       dropperColor: '',
       isDropperSelected: false,
-      dropperBackColor: ''
+      dropperBackColor: '',
+
     };
+  }
+
+  componentWillReceiveProps = () => {
+    if (this.state.pickerClicked !== this.props.flag) {
+      this.setState({ pickerClicked: this.props.flag });
+    }
   }
 
   componentDidMount = () => {
@@ -144,7 +151,7 @@ class ColorPicker extends PureComponent {
     });
     return (
       <div className={styles.container}>
-        {((this.state.pickerClicked && flag) || flag) &&
+        {this.state.pickerClicked &&
           <div className={styles.overlay} />
         }
         <div className={this.styles.color_picker}>
@@ -160,7 +167,7 @@ class ColorPicker extends PureComponent {
             />
           </div>
         </div>
-        {(this.state.pickerClicked && flag) || flag ?
+        {this.state.pickerClicked ?
           <div className={styles.colorBoard}>
             <div className={styles.palettes}>
               {palattes}

@@ -30,7 +30,7 @@
   font-size: 12px;
   padding-top: 7px;
   @include phone {
-    padding-top: 4px;
+    padding-top: 13px;
     height: 36px;
     width: 213px;
   }
@@ -43,6 +43,9 @@
 }
 .checkbox {
   margin-bottom: 16px;
+  @include phone {
+    margin-bottom: 15px;
+  }
 }
 .checkbox_label {
   font-size: 14px;
@@ -53,6 +56,9 @@
 }
 .button_name_feild {
   padding-bottom: 8px;
+  @include phone {
+    padding-bottom: 15px;
+  }
 }
 .section_content {
   padding-right: 30px;

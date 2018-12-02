@@ -35,8 +35,8 @@
   font-weight: 300;
   height: auto;
   @include phone {
-    padding-bottom: 18px;
-    padding-top: 2px;
+    padding-bottom: 20px;
+    padding-top: 0px;
     font-size: 18px;
   }
 }
@@ -48,13 +48,16 @@
   font-weight: 300;
   height: 24px;
   @include phone {
-    padding-top: 5px;
+    padding-top: 0px;
     font-size: 18px;
   }
 }
 
 .sliderWithInput_label {
   font-size: 14px;
+  @include phone {
+    padding-bottom: 5px;
+  }
 }
 
 .radioItem {
@@ -85,6 +88,7 @@
     width: 100%;
     height: 44px;
     padding-bottom: 20px;
+    padding-top: 9px;
     white-space: nowrap;
     position: relative;
     overflow-x: scroll;
@@ -148,21 +152,21 @@ input[type="range"]:focus {
 
 // FireFox
 input[type="range"]::-moz-range-progress {
-  background-color: #B5D1FF; 
+  background-color: #b5d1ff;
 }
-input[type="range"]::-moz-range-track {  
-  background-color: #E2EDFF;
+input[type="range"]::-moz-range-track {
+  background-color: #e2edff;
 }
 /* IE*/
 input[type="range"]::-ms-fill-lower {
-  background-color: #B5D1FF; 
+  background-color: #b5d1ff;
 }
-input[type="range"]::-ms-fill-upper {  
-  background-color: #E2EDFF;
+input[type="range"]::-ms-fill-upper {
+  background-color: #e2edff;
 }
 // chrome && opera
 input[type="range"]::-webkit-progress-bar {
-  background-color: #B5D1FF; 
+  background-color: #b5d1ff;
 }
 
 input[type="range"]::-webkit-slider-runnable-track {
@@ -255,4 +259,3 @@ input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-
