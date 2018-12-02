@@ -9,7 +9,8 @@
 > - :house: [Internal]
 
 ## [Unreleased]
-
+`button`
+- Add button blugin
 ### :bug: Bug Fix
 
 - `giphy`
