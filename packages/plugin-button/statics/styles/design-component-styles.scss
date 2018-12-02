@@ -35,6 +35,8 @@
   font-weight: 300;
   height: auto;
   @include phone {
+    padding-bottom: 18px;
+    padding-top: 2px;
     font-size: 18px;
   }
 }

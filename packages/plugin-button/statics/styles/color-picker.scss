@@ -3,6 +3,9 @@
 .container {
   position: relative;
   padding-bottom: 18px;
+  @include phone{
+    padding-bottom: 10px;
+  }
 }
 
 .overlay {
@@ -107,6 +110,10 @@ $size: 10px;
   text-align: right;
   padding-bottom: 17px;
   padding-top: 18px;
+  @include phone {
+    padding-top: 31px;
+    padding-bottom: 12px;
+  }
 }
 
 .pickerButton {
