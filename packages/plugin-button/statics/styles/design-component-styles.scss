@@ -29,7 +29,7 @@
 
 .section_header_color {
   padding-bottom: 5px;
-  padding-top: 5px;
+  padding-top: 6px;
   font-size: 16px;
   font-weight: 300;
   height: auto;
@@ -59,7 +59,7 @@
     padding: 0px 0px 15px;
   }
   label:nth-child(3n) {
-    padding-bottom: 3px;
+    padding-bottom: 2px;
     @include phone {
       padding: 0px 0px 16px;
     }
@@ -75,7 +75,7 @@
 
 .button_samples {
   border-bottom: 1px solid #ededed;
-  padding-top: 6px;
+  padding-top: 7px;
   padding-bottom: 6px;
   @include phone {
     width: 100%;
@@ -142,7 +142,6 @@ input[type="range"]:focus {
   outline: none;
 }
 
-//------------------
 // FireFox
 input[type="range"]::-moz-range-progress {
   background-color: #B5D1FF; 
@@ -158,9 +157,9 @@ input[type="range"]::-ms-fill-upper {
   background-color: #E2EDFF;
 }
 // chrome && opera
-
-
-//------------------
+input[type="range"]::-webkit-progress-bar {
+  background-color: #B5D1FF; 
+}
 
 input[type="range"]::-webkit-slider-runnable-track {
   width: 100%;

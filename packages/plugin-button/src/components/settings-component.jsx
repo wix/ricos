@@ -40,13 +40,8 @@ class SettingsComponent extends PureComponent {
   };
 
   onTextChanged = e => {
-    const { t } = this.props;
     const buttonText = e.target.value;
-    if (buttonText) {
-      this.setState({ buttonText });
-    } else {
-      this.setState({ buttonText: t('ButtonModal_InputName_Placeholder') });
-    }
+    this.setState({ buttonText });
   };
 
   onLinkChanged = e => {
@@ -85,7 +80,7 @@ class SettingsComponent extends PureComponent {
     return (
       <div className={styles.section_content}>
         <div className={styles.button_name_feild}>
-          <div className={styles.header_text}>
+          <div className={styles.header_ButtonText}>
             {t('ButtonModal_Button_Text')}
           </div>
           <div>
@@ -103,7 +98,7 @@ class SettingsComponent extends PureComponent {
             />
           </div>
         </div>
-        <div className={styles.header_text}>
+        <div className={styles.header_ButtonLink}>
           {t('ButtonModal_Button_Link')}
         </div>
         <TextInput

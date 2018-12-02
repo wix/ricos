@@ -2,11 +2,11 @@
 @import "~wix-rich-content-common/dist/statics/styles/palette";
 
 .button_sample {
-  box-sizing: border-box;
-  padding: 11px;
   font-size: 14px;
-  padding: 11px 23px;
+  padding: 0px 23px;
   border-style: none;
+  height: 40px;
+  box-sizing: border-box;
   cursor: pointer;
 }
 .button_sample_container {

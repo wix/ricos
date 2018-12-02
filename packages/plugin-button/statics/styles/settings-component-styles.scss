@@ -1,9 +1,19 @@
 @import "~wix-rich-content-common/dist/statics/styles/mixins";
 @import "~wix-rich-content-common/dist/statics/styles/palette";
 
-.header_text {
+.header_ButtonText {
   font-size: 14px;
-  margin: 8px 0 8px 0;
+  margin: 6px 0 6px 0;
+  line-height: 1.5;
+  height: 22px;
+  font-weight: normal;
+  @include phone {
+    font-weight: normal;
+  }
+}
+.header_ButtonLink {
+  font-size: 14px;
+  margin: 9px 0 7px 0;
   line-height: 1.5;
   height: 22px;
   font-weight: normal;
@@ -28,7 +38,7 @@
   }
 }
 .checkbox {
-  margin-bottom: 14px;
+  margin-bottom: 16px;
 }
 .checkbox_label {
   font-size: 14px;

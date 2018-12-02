@@ -18,7 +18,7 @@ class ButtonComponent extends PureComponent {
     const { colors } = this.props.settings;
     const { componentData, buttonObj, anchorTarget, relValue } = this.props;
     const { styles } = this;
-    let buttonText = (!componentData.button) ? 'Click Me!' : componentData.button.buttonText;
+    let buttonText = (!componentData.button.buttonText) ? 'Click Me!' : componentData.button.buttonText;
     let rel = '';
     let url = '';
     const sizes = {

@@ -19,7 +19,6 @@ import PreviewComponent from './../components/preview-component';
 import { settingsTabValue, designTabValue } from '../../src/constants';
 import styles from '../../statics/styles/button-input-modal.scss';
 
-
 export default class ButtonInputModal extends Component {
   constructor(props) {
     super(props);
