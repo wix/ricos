@@ -53,7 +53,7 @@
   "SoundCloudComponent_Overlay" : "To play this track, view this post from your live site.",
   "GiphyPlugin_InsertButton_Tooltip" : "Add a Gif",
   "GiphyPlugin_Trending" : "Trending",
-  "GiphyPlugin_ApiErrorMsg" : "Somthing went wrong (Check API Key)",
+  "GiphyPlugin_ApiErrorMsg" : "Something went wrong. Please try again later",
   "GiphyUploadModal_Input_Placeholder" : "Search",
   "GalleryPlugin_InsertButton_Tooltip" : "Add a Gallery",
   "GalleryPlugin_Layout_Grid" : "Grid",

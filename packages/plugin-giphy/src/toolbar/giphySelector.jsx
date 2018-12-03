@@ -87,14 +87,12 @@ class GiphySelector extends Component {
   };
 
   componentWillReceiveProps(nextProps) {
-    if (!this.state.didFail) {
-      if (this.timer !== null) {
-        clearTimeout(this.timer);
-      } else {
-        this.getGifs(nextProps.searchTag);
-      }
-      this.timer = setTimeout(() => this.getGifs(nextProps.searchTag), WAIT_INTERVAL);
+    if (this.timer !== null) {
+      clearTimeout(this.timer);
+    } else {
+      this.getGifs(nextProps.searchTag);
     }
+    this.timer = setTimeout(() => this.getGifs(nextProps.searchTag), WAIT_INTERVAL);
   }
 
   componentDidMount() {
@@ -104,7 +102,12 @@ class GiphySelector extends Component {
   render() {
     const { styles } = this;
     const { t } = this.props;
-    const loader = <div className={styles.giphy_selecter_spinner}> <MDSpinner singleColor="#000000" /></div>;
+    const loader =
+      (
+        <div className={styles[`giphy_selecter_spinner_${this.state.gifs.length ? 'more' : 'empty_modal'}`]}>
+          <MDSpinner borderSize="1.5" singleColor="#000000" />
+        </div>
+      );
     const trending = (!this.props.searchTag) ? t('GiphyPlugin_Trending') : null;
     return (
       <div>
@@ -142,7 +145,10 @@ class GiphySelector extends Component {
             </InfiniteScroll>
           </Scrollbars>
         </div>
-        {(this.state.didFail) ? <div className={styles.giphy_selecter_error_msg}> {t('GiphyPlugin_ApiErrorMsg')}</div> : null}
+        {
+          (this.state.didFail && !this.state.gifs.length) ?
+            <div className={styles.giphy_selecter_error_msg}> {t('GiphyPlugin_ApiErrorMsg')}</div> : null
+        }
       </div>
     );
   }

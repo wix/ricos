@@ -14,6 +14,7 @@
   padding-bottom: 5px;
   position: relative;
   @include phone {
+    padding: 0px;
     padding-bottom: 13px;
     width: 100%;
   }
@@ -29,9 +30,11 @@
   font-weight: 300;
   color: black;
   border: none;
+  border-radius: 0px;
 }
 
 .giphy_api_input_modal_search::placeholder {
+  color: black;
   opacity: 0.5;
 }
 
@@ -40,12 +43,14 @@
   display: inline-block;
   position: absolute;
   right: 0px;
-  top: 4px;
+  top: 2px;
 }
 
 .giphy_api_input_modal_closeIcon {
-  width: 10px;
-  height: 10px;
+  width: 1px;
+  height: 11px;
+  transform: rotate(45deg);
+  background-color: #333333;
 }
 
 .giphy_api_input_modal_navbar {
@@ -55,7 +60,6 @@
   vertical-align: middle;
   padding-top: 15px;
   text-align: center;
-
   font-family: Helvetica;
   font-size: 14px;
   line-height: 1.5;

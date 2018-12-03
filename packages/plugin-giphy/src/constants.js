@@ -34,8 +34,9 @@ export const DesktopFlyOutModalStyles = {
     overflow: 'visible',
     border: '1px solid #ccc',
     paddingRight: '8px',
-    paddingLeft: '18px',
+    paddingLeft: '17px',
     display: 'block',
+    borderRadius: '2px',
     position: 'absolute',
     zIndex: 6,
     paddingTop: '8px'
