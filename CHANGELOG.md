@@ -12,10 +12,13 @@
 
 ### :bug: Bug Fix
 
-- `soundcloud`
-  - [#195](https://github.com/wix-incubator/rich-content/pull/195) handle input selection focus on iphons + mathcing soundcloud url to viewer & clip prefix url shared text 
 - `giphy`
   - [#192](https://github.com/wix-incubator/rich-content/pull/192) removing container styles of giphy to keep original width to height ratio
+- `video`
+  - [#194](https://github.com/wix-incubator/rich-content/pull/194) handle input selection focus and removed border radius on iphone
+- `soundcloud`
+  - [#195](https://github.com/wix-incubator/rich-content/pull/195) handle input selection focus on iphone and source url optimisations
+
   
 <br/>
 
