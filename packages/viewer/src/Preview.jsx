@@ -153,10 +153,19 @@ Preview.propTypes = {
   theme: PropTypes.object,
   isMobile: PropTypes.bool,
   textDirection: PropTypes.oneOf(['rtl', 'ltr']),
-  decorators: PropTypes.arrayOf(PropTypes.shape({
-    component: PropTypes.func.isRequired,
-    strategy: PropTypes.func.isRequired,
-  })),
+  decorators: PropTypes.arrayOf(
+    PropTypes.oneOfType([
+      PropTypes.shape({
+        getDecorations: PropTypes.func.isRequired,
+        getComponentForKey: PropTypes.func.isRequired,
+        getPropsForKey: PropTypes.func.isRequired,
+      }),
+      PropTypes.shape({
+        component: PropTypes.func.isRequired,
+        strategy: PropTypes.func.isRequired,
+      })
+    ])
+  ),
   anchorTarget: PropTypes.string,
   relValue: PropTypes.string,
   config: PropTypes.object,

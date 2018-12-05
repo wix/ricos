@@ -944,6 +944,38 @@ const TestData = {
         data: {}
       }
     ]
+  },
+  codeBlock: {
+    blocks: [
+      {
+        key: "foo",
+        text: "",
+        type: "unstyled",
+        depth: 0,
+        inlineStyleRanges: [],
+        entityRanges: [],
+        data: {}
+      },
+      {
+        key: "envpb",
+        text: "for (var i=1; i <= 20; i++)\n{ \n    if (i % 15 == 0) \n        console.log(\"FizzBuzz\"); \n    else if (i % 3 == 0) \n        console.log(\"Fizz\"); \n    else if (i % 5 == 0) \n        console.log(\"Buzz\"); \n    else console.log(i);\n}",
+        type: "code-block",
+        depth: 0,
+        inlineStyleRanges: [],
+        entityRanges: [],
+        data: {}
+      },
+      {
+        key: "6b6mt",
+        text: "",
+        type: "unstyled",
+        depth: 0,
+        inlineStyleRanges: [],
+        entityRanges: [],
+        data: {}
+      }
+    ],
+    entityMap: {}
   }
 };
 

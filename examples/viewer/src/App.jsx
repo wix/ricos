@@ -12,6 +12,7 @@ import { soundCloudTypeMapper } from 'wix-rich-content-plugin-sound-cloud/dist/m
 import { linkTypeMapper, LinkViewer, LinkParseStrategy, LINK_TYPE } from 'wix-rich-content-plugin-link/dist/module.viewer';
 
 import { Strategy as HashTagStrategy, Component as HashTag } from 'wix-rich-content-plugin-hashtag';
+import { CodeBlockDecorator } from 'wix-rich-content-plugin-code-block/dist/module.viewer';
 
 import TestData from './TestData/initial-state';
 import theme from './theme/theme';
@@ -78,7 +79,8 @@ class App extends Component {
         strategy: HashTagStrategy,
         component: ({children, decoratedText}) =>
           <HashTag theme={theme} onClick={this.onHashTagClick} createHref={this.createHref} decoratedText={decoratedText}>{children}</HashTag>
-      }
+      },
+      new CodeBlockDecorator({ theme })
     ];
 
     this.config = {
