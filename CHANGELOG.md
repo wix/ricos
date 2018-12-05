@@ -8,9 +8,12 @@
 > - :book: [Documentation]
 > - :house: [Internal]
 
+## :rocket: New Feature
+- `Button Plugin`
+  - [#201](https://github.com/wix-incubator/rich-content/pull/201) `plugin-button` Add button plugin to RCE
+
 ## [Unreleased]
-`button`
-- Add button blugin
+
 ### :bug: Bug Fix
 
 - `giphy`
