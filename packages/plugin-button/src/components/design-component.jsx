@@ -22,7 +22,7 @@ class DesignComponent extends PureComponent {
     this.styles = mergeStyles({ styles, theme: props.theme });
     const { designObj } = this.props;
     const { colors } = this.props.settings;
-    this.arr = [
+    this.presetStyle = [
       {
         className: 'button_primary',
         border: '0px solid #' + colors.color_8,
@@ -69,6 +69,17 @@ class DesignComponent extends PureComponent {
         borderColor: colors.color_8
       },
     ];
+    this.sizeOptions = [
+      {
+        value: 'L', labelText: 'L'
+      },
+      {
+        value: 'M', labelText: 'M'
+      },
+      {
+        value: 'S', labelText: 'S'
+      },
+    ];
     this.state = {
       borderWidth: designObj.borderWidth,
       buttonSize: designObj.buttonSize,
@@ -102,11 +113,11 @@ class DesignComponent extends PureComponent {
   onButtonSampleClick = index => {
     this.setState({
       activeButton: index,
-      borderWidth: parseInt(this.arr[index].borderWidth),
-      borderRadius: parseInt(this.arr[index].borderRadius),
-      textColor: this.arr[index].color,
-      backgroundColor: this.arr[index].background,
-      borderColor: this.arr[index].borderColor
+      borderWidth: parseInt(this.presetStyle[index].borderWidth),
+      borderRadius: parseInt(this.presetStyle[index].borderRadius),
+      textColor: this.presetStyle[index].color,
+      backgroundColor: this.presetStyle[index].background,
+      borderColor: this.presetStyle[index].borderColor
     });
   }
 
@@ -125,22 +136,11 @@ class DesignComponent extends PureComponent {
   render() {
     const styles = this.styles;
     const { theme, t, designObj } = this.props;
-    const sizeOptions = [
-      {
-        value: 'L', labelText: 'L'
-      },
-      {
-        value: 'M', labelText: 'M'
-      },
-      {
-        value: 'S', labelText: 'S'
-      },
-    ];
     if (WixUtils.isMobile()) {
-      sizeOptions.push({ value: 'F', labelText: 'Full width' });
+      this.sizeOptions.push({ value: 'F', labelText: 'Full width' });
     }
 
-    const buttonSampleList = this.arr.map((style, i) => {
+    const buttonSampleList = this.presetStyle.map((style, i) => {
       const active = i === this.state.activeButton;
       return (<ButtonSample
         key={i.toString()}
@@ -175,7 +175,7 @@ class DesignComponent extends PureComponent {
             </div>
             <RadioGroup
               label={t('ButtonModal_Size_Section')}
-              dataSource={sizeOptions}
+              dataSource={this.sizeOptions}
               value={this.state.buttonSize}
               onChange={this.onRadioButtonsChange.bind(this)}
               theme={theme}
