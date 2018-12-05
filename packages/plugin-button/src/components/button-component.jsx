@@ -8,17 +8,17 @@ class ButtonComponent extends PureComponent {
   constructor(props) {
     super(props);
     this.styles = mergeStyles({ styles, theme: props.theme });
-    const { componentData } = this.props;
+    const { componentData : { button } } = this.props;
     this.state = {
-      style: componentData.button,
+      style: button,
     };
   }
 
   render() {
     const { colors } = this.props.settings;
-    const { componentData, buttonObj, anchorTarget, relValue } = this.props;
+    const { componentData: { button }, buttonObj, anchorTarget, relValue } = this.props;
     const { styles } = this;
-    let buttonText = (!componentData.button.buttonText) ? 'Click Me!' : componentData.button.buttonText;
+    let buttonText = (!button.buttonText) ? 'Click Me!' : button.buttonText;
     let rel = '';
     let url = '';
     const sizes = {
@@ -39,19 +39,19 @@ class ButtonComponent extends PureComponent {
       border: '0px solid blue',
       ...this.props.style
     };
-    const target = (componentData.button.target) ? anchorTarget : '_self';
-    rel = (componentData.button.rel) ? relValue : '';
+    const target = (button.target) ? anchorTarget : '_self';
+    rel = (button.rel) ? relValue : '';
     style = {
       ...style,
-      borderWidth: componentData.button.borderWidth + 'px',
-      borderRadius: componentData.button.borderRadius,
-      color: componentData.button.textColor ? componentData.button.textColor : colors.color_1,
-      background: componentData.button.backgroundColor ? componentData.button.backgroundColor : colors.color_8,
-      borderColor: componentData.button.borderColor ? componentData.button.borderColor : colors.color_8
+      borderWidth: button.borderWidth + 'px',
+      borderRadius: button.borderRadius,
+      color: button.textColor ? button.textColor : colors.color_1,
+      background: button.backgroundColor ? button.backgroundColor : colors.color_8,
+      borderColor: button.borderColor ? button.borderColor : colors.color_8
     };
-    url = componentData.button.url;
+    url = button.url;
     let buttonSize = {
-      ...sizes[componentData.button.buttonSize],
+      ...sizes[button.buttonSize],
     };
     if (buttonObj) {
       style = {
