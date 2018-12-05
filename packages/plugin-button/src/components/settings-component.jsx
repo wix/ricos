@@ -18,7 +18,7 @@ class SettingsComponent extends PureComponent {
     this.styles = mergeStyles({ styles, theme: props.theme });
     this.targetCheckboxText = t('LinkPanel_Target_Checkbox');
     this.nofollowCheckboxText = t('LinkPanel_Nofollow_Checkbox');
-    this.inputPlaceholder = t('LinkPanel_InputPlaceholder');
+    this.inputPlaceholder = t('ButtonModal_Link_Input_Placeholder');
     this.errorTooltipText = t('LinkPanel_ErrorTooltip');
     this.state = {
       url: settingsObj.url || '',
@@ -110,7 +110,7 @@ class SettingsComponent extends PureComponent {
           onKeyPress={this.handleKeyPress}
           onChange={this.onLinkChanged}
           value={url}
-          placeholder={t('LinkPanel_InputPlaceholder')}
+          placeholder={t('ButtonModal_Link_Input_Placeholder')}
           theme={this.styles}
           error={errorTooltip}
           data-hook="ButtonInputModal"
