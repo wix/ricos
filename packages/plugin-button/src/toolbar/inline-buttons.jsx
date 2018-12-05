@@ -19,7 +19,7 @@ export default ({ settings }) => {
       keyName: 'advanced_settings',
       type: BUTTONS.EXTERNAL_MODAL,
       icon: PluginSettingsIcon,
-      modalName: Modals.BUTTON_SETING,
+      modalName: Modals.BUTTON_INPUT,
       activeTab: 'advanced_settings',
       modalElement: decorateComponentWithProps(ButtonInputModal, settings),
       modalStyles: getModalStyles({ customStyles: customStyleSettingModal }),
