@@ -26,14 +26,14 @@ class ButtonSample extends PureComponent {
   render() {
     const { style, active } = this.props;
     const { styles } = this;
-    const { state } = this.props;
+    const { buttonObj } = this.props;
     const { buttonStyle } = this.state;
     const propsStyle = {
-      backgroundColor: state.backgroundColor,
-      borderColor: state.borderColor,
-      textColor: state.textColor,
-      borderRadius: state.borderRadius + 'px',
-      borderWidth: state.borderWidth + 'px',
+      backgroundColor: buttonObj.backgroundColor,
+      borderColor: buttonObj.borderColor,
+      textColor: buttonObj.textColor,
+      borderRadius: buttonObj.borderRadius + 'px',
+      borderWidth: buttonObj.borderWidth + 'px',
     };
     const stateStyle = {
       backgroundColor: buttonStyle.background,
@@ -66,7 +66,7 @@ ButtonSample.propTypes = {
   onClickButton: PropTypes.func,
   active: PropTypes.bool,
   i: PropTypes.number,
-  state: PropTypes.object,
+  buttonObj: PropTypes.object,
 
 };
 
