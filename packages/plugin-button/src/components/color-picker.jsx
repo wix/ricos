@@ -202,7 +202,6 @@ ColorPicker.propTypes = {
   onClick: PropTypes.func,
   onChange: PropTypes.func,
   flag: PropTypes.bool,
-  colors: PropTypes.object,
   settings: PropTypes.object
 };
 
