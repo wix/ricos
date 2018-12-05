@@ -8,20 +8,7 @@ class ButtonComponent extends PureComponent {
   constructor(props) {
     super(props);
     this.styles = mergeStyles({ styles, theme: props.theme });
-    const { componentData : { button } } = this.props;
-    this.state = {
-      style: button,
-    };
-  }
-
-  render() {
-    const { colors } = this.props.settings;
-    const { componentData: { button }, buttonObj, anchorTarget, relValue } = this.props;
-    const { styles } = this;
-    let buttonText = (!button.buttonText) ? 'Click Me!' : button.buttonText;
-    let rel = '';
-    let url = '';
-    const sizes = {
+    this.sizes = {
       L: {
         width: '156px'
       },
@@ -35,6 +22,19 @@ class ButtonComponent extends PureComponent {
         width: 'calc(100vw - 82px)',
       }
     };
+    const { componentData: { button } } = this.props;
+    this.state = {
+      style: button,
+    };
+  }
+
+  render() {
+    const { colors } = this.props.settings;
+    const { componentData: { button }, buttonObj, anchorTarget, relValue } = this.props;
+    const { styles } = this;
+    let buttonText = (!button.buttonText) ? 'Click Me!' : button.buttonText;
+    let rel = '';
+    let url = '';
     let style = {
       border: '0px solid blue',
       ...this.props.style
@@ -51,7 +51,7 @@ class ButtonComponent extends PureComponent {
     };
     url = button.url;
     let buttonSize = {
-      ...sizes[button.buttonSize],
+      ...this.sizes[button.buttonSize],
     };
     if (buttonObj) {
       style = {
@@ -65,7 +65,7 @@ class ButtonComponent extends PureComponent {
       buttonText = buttonObj.data.buttonText;
       buttonSize = {
         ...buttonSize,
-        ...sizes[buttonObj.design.buttonSize]
+        ...this.sizes[buttonObj.design.buttonSize]
       };
     }
 
