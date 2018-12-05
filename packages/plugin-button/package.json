@@ -54,13 +54,9 @@
     "rollup": "^0.64.1"
   },
   "dependencies": {
-    "broken-link-checker": "^0.7.8",
-    "fs": "0.0.1-security",
     "react-color": "^2.14.1",
     "react-custom-scrollbars": "^4.2.1",
-    "react-styleable": "^3.3.0",
-    "wix-rich-content-common": "^1.5.0",
-    "yamlparser": "0.0.2"
+    "wix-rich-content-common": "^1.5.0"
   },
   "unpkg": true,
   "publishConfig": {
