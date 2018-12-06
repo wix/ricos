@@ -195,14 +195,14 @@ class ColorPicker extends PureComponent {
 }
 
 ColorPicker.propTypes = {
-  theme: PropTypes.object,
+  theme: PropTypes.object.isRequired,
   style: PropTypes.object,
-  children: PropTypes.string,
+  children: PropTypes.string.isRequired,
   color: PropTypes.string,
   onClick: PropTypes.func,
   onChange: PropTypes.func,
   flag: PropTypes.bool,
-  settings: PropTypes.object
+  settings: PropTypes.object.isRequired
 };
 
 export default ColorPicker;

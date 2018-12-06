@@ -57,16 +57,13 @@ class ButtonSample extends PureComponent {
 }
 
 ButtonSample.propTypes = {
-  style: PropTypes.object,
-  theme: PropTypes.object,
-  componentData: PropTypes.object,
-  pubsub: PropTypes.object,
-  onConfirm: PropTypes.func,
+  style: PropTypes.object.isRequired,
+  theme: PropTypes.object.isRequired,
   onClick: PropTypes.func,
   onClickButton: PropTypes.func,
   active: PropTypes.bool,
   i: PropTypes.number,
-  buttonObj: PropTypes.object,
+  buttonObj: PropTypes.object.isRequired,
 
 };
 

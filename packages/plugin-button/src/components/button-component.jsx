@@ -88,13 +88,13 @@ class ButtonComponent extends PureComponent {
 }
 
 ButtonComponent.propTypes = {
-  theme: PropTypes.object,
+  theme: PropTypes.object.isRequired,
   componentData: PropTypes.object,
   style: PropTypes.object,
   buttonObj: PropTypes.object,
-  anchorTarget: PropTypes.string,
-  relValue: PropTypes.string,
-  settings: PropTypes.object,
+  anchorTarget: PropTypes.string.isRequired,
+  relValue: PropTypes.string.isRequired,
+  settings: PropTypes.object.isRequired,
 };
 
 export default ButtonComponent;

@@ -147,8 +147,8 @@ SettingsComponent.propTypes = {
   componentData: PropTypes.object,
   t: PropTypes.func,
   isValidUrl: PropTypes.func,
-  onSettingsChange: PropTypes.func,
-  settingsObj: PropTypes.object,
+  onSettingsChange: PropTypes.func.isRequired,
+  settingsObj: PropTypes.object.isRequired,
   validUrl: PropTypes.bool,
   onKeyPress: PropTypes.func
 };
