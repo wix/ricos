@@ -138,7 +138,7 @@ export default class ButtonInputModal extends Component {
     this.setState({ activeTab: settingsTabValue });
   }
 
-  tabSelected = tabValue => {
+  onTabSelected = tabValue => {
     const { url } = this.state.data;
     if (!isValidUrl(url) && tabValue === designTabValue) {
       this.setState({ isValidUrl: false });
@@ -215,7 +215,7 @@ export default class ButtonInputModal extends Component {
               </div>
               <FocusManager>
                 <div className={styles.focus_mhanager}>
-                  <Tabs value={this.state.activeTab} theme={theme} tabSelected={this.tabSelected.bind(this)}>
+                  <Tabs value={this.state.activeTab} theme={theme} onTabSelected={this.onTabSelected.bind(this)}>
                     <Tab label={settingTabLabel} value={settingsTabValue} theme={this.styles}>
                       <div onMouseEnter={this.handleOnMouseEnterSettings} >
                         {settingsComponent}

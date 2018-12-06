@@ -42,7 +42,7 @@ export class Tabs extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.value != this.state.activeTab) {
+    if (nextProps.value !== this.state.activeTab) {
       this.setState({ activeTab: nextProps.value });
     }
   }
@@ -69,8 +69,8 @@ export class Tabs extends Component {
                 data-hook={`${value}_Tab`} aria-controls={`${value}_panel`} aria-label={label} aria-selected={isSelected}
                 onClick={() => {
                   this.setState({ activeTab: value });
-                  if(this.props.tabSelected){
-                    this.props.tabSelected(value);
+                  if(this.props.onTabSelected){
+                    this.props.onTabSelected(value);
                   } 
                   this.renderTabs();
                 }}
