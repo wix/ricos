@@ -5,8 +5,9 @@ import HuePointer from '../components/hue-pointer';
 import SaturationPointer from '../components/saturation-pointer';
 import styles from '../../statics/styles/custom-color-picker.scss';
 class CustomColorPicker extends React.Component {
-  render() {
-    const inlineStyles = {
+  constructor(props) {
+    super(props);
+    this.inlineStyles = {
       hue: {
         height: '12px',
         position: 'relative',
@@ -25,18 +26,19 @@ class CustomColorPicker extends React.Component {
         fontSize: '14px',
       },
     };
-
+  }
+  render() {
     return (
       <div>
-        <div style={inlineStyles.saturation}>
-          <Saturation style={{ saturation: inlineStyles.saturation }} pointer={() => <SaturationPointer />} {...this.props} />
+        <div style={this.inlineStyles.saturation}>
+          <Saturation style={{ saturation: this.inlineStyles.saturation }} pointer={() => <SaturationPointer />} {...this.props} />
         </div>
-        <div style={inlineStyles.hue}>
-          <Hue style={{ hue: inlineStyles.hue }} {...this.props} pointer={() => <HuePointer />} />
+        <div style={this.inlineStyles.hue}>
+          <Hue style={{ hue: this.inlineStyles.hue }} {...this.props} pointer={() => <HuePointer />} />
         </div>
         <div className={styles.editable_input_label}>
           <EditableInput
-            style={{ input: inlineStyles.input }}
+            style={{ input: this.inlineStyles.input }}
             value={'Hex Number ' + this.props.color}
             {...this.props}
           />
