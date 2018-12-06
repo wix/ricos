@@ -89,9 +89,7 @@ class GiphySelector extends Component {
   componentWillReceiveProps(nextProps) {
     if (this.timer !== null) {
       clearTimeout(this.timer);
-    } else {
-      this.getGifs(nextProps.searchTag);
-    }
+    } 
     this.timer = setTimeout(() => this.getGifs(nextProps.searchTag), WAIT_INTERVAL);
   }
 
