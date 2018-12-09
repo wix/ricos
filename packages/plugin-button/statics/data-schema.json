@@ -141,6 +141,15 @@
             "right",
             "left"
           ]
+        },
+        "key": {
+          "$id": "/properties/config/properties/key",
+          "type": "string",
+          "title": "The Key Schema ",
+          "default": "",
+          "examples": [
+            "78mi0"
+          ]
         }
       }
     }
