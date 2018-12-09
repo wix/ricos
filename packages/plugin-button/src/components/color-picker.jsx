@@ -67,6 +67,7 @@ class ColorPicker extends PureComponent {
     if (color.hex) {
       this.customColorPickerChange(color);
     }
+    this.setState({ picker: false });
   }
 
   onPaletteDropperClick = () => {
