@@ -55,14 +55,14 @@
   padding: 30px 0px;
 }
 .button_name_feild {
-  padding-bottom: 8px;
+  padding-bottom: 9px;
   @include phone {
     padding-bottom: 15px;
   }
 }
 .section_content {
   padding-right: 30px;
-  padding-top: 4px;
+  padding-top: 8px;
   @include phone {
     padding-right: 0px;
   }

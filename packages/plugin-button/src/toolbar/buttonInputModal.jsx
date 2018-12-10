@@ -149,7 +149,7 @@ export default class ButtonInputModal extends Component {
     const { theme, t, uiSettings, doneLabel, cancelLabel } = this.props;
     const { styles } = this;
     const scrollContainerHeight = {
-      height: 'calc(100vh - '+(176+(2*this.state.design.borderWidth))+'px)'
+      height: 'calc(100vh - ' + (216 + (2 * this.state.design.borderWidth)) + 'px)'
     }
     console.log(scrollContainerHeight);
     const settingTabLabel = (
