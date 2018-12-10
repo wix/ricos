@@ -24,6 +24,9 @@
 .scroll {
   height: calc(100vh - 152px);
   overflow-y: scroll;
+  @include phone {
+    height: calc(100vh - 176px);
+  }
 }
 
 .errorIcon {
