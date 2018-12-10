@@ -18,6 +18,8 @@
   - [#194](https://github.com/wix-incubator/rich-content/pull/194) handle input selection focus and removed border radius on iphone
 - `soundcloud`
   - [#195](https://github.com/wix-incubator/rich-content/pull/195) handle input selection focus on iphone and source url optimisations
+- `viewer`
+  - [#203](https://github.com/wix-incubator/rich-content/pull/203) add `text` class for text blocks
 
   
 <br/>

@@ -59,7 +59,15 @@ const getBlocks = (mergedStyles, textDirection) => {
   // adding an empty block closes current paragraph and starts a new one
   return {
     unstyled: (children, blockProps) => children.map((child, i) =>
-      withTextAlignment(<div key={blockProps.keys[i]}><div>{child}</div></div>, blockProps.data[i], mergedStyles, textDirection)),
+      withTextAlignment(
+        <div className={mergedStyles.text} key={blockProps.keys[i]}>
+          <div>{child}</div>
+        </div>,
+        blockProps.data[i],
+        mergedStyles,
+        textDirection
+      )
+    ),
     blockquote: (children, blockProps) => children.map((child, i) =>
       withTextAlignment(<blockquote className={mergedStyles.quote} key={blockProps.keys[i]}><div>{child}</div></blockquote>,
         blockProps.data[i], mergedStyles, textDirection)),
