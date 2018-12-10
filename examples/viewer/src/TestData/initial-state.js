@@ -977,30 +977,6 @@ const TestData = {
     ],
     entityMap: {}
   },
-  emoji: {
-    blocks: [
-      {
-        key: "foo",
-        text: "😀 😁 😂 🤣 ",
-        type: "unstyled",
-        depth: 0,
-        inlineStyleRanges: [],
-        entityRanges: [
-          { offset: 0, length: 1, key: 0 },
-          { offset: 2, length: 1, key: 1 },
-          { offset: 4, length: 1, key: 2 },
-          { offset: 6, length: 1, key: 3 }
-        ],
-        data: {}
-      }
-    ],
-    entityMap: {
-      0: { type: "emoji", mutability: "IMMUTABLE", data: { emojiUnicode: "😀" } },
-      1: { type: "emoji", mutability: "IMMUTABLE", data: { emojiUnicode: "😁" } },
-      2: { type: "emoji", mutability: "IMMUTABLE", data: { emojiUnicode: "😂" } },
-      3: { type: "emoji", mutability: "IMMUTABLE", data: { emojiUnicode: "🤣" } }
-    }
-  },
   mentions: {
     blocks: [
       {
