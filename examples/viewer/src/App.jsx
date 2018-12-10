@@ -13,6 +13,7 @@ import { linkTypeMapper, LinkViewer, LinkParseStrategy, LINK_TYPE } from 'wix-ri
 
 import { Strategy as HashTagStrategy, Component as HashTag } from 'wix-rich-content-plugin-hashtag';
 import { CodeBlockDecorator } from 'wix-rich-content-plugin-code-block/dist/module.viewer';
+import { EXTERNAL_MENTIONS_TYPE, createExternalMentionsViewerPlugin } from 'wix-rich-content-plugin-mentions/dist/module.viewer';
 
 import TestData from './TestData/initial-state';
 import theme from './theme/theme';
@@ -57,12 +58,22 @@ class App extends Component {
     this.initViewerProps();
     this.styles = mergeStyles({ styles, theme });
 
+    const mentionsPlugin = createExternalMentionsViewerPlugin({
+      [EXTERNAL_MENTIONS_TYPE]: {
+        onMentionClick: mention => console.log(mention),
+        getMentionLink: () => '#'
+      },
+      theme
+    });
+
     this.typeMappers = [
       videoTypeMapper,
       dividerTypeMapper,
       htmlTypeMapper,
       linkTypeMapper,
-      soundCloudTypeMapper];
+      soundCloudTypeMapper,
+      mentionsPlugin.typeMapper,
+    ];
 
     this.decorators = [{
         strategy: LinkParseStrategy,

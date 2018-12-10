@@ -976,6 +976,62 @@ const TestData = {
       }
     ],
     entityMap: {}
+  },
+  emoji: {
+    blocks: [
+      {
+        key: "foo",
+        text: "😀 😁 😂 🤣 ",
+        type: "unstyled",
+        depth: 0,
+        inlineStyleRanges: [],
+        entityRanges: [
+          { offset: 0, length: 1, key: 0 },
+          { offset: 2, length: 1, key: 1 },
+          { offset: 4, length: 1, key: 2 },
+          { offset: 6, length: 1, key: 3 }
+        ],
+        data: {}
+      }
+    ],
+    entityMap: {
+      0: { type: "emoji", mutability: "IMMUTABLE", data: { emojiUnicode: "😀" } },
+      1: { type: "emoji", mutability: "IMMUTABLE", data: { emojiUnicode: "😁" } },
+      2: { type: "emoji", mutability: "IMMUTABLE", data: { emojiUnicode: "😂" } },
+      3: { type: "emoji", mutability: "IMMUTABLE", data: { emojiUnicode: "🤣" } }
+    }
+  },
+  mentions: {
+    blocks: [
+      {
+        key: "foo",
+        text: "Hi @Vytenis Butkevičius!",
+        type: "unstyled",
+        depth: 0,
+        inlineStyleRanges: [],
+        entityRanges: [
+          {
+            offset: 3,
+            length: 20,
+            key: 0
+          }
+        ],
+        data: {}
+      }
+    ],
+    entityMap: {
+      0: {
+        type: "mention",
+        mutability: "SEGMENTED",
+        data: {
+          mention: {
+            name: "Vytenis Butkevičius",
+            slug: "vytenisb",
+            id: "2068b184-6832-412f-abd4-31220fecd086"
+          }
+        }
+      }
+    }
   }
 };
 

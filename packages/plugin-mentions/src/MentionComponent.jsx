@@ -1,25 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const MentionComponent = mentionProps => {
-  const { onMentionClick, getMentionLink } = mentionProps.settings;
+const MentionComponent = ({ children, mention, settings, theme }) => {
+  const { onMentionClick, getMentionLink } = settings;
   return onMentionClick ? (
     <a
-      href={getMentionLink(mentionProps.mention)}
+      href={getMentionLink(mention)}
       rel="noopener noreferrer"
-      className={mentionProps.className}
-      onClick={() => onMentionClick(mentionProps.mention)}
+      className={theme.mention}
+      onClick={() => onMentionClick(mention)}
     >
-      {mentionProps.children}
+      {children}
     </a>
   ) : (
-    <span className={mentionProps.styles.mentionDisabled}>{mentionProps.children}</span>
+    <span className={theme.mentionDisabled}>{children}</span>
   );
 };
 
 MentionComponent.propTypes = {
-  mentionProps: PropTypes.object,
+  children: PropTypes.any,
+  mention: PropTypes.object,
   settings: PropTypes.object,
+  theme: PropTypes.object,
 };
 
 export default MentionComponent;
