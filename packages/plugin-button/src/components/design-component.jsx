@@ -170,7 +170,7 @@ class DesignComponent extends PureComponent {
         </SettingsSection>
         <SettingsSection theme={theme} ariaProps={{ 'aria-label': 'size selection', role: 'region' }}>
           <div className={styles.row}>
-            <div className={styles.section_header}>
+            <div className={styles.section_header_size}>
               {t('ButtonModal_Size_Section')}
             </div>
             <RadioGroup
