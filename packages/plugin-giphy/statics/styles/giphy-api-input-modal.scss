@@ -5,8 +5,8 @@
   width: 227px;
   padding-top: 6px;
   @include phone {
-    width: 100%;
-    padding: 11px 18px 30px;
+    width: calc(100% - 40px);
+    padding: 20px;
   }
 }
 
