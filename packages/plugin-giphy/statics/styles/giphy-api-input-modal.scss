@@ -2,8 +2,10 @@
 @import "~wix-rich-content-common/dist/statics/styles/palette";
 
 .giphy_api_input_modal_container {
+  width: 227px;
   padding-top: 6px;
   @include phone {
+    width: 100%;
     padding: 11px 18px 30px;
   }
 }
@@ -14,6 +16,7 @@
   padding-bottom: 5px;
   position: relative;
   @include phone {
+    margin: auto;
     padding: 0px;
     padding-bottom: 13px;
     width: 100%;

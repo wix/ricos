@@ -13,14 +13,13 @@
 
 .giphy_selecter_infinite_scroll_container {
   position: absolute;
-  width: calc(100% - 20px);
+  width: calc(100% - 21px);
   left: 18px;
   bottom: 0px;
   z-index: 7;
   height: calc(100% - 70px);
   overflow: auto;
   padding-right: 6px;
-  padding-left: 1px;
   @include phone {
     position: relative;
     width: auto;
@@ -71,7 +70,6 @@
   text-align: right;
   float: right;
   padding-top: 4px;
-  padding-right: 9px;
   @include phone {
     padding-right: 0px;
   }
