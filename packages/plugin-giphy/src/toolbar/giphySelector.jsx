@@ -30,26 +30,33 @@ class GiphySelector extends Component {
   getGifs = (searchTag, page) => {
     if (searchTag) {
       this.giphySdkCore
-        .search(SEARCH_TYPE, { q: searchTag, offset: page * PAGE_SIZE, limit: PAGE_SIZE })
+        .search(SEARCH_TYPE, {q: searchTag, offset: page * PAGE_SIZE, limit: PAGE_SIZE})
         .then(response => {
           if (page > 1) {
-            this.setState({ gifs: this.state.gifs.concat(response.data), hasMoreItems: true, page: this.state.page + 1, didFail: false });
+            this.setState({
+              gifs: this.state.gifs.concat(response.data),
+              hasMoreItems: true,
+              page: this.state.page + 1,
+              didFail: false
+            });
           } else {
             this.setState({
               gifs: response.data, hasMoreItems: true, page: this.state.page + 1, didFail: false
             });
           }
         }).catch(() => {
-          this.setState({ didFail: true, hasMoreItems: false });
-        });
+        this.setState({didFail: true, hasMoreItems: false});
+      });
     } else {
       this.giphySdkCore
-        .trending(SEARCH_TYPE, { limit: 100 })
+        .trending(SEARCH_TYPE, {limit: 100})
         .then(response => {
-          this.setState({ gifs: response.data, hasMoreItems: false, didFail: false });
+          if (!searchTag) {
+            this.setState({gifs: response.data, hasMoreItems: false, didFail: false});
+          }
         }).catch(() => {
-          this.setState({ didFail: true, hasMoreItems: false });
-        });
+        this.setState({didFail: true, hasMoreItems: false});
+      });
     }
   };
 
@@ -106,7 +113,7 @@ class GiphySelector extends Component {
           <MDSpinner borderSize="1.5" singleColor="#000000" />
         </div>
       );
-    const trending = (!this.props.searchTag) ? t('GiphyPlugin_Trending') : null;
+    const trending = (!this.props.searchTag && (!this.state.didFail || this.state.gifs.length)) ? t('GiphyPlugin_Trending') : null;
     return (
       <div>
         <div className={styles.giphy_selecter_container}>
