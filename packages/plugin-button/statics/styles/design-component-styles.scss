@@ -43,7 +43,7 @@
 
 .section_header_border {
   padding-bottom: 15px;
-  padding-top: 5px;
+  padding-top: 7px;
   font-size: 16px;
   font-weight: 300;
   height: 24px;
@@ -55,6 +55,7 @@
 
 .sliderWithInput_label {
   font-size: 14px;
+  padding-bottom: 4px;
   @include phone {
     padding-bottom: 5px;
   }
