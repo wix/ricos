@@ -1,13 +1,11 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import styles from '../../statics/styles/default-styles.scss';
-import { mergeStyles } from 'wix-rich-content-common';
+import ButtonViewer from './button-viewer';
 
 class ButtonComponent extends PureComponent {
 
   constructor(props) {
     super(props);
-    this.styles = mergeStyles({ styles, theme: props.theme });
     this.sizes = {
       L: {
         width: '156px'
@@ -31,7 +29,6 @@ class ButtonComponent extends PureComponent {
   render() {
     const { colors } = this.props.settings;
     const { componentData: { button }, buttonObj, anchorTarget, relValue } = this.props;
-    const { styles } = this;
     let buttonText = button.buttonText;
     let rel = '';
     let url = '';
@@ -39,7 +36,12 @@ class ButtonComponent extends PureComponent {
       border: '0px solid blue',
       ...this.props.style
     };
-    const target = (button.target) ? anchorTarget : '_self';
+
+    const target = (typeof (button.target) === 'undefined') ?
+      anchorTarget :
+      (button.target) ?
+        '_blank' :
+        '_self';
     rel = (button.rel) ? relValue : '';
     style = {
       ...style,
@@ -70,19 +72,14 @@ class ButtonComponent extends PureComponent {
     }
 
     return (
-      <a
-        className={styles.button_container}
-        href={url}
+      <ButtonViewer
+        url={url}
         style={style}
         target={target}
         rel={rel}
-      >
-        <div className={styles.button_text} style={buttonSize}>
-          {
-            buttonText
-          }
-        </div>
-      </a>
+        buttonSize={buttonSize}
+        buttonText={buttonText}
+      />
     );
   }
 }
