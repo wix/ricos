@@ -7,6 +7,9 @@
   border-bottom: 1px solid #ededed;
   padding-bottom: 14px;
   padding-top: 14px;
+  @include phone {
+    padding-top: 16px;
+  }
 }
 
 .design_component {
