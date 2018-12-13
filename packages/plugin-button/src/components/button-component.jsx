@@ -42,7 +42,11 @@ class ButtonComponent extends PureComponent {
       (button.target) ?
         '_blank' :
         '_self';
-    rel = (button.rel) ? relValue : '';
+    rel = (typeof (button.rel) === 'undefined') ?
+      relValue :
+      (button.rel) ?
+        'nofollow' :
+        '';
     style = {
       ...style,
       borderWidth: button.borderWidth + 'px',
