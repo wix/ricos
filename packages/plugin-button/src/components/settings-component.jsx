@@ -22,7 +22,7 @@ class SettingsComponent extends PureComponent {
     this.errorTooltipText = t('LinkPanel_ErrorTooltip');
     this.state = {
       url: settingsObj.url || '',
-      buttonText: settingsObj.buttonText || 'Click Me!',
+      buttonText: settingsObj.buttonText,
       target: settingsObj.target || false,
       rel: settingsObj.rel || false,
       validUrl: settingsObj.validUrl || true,
