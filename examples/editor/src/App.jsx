@@ -24,8 +24,8 @@ const modalStyleDefaults = {
   },
 };
 
-const anchorTarget = '_blank';
-const relValue = 'nofollow';
+const anchorTarget = '_self';
+const relValue = '';
 
 class App extends Component {
   constructor(props) {
