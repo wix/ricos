@@ -1,8 +1,5 @@
-import { mergeStyles } from 'wix-rich-content-common';
-import { DEFAULT_SETTINGS } from './defaultSettings';
-import { EXTERNAL_MENTIONS_TYPE } from './types';
-import { createTypeMapperFactory } from './typeMapper';
-import Styles from '../statics/mentions.scss';
+import { MENTION_TYPE } from './types';
+import typeMapper from './typeMapper';
 
 /*
 Interface Mention {
@@ -23,14 +20,4 @@ Interface Settings {
 }
 */
 
-const createExternalMentionsViewerPlugin = (config = {}) => {
-  const { theme, [EXTERNAL_MENTIONS_TYPE]: mentionSettings = {} } = config;
-  const styles = mergeStyles({ styles: Styles, theme });
-  const settings = Object.assign({}, DEFAULT_SETTINGS, mentionSettings);
-
-  return {
-    typeMapper: createTypeMapperFactory({ settings, theme: styles })
-  };
-};
-
-export { EXTERNAL_MENTIONS_TYPE, createExternalMentionsViewerPlugin };
+export { MENTION_TYPE, typeMapper as mentionsTypeMapper };
