@@ -1,0 +1,200 @@
+@import "~wix-rich-content-common/dist/statics/styles/mixins";
+.map_settings_modal_mobile_navbar {
+  width: 100%;
+  height: 35px;
+  background-color: #0060ff;
+  vertical-align: middle;
+  padding-top: 15px;
+  text-align: center;
+  font-family: Helvetica;
+  font-size: 14px;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-align: center;
+  color: #ffffff;
+}
+
+.map_settings_modal_mobile_header {
+  width: 100%;
+  height: 20px;
+  background: rgb(0, 86, 229);
+  display: block;
+}
+
+.map_settings_modal_title_header {
+  width: 100%;
+  text-align: center;
+  font-family: Helvetica;
+  font-size: 14px;
+  color: #333333;
+  padding-top: 15px;
+  padding-bottom: 10px;
+  @include phone {
+    font-size: 20px;
+    padding-top: 5px;
+  }
+}
+
+.map_settings_modal_container {
+  @include phone {
+    padding: 30px 30px 30px 30px;
+  }
+}
+
+.map_settings_modal_mobile_backButton {
+  position: absolute;
+  top: 37.5px;
+  left: 23.5px;
+  width: 200px;
+  width: 12px;
+  height: 12px;
+  background: none;
+  border: none;
+  transform: rotate(45deg);
+  border-bottom: solid 1px #ffffff;
+  border-left: solid 1px #ffffff;
+}
+
+.map_settings_modal_section {
+  font-family: Helvetica;
+  color: #333333;
+  margin: 5px 0 20px 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  span {
+    font-size: 12px;
+    @include phone {
+      font-size: 18px;
+    }
+  }
+  input[type="option"] {
+    @include phone {
+      width: 98%;
+      height: 42px;
+    }
+  }
+  input[type="number"] {
+    text-align: center;
+    height: 35px;
+    width: 110px;
+    margin-right: 23px;
+    padding-left: 5px;
+    padding-right: 5px;
+    @include phone {
+      width: 150px;
+      margin-right: 10px;
+      height: 42px;
+    }
+  }
+  @include phone {
+    font-size: 18px;
+    margin-bottom: 30px;
+  }
+}
+
+.map_settings_modal_location_label {
+  font-size: 14px;
+  font-family: Helvetica;
+  color: #333333;
+  margin-bottom: 9px;
+  @include phone {
+    font-size: 18px;
+  }
+}
+
+.map_settings_modal_advanced_location_label {
+  font-size: 14px;
+  font-family: Helvetica;
+  color: #333333;
+  margin-bottom: 9px;
+  @include phone {
+    font-size: 18px;
+  }
+}
+.map_settings_modal_zoom_slider_label {
+  font-size: 14px;
+  font-family: Helvetica;
+  color: #333333;
+  margin-bottom: 5px;
+  @include phone {
+    font-size: 18px;
+  }
+}
+.map_settings_modal_advanced_location_input_container {
+  display: flex;
+}
+
+.map_settings_modal_checkbox_section {
+  font-size: 14px;
+  font-family: Helvetica;
+  color: #333333;
+  margin: 0px 0 20px 0;
+  @include phone {
+    font-size: 18px;
+    margin-bottom: 30px;
+  }
+}
+.map_settings_modal_zoom_section {
+  font-size: 14px;
+  font-family: Helvetica;
+  color: #333333;
+  margin: 0px 0 20px 0;
+  @include phone {
+    width: 98%;
+    font-size: 18px;
+    margin-bottom: 30px;
+  }
+}
+.map_settings_modal_dropdown_section {
+  transform: translateY(-50%);
+  font-family: Helvetica;
+  color: #333333;
+  margin: 30px 0 10px 0;
+  @include phone {
+    div{
+      font-size: 18px !important;
+    }
+    margin-bottom: 30px;
+    padding-top: 10px;
+  }
+}
+
+.map_settings_modal_save_button {
+  font-family: Helvetica;
+  width: 80px;
+  display: inline-block;
+  border: none;
+  padding-left: 24px;
+  padding-right: 24px;
+  margin-left: 66.5%;
+  height: 30px;
+  @include phone {
+    padding-right: 0px;
+    padding-bottom: 10px;
+    font-size: 18px;
+  }
+}
+
+.map_settings_modal_save_button:disabled {
+  opacity: 0.5;
+}
+
+.map_settings_modal_drop_down {
+  @include phone {
+    font-size: 20px;
+  }
+}
+
+.textInput_input {
+  padding: 9px 21px 10px 12px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.dropdown_Dropdown-control {
+  @include phone {
+    font-size: 18px;
+  }
+}

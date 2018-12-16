@@ -6,6 +6,7 @@ import { HTML_TYPE } from "wix-rich-content-plugin-html";
 import { LINK_TYPE } from "wix-rich-content-plugin-link";
 import { VIDEO_TYPE } from "wix-rich-content-plugin-video";
 import { GIPHY_TYPE } from "wix-rich-content-plugin-giphy";
+import { MAP_TYPE } from "wix-rich-content-plugin-map";
 import { EXTERNAL_MENTIONS_TYPE } from "wix-rich-content-plugin-mentions";
 import { TOOLBARS, BUTTONS, DISPLAY_MODE } from "wix-rich-content-common";
 
@@ -84,7 +85,17 @@ export default {
     enableCustomUploadOnMobile: true,
   },
   [GIPHY_TYPE]: {
-    giphySdkApiKey: "JfQziSTdnSwDZcD3w8DpUL4LMFu3zBgU"
+    giphySdkApiKey: "JfQziSTdnSwDZcD3w8DpUL4LMFu3zBgU",
+    
+  },
+  [MAP_TYPE]: {
+    googleMapApiKey: "AIzaSyCz2rSCnf0HmeqxKp6rfO4mCb9LCBn9Pck",
+    minZoom: 0,
+    maxZoom: 20,
+    minWidth: 100,
+    maxWidth: 740,
+    minHeight: 100,
+    maxHeight: 1000
   },
   uiSettings,
   getToolbarSettings: ({ pluginButtons, textButtons }) => [
