@@ -46,9 +46,9 @@ const getList = (ordered, mergedStyles, textDirection) =>
           const dataEntry = blockProps.data.length > i ? blockProps.data[i] : {};
           return withTextAlignment(
             <li className={mergedStyles[`${className}List`]} key={blockProps.keys[i]}>
-              <p className={mergedStyles.elementSpacing}>
+              <div className={mergedStyles.elementSpacing}>
                 {child}
-              </p>
+              </div>
             </li>,
             dataEntry, mergedStyles, textDirection);
         })}
@@ -57,14 +57,10 @@ const getList = (ordered, mergedStyles, textDirection) =>
   };
 
 const getBlocks = (mergedStyles, textDirection) => {
-  // Rendering blocks like this along with cleanup results in a single p tag for each paragraph
-  // adding an empty block closes current paragraph and starts a new one
   return {
     unstyled: (children, blockProps) => children.map((child, i) =>
       withTextAlignment(
-        <div className={mergedStyles.text} key={blockProps.keys[i]}>
-          <div>{child}</div>
-        </div>,
+        <p className={mergedStyles.text} key={blockProps.keys[i]}>{child}</p>,
         blockProps.data[i],
         mergedStyles,
         textDirection
