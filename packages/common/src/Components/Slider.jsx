@@ -55,7 +55,7 @@ class Slider extends Component {
         {...ariaProps}
         tabIndex={readOnly ? -1 : 0}
         type={'range'} className={this.styles.slider} data-hook={dataHook} onChange={e => this.onChange(e.target.valueAsNumber)}
-        value={this.state.value} min={min} max={max} onMouseUp={e => onChange(e.target.valueAsNumber)} onKeyUp={e => this.onKeyUp(e)}
+        value={this.state.value} min={min} max={max} onChange={e => onChange(e.target.valueAsNumber)} onMouseUp={e => onChange(e.target.valueAsNumber)} onKeyUp={e => this.onKeyUp(e)}
       />);
   }
 }
