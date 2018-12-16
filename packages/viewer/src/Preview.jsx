@@ -3,11 +3,10 @@ import PropTypes from 'prop-types';
 import redraft from 'redraft';
 import classNames from 'classnames';
 import endsWith from 'lodash/endsWith';
-import { createInlineStyleDecorators, mergeStyles } from 'wix-rich-content-common';
+import { mergeStyles } from 'wix-rich-content-common';
 import getPluginsViewer from './PluginsViewer';
 import { getTextDirection } from './utils/textUtils';
 import List from './List';
-import { getStrategyByStyle } from './decorators/getStrategyByStyle';
 import styles from '../statics/rich-content-viewer.scss';
 
 const withTextAlignment = (element, data, mergedStyles, textDirection) => {
@@ -136,11 +135,6 @@ const Preview = ({ raw, typeMappers, theme, isMobile, decorators, anchorTarget, 
 
   const augmentedRaw = augmentRaw(raw);
 
-  const combinedDecorators = [
-    ...decorators,
-    ...createInlineStyleDecorators(getStrategyByStyle, mergedStyles)
-  ];
-
   const className = classNames(mergedStyles.preview, textDirection === 'rtl' && mergedStyles.rtl);
 
   return (
@@ -153,7 +147,7 @@ const Preview = ({ raw, typeMappers, theme, isMobile, decorators, anchorTarget, 
             inline: getInline(mergedStyles),
             blocks: getBlocks(mergedStyles, textDirection),
             entities: getEntities(typeMap, { theme, isMobile, anchorTarget, relValue, config }),
-            decorators: combinedDecorators
+            decorators,
           },
           options
         )

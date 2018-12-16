@@ -101,6 +101,21 @@ const TestData = {
         data: {}
       },
       {
+        key: '9hjyr',
+        text: 'H2 with inline text',
+        type: 'unstyled',
+        depth: 0,
+        inlineStyleRanges: [
+          {
+            offset: 0,
+            length: 2,
+            style: 'inline-header-two'
+          },
+        ],
+        entityRanges: [],
+        data: {}
+      },
+      {
         key: '3sg5e',
         text: 'H2 underline right',
         type: 'unstyled',

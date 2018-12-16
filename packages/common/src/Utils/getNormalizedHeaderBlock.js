@@ -1,64 +1,68 @@
-import { HEADING } from '../Decorators/inline-styles';
+import isEmpty from 'lodash/isEmpty';
+import includes from 'lodash/includes';
+import values from 'lodash/values';
+import { HEADING } from '../consts';
 
-const blockToInlineHeaderTypeMap = {
-  'header-one': 'inline-header-one',
-  'header-two': 'inline-header-two',
-  'header-three': 'inline-header-three',
+const INLINE_HEADING = {
+  ONE: 'inline-header-one',
+  TWO: 'inline-header-two',
+  THREE: 'inline-header-three',
 };
 
+const inlineToBlockHeaderTypeMap = {
+  [INLINE_HEADING.ONE]: HEADING.ONE,
+  [INLINE_HEADING.TWO]: HEADING.TWO,
+  [INLINE_HEADING.THREE]: HEADING.THREE,
+};
+
+
 const getInlineStyleRanges = block => {
-  if (block.inlineStyleRanges) {
-    const headerRanges = block.inlineStyleRanges.filter(({ style }) => style === HEADING.ONE || style === HEADING.TWO || style === HEADING.THREE);
-    const otherRanges = block.inlineStyleRanges.filter(({ style }) => style !== HEADING.ONE || style !== HEADING.TWO && style !== HEADING.THREE);
+  const { inlineStyleRanges } = block;
+  if (inlineStyleRanges) {
+    const INLINE_HEADINGS = values(INLINE_HEADING);
+    const headerRanges = inlineStyleRanges.filter(({ style }) => includes(INLINE_HEADINGS, style));
+    const otherRanges = inlineStyleRanges.filter(({ style }) => !includes(INLINE_HEADINGS, style));
     return { headerRanges, otherRanges };
   }
 
   return { headerRanges: [], otherRanges: [] };
-
 };
 
-const getCombinedRanges = (wrapRange, innerRanges) => {
-  if (innerRanges.length === 0) {
-    return [wrapRange];
-  }
-
-  const combined = innerRanges.reduce((combinedRanges, range) => {
-    // prepend the wrap range portion if the first inner range offset > 0
-    if (combinedRanges.length === 0 && range.offset > 0) {
-      combinedRanges.push({ ...wrapRange, length: range.offset - 1 });
-    } else if (combinedRanges.length > 0) {
-      const lastCombined = combinedRanges[combinedRanges.length - 1];
-      const lastCombinedEnd = lastCombined.offset + lastCombined.length + 1;
-      // insert the wrap range portion into the gap between last combined range and next inner range
-      if (lastCombinedEnd < range.offset) {
-        combinedRanges.push({ ...wrapRange, offset: lastCombinedEnd, length: range.offset - lastCombinedEnd - 1 });
+const getInlineHeaderBlockType = (blockText, headerRanges) => {
+  let blockType = 'unstyled';
+  if (headerRanges.length === 1) {
+    const { length: headerLength, style: headerStyle } = headerRanges[0];
+    if (headerLength === blockText.length) {
+      blockType = inlineToBlockHeaderTypeMap[headerStyle];
+    }
+  } else {
+    const headerLength = headerRanges.reduce((headerLength, { length }) => headerLength += length, 0); //eslint-disable-line no-param-reassign
+    const containsOnlyHeaders = headerLength === blockText.length;
+    if (containsOnlyHeaders) {
+      if (headerRanges.some(({ style }) => style === INLINE_HEADING.THREE)) {
+        blockType = HEADING.THREE;
+      } else if (headerRanges.some(({ style }) => style === INLINE_HEADING.TWO)) {
+        blockType = HEADING.TWO;
+      } else {
+        blockType = HEADING.ONE;
       }
     }
-    combinedRanges.push(range);
-    return combinedRanges;
-  }, []);
-
-  // append the wrap range portion into the gap between last combined range and wrap range end
-  if (combined.length > 0) {
-    const lastCombined = combined[combined.length - 1];
-    const lastCombinedEnd = lastCombined.offset + lastCombined.length;
-    if (lastCombinedEnd < wrapRange.length) {
-      combined.push({ ...wrapRange, offset: lastCombinedEnd, length: wrapRange.length - lastCombinedEnd });
-    }
   }
-
-  return combined;
+  return blockType;
 };
 
 export const getNormalizedHeaderBlock = block => {
-  const existingInlineRanges = getInlineStyleRanges(block);
-  const inlineStyleRanges = [...existingInlineRanges.otherRanges];
-  const wrapRange = {
-    offset: 0,
-    length: block.text.length,
-    style: blockToInlineHeaderTypeMap[block.type],
-  };
-  inlineStyleRanges.push(...getCombinedRanges(wrapRange, existingInlineRanges.headerRanges));
+  const { headerRanges, otherRanges } = getInlineStyleRanges(block);
+  const inlineStyleRanges = [...otherRanges];
+  if (isEmpty(headerRanges)) {
+    return block;
+  } else {
 
-  return { ...block, type: 'unstyled', inlineStyleRanges };
+    console.log(block.text, block.text.length, length); //eslint-disable-line
+    return {
+      ...block,
+      type: getInlineHeaderBlockType(block.text, headerRanges),
+      inlineStyleRanges,
+    };
+  }
 };
