@@ -64,22 +64,6 @@
   }
 }
 
-.radioItem {
-  label {
-    display: block;
-    padding: 0px 0px 14px;
-  }
-  label:nth-child(3n) {
-    padding-bottom: 2px;
-    @include phone {
-      padding: 0px 0px 16px;
-    }
-  }
-  label:nth-child(4n) {
-    padding: 0px;
-  }
-}
-
 .modal_footer {
   padding: 30px 0px;
 }

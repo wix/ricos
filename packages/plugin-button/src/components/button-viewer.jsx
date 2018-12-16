@@ -10,7 +10,7 @@ class ButtonViewer extends PureComponent {
   }
 
   render() {
-    const { url, style, target, rel, buttonSize, buttonText } = this.props;
+    const { url, style, target, rel, buttonText } = this.props;
     return (
       <a
         className={styles.button_container}
@@ -19,7 +19,7 @@ class ButtonViewer extends PureComponent {
         target={target}
         rel={rel}
       >
-        <div className={styles.button_text} style={buttonSize}>
+        <div className={styles.button_text}>
           {
             buttonText
           }
@@ -34,7 +34,6 @@ ButtonViewer.propTypes = {
   style: PropTypes.object,
   target: PropTypes.string,
   rel: PropTypes.string,
-  buttonSize: PropTypes.object,
   buttonText: PropTypes.string,
   theme: PropTypes.object.isRequired
 };

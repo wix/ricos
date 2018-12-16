@@ -2,7 +2,6 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import {
   SliderWithInput,
-  RadioGroup,
   SettingsSection,
   mergeStyles,
   WixUtils,
@@ -69,20 +68,8 @@ class DesignComponent extends PureComponent {
         borderColor: colors.color_8
       },
     ];
-    this.sizeOptions = [
-      {
-        value: 'L', labelText: 'L'
-      },
-      {
-        value: 'M', labelText: 'M'
-      },
-      {
-        value: 'S', labelText: 'S'
-      },
-    ];
     this.state = {
       borderWidth: designObj.borderWidth,
-      buttonSize: designObj.buttonSize,
       borderRadius: designObj.borderRadius,
       activeButton: designObj.activeButton,
       textColor: designObj.textColor ? designObj.textColor : colors.color_1,
@@ -95,10 +82,6 @@ class DesignComponent extends PureComponent {
   componentDidUpdate = () => {
     this.props.onDesignChange(this.state);
   }
-
-  onRadioButtonsChange = value => {
-    this.setState({ buttonSize: value });
-  };
 
   onBorderWidthChange = value => {
     this.setState({ borderWidth: value });
@@ -136,10 +119,6 @@ class DesignComponent extends PureComponent {
   render() {
     const styles = this.styles;
     const { theme, t, designObj } = this.props;
-    if (WixUtils.isMobile()) {
-      this.sizeOptions.push({ value: 'F', labelText: 'Full width' });
-    }
-
     const buttonSampleList = this.presetStyle.map((style, i) => {
       const active = i === this.state.activeButton;
       return (<ButtonSample
@@ -166,21 +145,6 @@ class DesignComponent extends PureComponent {
             <div className={classNames(styles.button_samples)}>
               {buttonSampleList}
             </div>
-          </div>
-        </SettingsSection>
-        <SettingsSection theme={theme} ariaProps={{ 'aria-label': 'size selection', role: 'region' }}>
-          <div className={styles.row}>
-            <div className={styles.section_header_size}>
-              {t('ButtonModal_Size_Section')}
-            </div>
-            <RadioGroup
-              label={t('ButtonModal_Size_Section')}
-              dataSource={this.sizeOptions}
-              value={this.state.buttonSize}
-              onChange={this.onRadioButtonsChange.bind(this)}
-              theme={theme}
-              className={styles.radioItem}
-            />
           </div>
         </SettingsSection>
         <SettingsSection theme={theme} ariaProps={{ 'aria-label': 'border selection', role: 'region' }}>

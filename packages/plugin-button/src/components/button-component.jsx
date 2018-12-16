@@ -6,20 +6,6 @@ class ButtonComponent extends PureComponent {
 
   constructor(props) {
     super(props);
-    this.sizes = {
-      L: {
-        width: '156px'
-      },
-      M: {
-        width: '118px'
-      },
-      S: {
-        width: '66px'
-      },
-      F: {
-        width: 'calc(100vw - 82px)',
-      }
-    };
     const { componentData: { button } } = this.props;
     this.state = {
       style: button,
@@ -56,9 +42,6 @@ class ButtonComponent extends PureComponent {
       borderColor: button.borderColor ? button.borderColor : colors.color_8
     };
     url = button.url;
-    let buttonSize = {
-      ...this.sizes[button.buttonSize],
-    };
     if (buttonObj) {
       style = {
         ...style,
@@ -69,10 +52,6 @@ class ButtonComponent extends PureComponent {
         borderColor: buttonObj.design.borderColor
       };
       buttonText = buttonObj.data.buttonText;
-      buttonSize = {
-        ...buttonSize,
-        ...this.sizes[buttonObj.design.buttonSize]
-      };
     }
 
     return (
@@ -81,7 +60,6 @@ class ButtonComponent extends PureComponent {
         style={style}
         target={target}
         rel={rel}
-        buttonSize={buttonSize}
         buttonText={buttonText}
       />
     );
