@@ -10,6 +10,11 @@
 
 ## [Unreleased]
 
+### :rocket: New Feature
+
+- `link`
+  - [#212](https://github.com/wix-incubator/rich-content/pull/212) optional auto link
+
 </br>
 
 ## 1.7.5 (Dec 17, 2018)

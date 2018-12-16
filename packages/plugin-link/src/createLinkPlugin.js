@@ -1,8 +1,8 @@
 import createLinkifyPlugin from 'draft-js-linkify-plugin';
-import { createBasePlugin, decorateComponentWithProps } from 'wix-rich-content-common';
+import { createBasePlugin } from 'wix-rich-content-common';
 import { LINK_TYPE } from './types';
-import { Strategy, Component } from './LinkDecorator';
-import DynamicLink from './DynamicLink';
+import { Component } from './LinkDecorator';
+import { linkEntityStrategy } from './strategy';
 import styles from '../statics/link-viewer.scss';
 import createLinkToolbar from './toolbar/createLinkToolbar';
 
@@ -16,23 +16,18 @@ const createLinkPlugin = (config = {}) => {
     ...rest
   } = config;
   const toolbar = createLinkToolbar(config);
-  const linkProps = {
-    className: theme.link,
-    anchorTarget,
-    relValue,
-    settings,
-  };
 
-  const LinkEntityComponent = decorateComponentWithProps(Component, linkProps);
-  const DynamicLinkComponent = decorateComponentWithProps(DynamicLink, linkProps);
+  const decorators = [];
+  if (settings.autoLink !== false) {
+    decorators.push(createLinkifyPlugin({
+      component: Component,
+      target: anchorTarget,
+      rel: relValue,
+      theme: theme || styles
+    }).decorators[0]);
+  }
 
-  const plugin = createLinkifyPlugin({
-    component: DynamicLinkComponent,
-    target: anchorTarget,
-    rel: relValue,
-    theme: theme || styles
-  });
-  plugin.decorators.push({ strategy: Strategy, component: LinkEntityComponent });
+  decorators.push({ strategy: linkEntityStrategy, component: Component });
 
   return createBasePlugin({
     theme,
@@ -42,7 +37,7 @@ const createLinkPlugin = (config = {}) => {
     relValue,
     settings,
     ...rest
-  }, plugin);
+  }, { decorators });
 };
 
 export { createLinkPlugin };
