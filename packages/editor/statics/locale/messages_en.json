@@ -122,6 +122,7 @@
   "ButtonModal_Background_Color":"Background",
   "ButtonModal_Invalid_Link": "Invalid link",
   "ButtonModal_Link_Input_Placeholder": "https://example-link.com/",
+  "ButtonComponent_Error_Overlay": "The button you added does not have a valid url, please enter valid url",
   "TextAlignmentButton_Tooltip" : "Alignment",
   "TextLinkButton_Tooltip" : "Link",
   "BoldButton_Tooltip" : "Bold",

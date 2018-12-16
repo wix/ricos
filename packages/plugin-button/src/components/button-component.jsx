@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import styles from '../../statics/styles/default-styles.scss';
 import ButtonViewer from './button-viewer';
 
 class ButtonComponent extends PureComponent {
@@ -7,6 +8,10 @@ class ButtonComponent extends PureComponent {
   constructor(props) {
     super(props);
     const { componentData: { button } } = this.props;
+    this.errorOverlay = {
+      width: '350px',
+      height: '89px',
+    };
     this.state = {
       style: button,
     };
@@ -14,7 +19,7 @@ class ButtonComponent extends PureComponent {
 
   render() {
     const { colors } = this.props.settings;
-    const { componentData: { button }, buttonObj, anchorTarget, relValue } = this.props;
+    const { componentData: { button }, buttonObj, anchorTarget, relValue, t, theme } = this.props;
     let buttonText = button.buttonText;
     let rel = '';
     let url = '';
@@ -42,6 +47,12 @@ class ButtonComponent extends PureComponent {
       borderColor: button.borderColor ? button.borderColor : colors.color_8
     };
     url = button.url;
+    const errorOverlay = !url && !buttonObj && this.errorOverlay;
+    const errorMessage = !url && !buttonObj && (
+      <div className={styles.errorOverlay}>
+        {t('ButtonComponent_Error_Overlay')}
+      </div>
+    );
     if (buttonObj) {
       style = {
         ...style,
@@ -61,6 +72,10 @@ class ButtonComponent extends PureComponent {
         target={target}
         rel={rel}
         buttonText={buttonText}
+        t={t}
+        theme={theme}
+        errorOverlay={errorOverlay}
+        errorMessage={errorMessage}
       />
     );
   }
@@ -74,6 +89,7 @@ ButtonComponent.propTypes = {
   anchorTarget: PropTypes.string.isRequired,
   relValue: PropTypes.string.isRequired,
   settings: PropTypes.object.isRequired,
+  t: PropTypes.func
 };
 
 export default ButtonComponent;

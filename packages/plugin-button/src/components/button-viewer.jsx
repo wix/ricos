@@ -10,21 +10,26 @@ class ButtonViewer extends PureComponent {
   }
 
   render() {
-    const { url, style, target, rel, buttonText } = this.props;
+    const { url, style, target, rel, buttonText, errorOverlay, errorMessage } = this.props;
     return (
-      <a
-        className={styles.button_container}
-        href={url}
-        style={style}
-        target={target}
-        rel={rel}
-      >
-        <div className={styles.button_text}>
-          {
-            buttonText
-          }
-        </div>
-      </a>
+      <div style={{ ...errorOverlay }}>
+        <a
+          className={styles.button_container}
+          href={url}
+          style={style}
+          target={target}
+          rel={rel}
+        >
+          <div className={styles.button_text}>
+            {
+              buttonText
+            }
+          </div>
+        </a>
+        {
+          errorMessage
+        }
+      </div>
     );
   }
 }
@@ -35,7 +40,10 @@ ButtonViewer.propTypes = {
   target: PropTypes.string,
   rel: PropTypes.string,
   buttonText: PropTypes.string,
-  theme: PropTypes.object.isRequired
+  theme: PropTypes.object.isRequired,
+  errorOverlay: PropTypes.object,
+  errorMessage: PropTypes.object
+
 };
 
 export default ButtonViewer;
