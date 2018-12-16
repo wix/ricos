@@ -5,7 +5,6 @@ import styles from '../../statics/styles/navbar.scss';
 const Navbar = (props) => (
 
   <div className={styles.navbar}>
-    <div className={styles.header} />
     <div className={styles.settingOptions}>
       <button className={styles.button} onClick={props.onCancel} style={{ textAlign: 'left' }}>Cancel</button>
       <div className={styles.button} style={{ textAlign: 'center' }}>**</div>
