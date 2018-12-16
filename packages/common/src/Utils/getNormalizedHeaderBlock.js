@@ -57,8 +57,6 @@ export const getNormalizedHeaderBlock = block => {
   if (isEmpty(headerRanges)) {
     return block;
   } else {
-
-    console.log(block.text, block.text.length, length); //eslint-disable-line
     return {
       ...block,
       type: getInlineHeaderBlockType(block.text, headerRanges),

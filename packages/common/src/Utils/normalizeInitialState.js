@@ -1,5 +1,4 @@
 import { getNormalizedHeaderBlock } from './getNormalizedHeaderBlock';
-import flatten from 'lodash/flatten';
 import mapValues from 'lodash/mapValues';
 import cloneDeep from 'lodash/cloneDeep';
 import isUndefined from 'lodash/isUndefined';
@@ -88,8 +87,8 @@ export default (initialState, config) => {
 
   const { blocks, entityMap } = initialState;
 
-  const state = {
-    blocks: flatten(blocks.map(block => {
+  return {
+    blocks: blocks.map(block => {
       switch (block.type) {
         case 'atomic':
           return { ...block, text: ' ' };
@@ -97,7 +96,7 @@ export default (initialState, config) => {
           return getNormalizedHeaderBlock(block);
         default: return block;
       }
-    })),
+    }),
     entityMap: mapValues(
       entityMap,
       entity => shouldNormalizeEntityConfig(entity, Object.keys(entityTypeMap.configNormalization)) ? {
@@ -111,5 +110,4 @@ export default (initialState, config) => {
       } : entity
     ),
   };
-  return state;
 };

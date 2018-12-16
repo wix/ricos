@@ -9,9 +9,11 @@
 > - :house: [Internal]
 
 ## [Unreleased]
-  
+
 ### :rocket: New Feature
 
+- `common`, `editor` & `viewer`
+  - [#205](https://github.com/wix-incubator/rich-content/pull/205) block headers
 - `link`
   - [#212](https://github.com/wix-incubator/rich-content/pull/212) optional auto link
 
