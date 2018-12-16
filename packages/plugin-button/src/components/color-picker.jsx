@@ -137,17 +137,17 @@ class ColorPicker extends PureComponent {
         active = false;
       }
       return (
-        <button
+        <div
           onClick={this.onPaletteClick.bind(this, color, index)}
           key={color + index}
           style={{ background: backColor }}
-          className={classNames(styles.checkboardBackground)}
+          className={classNames(styles.palette)}
         >
           {
             (active || (isDropperColor && index === 5)) &&
             <PickedIcon className={styles.picked} width="11px" height="11px" />
           }
-        </button>
+        </div>
       );
     });
     return (
@@ -172,17 +172,17 @@ class ColorPicker extends PureComponent {
           <div className={styles.colorBoard}>
             <div className={styles.palettes}>
               {palattes}
-              <button
+              <div
                 onClick={this.onPaletteDropperClick.bind(this)}
                 style={{ background: this.state.dropperBackColor }}
-                className={classNames(styles.checkboardBackground)}
+                className={classNames(styles.palette)}
               >
                 {
                   this.state.isDropperSelected &&
                   <PickedIcon className={styles.picked} width="11px" height="11px" />
                 }
                 <EyeDropperIcon style={{ color: dropperColor }} className={styles.dropper} />
-              </button>
+              </div>
             </div>
             {this.state.picker && flag ?
               <CustomColorPicker color={this.state.color} onChange={this.customColorPickerChange.bind(this)} /> : null

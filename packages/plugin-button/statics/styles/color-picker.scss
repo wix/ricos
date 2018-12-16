@@ -47,20 +47,6 @@
   top: 1px;
 }
 
-.palette {
-  position: relative;
-  width: 36px;
-  height: 36px;
-  border-radius: 28px;
-  display: inline-block;
-  border: solid 1px #ededed;
-  margin-left: 18px;
-  cursor: pointer;
-  @include phone {
-    width: 30px;
-    height: 30px;
-  }
-}
 .dropper {
   position: absolute;
   width: 18px;
@@ -79,7 +65,7 @@
 $color1: #fff;
 $color2: #eeeeee;
 $size: 10px;
-.checkboardBackground {
+.palette {
   background-image: linear-gradient(
       45deg,
       $color1 25%,
