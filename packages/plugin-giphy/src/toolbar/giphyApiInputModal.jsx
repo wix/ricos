@@ -47,13 +47,12 @@ export default class GiphyApiInputModal extends Component {
     const mobileNavbar =
       (
         <div>
-          <div className={styles.giphy_api_input_modal_header} />
-          <div className={styles.giphy_api_input_modal_navbar}>Choose a gif</div>
+          <div className={styles.giphy_api_input_modal_navbar}>Choose a gif {backButton}</div>
         </div>
       );
     return (
       <div>
-        {(WixUtils.isMobile()) ? <div>{mobileNavbar}{backButton}</div> : null}
+        {(WixUtils.isMobile()) ? <div>{mobileNavbar}</div> : null}
         <div className={styles.giphy_api_input_modal_container} data-hook="giphyUploadModal">
           <div className={styles.giphy_api_input_modal_search_textinput_group} >
             <TextInput

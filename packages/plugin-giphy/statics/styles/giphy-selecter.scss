@@ -26,7 +26,7 @@
     left: auto;
     bottom: auto;
     transform: none;
-    height: calc(100vh - 140px);
+    height: calc(100vh - 124px);
     margin-top: 6px;
     padding-right: 0px;
     padding-left: 0px;
@@ -60,7 +60,11 @@
 .giphy_selecter_trending {
   font-family: Helvetica;
   font-size: 10px;
+  font-weight: 300;
   font-style: oblique;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
   color: rgba(0, 0, 0, 0.3);
   width: auto;
   float: left;
