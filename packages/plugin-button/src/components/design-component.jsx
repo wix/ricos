@@ -157,7 +157,7 @@ class DesignComponent extends PureComponent {
                 <SliderWithInput
                   value={parseInt(this.state.borderWidth)}
                   min={0}
-                  max={30}
+                  max={15}
                   label={t('ButtonModal_Width_Input')}
                   onChange={this.onBorderWidthChange.bind(this)}
                   theme={this.styles}
@@ -172,7 +172,7 @@ class DesignComponent extends PureComponent {
                 <SliderWithInput
                   value={parseInt(this.state.borderRadius)}
                   min={0}
-                  max={30}
+                  max={15}
                   label={t('ButtonModal_Radius_Input')}
                   onChange={this.onBorderRadiusChange.bind(this)}
                   theme={this.styles}
