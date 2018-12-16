@@ -3,6 +3,7 @@ import {
   AlignCenterIcon,
   AlignRightIcon,
   AlignJustifyIcon,
+  HEADING,
 } from 'wix-rich-content-common';
 import {
   BoldIcon,
@@ -10,6 +11,9 @@ import {
   UnderlineIcon,
   IndentIcon,
   BlockQuoteIcon,
+  TitleIcon,
+  TitleOneIcon,
+  TitleTwoIcon,
   OrderedListIcon,
   UnorderedListIcon,
 } from '../../Icons';
@@ -39,6 +43,13 @@ export const IndentButton = createTextBlockStyleButton({
   blockTypes: ['indent'],
   Icons: [IndentIcon],
   tooltipTextKey: 'IndentButton_Tooltip',
+});
+
+export const TitleButton = createTextBlockStyleButton({
+  blockTypes: [HEADING.TWO, HEADING.THREE],
+  Icons: [TitleOneIcon, TitleTwoIcon],
+  InactiveIcon: TitleIcon,
+  tooltipTextKey: 'TitleButton_Tooltip',
 });
 
 export const BlockquoteButton = createTextBlockStyleButton({

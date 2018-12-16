@@ -39,3 +39,9 @@ export const DECORATION_MODE = {
   WRAP: 'WRAP',
   APPEND: 'APPEND',
 };
+
+export const HEADING = {
+  ONE: 'header-one',
+  TWO: 'header-two',
+  THREE: 'header-three',
+};

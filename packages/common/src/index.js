@@ -88,7 +88,12 @@ export { sizeClassName, alignmentClassName, textWrapClassName } from './Utils/cl
 export { getSelectionStyles } from './Utils/inlineStyleUtils';
 export { getConfigByFormFactor } from './Utils/getConfigByFormFactor';
 export { mergeToolbarSettings } from './Utils/mergeToolbarSettings';
-export { default as createInlineStyleDecorators } from './Decorators/inline-style-decorators';
 
-export { HEADING } from './Decorators/inline-styles';
-export { COMMANDS, MODIFIERS, TOOLBARS, DISPLAY_MODE, DECORATION_MODE } from './consts';
+export {
+  COMMANDS,
+  MODIFIERS,
+  TOOLBARS,
+  DISPLAY_MODE,
+  DECORATION_MODE,
+  HEADING,
+} from './consts';
