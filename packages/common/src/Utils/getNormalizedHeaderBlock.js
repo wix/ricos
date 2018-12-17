@@ -1,6 +1,7 @@
 import isEmpty from 'lodash/isEmpty';
 import includes from 'lodash/includes';
 import values from 'lodash/values';
+import get from 'lodash/get';
 import { HEADING } from '../consts';
 
 const INLINE_HEADING = {
@@ -8,21 +9,14 @@ const INLINE_HEADING = {
   TWO: 'inline-header-two',
   THREE: 'inline-header-three',
 };
-
-const inlineToBlockHeaderTypeMap = {
-  [INLINE_HEADING.ONE]: HEADING.ONE,
-  [INLINE_HEADING.TWO]: HEADING.TWO,
-  [INLINE_HEADING.THREE]: HEADING.THREE,
-};
+const INLINE_HEADINGS = values(INLINE_HEADING);
 
 const containsHeaderType = (headerRanges, headerType) =>
   headerRanges.some(({ style }) => style === headerType);
 
-
 const getInlineStyleRanges = block => {
   const { inlineStyleRanges } = block;
   if (inlineStyleRanges) {
-    const INLINE_HEADINGS = values(INLINE_HEADING);
     const headerRanges = inlineStyleRanges.filter(({ style }) => includes(INLINE_HEADINGS, style));
     const otherRanges = inlineStyleRanges.filter(({ style }) => !includes(INLINE_HEADINGS, style));
     return { headerRanges, otherRanges };
@@ -31,24 +25,31 @@ const getInlineStyleRanges = block => {
   return { headerRanges: [], otherRanges: [] };
 };
 
+const getHeadersLength = headerRanges => {
+  let previousHeader = {};
+  return headerRanges.reduce((headerLength, { offset, length }) => {
+    let additionalLength = 0;
+    if (offset !== get(previousHeader, 'offset', -1)) {
+      additionalLength = length;
+    } else {
+      additionalLength = Math.abs(previousHeader.length - length);
+    }
+    previousHeader = { offset, length };
+    return headerLength += additionalLength; //eslint-disable-line no-param-reassign
+  }, 0);
+};
+
 const getInlineHeaderBlockType = (blockText, headerRanges) => {
   let blockType = 'unstyled';
-  if (headerRanges.length === 1) {
-    const { length: headerLength, style: headerStyle } = headerRanges[0];
-    if (headerLength === blockText.length) {
-      blockType = inlineToBlockHeaderTypeMap[headerStyle];
-    }
-  } else {
-    const headerLength = headerRanges.reduce((headerLength, { length }) => headerLength += length, 0); //eslint-disable-line no-param-reassign
-    const containsOnlyHeaders = headerLength === blockText.length;
-    if (containsOnlyHeaders) {
-      if (containsHeaderType(headerRanges, INLINE_HEADING.THREE)) {
-        blockType = HEADING.THREE;
-      } else if (containsHeaderType(headerRanges, INLINE_HEADING.TWO)) {
-        blockType = HEADING.TWO;
-      } else {
-        blockType = HEADING.ONE;
-      }
+  const headersLength = getHeadersLength(headerRanges);
+  const containsOnlyHeaders = headersLength === blockText.length;
+  if (containsOnlyHeaders) {
+    if (containsHeaderType(headerRanges, INLINE_HEADING.THREE)) {
+      blockType = HEADING.THREE;
+    } else if (containsHeaderType(headerRanges, INLINE_HEADING.TWO)) {
+      blockType = HEADING.TWO;
+    } else {
+      blockType = HEADING.ONE;
     }
   }
   return blockType;
