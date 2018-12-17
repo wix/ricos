@@ -21,7 +21,7 @@
 - `viewer`
   - [#203](https://github.com/wix-incubator/rich-content/pull/203) add `text` class for text blocks
 - `soundcloud`
-  - [#205](https://github.com/wix-incubator/rich-content/pull/205) replacing insert button icon to a squared one (19*19)
+  - [#206](https://github.com/wix-incubator/rich-content/pull/206) replacing insert button icon to a squared one (19*19)
 
 
 <br/>
