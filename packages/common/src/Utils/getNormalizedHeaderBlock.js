@@ -15,6 +15,9 @@ const inlineToBlockHeaderTypeMap = {
   [INLINE_HEADING.THREE]: HEADING.THREE,
 };
 
+const containsHeaderType = (headerRanges, headerType) =>
+  headerRanges.some(({ style }) => style === headerType);
+
 
 const getInlineStyleRanges = block => {
   const { inlineStyleRanges } = block;
@@ -39,9 +42,9 @@ const getInlineHeaderBlockType = (blockText, headerRanges) => {
     const headerLength = headerRanges.reduce((headerLength, { length }) => headerLength += length, 0); //eslint-disable-line no-param-reassign
     const containsOnlyHeaders = headerLength === blockText.length;
     if (containsOnlyHeaders) {
-      if (headerRanges.some(({ style }) => style === INLINE_HEADING.THREE)) {
+      if (containsHeaderType(headerRanges, INLINE_HEADING.THREE)) {
         blockType = HEADING.THREE;
-      } else if (headerRanges.some(({ style }) => style === INLINE_HEADING.TWO)) {
+      } else if (containsHeaderType(headerRanges, INLINE_HEADING.TWO)) {
         blockType = HEADING.TWO;
       } else {
         blockType = HEADING.ONE;
