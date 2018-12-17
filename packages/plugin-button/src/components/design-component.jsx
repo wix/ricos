@@ -75,7 +75,6 @@ class DesignComponent extends PureComponent {
       textColor: designObj.textColor ? designObj.textColor : colors.color_1,
       borderColor: designObj.borderColor ? designObj.borderColor : colors.color_8,
       backgroundColor: designObj.backgroundColor ? designObj.backgroundColor : colors.color_8,
-      url: designObj.url
     };
   }
 
