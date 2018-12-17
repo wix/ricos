@@ -8,6 +8,8 @@ import { VIDEO_TYPE } from "wix-rich-content-plugin-video";
 import { GIPHY_TYPE } from "wix-rich-content-plugin-giphy";
 import { EXTERNAL_MENTIONS_TYPE } from "wix-rich-content-plugin-mentions";
 import { TOOLBARS, BUTTONS, DISPLAY_MODE } from "wix-rich-content-common";
+export { GALLERY_TYPE } from 'wix-rich-content-plugin-gallery';
+
 
 // import InlineToolbarDecoration from './Components/InlineToolbarDecoration';
 // import StaticToolbarDecoration from './Components/StaticToolbarDecoration';
@@ -67,6 +69,7 @@ export default {
   [CODE_BLOCK_TYPE]: {},
   [DIVIDER_TYPE]: {},
   [EXTERNAL_EMOJI_TYPE]: {},
+  [GALLERY_TYPE]: {},
   [VIDEO_TYPE]: {
     toolbar: {
       hidden: []

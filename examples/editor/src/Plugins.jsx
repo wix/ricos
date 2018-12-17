@@ -8,6 +8,7 @@ import { createExternalMentionsPlugin } from 'wix-rich-content-plugin-mentions';
 import { createCodeBlockPlugin } from 'wix-rich-content-plugin-code-block';
 import { createSoundCloudPlugin } from 'wix-rich-content-plugin-sound-cloud';
 import { createGiphyPlugin } from 'wix-rich-content-plugin-giphy';
+export { createGalleryPlugin } from 'wix-rich-content-plugin-gallery';
 
 import 'wix-rich-content-common/dist/styles.min.css';
 import 'wix-rich-content-editor/dist/styles.min.css';
@@ -22,7 +23,8 @@ import 'wix-rich-content-plugin-video/dist/styles.min.css';
 import 'wix-rich-content-plugin-code-block/dist/styles.min.css';
 import 'wix-rich-content-plugin-sound-cloud/dist/styles.min.css';
 import 'wix-rich-content-plugin-giphy/dist/styles.min.css';
-
+import 'wix-rich-content-plugin-gallery/dist/styles.min.css';
+console.log(createGalleryPlugin)
 const plugins = [
   createVideoPlugin,
   createHtmlPlugin,
@@ -33,7 +35,8 @@ const plugins = [
   createExternalMentionsPlugin,
   createCodeBlockPlugin,
   createSoundCloudPlugin,
-  createGiphyPlugin
+  createGiphyPlugin,
+  createGalleryPlugin
 ];
 
 export default plugins;
