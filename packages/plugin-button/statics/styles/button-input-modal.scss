@@ -54,10 +54,18 @@
   }
 }
 
+.tabs_headers_option {
+  border-bottom: 1px solid #ededed;
+}
+.tabs_headers{
+  border-bottom: none;
+}
+.tabs_headers_option_selected {
+  border-bottom: solid 3px #0261ff;
+}
 .header_icon {
   margin-right: 12px;
 }
-
 .errorMessage {
   color: red;
 }

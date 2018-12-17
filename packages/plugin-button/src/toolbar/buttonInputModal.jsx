@@ -218,7 +218,7 @@ export default class ButtonInputModal extends Component {
               </div>
               <FocusManager>
                 <div className={styles.focus_mhanager}>
-                  <Tabs value={this.state.activeTab} theme={theme} onTabSelected={this.onTabSelected.bind(this)}>
+                  <Tabs value={this.state.activeTab} theme={this.styles} onTabSelected={this.onTabSelected.bind(this)}>
                     <Tab label={settingTabLabel} value={settingsTabValue} theme={this.styles}>
                       <div onMouseEnter={this.handleOnMouseEnterSettings} >
                         {settingsComponent}
