@@ -1,7 +1,6 @@
 import isEmpty from 'lodash/isEmpty';
 import includes from 'lodash/includes';
 import values from 'lodash/values';
-import get from 'lodash/get';
 import { HEADING } from '../consts';
 
 const INLINE_HEADING = {
@@ -10,6 +9,8 @@ const INLINE_HEADING = {
   THREE: 'inline-header-three',
 };
 const INLINE_HEADINGS = values(INLINE_HEADING);
+
+const stripWhitespace = text => text.replace(/\s/g, '');
 
 const containsHeaderType = (headerRanges, headerType) =>
   headerRanges.some(({ style }) => style === headerType);
@@ -25,24 +26,28 @@ const getInlineStyleRanges = block => {
   return { headerRanges: [], otherRanges: [] };
 };
 
-const getHeadersLength = headerRanges => {
-  let previousHeader = {};
-  return headerRanges.reduce((headerLength, { offset, length }) => {
-    let additionalLength = 0;
-    if (offset !== get(previousHeader, 'offset', -1)) {
-      additionalLength = length;
-    } else {
-      additionalLength = Math.abs(previousHeader.length - length);
-    }
-    previousHeader = { offset, length };
-    return headerLength += additionalLength; //eslint-disable-line no-param-reassign
-  }, 0);
+const getHeadersText = (blockText, headerRanges) => {
+  const processedRanges = [];
+  return headerRanges.reduce((chars, { offset, length }) => {
+    let adjustedOffset = offset;
+    let adjustedLength = length;
+    processedRanges.forEach(pr => {
+      if (offset >= pr.offset && offset <= (pr.offset + pr.length)) {
+        adjustedOffset = pr.length;
+        adjustedLength -= offset;
+      }
+    });
+    processedRanges.push({ offset: adjustedOffset, length: adjustedLength });
+    return chars += blockText.substr(adjustedOffset, adjustedLength); //eslint-disable-line no-param-reassign
+  }, '');
 };
 
 const getInlineHeaderBlockType = (blockText, headerRanges) => {
   let blockType = 'unstyled';
-  const headersLength = getHeadersLength(headerRanges);
-  const containsOnlyHeaders = headersLength === blockText.length;
+  const textLength = stripWhitespace(blockText).length;
+  const headersText = getHeadersText(blockText, headerRanges);
+  const headersLength = stripWhitespace(headersText).length;
+  const containsOnlyHeaders = headersLength === textLength;
   if (containsOnlyHeaders) {
     if (containsHeaderType(headerRanges, INLINE_HEADING.THREE)) {
       blockType = HEADING.THREE;
