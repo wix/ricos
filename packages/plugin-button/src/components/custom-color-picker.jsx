@@ -29,7 +29,7 @@ class CustomColorPicker extends React.Component {
   }
   render() {
     return (
-      <div>
+      <div className={styles.container}>
         <div style={this.inlineStyles.saturation}>
           <Saturation style={{ saturation: this.inlineStyles.saturation }} pointer={() => <SaturationPointer />} {...this.props} />
         </div>
