@@ -84,10 +84,12 @@ class DesignComponent extends PureComponent {
 
   onBorderWidthChange = value => {
     this.setState({ borderWidth: value });
+    this.setState({ textFlag: false, borderFlag: false, backgroundFlag: false });
   };
 
   onBorderRadiusChange = value => {
     this.setState({ borderRadius: value });
+    this.setState({ textFlag: false, borderFlag: false, backgroundFlag: false });
   };
 
 
@@ -101,6 +103,7 @@ class DesignComponent extends PureComponent {
       backgroundColor: this.presetStyle[index].background,
       borderColor: this.presetStyle[index].borderColor
     });
+    this.setState({ textFlag: false, borderFlag: false, backgroundFlag: false });
   }
 
   onTextColorChange = color => {
