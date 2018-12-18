@@ -4,6 +4,9 @@
 
 .container{
   padding-top: 15px; 
+  @include phone {
+    padding-top: 3px;
+  }
 }
 .editable_input_label {
   @include phone {

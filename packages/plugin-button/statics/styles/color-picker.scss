@@ -4,7 +4,7 @@
   position: relative;
   padding-bottom: 18px;
   @include phone{
-    padding-bottom: 10px;
+    padding-bottom: 3px;
   }
 }
 
@@ -27,6 +27,10 @@
  height: 36px;
 width: 100%;
 position: relative;
+@include phone {
+  padding-bottom: 6px;
+  height: 30px;
+}
 }
 
 .label {
@@ -92,16 +96,19 @@ $size: 10px;
     width: 30px;
     height: 30px;
     margin-left: 16px;
+    box-sizing: border-box;
   }
 }
 
 .palettes {
   width: 100%;
   text-align: right;
+  height: 36px;
   padding-top: 18px;
   @include phone {
-    padding-top: 31px;
-    padding-bottom: 12px;
+    height: 30px;
+    padding-bottom: 8px;
+    padding-top: 25px;
   }
 }
 
