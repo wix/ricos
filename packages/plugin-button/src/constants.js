@@ -15,5 +15,4 @@ export const DEFAULTS = {
     buttonText: 'Click Me!',
     url: '',
   },
-  isOverlay: true
 };
