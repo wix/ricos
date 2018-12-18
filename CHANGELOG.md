@@ -10,6 +10,11 @@
 
 ## [Unreleased]
 
+### :house: Internal
+
+- `common`
+  - [#213](https://github.com/wix-incubator/rich-content/pull/213) upgrade node version (8 -> 10)
+  
 ### :rocket: New Feature
 
 - `link`
