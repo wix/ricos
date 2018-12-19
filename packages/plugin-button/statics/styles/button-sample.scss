@@ -15,6 +15,9 @@
   display: inline-block;
   margin-right: 23px;
   margin-bottom: 24px;
+  @include phone {
+    margin-bottom: 0px;
+  }
 }
 
 .button_sample_container:nth-child(3n) {
