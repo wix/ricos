@@ -75,6 +75,7 @@ class DesignComponent extends PureComponent {
       textColor: designObj.textColor ? designObj.textColor : colors.color_1,
       borderColor: designObj.borderColor ? designObj.borderColor : colors.color_8,
       backgroundColor: designObj.backgroundColor ? designObj.backgroundColor : colors.color_8,
+      openedColorPicker: -1
     };
   }
 
@@ -84,12 +85,10 @@ class DesignComponent extends PureComponent {
 
   onBorderWidthChange = value => {
     this.setState({ borderWidth: value });
-    this.setState({ textFlag: false, borderFlag: false, backgroundFlag: false });
   };
 
   onBorderRadiusChange = value => {
     this.setState({ borderRadius: value });
-    this.setState({ textFlag: false, borderFlag: false, backgroundFlag: false });
   };
 
 
@@ -103,7 +102,6 @@ class DesignComponent extends PureComponent {
       backgroundColor: this.presetStyle[index].background,
       borderColor: this.presetStyle[index].borderColor
     });
-    this.setState({ textFlag: false, borderFlag: false, backgroundFlag: false });
   }
 
   onTextColorChange = color => {
@@ -118,6 +116,14 @@ class DesignComponent extends PureComponent {
     this.setState({ backgroundColor: color });
   }
 
+  onColorPickerClicked = (index) => {
+    if(this.state.openedColorPicker === index){
+      this.setState({openedColorPicker: -1});
+    }
+    else {
+      this.setState({openedColorPicker: index});
+    }
+  }
   render() {
     const styles = this.styles;
     const { theme, t, designObj } = this.props;
@@ -194,20 +200,22 @@ class DesignComponent extends PureComponent {
             <ColorPicker
               {...this.props}
               onChange={this.onTextColorChange.bind(this)}
-              onClick={() => this.setState({ textFlag: true, borderFlag: false, backgroundFlag: false })}
+              onClick={(e) => this.onColorPickerClicked(e)}
               color={designObj.textColor}
               theme={theme}
-              flag={this.state.textFlag}
+              flag={this.state.openedColorPicker === 0}
+              index={0}
             >
               {t('ButtonModal_Text_Color')}
             </ColorPicker>
             <ColorPicker
               {...this.props}
               onChange={this.onBorderColorChange.bind(this)}
-              onClick={() => this.setState({ textFlag: false, borderFlag: true, backgroundFlag: false })}
+              onClick={(e) => this.onColorPickerClicked(e)}
               color={designObj.borderColor}
               theme={theme}
-              flag={this.state.borderFlag}
+              flag={this.state.openedColorPicker === 1}
+              index={1}
             >
               {t('ButtonModal_Border_Color')}
             </ColorPicker>
@@ -216,8 +224,9 @@ class DesignComponent extends PureComponent {
               color={designObj.backgroundColor}
               theme={theme}
               onChange={this.onBackgroundColorChange.bind(this)}
-              onClick={() => this.setState({ textFlag: false, borderFlag: false, backgroundFlag: true })}
-              flag={this.state.backgroundFlag}
+              onClick={(e) => this.onColorPickerClicked(e)}
+              flag={this.state.openedColorPicker === 2}
+              index={2}
             >
               {t('ButtonModal_Background_Color')}
             </ColorPicker>

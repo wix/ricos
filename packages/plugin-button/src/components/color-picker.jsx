@@ -50,7 +50,7 @@ class ColorPicker extends PureComponent {
   }
 
   onPickerClick = () => {
-    this.props.onClick();
+    this.props.onClick(this.props.index);
     this.setState({ pickerClicked: !this.state.pickerClicked });
   };
 
