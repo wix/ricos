@@ -43,6 +43,7 @@
 }
 .checkbox {
   margin-bottom: 16px;
+  outline: none;
   @include phone {
     margin-bottom: 15px;
   }
