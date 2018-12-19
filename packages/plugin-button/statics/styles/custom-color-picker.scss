@@ -1,16 +1,30 @@
 @import "~wix-rich-content-common/dist/statics/styles/mixins";
 @import "~wix-rich-content-common/dist/statics/styles/palette";
 
-
-.container{
-  padding-top: 15px; 
+.container {
+  padding-top: 15px;
   @include phone {
     padding-top: 3px;
   }
 }
-.editable_input_label {
+.editable_input_container {
+  padding-top: 10px;
   @include phone {
-    padding-top: 13px;
+    padding-top: 3px;
     padding-bottom: 7px;
   }
+}
+
+.input_label {
+  font-size: 14px;
+  color: #333;
+  width: auto;
+  margin-right: 5px;
+  display: inline-block;
+}
+.input {
+  font-size: 14px;
+  color: #333333;
+  width: 80px;
+  display: inline-block;
 }

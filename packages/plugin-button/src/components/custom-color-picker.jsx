@@ -28,6 +28,7 @@ class CustomColorPicker extends React.Component {
     };
   }
   render() {
+    const { t } = this.props;
     return (
       <div className={styles.container}>
         <div style={this.inlineStyles.saturation}>
@@ -36,12 +37,17 @@ class CustomColorPicker extends React.Component {
         <div style={this.inlineStyles.hue}>
           <Hue style={{ hue: this.inlineStyles.hue }} {...this.props} pointer={() => <HuePointer />} />
         </div>
-        <div className={styles.editable_input_label}>
-          <EditableInput
-            style={{ input: this.inlineStyles.input }}
-            value={'Hex Number ' + this.props.color}
-            {...this.props}
-          />
+        <div className={styles.editable_input_container}>
+          <div className={styles.input_label}>
+            {t('ButtonModal_Color_Input_Label')}
+          </div>
+          <div className={styles.input}>
+            <EditableInput
+              style={{ input: this.inlineStyles.input }}
+              value={this.props.color}
+              {...this.props}
+            />
+          </div>
         </div>
       </div>
     );

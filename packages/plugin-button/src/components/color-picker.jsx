@@ -185,7 +185,7 @@ class ColorPicker extends PureComponent {
               </div>
             </div>
             {this.state.picker && flag ?
-              <CustomColorPicker color={this.state.color} onChange={this.customColorPickerChange.bind(this)} /> : null
+              <CustomColorPicker color={this.state.color} onChange={this.customColorPickerChange.bind(this)} t={this.props.t} /> : null
             }
 
           </div> : null
