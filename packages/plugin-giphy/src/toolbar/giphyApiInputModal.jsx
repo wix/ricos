@@ -47,7 +47,7 @@ export default class GiphyApiInputModal extends Component {
     const mobileNavbar =
       (
         <div>
-          <div className={styles.giphy_api_input_modal_navbar}>Choose a gif {backButton}</div>
+          <div className={styles.giphy_api_input_modal_navbar}>{t('GiphyUploadModal_mobileNavbar_Title')} {backButton}</div>
         </div>
       );
     return (
