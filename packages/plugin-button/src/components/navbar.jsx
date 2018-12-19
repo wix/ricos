@@ -7,7 +7,6 @@ const Navbar = (props) => (
   <div className={styles.navbar}>
     <div className={styles.settingOptions}>
       <button className={styles.button} onClick={props.onCancel} style={{ textAlign: 'left' }}>Cancel</button>
-      <div className={styles.button} style={{ textAlign: 'center' }}>**</div>
       <button className={styles.button} onClick={props.onConfirm} style={{ textAlign: 'right' }}>Update</button>
     </div>
   </div>
