@@ -15,12 +15,13 @@ class ButtonComponent extends PureComponent {
     this.state = {
       style: button,
     };
+    this.buttonName='Click Me!';
   }
 
   render() {
     const { colors } = this.props.settings;
     const { componentData: { button }, buttonObj, anchorTarget, relValue, t, theme } = this.props;
-    let buttonText = button.buttonText;
+    let buttonText = button.buttonText || this.buttonName;
     let rel = '';
     let url = '';
     let style = {
