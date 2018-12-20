@@ -2,9 +2,28 @@
 @import "~wix-rich-content-common/dist/statics/styles/palette";
 
 .container {
+  input[type="text"]::placeholder {
+    font-size: 14px;
+    color: #333333;
+  }
   @include phone {
     padding: 7px 20px;
     padding-bottom: 4px;
+    input[type="text"] {
+      border: none;
+      border-bottom: solid 1px rgba(51, 51, 51, 0.2);
+      padding-left: 0px;
+    }
+    input[type="range"] {
+      border-radius: 3px;
+    }
+  }
+}
+
+.design_component_container {
+  @include phone {
+    padding: 7px 20px;
+    padding-bottom: 0px;
     input[type="text"] {
       border: none;
       border-bottom: solid 1px rgba(51, 51, 51, 0.2);
@@ -28,7 +47,7 @@
   height: calc(100vh - 152px);
   overflow-y: scroll;
   @include phone {
-    height: calc(100vh - 176px);
+    height: calc(100vh - 152px);
   }
 }
 
@@ -99,7 +118,7 @@
   height: calc(100vh - 232px);
   overflow: hidden;
   box-sizing: border-box;
-  padding: 18px 30px 30px;
+  padding: 18px 30px 0px;
   padding-right: 0px;
 }
 
