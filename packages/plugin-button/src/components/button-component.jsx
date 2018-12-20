@@ -63,7 +63,7 @@ class ButtonComponent extends PureComponent {
         background: buttonObj.design.backgroundColor,
         borderColor: buttonObj.design.borderColor
       };
-      buttonText = buttonObj.data.buttonText;
+      buttonText = buttonObj.data.buttonText || this.buttonName;
     }
 
     return (
