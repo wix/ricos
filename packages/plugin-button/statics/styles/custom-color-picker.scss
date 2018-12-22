@@ -22,9 +22,15 @@
   margin-right: 5px;
   display: inline-block;
 }
-.input {
+.input_container {
   font-size: 14px;
   color: #333333;
-  width: 80px;
+  width: 64px;
   display: inline-block;
+  input {
+    border: none;
+  }
+  input:focus {
+    border-bottom: 1px #0261ff solid;
+  }
 }

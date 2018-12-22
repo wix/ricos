@@ -121,7 +121,7 @@
   width: 18px;
   height: auto;
   float: right;
-  padding-top: 5px;
+  padding-top: 1px;
 }
 
 .sliderWithInput_content {
@@ -137,7 +137,12 @@ input[type="range"] {
 input[type="range"]:focus {
   outline: none;
 }
-
+.slider_with_input {
+  input[type="number"]:focus {
+    border-bottom: 1px #0261ff solid;
+    border-radius: 0px;
+  }
+}
 // FireFox
 input[type="range"]::-moz-range-progress {
   background-color: #b5d1ff;
@@ -238,8 +243,9 @@ input[type="range"]:focus::-ms-fill-upper {
 input[type="number"] {
   border: none;
   margin-left: 10px;
-  padding: 0px;
+  padding-top: 4px;
   flex: 0px;
+  height: auto;
   text-align: right;
 }
 input[type="number"]::-webkit-inner-spin-button,

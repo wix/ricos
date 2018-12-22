@@ -21,9 +21,9 @@ class CustomColorPicker extends React.Component {
       input: {
         position: 'relative',
         width: '100%',
-        border: 'none',
         paddingTop: '13px',
         fontSize: '14px',
+        color: '#333333'
       },
     };
   }
@@ -41,7 +41,7 @@ class CustomColorPicker extends React.Component {
           <div className={styles.input_label}>
             {t('ButtonModal_Color_Input_Label')}
           </div>
-          <div className={styles.input}>
+          <div className={styles.input_container}>
             <EditableInput
               style={{ input: this.inlineStyles.input }}
               value={this.props.color}
