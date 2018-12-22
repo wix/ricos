@@ -10,9 +10,9 @@ class ButtonViewer extends PureComponent {
   }
 
   render() {
-    const { url, style, target, rel, buttonText, errorOverlay, errorMessage } = this.props;
+    const { url, style, target, rel, buttonText, errorMessage } = this.props;
     return (
-      <div style={{ ...errorOverlay }}>
+      <div>
         <a
           className={styles.button_container}
           href={url}
@@ -25,10 +25,8 @@ class ButtonViewer extends PureComponent {
               buttonText
             }
           </div>
+          {errorMessage}
         </a>
-        {
-          errorMessage
-        }
       </div>
     );
   }

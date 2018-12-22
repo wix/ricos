@@ -12,7 +12,7 @@ export const DEFAULTS = {
     activeButton: 0,
     borderRadius: 0,
     borderWidth: 0,
-    buttonText: 'Click Me!',
+    buttonText: '',
     url: '',
   },
 };

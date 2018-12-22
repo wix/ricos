@@ -1,21 +1,19 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import { ErrorIcon } from 'wix-rich-content-common';
 import styles from '../../statics/styles/default-styles.scss';
 import ButtonViewer from './button-viewer';
+
 
 class ButtonComponent extends PureComponent {
 
   constructor(props) {
     super(props);
     const { componentData: { button } } = this.props;
-    this.errorOverlay = {
-      width: '350px',
-      height: '89px',
-    };
     this.state = {
       style: button,
     };
-    this.buttonName='Click Me!';
+    this.buttonName = 'Click Me!';
   }
 
   render() {
@@ -48,12 +46,13 @@ class ButtonComponent extends PureComponent {
       borderColor: button.borderColor ? button.borderColor : colors.color_8
     };
     url = button.url;
-    const errorOverlay = !url && !buttonObj && this.errorOverlay;
-    const errorMessage = !url && !buttonObj && (
-      <div className={styles.errorOverlay}>
-        {t('ButtonComponent_Error_Overlay')}
-      </div>
+    const errorMessage = !url && t && !buttonObj && (
+      <ErrorIcon width="18px" height="18px" className={styles.errorOverlay} />
     );
+    style = {
+      ...style,
+      color: (!url && t && !buttonObj) ? '#5D9AFF' : '#FFFFFF'
+    };
     if (buttonObj) {
       style = {
         ...style,
@@ -75,7 +74,6 @@ class ButtonComponent extends PureComponent {
         buttonText={buttonText}
         t={t}
         theme={theme}
-        errorOverlay={errorOverlay}
         errorMessage={errorMessage}
       />
     );
