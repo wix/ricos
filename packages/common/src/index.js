@@ -95,5 +95,5 @@ export {
   TOOLBARS,
   DISPLAY_MODE,
   DECORATION_MODE,
-  HEADING,
+  HEADER_BLOCK,
 } from './consts';

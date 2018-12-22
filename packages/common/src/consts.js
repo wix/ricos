@@ -40,7 +40,7 @@ export const DECORATION_MODE = {
   APPEND: 'APPEND',
 };
 
-export const HEADING = {
+export const HEADER_BLOCK = {
   ONE: 'header-one',
   TWO: 'header-two',
   THREE: 'header-three',

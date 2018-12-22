@@ -3,7 +3,7 @@ import {
   AlignCenterIcon,
   AlignRightIcon,
   AlignJustifyIcon,
-  HEADING,
+  HEADER_BLOCK,
 } from 'wix-rich-content-common';
 import {
   BoldIcon,
@@ -46,7 +46,7 @@ export const IndentButton = createTextBlockStyleButton({
 });
 
 export const TitleButton = createTextBlockStyleButton({
-  blockTypes: [HEADING.TWO, HEADING.THREE],
+  blockTypes: [HEADER_BLOCK.TWO, HEADER_BLOCK.THREE],
   Icons: [TitleOneIcon, TitleTwoIcon],
   InactiveIcon: TitleIcon,
   tooltipTextKey: 'TitleButton_Tooltip',
