@@ -37,7 +37,7 @@
     "wix-rich-content-plugin-giphy": "file:../../packages/plugin-giphy"
   },
   "scripts": {
-    "bootstrap": "yarn && node ../../scripts/linkExample editor",
+    "postinstall": "node ../../scripts/linkExample editor",
     "clean": "rm -rf dist/",
     "start": "webpack-serve ./config/webpack.dev.js",
     "test": "echo 'There are no tests configured for this project!' && exit 0",

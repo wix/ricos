@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactPlayer from 'react-player';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { mergeStyles, validate } from 'wix-rich-content-common';
+import { mergeStyles, validate, matchSoundCloudUrl } from 'wix-rich-content-common';
 import isEqual from 'lodash/isEqual';
 import schema from '../statics/data-schema.json';
 import styles from '../statics/styles/sound-cloud-viewer.scss';
@@ -25,7 +25,7 @@ class SoundCloudViewer extends Component {
     return (
       <ReactPlayer
         className={classNames(this.styles.soundCloud_player)}
-        url={componentData.src}
+        url={matchSoundCloudUrl(componentData.src)}
         {...rest}
       />
     );

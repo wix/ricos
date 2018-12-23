@@ -51,10 +51,19 @@ RichContentViewer.propTypes = {
   helpers: PropTypes.object,
   platform: PropTypes.string,
   typeMappers: PropTypes.arrayOf(PropTypes.func),
-  decorators: PropTypes.arrayOf(PropTypes.shape({
-    component: PropTypes.func.isRequired,
-    strategy: PropTypes.func.isRequired,
-  })),
+  decorators: PropTypes.arrayOf(
+    PropTypes.oneOfType([
+      PropTypes.shape({
+        getDecorations: PropTypes.func.isRequired,
+        getComponentForKey: PropTypes.func.isRequired,
+        getPropsForKey: PropTypes.func.isRequired,
+      }),
+      PropTypes.shape({
+        component: PropTypes.func.isRequired,
+        strategy: PropTypes.func.isRequired,
+      })
+    ])
+  ),
   theme: PropTypes.object,
   anchorTarget: PropTypes.string,
   relValue: PropTypes.string,

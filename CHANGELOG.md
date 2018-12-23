@@ -10,11 +10,30 @@
 
 ## [Unreleased]
 
+### :rocket: New Feature
+
+- `link`
+  - [#212](https://github.com/wix-incubator/rich-content/pull/212) optional auto link
+
+</br>
+
+## 1.7.5 (Dec 17, 2018)
+
 ### :bug: Bug Fix
 
+- `viewer`
+  - [#203](https://github.com/wix-incubator/rich-content/pull/203) add `text` class for text blocks
 - `giphy`
   - [#192](https://github.com/wix-incubator/rich-content/pull/192) removing container styles of giphy to keep original width to height ratio
+- `video`
+  - [#194](https://github.com/wix-incubator/rich-content/pull/194) handle input selection focus and removed border radius on iphone
+- `soundcloud`
+  - [#195](https://github.com/wix-incubator/rich-content/pull/195) handle input selection focus on iphone and source url optimisations
+  - [#206](https://github.com/wix-incubator/rich-content/pull/206) replacing insert button icon to a squared one (19*19)
+- `mentions`
+  - [#204](https://github.com/wix-incubator/rich-content/pull/204) viewer
   
+
 <br/>
 
 ## 1.7.4 (Nov 15, 2018)
