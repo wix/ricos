@@ -44,6 +44,10 @@ export default class ButtonInputModal extends Component {
       isHover: false,
       activeTab: settingsTabValue
     };
+
+    this.setScrollbarRef = element => {
+      this.scrollbarRef = element;
+    };
   }
 
   componentDidMount = () => {
@@ -145,12 +149,24 @@ export default class ButtonInputModal extends Component {
     }
   }
 
+  handleColorPickerOpened = index => {
+    if (WixUtils.isMobile()) {
+      this.scrollbarRef.scrollTo({
+        top: this.scrollbarRef.scrollTop + ((index + 1) * 300),
+        left: 0,
+        behavior: 'smooth'
+      });
+    } else {
+      this.scrollbarRef.scrollToBottom();
+    }
+  }
+
   render() {
     const { theme, t, uiSettings, doneLabel, cancelLabel } = this.props;
     const { styles } = this;
     const scrollContainerHeight = {
-      height: 'calc(100vh - ' + (196 + (2 * this.state.design.borderWidth)) + 'px)'
-    }
+      height: 'calc(100vh - ' + (143 + (2 * this.state.design.borderWidth)) + 'px)'
+    };
     const settingTabLabel = (
       <div className={styles.settingTab}>
         <div className={styles.tabTitle}>
@@ -184,6 +200,7 @@ export default class ButtonInputModal extends Component {
         onDesignChange={this.onDesignChanged.bind(this)}
         designObj={this.state.design}
         onKeyPress={this.handleKeyPress}
+        onColorPickerOpend={this.handleColorPickerOpened.bind(this)}
       />);
     let mobileView = null;
     if (WixUtils.isMobile()) {
@@ -191,13 +208,13 @@ export default class ButtonInputModal extends Component {
         <div>
           <Navbar onConfirm={this.onConfirm} onCancel={this.onCloseRequested} />
           <PreviewComponent buttonObj={this.state} {...this.props} />
-          <div className={styles.scroll} style={scrollContainerHeight}>
+          <div className={styles.scroll} style={scrollContainerHeight} ref={this.setScrollbarRef}>
             <div className={styles.container} data-hook="ButtonInputModal">
               <div className={styles.header_text}>{t('ButtonModal_Settings_Tab')}</div>
               {settingsComponent}
             </div>
             <div className={styles.separator} />
-            <div className={styles.container} data-hook="ButtonInputModal">
+            <div className={styles.design_component_container} data-hook="ButtonInputModal">
               <div className={styles.header_text}>{t('ButtonModal_Design_Tab')}</div>
               {designComponent}
             </div>
@@ -207,9 +224,10 @@ export default class ButtonInputModal extends Component {
     }
     return (
       <div>
-        {mobileView}
-        <div className={styles.container} data-hook="ButtonInputModal">
-          {!mobileView ?
+
+        {WixUtils.isMobile() ?
+          mobileView :
+          <div className={styles.container} data-hook="ButtonInputModal">
             <div>
               <div role="heading" aria-labelledby="button_modal_hdr" className={styles.header}>
                 <div className={styles.header_text}>
@@ -226,6 +244,7 @@ export default class ButtonInputModal extends Component {
                     </Tab>
                     <Tab label={t('ButtonModal_Design_Tab')} value={designTabValue} theme={this.styles}>
                       <Scrollbars
+                        ref={this.setScrollbarRef}
                         renderThumbVertical={() => this.state.isHover ? <div className={styles.scrollbar_thumb} /> : <div />}
                         className={styles.customize_scrollbar_container}
                         onMouseEnter={this.handleOnMouseEnterDesign}
@@ -237,9 +256,7 @@ export default class ButtonInputModal extends Component {
                   </Tabs>
                 </div>
               </FocusManager>
-            </div> : null
-          }
-          {!WixUtils.isMobile() &&
+            </div>
             <SettingsPanelFooter
               className={styles.modal_footer}
               save={() => this.onConfirm()}
@@ -249,8 +266,8 @@ export default class ButtonInputModal extends Component {
               theme={theme}
               t={t}
             />
-          }
-        </div>
+          </div>
+        }
       </div>
     );
   }
