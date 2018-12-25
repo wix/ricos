@@ -46,9 +46,9 @@ const getList = (ordered, mergedStyles, textDirection) =>
           const dataEntry = blockProps.data.length > i ? blockProps.data[i] : {};
           return withTextAlignment(
             <li className={mergedStyles[`${className}List`]} key={blockProps.keys[i]}>
-              <div className={mergedStyles.elementSpacing}>
+              <p className={mergedStyles.elementSpacing}>
                 {child}
-              </div>
+              </p>
             </li>,
             dataEntry, mergedStyles, textDirection);
         })}
