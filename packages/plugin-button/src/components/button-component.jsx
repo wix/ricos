@@ -18,7 +18,7 @@ class ButtonComponent extends PureComponent {
 
   render() {
     const { colors } = this.props.settings;
-    const { componentData: { button }, buttonObj, anchorTarget, relValue, t, theme } = this.props;
+    const { componentData: { button }, buttonObj, anchorTarget, relValue, t, theme, blockProps } = this.props;
     let buttonText = button.buttonText || this.buttonName;
     let rel = '';
     let url = '';
@@ -46,12 +46,15 @@ class ButtonComponent extends PureComponent {
       borderColor: button.borderColor ? button.borderColor : colors.color_8
     };
     url = button.url;
-    const errorMessage = !url && t && !buttonObj && (
+    const errorMessage = (blockProps && !blockProps.isFocused && !url) && (
       <ErrorIcon width="18px" height="18px" className={styles.errorOverlay} />
     );
+    const textColor = (blockProps && !blockProps.isFocused && !url) && {
+      color: '#5D9AFF'
+    }
     style = {
       ...style,
-      color: (!url && t && !buttonObj) ? '#5D9AFF' : '#FFFFFF'
+      ...textColor
     };
     if (buttonObj) {
       style = {
