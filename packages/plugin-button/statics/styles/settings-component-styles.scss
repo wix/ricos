@@ -64,6 +64,9 @@
 .section_content {
   padding-right: 30px;
   padding-top: 3px;
+  input[type="text"] {
+    border-radius: 0px;
+  }
   @include phone {
     padding-right: 0px;
   }
