@@ -15,7 +15,12 @@
 - `link`
   - [#212](https://github.com/wix-incubator/rich-content/pull/212) optional auto link
 
-</br>
+### :bug: Bug Fix
+
+- `viewer`
+  - [#214](https://github.com/wix-incubator/rich-content/pull/214) soft new line at end of block
+
+<br/>
 
 ## 1.7.5 (Dec 17, 2018)
 

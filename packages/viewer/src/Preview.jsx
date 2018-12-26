@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import redraft from 'redraft';
 import classNames from 'classnames';
+import endsWith from 'lodash/endsWith';
 import { createInlineStyleDecorators, mergeStyles } from 'wix-rich-content-common';
 import getPluginsViewer from './PluginsViewer';
 import { getTextDirection } from './utils/textUtils';
@@ -16,8 +17,10 @@ const withTextAlignment = (element, data, mergedStyles, textDirection) => {
   const elementProps = {
     ...element.props,
     className: classNames(
-      { [element.props.className]: !!element.props.className,
-        [mergedStyles.rtl]: appliedTextDirection === 'rtl' },
+      {
+        [element.props.className]: !!element.props.className,
+        [mergedStyles.rtl]: appliedTextDirection === 'rtl'
+      },
       mergedStyles[alignmentClass])
   };
   return React.cloneElement(element, elementProps, element.props.children);
@@ -114,13 +117,15 @@ const augmentRaw = raw => {
   const blocks = raw.blocks || [];
   blocks
     .filter(({ type }) => type !== 'atomic')
-    .forEach(({ text, data }) => {
-      const direction = getTextDirection(text);
+    .forEach(block => {
+      const direction = getTextDirection(block.text);
       if (direction === 'rtl') {
-        data.textDirection = direction;
+        block.data.textDirection = direction;
+      }
+      if (endsWith(block.text, '\n')) {
+        block.text += '\n';
       }
     });
-
   return raw;
 };
 
@@ -142,12 +147,17 @@ const Preview = ({ raw, typeMappers, theme, isMobile, decorators, anchorTarget, 
     <div className={className}>
       {isEmpty && <div>There is nothing to render...</div>}
       {!isEmpty &&
-        redraft(augmentedRaw, {
-          inline: getInline(mergedStyles),
-          blocks: getBlocks(mergedStyles, textDirection),
-          entities: getEntities(typeMap, { theme, isMobile, anchorTarget, relValue, config }),
-          decorators: combinedDecorators },
-        options)}
+        redraft(
+          augmentedRaw,
+          {
+            inline: getInline(mergedStyles),
+            blocks: getBlocks(mergedStyles, textDirection),
+            entities: getEntities(typeMap, { theme, isMobile, anchorTarget, relValue, config }),
+            decorators: combinedDecorators
+          },
+          options
+        )
+      }
     </div>
   );
 };
