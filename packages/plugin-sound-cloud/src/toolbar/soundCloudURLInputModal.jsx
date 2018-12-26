@@ -56,6 +56,12 @@ export default class SoundCloudURLInputModal extends Component {
     }
   };
 
+  //This function needed to handle onFocus select for iphone devices
+  componentDidMount() {
+    this.input.focus();
+    this.input.setSelectionRange(0, this.input.value.length);
+  }
+
   render() {
     const { url, submitted } = this.state;
     const { doneLabel, cancelLabel, t } = this.props;

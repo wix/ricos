@@ -6,6 +6,7 @@ import dividerTheme from './divider.theme.scss';
 import htmlTheme from './html.theme.scss';
 import imageTheme from './image.theme.scss';
 import videoTheme from './video.theme.scss';
+import mentionsTheme from './mentions.theme.scss';
 
 import commonTheme from './global.theme.scss';
 import loaderTheme from './loader.theme.scss';
@@ -27,6 +28,7 @@ const theme = {
   ...htmlTheme,
   ...imageTheme,
   ...videoTheme,
+  ...mentionsTheme,
 
   // common
   ...commonTheme,

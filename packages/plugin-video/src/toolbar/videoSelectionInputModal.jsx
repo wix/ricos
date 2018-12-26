@@ -63,6 +63,12 @@ export default class VideoSelectionInputModal extends Component {
     }
   };
 
+  //These two function needed to handle onFocus select for iphone devices
+  componentDidMount() {
+    this.input.focus();
+    this.input.setSelectionRange(0, this.input.value.length);
+  }
+
   render() {
     const { url, submitted, errorMsg } = this.state;
     const { t, handleFileSelection, enableCustomUploadOnMobile } = this.props;

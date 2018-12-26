@@ -7,7 +7,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack-dev-server",
-    "bootstrap": "npm install && npm run link",
+    "postinstall": "npm run link",
     "link": "npm link wix-rich-content-editor"
   },
   "author": "arturc@wix.com",
