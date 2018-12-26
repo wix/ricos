@@ -9,6 +9,7 @@ const tabPropTypes = {
   value: PropTypes.string.isRequired,
   className: PropTypes.string,
   children: PropTypes.node.isRequired,
+  onTabSelected: PropTypes.func
 };
 
 export class Tab extends Component {
@@ -69,9 +70,9 @@ export class Tabs extends Component {
                 data-hook={`${value}_Tab`} aria-controls={`${value}_panel`} aria-label={label} aria-selected={isSelected}
                 onClick={() => {
                   this.setState({ activeTab: value });
-                  if(this.props.onTabSelected){
+                  if (this.props.onTabSelected) {
                     this.props.onTabSelected(value);
-                  } 
+                  }
                   this.renderTabs();
                 }}
               >

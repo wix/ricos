@@ -22,8 +22,8 @@ class TextInput extends React.Component {
         {error && (showTooltip ?
           <Tooltip shouldRebuildOnUpdate={() => !!error} content={error} theme={theme} moveBy={{ y: 0 }} type={'error'}>
             <ErrorIcon className={styles.textInput_errorIcon} />
-          </Tooltip>
-          : <ErrorIcon className={styles.textInput_errorIcon} />)
+          </Tooltip> :
+          <ErrorIcon className={styles.textInput_errorIcon} />)
         }
       </div>
     );
@@ -34,6 +34,7 @@ TextInput.propTypes = {
   inputRef: PropTypes.func,
   theme: PropTypes.object.isRequired,
   error: PropTypes.string,
+  showTooltip: PropTypes.bool
 };
 
 export default TextInput;
