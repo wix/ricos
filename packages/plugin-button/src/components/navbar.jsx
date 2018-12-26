@@ -2,15 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from '../../statics/styles/navbar.scss';
 
-const Navbar = (props) => (
-
+const Navbar = props => (
   <div className={styles.navbar}>
     <div className={styles.settingOptions}>
       <button className={styles.button} onClick={props.onCancel} style={{ textAlign: 'left' }}>Cancel</button>
       <button className={styles.button} onClick={props.onConfirm} style={{ textAlign: 'right' }}>Update</button>
     </div>
   </div>
-)
+);
 
 Navbar.propTypes = {
   onCancel: PropTypes.func,

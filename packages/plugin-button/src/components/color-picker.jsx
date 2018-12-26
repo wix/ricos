@@ -92,9 +92,7 @@ class ColorPicker extends PureComponent {
       g = color[2];
       b = color[3];
     } else {
-      color = +('0x' + color.slice(1).replace(
-        color.length < 5 && /./g, '$&$&'));
-
+      color = +('0x' + color.slice(1).replace(color.length < 5 && /./g, '$&$&'));
       r = color >> 16;
       g = color >> 8 & 255;
       b = color & 255;
@@ -109,13 +107,10 @@ class ColorPicker extends PureComponent {
     } else {
       return true;
     }
-
-
   }
 
   render() {
     const { flag } = this.props;
-
     let dropperColor = '';
     let isDropperColor = false;
     if (this.presetColors.indexOf(this.props.color) === -1 || this.presetColors.indexOf(this.props.color) === 5) {
@@ -138,6 +133,9 @@ class ColorPicker extends PureComponent {
       }
       return (
         <div
+          role="button"
+          tabIndex="0"
+          onKeyPress={this.onPaletteClick.bind(this, color, index)}
           onClick={this.onPaletteClick.bind(this, color, index)}
           key={color + index}
           style={{ background: backColor }}
@@ -173,6 +171,9 @@ class ColorPicker extends PureComponent {
             <div className={styles.palettes}>
               {palattes}
               <div
+                role="button"
+                tabIndex="0"
+                onKeyPress={this.onPaletteDropperClick.bind(this)}
                 onClick={this.onPaletteDropperClick.bind(this)}
                 style={{ background: this.state.dropperBackColor }}
                 className={classNames(styles.palette)}
@@ -203,7 +204,9 @@ ColorPicker.propTypes = {
   onClick: PropTypes.func,
   onChange: PropTypes.func,
   flag: PropTypes.bool,
-  settings: PropTypes.object.isRequired
+  settings: PropTypes.object.isRequired,
+  t: PropTypes.func,
+  index: PropTypes.number
 };
 
 export default ColorPicker;

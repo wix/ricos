@@ -11,9 +11,6 @@ import ButtonSample from '../components/button-sample';
 import ColorPicker from './color-picker';
 import styles from '../../statics/styles/design-component-styles.scss';
 
-
-
-
 class DesignComponent extends PureComponent {
 
   constructor(props) {
@@ -116,12 +113,11 @@ class DesignComponent extends PureComponent {
     this.setState({ backgroundColor: color });
   }
 
-  onColorPickerClicked = (index) => {
-    if(this.state.openedColorPicker === index){
-      this.setState({openedColorPicker: -1});
-    }
-    else {
-      this.setState({openedColorPicker: index});
+  onColorPickerClicked = index => {
+    if (this.state.openedColorPicker === index) {
+      this.setState({ openedColorPicker: -1 });
+    } else {
+      this.setState({ openedColorPicker: index });
     }
   }
   render() {
@@ -200,7 +196,7 @@ class DesignComponent extends PureComponent {
             <ColorPicker
               {...this.props}
               onChange={this.onTextColorChange.bind(this)}
-              onClick={(e) => this.onColorPickerClicked(e)}
+              onClick={e => this.onColorPickerClicked(e)}
               color={designObj.textColor}
               theme={theme}
               flag={this.state.openedColorPicker === 0}
@@ -211,7 +207,7 @@ class DesignComponent extends PureComponent {
             <ColorPicker
               {...this.props}
               onChange={this.onBorderColorChange.bind(this)}
-              onClick={(e) => this.onColorPickerClicked(e)}
+              onClick={e => this.onColorPickerClicked(e)}
               color={designObj.borderColor}
               theme={theme}
               flag={this.state.openedColorPicker === 1}
@@ -224,7 +220,7 @@ class DesignComponent extends PureComponent {
               color={designObj.backgroundColor}
               theme={theme}
               onChange={this.onBackgroundColorChange.bind(this)}
-              onClick={(e) => this.onColorPickerClicked(e)}
+              onClick={e => this.onColorPickerClicked(e)}
               flag={this.state.openedColorPicker === 2}
               index={2}
             >

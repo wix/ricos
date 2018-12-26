@@ -51,7 +51,7 @@ class ButtonComponent extends PureComponent {
     );
     const textColor = (blockProps && !blockProps.isFocused && !url) && {
       color: '#5D9AFF'
-    }
+    };
     style = {
       ...style,
       ...textColor
@@ -91,7 +91,8 @@ ButtonComponent.propTypes = {
   anchorTarget: PropTypes.string.isRequired,
   relValue: PropTypes.string.isRequired,
   settings: PropTypes.object.isRequired,
-  t: PropTypes.func
+  t: PropTypes.func,
+  blockProps: PropTypes.object
 };
 
 export default ButtonComponent;

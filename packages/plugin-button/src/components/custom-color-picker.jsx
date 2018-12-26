@@ -4,6 +4,7 @@ import { Saturation, Hue, EditableInput } from 'react-color/lib/components/commo
 import HuePointer from '../components/hue-pointer';
 import SaturationPointer from '../components/saturation-pointer';
 import styles from '../../statics/styles/custom-color-picker.scss';
+
 class CustomColorPicker extends React.Component {
   constructor(props) {
     super(props);
