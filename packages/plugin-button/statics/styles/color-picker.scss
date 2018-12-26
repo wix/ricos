@@ -2,7 +2,7 @@
 @import "~wix-rich-content-common/dist/statics/styles/mixins";
 .container {
   position: relative;
-  padding-bottom: 18px;
+  padding-bottom: 20px;
   @include phone{
     padding-bottom: 3px;
   }
@@ -57,8 +57,8 @@ position: relative;
 
 .dropper {
   position: absolute;
-  width: 18px;
-  height: 18px;
+  width: 21px;
+  height: 21px;
   top: 9px;
   right: 8px;
   @include phone {
@@ -82,12 +82,12 @@ $size: 10px;
   background-size: $size $size;
   background-position: 0 0, $size/2 $size/2;
   position: relative;
-  width: 36px;
-  height: 36px;
+  width: 35px;
+  height: 35px;
   border-radius: 28px;
   display: inline-block;
   border: solid 1px #ededed;
-  margin-left: 18px;
+  margin-left: 17px;
   cursor: pointer;
   @include phone {
     width: 30px;
@@ -101,7 +101,7 @@ $size: 10px;
   width: 100%;
   text-align: right;
   height: 36px;
-  padding-top: 18px;
+  padding-top: 19px;
   @include phone {
     height: 30px;
     padding-bottom: 8px;

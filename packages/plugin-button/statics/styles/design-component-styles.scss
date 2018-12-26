@@ -5,7 +5,7 @@
   height: auto;
   width: 100%;
   border-bottom: 1px solid #ededed;
-  padding-bottom: 14px;
+  padding-bottom: 10px;
   padding-top: 14px;
   @include phone {
     padding-top: 16px;
@@ -118,10 +118,14 @@
 }
 
 .px_label {
+  font-size: 17px;
+  font-family: Helvetica;
+  color: #333;
+  padding-top: 2px;
+  text-align: left;
   width: 18px;
   height: auto;
   float: right;
-  padding-top: 1px;
 }
 
 .sliderWithInput_content {
@@ -138,6 +142,13 @@ input[type="range"]:focus {
   outline: none;
 }
 .slider_with_input {
+  input[type="number"] {
+    font-size: 18px;
+    font-family: Helvetica;
+    color: #333333;
+    padding-top: 2px;
+    text-align: left;
+  }
   input[type="number"]:focus {
     border-bottom: 1px #0261ff solid;
     border-radius: 0px;
