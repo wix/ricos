@@ -3,7 +3,7 @@
 
 .header_ButtonText {
   font-size: 14px;
-  margin: 6px 0 6px 0;
+  margin: 6px 0 8px 0;
   line-height: 1.5;
   height: 22px;
   font-weight: normal;
@@ -42,7 +42,7 @@
   }
 }
 .checkbox {
-  margin-bottom: 16px;
+  margin-bottom: 15px;
   outline: none;
   @include phone {
     margin-bottom: 15px;
@@ -63,7 +63,7 @@
 }
 .section_content {
   padding-right: 30px;
-  padding-top: 8px;
+  padding-top: 3px;
   @include phone {
     padding-right: 0px;
   }

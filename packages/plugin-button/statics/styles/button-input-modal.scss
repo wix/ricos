@@ -78,6 +78,7 @@
 }
 .tabs_headers{
   border-bottom: none;
+  height: 42px;
 }
 .tabs_headers_option_selected {
   border-bottom: solid 3px #0261ff;
@@ -101,7 +102,8 @@
 }
 
 .modal_footer {
-  padding: 30px 30px;
+  padding-right: 29px;
+  padding-left: 30px;
 }
 
 .settingTab {
@@ -136,4 +138,14 @@
 
 .customize_scrollbar_container {
   height: 100%;
+}
+
+.settingsPanel_save {
+  width: 78px;
+  height: 40px;
+}
+
+.settingsPanel_cancel {
+  width: 90px;
+  height: 40px;
 }

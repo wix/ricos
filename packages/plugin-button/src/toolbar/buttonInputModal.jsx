@@ -263,7 +263,7 @@ export default class ButtonInputModal extends Component {
               cancel={() => this.onCloseRequested()}
               saveLabel={doneLabel}
               cancelLabel={cancelLabel}
-              theme={theme}
+              theme={styles}
               t={t}
             />
           </div>
