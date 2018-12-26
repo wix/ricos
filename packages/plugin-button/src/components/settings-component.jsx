@@ -113,6 +113,7 @@ class SettingsComponent extends PureComponent {
           placeholder={t('ButtonModal_Link_Input_Placeholder')}
           theme={this.styles}
           error={errorTooltip}
+          showTooltip={false}
           data-hook="ButtonInputModal"
         />
         {!this.state.validUrl || !this.props.validUrl ?
