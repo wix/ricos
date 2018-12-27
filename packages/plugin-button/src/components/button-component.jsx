@@ -40,6 +40,7 @@ class ButtonComponent extends PureComponent {
     style = {
       ...style,
       borderWidth: button.borderWidth + 'px',
+      padding: button.padding + 'px',
       borderRadius: button.borderRadius,
       color: button.textColor ? button.textColor : colors.color_1,
       background: button.backgroundColor ? button.backgroundColor : colors.color_8,
@@ -60,6 +61,7 @@ class ButtonComponent extends PureComponent {
       style = {
         ...style,
         borderWidth: buttonObj.design.borderWidth + 'px',
+        padding: buttonObj.design.padding + 'px',
         borderRadius: buttonObj.design.borderRadius,
         color: buttonObj.design.textColor,
         background: buttonObj.design.backgroundColor,

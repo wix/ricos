@@ -67,6 +67,7 @@ class DesignComponent extends PureComponent {
     ];
     this.state = {
       borderWidth: designObj.borderWidth,
+      padding: designObj.padding,
       borderRadius: designObj.borderRadius,
       activeButton: designObj.activeButton,
       textColor: designObj.textColor ? designObj.textColor : colors.color_1,
@@ -81,7 +82,7 @@ class DesignComponent extends PureComponent {
   }
 
   onBorderWidthChange = value => {
-    this.setState({ borderWidth: value });
+    this.setState({ borderWidth: value, padding: 12 - (value / 2) });
   };
 
   onBorderRadiusChange = value => {
