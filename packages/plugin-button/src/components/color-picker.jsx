@@ -71,6 +71,7 @@ class ColorPicker extends PureComponent {
   }
 
   onPaletteDropperClick = () => {
+    this.props.scrollColorPickerDown();
     this.onPaletteClick(this.state.color, 5);
     this.setState({ picker: !this.state.picker });
   }
@@ -110,7 +111,7 @@ class ColorPicker extends PureComponent {
   }
 
   render() {
-    const { flag } = this.props;
+    const { flag, colorPickerRef } = this.props;
     let dropperColor = '';
     let isDropperColor = false;
     if (this.presetColors.indexOf(this.props.color) === -1 || this.presetColors.indexOf(this.props.color) === 5) {
@@ -149,7 +150,7 @@ class ColorPicker extends PureComponent {
       );
     });
     return (
-      <div className={styles.container}>
+      <div ref={colorPickerRef} className={styles.container}>
         {this.state.pickerClicked &&
           <div className={styles.overlay} />
         }

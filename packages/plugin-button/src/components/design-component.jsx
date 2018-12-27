@@ -113,7 +113,12 @@ class DesignComponent extends PureComponent {
     this.setState({ backgroundColor: color });
   }
 
+  scrollColorPickerDown = () => {
+    setTimeout(() => this.colorPicker3.scrollIntoView(false), 5);
+  }
+
   onColorPickerClicked = index => {
+    this.scrollColorPickerDown();
     if (this.state.openedColorPicker === index) {
       this.setState({ openedColorPicker: -1 });
     } else {
@@ -201,6 +206,7 @@ class DesignComponent extends PureComponent {
               theme={theme}
               flag={this.state.openedColorPicker === 0}
               index={0}
+              scrollColorPickerDown={this.scrollColorPickerDown}
             >
               {t('ButtonModal_Text_Color')}
             </ColorPicker>
@@ -212,6 +218,7 @@ class DesignComponent extends PureComponent {
               theme={theme}
               flag={this.state.openedColorPicker === 1}
               index={1}
+              scrollColorPickerDown={this.scrollColorPickerDown}
             >
               {t('ButtonModal_Border_Color')}
             </ColorPicker>
@@ -223,6 +230,10 @@ class DesignComponent extends PureComponent {
               onClick={e => this.onColorPickerClicked(e)}
               flag={this.state.openedColorPicker === 2}
               index={2}
+              colorPickerRef={ref => {
+                this.colorPicker3 = ref;
+              }}
+              scrollColorPickerDown={this.scrollColorPickerDown}
             >
               {t('ButtonModal_Background_Color')}
             </ColorPicker>
