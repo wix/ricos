@@ -89,9 +89,12 @@ class DesignComponent extends PureComponent {
     this.setState({ borderRadius: value });
   };
 
-
+  alignButtonSample = i => {
+    this.sampleContainer.scrollBy(80 * i, 0);
+  }
 
   onButtonSampleClick = index => {
+    this.alignButtonSample(index);
     this.setState({
       activeButton: index,
       borderWidth: parseInt(this.presetStyle[index].borderWidth),
@@ -115,7 +118,7 @@ class DesignComponent extends PureComponent {
   }
 
   scrollColorPickerDown = () => {
-    setTimeout(() => this.colorPicker3.scrollIntoView(false), 5);
+    setTimeout(() => this.colorPicker3.scrollIntoView(false), 1);
   }
 
   onColorPickerClicked = index => {
@@ -126,6 +129,11 @@ class DesignComponent extends PureComponent {
       this.setState({ openedColorPicker: index });
     }
   }
+
+  componentDidMount() {
+    this.alignButtonSample(this.state.activeButton);
+  }
+
   render() {
     const styles = this.styles;
     const { theme, t, designObj } = this.props;
@@ -152,7 +160,7 @@ class DesignComponent extends PureComponent {
                 <div className={styles.left_shadow} />
               </div>
             }
-            <div className={classNames(styles.button_samples)}>
+            <div className={classNames(styles.button_samples)} ref={ref => this.sampleContainer = ref}>
               {buttonSampleList}
             </div>
           </div>
