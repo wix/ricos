@@ -1,7 +1,5 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { ErrorIcon } from 'wix-rich-content-common';
-import styles from '../../statics/styles/default-styles.scss';
 import ButtonViewer from './button-viewer';
 
 
@@ -47,9 +45,6 @@ class ButtonComponent extends PureComponent {
       borderColor: button.borderColor ? button.borderColor : colors.color_8
     };
     url = button.url;
-    const errorMessage = (blockProps && !blockProps.isFocused && !url) && (
-      <ErrorIcon width="18px" height="18px" className={styles.errorOverlay} />
-    );
     const textColor = (blockProps && !blockProps.isFocused && !url) && {
       color: '#5D9AFF'
     };
@@ -79,7 +74,6 @@ class ButtonComponent extends PureComponent {
         buttonText={buttonText}
         t={t}
         theme={theme}
-        errorMessage={errorMessage}
       />
     );
   }

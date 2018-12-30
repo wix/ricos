@@ -10,7 +10,7 @@ class ButtonViewer extends PureComponent {
   }
 
   render() {
-    const { url, style, target, rel, buttonText, errorMessage } = this.props;
+    const { url, style, target, rel, buttonText } = this.props;
     return (
       <div>
         <a
@@ -25,7 +25,6 @@ class ButtonViewer extends PureComponent {
               buttonText
             }
           </div>
-          {errorMessage}
         </a>
       </div>
     );
@@ -38,10 +37,7 @@ ButtonViewer.propTypes = {
   target: PropTypes.string,
   rel: PropTypes.string,
   buttonText: PropTypes.string,
-  theme: PropTypes.object.isRequired,
-  errorOverlay: PropTypes.object,
-  errorMessage: PropTypes.object
-
+  theme: PropTypes.object.isRequired
 };
 
 export default ButtonViewer;

@@ -27,14 +27,3 @@
     max-width: calc(100vw - 89px);
   }
 }
-
-.errorOverlay {
-  display: block;
-    position: absolute;
-    top: -5px;
-    right: -5px;
-    width: 18px;
-    height: 18px;
-    background-color: #ffffff;
-    border-radius: 9px;
-}
