@@ -8,17 +8,15 @@
 > - :book: [Documentation]
 > - :house: [Internal]
 
-## :rocket: New Feature
-- `Button Plugin`
-  - [#201](https://github.com/wix-incubator/rich-content/pull/201) `plugin-button` Add button plugin to RCE
-
 ## [Unreleased]
 
 ### :rocket: New Feature
 
 - `link`
   - [#212](https://github.com/wix-incubator/rich-content/pull/212) optional auto link
-
+- `Button Plugin`
+  - [#201](https://github.com/wix-incubator/rich-content/pull/201) `plugin-button` Add button plugin to RCE
+  
 </br>
 
 ## 1.7.5 (Dec 17, 2018)
