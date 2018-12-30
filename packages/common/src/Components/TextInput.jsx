@@ -7,7 +7,18 @@ import { ErrorIcon } from '../Icons';
 import Tooltip from './Tooltip';
 import textInputStyles from '../../statics/styles/text-input.scss';
 
-class TextInput extends React.Component {
+export default class TextInput extends React.Component {
+
+  static propTypes = {
+    inputRef: PropTypes.func,
+    theme: PropTypes.object.isRequired,
+    error: PropTypes.string,
+    showTooltip: PropTypes.bool
+  };
+
+  static defaultProps = {
+    showTooltip: true
+  };
 
   render() {
     const { inputRef, error, theme, showTooltip, ...otherProps } = this.props;
@@ -29,12 +40,3 @@ class TextInput extends React.Component {
     );
   }
 }
-
-TextInput.propTypes = {
-  inputRef: PropTypes.func,
-  theme: PropTypes.object.isRequired,
-  error: PropTypes.string,
-  showTooltip: PropTypes.bool
-};
-
-export default TextInput;
