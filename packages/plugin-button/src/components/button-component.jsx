@@ -11,13 +11,12 @@ class ButtonComponent extends PureComponent {
     this.state = {
       style: button,
     };
-    this.buttonName = 'Click Me!';
   }
 
   render() {
     const { colors } = this.props.settings;
     const { componentData: { button }, buttonObj, anchorTarget, relValue, t, theme, blockProps } = this.props;
-    let buttonText = button.buttonText || this.buttonName;
+    let buttonText = button.buttonText;
     let rel = '';
     let url = '';
     let style = {
@@ -62,7 +61,7 @@ class ButtonComponent extends PureComponent {
         background: buttonObj.design.backgroundColor,
         borderColor: buttonObj.design.borderColor
       };
-      buttonText = buttonObj.data.buttonText || this.buttonName;
+      buttonText = buttonObj.data.buttonText;
     }
 
     return (

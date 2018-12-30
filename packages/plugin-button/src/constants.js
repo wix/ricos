@@ -13,7 +13,7 @@ export const DEFAULTS = {
     borderRadius: 0,
     borderWidth: 0,
     padding: 12,
-    buttonText: '',
+    buttonText: 'Click Me!',
     url: '',
   },
 };
