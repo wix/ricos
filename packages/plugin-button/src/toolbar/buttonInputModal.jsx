@@ -105,6 +105,7 @@ export default class ButtonInputModal extends Component {
       this.setState({ submitted: true });
     } else {
       this.setState({ isValidUrl: false, activeTab: settingsTabValue });
+      this.linkInput.scrollIntoView(false);
     }
   };
 
@@ -190,6 +191,9 @@ export default class ButtonInputModal extends Component {
         validUrl={this.state.isValidUrl}
         settingsObj={this.state.data}
         onKeyPress={this.handleKeyPress}
+        linkInputRef={ref => {
+          this.linkInput = ref;
+        }}
       />);
     const designComponent = (
       <DesignComponent

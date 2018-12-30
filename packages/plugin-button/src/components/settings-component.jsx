@@ -75,7 +75,7 @@ class SettingsComponent extends PureComponent {
   };
 
   render() {
-    const { theme, t } = this.props;
+    const { theme, t, linkInputRef } = this.props;
     const { buttonText, url, validUrl } = this.state;
     const errorTooltip = (!validUrl || !this.props.validUrl) ? t('ButtonModal_Invalid_Link') : false;
     return (
@@ -99,7 +99,7 @@ class SettingsComponent extends PureComponent {
             />
           </div>
         </div>
-        <div className={styles.header_ButtonLink}>
+        <div className={styles.header_ButtonLink} ref={linkInputRef}>
           {t('ButtonModal_Button_Link')}
         </div>
         <TextInput
@@ -154,7 +154,8 @@ SettingsComponent.propTypes = {
   onSettingsChange: PropTypes.func.isRequired,
   settingsObj: PropTypes.object.isRequired,
   validUrl: PropTypes.bool,
-  onKeyPress: PropTypes.func
+  onKeyPress: PropTypes.func,
+  linkInputRef: PropTypes.object
 };
 
 export default SettingsComponent;
