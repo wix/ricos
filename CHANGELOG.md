@@ -10,6 +10,11 @@
 
 ## [Unreleased]
 
+### :bug: Bug Fix
+
+- `examples`
+  - [#215](https://github.com/wix-incubator/rich-content/pull/215) [editor](https://github.com/wix-incubator/rich-content/tree/master/examples/editor) Re-enable document scrolling after closing a modal when cliking outside + Prevent flyOut modals from jumping up when opening
+  
 <br/>
 
 ## 1.7.6 (Dec 27, 2018)
