@@ -145,6 +145,12 @@ class App extends Component {
   };
 
   closeModal = () => {
+    try {
+      document.documentElement.style.height = 'initial';
+      document.documentElement.style.position = 'initial';
+    } catch (e) {
+      console.warn('Cannot change document styles', e);
+    }
     this.setState({
       showModal: false,
       modalContent: null,
