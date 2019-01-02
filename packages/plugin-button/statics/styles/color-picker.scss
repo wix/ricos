@@ -3,7 +3,7 @@
 .container {
   position: relative;
   padding-bottom: 20px;
-  @include phone{
+  @include phone {
     padding-bottom: 3px;
   }
 }
@@ -24,13 +24,13 @@
 }
 
 .color_picker {
- height: 36px;
-width: 100%;
-position: relative;
-@include phone {
-  padding-bottom: 6px;
-  height: 30px;
-}
+  height: 36px;
+  width: 100%;
+  position: relative;
+  @include phone {
+    padding-bottom: 6px;
+    height: 30px;
+  }
 }
 
 .label {
@@ -59,12 +59,9 @@ position: relative;
   position: absolute;
   width: 21px;
   height: 21px;
-  top: 9px;
-  right: 8px;
-  @include phone {
-    top: 6px;
-    right: 5px;
-  }
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
 }
 
 $color1: #fff;
