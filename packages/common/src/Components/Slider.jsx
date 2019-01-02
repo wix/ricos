@@ -57,7 +57,7 @@ class Slider extends Component {
         type={'range'}
         className={this.styles.slider}
         data-hook={dataHook}
-        onChange={e => this.onChange(e.target.valueAsNumber)}
+        onChange={e => onChange(e.target.valueAsNumber)}
         value={this.state.value}
         min={min}
         max={max}
