@@ -108,6 +108,7 @@ class App extends Component {
           showModal: false,
           modalProps: null,
           modalStyles: null,
+          modalContent: null
         });
       },
     };
@@ -141,19 +142,6 @@ class App extends Component {
     this.setState({
       lastSave: new Date(),
       editorState,
-    });
-  };
-
-  closeModal = () => {
-    try {
-      document.documentElement.style.height = 'initial';
-      document.documentElement.style.position = 'initial';
-    } catch (e) {
-      console.warn('Cannot change document styles', e);
-    }
-    this.setState({
-      showModal: false,
-      modalContent: null,
     });
   };
 
@@ -263,7 +251,7 @@ class App extends Component {
               contentLabel="External Modal Example"
               style={modalStyles}
               role="dialog"
-              onRequestClose={this.closeModal}
+              onRequestClose={this.helpers.closeModal}
             >
               {this.state.showModal &&
               <RichContentEditorModal
