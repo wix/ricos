@@ -12,8 +12,10 @@
 
 ### :bug: Bug Fix
 
+- `viewer`
+  - [#218](https://github.com/wix-incubator/rich-content/pull/218) Fixed justified text alignment.
 - `examples`
-  - [#215](https://github.com/wix-incubator/rich-content/pull/215) [editor](https://github.com/wix-incubator/rich-content/tree/master/examples/editor) Re-enable document scrolling after closing a modal when cliking outside + Prevent flyOut modals from jumping up when opening
+  - [#215](https://github.com/wix-incubator/rich-content/pull/215) Re-enable document scrolling after closing a modal when cliking outside + Prevent flyOut modals from jumping up when opening
   
 <br/>
 
