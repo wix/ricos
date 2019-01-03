@@ -19,6 +19,7 @@ class ColorPicker extends PureComponent {
       colors.color_8,
       colors.color_7,
       colors.color_6,
+      colors.color_10
     ];
     this.state = {
       pickerClicked: this.props.flag,
@@ -114,7 +115,7 @@ class ColorPicker extends PureComponent {
     const { flag, colorPickerRef } = this.props;
     let dropperColor = '';
     let isDropperColor = false;
-    if (this.presetColors.indexOf(this.props.color) === -1 || this.presetColors.indexOf(this.props.color) === 5) {
+    if (this.presetColors.indexOf(this.props.color) === -1 || this.presetColors.indexOf(this.props.color) === this.presetColors.length) {
       isDropperColor = true;
     }
     if (this.state.color && this.presetColors.indexOf(this.state.color) === -1) {
@@ -125,7 +126,7 @@ class ColorPicker extends PureComponent {
       }
     }
     const palattes = this.presetColors.map((color, index) => {
-      const backColor = (index !== 5) ? color : this.props.color;
+      const backColor = (index !== this.presetColors.length) ? color : this.props.color;
       let active = this.state.selectedPaletteIndex === index;
       if (color === this.props.color) {
         active = true;
@@ -140,7 +141,7 @@ class ColorPicker extends PureComponent {
           onClick={this.onPaletteClick.bind(this, color, index)}
           key={color + index}
           style={{ background: backColor }}
-          className={classNames(styles.palette)}
+          className={classNames(styles.non_dropper_palette)}
         >
           {
             (active || (isDropperColor && index === 5)) &&
@@ -162,7 +163,6 @@ class ColorPicker extends PureComponent {
             <button
               style={{ background: this.state.color }}
               onClick={this.onPickerClick}
-              onKeyDown={this.handleOnKeyPressed}
               className={this.styles.pickerButton}
             />
           </div>
@@ -177,7 +177,7 @@ class ColorPicker extends PureComponent {
                 onKeyPress={this.onPaletteDropperClick.bind(this)}
                 onClick={this.onPaletteDropperClick.bind(this)}
                 style={{ background: this.state.dropperBackColor }}
-                className={classNames(styles.palette)}
+                className={classNames(styles.dropper_palette)}
               >
                 {
                   this.state.isDropperSelected &&

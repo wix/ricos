@@ -117,19 +117,8 @@
   padding-bottom: 30px;
 }
 
-.px_label {
-  font-size: 17px;
-  font-family: Helvetica;
-  color: #333;
-  padding-top: 2px;
-  text-align: left;
-  width: 18px;
-  height: auto;
-  float: right;
-}
-
 .sliderWithInput_content {
-  width: calc(100% - 18px);
+  width: 100%;
   float: left;
 }
 // style the slider

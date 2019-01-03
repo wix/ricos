@@ -181,9 +181,6 @@ class DesignComponent extends PureComponent {
                   theme={this.styles}
                 />
               </div>
-              <div className={styles.px_label}>
-                px
-              </div>
             </div>
             <div className={styles.input_container_corner}>
               <div className={styles.slider_with_input}>
@@ -195,9 +192,6 @@ class DesignComponent extends PureComponent {
                   onChange={this.onBorderRadiusChange.bind(this)}
                   theme={this.styles}
                 />
-              </div>
-              <div className={styles.px_label}>
-                px
               </div>
             </div>
           </div>

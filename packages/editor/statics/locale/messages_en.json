@@ -103,7 +103,7 @@
   "GallerySettings_Thumbnail_Placement" : "Thumbnail placement",
   "ButtonPlugin_InsertButton_Tooltip" : "Add a button",
   "ButtonModal_InputLink_Placeholder": "eg: www.example.com",
-  "ButtonModal_InputName_Placeholder": "Click Me!",
+  "ButtonModal_InputName_Placeholder": "Add text here",
   "ButtonModal_InputLink_ErrorMessage": "Enter a valid link",
   "ButtonModal_Header": "Button Settings",
   "ButtonModal_New_Tap": "Open link in a new tab",
