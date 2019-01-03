@@ -35,8 +35,15 @@ export default class RichContentViewer extends Component {
       <div className={wrapperClassName}>
         <div className={styles.editor}>
           <Preview
-            raw={this.state.raw} decorators={decorators} typeMappers={typeMappers} config={config}
-            theme={theme} isMobile={isMobile} textDirection={textDirection} anchorTarget={anchorTarget} relValue={relValue}
+            anchorTarget={anchorTarget}
+            config={config}
+            decorators={decorators}
+            isMobile={isMobile}
+            raw={this.state.raw}
+            relValue={relValue}
+            textDirection={textDirection}
+            theme={theme}
+            typeMappers={typeMappers}
           />
         </div>
         <AccessibilityListener isMobile={isMobile} />

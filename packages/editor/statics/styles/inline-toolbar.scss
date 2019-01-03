@@ -1,6 +1,7 @@
 @import '~wix-rich-content-common/dist/statics/styles/palette';
 @import '~wix-rich-content-common/dist/statics/styles/mixins';
 $borderRadius: 6px;
+
 .inlineToolbar {
   min-height: 50px;
   left: 50%;
@@ -31,6 +32,7 @@ $borderRadius: 6px;
   cursor: pointer;
   border: none;
   border-left: 1px solid $toolbar-border-color;
+
   >i {
     display: inline-block;
     width: 6px;
@@ -59,9 +61,11 @@ $borderRadius: 6px;
   margin: -90px 0;
   pointer-events: none;
   scroll-behavior: smooth;
+
   &>* {
     pointer-events: initial;
   }
+
   &.mobile {
     pointer-events: initial;
     padding: 0 10px;
@@ -70,6 +74,7 @@ $borderRadius: 6px;
     overflow-x: scroll;
     -webkit-overflow-scrolling: touch;
   }
+
   &::-webkit-scrollbar {
     display: none;
     width: 0 !important;
@@ -85,11 +90,14 @@ $borderRadius: 6px;
     display: flex;
     width: auto;
     max-width: 100%;
+
     .inlineToolbar_responsiveSpacer {
       display: block;
     }
+
     .inlineToolbar_responsiveArrow {
       display: block;
+      height: 49px;
     }
   }
 }

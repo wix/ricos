@@ -35,7 +35,7 @@ const TestData = {
         data: {}
       },
       {
-        key: "8mis",
+        key: "8mif",
         text: "כותרת H3",
         type: "header-three",
         depth: 0,
@@ -96,6 +96,21 @@ const TestData = {
             length: 9,
             style: 'ITALIC'
           }
+        ],
+        entityRanges: [],
+        data: {}
+      },
+      {
+        key: '9hjyr',
+        text: 'H2 with inline text',
+        type: 'unstyled',
+        depth: 0,
+        inlineStyleRanges: [
+          {
+            offset: 0,
+            length: 2,
+            style: 'inline-header-two'
+          },
         ],
         entityRanges: [],
         data: {}
@@ -332,6 +347,24 @@ const TestData = {
         key: 'f60gq',
         text: 'Text bullet',
         type: 'unordered-list-item',
+        depth: 0,
+        inlineStyleRanges: [],
+        entityRanges: [],
+        data: {}
+      },
+      {
+        key: '92tkf',
+        text: 'new soft line below this list item\n',
+        type: 'ordered-list-item',
+        depth: 0,
+        inlineStyleRanges: [],
+        entityRanges: [],
+        data: {}
+      },
+      {
+        key: 'cmo3s',
+        text: 'new soft line above this list item',
+        type: 'ordered-list-item',
         depth: 0,
         inlineStyleRanges: [],
         entityRanges: [],

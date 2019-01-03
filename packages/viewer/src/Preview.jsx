@@ -2,11 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import redraft from 'redraft';
 import classNames from 'classnames';
-import { createInlineStyleDecorators, mergeStyles } from 'wix-rich-content-common';
+import endsWith from 'lodash/endsWith';
+import { mergeStyles } from 'wix-rich-content-common';
 import getPluginsViewer from './PluginsViewer';
 import { getTextDirection } from './utils/textUtils';
 import List from './List';
-import { getStrategyByStyle } from './decorators/getStrategyByStyle';
 import styles from '../statics/rich-content-viewer.scss';
 
 const withTextAlignment = (element, data, mergedStyles, textDirection) => {
@@ -16,8 +16,10 @@ const withTextAlignment = (element, data, mergedStyles, textDirection) => {
   const elementProps = {
     ...element.props,
     className: classNames(
-      { [element.props.className]: !!element.props.className,
-        [mergedStyles.rtl]: appliedTextDirection === 'rtl' },
+      {
+        [element.props.className]: !!element.props.className,
+        [mergedStyles.rtl]: appliedTextDirection === 'rtl'
+      },
       mergedStyles[alignmentClass])
   };
   return React.cloneElement(element, elementProps, element.props.children);
@@ -55,14 +57,10 @@ const getList = (ordered, mergedStyles, textDirection) =>
   };
 
 const getBlocks = (mergedStyles, textDirection) => {
-  // Rendering blocks like this along with cleanup results in a single p tag for each paragraph
-  // adding an empty block closes current paragraph and starts a new one
   return {
     unstyled: (children, blockProps) => children.map((child, i) =>
       withTextAlignment(
-        <div className={mergedStyles.text} key={blockProps.keys[i]}>
-          <div>{child}</div>
-        </div>,
+        <p className={mergedStyles.text} key={blockProps.keys[i]}>{child}</p>,
         blockProps.data[i],
         mergedStyles,
         textDirection
@@ -114,13 +112,15 @@ const augmentRaw = raw => {
   const blocks = raw.blocks || [];
   blocks
     .filter(({ type }) => type !== 'atomic')
-    .forEach(({ text, data }) => {
-      const direction = getTextDirection(text);
+    .forEach(block => {
+      const direction = getTextDirection(block.text);
       if (direction === 'rtl') {
-        data.textDirection = direction;
+        block.data.textDirection = direction;
+      }
+      if (endsWith(block.text, '\n')) {
+        block.text += '\n';
       }
     });
-
   return raw;
 };
 
@@ -131,23 +131,23 @@ const Preview = ({ raw, typeMappers, theme, isMobile, decorators, anchorTarget, 
 
   const augmentedRaw = augmentRaw(raw);
 
-  const combinedDecorators = [
-    ...decorators,
-    ...createInlineStyleDecorators(getStrategyByStyle, mergedStyles)
-  ];
-
   const className = classNames(mergedStyles.preview, textDirection === 'rtl' && mergedStyles.rtl);
 
   return (
     <div className={className}>
       {isEmpty && <div>There is nothing to render...</div>}
       {!isEmpty &&
-        redraft(augmentedRaw, {
-          inline: getInline(mergedStyles),
-          blocks: getBlocks(mergedStyles, textDirection),
-          entities: getEntities(typeMap, { theme, isMobile, anchorTarget, relValue, config }),
-          decorators: combinedDecorators },
-        options)}
+        redraft(
+          augmentedRaw,
+          {
+            inline: getInline(mergedStyles),
+            blocks: getBlocks(mergedStyles, textDirection),
+            entities: getEntities(typeMap, { theme, isMobile, anchorTarget, relValue, config }),
+            decorators,
+          },
+          options
+        )
+      }
     </div>
   );
 };

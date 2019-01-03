@@ -86,7 +86,6 @@ class App extends Component {
       openModal: data => {
         const { modalStyles, ...modalProps } = data;
         try {
-          document.body.style.overflow = document.documentElement.style.overflow = 'hidden';
           document.documentElement.style.height = '100%';
           document.documentElement.style.position = 'relative';
         } catch (e) {
@@ -100,7 +99,6 @@ class App extends Component {
       },
       closeModal: () => {
         try {
-          document.body.style.overflow = document.documentElement.style.overflow = 'auto';
           document.documentElement.style.height = 'initial';
           document.documentElement.style.position = 'initial';
         } catch (e) {
@@ -110,6 +108,7 @@ class App extends Component {
           showModal: false,
           modalProps: null,
           modalStyles: null,
+          modalContent: null
         });
       },
     };
@@ -143,13 +142,6 @@ class App extends Component {
     this.setState({
       lastSave: new Date(),
       editorState,
-    });
-  };
-
-  closeModal = () => {
-    this.setState({
-      showModal: false,
-      modalContent: null,
     });
   };
 
@@ -259,7 +251,7 @@ class App extends Component {
               contentLabel="External Modal Example"
               style={modalStyles}
               role="dialog"
-              onRequestClose={this.closeModal}
+              onRequestClose={this.helpers.closeModal}
             >
               {this.state.showModal &&
               <RichContentEditorModal
