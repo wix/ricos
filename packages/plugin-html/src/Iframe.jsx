@@ -7,7 +7,7 @@ const Iframe = ({ iframeRef, ...otherProps }) => (
     ref={iframeRef}
     className={styles.iframe}
     title="remote content"
-    allowTransparency
+    style={{ backgroundColor: 'transparent' }}
     {...otherProps}
   />
 );
