@@ -144,7 +144,7 @@ class ColorPicker extends PureComponent {
         >
           {
             (active || (isDropperColor && index === 5)) &&
-            <PickedIcon className={styles.picked} width="11px" height="11px" />
+            <PickedIcon className={styles.picked} width="12px" height="12px" />
           }
         </div>
       );
@@ -181,7 +181,7 @@ class ColorPicker extends PureComponent {
               >
                 {
                   this.state.isDropperSelected &&
-                  <PickedIcon className={styles.picked} width="11px" height="11px" />
+                  <PickedIcon className={styles.picked} width="12px" height="12px" />
                 }
                 <EyeDropperIcon style={{ color: dropperColor }} className={styles.dropper} />
               </div>
