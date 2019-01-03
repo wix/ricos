@@ -109,6 +109,7 @@ class SettingsComponent extends PureComponent {
           type="text"
           onKeyPress={this.handleKeyPress}
           onChange={this.onLinkChanged}
+          onBlur={this.props.onBlur}
           value={url}
           placeholder={t('ButtonModal_Link_Input_Placeholder')}
           theme={this.styles}
@@ -155,7 +156,8 @@ SettingsComponent.propTypes = {
   settingsObj: PropTypes.object.isRequired,
   validUrl: PropTypes.bool,
   onKeyPress: PropTypes.func,
-  linkInputRef: PropTypes.object
+  linkInputRef: PropTypes.object,
+  onBlur: PropTypes.func
 };
 
 export default SettingsComponent;
