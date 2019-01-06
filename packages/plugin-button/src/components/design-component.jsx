@@ -17,7 +17,7 @@ class DesignComponent extends PureComponent {
     super(props);
     this.styles = mergeStyles({ styles, theme: props.theme });
     const { designObj } = this.props;
-    const { colors } = this.props.settings;
+    const { settings: { colors } } = this.props;
     this.presetStyle = [
       {
         className: 'button_primary',
@@ -250,7 +250,12 @@ class DesignComponent extends PureComponent {
 DesignComponent.propTypes = {
   theme: PropTypes.object.isRequired,
   componentData: PropTypes.object,
-  t: PropTypes.func
+  t: PropTypes.func,
+  designObj: PropTypes.object,
+  settings: PropTypes.object.isRequired,
+  onDesignChange: PropTypes.func.isRequired
+
+
 };
 
 export default DesignComponent;
