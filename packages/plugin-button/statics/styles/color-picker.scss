@@ -53,6 +53,10 @@
   position: absolute;
   right: -2px;
   top: 1px;
+  @include phone {
+    right: -2px;
+    top: -4px;
+  }
 }
 
 .dropper {
