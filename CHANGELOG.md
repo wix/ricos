@@ -10,6 +10,9 @@
 
 ## [Unreleased]
 
+- `common`
+  - [#220](https://github.com/wix-incubator/rich-content/pull/220) Fixed atomic block removal.
+
 <br/>
 
 ## 1.7.7 (Jan 3, 2019)
