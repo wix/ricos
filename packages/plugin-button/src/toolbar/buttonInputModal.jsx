@@ -87,7 +87,7 @@ export default class ButtonInputModal extends Component {
 
   onConfirm = () => {
     const { url } = this.state.data;
-    const { componentData, pubsub, onConfirm } = this.props;
+    const { componentData, pubsub, onConfirm, helpers: { closeModal } } = this.props;
     const buttonObj = {
       data: { ...this.state.data },
       design: { ...this.state.design }
@@ -101,7 +101,7 @@ export default class ButtonInputModal extends Component {
       }
 
       this.setState({ isOpen: false });
-      this.props.helpers.closeModal();
+      closeModal();
       this.setState({ submitted: true });
     } else {
       this.setState({ isValidUrl: false, activeTab: settingsTabValue });
@@ -119,7 +119,7 @@ export default class ButtonInputModal extends Component {
   };
 
   onCloseRequested = () => {
-    const { componentData, pubsub, onCloseRequested } = this.props;
+    const { componentData, pubsub, onCloseRequested, helpers: { closeModal } } = this.props;
     const { initialComponentData } = this.state;
     if (onCloseRequested) {
       onCloseRequested({ ...componentData, button: initialComponentData });
@@ -128,7 +128,7 @@ export default class ButtonInputModal extends Component {
     }
 
     this.setState({ isOpen: false });
-    this.props.helpers.closeModal();
+    closeModal();
   };
 
   handleOnMouseEnterDesign = () => {
@@ -276,6 +276,20 @@ ButtonInputModal.propTypes = {
   componentData: PropTypes.object.isRequired,
   theme: PropTypes.object.isRequired,
   t: PropTypes.func,
+  style: PropTypes.object,
+  buttonObj: PropTypes.object,
+  anchorTarget: PropTypes.string.isRequired,
+  relValue: PropTypes.string.isRequired,
+  settings: PropTypes.object.isRequired,
+  blockProps: PropTypes.object,
+  pubsub: PropTypes.object,
+  onConfirm: PropTypes.func,
+  onCloseRequested: PropTypes.func,
+  doneLabel: PropTypes.string,
+  cancelLabel: PropTypes.string,
+  uiSettings: PropTypes.object,
+  helpers: PropTypes.object
+
 };
 
 ButtonInputModal.defaultProps = {
