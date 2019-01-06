@@ -94,10 +94,9 @@ class ColorPicker extends PureComponent {
       g = color[2];
       b = color[3];
     } else {
-      color = +('0x' + color.slice(1).replace(color.length < 5 && /./g, '$&$&'));
-      r = color >> 16;
-      g = color >> 8 & 255;
-      b = color & 255;
+      r = parseInt(color.substr(1, 2), 16);
+      g = parseInt(color.substr(3, 2), 16);
+      b = parseInt(color.substr(5, 2), 16);
     }
     const hsp = Math.sqrt(
       0.299 * (r * r) +
@@ -207,7 +206,9 @@ ColorPicker.propTypes = {
   flag: PropTypes.bool,
   settings: PropTypes.object.isRequired,
   t: PropTypes.func,
-  index: PropTypes.number
+  index: PropTypes.number,
+  scrollColorPickerDown: PropTypes.func,
+  colorPickerRef: PropTypes.func
 };
 
 export default ColorPicker;
