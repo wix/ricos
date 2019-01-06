@@ -157,19 +157,6 @@ export default class ButtonInputModal extends Component {
       this.setState({ isValidUrl: false });
     }
   }
-
-  handleColorPickerOpened = index => {
-    if (WixUtils.isMobile()) {
-      this.scrollbarRef.scrollTo({
-        top: this.scrollbarRef.scrollTop + ((index + 1) * 300),
-        left: 0,
-        behavior: 'smooth'
-      });
-    } else {
-      this.scrollbarRef.scrollToBottom();
-    }
-  }
-
   render() {
     const { theme, t, uiSettings, doneLabel, cancelLabel } = this.props;
     const { styles } = this;
@@ -213,7 +200,6 @@ export default class ButtonInputModal extends Component {
         onDesignChange={this.onDesignChanged.bind(this)}
         designObj={this.state.design}
         onKeyPress={this.handleKeyPress}
-        onColorPickerOpend={this.handleColorPickerOpened.bind(this)}
       />);
     let mobileView = null;
     if (WixUtils.isMobile()) {
