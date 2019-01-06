@@ -17,7 +17,7 @@ import { MENTION_TYPE, mentionsTypeMapper } from 'wix-rich-content-plugin-mentio
 
 import 'wix-rich-content-common/dist/styles.min.css';
 import 'wix-rich-content-viewer/dist/styles.min.css';
-import 'wix-rich-content-plugin-code-block/dist/styles.min.css';
+// import 'wix-rich-content-plugin-code-block/dist/styles.min.css';
 import 'wix-rich-content-plugin-divider/dist/styles.min.css';
 import 'wix-rich-content-plugin-emoji/dist/styles.min.css';
 import 'wix-rich-content-plugin-html/dist/styles.min.css';

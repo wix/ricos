@@ -1,4 +1,4 @@
-import { getNormalizedHeaderBlock } from './getNormalizedHeaderBlock';
+import { removeInlineHeaderRanges } from './removeInlineHeaderRanges';
 import mapValues from 'lodash/mapValues';
 import cloneDeep from 'lodash/cloneDeep';
 import isUndefined from 'lodash/isUndefined';
@@ -88,17 +88,16 @@ export default (initialState, config) => {
   const { blocks, entityMap } = initialState;
 
   return {
-    blocks: blocks.map(block => {
-      switch (block.type) {
-        case 'atomic':
-          return { ...block, text: ' ' };
-        case 'header-one':
-        case 'header-two':
-        case 'header-three':
-          return getNormalizedHeaderBlock(block);
-        default: return block;
-      }
-    }),
+    blocks: blocks
+      .map(block => {
+        switch (block.type) {
+          case 'atomic':
+            return { ...block, text: ' ' };
+          default:
+            return block;
+        }
+      })
+      .map(removeInlineHeaderRanges),
     entityMap: mapValues(
       entityMap,
       entity => shouldNormalizeEntityConfig(entity, Object.keys(entityTypeMap.configNormalization)) ? {

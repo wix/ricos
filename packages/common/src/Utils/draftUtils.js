@@ -88,15 +88,16 @@ export const isAtomicBlockFocused = editorState => {
 export const removeBlock = (editorState, blockKey) => {
   const contentState = editorState.getCurrentContent();
   const block = contentState.getBlockForKey(blockKey);
-  const previousBlock = contentState.getBlockBefore(blockKey);
-  const selectionRange = new SelectionState({
-    anchorOffset: previousBlock.text.length,
-    anchorKey: previousBlock.key,
-    focusOffset: block.text.length,
+  const blockRange = new SelectionState({
+    anchorKey: blockKey,
+    anchorOffset: 0,
     focusKey: blockKey,
+    focusOffset: block.getLength(),
   });
-  const newContentState = Modifier.removeRange(contentState, selectionRange, 'forward');
-  return EditorState.push(editorState, newContentState, 'remove-range');
+  const withoutBlock = Modifier.removeRange(contentState, blockRange, 'backward');
+  const resetBlock = Modifier.setBlockType(withoutBlock, withoutBlock.getSelectionAfter(), 'unstyled');
+  const newState = EditorState.push(editorState, resetBlock, 'remove-range');
+  return EditorState.forceSelection(newState, resetBlock.getSelectionAfter());
 };
 
 export const getSelectedBlocks = editorState => {

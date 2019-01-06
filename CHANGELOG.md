@@ -10,12 +10,41 @@
 
 ## [Unreleased]
 
+- `common`
+  - [#220](https://github.com/wix-incubator/rich-content/pull/220) Fixed atomic block removal.
+
+<br/>
+
+## 1.7.7 (Jan 3, 2019)
+
+### :bug: Bug Fix
+
+- `viewer`
+  - [#218](https://github.com/wix-incubator/rich-content/pull/218) Fixed justified text alignment.
+- `examples`
+  - [#215](https://github.com/wix-incubator/rich-content/pull/215) Re-enable document scrolling after closing a modal when cliking outside + Prevent flyOut modals from jumping up when opening
+  
+<br/>
+
+## 1.7.6 (Dec 27, 2018)
+
 ### :rocket: New Feature
 
+- `common`, `editor` & `viewer`
+  - [#205](https://github.com/wix-incubator/rich-content/pull/205) block headers
 - `link`
   - [#212](https://github.com/wix-incubator/rich-content/pull/212) optional auto link
 
-</br>
+### :bug: Bug Fix
+
+- `viewer`
+  - [#214](https://github.com/wix-incubator/rich-content/pull/214) soft new line at end of block
+### :house: Internal
+
+- `general`
+  - [#213](https://github.com/wix-incubator/rich-content/pull/213) upgrade node version (8 -> 10)
+
+<br/>
 
 ## 1.7.5 (Dec 17, 2018)
 

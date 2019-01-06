@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { EditorState, convertFromRaw, CompositeDecorator } from '@wix/draft-js';
+import { EditorState, convertFromRaw } from '@wix/draft-js';
 import Editor from 'draft-js-plugins-editor';
 import get from 'lodash/get';
 import merge from 'lodash/merge';
@@ -19,12 +19,9 @@ import { getStaticTextToolbarId } from './Toolbars/toolbar-id';
 import {
   AccessibilityListener,
   normalizeInitialState,
-  createInlineStyleDecorators,
-  mergeStyles,
   TooltipHost,
   TOOLBARS
 } from 'wix-rich-content-common';
-import { getStrategyByStyle } from './getStrategyByStyle';
 import styles from '../../statics/styles/rich-content-editor.scss';
 import draftStyles from '../../statics/styles/draft.scss';
 
@@ -260,7 +257,6 @@ class RichContentEditor extends Component {
       handleReturn,
     } = this.props;
     const { editorState, theme } = this.state;
-    const mergedStyles = mergeStyles({ styles, theme }); // TODO: refactor the whole class to use merged styles
     return (
       <Editor
         ref={this.setEditor}
@@ -294,7 +290,6 @@ class RichContentEditor extends Component {
         onBlur={onBlur}
         onFocus={onFocus}
         textAlignment={textAlignment}
-        decorators={[new CompositeDecorator(createInlineStyleDecorators(getStrategyByStyle, mergedStyles))]}
       />
     );
   };

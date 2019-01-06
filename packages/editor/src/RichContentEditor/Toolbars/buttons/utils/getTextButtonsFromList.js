@@ -4,6 +4,7 @@ import {
   ItalicButton,
   UnderlineButton,
   IndentButton,
+  TitleButton,
   BlockquoteButton,
   TextAlignmentButton,
   AlignTextLeftButton,
@@ -14,7 +15,6 @@ import {
   OrderedListButton,
 } from '../index';
 import createThemedSeparator from './createThemedSeparator';
-import HeadingSwitchButton from '../inline-styling/HeadingSwitchButton';
 
 export default ({ buttons, theme, t, isMobile, textPluginButtons, uiSettings }) => {
   const themedSeparator = horizontal => createThemedSeparator({ theme, horizontal });
@@ -24,7 +24,7 @@ export default ({ buttons, theme, t, isMobile, textPluginButtons, uiSettings }) 
     Italic: ItalicButton,
     Underline: UnderlineButton,
     Indent: IndentButton,
-    Title: HeadingSwitchButton,
+    Title: TitleButton,
     Blockquote: BlockquoteButton,
     Alignment: TextAlignmentButton,
     AlignLeft: AlignTextLeftButton,
