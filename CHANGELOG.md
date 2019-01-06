@@ -12,7 +12,9 @@
 
 - `common`
   - [#220](https://github.com/wix-incubator/rich-content/pull/220) Fixed atomic block removal.
-
+- `giphy`
+  - [#221](https://github.com/wix-incubator/rich-content/pull/221) Fix style issues & refactor 
+  
 <br/>
 
 ## 1.7.7 (Jan 3, 2019)
