@@ -110,21 +110,28 @@ const options = {
 
 const augmentRaw = raw => ({
   ...raw,
-  blocks: raw.blocks
-    .map(block => {
-      if (block.type === 'atomic') {
-        return block;
-      }
+  blocks: raw.blocks.map(block => {
+    if (block.type === 'atomic') {
+      return block;
+    }
 
-      return {
-        ...block,
-        data: {
-          ...block.data,
-          textDirection: getTextDirection(block.text),
-        },
-        text: `${block.text}${endsWith(block.text, '\\n') ? '\n' : ''}`,
-      };
-    }),
+    const data = { ...block.data };
+    const direction = getTextDirection(block.text);
+    if (direction === 'rtl') {
+      data.textDirection = direction;
+    }
+
+    let text = block.text;
+    if (endsWith(text, '\n')) {
+      text += '\n';
+    }
+
+    return {
+      ...block,
+      data,
+      text,
+    };
+  }),
 });
 
 const Preview = ({ raw, typeMappers, theme, isMobile, decorators, anchorTarget, relValue, config, textDirection }) => {
