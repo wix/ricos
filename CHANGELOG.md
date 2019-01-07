@@ -12,6 +12,8 @@
 
 - `common`
   - [#220](https://github.com/wix-incubator/rich-content/pull/220) Fixed atomic block removal.
+- `hashtag`
+  - [#224](https://github.com/wix-incubator/rich-content/pull/224) Prevent hashtag links in code-blocks.
 
 <br/>
 
