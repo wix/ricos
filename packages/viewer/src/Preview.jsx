@@ -108,28 +108,29 @@ const options = {
   },
 };
 
-const augmentRaw = raw => {
-  const blocks = raw.blocks || [];
-  blocks
-    .filter(({ type }) => type !== 'atomic')
-    .forEach(block => {
-      const direction = getTextDirection(block.text);
-      if (direction === 'rtl') {
-        block.data.textDirection = direction;
+const augmentRaw = raw => ({
+  ...raw,
+  blocks: raw.blocks
+    .map(block => {
+      if (block.type === 'atomic') {
+        return block;
       }
-      if (endsWith(block.text, '\n')) {
-        block.text += '\n';
-      }
-    });
-  return raw;
-};
+
+      return {
+        ...block,
+        data: {
+          ...block.data,
+          textDirection: getTextDirection(block.text),
+        },
+        text: `${block.text}${endsWith(block.text, '\\n') ? '\n' : ''}`,
+      };
+    }),
+});
 
 const Preview = ({ raw, typeMappers, theme, isMobile, decorators, anchorTarget, relValue, config, textDirection }) => {
   const mergedStyles = mergeStyles({ styles, theme });
   const isEmpty = isEmptyRaw(raw);
   const typeMap = combineTypeMappers(typeMappers);
-
-  const augmentedRaw = augmentRaw(raw);
 
   const className = classNames(mergedStyles.preview, textDirection === 'rtl' && mergedStyles.rtl);
 
@@ -138,7 +139,7 @@ const Preview = ({ raw, typeMappers, theme, isMobile, decorators, anchorTarget, 
       {isEmpty && <div>There is nothing to render...</div>}
       {!isEmpty &&
         redraft(
-          augmentedRaw,
+          augmentRaw(raw),
           {
             inline: getInline(mergedStyles),
             blocks: getBlocks(mergedStyles, textDirection),
