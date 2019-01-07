@@ -33,7 +33,12 @@ class GiphySelector extends Component {
         .search(SEARCH_TYPE, { q: searchTag, offset: page * PAGE_SIZE, limit: PAGE_SIZE })
         .then(response => {
           if (page > 1) {
-            this.setState({ gifs: this.state.gifs.concat(response.data), hasMoreItems: true, page: this.state.page + 1, didFail: false });
+            this.setState({
+              gifs: this.state.gifs.concat(response.data),
+              hasMoreItems: true,
+              page: this.state.page + 1,
+              didFail: false
+            });
           } else {
             this.setState({
               gifs: response.data, hasMoreItems: true, page: this.state.page + 1, didFail: false
@@ -46,7 +51,9 @@ class GiphySelector extends Component {
       this.giphySdkCore
         .trending(SEARCH_TYPE, { limit: 100 })
         .then(response => {
-          this.setState({ gifs: response.data, hasMoreItems: false, didFail: false });
+          if (!searchTag) {
+            this.setState({ gifs: response.data, hasMoreItems: false, didFail: false });
+          }
         }).catch(() => {
           this.setState({ didFail: true, hasMoreItems: false });
         });
@@ -87,14 +94,10 @@ class GiphySelector extends Component {
   };
 
   componentWillReceiveProps(nextProps) {
-    if (!this.state.didFail) {
-      if (this.timer !== null) {
-        clearTimeout(this.timer);
-      } else {
-        this.getGifs(nextProps.searchTag);
-      }
-      this.timer = setTimeout(() => this.getGifs(nextProps.searchTag), WAIT_INTERVAL);
+    if (this.timer !== null) {
+      clearTimeout(this.timer);
     }
+    this.timer = setTimeout(() => this.getGifs(nextProps.searchTag), WAIT_INTERVAL);
   }
 
   componentDidMount() {
@@ -104,8 +107,13 @@ class GiphySelector extends Component {
   render() {
     const { styles } = this;
     const { t } = this.props;
-    const loader = <div className={styles.giphy_selecter_spinner}> <MDSpinner singleColor="#000000" /></div>;
-    const trending = (!this.props.searchTag) ? t('GiphyPlugin_Trending') : null;
+    const loader =
+      (
+        <div className={styles[`giphy_selecter_spinner_${this.state.gifs.length ? 'more' : 'empty_modal'}`]}>
+          <MDSpinner borderSize={1.5} singleColor="#000000" />
+        </div>
+      );
+    const trending = (!this.props.searchTag && (!this.state.didFail || this.state.gifs.length)) ? t('GiphyPlugin_Trending') : null;
     return (
       <div>
         <div className={styles.giphy_selecter_container}>
@@ -142,7 +150,10 @@ class GiphySelector extends Component {
             </InfiniteScroll>
           </Scrollbars>
         </div>
-        {(this.state.didFail) ? <div className={styles.giphy_selecter_error_msg}> {t('GiphyPlugin_ApiErrorMsg')}</div> : null}
+        {
+          (this.state.didFail && !this.state.gifs.length) ?
+            <div className={styles.giphy_selecter_error_msg}> {t('GiphyPlugin_ApiErrorMsg')}</div> : null
+        }
       </div>
     );
   }

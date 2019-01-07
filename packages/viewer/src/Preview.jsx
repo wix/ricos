@@ -56,16 +56,26 @@ const getList = (ordered, mergedStyles, textDirection) =>
     );
   };
 
+const getUnstyledBlocks = (mergedStyles, textDirection) =>
+  (children, blockProps) =>
+    children.map((child, i) => {
+      const [_, data = []] = child;
+      const hasText = !!data.length;
+      if (hasText) {
+        return withTextAlignment(
+          <p className={mergedStyles.text} key={blockProps.keys[i]}>{child}</p>,
+          blockProps.data[i],
+          mergedStyles,
+          textDirection
+        );
+      } else {
+        return <div className={mergedStyles.text} />;
+      }
+    });
+
 const getBlocks = (mergedStyles, textDirection) => {
   return {
-    unstyled: (children, blockProps) => children.map((child, i) =>
-      withTextAlignment(
-        <p className={mergedStyles.text} key={blockProps.keys[i]}>{child}</p>,
-        blockProps.data[i],
-        mergedStyles,
-        textDirection
-      )
-    ),
+    unstyled: getUnstyledBlocks(mergedStyles, textDirection),
     blockquote: (children, blockProps) => children.map((child, i) =>
       withTextAlignment(<blockquote className={mergedStyles.quote} key={blockProps.keys[i]}><div>{child}</div></blockquote>,
         blockProps.data[i], mergedStyles, textDirection)),
