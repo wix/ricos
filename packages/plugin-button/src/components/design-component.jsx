@@ -90,7 +90,7 @@ class DesignComponent extends PureComponent {
   };
 
   alignButtonSample = i => {
-    this.sampleContainer.scrollBy(80 * i, 0);
+    this.sampleContainer.scrollTo(80 * i, 0);
   }
 
   onButtonSampleClick = index => {
