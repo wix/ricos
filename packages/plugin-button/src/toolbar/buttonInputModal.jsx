@@ -51,7 +51,17 @@ export default class ButtonInputModal extends Component {
   }
 
   componentDidMount = () => {
-    this.setState({ initialComponentData: this.props.componentData.button });
+    const { settings: { colors }, componentData: { button } } = this.props;
+    const initialButtonColors = {
+      textColor: colors.color_1,
+      borderColor: colors.color_8,
+      backgroundColor: colors.color_8
+    };
+    if (!button.textColor) {
+      this.setState({ initialComponentData: { ...button, ...initialButtonColors } });
+    } else {
+      this.setState({ initialComponentData: button });
+    }
   }
 
   onValidUrl = isValidUrl => {
