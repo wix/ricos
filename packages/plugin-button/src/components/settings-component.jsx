@@ -75,7 +75,7 @@ class SettingsComponent extends PureComponent {
   };
 
   render() {
-    const { theme, t, linkInputRef } = this.props;
+    const { t, linkInputRef } = this.props;
     const { buttonText, url, validUrl } = this.state;
     const errorTooltip = (!validUrl || !this.props.validUrl) ? t('ButtonModal_Invalid_Link') : false;
     return (
@@ -94,7 +94,7 @@ class SettingsComponent extends PureComponent {
               onChange={this.onTextChanged}
               value={buttonText}
               placeholder={t('ButtonModal_InputName_Placeholder')}
-              theme={theme}
+              theme={this.styles}
               data-hook="ButtonInputModal"
             />
           </div>

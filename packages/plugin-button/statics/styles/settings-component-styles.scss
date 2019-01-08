@@ -64,9 +64,6 @@
 .section_content {
   padding-right: 30px;
   padding-top: 21px;
-  input[type="text"] {
-    border-radius: 0px;
-  }
   @include phone {
     padding-right: 0px;
   }
@@ -74,4 +71,16 @@
 .textInput_errorIcon {
   width: 18px;
   height: 18px;
+}
+.textInput_input {
+  @include phone {
+    border: none;
+    border-bottom: solid 1px rgba(51, 51, 51, 0.2);
+    padding-left: 0px;
+  }
+}
+
+.textInput_input::placeholder {
+  font-size: 14px;
+  color: #333333;
 }

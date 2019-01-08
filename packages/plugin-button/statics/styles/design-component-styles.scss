@@ -121,48 +121,63 @@
   width: 100%;
   float: left;
 }
-// style the slider
-input[type="range"] {
+
+.slider {
   -webkit-appearance: none;
   width: 100%;
   margin: 4px 0;
 }
-input[type="range"]:focus {
+.slider:focus {
   outline: none;
 }
-.slider_with_input {
-  input[type="number"] {
-    font-size: 18px;
-    font-family: Helvetica;
-    color: #333333;
-    padding-top: 2px;
-    text-align: left;
-  }
-  input[type="number"]:focus {
-    border-bottom: 1px #0261ff solid;
-    border-radius: 0px;
-  }
+
+.sliderWithInput_input {
+  font-size: 18px;
+  font-family: Helvetica;
+  color: #333333;
+  border: none;
+  margin-left: 10px;
+  padding-top: 4px;
+  flex: 0px;
+  height: auto;
+  text-align: right;
+  width: 41px;
 }
+
+.sliderWithInput_input:focus {
+  border-bottom: 1px #0261ff solid;
+  border-radius: 0px;
+}
+.sliderWithInput_input::-webkit-inner-spin-button,
+.sliderWithInput_input::-webkit-outer-spin-button{
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.slider{
+  width: 301px;
+}
+
 // FireFox
-input[type="range"]::-moz-range-progress {
+.slider::-moz-range-progress {
   background-color: #b5d1ff;
 }
-input[type="range"]::-moz-range-track {
+.slider::-moz-range-track {
   background-color: #e2edff;
 }
 /* IE*/
-input[type="range"]::-ms-fill-lower {
+.slider::-ms-fill-lower {
   background-color: #b5d1ff;
 }
-input[type="range"]::-ms-fill-upper {
+.slider::-ms-fill-upper {
   background-color: #e2edff;
 }
 // chrome && opera
-input[type="range"]::-webkit-progress-bar {
-  background-color: #b5d1ff;
+.slider::-webkit-progress-bar {
+  background-color: #b5d1ff98;
 }
 
-input[type="range"]::-webkit-slider-runnable-track {
+.slider::-webkit-slider-runnable-track {
   width: 100%;
   height: 4px;
   cursor: pointer;
@@ -171,7 +186,11 @@ input[type="range"]::-webkit-slider-runnable-track {
   border-radius: 0px;
   border: 0px solid rgba(1, 1, 94, 0.61);
 }
-input[type="range"]::-webkit-slider-thumb {
+
+
+
+
+.slider::-webkit-slider-thumb {
   box-shadow: 0px 0px 0px rgba(0, 0, 0, 0), 0px 0px 0px rgba(13, 13, 13, 0);
   border: 0px solid #000000;
   height: 12px;
@@ -182,10 +201,10 @@ input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   margin-top: -4px;
 }
-input[type="range"]:focus::-webkit-slider-runnable-track {
+.slider:focus::-webkit-slider-runnable-track {
   background: #e7f0ff;
 }
-input[type="range"]::-moz-range-track {
+.slider::-moz-range-track {
   width: 100%;
   height: 4px;
   cursor: pointer;
@@ -194,7 +213,7 @@ input[type="range"]::-moz-range-track {
   border-radius: 0px;
   border: 0px solid rgba(1, 1, 94, 0.61);
 }
-input[type="range"]::-moz-range-thumb {
+.slider::-moz-range-thumb {
   box-shadow: 0px 0px 0px rgba(0, 0, 0, 0), 0px 0px 0px rgba(13, 13, 13, 0);
   border: 0px solid #000000;
   height: 12px;
@@ -203,7 +222,7 @@ input[type="range"]::-moz-range-thumb {
   background: #0261ff;
   cursor: pointer;
 }
-input[type="range"]::-ms-track {
+.slider::-ms-track {
   width: 100%;
   height: 4px;
   cursor: pointer;
@@ -211,19 +230,19 @@ input[type="range"]::-ms-track {
   border-color: transparent;
   color: transparent;
 }
-input[type="range"]::-ms-fill-lower {
+.slider::-ms-fill-lower {
   background: #ddeaff;
   border: 0px solid rgba(1, 1, 94, 0.61);
   border-radius: 0px;
   box-shadow: 1px 1px 1px rgba(0, 0, 0, 0), 0px 0px 1px rgba(13, 13, 13, 0);
 }
-input[type="range"]::-ms-fill-upper {
+.slider::-ms-fill-upper {
   background: #e2edff;
   border: 0px solid rgba(1, 1, 94, 0.61);
   border-radius: 0px;
   box-shadow: 1px 1px 1px rgba(0, 0, 0, 0), 0px 0px 1px rgba(13, 13, 13, 0);
 }
-input[type="range"]::-ms-thumb {
+.slider::-ms-thumb {
   box-shadow: 0px 0px 0px rgba(0, 0, 0, 0), 0px 0px 0px rgba(13, 13, 13, 0);
   border: 0px solid #000000;
   height: 12px;
@@ -233,23 +252,10 @@ input[type="range"]::-ms-thumb {
   cursor: pointer;
   height: 4px;
 }
-input[type="range"]:focus::-ms-fill-lower {
+.slider:focus::-ms-fill-lower {
   background: #e2edff;
 }
-input[type="range"]:focus::-ms-fill-upper {
+.slider:focus::-ms-fill-upper {
   background: #e7f0ff;
 }
 
-input[type="number"] {
-  border: none;
-  margin-left: 10px;
-  padding-top: 4px;
-  flex: 0px;
-  height: auto;
-  text-align: right;
-}
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
