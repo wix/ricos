@@ -30,7 +30,8 @@ class CustomColorPicker extends React.Component {
         width: '100%',
         paddingTop: '13px',
         fontSize: '14px',
-        color: '#333333'
+        color: '#333333',
+        border: 'none'
       },
     };
   }

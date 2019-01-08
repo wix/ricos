@@ -27,8 +27,12 @@
   color: #333333;
   width: 64px;
   display: inline-block;
-  input {
-    border: none;
-    border-bottom: 1px #0261ff solid;
-  }
+}
+
+.input_container:hover {
+  border-bottom: 1px solid #b5d1ff;
+}
+
+.input_container:focus-within {
+  border-bottom: 1px solid #0261ff;
 }
