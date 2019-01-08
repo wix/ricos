@@ -106,7 +106,8 @@
 .sizeContent {
   &:not(.textWrapNowrap) {
     max-width: 100%;
-    margin: 0 auto;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 
@@ -119,7 +120,8 @@
 .sizeSmallCenter {
   &:not(.textWrapNowrap) {
     width: 350px;
-    margin: 0 auto;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 
