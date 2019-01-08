@@ -23,6 +23,7 @@ class CustomColorPicker extends React.Component {
         width: '100%',
         height: '112px',
         position: 'relative',
+        touchAction: 'none'
       },
       input: {
         position: 'relative',
@@ -62,7 +63,7 @@ class CustomColorPicker extends React.Component {
 
 CustomColorPicker.propTypes = {
   t: PropTypes.func,
-  color: PropTypes.object
+  color: PropTypes.string
 };
 
 export default customPicker(CustomColorPicker);
