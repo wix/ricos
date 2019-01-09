@@ -10,6 +10,11 @@
 
 ## [Unreleased]
 
+### :bug: Bug Fix
+
+- `viewer`
+  - [6f5e95b](https://github.com/wix-incubator/rich-content/commit/6f5e95b22a8c85972c82b73f795fc9fb4db81a8e) fixed centring of blocks
+
 <hr/>
 
 ## 1.7.9 (Jan 8, 2019)
@@ -35,7 +40,7 @@
   - [#222](https://github.com/wix-incubator/rich-content/pull/222) block augmentation no longer mutates
   - [1200130](https://github.com/wix-incubator/rich-content/commit/12001307b1c6ba0153ae2b748b816a3b7da34ea0) render empty blocks as `<div>` tags
 - `hashtag`
-  - [#224](https://github.com/wix-incubator/rich-content/pull/224) prevent hashtag links in code-blocks  
+  - [#224](https://github.com/wix-incubator/rich-content/pull/224) prevent hashtag links in code-blocks
 
 <hr/>
 
@@ -47,7 +52,7 @@
   - [#218](https://github.com/wix-incubator/rich-content/pull/218) Fixed justified text alignment.
 - `examples`
   - [#215](https://github.com/wix-incubator/rich-content/pull/215) Re-enable document scrolling after closing a modal when cliking outside + Prevent flyOut modals from jumping up when opening
-  
+
 <hr/>
 
 ## 1.7.6 (Dec 27, 2018)
@@ -85,7 +90,7 @@
   - [#206](https://github.com/wix-incubator/rich-content/pull/206) replacing insert button icon to a squared one (19*19)
 - `mentions`
   - [#204](https://github.com/wix-incubator/rich-content/pull/204) viewer
-  
+
 
 <hr/>
 
@@ -94,7 +99,7 @@
 ### :bug: Bug Fix
 
 - `common`
-  - [a40574b8](https://github.com/wix-incubator/rich-content/commit/a40574b8d551e40dd8d1c27b3f7b1f7bc6f05057) decreased mobile plugin add button font size 
+  - [a40574b8](https://github.com/wix-incubator/rich-content/commit/a40574b8d551e40dd8d1c27b3f7b1f7bc6f05057) decreased mobile plugin add button font size
 
 ## 1.7.3 (Nov 13, 2018)
 
