@@ -170,9 +170,6 @@ export default class ButtonInputModal extends Component {
   render() {
     const { theme, t, uiSettings, doneLabel, cancelLabel } = this.props;
     const { styles } = this;
-    const scrollContainerHeight = {
-      height: 'calc(100vh - ' + (143 + (2 * this.state.design.borderWidth)) + 'px)'
-    };
     const settingTabLabel = (
       <div className={styles.settingTab}>
         <div className={styles.tabTitle}>
@@ -217,7 +214,7 @@ export default class ButtonInputModal extends Component {
         <div>
           <Navbar onConfirm={this.onConfirm} onCancel={this.onCloseRequested} />
           <PreviewComponent buttonObj={this.state} {...this.props} />
-          <div className={styles.scroll} style={scrollContainerHeight} ref={this.setScrollbarRef}>
+          <div className={styles.scroll} ref={this.setScrollbarRef}>
             <div className={styles.container} data-hook="ButtonInputModal">
               <div className={styles.header_text}>{t('ButtonModal_Settings_Tab')}</div>
               {settingsComponent}
