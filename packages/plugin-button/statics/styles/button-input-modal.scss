@@ -10,7 +10,7 @@
 
 .design_component_container {
   @include phone {
-    padding: 7px 20px;
+    padding-top: 7px;
     padding-bottom: 0px;
   }
 }
@@ -47,6 +47,18 @@
   margin: 10px 0px;
   width: 100%;
   @include phone {
+    margin: 7px 0px 0px;
+    padding-bottom: 10px;
+    font-size: 18px;
+  }
+}
+
+.design_header_text{
+  font-size: 16px;
+  margin: 10px 0px;
+  width: 100%;
+  @include phone {
+    padding-left: 20px;
     margin: 7px 0px 0px;
     padding-bottom: 10px;
     font-size: 18px;

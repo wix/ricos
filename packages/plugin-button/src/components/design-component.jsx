@@ -4,7 +4,6 @@ import {
   SliderWithInput,
   SettingsSection,
   mergeStyles,
-  WixUtils,
 } from 'wix-rich-content-common';
 import classNames from 'classnames';
 import ButtonSample from '../components/button-sample';
@@ -151,97 +150,93 @@ class DesignComponent extends PureComponent {
     });
 
     return (
-      <div className={styles.design_component}>
+      <div>
         <SettingsSection theme={theme} ariaProps={{ 'aria-label': 'button sample selection', role: 'region' }}>
           <div className={styles.button_samples_container}>
-            {WixUtils.isMobile() &&
-              <div>
-                <div className={styles.right_shadow} />
-                <div className={styles.left_shadow} />
-              </div>
-            }
             <div className={classNames(styles.button_samples)} ref={ref => this.sampleContainer = ref}>
               {buttonSampleList}
             </div>
           </div>
         </SettingsSection>
-        <SettingsSection theme={theme} ariaProps={{ 'aria-label': 'border selection', role: 'region' }}>
-          <div className={styles.row} >
-            <div className={styles.section_header_border}>
-              {t('ButtonModal_Border_Section')}
-            </div>
-            <div className={styles.input_container_width}>
-              <div className={styles.slider_with_input}>
-                <SliderWithInput
-                  value={parseInt(this.state.borderWidth)}
-                  min={0}
-                  max={15}
-                  label={t('ButtonModal_Width_Input')}
-                  onChange={this.onBorderWidthChange.bind(this)}
-                  theme={this.styles}
-                />
+        <div className={styles.design_component}>
+          <SettingsSection theme={theme} ariaProps={{ 'aria-label': 'border selection', role: 'region' }}>
+            <div className={styles.row} >
+              <div className={styles.section_header_border}>
+                {t('ButtonModal_Border_Section')}
+              </div>
+              <div className={styles.input_container_width}>
+                <div className={styles.slider_with_input}>
+                  <SliderWithInput
+                    value={parseInt(this.state.borderWidth)}
+                    min={0}
+                    max={15}
+                    label={t('ButtonModal_Width_Input')}
+                    onChange={this.onBorderWidthChange.bind(this)}
+                    theme={this.styles}
+                  />
+                </div>
+              </div>
+              <div className={styles.input_container_corner}>
+                <div className={styles.slider_with_input}>
+                  <SliderWithInput
+                    value={parseInt(this.state.borderRadius)}
+                    min={0}
+                    max={15}
+                    label={t('ButtonModal_Radius_Input')}
+                    onChange={this.onBorderRadiusChange.bind(this)}
+                    theme={this.styles}
+                  />
+                </div>
               </div>
             </div>
-            <div className={styles.input_container_corner}>
-              <div className={styles.slider_with_input}>
-                <SliderWithInput
-                  value={parseInt(this.state.borderRadius)}
-                  min={0}
-                  max={15}
-                  label={t('ButtonModal_Radius_Input')}
-                  onChange={this.onBorderRadiusChange.bind(this)}
-                  theme={this.styles}
-                />
+          </SettingsSection>
+          <SettingsSection theme={theme} ariaProps={{ 'aria-label': 'color selection', role: 'region' }}>
+            <div style={{ border: 'none' }} className={styles.row} >
+              <div className={styles.section_header_color}>
+                {t('ButtonModal_Color_Section')}
               </div>
+              <ColorPicker
+                {...this.props}
+                onChange={this.onTextColorChange.bind(this)}
+                onClick={e => this.onColorPickerClicked(e)}
+                color={designObj.textColor}
+                theme={theme}
+                flag={this.state.openedColorPicker === 0}
+                index={0}
+                scrollColorPickerDown={this.scrollColorPickerDown}
+              >
+                {t('ButtonModal_Text_Color')}
+              </ColorPicker>
+              <ColorPicker
+                {...this.props}
+                onChange={this.onBorderColorChange.bind(this)}
+                onClick={e => this.onColorPickerClicked(e)}
+                color={designObj.borderColor}
+                theme={theme}
+                flag={this.state.openedColorPicker === 1}
+                index={1}
+                scrollColorPickerDown={this.scrollColorPickerDown}
+              >
+                {t('ButtonModal_Border_Color')}
+              </ColorPicker>
+              <ColorPicker
+                {...this.props}
+                color={designObj.backgroundColor}
+                theme={theme}
+                onChange={this.onBackgroundColorChange.bind(this)}
+                onClick={e => this.onColorPickerClicked(e)}
+                flag={this.state.openedColorPicker === 2}
+                index={2}
+                colorPickerRef={ref => {
+                  this.colorPicker3 = ref;
+                }}
+                scrollColorPickerDown={this.scrollColorPickerDown}
+              >
+                {t('ButtonModal_Background_Color')}
+              </ColorPicker>
             </div>
-          </div>
-        </SettingsSection>
-        <SettingsSection theme={theme} ariaProps={{ 'aria-label': 'color selection', role: 'region' }}>
-          <div style={{ border: 'none' }} className={styles.row} >
-            <div className={styles.section_header_color}>
-              {t('ButtonModal_Color_Section')}
-            </div>
-            <ColorPicker
-              {...this.props}
-              onChange={this.onTextColorChange.bind(this)}
-              onClick={e => this.onColorPickerClicked(e)}
-              color={designObj.textColor}
-              theme={theme}
-              flag={this.state.openedColorPicker === 0}
-              index={0}
-              scrollColorPickerDown={this.scrollColorPickerDown}
-            >
-              {t('ButtonModal_Text_Color')}
-            </ColorPicker>
-            <ColorPicker
-              {...this.props}
-              onChange={this.onBorderColorChange.bind(this)}
-              onClick={e => this.onColorPickerClicked(e)}
-              color={designObj.borderColor}
-              theme={theme}
-              flag={this.state.openedColorPicker === 1}
-              index={1}
-              scrollColorPickerDown={this.scrollColorPickerDown}
-            >
-              {t('ButtonModal_Border_Color')}
-            </ColorPicker>
-            <ColorPicker
-              {...this.props}
-              color={designObj.backgroundColor}
-              theme={theme}
-              onChange={this.onBackgroundColorChange.bind(this)}
-              onClick={e => this.onColorPickerClicked(e)}
-              flag={this.state.openedColorPicker === 2}
-              index={2}
-              colorPickerRef={ref => {
-                this.colorPicker3 = ref;
-              }}
-              scrollColorPickerDown={this.scrollColorPickerDown}
-            >
-              {t('ButtonModal_Background_Color')}
-            </ColorPicker>
-          </div>
-        </SettingsSection>
+          </SettingsSection>
+        </div>
       </div>
     );
   }

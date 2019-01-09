@@ -224,7 +224,7 @@ export default class ButtonInputModal extends Component {
             </div>
             <div className={styles.separator} />
             <div className={styles.design_component_container} data-hook="ButtonInputModal">
-              <div className={styles.header_text}>{t('ButtonModal_Design_Tab')}</div>
+              <div className={styles.design_header_text}>{t('ButtonModal_Design_Tab')}</div>
               {designComponent}
             </div>
           </div>

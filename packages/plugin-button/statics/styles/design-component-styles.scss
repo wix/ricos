@@ -15,7 +15,7 @@
 .design_component {
   padding-right: 30px;
   @include phone {
-    padding-right: 0px;
+    padding:0px 20px;
   }
 }
 
@@ -86,27 +86,9 @@
   }
 }
 
-.left_shadow {
-  width: 81px;
-  height: 52px;
-  background-image: linear-gradient(to left, rgba(238, 238, 238, 0), #ffffff);
-  position: absolute;
-  z-index: 1;
-  left: 0px;
-}
-
 .button_samples_container {
   position: relative;
   padding-top: 5px;
-}
-
-.right_shadow {
-  width: 81px;
-  height: 52px;
-  background-image: linear-gradient(to right, rgba(238, 238, 238, 0), #ffffff);
-  position: absolute;
-  z-index: 1;
-  right: 0px;
 }
 
 .input_container_width {
