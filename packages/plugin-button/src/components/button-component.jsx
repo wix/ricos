@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import { normalizeUrl } from 'wix-rich-content-common';
 import ButtonViewer from './button-viewer';
 
 
@@ -66,7 +67,7 @@ class ButtonComponent extends PureComponent {
 
     return (
       <ButtonViewer
-        url={url}
+        url={normalizeUrl(url)}
         style={style}
         target={target}
         rel={rel}
