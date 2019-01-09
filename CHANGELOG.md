@@ -13,7 +13,7 @@
 ### :bug: Bug Fix
 
 - `viewer`
-  - [6f5e95b](https://github.com/wix-incubator/rich-content/commit/6f5e95b22a8c85972c82b73f795fc9fb4db81a8e) fixed centring of blocks
+  - [6f5e95b](https://github.com/wix-incubator/rich-content/commit/6f5e95b22a8c85972c82b73f795fc9fb4db81a8e) fixed centering of blocks
 
 <hr/>
 
