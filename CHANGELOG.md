@@ -12,6 +12,8 @@
 
 ### :bug: Bug Fix
 
+- `video`
+  - [#227](https://github.com/wix-incubator/rich-content/pull/227) Removing font sccs property from input modal heading text so theme could be applied 
 - `viewer`
   - [6f5e95b](https://github.com/wix-incubator/rich-content/commit/6f5e95b22a8c85972c82b73f795fc9fb4db81a8e) fixed centering of blocks
 
