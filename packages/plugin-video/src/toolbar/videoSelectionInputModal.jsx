@@ -95,7 +95,7 @@ export default class VideoSelectionInputModal extends Component {
       <div>
         <div className={styles[`video_modal_container_${handleFileSelection ? 'big' : 'small'}`]} data-hook="videoUploadModal">
           {!WixUtils.isMobile() && <CloseIcon className={styles.video_modal_closeIcon} onClick={() => this.onCloseRequested()} />}
-          <div className={styles.video_modal_add_a_Video}>{t('VideoUploadModal_Title')}</div>
+          <h2 className={styles.video_modal_add_a_Video}>{t('VideoUploadModal_Title')}</h2>
           <div role="heading" aria-labelledby="video_modal_hdr" className={styles.video_modal_header}>
             <h3 id="video_modal_hdr" className={styles.video_modal_header_text}>
               {t('VideoUploadModal_Header')}
