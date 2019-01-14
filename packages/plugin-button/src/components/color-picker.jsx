@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import isEqual from 'lodash/isEqual';
 import classNames from 'classnames';
 import { mergeStyles } from 'wix-rich-content-common';
 import PickedIcon from './../icons/pickedIcon';
@@ -21,64 +20,59 @@ class ColorPicker extends PureComponent {
       colors.color_6,
       colors.color_10
     ];
+
     this.state = {
       color: this.props.color,
-      isPickerClicked: this.props.flag,
-      isCustomColorPicker: false,
-      isDropperSelected: false
+      rgb: this.hexToRGB(this.props.color),
+      isOpened: this.props.isOpened,
+      isCustomColorPickerOpened: false,
+      selectedIndex: this.presetColors.indexOf(this.props.color.toUpperCase())
     };
+
   }
 
-  componentDidMount = () => {
-    if (this.state.color && this.presetColors.indexOf(this.state.color) === -1) {
-      this.setState({ dropperBackgroundColor: this.state.color, isDropperSelected: true });
-    }
-  }
-
-  componentWillReceiveProps = () => {
-    if (this.state.isPickerClicked !== this.props.flag) {
-      this.setState({ isPickerClicked: this.props.flag });
-    }
-    const { color } = this.props;
-    const colorIndex = this.presetColors.indexOf(color);
-    if (this.state.colorButtonIndex !== colorIndex) {
-      this.setState({ colorButtonIndex: colorIndex });
-    }
-  }
-
-  componentDidUpdate = () => {
-    if (!isEqual(this.state.color, this.props.color)) {
-      this.setState({ color: this.props.color });
+  componentWillReceiveProps = nextProps => {
+    if (this.state.isOpened !== nextProps.isOpened) {
+      this.setState({ isOpened: nextProps.isOpened });
     }
   }
 
   onPickerClicked = () => {
+    this.setState({ isOpened: !this.state.isOpened, isCustomColorPickerOpened: !this.state.isOpened && this.state.isCustomColorPickerOpened });
     this.props.onClick(this.props.index);
-    this.setState({ isPickerClicked: !this.state.isPickerClicked });
-    if (!this.state.isPickerClicked) {
-      this.setState({ isCustomColorPicker: false });
+  }
+
+  onColorButtonClicked = index => {
+    if (index !== -1) {
+      this.setColor(this.presetColors[index]);
+    } else {
+      this.setState({ isCustomColorPickerOpened: !this.state.isCustomColorPickerOpened });
     }
   }
 
-  onColorButtonClicked = (color, index) => {
-    this.setState({ colorButtonIndex: index, isDropperSelected: false, dropperBackgroundColor: '' });
-    this.props.onChange(color);
-  }
-
-  onDropperClicked = () => {
-    this.props.scrollColorPickerDown();
-    this.setState({ isCustomColorPicker: !this.state.isCustomColorPicker });
+  setColor = color => {
+    const selectedColor = color.toUpperCase();
+    const index = this.presetColors.indexOf(selectedColor);
+    this.setState({ selectedIndex: index, color: selectedColor, rgb: this.hexToRGB(selectedColor) });
+    this.props.onChange(selectedColor);
   }
 
   onCustomColorPickerChanged = color => {
-    this.setState({ rgb: color.rgb });
-    this.props.onChange(color.hex);
-    this.setState({ color: color.hex });
-    if (this.presetColors.indexOf(color.hex) === -1) {
-      this.setState({ dropperBackgroundColor: color.hex, isDropperSelected: true });
-    } else {
-      this.setState({ dropperBackgroundColor: '', isDropperSelected: false });
+    if (color.hex !== this.state.color) {
+      this.setColor(color.hex);
     }
+  }
+
+  hexToRGB = hex => {
+    let hexNumber = hex.substr(1);
+    const rgb = [];
+    while (hexNumber.length) {
+      const color = hexNumber.substr(0, 2);
+      hexNumber = hexNumber.substr(2);
+      const dec = parseInt(color, 16);
+      rgb.push(dec);
+    }
+    return { r: rgb[0], g: rgb[1], b: rgb[2] };
   }
 
   getDarkBrightness = rgb => {
@@ -99,17 +93,17 @@ class ColorPicker extends PureComponent {
     }
   }
 
-  handleKeyPress = (e, color) => {
-    if (e.charCode === 13) {
-      this.props.onChange(color);
-    }
+  handleKeyPress = () => {
+    return false;
   };
+
+
 
 
   render() {
     const { colorPickerRef } = this.props;
     let dropperColor = '';
-    if (this.state.color && this.presetColors.indexOf(this.state.color) === -1) {
+    if (this.state.selectedIndex === -1) {
       if (this.getDarkBrightness(this.state.rgb)) {
         dropperColor = '#eef1f6';
       } else {
@@ -120,22 +114,23 @@ class ColorPicker extends PureComponent {
       return (
         <div
           role="button"
-          tabIndex="0"
-          onKeyPress={this.handleKeyPress.bind(this, color)}
+          tabIndex={index}
+          onKeyPress={this.handleKeyPress.bind(this)}
           key={color + index}
           className={classNames(styles.non_dropper_palette)}
           style={{ background: color }}
-          onClick={this.onColorButtonClicked.bind(this, color, index)}
+          onClick={this.onColorButtonClicked.bind(this, index)}
         >
-          {this.state.colorButtonIndex === index &&
+          {this.state.selectedIndex === index &&
             <PickedIcon className={styles.picked} width="12px" height="12px" />
           }
         </div>
       );
     });
+    const dropperStyle = (this.state.selectedIndex < 0) ? { background: this.state.color } : {};
     return (
       <div ref={colorPickerRef} className={styles.container}>
-        {this.state.isPickerClicked &&
+        {this.state.isOpened &&
           <div className={styles.overlay} />
         }
         <div className={this.styles.color_picker}>
@@ -150,7 +145,7 @@ class ColorPicker extends PureComponent {
             />
           </div>
         </div>
-        {this.state.isPickerClicked &&
+        {this.state.isOpened &&
           <div className={styles.colorBoard}>
             <div className={styles.palettes}>
               {colorsButtons}
@@ -158,18 +153,18 @@ class ColorPicker extends PureComponent {
                 role="button"
                 tabIndex="0"
                 onKeyPress={this.handleKeyPress.bind(this, this.state.color)}
-                onClick={this.onDropperClicked}
-                style={{ background: this.state.dropperBackgroundColor }}
+                onClick={this.onColorButtonClicked.bind(this, -1)}
+                style={dropperStyle}
                 className={classNames(styles.dropper_palette)}
               >
                 {
-                  this.state.isDropperSelected &&
+                  this.state.selectedIndex < 0 &&
                   <PickedIcon className={styles.picked} width="12px" height="12px" />
                 }
                 <EyeDropperIcon style={{ color: dropperColor }} className={styles.dropper} />
               </div>
             </div>
-            {this.state.isCustomColorPicker &&
+            {this.state.isCustomColorPickerOpened &&
               <CustomColorPicker color={this.state.color} onChange={this.onCustomColorPickerChanged.bind(this)} t={this.props.t} />
             }
           </div>
@@ -186,7 +181,7 @@ ColorPicker.propTypes = {
   color: PropTypes.string,
   onClick: PropTypes.func,
   onChange: PropTypes.func,
-  flag: PropTypes.bool,
+  isOpened: PropTypes.bool,
   settings: PropTypes.object.isRequired,
   t: PropTypes.func,
   index: PropTypes.number,

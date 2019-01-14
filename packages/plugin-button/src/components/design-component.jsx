@@ -201,7 +201,7 @@ class DesignComponent extends PureComponent {
                 onClick={e => this.onColorPickerClicked(e)}
                 color={designObj.textColor}
                 theme={theme}
-                flag={this.state.openedColorPicker === 0}
+                isOpened={this.state.openedColorPicker === 0}
                 index={0}
                 scrollColorPickerDown={this.scrollColorPickerDown}
               >
@@ -213,7 +213,7 @@ class DesignComponent extends PureComponent {
                 onClick={e => this.onColorPickerClicked(e)}
                 color={designObj.borderColor}
                 theme={theme}
-                flag={this.state.openedColorPicker === 1}
+                isOpened={this.state.openedColorPicker === 1}
                 index={1}
                 scrollColorPickerDown={this.scrollColorPickerDown}
               >
@@ -225,7 +225,7 @@ class DesignComponent extends PureComponent {
                 theme={theme}
                 onChange={this.onBackgroundColorChange.bind(this)}
                 onClick={e => this.onColorPickerClicked(e)}
-                flag={this.state.openedColorPicker === 2}
+                isOpened={this.state.openedColorPicker === 2}
                 index={2}
                 colorPickerRef={ref => {
                   this.colorPicker3 = ref;

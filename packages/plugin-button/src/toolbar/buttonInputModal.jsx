@@ -23,7 +23,13 @@ export default class ButtonInputModal extends Component {
   constructor(props) {
     super(props);
     this.styles = mergeStyles({ styles, theme: props.theme });
-    const { componentData, relValue, anchorTarget } = this.props;
+    const { settings: { colors }, componentData, relValue, anchorTarget } = this.props;
+    const initialButtonColors = {
+      textColor: colors.color_1,
+      borderColor: colors.color_8,
+      backgroundColor: colors.color_8
+    };
+
     let buttonObj = {};
     if (componentData.button) {
       buttonObj = {
@@ -36,6 +42,11 @@ export default class ButtonInputModal extends Component {
     if (!('target' in buttonObj) && anchorTarget === '_blank') {
       buttonObj.target = true;
     }
+
+    if (!buttonObj.textColor) {
+      buttonObj = { ...buttonObj, ...initialButtonColors };
+    }
+
     this.state = {
       isValidUrl: true,
       data: { ...buttonObj },
