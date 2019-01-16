@@ -3,13 +3,33 @@
   "type": "object",
   "properties": {
     "src": {
-      "$id": "/properties/src",
-      "type": "string",
-      "title": "Video Source URL",
-      "default": "",
-      "examples": [
-        "https://www.youtube.com/watch?v=eqZVIiD6wSg"
+      "oneOf": [
+        {
+          "$id": "/properties/src",
+          "type": "string",
+          "title": "Video Source URL",
+          "default": "",
+          "examples": [
+            "https://www.youtube.com/watch?v=eqZVIiD6wSg"
+          ]
+        },
+        {
+          "$id": "/properties/src",
+          "type": "object",
+          "properties": {
+            "pathname": {
+              "$id": "/properties/src/pathname",
+              "type": "string",
+              "title": "Video Source Pathname",
+              "default": "",
+              "examples": [
+                "video-sample/jellyfish-25-mbps-hd-hevc.mp4"
+              ]
+            }
+          }
+        }
       ]
+
     },
     "isCustomVideo": {
       "$id": "/properties/isCustomVideo",
