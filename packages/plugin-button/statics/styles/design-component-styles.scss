@@ -7,8 +7,21 @@
   border-bottom: 1px solid #ededed;
   padding-top: 14px;
   @include phone {
-    padding-top: 16px;
+    padding-top: 34px;
+    margin-left: -1px;
   }
+}
+
+.colorPicker_container{
+  height: auto;
+  width: 100%;
+  border-bottom: 1px solid #ededed;
+  padding-bottom: 10px;
+  padding-top: 14px;
+  @include phone {
+    padding-top: 15px;
+    margin-left: -1px;
+  }  
 }
 
 .design_component {
@@ -18,40 +31,31 @@
   }
 }
 
-.section_header_size {
-  padding-bottom: 16px;
-  padding-top: 7px;
-  font-size: 16px;
-  font-weight: 300;
-  height: 24px;
-  @include phone {
-    padding-top: 0px;
-    font-size: 18px;
-  }
-}
-
 .section_header_color {
-  padding-bottom: 5px;
+  font-family: Helvetica;
+  padding-bottom: 6px;
   padding-top: 6px;
   font-size: 16px;
   font-weight: 300;
   height: auto;
   @include phone {
-    padding-bottom: 20px;
+    padding-bottom: 19px;
     padding-top: 0px;
     font-size: 18px;
   }
 }
 
 .section_header_border {
-  padding-bottom: 15px;
-  padding-top: 7px;
+  font-family: Helvetica;
+  padding-bottom: 14px;
+  padding-top: 8px;
   font-size: 16px;
   font-weight: 300;
   height: 24px;
   @include phone {
     padding-top: 0px;
     font-size: 18px;
+    padding-bottom: 17px;
   }
 }
 
@@ -67,7 +71,7 @@
     width: 100%;
     height: auto;
     padding-bottom: 24px;
-    padding-top: 9px;
+    padding-top: 12px;
     white-space: nowrap;
     position: relative;
     overflow-x: scroll;
@@ -87,10 +91,12 @@
 }
 
 .input_container_corner {
-  padding-bottom: 14px;
+  padding-bottom: 17px;
 }
 
 .sliderWithInput_label {
+  font-family: Helvetica;
+  color: #333333;
   font-size: 14px;
   padding-bottom: 4px;
   @include phone {

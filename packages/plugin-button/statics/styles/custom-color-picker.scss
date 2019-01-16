@@ -2,7 +2,7 @@
 @import "~wix-rich-content-common/dist/statics/styles/palette";
 
 .container {
-  padding-top: 20px;
+  padding-top: 18px;
   @include phone {
     padding-top: 3px;
   }
@@ -10,8 +10,8 @@
 .editable_input_container {
   padding-top: 0px;
   @include phone {
-    padding-top: 3px;
-    padding-bottom: 7px;
+    padding-top: 9px;
+    padding-bottom: 17px;
   }
 }
 

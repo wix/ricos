@@ -2,7 +2,7 @@
 @import "~wix-rich-content-common/dist/statics/styles/mixins";
 .container {
   position: relative;
-  padding-bottom: 20px;
+  padding-bottom: 19px;
   @include phone {
     padding-bottom: 3px;
   }
@@ -28,18 +28,23 @@
   width: 100%;
   position: relative;
   @include phone {
-    padding-bottom: 6px;
+    padding-bottom: 8px;
     height: 30px;
   }
 }
 
 .label {
   position: absolute;
+  font-family: Helvetica;
+  color: #333333;
   font-size: 14px;
   font-weight: 300;
   line-height: 18px;
-  top: calc(50% - 10px);
+  top: calc(50% - 11px);
   left: 0px;
+  @include phone{
+    top: calc(50% - 12px);
+  }
 }
 
 .picker {
@@ -100,6 +105,10 @@ $size: 10px;
 
 .non_dropper_palette {
   @extend %palette;
+  @include phone{
+    margin-right: 11px;
+  }
+  
 }
 
 .dropper_palette {
@@ -111,11 +120,11 @@ $size: 10px;
   width: 100%;
   text-align: right;
   height: 36px;
-  padding-top: 19px;
+  padding-top: 20px;
   @include phone {
     height: 30px;
-    padding-bottom: 8px;
-    padding-top: 25px;
+    padding-bottom: 9px;
+    padding-top: 26px;
   }
 }
 

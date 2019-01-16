@@ -17,7 +17,7 @@ class CustomColorPicker extends React.Component {
       hue: {
         height: isMobile ? '24px' : '12px',
         position: 'relative',
-        marginTop: '6px',
+        marginTop: isMobile ? '12px' : '6px',
       },
       saturation: {
         width: '100%',

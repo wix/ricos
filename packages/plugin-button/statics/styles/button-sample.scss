@@ -6,6 +6,8 @@
   border-style: none;
   height: 40px;
   width: 104px;
+  padding-bottom: 3px;
+  padding-right: 3px;
   box-sizing: border-box;
   cursor: pointer;
 }
@@ -29,6 +31,6 @@
 
 .picked {
   position: absolute;
-  right: -6px;
-  top: -6px;
+  right: -7px;
+  top: -7px;
 }

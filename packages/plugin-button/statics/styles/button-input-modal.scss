@@ -3,7 +3,7 @@
 
 .container {
   @include phone {
-    padding: 7px 20px;
+    padding: 6px 20px;
     padding-bottom: 4px;
   }
 }
@@ -32,36 +32,40 @@
   }
 }
 
-.errorIcon {
-  width: 13px;
-}
-
 .header {
   display: flex;
   align-items: center;
-  padding: 23px 30px 18px;
+  margin-top: 1px;
+  padding: 22px 30px 18px;
   border-bottom: 1px solid #ededed;
+  height: 80px;
+  box-sizing: border-box;
+
 }
 
 .header_text {
+  font-family: Helvetica;
   font-size: 16px;
-  margin: 10px 0px;
   width: 100%;
+  margin-top: 13px;
+  margin-bottom: 10px;
+  margin-left: -1px;
+  color: #333333;
   @include phone {
-    margin: 7px 0px 0px;
-    padding-bottom: 10px;
+    margin: 11px -1px 0;
     font-size: 18px;
   }
 }
 
 .design_header_text{
+  font-family: Helvetica;
   font-size: 16px;
   margin: 10px 0px;
   width: 100%;
   @include phone {
     padding-left: 20px;
-    margin: 7px 0px 0px;
-    padding-bottom: 10px;
+    margin: 9px 0px 0px;
+    padding-bottom: 8px;
     font-size: 18px;
   }
 }
@@ -87,8 +91,8 @@
 
 .errorIcon {
   position: absolute;
-  top: 0px;
-  left: 122px;
+  top: -2px;
+  left: 123px;
 }
 
 .modal_footer {
@@ -98,6 +102,7 @@
 
 .settingTab {
   position: relative;
+  margin-top: 4px;
   width: 100%;
   height: 18px;
 }

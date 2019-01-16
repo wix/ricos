@@ -191,7 +191,7 @@ class DesignComponent extends PureComponent {
             </div>
           </SettingsSection>
           <SettingsSection theme={theme} ariaProps={{ 'aria-label': 'color selection', role: 'region' }}>
-            <div style={{ border: 'none' }} className={styles.row} >
+            <div style={{ border: 'none' }} className={styles.colorPicker_container} >
               <div className={styles.section_header_color}>
                 {t('ButtonModal_Color_Section')}
               </div>
