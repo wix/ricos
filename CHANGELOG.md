@@ -10,6 +10,11 @@
 
 ## [Unreleased]
 
+### :bug: Bug Fix
+
+- `html`
+  - first time iframe onload is fired before React.render(), so it will not refresh
+
 ### :rocket: New Feature
 
 - `video`
@@ -84,6 +89,7 @@
 
 - `viewer`
   - [#214](https://github.com/wix-incubator/rich-content/pull/214) soft new line at end of block
+
 ### :house: Internal
 
 - `general`
@@ -103,10 +109,9 @@
   - [#194](https://github.com/wix-incubator/rich-content/pull/194) handle input selection focus and removed border radius on iphone
 - `soundcloud`
   - [#195](https://github.com/wix-incubator/rich-content/pull/195) handle input selection focus on iphone and source url optimisations
-  - [#206](https://github.com/wix-incubator/rich-content/pull/206) replacing insert button icon to a squared one (19*19)
+  - [#206](https://github.com/wix-incubator/rich-content/pull/206) replacing insert button icon to a squared one (19\*19)
 - `mentions`
   - [#204](https://github.com/wix-incubator/rich-content/pull/204) viewer
-
 
 <hr/>
 
@@ -328,6 +333,7 @@
 ### :rocket: New Feature
 
 - `viewer`
+
   - [#134](https://github.com/wix-incubator/rich-content/pull/134) `RichContentViewer` accepts `config` prop for plugin configuration
 
 - `examples`
@@ -355,7 +361,7 @@
 
 ~~- `soundcloud`~~
 
-  ~~- [#92](https://github.com/wix-incubator/rich-content/pull/92) `plugin-sound-cloud` implemented~~
+~~- [#92](https://github.com/wix-incubator/rich-content/pull/92) `plugin-sound-cloud` implemented~~
 
 ### :bug: Bug Fix
 
