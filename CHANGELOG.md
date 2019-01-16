@@ -13,12 +13,16 @@
 ### :bug: Bug Fix
 
 - `html`
-  - first time iframe onload is fired before React.render(), so it will not refresh
+  - [#232](https://github.com/wix-incubator/rich-content/pull/232) first time iframe onload is fired before React.render(), so it will not refresh
+  
+<hr/>
+
+## 1.7.11 (Jan 16, 2019)
 
 ### :rocket: New Feature
 
 - `video`
-  - import video with either url or pathname.
+  - [#231](https://github.com/wix-incubator/rich-content/pull/231) import video with either url or pathname
 
 <hr/>
 
