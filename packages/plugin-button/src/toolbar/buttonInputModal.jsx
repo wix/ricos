@@ -170,14 +170,6 @@ export default class ButtonInputModal extends Component {
       this.setState({ isValidUrl: false });
     }
   }
-  onBlur = () => {
-    const { url } = this.state.data;
-    if (isValidUrl(url)) {
-      this.setState({ isValidUrl: true });
-    } else {
-      this.setState({ isValidUrl: false });
-    }
-  }
   render() {
     const { theme, t, uiSettings, doneLabel, cancelLabel } = this.props;
     const { styles } = this;
@@ -204,7 +196,6 @@ export default class ButtonInputModal extends Component {
         validUrl={this.state.isValidUrl}
         settingsObj={this.state.data}
         onKeyPress={this.handleKeyPress}
-        onBlur={this.onBlur.bind(this)}
         linkInputRef={ref => {
           this.linkInput = ref;
         }}

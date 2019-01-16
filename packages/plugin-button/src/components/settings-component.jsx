@@ -74,6 +74,16 @@ class SettingsComponent extends PureComponent {
     }
   };
 
+  onBlur = () => {
+    const { url } = this.state;
+    this.setState({ target: event.target.checked });
+    if (isValidUrl(url)) {
+      this.setState({ validUrl: true });
+    } else {
+      this.setState({ validUrl: false });
+    }
+  }
+
   render() {
     const { t, linkInputRef } = this.props;
     const { buttonText, url, validUrl } = this.state;
@@ -109,7 +119,7 @@ class SettingsComponent extends PureComponent {
           type="text"
           onKeyPress={this.handleKeyPress}
           onChange={this.onLinkChanged}
-          onBlur={this.props.onBlur}
+          onBlur={this.onBlur}
           value={url}
           placeholder={t('ButtonModal_Link_Input_Placeholder')}
           theme={this.styles}
