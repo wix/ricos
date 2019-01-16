@@ -10,6 +10,11 @@
 
 ## [Unreleased]
 
+### :rocket: New Feature
+
+- `video`
+  - import video with either url or pathname.
+
 <hr/>
 
 ## 1.7.10 (Jan 14, 2019)

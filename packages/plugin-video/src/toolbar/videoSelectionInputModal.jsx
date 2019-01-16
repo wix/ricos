@@ -10,6 +10,7 @@ export default class VideoSelectionInputModal extends Component {
     const { componentData } = this.props;
     this.state = {
       url: (!componentData.isCustomVideo && componentData.src) || '',
+      pathname: '',
       isCustomVideo: false,
       errorMsg: ''
     };
@@ -23,18 +24,18 @@ export default class VideoSelectionInputModal extends Component {
   afterOpenModal = () => this.input.focus();
 
   onConfirm = () => {
-    const { url, isCustomVideo } = this.state;
-
+    const { url, pathname, isCustomVideo } = this.state;
+    const src = pathname.length ? { pathname } : url;
     if (isVideoUrl(url) || isCustomVideo) {
       const { componentData, helpers, pubsub, onConfirm } = this.props;
       if (onConfirm) {
-        onConfirm({ ...componentData, src: this.state.url, isCustomVideo: this.state.isCustomVideo });
+        onConfirm({ ...componentData, src, isCustomVideo: this.state.isCustomVideo });
       } else {
-        pubsub.update('componentData', { src: this.state.url, isCustomVideo: this.state.isCustomVideo });
+        pubsub.update('componentData', { src, isCustomVideo: this.state.isCustomVideo });
       }
 
       if (helpers && helpers.onVideoSelected) {
-        helpers.onVideoSelected(url, data => pubsub.update('componentData', { metadata: { ...data } }));
+        helpers.onVideoSelected(src, data => pubsub.update('componentData', { metadata: { ...data } }));
       }
 
       this.onCloseRequested();
@@ -47,7 +48,11 @@ export default class VideoSelectionInputModal extends Component {
     if (error) {
       this.setState({ errorMsg: error.msg });
     } else {
-      this.setState({ url: data.url, isCustomVideo: true });
+      if (data.pathname) {
+        this.setState({ url: '', pathname: data.pathname, isCustomVideo: true });
+      } else {
+        this.setState({ url: data.url, pathname: '', isCustomVideo: true });
+      }
       this.onConfirm();
     }
   };

@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { mergeStyles, validate } from 'wix-rich-content-common';
 import isEqual from 'lodash/isEqual';
+import getVideoSrc from './get-video-source';
 import schema from '../statics/data-schema.json';
 import styles from '../statics/styles/video-viewer.scss';
 
@@ -25,7 +26,7 @@ class VideoViewer extends Component {
     return (
       <ReactPlayer
         className={classNames(this.styles.video_player)}
-        url={componentData.src}
+        url={getVideoSrc(componentData.src, settings)}
         {...rest}
       />
     );
@@ -40,7 +41,7 @@ VideoViewer.propTypes = {
   controls: PropTypes.bool,
   width: PropTypes.string,
   height: PropTypes.string,
-  settings: PropTypes.object,
+  settings: PropTypes.object.isRequired,
   isMobile: PropTypes.bool,
 };
 
