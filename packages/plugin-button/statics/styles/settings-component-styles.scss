@@ -85,8 +85,10 @@
 .textInput_errorIcon {
   width: 18px;
   height: 18px;
-  right: 0px;
-  top: -6px;
+  @include phone {
+    right: 0px;
+    top: -6px;
+  }
 }
 .textInput_input {
   padding-bottom: 7px;
