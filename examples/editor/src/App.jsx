@@ -36,8 +36,8 @@ class App extends Component {
       readOnly: false,
       mounted: true,
       textToolbarType: 'inline',
-      showContentStateEditor: false,
-      showDevToggles: false,
+      showContentStateEditor: true,
+      showDevToggles: true,
     };
     this.md = window ? new MobileDetect(window.navigator.userAgent) : null;
     this.initEditorProps();

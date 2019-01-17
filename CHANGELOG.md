@@ -10,6 +10,9 @@
 
 ## [Unreleased]
 
+- `common`
+  - [#255](https://github.com/wix-incubator/rich-content/pull/235) add dropdown option in link panel
+
 
 ### :house: Internal
 

@@ -7,16 +7,67 @@ import { LINK_TYPE } from "wix-rich-content-plugin-link";
 import { VIDEO_TYPE } from "wix-rich-content-plugin-video";
 import { GIPHY_TYPE } from "wix-rich-content-plugin-giphy";
 import { EXTERNAL_MENTIONS_TYPE } from "wix-rich-content-plugin-mentions";
-import { TOOLBARS, BUTTONS, DISPLAY_MODE } from "wix-rich-content-common";
+import React from 'react';
+import Highlighter from 'react-highlight-words';
+import casual from 'casual-browserify';
 
+import { TOOLBARS, BUTTONS, DISPLAY_MODE } from "wix-rich-content-common";
 // import InlineToolbarDecoration from './Components/InlineToolbarDecoration';
 // import StaticToolbarDecoration from './Components/StaticToolbarDecoration';
 // import SideToolbarDecoration from './Components/SideToolbarDecoration';
 // import PluginToolbarDecoration from './Components/PluginToolbarDecoration';
 
+const getLinkPanelDropDownConfig = () => {
+  const getItems = () => {
+    casual.define('item', function() {
+      return {
+        value: casual.url,
+        label: casual.catch_phrase,
+        date: casual.date('DD/MM/YY')
+      };
+    });
+
+    const items = [];
+    const amount = 1000;
+    for (var i = 0; i < amount; ++i) {
+      items.push(casual.item);
+    }
+    return items;
+  };
+
+  const wordHighlighter = (textToHighlight, searchWords) => <Highlighter
+    searchWords={[searchWords]}
+    textToHighlight={textToHighlight}
+    highlightTag={({ children }) => <strong className="highlighted-text">{children}</strong>}
+  />;
+
+  const items = getItems();
+
+  return {
+    // isOpen: true,
+    getItems: () => items,
+    itemHeight: 40,
+    itemToString: item => item.value,
+    formatMenuItem: (item, input) =>
+      <div style={{display: 'flex', justifyContent: 'space-between', padding: '10px'}}>
+          <span style={{
+            whiteSpace: 'nowrap',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            paddingRight: '10px'
+          }}
+          >{wordHighlighter(item.label, input)}</span>
+        <span>{item.date}</span>
+      </div>
+  }
+};
+
 const uiSettings = {
-  blankTargetToggleVisibilityFn: () => true,
-  nofollowRelToggleVisibilityFn: () => true
+  linkPanel: {
+    blankTargetToggleVisibilityFn: () => true,
+    nofollowRelToggleVisibilityFn: () => true,
+    dropDown: getLinkPanelDropDownConfig(),
+  }
 };
 
 export default {
