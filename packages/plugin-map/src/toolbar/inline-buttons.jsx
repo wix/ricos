@@ -51,7 +51,7 @@ export default ({ settings, t, helpers }) => {
         const modalStyles = getModalStyles({ customStyles: DesktopFlyOutModalStyles, fullScreen: true });
         const { top, left } = buttonRef.getBoundingClientRect();
         const modalLeft = left - 120;
-        const modalTop = top > 475 ? top - 485 : top + 30;
+        const modalTop = top > 530 ? top - 540 : top + 30;
         return { ...modalStyles, content: { ...modalStyles.content, top: modalTop, left: modalLeft, margin: 0, position: 'absolute' } };
       },
       modalDecorations: [{

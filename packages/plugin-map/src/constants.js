@@ -1,14 +1,16 @@
 export const MAP_TYPE = 'wix-draft-plugin-map';
 
 export const DEFAULTS = {
-  map:{
+  map: {
     address: 'Wix HQ, Nemal Tel Aviv Street, Tel Aviv-Yafo, Israel',
     zoom: 18,
-    lat: 32.097235, 
+    lat: 32.097235,
     lng: 34.774270,
     mode: 'roadmap',
     isMarkerShown: true,
-    isControlsShown: true
+    isZoomControlShown: true,
+    isStreetViewControlShown: true,
+    isDraggingAllowed: true
   },
   config: {
     size: 'content',
@@ -36,7 +38,7 @@ export const DesktopFlyOutModalStyles = {
   content: {
     width: '275px',
     boxSizing: 'border-box',
-    height: '475px',
+    height: '530px',
     overflow: 'visible',
     border: '1px solid #ccc',
     paddingRight: '15px',

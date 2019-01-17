@@ -29,7 +29,9 @@ export default class MapSettingsModal extends Component {
       lng: componentData.map.lng,
       mode: componentData.map.mode,
       isMarkerShown: componentData.map.isMarkerShown,
-      isControlsShown: componentData.map.isControlsShown,
+      isZoomControlShown: componentData.map.isZoomControlShown,
+      isStreetViewControlShown: componentData.map.isStreetViewControlShown,
+      isDraggingAllowed: componentData.map.isDraggingAllowed,
       enableSave: false
     };
   }
@@ -58,7 +60,9 @@ export default class MapSettingsModal extends Component {
         lng: this.state.lng,
         mode: this.state.mode,
         isMarkerShown: this.state.isMarkerShown,
-        isControlsShown: this.state.isControlsShown
+        isZoomControlShown: this.state.isZoomControlShown,
+        isStreetViewControlShown: this.state.isStreetViewControlShown,
+        isDraggingAllowed: this.state.isDraggingAllowed
       }
     }
     
@@ -124,7 +128,7 @@ export default class MapSettingsModal extends Component {
       <div className={styles.map_settings_modal}>
         {(WixUtils.isMobile()) && <div>{mobileNavbar}{backButton}</div>}
         <div className={styles.map_settings_modal_container}>
-          <div className={styles.map_settings_modal_title_header}>Map Options</div>
+          <div className={styles.map_settings_modal_title_header}>{t('MapSettings_Title')}</div>
           <SettingsSection theme={theme} className={styles.map_settings_modal_section} ariaProps={{ 'aria-label': 'location', role: 'region' }}>
             <div className={styles.map_settings_modal_location_label}>{t('MapSettings_Location_Input_Label')}</div>
             <ReactGoogleMapLoader
@@ -195,8 +199,10 @@ export default class MapSettingsModal extends Component {
           </SettingsSection>
 
           <SettingsSection theme={theme} className={styles.map_settings_modal_checkbox_section} ariaProps={{ 'aria-label': 'ckeckboxes', role: 'region' }}>
-            <Checkbox theme={theme} label="Show Marker" checked={this.state.isMarkerShown} onChange={() => this.setState({ isMarkerShown: !this.state.isMarkerShown, enableSave: true })} />
-            <Checkbox theme={theme} label="Show Map Controls" checked={this.state.isControlsShown} onChange={() => this.setState({ isControlsShown: !this.state.isControlsShown, enableSave: true })} />
+            <Checkbox theme={theme} label="Show Marker Control" checked={this.state.isMarkerShown} onChange={() => this.setState({ isMarkerShown: !this.state.isMarkerShown, enableSave: true })} />
+            <Checkbox theme={theme} label="Show Zoom Control" checked={this.state.isZoomControlShown} onChange={() => this.setState({ isZoomControlShown: !this.state.isZoomControlShown, enableSave: true })} />
+            <Checkbox theme={theme} label="Show Street View Control" checked={this.state.isStreetViewControlShown} onChange={() => this.setState({ isStreetViewControlShown: !this.state.isStreetViewControlShown, enableSave: true })} />
+            <Checkbox theme={theme} label="Allow Dragging" checked={this.state.isDraggingAllowed} onChange={() => this.setState({ isDraggingAllowed: !this.state.isDraggingAllowed, enableSave: true })} />
           </SettingsSection>
 
           {!WixUtils.isMobile() && saveButton}
