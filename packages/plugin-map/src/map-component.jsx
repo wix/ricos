@@ -1,17 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { mergeStyles, validate } from 'wix-rich-content-common';
-import isEqual from 'lodash/isEqual';
 import MapViewer from './map-viewer';
-import schema from '../statics/data-schema.json';
-import styles from '../statics/styles/map-viewer.scss';
 import { DEFAULTS } from './constants';
 
 class MapComponent extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <div>
@@ -32,4 +24,4 @@ MapComponent.propTypes = {
   editorBounds: PropTypes.object,
 };
 
-export { MapComponent as Component, DEFAULTS as DEFAULTS };
+export { MapComponent as Component, DEFAULTS };

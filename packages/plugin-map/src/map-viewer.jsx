@@ -38,6 +38,7 @@ MapViewer.propTypes = {
   controls: PropTypes.bool,
   width: PropTypes.string,
   height: PropTypes.string,
+  settings: PropTypes.object
 };
 
 MapViewer.defaultProps = {

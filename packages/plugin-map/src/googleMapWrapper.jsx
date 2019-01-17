@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { withScriptjs, withGoogleMap, GoogleMap, Marker, MarkerWithLabel, BicyclingLayer } from 'react-google-maps';
-{/* <BicyclingLayer autoUpdate /> */ }
-const { InfoBox } = require("react-google-maps/lib/components/addons/InfoBox");
-const Wrapper = withScriptjs(withGoogleMap(props =>
+import PropTypes from 'prop-types';
+import { withScriptjs, withGoogleMap, GoogleMap, Marker } from 'react-google-maps';
+const { InfoBox } = require('react-google-maps/lib/components/addons/InfoBox');
+
+const Wrapper = withScriptjs(withGoogleMap(props => {
   <GoogleMap
     defaultZoom={props.zoom}
     defaultCenter={{ lat: props.lat, lng: props.lng }}
@@ -15,9 +16,7 @@ const Wrapper = withScriptjs(withGoogleMap(props =>
       streetViewControl: props.isStreetViewControlShown
     }}
   >
-    <InfoBox
-      defaultPosition={new google.maps.LatLng(props.lat, props.lng)}
-    >
+    <InfoBox defaultPosition={{ lat: props.lat, lng: props.lng }}>
       <div style={{ backgroundColor: `yellow`, opacity: 0.75, padding: `12px` }}>
         <div style={{ fontSize: `16px`, fontColor: `#08233B` }}>
           Hi, Lior!
@@ -25,20 +24,16 @@ const Wrapper = withScriptjs(withGoogleMap(props =>
       </div>
     </InfoBox>
     <Marker options={{ visible: props.isMarkerShown }} position={{ lat: props.lat, lng: props.lng }} />
-  </GoogleMap>
-
-));
+  </GoogleMap>;
+}));
 
 class GoogleMapWrapper extends Component {
-  constructor(props) {
-    super(props);
-  }
   render() {
     const { Apikey, componentData } = this.props;
     return (
       <Wrapper
         isMarkerShown={componentData.map.isMarkerShown}
-        googleMapURL={"https://maps.googleapis.com/maps/api/js?key=" + Apikey + "&v=3.exp&libraries=geometry,drawing,places"}
+        googleMapURL={'https://maps.googleapis.com/maps/api/js?key=' + Apikey + '&v=3.exp&libraries=geometry,drawing,places'}
         loadingElement={<div style={{ height: `100%` }} />}
         containerElement={<div style={{ height: componentData.config.height || '400px' }} />}
         mapElement={<div style={{ height: `100%` }} />}
@@ -54,5 +49,10 @@ class GoogleMapWrapper extends Component {
     );
   }
 }
+
+GoogleMapWrapper.propTypes = {
+  componentData: PropTypes.object.isRequired,
+  Apikey: PropTypes.string
+};
 
 export default GoogleMapWrapper;

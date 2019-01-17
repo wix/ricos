@@ -91,8 +91,7 @@ export default {
     // },
   },
   [GIPHY_TYPE]: {
-    giphySdkApiKey: "JfQziSTdnSwDZcD3w8DpUL4LMFu3zBgU",
-    
+    giphySdkApiKey: "JfQziSTdnSwDZcD3w8DpUL4LMFu3zBgU"
   },
   [MAP_TYPE]: {
     googleMapApiKey: "AIzaSyCz2rSCnf0HmeqxKp6rfO4mCb9LCBn9Pck",

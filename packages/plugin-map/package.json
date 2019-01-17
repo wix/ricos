@@ -57,7 +57,7 @@
     "react-google-maps": "^9.4.5",
     "react-google-maps-loader": "^4.2.3",
     "react-google-places-suggest": "^3.5.0",
-    "wix-rich-content-common": "^1.5.11"
+    "wix-rich-content-common": "^1.5.16"
   },
   "unpkg": true,
   "publishConfig": {

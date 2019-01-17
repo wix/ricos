@@ -12,8 +12,8 @@ import {
   Dropdown
 } from 'wix-rich-content-common';
 import { options } from '../constants';
-import ReactGoogleMapLoader from "react-google-maps-loader";
-import ReactGooglePlacesSuggest from "react-google-places-suggest";
+import ReactGoogleMapLoader from 'react-google-maps-loader';
+import ReactGooglePlacesSuggest from 'react-google-places-suggest';
 import styles from '../../statics/styles/map-settings-modal.scss';
 
 export default class MapSettingsModal extends Component {
@@ -37,17 +37,17 @@ export default class MapSettingsModal extends Component {
   }
 
   handleInputChange = e => {
-    this.setState({ search: e.target.value, address: e.target.value })
+    this.setState({ search: e.target.value, address: e.target.value });
   }
 
   handleSelectSuggest = (geocodedPrediction, originalPrediction) => {
     this.setState({
-      search: "",
+      search: '',
       address: originalPrediction.description,
       enableSave: true,
       lat: geocodedPrediction.geometry.location.lat(),
       lng: geocodedPrediction.geometry.location.lng()
-    })
+    });
   }
 
   onClick = () => {
@@ -64,9 +64,9 @@ export default class MapSettingsModal extends Component {
         isStreetViewControlShown: this.state.isStreetViewControlShown,
         isDraggingAllowed: this.state.isDraggingAllowed
       }
-    }
-    
-    if (onConfirm) {   
+    };
+
+    if (onConfirm) {
       onConfirm({ ...componentData, ...map });
     } else {
       pubsub.update('componentData', { ...map });
@@ -97,7 +97,7 @@ export default class MapSettingsModal extends Component {
   render() {
     const { theme, t, minZoom, maxZoom } = this.props;
     const { googleMapApiKey } = this.props;
-    const { search, address } = this.state
+    const { search, address } = this.state;
     const backButton =
       (<div
         className={styles.map_settings_modal_mobile_backButton}
@@ -106,13 +106,15 @@ export default class MapSettingsModal extends Component {
         tabIndex="0"
         onKeyPress={null}
       />);
-    const saveButton = (<Button
-      className={styles.map_settings_modal_save_button}
-      onClick={() => this.onClick()}
-      ariaProps={!this.state.enableSave && { disabled: 'disabled' }}
-    >
-      Save
-      </Button>);
+    const saveButton = (
+      <Button
+        className={styles.map_settings_modal_save_button}
+        onClick={() => this.onClick()}
+        ariaProps={!this.state.enableSave && { disabled: 'disabled' }}
+      >
+        Save
+      </Button>
+    );
 
     const mobileNavbar =
       (
@@ -129,12 +131,16 @@ export default class MapSettingsModal extends Component {
         {(WixUtils.isMobile()) && <div>{mobileNavbar}{backButton}</div>}
         <div className={styles.map_settings_modal_container}>
           <div className={styles.map_settings_modal_title_header}>{t('MapSettings_Title')}</div>
-          <SettingsSection theme={theme} className={styles.map_settings_modal_section} ariaProps={{ 'aria-label': 'location', role: 'region' }}>
+          <SettingsSection
+            theme={theme}
+            className={styles.map_settings_modal_section}
+            ariaProps={{ 'aria-label': 'location', role: 'region' }}
+          >
             <div className={styles.map_settings_modal_location_label}>{t('MapSettings_Location_Input_Label')}</div>
             <ReactGoogleMapLoader
               params={{
                 key: googleMapApiKey,
-                libraries: "places,geocode",
+                libraries: 'places,geocode',
               }}
               render={googleMaps =>
                 googleMaps && (
@@ -145,7 +151,6 @@ export default class MapSettingsModal extends Component {
                       onSelectSuggest={this.handleSelectSuggest}
                     >
                       <TextInput
-                        autoFocus
                         tabIndex="0"
                         theme={styles}
                         type="option"
@@ -161,8 +166,14 @@ export default class MapSettingsModal extends Component {
             />
           </SettingsSection>
 
-          <SettingsSection theme={theme} className={styles.map_settings_modal_section} ariaProps={{ 'aria-label': 'advanced location', role: 'region' }}>
-            <div className={styles.map_settings_modal_advanced_location_label}>{t('MapSettings_Advanced_Location_Input_Label')}</div>
+          <SettingsSection
+            theme={theme}
+            className={styles.map_settings_modal_section}
+            ariaProps={{ 'aria-label': 'advanced location', role: 'region' }}
+          >
+            <div className={styles.map_settings_modal_advanced_location_label}>
+              {t('MapSettings_Advanced_Location_Input_Label')}
+            </div>
             <div className={styles.map_settings_modal_advanced_location_input_container}>
               <InputWithLabel
                 theme={theme}
@@ -183,26 +194,75 @@ export default class MapSettingsModal extends Component {
                 label="Longitude"
                 placeholder={t('MapSettings_Longitude_Input_Placeholder')}
                 value={this.state.lng}
-                onChange={event =>  event.target.value > -176 && event.target.value < 176     &&
-                this.setState({ lng: event.target.value, enableSave: true })}
+                onChange={event => event.target.value > -176 && event.target.value < 176 &&
+                  this.setState({ lng: event.target.value, enableSave: true })}
               />
             </div>
           </SettingsSection>
 
-          <SettingsSection theme={theme} className={styles.map_settings_modal_zoom_section} ariaProps={{ 'aria-label': 'zoom', role: 'region' }}>
+          <SettingsSection
+            theme={theme}
+            className={styles.map_settings_modal_zoom_section}
+            ariaProps={{ 'aria-label': 'zoom', role: 'region' }}
+          >
             <div className={styles.map_settings_modal_zoom_slider_label}>{t('MapSettings_Zoom_Slider_Label')}</div>
-            <SliderWithInput theme={theme} value={this.state.zoom}  min={minZoom} max={maxZoom} onChange={value => this.setState({ zoom: value, enableSave: true })} />
+            <SliderWithInput
+              theme={theme}
+              value={this.state.zoom}
+              min={minZoom}
+              max={maxZoom}
+              onChange={value => this.setState({ zoom: value, enableSave: true })}
+
+            />
           </SettingsSection>
 
-          <SettingsSection theme={theme} className={styles.map_settings_modal_dropdown_section} ariaProps={{ 'aria-label': 'ckeckboxes', role: 'region' }}>
-            <Dropdown placeholder="Mode .." theme={styles} value={this.state.mode.toUpperCase()} options={options} onChange={value => this.setState({ mode: value.value, enableSave: true })} />
+          <SettingsSection
+            theme={theme}
+            className={styles.map_settings_modal_dropdown_section}
+            ariaProps={{ 'aria-label': 'ckeckboxes', role: 'region' }}
+          >
+            <Dropdown
+              placeholder="Mode .."
+              theme={styles}
+              value={this.state.mode.toUpperCase()}
+              options={options}
+              onChange={value => this.setState({ mode: value.value, enableSave: true })}
+            />
           </SettingsSection>
 
-          <SettingsSection theme={theme} className={styles.map_settings_modal_checkbox_section} ariaProps={{ 'aria-label': 'ckeckboxes', role: 'region' }}>
-            <Checkbox theme={theme} label="Show Marker Control" checked={this.state.isMarkerShown} onChange={() => this.setState({ isMarkerShown: !this.state.isMarkerShown, enableSave: true })} />
-            <Checkbox theme={theme} label="Show Zoom Control" checked={this.state.isZoomControlShown} onChange={() => this.setState({ isZoomControlShown: !this.state.isZoomControlShown, enableSave: true })} />
-            <Checkbox theme={theme} label="Show Street View Control" checked={this.state.isStreetViewControlShown} onChange={() => this.setState({ isStreetViewControlShown: !this.state.isStreetViewControlShown, enableSave: true })} />
-            <Checkbox theme={theme} label="Allow Dragging" checked={this.state.isDraggingAllowed} onChange={() => this.setState({ isDraggingAllowed: !this.state.isDraggingAllowed, enableSave: true })} />
+          <SettingsSection
+            theme={theme}
+            className={styles.map_settings_modal_checkbox_section}
+            ariaProps={{ 'aria-label': 'ckeckboxes', role: 'region' }}
+          >
+            <Checkbox
+              theme={theme}
+              label="Show Marker Control"
+              checked={this.state.isMarkerShown}
+              onChange={() => this.setState({ isMarkerShown: !this.state.isMarkerShown, enableSave: true })}
+
+            />
+            <Checkbox
+              theme={theme}
+              label="Show Zoom Control"
+              checked={this.state.isZoomControlShown}
+              onChange={() => this.setState({ isZoomControlShown: !this.state.isZoomControlShown, enableSave: true })}
+
+            />
+            <Checkbox
+              theme={theme}
+              label="Show Street View Control"
+              checked={this.state.isStreetViewControlShown}
+              onChange={() => this.setState({ isStreetViewControlShown: !this.state.isStreetViewControlShown, enableSave: true })}
+
+            />
+            <Checkbox
+              theme={theme}
+              label="Allow Dragging"
+              checked={this.state.isDraggingAllowed}
+              onChange={() => this.setState({ isDraggingAllowed: !this.state.isDraggingAllowed, enableSave: true })}
+
+            />
           </SettingsSection>
 
           {!WixUtils.isMobile() && saveButton}
@@ -218,5 +278,8 @@ MapSettingsModal.propTypes = {
   componentData: PropTypes.object.isRequired,
   onConfirm: PropTypes.func,
   theme: PropTypes.object.isRequired,
+  googleMapApiKey: PropTypes.string.isRequired,
+  minZoom: PropTypes.string,
+  maxZoom: PropTypes.string,
   t: PropTypes.func,
 };

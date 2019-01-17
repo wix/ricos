@@ -12,7 +12,7 @@ import { MobileFullScreenCustomStyle, DesktopFlyOutModalStyles } from '../consta
 import Arrow from './arrow';
 
 export default ({ settings, t, helpers }) => {
-  const { maxWidth, minWidth, maxHeight, minHeight, minZoom, maxZoom } = settings;
+  const { maxWidth, minWidth, maxHeight, minHeight } = settings;
 
   return [
     {
