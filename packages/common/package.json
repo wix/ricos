@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-common",
-  "version": "1.5.11",
+  "version": "1.5.16",
   "author": {
     "name": "Jonathan Bachman",
     "email": "jonathanb@wix.com"
@@ -29,10 +29,12 @@
     "build:analyze": "npm run build -- --environment MODULE_ANALYZE && open stats.html",
     "watch": "MODULE_WATCH=1 npm run build -- --watch",
     "release": "wnpm-release --no-shrinkwrap",
-    "test": "eslint 'src/**/*.{js,jsx}'"
+    "lint": "eslint 'src/**/*.{js,jsx}'",
+    "pretest": "npm run lint",
+    "test": "jest --verbose"
   },
   "peerDependencies": {
-    "@babel/runtime": "7.1.2",
+    "@babel/runtime": "7.2.0",
     "@wix/draft-js": "0.10.272",
     "classnames": "^2.0.0",
     "lodash": "^4.0.0",
@@ -41,15 +43,18 @@
     "react-dom": "^15.0.0 || ^16.0.0"
   },
   "devDependencies": {
-    "@babel/runtime": "7.1.2",
+    "@babel/runtime": "7.2.0",
     "@wix/draft-js": "0.10.272",
+    "babel-jest": "^23.6.0",
     "classnames": "^2.2.6",
+    "deep-freeze": "0.0.1",
     "eslint": "^4.19.1",
+    "jest": "^23.1.0",
     "lodash": "^4.17.10",
     "prop-types": "^15.6.2",
     "react": "15.5.4",
     "react-dom": "15.5.4",
-    "rollup": "^0.64.1"
+    "rollup": "^1.1.0"
   },
   "dependencies": {
     "focus-trap": "^2.4.5",
@@ -61,5 +66,17 @@
   "unpkg": true,
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
+  },
+  "jest": {
+    "globals": {
+      "NODE_ENV": "test"
+    },
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|svg)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(css|scss)$": "<rootDir>/__mocks__/styleMock.js",
+      "^draft-js$": "<rootDir>/../../node_modules/@wix/draft-js/dist/Draft.min.js",
+      "^draft-js/.*$": "<rootDir>/../../node_modules/@wix/draft-js/dist/Draft.min.js",
+      "^@wix/draft-js$": "<rootDir>/../../node_modules/@wix/draft-js/dist/Draft.min.js"
+    }
   }
 }

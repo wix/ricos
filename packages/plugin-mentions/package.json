@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-plugin-mentions",
-  "version": "1.5.11",
+  "version": "1.5.16",
   "author": {
     "name": "Vytenis Butkevicius",
     "email": "vytenisb@wix.com"
@@ -32,14 +32,14 @@
     "test": "eslint 'src/**/*.{js,jsx}'"
   },
   "peerDependencies": {
-    "@babel/runtime": "7.1.2",
+    "@babel/runtime": "7.2.0",
     "@wix/draft-js": "0.10.272",
     "prop-types": "^15.0.0",
     "react": "^15.0.0 || ^16.0.0",
     "react-dom": "^15.0.0 || ^16.0.0"
   },
   "devDependencies": {
-    "@babel/runtime": "7.1.2",
+    "@babel/runtime": "7.2.0",
     "@wix/draft-js": "0.10.272",
     "classnames": "^2.2.6",
     "eslint": "^4.19.1",
@@ -47,11 +47,11 @@
     "prop-types": "^15.6.2",
     "react": "15.5.4",
     "react-dom": "15.5.4",
-    "rollup": "^0.64.1"
+    "rollup": "^1.1.0"
   },
   "dependencies": {
     "draft-js-mention-plugin": "^3.0.4",
-    "wix-rich-content-common": "^1.5.11"
+    "wix-rich-content-common": "^1.5.16"
   },
   "unpkg": true,
   "publishConfig": {

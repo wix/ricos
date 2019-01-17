@@ -22,7 +22,7 @@ const exec = cmd => execSync(cmd, { stdio: 'inherit' });
 const fqdn = subdomain => `https://${subdomain}.surge.sh/`;
 
 function bootstrap(example) {
-  const bootstrapCommand = `npm run bootstrap --prefix=${example.path}`;
+  const bootstrapCommand = `npm install --prefix=${example.path}`;
   console.log(
     chalk.magenta(`Running: "${bootstrapCommand}"`),
   );

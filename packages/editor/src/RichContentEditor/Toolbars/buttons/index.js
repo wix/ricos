@@ -33,6 +33,7 @@ export {
   ItalicButton,
   UnderlineButton,
   IndentButton,
+  TitleButton,
   BlockquoteButton,
   AlignTextLeftButton,
   AlignTextCenterButton,

@@ -2,12 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import redraft from 'redraft';
 import classNames from 'classnames';
-import { createInlineStyleDecorators, mergeStyles } from 'wix-rich-content-common';
+import endsWith from 'lodash/endsWith';
+import { mergeStyles } from 'wix-rich-content-common';
 import getPluginsViewer from './PluginsViewer';
 import { getTextDirection } from './utils/textUtils';
 import List from './List';
-import { getStrategyByStyle } from './decorators/getStrategyByStyle';
 import styles from '../statics/rich-content-viewer.scss';
+
+const isEmptyBlock = ([_, data]) => data && data.length === 0; //eslint-disable-line no-unused-vars
 
 const withTextAlignment = (element, data, mergedStyles, textDirection) => {
   const appliedTextDirection = textDirection || data.textDirection || 'ltr';
@@ -16,8 +18,10 @@ const withTextAlignment = (element, data, mergedStyles, textDirection) => {
   const elementProps = {
     ...element.props,
     className: classNames(
-      { [element.props.className]: !!element.props.className,
-        [mergedStyles.rtl]: appliedTextDirection === 'rtl' },
+      {
+        [element.props.className]: !!element.props.className,
+        [mergedStyles.rtl]: appliedTextDirection === 'rtl'
+      },
       mergedStyles[alignmentClass])
   };
   return React.cloneElement(element, elementProps, element.props.children);
@@ -54,12 +58,24 @@ const getList = (ordered, mergedStyles, textDirection) =>
     );
   };
 
+const getUnstyledBlocks = (mergedStyles, textDirection) =>
+  (children, blockProps) =>
+    children.map((child, i) => {
+      if (!isEmptyBlock(child)) {
+        return withTextAlignment(
+          <p className={mergedStyles.text} key={blockProps.keys[i]}>{child}</p>,
+          blockProps.data[i],
+          mergedStyles,
+          textDirection
+        );
+      } else {
+        return <div className={mergedStyles.text} />;
+      }
+    });
+
 const getBlocks = (mergedStyles, textDirection) => {
-  // Rendering blocks like this along with cleanup results in a single p tag for each paragraph
-  // adding an empty block closes current paragraph and starts a new one
   return {
-    unstyled: (children, blockProps) => children.map((child, i) =>
-      withTextAlignment(<div key={blockProps.keys[i]}><div>{child}</div></div>, blockProps.data[i], mergedStyles, textDirection)),
+    unstyled: getUnstyledBlocks(mergedStyles, textDirection),
     blockquote: (children, blockProps) => children.map((child, i) =>
       withTextAlignment(<blockquote className={mergedStyles.quote} key={blockProps.keys[i]}><div>{child}</div></blockquote>,
         blockProps.data[i], mergedStyles, textDirection)),
@@ -102,31 +118,36 @@ const options = {
   },
 };
 
-const augmentRaw = raw => {
-  const blocks = raw.blocks || [];
-  blocks
-    .filter(({ type }) => type !== 'atomic')
-    .forEach(({ text, data }) => {
-      const direction = getTextDirection(text);
-      if (direction === 'rtl') {
-        data.textDirection = direction;
-      }
-    });
+const augmentRaw = raw => ({
+  ...raw,
+  blocks: raw.blocks.map(block => {
+    if (block.type === 'atomic') {
+      return block;
+    }
 
-  return raw;
-};
+    const data = { ...block.data };
+    const direction = getTextDirection(block.text);
+    if (direction === 'rtl') {
+      data.textDirection = direction;
+    }
+
+    let text = block.text;
+    if (endsWith(text, '\n')) {
+      text += '\n';
+    }
+
+    return {
+      ...block,
+      data,
+      text,
+    };
+  }),
+});
 
 const Preview = ({ raw, typeMappers, theme, isMobile, decorators, anchorTarget, relValue, config, textDirection }) => {
   const mergedStyles = mergeStyles({ styles, theme });
   const isEmpty = isEmptyRaw(raw);
   const typeMap = combineTypeMappers(typeMappers);
-
-  const augmentedRaw = augmentRaw(raw);
-
-  const combinedDecorators = [
-    ...decorators,
-    ...createInlineStyleDecorators(getStrategyByStyle, mergedStyles)
-  ];
 
   const className = classNames(mergedStyles.preview, textDirection === 'rtl' && mergedStyles.rtl);
 
@@ -134,12 +155,17 @@ const Preview = ({ raw, typeMappers, theme, isMobile, decorators, anchorTarget, 
     <div className={className}>
       {isEmpty && <div>There is nothing to render...</div>}
       {!isEmpty &&
-        redraft(augmentedRaw, {
-          inline: getInline(mergedStyles),
-          blocks: getBlocks(mergedStyles, textDirection),
-          entities: getEntities(typeMap, { theme, isMobile, anchorTarget, relValue, config }),
-          decorators: combinedDecorators },
-        options)}
+        redraft(
+          augmentRaw(raw),
+          {
+            inline: getInline(mergedStyles),
+            blocks: getBlocks(mergedStyles, textDirection),
+            entities: getEntities(typeMap, { theme, isMobile, anchorTarget, relValue, config }),
+            decorators,
+          },
+          options
+        )
+      }
     </div>
   );
 };

@@ -51,6 +51,10 @@ const BUNDLE_GLOBALS = {
 };
 
 const NAMED_EXPORTS = {
+  imageClientAPI: [
+    'getScaleToFillImageURL',
+    'getScaleToFitImageURL'
+  ],
   immutable: [
     'List',
   ]
@@ -72,6 +76,8 @@ const plugins = [
   }),
   commonjs({
     namedExports: {
+      '../../node_modules/image-client-api/dist/imageClientSDK.js': [...NAMED_EXPORTS.imageClientAPI],
+      'node_modules/image-client-api/dist/imageClientSDK.js': [...NAMED_EXPORTS.imageClientAPI],
       '../../node_modules/immutable/dist/immutable.js': [...NAMED_EXPORTS.immutable],
       'node_modules/immutable/dist/immutable.js': [...NAMED_EXPORTS.immutable],
     },
@@ -99,7 +105,7 @@ if (process.env.NODE_ENV !== 'development') {
   plugins.push(
     uglify({
       mangle: false,
-      sourceMap: {
+      sourcemap: {
         filename: 'out.js',
         url: 'out.js.map'
       }

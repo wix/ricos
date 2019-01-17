@@ -64,6 +64,7 @@ export default {
   },
   [LINK_TYPE]: {
     onClick: (event, url) => console.log('link clicked!', url),
+    // autoLink: false
   },
   [CODE_BLOCK_TYPE]: {},
   [DIVIDER_TYPE]: {},
@@ -77,12 +78,17 @@ export default {
       console.log('consumer wants to upload custom video');
       const customVideoUrl = 'http://mirrors.standaloneinstaller.com/video-sample/jellyfish-25-mbps-hd-hevc.mp4';
       setTimeout(() => {
+        // You can provide either URL or pathname. If pathname is provided getVideoUrl will be invoked to form full URL.
         updateEntity({ data: { url: customVideoUrl } });
         //updateEntity({ error: { msg: 'Upload Failed' } });
         console.log('consumer uploaded ', customVideoUrl);
       }, 500);
     },
     enableCustomUploadOnMobile: true,
+    // Function is invoked when rendering video which only has pathname. You should take the pathname and form a full URL.
+    // getVideoUrl: src => {
+    //   return `https://video.wixstatic.com${src.pathname}`;
+    // },
   },
   [GIPHY_TYPE]: {
     giphySdkApiKey: "JfQziSTdnSwDZcD3w8DpUL4LMFu3zBgU",

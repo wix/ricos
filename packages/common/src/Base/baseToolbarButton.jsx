@@ -257,6 +257,7 @@ BaseToolbarButton.propTypes = {
   iconActive: PropTypes.oneOfType([PropTypes.string, PropTypes.func, PropTypes.element]),
   icon: PropTypes.oneOfType([PropTypes.string, PropTypes.func, PropTypes.element]),
   modalStyles: PropTypes.object,
+  modalStylesFn: PropTypes.func,
   isMobile: PropTypes.bool,
   disabled: PropTypes.bool,
   t: PropTypes.func,

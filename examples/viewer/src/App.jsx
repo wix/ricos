@@ -10,25 +10,28 @@ import { dividerTypeMapper } from 'wix-rich-content-plugin-divider/dist/module.v
 import { htmlTypeMapper, HTML_TYPE } from 'wix-rich-content-plugin-html/dist/module.viewer';
 import { soundCloudTypeMapper } from 'wix-rich-content-plugin-sound-cloud/dist/module.viewer';
 import { linkTypeMapper, LinkViewer, LinkParseStrategy, LINK_TYPE } from 'wix-rich-content-plugin-link/dist/module.viewer';
+import { imageTypeMapper } from 'wix-rich-content-plugin-image/dist/module.viewer'
 
 import { Strategy as HashTagStrategy, Component as HashTag } from 'wix-rich-content-plugin-hashtag';
 import { CodeBlockDecorator } from 'wix-rich-content-plugin-code-block/dist/module.viewer';
-
-import TestData from './TestData/initial-state';
-import theme from './theme/theme';
-import styles from './App.scss';
+import { MENTION_TYPE, mentionsTypeMapper } from 'wix-rich-content-plugin-mentions/dist/module.viewer';
 
 import 'wix-rich-content-common/dist/styles.min.css';
 import 'wix-rich-content-viewer/dist/styles.min.css';
-import 'wix-rich-content-plugin-code-block/dist/styles.min.css';
+// import 'wix-rich-content-plugin-code-block/dist/styles.min.css';
 import 'wix-rich-content-plugin-divider/dist/styles.min.css';
 import 'wix-rich-content-plugin-emoji/dist/styles.min.css';
-import 'wix-rich-content-plugin-html/dist/styles.min.css';
 import 'wix-rich-content-plugin-hashtag/dist/styles.min.css';
+import 'wix-rich-content-plugin-html/dist/styles.min.css';
+import 'wix-rich-content-plugin-image/dist/styles.min.css';
 import 'wix-rich-content-plugin-link/dist/styles.min.css';
 import 'wix-rich-content-plugin-mentions/dist/styles.min.css';
 import 'wix-rich-content-plugin-video/dist/styles.min.css';
 import 'wix-rich-content-plugin-sound-cloud/dist/styles.min.css';
+
+import TestData from './TestData/initial-state';
+import styles from './App.scss';
+import theme from './theme/theme';
 
 const modalStyleDefaults = {
   content: {
@@ -44,6 +47,11 @@ const modalStyleDefaults = {
 const linkPluginSettings = {
   onClick: (event, url) => console.log('link clicked!', url),
 };
+const mentionsPluginSettings = {
+  onMentionClick: mention => console.log('mention clicked!', mention),
+  getMentionLink: () => '/link/to/mention',
+};
+
 const anchorTarget = '_top';
 const relValue = 'noreferrer';
 
@@ -62,7 +70,10 @@ class App extends Component {
       dividerTypeMapper,
       htmlTypeMapper,
       linkTypeMapper,
-      soundCloudTypeMapper];
+      soundCloudTypeMapper,
+      mentionsTypeMapper,
+      imageTypeMapper,
+    ];
 
     this.decorators = [{
         strategy: LinkParseStrategy,
@@ -88,6 +99,7 @@ class App extends Component {
         htmlIframeSrc: 'http://localhost:3001/static/html-plugin-embed.html',
       },
       [LINK_TYPE]: linkPluginSettings,
+      [MENTION_TYPE]: mentionsPluginSettings
     }
   }
 

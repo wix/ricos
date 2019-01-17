@@ -18,7 +18,7 @@ export const MobileFullScreenCustomStyle = {
     top: 0,
     left: 0,
     overflow: 'hidden',
-    paddingRight: '6px'
+    paddingRight: '6px',
   }
 };
 
@@ -33,11 +33,12 @@ export const DesktopFlyOutModalStyles = {
     height: '357px',
     overflow: 'visible',
     border: '1px solid #ccc',
-    paddingRight: '8px',
+    paddingRight: '10px',
     paddingLeft: '18px',
     display: 'block',
+    borderRadius: '2px',
     position: 'absolute',
     zIndex: 6,
-    paddingTop: '8px'
+    paddingTop: '9px'
   }
 };

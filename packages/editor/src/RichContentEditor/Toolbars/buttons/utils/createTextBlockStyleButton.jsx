@@ -24,7 +24,7 @@ export default ({ blockTypes, Icons, InactiveIcon = null, tooltipTextKey }) =>
 
     get activeBlockType() {
       const { blockTypeIndex } = this.state;
-      return blockTypeIndex !== undefined ? blockTypes[blockTypeIndex] : undefined;
+      return blockTypeIndex !== undefined ? blockTypes[blockTypeIndex] : 'unstyled';
     }
 
     get selectionBlockType() {

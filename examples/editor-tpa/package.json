@@ -7,7 +7,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack-dev-server",
-    "bootstrap": "npm install && npm run link",
+    "postinstall": "npm run link",
     "link": "npm link wix-rich-content-editor"
   },
   "author": "arturc@wix.com",
@@ -17,8 +17,8 @@
     "react-height": "^3.0.0"
   },
   "devDependencies": {
-    "@babel/core": "7.1.2",
-    "babel-jest": "^23.2.0",
-    "webpack-dev-server": "^3.1.4"
+    "@babel/core": "7.2.2",
+    "babel-jest": "^23.6.0",
+    "webpack-dev-server": "^3.1.14"
   }
 }

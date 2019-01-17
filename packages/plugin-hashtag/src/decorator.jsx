@@ -6,7 +6,8 @@ import styles from '../statics/hashtag.scss';
 
 const findHashtagEntities = (contentBlock, callback) => {
   const text = contentBlock.getText();
-  if (!text || !text.match(hashtagRegexes.hashSigns)) {
+  const type = contentBlock.getType();
+  if (type === 'code-block' || !text || !text.match(hashtagRegexes.hashSigns)) {
     return [];
   }
 

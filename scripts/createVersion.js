@@ -44,8 +44,8 @@ prompts({
         }
         lernaCmd = `${lernaCmd} ${forceFlag}`;
       }
-      if (argv.version) {
-        lernaCmd = `${lernaCmd} ${argv.version}`;
+      if (argv.release) {
+        lernaCmd = `${lernaCmd} ${argv.release}`;
       }
       cp.execSync(lernaCmd, { stdio: 'inherit' });
     } catch (error) {

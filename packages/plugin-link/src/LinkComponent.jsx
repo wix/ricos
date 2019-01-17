@@ -2,15 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import LinkViewer from './LinkViewer';
 
-const findLinkEntities = (contentBlock, callback, contentState) => {
-  contentBlock.findEntityRanges(character => {
-    const entityKey = character.getEntity();
-    return entityKey !== null && contentState.getEntity(entityKey).getType() === 'LINK';
-  }, callback);
-};
-
-const Link = ({ entityKey, contentState, className, children, anchorTarget, relValue, settings }) => {
-  const componentData = contentState.getEntity(entityKey).getData();
+const Link = ({ entityKey, contentState, className, children, anchorTarget, relValue, settings, href, rel, target, ...otherProps }) => {
+  const componentData = href ?
+    { url: href, rel, target } :
+    contentState.getEntity(entityKey).getData();
   return (
     <LinkViewer
       componentData={componentData}
@@ -18,6 +13,7 @@ const Link = ({ entityKey, contentState, className, children, anchorTarget, relV
       anchorTarget={anchorTarget}
       relValue={relValue}
       settings={settings}
+      {...otherProps}
     >
       {children}
     </LinkViewer>);
@@ -31,6 +27,9 @@ Link.propTypes = {
   anchorTarget: PropTypes.string,
   relValue: PropTypes.string,
   settings: PropTypes.object,
+  href: PropTypes.string,
+  rel: PropTypes.string,
+  target: PropTypes.string,
 };
 
-export { findLinkEntities as Strategy, Link as Component };
+export { Link as Component };

@@ -14,13 +14,14 @@ module.exports = env => ({
     path.resolve(PATHS.src, 'index.js'),
   ],
   output: {
-      path: PATHS.dist,
-      filename: '[name].js',
-      chunkFilename: '[name].js',
-      publicPath: '/'
+    path: PATHS.dist,
+    filename: '[name].js',
+    chunkFilename: '[name].js',
+    publicPath: '/'
   },
   resolve: {
     extensions: ['.js', '.jsx', '.json'],
+    symlinks: false,
     alias: {
       'draft-js': path.resolve(__dirname, '..', '..', '..', 'node_modules', '@wix', 'draft-js'),
     },

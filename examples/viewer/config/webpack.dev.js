@@ -1,5 +1,6 @@
 /* eslint-disable */
 const merge = require('webpack-merge');
+const { HotModuleReplacementPlugin } = require('webpack');
 
 const devConfig = {
   mode: 'development',
@@ -7,16 +8,16 @@ const devConfig = {
   optimization: {
     namedModules: false
   },
-  serve: {
+  plugins: [
+    new HotModuleReplacementPlugin(),
+  ],
+  devServer: {
     port: 3001,
     host: '0.0.0.0',
     hot: true,
-    clipboard: false,
-    dev: {
-      publicPath: '/',
-      stats: 'errors-only',
-      logLevel: 'warn',
-    }
+    compress: true,
+    publicPath: '/',
+    stats: 'errors-only'
   },
 };
 
