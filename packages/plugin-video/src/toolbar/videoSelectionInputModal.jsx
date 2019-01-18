@@ -11,6 +11,7 @@ export default class VideoSelectionInputModal extends Component {
     this.state = {
       url: (!componentData.isCustomVideo && componentData.src) || '',
       pathname: '',
+      thumbnail: { pathname: '', width: 0, height: 0 },
       isCustomVideo: false,
       errorMsg: ''
     };
@@ -24,8 +25,8 @@ export default class VideoSelectionInputModal extends Component {
   afterOpenModal = () => this.input.focus();
 
   onConfirm = () => {
-    const { url, pathname, isCustomVideo } = this.state;
-    const src = pathname.length ? { pathname } : url;
+    const { url, pathname, thumbnail, isCustomVideo } = this.state;
+    const src = pathname.length ? { pathname, thumbnail } : url;
     if (isVideoUrl(url) || isCustomVideo) {
       const { componentData, helpers, pubsub, onConfirm } = this.props;
       if (onConfirm) {
@@ -49,7 +50,7 @@ export default class VideoSelectionInputModal extends Component {
       this.setState({ errorMsg: error.msg });
     } else {
       if (data.pathname) {
-        this.setState({ url: '', pathname: data.pathname, isCustomVideo: true });
+        this.setState({ url: '', pathname: data.pathname, thumbnail: data.thumbnail, isCustomVideo: true });
       } else {
         this.setState({ url: data.url, pathname: '', isCustomVideo: true });
       }

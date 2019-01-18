@@ -25,11 +25,37 @@
               "examples": [
                 "video-sample/jellyfish-25-mbps-hd-hevc.mp4"
               ]
+            },
+            "thumbnail": {
+              "$id": "/properties/src/thumbnail",
+              "type": "object",
+              "properties": {
+                "pathname": {
+                  "$id": "/properties/src/thumbnail/pathname",
+                  "type": "string",
+                  "title": "Video Thumbnail Pathname",
+                  "default": "",
+                  "examples": ["media/441c23_84f5c058e5e4479ab9e626cd5560a21bf002.jpg"]
+                },
+                "height": {
+                  "$id": "/properties/src/thumbnail/height",
+                  "type": "number",
+                  "title": "Video Thumbnail Height",
+                  "default": "",
+                  "examples": ["1080"]
+                },
+                "width": {
+                  "$id": "/properties/src/thumbnail/width",
+                  "type": "number",
+                  "title": "Video Thumbnail Width",
+                  "default": "",
+                  "examples": ["1920"]
+                }
+              }
             }
           }
         }
       ]
-
     },
     "isCustomVideo": {
       "$id": "/properties/isCustomVideo",
