@@ -10,17 +10,23 @@
 
 ## [Unreleased]
 
+
 ### :rocket: New Feature
 
 - `video`
   - [#234](https://github.com/wix-incubator/rich-content/pull/234) upload thumbnail
+
+### :bug: Bug Fix
+
+- `image`
+  - [#233](https://github.com/wix-incubator/rich-content/pull/233) PNG images are loaded as JPG in preload, losing transparency and showing black background
 
 ## HTML Plugin 1.5.20 (Jan 16, 2019)
 
 ### :bug: Bug Fix
 
 - [#232](https://github.com/wix-incubator/rich-content/pull/232) first time iframe onload is fired before React.render(), so it will not refresh
-  
+
 <hr/>
 
 ## 1.7.11 (Jan 16, 2019)
