@@ -10,6 +10,11 @@
 
 ## [Unreleased]
 
+### :rocket: New Feature
+
+- `giphy`
+  - [#236](https://github.com/wix-incubator/rich-content/pull/236) Add extra customization options to giphy plugin
+
 <hr/>
 
 ## Video Plugin 1.6.0 (Jan 20, 2019)
