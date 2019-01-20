@@ -10,7 +10,6 @@
 
 ## [Unreleased]
 
-
 ### :rocket: New Feature
 
 - `video`
