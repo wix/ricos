@@ -21,12 +21,16 @@ class VideoViewer extends Component {
     }
   }
 
+  vimeoUrlFix = url => url.toLowerCase().indexOf('vimeo') === 0 ? 'https://' + url : url; //vimeo player needs urls prefixed with http[s]
+
   render() {
     const { componentData, theme, settings, isMobile, ...rest } = this.props; // eslint-disable-line no-unused-vars
+
+    const url = this.vimeoUrlFix(getVideoSrc(componentData.src, settings));
     return (
       <ReactPlayer
         className={classNames(this.styles.video_player)}
-        url={getVideoSrc(componentData.src, settings)}
+        url={url}
         {...rest}
       />
     );
