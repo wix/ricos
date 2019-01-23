@@ -24,7 +24,7 @@ class ButtonSample extends PureComponent {
 
 
   render() {
-    const { style, active } = this.props;
+    const { style, active, t } = this.props;
     const { styles } = this;
     const { buttonObj } = this.props;
     const { buttonStyle } = this.state;
@@ -49,7 +49,7 @@ class ButtonSample extends PureComponent {
           <PickedIcon className={styles.picked} />
         }
         <button onClick={this.onClick} style={{ ...style }} className={styles.button_sample}>
-          Click Me!
+          {t('ButtonModal_Button_Sample_text')}
         </button>
       </div>
     );

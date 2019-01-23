@@ -119,6 +119,7 @@
   "ButtonModal_Radius_Input":"Corner Radius (px)",
   "ButtonModal_Text_Color":"Text",
   "ButtonModal_Border_Color":"Border",
+  "ButtonModal_Button_Sample_text": "Click Me",
   "ButtonModal_Background_Color":"Background",
   "ButtonModal_Invalid_Link": "Invalid link",
   "ButtonModal_Link_Input_Placeholder": "https://example-link.com/",
