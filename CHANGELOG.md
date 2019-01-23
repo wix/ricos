@@ -13,6 +13,8 @@
 
 ### :house: Internal
 
+- `general`
+  - [#239](https://github.com/wix-incubator/rich-content/pull/239) prettier formatter
 - `common`
   - validate plugin schema only in development
 

@@ -46,6 +46,7 @@
     "eslint-plugin-fp": "^2.3.0",
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-lodash": "^2.7.0",
+    "eslint-plugin-prettier": "^3.0.1",
     "eslint-plugin-react": "^7.7.0",
     "husky": "^1.0.0-rc.6",
     "lerna": "^3.0.3",
