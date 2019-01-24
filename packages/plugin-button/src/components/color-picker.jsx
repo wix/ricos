@@ -43,6 +43,7 @@ class ColorPicker extends PureComponent {
   }
 
   onColorButtonClicked = index => {
+    this.props.scrollColorPickerDown();
     if (index !== -1) {
       this.setColor(this.presetColors[index]);
     } else {

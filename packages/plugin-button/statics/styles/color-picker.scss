@@ -105,10 +105,10 @@ $size: 10px;
 .non_dropper_palette {
   @extend %palette;
   @include phone{
-    margin-right: 11px;
+    margin-right: calc((100% - 200px) / 7);
   }
-  
 }
+
 
 .dropper_palette {
   @extend %palette;
