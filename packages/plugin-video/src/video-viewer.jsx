@@ -13,6 +13,14 @@ class VideoViewer extends Component {
     super(props);
     validate(props.componentData, schema);
     this.styles = mergeStyles({ styles, theme: props.theme });
+    this.state = {
+      hasError: false,
+    };
+  }
+
+  componentDidCatch(error) {
+    console.error(error); // eslint-disable-line
+    this.setState({ hasError: true });
   }
 
   componentWillReceiveProps(nextProps) {
@@ -22,14 +30,11 @@ class VideoViewer extends Component {
   }
 
   render() {
+    if (this.state.hasError) {
+      return null;
+    }
     const { componentData, theme, settings, isMobile, ...rest } = this.props; // eslint-disable-line no-unused-vars
-    return (
-      <ReactPlayer
-        className={classNames(this.styles.video_player)}
-        url={getVideoSrc(componentData.src, settings)}
-        {...rest}
-      />
-    );
+    return <ReactPlayer className={classNames(this.styles.video_player)} url={getVideoSrc(componentData.src, settings)} {...rest} />;
   }
 }
 
