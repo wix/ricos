@@ -27,6 +27,7 @@
         "allowTemplateLiterals": true
       }
     ],
+    "jsx-quotes": ["warn", "prefer-single"],
     "react/jsx-closing-tag-location": "error",
     "react/jsx-closing-bracket-location": [
       1,
