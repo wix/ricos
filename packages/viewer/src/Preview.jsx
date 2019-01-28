@@ -20,9 +20,10 @@ const withTextAlignment = (element, data, mergedStyles, textDirection) => {
     className: classNames(
       {
         [element.props.className]: !!element.props.className,
-        [mergedStyles.rtl]: appliedTextDirection === 'rtl'
+        [mergedStyles.rtl]: appliedTextDirection === 'rtl',
       },
-      mergedStyles[alignmentClass])
+      mergedStyles[alignmentClass]
+    ),
   };
   return React.cloneElement(element, elementProps, element.props.children);
 };
@@ -32,72 +33,117 @@ const getInline = mergedStyles => {
     BOLD: (children, { key }) => <strong key={key}>{children}</strong>,
     ITALIC: (children, { key }) => <em key={key}>{children}</em>,
     UNDERLINE: (children, { key }) => <u key={key}>{children}</u>,
-    CODE: (children, { key }) => <span key={key} className={mergedStyles.code}>{children}</span>
+    CODE: (children, { key }) => (
+      <span key={key} className={mergedStyles.code}>
+        {children}
+      </span>
+    ),
   };
 };
 
-const getList = (ordered, mergedStyles, textDirection) =>
-  (children, blockProps) => {
-    const fixedChildren = children.map(child => child.length ? child : [' ']);
-    const className = ordered ? 'ordered' : 'unordered';
-    const containerClassName = mergedStyles[`${className}ListContainer`];
-    return (
-      <List key={blockProps.keys[0]} keys={blockProps.keys} depth={blockProps.depth} ordered={ordered} className={containerClassName}>
-        {fixedChildren.map((child, i) => {
-          // NOTE: list block data is an array of data entries per list item
-          const dataEntry = blockProps.data.length > i ? blockProps.data[i] : {};
-          return withTextAlignment(
-            <li className={mergedStyles[`${className}List`]} key={blockProps.keys[i]}>
-              <p className={mergedStyles.elementSpacing}>
-                {child}
-              </p>
-            </li>,
-            dataEntry, mergedStyles, textDirection);
-        })}
-      </List>
-    );
-  };
-
-const getUnstyledBlocks = (mergedStyles, textDirection) =>
-  (children, blockProps) =>
-    children.map((child, i) => {
-      if (!isEmptyBlock(child)) {
+const getList = (ordered, mergedStyles, textDirection) => (children, blockProps) => {
+  const fixedChildren = children.map(child => (child.length ? child : [' ']));
+  const className = ordered ? 'ordered' : 'unordered';
+  const containerClassName = mergedStyles[`${className}ListContainer`];
+  return (
+    <List key={blockProps.keys[0]} keys={blockProps.keys} depth={blockProps.depth} ordered={ordered} className={containerClassName}>
+      {fixedChildren.map((child, i) => {
+        // NOTE: list block data is an array of data entries per list item
+        const dataEntry = blockProps.data.length > i ? blockProps.data[i] : {};
         return withTextAlignment(
-          <p className={mergedStyles.text} key={blockProps.keys[i]}>{child}</p>,
-          blockProps.data[i],
+          <li className={mergedStyles[`${className}List`]} key={blockProps.keys[i]}>
+            <p className={mergedStyles.elementSpacing}>{child}</p>
+          </li>,
+          dataEntry,
           mergedStyles,
           textDirection
         );
-      } else {
-        return <div className={mergedStyles.text} />;
-      }
-    });
+      })}
+    </List>
+  );
+};
+
+const getUnstyledBlocks = (mergedStyles, textDirection) => (children, blockProps) =>
+  children.map((child, i) => {
+    if (!isEmptyBlock(child)) {
+      return withTextAlignment(
+        <p className={mergedStyles.text} key={blockProps.keys[i]}>
+          {child}
+        </p>,
+        blockProps.data[i],
+        mergedStyles,
+        textDirection
+      );
+    } else {
+      return <div className={mergedStyles.text} />;
+    }
+  });
 
 const getBlocks = (mergedStyles, textDirection) => {
   return {
     unstyled: getUnstyledBlocks(mergedStyles, textDirection),
-    blockquote: (children, blockProps) => children.map((child, i) =>
-      withTextAlignment(<blockquote className={mergedStyles.quote} key={blockProps.keys[i]}><div>{child}</div></blockquote>,
-        blockProps.data[i], mergedStyles, textDirection)),
-    'header-one': (children, blockProps) => children.map((child, i) =>
-      withTextAlignment(<h1 className={mergedStyles.headerOne} key={blockProps.keys[i]}>{child}</h1>,
-        blockProps.data[i], mergedStyles, textDirection)),
-    'header-two': (children, blockProps) => children.map((child, i) =>
-      withTextAlignment(<h2 className={mergedStyles.headerTwo} key={blockProps.keys[i]}>{child}</h2>,
-        blockProps.data[i], mergedStyles, textDirection)),
-    'header-three': (children, blockProps) => children.map((child, i) =>
-      withTextAlignment(<h3 className={mergedStyles.headerThree} key={blockProps.keys[i]}>{child}</h3>,
-        blockProps.data[i], mergedStyles, textDirection)),
-    'code-block': (children, blockProps) => children.map((child, i) =>
-      withTextAlignment(<pre key={blockProps.keys[i]} className={mergedStyles.codeBlock}>{child}</pre>,
-        blockProps.data[i], mergedStyles, textDirection)),
+    blockquote: (children, blockProps) =>
+      children.map((child, i) =>
+        withTextAlignment(
+          <blockquote className={mergedStyles.quote} key={blockProps.keys[i]}>
+            <div>{child}</div>
+          </blockquote>,
+          blockProps.data[i],
+          mergedStyles,
+          textDirection
+        )
+      ),
+    'header-one': (children, blockProps) =>
+      children.map((child, i) =>
+        withTextAlignment(
+          <h1 className={mergedStyles.headerOne} key={blockProps.keys[i]}>
+            {child}
+          </h1>,
+          blockProps.data[i],
+          mergedStyles,
+          textDirection
+        )
+      ),
+    'header-two': (children, blockProps) =>
+      children.map((child, i) =>
+        withTextAlignment(
+          <h2 className={mergedStyles.headerTwo} key={blockProps.keys[i]}>
+            {child}
+          </h2>,
+          blockProps.data[i],
+          mergedStyles,
+          textDirection
+        )
+      ),
+    'header-three': (children, blockProps) =>
+      children.map((child, i) =>
+        withTextAlignment(
+          <h3 className={mergedStyles.headerThree} key={blockProps.keys[i]}>
+            {child}
+          </h3>,
+          blockProps.data[i],
+          mergedStyles,
+          textDirection
+        )
+      ),
+    'code-block': (children, blockProps) =>
+      children.map((child, i) =>
+        withTextAlignment(
+          <pre key={blockProps.keys[i]} className={mergedStyles.codeBlock}>
+            {child}
+          </pre>,
+          blockProps.data[i],
+          mergedStyles,
+          textDirection
+        )
+      ),
     'unordered-list-item': getList(false, mergedStyles, textDirection),
     'ordered-list-item': getList(true, mergedStyles, textDirection),
   };
 };
 
 const getEntities = (typeMap, pluginProps) => ({
-  ...getPluginsViewer(typeMap, pluginProps)
+  ...getPluginsViewer(typeMap, pluginProps),
 });
 
 const combineTypeMappers = mappers => {
@@ -108,7 +154,7 @@ const combineTypeMappers = mappers => {
   return mappers.reduce((map, mapper) => Object.assign(map, mapper()), {});
 };
 
-const isEmptyRaw = raw => (!raw || !raw.blocks || (raw.blocks.length === 1 && raw.blocks[0].text === ''));
+const isEmptyRaw = raw => !raw || !raw.blocks || (raw.blocks.length === 1 && raw.blocks[0].text === '');
 
 const options = {
   cleanup: {
@@ -153,7 +199,6 @@ const Preview = ({ raw, typeMappers, theme, isMobile, decorators, anchorTarget, 
 
   return (
     <div className={className}>
-      {isEmpty && <div>There is nothing to render...</div>}
       {!isEmpty &&
         redraft(
           augmentRaw(raw),
@@ -164,8 +209,7 @@ const Preview = ({ raw, typeMappers, theme, isMobile, decorators, anchorTarget, 
             decorators,
           },
           options
-        )
-      }
+        )}
     </div>
   );
 };
@@ -189,7 +233,7 @@ Preview.propTypes = {
       PropTypes.shape({
         component: PropTypes.func.isRequired,
         strategy: PropTypes.func.isRequired,
-      })
+      }),
     ])
   ),
   anchorTarget: PropTypes.string,

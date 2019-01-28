@@ -24,6 +24,8 @@ module.exports = env => ({
     symlinks: false,
     alias: {
       'draft-js': path.resolve(__dirname, '..', '..', '..', 'node_modules', '@wix', 'draft-js'),
+      '@wix/draft-js': path.resolve(__dirname, '..', '..', '..', 'node_modules', '@wix', 'draft-js'),
+      'wix-rich-content-common': path.resolve(__dirname, '..', '..', '..', 'packages', 'common'),
     },
   },
   module: {

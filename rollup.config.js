@@ -5,8 +5,6 @@ import resolve from 'rollup-plugin-node-resolve';
 import builtins from 'rollup-plugin-node-builtins';
 import commonjs from 'rollup-plugin-commonjs';
 import babel from 'rollup-plugin-babel';
-import { terser as uglify } from 'rollup-plugin-terser';
-import visualizer from 'rollup-plugin-visualizer';
 import json from 'rollup-plugin-json';
 import postcss from 'rollup-plugin-postcss';
 import postcssURL from 'postcss-url';
@@ -102,6 +100,14 @@ const plugins = [
 ];
 
 if (process.env.NODE_ENV !== 'development') {
+  const replace = require('rollup-plugin-replace');
+  plugins.push(
+    replace({
+      'process.env.NODE_ENV': JSON.stringify('production')
+    })
+  );
+
+  const uglify = require('rollup-plugin-terser').terser;
   plugins.push(
     uglify({
       mangle: false,
@@ -114,6 +120,7 @@ if (process.env.NODE_ENV !== 'development') {
 }
 
 if (process.env.MODULE_ANALYZE) {
+  const visualizer = require('rollup-plugin-visualizer');
   plugins.push(
     visualizer({
       sourcemaps: true,

@@ -1,10 +1,18 @@
 {
-  "extends": ["wix/react", "plugin:jsx-a11y/strict"],
+  "extends": [
+    "wix/react",
+    "plugin:jsx-a11y/strict"
+  ],
   "env": {
     "browser": true,
     "node": true
   },
-  "plugins": ["lodash", "fp", "jsx-a11y"],
+  "plugins": [
+    "lodash",
+    "fp",
+    "jsx-a11y",
+    "prettier"
+  ],
   "settings": {
     "react": {
       "version": "15.5.4"
@@ -19,6 +27,7 @@
         "allowTemplateLiterals": true
       }
     ],
+    "jsx-quotes": ["warn", "prefer-single"],
     "react/jsx-closing-tag-location": "error",
     "react/jsx-closing-bracket-location": [
       1,
@@ -53,6 +62,7 @@
     "mocha/no-pending-tests": "error",
     "no-param-reassign": "warn",
     "jsx-a11y/label-has-for": "off",
-    "jsx-a11y/aria-proptypes": "off"
+    "jsx-a11y/aria-proptypes": "off",
+    "prettier/prettier": "warn"
   }
 }

@@ -52,8 +52,8 @@ async function deployExamples(examples) {
 
   for (const example of examples) {
     console.log(chalk.blue(`\nDeploying ${example.name} example...`));
-    // bootstrap(example);
-    // build(example);
+    bootstrap(example);
+    build(example);
     publish(example);
   }
 }
