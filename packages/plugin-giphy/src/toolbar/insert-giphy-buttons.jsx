@@ -11,8 +11,8 @@ export default ({ helpers, t, settings }) => {
       name: 'GIF',
       tooltipText: t('GiphyPlugin_InsertButton_Tooltip'),
       Icon: WixUtils.isMobile() ? InsertPluginMobileIcon : InsertPluginIcon,
-      componentData: DEFAULTS,
-      toolbars: [TOOLBARS.FOOTER],
+      componentData: settings.componentDataDefaults || DEFAULTS,
+      toolbars: settings.insertToolbars || [TOOLBARS.FOOTER],
       modalElement: decorateComponentWithProps(GiphyApiInputModal, settings),
       modalStyles: WixUtils.isMobile() ?
         getModalStyles({ customStyles: MobileFullScreenCustomStyle, fullScreen: true }) : null,
