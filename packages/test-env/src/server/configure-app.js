@@ -16,13 +16,26 @@ module.exports = function configure(app) {
     res.sendStatus(200);
   });
 
+  app.get('/e', (req, res) => {
+    res.render('index', { contentState: null, bundleName: 'editor' });
+  });
+
+  app.get('/e/:packageName/:fixtureName', (req, res) => {
+    const contentState = getFixture(req.params.packageName, req.params.fixtureName);
+    if (!contentState) {
+      return res.sendStatus(404);
+    }
+
+    res.render('index', { contentState: null, bundleName: 'editor' });
+  });
+
   app.get('/v/:packageName/:fixtureName', (req, res) => {
     const contentState = getFixture(req.params.packageName, req.params.fixtureName);
     if (!contentState) {
       return res.sendStatus(404);
     }
 
-    res.render('index', { contentState });
+    res.render('index', { contentState, bundleName: 'viewer' });
   });
 
   return app;
