@@ -21,3 +21,10 @@ stats.html
 
 .history/**
 *.todo
+
+#Tests
+**/*.diff.png
+cypress/fixtures
+cypress/videos
+cypress/screenshots
+cypress/snapshots/All\sSpecs

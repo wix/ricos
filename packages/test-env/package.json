@@ -1,0 +1,23 @@
+{
+  "name": "wix-rich-content-test-env",
+  "version": "0.0.1",
+  "author": {
+    "name": "Jonathan Bachman",
+    "email": "jonathanb@wix.com"
+  },
+  "scripts": {
+    "debug": "webpack-dev-server",
+    "build": "webpack",
+    "start": "node ./src/server"
+  },
+  "dependencies": {
+    "wix-rich-content-viewer": "*",
+    "wix-rich-content-plugin-divider": "*",
+    "express": "^4.16.4",
+    "webpack": "^4.29.0",
+    "webpack-dev-server": "^3.1.14"
+  },
+  "peerDependencies": {},
+  "devDependencies": {},
+  "private": true
+}
