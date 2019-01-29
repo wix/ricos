@@ -20,8 +20,19 @@
     "release": "node scripts/publishPackages",
     "deploy": "node scripts/deployExamples",
     "createVersion": "node scripts/createVersion",
+    "e2e": "start-server-and-test e2e:env http://localhost:3002 e2e:run",
+    "e2e:updateSnapshots": "start-server-and-test e2e:env http://localhost:3002 e2e:run:update",
+    "e2e:ci": "start-server-and-test e2e:env:run http://localhost:3002 e2e:run:ci",
+    "e2e:run": "docker run -it -v $PWD:/e2e -w /e2e --entrypoint=cypress cypress/included:3.3.1 run --config baseUrl=http://host.docker.internal:3002",
+    "e2e:run:update": "npm run e2e:run -- --env CYPRESS_CONFIG=update",
+    "e2e:run:ci": "docker run -it -v $PWD:/e2e -w /e2e --network='host' cypress/included:3.3.1 --env CYPRESS_CONFIG=ci",
+    "e2e:debug": "cypress open",
+    "e2e:env": "cd e2e/test-env && npm run build && npm start",
+    "e2e:env:run": "cd e2e/test-env && npm start",
+    "e2e:env:dev": "cd e2e/test-env && npm run dev",
+    "test:unit": "lerna run --parallel --stream test",
     "lint": "lerna run --parallel --stream lint",
-    "test": "lerna run --parallel --stream test"
+    "test": "npm run test:unit && npm run e2e:ci"
   },
   "husky": {
     "hooks": {
@@ -49,6 +60,8 @@
     "create-index": "^2.3.0",
     "cross-env": "^5.2.0",
     "css-loader": "^0.28.11",
+    "cypress": "3.3.1",
+    "cypress-plugin-snapshots": "git://github.com/artur-charcenko/cypress-plugin-snapshots.git",
     "eslint": "^6.1.0",
     "eslint-config-prettier": "^4.0.0",
     "eslint-config-wix": "^1.1.18",
@@ -86,6 +99,7 @@
     "sass-loader": "^7.0.1",
     "semver": "^5.5.0",
     "source-map-loader": "^0.2.3",
+    "start-server-and-test": "^1.7.11",
     "style-loader": "^0.21.0",
     "surge-github-autorelease": "^1.0.43",
     "uglifyjs-webpack-plugin": "^1.2.5",

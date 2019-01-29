@@ -6,6 +6,7 @@ const chalk = require('chalk');
 const isEmpty = require('lodash').isEmpty;
 
 const baseDir = 'packages/';
+const excludedDirs = ['e2e'];
 
 const dirsWithModifiedFiles = execSync('git status --porcelain=1')
   .toString()
@@ -20,7 +21,8 @@ const dirsWithModifiedFiles = execSync('git status --porcelain=1')
       fullFileDirSepIndex > -1 ? fullFileDir.substring(0, fullFileDirSepIndex) : fullFileDir;
     return baseFileDir;
   })
-  .filter(s => !isEmpty(s));
+  .filter(s => !isEmpty(s))
+  .filter(s => !excludedDirs.includes(s));
 
 if (dirsWithModifiedFiles.length) {
   new Set(dirsWithModifiedFiles).forEach(dir => {
