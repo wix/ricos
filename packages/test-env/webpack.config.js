@@ -1,12 +1,29 @@
 const path = require('path');
 
 const config = {
-  entry: './src/client',
+  entry: {
+    viewer: './src/client/viewer',
+    editor: './src/client/editor',
+  },
   output: {
     path: path.resolve(__dirname, 'dist/'),
     filename: '[name].bundle.js',
   },
-  mode: 'development',
+  resolve: {
+    extensions: ['.js', '.jsx'],
+    alias: {
+      'draft-js': '@wix/draft-js',
+    },
+  },
+  module: {
+    rules: [
+      {
+        test: /\.jsx?/,
+        exclude: /node_modules/,
+        use: 'babel-loader',
+      }
+    ],
+  },
   devServer: {
     compress: true,
     port: 3002,
@@ -14,6 +31,7 @@ const config = {
       require('./src/server/configure-app')(app);
     },
   },
+  mode: 'production',
 };
 
 module.exports = config;

@@ -6,16 +6,27 @@
     "email": "jonathanb@wix.com"
   },
   "scripts": {
-    "debug": "webpack-dev-server",
+    "debug": "webpack-dev-server --mode development",
     "build": "webpack",
     "start": "node ./src/server"
   },
   "dependencies": {
-    "wix-rich-content-viewer": "*",
-    "wix-rich-content-plugin-divider": "*",
+    "@babel/core": "^7.2.2",
+    "@babel/plugin-proposal-class-properties": "^7.3.0",
+    "@babel/preset-env": "^7.3.1",
+    "@babel/preset-react": "^7.0.0",
+    "@wix/draft-js": "^0.10.272",
+    "babel-loader": "^8.0.5",
+    "deep-freeze": "0.0.1",
     "express": "^4.16.4",
+    "react": "^15.6.2",
+    "react-dom": "^15.6.2",
     "webpack": "^4.29.0",
-    "webpack-dev-server": "^3.1.14"
+    "webpack-dev-server": "^3.1.14",
+    "wix-rich-content-common": "*",
+    "wix-rich-content-editor": "*",
+    "wix-rich-content-plugin-divider": "*",
+    "wix-rich-content-viewer": "*"
   },
   "peerDependencies": {},
   "devDependencies": {},
