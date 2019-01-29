@@ -1,0 +1,6 @@
+{
+  "baseUrl": "http://localhost:3002",
+  "ignoreTestFiles": "**/node_modules/**/*",
+  "testFiles": "**/e2e/*.spec.js",
+  "integrationFolder": "packages"
+}
