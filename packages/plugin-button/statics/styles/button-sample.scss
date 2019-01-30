@@ -7,9 +7,12 @@
   height: 40px;
   width: 104px;
   padding-bottom: 3px;
-  padding-right: 3px;
+  padding-right: 6px;
   box-sizing: border-box;
   cursor: pointer;
+  @include phone {
+    padding-bottom: 1px;
+  }
 }
 .button_sample_container {
   position: relative;
