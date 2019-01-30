@@ -4,6 +4,7 @@ import { RichContentEditor } from 'wix-rich-content-editor';
 import deepFreeze from 'deep-freeze';
 import 'wix-rich-content-common/dist/styles.min.css';
 import 'wix-rich-content-editor/dist/styles.min.css';
+import getPropsFromQuery from '../services/get-props-from-query';
 
 class Editor extends Component {
   state = {
@@ -19,7 +20,7 @@ class Editor extends Component {
 
   render() {
     return (
-      <RichContentEditor editorState={this.state.editorState} onChange={this.handleChange}/>
+      <RichContentEditor editorState={this.state.editorState} onChange={this.handleChange} {...getPropsFromQuery()}/>
     );
   }
 }
