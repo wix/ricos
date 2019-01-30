@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { convertFromRaw, convertToRaw, EditorState } from '@wix/draft-js';
 import { RichContentEditor } from 'wix-rich-content-editor';
 import deepFreeze from 'deep-freeze';
+import 'wix-rich-content-common/dist/styles.min.css';
+import 'wix-rich-content-editor/dist/styles.min.css';
 
 class Editor extends Component {
   state = {

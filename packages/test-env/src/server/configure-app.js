@@ -1,9 +1,10 @@
 const path = require('path');
 
-const getFixture = (packageName, fixtureName) => {
+const getFixture = (fixtureName) => {
   try {
-    return require(`../../../${packageName}/e2e/fixtures/${fixtureName}`);
+    return require(`./fixtures/${fixtureName}`);
   } catch (error) {
+    console.error(`Could not load ${fixtureName} fixture`);
     console.error(error);
   }
 };
@@ -16,21 +17,21 @@ module.exports = function configure(app) {
     res.sendStatus(200);
   });
 
-  app.get('/e', (req, res) => {
+  app.get('/rce', (req, res) => {
     res.render('index', { contentState: null, bundleName: 'editor' });
   });
 
-  app.get('/e/:packageName/:fixtureName', (req, res) => {
-    const contentState = getFixture(req.params.packageName, req.params.fixtureName);
+  app.get('/rce/:fixtureName', (req, res) => {
+    const contentState = getFixture(req.params.fixtureName);
     if (!contentState) {
       return res.sendStatus(404);
     }
 
-    res.render('index', { contentState: null, bundleName: 'editor' });
+    res.render('index', { contentState, bundleName: 'editor' });
   });
 
-  app.get('/v/:packageName/:fixtureName', (req, res) => {
-    const contentState = getFixture(req.params.packageName, req.params.fixtureName);
+  app.get('/rcv/:fixtureName', (req, res) => {
+    const contentState = getFixture(req.params.fixtureName);
     if (!contentState) {
       return res.sendStatus(404);
     }
