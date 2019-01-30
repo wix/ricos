@@ -1,6 +1,15 @@
 describe('viewer', () => {
-  it('should handle text with basic styling', () => {
-    cy.viewer('inline-styles');
-    cy.matchImageSnapshot('inline-styles');
+  context('desktop', () => {
+    it('inline styles', () => {
+      cy.viewerDesktop('inline-styles');
+      cy.matchImageSnapshot();
+    });
+  });
+
+  context('mobile', () => {
+    it('inline styles', () => {
+      cy.viewerMobile('inline-styles');
+      cy.matchImageSnapshot();
+    });
   });
 });
