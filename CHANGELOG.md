@@ -10,6 +10,9 @@
 
 ## [Unreleased]
 
+- `general`
+   - [#243](https://github.com/wix-incubator/rich-content/pull/242) move error boundary from img/video plugins to atomic bloc wrapper 
+
 <hr/>
   
 ## 2.0.0 (Jan 28, 2019)

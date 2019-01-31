@@ -24,14 +24,7 @@ class ImageViewer extends React.Component {
     super(props);
     validate(props.componentData, schema);
     this.styles = mergeStyles({ styles, theme: props.theme });
-    this.state = {
-      hasError: false,
-    };
-  }
-
-  componentDidCatch(error) {
-    console.error(error); //eslint-disable-line
-    this.setState({ hasError: true });
+    this.state = {};
   }
 
   componentDidMount() {
@@ -169,10 +162,6 @@ class ImageViewer extends React.Component {
   }
 
   render() {
-    if (this.state.hasError) {
-      return null;
-    }
-
     const { styles } = this;
     const { componentData, className, onClick, isFocused, readOnly, settings, defaultCaption } = this.props;
     const data = componentData || getDefault();

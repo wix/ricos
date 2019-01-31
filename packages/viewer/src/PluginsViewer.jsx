@@ -9,53 +9,70 @@ const renderLink = (componentData, anchorTarget, relValue) => {
   if (componentData.config && componentData.config.link) {
     const { url, target, rel } = componentData.config.link;
     return (
-      <a
-        target={target || anchorTarget || '_self'}
-        rel={rel || relValue || 'noopener'}
-        href={normalizeUrl(url)}
-        className={styles.anchor}
-      >{}
-      </a>);
+      <a target={target || anchorTarget || '_self'} rel={rel || relValue || 'noopener'} href={normalizeUrl(url)} className={styles.anchor}>
+        {}
+      </a>
+    );
   }
   return null;
 };
 
-const AtomicBlock = ({ type, typeMap, componentData, children, theme, isMobile, anchorTarget, relValue, config, ...props }) => {
-  const mergedStyles = mergeStyles({ theme, styles });
-  const { component: Component, elementType } = typeMap[type];
-  const { size, alignment, textWrap, container } = typeMap[type].classNameStrategies || {};
-  const settings = (config && config[type]) || {};
+class AtomicBlock extends React.Component {
+  state = {
+    hasError: false,
+  };
 
-  if (Component) {
-    if (elementType !== 'inline') {
-      const containerClassNames = classNames(mergedStyles.pluginContainerReadOnly,
-        { [mergedStyles.pluginContainerMobile]: isMobile },
-        isFunction(alignment) ? alignment(componentData, theme, styles, isMobile) :
-          alignmentClassName(componentData, theme, styles, isMobile),
-        isFunction(size) ? size(componentData, theme, styles, isMobile) :
-          sizeClassName(componentData, theme, styles, isMobile),
-        isFunction(textWrap) ? textWrap(componentData, theme, styles, isMobile) :
-          textWrapClassName(componentData, theme, styles, isMobile)
-      );
-      return (
-        <div className={containerClassNames}>
-          {isFunction(container) ?
-            <div className={container(theme)}>
+  componentDidCatch() {
+    this.setState({ hasError: true });
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return null;
+    }
+    const { type, typeMap, componentData, children, theme, isMobile, anchorTarget, relValue, config, ...props } = this.props;
+
+    const mergedStyles = mergeStyles({ theme, styles });
+    const { component: Component, elementType } = typeMap[type];
+    const { size, alignment, textWrap, container } = typeMap[type].classNameStrategies || {};
+    const settings = (config && config[type]) || {};
+
+    if (Component) {
+      if (elementType !== 'inline') {
+        const containerClassNames = classNames(
+          mergedStyles.pluginContainerReadOnly,
+          { [mergedStyles.pluginContainerMobile]: isMobile },
+          isFunction(alignment) ? alignment(componentData, theme, styles, isMobile) : alignmentClassName(componentData, theme, styles, isMobile),
+          isFunction(size) ? size(componentData, theme, styles, isMobile) : sizeClassName(componentData, theme, styles, isMobile),
+          isFunction(textWrap) ? textWrap(componentData, theme, styles, isMobile) : textWrapClassName(componentData, theme, styles, isMobile)
+        );
+        return (
+          <div className={containerClassNames}>
+            {isFunction(container) ? (
+              <div className={container(theme)}>
+                <Component componentData={componentData} theme={theme} settings={settings} isMobile={isMobile} {...props}>
+                  {children}
+                </Component>
+              </div>
+            ) : (
               <Component componentData={componentData} theme={theme} settings={settings} isMobile={isMobile} {...props}>
                 {children}
               </Component>
-            </div> :
-            <Component componentData={componentData} theme={theme} settings={settings} isMobile={isMobile} {...props}>
-              {children}
-            </Component>}
-          {renderLink(componentData, anchorTarget, relValue)}
-        </div>);
-    } else {
-      return <Component componentData={componentData} theme={theme} settings={settings} isMobile={isMobile} {...props}>{children}</Component>;
+            )}
+            {renderLink(componentData, anchorTarget, relValue)}
+          </div>
+        );
+      } else {
+        return (
+          <Component componentData={componentData} theme={theme} settings={settings} isMobile={isMobile} {...props}>
+            {children}
+          </Component>
+        );
+      }
     }
+    return null;
   }
-  return null;
-};
+}
 
 AtomicBlock.propTypes = {
   type: PropTypes.string.isRequired,
@@ -74,7 +91,10 @@ const getPluginsViewer = (typeMap, pluginProps) => {
   const res = {};
   Object.keys(typeMap).forEach(type => {
     res[type] = (children, entity, { key }) => (
-      <AtomicBlock typeMap={typeMap} type={type} key={key} componentData={entity} {...pluginProps}>{children}</AtomicBlock>);
+      <AtomicBlock typeMap={typeMap} type={type} key={key} componentData={entity} {...pluginProps}>
+        {children}
+      </AtomicBlock>
+    );
   });
   return res;
 };
