@@ -264,7 +264,9 @@ const createBaseComponent = ({ PluginComponent, theme, settings, pubsub, helpers
         };
       }
       const anchorClass = classNames(
-        Styles.anchor, {
+        Styles.absFull,
+        Styles.anchor,
+        {
           [Styles.isImage]: getDisplayName(PluginComponent).toLowerCase().indexOf('image') !== -1,
         });
       /* eslint-disable jsx-a11y/anchor-has-content */

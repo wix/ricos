@@ -10,8 +10,11 @@
 
 ## [Unreleased]
 
+### :bug: Bug Fix
 - `general`
-   - [#243](https://github.com/wix-incubator/rich-content/pull/242) move error boundary from img/video plugins to atomic bloc wrapper 
+   - [#242](https://github.com/wix-incubator/rich-content/pull/242) move error boundary from img/video plugins to atomic block wrapper 
+- `viewer`
+   - [#244](https://github.com/wix-incubator/rich-content/pull/244) wrap atomic blocks with links instead of positioning a sibling 
 
 <hr/>
   

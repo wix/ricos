@@ -4,19 +4,6 @@ import classNames from 'classnames';
 import isFunction from 'lodash/isFunction';
 import { sizeClassName, alignmentClassName, textWrapClassName, mergeStyles, normalizeUrl } from 'wix-rich-content-common';
 import styles from '../statics/rich-content-viewer.scss';
-
-const renderLink = (componentData, anchorTarget, relValue) => {
-  if (componentData.config && componentData.config.link) {
-    const { url, target, rel } = componentData.config.link;
-    return (
-      <a target={target || anchorTarget || '_self'} rel={rel || relValue || 'noopener'} href={normalizeUrl(url)} className={styles.anchor}>
-        {}
-      </a>
-    );
-  }
-  return null;
-};
-
 class AtomicBlock extends React.Component {
   state = {
     hasError: false,
@@ -39,15 +26,29 @@ class AtomicBlock extends React.Component {
 
     if (Component) {
       if (elementType !== 'inline') {
+        const hasLink = componentData.config && componentData.config.link;
+        const ContainerElement = !hasLink ? 'div' : 'a';
         const containerClassNames = classNames(
           mergedStyles.pluginContainerReadOnly,
-          { [mergedStyles.pluginContainerMobile]: isMobile },
+          {
+            [mergedStyles.pluginContainerMobile]: isMobile,
+            [styles.anchor]: hasLink,
+          },
           isFunction(alignment) ? alignment(componentData, theme, styles, isMobile) : alignmentClassName(componentData, theme, styles, isMobile),
           isFunction(size) ? size(componentData, theme, styles, isMobile) : sizeClassName(componentData, theme, styles, isMobile),
           isFunction(textWrap) ? textWrap(componentData, theme, styles, isMobile) : textWrapClassName(componentData, theme, styles, isMobile)
         );
+        let containerProps = {};
+        if (hasLink) {
+          const { url, target, rel } = componentData.config.link;
+          containerProps = {
+            href: normalizeUrl(url),
+            target: target || anchorTarget || '_self',
+            rel: rel || relValue || 'noopener',
+          };
+        }
         return (
-          <div className={containerClassNames}>
+          <ContainerElement className={containerClassNames} {...containerProps}>
             {isFunction(container) ? (
               <div className={container(theme)}>
                 <Component componentData={componentData} theme={theme} settings={settings} isMobile={isMobile} {...props}>
@@ -59,8 +60,7 @@ class AtomicBlock extends React.Component {
                 {children}
               </Component>
             )}
-            {renderLink(componentData, anchorTarget, relValue)}
-          </div>
+          </ContainerElement>
         );
       } else {
         return (
