@@ -134,7 +134,9 @@ class SettingsComponent extends PureComponent {
           null
         }
         <div
-          style={{ paddingTop: !this.state.validUrl || !this.props.validUrl ? ((WixUtils.isMobile()) ? '21px' : '25px') : '34px' }}
+          style={{ paddingTop: !this.state.validUrl || !this.props.validUrl ? 
+            ((WixUtils.isMobile()) ? '21px' : '25px') : 
+            (WixUtils.isMobile() ? '24px' : '34px')}}
           className={styles.checkBoxes}
         >
           <Checkbox
