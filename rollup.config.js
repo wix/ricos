@@ -57,7 +57,11 @@ const plugins = [
     },
   }),
   json({
-    include: 'statics/**',
+    include: [
+      'statics/**',
+      'node_modules/**',
+      '../../node_modules/**',
+    ],
   }),
   postcss({
     minimize: {
@@ -109,28 +113,24 @@ let output = [
     sourcemap: true,
   },
   {
+    file: 'dist/module.cjs.js',
+    format: 'cjs',
+    sourcemap: true,
+  },
+  {
     name: NAME,
     format: 'iife',
     file: `dist/${MODULE_NAME}.js`,
     globals: id => {
       const isExcluded = excludedGlobals.find(p => p === id);
-
       if (!isExcluded) {
         const globalKey = Object.keys(globals).find(externalName => externalName === id || new RegExp(externalName + '\/').test(id));
-
         if (globalKey) {
           return globals[globalKey];
         }
       }
-
-
       return false;
     },
-    sourcemap: true,
-  },
-  {
-    file: 'dist/module.cjs.js',
-    format: 'cjs',
     sourcemap: true,
   },
 ];

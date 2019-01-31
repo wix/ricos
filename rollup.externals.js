@@ -29,6 +29,7 @@ export const globals = {
   'lodash/camelCase': '_.camelCase',
   'lodash/cloneDeep': '_.cloneDeep',
   'lodash/debounce': '_.debounce',
+  'lodash.escaperegexp': '_.escaperegexp',
   'lodash/findIndex': '_.findIndex',
   'lodash/findLastIndex': '_.findLastIndex',
   'lodash/flatMap': '_.flatMap',
@@ -42,6 +43,7 @@ export const globals = {
   'lodash/isNil': '_.isNil',
   'lodash/isNumber': '_.isNumber',
   'lodash/isUndefined': '_.isUndefined',
+  'lodash.keys': '_.keys',
   'lodash/mapValues': '_.mapValues',
   'lodash/merge': '_.merge',
   'lodash/mergeWith': '_.mergeWith',
@@ -54,11 +56,15 @@ export const globals = {
   'lodash/upperFirst': '_.upperFirst',
   'prop-types': 'PropTypes',
   react: 'React',
+  'react-custom-scrollbars': 'ReactCustomScrollbars',
   'react-dom': 'ReactDOM',
   'react-i18next': 'reactI18next',
+  'react-infinite-scroller': 'InfiniteScroll',
+  'react-md-spinner': 'MDSpinner',
   'react-measure': 'Measure',
   'react-player': 'ReactPlayer',
   'react-sortable-hoc': 'reactSortableHoc',
+  'react-tooltip': 'ReactTooltip',
   'wix-rich-content-common': 'WixRichContentCommon'
 };
 

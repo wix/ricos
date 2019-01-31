@@ -13,7 +13,7 @@
   <script src="https://unpkg.com/react-tooltip@3.6.1/standalone/react-tooltip.min.js" crossorigin></script>
   <script src="https://unpkg.com/react-measure@2.1.0/dist/react-measure.js" crossorigin></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react-modal/3.1.11/react-modal.js" crossorigin></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone@7.2.5/babel.js" crossorigin></script>
 
   <script src="http://localhost:8080/packages/common/dist/Common.js"></script>
   <script src="http://localhost:8080/packages/editor/dist/Editor.js"></script>
@@ -27,9 +27,9 @@
 </head>
 
 <body>
-<div id="root"></div>
-<script type="text/babel">
-  ReactDOM.render(<DemoExample />, document.getElementById('root'));
+  <div id="root"></div>
+  <script type="text/babel">
+    ReactDOM.render(<DemoExample />, document.getElementById('root'));
 </script>
 </body>
 
