@@ -20,7 +20,8 @@
     "e2e:run": "cypress run --reporter cypress-image-snapshot/reporter",
     "e2e:debug": "cypress open",
     "e2e:env": "cd ./packages/test-env && npm run build && npm start",
-    "test": "lerna run --parallel --stream test"
+    "test:unit": "lerna run --parallel --stream test",
+    "test": "npm run test:unit && npm run e2e"
   },
   "husky": {
     "hooks": {
