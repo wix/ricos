@@ -33,11 +33,17 @@ const config = [
         babelRule,
         {
           test: /\.css$/,
-          use: ['style-loader', 'css-loader']
-        }
+          include: /packages\/test-env/,
+          use: ['style-loader', { loader: 'css-loader', options: { modules: true } }],
+        },
+        {
+          test: /\.min\.css$/,
+          exclude: /packages\/test-env/,
+          use: ['style-loader', 'css-loader'],
+        },
       ],
     },
-    mode: 'production',
+    mode: 'development',
   },
   {
     name: 'server',
@@ -57,8 +63,14 @@ const config = [
         babelRule,
         {
           test: /\.css$/,
+          include: /packages\/test-env/,
+          use: { loader: 'css-loader', options: { modules: true, exportOnlyLocals: true } },
+        },
+        {
+          test: /\.css$/,
+          exclude: /packages\/test-env/,
           use: { loader: 'css-loader', options: { exportOnlyLocals: true } },
-        }
+        },
       ],
     },
     mode: 'development',

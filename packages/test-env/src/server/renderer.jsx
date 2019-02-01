@@ -2,6 +2,7 @@ import React from 'react';
 import { renderToString } from 'react-dom/server';
 import Editor from '../shared/components/Editor';
 import Viewer from '../shared/components/Viewer';
+import App from '../shared/components/App';
 
 const COMPONENTS = {
   rce: {
@@ -34,7 +35,11 @@ export default function renderer() {
     }
 
     res.render('index', {
-      html: renderToString(<Component {...props}/>),
+      html: renderToString(
+        <App>
+          <Component {...props}/>
+        </App>
+      ),
       initialState: props.initialState,
       bundleName,
     });
