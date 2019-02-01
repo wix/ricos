@@ -15,7 +15,13 @@ class Editor extends Component {
   handleChange = editorState => {
     this.setState({ editorState });
     if (typeof window !== 'undefined') {
-      window.__CONTENT_STATE__ = deepFreeze(convertToRaw(editorState.getCurrentContent()));
+      const raw = deepFreeze(convertToRaw(editorState.getCurrentContent()));
+      window.__CONTENT_STATE__ = raw;
+      window.__CONTENT_SNAPSHOT__ = {
+        ...raw,
+        // blocks keys are random so for snapshot diffing they are changed to indexes
+        blocks: raw.blocks.map((block, index) => ({ ...block, key: index})),
+      };
     }
   };
 
