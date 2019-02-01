@@ -1,8 +1,13 @@
 describe('editor', () => {
   it('should support lists', () => {
     cy.editorDesktop();
-    cy.contentSnapshot('before');
+
+    cy.matchContentSnapshot('before');
+
     cy.enterText('hello{selectall}');
-    cy.contentSnapshot('after');
+    cy.get('[data-hook=textInlineStyleButton_Bold]').click();
+
+    cy.matchContentSnapshot('after');
+    cy.matchImageSnapshot();
   });
 });

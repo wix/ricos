@@ -4,7 +4,6 @@ require('@cypress/snapshot').register();
 const resizeForDesktop = () => cy.viewport('ipad-2');
 const resizeForMobile = () => cy.viewport('iphone-5');
 
-
 const getUrl = (componentId, fixtureName) => {
   const path = `/${componentId}`;
   return fixtureName ? `${path}/${fixtureName}` : path;
@@ -36,6 +35,6 @@ Cypress.Commands.add('enterText', text => {
     .type(text);
 });
 
-Cypress.Commands.add('contentSnapshot', name => {
+Cypress.Commands.add('matchContentSnapshot', name => {
   cy.window().its('__CONTENT_SNAPSHOT__').snapshot({ name });
 });
