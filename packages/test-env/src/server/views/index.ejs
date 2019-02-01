@@ -7,10 +7,12 @@
 
 <body>
 
-<div id="root"></div>
+<div id="root">
+    <%- html %>
+</div>
 
 <script>
-    window.__CONTENT_STATE__ = <%- JSON.stringify(contentState) %>;
+    window.__CONTENT_STATE__ = <%- JSON.stringify(initialState) %>;
 </script>
 <script src="/<%- bundleName %>.bundle.js"></script>
 

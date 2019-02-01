@@ -6,7 +6,7 @@
     "email": "jonathanb@wix.com"
   },
   "scripts": {
-    "debug": "webpack-dev-server --mode development",
+    "dev": "node ./dev",
     "build": "webpack",
     "start": "node ./src/server"
   },
@@ -25,7 +25,10 @@
     "react-dom": "^15.6.2",
     "style-loader": "^0.23.1",
     "webpack": "^4.29.0",
+    "webpack-dev-middleware": "^3.5.1",
     "webpack-dev-server": "^3.1.14",
+    "webpack-hot-server-middleware": "^0.5.0",
+    "webpack-node-externals": "^1.7.2",
     "wix-rich-content-common": "*",
     "wix-rich-content-editor": "*",
     "wix-rich-content-plugin-divider": "*",
