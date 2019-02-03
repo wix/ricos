@@ -5,26 +5,31 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const PATHS = {
   root: path.join(__dirname, '..'),
   src: path.join(__dirname, '../src'),
-  dist: path.join(__dirname, '../dist')
+  dist: path.join(__dirname, '../dist'),
 };
 
 module.exports = env => ({
-  entry: [
-    require.resolve('./polyfills'),
-    path.resolve(PATHS.src, 'index.js'),
-  ],
+  entry: [require.resolve('./polyfills'), path.resolve(PATHS.src, 'index.js')],
   output: {
     path: PATHS.dist,
     filename: '[name].js',
     chunkFilename: '[name].js',
-    publicPath: '/'
+    publicPath: '/',
   },
   resolve: {
     extensions: ['.js', '.jsx', '.json'],
     symlinks: false,
     alias: {
       'draft-js': path.resolve(__dirname, '..', '..', '..', 'node_modules', '@wix', 'draft-js'),
-      '@wix/draft-js': path.resolve(__dirname, '..', '..', '..', 'node_modules', '@wix', 'draft-js'),
+      '@wix/draft-js': path.resolve(
+        __dirname,
+        '..',
+        '..',
+        '..',
+        'node_modules',
+        '@wix',
+        'draft-js'
+      ),
       'wix-rich-content-common': path.resolve(__dirname, '..', '..', '..', 'packages', 'common'),
     },
   },
@@ -34,38 +39,35 @@ module.exports = env => ({
         test: /\.js(x)?$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader",
+          loader: 'babel-loader',
           options: {
             compact: true,
-            extends: path.resolve(PATHS.root, '..', '..', '.babelrc.js')
-          }
-        }
+            extends: path.resolve(PATHS.root, '..', '..', '.babelrc.js'),
+          },
+        },
       },
       {
         test: /\.css$/,
-        use: [
-          'style-loader',
-          'css-loader'
-        ]
+        use: ['style-loader', 'css-loader'],
       },
       {
         test: /\.scss$/,
         use: [
           {
-            loader: "style-loader"
+            loader: 'style-loader',
           },
           {
-            loader: "css-loader",
+            loader: 'css-loader',
             options: {
               modules: true,
               importLoaders: 1,
-              localIdentName: "[name]_[local]"
-            }
+              localIdentName: '[name]_[local]',
+            },
           },
           {
-            loader: 'sass-loader'
-          }
-        ]
+            loader: 'sass-loader',
+          },
+        ],
       },
       {
         test: /\.(png|jpg|gif)$/,
@@ -95,8 +97,8 @@ module.exports = env => ({
           {
             loader: 'babel-loader',
             options: {
-              presets: ["@babel/preset-react"]
-            }
+              presets: ['@babel/preset-react'],
+            },
           },
           {
             loader: 'react-svg-loader',
@@ -113,7 +115,7 @@ module.exports = env => ({
           },
         ],
       },
-    ]
+    ],
   },
   plugins: [
     new HtmlWebPackPlugin({
@@ -123,12 +125,14 @@ module.exports = env => ({
       meta: {
         charset: 'utf-8',
         viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no',
-      }
+      },
     }),
-    new CopyWebpackPlugin([{
-      from: '**/*',
-      context: 'node_modules/wix-rich-content-plugin-html/dist/static/',
-      to: 'static/',
-    }]),
+    new CopyWebpackPlugin([
+      {
+        from: '**/*',
+        context: 'node_modules/wix-rich-content-plugin-html/dist/static/',
+        to: 'static/',
+      },
+    ]),
   ],
 });

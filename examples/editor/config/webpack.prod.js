@@ -18,19 +18,19 @@ const prodConfig = {
             options: {
               modules: true,
               importLoaders: 1,
-              localIdentName: '[hash:base64:5]'
-            }
+              localIdentName: '[hash:base64:5]',
+            },
           },
-          'sass-loader'
-        ]
+          'sass-loader',
+        ],
       },
-    ]
+    ],
   },
-  plugins:[
+  plugins: [
     new MiniCssExtractPlugin({
-      filename: "[name].css",
-      chunkFilename: "[id].css"
-    })
+      filename: '[name].css',
+      chunkFilename: '[id].css',
+    }),
   ],
   optimization: {
     minimizer: [
@@ -38,8 +38,8 @@ const prodConfig = {
         cache: true,
         parallel: true,
       }),
-      new OptimizeCSSAssetsPlugin({})
-    ]
+      new OptimizeCSSAssetsPlugin({}),
+    ],
   },
 };
 
@@ -48,6 +48,8 @@ module.exports = env => {
     prodConfig.plugins.push(new BundleAnalyzerPlugin());
   }
   const common = require('./webpack.common.js')(env);
-  common.module.rules = common.module.rules.filter(rule => rule.test && (rule.test.toString() !== /\.scss$/.toString()))
+  common.module.rules = common.module.rules.filter(
+    rule => rule.test && rule.test.toString() !== /\.scss$/.toString()
+  );
   return merge(common, prodConfig);
 };

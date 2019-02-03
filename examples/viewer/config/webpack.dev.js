@@ -6,7 +6,7 @@ const devConfig = {
   mode: 'development',
   devtool: 'eval-source-map',
   optimization: {
-    namedModules: false
+    namedModules: false,
   },
   module: {
     rules: [
@@ -14,20 +14,18 @@ const devConfig = {
         test: /\.js$/,
         use: ['source-map-loader'],
         enforce: 'pre',
-        exclude: /node_modules.*node_modules/
-      }
-    ]
+        exclude: /node_modules.*node_modules/,
+      },
+    ],
   },
-  plugins: [
-    new HotModuleReplacementPlugin(),
-  ],
+  plugins: [new HotModuleReplacementPlugin()],
   devServer: {
     port: 3001,
     host: '0.0.0.0',
     hot: true,
     compress: true,
     publicPath: '/',
-    stats: 'errors-only'
+    stats: 'errors-only',
   },
 };
 

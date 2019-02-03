@@ -23,11 +23,13 @@
     "*.ejs": "html",
     "*.json.erb": "json"
   },
-  "auto-run-command.rules": [{
-    "condition": "hasFile: wallaby.js",
-    "command": "wallaby.start",
-    "message": "Running wallaby"
-  }],
+  "auto-run-command.rules": [
+    {
+      "condition": "hasFile: wallaby.js",
+      "command": "wallaby.start",
+      "message": "Running wallaby"
+    }
+  ],
   "javascript.validate.enable": false,
   "files.trimTrailingWhitespace": true,
   "editor.tabSize": 2,

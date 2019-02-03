@@ -3,15 +3,15 @@ const TestData = {
   entityMap: {},
   blocks: [
     {
-      key: "5g8yu",
-      text: "Hello text only",
-      type: "unstyled",
+      key: '5g8yu',
+      text: 'Hello text only',
+      type: 'unstyled',
       depth: 0,
       inlineStyleRanges: [],
       entityRanges: [],
-      data: {}
+      data: {},
     },
-  ]
+  ],
 };
 
 export default TestData;

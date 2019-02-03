@@ -9,9 +9,9 @@ export default {
           width: 200,
           height: 200,
           safe: true,
-          isSrc: true
-        }
-      }
+          isSrc: true,
+        },
+      },
     },
     5: {
       type: 'wix-draft-plugin-html',
@@ -22,9 +22,9 @@ export default {
           width: 500,
           height: 200,
           safe: true,
-          isSrc: true
-        }
-      }
+          isSrc: true,
+        },
+      },
     },
     6: {
       type: 'wix-draft-plugin-divider',
@@ -32,9 +32,9 @@ export default {
       data: {
         type: 'divider1',
         config: {
-          width: 500
-        }
-      }
+          width: 500,
+        },
+      },
     },
     7: {
       type: 'VIDEO-EMBED',
@@ -42,10 +42,10 @@ export default {
       data: {
         src: 'https://www.youtube.com/watch?v=eqZVIiD6wSg',
         config: {
-          size: 'content'
-        }
-      }
-    }
+          size: 'content',
+        },
+      },
+    },
   },
   blocks: [
     {
@@ -56,7 +56,7 @@ export default {
       depth: 0,
       inlineStyleRanges: [],
       entityRanges: [],
-      data: {}
+      data: {},
     },
     {
       key: 'ov8f',
@@ -68,10 +68,10 @@ export default {
         {
           offset: 0,
           length: 1,
-          key: 7
-        }
+          key: 7,
+        },
       ],
-      data: {}
+      data: {},
     },
     {
       key: 'ov8w',
@@ -83,10 +83,10 @@ export default {
         {
           offset: 0,
           length: 1,
-          key: 4
-        }
+          key: 4,
+        },
       ],
-      data: {}
+      data: {},
     },
     {
       key: 'ov8t',
@@ -98,11 +98,12 @@ export default {
         {
           offset: 0,
           length: 1,
-          key: 5
-        }
+          key: 5,
+        },
       ],
-      data: {}
-    }, {
+      data: {},
+    },
+    {
       key: 'e23a8',
       text:
         'Meatball.com rump tri-tip short ribs frankfurter chuck. Salami turkey ham, ball tip shankle chicken pork jerky venison beef ribs pastrami sausage bresaola. Beef ribs pork salami fatback tenderloin cupim, picanha porchetta pancetta hamburger pig pork loin chuck jerky bresaola. T-bone biltong landjaeger ham hock meatball tri-tip pancetta kevin chicken turducken drumstick tenderloin beef ribs tail. Sausage t-bone ham hock, bacon chicken jowl venison turkey bresaola tongue hamburger.',
@@ -110,8 +111,9 @@ export default {
       depth: 0,
       inlineStyleRanges: [],
       entityRanges: [],
-      data: {}
-    }, {
+      data: {},
+    },
+    {
       key: '5g8yu',
       text:
         'Biltong landjaeger andouille, doner prosciutto tri-tip sirloin shank. Ribeye capicola biltong pastrami burgdoggen. Filet mignon kielbasa capicola landjaeger pig hamburger, corned beef meatloaf swine meatball. Frankfurter brisket rump, pork fatback strip steak boudin cupim landjaeger sirloin venison pastrami cow pork chop chuck.',
@@ -119,7 +121,7 @@ export default {
       depth: 0,
       inlineStyleRanges: [],
       entityRanges: [],
-      data: {}
-    }
-  ]
+      data: {},
+    },
+  ],
 };

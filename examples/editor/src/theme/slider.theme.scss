@@ -4,7 +4,6 @@
 // Version 1.4.1
 // MIT License
 
-
 // NB: THEME SHOULD OVERRIDE ONLY THE CONSTS
 $track-color: #c0ffee !default;
 $thumb-color: #bada55 !default;
@@ -14,7 +13,7 @@ $thumb-height: 16px !default;
 $thumb-width: 16px !default;
 $thumb-shadow-size: 1px !default;
 $thumb-shadow-blur: 1px !default;
-$thumb-shadow-color: rgba(0, 0, 0, .2) !default;
+$thumb-shadow-color: rgba(0, 0, 0, 0.2) !default;
 $thumb-border-width: 4px !default;
 $thumb-border-color: #fff !default;
 
@@ -22,23 +21,23 @@ $track-width: 100% !default;
 $track-height: 6px !default;
 $track-shadow-size: 0 !default;
 $track-shadow-blur: 0 !default;
-$track-shadow-color: rgba(0, 0, 0, .2) !default;
+$track-shadow-color: rgba(0, 0, 0, 0.2) !default;
 $track-border-width: 0 !default;
 $track-border-color: #cfd8dc !default;
 
 $track-radius: 3px !default;
 $contrast: 0 !default;
 
-
 // NB: DO NOT MODIFY THE STRUCTURE!
 @mixin shadow($shadow-size, $shadow-blur, $shadow-color) {
-  box-shadow: $shadow-size $shadow-size $shadow-blur $shadow-color, 0 0 $shadow-size lighten($shadow-color, 5%);
+  box-shadow: $shadow-size $shadow-size $shadow-blur $shadow-color,
+    0 0 $shadow-size lighten($shadow-color, 5%);
 }
 
 @mixin track {
   cursor: pointer;
   height: $track-height;
-  transition: all .2s ease;
+  transition: all 0.2s ease;
   width: $track-width;
 }
 
@@ -58,7 +57,6 @@ $contrast: 0 !default;
   width: $track-width;
 
   &:focus {
-
     &::-webkit-slider-runnable-track {
       background: lighten($track-color, $contrast);
     }

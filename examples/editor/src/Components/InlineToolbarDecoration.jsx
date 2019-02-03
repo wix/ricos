@@ -4,7 +4,6 @@ import { getVisibleSelectionRect } from '@wix/draft-js';
 
 import styles from './InlineToolbarDecoration.scss';
 
-
 class InlineToolbarDecoration extends Component {
   handleRef = el => {
     this.element = el;
@@ -26,15 +25,15 @@ class InlineToolbarDecoration extends Component {
     const left = relLeft - toolbarLeft;
 
     const arrowStyle = {
-      left
+      left,
     };
 
     return (
-    <div style={alteredStyle} className={className} ref={this.handleRef} {...props}>
-      <div className={styles.arrow} style={arrowStyle}/>
-      {children}
-    </div>
-  )
+      <div style={alteredStyle} className={className} ref={this.handleRef} {...props}>
+        <div className={styles.arrow} style={arrowStyle} />
+        {children}
+      </div>
+    );
   }
 }
 
@@ -42,8 +41,8 @@ InlineToolbarDecoration.propTypes = {
   children: PropTypes.node,
   style: PropTypes.object,
   className: PropTypes.string,
-  refCallback: PropTypes.func
-}
+  refCallback: PropTypes.func,
+};
 
 InlineToolbarDecoration.displayName = 'InlineToolbarDecoration';
 

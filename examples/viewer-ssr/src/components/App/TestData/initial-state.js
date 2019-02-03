@@ -4,15 +4,15 @@ const TestData = {
     entityMap: {},
     blocks: [
       {
-        key: "5g8yu",
-        text: "Hello text only #hashtag test.com",
-        type: "unstyled",
+        key: '5g8yu',
+        text: 'Hello text only #hashtag test.com',
+        type: 'unstyled',
         depth: 0,
         inlineStyleRanges: [],
         entityRanges: [],
-        data: {}
-      }
-    ]
+        data: {},
+      },
+    ],
   },
   'basic styles': {
     blocks: [
@@ -25,13 +25,13 @@ const TestData = {
           {
             offset: 0,
             length: 9,
-            style: 'inline-header-two'
-          }
+            style: 'inline-header-two',
+          },
         ],
         entityRanges: [],
         data: {
-          textAlignment: 'center'
-        }
+          textAlignment: 'center',
+        },
       },
       {
         key: 'b69na',
@@ -42,16 +42,16 @@ const TestData = {
           {
             offset: 0,
             length: 7,
-            style: 'inline-header-two'
+            style: 'inline-header-two',
           },
           {
             offset: 0,
             length: 7,
-            style: 'BOLD'
-          }
+            style: 'BOLD',
+          },
         ],
         entityRanges: [],
-        data: {}
+        data: {},
       },
       {
         key: '2qet3',
@@ -62,16 +62,16 @@ const TestData = {
           {
             offset: 0,
             length: 9,
-            style: 'inline-header-two'
+            style: 'inline-header-two',
           },
           {
             offset: 0,
             length: 9,
-            style: 'ITALIC'
-          }
+            style: 'ITALIC',
+          },
         ],
         entityRanges: [],
-        data: {}
+        data: {},
       },
       {
         key: '3sg5e',
@@ -82,18 +82,18 @@ const TestData = {
           {
             offset: 0,
             length: 18,
-            style: 'inline-header-two'
+            style: 'inline-header-two',
           },
           {
             offset: 0,
             length: 18,
-            style: 'UNDERLINE'
-          }
+            style: 'UNDERLINE',
+          },
         ],
         entityRanges: [],
         data: {
-          textAlignment: 'right'
-        }
+          textAlignment: 'right',
+        },
       },
       {
         key: 'b8b0u',
@@ -104,11 +104,11 @@ const TestData = {
           {
             offset: 0,
             length: 11,
-            style: 'inline-header-two'
-          }
+            style: 'inline-header-two',
+          },
         ],
         entityRanges: [],
-        data: {}
+        data: {},
       },
       {
         key: '9skn5',
@@ -119,11 +119,11 @@ const TestData = {
           {
             offset: 0,
             length: 9,
-            style: 'inline-header-two'
-          }
+            style: 'inline-header-two',
+          },
         ],
         entityRanges: [],
-        data: {}
+        data: {},
       },
       {
         key: 'fbp7d',
@@ -134,13 +134,13 @@ const TestData = {
           {
             offset: 0,
             length: 9,
-            style: 'inline-header-three'
-          }
+            style: 'inline-header-three',
+          },
         ],
         entityRanges: [],
         data: {
-          textAlignment: 'center'
-        }
+          textAlignment: 'center',
+        },
       },
       {
         key: 'aq7ob',
@@ -151,16 +151,16 @@ const TestData = {
           {
             offset: 0,
             length: 7,
-            style: 'inline-header-three'
+            style: 'inline-header-three',
           },
           {
             offset: 0,
             length: 7,
-            style: 'BOLD'
-          }
+            style: 'BOLD',
+          },
         ],
         entityRanges: [],
-        data: {}
+        data: {},
       },
       {
         key: 'clcev',
@@ -171,16 +171,16 @@ const TestData = {
           {
             offset: 0,
             length: 9,
-            style: 'inline-header-three'
+            style: 'inline-header-three',
           },
           {
             offset: 0,
             length: 9,
-            style: 'ITALIC'
-          }
+            style: 'ITALIC',
+          },
         ],
         entityRanges: [],
-        data: {}
+        data: {},
       },
       {
         key: 'ag9to',
@@ -191,18 +191,18 @@ const TestData = {
           {
             offset: 0,
             length: 18,
-            style: 'inline-header-three'
+            style: 'inline-header-three',
           },
           {
             offset: 0,
             length: 18,
-            style: 'UNDERLINE'
-          }
+            style: 'UNDERLINE',
+          },
         ],
         entityRanges: [],
         data: {
-          textAlignment: 'right'
-        }
+          textAlignment: 'right',
+        },
       },
       {
         key: '3mbj4',
@@ -213,11 +213,11 @@ const TestData = {
           {
             offset: 0,
             length: 11,
-            style: 'inline-header-three'
-          }
+            style: 'inline-header-three',
+          },
         ],
         entityRanges: [],
-        data: {}
+        data: {},
       },
       {
         key: 'bcsbh',
@@ -228,11 +228,11 @@ const TestData = {
           {
             offset: 0,
             length: 9,
-            style: 'inline-header-three'
-          }
+            style: 'inline-header-three',
+          },
         ],
         entityRanges: [],
-        data: {}
+        data: {},
       },
       {
         key: '2fdkb',
@@ -242,8 +242,8 @@ const TestData = {
         inlineStyleRanges: [],
         entityRanges: [],
         data: {
-          textAlignment: 'center'
-        }
+          textAlignment: 'center',
+        },
       },
       {
         key: '6ebba',
@@ -254,11 +254,11 @@ const TestData = {
           {
             offset: 0,
             length: 9,
-            style: 'BOLD'
-          }
+            style: 'BOLD',
+          },
         ],
         entityRanges: [],
-        data: {}
+        data: {},
       },
       {
         key: '9tadl',
@@ -269,11 +269,11 @@ const TestData = {
           {
             offset: 0,
             length: 11,
-            style: 'ITALIC'
-          }
+            style: 'ITALIC',
+          },
         ],
         entityRanges: [],
-        data: {}
+        data: {},
       },
       {
         key: 'it2e',
@@ -284,13 +284,13 @@ const TestData = {
           {
             offset: 0,
             length: 20,
-            style: 'UNDERLINE'
-          }
+            style: 'UNDERLINE',
+          },
         ],
         entityRanges: [],
         data: {
-          textAlignment: 'right'
-        }
+          textAlignment: 'right',
+        },
       },
       {
         key: '8utpq',
@@ -299,7 +299,7 @@ const TestData = {
         depth: 0,
         inlineStyleRanges: [],
         entityRanges: [],
-        data: {}
+        data: {},
       },
       {
         key: 'f60gq',
@@ -308,7 +308,7 @@ const TestData = {
         depth: 0,
         inlineStyleRanges: [],
         entityRanges: [],
-        data: {}
+        data: {},
       },
       {
         key: '8vk72',
@@ -317,7 +317,7 @@ const TestData = {
         depth: 0,
         inlineStyleRanges: [],
         entityRanges: [],
-        data: {}
+        data: {},
       },
       {
         key: '6mlr2',
@@ -326,7 +326,7 @@ const TestData = {
         depth: 0,
         inlineStyleRanges: [],
         entityRanges: [],
-        data: {}
+        data: {},
       },
       {
         key: '7c1rt',
@@ -335,7 +335,7 @@ const TestData = {
         depth: 0,
         inlineStyleRanges: [],
         entityRanges: [],
-        data: {}
+        data: {},
       },
       {
         key: 'c3m22',
@@ -345,8 +345,8 @@ const TestData = {
         inlineStyleRanges: [],
         entityRanges: [],
         data: {
-          textAlignment: 'left'
-        }
+          textAlignment: 'left',
+        },
       },
       {
         key: '5ej',
@@ -355,551 +355,549 @@ const TestData = {
         depth: 0,
         inlineStyleRanges: [],
         entityRanges: [],
-        data: {}
-      }
+        data: {},
+      },
     ],
-    entityMap: {}
+    entityMap: {},
   },
   softNewLine: {
     blocks: [
       {
-        key: "4rcs3",
+        key: '4rcs3',
         text: "test me!hi, my name is Dor. \nI'm an idiot",
-        type: "unstyled",
+        type: 'unstyled',
         depth: 0,
         inlineStyleRanges: [
           {
             offset: 0,
             length: 8,
-            style: "inline-header-one"
-          }
+            style: 'inline-header-one',
+          },
         ],
         entityRanges: [],
-        data: {}
+        data: {},
       },
       {
-        key: "c926g",
-        text: "one more block \nand this is a normal text",
-        type: "unstyled",
+        key: 'c926g',
+        text: 'one more block \nand this is a normal text',
+        type: 'unstyled',
         depth: 0,
         inlineStyleRanges: [
           {
             offset: 0,
             length: 14,
-            style: "inline-header-one"
-          }
+            style: 'inline-header-one',
+          },
         ],
         entityRanges: [],
-        data: {}
-      }
+        data: {},
+      },
     ],
-    entityMap: {}
+    entityMap: {},
   },
   lists: {
     blocks: [
       {
-        key: "b1jra",
-        text: "h2test",
-        type: "ordered-list-item",
+        key: 'b1jra',
+        text: 'h2test',
+        type: 'ordered-list-item',
         depth: 0,
         inlineStyleRanges: [
           {
             offset: 0,
             length: 2,
-            style: "inline-header-one"
+            style: 'inline-header-one',
           },
           {
             offset: 0,
             length: 6,
-            style: "BOLD"
-          }
+            style: 'BOLD',
+          },
         ],
         entityRanges: [],
-        data: {}
+        data: {},
       },
       {
-        key: "9ne2e",
-        text: "h3test",
-        type: "ordered-list-item",
+        key: '9ne2e',
+        text: 'h3test',
+        type: 'ordered-list-item',
         depth: 0,
         inlineStyleRanges: [
           {
             offset: 0,
             length: 2,
-            style: "inline-header-two"
+            style: 'inline-header-two',
           },
           {
             offset: 0,
             length: 6,
-            style: "ITALIC"
-          }
+            style: 'ITALIC',
+          },
         ],
         entityRanges: [],
-        data: {}
+        data: {},
       },
       {
-        key: "6gc05",
-        text: "h4test",
-        type: "ordered-list-item",
+        key: '6gc05',
+        text: 'h4test',
+        type: 'ordered-list-item',
         depth: 0,
         inlineStyleRanges: [
           {
             offset: 0,
             length: 2,
-            style: "inline-header-three"
+            style: 'inline-header-three',
           },
           {
             offset: 0,
             length: 6,
-            style: "UNDERLINE"
-          }
+            style: 'UNDERLINE',
+          },
         ],
         entityRanges: [],
-        data: {}
+        data: {},
       },
       {
-        key: "3k78h",
-        text: "",
-        type: "unstyled",
+        key: '3k78h',
+        text: '',
+        type: 'unstyled',
         depth: 0,
         inlineStyleRanges: [],
         entityRanges: [],
-        data: {}
+        data: {},
       },
       {
-        key: "4vk1l",
-        text: "h2\ntest",
-        type: "unordered-list-item",
+        key: '4vk1l',
+        text: 'h2\ntest',
+        type: 'unordered-list-item',
         depth: 0,
         inlineStyleRanges: [
           {
             offset: 0,
             length: 3,
-            style: "inline-header-one"
+            style: 'inline-header-one',
           },
           {
             offset: 0,
             length: 7,
-            style: "BOLD"
-          }
+            style: 'BOLD',
+          },
         ],
         entityRanges: [],
-        data: {}
+        data: {},
       },
       {
-        key: "f76qt",
-        text: "h3\ntest",
-        type: "unordered-list-item",
+        key: 'f76qt',
+        text: 'h3\ntest',
+        type: 'unordered-list-item',
         depth: 0,
         inlineStyleRanges: [
           {
             offset: 0,
             length: 3,
-            style: "inline-header-two"
+            style: 'inline-header-two',
           },
           {
             offset: 0,
             length: 7,
-            style: "ITALIC"
-          }
+            style: 'ITALIC',
+          },
         ],
         entityRanges: [],
-        data: {}
+        data: {},
       },
       {
-        key: "dc2cf",
-        text: "h4\ntest",
-        type: "unordered-list-item",
+        key: 'dc2cf',
+        text: 'h4\ntest',
+        type: 'unordered-list-item',
         depth: 0,
         inlineStyleRanges: [
           {
             offset: 0,
             length: 3,
-            style: "inline-header-three"
+            style: 'inline-header-three',
           },
           {
             offset: 0,
             length: 7,
-            style: "UNDERLINE"
-          }
+            style: 'UNDERLINE',
+          },
         ],
         entityRanges: [],
-        data: {}
-      }
+        data: {},
+      },
     ],
-    entityMap: {}
+    entityMap: {},
   },
   links: {
     blocks: [
       {
-        key: "foo",
+        key: 'foo',
         text:
-          "Search was Google’s only unambiguous win, as well as its primary source of revenue, so when Amazon rapidly surpassed Google as the top product search destination, Google’s foundations began to falter. As many noted at the time, the online advertising industry experienced a major shift from search to discovery in the mid-2010s.",
-        type: "unstyled",
+          'Search was Google’s only unambiguous win, as well as its primary source of revenue, so when Amazon rapidly surpassed Google as the top product search destination, Google’s foundations began to falter. As many noted at the time, the online advertising industry experienced a major shift from search to discovery in the mid-2010s.',
+        type: 'unstyled',
         depth: 0,
         inlineStyleRanges: [],
         entityRanges: [
           {
             offset: 57,
             length: 25,
-            key: 0
+            key: 0,
           },
           {
             offset: 99,
             length: 24,
-            key: 1
+            key: 1,
           },
           {
             offset: 204,
             length: 10,
-            key: 2
-          }
+            key: 2,
+          },
         ],
-        data: {}
-      }
+        data: {},
+      },
     ],
     entityMap: {
-      "0": {
-        type: "LINK",
-        mutability: "MUTABLE",
+      '0': {
+        type: 'LINK',
+        mutability: 'MUTABLE',
         data: {
           href:
-            "http://www.cnbc.com/2017/01/26/googlealphabet-reports-fourth-quarter-2016-earnings-q4.html",
-          rel: "noopener",
-          target: "_blank",
+            'http://www.cnbc.com/2017/01/26/googlealphabet-reports-fourth-quarter-2016-earnings-q4.html',
+          rel: 'noopener',
+          target: '_blank',
           url:
-            "http://www.cnbc.com/2017/01/26/googlealphabet-reports-fourth-quarter-2016-earnings-q4.html"
-        }
+            'http://www.cnbc.com/2017/01/26/googlealphabet-reports-fourth-quarter-2016-earnings-q4.html',
+        },
       },
-      "1": {
-        type: "LINK",
-        mutability: "MUTABLE",
+      '1': {
+        type: 'LINK',
+        mutability: 'MUTABLE',
         data: {
           href:
-            "http://www.geekwire.com/2017/amazon-continues-grow-lead-google-starting-point-online-shoppers/",
-          rel: "noopener",
-          target: "_blank",
+            'http://www.geekwire.com/2017/amazon-continues-grow-lead-google-starting-point-online-shoppers/',
+          rel: 'noopener',
+          target: '_blank',
           url:
-            "http://www.geekwire.com/2017/amazon-continues-grow-lead-google-starting-point-online-shoppers/"
-        }
+            'http://www.geekwire.com/2017/amazon-continues-grow-lead-google-starting-point-online-shoppers/',
+        },
       },
-      "2": {
-        type: "LINK",
-        mutability: "MUTABLE",
+      '2': {
+        type: 'LINK',
+        mutability: 'MUTABLE',
         data: {
-          href:
-            "https://techcrunch.com/2016/08/11/google-isnt-safe-from-yahoos-fate/",
-          rel: "noopener",
-          target: "_blank",
-          url:
-            "https://techcrunch.com/2016/08/11/google-isnt-safe-from-yahoos-fate/"
-        }
-      }
-    }
+          href: 'https://techcrunch.com/2016/08/11/google-isnt-safe-from-yahoos-fate/',
+          rel: 'noopener',
+          target: '_blank',
+          url: 'https://techcrunch.com/2016/08/11/google-isnt-safe-from-yahoos-fate/',
+        },
+      },
+    },
   },
   legacyVideo: {
     entityMap: {
-      "0": {
-        type: "VIDEO-EMBED",
-        mutability: "IMMUTABLE",
+      '0': {
+        type: 'VIDEO-EMBED',
+        mutability: 'IMMUTABLE',
         data: {
-          src: "https://www.youtube.com/watch?v=eqZVIiD6wSg",
-          config: { size: "content" }
-        }
-      }
+          src: 'https://www.youtube.com/watch?v=eqZVIiD6wSg',
+          config: { size: 'content' },
+        },
+      },
     },
     blocks: [
       {
-        key: "ov8f",
-        text: " ",
-        type: "atomic",
+        key: 'ov8f',
+        text: ' ',
+        type: 'atomic',
         depth: 0,
         inlineStyleRanges: [],
         entityRanges: [
           {
             offset: 0,
             length: 1,
-            key: 0
-          }
+            key: 0,
+          },
         ],
-        data: {}
-      }
-    ]
+        data: {},
+      },
+    ],
   },
   video: {
     entityMap: {
-      "0": {
-        type: "wix-draft-plugin-video",
-        mutability: "IMMUTABLE",
+      '0': {
+        type: 'wix-draft-plugin-video',
+        mutability: 'IMMUTABLE',
         data: {
-          src: "https://www.youtube.com/watch?v=eqZVIiD6wSg"
+          src: 'https://www.youtube.com/watch?v=eqZVIiD6wSg',
         },
         config: {
-          alignment: "center",
-          size: "content",
-          key: "ov8f"
-        }
-      }
+          alignment: 'center',
+          size: 'content',
+          key: 'ov8f',
+        },
+      },
     },
     blocks: [
       {
-        key: "ov8f",
-        text: " ",
-        type: "atomic",
+        key: 'ov8f',
+        text: ' ',
+        type: 'atomic',
         depth: 0,
         inlineStyleRanges: [],
         entityRanges: [
           {
             offset: 0,
             length: 1,
-            key: 0
-          }
+            key: 0,
+          },
         ],
-        data: {}
-      }
-    ]
+        data: {},
+      },
+    ],
   },
   html: {
     entityMap: {
-      "0": {
-        type: "wix-draft-plugin-html",
-        mutability: "IMMUTABLE",
+      '0': {
+        type: 'wix-draft-plugin-html',
+        mutability: 'IMMUTABLE',
         data: {
-          src: "https://www.youtube.com/embed/owsfdh4gxyc",
-          srcType: "url",
+          src: 'https://www.youtube.com/embed/owsfdh4gxyc',
+          srcType: 'url',
           config: {
             width: 560,
             height: 340,
-            safe: true
-          }
-        }
-      }
+            safe: true,
+          },
+        },
+      },
     },
     blocks: [
       {
-        key: "ov8f",
-        text: " ",
-        type: "atomic",
+        key: 'ov8f',
+        text: ' ',
+        type: 'atomic',
         depth: 0,
         inlineStyleRanges: [],
         entityRanges: [
           {
             offset: 0,
             length: 1,
-            key: 0
-          }
+            key: 0,
+          },
         ],
-        data: {}
-      }
-    ]
+        data: {},
+      },
+    ],
   },
   divider: {
     entityMap: {
-      "0": {
-        type: "wix-draft-plugin-divider",
-        mutability: "IMMUTABLE",
+      '0': {
+        type: 'wix-draft-plugin-divider',
+        mutability: 'IMMUTABLE',
         data: {
-          type: "single",
+          type: 'single',
           config: {
-            size: "small",
-            alignment: "center",
-            textWrap: "nowrap",
-            key: "ov8f"
-          }
-        }
+            size: 'small',
+            alignment: 'center',
+            textWrap: 'nowrap',
+            key: 'ov8f',
+          },
+        },
       },
-      "1": {
-        type: "wix-draft-plugin-divider",
-        mutability: "IMMUTABLE",
+      '1': {
+        type: 'wix-draft-plugin-divider',
+        mutability: 'IMMUTABLE',
         data: {
-          type: "dashed",
+          type: 'dashed',
           config: {
-            size: "medium",
-            alignment: "center",
-            textWrap: "nowrap",
-            key: "7poao"
-          }
-        }
+            size: 'medium',
+            alignment: 'center',
+            textWrap: 'nowrap',
+            key: '7poao',
+          },
+        },
       },
-      "2": {
-        type: "wix-draft-plugin-divider",
-        mutability: "IMMUTABLE",
+      '2': {
+        type: 'wix-draft-plugin-divider',
+        mutability: 'IMMUTABLE',
         data: {
-          type: "double",
+          type: 'double',
           config: {
-            size: "large",
-            alignment: "center",
-            textWrap: "nowrap",
-            key: "6gci3"
-          }
-        }
+            size: 'large',
+            alignment: 'center',
+            textWrap: 'nowrap',
+            key: '6gci3',
+          },
+        },
       },
     },
     blocks: [
       {
-        key: "ov8f",
-        text: " ",
-        type: "atomic",
+        key: 'ov8f',
+        text: ' ',
+        type: 'atomic',
         depth: 0,
         inlineStyleRanges: [],
         entityRanges: [
           {
             offset: 0,
             length: 1,
-            key: 0
-          }
+            key: 0,
+          },
         ],
-        data: {}
+        data: {},
       },
       {
-        key: "7poao",
-        text: " ",
-        type: "atomic",
+        key: '7poao',
+        text: ' ',
+        type: 'atomic',
         depth: 0,
         inlineStyleRanges: [],
         entityRanges: [
           {
             offset: 0,
             length: 1,
-            key: 1
-          }
+            key: 1,
+          },
         ],
-        data: {}
+        data: {},
       },
       {
-        key: "6gci3",
-        text: " ",
-        type: "atomic",
+        key: '6gci3',
+        text: ' ',
+        type: 'atomic',
         depth: 0,
         inlineStyleRanges: [],
         entityRanges: [
           {
             offset: 0,
             length: 1,
-            key: 2
-          }
+            key: 2,
+          },
         ],
-        data: {}
-      }
-    ]
+        data: {},
+      },
+    ],
   },
   full: {
     entityMap: {
-      "4": {
-        type: "wix-draft-plugin-html",
-        mutability: "IMMUTABLE",
+      '4': {
+        type: 'wix-draft-plugin-html',
+        mutability: 'IMMUTABLE',
         data: {
-          src: "https://www.youtube.com/embed/owsfdh4gxyc",
+          src: 'https://www.youtube.com/embed/owsfdh4gxyc',
           config: {
             width: 200,
             height: 200,
             safe: true,
-            isSrc: true
-          }
-        }
+            isSrc: true,
+          },
+        },
       },
-      "5": {
-        type: "wix-draft-plugin-html",
-        mutability: "IMMUTABLE",
+      '5': {
+        type: 'wix-draft-plugin-html',
+        mutability: 'IMMUTABLE',
         data: {
-          src: "https://www.youtube.com/embed/owsfdh4gxyc",
-          srcType: "url",
+          src: 'https://www.youtube.com/embed/owsfdh4gxyc',
+          srcType: 'url',
           config: {
             width: 500,
             height: 200,
-            safe: true
-          }
-        }
+            safe: true,
+          },
+        },
       },
-      "6": {
-        type: "wix-draft-plugin-divider",
-        mutability: "IMMUTABLE",
+      '6': {
+        type: 'wix-draft-plugin-divider',
+        mutability: 'IMMUTABLE',
         data: {
-          type: "dashed",
+          type: 'dashed',
           config: {
-            size: "medium"
-          }
-        }
-      }
+            size: 'medium',
+          },
+        },
+      },
     },
     blocks: [
       {
-        key: "9gm3s",
+        key: '9gm3s',
         text:
-          "Spicy jalapeno #bacon ipsum dolor amet kevin shank ground round, andouille tail shoulder venison strip steak biltong pastrami alcatra ribeye. Porchetta doner tail brisket chicken. Shank jerky flank, pastrami frankfurter hamburger burgdoggen filet mignon salami pork chop. Jerky swine short loin picanha porchetta, prosciutto short ribs jowl chuck burgdoggen brisket turkey.",
-        type: "unstyled",
+          'Spicy jalapeno #bacon ipsum dolor amet kevin shank ground round, andouille tail shoulder venison strip steak biltong pastrami alcatra ribeye. Porchetta doner tail brisket chicken. Shank jerky flank, pastrami frankfurter hamburger burgdoggen filet mignon salami pork chop. Jerky swine short loin picanha porchetta, prosciutto short ribs jowl chuck burgdoggen brisket turkey.',
+        type: 'unstyled',
         depth: 0,
         inlineStyleRanges: [],
         entityRanges: [],
-        data: {}
+        data: {},
       },
       {
-        key: "ov8f",
-        text: " ",
-        type: "atomic",
+        key: 'ov8f',
+        text: ' ',
+        type: 'atomic',
         depth: 0,
         inlineStyleRanges: [],
         entityRanges: [
           {
             offset: 0,
             length: 1,
-            key: 6
-          }
+            key: 6,
+          },
         ],
-        data: {}
+        data: {},
       },
       {
-        key: "ov8w",
-        text: " ",
-        type: "atomic",
+        key: 'ov8w',
+        text: ' ',
+        type: 'atomic',
         depth: 0,
         inlineStyleRanges: [],
         entityRanges: [
           {
             offset: 0,
             length: 1,
-            key: 4
-          }
+            key: 4,
+          },
         ],
-        data: {}
+        data: {},
       },
       {
-        key: "ov8t",
-        text: " ",
-        type: "atomic",
+        key: 'ov8t',
+        text: ' ',
+        type: 'atomic',
         depth: 0,
         inlineStyleRanges: [],
         entityRanges: [
           {
             offset: 0,
             length: 1,
-            key: 5
-          }
+            key: 5,
+          },
         ],
-        data: {}
+        data: {},
       },
       {
-        key: "e23a8",
+        key: 'e23a8',
         text:
-          "Meatball.com rump tri-tip short ribs frankfurter chuck. Salami turkey ham, ball tip shankle chicken pork jerky venison beef ribs pastrami sausage bresaola. Beef ribs pork salami fatback tenderloin cupim, picanha porchetta pancetta hamburger pig pork loin chuck jerky bresaola. T-bone biltong landjaeger ham hock meatball tri-tip pancetta kevin chicken turducken drumstick tenderloin beef ribs tail. Sausage t-bone ham hock, bacon chicken jowl venison turkey bresaola tongue hamburger.",
-        type: "unstyled",
+          'Meatball.com rump tri-tip short ribs frankfurter chuck. Salami turkey ham, ball tip shankle chicken pork jerky venison beef ribs pastrami sausage bresaola. Beef ribs pork salami fatback tenderloin cupim, picanha porchetta pancetta hamburger pig pork loin chuck jerky bresaola. T-bone biltong landjaeger ham hock meatball tri-tip pancetta kevin chicken turducken drumstick tenderloin beef ribs tail. Sausage t-bone ham hock, bacon chicken jowl venison turkey bresaola tongue hamburger.',
+        type: 'unstyled',
         depth: 0,
         inlineStyleRanges: [],
         entityRanges: [],
-        data: {}
+        data: {},
       },
       {
-        key: "5g8yu",
+        key: '5g8yu',
         text:
-          "Biltong landjaeger andouille, doner prosciutto tri-tip sirloin shank. Ribeye capicola biltong pastrami burgdoggen. Filet mignon kielbasa capicola landjaeger pig hamburger, corned beef meatloaf swine meatball. Frankfurter brisket rump, pork fatback strip steak boudin cupim landjaeger sirloin venison pastrami cow pork chop chuck.",
-        type: "unstyled",
+          'Biltong landjaeger andouille, doner prosciutto tri-tip sirloin shank. Ribeye capicola biltong pastrami burgdoggen. Filet mignon kielbasa capicola landjaeger pig hamburger, corned beef meatloaf swine meatball. Frankfurter brisket rump, pork fatback strip steak boudin cupim landjaeger sirloin venison pastrami cow pork chop chuck.',
+        type: 'unstyled',
         depth: 0,
         inlineStyleRanges: [],
         entityRanges: [],
-        data: {}
-      }
-    ]
-  }
+        data: {},
+      },
+    ],
+  },
 };
 
 export default TestData;

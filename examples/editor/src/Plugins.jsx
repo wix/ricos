@@ -35,7 +35,7 @@ const plugins = [
   createExternalMentionsPlugin,
   createCodeBlockPlugin,
   createSoundCloudPlugin,
-  createGiphyPlugin
+  createGiphyPlugin,
 ];
 
 export default plugins;

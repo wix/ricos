@@ -35,8 +35,7 @@ import addPluginModalTheme from './toolbars/add-plugin-modal.theme.scss';
 import videoUploadTheme from './toolbars/modals/video/video-upload-modal.theme.scss';
 
 const modalTheme = {
-  content: {
-  }
+  content: {},
 };
 
 const theme = {
@@ -80,8 +79,7 @@ const theme = {
   ...footerToolbarTheme,
   ...mobileToolbarTheme,
   ...mobileAddModalTheme,
-  ...toolbarSeparatorTheme
-
+  ...toolbarSeparatorTheme,
 };
 
 export default theme;

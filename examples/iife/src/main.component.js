@@ -22,10 +22,7 @@ class DemoExample extends React.Component {
           <div className="content">
             <div className="columns">
               <div className="column main">
-                <RichContentEditor
-                  onChange={this.onChange}
-                  editorState={this.state.editorState}
-                />
+                <RichContentEditor onChange={this.onChange} editorState={this.state.editorState} />
               </div>
             </div>
           </div>

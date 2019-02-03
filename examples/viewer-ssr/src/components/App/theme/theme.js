@@ -12,8 +12,7 @@ import loaderTheme from './loader.theme.scss';
 import tooltipTheme from './tooltip.theme.scss';
 
 const modalTheme = {
-  content: {
-  }
+  content: {},
 };
 
 const theme = {
