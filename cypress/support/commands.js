@@ -1,6 +1,10 @@
 require('cypress-image-snapshot/command').addMatchImageSnapshotCommand();
 require('@cypress/snapshot').register();
 
+if (Cypress.browser.isHeaded) {
+  Cypress.Commands.overwrite('matchImageSnapshot', () => {});
+}
+
 const resizeForDesktop = () => cy.viewport('ipad-2');
 const resizeForMobile = () => cy.viewport('iphone-5');
 
