@@ -7,7 +7,7 @@
   },
   "scripts": {
     "dev": "node ./dev",
-    "build": "webpack",
+    "build": "webpack --mode production",
     "start": "node ./src/server"
   },
   "dependencies": {
