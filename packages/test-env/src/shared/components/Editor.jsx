@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { convertFromRaw, convertToRaw, EditorState } from '@wix/draft-js';
+import { convertFromRaw, convertToRaw, EditorState, SelectionState } from '@wix/draft-js';
 import deepFreeze from 'deep-freeze';
 import { RichContentEditor } from 'wix-rich-content-editor';
 import 'wix-rich-content-common/dist/styles.min.css';
@@ -10,6 +10,34 @@ class Editor extends Component {
     editorState: this.props.raw ?
       EditorState.createWithContent(convertFromRaw(this.props.raw)) :
       EditorState.createEmpty(),
+  };
+
+  constructor(props) {
+    super(props);
+
+    if (isBrowser()) {
+      window.setEditorSelection = this.setSelection;
+    }
+  }
+
+  setSelection = ({
+    anchorBlockIndex,
+    anchorOffset,
+    focusBlockIndex = anchorBlockIndex,
+    focusOffset = anchorOffset,
+  }) => {
+    const { editorState } = this.state;
+    const blocks = editorState.getCurrentContent().getBlocksAsArray();
+    const selection = new SelectionState({
+      anchorKey: blocks[anchorBlockIndex].key,
+      anchorOffset,
+      focusKey: blocks[focusBlockIndex].key,
+      focusOffset,
+    });
+
+    this.setState({
+      editorState: EditorState.forceSelection(editorState, selection),
+    })
   };
 
   handleChange = editorState => {
@@ -31,5 +59,7 @@ class Editor extends Component {
     );
   }
 }
+
+const isBrowser = () => typeof window !== 'undefined';
 
 export default Editor;

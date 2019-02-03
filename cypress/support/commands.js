@@ -13,6 +13,8 @@ const getUrl = (componentId, fixtureName) => {
   return fixtureName ? `${path}/${fixtureName}` : path;
 };
 
+// Viewport size commands
+
 Cypress.Commands.add('viewerDesktop', fixtureName => {
   resizeForDesktop();
   cy.visit(getUrl('rcv', fixtureName));
@@ -33,12 +35,23 @@ Cypress.Commands.add('editorMobile', fixtureName => {
   cy.visit(`${getUrl('rce', fixtureName)}?mobile=true`);
 });
 
+// Editor commands
+
+Cypress.Commands.add('matchContentSnapshot', name => {
+  cy.window().its('__CONTENT_SNAPSHOT__').snapshot({ name });
+});
+
 Cypress.Commands.add('enterText', text => {
   cy
     .get('[contenteditable="true"]')
     .type(text);
 });
 
-Cypress.Commands.add('matchContentSnapshot', name => {
-  cy.window().its('__CONTENT_SNAPSHOT__').snapshot({ name });
+Cypress.Commands.add('selectText', ({ anchorBlockIndex, anchorOffset, focusOffset, focusBlockOffset }) => {
+  cy.window().invoke('setEditorSelection', {
+    anchorBlockIndex,
+    anchorOffset,
+    focusOffset,
+    focusBlockOffset,
+  });
 });
