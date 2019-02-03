@@ -43,7 +43,7 @@ const config = [
         },
       ],
     },
-    mode: 'production',
+    mode: 'development',
   },
   {
     name: 'server',
@@ -73,7 +73,7 @@ const config = [
         },
       ],
     },
-    mode: 'production',
+    mode: 'development',
   },
 ];
 
