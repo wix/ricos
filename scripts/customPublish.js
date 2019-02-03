@@ -16,9 +16,7 @@ const publishedPackages = [];
 const getPackageDetails = memoize(pkg => {
   try {
     const npmShowCommand = `npm show ${pkg.name} --registry=${pkg.registry} --json`;
-    return JSON.parse(
-      execSync(npmShowCommand, { stdio: ['pipe', 'pipe', 'ignore'] }),
-    );
+    return JSON.parse(execSync(npmShowCommand, { stdio: ['pipe', 'pipe', 'ignore'] }));
   } catch (error) {
     if (!error.stdout.toString().includes('E404')) {
       console.error(chalk.red(`\nError: ${error}`));
@@ -63,14 +61,16 @@ function publish(pkg) {
 
   if (!process.env.IS_BUILD_AGENT) {
     console.log(
-      chalk.yellow(`${pkg.name}@${pkg.version} will not be published because we're not running in a CI build agent`),
+      chalk.yellow(
+        `${pkg.name}@${
+          pkg.version
+        } will not be published because we're not running in a CI build agent`
+      )
     );
     return false;
   }
 
-  console.log(
-    chalk.magenta(`Running: "${publishCommand}" for ${pkg.name}@${pkg.version}`),
-  );
+  console.log(chalk.magenta(`Running: "${publishCommand}" for ${pkg.name}@${pkg.version}`));
 
   execSync(publishCommand, { stdio: 'inherit' });
   publishedPackages.push(pkg);
@@ -82,9 +82,7 @@ function release(pkg) {
 
   if (!shouldPublishPackage(pkg)) {
     console.log(
-      chalk.blue(
-        `${pkg.name}@${pkg.version} already exists on registry ${pkg.registry}`,
-      ),
+      chalk.blue(`${pkg.name}@${pkg.version} already exists on registry ${pkg.registry}`)
     );
     console.log('No publish performed');
     return;
@@ -93,7 +91,7 @@ function release(pkg) {
   const published = publish(pkg);
   if (published) {
     console.log(
-      chalk.green(`Published "${pkg.name}@${pkg.version}" succesfully to ${pkg.registry}`),
+      chalk.green(`Published "${pkg.name}@${pkg.version}" succesfully to ${pkg.registry}`)
     );
   } else {
     console.log('No publish performed');
@@ -112,12 +110,12 @@ function publishExamples() {
       {
         packageName: 'wix-rich-content-editor',
         exampleName: 'rich-content-editor',
-        examplePath: 'examples/editor'
+        examplePath: 'examples/editor',
       },
       {
         packageName: 'wix-rich-content-viewer',
         exampleName: 'rich-content-viewer',
-        examplePath: 'examples/viewer'
+        examplePath: 'examples/viewer',
       },
     ];
 
@@ -130,7 +128,7 @@ function publishExamples() {
         examplesToDeploy.push({
           name,
           path,
-          version
+          version,
         });
       }
     });

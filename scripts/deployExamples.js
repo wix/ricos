@@ -9,17 +9,13 @@ const fqdn = subdomain => `https://${subdomain}.surge.sh/`;
 
 function bootstrap(example) {
   const bootstrapCommand = `npm install --prefix=${example.path}`;
-  console.log(
-    chalk.magenta(`Running: "${bootstrapCommand}"`),
-  );
+  console.log(chalk.magenta(`Running: "${bootstrapCommand}"`));
   exec(bootstrapCommand);
 }
 
 function build(example) {
   const buildCommand = `npm run build --prefix=${example.path}`;
-  console.log(
-    chalk.magenta(`Running: "${buildCommand}"`),
-  );
+  console.log(chalk.magenta(`Running: "${buildCommand}"`));
   exec(`npm run clean --prefix=${example.path}`);
   exec(buildCommand);
 }
@@ -29,9 +25,7 @@ function publish(example) {
   const domain = `${example.name}-${example.version.replace(/\./g, '-')}`;
   const deployCommand = `npx surge-github-autorelease -b . -s ${example.path}/dist -d ${domain}`;
   try {
-    console.log(
-      chalk.magenta(`Running "${deployCommand}`)
-    );
+    console.log(chalk.magenta(`Running "${deployCommand}`));
     exec(deployCommand);
     console.log(chalk.green(`Published to ${fqdn(domain)}`));
   } catch (e) {
