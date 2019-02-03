@@ -8,8 +8,8 @@ export const insertLink = (editorState, { url, targetBlank, nofollow, anchorTarg
   const content = editorState.getCurrentContent();
   const contentStateWithEntity = content.createEntity('LINK', 'MUTABLE', {
     url,
-    target: targetBlank ? '_blank' : (anchorTarget || '_self'),
-    rel: nofollow ? 'nofollow' : (relValue || 'noopener')
+    target: targetBlank ? '_blank' : anchorTarget || '_self',
+    rel: nofollow ? 'nofollow' : relValue || 'noopener',
   });
   const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
 
@@ -31,7 +31,11 @@ export const insertLink = (editorState, { url, targetBlank, nofollow, anchorTarg
 
     const content = editorState.getCurrentContent();
     const newContent = Modifier.insertText(content, selection, url);
-    newEditorState = RichUtils.toggleLink(EditorState.push(editorState, newContent, 'insert-characters'), linkRange, entityKey);
+    newEditorState = RichUtils.toggleLink(
+      EditorState.push(editorState, newContent, 'insert-characters'),
+      linkRange,
+      entityKey
+    );
 
     newSelection = new SelectionState({
       anchorOffset: focusOffset,
@@ -59,14 +63,19 @@ export const getLinkDataInSelection = editorState => {
 };
 
 export const removeLinksInSelection = editorState => {
-  return getSelectedLinks(editorState).reduce((prevState, { key, range }) => removeLink(prevState, key, range), editorState);
+  return getSelectedLinks(editorState).reduce(
+    (prevState, { key, range }) => removeLink(prevState, key, range),
+    editorState
+  );
 };
 
 export const getTextAlignment = (editorState, defaultAlignment = 'left') => {
   const selection = getSelection(editorState);
   const currentContent = editorState.getCurrentContent();
   const contentBlock = currentContent.getBlockForKey(selection.getStartKey());
-  const { data: { textAlignment } } = contentBlock.toJS();
+  const {
+    data: { textAlignment },
+  } = contentBlock.toJS();
   return textAlignment || defaultAlignment;
 };
 
@@ -95,7 +104,11 @@ export const removeBlock = (editorState, blockKey) => {
     focusOffset: block.getLength(),
   });
   const withoutBlock = Modifier.removeRange(contentState, blockRange, 'backward');
-  const resetBlock = Modifier.setBlockType(withoutBlock, withoutBlock.getSelectionAfter(), 'unstyled');
+  const resetBlock = Modifier.setBlockType(
+    withoutBlock,
+    withoutBlock.getSelectionAfter(),
+    'unstyled'
+  );
   const newState = EditorState.push(editorState, resetBlock, 'remove-range');
   return EditorState.forceSelection(newState, resetBlock.getSelectionAfter());
 };
@@ -136,7 +149,9 @@ export const isInSelectionRange = ([start, end], range) => {
 };
 
 function getSelectedLinks(editorState) {
-  return flatMap(getSelectedBlocks(editorState), block => getSelectedLinksInBlock(block, editorState));
+  return flatMap(getSelectedBlocks(editorState), block =>
+    getSelectedLinksInBlock(block, editorState)
+  );
 }
 
 function getSelectedLinksInBlock(block, editorState) {

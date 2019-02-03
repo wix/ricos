@@ -10,14 +10,13 @@ import { VIDEO_TYPE_LEGACY, VIDEO_TYPE } from './types';
 const DEFAULTS = {
   config: {
     size: 'content',
-    alignment: 'center'
+    alignment: 'center',
   },
 };
 
 const MAX_WAIT_TIME = 5000;
 
 class VideoComponent extends React.Component {
-
   static type = { VIDEO_TYPE_LEGACY, VIDEO_TYPE };
 
   constructor(props) {
@@ -47,8 +46,12 @@ class VideoComponent extends React.Component {
   // TODO: get rid of this ASAP!
   // Currently, there's no other means to access the player inner iframe
   handlePlayerFocus() {
-    return !this.state.isPlayable && this.player && findDOMNode(this.player).querySelector('iframe') &&
-      (findDOMNode(this.player).querySelector('iframe').tabIndex = -1);
+    return (
+      !this.state.isPlayable &&
+      this.player &&
+      findDOMNode(this.player).querySelector('iframe') &&
+      (findDOMNode(this.player).querySelector('iframe').tabIndex = -1)
+    );
   }
   /* eslint-enable react/no-find-dom-node */
 
@@ -80,7 +83,8 @@ class VideoComponent extends React.Component {
     return (
       <div className={classNames(styles.video_overlay)}>
         {isLoaded && <span className={styles.video_overlay_message}>{overlayText}</span>}
-      </div>);
+      </div>
+    );
   };
 
   renderPlayer = () => {
@@ -109,7 +113,12 @@ class VideoComponent extends React.Component {
     const containerClassNames = classNames(styles.video_container, className || '');
     /* eslint-disable jsx-a11y/no-static-element-interactions */
     return (
-      <div data-hook="videoPlayer" onClick={onClick} className={containerClassNames} onKeyDown={e => this.onKeyDown(e, onClick)}>
+      <div
+        data-hook="videoPlayer"
+        onClick={onClick}
+        className={containerClassNames}
+        onKeyDown={e => this.onKeyDown(e, onClick)}
+      >
         {!isPlayable && this.renderOverlay(styles, t)}
         {this.renderPlayer()}
       </div>

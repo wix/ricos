@@ -1,25 +1,25 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <script>
-    window.addEventListener('message', event => {
-      if (event.data.type !== 'htmlPlugin:updateContent') {
-        return;
-      }
+  <head>
+    <script>
+      window.addEventListener('message', event => {
+        if (event.data.type !== 'htmlPlugin:updateContent') {
+          return;
+        }
 
-      var content = [
-        '<!DOCTYPE html>',
-        '<html>',
-        '<head>' + document.head.innerHTML + '</head>',
-        '<body>' + event.data.content + '</body>',
-        '</html>',
-      ].join('');
+        var content = [
+          '<!DOCTYPE html>',
+          '<html>',
+          '<head>' + document.head.innerHTML + '</head>',
+          '<body>' + event.data.content + '</body>',
+          '</html>',
+        ].join('');
 
-      document.open('text/html', 'replace');
-      document.write(content);
-      document.close();
-  });
-  </script>
-</head>
-<body></body>
+        document.open('text/html', 'replace');
+        document.write(content);
+        document.close();
+      });
+    </script>
+  </head>
+  <body></body>
 </html>

@@ -27,7 +27,7 @@ export default ({ alignment, Icon, tooltipTextKey }) =>
         const newEditorState = setTextAlignment(getEditorState(), alignment);
         setEditorState(newEditorState);
       }
-    }
+    };
 
     render() {
       const { theme, isMobile, t, tabIndex } = this.props;
@@ -48,5 +48,4 @@ export default ({ alignment, Icon, tooltipTextKey }) =>
         />
       );
     }
-
   };

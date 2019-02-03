@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { mergeStyles } from 'wix-rich-content-common';
 import styles from '../../statics/styles/giphy-modal-arrow.scss';
 
-
 class Arrow extends Component {
   constructor(props) {
     super(props);
@@ -25,6 +24,6 @@ class Arrow extends Component {
 
 Arrow.propTypes = {
   buttonRef: PropTypes.object,
-  theme: PropTypes.object.isRequired
+  theme: PropTypes.object.isRequired,
 };
 export default Arrow;

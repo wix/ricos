@@ -2,7 +2,13 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { mergeStyles, isValidUrl, normalizeUrl, validate } from 'wix-rich-content-common';
 
-import { SRC_TYPE_HTML, SRC_TYPE_URL, DEFAULT_COMPONENT_DATA, INIT_HEIGHT, INIT_WIDTH } from './constants';
+import {
+  SRC_TYPE_HTML,
+  SRC_TYPE_URL,
+  DEFAULT_COMPONENT_DATA,
+  INIT_HEIGHT,
+  INIT_WIDTH,
+} from './constants';
 import schema from '../statics/data-schema.json';
 import IframeHtml from './IframeHtml';
 import IframeUrl from './IframeUrl';
@@ -40,25 +46,23 @@ class HtmlComponent extends Component {
     validate(props.componentData, schema);
     const {
       blockProps,
-      componentData: {
-        src,
-        srcType,
-        config: {
-          width: currentWidth,
-          height: currentHeight
-        } = {}
-      },
-      settings: {
-        htmlIframeSrc,
-        width,
-        height
-      } = {} } = props;
+      componentData: { src, srcType, config: { width: currentWidth, height: currentHeight } = {} },
+      settings: { htmlIframeSrc, width, height } = {},
+    } = props;
 
-    const style = { width: currentWidth || width || INIT_WIDTH, height: currentHeight || height || INIT_HEIGHT };
+    const style = {
+      width: currentWidth || width || INIT_WIDTH,
+      height: currentHeight || height || INIT_HEIGHT,
+    };
     const readOnly = blockProps ? blockProps.readOnly : true;
 
     return (
-      <div className={styles.htmlComponent} ref={ref => this.element = ref} style={style} data-hook="HtmlComponent">
+      <div
+        className={styles.htmlComponent}
+        ref={ref => (this.element = ref)}
+        style={style}
+        data-hook="HtmlComponent"
+      >
         {srcType === SRC_TYPE_HTML && src && (
           <IframeHtml
             key={SRC_TYPE_HTML}
@@ -72,9 +76,7 @@ class HtmlComponent extends Component {
           <IframeUrl key={SRC_TYPE_URL} tabIndex={readOnly ? -1 : 0} src={normalizeUrl(src)} />
         )}
 
-        {!src && !isValidUrl(src) && (
-          <div className={styles.htmlComponent_placeholder} />
-        )}
+        {!src && !isValidUrl(src) && <div className={styles.htmlComponent_placeholder} />}
       </div>
     );
   }
@@ -96,7 +98,4 @@ HtmlComponent.propTypes = {
   }).isRequired,
 };
 
-export {
-  HtmlComponent as Component,
-  DEFAULT_COMPONENT_DATA as DEFAULTS
-};
+export { HtmlComponent as Component, DEFAULT_COMPONENT_DATA as DEFAULTS };

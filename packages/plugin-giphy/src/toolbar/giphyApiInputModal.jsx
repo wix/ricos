@@ -10,7 +10,7 @@ export default class GiphyApiInputModal extends Component {
     super(props);
     this.styles = mergeStyles({ styles, theme: props.theme });
     this.state = {
-      searchTag: ''
+      searchTag: '',
     };
   }
 
@@ -36,25 +36,27 @@ export default class GiphyApiInputModal extends Component {
     const { styles } = this;
     const { t, theme } = this.props;
     const searchTag = this.state.searchTag;
-    const backButton =
-      (<div
+    const backButton = (
+      <div
         className={styles.giphy_api_input_modal_backButton}
         onClick={this.onCloseRequested}
         role="button"
         tabIndex="0"
         onKeyPress={null}
-      />);
-    const mobileNavbar =
-      (
-        <div>
-          <div className={styles.giphy_api_input_modal_navbar}>{t('GiphyUploadModal_mobileNavbar_Title')} {backButton}</div>
+      />
+    );
+    const mobileNavbar = (
+      <div>
+        <div className={styles.giphy_api_input_modal_navbar}>
+          {t('GiphyUploadModal_mobileNavbar_Title')} {backButton}
         </div>
-      );
+      </div>
+    );
     return (
       <div>
-        {(WixUtils.isMobile()) ? <div>{mobileNavbar}</div> : null}
+        {WixUtils.isMobile() ? <div>{mobileNavbar}</div> : null}
         <div className={styles.giphy_api_input_modal_container} data-hook="giphyUploadModal">
-          <div className={styles.giphy_api_input_modal_search_textinput_group} >
+          <div className={styles.giphy_api_input_modal_search_textinput_group}>
             <TextInput
               inputRef={ref => {
                 this.input = ref;
@@ -67,12 +69,14 @@ export default class GiphyApiInputModal extends Component {
               theme={theme}
               data-hook="giphyUploadModalInput"
             />
-            <div className={styles.giphy_api_input_modal_searchIcon} >
-              {(!this.state.searchTag) ?
-                <SearchIcon /> :
+            <div className={styles.giphy_api_input_modal_searchIcon}>
+              {!this.state.searchTag ? (
+                <SearchIcon />
+              ) : (
                 <div onClick={this.handleClearText} role="button" tabIndex="0" onKeyPress={null}>
                   <CloseIcon className={styles.closeIcon} />
-                </div>}
+                </div>
+              )}
             </div>
           </div>
           <GiphySelector
@@ -91,5 +95,5 @@ GiphyApiInputModal.propTypes = {
   helpers: PropTypes.object.isRequired,
   searchTag: PropTypes.string,
   theme: PropTypes.object.isRequired,
-  t: PropTypes.func
+  t: PropTypes.func,
 };

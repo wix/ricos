@@ -4,7 +4,6 @@ import { mergeStyles } from '../Utils/mergeStyles';
 import styles from '../../statics/styles/slider.scss';
 
 class Slider extends Component {
-
   static propTypes = {
     value: PropTypes.number.isRequired,
     min: PropTypes.number,
@@ -44,7 +43,8 @@ class Slider extends Component {
       case 'PageDown':
         this.props.onChange(event.target.valueAsNumber);
         break;
-      default: return;
+      default:
+        return;
     }
   }
 
@@ -54,9 +54,17 @@ class Slider extends Component {
       <input
         {...ariaProps}
         tabIndex={readOnly ? -1 : 0}
-        type={'range'} className={this.styles.slider} data-hook={dataHook} onChange={e => this.onChange(e.target.valueAsNumber)}
-        value={this.state.value} min={min} max={max} onMouseUp={e => onChange(e.target.valueAsNumber)} onKeyUp={e => this.onKeyUp(e)}
-      />);
+        type={'range'}
+        className={this.styles.slider}
+        data-hook={dataHook}
+        onChange={e => this.onChange(e.target.valueAsNumber)}
+        value={this.state.value}
+        min={min}
+        max={max}
+        onMouseUp={e => onChange(e.target.valueAsNumber)}
+        onKeyUp={e => this.onKeyUp(e)}
+      />
+    );
   }
 }
 

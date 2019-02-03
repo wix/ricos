@@ -1,4 +1,10 @@
-import { BUTTONS, getModalStyles, WixUtils, DECORATION_MODE, decorateComponentWithProps } from 'wix-rich-content-common';
+import {
+  BUTTONS,
+  getModalStyles,
+  WixUtils,
+  DECORATION_MODE,
+  decorateComponentWithProps,
+} from 'wix-rich-content-common';
 import { MediaReplaceIcon } from '../icons';
 import GiphyApiInputModal from './giphyApiInputModal';
 import { MobileFullScreenCustomStyle, DesktopFlyOutModalStyles } from '../constants';
@@ -19,19 +25,34 @@ export default ({ t, settings }) => {
       type: BUTTONS.EXTERNAL_MODAL,
       icon: MediaReplaceIcon,
       modalElement: decorateComponentWithProps(GiphyApiInputModal, settings),
-      modalStyles: WixUtils.isMobile() ?
-        getModalStyles({ customStyles: MobileFullScreenCustomStyle, fullScreen: true }) : null,
+      modalStyles: WixUtils.isMobile()
+        ? getModalStyles({ customStyles: MobileFullScreenCustomStyle, fullScreen: true })
+        : null,
       modalStylesFn: ({ buttonRef }) => {
-        const modalStyles = getModalStyles({ customStyles: DesktopFlyOutModalStyles, fullScreen: true });
+        const modalStyles = getModalStyles({
+          customStyles: DesktopFlyOutModalStyles,
+          fullScreen: true,
+        });
         const { top, left } = buttonRef.getBoundingClientRect();
         const modalLeft = left - 15;
         const modalTop = top > 357 ? top - 365 : top + 30;
-        return { ...modalStyles, content: { ...modalStyles.content, top: modalTop, left: modalLeft, margin: 0, position: 'absolute' } };
+        return {
+          ...modalStyles,
+          content: {
+            ...modalStyles.content,
+            top: modalTop,
+            left: modalLeft,
+            margin: 0,
+            position: 'absolute',
+          },
+        };
       },
-      modalDecorations: [{
-        decorationMode: DECORATION_MODE.APPEND,
-        decorator: Arrow
-      }],
+      modalDecorations: [
+        {
+          decorationMode: DECORATION_MODE.APPEND,
+          decorator: Arrow,
+        },
+      ],
       mobile: true,
       tooltipTextKey: 'ReplaceGiphyButton_Tooltip',
       t,

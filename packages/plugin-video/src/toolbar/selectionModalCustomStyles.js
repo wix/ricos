@@ -1,15 +1,13 @@
 export const SelectionModalCustomStyle = {
-  content:
-  {
+  content: {
     maxWidth: '580px',
-    minHeight: '260px'
-  }
+    minHeight: '260px',
+  },
 };
 
 export const ExtendedSelectionModalCustomStyle = {
-  content:
-  {
+  content: {
     maxWidth: '580px',
-    minHeight: '378px'
-  }
+    minHeight: '378px',
+  },
 };

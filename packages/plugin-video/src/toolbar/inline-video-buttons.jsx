@@ -1,7 +1,15 @@
-import { BUTTONS, getModalStyles, decorateComponentWithProps, WixUtils } from 'wix-rich-content-common';
+import {
+  BUTTONS,
+  getModalStyles,
+  decorateComponentWithProps,
+  WixUtils,
+} from 'wix-rich-content-common';
 import { MediaReplaceIcon } from '../icons';
 import VideoSelectionInputModal from './videoSelectionInputModal';
-import { SelectionModalCustomStyle, ExtendedSelectionModalCustomStyle } from './selectionModalCustomStyles';
+import {
+  SelectionModalCustomStyle,
+  ExtendedSelectionModalCustomStyle,
+} from './selectionModalCustomStyles';
 
 export default ({ t, settings }) => {
   return [
@@ -20,10 +28,12 @@ export default ({ t, settings }) => {
       modalStyles: getModalStyles({
         //apply the extended input modal styles if handleFileSelection is avilable in plugin config
         //& on mobile if enableCustomUploadOnMobile is set to true, otherwise the normal modal styles is applied
-        customStyles: (!WixUtils.isMobile() || settings.enableCustomUploadOnMobile) && settings.handleFileSelection ?
-          ExtendedSelectionModalCustomStyle :
-          SelectionModalCustomStyle,
-        fullScreen: false
+        customStyles:
+          (!WixUtils.isMobile() || settings.enableCustomUploadOnMobile) &&
+          settings.handleFileSelection
+            ? ExtendedSelectionModalCustomStyle
+            : SelectionModalCustomStyle,
+        fullScreen: false,
       }),
       mobile: true,
       tooltipTextKey: 'ReplaceVideoButton_Tooltip',

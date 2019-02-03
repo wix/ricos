@@ -23,5 +23,5 @@ export const DEFAULTS = {
     size: SIZE_LARGE,
     alignment: ALIGN_CENTER,
     textWrap: NO_WRAP,
-  }
+  },
 };

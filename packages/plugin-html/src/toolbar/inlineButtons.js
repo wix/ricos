@@ -23,7 +23,7 @@ const getAlignmentButtonProps = ({ store, componentData }) => {
   const bounds = store.get('editorBounds');
   const maxAlignmentWidth = bounds ? bounds.width - 1 : MAX_ALIGNMENT_WIDTH;
   return {
-    disabled: get(componentData, 'config.width', 0) > maxAlignmentWidth
+    disabled: get(componentData, 'config.width', 0) > maxAlignmentWidth,
   };
 };
 
@@ -36,15 +36,21 @@ const TOOLTIP_TEXT_BY_SRC_TYPE = {
  * createInlineButtons
  */
 export default ({ settings = {} }) => {
-  const { maxWidth, minWidth = MIN_WIDTH, maxHeight = MAX_HEIGHT, minHeight = MIN_HEIGHT } = settings;
+  const {
+    maxWidth,
+    minWidth = MIN_WIDTH,
+    maxHeight = MAX_HEIGHT,
+    minHeight = MIN_HEIGHT,
+  } = settings;
   return [
     {
       type: BUTTONS.INLINE_PANEL,
       keyName: 'edit',
       panelContent: translate(null)(EditPanel),
       icon: EditIcon,
-      mapComponentDataToButtonProps: ({ src, srcType }) =>
-        ({ tooltipTextKey: src ? TOOLTIP_TEXT_BY_SRC_TYPE[srcType] : 'HtmlPlugin_EditEmpty_Tooltip' }),
+      mapComponentDataToButtonProps: ({ src, srcType }) => ({
+        tooltipTextKey: src ? TOOLTIP_TEXT_BY_SRC_TYPE[srcType] : 'HtmlPlugin_EditEmpty_Tooltip',
+      }),
     },
     { type: BUTTONS.SEPARATOR, keyName: 'separator1' },
     {
@@ -58,7 +64,7 @@ export default ({ settings = {} }) => {
         } else {
           return { max: maxWidth || MAX_WIDTH };
         }
-      }
+      },
     },
     {
       type: BUTTONS.HEIGHT,

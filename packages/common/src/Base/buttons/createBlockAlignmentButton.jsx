@@ -48,7 +48,12 @@ export default ({ alignment, Icon, tooltipTextKey }) =>
       /* eslint-disable jsx-a11y/no-static-element-interactions */
       const blockButton = (
         <div className={theme.buttonWrapper} onMouseDown={this.preventBubblingUp}>
-          <button tabIndex={tabIndex} className={className} data-hook={dataHookText} onClick={this.handleClick}>
+          <button
+            tabIndex={tabIndex}
+            className={className}
+            data-hook={dataHookText}
+            onClick={this.handleClick}
+          >
             <div className={theme.icon}>
               <IconComponent />
             </div>
@@ -57,6 +62,14 @@ export default ({ alignment, Icon, tooltipTextKey }) =>
       );
       /* eslint-enable jsx-a11y/no-static-element-interactions */
 
-      return <ToolbarButton theme={theme} showTooltip={showTooltip} tooltipText={tooltipText} button={blockButton} tooltipOffset={{ y: -20 }} />;
+      return (
+        <ToolbarButton
+          theme={theme}
+          showTooltip={showTooltip}
+          tooltipText={tooltipText}
+          button={blockButton}
+          tooltipOffset={{ y: -20 }}
+        />
+      );
     }
   };

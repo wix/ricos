@@ -5,7 +5,6 @@ import createFocusTrap from 'focus-trap';
 const checkedProps = ['active', 'paused', 'tag', 'focusTrapOptions', '_createFocusTrap'];
 
 export default class FocusTrap extends React.Component {
-
   componentDidMount() {
     this.focusTrap = this.props._createFocusTrap(this.node, this.props.focusTrapOptions);
     if (this.props.active) {
@@ -34,12 +33,17 @@ export default class FocusTrap extends React.Component {
     this.focusTrap.deactivate();
   }
 
-  setNode = el => this.node = el;
+  setNode = el => (this.node = el);
 
   render() {
     const elementProps = Object.keys(this.props)
-      .filter(prop => Object.prototype.hasOwnProperty.call(this.props, prop) && !checkedProps.includes(prop))
-      .reduce((resultProps, prop) => Object.assign(resultProps, { [prop]: this.props[prop] }), { ref: this.setNode });
+      .filter(
+        prop =>
+          Object.prototype.hasOwnProperty.call(this.props, prop) && !checkedProps.includes(prop)
+      )
+      .reduce((resultProps, prop) => Object.assign(resultProps, { [prop]: this.props[prop] }), {
+        ref: this.setNode,
+      });
 
     return React.createElement(this.props.tag, elementProps, this.props.children);
   }
@@ -59,5 +63,5 @@ FocusTrap.defaultProps = {
   tag: 'div',
   paused: false,
   focusTrapOptions: {},
-  _createFocusTrap: createFocusTrap
+  _createFocusTrap: createFocusTrap,
 };

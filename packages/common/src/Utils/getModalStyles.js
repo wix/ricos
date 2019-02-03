@@ -11,7 +11,7 @@ const mobileModalStyles = {
     width: '100%',
     height: 'calc(100% + 5px)',
     backgroundColor: 'rgba(0, 0, 0, 0.7)',
-    zIndex: 5
+    zIndex: 5,
   },
   content: {
     position: 'absolute',
@@ -29,8 +29,8 @@ const mobileModalStyles = {
     width: 'calc(100% - 20px)',
     margin: '0 10px',
     direction: 'ltr',
-    zIndex: 6
-  }
+    zIndex: 6,
+  },
 };
 
 const mobileFullScreenOverrideStyles = {
@@ -42,7 +42,7 @@ const mobileFullScreenOverrideStyles = {
     height: '100vh',
     width: '100vw',
     margin: 0,
-    zIndex: 5
+    zIndex: 5,
   },
   content: {
     top: 0,
@@ -55,8 +55,8 @@ const mobileFullScreenOverrideStyles = {
     margin: 0,
     transform: 'none',
     direction: 'ltr',
-    zIndex: 6
-  }
+    zIndex: 6,
+  },
 };
 
 const desktopSideBarStyles = {
@@ -69,7 +69,7 @@ const desktopSideBarStyles = {
     width: '100%',
     height: 'calc(100% + 85px)',
     backgroundColor: 'rgba(0, 0, 0, 0.4)',
-    zIndex: 5
+    zIndex: 5,
   },
   content: {
     position: 'fixed',
@@ -87,13 +87,12 @@ const desktopSideBarStyles = {
     width: '100%',
     maxWidth: '420px',
     direction: 'ltr',
-    zIndex: 6
-  }
+    zIndex: 6,
+  },
 };
 
 const desktopModalOverrideStyles = {
-  overlay: {
-  },
+  overlay: {},
   content: {
     top: 'calc(50%)',
     transform: 'translateY(-50%)',
@@ -102,18 +101,18 @@ const desktopModalOverrideStyles = {
     height: 'auto',
     marginLeft: 'auto',
     marginRight: 'auto',
-    direction: 'ltr'
+    direction: 'ltr',
   },
 };
 
 const inlineStyles = {
   overlay: {
     background: 'transparent',
-    pointerEvents: 'none'
+    pointerEvents: 'none',
   },
   content: {
-    pointerEvents: 'initial'
-  }
+    pointerEvents: 'initial',
+  },
 };
 
 export const getModalStyles = ({ customStyles = null, fullScreen = true, inline = false } = {}) => {

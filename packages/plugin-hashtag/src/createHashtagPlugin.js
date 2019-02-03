@@ -15,15 +15,18 @@ const createHashtagPlugin = (config = {}) => {
 
   plugin.decorators.push({
     strategy: Strategy,
-    component: decorateComponentWithProps(Component, hashtagProps)
+    component: decorateComponentWithProps(Component, hashtagProps),
   });
 
-  return createBasePlugin({
-    theme,
-    type,
-    settings,
-    ...rest
-  }, plugin);
+  return createBasePlugin(
+    {
+      theme,
+      type,
+      settings,
+      ...rest,
+    },
+    plugin
+  );
 };
 
 export { createHashtagPlugin };

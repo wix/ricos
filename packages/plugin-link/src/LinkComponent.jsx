@@ -2,10 +2,22 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import LinkViewer from './LinkViewer';
 
-const Link = ({ entityKey, contentState, className, children, anchorTarget, relValue, settings, href, rel, target, ...otherProps }) => {
-  const componentData = href ?
-    { url: href, rel, target } :
-    contentState.getEntity(entityKey).getData();
+const Link = ({
+  entityKey,
+  contentState,
+  className,
+  children,
+  anchorTarget,
+  relValue,
+  settings,
+  href,
+  rel,
+  target,
+  ...otherProps
+}) => {
+  const componentData = href
+    ? { url: href, rel, target }
+    : contentState.getEntity(entityKey).getData();
   return (
     <LinkViewer
       componentData={componentData}
@@ -16,7 +28,8 @@ const Link = ({ entityKey, contentState, className, children, anchorTarget, relV
       {...otherProps}
     >
       {children}
-    </LinkViewer>);
+    </LinkViewer>
+  );
 };
 
 Link.propTypes = {

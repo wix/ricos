@@ -14,7 +14,7 @@ const createSoundCloudPlugin = (config = {}) => {
     toolbar: createToolbar({ helpers, t }),
     helpers,
     t,
-    ...rest
+    ...rest,
   });
 };
 

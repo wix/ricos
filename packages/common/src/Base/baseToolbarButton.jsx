@@ -10,7 +10,6 @@ import ToolbarButton from '../Components/ToolbarButton';
 import BUTTONS from './buttons/keys';
 
 class BaseToolbarButton extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = { isActive: false };
@@ -73,14 +72,29 @@ class BaseToolbarButton extends React.Component {
 
     if (this.props.type === BUTTONS.FILES && helpers && helpers.handleFileSelection) {
       const multiple = !!this.props.multiple;
-      helpers.handleFileSelection(undefined, multiple, pubsub.getBlockHandler('handleFilesAdded'), undefined, this.props.componentData);
+      helpers.handleFileSelection(
+        undefined,
+        multiple,
+        pubsub.getBlockHandler('handleFilesAdded'),
+        undefined,
+        this.props.componentData
+      );
       return;
     }
 
     const activeButton = componentState.activeButton || { keyName, isActive: false };
-    const isToggleButton = !(this.props.type === BUTTONS.EXTERNAL_MODAL || this.props.type === BUTTONS.FILES);
-    const isActive = !isToggleButton ? activeButton.keyName === keyName : !(activeButton.keyName === keyName && activeButton.isActive);
-    componentState.activeButton = { ...activeButton, keyName, isActive, boundingRect: this.getBoundingRectForModalButton(isActive) };
+    const isToggleButton = !(
+      this.props.type === BUTTONS.EXTERNAL_MODAL || this.props.type === BUTTONS.FILES
+    );
+    const isActive = !isToggleButton
+      ? activeButton.keyName === keyName
+      : !(activeButton.keyName === keyName && activeButton.isActive);
+    componentState.activeButton = {
+      ...activeButton,
+      keyName,
+      isActive,
+      boundingRect: this.getBoundingRectForModalButton(isActive),
+    };
     pubsub.set('componentState', componentState);
 
     if (this.props.type === BUTTONS.PANEL) {
@@ -88,14 +102,13 @@ class BaseToolbarButton extends React.Component {
     }
 
     if (this.props.type === BUTTONS.INLINE_PANEL) {
-      this.state.isActive ?
-        this.props.hideInlinePanel() :
-        this.props.displayInlinePanel({ PanelContent: this.props.panelContent, keyName });
+      this.state.isActive
+        ? this.props.hideInlinePanel()
+        : this.props.displayInlinePanel({ PanelContent: this.props.panelContent, keyName });
     }
 
     if (this.props.type === BUTTONS.EXTERNAL_MODAL && isActive) {
       if (helpers && helpers.openModal) {
-
         let appliedModalStyles = {};
         if (modalStyles) {
           appliedModalStyles = modalStyles;
@@ -121,7 +134,10 @@ class BaseToolbarButton extends React.Component {
         };
         helpers.openModal(modalProps);
       } else {
-        console.error('Open external helper function is not defined for toolbar button with keyName ' + keyName); //eslint-disable-line no-console
+        //eslint-disable-next-line no-console
+        console.error(
+          'Open external helper function is not defined for toolbar button with keyName ' + keyName
+        );
       }
     }
     onClick && onClick(pubsub);
@@ -141,11 +157,7 @@ class BaseToolbarButton extends React.Component {
     const { iconActive, icon, theme } = this.props;
     const ActiveIcon = iconActive || icon;
     const Icon = icon;
-    return (
-      <div className={theme.icon}>
-        {this.state.isActive ? <ActiveIcon /> : <Icon />}
-      </div>
-    );
+    return <div className={theme.icon}>{this.state.isActive ? <ActiveIcon /> : <Icon />}</div>;
   };
 
   getDataHook = () => `baseToolbarButton_${this.props.keyName}`;
@@ -159,8 +171,13 @@ class BaseToolbarButton extends React.Component {
       /* eslint-disable jsx-a11y/no-static-element-interactions */
       <div className={buttonWrapperClassNames} onMouseDown={this.preventBubblingUp}>
         <button
-          className={buttonClassNames} aria-label={tooltipText} tabIndex={tabIndex} aria-pressed={this.state.isActive}
-          data-hook={this.getDataHook()} onClick={this.handleClick} children={this.props.children || [this.getIcon()]}
+          className={buttonClassNames}
+          aria-label={tooltipText}
+          tabIndex={tabIndex}
+          aria-pressed={this.state.isActive}
+          data-hook={this.getDataHook()}
+          onClick={this.handleClick}
+          children={this.props.children || [this.getIcon()]}
         >
           {this.getIcon()}
         </button>
@@ -168,7 +185,15 @@ class BaseToolbarButton extends React.Component {
       /* eslint-enable jsx-a11y/no-static-element-interactions */
     );
 
-    return <ToolbarButton theme={theme} showTooltip={showTooltip} tooltipText={tooltipText} button={toggleButton} tooltipOffset={{ y: -20 }} />;
+    return (
+      <ToolbarButton
+        theme={theme}
+        showTooltip={showTooltip}
+        tooltipText={tooltipText}
+        button={toggleButton}
+        tooltipOffset={{ y: -20 }}
+      />
+    );
   };
 
   renderFilesButton = (buttonClassNames, styles) => {
@@ -180,15 +205,28 @@ class BaseToolbarButton extends React.Component {
     const filesButton = (
       <div className={replaceButtonWrapperClassNames}>
         <FileInput
-          className={classNames(buttonClassNames)} theme={theme} tabIndex={tabIndex}
-          dataHook={this.getDataHook()} onChange={this.handleFileChange} accept="image/*" multiple={this.props.multiple}
+          className={classNames(buttonClassNames)}
+          theme={theme}
+          tabIndex={tabIndex}
+          dataHook={this.getDataHook()}
+          onChange={this.handleFileChange}
+          accept="image/*"
+          multiple={this.props.multiple}
         >
           {this.getIcon()}
         </FileInput>
       </div>
     );
 
-    return <ToolbarButton theme={theme} showTooltip={showTooltip} tooltipText={tooltipText} button={filesButton} tooltipOffset={{ y: -20 }} />;
+    return (
+      <ToolbarButton
+        theme={theme}
+        showTooltip={showTooltip}
+        tooltipText={tooltipText}
+        button={filesButton}
+        tooltipOffset={{ y: -20 }}
+      />
+    );
   };
 
   renderDropdownButton = (buttonWrapperClassNames, buttonClassNames) => {
@@ -201,8 +239,12 @@ class BaseToolbarButton extends React.Component {
     return (
       <div className={buttonWrapperClassNames} onMouseDown={this.preventBubblingUp}>
         <Dropdown
-          className={buttonClassNames} tabIndex={tabIndex}
-          dataHook={this.getDataHook()} onChange={decoratedOnChange} getValue={decoratedGetValue} {...props}
+          className={buttonClassNames}
+          tabIndex={tabIndex}
+          dataHook={this.getDataHook()}
+          onChange={decoratedOnChange}
+          getValue={decoratedGetValue}
+          {...props}
         />
       </div>
     );

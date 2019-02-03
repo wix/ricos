@@ -5,4 +5,3 @@ export const typeMapper = () => ({
   [EXTERNAL_LINK_TYPE]: { component: LinkViewer, elementType: 'inline' },
   [LINK_TYPE]: { component: LinkViewer, elementType: 'inline' },
 });
-

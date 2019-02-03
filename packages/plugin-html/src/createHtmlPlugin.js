@@ -20,7 +20,7 @@ const createHtmlPlugin = (config = {}) => {
     helpers,
     isMobile,
     t,
-    ...rest
+    ...rest,
   });
 };
 

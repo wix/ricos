@@ -33,28 +33,39 @@ class SliderWithInput extends Component {
     this.submitInputValueDebounced.flush();
   };
 
-  getInputMin = () => isNumber(this.props.inputMin) ? this.props.inputMin : this.props.min;
-  getInputMax = () => isNumber(this.props.inputMax) ? this.props.inputMax : this.props.max;
+  getInputMin = () => (isNumber(this.props.inputMin) ? this.props.inputMin : this.props.min);
+  getInputMax = () => (isNumber(this.props.inputMax) ? this.props.inputMax : this.props.max);
 
-  normalizeInputValue = value => Math.min(
-    Math.max(this.getInputMin(), value),
-    this.getInputMax()
-  );
+  normalizeInputValue = value => Math.min(Math.max(this.getInputMin(), value), this.getInputMax());
 
   render() {
-    const { readOnly, label, value, min, max, onChange, theme, sliderDataHook, inputDataHook } = this.props;
+    const {
+      readOnly,
+      label,
+      value,
+      min,
+      max,
+      onChange,
+      theme,
+      sliderDataHook,
+      inputDataHook,
+    } = this.props;
     let ariaProps = label ? { 'aria-labelledby': `${this.id}_lbl` } : {};
     ariaProps = Object.assign({}, ariaProps, {
       'aria-disabled': readOnly,
       'aria-valuemin': min,
       'aria-valuemax': max,
-      'aria-valuenow': value
+      'aria-valuenow': value,
     });
 
     /* eslint-disable jsx-a11y/role-has-required-aria-props */
     return (
-      <div className={readOnly ? this.styles.sliderWithInput_readOnly : null} >
-        {label ? <span id={`${this.id}_lbl`} className={this.styles.sliderWithInput_label}>{label}</span> : null}
+      <div className={readOnly ? this.styles.sliderWithInput_readOnly : null}>
+        {label ? (
+          <span id={`${this.id}_lbl`} className={this.styles.sliderWithInput_label}>
+            {label}
+          </span>
+        ) : null}
         <div className={this.styles.sliderWithInput_content}>
           <Slider
             theme={theme}

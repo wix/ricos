@@ -1,7 +1,23 @@
-import { MODIFIERS, hasLinksInSelection, removeLinksInSelection, EditorModals, getModalStyles } from 'wix-rich-content-common';
+import {
+  MODIFIERS,
+  hasLinksInSelection,
+  removeLinksInSelection,
+  EditorModals,
+  getModalStyles,
+} from 'wix-rich-content-common';
 import TextLinkButton from './TextLinkButton';
 
-const openLinkModal = ({ helpers, isMobile, anchorTarget, relValue, t, theme, getEditorState, setEditorState, uiSettings }) => {
+const openLinkModal = ({
+  helpers,
+  isMobile,
+  anchorTarget,
+  relValue,
+  t,
+  theme,
+  getEditorState,
+  setEditorState,
+  uiSettings,
+}) => {
   const modalStyles = getModalStyles({ fullScreen: false });
   if (helpers && helpers.openModal) {
     const modalProps = {
@@ -20,7 +36,10 @@ const openLinkModal = ({ helpers, isMobile, anchorTarget, relValue, t, theme, ge
     };
     helpers.openModal(modalProps);
   } else {
-    console.error('Link plugin: failed to display Link modal dialog since helpers.openModal is not defined'); // eslint-disable-line no-console
+    //eslint-disable-next-line no-console
+    console.error(
+      'Link plugin: failed to display Link modal dialog since helpers.openModal is not defined'
+    );
   }
 };
 
@@ -30,21 +49,22 @@ export default config => ({
       component: TextLinkButton,
       isMobile: true,
       position: { mobile: 5 },
-      keyBindings: [{
-        keyCommand: {
-          command: 'link',
-          modifiers: [MODIFIERS.COMMAND],
-          key: 'k'
+      keyBindings: [
+        {
+          keyCommand: {
+            command: 'link',
+            modifiers: [MODIFIERS.COMMAND],
+            key: 'k',
+          },
+          commandHandler: editorState => {
+            if (hasLinksInSelection(editorState)) {
+              return removeLinksInSelection(editorState);
+            } else {
+              openLinkModal(config);
+            }
+          },
         },
-        commandHandler: editorState => {
-          if (hasLinksInSelection(editorState)) {
-            return removeLinksInSelection(editorState);
-          } else {
-            openLinkModal(config);
-          }
-        }
-      }]
-    }
-  })
+      ],
+    },
+  }),
 });
-

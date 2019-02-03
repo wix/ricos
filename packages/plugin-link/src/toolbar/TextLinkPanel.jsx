@@ -30,10 +30,13 @@ export default class TextLinkPanel extends Component {
       onCancel: this.hideLinkPanel,
       onDelete: this.deleteLink,
       onOverrideContent: this.props.onOverrideContent,
-      uiSettings
+      uiSettings,
     };
 
-    const LinkPanelContainerWithProps = decorateComponentWithProps(LinkPanelContainer, linkContainerProps);
+    const LinkPanelContainerWithProps = decorateComponentWithProps(
+      LinkPanelContainer,
+      linkContainerProps
+    );
     this.props.onOverrideContent(LinkPanelContainerWithProps);
   }
 
@@ -41,7 +44,13 @@ export default class TextLinkPanel extends Component {
     const { anchorTarget, relValue } = this.props;
     if (!isEmpty(url)) {
       const { getEditorState, setEditorState } = this.props;
-      const newEditorState = insertLink(getEditorState(), { url, targetBlank, nofollow, anchorTarget, relValue });
+      const newEditorState = insertLink(getEditorState(), {
+        url,
+        targetBlank,
+        nofollow,
+        anchorTarget,
+        relValue,
+      });
       setEditorState(newEditorState);
     }
     this.hideLinkPanel();
@@ -53,7 +62,7 @@ export default class TextLinkPanel extends Component {
     const selection = editorState.getSelection();
     const newEditorState = removeLinksInSelection(editorState);
     setEditorState(EditorState.acceptSelection(newEditorState, selection));
-  }
+  };
 
   hideLinkPanel = () => {
     this.props.onExtendContent(undefined);

@@ -46,7 +46,13 @@ const getList = (ordered, mergedStyles, textDirection) => (children, blockProps)
   const className = ordered ? 'ordered' : 'unordered';
   const containerClassName = mergedStyles[`${className}ListContainer`];
   return (
-    <List key={blockProps.keys[0]} keys={blockProps.keys} depth={blockProps.depth} ordered={ordered} className={containerClassName}>
+    <List
+      key={blockProps.keys[0]}
+      keys={blockProps.keys}
+      depth={blockProps.depth}
+      ordered={ordered}
+      className={containerClassName}
+    >
       {fixedChildren.map((child, i) => {
         // NOTE: list block data is an array of data entries per list item
         const dataEntry = blockProps.data.length > i ? blockProps.data[i] : {};
@@ -154,7 +160,8 @@ const combineTypeMappers = mappers => {
   return mappers.reduce((map, mapper) => Object.assign(map, mapper()), {});
 };
 
-const isEmptyRaw = raw => !raw || !raw.blocks || (raw.blocks.length === 1 && raw.blocks[0].text === '');
+const isEmptyRaw = raw =>
+  !raw || !raw.blocks || (raw.blocks.length === 1 && raw.blocks[0].text === '');
 
 const options = {
   cleanup: {
@@ -190,7 +197,17 @@ const augmentRaw = raw => ({
   }),
 });
 
-const Preview = ({ raw, typeMappers, theme, isMobile, decorators, anchorTarget, relValue, config, textDirection }) => {
+const Preview = ({
+  raw,
+  typeMappers,
+  theme,
+  isMobile,
+  decorators,
+  anchorTarget,
+  relValue,
+  config,
+  textDirection,
+}) => {
   const mergedStyles = mergeStyles({ styles, theme });
   const isEmpty = isEmptyRaw(raw);
   const typeMap = combineTypeMappers(typeMappers);

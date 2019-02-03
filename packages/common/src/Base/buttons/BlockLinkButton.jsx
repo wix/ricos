@@ -23,7 +23,7 @@ class BlockLinkButton extends Component {
       anchorTarget,
       relValue,
       t,
-      uiSettings
+      uiSettings,
     } = this.props;
     const modalStyles = getModalStyles({ fullScreen: false });
     if (isMobile) {
@@ -40,11 +40,14 @@ class BlockLinkButton extends Component {
           relValue,
           modalName: EditorModals.MOBILE_BLOCK_LINK_MODAL,
           hidePopup: helpers.closeModal,
-          uiSettings
+          uiSettings,
         };
         helpers.openModal(modalProps);
       } else {
-        console.error('Open external helper function is not defined for toolbar button with keyName ' + keyName); //eslint-disable-line no-console
+        //eslint-disable-next-line no-console
+        console.error(
+          'Open external helper function is not defined for toolbar button with keyName ' + keyName
+        );
       }
     } else {
       const linkPanelProps = {
@@ -54,7 +57,7 @@ class BlockLinkButton extends Component {
         relValue,
         theme,
         t,
-        uiSettings
+        uiSettings,
       };
       const BlockLinkPanelWithProps = decorateComponentWithProps(BlockLinkPanel, linkPanelProps);
       onOverrideContent(BlockLinkPanelWithProps);
@@ -64,14 +67,17 @@ class BlockLinkButton extends Component {
   render() {
     const { theme, isMobile, t, tabIndex } = this.props;
     const linkButtonTooltip = t('TextLinkButton_Tooltip');
-    return (<LinkButton
-      data-hook="blockLinkButton" onClick={this.showLinkPanel}
-      isActive={this.isActive}
-      theme={theme}
-      isMobile={isMobile}
-      tooltipText={linkButtonTooltip}
-      tabIndex={tabIndex}
-    />);
+    return (
+      <LinkButton
+        data-hook="blockLinkButton"
+        onClick={this.showLinkPanel}
+        isActive={this.isActive}
+        theme={theme}
+        isMobile={isMobile}
+        tooltipText={linkButtonTooltip}
+        tabIndex={tabIndex}
+      />
+    );
   }
 }
 

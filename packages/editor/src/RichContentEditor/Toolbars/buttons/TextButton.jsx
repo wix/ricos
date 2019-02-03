@@ -7,7 +7,6 @@ import { mergeStyles, ToolbarButton } from 'wix-rich-content-common';
 import styles from 'wix-rich-content-common/dist/statics/styles/inline-toolbar-button.scss';
 
 export default class TextButton extends Component {
-
   constructor(props) {
     super(props);
     const { buttonStyles } = props.theme || {};
@@ -26,18 +25,18 @@ export default class TextButton extends Component {
   };
 
   static defaultProps = {
-    tabIndex: 0
+    tabIndex: 0,
   };
 
   isActive = () => {
     const { isActive } = this.props;
     return isActive ? isActive() : false;
-  }
+  };
 
   handleClick = event => {
     const { onClick } = this.props;
     onClick && onClick(event);
-  }
+  };
 
   preventBubblingUp = event => event.preventDefault();
 
@@ -45,19 +44,20 @@ export default class TextButton extends Component {
     const { styles } = this;
     const { icon: Icon, theme, isMobile, tooltipText, dataHook, tabIndex } = this.props;
     const showTooltip = !isMobile && !isEmpty(tooltipText);
-    const iconClassNames = classNames(
-      styles.inlineToolbarButton_icon,
-      {
-        [styles.inlineToolbarButton_active]: this.isActive(),
-      }
-    );
+    const iconClassNames = classNames(styles.inlineToolbarButton_icon, {
+      [styles.inlineToolbarButton_active]: this.isActive(),
+    });
 
     /* eslint-disable jsx-a11y/no-static-element-interactions */
     const textButton = (
       <div className={styles.inlineToolbarButton_wrapper} onMouseDown={this.preventBubblingUp}>
         <button
-          tabIndex={tabIndex} aria-label={tooltipText} aria-pressed={this.isActive()}
-          className={styles.inlineToolbarButton} data-hook={dataHook} onClick={this.handleClick}
+          tabIndex={tabIndex}
+          aria-label={tooltipText}
+          aria-pressed={this.isActive()}
+          className={styles.inlineToolbarButton}
+          data-hook={dataHook}
+          onClick={this.handleClick}
         >
           <div className={iconClassNames}>
             <Icon />
@@ -67,6 +67,14 @@ export default class TextButton extends Component {
     );
     /* eslint-enable jsx-a11y/no-static-element-interactions */
 
-    return <ToolbarButton theme={theme} showTooltip={showTooltip} tooltipText={tooltipText} button={textButton} tooltipOffset={{ y: -20 }} />;
+    return (
+      <ToolbarButton
+        theme={theme}
+        showTooltip={showTooltip}
+        tooltipText={tooltipText}
+        button={textButton}
+        tooltipOffset={{ y: -20 }}
+      />
+    );
   }
 }

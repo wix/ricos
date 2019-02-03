@@ -24,7 +24,7 @@ const getRelativeParent = element => {
 
 const displayOptionStyles = {
   [DISPLAY_MODE.NORMAL]: {},
-  [DISPLAY_MODE.FLOATING]: { position: 'fixed' }
+  [DISPLAY_MODE.FLOATING]: { position: 'fixed' },
 };
 
 export default class InlineToolbar extends Component {
@@ -40,7 +40,7 @@ export default class InlineToolbar extends Component {
     t: PropTypes.func,
     visibilityFn: PropTypes.func,
     displayOptions: PropTypes.shape({
-      displayMode: PropTypes.string
+      displayMode: PropTypes.string,
     }),
     offset: PropTypes.shape({
       x: PropTypes.number,
@@ -51,9 +51,9 @@ export default class InlineToolbar extends Component {
 
   static defaultProps = {
     displayOptions: {
-      displayMode: DISPLAY_MODE.NORMAL
+      displayMode: DISPLAY_MODE.NORMAL,
     },
-    toolbarDecorationFn: () => null
+    toolbarDecorationFn: () => null,
   };
 
   constructor(props) {
@@ -69,7 +69,7 @@ export default class InlineToolbar extends Component {
       overrideContent: undefined,
       extendContent: undefined,
       showRightArrow: false,
-      showLeftArrow: false
+      showLeftArrow: false,
     };
 
     this.ToolbarDecoration = props.toolbarDecorationFn();
@@ -85,7 +85,7 @@ export default class InlineToolbar extends Component {
 
   onOverrideContent = overrideContent => {
     this.setState({ overrideContent });
-  }
+  };
 
   onExtendContent = extendContent => this.setState({ extendContent });
 
@@ -93,7 +93,7 @@ export default class InlineToolbar extends Component {
     if (this.state.overrideContent || this.state.extendContent) {
       this.setState({ overrideContent: null, extendContent: null });
     }
-  }
+  };
 
   getRelativePosition() {
     const relativeParent = getRelativeParent(this.toolbar.parentElement);
@@ -108,16 +108,16 @@ export default class InlineToolbar extends Component {
 
     let top;
     if (!this.props.isMobile) {
-      top = ((selectionRect.top - relativeRect.top) - toolbarHeight) - TOOLBAR_OFFSET;
+      top = selectionRect.top - relativeRect.top - toolbarHeight - TOOLBAR_OFFSET;
     } else {
-      top = (selectionRect.bottom - relativeRect.top) + TOOLBAR_OFFSET;
+      top = selectionRect.bottom - relativeRect.top + TOOLBAR_OFFSET;
     }
 
-    let left = (selectionRect.left - relativeRect.left) + (selectionRect.width / 2);
+    let left = selectionRect.left - relativeRect.left + selectionRect.width / 2;
     // make sure we're not out of bounds, adjust position if we are
     if (left < halfToolbarWidth) {
       left = halfToolbarWidth;
-    } else if ((left + halfToolbarWidth) > relativeRect.width) {
+    } else if (left + halfToolbarWidth > relativeRect.width) {
       left = relativeRect.width - halfToolbarWidth;
     }
 
@@ -146,7 +146,7 @@ export default class InlineToolbar extends Component {
     });
   };
 
-  getTabIndexByVisibility = () => this.isVisible() ? 0 : -1;
+  getTabIndexByVisibility = () => (this.isVisible() ? 0 : -1);
 
   isVisible = () => {
     const { pubsub, visibilityFn } = this.props;
@@ -169,7 +169,7 @@ export default class InlineToolbar extends Component {
     const defaultDispayStyles = {
       visibility: this.isVisible() ? 'visible' : 'hidden',
       transform: this.isVisible() ? 'translate(-50%) scale(1)' : 'translate(-50%) scale(1)',
-      transition: this.isVisible() ? 'transform 0.15s cubic-bezier(.3,1.2,.2,1)' : ''
+      transition: this.isVisible() ? 'transform 0.15s cubic-bezier(.3,1.2,.2,1)' : '',
     };
 
     Object.assign(style, defaultDispayStyles, displayOptionStyles[displayOptions.displayMode]);
@@ -184,7 +184,9 @@ export default class InlineToolbar extends Component {
   scrollToolbar(event, leftDirection) {
     event.preventDefault();
     const { clientWidth, scrollWidth } = this.scrollContainer;
-    this.scrollContainer.scrollLeft = leftDirection ? 0 : Math.min(this.scrollContainer.scrollLeft + clientWidth, scrollWidth);
+    this.scrollContainer.scrollLeft = leftDirection
+      ? 0
+      : Math.min(this.scrollContainer.scrollLeft + clientWidth, scrollWidth);
   }
 
   setToolbarScrollButton = (scrollLeft, scrollWidth, clientWidth) => {
@@ -197,24 +199,46 @@ export default class InlineToolbar extends Component {
 
     this.setState({
       showLeftArrow: isScroll && scrollLeft === scrollWidth - clientWidth,
-      showRightArrow: isScroll && scrollLeft < scrollWidth - clientWidth
+      showRightArrow: isScroll && scrollLeft < scrollWidth - clientWidth,
     });
   };
 
   renderToolbarContent() {
-    const { theme, pubsub, structure, defaultTextAlignment, helpers, isMobile, anchorTarget, relValue, t } = this.props;
-    const { showLeftArrow, showRightArrow, overrideContent: OverrideContent, extendContent: ExtendContent } = this.state;
+    const {
+      theme,
+      pubsub,
+      structure,
+      defaultTextAlignment,
+      helpers,
+      isMobile,
+      anchorTarget,
+      relValue,
+      t,
+    } = this.props;
+    const {
+      showLeftArrow,
+      showRightArrow,
+      overrideContent: OverrideContent,
+      extendContent: ExtendContent,
+    } = this.state;
 
     const tabIndex = this.isVisible() ? 0 : -1;
     const toolbarStyle = this.getStyle();
     const hasArrow = showLeftArrow || showRightArrow;
     const { toolbarStyles } = theme || {};
 
-    const buttonClassNames = classNames(Styles.inlineToolbar_buttons, toolbarStyles && toolbarStyles.inlineToolbar_buttons, {
-      [Styles.inlineToolbar_overrideContent]: !!OverrideContent,
-      [toolbarStyles.inlineToolbar_overrideContent]: !!OverrideContent,
-    });
-    const extendClassNames = classNames(Styles.inlineToolbar_extend, toolbarStyles && toolbarStyles.inlineToolbar_extend);
+    const buttonClassNames = classNames(
+      Styles.inlineToolbar_buttons,
+      toolbarStyles && toolbarStyles.inlineToolbar_buttons,
+      {
+        [Styles.inlineToolbar_overrideContent]: !!OverrideContent,
+        [toolbarStyles.inlineToolbar_overrideContent]: !!OverrideContent,
+      }
+    );
+    const extendClassNames = classNames(
+      Styles.inlineToolbar_extend,
+      toolbarStyles && toolbarStyles.inlineToolbar_extend
+    );
 
     const scrollableClassNames = classNames(
       Styles.inlineToolbar_scrollableContainer,
@@ -224,9 +248,18 @@ export default class InlineToolbar extends Component {
       }
     );
 
-    const arrowClassNames = classNames(Styles.inlineToolbar_responsiveArrow, toolbarStyles.inlineToolbar_responsiveArrow);
-    const leftArrowIconClassNames = classNames(Styles.inlineToolbar_responsiveArrowLeft_icon, toolbarStyles.responsiveArrowLeft_icon);
-    const rightArrowIconClassNames = classNames(Styles.inlineToolbar_responsiveArrowRight_icon, toolbarStyles.responsiveArrowRight_icon);
+    const arrowClassNames = classNames(
+      Styles.inlineToolbar_responsiveArrow,
+      toolbarStyles.inlineToolbar_responsiveArrow
+    );
+    const leftArrowIconClassNames = classNames(
+      Styles.inlineToolbar_responsiveArrowLeft_icon,
+      toolbarStyles.responsiveArrowLeft_icon
+    );
+    const rightArrowIconClassNames = classNames(
+      Styles.inlineToolbar_responsiveArrowRight_icon,
+      toolbarStyles.responsiveArrowRight_icon
+    );
 
     const childrenProps = {
       theme,
@@ -241,40 +274,40 @@ export default class InlineToolbar extends Component {
       anchorTarget,
       relValue,
       t,
-      tabIndex
+      tabIndex,
     };
 
     return (
       <ClickOutside onClickOutside={this.onClickOutside}>
-        <div
-          className={buttonClassNames}
-        >
+        <div className={buttonClassNames}>
           <Measure
             client
             scroll
-            innerRef={ref => this.scrollContainer = ref}
-            onResize={({ scroll, client }) => this.setToolbarScrollButton(scroll.left, scroll.width, client.width)}
+            innerRef={ref => (this.scrollContainer = ref)}
+            onResize={({ scroll, client }) =>
+              this.setToolbarScrollButton(scroll.left, scroll.width, client.width)
+            }
           >
             {({ measure, measureRef }) => (
               <div className={scrollableClassNames} ref={measureRef} onScroll={() => measure()}>
-                {
-                  OverrideContent ?
-                    <OverrideContent {...childrenProps} /> :
-                    structure.map((Button, index) => <Button key={index} {...childrenProps} />)
-                }
+                {OverrideContent ? (
+                  <OverrideContent {...childrenProps} />
+                ) : (
+                  structure.map((Button, index) => <Button key={index} {...childrenProps} />)
+                )}
               </div>
             )}
           </Measure>
-          {
-            hasArrow &&
-              <button
-                tabIndex={tabIndex}
-                className={arrowClassNames}
-                data-hook="inlineToolbarRightArrow" onMouseDown={e => this.scrollToolbar(e, showLeftArrow)}
-              >
-                <i className={showLeftArrow ? leftArrowIconClassNames : rightArrowIconClassNames} />
-              </button>
-          }
+          {hasArrow && (
+            <button
+              tabIndex={tabIndex}
+              className={arrowClassNames}
+              data-hook="inlineToolbarRightArrow"
+              onMouseDown={e => this.scrollToolbar(e, showLeftArrow)}
+            >
+              <i className={showLeftArrow ? leftArrowIconClassNames : rightArrowIconClassNames} />
+            </button>
+          )}
         </div>
         {ExtendContent && (
           <div className={extendClassNames}>
@@ -303,7 +336,8 @@ export default class InlineToolbar extends Component {
       return (
         <ToolbarDecoration refCallback={this.handleToolbarRef} {...props}>
           {this.renderToolbarContent()}
-        </ToolbarDecoration>);
+        </ToolbarDecoration>
+      );
     }
 
     return (

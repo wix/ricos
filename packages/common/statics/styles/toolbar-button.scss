@@ -1,5 +1,5 @@
-@import "./mixins";
-@import "./palette";
+@import './mixins';
+@import './palette';
 @import './consts';
 
 .buttonWrapper {
@@ -27,7 +27,8 @@
   height: 100%;
   pointer-events: initial;
 
-  &:hover, &:focus {
+  &:hover,
+  &:focus {
     cursor: pointer;
     color: $accent-color;
     @include svg-fill;

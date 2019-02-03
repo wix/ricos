@@ -7,7 +7,6 @@ import styles from '../../statics/styles/checkbox.scss';
 import globalStyles from '../../statics/styles/global.scss';
 
 export default class Checkbox extends React.Component {
-
   static propTypes = {
     theme: PropTypes.object.isRequired,
     onChange: PropTypes.func.isRequired,
@@ -17,7 +16,7 @@ export default class Checkbox extends React.Component {
   };
 
   static defaultProps = {
-    checked: false
+    checked: false,
   };
 
   constructor(props) {
@@ -43,16 +42,35 @@ export default class Checkbox extends React.Component {
     const a11yProps = {
       'aria-label': label,
       'aria-checked': checked,
-      role: 'checkbox'
+      role: 'checkbox',
     };
 
     return (
-      <label htmlFor={this.id} className={classnames({ [styles.checkbox]: true, [globalStyles.focused]: this.state.focused })}>
+      <label
+        htmlFor={this.id}
+        className={classnames({
+          [styles.checkbox]: true,
+          [globalStyles.focused]: this.state.focused,
+        })}
+      >
         <input
-          id={this.id} onFocus={() => this.onFocus()} onBlur={() => this.onBlur()} tabIndex="0" {...a11yProps}
-          className={styles.checkbox_input} type={'checkbox'} data-hook={dataHook} onChange={onChange} {...isChecked}
+          id={this.id}
+          onFocus={() => this.onFocus()}
+          onBlur={() => this.onBlur()}
+          tabIndex="0"
+          {...a11yProps}
+          className={styles.checkbox_input}
+          type={'checkbox'}
+          data-hook={dataHook}
+          onChange={onChange}
+          {...isChecked}
         />
-        <i className={classnames(styles.checkbox_icon, checked ? styles.checkbox_icon_checked : styles.checkbox_icon_unchecked)}>
+        <i
+          className={classnames(
+            styles.checkbox_icon,
+            checked ? styles.checkbox_icon_checked : styles.checkbox_icon_unchecked
+          )}
+        >
           {checked && <CheckIcon className={styles.checkbox_check} />}
         </i>
         <span className={styles.checkbox_label}>{label}</span>

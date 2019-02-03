@@ -16,7 +16,7 @@ const createImagePlugin = (config = {}) => {
       anchorTarget,
       relValue,
       t,
-      uiSettings
+      uiSettings,
     }),
     helpers,
     anchorTarget,
@@ -24,7 +24,7 @@ const createImagePlugin = (config = {}) => {
     settings,
     uiSettings,
     t,
-    ...rest
+    ...rest,
   });
 };
 

@@ -14,10 +14,13 @@ export default class RichContentViewer extends Component {
     this.styles = mergeStyles({ styles, theme: props.theme });
   }
 
-  getInitialState = initialState => initialState ? normalizeInitialState(initialState, {
-    anchorTarget: this.props.anchorTarget,
-    relValue: this.props.relValue
-  }) : {};
+  getInitialState = initialState =>
+    initialState
+      ? normalizeInitialState(initialState, {
+          anchorTarget: this.props.anchorTarget,
+          relValue: this.props.relValue,
+        })
+      : {};
 
   componentWillReceiveProps(nextProps) {
     if (this.props.initialState !== nextProps.initialState) {
@@ -27,7 +30,16 @@ export default class RichContentViewer extends Component {
 
   render() {
     const { styles } = this;
-    const { theme, isMobile, textDirection, typeMappers, decorators, anchorTarget, relValue, config } = this.props;
+    const {
+      theme,
+      isMobile,
+      textDirection,
+      typeMappers,
+      decorators,
+      anchorTarget,
+      relValue,
+      config,
+    } = this.props;
     const wrapperClassName = classNames(styles.wrapper, {
       [styles.desktop]: !this.props.platform || this.props.platform === 'desktop',
     });
@@ -68,7 +80,7 @@ RichContentViewer.propTypes = {
       PropTypes.shape({
         component: PropTypes.func.isRequired,
         strategy: PropTypes.func.isRequired,
-      })
+      }),
     ])
   ),
   theme: PropTypes.object,

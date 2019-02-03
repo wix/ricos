@@ -8,8 +8,22 @@ import buttonStyles from '../../../../statics/styles/mobile-toolbar-button.scss'
 import separatorStyles from '../../../../statics/styles/mobile-toolbar-separator.scss';
 
 const createMobileToolbar = ({
-  buttons, textPluginButtons, pluginButtons, helpers, pubsub, getEditorState, setEditorState,
-  anchorTarget, relValue, theme, t, offset, visibilityFn, uiSettings, displayOptions, toolbarDecorationFn
+  buttons,
+  textPluginButtons,
+  pluginButtons,
+  helpers,
+  pubsub,
+  getEditorState,
+  setEditorState,
+  anchorTarget,
+  relValue,
+  theme,
+  t,
+  offset,
+  visibilityFn,
+  uiSettings,
+  displayOptions,
+  toolbarDecorationFn,
 }) => {
   const mobileTheme = getMobileTheme(theme);
   return createStaticToolbar({
@@ -27,7 +41,7 @@ const createMobileToolbar = ({
       setEditorState,
       mobileTheme,
       t,
-      uiSettings
+      uiSettings,
     }),
     anchorTarget,
     relValue,
@@ -36,7 +50,7 @@ const createMobileToolbar = ({
     visibilityFn,
     uiSettings,
     displayOptions,
-    toolbarDecorationFn
+    toolbarDecorationFn,
   });
 };
 
@@ -50,14 +64,11 @@ const getMobileTheme = theme => {
 
   return {
     toolbarStyles: {
-      toolbar: classNames(
-        toolbarStyles.mobileToolbar,
-        toolbarTheme && toolbarTheme.mobileToolbar,
-        {
-          [toolbarStyles.mobileToolbar_fixed]: !WixUtils.isiOS(),
-          [toolbarTheme.mobileToolbar_fixed]: (toolbarTheme && toolbarTheme.mobileToolbar_fixed) && !WixUtils.isiOS(),
-        }
-      ),
+      toolbar: classNames(toolbarStyles.mobileToolbar, toolbarTheme && toolbarTheme.mobileToolbar, {
+        [toolbarStyles.mobileToolbar_fixed]: !WixUtils.isiOS(),
+        [toolbarTheme.mobileToolbar_fixed]:
+          toolbarTheme && toolbarTheme.mobileToolbar_fixed && !WixUtils.isiOS(),
+      }),
       scrollableContainer: classNames(
         toolbarStyles.mobileToolbar_scrollableContainer,
         toolbarTheme && toolbarTheme.mobileToolbar_scrollableContainer
@@ -83,17 +94,20 @@ const getMobileTheme = theme => {
         toolbarStyles.mobileToolbar_responsiveArrowRight,
         toolbarTheme && toolbarTheme.mobileToolbar_responsiveArrowRight
       ),
-      responsiveArrowLeft_icon: classNames( //eslint-disable-line camelcase
+      //eslint-disable-next-line camelcase
+      responsiveArrowLeft_icon: classNames(
         toolbarStyles.mobileToolbar_responsiveArrowLeft_icon,
         toolbarTheme && toolbarTheme.mobileToolbar_responsiveArrowLeft_icon
       ),
-      responsiveArrowRight_icon: classNames( //eslint-disable-line camelcase
+      //eslint-disable-next-line camelcase
+      responsiveArrowRight_icon: classNames(
         toolbarStyles.mobileToolbar_responsiveArrowRight_icon,
         toolbarTheme && toolbarTheme.mobileToolbar_responsiveArrowRight_icon
       ),
     },
     buttonStyles: {
-      inlineToolbarButton_wrapper: classNames( //eslint-disable-line camelcase
+      //eslint-disable-next-line camelcase
+      inlineToolbarButton_wrapper: classNames(
         buttonStyles.mobileToolbarButton_wrapper,
         buttonTheme && buttonTheme.mobileToolbarButton_wrapper
       ),
@@ -101,7 +115,8 @@ const getMobileTheme = theme => {
         buttonStyles.mobileToolbarButton,
         buttonTheme && buttonTheme.mobileToolbarButton
       ),
-      inlineToolbarButton_icon: classNames( //eslint-disable-line camelcase
+      //eslint-disable-next-line camelcase
+      inlineToolbarButton_icon: classNames(
         buttonStyles.mobileToolbarButton_icon,
         buttonTheme && buttonTheme.mobileToolbarButton_icon
       ),
@@ -112,7 +127,7 @@ const getMobileTheme = theme => {
         separatorTheme && separatorTheme.mobileToolbarSeparator
       ),
     },
-    ...rest
+    ...rest,
   };
 };
 
@@ -126,28 +141,39 @@ const getMobileButtons = ({
   setEditorState,
   mobileTheme,
   t,
-  uiSettings
+  uiSettings,
 }) => {
   const addPluginIndex = buttons.findIndex(b => b === 'AddPlugin');
   if (addPluginIndex !== -1) {
     buttons.splice(addPluginIndex, 1);
   }
 
-  const structure = getTextButtonsFromList({ buttons, textPluginButtons, theme: mobileTheme, isMobile: true, t, uiSettings });
+  const structure = getTextButtonsFromList({
+    buttons,
+    textPluginButtons,
+    theme: mobileTheme,
+    isMobile: true,
+    t,
+    uiSettings,
+  });
 
   if (addPluginIndex !== -1) {
     const addAddPluginButton = pluginButtons && pluginButtons.length;
     if (addAddPluginButton) {
-      structure.splice(addPluginIndex, 0, decorateComponentWithProps(AddPluginButton, {
-        openModal: helpers.openModal,
-        closeModal: helpers.closeModal,
-        pluginButtons,
-        getEditorState,
-        setEditorState,
-        pubsub,
-        t,
-        theme: mobileTheme
-      }));
+      structure.splice(
+        addPluginIndex,
+        0,
+        decorateComponentWithProps(AddPluginButton, {
+          openModal: helpers.openModal,
+          closeModal: helpers.closeModal,
+          pluginButtons,
+          getEditorState,
+          setEditorState,
+          pubsub,
+          t,
+          theme: mobileTheme,
+        })
+      );
     }
   }
 

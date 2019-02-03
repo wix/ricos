@@ -1,4 +1,12 @@
-import { EditorState, RichUtils, Modifier, genKey, ContentBlock, BlockMapBuilder, SelectionState } from 'draft-js';
+import {
+  EditorState,
+  RichUtils,
+  Modifier,
+  genKey,
+  ContentBlock,
+  BlockMapBuilder,
+  SelectionState,
+} from 'draft-js';
 import { List } from 'immutable';
 
 export const hasBlockType = (blockType, editorState) => {
@@ -10,7 +18,8 @@ export const hasBlockType = (blockType, editorState) => {
   return blockType === currentBlockType;
 };
 
-export const toggleBlockType = (blockType, editorState) => RichUtils.toggleBlockType(editorState, blockType);
+export const toggleBlockType = (blockType, editorState) =>
+  RichUtils.toggleBlockType(editorState, blockType);
 
 export const toggleBlockTypeAndEnsureSpaces = (blockType, editorState) => {
   if (hasBlockType(blockType, editorState)) {
@@ -70,8 +79,12 @@ function moveTextToFirstBlock(blocks, contentState) {
 
     const withNewLine = Modifier.insertText(contentState, newLineTarget, '\n');
 
-    const sourceRange = SelectionState.createEmpty(key).set('anchorOffset', 0).set('focusOffset', block.getLength());
-    const textTarget = newLineTarget.set('anchorOffset', targetLength + 1).set('focusOffset', targetLength + 1);
+    const sourceRange = SelectionState.createEmpty(key)
+      .set('anchorOffset', 0)
+      .set('focusOffset', block.getLength());
+    const textTarget = newLineTarget
+      .set('anchorOffset', targetLength + 1)
+      .set('focusOffset', targetLength + 1);
 
     return Modifier.moveText(withNewLine, sourceRange, textTarget);
   }, contentState);

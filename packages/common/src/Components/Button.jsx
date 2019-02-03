@@ -16,7 +16,7 @@ class Button extends Component {
   };
 
   static defaultProps = {
-    type: 'primary'
+    type: 'primary',
   };
 
   constructor(props) {
@@ -27,9 +27,15 @@ class Button extends Component {
   render() {
     const { onClick, className, type, children, dataHook, ariaProps } = this.props;
     return (
-      <button {...ariaProps} data-hook={dataHook} onClick={onClick} className={classNames(this.styles[`button_${type}`], className)}>
+      <button
+        {...ariaProps}
+        data-hook={dataHook}
+        onClick={onClick}
+        className={classNames(this.styles[`button_${type}`], className)}
+      >
         {children}
-      </button>);
+      </button>
+    );
   }
 }
 

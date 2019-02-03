@@ -1,7 +1,6 @@
 /* eslint-disable max-len */
 import React from 'react';
 
-
 const TitleOneIcon = props => (
   <svg viewBox="0 0 19 19" {...props}>
     <path

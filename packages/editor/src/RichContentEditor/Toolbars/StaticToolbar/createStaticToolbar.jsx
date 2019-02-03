@@ -54,4 +54,3 @@ export default (config = {}) => {
     Toolbar: decorateComponentWithProps(StaticToolbar, toolbarProps),
   };
 };
-

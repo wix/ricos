@@ -70,7 +70,7 @@ export default ({ blockTypes, Icons, InactiveIcon = null, tooltipTextKey }) =>
         }
       }
       return nextBlockTypeIndex > -1 ? nextBlockTypeIndex : undefined;
-    }
+    };
 
     setBlockStyle = event => {
       event.preventDefault();

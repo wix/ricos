@@ -17,11 +17,18 @@ export default class AddPluginModal extends Component {
 
   render() {
     const { getEditorState, setEditorState, structure, theme } = this.props;
-    const tileClassNames = classNames(Styles.addPluginModal_tile, theme && theme.addPluginModal_tile);
+    const tileClassNames = classNames(
+      Styles.addPluginModal_tile,
+      theme && theme.addPluginModal_tile
+    );
     const placeHolderCount = getPlaceHolderCount(structure.length);
     /* eslint-disable jsx-a11y/no-noninteractive-element-to-interactive-role */
     return (
-      <ul role="toolbar" aria-label="Add Plugin" className={classNames(Styles.addPluginModal_list, theme && theme.addPluginModal_list)}>
+      <ul
+        role="toolbar"
+        aria-label="Add Plugin"
+        className={classNames(Styles.addPluginModal_list, theme && theme.addPluginModal_list)}
+      >
         {structure.map(({ component: Component }, index) => (
           <li key={index} className={tileClassNames}>
             <Component
@@ -35,9 +42,11 @@ export default class AddPluginModal extends Component {
             />
           </li>
         ))}
-        {Array(placeHolderCount).fill().map((_, i) => (
-          <li key={`empty-placeholder-${i}`} className={tileClassNames} />
-        ))}
+        {Array(placeHolderCount)
+          .fill()
+          .map((_, i) => (
+            <li key={`empty-placeholder-${i}`} className={tileClassNames} />
+          ))}
       </ul>
     );
     /* eslint-enable jsx-a11y/no-noninteractive-element-to-interactive-role */

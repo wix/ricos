@@ -1,4 +1,3 @@
-
 import wixMediaUrl from './get-wix-media-url';
 
 const getImageSrc = (src, helpers, options = {}) => {
@@ -18,7 +17,13 @@ const getImageSrc = (src, helpers, options = {}) => {
         }
       }
     } else if (src.file_name) {
-      const url = wixMediaUrl.createUrl(src, options.requiredWidth, options.requiredHeight, options.requiredQuality, options.imageType);
+      const url = wixMediaUrl.createUrl(
+        src,
+        options.requiredWidth,
+        options.requiredHeight,
+        options.requiredQuality,
+        options.imageType
+      );
       return url;
     }
   }

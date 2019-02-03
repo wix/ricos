@@ -21,7 +21,7 @@ class IframeHtml extends Component {
     this.iframe.contentWindow.postMessage(
       {
         type: 'htmlPlugin:updateContent',
-        content
+        content,
       },
       '*'
     );
@@ -36,13 +36,19 @@ class IframeHtml extends Component {
   };
 
   render() {
-    return this.state.shouldRender ? <Iframe {...omit(this.props, 'html')} iframeRef={this.setIframe} onLoad={this.handleIframeLoad} /> : null;
+    return this.state.shouldRender ? (
+      <Iframe
+        {...omit(this.props, 'html')}
+        iframeRef={this.setIframe}
+        onLoad={this.handleIframeLoad}
+      />
+    ) : null;
   }
 }
 
 IframeHtml.propTypes = {
   html: PropTypes.string.isRequired,
-  src: PropTypes.string.isRequired
+  src: PropTypes.string.isRequired,
 };
 
 export default IframeHtml;

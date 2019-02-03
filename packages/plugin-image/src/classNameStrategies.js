@@ -18,11 +18,13 @@ export const alignmentClassName = (componentData, theme, styles) => {
   return classNames(styles[`align${upperFirst(align)}`], theme[`align${upperFirst(align)}`]);
 };
 
-
 export const sizeClassName = (componentData, theme, styles) => {
   const { size } = componentData.config || {};
   if (!size) {
     return '';
   }
-  return classNames(styles[`size${upperFirst(camelCase(size))}`], theme[`size${upperFirst(camelCase(size))}`]);
+  return classNames(
+    styles[`size${upperFirst(camelCase(size))}`],
+    theme[`size${upperFirst(camelCase(size))}`]
+  );
 };

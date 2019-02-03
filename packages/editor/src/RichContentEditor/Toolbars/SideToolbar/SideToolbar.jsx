@@ -17,17 +17,17 @@ export default class SideToolbar extends Component {
     visibilityFn: PropTypes.func,
     isMobile: PropTypes.bool,
     displayOptions: PropTypes.shape({
-      displayMode: PropTypes.string
+      displayMode: PropTypes.string,
     }),
     toolbarDecorationFn: PropTypes.func,
   };
 
   static defaultProps = {
     displayOptions: {
-      displayMode: DISPLAY_MODE.NORMAL
+      displayMode: DISPLAY_MODE.NORMAL,
     },
-    toolbarDecorationFn: () => null
-  }
+    toolbarDecorationFn: () => null,
+  };
 
   constructor(props) {
     super(props);
@@ -95,7 +95,7 @@ export default class SideToolbar extends Component {
             transform: `scale(${isMobile ? 0.76 : 1})`, //mobile plus is smaller
             transition: 'transform 0.15s cubic-bezier(.3,1.2,.2,1)',
             position: 'fixed',
-            zIndex: 7
+            zIndex: 7,
           },
         });
       }
@@ -114,28 +114,23 @@ export default class SideToolbar extends Component {
     ));
   }
 
-
   render() {
     const { theme } = this.props;
     const { wrapperStyles } = theme || {};
 
     const props = {
-      className: classNames(Styles.sideToolbarWrapper, wrapperStyles && wrapperStyles.sideToolbarWrapper),
-      style: this.state.position
+      className: classNames(
+        Styles.sideToolbarWrapper,
+        wrapperStyles && wrapperStyles.sideToolbarWrapper
+      ),
+      style: this.state.position,
     };
 
     if (this.ToolbarDecoration) {
       const { ToolbarDecoration } = this;
-      return (
-        <ToolbarDecoration {...props}>
-          {this.renderToolbarContent()}
-        </ToolbarDecoration>);
+      return <ToolbarDecoration {...props}>{this.renderToolbarContent()}</ToolbarDecoration>;
     }
 
-    return (
-      <div {...props}>
-        {this.renderToolbarContent()}
-      </div>
-    );
+    return <div {...props}>{this.renderToolbarContent()}</div>;
   }
 }

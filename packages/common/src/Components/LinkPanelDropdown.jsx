@@ -13,9 +13,9 @@ function isSubString(str, subStr) {
 }
 
 function filterItems(items, str) {
-  return str ?
-    items.filter(({ value, label }) => isSubString(value, str) || isSubString(label, str)) :
-    items;
+  return str
+    ? items.filter(({ value, label }) => isSubString(value, str) || isSubString(label, str))
+    : items;
 }
 
 class ItemRenderer extends PureComponent {
@@ -39,7 +39,7 @@ class ItemRenderer extends PureComponent {
           style: {
             backgroundColor: highlightedIndex === index ? 'lightgray' : 'white',
             fontWeight: selectedItem === item ? 'bold' : 'normal',
-            ...style
+            ...style,
           },
         })}
       >
@@ -52,7 +52,7 @@ class ItemRenderer extends PureComponent {
     data: PropTypes.object,
     index: PropTypes.number,
     style: PropTypes.object,
-  }
+  };
 }
 
 export class LinkPanelDropdown extends Component {
@@ -71,22 +71,17 @@ export class LinkPanelDropdown extends Component {
       if (!this.state.selectedItem || this.state.selectedItem.value !== inputValue) {
         this.setState({ selectedItem: { value: inputValue } });
       }
-      this.setState(
-        {
-          items: filterItems(this.props.getItems(), inputValue),
-          inputValue
-        }
-      );
+      this.setState({
+        items: filterItems(this.props.getItems(), inputValue),
+        inputValue,
+      });
       this.props.onChange(inputValue);
     }
   };
 
   render() {
     const { itemToString, formatMenuItem, itemHeight, textInputProps } = this.props;
-    const {
-      selectedItem,
-      items
-    } = this.state;
+    const { selectedItem, items } = this.state;
     return (
       <Downshift
         selectedItem={selectedItem}
@@ -100,33 +95,35 @@ export class LinkPanelDropdown extends Component {
           getMenuProps,
           isOpen,
           highlightedIndex,
-          inputValue
+          inputValue,
         }) => (
           <div>
             {/*<label {...getLabelProps()}>Enter a fruit</label>*/}
             <input {...getInputProps(textInputProps)} />
-            {(isOpen || this.props.isOpen) &&
-            <List
-              className={styles.linkPanel_dropdownList}
-              style={{ borderTop: '0', position: 'absolute' }}
-              height={Math.min(items.length * itemHeight + 1, 200)}
-              itemCount={items.length}
-              itemSize={itemHeight}
-              itemData={{
-                items,
-                getItemProps,
-                highlightedIndex,
-                selectedItem,
-                formatMenuItem,
-                inputValue,
-              }}
-              {...getMenuProps()}
-            >
-              {ItemRenderer}
-            </List>}
+            {(isOpen || this.props.isOpen) && (
+              <List
+                className={styles.linkPanel_dropdownList}
+                style={{ borderTop: '0', position: 'absolute' }}
+                height={Math.min(items.length * itemHeight + 1, 200)}
+                itemCount={items.length}
+                itemSize={itemHeight}
+                itemData={{
+                  items,
+                  getItemProps,
+                  highlightedIndex,
+                  selectedItem,
+                  formatMenuItem,
+                  inputValue,
+                }}
+                {...getMenuProps()}
+              >
+                {ItemRenderer}
+              </List>
+            )}
           </div>
         )}
-      </Downshift>);
+      </Downshift>
+    );
   }
 
   static propTypes = {
@@ -139,5 +136,5 @@ export class LinkPanelDropdown extends Component {
     itemHeight: PropTypes.number,
     textInputProps: PropTypes.object,
     isOpen: PropTypes.bool,
-  }
+  };
 }

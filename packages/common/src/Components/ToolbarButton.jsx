@@ -10,15 +10,18 @@ class ToolbarButton extends Component {
     button: PropTypes.element,
     tooltipOffset: PropTypes.shape({
       x: PropTypes.number,
-      y: PropTypes.number
-    })
+      y: PropTypes.number,
+    }),
   };
-
 
   render() {
     const { theme, showTooltip, tooltipText, button, tooltipOffset } = this.props;
     if (showTooltip) {
-      return <Tooltip content={tooltipText} moveBy={tooltipOffset} theme={theme}>{button}</Tooltip>;
+      return (
+        <Tooltip content={tooltipText} moveBy={tooltipOffset} theme={theme}>
+          {button}
+        </Tooltip>
+      );
     } else {
       return button;
     }
@@ -26,4 +29,3 @@ class ToolbarButton extends Component {
 }
 
 export default ToolbarButton;
-

@@ -1,17 +1,17 @@
-@import "~wix-rich-content-common/dist/statics/styles/palette";
-@import "~wix-rich-content-common/dist/statics/styles/mixins";
+@import '~wix-rich-content-common/dist/statics/styles/palette';
+@import '~wix-rich-content-common/dist/statics/styles/mixins';
 
 .mobileToolbar {
-    position: relative;
-    border-bottom: 1px solid rgba($secondary-text-color, 0.2);
+  position: relative;
+  border-bottom: 1px solid rgba($secondary-text-color, 0.2);
 }
 
 .mobileToolbar_scrollableContainer {
 }
 
 .mobileToolbar_fixed {
-    position: fixed;
-    top: 0;
+  position: fixed;
+  top: 0;
 }
 
 .mobileToolbar_buttons {

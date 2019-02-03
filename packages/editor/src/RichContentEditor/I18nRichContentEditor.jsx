@@ -6,7 +6,6 @@ import englishResources from '../../statics/locale/messages_en.json';
 import RichContentEditor from './RichContentEditor';
 
 class I18nRichContentEditor extends PureComponent {
-
   constructor(props) {
     super(props);
     const { locale, localeResource } = props;
@@ -31,7 +30,7 @@ class I18nRichContentEditor extends PureComponent {
     });
   }
 
-  setEditorRef = editor => this.editor = editor ? editor.getWrappedInstance() : undefined;
+  setEditorRef = editor => (this.editor = editor ? editor.getWrappedInstance() : undefined);
 
   getToolbars = () => this.editor.getToolbars();
 
@@ -42,11 +41,7 @@ class I18nRichContentEditor extends PureComponent {
   render() {
     return (
       <I18nextProvider i18n={this.i18n}>
-        <RichContentEditor
-          key={this.state.key}
-          ref={this.setEditorRef}
-          {...this.props}
-        />
+        <RichContentEditor key={this.state.key} ref={this.setEditorRef} {...this.props} />
       </I18nextProvider>
     );
   }
@@ -55,12 +50,12 @@ class I18nRichContentEditor extends PureComponent {
 I18nRichContentEditor.propTypes = {
   locale: PropTypes.string,
   localeResource: PropTypes.object,
-  helpers: PropTypes.object
+  helpers: PropTypes.object,
 };
 
 I18nRichContentEditor.defaultProps = {
   locale: 'en',
-  localeResource: englishResources
+  localeResource: englishResources,
 };
 
 export default I18nRichContentEditor;

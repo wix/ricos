@@ -18,14 +18,23 @@ function defaultDataMapper(item) {
 }
 
 function defaultRenderItem({ option, selected }) {
-  return option && option.value && (
-    <SelectionListOption selected={selected} value={option.value} theme={{}} data-hook={option.value} onChange={() => { }}>
-      {option.value}
-    </SelectionListOption>);
+  return (
+    option &&
+    option.value && (
+      <SelectionListOption
+        selected={selected}
+        value={option.value}
+        theme={{}}
+        data-hook={option.value}
+        onChange={() => {}}
+      >
+        {option.value}
+      </SelectionListOption>
+    )
+  );
 }
 
 class SelectionList extends Component {
-
   constructor(props) {
     super(props);
     this.styles = mergeStyles({ styles, theme: props.theme });
@@ -47,7 +56,7 @@ class SelectionList extends Component {
   static defaultProps = {
     dataMapper: defaultDataMapper,
     renderItem: defaultRenderItem,
-    readOnly: false
+    readOnly: false,
   };
 
   mapItemToOptionData(item) {
@@ -55,7 +64,7 @@ class SelectionList extends Component {
     return {
       item,
       option,
-      selected: option.value === this.props.value
+      selected: option.value === this.props.value,
     };
   }
 
@@ -91,23 +100,44 @@ class SelectionList extends Component {
   }
 
   render() {
-    const { dataSource, className, onChange, renderItem, theme, optionClassName, readOnly } = this.props;
+    const {
+      dataSource,
+      className,
+      onChange,
+      renderItem,
+      theme,
+      optionClassName,
+      readOnly,
+    } = this.props;
     return (
       <div
-        ref={el => this.ref = el} className={classnames(styles.selectionList, className)}
-        role={'listbox'} aria-disabled={readOnly} aria-orientation={'horizontal'}
+        ref={el => (this.ref = el)}
+        className={classnames(styles.selectionList, className)}
+        role={'listbox'}
+        aria-disabled={readOnly}
+        aria-orientation={'horizontal'}
       >
-        {dataSource.map(item => this.mapItemToOptionData(item))
+        {dataSource
+          .map(item => this.mapItemToOptionData(item))
           .map(({ item, option, selected }, i) => (
             <SelectionListOption
-              tabIndex={(i === 0 && !readOnly) ? 0 : -1} selected={selected} focused={i === this.state.focusIndex}
-              dataHook={item.dataHook} onChange={onChange} key={i} theme={theme} value={option.value} optionClassName={optionClassName}
-              onKeyDown={e => this.onKeyDown(e)} readOnly={readOnly}
+              tabIndex={i === 0 && !readOnly ? 0 : -1}
+              selected={selected}
+              focused={i === this.state.focusIndex}
+              dataHook={item.dataHook}
+              onChange={onChange}
+              key={i}
+              theme={theme}
+              value={option.value}
+              optionClassName={optionClassName}
+              onKeyDown={e => this.onKeyDown(e)}
+              readOnly={readOnly}
             >
               {renderItem({ item, option, selected })}
-            </SelectionListOption>)
-          )}
-      </div>);
+            </SelectionListOption>
+          ))}
+      </div>
+    );
   }
 }
 
@@ -138,18 +168,37 @@ class SelectionListOption extends Component {
   }
 
   render() {
-    const { selected, onChange, children, value, optionClassName, dataHook, tabIndex, onKeyDown, readOnly } = this.props;
+    const {
+      selected,
+      onChange,
+      children,
+      value,
+      optionClassName,
+      dataHook,
+      tabIndex,
+      onKeyDown,
+      readOnly,
+    } = this.props;
 
     return (
       <div
-        tabIndex={tabIndex} role={'option'} aria-selected={selected} aria-disabled={readOnly}
-        ref={el => this.ref = el} onKeyDown={e => onKeyDown(e)}
-        className={classnames(this.styles.selectionListOption,
-          { [this.styles.selectionListOption_selected]: selected }, optionClassName)}
-        data-hook={dataHook} onClick={() => onChange(value)}
+        tabIndex={tabIndex}
+        role={'option'}
+        aria-selected={selected}
+        aria-disabled={readOnly}
+        ref={el => (this.ref = el)}
+        onKeyDown={e => onKeyDown(e)}
+        className={classnames(
+          this.styles.selectionListOption,
+          { [this.styles.selectionListOption_selected]: selected },
+          optionClassName
+        )}
+        data-hook={dataHook}
+        onClick={() => onChange(value)}
       >
         {children}
-      </div>);
+      </div>
+    );
   }
 }
 

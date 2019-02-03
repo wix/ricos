@@ -8,7 +8,6 @@ import schema from '../statics/data-schema.json';
 import styles from '../statics/link-viewer.scss';
 
 class LinkViewer extends Component {
-
   static propTypes = {
     componentData: PropTypes.object.isRequired,
     theme: PropTypes.object,
@@ -45,8 +44,8 @@ class LinkViewer extends Component {
     const { target, rel } = componentData;
     const anchorProps = {
       href: this.getHref(),
-      target: target ? target : (anchorTarget || '_self'),
-      rel: rel ? rel : (relValue || 'noopener'),
+      target: target ? target : anchorTarget || '_self',
+      rel: rel ? rel : relValue || 'noopener',
       className: classNames(styles.link, className),
       onClick: this.handleClick,
     };

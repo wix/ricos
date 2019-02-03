@@ -3,37 +3,39 @@ import PropTypes from 'prop-types';
 import { ImageViewer, getDefault } from './image-viewer';
 import { sizeClassName, alignmentClassName } from './classNameStrategies';
 
-const EMPTY_SMALL_PLACEHOLDER = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
+const EMPTY_SMALL_PLACEHOLDER =
+  'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
 
 class ImageComponent extends React.Component {
+  static alignmentClassName = (componentData, theme, styles) =>
+    alignmentClassName(componentData, theme, styles);
 
-    static alignmentClassName = (componentData, theme, styles) => alignmentClassName(componentData, theme, styles);
+  static sizeClassName = (componentData, theme, styles) =>
+    sizeClassName(componentData, theme, styles);
 
-    static sizeClassName = (componentData, theme, styles) => sizeClassName(componentData, theme, styles);
+  constructor(props) {
+    super(props);
+    this.state = Object.assign({ isMounted: false }, this.stateFromProps(props));
 
-    constructor(props) {
-      super(props);
-      this.state = Object.assign({ isMounted: false }, this.stateFromProps(props));
-
-      const { block, store } = this.props;
-      if (store) {
-        const blockKey = block.getKey();
-        store.setBlockHandler('handleFilesSelected', blockKey, this.handleFilesSelected.bind(this));
-        store.setBlockHandler('handleFilesAdded', blockKey, this.handleFilesAdded.bind(this));
-      }
+    const { block, store } = this.props;
+    if (store) {
+      const blockKey = block.getKey();
+      store.setBlockHandler('handleFilesSelected', blockKey, this.handleFilesSelected.bind(this));
+      store.setBlockHandler('handleFilesAdded', blockKey, this.handleFilesAdded.bind(this));
     }
+  }
 
-    componentDidMount() {
-      this.state.isMounted = true; //eslint-disable-line react/no-direct-mutation-state
-    }
+  componentDidMount() {
+    this.state.isMounted = true; //eslint-disable-line react/no-direct-mutation-state
+  }
 
-    componentWillUnmount() {
-      this.state.isMounted = false; //eslint-disable-line react/no-direct-mutation-state
-    }
+  componentWillUnmount() {
+    this.state.isMounted = false; //eslint-disable-line react/no-direct-mutation-state
+  }
 
-    componentWillReceiveProps(nextProps) {
-      this.setState(this.stateFromProps(nextProps));
-    }
+  componentWillReceiveProps(nextProps) {
+    this.setState(this.stateFromProps(nextProps));
+  }
 
   stateFromProps = props => {
     const componentState = props.componentState || {};
@@ -89,7 +91,9 @@ class ImageComponent extends React.Component {
     const { helpers } = this.props;
     const hasFileChangeHelper = helpers && helpers.onFilesChange;
     if (hasFileChangeHelper && fileList.length > 0) {
-      helpers.onFilesChange(fileList[0], ({ data, error }) => this.handleFilesAdded({ data, error }));
+      helpers.onFilesChange(fileList[0], ({ data, error }) =>
+        this.handleFilesAdded({ data, error })
+      );
     } else {
       this.resetLoadingState({ msg: 'Missing upload function' });
     }
@@ -158,7 +162,7 @@ ImageComponent.propTypes = {
   helpers: PropTypes.object.isRequired,
   isMobile: PropTypes.bool,
   settings: PropTypes.object,
-  t: PropTypes.func
+  t: PropTypes.func,
 };
 
 export { ImageComponent as Component, getDefault };

@@ -26,7 +26,7 @@ export default ({ t, anchorTarget, relValue, uiSettings }) => {
       t,
       mobile: true,
       tooltipTextKey: 'SettingsButton_Tooltip',
-      uiSettings
+      uiSettings,
     },
     {
       keyName: 'replace',

@@ -18,17 +18,15 @@ import buttonStyles from '../../statics/styles/plugin-toolbar-button.scss';
 
 const toolbarOffset = 12;
 
-const getInitialState = () => (
-  {
-    position: { transform: 'translate(-50%) scale(0)' },
-    showLeftArrow: false,
-    showRightArrow: false,
-    componentData: {},
-    componentState: {},
-    overrideContent: undefined,
-    tabIndex: -1
-  }
-);
+const getInitialState = () => ({
+  position: { transform: 'translate(-50%) scale(0)' },
+  showLeftArrow: false,
+  showRightArrow: false,
+  componentData: {},
+  componentState: {},
+  overrideContent: undefined,
+  tabIndex: -1,
+});
 
 export default function createToolbar({
   buttons,
@@ -41,7 +39,7 @@ export default function createToolbar({
   t,
   name,
   uiSettings,
-  getToolbarSettings = () => []
+  getToolbarSettings = () => [],
 }) {
   class BaseToolbar extends Component {
     constructor(props) {
@@ -51,18 +49,48 @@ export default function createToolbar({
       const visibleButtons = all.filter(({ keyName }) => !hidden.includes(keyName));
 
       const defaultSettings = getDefaultToolbarSettings({ pluginButtons: visibleButtons });
-      const customSettings = getToolbarSettings({ pluginButtons: visibleButtons }).filter(({ name }) => name === TOOLBARS.PLUGIN);
-      const toolbarSettings = mergeToolbarSettings({ defaultSettings, customSettings })
-        .filter(({ name }) => name === TOOLBARS.PLUGIN)[0];
+      const customSettings = getToolbarSettings({ pluginButtons: visibleButtons }).filter(
+        ({ name }) => name === TOOLBARS.PLUGIN
+      );
+      const toolbarSettings = mergeToolbarSettings({ defaultSettings, customSettings }).filter(
+        ({ name }) => name === TOOLBARS.PLUGIN
+      )[0];
 
-      const { shouldCreate, getPositionOffset, getButtons, getVisibilityFn, getDisplayOptions, getToolbarDecorationFn } = toolbarSettings;
+      const {
+        shouldCreate,
+        getPositionOffset,
+        getButtons,
+        getVisibilityFn,
+        getDisplayOptions,
+        getToolbarDecorationFn,
+      } = toolbarSettings;
 
       this.structure = getConfigByFormFactor({ config: getButtons(), isMobile, defaultValue: [] });
-      this.offset = getConfigByFormFactor({ config: getPositionOffset(), isMobile, defaultValue: { x: 0, y: 0 } });
-      this.shouldCreate = getConfigByFormFactor({ config: shouldCreate(), isMobile, defaultValue: true });
-      this.visibilityFn = getConfigByFormFactor({ config: getVisibilityFn(), isMobile, defaultValue: () => true });
-      this.displayOptions = getConfigByFormFactor({ config: getDisplayOptions(), isMobile, defaultValue: { displayMode: DISPLAY_MODE.NORMAL } });
-      const toolbarDecorationFn = getConfigByFormFactor({ config: getToolbarDecorationFn(), isMobile, defaultValue: () => null });
+      this.offset = getConfigByFormFactor({
+        config: getPositionOffset(),
+        isMobile,
+        defaultValue: { x: 0, y: 0 },
+      });
+      this.shouldCreate = getConfigByFormFactor({
+        config: shouldCreate(),
+        isMobile,
+        defaultValue: true,
+      });
+      this.visibilityFn = getConfigByFormFactor({
+        config: getVisibilityFn(),
+        isMobile,
+        defaultValue: () => true,
+      });
+      this.displayOptions = getConfigByFormFactor({
+        config: getDisplayOptions(),
+        isMobile,
+        defaultValue: { displayMode: DISPLAY_MODE.NORMAL },
+      });
+      const toolbarDecorationFn = getConfigByFormFactor({
+        config: getToolbarDecorationFn(),
+        isMobile,
+        defaultValue: () => null,
+      });
       this.ToolbarDecoration = toolbarDecorationFn();
 
       this.state = getInitialState();
@@ -75,7 +103,10 @@ export default function createToolbar({
       pubsub.subscribe('componentAlignment', this.onComponentAlignmentChange);
       pubsub.subscribe('componentSize', this.onComponentSizeChange);
       pubsub.subscribe('componentTextWrap', this.onComponentTextWrapChange);
-      this.unsubscribeOnBlock = pubsub.subscribeOnBlock({ key: 'componentLink', callback: this.onComponentLinkChange });
+      this.unsubscribeOnBlock = pubsub.subscribeOnBlock({
+        key: 'componentLink',
+        callback: this.onComponentLinkChange,
+      });
       pubsub.subscribe('editorBounds', this.onEditorBoundsChange);
     }
 
@@ -108,16 +139,22 @@ export default function createToolbar({
 
     onComponentLinkChange = linkData => {
       const { url, targetBlank, nofollow } = linkData || {};
-      const link = url ? {
-        url,
-        target: targetBlank ? '_blank' : (anchorTarget || '_self'),
-        rel: nofollow ? 'nofollow' : (relValue || 'noopener')
-      } : null;
+      const link = url
+        ? {
+            url,
+            target: targetBlank ? '_blank' : anchorTarget || '_self',
+            rel: nofollow ? 'nofollow' : relValue || 'noopener',
+          }
+        : null;
 
       pubsub.update('componentData', { config: { link } });
     };
 
-    setLayoutProps = ({ alignment: componentAlignment, size: componentSize, textWrap: componentTextWrap }) => {
+    setLayoutProps = ({
+      alignment: componentAlignment,
+      size: componentSize,
+      textWrap: componentTextWrap,
+    }) => {
       pubsub.set(pickBy({ componentAlignment, componentSize, componentTextWrap }));
     };
 
@@ -184,7 +221,7 @@ export default function createToolbar({
           left: this.offset.x,
           transform: 'translate(-50%) scale(1)',
           position: 'fixed',
-          zIndex: 7
+          zIndex: 7,
         };
       }
 
@@ -194,14 +231,16 @@ export default function createToolbar({
         position,
         componentData,
         componentState,
-        tabIndex: 0
+        tabIndex: 0,
       });
     };
 
     scrollToolbar(event, leftDirection) {
       event.preventDefault();
       const { clientWidth, scrollWidth } = this.scrollContainer;
-      this.scrollContainer.scrollLeft = leftDirection ? 0 : Math.min(this.scrollContainer.scrollLeft + clientWidth, scrollWidth);
+      this.scrollContainer.scrollLeft = leftDirection
+        ? 0
+        : Math.min(this.scrollContainer.scrollLeft + clientWidth, scrollWidth);
     }
 
     renderButton = (button, key, themedStyle, separatorClassNames, tabIndex) => {
@@ -264,9 +303,7 @@ export default function createToolbar({
         case BUTTONS.SEPARATOR:
           return <Separator className={separatorClassNames} key={key} />;
         case BUTTONS.HORIZONTAL_SEPARATOR:
-          return (
-            <Separator className={separatorClassNames} horizontal key={key} />
-          );
+          return <Separator className={separatorClassNames} horizontal key={key} />;
         case BUTTONS.LINK:
           return (
             <BlockLinkButton
@@ -324,7 +361,7 @@ export default function createToolbar({
       }
       return {
         ...button,
-        ...button.mapComponentDataToButtonProps(componentData)
+        ...button.mapComponentDataToButtonProps(componentData),
       };
     };
 
@@ -334,17 +371,18 @@ export default function createToolbar({
       }
       return {
         ...button,
-        ...button.mapStoreDataToButtonProps({ store, componentData })
+        ...button.mapStoreDataToButtonProps({ store, componentData }),
       };
     };
 
     setToolbarScrollButton = (scrollLeft, scrollWidth, clientWidth) => {
-      const currentScrollButtonWidth = this.state.showLeftArrow || this.state.showRightArrow ? 20 : 0;
+      const currentScrollButtonWidth =
+        this.state.showLeftArrow || this.state.showRightArrow ? 20 : 0;
       const isScroll = scrollWidth - clientWidth - currentScrollButtonWidth > 8;
 
       this.setState({
         showLeftArrow: isScroll && scrollLeft === scrollWidth - clientWidth,
-        showRightArrow: isScroll && scrollLeft < scrollWidth - clientWidth
+        showRightArrow: isScroll && scrollLeft < scrollWidth - clientWidth,
       });
     };
 
@@ -365,7 +403,10 @@ export default function createToolbar({
       const { PanelContent, keyName } = inlinePanel || {};
 
       return inlinePanel ? (
-        <div className={toolbarStyles.pluginToolbar_inlinePanel} data-hook="baseToolbar_InlinePanel">
+        <div
+          className={toolbarStyles.pluginToolbar_inlinePanel}
+          data-hook="baseToolbar_InlinePanel"
+        >
           <PanelContent
             key={keyName}
             theme={theme}
@@ -402,59 +443,111 @@ export default function createToolbar({
     }
 
     renderToolbarContent() {
-      const { showLeftArrow, showRightArrow, overrideContent: OverrideContent, tabIndex } = this.state;
+      const {
+        showLeftArrow,
+        showRightArrow,
+        overrideContent: OverrideContent,
+        tabIndex,
+      } = this.state;
       const hasArrow = showLeftArrow || showRightArrow;
       const { toolbarStyles: toolbarTheme } = theme || {};
       const { buttonStyles: buttonTheme, separatorStyles: separatorTheme } = theme || {};
-      const scrollableContainerClasses = classNames(toolbarStyles.pluginToolbar_scrollableContainer,
-        toolbarTheme && toolbarTheme.pluginToolbar_scrollableContainer);
-      const buttonContainerClassnames = classNames(toolbarStyles.pluginToolbar_buttons, toolbarTheme && toolbarTheme.pluginToolbar_buttons, {
-        [toolbarStyles.pluginToolbar_overrideContent]: !!OverrideContent,
-        [toolbarTheme.pluginToolbar_overrideContent]: !!OverrideContent,
-      });
+      const scrollableContainerClasses = classNames(
+        toolbarStyles.pluginToolbar_scrollableContainer,
+        toolbarTheme && toolbarTheme.pluginToolbar_scrollableContainer
+      );
+      const buttonContainerClassnames = classNames(
+        toolbarStyles.pluginToolbar_buttons,
+        toolbarTheme && toolbarTheme.pluginToolbar_buttons,
+        {
+          [toolbarStyles.pluginToolbar_overrideContent]: !!OverrideContent,
+          [toolbarTheme.pluginToolbar_overrideContent]: !!OverrideContent,
+        }
+      );
       const themedButtonStyle = {
-        buttonWrapper: classNames(buttonStyles.pluginToolbarButton_wrapper, buttonTheme && buttonTheme.pluginToolbarButton_wrapper),
-        button: classNames(buttonStyles.pluginToolbarButton, buttonTheme && buttonTheme.pluginToolbarButton),
-        icon: classNames(buttonStyles.pluginToolbarButton_icon, buttonTheme && buttonTheme.pluginToolbarButton_icon),
-        active: classNames(buttonStyles.pluginToolbarButton_active, buttonTheme && buttonTheme.pluginToolbarButton_active),
-        disabled: classNames(buttonStyles.pluginToolbarButton_disabled, buttonTheme && buttonTheme.pluginToolbarButton_disabled),
-        ...theme
+        buttonWrapper: classNames(
+          buttonStyles.pluginToolbarButton_wrapper,
+          buttonTheme && buttonTheme.pluginToolbarButton_wrapper
+        ),
+        button: classNames(
+          buttonStyles.pluginToolbarButton,
+          buttonTheme && buttonTheme.pluginToolbarButton
+        ),
+        icon: classNames(
+          buttonStyles.pluginToolbarButton_icon,
+          buttonTheme && buttonTheme.pluginToolbarButton_icon
+        ),
+        active: classNames(
+          buttonStyles.pluginToolbarButton_active,
+          buttonTheme && buttonTheme.pluginToolbarButton_active
+        ),
+        disabled: classNames(
+          buttonStyles.pluginToolbarButton_disabled,
+          buttonTheme && buttonTheme.pluginToolbarButton_disabled
+        ),
+        ...theme,
       };
 
-      const arrowClassNames = classNames(toolbarStyles.pluginToolbar_responsiveArrow, toolbarTheme && toolbarTheme.pluginToolbar_responsiveArrow);
-      const leftArrowIconClassNames = classNames(toolbarStyles.pluginToolbar_responsiveArrowLeft_icon,
-        toolbarTheme && toolbarTheme.responsiveArrowLeft_icon);
-      const rightArrowIconClassNames = classNames(toolbarStyles.pluginToolbar_responsiveArrowRight_icon,
-        toolbarTheme && toolbarTheme.responsiveArrowRight_icon);
-      const separatorClassNames = classNames(toolbarStyles.pluginToolbarSeparator, separatorTheme && separatorTheme.pluginToolbarSeparator);
+      const arrowClassNames = classNames(
+        toolbarStyles.pluginToolbar_responsiveArrow,
+        toolbarTheme && toolbarTheme.pluginToolbar_responsiveArrow
+      );
+      const leftArrowIconClassNames = classNames(
+        toolbarStyles.pluginToolbar_responsiveArrowLeft_icon,
+        toolbarTheme && toolbarTheme.responsiveArrowLeft_icon
+      );
+      const rightArrowIconClassNames = classNames(
+        toolbarStyles.pluginToolbar_responsiveArrowRight_icon,
+        toolbarTheme && toolbarTheme.responsiveArrowRight_icon
+      );
+      const separatorClassNames = classNames(
+        toolbarStyles.pluginToolbarSeparator,
+        separatorTheme && separatorTheme.pluginToolbarSeparator
+      );
       const overrideProps = { onOverrideContent: this.onOverrideContent };
 
       return (
         <div className={buttonContainerClassnames}>
           <Measure
-            client scroll innerRef={ref => this.scrollContainer = ref}
-            onResize={({ scroll, client }) => this.setToolbarScrollButton(scroll.left, scroll.width, client.width)}
+            client
+            scroll
+            innerRef={ref => (this.scrollContainer = ref)}
+            onResize={({ scroll, client }) =>
+              this.setToolbarScrollButton(scroll.left, scroll.width, client.width)
+            }
           >
             {({ measure, measureRef }) => (
-              <div className={scrollableContainerClasses} ref={measureRef} onScroll={() => measure()}>
-                {OverrideContent ?
-                  <OverrideContent {...overrideProps} /> :
-                  this.structure.map((button, index) => (
-                    this.renderButton(button, index, themedButtonStyle, separatorClassNames, tabIndex)
-                  ))
-                }
-              </div>)}
+              <div
+                className={scrollableContainerClasses}
+                ref={measureRef}
+                onScroll={() => measure()}
+              >
+                {OverrideContent ? (
+                  <OverrideContent {...overrideProps} />
+                ) : (
+                  this.structure.map((button, index) =>
+                    this.renderButton(
+                      button,
+                      index,
+                      themedButtonStyle,
+                      separatorClassNames,
+                      tabIndex
+                    )
+                  )
+                )}
+              </div>
+            )}
           </Measure>
-          {
-            hasArrow &&
+          {hasArrow && (
             <button
               tabIndex={tabIndex}
               className={arrowClassNames}
-              data-hook="pluginToolbarRightArrow" onMouseDown={e => this.scrollToolbar(e, showLeftArrow)}
+              data-hook="pluginToolbarRightArrow"
+              onMouseDown={e => this.scrollToolbar(e, showLeftArrow)}
             >
               <i className={showLeftArrow ? leftArrowIconClassNames : rightArrowIconClassNames} />
             </button>
-          }
+          )}
         </div>
       );
     }
@@ -468,11 +561,13 @@ export default function createToolbar({
 
       // TODO: visibilityFn params?
       if (this.visibilityFn()) {
-
         const props = {
           style: this.state.position,
-          className: classNames(toolbarStyles.pluginToolbar, toolbarTheme && toolbarTheme.pluginToolbar),
-          'data-hook': name ? `${name}PluginToolbar` : null
+          className: classNames(
+            toolbarStyles.pluginToolbar,
+            toolbarTheme && toolbarTheme.pluginToolbar
+          ),
+          'data-hook': name ? `${name}PluginToolbar` : null,
         };
 
         if (this.ToolbarDecoration) {
@@ -482,7 +577,8 @@ export default function createToolbar({
               {this.renderToolbarContent()}
               {this.renderInlinePanel()}
               {this.renderPanel()}
-            </ToolbarDecoration>);
+            </ToolbarDecoration>
+          );
         }
 
         return (
@@ -496,7 +592,6 @@ export default function createToolbar({
         return null;
       }
     }
-
   }
   return BaseToolbar;
 }

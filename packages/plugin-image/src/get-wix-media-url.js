@@ -1,5 +1,6 @@
 import imageClientAPI from 'image-client-api';
 
+const WIX_STATIC_URL = 'https://static.wixstatic.com';
 class WixMediaUrl {
   constructor() {
     // default small quality for performance (should get exact size after first render and then the right quality)
@@ -23,19 +24,26 @@ class WixMediaUrl {
     return this.createHiResUrl(src, rw, rh, rq);
   };
 
-  createHiResUrl = ({ file_name: fileName, width: w, height: h } = {},
-    rw = this.DEFAULT_SIZE, rh = this.DEFAULT_SIZE, rq = this.DEFAULT_QUALITY) =>
+  createHiResUrl = (
+    { file_name: fileName, width: w, height: h } = {},
+    rw = this.DEFAULT_SIZE,
+    rh = this.DEFAULT_SIZE,
+    rq = this.DEFAULT_QUALITY
+  ) =>
     fileName ? imageClientAPI.getScaleToFitImageURL(fileName, w, h, rw, rh, { quality: rq }) : '';
 
-  createPreloadUrl = ({ file_name: fileName, width: w, height: h } = {},
-    rw = this.DEFAULT_SIZE, rh = this.DEFAULT_SIZE, rq = this.DEFAULT_QUALITY
+  createPreloadUrl = (
+    { file_name: fileName, width: w, height: h } = {},
+    rw = this.DEFAULT_SIZE,
+    rh = this.DEFAULT_SIZE,
+    rq = this.DEFAULT_QUALITY
   ) => {
     if (fileName) {
       const { width, height } = this.resize(w, h, rw, rh);
       const H = Math.ceil(height); //make sure no sterching will occur
       const W = Math.ceil(width);
       const format = this.getImageFormat(fileName);
-      return `https://static.wixstatic.com/media/${fileName}/v1/fit/w_${W},h_${H},al_c,q_${rq}/file${format}`;
+      return `${WIX_STATIC_URL}/media/${fileName}/v1/fit/w_${W},h_${H},al_c,q_${rq}/file${format}`;
     }
     return '';
   };

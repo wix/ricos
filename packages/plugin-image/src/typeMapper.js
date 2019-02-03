@@ -6,11 +6,11 @@ const imageRenderDescriptor = {
   component: ImageViewer,
   classNameStrategies: {
     size: sizeClassName,
-    alignment: alignmentClassName
-  }
+    alignment: alignmentClassName,
+  },
 };
 
 export const typeMapper = () => ({
   [IMAGE_TYPE_LEGACY]: imageRenderDescriptor,
-  [IMAGE_TYPE]: imageRenderDescriptor
+  [IMAGE_TYPE]: imageRenderDescriptor,
 });

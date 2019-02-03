@@ -20,7 +20,14 @@ export default config => {
     toolbarDecorationFn,
   } = config;
 
-  const structure = getTextButtonsFromList({ buttons, textPluginButtons, pubsub, theme, t, uiSettings });
+  const structure = getTextButtonsFromList({
+    buttons,
+    textPluginButtons,
+    pubsub,
+    theme,
+    t,
+    uiSettings,
+  });
 
   return createInlineToolbar({
     name: 'InlineTextToolbar',

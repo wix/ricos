@@ -8,7 +8,6 @@ import Tooltip from './Tooltip';
 import textInputStyles from '../../statics/styles/text-input.scss';
 
 class TextInput extends React.Component {
-
   render() {
     const { inputRef, error, theme, ...otherProps } = this.props;
     const styles = mergeStyles({ styles: textInputStyles, theme });
@@ -16,14 +15,22 @@ class TextInput extends React.Component {
       <div className={styles.textInput}>
         <input
           ref={inputRef}
-          className={classNames(styles.textInput_input, { [styles.textInput_input_invalid]: error })}
+          className={classNames(styles.textInput_input, {
+            [styles.textInput_input_invalid]: error,
+          })}
           {...otherProps}
         />
-        {error &&
-        <Tooltip shouldRebuildOnUpdate={() => !!error} content={error} theme={theme} moveBy={{ y: 0 }} type={'error'}>
-          <ErrorIcon className={styles.textInput_errorIcon} />
-        </Tooltip>
-        }
+        {error && (
+          <Tooltip
+            shouldRebuildOnUpdate={() => !!error}
+            content={error}
+            theme={theme}
+            moveBy={{ y: 0 }}
+            type={'error'}
+          >
+            <ErrorIcon className={styles.textInput_errorIcon} />
+          </Tooltip>
+        )}
       </div>
     );
   }

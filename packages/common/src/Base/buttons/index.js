@@ -20,7 +20,7 @@ import {
   AlignRightIcon,
   WidthIcon,
   HeightIcon,
-  TrashIcon
+  TrashIcon,
 } from '../../Icons';
 
 export { BUTTONS };
