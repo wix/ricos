@@ -41,18 +41,16 @@ const plugins = [
   }),
   commonjs({
     namedExports: {
-      '../../node_modules/image-client-api/dist/imageClientSDK.js': [...NAMED_EXPORTS.imageClientAPI],
+      '../../node_modules/image-client-api/dist/imageClientSDK.js': [
+        ...NAMED_EXPORTS.imageClientAPI,
+      ],
       'node_modules/image-client-api/dist/imageClientSDK.js': [...NAMED_EXPORTS.imageClientAPI],
       '../../node_modules/immutable/dist/immutable.js': [...NAMED_EXPORTS.immutable],
       'node_modules/immutable/dist/immutable.js': [...NAMED_EXPORTS.immutable],
     },
   }),
   json({
-    include: [
-      'statics/**',
-      'node_modules/**',
-      '../../node_modules/**',
-    ],
+    include: ['statics/**', 'node_modules/**', '../../node_modules/**'],
   }),
   postcss({
     minimize: {
@@ -106,7 +104,7 @@ const external = id =>
   !id.startsWith('\0') &&
   !id.startsWith('.') &&
   !id.startsWith('/') &&
-  !excludedExternals.find(regex => typeof regex === 'string' ? regex === id : regex.test(id)) &&
+  !excludedExternals.find(regex => (typeof regex === 'string' ? regex === id : regex.test(id))) &&
   !!externals.find(externalName => new RegExp(externalName).test(id));
 
 let output = [
@@ -127,7 +125,9 @@ let output = [
     globals: id => {
       const isExcluded = excludedGlobals.find(p => p === id);
       if (!isExcluded) {
-        const globalKey = Object.keys(globals).find(externalName => externalName === id || new RegExp(externalName + '\/').test(id));
+        const globalKey = Object.keys(globals).find(
+          externalName => externalName === id || new RegExp(externalName + '/').test(id)
+        );
         if (globalKey) {
           return globals[globalKey];
         }
@@ -176,6 +176,5 @@ const config = [editorEntry];
 if (viewerEntry) {
   config.push(viewerEntry);
 }
-
 
 export default config;

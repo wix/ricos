@@ -17,7 +17,7 @@ export const excludedExternals = [
   /react-click-outside/,
   '@wix/draft-js/lib/DraftOffsetKey',
   '@wix/draft-js/lib/isSoftNewlineEvent',
-  /wix-rich-content-common\/.*?\.scss/
+  /wix-rich-content-common\/.*?\.scss/,
 ];
 
 export const globals = {
@@ -65,7 +65,7 @@ export const globals = {
   'react-player': 'ReactPlayer',
   'react-sortable-hoc': 'reactSortableHoc',
   'react-tooltip': 'ReactTooltip',
-  'wix-rich-content-common': 'WixRichContentCommon'
+  'wix-rich-content-common': 'WixRichContentCommon',
 };
 
 export const excludedGlobals = [
