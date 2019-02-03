@@ -69,9 +69,25 @@ const getStaticTextTheme = theme => {
   };
 };
 
-export default ({ buttons, textPluginButtons, pubsub, theme, isMobile, helpers, anchorTarget, relValue, t, refId, offset, visibilityFn }) => {
+export default ({
+  buttons,
+  textPluginButtons,
+  pubsub,
+  theme,
+  isMobile,
+  helpers,
+  anchorTarget,
+  relValue,
+  t,
+  refId,
+  offset,
+  visibilityFn,
+  displayOptions,
+  uiSettings,
+  toolbarDecorationFn,
+}) => {
   const staticTextTheme = getStaticTextTheme(theme);
-  const structure = getTextButtonsFromList({ buttons, textPluginButtons, pubsub, theme: staticTextTheme, t });
+  const structure = getTextButtonsFromList({ buttons, textPluginButtons, pubsub, theme: staticTextTheme, t, uiSettings });
   const id = getStaticTextToolbarId(refId);
 
   return createStaticToolbar({
@@ -87,6 +103,9 @@ export default ({ buttons, textPluginButtons, pubsub, theme, isMobile, helpers, 
     t,
     id,
     offset,
-    visibilityFn
+    visibilityFn,
+    displayOptions,
+    uiSettings,
+    toolbarDecorationFn,
   });
 };

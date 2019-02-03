@@ -20,7 +20,6 @@ const getDefault = () => ({
 });
 
 class ImageViewer extends React.Component {
-
   constructor(props) {
     super(props);
     validate(props.componentData, schema);
@@ -46,7 +45,7 @@ class ImageViewer extends React.Component {
 
     const imageUrl = {
       preload: '',
-      highres: ''
+      highres: '',
     };
 
     if (this.props.dataUrl) {
@@ -57,16 +56,21 @@ class ImageViewer extends React.Component {
         const { width } = this.state.container.getBoundingClientRect();
         let requiredWidth = width || src.width || 1;
         if (this.props.isMobile) {
-        //adjust the image width to viewport scaling and device pixel ratio
+          //adjust the image width to viewport scaling and device pixel ratio
           requiredWidth *= (window && window.devicePixelRatio) || 1;
-          requiredWidth *= (window && (window.screen.width / document.body.clientWidth)) || 1;
+          requiredWidth *= (window && window.screen.width / document.body.clientWidth) || 1;
         }
         //keep the image's original ratio
-        let requiredHeight = (src.height && src.width) ? Math.ceil((src.height / src.width) * requiredWidth) : 2048;
+        let requiredHeight = src.height && src.width ? Math.ceil((src.height / src.width) * requiredWidth) : 2048;
         requiredWidth = Math.ceil(requiredWidth);
         requiredHeight = Math.ceil(requiredHeight);
 
-        imageUrl.highres = getImageSrc(src, helpers, { requiredWidth, requiredHeight, requiredQuality: 90, imageType: 'highRes' });
+        imageUrl.highres = getImageSrc(src, helpers, {
+          requiredWidth,
+          requiredHeight,
+          requiredQuality: 90,
+          imageType: 'highRes',
+        });
       }
     }
 
@@ -85,13 +89,20 @@ class ImageViewer extends React.Component {
   renderImage(imageClassName, imageSrc, alt, props) {
     return [
       <img
-        key="preload" ref={ref => this.preloadImage = ref}
-        className={classNames(imageClassName, this.styles.imagePreload)} src={imageSrc.preload} alt={alt}
+        key='preload'
+        ref={ref => (this.preloadImage = ref)}
+        className={classNames(imageClassName, this.styles.imagePreload)}
+        src={imageSrc.preload}
+        alt={alt}
       />,
       <img
-        {...props} key="highres" className={classNames(imageClassName, this.styles.imageHighres)} src={imageSrc.highres} alt={alt}
+        {...props}
+        key='highres'
+        className={classNames(imageClassName, this.styles.imageHighres)}
+        src={imageSrc.highres}
+        alt={alt}
         onLoad={e => this.onHighResLoad(e)}
-      />
+      />,
     ];
   }
 
@@ -99,7 +110,11 @@ class ImageViewer extends React.Component {
     if (!this.props.isLoading) {
       return null;
     }
-    return <div className={this.styles.imageOverlay}><ImageLoader type={'medium'} theme={this.props.theme} /></div>;
+    return (
+      <div className={this.styles.imageOverlay}>
+        <ImageLoader type={'medium'} theme={this.props.theme} />
+      </div>
+    );
   }
 
   renderTitle(data, styles) {
@@ -109,16 +124,16 @@ class ImageViewer extends React.Component {
 
   renderDescription(data, styles) {
     const config = data.config || {};
-    return !!config.showDescription &&
-      <div className={classNames(styles.imageDescription)}>{(data && data.description) || ''}</div>;
+    return !!config.showDescription && <div className={classNames(styles.imageDescription)}>{(data && data.description) || ''}</div>;
   }
 
   renderCaption(caption, isFocused, readOnly, styles, defaultCaption) {
-
-    return (
-      caption ?
-        <div className={styles.imageCaption} data-hook="imageViewerCaption">{caption}</div> :
-        (!readOnly && isFocused && defaultCaption) && <div className={styles.imageCaption}>{defaultCaption}</div>
+    return caption ? (
+      <div className={styles.imageCaption} data-hook='imageViewerCaption'>
+        {caption}
+      </div>
+    ) : (
+      !readOnly && isFocused && defaultCaption && <div className={styles.imageCaption}>{defaultCaption}</div>
     );
   }
 
@@ -134,16 +149,24 @@ class ImageViewer extends React.Component {
     }
   };
 
+  shouldRenderCaption() {
+    const { settings, componentData } = this.props;
+    if (includes(get(settings, 'toolbar.hidden'), 'settings')) {
+      return false;
+    }
+    const data = componentData || getDefault();
+    if (data.config.size === 'original' && data.src && data.src.width) {
+      return data.src.width >= 350;
+    }
+    return true;
+  }
+
   render() {
     const { styles } = this;
     const { componentData, className, onClick, isFocused, readOnly, settings, defaultCaption } = this.props;
     const data = componentData || getDefault();
     data.config = data.config || {};
     const { metadata = {} } = componentData;
-    const shouldRenderCaption = !includes(get(settings, 'toolbar.hidden'), 'settings') &&
-      data.config.size !== 'original' &&
-      data.config.alignment !== 'left' &&
-      data.config.alignment !== 'right';
 
     const itemClassName = classNames(styles.imageContainer, className);
     const imageClassName = classNames(styles.image);
@@ -158,7 +181,10 @@ class ImageViewer extends React.Component {
     /* eslint-disable jsx-a11y/no-static-element-interactions */
     return (
       <div
-        data-hook="imageViewer" onClick={onClick} className={itemClassName} onKeyDown={e => this.onKeyDown(e, onClick)}
+        data-hook='imageViewer'
+        onClick={onClick}
+        className={itemClassName}
+        onKeyDown={e => this.onKeyDown(e, onClick)}
         ref={e => this.handleRef(e)}
       >
         <div className={styles.imageWrapper}>
@@ -167,11 +193,10 @@ class ImageViewer extends React.Component {
         </div>
         {this.renderTitle(data, styles)}
         {this.renderDescription(data, styles)}
-        {shouldRenderCaption && this.renderCaption(metadata.caption, isFocused, readOnly, styles, defaultCaption)}
+        {this.shouldRenderCaption() && this.renderCaption(metadata.caption, isFocused, readOnly, styles, defaultCaption)}
       </div>
     );
     /* eslint-enable jsx-a11y/no-static-element-interactions */
-
   }
 }
 

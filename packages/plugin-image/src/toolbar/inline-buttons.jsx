@@ -4,7 +4,7 @@ import { MediaReplaceIcon } from '../icons';
 
 const modalStyles = getModalStyles();
 
-export default ({ t, anchorTarget, relValue }) => {
+export default ({ t, anchorTarget, relValue, uiSettings }) => {
   return [
     { keyName: 'sizeOriginal', type: BUTTONS.SIZE_ORIGINAL, mobile: false },
     { keyName: 'sizeSmallCenter', type: BUTTONS.SIZE_SMALL_CENTER, mobile: false },
@@ -26,14 +26,14 @@ export default ({ t, anchorTarget, relValue }) => {
       t,
       mobile: true,
       tooltipTextKey: 'SettingsButton_Tooltip',
+      uiSettings
     },
     {
       keyName: 'replace',
       type: BUTTONS.FILES,
       onFilesSelected: (pubsub, files) => {
         if (files.length > 0) {
-          const handleFilesSelected = pubsub.store.get('handleFilesSelected');
-          handleFilesSelected(files);
+          pubsub.getBlockHandler('handleFilesSelected')(files);
         }
       },
       icon: MediaReplaceIcon,

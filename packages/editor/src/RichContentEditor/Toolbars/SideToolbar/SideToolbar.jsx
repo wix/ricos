@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { DISPLAY_MODE } from 'wix-rich-content-common';
 import DraftOffsetKey from '@wix/draft-js/lib/DraftOffsetKey';
 import Styles from '../../../../statics/styles/side-toolbar-wrapper.scss';
 
@@ -14,14 +15,29 @@ export default class SideToolbar extends Component {
     }),
     theme: PropTypes.object.isRequired,
     visibilityFn: PropTypes.func,
-    isMobile: PropTypes.bool
+    isMobile: PropTypes.bool,
+    displayOptions: PropTypes.shape({
+      displayMode: PropTypes.string
+    }),
+    toolbarDecorationFn: PropTypes.func,
   };
 
-  state = {
-    position: {
-      transform: 'scale(0)',
+  static defaultProps = {
+    displayOptions: {
+      displayMode: DISPLAY_MODE.NORMAL
     },
-  };
+    toolbarDecorationFn: () => null
+  }
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      position: {
+        transform: 'scale(0)',
+      },
+    };
+    this.ToolbarDecoration = props.toolbarDecorationFn();
+  }
 
   componentDidMount() {
     this.props.pubsub.subscribe('editorState', this.onEditorStateChange);
@@ -48,6 +64,7 @@ export default class SideToolbar extends Component {
       return;
     }
 
+    const { displayOptions, offset, isMobile } = this.props;
     const selection = editorState.getSelection();
     const currentContent = editorState.getCurrentContent();
     const currentBlock = currentContent.getBlockForKey(selection.getStartKey());
@@ -56,38 +73,68 @@ export default class SideToolbar extends Component {
     const offsetKey = DraftOffsetKey.encode(currentBlock.getKey(), 0, 0);
     // Note: need to wait on tick to make sure the DOM node has been create by Draft.js
     setTimeout(() => {
-      const { isMobile } = this.props;
-      const node = document.querySelectorAll(`[data-offset-key="${offsetKey}"]`)[0];
-      if (node) {
-        const top = node.getBoundingClientRect().top;
-        const parentTop = node.offsetParent.getBoundingClientRect().top;
-        const { offset } = this.props;
+      if (displayOptions.displayMode === DISPLAY_MODE.NORMAL) {
+        const node = document.querySelectorAll(`[data-offset-key="${offsetKey}"]`)[0];
+        if (node) {
+          const top = node.getBoundingClientRect().top;
+          const parentTop = node.offsetParent.getBoundingClientRect().top;
+          this.setState({
+            position: {
+              top: top - parentTop + offset.y,
+              [!isMobile ? 'left' : 'right']: offset.x,
+              transform: `scale(${isMobile ? 0.76 : 1})`, //mobile plus is smaller
+              transition: 'transform 0.15s cubic-bezier(.3,1.2,.2,1)',
+            },
+          });
+        }
+      } else if (displayOptions.displayMode === DISPLAY_MODE.FLOATING) {
         this.setState({
           position: {
-            top: top - parentTop + offset.y,
+            top: offset.y,
             [!isMobile ? 'left' : 'right']: offset.x,
             transform: `scale(${isMobile ? 0.76 : 1})`, //mobile plus is smaller
             transition: 'transform 0.15s cubic-bezier(.3,1.2,.2,1)',
+            position: 'fixed',
+            zIndex: 7
           },
         });
       }
     });
   };
 
-  render() {
+  renderToolbarContent() {
     const { theme, pubsub } = this.props;
+    return this.props.structure.map((Component, index) => (
+      <Component
+        key={index}
+        getEditorState={pubsub.get('getEditorState')}
+        setEditorState={pubsub.get('setEditorState')}
+        theme={theme}
+      />
+    ));
+  }
+
+
+  render() {
+    const { theme } = this.props;
     const { wrapperStyles } = theme || {};
-    const wrapperClassNames = classNames(Styles.sideToolbarWrapper, wrapperStyles && wrapperStyles.sideToolbarWrapper);
+
+    const props = {
+      className: classNames(Styles.sideToolbarWrapper, wrapperStyles && wrapperStyles.sideToolbarWrapper),
+      style: this.state.position
+    };
+
+    if (this.ToolbarDecoration) {
+      const { ToolbarDecoration } = this;
+      return (
+        <ToolbarDecoration {...props}>
+          {this.renderToolbarContent()}
+        </ToolbarDecoration>);
+    }
+
     return (
-      <div className={wrapperClassNames} style={this.state.position}>
-        {this.props.structure.map((Component, index) => (
-          <Component
-            key={index}
-            getEditorState={pubsub.get('getEditorState')}
-            setEditorState={pubsub.get('setEditorState')}
-            theme={theme}
-          />
-        ))}
+      <div {...props}>
+        {this.renderToolbarContent()}
       </div>
     );
   }

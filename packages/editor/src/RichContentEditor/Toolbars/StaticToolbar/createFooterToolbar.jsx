@@ -61,13 +61,15 @@ const getFooterTheme = theme => {
   };
 };
 
-export default ({ buttons, theme, offset, visibilityFn }) => {
+export default ({ buttons, theme, offset, visibilityFn, displayOptions, toolbarDecorationFn }) => {
   const footerTheme = getFooterTheme(theme);
   return createStaticToolbar({
     name: 'FooterToolbar',
     theme: footerTheme,
     structure: buttons,
     offset,
-    visibilityFn
+    visibilityFn,
+    displayOptions,
+    toolbarDecorationFn
   });
 };

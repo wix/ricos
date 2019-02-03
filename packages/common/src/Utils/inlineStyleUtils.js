@@ -8,7 +8,10 @@ const getBlockStyleRanges = (block, styles) => {
 };
 
 /**
- * @param allStyles: [string] - set of exclusive inline styles
+ * getSelectionStyles
+ *
+ * @param string[] allStyles - set of exclusive inline styles
+ * @returns string[] - a subset of allStyles found in selection
  */
 export const getSelectionStyles = (allStyles, editorState) => {
 

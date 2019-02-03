@@ -1,6 +1,8 @@
 import { createBasePlugin, mergeStyles, decorateComponentWithProps } from 'wix-rich-content-common';
 import createMentionPlugin from 'draft-js-mention-plugin';
+import { DEFAULT_SETTINGS } from './defaultSettings';
 import { EXTERNAL_MENTIONS_TYPE } from './types';
+import { positionSuggestions } from './positionSuggestions';
 import MentionComponent from './MentionComponent';
 import MentionSuggestionsWrapper from './MentionSuggestionsWrapper';
 import Styles from '../statics/mentions.scss';
@@ -18,56 +20,44 @@ Interface Settings {
   getMentionLink?: (mention: Mention) => string;
   getMentions: (search: string) => Promise<Mention[]>
   onMentionClick: (mention: Mention) => void;
+  repositionSuggestions: boolean, // when you are in iframe and want suggestions to be repositioned if they go out of iframe
+  entryHeight: number, // suggestion entry height
+  additionalHeight: number, // extra spacing in suggestion popup
 }
 */
 
-const defaultSettings = {
-  mentionPrefix: '@',
-  mentionTrigger: '@',
-  getMentionLink: () => '#',
-};
-
 const createExternalMentionsPlugin = (config = {}) => {
   const type = EXTERNAL_MENTIONS_TYPE;
-  const {
-    decorator,
-    helpers,
-    theme,
-    isMobile,
-    t,
-    anchorTarget,
-    relValue,
-    mentions = {},
-  } = config;
+  const { theme, [type]: mentionSettings = {}, ...rest } = config;
   const styles = mergeStyles({ styles: Styles, theme });
-  const settings = Object.assign({}, defaultSettings, mentions);
+  const settings = Object.assign({}, DEFAULT_SETTINGS, mentionSettings);
 
   const plugin = createMentionPlugin({
-    mentionComponent: decorateComponentWithProps(MentionComponent, { settings, styles }),
+    mentionComponent: decorateComponentWithProps(MentionComponent, { settings }),
     theme: styles,
     mentionPrefix: settings.mentionPrefix,
     mentionTrigger: settings.mentionTrigger,
+    positionSuggestions: positionSuggestions({
+      entryHeight: settings.entryHeight,
+      additionalHeight: settings.additionalHeight,
+      reposition: settings.repositionSuggestions,
+    }),
   });
 
   const inlineModals = [
     decorateComponentWithProps(MentionSuggestionsWrapper, {
       component: plugin.MentionSuggestions,
       settings,
-      styles,
     }),
   ];
 
   return createBasePlugin(
     {
-      decorator,
       theme,
       type,
-      helpers,
-      isMobile,
-      anchorTarget,
       inlineModals,
-      relValue,
-      t,
+      settings,
+      ...rest,
     },
     plugin,
   );

@@ -1,7 +1,6 @@
 import { EditorState, RichUtils, Modifier } from '@wix/draft-js';
 import { isAtomicBlockFocused, removeBlock, COMMANDS } from 'wix-rich-content-common';
 
-/* eslint-disable complexity */
 export default (updateEditorState, customHandlers) =>
   (command, editorState) => {
     let newState, contentState;
@@ -43,5 +42,3 @@ export default (updateEditorState, customHandlers) =>
 
     return 'not-handled';
   };
-/* eslint-disable complexity */
-

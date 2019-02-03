@@ -1,10 +1,10 @@
 import CodeUtils from 'draft-js-code';
 import { createBasePlugin } from 'wix-rich-content-common';
 import { CODE_BLOCK_TYPE } from './types';
-import PrismDecorator from './PrismDecorator';
+// import PrismDecorator from './PrismDecorator';
 import createCodeBlockToolbar from './toolbar/createCodeBlockToolbar';
 
-const createUnderlyingPlugin = ({ theme }) => ({
+const createUnderlyingPlugin = (/*{ theme }*/) => ({
   keyBindingFn: (event, { getEditorState }) => {
     if (CodeUtils.hasSelectionInBlock(getEditorState())) {
       return CodeUtils.getKeyBinding(event);
@@ -50,13 +50,12 @@ const createUnderlyingPlugin = ({ theme }) => ({
     return 'not-handled';
   },
 
-  decorators: [new PrismDecorator(theme)],
+  // decorators: [new PrismDecorator(theme)],
 });
 
 const createCodeBlockPlugin = (config = {}) => {
   const type = CODE_BLOCK_TYPE;
   const {
-    decorator,
     helpers,
     theme,
     isMobile,
@@ -65,7 +64,10 @@ const createCodeBlockPlugin = (config = {}) => {
     relValue,
     getEditorState,
     setEditorState,
+    [type]: settings = {},
+    ...rest
   } = config;
+
   const plugin = createUnderlyingPlugin({ theme });
   const toolbar = createCodeBlockToolbar({
     helpers,
@@ -80,7 +82,6 @@ const createCodeBlockPlugin = (config = {}) => {
 
   return createBasePlugin(
     {
-      decorator,
       theme,
       toolbar,
       type,
@@ -89,6 +90,8 @@ const createCodeBlockPlugin = (config = {}) => {
       anchorTarget,
       relValue,
       t,
+      settings,
+      ...rest
     },
     plugin,
   );

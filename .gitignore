@@ -1,9 +1,10 @@
 .DS_Store
-package-lock.json
 dist
 node_modules
 *npm-debug.log
 lerna-debug.log
+yarn-error.log
+yarn.lock
 target
 maven
 stats.html
@@ -15,7 +16,6 @@ stats.html
 **/.project
 **/.settings/*
 *.code-workspace
-**/.vscode/**
 
 .history/**
 *.todo

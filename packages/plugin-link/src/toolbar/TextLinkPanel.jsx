@@ -12,7 +12,7 @@ import {
 
 export default class TextLinkPanel extends Component {
   componentDidMount() {
-    const { anchorTarget, relValue, getEditorState, theme, t } = this.props;
+    const { anchorTarget, relValue, getEditorState, theme, t, uiSettings } = this.props;
     const linkData = getLinkDataInSelection(getEditorState());
     const { url, target, rel } = linkData || {};
     const targetBlank = target === '_blank';
@@ -30,6 +30,7 @@ export default class TextLinkPanel extends Component {
       onCancel: this.hideLinkPanel,
       onDelete: this.deleteLink,
       onOverrideContent: this.props.onOverrideContent,
+      uiSettings
     };
 
     const LinkPanelContainerWithProps = decorateComponentWithProps(LinkPanelContainer, linkContainerProps);
@@ -73,4 +74,5 @@ TextLinkPanel.propTypes = {
   anchorTarget: PropTypes.string,
   relValue: PropTypes.string,
   t: PropTypes.func,
+  uiSettings: PropTypes.object,
 };

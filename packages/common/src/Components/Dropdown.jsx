@@ -127,7 +127,7 @@ class Dropdown extends Component {
       >
         {Icon && <Icon className={styles['Dropdown-option-icon']} />}
         {label && <span className={styles['Dropdown-option-label']}>{label}</span>}
-        {OptionComponent && <OptionComponent/>}
+        {OptionComponent && <OptionComponent />}
       </button>
     );
   }
@@ -178,7 +178,7 @@ class Dropdown extends Component {
         <span>
           {Icon ? <Icon className={styles['Dropdown-option-icon']} /> : null}
           {label && <span className={styles['Dropdown-option-label']}>{label}</span>}
-          {OptionComponent && <OptionComponent/>}
+          {OptionComponent && <OptionComponent />}
         </span>
       );
     })();

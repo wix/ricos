@@ -4,24 +4,23 @@ import { Component } from './HtmlComponent';
 import { HTML_TYPE } from './types';
 
 const createHtmlPlugin = (config = {}) => {
-  const { decorator, helpers, theme, isMobile, t, anchorTarget, relValue, html: settings } = config;
+  const type = HTML_TYPE;
+  const { helpers, isMobile, t, [type]: settings = {}, ...rest } = config;
 
   return createBasePlugin({
     component: Component,
-    decorator,
     settings,
-    theme,
     type: HTML_TYPE,
     toolbar: createToolbar({
       helpers,
       t,
       isMobile,
+      settings,
     }),
     helpers,
     isMobile,
-    anchorTarget,
-    relValue,
     t,
+    ...rest
   });
 };
 

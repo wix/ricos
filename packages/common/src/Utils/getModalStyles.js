@@ -106,7 +106,17 @@ const desktopModalOverrideStyles = {
   },
 };
 
-export const getModalStyles = ({ customStyles = null, fullScreen = true } = {}) => {
+const inlineStyles = {
+  overlay: {
+    background: 'transparent',
+    pointerEvents: 'none'
+  },
+  content: {
+    pointerEvents: 'initial'
+  }
+};
+
+export const getModalStyles = ({ customStyles = null, fullScreen = true, inline = false } = {}) => {
   const overrideStyles = [];
   if (customStyles) {
     overrideStyles.push(customStyles);
@@ -120,6 +130,9 @@ export const getModalStyles = ({ customStyles = null, fullScreen = true } = {}) 
   } else {
     if (!fullScreen) {
       overrideStyles.push(desktopModalOverrideStyles);
+    }
+    if (inline) {
+      overrideStyles.push(inlineStyles);
     }
     return merge({}, desktopSideBarStyles, ...overrideStyles);
   }

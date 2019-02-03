@@ -10,10 +10,19 @@ export const simplePubsub = initialState => {
     }
     listeners[key] = listeners[key] || [];
     listeners[key].push(callback);
+    return () => {
+      listeners[key] = listeners[key].filter(listener => listener !== callback);
+    };
   };
 
   const unsubscribe = (key, callback) => {
     listeners[key] = listeners[key].filter(listener => listener !== callback);
+  };
+
+  // If unsubscribe is called on componentWillUnmount, the state.visibleBlock key is null
+  // so, the return value is used for unsubscribe
+  const subscribeOnBlock = ({ key, blockKey = state.visibleBlock, callback }) => {
+    return subscribe(blockHandlerKey(key, blockKey), callback);
   };
 
   const update = (key, newData) => {
@@ -22,29 +31,29 @@ export const simplePubsub = initialState => {
     set(key, newItem);
   };
 
-  const set = (...args) => {
-    const _setSingle = (key, item) => {
-      state = {
-        ...state,
-        [key]: item,
-      };
+  const _setSingle = (key, item) => {
+    state = {
+      ...state,
+      [key]: item,
+    };
+    if (listeners[key]) {
+      listeners[key].forEach(listener => listener(state[key]));
+    }
+  };
+
+  const _setBatch = updates => {
+    state = {
+      ...state,
+      ...updates,
+    };
+    Object.keys(updates).forEach(key => {
       if (listeners[key]) {
         listeners[key].forEach(listener => listener(state[key]));
       }
-    };
+    });
+  };
 
-    const _setBatch = updates => {
-      state = {
-        ...state,
-        ...updates,
-      };
-      Object.keys(updates).forEach(key => {
-        if (listeners[key]) {
-          listeners[key].forEach(listener => listener(state[key]));
-        }
-      });
-    };
-
+  const set = (...args) => {
     if (args.length === 1) {
       _setBatch(args[0]);
     } else if (args.length === 2) {
@@ -54,12 +63,32 @@ export const simplePubsub = initialState => {
     }
   };
 
+  const setBlockHandler = (key, blockKey, item) => {
+    _setSingle(blockHandlerKey(key, blockKey), item);
+  };
+
+  const setBlockData = ({ key, blockKey = state.visibleBlock, item }) => {
+    _setSingle(blockHandlerKey(key, blockKey), item);
+  };
+
   const get = key => state[key];
+
+  const getBlockHandler = (key, blockKey = state.visibleBlock) => {
+    return state[blockHandlerKey(key, blockKey)];
+  };
+
+  const getBlockData = ({ key, blockKey = state.visibleBlock }) => {
+    return state[blockHandlerKey(key, blockKey)];
+  };
+
+  const blockHandlerKey = (key, blockKey) => `${blockKey}_${key}`;
 
   const store = {
     get,
+    getBlockHandler,
     update,
     set,
+    setBlockHandler,
   };
 
   return {
@@ -67,7 +96,12 @@ export const simplePubsub = initialState => {
     unsubscribe,
     update,
     set,
+    setBlockHandler,
     get,
+    getBlockHandler,
     store,
+    getBlockData,
+    setBlockData,
+    subscribeOnBlock,
   };
 };

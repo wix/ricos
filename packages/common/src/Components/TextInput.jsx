@@ -21,7 +21,7 @@ class TextInput extends React.Component {
         />
         {error &&
         <Tooltip shouldRebuildOnUpdate={() => !!error} content={error} theme={theme} moveBy={{ y: 0 }} type={'error'}>
-          <ErrorIcon className={styles.textInput_errorIcon}/>
+          <ErrorIcon className={styles.textInput_errorIcon} />
         </Tooltip>
         }
       </div>

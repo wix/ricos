@@ -55,11 +55,25 @@ class BaseToolbarButton extends React.Component {
       return;
     }
 
-    const { componentState, keyName, helpers, pubsub, theme, t, onClick, anchorTarget, relValue, ...otherProps } = this.props;
+    const {
+      componentState,
+      keyName,
+      helpers,
+      pubsub,
+      theme,
+      t,
+      onClick,
+      anchorTarget,
+      relValue,
+      uiSettings,
+      modalStyles,
+      modalStylesFn,
+      ...otherProps
+    } = this.props;
 
     if (this.props.type === BUTTONS.FILES && helpers && helpers.handleFileSelection) {
       const multiple = !!this.props.multiple;
-      helpers.handleFileSelection(undefined, multiple, pubsub.get('handleFilesAdded'), undefined, this.props.componentData);
+      helpers.handleFileSelection(undefined, multiple, pubsub.getBlockHandler('handleFilesAdded'), undefined, this.props.componentData);
       return;
     }
 
@@ -81,7 +95,16 @@ class BaseToolbarButton extends React.Component {
 
     if (this.props.type === BUTTONS.EXTERNAL_MODAL && isActive) {
       if (helpers && helpers.openModal) {
+
+        let appliedModalStyles = {};
+        if (modalStyles) {
+          appliedModalStyles = modalStyles;
+        } else if (modalStylesFn) {
+          appliedModalStyles = modalStylesFn({ buttonRef: event.target, pubsub });
+        }
+
         const keyName = BUTTONS.EXTERNAL_MODAL;
+
         const modalProps = {
           componentState,
           keyName,
@@ -91,6 +114,9 @@ class BaseToolbarButton extends React.Component {
           relValue,
           t,
           theme: theme || {},
+          uiSettings,
+          modalStyles: appliedModalStyles,
+          buttonRef: event.target,
           ...otherProps,
         };
         helpers.openModal(modalProps);
@@ -162,7 +188,7 @@ class BaseToolbarButton extends React.Component {
       </div>
     );
 
-    return <ToolbarButton theme={theme} showTooltip={showTooltip} tooltipText={tooltipText} button={filesButton} tooltipOffset={{ y: -20 }}/>;
+    return <ToolbarButton theme={theme} showTooltip={showTooltip} tooltipText={tooltipText} button={filesButton} tooltipOffset={{ y: -20 }} />;
   };
 
   renderDropdownButton = (buttonWrapperClassNames, buttonClassNames) => {
@@ -231,6 +257,7 @@ BaseToolbarButton.propTypes = {
   iconActive: PropTypes.oneOfType([PropTypes.string, PropTypes.func, PropTypes.element]),
   icon: PropTypes.oneOfType([PropTypes.string, PropTypes.func, PropTypes.element]),
   modalStyles: PropTypes.object,
+  modalStylesFn: PropTypes.func,
   isMobile: PropTypes.bool,
   disabled: PropTypes.bool,
   t: PropTypes.func,
@@ -241,6 +268,7 @@ BaseToolbarButton.propTypes = {
   displayPanel: PropTypes.func.isRequired,
   displayInlinePanel: PropTypes.func.isRequired,
   hideInlinePanel: PropTypes.func.isRequired,
+  uiSettings: PropTypes.object,
 };
 
 export default BaseToolbarButton;

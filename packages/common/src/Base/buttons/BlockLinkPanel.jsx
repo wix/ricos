@@ -6,8 +6,8 @@ import LinkPanelContainer from '../../Components/LinkPanelContainer';
 
 class BlockLinkPanel extends Component {
   componentDidMount() {
-    const { anchorTarget, relValue, theme, t } = this.props;
-    const componentLink = this.props.pubsub.get('componentLink');
+    const { anchorTarget, relValue, theme, t, uiSettings } = this.props;
+    const componentLink = this.props.pubsub.getBlockData({ key: 'componentLink' });
     const { url, targetBlank, nofollow } = componentLink || {};
     const linkContainerProps = {
       url,
@@ -22,6 +22,7 @@ class BlockLinkPanel extends Component {
       onCancel: this.hideLinkPanel,
       onDelete: this.deleteLink,
       onOverrideContent: this.props.onOverrideContent,
+      uiSettings,
     };
 
     const LinkPanelContainerWithProps = decorateComponentWithProps(LinkPanelContainer, linkContainerProps);
@@ -31,15 +32,15 @@ class BlockLinkPanel extends Component {
   wrapBlockInLink = ({ url, targetBlank, nofollow }) => {
     const { pubsub } = this.props;
     if (!isEmpty(url)) {
-      pubsub.set('componentLink', { url, targetBlank, nofollow });
+      pubsub.setBlockData({ key: 'componentLink', item: { url, targetBlank, nofollow } });
     } else {
-      pubsub.set('componentLink', null);
+      pubsub.setBlockData({ key: 'componentLink', item: null });
     }
     this.hideLinkPanel();
   };
 
   deleteLink = () => {
-    this.props.pubsub.set('componentLink', null);
+    this.props.pubsub.setBlockData({ key: 'componentLink', item: null });
   }
 
   hideLinkPanel = () => {
@@ -58,6 +59,7 @@ BlockLinkPanel.propTypes = {
   anchorTarget: PropTypes.string,
   relValue: PropTypes.string,
   t: PropTypes.func,
+  uiSettings: PropTypes.object,
 };
 
 export default BlockLinkPanel;

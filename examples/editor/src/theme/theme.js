@@ -32,18 +32,7 @@ import mobileToolbarTheme from './toolbars/mobile-toolbar.theme.scss';
 import mobileAddModalTheme from './toolbars/mobile-add-modal.theme.scss';
 import toolbarSeparatorTheme from './toolbars/toolbar-separator.theme.scss';
 import addPluginModalTheme from './toolbars/add-plugin-modal.theme.scss';
-
-import gallerySettingsModalTheme from './toolbars/modals/gallery/gallery-settings-modal.theme.scss';
-import galleryItemsSortableTheme from './toolbars/modals/gallery/gallery-items-sortable.theme.scss';
-import galleryImageSettingsTheme from './toolbars/modals/gallery/gallery-image-settings.theme.scss';
-import gallerySettingsMobileHeaderTheme from './toolbars/modals/gallery/gallery-settings-mobile-header.theme.scss';
-import imageRatioSelectorTheme from './toolbars/modals/gallery/image-ratio-selector.theme.scss';
-import layoutSelectorTheme from './toolbars/modals/gallery/layout-selector.theme.scss';
-import sliderWithInputTheme from './toolbars/modals/gallery/slider-with-input.theme.scss';
-import thumbnailPlacementSelectorTheme from './toolbars/modals/gallery/thumbnail-placement-selector.theme.scss';
 import videoUploadTheme from './toolbars/modals/video/video-upload-modal.theme.scss';
-import imageSettingsTheme from './toolbars/modals/image/image-settings.theme.scss';
-import imageSettingsMobileHeaderTheme from './toolbars/modals/image/image-settings-mobile-header.theme.scss';
 
 const modalTheme = {
   content: {
@@ -80,17 +69,7 @@ const theme = {
   ...tooltipTheme,
 
   // modals
-  ...gallerySettingsModalTheme,
-  ...galleryItemsSortableTheme,
-  ...galleryImageSettingsTheme,
-  ...gallerySettingsMobileHeaderTheme,
-  ...imageRatioSelectorTheme,
-  ...layoutSelectorTheme,
-  ...sliderWithInputTheme,
-  ...thumbnailPlacementSelectorTheme,
   ...videoUploadTheme,
-  ...imageSettingsTheme,
-  ...imageSettingsMobileHeaderTheme,
   ...addPluginModalTheme,
 
   // toolbars

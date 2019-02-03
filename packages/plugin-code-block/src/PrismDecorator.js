@@ -1,6 +1,7 @@
 import _reduce from 'lodash/reduce';
 import range from 'lodash/range';
 import React from 'react';
+import PropTypes from 'prop-types';
 import Immutable from 'immutable';
 import Prism from 'prismjs';
 import classNames from 'classnames';
@@ -8,6 +9,15 @@ import highlightingTheme from '../statics/styles/highlighting-theme.scss';
 
 const DEFAULT_SYNTAX = 'javascript';
 const CODE_TOKEN_CLASS_NAMES = highlightingTheme;
+
+const PrismToken = ({ className, children, offsetKey }) =>
+  <span key={`codeBlock_${offsetKey}`} children={children} className={className} />;
+
+PrismToken.propTypes = {
+  className: PropTypes.string.isRequired,
+  children: PropTypes.any,
+  offsetKey: PropTypes.string,
+};
 
 export default class PrismDecorator {
   highlighted = {};
@@ -51,11 +61,7 @@ export default class PrismDecorator {
   }
 
   getComponentForKey() {
-    return props => {
-      const { type } = props; // eslint-disable-line react/prop-types
-      const className = classNames(CODE_TOKEN_CLASS_NAMES[type], this.theme[`codeBlock_${type}`]);
-      return <span {...props} className={className}/>;
-    };
+    return PrismToken;
   }
 
   getPropsForKey(key) {
@@ -64,7 +70,7 @@ export default class PrismDecorator {
     const tokId = parts[1];
     const { type } = this.highlighted[blockKey][tokId];
     return {
-      type,
+      className: classNames(CODE_TOKEN_CLASS_NAMES[type], this.theme[`codeBlock_${type}`])
     };
   }
 }

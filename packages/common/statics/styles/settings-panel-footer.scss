@@ -20,6 +20,7 @@
 
 %panel_button {
     padding: 8.5px 24px;
+    border-style: none;
 }
 
 .settingsPanel_save {
@@ -32,4 +33,10 @@
 
 .settingsPanel_cancel {
     @extend %panel_button;
+    border-style: solid;
+}
+
+.settingsPanel_cancel:hover {
+    background: #fff;
+    color: #4990e2;
 }

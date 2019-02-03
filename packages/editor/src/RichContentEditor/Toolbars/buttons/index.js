@@ -17,7 +17,6 @@ export const MobileTextButtonList = [
   'Underline',
   'Title',
   'Blockquote',
-  // TODO: Link here
   'AddPlugin',
   'AlignLeft',
   'AlignCenter',
@@ -34,6 +33,7 @@ export {
   ItalicButton,
   UnderlineButton,
   IndentButton,
+  TitleButton,
   BlockquoteButton,
   AlignTextLeftButton,
   AlignTextCenterButton,

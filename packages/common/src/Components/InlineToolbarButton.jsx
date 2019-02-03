@@ -81,6 +81,6 @@ export default class InlineToolbarButton extends Component {
     );
     /* eslint-enable jsx-a11y/no-static-element-interactions */
 
-    return <ToolbarButton theme={theme} showTooltip={showTooltip} tooltipText={tooltipText} button={codeBlockButton} tooltipOffset={{ y: -20 }}/>;
+    return <ToolbarButton theme={theme} showTooltip={showTooltip} tooltipText={tooltipText} button={codeBlockButton} tooltipOffset={{ y: -20 }} />;
   }
 }

@@ -25,5 +25,23 @@ export const TOOLBARS = {
   MOBILE: 'MOBILE',
   FOOTER: 'FOOTER',
   STATIC: 'TEXT',
-  INLINE: 'INLINE'
+  INLINE: 'INLINE',
+  PLUGIN: 'PLUGIN',
+};
+
+export const DISPLAY_MODE = {
+  NORMAL: 'NORMAL',
+  FLOATING: 'FLOATING'
+};
+
+export const DECORATION_MODE = {
+  PREPEND: 'PREPEND',
+  WRAP: 'WRAP',
+  APPEND: 'APPEND',
+};
+
+export const HEADER_BLOCK = {
+  ONE: 'header-one',
+  TWO: 'header-two',
+  THREE: 'header-three',
 };

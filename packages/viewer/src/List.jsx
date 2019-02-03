@@ -1,23 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import './List.css';
 
-const List = ({ ordered, children }) => {
-  if (ordered) {
-    return (
-      <ol>
-        {children}
-      </ol>);
-  } else {
-    return (
-      <ul>
-        {children}
-      </ul>);
-  }
+const List = ({ ordered, children, className }) => {
+  const Component = ordered ? 'ol' : 'ul';
+  return <Component className={className}>{children}</Component>;
 };
+
 List.propTypes = {
   ordered: PropTypes.bool,
   children: PropTypes.node.isRequired,
+  className: PropTypes.string,
 };
 
 export default List;

@@ -1,4 +1,4 @@
-import { getScaleToFitImageURL } from 'image-client-api/dist/imageClientSDK';
+import imageClientAPI from 'image-client-api';
 
 class WixMediaUrl {
   constructor() {
@@ -25,7 +25,7 @@ class WixMediaUrl {
 
   createHiResUrl = ({ file_name: fileName, width: w, height: h } = {},
     rw = this.DEFAULT_SIZE, rh = this.DEFAULT_SIZE, rq = this.DEFAULT_QUALITY) =>
-    fileName ? getScaleToFitImageURL(fileName, w, h, rw, rh, { quality: rq }) : '';
+    fileName ? imageClientAPI.getScaleToFitImageURL(fileName, w, h, rw, rh, { quality: rq }) : '';
 
   createPreloadUrl = ({ file_name: fileName, width: w, height: h } = {},
     rw = this.DEFAULT_SIZE, rh = this.DEFAULT_SIZE, rq = this.DEFAULT_QUALITY
@@ -34,9 +34,15 @@ class WixMediaUrl {
       const { width, height } = this.resize(w, h, rw, rh);
       const H = Math.ceil(height); //make sure no sterching will occur
       const W = Math.ceil(width);
-      return `https://static.wixstatic.com/media/${fileName}/v1/fit/w_${W},h_${H},al_c,q_${rq}/file.jpg`;
+      const format = this.getImageFormat(fileName);
+      return `https://static.wixstatic.com/media/${fileName}/v1/fit/w_${W},h_${H},al_c,q_${rq}/file${format}`;
     }
     return '';
+  };
+
+  getImageFormat = fileName => {
+    const matches = /\.([0-9a-z]+)(?=[?#])|(\.)(?:[\w]+)$/i.exec(fileName);
+    return matches ? matches[0] : '.jpg';
   };
 }
 

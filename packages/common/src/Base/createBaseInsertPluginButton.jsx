@@ -55,7 +55,7 @@ export default ({ blockType, button, helpers, pubsub, t }) => {
           this.toggleFileSelection();
           break;
         case 'modal':
-          this.toggleButtonModal();
+          this.toggleButtonModal(event);
           break;
         default:
           this.addBlock(button.componentData || {});
@@ -75,7 +75,7 @@ export default ({ blockType, button, helpers, pubsub, t }) => {
     handleExternalFileChanged = data => {
       if (data) {
         this.addBlock(button.componentData || {});
-        setTimeout(() => pubsub.get('handleFilesAdded')(data));
+        setTimeout(() => pubsub.getBlockHandler('handleFilesAdded')(data));
       }
     }
 
@@ -114,12 +114,22 @@ export default ({ blockType, button, helpers, pubsub, t }) => {
       }
     };
 
-    toggleButtonModal = () => {
+    toggleButtonModal = event => {
       if (helpers && helpers.openModal) {
+
+        let modalStyles = {};
+        if (button.modalStyles) {
+          modalStyles = button.modalStyles;
+        } else if (button.modalStylesFn) {
+          modalStyles = button.modalStylesFn({ buttonRef: event.target, pubsub });
+        }
+
         helpers.openModal({
           modalName: button.modalName,
           modalElement: button.modalElement,
-          modalStyles: button.modalStyles,
+          modalDecorations: button.modalDecorations,
+          buttonRef: event.target,
+          modalStyles,
           theme: this.props.theme,
           componentData: button.componentData,
           onConfirm: this.addBlock,
@@ -175,7 +185,7 @@ export default ({ blockType, button, helpers, pubsub, t }) => {
         </div>
       );
 
-      return <ToolbarButton theme={theme} showTooltip={showTooltip} tooltipText={tooltipText} button={Button} tooltipOffset={{ y: -10 }}/>;
+      return <ToolbarButton theme={theme} showTooltip={showTooltip} tooltipText={tooltipText} button={Button} tooltipOffset={{ y: -10 }} />;
     }
   }
 

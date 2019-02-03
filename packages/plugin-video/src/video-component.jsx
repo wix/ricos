@@ -84,11 +84,12 @@ class VideoComponent extends React.Component {
   };
 
   renderPlayer = () => {
-    const { componentData } = this.props;
+    const { componentData, settings } = this.props;
     return (
       <VideoViewer
         ref={this.setPlayer}
         componentData={componentData}
+        settings={settings}
         onReady={this.handleReady}
         onStart={this.handleStart}
       />
@@ -119,6 +120,7 @@ class VideoComponent extends React.Component {
 
 VideoComponent.propTypes = {
   componentData: PropTypes.object.isRequired,
+  settings: PropTypes.object.isRequired,
   componentState: PropTypes.object.isRequired,
   store: PropTypes.object.isRequired,
   blockProps: PropTypes.object.isRequired,

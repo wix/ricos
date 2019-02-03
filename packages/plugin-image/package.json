@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-plugin-image",
-  "version": "1.3.0",
+  "version": "2.0.0",
   "author": {
     "name": "Jonathan Bachman",
     "email": "jonathanb@wix.com"
@@ -27,13 +27,13 @@
     "build": "rollup --environment MODULE_NAME:plugin-image -c ../../rollup.config.js",
     "build:dev": "NODE_ENV=development npm run build",
     "build:analyze": "npm run build -- --environment MODULE_ANALYZE && open stats.html",
-    "watch": "MODULE_WATCH=1 npm run build -- --watch",
+    "watch": "NODE_ENV=development MODULE_WATCH=1 npm run build -- --watch",
     "release": "wnpm-release --no-shrinkwrap",
     "test": "eslint 'src/**/*.{js,jsx}'"
   },
   "peerDependencies": {
-    "@babel/runtime": "7.0.0-rc.1",
-    "@wix/draft-js": "0.10.163",
+    "@babel/runtime": "7.2.0",
+    "@wix/draft-js": "0.10.272",
     "classnames": "^2.0.0",
     "lodash": "^4.0.0",
     "prop-types": "^15.0.0",
@@ -41,19 +41,19 @@
     "react-dom": "^15.0.0 || ^16.0.0"
   },
   "devDependencies": {
-    "@babel/runtime": "7.0.0-rc.1",
-    "@wix/draft-js": "0.10.163",
+    "@babel/runtime": "7.2.0",
+    "@wix/draft-js": "0.10.272",
     "classnames": "^2.2.6",
     "eslint": "^4.19.1",
     "lodash": "^4.17.10",
     "prop-types": "^15.6.2",
     "react": "15.5.4",
     "react-dom": "15.5.4",
-    "rollup": "^0.64.1"
+    "rollup": "^1.1.0"
   },
   "dependencies": {
-    "image-client-api": "1.452.0",
-    "wix-rich-content-common": "^1.3.0"
+    "image-client-api": "1.2218.0",
+    "wix-rich-content-common": "^2.0.0"
   },
   "unpkg": true,
   "publishConfig": {

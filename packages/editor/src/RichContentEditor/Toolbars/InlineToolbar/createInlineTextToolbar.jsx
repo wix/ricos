@@ -14,10 +14,13 @@ export default config => {
     relValue,
     t,
     offset,
-    visibilityFn
+    visibilityFn,
+    displayOptions,
+    uiSettings,
+    toolbarDecorationFn,
   } = config;
 
-  const structure = getTextButtonsFromList({ buttons, textPluginButtons, pubsub, theme, t });
+  const structure = getTextButtonsFromList({ buttons, textPluginButtons, pubsub, theme, t, uiSettings });
 
   return createInlineToolbar({
     name: 'InlineTextToolbar',
@@ -31,6 +34,9 @@ export default config => {
     relValue,
     t,
     offset,
-    visibilityFn
+    visibilityFn,
+    displayOptions,
+    uiSettings,
+    toolbarDecorationFn,
   });
 };

@@ -14,7 +14,7 @@
 
 .linkPanel_container {
     position: relative;
-    min-width: 359px;
+    min-width: 360px;
     margin-top: 18px;
     font-size: 14px;
     font-weight: 300;
@@ -48,21 +48,30 @@
     position: relative;
 }
 
-.linkPanel_textInput {
+.linkPanel_textInput, .linkPanel_dropdownList {
     color: $modal-input-color;
     width: 100%;
-    height: 42px;
     font-size: 14px;
     border: 1px solid rgba(51, 51, 51, 0.2);
-    padding: 0 18px;
-    text-align: left;
     box-sizing: border-box;
-    &:focus {
+
+    &:focus, &:focus + .linkPanel_dropdownList {
         border: 1px solid rgba(51, 51, 51, 0.5);
     }
+}
+
+.linkPanel_textInput {
+    height: 42px;
+    padding: 0 18px;
+    text-align: left;
     &::placeholder {
         opacity: 0.4;
     }
+}
+
+.linkPanel_dropdownList {
+    position: absolute;
+    border-top: none;
 }
 
 .linkPanel_textInput_invalid {

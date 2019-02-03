@@ -1,0 +1,171 @@
+@import "~wix-rich-content-common/dist/statics/styles/mixins";
+@import "~wix-rich-content-common/dist/statics/styles/palette";
+
+.video_modal_container_big {
+  padding: 48px 60px 60px 60px;
+  @include phone {
+    padding: 36px 32px 30px 32px;
+  }
+}
+
+.video_modal_container_small {
+  padding: 48px 60px 48px 60px;
+  @include phone {
+    padding: 36px 32px 30px 32px;
+  }
+}
+
+.video_modal_closeIcon {
+  position: absolute;
+  right: 30px;
+  top: 30px;
+  cursor: pointer;
+}
+
+.video_modal_errorIcon {
+  width: 13px;
+}
+
+.video_modal_header {
+  display: flex;
+  align-items: center;
+}
+
+.video_modal_header_text {
+  font-size: 16px;
+  height: 24px;
+  margin: 0px 0 12px 0;
+  width: 460px;
+  text-align: center;
+  @include phone {
+    height: 46px;
+    margin-bottom: 12px;
+  }
+}
+
+%video_modal_textInput {
+  display: inline-block;
+  input[type="url"] {
+    border-radius: 0px;
+    padding-left: 18px;
+    @include phone {
+      border-left: none;
+      border-right: none;
+      border-top: none;
+      border-bottom: 1px solid #000000;
+    }
+  }
+}
+
+.video_modal_textInput_customWidth {
+  @extend %video_modal_textInput;
+  width: calc(100% - 120px);
+  margin: 0px 0 48px 0px;
+  @include phone {
+    width: 100%;
+    margin: 0px 0 24px 0px;
+  }
+}
+
+.video_modal_textInput_fullWidth {
+  @extend %video_modal_textInput;
+  width: 420px;
+  margin: 0px 0 36px 20px;
+  @include phone {
+    width: 100%;
+    margin: 0px 0 24px 0px;
+  }
+}
+
+.video_modal_add_a_Video {
+  width: 100%;
+  height: 36px;
+  font-size: 24px;
+  text-align: center;
+  padding-bottom: 36px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  @include phone {
+    height: 34px;
+    padding-bottom: 12px;
+  }
+}
+
+.video_modal_or_upload_video_from {
+  font-family: Avenir;
+  font-weight: 500;
+  line-height: 1.5;
+  text-align: center;
+  padding-bottom: 24px;
+  @include phone {
+    padding-top: 14px;
+    padding-bottom: 18px;
+  }
+}
+
+.video_modal_upload_video {
+  width: 100%;
+  height: 24px;
+  font-family: Avenir;
+  line-height: 1.5;
+  text-align: center;
+  color: #236fff;
+  display: inline-block;
+  cursor: pointer;
+}
+
+%video_modal_add_button {
+  width: 108px;
+  display: inline-block;
+  border: none;
+  padding-left: 24px;
+  padding-right: 24px;
+  margin-left: 12px;
+  height: 40px;
+}
+
+.video_modal_add_button_inline {
+  @extend %video_modal_add_button;
+  @include phone {
+    width: 45%;
+    margin-left: 27.5%;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+
+.video_modal_add_button_inMiddle {
+  @extend %video_modal_add_button;
+  margin-left: 38.5%;
+  @include phone {
+    width: 45%;
+    margin-left: 27.5%;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+
+.video_modal_add_button_inline:disabled {
+  opacity: 0.5;
+}
+
+.video_modal_add_button_inMiddle:disabled {
+  opacity: 0.5;
+}
+
+.video_modal_error_msg {
+  margin-top: 5px;
+  color: red;
+  font-size: 14px;
+}
+
+.textInput_input {
+  padding: 9px 21px 10px 12px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.textInput_input_invalid {
+  padding-right: 39px;
+}

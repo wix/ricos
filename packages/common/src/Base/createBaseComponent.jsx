@@ -52,8 +52,9 @@ const createBaseComponent = ({ PluginComponent, theme, settings, pubsub, helpers
       pubsub.subscribe('componentAlignment', this.onComponentAlignmentChange);
       pubsub.subscribe('componentSize', this.onComponentSizeChange);
       pubsub.subscribe('componentTextWrap', this.onComponentTextWrapChange);
-      pubsub.subscribe('componentLink', this.onComponentLinkChange);
       pubsub.subscribe('editorBounds', this.onEditorBoundsChange);
+      const blockKey = this.props.block.getKey();
+      this.unsubscribeOnBlock = pubsub.subscribeOnBlock({ key: 'componentLink', blockKey, callback: this.onComponentLinkChange });
     }
 
     componentDidUpdate() {
@@ -68,9 +69,9 @@ const createBaseComponent = ({ PluginComponent, theme, settings, pubsub, helpers
       pubsub.unsubscribe('componentAlignment', this.onComponentAlignmentChange);
       pubsub.unsubscribe('componentSize', this.onComponentSizeChange);
       pubsub.unsubscribe('componentTextWrap', this.onComponentTextWrapChange);
-      pubsub.unsubscribe('componentLink', this.onComponentLinkChange);
       pubsub.unsubscribe('editorBounds', this.onEditorBoundsChange);
       pubsub.set('visibleBlock', null);
+      this.unsubscribeOnBlock && this.unsubscribeOnBlock();
     }
 
     isMe = () => {
@@ -121,8 +122,8 @@ const createBaseComponent = ({ PluginComponent, theme, settings, pubsub, helpers
       if (this.isMeAndIdle) {
         const link = url ? {
           url,
-          target: targetBlank ? '_blank' : (anchorTarget || '_self'),
-          rel: nofollow ? 'nofollow' : (relValue || 'noopener')
+          target: targetBlank === true ? '_blank' : (anchorTarget || '_self'),
+          rel: nofollow === true ? 'nofollow' : (relValue || 'noopener')
         } : null;
 
         this.updateComponentConfig({ link });
@@ -198,7 +199,8 @@ const createBaseComponent = ({ PluginComponent, theme, settings, pubsub, helpers
     render = () => {
       const { blockProps, className, onClick, selection } = this.props;
       const { componentData, readOnly } = this.state;
-      const { link, width, height } = componentData.config || {};
+      const { link, width: currentWidth, height: currentHeight } = componentData.config || {};
+      const { width: initialWidth, height: initialHeight } = settings || {};
       const isEditorFocused = selection.getHasFocus();
       const { isFocused } = blockProps;
       const isActive = isFocused && isEditorFocused && !readOnly;
@@ -233,6 +235,11 @@ const createBaseComponent = ({ PluginComponent, theme, settings, pubsub, helpers
         [theme.hidden]: readOnly,
       });
 
+      const sizeStyles = {
+        width: !isNil(currentWidth) ? currentWidth : initialWidth,
+        height: !isNil(currentHeight) ? currentHeight : initialHeight,
+      };
+
       const component = (
         <PluginComponent
           {...this.props}
@@ -262,8 +269,8 @@ const createBaseComponent = ({ PluginComponent, theme, settings, pubsub, helpers
         });
       /* eslint-disable jsx-a11y/anchor-has-content */
       return (
-        <div style={{ width, height }} className={ContainerClassNames}>
-          {!isNil(link) ? <div>{component}<a className={anchorClass} {...anchorProps}/></div> : component}
+        <div style={sizeStyles} className={ContainerClassNames}>
+          {!isNil(link) ? <div>{component}<a className={anchorClass} {...anchorProps} /></div> : component}
           {!this.state.readOnly && <div role="none" data-hook={'componentOverlay'} onClick={onClick} className={overlayClassNames} />}
         </div>
       );

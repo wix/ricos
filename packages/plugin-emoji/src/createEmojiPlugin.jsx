@@ -8,7 +8,7 @@ import * as Styles from '../statics/emoji.scss';
 
 const createExternalEmojiPlugin = (config = {}) => {
   const type = EXTERNAL_EMOJI_TYPE;
-  const { decorator, helpers, theme, isMobile, t, anchorTarget, relValue } = config;
+  const { helpers, theme, isMobile, t, [type]: settings = {}, ...rest } = config;
   const styles = mergeStyles({ styles: Styles.default, theme });
 
   const plugin = createEmojiPlugin({
@@ -39,16 +39,14 @@ const createExternalEmojiPlugin = (config = {}) => {
 
   return createBasePlugin(
     {
-      decorator,
-      theme,
       type,
       toolbar,
       inlineModals,
       helpers,
       isMobile,
-      anchorTarget,
-      relValue,
       t,
+      settings,
+      ...rest
     },
     plugin,
   );

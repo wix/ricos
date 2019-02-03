@@ -24,7 +24,7 @@ class InputWithLabel extends Component {
     );
     const InputComponent = isTextArea ? 'textarea' : 'input';
 
-    return <InputComponent className={inputClassName} id={id} data-hook={dataHook} {...inputProps}/>;
+    return <InputComponent className={inputClassName} id={id} data-hook={dataHook} {...inputProps} />;
   };
 
   render() {

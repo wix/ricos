@@ -12,8 +12,8 @@ class ImageLoader extends React.Component {
   }
 
   render = () => (
-    <div className={this.styles.loaderOverlay}>
-      <div className={classNames(this.styles.loader, { [this.styles[this.props.type]]: this.props.type })} />
+    <div className={classNames(this.props.overlayClassName, this.styles.loaderOverlay)} data-hook="imageLoader">
+      <div className={classNames(this.props.loaderClassName, this.styles.loader, { [this.styles[this.props.type]]: this.props.type })} />
     </div>
   );
 }
@@ -26,7 +26,9 @@ ImageLoader.propTypes = {
 };
 
 ImageLoader.defaultProps = {
-  type: 'mini'
+  type: 'mini',
+  overlayClassName: '',
+  loaderClassName: '',
 };
 
 export default ImageLoader;

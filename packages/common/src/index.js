@@ -61,14 +61,18 @@ export { getModalStyles } from './Utils/getModalStyles';
 export { mergeStyles } from './Utils/mergeStyles';
 export { default as normalizeInitialState } from './Utils/normalizeInitialState';
 export { validate } from './Utils/component-data-validator';
+
 export {
   isValidUrl,
+  isSoundCloudUrl,
+  matchSoundCloudUrl,
   isVideoUrl,
   normalizeUrl,
   getUrlMatches,
   startsWithHttps,
   hasProtocol,
 } from './Utils/urlValidators';
+
 export {
   insertLink,
   hasLinksInSelection,
@@ -83,7 +87,13 @@ export { default as WixUtils } from './Utils/wixUtils';
 export { sizeClassName, alignmentClassName, textWrapClassName } from './Utils/classNameStrategies';
 export { getSelectionStyles } from './Utils/inlineStyleUtils';
 export { getConfigByFormFactor } from './Utils/getConfigByFormFactor';
-export { default as createInlineStyleDecorators } from './Decorators/inline-style-decorators';
+export { mergeToolbarSettings } from './Utils/mergeToolbarSettings';
 
-export { HEADING } from './Decorators/inline-styles';
-export { COMMANDS, MODIFIERS, TOOLBARS } from './consts';
+export {
+  COMMANDS,
+  MODIFIERS,
+  TOOLBARS,
+  DISPLAY_MODE,
+  DECORATION_MODE,
+  HEADER_BLOCK,
+} from './consts';

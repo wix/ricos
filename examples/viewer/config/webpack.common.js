@@ -13,12 +13,13 @@ module.exports = env => ({
     path.resolve(PATHS.src, 'index.js'),
   ],
   output: {
-      path: PATHS.dist,
-      filename: '[name].js',
-      publicPath: '/'
+    path: PATHS.dist,
+    filename: '[name].js',
+    publicPath: '/'
   },
   resolve: {
     extensions: ['.js', '.jsx', '.json', '.scss', '.css'],
+    symlinks: false,
   },
   module: {
     rules: [

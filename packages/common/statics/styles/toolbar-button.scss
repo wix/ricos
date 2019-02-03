@@ -25,6 +25,7 @@
   border: 0;
   vertical-align: bottom;
   height: 100%;
+  pointer-events: initial;
 
   &:hover, &:focus {
     cursor: pointer;
@@ -84,7 +85,7 @@
 
   .label {
     display: block;
-    font-size: 18px;
+    font-size: 13px;
     line-height: 21px;
     margin: 6px 0 0;
   }

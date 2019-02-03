@@ -6,7 +6,8 @@ import styles from '../statics/hashtag.scss';
 
 const findHashtagEntities = (contentBlock, callback) => {
   const text = contentBlock.getText();
-  if (!text || !text.match(hashtagRegexes.hashSigns)) {
+  const type = contentBlock.getType();
+  if (type === 'code-block' || !text || !text.match(hashtagRegexes.hashSigns)) {
     return [];
   }
 
@@ -25,6 +26,7 @@ const findHashtagEntities = (contentBlock, callback) => {
 };
 
 const Hashtag = ({ children, decoratedText, createHref, onClick, target = '_self', theme = {} }) => {
+
   const text = decoratedText.slice(1);
   const href = createHref ? createHref(text) : null;
   const Component = href ? 'a' : 'span';
@@ -34,9 +36,9 @@ const Hashtag = ({ children, decoratedText, createHref, onClick, target = '_self
       [styles.hashtag_hover]: !!href,
       [theme.hashtag_hover]: theme && theme.hashtag_hover && !!href,
     });
-  const decoratedOnClick = event => onClick(event, text);
-  const props = href ? { className, href, target, onClick: decoratedOnClick } : { className };
 
+  const decoratedOnClick = onClick ? event => onClick(event, text) : null;
+  const props = href ? { className, href, target, onClick: decoratedOnClick } : { className };
   return <Component {...props} >{children}</Component>;
 };
 

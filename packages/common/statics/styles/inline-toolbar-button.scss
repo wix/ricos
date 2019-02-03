@@ -3,8 +3,8 @@
 @import './consts';
 
 .inlineToolbarButton_wrapper {
-  display: inline-block;
-  padding: 10px 0 6px;
+  display: flex;
+  padding: 10px 0;
   margin-right: 10px;
   &:last-child {
     margin-right: 0;

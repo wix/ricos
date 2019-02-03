@@ -8,7 +8,7 @@ import BlockLinkPanel from './BlockLinkPanel';
 
 class BlockLinkButton extends Component {
   get isActive() {
-    return !!this.props.pubsub.get('componentLink');
+    return !!this.props.pubsub.getBlockData({ key: 'componentLink' });
   }
 
   showLinkPanel = () => {
@@ -22,7 +22,8 @@ class BlockLinkButton extends Component {
       componentState,
       anchorTarget,
       relValue,
-      t
+      t,
+      uiSettings
     } = this.props;
     const modalStyles = getModalStyles({ fullScreen: false });
     if (isMobile) {
@@ -38,7 +39,8 @@ class BlockLinkButton extends Component {
           anchorTarget,
           relValue,
           modalName: EditorModals.MOBILE_BLOCK_LINK_MODAL,
-          hidePopup: helpers.closeModal
+          hidePopup: helpers.closeModal,
+          uiSettings
         };
         helpers.openModal(modalProps);
       } else {
@@ -52,6 +54,7 @@ class BlockLinkButton extends Component {
         relValue,
         theme,
         t,
+        uiSettings
       };
       const BlockLinkPanelWithProps = decorateComponentWithProps(BlockLinkPanel, linkPanelProps);
       onOverrideContent(BlockLinkPanelWithProps);
@@ -84,6 +87,7 @@ BlockLinkButton.propTypes = {
   relValue: PropTypes.string,
   t: PropTypes.func,
   tabIndex: PropTypes.number,
+  uiSettings: PropTypes.object,
 };
 
 export default BlockLinkButton;

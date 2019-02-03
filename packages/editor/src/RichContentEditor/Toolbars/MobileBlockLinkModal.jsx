@@ -10,20 +10,20 @@ export default class MobileBlockLinkModal extends Component {
   wrapBlockInLink = ({ url, targetBlank, nofollow }) => {
     const { pubsub } = this.props;
     if (!isEmpty(url)) {
-      pubsub.set('componentLink', { url, targetBlank, nofollow });
+      pubsub.setBlockData({ key: 'componentLink', item: { url, targetBlank, nofollow } });
     } else {
-      pubsub.set('componentLink', null);
+      pubsub.setBlockData({ key: 'componentLink', item: null });
     }
     this.hidePopup();
   };
 
   deleteLink = () => {
-    this.props.pubsub.set('componentLink', null);
+    this.props.pubsub.setBlockData({ key: 'componentLink', item: null });
   }
 
   render() {
-    const { pubsub, theme, isMobile, anchorTarget, relValue, t } = this.props;
-    const componentLink = pubsub.get('componentLink');
+    const { pubsub, theme, isMobile, anchorTarget, relValue, t, uiSettings } = this.props;
+    const componentLink = pubsub.getBlockData({ key: 'componentLink' });
     const { url, target, rel } = componentLink || {};
     const targetBlank = target === '_blank';
     const nofollow = rel === 'nofollow';
@@ -40,6 +40,7 @@ export default class MobileBlockLinkModal extends Component {
         onDone={this.wrapBlockInLink}
         onCancel={this.hidePopup}
         onDelete={this.deleteLink}
+        uiSettings={uiSettings}
         t={t}
       />
     );
@@ -57,4 +58,5 @@ MobileBlockLinkModal.propTypes = {
   anchorTarget: PropTypes.string,
   relValue: PropTypes.string,
   t: PropTypes.func,
+  uiSettings: PropTypes.object,
 };

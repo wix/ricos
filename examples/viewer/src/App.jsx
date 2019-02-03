@@ -6,30 +6,32 @@ import { RichContentViewer } from 'wix-rich-content-viewer';
 import RichContentRawDataViewer from './RichContentRawDataViewer';
 
 import { videoTypeMapper } from 'wix-rich-content-plugin-video/dist/module.viewer';
-import { imageTypeMapper } from 'wix-rich-content-plugin-image/dist/module.viewer';
-import { galleryTypeMapper } from 'wix-rich-content-plugin-gallery/dist/module.viewer';
 import { dividerTypeMapper } from 'wix-rich-content-plugin-divider/dist/module.viewer';
-import { htmlTypeMapper } from 'wix-rich-content-plugin-html/dist/module.viewer';
-import { linkTypeMapper, LinkViewer, LinkParseStrategy } from 'wix-rich-content-plugin-link/dist/module.viewer';
+import { htmlTypeMapper, HTML_TYPE } from 'wix-rich-content-plugin-html/dist/module.viewer';
+import { soundCloudTypeMapper } from 'wix-rich-content-plugin-sound-cloud/dist/module.viewer';
+import { linkTypeMapper, LinkViewer, LinkParseStrategy, LINK_TYPE } from 'wix-rich-content-plugin-link/dist/module.viewer';
+import { imageTypeMapper } from 'wix-rich-content-plugin-image/dist/module.viewer'
 
 import { Strategy as HashTagStrategy, Component as HashTag } from 'wix-rich-content-plugin-hashtag';
-
-import TestData from './TestData/initial-state';
-import theme from './theme/theme';
-import styles from './App.scss';
+import { CodeBlockDecorator } from 'wix-rich-content-plugin-code-block/dist/module.viewer';
+import { MENTION_TYPE, mentionsTypeMapper } from 'wix-rich-content-plugin-mentions/dist/module.viewer';
 
 import 'wix-rich-content-common/dist/styles.min.css';
 import 'wix-rich-content-viewer/dist/styles.min.css';
-import 'wix-rich-content-plugin-code-block/dist/styles.min.css';
+// import 'wix-rich-content-plugin-code-block/dist/styles.min.css';
 import 'wix-rich-content-plugin-divider/dist/styles.min.css';
 import 'wix-rich-content-plugin-emoji/dist/styles.min.css';
-import 'wix-rich-content-plugin-gallery/dist/styles.min.css';
-import 'wix-rich-content-plugin-html/dist/styles.min.css';
 import 'wix-rich-content-plugin-hashtag/dist/styles.min.css';
+import 'wix-rich-content-plugin-html/dist/styles.min.css';
 import 'wix-rich-content-plugin-image/dist/styles.min.css';
 import 'wix-rich-content-plugin-link/dist/styles.min.css';
 import 'wix-rich-content-plugin-mentions/dist/styles.min.css';
 import 'wix-rich-content-plugin-video/dist/styles.min.css';
+import 'wix-rich-content-plugin-sound-cloud/dist/styles.min.css';
+
+import TestData from './TestData/initial-state';
+import styles from './App.scss';
+import theme from './theme/theme';
 
 const modalStyleDefaults = {
   content: {
@@ -40,6 +42,14 @@ const modalStyleDefaults = {
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)'
   }
+};
+
+const linkPluginSettings = {
+  onClick: (event, url) => console.log('link clicked!', url),
+};
+const mentionsPluginSettings = {
+  onMentionClick: mention => console.log('mention clicked!', mention),
+  getMentionLink: () => '/link/to/mention',
 };
 
 const anchorTarget = '_top';
@@ -57,42 +67,44 @@ class App extends Component {
 
     this.typeMappers = [
       videoTypeMapper,
-      imageTypeMapper,
-      galleryTypeMapper,
       dividerTypeMapper,
       htmlTypeMapper,
-      linkTypeMapper];
+      linkTypeMapper,
+      soundCloudTypeMapper,
+      mentionsTypeMapper,
+      imageTypeMapper,
+    ];
 
     this.decorators = [{
         strategy: LinkParseStrategy,
         component: ({ children, decoratedText, rel, target }) =>
-        <LinkViewer componentData={{ rel, target, url: decoratedText }} anchorTarget={anchorTarget} relValue={relValue}> {children} </LinkViewer>
+        <LinkViewer
+          componentData={{ rel, target, url: decoratedText }}
+          anchorTarget={anchorTarget}
+          relValue={relValue}
+          settings={linkPluginSettings}
+        >
+          {children}
+        </LinkViewer>
       }, {
         strategy: HashTagStrategy,
         component: ({children, decoratedText}) =>
           <HashTag theme={theme} onClick={this.onHashTagClick} createHref={this.createHref} decoratedText={decoratedText}>{children}</HashTag>
-      }
+      },
+      new CodeBlockDecorator({ theme })
     ];
+
+    this.config = {
+      [HTML_TYPE]: {
+        htmlIframeSrc: 'http://localhost:3001/static/html-plugin-embed.html',
+      },
+      [LINK_TYPE]: linkPluginSettings,
+      [MENTION_TYPE]: mentionsPluginSettings
+    }
   }
 
   initViewerProps() {
-    this.helpers = {
-      openModal: data => {
-        const { modalStyles, ...modalProps } = data;
-        this.setState({
-          showModal: true,
-          modalProps,
-          modalStyles,
-        });
-      },
-      closeModal: () => {
-        this.setState({
-          showModal: false,
-          modalProps: null,
-          modalStyles: null,
-        });
-      }
-    };
+    this.helpers = {};
   }
 
   closeModal = () => {
@@ -166,6 +178,7 @@ class App extends Component {
                   isMobile={this.isMobile()}
                   anchorTarget={anchorTarget}
                   relValue={relValue}
+                  config={this.config}
                 />
               </div>
               <div className={styles.column}>

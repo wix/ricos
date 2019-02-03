@@ -31,7 +31,7 @@ class Image extends Component {
     };
     return (
       <div className={classNames(styles.image_container, className)} style={imageStyle}>
-        <img src={src} className={styles.image_placeholder} alt={alt}/>
+        <img src={src} className={styles.image_placeholder} alt={alt} />
       </div>);
   }
 }

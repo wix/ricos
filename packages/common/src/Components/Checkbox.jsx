@@ -53,7 +53,7 @@ export default class Checkbox extends React.Component {
           className={styles.checkbox_input} type={'checkbox'} data-hook={dataHook} onChange={onChange} {...isChecked}
         />
         <i className={classnames(styles.checkbox_icon, checked ? styles.checkbox_icon_checked : styles.checkbox_icon_unchecked)}>
-          {checked && <CheckIcon className={styles.checkbox_check}/>}
+          {checked && <CheckIcon className={styles.checkbox_check} />}
         </i>
         <span className={styles.checkbox_label}>{label}</span>
       </label>

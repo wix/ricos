@@ -61,7 +61,6 @@ class ImageSettingsMobileHeader extends Component {
 }
 
 ImageSettingsMobileHeader.propTypes = {
-  hide: PropTypes.func.isRequired,
   save: PropTypes.func.isRequired,
   theme: PropTypes.object.isRequired,
   cancel: PropTypes.func.isRequired,

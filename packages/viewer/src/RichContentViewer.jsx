@@ -27,7 +27,7 @@ export default class RichContentViewer extends Component {
 
   render() {
     const { styles } = this;
-    const { theme, isMobile, typeMappers, decorators, anchorTarget, relValue } = this.props;
+    const { theme, isMobile, textDirection, typeMappers, decorators, anchorTarget, relValue, config } = this.props;
     const wrapperClassName = classNames(styles.wrapper, {
       [styles.desktop]: !this.props.platform || this.props.platform === 'desktop',
     });
@@ -35,11 +35,18 @@ export default class RichContentViewer extends Component {
       <div className={wrapperClassName}>
         <div className={styles.editor}>
           <Preview
-            raw={this.state.raw} decorators={decorators} typeMappers={typeMappers}
-            theme={theme} isMobile={isMobile} anchorTarget={anchorTarget} relValue={relValue}
+            anchorTarget={anchorTarget}
+            config={config}
+            decorators={decorators}
+            isMobile={isMobile}
+            raw={this.state.raw}
+            relValue={relValue}
+            textDirection={textDirection}
+            theme={theme}
+            typeMappers={typeMappers}
           />
         </div>
-        <AccessibilityListener isMobile={isMobile}/>
+        <AccessibilityListener isMobile={isMobile} />
       </div>
     );
   }
@@ -50,12 +57,29 @@ RichContentViewer.propTypes = {
   isMobile: PropTypes.bool,
   helpers: PropTypes.object,
   platform: PropTypes.string,
-  typeMappers: PropTypes.arrayOf(PropTypes.func).isRequired,
-  decorators: PropTypes.arrayOf(PropTypes.shape({
-    component: PropTypes.func.isRequired,
-    strategy: PropTypes.func.isRequired,
-  })),
+  typeMappers: PropTypes.arrayOf(PropTypes.func),
+  decorators: PropTypes.arrayOf(
+    PropTypes.oneOfType([
+      PropTypes.shape({
+        getDecorations: PropTypes.func.isRequired,
+        getComponentForKey: PropTypes.func.isRequired,
+        getPropsForKey: PropTypes.func.isRequired,
+      }),
+      PropTypes.shape({
+        component: PropTypes.func.isRequired,
+        strategy: PropTypes.func.isRequired,
+      })
+    ])
+  ),
   theme: PropTypes.object,
   anchorTarget: PropTypes.string,
   relValue: PropTypes.string,
+  config: PropTypes.object,
+  textDirection: PropTypes.oneOf(['rtl', 'ltr']),
+};
+
+RichContentViewer.defaultProps = {
+  theme: {},
+  decorators: [],
+  typeMappers: [],
 };

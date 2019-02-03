@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { EditorState, convertFromRaw, CompositeDecorator } from '@wix/draft-js';
+import { EditorState, convertFromRaw } from '@wix/draft-js';
 import Editor from 'draft-js-plugins-editor';
 import get from 'lodash/get';
+import merge from 'lodash/merge';
 import includes from 'lodash/includes';
 import Measure from 'react-measure';
 import { translate } from 'react-i18next';
@@ -13,16 +14,14 @@ import { keyBindingFn, initPluginKeyBindings } from './keyBindings';
 import handleKeyCommand from './handleKeyCommand';
 import handleReturnCommand from './handleReturnCommand';
 import blockStyleFn from './blockStyleFn';
+import getBlockRenderMap from './getBlockRenderMap';
 import { getStaticTextToolbarId } from './Toolbars/toolbar-id';
 import {
   AccessibilityListener,
   normalizeInitialState,
-  createInlineStyleDecorators,
-  mergeStyles,
   TooltipHost,
   TOOLBARS
 } from 'wix-rich-content-common';
-import { getStrategyByStyle } from './getStrategyByStyle';
 import styles from '../../statics/styles/rich-content-editor.scss';
 import draftStyles from '../../statics/styles/draft.scss';
 
@@ -34,6 +33,12 @@ class RichContentEditor extends Component {
       theme: props.theme || {}
     };
     this.refId = Math.floor(Math.random() * 9999);
+
+    props.config.uiSettings = merge({
+      blankTargetToggleVisibilityFn: anchorTarget => anchorTarget !== '_blank',
+      nofollowRelToggleVisibilityFn: relValue => relValue !== 'nofollow'
+    }, props.config.uiSettings || {});
+
     this.initPlugins();
   }
 
@@ -47,11 +52,23 @@ class RichContentEditor extends Component {
       relValue,
       t,
     } = this.props;
+
     const { theme } = this.state;
     const getEditorState = () => this.state.editorState;
     const setEditorState = editorState => this.setState({ editorState });
     const { pluginInstances, pluginButtons, pluginTextButtons, pubsubs } =
-      createPlugins({ plugins, config, helpers, theme, t, isMobile, anchorTarget, relValue, getEditorState, setEditorState });
+      createPlugins({
+        plugins,
+        config,
+        helpers,
+        theme,
+        t,
+        isMobile,
+        anchorTarget,
+        relValue,
+        getEditorState,
+        setEditorState,
+      });
     this.initEditorToolbars(pluginButtons, pluginTextButtons);
     this.pluginKeyBindings = initPluginKeyBindings(pluginTextButtons);
     this.plugins = [...pluginInstances, ...Object.values(this.toolbars)];
@@ -85,7 +102,8 @@ class RichContentEditor extends Component {
       setEditorState: editorState => this.setState({ editorState }),
       t,
       refId: this.refId,
-      getToolbarSettings: config.getToolbarSettings
+      getToolbarSettings: config.getToolbarSettings,
+      uiSettings: config.uiSettings
     });
   }
 
@@ -133,21 +151,6 @@ class RichContentEditor extends Component {
       this.setState({ textToolbarType: nextProps.textToolbarType });
     }
   }
-
-  // TODO: get rid of this ASAP!
-  // this is done to ensure fixed tooltips have transformed parent for scrolling
-  componentDidMount() {
-    if (this.getToolbars().TextToolbar && !document.body.className.includes(styles.transformed)) {
-      document.body.className += ` ${styles.transformed}`;
-    }
-  }
-
-  componentDidUpdate() {
-    if (this.getToolbars().TextToolbar && !document.body.className.includes(styles.transformed)) {
-      document.body.className += ` ${styles.transformed}`;
-    }
-  }
-
 
   // TODO: get rid of this ASAP!
   // Currently, there's no way to get a static toolbar ref without consumer interference
@@ -219,7 +222,7 @@ class RichContentEditor extends Component {
       const modals = this.plugins.map((plugin, index) => {
         if (plugin.InlineModals && plugin.InlineModals.length > 0) {
           return plugin.InlineModals.map((Modal, modalIndex) => {
-            return <Modal key={`k${index}m${modalIndex}`}/>;
+            return <Modal key={`k${index}m${modalIndex}`} />;
           });
         }
       });
@@ -251,19 +254,20 @@ class RichContentEditor extends Component {
       readOnly,
       handleBeforeInput,
       handlePastedText,
+      handleReturn,
     } = this.props;
     const { editorState, theme } = this.state;
-    const mergedStyles = mergeStyles({ styles, theme }); // TODO: refactor the whole class to use merged styles
     return (
       <Editor
         ref={this.setEditor}
-        handleReturn={handleReturnCommand(this.updateEditorState)}
+        handleReturn={handleReturn ? handleReturn(this.updateEditorState) : handleReturnCommand(this.updateEditorState)}
         editorState={editorState}
         onChange={this.updateEditorState}
         handleBeforeInput={handleBeforeInput}
         handlePastedText={handlePastedText}
         plugins={this.plugins}
         blockStyleFn={blockStyleFn(theme)}
+        blockRenderMap={getBlockRenderMap(theme)}
         handleKeyCommand={handleKeyCommand(this.updateEditorState, this.getCustomCommandHandlers().commandHanders)}
         editorKey={editorKey}
         keyBindingFn={keyBindingFn(this.getCustomCommandHandlers().commands || [])}
@@ -286,12 +290,11 @@ class RichContentEditor extends Component {
         onBlur={onBlur}
         onFocus={onFocus}
         textAlignment={textAlignment}
-        decorators={[new CompositeDecorator(createInlineStyleDecorators(getStrategyByStyle, mergedStyles))]}
       />
     );
   };
 
-  renderAccessibilityListener = () => <AccessibilityListener isMobile={this.props.isMobile}/>;
+  renderAccessibilityListener = () => <AccessibilityListener isMobile={this.props.isMobile} />;
 
   renderTooltipHost = () => <TooltipHost theme={this.state.theme} />
 
@@ -359,6 +362,11 @@ RichContentEditor.propTypes = {
   textAlignment: PropTypes.oneOf(['left', 'right', 'center']),
   handleBeforeInput: PropTypes.func,
   handlePastedText: PropTypes.func,
+  handleReturn: PropTypes.func,
+};
+
+RichContentEditor.defaultProps = {
+  config: {}
 };
 
 export default translate(null, { withRef: true })(RichContentEditor);
