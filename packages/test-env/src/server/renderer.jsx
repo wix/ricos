@@ -17,7 +17,7 @@ const COMPONENTS = {
 
 export default function renderer() {
   return (req, res) => {
-    const [componentId, fixtureName] = req.path.replace(/^\//, '').split('/');
+    const [componentId, fixtureName = 'empty'] = req.path.replace(/^\//, '').split('/');
     const { Component, bundleName } = COMPONENTS[componentId] || {};
     const props = { initialState: null };
 
@@ -25,13 +25,11 @@ export default function renderer() {
       return res.status(404).send(`Component for ${componentId} not found`);
     }
 
-    if (fixtureName) {
-      try {
-        props.initialState = require(`./fixtures/${fixtureName}.json`);
-      } catch (error) {
-        console.log(error);
-        return res.status(404).send(`Fixture ${fixtureName} not found`);
-      }
+    try {
+      props.initialState = require(`./fixtures/${fixtureName}.json`);
+    } catch (error) {
+      console.log(error);
+      return res.status(404).send(`Fixture ${fixtureName} not found`);
     }
 
     res.render('index', {

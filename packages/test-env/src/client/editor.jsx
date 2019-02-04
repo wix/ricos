@@ -6,7 +6,7 @@ import getPropsFromQuery from './services/get-props-from-query';
 
 render(
   <App>
-    <Editor raw={window.__CONTENT_STATE__} {...getPropsFromQuery()}/>
+    <Editor initialState={window.__CONTENT_STATE__} {...getPropsFromQuery()}/>
   </App>,
   document.getElementById('root'),
 );

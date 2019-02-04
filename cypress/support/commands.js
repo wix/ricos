@@ -37,8 +37,25 @@ Cypress.Commands.add('editorMobile', fixtureName => {
 
 // Editor commands
 
+const getRce = () => cy.window().its('rce');
+
 Cypress.Commands.add('matchContentSnapshot', name => {
-  cy.window().its('__CONTENT_SNAPSHOT__').snapshot({ name });
+  cy
+    .window()
+    .its('__CONTENT_SNAPSHOT__')
+    .snapshot(name ? { name } : undefined);
+});
+
+Cypress.Commands.add('matchSnapshots', () => {
+  cy
+    .matchImageSnapshot()
+    .matchContentSnapshot();
+});
+
+Cypress.Commands.add('enterParagraphs', pagraphs => {
+  cy
+    .get('[contenteditable="true"]')
+    .type(pagraphs.join('{enter}'));
 });
 
 Cypress.Commands.add('enterText', text => {
@@ -47,11 +64,27 @@ Cypress.Commands.add('enterText', text => {
     .type(text);
 });
 
-Cypress.Commands.add('selectText', ({ anchorBlockIndex, anchorOffset, focusOffset, focusBlockOffset }) => {
-  cy.window().invoke('setEditorSelection', {
-    anchorBlockIndex,
+Cypress.Commands.add('newLine', () => {
+  cy.enterText('{enter}');
+});
+
+Cypress.Commands.add('blurEditor', () => {
+  getRce().blur();
+});
+
+Cypress.Commands.add('selectText', ({ anchorBlockIndex, anchorOffset, focusOffset, focusBlockIndex }) => {
+  getRce().invoke('setSelection', {
     anchorOffset,
+    anchorBlockIndex,
     focusOffset,
-    focusBlockOffset,
+    focusBlockIndex,
   });
+});
+
+Cypress.Commands.add('moveSelectionToEnd', () => {
+  getRce().invoke('moveSelectionToEnd');
+});
+
+Cypress.Commands.add('setTextStyle', (buttonSelector) => {
+  cy.get(`[data-hook=${buttonSelector}]`).click();
 });

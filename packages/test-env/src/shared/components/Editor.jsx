@@ -7,22 +7,31 @@ import 'wix-rich-content-editor/dist/styles.min.css';
 
 class Editor extends Component {
   state = {
-    editorState: this.props.raw ?
-      EditorState.createWithContent(convertFromRaw(this.props.raw)) :
-      EditorState.createEmpty(),
+    editorState: EditorState.createWithContent(convertFromRaw(this.props.initialState)),
   };
 
   constructor(props) {
     super(props);
 
     if (isBrowser()) {
-      window.setEditorSelection = this.setSelection;
+      window.rce = {
+        setSelection: this.setSelection,
+        moveSelectionToEnd: this.moveSelectionToEnd,
+        focus: this.focus,
+      };
     }
   }
 
+  focus = ({}) => {
+    const { editorState } = this.state;
+    this.setState({
+      editorState: EditorState.forceSelection(editorState, editorState.getSelection()),
+    })
+  };
+
   setSelection = ({
-    anchorBlockIndex,
-    anchorOffset,
+    anchorBlockIndex = 0,
+    anchorOffset = 0,
     focusBlockIndex = anchorBlockIndex,
     focusOffset = anchorOffset,
   }) => {
@@ -37,7 +46,13 @@ class Editor extends Component {
 
     this.setState({
       editorState: EditorState.forceSelection(editorState, selection),
-    })
+    });
+  };
+
+  moveSelectionToEnd = () => {
+    this.setState({
+      editorState: EditorState.moveFocusToEnd(this.state.editorState),
+    });
   };
 
   handleChange = editorState => {
@@ -55,7 +70,7 @@ class Editor extends Component {
 
   render() {
     return (
-      <RichContentEditor editorState={this.state.editorState} onChange={this.handleChange}/>
+      <RichContentEditor editorKey="rce" editorState={this.state.editorState} onChange={this.handleChange}/>
     );
   }
 }

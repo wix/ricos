@@ -37,7 +37,7 @@ const config = [
           use: ['style-loader', { loader: 'css-loader', options: { modules: true } }],
         },
         {
-          test: /\.min\.css$/,
+          test: /\.css$/,
           exclude: /packages\/test-env/,
           use: ['style-loader', 'css-loader'],
         },
