@@ -7,6 +7,7 @@ import { LINK_TYPE } from 'wix-rich-content-plugin-link';
 import { VIDEO_TYPE } from 'wix-rich-content-plugin-video';
 import { GIPHY_TYPE } from 'wix-rich-content-plugin-giphy';
 import { EXTERNAL_MENTIONS_TYPE } from 'wix-rich-content-plugin-mentions';
+import { HEADERS_MARKDOWN_TYPE } from 'wix-rich-content-plugin-headers-markdown';
 import React from 'react';
 import Highlighter from 'react-highlight-words';
 import casual from 'casual-browserify';

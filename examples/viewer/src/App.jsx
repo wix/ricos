@@ -23,6 +23,10 @@ import {
 import { imageTypeMapper } from 'wix-rich-content-plugin-image/dist/module.viewer';
 
 import { Strategy as HashTagStrategy, Component as HashTag } from 'wix-rich-content-plugin-hashtag';
+import {
+  createHeadersMarkdownDecorator,
+  HEADERS_MARKDOWN_TYPE,
+} from 'wix-rich-content-plugin-headers-markdown';
 import { CodeBlockDecorator } from 'wix-rich-content-plugin-code-block/dist/module.viewer';
 import {
   MENTION_TYPE,
@@ -88,6 +92,17 @@ class App extends Component {
       imageTypeMapper,
     ];
 
+    this.config = {
+      [HEADERS_MARKDOWN_TYPE]: {
+        hideMarkdown: true,
+      },
+      [HTML_TYPE]: {
+        htmlIframeSrc: 'http://localhost:3001/static/html-plugin-embed.html',
+      },
+      [LINK_TYPE]: linkPluginSettings,
+      [MENTION_TYPE]: mentionsPluginSettings,
+    };
+
     this.decorators = [
       {
         strategy: LinkParseStrategy,
@@ -116,15 +131,8 @@ class App extends Component {
         ),
       },
       new CodeBlockDecorator({ theme }),
+      createHeadersMarkdownDecorator(this.config),
     ];
-
-    this.config = {
-      [HTML_TYPE]: {
-        htmlIframeSrc: 'http://localhost:3001/static/html-plugin-embed.html',
-      },
-      [LINK_TYPE]: linkPluginSettings,
-      [MENTION_TYPE]: mentionsPluginSettings,
-    };
   }
 
   initViewerProps() {

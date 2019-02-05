@@ -36,6 +36,7 @@
     "wix-rich-content-plugin-emoji": "file:../../packages/plugin-emoji",
     "wix-rich-content-plugin-giphy": "file:../../packages/plugin-giphy",
     "wix-rich-content-plugin-hashtag": "file:../../packages/plugin-hashtag",
+    "wix-rich-content-plugin-headers-markdown": "file:../../packages/plugin-headers-markdown",
     "wix-rich-content-plugin-html": "file:../../packages/plugin-html",
     "wix-rich-content-plugin-image": "file:../../packages/plugin-image",
     "wix-rich-content-plugin-link": "file:../../packages/plugin-link",
