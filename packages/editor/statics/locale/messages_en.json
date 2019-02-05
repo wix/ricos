@@ -58,7 +58,7 @@
   "MapSettings_Title" : "Map Settings",
   "MapSettings_Location_Input_Label" : "Location",
   "MapSettings_Location_Input_Placeholder" : "Address",
-  "MapSettings_Advanced_Location_Input_Label" : "Advanced Location",
+  "MapSettings_Location_Display_Name" : "Location Display Name",
   "MapSettings_Zoom_Slider_Label" : "Zoom",
   "MapPlugin_InsertButton_Tooltip" : "Add a Map",
   "MapPluginButton_Settings_Tooltip" : "Map Settings",

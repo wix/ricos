@@ -4,27 +4,35 @@ import {
   mergeStyles,
   WixUtils,
   SettingsSection,
-  InputWithLabel,
   TextInput,
-  SliderWithInput,
   Checkbox,
   Button,
   Dropdown
 } from 'wix-rich-content-common';
-import { options } from '../constants';
 import ReactGoogleMapLoader from 'react-google-maps-loader';
 import ReactGooglePlacesSuggest from 'react-google-places-suggest';
 import styles from '../../statics/styles/map-settings-modal.scss';
 
-export default class MapSettingsModal extends Component {
+const mapModes = [{
+  value: 'roadmap',
+  label: 'Roadmap'
+}, {
+  value: 'terrain',
+  label: 'Terrain'
+}, {
+  value: 'satellite',
+  label: 'Satellite'
+}];
+
+export class MapSettingsModal extends Component {
   constructor(props) {
     super(props);
-    this.styles = mergeStyles({ styles, theme: props.theme });
     const { componentData } = this.props;
+
+    this.styles = mergeStyles({ styles, theme: props.theme });
     this.state = {
-      search: '',
+      locationSearchPhrase: '',
       address: componentData.map.address,
-      zoom: componentData.map.zoom,
       lat: componentData.map.lat,
       lng: componentData.map.lng,
       mode: componentData.map.mode,
@@ -32,30 +40,28 @@ export default class MapSettingsModal extends Component {
       isZoomControlShown: componentData.map.isZoomControlShown,
       isStreetViewControlShown: componentData.map.isStreetViewControlShown,
       isDraggingAllowed: componentData.map.isDraggingAllowed,
-      enableSave: false
+      isLocationInputAlreadyFocused: false,
     };
+    this.state.locationDisplayName = this.state.address;
   }
 
-  handleInputChange = e => {
-    this.setState({ search: e.target.value, address: e.target.value });
-  }
+  onLocationInputChange = e => this.setState({ locationSearchPhrase: e.target.value, address: e.target.value });
 
-  handleSelectSuggest = (geocodedPrediction, originalPrediction) => {
+  onLocationSuggestSelect = (geocodedPrediction, originalPrediction) => {
     this.setState({
-      search: '',
+      locationSearchPhrase: '',
       address: originalPrediction.description,
-      enableSave: true,
+      locationDisplayName: originalPrediction.description,
       lat: geocodedPrediction.geometry.location.lat(),
       lng: geocodedPrediction.geometry.location.lng()
     });
   }
 
-  onClick = () => {
+  onSaveBtnClick = () => {
     const { componentData, onConfirm, pubsub, helpers } = this.props;
-    const map = {
+    const newComponentData = {
       map: {
         address: this.state.address,
-        zoom: this.state.zoom,
         lat: this.state.lat,
         lng: this.state.lng,
         mode: this.state.mode,
@@ -67,50 +73,39 @@ export default class MapSettingsModal extends Component {
     };
 
     if (onConfirm) {
-      onConfirm({ ...componentData, ...map });
+      onConfirm({ ...componentData, ...newComponentData });
     } else {
-      pubsub.update('componentData', { ...map });
+      pubsub.update('componentData', { ...newComponentData });
     }
 
     if (helpers) {
       helpers.openModal(data => pubsub.update('componentData', { metadata: { ...data } }));
     }
 
-    this.onCloseRequested();
+    this.closeModal();
   };
 
-  onCloseRequested = () => {
-    this.setState({ isOpen: false });
-    this.props.helpers.closeModal();
-  };
-
-  handleKeyPress = e => {
-    if (e.charCode === 27) {
-      this.onCloseRequested();
-    }
-  };
-
-  handleClearText = () => {
-    this.setState({ searchTag: '' });
-  };
+  closeModal = () => this.props.helpers.closeModal();
 
   render() {
-    const { theme, t, minZoom, maxZoom } = this.props;
-    const { googleMapApiKey } = this.props;
-    const { search, address } = this.state;
+    const { theme, t, googleMapApiKey } = this.props;
+    const { locationSearchPhrase, address } = this.state;
+
     const backButton =
       (<div
         className={styles.map_settings_modal_mobile_backButton}
-        onClick={this.onCloseRequested}
+        onClick={this.closeModal}
         role="button"
         tabIndex="0"
-        onKeyPress={null}
+        onKeyPress={this.closeModal}
       />);
+
     const saveButton = (
       <Button
         className={styles.map_settings_modal_save_button}
-        onClick={() => this.onClick()}
-        ariaProps={!this.state.enableSave && { disabled: 'disabled' }}
+        onClick={this.onSaveBtnClick}
+        ariaProps={{ 'aria-label': 'Save Button', role: 'button' }}
+        theme={theme}
       >
         Save
       </Button>
@@ -129,8 +124,11 @@ export default class MapSettingsModal extends Component {
     return (
       <div className={styles.map_settings_modal}>
         {(WixUtils.isMobile()) && <div>{mobileNavbar}{backButton}</div>}
+
         <div className={styles.map_settings_modal_container}>
+
           <div className={styles.map_settings_modal_title_header}>{t('MapSettings_Title')}</div>
+
           <SettingsSection
             theme={theme}
             className={styles.map_settings_modal_section}
@@ -146,9 +144,9 @@ export default class MapSettingsModal extends Component {
                 googleMaps && (
                   <div>
                     <ReactGooglePlacesSuggest
-                      autocompletionRequest={{ input: search }}
+                      autocompletionRequest={{ input: locationSearchPhrase }}
                       googleMaps={googleMaps}
-                      onSelectSuggest={this.handleSelectSuggest}
+                      onSelectSuggest={this.onLocationSuggestSelect}
                     >
                       <TextInput
                         tabIndex="0"
@@ -156,9 +154,16 @@ export default class MapSettingsModal extends Component {
                         type="option"
                         placeholder={t('MapSettings_Location_Input_Placeholder')}
                         value={address}
-                        onChange={this.handleInputChange}
+                        onChange={this.onLocationInputChange}
+                        inputRef={ref => {
+                          // TODO: since this is a common logic, move it to the TextInput component, and encapsulate it in a prop
+                          if (ref !== null && !this.state.isLocationInputAlreadyFocused) {
+                            ref.focus();
+                            ref.setSelectionRange(0, ref.value.length);
+                            this.setState({ isLocationInputAlreadyFocused: true });
+                          }
+                        }}
                       />
-
                     </ReactGooglePlacesSuggest>
                   </div>
                 )
@@ -169,50 +174,14 @@ export default class MapSettingsModal extends Component {
           <SettingsSection
             theme={theme}
             className={styles.map_settings_modal_section}
-            ariaProps={{ 'aria-label': 'advanced location', role: 'region' }}
+            ariaProps={{ 'aria-label': 'location', role: 'region' }}
           >
-            <div className={styles.map_settings_modal_advanced_location_label}>
-              {t('MapSettings_Advanced_Location_Input_Label')}
-            </div>
-            <div className={styles.map_settings_modal_advanced_location_input_container}>
-              <InputWithLabel
-                theme={theme}
-                type="number"
-                min="-85"
-                max="85"
-                label="Latitude"
-                placeholder={t('MapSettings_Latitude_Input_Placeholder')}
-                value={this.state.lat}
-                onChange={event => event.target.value > -86 && event.target.value < 86 &&
-                  this.setState({ lat: event.target.value, enableSave: true })}
-              />
-              <InputWithLabel
-                theme={theme}
-                type="number"
-                min="-175"
-                max="175"
-                label="Longitude"
-                placeholder={t('MapSettings_Longitude_Input_Placeholder')}
-                value={this.state.lng}
-                onChange={event => event.target.value > -176 && event.target.value < 176 &&
-                  this.setState({ lng: event.target.value, enableSave: true })}
-              />
-            </div>
-          </SettingsSection>
-
-          <SettingsSection
-            theme={theme}
-            className={styles.map_settings_modal_zoom_section}
-            ariaProps={{ 'aria-label': 'zoom', role: 'region' }}
-          >
-            <div className={styles.map_settings_modal_zoom_slider_label}>{t('MapSettings_Zoom_Slider_Label')}</div>
-            <SliderWithInput
+            <div className={styles.map_settings_modal_location_label}>{t('MapSettings_Location_Display_Name')}</div>
+            <TextInput
+              type="text"
+              value={this.state.locationDisplayName}
+              onChange={e => this.setState({ locationDisplayName: e.target.value })}
               theme={theme}
-              value={this.state.zoom}
-              min={minZoom}
-              max={maxZoom}
-              onChange={value => this.setState({ zoom: value, enableSave: true })}
-
             />
           </SettingsSection>
 
@@ -223,10 +192,10 @@ export default class MapSettingsModal extends Component {
           >
             <Dropdown
               placeholder="Mode .."
-              theme={styles}
-              value={this.state.mode.toUpperCase()}
-              options={options}
-              onChange={value => this.setState({ mode: value.value, enableSave: true })}
+              theme={theme}
+              value={this.state.mode}
+              options={mapModes}
+              onChange={option => this.setState({ mode: option.value })}
             />
           </SettingsSection>
 
@@ -239,30 +208,30 @@ export default class MapSettingsModal extends Component {
               theme={theme}
               label="Show Marker Control"
               checked={this.state.isMarkerShown}
-              onChange={() => this.setState({ isMarkerShown: !this.state.isMarkerShown, enableSave: true })}
-
+              onChange={() => this.setState({ isMarkerShown: !this.state.isMarkerShown })}
             />
+
             <Checkbox
               theme={theme}
               label="Show Zoom Control"
               checked={this.state.isZoomControlShown}
-              onChange={() => this.setState({ isZoomControlShown: !this.state.isZoomControlShown, enableSave: true })}
-
+              onChange={() => this.setState({ isZoomControlShown: !this.state.isZoomControlShown })}
             />
+
             <Checkbox
               theme={theme}
               label="Show Street View Control"
               checked={this.state.isStreetViewControlShown}
-              onChange={() => this.setState({ isStreetViewControlShown: !this.state.isStreetViewControlShown, enableSave: true })}
-
+              onChange={() => this.setState({ isStreetViewControlShown: !this.state.isStreetViewControlShown })}
             />
+
             <Checkbox
               theme={theme}
               label="Allow Dragging"
               checked={this.state.isDraggingAllowed}
-              onChange={() => this.setState({ isDraggingAllowed: !this.state.isDraggingAllowed, enableSave: true })}
-
+              onChange={() => this.setState({ isDraggingAllowed: !this.state.isDraggingAllowed })}
             />
+
           </SettingsSection>
 
           {!WixUtils.isMobile() && saveButton}
@@ -279,7 +248,5 @@ MapSettingsModal.propTypes = {
   onConfirm: PropTypes.func,
   theme: PropTypes.object.isRequired,
   googleMapApiKey: PropTypes.string.isRequired,
-  minZoom: PropTypes.string,
-  maxZoom: PropTypes.string,
   t: PropTypes.func,
 };

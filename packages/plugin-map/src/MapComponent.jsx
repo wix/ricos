@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import MapViewer from './map-viewer';
-import { DEFAULTS } from './constants';
+import { MapViewer } from './MapViewer';
 
-class MapComponent extends Component {
+export class MapComponent extends Component {
   render() {
     return (
       <div>
@@ -24,4 +23,3 @@ MapComponent.propTypes = {
   editorBounds: PropTypes.object,
 };
 
-export { MapComponent as Component, DEFAULTS };

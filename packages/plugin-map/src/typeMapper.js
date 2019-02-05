@@ -1,4 +1,4 @@
-import MapViewer from './map-viewer';
+import { MapViewer } from './MapViewer';
 import { MAP_TYPE } from './constants';
 
 export const typeMapper = () => ({

@@ -2,14 +2,10 @@ import {
   BUTTONS,
   getModalStyles,
   PluginSettingsIcon,
-  WixUtils,
   SizeSmallCenterIcon,
-  DECORATION_MODE,
   decorateComponentWithProps
 } from 'wix-rich-content-common';
-import MapSettingsModal from './mapSettingsModal';
-import { MobileFullScreenCustomStyle, DesktopFlyOutModalStyles } from '../constants';
-import Arrow from './arrow';
+import { MapSettingsModal } from './MapSettingsModal';
 
 export default ({ settings, t, helpers }) => {
   const { maxWidth, minWidth, maxHeight, minHeight } = settings;
@@ -45,19 +41,7 @@ export default ({ settings, t, helpers }) => {
       type: BUTTONS.EXTERNAL_MODAL,
       icon: PluginSettingsIcon,
       modalElement: decorateComponentWithProps(MapSettingsModal, settings),
-      modalStyles: WixUtils.isMobile() ?
-        getModalStyles({ customStyles: MobileFullScreenCustomStyle, fullScreen: true }) : null,
-      modalStylesFn: ({ buttonRef }) => {
-        const modalStyles = getModalStyles({ customStyles: DesktopFlyOutModalStyles, fullScreen: true });
-        const { top, left } = buttonRef.getBoundingClientRect();
-        const modalLeft = left - 120;
-        const modalTop = top > 530 ? top - 540 : top + 30;
-        return { ...modalStyles, content: { ...modalStyles.content, top: modalTop, left: modalLeft, margin: 0, position: 'absolute' } };
-      },
-      modalDecorations: [{
-        decorationMode: DECORATION_MODE.APPEND,
-        decorator: Arrow
-      }],
+      modalStyles: getModalStyles(),
       mobile: true,
       tooltipTextKey: 'MapPluginButton_Settings_Tooltip',
       helpers,

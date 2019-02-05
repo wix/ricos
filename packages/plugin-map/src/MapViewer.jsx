@@ -4,9 +4,9 @@ import { mergeStyles, validate } from 'wix-rich-content-common';
 import isEqual from 'lodash/isEqual';
 import schema from '../statics/data-schema.json';
 import styles from '../statics/styles/map-viewer.scss';
-import GoogleMapWrapper from './googleMapWrapper';
+import { Map } from './Map';
 
-class MapViewer extends Component {
+export class MapViewer extends Component {
   constructor(props) {
     super(props);
     validate(props.componentData, schema);
@@ -20,12 +20,11 @@ class MapViewer extends Component {
   }
 
   render() {
-    const { componentData } = this.props; // eslint-disable-line no-unused-vars
     const { googleMapApiKey } = this.props.settings;
     return (
-      <di>
-        <GoogleMapWrapper Apikey={googleMapApiKey} componentData={componentData} {...this.props} />
-      </di>
+      <div>
+        <Map apiKey={googleMapApiKey} {...this.props} />
+      </div>
     );
   }
 }
@@ -46,5 +45,3 @@ MapViewer.defaultProps = {
   height: '100%',
   controls: true,
 };
-
-export default MapViewer;

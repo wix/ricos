@@ -105,9 +105,7 @@ export default {
     giphySdkApiKey: "JfQziSTdnSwDZcD3w8DpUL4LMFu3zBgU"
   },
   [MAP_TYPE]: {
-    googleMapApiKey: "AIzaSyCz2rSCnf0HmeqxKp6rfO4mCb9LCBn9Pck",
-    minZoom: 0,
-    maxZoom: 20,
+    googleMapApiKey: "AIzaSyB40ci07ioXEC6U4Rkxai2rRDiJEobv0T4",
     minWidth: 100,
     maxWidth: 740,
     minHeight: 100,
