@@ -176,7 +176,7 @@ export default class ButtonInputModal extends Component {
     const settingTabLabel = (
       <div className={styles.settingTab}>
         <div className={styles.tabTitle}>
-          {t('ButtonModal_Settings_Tab')}
+          <p className={styles.tabLabel}>{t('ButtonModal_Settings_Tab')}</p>
         </div>
         <div className={styles.errorIcon}>
           {!this.state.isValidUrl ?
@@ -185,6 +185,9 @@ export default class ButtonInputModal extends Component {
           }
         </div>
       </div>);
+    const designTabLabel = (
+      <p className={styles.tabLabel}>{t('ButtonModal_Design_Tab')}</p>
+    );
     const settingsComponent = (
       <SettingsComponent
         t={t}
@@ -250,7 +253,7 @@ export default class ButtonInputModal extends Component {
                         {settingsComponent}
                       </div>
                     </Tab>
-                    <Tab label={t('ButtonModal_Design_Tab')} value={designTabValue} theme={this.styles}>
+                    <Tab label={designTabLabel} value={designTabValue} theme={this.styles}>
                       <Scrollbars
                         ref={this.setScrollbarRef}
                         renderThumbVertical={() => this.state.isHover ? <div className={styles.scrollbar_thumb} /> : <div />}
