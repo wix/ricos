@@ -7,11 +7,11 @@ const EMPTY_SMALL_PLACEHOLDER =
   'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
 
 class ImageComponent extends React.Component {
-  static alignmentClassName = (componentData, theme, styles) =>
-    alignmentClassName(componentData, theme, styles);
+  static alignmentClassName = (componentData, theme, styles, isMobile) =>
+    alignmentClassName(componentData, theme, styles, isMobile);
 
-  static sizeClassName = (componentData, theme, styles) =>
-    sizeClassName(componentData, theme, styles);
+  static sizeClassName = (componentData, theme, styles, isMobile) =>
+    sizeClassName(componentData, theme, styles, isMobile);
 
   constructor(props) {
     super(props);

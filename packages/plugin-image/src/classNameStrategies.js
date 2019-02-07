@@ -3,9 +3,9 @@ import upperFirst from 'lodash/upperFirst';
 import camelCase from 'lodash/camelCase';
 import isNumber from 'lodash/isNumber';
 
-export const alignmentClassName = (componentData, theme, styles) => {
+export const alignmentClassName = (componentData, theme, styles, isMobile) => {
   const { alignment, size } = componentData.config || {};
-  if (!alignment) {
+  if (!alignment || (isMobile && size !== 'original')) {
     return '';
   }
   let align = alignment;
@@ -18,13 +18,15 @@ export const alignmentClassName = (componentData, theme, styles) => {
   return classNames(styles[`align${upperFirst(align)}`], theme[`align${upperFirst(align)}`]);
 };
 
-export const sizeClassName = (componentData, theme, styles) => {
+export const sizeClassName = (componentData, theme, styles, isMobile) => {
   const { size } = componentData.config || {};
-  if (!size) {
+  if (!size || (isMobile && size === 'original')) {
     return '';
   }
-  return classNames(
-    styles[`size${upperFirst(camelCase(size))}`],
-    theme[`size${upperFirst(camelCase(size))}`]
-  );
+  return isMobile
+    ? classNames(styles.sizeFullWidth, theme.sizeFullWidth)
+    : classNames(
+        styles[`size${upperFirst(camelCase(size))}`],
+        theme[`size${upperFirst(camelCase(size))}`]
+      );
 };
