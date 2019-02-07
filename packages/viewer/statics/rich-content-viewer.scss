@@ -62,7 +62,7 @@
 }
 
 .block {
-  & + & {
+  &+& {
     margin-top: 20px;
   }
 }
@@ -72,6 +72,7 @@
 
   @include phone {
     margin: 0;
+    clear: both;
   }
 }
 
@@ -94,7 +95,7 @@
 .left {
   text-align: left !important;
 
-  & > * {
+  &>* {
     text-align: left !important;
   }
 }
@@ -102,7 +103,7 @@
 .center {
   text-align: center !important;
 
-  & > * {
+  &>* {
     text-align: center !important;
   }
 }
@@ -110,7 +111,7 @@
 .right {
   text-align: right !important;
 
-  & > * {
+  &>* {
     text-align: right !important;
   }
 }
@@ -119,7 +120,7 @@
   white-space: pre-line !important;
   text-align: justify !important;
 
-  & > * {
+  &>* {
     white-space: pre-line !important;
     text-align: justify !important;
   }
