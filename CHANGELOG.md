@@ -10,6 +10,11 @@
 
 ## [Unreleased]
 
+### :bug: Bug Fix
+
+- `html`
+  - [#248](https://github.com/wix-incubator/rich-content/pull/248)  use 'auto' width on mobile
+
 <hr/>
 
 ## 2.0.1 (Feb 4, 2019)

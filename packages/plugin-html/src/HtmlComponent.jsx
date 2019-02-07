@@ -46,12 +46,13 @@ class HtmlComponent extends Component {
     validate(props.componentData, schema);
     const {
       blockProps,
+      isMobile,
       componentData: { src, srcType, config: { width: currentWidth, height: currentHeight } = {} },
       settings: { htmlIframeSrc, width, height } = {},
     } = props;
 
     const style = {
-      width: currentWidth || width || INIT_WIDTH,
+      width: isMobile ? 'auto' : currentWidth || width || INIT_WIDTH,
       height: currentHeight || height || INIT_HEIGHT,
     };
     const readOnly = blockProps ? blockProps.readOnly : true;
@@ -87,6 +88,7 @@ HtmlComponent.propTypes = {
   blockProps: PropTypes.object,
   className: PropTypes.string,
   theme: PropTypes.object,
+  isMobile: PropTypes.bool.isRequired,
   settings: PropTypes.shape({
     htmlIframeSrc: PropTypes.string.isRequired,
     width: PropTypes.number,
