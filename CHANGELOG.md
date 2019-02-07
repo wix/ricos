@@ -13,7 +13,11 @@
 ### :bug: Bug Fix
 
 - `html`
-  - [#248](https://github.com/wix-incubator/rich-content/pull/248)  use 'auto' width on mobile
+  - [#248](https://github.com/wix-incubator/rich-content/pull/248) use 'auto' width on mobile
+- `image`
+  - [#249](https://github.com/wix-incubator/rich-content/pull/249) original size support for mobile cuts off full size images
+- `viewer`
+  - [#249](https://github.com/wix-incubator/rich-content/pull/249) original size support for mobile cuts off full size images
 
 <hr/>
 
