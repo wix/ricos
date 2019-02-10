@@ -9,11 +9,16 @@
 > - :house: [Internal]
 
 ## [Unreleased]
+
 ### :rocket: New Feature
 - `viewer`
   - [#246](https://github.com/wix-incubator/rich-content/pull/246) fix headers inside of lists to be semantically correct 
 - `headersMarkdown`
   - [#246](https://github.com/wix-incubator/rich-content/pull/246) whoo hoo :) new plugin for headers markdown 
+
+### :bug: Bug Fix
+- `image`
+  - [#250](https://github.com/wix-incubator/rich-content/pull/250) reduce default preload size
 
 <hr/>
 

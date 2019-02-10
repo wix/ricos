@@ -7,6 +7,7 @@ import isFunction from 'lodash/isFunction';
 import { mergeStyles, ImageLoader, validate } from 'wix-rich-content-common';
 import isEqual from 'lodash/isEqual';
 import getImageSrc from './get-image-source';
+import { WIX_MEDIA_DEFAULT } from './get-wix-media-url';
 import schema from '../statics/data-schema.json';
 import styles from '../statics/styles/image-viewer.scss';
 
@@ -62,7 +63,9 @@ class ImageViewer extends React.Component {
         }
         //keep the image's original ratio
         let requiredHeight =
-          src.height && src.width ? Math.ceil((src.height / src.width) * requiredWidth) : 2048;
+          src.height && src.width
+            ? Math.ceil((src.height / src.width) * requiredWidth)
+            : WIX_MEDIA_DEFAULT.SIZE;
         requiredWidth = Math.ceil(requiredWidth);
         requiredHeight = Math.ceil(requiredHeight);
 
