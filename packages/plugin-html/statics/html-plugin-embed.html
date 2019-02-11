@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <style type="text/css">
+      iframe[class|='instagram'] {
+        min-width: 0 !important;
+      }
+    </style>
     <script>
       window.addEventListener('message', event => {
         if (event.data.type !== 'htmlPlugin:updateContent') {
