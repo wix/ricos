@@ -15,9 +15,21 @@ import { TOOLBARS, BUTTONS, DISPLAY_MODE } from "wix-rich-content-common";
 // import SideToolbarDecoration from './Components/SideToolbarDecoration';
 // import PluginToolbarDecoration from './Components/PluginToolbarDecoration';
 
+const themeColors = {
+  color1: '#ffffff',
+  color2: '#ed24d9',
+  color3: '#969696',
+  color4: '#ed24d9',
+  color5: '#000000',
+  color6: '#000000',
+  color7: '#000000',
+  color8: '#9a87ce',
+}
+
 const uiSettings = {
   blankTargetToggleVisibilityFn: () => true,
-  nofollowRelToggleVisibilityFn: () => true
+  nofollowRelToggleVisibilityFn: () => true,
+  themeColors,
 };
 
 export default {

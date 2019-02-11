@@ -67,12 +67,13 @@ module.exports = env => ({
       },
       {
         test: /\.(png|jpg|gif)$/,
-        issuer: /\.(s)?css$/,
+        issuer: /\.(css|sass|js|jsx)$/,
         use: [
           {
             loader: 'url-loader',
             options: {
               limit: 8192,
+              fallback: 'file-loader',
             },
           },
         ],

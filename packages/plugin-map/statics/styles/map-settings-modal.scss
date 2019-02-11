@@ -1,200 +1,327 @@
 @import "~wix-rich-content-common/dist/statics/styles/mixins";
-.map_settings_modal_mobile_navbar {
-  width: 100%;
-  height: 35px;
-  background-color: #0060ff;
-  vertical-align: middle;
-  padding-top: 15px;
-  text-align: center;
-  font-family: Helvetica;
-  font-size: 14px;
-  line-height: 1.5;
-  letter-spacing: normal;
-  text-align: center;
-  color: #ffffff;
-}
 
-.map_settings_modal_mobile_header {
-  width: 100%;
-  height: 20px;
-  background: rgb(0, 86, 229);
-  display: block;
-}
-
-.map_settings_modal_title_header {
-  width: 100%;
-  text-align: center;
-  font-family: Helvetica;
-  font-size: 14px;
-  color: #333333;
-  padding-top: 15px;
-  padding-bottom: 10px;
-  @include phone {
-    font-size: 20px;
-    padding-top: 5px;
-  }
-}
-
-.map_settings_modal_container {
-  @include phone {
-    padding: 30px 30px 30px 30px;
-  }
-}
-
-.map_settings_modal_mobile_backButton {
-  position: absolute;
-  top: 37.5px;
-  left: 23.5px;
-  width: 200px;
-  width: 12px;
-  height: 12px;
-  background: none;
-  border: none;
-  transform: rotate(45deg);
-  border-bottom: solid 1px #ffffff;
-  border-left: solid 1px #ffffff;
-}
-
-.map_settings_modal_section {
-  font-family: Helvetica;
-  color: #333333;
-  margin: 5px 0 20px 0;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  span {
-    font-size: 12px;
-    @include phone {
-      font-size: 18px;
-    }
-  }
-  input[type="option"] {
-    @include phone {
-      width: 98%;
-      height: 42px;
-    }
-  }
-  input[type="number"] {
-    text-align: center;
-    height: 35px;
-    width: 110px;
-    margin-right: 23px;
-    padding-left: 5px;
-    padding-right: 5px;
-    @include phone {
-      width: 150px;
-      margin-right: 10px;
-      height: 42px;
-    }
-  }
-  @include phone {
-    font-size: 18px;
-    margin-bottom: 30px;
-  }
-}
-
-.map_settings_modal_location_label {
-  font-size: 14px;
-  font-family: Helvetica;
-  color: #333333;
-  margin-bottom: 9px;
-  @include phone {
-    font-size: 18px;
-  }
-}
-
-.map_settings_modal_advanced_location_label {
-  font-size: 14px;
-  font-family: Helvetica;
-  color: #333333;
-  margin-bottom: 9px;
-  @include phone {
-    font-size: 18px;
-  }
-}
-.map_settings_modal_zoom_slider_label {
-  font-size: 14px;
-  font-family: Helvetica;
-  color: #333333;
-  margin-bottom: 5px;
-  @include phone {
-    font-size: 18px;
-  }
-}
-.map_settings_modal_advanced_location_input_container {
+.map_settings {
   display: flex;
+  flex-direction: column;
+  height: 100vh;
 }
 
-.map_settings_modal_checkbox_section {
-  font-size: 14px;
-  font-family: Helvetica;
-  color: #333333;
-  margin: 0px 0 20px 0;
-  @include phone {
-    font-size: 18px;
-    margin-bottom: 30px;
-  }
-}
-.map_settings_modal_zoom_section {
-  font-size: 14px;
-  font-family: Helvetica;
-  color: #333333;
-  margin: 0px 0 20px 0;
-  @include phone {
-    width: 98%;
-    font-size: 18px;
-    margin-bottom: 30px;
-  }
-}
-.map_settings_modal_dropdown_section {
-  transform: translateY(-50%);
-  font-family: Helvetica;
-  color: #333333;
-  margin: 30px 0 10px 0;
-  @include phone {
-    div{
-      font-size: 18px !important;
-    }
-    margin-bottom: 30px;
-    padding-top: 10px;
-  }
+.map_settings * p {
+  margin: 0px;
 }
 
-.map_settings_modal_save_button {
-  font-family: Helvetica;
-  width: 80px;
-  display: inline-block;
-  border: none;
+.map_settings_modal_desktop {
+  @extend .map_settings;
+  padding: 0px 40px;
+}
+
+.map_settings_modal_mobile{
+  @extend .map_settings;
+  height: 100%;
+  padding: 0px 20px;
+  padding-bottom: 30px;
+}
+
+.header_desktop {
+  height: 120px;
+  flex: none;
+  padding-top: 42px;
+  padding-bottom: 34px;
+  box-sizing: border-box;
+}
+
+.header_mobile{
+  padding: 30px 0px;
+}
+
+.map_settings_modal_settings_desktop {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  min-height: 0px;
+}
+
+.map_settings_modal_settings_mobile {
+
+}
+
+.map_settings_modal_footer_button {
+  width: 182px;
+  height: 42px;
+}
+
+.map_settings_modal_footer_cancel_button {
+  @extend .map_settings_modal_footer_button;
+  margin-right: 32px;
+}
+
+.map_settings_modal_footer_save_button {
+  @extend .map_settings_modal_footer_button;
+}
+
+
+.map_settings_modal_footer_desktop {
+  height: 124px;
+  flex: none;
+  padding-top: 40px;
+  padding-bottom: 42px;
+  box-sizing: border-box;
+}
+
+.map_settings_modal_mobile_navbar {
+  display: flex;
+  flex-direction: row;
+  background-color: #9a87ce;
+  padding: 0px 20px;
+  color: #c1c1c1;
+  min-height: 50px;
+}
+
+.map_settings_modal_mobile_navbar p {
+  margin: 0px;
+}
+
+.map_settings_modal_mobile_navbar_button {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+
+.map_settings_modal_mobile_navbar_save_button {
+  @extend .map_settings_modal_mobile_navbar_button;
+  margin-left: auto;
+}
+
+.map_settings_modal_mobile_navbar_cancel_button {
+  @extend .map_settings_modal_mobile_navbar_button;
+}
+
+
+.map_settings_modal_location_suggestion {
+  font-size: 16px;
+  line-height: 24px;
   padding-left: 24px;
-  padding-right: 24px;
-  margin-left: 66.5%;
-  height: 30px;
-  @include phone {
-    padding-right: 0px;
-    padding-bottom: 10px;
-    font-size: 18px;
+  padding-right: 15px;
+  min-height: 42px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.06);
   }
 }
 
-.map_settings_modal_save_button:disabled {
-  opacity: 0.5;
+.button_secondary {
+  border: 1px solid #9a87ce;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #9a87ce;
+
+  &:hover {
+    opacity: 0.6;
+    background: transparent;
+    color: #9a87ce;
+  }
 }
 
-.map_settings_modal_drop_down {
-  @include phone {
-    font-size: 20px;
+.button_primary {
+  background: #9a87ce;
+  font-size: 16px;
+  line-height: 1.5;
+
+  &:hover {
+    opacity: 0.8;
+    color: #ffffff;
   }
+}
+
+.title_desktop {
+  font-size: 30px;
+  line-height: 1.47;
+}
+
+.map_settings_modal_text_input_label {
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.divider_wrapper {
+  padding: 40px 0px;
+
+  @include phone {
+    padding: 36px 0px;
+  }
+}
+
+.divider {
+  height: 1px;
+  opacity: 0.2;
+  background-color: #000000;
 }
 
 .textInput_input {
-  padding: 9px 21px 10px 12px;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
+  font-size: 16px;
+  line-height: 1.5px;
+  text-overflow: ellipsis;
+  padding-right: 45px;
+  opacity: 0.6;
+  border-color: #000000;
+
+  &:hover {
+    opacity: 1;
+  }
+
+  &:focus {
+    opacity: 1;
+  }
+
+  @include phone {
+    border-top: none;
+    border-right: none;
+    border-left: none;
+  }
 }
 
-.dropdown_Dropdown-control {
+.map_modes {
+  padding-top: 30px;
+  display: flex;
+  flex-wrap: wrap;
+
   @include phone {
-    font-size: 18px;
+    padding-top: 24px;
   }
+}
+
+.map_modes > div {
+  margin-right: 30px;
+
+  @include phone {
+    margin-right: 35px;
+  }
+}
+
+.labeled_image_terrain_mode_root {
+  @include phone {
+    margin-top: 15px;
+  }
+}
+
+.map_settings_modal_location_display_name_settings_section {
+  @include phone {
+    margin-bottom: 42px;
+  }
+}
+
+.labeled_toggle_input_container {
+  position: relative;
+  display: inline-block;
+  width: 46px;
+  height: 24px;
+
+  &:hover {
+    opacity: 0.6;
+  }
+}
+
+
+.labeled_toggle_input_root {
+  margin-left: auto;
+  display: flex;
+}
+
+.labeled_toggle_root {
+  display: flex;
+}
+
+.labeled_toggle_root + .labeled_toggle_root {
+  padding-top: 30px;
+
+  @include phone {
+    padding-top: 36px;
+  }
+}
+
+.labeled_toggle_checkbox_input {
+  width: 100%;
+  height: 100%;
+  margin: 0
+}
+
+.labeled_toggle_switch {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  pointer-events: none
+}
+
+.labeled_toggle_label_wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.labeled_toggle_label {
+  font-size: 14px;
+}
+
+.labeled_toggle_track {
+  flex: 1;
+  height: 100%;
+  border-radius: 12px;
+}
+
+.labeled_toggle_slider {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  transition: transform 0.3s;
+}
+
+.map_settings_modal_search_icon_wrapper {
+  position: relative;
+}
+
+.map_settings_modal_search_icon {
+  position: absolute;
+  z-index: 10;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  height: 100%;
+  padding-right: 13px;
+}
+
+.map_settings_modal_location_input_settings_section {
+  padding-top: 16px;
+  padding-bottom: 30px;
+}
+
+.labeled_image_img {
+  height: 88px;
+  width: 88px;
+  box-sizing: border-box;
+
+  @include phone {
+    height: 70px;
+    width: 70px;
+  }
+}
+
+.labeled_image_img_wrapper {
+  margin-top: 12px;
+
+  @include phone {
+    margin-top: 6px;
+  }
+}
+
+.labeled_image_label {
+  font-size: 14px;
 }

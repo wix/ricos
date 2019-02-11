@@ -5,15 +5,15 @@ import ReactGoogleMapLoader from 'react-google-maps-loader';
 
 const GoogleMapWrapper = withGoogleMap(props => (
   <GoogleMap
-    defaultZoom={props.zoom}
     defaultCenter={{ lat: props.lat, lng: props.lng }}
     center={{ lat: props.lat, lng: props.lng }}
-    zoom={props.zoom}
+    zoom={18}
     options={{
       draggable: props.isDraggingAllowed,
       mapTypeId: props.mode,
       zoomControl: props.isZoomControlShown,
-      streetViewControl: props.isStreetViewControlShown
+      streetViewControl: props.isStreetViewControlShown,
+      mapTypeControl: false,
     }}
   >
     <Marker
@@ -54,7 +54,6 @@ export class Map extends Component {
           loadingElement={<div style={{ height: `100%` }} />}
           containerElement={<div style={{ height: componentData.config.height || '400px' }} />}
           mapElement={<div style={{ height: `100%` }} />}
-          zoom={componentData.map.zoom}
           lat={Number(componentData.map.lat)}
           lng={Number(componentData.map.lng)}
           markerTitle={componentData.map.address}

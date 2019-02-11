@@ -1,16 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { mergeStyles, validate } from 'wix-rich-content-common';
+import { validate } from 'wix-rich-content-common';
 import isEqual from 'lodash/isEqual';
 import schema from '../statics/data-schema.json';
-import styles from '../statics/styles/map-viewer.scss';
 import { Map } from './Map';
 
 export class MapViewer extends Component {
   constructor(props) {
     super(props);
     validate(props.componentData, schema);
-    this.styles = mergeStyles({ styles, theme: props.theme });
   }
 
   componentWillReceiveProps(nextProps) {
@@ -37,7 +35,7 @@ MapViewer.propTypes = {
   controls: PropTypes.bool,
   width: PropTypes.string,
   height: PropTypes.string,
-  settings: PropTypes.object
+  settings: PropTypes.object,
 };
 
 MapViewer.defaultProps = {

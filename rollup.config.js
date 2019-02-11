@@ -12,6 +12,8 @@ import postcss from 'rollup-plugin-postcss';
 import postcssURL from 'postcss-url';
 import pascalCase from 'pascal-case';
 import cloneDeep from 'lodash/cloneDeep';
+import images from 'rollup-plugin-image-files';
+
 
 if (!process.env.MODULE_NAME) {
   console.error('Environment variable "MODULE_NAME" is missing!');
@@ -66,6 +68,7 @@ const plugins = [
     extensions: ['.js', '.jsx', '.json'],
   }),
   builtins(),
+  images(),
   babel({
     configFile: path.resolve(__dirname, '.babelrc.js'),
     include: [
