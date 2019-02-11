@@ -16,7 +16,7 @@ export const LabeledToggle = ({ label, onChange, checked, sliderColor, toggleIsO
         <p className={styles.labeled_toggle_label}>{label}</p>
       </div>
       <div className={styles.labeled_toggle_input_root}>
-        <div className={classNames(styles.labeled_toggle_input_container, { off: !checked })} >
+        <div className={classNames(styles.labeled_toggle_input_container, { [styles.off]: !checked })} >
           <input
             type="checkbox"
             className={styles.labeled_toggle_checkbox_input}

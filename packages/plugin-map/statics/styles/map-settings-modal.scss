@@ -219,7 +219,15 @@
   width: 46px;
   height: 24px;
 
+  &.off {
+    opacity: 0.6;
+  }
+
   &:hover {
+    opacity: 1;
+  }
+
+  &:hover:not(.off) {
     opacity: 0.6;
   }
 }
