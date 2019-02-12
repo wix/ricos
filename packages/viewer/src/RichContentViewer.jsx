@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { mergeStyles, AccessibilityListener, normalizeInitialState } from 'wix-rich-content-common';
+import { convertToHTML } from './utils/convertToHTML';
 import styles from '../statics/rich-content-viewer.scss';
-import Preview from './Preview';
 
 export default class RichContentViewer extends Component {
   constructor(props) {
@@ -40,24 +40,26 @@ export default class RichContentViewer extends Component {
       relValue,
       config,
     } = this.props;
+
     const wrapperClassName = classNames(styles.wrapper, {
       [styles.desktop]: !this.props.platform || this.props.platform === 'desktop',
     });
+    const editorClassName = classNames(styles.editor, {
+      [styles.rtl]: textDirection === 'rtl',
+    });
+
+    const html = convertToHTML(
+      this.state.raw,
+      styles,
+      textDirection,
+      typeMappers,
+      { theme, isMobile, anchorTarget, relValue, config },
+      decorators
+    );
+
     return (
       <div className={wrapperClassName}>
-        <div className={styles.editor}>
-          <Preview
-            anchorTarget={anchorTarget}
-            config={config}
-            decorators={decorators}
-            isMobile={isMobile}
-            raw={this.state.raw}
-            relValue={relValue}
-            textDirection={textDirection}
-            theme={theme}
-            typeMappers={typeMappers}
-          />
-        </div>
+        <div className={editorClassName}>{html}</div>
         <AccessibilityListener isMobile={isMobile} />
       </div>
     );

@@ -1,13 +1,13 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import redraft from 'redraft';
 import classNames from 'classnames';
 import endsWith from 'lodash/endsWith';
-import { mergeStyles } from 'wix-rich-content-common';
-import getPluginsViewer from './PluginsViewer';
-import { getTextDirection } from './utils/textUtils';
-import List from './List';
-import styles from '../statics/rich-content-viewer.scss';
+import List from '../List';
+import getPluginsViewer from '../PluginsViewer';
+import { getTextDirection } from './textUtils';
+
+const isEmptyContentState = raw =>
+  !raw || !raw.blocks || (raw.blocks.length === 1 && raw.blocks[0].text === '');
 
 const isEmptyBlock = ([_, data]) => data && data.length === 0; //eslint-disable-line no-unused-vars
 
@@ -101,28 +101,9 @@ const getEntities = (typeMap, pluginProps) => ({
   ...getPluginsViewer(typeMap, pluginProps),
 });
 
-const combineTypeMappers = mappers => {
-  if (!mappers || !mappers.length || mappers.some(resolver => typeof resolver !== 'function')) {
-    console.warn('typeMappers is expected to be a function array'); // eslint-disable-line no-console
-    return {};
-  }
-  return mappers.reduce((map, mapper) => Object.assign(map, mapper()), {});
-};
-
-const isEmptyRaw = raw =>
-  !raw || !raw.blocks || (raw.blocks.length === 1 && raw.blocks[0].text === '');
-
-const options = {
-  cleanup: {
-    after: 'all',
-    split: true,
-    except: ['unordered-list-item', 'ordered-list-item', 'unstyled'],
-  },
-};
-
-const augmentRaw = raw => ({
-  ...raw,
-  blocks: raw.blocks.map(block => {
+const normalizeContentState = contentState => ({
+  ...contentState,
+  blocks: contentState.blocks.map(block => {
     if (block.type === 'atomic') {
       return block;
     }
@@ -146,65 +127,45 @@ const augmentRaw = raw => ({
   }),
 });
 
-const Preview = ({
-  raw,
-  typeMappers,
-  theme,
-  isMobile,
-  decorators,
-  anchorTarget,
-  relValue,
-  config,
+const redraftOptions = {
+  cleanup: {
+    after: 'all',
+    split: true,
+    except: ['unordered-list-item', 'ordered-list-item', 'unstyled'],
+  },
+};
+
+const combineTypeMappers = mappers => {
+  if (!mappers || !mappers.length || mappers.some(resolver => typeof resolver !== 'function')) {
+    console.warn('typeMappers is expected to be a function array'); // eslint-disable-line no-console
+    return {};
+  }
+  return mappers.reduce((map, mapper) => Object.assign(map, mapper()), {});
+};
+
+const convertToHTML = (
+  contentState,
+  mergedStyles,
   textDirection,
-}) => {
-  const mergedStyles = mergeStyles({ styles, theme });
-  const isEmpty = isEmptyRaw(raw);
-  const typeMap = combineTypeMappers(typeMappers);
+  typeMap,
+  entityProps,
+  decorators,
+  options = {}
+) => {
+  if (isEmptyContentState(contentState)) {
+    return null;
+  }
 
-  const className = classNames(mergedStyles.preview, textDirection === 'rtl' && mergedStyles.rtl);
-
-  return (
-    <div className={className}>
-      {!isEmpty &&
-        redraft(
-          augmentRaw(raw),
-          {
-            inline: getInline(mergedStyles),
-            blocks: getBlocks(mergedStyles, textDirection),
-            entities: getEntities(typeMap, { theme, isMobile, anchorTarget, relValue, config }),
-            decorators,
-          },
-          options
-        )}
-    </div>
+  return redraft(
+    normalizeContentState(contentState),
+    {
+      inline: getInline(mergedStyles),
+      blocks: getBlocks(mergedStyles, textDirection),
+      entities: getEntities(combineTypeMappers(typeMap), entityProps),
+      decorators,
+    },
+    { ...redraftOptions, ...options }
   );
 };
 
-Preview.propTypes = {
-  raw: PropTypes.shape({
-    blocks: PropTypes.array.isRequired,
-    entityMap: PropTypes.object.isRequired,
-  }).isRequired,
-  typeMappers: PropTypes.arrayOf(PropTypes.func),
-  theme: PropTypes.object,
-  isMobile: PropTypes.bool,
-  textDirection: PropTypes.oneOf(['rtl', 'ltr']),
-  decorators: PropTypes.arrayOf(
-    PropTypes.oneOfType([
-      PropTypes.shape({
-        getDecorations: PropTypes.func.isRequired,
-        getComponentForKey: PropTypes.func.isRequired,
-        getPropsForKey: PropTypes.func.isRequired,
-      }),
-      PropTypes.shape({
-        component: PropTypes.func.isRequired,
-        strategy: PropTypes.func.isRequired,
-      }),
-    ])
-  ),
-  anchorTarget: PropTypes.string,
-  relValue: PropTypes.string,
-  config: PropTypes.object,
-};
-
-export default Preview;
+export { convertToHTML };
