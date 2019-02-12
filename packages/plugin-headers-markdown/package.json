@@ -33,16 +33,16 @@
     "@babel/runtime": "7.2.0",
     "@wix/draft-js": "0.10.272",
     "prop-types": "^15.0.0",
-    "react": "^15.0.0 || ^16.0.0",
-    "react-dom": "^15.0.0 || ^16.0.0"
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2"
   },
   "devDependencies": {
     "@babel/runtime": "7.2.0",
     "@wix/draft-js": "0.10.272",
     "eslint": "^4.19.1",
     "prop-types": "^15.6.2",
-    "react": "15.5.4",
-    "react-dom": "15.5.4",
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2",
     "rollup": "^1.1.0"
   },
   "dependencies": {

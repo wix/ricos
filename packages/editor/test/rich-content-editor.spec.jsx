@@ -1,7 +1,11 @@
 import React from 'react';
 import { RichContentEditor } from '../src/index';
-import { shallow } from 'enzyme';
+import Enzyme from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
 import TestData from './TestData/initial-state';
+
+Enzyme.configure({ adapter: new Adapter() });
+const { shallow } = Enzyme;
 
 describe('RichContentEditor', () => {
   it('should render', async () => {

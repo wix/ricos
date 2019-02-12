@@ -9,6 +9,9 @@
 > - :house: [Internal]
 
 ## [Unreleased]
+### :boom: Breaking Change
+- `general`
+  - [#259](https://github.com/wix-incubator/rich-content/pull/259) react 16.4.2
 ### :bug: Bug Fix
 - `html`
   - [#261](https://github.com/wix-incubator/rich-content/pull/261) (ios) fix instagram too wide for mobile

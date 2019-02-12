@@ -21,7 +21,6 @@
   },
   "devDependencies": {
     "chai": "~4.1.0",
-    "enzyme": "~2.9.0",
     "husky": "~0.14.0",
     "jsdom": "~11.2.0",
     "jsdom-global": "~3.0.0",
@@ -42,8 +41,8 @@
     "i18next-node-fs-backend": "~1.0.0",
     "mobile-detect": "^1.4.2",
     "prop-types": "~15.6.0",
-    "react": "15.6.1",
-    "react-dom": "15.6.1",
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2",
     "react-i18next": "~4.8.0",
     "react-json-editor-ajrm": "^2.5.3",
     "react-modal": "^3.5.1",
