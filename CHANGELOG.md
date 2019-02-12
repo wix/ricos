@@ -10,10 +10,6 @@
 
 ## [Unreleased]
 
-### :rocket: New Feature
-- `viewer`
-  - [#254](https://github.com/wix-incubator/rich-content/pull/254) convertToHTML
-
 <hr/>
 
 ## 2.0.3 (Feb 10, 2019)
