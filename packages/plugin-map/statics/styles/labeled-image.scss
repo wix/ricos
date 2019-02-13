@@ -1,0 +1,41 @@
+@import "~wix-rich-content-common/dist/statics/styles/mixins";
+
+.labeled_image_root ~ .labeled_image_root {
+  margin-left: 30px;
+
+  @include phone {
+    margin-left: 35px;
+  }
+}
+
+.labeled_image_img {
+  height: 88px;
+  width: 88px;
+  box-sizing: border-box;
+
+  @include phone {
+    height: 70px;
+    width: 70px;
+  }
+}
+
+.labeled_image_img_wrapper {
+  margin-top: 12px;
+  display: flex;
+
+  @include phone {
+    margin-top: 6px;
+  }
+}
+
+.labeled_image_label {
+  font-size: 14px;
+  min-height: 19px;
+
+  @include phone {
+    font-size: 14px;
+    line-height: 1.71;
+    min-height: 24px;
+  }
+}
+

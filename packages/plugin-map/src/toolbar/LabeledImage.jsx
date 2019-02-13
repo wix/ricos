@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from '../../statics/styles/map-settings-modal.scss';
 
-export const LabeledImage = ({ label, alt, title, onClick, onKeyPress, src, imgStyle, rootClassName }) => {
+export const LabeledImage = ({ label, alt, title, onClick, onKeyPress, src, imgStyle }) => {
   return (
-    <div className={rootClassName}>
+    <div className={styles.labeled_image_root}>
       <div
         onClick={onClick}
         role="button"
@@ -40,6 +40,5 @@ LabeledImage.propTypes = {
   onClick: PropTypes.func.isRequired,
   onKeyPress: PropTypes.func,
   imgStyle: PropTypes.object,
-  rootClassName: PropTypes.string,
 };
 
