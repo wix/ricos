@@ -10,6 +10,11 @@
 
 ## [Unreleased]
 
+### :rocket: New Feature
+
+  - `Map Plugin`
+  - [#260] (https://github.com/wix-incubator/rich-content/pull/260) `plugin-map` Add map plugin to RCE
+
 <hr/>
 
 ## Video Plugin 1.6.0 (Jan 20, 2019)
