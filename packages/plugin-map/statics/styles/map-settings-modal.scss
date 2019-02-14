@@ -2,41 +2,36 @@
 @import "./labeled-toggle.scss";
 @import "./labeled-image.scss";
 
-.map_settings {
+.map_settings_modal_settings_container {
   display: flex;
   flex-direction: column;
   height: 100vh;
+  padding: 0px 40px;
+
+  @include phone {
+    height: 100%;
+    padding: 0px 20px;
+    padding-bottom: 30px;
+  }
 }
 
-.map_settings * p {
+.map_settings_modal_settings_container * p {
   margin: 0px;
 }
 
-.map_settings_modal_desktop {
-  @extend .map_settings;
-  padding: 0px 40px;
-}
-
-.map_settings_modal_mobile{
-  @extend .map_settings;
-  height: 100%;
-  padding: 0px 20px;
-  padding-bottom: 30px;
-}
-
-.header_desktop {
+.map_settings_modal_title_container {
   height: 120px;
   flex: none;
   padding-top: 42px;
   padding-bottom: 34px;
   box-sizing: border-box;
+
+  @include phone {
+    padding: 30px 0px;
+  }
 }
 
-.header_mobile{
-  padding: 30px 0px;
-}
-
-.map_settings_modal_settings_desktop {
+.map_settings_modal_settings {
   flex: 1 1 auto;
   overflow-y: auto;
   min-height: 0px;
@@ -66,8 +61,7 @@
   border: none;
 }
 
-
-.map_settings_modal_footer_desktop {
+.map_settings_modal_footer {
   height: 124px;
   flex: none;
   padding-top: 40px;
@@ -161,7 +155,7 @@
   min-height: 20px;
 }
 
-.divider_wrapper {
+.map_settings_modal_divider_wrapper {
   padding: 40px 0px;
 
   @include phone {
@@ -169,7 +163,7 @@
   }
 }
 
-.divider {
+.map_settings_modal_divider {
   height: 1px;
   opacity: 0.2;
   background-color: #000000;
@@ -198,7 +192,7 @@
   }
 }
 
-.map_modes {
+.map_settings_modal_map_modes {
   padding-top: 30px;
   display: flex;
 

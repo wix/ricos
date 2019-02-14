@@ -17,6 +17,7 @@ import satelliteImg from '../../statics/images/satellite.png';
 import terrainImg from '../../statics/images/terrain.png';
 import roadmapImg from '../../statics/images/roadmap.png';
 import { Scrollbars } from 'react-custom-scrollbars';
+
 export class MapSettingsModal extends Component {
   constructor(props) {
     super(props);
@@ -93,7 +94,7 @@ export class MapSettingsModal extends Component {
         onClick={this.closeModal}
         role="button"
         tabIndex={0}
-        onKeyPress={e => e.key === 'Enter' ? this.closeModal() : undefined}
+        onKeyPress={e => e.key === 'Enter' && this.closeModal()}
         className={this.styles.map_settings_modal_mobile_navbar_cancel_button}
       >
         <p>Cancel</p>
@@ -105,7 +106,7 @@ export class MapSettingsModal extends Component {
         onClick={this.onSaveBtnClick}
         role="button"
         tabIndex={0}
-        onKeyPress={e => e.key === 'Enter' ? this.onSaveBtnClick() : undefined}
+        onKeyPress={e => e.key === 'Enter' && this.onSaveBtnClick()}
         className={this.styles.map_settings_modal_mobile_navbar_save_button}
       >
         <p>Save</p>
@@ -124,21 +125,24 @@ export class MapSettingsModal extends Component {
     const { theme, t, googleMapApiKey } = this.props;
     const { locationSearchPhrase, address } = this.state;
 
+    const selectedLabeledImageStyle = { border: '2px solid #9a87ce' };
+
     return (
       <Scrollbars
         renderThumbVertical={() => <div className={this.styles.map_settings_modal_scrollbar_thumb} />}
         style={{ height: '100vh' }}
       >
+
         <div>
           {WixUtils.isMobile() && this.renderMobileNavBar()}
 
-          <div className={WixUtils.isMobile() ? this.styles.map_settings_modal_mobile : this.styles.map_settings_modal_desktop}>
+          <div className={this.styles.map_settings_modal_settings_container}>
 
-            <div className={WixUtils.isMobile() ? this.styles.header_mobile : this.styles.header_desktop}>
+            <div className={this.styles.map_settings_modal_title_container}>
               <div className={this.styles.map_settings_modal_title}>{t('MapSettings_Title')}</div>
             </div>
 
-            <div className={WixUtils.isMobile() ? this.styles.map_settings_modal_settings_mobile : this.styles.map_settings_modal_settings_desktop}>
+            <div className={this.styles.map_settings_modal_settings}>
               <SettingsSection
                 theme={theme}
                 className={this.styles.map_settings_modal_location_input_settings_section}
@@ -214,7 +218,10 @@ export class MapSettingsModal extends Component {
                 />
               </SettingsSection>
 
-              {!WixUtils.isMobile() && <div className={this.styles.divider_wrapper}><div className={this.styles.divider} /></div>}
+              {!WixUtils.isMobile() &&
+              <div className={this.styles.map_settings_modal_divider_wrapper}>
+                <div className={this.styles.map_settings_modal_divider} />
+              </div>}
 
               <SettingsSection
                 theme={theme}
@@ -224,33 +231,36 @@ export class MapSettingsModal extends Component {
 
                 <div>
                   <p className={this.styles.map_settings_modal_map_modes_sub_header}>{t('MapSettings_MapType_Label')}</p>
-                  <div className={this.styles.map_modes} >
+                  <div className={this.styles.map_settings_modal_map_modes} >
                     <LabeledImage
                       label={t('MapSettings_MapType_RoadMap_Label')}
                       src={roadmapImg}
                       onClick={() => this.setState({ mode: 'roadmap' })}
-                      imgStyle={this.state.mode === 'roadmap' ? { border: '2px solid #9a87ce' } : {}}
+                      imgStyle={this.state.mode === 'roadmap' ? selectedLabeledImageStyle : {}}
+                      theme={theme}
                     />
 
                     <LabeledImage
                       label={t('MapSettings_MapType_Satellite_Label')}
                       src={satelliteImg}
                       onClick={() => this.setState({ mode: 'satellite' })}
-                      imgStyle={this.state.mode === 'satellite' ? { border: '2px solid #9a87ce' } : {}}
+                      imgStyle={this.state.mode === 'satellite' ? selectedLabeledImageStyle : {}}
+                      theme={theme}
                     />
 
                     <LabeledImage
                       label={t('MapSettings_MapType_Terrain_Label')}
                       src={terrainImg}
                       onClick={() => this.setState({ mode: 'terrain' })}
-                      imgStyle={this.state.mode === 'terrain' ? { border: '2px solid #9a87ce' } : {}}
+                      imgStyle={this.state.mode === 'terrain' ? selectedLabeledImageStyle : {}}
+                      theme={theme}
                     />
                   </div>
                 </div>
               </SettingsSection>
 
 
-              <div className={this.styles.divider_wrapper}><div className={this.styles.divider} /></div>
+              <div className={this.styles.map_settings_modal_divider_wrapper}><div className={this.styles.map_settings_modal_divider} /></div>
 
               <SettingsSection
                 theme={theme}
@@ -264,6 +274,7 @@ export class MapSettingsModal extends Component {
                     checked={this.state.isMarkerShown}
                     onChange={() => this.setState({ isMarkerShown: !this.state.isMarkerShown })}
                     {...this.labeledToggleDefaultProps()}
+                    theme={theme}
                   />
 
                   <LabeledToggle
@@ -271,6 +282,7 @@ export class MapSettingsModal extends Component {
                     checked={this.state.isZoomControlShown}
                     onChange={() => this.setState({ isZoomControlShown: !this.state.isZoomControlShown })}
                     {...this.labeledToggleDefaultProps()}
+                    theme={theme}
                   />
 
                   <LabeledToggle
@@ -278,6 +290,7 @@ export class MapSettingsModal extends Component {
                     checked={this.state.isStreetViewControlShown}
                     onChange={() => this.setState({ isStreetViewControlShown: !this.state.isStreetViewControlShown })}
                     {...this.labeledToggleDefaultProps()}
+                    theme={theme}
                   />
 
                   <LabeledToggle
@@ -285,13 +298,14 @@ export class MapSettingsModal extends Component {
                     checked={this.state.isDraggingAllowed}
                     onChange={() => this.setState({ isDraggingAllowed: !this.state.isDraggingAllowed })}
                     {...this.labeledToggleDefaultProps()}
+                    theme={theme}
                   />
                 </div>
               </SettingsSection>
             </div>
 
             {!WixUtils.isMobile() &&
-            <div className={this.styles.map_settings_modal_footer_desktop}>
+            <div className={this.styles.map_settings_modal_footer}>
               <Button type="secondary" onClick={this.closeModal} theme={this.styles} className={this.styles.map_settings_modal_footer_cancel_button}>
               Cancel
               </Button>
