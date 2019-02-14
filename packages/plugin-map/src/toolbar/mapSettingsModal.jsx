@@ -27,17 +27,17 @@ export class MapSettingsModal extends Component {
 
     this.state = {
       locationSearchPhrase: '',
-      address: componentData.map.address,
-      lat: componentData.map.lat,
-      lng: componentData.map.lng,
-      mode: componentData.map.mode,
-      isMarkerShown: componentData.map.isMarkerShown,
-      isZoomControlShown: componentData.map.isZoomControlShown,
-      isStreetViewControlShown: componentData.map.isStreetViewControlShown,
-      isDraggingAllowed: componentData.map.isDraggingAllowed,
+      address: componentData.mapSettings.address,
+      lat: componentData.mapSettings.lat,
+      lng: componentData.mapSettings.lng,
+      mode: componentData.mapSettings.mode,
+      isMarkerShown: componentData.mapSettings.isMarkerShown,
+      isZoomControlShown: componentData.mapSettings.isZoomControlShown,
+      isStreetViewControlShown: componentData.mapSettings.isStreetViewControlShown,
+      isDraggingAllowed: componentData.mapSettings.isDraggingAllowed,
       isLocationInputAlreadyFocused: false,
     };
-    this.state.locationDisplayName = componentData.map.locationDisplayName || this.state.address;
+    this.state.locationDisplayName = componentData.mapSettings.locationDisplayName || this.state.address;
   }
 
   onLocationInputChange = e => this.setState({ locationSearchPhrase: e.target.value, address: e.target.value });
@@ -54,7 +54,7 @@ export class MapSettingsModal extends Component {
   onSaveBtnClick = () => {
     const { componentData, onConfirm, pubsub, helpers } = this.props;
     const newComponentData = {
-      map: {
+      mapSettings: {
         address: this.state.address,
         locationDisplayName: this.state.locationDisplayName,
         lat: this.state.lat,
@@ -122,8 +122,9 @@ export class MapSettingsModal extends Component {
   }
 
   render() {
-    const { theme, t, googleMapApiKey } = this.props;
+    const { theme, t } = this.props;
     const { locationSearchPhrase, address } = this.state;
+    const { googleMapApiKey } = this.props.componentData;
 
     const selectedLabeledImageStyle = { border: '2px solid #9a87ce' };
 
@@ -326,7 +327,6 @@ MapSettingsModal.propTypes = {
   componentData: PropTypes.object.isRequired,
   onConfirm: PropTypes.func,
   theme: PropTypes.object.isRequired,
-  googleMapApiKey: PropTypes.string.isRequired,
   uiSettings: PropTypes.object.isRequired,
   t: PropTypes.func,
 };

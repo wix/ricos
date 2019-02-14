@@ -7,7 +7,7 @@ const GoogleMapWrapper = withGoogleMap(props => (
   <GoogleMap
     defaultCenter={{ lat: props.lat, lng: props.lng }}
     center={{ lat: props.lat, lng: props.lng }}
-    zoom={18}
+    zoom={props.zoom}
     options={{
       draggable: props.isDraggingAllowed,
       mapTypeId: props.mode,
@@ -40,31 +40,32 @@ export class Map extends Component {
   }
 
   render() {
-    const { apiKey, componentData } = this.props;
+    const { componentData } = this.props;
 
     return (
       <ReactGoogleMapLoader
         params={{
-          key: apiKey,
+          key: componentData.googleMapApiKey,
           libraries: 'geometry,drawing,places',
         }}
         render={googleMaps => googleMaps &&
         <GoogleMapWrapper
-          isMarkerShown={componentData.map.isMarkerShown}
+          isMarkerShown={componentData.mapSettings.isMarkerShown}
           loadingElement={<div style={{ height: `100%` }} />}
           containerElement={<div style={{ height: componentData.config.height || '400px' }} />}
           mapElement={<div style={{ height: `100%` }} />}
-          lat={Number(componentData.map.lat)}
-          lng={Number(componentData.map.lng)}
-          markerTitle={componentData.map.address}
-          markerTooltipContent={componentData.map.locationDisplayName}
+          lat={Number(componentData.mapSettings.lat)}
+          lng={Number(componentData.mapSettings.lng)}
+          markerTitle={componentData.mapSettings.address}
+          markerTooltipContent={componentData.mapSettings.locationDisplayName}
+          zoom={componentData.mapSettings.zoom}
           onMarkerTooltipCloseClick={() => this.setState({ isMarkerTooltipRendered: false })}
           onMarkerClick={() => this.setState({ isMarkerTooltipRendered: !this.state.isMarkerTooltipRendered })}
           isMarkerTooltipRendered={this.state.isMarkerTooltipRendered}
-          mode={componentData.map.mode}
-          isZoomControlShown={componentData.map.isZoomControlShown}
-          isStreetViewControlShown={componentData.map.isStreetViewControlShown}
-          isDraggingAllowed={componentData.map.isDraggingAllowed}
+          mode={componentData.mapSettings.mode}
+          isZoomControlShown={componentData.mapSettings.isZoomControlShown}
+          isStreetViewControlShown={componentData.mapSettings.isStreetViewControlShown}
+          isDraggingAllowed={componentData.mapSettings.isDraggingAllowed}
           {...this.props}
         />
         }
@@ -75,6 +76,5 @@ export class Map extends Component {
 
 Map.propTypes = {
   componentData: PropTypes.object.isRequired,
-  apiKey: PropTypes.string
 };
 

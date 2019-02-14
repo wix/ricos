@@ -121,7 +121,19 @@ export default {
     minWidth: 100,
     maxWidth: 740,
     minHeight: 100,
-    maxHeight: 1000
+    maxHeight: 1000,
+    mapSettings: {
+      address: 'Wix HQ, Nemal Tel Aviv Street, Tel Aviv-Yafo, Israel',
+      locationDisplayName: 'Wix HQ, Nemal Tel Aviv Street, Tel Aviv-Yafo, Israel',
+      lat: 32.097235,
+      lng: 34.774270,
+      zoom: 18,
+      mode: 'roadmap',
+      isMarkerShown: true,
+      isZoomControlShown: true,
+      isStreetViewControlShown: true,
+      isDraggingAllowed: true,
+    },
   },
   uiSettings,
   getToolbarSettings: ({ pluginButtons, textButtons }) => [

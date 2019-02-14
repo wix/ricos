@@ -3,7 +3,6 @@ import {
   getModalStyles,
   PluginSettingsIcon,
   SizeSmallCenterIcon,
-  decorateComponentWithProps,
   WixUtils,
 } from 'wix-rich-content-common';
 import { MapSettingsModal } from './MapSettingsModal';
@@ -41,7 +40,7 @@ export default ({ settings, t, helpers }) => {
       keyName: 'settings',
       type: BUTTONS.EXTERNAL_MODAL,
       icon: PluginSettingsIcon,
-      modalElement: decorateComponentWithProps(MapSettingsModal, { ...settings }),
+      modalElement: MapSettingsModal,
       modalStyles: WixUtils.isMobile() ?
         getModalStyles({ customStyles: { content: { width: '100%', maxWidth: '100%' } }, fullScreen: true }) :
         getModalStyles({ customStyles: { content: { width: '480px', maxWidth: '480px' } }, fullScreen: true }),

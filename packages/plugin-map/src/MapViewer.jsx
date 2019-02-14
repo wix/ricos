@@ -18,10 +18,9 @@ export class MapViewer extends Component {
   }
 
   render() {
-    const { googleMapApiKey } = this.props.settings;
     return (
       <div>
-        <Map apiKey={googleMapApiKey} {...this.props} />
+        <Map {...this.props} />
       </div>
     );
   }
