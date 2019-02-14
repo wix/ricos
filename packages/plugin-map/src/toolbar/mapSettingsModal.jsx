@@ -16,7 +16,8 @@ import { SearchIcon } from '../icons/SearchIcon';
 import satelliteImg from '../../statics/images/satellite.png';
 import terrainImg from '../../statics/images/terrain.png';
 import roadmapImg from '../../statics/images/roadmap.png';
-import { Scrollbars } from 'react-custom-scrollbars';
+const uuidv4 = require('uuid/v4');
+
 
 export class MapSettingsModal extends Component {
   constructor(props) {
@@ -38,6 +39,8 @@ export class MapSettingsModal extends Component {
       isLocationInputAlreadyFocused: false,
     };
     this.state.locationDisplayName = componentData.mapSettings.locationDisplayName || this.state.address;
+
+    this.uniqueClassesId = uuidv4();
   }
 
   onLocationInputChange = e => this.setState({ locationSearchPhrase: e.target.value, address: e.target.value });
@@ -121,6 +124,81 @@ export class MapSettingsModal extends Component {
     );
   }
 
+
+
+  renderInjectedStyles = () => {
+    const { themeColors } = this.props.uiSettings;
+
+    const uniqueClassesId = this.uniqueClassesId;
+    const maxPhoneWidth = '640px';
+
+    const buttonPrimaryClassName = `map_settings_modal_button_primary_${uniqueClassesId}`;
+    const buttonSecondaryClassName = `map_settings_modal_button_secondary_${uniqueClassesId}`;
+    const textInputClassName = `map_settings_modal_text_input_${uniqueClassesId}`;
+
+    this.styles.button_primary = buttonPrimaryClassName;
+    this.styles.button_secondary = buttonSecondaryClassName;
+    this.styles.textInput_input = textInputClassName;
+
+    const style = `
+      .${buttonPrimaryClassName} {
+        background: ${themeColors.color8};
+
+        font-size: 16px;
+        line-height: 1.5;
+      }
+
+      .${buttonPrimaryClassName}:hover {
+        color: ${themeColors.color1};
+
+        opacity: 0.8;
+      }
+
+      .${buttonSecondaryClassName} {
+        border: 1px solid ${themeColors.color8};
+        color: ${themeColors.color8};
+
+        font-size: 16px;
+        line-height: 1.5;
+      }
+
+      .${buttonSecondaryClassName}:hover {
+        color: ${themeColors.color8};
+
+        opacity: 0.6;
+        background: transparent;
+      }
+
+      .${textInputClassName} {
+        border-color: ${themeColors.color5};
+
+        font-size: 16px;
+        line-height: 1.5px;
+        text-overflow: ellipsis;
+        padding-right: 45px;
+        opacity: 0.6;
+      }
+
+      .${textInputClassName}:hover {
+        opacity: 1;
+      }
+
+      .${textInputClassName}:focus {
+        opacity: 1;
+      }
+
+      @media only screen and (max-width: ${maxPhoneWidth}) {
+        .${textInputClassName} {
+          border-top: none;
+          border-right: none;
+          border-left: none;
+        }
+      }
+    `;
+
+    return <style>{style}</style>;
+  }
+
   render() {
     const { theme, t } = this.props;
     const { locationSearchPhrase, address } = this.state;
@@ -129,183 +207,179 @@ export class MapSettingsModal extends Component {
     const selectedLabeledImageStyle = { border: '2px solid #9a87ce' };
 
     return (
-      <Scrollbars
-        renderThumbVertical={() => <div className={this.styles.map_settings_modal_scrollbar_thumb} />}
-        style={{ height: '100vh' }}
-      >
+      <div>
+        {this.renderInjectedStyles()}
+        {WixUtils.isMobile() && this.renderMobileNavBar()}
 
-        <div>
-          {WixUtils.isMobile() && this.renderMobileNavBar()}
+        <div className={this.styles.map_settings_modal_settings_container}>
 
-          <div className={this.styles.map_settings_modal_settings_container}>
+          <div className={this.styles.map_settings_modal_title_container}>
+            <div className={this.styles.map_settings_modal_title}>{t('MapSettings_Title')}</div>
+          </div>
 
-            <div className={this.styles.map_settings_modal_title_container}>
-              <div className={this.styles.map_settings_modal_title}>{t('MapSettings_Title')}</div>
-            </div>
+          <div className={this.styles.map_settings_modal_settings}>
+            <SettingsSection
+              theme={theme}
+              className={this.styles.map_settings_modal_location_input_settings_section}
+              ariaProps={{ 'aria-label': 'location', role: 'region' }}
+            >
 
-            <div className={this.styles.map_settings_modal_settings}>
-              <SettingsSection
-                theme={theme}
-                className={this.styles.map_settings_modal_location_input_settings_section}
-                ariaProps={{ 'aria-label': 'location', role: 'region' }}
-              >
-
-                <div className={this.styles.map_settings_modal_text_input_label}>
-                  <label htmlFor="location-input">{t('MapSettings_Location_Input_Label')}</label>
-                </div>
-                <ReactGoogleMapLoader
-                  params={{
-                    key: googleMapApiKey,
-                    libraries: 'places,geocode',
-                  }}
-                  render={googleMaps =>
-                    googleMaps && (
-                      <div>
-                        <ReactGooglePlacesSuggest
-                          autocompletionRequest={{ input: locationSearchPhrase }}
-                          googleMaps={googleMaps}
-                          onSelectSuggest={this.onLocationSuggestSelect}
-                          customRender={prediction => prediction ?
-                            <p className={this.styles.map_settings_modal_location_suggestion}>{prediction.description}</p> :
-                            <p className={this.styles.map_settings_modal_location_suggestion}>
-                              {t('MapSettings_Location_Suggestion_Input_No_Results_Found')}
-                            </p>
-                          }
-                        >
-                          <div className={this.styles.map_settings_modal_search_icon_wrapper}>
-                            <div className={this.styles.map_settings_modal_search_icon}>
-                              <SearchIcon />
-                            </div>
-                            <TextInput
-                              tabIndex="0"
-                              theme={this.styles}
-                              type="option"
-                              placeholder={t('MapSettings_Location_Input_Placeholder')}
-                              value={address}
-                              id="location-input"
-                              autoComplete="off"
-                              onChange={this.onLocationInputChange}
-                              inputRef={ref => {
-                                // TODO: since this is a common logic, move it to the TextInput component, and encapsulate it in a prop
-                                if (ref !== null && !this.state.isLocationInputAlreadyFocused) {
-                                  ref.focus();
-                                  this.setState({ isLocationInputAlreadyFocused: true });
-                                }
-                              }}
-                            />
+              <div className={this.styles.map_settings_modal_text_input_label}>
+                <label htmlFor="location-input">{t('MapSettings_Location_Input_Label')}</label>
+              </div>
+              <ReactGoogleMapLoader
+                params={{
+                  key: googleMapApiKey,
+                  libraries: 'places,geocode',
+                }}
+                render={googleMaps =>
+                  googleMaps && (
+                    <div>
+                      <ReactGooglePlacesSuggest
+                        autocompletionRequest={{ input: locationSearchPhrase }}
+                        googleMaps={googleMaps}
+                        onSelectSuggest={this.onLocationSuggestSelect}
+                        customRender={prediction => prediction ?
+                          <p className={this.styles.map_settings_modal_location_suggestion}>{prediction.description}</p> :
+                          <p className={this.styles.map_settings_modal_location_suggestion}>
+                            {t('MapSettings_Location_Suggestion_Input_No_Results_Found')}
+                          </p>
+                        }
+                      >
+                        <div className={this.styles.map_settings_modal_search_icon_wrapper}>
+                          <div className={this.styles.map_settings_modal_search_icon}>
+                            <SearchIcon />
                           </div>
-                        </ReactGooglePlacesSuggest>
-                      </div>
-                    )
-                  }
-                />
-              </SettingsSection>
+                          <TextInput
+                            tabIndex="0"
+                            theme={this.styles}
+                            type="option"
+                            placeholder={t('MapSettings_Location_Input_Placeholder')}
+                            value={address}
+                            id="location-input"
+                            autoComplete="off"
+                            onChange={this.onLocationInputChange}
+                            inputRef={ref => {
+                              // TODO: since this is a common logic, move it to the TextInput component, and encapsulate it in a prop
+                              if (ref !== null && !this.state.isLocationInputAlreadyFocused) {
+                                ref.focus();
+                                this.setState({ isLocationInputAlreadyFocused: true });
+                              }
+                            }}
+                          />
+                        </div>
+                      </ReactGooglePlacesSuggest>
+                    </div>
+                  )
+                }
+              />
+            </SettingsSection>
 
-              <SettingsSection
-                theme={theme}
-                className={this.styles.map_settings_modal_location_display_name_settings_section}
-                ariaProps={{ 'aria-label': 'location', role: 'region' }}
-              >
-                <div className={this.styles.map_settings_modal_text_input_label}>
-                  <label htmlFor="location-display-name">{t('MapSettings_Location_Display_Name')}</label>
-                </div>
-                <TextInput
-                  type="text"
-                  id="location-display-name"
-                  value={this.state.locationDisplayName}
-                  onChange={e => this.setState({ locationDisplayName: e.target.value })}
-                  theme={this.styles}
-                  autoComplete="off"
-                />
-              </SettingsSection>
+            <SettingsSection
+              theme={theme}
+              className={this.styles.map_settings_modal_location_display_name_settings_section}
+              ariaProps={{ 'aria-label': 'location', role: 'region' }}
+            >
+              <div className={this.styles.map_settings_modal_text_input_label}>
+                <label htmlFor="location-display-name">{t('MapSettings_Location_Display_Name')}</label>
+              </div>
+              <TextInput
+                type="text"
+                id="location-display-name"
+                value={this.state.locationDisplayName}
+                onChange={e => this.setState({ locationDisplayName: e.target.value })}
+                theme={this.styles}
+                autoComplete="off"
+              />
+            </SettingsSection>
 
-              {!WixUtils.isMobile() &&
+            {!WixUtils.isMobile() &&
               <div className={this.styles.map_settings_modal_divider_wrapper}>
                 <div className={this.styles.map_settings_modal_divider} />
               </div>}
 
-              <SettingsSection
-                theme={theme}
-                className={this.styles.map_settings_modal_dropdown_section}
-                ariaProps={{ 'aria-label': 'ckeckboxes', role: 'region' }}
-              >
+            <SettingsSection
+              theme={theme}
+              className={this.styles.map_settings_modal_dropdown_section}
+              ariaProps={{ 'aria-label': 'ckeckboxes', role: 'region' }}
+            >
 
-                <div>
-                  <p className={this.styles.map_settings_modal_map_modes_sub_header}>{t('MapSettings_MapType_Label')}</p>
-                  <div className={this.styles.map_settings_modal_map_modes} >
-                    <LabeledImage
-                      label={t('MapSettings_MapType_RoadMap_Label')}
-                      src={roadmapImg}
-                      onClick={() => this.setState({ mode: 'roadmap' })}
-                      imgStyle={this.state.mode === 'roadmap' ? selectedLabeledImageStyle : {}}
-                      theme={theme}
-                    />
-
-                    <LabeledImage
-                      label={t('MapSettings_MapType_Satellite_Label')}
-                      src={satelliteImg}
-                      onClick={() => this.setState({ mode: 'satellite' })}
-                      imgStyle={this.state.mode === 'satellite' ? selectedLabeledImageStyle : {}}
-                      theme={theme}
-                    />
-
-                    <LabeledImage
-                      label={t('MapSettings_MapType_Terrain_Label')}
-                      src={terrainImg}
-                      onClick={() => this.setState({ mode: 'terrain' })}
-                      imgStyle={this.state.mode === 'terrain' ? selectedLabeledImageStyle : {}}
-                      theme={theme}
-                    />
-                  </div>
-                </div>
-              </SettingsSection>
-
-
-              <div className={this.styles.map_settings_modal_divider_wrapper}><div className={this.styles.map_settings_modal_divider} /></div>
-
-              <SettingsSection
-                theme={theme}
-                className={this.styles.map_settings_modal_checkbox_section}
-                ariaProps={{ 'aria-label': 'ckeckboxes', role: 'region' }}
-              >
-
-                <div className={this.styles.map_settings_modal_map_options}>
-                  <LabeledToggle
-                    label={t('MapSettings_MapOption_Show_Marker_Label')}
-                    checked={this.state.isMarkerShown}
-                    onChange={() => this.setState({ isMarkerShown: !this.state.isMarkerShown })}
-                    {...this.labeledToggleDefaultProps()}
+              <div>
+                <p className={this.styles.map_settings_modal_map_modes_sub_header}>{t('MapSettings_MapType_Label')}</p>
+                <div className={this.styles.map_settings_modal_map_modes} >
+                  <LabeledImage
+                    label={t('MapSettings_MapType_RoadMap_Label')}
+                    src={roadmapImg}
+                    onClick={() => this.setState({ mode: 'roadmap' })}
+                    imgStyle={this.state.mode === 'roadmap' ? selectedLabeledImageStyle : {}}
                     theme={theme}
                   />
 
-                  <LabeledToggle
-                    label={t('MapSettings_MapOption_Show_Zoom_Label')}
-                    checked={this.state.isZoomControlShown}
-                    onChange={() => this.setState({ isZoomControlShown: !this.state.isZoomControlShown })}
-                    {...this.labeledToggleDefaultProps()}
+                  <LabeledImage
+                    label={t('MapSettings_MapType_Satellite_Label')}
+                    src={satelliteImg}
+                    onClick={() => this.setState({ mode: 'satellite' })}
+                    imgStyle={this.state.mode === 'satellite' ? selectedLabeledImageStyle : {}}
                     theme={theme}
                   />
 
-                  <LabeledToggle
-                    label={t('MapSettings_MapOption_Show_Street_View_Label')}
-                    checked={this.state.isStreetViewControlShown}
-                    onChange={() => this.setState({ isStreetViewControlShown: !this.state.isStreetViewControlShown })}
-                    {...this.labeledToggleDefaultProps()}
-                    theme={theme}
-                  />
-
-                  <LabeledToggle
-                    label={t('MapSettings_MapOption_Allow_Dragging_Label')}
-                    checked={this.state.isDraggingAllowed}
-                    onChange={() => this.setState({ isDraggingAllowed: !this.state.isDraggingAllowed })}
-                    {...this.labeledToggleDefaultProps()}
+                  <LabeledImage
+                    label={t('MapSettings_MapType_Terrain_Label')}
+                    src={terrainImg}
+                    onClick={() => this.setState({ mode: 'terrain' })}
+                    imgStyle={this.state.mode === 'terrain' ? selectedLabeledImageStyle : {}}
                     theme={theme}
                   />
                 </div>
-              </SettingsSection>
-            </div>
+              </div>
+            </SettingsSection>
 
-            {!WixUtils.isMobile() &&
+
+            <div className={this.styles.map_settings_modal_divider_wrapper}><div className={this.styles.map_settings_modal_divider} /></div>
+
+            <SettingsSection
+              theme={theme}
+              className={this.styles.map_settings_modal_checkbox_section}
+              ariaProps={{ 'aria-label': 'ckeckboxes', role: 'region' }}
+            >
+
+              <div className={this.styles.map_settings_modal_map_options}>
+                <LabeledToggle
+                  label={t('MapSettings_MapOption_Show_Marker_Label')}
+                  checked={this.state.isMarkerShown}
+                  onChange={() => this.setState({ isMarkerShown: !this.state.isMarkerShown })}
+                  {...this.labeledToggleDefaultProps()}
+                  theme={theme}
+                />
+
+                <LabeledToggle
+                  label={t('MapSettings_MapOption_Show_Zoom_Label')}
+                  checked={this.state.isZoomControlShown}
+                  onChange={() => this.setState({ isZoomControlShown: !this.state.isZoomControlShown })}
+                  {...this.labeledToggleDefaultProps()}
+                  theme={theme}
+                />
+
+                <LabeledToggle
+                  label={t('MapSettings_MapOption_Show_Street_View_Label')}
+                  checked={this.state.isStreetViewControlShown}
+                  onChange={() => this.setState({ isStreetViewControlShown: !this.state.isStreetViewControlShown })}
+                  {...this.labeledToggleDefaultProps()}
+                  theme={theme}
+                />
+
+                <LabeledToggle
+                  label={t('MapSettings_MapOption_Allow_Dragging_Label')}
+                  checked={this.state.isDraggingAllowed}
+                  onChange={() => this.setState({ isDraggingAllowed: !this.state.isDraggingAllowed })}
+                  {...this.labeledToggleDefaultProps()}
+                  theme={theme}
+                />
+              </div>
+            </SettingsSection>
+          </div>
+
+          {!WixUtils.isMobile() &&
             <div className={this.styles.map_settings_modal_footer}>
               <Button type="secondary" onClick={this.closeModal} theme={this.styles} className={this.styles.map_settings_modal_footer_cancel_button}>
               Cancel
@@ -314,9 +388,8 @@ export class MapSettingsModal extends Component {
               Save
               </Button>
             </div>}
-          </div>
         </div>
-      </Scrollbars>
+      </div>
     );
   }
 }
