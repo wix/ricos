@@ -2,15 +2,21 @@
 @import "./labeled-toggle.scss";
 @import "./labeled-image.scss";
 
+.map_settings_modal_main_content_block {
+  padding: 0px 40px;
+  @include phone {
+    padding: 0px 20px;
+  }
+}
+
 .map_settings_modal_settings_container {
   display: flex;
   flex-direction: column;
   height: 100vh;
-  padding: 0px 40px;
+
 
   @include phone {
     height: 100%;
-    padding: 0px 20px;
     padding-bottom: 30px;
   }
 }
@@ -27,14 +33,13 @@
   box-sizing: border-box;
 
   @include phone {
-    padding: 30px 0px;
+    padding: 30px 20px;
     height: inherit;
   }
 }
 
 .map_settings_modal_settings {
   flex: 1 1 auto;
-  overflow-y: auto;
   min-height: 0px;
 
   @include phone {
@@ -59,6 +64,8 @@
   @extend .map_settings_modal_footer_button;
   margin-right: 32px;
   width: 186px;
+  outline: none;
+  padding: 0px;
 }
 
 .map_settings_modal_footer_save_button {
@@ -180,6 +187,10 @@
   flex-direction: column;
   height: 100%;
   padding-right: 13px;
+
+  @include phone {
+    padding-right: 0px;
+  }
 }
 
 .map_settings_modal_location_input_settings_section {
@@ -200,9 +211,14 @@
   background: #000000;
   border-radius: 4px;
   width: 4px;
-  margin-left: -2px;
+  opacity: 0.3;
+  cursor: pointer;
+}
+
+.map_settings_modal_scrollbar_thumb:hover {
+  opacity: 0.8;
 }
 
 .map_settings_modal_scrollbar_container {
-  height: 100vh;
+  height: 100%;
 }

@@ -43,7 +43,7 @@ export class LabeledToggle extends Component {
               <span
                 className={this.styles.labeled_toggle_slider}
                 style={{
-                  transform: checked ? 'translateX(22px)' : 'translateX(2px)',
+                  transform: checked ? 'translateX(22px)' : 'translateX(1px)',
                   background: sliderColor,
                 }}
               />

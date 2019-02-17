@@ -1,18 +1,10 @@
 .labeled_toggle_input_container {
   position: relative;
   display: inline-block;
-  width: 46px;
-  height: 24px;
+  width: 45px;
+  height: 23px;
 
   &.off {
-    opacity: 0.6;
-  }
-
-  &:hover {
-    opacity: 1;
-  }
-
-  &:hover:not(.off) {
     opacity: 0.6;
   }
 }
@@ -65,13 +57,13 @@
 .labeled_toggle_track {
   flex: 1;
   height: 100%;
-  border-radius: 12px;
+  border-radius: 100px;
 }
 
 .labeled_toggle_slider {
   position: absolute;
   width: 22px;
-  height: 22px;
+  height: 21px;
   border-radius: 50%;
   transition: transform 0.3s;
 }
