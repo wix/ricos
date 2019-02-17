@@ -2,12 +2,26 @@
 <html>
   <head>
     <style type="text/css">
-      iframe[class|='instagram'], blockquote[class|='instagram'] {
+      iframe[class|='instagram'], blockquote[class|='instagram'] { /* fallback script for ios below */
         min-width: 0 !important;
       }
     </style>
     <script>
-      window.addEventListener('message', event => {
+      (function fixInstagramWidth() { // This is a fallback for the styles above. Because inline styles can't be overridden in ios.
+        var callback = function() {
+          try {
+            if (document.body.firstChild.className.indexOf('instagram') >= 0) {
+              document.body.firstChild.style.minWidth = '0';
+            }
+          } catch (e) {}
+        };
+
+        var observer = new MutationObserver(callback);
+
+        observer.observe(document, { childList: true, subtree: true });
+      })();
+
+      window.addEventListener('message', function(event) {
         if (event.data.type !== 'htmlPlugin:updateContent') {
           return;
         }
