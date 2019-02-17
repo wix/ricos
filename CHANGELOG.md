@@ -12,6 +12,9 @@
 ### :bug: Bug Fix
 - `html`
   - [#261](https://github.com/wix-incubator/rich-content/pull/261) (ios) fix instagram too wide for mobile
+### :house: Internal
+- `general`
+  - [#262](https://github.com/wix-incubator/rich-content/pull/262) update rollup-plugin-postcss
 
 <hr/>
 
