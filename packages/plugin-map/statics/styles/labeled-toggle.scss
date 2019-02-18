@@ -20,7 +20,7 @@
 }
 
 .labeled_toggle_root + .labeled_toggle_root {
-  padding-top: 30px;
+  padding-top: 31px;
 
   @include phone {
     padding-top: 36px;
@@ -57,7 +57,7 @@
 .labeled_toggle_track {
   flex: 1;
   height: 100%;
-  border-radius: 100px;
+  border-radius: 12px;
 }
 
 .labeled_toggle_slider {

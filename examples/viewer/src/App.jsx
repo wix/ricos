@@ -11,6 +11,7 @@ import { htmlTypeMapper, HTML_TYPE } from 'wix-rich-content-plugin-html/dist/mod
 import { soundCloudTypeMapper } from 'wix-rich-content-plugin-sound-cloud/dist/module.viewer';
 import { linkTypeMapper, LinkViewer, LinkParseStrategy, LINK_TYPE } from 'wix-rich-content-plugin-link/dist/module.viewer';
 import { imageTypeMapper } from 'wix-rich-content-plugin-image/dist/module.viewer'
+import { mapTypeMapper } from 'wix-rich-content-plugin-map/dist/module.viewer'
 
 import { Strategy as HashTagStrategy, Component as HashTag } from 'wix-rich-content-plugin-hashtag';
 import { CodeBlockDecorator } from 'wix-rich-content-plugin-code-block/dist/module.viewer';
@@ -28,6 +29,7 @@ import 'wix-rich-content-plugin-link/dist/styles.min.css';
 import 'wix-rich-content-plugin-mentions/dist/styles.min.css';
 import 'wix-rich-content-plugin-video/dist/styles.min.css';
 import 'wix-rich-content-plugin-sound-cloud/dist/styles.min.css';
+import 'wix-rich-content-plugin-map/dist/styles.min.css';
 
 import TestData from './TestData/initial-state';
 import styles from './App.scss';
@@ -73,6 +75,7 @@ class App extends Component {
       soundCloudTypeMapper,
       mentionsTypeMapper,
       imageTypeMapper,
+      mapTypeMapper,
     ];
 
     this.decorators = [{

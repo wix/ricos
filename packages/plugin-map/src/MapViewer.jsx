@@ -18,11 +18,7 @@ export class MapViewer extends Component {
   }
 
   render() {
-    return (
-      <div>
-        <Map {...this.props} />
-      </div>
-    );
+    return <Map {...this.props} />;
   }
 }
 

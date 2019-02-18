@@ -4,11 +4,7 @@ import { MapViewer } from './MapViewer';
 
 export class MapComponent extends Component {
   render() {
-    return (
-      <div>
-        <MapViewer {...this.props} />
-      </div>
-    );
+    return <MapViewer {...this.props} />;
   }
 }
 
