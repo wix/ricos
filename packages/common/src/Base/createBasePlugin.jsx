@@ -80,12 +80,14 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
     t,
     name: config.toolbar.name,
     uiSettings: config.uiSettings,
-    getToolbarSettings: config.getToolbarSettings
+    getToolbarSettings: config.getToolbarSettings,
+    settings: settings,
+    config: config
   });
   const InsertPluginButtons =
     settings.showInsertButtons && config.toolbar && config.toolbar.InsertButtons && config.toolbar.InsertButtons.map(button => ({
       buttonSettings: button,
-      component: createInsertPluginButton({ blockType: config.type, button, helpers, pubsub, t })
+      component: createInsertPluginButton({ blockType: config.type, button, helpers, pubsub, t, settings })
     }));
   const PluginComponent = config.component && config.decorator ? config.decorator(config.component) : config.component;
 

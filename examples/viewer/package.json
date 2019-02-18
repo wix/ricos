@@ -33,6 +33,7 @@
     "wix-rich-content-plugin-code-block": "file:../../packages/plugin-code-block",
     "wix-rich-content-plugin-video": "file:../../packages/plugin-video",
     "wix-rich-content-plugin-sound-cloud": "file:../../packages/plugin-sound-cloud",
+    "wix-rich-content-plugin-upload-file": "file:../../packages/plugin-upload-file",
     "wix-rich-content-viewer": "file:../../packages/viewer"
   },
   "peerDependencies": {
@@ -46,7 +47,7 @@
     "clean": "rm -rf dist/",
     "start": "webpack-dev-server --config ./config/webpack.dev.js",
     "test": "echo 'There are no tests configured for this project!' && exit 0",
-    "build": "webpack --config ./config/webpack.prod.js",
+    "build": "webpack --config ./config/webpack.dev.js",
     "build:dev": "webpack --config ./config/webpack.dev.js",
     "build:analyze": "npm run build -- --progress --env.analyzeBundle"
   },

@@ -23,7 +23,9 @@ class BaseToolbarButton extends React.Component {
   componentWillUnmount() {
     this.props.pubsub.unsubscribe('componentState', this.onComponentStateChange);
   }
-
+  handleExternalFileChanged = (data, error) => {
+    this.props.pubsub.update('componentData', data);
+  }
   handleFileChange = event => {
     if (event.target.files && event.target.files.length > 0) {
       const { helpers, onFilesSelected } = this.props;
@@ -172,19 +174,23 @@ class BaseToolbarButton extends React.Component {
   };
 
   renderFilesButton = (buttonClassNames, styles) => {
-    const { theme, isMobile, t, tooltipTextKey, tabIndex } = this.props;
+    const { theme, isMobile, t, tooltipTextKey, tabIndex, pubsub, settings } = this.props;
     const tooltipText = t(tooltipTextKey);
     const showTooltip = !isMobile && !isEmpty(tooltipText);
+    let  handleClick;
+    if (settings && settings.handleFileSelection) {
+      handleClick = settings.handleFileSelection;
 
+    }
     const replaceButtonWrapperClassNames = classNames(styles.buttonWrapper);
     const filesButton = (
       <div className={replaceButtonWrapperClassNames}>
-        <FileInput
+{       <FileInput
           className={classNames(buttonClassNames)} theme={theme} tabIndex={tabIndex}
-          dataHook={this.getDataHook()} onChange={this.handleFileChange} accept="image/*" multiple={this.props.multiple}
+          dataHook={this.getDataHook()}  onClick={() =>{handleClick(this.handleExternalFileChanged)}}  multiple={this.props.multiple}
         >
           {this.getIcon()}
-        </FileInput>
+        </FileInput>}
       </div>
     );
 

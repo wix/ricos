@@ -23,7 +23,7 @@ class FileInput extends Component {
   }
 
   renderInput() {
-    const { onChange, accept, multiple, className, title, children, dataHook, tabIndex } = this.props;
+    const { onChange, accept, multiple, className, title, children, dataHook, tabIndex, onClick } = this.props;
     const hasMultiple = multiple ? { multiple } : {};
     const { styles } = this;
     const a11yProps = {
@@ -40,11 +40,12 @@ class FileInput extends Component {
           {...a11yProps}
           className={styles.visuallyHidden}
           id={this.id}
-          type={'file'}
+          type={(!onClick) ? 'file' : ''}
           data-hook={dataHook} onChange={onChange}
           accept={accept}
           onFocus={() => this.onFocus()}
           onBlur={() => this.onBlur()}
+          onClick={onClick || null}
           tabIndex={tabIndex}
           {...hasMultiple}
         />

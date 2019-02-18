@@ -1041,7 +1041,60 @@ const TestData = {
         }
       }
     }
+  },
+  fileUpload: {
+    blocks: [
+      {
+        key: 'djpvb',
+        text: '',
+        type: 'unstyled',
+        depth: 0,
+        inlineStyleRanges: [],
+        entityRanges: [],
+        data: {}
+      },
+      {
+        key: '907ro',
+        text: ' ',
+        type: 'atomic',
+        depth: 0,
+        inlineStyleRanges: [],
+        entityRanges: [
+          {
+            offset: 0,
+            length: 1,
+            key: 0
+          }
+        ],
+        data: {}
+      },
+      {
+        key: 'ds8pr',
+        text: '',
+        type: 'unstyled',
+        depth: 0,
+        inlineStyleRanges: [],
+        entityRanges: [],
+        data: {}
+      }
+    ],
+    entityMap: {
+      '0': {
+        type: 'wix-draft-plugin-upload-files',
+        mutability: 'IMMUTABLE',
+        data: {
+          config: {
+            alignment: 'center',
+            width: 'fit-content'
+          },
+          fileName: 'qwdxihmtanhxwwgfyogkvlt_skxt.jpg',
+          fileType: 'jpg',
+          fileURL: 'https://drive.google.com/open?id=0B--AtqZgBOd4c3RhcnRlcl9maWxl'
+        }
+      }
+    }
   }
+
 };
 
 export default TestData;

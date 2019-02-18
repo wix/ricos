@@ -157,12 +157,11 @@ export default ({ blockType, button, helpers, pubsub, t }) => {
           dataHook={`${button.name}_file_input`}
           className={classNames(styles.button, styles.fileUploadButton)}
           onChange={this.handleFileChange}
-          accept="image/*"
           multiple={button.multi}
           theme={this.props.theme}
           tabIndex={tabIndex}
         >
-          <div className={styles.icon}>
+         <div className={styles.icon}>
             <Icon key="0" />
           </div>
           {showName && <span key="1" className={styles.label}>{name}</span>}
