@@ -6,26 +6,26 @@ export const GIPHY_TYPE = 'wix-draft-plugin-giphy';
 export const DEFAULTS = {
   config: {
     size: 'content',
-    alignment: 'center'
+    alignment: 'center',
   },
 };
 
 export const MobileFullScreenCustomStyle = {
   overlay: {
-    backgroundColor: 'transparent'
+    backgroundColor: 'transparent',
   },
   content: {
     top: 0,
     left: 0,
     overflow: 'hidden',
-    paddingRight: '6px'
-  }
+    paddingRight: '6px',
+  },
 };
 
 export const DesktopFlyOutModalStyles = {
   overlay: {
     backgroundColor: 'rgba(0, 0, 0, 0)',
-    zIndex: 5
+    zIndex: 5,
   },
   content: {
     width: '265px',
@@ -33,11 +33,12 @@ export const DesktopFlyOutModalStyles = {
     height: '357px',
     overflow: 'visible',
     border: '1px solid #ccc',
-    paddingRight: '8px',
+    paddingRight: '10px',
     paddingLeft: '18px',
     display: 'block',
+    borderRadius: '2px',
     position: 'absolute',
     zIndex: 6,
-    paddingTop: '8px'
-  }
+    paddingTop: '9px',
+  },
 };

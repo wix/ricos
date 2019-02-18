@@ -11,7 +11,11 @@ const getRelativeParent = element => {
   return getRelativeParent(element.parentElement);
 };
 
-export const positionSuggestions = ({ entryHeight, additionalHeight, reposition = false } = {}) => ({ decoratorRect, popover, state, props }) => {
+export const positionSuggestions = ({
+  entryHeight,
+  additionalHeight,
+  reposition = false,
+} = {}) => ({ decoratorRect, popover, state, props }) => {
   const relativeParent = getRelativeParent(popover.parentElement);
   const relativeRect = {};
 
@@ -33,8 +37,7 @@ export const positionSuggestions = ({ entryHeight, additionalHeight, reposition 
   const left = relativeRect.left + relativeRect.scrollLeft;
   let top = relativeRect.top + relativeRect.scrollTop;
 
-
-  const popoverHeight = (props.suggestions.length * entryHeight + additionalHeight);
+  const popoverHeight = props.suggestions.length * entryHeight + additionalHeight;
   const isBelow = decoratorRect.bottom + popoverHeight > window.innerHeight;
 
   if (isBelow && reposition) {

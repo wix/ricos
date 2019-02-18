@@ -18,7 +18,7 @@ const createGiphyPlugin = (config = {}) => {
     helpers,
     settings,
     t,
-    ...rest
+    ...rest,
   });
 };
 

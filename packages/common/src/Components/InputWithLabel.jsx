@@ -15,23 +15,27 @@ class InputWithLabel extends Component {
     const { styles } = this;
     const { id, isTextArea, isFullHeight, dataHook, ...otherProps } = this.props;
     const inputProps = omit(otherProps, ['theme']);
-    const inputClassName = classNames(
-      styles.inputWithLabel_input,
-      {
-        [styles.inputWithLabel_textArea]: isTextArea,
-        [styles.inputWithLabel_fullHeight]: isFullHeight,
-      }
-    );
+    const inputClassName = classNames(styles.inputWithLabel_input, {
+      [styles.inputWithLabel_textArea]: isTextArea,
+      [styles.inputWithLabel_fullHeight]: isFullHeight,
+    });
     const InputComponent = isTextArea ? 'textarea' : 'input';
 
-    return <InputComponent className={inputClassName} id={id} data-hook={dataHook} {...inputProps} />;
+    return (
+      <InputComponent className={inputClassName} id={id} data-hook={dataHook} {...inputProps} />
+    );
   };
 
   render() {
     const { styles } = this;
     const { id, label } = this.props;
     if (label) {
-      return <label htmlFor={id}><span className={styles.inputWithLabel_label}>{label}</span>{this.renderInput()}</label>;
+      return (
+        <label htmlFor={id}>
+          <span className={styles.inputWithLabel_label}>{label}</span>
+          {this.renderInput()}
+        </label>
+      );
     } else {
       return this.renderInput();
     }

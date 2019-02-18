@@ -64,7 +64,10 @@ The `toolbar` setting refers to plugin functionality toolbar. Currently, it expo
 
 | setting key | description | default value | is required? |
 |-------------|-------------|---------------|--------------|
-| `giphySdkApiKey` | [Giphy Developer API key](https://developers.giphy.com/dashboard/?create=true) | none | Yes
+| `giphySdkApiKey` | [Giphy Developer API key](https://developers.giphy.com/dashboard/?create=true) | none | 
+Yes
+| `componentDataDefaults` | Default component data | `{ config: { size: 'content', alignment: 'center' } }` | No
+| `insertToolbars` | Which toolbars to add insert button to | `[TOOLBARS.FOOTER]` | No
 
 ## References and Examples
 

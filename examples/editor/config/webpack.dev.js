@@ -1,31 +1,31 @@
 /* eslint-disable */
 const merge = require('webpack-merge');
+const { HotModuleReplacementPlugin } = require('webpack');
 
 const devConfig = {
   mode: 'development',
   devtool: 'eval-source-map',
   optimization: {
-    namedModules: false
+    namedModules: false,
   },
   module: {
     rules: [
       {
         test: /\.js$/,
         use: ['source-map-loader'],
-        enforce: 'pre'
-      }
-    ]
+        enforce: 'pre',
+        exclude: /node_modules.*node_modules/,
+      },
+    ],
   },
-  serve: {
+  plugins: [new HotModuleReplacementPlugin()],
+  devServer: {
     port: 3000,
     host: '0.0.0.0',
     hot: true,
-    clipboard: false,
-    dev: {
-      publicPath: '/',
-      stats: 'errors-only',
-      logLevel: 'warn',
-    }
+    compress: true,
+    publicPath: '/',
+    stats: 'errors-only',
   },
 };
 

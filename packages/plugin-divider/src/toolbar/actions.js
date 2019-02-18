@@ -4,7 +4,7 @@ import {
   ALIGN_RIGHT,
   SIZE_LARGE,
   SIZE_MEDIUM,
-  SIZE_SMALL
+  SIZE_SMALL,
 } from '../constants';
 import { getConfigFromStore, getNextValue } from './selectors';
 

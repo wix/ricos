@@ -16,5 +16,5 @@ ReactDOM.render(
   <I18nextProvider i18n={i18n(initialI18n)}>
     <App />
   </I18nextProvider>,
-  document.getElementById('root'),
+  document.getElementById('root')
 );

@@ -29,7 +29,6 @@ export const reducePluginTextButtons = (pluginTextButtons, filterButtons = () =>
 export const reducePluginTextButtonNames = (pluginTextButtons, filterButtons = () => true) => {
   // iterate plugin button mappers
   return pluginTextButtons.reduce((buttonNames, buttonData, i) => {
-
     if (buttonData) {
       // iterate each buttonData
       const singlePluginButtonNames = Object.keys(buttonData).reduce((names, key) => {

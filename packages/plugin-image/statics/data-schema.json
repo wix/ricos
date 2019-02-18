@@ -1,0 +1,135 @@
+{
+  "$id": "http://path/to/schema.json",
+  "type": "object",
+  "properties": {
+    "config": {
+      "$id": "/properties/config",
+      "type": "object",
+      "properties": {
+        "size": {
+          "$id": "/properties/config/properties/size",
+          "type": "string",
+          "title": "Size",
+          "default": "large",
+          "examples": ["medium", "small", "large"]
+        },
+        "alignment": {
+          "$id": "/properties/config/properties/alignment",
+          "type": "string",
+          "title": "The Alignment Schema ",
+          "default": "center",
+          "examples": ["left", "right", "center"]
+        },
+        "showTitle": {
+          "$id": "/properties/config/properties/showTitle",
+          "type": "boolean",
+          "title": "showTitle flag",
+          "default": false,
+          "examples": [true]
+        },
+        "showDescription": {
+          "$id": "/properties/config/properties/showDescription",
+          "type": "boolean",
+          "title": "showDescription flag",
+          "default": false,
+          "examples": [true]
+        },
+        "link": {
+          "$id": "/properties/config/properties/link",
+          "type": ["object", "null"],
+          "properties": {
+            "url": {
+              "$id": "/properties/config/properties/link/properties/url",
+              "type": "string",
+              "title": "URL",
+              "default": "",
+              "examples": ["wix.com"]
+            },
+            "target": {
+              "$id": "/properties/config/properties/link/properties/target",
+              "type": "string",
+              "title": "Link Target",
+              "default": "",
+              "examples": ["_blank"]
+            },
+            "rel": {
+              "$id": "/properties/config/properties/link/properties/rel",
+              "type": "string",
+              "title": "Link rel",
+              "default": "noopener",
+              "examples": ["nofollow", "noreferrer"]
+            }
+          }
+        },
+        "key": {
+          "$id": "/properties/config/properties/key",
+          "type": "string",
+          "title": "Entity Block Key",
+          "default": "",
+          "examples": ["7tfhb"]
+        }
+      }
+    },
+    "src": {
+      "$id": "/properties/src",
+      "type": ["object", "string", "null"],
+      "properties": {
+        "id": {
+          "$id": "/properties/src/properties/id",
+          "type": "string",
+          "title": "ID",
+          "default": "",
+          "examples": ["8310d26374ed948918b9914ea076e411"]
+        },
+        "original_file_name": {
+          "$id": "/properties/src/properties/original_file_name",
+          "type": "string",
+          "title": "The original file name",
+          "default": "",
+          "examples": ["8bb438_b5957febd0ed45d3be9a0e91669c65b4.jpg"]
+        },
+        "file_name": {
+          "$id": "/properties/src/properties/file_name",
+          "type": "string",
+          "title": "The file name",
+          "default": "",
+          "examples": ["8bb438_b5957febd0ed45d3be9a0e91669c65b4.jpg"]
+        },
+        "width": {
+          "$id": "/properties/src/properties/width",
+          "type": "integer",
+          "title": "Image Width",
+          "default": 0,
+          "examples": [1621]
+        },
+        "height": {
+          "$id": "/properties/src/properties/height",
+          "type": "integer",
+          "title": "Image Height",
+          "default": 0,
+          "examples": [1081]
+        }
+      }
+    },
+    "metadata": {
+      "$id": "/properties/metadata",
+      "type": "object",
+      "properties": {
+        "alt": {
+          "$id": "/properties/metadata/properties/alt",
+          "type": "string",
+          "title": "Alt text",
+          "default": "",
+          "examples": ["alt"]
+        },
+        "caption": {
+          "$id": "/properties/metadata/properties/caption",
+          "type": "string",
+          "title": "Image caption",
+          "default": "",
+          "examples": ["Wanted dead or alive"]
+        }
+      }
+    }
+  }
+}

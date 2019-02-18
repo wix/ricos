@@ -12,8 +12,6 @@ const argv = require('yargs').argv;
 const pkg = require('../package.json');
 
 const lernaPath = path.resolve(__dirname, '../node_modules/.bin/lerna');
-const scope = argv.scope || 'wix-rich-content-*';
-const force = argv.force || false;
 
 // resets the console
 process.stdout.write('\x1Bc');
@@ -36,16 +34,9 @@ prompts({
     console.log(chalk.red('Release aborted'));
   } else {
     try {
-      let lernaCmd = `${lernaPath} version --no-commit-hooks --message="version bump:"`;
-      if (argv.force) {
-        let forceFlag = '--force-publish';
-        if (typeof argv.force === 'string') {
-          forceFlag = `${forceFlag}=${argv.force}`;
-        }
-        lernaCmd = `${lernaCmd} ${forceFlag}`;
-      }
-      if (argv.version) {
-        lernaCmd = `${lernaCmd} ${argv.version}`;
+      let lernaCmd = `${lernaPath} version --no-commit-hooks --force-publish="*"`;
+      if (argv.release) {
+        lernaCmd = `${lernaCmd} ${argv.release}`;
       }
       cp.execSync(lernaCmd, { stdio: 'inherit' });
     } catch (error) {

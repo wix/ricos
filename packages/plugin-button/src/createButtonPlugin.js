@@ -8,21 +8,13 @@ import ButtonComponent from './components/button-component';
 
 const createButtonPlugin = (config = {}) => {
   const type = BUTTON_TYPE;
-  const {
-    helpers,
-    theme,
-    t,
-    anchorTarget,
-    relValue,
-    [type]: settings = {},
-    ...rest
-  } = config;
+  const { helpers, theme, t, anchorTarget, relValue, [type]: settings = {}, ...rest } = config;
   const styles = mergeStyles({ styles: Styles, theme });
   const buttonProps = {
     className: theme,
     anchorTarget,
     relValue,
-    settings
+    settings,
   };
 
   const buttonEntityComponent = decorateComponentWithProps(ButtonComponent, buttonProps);
@@ -41,11 +33,11 @@ const createButtonPlugin = (config = {}) => {
       anchorTarget,
       relValue,
       theme,
-      t
+      t,
     }),
     helpers,
     t,
-    ...rest
+    ...rest,
   });
 };
 

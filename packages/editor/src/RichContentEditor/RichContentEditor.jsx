@@ -20,7 +20,7 @@ import {
   AccessibilityListener,
   normalizeInitialState,
   TooltipHost,
-  TOOLBARS
+  TOOLBARS,
 } from 'wix-rich-content-common';
 import styles from '../../statics/styles/rich-content-editor.scss';
 import draftStyles from '../../statics/styles/draft.scss';
@@ -30,45 +30,39 @@ class RichContentEditor extends Component {
     super(props);
     this.state = {
       editorState: this.getInitialEditorState(),
-      theme: props.theme || {}
+      theme: props.theme || {},
     };
     this.refId = Math.floor(Math.random() * 9999);
 
-    props.config.uiSettings = merge({
-      blankTargetToggleVisibilityFn: anchorTarget => anchorTarget !== '_blank',
-      nofollowRelToggleVisibilityFn: relValue => relValue !== 'nofollow'
-    }, props.config.uiSettings || {});
+    props.config.uiSettings = merge(
+      {
+        blankTargetToggleVisibilityFn: anchorTarget => anchorTarget !== '_blank',
+        nofollowRelToggleVisibilityFn: relValue => relValue !== 'nofollow',
+      },
+      props.config.uiSettings || {}
+    );
 
     this.initPlugins();
   }
 
   initPlugins() {
-    const {
-      helpers,
-      plugins,
-      config,
-      isMobile,
-      anchorTarget,
-      relValue,
-      t,
-    } = this.props;
+    const { helpers, plugins, config, isMobile, anchorTarget, relValue, t } = this.props;
 
     const { theme } = this.state;
     const getEditorState = () => this.state.editorState;
     const setEditorState = editorState => this.setState({ editorState });
-    const { pluginInstances, pluginButtons, pluginTextButtons, pubsubs } =
-      createPlugins({
-        plugins,
-        config,
-        helpers,
-        theme,
-        t,
-        isMobile,
-        anchorTarget,
-        relValue,
-        getEditorState,
-        setEditorState,
-      });
+    const { pluginInstances, pluginButtons, pluginTextButtons, pubsubs } = createPlugins({
+      plugins,
+      config,
+      helpers,
+      theme,
+      t,
+      isMobile,
+      anchorTarget,
+      relValue,
+      getEditorState,
+      setEditorState,
+    });
     this.initEditorToolbars(pluginButtons, pluginTextButtons);
     this.pluginKeyBindings = initPluginKeyBindings(pluginTextButtons);
     this.plugins = [...pluginInstances, ...Object.values(this.toolbars)];
@@ -84,7 +78,7 @@ class RichContentEditor extends Component {
       isMobile,
       t,
       config = {},
-      textAlignment
+      textAlignment,
     } = this.props;
     const { theme } = this.state;
     const buttons = { pluginButtons, pluginTextButtons };
@@ -103,16 +97,15 @@ class RichContentEditor extends Component {
       t,
       refId: this.refId,
       getToolbarSettings: config.getToolbarSettings,
-      uiSettings: config.uiSettings
+      uiSettings: config.uiSettings,
     });
   }
 
-  getToolbars = () => (
-    {
-      MobileToolbar: this.toolbars[TOOLBARS.MOBILE] ? this.toolbars[TOOLBARS.MOBILE].Toolbar : null,
-      TextToolbar: this.props.textToolbarType === 'static' ? this.toolbars[TOOLBARS.STATIC].Toolbar : null
-    }
-  )
+  getToolbars = () => ({
+    MobileToolbar: this.toolbars[TOOLBARS.MOBILE] ? this.toolbars[TOOLBARS.MOBILE].Toolbar : null,
+    TextToolbar:
+      this.props.textToolbarType === 'static' ? this.toolbars[TOOLBARS.STATIC].Toolbar : null,
+  });
 
   getInitialEditorState() {
     const { editorState, initialState, anchorTarget, relValue } = this.props;
@@ -121,11 +114,10 @@ class RichContentEditor extends Component {
     }
     if (initialState) {
       const rawContentState = normalizeInitialState(initialState, { anchorTarget, relValue });
-      return EditorState.createWithContent(
-        convertFromRaw(rawContentState)
-      );
+      return EditorState.createWithContent(convertFromRaw(rawContentState));
     } else {
-      const emptyContentState = convertFromRaw({ //this is needed for ssr. Otherwise the key will be generated randomly on both server and client.
+      const emptyContentState = convertFromRaw({
+        //this is needed for ssr. Otherwise the key will be generated randomly on both server and client.
         entityMap: {},
         blocks: [
           {
@@ -167,29 +159,34 @@ class RichContentEditor extends Component {
   };
 
   getCustomCommandHandlers = () => ({
-    commands: [...this.pluginKeyBindings.commands, {
-      command: 'tab',
-      modifiers: [],
-      key: 'Tab'
-    }],
+    commands: [
+      ...this.pluginKeyBindings.commands,
+      {
+        command: 'tab',
+        modifiers: [],
+        key: 'Tab',
+      },
+    ],
     commandHanders: {
       ...this.pluginKeyBindings.commandHandlers,
       tab: () => {
         if (this.getToolbars().TextToolbar) {
-          const staticToolbarButton = this.findFocusableChildForElement(`${getStaticTextToolbarId(this.refId)}`);
+          const staticToolbarButton = this.findFocusableChildForElement(
+            `${getStaticTextToolbarId(this.refId)}`
+          );
           staticToolbarButton && staticToolbarButton.focus();
         } else {
           this.editor.blur();
         }
       },
-    }
+    },
   });
 
   focus = () => this.editor.focus();
 
   blur = () => this.editor.blur();
 
-  setEditor = ref => this.editor = get(ref, 'editor', ref);
+  setEditor = ref => (this.editor = get(ref, 'editor', ref));
 
   updateBounds = editorBounds => {
     this.subscriberPubsubs.forEach(pubsub => pubsub.set('editorBounds', editorBounds));
@@ -260,7 +257,11 @@ class RichContentEditor extends Component {
     return (
       <Editor
         ref={this.setEditor}
-        handleReturn={handleReturn ? handleReturn(this.updateEditorState) : handleReturnCommand(this.updateEditorState)}
+        handleReturn={
+          handleReturn
+            ? handleReturn(this.updateEditorState)
+            : handleReturnCommand(this.updateEditorState)
+        }
         editorState={editorState}
         onChange={this.updateEditorState}
         handleBeforeInput={handleBeforeInput}
@@ -268,7 +269,10 @@ class RichContentEditor extends Component {
         plugins={this.plugins}
         blockStyleFn={blockStyleFn(theme)}
         blockRenderMap={getBlockRenderMap(theme)}
-        handleKeyCommand={handleKeyCommand(this.updateEditorState, this.getCustomCommandHandlers().commandHanders)}
+        handleKeyCommand={handleKeyCommand(
+          this.updateEditorState,
+          this.getCustomCommandHandlers().commandHanders
+        )}
         editorKey={editorKey}
         keyBindingFn={keyBindingFn(this.getCustomCommandHandlers().commands || [])}
         helpers={helpers}
@@ -296,20 +300,15 @@ class RichContentEditor extends Component {
 
   renderAccessibilityListener = () => <AccessibilityListener isMobile={this.props.isMobile} />;
 
-  renderTooltipHost = () => <TooltipHost theme={this.state.theme} />
+  renderTooltipHost = () => <TooltipHost theme={this.state.theme} />;
 
   render() {
     const { isMobile } = this.props;
     const { theme } = this.state;
-    const wrapperClassName = classNames(
-      draftStyles.wrapper,
-      styles.wrapper,
-      theme.wrapper,
-      {
-        [styles.desktop]: !isMobile,
-        [theme.desktop]: !isMobile && theme && theme.desktop,
-      }
-    );
+    const wrapperClassName = classNames(draftStyles.wrapper, styles.wrapper, theme.wrapper, {
+      [styles.desktop]: !isMobile,
+      [theme.desktop]: !isMobile && theme && theme.desktop,
+    });
     return (
       <Measure bounds onResize={({ bounds }) => this.updateBounds(bounds)}>
         {({ measureRef }) => (
@@ -321,7 +320,8 @@ class RichContentEditor extends Component {
               {this.renderInlineModals()}
               {this.renderTooltipHost()}
             </div>
-          </div>)}
+          </div>
+        )}
       </Measure>
     );
   }
@@ -366,7 +366,7 @@ RichContentEditor.propTypes = {
 };
 
 RichContentEditor.defaultProps = {
-  config: {}
+  config: {},
 };
 
 export default translate(null, { withRef: true })(RichContentEditor);

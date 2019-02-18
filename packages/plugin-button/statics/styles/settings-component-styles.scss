@@ -1,5 +1,5 @@
-@import "~wix-rich-content-common/dist/statics/styles/mixins";
-@import "~wix-rich-content-common/dist/statics/styles/palette";
+@import '~wix-rich-content-common/dist/statics/styles/mixins';
+@import '~wix-rich-content-common/dist/statics/styles/palette';
 
 .header_ButtonText {
   font-size: 14px;
@@ -57,8 +57,8 @@
 .checkbox_label {
   font-size: 14px;
   font-weight: normal;
-  @include phone{
-  margin-left: 18px;
+  @include phone {
+    margin-left: 18px;
   }
 }
 .modal_footer {

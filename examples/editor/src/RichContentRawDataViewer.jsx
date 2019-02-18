@@ -5,7 +5,6 @@ import get from 'lodash/get';
 import set from 'lodash/set';
 
 class RichContentRawDataViewer extends Component {
-
   constructor(props) {
     super(props);
     this.id = `rcrv_${Math.floor(Math.random() * 9999)}`;
@@ -18,7 +17,7 @@ class RichContentRawDataViewer extends Component {
     }
   }
 
-  stateFromProps(props){
+  stateFromProps(props) {
     return { content: this.fixKeys(props.content) };
   }
 
@@ -30,13 +29,12 @@ class RichContentRawDataViewer extends Component {
         const videoHtml = get(entity, 'data.metadata.html');
         if (videoHtml) {
           set(entity, 'data.metadata.html', this.escapeHtml(videoHtml));
-        } else if (get(entity, 'data.srcType') === 'html'){
+        } else if (get(entity, 'data.srcType') === 'html') {
           const htmlSrc = get(entity, 'data.src');
           set(entity, 'data.src', this.escapeHtml(htmlSrc));
         }
 
-        return Object.assign(map, { [`"${key}"`]: entity});
-
+        return Object.assign(map, { [`"${key}"`]: entity });
       }, {});
 
       fixed = Object.assign({}, content, { entityMap: fixedEntityMap });
@@ -44,7 +42,7 @@ class RichContentRawDataViewer extends Component {
 
     if (fixed && fixed.blocks) {
       const fixedBlocks = fixed.blocks.map(block => {
-        if(block.text) {
+        if (block.text) {
           block.text = this.escapeNewLine(block.text);
         }
         return block;
@@ -54,20 +52,32 @@ class RichContentRawDataViewer extends Component {
   }
 
   escapeNewLine(text) {
-    return text.replace(/[\n\r]/gmui, '\\n');
+    return text.replace(/[\n\r]/gimu, '\\n');
   }
 
   escapeHtml(text) {
-    return text.replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;").replace(/\//g, "&#047;");
+    return text
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;')
+      .replace(/\//g, '&#047;');
   }
 
   onChange(content) {
-      if (content && content.jsObject && !content.error) {
-        this.props.onChange(this.fixKeys(content.jsObject));
-      }
-  };
+    if (content && content.jsObject && !content.error) {
+      this.props.onChange(this.fixKeys(content.jsObject));
+    }
+  }
 
-  render = () => <JSONInput placeholder={this.state.content} id={this.id} onChange={content => this.onChange(content)} {...this.props} />;
+  render = () => (
+    <JSONInput
+      placeholder={this.state.content}
+      id={this.id}
+      onChange={content => this.onChange(content)}
+      {...this.props}
+    />
+  );
 }
 
 // see https://github.com/AndrewRedican/react-json-editor-ajrm for details

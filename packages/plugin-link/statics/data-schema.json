@@ -9,43 +9,29 @@
       "type": "string",
       "title": "href",
       "default": "",
-      "examples": [
-        "wix.com"
-      ]
+      "examples": ["wix.com"]
     },
     "rel": {
       "$id": "/properties/rel",
       "type": "string",
       "title": "rel",
       "default": "noopener",
-      "examples": [
-        "nofollow",
-        "noopener",
-        "noreferrer"
-      ]
+      "examples": ["nofollow", "noopener", "noreferrer"]
     },
     "target": {
       "$id": "/properties/target",
       "type": "string",
       "title": "target",
       "default": "_self",
-      "examples": [
-        "_blank",
-        "_top",
-        "_self"
-      ]
+      "examples": ["_blank", "_top", "_self"]
     },
     "url": {
       "$id": "/properties/url",
       "type": "string",
       "title": "URL",
       "default": "",
-      "examples": [
-        "wix.com"
-      ]
+      "examples": ["wix.com"]
     }
   },
-  "required": [
-    "url"
-  ]
+  "required": ["url"]
 }

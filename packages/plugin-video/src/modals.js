@@ -5,10 +5,7 @@ const Modals = {
 };
 
 const ModalsMap = {
-  [Modals.VIDEO_SELECTION_INPUT]: VideoSelectionInputModal
+  [Modals.VIDEO_SELECTION_INPUT]: VideoSelectionInputModal,
 };
 
-export {
-  Modals,
-  ModalsMap
-};
+export { Modals, ModalsMap };

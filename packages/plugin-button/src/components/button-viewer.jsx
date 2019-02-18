@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { mergeStyles } from 'wix-rich-content-common';
 import styles from '../../statics/styles/default-styles.scss';
 class ButtonViewer extends PureComponent {
-
   constructor(props) {
     super(props);
     this.styles = mergeStyles({ styles, theme: props.theme });
@@ -13,18 +12,8 @@ class ButtonViewer extends PureComponent {
     const { url, style, target, rel, buttonText } = this.props;
     return (
       <div>
-        <a
-          className={styles.button_container}
-          href={url}
-          style={style}
-          target={target}
-          rel={rel}
-        >
-          <div className={styles.button_text}>
-            {
-              buttonText
-            }
-          </div>
+        <a className={styles.button_container} href={url} style={style} target={target} rel={rel}>
+          <div className={styles.button_text}>{buttonText}</div>
         </a>
       </div>
     );
@@ -37,7 +26,7 @@ ButtonViewer.propTypes = {
   target: PropTypes.string,
   rel: PropTypes.string,
   buttonText: PropTypes.string,
-  theme: PropTypes.object.isRequired
+  theme: PropTypes.object.isRequired,
 };
 
 export default ButtonViewer;

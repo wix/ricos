@@ -12,15 +12,24 @@ const getLines = (type, width, multilineDinstance = 7) => {
         {
           x2: width,
           y1: multilineDinstance,
-          y2: multilineDinstance
-        }
+          y2: multilineDinstance,
+        },
       ];
     default:
       return [{ x2: width, y1: 1, y2: 1 }];
   }
 };
 
-const DividerLine = ({ type, size, alignment, width, multilineDinstance, styles, isMobile, className }) => {
+const DividerLine = ({
+  type,
+  size,
+  alignment,
+  width,
+  multilineDinstance,
+  styles,
+  isMobile,
+  className,
+}) => {
   const lines = getLines(type, width, multilineDinstance);
   const lineClassName = classNames(
     styles.divider,
@@ -31,7 +40,9 @@ const DividerLine = ({ type, size, alignment, width, multilineDinstance, styles,
   );
   return (
     <svg className={lineClassName}>
-      {lines.map((props, i) => <line key={i} {...props} />)}
+      {lines.map((props, i) => (
+        <line key={i} {...props} />
+      ))}
     </svg>
   );
 };

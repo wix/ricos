@@ -5,7 +5,7 @@ import { GIPHY_TYPE } from './constants';
 
 class GiphyComponent extends Component {
   static type = {
-    GIPHY_TYPE
+    GIPHY_TYPE,
   };
 
   constructor(props) {
@@ -14,7 +14,7 @@ class GiphyComponent extends Component {
     this.state = {
       isLoading: false,
       isLoaded: false,
-      isPlayable
+      isPlayable,
     };
   }
 
@@ -26,12 +26,7 @@ class GiphyComponent extends Component {
 
   renderPlayer = () => {
     const { componentData } = this.props;
-    return (
-      <GiphyViewer
-        ref={this.setPlayer}
-        componentData={componentData}
-      />
-    );
+    return <GiphyViewer ref={this.setPlayer} componentData={componentData} />;
   };
 
   onKeyDown = (e, handler) => {
@@ -44,11 +39,7 @@ class GiphyComponent extends Component {
     const { onClick } = this.props;
     /* eslint-disable jsx-a11y/no-static-element-interactions */
     return (
-      <div
-        data-hook="giphyPlayer"
-        onClick={onClick}
-        onKeyDown={e => this.onKeyDown(e, onClick)}
-      >
+      <div data-hook="giphyPlayer" onClick={onClick} onKeyDown={e => this.onKeyDown(e, onClick)}>
         {this.renderPlayer()}
       </div>
     );

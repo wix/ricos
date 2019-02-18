@@ -8,7 +8,7 @@ export {
   SizeSmallRightButton,
   SizeContentButton,
   SizeFullWidthButton,
-  DeleteButton
+  DeleteButton,
 } from './Base/buttons';
 export * from './Icons';
 export { default as BUTTONS } from './Base/buttons/keys';

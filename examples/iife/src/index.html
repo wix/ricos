@@ -1,0 +1,36 @@
+<html>
+
+<head>
+  <script src="https://unpkg.com/lodash@4.17.10/lodash.js" crossorigin></script>
+  <script src="https://unpkg.com/react@16.3.2/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@16.3.2/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/prop-types@15.6.2/prop-types.js" crossorigin></script>
+  <script src="http://localhost:8080/examples/iife/src/helpers.js"></script>
+  <script src="https://unpkg.com/classnames@2.2.6/index.js" crossorigin></script>
+  <script src="https://unpkg.com/immutable@3.8.2/dist/immutable.js" crossorigin></script>
+  <script src="https://unpkg.com/react-i18next@7.6.1/dist/umd/react-i18next.js" crossorigin></script>
+  <script src="https://unpkg.com/draft-js@0.10.5/dist/Draft.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-tooltip@3.6.1/standalone/react-tooltip.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-measure@2.1.0/dist/react-measure.js" crossorigin></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-modal/3.1.11/react-modal.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone@7.2.5/babel.js" crossorigin></script>
+
+  <script src="http://localhost:8080/packages/common/dist/Common.js"></script>
+  <script src="http://localhost:8080/packages/editor/dist/Editor.js"></script>
+
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet" />
+  <link rel="stylesheet" href="http://localhost:8080/packages/common/dist/styles.min.css" />
+  <link rel="stylesheet" href="http://localhost:8080/packages/editor/dist/styles.min.css" />
+
+  <script src="./main.component.js" type="text/babel"></script>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    ReactDOM.render(<DemoExample />, document.getElementById('root'));
+    </script>
+</body>
+
+</html>

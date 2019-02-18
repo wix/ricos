@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import isEmpty from 'lodash/isEmpty';
 import MobileLinkModal from './MobileLinkModal';
 
-
 export default class MobileBlockLinkModal extends Component {
   hidePopup = () => this.props.hidePopup();
 
@@ -19,7 +18,7 @@ export default class MobileBlockLinkModal extends Component {
 
   deleteLink = () => {
     this.props.pubsub.setBlockData({ key: 'componentLink', item: null });
-  }
+  };
 
   render() {
     const { pubsub, theme, isMobile, anchorTarget, relValue, t, uiSettings } = this.props;

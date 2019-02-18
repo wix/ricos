@@ -6,38 +6,27 @@ import ToolbarButton from './ToolbarButton';
 import styles from '../../statics/styles/inline-toolbar-button.scss';
 
 export default class InlineToolbarButton extends Component {
-
   constructor(props) {
     super(props);
     const { buttonStyles } = props.theme || {};
 
     this.styles = {
-      button: classNames(
-        styles.inlineToolbarButton,
-        {
-          [buttonStyles.inlineToolbarButton]: !!buttonStyles.inlineToolbarButton,
-          [buttonStyles.pluginToolbarButton]: !!buttonStyles.pluginToolbarButton,
-        }
-      ),
-      buttonWrapper: classNames(
-        styles.inlineToolbarButton_wrapper,
-        {
-          [buttonStyles.inlineToolbarButton_wrapper]: !!buttonStyles.inlineToolbarButton_wrapper,
-          [buttonStyles.pluginToolbarButton_wrapper]: !!buttonStyles.pluginToolbarButton_wrapper,
-        }
-      ),
-      icon: classNames(styles.inlineToolbarButton_icon,
-        {
-          [buttonStyles.inlineToolbarButton_icon]: !!buttonStyles.inlineToolbarButton_icon,
-          [buttonStyles.pluginToolbarButton_icon]: !!buttonStyles.pluginToolbarButton_icon,
-        }
-      ),
-      active: classNames(styles.inlineToolbarButton_active,
-        {
-          [buttonStyles.inlineToolbarButton_active]: !!buttonStyles.inlineToolbarButton_active,
-          [buttonStyles.pluginToolbarButton_active]: !!buttonStyles.pluginToolbarButton_active,
-        }
-      ),
+      button: classNames(styles.inlineToolbarButton, {
+        [buttonStyles.inlineToolbarButton]: !!buttonStyles.inlineToolbarButton,
+        [buttonStyles.pluginToolbarButton]: !!buttonStyles.pluginToolbarButton,
+      }),
+      buttonWrapper: classNames(styles.inlineToolbarButton_wrapper, {
+        [buttonStyles.inlineToolbarButton_wrapper]: !!buttonStyles.inlineToolbarButton_wrapper,
+        [buttonStyles.pluginToolbarButton_wrapper]: !!buttonStyles.pluginToolbarButton_wrapper,
+      }),
+      icon: classNames(styles.inlineToolbarButton_icon, {
+        [buttonStyles.inlineToolbarButton_icon]: !!buttonStyles.inlineToolbarButton_icon,
+        [buttonStyles.pluginToolbarButton_icon]: !!buttonStyles.pluginToolbarButton_icon,
+      }),
+      active: classNames(styles.inlineToolbarButton_active, {
+        [buttonStyles.inlineToolbarButton_active]: !!buttonStyles.inlineToolbarButton_active,
+        [buttonStyles.pluginToolbarButton_active]: !!buttonStyles.pluginToolbarButton_active,
+      }),
     };
   }
 
@@ -60,18 +49,20 @@ export default class InlineToolbarButton extends Component {
     const { styles } = this;
     const showTooltip = !isMobile && !isEmpty(tooltipText);
 
-    const iconClassNames = classNames(styles.icon,
-      {
-        [styles.active]: isActive,
-      }
-    );
+    const iconClassNames = classNames(styles.icon, {
+      [styles.active]: isActive,
+    });
 
     const codeBlockButton = (
-    /* eslint-disable jsx-a11y/no-static-element-interactions */
+      /* eslint-disable jsx-a11y/no-static-element-interactions */
       <div className={styles.buttonWrapper} onMouseDown={this.preventBubblingUp}>
         <button
-          tabIndex={tabIndex} aria-label={tooltipText} aria-pressed={isActive} data-hook="codeBlockButton"
-          onClick={this.handleClick} className={styles.button}
+          tabIndex={tabIndex}
+          aria-label={tooltipText}
+          aria-pressed={isActive}
+          data-hook="codeBlockButton"
+          onClick={this.handleClick}
+          className={styles.button}
         >
           <div className={iconClassNames}>
             <Icon />
@@ -81,6 +72,14 @@ export default class InlineToolbarButton extends Component {
     );
     /* eslint-enable jsx-a11y/no-static-element-interactions */
 
-    return <ToolbarButton theme={theme} showTooltip={showTooltip} tooltipText={tooltipText} button={codeBlockButton} tooltipOffset={{ y: -20 }} />;
+    return (
+      <ToolbarButton
+        theme={theme}
+        showTooltip={showTooltip}
+        tooltipText={tooltipText}
+        button={codeBlockButton}
+        tooltipOffset={{ y: -20 }}
+      />
+    );
   }
 }

@@ -1,4 +1,4 @@
-@import "~wix-rich-content-common/dist/statics/styles/mixins";
+@import '~wix-rich-content-common/dist/statics/styles/mixins';
 
 .hue_pointer {
   width: 0;
@@ -11,14 +11,14 @@
   }
 }
 
-.vertical_line{
-    width: 1px;
-    height: 6px;
-    background-color: #fff;
-    margin-left: 8px;
-    @include phone {
-      width: 2px;
-      height: 12px;
-      margin-left: 7px;
-    }
+.vertical_line {
+  width: 1px;
+  height: 6px;
+  background-color: #fff;
+  margin-left: 8px;
+  @include phone {
+    width: 2px;
+    height: 12px;
+    margin-left: 7px;
+  }
 }

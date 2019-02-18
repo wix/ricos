@@ -10,7 +10,7 @@ import {
   ErrorIcon,
   WixUtils,
   SettingsPanelFooter,
-  isValidUrl
+  isValidUrl,
 } from 'wix-rich-content-common';
 import DesignComponent from './../components/design-component';
 import SettingsComponent from './../components/settings-component';
@@ -23,17 +23,22 @@ export default class ButtonInputModal extends Component {
   constructor(props) {
     super(props);
     this.styles = mergeStyles({ styles, theme: props.theme });
-    const { settings: { colors }, componentData, relValue, anchorTarget } = this.props;
+    const {
+      settings: { colors },
+      componentData,
+      relValue,
+      anchorTarget,
+    } = this.props;
     const initialButtonColors = {
       textColor: colors.color_1,
       borderColor: colors.color_8,
-      backgroundColor: colors.color_8
+      backgroundColor: colors.color_8,
     };
 
     let buttonObj = {};
     if (componentData.button) {
       buttonObj = {
-        ...componentData.button
+        ...componentData.button,
       };
     }
     if (!('rel' in buttonObj) && relValue === 'nofollow') {
@@ -53,7 +58,7 @@ export default class ButtonInputModal extends Component {
       design: { ...buttonObj },
       initialComponentData: {},
       isHover: false,
-      activeTab: settingsTabValue
+      activeTab: settingsTabValue,
     };
 
     this.setScrollbarRef = element => {
@@ -62,34 +67,37 @@ export default class ButtonInputModal extends Component {
   }
 
   componentDidMount = () => {
-    const { settings: { colors }, componentData: { button } } = this.props;
+    const {
+      settings: { colors },
+      componentData: { button },
+    } = this.props;
     const initialButtonColors = {
       textColor: colors.color_1,
       borderColor: colors.color_8,
-      backgroundColor: colors.color_8
+      backgroundColor: colors.color_8,
     };
     if (!button.textColor) {
       this.setState({ initialComponentData: { ...button, ...initialButtonColors } });
     } else {
       this.setState({ initialComponentData: button });
     }
-  }
+  };
 
   onValidUrl = isValidUrl => {
     this.setState({ isValidUrl });
-  }
+  };
 
   onSettingsChanged = data => {
     const buttonObj = {
       ...this.state.data,
-      ...data
+      ...data,
     };
     if (!isEqual(data, this.state.data)) {
       const { pubsub } = this.props;
       pubsub.update('componentData', { button: buttonObj });
       this.setState({ data });
     }
-  }
+  };
 
   onDesignChanged = design => {
     if (this.state.activeTab !== designTabValue) {
@@ -97,21 +105,26 @@ export default class ButtonInputModal extends Component {
     }
     const buttonObj = {
       ...this.state.data,
-      ...design
+      ...design,
     };
     if (!isEqual(design, this.state.design)) {
       const { pubsub } = this.props;
       pubsub.update('componentData', { button: buttonObj });
       this.setState({ design });
     }
-  }
+  };
 
   onConfirm = () => {
     const { url } = this.state.data;
-    const { componentData, pubsub, onConfirm, helpers: { closeModal } } = this.props;
+    const {
+      componentData,
+      pubsub,
+      onConfirm,
+      helpers: { closeModal },
+    } = this.props;
     const buttonObj = {
       data: { ...this.state.data },
-      design: { ...this.state.design }
+      design: { ...this.state.design },
     };
     if (isValidUrl(url)) {
       this.setState({ isValidUrl: true });
@@ -140,7 +153,12 @@ export default class ButtonInputModal extends Component {
   };
 
   onCloseRequested = () => {
-    const { componentData, pubsub, onCloseRequested, helpers: { closeModal } } = this.props;
+    const {
+      componentData,
+      pubsub,
+      onCloseRequested,
+      helpers: { closeModal },
+    } = this.props;
     const { initialComponentData } = this.state;
     if (onCloseRequested) {
       onCloseRequested({ ...componentData, button: initialComponentData });
@@ -154,22 +172,22 @@ export default class ButtonInputModal extends Component {
 
   handleOnMouseEnterDesign = () => {
     this.setState({ isHover: true, activeTab: designTabValue });
-  }
+  };
 
   handleOnMouseLeaveDesign = () => {
     this.setState({ isHover: false });
-  }
+  };
 
   handleOnMouseEnterSettings = () => {
     this.setState({ activeTab: settingsTabValue });
-  }
+  };
 
   onTabSelected = tabValue => {
     const { url } = this.state.data;
     if (!isValidUrl(url) && tabValue === designTabValue) {
       this.setState({ isValidUrl: false });
     }
-  }
+  };
   render() {
     const { theme, t, uiSettings, doneLabel, cancelLabel } = this.props;
     const { styles } = this;
@@ -179,15 +197,11 @@ export default class ButtonInputModal extends Component {
           <p className={styles.tabLabel}>{t('ButtonModal_Settings_Tab')}</p>
         </div>
         <div className={styles.errorIcon}>
-          {!this.state.isValidUrl ?
-            <ErrorIcon width="18" height="18" /> :
-            null
-          }
+          {!this.state.isValidUrl ? <ErrorIcon width="18" height="18" /> : null}
         </div>
-      </div>);
-    const designTabLabel = (
-      <p className={styles.tabLabel}>{t('ButtonModal_Design_Tab')}</p>
+      </div>
     );
+    const designTabLabel = <p className={styles.tabLabel}>{t('ButtonModal_Design_Tab')}</p>;
     const settingsComponent = (
       <SettingsComponent
         t={t}
@@ -202,7 +216,8 @@ export default class ButtonInputModal extends Component {
         linkInputRef={ref => {
           this.linkInput = ref;
         }}
-      />);
+      />
+    );
     const designComponent = (
       <DesignComponent
         {...this.props}
@@ -212,7 +227,8 @@ export default class ButtonInputModal extends Component {
         onDesignChange={this.onDesignChanged.bind(this)}
         designObj={this.state.design}
         onKeyPress={this.handleKeyPress}
-      />);
+      />
+    );
     let mobileView = null;
     if (WixUtils.isMobile()) {
       mobileView = (
@@ -235,28 +251,36 @@ export default class ButtonInputModal extends Component {
     }
     return (
       <div>
-
-        {WixUtils.isMobile() ?
-          mobileView :
+        {WixUtils.isMobile() ? (
+          mobileView
+        ) : (
           <div className={styles.container} data-hook="ButtonInputModal">
             <div>
               <div role="heading" aria-labelledby="button_modal_hdr" className={styles.header}>
-                <div className={styles.header_text}>
-                  {t('ButtonModal_Header')}
-                </div>
+                <div className={styles.header_text}>{t('ButtonModal_Header')}</div>
               </div>
               <FocusManager>
                 <div className={styles.focus_mhanager}>
-                  <Tabs value={this.state.activeTab} theme={this.styles} onTabSelected={this.onTabSelected.bind(this)}>
+                  <Tabs
+                    value={this.state.activeTab}
+                    theme={this.styles}
+                    onTabSelected={this.onTabSelected.bind(this)}
+                  >
                     <Tab label={settingTabLabel} value={settingsTabValue} theme={this.styles}>
-                      <div role="button" tabIndex="0" onMouseEnter={this.handleOnMouseEnterSettings} >
+                      <div
+                        role="button"
+                        tabIndex="0"
+                        onMouseEnter={this.handleOnMouseEnterSettings}
+                      >
                         {settingsComponent}
                       </div>
                     </Tab>
                     <Tab label={designTabLabel} value={designTabValue} theme={this.styles}>
                       <Scrollbars
                         ref={this.setScrollbarRef}
-                        renderThumbVertical={() => this.state.isHover ? <div className={styles.scrollbar_thumb} /> : <div />}
+                        renderThumbVertical={() =>
+                          this.state.isHover ? <div className={styles.scrollbar_thumb} /> : <div />
+                        }
                         className={styles.customize_scrollbar_container}
                         onMouseEnter={this.handleOnMouseEnterDesign}
                         onMouseLeave={this.handleOnMouseLeaveDesign}
@@ -278,7 +302,7 @@ export default class ButtonInputModal extends Component {
               t={t}
             />
           </div>
-        }
+        )}
       </div>
     );
   }
@@ -300,8 +324,7 @@ ButtonInputModal.propTypes = {
   doneLabel: PropTypes.string,
   cancelLabel: PropTypes.string,
   uiSettings: PropTypes.object,
-  helpers: PropTypes.object
-
+  helpers: PropTypes.object,
 };
 
 ButtonInputModal.defaultProps = {

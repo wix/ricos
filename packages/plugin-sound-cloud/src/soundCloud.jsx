@@ -10,16 +10,15 @@ import { SOUND_CLOUD_TYPE } from './types';
 const DEFAULTS = {
   config: {
     size: 'content',
-    alignment: 'center'
+    alignment: 'center',
   },
 };
 
 const MAX_WAIT_TIME = 5000;
 
 class SoundCloud extends Component {
-
   static type = {
-    SOUND_CLOUD_TYPE
+    SOUND_CLOUD_TYPE,
   };
 
   constructor(props) {
@@ -49,8 +48,12 @@ class SoundCloud extends Component {
   // TODO: get rid of this ASAP!
   // Currently, there's no other means to access the player inner iframe
   handlePlayerFocus() {
-    return !this.state.isPlayable && this.player && findDOMNode(this.player).querySelector('iframe') &&
-      (findDOMNode(this.player).querySelector('iframe').tabIndex = -1);
+    return (
+      !this.state.isPlayable &&
+      this.player &&
+      findDOMNode(this.player).querySelector('iframe') &&
+      (findDOMNode(this.player).querySelector('iframe').tabIndex = -1)
+    );
   }
   /* eslint-enable react/no-find-dom-node */
 
@@ -82,7 +85,8 @@ class SoundCloud extends Component {
     return (
       <div className={classNames(styles.soundCloud_overlay)}>
         {isLoaded && <span className={styles.soundCloud_overlay_message}>{overlayText}</span>}
-      </div>);
+      </div>
+    );
   };
 
   renderPlayer = () => {
@@ -110,7 +114,12 @@ class SoundCloud extends Component {
     const containerClassNames = classNames(styles.soundCloud_container, className || '');
     /* eslint-disable jsx-a11y/no-static-element-interactions */
     return (
-      <div data-hook="soundCloudPlayer" onClick={onClick} className={containerClassNames} onKeyDown={e => this.onKeyDown(e, onClick)}>
+      <div
+        data-hook="soundCloudPlayer"
+        onClick={onClick}
+        className={containerClassNames}
+        onKeyDown={e => this.onKeyDown(e, onClick)}
+      >
         {!isPlayable && this.renderOverlay(styles, t)}
         {this.renderPlayer()}
       </div>

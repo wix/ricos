@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { hasLinksInSelection, getModalStyles, LinkButton, EditorModals, decorateComponentWithProps } from 'wix-rich-content-common';
+import {
+  hasLinksInSelection,
+  getModalStyles,
+  LinkButton,
+  EditorModals,
+  decorateComponentWithProps,
+} from 'wix-rich-content-common';
 import TextLinkPanel from './TextLinkPanel';
 
 export default class TextLinkButton extends Component {
@@ -18,7 +24,7 @@ export default class TextLinkButton extends Component {
       anchorTarget,
       relValue,
       t,
-      uiSettings
+      uiSettings,
     } = this.props;
     const modalStyles = getModalStyles({ fullScreen: false });
     if (isMobile || linkModal) {
@@ -39,7 +45,10 @@ export default class TextLinkButton extends Component {
         };
         helpers.openModal(modalProps);
       } else {
-        console.error('Open external helper function is not defined for toolbar button with keyName ' + keyName); //eslint-disable-line no-console
+        //eslint-disable-next-line no-console
+        console.error(
+          'Open external helper function is not defined for toolbar button with keyName ' + keyName
+        );
       }
     } else {
       const linkPanelProps = {
@@ -49,12 +58,12 @@ export default class TextLinkButton extends Component {
         relValue,
         theme,
         t,
-        uiSettings
+        uiSettings,
       };
       const TextLinkPanelWithProps = decorateComponentWithProps(TextLinkPanel, linkPanelProps);
       onOverrideContent(TextLinkPanelWithProps);
     }
-  }
+  };
 
   get isActive() {
     return hasLinksInSelection(this.props.getEditorState());
@@ -69,14 +78,16 @@ export default class TextLinkButton extends Component {
       icon: theme.inlineToolbarButton_icon,
       active: theme.inlineToolbarButton_active,
     };
-    return (<LinkButton
-      onClick={this.showLinkPanel}
-      isActive={this.isActive}
-      theme={{ ...theme, ...buttonStyles }}
-      isMobile={isMobile}
-      tooltipText={linkButtonTooltip}
-      tabIndex={tabIndex}
-    />);
+    return (
+      <LinkButton
+        onClick={this.showLinkPanel}
+        isActive={this.isActive}
+        theme={{ ...theme, ...buttonStyles }}
+        isMobile={isMobile}
+        tooltipText={linkButtonTooltip}
+        tabIndex={tabIndex}
+      />
+    );
   }
 }
 

@@ -1,0 +1,14 @@
+{
+  "editor.formatOnSave": true,
+  "prettier.eslintIntegration": true,
+  "prettier.requireConfig": true,
+  "prettier.disableLanguages": [
+    "vue",
+    "css",
+    "scss",
+    "sass"
+  ],
+  "[json]": {
+    "editor.formatOnSave": false
+  }
+}

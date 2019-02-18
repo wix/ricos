@@ -2,11 +2,14 @@
   "lerna": "3.0.3",
   "command": {
     "version": {
-      "allowBranch": ["develop"]
+      "allowBranch": [
+        "develop"
+      ],
+      "message": "[*] chore(release): %s"
     }
   },
   "packages": [
     "packages/*"
   ],
-  "version": "independent"
+  "version": "2.0.4"
 }

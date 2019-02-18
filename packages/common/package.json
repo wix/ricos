@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-common",
-  "version": "1.5.13",
+  "version": "2.0.4",
   "author": {
     "name": "Jonathan Bachman",
     "email": "jonathanb@wix.com"
@@ -22,19 +22,19 @@
   "style": "dist/styles.min.scss",
   "scripts": {
     "clean": "rm -rf dist/",
-    "statics": "mkdir -p dist && cp -R statics dist/statics",
+    "statics": "mkdir -p dist && cp -R statics dist",
     "prebuild": "npm run statics",
     "build": "rollup --environment MODULE_NAME:common -c ../../rollup.config.js",
     "build:dev": "NODE_ENV=development npm run build",
     "build:analyze": "npm run build -- --environment MODULE_ANALYZE && open stats.html",
-    "watch": "MODULE_WATCH=1 npm run build -- --watch",
+    "watch": "NODE_ENV=development MODULE_WATCH=1 npm run build -- --watch",
     "release": "wnpm-release --no-shrinkwrap",
     "lint": "eslint 'src/**/*.{js,jsx}'",
     "pretest": "npm run lint",
     "test": "jest --verbose"
   },
   "peerDependencies": {
-    "@babel/runtime": "7.1.2",
+    "@babel/runtime": "7.2.0",
     "@wix/draft-js": "0.10.272",
     "classnames": "^2.0.0",
     "lodash": "^4.0.0",
@@ -43,9 +43,9 @@
     "react-dom": "^15.0.0 || ^16.0.0"
   },
   "devDependencies": {
-    "@babel/runtime": "7.1.2",
+    "@babel/runtime": "7.2.0",
     "@wix/draft-js": "0.10.272",
-    "babel-jest": "^23.2.0",
+    "babel-jest": "^23.6.0",
     "classnames": "^2.2.6",
     "deep-freeze": "0.0.1",
     "eslint": "^4.19.1",
@@ -54,14 +54,16 @@
     "prop-types": "^15.6.2",
     "react": "15.5.4",
     "react-dom": "15.5.4",
-    "rollup": "^0.64.1"
+    "rollup": "^1.1.0"
   },
   "dependencies": {
+    "downshift": "3.1.12",
     "focus-trap": "^2.4.5",
     "jsonschema": "^1.2.4",
     "linkify-it": "^2.0.3",
     "react-measure": "^2.0.2",
-    "react-tooltip": "^3.6.1"
+    "react-tooltip": "^3.6.1",
+    "react-window": "1.5.0"
   },
   "unpkg": true,
   "publishConfig": {
@@ -70,6 +72,9 @@
   "jest": {
     "globals": {
       "NODE_ENV": "test"
+    },
+    "transform": {
+      "^.+\\.jsx?$": "<rootDir>/../../babel.jest.monorepo.js"
     },
     "moduleNameMapper": {
       "\\.(jpg|jpeg|png|gif|svg)$": "<rootDir>/__mocks__/fileMock.js",

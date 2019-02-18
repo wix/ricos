@@ -8,7 +8,10 @@ import RadioGroupHorizontal from './RadioGroupHorizontal';
 import styles from '../../statics/styles/link-panel.scss';
 const LinkType = props => (
   <RadioGroupHorizontal
-    dataSource={[{ value: 'url', labelText: 'Website address (URL)' }, { value: 'page', labelText: 'Site Page' }]}
+    dataSource={[
+      { value: 'url', labelText: 'Website address (URL)' },
+      { value: 'page', labelText: 'Site Page' },
+    ]}
     {...props}
   />
 );
@@ -22,79 +25,118 @@ class LinkPanelContainer extends PureComponent {
   constructor(props) {
     super(props);
     this.styles = mergeStyles({ styles, theme: props.theme });
+    const { url, targetBlank, nofollow } = this.props;
+    this.state = {
+      linkPanelValues: { url, targetBlank, nofollow },
+    };
   }
 
-  setLinkPanel = linkPanel => this.linkPanel = linkPanel;
-
-  onDoneClick = () => {
-    const { onCancel, onDelete } = this.props;
-    if (this.linkPanel.state.isValidUrl && this.linkPanel.state.url) {
-      const { url, targetBlank, nofollow } = this.linkPanel.state;
-      this.props.onDone && this.props.onDone({ url, targetBlank, nofollow });
-    } else if (this.linkPanel.state.intermediateUrl === '') {
-      onDelete();
-      onCancel();
-    } else {
-      this.linkPanel.validateUrl();
+  onDone = () => {
+    const { linkPanelValues } = this.state;
+    if (linkPanelValues.isValid && linkPanelValues.url) {
+      this.props.onDone(linkPanelValues);
+    } else if (linkPanelValues.url === '') {
+      this.onDelete();
     }
   };
 
-  onCancelClick = () => this.props.onCancel && this.props.onCancel();
+  onDelete = () => {
+    this.props.onDelete();
+    this.onCancel();
+  };
 
-  onDeleteClick = () => {
-    const { onCancel, onDelete } = this.props;
-    onDelete();
-    onCancel();
-  }
+  onCancel = () => this.props.onCancel();
 
   render() {
     const { styles } = this;
-    const { url, targetBlank, nofollow, theme, isActive, anchorTarget, relValue, isMobile, t, ariaProps, tabIndex, uiSettings } = this.props;
+    const {
+      theme,
+      isActive,
+      anchorTarget,
+      relValue,
+      isMobile,
+      t,
+      ariaProps,
+      tabIndex,
+      uiSettings,
+    } = this.props;
     const doneButtonText = t('LinkPanelContainer_DoneButton');
     const cancelButtonText = t('LinkPanelContainer_CancelButton');
     const removeButtonText = t('LinkPanelContainer_RemoveButton');
     const doneButtonClassName = classNames(styles.linkPanel_FooterButton, styles.linkPanel_enabled);
-    const cancelButtonClassName = classNames(styles.linkPanel_FooterButton, styles.linkPanel_Cancel);
+    const cancelButtonClassName = classNames(
+      styles.linkPanel_FooterButton,
+      styles.linkPanel_Cancel
+    );
     const removeButtonClassName = classNames(styles.linkPanel_FooterButton);
-    const linkPanelContainerClassName = classNames(styles.linkPanel_container,
-      {
-        [styles.linkPanel_container_isMobile]: isMobile,
-      });
+    const linkPanelContainerClassName = classNames(styles.linkPanel_container, {
+      [styles.linkPanel_container_isMobile]: isMobile,
+    });
+
+    const { linkPanel } = uiSettings || {};
+    const { blankTargetToggleVisibilityFn, nofollowRelToggleVisibilityFn } = linkPanel || {};
+    const showTargetBlankCheckbox =
+      blankTargetToggleVisibilityFn && blankTargetToggleVisibilityFn(anchorTarget);
+    const showRelValueCheckbox =
+      nofollowRelToggleVisibilityFn && nofollowRelToggleVisibilityFn(relValue);
 
     const linkPanelAriaProps = { 'aria-label': 'Link management' };
     return (
-      <FocusManager className={linkPanelContainerClassName} data-hook="linkPanelContainer" role="form" {...ariaProps}>
+      <FocusManager
+        className={linkPanelContainerClassName}
+        data-hook="linkPanelContainer"
+        role="form"
+        {...ariaProps}
+      >
         <div className={styles.linkPanel_content}>
           <LinkPanel
-            onEnter={this.onDoneClick.bind(this)} onEscape={this.onCancelClick.bind(this)}
-            ref={this.setLinkPanel} theme={theme} url={url} targetBlank={targetBlank} anchorTarget={anchorTarget}
-            relValue={relValue} nofollow={nofollow} t={t} ariaProps={linkPanelAriaProps} uiSettings={uiSettings}
+            onEnter={this.onDone}
+            onEscape={this.onCancel}
+            linkValues={this.state.linkPanelValues}
+            onChange={linkPanelValues => this.setState({ linkPanelValues })}
+            theme={theme}
+            showTargetBlankCheckbox={showTargetBlankCheckbox}
+            showRelValueCheckbox={showRelValueCheckbox}
+            t={t}
+            ariaProps={linkPanelAriaProps}
+            {...uiSettings.linkPanel}
           />
           <div className={styles.linkPanel_actionsDivider} role="separator" />
         </div>
         <div className={styles.linkPanel_Footer}>
           <div className={styles.linkPanel_LeftActions}>
             <button
-              tabIndex={tabIndex} aria-label={cancelButtonText}
-              className={cancelButtonClassName} data-hook="linkPanelContainerCancel" onClick={this.onCancelClick}
-            >{cancelButtonText}
+              tabIndex={tabIndex}
+              aria-label={cancelButtonText}
+              className={cancelButtonClassName}
+              data-hook="linkPanelContainerCancel"
+              onClick={this.onCancel}
+            >
+              {cancelButtonText}
             </button>
-            {isActive &&
-            <div className={styles.linkPanel_RemoveContainer}>
-              <div className={styles.linkPanel_VerticalDivider} />
-              <button
-                tabIndex={tabIndex} aria-label={removeButtonText}
-                className={removeButtonClassName}
-                data-hook="linkPanelContainerRemove" onClick={this.onDeleteClick}
-              >{removeButtonText}
-              </button>
-            </div>
-            }
+            {isActive && (
+              <div className={styles.linkPanel_RemoveContainer}>
+                <div className={styles.linkPanel_VerticalDivider} />
+                <button
+                  tabIndex={tabIndex}
+                  aria-label={removeButtonText}
+                  className={removeButtonClassName}
+                  data-hook="linkPanelContainerRemove"
+                  onClick={this.onDelete}
+                >
+                  {removeButtonText}
+                </button>
+              </div>
+            )}
           </div>
           <button
-            tabIndex={tabIndex} aria-label={doneButtonText}
-            className={doneButtonClassName} data-hook="linkPanelContainerDone" onClick={this.onDoneClick}
-          >{doneButtonText}
+            tabIndex={tabIndex}
+            aria-label={doneButtonText}
+            className={doneButtonClassName}
+            data-hook="linkPanelContainerDone"
+            onClick={this.onDone}
+          >
+            {doneButtonText}
           </button>
         </div>
       </FocusManager>

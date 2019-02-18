@@ -38,7 +38,13 @@ export default ({ Icon, tooltipTextKey }) =>
       const blockButton = (
         /* eslint-disable jsx-a11y/no-static-element-interactions */
         <div className={theme.buttonWrapper} onMouseDown={this.preventBubblingUp}>
-          <button aria-label={tooltipText} tabIndex={tabIndex} className={theme.button} data-hook={dataHookText} onClick={this.handleClick}>
+          <button
+            aria-label={tooltipText}
+            tabIndex={tabIndex}
+            className={theme.button}
+            data-hook={dataHookText}
+            onClick={this.handleClick}
+          >
             <div className={theme.icon}>
               <Icon />
             </div>
@@ -47,6 +53,14 @@ export default ({ Icon, tooltipTextKey }) =>
         /* eslint-enable jsx-a11y/no-static-element-interactions */
       );
 
-      return <ToolbarButton theme={theme} showTooltip={showTooltip} tooltipText={tooltipText} button={blockButton} tooltipOffset={{ y: -20 }} />;
+      return (
+        <ToolbarButton
+          theme={theme}
+          showTooltip={showTooltip}
+          tooltipText={tooltipText}
+          button={blockButton}
+          tooltipOffset={{ y: -20 }}
+        />
+      );
     }
   };

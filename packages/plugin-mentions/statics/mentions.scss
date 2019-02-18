@@ -31,7 +31,7 @@
   padding: 5px 10px;
   display: flex;
   align-items: center;
-  transition: background-color 0.4s cubic-bezier(.27, 1.27, .48, .56);
+  transition: background-color 0.4s cubic-bezier(0.27, 1.27, 0.48, 0.56);
 }
 
 .mentionSuggestionsEntry:active {
@@ -40,7 +40,7 @@
 
 .mentionSuggestionsEntryFocused {
   padding: 5px 10px;
-  transition: background-color 0.4s cubic-bezier(.27, 1.27, .48, .56);
+  transition: background-color 0.4s cubic-bezier(0.27, 1.27, 0.48, 0.56);
   display: flex;
   align-items: center;
   background-color: #e6f3ff;

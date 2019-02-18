@@ -12,15 +12,19 @@ export default class TextCodeBlockButton extends Component {
 
   render() {
     const { theme, isMobile, t, tabIndex, setEditorState, getEditorState } = this.props;
-    return (<InlineToolbarButton
-      onClick={() => setEditorState(toggleBlockTypeAndEnsureSpaces(CODE_BLOCK_TYPE, getEditorState()))}
-      isActive={this.isActive}
-      theme={theme}
-      isMobile={isMobile}
-      tooltipText={t('TextCodeBlockButton_Tooltip')}
-      tabIndex={tabIndex}
-      icon={CodeBlockIcon}
-    />);
+    return (
+      <InlineToolbarButton
+        onClick={() =>
+          setEditorState(toggleBlockTypeAndEnsureSpaces(CODE_BLOCK_TYPE, getEditorState()))
+        }
+        isActive={this.isActive}
+        theme={theme}
+        isMobile={isMobile}
+        tooltipText={t('TextCodeBlockButton_Tooltip')}
+        tabIndex={tabIndex}
+        icon={CodeBlockIcon}
+      />
+    );
   }
 }
 

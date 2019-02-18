@@ -7,11 +7,7 @@
       "type": "string",
       "title": "Divider Type",
       "default": "single",
-      "examples": [
-        "double",
-        "single",
-        "dashed"
-      ]
+      "examples": ["double", "single", "dashed"]
     },
     "config": {
       "$id": "/properties/config",
@@ -22,45 +18,31 @@
           "type": "string",
           "title": "Size",
           "default": "large",
-          "examples": [
-            "medium",
-            "small",
-            "large"
-          ]
+          "examples": ["medium", "small", "large"]
         },
         "alignment": {
           "$id": "/properties/config/properties/alignment",
           "type": "string",
           "title": "The Alignment Schema ",
           "default": "center",
-          "examples": [
-            "left",
-            "right",
-            "center"
-          ]
+          "examples": ["left", "right", "center"]
         },
         "textWrap": {
           "$id": "/properties/config/properties/textWrap",
           "type": "string",
           "title": "The Textwrap Schema ",
           "default": "nowrap",
-          "examples": [
-            "nowrap"
-          ]
+          "examples": ["nowrap"]
         },
         "key": {
           "$id": "/properties/config/properties/key",
           "type": "string",
           "title": "The Key Schema ",
           "default": "",
-          "examples": [
-            "7mib0"
-          ]
+          "examples": ["7mib0"]
         }
       }
     }
   },
-  "required": [
-    "type"
-  ]
+  "required": ["type"]
 }

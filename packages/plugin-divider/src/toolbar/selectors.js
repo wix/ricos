@@ -14,14 +14,12 @@ import {
   SIZE_SMALL,
   ALIGN_LEFT,
   ALIGN_CENTER,
-  ALIGN_RIGHT
+  ALIGN_RIGHT,
 } from '../constants';
 
-export const getType = (componentData = {}) =>
-  componentData.type || DEFAULTS.type;
+export const getType = (componentData = {}) => componentData.type || DEFAULTS.type;
 
-export const getConfigFromStore = store =>
-  getConfig(store.get('componentData'));
+export const getConfigFromStore = store => getConfig(store.get('componentData'));
 
 export const getConfig = (componentData = {}) => {
   const config = componentData.config || {};

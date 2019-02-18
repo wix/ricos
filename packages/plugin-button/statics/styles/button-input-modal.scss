@@ -1,5 +1,5 @@
-@import "~wix-rich-content-common/dist/statics/styles/mixins";
-@import "~wix-rich-content-common/dist/statics/styles/palette";
+@import '~wix-rich-content-common/dist/statics/styles/mixins';
+@import '~wix-rich-content-common/dist/statics/styles/palette';
 
 .container {
   @include phone {
@@ -40,7 +40,6 @@
   border-bottom: 1px solid #ededed;
   height: 80px;
   box-sizing: border-box;
-
 }
 
 .header_text {
@@ -56,7 +55,7 @@
   }
 }
 
-.design_header_text{
+.design_header_text {
   font-size: 16px;
   margin: 10px 0px;
   width: 100%;
@@ -73,7 +72,7 @@
   padding-bottom: 0px;
   padding-top: 0px;
 }
-.tabs_headers{
+.tabs_headers {
   border-bottom: none;
   height: 42px;
 }
@@ -115,7 +114,7 @@
   padding-right: 0px;
 }
 
-.tabLabel{
+.tabLabel {
   margin-top: 12px;
 }
 

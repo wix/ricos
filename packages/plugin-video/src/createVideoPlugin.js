@@ -14,12 +14,12 @@ const createVideoPlugin = (config = {}) => {
     toolbar: createToolbar({
       helpers,
       t,
-      settings
+      settings,
     }),
     helpers,
     settings,
     t,
-    ...rest
+    ...rest,
   });
 };
 

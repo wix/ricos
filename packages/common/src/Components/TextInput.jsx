@@ -8,16 +8,15 @@ import Tooltip from './Tooltip';
 import textInputStyles from '../../statics/styles/text-input.scss';
 
 export default class TextInput extends React.Component {
-
   static propTypes = {
     inputRef: PropTypes.func,
     theme: PropTypes.object.isRequired,
     error: PropTypes.string,
-    showTooltip: PropTypes.bool
+    showTooltip: PropTypes.bool,
   };
 
   static defaultProps = {
-    showTooltip: true
+    showTooltip: true,
   };
 
   render() {
@@ -27,15 +26,25 @@ export default class TextInput extends React.Component {
       <div className={styles.textInput}>
         <input
           ref={inputRef}
-          className={classNames(styles.textInput_input, { [styles.textInput_input_invalid]: error })}
+          className={classNames(styles.textInput_input, {
+            [styles.textInput_input_invalid]: error,
+          })}
           {...otherProps}
         />
-        {error && (showTooltip ?
-          <Tooltip shouldRebuildOnUpdate={() => !!error} content={error} theme={theme} moveBy={{ y: 0 }} type={'error'}>
+        {error &&
+          (showTooltip ? (
+            <Tooltip
+              shouldRebuildOnUpdate={() => !!error}
+              content={error}
+              theme={theme}
+              moveBy={{ y: 0 }}
+              type={'error'}
+            >
+              <ErrorIcon className={styles.textInput_errorIcon} />
+            </Tooltip>
+          ) : (
             <ErrorIcon className={styles.textInput_errorIcon} />
-          </Tooltip> :
-          <ErrorIcon className={styles.textInput_errorIcon} />)
-        }
+          ))}
       </div>
     );
   }

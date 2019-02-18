@@ -4,9 +4,11 @@
   //outline: 1px dashed fuchsia;
 }
 
-.hasFocus {}
+.hasFocus {
+}
 
-.overlay {}
+.overlay {
+}
 
 .pluginContainerReadOnly {
   @extend .fontElementMap !optional;
@@ -24,27 +26,38 @@
   .ReactModalPortal {
     @extend .glob_fontElementMap !optional;
   }
-  .ReactModal__Body--open {}
-  .ReactModal__Content {}
+  .ReactModal__Body--open {
+  }
+  .ReactModal__Content {
+  }
 }
 
-.flex {}
+.flex {
+}
 
-.hidden {}
+.hidden {
+}
 
-.alignLeft {}
+.alignLeft {
+}
 
-.alignCenter {}
+.alignCenter {
+}
 
-.alignRight {}
+.alignRight {
+}
 
-.sizeFullWidth {}
+.sizeFullWidth {
+}
 
-.sizeContent {}
+.sizeContent {
+}
 
-.sizeSmall {}
+.sizeSmall {
+}
 
-.sizeSmallCenter {}
+.sizeSmallCenter {
+}
 
 @media only screen and (min-width: 640px) {
   .sizeFullWidth {

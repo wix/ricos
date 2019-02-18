@@ -5,10 +5,7 @@ const Modals = {
 };
 
 const ModalsMap = {
-  [Modals.GIPHY_API_INPUT]: GiphyApiInputModal
+  [Modals.GIPHY_API_INPUT]: GiphyApiInputModal,
 };
 
-export {
-  Modals,
-  ModalsMap
-};
+export { Modals, ModalsMap };

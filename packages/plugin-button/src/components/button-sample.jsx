@@ -6,7 +6,6 @@ import PickedIcon from './../icons/pickedIcon';
 import styles from '../../statics/styles/button-sample.scss';
 
 class ButtonSample extends PureComponent {
-
   constructor(props) {
     super(props);
     this.styles = mergeStyles({ styles, theme: props.theme });
@@ -20,8 +19,7 @@ class ButtonSample extends PureComponent {
   onClick = () => {
     this.props.onClickButton(this.state.index);
     this.setState({ buttonStyle: this.props.style });
-  }
-
+  };
 
   render() {
     const { style, active, t } = this.props;
@@ -45,9 +43,7 @@ class ButtonSample extends PureComponent {
     const onStyleChanged = isEqual(propsStyle, stateStyle);
     return (
       <div className={styles.button_sample_container}>
-        {active && onStyleChanged &&
-          <PickedIcon className={styles.picked} />
-        }
+        {active && onStyleChanged && <PickedIcon className={styles.picked} />}
         <button onClick={this.onClick} style={{ ...style }} className={styles.button_sample}>
           {t('ButtonModal_Button_Sample_text')}
         </button>
@@ -63,8 +59,8 @@ ButtonSample.propTypes = {
   onClickButton: PropTypes.func,
   active: PropTypes.bool,
   i: PropTypes.number,
+  t: PropTypes.func,
   buttonObj: PropTypes.object.isRequired,
-
 };
 
 export default ButtonSample;

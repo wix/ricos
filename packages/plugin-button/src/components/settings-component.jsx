@@ -1,15 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import {
-  mergeStyles,
-  TextInput,
-  Checkbox,
-  isValidUrl,
-  WixUtils
-} from 'wix-rich-content-common';
+import { mergeStyles, TextInput, Checkbox, isValidUrl, WixUtils } from 'wix-rich-content-common';
 import styles from '../../statics/styles/settings-component-styles.scss';
-
-
 
 class SettingsComponent extends PureComponent {
   constructor(props) {
@@ -30,11 +22,9 @@ class SettingsComponent extends PureComponent {
     };
   }
 
-
   componentDidUpdate = () => {
     this.props.onSettingsChange(this.state);
-  }
-
+  };
 
   handleKeyPress = e => {
     this.props.onKeyPress(e);
@@ -52,7 +42,7 @@ class SettingsComponent extends PureComponent {
       this.setState({ validUrl: true });
       this.props.isValidUrl(true);
     }
-  }
+  };
 
   handleTargetChange = event => {
     const { url } = this.state;
@@ -74,7 +64,7 @@ class SettingsComponent extends PureComponent {
     }
   };
 
-  onBlur = () => {
+  onBlur = event => {
     const { url } = this.state;
     this.setState({ target: event.target.checked });
     if (isValidUrl(url)) {
@@ -82,18 +72,16 @@ class SettingsComponent extends PureComponent {
     } else {
       this.setState({ validUrl: false });
     }
-  }
+  };
 
   render() {
     const { t, linkInputRef } = this.props;
     const { buttonText, url, validUrl } = this.state;
-    const errorTooltip = (!validUrl || !this.props.validUrl) ? t('ButtonModal_Invalid_Link') : false;
+    const errorTooltip = !validUrl || !this.props.validUrl ? t('ButtonModal_Invalid_Link') : false;
     return (
       <div className={styles.section_content}>
         <div className={styles.button_name_feild}>
-          <div className={styles.header_ButtonText}>
-            {t('ButtonModal_Button_Text')}
-          </div>
+          <div className={styles.header_ButtonText}>{t('ButtonModal_Button_Text')}</div>
           <div>
             <TextInput
               inputRef={ref => {
@@ -127,16 +115,20 @@ class SettingsComponent extends PureComponent {
           showTooltip={false}
           data-hook="ButtonInputModal"
         />
-        {!this.state.validUrl || !this.props.validUrl ?
-          <div className={styles.errorMessage}>
-            {t('ButtonModal_InputLink_ErrorMessage')}
-          </div> :
-          null
-        }
+        {!this.state.validUrl || !this.props.validUrl ? (
+          <div className={styles.errorMessage}>{t('ButtonModal_InputLink_ErrorMessage')}</div>
+        ) : null}
         <div
-          style={{ paddingTop: !this.state.validUrl || !this.props.validUrl ? 
-            ((WixUtils.isMobile()) ? '21px' : '25px') : 
-            (WixUtils.isMobile() ? '24px' : '34px')}}
+          style={{
+            paddingTop:
+              !this.state.validUrl || !this.props.validUrl
+                ? WixUtils.isMobile()
+                  ? '21px'
+                  : '25px'
+                : WixUtils.isMobile()
+                ? '24px'
+                : '34px',
+          }}
           className={styles.checkBoxes}
         >
           <Checkbox
@@ -169,7 +161,7 @@ SettingsComponent.propTypes = {
   validUrl: PropTypes.bool,
   onKeyPress: PropTypes.func,
   linkInputRef: PropTypes.object,
-  onBlur: PropTypes.func
+  onBlur: PropTypes.func,
 };
 
 export default SettingsComponent;

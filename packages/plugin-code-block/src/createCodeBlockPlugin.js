@@ -91,9 +91,9 @@ const createCodeBlockPlugin = (config = {}) => {
       relValue,
       t,
       settings,
-      ...rest
+      ...rest,
     },
-    plugin,
+    plugin
   );
 };
 

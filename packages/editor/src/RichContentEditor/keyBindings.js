@@ -6,44 +6,54 @@ const COMMAND_BY_SHORTCUT = [
   {
     command: COMMANDS.TITLE,
     modifiers: [MODIFIERS.COMMAND, MODIFIERS.SHIFT],
-    key: '1'
-  }, {
+    key: '1',
+  },
+  {
     command: COMMANDS.SUBTITLE,
     modifiers: [MODIFIERS.COMMAND, MODIFIERS.SHIFT],
-    key: '2'
-  }, {
+    key: '2',
+  },
+  {
     command: COMMANDS.ALIGN_LEFT,
     modifiers: [MODIFIERS.COMMAND],
-    key: 'l'
-  }, {
+    key: 'l',
+  },
+  {
     command: COMMANDS.ALIGN_RIGHT,
     modifiers: [MODIFIERS.COMMAND],
-    key: 'r'
-  }, {
+    key: 'r',
+  },
+  {
     command: COMMANDS.ALIGN_CENTER,
     modifiers: [MODIFIERS.COMMAND],
-    key: 'e'
-  }, {
+    key: 'e',
+  },
+  {
     command: COMMANDS.JUSTIFY,
     modifiers: [MODIFIERS.COMMAND],
-    key: 'j'
-  }, {
+    key: 'j',
+  },
+  {
     command: COMMANDS.NUMBERED_LIST,
     modifiers: [MODIFIERS.COMMAND],
-    key: 'm'
-  }, {
+    key: 'm',
+  },
+  {
     command: COMMANDS.BULLET_LIST,
     modifiers: [MODIFIERS.COMMAND, MODIFIERS.SHIFT],
-    key: 'l'
-  }, {
+    key: 'l',
+  },
+  {
     command: COMMANDS.CODE,
     modifiers: [MODIFIERS.COMMAND, MODIFIERS.SHIFT],
-    key: '8'
-  }, {
+    key: '8',
+  },
+  {
     command: COMMANDS.BLOCKQUOTE,
     modifiers: [MODIFIERS.COMMAND, MODIFIERS.SHIFT],
-    key: '9'
-  }];
+    key: '9',
+  },
+];
 
 const { hasCommandModifier, isCtrlKeyCommand, isOptionKeyCommand } = KeyBindingUtil;
 
@@ -52,7 +62,7 @@ function getModifiers(e) {
     ...(hasCommandModifier(e) ? [MODIFIERS.COMMAND] : []),
     ...(isCtrlKeyCommand(e) ? [MODIFIERS.CTRL] : []),
     ...(isOptionKeyCommand(e) ? [MODIFIERS.OPTION] : []),
-    ...(e.shiftKey ? [MODIFIERS.SHIFT] : [])
+    ...(e.shiftKey ? [MODIFIERS.SHIFT] : []),
   ];
 }
 
@@ -62,8 +72,7 @@ function getCommandByShortcut(shortcut, bindingMap) {
   }
 
   const commands = bindingMap
-    .filter(mapped => mapped.key === shortcut.key &&
-      isEqual(mapped.modifiers, shortcut.modifiers))
+    .filter(mapped => mapped.key === shortcut.key && isEqual(mapped.modifiers, shortcut.modifiers))
     .map(mapped => mapped.command);
 
   return commands.length > 0 ? commands[0] : null;
@@ -79,35 +88,43 @@ export const keyBindingFn = customCommands => {
 
 // merges all plugin TextButton keyBindings into an object { commands: [{ cmd1 }, ...], commandHandlers: { cmd1: handler1, ... } }
 export const initPluginKeyBindings = pluginTextButtons =>
-  pluginTextButtons.reduce((bindings, buttonData, i) => {
-    if (buttonData) {
-      // iterate each button
-      const buttonBindings = Object.keys(buttonData).reduce((buttonBindings, key) => {
-        if (buttonData[key].keyBindings && buttonData[key].keyBindings.length > 0) {
-          // array of commands per button
-          const buttonCommands = buttonData[key].keyBindings.map(binding => ({
-            ...binding.keyCommand,
-            // avoid cross-plugin name collisions
-            command: `${binding.keyCommand.command}_${i}`
-          }));
-          // handlers per button
-          const buttonCommandHandlers = {};
-          buttonData[key].keyBindings.forEach(binding => {
-            Object.assign(buttonCommandHandlers, { [`${binding.keyCommand.command}_${i}`]: binding.commandHandler });
-          });
-          // merge all button commands and handlers
-          return {
-            commands: [...buttonBindings.commands, ...buttonCommands],
-            commandHandlers: { ...buttonBindings.commandHandlers, ...buttonCommandHandlers }
-          };
-        }
-        return buttonBindings;
-      }, { commands: [], commandHandlers: {} });
-      // merge all commands and handlers
-      return {
-        commands: [...bindings.commands, ...buttonBindings.commands],
-        commandHandlers: { ...bindings.commandHandlers, ...buttonBindings.commandHandlers }
-      };
-    }
-    return bindings;
-  }, { commands: [], commandHandlers: {} });
+  pluginTextButtons.reduce(
+    (bindings, buttonData, i) => {
+      if (buttonData) {
+        // iterate each button
+        const buttonBindings = Object.keys(buttonData).reduce(
+          (buttonBindings, key) => {
+            if (buttonData[key].keyBindings && buttonData[key].keyBindings.length > 0) {
+              // array of commands per button
+              const buttonCommands = buttonData[key].keyBindings.map(binding => ({
+                ...binding.keyCommand,
+                // avoid cross-plugin name collisions
+                command: `${binding.keyCommand.command}_${i}`,
+              }));
+              // handlers per button
+              const buttonCommandHandlers = {};
+              buttonData[key].keyBindings.forEach(binding => {
+                Object.assign(buttonCommandHandlers, {
+                  [`${binding.keyCommand.command}_${i}`]: binding.commandHandler,
+                });
+              });
+              // merge all button commands and handlers
+              return {
+                commands: [...buttonBindings.commands, ...buttonCommands],
+                commandHandlers: { ...buttonBindings.commandHandlers, ...buttonCommandHandlers },
+              };
+            }
+            return buttonBindings;
+          },
+          { commands: [], commandHandlers: {} }
+        );
+        // merge all commands and handlers
+        return {
+          commands: [...bindings.commands, ...buttonBindings.commands],
+          commandHandlers: { ...bindings.commandHandlers, ...buttonBindings.commandHandlers },
+        };
+      }
+      return bindings;
+    },
+    { commands: [], commandHandlers: {} }
+  );

@@ -4,7 +4,6 @@ import { shallow } from 'enzyme';
 import TestData from './TestData/initial-state';
 
 describe('RichContentEditor', () => {
-
   it('should render', async () => {
     const wrapper = shallow(<RichContentEditor />);
     expect(wrapper.html()).toEqual(expect.stringContaining('class="DraftEditor-root"'));
@@ -16,20 +15,12 @@ describe('RichContentEditor', () => {
   });
 
   it('should render read only mode', async () => {
-    const wrapper = shallow(
-      <RichContentEditor
-        readOnly
-      />
-    );
+    const wrapper = shallow(<RichContentEditor readOnly />);
     expect(wrapper.html()).toEqual(expect.stringContaining('contenteditable="false"'));
   });
 
   it('should render text only', async () => {
-    const wrapper = shallow(
-      <RichContentEditor
-        initialState={TestData.onlyText}
-      />
-    );
+    const wrapper = shallow(<RichContentEditor initialState={TestData.onlyText} />);
     expect(wrapper.html()).toEqual(expect.stringContaining('Hello text only'));
   });
   // it('should render legacy video', () => {

@@ -8,8 +8,6 @@ import { SEARCH_TYPE, PAGE_SIZE, WAIT_INTERVAL } from '../constants';
 import { PoweredByGiphy } from '../icons';
 import styles from '../../statics/styles/giphy-selecter.scss';
 
-
-
 class GiphySelector extends Component {
   constructor(props) {
     super(props);
@@ -20,7 +18,7 @@ class GiphySelector extends Component {
       hasMoreItems: true,
       gifs: [],
       page: 0,
-      didFail: false
+      didFail: false,
     };
     this.styles = mergeStyles({ styles, theme: this.props.theme });
     const gphApiClient = require('giphy-js-sdk-core');
@@ -33,21 +31,33 @@ class GiphySelector extends Component {
         .search(SEARCH_TYPE, { q: searchTag, offset: page * PAGE_SIZE, limit: PAGE_SIZE })
         .then(response => {
           if (page > 1) {
-            this.setState({ gifs: this.state.gifs.concat(response.data), hasMoreItems: true, page: this.state.page + 1, didFail: false });
+            this.setState({
+              gifs: this.state.gifs.concat(response.data),
+              hasMoreItems: true,
+              page: this.state.page + 1,
+              didFail: false,
+            });
           } else {
             this.setState({
-              gifs: response.data, hasMoreItems: true, page: this.state.page + 1, didFail: false
+              gifs: response.data,
+              hasMoreItems: true,
+              page: this.state.page + 1,
+              didFail: false,
             });
           }
-        }).catch(() => {
+        })
+        .catch(() => {
           this.setState({ didFail: true, hasMoreItems: false });
         });
     } else {
       this.giphySdkCore
         .trending(SEARCH_TYPE, { limit: 100 })
         .then(response => {
-          this.setState({ gifs: response.data, hasMoreItems: false, didFail: false });
-        }).catch(() => {
+          if (!searchTag) {
+            this.setState({ gifs: response.data, hasMoreItems: false, didFail: false });
+          }
+        })
+        .catch(() => {
           this.setState({ didFail: true, hasMoreItems: false });
         });
     }
@@ -63,7 +73,7 @@ class GiphySelector extends Component {
       originalUrl: gif.images.original.url,
       stillUrl: gif.images.original_still.url,
       height: parseInt(gif.images.original.height),
-      width: parseInt(gif.images.original.width)
+      width: parseInt(gif.images.original.width),
     };
     const { componentData, helpers, pubsub, onConfirm, onCloseRequested } = this.props;
 
@@ -87,14 +97,10 @@ class GiphySelector extends Component {
   };
 
   componentWillReceiveProps(nextProps) {
-    if (!this.state.didFail) {
-      if (this.timer !== null) {
-        clearTimeout(this.timer);
-      } else {
-        this.getGifs(nextProps.searchTag);
-      }
-      this.timer = setTimeout(() => this.getGifs(nextProps.searchTag), WAIT_INTERVAL);
+    if (this.timer !== null) {
+      clearTimeout(this.timer);
     }
+    this.timer = setTimeout(() => this.getGifs(nextProps.searchTag), WAIT_INTERVAL);
   }
 
   componentDidMount() {
@@ -104,8 +110,19 @@ class GiphySelector extends Component {
   render() {
     const { styles } = this;
     const { t } = this.props;
-    const loader = <div className={styles.giphy_selecter_spinner}> <MDSpinner singleColor="#000000" /></div>;
-    const trending = (!this.props.searchTag) ? t('GiphyPlugin_Trending') : null;
+    const loader = (
+      <div
+        className={
+          styles[`giphy_selecter_spinner_${this.state.gifs.length ? 'more' : 'empty_modal'}`]
+        }
+      >
+        <MDSpinner borderSize={1.5} singleColor="#000000" />
+      </div>
+    );
+    const trending =
+      !this.props.searchTag && (!this.state.didFail || this.state.gifs.length)
+        ? t('GiphyPlugin_Trending')
+        : null;
     return (
       <div>
         <div className={styles.giphy_selecter_container}>
@@ -121,7 +138,7 @@ class GiphySelector extends Component {
               pageStart={0}
               loadMore={this.getMoreGifs.bind(this)}
               hasMore={this.state.hasMoreItems}
-              loader={(!this.state.didFail) ? loader : null}
+              loader={!this.state.didFail ? loader : null}
               useWindow={false}
               className={styles.giphy_selecter_infinite_scroll}
             >
@@ -135,14 +152,20 @@ class GiphySelector extends Component {
                     onKeyPress={this.handleKeyPress}
                     onClick={() => this.onClick(gif)}
                   >
-                    <img className={styles.giphy_selecter_gif_img} src={gif.images.fixed_width_downsampled.url} alt={'gif'} />
+                    <img
+                      className={styles.giphy_selecter_gif_img}
+                      src={gif.images.fixed_width_downsampled.url}
+                      alt={'gif'}
+                    />
                   </div>
                 );
               })}
             </InfiniteScroll>
           </Scrollbars>
         </div>
-        {(this.state.didFail) ? <div className={styles.giphy_selecter_error_msg}> {t('GiphyPlugin_ApiErrorMsg')}</div> : null}
+        {this.state.didFail && !this.state.gifs.length ? (
+          <div className={styles.giphy_selecter_error_msg}> {t('GiphyPlugin_ApiErrorMsg')}</div>
+        ) : null}
       </div>
     );
   }

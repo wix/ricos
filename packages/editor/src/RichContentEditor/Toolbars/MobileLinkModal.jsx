@@ -4,7 +4,6 @@ import { LinkPanelContainer } from 'wix-rich-content-common';
 import { LinkIcon } from '../Icons';
 import styles from '../../../statics/styles/mobile-link-modal.scss';
 
-
 export default class MobileLinkModal extends Component {
   render() {
     const {
@@ -20,21 +19,34 @@ export default class MobileLinkModal extends Component {
       onCancel,
       onDelete,
       t,
-      uiSettings
+      uiSettings,
     } = this.props;
     const mobileLinkModalTitle = t('MobileLinkModal_Title');
     return (
       <div>
         <div className={styles.mobileLinkModal_titleContainer}>
-          <div className={styles.mobileLinkModal_linkIconContainer} >
+          <div className={styles.mobileLinkModal_linkIconContainer}>
             <LinkIcon />
           </div>
-          <h3 id="mob_link_modal_hdr" className={styles.mobileLinkModal_title}>{mobileLinkModalTitle}</h3>
+          <h3 id="mob_link_modal_hdr" className={styles.mobileLinkModal_title}>
+            {mobileLinkModalTitle}
+          </h3>
         </div>
         <LinkPanelContainer
-          url={url} targetBlank={targetBlank} anchorTarget={anchorTarget} relValue={relValue} nofollow={nofollow} theme={theme}
-          isActive={isActive} isMobile={isMobile} onDone={onDone} onCancel={onCancel} onDelete={onDelete} t={t}
-          ariaProps={{ 'aria-labelledby': 'mob_link_modal_hdr' }} uiSettings={uiSettings}
+          url={url}
+          targetBlank={targetBlank}
+          anchorTarget={anchorTarget}
+          relValue={relValue}
+          nofollow={nofollow}
+          theme={theme}
+          isActive={isActive}
+          isMobile={isMobile}
+          onDone={onDone}
+          onCancel={onCancel}
+          onDelete={onDelete}
+          t={t}
+          ariaProps={{ 'aria-labelledby': 'mob_link_modal_hdr' }}
+          uiSettings={uiSettings}
         />
       </div>
     );

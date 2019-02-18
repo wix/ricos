@@ -1,5 +1,5 @@
-@import "~wix-rich-content-common/dist/statics/styles/palette";
-@import "~wix-rich-content-common/dist/statics/styles/mixins";
+@import '~wix-rich-content-common/dist/statics/styles/palette';
+@import '~wix-rich-content-common/dist/statics/styles/mixins';
 .container {
   position: relative;
   padding-bottom: 19px;
@@ -41,7 +41,7 @@
   line-height: 18px;
   top: calc(50% - 11px);
   left: 0px;
-  @include phone{
+  @include phone {
     top: calc(50% - 12px);
   }
 }
@@ -104,11 +104,10 @@ $size: 10px;
 
 .non_dropper_palette {
   @extend %palette;
-  @include phone{
+  @include phone {
     margin-right: calc((100% - 200px) / 7);
   }
 }
-
 
 .dropper_palette {
   @extend %palette;

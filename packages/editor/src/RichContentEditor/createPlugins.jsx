@@ -20,7 +20,15 @@ const createPlugins = ({
   const wixPluginsDecorators = composeDecorators(focusPlugin.decorator, dndPlugin.decorator);
   const wixPluginConfig = {
     decorator: wixPluginsDecorators,
-    helpers, theme, t, isMobile, anchorTarget, relValue, getEditorState, setEditorState, ...config
+    helpers,
+    theme,
+    t,
+    isMobile,
+    anchorTarget,
+    relValue,
+    getEditorState,
+    setEditorState,
+    ...config,
   };
   const wixPlugins = (plugins || []).map(createPlugin => createPlugin(wixPluginConfig));
 
@@ -29,21 +37,22 @@ const createPlugins = ({
   let pubsubs = [];
   wixPlugins.forEach(wixPlugin => {
     pluginButtons = [...pluginButtons, ...(wixPlugin.InsertPluginButtons || [])];
-    pluginTextButtons = [...pluginTextButtons, ...(wixPlugin.TextButtonMapper ? [wixPlugin.TextButtonMapper()] : [])]; // eslint-disable-line new-cap
+    /* eslint-disable new-cap */
+    pluginTextButtons = [
+      ...pluginTextButtons,
+      ...(wixPlugin.TextButtonMapper ? [wixPlugin.TextButtonMapper()] : []),
+    ];
+    /* eslint-enable new-cap */
     pubsubs = [...pubsubs, ...(wixPlugin.pubsub ? [wixPlugin.pubsub] : [])];
   });
 
-  const pluginInstances = [
-    focusPlugin,
-    dndPlugin,
-    ...wixPlugins,
-  ];
+  const pluginInstances = [focusPlugin, dndPlugin, ...wixPlugins];
 
   return {
     pluginInstances,
     pluginButtons,
     pluginTextButtons,
-    pubsubs
+    pubsubs,
   };
 };
 

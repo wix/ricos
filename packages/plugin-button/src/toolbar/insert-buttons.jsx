@@ -11,7 +11,7 @@ export default ({ helpers, t }) => {
       Icon: InsertPluginIcon,
       componentData: DEFAULTS,
       helpers,
-      t
-    }
+      t,
+    },
   ];
 };

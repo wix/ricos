@@ -1,7 +1,6 @@
 import { getUrlMatches } from 'wix-rich-content-common';
 
 export const LinkParseStrategy = (contentBlock, callback) => {
-
   const text = contentBlock.getText();
   if (!text) {
     return [];
@@ -19,8 +18,9 @@ export const LinkParseStrategy = (contentBlock, callback) => {
     contentBlock.entityRanges.forEach(({ offset, length }) => {
       const entityRangeStart = offset;
       const entityRangeEnd = offset + length;
-      linkMatches = linkMatches.filter(({ index, lastIndex }) =>
-        !(index === entityRangeStart && lastIndex === entityRangeEnd));
+      linkMatches = linkMatches.filter(
+        ({ index, lastIndex }) => !(index === entityRangeStart && lastIndex === entityRangeEnd)
+      );
     });
   }
 

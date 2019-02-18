@@ -1,29 +1,20 @@
 import React, { Component } from 'react';
 import ReactModal from 'react-modal';
 import MobileDetect from 'mobile-detect';
-import {
-  RichContentModal,
-  mergeStyles,
-  normalizeInitialState,
-} from 'wix-rich-content-common';
+import { RichContentModal, mergeStyles, normalizeInitialState } from 'wix-rich-content-common';
 
 import { RichContentViewer } from 'wix-rich-content-viewer';
 
+import { imageTypeMapper } from 'wix-rich-content-plugin-image/dist/module.viewer.cjs';
 import { videoTypeMapper } from 'wix-rich-content-plugin-video/dist/module.viewer.cjs';
 import { dividerTypeMapper } from 'wix-rich-content-plugin-divider/dist/module.viewer.cjs';
-import {
-  htmlTypeMapper,
-  HTML_TYPE,
-} from 'wix-rich-content-plugin-html/dist/module.viewer.cjs';
+import { htmlTypeMapper, HTML_TYPE } from 'wix-rich-content-plugin-html/dist/module.viewer.cjs';
 import {
   linkTypeMapper,
   LinkViewer,
   LinkParseStrategy,
 } from 'wix-rich-content-plugin-link/dist/module.viewer.cjs';
-import {
-  Strategy as HashTagStrategy,
-  Component as HashTag,
-} from 'wix-rich-content-plugin-hashtag';
+import { Strategy as HashTagStrategy, Component as HashTag } from 'wix-rich-content-plugin-hashtag';
 
 import TestData from './TestData/initial-state';
 
@@ -65,6 +56,7 @@ class App extends Component {
       dividerTypeMapper,
       htmlTypeMapper,
       linkTypeMapper,
+      imageTypeMapper,
     ];
 
     this.decorators = [
@@ -131,10 +123,10 @@ class App extends Component {
 
   generateViewerState() {
     if (this.state.content && this.state.content.jsObject) {
-      const normalizedState = normalizeInitialState(
-        this.state.content.jsObject,
-        { anchorTarget, relValue },
-      );
+      const normalizedState = normalizeInitialState(this.state.content.jsObject, {
+        anchorTarget,
+        relValue,
+      });
       this.setState({ raw: normalizedState });
     }
   }
@@ -144,8 +136,7 @@ class App extends Component {
     console.log(`'${text}' hashtag clicked!`); // eslint-disable-line no-console
   };
 
-  createHref = decoratedText =>
-    `/search/posts?query=${encodeURIComponent('#')}${decoratedText}`;
+  createHref = decoratedText => `/search/posts?query=${encodeURIComponent('#')}${decoratedText}`;
 
   render() {
     const contentOptions = Object.keys(TestData).map(key => (
@@ -203,9 +194,7 @@ class App extends Component {
               style={this.state.modalStyles || modalStyleDefaults}
               onRequestClose={this.closeModal}
             >
-              {this.state.showModal && (
-                <RichContentModal {...this.state.modalProps} />
-              )}
+              {this.state.showModal && <RichContentModal {...this.state.modalProps} />}
             </ReactModal>
           </div>
         </div>

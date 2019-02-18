@@ -5,7 +5,6 @@ import { EditorModals, getModalStyles } from 'wix-rich-content-common';
 import { PlusIcon } from '../../Icons';
 
 export default class AddPluginButton extends Component {
-
   handleClick = () => this.openAddPluginModal();
 
   openAddPluginModal = () => {
@@ -21,7 +20,7 @@ export default class AddPluginButton extends Component {
       pubsub,
       t,
     });
-  }
+  };
 
   render() {
     const { theme } = this.props;
@@ -29,7 +28,8 @@ export default class AddPluginButton extends Component {
       <TextButton
         icon={PlusIcon}
         theme={theme}
-        dataHook="addPluginButton" onClick={this.handleClick}
+        dataHook="addPluginButton"
+        onClick={this.handleClick}
       />
     );
   }

@@ -1,5 +1,5 @@
-@import "~wix-rich-content-common/dist/statics/styles/mixins";
-@import "~wix-rich-content-common/dist/statics/styles/palette";
+@import '~wix-rich-content-common/dist/statics/styles/mixins';
+@import '~wix-rich-content-common/dist/statics/styles/palette';
 
 .video_modal_container_big {
   padding: 48px 60px 60px 60px;
@@ -45,8 +45,9 @@
 
 %video_modal_textInput {
   display: inline-block;
-  input[type="url"] {
+  input[type='url'] {
     border-radius: 0px;
+    padding-left: 18px;
     @include phone {
       border-left: none;
       border-right: none;
@@ -58,7 +59,7 @@
 
 .video_modal_textInput_customWidth {
   @extend %video_modal_textInput;
-  width: calc(100% - 121px);
+  width: calc(100% - 120px);
   margin: 0px 0 48px 0px;
   @include phone {
     width: 100%;
@@ -79,10 +80,11 @@
 .video_modal_add_a_Video {
   width: 100%;
   height: 36px;
-  font-family: "Courier New", Courier, monospace;
   font-size: 24px;
   text-align: center;
   padding-bottom: 36px;
+  margin-top: 0px;
+  margin-bottom: 0px;
   @include phone {
     height: 34px;
     padding-bottom: 12px;
@@ -164,6 +166,6 @@
   appearance: none;
 }
 
- .textInput_input_invalid {
+.textInput_input_invalid {
   padding-right: 39px;
 }

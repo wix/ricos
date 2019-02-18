@@ -30,7 +30,7 @@ SliderPanel.propTypes = {
 };
 
 SliderPanel.defaultProps = {
-  mapStoreDataToPanelProps: () => ({})
+  mapStoreDataToPanelProps: () => ({}),
 };
 
 export default SliderPanel;

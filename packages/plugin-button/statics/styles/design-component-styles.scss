@@ -1,5 +1,5 @@
-@import "~wix-rich-content-common/dist/statics/styles/mixins";
-@import "~wix-rich-content-common/dist/statics/styles/palette";
+@import '~wix-rich-content-common/dist/statics/styles/mixins';
+@import '~wix-rich-content-common/dist/statics/styles/palette';
 
 .row {
   height: auto;
@@ -12,7 +12,7 @@
   }
 }
 
-.colorPicker_container{
+.colorPicker_container {
   height: auto;
   width: 100%;
   border-bottom: 1px solid #ededed;
@@ -21,7 +21,7 @@
   @include phone {
     padding-top: 15px;
     margin-left: -1px;
-  }  
+  }
 }
 
 .design_component {
