@@ -1,0 +1,56 @@
+@import '~wix-rich-content-common/dist/statics/styles/mixins';
+
+.upload_file_container {
+  position: relative;
+  overflow: hidden;
+  padding: 24px;
+  border: 1px solid #ededed;
+  color: #333;
+  width: 350px;
+  height: 89px;
+  box-sizing: border-box;
+}
+
+.upload_file_icon_container  {
+  position:relative;
+  display: inline-block;
+  height: 32px;
+  padding: 5px 0px;
+  margin-right: 24px;
+  float: left;
+}
+
+.upload_file_link {
+  color: inherit;
+  display: block;
+  position: relative;
+}
+
+.upload_file_name {
+  display: inline-block;
+  height: 32px;
+  text-align: left;
+  font-size: 14px;
+  line-height: 24px;
+  padding: 5px 0px;
+  float: left;
+  color: rgba(51, 51, 51, .81);
+}
+
+.upload_file_icon  {
+  height: 32px;
+  width: 24px;
+}
+
+.upload_file_type  {
+  position: absolute;
+  right: 5px;
+  bottom: 8px;
+  transform: translateX(50%);
+  text-transform: uppercase;
+  background: #fff;
+  font-size: 10px;
+  height: 10px;
+  color: rgba(0, 0, 0, .54);
+  font-family: Helvetica !important;
+}
