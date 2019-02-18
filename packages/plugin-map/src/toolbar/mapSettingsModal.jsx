@@ -131,69 +131,35 @@ export class MapSettingsModal extends Component {
     const { themeColors } = this.props.uiSettings;
 
     const uniqueClassesId = this.uniqueClassesId;
-    const maxPhoneWidth = '640px';
 
     const buttonPrimaryClassName = `map_settings_modal_button_primary_${uniqueClassesId}`;
     const buttonSecondaryClassName = `map_settings_modal_button_secondary_${uniqueClassesId}`;
     const textInputClassName = `map_settings_modal_text_input_${uniqueClassesId}`;
 
-    this.styles.button_primary = buttonPrimaryClassName;
-    this.styles.button_secondary = buttonSecondaryClassName;
-    this.styles.textInput_input = textInputClassName;
+    this.styles.button_primary = `${buttonPrimaryClassName} ${this.styles.button_primary}`;
+    this.styles.button_secondary = `${buttonSecondaryClassName} ${this.styles.button_secondary}`;
+    this.styles.textInput_input = `${textInputClassName} ${this.styles.textInput_input}`;
 
     const style = `
       .${buttonPrimaryClassName} {
         background: ${themeColors.color8};
-
-        font-size: 16px;
-        line-height: 1.5;
       }
 
       .${buttonPrimaryClassName}:hover {
         color: ${themeColors.color1};
-
-        opacity: 0.8;
       }
 
       .${buttonSecondaryClassName} {
         border: 1px solid ${themeColors.color8};
         color: ${themeColors.color8};
-
-        font-size: 16px;
-        line-height: 1.5;
       }
 
       .${buttonSecondaryClassName}:hover {
         color: ${themeColors.color8};
-
-        opacity: 0.6;
-        background: transparent;
       }
 
       .${textInputClassName} {
         border-color: ${themeColors.color5};
-
-        font-size: 16px;
-        line-height: 1.5px;
-        text-overflow: ellipsis;
-        padding-right: 45px;
-        opacity: 0.6;
-      }
-
-      .${textInputClassName}:hover {
-        opacity: 1;
-      }
-
-      .${textInputClassName}:focus {
-        opacity: 1;
-      }
-
-      @media only screen and (max-width: ${maxPhoneWidth}) {
-        .${textInputClassName} {
-          border-top: none;
-          border-right: none;
-          border-left: none;
-        }
       }
     `;
 

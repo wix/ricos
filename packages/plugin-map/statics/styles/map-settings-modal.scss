@@ -2,6 +2,47 @@
 @import "./labeled-toggle.scss";
 @import "./labeled-image.scss";
 
+.button_primary {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.button_primary:hover {
+  opacity: 0.8;
+}
+
+.button_secondary {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.button_secondary:hover {
+  opacity: 0.6;
+  background: transparent;
+}
+
+.textInput_input {
+  font-size: 16px;
+  line-height: 1.5px;
+  text-overflow: ellipsis;
+  padding-right: 45px;
+  opacity: 0.6;
+
+  @include phone {
+    border-top: none;
+    border-right: none;
+    border-left: none;
+  }
+}
+
+.textInput_input:hover {
+  opacity: 1;
+}
+
+.textInput_input:focus {
+  opacity: 1;
+}
+
 .map_settings_modal_main_content_block {
   padding: 0px 40px;
   @include phone {
