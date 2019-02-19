@@ -9,6 +9,9 @@
 > - :house: [Internal]
 
 ## [Unreleased]
+### :rocket: New Feature
+- `uploadfiles`:
+- [#261] (https://github.com/wix-incubator/rich-content/pull/261) Add upload files plugin
 
 ## HTML Plugin 1.5.20 (Jan 16, 2019)
 
