@@ -70,7 +70,7 @@ class RichContentRawDataViewer extends Component {
 }
 
 // see https://github.com/AndrewRedican/react-json-editor-ajrm for details
-RichContentRawDataViewer.PropTypes = {
+RichContentRawDataViewer.propTypes = {
   content: PropTypes.object.isRequired,
   onChange: PropTypes.func.isRequired,
   viewOnly: PropTypes.bool,
