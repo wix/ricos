@@ -18,6 +18,7 @@
 ### :house: Internal
 - `general`
   - [#262](https://github.com/wix-incubator/rich-content/pull/262) update rollup-plugin-postcss
+  - [#263](https://github.com/wix-incubator/rich-content/pull/263) migrate from Wix CI to Travis CI
 
 <hr/>
 

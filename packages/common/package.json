@@ -28,7 +28,6 @@
     "build:dev": "NODE_ENV=development npm run build",
     "build:analyze": "npm run build -- --environment MODULE_ANALYZE && open stats.html",
     "watch": "NODE_ENV=development MODULE_WATCH=1 npm run build -- --watch",
-    "release": "wnpm-release --no-shrinkwrap",
     "lint": "eslint 'src/**/*.{js,jsx}'",
     "pretest": "npm run lint",
     "test": "jest --verbose"

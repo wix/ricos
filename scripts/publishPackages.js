@@ -58,20 +58,7 @@ function getTag(pkg) {
 
 function publish(pkg) {
   const publishCommand = `npm publish ${pkg.path} --tag=${getTag(pkg)} --registry=${pkg.registry}`;
-
-  if (!process.env.IS_BUILD_AGENT) {
-    console.log(
-      chalk.yellow(
-        `${pkg.name}@${
-          pkg.version
-        } will not be published because we're not running in a CI build agent`
-      )
-    );
-    return false;
-  }
-
   console.log(chalk.magenta(`Running: "${publishCommand}" for ${pkg.name}@${pkg.version}`));
-
   execSync(publishCommand, { stdio: 'inherit' });
   publishedPackages.push(pkg);
   return true;
@@ -96,6 +83,15 @@ function release(pkg) {
   } else {
     console.log('No publish performed');
   }
+}
+
+function createNpmRc() {
+  execSync(`rm -f package-lock.json`);
+  const { NPM_EMAIL, NPM_TOKEN } = process.env;
+  const EOL = require('os').EOL;
+  const content = `email=${NPM_EMAIL}${EOL}//registry.npmjs.org/:_authToken=${NPM_TOKEN}${EOL}`;
+  const fs = require('fs');
+  fs.writeFileSync(`.npmrc`, content);
 }
 
 function publishPackages() {
@@ -138,5 +134,21 @@ function publishExamples() {
   }
 }
 
-publishPackages();
-publishExamples();
+function run() {
+  if (process.env.TRAVIS_BRANCH !== 'master') {
+    let skipReason;
+    if (process.env.CI) {
+      skipReason = 'Not on master branch';
+    } else {
+      skipReason = 'Not in CI';
+    }
+    console.log(chalk.yellow(`${skipReason} - skipping publish`));
+    return false;
+  }
+
+  createNpmRc();
+  publishPackages();
+  publishExamples();
+}
+
+run();

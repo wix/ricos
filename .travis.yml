@@ -1,0 +1,12 @@
+language: node_js
+node_js:
+  - 10
+install:
+  - npm install
+jobs:
+  include:
+    - stage: 'Publish'
+      script:
+        - npm run build
+        - npm test
+        - npm run release

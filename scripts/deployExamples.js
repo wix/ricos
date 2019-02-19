@@ -34,7 +34,7 @@ function publish(example) {
 }
 
 async function deployExamples(examples) {
-  if (!process.env.IS_BUILD_AGENT) {
+  if (!process.env.CI) {
     console.log(chalk.yellow(`Not in CI - skipping examples deploy`));
     return false;
   }

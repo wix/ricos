@@ -19,7 +19,6 @@
     "build:dev": "NODE_ENV=development npm run build",
     "build:analyze": "npm run build -- --environment MODULE_ANALYZE && open stats.html",
     "watch": "NODE_ENV=development MODULE_WATCH=1 npm run build -- --watch",
-    "release": "wnpm-release --no-shrinkwrap",
     "test": "eslint 'src/**/*.{js,jsx}'"
   },
   "jest": {
@@ -34,8 +33,7 @@
   "dependencies": {
     "direction": "^1.0.2",
     "redraft": "^0.9.0",
-    "wix-rich-content-common": "^2.0.4",
-    "wnpm-ci": "latest"
+    "wix-rich-content-common": "^2.0.4"
   },
   "peerDependencies": {
     "@babel/runtime": "7.2.0",
