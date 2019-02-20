@@ -45,7 +45,7 @@ class FileInput extends Component {
           accept={accept}
           onFocus={() => this.onFocus()}
           onBlur={() => this.onBlur()}
-          onClick={onClick || null}
+          onClick={onClick}
           tabIndex={tabIndex}
           {...hasMultiple}
         />
