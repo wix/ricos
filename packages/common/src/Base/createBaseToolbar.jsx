@@ -15,7 +15,7 @@ import { BUTTONS, BUTTONS_BY_KEY, BlockLinkButton, DeleteButton } from './button
 import Panel from '../Components/Panel';
 import toolbarStyles from '../../statics/styles/plugin-toolbar.scss';
 import buttonStyles from '../../statics/styles/plugin-toolbar-button.scss';
-ن
+
 const toolbarOffset = 12;
 
 const getInitialState = () => (
@@ -46,7 +46,6 @@ export default function createToolbar({
   class BaseToolbar extends Component {
     constructor(props) {
       super(props);
-
       const { all, hidden } = buttons;
       const visibleButtons = all.filter(({ keyName }) => !hidden.includes(keyName));
 
@@ -54,7 +53,6 @@ export default function createToolbar({
       const customSettings = getToolbarSettings({ pluginButtons: visibleButtons }).filter(({ name }) => name === TOOLBARS.PLUGIN);
       const toolbarSettings = mergeToolbarSettings({ defaultSettings, customSettings })
         .filter(({ name }) => name === TOOLBARS.PLUGIN)[0];
-
       const { shouldCreate, getPositionOffset, getButtons, getVisibilityFn, getDisplayOptions, getToolbarDecorationFn } = toolbarSettings;
 
       this.structure = getConfigByFormFactor({ config: getButtons(), isMobile, defaultValue: [] });
@@ -64,7 +62,6 @@ export default function createToolbar({
       this.displayOptions = getConfigByFormFactor({ config: getDisplayOptions(), isMobile, defaultValue: { displayMode: DISPLAY_MODE.NORMAL } });
       const toolbarDecorationFn = getConfigByFormFactor({ config: getToolbarDecorationFn(), isMobile, defaultValue: () => null });
       this.ToolbarDecoration = toolbarDecorationFn();
-
       this.state = getInitialState();
     }
 
