@@ -47,7 +47,7 @@
     "clean": "rm -rf dist/",
     "start": "webpack-dev-server --config ./config/webpack.dev.js",
     "test": "echo 'There are no tests configured for this project!' && exit 0",
-    "build": "webpack --config ./config/webpack.dev.js",
+    "build": "webpack --config ./config/webpack.prod.js",
     "build:dev": "webpack --config ./config/webpack.dev.js",
     "build:analyze": "npm run build -- --progress --env.analyzeBundle"
   },
