@@ -40,7 +40,7 @@ class FileInput extends Component {
           {...a11yProps}
           className={styles.visuallyHidden}
           id={this.id}
-          type={(!onClick) ? 'file' : ''}
+          type={(!onClick) ? 'file' : 'button'}
           data-hook={dataHook} onChange={onChange}
           accept={accept}
           onFocus={() => this.onFocus()}
