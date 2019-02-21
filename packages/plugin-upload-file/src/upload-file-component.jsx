@@ -28,13 +28,6 @@ class UploadFileComponent extends React.Component {
     this.player = player;
   };
 
-  componentDidMount() {
-  }
-
-  componentDidUpdate() {
-  }
-
-
   render() {
     const { componentData } = this.props;
     return (
