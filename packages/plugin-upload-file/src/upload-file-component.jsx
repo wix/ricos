@@ -31,7 +31,7 @@ class UploadFileComponent extends React.Component {
   render() {
     const { componentData } = this.props;
     return (
-      <div data-hook="" className={styles.upload_file_container}>
+      <div data-hook="upload-file-component-container" className={styles.upload_file_container}>
         <a href={componentData.fileURL} className={styles.upload_file_link}>
           <div className={styles.upload_file_icon_container}>
             <DocumentIcon className={styles.upload_file_icon} />
