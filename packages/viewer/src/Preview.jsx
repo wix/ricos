@@ -150,16 +150,7 @@ const Preview = ({ raw, typeMappers, theme, isMobile, decorators, anchorTarget, 
   const typeMap = combineTypeMappers(typeMappers);
 
   const className = classNames(mergedStyles.preview, textDirection === 'rtl' && mergedStyles.rtl);
-    redraft(
-    augmentRaw(raw),
-    {
-      inline: getInline(mergedStyles),
-      blocks: getBlocks(mergedStyles, textDirection),
-      entities: getEntities(typeMap, { theme, isMobile, anchorTarget, relValue, config }),
-      decorators,
-    },
-    options
-  )
+
   return (
     <div className={className}>
       {isEmpty && <div>There is nothing to render...</div>}
