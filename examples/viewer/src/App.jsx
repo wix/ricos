@@ -77,6 +77,7 @@ class App extends Component {
       imageTypeMapper,
       fileUploadTypeMapper
     ];
+
     this.decorators = [{
         strategy: LinkParseStrategy,
         component: ({ children, decoratedText, rel, target }) =>
