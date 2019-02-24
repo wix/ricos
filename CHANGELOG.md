@@ -9,6 +9,9 @@
 > - :house: [Internal]
 
 ## [Unreleased]
+### :bug: Bug Fix
+- `html`
+  - [#266](https://github.com/wix-incubator/rich-content/pull/266) (ios) fix instagram too wide for mobile
 
 <hr/>
 
