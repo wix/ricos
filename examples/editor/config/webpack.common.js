@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const DotenvWebpackPlugin = require('dotenv-webpack');
 
 const PATHS = {
   root: path.join(__dirname, '..'),
@@ -129,5 +130,8 @@ module.exports = env => ({
       context: 'node_modules/wix-rich-content-plugin-html/dist/static/',
       to: 'static/',
     }]),
+    new DotenvWebpackPlugin({
+      path: path.resolve(PATHS.root, '..', '..', '.env'),
+    })
   ],
 });

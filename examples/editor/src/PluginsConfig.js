@@ -114,10 +114,10 @@ export default {
     getVideoUrl: src => `https://video.wixstatic.com/${src.pathname}`
   },
   [GIPHY_TYPE]: {
-    giphySdkApiKey: "JfQziSTdnSwDZcD3w8DpUL4LMFu3zBgU"
+    giphySdkApiKey: process.env.GIPHY_API_KEY
   },
   [MAP_TYPE]: {
-    googleMapApiKey: "AIzaSyB40ci07ioXEC6U4Rkxai2rRDiJEobv0T4",
+    googleMapApiKey: process.env.GOOGLE_MAPS_API_KEY,
     minWidth: 100,
     maxWidth: 740,
     minHeight: 100,
