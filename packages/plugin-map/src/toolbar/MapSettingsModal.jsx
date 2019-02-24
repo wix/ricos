@@ -136,9 +136,11 @@ export class MapSettingsModal extends Component {
     const buttonSecondaryClassName = `map_settings_modal_button_secondary_${uniqueClassesId}`;
     const textInputClassName = `map_settings_modal_text_input_${uniqueClassesId}`;
 
+    /* eslint-disable camelcase */
     this.styles.button_primary = `${buttonPrimaryClassName} ${this.styles.button_primary}`;
     this.styles.button_secondary = `${buttonSecondaryClassName} ${this.styles.button_secondary}`;
     this.styles.textInput_input = `${textInputClassName} ${this.styles.textInput_input}`;
+    /*eslint-enable camelcase */
 
     const style = `
       .${buttonPrimaryClassName} {
