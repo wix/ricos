@@ -15,6 +15,7 @@
     "prewatch": "lerna run build --scope wix-rich-content-common",
     "watch": "lerna exec --no-sort --concurrency 30 -- npm run watch",
     "release": "node scripts/publishPackages",
+    "deploy": "node scripts/deployExamples",
     "createVersion": "node scripts/createVersion",
     "lint": "lerna run --parallel --stream lint",
     "test": "lerna run --parallel --stream test"

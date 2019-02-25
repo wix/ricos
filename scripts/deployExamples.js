@@ -1,55 +1,85 @@
 /* eslint-disable no-console, fp/no-loops */
 
+const path = require('path');
 const chalk = require('chalk');
 const execSync = require('child_process').execSync;
 
+const EXAMPLES_TO_DEPLOY = [
+  {
+    name: 'rich-content-editor',
+    path: 'examples/editor',
+  },
+  {
+    name: 'rich-content-viewer',
+    path: 'examples/viewer',
+  },
+];
+
 const exec = cmd => execSync(cmd, { stdio: 'inherit' });
 
-const fqdn = subdomain => `https://${subdomain}.surge.sh/`;
+const fqdn = subdomain => `${subdomain}.surge.sh/`;
 
-function bootstrap(example) {
-  const bootstrapCommand = `npm install --prefix=${example.path}`;
-  console.log(chalk.magenta(`Running: "${bootstrapCommand}"`));
+const generateSubdomain = exampleName => {
+  const { version } = require('../lerna.json');
+  let subdomain = exampleName;
+  const { TRAVIS_PULL_REQUEST } = process.env;
+  if (TRAVIS_PULL_REQUEST && TRAVIS_PULL_REQUEST !== 'false') {
+    subdomain += `-pr-${TRAVIS_PULL_REQUEST}`;
+  } else {
+    subdomain += `-${version.replace(/\./g, '-')}`;
+  }
+  return subdomain;
+};
+
+function bootstrap() {
+  const bootstrapCommand = `yarn`;
+  console.log(chalk.magenta(`Running: ${bootstrapCommand}"`));
   exec(bootstrapCommand);
 }
 
-function build(example) {
-  const buildCommand = `npm run build --prefix=${example.path}`;
+function build() {
+  const buildCommand = 'npm run build';
   console.log(chalk.magenta(`Running: "${buildCommand}"`));
-  exec(`npm run clean --prefix=${example.path}`);
+  exec('npm run clean');
   exec(buildCommand);
 }
 
-function publish(example) {
-  console.log(chalk.cyan(`Publishing ${example.name} example v${example.version} to surge...`));
-  const domain = `${example.name}-${example.version.replace(/\./g, '-')}`;
-  const deployCommand = `npx surge-github-autorelease -b . -s ${example.path}/dist -d ${domain}`;
+function deploy(name) {
+  console.log(chalk.cyan(`Deploying ${name} example to surge...`));
+  const subdomain = generateSubdomain(name);
+  const domain = fqdn(subdomain);
+  const deployCommand = `npx surge dist ${domain}`;
   try {
     console.log(chalk.magenta(`Running "${deployCommand}`));
     exec(deployCommand);
-    console.log(chalk.green(`Published to ${fqdn(domain)}`));
   } catch (e) {
     console.error(chalk.bold.red(e));
   }
 }
 
-async function deployExamples(examples) {
-  if (!process.env.CI) {
-    console.log(chalk.yellow(`Not in CI - skipping examples deploy`));
+function run() {
+  let skip;
+  const { TRAVIS_BRANCH, TRAVIS_PULL_REQUEST, CI } = process.env;
+  if (TRAVIS_BRANCH !== 'master' && TRAVIS_PULL_REQUEST === 'false') {
+    skip = 'Not master or PR';
+  } else if (!CI) {
+    skip = 'Not in CI';
+  }
+  if (skip) {
+    console.log(chalk.yellow(`${skip} - skipping publish`));
     return false;
   }
 
-  if (!examples.length) {
-    console.log('No examples to publish');
-    return false;
-  }
+  for (const example of EXAMPLES_TO_DEPLOY) {
+    process.chdir(path.resolve(process.cwd(), example.path));
 
-  for (const example of examples) {
     console.log(chalk.blue(`\nDeploying ${example.name} example...`));
-    bootstrap(example);
-    build(example);
-    publish(example);
+    bootstrap();
+    build();
+    deploy(example.name);
+
+    process.chdir(path.resolve('../..'));
   }
 }
 
-module.exports = deployExamples;
+run();
