@@ -40,6 +40,7 @@ class AtomicBlock extends React.Component {
     const { component: Component, elementType } = typeMap[type];
     const { size, alignment, textWrap, container } = typeMap[type].classNameStrategies || {};
     const settings = (config && config[type]) || {};
+    const { helpers } = config;
 
     if (Component) {
       if (elementType !== 'inline') {
@@ -80,6 +81,7 @@ class AtomicBlock extends React.Component {
                   settings={settings}
                   isMobile={isMobile}
                   {...props}
+                  helpers={helpers}
                 >
                   {children}
                 </Component>
@@ -91,6 +93,7 @@ class AtomicBlock extends React.Component {
                 settings={settings}
                 isMobile={isMobile}
                 {...props}
+                helpers={helpers}
               >
                 {children}
               </Component>
@@ -105,6 +108,7 @@ class AtomicBlock extends React.Component {
             settings={settings}
             isMobile={isMobile}
             {...props}
+            helpers={helpers}
           >
             {children}
           </Component>
