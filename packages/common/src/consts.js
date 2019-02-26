@@ -31,7 +31,7 @@ export const TOOLBARS = {
 
 export const DISPLAY_MODE = {
   NORMAL: 'NORMAL',
-  FLOATING: 'FLOATING'
+  FLOATING: 'FLOATING',
 };
 
 export const DECORATION_MODE = {

@@ -2,29 +2,25 @@ const presetEnvESM = [
   '@babel/preset-env',
   {
     modules: false,
-    loose: true
-  }
+    loose: true,
+  },
 ];
 
 const presetEnvCommonJS = [
   '@babel/preset-env',
   {
-    loose: true
-  }
+    loose: true,
+  },
 ];
 
-const commonPresets = [
-  '@babel/preset-react'
-];
+const commonPresets = ['@babel/preset-react'];
 
 const commonPlugins = [
   ['@babel/plugin-proposal-class-properties', { loose: true }],
-  '@babel/transform-runtime'
+  '@babel/plugin-transform-runtime',
 ];
 
-const testPlugins = [
-  '@babel/plugin-transform-modules-commonjs'
-];
+const testPlugins = ['@babel/plugin-transform-modules-commonjs'];
 
 module.exports = {
   presets: [presetEnvESM, ...commonPresets],
@@ -32,11 +28,11 @@ module.exports = {
   env: {
     commonjs: {
       presets: [presetEnvCommonJS, ...commonPresets],
-      plugins: [...commonPlugins]
+      plugins: [...commonPlugins],
     },
     test: {
       presets: [presetEnvCommonJS, ...commonPresets],
-      plugins: [...testPlugins]
-    }
-  }
+      plugins: [...testPlugins],
+    },
+  },
 };

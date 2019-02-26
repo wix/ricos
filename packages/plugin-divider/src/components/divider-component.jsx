@@ -44,10 +44,7 @@ class DividerComponent extends PureComponent {
       this.props.className
     );
     return (
-      <div
-        className={className}
-        data-hook={`divider-${type}`}
-      >
+      <div className={className} data-hook={`divider-${type}`}>
         <DividerLine
           type={type}
           width={editorWidth}

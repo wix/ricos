@@ -62,7 +62,7 @@
 
 .column {
   min-height: 650px;
-  padding: 0 10px;
+  margin: 0 10px;
 }
 
 .column.main {
@@ -71,7 +71,7 @@
   margin: 0 auto;
 }
 
-.column+.column {
+.column + .column {
   border-left: 1px solid rgba(0, 0, 0, 0.3);
   display: flex;
   flex-direction: column;

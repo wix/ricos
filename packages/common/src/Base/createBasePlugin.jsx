@@ -13,7 +13,8 @@ const updateEntityData = (contentBlock, { getEditorState, setEditorState }, getN
     const editorState = getEditorState();
     const contentState = editorState.getCurrentContent();
     const entityData = contentState.getEntity(entityKey).getData();
-    const data = typeof getNewData === 'function' ? cloneDeep(getNewData(entityData)) : cloneDeep(getNewData);
+    const data =
+      typeof getNewData === 'function' ? cloneDeep(getNewData(entityData)) : cloneDeep(getNewData);
     contentState.replaceEntityData(entityKey, data);
     data.config.key = contentBlock.getKey();
     //console.log('setData for ' + entityKey + ' key ' + contentBlock.getKey(), data);
@@ -22,7 +23,8 @@ const updateEntityData = (contentBlock, { getEditorState, setEditorState }, getN
 };
 
 const setData = (contentBlock, { getEditorState, setEditorState }) => {
-  return newDataFunc => updateEntityData(contentBlock, { getEditorState, setEditorState }, newDataFunc);
+  return newDataFunc =>
+    updateEntityData(contentBlock, { getEditorState, setEditorState }, newDataFunc);
 };
 
 const getData = (contentBlock, { getEditorState }) => {
@@ -66,31 +68,50 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
   const { t, anchorTarget, relValue } = config;
 
   const toolbarTheme = { ...getToolbarTheme(config.theme, 'plugin'), ...config.theme };
-  const Toolbar = config.toolbar && config.toolbar.InlineButtons && createToolbar({
-    buttons: {
-      all: config.toolbar.InlineButtons,
-      hidden: settings.toolbar ? settings.toolbar.hidden : [],
-    },
-    theme: { ...toolbarTheme, ...config.theme },
-    pubsub,
-    helpers,
-    isMobile,
-    anchorTarget,
-    relValue,
-    t,
-    name: config.toolbar.name,
-    uiSettings: config.uiSettings,
-    getToolbarSettings: config.getToolbarSettings
-  });
+  const Toolbar =
+    config.toolbar &&
+    config.toolbar.InlineButtons &&
+    createToolbar({
+      buttons: {
+        all: config.toolbar.InlineButtons,
+        hidden: settings.toolbar ? settings.toolbar.hidden : [],
+      },
+      theme: { ...toolbarTheme, ...config.theme },
+      pubsub,
+      helpers,
+      isMobile,
+      anchorTarget,
+      relValue,
+      t,
+      name: config.toolbar.name,
+      uiSettings: config.uiSettings,
+      getToolbarSettings: config.getToolbarSettings,
+    });
   const InsertPluginButtons =
-    settings.showInsertButtons && config.toolbar && config.toolbar.InsertButtons && config.toolbar.InsertButtons.map(button => ({
+    settings.showInsertButtons &&
+    config.toolbar &&
+    config.toolbar.InsertButtons &&
+    config.toolbar.InsertButtons.map(button => ({
       buttonSettings: button,
-      component: createInsertPluginButton({ blockType: config.type, button, helpers, pubsub, t })
+      component: createInsertPluginButton({ blockType: config.type, button, helpers, pubsub, t }),
     }));
-  const PluginComponent = config.component && config.decorator ? config.decorator(config.component) : config.component;
+  const PluginComponent =
+    config.component && config.decorator ? config.decorator(config.component) : config.component;
 
-  const CompWithBase = PluginComponent && createBaseComponent(
-    { PluginComponent, theme: config.theme, type: config.type, pubsub, settings, helpers, t, anchorTarget, relValue, isMobile });
+  const CompWithBase =
+    PluginComponent &&
+    createBaseComponent({
+      PluginComponent,
+      theme: config.theme,
+      type: config.type,
+      pubsub,
+      settings,
+      helpers,
+      t,
+      anchorTarget,
+      relValue,
+      isMobile,
+    });
 
   const InlineModals = config.inlineModals;
 
@@ -127,13 +148,13 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
     InsertPluginButtons,
     InlineModals,
     TextButtonMapper,
-    pubsub
+    pubsub,
   };
 
   if (underlyingPlugin) {
     return {
       ...commonProps,
-      ...underlyingPlugin
+      ...underlyingPlugin,
     };
   } else {
     return {

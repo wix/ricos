@@ -7,7 +7,6 @@ import { mergeStyles, ToolbarButton } from 'wix-rich-content-common';
 import styles from '../../../../statics/styles/text-label-button.scss';
 
 export default class TextLabelButton extends Component {
-
   constructor(props) {
     super(props);
     const { buttonStyles } = props.theme || {};
@@ -27,38 +26,59 @@ export default class TextLabelButton extends Component {
   };
 
   static defaultProps = {
-    tabIndex: 0
+    tabIndex: 0,
   };
 
   handleClick = event => {
     const { onClick } = this.props;
     onClick && onClick(event);
-  }
+  };
 
   preventBubblingUp = event => event.preventDefault();
 
   render() {
     const { styles } = this;
-    const { icon: Icon, theme, isMobile, tooltipText, dataHook, tabIndex, label, className } = this.props;
+    const {
+      icon: Icon,
+      theme,
+      isMobile,
+      tooltipText,
+      dataHook,
+      tabIndex,
+      label,
+      className,
+    } = this.props;
     const showTooltip = !isMobile && !isEmpty(tooltipText);
 
     /* eslint-disable jsx-a11y/no-static-element-interactions */
     const textButton = (
       <div className={styles.textLabelButton_wrapper} onMouseDown={this.preventBubblingUp}>
         <button
-          tabIndex={tabIndex} aria-label={tooltipText}
-          className={classNames(styles.textLabelButton, className)} data-hook={dataHook} onClick={this.handleClick}
+          tabIndex={tabIndex}
+          aria-label={tooltipText}
+          className={classNames(styles.textLabelButton, className)}
+          data-hook={dataHook}
+          onClick={this.handleClick}
         >
-          {Icon &&
-          <div className={styles.textLabelButton_icon}>
-            <Icon />
-          </div>}
+          {Icon && (
+            <div className={styles.textLabelButton_icon}>
+              <Icon />
+            </div>
+          )}
           <span className={styles.textLabelButton_label}>{label}</span>
         </button>
       </div>
     );
     /* eslint-enable jsx-a11y/no-static-element-interactions */
 
-    return <ToolbarButton theme={theme} showTooltip={showTooltip} tooltipText={tooltipText} button={textButton} tooltipOffset={{ y: -20 }} />;
+    return (
+      <ToolbarButton
+        theme={theme}
+        showTooltip={showTooltip}
+        tooltipText={tooltipText}
+        button={textButton}
+        tooltipOffset={{ y: -20 }}
+      />
+    );
   }
 }

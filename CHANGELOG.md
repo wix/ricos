@@ -9,6 +9,119 @@
 > - :house: [Internal]
 
 ## [Unreleased]
+### :bug: Bug Fix
+- `html`
+  - [#266](https://github.com/wix-incubator/rich-content/pull/266) (ios) fix instagram too wide for mobile
+### :house: Internal
+- `general`
+  - [#267](https://github.com/wix-incubator/rich-content/pull/267) auto deploys examples to surge on commits to master or PRs
+
+<hr/>
+
+## 3.0.1 (Feb 20, 2019)
+### :house: Internal
+- `general`
+  - align version with `plugin-gallery` release
+
+<hr/>
+
+## 3.0.0 (Feb 19, 2019)
+### :boom: Breaking Change
+- `general`
+  - [#259](https://github.com/wix-incubator/rich-content/pull/259) Minimum supported React version is now 16.4.2
+### :bug: Bug Fix
+- `html`
+  - [#261](https://github.com/wix-incubator/rich-content/pull/261) (ios) fix instagram too wide for mobile
+### :house: Internal
+- `general`
+  - [#262](https://github.com/wix-incubator/rich-content/pull/262) update rollup-plugin-postcss
+  - [#263](https://github.com/wix-incubator/rich-content/pull/263) migrate from Wix CI to Travis CI
+
+<hr/>
+
+## 2.0.4 (Feb 10, 2019)
+
+### :bug: Bug Fix
+- `general`
+  - [#253](https://github.com/wix-incubator/rich-content/pull/253) fix statics copy in package.json
+- `html`
+  - [#253](https://github.com/wix-incubator/rich-content/pull/253) fix instagram too wide for mobile
+
+### :rocket: New Feature
+- `viewer`
+  - [#256](https://github.com/wix-incubator/rich-content/pull/256) convertToHTML
+
+<hr/>
+
+## 2.0.3 (Feb 10, 2019)
+
+### :rocket: New Feature
+- `viewer`
+  - [#246](https://github.com/wix-incubator/rich-content/pull/246) fix headers inside of lists to be semantically correct 
+- `headersMarkdown`
+  - [#246](https://github.com/wix-incubator/rich-content/pull/246) whoo hoo :) new plugin for headers markdown 
+
+### :bug: Bug Fix
+- `image`
+  - [#250](https://github.com/wix-incubator/rich-content/pull/250) reduce default preload size to 300px
+
+### :house: Internal
+- `general`
+  - [b9a6f13](https://github.com/wix-incubator/rich-content/commit/b9a6f1354ab3cd00afd226f9aab777dfab4676cb) force publish all modules with each release
+
+<hr/>
+
+## 2.0.2 (Feb 7, 2019)
+
+### :bug: Bug Fix
+
+- `html`
+  - [#248](https://github.com/wix-incubator/rich-content/pull/248) use 'auto' width on mobile
+- `image`
+  - [#249](https://github.com/wix-incubator/rich-content/pull/249) original size support for mobile cuts off full size images
+- `viewer`
+  - [#249](https://github.com/wix-incubator/rich-content/pull/249) original size support for mobile cuts off full size images
+
+<hr/>
+
+## 2.0.1 (Feb 4, 2019)
+### :bug: Bug Fix
+- `general`
+  - [#242](https://github.com/wix-incubator/rich-content/pull/242) move error boundary from img/video plugins to atomic block wrapper
+  - [#ca4c5da](https://github.com/wix-incubator/rich-content/commit/ca4c5dad0b4f817ff46dcb1b55702cf9bfeb4523) fixed babel-jest error
+- `viewer`
+  - [#244](https://github.com/wix-incubator/rich-content/pull/244) wrap atomic blocks with links instead of positioning a sibling
+
+<hr/>
+
+## 2.0.0 (Jan 28, 2019)
+
+_NOTE:_ From this version onwards all modules will have the same version number, no more independent versioning.
+
+### :boom: Breaking Change
+
+- `common`
+  - [#235](https://github.com/wix-incubator/rich-content/pull/235) add dropdown support in link panel. Breaking changes in all link panel users: `plugin-link`, `plugin-image` and `plugin-gallery`
+
+### :rocket: New Feature
+
+- `giphy`
+  - [#236](https://github.com/wix-incubator/rich-content/pull/236) Add extra customization options to giphy plugin
+
+### :bug: Bug Fix
+
+- `video`
+  - [#238](https://github.com/wix-incubator/rich-content/pull/238) Vimeo - urls not prefixed with http[s] didn't work
+- `viewer`
+  - [708c9a8](https://github.com/wix-incubator/rich-content/commit/708c9a843ce8a48841ef98c13ac211524acf3fb7) render empty container div when there is no content
+  - [#240](https://github.com/wix-incubator/rich-content/pull/240) add componentDidCatch, render null for img or video plugins instead of crashing
+
+### :house: Internal
+
+- `general`
+  - [#239](https://github.com/wix-incubator/rich-content/pull/239) prettier formatter
+- `common`
+  - [c6b143d](https://github.com/wix-incubator/rich-content/commit/c6b143dc792b3d9c6f7892bf24db1818bc7f4cd9) validate plugin schema only in development
 
 ### :rocket: New Feature
 
@@ -21,7 +134,7 @@
 
 ### :rocket: New Feature
 
- [#234](https://github.com/wix-incubator/rich-content/pull/234) thumbnail support - if you are using relative URLs this requires changes
+[#234](https://github.com/wix-incubator/rich-content/pull/234) thumbnail support - if you are using relative URLs this requires changes
 
 <hr/>
 
@@ -509,7 +622,7 @@
   - Theme supports empty css classes
 - `editor`
   - Firefox text editing
-  - Close alignment dropdown when clicke d outside
+  - Close alignment dropdown when clicked outside
 - `image`
   - Transition between `preLoad` and `hiRes` images
 

@@ -33,7 +33,7 @@ $borderRadius: 6px;
   border: none;
   border-left: 1px solid $toolbar-border-color;
 
-  >i {
+  > i {
     display: inline-block;
     width: 6px;
     height: 6px;
@@ -62,7 +62,7 @@ $borderRadius: 6px;
   pointer-events: none;
   scroll-behavior: smooth;
 
-  &>* {
+  & > * {
     pointer-events: initial;
   }
 

@@ -28,7 +28,7 @@ export default class AddPluginFloatingToolbar extends Component {
     if (this.state.isActive) {
       this.hidePopup();
     }
-  }
+  };
 
   openAddPluginModal = () => {
     const { getEditorState, setEditorState, structure, pubsub, theme, helpers, t } = this.props;
@@ -43,7 +43,7 @@ export default class AddPluginFloatingToolbar extends Component {
       pubsub,
       t,
     });
-  }
+  };
 
   onClick = event => {
     event.preventDefault();
@@ -64,7 +64,7 @@ export default class AddPluginFloatingToolbar extends Component {
       default:
         break;
     }
-  }
+  };
 
   togglePopup = () => {
     if (this.state.isActive) {
@@ -82,7 +82,7 @@ export default class AddPluginFloatingToolbar extends Component {
         transition: 'transform 0.15s cubic-bezier(.3,1.2,.2,1)',
       },
       isActive: true,
-      tabIndex: 0
+      tabIndex: 0,
     });
   };
 
@@ -92,7 +92,7 @@ export default class AddPluginFloatingToolbar extends Component {
         transform: 'translate(-50%) scale(0)',
       },
       isActive: false,
-      tabIndex: -1
+      tabIndex: -1,
     });
   };
 
@@ -108,24 +108,48 @@ export default class AddPluginFloatingToolbar extends Component {
   render() {
     const { theme, getEditorState, setEditorState } = this.props;
     const { toolbarStyles } = theme || {};
-    const floatingContainerClassNames = classNames(Styles.sideToolbar_floatingContainer,
-      toolbarStyles && toolbarStyles.sideToolbar_floatingContainer);
-    const floatingIconClassNames = classNames(Styles.sideToolbar_floatingIcon, toolbarStyles && toolbarStyles.sideToolbar_floatingIcon);
-    const popoupClassNames = classNames(Styles.sideToolbar, toolbarStyles && toolbarStyles.sideToolbar);
+    const floatingContainerClassNames = classNames(
+      Styles.sideToolbar_floatingContainer,
+      toolbarStyles && toolbarStyles.sideToolbar_floatingContainer
+    );
+    const floatingIconClassNames = classNames(
+      Styles.sideToolbar_floatingIcon,
+      toolbarStyles && toolbarStyles.sideToolbar_floatingIcon
+    );
+    const popoupClassNames = classNames(
+      Styles.sideToolbar,
+      toolbarStyles && toolbarStyles.sideToolbar
+    );
     return (
       <FocusManager
-        role="toolbar" active={this.state.isActive} aria-orientation="horizontal"
-        focusTrapOptions={{ escapeDeactivates: false, clickOutsideDeactivates: true, initialFocus: this.getFirstFocusableChildSelector(this.id) }}
-        className={floatingContainerClassNames} onKeyDown={e => this.onKeyDown(e)}
+        role="toolbar"
+        active={this.state.isActive}
+        aria-orientation="horizontal"
+        focusTrapOptions={{
+          escapeDeactivates: false,
+          clickOutsideDeactivates: true,
+          initialFocus: this.getFirstFocusableChildSelector(this.id),
+        }}
+        className={floatingContainerClassNames}
+        onKeyDown={e => this.onKeyDown(e)}
       >
         <button
-          aria-label={'Plugin Toolbar'} aria-pressed={this.state.isActive} tabIndex="0"
-          className={floatingIconClassNames} data-hook="addPluginFloatingToolbar" onClick={this.onClick}
+          aria-label={'Plugin Toolbar'}
+          aria-pressed={this.state.isActive}
+          tabIndex="0"
+          className={floatingIconClassNames}
+          data-hook="addPluginFloatingToolbar"
+          onClick={this.onClick}
           ref={el => (this.selectButton = el)}
         >
           {!this.state.isActive ? <PlusIcon /> : <PlusActiveIcon />}
         </button>
-        <div id={this.id} className={popoupClassNames} style={this.state.style} ref={el => (this.popup = el)}>
+        <div
+          id={this.id}
+          className={popoupClassNames}
+          style={this.state.style}
+          ref={el => (this.popup = el)}
+        >
           {this.props.structure.map((Component, index) => (
             <Component
               tabIndex={this.state.tabIndex}

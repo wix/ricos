@@ -6,7 +6,6 @@ import { mergeStyles } from '../Utils/mergeStyles';
 import styles from '../../statics/styles/global.scss';
 
 class FileInput extends Component {
-
   constructor(props) {
     super(props);
     this.styles = mergeStyles({ styles, theme: props.theme });
@@ -23,25 +22,37 @@ class FileInput extends Component {
   }
 
   renderInput() {
-    const { onChange, accept, multiple, className, title, children, dataHook, tabIndex } = this.props;
+    const {
+      onChange,
+      accept,
+      multiple,
+      className,
+      title,
+      children,
+      dataHook,
+      tabIndex,
+    } = this.props;
     const hasMultiple = multiple ? { multiple } : {};
     const { styles } = this;
     const a11yProps = {
       role: 'button',
-      'aria-label': title
+      'aria-label': title,
     };
 
     return (
       <label
-        htmlFor={this.id} className={classnames({ [className]: true, [styles.focused]: this.state.focused })}
-        style={this.props.style} title={title}
+        htmlFor={this.id}
+        className={classnames({ [className]: true, [styles.focused]: this.state.focused })}
+        style={this.props.style}
+        title={title}
       >
         <input
           {...a11yProps}
           className={styles.visuallyHidden}
           id={this.id}
           type={'file'}
-          data-hook={dataHook} onChange={onChange}
+          data-hook={dataHook}
+          onChange={onChange}
           accept={accept}
           onFocus={() => this.onFocus()}
           onBlur={() => this.onBlur()}
@@ -57,32 +68,21 @@ class FileInput extends Component {
     const { handleFileSelection, multiple, className, title, children, dataHook } = this.props;
     const onClick = () => handleFileSelection(multiple);
     const a11yProps = {
-      'aria-label': title
+      'aria-label': title,
     };
     return (
-      <label
-        className={className}
-        htmlFor={this.id}
-        style={this.props.style}
-        title={title}
-      >
-        <button
-          {...a11yProps}
-          id={this.id}
-          data-hook={dataHook} onClick={onClick}
-        >
+      <label className={className} htmlFor={this.id} style={this.props.style} title={title}>
+        <button {...a11yProps} id={this.id} data-hook={dataHook} onClick={onClick}>
           {children}
         </button>
       </label>
     );
-
   }
 
   render() {
     const { handleFileSelection } = this.props;
     return handleFileSelection ? this.renderButton() : this.renderInput();
   }
-
 }
 
 FileInput.propTypes = {
@@ -101,7 +101,7 @@ FileInput.propTypes = {
 
 FileInput.defaultProps = {
   accept: 'image/*',
-  multiple: false
+  multiple: false,
 };
 
 export default FileInput;

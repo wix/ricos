@@ -25,7 +25,10 @@ class BlockLinkPanel extends Component {
       uiSettings,
     };
 
-    const LinkPanelContainerWithProps = decorateComponentWithProps(LinkPanelContainer, linkContainerProps);
+    const LinkPanelContainerWithProps = decorateComponentWithProps(
+      LinkPanelContainer,
+      linkContainerProps
+    );
     this.props.onOverrideContent(LinkPanelContainerWithProps);
   }
 
@@ -41,7 +44,7 @@ class BlockLinkPanel extends Component {
 
   deleteLink = () => {
     this.props.pubsub.setBlockData({ key: 'componentLink', item: null });
-  }
+  };
 
   hideLinkPanel = () => {
     this.props.onOverrideContent(undefined);

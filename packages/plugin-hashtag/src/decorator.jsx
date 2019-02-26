@@ -25,21 +25,25 @@ const findHashtagEntities = (contentBlock, callback) => {
   tags.forEach(hashtag => callback(hashtag.indices[0], hashtag.indices[1]));
 };
 
-const Hashtag = ({ children, decoratedText, createHref, onClick, target = '_self', theme = {} }) => {
-
+const Hashtag = ({
+  children,
+  decoratedText,
+  createHref,
+  onClick,
+  target = '_self',
+  theme = {},
+}) => {
   const text = decoratedText.slice(1);
   const href = createHref ? createHref(text) : null;
   const Component = href ? 'a' : 'span';
-  const className = classNames(styles.hashtag,
-    theme && theme.hashtag,
-    {
-      [styles.hashtag_hover]: !!href,
-      [theme.hashtag_hover]: theme && theme.hashtag_hover && !!href,
-    });
+  const className = classNames(styles.hashtag, theme && theme.hashtag, {
+    [styles.hashtag_hover]: !!href,
+    [theme.hashtag_hover]: theme && theme.hashtag_hover && !!href,
+  });
 
   const decoratedOnClick = onClick ? event => onClick(event, text) : null;
   const props = href ? { className, href, target, onClick: decoratedOnClick } : { className };
-  return <Component {...props} >{children}</Component>;
+  return <Component {...props}>{children}</Component>;
 };
 
 Hashtag.propTypes = {

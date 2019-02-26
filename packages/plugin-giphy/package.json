@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-plugin-giphy",
-  "version": "1.1.10",
+  "version": "3.0.1",
   "author": {
     "name": "Nabeel Zanabeet",
     "email": "nabeelz@wix.com"
@@ -22,13 +22,13 @@
   "style": "dist/styles.min.scss",
   "scripts": {
     "clean": "rm -rf dist/",
-    "statics": "mkdir -p dist && cp -R statics dist/statics",
+    "statics": "mkdir -p dist && cp -R statics dist",
     "prebuild": "npm run statics",
     "build": "rollup --environment MODULE_NAME:plugin-giphy -c ../../rollup.config.js",
+    "build:dev": "NODE_ENV=development npm run build",
     "build:analyze": "npm run build -- --environment MODULE_ANALYZE && open stats.html",
-    "watch": "MODULE_WATCH=1 npm run build -- --watch",
-    "release": "wnpm-release --no-shrinkwrap",
-    "test": "eslint 'src/**/*.{js,jsx}'"
+    "watch": "NODE_ENV=development MODULE_WATCH=1 npm run build -- --watch",
+    "lint": "eslint 'src/**/*.{js,jsx}'"
   },
   "peerDependencies": {
     "@babel/runtime": "7.2.0",
@@ -36,8 +36,8 @@
     "classnames": "^2.0.0",
     "lodash": "^4.0.0",
     "prop-types": "^15.0.0",
-    "react": "^15.0.0 || ^16.0.0",
-    "react-dom": "^15.0.0 || ^16.0.0"
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2"
   },
   "devDependencies": {
     "@babel/runtime": "7.2.0",
@@ -46,8 +46,8 @@
     "eslint": "^4.19.1",
     "lodash": "^4.17.10",
     "prop-types": "^15.6.2",
-    "react": "15.5.4",
-    "react-dom": "15.5.4",
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2",
     "rollup": "^1.1.0"
   },
   "dependencies": {
@@ -55,7 +55,7 @@
     "react-custom-scrollbars": "^4.2.1",
     "react-infinite-scroller": "^1.2.0",
     "react-md-spinner": "^0.3.0",
-    "wix-rich-content-common": "^1.5.16"
+    "wix-rich-content-common": "^3.0.1"
   },
   "unpkg": true,
   "publishConfig": {

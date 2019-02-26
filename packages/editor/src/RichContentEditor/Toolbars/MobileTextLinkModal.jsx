@@ -2,9 +2,12 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { EditorState } from '@wix/draft-js';
 import isEmpty from 'lodash/isEmpty';
-import { insertLink, getLinkDataInSelection, removeLinksInSelection } from 'wix-rich-content-common';
+import {
+  insertLink,
+  getLinkDataInSelection,
+  removeLinksInSelection,
+} from 'wix-rich-content-common';
 import MobileLinkModal from './MobileLinkModal';
-
 
 export default class MobileTextLinkModal extends Component {
   hidePopup = () => this.props.hidePopup();
@@ -12,7 +15,13 @@ export default class MobileTextLinkModal extends Component {
   createLinkEntity = ({ url, targetBlank, nofollow }) => {
     if (!isEmpty(url)) {
       const { getEditorState, setEditorState, anchorTarget, relValue } = this.props;
-      const newEditorState = insertLink(getEditorState(), { url, targetBlank, nofollow, anchorTarget, relValue });
+      const newEditorState = insertLink(getEditorState(), {
+        url,
+        targetBlank,
+        nofollow,
+        anchorTarget,
+        relValue,
+      });
       setEditorState(newEditorState);
     }
     this.hidePopup();
@@ -24,7 +33,7 @@ export default class MobileTextLinkModal extends Component {
     const selection = editorState.getSelection();
     const newEditorState = removeLinksInSelection(editorState);
     setEditorState(EditorState.acceptSelection(newEditorState, selection));
-  }
+  };
 
   render() {
     const { getEditorState, theme, isMobile, anchorTarget, relValue, t, uiSettings } = this.props;
@@ -65,5 +74,4 @@ MobileTextLinkModal.propTypes = {
   relValue: PropTypes.string,
   t: PropTypes.func,
   uiSettings: PropTypes.object,
-
 };

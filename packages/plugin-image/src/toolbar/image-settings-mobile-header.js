@@ -10,7 +10,7 @@ class ImageSettingsMobileHeader extends Component {
     super(props);
     this.styles = mergeStyles({ styles, theme: props.theme });
     this.state = {
-      showMenu: false
+      showMenu: false,
     };
   }
   render() {
@@ -23,30 +23,49 @@ class ImageSettingsMobileHeader extends Component {
         <div className={this.styles.imageSettingsMobileHeader_headerPlaceholder} />
         <div className={this.styles.imageSettingsMobileHeader_header}>
           <button
-            data-hook="ImageSettingsMobileHeaderCancel" role="menuitem" aria-label={cancelLabel} onClick={() => cancel()}
-            className={classNames(this.styles.imageSettingsMobileHeader_button, this.styles.imageSettingsMobileHeader_cancel)}
-          >{cancelLabel}
+            data-hook="ImageSettingsMobileHeaderCancel"
+            role="menuitem"
+            aria-label={cancelLabel}
+            onClick={() => cancel()}
+            className={classNames(
+              this.styles.imageSettingsMobileHeader_button,
+              this.styles.imageSettingsMobileHeader_cancel
+            )}
+          >
+            {cancelLabel}
           </button>
-          {otherTab ?
+          {otherTab ? (
             <button
-              role="menuitem" aria-label="More"
-              data-hook="ImageSettingsMobileHeaderMore" onClick={() => this.setState({ showMenu: !this.state.showMenu })}
-              className={classNames(this.styles.imageSettingsMobileHeader_button, this.styles.imageSettingsMobileHeader_menuIcon)}
-            ><MoreIcon />
-            </button> : null}
+              role="menuitem"
+              aria-label="More"
+              data-hook="ImageSettingsMobileHeaderMore"
+              onClick={() => this.setState({ showMenu: !this.state.showMenu })}
+              className={classNames(
+                this.styles.imageSettingsMobileHeader_button,
+                this.styles.imageSettingsMobileHeader_menuIcon
+              )}
+            >
+              <MoreIcon />
+            </button>
+          ) : null}
           <button
-            data-hook="ImageSettingsMobileHeaderDone" onClick={() => save()} role="menuitem" aria-label={saveLabel}
-            className={classNames(this.styles.imageSettingsMobileHeader_button, this.styles.imageSettingsMobileHeader_done)}
-          >{saveLabel}
+            data-hook="ImageSettingsMobileHeaderDone"
+            onClick={() => save()}
+            role="menuitem"
+            aria-label={saveLabel}
+            className={classNames(
+              this.styles.imageSettingsMobileHeader_button,
+              this.styles.imageSettingsMobileHeader_done
+            )}
+          >
+            {saveLabel}
           </button>
         </div>
         {this.state.showMenu ? (
           <div className={this.styles.imageSettingsMobileHeader_menu}>
             <SelectionList
               theme={theme}
-              dataSource={[
-                otherTab,
-              ]}
+              dataSource={[otherTab]}
               value={''}
               onChange={() => {
                 this.setState({ showMenu: false });
@@ -61,7 +80,6 @@ class ImageSettingsMobileHeader extends Component {
 }
 
 ImageSettingsMobileHeader.propTypes = {
-  hide: PropTypes.func.isRequired,
   save: PropTypes.func.isRequired,
   theme: PropTypes.object.isRequired,
   cancel: PropTypes.func.isRequired,

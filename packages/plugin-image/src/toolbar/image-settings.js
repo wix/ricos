@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import isEmpty from 'lodash/isEmpty';
 import {
   mergeStyles,
   Image,
@@ -33,10 +32,18 @@ class ImageSettings extends Component {
   }
 
   propsToState(props) {
-    const { componentData: { src, metadata } } = props || {};
+    const {
+      componentData: { src, metadata, config = {} },
+    } = props;
+    const { url = '', target, rel } = config.link || {};
     return {
       src,
       metadata,
+      linkPanelValues: {
+        url,
+        targetBlank: target === '_blank',
+        nofollow: rel === 'nofollow',
+      },
     };
   }
 
@@ -49,8 +56,6 @@ class ImageSettings extends Component {
   }
 
   onComponentUpdate = () => this.forceUpdate();
-
-  setLinkPanel = linkPanel => this.linkPanel = linkPanel;
 
   revertComponentData() {
     const { componentData, helpers, pubsub } = this.props;
@@ -67,77 +72,90 @@ class ImageSettings extends Component {
     this.setState({ metadata: updatedMetadata });
   };
 
-  wrapBlockInLink = ({ url, targetBlank, nofollow }) => {
-    const { pubsub } = this.props;
-    if (!isEmpty(url)) {
-      pubsub.setBlockData({ key: 'componentLink', item: { url, targetBlank, nofollow } });
-    } else {
-      pubsub.setBlockData({ key: 'componentLink', item: null });
-    }
-  };
-
   addMetadataToBlock = () => {
     const { pubsub } = this.props;
-    const { alt, caption } = this.state.metadata || {};
-    const metadata = {
-      alt: alt || undefined,
-      caption: caption || undefined,
-    };
+    const metadata = this.state.metadata || {};
     pubsub.update('componentData', { metadata });
   };
 
-  deleteLink = () => {
-    this.props.pubsub.setBlockData({ key: 'componentLink', item: null });
-  }
-
   onDoneClick = () => {
     const { helpers } = this.props;
-    if (this.linkPanel.state.isValidUrl && this.linkPanel.state.url) {
-      const { url, targetBlank, nofollow } = this.linkPanel.state;
-      this.wrapBlockInLink({ url, targetBlank, nofollow });
-    } else if (this.linkPanel.state.intermediateUrl === '') {
-      this.deleteLink();
-    }
+    this.saveLink();
     if (this.state.metadata) {
       this.addMetadataToBlock();
     }
     helpers.closeModal();
   };
 
+  saveLink = () => {
+    const { linkPanelValues } = this.state;
+    if (linkPanelValues.url === '') {
+      this.setBlockLink(null);
+    } else if (linkPanelValues.isValid) {
+      this.setBlockLink(linkPanelValues);
+    }
+  };
+
+  setBlockLink = item => this.props.pubsub.setBlockData({ key: 'componentLink', item });
+
+  onLinkPanelChange = linkPanelValues => {
+    this.setState({ linkPanelValues });
+  };
+
   render() {
-    const { componentData, helpers, theme, t, anchorTarget, relValue, isMobile, uiSettings } = this.props;
-    const { config = {} } = componentData;
+    const { helpers, theme, t, anchorTarget, relValue, isMobile, uiSettings } = this.props;
     const { src, metadata = {} } = this.state;
+
+    const { linkPanel } = uiSettings || {};
+    const { blankTargetToggleVisibilityFn, nofollowRelToggleVisibilityFn } = linkPanel || {};
+    const showTargetBlankCheckbox =
+      blankTargetToggleVisibilityFn && blankTargetToggleVisibilityFn(anchorTarget);
+    const showRelValueCheckbox =
+      nofollowRelToggleVisibilityFn && nofollowRelToggleVisibilityFn(relValue);
 
     if (!src) {
       return <ImageLoader type={'medium'} theme={theme} />; //do not render until the src is passed
     }
 
-    const { url, target, rel } = (!isEmpty(config.link) ? config.link : {});
-    const targetBlank = target === '_blank';
-    const nofollow = rel === 'nofollow';
-
     return (
       <div className={this.styles.imageSettings} data-hook="imageSettings">
-
-        {isMobile ?
+        {isMobile ? (
           <ImageSettingsMobileHeader
             t={t}
             theme={theme}
             cancel={() => this.revertComponentData()}
             save={() => this.onDoneClick()}
             saveName={this.updateLabel}
-          /> :
+          />
+        ) : (
           <h3 className={this.styles.imageSettingsTitle}>{this.headerText}</h3>
-        }
-        <div className={classNames(styles.imageSettings_scrollContainer, { [styles.imageSettings_mobile]: isMobile })}>
-          <SettingsSection theme={theme} ariaProps={{ 'aria-label': 'image preview', role: 'region' }}>
+        )}
+        <div
+          className={classNames(styles.imageSettings_scrollContainer, {
+            [styles.imageSettings_mobile]: isMobile,
+          })}
+        >
+          <SettingsSection
+            theme={theme}
+            ariaProps={{ 'aria-label': 'image preview', role: 'region' }}
+          >
             <Image
-              alt={metadata.alt || 'image preview'} resizeMode={'contain'} className={this.styles.imageSettingsImage}
-              src={getImageSrc(src, helpers, { requiredWidth: 1000, requiredHeight: 250, requiredQuality: 80 })} theme={theme}
+              alt={metadata.alt || 'image preview'}
+              resizeMode={'contain'}
+              className={this.styles.imageSettingsImage}
+              src={getImageSrc(src, helpers, {
+                requiredWidth: 1000,
+                requiredHeight: 250,
+                requiredQuality: 80,
+              })}
+              theme={theme}
             />
           </SettingsSection>
-          <SettingsSection theme={theme} className={this.styles.imageSettingsSection} ariaProps={{ 'aria-label': 'image caption', role: 'region' }}>
+          <SettingsSection
+            theme={theme}
+            className={this.styles.imageSettingsSection}
+            ariaProps={{ 'aria-label': 'image caption', role: 'region' }}
+          >
             <InputWithLabel
               theme={theme}
               id="imageSettingsCaptionInput"
@@ -148,7 +166,11 @@ class ImageSettings extends Component {
               dataHook="imageSettingsCaptionInput"
             />
           </SettingsSection>
-          <SettingsSection theme={theme} className={this.styles.imageSettingsSection} ariaProps={{ 'aria-label': 'image alt text', role: 'region' }}>
+          <SettingsSection
+            theme={theme}
+            className={this.styles.imageSettingsSection}
+            ariaProps={{ 'aria-label': 'image alt text', role: 'region' }}
+          >
             <InputWithLabel
               theme={theme}
               id="imageSettingsAltInput"
@@ -159,32 +181,34 @@ class ImageSettings extends Component {
               dataHook="imageSettingsAltInput"
             />
           </SettingsSection>
-          <SettingsSection theme={theme} className={this.styles.imageSettingsSection} ariaProps={{ 'aria-label': 'image link', role: 'region' }}>
-            <span id="image_settings_link_lbl" className={this.styles.inputWithLabel_label}>{this.linkLabel}</span>
+          <SettingsSection
+            theme={theme}
+            className={this.styles.imageSettingsSection}
+            ariaProps={{ 'aria-label': 'image link', role: 'region' }}
+          >
+            <span id="image_settings_link_lbl" className={this.styles.inputWithLabel_label}>
+              {this.linkLabel}
+            </span>
             <LinkPanel
-              url={url}
-              ref={this.setLinkPanel}
+              linkValues={this.state.linkPanelValues}
+              onChange={this.onLinkPanelChange}
+              showTargetBlankCheckbox={showTargetBlankCheckbox}
+              showRelValueCheckbox={showRelValueCheckbox}
               theme={theme}
-              targetBlank={targetBlank}
-              nofollow={nofollow}
-              uiSettings={uiSettings}
-              isImageSettings
-              anchorTarget={anchorTarget}
-              relValue={relValue}
               t={t}
               ariaProps={{ 'aria-labelledby': 'image_settings_link_lbl' }}
             />
           </SettingsSection>
         </div>
-        {isMobile ? null : <SettingsPanelFooter
-          fixed
-          theme={theme}
-          cancel={() => this.revertComponentData()}
-          save={() => this.onDoneClick()}
-          t={t}
-        />
-        }
-
+        {isMobile ? null : (
+          <SettingsPanelFooter
+            fixed
+            theme={theme}
+            cancel={() => this.revertComponentData()}
+            save={() => this.onDoneClick()}
+            t={t}
+          />
+        )}
       </div>
     );
   }

@@ -9,11 +9,11 @@ import Styles from './App.scss';
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { lastSave: new Date(), readOnly: false }
+    this.state = { lastSave: new Date(), readOnly: false };
   }
-  setEditor = editor => this.editor = editor;
+  setEditor = editor => (this.editor = editor);
 
-  onChange = (editorState) => {
+  onChange = editorState => {
     //TODO: this is the place where we want to auto-save
     this.setState({ lastSave: new Date() });
   };
@@ -50,7 +50,6 @@ class App extends Component {
     }
   };
 
-
   setHeight(height) {
     console.log('Got new height', height);
     Wix.setHeight(height);
@@ -58,7 +57,7 @@ class App extends Component {
 
   render() {
     return (
-      <ReactHeight id='content-wrapper' onHeightReady={this.setHeight}>
+      <ReactHeight id="content-wrapper" onHeightReady={this.setHeight}>
         <div className={Styles.app}>
           <div className={Styles.appHeader}>
             <img src={logo} className={Styles.appLogo} alt="logo" />
@@ -66,9 +65,15 @@ class App extends Component {
             <h3>Last saved on {this.state.lastSave.toTimeString()}</h3>
             <div>
               <label htmlFor="readOnly">read only mode</label>
-              <input type="checkbox" checked={this.state.readOnly} id="readOnly"
-                onChange={(event) => this.setState({ readOnly: event.target.checked })} />
-              <output htmlFor="readOnly" id="readOnlyVal">{this.state.readOnly}</output>
+              <input
+                type="checkbox"
+                checked={this.state.readOnly}
+                id="readOnly"
+                onChange={event => this.setState({ readOnly: event.target.checked })}
+              />
+              <output htmlFor="readOnly" id="readOnlyVal">
+                {this.state.readOnly}
+              </output>
             </div>
           </div>
           <div className={Styles.appIntro}>

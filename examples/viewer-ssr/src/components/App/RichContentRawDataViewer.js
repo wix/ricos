@@ -23,21 +23,18 @@ class RichContentRawDataViewer extends Component {
 
   fixKeys(content) {
     if (content && content.entityMap) {
-      const fixedEntityMap = Object.keys(content.entityMap).reduce(
-        (map, key) => {
-          const entity = content.entityMap[key];
-          const videoHtml = get(entity, 'data.metadata.html');
-          if (videoHtml) {
-            set(entity, 'data.metadata.html', this.escapeHtml(videoHtml));
-          } else if (get(entity, 'data.srcType') === 'html') {
-            const htmlSrc = get(entity, 'data.src');
-            set(entity, 'data.src', this.escapeHtml(htmlSrc));
-          }
+      const fixedEntityMap = Object.keys(content.entityMap).reduce((map, key) => {
+        const entity = content.entityMap[key];
+        const videoHtml = get(entity, 'data.metadata.html');
+        if (videoHtml) {
+          set(entity, 'data.metadata.html', this.escapeHtml(videoHtml));
+        } else if (get(entity, 'data.srcType') === 'html') {
+          const htmlSrc = get(entity, 'data.src');
+          set(entity, 'data.src', this.escapeHtml(htmlSrc));
+        }
 
-          return Object.assign(map, { [`"${key}"`]: entity });
-        },
-        {},
-      );
+        return Object.assign(map, { [`"${key}"`]: entity });
+      }, {});
 
       return Object.assign({}, content, { entityMap: fixedEntityMap });
     }
@@ -73,7 +70,7 @@ class RichContentRawDataViewer extends Component {
 }
 
 // see https://github.com/AndrewRedican/react-json-editor-ajrm for details
-RichContentRawDataViewer.PropTypes = {
+RichContentRawDataViewer.propTypes = {
   content: PropTypes.object.isRequired,
   onChange: PropTypes.func.isRequired,
   viewOnly: PropTypes.bool,

@@ -3,19 +3,12 @@ import createStaticToolbar from './createStaticToolbar';
 import toolbarStyles from '../../../../statics/styles/footer-toolbar.scss';
 
 const getFooterTheme = theme => {
-  const {
-    toolbarStyles: toolbarTheme,
-    buttonStyles,
-    separatorStyles: separatorTheme,
-    ...rest
-  } = theme || {};
+  const { toolbarStyles: toolbarTheme, buttonStyles, separatorStyles: separatorTheme, ...rest } =
+    theme || {};
 
   return {
     toolbarStyles: {
-      toolbar: classNames(
-        toolbarStyles.footerToolbar,
-        toolbarTheme && toolbarTheme.footerToolbar,
-      ),
+      toolbar: classNames(toolbarStyles.footerToolbar, toolbarTheme && toolbarTheme.footerToolbar),
       scrollableContainer: classNames(
         toolbarStyles.footerToolbar_scrollableContainer,
         toolbarTheme && toolbarTheme.footerToolbar_scrollableContainer
@@ -40,11 +33,13 @@ const getFooterTheme = theme => {
         toolbarStyles.footerToolbar_responsiveArrowRight,
         toolbarTheme && toolbarTheme.footerToolbar_responsiveArrowRight
       ),
-      responsiveArrowLeft_icon: classNames( //eslint-disable-line camelcase
+      //eslint-disable-next-line camelcase
+      responsiveArrowLeft_icon: classNames(
         toolbarStyles.footerToolbar_responsiveArrowLeft_icon,
         toolbarTheme && toolbarTheme.footerToolbar_responsiveArrowLeft_icon
       ),
-      responsiveArrowRight_icon: classNames( //eslint-disable-line camelcase
+      //eslint-disable-next-line camelcase
+      responsiveArrowRight_icon: classNames(
         toolbarStyles.footerToolbar_responsiveArrowRight_icon,
         toolbarTheme && toolbarTheme.footerToolbar_responsiveArrowRight_icon
       ),
@@ -55,9 +50,9 @@ const getFooterTheme = theme => {
       icon: buttonStyles && buttonStyles.footerToolbarButton_icon,
     },
     separatorStyles: {
-      separator: separatorTheme && separatorTheme.footerToolbarSeparator
+      separator: separatorTheme && separatorTheme.footerToolbarSeparator,
     },
-    ...rest
+    ...rest,
   };
 };
 
@@ -70,6 +65,6 @@ export default ({ buttons, theme, offset, visibilityFn, displayOptions, toolbarD
     offset,
     visibilityFn,
     displayOptions,
-    toolbarDecorationFn
+    toolbarDecorationFn,
   });
 };

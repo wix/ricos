@@ -4,11 +4,10 @@ import SoundCloudURLInputModal from './soundCloudURLInputModal';
 import { InsertPluginIcon } from '../icons';
 
 const modalCustomStyle = {
-  content:
-  {
+  content: {
     maxWidth: '460px',
-    minHeight: '262px'
-  }
+    minHeight: '262px',
+  },
 };
 
 if (WixUtils.isMobile()) {

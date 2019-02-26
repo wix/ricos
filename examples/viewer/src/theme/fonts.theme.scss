@@ -23,7 +23,12 @@
 
 .fontElementMap {
   @extend .regularText !optional;
-  h1,h2,h3,h4,h5,h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @extend .headerText !optional;
   }
 }
@@ -39,7 +44,12 @@
 
   .glob_fontElementMap {
     @extend .glob_regularText !optional;
-    h1,h2,h3,h4,h5,h6 {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
       @extend .glob_headerText !optional;
     }
   }

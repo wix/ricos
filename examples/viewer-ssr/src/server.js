@@ -38,9 +38,7 @@ module.exports = (app, context) => {
     return {
       locale: req.aspects['web-context'].language,
       basename: req.aspects['web-context'].basename,
-      debug:
-        req.aspects['web-context'].debug ||
-        process.env.NODE_ENV === 'development',
+      debug: req.aspects['web-context'].debug || process.env.NODE_ENV === 'development',
       clientTopology: config.clientTopology,
       title: 'Wix Universal Project Boilerplate',
     };
@@ -50,7 +48,7 @@ module.exports = (app, context) => {
     const appHtml = renderToString(
       <I18nextProvider i18n={req.i18n}>
         <App />
-      </I18nextProvider>,
+      </I18nextProvider>
     );
 
     return {

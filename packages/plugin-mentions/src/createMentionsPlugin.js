@@ -59,7 +59,7 @@ const createExternalMentionsPlugin = (config = {}) => {
       settings,
       ...rest,
     },
-    plugin,
+    plugin
   );
 };
 

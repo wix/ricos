@@ -1,7 +1,7 @@
-@import "~wix-rich-content-common/dist/statics/styles/palette";
-@import "~wix-rich-content-common/dist/statics/styles/consts";
-@import "~wix-rich-content-common/dist/statics/styles/global";
-@import "~wix-rich-content-common/dist/statics/styles/fonts";
+@import '~wix-rich-content-common/dist/statics/styles/palette';
+@import '~wix-rich-content-common/dist/statics/styles/consts';
+@import '~wix-rich-content-common/dist/statics/styles/global';
+@import '~wix-rich-content-common/dist/statics/styles/fonts';
 
 .wrapper {
   @extend .fontElementMap;
@@ -45,6 +45,7 @@
   font-size: 16px;
   font-family: 'Roboto', sans-serif;
   color: $primary-text-color;
+  white-space: pre-wrap !important;
 
   &::after {
     content: '';
@@ -72,6 +73,7 @@
 
   @include phone {
     margin: 0;
+    clear: both;
   }
 }
 
@@ -79,7 +81,7 @@
   margin: 15px 18px;
 
   @include phone {
-    margin: 15px calc((18px + (100% - #{$textMobileWidth}) /2));
+    margin: 15px calc((18px + (100% - #{$textMobileWidth}) / 2));
   }
 }
 
@@ -182,7 +184,7 @@
 .codeBlock {
   composes: blockStyleSpacing;
   background-color: rgba(0, 0, 0, 0.05);
-  font-family: "Inconsolata", "Menlo", "Consolas", monospace;
+  font-family: 'Inconsolata', 'Menlo', 'Consolas', monospace;
   font-size: 16px;
   line-height: 26px;
   padding: 2px 25px;
@@ -197,10 +199,6 @@
   margin: 0;
   padding: 0;
   display: contents;
-}
-
-.preview {
-  white-space: pre-wrap !important;
 }
 
 .rtl {

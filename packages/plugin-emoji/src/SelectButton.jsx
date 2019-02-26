@@ -9,7 +9,9 @@ const SelectButton = ({ t, theme }) => {
   return (
     <Tooltip content={t('EmojiPlugin_InsertButton_Tooltip')} theme={theme}>
       <div className={mergedStyles.emoji_selectButton}>
-        <span className={mergedStyles.emoji_selectButton_icon}><EmojiPluginIcon /></span>
+        <span className={mergedStyles.emoji_selectButton_icon}>
+          <EmojiPluginIcon />
+        </span>
       </div>
     </Tooltip>
   );

@@ -9,6 +9,7 @@ import { createExternalMentionsPlugin } from 'wix-rich-content-plugin-mentions';
 import { createCodeBlockPlugin } from 'wix-rich-content-plugin-code-block';
 import { createSoundCloudPlugin } from 'wix-rich-content-plugin-sound-cloud';
 import { createGiphyPlugin } from 'wix-rich-content-plugin-giphy';
+import { createHeadersMarkdownPlugin } from 'wix-rich-content-plugin-headers-markdown';
 import { createMapPlugin } from 'wix-rich-content-plugin-map';
 
 import 'wix-rich-content-common/dist/styles.min.css';
@@ -38,7 +39,8 @@ const plugins = [
   createCodeBlockPlugin,
   createSoundCloudPlugin,
   createGiphyPlugin,
-  createMapPlugin
+  createHeadersMarkdownPlugin,
+  createMapPlugin,
 ];
 
 export default plugins;

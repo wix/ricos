@@ -3,7 +3,6 @@ import { Component } from 'react';
 import styles from '../../statics/styles/global.scss';
 
 export default class AccessibilityListener extends Component {
-
   handleTabKeyUp = e => {
     if (e.which === 9 && document.body.classList.contains(styles.noOutline)) {
       document.body.classList.remove(styles.noOutline);

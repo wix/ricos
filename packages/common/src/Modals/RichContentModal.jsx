@@ -14,11 +14,9 @@ const renderWrappedModalElement = (wrapping, ModalElement, modalProps) => {
       </Wrapper>
     );
   }
-
 };
 
 const RichContentModal = ({ modalElement, modalDecorations, ...modalProps }) => {
-
   const ModalElement = modalElement;
   const prepended = modalDecorations
     .filter(({ decorationMode }) => decorationMode === DECORATION_MODE.PREPEND)
@@ -32,19 +30,28 @@ const RichContentModal = ({ modalElement, modalDecorations, ...modalProps }) => 
 
   return (
     <FocusManager>
-      {prepended.length > 0 && prepended.map((Prepended, index) => <Prepended key={`prepended_decorator_${index}`} {...modalProps} />)}
+      {prepended.length > 0 &&
+        prepended.map((Prepended, index) => (
+          <Prepended key={`prepended_decorator_${index}`} {...modalProps} />
+        ))}
       {renderWrappedModalElement(wrapping, ModalElement, modalProps)}
-      {appended.length > 0 && appended.map((Appended, index) => <Appended key={`appended_decorator_${index}`} {...modalProps} />)}
-    </FocusManager>);
+      {appended.length > 0 &&
+        appended.map((Appended, index) => (
+          <Appended key={`appended_decorator_${index}`} {...modalProps} />
+        ))}
+    </FocusManager>
+  );
 };
 
 RichContentModal.propTypes = {
   modalElement: PropTypes.func,
   modalProps: PropTypes.object,
-  modalDecorations: PropTypes.arrayOf(PropTypes.shape({
-    decorationMode: PropTypes.oneOf(Object.values(DECORATION_MODE)).isRequired,
-    decorator: PropTypes.func.isRequired,
-  })),
+  modalDecorations: PropTypes.arrayOf(
+    PropTypes.shape({
+      decorationMode: PropTypes.oneOf(Object.values(DECORATION_MODE)).isRequired,
+      decorator: PropTypes.func.isRequired,
+    })
+  ),
 };
 
 RichContentModal.defaultProps = {

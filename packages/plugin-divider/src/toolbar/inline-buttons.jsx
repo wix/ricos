@@ -1,22 +1,7 @@
-import {
-  BUTTONS,
-  AlignCenterIcon,
-  SizeLargeIcon
-} from 'wix-rich-content-common';
-import {
-  changeType,
-  changeAlignmentMobile,
-  changeSizeMobile
-} from './actions';
-import {
-  isAlignmentDisabled,
-  getNextSizeIcon,
-  getNextAlignmentIcon
-} from './selectors';
-import {
-  getDropdownOptions,
-  createDropdownValueGetter
-} from './dropdown-options';
+import { BUTTONS, AlignCenterIcon, SizeLargeIcon } from 'wix-rich-content-common';
+import { changeType, changeAlignmentMobile, changeSizeMobile } from './actions';
+import { isAlignmentDisabled, getNextSizeIcon, getNextAlignmentIcon } from './selectors';
+import { getDropdownOptions, createDropdownValueGetter } from './dropdown-options';
 
 export default ({ styles }) => {
   const dropdownOptions = getDropdownOptions(styles);
@@ -51,14 +36,16 @@ export default ({ styles }) => {
       keyName: 'alignLeft',
       type: BUTTONS.ALIGNMENT_LEFT,
       mapComponentDataToButtonProps: componentData => ({
-        disabled: isAlignmentDisabled(componentData)
-      })
+        disabled: isAlignmentDisabled(componentData),
+      }),
     },
     { keyName: 'alignCenter', type: BUTTONS.ALIGNMENT_CENTER },
-    { keyName: 'alignRight', type: BUTTONS.ALIGNMENT_RIGHT,
+    {
+      keyName: 'alignRight',
+      type: BUTTONS.ALIGNMENT_RIGHT,
       mapComponentDataToButtonProps: componentData => ({
-        disabled: isAlignmentDisabled(componentData)
-      })
+        disabled: isAlignmentDisabled(componentData),
+      }),
     },
     {
       keyName: 'alignMobile',
@@ -73,6 +60,6 @@ export default ({ styles }) => {
       }),
     },
     { keyName: 'separator3', type: BUTTONS.SEPARATOR, mobile: true },
-    { keyName: 'delete', type: BUTTONS.DELETE, mobile: true }
+    { keyName: 'delete', type: BUTTONS.DELETE, mobile: true },
   ];
 };

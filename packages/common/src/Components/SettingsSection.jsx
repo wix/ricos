@@ -16,7 +16,8 @@ class SettingsSection extends React.Component {
     return (
       <div className={classNames(styles.section, className)} {...ariaProps}>
         {children}
-      </div>);
+      </div>
+    );
   }
 }
 

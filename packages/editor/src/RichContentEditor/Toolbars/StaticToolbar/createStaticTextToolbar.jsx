@@ -16,10 +16,7 @@ const getStaticTextTheme = theme => {
 
   return {
     toolbarStyles: {
-      toolbar: classNames(
-        toolbarStyles.textToolbar,
-        toolbarTheme && toolbarTheme.textToolbar,
-      ),
+      toolbar: classNames(toolbarStyles.textToolbar, toolbarTheme && toolbarTheme.textToolbar),
       scrollableContainer: classNames(
         toolbarStyles.textToolbar_scrollableContainer,
         toolbarTheme && toolbarTheme.textToolbar_scrollableContainer
@@ -45,11 +42,13 @@ const getStaticTextTheme = theme => {
         toolbarStyles.textToolbar_responsiveArrowRight,
         toolbarTheme && toolbarTheme.textToolbar_responsiveArrowRight
       ),
-      responsiveArrowLeft_icon: classNames( //eslint-disable-line camelcase
+      //eslint-disable-next-line camelcase
+      responsiveArrowLeft_icon: classNames(
         toolbarStyles.textToolbar_responsiveArrowLeft_icon,
         toolbarTheme && toolbarTheme.textToolbar_responsiveArrowLeft_icon
       ),
-      responsiveArrowRight_icon: classNames( //eslint-disable-line camelcase
+      //eslint-disable-next-line camelcase
+      responsiveArrowRight_icon: classNames(
         toolbarStyles.textToolbar_responsiveArrowRight_icon,
         toolbarTheme && toolbarTheme.textToolbar_responsiveArrowRight_icon
       ),
@@ -65,7 +64,7 @@ const getStaticTextTheme = theme => {
         separatorTheme && separatorTheme.textToolbarSeparator
       ),
     },
-    ...rest
+    ...rest,
   };
 };
 
@@ -87,7 +86,14 @@ export default ({
   toolbarDecorationFn,
 }) => {
   const staticTextTheme = getStaticTextTheme(theme);
-  const structure = getTextButtonsFromList({ buttons, textPluginButtons, pubsub, theme: staticTextTheme, t, uiSettings });
+  const structure = getTextButtonsFromList({
+    buttons,
+    textPluginButtons,
+    pubsub,
+    theme: staticTextTheme,
+    t,
+    uiSettings,
+  });
   const id = getStaticTextToolbarId(refId);
 
   return createStaticToolbar({
