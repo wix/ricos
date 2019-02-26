@@ -22,14 +22,14 @@ const GoogleMapWrapper = withGoogleMap(props => (
       position={{ lat: props.lat, lng: props.lng }}
       onClick={props.onMarkerClick}
     >
-      {props.isMarkerTooltipRendered &&
-      <InfoWindow onCloseClick={props.onMarkerTooltipCloseClick}>
-        <div>{props.markerTooltipContent}</div>
-      </InfoWindow>
-      }
+      {props.isMarkerTooltipRendered && (
+        <InfoWindow onCloseClick={props.onMarkerTooltipCloseClick}>
+          <div>{props.markerTooltipContent}</div>
+        </InfoWindow>
+      )}
     </Marker>
-  </GoogleMap>)
-);
+  </GoogleMap>
+));
 
 export class Map extends Component {
   constructor(props) {
@@ -48,26 +48,30 @@ export class Map extends Component {
           key: componentData.googleMapApiKey,
           libraries: 'geometry,drawing,places',
         }}
-        render={googleMaps => googleMaps &&
-        <GoogleMapWrapper
-          isMarkerShown={componentData.mapSettings.isMarkerShown}
-          loadingElement={<div style={{ height: `100%` }} />}
-          containerElement={<div style={{ height: componentData.config.height || '400px' }} />}
-          mapElement={<div style={{ height: `100%` }} />}
-          lat={Number(componentData.mapSettings.lat)}
-          lng={Number(componentData.mapSettings.lng)}
-          markerTitle={componentData.mapSettings.address}
-          markerTooltipContent={componentData.mapSettings.locationDisplayName}
-          zoom={componentData.mapSettings.zoom}
-          onMarkerTooltipCloseClick={() => this.setState({ isMarkerTooltipRendered: false })}
-          onMarkerClick={() => this.setState({ isMarkerTooltipRendered: !this.state.isMarkerTooltipRendered })}
-          isMarkerTooltipRendered={this.state.isMarkerTooltipRendered}
-          mode={componentData.mapSettings.mode}
-          isZoomControlShown={componentData.mapSettings.isZoomControlShown}
-          isStreetViewControlShown={componentData.mapSettings.isStreetViewControlShown}
-          isDraggingAllowed={componentData.mapSettings.isDraggingAllowed}
-          {...this.props}
-        />
+        render={googleMaps =>
+          googleMaps && (
+            <GoogleMapWrapper
+              isMarkerShown={componentData.mapSettings.isMarkerShown}
+              loadingElement={<div style={{ height: `100%` }} />}
+              containerElement={<div style={{ height: componentData.config.height || '400px' }} />}
+              mapElement={<div style={{ height: `100%` }} />}
+              lat={Number(componentData.mapSettings.lat)}
+              lng={Number(componentData.mapSettings.lng)}
+              markerTitle={componentData.mapSettings.address}
+              markerTooltipContent={componentData.mapSettings.locationDisplayName}
+              zoom={componentData.mapSettings.zoom}
+              onMarkerTooltipCloseClick={() => this.setState({ isMarkerTooltipRendered: false })}
+              onMarkerClick={() =>
+                this.setState({ isMarkerTooltipRendered: !this.state.isMarkerTooltipRendered })
+              }
+              isMarkerTooltipRendered={this.state.isMarkerTooltipRendered}
+              mode={componentData.mapSettings.mode}
+              isZoomControlShown={componentData.mapSettings.isZoomControlShown}
+              isStreetViewControlShown={componentData.mapSettings.isStreetViewControlShown}
+              isDraggingAllowed={componentData.mapSettings.isDraggingAllowed}
+              {...this.props}
+            />
+          )
         }
       />
     );
@@ -77,4 +81,3 @@ export class Map extends Component {
 Map.propTypes = {
   componentData: PropTypes.object.isRequired,
 };
-

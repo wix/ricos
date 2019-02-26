@@ -11,7 +11,7 @@ export default ({ helpers, t, settings }) => {
       Icon: InsertPluginIcon,
       componentData: Object.assign({}, DEFAULTS, settings),
       helpers,
-      t
-    }
+      t,
+    },
   ];
 };

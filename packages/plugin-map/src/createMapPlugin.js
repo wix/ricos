@@ -16,11 +16,11 @@ const createMapPlugin = (config = {}) => {
       settings,
       helpers,
       theme,
-      t
+      t,
     }),
     helpers,
     t,
-    ...rest
+    ...rest,
   });
 };
 

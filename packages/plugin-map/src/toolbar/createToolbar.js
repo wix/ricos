@@ -5,6 +5,6 @@ export default function createToolbar({ settings, helpers, t }) {
   return {
     InlineButtons: createInlineButtons({ settings, helpers, t }),
     InsertButtons: createInsertButtons({ helpers, t, settings }),
-    name: 'map'
+    name: 'map',
   };
 }

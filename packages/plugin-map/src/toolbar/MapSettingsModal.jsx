@@ -1,12 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import {
-  mergeStyles,
-  WixUtils,
-  SettingsSection,
-  TextInput,
-  Button,
-} from 'wix-rich-content-common';
+import { mergeStyles, WixUtils, SettingsSection, TextInput, Button } from 'wix-rich-content-common';
 import ReactGoogleMapLoader from 'react-google-maps-loader';
 import ReactGooglePlacesSuggest from 'react-google-places-suggest';
 import styles from '../../statics/styles/map-settings-modal.scss';
@@ -39,21 +33,23 @@ export class MapSettingsModal extends Component {
       isDraggingAllowed: componentData.mapSettings.isDraggingAllowed,
       isLocationInputAlreadyFocused: false,
     };
-    this.state.locationDisplayName = componentData.mapSettings.locationDisplayName || this.state.address;
+    this.state.locationDisplayName =
+      componentData.mapSettings.locationDisplayName || this.state.address;
 
     this.uniqueClassesId = uuidv4();
   }
 
-  onLocationInputChange = e => this.setState({ locationSearchPhrase: e.target.value, address: e.target.value });
+  onLocationInputChange = e =>
+    this.setState({ locationSearchPhrase: e.target.value, address: e.target.value });
 
-  onLocationSuggestSelect = (geocodedPrediction, originalPrediction) => this.setState({
-    locationSearchPhrase: '',
-    address: originalPrediction.description,
-    locationDisplayName: originalPrediction.description,
-    lat: geocodedPrediction.geometry.location.lat(),
-    lng: geocodedPrediction.geometry.location.lng()
-  });
-
+  onLocationSuggestSelect = (geocodedPrediction, originalPrediction) =>
+    this.setState({
+      locationSearchPhrase: '',
+      address: originalPrediction.description,
+      locationDisplayName: originalPrediction.description,
+      lat: geocodedPrediction.geometry.location.lat(),
+      lng: geocodedPrediction.geometry.location.lng(),
+    });
 
   onSaveBtnClick = () => {
     const { componentData, onConfirm, pubsub, helpers } = this.props;
@@ -67,8 +63,8 @@ export class MapSettingsModal extends Component {
         isMarkerShown: this.state.isMarkerShown,
         isZoomControlShown: this.state.isZoomControlShown,
         isStreetViewControlShown: this.state.isStreetViewControlShown,
-        isDraggingAllowed: this.state.isDraggingAllowed
-      }
+        isDraggingAllowed: this.state.isDraggingAllowed,
+      },
     };
 
     if (onConfirm) {
@@ -90,7 +86,7 @@ export class MapSettingsModal extends Component {
     sliderColor: this.props.uiSettings.themeColors.color1,
     toggleIsOnTrackColor: this.props.uiSettings.themeColors.color8,
     toggleIsOffTrackColor: this.props.uiSettings.themeColors.color8,
-  })
+  });
 
   renderMobileNavBar() {
     const mobileCancelButton = (
@@ -124,8 +120,6 @@ export class MapSettingsModal extends Component {
       </div>
     );
   }
-
-
 
   renderInjectedStyles = () => {
     const { themeColors } = this.props.uiSettings;
@@ -166,7 +160,7 @@ export class MapSettingsModal extends Component {
     `;
 
     return <style>{style}</style>;
-  }
+  };
 
   renderSettingsSections() {
     const { theme, t } = this.props;
@@ -176,13 +170,17 @@ export class MapSettingsModal extends Component {
     const selectedLabeledImageStyle = { border: '2px solid #9a87ce' };
 
     return (
-      <div className={classNames(this.styles.map_settings_modal_settings, this.styles.map_settings_modal_main_content_block)}>
+      <div
+        className={classNames(
+          this.styles.map_settings_modal_settings,
+          this.styles.map_settings_modal_main_content_block
+        )}
+      >
         <SettingsSection
           theme={theme}
           className={this.styles.map_settings_modal_location_input_settings_section}
           ariaProps={{ 'aria-label': 'location', role: 'region' }}
         >
-
           <div className={this.styles.map_settings_modal_text_input_label}>
             <label htmlFor="location-input">{t('MapSettings_Location_Input_Label')}</label>
           </div>
@@ -198,11 +196,16 @@ export class MapSettingsModal extends Component {
                     autocompletionRequest={{ input: locationSearchPhrase }}
                     googleMaps={googleMaps}
                     onSelectSuggest={this.onLocationSuggestSelect}
-                    customRender={prediction => prediction ?
-                      <p className={this.styles.map_settings_modal_location_suggestion}>{prediction.description}</p> :
-                      <p className={this.styles.map_settings_modal_location_suggestion}>
-                        {t('MapSettings_Location_Suggestion_Input_No_Results_Found')}
-                      </p>
+                    customRender={prediction =>
+                      prediction ? (
+                        <p className={this.styles.map_settings_modal_location_suggestion}>
+                          {prediction.description}
+                        </p>
+                      ) : (
+                        <p className={this.styles.map_settings_modal_location_suggestion}>
+                          {t('MapSettings_Location_Suggestion_Input_No_Results_Found')}
+                        </p>
+                      )
                     }
                   >
                     <div className={this.styles.map_settings_modal_search_icon_wrapper}>
@@ -219,7 +222,7 @@ export class MapSettingsModal extends Component {
                         autoComplete="off"
                         onChange={this.onLocationInputChange}
                         inputRef={ref => {
-                        // TODO: since this is a common logic, move it to the TextInput component, and encapsulate it in a prop
+                          // TODO: since this is a common logic, move it to the TextInput component, and encapsulate it in a prop
                           if (ref !== null && !this.state.isLocationInputAlreadyFocused) {
                             ref.focus();
                             this.setState({ isLocationInputAlreadyFocused: true });
@@ -252,20 +255,22 @@ export class MapSettingsModal extends Component {
           />
         </SettingsSection>
 
-        {!WixUtils.isMobile() &&
-        <div className={this.styles.map_settings_modal_divider_wrapper}>
-          <div className={this.styles.map_settings_modal_divider} />
-        </div>}
+        {!WixUtils.isMobile() && (
+          <div className={this.styles.map_settings_modal_divider_wrapper}>
+            <div className={this.styles.map_settings_modal_divider} />
+          </div>
+        )}
 
         <SettingsSection
           theme={theme}
           className={this.styles.map_settings_modal_dropdown_section}
           ariaProps={{ 'aria-label': 'ckeckboxes', role: 'region' }}
         >
-
           <div>
-            <p className={this.styles.map_settings_modal_map_modes_sub_header}>{t('MapSettings_MapType_Label')}</p>
-            <div className={this.styles.map_settings_modal_map_modes} >
+            <p className={this.styles.map_settings_modal_map_modes_sub_header}>
+              {t('MapSettings_MapType_Label')}
+            </p>
+            <div className={this.styles.map_settings_modal_map_modes}>
               <LabeledImage
                 label={t('MapSettings_MapType_RoadMap_Label')}
                 src={roadmapImg}
@@ -293,15 +298,15 @@ export class MapSettingsModal extends Component {
           </div>
         </SettingsSection>
 
-
-        <div className={this.styles.map_settings_modal_divider_wrapper}><div className={this.styles.map_settings_modal_divider} /></div>
+        <div className={this.styles.map_settings_modal_divider_wrapper}>
+          <div className={this.styles.map_settings_modal_divider} />
+        </div>
 
         <SettingsSection
           theme={theme}
           className={this.styles.map_settings_modal_checkbox_section}
           ariaProps={{ 'aria-label': 'ckeckboxes', role: 'region' }}
         >
-
           <div className={this.styles.map_settings_modal_map_options}>
             <LabeledToggle
               label={t('MapSettings_MapOption_Show_Marker_Label')}
@@ -322,7 +327,9 @@ export class MapSettingsModal extends Component {
             <LabeledToggle
               label={t('MapSettings_MapOption_Show_Street_View_Label')}
               checked={this.state.isStreetViewControlShown}
-              onChange={() => this.setState({ isStreetViewControlShown: !this.state.isStreetViewControlShown })}
+              onChange={() =>
+                this.setState({ isStreetViewControlShown: !this.state.isStreetViewControlShown })
+              }
               {...this.labeledToggleDefaultProps()}
               theme={theme}
             />
@@ -345,7 +352,9 @@ export class MapSettingsModal extends Component {
 
     const wrapWithScrollBars = jsx => (
       <Scrollbars
-        renderThumbVertical={() => <div className={this.styles.map_settings_modal_scrollbar_thumb} />}
+        renderThumbVertical={() => (
+          <div className={this.styles.map_settings_modal_scrollbar_thumb} />
+        )}
         className={this.styles.map_settings_modal_scrollbar_container}
       >
         {jsx}
@@ -358,22 +367,44 @@ export class MapSettingsModal extends Component {
         {WixUtils.isMobile() && this.renderMobileNavBar()}
 
         <div className={this.styles.map_settings_modal_settings_container}>
-
-          <div className={classNames(this.styles.map_settings_modal_title_container, this.styles.map_settings_modal_main_content_block)}>
+          <div
+            className={classNames(
+              this.styles.map_settings_modal_title_container,
+              this.styles.map_settings_modal_main_content_block
+            )}
+          >
             <div className={this.styles.map_settings_modal_title}>{t('MapSettings_Title')}</div>
           </div>
 
-          {WixUtils.isMobile() ? this.renderSettingsSections() : wrapWithScrollBars(this.renderSettingsSections())}
+          {WixUtils.isMobile()
+            ? this.renderSettingsSections()
+            : wrapWithScrollBars(this.renderSettingsSections())}
 
-          {!WixUtils.isMobile() &&
-            <div className={classNames(this.styles.map_settings_modal_footer, this.styles.map_settings_modal_main_content_block)}>
-              <Button type="secondary" onClick={this.closeModal} theme={this.styles} className={this.styles.map_settings_modal_footer_cancel_button}>
-              Cancel
+          {!WixUtils.isMobile() && (
+            <div
+              className={classNames(
+                this.styles.map_settings_modal_footer,
+                this.styles.map_settings_modal_main_content_block
+              )}
+            >
+              <Button
+                type="secondary"
+                onClick={this.closeModal}
+                theme={this.styles}
+                className={this.styles.map_settings_modal_footer_cancel_button}
+              >
+                Cancel
               </Button>
-              <Button type="primary" onClick={this.onSaveBtnClick} theme={this.styles} className={this.styles.map_settings_modal_footer_save_button}>
-              Save
+              <Button
+                type="primary"
+                onClick={this.onSaveBtnClick}
+                theme={this.styles}
+                className={this.styles.map_settings_modal_footer_save_button}
+              >
+                Save
               </Button>
-            </div>}
+            </div>
+          )}
         </div>
       </div>
     );

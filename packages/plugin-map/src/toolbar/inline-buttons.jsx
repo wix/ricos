@@ -29,11 +29,16 @@ export default ({ settings, t, helpers }) => {
         } else {
           return { max: maxWidth || maxWidth };
         }
-      }
+      },
     },
     { keyName: 'separator1', type: BUTTONS.SEPARATOR, mobile: false },
     { keyName: 'sizeSmallLeft', type: BUTTONS.SIZE_SMALL_LEFT, mobile: false },
-    { type: BUTTONS.ALIGNMENT_CENTER, keyName: 'alignCenter', icon: SizeSmallCenterIcon, mobile: false },
+    {
+      type: BUTTONS.ALIGNMENT_CENTER,
+      keyName: 'alignCenter',
+      icon: SizeSmallCenterIcon,
+      mobile: false,
+    },
     { keyName: 'sizeSmallRight', type: BUTTONS.SIZE_SMALL_RIGHT, mobile: false },
     { keyName: 'separator2', type: BUTTONS.SEPARATOR, mobile: false },
     {
@@ -41,9 +46,15 @@ export default ({ settings, t, helpers }) => {
       type: BUTTONS.EXTERNAL_MODAL,
       icon: PluginSettingsIcon,
       modalElement: MapSettingsModal,
-      modalStyles: WixUtils.isMobile() ?
-        getModalStyles({ customStyles: { content: { width: '100%', maxWidth: '100%' } }, fullScreen: true }) :
-        getModalStyles({ customStyles: { content: { width: '480px', maxWidth: '480px' } }, fullScreen: true }),
+      modalStyles: WixUtils.isMobile()
+        ? getModalStyles({
+            customStyles: { content: { width: '100%', maxWidth: '100%' } },
+            fullScreen: true,
+          })
+        : getModalStyles({
+            customStyles: { content: { width: '480px', maxWidth: '480px' } },
+            fullScreen: true,
+          }),
       mobile: true,
       tooltipTextKey: 'MapPluginButton_Settings_Tooltip',
       helpers,

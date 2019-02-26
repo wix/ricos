@@ -18,4 +18,3 @@ MapComponent.propTypes = {
   isMobile: PropTypes.bool,
   editorBounds: PropTypes.object,
 };
-

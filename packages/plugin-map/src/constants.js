@@ -6,5 +6,3 @@ export const DEFAULTS = {
     alignment: 'center',
   },
 };
-
-

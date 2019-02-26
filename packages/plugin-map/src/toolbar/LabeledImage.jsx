@@ -40,7 +40,6 @@ export class LabeledImage extends Component {
       </div>
     );
   }
-
 }
 
 LabeledImage.propTypes = {
@@ -53,4 +52,3 @@ LabeledImage.propTypes = {
   imgStyle: PropTypes.object,
   theme: PropTypes.object.isRequired,
 };
-

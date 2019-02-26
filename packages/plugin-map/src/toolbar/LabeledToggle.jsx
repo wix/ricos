@@ -11,7 +11,14 @@ export class LabeledToggle extends Component {
   }
 
   render() {
-    const { label, onChange, checked, sliderColor, toggleIsOnTrackColor, toggleIsOffTrackColor } = this.props;
+    const {
+      label,
+      onChange,
+      checked,
+      sliderColor,
+      toggleIsOnTrackColor,
+      toggleIsOffTrackColor,
+    } = this.props;
 
     return (
       <div className={this.styles.labeled_toggle_root}>
@@ -25,7 +32,11 @@ export class LabeledToggle extends Component {
           <p className={this.styles.labeled_toggle_label}>{label}</p>
         </div>
         <div className={this.styles.labeled_toggle_input_root}>
-          <div className={classNames(this.styles.labeled_toggle_input_container, { [this.styles.off]: !checked })} >
+          <div
+            className={classNames(this.styles.labeled_toggle_input_container, {
+              [this.styles.off]: !checked,
+            })}
+          >
             <input
               type="checkbox"
               className={this.styles.labeled_toggle_checkbox_input}
@@ -37,7 +48,7 @@ export class LabeledToggle extends Component {
               <span
                 className={this.styles.labeled_toggle_track}
                 style={{
-                  background: checked ? toggleIsOnTrackColor : toggleIsOffTrackColor
+                  background: checked ? toggleIsOnTrackColor : toggleIsOffTrackColor,
                 }}
               />
               <span
@@ -64,4 +75,3 @@ LabeledToggle.propTypes = {
   toggleIsOnTrackColor: PropTypes.string.isRequired,
   theme: PropTypes.object.isRequired,
 };
-
