@@ -27,9 +27,19 @@
   display: flex;
 }
 
-.labeled_toggle_root + .labeled_toggle_root {
-  padding-top: 31px;
+.labeled_toggle_root * p {
+  margin: 0px;
+}
 
+.labeled_toggle_root {
+  padding-top: 30px;
+
+  @include phone {
+    padding-top: 0px;
+  }
+}
+
+.labeled_toggle_root + .labeled_toggle_root {
   @include phone {
     padding-top: 36px;
   }

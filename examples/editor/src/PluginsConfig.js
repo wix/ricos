@@ -189,6 +189,7 @@ export default {
       isMarkerShown: true,
       isZoomControlShown: true,
       isStreetViewControlShown: true,
+      isViewControlShown: true,
       isDraggingAllowed: true,
     },
   },

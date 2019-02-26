@@ -13,7 +13,7 @@ const GoogleMapWrapper = withGoogleMap(props => (
       mapTypeId: props.mode,
       zoomControl: props.isZoomControlShown,
       streetViewControl: props.isStreetViewControlShown,
-      mapTypeControl: false,
+      mapTypeControl: props.isViewControlShown,
     }}
   >
     <Marker
@@ -68,6 +68,7 @@ export class Map extends Component {
               mode={componentData.mapSettings.mode}
               isZoomControlShown={componentData.mapSettings.isZoomControlShown}
               isStreetViewControlShown={componentData.mapSettings.isStreetViewControlShown}
+              isViewControlShown={componentData.mapSettings.isViewControlShown}
               isDraggingAllowed={componentData.mapSettings.isDraggingAllowed}
               {...this.props}
             />

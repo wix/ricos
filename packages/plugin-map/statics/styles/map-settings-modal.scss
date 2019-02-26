@@ -1,6 +1,5 @@
 @import "~wix-rich-content-common/dist/statics/styles/mixins";
 @import "./labeled-toggle.scss";
-@import "./labeled-image.scss";
 
 .button_primary {
   font-size: 16px;
@@ -62,10 +61,6 @@
   }
 }
 
-.map_settings_modal_settings_container * p {
-  margin: 0px;
-}
-
 .map_settings_modal_title_container {
   height: 120px;
   flex: none;
@@ -93,6 +88,16 @@
 
   @include phone {
     padding-top: 0px;
+  }
+}
+
+.map_settings_modal_map_options_sub_header {
+  font-size: 16px;
+  line-height: 1.5;
+  margin: 0px;
+
+  @include phone {
+    margin-bottom: 32px;
   }
 }
 
@@ -241,11 +246,6 @@
   @include phone {
     padding-top: 0px;
   }
-}
-
-.map_settings_modal_map_modes_sub_header {
-  min-height: 24px;
-  font-size: 16px;
 }
 
 .map_settings_modal_scrollbar_thumb {
