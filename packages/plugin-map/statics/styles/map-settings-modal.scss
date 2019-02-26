@@ -31,6 +31,7 @@
     border-top: none;
     border-right: none;
     border-left: none;
+    padding-left: 0px;
   }
 }
 
@@ -236,6 +237,7 @@
 
   @include phone {
     padding-right: 0px;
+    margin-right: -2.5px;
   }
 }
 
