@@ -12,12 +12,16 @@
 ### :rocket: New Feature
   - `map`
   - [#260](https://github.com/wix-incubator/rich-content/pull/260) new google maps plugin
+
+<hr/>
+
+## 3.0.2 (Feb 26, 2019)
 ### :bug: Bug Fix
 - `html`
-  - [#266](https://github.com/wix-incubator/rich-content/pull/266) (ios) fix instagram too wide for mobile
+  - [#266](https://github.com/wix-incubator/rich-content/pull/266) fix instagram cut off on ios
 ### :house: Internal
 - `general`
-  - [#267](https://github.com/wix-incubator/rich-content/pull/267) auto deploys examples to surge on commits to master or PRs
+  - [#267](https://github.com/wix-incubator/rich-content/pull/267) auto deploy examples to surge on commits to master or PRs
 
 <hr/>
 
