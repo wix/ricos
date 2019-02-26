@@ -9,6 +9,9 @@
 > - :house: [Internal]
 
 ## [Unreleased]
+### :rocket: New Feature
+  - `map`
+  - [#260](https://github.com/wix-incubator/rich-content/pull/260) new google maps plugin
 ### :bug: Bug Fix
 - `html`
   - [#266](https://github.com/wix-incubator/rich-content/pull/266) (ios) fix instagram too wide for mobile
@@ -122,11 +125,6 @@ _NOTE:_ From this version onwards all modules will have the same version number,
   - [#239](https://github.com/wix-incubator/rich-content/pull/239) prettier formatter
 - `common`
   - [c6b143d](https://github.com/wix-incubator/rich-content/commit/c6b143dc792b3d9c6f7892bf24db1818bc7f4cd9) validate plugin schema only in development
-
-### :rocket: New Feature
-
-  - `Map Plugin`
-  - [#260] (https://github.com/wix-incubator/rich-content/pull/260) `plugin-map` Add map plugin to RCE
 
 <hr/>
 
