@@ -85,7 +85,7 @@ export class MapSettingsModal extends Component {
   labeledToggleDefaultProps = () => ({
     sliderColor: this.props.uiSettings.themeColors.color1,
     toggleIsOnTrackColor: this.props.uiSettings.themeColors.color8,
-    toggleIsOffTrackColor: this.props.uiSettings.themeColors.color8,
+    toggleIsOffTrackColor: this.props.uiSettings.themeColors.color5,
   });
 
   renderMobileNavBar() {

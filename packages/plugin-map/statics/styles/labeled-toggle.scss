@@ -3,10 +3,18 @@
   display: inline-block;
   width: 45px;
   height: 23px;
+}
 
-  &.off {
-    opacity: 0.6;
-  }
+.labeled_toggle_input_container:hover {
+  opacity: 0.6;
+}
+
+.labeled_toggle_input_container_off {
+  opacity: 0.6;
+}
+
+.labeled_toggle_input_container_off:hover {
+  opacity: 1;
 }
 
 

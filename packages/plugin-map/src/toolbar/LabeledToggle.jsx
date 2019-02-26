@@ -34,7 +34,7 @@ export class LabeledToggle extends Component {
         <div className={this.styles.labeled_toggle_input_root}>
           <div
             className={classNames(this.styles.labeled_toggle_input_container, {
-              [this.styles.off]: !checked,
+              [this.styles.labeled_toggle_input_container_off]: !checked,
             })}
           >
             <input
