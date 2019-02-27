@@ -9,7 +9,7 @@ import FileInput from '../Components/FileInput';
 import ToolbarButton from '../Components/ToolbarButton';
 import styles from '../../statics/styles/toolbar-button.scss';
 
-export default ({ blockType, button, helpers, pubsub, t }) => {
+export default ({ blockType, button, helpers, pubsub, t, settings }) => {
   class InsertPluginButton extends Component {
     constructor(props) {
       super(props);
@@ -72,10 +72,12 @@ export default ({ blockType, button, helpers, pubsub, t }) => {
       }
     };
 
-    handleExternalFileChanged = data => {
+    handleExternalFileChanged = (data, error) => {
       if (data) {
-        this.addBlock(button.componentData || {});
-        setTimeout(() => pubsub.getBlockHandler('handleFilesAdded')(data));
+        if (error) {
+          data['error'] = error;
+        }
+        this.addBlock({ ...button.componentData, ...data });
       }
     }
 
@@ -141,10 +143,13 @@ export default ({ blockType, button, helpers, pubsub, t }) => {
     }
 
     toggleFileSelection = () => {
-      const { handleFileSelection } = helpers || {};
-      if (handleFileSelection) {
-        const multiple = !!button.multi;
+      const { handleFileSelection } = settings || helpers || {};
+      const multiple = !!button.multi;
+      if (helpers && helpers.handleFileSelection) {
         handleFileSelection(undefined, multiple, this.handleExternalFileChanged, undefined, button.componentData);
+      }
+      if (settings && settings.handleFileSelection) {
+        handleFileSelection(this.handleExternalFileChanged);
       }
     }
 
@@ -157,9 +162,10 @@ export default ({ blockType, button, helpers, pubsub, t }) => {
           dataHook={`${button.name}_file_input`}
           className={classNames(styles.button, styles.fileUploadButton)}
           onChange={this.handleFileChange}
-          multiple={button.multi}
+          multiple={button.multiple}
           theme={this.props.theme}
           tabIndex={tabIndex}
+          accept= {settings && settings.accept || "image/*" }
         >
          <div className={styles.icon}>
             <Icon key="0" />
@@ -174,7 +180,7 @@ export default ({ blockType, button, helpers, pubsub, t }) => {
       const { theme, isMobile } = this.props;
       const { tooltipText } = button;
       const showTooltip = !isMobile && !isEmpty(tooltipText);
-      const shouldRenderFileUploadButton = button.type === 'file' && !(helpers && helpers.handleFileSelection);
+      const shouldRenderFileUploadButton = button.type === 'file' && !((helpers && helpers.handleFileSelection) || (settings && settings.handleFileSelection));
       const buttonWrapperClassNames = classNames(
         styles.buttonWrapper, { [styles.mobile]: isMobile });
 

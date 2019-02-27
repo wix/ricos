@@ -8,6 +8,7 @@ import { VIDEO_TYPE } from "wix-rich-content-plugin-video";
 import { GIPHY_TYPE } from "wix-rich-content-plugin-giphy";
 import { EXTERNAL_MENTIONS_TYPE } from "wix-rich-content-plugin-mentions";
 import { TOOLBARS, BUTTONS, DISPLAY_MODE } from "wix-rich-content-common";
+import {UPLOAD_FILE_TYPE} from "wix-rich-content-upload-file";
 
 // import InlineToolbarDecoration from './Components/InlineToolbarDecoration';
 // import StaticToolbarDecoration from './Components/StaticToolbarDecoration';
@@ -207,5 +208,30 @@ export default {
     //     desktop: () => InlineToolbarDecoration
     //   })
     // }
-  ]
+  ],
+  [UPLOAD_FILE_TYPE]: {
+    accept: '*',
+    handleFileSelection: (updateEntity, removeEntity) => {
+      console.log("handleFileSelection dd", updateEntity, "cool")
+      const fileSelector = document.createElement('input');
+      fileSelector.setAttribute('type', 'file');
+
+      fileSelector.onchange = (e) => {
+        const letters = "abcdefghijklmnopqrstuvwxyz_";
+        let text = "";
+        for (var i = 0; i < 10 + Math.ceil(Math.random() * 50); i++) {
+          text += letters.charAt(Math.floor(Math.random() * letters.length));
+        }
+        const fileNameParts = e.target.value.split(".")
+        const type = fileNameParts[fileNameParts.length - 1]
+        text += '.' + type;
+        updateEntity({
+          fileName: text,
+          fileType: type,
+          fileURL: 'https://drive.google.com/open?id=0B--AtqZgBOd4c3RhcnRlcl9maWxl'
+        })
+      }
+      fileSelector.click();
+    }
+  }
 };
