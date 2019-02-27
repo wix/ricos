@@ -22,14 +22,14 @@
   "style": "dist/styles.min.scss",
   "scripts": {
     "clean": "rm -rf dist/",
-    "statics": "mkdir -p dist && cp -R statics dist/statics",
+    "statics": "mkdir -p dist && cp -R statics dist",
     "prebuild": "npm run statics",
     "build": "rollup --environment MODULE_NAME:plugin-map -c ../../rollup.config.js",
     "build:dev": "NODE_ENV=development npm run build",
     "build:analyze": "npm run build -- --environment MODULE_ANALYZE && open stats.html",
-    "watch": "MODULE_WATCH=1 npm run build -- --watch",
-    "release": "wnpm-release --no-shrinkwrap",
-    "lint": "eslint 'src/**/*.{js,jsx}'"
+    "watch": "NODE_ENV=development MODULE_WATCH=1 npm run build -- --watch",
+    "lint": "eslint 'src/**/*.{js,jsx}'",
+    "release": "wnpm-release --no-shrinkwrap"
   },
   "peerDependencies": {
     "@babel/runtime": "7.2.0",
