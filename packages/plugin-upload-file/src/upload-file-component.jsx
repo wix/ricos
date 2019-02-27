@@ -10,7 +10,7 @@ import { UPLOAD_FILE_TYPE } from './types';
 const DEFAULTS = {
   config: {
     alignment: ALIGN_CENTER,
-    width: (WixUtils.isMobile()) ? '100%' : 'fit-content'
+    size: 'small'
   },
 };
 
