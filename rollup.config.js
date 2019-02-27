@@ -14,6 +14,10 @@ import cloneDeep from 'lodash/cloneDeep';
 import images from 'rollup-plugin-image-files';
 import nodeGlobalsPolyfill from 'rollup-plugin-node-globals';
 import { externals, globals, excludedExternals, excludedGlobals } from './rollup.externals';
+import dotenv from 'dotenv';
+
+const rootPath = path.resolve(__dirname + '/.env');
+dotenv.config({ path: rootPath });
 
 if (!process.env.MODULE_NAME) {
   console.error('Environment variable "MODULE_NAME" is missing!');

@@ -89,7 +89,8 @@
     "webpack-bundle-analyzer": "^3.0.3",
     "webpack-cli": "^3.0.4",
     "webpack-dev-server": "^3.1.14",
-    "webpack-merge": "^4.1.2"
+    "webpack-merge": "^4.1.2",
+    "dotenv": "^6.2.0"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
