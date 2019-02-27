@@ -24,7 +24,13 @@ class BaseToolbarButton extends React.Component {
     this.props.pubsub.unsubscribe('componentState', this.onComponentStateChange);
   }
   handleExternalFileChanged = (data, error) => {
-    this.props.pubsub.update('componentData', data);
+    if (data) {
+      if (error) {
+        data['error'] = error;
+      }
+      this.props.pubsub.update('componentData', data);
+    }
+
   }
   handleFileChange = event => {
     if (event.target.files && event.target.files.length > 0) {
