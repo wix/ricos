@@ -9,11 +9,13 @@ import { createExternalMentionsPlugin } from 'wix-rich-content-plugin-mentions';
 import { createCodeBlockPlugin } from 'wix-rich-content-plugin-code-block';
 import { createSoundCloudPlugin } from 'wix-rich-content-plugin-sound-cloud';
 import { createGiphyPlugin } from 'wix-rich-content-plugin-giphy';
+import { createUploadFilesPlugin } from 'wix-rich-content-upload-file';
 
 import 'wix-rich-content-common/dist/styles.min.css';
 import 'wix-rich-content-editor/dist/styles.min.css';
 // import 'wix-rich-content-plugin-code-block/dist/styles.min.css';
 import 'wix-rich-content-plugin-divider/dist/styles.min.css';
+import 'wix-rich-content-upload-file/dist/styles.min.css';
 // import 'wix-rich-content-plugin-emoji/dist/styles.min.css';
 import 'wix-rich-content-plugin-html/dist/styles.min.css';
 import 'wix-rich-content-plugin-hashtag/dist/styles.min.css';
@@ -35,7 +37,10 @@ const plugins = [
   createExternalMentionsPlugin,
   createCodeBlockPlugin,
   createSoundCloudPlugin,
-  createGiphyPlugin
+  createUploadFilesPlugin,
+  createGiphyPlugin,
+
+
 ];
 
 export default plugins;
