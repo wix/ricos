@@ -10,8 +10,11 @@
 
 ## [Unreleased]
 ### :rocket: New Feature
-  - `map`
+- `map`
   - [#260](https://github.com/wix-incubator/rich-content/pull/260) new google maps plugin
+### :house: [Internal]
+- `examples`
+    - [#269](https://github.com/wix-incubator/rich-content/pull/269) new integrated, editor/viewer, example 
 
 <hr/>
 

@@ -1,0 +1,58 @@
+/* Wrapper */
+.sideToolbarWrapper {
+}
+
+/* Toolbar */
+.sideToolbar_floatingContainer {
+}
+
+.sideToolbar_floatingIcon {
+}
+
+.sideToolbar {
+  box-shadow: 0px 1px 3px 0px rgba(220, 220, 220, 1);
+  // border: none;
+  // border-radius: 0;
+  // color: #fff;
+  // background: #000;
+  // position: relative;
+  // left: 115px !important;
+  // top: -41px;
+  // pointer-events: none;
+
+  // &:after, &:before {
+  //   right: 100%;
+  //   top: 50%;
+  //   border: solid transparent;
+  //   content: " ";
+  //   height: 0;
+  //   width: 0;
+  //   position: absolute;
+  //   pointer-events: none;
+  // }
+  // &:after {
+  //   border-color: rgba(255, 255, 255, 0);
+  //   border-right-color: #000;
+  //   border-width: 10px;
+  //   margin-top: -10px;
+  // }
+  // &:before {
+  //   border-color: rgba(255, 255, 255, 0);
+  //   border-right-color: #000;
+  //   border-width: 11px;
+  //   margin-top: -11px;
+  // }
+}
+
+/* Button */
+.sideToolbarButton_wrapper {
+}
+
+.sideToolbarButton {
+}
+
+.sideToolbarButton_wrapper:hover .sideToolbarButton_icon {
+}
+
+.sideToolbarButton_label {
+}
