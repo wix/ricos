@@ -35,10 +35,15 @@ class ItemComponent extends Component {
         onKeyPress={null}
         onClick={this.onClickedHandler}
       >
-        <img src={videoObj.thumbnail} alt="Youtube Thumbnail" />
-        <p>{videoObj.videoTitle}</p>
-        <p>{videoObj.publisherName}</p>
-        <p>{videoObj.publishedDate}</p>
+        <div className={this.styles.thumbnail_container}>
+          <img className={this.styles.image} src={videoObj.thumbnail} alt="Youtube Thumbnail" />
+        </div>
+        <div className={this.styles.description_container}>
+          <p>{videoObj.videoTitle}</p>
+          <p>{videoObj.publisherName}</p>
+          <p>{videoObj.publishedDate}</p>
+        </div>
+        <div className={this.styles.clearFloating} />
       </div>
     );
   }

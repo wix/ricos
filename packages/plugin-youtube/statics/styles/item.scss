@@ -1,21 +1,44 @@
-
 @import "~wix-rich-content-common/dist/statics/styles/mixins";
 @import "~wix-rich-content-common/dist/statics/styles/palette";
 
-.item_container{
-    padding: 5px;
-    border: 1px solid #000;
-    margin-bottom: 3px;
-    margin-right: 3px;
-    display: inline-block;
-    width: calc(50% - 15px);
-    box-sizing: border-box;
-    @include phone{
-        width: calc(100vw - 32px);
-    }
-    cursor: pointer;
+.item_container {
+  padding: 5px;
+  border: 1px solid #000;
+  margin-top: 6px;
+  margin-right: 3px;
+  display: inline-block;
+  width: calc(50% - 15px);
+  box-sizing: border-box;
+  @include phone {
+    width: calc(100vw - 32px);
+  }
+  cursor: pointer;
 }
 
-.item_container:hover{
-    background: rgba(33,61,232, .5);
+.item_container:hover {
+  background: rgba(33, 61, 232, 0.5);
+}
+
+.thumbnail_container {
+  height: 100px;
+  max-width: 50%;
+  float: left;
+}
+
+.image {
+  height: 100%;
+  width: auto;
+}
+
+.description_container {
+  height: 100px;
+  width: 50%;
+  float: left;
+  margin-left: 5px;
+  font-size: 11px;
+  overflow: hidden;
+}
+
+.clearFloating {
+  clear: both;
 }
