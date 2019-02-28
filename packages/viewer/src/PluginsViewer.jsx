@@ -51,6 +51,7 @@ class AtomicBlock extends React.Component {
           {
             [mergedStyles.pluginContainerMobile]: isMobile,
             [styles.anchor]: hasLink,
+            [theme.anchor]: hasLink && theme.anchor,
           },
           isFunction(alignment)
             ? alignment(componentData, theme, styles, isMobile)

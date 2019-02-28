@@ -4,7 +4,7 @@ import { RichContentViewer } from 'wix-rich-content-viewer';
 import theme from '../theme/theme';
 import * as PropTypes from 'prop-types';
 import React from 'react';
-import * as Plugins from './ViewerPlugins'
+import * as Plugins from './ViewerPlugins';
 
 const modalStyleDefaults = {
   content: {
@@ -35,7 +35,7 @@ export default class Viewer extends PureComponent {
 
   render() {
     return (
-      <div className={'viewer'}>
+      <div className="viewer">
         <RichContentViewer
           helpers={this.helpers}
           typeMappers={Plugins.typeMappers}

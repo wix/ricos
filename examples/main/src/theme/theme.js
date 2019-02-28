@@ -1,4 +1,5 @@
 import richContentEditorTheme from './rich-content-editor.theme.scss';
+import pluginLinkTheme from './plugin-link.theme.scss';
 import linkTheme from './text-link.theme.scss';
 import hashtagTheme from './text-hashtag.theme.scss';
 
@@ -42,6 +43,7 @@ const theme = {
   modalTheme,
   ...richContentEditorTheme,
   ...linkTheme,
+  ...pluginLinkTheme,
   ...hashtagTheme,
 
   // plugin components
