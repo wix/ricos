@@ -14,12 +14,21 @@
 }
 
 .infinite_scroll_component {
-  overflow-y: scroll;
-  padding-left: 10px;
-  width:calc(100% + 21px);
-  height: 330px;
+  height: 100%;
+  position: relative;
+}
+
+.error_message_container {
+  text-align: center;
+  margin-top: calc(25% - 54px);
+}
+.giphy_selecter_infinite_scroll {
+  width: calc(100% - 15px);
   @include phone {
     width: 100%;
-    height: calc(100vh - 124px);
   }
+}
+
+.InfiniteScroll_container{
+  margin-left: 10px;
 }
