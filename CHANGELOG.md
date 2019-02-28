@@ -9,6 +9,9 @@
 > - :house: [Internal]
 
 ## [Unreleased]
+### :bug: Bug Fix
+- `editor`
+  - [#273](https://github.com/wix-incubator/rich-content/pull/273) staticToolbar - render the correct state
 <hr/>
 
 ## 3.0.3 (Feb 28, 2019)
