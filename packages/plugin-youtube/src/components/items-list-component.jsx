@@ -5,7 +5,7 @@ import MDSpinner from 'react-md-spinner';
 import Scrollbars from 'react-custom-scrollbars';
 import { mergeStyles, isVideoUrl } from 'wix-rich-content-common';
 import ItemComponent from './item-component';
-import { YOUTUBE_API_KEY, YOUTUBE_URL, YOUTUBE_V3_API_LINK } from './../constants';
+import { YOUTUBE_URL, YOUTUBE_V3_API_LINK } from './../constants';
 import styles from '../../statics/styles/items-list.scss';
 
 class ItemsListComponent extends Component {
@@ -87,12 +87,12 @@ class ItemsListComponent extends Component {
           'maxResults=50&order=viewCount&q=' +
           term +
           '&type=video&videoDefinition=high&key=' +
-          YOUTUBE_API_KEY
+          this.props.googleYoutubeApiKey
         : YOUTUBE_V3_API_LINK +
           'videos?part=snippet&' +
           pageToken +
           'chart=mostPopular&maxResults=50&pageToken=CDIQAA&key=' +
-          YOUTUBE_API_KEY;
+          this.props.googleYoutubeApiKey;
       fetch(url)
         .then(response => {
           return response.json();
@@ -207,6 +207,7 @@ ItemsListComponent.propTypes = {
   isTextBoxFocused: PropTypes.bool,
   searchTerm: PropTypes.string.isRequired,
   t: PropTypes.func,
+  googleYoutubeApiKey: PropTypes.string.isRequired,
 };
 
 export default ItemsListComponent;
