@@ -43,7 +43,8 @@
     "wix-rich-content-plugin-mentions": "file:../../packages/plugin-mentions",
     "wix-rich-content-plugin-sound-cloud": "file:../../packages/plugin-sound-cloud",
     "wix-rich-content-plugin-video": "file:../../packages/plugin-video",
-    "wix-rich-content-plugin-youtube": "file:../../packages/plugin-youtube"
+    "wix-rich-content-plugin-youtube": "file:../../packages/plugin-youtube",
+    "wix-rich-content-plugin-map": "file:../../packages/plugin-map"
   },
   "scripts": {
     "postinstall": "node ../../scripts/linkExample editor",
@@ -55,6 +56,7 @@
     "build:analyze": "npm run build -- --progress --env.analyzeBundle"
   },
   "devDependencies": {
+    "dotenv-webpack": "^1.7.0",
     "eslint": "^4.19.1",
     "html-webpack-plugin": "^3.1.0",
     "webpack": "^4.12.0",

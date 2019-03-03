@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css?family=Lato:300');
+@import url('https://fonts.googleapis.com/css?family=Playfair+Display');
+
+@mixin lato-light {
+  font-family: 'Lato';
+  font-weight: 300;
+  font-style: normal;
+}
+
+@mixin playfair-display {
+  font-family: 'Playfair Display';
+  font-weight: 400;
+  font-style: normal;
+}
+
+.regularText {
+  @include lato-light;
+}
+
+.headerText {
+  @include playfair-display;
+}
+
+.fontElementMap {
+  @extend .regularText !optional;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @extend .headerText !optional;
+  }
+}
+
+:global {
+  .glob_regularText {
+    @include lato-light;
+  }
+
+  .glob_headerText {
+    @include playfair-display;
+  }
+
+  .glob_fontElementMap {
+    @extend .glob_regularText !optional;
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      @extend .glob_headerText !optional;
+    }
+  }
+}

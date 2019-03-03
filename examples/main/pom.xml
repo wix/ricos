@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.wixpress.exposure</groupId>
+    <artifactId>wix-rich-content-editor-example</artifactId>
+    <packaging>pom</packaging>
+    <name>Wix Rich Content Editor Example</name>
+    <description>Wix Rich Content Editor Example</description>
+    <version>1.0.0-SNAPSHOT</version>
+    <organization>
+        <name>com.wixpress</name>
+    </organization>
+
+    <parent>
+        <groupId>com.wixpress.common</groupId>
+        <artifactId>wix-master-parent</artifactId>
+        <version>100.0.0-SNAPSHOT</version>
+    </parent>
+
+    <developers>
+        <developer>
+            <name>Jonathan Bachman</name>
+            <email>jonathanb@wix.com</email>
+            <roles>
+                <role>owner</role>
+            </roles>
+        </developer>
+        <developer>
+            <name>ronny</name>
+            <email>ronny@wix.com</email>
+            <roles>
+                <role>dev</role>
+            </roles>
+        </developer>
+    </developers>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.1.0</version>
+                <configuration>
+                    <tarLongFileMode>posix</tarLongFileMode>
+                    <descriptors>
+                        <descriptor>maven/assembly/tar.gz.xml</descriptor>
+                    </descriptors>
+                    <appendAssemblyId>false</appendAssemblyId>
+                    <finalName>${project.artifactId}-${project.version}</finalName>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

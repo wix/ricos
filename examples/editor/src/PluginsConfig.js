@@ -6,6 +6,7 @@ import { HTML_TYPE } from 'wix-rich-content-plugin-html';
 import { LINK_TYPE } from 'wix-rich-content-plugin-link';
 import { VIDEO_TYPE } from 'wix-rich-content-plugin-video';
 import { GIPHY_TYPE } from 'wix-rich-content-plugin-giphy';
+import { MAP_TYPE } from 'wix-rich-content-plugin-map';
 import { EXTERNAL_MENTIONS_TYPE } from 'wix-rich-content-plugin-mentions';
 import { HEADERS_MARKDOWN_TYPE } from 'wix-rich-content-plugin-headers-markdown';
 import React from 'react';
@@ -17,6 +18,17 @@ import { TOOLBARS, BUTTONS, DISPLAY_MODE } from 'wix-rich-content-common';
 // import StaticToolbarDecoration from './Components/StaticToolbarDecoration';
 // import SideToolbarDecoration from './Components/SideToolbarDecoration';
 // import PluginToolbarDecoration from './Components/PluginToolbarDecoration';
+
+const themeColors = {
+  color1: '#ffffff',
+  color2: '#ed24d9',
+  color3: '#969696',
+  color4: '#ed24d9',
+  color5: '#000000',
+  color6: '#000000',
+  color7: '#000000',
+  color8: '#9a87ce',
+};
 
 const getLinkPanelDropDownConfig = () => {
   const getItems = () => {
@@ -70,6 +82,7 @@ const getLinkPanelDropDownConfig = () => {
 };
 
 const uiSettings = {
+  themeColors,
   linkPanel: {
     blankTargetToggleVisibilityFn: () => true,
     nofollowRelToggleVisibilityFn: () => true,
@@ -158,7 +171,26 @@ export default {
     getVideoUrl: src => `https://video.wixstatic.com/${src.pathname}`,
   },
   [GIPHY_TYPE]: {
-    giphySdkApiKey: 'JfQziSTdnSwDZcD3w8DpUL4LMFu3zBgU',
+    giphySdkApiKey: process.env.GIPHY_API_KEY,
+  },
+  [MAP_TYPE]: {
+    googleMapApiKey: process.env.GOOGLE_MAPS_API_KEY,
+    minWidth: 100,
+    maxWidth: 740,
+    minHeight: 100,
+    maxHeight: 1000,
+    mapSettings: {
+      address: 'Wix HQ, Nemal Tel Aviv Street, Tel Aviv-Yafo, Israel',
+      locationDisplayName: 'Wix HQ, Nemal Tel Aviv Street, Tel Aviv-Yafo, Israel',
+      lat: 32.097235,
+      lng: 34.77427,
+      zoom: 18,
+      mode: 'roadmap',
+      isMarkerShown: true,
+      isZoomControlShown: true,
+      isStreetViewControlShown: true,
+      isDraggingAllowed: true,
+    },
   },
   uiSettings,
   getToolbarSettings: ({ pluginButtons, textButtons }) => [

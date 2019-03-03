@@ -11,6 +11,7 @@ import postcss from 'rollup-plugin-postcss';
 import postcssURL from 'postcss-url';
 import pascalCase from 'pascal-case';
 import cloneDeep from 'lodash/cloneDeep';
+import images from 'rollup-plugin-image-files';
 import nodeGlobalsPolyfill from 'rollup-plugin-node-globals';
 import { externals, globals, excludedExternals, excludedGlobals } from './rollup.externals';
 
@@ -34,6 +35,7 @@ const plugins = [
     extensions: ['.js', '.jsx', '.json'],
   }),
   builtins(),
+  images(),
   babel({
     configFile: path.resolve(__dirname, 'babel.config.js'),
     include: ['src/**', 'statics/icons/**'],
