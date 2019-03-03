@@ -197,6 +197,7 @@
   "YoutubePlugin_API_ErrorMessage_Description": "API request error",
   "YoutubePlugin_NoResult_ErrorMessage_Title": "No results found.",
   "YoutubePlugin_NoResult_ErrorMessage_Description": "Try different keyword.",
+  "YoutubePlugin_Url_ErrorTooltip": "Invalid URL",
   "TitleButton_label": "Title",
   "TitleButton_tooltip": "Title",
   "HeadingOneButton_label": "Heading 1",

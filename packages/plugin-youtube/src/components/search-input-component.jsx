@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { mergeStyles, TextInput, Button, isVideoUrl, WixUtils } from 'wix-rich-content-common';
+import {
+  mergeStyles,
+  TextInput,
+  Button,
+  isVideoUrl,
+  WixUtils,
+  getUrlMatches,
+} from 'wix-rich-content-common';
 import styles from '../../statics/styles/search-input.scss';
 class SearchInputComponent extends Component {
   constructor(props) {
@@ -12,6 +19,7 @@ class SearchInputComponent extends Component {
       searchTerm: '',
       selectedVideoUrl: this.props.selectedVideoUrl,
       buttonText: t('YoutubePlugin_SearchButton_Text'),
+      invalidYoutubeURL: false,
     };
   }
 
@@ -26,22 +34,35 @@ class SearchInputComponent extends Component {
   onTextInputChanged = e => {
     const { t } = this.props;
     this.setState({ textInputValue: e.target.value });
-    if (isVideoUrl(e.target.value)) {
-      this.setState({ buttonText: t('YoutubePlugin_AddButton_Text') });
+    if (getUrlMatches(e.target.value)) {
+      this.setState({ buttonText: t('YoutubePlugin_AddButton_Text'), invalidYoutubeURL: false });
     } else {
       this.setState({ buttonText: t('YoutubePlugin_SearchButton_Text') });
     }
   };
 
-  onSearchClicked = () => {
+  onSubmit = () => {
     const { textInputValue } = this.state;
-    this.setState({ searchTerm: textInputValue });
-    this.props.onSearchButtonClicked(textInputValue);
+    if (getUrlMatches(textInputValue)) {
+      if (isVideoUrl(textInputValue)) {
+        this.setState({ searchTerm: textInputValue, invalidYoutubeURL: false });
+        this.props.onSearchButtonClicked(textInputValue);
+      } else {
+        this.setState({ invalidYoutubeURL: true });
+      }
+    } else {
+      this.setState({ searchTerm: textInputValue, invalidYoutubeURL: false });
+      this.props.onSearchButtonClicked(textInputValue);
+    }
+  };
+
+  onSearchClicked = () => {
+    this.onSubmit();
   };
 
   handleOnKeyPressed = e => {
     if (e.key === 'Enter') {
-      this.props.onKeyPress(this.state.textInputValue);
+      this.onSubmit();
     }
   };
 
@@ -56,6 +77,7 @@ class SearchInputComponent extends Component {
           onFocus={this.onFocus}
           onBlur={this.onBlur}
           theme={this.styles}
+          error={this.state.invalidYoutubeURL && t('YoutubePlugin_Url_ErrorTooltip')}
         />
         {!WixUtils.isMobile() && (
           <Button onClick={this.onSearchClicked} theme={this.styles} type="secondary">
