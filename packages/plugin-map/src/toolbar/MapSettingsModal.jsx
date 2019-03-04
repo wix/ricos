@@ -28,11 +28,9 @@ export class MapSettingsModal extends Component {
       isStreetViewControlShown: componentData.mapSettings.isStreetViewControlShown,
       isDraggingAllowed: componentData.mapSettings.isDraggingAllowed,
       isViewControlShown: componentData.mapSettings.isViewControlShown,
+      locationDisplayName: componentData.mapSettings.locationDisplayName,
       isLocationInputAlreadyFocused: false,
     };
-
-    this.state.locationDisplayName =
-      componentData.mapSettings.locationDisplayName || this.state.address;
 
     this.uniqueClassesId = uuidv4();
   }
