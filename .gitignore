@@ -8,10 +8,11 @@ yarn.lock
 target
 maven
 stats.html
-wix-rich-content.iml
+
 
 #Webstorm
 **/.idea/*
+*.iml
 
 #VSCode
 **/.project
