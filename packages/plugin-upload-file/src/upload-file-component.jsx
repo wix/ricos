@@ -23,10 +23,6 @@ class UploadFileComponent extends React.Component {
     this.styles = mergeStyles({ styles, theme: this.props.theme });
   }
 
-  setPlayer = player => {
-    this.player = player;
-  };
-
   render() {
     const { componentData } = this.props;
     return (
@@ -46,12 +42,7 @@ class UploadFileComponent extends React.Component {
 
 UploadFileComponent.propTypes = {
   componentData: PropTypes.object.isRequired,
-  componentState: PropTypes.object.isRequired,
-  store: PropTypes.object.isRequired,
-  blockProps: PropTypes.object.isRequired,
-  className: PropTypes.string.isRequired,
   theme: PropTypes.object.isRequired,
-  t: PropTypes.func,
 };
 
 export { UploadFileComponent as Component, DEFAULTS };
