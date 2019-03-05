@@ -42,7 +42,7 @@ class UploadFileComponent extends React.Component {
 
 UploadFileComponent.propTypes = {
   componentData: PropTypes.object.isRequired,
-  theme: PropTypes.object.isRequired,
+  theme: PropTypes.object.isRequired
 };
 
 export { UploadFileComponent as Component, DEFAULTS };
