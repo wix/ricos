@@ -27,6 +27,18 @@ class ItemsListComponent extends Component {
     this.searchYoutube('', '');
   };
 
+  componentDidCatch = () => {
+    this.setState({ loading: false, apiError: true, hasMore: true });
+  };
+
+  componentWillReceiveProps = nextProp => {
+    if (this.state.searchTerm !== nextProp.searchTerm) {
+      try {
+        this.scrollbarRef.scrollTop(0);
+      } catch (err) {}
+    }
+  };
+
   componentDidUpdate = () => {
     const { searchTerm, nextPageToken } = this.state;
     if (searchTerm !== this.props.searchTerm) {
@@ -176,6 +188,9 @@ class ItemsListComponent extends Component {
           this.renderResultNotFoundErrorMessage()
         ) : (
           <Scrollbars
+            ref={ref => {
+              this.scrollbarRef = ref;
+            }}
             style={{
               width: '100%',
               height: isMobile ? 'calc(100vh - 102px)' : '329px',
