@@ -53,7 +53,7 @@ export class Map extends Component {
             <GoogleMapWrapper
               isMarkerShown={componentData.mapSettings.isMarkerShown}
               loadingElement={<div style={{ height: `100%` }} />}
-              containerElement={<div style={{ height: componentData.config.height || '400px' }} />}
+              containerElement={<div style={{ height: componentData.config.height + 'px' }} />}
               mapElement={<div style={{ height: `100%` }} />}
               lat={Number(componentData.mapSettings.lat)}
               lng={Number(componentData.mapSettings.lng)}
