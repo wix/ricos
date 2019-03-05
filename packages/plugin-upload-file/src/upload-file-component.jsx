@@ -16,7 +16,6 @@ const DEFAULTS = {
 
 class UploadFileComponent extends React.Component {
 
-  static type = { UPLOAD_FILE_TYPE };
 
   constructor(props) {
     super(props);
