@@ -24,25 +24,22 @@ class ItemsListComponent extends Component {
   }
 
   componentDidMount = () => {
-    this.searchYoutube('', '');
+    if (this.props.googleYoutubeApiKey) {
+      this.searchYoutube('', '');
+    } else {
+      this.setState({ loading: false, apiError: true, hasMore: true });
+    }
   };
 
   componentDidCatch = () => {
     this.setState({ loading: false, apiError: true, hasMore: true });
   };
 
-  componentWillReceiveProps = nextProp => {
-    if (this.state.searchTerm !== nextProp.searchTerm) {
-      try {
-        this.scrollbarRef.scrollTop(0);
-      } catch (err) {}
-    }
-  };
-
   componentDidUpdate = () => {
     const { searchTerm, nextPageToken } = this.state;
     if (searchTerm !== this.props.searchTerm) {
       this.setState({ searchTerm: this.props.searchTerm });
+      this.scrollbarRef.scrollTop(0);
       this.searchYoutube(this.props.searchTerm, nextPageToken);
     }
   };
@@ -204,6 +201,7 @@ class ItemsListComponent extends Component {
               hasMore={hasMore}
               loader={<MDSpinner />}
               useWindow={false}
+              threshold={3}
               className={this.styles.InfiniteScroll_container}
             >
               {items}
