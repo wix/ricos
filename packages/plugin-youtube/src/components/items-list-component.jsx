@@ -39,7 +39,7 @@ class ItemsListComponent extends Component {
     const { searchTerm, nextPageToken } = this.state;
     if (searchTerm !== this.props.searchTerm) {
       this.setState({ searchTerm: this.props.searchTerm });
-      this.scrollbarRef.scrollTop(0);
+      this.scrollbarRef && this.scrollbarRef.scrollTop(0);
       this.searchYoutube(this.props.searchTerm, nextPageToken);
     }
   };
