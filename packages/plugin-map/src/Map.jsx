@@ -5,12 +5,10 @@ import ReactGoogleMapLoader from 'react-google-maps-loader';
 
 const GoogleMapWrapper = withGoogleMap(props => (
   <GoogleMap
-    defaultCenter={{ lat: props.lat, lng: props.lng }}
     center={{ lat: props.lat, lng: props.lng }}
     zoom={props.zoom}
     options={{
       draggable: props.isDraggingAllowed,
-      mapTypeId: props.mode,
       zoomControl: props.isZoomControlShown,
       streetViewControl: props.isStreetViewControlShown,
       mapTypeControl: props.isViewControlShown,
@@ -22,11 +20,13 @@ const GoogleMapWrapper = withGoogleMap(props => (
       position={{ lat: props.lat, lng: props.lng }}
       onClick={props.onMarkerClick}
     >
-      {props.isMarkerTooltipRendered && props.markerTooltipContent.trim() !== '' && (
-        <InfoWindow onCloseClick={props.onMarkerTooltipCloseClick}>
-          <div>{props.markerTooltipContent}</div>
-        </InfoWindow>
-      )}
+      {props.isMarkerShown &&
+        props.isMarkerTooltipRendered &&
+        props.markerTooltipContent.trim() !== '' && (
+          <InfoWindow onCloseClick={props.onMarkerTooltipCloseClick}>
+            <div>{props.markerTooltipContent}</div>
+          </InfoWindow>
+        )}
     </Marker>
   </GoogleMap>
 ));
@@ -53,7 +53,11 @@ export class Map extends Component {
             <GoogleMapWrapper
               isMarkerShown={componentData.mapSettings.isMarkerShown}
               loadingElement={<div style={{ height: `100%` }} />}
-              containerElement={<div style={{ height: componentData.config.height + 'px' }} />}
+              containerElement={
+                <div
+                  style={{ height: componentData.config.height + 'px', whiteSpace: 'initial' }}
+                />
+              }
               mapElement={<div style={{ height: `100%` }} />}
               lat={Number(componentData.mapSettings.lat)}
               lng={Number(componentData.mapSettings.lng)}
@@ -65,12 +69,10 @@ export class Map extends Component {
                 this.setState({ isMarkerTooltipRendered: !this.state.isMarkerTooltipRendered })
               }
               isMarkerTooltipRendered={this.state.isMarkerTooltipRendered}
-              mode={componentData.mapSettings.mode}
               isZoomControlShown={componentData.mapSettings.isZoomControlShown}
               isStreetViewControlShown={componentData.mapSettings.isStreetViewControlShown}
               isViewControlShown={componentData.mapSettings.isViewControlShown}
               isDraggingAllowed={componentData.mapSettings.isDraggingAllowed}
-              {...this.props}
             />
           )
         }
