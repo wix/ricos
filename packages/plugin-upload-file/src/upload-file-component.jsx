@@ -1,11 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { DocumentIcon } from './icons';
 import { mergeStyles, WixUtils } from 'wix-rich-content-common';
 
 export const ALIGN_CENTER = 'center';
-import styles from '../statics/styles/default-upload-file-styles.scss';
-import { UPLOAD_FILE_TYPE } from './types';
+import  UploadFileViewer  from './upload-file-viewer';
 
 const DEFAULTS = {
   config: {
@@ -24,17 +22,9 @@ class UploadFileComponent extends React.Component {
   }
 
   render() {
-    const { componentData } = this.props;
+    const { componentData, theme } = this.props;
     return (
-      <div data-hook="upload-file-component-container" className={styles.upload_file_container}>
-        <a href={componentData.fileURL} className={styles.upload_file_link}>
-          <div className={styles.upload_file_icon_container}>
-            <DocumentIcon className={styles.upload_file_icon} />
-            <span className={styles.upload_file_type}>{componentData.fileType}</span>
-          </div>
-          <span className={styles.upload_file_name}>{componentData.fileName}</span>
-        </a>
-      </div>
+        <UploadFileViewer componentData={componentData} theme={theme}/>
     );
   }
 }

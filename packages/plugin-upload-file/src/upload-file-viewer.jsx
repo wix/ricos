@@ -22,13 +22,15 @@ class UploadFileViewer extends Component {
   render() {
     const { componentData } = this.props;
     return (
-      <a href={componentData.fileURL} className={this.styles.upload_file_link}>
-        <div className={styles.upload_file_icon_container}>
-          <DocumentIcon className={styles.upload_file_icon} />
-          <span className={styles.upload_file_type}>{componentData.fileType}</span>
-        </div>
-        <span className={styles.upload_file_name}>{componentData.fileName}</span>
-      </a>
+      <div data-hook="upload-file-component-container" className={styles.upload_file_container}>
+        <a href={componentData.fileURL} className={this.styles.upload_file_link}>
+          <div className={styles.upload_file_icon_container}>
+            <DocumentIcon className={styles.upload_file_icon}/>
+            <span className={styles.upload_file_type}>{componentData.fileType}</span>
+          </div>
+          <span className={styles.upload_file_name}>{componentData.fileName}</span>
+        </a>
+      </div>
     );
   }
 }
