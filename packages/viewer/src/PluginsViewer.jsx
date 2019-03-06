@@ -33,6 +33,7 @@ class AtomicBlock extends React.Component {
       anchorTarget,
       relValue,
       config,
+      helpers,
       ...props
     } = this.props;
 
@@ -40,7 +41,6 @@ class AtomicBlock extends React.Component {
     const { component: Component, elementType } = typeMap[type];
     const { size, alignment, textWrap, container } = typeMap[type].classNameStrategies || {};
     const settings = (config && config[type]) || {};
-    const { helpers } = config;
 
     if (Component) {
       if (elementType !== 'inline') {
@@ -130,6 +130,7 @@ AtomicBlock.propTypes = {
   anchorTarget: PropTypes.string,
   relValue: PropTypes.string,
   config: PropTypes.object,
+  helpers: PropTypes.object,
 };
 
 //return a list of types with a function that wraps the viewer

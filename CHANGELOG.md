@@ -9,49 +9,69 @@
 > - :house: [Internal]
 
 ## [Unreleased]
+
 ### :bug: Bug Fix
+
 - `editor`
   - [#273](https://github.com/wix-incubator/rich-content/pull/273) staticToolbar - render the correct active state
-<hr/>
+    <hr/>
 
 ## 3.0.3 (Feb 28, 2019)
+
 ### :rocket: New Feature
+
 - `map`
   - [#260](https://github.com/wix-incubator/rich-content/pull/260) new google maps plugin
+
 ### :bug: Bug Fix
+
 - `viewer`
   - [#272](https://github.com/wix-incubator/rich-content/pull/272) plugin link height issues and enabled theming plugin links
+
 ### :house: [Internal]
+
 - `examples`
-    - [#269](https://github.com/wix-incubator/rich-content/pull/269) new integrated, editor/viewer, example 
+  - [#269](https://github.com/wix-incubator/rich-content/pull/269) new integrated, editor/viewer, example
 
 <hr/>
 
 ## 3.0.2 (Feb 26, 2019)
+
 ### :bug: Bug Fix
+
 - `html`
   - [#266](https://github.com/wix-incubator/rich-content/pull/266) fix instagram cut off on ios
+
 ### :house: Internal
+
 - `general`
   - [#267](https://github.com/wix-incubator/rich-content/pull/267) auto deploy examples to surge on commits to master or PRs
 
 <hr/>
 
 ## 3.0.1 (Feb 20, 2019)
+
 ### :house: Internal
+
 - `general`
   - align version with `plugin-gallery` release
 
 <hr/>
 
 ## 3.0.0 (Feb 19, 2019)
+
 ### :boom: Breaking Change
+
 - `general`
   - [#259](https://github.com/wix-incubator/rich-content/pull/259) Minimum supported React version is now 16.4.2
+
 ### :bug: Bug Fix
+
 - `html`
   - [#261](https://github.com/wix-incubator/rich-content/pull/261) (ios) fix instagram too wide for mobile
+
 ### :house: Internal
+
 - `general`
   - [#262](https://github.com/wix-incubator/rich-content/pull/262) update rollup-plugin-postcss
   - [#263](https://github.com/wix-incubator/rich-content/pull/263) migrate from Wix CI to Travis CI
@@ -61,12 +81,14 @@
 ## 2.0.4 (Feb 10, 2019)
 
 ### :bug: Bug Fix
+
 - `general`
   - [#253](https://github.com/wix-incubator/rich-content/pull/253) fix statics copy in package.json
 - `html`
   - [#253](https://github.com/wix-incubator/rich-content/pull/253) fix instagram too wide for mobile
 
 ### :rocket: New Feature
+
 - `viewer`
   - [#256](https://github.com/wix-incubator/rich-content/pull/256) convertToHTML
 
@@ -75,16 +97,19 @@
 ## 2.0.3 (Feb 10, 2019)
 
 ### :rocket: New Feature
+
 - `viewer`
-  - [#246](https://github.com/wix-incubator/rich-content/pull/246) fix headers inside of lists to be semantically correct 
+  - [#246](https://github.com/wix-incubator/rich-content/pull/246) fix headers inside of lists to be semantically correct
 - `headersMarkdown`
-  - [#246](https://github.com/wix-incubator/rich-content/pull/246) whoo hoo :) new plugin for headers markdown 
+  - [#246](https://github.com/wix-incubator/rich-content/pull/246) whoo hoo :) new plugin for headers markdown
 
 ### :bug: Bug Fix
+
 - `image`
   - [#250](https://github.com/wix-incubator/rich-content/pull/250) reduce default preload size to 300px
 
 ### :house: Internal
+
 - `general`
   - [b9a6f13](https://github.com/wix-incubator/rich-content/commit/b9a6f1354ab3cd00afd226f9aab777dfab4676cb) force publish all modules with each release
 
@@ -104,7 +129,9 @@
 <hr/>
 
 ## 2.0.1 (Feb 4, 2019)
+
 ### :bug: Bug Fix
+
 - `general`
   - [#242](https://github.com/wix-incubator/rich-content/pull/242) move error boundary from img/video plugins to atomic block wrapper
   - [#ca4c5da](https://github.com/wix-incubator/rich-content/commit/ca4c5dad0b4f817ff46dcb1b55702cf9bfeb4523) fixed babel-jest error
