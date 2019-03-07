@@ -179,6 +179,7 @@ export default {
     maxWidth: 1400,
     minHeight: 100,
     maxHeight: 1400,
+    width: 650,
     mapSettings: {
       address: 'Wix HQ, Nemal Tel Aviv Street, Tel Aviv-Yafo, Israel',
       locationDisplayName: 'Wix HQ, Nemal Tel Aviv Street, Tel Aviv-Yafo, Israel',

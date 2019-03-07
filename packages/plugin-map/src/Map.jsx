@@ -55,7 +55,11 @@ export class Map extends Component {
               loadingElement={<div style={{ height: `100%` }} />}
               containerElement={
                 <div
-                  style={{ height: componentData.config.height + 'px', whiteSpace: 'initial' }}
+                  style={{
+                    height: componentData.config.height + 'px',
+                    whiteSpace: 'initial',
+                    width: componentData.config.width + 'px',
+                  }}
                 />
               }
               mapElement={<div style={{ height: `100%` }} />}
