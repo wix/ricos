@@ -36,11 +36,11 @@ class ItemsListComponent extends Component {
   };
 
   componentDidUpdate = () => {
-    const { searchTerm, nextPageToken } = this.state;
+    const { searchTerm } = this.state;
     if (searchTerm !== this.props.searchTerm) {
       this.setState({ searchTerm: this.props.searchTerm });
       this.scrollbarRef && this.scrollbarRef.scrollTop(0);
-      this.searchYoutube(this.props.searchTerm, nextPageToken);
+      this.searchYoutube(this.props.searchTerm, '');
     }
   };
 
@@ -54,7 +54,7 @@ class ItemsListComponent extends Component {
     if (nextPageToken && true) {
       setTimeout(() => {
         this.searchYoutube(searchTerm, nextPageToken);
-      }, 2000);
+      }, 1000);
     } else {
       return;
     }
@@ -83,7 +83,7 @@ class ItemsListComponent extends Component {
   searchYoutube = (term, isNextPage) => {
     const { searchTerm } = this.state;
     if (!isVideoUrl(term)) {
-      this.setState({ loading: true });
+      !isNextPage && this.setState({ loading: true });
       let pageToken = '';
       if (isNextPage) {
         pageToken = 'pageToken=' + this.state.nextPageToken + '&';
@@ -195,17 +195,21 @@ class ItemsListComponent extends Component {
             }}
             renderThumbVertical={() => <div className={styles.scrollbar_thumb} />}
           >
-            <InfiniteScroll
-              pageStart={0}
-              loadMore={this.loadMore}
-              hasMore={hasMore}
-              loader={<MDSpinner />}
-              useWindow={false}
-              threshold={3}
-              className={this.styles.InfiniteScroll_container}
-            >
-              {items}
-            </InfiniteScroll>
+            {loading ? (
+              <MDSpinner className={this.styles.spinner_container} />
+            ) : (
+              <InfiniteScroll
+                pageStart={0}
+                loadMore={this.loadMore}
+                hasMore={hasMore}
+                loader={<MDSpinner style={{ marginLeft: 'calc(50% - 20px)' }} />}
+                useWindow={false}
+                threshold={3}
+                className={this.styles.InfiniteScroll_container}
+              >
+                {items}
+              </InfiniteScroll>
+            )}
           </Scrollbars>
         )}
       </div>
