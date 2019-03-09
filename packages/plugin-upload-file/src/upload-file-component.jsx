@@ -18,7 +18,6 @@ class UploadFileComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
-    this.styles = mergeStyles({ styles, theme: this.props.theme });
   }
 
   render() {
