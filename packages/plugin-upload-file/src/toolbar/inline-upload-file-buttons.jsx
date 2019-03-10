@@ -12,7 +12,7 @@ export default ({ t, settings }) => {
       type: BUTTONS.FILES,
       icon: MediaReplaceIcon,
       settings,
-      tooltipTextKey: t('replace_file_tooltip'),
+      tooltipTextKey: t('UploadFileReplaceButton_tooltip'),
     },
     { keyName: 'delete', type: BUTTONS.DELETE, mobile: true },
   ];

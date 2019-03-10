@@ -7,7 +7,7 @@ export default ({ helpers, t, settings }) => {
     {
       type: 'file',
       name: 'UploadFile',
-      tooltipText: t('upload_file_tooltip'),
+      tooltipText: t('UploadFileInsertButton_tooltip'),
       Icon: InsertPluginIcon,
       componentData: DEFAULTS,
       toolbars: [TOOLBARS.FOOTER, TOOLBARS.SIDE],

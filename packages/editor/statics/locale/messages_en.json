@@ -156,5 +156,7 @@
   "HeadingTwoButton_tooltip": "Heading 2",
   "HeadingThreeButton_tooltip": "Heading 3",
   "NormalTextButton_tooltip": "Normal Text",
-  "TextCodeBlockButton_Tooltip": "Code Block"
+  "TextCodeBlockButton_Tooltip": "Code Block",
+  "UploadFileInsertButton_tooltip": "Upload a file",
+  "UploadFileReplaceButton_tooltip": "Replace file"
 }
