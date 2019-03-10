@@ -7,6 +7,10 @@
 
 .labeled_toggle_input_container:hover {
   opacity: 0.6;
+
+  @include phone {
+    opacity: 1;
+  }
 }
 
 .labeled_toggle_input_container_off {
@@ -15,6 +19,10 @@
 
 .labeled_toggle_input_container_off:hover {
   opacity: 1;
+
+  @include phone {
+    opacity: 0.6;
+  }
 }
 
 

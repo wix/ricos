@@ -30,7 +30,7 @@ export default ({ settings, t, helpers }) => {
         if (bounds && bounds.width) {
           return { max: maxWidth ? Math.min(maxWidth, bounds.width) : bounds.width };
         } else {
-          return { max: maxWidth || maxWidth };
+          return { max: maxWidth };
         }
       },
     },

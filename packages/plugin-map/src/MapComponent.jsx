@@ -15,7 +15,8 @@ export class MapComponent extends Component {
   setRootElementRef = elm => (this.rootElement = elm);
 
   render() {
-    const width = `${this.props.settings.width}px` || 'auto';
+    const desktopWidth = this.props.settings.width ? `${this.props.settings.width}px` : 'auto';
+    const width = this.props.isMobile ? 'auto' : desktopWidth;
     const height = `${this.props.settings.height}px` || 'auto';
 
     return (
