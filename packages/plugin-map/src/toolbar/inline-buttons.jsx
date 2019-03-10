@@ -22,13 +22,6 @@ export default ({ settings, t, helpers }) => {
 
   return [
     {
-      type: BUTTONS.HEIGHT,
-      keyName: 'height',
-      min: minHeight,
-      max: maxHeight,
-      inputMax: maxHeight,
-    },
-    {
       type: BUTTONS.WIDTH,
       keyName: 'width',
       min: minWidth,
@@ -40,6 +33,13 @@ export default ({ settings, t, helpers }) => {
           return { max: maxWidth || maxWidth };
         }
       },
+    },
+    {
+      type: BUTTONS.HEIGHT,
+      keyName: 'height',
+      min: minHeight,
+      max: maxHeight,
+      inputMax: maxHeight,
     },
     { keyName: 'separator1', type: BUTTONS.SEPARATOR, mobile: false },
     {
