@@ -1,0 +1,39 @@
+/* Toolbar */
+.pluginToolbar {
+  box-shadow: 0px 1px 3px 0px rgba(220, 220, 220, 1);
+}
+
+.pluginToolbar_buttons {
+}
+
+.pluginToolbar_buttons_overrideContent {
+}
+
+.pluginToolbar_extend {
+}
+
+/* Button */
+.pluginToolbarButton_active {
+}
+
+.pluginToolbarButton {
+  // background: orange;
+}
+
+.pluginToolbarButton_wrapper {
+  // background: cyan;
+}
+
+.pluginToolbarButton_wrapper:hover .pluginToolbarButton_icon {
+}
+
+.pluginToolbarButton_icon {
+  // background: green;
+  svg {
+    // background: rosybrown;
+  }
+}
+
+/* Separator */
+.pluginToolbarSeparator {
+}

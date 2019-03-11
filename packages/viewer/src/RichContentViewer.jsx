@@ -39,6 +39,7 @@ export default class RichContentViewer extends Component {
       anchorTarget,
       relValue,
       config,
+      helpers,
     } = this.props;
 
     const wrapperClassName = classNames(styles.wrapper, {
@@ -53,7 +54,7 @@ export default class RichContentViewer extends Component {
       styles,
       textDirection,
       typeMappers,
-      { theme, isMobile, anchorTarget, relValue, config },
+      { theme, isMobile, anchorTarget, relValue, config, helpers },
       decorators
     );
 

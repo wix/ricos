@@ -1,5 +1,6 @@
 import React from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
+import { DefaultDraftBlockRenderMap } from '@wix/draft-js';
 import redraft from 'redraft';
 import classNames from 'classnames';
 import endsWith from 'lodash/endsWith';
@@ -11,6 +12,8 @@ const isEmptyContentState = raw =>
   !raw || !raw.blocks || (raw.blocks.length === 1 && raw.blocks[0].text === '');
 
 const isEmptyBlock = ([_, data]) => data && data.length === 0; //eslint-disable-line no-unused-vars
+
+const allBlockTypes = () => Object.keys(DefaultDraftBlockRenderMap.toJS());
 
 const textAlignmentStyle = (data, mergedStyles, textDirection, classes) => {
   const rtl = textDirection || data.textDirection;
@@ -138,7 +141,7 @@ const combineTypeMappers = mappers => {
 
 const redraftOptions = {
   cleanup: {
-    after: 'all',
+    after: allBlockTypes().filter(t => t.indexOf('header') === -1),
     split: true,
     except: ['unordered-list-item', 'ordered-list-item', 'unstyled'],
   },

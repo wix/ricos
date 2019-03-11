@@ -16,8 +16,6 @@ const updateEntityData = (contentBlock, { getEditorState, setEditorState }, getN
     const data =
       typeof getNewData === 'function' ? cloneDeep(getNewData(entityData)) : cloneDeep(getNewData);
     contentState.replaceEntityData(entityKey, data);
-    data.config.key = contentBlock.getKey();
-    //console.log('setData for ' + entityKey + ' key ' + contentBlock.getKey(), data);
     setEditorState(editorState);
   }
 };
@@ -31,8 +29,6 @@ const getData = (contentBlock, { getEditorState }) => {
   return () => {
     const contentState = getEditorState().getCurrentContent();
     const entity = contentState.getEntity(contentBlock.getEntityAt(0));
-    //const entityKey = contentBlock.getEntityAt(0);
-    // console.log('getData for ' + entityKey + ' key ' + contentBlock.getKey(), entity.getData());
     return entity.getData();
   };
 };

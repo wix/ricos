@@ -16,7 +16,6 @@ import { testImages, testVideos } from './mock';
 import './App.css';
 import theme from './theme/theme'; // must import after custom styles
 import RichContentRawDataViewer from './RichContentRawDataViewer';
-import cloneDeep from 'lodash/cloneDeep'
 
 const modalStyleDefaults = {
   content: {
@@ -261,7 +260,7 @@ class App extends Component {
                   <div className="column side">
                     <RichContentRawDataViewer
                       onChange={content => this.setState({ content })}
-                      content={cloneDeep(convertToRaw(this.state.editorState.getCurrentContent()))}
+                      content={convertToRaw(this.state.editorState.getCurrentContent())}
                       width="740px"
                     />
                     <Button
