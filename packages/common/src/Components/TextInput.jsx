@@ -27,7 +27,9 @@ export default class TextInput extends React.Component {
       <div className={styles.textInput}>
         <input
           ref={inputRef}
-          className={classNames(styles.textInput_input, { [styles.textInput_input_invalid]: error })}
+          className={classNames(styles.textInput_input, {
+            [styles.textInput_input_invalid]: error,
+          })}
           {...otherProps}
         />
         {error && (showTooltip ?

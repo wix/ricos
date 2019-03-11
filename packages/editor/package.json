@@ -1,7 +1,7 @@
 {
   "private": false,
   "name": "wix-rich-content-editor",
-  "version": "1.7.7",
+  "version": "3.0.5",
   "author": {
     "name": "Jonathan Bachman",
     "email": "jonathanb@wix.com"
@@ -14,21 +14,22 @@
   ],
   "scripts": {
     "clean": "rm -rf dist/",
-    "statics": "mkdir -p dist && cp -R statics dist/statics",
+    "statics": "mkdir -p dist && cp -R statics dist",
     "prebuild": "npm run statics",
     "build": "rollup --environment MODULE_NAME:editor -c ../../rollup.config.js",
     "build:dev": "NODE_ENV=development npm run build",
     "build:analyze": "npm run build -- --environment MODULE_ANALYZE && open stats.html",
-    "watch": "MODULE_WATCH=1 npm run build -- --watch",
-    "release": "wnpm-release --no-shrinkwrap",
+    "watch": "NODE_ENV=development MODULE_WATCH=1 npm run build -- --watch",
     "lint": "eslint 'src/**/*.{js,jsx}'",
     "lint:fix": "npm run lint -- --fix",
-    "pretest": "npm run lint",
     "test": "jest --verbose"
   },
   "jest": {
     "globals": {
       "NODE_ENV": "test"
+    },
+    "transform": {
+      "^.+\\.jsx?$": "<rootDir>/../../babel.jest.monorepo.js"
     },
     "moduleNameMapper": {
       "\\.(jpg|jpeg|png|gif|svg)$": "<rootDir>/__mocks__/fileMock.js",
@@ -46,30 +47,30 @@
     "react-click-outside": "github:tj/react-click-outside",
     "react-i18next": "^7.6.1",
     "react-measure": "^2.0.2",
-    "wix-rich-content-common": "^1.5.13",
-    "wnpm-ci": "latest"
+    "wix-rich-content-common": "^3.0.5"
   },
   "peerDependencies": {
-    "@babel/runtime": "7.1.2",
+    "@babel/runtime": "7.2.0",
     "classnames": "^2.0.0",
     "lodash": "^4.0.0",
-    "react": "^15.0.0 || ^16.0.0",
-    "react-dom": "^15.0.0 || ^16.0.0"
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2"
   },
   "devDependencies": {
-    "@babel/runtime": "7.1.2",
+    "@babel/runtime": "7.2.0",
     "@wix/draft-js": "0.10.272",
-    "babel-jest": "^23.2.0",
+    "babel-jest": "^23.6.0",
     "classnames": "^2.2.6",
-    "enzyme": "^2.9.1",
+    "enzyme": "^3.8.0",
+    "enzyme-adapter-react-16": "^1.9.1",
     "eslint": "^4.19.1",
     "jest": "^23.1.0",
     "lodash": "^4.17.10",
     "prop-types": "^15.6.2",
-    "react": "15.5.4",
-    "react-dom": "15.5.4",
-    "react-test-renderer": "^15.6.1",
-    "rollup": "^0.64.1"
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2",
+    "react-test-renderer": "^16.4.2",
+    "rollup": "^1.1.0"
   },
   "unpkg": true,
   "publishConfig": {

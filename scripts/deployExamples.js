@@ -3,73 +3,89 @@
 const path = require('path');
 const chalk = require('chalk');
 const execSync = require('child_process').execSync;
-const sgAutorelease = require('surge-github-autorelease');
 
-const rootDir = path.resolve(__dirname, '..');
-
-const surgeOpts = {
-  repoOwner: 'wix-incubator',
-  repoName: 'rich-content',
-  rootPath: rootDir,
-};
-
-if (process.env.GITHUB_TOKEN) {
-  surgeOpts.githubToken = process.env.GITHUB_TOKEN;
-}
+const EXAMPLES_TO_DEPLOY = [
+  {
+    name: 'rich-content-editor',
+    path: 'examples/editor',
+  },
+  {
+    name: 'rich-content-viewer',
+    path: 'examples/viewer',
+  },
+  {
+    name: 'rich-content',
+    path: 'examples/main',
+  },
+];
 
 const exec = cmd => execSync(cmd, { stdio: 'inherit' });
 
-const fqdn = subdomain => `https://${subdomain}.surge.sh/`;
+const fqdn = subdomain => `${subdomain}.surge.sh/`;
 
-function bootstrap(example) {
-  const bootstrapCommand = `npm install --prefix=${example.path}`;
-  console.log(
-    chalk.magenta(`Running: "${bootstrapCommand}"`),
-  );
+const generateSubdomain = exampleName => {
+  const { version } = require('../lerna.json');
+  let subdomain = exampleName;
+  const { TRAVIS_PULL_REQUEST } = process.env;
+  if (TRAVIS_PULL_REQUEST && TRAVIS_PULL_REQUEST !== 'false') {
+    subdomain += `-pr-${TRAVIS_PULL_REQUEST}`;
+  } else {
+    subdomain += `-${version.replace(/\./g, '-')}`;
+  }
+  return subdomain;
+};
+
+function bootstrap() {
+  const bootstrapCommand = `yarn`;
+  console.log(chalk.magenta(`Running: ${bootstrapCommand}"`));
   exec(bootstrapCommand);
 }
 
-function build(example) {
-  const buildCommand = `npm run build --prefix=${example.path}`;
-  console.log(
-    chalk.magenta(`Running: "${buildCommand}"`),
-  );
-  exec(`npm run clean --prefix=${example.path}`);
+function build() {
+  const buildCommand = 'npm run build';
+  console.log(chalk.magenta(`Running: "${buildCommand}"`));
+  exec('npm run clean');
   exec(buildCommand);
 }
 
-async function publish(example) {
-  console.log(chalk.cyan(`Publishing ${example.name} example v${example.version} to surge...`));
-  const domain = `${example.name}-${example.version.replace(/\./g, '-')}`;
+function deploy(name) {
+  console.log(chalk.cyan(`Deploying ${name} example to surge...`));
+  const subdomain = generateSubdomain(name);
+  const domain = fqdn(subdomain);
+  const deployCommand = `npx surge dist ${domain}`;
   try {
-    await sgAutorelease({
-      ...surgeOpts,
-      domain,
-      sourceDirectory: `${example.path}/dist`,
-    });
-    console.log(chalk.green(`Published to ${fqdn(domain)}`));
+    console.log(chalk.magenta(`Running "${deployCommand}`));
+    exec(deployCommand);
   } catch (e) {
     console.error(chalk.bold.red(e));
   }
 }
 
-async function deployExamples(examples) {
-  if (!process.env.IS_BUILD_AGENT) {
-    console.log(chalk.yellow(`Not in CI - skipping examples deploy`));
+function run() {
+  let skip;
+  const { SURGE_LOGIN, TRAVIS_BRANCH, TRAVIS_PULL_REQUEST, CI } = process.env;
+  if (TRAVIS_BRANCH !== 'master' && TRAVIS_PULL_REQUEST === 'false') {
+    skip = 'Not master or PR';
+  } else if (!CI) {
+    skip = 'Not in CI';
+  } else if (!SURGE_LOGIN) {
+    skip = 'PR from fork';
+  }
+  if (skip) {
+    console.log(chalk.yellow(`${skip} - skipping deploy`));
     return false;
   }
 
-  if (!examples.length) {
-    console.log('No examples to publish');
-    return false;
-  }
+  for (const example of EXAMPLES_TO_DEPLOY) {
+    process.chdir(path.resolve(process.cwd(), example.path));
 
-  for (const example of examples) {
     console.log(chalk.blue(`\nDeploying ${example.name} example...`));
-    bootstrap(example);
-    build(example);
-    await publish(example);
+    bootstrap();
+    build();
+    deploy(example.name);
+
+    process.chdir(path.resolve('../..'));
   }
 }
 
-module.exports = deployExamples;
+run();

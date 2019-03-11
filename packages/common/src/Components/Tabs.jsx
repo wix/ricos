@@ -24,13 +24,18 @@ export class Tab extends Component {
     this.styles = mergeStyles({ styles, theme: props.theme });
   }
 
-  render = () => this.props.selected &&
-    <div
-      role="tabpanel" key={this.props.value} aria-labelledby={`${this.props.value}_header`}
-      id={`${this.props.value}_panel`} className={this.styles.tabs_panel}
-    >
-      {this.props.children}
-    </div>;
+  render = () =>
+    this.props.selected && (
+      <div
+        role="tabpanel"
+        key={this.props.value}
+        aria-labelledby={`${this.props.value}_header`}
+        id={`${this.props.value}_panel`}
+        className={this.styles.tabs_panel}
+      >
+        {this.props.children}
+      </div>
+    );
 }
 
 export class Tabs extends Component {
@@ -50,9 +55,12 @@ export class Tabs extends Component {
 
   getTabHeaders = tabs => React.Children.map(tabs, tab => ({ label: tab.props.label, value: tab.props.value }));
 
-  renderTabs = () => React.Children.map(this.props.children, tab => React.cloneElement(tab, {
-    selected: this.state.activeTab === tab.props.value,
-  }));
+  renderTabs = () =>
+    React.Children.map(this.props.children, tab =>
+      React.cloneElement(tab, {
+        selected: this.state.activeTab === tab.props.value,
+      })
+    );
 
   render() {
     const { styles, props } = this;
@@ -65,9 +73,18 @@ export class Tabs extends Component {
             const isSelected = value === this.state.activeTab;
             return (
               <button
-                id={`${value}_header`} role="tab" tabIndex={0} name={`tabs`} key={value}
-                className={classNames(styles.tabs_headers_option, { [styles.tabs_headers_option_selected]: isSelected })}
-                data-hook={`${value}_Tab`} aria-controls={`${value}_panel`} aria-label={label} aria-selected={isSelected}
+                id={`${value}_header`}
+                role="tab"
+                tabIndex={0}
+                name={`tabs`}
+                key={value}
+                className={classNames(styles.tabs_headers_option, {
+                  [styles.tabs_headers_option_selected]: isSelected,
+                })}
+                data-hook={`${value}_Tab`}
+                aria-controls={`${value}_panel`}
+                aria-label={label}
+                aria-selected={isSelected}
                 onClick={() => {
                   this.setState({ activeTab: value });
                   if (this.props.onTabSelected) {
@@ -77,7 +94,8 @@ export class Tabs extends Component {
                 }}
               >
                 <span className={this.styles.tabs_headers_option_label}>{label}</span>
-              </button>);
+              </button>
+            );
           })}
         </div>
         {this.renderTabs()}

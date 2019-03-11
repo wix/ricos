@@ -1,5 +1,5 @@
-@import "~wix-rich-content-common/dist/statics/styles/consts";
-@import "~wix-rich-content-common/dist/statics/styles/mixins";
+@import '~wix-rich-content-common/dist/statics/styles/consts';
+@import '~wix-rich-content-common/dist/statics/styles/mixins';
 .wrapper {
   :global {
     .DraftEditor-editorContainer,
@@ -8,33 +8,33 @@
       height: inherit;
       text-align: initial;
     }
-    .public-DraftEditor-content[contenteditable=true] {
+    .public-DraftEditor-content[contenteditable='true'] {
       -webkit-user-modify: read-write-plaintext-only;
     }
     .DraftEditor-root {
       position: relative;
     }
     .DraftEditor-alignLeft .public-DraftStyleDefault-block {
-      text-align: left
+      text-align: left;
     }
     .DraftEditor-alignLeft .public-DraftEditorPlaceholder-root {
       left: 0;
-      text-align: left
+      text-align: left;
     }
     .DraftEditor-alignCenter .public-DraftStyleDefault-block {
-      text-align: center
+      text-align: center;
     }
     .DraftEditor-alignCenter .public-DraftEditorPlaceholder-root {
       margin: 0 auto;
       text-align: center;
-      width: 100%
+      width: 100%;
     }
     .DraftEditor-alignRight .public-DraftStyleDefault-block {
-      text-align: right
+      text-align: right;
     }
     .DraftEditor-alignRight .public-DraftEditorPlaceholder-root {
       right: 0;
-      text-align: right
+      text-align: right;
     }
     .public-DraftStyleDefault-block {
       position: relative;

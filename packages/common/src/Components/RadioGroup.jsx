@@ -5,7 +5,6 @@ import styles from '../../statics/styles/radio-group.scss';
 import { mergeStyles } from '../Utils/mergeStyles';
 
 class RadioGroup extends Component {
-
   static propTypes = {
     dataSource: PropTypes.arrayOf(PropTypes.object).isRequired,
     onChange: PropTypes.func.isRequired,
@@ -72,32 +71,47 @@ class RadioGroup extends Component {
     const { styles } = this;
     return (
       <div
-        aria-labelledby={ariaLabelledBy} role="radiogroup" tabIndex="-1" aria-disabled={readOnly}
-        className={classnames(styles.radioGroup, className)} onKeyDown={e => this.onKeyDown(e)}
+        aria-labelledby={ariaLabelledBy}
+        role="radiogroup"
+        tabIndex="-1"
+        aria-disabled={readOnly}
+        className={classnames(styles.radioGroup, className)}
+        onKeyDown={e => this.onKeyDown(e)}
       >
-        {dataSource
-          .map((option, i) => {
-            const checked = option.value === value;
-            const a11yProps = {
-              'aria-checked': checked,
-              'aria-label': option.labelText,
-              'aria-disabled': readOnly
-            };
-            const inputId = `${this.id}_${i}`;
-            return (
-              <label
-                htmlFor={inputId} tabIndex={(i === 0 && !readOnly) ? 0 : -1} name={`${this.id}`} key={option.value}
-                ref={el => this.saveInputRef(el, inputId)} className={styles.radioGroup} data-hook={option.dataHook}
-              >
-                <input
-                  tabIndex="-1" {...a11yProps} id={inputId} className={styles.radioGroup_input}
-                  type={'radio'} checked={checked} onChange={() => onChange(option.value)}
-                />
-                <span className={styles.radioGroup_button} />
-                <span className={styles.radioGroup_label}>{option.labelText}</span>
-              </label>);
-          })}
-      </div>);
+        {dataSource.map((option, i) => {
+          const checked = option.value === value;
+          const a11yProps = {
+            'aria-checked': checked,
+            'aria-label': option.labelText,
+            'aria-disabled': readOnly,
+          };
+          const inputId = `${this.id}_${i}`;
+          return (
+            <label
+              htmlFor={inputId}
+              tabIndex={i === 0 && !readOnly ? 0 : -1}
+              name={`${this.id}`}
+              key={option.value}
+              ref={el => this.saveInputRef(el, inputId)}
+              className={styles.radioGroup}
+              data-hook={option.dataHook}
+            >
+              <input
+                tabIndex="-1"
+                {...a11yProps}
+                id={inputId}
+                className={styles.radioGroup_input}
+                type={'radio'}
+                checked={checked}
+                onChange={() => onChange(option.value)}
+              />
+              <span className={styles.radioGroup_button} />
+              <span className={styles.radioGroup_label}>{option.labelText}</span>
+            </label>
+          );
+        })}
+      </div>
+    );
   }
 }
 

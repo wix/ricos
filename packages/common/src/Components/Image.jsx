@@ -14,7 +14,7 @@ class Image extends Component {
   };
 
   static defaultProps = {
-    resizeMode: 'contain'
+    resizeMode: 'contain',
   };
 
   constructor(props) {
@@ -27,12 +27,13 @@ class Image extends Component {
     const { src, resizeMode, className, alt } = this.props;
     const imageStyle = {
       backgroundImage: `url(${src})`,
-      backgroundSize: resizeMode
+      backgroundSize: resizeMode,
     };
     return (
       <div className={classNames(styles.image_container, className)} style={imageStyle}>
         <img src={src} className={styles.image_placeholder} alt={alt} />
-      </div>);
+      </div>
+    );
   }
 }
 

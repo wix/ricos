@@ -1,4 +1,4 @@
-@import "~wix-rich-content-common/dist/statics/styles/palette";
+@import '~wix-rich-content-common/dist/statics/styles/palette';
 
 .addPluginModal_list {
   margin: 0;
@@ -15,11 +15,11 @@
   vertical-align: middle;
   border-right: 1px solid rgba($secondary-text-color, 0.2);
 
-  &:nth-child(n+4) {
+  &:nth-child(n + 4) {
     border-top: 1px solid rgba($secondary-text-color, 0.2);
   }
 
-  &:nth-child(3n+0) {
+  &:nth-child(3n + 0) {
     border-right: 0 none;
   }
 }

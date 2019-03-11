@@ -10,8 +10,9 @@ import highlightingTheme from '../statics/styles/highlighting-theme.scss';
 const DEFAULT_SYNTAX = 'javascript';
 const CODE_TOKEN_CLASS_NAMES = highlightingTheme;
 
-const PrismToken = ({ className, children, offsetKey }) =>
-  <span key={`codeBlock_${offsetKey}`} children={children} className={className} />;
+const PrismToken = ({ className, children, offsetKey }) => (
+  <span key={`codeBlock_${offsetKey}`} children={children} className={className} />
+);
 
 PrismToken.propTypes = {
   className: PropTypes.string.isRequired,
@@ -70,7 +71,7 @@ export default class PrismDecorator {
     const tokId = parts[1];
     const { type } = this.highlighted[blockKey][tokId];
     return {
-      className: classNames(CODE_TOKEN_CLASS_NAMES[type], this.theme[`codeBlock_${type}`])
+      className: classNames(CODE_TOKEN_CLASS_NAMES[type], this.theme[`codeBlock_${type}`]),
     };
   }
 }
@@ -86,5 +87,5 @@ function getTokenLength(token) {
 
 function addDecorations(decorations, start, end, componentKey) {
   const numRange = range(start, end, 1);
-  numRange.forEach(i => decorations[i] = componentKey);
+  numRange.forEach(i => (decorations[i] = componentKey));
 }

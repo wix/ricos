@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-plugin-code-block",
-  "version": "1.5.14",
+  "version": "3.0.5",
   "author": {
     "name": "Šarūnas Dubinskas",
     "email": "sarunasd@wix.com"
@@ -22,39 +22,38 @@
   "style": "dist/styles.min.scss",
   "scripts": {
     "clean": "rm -rf dist/",
-    "statics": "mkdir -p dist && cp -R statics dist/statics",
+    "statics": "mkdir -p dist && cp -R statics dist",
     "prebuild": "npm run statics",
     "build": "rollup --environment MODULE_NAME:plugin-code-block -c ../../rollup.config.js",
     "build:dev": "NODE_ENV=development npm run build",
     "build:analyze": "npm run build -- --environment MODULE_ANALYZE && open stats.html",
-    "watch": "MODULE_WATCH=1 npm run build -- --watch",
-    "release": "wnpm-release --no-shrinkwrap",
-    "test": "eslint 'src/**/*.{js,jsx}'"
+    "watch": "NODE_ENV=development MODULE_WATCH=1 npm run build -- --watch",
+    "lint": "eslint 'src/**/*.{js,jsx}'"
   },
   "peerDependencies": {
-    "@babel/runtime": "7.1.2",
+    "@babel/runtime": "7.2.0",
     "@wix/draft-js": "0.10.272",
     "classnames": "^2.0.0",
     "lodash": "^4.0.0",
     "prop-types": "^15.0.0",
-    "react": "^15.0.0 || ^16.0.0",
-    "react-dom": "^15.0.0 || ^16.0.0"
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2"
   },
   "devDependencies": {
-    "@babel/runtime": "7.1.2",
+    "@babel/runtime": "7.2.0",
     "@wix/draft-js": "0.10.272",
     "classnames": "^2.2.6",
     "eslint": "^4.19.1",
     "lodash": "^4.17.10",
     "prop-types": "^15.6.2",
-    "react": "15.5.4",
-    "react-dom": "15.5.4",
-    "rollup": "^0.64.1"
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2",
+    "rollup": "^1.1.0"
   },
   "dependencies": {
     "draft-js-code": "^0.3.0",
     "prismjs": "^1.15.0",
-    "wix-rich-content-common": "^1.5.13"
+    "wix-rich-content-common": "^3.0.5"
   },
   "unpkg": true,
   "publishConfig": {

@@ -3,12 +3,54 @@
   "type": "object",
   "properties": {
     "src": {
-      "$id": "/properties/src",
-      "type": "string",
-      "title": "Video Source URL",
-      "default": "",
-      "examples": [
-        "https://www.youtube.com/watch?v=eqZVIiD6wSg"
+      "oneOf": [
+        {
+          "$id": "/properties/src",
+          "type": "string",
+          "title": "Video Source URL",
+          "default": "",
+          "examples": ["https://www.youtube.com/watch?v=eqZVIiD6wSg"]
+        },
+        {
+          "$id": "/properties/src",
+          "type": "object",
+          "properties": {
+            "pathname": {
+              "$id": "/properties/src/pathname",
+              "type": "string",
+              "title": "Video Source Pathname",
+              "default": "",
+              "examples": ["video-sample/jellyfish-25-mbps-hd-hevc.mp4"]
+            },
+            "thumbnail": {
+              "$id": "/properties/src/thumbnail",
+              "type": "object",
+              "properties": {
+                "pathname": {
+                  "$id": "/properties/src/thumbnail/pathname",
+                  "type": "string",
+                  "title": "Video Thumbnail Pathname",
+                  "default": "",
+                  "examples": ["media/441c23_84f5c058e5e4479ab9e626cd5560a21bf002.jpg"]
+                },
+                "height": {
+                  "$id": "/properties/src/thumbnail/height",
+                  "type": "number",
+                  "title": "Video Thumbnail Height",
+                  "default": "",
+                  "examples": ["1080"]
+                },
+                "width": {
+                  "$id": "/properties/src/thumbnail/width",
+                  "type": "number",
+                  "title": "Video Thumbnail Width",
+                  "default": "",
+                  "examples": ["1920"]
+                }
+              }
+            }
+          }
+        }
       ]
     },
     "isCustomVideo": {
@@ -26,45 +68,31 @@
           "type": "string",
           "title": "Size",
           "default": "large",
-          "examples": [
-            "medium",
-            "small",
-            "large"
-          ]
+          "examples": ["medium", "small", "large"]
         },
         "alignment": {
           "$id": "/properties/config/properties/alignment",
           "type": "string",
           "title": "The Alignment Schema ",
           "default": "center",
-          "examples": [
-            "left",
-            "right",
-            "center"
-          ]
+          "examples": ["left", "right", "center"]
         },
         "textWrap": {
           "$id": "/properties/config/properties/textWrap",
           "type": "string",
           "title": "The Textwrap Schema ",
           "default": "nowrap",
-          "examples": [
-            "nowrap"
-          ]
+          "examples": ["nowrap"]
         },
         "key": {
           "$id": "/properties/config/properties/key",
           "type": "string",
           "title": "The Key Schema ",
           "default": "",
-          "examples": [
-            "7mib0"
-          ]
+          "examples": ["7mib0"]
         }
       }
     }
   },
-  "required": [
-    "src"
-  ]
+  "required": ["src"]
 }

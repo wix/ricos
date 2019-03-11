@@ -1,5 +1,6 @@
 import richContentViewerTheme from './viewer-example-app.theme.scss';
 import linkTheme from './text-link.theme.scss';
+import pluginLinkTheme from './plugin-link.theme.scss';
 import hashtagTheme from './text-hashtag.theme.scss';
 
 import dividerTheme from './divider.theme.scss';
@@ -13,14 +14,14 @@ import loaderTheme from './loader.theme.scss';
 import tooltipTheme from './tooltip.theme.scss';
 
 const modalTheme = {
-  content: {
-  }
+  content: {},
 };
 
 const theme = {
   modalTheme,
   ...richContentViewerTheme,
   ...linkTheme,
+  ...pluginLinkTheme,
   ...hashtagTheme,
 
   // plugin components

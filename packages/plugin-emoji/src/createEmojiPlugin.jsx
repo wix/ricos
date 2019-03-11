@@ -46,9 +46,9 @@ const createExternalEmojiPlugin = (config = {}) => {
       isMobile,
       t,
       settings,
-      ...rest
+      ...rest,
     },
-    plugin,
+    plugin
   );
 };
 

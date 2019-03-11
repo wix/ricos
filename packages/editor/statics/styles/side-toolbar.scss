@@ -1,38 +1,38 @@
-@import "~wix-rich-content-common/dist/statics/styles/mixins";
-@import "~wix-rich-content-common/dist/statics/styles/palette";
+@import '~wix-rich-content-common/dist/statics/styles/mixins';
+@import '~wix-rich-content-common/dist/statics/styles/palette';
 
 .sideToolbar_floatingContainer {
-    position: relative;
-    pointer-events: none;
+  position: relative;
+  pointer-events: none;
 }
 
 .sideToolbar_floatingIcon {
-    border: none;
-    background-color: transparent;
-    padding: 0;
-    box-sizing: border-box;
-    cursor: pointer;
-    height: 25px;
-    width: 25px;
-    line-height: normal;
-    text-align: center;
-    color: $secondary-text-color;
-    pointer-events: initial;
+  border: none;
+  background-color: transparent;
+  padding: 0;
+  box-sizing: border-box;
+  cursor: pointer;
+  height: 25px;
+  width: 25px;
+  line-height: normal;
+  text-align: center;
+  color: $secondary-text-color;
+  pointer-events: initial;
 
-    &:hover {
-        color: $accent-color;
-    }
+  &:hover {
+    color: $accent-color;
+  }
 }
 
 .sideToolbar {
-    position: absolute;
-    top: -15px;
-    transform: translate(-50%);
-    color: $secondary-text-color;
-    border: 1px solid #ededed;
-    background: #fff;
-    border-radius: 6px;
-    padding: 9px 19px;
-    box-sizing: border-box;
-    white-space: nowrap;
+  position: absolute;
+  top: -15px;
+  transform: translate(-50%);
+  color: $secondary-text-color;
+  border: 1px solid #ededed;
+  background: #fff;
+  border-radius: 6px;
+  padding: 9px 19px;
+  box-sizing: border-box;
+  white-space: nowrap;
 }

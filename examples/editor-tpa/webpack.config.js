@@ -17,36 +17,36 @@ module.exports = {
     'wix-rich-content-editor': 'WixRichContentEditor',
   },
   module: {
-    rules: [{
-      test: /\.jsx?$/,
-      loader: 'babel-loader',
-      options: {
-        presets: ['env', 'stage-2', 'react'],
-        plugins: ['transform-class-properties']
-      },
-    },
-    {
-      test: /\.scss$/,
-      use: [{
-        loader: 'style-loader',
-      },
+    rules: [
       {
-        loader: 'css-loader',
+        test: /\.jsx?$/,
+        loader: 'babel-loader',
         options: {
-          modules: true,
+          presets: ['env', 'stage-2', 'react'],
+          plugins: ['transform-class-properties'],
         },
       },
       {
-        loader: 'sass-loader',
-      }
-      ],
-    },
-    {
-      test: /\.(svg|woff|woff2|ttf|eot)$/,
-      loaders: [
-        'url-loader'
-      ]
-    }
+        test: /\.scss$/,
+        use: [
+          {
+            loader: 'style-loader',
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+            },
+          },
+          {
+            loader: 'sass-loader',
+          },
+        ],
+      },
+      {
+        test: /\.(svg|woff|woff2|ttf|eot)$/,
+        loaders: ['url-loader'],
+      },
     ],
   },
   resolve: {

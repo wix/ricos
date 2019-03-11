@@ -9,17 +9,18 @@ import { DropdownArrowIcon } from '../Icons';
 const DEFAULT_PLACEHOLDER_STRING = 'Select...';
 
 class Dropdown extends Component {
-
   static propTypes = {
-    options: PropTypes.arrayOf(PropTypes.shape({
-      name: PropTypes.string,
-      type: PropTypes.type,
-      items: PropTypes.array,
-      value: PropTypes.any.isRequired,
-      label: PropTypes.string,
-      icon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-      component: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-    })).isRequired,
+    options: PropTypes.arrayOf(
+      PropTypes.shape({
+        name: PropTypes.string,
+        type: PropTypes.type,
+        items: PropTypes.array,
+        value: PropTypes.any.isRequired,
+        label: PropTypes.string,
+        icon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+        component: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+      })
+    ).isRequired,
     onChange: PropTypes.func.isRequired,
     theme: PropTypes.object.isRequired,
     value: PropTypes.number,
@@ -35,7 +36,7 @@ class Dropdown extends Component {
     super(props);
     this.state = {
       selected: this.getCurrentValue(props),
-      isOpen: false
+      isOpen: false,
     };
     this.mounted = true;
     this.styles = mergeStyles({ styles, theme: props.theme });
@@ -69,7 +70,7 @@ class Dropdown extends Component {
     } else {
       return {
         label: props.placeholder || DEFAULT_PLACEHOLDER_STRING,
-        value: ''
+        value: '',
       };
     }
   }
@@ -86,7 +87,7 @@ class Dropdown extends Component {
 
     if (!this.props.disabled) {
       this.setState({
-        isOpen: !this.state.isOpen
+        isOpen: !this.state.isOpen,
       });
     }
   }
@@ -98,7 +99,7 @@ class Dropdown extends Component {
         label,
         component,
       },
-      isOpen: false
+      isOpen: false,
     };
     this.fireChangeEvent(newState);
     this.setState(newState);
@@ -108,22 +109,27 @@ class Dropdown extends Component {
     if (newState.selected !== this.state.selected && this.props.onChange) {
       this.props.onChange(newState.selected);
     }
-  }
+  };
 
   renderOption(option) {
     const { styles } = this;
     const optionClass = classNames({
       [styles['Dropdown-option']]: true,
-      [styles['Dropdown-option-selected']]: option === this.state.selected
+      [styles['Dropdown-option-selected']]: option === this.state.selected,
     });
 
     const { value, label, icon: Icon, component: OptionComponent } = option;
 
     return (
       <button
-        key={value} className={optionClass} onMouseDown={this.setValue.bind(this, value, label, OptionComponent)}
-        data-hook={`${label || value}_dropdown_option`} onClick={this.setValue.bind(this, value, label, OptionComponent)}
-        role="option" aria-selected={option === this.state.selected} aria-label={label}
+        key={value}
+        className={optionClass}
+        onMouseDown={this.setValue.bind(this, value, label, OptionComponent)}
+        data-hook={`${label || value}_dropdown_option`}
+        onClick={this.setValue.bind(this, value, label, OptionComponent)}
+        role="option"
+        aria-selected={option === this.state.selected}
+        aria-label={label}
       >
         {Icon && <Icon className={styles['Dropdown-option-icon']} />}
         {label && <span className={styles['Dropdown-option-label']}>{label}</span>}
@@ -136,7 +142,7 @@ class Dropdown extends Component {
     const { options } = this.props;
     const ops = options.map(option => {
       if (option.type === 'group') {
-        const groupTitle = (<div className={styles['Dropdown-title']}>{option.name}</div>);
+        const groupTitle = <div className={styles['Dropdown-title']}>{option.name}</div>;
         const _options = option.items.map(item => this.renderOption(item));
 
         return (
@@ -162,46 +168,65 @@ class Dropdown extends Component {
         }
       }
     }
-  }
+  };
 
   render() {
     const { styles } = this;
     const disabledClass = this.props.disabled ? 'Dropdown-disabled' : '';
     const selected = this.state.selected;
 
-    const placeHolderValue = typeof selected === 'string' ? selected : (() => {
-      const label = selected.label || '';
-      const Icon = selected.icon || null;
-      const OptionComponent = selected.component || null;
+    const placeHolderValue =
+      typeof selected === 'string'
+        ? selected
+        : (() => {
+            const label = selected.label || '';
+            const Icon = selected.icon || null;
+            const OptionComponent = selected.component || null;
 
-      return (
-        <span>
-          {Icon ? <Icon className={styles['Dropdown-option-icon']} /> : null}
-          {label && <span className={styles['Dropdown-option-label']}>{label}</span>}
-          {OptionComponent && <OptionComponent />}
-        </span>
-      );
-    })();
-    const value = (<div className={styles['Dropdown-placeholder']} role="textbox">{placeHolderValue}</div>);
-    const menu = this.state.isOpen ? <div className={styles['Dropdown-menu']} role="listbox" id={`${this.id}_menu`}>{this.buildMenu()}</div> : null;
+            return (
+              <span>
+                {Icon ? <Icon className={styles['Dropdown-option-icon']} /> : null}
+                {label && <span className={styles['Dropdown-option-label']}>{label}</span>}
+                {OptionComponent && <OptionComponent />}
+              </span>
+            );
+          })();
+    const value = (
+      <div className={styles['Dropdown-placeholder']} role="textbox">
+        {placeHolderValue}
+      </div>
+    );
+    const menu = this.state.isOpen ? (
+      <div className={styles['Dropdown-menu']} role="listbox" id={`${this.id}_menu`}>
+        {this.buildMenu()}
+      </div>
+    ) : null;
 
     const dropdownClass = classNames({
       [styles['Dropdown-root']]: true,
-      [styles['Dropdown-root-isOpen']]: this.state.isOpen
+      [styles['Dropdown-root-isOpen']]: this.state.isOpen,
     });
     const { dataHook } = this.props;
 
     return (
       <div className={dropdownClass}>
         <button
-          role="combobox" aria-controls={`${this.id}_menu`} aria-expanded={this.state.isOpen}
-          className={classNames(styles['Dropdown-control'], this.props.controlClassName, disabledClass)}
-          data-hook={dataHook} onClick={this.handleMouseDown.bind(this)} onTouchEnd={this.handleMouseDown.bind(this)}
+          role="combobox"
+          aria-controls={`${this.id}_menu`}
+          aria-expanded={this.state.isOpen}
+          className={classNames(
+            styles['Dropdown-control'],
+            this.props.controlClassName,
+            disabledClass
+          )}
+          data-hook={dataHook}
+          onClick={this.handleMouseDown.bind(this)}
+          onTouchEnd={this.handleMouseDown.bind(this)}
         >
           {value}
           <span
             className={classNames(styles['Dropdown-arrow'], {
-              [styles['Dropdown-arrow-isOpen']]: this.state.isOpen
+              [styles['Dropdown-arrow-isOpen']]: this.state.isOpen,
             })}
           >
             <DropdownArrowIcon />

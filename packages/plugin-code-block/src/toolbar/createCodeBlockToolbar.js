@@ -11,16 +11,18 @@ export default ({ setEditorState }) => ({
       position: {
         mobile: 7,
       },
-      keyBindings: [{
-        keyCommand: {
-          command: 'code-block',
-          modifiers: [MODIFIERS.COMMAND],
-          key: '0'
+      keyBindings: [
+        {
+          keyCommand: {
+            command: 'code-block',
+            modifiers: [MODIFIERS.COMMAND],
+            key: '0',
+          },
+          commandHandler: editorState => {
+            setEditorState(toggleBlockTypeAndEnsureSpaces(CODE_BLOCK_TYPE, editorState));
+          },
         },
-        commandHandler: editorState => {
-          setEditorState(toggleBlockTypeAndEnsureSpaces(CODE_BLOCK_TYPE, editorState));
-        }
-      }]
-    }
-  })
+      ],
+    },
+  }),
 });

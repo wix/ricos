@@ -32,7 +32,7 @@ const VALIDATORS = {
 
 const NORMALIZERS = {
   [SRC_TYPE_HTML]: identity,
-  [SRC_TYPE_URL]: url => hasProtocol(url) ? url : `https://${trimStart(url, '//')}`,
+  [SRC_TYPE_URL]: url => (hasProtocol(url) ? url : `https://${trimStart(url, '//')}`),
 };
 
 class HtmlEditPanel extends Component {
@@ -110,8 +110,16 @@ class HtmlEditPanel extends Component {
           value={this.state.srcType}
           onChange={this.handleSrcTypeChange}
           dataSource={[
-            { value: SRC_TYPE_HTML, labelText: t('HtmlEditPanel_Code'), dataHook: 'htmlEditPanel_radioHtml' },
-            { value: SRC_TYPE_URL, labelText: t('HtmlEditPanel_Source'), dataHook: 'htmlEditPanel_radioUrl' },
+            {
+              value: SRC_TYPE_HTML,
+              labelText: t('HtmlEditPanel_Code'),
+              dataHook: 'htmlEditPanel_radioHtml',
+            },
+            {
+              value: SRC_TYPE_URL,
+              labelText: t('HtmlEditPanel_Source'),
+              dataHook: 'htmlEditPanel_radioUrl',
+            },
           ]}
           inline
         />
@@ -158,10 +166,7 @@ class HtmlEditPanel extends Component {
             {t('HtmlEditPanel_Cancel')}
           </button>
           <button
-            className={classNames(
-              styles.htmlEditPanel_button,
-              styles.htmlEditPanel_primaryButton
-            )}
+            className={classNames(styles.htmlEditPanel_button, styles.htmlEditPanel_primaryButton)}
             onClick={this.handleUpdateClick}
             data-hook="htmlEditPanel_Update"
           >

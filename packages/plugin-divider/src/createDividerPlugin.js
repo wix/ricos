@@ -18,11 +18,11 @@ const createDividerPlugin = (config = {}) => {
       helpers,
       styles,
       theme,
-      t
+      t,
     }),
     helpers,
     t,
-    ...rest
+    ...rest,
   });
 };
 

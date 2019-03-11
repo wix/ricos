@@ -9,6 +9,7 @@
   @import 'wix-rich-content-plugin-link/dist/styles.min';
   @import 'wix-rich-content-plugin-mentions/dist/styles.min';
   @import 'wix-rich-content-plugin-video/dist/styles.min';
+  @import 'wix-rich-content-plugin-image/dist/styles.min';
 }
 
 .wrapper {
@@ -63,7 +64,6 @@
   padding: 20px 40px;
 }
 
-
 .columns {
   width: 100%;
   height: 100%;
@@ -80,7 +80,7 @@
 }
 
 .column + .column {
-  border-left: 1px solid rgba(0,0,0,0.3);
+  border-left: 1px solid rgba(0, 0, 0, 0.3);
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;

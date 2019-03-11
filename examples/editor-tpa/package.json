@@ -12,13 +12,13 @@
   },
   "author": "arturc@wix.com",
   "dependencies": {
-    "react": "15.5.4",
-    "react-dom": "15.5.4",
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2",
     "react-height": "^3.0.0"
   },
   "devDependencies": {
-    "@babel/core": "7.1.2",
-    "babel-jest": "^23.2.0",
-    "webpack-dev-server": "^3.1.4"
+    "@babel/core": "7.2.2",
+    "babel-jest": "^23.6.0",
+    "webpack-dev-server": "^3.1.14"
   }
 }

@@ -18,7 +18,17 @@ const DEFAULTS = {
   textWrap: null,
 };
 
-const createBaseComponent = ({ PluginComponent, theme, settings, pubsub, helpers, anchorTarget, relValue, t, isMobile }) => {
+const createBaseComponent = ({
+  PluginComponent,
+  theme,
+  settings,
+  pubsub,
+  helpers,
+  anchorTarget,
+  relValue,
+  t,
+  isMobile,
+}) => {
   class WrappedComponent extends Component {
     static displayName = createHocName('BaseComponent', PluginComponent);
 
@@ -54,7 +64,11 @@ const createBaseComponent = ({ PluginComponent, theme, settings, pubsub, helpers
       pubsub.subscribe('componentTextWrap', this.onComponentTextWrapChange);
       pubsub.subscribe('editorBounds', this.onEditorBoundsChange);
       const blockKey = this.props.block.getKey();
-      this.unsubscribeOnBlock = pubsub.subscribeOnBlock({ key: 'componentLink', blockKey, callback: this.onComponentLinkChange });
+      this.unsubscribeOnBlock = pubsub.subscribeOnBlock({
+        key: 'componentLink',
+        blockKey,
+        callback: this.onComponentLinkChange,
+      });
     }
 
     componentDidUpdate() {
@@ -87,7 +101,9 @@ const createBaseComponent = ({ PluginComponent, theme, settings, pubsub, helpers
     onComponentDataChange = componentData => {
       if (this.isMeAndIdle) {
         this.setState({ componentData: componentData || {} }, () => {
-          const { blockProps: { setData } } = this.props;
+          const {
+            blockProps: { setData },
+          } = this.props;
           setData(componentData);
         });
       }
@@ -120,11 +136,13 @@ const createBaseComponent = ({ PluginComponent, theme, settings, pubsub, helpers
     onComponentLinkChange = linkData => {
       const { url, targetBlank, nofollow } = linkData || {};
       if (this.isMeAndIdle) {
-        const link = url ? {
-          url,
-          target: targetBlank === true ? '_blank' : (anchorTarget || '_self'),
-          rel: nofollow === true ? 'nofollow' : (relValue || 'noopener')
-        } : null;
+        const link = url
+          ? {
+              url,
+              target: targetBlank === true ? '_blank' : anchorTarget || '_self',
+              rel: nofollow === true ? 'nofollow' : relValue || 'noopener',
+            }
+          : null;
 
         this.updateComponentConfig({ link });
       }
@@ -133,7 +151,7 @@ const createBaseComponent = ({ PluginComponent, theme, settings, pubsub, helpers
     deleteBlock = () => {
       pubsub.set('visibleBlock', null);
       this.props.blockProps.deleteBlock();
-    }
+    };
 
     updateComponent() {
       const { block, blockProps } = this.props;
@@ -214,15 +232,30 @@ const createBaseComponent = ({ PluginComponent, theme, settings, pubsub, helpers
           [theme.pluginContainerReadOnly]: readOnly,
           [theme.pluginContainerMobile]: isMobile,
         },
-        isFunction(PluginComponent.WrappedComponent.alignmentClassName) ?
-          PluginComponent.WrappedComponent.alignmentClassName(this.state.componentData, theme, Styles, isMobile) :
-          alignmentClassName(this.state.componentData, theme, Styles, isMobile),
-        isFunction(PluginComponent.WrappedComponent.sizeClassName) ?
-          PluginComponent.WrappedComponent.sizeClassName(this.state.componentData, theme, Styles, isMobile) :
-          sizeClassName(this.state.componentData, theme, Styles, isMobile),
-        isFunction(PluginComponent.WrappedComponent.textWrapClassName) ?
-          PluginComponent.WrappedComponent.textWrapClassName(this.state.componentData, theme, Styles, isMobile) :
-          textWrapClassName(this.state.componentData, theme, Styles, isMobile),
+        isFunction(PluginComponent.WrappedComponent.alignmentClassName)
+          ? PluginComponent.WrappedComponent.alignmentClassName(
+              this.state.componentData,
+              theme,
+              Styles,
+              isMobile
+            )
+          : alignmentClassName(this.state.componentData, theme, Styles, isMobile),
+        isFunction(PluginComponent.WrappedComponent.sizeClassName)
+          ? PluginComponent.WrappedComponent.sizeClassName(
+              this.state.componentData,
+              theme,
+              Styles,
+              isMobile
+            )
+          : sizeClassName(this.state.componentData, theme, Styles, isMobile),
+        isFunction(PluginComponent.WrappedComponent.textWrapClassName)
+          ? PluginComponent.WrappedComponent.textWrapClassName(
+              this.state.componentData,
+              theme,
+              Styles,
+              isMobile
+            )
+          : textWrapClassName(this.state.componentData, theme, Styles, isMobile),
         className || '',
         {
           [Styles.hasFocus]: isActive,
@@ -259,19 +292,35 @@ const createBaseComponent = ({ PluginComponent, theme, settings, pubsub, helpers
       if (!isNil(link)) {
         anchorProps = {
           href: normalizeUrl(link.url),
-          target: link.target ? link.target : (anchorTarget || '_self'),
-          rel: link.rel ? link.rel : (relValue || 'noopener')
+          target: link.target ? link.target : anchorTarget || '_self',
+          rel: link.rel ? link.rel : relValue || 'noopener',
         };
       }
-      const anchorClass = classNames(
-        Styles.anchor, {
-          [Styles.isImage]: getDisplayName(PluginComponent).toLowerCase().indexOf('image') !== -1,
-        });
+      const anchorClass = classNames(Styles.absFull, Styles.anchor, {
+        [Styles.isImage]:
+          getDisplayName(PluginComponent)
+            .toLowerCase()
+            .indexOf('image') !== -1,
+      });
       /* eslint-disable jsx-a11y/anchor-has-content */
       return (
         <div style={sizeStyles} className={ContainerClassNames}>
-          {!isNil(link) ? <div>{component}<a className={anchorClass} {...anchorProps} /></div> : component}
-          {!this.state.readOnly && <div role="none" data-hook={'componentOverlay'} onClick={onClick} className={overlayClassNames} />}
+          {!isNil(link) ? (
+            <div>
+              {component}
+              <a className={anchorClass} {...anchorProps} />
+            </div>
+          ) : (
+            component
+          )}
+          {!this.state.readOnly && (
+            <div
+              role="none"
+              data-hook={'componentOverlay'}
+              onClick={onClick}
+              className={overlayClassNames}
+            />
+          )}
         </div>
       );
       /* eslint-enable jsx-a11y/anchor-has-content */

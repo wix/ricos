@@ -17,10 +17,11 @@ const createDropdownOptionComponent = ({ type, styles }) => () => {
   );
 };
 
-export const getDropdownOptions = styles => LINE_TYPES.map(type => ({
-  value: type,
-  component: createDropdownOptionComponent({ type, styles })
-}));
+export const getDropdownOptions = styles =>
+  LINE_TYPES.map(type => ({
+    value: type,
+    component: createDropdownOptionComponent({ type, styles }),
+  }));
 
 export const createDropdownValueGetter = dropdownOptions => store => {
   const componentData = store.get('componentData') || {};

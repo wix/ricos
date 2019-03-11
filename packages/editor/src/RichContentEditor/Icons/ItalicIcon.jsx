@@ -1,7 +1,6 @@
 /* eslint-disable max-len */
 import React from 'react';
 
-
 const ItalicIcon = props => (
   <svg
     xmlnsXlink="http://www.w3.org/1999/xlink"

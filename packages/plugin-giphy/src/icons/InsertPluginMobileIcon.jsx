@@ -2,13 +2,7 @@
 import React from 'react';
 
 const InsertPluginMobileIcon = props => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width={11}
-    height={14}
-    viewBox="0 0 11 14"
-    {...props}
-  >
+  <svg xmlns="http://www.w3.org/2000/svg" width={11} height={14} viewBox="0 0 11 14" {...props}>
     <g fill="none" fillRule="evenodd">
       <path stroke="currentColor" d="M.5.5v13h10V5.499H5.49V.5H.5z" />
       <path

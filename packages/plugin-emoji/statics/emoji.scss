@@ -5,7 +5,8 @@
   justify-content: center;
 }
 
-.emojiSelectButton, .emojiSelectButtonPressed {
+.emojiSelectButton,
+.emojiSelectButtonPressed {
   padding: 0;
   box-sizing: border-box;
   border: 0;
@@ -50,7 +51,7 @@
   left: 235px;
   font-style: italic;
   font-size: 12px;
-  content: "By EmojiOne"
+  content: 'By EmojiOne';
 }
 
 .emojiSelectPopoverGroups {
@@ -121,8 +122,8 @@
   }
 }
 
-
-.emojiSelectPopoverEntry, .emojiSelectPopoverEntryFocused {
+.emojiSelectPopoverEntry,
+.emojiSelectPopoverEntryFocused {
   padding: 0;
   width: 100%;
   height: 100%;
@@ -159,7 +160,8 @@
   }
 }
 
-.emojiSelectPopoverNavEntry, .emojiSelectPopoverNavEntryActive {
+.emojiSelectPopoverNavEntry,
+.emojiSelectPopoverNavEntryActive {
   padding: 0;
   width: 100%;
   height: 100%;
@@ -181,8 +183,8 @@
   width: 4px;
   background-color: #e0e0e0;
   border-radius: 2px;
-  opacity: .1;
-  transition: opacity .4s;
+  opacity: 0.1;
+  transition: opacity 0.4s;
 }
 
 .emojiSelectPopoverScrollbarThumb {
@@ -192,12 +194,12 @@
 }
 
 .emojiSelectPopoverGroups:hover .emojiSelectPopoverScrollbar {
-  opacity: .3;
+  opacity: 0.3;
 }
 
 .emojiSelectPopoverGroups .emojiSelectPopoverScrollbar:hover,
 .emojiSelectPopoverGroups .emojiSelectPopoverScrollbar:active {
-  opacity: .6;
+  opacity: 0.6;
 }
 .emoji {
   background-position: center;
@@ -222,7 +224,7 @@
   */
   max-height: 1em;
   line-height: inherit;
-  margin: -.2ex 0em .2ex;
+  margin: -0.2ex 0em 0.2ex;
   /*
   In the past we used opacity: 0 to hide the original Emoji icon no matter what
   system it is. Recently we switched to color: transparent since it started to
@@ -230,11 +232,12 @@
   */
   color: transparent;
 }
-.emojiSuggestionsEntry, .emojiSuggestionsEntryFocused {
+.emojiSuggestionsEntry,
+.emojiSuggestionsEntryFocused {
   padding: 5px 10px;
   display: flex;
   align-items: center;
-  transition: background-color 0.4s cubic-bezier(.27,1.27,.48,.56);
+  transition: background-color 0.4s cubic-bezier(0.27, 1.27, 0.48, 0.56);
 }
 
 .emojiSuggestionsEntry:active {
@@ -270,7 +273,7 @@
   max-width: 440px;
   background: #fff;
   border-radius: 2px;
-  box-shadow: 0px 4px 30px 0px rgba(220,220,220,1);
+  box-shadow: 0px 4px 30px 0px rgba(220, 220, 220, 1);
   cursor: pointer;
   padding-top: 8px;
   padding-bottom: 8px;

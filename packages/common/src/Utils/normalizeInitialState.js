@@ -15,7 +15,12 @@ const normalizeEntityType = (entityType, entityTypeMap) => {
 const dataNormalizers = {
   LINK: (componentData, { anchorTarget, relValue }) => {
     const { targetBlank, nofollow, target, rel } = componentData;
-    if (isUndefined(targetBlank) && isUndefined(nofollow) && !isUndefined(target) && !isUndefined(rel)) {
+    if (
+      isUndefined(targetBlank) &&
+      isUndefined(nofollow) &&
+      !isUndefined(target) &&
+      !isUndefined(rel)
+    ) {
       return componentData;
     }
 
@@ -23,13 +28,14 @@ const dataNormalizers = {
     delete componentData.nofollow;
 
     return Object.assign(componentData, {
-      target: targetBlank ? '_blank' : (anchorTarget || '_self'),
-      rel: nofollow ? 'nofollow' : (relValue || 'noopener')
+      target: targetBlank ? '_blank' : anchorTarget || '_self',
+      rel: nofollow ? 'nofollow' : relValue || 'noopener',
     });
   },
 };
 
-const normalizeComponentData = (type, componentData, config) => dataNormalizers[type](componentData, config);
+const normalizeComponentData = (type, componentData, config) =>
+  dataNormalizers[type](componentData, config);
 
 // TODO: create configNormalizers map and separate the IMAGE and VIDEO normalizers
 const normalizeComponentConfig = componentData => {
@@ -70,9 +76,11 @@ const normalizeComponentConfig = componentData => {
 };
 /* eslint-enable */
 
-const shouldNormalizeEntityConfig = (entity, normalizationMap) => normalizationMap.includes(entity.type) && entity.data;
+const shouldNormalizeEntityConfig = (entity, normalizationMap) =>
+  normalizationMap.includes(entity.type) && entity.data;
 
-const shouldNormalizeEntityData = (entity, normalizationMap) => normalizationMap.includes(entity.type) && entity.data;
+const shouldNormalizeEntityData = (entity, normalizationMap) =>
+  normalizationMap.includes(entity.type) && entity.data;
 
 export default (initialState, config) => {
   const entityTypeMap = {
@@ -98,17 +106,20 @@ export default (initialState, config) => {
         }
       })
       .map(removeInlineHeaderRanges),
-    entityMap: mapValues(
-      entityMap,
-      entity => shouldNormalizeEntityConfig(entity, Object.keys(entityTypeMap.configNormalization)) ? {
-        ...entity,
-        type: normalizeEntityType(entity.type, entityTypeMap.configNormalization),
-        data: normalizeComponentConfig(cloneDeep(entity.data), config)
-      } : shouldNormalizeEntityData(entity, Object.keys(entityTypeMap.dataNormalization)) ? {
-        ...entity,
-        type: normalizeEntityType(entity.type, entityTypeMap.dataNormalization),
-        data: normalizeComponentData(entity.type, cloneDeep(entity.data), config)
-      } : entity
+    entityMap: mapValues(entityMap, entity =>
+      shouldNormalizeEntityConfig(entity, Object.keys(entityTypeMap.configNormalization))
+        ? {
+            ...entity,
+            type: normalizeEntityType(entity.type, entityTypeMap.configNormalization),
+            data: normalizeComponentConfig(cloneDeep(entity.data), config),
+          }
+        : shouldNormalizeEntityData(entity, Object.keys(entityTypeMap.dataNormalization))
+        ? {
+            ...entity,
+            type: normalizeEntityType(entity.type, entityTypeMap.dataNormalization),
+            data: normalizeComponentData(entity.type, cloneDeep(entity.data), config),
+          }
+        : entity
     ),
   };
 };

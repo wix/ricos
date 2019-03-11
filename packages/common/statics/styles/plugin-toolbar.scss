@@ -56,7 +56,7 @@
   cursor: pointer;
   border: none;
   border-left: 1px solid $toolbar-border-color;
-  >i {
+  > i {
     display: inline-block;
     width: 6px;
     height: 6px;
@@ -87,7 +87,6 @@
   transform: rotate(225deg);
 }
 
-
 @include phone {
   .pluginToolbar_buttons {
     display: flex;
@@ -117,7 +116,7 @@
   margin: -90px 0;
   pointer-events: none;
   & > * {
-      pointer-events: initial;
+    pointer-events: initial;
   }
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: auto;

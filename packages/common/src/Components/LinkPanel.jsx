@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import isUndefined from 'lodash/isUndefined';
-import isEqual from 'lodash/isEqual';
 
 import { mergeStyles } from '../Utils/mergeStyles';
 import { isValidUrl } from '../Utils/urlValidators';
@@ -10,133 +8,121 @@ import Tooltip from './Tooltip';
 import Checkbox from './Checkbox';
 import { ErrorIcon } from '../Icons';
 import styles from '../../statics/styles/link-panel.scss';
+import { LinkPanelDropdown } from './LinkPanelDropdown';
 
 class LinkPanel extends Component {
-  constructor(props) {
-    super(props);
-    this.state = this.propsToState(props);
-    this.styles = mergeStyles({ styles, theme: props.theme });
-    const { t, isImageSettings } = props;
-    this.firstCheckboxText = t('LinkPanel_Target_Checkbox');
-    this.secondCheckboxText = t('LinkPanel_Nofollow_Checkbox');
-    this.inputPlaceholder = isImageSettings ? t('LinkPanel_InputPlaceholder_ImageSettings') : t('LinkPanel_InputPlaceholder');
-    this.errorTooltipText = t('LinkPanel_ErrorTooltip');
-  }
+  state = { showValidation: false };
+  static defaultProps = {
+    targetBlank: true,
+    showTargetBlankCheckbox: true,
+    showRelValueCheckbox: true,
+  };
+  styles = mergeStyles({ styles, theme: this.props.theme });
 
   componentDidMount() {
-    if (!this.props.isImageSettings) {
-      this.input.focus();
-    }
+    this.onChange({ isValid: this.isValidUrl(this.props.linkValues.url) });
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (!isEqual(this.props, nextProps)) {
-      this.setState(this.propsToState(nextProps));
-    }
-  }
-
-  propsToState = props => {
-    const state = {
-      url: props.url || '',
-      intermediateUrl: props.intermediateUrl || props.url || '',
-      targetBlank: isUndefined(props.targetBlank) ? true : props.targetBlank,
-      nofollow: isUndefined(props.nofollow) ? false : props.nofollow
-    };
-    state.isValidUrl = isValidUrl(state.intermediateUrl) || (state.intermediateUrl === '');
-    return state;
-  };
-
-  handleIntermediateUrlChange = event => {
-    const { onIntermediateUrlChange } = this.props;
-    if (onIntermediateUrlChange) {
-      onIntermediateUrlChange(event.target.value);
-    } else {
-      this.setState({ intermediateUrl: event.target.value });
-    }
-  };
-
-  handleUrlChange = () => {
-    const { onUrlChange } = this.props;
-    if (onUrlChange) {
-      onUrlChange();
-    } else {
-      const { intermediateUrl } = this.state;
-      this.setState({ url: intermediateUrl });
-    }
+  handleUrlChange = url => {
+    this.setState({ showValidation: false });
+    this.onChange({
+      url,
+      isValid: this.isValidUrl(url),
+    });
   };
 
   handleTargetChange = event => {
-    const { onTargetBlankChange } = this.props;
-    if (onTargetBlankChange) {
-      onTargetBlankChange(event.target.checked);
-    } else {
-      this.setState({ targetBlank: event.target.checked });
-    }
+    this.onChange({ targetBlank: event.target.checked });
   };
 
   handleNofollowChange = event => {
-    const { onNofollowChange } = this.props;
-    if (onNofollowChange) {
-      onNofollowChange(event.target.checked);
-    } else {
-      this.setState({ nofollow: event.target.checked });
-    }
+    this.onChange({ nofollow: event.target.checked });
   };
 
-  validateUrl = () => {
-    const { intermediateUrl } = this.state;
-    const isValidUrlConst = isValidUrl(intermediateUrl) || (intermediateUrl === '');
-    if (isValidUrlConst) {
-      this.handleUrlChange();
-    }
-    const { onValidateUrl } = this.props;
-    if (onValidateUrl) {
-      onValidateUrl(isValidUrlConst);
-    } else {
-      this.setState({ isValidUrl: isValidUrlConst });
-    }
+  onChange = changes => {
+    this.props.onChange({ ...this.props.linkValues, ...changes });
   };
 
   handleKeyDown = e => {
     const { onEnter, onEscape } = this.props;
-    if (e.key === 'Enter') { // TODO: only the 2nd 'Enter' key closes the panel because of setState() call in the validateUrl
-      if (onEnter) {
-        onEnter(e);
-      } else {
-        this.validateUrl();
-      }
+    if (e.key === 'Enter') {
+      this.setState({ showValidation: true });
+      e.preventDefault();
+      onEnter && onEnter(e);
     } else if (e.key === 'Escape') {
+      e.preventDefault();
       onEscape && onEscape(e);
     }
   };
 
+  isValidUrl = url => !url || isValidUrl(url);
+
+  hasError() {
+    return this.props.linkValues.isValid === false && this.state.showValidation;
+  }
+
+  getInput = () => {
+    return this.props.dropDown ? this.getDropdown() : this.getTextInput();
+  };
+
+  getDropdown() {
+    return (
+      <LinkPanelDropdown
+        theme={this.props.theme}
+        initialValue={this.props.linkValues.url}
+        onChange={this.handleUrlChange}
+        textInputProps={this.getTextInputProps()}
+        {...this.props.dropDown}
+      />
+    );
+  }
+
+  getTextInput() {
+    return (
+      <input
+        value={this.props.linkValues.url}
+        onChange={e => this.handleUrlChange(e.target.value)}
+        {...this.getTextInputProps()}
+      />
+    );
+  }
+
+  getTextInputProps() {
+    const textInputClassName = classNames(styles.linkPanel_textInput, {
+      [styles.linkPanel_textInput_invalid]: this.hasError(),
+    });
+    return {
+      type: 'url',
+      className: textInputClassName,
+      placeholder: this.props.t('LinkPanel_InputPlaceholder'),
+      'data-hook': 'linkPanelInput',
+      onBlur: () => this.setState({ showValidation: true }),
+    };
+  }
+
   render() {
     const { styles } = this;
-    const { isImageSettings, theme, anchorTarget, relValue, ariaProps, uiSettings } = this.props;
-    const showTargetBlankCheckbox = uiSettings.blankTargetToggleVisibilityFn(anchorTarget);
-    const showRelValueCheckbox = uiSettings.nofollowRelToggleVisibilityFn(relValue);
+    const {
+      theme,
+      ariaProps,
+      showTargetBlankCheckbox,
+      showRelValueCheckbox,
+      t,
+      linkValues,
+    } = this.props;
 
-    const textInputClassName = classNames(styles.linkPanel_textInput,
-      {
-        [styles.linkPanel_textInput_invalid]: !this.state.isValidUrl,
-        [styles.linkPanel_imageSettings]: isImageSettings
-      }
-    );
+    const { isValid, targetBlank, nofollow } = linkValues;
 
     return (
       <div className={styles.linkPanel_Content} {...ariaProps} role="form">
-        <div className={styles.linkPanel_Input}>
-
-          <input
-            onKeyDown={this.handleKeyDown}
-            tabIndex="0" type="url" ref={ref => (this.input = ref)} className={textInputClassName} placeholder={this.inputPlaceholder}
-            data-hook="linkPanelInput" onChange={this.handleIntermediateUrlChange} onBlur={this.validateUrl} value={this.state.intermediateUrl}
-          />
-          {!this.state.isValidUrl && (
+        {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
+        <div className={styles.linkPanel_Input} onKeyDown={this.handleKeyDown}>
+          {this.getInput()}
+          {this.hasError() && (
             <Tooltip
-              shouldRebuildOnUpdate={() => !this.state.isValidUrl}
+              shouldRebuildOnUpdate={() => !isValid}
               data-hook="linkPanelTooltip"
-              content={this.errorTooltipText}
+              content={t('LinkPanel_ErrorTooltip')}
               theme={theme}
               moveBy={{ y: 0 }}
               type={'error'}
@@ -146,18 +132,24 @@ class LinkPanel extends Component {
           )}
         </div>
         <div>
-          {showTargetBlankCheckbox &&
+          {showTargetBlankCheckbox && (
             <Checkbox
-              label={this.firstCheckboxText} theme={theme} checked={this.state.targetBlank}
-              dataHook="linkPanelBlankCheckbox" onChange={this.handleTargetChange}
+              label={t('LinkPanel_Target_Checkbox')}
+              theme={theme}
+              checked={targetBlank}
+              dataHook="linkPanelBlankCheckbox"
+              onChange={this.handleTargetChange}
             />
-          }
-          {showRelValueCheckbox &&
+          )}
+          {showRelValueCheckbox && (
             <Checkbox
-              label={this.secondCheckboxText} theme={theme} checked={this.state.nofollow}
-              dataHook="linkPanelRelCheckbox" onChange={this.handleNofollowChange}
+              label={t('LinkPanel_Nofollow_Checkbox')}
+              theme={theme}
+              checked={nofollow}
+              dataHook="linkPanelRelCheckbox"
+              onChange={this.handleNofollowChange}
             />
-          }
+          )}
         </div>
       </div>
     );
@@ -165,23 +157,20 @@ class LinkPanel extends Component {
 }
 
 LinkPanel.propTypes = {
-  url: PropTypes.string,
-  intermediateUrl: PropTypes.string,
-  targetBlank: PropTypes.bool,
-  nofollow: PropTypes.bool,
-  isImageSettings: PropTypes.bool,
+  t: PropTypes.func.isRequired,
   theme: PropTypes.object.isRequired,
-  anchorTarget: PropTypes.string,
-  relValue: PropTypes.string,
-  t: PropTypes.func,
+  onChange: PropTypes.func.isRequired,
+  linkValues: PropTypes.shape({
+    url: PropTypes.string,
+    isValid: PropTypes.bool,
+    targetBlank: PropTypes.bool,
+    nofollow: PropTypes.bool,
+  }).isRequired,
   ariaProps: PropTypes.object,
-  onUrlChange: PropTypes.func,
-  onIntermediateUrlChange: PropTypes.func,
-  onTargetBlankChange: PropTypes.func,
-  onNofollowChange: PropTypes.func,
-  onValidateUrl: PropTypes.func,
+  showTargetBlankCheckbox: PropTypes.bool,
+  showRelValueCheckbox: PropTypes.bool,
+  dropDown: PropTypes.object,
   onEnter: PropTypes.func,
   onEscape: PropTypes.func,
-  uiSettings: PropTypes.object,
 };
 export default LinkPanel;

@@ -12,36 +12,28 @@
           "type": "string",
           "title": "original gif url",
           "default": "",
-          "examples": [
-            "https://media3.giphy.com/media/5BYvjhtjsQdoyx9JT9/giphy.gif"
-          ]
+          "examples": ["https://media3.giphy.com/media/5BYvjhtjsQdoyx9JT9/giphy.gif"]
         },
         "stillUrl": {
           "$id": "/properties/gif/properties/stillUrl",
           "type": "string",
           "title": "still gif image url",
           "default": "",
-          "examples": [
-            "https://media3.giphy.com/media/5BYvjhtjsQdoyx9JT9/giphy_s.gif"
-          ]
+          "examples": ["https://media3.giphy.com/media/5BYvjhtjsQdoyx9JT9/giphy_s.gif"]
         },
         "height": {
           "$id": "/properties/gif/properties/height",
           "type": "integer",
           "title": "gif height",
           "default": "",
-          "examples": [
-            "50"
-          ]
+          "examples": ["50"]
         },
         "width": {
           "$id": "/properties/gif/properties/width",
           "type": "integer",
           "title": "gif width",
           "default": "",
-          "examples": [
-            "50"
-          ]
+          "examples": ["50"]
         }
       }
     },
@@ -54,36 +46,24 @@
           "type": "string",
           "title": "Size",
           "default": "large",
-          "examples": [
-            "medium",
-            "small",
-            "large"
-          ]
+          "examples": ["medium", "small", "large"]
         },
         "alignment": {
           "$id": "/properties/config/properties/alignment",
           "type": "string",
           "title": "The Alignment Schema ",
           "default": "center",
-          "examples": [
-            "left",
-            "right",
-            "center"
-          ]
+          "examples": ["left", "right", "center"]
         },
         "key": {
           "$id": "/properties/config/properties/key",
           "type": "string",
           "title": "The Key Schema ",
           "default": "",
-          "examples": [
-            "7mib0"
-          ]
+          "examples": ["7mib0"]
         }
       }
     }
   },
-  "required": [
-    "gif"
-  ]
+  "required": ["gif"]
 }

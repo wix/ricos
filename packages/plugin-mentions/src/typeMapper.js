@@ -4,6 +4,6 @@ import MentionViewer from './MentionViewer';
 export default () => ({
   [MENTION_TYPE]: {
     component: MentionViewer,
-    elementType: 'inline'
+    elementType: 'inline',
   },
 });

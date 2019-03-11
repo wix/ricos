@@ -1,6 +1,13 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { mergeStyles, isVideoUrl, TextInput, CloseIcon, Button, WixUtils } from 'wix-rich-content-common';
+import {
+  mergeStyles,
+  isVideoUrl,
+  TextInput,
+  CloseIcon,
+  Button,
+  WixUtils,
+} from 'wix-rich-content-common';
 import styles from '../../statics/styles/video-selection-input-modal.scss';
 
 export default class VideoSelectionInputModal extends Component {
@@ -10,8 +17,10 @@ export default class VideoSelectionInputModal extends Component {
     const { componentData } = this.props;
     this.state = {
       url: (!componentData.isCustomVideo && componentData.src) || '',
+      pathname: '',
+      thumbnail: { pathname: '', width: 0, height: 0 },
       isCustomVideo: false,
-      errorMsg: ''
+      errorMsg: '',
     };
   }
 
@@ -23,18 +32,20 @@ export default class VideoSelectionInputModal extends Component {
   afterOpenModal = () => this.input.focus();
 
   onConfirm = () => {
-    const { url, isCustomVideo } = this.state;
-
+    const { url, pathname, thumbnail, isCustomVideo } = this.state;
+    const src = pathname.length ? { pathname, thumbnail } : url;
     if (isVideoUrl(url) || isCustomVideo) {
       const { componentData, helpers, pubsub, onConfirm } = this.props;
       if (onConfirm) {
-        onConfirm({ ...componentData, src: this.state.url, isCustomVideo: this.state.isCustomVideo });
+        onConfirm({ ...componentData, src, isCustomVideo: this.state.isCustomVideo });
       } else {
-        pubsub.update('componentData', { src: this.state.url, isCustomVideo: this.state.isCustomVideo });
+        pubsub.update('componentData', { src, isCustomVideo: this.state.isCustomVideo });
       }
 
       if (helpers && helpers.onVideoSelected) {
-        helpers.onVideoSelected(url, data => pubsub.update('componentData', { metadata: { ...data } }));
+        helpers.onVideoSelected(src, data =>
+          pubsub.update('componentData', { metadata: { ...data } })
+        );
       }
 
       this.onCloseRequested();
@@ -47,7 +58,16 @@ export default class VideoSelectionInputModal extends Component {
     if (error) {
       this.setState({ errorMsg: error.msg });
     } else {
-      this.setState({ url: data.url, isCustomVideo: true });
+      if (data.pathname) {
+        this.setState({
+          url: '',
+          pathname: data.pathname,
+          thumbnail: data.thumbnail,
+          isCustomVideo: true,
+        });
+      } else {
+        this.setState({ url: data.url, pathname: '', isCustomVideo: true });
+      }
       this.onConfirm();
     }
   };
@@ -73,36 +93,61 @@ export default class VideoSelectionInputModal extends Component {
     const { url, submitted, errorMsg } = this.state;
     const { t, handleFileSelection, enableCustomUploadOnMobile } = this.props;
     const { styles } = this;
-    const uploadVideoSection =
-      (
-        <div>
-          <div className={styles.video_modal_or_upload_video_from}>{t('VideoUploadModal_CustomVideoHeader')}</div>
-          <div className={styles.video_modal_upload_video}>
-            <div
-              role="button"
-              onClick={() => handleFileSelection(({ data, error }) => this.handleCustomVideoUpload({ data, error }),
-                () => this.onCloseRequested())}
-              tabIndex={0}
-              onKeyDown={() => handleFileSelection(({ data, error }) => this.handleCustomVideoUpload({ data, error }))}
-            >
-              + {t('VideoUploadModal_CustomVideoClickText')}
-            </div>
-            {errorMsg.length > 0 && (<div className={styles.video_modal_error_msg}>{errorMsg}</div>)}
-          </div>
+    const uploadVideoSection = (
+      <div>
+        <div className={styles.video_modal_or_upload_video_from}>
+          {t('VideoUploadModal_CustomVideoHeader')}
         </div>
-      );
+        <div className={styles.video_modal_upload_video}>
+          <div
+            role="button"
+            onClick={() =>
+              handleFileSelection(
+                ({ data, error }) => this.handleCustomVideoUpload({ data, error }),
+                () => this.onCloseRequested()
+              )
+            }
+            tabIndex={0}
+            onKeyDown={() =>
+              handleFileSelection(({ data, error }) =>
+                this.handleCustomVideoUpload({ data, error })
+              )
+            }
+          >
+            + {t('VideoUploadModal_CustomVideoClickText')}
+          </div>
+          {errorMsg.length > 0 && <div className={styles.video_modal_error_msg}>{errorMsg}</div>}
+        </div>
+      </div>
+    );
     return (
       <div>
-        <div className={styles[`video_modal_container_${handleFileSelection ? 'big' : 'small'}`]} data-hook="videoUploadModal">
-          {!WixUtils.isMobile() && <CloseIcon className={styles.video_modal_closeIcon} onClick={() => this.onCloseRequested()} />}
-          <div className={styles.video_modal_add_a_Video}>{t('VideoUploadModal_Title')}</div>
-          <div role="heading" aria-labelledby="video_modal_hdr" className={styles.video_modal_header}>
+        <div
+          className={styles[`video_modal_container_${handleFileSelection ? 'big' : 'small'}`]}
+          data-hook="videoUploadModal"
+        >
+          {!WixUtils.isMobile() && (
+            <CloseIcon
+              className={styles.video_modal_closeIcon}
+              onClick={() => this.onCloseRequested()}
+            />
+          )}
+          <h2 className={styles.video_modal_add_a_Video}>{t('VideoUploadModal_Title')}</h2>
+          <div
+            role="heading"
+            aria-labelledby="video_modal_hdr"
+            className={styles.video_modal_header}
+          >
             <h3 id="video_modal_hdr" className={styles.video_modal_header_text}>
               {t('VideoUploadModal_Header')}
             </h3>
           </div>
           <div>
-            <div className={styles[`video_modal_textInput_${handleFileSelection ? 'customWidth' : 'fullWidth'}`]}>
+            <div
+              className={
+                styles[`video_modal_textInput_${handleFileSelection ? 'customWidth' : 'fullWidth'}`]
+              }
+            >
               <TextInput
                 inputRef={ref => {
                   this.input = ref;
@@ -111,21 +156,27 @@ export default class VideoSelectionInputModal extends Component {
                 onKeyPress={this.handleKeyPress}
                 onChange={this.onUrlChange}
                 value={url}
-                error={!isVideoUrl(url) && submitted ? t('VideoUploadModal_Input_InvalidUrl') : null}
+                error={
+                  !isVideoUrl(url) && submitted ? t('VideoUploadModal_Input_InvalidUrl') : null
+                }
                 placeholder={t('VideoUploadModal_Input_Placeholder')}
                 theme={styles}
                 data-hook="videoUploadModalInput"
               />
             </div>
             <Button
-              className={styles[`video_modal_add_button_${handleFileSelection ? 'inline' : 'inMiddle'}`]}
+              className={
+                styles[`video_modal_add_button_${handleFileSelection ? 'inline' : 'inMiddle'}`]
+              }
               onClick={() => this.onConfirm()}
               ariaProps={!this.state.url && { disabled: 'disabled' }}
             >
               {t('VideoUploadModal_AddButtonText')}
             </Button>
           </div>
-          {(!WixUtils.isMobile() || enableCustomUploadOnMobile) && handleFileSelection && uploadVideoSection}
+          {(!WixUtils.isMobile() || enableCustomUploadOnMobile) &&
+            handleFileSelection &&
+            uploadVideoSection}
         </div>
       </div>
     );

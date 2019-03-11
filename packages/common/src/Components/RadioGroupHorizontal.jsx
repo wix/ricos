@@ -6,7 +6,6 @@ import { mergeStyles } from '../Utils/mergeStyles';
 import styles from '../../statics/styles/radio-group-horizontal.scss';
 
 class RadioGroupHorizontal extends Component {
-
   constructor(props) {
     super(props);
     this.styles = mergeStyles({ styles, theme: props.theme });
@@ -19,12 +18,21 @@ class RadioGroupHorizontal extends Component {
     const groupClassName = classNames(
       styles.radioGroupHorizontal_group,
       inline && styles.radioGroupHorizontal_groupInline,
-      !inline && styles.radioGroupHorizontal_groupTwoColumns,
+      !inline && styles.radioGroupHorizontal_groupTwoColumns
     );
     return (
       <div className={readOnly ? styles.radioGroupHorizontal_readOnly : ''}>
-        {label ? <span id={`${this.id}_label`} className={styles.radioGroupHorizontal_title}>{label}</span> : null}
-        <RadioGroup ariaLabelledBy={`${this.id}_label`} {...props} readOnly={readOnly} className={groupClassName} />
+        {label ? (
+          <span id={`${this.id}_label`} className={styles.radioGroupHorizontal_title}>
+            {label}
+          </span>
+        ) : null}
+        <RadioGroup
+          ariaLabelledBy={`${this.id}_label`}
+          {...props}
+          readOnly={readOnly}
+          className={groupClassName}
+        />
       </div>
     );
   }

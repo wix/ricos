@@ -29,7 +29,7 @@ export default ({ style, Icon, tooltipTextKey }) =>
       } else {
         return false;
       }
-    }
+    };
 
     render() {
       const { theme, isMobile, t, tabIndex } = this.props;

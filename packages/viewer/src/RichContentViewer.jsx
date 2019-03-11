@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { mergeStyles, AccessibilityListener, normalizeInitialState } from 'wix-rich-content-common';
+import { convertToReact } from './utils/convertContentState';
 import styles from '../statics/rich-content-viewer.scss';
-import Preview from './Preview';
 
 export default class RichContentViewer extends Component {
   constructor(props) {
@@ -14,10 +14,13 @@ export default class RichContentViewer extends Component {
     this.styles = mergeStyles({ styles, theme: props.theme });
   }
 
-  getInitialState = initialState => initialState ? normalizeInitialState(initialState, {
-    anchorTarget: this.props.anchorTarget,
-    relValue: this.props.relValue
-  }) : {};
+  getInitialState = initialState =>
+    initialState
+      ? normalizeInitialState(initialState, {
+          anchorTarget: this.props.anchorTarget,
+          relValue: this.props.relValue,
+        })
+      : {};
 
   componentWillReceiveProps(nextProps) {
     if (this.props.initialState !== nextProps.initialState) {
@@ -27,25 +30,37 @@ export default class RichContentViewer extends Component {
 
   render() {
     const { styles } = this;
-    const { theme, isMobile, textDirection, typeMappers, decorators, anchorTarget, relValue, config } = this.props;
+    const {
+      theme,
+      isMobile,
+      textDirection,
+      typeMappers,
+      decorators,
+      anchorTarget,
+      relValue,
+      config,
+      helpers,
+    } = this.props;
+
     const wrapperClassName = classNames(styles.wrapper, {
       [styles.desktop]: !this.props.platform || this.props.platform === 'desktop',
     });
+    const editorClassName = classNames(styles.editor, {
+      [styles.rtl]: textDirection === 'rtl',
+    });
+
+    const output = convertToReact(
+      this.state.raw,
+      styles,
+      textDirection,
+      typeMappers,
+      { theme, isMobile, anchorTarget, relValue, config, helpers },
+      decorators
+    );
+
     return (
       <div className={wrapperClassName}>
-        <div className={styles.editor}>
-          <Preview
-            anchorTarget={anchorTarget}
-            config={config}
-            decorators={decorators}
-            isMobile={isMobile}
-            raw={this.state.raw}
-            relValue={relValue}
-            textDirection={textDirection}
-            theme={theme}
-            typeMappers={typeMappers}
-          />
-        </div>
+        <div className={editorClassName}>{output}</div>
         <AccessibilityListener isMobile={isMobile} />
       </div>
     );
@@ -68,7 +83,7 @@ RichContentViewer.propTypes = {
       PropTypes.shape({
         component: PropTypes.func.isRequired,
         strategy: PropTypes.func.isRequired,
-      })
+      }),
     ])
   ),
   theme: PropTypes.object,

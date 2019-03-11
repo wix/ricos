@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import FocusTrap from './FocusTrapReact';
 
 class FocusManager extends Component {
-
   static propTypes = {
     focusTrapOptions: PropTypes.object,
     children: PropTypes.node,
@@ -14,7 +13,7 @@ class FocusManager extends Component {
     isMobile: false,
     focusTrapOptions: {
       clickOutsideDeactivates: true,
-    }
+    },
   };
 
   constructor(props) {
@@ -37,18 +36,16 @@ class FocusManager extends Component {
     const options = Object.assign({}, focusTrapOptions, {
       onActivate: this.onActivate,
       onDeactivate: this.onDeactivate,
-      clickOutsideDeactivates: true
+      clickOutsideDeactivates: true,
     });
     if (isMobile) {
-      return (
-        <Fragment {...rest}>
-          {children}
-        </Fragment>);
+      return <Fragment {...rest}>{children}</Fragment>;
     } else {
       return (
         <FocusTrap focusTrapOptions={options} {...rest}>
           {children}
-        </FocusTrap>);
+        </FocusTrap>
+      );
     }
   }
 }

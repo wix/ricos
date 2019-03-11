@@ -16,7 +16,6 @@ export default ({ Icon, tooltipTextKey, getValue, onChange, keyName }) =>
     };
 
     render() {
-
       const panelContent = decorateComponentWithProps(SliderPanel, {
         getValue,
         onChange,
@@ -24,7 +23,7 @@ export default ({ Icon, tooltipTextKey, getValue, onChange, keyName }) =>
         max: this.props.max,
         inputMin: this.props.inputMin,
         inputMax: this.props.inputMax,
-        mapStoreDataToPanelProps: this.props.mapStoreDataToPanelProps
+        mapStoreDataToPanelProps: this.props.mapStoreDataToPanelProps,
       });
 
       return (

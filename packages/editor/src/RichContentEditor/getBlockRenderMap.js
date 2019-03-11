@@ -5,7 +5,6 @@ import { DefaultDraftBlockRenderMap } from '@wix/draft-js';
 import { mergeStyles } from 'wix-rich-content-common';
 import styles from '../../statics/styles/rich-content-editor.scss';
 
-
 /**
   getBlockRenderMap util
 
@@ -19,25 +18,40 @@ export default theme => {
   const listClassNames = classNames(
     'public-DraftStyleDefault-depth0', // TODO: should depend on actual depth
     'public-DraftStyleDefault-listLTR', // TODO: should depend on actual direction
-    'public-DraftStyleDefault-reset');
+    'public-DraftStyleDefault-reset'
+  );
 
   const OrderedListItem = ({ children }) => (
     <ol className={'public-DraftStyleDefault-ol'}>
-      {children.map((child, i) =>
-        (
-          <li className={classNames(mergedStyles.orderedList, 'public-DraftStyleDefault-orderedListItem', listClassNames)} key={i}>
-            {child}
-          </li>))}
+      {children.map((child, i) => (
+        <li
+          className={classNames(
+            mergedStyles.orderedList,
+            'public-DraftStyleDefault-orderedListItem',
+            listClassNames
+          )}
+          key={i}
+        >
+          {child}
+        </li>
+      ))}
     </ol>
   );
 
   const UnorderedListItem = ({ children }) => (
     <ul className={'public-DraftStyleDefault-ul'}>
-      {children.map((child, i) =>
-        (
-          <li className={classNames(mergedStyles.unorderedList, 'public-DraftStyleDefault-unorderedListItem', listClassNames)} key={i}>
-            {child}
-          </li>))}
+      {children.map((child, i) => (
+        <li
+          className={classNames(
+            mergedStyles.unorderedList,
+            'public-DraftStyleDefault-unorderedListItem',
+            listClassNames
+          )}
+          key={i}
+        >
+          {child}
+        </li>
+      ))}
     </ul>
   );
 

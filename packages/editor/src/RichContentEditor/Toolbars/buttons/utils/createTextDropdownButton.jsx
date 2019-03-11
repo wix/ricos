@@ -32,7 +32,8 @@ export default ({ buttons, activeItem, onChange, tooltipTextKey }) =>
       this.theme = {
         ...theme,
         buttonStyles: {
-          inlineToolbarButton_wrapper: classNames( //eslint-disable-line camelcase
+          //eslint-disable-next-line camelcase
+          inlineToolbarButton_wrapper: classNames(
             styles.inlineToolbarDropdownButton_wrapper,
             theme && theme.inlineToolbarDropdownButton_wrapper
           ),
@@ -40,7 +41,8 @@ export default ({ buttons, activeItem, onChange, tooltipTextKey }) =>
             styles.inlineToolbarDropdownButton,
             theme && theme.inlineToolbarDropdownButton
           ),
-          inlineToolbarButton_icon: classNames( //eslint-disable-line camelcase
+          //eslint-disable-next-line camelcase
+          inlineToolbarButton_icon: classNames(
             styles.inlineToolbarDropdownButton_icon,
             theme && theme.inlineToolbarDropdownButton_icon
           ),
@@ -52,7 +54,6 @@ export default ({ buttons, activeItem, onChange, tooltipTextKey }) =>
     componentWillReceiveProps(nextProps) {
       if (this.props.isVisible === true && nextProps.isVisible === false) {
         this.setState({ isOpen: false });
-
       }
     }
 
@@ -74,14 +75,22 @@ export default ({ buttons, activeItem, onChange, tooltipTextKey }) =>
         theme: this.theme,
       };
       return (
-        <ClickOutside onClickOutside={() => this.setState({ isOpen: false })} className={this.styles.inlineToolbarDropdown_options}>
-          {buttons.map((Button, i) => <Button key={i} tabIndex="0" {...buttonProps} />)}
+        <ClickOutside
+          onClickOutside={() => this.setState({ isOpen: false })}
+          className={this.styles.inlineToolbarDropdown_options}
+        >
+          {buttons.map((Button, i) => (
+            <Button key={i} tabIndex="0" {...buttonProps} />
+          ))}
         </ClickOutside>
       );
     };
 
     render() {
-      const { selected: { Icon }, isOpen } = this.state;
+      const {
+        selected: { Icon },
+        isOpen,
+      } = this.state;
       const { isMobile, tabIndex, t } = this.props;
       const tooltipText = t(tooltipTextKey);
       const textForHooks = tooltipText.replace(/\s+/, '');

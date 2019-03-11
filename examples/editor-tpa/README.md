@@ -1,6 +1,7 @@
 # wix-rich-content-editor-tpa
 
 ### To run follow these steps
+
 1. `cd rich-content-editor`
 2. `npm link`
 3. `npm run watch`

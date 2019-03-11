@@ -1,25 +1,49 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <script>
-    window.addEventListener('message', event => {
-      if (event.data.type !== 'htmlPlugin:updateContent') {
-        return;
+  <head>
+    <style type="text/css">
+      iframe[class|='instagram'], blockquote[class|='instagram'] { /* fallback script for ios below */
+        min-width: 0 !important;
+        width: calc(100vw - 2px);
       }
+      body {
+        margin: 0;
+      }
+    </style>
+    <script>
+      (function fixInstagramWidth() { // This is a fallback for the styles above. Because inline styles can't be overridden in ios.
+        var callback = function() {
+          try {
+            if (document.body.firstChild.className.indexOf('instagram') >= 0) {
+              document.body.firstChild.style.minWidth = '0';
+              document.body.firstChild.style.width = 'calc(100vw - 2px)';
+            }
+          } catch (e) {}
+        };
 
-      var content = [
-        '<!DOCTYPE html>',
-        '<html>',
-        '<head>' + document.head.innerHTML + '</head>',
-        '<body>' + event.data.content + '</body>',
-        '</html>',
-      ].join('');
+        var observer = new MutationObserver(callback);
 
-      document.open('text/html', 'replace');
-      document.write(content);
-      document.close();
-  });
-  </script>
-</head>
-<body></body>
+        observer.observe(document, { childList: true, subtree: true });
+      })();
+
+      window.addEventListener('message', function(event) {
+        if (event.data.type !== 'htmlPlugin:updateContent') {
+          return;
+        }
+
+        var content = [
+          '<!DOCTYPE html>',
+          '<html>',
+          '<head>' + document.head.innerHTML + '</head>',
+          '<body>' + event.data.content + '</body>',
+          '</html>',
+        ].join('');
+
+        document.open('text/html', 'replace');
+        document.write(content);
+        document.close();
+      });
+    </script>
+  </head>
+  <body></body>
 </html>

@@ -1,5 +1,5 @@
-@import "~wix-rich-content-common/dist/statics/styles/palette";
-@import "~wix-rich-content-common/dist/statics/styles/mixins";
+@import '~wix-rich-content-common/dist/statics/styles/palette';
+@import '~wix-rich-content-common/dist/statics/styles/mixins';
 .staticToolbar {
   width: 100%;
   background: #fff;
@@ -49,7 +49,7 @@
   cursor: pointer;
   border: none;
   border-left: 1px solid $toolbar-border-color;
-  >i {
+  > i {
     display: inline-block;
     width: 6px;
     height: 6px;

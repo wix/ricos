@@ -12,11 +12,7 @@ const INLINE_HEADER = {
   TWO: 'inline-header-two',
   THREE: 'inline-header-three',
 };
-const INLINE_HEADERS = [
-  INLINE_HEADER.THREE,
-  INLINE_HEADER.TWO,
-  INLINE_HEADER.ONE,
-];
+const INLINE_HEADERS = [INLINE_HEADER.THREE, INLINE_HEADER.TWO, INLINE_HEADER.ONE];
 const INLINE_HEADER_TO_BLOCK = {
   [INLINE_HEADER.ONE]: HEADER_BLOCK.ONE,
   [INLINE_HEADER.TWO]: HEADER_BLOCK.TWO,
@@ -48,23 +44,22 @@ const omitInlineHeaderRanges = ranges => ranges.filter(negate(isInlineHeaderRang
 const getInlineHeaderRanges = ranges => ranges.filter(isInlineHeaderRange);
 
 const getBlockType = (type, text, inlineHeaderRanges) =>
-  type === 'unstyled' && shouldConvertToHeaderBlock(text, inlineHeaderRanges) ?
-    getBlockHeaderType(inlineHeaderRanges) :
-    type;
+  type === 'unstyled' && shouldConvertToHeaderBlock(text, inlineHeaderRanges)
+    ? getBlockHeaderType(inlineHeaderRanges)
+    : type;
 
 const shouldConvertToHeaderBlock = (text, inlineStyleRanges) =>
   sortBy(inlineStyleRanges, 'offset')
     .map(range => [range.offset, range.offset + range.length])
     .reduce((ranges, range) => {
       const lastRange = last(ranges);
-      return lastRange && isOverlapping(lastRange, range) ?
-        [...initial(ranges), mergeOverlappingRanges(lastRange, range)] :
-        [...ranges, range];
+      return lastRange && isOverlapping(lastRange, range)
+        ? [...initial(ranges), mergeOverlappingRanges(lastRange, range)]
+        : [...ranges, range];
     }, [])
     .reverse()
     .reduce((text, range) => `${text.slice(0, range[0])}${text.slice(range[1])}`, text)
-    .replace(/\s/g, '')
-    .length === 0;
+    .replace(/\s/g, '').length === 0;
 
 const isInRange = (number, range) => range[0] <= number && number <= range[1];
 const isOverlapping = (rangeA, rangeB) =>
