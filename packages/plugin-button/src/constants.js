@@ -6,6 +6,7 @@ export const BUTTON_TYPES = ['primary', 'secondary'];
 export const DEFAULTS = {
   config: {
     alignment: ALIGN_CENTER,
+    size: 'small',
     width: 'fit-content',
   },
   button: {

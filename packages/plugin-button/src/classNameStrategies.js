@@ -1,4 +1,4 @@
-import styles from '../statics/styles/button-viewer.scss';
+import styles from '../statics/styles/default-styles.scss';
 import { mergeStyles } from 'wix-rich-content-common';
 
 export const containerClassName = theme => {
