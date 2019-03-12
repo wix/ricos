@@ -17,7 +17,12 @@ const pickedIcon = props => (
         <g id="Group" transform="translate(75.000000, 308.000000)" stroke="#FFFFFF">
           <g id="Picked" transform="translate(1.000000, 1.000000)">
             <circle id="Oval" fill="#23D6B5" fillRule="evenodd" cx="9" cy="9" r="9" />
-            <polyline id="Path-8" strokeLinecap="round" transform="translate(8.736899, 8.848516) rotate(8.000000) translate(-8.736899, -8.848516) " points="4.55903894 9.75314099 9.07680362 13.1575209 12.9147592 4.53951081" />
+            <polyline
+              id="Path-8"
+              strokeLinecap="round"
+              transform="translate(8.736899, 8.848516) rotate(8.000000) translate(-8.736899, -8.848516) "
+              points="4.55903894 9.75314099 9.07680362 13.1575209 12.9147592 4.53951081"
+            />
           </g>
         </g>
       </g>

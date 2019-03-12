@@ -7,6 +7,7 @@ import { LINK_TYPE } from 'wix-rich-content-plugin-link';
 import { VIDEO_TYPE } from 'wix-rich-content-plugin-video';
 import { GIPHY_TYPE } from 'wix-rich-content-plugin-giphy';
 import { MAP_TYPE } from 'wix-rich-content-plugin-map';
+import {BUTTON_TYPE} from 'wix-rich-content-plugin-button';
 import { EXTERNAL_MENTIONS_TYPE } from 'wix-rich-content-plugin-mentions';
 import { HEADERS_MARKDOWN_TYPE } from 'wix-rich-content-plugin-headers-markdown';
 import React from 'react';

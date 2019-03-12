@@ -8,7 +8,4 @@ const ModalsMap = {
   [Modals.BUTTON_INPUT]: ButtonInputModal,
 };
 
-export {
-  Modals,
-  ModalsMap
-};
+export { Modals, ModalsMap };

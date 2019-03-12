@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 import { normalizeUrl } from 'wix-rich-content-common';
 import ButtonViewer from './button-viewer';
 
-
 class ButtonComponent extends PureComponent {
-
   constructor(props) {
     super(props);
-    const { componentData: { button } } = this.props;
+    const {
+      componentData: { button },
+    } = this.props;
     this.state = {
       style: button,
     };
@@ -16,25 +16,26 @@ class ButtonComponent extends PureComponent {
 
   render() {
     const { colors } = this.props.settings;
-    const { componentData: { button }, buttonObj, anchorTarget, relValue, t, theme, blockProps } = this.props;
+    const {
+      componentData: { button },
+      buttonObj,
+      anchorTarget,
+      relValue,
+      t,
+      theme,
+      blockProps,
+    } = this.props;
     let buttonText = button.buttonText;
     let rel = '';
     let url = '';
     let style = {
       border: '0px solid blue',
-      ...this.props.style
+      ...this.props.style,
     };
 
-    const target = (typeof (button.target) === 'undefined') ?
-      anchorTarget :
-      (button.target) ?
-        '_blank' :
-        '_self';
-    rel = (typeof (button.rel) === 'undefined') ?
-      relValue :
-      (button.rel) ?
-        'nofollow' :
-        '';
+    const target =
+      typeof button.target === 'undefined' ? anchorTarget : button.target ? '_blank' : '_self';
+    rel = typeof button.rel === 'undefined' ? relValue : button.rel ? 'nofollow' : '';
     style = {
       ...style,
       borderWidth: button.borderWidth + 'px',
@@ -42,15 +43,17 @@ class ButtonComponent extends PureComponent {
       borderRadius: button.borderRadius,
       color: button.textColor ? button.textColor : colors.color_1,
       background: button.backgroundColor ? button.backgroundColor : colors.color_8,
-      borderColor: button.borderColor ? button.borderColor : colors.color_8
+      borderColor: button.borderColor ? button.borderColor : colors.color_8,
     };
     url = button.url;
-    const textColor = (blockProps && !blockProps.isFocused && !url) && {
-      color: '#5D9AFF'
-    };
+    const textColor = blockProps &&
+      !blockProps.isFocused &&
+      !url && {
+        color: '#5D9AFF',
+      };
     style = {
       ...style,
-      ...textColor
+      ...textColor,
     };
     if (buttonObj) {
       style = {
@@ -60,7 +63,7 @@ class ButtonComponent extends PureComponent {
         borderRadius: buttonObj.design.borderRadius,
         color: buttonObj.design.textColor,
         background: buttonObj.design.backgroundColor,
-        borderColor: buttonObj.design.borderColor
+        borderColor: buttonObj.design.borderColor,
       };
       buttonText = buttonObj.data.buttonText;
     }
@@ -88,7 +91,7 @@ ButtonComponent.propTypes = {
   relValue: PropTypes.string.isRequired,
   settings: PropTypes.object.isRequired,
   t: PropTypes.func,
-  blockProps: PropTypes.object
+  blockProps: PropTypes.object,
 };
 
 export default ButtonComponent;
