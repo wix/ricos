@@ -45,6 +45,7 @@
   font-size: 16px;
   font-family: 'Roboto', sans-serif;
   color: $primary-text-color;
+  white-space: pre-wrap !important;
 
   &::after {
     content: '';
@@ -198,10 +199,6 @@
   margin: 0;
   padding: 0;
   display: contents;
-}
-
-.preview {
-  white-space: pre-wrap !important;
 }
 
 .rtl {

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { CustomPicker } from 'react-color';
 import { Saturation, Hue, EditableInput } from 'react-color/lib/components/common';
-import { WixUtils } from 'wix-rich-content-common';
+import { mergeStyles } from 'wix-rich-content-common';
 import HuePointer from '../components/hue-pointer';
 import SaturationPointer from '../components/saturation-pointer';
 import styles from '../../statics/styles/custom-color-picker.scss';
@@ -12,7 +12,8 @@ const customPicker = CustomPicker;
 class CustomColorPicker extends React.Component {
   constructor(props) {
     super(props);
-    const isMobile = WixUtils.isMobile();
+    this.styles = mergeStyles({ styles, theme: props.theme });
+    const { isMobile } = this.props;
     this.inlineStyles = {
       hue: {
         height: isMobile ? '24px' : '12px',
@@ -71,6 +72,8 @@ class CustomColorPicker extends React.Component {
 CustomColorPicker.propTypes = {
   t: PropTypes.func,
   color: PropTypes.string,
+  isMobile: PropTypes.bool,
+  theme: PropTypes.object.isRequired,
 };
 
 export default customPicker(CustomColorPicker);

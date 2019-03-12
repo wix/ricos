@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-plugin-emoji",
-  "version": "2.0.4",
+  "version": "3.0.5",
   "author": {
     "name": "Jonathan Bachman",
     "email": "jonathanb@wix.com"
@@ -28,8 +28,7 @@
     "build:dev": "NODE_ENV=development npm run build",
     "build:analyze": "npm run build -- --environment MODULE_ANALYZE && open stats.html",
     "watch": "NODE_ENV=development MODULE_WATCH=1 npm run build -- --watch",
-    "release": "wnpm-release --no-shrinkwrap",
-    "test": "eslint 'src/**/*.{js,jsx}'"
+    "lint": "eslint 'src/**/*.{js,jsx}'"
   },
   "peerDependencies": {
     "@babel/runtime": "7.2.0",
@@ -37,8 +36,8 @@
     "classnames": "^2.0.0",
     "lodash": "^4.0.0",
     "prop-types": "^15.0.0",
-    "react": "^15.0.0 || ^16.0.0",
-    "react-dom": "^15.0.0 || ^16.0.0"
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2"
   },
   "devDependencies": {
     "@babel/runtime": "7.2.0",
@@ -47,14 +46,14 @@
     "eslint": "^4.19.1",
     "lodash": "^4.17.10",
     "prop-types": "^15.6.2",
-    "react": "15.5.4",
-    "react-dom": "15.5.4",
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2",
     "rollup": "^1.1.0"
   },
   "dependencies": {
     "draft-js-emoji-plugin": "^2.0.2",
     "react-icons": "^2.2.7",
-    "wix-rich-content-common": "^2.0.4"
+    "wix-rich-content-common": "^3.0.5"
   },
   "unpkg": true,
   "publishConfig": {

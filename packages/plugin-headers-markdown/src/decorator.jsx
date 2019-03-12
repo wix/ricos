@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 function findWithRegex(text, regex, callback) {
   let matchArr, start;
+  // eslint-disable-next-line fp/no-loops
   while ((matchArr = regex.exec(text)) !== null) {
     start = matchArr.index;
     callback(start, start + matchArr[0].length);

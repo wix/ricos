@@ -22,9 +22,8 @@ class ButtonSample extends PureComponent {
   };
 
   render() {
-    const { style, active, t } = this.props;
+    const { buttonObj, style, active, t } = this.props;
     const { styles } = this;
-    const { buttonObj } = this.props;
     const { buttonStyle } = this.state;
     const propsStyle = {
       backgroundColor: buttonObj.backgroundColor,
@@ -57,6 +56,7 @@ ButtonSample.propTypes = {
   theme: PropTypes.object.isRequired,
   onClick: PropTypes.func,
   onClickButton: PropTypes.func,
+  t: PropTypes.func,
   active: PropTypes.bool,
   i: PropTypes.number,
   t: PropTypes.func,

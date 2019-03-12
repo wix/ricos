@@ -4,6 +4,10 @@
     <style type="text/css">
       iframe[class|='instagram'], blockquote[class|='instagram'] { /* fallback script for ios below */
         min-width: 0 !important;
+        width: calc(100vw - 2px);
+      }
+      body {
+        margin: 0;
       }
     </style>
     <script>
@@ -12,6 +16,7 @@
           try {
             if (document.body.firstChild.className.indexOf('instagram') >= 0) {
               document.body.firstChild.style.minWidth = '0';
+              document.body.firstChild.style.width = 'calc(100vw - 2px)';
             }
           } catch (e) {}
         };

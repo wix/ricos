@@ -13,6 +13,32 @@ const tabPropTypes = {
 };
 
 export class Tab extends Component {
+  static propTypes = {
+    ...tabPropTypes,
+    label: PropTypes.string.isRequired,
+    selected: PropTypes.bool,
+  };
+
+  constructor(props) {
+    super(props);
+    this.styles = mergeStyles({ styles, theme: props.theme });
+  }
+
+  render = () =>
+    this.props.selected && (
+      <div
+        role="tabpanel"
+        key={this.props.value}
+        aria-labelledby={`${this.props.value}_header`}
+        id={`${this.props.value}_panel`}
+        className={this.styles.tabs_panel}
+      >
+        {this.props.children}
+      </div>
+    );
+}
+
+export class Tabs extends Component {
   static propTypes = tabPropTypes;
 
   constructor(props) {
@@ -23,6 +49,8 @@ export class Tab extends Component {
 
   getTabHeaders = tabs =>
     React.Children.map(tabs, tab => ({ label: tab.props.label, value: tab.props.value }));
+
+  getTabHeaders = tabs => React.Children.map(tabs, tab => ({ label: tab.props.label, value: tab.props.value }));
 
   renderTabs = () =>
     React.Children.map(this.props.children, tab =>

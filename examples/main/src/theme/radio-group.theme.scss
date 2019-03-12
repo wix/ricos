@@ -1,0 +1,13 @@
+.radioGroup {
+}
+
+.radioGroup_button {
+}
+
+.radioGroup_input {
+}
+
+.radioGroup_input:checked ~ .radioGroup_button {
+  &::after {
+  }
+}

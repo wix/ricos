@@ -56,7 +56,6 @@ export const globals = {
   'lodash/upperFirst': '_.upperFirst',
   'prop-types': 'PropTypes',
   react: 'React',
-  'react-color': 'ReactColor',
   'react-custom-scrollbars': 'ReactCustomScrollbars',
   'react-dom': 'ReactDOM',
   'react-i18next': 'reactI18next',

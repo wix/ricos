@@ -54,6 +54,18 @@ export default class StaticToolbar extends React.Component {
     this.ToolbarDecoration = props.toolbarDecorationFn();
   }
 
+  componentWillMount() {
+    this.props.pubsub.subscribe('selection', this.onSelectionChanged);
+  }
+
+  componentWillUnmount() {
+    this.props.pubsub.unsubscribe('selection', this.onSelectionChanged);
+  }
+
+  onSelectionChanged = () => {
+    setTimeout(() => this.forceUpdate(), 0); // wait for next tick. So editorState will be updated
+  };
+
   scrollToolbar(event, leftDirection) {
     event.preventDefault();
     const { clientWidth, scrollWidth } = this.scrollContainer;
@@ -143,7 +155,7 @@ export default class StaticToolbar extends React.Component {
   render() {
     const { visibilityFn, pubsub } = this.props;
     if (visibilityFn) {
-      const editorState = pubsub.get('getEditorState');
+      const editorState = pubsub.get('getEditorState')();
       if (!visibilityFn(editorState)) {
         return null;
       }

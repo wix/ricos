@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { mergeStyles, TextInput, Checkbox, isValidUrl, WixUtils } from 'wix-rich-content-common';
+import { mergeStyles, TextInput, Checkbox, isValidUrl } from 'wix-rich-content-common';
 import styles from '../../statics/styles/settings-component-styles.scss';
 
 class SettingsComponent extends PureComponent {
@@ -66,7 +66,7 @@ class SettingsComponent extends PureComponent {
 
   onBlur = event => {
     const { url } = this.state;
-    this.setState({ target: event.target.checked });
+    this.setState({ target: Event.target.checked });
     if (isValidUrl(url)) {
       this.setState({ validUrl: true });
     } else {
@@ -75,7 +75,7 @@ class SettingsComponent extends PureComponent {
   };
 
   render() {
-    const { t, linkInputRef } = this.props;
+    const { t, linkInputRef, isMobile } = this.props;
     const { buttonText, url, validUrl } = this.state;
     const errorTooltip = !validUrl || !this.props.validUrl ? t('ButtonModal_Invalid_Link') : false;
     return (
@@ -122,10 +122,10 @@ class SettingsComponent extends PureComponent {
           style={{
             paddingTop:
               !this.state.validUrl || !this.props.validUrl
-                ? WixUtils.isMobile()
+                ? isMobile
                   ? '21px'
                   : '25px'
-                : WixUtils.isMobile()
+                : isMobile
                 ? '24px'
                 : '34px',
           }}
@@ -159,6 +159,7 @@ SettingsComponent.propTypes = {
   onSettingsChange: PropTypes.func.isRequired,
   settingsObj: PropTypes.object.isRequired,
   validUrl: PropTypes.bool,
+  isMobile: PropTypes.bool,
   onKeyPress: PropTypes.func,
   linkInputRef: PropTypes.object,
   onBlur: PropTypes.func,

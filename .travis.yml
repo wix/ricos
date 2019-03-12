@@ -1,0 +1,12 @@
+# don't build tags, it's redundant
+if: tag IS blank
+language: node_js
+node_js:
+  - 10
+install: npm install
+script:
+  - npm run lint
+  - npm run build
+  - npm run test
+  - npm run release
+  - npm run deploy

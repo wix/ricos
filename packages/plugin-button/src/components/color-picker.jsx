@@ -73,7 +73,7 @@ class ColorPicker extends PureComponent {
   hexToRGB = hex => {
     let hexNumber = hex.substr(1);
     const rgb = [];
-    /* eslint-disable fp/no-loops */
+    // eslint-disable-next-line fp/no-loops
     while (hexNumber.length) {
       const color = hexNumber.substr(0, 2);
       hexNumber = hexNumber.substr(2);
@@ -166,6 +166,7 @@ class ColorPicker extends PureComponent {
                 color={this.state.color}
                 onChange={this.onCustomColorPickerChanged.bind(this)}
                 t={this.props.t}
+                {...this.props}
               />
             )}
           </div>
