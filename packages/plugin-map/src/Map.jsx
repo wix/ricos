@@ -22,7 +22,7 @@ const GoogleMapWrapper = withGoogleMap(props => (
     >
       {props.isMarkerTooltipRendered && props.markerTooltipContent.trim() !== '' && (
         <InfoWindow onCloseClick={props.onMarkerTooltipCloseClick}>
-          <div>{props.markerTooltipContent}</div>
+          <p style={{ margin: 0 }}>{props.markerTooltipContent}</p>
         </InfoWindow>
       )}
     </Marker>
