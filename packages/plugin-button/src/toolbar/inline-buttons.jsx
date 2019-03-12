@@ -3,7 +3,6 @@ import {
   getModalStyles,
   PluginSettingsIcon,
   decorateComponentWithProps,
-  WixUtils,
 } from 'wix-rich-content-common';
 import { Modals } from '../modals';
 import ButtonInputModal from './buttonInputModal';
@@ -20,7 +19,7 @@ const MobileFullScreenCustomStyle = {
   },
 };
 
-export default ({ settings }) => {
+export default ({ settings, isMobile }) => {
   return [
     { keyName: 'sizeSmallLeft', type: BUTTONS.SIZE_SMALL_LEFT, mobile: false },
     { keyName: 'sizeSmallCenter', type: BUTTONS.SIZE_SMALL_CENTER, mobile: false },
@@ -33,12 +32,13 @@ export default ({ settings }) => {
       modalName: Modals.BUTTON_INPUT,
       activeTab: 'advanced_settings',
       modalElement: decorateComponentWithProps(ButtonInputModal, settings),
-      modalStyles: WixUtils.isMobile()
+      modalStyles: isMobile
         ? getModalStyles({ customStyles: MobileFullScreenCustomStyle })
         : getModalStyles({ customStyles: DesktopCustomModalStyles }),
       mobile: true,
       tooltipTextKey: 'SettingsButton_Tooltip',
       settings,
+      isMobile,
     },
     { keyName: 'delete', type: BUTTONS.DELETE, mobile: true },
   ];

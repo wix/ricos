@@ -8,7 +8,6 @@ import {
   Tab,
   FocusManager,
   ErrorIcon,
-  WixUtils,
   SettingsPanelFooter,
   isValidUrl,
 } from 'wix-rich-content-common';
@@ -189,7 +188,7 @@ export default class ButtonInputModal extends Component {
     }
   };
   render() {
-    const { theme, t, uiSettings, doneLabel, cancelLabel } = this.props;
+    const { theme, t, uiSettings, doneLabel, cancelLabel, isMobile } = this.props;
     const { styles } = this;
     const settingTabLabel = (
       <div className={styles.settingTab}>
@@ -230,7 +229,7 @@ export default class ButtonInputModal extends Component {
       />
     );
     let mobileView = null;
-    if (WixUtils.isMobile()) {
+    if (isMobile) {
       mobileView = (
         <div>
           <Navbar onConfirm={this.onConfirm} onCancel={this.onCloseRequested} />
@@ -251,7 +250,7 @@ export default class ButtonInputModal extends Component {
     }
     return (
       <div>
-        {WixUtils.isMobile() ? (
+        {isMobile ? (
           mobileView
         ) : (
           <div className={styles.container} data-hook="ButtonInputModal">
@@ -325,6 +324,7 @@ ButtonInputModal.propTypes = {
   cancelLabel: PropTypes.string,
   uiSettings: PropTypes.object,
   helpers: PropTypes.object,
+  isMobile: PropTypes.bool,
 };
 
 ButtonInputModal.defaultProps = {

@@ -165,6 +165,7 @@ class ColorPicker extends PureComponent {
                 color={this.state.color}
                 onChange={this.onCustomColorPickerChanged.bind(this)}
                 t={this.props.t}
+                {...this.props}
               />
             )}
           </div>

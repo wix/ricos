@@ -8,7 +8,16 @@ import ButtonComponent from './components/button-component';
 
 const createButtonPlugin = (config = {}) => {
   const type = BUTTON_TYPE;
-  const { helpers, theme, t, anchorTarget, relValue, [type]: settings = {}, ...rest } = config;
+  const {
+    helpers,
+    theme,
+    t,
+    anchorTarget,
+    relValue,
+    isMobile,
+    [type]: settings = {},
+    ...rest
+  } = config;
   const styles = mergeStyles({ styles: Styles, theme });
   const buttonProps = {
     className: theme,
@@ -32,6 +41,7 @@ const createButtonPlugin = (config = {}) => {
       settings,
       anchorTarget,
       relValue,
+      isMobile,
       theme,
       t,
     }),
