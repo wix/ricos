@@ -66,7 +66,7 @@ class SettingsComponent extends PureComponent {
 
   onBlur = event => {
     const { url } = this.state;
-    this.setState({ target: Event.target.checked });
+    this.setState({ target: event.target.checked });
     if (isValidUrl(url)) {
       this.setState({ validUrl: true });
     } else {
