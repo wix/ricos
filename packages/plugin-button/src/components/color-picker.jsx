@@ -103,7 +103,7 @@ class ColorPicker extends PureComponent {
   };
 
   render() {
-    const { colorPickerRef } = this.props;
+    const { colorPickerRef, theme, isMobile } = this.props;
     let dropperColor = '';
     if (this.state.selectedIndex === -1) {
       if (this.getDarkBrightness(this.state.rgb)) {
@@ -165,8 +165,9 @@ class ColorPicker extends PureComponent {
               <CustomColorPicker
                 color={this.state.color}
                 onChange={this.onCustomColorPickerChanged.bind(this)}
+                theme={theme}
+                isMobile={isMobile}
                 t={this.props.t}
-                {...this.props}
               />
             )}
           </div>
@@ -186,6 +187,7 @@ ColorPicker.propTypes = {
   isOpened: PropTypes.bool,
   settings: PropTypes.object.isRequired,
   t: PropTypes.func,
+  isMobile: PropTypes.bool,
   index: PropTypes.number,
   scrollColorPickerDown: PropTypes.func,
   colorPickerRef: PropTypes.func,
