@@ -6,12 +6,8 @@ import styles from '../../statics/styles/settings-component-styles.scss';
 class SettingsComponent extends PureComponent {
   constructor(props) {
     super(props);
-    const { settingsObj, t } = this.props;
+    const { settingsObj } = this.props;
     this.styles = mergeStyles({ styles, theme: props.theme });
-    this.targetCheckboxText = t('LinkPanel_Target_Checkbox');
-    this.nofollowCheckboxText = t('LinkPanel_Nofollow_Checkbox');
-    this.inputPlaceholder = t('ButtonModal_Link_Input_Placeholder');
-    this.errorTooltipText = t('LinkPanel_ErrorTooltip');
     this.state = {
       url: settingsObj.url || '',
       buttonText: settingsObj.buttonText,
@@ -132,14 +128,14 @@ class SettingsComponent extends PureComponent {
           className={styles.checkBoxes}
         >
           <Checkbox
-            label={this.targetCheckboxText}
+            label={t('LinkPanel_Target_Checkbox')}
             theme={this.styles}
             checked={this.state.target}
             dataHook="linkPanelBlankCheckbox"
             onChange={this.handleTargetChange}
           />
           <Checkbox
-            label={this.nofollowCheckboxText}
+            label={t('LinkPanel_Nofollow_Checkbox')}
             theme={this.styles}
             checked={this.state.rel}
             dataHook="linkPanelRelCheckbox"
