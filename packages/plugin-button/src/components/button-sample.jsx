@@ -59,7 +59,6 @@ ButtonSample.propTypes = {
   t: PropTypes.func,
   active: PropTypes.bool,
   i: PropTypes.number,
-  t: PropTypes.func,
   buttonObj: PropTypes.object.isRequired,
 };
 
