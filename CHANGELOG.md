@@ -8,9 +8,6 @@
 > - :house: [Internal]
 
 ## [Unreleased]
-### :rocket: New Feature
-- `common`
-  - color-picker component initial implementation
 <hr/>
 
 ## 3.0.8  (Mar 12, 2019)
