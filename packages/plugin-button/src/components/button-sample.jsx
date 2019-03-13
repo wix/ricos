@@ -17,7 +17,7 @@ class ButtonSample extends PureComponent {
   }
 
   onClick = () => {
-    this.props.onClickButton(this.state.index);
+    this.props.onClick(this.state.index);
     this.setState({ buttonStyle: this.props.style });
   };
 
@@ -55,7 +55,6 @@ ButtonSample.propTypes = {
   style: PropTypes.object.isRequired,
   theme: PropTypes.object.isRequired,
   onClick: PropTypes.func,
-  onClickButton: PropTypes.func,
   t: PropTypes.func,
   active: PropTypes.bool,
   i: PropTypes.number,

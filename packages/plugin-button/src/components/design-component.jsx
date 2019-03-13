@@ -140,7 +140,7 @@ class DesignComponent extends PureComponent {
           key={i.toString()}
           active={active}
           i={i}
-          onClickButton={this.onButtonSampleClick.bind(this)}
+          onClick={this.onButtonSampleClick.bind(this)}
           {...this.props}
           style={style}
           buttonObj={this.state}
