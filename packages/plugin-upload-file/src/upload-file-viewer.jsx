@@ -36,11 +36,6 @@ class UploadFileViewer extends Component {
 UploadFileViewer.propTypes = {
   componentData: PropTypes.object.isRequired,
   theme: PropTypes.object,
-  onReady: PropTypes.func,
-  onStart: PropTypes.func,
-  controls: PropTypes.bool,
-  width: PropTypes.string,
-  height: PropTypes.string,
 };
 
 
