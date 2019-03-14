@@ -18,8 +18,16 @@ class UploadFileComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
+    const { block, store, settings } = this.props;
+    if (settings && !settings.handleFileSelection() && store) {
+      const blockKey = block.getKey();
+      store.setBlockHandler('handleSelectedFile', blockKey, this.handlefileupload.bind(this));
+    }
   }
-
+  handlefileupload =(files, updateEntity) => {
+    const { settings } = this.props;
+    settings.onFilesChange(files, updateEntity);
+  }
   render() {
     const { componentData, theme } = this.props;
     return (

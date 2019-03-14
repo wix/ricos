@@ -40,18 +40,18 @@ export default {
   },
   [EXTERNAL_MENTIONS_TYPE]: {
     repositionSuggestions: true,
-    onMentionClick: mention => console.log({ mention }),
+    onMentionClick: mention => console.log({mention}),
     getMentions: searchQuery =>
       new Promise(resolve =>
         setTimeout(
           () =>
             resolve([
-              { name: searchQuery, slug: searchQuery },
-              { name: "Test One", slug: "testone" },
-              { name: "Test One.1", slug: "testone1" },
-              { name: "Test One.2", slug: "testone2" },
-              { name: "Test One.3", slug: "testone3" },
-              { name: "Test One.4", slug: "testone4" },
+              {name: searchQuery, slug: searchQuery},
+              {name: "Test One", slug: "testone"},
+              {name: "Test One.1", slug: "testone1"},
+              {name: "Test One.2", slug: "testone2"},
+              {name: "Test One.3", slug: "testone3"},
+              {name: "Test One.4", slug: "testone4"},
               {
                 name: "Test Two",
                 slug: "testwo",
@@ -79,7 +79,7 @@ export default {
       const customVideoUrl = 'http://mirrors.standaloneinstaller.com/video-sample/jellyfish-25-mbps-hd-hevc.mp4';
       setTimeout(() => {
         // You can provide either URL or pathname. If pathname is provided getVideoUrl will be invoked to form full URL.
-        updateEntity({ data: { url: customVideoUrl } });
+        updateEntity({data: {url: customVideoUrl}});
         //updateEntity({ error: { msg: 'Upload Failed' } });
         console.log('consumer uploaded ', customVideoUrl);
       }, 500);
@@ -94,7 +94,7 @@ export default {
     giphySdkApiKey: "JfQziSTdnSwDZcD3w8DpUL4LMFu3zBgU"
   },
   uiSettings,
-  getToolbarSettings: ({ pluginButtons, textButtons }) => [
+  getToolbarSettings: ({pluginButtons, textButtons}) => [
     // {
     //   name: TOOLBARS.PLUGIN,
     //   getVisibilityFn: () => ({
@@ -211,27 +211,41 @@ export default {
   ],
   [UPLOAD_FILE_TYPE]: {
     accept: '*',
-    handleFileSelection: (updateEntity, removeEntity) => {
-      console.log("handleFileSelection dd", updateEntity, "cool")
-      const fileSelector = document.createElement('input');
-      fileSelector.setAttribute('type', 'file');
-
-      fileSelector.onchange = (e) => {
-        const letters = "abcdefghijklmnopqrstuvwxyz_";
-        let text = "";
-        for (var i = 0; i < 10 + Math.ceil(Math.random() * 50); i++) {
-          text += letters.charAt(Math.floor(Math.random() * letters.length));
-        }
-        const fileNameParts = e.target.value.split(".")
-        const type = fileNameParts[fileNameParts.length - 1]
-        text += '.' + type;
-        updateEntity({
-          fileName: text,
-          fileType: type,
-          fileURL: 'https://drive.google.com/open?id=0B--AtqZgBOd4c3RhcnRlcl9maWxl'
-        })
+    onFilesChange: (files, updateEntity) => {
+      const letters = "abcdefghijklmnopqrstuvwxyz_";
+      let text = "";
+      for (var i = 0; i < 10 + Math.ceil(Math.random() * 50); i++) {
+        text += letters.charAt(Math.floor(Math.random() * letters.length));
       }
-      fileSelector.click();
+      const fileNameParts = files[0].split(".")
+      const type = fileNameParts[fileNameParts.length - 1]
+      text += '.' + type;
+      updateEntity({
+        fileName: text,
+        fileType: type,
+        fileURL: 'https://drive.google.com/open?id=0B--AtqZgBOd4c3RhcnRlcl9maWxl'
+      })
     }
+    ,
+    handleFileSelection: (updateEntity, removeEntity) => {
+    const fileSelector = document.createElement('input');
+    fileSelector.setAttribute('type', 'file');
+    fileSelector.onchange = (e) => {
+      const letters = "abcdefghijklmnopqrstuvwxyz_";
+      let text = "";
+      for (var i = 0; i < 10 + Math.ceil(Math.random() * 50); i++) {
+        text += letters.charAt(Math.floor(Math.random() * letters.length));
+      }
+      const fileNameParts = e.target.value.split(".")
+      const type = fileNameParts[fileNameParts.length - 1]
+      text += '.' + type;
+      updateEntity({
+        fileName: text,
+        fileType: type,
+        fileURL: 'https://drive.google.com/open?id=0B--AtqZgBOd4c3RhcnRlcl9maWxl'
+      })
+    }
+    fileSelector.click();
   }
+}
 };

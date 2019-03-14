@@ -180,15 +180,19 @@ class BaseToolbarButton extends React.Component {
   };
 
   renderFilesButton = (buttonClassNames, styles) => {
-    const { theme, isMobile, t, tooltipTextKey, tabIndex, settings } = this.props;
+    const {theme, isMobile, t, tooltipTextKey, tabIndex, settings, pubsub} = this.props;
     const tooltipText = t(tooltipTextKey);
     const showTooltip = !isMobile && !isEmpty(tooltipText);
-    let  handleClick;
+    let handleClick;
     let handleChange
     if (settings && settings.handleFileSelection) {
       handleClick = settings.handleFileSelection;
     } else {
-      handleChange = this.handleFileChange;
+      if (pubsub && pubsub.store && pubsub.store.getBlockHandler('handleSelectedFile')) {
+        handleChange = pubsub.store.getBlockHandler('handleSelectedFile')
+      } else {
+        handleChange = this.handleFileChange;
+      }
     }
     const replaceButtonWrapperClassNames = classNames(styles.buttonWrapper);
     const filesButton = (
