@@ -232,7 +232,7 @@ export default class ButtonInputModal extends Component {
     if (isMobile) {
       mobileView = (
         <div>
-          <Navbar onConfirm={this.onConfirm} onCancel={this.onCloseRequested} />
+          <Navbar onConfirm={this.onConfirm} onCancel={this.onCloseRequested} {...this.props} />
           <PreviewComponent buttonObj={this.state} {...this.props} />
           <div className={styles.scroll} ref={this.setScrollbarRef}>
             <div className={styles.container} data-hook="ButtonInputModal">

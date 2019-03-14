@@ -1,18 +1,14 @@
-.navbar {
+.navbar_constainer {
   height: 50px;
   background: #0060ff;
   color: #fff;
 }
-.header {
-  height: 20px;
-  background: #0056e5;
-}
-.settingOptions {
+.navbar_settingOptions {
   height: 21px;
   font-size: 14px;
   padding: 15px 14px;
 }
-.button {
+.navbar_button {
   height: 100%;
   width: 50%;
   display: inline-block;

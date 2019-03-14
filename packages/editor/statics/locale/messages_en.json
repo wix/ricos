@@ -144,6 +144,8 @@
   "ButtonModal_Color_Input_Label": "Hex Number",
   "ButtonModal_Preview_Label": "Preview",
   "ButtonComponent_Error_Overlay": "The button you added does not have a valid url, please enter valid url",
+  "ButtonPlugin_Navbar_Cancel_button": "Cancel",
+  "ButtonPlugin_Navbar_Update_button": "Update",
   "TextAlignmentButton_Tooltip": "Alignment",
   "TextLinkButton_Tooltip": "Link",
   "BoldButton_Tooltip": "Bold",
