@@ -75,9 +75,9 @@ class SettingsComponent extends PureComponent {
     const { buttonText, url, validUrl } = this.state;
     const errorTooltip = !validUrl || !this.props.validUrl ? t('ButtonModal_Invalid_Link') : false;
     return (
-      <div className={styles.section_content}>
-        <div className={styles.button_name_feild}>
-          <div className={styles.header_ButtonText}>{t('ButtonModal_Button_Text')}</div>
+      <div className={this.styles.section_content}>
+        <div className={this.styles.button_name_feild}>
+          <div className={this.styles.header_ButtonText}>{t('ButtonModal_Button_Text')}</div>
           <div>
             <TextInput
               inputRef={ref => {
@@ -93,7 +93,7 @@ class SettingsComponent extends PureComponent {
             />
           </div>
         </div>
-        <div className={styles.header_ButtonLink} ref={linkInputRef}>
+        <div className={this.styles.header_ButtonLink} ref={linkInputRef}>
           {t('ButtonModal_Button_Link')}
         </div>
         <TextInput
@@ -112,7 +112,7 @@ class SettingsComponent extends PureComponent {
           data-hook="ButtonInputModal"
         />
         {!this.state.validUrl || !this.props.validUrl ? (
-          <div className={styles.errorMessage}>{t('ButtonModal_InputLink_ErrorMessage')}</div>
+          <div className={this.styles.errorMessage}>{t('ButtonModal_InputLink_ErrorMessage')}</div>
         ) : null}
         <div
           style={{
@@ -125,7 +125,7 @@ class SettingsComponent extends PureComponent {
                 ? '24px'
                 : '34px',
           }}
-          className={styles.checkBoxes}
+          className={this.styles.checkBoxes}
         >
           <Checkbox
             label={t('LinkPanel_Target_Checkbox')}

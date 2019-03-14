@@ -119,33 +119,33 @@ class ColorPicker extends PureComponent {
           tabIndex={index}
           onKeyPress={this.handleKeyPress.bind(this)}
           key={color + index}
-          className={classNames(styles.non_dropper_palette)}
+          className={classNames(this.styles.color_picker_non_dropper_palette)}
           style={{ background: color }}
           onClick={this.onColorButtonClicked.bind(this, index)}
         >
           {this.state.selectedIndex === index && (
-            <PickedIcon className={styles.picked} width="12px" height="12px" />
+            <PickedIcon className={this.styles.color_picker_picked} width="12px" height="12px" />
           )}
         </div>
       );
     });
     const dropperStyle = this.state.selectedIndex < 0 ? { background: this.state.color } : {};
     return (
-      <div ref={colorPickerRef} className={styles.container}>
-        {this.state.isOpened && <div className={styles.overlay} />}
+      <div ref={colorPickerRef} className={this.styles.color_picker_container}>
+        {this.state.isOpened && <div className={this.styles.color_picker_overlay} />}
         <div className={this.styles.color_picker}>
-          <div className={this.styles.label}>{this.props.children}</div>
+          <div className={this.styles.color_picker_label}>{this.props.children}</div>
           <div className={this.styles.picker}>
             <button
               style={{ background: this.state.color }}
-              className={this.styles.pickerButton}
+              className={this.styles.color_picker_pickerButton}
               onClick={this.onPickerClicked}
             />
           </div>
         </div>
         {this.state.isOpened && (
-          <div className={styles.colorBoard}>
-            <div className={styles.palettes}>
+          <div className={this.styles.color_picker_colorBoard}>
+            <div className={this.styles.color_picker_palettes}>
               {colorsButtons}
               <div
                 role="button"
@@ -153,12 +153,19 @@ class ColorPicker extends PureComponent {
                 onKeyPress={this.handleKeyPress.bind(this, this.state.color)}
                 onClick={this.onColorButtonClicked.bind(this, -1)}
                 style={dropperStyle}
-                className={classNames(styles.dropper_palette)}
+                className={classNames(this.styles.color_picker_dropper_palette)}
               >
                 {this.state.selectedIndex < 0 && (
-                  <PickedIcon className={styles.picked} width="12px" height="12px" />
+                  <PickedIcon
+                    className={this.styles.color_picker_picked}
+                    width="12px"
+                    height="12px"
+                  />
                 )}
-                <EyeDropperIcon style={{ color: dropperColor }} className={styles.dropper} />
+                <EyeDropperIcon
+                  style={{ color: dropperColor }}
+                  className={this.styles.color_picker_dropper}
+                />
               </div>
             </div>
             {this.state.isCustomColorPickerOpened && (

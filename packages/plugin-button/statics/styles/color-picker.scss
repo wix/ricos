@@ -1,6 +1,6 @@
 @import '~wix-rich-content-common/dist/statics/styles/palette';
 @import '~wix-rich-content-common/dist/statics/styles/mixins';
-.container {
+.color_picker_container {
   position: relative;
   padding-bottom: 19px;
   @include phone {
@@ -8,7 +8,7 @@
   }
 }
 
-.overlay {
+.color_picker_overlay {
   position: absolute;
   top: -1px;
   right: -1px;
@@ -33,7 +33,7 @@
   }
 }
 
-.label {
+.color_picker_label {
   position: absolute;
   color: #333333;
   font-size: 14px;
@@ -53,7 +53,7 @@
   display: inline-block;
 }
 
-.picked {
+.color_picker_picked {
   position: absolute;
   right: -2px;
   top: 1px;
@@ -63,7 +63,7 @@
   }
 }
 
-.dropper {
+.color_picker_dropper {
   position: absolute;
   width: 21px;
   height: 21px;
@@ -102,19 +102,19 @@ $size: 10px;
   }
 }
 
-.non_dropper_palette {
+.color_picker_non_dropper_palette {
   @extend %palette;
   @include phone {
     margin-right: calc((100% - 200px) / 7);
   }
 }
 
-.dropper_palette {
+.color_picker_dropper_palette {
   @extend %palette;
   margin-right: 0px;
 }
 
-.palettes {
+.color_picker_palettes {
   width: 100%;
   text-align: right;
   height: 36px;
@@ -126,7 +126,7 @@ $size: 10px;
   }
 }
 
-.pickerButton {
+.color_picker_pickerButton {
   width: 36px;
   height: 36px;
   border-radius: 28px;
@@ -143,7 +143,7 @@ $size: 10px;
   }
 }
 
-.swatchesPicker {
+.color_picker_swatchesPicker {
   position: absolute;
   top: 30;
   right: 30;

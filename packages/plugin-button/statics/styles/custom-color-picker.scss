@@ -1,13 +1,13 @@
 @import '~wix-rich-content-common/dist/statics/styles/mixins';
 @import '~wix-rich-content-common/dist/statics/styles/palette';
 
-.container {
+.custom_color_picker_container {
   padding-top: 18px;
   @include phone {
     padding-top: 3px;
   }
 }
-.editable_input_container {
+.custom_color_picker_editable_input_container {
   padding-top: 0px;
   @include phone {
     padding-top: 9px;
@@ -15,24 +15,24 @@
   }
 }
 
-.input_label {
+.custom_color_picker_input_label {
   font-size: 14px;
   color: #333;
   width: auto;
   margin-right: 5px;
   display: inline-block;
 }
-.input_container {
+.custom_color_picker_input_container {
   font-size: 14px;
   color: #333333;
   width: 64px;
   display: inline-block;
 }
 
-.input_container:hover {
+.custom_color_picker_input_container:hover {
   border-bottom: 1px solid #b5d1ff;
 }
 
-.input_container:focus-within {
+.custom_color_picker_input_container:focus-within {
   border-bottom: 1px solid #0261ff;
 }

@@ -12,8 +12,14 @@ class ButtonViewer extends PureComponent {
     const { url, style, target, rel, buttonText } = this.props;
     return (
       <div>
-        <a className={styles.button_container} href={url} style={style} target={target} rel={rel}>
-          <div className={styles.button_text}>{buttonText}</div>
+        <a
+          className={this.styles.button_container}
+          href={url}
+          style={style}
+          target={target}
+          rel={rel}
+        >
+          <div className={this.styles.button_text}>{buttonText}</div>
         </a>
       </div>
     );

@@ -1,27 +1,17 @@
-.preview_container {
+.PreviewComponent_preview_container {
   height: 104px;
   width: 100%;
   background: #f2f2f2;
 }
-.header {
+.PreviewComponent_header {
   font-size: 10px;
   color: #d3d3d3;
   width: 100%;
   text-align: center;
   padding-top: 10px;
 }
-.button {
+.PreviewComponent_button {
   text-align: center;
   padding-top: 6px;
   padding-bottom: 14px;
-}
-.button_container {
-  box-sizing: border-box;
-  display: inline-block;
-  margin: 5px;
-  padding: 11px 24px;
-  border-style: none;
-  font-size: 14px;
-  border-width: 0px;
-  text-decoration: none;
 }

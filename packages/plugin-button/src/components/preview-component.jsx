@@ -13,9 +13,9 @@ class PreviewComponent extends PureComponent {
   render() {
     const { t } = this.props;
     return (
-      <div className={styles.preview_container}>
-        <div className={styles.header}>{t('ButtonModal_Preview_Label')}</div>
-        <div className={styles.button}>
+      <div className={this.styles.PreviewComponent_preview_container}>
+        <div className={this.styles.PreviewComponent_header}>{t('ButtonModal_Preview_Label')}</div>
+        <div className={this.styles.PreviewComponent_button}>
           <ButtonComponent
             theme={this.props.theme}
             style={{ pointerEvents: 'none' }}
