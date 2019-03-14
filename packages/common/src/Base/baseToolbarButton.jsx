@@ -181,6 +181,7 @@ class BaseToolbarButton extends React.Component {
 
   renderFilesButton = (buttonClassNames, styles) => {
     const { theme, isMobile, t, tooltipTextKey, tabIndex, settings } = this.props;
+    const accept = settings || {};
     const tooltipText = t(tooltipTextKey);
     const showTooltip = !isMobile && !isEmpty(tooltipText);
     let  handleClick;
