@@ -7,6 +7,7 @@ import dividerTheme from './divider.theme.scss';
 import htmlTheme from './html.theme.scss';
 import imageTheme from './image.theme.scss';
 import videoTheme from './video.theme.scss';
+import buttonPluginTheme from './button-plugin.theme.scss';
 
 import commonTheme from './global.theme.scss';
 import checkboxTheme from './checkbox.theme.scss';
@@ -34,6 +35,7 @@ import mobileAddModalTheme from './toolbars/mobile-add-modal.theme.scss';
 import toolbarSeparatorTheme from './toolbars/toolbar-separator.theme.scss';
 import addPluginModalTheme from './toolbars/add-plugin-modal.theme.scss';
 import videoUploadTheme from './toolbars/modals/video/video-upload-modal.theme.scss';
+import buttonInputModal from './button-input-modal.theme.scss';
 
 const modalTheme = {
   content: {},
@@ -51,6 +53,7 @@ const theme = {
   ...htmlTheme,
   ...imageTheme,
   ...videoTheme,
+  ...buttonPluginTheme,
 
   // common
   ...commonTheme,
@@ -72,6 +75,7 @@ const theme = {
   // modals
   ...videoUploadTheme,
   ...addPluginModalTheme,
+  ...buttonInputModal,
 
   // toolbars
   ...inlineToolbarTheme,
