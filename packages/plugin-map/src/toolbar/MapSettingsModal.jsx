@@ -126,11 +126,19 @@ export class MapSettingsModal extends Component {
     const buttonPrimaryClassName = `map_settings_modal_button_primary_${uniqueClassesId}`;
     const buttonSecondaryClassName = `map_settings_modal_button_secondary_${uniqueClassesId}`;
     const textInputClassName = `map_settings_modal_text_input_${uniqueClassesId}`;
+    const navBarClassName = `map_settings_modal_mobile_navbar_dynamic_${uniqueClassesId}`;
+    const dividerClassName = `map_settings_modal_divider_dynamic_${uniqueClassesId}`;
 
     /* eslint-disable camelcase */
     this.styles.button_primary = `${buttonPrimaryClassName} ${this.styles.button_primary}`;
     this.styles.button_secondary = `${buttonSecondaryClassName} ${this.styles.button_secondary}`;
     this.styles.textInput_input = `${textInputClassName} ${this.styles.textInput_input}`;
+    this.styles.map_settings_modal_mobile_navbar = `${navBarClassName} ${
+      this.styles.map_settings_modal_mobile_navbar
+    }`;
+    this.styles.map_settings_modal_divider = `${dividerClassName} ${
+      this.styles.map_settings_modal_divider
+    }`;
     /*eslint-enable camelcase */
 
     const style = `
@@ -153,6 +161,15 @@ export class MapSettingsModal extends Component {
 
       .${textInputClassName} {
         border-color: ${themeColors.color5};
+      }
+
+      .${navBarClassName} {
+        background-color: ${themeColors.color8};
+        color: ${themeColors.color1};
+      }
+
+      .${dividerClassName} {
+        background-color: ${themeColors.color5};
       }
     `;
 
