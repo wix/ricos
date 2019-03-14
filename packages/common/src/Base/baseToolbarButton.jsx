@@ -196,7 +196,7 @@ class BaseToolbarButton extends React.Component {
       <div className={replaceButtonWrapperClassNames}>
 {       <FileInput
           className={classNames(buttonClassNames)} theme={theme} tabIndex={tabIndex}
-          dataHook={this.getDataHook()} onChange={handleChange} onClick={() =>{handleClick(this.handleExternalFileChanged)}}  multiple={this.props.multiple}
+          dataHook={this.getDataHook()} onChange={handleChange} onClick={() =>{handleClick(this.handleExternalFileChanged)}}  multiple={this.props.multiple} accept={accept}
         >
           {this.getIcon()}
         </FileInput>}
