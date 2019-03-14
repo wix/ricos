@@ -10,6 +10,27 @@
 ## [Unreleased]
 <hr/>
 
+## 3.0.8  (Mar 12, 2019)
+### :rocket: New Feature
+- `image`
+  - [bebba18](https://github.com/wix-incubator/rich-content/commit/bebba1806a99a6704c72b1a0770fc2e7cf74bba3) support fallback image in wix media
+### :house: Internal
+- `viewer`
+  - [d00fc1c](https://github.com/wix-incubator/rich-content/commit/d00fc1c2042150f3b9b121332d4b30dccbc0e982) removed `@wix/draft-js` dependency
+<hr/>
+
+## 3.0.7 (Mar 11, 2019)
+### :house: Internal
+- `viewer`
+  - [d4dcbd7](https://github.com/wix-incubator/rich-content/commit/d4dcbd76366484b0133b040656f7f3f8ad1b23e7) react-native css-module issue fix
+<hr/>
+
+## 3.0.6 (Mar 11, 2019)
+### :house: Internal
+- `viewer`
+  - [bc46ff2](https://github.com/wix-incubator/rich-content/commit/bc46ff207a1f2c9b456f8b6d645e0ca001e307bc) mergedStyles are passed to AtomicBlock as a prop [React Native requirement]
+<hr/>
+
 ## 3.0.5 (Mar 8, 2019)
 ### :bug: Bug Fix
 - `common`
@@ -217,11 +238,9 @@ _NOTE:_ From this version onwards all modules will have the same version number,
   - [#201](https://github.com/wix-incubator/rich-content/pull/201) `plugin-button` Add button plugin to RCE
   
 </br>
-
 ### :bug: Bug Fix
 - `viewer`
   - [#214](https://github.com/wix-incubator/rich-content/pull/214) soft new line at end of block
-
 ### :house: Internal
 - `general`
   - [#213](https://github.com/wix-incubator/rich-content/pull/213) upgrade node version (8 -> 10)
@@ -309,6 +328,10 @@ _NOTE:_ From this version onwards all modules will have the same version number,
   - `package-lock.json` files are not ignored
 <hr/>
 
+
+## 1.6.9 (Oct 24, 2018)
+### :rocket: New Feature
+- `giphy`
   - [#161](https://github.com/wix-incubator/rich-content/pull/161) `plugin-giphy` implemented
 <hr/>
 
@@ -380,12 +403,20 @@ _NOTE:_ From this version onwards all modules will have the same version number,
   - [#146](https://github.com/wix-incubator/rich-content/pull/146) fix: empty `List` items are not rendered
 <hr/>
 
+
+## 1.6.3 (Sep 27, 2018)
+### :rocket: New Feature
+- `soundcloud`
   - [#92](https://github.com/wix-incubator/rich-content/pull/92) `plugin-sound-cloud` implemented
 ### :bug: Bug Fix
 - `html`
   - [#141](https://github.com/wix-incubator/rich-content/pull/141) width and height component data is now applied on HTML viewer component
 <hr/>
 
+
+## 1.6.2 (Sep 25, 2018)
+### :rocket: New Feature
+- `general`
   - [#142](https://github.com/wix-incubator/rich-content/pull/142) RCE `config.getToolbarSettings` API now allows to customize the plugin functionality toolbars. Check [documentation](https://github.com/wix-incubator/rich-content/blob/master/docs/ToolbarCustomization.md) for more details
   - [#143](https://github.com/wix-incubator/rich-content/pull/143) RCE `config.getToolbarSettings` API now allows to customize the toolbar display mode. Check [documentation](https://github.com/wix-incubator/rich-content/blob/master/docs/ToolbarCustomization.md) for more details
 ### :book: Documentation
@@ -397,7 +428,6 @@ _NOTE:_ From this version onwards all modules will have the same version number,
 ## 1.6.1 (Sep 13, 2018)
 ### :rocket: New Feature
 - `viewer`
-
   - [#134](https://github.com/wix-incubator/rich-content/pull/134) `RichContentViewer` accepts `config` prop for plugin configuration
 - `examples`
   - [#134](https://github.com/wix-incubator/rich-content/pull/134) [viewer-ssr](https://github.com/wix-incubator/rich-content/tree/master/examples/viewer-ssr) example added
