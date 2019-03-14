@@ -43,10 +43,5 @@ UploadFileViewer.propTypes = {
   height: PropTypes.string,
 };
 
-UploadFileViewer.defaultProps = {
-  width: '100%',
-  height: '100%',
-  controls: true,
-};
 
 export default UploadFileViewer;
