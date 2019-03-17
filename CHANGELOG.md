@@ -8,6 +8,9 @@
 > - :house: [Internal]
 
 ## [Unreleased]
+### :rocket: New Feature
+- `text-color`
+  - Text Color plugin added
 <hr/>
 
 ## 3.0.9 (Mar 14, 2019)
