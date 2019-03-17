@@ -146,6 +146,7 @@
   "ButtonComponent_Error_Overlay": "The button you added does not have a valid url, please enter valid url",
   "TextAlignmentButton_Tooltip": "Alignment",
   "TextLinkButton_Tooltip": "Link",
+  "TextColorButton_Tooltip": "Text Color",
   "BoldButton_Tooltip": "Bold",
   "ItalicButton_Tooltip": "Italic",
   "UnderlineButton_Tooltip": "Underline",
