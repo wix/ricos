@@ -13,6 +13,10 @@ const EXAMPLES_TO_DEPLOY = [
     name: 'rich-content-viewer',
     path: 'examples/viewer',
   },
+  {
+    name: 'rich-content',
+    path: 'examples/main',
+  },
 ];
 
 const exec = cmd => execSync(cmd, { stdio: 'inherit' });

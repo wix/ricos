@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-common",
-  "version": "3.0.3",
+  "version": "3.0.9",
   "author": {
     "name": "Jonathan Bachman",
     "email": "jonathanb@wix.com"
@@ -29,7 +29,6 @@
     "build:analyze": "npm run build -- --environment MODULE_ANALYZE && open stats.html",
     "watch": "NODE_ENV=development MODULE_WATCH=1 npm run build -- --watch",
     "lint": "eslint 'src/**/*.{js,jsx}'",
-    "pretest": "npm run lint",
     "test": "jest --verbose"
   },
   "peerDependencies": {
@@ -58,8 +57,10 @@
   "dependencies": {
     "downshift": "3.1.12",
     "focus-trap": "^2.4.5",
+    "hex-rgb": "^4.0.0",
     "jsonschema": "^1.2.4",
     "linkify-it": "^2.0.3",
+    "react-color": "^2.17.0",
     "react-measure": "^2.0.2",
     "react-tooltip": "^3.6.1",
     "react-window": "1.5.0"

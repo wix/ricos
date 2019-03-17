@@ -90,6 +90,21 @@ class ImageViewer extends React.Component {
     this.preloadImage && (this.preloadImage.style.opacity = 0);
   };
 
+  onImageLoadError = () => {
+    const {
+      componentData: { src },
+    } = this.props;
+
+    if (src && src.fallback) {
+      this.setState({
+        fallbackImageSrc: {
+          preload: src.fallback,
+          highres: src.fallback,
+        },
+      });
+    }
+  };
+
   renderImage(imageClassName, imageSrc, alt, props) {
     return [
       <img
@@ -98,6 +113,7 @@ class ImageViewer extends React.Component {
         className={classNames(imageClassName, this.styles.imagePreload)}
         src={imageSrc.preload}
         alt={alt}
+        onError={this.onImageLoadError}
       />,
       <img
         {...props}
@@ -188,13 +204,14 @@ class ImageViewer extends React.Component {
       settings,
       defaultCaption,
     } = this.props;
+    const { fallbackImageSrc } = this.state;
     const data = componentData || getDefault();
     data.config = data.config || {};
     const { metadata = {} } = componentData;
 
     const itemClassName = classNames(styles.imageContainer, className);
     const imageClassName = classNames(styles.image);
-    const imageSrc = this.getImageSrc(data.src);
+    const imageSrc = fallbackImageSrc || this.getImageSrc(data.src);
     let imageProps = {};
     if (data.src && settings && isFunction(settings.imageProps)) {
       imageProps = settings.imageProps(data.src);

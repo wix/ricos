@@ -1,5 +1,6 @@
 import React from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
+import { BLOCK_TYPES } from 'wix-rich-content-common';
 import redraft from 'redraft';
 import classNames from 'classnames';
 import endsWith from 'lodash/endsWith';
@@ -98,9 +99,9 @@ const getBlocks = (mergedStyles, textDirection) => {
   };
 };
 
-const getEntities = (typeMap, pluginProps) => ({
-  ...getPluginsViewer(typeMap, pluginProps),
-});
+const getEntities = (typeMap, pluginProps, styles) => {
+  return getPluginsViewer(typeMap, pluginProps, styles);
+};
 
 const normalizeContentState = contentState => ({
   ...contentState,
@@ -138,7 +139,7 @@ const combineTypeMappers = mappers => {
 
 const redraftOptions = {
   cleanup: {
-    after: 'all',
+    after: BLOCK_TYPES.filter(t => t.indexOf('header') === -1),
     split: true,
     except: ['unordered-list-item', 'ordered-list-item', 'unstyled'],
   },
@@ -162,7 +163,7 @@ const convertToReact = (
     {
       inline: getInline(mergedStyles),
       blocks: getBlocks(mergedStyles, textDirection),
-      entities: getEntities(combineTypeMappers(typeMap), entityProps),
+      entities: getEntities(combineTypeMappers(typeMap), entityProps, mergedStyles),
       decorators,
     },
     { ...redraftOptions, ...options }
