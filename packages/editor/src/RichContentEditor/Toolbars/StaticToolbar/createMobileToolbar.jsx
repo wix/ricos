@@ -65,9 +65,9 @@ const getMobileTheme = theme => {
   return {
     toolbarStyles: {
       toolbar: classNames(toolbarStyles.mobileToolbar, toolbarTheme && toolbarTheme.mobileToolbar, {
-        [toolbarStyles.mobileToolbar_fixed]: !WixUtils.isiOS(),
-        [toolbarTheme.mobileToolbar_fixed]:
-          toolbarTheme && toolbarTheme.mobileToolbar_fixed && !WixUtils.isiOS(),
+        [toolbarStyles.mobileToolbar_sticky]: !WixUtils.isiOS(),
+        [toolbarTheme.mobileToolbar_sticky]:
+          toolbarTheme && toolbarTheme.mobileToolbar_sticky && !WixUtils.isiOS(),
       }),
       scrollableContainer: classNames(
         toolbarStyles.mobileToolbar_scrollableContainer,
