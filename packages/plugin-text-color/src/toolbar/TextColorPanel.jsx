@@ -1,5 +1,6 @@
-import { Component } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { ColorPicker } from 'wix-rich-content-common';
 
 export default class TextLinkPanel extends Component {
   componentDidMount() {
@@ -23,8 +24,32 @@ export default class TextLinkPanel extends Component {
   };
 
   render() {
-    // TODO: render ColorPicker (currentColor, theme, settings.colors, ..)
-    return null;
+    const { theme } = this.props;
+    return (
+      <ColorPicker
+        color={'#bada55'}
+        settings={{
+          colors: {
+            color_1: '#FEFDFD',
+            color_2: '#D5D4D4',
+            color_3: '#000000',
+            color_4: '#000000',
+            color_5: '#000000',
+            color_6: '#ABCAFF',
+            color_7: '#81B0FF',
+            color_8: '#0261FF',
+            color_9: '#0141AA',
+            color_10: '#012055',
+          },
+        }}
+        onChange={() => {}}
+        onClick={() => {}}
+        theme={theme}
+        isOpened={() => {}}
+        index={0}
+        scrollColorPickerDown={() => {}}
+      />
+    );
   }
 }
 
