@@ -32,6 +32,7 @@ import {
   MENTION_TYPE,
   mentionsTypeMapper,
 } from 'wix-rich-content-plugin-mentions/dist/module.viewer';
+import { fileUploadTypeMapper } from 'wix-rich-content-plugin-file-upload/dist/module.viewer';
 
 import 'wix-rich-content-common/dist/styles.min.css';
 import 'wix-rich-content-viewer/dist/styles.min.css';
@@ -46,6 +47,7 @@ import 'wix-rich-content-plugin-mentions/dist/styles.min.css';
 import 'wix-rich-content-plugin-video/dist/styles.min.css';
 import 'wix-rich-content-plugin-sound-cloud/dist/styles.min.css';
 import 'wix-rich-content-plugin-map/dist/styles.min.css';
+import 'wix-rich-content-plugin-file-upload/dist/styles.min.css';
 
 import TestData from './TestData/initial-state';
 import styles from './App.scss';
@@ -92,6 +94,7 @@ class App extends Component {
       mentionsTypeMapper,
       imageTypeMapper,
       mapTypeMapper,
+      fileUploadTypeMapper,
     ];
 
     this.config = {

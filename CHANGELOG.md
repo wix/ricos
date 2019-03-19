@@ -8,6 +8,9 @@
 > - :house: [Internal]
 
 ## [Unreleased]
+### :rocket: New Feature
+- `file-upload`
+  - [#281](https://github.com/wix-incubator/rich-content/pull/281) new file upload plugin
 <hr/>
 
 ## 3.0.9 (Mar 14, 2019)

@@ -1041,6 +1041,58 @@ const TestData = {
       },
     },
   },
+  fileUpload: {
+    blocks: [
+      {
+        key: 'djpvb',
+        text: '',
+        type: 'unstyled',
+        depth: 0,
+        inlineStyleRanges: [],
+        entityRanges: [],
+        data: {},
+      },
+      {
+        key: '907ro',
+        text: ' ',
+        type: 'atomic',
+        depth: 0,
+        inlineStyleRanges: [],
+        entityRanges: [
+          {
+            offset: 0,
+            length: 1,
+            key: 0,
+          },
+        ],
+        data: {},
+      },
+      {
+        key: 'ds8pr',
+        text: '',
+        type: 'unstyled',
+        depth: 0,
+        inlineStyleRanges: [],
+        entityRanges: [],
+        data: {},
+      },
+    ],
+    entityMap: {
+      0: {
+        type: 'wix-draft-plugin-file-upload',
+        mutability: 'IMMUTABLE',
+        data: {
+          config: {
+            alignment: 'center',
+            size: 'small',
+          },
+          name: 'file-sample_150kB.pdf',
+          type: 'pdf',
+          uRL: 'http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf',
+        },
+      },
+    },
+  },
 };
 
 export default TestData;

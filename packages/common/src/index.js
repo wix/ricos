@@ -27,7 +27,7 @@ export { default as Dropdown } from './Components/Dropdown';
 export { default as FileInput } from './Components/FileInput';
 export { default as FocusManager } from './Components/FocusManager';
 export { default as Image } from './Components/Image';
-export { default as ImageLoader } from './Components/ImageLoader';
+export { default as Loader } from './Components/Loader';
 export { default as InputWithLabel } from './Components/InputWithLabel';
 export { default as LinkButton } from './Components/LinkButton';
 export { default as LinkPanel } from './Components/LinkPanel';

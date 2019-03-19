@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import { mergeStyles } from '../Utils/mergeStyles';
 import styles from '../../statics/styles/loaders.scss';
 
-class ImageLoader extends React.Component {
+class Loader extends React.Component {
   constructor(props) {
     super(props);
     this.styles = mergeStyles({ styles, theme: props.theme });
@@ -13,7 +13,7 @@ class ImageLoader extends React.Component {
   render = () => (
     <div
       className={classNames(this.props.overlayClassName, this.styles.loaderOverlay)}
-      data-hook="imageLoader"
+      data-hook="loader"
     >
       <div
         className={classNames(this.props.loaderClassName, this.styles.loader, {
@@ -24,17 +24,17 @@ class ImageLoader extends React.Component {
   );
 }
 
-ImageLoader.propTypes = {
+Loader.propTypes = {
   theme: PropTypes.object.isRequired,
   type: PropTypes.string,
   overlayClassName: PropTypes.string,
   loaderClassName: PropTypes.string,
 };
 
-ImageLoader.defaultProps = {
+Loader.defaultProps = {
   type: 'mini',
   overlayClassName: '',
   loaderClassName: '',
 };
 
-export default ImageLoader;
+export default Loader;
