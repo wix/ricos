@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-common",
-  "version": "3.0.5",
+  "version": "3.0.9",
   "author": {
     "name": "Jonathan Bachman",
     "email": "jonathanb@wix.com"
@@ -57,8 +57,10 @@
   "dependencies": {
     "downshift": "3.1.12",
     "focus-trap": "^2.4.5",
+    "hex-rgb": "^4.0.0",
     "jsonschema": "^1.2.4",
     "linkify-it": "^2.0.3",
+    "react-color": "^2.17.0",
     "react-measure": "^2.0.2",
     "react-tooltip": "^3.6.1",
     "react-window": "1.5.0"

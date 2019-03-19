@@ -12,6 +12,7 @@ import {
   RichContentEditorModal,
 } from 'wix-rich-content-editor';
 import { Button, normalizeInitialState, TOOLBARS } from 'wix-rich-content-common';
+import classNames from 'classnames';
 import { testImages, testVideos } from './mock';
 import './App.css';
 import theme from './theme/theme'; // must import after custom styles
@@ -178,6 +179,9 @@ class App extends Component {
         theme.modalTheme.overlay
       ),
     };
+    const contentStyles = classNames('content', {
+      android: this.md.is('AndroidOS'),
+    });
     const { showDevToggles } = this.state;
 
     const { MobileToolbar, TextToolbar } = this.state;
@@ -234,7 +238,7 @@ class App extends Component {
             </div>
           )}
           {MobileToolbar && <MobileToolbar />}
-          <div className="content">
+          <div className={contentStyles}>
             {this.state.mounted && (
               <div className="columns">
                 <div className="column main">

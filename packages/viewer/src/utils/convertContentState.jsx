@@ -1,6 +1,6 @@
 import React from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
-import { DefaultDraftBlockRenderMap } from '@wix/draft-js';
+import { BLOCK_TYPES } from 'wix-rich-content-common';
 import redraft from 'redraft';
 import classNames from 'classnames';
 import endsWith from 'lodash/endsWith';
@@ -12,8 +12,6 @@ const isEmptyContentState = raw =>
   !raw || !raw.blocks || (raw.blocks.length === 1 && raw.blocks[0].text === '');
 
 const isEmptyBlock = ([_, data]) => data && data.length === 0; //eslint-disable-line no-unused-vars
-
-const allBlockTypes = () => Object.keys(DefaultDraftBlockRenderMap.toJS());
 
 const textAlignmentStyle = (data, mergedStyles, textDirection, classes) => {
   const rtl = textDirection || data.textDirection;
@@ -101,9 +99,9 @@ const getBlocks = (mergedStyles, textDirection) => {
   };
 };
 
-const getEntities = (typeMap, pluginProps) => ({
-  ...getPluginsViewer(typeMap, pluginProps),
-});
+const getEntities = (typeMap, pluginProps, styles) => {
+  return getPluginsViewer(typeMap, pluginProps, styles);
+};
 
 const normalizeContentState = contentState => ({
   ...contentState,
@@ -141,7 +139,7 @@ const combineTypeMappers = mappers => {
 
 const redraftOptions = {
   cleanup: {
-    after: allBlockTypes().filter(t => t.indexOf('header') === -1),
+    after: BLOCK_TYPES.filter(t => t.indexOf('header') === -1),
     split: true,
     except: ['unordered-list-item', 'ordered-list-item', 'unstyled'],
   },
@@ -165,7 +163,7 @@ const convertToReact = (
     {
       inline: getInline(mergedStyles),
       blocks: getBlocks(mergedStyles, textDirection),
-      entities: getEntities(combineTypeMappers(typeMap), entityProps),
+      entities: getEntities(combineTypeMappers(typeMap), entityProps, mergedStyles),
       decorators,
     },
     { ...redraftOptions, ...options }

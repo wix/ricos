@@ -71,7 +71,7 @@
   margin: 0 auto;
 }
 
-.column + .column {
+.column+.column {
   border-left: 1px solid rgba(0, 0, 0, 0.3);
   display: flex;
   flex-direction: column;
@@ -97,5 +97,9 @@
     box-sizing: border-box;
     margin: 0;
     padding: 18px;
+  }
+
+  .content.android {
+    margin: 50px 0 0;
   }
 }
