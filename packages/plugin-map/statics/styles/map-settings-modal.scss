@@ -1,6 +1,5 @@
 @import "~wix-rich-content-common/dist/statics/styles/mixins";
 @import "./labeled-toggle.scss";
-@import "./labeled-image.scss";
 
 .button_primary {
   font-size: 16px;
@@ -32,6 +31,7 @@
     border-top: none;
     border-right: none;
     border-left: none;
+    padding-left: 0;
   }
 }
 
@@ -60,10 +60,6 @@
     height: 100%;
     padding-bottom: 30px;
   }
-}
-
-.map_settings_modal_settings_container * p {
-  margin: 0px;
 }
 
 .map_settings_modal_title_container {
@@ -96,6 +92,17 @@
   }
 }
 
+.map_settings_modal_map_options_sub_header {
+  font-size: 16px;
+  line-height: 1.5;
+  margin: 0px;
+
+   @include phone {
+    margin-bottom: 32px;
+  }
+}
+
+
 .map_settings_modal_footer_button {
   width: 182px;
   height: 42px;
@@ -116,6 +123,7 @@
 
 .map_settings_modal_footer {
   height: 124px;
+  display: flex;
   flex: none;
   padding-top: 40px;
   padding-bottom: 42px;
@@ -125,9 +133,7 @@
 .map_settings_modal_mobile_navbar {
   display: flex;
   flex-direction: row;
-  background-color: #9a87ce;
   padding: 0px 20px;
-  color: #c1c1c1;
   min-height: 50px;
 }
 
@@ -195,7 +201,6 @@
 .map_settings_modal_divider {
   height: 1px;
   opacity: 0.2;
-  background-color: #000000;
 }
 
 
@@ -231,6 +236,7 @@
 
   @include phone {
     padding-right: 0px;
+    margin-right: -2.5px;
   }
 }
 
@@ -241,11 +247,6 @@
   @include phone {
     padding-top: 0px;
   }
-}
-
-.map_settings_modal_map_modes_sub_header {
-  min-height: 24px;
-  font-size: 16px;
 }
 
 .map_settings_modal_scrollbar_thumb {

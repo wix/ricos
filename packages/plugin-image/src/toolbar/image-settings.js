@@ -114,7 +114,7 @@ class ImageSettings extends Component {
       nofollowRelToggleVisibilityFn && nofollowRelToggleVisibilityFn(relValue);
 
     if (!src) {
-      return <Loader type={'medium'} theme={theme} />; //do not render until the src is passed
+      return <Loader type={'medium'} />; //do not render until the src is passed
     }
 
     return (

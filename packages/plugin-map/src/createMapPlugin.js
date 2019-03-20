@@ -1,6 +1,6 @@
 import { createBasePlugin } from 'wix-rich-content-common';
 import { MAP_TYPE } from './constants';
-import { MapComponent } from './MapComponent';
+import { MapViewer } from './MapViewer';
 import createToolbar from './toolbar';
 
 const createMapPlugin = (config = {}) => {
@@ -8,7 +8,7 @@ const createMapPlugin = (config = {}) => {
   const { helpers, theme, t, [type]: settings = {}, ...rest } = config;
 
   return createBasePlugin({
-    component: MapComponent,
+    component: MapViewer,
     type: MAP_TYPE,
     settings,
     theme,

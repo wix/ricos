@@ -3,25 +3,56 @@
   display: inline-block;
   width: 45px;
   height: 23px;
+}
 
-  &.off {
+.labeled_toggle_input_container:hover {
+ opacity: 0.6;
+
+  @include phone {
+   opacity: 1;
+ }
+}
+
+.labeled_toggle_input_container_off {
+ opacity: 0.6;
+}
+
+.labeled_toggle_input_container_off:hover {
+  opacity: 1;
+
+  @include phone {
     opacity: 0.6;
   }
 }
 
-
 .labeled_toggle_input_root {
   margin-left: auto;
   display: flex;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .labeled_toggle_root {
   display: flex;
 }
 
-.labeled_toggle_root + .labeled_toggle_root {
-  padding-top: 31px;
+.labeled_toggle_root * p {
+  margin: 0px;
+}
 
+.labeled_toggle_root {
+  padding-top: 30px;
+   @include phone {
+    padding-top: 0px;
+  }
+}
+
+.labeled_toggle_root + .labeled_toggle_root {
   @include phone {
     padding-top: 36px;
   }

@@ -176,10 +176,12 @@ export default {
   },
   [MAP_TYPE]: {
     googleMapApiKey: process.env.GOOGLE_MAPS_API_KEY,
+    height: 600,
     minWidth: 100,
-    maxWidth: 740,
+    maxWidth: 1400,
     minHeight: 100,
-    maxHeight: 1000,
+    maxHeight: 1400,
+    width: 740,
     mapSettings: {
       address: 'Wix HQ, Nemal Tel Aviv Street, Tel Aviv-Yafo, Israel',
       locationDisplayName: 'Wix HQ, Nemal Tel Aviv Street, Tel Aviv-Yafo, Israel',
@@ -190,6 +192,7 @@ export default {
       isMarkerShown: true,
       isZoomControlShown: true,
       isStreetViewControlShown: true,
+      isViewControlShown: true,
       isDraggingAllowed: true,
     },
   },

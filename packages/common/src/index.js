@@ -89,7 +89,7 @@ export { sizeClassName, alignmentClassName, textWrapClassName } from './Utils/cl
 export { getSelectionStyles } from './Utils/inlineStyleUtils';
 export { getConfigByFormFactor } from './Utils/getConfigByFormFactor';
 export { mergeToolbarSettings } from './Utils/mergeToolbarSettings';
-
+export { default as Context } from './Utils/Context';
 export {
   COMMANDS,
   MODIFIERS,
