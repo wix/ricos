@@ -11,6 +11,7 @@ import { createSoundCloudPlugin } from 'wix-rich-content-plugin-sound-cloud';
 import { createGiphyPlugin } from 'wix-rich-content-plugin-giphy';
 import { createHeadersMarkdownPlugin } from 'wix-rich-content-plugin-headers-markdown';
 import { createMapPlugin } from 'wix-rich-content-plugin-map';
+import { createTextColorPlugin } from 'wix-rich-content-plugin-text-color';
 
 import 'wix-rich-content-common/dist/styles.min.css';
 import 'wix-rich-content-editor/dist/styles.min.css';
@@ -41,6 +42,7 @@ const plugins = [
   createGiphyPlugin,
   createHeadersMarkdownPlugin,
   createMapPlugin,
+  createTextColorPlugin,
 ];
 
 export default plugins;

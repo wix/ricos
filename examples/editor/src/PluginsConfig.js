@@ -7,6 +7,7 @@ import { LINK_TYPE } from 'wix-rich-content-plugin-link';
 import { VIDEO_TYPE } from 'wix-rich-content-plugin-video';
 import { GIPHY_TYPE } from 'wix-rich-content-plugin-giphy';
 import { MAP_TYPE } from 'wix-rich-content-plugin-map';
+import { TEXT_COLOR_TYPE } from 'wix-rich-content-plugin-text-color';
 import { EXTERNAL_MENTIONS_TYPE } from 'wix-rich-content-plugin-mentions';
 import { HEADERS_MARKDOWN_TYPE } from 'wix-rich-content-plugin-headers-markdown';
 import React from 'react';
@@ -190,6 +191,20 @@ export default {
       isZoomControlShown: true,
       isStreetViewControlShown: true,
       isDraggingAllowed: true,
+    },
+  },
+  [TEXT_COLOR_TYPE]: {
+    colors: {
+      color_1: '#FEFDFD',
+      color_2: '#D5D4D4',
+      color_3: '#000000',
+      color_4: '#000000',
+      color_5: '#000000',
+      color_6: '#ABCAFF',
+      color_7: '#81B0FF',
+      color_8: '#0261FF',
+      color_9: '#0141AA',
+      color_10: '#012055',
     },
   },
   uiSettings,
