@@ -9,7 +9,7 @@ import FileInput from '../Components/FileInput';
 import ToolbarButton from '../Components/ToolbarButton';
 import styles from '../../statics/styles/toolbar-button.scss';
 
-export default ({ blockType, button, helpers, pubsub, t }) => {
+export default ({ blockType, button, helpers, pubsub, settings, t }) => {
   class InsertPluginButton extends Component {
     constructor(props) {
       super(props);
@@ -76,8 +76,12 @@ export default ({ blockType, button, helpers, pubsub, t }) => {
       }
     };
 
-    handleExternalFileChanged = data => {
+    handleExternalFileChanged = (data, error) => {
       if (data) {
+        if (error) {
+          data.error = error;
+        }
+
         this.addBlock(button.componentData || {});
         setTimeout(() => pubsub.getBlockHandler('handleFilesAdded')(data));
       }
@@ -155,10 +159,11 @@ export default ({ blockType, button, helpers, pubsub, t }) => {
     };
 
     toggleFileSelection = () => {
-      const { handleFileSelection } = helpers || {};
-      if (handleFileSelection) {
+      if (settings && settings.handleFileSelection) {
+        settings.handleFileSelection(this.handleExternalFileChanged);
+      } else if (helpers && helpers.handleFileSelection) {
         const multiple = !!button.multi;
-        handleFileSelection(
+        helpers.handleFileSelection(
           undefined,
           multiple,
           this.handleExternalFileChanged,
@@ -171,13 +176,14 @@ export default ({ blockType, button, helpers, pubsub, t }) => {
     renderFileUploadButton = () => {
       const { showName, tabIndex } = this.props;
       const { name, Icon } = button;
+      const { accept } = settings || {};
       const { styles } = this;
       return (
         <FileInput
           dataHook={`${button.name}_file_input`}
           className={classNames(styles.button, styles.fileUploadButton)}
           onChange={this.handleFileChange}
-          accept="image/*"
+          accept={accept}
           multiple={button.multi}
           theme={this.props.theme}
           tabIndex={tabIndex}
@@ -200,7 +206,8 @@ export default ({ blockType, button, helpers, pubsub, t }) => {
       const { tooltipText } = button;
       const showTooltip = !isMobile && !isEmpty(tooltipText);
       const shouldRenderFileUploadButton =
-        button.type === 'file' && !(helpers && helpers.handleFileSelection);
+        button.type === 'file' &&
+        !((settings && settings.handleFileSelection) || (helpers && helpers.handleFileSelection));
       const buttonWrapperClassNames = classNames(styles.buttonWrapper, {
         [styles.mobile]: isMobile,
       });

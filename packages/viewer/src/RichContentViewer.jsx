@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { mergeStyles, AccessibilityListener, normalizeInitialState } from 'wix-rich-content-common';
+import {
+  mergeStyles,
+  AccessibilityListener,
+  normalizeInitialState,
+  Context,
+} from 'wix-rich-content-common';
 import { convertToReact } from './utils/convertContentState';
 import styles from '../statics/rich-content-viewer.scss';
 
@@ -40,6 +45,7 @@ export default class RichContentViewer extends Component {
       relValue,
       config,
       helpers,
+      locale,
     } = this.props;
 
     const wrapperClassName = classNames(styles.wrapper, {
@@ -49,19 +55,23 @@ export default class RichContentViewer extends Component {
       [styles.rtl]: textDirection === 'rtl',
     });
 
+    const contextualData = { theme, isMobile, anchorTarget, relValue, config, helpers, locale };
+
     const output = convertToReact(
       this.state.raw,
       styles,
       textDirection,
       typeMappers,
-      { theme, isMobile, anchorTarget, relValue, config, helpers },
+      contextualData,
       decorators
     );
 
     return (
       <div className={wrapperClassName}>
-        <div className={editorClassName}>{output}</div>
-        <AccessibilityListener isMobile={isMobile} />
+        <Context.Provider {...contextualData}>
+          <div className={editorClassName}>{output}</div>
+          <AccessibilityListener />
+        </Context.Provider>
       </div>
     );
   }
@@ -72,6 +82,7 @@ RichContentViewer.propTypes = {
   isMobile: PropTypes.bool,
   helpers: PropTypes.object,
   platform: PropTypes.string,
+  locale: PropTypes.string,
   typeMappers: PropTypes.arrayOf(PropTypes.func),
   decorators: PropTypes.arrayOf(
     PropTypes.oneOfType([
@@ -97,4 +108,5 @@ RichContentViewer.defaultProps = {
   theme: {},
   decorators: [],
   typeMappers: [],
+  locale: 'en',
 };

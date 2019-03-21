@@ -30,44 +30,43 @@ The `toolbar` setting refers to plugin functionality toolbar. Currently, it expo
 
 ### HTML Plugin Settings
 
-| setting key | description | default value | is required? |
-|-------------|-------------|---------------|--------------|
-| `htmlIframeSrc` | `src` attribute of the HTML `iframe` when the plugin is used in `source mode` | none | Yes |
-| `maxWidth` | the maximum component width in pixels. **note:** this value is dynamicaly limited by the editor boundaries | 940 | No
-| `minWidth` | the minimum component width in pixels | 35 | No
-| `maxHeight` | the maximum component height in pixels | 1200 | No
-| `minHeight` | the minimum component height in pixels | 35 | No
-| `width` | the initial component width in pixels | 740 | No
-| `height` | the initial component height in pixels | 242 | No
+| setting key     | description                                                                                                | default value | is required? |
+| --------------- | ---------------------------------------------------------------------------------------------------------- | ------------- | ------------ |
+| `htmlIframeSrc` | `src` attribute of the HTML `iframe` when the plugin is used in `source mode`                              | none          | Yes          |
+| `maxWidth`      | the maximum component width in pixels. **note:** this value is dynamicaly limited by the editor boundaries | 940           | No           |
+| `minWidth`      | the minimum component width in pixels                                                                      | 35            | No           |
+| `maxHeight`     | the maximum component height in pixels                                                                     | 1200          | No           |
+| `minHeight`     | the minimum component height in pixels                                                                     | 35            | No           |
+| `width`         | the initial component width in pixels                                                                      | 740           | No           |
+| `height`        | the initial component height in pixels                                                                     | 242           | No           |
 
 ### Hashtag Plugin Settings
 
-| setting key | description | default value | is required? |
-|-------------|-------------|---------------|--------------|
-| `createHref` | converter function that converts the Hashtag `#text` to URL. if provided, the hashtags will behave as anchor links | none | No |
-| `onClick` | optional Hashtag click handler | none | No
+| setting key  | description                                                                                                        | default value | is required? |
+| ------------ | ------------------------------------------------------------------------------------------------------------------ | ------------- | ------------ |
+| `createHref` | converter function that converts the Hashtag `#text` to URL. if provided, the hashtags will behave as anchor links | none          | No           |
+| `onClick`    | optional Hashtag click handler                                                                                     | none          | No           |
 
 ### Link Plugin Settings
 
-| setting key | description | default value | is required? |
-|-------------|-------------|---------------|--------------|
-| `onClick` | optional Link click handler | none | No
+| setting key | description                 | default value | is required? |
+| ----------- | --------------------------- | ------------- | ------------ |
+| `onClick`   | optional Link click handler | none          | No           |
 
 ### Mentions Plugin Settings
 
-| setting key | description | default value | is required? |
-|-------------|-------------|---------------|--------------|
-| `getMentions` | function that retrieves a list of suggestions according to provided search query parameter  | none | Yes
-| `onMentionClick` | optional Mention click handler | none | No
+| setting key      | description                                                                                | default value | is required? |
+| ---------------- | ------------------------------------------------------------------------------------------ | ------------- | ------------ |
+| `getMentions`    | function that retrieves a list of suggestions according to provided search query parameter | none          | Yes          |
+| `onMentionClick` | optional Mention click handler                                                             | none          | No           |
 
 ### Giphy Plugin Settings
 
-| setting key | description | default value | is required? |
-|-------------|-------------|---------------|--------------|
-| `giphySdkApiKey` | [Giphy Developer API key](https://developers.giphy.com/dashboard/?create=true) | none | 
-Yes
-| `componentDataDefaults` | Default component data | `{ config: { size: 'content', alignment: 'center' } }` | No
-| `insertToolbars` | Which toolbars to add insert button to | `[TOOLBARS.FOOTER]` | No
+| setting key             | description                                                                    | default value                                          | is required? |
+| ----------------------- | ------------------------------------------------------------------------------ | ------------------------------------------------------ | ------------ |
+| `giphySdkApiKey`        | [Giphy Developer API key](https://developers.giphy.com/dashboard/?create=true) | none                                                   | Yes          |
+| `componentDataDefaults` | Default component data                                                         | `{ config: { size: 'content', alignment: 'center' } }` | No           |
+| `insertToolbars`        | Which toolbars to add insert button to                                         | `[TOOLBARS.FOOTER]`                                    | No           |
 
 ## References and Examples
 

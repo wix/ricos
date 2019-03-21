@@ -7,6 +7,7 @@ import dividerTheme from './divider.theme.scss';
 import htmlTheme from './html.theme.scss';
 import imageTheme from './image.theme.scss';
 import videoTheme from './video.theme.scss';
+import fileUploadTheme from './file-upload.theme.scss';
 
 import commonTheme from './global.theme.scss';
 import checkboxTheme from './checkbox.theme.scss';
@@ -51,6 +52,7 @@ const theme = {
   ...htmlTheme,
   ...imageTheme,
   ...videoTheme,
+  ...fileUploadTheme,
 
   // common
   ...commonTheme,

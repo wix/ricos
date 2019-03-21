@@ -22,6 +22,7 @@ import {
   normalizeInitialState,
   TooltipHost,
   TOOLBARS,
+  Context,
 } from 'wix-rich-content-common';
 import styles from '../../statics/styles/rich-content-editor.scss';
 import draftStyles from '../../statics/styles/draft.scss';
@@ -46,6 +47,8 @@ class RichContentEditor extends Component {
     this.initPlugins();
   }
 
+  setEditorState = editorState => this.setState({ editorState });
+
   initPlugins() {
     const {
       helpers,
@@ -60,13 +63,12 @@ class RichContentEditor extends Component {
 
     const { theme } = this.state;
     const getEditorState = () => this.state.editorState;
-    const setEditorState = editorState => this.setState({ editorState });
     const {
       pluginInstances,
       pluginButtons,
       pluginTextButtons,
       pubsubs,
-      styleFns: pluginStyleFns,
+      pluginStyleFns,
     } = createPlugins({
       plugins,
       config,
@@ -77,7 +79,7 @@ class RichContentEditor extends Component {
       anchorTarget,
       relValue,
       getEditorState,
-      setEditorState,
+      setEditorState: this.setEditorState,
     });
     this.initEditorToolbars(pluginButtons, pluginTextButtons);
     this.pluginKeyBindings = initPluginKeyBindings(pluginTextButtons);
@@ -316,9 +318,9 @@ class RichContentEditor extends Component {
     );
   };
 
-  renderAccessibilityListener = () => <AccessibilityListener isMobile={this.props.isMobile} />;
+  renderAccessibilityListener = () => <AccessibilityListener />;
 
-  renderTooltipHost = () => <TooltipHost theme={this.state.theme} />;
+  renderTooltipHost = () => <TooltipHost />;
 
   render() {
     const { isMobile } = this.props;
@@ -328,19 +330,21 @@ class RichContentEditor extends Component {
       [theme.desktop]: !isMobile && theme && theme.desktop,
     });
     return (
-      <Measure bounds onResize={({ bounds }) => this.updateBounds(bounds)}>
-        {({ measureRef }) => (
-          <div style={this.props.style} ref={measureRef} className={wrapperClassName}>
-            <div className={classNames(styles.editor, theme.editor)}>
-              {this.renderAccessibilityListener()}
-              {this.renderEditor()}
-              {this.renderToolbars()}
-              {this.renderInlineModals()}
-              {this.renderTooltipHost()}
+      <Context.Provider theme={theme} {...this.props}>
+        <Measure bounds onResize={({ bounds }) => this.updateBounds(bounds)}>
+          {({ measureRef }) => (
+            <div style={this.props.style} ref={measureRef} className={wrapperClassName}>
+              <div className={classNames(styles.editor, theme.editor)}>
+                {this.renderAccessibilityListener()}
+                {this.renderEditor()}
+                {this.renderToolbars()}
+                {this.renderInlineModals()}
+                {this.renderTooltipHost()}
+              </div>
             </div>
-          </div>
-        )}
-      </Measure>
+          )}
+        </Measure>
+      </Context.Provider>
     );
   }
 }

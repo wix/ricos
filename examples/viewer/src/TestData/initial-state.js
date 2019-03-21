@@ -673,6 +673,61 @@ const TestData = {
       },
     },
   },
+  giphy: {
+    blocks: [
+      {
+        key: 'fls2k',
+        text: '',
+        type: 'unstyled',
+        depth: 0,
+        inlineStyleRanges: [],
+        entityRanges: [],
+        data: {},
+      },
+      {
+        key: 'cksr1',
+        text: ' ',
+        type: 'atomic',
+        depth: 0,
+        inlineStyleRanges: [],
+        entityRanges: [
+          {
+            offset: 0,
+            length: 1,
+            key: 0,
+          },
+        ],
+        data: {},
+      },
+      {
+        key: 'c8hff',
+        text: '',
+        type: 'unstyled',
+        depth: 0,
+        inlineStyleRanges: [],
+        entityRanges: [],
+        data: {},
+      },
+    ],
+    entityMap: {
+      '0': {
+        type: 'wix-draft-plugin-giphy',
+        mutability: 'IMMUTABLE',
+        data: {
+          config: {
+            size: 'content',
+            alignment: 'center',
+          },
+          gif: {
+            originalUrl: 'https://media0.giphy.com/media/7ZidoKPclnq7e/giphy.gif',
+            stillUrl: 'https://media0.giphy.com/media/7ZidoKPclnq7e/giphy_s.gif',
+            height: 306,
+            width: 250,
+          },
+        },
+      },
+    },
+  },
   legacyVideo: {
     entityMap: {
       '0': {
@@ -859,6 +914,73 @@ const TestData = {
       },
     ],
   },
+  soundCloud: {
+    blocks: [
+      {
+        key: 'fls2k',
+        text: '',
+        type: 'unstyled',
+        depth: 0,
+        inlineStyleRanges: [],
+        entityRanges: [],
+        data: {},
+      },
+      {
+        key: '842n2',
+        text: ' ',
+        type: 'atomic',
+        depth: 0,
+        inlineStyleRanges: [],
+        entityRanges: [
+          {
+            offset: 0,
+            length: 1,
+            key: 0,
+          },
+        ],
+        data: {},
+      },
+      {
+        key: 'eku9b',
+        text: '',
+        type: 'unstyled',
+        depth: 0,
+        inlineStyleRanges: [],
+        entityRanges: [],
+        data: {},
+      },
+    ],
+    entityMap: {
+      '0': {
+        type: 'wix-draft-plugin-sound-cloud',
+        mutability: 'IMMUTABLE',
+        data: {
+          config: {
+            size: 'content',
+            alignment: 'center',
+          },
+          src: 'https://soundcloud.com/jackie-y-los-bourbons/psycho-killer',
+          metadata: {
+            height: 270,
+            author_name: 'Wix.com',
+            html:
+              '<iframe width="480" height="270" src="https://www.youtube.com/embed/_zuIxexRrtk?feature=oembed" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>',
+            thumbnail_width: 480,
+            type: 'video',
+            version: '1.0',
+            thumbnail_height: 360,
+            provider_url: 'https://www.youtube.com/',
+            title: 'How to Build a Wix Website for Your Business | James Veitch',
+            thumbnail_url: 'https://i.ytimg.com/vi/_zuIxexRrtk/hqdefault.jpg',
+            author_url: 'https://www.youtube.com/user/Wix',
+            provider_name: 'YouTube',
+            width: 480,
+            video_url: 'https://youtu.be/_zuIxexRrtk',
+          },
+        },
+      },
+    },
+  },
   full: {
     entityMap: {
       '4': {
@@ -1037,6 +1159,121 @@ const TestData = {
             slug: 'vytenisb',
             id: '2068b184-6832-412f-abd4-31220fecd086',
           },
+        },
+      },
+    },
+  },
+  map: {
+    blocks: [
+      {
+        key: 'dvtg1',
+        text: '',
+        type: 'unstyled',
+        depth: 0,
+        inlineStyleRanges: [],
+        entityRanges: [],
+        data: {},
+      },
+      {
+        key: '54hkp',
+        text: ' ',
+        type: 'atomic',
+        depth: 0,
+        inlineStyleRanges: [],
+        entityRanges: [
+          {
+            offset: 0,
+            length: 1,
+            key: 0,
+          },
+        ],
+        data: {},
+      },
+      {
+        key: '1ma4t',
+        text: '',
+        type: 'unstyled',
+        depth: 0,
+        inlineStyleRanges: [],
+        entityRanges: [],
+        data: {},
+      },
+    ],
+    entityMap: {
+      '0': {
+        type: 'wix-draft-plugin-map',
+        mutability: 'IMMUTABLE',
+        data: {
+          config: {
+            size: 'content',
+            alignment: 'center',
+            width: 740,
+            height: 650,
+          },
+          mapSettings: {
+            address: 'Sarnath, Varanasi, Uttar Pradesh, India',
+            locationDisplayName: 'Sarnath, Varanasi, Uttar Pradesh, India',
+            lat: 25.3761664,
+            lng: 83.02271029999997,
+            zoom: 18,
+            mode: 'satellite',
+            isMarkerShown: true,
+            isZoomControlShown: true,
+            isStreetViewControlShown: true,
+            isDraggingAllowed: true,
+          },
+        },
+      },
+    },
+  },
+  fileUpload: {
+    blocks: [
+      {
+        key: 'djpvb',
+        text: '',
+        type: 'unstyled',
+        depth: 0,
+        inlineStyleRanges: [],
+        entityRanges: [],
+        data: {},
+      },
+      {
+        key: '907ro',
+        text: ' ',
+        type: 'atomic',
+        depth: 0,
+        inlineStyleRanges: [],
+        entityRanges: [
+          {
+            offset: 0,
+            length: 1,
+            key: 0,
+          },
+        ],
+        data: {},
+      },
+      {
+        key: 'ds8pr',
+        text: '',
+        type: 'unstyled',
+        depth: 0,
+        inlineStyleRanges: [],
+        entityRanges: [],
+        data: {},
+      },
+    ],
+    entityMap: {
+      0: {
+        type: 'wix-draft-plugin-file-upload',
+        mutability: 'IMMUTABLE',
+        data: {
+          config: {
+            alignment: 'center',
+            size: 'small',
+          },
+          name: 'file-sample_150kB.pdf',
+          type: 'pdf',
+          uRL: 'http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf',
         },
       },
     },

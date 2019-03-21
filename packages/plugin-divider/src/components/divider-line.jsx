@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { Context } from 'wix-rich-content-common';
 
 import { LINE_DOUBLE } from '../constants';
 
@@ -27,23 +28,30 @@ const DividerLine = ({
   width,
   multilineDinstance,
   styles,
-  isMobile,
   className,
+  contextType,
 }) => {
   const lines = getLines(type, width, multilineDinstance);
-  const lineClassName = classNames(
-    styles.divider,
-    styles[`divider--${type}`],
-    styles[`divider--${size}${isMobile ? '--mobile' : ''}`],
-    styles[`divider--${alignment}`],
-    className
-  );
+  const { Consumer } = contextType || Context;
   return (
-    <svg className={lineClassName}>
-      {lines.map((props, i) => (
-        <line key={i} {...props} />
-      ))}
-    </svg>
+    <Consumer>
+      {context => {
+        const lineClassName = classNames(
+          styles.divider,
+          styles[`divider--${type}`],
+          styles[`divider--${size}${context.isMobile ? '--mobile' : ''}`],
+          styles[`divider--${alignment}`],
+          className
+        );
+        return (
+          <svg className={lineClassName}>
+            {lines.map((props, i) => (
+              <line key={i} {...props} />
+            ))}
+          </svg>
+        );
+      }}
+    </Consumer>
   );
 };
 
@@ -53,9 +61,9 @@ DividerLine.propTypes = {
   alignment: PropTypes.string,
   styles: PropTypes.object.isRequired,
   className: PropTypes.string,
-  isMobile: PropTypes.bool,
   width: PropTypes.number,
   multilineDinstance: PropTypes.number,
+  contextType: PropTypes.object,
 };
 
 export default DividerLine;

@@ -9,7 +9,16 @@ export default ({ helpers, t, settings }) => {
       tooltipText: t('MapPlugin_InsertButton_Tooltip'),
       toolbars: [TOOLBARS.FOOTER, TOOLBARS.SIDE],
       Icon: InsertPluginIcon,
-      componentData: Object.assign({}, DEFAULTS, settings),
+      // NOTE: settings contains google maps sdk key, should not be exposed
+      componentData: {
+        config: {
+          size: settings.size || DEFAULTS.size,
+          alignment: settings.alignment || DEFAULTS.alignment,
+          width: settings.width || DEFAULTS.width,
+          height: settings.height || DEFAULTS.height,
+        },
+        mapSettings: settings.mapSettings,
+      },
       helpers,
       t,
     },

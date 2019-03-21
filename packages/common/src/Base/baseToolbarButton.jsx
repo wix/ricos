@@ -13,6 +13,11 @@ class BaseToolbarButton extends React.Component {
   constructor(props) {
     super(props);
     this.state = { isActive: false };
+    const { settings, helpers } = props;
+    this.shouldHandleFileSelection = !(
+      (settings && settings.handleFileSelection) ||
+      (helpers && helpers.handleFileSelection)
+    );
   }
 
   componentDidMount() {
@@ -48,6 +53,7 @@ class BaseToolbarButton extends React.Component {
     }
   };
 
+  /* eslint-disable complexity */
   handleClick = event => {
     event.preventDefault();
     if (this.props.disabled) {
@@ -64,21 +70,27 @@ class BaseToolbarButton extends React.Component {
       onClick,
       anchorTarget,
       relValue,
+      settings,
       uiSettings,
       modalStyles,
       modalStylesFn,
       ...otherProps
     } = this.props;
 
-    if (this.props.type === BUTTONS.FILES && helpers && helpers.handleFileSelection) {
-      const multiple = !!this.props.multiple;
-      helpers.handleFileSelection(
-        undefined,
-        multiple,
-        pubsub.getBlockHandler('handleFilesAdded'),
-        undefined,
-        this.props.componentData
-      );
+    if (this.props.type === BUTTONS.FILES && !this.shouldHandleFileSelection) {
+      const updateEntity = pubsub.getBlockHandler('handleFilesAdded');
+      if (settings && settings.handleFileSelection) {
+        settings.handleFileSelection(updateEntity);
+      } else if (helpers && helpers.handleFileSelection) {
+        const multiple = !!this.props.multiple;
+        helpers.handleFileSelection(
+          undefined,
+          multiple,
+          updateEntity,
+          undefined,
+          this.props.componentData
+        );
+      }
       return;
     }
 
@@ -127,6 +139,7 @@ class BaseToolbarButton extends React.Component {
           relValue,
           t,
           theme: theme || {},
+          settings,
           uiSettings,
           modalStyles: appliedModalStyles,
           buttonRef: event.target,
@@ -142,6 +155,7 @@ class BaseToolbarButton extends React.Component {
     }
     onClick && onClick(pubsub);
   };
+  /* eslint-enable complexity */
 
   onComponentStateChange = componentState => {
     if (componentState.activeButton) {
@@ -197,10 +211,16 @@ class BaseToolbarButton extends React.Component {
   };
 
   renderFilesButton = (buttonClassNames, styles) => {
-    const { theme, isMobile, t, tooltipTextKey, tabIndex } = this.props;
+    const {
+      settings: { accept },
+      theme,
+      isMobile,
+      t,
+      tooltipTextKey,
+      tabIndex,
+    } = this.props;
     const tooltipText = t(tooltipTextKey);
     const showTooltip = !isMobile && !isEmpty(tooltipText);
-
     const replaceButtonWrapperClassNames = classNames(styles.buttonWrapper);
     const filesButton = (
       <div className={replaceButtonWrapperClassNames}>
@@ -210,7 +230,7 @@ class BaseToolbarButton extends React.Component {
           tabIndex={tabIndex}
           dataHook={this.getDataHook()}
           onChange={this.handleFileChange}
-          accept="image/*"
+          accept={accept}
           multiple={this.props.multiple}
         >
           {this.getIcon()}
@@ -252,7 +272,7 @@ class BaseToolbarButton extends React.Component {
   };
 
   render = () => {
-    const { helpers, disabled, theme: themedStyles } = this.props;
+    const { disabled, theme: themedStyles } = this.props;
     const { isActive } = this.state;
     const buttonWrapperClassNames = classNames(themedStyles.buttonWrapper);
     const buttonClassNames = classNames({
@@ -264,7 +284,7 @@ class BaseToolbarButton extends React.Component {
     let toolbarButton;
     switch (this.props.type) {
       case BUTTONS.FILES:
-        if (helpers && helpers.handleFileSelection) {
+        if (!this.shouldHandleFileSelection) {
           toolbarButton = this.renderToggleButton(buttonWrapperClassNames, buttonClassNames);
         } else {
           toolbarButton = this.renderFilesButton(buttonClassNames, themedStyles);
@@ -311,6 +331,11 @@ BaseToolbarButton.propTypes = {
   displayInlinePanel: PropTypes.func.isRequired,
   hideInlinePanel: PropTypes.func.isRequired,
   uiSettings: PropTypes.object,
+  settings: PropTypes.object,
+};
+
+BaseToolbarButton.defaultProps = {
+  settings: {},
 };
 
 export default BaseToolbarButton;

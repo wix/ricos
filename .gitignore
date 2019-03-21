@@ -12,6 +12,7 @@ stats.html
 
 #Webstorm
 **/.idea/*
+*.iml
 
 #VSCode
 **/.project
