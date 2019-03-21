@@ -20,8 +20,6 @@ export default class TextColorButton extends Component {
       isMobile,
       helpers,
       keyName,
-      anchorTarget,
-      relValue,
       t,
       uiSettings,
       config,
@@ -49,8 +47,6 @@ export default class TextColorButton extends Component {
         setEditorState,
         t,
         theme,
-        anchorTarget,
-        relValue,
         modalName: Modals.TEXT_COLOR_PICKER,
         hidePopup: helpers.closeModal,
         uiSettings,
@@ -61,7 +57,7 @@ export default class TextColorButton extends Component {
     } else {
       //eslint-disable-next-line no-console
       console.error(
-        'Open external helper function is not defined for toolbar button with keyName ' + keyName
+        'helpers.openModal function is not defined for toolbar button with keyName ' + keyName
       );
     }
   };
@@ -74,7 +70,7 @@ export default class TextColorButton extends Component {
       return {};
     }
     const { bottom, left } = buttonRef.getBoundingClientRect();
-    const panelTop = bottom + 50;
+    const panelTop = bottom + 60;
     const panelLeft = left - PANEL_WIDTH / 2;
     return { top: panelTop, left: panelLeft };
   };

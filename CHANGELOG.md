@@ -90,6 +90,8 @@
 
 ## 3.2.0 (Apr 8, 2019)
 ### :rocket: New Feature
+- `line-spacing`
+  - [#282](https://github.com/wix-incubator/rich-content/pull/282) add line-spacing plugin
 - `button`
   - [#275](https://github.com/wix-incubator/rich-content/pull/275) new button plugin
 ### :bug: Bug Fix

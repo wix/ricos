@@ -116,7 +116,7 @@ class App extends React.PureComponent {
           onChange={this.onEditorChange}
           editorState={this.state.editorState}
           readOnly={this.state.readOnly}
-          mobile={isMobile}
+          isMobile={isMobile}
           staticToolbar={this.state.staticToolbar}
         />
       </Suspense>
@@ -126,8 +126,8 @@ class App extends React.PureComponent {
         <Viewer initialState={this.state.viewerState} mobile={isMobile} config={this.config} />
       </Suspense>
     );
-    const checkBoxComponents = (isMobileDevice ? mobileCheckBoxes : checkBoxes).map(name => (
-      <div className="toggle">
+    const checkBoxComponents = (isMobileDevice ? mobileCheckBoxes : checkBoxes).map((name, i) => (
+      <div className="toggle" key={i}>
         <Checkbox name={name} checked={this.state[name]} onChange={this.onCheckBoxChange} />
       </div>
     ));
@@ -173,7 +173,7 @@ class App extends React.PureComponent {
                   <div className="column side">
                     <RichContentRawDataEditor
                       onChange={this.onRichContentRawDataEditorChange}
-                      content={cloneDeep(convertToRaw(this.state.editorState.getCurrentContent()))}
+                      content={(convertToRaw(this.state.editorState.getCurrentContent()))}
                     />
                   </div>
                 )}

@@ -128,7 +128,7 @@ export default class Editor extends PureComponent {
       ),
     };
     const { MobileToolbar, TextToolbar } = this.state;
-    const textToolbarType = this.props.staticToolbar ? 'static' : null;
+    const textToolbarType = this.props.staticToolbar && !this.props.isMobile ? 'static' : null;
     return (
       <div className={'editor'}>
         {MobileToolbar && <MobileToolbar />}

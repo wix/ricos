@@ -1,0 +1,180 @@
+.lineHeightsPanel {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 10px 0;
+  width: 174px;
+
+  * {
+    height: 42px;
+    border: none;
+    font-family: Avenir, serif;
+    font-size: 14px;
+    width: 100%;
+    text-align: left;
+    padding: 0 0 0 26px;
+    background-color: transparent;
+
+    &:hover {
+      color: #236fff;
+      cursor: pointer;
+    }
+  }
+}
+
+.lineHeightsPanel_selectedLineHeight,
+.lineSpacingMobilePanel_selectedLineHeight {
+  color: #236fff;
+}
+
+.lineSpacingMobilePanel {
+  display: flex;
+  flex-direction: column;
+  //align-items: flex-start;
+  padding: 16px 18px;
+
+  > * {
+    margin: 11px 0;
+  }
+
+  * {
+    font-family: Avenir, serif;
+    font-size: 14px;
+    background-color: transparent;
+    border: none;
+  }
+}
+
+.lineSpacingMobilePanel_heights {
+  display: flex;
+
+  * {
+    height: 40px;
+    flex: 1;
+    text-align: center;
+    padding: 0;
+  }
+}
+
+.lineSpacingMobilePanel_buttons {
+  display: flex;
+  justify-content: space-between;
+
+  * {
+    padding: 0;
+  }
+
+  :nth-child(2) {
+    color: #236fff;
+  }
+}
+
+.customSpacingPanel {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 0;
+  width: 248px;
+
+  > * {
+    margin: 9px 20px;
+  }
+
+  * {
+    font-family: Avenir, serif;
+    font-size: 14px;
+    color: #333333;
+  }
+}
+
+.customSpacingPanel_mobile {
+  border-radius: unset;
+  width: unset;
+}
+
+.customSpacingPanel_labeledInput {
+  height: 40px;
+  line-height: 40px;
+  display: flex;
+  justify-content: space-between;
+
+  * {
+    font-family: Avenir, serif;
+    font-size: 14px;
+  }
+
+  input {
+    width: 42px;
+    border: solid 1px rgba(51, 51, 51, 0.2);
+    padding-left: 12px;
+
+    &:focus {
+      border: solid 1px rgba(51, 51, 51, 0.5);
+    }
+
+    &::-webkit-inner-spin-button,
+    &::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  }
+}
+
+.lineSpacing_separator {
+  height: 1px;
+  background-color: rgba(51, 51, 51, 0.2);
+}
+
+.customSpacingPanel_buttons {
+  height: 34px;
+  display: flex;
+  justify-content: space-between;
+
+  * {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+  }
+
+  :nth-child(2) {
+    color: #236fff;
+  }
+}
+
+.lineSpacingContainer {
+  border: solid 1px #ededed;
+  border-radius: 6px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 0 4px 0 rgba(0, 0, 0, 0.1);
+}
+
+.lineSpacingContainer_mobile {
+  border: solid 1px #ededed;
+  border-radius: unset;
+  box-shadow: 0 -4px 8px 0 rgba(0, 0, 0, 0.05);
+}
+
+.lineSpacingModal {
+  position: fixed;
+  right: initial;
+  bottom: initial;
+  padding: 0;
+  background: #fff;
+}
+
+.lineSpacingModal_mobile {
+  border-radius: unset;
+  box-shadow: unset;
+}
+
+.lineSpacingModalOverlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: transparent;
+  z-index: 40;
+}
+.lineSpacingModalOverlay_mobile {
+  //background-color: rgba(0, 0, 0, 0.2);
+}

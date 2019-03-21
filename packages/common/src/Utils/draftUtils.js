@@ -80,12 +80,23 @@ export const getTextAlignment = (editorState, defaultAlignment = 'left') => {
 };
 
 export const setTextAlignment = (editorState, textAlignment) => {
+  return mergeBlockData(editorState, { textAlignment });
+};
+
+export const mergeBlockData = (editorState, data) => {
   const contentState = Modifier.mergeBlockData(
     editorState.getCurrentContent(),
     editorState.getSelection(),
-    { textAlignment }
+    data
   );
   return EditorState.push(editorState, contentState, 'change-block-data');
+};
+
+export const getAnchorBlockData = editorState => {
+  //*** anchor is where the user began the selection
+  const anchorKey = editorState.getSelection().getAnchorKey();
+  const block = editorState.getCurrentContent().getBlockForKey(anchorKey);
+  return block.get('data').toJS();
 };
 
 export const isAtomicBlockFocused = editorState => {
@@ -187,7 +198,7 @@ function removeLink(editorState, blockKey, [start, end]) {
 
 function getSelection(editorState) {
   let selection = editorState.getSelection();
-
+  //todo: seems like this is wrong. Should be start/end key. Anchor/focus key have diffrent meaning. (reference https://developer.mozilla.org/en-US/docs/Web/API/Selection#Glossary)
   if (selection.getIsBackward()) {
     selection = new SelectionState({
       anchorKey: selection.getFocusKey(),
