@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import {
   getModalStyles,
   InlineToolbarButton,
-  EditorModals,
   decorateComponentWithProps,
 } from 'wix-rich-content-common';
 import TextColorIcon from './TextColorIcon';
@@ -39,7 +38,7 @@ export default class TextColorButton extends Component {
           theme,
           anchorTarget,
           relValue,
-          modalName: EditorModals.MOBILE_TEXT_COLOR_MODAL,
+          modalName: TextColorPanel,
           hidePopup: helpers.closeModal,
           uiSettings,
         };
