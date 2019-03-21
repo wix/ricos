@@ -15,6 +15,7 @@ import handleKeyCommand from './handleKeyCommand';
 import handleReturnCommand from './handleReturnCommand';
 import blockStyleFn from './blockStyleFn';
 import getBlockRenderMap from './getBlockRenderMap';
+import { combineStyleFns } from './combineStyleFns';
 import { getStaticTextToolbarId } from './Toolbars/toolbar-id';
 import {
   AccessibilityListener,
@@ -46,12 +47,27 @@ class RichContentEditor extends Component {
   }
 
   initPlugins() {
-    const { helpers, plugins, config, isMobile, anchorTarget, relValue, t } = this.props;
+    const {
+      helpers,
+      plugins,
+      config,
+      isMobile,
+      anchorTarget,
+      relValue,
+      t,
+      customStyleFn,
+    } = this.props;
 
     const { theme } = this.state;
     const getEditorState = () => this.state.editorState;
     const setEditorState = editorState => this.setState({ editorState });
-    const { pluginInstances, pluginButtons, pluginTextButtons, pubsubs } = createPlugins({
+    const {
+      pluginInstances,
+      pluginButtons,
+      pluginTextButtons,
+      pubsubs,
+      styleFns: pluginStyleFns,
+    } = createPlugins({
       plugins,
       config,
       helpers,
@@ -67,6 +83,7 @@ class RichContentEditor extends Component {
     this.pluginKeyBindings = initPluginKeyBindings(pluginTextButtons);
     this.plugins = [...pluginInstances, ...Object.values(this.toolbars)];
     this.subscriberPubsubs = pubsubs || [];
+    this.customStyleFn = combineStyleFns([...pluginStyleFns, customStyleFn]);
   }
 
   initEditorToolbars(pluginButtons, pluginTextButtons) {
@@ -275,6 +292,7 @@ class RichContentEditor extends Component {
         )}
         editorKey={editorKey}
         keyBindingFn={keyBindingFn(this.getCustomCommandHandlers().commands || [])}
+        customStyleFn={this.customStyleFn}
         helpers={helpers}
         tabIndex={tabIndex}
         placeholder={placeholder || ''}
@@ -363,11 +381,13 @@ RichContentEditor.propTypes = {
   handleBeforeInput: PropTypes.func,
   handlePastedText: PropTypes.func,
   handleReturn: PropTypes.func,
+  customStyleFn: PropTypes.func,
 };
 
 RichContentEditor.defaultProps = {
   config: {},
   spellCheck: true,
+  customStyleFn: () => ({}),
 };
 
 export default translate(null, { withRef: true })(RichContentEditor);
