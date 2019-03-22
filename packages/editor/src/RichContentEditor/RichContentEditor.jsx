@@ -117,6 +117,7 @@ class RichContentEditor extends Component {
       refId: this.refId,
       getToolbarSettings: config.getToolbarSettings,
       uiSettings: config.uiSettings,
+      config,
     });
   }
 

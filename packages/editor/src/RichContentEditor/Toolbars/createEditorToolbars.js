@@ -23,7 +23,7 @@ const appendSeparator = ({ mergedList, sourceList, buttonData, formFactor }) => 
   return mergedList;
 };
 
-const createEditorToolbars = config => {
+const createEditorToolbars = data => {
   const {
     buttons,
     anchorTarget,
@@ -39,7 +39,8 @@ const createEditorToolbars = config => {
     refId,
     getToolbarSettings = () => [],
     uiSettings,
-  } = config;
+    config,
+  } = data;
   const { pluginButtons, pluginTextButtons } = buttons;
 
   const pubsub = simplePubsub();
@@ -121,6 +122,7 @@ const createEditorToolbars = config => {
           relValue,
           isMobile,
           helpers,
+          config,
           pubsub,
           refId,
           t,
