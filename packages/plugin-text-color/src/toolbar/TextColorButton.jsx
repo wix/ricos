@@ -1,66 +1,49 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {
-  getModalStyles,
-  InlineToolbarButton,
-  decorateComponentWithProps,
-} from 'wix-rich-content-common';
+import { getModalStyles, InlineToolbarButton } from 'wix-rich-content-common';
 import TextColorIcon from './TextColorIcon';
 import TextColorPanel from './TextColorPanel';
+import { TEXT_COLOR_TYPE } from '../types';
 
 export default class TextColorButton extends Component {
   showTextColorPanel = () => {
     const {
-      onExtendContent,
-      onOverrideContent,
       getEditorState,
       setEditorState,
       theme,
       isMobile,
-      textColorModal,
       helpers,
       keyName,
       anchorTarget,
       relValue,
       t,
       uiSettings,
+      config,
     } = this.props;
+    const settings = config[TEXT_COLOR_TYPE];
     const modalStyles = getModalStyles({ fullScreen: false });
-    if (isMobile || textColorModal) {
-      if (helpers && helpers.openModal) {
-        const modalProps = {
-          helpers,
-          modalStyles,
-          isMobile,
-          getEditorState,
-          setEditorState,
-          t,
-          theme,
-          anchorTarget,
-          relValue,
-          modalName: TextColorPanel,
-          hidePopup: helpers.closeModal,
-          uiSettings,
-        };
-        helpers.openModal(modalProps);
-      } else {
-        //eslint-disable-next-line no-console
-        console.error(
-          'Open external helper function is not defined for toolbar button with keyName ' + keyName
-        );
-      }
-    } else {
-      const linkPanelProps = {
-        onExtendContent,
-        onOverrideContent,
+    if (helpers && helpers.openModal) {
+      const modalProps = {
+        helpers,
+        modalStyles,
+        isMobile,
+        getEditorState,
+        setEditorState,
+        t,
+        theme,
         anchorTarget,
         relValue,
-        theme,
-        t,
+        modalElement: TextColorPanel,
+        hidePopup: helpers.closeModal,
         uiSettings,
+        settings,
       };
-      const TextColorPanelWithProps = decorateComponentWithProps(TextColorPanel, linkPanelProps);
-      onOverrideContent(TextColorPanelWithProps);
+      helpers.openModal(modalProps);
+    } else {
+      //eslint-disable-next-line no-console
+      console.error(
+        'Open external helper function is not defined for toolbar button with keyName ' + keyName
+      );
     }
   };
 
@@ -107,4 +90,5 @@ TextColorButton.propTypes = {
   t: PropTypes.func,
   tabIndex: PropTypes.number,
   uiSettings: PropTypes.object,
+  config: PropTypes.object,
 };
