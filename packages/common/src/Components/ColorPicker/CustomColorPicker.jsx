@@ -34,13 +34,13 @@ class CustomColorPicker extends React.Component {
     };
   }
   render() {
-    const { t } = this.props;
+    const { t, theme } = this.props;
     return (
       <div className={styles.customColorPicker_container}>
         <div style={this.inlineStyles.saturation}>
           <Saturation
             style={{ saturation: this.inlineStyles.saturation }}
-            pointer={() => <SaturationPointer />}
+            pointer={() => <SaturationPointer theme={theme} />}
             {...this.props}
           />
         </div>
@@ -48,7 +48,7 @@ class CustomColorPicker extends React.Component {
           <Hue
             style={{ hue: this.inlineStyles.hue }}
             {...this.props}
-            pointer={() => <HuePointer />}
+            pointer={() => <HuePointer theme={theme} />}
           />
         </div>
         <div className={styles.customColorPicker_editable_input_container}>
@@ -72,6 +72,7 @@ CustomColorPicker.propTypes = {
   t: PropTypes.func,
   color: PropTypes.string,
   isMobile: PropTypes.bool,
+  theme: PropTypes.object,
 };
 
 export default customPicker(CustomColorPicker);

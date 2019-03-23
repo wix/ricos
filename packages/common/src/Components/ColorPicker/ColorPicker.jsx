@@ -91,7 +91,7 @@ class ColorPicker extends PureComponent {
 
   render() {
     const { styles } = this;
-    const { colorPickerRef, isMobile, t } = this.props;
+    const { colorPickerRef, isMobile, t, theme } = this.props;
     let dropperColor = '';
     if (this.state.selectedIndex === -1) {
       if (this.getDarkBrightness(this.state.rgb)) {
@@ -122,7 +122,7 @@ class ColorPicker extends PureComponent {
       <div ref={colorPickerRef} className={styles.colorPicker_container}>
         {this.state.isOpened && <div className={styles.colorPicker_overlay} />}
         <div className={this.styles.colorPicker}>
-          <div className={this.styles.colorPicker_label}>{this.props.children}</div>
+          <div className={this.styles.colorPicker_label}>{this.props.label}</div>
           <div className={this.styles.colorPicker_picker}>
             <button
               style={{ background: this.state.color }}
@@ -158,6 +158,7 @@ class ColorPicker extends PureComponent {
                 onChange={this.onCustomColorPickerChanged.bind(this)}
                 t={t}
                 isMobile={isMobile}
+                theme={theme}
               />
             )}
           </div>
@@ -170,7 +171,7 @@ class ColorPicker extends PureComponent {
 ColorPicker.propTypes = {
   theme: PropTypes.object.isRequired,
   style: PropTypes.object,
-  children: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
   color: PropTypes.string,
   onClick: PropTypes.func,
   onChange: PropTypes.func,
