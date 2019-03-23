@@ -7,11 +7,10 @@ import { isHexColor } from '../utils';
 export default class TextColorPanel extends Component {
   constructor(props) {
     super(props);
+    const currentColors = getSelectionStyles(style => isHexColor(style), props.getEditorState());
     this.state = {
-      currentColors: getSelectionStyles(style => isHexColor(style), props.getEditorState()),
+      currentColor: currentColors.length > 0 ? currentColors[0] : props.defaultColor,
     };
-    this.state.currentColor =
-      this.state.currentColors.length > 0 ? this.state.currentColors[0] : props.defaultColor;
     this.setColor = this.setColor.bind(this);
   }
 
@@ -19,13 +18,13 @@ export default class TextColorPanel extends Component {
     this.applyInlineColorStyle(color);
     this.setState({
       currentColor: color,
-      currentColors: [color],
     });
   }
 
   applyInlineColorStyle(color) {
     const { getEditorState, setEditorState } = this.props;
-    const newEditorState = this.state.currentColors.reduce((nextEditorState, prevColor) => {
+    const currentColors = getSelectionStyles(style => isHexColor(style), getEditorState());
+    const newEditorState = currentColors.reduce((nextEditorState, prevColor) => {
       const selection = nextEditorState.getSelection();
       const contentState = nextEditorState.getCurrentContent();
       const nextContentState = Modifier.removeInlineStyle(contentState, selection, prevColor);
