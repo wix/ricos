@@ -1,36 +1,57 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { ColorPicker } from 'wix-rich-content-common';
+import { Modifier, EditorState } from '@wix/draft-js';
+import { ColorPicker, getSelectionStyles } from 'wix-rich-content-common';
+import { isHexColor } from '../utils';
 
 export default class TextColorPanel extends Component {
-  componentDidMount() {
-    const { getEditorState } = this.props;
-    this.currentColor = this.getColorDataInSelection(getEditorState());
+  constructor(props) {
+    super(props);
+    this.state = {
+      currentColors: getSelectionStyles(style => isHexColor(style), props.getEditorState()),
+    };
+    this.state.currentColor =
+      this.state.currentColors.length > 0 ? this.state.currentColors[0] : props.defaultColor;
+    this.setColor = this.setColor.bind(this);
   }
 
-  // TODO: get inline color styles from selection
-  getColorDataInSelection = () => ({});
+  setColor(color) {
+    this.applyInlineColorStyle(color);
+    this.setState({
+      currentColor: color,
+      currentColors: [color],
+    });
+  }
 
-  createInlineColorStyle = () => {
+  applyInlineColorStyle(color) {
     const { getEditorState, setEditorState } = this.props;
-    const newEditorState = getEditorState();
-    setEditorState(newEditorState);
+    const newEditorState = this.state.currentColors.reduce((nextEditorState, prevColor) => {
+      const selection = nextEditorState.getSelection();
+      const contentState = nextEditorState.getCurrentContent();
+      const nextContentState = Modifier.removeInlineStyle(contentState, selection, prevColor);
+      return EditorState.push(nextEditorState, nextContentState, 'change-inline-style');
+    }, getEditorState());
 
-    this.hideColorPanel();
-  };
+    const selection = newEditorState.getSelection();
+    const contentState = newEditorState.getCurrentContent();
+    const newContentState = Modifier.applyInlineStyle(contentState, selection, color);
+    setEditorState(EditorState.push(newEditorState, newContentState, 'change-inline-style'));
+  }
 
   render() {
-    const { theme, settings } = this.props;
+    const { theme, settings, t } = this.props;
     return (
       <ColorPicker
-        color={'#bada55'}
+        color={this.state.currentColor}
         settings={settings}
-        onChange={() => {}}
+        onChange={this.setColor}
         onClick={() => {}}
         theme={theme}
-        isOpened={() => {}}
+        isOpened
         index={0}
         scrollColorPickerDown={() => {}}
+        t={t}
+        label={''}
       />
     );
   }
@@ -39,10 +60,13 @@ export default class TextColorPanel extends Component {
 TextColorPanel.propTypes = {
   getEditorState: PropTypes.func.isRequired,
   setEditorState: PropTypes.func.isRequired,
-  onExtendContent: PropTypes.func.isRequired,
-  onOverrideContent: PropTypes.func.isRequired,
   theme: PropTypes.object.isRequired,
   t: PropTypes.func,
   uiSettings: PropTypes.object,
   settings: PropTypes.object,
+  defaultColor: PropTypes.string,
+};
+
+TextColorPanel.defaultProps = {
+  defaultColor: '#000000',
 };

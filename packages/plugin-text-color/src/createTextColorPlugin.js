@@ -3,12 +3,13 @@ import { TEXT_COLOR_TYPE } from './types';
 import { isHexColor } from './utils';
 import createTextColorToolbar from './toolbar/createTextColorToolbar';
 
-const customStyleFn = style => {
-  if (isHexColor(style)) {
-    return { color: style };
-  }
-  return {};
-};
+const customStyleFn = styles =>
+  styles
+    .toArray()
+    .reduce(
+      (cssStyle, style) => ({ ...cssStyle, ...(isHexColor(style) ? { color: style } : {}) }),
+      {}
+    );
 
 const createTextColorPlugin = (config = {}) => {
   const type = TEXT_COLOR_TYPE;
