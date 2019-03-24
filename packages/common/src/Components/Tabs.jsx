@@ -56,9 +56,6 @@ export class Tabs extends Component {
   getTabHeaders = tabs =>
     React.Children.map(tabs, tab => ({ label: tab.props.label, value: tab.props.value }));
 
-  getTabHeaders = tabs =>
-    React.Children.map(tabs, tab => ({ label: tab.props.label, value: tab.props.value }));
-
   renderTabs = () =>
     React.Children.map(this.props.children, tab =>
       React.cloneElement(tab, {
