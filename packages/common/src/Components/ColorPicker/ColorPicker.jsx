@@ -12,22 +12,13 @@ class ColorPicker extends PureComponent {
   constructor(props) {
     super(props);
     this.styles = mergeStyles({ styles, theme: props.theme });
-    const { colors } = this.props.settings;
-    this.presetColors = [
-      colors.color_1,
-      colors.color_5,
-      colors.color_8,
-      colors.color_7,
-      colors.color_6,
-      colors.color_10,
-    ];
 
     this.state = {
       color: this.props.color,
       rgb: hexRgb(this.props.color),
       isOpened: this.props.isOpened,
       isCustomColorPickerOpened: false,
-      selectedIndex: this.presetColors.indexOf(this.props.color.toUpperCase()),
+      selectedIndex: props.palette.indexOf(this.props.color.toUpperCase()),
     };
   }
 
@@ -48,7 +39,7 @@ class ColorPicker extends PureComponent {
   onColorButtonClicked = index => {
     this.props.scrollColorPickerDown();
     if (index !== -1) {
-      this.setColor(this.presetColors[index]);
+      this.setColor(this.props.palette[index]);
     } else {
       this.setState({ isCustomColorPickerOpened: !this.state.isCustomColorPickerOpened });
     }
@@ -56,7 +47,7 @@ class ColorPicker extends PureComponent {
 
   setColor = color => {
     const selectedColor = color.toUpperCase();
-    const index = this.presetColors.indexOf(selectedColor);
+    const index = this.props.palette.indexOf(selectedColor);
     this.setState({
       selectedIndex: index,
       color: selectedColor,
@@ -100,7 +91,7 @@ class ColorPicker extends PureComponent {
         dropperColor = '#000000';
       }
     }
-    const colorsButtons = this.presetColors.map((color, index) => {
+    const colorsButtons = this.props.palette.map((color, index) => {
       return (
         <div
           role="button"
@@ -172,11 +163,12 @@ ColorPicker.propTypes = {
   theme: PropTypes.object.isRequired,
   style: PropTypes.object,
   label: PropTypes.string.isRequired,
-  color: PropTypes.string,
+  color: PropTypes.string.isRequired,
   onClick: PropTypes.func,
   onChange: PropTypes.func,
   isOpened: PropTypes.bool,
-  settings: PropTypes.object.isRequired,
+  palette: PropTypes.arrayOf(PropTypes.string).isRequired,
+  userColors: PropTypes.arrayOf(PropTypes.string),
   t: PropTypes.func,
   index: PropTypes.number,
   scrollColorPickerDown: PropTypes.func,
