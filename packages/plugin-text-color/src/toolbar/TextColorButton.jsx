@@ -4,6 +4,7 @@ import { getModalStyles, InlineToolbarButton } from 'wix-rich-content-common';
 import TextColorIcon from './TextColorIcon';
 import TextColorPanel from './TextColorPanel';
 import { TEXT_COLOR_TYPE } from '../types';
+import { MODAL_STYLES, PANEL_WIDTH } from './constants';
 
 export default class TextColorButton extends Component {
   showTextColorPanel = () => {
@@ -21,7 +22,15 @@ export default class TextColorButton extends Component {
       config,
     } = this.props;
     const settings = config[TEXT_COLOR_TYPE];
-    const modalStyles = getModalStyles({ fullScreen: false });
+
+    const modalStyles = getModalStyles({
+      fullScreen: false,
+      inline: true,
+      customStyles: {
+        content: { ...MODAL_STYLES.content, ...this.calculatePanelLocation(this.element) },
+        overlay: MODAL_STYLES.overlay,
+      },
+    });
     if (helpers && helpers.openModal) {
       const modalProps = {
         helpers,
@@ -47,6 +56,16 @@ export default class TextColorButton extends Component {
     }
   };
 
+  calculatePanelLocation = buttonRef => {
+    if (!buttonRef) {
+      return {};
+    }
+    const { top, left } = buttonRef.getBoundingClientRect();
+    const panelTop = top + 1;
+    const panelLeft = left - PANEL_WIDTH / 2;
+    return { top: panelTop, left: panelLeft };
+  };
+
   // TODO: check if has text color inline style and such single style is in selection
   get isActive() {
     return false; // this.hasInlineColorInSelection(this.props.getEditorState());
@@ -62,15 +81,17 @@ export default class TextColorButton extends Component {
       active: theme.inlineToolbarButton_active,
     };
     return (
-      <InlineToolbarButton
-        onClick={this.showTextColorPanel}
-        isActive={this.isActive}
-        theme={{ ...theme, ...buttonStyles }}
-        isMobile={isMobile}
-        tooltipText={tooltip}
-        tabIndex={tabIndex}
-        icon={TextColorIcon}
-      />
+      <div ref={ref => (this.element = ref)}>
+        <InlineToolbarButton
+          onClick={this.showTextColorPanel}
+          isActive={this.isActive}
+          theme={{ ...theme, ...buttonStyles }}
+          isMobile={isMobile}
+          tooltipText={tooltip}
+          tabIndex={tabIndex}
+          icon={TextColorIcon}
+        />
+      </div>
     );
   }
 }

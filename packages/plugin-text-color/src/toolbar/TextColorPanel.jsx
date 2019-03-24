@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Modifier, EditorState } from '@wix/draft-js';
 import { ColorPicker, getSelectionStyles } from 'wix-rich-content-common';
 import { isHexColor } from '../utils';
+import { DEFAULT_PALETTE } from './constants';
 
 export default class TextColorPanel extends Component {
   constructor(props) {
@@ -39,10 +40,13 @@ export default class TextColorPanel extends Component {
 
   render() {
     const { theme, settings, t } = this.props;
+    const palette = settings.palette || DEFAULT_PALETTE;
+    const userColors = settings.userColors || [];
     return (
       <ColorPicker
         color={this.state.currentColor}
-        settings={settings}
+        palette={palette}
+        userColors={userColors}
         onChange={this.setColor}
         onClick={() => {}}
         theme={theme}
