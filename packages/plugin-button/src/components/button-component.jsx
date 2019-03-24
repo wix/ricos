@@ -19,12 +19,12 @@ class ButtonComponent extends PureComponent {
     const {
       componentData: { button },
       buttonObj,
-      anchorTarget,
-      relValue,
       t,
       theme,
       blockProps,
     } = this.props;
+    const anchorTarget = this.props.anchorTarget ? this.props.anchorTarget : '_self';
+    const relValue = this.props.relValue ? this.props.relValue : '';
     let buttonText = button.buttonText;
     let rel = '';
     let url = '';
@@ -87,8 +87,8 @@ ButtonComponent.propTypes = {
   componentData: PropTypes.object,
   style: PropTypes.object,
   buttonObj: PropTypes.object,
-  anchorTarget: PropTypes.string.isRequired,
-  relValue: PropTypes.string.isRequired,
+  anchorTarget: PropTypes.string,
+  relValue: PropTypes.string,
   settings: PropTypes.object.isRequired,
   t: PropTypes.func,
   blockProps: PropTypes.object,

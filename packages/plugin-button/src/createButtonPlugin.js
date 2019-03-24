@@ -1,5 +1,5 @@
 import createToolbar from './toolbar';
-import { createBasePlugin, mergeStyles, decorateComponentWithProps } from 'wix-rich-content-common';
+import { createBasePlugin, mergeStyles } from 'wix-rich-content-common';
 
 import { BUTTON_TYPE } from './constants';
 
@@ -19,17 +19,8 @@ const createButtonPlugin = (config = {}) => {
     ...rest
   } = config;
   const styles = mergeStyles({ styles: Styles, theme });
-  const buttonProps = {
-    className: theme,
-    anchorTarget,
-    relValue,
-    settings,
-  };
-
-  const buttonEntityComponent = decorateComponentWithProps(ButtonComponent, buttonProps);
-
   return createBasePlugin({
-    component: buttonEntityComponent,
+    component: ButtonComponent,
     settings,
     theme,
     type: BUTTON_TYPE,
