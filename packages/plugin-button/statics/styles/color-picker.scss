@@ -93,6 +93,7 @@ $size: 10px;
   display: inline-block;
   border: solid 1px #ededed;
   margin-right: 18px;
+  box-sizing: border-box;
   cursor: pointer;
   @include phone {
     width: 30px;
