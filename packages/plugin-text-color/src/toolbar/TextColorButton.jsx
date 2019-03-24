@@ -24,14 +24,14 @@ export default class TextColorButton extends Component {
     const settings = config[TEXT_COLOR_TYPE];
 
     const modalStyles = getModalStyles({
-      fullScreen: false,
-      inline: true,
+      fullScreen: true,
       customStyles: {
         content: { ...MODAL_STYLES.content, ...this.calculatePanelLocation(this.element) },
         overlay: MODAL_STYLES.overlay,
       },
     });
     if (helpers && helpers.openModal) {
+      this.props.setKeepOpen(true);
       const modalProps = {
         helpers,
         modalStyles,
@@ -60,8 +60,8 @@ export default class TextColorButton extends Component {
     if (!buttonRef) {
       return {};
     }
-    const { top, left } = buttonRef.getBoundingClientRect();
-    const panelTop = top + 1;
+    const { bottom, left } = buttonRef.getBoundingClientRect();
+    const panelTop = bottom - 10;
     const panelLeft = left - PANEL_WIDTH / 2;
     return { top: panelTop, left: panelLeft };
   };
@@ -112,4 +112,5 @@ TextColorButton.propTypes = {
   tabIndex: PropTypes.number,
   uiSettings: PropTypes.object,
   config: PropTypes.object,
+  setKeepOpen: PropTypes.object.isRequired,
 };

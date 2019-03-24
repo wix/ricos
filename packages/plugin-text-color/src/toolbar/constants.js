@@ -8,6 +8,9 @@ export const MODAL_STYLES = {
     position: 'absolute',
     borderRadius: 6,
     border: 'solid 1px #ededed',
+    margin: 0,
   },
-  overlay: {},
+  overlay: {
+    background: 'transparent',
+  },
 };
