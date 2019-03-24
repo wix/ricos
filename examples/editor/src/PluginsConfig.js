@@ -83,6 +83,8 @@ const getLinkPanelDropDownConfig = () => {
   };
 };
 
+let userColors = [];
+
 const uiSettings = {
   themeColors,
   linkPanel: {
@@ -198,7 +200,10 @@ export default {
     },
   },
   [TEXT_COLOR_TYPE]: {
-    //palette: ['#FEFDFD', '#D5D4D4', '#ABCAFF', '#81B0FF', '#0261FF', '#0141AA'],
+    palette: ['#FEFDFD', '#D5D4D4', '#ABCAFF', '#81B0FF', '#0261FF', '#0141AA'],
+    defaultColor: '#FEFDFD',
+    onColorAdded: color => (userColors = [color, ...userColors]),
+    getUserColors: () => userColors,
   },
   [FILE_UPLOAD_TYPE]: {
     accept: '*',

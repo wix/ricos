@@ -46,6 +46,7 @@ export default class TextColorButton extends Component {
         hidePopup: helpers.closeModal,
         uiSettings,
         settings,
+        setKeepToolbarOpen: this.props.setKeepOpen,
       };
       helpers.openModal(modalProps);
     } else {
