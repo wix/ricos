@@ -33,36 +33,10 @@
 .color_picker_dropper {
 }
 
-$color1: #fff;
-$color2: #eeeeee;
-$size: 10px;
-%palette {
-  background-image: linear-gradient(45deg, $color1 25%, transparent 25%, transparent 75%, $color1 75%),
-    linear-gradient(45deg, $color1 25%, $color2 25%, $color2 75%, $color1 75%);
-  background-size: $size $size;
-  background-position: 0 0, $size/2 $size/2;
-  position: relative;
-  width: 34px;
-  height: 34px;
-  border-radius: 28px;
-  display: inline-block;
-  border: solid 1px #ededed;
-  margin-right: 18px;
-  cursor: pointer;
-  @include phone {
-    width: 30px;
-    height: 30px;
-    margin-left: 0px;
-    box-sizing: border-box;
-  }
-}
-
 .color_picker_non_dropper_palette {
-  @extend %palette;
 }
 
 .color_picker_dropper_palette {
-  @extend %palette;
 }
 
 .color_picker_palettes {
