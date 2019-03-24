@@ -1,6 +1,3 @@
-@import "~wix-rich-content-common/dist/statics/styles/mixins";
-@import "~wix-rich-content-common/dist/statics/styles/palette";
-
 .button_sample {
 }
 .button_sample_container {
@@ -66,7 +63,6 @@ $size: 10px;
 
 .color_picker_dropper_palette {
   @extend %palette;
-  margin-right: 0px;
 }
 
 .color_picker_palettes {
