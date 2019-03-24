@@ -117,10 +117,6 @@ const inlineStyles = {
 
 export const getModalStyles = ({ customStyles = null, fullScreen = true, inline = false } = {}) => {
   const overrideStyles = [];
-  if (customStyles) {
-    overrideStyles.push(customStyles);
-  }
-
   if (WixUtils.isMobile()) {
     if (fullScreen) {
       overrideStyles.push(mobileFullScreenOverrideStyles);
@@ -132,6 +128,9 @@ export const getModalStyles = ({ customStyles = null, fullScreen = true, inline 
     }
     if (inline) {
       overrideStyles.push(inlineStyles);
+    }
+    if (customStyles) {
+      overrideStyles.push(customStyles);
     }
     return merge({}, desktopSideBarStyles, ...overrideStyles);
   }
