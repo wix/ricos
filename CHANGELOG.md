@@ -8,7 +8,41 @@
 > - :house: [Internal]
 
 ## [Unreleased]
+- `Button Plugin`
+  - [#275](https://github.com/wix-incubator/rich-content/pull/275) `plugin-button` Add button plugin to RCE
 <hr/>
+
+## 3.1.1 (Mar 20, 2019)
+### :rocket: New Feature
+- `file-upload`
+  - [#281](https://github.com/wix-incubator/rich-content/pull/281) new file upload plugin
+- `map`
+  - [92e3d9a6](https://github.com/wix-incubator/rich-content/commit/92e3d9a6), [#280](https://github.com/wix-incubator/rich-content/pull/280) dynamic map component dimentions; settings redesigned
+### :bug: Bug Fix
+- `map`
+  - [#274](https://github.com/wix-incubator/rich-content/pull/274) redundant code removed
+  - [39b380df](https://github.com/wix-incubator/rich-content/commit/39b380df) removed `store` from `map-viewer`, removed Maps API key from `component-data`, missing defaults added; styles fixed; `isMobile` prop used in `map-settings`
+### :house: Internal
+- `common`
+  - [#274](https://github.com/wix-incubator/rich-content/pull/274) `Context` component is implemented as a `React.createContext()` wrapper
+  - [#281](https://github.com/wix-incubator/rich-content/pull/281) renamed `ImageLoader` to `Loader`
+- `editor`
+  - [#274](https://github.com/wix-incubator/rich-content/pull/274) `Context.Provider` is integrated into `RCE`
+- `viewer`
+  - [#274](https://github.com/wix-incubator/rich-content/pull/274) `Context.Provider` is integrated into `RCV`
+- `plugins`
+  - [#274](https://github.com/wix-incubator/rich-content/pull/274) every plugin's `Component` and `Viewer` components now rely on Context
+- `examples/viewer`
+  - [#274](https://github.com/wix-incubator/rich-content/pull/274) `giphy`, `map`, and `soundCloud` examples added
+<hr/>
+
+
+## 3.0.9 (Mar 14, 2019)
+### :rocket: New Feature
+- `common`
+  - [#278](https://github.com/wix-incubator/rich-content/pull/278) color-picker component initial implementation
+<hr/>
+
 
 ## 3.0.8  (Mar 12, 2019)
 ### :rocket: New Feature
@@ -19,11 +53,13 @@
   - [d00fc1c](https://github.com/wix-incubator/rich-content/commit/d00fc1c2042150f3b9b121332d4b30dccbc0e982) removed `@wix/draft-js` dependency
 <hr/>
 
+
 ## 3.0.7 (Mar 11, 2019)
 ### :house: Internal
 - `viewer`
   - [d4dcbd7](https://github.com/wix-incubator/rich-content/commit/d4dcbd76366484b0133b040656f7f3f8ad1b23e7) react-native css-module issue fix
 <hr/>
+
 
 ## 3.0.6 (Mar 11, 2019)
 ### :house: Internal
@@ -31,11 +67,13 @@
   - [bc46ff2](https://github.com/wix-incubator/rich-content/commit/bc46ff207a1f2c9b456f8b6d645e0ca001e307bc) mergedStyles are passed to AtomicBlock as a prop [React Native requirement]
 <hr/>
 
+
 ## 3.0.5 (Mar 8, 2019)
 ### :bug: Bug Fix
 - `common`
   - [c9d954d](https://github.com/wix-incubator/rich-content/commit/c9d954d39c1d496649794c7edfe43a199a8552b5) original size image streching in mobile
 <hr/>
+
 
 ## 3.0.4 (Mar 6, 2019)
 ### :bug: Bug Fix
@@ -234,10 +272,6 @@ _NOTE:_ From this version onwards all modules will have the same version number,
   - [#205](https://github.com/wix-incubator/rich-content/pull/205) block headers
 - `link`
   - [#212](https://github.com/wix-incubator/rich-content/pull/212) optional auto link
-- `Button Plugin`
-  - [#201](https://github.com/wix-incubator/rich-content/pull/201) `plugin-button` Add button plugin to RCE
-  
-</br>
 ### :bug: Bug Fix
 - `viewer`
   - [#214](https://github.com/wix-incubator/rich-content/pull/214) soft new line at end of block
