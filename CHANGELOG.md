@@ -12,7 +12,6 @@
   - [#275](https://github.com/wix-incubator/rich-content/pull/275) `plugin-button` Add button plugin to RCE
 <hr/>
 
-
 ## 3.0.5 (Mar 8, 2019)
 ### :bug: Bug Fix
 - `common`
