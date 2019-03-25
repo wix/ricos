@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { CustomPicker } from 'react-color';
+import { mergeStyles } from '../../Utils/mergeStyles';
 import { Saturation, Hue, EditableInput } from 'react-color/lib/components/common';
 import HuePointer from './HuePointer.jsx';
 import SaturationPointer from './SaturationPointer';
@@ -11,15 +12,16 @@ const customPicker = CustomPicker;
 class CustomColorPicker extends React.Component {
   constructor(props) {
     super(props);
+    this.styles = mergeStyles({ styles, theme: props.theme });
     this.inlineStyles = {
       hue: {
-        height: props.isMobile ? '24px' : '12px',
+        height: 24,
         position: 'relative',
-        marginTop: props.isMobile ? '12px' : '6px',
+        marginTop: 12,
       },
       saturation: {
         width: '100%',
-        height: '112px',
+        height: 'auto',
         position: 'relative',
         touchAction: 'none',
       },
@@ -32,19 +34,24 @@ class CustomColorPicker extends React.Component {
         border: 'none',
       },
     };
+    this.state = {
+      color: props.color,
+    };
   }
+
   render() {
+    const { styles } = this;
     const { t, theme } = this.props;
     return (
       <div className={styles.customColorPicker_container}>
-        <div style={this.inlineStyles.saturation}>
+        <div className={styles.customColorPicker_saturation}>
           <Saturation
             style={{ saturation: this.inlineStyles.saturation }}
             pointer={() => <SaturationPointer theme={theme} />}
             {...this.props}
           />
         </div>
-        <div style={this.inlineStyles.hue}>
+        <div className={styles.customColorPicker_hue}>
           <Hue
             style={{ hue: this.inlineStyles.hue }}
             {...this.props}
@@ -58,7 +65,7 @@ class CustomColorPicker extends React.Component {
           <div className={styles.customColorPicker_input_container}>
             <EditableInput
               style={{ input: this.inlineStyles.input }}
-              value={this.props.color}
+              value={this.state.color}
               {...this.props}
             />
           </div>
@@ -73,6 +80,7 @@ CustomColorPicker.propTypes = {
   color: PropTypes.string,
   isMobile: PropTypes.bool,
   theme: PropTypes.object,
+  onChange: PropTypes.func,
 };
 
 export default customPicker(CustomColorPicker);

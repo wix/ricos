@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import hexRgb from 'hex-rgb';
 import { mergeStyles } from '../../Utils/mergeStyles';
 import CustomColorPicker from './CustomColorPicker';
 import AddColorIcon from '../../Icons/AddColorIcon';
@@ -14,7 +13,6 @@ class ColorPicker extends PureComponent {
 
     this.state = {
       color: this.props.color,
-      rgb: hexRgb(this.props.color),
       isCustomColorPickerOpened: false,
     };
 
@@ -27,18 +25,15 @@ class ColorPicker extends PureComponent {
 
   setColor = color => {
     const selectedColor = color.toUpperCase();
-    const index = this.props.palette.indexOf(selectedColor);
     this.setState({
-      selectedIndex: index,
       color: selectedColor,
-      rgb: hexRgb(selectedColor),
     });
     this.props.onChange(color);
   };
 
   onCustomColorPickerChanged = color => {
     if (color.hex !== this.state.color) {
-      this.setColor(color.hex);
+      this.props.onColorAdded(color.hex.toUpperCase());
     }
   };
 
@@ -52,10 +47,11 @@ class ColorPicker extends PureComponent {
     const { styles } = this;
     return colors.map((color, index) => (
       <button
+        title={color}
         key={`${color}_${index}`}
         className={classNames({
           [styles.colorPicker_button]: true,
-          [styles.colorPicker_button_selected]: this.state.color === color,
+          [styles.colorPicker_button_selected]: this.state.color === color.toUpperCase(),
         })}
         style={{ background: color, '--border-color': color }}
         onClick={this.onColorButtonClicked.bind(this, color)}
@@ -71,10 +67,10 @@ class ColorPicker extends PureComponent {
   renderAddColorButton() {
     const { styles } = this;
     return (
-      <div key={'add_color_button'}>
+      <div key={'add_color_button'} className={styles.colorPicker_add_color_button}>
         <button
           id={'add_color_button'}
-          className={styles.colorPicker_add_color_button}
+          className={styles.colorPicker_add_color_button_hidden}
           onClick={this.toggleCustomColorPicker}
         />
         <label
@@ -96,17 +92,21 @@ class ColorPicker extends PureComponent {
         {this.state.isCustomColorPickerOpened ? (
           <CustomColorPicker
             color={this.state.color}
-            onChange={this.onCustomColorPickerChanged.bind(this)}
+            onChange={this.onCustomColorPickerChanged}
             t={t}
             isMobile={isMobile}
             theme={theme}
           />
         ) : (
           <div className={styles.colorPicker_palette}>
-            {this.renderColorButtons(this.props.palette)}
+            <div className={styles.colorPicker_buttons_container}>
+              {this.renderColorButtons(this.props.palette)}
+            </div>
             {this.renderSeparator()}
-            {this.renderColorButtons(this.props.userColors)}
-            {this.renderAddColorButton()}
+            <div className={styles.colorPicker_buttons_container}>
+              {this.renderColorButtons(this.props.userColors)}
+              {this.renderAddColorButton()}
+            </div>
           </div>
         )}
       </div>
@@ -121,6 +121,7 @@ ColorPicker.propTypes = {
   palette: PropTypes.arrayOf(PropTypes.string).isRequired,
   userColors: PropTypes.arrayOf(PropTypes.string),
   t: PropTypes.func,
+  onColorAdded: PropTypes.func.isRequired,
   isMobile: PropTypes.bool,
 };
 

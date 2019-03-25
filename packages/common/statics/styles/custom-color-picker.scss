@@ -1,12 +1,24 @@
-@import './palette.scss';
-@import './mixins.scss';
+@import "./palette.scss";
+@import "./mixins.scss";
 
 .customColorPicker_container {
-  padding-top: 18px;
-  @include phone {
-    padding-top: 3px;
-  }
+  width: 312px;
+  height: 146px;
+  margin: 24px 24px 15px 24px;
 }
+
+.customColorPicker_saturation {
+  width: 312px;
+  height: 76px;
+  position: relative;
+}
+
+.customColorPicker_hue {
+  height: 24px;
+  position: relative;
+  margin-top: 12px;
+}
+
 .customColorPicker_editable_input_container {
   padding-top: 0px;
   @include phone {
@@ -22,6 +34,7 @@
   margin-right: 5px;
   display: inline-block;
 }
+
 .customColorPicker_input_container {
   font-size: 14px;
   color: #333333;
