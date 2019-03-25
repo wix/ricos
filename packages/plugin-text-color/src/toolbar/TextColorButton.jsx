@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { getModalStyles, InlineToolbarButton } from 'wix-rich-content-common';
 import TextColorIcon from './TextColorIcon';
-import TextColorPanel from './TextColorPanel';
 import { TEXT_COLOR_TYPE } from '../types';
 import { MODAL_STYLES, PANEL_WIDTH } from './constants';
+import { Modals } from '../modals';
 
 export default class TextColorButton extends Component {
   showTextColorPanel = () => {
@@ -42,7 +42,7 @@ export default class TextColorButton extends Component {
         theme,
         anchorTarget,
         relValue,
-        modalElement: TextColorPanel,
+        modalName: Modals.TEXT_COLOR_PICKER,
         hidePopup: helpers.closeModal,
         uiSettings,
         settings,
