@@ -30,11 +30,6 @@ class CustomColorPickerDialog extends Component {
     this.props.onChange(this.state.color);
   }
 
-  renderSeparator() {
-    const { styles } = this;
-    return <hr className={styles.colorPickerDialog_separator} />;
-  }
-
   render() {
     const { styles } = this;
     const { t, isMobile, theme } = this.props;
@@ -47,7 +42,7 @@ class CustomColorPickerDialog extends Component {
           isMobile={isMobile}
           theme={theme}
         />
-        {this.renderSeparator()}
+        <hr className={styles.colorPickerDialog_separator} />
         <div className={styles.colorPickerDialog_buttons}>
           <button className={styles.colorPickerDialog_button} onClick={this.onCancel}>
             {t('ColorPickerButtonLabel_Cancel')}
