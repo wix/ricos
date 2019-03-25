@@ -10,7 +10,7 @@
 ## [Unreleased]
 ### :rocket: New Feature
 - `text-color`
-  - Text Color plugin added
+  - plugin created
 <hr/>
 
 ## 3.1.1 (Mar 20, 2019)
