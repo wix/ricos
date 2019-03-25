@@ -1,4 +1,6 @@
 {
+  "ColorPickerButtonLabel_Cancel": "Cancel",
+  "ColorPickerButtonLabel_Update": "Update",
   "LineSpacing_customSpacing": "Custom Spacing",
   "LineSpacing_lineSpacing": "Line Spacing",
   "LineSpacing_beforeParagraph": "Before Paragraph",
