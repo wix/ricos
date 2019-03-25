@@ -12,8 +12,10 @@ export default class TextColorPanel extends Component {
     const currentColors = getSelectionStyles(style => isHexColor(style), props.getEditorState());
     this.state = {
       currentColor: currentColors.length > 0 ? currentColors[0] : defaultColor,
+      userColors: props.settings.getUserColors() || [],
     };
     this.setColor = this.setColor.bind(this);
+    this.onColorAdded = this.onColorAdded.bind(this);
   }
 
   componentWillUnmount() {
@@ -43,21 +45,26 @@ export default class TextColorPanel extends Component {
     setEditorState(EditorState.push(newEditorState, newContentState, 'change-inline-style'));
   }
 
+  onColorAdded(color) {
+    this.props.settings.onColorAdded(color);
+    this.setState({
+      userColors: this.props.settings.getUserColors() || [],
+    });
+  }
+
   render() {
-    const { theme, settings, t } = this.props;
+    const { theme, settings, t, setKeepToolbarOpen } = this.props;
     const palette = settings.palette || DEFAULT_PALETTE;
-    const userColors = settings.getUserColors() || [];
     return (
       <ColorPicker
         color={this.state.currentColor}
         palette={palette.slice(0, 6)}
-        userColors={userColors.slice(0, 17)}
-        onColorAdded={settings.onColorAdded}
+        userColors={this.state.userColors.slice(0, 17)}
+        onColorAdded={this.onColorAdded}
         onChange={this.setColor}
-        onClick={() => {}}
         theme={theme}
-        scrollColorPickerDown={() => {}}
         t={t}
+        setKeepToolbarOpen={setKeepToolbarOpen}
       />
     );
   }
