@@ -4,13 +4,16 @@ export const PANEL_WIDTH = 216;
 export const PANEL_HEIGHT = 116;
 export const MODAL_STYLES = {
   content: {
-    maxWidth: PANEL_WIDTH,
+    display: 'inline-table',
     minHeight: PANEL_HEIGHT,
     height: 'auto',
     position: 'absolute',
     borderRadius: 6,
     border: 'solid 1px #ededed',
     margin: 0,
+    minWidth: PANEL_WIDTH,
+    maxWidth: 360,
+    width: 'auto',
   },
   overlay: {
     background: 'transparent',
