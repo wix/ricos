@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { mergeStyles } from '../../Utils/mergeStyles';
-import CustomColorPicker from './CustomColorPicker';
+import CustomColorPickerDialog from './CustomColorPickerDialog';
 import AddColorIcon from '../../Icons/AddColorIcon';
 import styles from '../../../statics/styles/color-picker.scss';
 
@@ -31,10 +31,11 @@ class ColorPicker extends PureComponent {
     this.props.onChange(color);
   };
 
-  onCustomColorPickerChanged = color => {
-    if (color.hex !== this.state.color) {
-      this.props.onColorAdded(color.hex.toUpperCase());
+  onCustomColorPicked = color => {
+    if (color !== this.state.color) {
+      this.props.onColorAdded(color);
     }
+    this.toggleCustomColorPicker();
   };
 
   toggleCustomColorPicker() {
@@ -90,9 +91,9 @@ class ColorPicker extends PureComponent {
     return (
       <div className={styles.colorPicker}>
         {this.state.isCustomColorPickerOpened ? (
-          <CustomColorPicker
+          <CustomColorPickerDialog
             color={this.state.color}
-            onChange={this.onCustomColorPickerChanged}
+            onChange={this.onCustomColorPicked}
             t={t}
             isMobile={isMobile}
             theme={theme}

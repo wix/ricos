@@ -1,0 +1,30 @@
+.colorPickerDialog {
+  margin: 24px;
+  margin-bottom: 15px;
+  width: 312px;
+}
+
+.colorPickerDialog_button {
+  border: none;
+  outline: none;
+  background: transparent;
+  line-height: 1.5;
+  font-size: 14px;
+  font-weight: 300;
+  cursor: pointer;
+  flex: none;
+}
+
+.colorPickerDialog_button_update {
+  color: #236fff;
+}
+
+.colorPickerDialog_buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.colorPickerDialog_separator {
+  border-top: 1px solid rgba(51, 51, 51, 0.1);
+  width: 100%;
+}

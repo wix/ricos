@@ -34,9 +34,6 @@ class CustomColorPicker extends React.Component {
         border: 'none',
       },
     };
-    this.state = {
-      color: props.color,
-    };
   }
 
   render() {
@@ -65,7 +62,7 @@ class CustomColorPicker extends React.Component {
           <div className={styles.customColorPicker_input_container}>
             <EditableInput
               style={{ input: this.inlineStyles.input }}
-              value={this.state.color}
+              value={this.props.color}
               {...this.props}
             />
           </div>
