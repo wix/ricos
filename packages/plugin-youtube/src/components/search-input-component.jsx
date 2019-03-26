@@ -70,21 +70,28 @@ class SearchInputComponent extends Component {
     const { t } = this.props;
     return (
       <div className={styles.search_input_container}>
-        <TextInput
-          type="search"
-          onChange={this.onTextInputChanged.bind(this)}
-          onKeyPress={this.handleOnKeyPressed}
-          placeholder={t('YoutubePlugin_Search_Textbox_Placeholder')}
-          onFocus={this.onFocus}
-          onBlur={this.onBlur}
-          theme={this.styles}
-          error={this.state.invalidYoutubeURL && t('YoutubePlugin_Url_ErrorTooltip')}
-        />
-        {!WixUtils.isMobile() && (
-          <Button onClick={this.onSearchClicked} theme={this.styles} type="secondary">
-            {this.state.buttonText}
-          </Button>
-        )}
+        <form
+          action="#"
+          onSubmit={() => {
+            return false;
+          }}
+        >
+          <TextInput
+            type="search"
+            onChange={this.onTextInputChanged.bind(this)}
+            onKeyPress={this.handleOnKeyPressed}
+            placeholder={t('YoutubePlugin_Search_Textbox_Placeholder')}
+            onFocus={this.onFocus}
+            onBlur={this.onBlur}
+            theme={this.styles}
+            error={this.state.invalidYoutubeURL && t('YoutubePlugin_Url_ErrorTooltip')}
+          />
+          {!WixUtils.isMobile() && (
+            <Button onClick={this.onSearchClicked} theme={this.styles} type="secondary">
+              {this.state.buttonText}
+            </Button>
+          )}
+        </form>
       </div>
     );
   }
