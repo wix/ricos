@@ -4,8 +4,8 @@ export default () => ({
   TextButtonMapper: () => ({
     TextColor: {
       component: TextColorButton,
-      isMobile: false,
-      position: { desktop: 3 },
+      isMobile: true,
+      position: { desktop: 3, mobile: 3 },
     },
   }),
 });

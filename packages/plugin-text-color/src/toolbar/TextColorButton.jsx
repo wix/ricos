@@ -24,7 +24,7 @@ export default class TextColorButton extends Component {
     const settings = config[TEXT_COLOR_TYPE];
 
     const modalStyles = getModalStyles({
-      fullScreen: true,
+      fullScreen: false,
       customStyles: {
         content: { ...MODAL_STYLES.content, ...this.calculatePanelLocation(this.element) },
         overlay: MODAL_STYLES.overlay,
@@ -113,5 +113,9 @@ TextColorButton.propTypes = {
   tabIndex: PropTypes.number,
   uiSettings: PropTypes.object,
   config: PropTypes.object,
-  setKeepOpen: PropTypes.object.isRequired,
+  setKeepOpen: PropTypes.func,
+};
+
+TextColorButton.defaultProps = {
+  setKeepOpen: () => {},
 };
