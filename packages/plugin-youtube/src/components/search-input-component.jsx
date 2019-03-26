@@ -71,6 +71,7 @@ class SearchInputComponent extends Component {
     return (
       <div className={styles.search_input_container}>
         <TextInput
+          type="search"
           onChange={this.onTextInputChanged.bind(this)}
           onKeyPress={this.handleOnKeyPressed}
           placeholder={t('YoutubePlugin_Search_Textbox_Placeholder')}
