@@ -71,8 +71,10 @@ class SearchInputComponent extends Component {
     return (
       <div className={styles.search_input_container}>
         <form
+          action="#"
           onSubmit={e => {
             e.preventDefault();
+            return false;
           }}
         >
           <TextInput
