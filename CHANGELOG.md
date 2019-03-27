@@ -8,6 +8,9 @@
 > - :house: [Internal]
 
 ## [Unreleased]
+### :bug: Bug Fix
+- `common`
+  - [#283](https://github.com/wix-incubator/rich-content/pull/283) fix handleExternalFileChanged
 <hr/>
 
 ## 3.1.1 (Mar 20, 2019)
