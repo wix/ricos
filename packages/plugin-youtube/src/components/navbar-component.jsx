@@ -21,12 +21,24 @@ class NavbarComponent extends Component {
     this.props.onBackClicked();
   };
 
+  onKeyPress = e => {
+    if (e.keyCode === 27) {
+      this.props.onBackClicked();
+    }
+  };
+
   render() {
     const { selectedVideoUrl, isTextBoxFocused, t } = this.props;
     return (
       <div className={this.styles.navbar_container}>
         <div className={this.styles.back_arrow_container}>
-          <button onClick={this.onBackArrowClicked} className={this.styles.back_arrow_button} />
+          <div
+            role="button"
+            tabIndex={0}
+            onKeyPress={this.onKeyPress}
+            onClick={this.onBackArrowClicked}
+            className={this.styles.back_arrow_button}
+          />
         </div>
         <div className={this.styles.add_button_container}>
           <button
