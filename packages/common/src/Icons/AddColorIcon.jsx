@@ -1,32 +1,13 @@
+/* eslint-disable max-len */
 import React from 'react';
 
 const AddColorIcon = props => (
-  <svg width="19px" height="19px" viewBox="0 0 19 19" {...props}>
-    <g id="Text-Color-Add" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
-      <g id="Text-Color_0000" transform="translate(-146.000000, -390.000000)" stroke="currentColor">
-        <g id="Text-Color-Picker" transform="translate(122.000000, 311.000000)">
-          <g id="Text-Color-Plus" transform="translate(24.000000, 79.000000)">
-            <circle id="Text-Color-Oval" cx="9.5" cy="9.5" r="9" />
-            <rect
-              id="Text-Color-Rectangle"
-              fill="currentColor"
-              x="6.5"
-              y="9.5"
-              width="6"
-              height="1"
-            />
-            <rect
-              id="Text-Color-Rectangle-2"
-              fill="currentColor"
-              x="9.5"
-              y="6.5"
-              width="1"
-              height="6"
-            />
-          </g>
-        </g>
-      </g>
-    </g>
+  <svg width={25} height={25} viewBox="0 0 25 25" {...props}>
+    <path
+      fill="currentColor"
+      fillRule="evenodd"
+      d="M13 12h4.8c.11 0 .2.09.2.2v.6a.2.2 0 0 1-.2.2H13v4.8a.2.2 0 0 1-.2.2h-.6a.2.2 0 0 1-.2-.2V13H7.2a.2.2 0 0 1-.2-.2v-.6c0-.11.09-.2.2-.2H12V7.2c0-.11.09-.2.2-.2h.6c.11 0 .2.09.2.2V12zm-.5 13C5.596 25 0 19.404 0 12.5S5.596 0 12.5 0 25 5.596 25 12.5 19.404 25 12.5 25zm0-1C18.851 24 24 18.851 24 12.5S18.851 1 12.5 1 1 6.149 1 12.5 6.149 24 12.5 24z"
+    />
   </svg>
 );
 

@@ -98,6 +98,9 @@
   height: 18px;
   color: $accent-color;
   cursor: pointer;
+  position: relative;
+  top: -4px;
+  left: -4px;
 }
 
 .colorPicker_buttons_container {

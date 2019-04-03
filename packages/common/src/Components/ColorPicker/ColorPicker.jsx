@@ -79,7 +79,7 @@ class ColorPicker extends PureComponent {
           className={styles.colorPicker_add_color_label}
           htmlFor="add_color_button"
         >
-          <AddColorIcon />
+          <AddColorIcon style={{ transform: 'scale(0.72)' }} />
         </label>
       </div>
     );
