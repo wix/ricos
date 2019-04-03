@@ -121,6 +121,9 @@ export const getModalStyles = ({ customStyles = null, fullScreen = true, inline 
     if (fullScreen) {
       overrideStyles.push(mobileFullScreenOverrideStyles);
     }
+    if (customStyles) {
+      overrideStyles.push(customStyles);
+    }
     return merge({}, mobileModalStyles, ...overrideStyles);
   } else {
     if (!fullScreen) {
