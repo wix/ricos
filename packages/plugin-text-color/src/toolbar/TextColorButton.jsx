@@ -7,6 +7,11 @@ import { MODAL_STYLES, PANEL_WIDTH } from './constants';
 import { Modals } from '../modals';
 
 export default class TextColorButton extends Component {
+  constructor(props) {
+    super(props);
+    this.buttonRef = React.createRef();
+  }
+
   showTextColorPanel = () => {
     const {
       getEditorState,
@@ -23,15 +28,19 @@ export default class TextColorButton extends Component {
     } = this.props;
     const settings = config[TEXT_COLOR_TYPE];
 
+    const styles = isMobile ? MODAL_STYLES.mobile : MODAL_STYLES.desktop;
+
     const modalStyles = getModalStyles({
       fullScreen: false,
       customStyles: {
-        content: { ...MODAL_STYLES.content, ...this.calculatePanelLocation(this.element) },
-        overlay: MODAL_STYLES.overlay,
+        content: { ...styles.content, ...this.calculatePanelLocation(this.buttonRef.current) },
+        overlay: styles.overlay,
       },
     });
     if (helpers && helpers.openModal) {
-      this.props.setKeepOpen(true);
+      if (!isMobile) {
+        this.props.setKeepOpen(true);
+      }
       const modalProps = {
         helpers,
         modalStyles,
@@ -58,11 +67,14 @@ export default class TextColorButton extends Component {
   };
 
   calculatePanelLocation = buttonRef => {
+    if (this.props.isMobile) {
+      return {};
+    }
     if (!buttonRef) {
       return {};
     }
     const { bottom, left } = buttonRef.getBoundingClientRect();
-    const panelTop = bottom - 10;
+    const panelTop = bottom + 50;
     const panelLeft = left - PANEL_WIDTH / 2;
     return { top: panelTop, left: panelLeft };
   };
@@ -82,17 +94,16 @@ export default class TextColorButton extends Component {
       active: theme.inlineToolbarButton_active,
     };
     return (
-      <div ref={ref => (this.element = ref)}>
-        <InlineToolbarButton
-          onClick={this.showTextColorPanel}
-          isActive={this.isActive}
-          theme={{ ...theme, ...buttonStyles }}
-          isMobile={isMobile}
-          tooltipText={tooltip}
-          tabIndex={tabIndex}
-          icon={TextColorIcon}
-        />
-      </div>
+      <InlineToolbarButton
+        onClick={this.showTextColorPanel}
+        isActive={this.isActive}
+        theme={{ ...theme, ...buttonStyles }}
+        isMobile={isMobile}
+        tooltipText={tooltip}
+        tabIndex={tabIndex}
+        icon={TextColorIcon}
+        forwardRef={this.buttonRef}
+      />
     );
   }
 }
