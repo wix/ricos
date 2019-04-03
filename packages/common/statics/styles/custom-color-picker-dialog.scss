@@ -1,7 +1,14 @@
+@import "./consts";
+@import "./mixins";
+@import "./palette";
+
 .colorPickerDialog {
   margin: 24px;
   margin-bottom: 15px;
-  width: 312px;
+  width: auto;
+  @include phone {
+    margin: 27px 18px 15px;
+  }
 }
 
 .colorPickerDialog_button {
@@ -16,7 +23,7 @@
 }
 
 .colorPickerDialog_button_update {
-  color: #236fff;
+  color: $accent-color;
 }
 
 .colorPickerDialog_buttons {

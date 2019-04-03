@@ -18,6 +18,7 @@ class CustomColorPicker extends React.Component {
         height: 24,
         position: 'relative',
         marginTop: 12,
+        width: '100%',
       },
       saturation: {
         width: '100%',
