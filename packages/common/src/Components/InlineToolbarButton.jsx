@@ -38,7 +38,7 @@ export default class InlineToolbarButton extends Component {
     tooltipText: PropTypes.string,
     tabIndex: PropTypes.number,
     icon: PropTypes.func.isRequired,
-    forwardRef: PropTypes.func,
+    forwardRef: PropTypes.object,
   };
 
   handleClick = () => this.props.onClick && this.props.onClick();
