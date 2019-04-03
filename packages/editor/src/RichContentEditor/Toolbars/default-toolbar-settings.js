@@ -2,7 +2,6 @@ import { TOOLBARS, DISPLAY_MODE } from 'wix-rich-content-common';
 import { createSideToolbar } from './SideToolbar';
 import { createMobileToolbar, createFooterToolbar, createStaticTextToolbar } from './StaticToolbar';
 import { createInlineTextToolbar } from './InlineToolbar';
-import { reducePluginTextButtons } from './buttons/utils';
 
 const defaultInlineToolbarVisibilityFn = editorState => {
   const selection = editorState.getSelection();
@@ -49,12 +48,6 @@ const defaultTextPluginButtons = {
 };
 
 export const getDefaultToolbarSettings = ({ pluginButtons, textButtons, pluginTextButtons }) => {
-  const desktopTextPluginButtons = reducePluginTextButtons(pluginTextButtons);
-  const mobileTextPluginButtons = reducePluginTextButtons(
-    pluginTextButtons,
-    ({ isMobile }) => isMobile !== false
-  );
-
   return [
     {
       name: TOOLBARS.SIDE,
@@ -126,8 +119,8 @@ export const getDefaultToolbarSettings = ({ pluginButtons, textButtons, pluginTe
       getTextPluginButtons: () => ({
         desktop: [],
         mobile: {
-          ios: mobileTextPluginButtons,
-          android: mobileTextPluginButtons,
+          ios: pluginTextButtons.mobile,
+          android: pluginTextButtons.mobile,
         },
       }),
       getVisibilityFn: () => ({
@@ -196,7 +189,7 @@ export const getDefaultToolbarSettings = ({ pluginButtons, textButtons, pluginTe
         },
       }),
       getTextPluginButtons: () => ({
-        desktop: desktopTextPluginButtons,
+        desktop: pluginTextButtons.desktop,
         mobile: {
           ios: {},
           android: {},
@@ -231,9 +224,9 @@ export const getDefaultToolbarSettings = ({ pluginButtons, textButtons, pluginTe
         },
       }),
       getTextPluginButtons: () => ({
-        desktop: desktopTextPluginButtons,
+        desktop: pluginTextButtons.desktop,
         mobile: {
-          ios: mobileTextPluginButtons,
+          ios: pluginTextButtons.mobile,
           android: {},
         },
       }),
