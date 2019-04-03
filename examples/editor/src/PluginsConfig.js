@@ -233,7 +233,7 @@ export default {
     // },
   },
   uiSettings,
-  getToolbarSettings: ({ pluginButtons, textButtons }) => [
+  getToolbarSettings: ({ pluginButtons, textButtons, pluginTextButtons }) => [
     // {
     //   name: TOOLBARS.PLUGIN,
     //   getVisibilityFn: () => ({
@@ -343,9 +343,30 @@ export default {
     // },
     // {
     //   name: TOOLBARS.INLINE,
+    //   shouldCreate: () => ({
+    //     desktop: true,
+    //     mobile: {
+    //       ios: true,
+    //       android: true,
+    //     },
+    //   }),
+    //   getButtons: () => ({
+    //     desktop: textButtons.desktop,
+    //     mobile: {
+    //       ios: textButtons.mobile,
+    //       android: textButtons.mobile,
+    //     },
+    //   }),
+    //   getTextPluginButtons: () => ({
+    //     desktop: pluginTextButtons.desktop,
+    //     mobile: {
+    //       ios: pluginTextButtons.mobile,
+    //       android: pluginTextButtons.mobile,
+    //     },
+    //   }),
     //   getToolbarDecorationFn: () => ({
-    //     desktop: () => InlineToolbarDecoration
-    //   })
-    // }
+    //     desktop: () => InlineToolbarDecoration,
+    //    }),
+    // },
   ],
 };

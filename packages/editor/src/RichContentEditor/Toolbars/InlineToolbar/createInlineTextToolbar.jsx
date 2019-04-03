@@ -29,6 +29,7 @@ export default data => {
     t,
     uiSettings,
     config,
+    isMobile,
   });
 
   return createInlineToolbar({

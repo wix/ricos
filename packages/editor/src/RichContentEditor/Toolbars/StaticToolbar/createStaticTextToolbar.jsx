@@ -95,6 +95,7 @@ export default ({
     t,
     uiSettings,
     config,
+    isMobile,
   });
   const id = getStaticTextToolbarId(refId);
 
