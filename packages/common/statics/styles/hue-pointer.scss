@@ -7,7 +7,8 @@
   border-right: 8px solid transparent;
   border-bottom: 6px solid #fff;
   @include phone {
-    border-bottom: 12px solid #fff;
+    position: relative;
+    top: -6px;
   }
 }
 
