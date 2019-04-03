@@ -82,8 +82,9 @@ export default ({ blockType, button, helpers, pubsub, settings, t }) => {
           data.error = error;
         }
 
-        this.addBlock(button.componentData || {});
-        setTimeout(() => pubsub.getBlockHandler('handleFilesAdded')(data));
+        const { newBlock } = this.addBlock(button.componentData || {});
+        const blockKey = newBlock.getKey();
+        setTimeout(() => pubsub.getBlockHandler('handleFilesAdded', blockKey)(data));
       }
     };
 

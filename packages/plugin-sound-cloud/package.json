@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-plugin-sound-cloud",
-  "version": "3.1.1",
+  "version": "3.1.2",
   "author": {
     "name": "Nabeel Zanabeet",
     "email": "nabeelz@wix.com"
@@ -36,8 +36,8 @@
     "classnames": "^2.0.0",
     "lodash": "^4.0.0",
     "prop-types": "^15.0.0",
-    "react": "^16.4.2",
-    "react-dom": "^16.4.2"
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3"
   },
   "devDependencies": {
     "@babel/runtime": "7.2.0",
@@ -46,13 +46,13 @@
     "eslint": "^4.19.1",
     "lodash": "^4.17.10",
     "prop-types": "^15.6.2",
-    "react": "^16.4.2",
-    "react-dom": "^16.4.2",
+    "react": "16.6.3",
+    "react-dom": "16.6.3",
     "rollup": "^1.1.0"
   },
   "dependencies": {
     "react-player": "^1.5.0",
-    "wix-rich-content-common": "^3.1.1"
+    "wix-rich-content-common": "^3.1.2"
   },
   "unpkg": true,
   "publishConfig": {

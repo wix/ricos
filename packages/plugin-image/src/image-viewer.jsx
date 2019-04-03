@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import includes from 'lodash/includes';
 import get from 'lodash/get';
 import isFunction from 'lodash/isFunction';
-import { mergeStyles, Loader, validate } from 'wix-rich-content-common';
+import { mergeStyles, Loader, validate, Context } from 'wix-rich-content-common';
 import isEqual from 'lodash/isEqual';
 import getImageSrc from './get-image-source';
 import { WIX_MEDIA_DEFAULT } from './get-wix-media-url';
@@ -37,7 +37,7 @@ class ImageViewer extends React.Component {
     }
   }
   getImageSrc(src) {
-    const { helpers } = this.props || {};
+    const { helpers } = this.context || {};
 
     if (!src && (helpers && helpers.handleFileSelection)) {
       return null;
@@ -240,6 +240,8 @@ class ImageViewer extends React.Component {
     /* eslint-enable jsx-a11y/no-static-element-interactions */
   }
 }
+
+ImageViewer.contextType = Context.type;
 
 ImageViewer.propTypes = {
   componentData: PropTypes.object.isRequired,

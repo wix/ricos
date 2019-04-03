@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const ReactContext = React.createContext();
+const RichContentContext = React.createContext();
 
 const Provider = ({
   children,
@@ -15,11 +15,11 @@ const Provider = ({
   isMobile,
   setEditorState,
 }) => (
-  <ReactContext.Provider
+  <RichContentContext.Provider
     value={{ theme, t, locale, anchorTarget, relValue, helpers, config, isMobile, setEditorState }}
   >
     {children}
-  </ReactContext.Provider>
+  </RichContentContext.Provider>
 );
 
 Provider.propTypes = {
@@ -35,14 +35,16 @@ Provider.propTypes = {
   setEditorState: PropTypes.func,
 };
 
-const Consumer = ({ children }) => <ReactContext.Consumer>{children}</ReactContext.Consumer>;
+const Consumer = ({ children }) => (
+  <RichContentContext.Consumer>{children}</RichContentContext.Consumer>
+);
 
 Consumer.propTypes = {
   children: PropTypes.func.isRequired,
 };
 
 export default {
-  type: ReactContext,
+  type: RichContentContext,
   Provider,
   Consumer,
 };
