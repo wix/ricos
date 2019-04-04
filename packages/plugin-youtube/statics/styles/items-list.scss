@@ -2,11 +2,15 @@
 @import "~wix-rich-content-common/dist/statics/styles/palette";
 
 .scrollbar_thumb {
-  background: #000000;
+  background: #b2b2b2;
   border-radius: 4px;
   width: 4px;
-  margin-left: -15px;
+  margin-left: -13px;
   cursor: pointer;
+}
+
+.scrollbar_thumb:hover {
+  background: #000000;
 }
 .customize_scrollbar_container {
   margin-right: -41px;
@@ -19,20 +23,18 @@
 }
 
 .error_message_container {
+  height: 24px;
+  font-size: 16px;
+  line-height: 1.5;
   text-align: center;
-  margin-top: calc(25% - 54px);
-}
-.giphy_selecter_infinite_scroll {
-  width: calc(100% - 15px);
-  @include phone {
-    width: 100%;
-  }
+  color: #969696;
+  margin-top: calc(25% - 16px);
 }
 
-.InfiniteScroll_container{
-  margin-left: 10px;
+.InfiniteScroll_container {
+  margin-left: 20px;
 }
-.spinner_container{
+.spinner_container {
   margin-left: calc(50% - 20px);
   margin-top: calc(25% - 20px);
 }

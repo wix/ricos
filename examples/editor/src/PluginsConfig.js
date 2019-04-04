@@ -176,6 +176,7 @@ export default {
   },
   [YOUTUBE_TYPE]: {
     googleYoutubeApiKey: process.env.YOUTUBE_API_KEY,
+    colors: themeColors,
   },
   [MAP_TYPE]: {
     googleMapApiKey: process.env.GOOGLE_MAPS_API_KEY,

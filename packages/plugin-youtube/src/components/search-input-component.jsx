@@ -7,8 +7,10 @@ import {
   isVideoUrl,
   WixUtils,
   getUrlMatches,
+  ErrorIcon,
 } from 'wix-rich-content-common';
 import styles from '../../statics/styles/search-input.scss';
+import { SearchIcon, SearchCancelIcon } from './../icons';
 class SearchInputComponent extends Component {
   constructor(props) {
     super(props);
@@ -65,11 +67,29 @@ class SearchInputComponent extends Component {
       this.onSubmit();
     }
   };
-
+  onCancelClicked = () => {
+    this.setState({ textInputValue: '' });
+  };
   render() {
     const { t } = this.props;
+    const { invalidYoutubeURL, textInputValue } = this.state;
+    const textInputStyles = invalidYoutubeURL && {
+      borderColor: '#f64d43',
+      paddingLeft: 35 + 'px',
+    };
     return (
-      <div className={styles.search_input_container}>
+      <div className={this.styles.search_input_container}>
+        {textInputValue && (
+          <SearchCancelIcon
+            onClick={this.onCancelClicked}
+            className={this.styles.cancel_search_icon}
+          />
+        )}
+        {!invalidYoutubeURL ? (
+          <SearchIcon className={this.styles.search_icon_container} />
+        ) : (
+          <ErrorIcon width={18} height={18} className={this.styles.error_icon_container} />
+        )}
         <form
           action="#"
           onSubmit={e => {
@@ -84,11 +104,12 @@ class SearchInputComponent extends Component {
             placeholder={t('YoutubePlugin_Search_Textbox_Placeholder')}
             onFocus={this.onFocus}
             onBlur={this.onBlur}
+            value={textInputValue}
+            style={{ ...textInputStyles }}
             theme={this.styles}
-            error={this.state.invalidYoutubeURL && t('YoutubePlugin_Url_ErrorTooltip')}
           />
           {!WixUtils.isMobile() && (
-            <Button onClick={this.onSearchClicked} theme={this.styles} type="secondary">
+            <Button onClick={this.onSearchClicked} theme={this.styles} type="primary">
               {this.state.buttonText}
             </Button>
           )}

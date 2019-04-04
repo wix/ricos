@@ -2,43 +2,64 @@
 @import "~wix-rich-content-common/dist/statics/styles/palette";
 
 .item_container {
-  padding: 5px;
-  border: 1px solid #000;
-  margin-top: 6px;
-  margin-right: 3px;
+  margin-right: 11px;
   display: inline-block;
-  width: calc(50% - 15px);
+  width: 186px;
+  margin-bottom: 13px;
   box-sizing: border-box;
   @include phone {
     width: calc(100vw - 32px);
   }
-  cursor: pointer;
-}
-
-.item_container:hover {
-  background: rgba(33, 61, 232, 0.5);
 }
 
 .thumbnail_container {
   height: 100px;
-  max-width: 50%;
-  float: left;
+  max-width: 100%;
 }
 
 .image {
-  height: 100%;
-  width: auto;
+  height: 100px;
+  width: 184px;
+  cursor: pointer;
+}
+.image:hover {
+  border: solid 2px #9a87ce;
 }
 
 .description_container {
   height: 100px;
-  width: 50%;
-  float: left;
-  margin-left: 5px;
+  width: 100%;
   font-size: 11px;
   overflow: hidden;
 }
 
 .clearFloating {
   clear: both;
+}
+
+.video_title {
+  margin-top: 12px;
+  height: 40px;
+  font-size: 14px;
+  color: #000000;
+  overflow: hidden;
+  line-height: 1.43;
+  font-family: Avenir;
+}
+
+.video_publisher_name {
+  margin-top: 4px;
+  height: 16px;
+  font-family: Avenir;
+  font-size: 12px;
+  line-height: 1.33;
+  color: #969696;
+}
+.video_publish_date {
+  margin-top: 6px;
+  height: 16px;
+  font-family: Avenir;
+  font-size: 12px;
+  line-height: 1.33;
+  color: #969696;
 }

@@ -74,8 +74,7 @@ class ItemsListComponent extends Component {
     const { t } = this.props;
     return (
       <div className={this.styles.error_message_container}>
-        <p>{t('YoutubePlugin_NoResult_ErrorMessage_Title')}</p>
-        <p>{t('YoutubePlugin_NoResult_ErrorMessage_Description')}</p>
+        {t('YoutubePlugin_NoResult_ErrorMessage')}
       </div>
     );
   };
@@ -190,13 +189,19 @@ class ItemsListComponent extends Component {
             }}
             style={{
               width: '100%',
-              height: isMobile ? 'calc(100vh - 102px)' : '329px',
+              height: isMobile ? 'calc(100vh - 102px)' : '277px',
               paddingRight: '14px',
+              marginTop: '17px',
             }}
             renderThumbVertical={() => <div className={styles.scrollbar_thumb} />}
           >
             {loading ? (
-              <MDSpinner className={this.styles.spinner_container} />
+              <MDSpinner
+                singleColor="#000"
+                size={16}
+                borderSize={2}
+                className={this.styles.spinner_container}
+              />
             ) : (
               <InfiniteScroll
                 pageStart={0}

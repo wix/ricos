@@ -1,21 +1,72 @@
 @import "~wix-rich-content-common/dist/statics/styles/mixins";
 @import "~wix-rich-content-common/dist/statics/styles/palette";
 
-.search_input_container{
-  padding: 10px;
-  padding-bottom: 0px;
+.search_input_container {
+  position: relative;
+  padding: 22px 20px 0;
+  height: 39px;
 }
 
-.button_secondary {
-  padding: 12px;
+.search_icon_container {
+  position: absolute;
+  top: 31px;
+  left: 19px;
+  z-index: 1;
+  width: 14px;
+  height: 14px;
+}
+
+.error_icon_container {
+  position: absolute;
+  top: 29px;
+  left: 23px;
+  z-index: 1;
+  width: 18px;
+  height: 18px;
+}
+
+.cancel_search_icon {
+  position: absolute;
+  top: 35px;
+  right: 140px;
+  z-index: 1;
+  cursor: pointer;
+}
+
+.button_primary {
+  border: none;
+  padding: 0px;
+  width: 95px;
   display: inline-block;
+  height: 36px;
+  font-size: 16px;
+  background: #9a87ce;
+  cursor: pointer;
 }
 
 .textInput {
   display: inline-block;
-  width: calc(100% - 78px);
-  margin-right: 5px;
   @include phone {
     width: calc(100vw - 20px);
   }
+}
+.textInput_input {
+  border: none;
+  border-radius: 0;
+  border-bottom: 1px solid #b2b2b2;
+  width: 459px;
+  max-height: 36px;
+  margin-right: 24px;
+  padding-left: 21px;
+  font-size: 16px;
+  @include phone {
+    -webkit-appearance: none;
+    border: none;
+    border-radius: 0;
+    border-bottom: 1px solid blue;
+  }
+}
+
+.textInput_input::-webkit-search-cancel-button {
+  -webkit-appearance: none;
 }
