@@ -8,8 +8,12 @@
 > - :house: [Internal]
 
 ## [Unreleased]
+### :rocket: New Feature
 - `button`
   - [#275](https://github.com/wix-incubator/rich-content/pull/275) new button plugin
+### :bug: Bug Fix
+- `general`
+  - [#285](https://github.com/wix-incubator/rich-content/pull/285) prevent `context` from rerendering unnecessarily
 <hr/>
 
 ## 3.1.2 (Mar 28, 2019)
