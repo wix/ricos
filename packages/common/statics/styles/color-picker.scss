@@ -12,7 +12,9 @@
 }
 
 .colorPicker_separator {
-  border-top: 1px solid rgba(51, 51, 51, 0.1);
+  border: none;
+  height: 1px;
+  background: rgba(51, 51, 51, 0.1);
   width: auto;
   margin: 18px 12px 6px 12px;
   @include phone {

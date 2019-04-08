@@ -3,13 +3,14 @@
 
 .customColorPicker_container {
   width: 312px;
-  height: 146px;
+  height: 136px;
   @include phone {
     width: 100%;
   }
 }
 
 .customColorPicker_saturation {
+  width: 100%;
   height: 76px;
   position: relative;
 }

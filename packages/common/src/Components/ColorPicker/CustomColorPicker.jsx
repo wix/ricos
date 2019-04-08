@@ -13,28 +13,6 @@ class CustomColorPicker extends React.Component {
   constructor(props) {
     super(props);
     this.styles = mergeStyles({ styles, theme: props.theme });
-    this.inlineStyles = {
-      hue: {
-        height: 24,
-        position: 'relative',
-        marginTop: 12,
-        width: '100%',
-      },
-      saturation: {
-        width: '100%',
-        height: 'auto',
-        position: 'relative',
-        touchAction: 'none',
-      },
-      input: {
-        position: 'relative',
-        width: '100%',
-        paddingTop: '13px',
-        fontSize: '14px',
-        color: '#333333',
-        border: 'none',
-      },
-    };
   }
 
   render() {
@@ -43,18 +21,10 @@ class CustomColorPicker extends React.Component {
     return (
       <div className={styles.customColorPicker_container}>
         <div className={styles.customColorPicker_saturation}>
-          <Saturation
-            style={{ saturation: this.inlineStyles.saturation }}
-            pointer={() => <SaturationPointer theme={theme} />}
-            {...this.props}
-          />
+          <Saturation pointer={() => <SaturationPointer theme={theme} />} {...this.props} />
         </div>
         <div className={styles.customColorPicker_hue}>
-          <Hue
-            style={{ hue: this.inlineStyles.hue }}
-            {...this.props}
-            pointer={() => <HuePointer theme={theme} />}
-          />
+          <Hue {...this.props} pointer={() => <HuePointer theme={theme} />} />
         </div>
         <div className={styles.customColorPicker_editable_input_container}>
           <div className={styles.customColorPicker_input_label}>
@@ -62,7 +32,16 @@ class CustomColorPicker extends React.Component {
           </div>
           <div className={styles.customColorPicker_input_container}>
             <EditableInput
-              style={{ input: this.inlineStyles.input }}
+              style={{
+                input: {
+                  position: 'relative',
+                  width: '100%',
+                  paddingTop: 13,
+                  fontSize: 14,
+                  color: '#333333',
+                  border: 'none',
+                },
+              }}
               value={this.props.color}
               {...this.props}
             />

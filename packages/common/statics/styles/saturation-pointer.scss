@@ -7,6 +7,7 @@
 
 .saturationPointer {
   position: relative;
+  transform: translateX(-8px) translateY(-8px);
 }
 
 .saturationPointer_top_path {
@@ -34,11 +35,11 @@
   width: 3px;
   height: 1px;
 }
-.saturationPointer_right_path{
-    position: absolute;
-    bottom: 7px;
-    right: 0px;
-    background: #fff;
-    width: 3px;
-    height: 1px;
+.saturationPointer_right_path {
+  position: absolute;
+  bottom: 7px;
+  right: 0px;
+  background: #fff;
+  width: 3px;
+  height: 1px;
 }
