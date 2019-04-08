@@ -46,6 +46,13 @@
 <hr/>
 
 
+## 3.0.9 (Apr 8, 2019)
+### :rocket: New Feature
+- `button plugin`
+  -[#286](https://github.com/wix-incubator/rich-content/pull/286) Add the most recent used colors by the user into color picker common component and configure it into button component.
+<hr/>
+
+
 ## 3.0.9 (Mar 14, 2019)
 ### :rocket: New Feature
 - `common`
