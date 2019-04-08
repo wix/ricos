@@ -27,6 +27,7 @@ export default class TextColorPanel extends Component {
     this.setState({
       currentColor: color,
     });
+    this.props.helpers.closeModal();
   }
 
   applyInlineColorStyle(color) {
@@ -83,4 +84,5 @@ TextColorPanel.propTypes = {
     defaultColor: PropTypes.string,
   }).isRequired,
   setKeepToolbarOpen: PropTypes.func,
+  helpers: PropTypes.object.isRequired,
 };
