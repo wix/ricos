@@ -17,6 +17,9 @@
 ### :bug: Bug Fix
 - `general`
   - [#285](https://github.com/wix-incubator/rich-content/pull/285) prevent `context` from rerendering unnecessarily
+### :house: Internal
+- `general`
+  - [#287](https://github.com/wix-incubator/rich-content/pull/287) support building modules on Windows
 <hr/>
 
 ## 3.1.2 (Mar 28, 2019)
