@@ -83,6 +83,10 @@ const getLinkPanelDropDownConfig = () => {
   };
 };
 
+let userButtonTextColors = [];
+let userButtonBackgroundColors = [];
+let userButtonBorderColors = [];
+
 const uiSettings = {
   themeColors,
   linkPanel: {
@@ -237,6 +241,13 @@ export default {
       color9: '#0141AA',
       color10: '#012055',
     },
+    onTextColorAdded: color => (userButtonTextColors = [color, ...userButtonTextColors]),
+    onBackgroundColorAdded: color =>
+      (userButtonBackgroundColors = [color, ...userButtonBackgroundColors]),
+    onBorderColorAdded: color => (userButtonBorderColors = [color, ...userButtonBorderColors]),
+    getTextColors: () => userButtonTextColors,
+    getBorderColors: () => userButtonBorderColors,
+    getBackgroundColors: () => userButtonBackgroundColors,
   },
   uiSettings,
   getToolbarSettings: ({ pluginButtons, textButtons }) => [

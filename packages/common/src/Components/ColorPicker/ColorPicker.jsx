@@ -89,6 +89,10 @@ class ColorPicker extends PureComponent {
     return false;
   };
 
+  onUsedColorClicked = color => {
+    this.setColor(color);
+  };
+
   render() {
     const { styles } = this;
     const { colorPickerRef, isMobile, t } = this.props;
@@ -100,6 +104,23 @@ class ColorPicker extends PureComponent {
         dropperColor = '#000000';
       }
     }
+    const userColors = this.props.userColors.map((color, index) => {
+      return (
+        <div
+          role="button"
+          tabIndex={index}
+          onKeyPress={this.handleKeyPress.bind(this)}
+          key={color + index}
+          className={classNames(styles.colorPicker_non_dropper_palette)}
+          style={{
+            background: color,
+            marginRight: index === this.props.userColors.length - 1 ? '0px' : '18px',
+          }}
+          onClick={this.onUsedColorClicked.bind(this, color)}
+        />
+      );
+    });
+
     const colorsButtons = this.presetColors.map((color, index) => {
       return (
         <div
@@ -151,6 +172,7 @@ class ColorPicker extends PureComponent {
                   className={styles.colorPicker_dropper}
                 />
               </div>
+              <div>{userColors}</div>
             </div>
             {this.state.isCustomColorPickerOpened && (
               <CustomColorPicker
@@ -168,6 +190,7 @@ class ColorPicker extends PureComponent {
 }
 
 ColorPicker.propTypes = {
+  userColors: PropTypes.array,
   theme: PropTypes.object.isRequired,
   style: PropTypes.object,
   children: PropTypes.string.isRequired,

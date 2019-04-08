@@ -119,10 +119,10 @@ $size: 10px;
 .colorPicker_palettes {
   width: 100%;
   text-align: right;
-  height: 36px;
+  height: auto;
   padding-top: 20px;
   @include phone {
-    height: 30px;
+    height: auto;
     padding-bottom: 9px;
     padding-top: 26px;
   }
