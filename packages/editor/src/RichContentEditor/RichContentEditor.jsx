@@ -21,6 +21,7 @@ import {
   normalizeInitialState,
   TooltipHost,
   TOOLBARS,
+  Context,
 } from 'wix-rich-content-common';
 import styles from '../../statics/styles/rich-content-editor.scss';
 import draftStyles from '../../statics/styles/draft.scss';
@@ -42,15 +43,33 @@ class RichContentEditor extends Component {
       props.config.uiSettings || {}
     );
 
+    this.initContext();
     this.initPlugins();
   }
+
+  getEditorState = () => this.state.editorState;
+
+  setEditorState = editorState => this.setState({ editorState });
+
+  initContext = () => {
+    const { theme, t, locale, anchorTarget, relValue, helpers, config, isMobile } = this.props;
+    this.contextualData = {
+      theme,
+      t,
+      locale,
+      anchorTarget,
+      relValue,
+      helpers,
+      config,
+      isMobile,
+      setEditorState: this.setEditorState,
+    };
+  };
 
   initPlugins() {
     const { helpers, plugins, config, isMobile, anchorTarget, relValue, t } = this.props;
 
     const { theme } = this.state;
-    const getEditorState = () => this.state.editorState;
-    const setEditorState = editorState => this.setState({ editorState });
     const { pluginInstances, pluginButtons, pluginTextButtons, pubsubs } = createPlugins({
       plugins,
       config,
@@ -60,8 +79,8 @@ class RichContentEditor extends Component {
       isMobile,
       anchorTarget,
       relValue,
-      getEditorState,
-      setEditorState,
+      getEditorState: this.getEditorState,
+      setEditorState: this.setEditorState,
     });
     this.initEditorToolbars(pluginButtons, pluginTextButtons);
     this.pluginKeyBindings = initPluginKeyBindings(pluginTextButtons);
@@ -92,8 +111,8 @@ class RichContentEditor extends Component {
       textToolbarType,
       textAlignment,
       theme: theme || {},
-      getEditorState: () => this.state.editorState,
-      setEditorState: editorState => this.setState({ editorState }),
+      getEditorState: this.getEditorState,
+      setEditorState: this.setEditorState,
       t,
       refId: this.refId,
       getToolbarSettings: config.getToolbarSettings,
@@ -154,7 +173,7 @@ class RichContentEditor extends Component {
   getEditorState = () => this.state.editorState;
 
   updateEditorState = editorState => {
-    this.setState({ editorState });
+    this.setEditorState(editorState);
     this.props.onChange && this.props.onChange(editorState);
   };
 
@@ -298,9 +317,9 @@ class RichContentEditor extends Component {
     );
   };
 
-  renderAccessibilityListener = () => <AccessibilityListener isMobile={this.props.isMobile} />;
+  renderAccessibilityListener = () => <AccessibilityListener />;
 
-  renderTooltipHost = () => <TooltipHost theme={this.state.theme} />;
+  renderTooltipHost = () => <TooltipHost />;
 
   render() {
     const { isMobile } = this.props;
@@ -310,19 +329,21 @@ class RichContentEditor extends Component {
       [theme.desktop]: !isMobile && theme && theme.desktop,
     });
     return (
-      <Measure bounds onResize={({ bounds }) => this.updateBounds(bounds)}>
-        {({ measureRef }) => (
-          <div style={this.props.style} ref={measureRef} className={wrapperClassName}>
-            <div className={classNames(styles.editor, theme.editor)}>
-              {this.renderAccessibilityListener()}
-              {this.renderEditor()}
-              {this.renderToolbars()}
-              {this.renderInlineModals()}
-              {this.renderTooltipHost()}
+      <Context.Provider value={this.contextualData}>
+        <Measure bounds onResize={({ bounds }) => this.updateBounds(bounds)}>
+          {({ measureRef }) => (
+            <div style={this.props.style} ref={measureRef} className={wrapperClassName}>
+              <div className={classNames(styles.editor, theme.editor)}>
+                {this.renderAccessibilityListener()}
+                {this.renderEditor()}
+                {this.renderToolbars()}
+                {this.renderInlineModals()}
+                {this.renderTooltipHost()}
+              </div>
             </div>
-          </div>
-        )}
-      </Measure>
+          )}
+        </Measure>
+      </Context.Provider>
     );
   }
 }
@@ -363,6 +384,7 @@ RichContentEditor.propTypes = {
   handleBeforeInput: PropTypes.func,
   handlePastedText: PropTypes.func,
   handleReturn: PropTypes.func,
+  locale: PropTypes.string,
 };
 
 RichContentEditor.defaultProps = {

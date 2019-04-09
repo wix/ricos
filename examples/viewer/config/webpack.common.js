@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
+const DotenvWebpackPlugin = require('dotenv-webpack');
 
 const PATHS = {
   root: path.join(__dirname, '..'),
@@ -111,6 +112,9 @@ module.exports = env => ({
         charset: 'utf-8',
         viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no',
       },
+    }),
+    new DotenvWebpackPlugin({
+      path: path.resolve(PATHS.root, '..', '..', '.env'),
     }),
   ],
 });

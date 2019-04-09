@@ -89,6 +89,8 @@ export default class InlineToolbar extends Component {
 
   onExtendContent = extendContent => this.setState({ extendContent });
 
+  setKeepOpen = keepOpen => this.setState({ keepOpen });
+
   onClickOutside = () => {
     if (this.state.overrideContent || this.state.extendContent) {
       this.setState({ overrideContent: null, extendContent: null });
@@ -139,7 +141,7 @@ export default class InlineToolbar extends Component {
 
       const { displayOptions } = this.props;
 
-      if (displayOptions.displayMode === DISPLAY_MODE.NORMAL) {
+      if (displayOptions.displayMode === DISPLAY_MODE.NORMAL && !this.state.keepOpen) {
         const { top, left } = this.getRelativePosition();
         this.setState({ position: { top, left } });
       }
@@ -150,7 +152,7 @@ export default class InlineToolbar extends Component {
 
   isVisible = () => {
     const { pubsub, visibilityFn } = this.props;
-    const { overrideContent, extendContent } = this.state;
+    const { overrideContent, extendContent, keepOpen } = this.state;
 
     let isVisible = false;
     if (visibilityFn) {
@@ -159,7 +161,7 @@ export default class InlineToolbar extends Component {
     }
 
     // TODO: Test readonly mode and possibly set isVisible to false if the editor is readonly
-    return isVisible || overrideContent || extendContent;
+    return isVisible || overrideContent || extendContent || keepOpen;
   };
 
   getStyle() {
@@ -267,6 +269,7 @@ export default class InlineToolbar extends Component {
       setEditorState: pubsub.get('setEditorState'),
       onOverrideContent: this.onOverrideContent,
       onExtendContent: this.onExtendContent,
+      setKeepOpen: this.setKeepOpen,
       defaultTextAlignment,
       isVisible: toolbarStyle.visibility === 'visible',
       isMobile,

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { mergeStyles, isValidUrl, normalizeUrl, validate } from 'wix-rich-content-common';
+import { mergeStyles, isValidUrl, normalizeUrl, validate, Context } from 'wix-rich-content-common';
 
 import {
   SRC_TYPE_HTML,
@@ -15,11 +15,6 @@ import IframeUrl from './IframeUrl';
 import htmlComponentStyles from '../statics/styles/HtmlComponent.scss';
 
 class HtmlComponent extends Component {
-  constructor(props) {
-    super(props);
-    this.styles = mergeStyles({ styles: htmlComponentStyles, theme: props.theme });
-  }
-
   componentDidMount() {
     if (!this.props.componentData.config.width) {
       if (this.props.settings && this.props.settings.width) {
@@ -42,24 +37,25 @@ class HtmlComponent extends Component {
   }
 
   render() {
-    const { styles, props } = this;
+    this.styles =
+      this.styles || mergeStyles({ styles: htmlComponentStyles, theme: this.context.theme });
+    const { props } = this;
     validate(props.componentData, schema);
     const {
       blockProps,
-      isMobile,
       componentData: { src, srcType, config: { width: currentWidth, height: currentHeight } = {} },
       settings: { htmlIframeSrc, width, height } = {},
     } = props;
 
     const style = {
-      width: isMobile ? 'auto' : currentWidth || width || INIT_WIDTH,
+      width: this.context.isMobile ? 'auto' : currentWidth || width || INIT_WIDTH,
       height: currentHeight || height || INIT_HEIGHT,
     };
     const readOnly = blockProps ? blockProps.readOnly : true;
 
     return (
       <div
-        className={styles.htmlComponent}
+        className={this.styles.htmlComponent}
         ref={ref => (this.element = ref)}
         style={style}
         data-hook="HtmlComponent"
@@ -77,18 +73,18 @@ class HtmlComponent extends Component {
           <IframeUrl key={SRC_TYPE_URL} tabIndex={readOnly ? -1 : 0} src={normalizeUrl(src)} />
         )}
 
-        {!src && !isValidUrl(src) && <div className={styles.htmlComponent_placeholder} />}
+        {!src && !isValidUrl(src) && <div className={this.styles.htmlComponent_placeholder} />}
       </div>
     );
   }
 }
 
+HtmlComponent.contextType = Context.type;
+
 HtmlComponent.propTypes = {
   componentData: PropTypes.object.isRequired,
   blockProps: PropTypes.object,
   className: PropTypes.string,
-  theme: PropTypes.object,
-  isMobile: PropTypes.bool.isRequired,
   settings: PropTypes.shape({
     htmlIframeSrc: PropTypes.string.isRequired,
     width: PropTypes.number,

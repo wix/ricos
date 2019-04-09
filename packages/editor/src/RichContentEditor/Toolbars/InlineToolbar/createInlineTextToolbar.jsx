@@ -27,6 +27,7 @@ export default config => {
     theme,
     t,
     uiSettings,
+    isMobile,
   });
 
   return createInlineToolbar({

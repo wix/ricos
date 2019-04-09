@@ -29,6 +29,7 @@ class Slider extends Component {
 
   onChange(value) {
     this.setState({ value });
+    this.props.onChange(value);
   }
 
   onKeyUp(event) {

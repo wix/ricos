@@ -1,5 +1,5 @@
-import PropTypes from 'prop-types';
 import { Component } from 'react';
+import Context from '../Utils/Context';
 import styles from '../../statics/styles/global.scss';
 
 export default class AccessibilityListener extends Component {
@@ -18,14 +18,14 @@ export default class AccessibilityListener extends Component {
   componentDidMount() {
     document.body.classList.add(styles.noOutline);
 
-    if (!this.props.isMobile) {
+    if (!this.context.isMobile) {
       document.addEventListener('keyup', this.handleTabKeyUp);
       document.addEventListener('click', this.handleClick);
     }
   }
 
   componentWillUnmount() {
-    if (!this.props.isMobile) {
+    if (!this.context.isMobile) {
       document.removeEventListener('keyup', this.handleTabKeyUp);
       document.removeEventListener('click', this.handleClick);
     }
@@ -34,6 +34,4 @@ export default class AccessibilityListener extends Component {
   render = () => null;
 }
 
-AccessibilityListener.propTypes = {
-  isMobile: PropTypes.bool,
-};
+AccessibilityListener.contextType = Context.type;

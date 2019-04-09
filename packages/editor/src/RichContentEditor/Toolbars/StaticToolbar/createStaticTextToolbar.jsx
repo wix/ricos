@@ -93,6 +93,7 @@ export default ({
     theme: staticTextTheme,
     t,
     uiSettings,
+    isMobile,
   });
   const id = getStaticTextToolbarId(refId);
 

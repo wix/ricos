@@ -1,0 +1,105 @@
+@import '~wix-rich-content-common/dist/statics/styles/mixins';
+@import '~wix-rich-content-common/dist/statics/styles/palette';
+
+.header_ButtonText {
+  font-size: 14px;
+  margin: 7px 0 7px 0;
+  line-height: 1.5;
+  height: 22px;
+  font-weight: normal;
+  @include phone {
+    margin: 0px 0px;
+    font-weight: normal;
+    margin-top: 4px;
+  }
+}
+.header_ButtonLink {
+  font-size: 14px;
+  margin: 9px 0 7px 0;
+  line-height: 1.5;
+  height: 22px;
+  font-weight: normal;
+  @include phone {
+    margin: 2px 0;
+    margin-bottom: 1px;
+    font-weight: normal;
+  }
+}
+.settingTab {
+  margin-top: 6px;
+  margin-left: 0px;
+}
+.errorMessage {
+  color: #ee5951;
+  font-size: 12px;
+  padding-top: 7px;
+  @include phone {
+    padding-top: 18px;
+    width: 213px;
+    margin-left: 1px;
+    line-height: 1.5;
+  }
+}
+.checkBoxes {
+  padding-top: 13px;
+  @include phone {
+    padding-top: 22px;
+    padding-bottom: 1px;
+  }
+}
+.checkbox {
+  margin-bottom: 15px;
+  outline: none;
+  @include phone {
+    margin-bottom: 15px;
+  }
+}
+.checkbox_label {
+  font-size: 14px;
+  font-weight: normal;
+  @include phone {
+    margin-left: 18px;
+  }
+}
+.modal_footer {
+  padding: 30px 0px;
+}
+.button_name_feild {
+  padding-bottom: 8px;
+  @include phone {
+    padding-bottom: 15px;
+  }
+}
+.section_content {
+  padding-right: 30px;
+  padding-top: 22px;
+  @include phone {
+    padding-right: 0px;
+    padding-top: 14px;
+  }
+}
+.textInput_errorIcon {
+  width: 18px;
+  height: 18px;
+  @include phone {
+    right: 0px;
+    top: -6px;
+  }
+}
+.textInput_input {
+  padding-bottom: 1px;
+  padding-left: 17px;
+  border-radius: 0px;
+  @include phone {
+    border: none;
+    border-bottom: solid 1px rgba(51, 51, 51, 0.2);
+    border-radius: 0px;
+    padding-left: 0px;
+    padding-bottom: 1px;
+  }
+}
+
+.textInput_input::placeholder {
+  font-size: 14px;
+  color: #333333;
+}

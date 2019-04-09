@@ -6,7 +6,8 @@
   ],
   "env": {
     "browser": true,
-    "node": true
+    "node": true,
+    "jest": true
   },
   "plugins": [
     "lodash",
@@ -16,7 +17,7 @@
   ],
   "settings": {
     "react": {
-      "version": "16.4.2"
+      "version": "16.6.3"
     }
   },
   "rules": {

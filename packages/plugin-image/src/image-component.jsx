@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { ImageViewer, getDefault } from './image-viewer';
 import { sizeClassName, alignmentClassName } from './classNameStrategies';
+import { Context } from 'wix-rich-content-common';
 
 const EMPTY_SMALL_PLACEHOLDER =
   'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
@@ -88,7 +89,7 @@ class ImageComponent extends React.Component {
         fileError: null,
       });
     }
-    const { helpers } = this.props;
+    const { helpers } = this.context;
     const hasFileChangeHelper = helpers && helpers.onFilesChange;
     if (hasFileChangeHelper && fileList.length > 0) {
       helpers.onFilesChange(fileList[0], ({ data, error }) =>
@@ -130,25 +131,24 @@ class ImageComponent extends React.Component {
   };
 
   render() {
-    const { settings, t } = this.props;
+    const { settings, componentData, onClick, className, blockProps } = this.props;
     return (
       <ImageViewer
-        componentData={this.props.componentData}
-        isMobile={this.props.isMobile}
-        onClick={this.props.onClick}
-        className={this.props.className}
-        theme={this.props.theme}
-        helpers={this.props.helpers}
+        componentData={componentData}
+        onClick={onClick}
+        className={className}
         isLoading={this.state.isLoading}
         dataUrl={this.state.dataUrl}
-        isFocused={this.props.blockProps.isFocused}
-        readOnly={this.props.blockProps.readOnly}
+        isFocused={blockProps.isFocused}
+        readOnly={blockProps.readOnly}
         settings={settings}
-        defaultCaption={t('ImageViewer_Caption')}
+        defaultCaption={this.context.t('ImageViewer_Caption')}
       />
     );
   }
 }
+
+ImageComponent.contextType = Context.type;
 
 ImageComponent.propTypes = {
   componentData: PropTypes.object.isRequired,
@@ -158,11 +158,7 @@ ImageComponent.propTypes = {
   block: PropTypes.object.isRequired,
   onClick: PropTypes.func.isRequired,
   className: PropTypes.string.isRequired,
-  theme: PropTypes.object.isRequired,
-  helpers: PropTypes.object.isRequired,
-  isMobile: PropTypes.bool,
   settings: PropTypes.object,
-  t: PropTypes.func,
 };
 
 export { ImageComponent as Component, getDefault };

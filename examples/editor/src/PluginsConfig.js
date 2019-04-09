@@ -8,6 +8,8 @@ import { VIDEO_TYPE } from 'wix-rich-content-plugin-video';
 import { GIPHY_TYPE } from 'wix-rich-content-plugin-giphy';
 import { MAP_TYPE } from 'wix-rich-content-plugin-map';
 import { YOUTUBE_TYPE } from 'wix-rich-content-plugin-youtube';
+import { FILE_UPLOAD_TYPE } from 'wix-rich-content-plugin-file-upload';
+import { BUTTON_TYPE } from 'wix-rich-content-plugin-button';
 import { EXTERNAL_MENTIONS_TYPE } from 'wix-rich-content-plugin-mentions';
 import { HEADERS_MARKDOWN_TYPE } from 'wix-rich-content-plugin-headers-markdown';
 import React from 'react';
@@ -180,10 +182,12 @@ export default {
   },
   [MAP_TYPE]: {
     googleMapApiKey: process.env.GOOGLE_MAPS_API_KEY,
+    height: 600,
     minWidth: 100,
-    maxWidth: 740,
+    maxWidth: 1400,
     minHeight: 100,
-    maxHeight: 1000,
+    maxHeight: 1400,
+    width: 740,
     mapSettings: {
       address: 'Wix HQ, Nemal Tel Aviv Street, Tel Aviv-Yafo, Israel',
       locationDisplayName: 'Wix HQ, Nemal Tel Aviv Street, Tel Aviv-Yafo, Israel',
@@ -194,7 +198,49 @@ export default {
       isMarkerShown: true,
       isZoomControlShown: true,
       isStreetViewControlShown: true,
+      isViewControlShown: true,
       isDraggingAllowed: true,
+    },
+  },
+  [FILE_UPLOAD_TYPE]: {
+    accept: '*',
+    onFileSelected: (file, updateEntity) => {
+      const name = file.name;
+      const filenameParts = name.split('.');
+      const type = filenameParts[filenameParts.length - 1];
+
+      const data = {
+        name,
+        type,
+        url: 'http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf',
+      };
+      setTimeout(() => updateEntity({ data }), 1000);
+    },
+    // handleFileSelection: updateEntity => {
+    //   const filenames = ['image.jpg', 'document.pdf', 'music.mp3'];
+    //   const name = filenames[Math.floor(Math.random() * filenames.length)];
+    //   const filenameParts = name.split('.');
+    //   const type = filenameParts[filenameParts.length - 1];
+    //   const data = {
+    //     name,
+    //     type,
+    //     url: 'http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf',
+    //   };
+    //   setTimeout(() => updateEntity({ data }), 500);
+    // },
+  },
+  [BUTTON_TYPE]: {
+    colors: {
+      color1: '#FEFDFD',
+      color2: '#D5D4D4',
+      color3: '#000000',
+      color4: '#000000',
+      color5: '#000000',
+      color6: '#ABCAFF',
+      color7: '#81B0FF',
+      color8: '#0261FF',
+      color9: '#0141AA',
+      color10: '#012055',
     },
   },
   uiSettings,

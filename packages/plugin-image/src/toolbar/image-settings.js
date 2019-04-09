@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import {
   mergeStyles,
   Image,
-  ImageLoader,
+  Loader,
   InputWithLabel,
   LinkPanel,
   SettingsPanelFooter,
@@ -114,7 +114,7 @@ class ImageSettings extends Component {
       nofollowRelToggleVisibilityFn && nofollowRelToggleVisibilityFn(relValue);
 
     if (!src) {
-      return <ImageLoader type={'medium'} theme={theme} />; //do not render until the src is passed
+      return <Loader type={'medium'} />; //do not render until the src is passed
     }
 
     return (

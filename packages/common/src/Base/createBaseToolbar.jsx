@@ -248,6 +248,7 @@ export default function createToolbar({
       const buttonProps = {
         ...this.mapComponentDataToButtonProps(button, this.state.componentData),
         ...this.mapStoreDataToButtonProps(button, pubsub.store, this.state.componentData),
+        settings: button.settings,
       };
 
       switch (button.type) {
@@ -347,8 +348,8 @@ export default function createToolbar({
               displayPanel={this.displayPanel}
               displayInlinePanel={this.displayInlinePanel}
               hideInlinePanel={this.hidePanels}
-              {...buttonProps}
               uiSettings={uiSettings}
+              {...buttonProps}
             />
           );
       }

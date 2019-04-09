@@ -1,16 +1,26 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { mergeStyles } from 'wix-rich-content-common';
+import { mergeStyles, Context } from 'wix-rich-content-common';
 import MentionComponent from './MentionComponent';
 import Styles from '../statics/mentions.scss';
 
-const MentionViewer = props => {
-  const theme = mergeStyles({ styles: Styles, theme: props.theme });
-  return <MentionComponent mention={props.componentData.mention} {...props} theme={theme} />;
-};
+class MentionViewer extends Component {
+  render() {
+    this.styles = this.styles || mergeStyles({ styles: Styles, theme: this.context.theme });
+    return (
+      <MentionComponent
+        contextType={MentionViewer.contextType || Context.type}
+        mention={this.props.componentData.mention}
+        {...this.props}
+        theme={this.styles}
+      />
+    );
+  }
+}
+
+MentionViewer.contextType = Context.type;
 
 MentionViewer.propTypes = {
-  theme: PropTypes.object,
   componentData: PropTypes.object.isRequired,
 };
 
