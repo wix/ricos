@@ -23,8 +23,8 @@
     "promise": "8.0.1",
     "prop-types": "^15.6.2",
     "raf": "3.4.0",
-    "react": "^16.4.2",
-    "react-dom": "^16.4.2",
+    "react": "16.6.3",
+    "react-dom": "16.6.3",
     "react-highlight-words": "0.15.1",
     "react-json-editor-ajrm": "^2.5.3",
     "react-modal": "^3.1.11",
@@ -34,6 +34,7 @@
     "wix-rich-content-plugin-code-block": "file:../../packages/plugin-code-block",
     "wix-rich-content-plugin-divider": "file:../../packages/plugin-divider",
     "wix-rich-content-plugin-emoji": "file:../../packages/plugin-emoji",
+    "wix-rich-content-plugin-file-upload": "file:../../packages/plugin-file-upload",
     "wix-rich-content-plugin-giphy": "file:../../packages/plugin-giphy",
     "wix-rich-content-plugin-hashtag": "file:../../packages/plugin-hashtag",
     "wix-rich-content-plugin-headers-markdown": "file:../../packages/plugin-headers-markdown",
@@ -44,7 +45,8 @@
     "wix-rich-content-plugin-sound-cloud": "file:../../packages/plugin-sound-cloud",
     "wix-rich-content-plugin-video": "file:../../packages/plugin-video",
     "wix-rich-content-plugin-youtube": "file:../../packages/plugin-youtube",
-    "wix-rich-content-plugin-map": "file:../../packages/plugin-map"
+    "wix-rich-content-plugin-map": "file:../../packages/plugin-map",
+    "wix-rich-content-plugin-button": "file:../../packages/plugin-button"
   },
   "scripts": {
     "postinstall": "node ../../scripts/linkExample editor",

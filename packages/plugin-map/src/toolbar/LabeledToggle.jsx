@@ -31,19 +31,18 @@ export class LabeledToggle extends Component {
         >
           <p className={this.styles.labeled_toggle_label}>{label}</p>
         </div>
-        <div className={this.styles.labeled_toggle_input_root}>
+        <div
+          className={this.styles.labeled_toggle_input_root}
+          onClick={onChange}
+          tabIndex={-1}
+          onKeyPress={null}
+          role="button"
+        >
           <div
             className={classNames(this.styles.labeled_toggle_input_container, {
-              [this.styles.off]: !checked,
+              [this.styles.labeled_toggle_input_container_off]: !checked,
             })}
           >
-            <input
-              type="checkbox"
-              className={this.styles.labeled_toggle_checkbox_input}
-              onChange={onChange}
-              checked={checked}
-              tabIndex={-1}
-            />
             <div className={this.styles.labeled_toggle_switch}>
               <span
                 className={this.styles.labeled_toggle_track}

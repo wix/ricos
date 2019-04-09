@@ -17,6 +17,7 @@ import {
   HEADERS_MARKDOWN_TYPE,
 } from 'wix-rich-content-plugin-headers-markdown';
 import { createMapPlugin, MAP_TYPE } from 'wix-rich-content-plugin-map';
+import { createFileUploadPlugin, FILE_UPLOAD_TYPE } from 'wix-rich-content-plugin-file-upload';
 
 import React from 'react';
 import Highlighter from 'react-highlight-words';
@@ -36,6 +37,7 @@ import 'wix-rich-content-plugin-video/dist/styles.min.css';
 import 'wix-rich-content-plugin-sound-cloud/dist/styles.min.css';
 import 'wix-rich-content-plugin-giphy/dist/styles.min.css';
 import 'wix-rich-content-plugin-map/dist/styles.min.css';
+import 'wix-rich-content-plugin-file-upload/dist/styles.min.css';
 
 // import { TOOLBARS, BUTTONS, DISPLAY_MODE } from 'wix-rich-content-common';
 // import InlineToolbarDecoration from './Components/InlineToolbarDecoration';
@@ -57,6 +59,7 @@ export const editorPlugins = [
   createGiphyPlugin,
   createHeadersMarkdownPlugin,
   createMapPlugin,
+  createFileUploadPlugin,
 ];
 
 const themeColors = {
@@ -231,6 +234,33 @@ export const config = {
       isStreetViewControlShown: true,
       isDraggingAllowed: true,
     },
+  },
+  [FILE_UPLOAD_TYPE]: {
+    accept: '*',
+    onFileSelected: (file, updateEntity) => {
+      const name = file.name;
+      const filenameParts = name.split('.');
+      const type = filenameParts[filenameParts.length - 1];
+
+      const data = {
+        name,
+        type,
+        url: 'http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf',
+      };
+      setTimeout(() => updateEntity({ data }), 1000);
+    },
+    // handleFileSelection: updateEntity => {
+    //   const filenames = ['image.jpg', 'document.pdf', 'music.mp3'];
+    //   const name = filenames[Math.floor(Math.random() * filenames.length)];
+    //   const filenameParts = name.split('.');
+    //   const type = filenameParts[filenameParts.length - 1];
+    //   const data = {
+    //     name,
+    //     type,
+    //     url: 'http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf',
+    //   };
+    //   setTimeout(() => updateEntity({ data }), 500);
+    // },
   },
   uiSettings,
   getToolbarSettings: ({ pluginButtons, textButtons }) => [

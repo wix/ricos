@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactPlayer from 'react-player';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { mergeStyles, validate, matchSoundCloudUrl } from 'wix-rich-content-common';
+import { mergeStyles, validate, matchSoundCloudUrl, Context } from 'wix-rich-content-common';
 import isEqual from 'lodash/isEqual';
 import schema from '../statics/data-schema.json';
 import styles from '../statics/styles/sound-cloud-viewer.scss';
@@ -11,7 +11,6 @@ class SoundCloudViewer extends Component {
   constructor(props) {
     super(props);
     validate(props.componentData, schema);
-    this.styles = mergeStyles({ styles, theme: props.theme });
   }
 
   componentWillReceiveProps(nextProps) {
@@ -21,7 +20,8 @@ class SoundCloudViewer extends Component {
   }
 
   render() {
-    const { componentData, theme, ...rest } = this.props; // eslint-disable-line no-unused-vars
+    this.styles = mergeStyles({ styles, theme: this.context.theme });
+    const { componentData, ...rest } = this.props;
     return (
       <ReactPlayer
         className={classNames(this.styles.soundCloud_player)}
@@ -32,9 +32,10 @@ class SoundCloudViewer extends Component {
   }
 }
 
+SoundCloudViewer.contextType = Context.type;
+
 SoundCloudViewer.propTypes = {
   componentData: PropTypes.object.isRequired,
-  theme: PropTypes.object,
   onReady: PropTypes.func,
   onStart: PropTypes.func,
   controls: PropTypes.bool,

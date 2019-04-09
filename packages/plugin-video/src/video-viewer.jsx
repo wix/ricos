@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactPlayer from 'react-player';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { mergeStyles, validate } from 'wix-rich-content-common';
+import { mergeStyles, validate, Context } from 'wix-rich-content-common';
 import isEqual from 'lodash/isEqual';
 import getVideoSrc from './get-video-source';
 import schema from '../statics/data-schema.json';
@@ -12,7 +12,6 @@ class VideoViewer extends Component {
   constructor(props) {
     super(props);
     validate(props.componentData, schema);
-    this.styles = mergeStyles({ styles, theme: props.theme });
   }
 
   componentWillReceiveProps(nextProps) {
@@ -24,7 +23,8 @@ class VideoViewer extends Component {
   normalizeUrl = url => (url.toLowerCase().indexOf('vimeo') === 0 ? 'https://' + url : url); //vimeo player needs urls prefixed with http[s]
 
   render() {
-    const { componentData, theme, settings, isMobile, ...rest } = this.props; // eslint-disable-line no-unused-vars
+    const { componentData, settings, ...rest } = this.props;
+    this.styles = this.styles || mergeStyles({ styles, theme: this.context.theme });
     const url = this.normalizeUrl(getVideoSrc(componentData.src, settings));
     return <ReactPlayer className={classNames(this.styles.video_player)} url={url} {...rest} />;
   }
@@ -32,15 +32,15 @@ class VideoViewer extends Component {
 
 VideoViewer.propTypes = {
   componentData: PropTypes.object.isRequired,
-  theme: PropTypes.object,
   onReady: PropTypes.func,
   onStart: PropTypes.func,
   controls: PropTypes.bool,
   width: PropTypes.string,
   height: PropTypes.string,
   settings: PropTypes.object.isRequired,
-  isMobile: PropTypes.bool,
 };
+
+VideoViewer.contextType = Context.type;
 
 VideoViewer.defaultProps = {
   width: '100%',
