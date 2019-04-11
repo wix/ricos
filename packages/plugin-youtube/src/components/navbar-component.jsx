@@ -40,6 +40,7 @@ class NavbarComponent extends Component {
             className={this.styles.back_arrow_button}
           />
         </div>
+        <div className={this.styles.navbar_title}>YouTube Video</div>
         <div className={this.styles.add_button_container}>
           <button
             onClick={this.onAddButtonClicked}

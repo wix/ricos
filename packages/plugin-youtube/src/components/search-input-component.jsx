@@ -8,6 +8,7 @@ import {
   WixUtils,
   getUrlMatches,
   ErrorIcon,
+  Tooltip,
 } from 'wix-rich-content-common';
 import styles from '../../statics/styles/search-input.scss';
 import { SearchIcon, SearchCancelIcon } from './../icons';
@@ -68,10 +69,10 @@ class SearchInputComponent extends Component {
     }
   };
   onCancelClicked = () => {
-    this.setState({ textInputValue: '' });
+    this.setState({ textInputValue: '', invalidYoutubeURL: false });
   };
   render() {
-    const { t } = this.props;
+    const { t, theme } = this.props;
     const { invalidYoutubeURL, textInputValue } = this.state;
     const textInputStyles = invalidYoutubeURL && {
       borderColor: '#f64d43',
@@ -88,7 +89,15 @@ class SearchInputComponent extends Component {
         {!invalidYoutubeURL ? (
           <SearchIcon className={this.styles.search_icon_container} />
         ) : (
-          <ErrorIcon width={18} height={18} className={this.styles.error_icon_container} />
+          <Tooltip
+            shouldRebuildOnUpdate={() => t('YoutubePlugin_Url_ErrorTooltip')}
+            content={'Invalid URL'}
+            theme={theme}
+            moveBy={{ y: 0 }}
+            type={'error'}
+          >
+            <ErrorIcon width={18} height={18} className={this.styles.error_icon_container} />
+          </Tooltip>
         )}
         <form
           action="#"

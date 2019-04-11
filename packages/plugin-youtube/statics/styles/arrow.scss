@@ -18,12 +18,12 @@
   @extend %arrow;
   transform: rotate(45deg);
   bottom: -7px;
-  left: 65px;
+  left: 68px;
 }
 
 .modal_arrow_up {
   @extend %arrow;
   transform: rotate(-135deg);
   bottom: 375px;
-  right: 65px;
+  right: 68px;
 }

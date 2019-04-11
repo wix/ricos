@@ -15,12 +15,20 @@
 .thumbnail_container {
   height: 100px;
   max-width: 100%;
+  @include phone {
+    height: 150px;
+    width: calc(100vw - 40px);
+  }
 }
 
 .image {
   height: 100px;
   width: 184px;
   cursor: pointer;
+  @include phone {
+    height: 150px;
+    width: calc(100vw - 40px);
+  }
 }
 .image:hover {
   border: solid 2px #9a87ce;
@@ -44,7 +52,9 @@
   color: #000000;
   overflow: hidden;
   line-height: 1.43;
-  font-family: Avenir;
+  @include phone {
+    margin-top: 8px;
+  }
 }
 
 .video_publisher_name {

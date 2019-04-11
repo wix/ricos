@@ -189,7 +189,7 @@ class ItemsListComponent extends Component {
             }}
             style={{
               width: '100%',
-              height: isMobile ? 'calc(100vh - 102px)' : '277px',
+              height: isMobile ? 'calc(100vh - 121px)' : '277px',
               paddingRight: '14px',
               marginTop: '17px',
             }}
@@ -207,7 +207,15 @@ class ItemsListComponent extends Component {
                 pageStart={0}
                 loadMore={this.loadMore}
                 hasMore={hasMore}
-                loader={<MDSpinner style={{ marginLeft: 'calc(50% - 20px)' }} />}
+                loader={
+                  <MDSpinner
+                    singleColor="#000"
+                    size={16}
+                    borderSize={2}
+                    className={this.styles.spinner_container}
+                    style={{ marginLeft: 'calc(50% - 20px)' }}
+                  />
+                }
                 useWindow={false}
                 threshold={3}
                 className={this.styles.InfiniteScroll_container}

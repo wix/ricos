@@ -46,13 +46,11 @@ class ItemComponent extends Component {
   };
 
   render() {
-    const { isMobile, videoObj } = this.props;
-    const border = isMobile && this.props.isClicked && '5px solid blue';
+    const { videoObj } = this.props;
     return (
       <div
         role="button"
         tabIndex={0}
-        style={{ border }}
         className={this.styles.item_container}
         onKeyPress={null}
         onClick={this.onClickedHandler}

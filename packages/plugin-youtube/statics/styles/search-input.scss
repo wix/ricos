@@ -5,6 +5,9 @@
   position: relative;
   padding: 22px 20px 0;
   height: 39px;
+  @include phone {
+    padding: 15px 20px 0;
+  }
 }
 
 .search_icon_container {
@@ -14,6 +17,9 @@
   z-index: 1;
   width: 14px;
   height: 14px;
+  @include phone {
+    top: 25px;
+  }
 }
 
 .error_icon_container {
@@ -23,14 +29,22 @@
   z-index: 1;
   width: 18px;
   height: 18px;
+  @include phone {
+    top: 23px;
+    left: 20px;
+  }
 }
 
 .cancel_search_icon {
   position: absolute;
-  top: 35px;
-  right: 140px;
+  top: 34px;
+  right: 139px;
   z-index: 1;
   cursor: pointer;
+  @include phone {
+    right: 20px;
+    top: 28px;
+  }
 }
 
 .button_primary {
@@ -53,17 +67,21 @@
 .textInput_input {
   border: none;
   border-radius: 0;
-  border-bottom: 1px solid #b2b2b2;
+  border-bottom: 2px solid #b2b2b2;
   width: 459px;
   max-height: 36px;
   margin-right: 24px;
-  padding-left: 21px;
+  padding-left: 22px;
   font-size: 16px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   @include phone {
     -webkit-appearance: none;
     border: none;
     border-radius: 0;
-    border-bottom: 1px solid blue;
+    border-bottom: 2px solid #b2b2b2;
+    width: calc(100vw - 40px);
   }
 }
 

@@ -1,5 +1,5 @@
 .navbar_container {
-  background: #7997c6;
+  background-color: #9a87ce;
   width: 100vh;
   height: 50px;
 }
@@ -14,23 +14,31 @@
   transform: rotate(135deg);
 }
 .back_arrow_container {
-  width: calc(50vw - 40px);
+  width: calc(20vw - 20px);
   display: inline-block;
   padding-top: 14px;
   padding-left: 20px;
 }
 
+.navbar_title {
+  width: 60vw;
+  display: inline-block;
+  font-size: 16px;
+  text-align: center;
+  color: #ffffff;
+}
 .add_button_container {
   color: #fff;
-  width: 50vw;
-  display: inline-block;
+  width: 20vw;
   text-align: right;
+  display: inline-block;
   padding-top: 14px;
 }
 .add_button {
   border: none;
   background: none;
   color: #fff;
+  margin-right: 11px;
 }
 .add_button:disabled {
   color: #dbdbdb;
