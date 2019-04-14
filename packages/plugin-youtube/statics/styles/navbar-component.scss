@@ -14,31 +14,36 @@
   transform: rotate(135deg);
 }
 .back_arrow_container {
-  width: calc(20vw - 20px);
-  display: inline-block;
-  padding-top: 14px;
-  padding-left: 20px;
+  width: 28px;
+  height: 33px;
+  float: left;
+  padding-top: 16px;
+  padding-left: 22px;
 }
 
 .navbar_title {
-  width: 60vw;
-  display: inline-block;
+  width: calc(100vw - 100px);
+  height: 50px;
+  float: left;
   font-size: 16px;
   text-align: center;
   color: #ffffff;
+  padding-top: 14px;
 }
 .add_button_container {
+  position: relative;
   color: #fff;
-  width: 20vw;
+  width: 50px;
+  height: 50px;
   text-align: right;
-  display: inline-block;
-  padding-top: 14px;
+  float: left;
 }
 .add_button {
   border: none;
   background: none;
   color: #fff;
   margin-right: 11px;
+  cursor: pointer;
 }
 .add_button:disabled {
   color: #dbdbdb;

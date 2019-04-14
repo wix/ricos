@@ -71,10 +71,17 @@ class ItemsListComponent extends Component {
   };
 
   renderResultNotFoundErrorMessage = () => {
-    const { t } = this.props;
+    const { t, isMobile } = this.props;
     return (
       <div className={this.styles.error_message_container}>
-        {t('YoutubePlugin_NoResult_ErrorMessage')}
+        {isMobile ? (
+          <div>
+            <div> {t('YoutubePlugin_NoResult_ErrorMessage_1')}</div>
+            <div> {t('YoutubePlugin_NoResult_ErrorMessage_2')}</div>
+          </div>
+        ) : (
+          t('YoutubePlugin_NoResult_ErrorMessage')
+        )}
       </div>
     );
   };
@@ -198,7 +205,7 @@ class ItemsListComponent extends Component {
             {loading ? (
               <MDSpinner
                 singleColor="#000"
-                size={16}
+                size={25}
                 borderSize={2}
                 className={this.styles.spinner_container}
               />
@@ -210,7 +217,7 @@ class ItemsListComponent extends Component {
                 loader={
                   <MDSpinner
                     singleColor="#000"
-                    size={16}
+                    size={25}
                     borderSize={2}
                     className={this.styles.spinner_container}
                     style={{ marginLeft: 'calc(50% - 20px)' }}

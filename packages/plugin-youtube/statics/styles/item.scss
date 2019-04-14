@@ -9,6 +9,7 @@
   box-sizing: border-box;
   @include phone {
     width: calc(100vw - 32px);
+    margin-bottom: 24px;
   }
 }
 
@@ -39,6 +40,9 @@
   width: 100%;
   font-size: 11px;
   overflow: hidden;
+  @include phone{
+    height: auto;
+  }
 }
 
 .clearFloating {
@@ -54,6 +58,7 @@
   line-height: 1.43;
   @include phone {
     margin-top: 8px;
+    height: auto;
   }
 }
 

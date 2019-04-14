@@ -29,6 +29,9 @@
   text-align: center;
   color: #969696;
   margin-top: calc(25% - 16px);
+  @include phone {
+    height: 48px;
+  }
 }
 
 .InfiniteScroll_container {

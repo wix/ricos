@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { mergeStyles } from 'wix-rich-content-common';
+import PlusIcon from './plus-icon';
 import styles from '../../statics/styles/navbar-component.scss';
 
 class NavbarComponent extends Component {
@@ -28,28 +29,32 @@ class NavbarComponent extends Component {
   };
 
   render() {
-    const { selectedVideoUrl, isTextBoxFocused, t } = this.props;
+    const { selectedVideoUrl, isTextBoxFocused } = this.props;
+    const disableAadd = !selectedVideoUrl || isTextBoxFocused;
     return (
       <div className={this.styles.navbar_container}>
-        <div className={this.styles.back_arrow_container}>
-          <div
-            role="button"
-            tabIndex={0}
-            onKeyPress={this.onKeyPress}
-            onClick={this.onBackArrowClicked}
-            className={this.styles.back_arrow_button}
-          />
+        <div
+          role="button"
+          tabIndex={0}
+          onKeyPress={this.onKeyPress}
+          onClick={this.onBackArrowClicked}
+          className={this.styles.back_arrow_container}
+        >
+          <div className={this.styles.back_arrow_button} />
         </div>
         <div className={this.styles.navbar_title}>YouTube Video</div>
-        <div className={this.styles.add_button_container}>
-          <button
-            onClick={this.onAddButtonClicked}
-            disabled={!selectedVideoUrl || isTextBoxFocused}
-            className={this.styles.add_button}
-          >
-            {t('YoutubePlugin_AddButton_Text')}
-          </button>
+        <div
+          role="button"
+          tabIndex={0}
+          onKeyPress={this.onKeyPress}
+          onClick={!disableAadd && this.onAddButtonClicked}
+          style={{ opacity: disableAadd ? '0.6' : '1' }}
+          disabled={disableAadd}
+          className={this.styles.add_button_container}
+        >
+          <PlusIcon />
         </div>
+        <div style={{ clear: 'both' }} />
       </div>
     );
   }
