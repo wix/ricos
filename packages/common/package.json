@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-common",
-  "version": "3.2.1",
+  "version": "3.2.3",
   "author": {
     "name": "Jonathan Bachman",
     "email": "jonathanb@wix.com"
@@ -22,12 +22,10 @@
   "style": "dist/styles.min.scss",
   "scripts": {
     "clean": "rm -rf dist/",
-    "statics": "mkdir -p dist && cp -R statics dist",
-    "prebuild": "npm run statics",
     "build": "rollup --environment MODULE_NAME:common -c ../../rollup.config.js",
-    "build:dev": "NODE_ENV=development npm run build",
+    "build:dev": "cross-env NODE_ENV=development npm run build",
     "build:analyze": "npm run build -- --environment MODULE_ANALYZE && open stats.html",
-    "watch": "NODE_ENV=development MODULE_WATCH=1 npm run build -- --watch",
+    "watch": "cross-env NODE_ENV=development MODULE_WATCH=1 npm run build -- --watch",
     "lint": "eslint 'src/**/*.{js,jsx}'",
     "test": "jest --verbose"
   },
@@ -45,6 +43,7 @@
     "@wix/draft-js": "0.10.272",
     "babel-jest": "^23.6.0",
     "classnames": "^2.2.6",
+    "cross-env": "^5.2.0",
     "deep-freeze": "0.0.1",
     "eslint": "^4.19.1",
     "jest": "^23.1.0",
