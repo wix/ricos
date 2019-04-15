@@ -4,6 +4,7 @@ import { findDOMNode } from 'react-dom';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import isEmpty from 'lodash/isEmpty';
+import Context from '../Utils/Context';
 import Dropdown from '../Components/Dropdown';
 import FileInput from '../Components/FileInput';
 import ToolbarButton from '../Components/ToolbarButton';
@@ -63,19 +64,16 @@ class BaseToolbarButton extends React.Component {
     const {
       componentState,
       keyName,
-      helpers,
       pubsub,
-      theme,
-      t,
       onClick,
-      anchorTarget,
-      relValue,
       settings,
       uiSettings,
       modalStyles,
       modalStylesFn,
       ...otherProps
     } = this.props;
+
+    const { helpers, theme, t, anchorTarget, relValue } = this.context;
 
     if (this.props.type === BUTTONS.FILES && !this.shouldHandleFileSelection) {
       const updateEntity = pubsub.getBlockHandler('handleFilesAdded');
@@ -337,5 +335,7 @@ BaseToolbarButton.propTypes = {
 BaseToolbarButton.defaultProps = {
   settings: {},
 };
+
+BaseToolbarButton.contextType = Context.type;
 
 export default BaseToolbarButton;

@@ -9,6 +9,7 @@ import { GIPHY_TYPE } from 'wix-rich-content-plugin-giphy';
 import { MAP_TYPE } from 'wix-rich-content-plugin-map';
 import { TEXT_COLOR_TYPE } from 'wix-rich-content-plugin-text-color';
 import { FILE_UPLOAD_TYPE } from 'wix-rich-content-plugin-file-upload';
+import { BUTTON_TYPE } from 'wix-rich-content-plugin-button';
 import { EXTERNAL_MENTIONS_TYPE } from 'wix-rich-content-plugin-mentions';
 import { HEADERS_MARKDOWN_TYPE } from 'wix-rich-content-plugin-headers-markdown';
 import React from 'react';
@@ -231,6 +232,20 @@ export default {
     //   };
     //   setTimeout(() => updateEntity({ data }), 500);
     // },
+  },
+  [BUTTON_TYPE]: {
+    colors: {
+      color1: '#FEFDFD',
+      color2: '#D5D4D4',
+      color3: '#000000',
+      color4: '#000000',
+      color5: '#000000',
+      color6: '#ABCAFF',
+      color7: '#81B0FF',
+      color8: '#0261FF',
+      color9: '#0141AA',
+      color10: '#012055',
+    },
   },
   uiSettings,
   getToolbarSettings: ({ pluginButtons, textButtons, pluginTextButtons }) => [

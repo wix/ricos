@@ -8,6 +8,7 @@ import { createDividerPlugin } from 'wix-rich-content-plugin-divider';
 import { createExternalMentionsPlugin } from 'wix-rich-content-plugin-mentions';
 import { createCodeBlockPlugin } from 'wix-rich-content-plugin-code-block';
 import { createSoundCloudPlugin } from 'wix-rich-content-plugin-sound-cloud';
+import { createButtonPlugin } from 'wix-rich-content-plugin-button';
 import { createGiphyPlugin } from 'wix-rich-content-plugin-giphy';
 import { createHeadersMarkdownPlugin } from 'wix-rich-content-plugin-headers-markdown';
 import { createMapPlugin } from 'wix-rich-content-plugin-map';
@@ -26,6 +27,7 @@ import 'wix-rich-content-plugin-mentions/dist/styles.min.css';
 import 'wix-rich-content-plugin-image/dist/styles.min.css';
 import 'wix-rich-content-plugin-video/dist/styles.min.css';
 import 'wix-rich-content-plugin-sound-cloud/dist/styles.min.css';
+import 'wix-rich-content-plugin-button/dist/styles.min.css';
 import 'wix-rich-content-plugin-giphy/dist/styles.min.css';
 import 'wix-rich-content-plugin-map/dist/styles.min.css';
 import 'wix-rich-content-plugin-file-upload/dist/styles.min.css';
@@ -41,6 +43,7 @@ const plugins = [
   createExternalMentionsPlugin,
   createCodeBlockPlugin,
   createSoundCloudPlugin,
+  createButtonPlugin,
   createGiphyPlugin,
   createHeadersMarkdownPlugin,
   createMapPlugin,

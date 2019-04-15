@@ -44,10 +44,28 @@ class RichContentEditor extends Component {
       props.config.uiSettings || {}
     );
 
+    this.initContext();
     this.initPlugins();
   }
 
+  getEditorState = () => this.state.editorState;
+
   setEditorState = editorState => this.setState({ editorState });
+
+  initContext = () => {
+    const { theme, t, locale, anchorTarget, relValue, helpers, config, isMobile } = this.props;
+    this.contextualData = {
+      theme,
+      t,
+      locale,
+      anchorTarget,
+      relValue,
+      helpers,
+      config,
+      isMobile,
+      setEditorState: this.setEditorState,
+    };
+  };
 
   initPlugins() {
     const {
@@ -62,7 +80,6 @@ class RichContentEditor extends Component {
     } = this.props;
 
     const { theme } = this.state;
-    const getEditorState = () => this.state.editorState;
     const {
       pluginInstances,
       pluginButtons,
@@ -78,7 +95,7 @@ class RichContentEditor extends Component {
       isMobile,
       anchorTarget,
       relValue,
-      getEditorState,
+      getEditorState: this.getEditorState,
       setEditorState: this.setEditorState,
     });
     this.initEditorToolbars(pluginButtons, pluginTextButtons);
@@ -111,8 +128,8 @@ class RichContentEditor extends Component {
       textToolbarType,
       textAlignment,
       theme: theme || {},
-      getEditorState: () => this.state.editorState,
-      setEditorState: editorState => this.setState({ editorState }),
+      getEditorState: this.getEditorState,
+      setEditorState: this.setEditorState,
       t,
       refId: this.refId,
       getToolbarSettings: config.getToolbarSettings,
@@ -174,7 +191,7 @@ class RichContentEditor extends Component {
   getEditorState = () => this.state.editorState;
 
   updateEditorState = editorState => {
-    this.setState({ editorState });
+    this.setEditorState(editorState);
     this.props.onChange && this.props.onChange(editorState);
   };
 
@@ -331,7 +348,7 @@ class RichContentEditor extends Component {
       [theme.desktop]: !isMobile && theme && theme.desktop,
     });
     return (
-      <Context.Provider theme={theme} {...this.props}>
+      <Context.Provider value={this.contextualData}>
         <Measure bounds onResize={({ bounds }) => this.updateBounds(bounds)}>
           {({ measureRef }) => (
             <div style={this.props.style} ref={measureRef} className={wrapperClassName}>
@@ -387,6 +404,7 @@ RichContentEditor.propTypes = {
   handlePastedText: PropTypes.func,
   handleReturn: PropTypes.func,
   customStyleFn: PropTypes.func,
+  locale: PropTypes.string,
 };
 
 RichContentEditor.defaultProps = {

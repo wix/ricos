@@ -25,6 +25,34 @@
 - [Toolbar Customization](./docs/ToolbarCustomization.md) doc updated
 <hr/>
 
+## 3.2.3 (Apr 14, 2019)
+### :house: Internal
+- `general`
+  - align version with `plugin-gallery` release
+  - [ac27a91](https://github.com/wix-incubator/rich-content/commit/ac27a91b427f64555ca653a37772755e21315198) CI fails if any script fails
+<hr/>
+
+## 3.2.2 (Apr 14, 2019)
+### :house: Internal
+- `general`
+  - [#287](https://github.com/wix-incubator/rich-content/pull/287) support building modules on Windows
+<hr/>
+
+## 3.2.1 (Apr 9, 2019)
+### :house: Internal
+- `general`
+  - align version with `plugin-gallery` release
+<hr/>
+
+## 3.2.0 (Apr 8, 2019)
+### :rocket: New Feature
+- `button`
+  - [#275](https://github.com/wix-incubator/rich-content/pull/275) new button plugin
+### :bug: Bug Fix
+- `general`
+  - [#285](https://github.com/wix-incubator/rich-content/pull/285) prevent `context` from rerendering unnecessarily
+
+<hr/>
 
 ## 3.1.2 (Mar 28, 2019)
 ### :bug: Bug Fix
@@ -32,6 +60,10 @@
   - [#283](https://github.com/wix-incubator/rich-content/pull/283) fix image upload `updateEntity` callback
 - `editor`
   - [b1e720b](https://github.com/wix-incubator/rich-content/commit/b1e720b) inline-text-toolbar: link panel on mobile is now displayed as modal neither inline panel
+<<<<<<< HEAD
+=======
+
+>>>>>>> develop
 <hr/>
 
 

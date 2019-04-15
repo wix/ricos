@@ -2,45 +2,25 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const RichContentContext = React.createContext();
-
-const Provider = ({
-  children,
-  theme,
-  t,
-  locale,
-  anchorTarget,
-  relValue,
-  helpers,
-  config,
-  isMobile,
-  setEditorState,
-}) => (
-  <RichContentContext.Provider
-    value={{ theme, t, locale, anchorTarget, relValue, helpers, config, isMobile, setEditorState }}
-  >
-    {children}
-  </RichContentContext.Provider>
-);
+const { Provider, Consumer } = RichContentContext;
 
 Provider.propTypes = {
   children: PropTypes.node.isRequired,
-  theme: PropTypes.object,
-  t: PropTypes.func,
-  locale: PropTypes.string,
-  anchorTarget: PropTypes.string,
-  relValue: PropTypes.string,
-  helpers: PropTypes.object,
-  config: PropTypes.object,
-  isMobile: PropTypes.bool,
-  setEditorState: PropTypes.func,
+  value: PropTypes.shape({
+    setEditorState: PropTypes.func.isRequired,
+    t: PropTypes.func.isRequired,
+    theme: PropTypes.object,
+    locale: PropTypes.string,
+    anchorTarget: PropTypes.string,
+    relValue: PropTypes.string,
+    helpers: PropTypes.object,
+    config: PropTypes.object,
+    isMobile: PropTypes.bool,
+  }),
 };
 
-const Consumer = ({ children }) => (
-  <RichContentContext.Consumer>{children}</RichContentContext.Consumer>
-);
-
 Consumer.propTypes = {
-  children: PropTypes.func.isRequired,
+  children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
 };
 
 export default {
