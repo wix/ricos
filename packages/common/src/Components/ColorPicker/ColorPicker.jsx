@@ -47,6 +47,7 @@ class ColorPicker extends PureComponent {
 
   renderColorButtons(colors) {
     const { styles } = this;
+    const { selectionColor } = this.props;
     return colors.map((color, index) => (
       <button
         title={color}
@@ -55,7 +56,7 @@ class ColorPicker extends PureComponent {
           [styles.colorPicker_button]: true,
           [styles.colorPicker_button_selected]: this.state.color === color.toUpperCase(),
         })}
-        style={{ background: color, '--border-color': color }}
+        style={{ background: color, '--border-color': selectionColor }}
         onClick={this.onColorButtonClicked.bind(this, color)}
       />
     ));
@@ -125,6 +126,7 @@ ColorPicker.propTypes = {
   t: PropTypes.func,
   onColorAdded: PropTypes.func.isRequired,
   isMobile: PropTypes.bool,
+  selectionColor: PropTypes.string,
 };
 
 export default ColorPicker;
