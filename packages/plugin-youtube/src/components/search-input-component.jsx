@@ -39,8 +39,11 @@ class SearchInputComponent extends Component {
     this.setState({ textInputValue: e.target.value });
     if (getUrlMatches(e.target.value)) {
       this.setState({ buttonText: t('YoutubePlugin_AddButton_Text'), invalidYoutubeURL: false });
+      if (!isVideoUrl(e.target.value)) {
+        this.setState({ invalidYoutubeURL: true });
+      }
     } else {
-      this.setState({ buttonText: t('YoutubePlugin_SearchButton_Text') });
+      this.setState({ buttonText: t('YoutubePlugin_SearchButton_Text'), invalidYoutubeURL: false });
     }
   };
 
@@ -118,7 +121,12 @@ class SearchInputComponent extends Component {
             theme={this.styles}
           />
           {!WixUtils.isMobile() && (
-            <Button onClick={this.onSearchClicked} theme={this.styles} type="primary">
+            <Button
+              ariaProps={{ disabled: invalidYoutubeURL }}
+              onClick={this.onSearchClicked}
+              theme={this.styles}
+              type="primary"
+            >
               {this.state.buttonText}
             </Button>
           )}
