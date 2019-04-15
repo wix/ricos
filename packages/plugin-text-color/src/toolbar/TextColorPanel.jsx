@@ -23,10 +23,12 @@ export default class TextColorPanel extends Component {
   }
 
   setColor(color) {
-    this.applyInlineColorStyle(color);
-    this.setState({
-      currentColor: color,
-    });
+    if (color !== this.state.currentColor) {
+      this.applyInlineColorStyle(color);
+      this.setState({
+        currentColor: color,
+      });
+    }
     this.props.helpers.closeModal();
   }
 
