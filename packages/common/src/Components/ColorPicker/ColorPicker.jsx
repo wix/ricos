@@ -34,8 +34,8 @@ class ColorPicker extends PureComponent {
   onCustomColorPicked = color => {
     if (color !== this.state.color) {
       this.props.onColorAdded(color);
-      this.setColor(color);
     }
+    this.setColor(color);
     this.toggleCustomColorPicker();
   };
 
