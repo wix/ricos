@@ -79,7 +79,7 @@ class SearchInputComponent extends Component {
     const { invalidYoutubeURL, textInputValue } = this.state;
     const textInputStyles = invalidYoutubeURL && {
       borderColor: '#f64d43',
-      paddingLeft: 35 + 'px',
+      paddingLeft: 32 + 'px',
     };
     return (
       <div className={this.styles.search_input_container}>
