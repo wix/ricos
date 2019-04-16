@@ -5,7 +5,7 @@
   margin-right: 11px;
   display: inline-block;
   width: 186px;
-  margin-bottom: 13px;
+  margin-bottom: 21px;
   box-sizing: border-box;
   @include phone {
     width: calc(100vw - 32px);
@@ -33,10 +33,11 @@
 }
 .image:hover {
   border: solid 2px #9a87ce;
+  box-sizing: border-box;
 }
 
 .description_container {
-  height: 100px;
+  height: auto;
   width: 100%;
   font-size: 11px;
   overflow: hidden;
@@ -63,9 +64,8 @@
 }
 
 .video_publisher_name {
-  margin-top: 4px;
+  margin-top: 7px;
   height: 16px;
-  font-family: Avenir;
   font-size: 12px;
   line-height: 1.33;
   color: #969696;
@@ -73,7 +73,6 @@
 .video_publish_date {
   margin-top: 6px;
   height: 16px;
-  font-family: Avenir;
   font-size: 12px;
   line-height: 1.33;
   color: #969696;

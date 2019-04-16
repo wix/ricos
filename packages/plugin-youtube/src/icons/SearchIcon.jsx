@@ -3,19 +3,19 @@ import React from 'react';
 
 const SearchIcon = props => (
   <svg width={13} height={13} viewBox="0 0 13 13" xmlns="http://www.w3.org/2000/svg" {...props}>
-    <g id="giphy-Symbols" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
-      <g id="Giphy-window" transform="translate(-234.000000, -20.000000)">
+    <g id="youtube-Symbols" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
+      <g id="youtube-window" transform="translate(-234.000000, -20.000000)">
         <rect fill="#FFF" x="0" y="0" width="265" height="383" />
         <rect fill="#FFF" x="0" y="0" width="265" height="360" rx="2" />
         <g
-          id="giphy-Find-Member-Copy"
+          id="youtube-Find-Member-Copy"
           opacity="0.7"
           transform="translate(234.000000, 20.000000)"
           fill="#000000"
           fillRule="nonzero"
         >
-          <g id="giphy-Find-Member">
-            <g id="giphy-Search-Icon">
+          <g id="youtube-Find-Member">
+            <g id="youtube-Search-Icon">
               <path d="M9.90458476,9 L12.9363236,12.0724408 C13.0131754,12.1503243 13.0131754,12.2755077 12.9363236,12.3533913 L12.3127143,12.9853727 C12.3120899,12.9860055 12.3114612,12.9866341 12.3108284,12.9872586 C12.2322045,13.0648409 12.1055743,13.0639966 12.027992,12.9853727 L9,9.91672906 L9.90458476,9 Z M5.5,11 C2.46243388,11 0,8.53756612 0,5.5 C0,2.46243388 2.46243388,0 5.5,0 C8.53756612,0 11,2.46243388 11,5.5 C11,8.53756612 8.53756612,11 5.5,11 Z M5.5,10 C7.98528137,10 10,7.98528137 10,5.5 C10,3.01471863 7.98528137,1 5.5,1 C3.01471863,1 1,3.01471863 1,5.5 C1,7.98528137 3.01471863,10 5.5,10 Z" />
             </g>
           </g>
