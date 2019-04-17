@@ -41,6 +41,7 @@ class AtomicBlock extends React.Component {
         const ContainerElement = !hasLink ? 'div' : 'a';
         const containerClassNames = classNames(
           styles.pluginContainerReadOnly,
+          styles.atomic,
           {
             [styles.pluginContainerMobile]: isMobile,
             [styles.anchor]: hasLink,
@@ -66,17 +67,15 @@ class AtomicBlock extends React.Component {
           };
         }
         return (
-          <figure className={styles.atomic}>
-            <ContainerElement className={containerClassNames} {...containerProps}>
-              {isFunction(container) ? (
-                <div className={container(theme)}>
-                  {this.renderComponent(Component, children, { componentData, settings })}
-                </div>
-              ) : (
-                this.renderComponent(Component, children, { componentData, settings })
-              )}
-            </ContainerElement>
-          </figure>
+          <ContainerElement className={containerClassNames} {...containerProps}>
+            {isFunction(container) ? (
+              <div className={container(theme)}>
+                {this.renderComponent(Component, children, { componentData, settings })}
+              </div>
+            ) : (
+              this.renderComponent(Component, children, { componentData, settings })
+            )}
+          </ContainerElement>
         );
       } else {
         return this.renderComponent(Component, children, { componentData, settings });
