@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { getModalStyles, InlineToolbarButton } from 'wix-rich-content-common';
+import { getModalStyles, InlineToolbarButton, getSelectionStyles } from 'wix-rich-content-common';
 import TextColorIcon from './TextColorIcon';
 import { TEXT_COLOR_TYPE } from '../types';
 import { MODAL_STYLES, PANEL_WIDTH } from './constants';
 import { Modals } from '../modals';
+import { isHexColor } from '../utils';
 
 export default class TextColorButton extends Component {
   constructor(props) {
@@ -79,9 +80,8 @@ export default class TextColorButton extends Component {
     return { top: panelTop, left: panelLeft };
   };
 
-  // TODO: check if has text color inline style and such single style is in selection
   get isActive() {
-    return false; // this.hasInlineColorInSelection(this.props.getEditorState());
+    return getSelectionStyles(style => isHexColor(style), this.props.getEditorState()).length > 0;
   }
 
   render() {
