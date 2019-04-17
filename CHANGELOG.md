@@ -12,7 +12,7 @@
 - `link`
   - [#288](https://github.com/wix-incubator/rich-content/pull/288) `link` fix link not using theme
 - `viewer`
-  - `atomic-block` now has proper style to comply with the `editor` style
+  - [#289](https://github.com/wix-incubator/rich-content/pull/289) `atomic-block` now has proper style to comply with the `editor` style
 <hr/>
 
 ## 3.3.0 (Apr 17, 2019)
