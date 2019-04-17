@@ -3,7 +3,6 @@ import { createBasePlugin } from 'wix-rich-content-common';
 import { LINK_TYPE } from './types';
 import { Component } from './LinkComponent';
 import { linkEntityStrategy } from './strategy';
-import styles from '../statics/link-viewer.scss';
 import createLinkToolbar from './toolbar/createLinkToolbar';
 
 const createLinkPlugin = (config = {}) => {
@@ -18,7 +17,6 @@ const createLinkPlugin = (config = {}) => {
         component: Component,
         target: anchorTarget,
         rel: relValue,
-        theme: theme || styles,
       }).decorators[0]
     );
   }
