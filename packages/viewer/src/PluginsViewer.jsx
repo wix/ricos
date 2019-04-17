@@ -66,15 +66,17 @@ class AtomicBlock extends React.Component {
           };
         }
         return (
-          <ContainerElement className={containerClassNames} {...containerProps}>
-            {isFunction(container) ? (
-              <div className={container(theme)}>
-                {this.renderComponent(Component, children, { componentData, settings })}
-              </div>
-            ) : (
-              this.renderComponent(Component, children, { componentData, settings })
-            )}
-          </ContainerElement>
+          <figure className={styles.atomic}>
+            <ContainerElement className={containerClassNames} {...containerProps}>
+              {isFunction(container) ? (
+                <div className={container(theme)}>
+                  {this.renderComponent(Component, children, { componentData, settings })}
+                </div>
+              ) : (
+                this.renderComponent(Component, children, { componentData, settings })
+              )}
+            </ContainerElement>
+          </figure>
         );
       } else {
         return this.renderComponent(Component, children, { componentData, settings });
