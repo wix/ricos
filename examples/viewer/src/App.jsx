@@ -23,6 +23,7 @@ import {
 import { imageTypeMapper } from 'wix-rich-content-plugin-image/dist/module.viewer';
 import { mapTypeMapper, MAP_TYPE } from 'wix-rich-content-plugin-map/dist/module.viewer';
 import { Strategy as HashTagStrategy, Component as HashTag } from 'wix-rich-content-plugin-hashtag';
+import { TextColorDecorator } from 'wix-rich-content-plugin-text-color';
 import {
   createHeadersMarkdownDecorator,
   HEADERS_MARKDOWN_TYPE,
@@ -136,6 +137,7 @@ class App extends Component {
     };
 
     this.decorators = [
+      TextColorDecorator,
       {
         strategy: LinkParseStrategy,
         component: ({ children, decoratedText, rel, target }) => (

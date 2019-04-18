@@ -10,6 +10,33 @@
 ## [Unreleased]
 <hr/>
 
+
+## 3.3.1 (Apr 17, 2019)
+### :bug: Bug Fix
+- `link`
+  - [#288](https://github.com/wix-incubator/rich-content/pull/288) `link` fix link not using theme
+- `viewer`
+  - [#289](https://github.com/wix-incubator/rich-content/pull/289) `atomic-block` now has proper style to comply with the `editor` style
+
+
+## 3.3.0 (Apr 17, 2019)
+### :boom: Breaking Change
+- `editor`
+  - [#284](https://github.com/wix-incubator/rich-content/pull/284) `getToolbarSettings` API: `pluginTextButtons` parameter now exposes `mobile` and `desktop` button lists, more details [here](./docs/ToolbarCustomization.md)
+### :rocket: New Feature
+- `text-color`
+  - [#284](https://github.com/wix-incubator/rich-content/pull/284) new plugin added
+- `editor`
+  - [#284](https://github.com/wix-incubator/rich-content/pull/284) `RichContentEditor` accepts the `customStyleFn` prop, details [here](https://draftjs.org/docs/api-reference-editor.html#customstylefn)
+### :bug: Bug Fix
+- `common`
+  - [#284](https://github.com/wix-incubator/rich-content/pull/284) `color-picker` component UI adjusted according to design
+  - [#284](https://github.com/wix-incubator/rich-content/pull/284) `getModalStyles` util: `customStyles` now affect both `desktop` and `mobile` styles
+  - [#284](https://github.com/wix-incubator/rich-content/pull/284) `getSelectionStyles` util now accepts `styleSelectionPredicate` function parameter
+### :book: Documentation
+- [#284](https://github.com/wix-incubator/rich-content/pull/284) [Toolbar Customization](./docs/ToolbarCustomization.md) doc updated
+
+
 ## 3.2.3 (Apr 14, 2019)
 ### :house: Internal
 - `general`
@@ -45,8 +72,12 @@
   - [#283](https://github.com/wix-incubator/rich-content/pull/283) fix image upload `updateEntity` callback
 - `editor`
   - [b1e720b](https://github.com/wix-incubator/rich-content/commit/b1e720b) inline-text-toolbar: link panel on mobile is now displayed as modal neither inline panel
+<<<<<<< HEAD
+=======
 
+>>>>>>> develop
 <hr/>
+
 
 ## 3.1.1 (Mar 20, 2019)
 ### :rocket: New Feature

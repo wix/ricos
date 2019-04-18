@@ -22,6 +22,7 @@ import {
   mentionsTypeMapper,
 } from 'wix-rich-content-plugin-mentions/dist/module.viewer';
 import { fileUploadTypeMapper } from 'wix-rich-content-plugin-file-upload/dist/module.viewer';
+import { TextColorDecorator } from 'wix-rich-content-plugin-text-color';
 
 import 'wix-rich-content-common/dist/styles.min.css';
 import 'wix-rich-content-viewer/dist/styles.min.css';
@@ -75,6 +76,7 @@ export const config = {
 };
 
 export const decorators = [
+  TextColorDecorator,
   {
     strategy: LinkParseStrategy,
     component: ({ children, decoratedText, rel, target }) => (

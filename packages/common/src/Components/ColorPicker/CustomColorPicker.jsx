@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { CustomPicker } from 'react-color';
+import { mergeStyles } from '../../Utils/mergeStyles';
 import { Saturation, Hue, EditableInput } from 'react-color/lib/components/common';
 import HuePointer from './HuePointer.jsx';
 import SaturationPointer from './SaturationPointer';
@@ -11,45 +12,19 @@ const customPicker = CustomPicker;
 class CustomColorPicker extends React.Component {
   constructor(props) {
     super(props);
-    this.inlineStyles = {
-      hue: {
-        height: props.isMobile ? '24px' : '12px',
-        position: 'relative',
-        marginTop: props.isMobile ? '12px' : '6px',
-      },
-      saturation: {
-        width: '100%',
-        height: '112px',
-        position: 'relative',
-        touchAction: 'none',
-      },
-      input: {
-        position: 'relative',
-        width: '100%',
-        paddingTop: '13px',
-        fontSize: '14px',
-        color: '#333333',
-        border: 'none',
-      },
-    };
+    this.styles = mergeStyles({ styles, theme: props.theme });
   }
+
   render() {
-    const { t } = this.props;
+    const { styles } = this;
+    const { t, theme } = this.props;
     return (
       <div className={styles.customColorPicker_container}>
-        <div style={this.inlineStyles.saturation}>
-          <Saturation
-            style={{ saturation: this.inlineStyles.saturation }}
-            pointer={() => <SaturationPointer />}
-            {...this.props}
-          />
+        <div className={styles.customColorPicker_saturation}>
+          <Saturation pointer={() => <SaturationPointer theme={theme} />} {...this.props} />
         </div>
-        <div style={this.inlineStyles.hue}>
-          <Hue
-            style={{ hue: this.inlineStyles.hue }}
-            {...this.props}
-            pointer={() => <HuePointer />}
-          />
+        <div className={styles.customColorPicker_hue}>
+          <Hue {...this.props} pointer={() => <HuePointer theme={theme} />} />
         </div>
         <div className={styles.customColorPicker_editable_input_container}>
           <div className={styles.customColorPicker_input_label}>
@@ -57,7 +32,16 @@ class CustomColorPicker extends React.Component {
           </div>
           <div className={styles.customColorPicker_input_container}>
             <EditableInput
-              style={{ input: this.inlineStyles.input }}
+              style={{
+                input: {
+                  position: 'relative',
+                  width: '100%',
+                  paddingTop: 13,
+                  fontSize: 14,
+                  color: '#333333',
+                  border: 'none',
+                },
+              }}
               value={this.props.color}
               {...this.props}
             />
@@ -72,6 +56,8 @@ CustomColorPicker.propTypes = {
   t: PropTypes.func,
   color: PropTypes.string,
   isMobile: PropTypes.bool,
+  theme: PropTypes.object,
+  onChange: PropTypes.func,
 };
 
 export default customPicker(CustomColorPicker);

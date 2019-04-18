@@ -5,5 +5,8 @@
   "prettier.disableLanguages": ["vue", "css", "scss", "sass", "markdown"],
   "[json]": {
     "editor.formatOnSave": false
-  }
+  },
+  "eslint.workingDirectories": [
+    "**/src/**"
+  ]
 }

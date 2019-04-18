@@ -61,7 +61,7 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
   const settings = { ...DEFAULT_SETTINGS, ...config.settings };
   const helpers = config.helpers || {};
   const isMobile = config.isMobile || false;
-  const { t, anchorTarget, relValue } = config;
+  const { t, anchorTarget, relValue, customStyleFn } = config;
 
   const toolbarTheme = { ...getToolbarTheme(config.theme, 'plugin'), ...config.theme };
   const Toolbar =
@@ -153,6 +153,7 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
     InlineModals,
     TextButtonMapper,
     pubsub,
+    customStyleFn,
   };
 
   if (underlyingPlugin) {

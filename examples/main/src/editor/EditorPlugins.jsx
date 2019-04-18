@@ -18,6 +18,7 @@ import {
 } from 'wix-rich-content-plugin-headers-markdown';
 import { createMapPlugin, MAP_TYPE } from 'wix-rich-content-plugin-map';
 import { createFileUploadPlugin, FILE_UPLOAD_TYPE } from 'wix-rich-content-plugin-file-upload';
+import { createTextColorPlugin, TEXT_COLOR_TYPE } from 'wix-rich-content-plugin-text-color';
 
 import React from 'react';
 import Highlighter from 'react-highlight-words';
@@ -60,6 +61,7 @@ export const editorPlugins = [
   createHeadersMarkdownPlugin,
   createMapPlugin,
   createFileUploadPlugin,
+  createTextColorPlugin,
 ];
 
 const themeColors = {
@@ -123,6 +125,8 @@ const getLinkPanelDropDownConfig = () => {
     ),
   };
 };
+
+let userColors = [];
 
 const uiSettings = {
   themeColors,
@@ -261,6 +265,12 @@ export const config = {
     //   };
     //   setTimeout(() => updateEntity({ data }), 500);
     // },
+  },
+  [TEXT_COLOR_TYPE]: {
+    palette: ['#FEFDFD', '#D5D4D4', '#ABCAFF', '#81B0FF', '#0261FF', '#0141AA'],
+    selectionColor: 'fuchsia',
+    onColorAdded: color => (userColors = [color, ...userColors]),
+    getUserColors: () => userColors,
   },
   uiSettings,
   getToolbarSettings: ({ pluginButtons, textButtons }) => [

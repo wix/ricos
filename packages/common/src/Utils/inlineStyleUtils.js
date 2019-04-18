@@ -1,12 +1,17 @@
 import { getSelectedBlocks, getSelectionRange, isInSelectionRange } from './draftUtils';
 
-const getBlockStyleRanges = (block, styles) => {
+const getBlockStyleRanges = (block, styleSelectionPredicate) => {
   const styleRanges = [];
-  styles.forEach(style =>
-    block.findStyleRanges(
-      character => character.hasStyle(style),
-      (start, end) => styleRanges.push({ start, end, style })
-    )
+
+  block.findStyleRanges(
+    character => {
+      const styles = character.getStyle();
+      return styles.toArray().filter(style => styleSelectionPredicate(style));
+    },
+    (start, end) => {
+      const styles = block.getInlineStyleAt(start).filter(style => styleSelectionPredicate(style));
+      styles.toArray().forEach(style => styleRanges.push({ start, end, style }));
+    }
   );
   return styleRanges;
 };
@@ -14,17 +19,17 @@ const getBlockStyleRanges = (block, styles) => {
 /**
  * getSelectionStyles
  *
- * @param string[] allStyles - set of exclusive inline styles
- * @returns string[] - a subset of allStyles found in selection
+ * @param {function} styleSelectionPredicate - style selection criteria
+ * @returns {string[]} a set of relevant styles found in selection
  */
-export const getSelectionStyles = (allStyles, editorState) => {
+export const getSelectionStyles = (styleSelectionPredicate, editorState) => {
   const selectedBlocks = getSelectedBlocks(editorState);
 
   return selectedBlocks.reduce((selectedStyles, block) => {
     const blockSelectionRange = getSelectionRange(editorState, block);
 
-    // for each selected block, get its style ranges (only for styles passed in allStyles)
-    const blockStyleRanges = getBlockStyleRanges(block, allStyles); // { start, end, style }
+    // for each selected block, get its style ranges (only for styles that meet the styleSelectionPredicate criteria)
+    const blockStyleRanges = getBlockStyleRanges(block, styleSelectionPredicate); // { start, end, style }
 
     // if style range is in selection, add this style to result
     return selectedStyles

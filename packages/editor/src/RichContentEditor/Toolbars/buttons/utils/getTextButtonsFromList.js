@@ -16,7 +16,7 @@ import {
 } from '../index';
 import createThemedSeparator from './createThemedSeparator';
 
-export default ({ buttons, theme, t, isMobile, textPluginButtons, uiSettings }) => {
+export default ({ buttons, theme, t, isMobile, textPluginButtons, uiSettings, config }) => {
   const themedSeparator = horizontal => createThemedSeparator({ theme, horizontal });
 
   const buttonByName = {
@@ -44,5 +44,5 @@ export default ({ buttons, theme, t, isMobile, textPluginButtons, uiSettings }) 
 
   const structure = buttons.map(buttonName => buttonMap[buttonName]).filter(b => b !== undefined);
 
-  return structure.map(b => decorateComponentWithProps(b, { t, isMobile, uiSettings }));
+  return structure.map(b => decorateComponentWithProps(b, { t, isMobile, uiSettings, config }));
 };

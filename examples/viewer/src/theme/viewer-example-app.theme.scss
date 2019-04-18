@@ -1,4 +1,4 @@
-@import './fonts.theme.scss';
+@import "./fonts.theme.scss";
 
 .wrapper {
   @extend .fontElementMap !optional;
@@ -20,4 +20,8 @@
 }
 
 .content {
+}
+
+.atomic {
+  margin: 15px 0;
 }

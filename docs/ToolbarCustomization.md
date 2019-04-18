@@ -10,7 +10,25 @@ This document focuses on a specific `config` API `getToolbarSettings` that is re
 
 ### Signature
 
-The `getToolbarSettings` is defined as follows: `{ textButtons, pluginButtons, pluginTextButtons } => Array<Setting>`.
+The `getToolbarSettings` is defined as follows: `{ textButtons, pluginButtons, pluginTextButtons } => Array<Setting>`
+
+
+The `textButtons` and `pluginTextButtons` parameters are objects of the following structure:
+
+```javascript
+{
+  mobile: {
+    buttonName: buttonComponent,
+    ...
+  },
+  desktop: {
+    buttonName: buttonComponent,
+    ...
+  }
+}
+```
+
+The `pluginButtons` parameter is an `inline-button` data array (see divider plugin [inline-buttons](../packages/plugin-divider/src/toolbar/inline-buttons.jsx) for reference).
 
 The `Setting` type is defined as follows:
 

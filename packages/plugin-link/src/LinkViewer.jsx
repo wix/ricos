@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import { normalizeUrl, mergeStyles, validate } from 'wix-rich-content-common';
+import { normalizeUrl, mergeStyles, validate, Context } from 'wix-rich-content-common';
 import isEqual from 'lodash/isEqual';
 import invoke from 'lodash/invoke';
 import schema from '../statics/data-schema.json';
@@ -11,7 +10,6 @@ class LinkViewer extends Component {
   static propTypes = {
     componentData: PropTypes.object.isRequired,
     theme: PropTypes.object,
-    className: PropTypes.string,
     children: PropTypes.node,
     anchorTarget: PropTypes.string,
     relValue: PropTypes.string,
@@ -21,13 +19,18 @@ class LinkViewer extends Component {
   constructor(props) {
     super(props);
     validate(props.componentData, schema);
-    this.styles = mergeStyles({ styles, theme: props.theme });
+    this.state = { styles };
   }
 
   componentWillReceiveProps(nextProps) {
     if (!isEqual(nextProps.componentData, this.props.componentData)) {
       validate(nextProps.componentData, schema);
     }
+  }
+
+  componentDidMount() {
+    const theme = this.context && this.context.theme;
+    this.setState({ styles: mergeStyles({ styles, theme }) });
   }
 
   handleClick = event => {
@@ -39,18 +42,19 @@ class LinkViewer extends Component {
   }
 
   render() {
-    const { styles, props } = this;
-    const { componentData, anchorTarget, relValue, className, children } = props;
+    const { componentData, anchorTarget, relValue, children } = this.props;
     const { target, rel } = componentData;
     const anchorProps = {
       href: this.getHref(),
       target: target ? target : anchorTarget || '_self',
       rel: rel ? rel : relValue || 'noopener',
-      className: classNames(styles.link, className),
+      className: this.state.styles.link,
       onClick: this.handleClick,
     };
     return <a {...anchorProps}>{children}</a>;
   }
 }
+
+LinkViewer.contextType = Context.type;
 
 export default LinkViewer;
