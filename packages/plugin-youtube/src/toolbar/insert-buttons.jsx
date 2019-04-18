@@ -30,7 +30,7 @@ export default ({ helpers, t, settings }) => {
         });
         const { top, left } = buttonRef.getBoundingClientRect();
         const modalLeft = left - 63;
-        const modalTop = top - 398;
+        const modalTop = top - 386;
         return {
           ...modalStyles,
           content: {
