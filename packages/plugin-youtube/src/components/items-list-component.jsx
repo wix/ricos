@@ -60,16 +60,6 @@ class ItemsListComponent extends Component {
     }
   };
 
-  renderApiErrorMessage = () => {
-    const { t } = this.props;
-    return (
-      <div className={this.styles.error_message_container}>
-        <p>{t('YoutubePlugin_API_ErrorMessage_Title')}</p>
-        <p>{t('YoutubePlugin_API_ErrorMessage_Description')}</p>
-      </div>
-    );
-  };
-
   renderResultNotFoundErrorMessage = () => {
     const { t, isMobile } = this.props;
     return (
@@ -186,7 +176,7 @@ class ItemsListComponent extends Component {
     return (
       <div className={this.styles.items_list_component_container}>
         {apiError ? (
-          this.renderApiErrorMessage()
+          this.renderResultNotFoundErrorMessage()
         ) : noReslut ? (
           this.renderResultNotFoundErrorMessage()
         ) : (
