@@ -3,7 +3,12 @@ import PropTypes from 'prop-types';
 import { Modifier, EditorState } from '@wix/draft-js';
 import { ColorPicker, getSelectionStyles } from 'wix-rich-content-common';
 import { isHexColor } from '../utils';
-import { DEFAULT_PALETTE, DEFAULT_COLOR, DEFAULT_SELECTION_COLOR } from './constants';
+import {
+  DEFAULT_PALETTE,
+  DEFAULT_COLOR,
+  DEFAULT_SELECTION_COLOR,
+  DEFAULT_COLOR_TO_STYLE,
+} from './constants';
 
 export default class TextColorPanel extends Component {
   constructor(props) {
@@ -22,10 +27,12 @@ export default class TextColorPanel extends Component {
   }
 
   setColor(color) {
+    const colorToStyle = this.props.settings.colorToStyle || DEFAULT_COLOR_TO_STYLE;
     if (color !== this.state.currentColor) {
-      this.applyInlineColorStyle(color);
+      const style = colorToStyle(color);
+      this.applyInlineColorStyle(style);
       this.setState({
-        currentColor: color,
+        currentColor: style,
       });
     }
     this.props.helpers.closeModal();
@@ -56,7 +63,7 @@ export default class TextColorPanel extends Component {
 
   render() {
     const { theme, settings, t, setKeepToolbarOpen } = this.props;
-    const palette = settings.palette || DEFAULT_PALETTE;
+    const palette = settings.getPaletteColors() || DEFAULT_PALETTE;
     return (
       <ColorPicker
         color={this.state.currentColor}
@@ -81,9 +88,11 @@ TextColorPanel.propTypes = {
   uiSettings: PropTypes.object,
   settings: PropTypes.shape({
     onColorAdded: PropTypes.func.isRequired,
-    palette: PropTypes.arrayOf(PropTypes.string),
+    getPaletteColors: PropTypes.func.isRequired,
     getUserColors: PropTypes.func,
     selectionColor: PropTypes.string,
+    getStyleSelectionPredicate: PropTypes.func,
+    colorToStyle: PropTypes.func,
   }).isRequired,
   setKeepToolbarOpen: PropTypes.func,
   helpers: PropTypes.object.isRequired,

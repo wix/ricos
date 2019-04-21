@@ -3,7 +3,7 @@ import { TEXT_COLOR_TYPE } from './types';
 import { isHexColor } from './utils';
 import createTextColorToolbar from './toolbar/createTextColorToolbar';
 
-const customStyleFn = styles =>
+const defaultStyleFn = styles =>
   styles
     .toArray()
     .reduce(
@@ -13,7 +13,7 @@ const customStyleFn = styles =>
 
 const createTextColorPlugin = (config = {}) => {
   const type = TEXT_COLOR_TYPE;
-  const { theme, [type]: settings = {}, ...rest } = config;
+  const { theme, [type]: settings = {}, customStyleFn, ...rest } = config;
   const toolbar = createTextColorToolbar(config);
 
   return createBasePlugin({
@@ -21,7 +21,7 @@ const createTextColorPlugin = (config = {}) => {
     toolbar,
     type,
     settings,
-    customStyleFn,
+    customStyleFn: customStyleFn || defaultStyleFn,
     ...rest,
   });
 };
