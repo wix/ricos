@@ -1,157 +1,118 @@
-@import './palette.scss';
-@import './mixins.scss';
-
-.colorPicker_container {
-  position: relative;
-  padding-bottom: 19px;
-  @include phone {
-    padding-bottom: 3px;
-  }
-}
-
-.colorPicker_overlay {
-  position: absolute;
-  top: -1px;
-  right: -1px;
-  border-radius: 28px;
-  z-index: -1;
-  width: 38px;
-  height: 38px;
-  background: #0261ff;
-  @include phone {
-    width: 32px;
-    height: 32px;
-  }
-}
+@import "./consts";
+@import "./mixins";
+@import "./palette";
 
 .colorPicker {
-  height: 36px;
-  width: 100%;
   position: relative;
+  margin: 0;
+}
+
+.colorPicker_button.colorPicker_button_selected::after {
+  border-color: var(--border-color);
+}
+
+.colorPicker_separator {
+  border: none;
+  height: 1px;
+  background: rgba(51, 51, 51, 0.1);
+  width: auto;
+  margin: 18px 12px 6px 12px;
   @include phone {
-    padding-bottom: 8px;
-    height: 30px;
+    margin: 0;
+    margin-top: 22px;
   }
 }
 
-.colorPicker_label {
-  position: absolute;
-  color: #333333;
-  font-size: 14px;
-  font-weight: 300;
-  line-height: 18px;
-  top: calc(50% - 11px);
-  left: 0px;
-  @include phone{
-    top: calc(50% - 12px);
+%button {
+  position: relative;
+  margin-top: 12px;
+  -webkit-flex: none;
+  flex: none;
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  outline: 0;
+  padding: 0;
+  margin-left: 12px;
+
+  @include phone {
+    margin-top: 22px;
+    margin-left: calc((100% - 6 * 18px) / 5);
+    &:nth-child(6n + 1) {
+      margin-left: 0;
+    }
   }
 }
 
-.colorPicker_picker {
-  width: 50%;
-  height: auto;
-  direction: rtl;
-  display: inline-block;
-}
-
-.colorPicker_picked {
-  position: absolute;
-  right: -2px;
-  top: 1px;
-  @include phone {
-    right: -2px;
+.colorPicker_button {
+  @extend %button;
+  border-radius: 50%;
+  border: solid 1px rgba(51, 51, 51, 0.4);
+  &::after {
+    content: " ";
+    border-radius: 50%;
+    width: 22px;
+    height: 22px;
+    display: block;
+    background: transparent;
+    border: 1px solid;
+    border-color: transparent;
+    position: absolute;
     top: -4px;
+    left: -4px;
+    outline: 0;
+  }
+  &:hover,
+  &:focus,
+  &:active {
+    outline: 0;
+  }
+  &:not(.colorPicker_button_selected):focus::after {
+    border-color: rgba(51, 51, 51, 0.4);
   }
 }
 
-.colorPicker_dropper {
-  position: absolute;
-  width: 21px;
-  height: 21px;
-  top: 50%;
-  left: 50%;
-  transform: translateX(-50%) translateY(-50%);
+.colorPicker_palette {
+  width: auto;
+  margin: 12px;
+  @include phone {
+    margin: 0 18px 24px;
+  }
 }
 
-$color1: #fff;
-$color2: #eeeeee;
-$size: 10px;
-%palette {
-  background-image: linear-gradient(
-      45deg,
-      $color1 25%,
-      transparent 25%,
-      transparent 75%,
-      $color1 75%
-    ),
-    linear-gradient(45deg, $color1 25%, $color2 25%, $color2 75%, $color1 75%);
-  background-size: $size $size;
-  background-position: 0 0, $size/2 $size/2;
-  position: relative;
-  width: 34px;
-  height: 34px;
-  border-radius: 28px;
+.colorPicker_add_color_button_hidden {
+  position: absolute;
+  opacity: 0;
+  width: 0.1px;
+  height: 0.1px;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.colorPicker_add_color_button {
+  @extend %button;
   display: inline-block;
-  border: solid 1px #ededed;
-  margin-right: 18px;
+  vertical-align: top;
+}
+
+.colorPicker_add_color_label {
+  width: 18px;
+  height: 18px;
+  color: $accent-color;
   cursor: pointer;
+  position: relative;
+  top: -4px;
+  left: -4px;
+}
+
+.colorPicker_buttons_container {
+  flex-direction: row;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  width: 180px;
   @include phone {
-    width: 30px;
-    height: 30px;
-    margin-left: 0px;
-    box-sizing: border-box;
+    width: 100%;
   }
-}
-
-.colorPicker_non_dropper_palette {
-  @extend %palette;
-  @include phone{
-    margin-right: calc((100% - 200px) / 7);
-  }
-}
-
-
-.colorPicker_dropper_palette {
-  @extend %palette;
-  margin-right: 0px;
-}
-
-.colorPicker_palettes {
-  width: 100%;
-  text-align: right;
-  height: auto;
-  padding-top: 20px;
-  @include phone {
-    height: auto;
-    padding-bottom: 9px;
-    padding-top: 26px;
-  }
-}
-
-.colorPicker_pickerButton {
-  width: 36px;
-  height: 36px;
-  border-radius: 28px;
-  border: 1px solid #b2c1ce;
-  box-sizing: border-box;
-  cursor: pointer;
-  position: absolute;
-  top: 0px;
-  right: 0px;
-  cursor: pointer;
-  @include phone {
-    width: 30px;
-    height: 30px;
-  }
-}
-
-.colorPicker_swatchesPicker {
-  position: absolute;
-  top: 30;
-  right: 30;
-  z-index: 11;
-}
-
-.colorPicker_colorBoard {
-
 }

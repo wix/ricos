@@ -1,4 +1,4 @@
-@import './fonts.theme.scss';
+@import "./fonts.theme.scss";
 
 .wrapper {
   @extend .fontElementMap !optional;
@@ -8,6 +8,7 @@
 }
 
 .atomic {
+  margin: 15px 0;
 }
 
 .toolbar {

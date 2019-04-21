@@ -84,6 +84,7 @@ export default ({
   displayOptions,
   uiSettings,
   toolbarDecorationFn,
+  config,
 }) => {
   const staticTextTheme = getStaticTextTheme(theme);
   const structure = getTextButtonsFromList({
@@ -93,6 +94,7 @@ export default ({
     theme: staticTextTheme,
     t,
     uiSettings,
+    config,
     isMobile,
   });
   const id = getStaticTextToolbarId(refId);

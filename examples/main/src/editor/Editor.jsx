@@ -1,11 +1,11 @@
 import React, { PureComponent } from 'react';
 import { RichContentEditor, RichContentEditorModal } from 'wix-rich-content-editor';
-import theme from '../theme/theme';
 import * as PropTypes from 'prop-types';
 import ReactModal from 'react-modal';
 import { testImages, testVideos } from './mock';
 import * as Plugins from './EditorPlugins';
 import ModalsMap from './ModalsMap';
+import theme from '../theme/theme'; // must import after custom styles
 
 
 const modalStyleDefaults = {

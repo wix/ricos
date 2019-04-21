@@ -23,21 +23,18 @@ class FocusManager extends Component {
     this.onDeactivate = this.onDeactivate.bind(this);
   }
 
-  onActivate() {
-    console.log('onActivate', this.id); // eslint-disable-line no-console
-  }
+  onActivate() {}
 
-  onDeactivate() {
-    console.log('onDeactivate', this.id); // eslint-disable-line no-console
-  }
+  onDeactivate() {}
 
   render() {
     const { children, focusTrapOptions, isMobile, ...rest } = this.props;
-    const options = Object.assign({}, focusTrapOptions, {
+    const options = {
+      ...focusTrapOptions,
       onActivate: this.onActivate,
       onDeactivate: this.onDeactivate,
       clickOutsideDeactivates: true,
-    });
+    };
     if (isMobile) {
       return <Fragment {...rest}>{children}</Fragment>;
     } else {

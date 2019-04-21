@@ -35,6 +35,7 @@ const createPlugins = ({
   let pluginButtons = [];
   let pluginTextButtons = [];
   let pubsubs = [];
+  let pluginStyleFns = [];
   wixPlugins.forEach(wixPlugin => {
     pluginButtons = [...pluginButtons, ...(wixPlugin.InsertPluginButtons || [])];
     /* eslint-disable new-cap */
@@ -44,6 +45,10 @@ const createPlugins = ({
     ];
     /* eslint-enable new-cap */
     pubsubs = [...pubsubs, ...(wixPlugin.pubsub ? [wixPlugin.pubsub] : [])];
+    pluginStyleFns = [
+      ...pluginStyleFns,
+      ...(wixPlugin.customStyleFn ? [wixPlugin.customStyleFn] : []),
+    ];
   });
 
   const pluginInstances = [focusPlugin, dndPlugin, ...wixPlugins];
@@ -53,6 +58,7 @@ const createPlugins = ({
     pluginButtons,
     pluginTextButtons,
     pubsubs,
+    pluginStyleFns,
   };
 };
 

@@ -1,5 +1,5 @@
 import { createBasePlugin } from 'wix-rich-content-common';
-import { HEADERS_MARKDOWN_TYPE as type } from './index';
+import { HEADERS_MARKDOWN_TYPE as type } from './types';
 import { strategy, component } from './decorator';
 
 export const createHeadersMarkdownDecorator = (config = {}) => {

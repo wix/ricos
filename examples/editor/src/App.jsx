@@ -244,6 +244,7 @@ class App extends Component {
                 <div className="column main">
                   {TextToolbar && <TextToolbar />}
                   <RichContentEditor
+                    // customStyleFn={() => ({ background: 'wheat' })}
                     ref={this.setEditor}
                     onChange={this.onChange}
                     helpers={this.helpers}

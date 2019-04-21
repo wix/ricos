@@ -8,7 +8,11 @@ import {
 } from 'wix-rich-content-common';
 import { getDefaultToolbarSettings } from './default-toolbar-settings';
 import { MobileTextButtonList, DesktopTextButtonList } from './buttons';
-import { reducePluginTextButtonNames, mergeButtonLists } from './buttons/utils';
+import {
+  reducePluginTextButtonNames,
+  mergeButtonLists,
+  reducePluginTextButtons,
+} from './buttons/utils';
 
 const appendSeparator = ({ mergedList, sourceList, buttonData, formFactor }) => {
   if (
@@ -23,12 +27,11 @@ const appendSeparator = ({ mergedList, sourceList, buttonData, formFactor }) => 
   return mergedList;
 };
 
-const createEditorToolbars = config => {
+const createEditorToolbars = data => {
   const {
     buttons,
     anchorTarget,
     relValue,
-    // textToolbarType,
     textAlignment,
     helpers,
     isMobile,
@@ -39,7 +42,8 @@ const createEditorToolbars = config => {
     refId,
     getToolbarSettings = () => [],
     uiSettings,
-  } = config;
+    config,
+  } = data;
   const { pluginButtons, pluginTextButtons } = buttons;
 
   const pubsub = simplePubsub();
@@ -59,12 +63,21 @@ const createEditorToolbars = config => {
     ),
   };
 
+  const pluginTextButtonsByFormFactor = {
+    mobile: reducePluginTextButtons(pluginTextButtons, ({ isMobile }) => isMobile !== false),
+    desktop: reducePluginTextButtons(pluginTextButtons),
+  };
+
   const defaultSettings = getDefaultToolbarSettings({
     pluginButtons,
     textButtons,
-    pluginTextButtons,
+    pluginTextButtons: pluginTextButtonsByFormFactor,
   });
-  const customSettings = getToolbarSettings({ pluginButtons, textButtons, pluginTextButtons });
+  const customSettings = getToolbarSettings({
+    pluginButtons,
+    textButtons,
+    pluginTextButtons: pluginTextButtonsByFormFactor,
+  });
   const toolbarSettings = mergeToolbarSettings({ defaultSettings, customSettings });
   const toolbars = {};
 
@@ -121,6 +134,7 @@ const createEditorToolbars = config => {
           relValue,
           isMobile,
           helpers,
+          config,
           pubsub,
           refId,
           t,

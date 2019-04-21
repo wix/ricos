@@ -17,6 +17,8 @@ export default class RichContentViewer extends Component {
       raw: this.getInitialState(props.initialState),
     };
     this.styles = mergeStyles({ styles, theme: props.theme });
+
+    this.initContext();
   }
 
   getInitialState = initialState =>
@@ -27,6 +29,19 @@ export default class RichContentViewer extends Component {
         })
       : {};
 
+  initContext = () => {
+    const { theme, isMobile, anchorTarget, relValue, config, helpers, locale } = this.props;
+    this.contextualData = {
+      theme,
+      isMobile,
+      anchorTarget,
+      relValue,
+      config,
+      helpers,
+      locale,
+    };
+  };
+
   componentWillReceiveProps(nextProps) {
     if (this.props.initialState !== nextProps.initialState) {
       this.setState({ raw: this.getInitialState(nextProps.initialState) });
@@ -35,18 +50,7 @@ export default class RichContentViewer extends Component {
 
   render() {
     const { styles } = this;
-    const {
-      theme,
-      isMobile,
-      textDirection,
-      typeMappers,
-      decorators,
-      anchorTarget,
-      relValue,
-      config,
-      helpers,
-      locale,
-    } = this.props;
+    const { textDirection, typeMappers, decorators } = this.props;
 
     const wrapperClassName = classNames(styles.wrapper, {
       [styles.desktop]: !this.props.platform || this.props.platform === 'desktop',
@@ -55,20 +59,18 @@ export default class RichContentViewer extends Component {
       [styles.rtl]: textDirection === 'rtl',
     });
 
-    const contextualData = { theme, isMobile, anchorTarget, relValue, config, helpers, locale };
-
     const output = convertToReact(
       this.state.raw,
       styles,
       textDirection,
       typeMappers,
-      contextualData,
+      this.contextualData,
       decorators
     );
 
     return (
       <div className={wrapperClassName}>
-        <Context.Provider {...contextualData}>
+        <Context.Provider value={this.contextualData}>
           <div className={editorClassName}>{output}</div>
           <AccessibilityListener />
         </Context.Provider>

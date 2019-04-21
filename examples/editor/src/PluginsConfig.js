@@ -7,6 +7,7 @@ import { LINK_TYPE } from 'wix-rich-content-plugin-link';
 import { VIDEO_TYPE } from 'wix-rich-content-plugin-video';
 import { GIPHY_TYPE } from 'wix-rich-content-plugin-giphy';
 import { MAP_TYPE } from 'wix-rich-content-plugin-map';
+import { TEXT_COLOR_TYPE } from 'wix-rich-content-plugin-text-color';
 import { FILE_UPLOAD_TYPE } from 'wix-rich-content-plugin-file-upload';
 import { BUTTON_TYPE } from 'wix-rich-content-plugin-button';
 import { EXTERNAL_MENTIONS_TYPE } from 'wix-rich-content-plugin-mentions';
@@ -86,6 +87,7 @@ const getLinkPanelDropDownConfig = () => {
 let userButtonTextColors = [];
 let userButtonBackgroundColors = [];
 let userButtonBorderColors = [];
+let userColors = [];
 
 const uiSettings = {
   themeColors,
@@ -201,6 +203,12 @@ export default {
       isDraggingAllowed: true,
     },
   },
+  [TEXT_COLOR_TYPE]: {
+    palette: ['#FEFDFD', '#D5D4D4', '#ABCAFF', '#81B0FF', '#0261FF', '#0141AA'],
+    selectionColor: 'fuchsia',
+    onColorAdded: color => (userColors = [color, ...userColors]),
+    getUserColors: () => userColors,
+  },
   [FILE_UPLOAD_TYPE]: {
     accept: '*',
     onFileSelected: (file, updateEntity) => {
@@ -250,7 +258,7 @@ export default {
     getBackgroundColors: () => userButtonBackgroundColors,
   },
   uiSettings,
-  getToolbarSettings: ({ pluginButtons, textButtons }) => [
+  getToolbarSettings: ({ pluginButtons, textButtons, pluginTextButtons }) => [
     // {
     //   name: TOOLBARS.PLUGIN,
     //   getVisibilityFn: () => ({
@@ -360,9 +368,30 @@ export default {
     // },
     // {
     //   name: TOOLBARS.INLINE,
+    //   shouldCreate: () => ({
+    //     desktop: true,
+    //     mobile: {
+    //       ios: true,
+    //       android: true,
+    //     },
+    //   }),
+    //   getButtons: () => ({
+    //     desktop: textButtons.desktop,
+    //     mobile: {
+    //       ios: textButtons.mobile,
+    //       android: textButtons.mobile,
+    //     },
+    //   }),
+    //   getTextPluginButtons: () => ({
+    //     desktop: pluginTextButtons.desktop,
+    //     mobile: {
+    //       ios: pluginTextButtons.mobile,
+    //       android: pluginTextButtons.mobile,
+    //     },
+    //   }),
     //   getToolbarDecorationFn: () => ({
-    //     desktop: () => InlineToolbarDecoration
-    //   })
-    // }
+    //     desktop: () => InlineToolbarDecoration,
+    //    }),
+    // },
   ],
 };

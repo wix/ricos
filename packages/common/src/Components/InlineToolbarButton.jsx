@@ -38,6 +38,7 @@ export default class InlineToolbarButton extends Component {
     tooltipText: PropTypes.string,
     tabIndex: PropTypes.number,
     icon: PropTypes.func.isRequired,
+    forwardRef: PropTypes.object,
   };
 
   handleClick = () => this.props.onClick && this.props.onClick();
@@ -45,7 +46,7 @@ export default class InlineToolbarButton extends Component {
   preventBubblingUp = event => event.preventDefault();
 
   render() {
-    const { isActive, theme, isMobile, tooltipText, tabIndex, icon: Icon } = this.props;
+    const { isActive, theme, isMobile, tooltipText, tabIndex, icon: Icon, forwardRef } = this.props;
     const { styles } = this;
     const showTooltip = !isMobile && !isEmpty(tooltipText);
 
@@ -55,7 +56,7 @@ export default class InlineToolbarButton extends Component {
 
     const codeBlockButton = (
       /* eslint-disable jsx-a11y/no-static-element-interactions */
-      <div className={styles.buttonWrapper} onMouseDown={this.preventBubblingUp}>
+      <div className={styles.buttonWrapper} onMouseDown={this.preventBubblingUp} ref={forwardRef}>
         <button
           tabIndex={tabIndex}
           aria-label={tooltipText}

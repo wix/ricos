@@ -41,6 +41,7 @@ class AtomicBlock extends React.Component {
         const ContainerElement = !hasLink ? 'div' : 'a';
         const containerClassNames = classNames(
           styles.pluginContainerReadOnly,
+          styles.atomic,
           {
             [styles.pluginContainerMobile]: isMobile,
             [styles.anchor]: hasLink,

@@ -3,7 +3,7 @@ import SideToolbar from './SideToolbar';
 import AddPluginFloatingToolbar from './AddPluginFloatingToolbar';
 import { simplePubsub, decorateComponentWithProps } from 'wix-rich-content-common';
 
-const createSideToolbar = (config = {}) => {
+const createSideToolbar = (data = {}) => {
   const {
     name = 'SideToolbar',
     pubsub = simplePubsub({ isVisible: false }),
@@ -14,7 +14,8 @@ const createSideToolbar = (config = {}) => {
     isMobile,
     displayOptions,
     toolbarDecorationFn,
-  } = config;
+    config,
+  } = data;
 
   const toolbarProps = {
     pubsub,
@@ -25,6 +26,7 @@ const createSideToolbar = (config = {}) => {
     visibilityFn,
     displayOptions,
     toolbarDecorationFn,
+    config,
   };
 
   return {
@@ -52,6 +54,7 @@ export default ({
   t,
   displayOptions,
   toolbarDecorationFn,
+  config,
 }) => {
   const { buttonStyles, ...rest } = theme;
   const toolbarButtonTheme = {
@@ -70,6 +73,7 @@ export default ({
     isMobile,
     displayOptions,
     toolbarDecorationFn,
+    config,
     structure: [
       (
         { getEditorState, setEditorState } //eslint-disable-line
