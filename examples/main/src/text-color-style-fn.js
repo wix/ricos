@@ -10,3 +10,5 @@ export const getCustomStyleFn = colorMap => styles =>
     );
 
 export const getStyleSelectionPredicate = colorMap => style => isHexColor(colorMap[style]);
+
+export const getPalleteColors = colorMap => Object.values(colorMap);
