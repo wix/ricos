@@ -2,18 +2,20 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Modifier, EditorState } from '@wix/draft-js';
 import { ColorPicker, getSelectionStyles } from 'wix-rich-content-common';
-import { isHexColor } from '../utils';
 import {
   DEFAULT_PALETTE,
   DEFAULT_COLOR,
   DEFAULT_SELECTION_COLOR,
   DEFAULT_COLOR_TO_STYLE,
+  DEFAULT_STYLE_SELECTION_PREDICATE,
 } from './constants';
 
 export default class TextColorPanel extends Component {
   constructor(props) {
     super(props);
-    const currentColors = getSelectionStyles(style => isHexColor(style), props.editorState);
+    const styleSelectionPredicate =
+      props.settings.styleSelectionPredicate || DEFAULT_STYLE_SELECTION_PREDICATE;
+    const currentColors = getSelectionStyles(styleSelectionPredicate, props.editorState);
     this.state = {
       currentColor: currentColors.length > 0 ? currentColors[0] : DEFAULT_COLOR,
       userColors: props.settings.getUserColors() || [],
@@ -39,8 +41,10 @@ export default class TextColorPanel extends Component {
   }
 
   applyInlineColorStyle(color) {
-    const { editorState, setEditorState } = this.props;
-    const currentColors = getSelectionStyles(style => isHexColor(style), editorState);
+    const { editorState, setEditorState, settings } = this.props;
+    const styleSelectionPredicate =
+      settings.styleSelectionPredicate || DEFAULT_STYLE_SELECTION_PREDICATE;
+    const currentColors = getSelectionStyles(styleSelectionPredicate, editorState);
     const newEditorState = currentColors.reduce((nextEditorState, prevColor) => {
       const selection = nextEditorState.getSelection();
       const contentState = nextEditorState.getCurrentContent();
@@ -91,7 +95,7 @@ TextColorPanel.propTypes = {
     getPaletteColors: PropTypes.func.isRequired,
     getUserColors: PropTypes.func,
     selectionColor: PropTypes.string,
-    getStyleSelectionPredicate: PropTypes.func,
+    styleSelectionPredicate: PropTypes.func,
     colorToStyle: PropTypes.func,
   }).isRequired,
   setKeepToolbarOpen: PropTypes.func,
