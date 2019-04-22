@@ -1,6 +1,5 @@
-import { createBasePlugin } from 'wix-rich-content-common';
+import { createBasePlugin, isHexColor } from 'wix-rich-content-common';
 import { TEXT_COLOR_TYPE } from './types';
-import { isHexColor } from './utils';
 import createTextColorToolbar from './toolbar/createTextColorToolbar';
 
 const defaultStyleFn = styles =>

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { isHexColor } from './utils';
+import { isHexColor } from 'wix-rich-content-common';
 
 const colors = {};
 
