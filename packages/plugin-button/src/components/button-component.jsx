@@ -21,7 +21,6 @@ class ButtonComponent extends PureComponent {
     const {
       componentData: { button },
       buttonObj,
-      blockProps,
     } = this.props;
     const { anchorTarget = '_self', relValue = '', theme } = this.context || this.props;
     let buttonText = button.buttonText;
@@ -45,15 +44,6 @@ class ButtonComponent extends PureComponent {
       borderColor: button.borderColor ? button.borderColor : colors.color8,
     };
     url = button.url;
-    const textColor = blockProps &&
-      !blockProps.isFocused &&
-      !url && {
-        color: '#5D9AFF',
-      };
-    style = {
-      ...style,
-      ...textColor,
-    };
     if (buttonObj) {
       style = {
         ...style,
