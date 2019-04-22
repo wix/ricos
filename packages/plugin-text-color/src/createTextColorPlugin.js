@@ -1,18 +1,11 @@
-import { createBasePlugin, isHexColor } from 'wix-rich-content-common';
+import { createBasePlugin } from 'wix-rich-content-common';
 import { TEXT_COLOR_TYPE } from './types';
 import createTextColorToolbar from './toolbar/createTextColorToolbar';
-
-const defaultStyleFn = styles =>
-  styles
-    .toArray()
-    .reduce(
-      (cssStyle, style) => ({ ...cssStyle, ...(isHexColor(style) ? { color: style } : {}) }),
-      {}
-    );
+import { DEFAULT_STYLE_FN_DRAFT } from './constants';
 
 const createTextColorPlugin = (config = {}) => {
   const type = TEXT_COLOR_TYPE;
-  const { theme, [type]: settings = {}, customStyleFn, ...rest } = config;
+  const { theme, [type]: settings = {}, ...rest } = config;
   const toolbar = createTextColorToolbar(config);
 
   return createBasePlugin({
@@ -20,7 +13,7 @@ const createTextColorPlugin = (config = {}) => {
     toolbar,
     type,
     settings,
-    customStyleFn: customStyleFn || defaultStyleFn,
+    customStyleFn: settings.customStyleFn || DEFAULT_STYLE_FN_DRAFT,
     ...rest,
   });
 };

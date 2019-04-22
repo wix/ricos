@@ -1,29 +1,32 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { isHexColor } from 'wix-rich-content-common';
+import { DEFAULT_STYLE_SELECTION_PREDICATE, DEFAULT_STYLE_FN } from './constants';
+import { TEXT_COLOR_TYPE } from './types';
 
 const colors = {};
 
-const TextColorComponent = props => (
-  <span style={{ color: colors[props.key] }}>{props.decoratedText}</span>
+const getTextColorComponent = customStyleFn => props => (
+  <span style={customStyleFn(colors[props.key])}>{props.decoratedText}</span> // eslint-disable-line react/prop-types
 );
-TextColorComponent.propTypes = {
-  decoratedText: PropTypes.string,
-  key: PropTypes.string,
-};
-export default {
-  component: TextColorComponent,
-  strategy: (contentBlock, callback) => {
-    if (contentBlock && contentBlock.inlineStyleRanges) {
-      contentBlock.inlineStyleRanges
-        .filter(range => {
-          if (isHexColor(range.style)) {
-            colors[`${contentBlock.key}.${range.offset}.0`] = range.style;
-            return true;
-          }
-          return false;
-        })
-        .forEach(({ offset, length }) => callback(offset, offset + length));
-    }
-  },
+
+export default config => {
+  const settings = config[TEXT_COLOR_TYPE] || {};
+  const styleSelectionPredicate =
+    settings.styleSelectionPredicate || DEFAULT_STYLE_SELECTION_PREDICATE;
+  const customStyleFn = settings.customStyleFn || DEFAULT_STYLE_FN;
+  return {
+    component: getTextColorComponent(customStyleFn),
+    strategy: (contentBlock, callback) => {
+      if (contentBlock && contentBlock.inlineStyleRanges) {
+        contentBlock.inlineStyleRanges
+          .filter(range => {
+            if (styleSelectionPredicate(range.style)) {
+              colors[`${contentBlock.key}.${range.offset}.0`] = range.style;
+              return true;
+            }
+            return false;
+          })
+          .forEach(({ offset, length }) => callback(offset, offset + length));
+      }
+    },
+  };
 };

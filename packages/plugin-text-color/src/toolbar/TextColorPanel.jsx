@@ -7,17 +7,20 @@ import {
   DEFAULT_COLOR,
   DEFAULT_SELECTION_COLOR,
   DEFAULT_COLOR_TO_STYLE,
+  DEFAULT_STYLE_TO_COLOR,
   DEFAULT_STYLE_SELECTION_PREDICATE,
-} from './constants';
+} from '../constants';
 
 export default class TextColorPanel extends Component {
   constructor(props) {
     super(props);
     const styleSelectionPredicate =
       props.settings.styleSelectionPredicate || DEFAULT_STYLE_SELECTION_PREDICATE;
+    const styleToColor = props.settings.styleToColor || DEFAULT_STYLE_TO_COLOR;
     const currentColors = getSelectionStyles(styleSelectionPredicate, props.editorState);
     this.state = {
-      currentColor: currentColors.length > 0 ? currentColors[0] : DEFAULT_COLOR,
+      currentColor:
+        currentColors.length > 0 ? styleToColor(currentColors[0]).toUpperCase() : DEFAULT_COLOR,
       userColors: props.settings.getUserColors() || [],
     };
     this.setColor = this.setColor.bind(this);
@@ -30,11 +33,11 @@ export default class TextColorPanel extends Component {
 
   setColor(color) {
     const colorToStyle = this.props.settings.colorToStyle || DEFAULT_COLOR_TO_STYLE;
+    const style = colorToStyle(color);
     if (color !== this.state.currentColor) {
-      const style = colorToStyle(color);
       this.applyInlineColorStyle(style);
       this.setState({
-        currentColor: style,
+        currentColor: color,
       });
     }
     this.props.helpers.closeModal();
@@ -97,6 +100,7 @@ TextColorPanel.propTypes = {
     selectionColor: PropTypes.string,
     styleSelectionPredicate: PropTypes.func,
     colorToStyle: PropTypes.func,
+    styleToColor: PropTypes.func,
   }).isRequired,
   setKeepToolbarOpen: PropTypes.func,
   helpers: PropTypes.object.isRequired,

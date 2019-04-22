@@ -42,4 +42,11 @@ export const MODAL_STYLES = {
 
 export const DEFAULT_COLOR_TO_STYLE = color => color;
 
+export const DEFAULT_STYLE_TO_COLOR = style => style;
+
 export const DEFAULT_STYLE_SELECTION_PREDICATE = style => isHexColor(style);
+
+export const DEFAULT_STYLE_FN = style => (isHexColor(style) ? { color: style } : {});
+
+export const DEFAULT_STYLE_FN_DRAFT = styles =>
+  styles.toArray().reduce((cssStyle, style) => ({ ...cssStyle, ...DEFAULT_STYLE_FN(style) }), {}); // eslint-disable-line new-cap
