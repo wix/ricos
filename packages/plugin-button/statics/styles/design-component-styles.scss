@@ -12,6 +12,33 @@
   }
 }
 
+.colorPicker_button{
+  width: 36px;
+  height: 36px;
+
+  &::after{
+    width: 40px;
+    height: 40px;
+  }
+}
+
+.colorPicker_palette{
+  margin-right: 0px;
+  margin-left: 0px;
+}
+
+.customColorPicker_container{
+  width: 100%;
+}
+
+.colorPickerDialog{
+  margin: 24px 0px 15px;
+}
+
+.colorPicker_buttons_container{
+  width: 100%;
+}
+
 .colorPicker_container {
   height: auto;
   width: 100%;

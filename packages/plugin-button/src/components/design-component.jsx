@@ -8,6 +8,7 @@ import {
 } from 'wix-rich-content-common';
 import classNames from 'classnames';
 import ButtonSample from '../components/button-sample';
+import { DEFAULT_PALETTE } from '../constants';
 import styles from '../../statics/styles/design-component-styles.scss';
 
 class DesignComponent extends PureComponent {
@@ -78,10 +79,35 @@ class DesignComponent extends PureComponent {
       backgroundCustomcolors: getBackgroundColors() || [],
       openedColorPicker: -1,
     };
+
+    this.onBackgroundcolorAdded = this.onBackgroundcolorAdded.bind(this);
+    this.onBordercolorAdded = this.onBordercolorAdded.bind(this);
+    this.onTextcolorAdded = this.onTextcolorAdded.bind(this);
   }
 
   componentDidUpdate = () => {
     this.props.onDesignChange(this.state);
+  };
+
+  onBackgroundcolorAdded(color) {
+    this.props.settings.onBackgroundColorAdded(color);
+    this.setState({
+      backgroundCustomcolors: this.props.settings.getBackgroundColors() || [],
+    });
+  }
+
+  onBordercolorAdded = color => {
+    this.props.settings.onBorderColorAdded(color);
+    this.setState({
+      borderCustomcolors: this.props.settings.getBorderColors() || [],
+    });
+  };
+
+  onTextcolorAdded = color => {
+    this.props.settings.onTextColorAdded(color);
+    this.setState({
+      textCustomcolors: this.props.settings.getTextColors() || [],
+    });
   };
 
   onBorderWidthChange = value => {
@@ -149,30 +175,17 @@ class DesignComponent extends PureComponent {
     return !paletteColors.includes(color);
   };
 
-  componentWillUnmount = () => {
-    const { textColor, borderColor, backgroundColor } = this.state;
-    const {
-      onTextColorAdded,
-      onBackgroundColorAdded,
-      onBorderColorAdded,
-      getTextColors,
-      getBorderColors,
-      getBackgroundColors,
-    } = this.props.settings;
-    if (this.isCustomColor(textColor) && !getTextColors().includes(textColor)) {
-      onTextColorAdded(textColor);
-    }
-    if (this.isCustomColor(borderColor) && !getBorderColors().includes(borderColor)) {
-      onBorderColorAdded(borderColor);
-    }
-    if (this.isCustomColor(backgroundColor) && !getBackgroundColors().includes(backgroundColor)) {
-      onBackgroundColorAdded(backgroundColor);
-    }
-  };
-
   render() {
     const styles = this.styles;
-    const { theme, t, designObj, getTextColors, getBorderColors, getBackgroundColors } = this.props;
+    const {
+      theme,
+      t,
+      designObj,
+      selectionBackgroundColor,
+      selectionBorderColor,
+      selectionTextColor,
+      palette,
+    } = this.props;
     const buttonSampleList = this.presetStyle.map((style, i) => {
       const active = i === this.state.activeButton;
       return (
@@ -187,7 +200,6 @@ class DesignComponent extends PureComponent {
         />
       );
     });
-
     return (
       <div>
         <SettingsSection
@@ -242,48 +254,48 @@ class DesignComponent extends PureComponent {
           >
             <div style={{ border: 'none' }} className={styles.colorPicker_container}>
               <div className={styles.section_header_color}>{t('ButtonModal_Color_Section')}</div>
+
+              {t('ButtonModal_Text_Color')}
+
               <ColorPicker
-                {...this.props}
-                userColors={getTextColors().slice(0, 7)}
-                onChange={this.onTextColorChange.bind(this)}
-                onClick={e => this.onColorPickerClicked(e)}
+                key="0000"
                 color={designObj.textColor}
-                theme={theme}
-                isOpened={this.state.openedColorPicker === 0}
-                index={0}
-                scrollColorPickerDown={this.scrollColorPickerDown}
-              >
-                {t('ButtonModal_Text_Color')}
-              </ColorPicker>
+                selectionColor={selectionTextColor || '#FEFDFD'}
+                palette={palette.slice(0, 7) || DEFAULT_PALETTE}
+                userColors={this.state.textCustomcolors.slice(0, 17)}
+                onColorAdded={this.onTextcolorAdded}
+                theme={this.styles}
+                onChange={this.onTextColorChange.bind(this)}
+                t={t}
+              />
+
+              {t('ButtonModal_Border_Color')}
+
               <ColorPicker
-                {...this.props}
-                userColors={getBorderColors().slice(0, 7)}
-                onChange={this.onBorderColorChange.bind(this)}
-                onClick={e => this.onColorPickerClicked(e)}
+                key="1111"
                 color={designObj.borderColor}
-                theme={theme}
-                isOpened={this.state.openedColorPicker === 1}
-                index={1}
-                scrollColorPickerDown={this.scrollColorPickerDown}
-              >
-                {t('ButtonModal_Border_Color')}
-              </ColorPicker>
+                selectionColor={selectionBorderColor || '#FEFDFD'}
+                palette={palette.slice(0, 7) || DEFAULT_PALETTE}
+                userColors={this.state.borderCustomcolors.slice(0, 17)}
+                onColorAdded={this.onBordercolorAdded}
+                theme={this.styles}
+                onChange={this.onBorderColorChange.bind(this)}
+                t={t}
+              />
+
+              {t('ButtonModal_Background_Color')}
+
               <ColorPicker
-                {...this.props}
-                userColors={getBackgroundColors().slice(0, 7)}
+                key="2222"
                 color={designObj.backgroundColor}
-                theme={theme}
+                selectionColor={selectionBackgroundColor}
+                palette={palette.slice(0, 7) || DEFAULT_PALETTE}
+                userColors={this.state.backgroundCustomcolors.slice(0, 17)}
+                onColorAdded={this.onBackgroundcolorAdded}
+                theme={this.styles}
                 onChange={this.onBackgroundColorChange.bind(this)}
-                onClick={e => this.onColorPickerClicked(e)}
-                isOpened={this.state.openedColorPicker === 2}
-                index={2}
-                colorPickerRef={ref => {
-                  this.colorPicker3 = ref;
-                }}
-                scrollColorPickerDown={this.scrollColorPickerDown}
-              >
-                {t('ButtonModal_Background_Color')}
-              </ColorPicker>
+                t={t}
+              />
             </div>
           </SettingsSection>
         </div>
@@ -299,9 +311,13 @@ DesignComponent.propTypes = {
   designObj: PropTypes.object,
   settings: PropTypes.object.isRequired,
   onDesignChange: PropTypes.func.isRequired,
-  getTextColors: PropTypes.array,
-  getBorderColors: PropTypes.array,
-  getBackgroundColors: PropTypes.array,
+  getTextColors: PropTypes.func,
+  getBorderColors: PropTypes.func,
+  getBackgroundColors: PropTypes.func,
+  selectionBackgroundColor: PropTypes.string,
+  selectionBorderColor: PropTypes.string,
+  selectionTextColor: PropTypes.string,
+  palette: PropTypes.arrayOf(PropTypes.string),
 };
 
 export default DesignComponent;

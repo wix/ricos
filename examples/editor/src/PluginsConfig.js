@@ -237,6 +237,10 @@ export default {
     // },
   },
   [BUTTON_TYPE]: {
+    palette: ['#FEFDFD', '#D5D4D4', '#ABCAFF', '#81B0FF', '#0261FF', '#0141AA'],
+    selectionBackgroundColor: 'fuchsia',
+    selectionBorderColor: '#FFF',
+    selectionTextColor: '#FFF',
     colors: {
       color1: '#FEFDFD',
       color2: '#D5D4D4',
