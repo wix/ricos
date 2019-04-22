@@ -22,7 +22,9 @@ import {
   mentionsTypeMapper,
 } from 'wix-rich-content-plugin-mentions/dist/module.viewer';
 import { fileUploadTypeMapper } from 'wix-rich-content-plugin-file-upload/dist/module.viewer';
-import { TextColorDecorator } from 'wix-rich-content-plugin-text-color';
+import { createTextColorDecorator, TEXT_COLOR_TYPE } from 'wix-rich-content-plugin-text-color';
+
+import { getViewerCustomStyleFn, getStyleSelectionPredicate } from '../text-color-style-fn';
 
 import 'wix-rich-content-common/dist/styles.min.css';
 import 'wix-rich-content-viewer/dist/styles.min.css';
@@ -64,6 +66,17 @@ export const typeMappers = [
   fileUploadTypeMapper,
 ];
 
+const themeColors = {
+  color1: '#ffffff',
+  color2: '#303030',
+  color3: '#3a54b4',
+  color4: '#bfad80',
+  color5: '#bf695c',
+  color6: '#f7f7f7',
+  color7: '#000000',
+  color8: '#9a87ce',
+};
+
 export const config = {
   [HEADERS_MARKDOWN_TYPE]: {
     hideMarkdown: true,
@@ -73,10 +86,13 @@ export const config = {
   },
   [LINK_TYPE]: linkPluginSettings,
   [MENTION_TYPE]: mentionsPluginSettings,
+  [TEXT_COLOR_TYPE]: {
+    styleSelectionPredicate: getStyleSelectionPredicate(themeColors),
+    customStyleFn: getViewerCustomStyleFn(themeColors),
+  },
 };
 
 export const decorators = [
-  TextColorDecorator,
   {
     strategy: LinkParseStrategy,
     component: ({ children, decoratedText, rel, target }) => (
@@ -107,4 +123,5 @@ export const decorators = [
   },
   new CodeBlockDecorator({ theme }),
   createHeadersMarkdownDecorator(config),
+  createTextColorDecorator(config),
 ];
