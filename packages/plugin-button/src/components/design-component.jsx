@@ -8,6 +8,7 @@ import {
 } from 'wix-rich-content-common';
 import classNames from 'classnames';
 import ButtonSample from '../components/button-sample';
+import ColorToggleComponent from './color-toggle-component';
 import { DEFAULT_PALETTE } from '../constants';
 import styles from '../../statics/styles/design-component-styles.scss';
 
@@ -77,7 +78,7 @@ class DesignComponent extends PureComponent {
       textCustomcolors: getTextColors() || [],
       borderCustomcolors: getBorderColors() || [],
       backgroundCustomcolors: getBackgroundColors() || [],
-      openedColorPicker: -1,
+      colorToggle: { index: -1, isOpened: false },
     };
 
     this.onBackgroundcolorAdded = this.onBackgroundcolorAdded.bind(this);
@@ -146,33 +147,16 @@ class DesignComponent extends PureComponent {
     this.setState({ backgroundColor: color });
   };
 
-  scrollColorPickerDown = () => {
-    setTimeout(() => this.colorPicker3.scrollIntoView(false), 1);
-  };
-
-  onColorPickerClicked = index => {
-    this.scrollColorPickerDown();
-    if (this.state.openedColorPicker === index) {
-      this.setState({ openedColorPicker: -1 });
-    } else {
-      this.setState({ openedColorPicker: index });
-    }
-  };
-
   componentDidMount() {
     this.alignButtonSample(this.state.activeButton);
   }
 
-  isCustomColor = color => {
-    const {
-      settings: { colors },
-    } = this.props;
-
-    const paletteColors = [];
-    Object.keys(colors).forEach(function(key, index) {
-      paletteColors[index] = colors[key];
-    });
-    return !paletteColors.includes(color);
+  onToggled = (index, isOpened) => {
+    if (index !== this.state.colorToggle.index) {
+      this.setState({ colorToggle: { index, isOpened: true } });
+    } else {
+      this.setState({ colorToggle: { index, isOpened } });
+    }
   };
 
   render() {
@@ -255,47 +239,70 @@ class DesignComponent extends PureComponent {
             <div style={{ border: 'none' }} className={styles.colorPicker_container}>
               <div className={styles.section_header_color}>{t('ButtonModal_Color_Section')}</div>
 
-              {t('ButtonModal_Text_Color')}
+              <ColorToggleComponent
+                theme={theme}
+                color={this.state.textColor}
+                index={0}
+                toggle={this.onToggled.bind(this)}
+              >
+                {t('ButtonModal_Text_Color')}
+              </ColorToggleComponent>
+              {this.state.colorToggle.index === 0 && this.state.colorToggle.isOpened && (
+                <ColorPicker
+                  key="0000"
+                  color={designObj.textColor}
+                  selectionColor={selectionTextColor || '#FEFDFD'}
+                  palette={palette.slice(0, 7) || DEFAULT_PALETTE}
+                  userColors={this.state.textCustomcolors.slice(0, 17)}
+                  onColorAdded={this.onTextcolorAdded}
+                  theme={this.styles}
+                  onChange={this.onTextColorChange.bind(this)}
+                  t={t}
+                />
+              )}
+              <ColorToggleComponent
+                theme={theme}
+                color={this.state.borderColor}
+                index={1}
+                toggle={this.onToggled.bind(this)}
+              >
+                {t('ButtonModal_Border_Color')}
+              </ColorToggleComponent>
+              {this.state.colorToggle.index === 1 && this.state.colorToggle.isOpened && (
+                <ColorPicker
+                  key="1111"
+                  color={designObj.borderColor}
+                  selectionColor={selectionBorderColor || '#FEFDFD'}
+                  palette={palette.slice(0, 7) || DEFAULT_PALETTE}
+                  userColors={this.state.borderCustomcolors.slice(0, 17)}
+                  onColorAdded={this.onBordercolorAdded}
+                  theme={this.styles}
+                  onChange={this.onBorderColorChange.bind(this)}
+                  t={t}
+                />
+              )}
 
-              <ColorPicker
-                key="0000"
-                color={designObj.textColor}
-                selectionColor={selectionTextColor || '#FEFDFD'}
-                palette={palette.slice(0, 7) || DEFAULT_PALETTE}
-                userColors={this.state.textCustomcolors.slice(0, 17)}
-                onColorAdded={this.onTextcolorAdded}
-                theme={this.styles}
-                onChange={this.onTextColorChange.bind(this)}
-                t={t}
-              />
-
-              {t('ButtonModal_Border_Color')}
-
-              <ColorPicker
-                key="1111"
-                color={designObj.borderColor}
-                selectionColor={selectionBorderColor || '#FEFDFD'}
-                palette={palette.slice(0, 7) || DEFAULT_PALETTE}
-                userColors={this.state.borderCustomcolors.slice(0, 17)}
-                onColorAdded={this.onBordercolorAdded}
-                theme={this.styles}
-                onChange={this.onBorderColorChange.bind(this)}
-                t={t}
-              />
-
-              {t('ButtonModal_Background_Color')}
-
-              <ColorPicker
-                key="2222"
-                color={designObj.backgroundColor}
-                selectionColor={selectionBackgroundColor}
-                palette={palette.slice(0, 7) || DEFAULT_PALETTE}
-                userColors={this.state.backgroundCustomcolors.slice(0, 17)}
-                onColorAdded={this.onBackgroundcolorAdded}
-                theme={this.styles}
-                onChange={this.onBackgroundColorChange.bind(this)}
-                t={t}
-              />
+              <ColorToggleComponent
+                theme={theme}
+                color={this.state.backgroundColor}
+                index={2}
+                toggle={this.onToggled.bind(this)}
+              >
+                {t('ButtonModal_Background_Color')}
+              </ColorToggleComponent>
+              {this.state.colorToggle.index === 2 && this.state.colorToggle.isOpened && (
+                <ColorPicker
+                  key="2222"
+                  color={designObj.backgroundColor}
+                  selectionColor={selectionBackgroundColor}
+                  palette={palette.slice(0, 7) || DEFAULT_PALETTE}
+                  userColors={this.state.backgroundCustomcolors.slice(0, 17)}
+                  onColorAdded={this.onBackgroundcolorAdded}
+                  theme={this.styles}
+                  onChange={this.onBackgroundColorChange.bind(this)}
+                  t={t}
+                />
+              )}
             </div>
           </SettingsSection>
         </div>
