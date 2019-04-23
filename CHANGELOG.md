@@ -10,14 +10,14 @@
 ## [Unreleased]
 ### :rocket: New Feature
 - `text-color`
-  - customization API exposed (defining and handling custom inline styles)
+  - [#290](https://github.com/wix-incubator/rich-content/pull/290) customization API exposed (defining and handling custom inline styles)
 ### :bug: Bug Fix
 - `text-color`
   - selection state handled correctly
 - `common`
   - focus-manager: console log removed
 ### :book: Documentation
-- [Plugin Customization doc]('./docs/PluginCustomization.md') update on `text-color`
+- [#290](https://github.com/wix-incubator/rich-content/pull/290) [Plugin Customization doc]('./docs/PluginCustomization.md') update on `text-color`
 <hr/>
 
 
