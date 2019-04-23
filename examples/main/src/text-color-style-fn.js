@@ -27,4 +27,4 @@ export const getColorToStyle = colorMap => color =>
 
 export const getStyleToColor = colorMap => style => colorMap[style] || style;
 
-export const getPalleteColors = colorMap => Object.values(colorMap);
+export const getPaletteColors = colorMap => Object.values(colorMap);

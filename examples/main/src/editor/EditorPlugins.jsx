@@ -41,7 +41,7 @@ import 'wix-rich-content-plugin-map/dist/styles.min.css';
 import 'wix-rich-content-plugin-file-upload/dist/styles.min.css';
 
 import {
-  getPalleteColors,
+  getPaletteColors,
   getCustomStyleFn,
   getColorToStyle,
   getStyleToColor,
@@ -275,7 +275,7 @@ export const config = {
     // },
   },
   [TEXT_COLOR_TYPE]: {
-    getPaletteColors: () => getPalleteColors(themeColors),
+    getPaletteColors: () => getPaletteColors(themeColors),
     styleSelectionPredicate: getStyleSelectionPredicate(themeColors),
     colorToStyle: getColorToStyle(themeColors),
     styleToColor: getStyleToColor(themeColors),
