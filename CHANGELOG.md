@@ -8,6 +8,9 @@
 > - :house: [Internal]
 
 ## [Unreleased]
+### :house: Internal
+- `toolbars`
+  - [#296](https://github.com/wix-incubator/rich-content/pull/296) Improve performance by eliminating a lot of unnecessary work that was done on the toolbars for every keystroke.
 <hr/>
 
 ## 3.3.3 (Apr 30, 2019)
