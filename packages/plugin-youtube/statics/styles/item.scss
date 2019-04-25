@@ -41,7 +41,7 @@
   width: 100%;
   font-size: 11px;
   overflow: hidden;
-  @include phone{
+  @include phone {
     height: auto;
   }
 }

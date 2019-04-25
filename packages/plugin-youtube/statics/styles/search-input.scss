@@ -59,13 +59,13 @@
   cursor: pointer;
 }
 
-.button_primary:hover{
+.button_primary:hover {
   opacity: 0.8;
 }
 
-.button_primary:disabled{
+.button_primary:disabled {
   background-color: #969696;
-  color: rgba(255,255,255,0.6);
+  color: rgba(255, 255, 255, 0.6);
   cursor: default;
 }
 
