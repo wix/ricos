@@ -13,7 +13,7 @@ class ItemComponent extends Component {
     };
   }
   componentDidMount = () => {
-    this.getNumberOfYears();
+    this.getVideoAge();
   };
 
   componentWillReceiveProps = nextProp => {
@@ -26,21 +26,22 @@ class ItemComponent extends Component {
     this.props.onItemClicked(YOUTUBE_URL + this.props.videoObj.videoId);
   };
 
-  getNumberOfYears = () => {
+  getVideoAge = () => {
     const { publishedDate } = this.props.videoObj;
+    const { t } = this.props;
     const dateAndTime = publishedDate.split('T');
     const date = dateAndTime[0].split('-');
     const today = new Date();
-    const dd = String(today.getDate()).padStart(2, '0');
-    const mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-    const yyyy = today.getFullYear();
+    const day = String(today.getDate()).padStart(2, '0');
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const year = today.getFullYear();
     let diff = '';
-    if (yyyy - date[0] !== 0) {
-      diff = yyyy - date[0] + ' years ago';
-    } else if (mm - date[1] !== 0) {
-      diff = mm - date[1] + ' months ago';
+    if (year - date[0] !== 0) {
+      diff = year - date[0] + t('YoutubePlugin_years_ago_label');
+    } else if (month - date[1] !== 0) {
+      diff = month - date[1] + t('YoutubePlugin_months_ago_label');
     } else {
-      diff = dd - date[2] + ' days ago';
+      diff = day - date[2] + t('YoutubePlugin_days_ago_label');
     }
     this.setState({ sincePublished: diff });
   };
@@ -76,6 +77,7 @@ ItemComponent.propTypes = {
   isClicked: PropTypes.bool,
   isMobile: PropTypes.bool,
   thumbnail: PropTypes.string,
+  t: PropTypes.func,
 };
 
 export default ItemComponent;
