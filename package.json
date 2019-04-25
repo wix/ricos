@@ -20,13 +20,13 @@
     "release": "node scripts/publishPackages",
     "deploy": "node scripts/deployExamples",
     "createVersion": "node scripts/createVersion",
-    "lint": "lerna run --parallel --stream lint",
     "e2e": "start-server-and-test e2e:env http://localhost:3002 e2e:run",
     "e2e:run": "cypress run --reporter cypress-image-snapshot/reporter",
     "e2e:debug": "cypress open",
     "e2e:env": "cd ./packages/test-env && npm run build && npm start",
     "e2e:updateSnapshots": "npm run e2e:run -- --env updateSnapshots=true",
     "test:unit": "lerna run --parallel --stream test",
+    "lint": "lerna run --parallel --stream lint",
     "test": "npm run test:unit && npm run e2e"
   },
   "husky": {
