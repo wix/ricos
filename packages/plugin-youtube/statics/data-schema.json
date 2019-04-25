@@ -3,69 +3,44 @@
   "type": "object",
   "properties": {
     "youtube": {
-      "$id": "/properties/gif",
+      "$id": "/properties/youtube",
       "type": "object",
-      "title": "Youtube Source",
       "properties": {
         "url": {
-          "$id": "/properties/gif/properties/originalUrl",
+          "$id": "/properties/youtube/properties/url",
           "type": "string",
-          "title": "youtube url",
+          "title": "URL",
           "default": "",
-          "examples": [
-            "https://www.youtube.com/watch?v=Mrmv1gCEMRk"
-          ]
+          "examples": ["https://www.youtube.com/watch?v=JfVbgwmo2UA "]
+        },
+        "config": {
+          "$id": "/properties/config",
+          "type": "object",
+          "properties": {
+            "size": {
+              "$id": "/properties/config/properties/size",
+              "type": "string",
+              "title": "size",
+              "default": "content"
+            },
+            "alignment": {
+              "$id": "/properties/config/properties/alignment",
+              "type": "string",
+              "title": "alignment",
+              "default": "center",
+              "examples": ["center", "right", "left"]
+            },
+            "key": {
+              "$id": "/properties/config/properties/key",
+              "type": "string",
+              "title": "The Key Schema ",
+              "default": "",
+              "examples": ["78m20"]
+            }
+          }
         }
       }
     },
-    "config": {
-      "$id": "/properties/config",
-      "type": "object",
-      "properties": {
-        "size": {
-          "$id": "/properties/config/properties/size",
-          "type": "string",
-          "title": "Size",
-          "default": "large",
-          "examples": [
-            "medium",
-            "small",
-            "large"
-          ]
-        },
-        "alignment": {
-          "$id": "/properties/config/properties/alignment",
-          "type": "string",
-          "title": "The Alignment Schema ",
-          "default": "center",
-          "examples": [
-            "left",
-            "right",
-            "center"
-          ]
-        },
-        "textWrap": {
-          "$id": "/properties/config/properties/textWrap",
-          "type": "string",
-          "title": "The Textwrap Schema ",
-          "default": "nowrap",
-          "examples": [
-            "nowrap"
-          ]
-        },
-        "key": {
-          "$id": "/properties/config/properties/key",
-          "type": "string",
-          "title": "The Key Schema ",
-          "default": "",
-          "examples": [
-            "7mib0"
-          ]
-        }
-      }
-    }
-  },
-  "required": [
-    "url"
-  ]
+    "required": ["url"]
+  }
 }
