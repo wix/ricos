@@ -1,7 +1,4 @@
-export const PAGE_SIZE = 25;
-export const WAIT_INTERVAL = 300;
 export const YOUTUBE_TYPE = 'wix-draft-plugin-youtube';
-export const VIDEO_TYPE_LEGACY = 'VIDEO-EMBED';
 export const YOUTUBE_URL = 'https://www.youtube.com/watch?v=';
 export const YOUTUBE_V3_API_LINK = 'https://www.googleapis.com/youtube/v3/';
 
