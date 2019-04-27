@@ -19,7 +19,7 @@ class CustomColorPickerDialog extends Component {
   }
 
   onChange(color) {
-    this.setState({ color: color.hex.toUpperCase() });
+    this.setState({ color });
   }
 
   onCancel() {

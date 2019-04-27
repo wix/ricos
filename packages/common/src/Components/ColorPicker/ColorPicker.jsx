@@ -89,17 +89,17 @@ class ColorPicker extends PureComponent {
 
   render() {
     const { styles } = this;
-    const { isMobile, t, theme } = this.props;
+    const { t, isMobile, theme } = this.props;
     return (
       <div className={styles.colorPicker}>
         {this.state.isCustomColorPickerOpened ? (
-          <CustomColorPickerDialog
-            color={this.state.color}
-            onChange={this.onCustomColorPicked}
-            t={t}
-            isMobile={isMobile}
-            theme={theme}
-          />
+          this.props.onCustomPickerToggle({
+            color: this.state.color,
+            onCustomColorPicked: this.onCustomColorPicked,
+            t,
+            isMobile,
+            theme,
+          })
         ) : (
           <div className={styles.colorPicker_palette}>
             <div className={styles.colorPicker_buttons_container}>
@@ -125,8 +125,25 @@ ColorPicker.propTypes = {
   userColors: PropTypes.arrayOf(PropTypes.string),
   t: PropTypes.func,
   onColorAdded: PropTypes.func.isRequired,
+  onCustomPickerToggle: PropTypes.func,
   isMobile: PropTypes.bool,
   selectionColor: PropTypes.string,
+};
+
+const DefaultColorPicker = ({ color, onCustomColorPicked, ...props }) => (
+  <CustomColorPickerDialog color={color} onChange={onCustomColorPicked} {...props} />
+);
+
+DefaultColorPicker.propTypes = {
+  color: PropTypes.string.isRequired,
+  onCustomColorPicked: PropTypes.func,
+  t: PropTypes.func,
+  isMobile: PropTypes.bool,
+  theme: PropTypes.object.isRequired,
+};
+
+ColorPicker.defaultProps = {
+  onCustomPickerToggle: props => <DefaultColorPicker {...props} />,
 };
 
 export default ColorPicker;
