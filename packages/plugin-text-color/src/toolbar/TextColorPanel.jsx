@@ -8,7 +8,7 @@ import { DEFAULT_PALETTE, DEFAULT_COLOR, DEFAULT_SELECTION_COLOR } from './const
 export default class TextColorPanel extends Component {
   constructor(props) {
     super(props);
-    const currentColors = getSelectionStyles(style => isHexColor(style), props.getEditorState());
+    const currentColors = getSelectionStyles(style => isHexColor(style), props.editorState);
     this.state = {
       currentColor: currentColors.length > 0 ? currentColors[0] : DEFAULT_COLOR,
       userColors: props.settings.getUserColors() || [],
@@ -32,14 +32,14 @@ export default class TextColorPanel extends Component {
   }
 
   applyInlineColorStyle(color) {
-    const { getEditorState, setEditorState } = this.props;
-    const currentColors = getSelectionStyles(style => isHexColor(style), getEditorState());
+    const { editorState, setEditorState } = this.props;
+    const currentColors = getSelectionStyles(style => isHexColor(style), editorState);
     const newEditorState = currentColors.reduce((nextEditorState, prevColor) => {
       const selection = nextEditorState.getSelection();
       const contentState = nextEditorState.getCurrentContent();
       const nextContentState = Modifier.removeInlineStyle(contentState, selection, prevColor);
       return EditorState.push(nextEditorState, nextContentState, 'change-inline-style');
-    }, getEditorState());
+    }, editorState);
 
     const selection = newEditorState.getSelection();
     const contentState = newEditorState.getCurrentContent();
@@ -74,7 +74,7 @@ export default class TextColorPanel extends Component {
 }
 
 TextColorPanel.propTypes = {
-  getEditorState: PropTypes.func.isRequired,
+  editorState: PropTypes.object.isRequired,
   setEditorState: PropTypes.func.isRequired,
   theme: PropTypes.object.isRequired,
   t: PropTypes.func,

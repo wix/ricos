@@ -46,7 +46,7 @@ export default class TextColorButton extends Component {
         helpers,
         modalStyles,
         isMobile,
-        getEditorState,
+        editorState: getEditorState(),
         setEditorState,
         t,
         theme,

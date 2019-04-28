@@ -208,8 +208,8 @@ class ImageViewer extends React.Component {
     data.config = data.config || {};
     const { metadata = {} } = componentData;
 
-    const itemClassName = classNames(styles.imageContainer, className);
-    const imageClassName = classNames(styles.image);
+    const itemClassName = classNames(this.styles.imageContainer, className);
+    const imageClassName = classNames(this.styles.image);
     const imageSrc = fallbackImageSrc || this.getImageSrc(data.src);
     let imageProps = {};
     if (data.src && settings && isFunction(settings.imageProps)) {
@@ -227,14 +227,14 @@ class ImageViewer extends React.Component {
         onKeyDown={e => this.onKeyDown(e, onClick)}
         ref={e => this.handleRef(e)}
       >
-        <div className={styles.imageWrapper}>
+        <div className={this.styles.imageWrapper}>
           {imageSrc && this.renderImage(imageClassName, imageSrc, metadata.alt, imageProps)}
           {this.renderLoader()}
         </div>
-        {this.renderTitle(data, styles)}
-        {this.renderDescription(data, styles)}
+        {this.renderTitle(data, this.styles)}
+        {this.renderDescription(data, this.styles)}
         {this.shouldRenderCaption() &&
-          this.renderCaption(metadata.caption, isFocused, readOnly, styles, defaultCaption)}
+          this.renderCaption(metadata.caption, isFocused, readOnly, this.styles, defaultCaption)}
       </div>
     );
     /* eslint-enable jsx-a11y/no-static-element-interactions */

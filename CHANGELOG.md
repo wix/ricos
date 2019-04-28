@@ -8,6 +8,13 @@
 > - :house: [Internal]
 
 ## [Unreleased]
+### :bug: Bug Fix
+- `text-color`
+  - selection state handled correctly
+- `common`
+  - focus-manager: console log removed
+- `general`
+  - merged styles are used in plugins rather default ones
 <hr/>
 
 

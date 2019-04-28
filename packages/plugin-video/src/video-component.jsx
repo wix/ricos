@@ -109,7 +109,7 @@ class VideoComponent extends React.Component {
     this.styles = this.styles || mergeStyles({ styles, theme: this.context.theme });
     const { className, onClick } = this.props;
     const { isPlayable } = this.state;
-    const containerClassNames = classNames(styles.video_container, className || '');
+    const containerClassNames = classNames(this.styles.video_container, className || '');
     /* eslint-disable jsx-a11y/no-static-element-interactions */
     return (
       <div
@@ -118,7 +118,7 @@ class VideoComponent extends React.Component {
         className={containerClassNames}
         onKeyDown={e => this.onKeyDown(e, onClick)}
       >
-        {!isPlayable && this.renderOverlay(styles, this.context.t)}
+        {!isPlayable && this.renderOverlay(this.styles, this.context.t)}
         {this.renderPlayer()}
       </div>
     );
