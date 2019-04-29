@@ -205,9 +205,10 @@ export default {
     selectionColor: 'fuchsia',
     onColorAdded: color => (userColors = [color, ...userColors]),
     getUserColors: () => userColors,
-    onCustomPickerToggle: ({ onCustomColorPicked, ...props }) => (
-      <CustomColorPicker onChange={onCustomColorPicked} {...props} />
-    ),
+    // onCustomPickerToggle: ({ onCustomColorPicked, ...props }) => (
+    //   <CustomColorPicker onChange={onCustomColorPicked} {...props} />
+    // ),
+    onCustomColorPicked: color => console.log({ color }),
   },
   [FILE_UPLOAD_TYPE]: {
     accept: '*',
