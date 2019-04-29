@@ -8,6 +8,13 @@
 > - :house: [Internal]
 
 ## [Unreleased]
+### :rocket: New Feature
+- `common`
+  - ColorPicker now accepts `onCustomPickerToggle`, `onCustomColorPicked` props for higher customability
+- `text-color`
+  - plugin config now accepts `onCustomPickerToggle`, `onCustomColorPicked` handlers
+### :book: Documentation
+- [Plugin Customization](./docs/PluginCustomization.md) doc updated
 <hr/>
 
 ## 3.3.2 (Apr 29, 2019)
