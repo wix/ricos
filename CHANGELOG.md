@@ -8,6 +8,8 @@
 > - :house: [Internal]
 
 ## [Unreleased]
+- `video` 
+  - [#293](https://github.com/wix-incubator/rich-content/pull/293) fix ratio
 <hr/>
 
 ## 3.3.2 (Apr 29, 2019)
