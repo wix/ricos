@@ -8,15 +8,22 @@
 > - :house: [Internal]
 
 ## [Unreleased]
-### :bug: Bug Fix
-- `text-color`
-  - selection state handled correctly
-- `common`
-  - focus-manager: console log removed
-- `general`
-  - merged styles are used in plugins rather default ones
 <hr/>
 
+## 3.3.2 (Apr 29, 2019)
+### :bug: Bug Fix
+- `general`
+  - [a720dd6](https://github.com/wix-incubator/rich-content/commit/a720dd604cce4fcd8b9bf9cc22d15fb6840bd8c5) merged styles are used in plugins rather default ones
+- `common`
+  - [0595e88](https://github.com/wix-incubator/rich-content/commit/0595e88c3da6173df9c99c6ce56baf0b3f14fb2c) focus-manager: console log removed
+- `html`
+  - [69ccd8d](https://github.com/wix-incubator/rich-content/commit/69ccd8d38ccf70a4e282c137208c3c366db236fe) limit body width to viewport width
+- `text-color`
+  - [5227d93](https://github.com/wix-incubator/rich-content/commit/5227d9370ff0106ab16f1c44077991ead28ba856) selection state handled correctly
+- `viewer`
+  - [cc09f6f](https://github.com/wix-incubator/rich-content/commit/cc09f6ff1b72926885d357f955c93c54be688b22) atomic class is applied to a proper element [similar to editor layout]
+  - [1a3ddc0](https://github.com/wix-incubator/rich-content/commit/1a3ddc060a32f187d8029488ac24bc3adfd7e8b0) headers line spacing
+<hr/>
 
 ## 3.3.1 (Apr 17, 2019)
 ### :bug: Bug Fix
@@ -24,7 +31,7 @@
   - [#288](https://github.com/wix-incubator/rich-content/pull/288) `link` fix link not using theme
 - `viewer`
   - [#289](https://github.com/wix-incubator/rich-content/pull/289) `atomic-block` now has proper style to comply with the `editor` style
-
+<hr/>
 
 ## 3.3.0 (Apr 17, 2019)
 ### :boom: Breaking Change
@@ -42,7 +49,7 @@
   - [#284](https://github.com/wix-incubator/rich-content/pull/284) `getSelectionStyles` util now accepts `styleSelectionPredicate` function parameter
 ### :book: Documentation
 - [#284](https://github.com/wix-incubator/rich-content/pull/284) [Toolbar Customization](./docs/ToolbarCustomization.md) doc updated
-
+<hr/>
 
 ## 3.2.3 (Apr 14, 2019)
 ### :house: Internal
@@ -70,7 +77,6 @@
 ### :bug: Bug Fix
 - `general`
   - [#285](https://github.com/wix-incubator/rich-content/pull/285) prevent `context` from rerendering unnecessarily
-
 <hr/>
 
 ## 3.1.2 (Mar 28, 2019)
@@ -79,10 +85,6 @@
   - [#283](https://github.com/wix-incubator/rich-content/pull/283) fix image upload `updateEntity` callback
 - `editor`
   - [b1e720b](https://github.com/wix-incubator/rich-content/commit/b1e720b) inline-text-toolbar: link panel on mobile is now displayed as modal neither inline panel
-<<<<<<< HEAD
-=======
-
->>>>>>> develop
 <hr/>
 
 

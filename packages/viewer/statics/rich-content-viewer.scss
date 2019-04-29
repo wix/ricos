@@ -146,17 +146,20 @@
 
 .headerOne {
   font-size: 32px;
-  line-height: 42px;
+  line-height: $headerOneHeight;
+  min-height: $headerOneHeight;
 }
 
 .headerTwo {
   font-size: 28px;
-  line-height: 36px;
+  line-height: $headerTwoHeight;
+  min-height: $headerTwoHeight;
 }
 
 .headerThree {
   font-size: 22px;
-  line-height: 30px;
+  line-height: $headerThreeHeight;
+  min-height: $headerThreeHeight;
 }
 
 .indent {
