@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import ReactPlayer from 'react-player';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
@@ -22,11 +23,24 @@ class VideoViewer extends Component {
 
   normalizeUrl = url => (url.toLowerCase().indexOf('vimeo') === 0 ? 'https://' + url : url); //vimeo player needs urls prefixed with http[s]
 
+  getVideoRatio = wrapper => {
+    const element = wrapper.querySelector('iframe, video');
+    return element.clientHeight / element.clientWidth;
+  };
+
+  fixVideoRatio = () => {
+    // eslint-disable-next-line react/no-find-dom-node
+    const wrapper = ReactDOM.findDOMNode(this).parentNode;
+    const ratio = this.getVideoRatio(wrapper);
+    wrapper.style['padding-bottom'] = ratio * 100 + '%';
+  };
+
   render() {
     const { componentData, settings, ...rest } = this.props;
     this.styles = this.styles || mergeStyles({ styles, theme: this.context.theme });
     const url = this.normalizeUrl(getVideoSrc(componentData.src, settings));
-    return <ReactPlayer className={classNames(this.styles.video_player)} url={url} {...rest} />;
+    const props = { ...rest, url, onReady: this.fixVideoRatio };
+    return <ReactPlayer className={classNames(this.styles.video_player)} {...props} />;
   }
 }
 
