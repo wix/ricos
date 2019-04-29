@@ -20,14 +20,15 @@ class CustomColorPickerDialog extends Component {
 
   onChange(color) {
     this.setState({ color });
+    this.props.onChange(color);
   }
 
   onCancel() {
-    this.props.onChange(this.initialColor);
+    this.props.onCancel(this.initialColor);
   }
 
   onUpdate() {
-    this.props.onChange(this.state.color);
+    this.props.onUpdate(this.state.color);
   }
 
   render() {
@@ -67,7 +68,9 @@ CustomColorPickerDialog.propTypes = {
   color: PropTypes.string,
   isMobile: PropTypes.bool,
   theme: PropTypes.object,
+  onCancel: PropTypes.func,
   onChange: PropTypes.func,
+  onUpdate: PropTypes.func,
 };
 
 export default CustomColorPickerDialog;
