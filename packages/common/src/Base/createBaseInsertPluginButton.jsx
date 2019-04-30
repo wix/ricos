@@ -9,6 +9,9 @@ import FileInput from '../Components/FileInput';
 import ToolbarButton from '../Components/ToolbarButton';
 import styles from '../../statics/styles/toolbar-button.scss';
 
+/**
+ * createBaseInsertPluginButton
+ */
 export default ({ blockType, button, helpers, pubsub, settings, t }) => {
   class InsertPluginButton extends Component {
     constructor(props) {
@@ -19,6 +22,14 @@ export default ({ blockType, button, helpers, pubsub, settings, t }) => {
     }
 
     addBlock = data => this.createBlock(data, true);
+
+    addCustomBlock = buttonData => {
+      const { getEditorState } = this.props;
+      if (buttonData.addBlockHandler) {
+        const editorState = getEditorState();
+        buttonData.addBlockHandler(editorState);
+      }
+    };
 
     createBlock = (data, shouldSetEditorState = false) => {
       const { getEditorState, setEditorState, hidePopup } = this.props;
@@ -60,6 +71,9 @@ export default ({ blockType, button, helpers, pubsub, settings, t }) => {
           break;
         case 'modal':
           this.toggleButtonModal(event);
+          break;
+        case 'custom-block':
+          this.addCustomBlock(button);
           break;
         default:
           this.addBlock(button.componentData || {});
