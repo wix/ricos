@@ -1,3 +1,5 @@
+import { isHexColor } from 'wix-rich-content-common';
+
 export const DEFAULT_PALETTE = ['#303030', '#303030', '#3a54b4', '#bfad80', '#bf695c', '#f7f7f7'];
 export const DEFAULT_COLOR = '#000000';
 export const DEFAULT_SELECTION_COLOR = '#000000';
@@ -37,3 +39,14 @@ export const MODAL_STYLES = {
     },
   },
 };
+
+export const DEFAULT_COLOR_TO_STYLE = color => color;
+
+export const DEFAULT_STYLE_TO_COLOR = style => style;
+
+export const DEFAULT_STYLE_SELECTION_PREDICATE = style => isHexColor(style);
+
+export const DEFAULT_STYLE_FN = style => (isHexColor(style) ? { color: style } : {});
+
+export const DEFAULT_STYLE_FN_DRAFT = styles =>
+  styles.toArray().reduce((cssStyle, style) => ({ ...cssStyle, ...DEFAULT_STYLE_FN(style) }), {}); // eslint-disable-line new-cap
