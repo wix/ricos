@@ -49,7 +49,7 @@ class DividerComponent extends PureComponent {
           width={editorWidth}
           size={size}
           alignment={alignment}
-          styles={styles}
+          styles={this.styles}
           contextType={DividerComponent.contextType || Context.type}
         />
       </div>
