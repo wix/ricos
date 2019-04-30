@@ -8,7 +8,13 @@
 > - :house: [Internal]
 
 ## [Unreleased]
-- `video` 
+### :rocket: New Feature
+- `common`
+  - insert plugin button with `custom-block` type supported [allows to run custom add-block handler]
+- `code-block`
+  - insert-buttons added
+### :bug: Bug Fix
+- `video`
   - [#293](https://github.com/wix-incubator/rich-content/pull/293) fix ratio
 <hr/>
 
