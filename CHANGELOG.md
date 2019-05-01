@@ -8,6 +8,9 @@
 > - :house: [Internal]
 
 ## [Unreleased]
+### :boom: Breaking Change
+- `editor`
+  - [#297](https://github.com/wix-incubator/rich-content/pull/297) support rtl in lists
 ### :bug: Bug Fix
 - `common`
   - [86b94cc](https://github.com/wix-incubator/rich-content/commit/86b94cc19fac3fe6d04fe348735de7538992b1ac)&nbsp;&nbsp;`<Loader />`&nbsp;&nbsp;component supports getting theme from context or props (external modals)

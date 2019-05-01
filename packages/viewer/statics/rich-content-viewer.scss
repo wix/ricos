@@ -173,6 +173,12 @@
 
 .orderedListContainer {
   outline: none;
+  padding: 0;
+  margin: 0;
+
+  & > * {
+    margin-inline-start: 40px;
+  }
 }
 
 .unorderedList {
@@ -181,6 +187,12 @@
 
 .unorderedListContainer {
   outline: none;
+  padding: 0;
+  margin: 0;
+
+  & > * {
+    margin-inline-start: 40px;
+  }
 }
 
 .code,
