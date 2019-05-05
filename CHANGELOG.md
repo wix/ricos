@@ -14,9 +14,11 @@
 ### :bug: Bug Fix
 - `common`
   - [86b94cc](https://github.com/wix-incubator/rich-content/commit/86b94cc19fac3fe6d04fe348735de7538992b1ac)&nbsp;&nbsp;`<Loader />`&nbsp;&nbsp;component supports getting theme from context or props (external modals)
-  ### :house: Internal
+### :house: Internal
 - `toolbars`
   - [#296](https://github.com/wix-incubator/rich-content/pull/296) improve performance by eliminating a lot of unnecessary work that was done on the toolbars for every keystroke.
+- `example`
+  - [#298](https://github.com/wix-incubator/rich-content/pull/296) hmr + error handling for viewer
 <hr/>
 
 ## 3.3.3 (Apr 30, 2019)
