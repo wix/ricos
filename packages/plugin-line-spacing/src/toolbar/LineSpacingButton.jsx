@@ -8,6 +8,7 @@ import {
   mergeBlockData,
   mergeStyles,
 } from 'wix-rich-content-common';
+import { EditorState } from '@wix/draft-js';
 
 import { LineSpacingIcon } from '../icons';
 import styles from '../../statics/styles/styles.scss';
@@ -25,32 +26,28 @@ export default class LineSpacingButton extends Component {
     this.styles = mergeStyles({ styles, theme: props.theme });
   }
 
-  getBlockSpacing() {
-    const { dynamicStyles = {} } = getAnchorBlockData(this.props.getEditorState());
+  getBlockSpacing(editorState) {
+    const { dynamicStyles = {} } = getAnchorBlockData(editorState);
     return pick(dynamicStyles, [lineHeight, spaceBefore, spaceAfter]);
   }
 
-  updateSpacing = spacing => {
-    const dynamicStyles = spacing;
-    const { setEditorState, onUpdate } = this.props;
-    const newEditorState = mergeBlockData(this.oldEditorState, { dynamicStyles }); //using this.oldEditorState to fix 'undo' bug.
-    setEditorState(newEditorState);
-    onUpdate(dynamicStyles);
-  };
-
   openPanel = () => {
     const { setKeepOpen, isMobile, helpers, t, defaultSpacing, keyName } = this.props;
-    setKeepOpen(true);
-    this.oldEditorState = this.props.getEditorState();
-
-    const spacing = this.getBlockSpacing();
-    this.oldSpacing = spacing;
-    this.setState({ isPanelOpen: true });
-
     if (helpers && helpers.openModal) {
+      const editorState = this.props.getEditorState();
+      this.oldEditorState = EditorState.forceSelection(
+        //fixes 'undo' bug, due to the lost selection
+        editorState,
+        editorState.getSelection()
+      );
+      this.currentEditorState = this.oldEditorState;
       setKeepOpen(true);
+
+      this.oldSpacing = this.getBlockSpacing(this.oldEditorState);
+      this.setState({ isPanelOpen: true });
+
       const modalProps = {
-        spacing: { ...defaultSpacing, ...spacing },
+        spacing: { ...defaultSpacing, ...this.oldSpacing },
         onChange: this.updateSpacing,
         onSave: this.save,
         onCancel: this.cancel,
@@ -60,7 +57,7 @@ export default class LineSpacingButton extends Component {
         isMobile,
         t,
         modalName: Modals.LINE_SPACING,
-        hidePopup: helpers.closeModal,
+        onRequestClose: () => this.save(),
       };
       helpers.openModal(modalProps);
     } else {
@@ -90,6 +87,15 @@ export default class LineSpacingButton extends Component {
     });
   }
 
+  updateSpacing = spacing => {
+    const dynamicStyles = spacing;
+    const { setEditorState, onUpdate } = this.props;
+    const newEditorState = mergeBlockData(this.oldEditorState, { dynamicStyles });
+    setEditorState(newEditorState);
+    this.currentEditorState = newEditorState;
+    onUpdate(dynamicStyles);
+  };
+
   closePanel = () => {
     this.setState({ isPanelOpen: false });
     this.props.helpers.closeModal();
@@ -97,8 +103,12 @@ export default class LineSpacingButton extends Component {
   };
 
   save = spacing => {
-    this.updateSpacing(spacing);
     this.closePanel();
+    if (spacing) {
+      this.updateSpacing(spacing);
+    } else {
+      this.props.setEditorState(this.currentEditorState); // fix selection (selection is lost due to focus)
+    }
   };
 
   cancel = () => {
@@ -107,10 +117,6 @@ export default class LineSpacingButton extends Component {
     onUpdate(this.oldSpacing);
     this.closePanel();
   };
-
-  static getModalParent() {
-    return document.querySelector('.DraftEditor-root').parentNode;
-  }
 
   render() {
     const { theme, isMobile, t, tabIndex } = this.props;

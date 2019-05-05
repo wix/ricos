@@ -49,9 +49,6 @@
     "rollup": "^1.1.0"
   },
   "dependencies": {
-    "draft-js-code": "^0.3.0",
-    "prismjs": "^1.15.0",
-    "react-modal": "3.8.1",
     "wix-rich-content-common": "^3.3.3"
   },
   "unpkg": true,
