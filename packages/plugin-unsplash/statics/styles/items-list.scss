@@ -1,0 +1,49 @@
+@import "~wix-rich-content-common/dist/statics/styles/mixins";
+@import "~wix-rich-content-common/dist/statics/styles/palette";
+
+.items_list_container {
+  height: 307px;
+  width: 100%;
+  padding-right: 10px;
+}
+
+.scrollbar_thumb {
+  background: #b2b2b2;
+  border-radius: 4px;
+  width: 4px;
+  margin-left: -1px;
+  cursor: pointer;
+}
+
+.scrollbar_thumb:hover {
+  background: #000000;
+}
+
+.InfiniteScroll_container {
+ padding-right: 10px;
+}
+
+.unsplash_selecter_error_msg {
+  width: 229px;
+  font-family: Helvetica;
+  font-size: 14px;
+  font-weight: 300;
+  text-align: center;
+  color: #000000;
+  line-height: 1.57;
+  padding: 0px 20px;
+  box-sizing: border-box;
+  position: absolute;
+  top: 137px;
+  left: 18px;
+  @include phone {
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+  }
+}
+
+.spinner_container {
+  margin-left: calc(50% - 17px);
+  margin-top: calc(25% - 32px);
+}

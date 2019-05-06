@@ -1,0 +1,14 @@
+.search_container {
+  position: relative;
+  margin-right: 12px;
+}
+.textInput_input {
+  border: 0;
+  padding-left: 40px;
+}
+.search_icon {
+  position: absolute;
+  top: 15px;
+  left: 10px;
+  z-index: 1;
+}

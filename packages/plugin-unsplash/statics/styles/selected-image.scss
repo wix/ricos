@@ -1,0 +1,16 @@
+.image_container {
+  display: inline;
+}
+
+.image_overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: inherit;
+  width: inherit;
+  color: #fff;
+  font-size: 14px;
+  vertical-align: text-bottom;
+  line-height: 1em;
+  background-color: rgba(0, 0, 0, 0.2);
+}

@@ -46,7 +46,8 @@
     "wix-rich-content-plugin-sound-cloud": "file:../../packages/plugin-sound-cloud",
     "wix-rich-content-plugin-text-color": "file:../../packages/plugin-text-color",
     "wix-rich-content-plugin-button": "file:../../packages/plugin-button",
-    "wix-rich-content-plugin-video": "file:../../packages/plugin-video"
+    "wix-rich-content-plugin-video": "file:../../packages/plugin-video",
+    "wix-rich-content-plugin-unsplash": "file:../../packages/plugin-unsplash"
   },
   "scripts": {
     "postinstall": "node ../../scripts/linkExample editor",
