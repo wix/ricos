@@ -181,7 +181,7 @@ class BaseToolbarButton extends React.Component {
 
     const toggleButton = (
       /* eslint-disable jsx-a11y/no-static-element-interactions */
-      <div className={buttonWrapperClassNames} onMouseDown={this.preventBubblingUp}>
+      <div className={buttonWrapperClassNames}>
         <button
           className={buttonClassNames}
           aria-label={tooltipText}
@@ -255,7 +255,7 @@ class BaseToolbarButton extends React.Component {
 
     /* eslint-disable jsx-a11y/no-static-element-interactions */
     return (
-      <div className={buttonWrapperClassNames} onMouseDown={this.preventBubblingUp}>
+      <div className={buttonWrapperClassNames}>
         <Dropdown
           className={buttonClassNames}
           tabIndex={tabIndex}

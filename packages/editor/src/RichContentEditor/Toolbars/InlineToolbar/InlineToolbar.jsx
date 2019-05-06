@@ -6,6 +6,7 @@ import Measure from 'react-measure';
 import { DISPLAY_MODE } from 'wix-rich-content-common';
 import Styles from '../../../../statics/styles/inline-toolbar.scss';
 import ClickOutside from 'react-click-outside';
+import debounce from 'lodash/debounce';
 
 const TOOLBAR_OFFSET = 5;
 
@@ -131,26 +132,25 @@ export default class InlineToolbar extends Component {
     return { top, left };
   }
 
-  onSelectionChanged = () => {
+  onSelectionChanged = debounce(() => {
     // need to wait a tick for window.getSelection() to be accurate
     // when focusing editor with already present selection
-    setTimeout(() => {
-      if (!this.toolbar || this.state.overrideContent || this.state.extendContent) {
-        return;
-      }
+    this.setState({ isVisible: this.shouldBeVisible() });
+    if (!this.toolbar || this.state.overrideContent || this.state.extendContent) {
+      return;
+    }
 
-      const { displayOptions } = this.props;
+    const { displayOptions } = this.props;
 
-      if (displayOptions.displayMode === DISPLAY_MODE.NORMAL && !this.state.keepOpen) {
-        const { top, left } = this.getRelativePosition();
-        this.setState({ position: { top, left } });
-      }
-    });
-  };
+    if (displayOptions.displayMode === DISPLAY_MODE.NORMAL && !this.state.keepOpen) {
+      const { top, left } = this.getRelativePosition();
+      this.setState({ position: { top, left } });
+    }
+  }, 40);
 
   getTabIndexByVisibility = () => (this.isVisible() ? 0 : -1);
 
-  isVisible = () => {
+  shouldBeVisible = () => {
     const { pubsub, visibilityFn } = this.props;
     const { overrideContent, extendContent, keepOpen } = this.state;
 
@@ -163,6 +163,8 @@ export default class InlineToolbar extends Component {
     // TODO: Test readonly mode and possibly set isVisible to false if the editor is readonly
     return isVisible || overrideContent || extendContent || keepOpen;
   };
+
+  isVisible = () => this.state.isVisible;
 
   getStyle() {
     const { displayOptions } = this.props;
@@ -322,6 +324,9 @@ export default class InlineToolbar extends Component {
   }
 
   render() {
+    if (!this.isVisible()) {
+      return null;
+    }
     const { theme } = this.props;
     const { toolbarStyles } = theme || {};
 

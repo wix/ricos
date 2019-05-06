@@ -2,15 +2,25 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Modifier, EditorState } from '@wix/draft-js';
 import { ColorPicker, getSelectionStyles } from 'wix-rich-content-common';
-import { isHexColor } from '../utils';
-import { DEFAULT_PALETTE, DEFAULT_COLOR, DEFAULT_SELECTION_COLOR } from './constants';
+import {
+  DEFAULT_PALETTE,
+  DEFAULT_COLOR,
+  DEFAULT_SELECTION_COLOR,
+  DEFAULT_COLOR_TO_STYLE,
+  DEFAULT_STYLE_TO_COLOR,
+  DEFAULT_STYLE_SELECTION_PREDICATE,
+} from '../constants';
 
 export default class TextColorPanel extends Component {
   constructor(props) {
     super(props);
-    const currentColors = getSelectionStyles(style => isHexColor(style), props.editorState);
+    const styleSelectionPredicate =
+      props.settings.styleSelectionPredicate || DEFAULT_STYLE_SELECTION_PREDICATE;
+    const styleToColor = props.settings.styleToColor || DEFAULT_STYLE_TO_COLOR;
+    const currentColors = getSelectionStyles(styleSelectionPredicate, props.editorState);
     this.state = {
-      currentColor: currentColors.length > 0 ? currentColors[0] : DEFAULT_COLOR,
+      currentColor:
+        currentColors.length > 0 ? styleToColor(currentColors[0]).toUpperCase() : DEFAULT_COLOR,
       userColors: props.settings.getUserColors() || [],
     };
     this.setColor = this.setColor.bind(this);
@@ -22,8 +32,10 @@ export default class TextColorPanel extends Component {
   }
 
   setColor(color) {
+    const colorToStyle = this.props.settings.colorToStyle || DEFAULT_COLOR_TO_STYLE;
+    const style = colorToStyle(color);
     if (color !== this.state.currentColor) {
-      this.applyInlineColorStyle(color);
+      this.applyInlineColorStyle(style);
       this.setState({
         currentColor: color,
       });
@@ -32,8 +44,10 @@ export default class TextColorPanel extends Component {
   }
 
   applyInlineColorStyle(color) {
-    const { editorState, setEditorState } = this.props;
-    const currentColors = getSelectionStyles(style => isHexColor(style), editorState);
+    const { editorState, setEditorState, settings } = this.props;
+    const styleSelectionPredicate =
+      settings.styleSelectionPredicate || DEFAULT_STYLE_SELECTION_PREDICATE;
+    const currentColors = getSelectionStyles(styleSelectionPredicate, editorState);
     const newEditorState = currentColors.reduce((nextEditorState, prevColor) => {
       const selection = nextEditorState.getSelection();
       const contentState = nextEditorState.getCurrentContent();
@@ -55,8 +69,9 @@ export default class TextColorPanel extends Component {
   }
 
   render() {
-    const { theme, settings, t, setKeepToolbarOpen } = this.props;
-    const palette = settings.palette || DEFAULT_PALETTE;
+    const { theme, settings, t, setKeepToolbarOpen, isMobile } = this.props;
+    const palette = settings.getPaletteColors() || DEFAULT_PALETTE;
+    const { onCustomPickerToggle, onCustomColorPicked } = settings;
     return (
       <ColorPicker
         color={this.state.currentColor}
@@ -65,9 +80,12 @@ export default class TextColorPanel extends Component {
         userColors={this.state.userColors.slice(0, 17)}
         onColorAdded={this.onColorAdded}
         onChange={this.setColor}
+        onCustomPickerToggle={onCustomPickerToggle}
+        onCustomColorPicked={onCustomColorPicked}
         theme={theme}
         t={t}
         setKeepToolbarOpen={setKeepToolbarOpen}
+        isMobile={isMobile}
       />
     );
   }
@@ -81,10 +99,16 @@ TextColorPanel.propTypes = {
   uiSettings: PropTypes.object,
   settings: PropTypes.shape({
     onColorAdded: PropTypes.func.isRequired,
-    palette: PropTypes.arrayOf(PropTypes.string),
+    getPaletteColors: PropTypes.func.isRequired,
     getUserColors: PropTypes.func,
     selectionColor: PropTypes.string,
+    onCustomPickerToggle: PropTypes.func,
+    onCustomColorPicked: PropTypes.func,
+    styleSelectionPredicate: PropTypes.func,
+    colorToStyle: PropTypes.func,
+    styleToColor: PropTypes.func,
   }).isRequired,
   setKeepToolbarOpen: PropTypes.func,
   helpers: PropTypes.object.isRequired,
+  isMobile: PropTypes.bool.isRequired,
 };

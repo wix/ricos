@@ -7,7 +7,6 @@ import * as Plugins from './EditorPlugins';
 import ModalsMap from './ModalsMap';
 import theme from '../theme/theme'; // must import after custom styles
 
-
 const modalStyleDefaults = {
   content: {
     top: '50%',
@@ -128,7 +127,8 @@ export default class Editor extends PureComponent {
       ),
     };
     const { MobileToolbar, TextToolbar } = this.state;
-    const textToolbarType = this.props.staticToolbar ? 'static' : null;
+    const textToolbarType = this.props.staticToolbar && !this.props.isMobile ? 'static' : null;
+    const { onRequestClose } = this.state.modalProps || {};
     return (
       <div className={'editor'}>
         {MobileToolbar && <MobileToolbar />}
@@ -154,7 +154,7 @@ export default class Editor extends PureComponent {
           contentLabel="External Modal Example"
           style={modalStyles}
           role="dialog"
-          onRequestClose={this.helpers.closeModal}
+          onRequestClose={onRequestClose || this.helpers.closeModal}
         >
           {this.state.showModal && (
             <RichContentEditorModal modalsMap={ModalsMap} {...this.state.modalProps} />

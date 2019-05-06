@@ -4,13 +4,14 @@ import classNames from 'classnames';
 import Measure from 'react-measure';
 import { DISPLAY_MODE } from 'wix-rich-content-common';
 import Styles from '../../../../statics/styles/static-toolbar.scss';
+import debounce from 'lodash/debounce';
 
 const displayOptionStyles = {
   [DISPLAY_MODE.NORMAL]: {},
   [DISPLAY_MODE.FLOATING]: { position: 'absolute' },
 };
 
-export default class StaticToolbar extends React.Component {
+export default class StaticToolbar extends React.PureComponent {
   static propTypes = {
     pubsub: PropTypes.object.isRequired,
     structure: PropTypes.array.isRequired,
@@ -62,9 +63,8 @@ export default class StaticToolbar extends React.Component {
     this.props.pubsub.unsubscribe('selection', this.onSelectionChanged);
   }
 
-  onSelectionChanged = () => {
-    setTimeout(() => this.forceUpdate(), 0); // wait for next tick. So editorState will be updated
-  };
+  // must wait for next tick. So editorState will be updated
+  onSelectionChanged = debounce(() => this.forceUpdate(), 100);
 
   scrollToolbar(event, leftDirection) {
     event.preventDefault();
