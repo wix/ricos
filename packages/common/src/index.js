@@ -47,6 +47,7 @@ export { default as ToolbarButton } from './Components/ToolbarButton';
 export { default as Tooltip } from './Components/Tooltip';
 export { default as TooltipHost } from './Components/TooltipHost';
 export { default as ColorPicker } from './Components/ColorPicker/ColorPicker';
+export { default as CustomColorPicker } from './Components/ColorPicker/CustomColorPicker';
 
 //Modals
 export { default as EditorModals } from './Modals/EditorModals';
@@ -82,6 +83,8 @@ export {
   removeLinksInSelection,
   getTextAlignment,
   setTextAlignment,
+  getAnchorBlockData,
+  mergeBlockData,
   isAtomicBlockFocused,
   removeBlock,
 } from './Utils/draftUtils';

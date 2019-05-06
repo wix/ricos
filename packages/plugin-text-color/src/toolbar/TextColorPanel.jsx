@@ -69,8 +69,9 @@ export default class TextColorPanel extends Component {
   }
 
   render() {
-    const { theme, settings, t, setKeepToolbarOpen } = this.props;
+    const { theme, settings, t, setKeepToolbarOpen, isMobile } = this.props;
     const palette = settings.getPaletteColors() || DEFAULT_PALETTE;
+    const { onCustomPickerToggle, onCustomColorPicked } = settings;
     return (
       <ColorPicker
         color={this.state.currentColor}
@@ -79,9 +80,12 @@ export default class TextColorPanel extends Component {
         userColors={this.state.userColors.slice(0, 17)}
         onColorAdded={this.onColorAdded}
         onChange={this.setColor}
+        onCustomPickerToggle={onCustomPickerToggle}
+        onCustomColorPicked={onCustomColorPicked}
         theme={theme}
         t={t}
         setKeepToolbarOpen={setKeepToolbarOpen}
+        isMobile={isMobile}
       />
     );
   }
@@ -98,10 +102,13 @@ TextColorPanel.propTypes = {
     getPaletteColors: PropTypes.func.isRequired,
     getUserColors: PropTypes.func,
     selectionColor: PropTypes.string,
+    onCustomPickerToggle: PropTypes.func,
+    onCustomColorPicked: PropTypes.func,
     styleSelectionPredicate: PropTypes.func,
     colorToStyle: PropTypes.func,
     styleToColor: PropTypes.func,
   }).isRequired,
   setKeepToolbarOpen: PropTypes.func,
   helpers: PropTypes.object.isRequired,
+  isMobile: PropTypes.bool.isRequired,
 };

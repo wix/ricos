@@ -5,7 +5,7 @@ import isEmpty from 'lodash/isEmpty';
 import ToolbarButton from './ToolbarButton';
 import styles from '../../statics/styles/inline-toolbar-button.scss';
 
-export default class InlineToolbarButton extends Component {
+class InlineToolbarButton extends Component {
   constructor(props) {
     super(props);
     const { buttonStyles } = props.theme || {};
@@ -38,12 +38,11 @@ export default class InlineToolbarButton extends Component {
     tooltipText: PropTypes.string,
     tabIndex: PropTypes.number,
     icon: PropTypes.func.isRequired,
-    forwardRef: PropTypes.object,
+    children: PropTypes.node,
+    forwardRef: PropTypes.func,
   };
 
-  handleClick = () => this.props.onClick && this.props.onClick();
-
-  preventBubblingUp = event => event.preventDefault();
+  preventDefault = event => event.preventDefault();
 
   render() {
     const { isActive, theme, isMobile, tooltipText, tabIndex, icon: Icon, forwardRef } = this.props;
@@ -56,19 +55,22 @@ export default class InlineToolbarButton extends Component {
 
     const codeBlockButton = (
       /* eslint-disable jsx-a11y/no-static-element-interactions */
-      <div className={styles.buttonWrapper} onMouseDown={this.preventBubblingUp} ref={forwardRef}>
+      <div className={styles.buttonWrapper}>
         <button
           tabIndex={tabIndex}
           aria-label={tooltipText}
           aria-pressed={isActive}
           data-hook="codeBlockButton"
-          onClick={this.handleClick}
+          onClick={this.props.onClick}
           className={styles.button}
+          ref={forwardRef}
+          onMouseDown={this.preventDefault}
         >
           <div className={iconClassNames}>
             <Icon />
           </div>
         </button>
+        {this.props.children}
       </div>
     );
     /* eslint-enable jsx-a11y/no-static-element-interactions */
@@ -84,3 +86,7 @@ export default class InlineToolbarButton extends Component {
     );
   }
 }
+
+export default React.forwardRef((props, ref) => (
+  <InlineToolbarButton forwardRef={ref} {...props} />
+));

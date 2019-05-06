@@ -15,6 +15,7 @@
   "LinkPanelContainer_DoneButton" : "Update",
   "LinkPanelContainer_CancelButton" : "Cancel",
   "LinkPanelContainer_RemoveButton" : "Remove Link",
+  "LineSpacingButton_Tooltip" : "Line Spacing",
   "MobileLinkModal_Title" : "Add a Link",
   "SettingsPanelFooter_Save" : "Save",
   "SettingsPanelFooter_Done" : "Done",

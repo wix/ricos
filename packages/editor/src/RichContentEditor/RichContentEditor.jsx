@@ -188,8 +188,6 @@ class RichContentEditor extends Component {
     return element && element.querySelector('*[tabindex="0"]');
   }
 
-  getEditorState = () => this.state.editorState;
-
   updateEditorState = editorState => {
     this.setEditorState(editorState);
     this.props.onChange && this.props.onChange(editorState);
@@ -304,7 +302,7 @@ class RichContentEditor extends Component {
         handleBeforeInput={handleBeforeInput}
         handlePastedText={handlePastedText}
         plugins={this.plugins}
-        blockStyleFn={blockStyleFn(theme)}
+        blockStyleFn={blockStyleFn(theme, this.styleToClass)}
         blockRenderMap={getBlockRenderMap(theme)}
         handleKeyCommand={handleKeyCommand(
           this.updateEditorState,
@@ -340,6 +338,27 @@ class RichContentEditor extends Component {
 
   renderTooltipHost = () => <TooltipHost />;
 
+  styleToClass = ([key, val]) => `rich_content_${key}-${val.toString().replace('.', '_')}`;
+
+  renderStyleTag = () => {
+    const styleToCss = ([key, val]) => `${key}: ${val};`;
+    const blocks = this.getEditorState()
+      .getCurrentContent()
+      .getBlockMap();
+    const styles = {};
+    blocks.forEach(block => {
+      const { dynamicStyles = {} } = block.get('data').toJS();
+      Object.entries(dynamicStyles).forEach(
+        style => (styles[this.styleToClass(style)] = styleToCss(style))
+      );
+    });
+    const css = Object.entries(styles).reduce(
+      (cssString, [className, css]) => `${cssString} .${className} {${css}}`,
+      ''
+    );
+    return <style id="dynamicStyles">{css}</style>;
+  };
+
   render() {
     const { isMobile } = this.props;
     const { theme } = this.state;
@@ -352,6 +371,7 @@ class RichContentEditor extends Component {
         <Measure bounds onResize={({ bounds }) => this.updateBounds(bounds)}>
           {({ measureRef }) => (
             <div style={this.props.style} ref={measureRef} className={wrapperClassName}>
+              {this.renderStyleTag()}
               <div className={classNames(styles.editor, theme.editor)}>
                 {this.renderAccessibilityListener()}
                 {this.renderEditor()}

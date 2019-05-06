@@ -1,4 +1,5 @@
 import { createLinkPlugin, LINK_TYPE } from 'wix-rich-content-plugin-link';
+import { createLineSpacingPlugin, LINE_SPACING_TYPE } from 'wix-rich-content-plugin-line-spacing';
 import { createHashtagPlugin, HASHTAG_TYPE } from 'wix-rich-content-plugin-hashtag';
 // import { createExternalEmojiPlugin, EXTERNAL_EMOJI_TYPE } from 'wix-rich-content-plugin-emoji';
 import { createImagePlugin } from 'wix-rich-content-plugin-image';
@@ -31,6 +32,7 @@ import 'wix-rich-content-plugin-divider/dist/styles.min.css';
 // import 'wix-rich-content-plugin-emoji/dist/styles.min.css';
 import 'wix-rich-content-plugin-html/dist/styles.min.css';
 import 'wix-rich-content-plugin-hashtag/dist/styles.min.css';
+import 'wix-rich-content-plugin-line-spacing/dist/styles.min.css';
 import 'wix-rich-content-plugin-link/dist/styles.min.css';
 import 'wix-rich-content-plugin-mentions/dist/styles.min.css';
 import 'wix-rich-content-plugin-image/dist/styles.min.css';
@@ -60,6 +62,7 @@ export const editorPlugins = [
   createHtmlPlugin,
   createDividerPlugin,
   // createExternalEmojiPlugin,
+  createLineSpacingPlugin,
   createLinkPlugin,
   createHashtagPlugin,
   createExternalMentionsPlugin,
@@ -185,6 +188,14 @@ export const config = {
           250
         )
       ),
+  },
+  [LINE_SPACING_TYPE]: {
+    defaultSpacing: {
+      'line-height': '1.5',
+      'padding-top': '2px',
+      'padding-bottom': '3px'
+    },
+    onUpdate: spacing => console.log(LINE_SPACING_TYPE, spacing),
   },
   [LINK_TYPE]: {
     onClick: (event, url) => console.log('link clicked!', url),
