@@ -16,7 +16,7 @@ import React from 'react';
 import Highlighter from 'react-highlight-words';
 import casual from 'casual-browserify';
 
-import { TOOLBARS, BUTTONS, DISPLAY_MODE } from 'wix-rich-content-common';
+import { TOOLBARS, BUTTONS, DISPLAY_MODE, CustomColorPicker } from 'wix-rich-content-common';
 // import InlineToolbarDecoration from './Components/InlineToolbarDecoration';
 // import StaticToolbarDecoration from './Components/StaticToolbarDecoration';
 // import SideToolbarDecoration from './Components/SideToolbarDecoration';
@@ -205,6 +205,10 @@ export default {
     selectionColor: 'fuchsia',
     onColorAdded: color => (userColors = [color, ...userColors]),
     getUserColors: () => userColors,
+    // onCustomPickerToggle: ({ onCustomColorPicked, ...props }) => (
+    //   <CustomColorPicker onChange={onCustomColorPicked} {...props} />
+    // ),
+    onCustomColorPicked: color => console.log({ color }),
   },
   [FILE_UPLOAD_TYPE]: {
     accept: '*',

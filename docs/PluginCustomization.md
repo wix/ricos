@@ -83,6 +83,29 @@ The `toolbar` setting refers to plugin functionality toolbar. Currently, it expo
 | `onColorAdded`            | a handler called when a custom color is picked                                         | none                                                               | Yes          | editor               |
 | `getUserColors`           | a function that returns user-defined custom colors                                     | none                                                               | Yes          | editor               |
 
+### Text Color Plugin
+
+| setting key               | description                                                                            | default value                                                      | is required? | editor/viewer config |
+| ------------------------- | -------------------------------------------------------------------------------------- | ------------------------------------------------------------------ | ------------ | -------------------- |
+| `getPaletteColors`        | a function which returns color array: `() => ['#000', '#fff', ...]`                    | ['#303030', '#303030', '#3a54b4', '#bfad80', '#bf695c', '#f7f7f7'] | No           | editor               |
+| `styleSelectionPredicate` | a function that tells the plugin which inline styles are relevant: `string => boolean` | `style => isHexColor(style)`                                       | No           | both                 |
+| `customStyleFn` (1)       | a function that converts an inline-style to CSS style: `DraftInlineStyle => object`    | DEFAULT_STYLE_FN_DRAFT                                             | No           | editor               |
+| `customStyleFn` (2)       | a function that converts an inline-style to CSS style: `string => object`              | DEFAULT_STYLE_FN                                                   | No           | viewer               |
+| `colorToStyle`            | a function that maps hex-color to inline-style: `string => string`                     | `color => color`                                                   | No           | editor               |
+| `styleToColor`            | a function that maps hex-color to inline-style: `string => string`                     | `style => style`                                                   | No           | editor               |
+| `selectionColor`          | selected color indicator (`string`)                                                    | `#000`                                                             | No           | editor               |
+| `onColorAdded`            | a handler called when a custom color is added                                          | none                                                               | Yes          | editor               |
+| `getUserColors`           | a function that returns user-defined custom colors                                     | none                                                               | Yes          | editor               |
+| `onCustomPickerToggle`    | a handler called when the Add Color button is clicked [see **Note** below for details] | modal `CustomColorPickerDialog` is displayed                       | No           | editor               |
+| `onCustomColorPicked`     | a handler called when a custom color is picked by hue/saturation controls              | noop                                                               | No           | editor               |
+
+**Note:** `onCustomPickerToggle` API is intended to be used when there is a need to display the `CustomColorPicker` outside the modal dialog, e.g. as a Settings panel element. The API is called with the following parameters:
+- `onCustomColorPicked`(color) -- should be called when a custom color is picked by hue/saturation controls of the `CustomColorPicker`. Usually it should be wired to the `CustomColorPicker`'s _`onChange`_ prop
+- `onCustomColorUpdate`(color) -- should be called when user decides to apply the selected color (e.g. `CustomColorPickerDialog` Update button)
+- `onCustomColorCancel`(color) -- should be called when user decides to cancel the custom color selection (e.g. `CustomColorPickerDialog` Cancel button)
+- all the `ColorPicker` props (`t`, `isMobile`, `theme`, ...etc)
+
+
 ## References and Examples
 
 Both [editor-example](../examples/editor/src/PluginsConfig.js) and [viewer-example](../examples/viewer/src/App.jsx) apps demonstrate the plugin customization capabilities.

@@ -11,13 +11,19 @@
 ### :rocket: New Feature
 - `line-spacing`
   - [#282](https://github.com/wix-incubator/rich-content/pull/282) new plugin added
+- `common`
+  - [#294](https://github.com/wix-incubator/rich-content/pull/294) ColorPicker now accepts `onCustomPickerToggle`, `onCustomColorPicked` props for higher customability
+- `text-color`
+  - [#294](https://github.com/wix-incubator/rich-content/pull/294) plugin config now accepts `onCustomPickerToggle`, `onCustomColorPicked` handlers
 ### :bug: Bug Fix
 - `common`
   - [86b94cc](https://github.com/wix-incubator/rich-content/commit/86b94cc19fac3fe6d04fe348735de7538992b1ac)&nbsp;&nbsp;`<Loader />`&nbsp;&nbsp;component supports getting theme from context or props (external modals)
+### :book: Documentation
+- [Plugin Customization](./docs/PluginCustomization.md) doc updated
 ### :house: Internal
 - `toolbars`
   - [#296](https://github.com/wix-incubator/rich-content/pull/296) improve performance by eliminating a lot of unnecessary work that was done on the toolbars for every keystroke.
-- `example`
+- `examples`
   - [#298](https://github.com/wix-incubator/rich-content/pull/296) hmr + error handling for viewer
 <hr/>
 
