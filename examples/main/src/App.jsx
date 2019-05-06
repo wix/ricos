@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { hot } from 'react-hot-loader/root';
 import React, { Suspense } from 'react';
 import MobileDetect from 'mobile-detect';
 import { convertFromRaw, convertToRaw, EditorState } from '@wix/draft-js';
@@ -9,7 +10,7 @@ const Editor = React.lazy(() => import('./editor/Editor'));
 const Viewer = React.lazy(() => import('./viewer/Viewer'));
 import Resizable from 're-resizable';
 import startCase from 'lodash/startCase';
-import cloneDeep from 'lodash/cloneDeep';
+import debounce from 'lodash/debounce';
 import local from 'local-storage';
 
 // const whyDidYouRender = require('@welldone-software/why-did-you-render/dist/no-classes-transpile/umd/whyDidYouRender.min.js');
@@ -65,17 +66,20 @@ class App extends React.PureComponent {
     return state;
   }
 
+  setViewerState = debounce(editorState => {
+    const content = editorState.getCurrentContent();
+    if (content !== this.state.editorState.getCurrentContent()) {
+      theis.setState({ viewerState: convertToRaw(content) });
+    }
+  }, 70);
+
   onEditorChange = editorState => {
     const state = {
       lastSave: new Date(),
       editorState,
     };
-
-    const content = editorState.getCurrentContent();
-    if (content !== this.state.editorState.getCurrentContent()) {
-      state.viewerState = convertToRaw(content);
-    }
     this.setState(state);
+    this.setViewerState(editorState);
   };
 
   isMobileDevice = () => {
@@ -123,7 +127,9 @@ class App extends React.PureComponent {
     );
     const viewer = (
       <Suspense fallback={<div>Loading...</div>}>
-        <Viewer initialState={this.state.viewerState} mobile={isMobile} config={this.config} />
+        <ErrorBoundary>
+          <Viewer initialState={this.state.viewerState} mobile={isMobile} config={this.config} />
+        </ErrorBoundary>
       </Suspense>
     );
     const checkBoxComponents = (isMobileDevice ? mobileCheckBoxes : checkBoxes).map((name, i) => (
@@ -152,7 +158,7 @@ class App extends React.PureComponent {
             {this.state.mounted && (
               <div className="columns">
                 {isMobileDevice ? (
-                  <div className={"mobileDevice"} style={{ width: '100%' }}>
+                  <div className={'mobileDevice'} style={{ width: '100%' }}>
                     <div style={{ display: 'flex' }}>{checkBoxComponents}</div>
                     {showEditor && editor}
                     {showViewer && viewer}
@@ -173,7 +179,7 @@ class App extends React.PureComponent {
                   <div className="column side">
                     <RichContentRawDataEditor
                       onChange={this.onRichContentRawDataEditorChange}
-                      content={(convertToRaw(this.state.editorState.getCurrentContent()))}
+                      content={convertToRaw(this.state.editorState.getCurrentContent())}
                     />
                   </div>
                 )}
@@ -186,4 +192,37 @@ class App extends React.PureComponent {
   }
 }
 
-export default App;
+class ErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  componentDidCatch(error, info) {
+    this.setState({ error, info });
+  }
+
+  retry = () => {
+    this.setState({ error: undefined });
+  };
+
+  render() {
+    const { error, info } = this.state;
+    if (error) {
+      return (
+        <div style={{ whiteSpace: 'pre-wrap', marginLeft: '5px' }}>
+          <h1> oh oh :(</h1>
+          <button style={{ fontSize: '20px', background: 'aliceblue' }} onClick={this.retry}>
+            Retry
+          </button>
+          <p>Look for more info in the console</p>
+          <p>{error + info.componentStack}</p>
+        </div>
+      );
+    }
+
+    return this.props.children;
+  }
+}
+
+export default hot(App);
