@@ -9,12 +9,35 @@
 
 ## [Unreleased]
 ### :rocket: New Feature
+- `line-spacing`
+  - [#282](https://github.com/wix-incubator/rich-content/pull/282) new plugin added
 - `common`
-  - ColorPicker now accepts `onCustomPickerToggle`, `onCustomColorPicked` props for higher customability
+  - [#294](https://github.com/wix-incubator/rich-content/pull/294) ColorPicker now accepts `onCustomPickerToggle`, `onCustomColorPicked` props for higher customability
 - `text-color`
-  - plugin config now accepts `onCustomPickerToggle`, `onCustomColorPicked` handlers
+  - [#294](https://github.com/wix-incubator/rich-content/pull/294) plugin config now accepts `onCustomPickerToggle`, `onCustomColorPicked` handlers
+### :bug: Bug Fix
+- `common`
+  - [86b94cc](https://github.com/wix-incubator/rich-content/commit/86b94cc19fac3fe6d04fe348735de7538992b1ac)&nbsp;&nbsp;`<Loader />`&nbsp;&nbsp;component supports getting theme from context or props (external modals)
 ### :book: Documentation
 - [Plugin Customization](./docs/PluginCustomization.md) doc updated
+### :house: Internal
+- `toolbars`
+  - [#296](https://github.com/wix-incubator/rich-content/pull/296) improve performance by eliminating a lot of unnecessary work that was done on the toolbars for every keystroke.
+<hr/>
+
+## 3.3.3 (Apr 30, 2019)
+### :rocket: New Feature
+- `common`
+  - [#295](https://github.com/wix-incubator/rich-content/pull/295) insert plugin button with `custom-block` type supported [allows to run custom add-block handler]
+- `code-block`
+  - [#295](https://github.com/wix-incubator/rich-content/pull/295) insert-buttons added
+- `text-color`
+  - [#290](https://github.com/wix-incubator/rich-content/pull/290) customization API exposed (defining and handling custom inline styles)
+### :bug: Bug Fix
+- `video`
+  - [#293](https://github.com/wix-incubator/rich-content/pull/293) fix ratio
+### :book: Documentation
+- [#290](https://github.com/wix-incubator/rich-content/pull/290) [Plugin Customization doc]('./docs/PluginCustomization.md') update on `text-color`
 <hr/>
 
 ## 3.3.2 (Apr 29, 2019)
@@ -286,18 +309,22 @@ _NOTE:_ From this version onwards all modules will have the same version number,
 - `common`
   - [c6b143d](https://github.com/wix-incubator/rich-content/commit/c6b143dc792b3d9c6f7892bf24db1818bc7f4cd9) validate plugin schema only in development
 <hr/>
+
 ## Video Plugin 1.6.0 (Jan 20, 2019)
 ### :rocket: New Feature
 [#234](https://github.com/wix-incubator/rich-content/pull/234) thumbnail support - if you are using relative URLs this requires changes
 <hr/>
+
 ## Image Plugin 1.5.12 (Jan 20, 2019)
 ### :bug: Bug Fix
 - [#233](https://github.com/wix-incubator/rich-content/pull/233) PNG images are loaded as JPG in preload, losing transparency and showing black background
 <hr/>
+
 ## HTML Plugin 1.5.20 (Jan 16, 2019)
 ### :bug: Bug Fix
 - [#232](https://github.com/wix-incubator/rich-content/pull/232) first time iframe onload is fired before React.render(), so it will not refresh
 <hr/>
+
 ## Rich Content 1.7.11 (Jan 16, 2019)
 ### :rocket: New Feature
 - `video`

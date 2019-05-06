@@ -1,13 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import get from 'lodash/get';
 import { mergeStyles } from '../Utils/mergeStyles';
 import Context from '../Utils/Context';
 import styles from '../../statics/styles/loaders.scss';
 
 class Loader extends React.Component {
+  get styles() {
+    if (!this._styles) {
+      const theme = get(this, 'context.theme', this.props.theme);
+      this._styles = mergeStyles({ styles, theme });
+    }
+    return this._styles;
+  }
+
   render() {
-    this.styles = this.styles || mergeStyles({ styles, theme: this.context.theme });
     return (
       <div
         className={classNames(this.props.overlayClassName, this.styles.loaderOverlay)}
@@ -29,6 +37,7 @@ Loader.propTypes = {
   type: PropTypes.string,
   overlayClassName: PropTypes.string,
   loaderClassName: PropTypes.string,
+  theme: PropTypes.object,
 };
 
 Loader.defaultProps = {

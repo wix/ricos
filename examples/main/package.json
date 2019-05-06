@@ -42,6 +42,7 @@
     "wix-rich-content-plugin-headers-markdown": "file:../../packages/plugin-headers-markdown",
     "wix-rich-content-plugin-html": "file:../../packages/plugin-html",
     "wix-rich-content-plugin-image": "file:../../packages/plugin-image",
+    "wix-rich-content-plugin-line-spacing": "file:../../packages/plugin-line-spacing",
     "wix-rich-content-plugin-link": "file:../../packages/plugin-link",
     "wix-rich-content-plugin-map": "file:../../packages/plugin-map",
     "wix-rich-content-plugin-mentions": "file:../../packages/plugin-mentions",

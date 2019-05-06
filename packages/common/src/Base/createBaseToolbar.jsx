@@ -121,6 +121,10 @@ export default function createToolbar({
       this.unsubscribeOnBlock && this.unsubscribeOnBlock();
     }
 
+    shouldComponentUpdate() {
+      return !!this.state.isVisible;
+    }
+
     onEditorBoundsChange = editorBounds => {
       this.setState({ editorBounds });
     };
@@ -187,7 +191,7 @@ export default function createToolbar({
     };
 
     hideToolbar = () => {
-      this.setState(getInitialState());
+      this.setState({ ...getInitialState(), isVisible: false });
     };
 
     getRelativePositionStyle() {
@@ -227,6 +231,7 @@ export default function createToolbar({
       const componentData = pubsub.get('componentData') || {};
       const componentState = pubsub.get('componentState') || {};
       this.setState({
+        isVisible: true,
         position,
         componentData,
         componentState,
