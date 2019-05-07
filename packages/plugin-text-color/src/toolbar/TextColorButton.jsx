@@ -1,19 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
 import Modal from 'react-modal';
-import { InlineToolbarButton, getSelectionStyles, mergeStyles } from 'wix-rich-content-common';
+import { InlineToolbarButton, getSelectionStyles, getModalStyles } from 'wix-rich-content-common';
 import TextColorIcon from './TextColorIcon';
 import { TEXT_COLOR_TYPE } from '../types';
 import TextColorPanel from './TextColorPanel';
-import { PANEL_WIDTH, DEFAULT_STYLE_SELECTION_PREDICATE } from '../constants';
-import styles from '../../statics/text-color.scss';
+import { PANEL_WIDTH, DEFAULT_STYLE_SELECTION_PREDICATE, MODAL_STYLES } from '../constants';
 
 export default class TextColorButton extends Component {
   constructor(props) {
     super(props);
     this.buttonRef = React.createRef();
-    this.styles = mergeStyles({ styles, theme: props.theme });
+    this.state = { showPanel: false };
   }
 
   static getModalParent() {
@@ -25,7 +23,7 @@ export default class TextColorButton extends Component {
     if (!isMobile) {
       setKeepOpen && setKeepOpen(true);
     }
-    const { bottom, left } = this.buttonRef.getBoundingClientRect();
+    const { bottom, left } = this.buttonRef.current.getBoundingClientRect();
     const panelTop = bottom + 60;
     const panelLeft = left - PANEL_WIDTH / 2;
     this.setState({ isPanelOpen: true, panelLeft, panelTop });
@@ -34,19 +32,6 @@ export default class TextColorButton extends Component {
   closePanel = () => {
     this.setState({ isPanelOpen: false });
     this.props.setKeepOpen(false);
-  };
-
-  calculatePanelLocation = buttonRef => {
-    if (this.props.isMobile) {
-      return {};
-    }
-    if (!buttonRef) {
-      return {};
-    }
-    const { bottom, left } = buttonRef.getBoundingClientRect();
-    const panelTop = bottom + 60;
-    const panelLeft = left - PANEL_WIDTH / 2;
-    return { top: panelTop, left: panelLeft };
   };
 
   get isActive() {
@@ -78,13 +63,20 @@ export default class TextColorButton extends Component {
       active: theme.inlineToolbarButton_active,
     };
 
-    const modalStyle = {
-      content: isMobile ? { left: 0, bottom: 0, right: 0 } : { top: panelTop, left: panelLeft },
-    };
+    const customStyles = isMobile ? MODAL_STYLES.mobile : MODAL_STYLES.desktop;
+    if (!isMobile) {
+      customStyles.content.top = panelTop;
+      customStyles.content.left = panelLeft;
+    }
+
+    const modalStyle = getModalStyles({
+      customStyles,
+      fullScreen: false,
+    });
 
     return (
       <InlineToolbarButton
-        onClick={this.showTextColorPanel}
+        onClick={this.openPanel}
         isActive={this.isActive}
         theme={{ ...theme, ...buttonStyles }}
         isMobile={isMobile}
@@ -95,12 +87,6 @@ export default class TextColorButton extends Component {
       >
         <Modal
           isOpen={isPanelOpen}
-          className={classNames(styles.textColorModal, {
-            [styles.textColorModal_mobile]: isMobile,
-          })}
-          overlayClassName={classNames(styles.textColorModalOverlay, {
-            [styles.textColorModalOverlay_mobile]: isMobile,
-          })}
           parentSelector={TextColorButton.getModalParent}
           style={modalStyle}
         >
