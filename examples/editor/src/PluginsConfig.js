@@ -202,7 +202,6 @@ export default {
   },
   [TEXT_COLOR_TYPE]: {
     getPaletteColors: () => ['#FEFDFD', '#D5D4D4', '#ABCAFF', '#81B0FF', '#0261FF', '#0141AA'],
-    selectionColor: 'fuchsia',
     onColorAdded: color => (userColors = [color, ...userColors]),
     getUserColors: () => userColors,
     // onCustomPickerToggle: ({ onCustomColorPicked, ...props }) => (
