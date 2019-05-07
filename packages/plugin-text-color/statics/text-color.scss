@@ -1,0 +1,34 @@
+$PANEL_WIDTH: 216px;
+$PANEL_HEIGHT: 116px;
+
+.textColorModal {
+  display: inline-table;
+  min-height: $PANEL_HEIGHT;
+  height: auto;
+  position: absolute;
+  border-radius: 6px;
+  border: solid 1px #ededed;
+  margin: 0;
+  min-width: $PANEL_WIDTH;
+  max-width: 360px;
+  width: auto;
+}
+
+.textColorModal_mobile {
+  display: inline-table;
+  position: absolute;
+  box-shadow: 4px 0 4px 0 rgba(0, 0, 0, 0.1), 0 0 8px 0 rgba(0, 0, 0, 0.1);
+  margin: 0;
+  bottom: 0;
+  top: unset;
+  transform: unset;
+  width: 100%;
+}
+
+.textColorModalOverlay {
+  background: transparent;
+}
+
+.textColorModalOverlay_mobile {
+  background: transparent;
+}
