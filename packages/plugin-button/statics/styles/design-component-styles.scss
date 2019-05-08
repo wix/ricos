@@ -1,5 +1,5 @@
-@import '~wix-rich-content-common/dist/statics/styles/mixins';
-@import '~wix-rich-content-common/dist/statics/styles/palette';
+@import "~wix-rich-content-common/dist/statics/styles/mixins";
+@import "~wix-rich-content-common/dist/statics/styles/palette";
 
 .row {
   height: auto;
@@ -12,31 +12,53 @@
   }
 }
 
-.colorPicker_button{
-  width: 36px;
-  height: 36px;
-
-  &::after{
-    width: 40px;
-    height: 40px;
+.colorPicker_button {
+  width: 20px;
+  height: 20px;
+  margin-left: 8px;
+  &::after {
+    width: 24px;
+    height: 24px;
   }
 }
 
-.colorPicker_palette{
+.colorPickerDialog_buttons {
+  padding-left: calc(100% - 126px);
+  margin-top: 12px;
+  padding-bottom: 13px;
+  border-bottom: 1px solid #cccccc;
+  margin-bottom: 22px;
+}
+
+.colorPickerDialog_button {
+  margin-right: 19px;
+  font-size: 16px;
+}
+.colorPicker_palette {
   margin-right: 0px;
   margin-left: 0px;
 }
 
-.customColorPicker_container{
+.customColorPicker_container {
   width: 100%;
 }
 
-.colorPickerDialog{
+.colorPickerDialog {
   margin: 24px 0px 15px;
 }
 
-.colorPicker_buttons_container{
+.colorPicker_buttons_container {
   width: 100%;
+}
+.customColorPicker_container {
+  height: 100%;
+}
+.customColorPicker_saturation {
+  height: 112px;
+}
+
+.colorPickerDialog_separator {
+  display: none;
 }
 
 .colorPicker_container {
@@ -59,7 +81,7 @@
 }
 
 .section_header_color {
-  padding-bottom: 6px;
+  padding-bottom: 38px;
   padding-top: 6px;
   font-size: 16px;
   font-weight: 300;
