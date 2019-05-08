@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import JSONInput from 'react-json-editor-ajrm';
 import get from 'lodash/get';
 import set from 'lodash/set';
-import isEqual from 'lodash/isEqual';
 import debounce from 'lodash/debounce';
 
 class RichContentRawDataEditor extends React.Component {
@@ -18,7 +17,7 @@ class RichContentRawDataEditor extends React.Component {
   shouldComponentUpdate(nextProps, nextState, nextContext) {
     if (
       this.state.editingEnabled !== nextState.editingEnabled ||
-      !isEqual(nextProps.content, this.content)
+      JSON.stringify(nextProps.content) !== JSON.stringify(this.content)
     ) {
       this.content = nextProps.content;
       this.forceUpdateDebounced();

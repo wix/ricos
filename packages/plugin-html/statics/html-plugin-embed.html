@@ -1,49 +1,59 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <style type="text/css">
-      iframe[class|='instagram'], blockquote[class|='instagram'] { /* fallback script for ios below */
-        min-width: 0 !important;
-        width: calc(100vw - 2px);
-      }
-      body {
-        margin: 0;
-      }
-    </style>
-    <script>
-      (function fixInstagramWidth() { // This is a fallback for the styles above. Because inline styles can't be overridden in ios.
-        var callback = function() {
-          try {
-            if (document.body.firstChild.className.indexOf('instagram') >= 0) {
-              document.body.firstChild.style.minWidth = '0';
-              document.body.firstChild.style.width = 'calc(100vw - 2px)';
-            }
-          } catch (e) {}
-        };
 
-        var observer = new MutationObserver(callback);
+<head>
+  <style type="text/css">
+    iframe[class|='instagram'],
+    blockquote[class|='instagram'] {
+      /* fallback script for ios below */
+      min-width: 0 !important;
+      width: calc(100vw - 2px);
+    }
 
-        observer.observe(document, { childList: true, subtree: true });
-      })();
+    body {
+      margin: 0;
+      max-width: calc(100vw);
+    }
+  </style>
+  <script>
+    (function fixInstagramWidth() { // This is a fallback for the styles above. Because inline styles can't be overridden in ios.
+      var callback = function () {
+        try {
+          if (document.body.firstChild.className.indexOf('instagram') >= 0) {
+            document.body.firstChild.style.minWidth = '0';
+            document.body.firstChild.style.width = 'calc(100vw - 2px)';
+          }
+        } catch (e) {}
+      };
 
-      window.addEventListener('message', function(event) {
-        if (event.data.type !== 'htmlPlugin:updateContent') {
-          return;
-        }
+      var observer = new MutationObserver(callback);
 
-        var content = [
-          '<!DOCTYPE html>',
-          '<html>',
-          '<head>' + document.head.innerHTML + '</head>',
-          '<body>' + event.data.content + '</body>',
-          '</html>',
-        ].join('');
-
-        document.open('text/html', 'replace');
-        document.write(content);
-        document.close();
+      observer.observe(document, {
+        childList: true,
+        subtree: true
       });
-    </script>
-  </head>
-  <body></body>
+    })();
+
+    window.addEventListener('message', function (event) {
+      if (event.data.type !== 'htmlPlugin:updateContent') {
+        return;
+      }
+
+      var content = [
+        '<!DOCTYPE html>',
+        '<html>',
+        '<head>' + document.head.innerHTML + '</head>',
+        '<body>' + event.data.content + '</body>',
+        '</html>',
+      ].join('');
+
+      document.open('text/html', 'replace');
+      document.write(content);
+      document.close();
+    });
+  </script>
+</head>
+
+<body></body>
+
 </html>

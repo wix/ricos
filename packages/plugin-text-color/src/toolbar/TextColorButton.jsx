@@ -3,9 +3,8 @@ import PropTypes from 'prop-types';
 import { getModalStyles, InlineToolbarButton, getSelectionStyles } from 'wix-rich-content-common';
 import TextColorIcon from './TextColorIcon';
 import { TEXT_COLOR_TYPE } from '../types';
-import { MODAL_STYLES, PANEL_WIDTH } from './constants';
+import { MODAL_STYLES, PANEL_WIDTH, DEFAULT_STYLE_SELECTION_PREDICATE } from '../constants';
 import { Modals } from '../modals';
-import { isHexColor } from '../utils';
 
 export default class TextColorButton extends Component {
   constructor(props) {
@@ -21,8 +20,6 @@ export default class TextColorButton extends Component {
       isMobile,
       helpers,
       keyName,
-      anchorTarget,
-      relValue,
       t,
       uiSettings,
       config,
@@ -50,8 +47,6 @@ export default class TextColorButton extends Component {
         setEditorState,
         t,
         theme,
-        anchorTarget,
-        relValue,
         modalName: Modals.TEXT_COLOR_PICKER,
         hidePopup: helpers.closeModal,
         uiSettings,
@@ -62,7 +57,7 @@ export default class TextColorButton extends Component {
     } else {
       //eslint-disable-next-line no-console
       console.error(
-        'Open external helper function is not defined for toolbar button with keyName ' + keyName
+        'helpers.openModal function is not defined for toolbar button with keyName ' + keyName
       );
     }
   };
@@ -75,13 +70,16 @@ export default class TextColorButton extends Component {
       return {};
     }
     const { bottom, left } = buttonRef.getBoundingClientRect();
-    const panelTop = bottom + 50;
+    const panelTop = bottom + 60;
     const panelLeft = left - PANEL_WIDTH / 2;
     return { top: panelTop, left: panelLeft };
   };
 
   get isActive() {
-    return getSelectionStyles(style => isHexColor(style), this.props.getEditorState()).length > 0;
+    const settings = this.props.config[TEXT_COLOR_TYPE] || {};
+    const styleSelectionPredicate =
+      settings.styleSelectionPredicate || DEFAULT_STYLE_SELECTION_PREDICATE;
+    return getSelectionStyles(styleSelectionPredicate, this.props.getEditorState()).length > 0;
   }
 
   render() {

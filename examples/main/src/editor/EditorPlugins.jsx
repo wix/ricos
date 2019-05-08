@@ -1,4 +1,5 @@
 import { createLinkPlugin, LINK_TYPE } from 'wix-rich-content-plugin-link';
+import { createLineSpacingPlugin, LINE_SPACING_TYPE } from 'wix-rich-content-plugin-line-spacing';
 import { createHashtagPlugin, HASHTAG_TYPE } from 'wix-rich-content-plugin-hashtag';
 // import { createExternalEmojiPlugin, EXTERNAL_EMOJI_TYPE } from 'wix-rich-content-plugin-emoji';
 import { createImagePlugin } from 'wix-rich-content-plugin-image';
@@ -31,6 +32,7 @@ import 'wix-rich-content-plugin-divider/dist/styles.min.css';
 // import 'wix-rich-content-plugin-emoji/dist/styles.min.css';
 import 'wix-rich-content-plugin-html/dist/styles.min.css';
 import 'wix-rich-content-plugin-hashtag/dist/styles.min.css';
+import 'wix-rich-content-plugin-line-spacing/dist/styles.min.css';
 import 'wix-rich-content-plugin-link/dist/styles.min.css';
 import 'wix-rich-content-plugin-mentions/dist/styles.min.css';
 import 'wix-rich-content-plugin-image/dist/styles.min.css';
@@ -39,6 +41,14 @@ import 'wix-rich-content-plugin-sound-cloud/dist/styles.min.css';
 import 'wix-rich-content-plugin-giphy/dist/styles.min.css';
 import 'wix-rich-content-plugin-map/dist/styles.min.css';
 import 'wix-rich-content-plugin-file-upload/dist/styles.min.css';
+
+import {
+  getPaletteColors,
+  getCustomStyleFn,
+  getColorToStyle,
+  getStyleToColor,
+  getStyleSelectionPredicate,
+} from '../text-color-style-fn';
 
 // import { TOOLBARS, BUTTONS, DISPLAY_MODE } from 'wix-rich-content-common';
 // import InlineToolbarDecoration from './Components/InlineToolbarDecoration';
@@ -52,6 +62,7 @@ export const editorPlugins = [
   createHtmlPlugin,
   createDividerPlugin,
   // createExternalEmojiPlugin,
+  createLineSpacingPlugin,
   createLinkPlugin,
   createHashtagPlugin,
   createExternalMentionsPlugin,
@@ -66,11 +77,11 @@ export const editorPlugins = [
 
 const themeColors = {
   color1: '#ffffff',
-  color2: '#ed24d9',
-  color3: '#969696',
-  color4: '#ed24d9',
-  color5: '#000000',
-  color6: '#000000',
+  color2: '#303030',
+  color3: '#3a54b4',
+  color4: '#bfad80',
+  color5: '#bf695c',
+  color6: '#f7f7f7',
   color7: '#000000',
   color8: '#9a87ce',
 };
@@ -178,6 +189,14 @@ export const config = {
         )
       ),
   },
+  [LINE_SPACING_TYPE]: {
+    defaultSpacing: {
+      'line-height': '1.5',
+      'padding-top': '2px',
+      'padding-bottom': '3px'
+    },
+    onUpdate: spacing => console.log(LINE_SPACING_TYPE, spacing),
+  },
   [LINK_TYPE]: {
     onClick: (event, url) => console.log('link clicked!', url),
     // autoLink: false
@@ -267,10 +286,14 @@ export const config = {
     // },
   },
   [TEXT_COLOR_TYPE]: {
-    palette: ['#FEFDFD', '#D5D4D4', '#ABCAFF', '#81B0FF', '#0261FF', '#0141AA'],
+    getPaletteColors: () => getPaletteColors(themeColors),
+    styleSelectionPredicate: getStyleSelectionPredicate(themeColors),
+    colorToStyle: getColorToStyle(themeColors),
+    styleToColor: getStyleToColor(themeColors),
     selectionColor: 'fuchsia',
     onColorAdded: color => (userColors = [color, ...userColors]),
     getUserColors: () => userColors,
+    customStyleFn: getCustomStyleFn(themeColors),
   },
   uiSettings,
   getToolbarSettings: ({ pluginButtons, textButtons }) => [

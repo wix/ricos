@@ -1,57 +1,35 @@
 import classNames from 'classnames';
 import styles from '../../statics/styles/rich-content-editor.scss';
 
-export default theme => contentBlock => {
-  const {
-    type,
-    data: { textAlignment },
-  } = contentBlock.toJS();
-  const classList = [];
+const types = {
+  blockquote: 'quote',
+  'header-one': 'headerOne',
+  'header-two': 'headerTwo',
+  'header-three': 'headerThree',
+  indent: 'indent',
+  'ordered-list-item': 'orderedList',
+  'unordered-list-item': 'unorderedList',
+  atomic: 'atomic',
+  'code-block': 'codeBlock',
+};
 
-  switch (type) {
-    case 'blockquote':
-      classList.push(styles.quote);
-      classList.push(theme.quote);
-      break;
-    case 'header-one':
-      classList.push(styles.headerOne);
-      classList.push(theme.headerOne);
-      break;
-    case 'header-two':
-      classList.push(styles.headerTwo);
-      classList.push(theme.headerTwo);
-      break;
-    case 'header-three':
-      classList.push(styles.headerThree);
-      classList.push(theme.headerThree);
-      break;
-    case 'indent':
-      classList.push(styles.indent);
-      classList.push(theme.indent);
-      break;
-    case 'ordered-list-item':
-      classList.push(styles.orderedList);
-      classList.push(theme.orderedList);
-      break;
-    case 'unordered-list-item':
-      classList.push(styles.unorderedList);
-      classList.push(theme.unorderedList);
-      break;
-    case 'atomic':
-      classList.push(styles.atomic);
-      classList.push(theme.atomic);
-      break;
-    case 'code-block':
-      classList.push(styles.codeBlock);
-      classList.push(theme.codeBlock);
-      break;
-    default:
-      classList.push(styles.text);
-      classList.push(theme.text);
-  }
-  if (type !== 'atomic') {
-    classList.push(styles[textAlignment]);
-    classList.push(theme[textAlignment]);
-  }
-  return classNames(...classList);
+export default (theme, styleToClass) => {
+  return contentBlock => {
+    const {
+      type,
+      data: { textAlignment, dynamicStyles = {} },
+    } = contentBlock.toJS();
+
+    const key = types[type] || 'text';
+
+    const classList = [styles[key], theme[key]];
+
+    if (type !== 'atomic') {
+      classList.push(styles[textAlignment], theme[textAlignment]);
+    }
+
+    const dynamicClasses = Object.entries(dynamicStyles).map(styleToClass);
+
+    return classNames(...classList, ...dynamicClasses);
+  };
 };

@@ -60,4 +60,23 @@ CustomColorPicker.propTypes = {
   onChange: PropTypes.func,
 };
 
-export default customPicker(CustomColorPicker);
+const Picker = customPicker(CustomColorPicker);
+
+class HexColorPicker extends React.Component {
+  constructor(props) {
+    super(props);
+    this.onChangeConverted = this.onChangeConverted.bind(this);
+  }
+
+  onChangeConverted(color) {
+    this.props.onChange(color.hex.toUpperCase());
+  }
+
+  render() {
+    return <Picker {...this.props} onChange={this.onChangeConverted} />;
+  }
+}
+
+HexColorPicker.propTypes = CustomColorPicker.propTypes;
+
+export default HexColorPicker;

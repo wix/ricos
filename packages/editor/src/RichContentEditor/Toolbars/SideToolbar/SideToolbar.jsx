@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import { DISPLAY_MODE } from 'wix-rich-content-common';
 import DraftOffsetKey from '@wix/draft-js/lib/DraftOffsetKey';
 import Styles from '../../../../statics/styles/side-toolbar-wrapper.scss';
+import debounce from 'lodash/debounce';
 
 export default class SideToolbar extends Component {
   static propTypes = {
@@ -26,6 +27,7 @@ export default class SideToolbar extends Component {
     displayOptions: {
       displayMode: DISPLAY_MODE.NORMAL,
     },
+    visibilityFn: () => false,
     toolbarDecorationFn: () => null,
   };
 
@@ -47,22 +49,25 @@ export default class SideToolbar extends Component {
     this.props.pubsub.unsubscribe('editorState', this.onEditorStateChange);
   }
 
-  onEditorStateChange = editorState => {
+  onEditorStateChange = debounce(editorState => {
     const { visibilityFn } = this.props;
 
-    let isVisible = false;
-    if (visibilityFn) {
-      isVisible = visibilityFn(editorState);
-    }
+    const isVisible = visibilityFn(editorState);
+    const wasVisible = this.state.isVisible;
 
     if (!isVisible) {
-      this.setState({
-        position: {
-          transform: 'scale(0)',
-        },
-      });
+      if (wasVisible) {
+        this.setState({
+          isVisible: false,
+          position: {
+            transform: 'scale(0)',
+          },
+        });
+      }
       return;
     }
+
+    this.setState({ isVisible });
 
     const { displayOptions, offset, isMobile } = this.props;
     const selection = editorState.getSelection();
@@ -99,7 +104,7 @@ export default class SideToolbar extends Component {
         });
       }
     });
-  };
+  }, 40);
 
   renderToolbarContent() {
     const { theme, pubsub } = this.props;
@@ -114,6 +119,9 @@ export default class SideToolbar extends Component {
   }
 
   render() {
+    if (!this.state.isVisible) {
+      return null;
+    }
     const { theme } = this.props;
     const { wrapperStyles } = theme || {};
 
