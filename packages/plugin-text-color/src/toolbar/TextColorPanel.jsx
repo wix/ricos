@@ -6,7 +6,6 @@ import { ColorPicker, getSelectionStyles } from 'wix-rich-content-common';
 import {
   DEFAULT_PALETTE,
   DEFAULT_COLOR,
-  DEFAULT_SELECTION_COLOR,
   DEFAULT_COLOR_TO_STYLE,
   DEFAULT_STYLE_TO_COLOR,
   DEFAULT_STYLE_SELECTION_PREDICATE,
@@ -78,7 +77,6 @@ export default class TextColorPanel extends Component {
     return (
       <ColorPicker
         color={this.state.currentColor}
-        selectionColor={settings.selectionColor || DEFAULT_SELECTION_COLOR}
         palette={palette.slice(0, 6)}
         userColors={this.state.userColors.slice(0, 17)}
         onColorAdded={this.onColorAdded}
@@ -104,7 +102,6 @@ TextColorPanel.propTypes = {
     onColorAdded: PropTypes.func.isRequired,
     getPaletteColors: PropTypes.func,
     getUserColors: PropTypes.func,
-    selectionColor: PropTypes.string,
     onCustomPickerToggle: PropTypes.func,
     onCustomColorPicked: PropTypes.func,
     styleSelectionPredicate: PropTypes.func,
