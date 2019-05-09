@@ -27,7 +27,7 @@ export const DesktopFlyOutModalStyles = {
     width: '620px',
     maxWidth: '620px',
     boxSizing: 'border-box',
-    height: '372px',
+    height: '375px',
     overflow: 'visible',
     border: '1px solid #ccc',
     paddingRight: '0px',
@@ -39,5 +39,7 @@ export const DesktopFlyOutModalStyles = {
     zIndex: 6,
     paddingTop: '9px',
     paddingBottom: '12px',
+    boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 0 4px 0 rgba(0, 0, 0, 0.1)',
+    border: ' solid 1px rgba(255, 255, 255, 0.25)',
   },
 };
