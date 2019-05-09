@@ -153,7 +153,10 @@ class ItemsList extends PureComponent {
     });
     return (
       <div className={this.styles.items_list_container}>
-        <Scrollbars renderThumbVertical={() => <div className={this.styles.scrollbar_thumb} />}>
+        <Scrollbars
+          renderThumbVertical={() => <div className={this.styles.scrollbar_thumb} />}
+          autoHide
+        >
           <InfiniteScroll
             pageStart={0}
             loadMore={this.getMoreImages.bind(this)}

@@ -2,25 +2,21 @@
 @import "~wix-rich-content-common/dist/statics/styles/palette";
 
 .items_list_container {
-  height: 307px;
+  height: 309px;
   width: 100%;
   padding-right: 10px;
 }
 
 .scrollbar_thumb {
-  background: #b2b2b2;
+  background: #B2B2B2;
   border-radius: 4px;
-  width: 4px;
-  margin-left: -1px;
+  width: 6px;
   cursor: pointer;
 }
 
-.scrollbar_thumb:hover {
-  background: #000000;
-}
-
 .InfiniteScroll_container {
- padding-right: 10px;
+  padding-right: 8px;
+  margin-top: 7px;
 }
 
 .unsplash_selecter_error_msg {
