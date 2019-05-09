@@ -30,10 +30,13 @@ class ItemsList extends PureComponent {
   }
 
   componentWillReceiveProps = nextProps => {
-    if (this.state.searchTerm !== nextProps.searchTerm) {
+    if (this.timer !== null) {
+      clearTimeout(this.timer);
+    }
+    this.timer = setTimeout(() => {
       this.searchUnsplash(nextProps.searchTerm);
       this.setState({ searchTerm: nextProps.searchTerm });
-    }
+    }, 300);
   };
 
   selectPhoto = (event, image) => {
@@ -67,6 +70,7 @@ class ItemsList extends PureComponent {
   };
 
   componentDidMount = () => {
+    this.timer = null;
     this.searchUnsplash(this.props.searchTerm);
     this.setState({ searchTerm: this.props.searchTerm });
   };
