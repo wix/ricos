@@ -18,6 +18,7 @@
 ### :bug: Bug Fix
 - `text-color`
   - missing `getPaletteColors` won't crash
+  - viewer decorator does not override other inline styles
 - `common`
   - [86b94cc](https://github.com/wix-incubator/rich-content/commit/86b94cc19fac3fe6d04fe348735de7538992b1ac)&nbsp;&nbsp;`<Loader />`&nbsp;&nbsp;component supports getting theme from context or props (external modals)
 - `editor`
