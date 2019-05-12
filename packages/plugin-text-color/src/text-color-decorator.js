@@ -5,7 +5,7 @@ import { TEXT_COLOR_TYPE } from './types';
 const colors = {};
 
 const getTextColorComponent = customStyleFn => props => (
-  <span style={customStyleFn(colors[props.key])}>{props.decoratedText}</span> // eslint-disable-line react/prop-types
+  <span style={customStyleFn(colors[props.key])}>{props.children}</span> // eslint-disable-line react/prop-types
 );
 
 export default config => {
