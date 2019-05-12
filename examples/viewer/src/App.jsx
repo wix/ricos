@@ -23,7 +23,7 @@ import {
 import { imageTypeMapper } from 'wix-rich-content-plugin-image/dist/module.viewer';
 import { mapTypeMapper, MAP_TYPE } from 'wix-rich-content-plugin-map/dist/module.viewer';
 import { Strategy as HashTagStrategy, Component as HashTag } from 'wix-rich-content-plugin-hashtag';
-import { TextColorDecorator } from 'wix-rich-content-plugin-text-color';
+import { createTextColorDecorator, TEXT_COLOR_TYPE } from 'wix-rich-content-plugin-text-color';
 import {
   createHeadersMarkdownDecorator,
   HEADERS_MARKDOWN_TYPE,
@@ -57,6 +57,8 @@ import 'wix-rich-content-plugin-button/dist/styles.min.css';
 import TestData from './TestData/initial-state';
 import styles from './App.scss';
 import theme from './theme/theme';
+
+import { getViewerCustomStyleFn, getStyleSelectionPredicate } from './text-color-style-fn';
 
 const modalStyleDefaults = {
   content: {
@@ -104,6 +106,17 @@ class App extends Component {
       buttonTypeMapper,
     ];
 
+    const themeColors = {
+      color1: '#ffffff',
+      color2: '#303030',
+      color3: '#3a54b4',
+      color4: '#bfad80',
+      color5: '#bf695c',
+      color6: '#f7f7f7',
+      color7: '#000000',
+      color8: '#9a87ce',
+    };
+
     this.config = {
       [HEADERS_MARKDOWN_TYPE]: {
         hideMarkdown: true,
@@ -134,10 +147,13 @@ class App extends Component {
           isDraggingAllowed: true,
         },
       },
+      [TEXT_COLOR_TYPE]: {
+        styleSelectionPredicate: getStyleSelectionPredicate(themeColors),
+        customStyleFn: getViewerCustomStyleFn(themeColors),
+      },
     };
 
     this.decorators = [
-      TextColorDecorator,
       {
         strategy: LinkParseStrategy,
         component: ({ children, decoratedText, rel, target }) => (
@@ -166,6 +182,7 @@ class App extends Component {
       },
       new CodeBlockDecorator({ theme }),
       createHeadersMarkdownDecorator(this.config),
+      createTextColorDecorator(this.config),
     ];
   }
 

@@ -16,6 +16,14 @@ import React from 'react';
 import Highlighter from 'react-highlight-words';
 import casual from 'casual-browserify';
 
+import {
+  getPaletteColors,
+  getCustomStyleFn,
+  getColorToStyle,
+  getStyleToColor,
+  getStyleSelectionPredicate,
+} from './text-color-style-fn';
+
 import { TOOLBARS, BUTTONS, DISPLAY_MODE, CustomColorPicker } from 'wix-rich-content-common';
 // import InlineToolbarDecoration from './Components/InlineToolbarDecoration';
 // import StaticToolbarDecoration from './Components/StaticToolbarDecoration';
@@ -24,11 +32,11 @@ import { TOOLBARS, BUTTONS, DISPLAY_MODE, CustomColorPicker } from 'wix-rich-con
 
 const themeColors = {
   color1: '#ffffff',
-  color2: '#ed24d9',
-  color3: '#969696',
-  color4: '#ed24d9',
-  color5: '#000000',
-  color6: '#000000',
+  color2: '#303030',
+  color3: '#3a54b4',
+  color4: '#bfad80',
+  color5: '#bf695c',
+  color6: '#f7f7f7',
   color7: '#000000',
   color8: '#9a87ce',
 };
@@ -201,14 +209,14 @@ export default {
     },
   },
   [TEXT_COLOR_TYPE]: {
-    palette: ['#FEFDFD', '#D5D4D4', '#ABCAFF', '#81B0FF', '#0261FF', '#0141AA'],
+    getPaletteColors: () => getPaletteColors(themeColors),
+    styleSelectionPredicate: getStyleSelectionPredicate(themeColors),
+    colorToStyle: getColorToStyle(themeColors),
+    styleToColor: getStyleToColor(themeColors),
     selectionColor: 'fuchsia',
     onColorAdded: color => (userColors = [color, ...userColors]),
     getUserColors: () => userColors,
-    // onCustomPickerToggle: ({ onCustomColorPicked, ...props }) => (
-    //   <CustomColorPicker onChange={onCustomColorPicked} {...props} />
-    // ),
-    onCustomColorPicked: color => console.log({ color }),
+    customStyleFn: getCustomStyleFn(themeColors),
   },
   [FILE_UPLOAD_TYPE]: {
     accept: '*',
