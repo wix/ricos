@@ -66,7 +66,7 @@ export default class TextColorButton extends Component {
     };
 
     const modalStyle = {
-      content: isMobile ? { top: 0, left: 0 } : { top: panelTop, left: panelLeft },
+      content: isMobile ? { top: 'unset', left: 0 } : { top: panelTop, left: panelLeft },
     };
 
     return (
@@ -84,10 +84,12 @@ export default class TextColorButton extends Component {
           onRequestClose={this.closePanel}
           isOpen={isPanelOpen}
           parentSelector={TextColorButton.getModalParent}
-          className={classNames(this.styles.textColorModal, {
+          className={classNames({
+            [this.styles.textColorModal]: !isMobile,
             [this.styles.textColorModal_mobile]: isMobile,
           })}
-          overlayClassName={classNames(this.styles.textColorModalOverlay, {
+          overlayClassName={classNames({
+            [this.styles.textColorModalOverlay]: !isMobile,
             [this.styles.textColorModalOverlay_mobile]: isMobile,
           })}
           style={modalStyle}
