@@ -1,14 +1,28 @@
+@import "~wix-rich-content-common/dist/statics/styles/mixins";
 .search_container {
   position: relative;
   margin-right: 12px;
+  @include phone{
+    height: 50px;
+    width: 100vw;
+  }
+
 }
 .textInput_input {
   border: 0;
   padding-left: 40px;
+  @include phone{
+    height: 50px;
+    padding-left: 44px;
+  }
 }
 .search_icon {
   position: absolute;
   top: 14px;
   left: 9px;
   z-index: 1;
+  @include phone{
+    top: 18px;
+    left: 20px;
+  }
 }

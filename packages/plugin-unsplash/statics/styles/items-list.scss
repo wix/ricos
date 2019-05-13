@@ -5,10 +5,14 @@
   height: 309px;
   width: 100%;
   padding-right: 10px;
+  @include phone {
+    height: calc(100vh - 92px);
+    width: calc(100vw + 6px);
+  }
 }
 
 .scrollbar_thumb {
-  background: #B2B2B2;
+  background: #b2b2b2;
   border-radius: 4px;
   width: 6px;
   cursor: pointer;
@@ -17,6 +21,10 @@
 .InfiniteScroll_container {
   padding-right: 8px;
   margin-top: 7px;
+  @include phone {
+    padding-right: 0px;
+    margin-top: 0px;
+  }
 }
 
 .unsplash_selecter_error_msg {
