@@ -69,7 +69,7 @@ class HexColorPicker extends React.Component {
   }
 
   onChangeConverted(color) {
-    this.props.onChange(color.hex.toUpperCase());
+    this.props.onChange(color.hex);
   }
 
   render() {
