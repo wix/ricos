@@ -106,17 +106,6 @@ class App extends Component {
       buttonTypeMapper,
     ];
 
-    const themeColors = {
-      color1: '#ffffff',
-      color2: '#303030',
-      color3: '#3a54b4',
-      color4: '#bfad80',
-      color5: '#bf695c',
-      color6: '#f7f7f7',
-      color7: '#000000',
-      color8: '#9a87ce',
-    };
-
     this.config = {
       [HEADERS_MARKDOWN_TYPE]: {
         hideMarkdown: true,
