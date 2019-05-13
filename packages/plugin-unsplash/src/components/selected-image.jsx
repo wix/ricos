@@ -1,11 +1,6 @@
-/* eslint-disable no-undef */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable react/prop-types */
-/* eslint-disable jsx-a11y/alt-text */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { mergeStyles } from 'wix-rich-content-common';
+import { mergeStyles, WixUtils } from 'wix-rich-content-common';
 import styles from '../../statics/styles/selected-image.scss';
 const imgStyle = {
   transition: 'transform .135s cubic-bezier(0.0,0.0,0.2,1),opacity linear .15s',
@@ -21,6 +16,7 @@ class SelectedImage extends Component {
   constructor(props) {
     super(props);
     this.styles = mergeStyles({ styles, theme: props.theme });
+    this.isMobile = WixUtils.isMobile();
     this.state = {
       isHovered: false,
     };
@@ -33,33 +29,60 @@ class SelectedImage extends Component {
     this.setState({ isHovered: false });
   };
 
-  render() {
-    const { index, onClick, photo, margin } = this.props;
+  renderOverlay = (photo, onClick, index, opacity) => {
     return (
       <div
-        style={{ margin, height: photo.height, width: photo.width, ...cont }}
+        className={this.styles.image_overlay}
+        role="button"
+        tabIndex={0}
+        onKeyPress={() => null}
+        style={{
+          height: photo.height,
+          width: photo.width - 12,
+          paddingTop: photo.height - 26 + 'px',
+          paddingLeft: '12px',
+          backgroundColor: 'rgba(0, 0, 0,' + opacity + ')',
+        }}
+        onClick={e => onClick(e, { index, photo })}
+      >
+        {photo.username}
+      </div>
+    );
+  };
+
+  render() {
+    const { index, onClick, photo, margin } = this.props;
+    const { isMobile } = this;
+    return (
+      <div
+        style={{
+          margin: !isMobile ? margin : 0,
+          marginBottom: isMobile && '6px',
+          height: photo.height,
+          width: photo.width,
+          ...cont,
+        }}
+        role="button"
+        tabIndex={0}
         className={this.styles.image_container}
         onMouseEnter={this.onMouseEntered}
         onMouseLeave={this.onMouseLeft}
       >
-        {this.state.isHovered && (
-          <div
-            className={this.styles.image_overlay}
-            style={{
-              height: photo.height,
-              width: photo.width - 12,
-              paddingTop: photo.height - 26 + 'px',
-              paddingLeft: '12px',
-            }}
-            onClick={e => onClick(e, { index, photo })}
-          >
-            {photo.username}
-          </div>
-        )}
-        <img style={{ ...imgStyle }} {...photo} />
+        {isMobile
+          ? this.renderOverlay(photo, onClick, index, 0.0)
+          : this.state.isHovered && this.renderOverlay(photo, onClick, index, 0.2)}
+        <img style={{ ...imgStyle }} alt={'Unsplash'} {...photo} />
       </div>
     );
   }
 }
+
+SelectedImage.propTypes = {
+  theme: PropTypes.object.isRequired,
+  index: PropTypes.number.isRequired,
+  onClick: PropTypes.func.isRequired,
+  photo: PropTypes.object.isRequired,
+  margin: PropTypes.number.isRequired,
+};
 
 export default SelectedImage;
