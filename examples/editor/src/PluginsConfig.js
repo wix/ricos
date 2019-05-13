@@ -11,18 +11,11 @@ import { TEXT_COLOR_TYPE } from 'wix-rich-content-plugin-text-color';
 import { FILE_UPLOAD_TYPE } from 'wix-rich-content-plugin-file-upload';
 import { BUTTON_TYPE } from 'wix-rich-content-plugin-button';
 import { EXTERNAL_MENTIONS_TYPE } from 'wix-rich-content-plugin-mentions';
-import { HEADERS_MARKDOWN_TYPE } from 'wix-rich-content-plugin-headers-markdown';
 import React from 'react';
 import Highlighter from 'react-highlight-words';
 import casual from 'casual-browserify';
 
-import {
-  getPaletteColors,
-  getCustomStyleFn,
-  getColorToStyle,
-  getStyleToColor,
-  getStyleSelectionPredicate,
-} from './text-color-style-fn';
+import { customStyleFn, styleSelectionPredicate, colorScheme } from './text-color-style-fn';
 
 import { TOOLBARS, BUTTONS, DISPLAY_MODE, CustomColorPicker } from 'wix-rich-content-common';
 // import InlineToolbarDecoration from './Components/InlineToolbarDecoration';
@@ -209,14 +202,11 @@ export default {
     },
   },
   [TEXT_COLOR_TYPE]: {
-    getPaletteColors: () => getPaletteColors(themeColors),
-    styleSelectionPredicate: getStyleSelectionPredicate(themeColors),
-    colorToStyle: getColorToStyle(themeColors),
-    styleToColor: getStyleToColor(themeColors),
-    selectionColor: 'fuchsia',
+    colorScheme,
+    styleSelectionPredicate,
+    customStyleFn,
     onColorAdded: color => (userColors = [color, ...userColors]),
     getUserColors: () => userColors,
-    customStyleFn: getCustomStyleFn(themeColors),
   },
   [FILE_UPLOAD_TYPE]: {
     accept: '*',

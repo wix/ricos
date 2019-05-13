@@ -58,7 +58,7 @@ import TestData from './TestData/initial-state';
 import styles from './App.scss';
 import theme from './theme/theme';
 
-import { getViewerCustomStyleFn, getStyleSelectionPredicate } from './text-color-style-fn';
+import { viewerCustomStyleFn, styleSelectionPredicate } from './text-color-style-fn';
 
 const modalStyleDefaults = {
   content: {
@@ -148,8 +148,8 @@ class App extends Component {
         },
       },
       [TEXT_COLOR_TYPE]: {
-        styleSelectionPredicate: getStyleSelectionPredicate(themeColors),
-        customStyleFn: getViewerCustomStyleFn(themeColors),
+        styleSelectionPredicate,
+        customStyleFn: viewerCustomStyleFn,
       },
     };
 
