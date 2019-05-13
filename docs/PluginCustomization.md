@@ -89,6 +89,8 @@ The `toolbar` setting refers to plugin functionality toolbar. Currently, it expo
 - `onCustomColorCancel`(color) -- should be called when user decides to cancel the custom color selection (e.g. `CustomColorPickerDialog` Cancel button)
 - all the `ColorPicker` props (`t`, `isMobile`, `theme`, ...etc)
 
+**Note**: `selectionColor` prop is deprecated, please override the `.colorPicker_button_selected::after` class `border-color` rule (theme).
+
 
 ## References and Examples
 

@@ -19,8 +19,10 @@
   - [#301](https://github.com/wix-incubator/rich-content/pull/301) plugin config now accepts `colorScheme` mapping instead of `getPaletteColors` and converter functions
 ### :bug: Bug Fix
 - `text-color`
-  - missing `colorScheme` won't crash
-  - viewer decorator does not override other inline styles
+  - [#301](https://github.com/wix-incubator/rich-content/pull/301) viewer decorator does not override other inline styles
+  - [#300](https://github.com/wix-incubator/rich-content/pull/300) missing `getPaletteColors` won't crash
+  - [#300](https://github.com/wix-incubator/rich-content/pull/300) pop-up is opened as internal modal rather external one
+  - [#300](https://github.com/wix-incubator/rich-content/pull/300) pop-up is themable
 - `common`
   - [86b94cc](https://github.com/wix-incubator/rich-content/commit/86b94cc19fac3fe6d04fe348735de7538992b1ac)&nbsp;&nbsp;`<Loader />`&nbsp;&nbsp;component supports getting theme from context or props (external modals)
 - `editor`

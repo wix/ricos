@@ -2,11 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Modifier, EditorState } from '@wix/draft-js';
 import { ColorPicker, getSelectionStyles } from 'wix-rich-content-common';
-import {
-  DEFAULT_COLOR,
-  DEFAULT_SELECTION_COLOR,
-  DEFAULT_STYLE_SELECTION_PREDICATE,
-} from '../constants';
+import { DEFAULT_COLOR, DEFAULT_STYLE_SELECTION_PREDICATE } from '../constants';
 
 import {
   extractColor,
@@ -48,7 +44,7 @@ export default class TextColorPanel extends Component {
         currentSchemeColor: color,
       });
     }
-    this.props.helpers.closeModal();
+    this.props.closeModal();
   }
 
   applyInlineColorStyle(color) {
@@ -87,7 +83,6 @@ export default class TextColorPanel extends Component {
         schemeAttributes={schemeAttributes}
         schemeColor={this.state.currentSchemeColor}
         color={this.state.currentColor}
-        selectionColor={settings.selectionColor || DEFAULT_SELECTION_COLOR}
         palette={palette.slice(0, 6)}
         userColors={this.state.userColors.slice(0, 17)}
         onColorAdded={this.onColorAdded}
@@ -113,12 +108,11 @@ TextColorPanel.propTypes = {
     onColorAdded: PropTypes.func.isRequired,
     colorScheme: PropTypes.object,
     getUserColors: PropTypes.func,
-    selectionColor: PropTypes.string,
     onCustomPickerToggle: PropTypes.func,
     onCustomColorPicked: PropTypes.func,
     styleSelectionPredicate: PropTypes.func,
   }).isRequired,
   setKeepToolbarOpen: PropTypes.func,
-  helpers: PropTypes.object.isRequired,
+  closeModal: PropTypes.func.isRequired,
   isMobile: PropTypes.bool.isRequired,
 };

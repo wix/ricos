@@ -41,6 +41,7 @@ import 'wix-rich-content-plugin-sound-cloud/dist/styles.min.css';
 import 'wix-rich-content-plugin-giphy/dist/styles.min.css';
 import 'wix-rich-content-plugin-map/dist/styles.min.css';
 import 'wix-rich-content-plugin-file-upload/dist/styles.min.css';
+import 'wix-rich-content-plugin-text-color/dist/styles.min.css';
 
 import {
   getPaletteColors,
@@ -193,7 +194,7 @@ export const config = {
     defaultSpacing: {
       'line-height': '1.5',
       'padding-top': '2px',
-      'padding-bottom': '3px'
+      'padding-bottom': '3px',
     },
     onUpdate: spacing => console.log(LINE_SPACING_TYPE, spacing),
   },
@@ -290,7 +291,6 @@ export const config = {
     styleSelectionPredicate: getStyleSelectionPredicate(themeColors),
     colorToStyle: getColorToStyle(themeColors),
     styleToColor: getStyleToColor(themeColors),
-    selectionColor: 'fuchsia',
     onColorAdded: color => (userColors = [color, ...userColors]),
     getUserColors: () => userColors,
     customStyleFn: getCustomStyleFn(themeColors),
