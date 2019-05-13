@@ -1,0 +1,25 @@
+{
+  "definitions": {},
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "color-scheme",
+  "type": "object",
+  "title": "color-scheme schema",
+  "required": ["color", "index"],
+  "properties": {
+    "color": {
+      "$id": "#/properties/color",
+      "type": "string",
+      "title": "hex color",
+      "default": "",
+      "examples": ["#fff", "#bada55"],
+      "pattern": "^#[0-9a-f]{3}(?:[0-9a-f]{3})?$"
+    },
+    "index": {
+      "$id": "#/properties/index",
+      "type": "integer",
+      "title": "color index",
+      "default": 0,
+      "examples": [0]
+    }
+  }
+}
