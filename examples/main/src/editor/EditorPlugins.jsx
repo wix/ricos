@@ -43,13 +43,7 @@ import 'wix-rich-content-plugin-map/dist/styles.min.css';
 import 'wix-rich-content-plugin-file-upload/dist/styles.min.css';
 import 'wix-rich-content-plugin-text-color/dist/styles.min.css';
 
-import {
-  getPaletteColors,
-  getCustomStyleFn,
-  getColorToStyle,
-  getStyleToColor,
-  getStyleSelectionPredicate,
-} from '../text-color-style-fn';
+import { customStyleFn, styleSelectionPredicate, colorScheme } from '../text-color-style-fn';
 
 // import { TOOLBARS, BUTTONS, DISPLAY_MODE } from 'wix-rich-content-common';
 // import InlineToolbarDecoration from './Components/InlineToolbarDecoration';
@@ -287,13 +281,11 @@ export const config = {
     // },
   },
   [TEXT_COLOR_TYPE]: {
-    getPaletteColors: () => getPaletteColors(themeColors),
-    styleSelectionPredicate: getStyleSelectionPredicate(themeColors),
-    colorToStyle: getColorToStyle(themeColors),
-    styleToColor: getStyleToColor(themeColors),
+    colorScheme,
+    styleSelectionPredicate,
+    customStyleFn,
     onColorAdded: color => (userColors = [color, ...userColors]),
     getUserColors: () => userColors,
-    customStyleFn: getCustomStyleFn(themeColors),
   },
   uiSettings,
   getToolbarSettings: ({ pluginButtons, textButtons }) => [

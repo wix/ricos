@@ -1,4 +1,3 @@
-import head from 'lodash/head';
 import { isHexColor } from 'wix-rich-content-common';
 
 export const colorScheme = {
