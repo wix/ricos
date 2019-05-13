@@ -147,7 +147,8 @@ class ItemsList extends PureComponent {
         full: image.urls.full,
         width: image.width,
         height: image.height,
-        username: image.user.first_name + ' ' + image.user.last_name,
+        username:
+          image.user.first_name + ' ' + (image.user.last_name === null ? '' : image.user.last_name),
         theme: this.props.theme,
       });
     });
