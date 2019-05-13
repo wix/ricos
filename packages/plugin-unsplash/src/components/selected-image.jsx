@@ -37,10 +37,10 @@ class SelectedImage extends Component {
         tabIndex={0}
         onKeyPress={() => null}
         style={{
-          height: photo.height,
-          width: photo.width - 12,
-          paddingTop: photo.height - 26 + 'px',
-          paddingLeft: '12px',
+          height: this.isMobile ? 32 : 26,
+          width: this.isMobile ? photo.width - 20 : photo.width - 12,
+          paddingTop: this.isMobile ? photo.height - 32 + 'px' : photo.height - 26 + 'px',
+          paddingLeft: this.isMobile ? '20px' : '12px',
           backgroundColor: 'rgba(0, 0, 0,' + opacity + ')',
         }}
         onClick={e => onClick(e, { index, photo })}
