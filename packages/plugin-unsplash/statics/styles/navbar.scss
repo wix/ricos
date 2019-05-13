@@ -1,0 +1,33 @@
+.navbar_container {
+  background-color: #9a87ce;
+  width: 100vw;
+  height: 50px;
+  overflow: hidden;
+}
+.back_arrow_button {
+  background: inherit;
+  border: solid #fff;
+  border-width: 0 1px 1px 0;
+  display: inline-block;
+  height: 8px;
+  width: 8px;
+  transform: rotate(135deg);
+}
+.back_arrow_container {
+  width: 28px;
+  height: 37px;
+  float: left;
+  padding-top: 13px;
+  padding-left: 22px;
+}
+
+.navbar_title {
+  width: calc(100vw - 100px);
+  height: 50px;
+  float: left;
+  font-size: 16px;
+  letter-spacing: 0.04em;
+  text-align: center;
+  color: #ffffff;
+  padding-top: 14px;
+}
