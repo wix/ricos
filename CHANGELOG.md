@@ -17,9 +17,9 @@
   - [#294](https://github.com/wix-incubator/rich-content/pull/294) plugin config now accepts `onCustomPickerToggle`, `onCustomColorPicked` handlers
 ### :bug: Bug Fix
 - `text-color`
-  - missing `getPaletteColors` won't crash
-  - pop-up is opened as internal modal rather external one
-  - pop-up is themable
+  - [#300](https://github.com/wix-incubator/rich-content/pull/300) missing `getPaletteColors` won't crash
+  - [#300](https://github.com/wix-incubator/rich-content/pull/300) pop-up is opened as internal modal rather external one
+  - [#300](https://github.com/wix-incubator/rich-content/pull/300) pop-up is themable
 - `common`
   - [86b94cc](https://github.com/wix-incubator/rich-content/commit/86b94cc19fac3fe6d04fe348735de7538992b1ac)&nbsp;&nbsp;`<Loader />`&nbsp;&nbsp;component supports getting theme from context or props (external modals)
 - `editor`
