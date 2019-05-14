@@ -2,25 +2,30 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Modifier, EditorState } from '@wix/draft-js';
 import { ColorPicker, getSelectionStyles } from 'wix-rich-content-common';
+import { DEFAULT_COLOR, DEFAULT_STYLE_SELECTION_PREDICATE } from '../constants';
+
 import {
-  DEFAULT_PALETTE,
-  DEFAULT_COLOR,
-  DEFAULT_SELECTION_COLOR,
-  DEFAULT_COLOR_TO_STYLE,
-  DEFAULT_STYLE_TO_COLOR,
-  DEFAULT_STYLE_SELECTION_PREDICATE,
-} from '../constants';
+  extractColor,
+  extractPalette,
+  extractSchemeAttributes,
+  validateColorScheme,
+} from '../color-scheme-utils';
 
 export default class TextColorPanel extends Component {
   constructor(props) {
     super(props);
     const styleSelectionPredicate =
       props.settings.styleSelectionPredicate || DEFAULT_STYLE_SELECTION_PREDICATE;
-    const styleToColor = props.settings.styleToColor || DEFAULT_STYLE_TO_COLOR;
+    if (props.settings.colorScheme && !validateColorScheme(props.settings.colorScheme)) {
+      console.error('Error: colorScheme is not valid'); // eslint-disable-line no-console
+    }
     const currentColors = getSelectionStyles(styleSelectionPredicate, props.editorState);
     this.state = {
       currentColor:
-        currentColors.length > 0 ? styleToColor(currentColors[0]).toUpperCase() : DEFAULT_COLOR,
+        currentColors.length > 0
+          ? extractColor(props.settings.colorScheme, currentColors[0])
+          : DEFAULT_COLOR,
+      currentSchemeColor: currentColors[0],
       userColors: props.settings.getUserColors() || [],
     };
     this.setColor = this.setColor.bind(this);
@@ -32,15 +37,14 @@ export default class TextColorPanel extends Component {
   }
 
   setColor(color) {
-    const colorToStyle = this.props.settings.colorToStyle || DEFAULT_COLOR_TO_STYLE;
-    const style = colorToStyle(color);
     if (color !== this.state.currentColor) {
-      this.applyInlineColorStyle(style);
+      this.applyInlineColorStyle(color);
       this.setState({
-        currentColor: color,
+        currentColor: extractColor(this.props.settings.colorScheme, color),
+        currentSchemeColor: color,
       });
     }
-    this.props.helpers.closeModal();
+    this.props.closeModal();
   }
 
   applyInlineColorStyle(color) {
@@ -70,12 +74,15 @@ export default class TextColorPanel extends Component {
 
   render() {
     const { theme, settings, t, setKeepToolbarOpen, isMobile } = this.props;
-    const palette = settings.getPaletteColors() || DEFAULT_PALETTE;
+    const { colorScheme } = settings;
+    const palette = extractPalette(colorScheme);
+    const schemeAttributes = extractSchemeAttributes(colorScheme);
     const { onCustomPickerToggle, onCustomColorPicked } = settings;
     return (
       <ColorPicker
+        schemeAttributes={schemeAttributes}
+        schemeColor={this.state.currentSchemeColor}
         color={this.state.currentColor}
-        selectionColor={settings.selectionColor || DEFAULT_SELECTION_COLOR}
         palette={palette.slice(0, 6)}
         userColors={this.state.userColors.slice(0, 17)}
         onColorAdded={this.onColorAdded}
@@ -99,16 +106,13 @@ TextColorPanel.propTypes = {
   uiSettings: PropTypes.object,
   settings: PropTypes.shape({
     onColorAdded: PropTypes.func.isRequired,
-    getPaletteColors: PropTypes.func.isRequired,
+    colorScheme: PropTypes.object,
     getUserColors: PropTypes.func,
-    selectionColor: PropTypes.string,
     onCustomPickerToggle: PropTypes.func,
     onCustomColorPicked: PropTypes.func,
     styleSelectionPredicate: PropTypes.func,
-    colorToStyle: PropTypes.func,
-    styleToColor: PropTypes.func,
   }).isRequired,
   setKeepToolbarOpen: PropTypes.func,
-  helpers: PropTypes.object.isRequired,
+  closeModal: PropTypes.func.isRequired,
   isMobile: PropTypes.bool.isRequired,
 };

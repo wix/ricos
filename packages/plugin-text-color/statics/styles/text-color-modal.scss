@@ -1,0 +1,45 @@
+$PANEL_WIDTH: 216px;
+$PANEL_HEIGHT: 116px;
+$PANEL_MAX_WIDTH: 360px;
+
+.textColorModal {
+  display: inline-table;
+  min-height: $PANEL_HEIGHT;
+  height: auto;
+  position: absolute;
+  border-radius: 6px;
+  border: solid 1px #ededed;
+  margin: 0px;
+  min-width: $PANEL_WIDTH;
+  max-width: $PANEL_MAX_WIDTH;
+  width: auto;
+  background: white;
+}
+
+.textColorModal_mobile {
+  display: inline-table;
+  position: fixed;
+  box-shadow: 4px 0 4px 0 rgba(0, 0, 0, 0.1), 0 0 8px 0 rgba(0, 0, 0, 0.1);
+  margin: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  top: unset;
+  transform: unset;
+  width: 100%;
+  z-index: 8;
+  &:focus {
+    box-shadow: 4px 0 4px 0 rgba(0, 0, 0, 0.1), 0 0 8px 0 rgba(0, 0, 0, 0.1);
+  }
+}
+
+.textColorModalOverlay,
+.textColorModalOverlay_mobile {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: transparent;
+  z-index: 8;
+}

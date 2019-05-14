@@ -1,78 +1,39 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { getModalStyles, InlineToolbarButton, getSelectionStyles } from 'wix-rich-content-common';
+import classNames from 'classnames';
+import Modal from 'react-modal';
+import { InlineToolbarButton, getSelectionStyles, mergeStyles } from 'wix-rich-content-common';
 import TextColorIcon from './TextColorIcon';
 import { TEXT_COLOR_TYPE } from '../types';
-import { MODAL_STYLES, PANEL_WIDTH, DEFAULT_STYLE_SELECTION_PREDICATE } from '../constants';
-import { Modals } from '../modals';
+import TextColorPanel from './TextColorPanel';
+import { PANEL_WIDTH, DEFAULT_STYLE_SELECTION_PREDICATE } from '../constants';
+import styles from '../../statics/styles/text-color-modal.scss';
 
 export default class TextColorButton extends Component {
   constructor(props) {
     super(props);
     this.buttonRef = React.createRef();
+    this.state = { showPanel: false };
+    this.styles = mergeStyles({ styles, theme: props.theme });
   }
 
-  showTextColorPanel = () => {
-    const {
-      getEditorState,
-      setEditorState,
-      theme,
-      isMobile,
-      helpers,
-      keyName,
-      t,
-      uiSettings,
-      config,
-    } = this.props;
-    const settings = config[TEXT_COLOR_TYPE];
+  static getModalParent() {
+    return document.querySelector('.DraftEditor-root').parentNode;
+  }
 
-    const styles = isMobile ? MODAL_STYLES.mobile : MODAL_STYLES.desktop;
-
-    const modalStyles = getModalStyles({
-      fullScreen: false,
-      customStyles: {
-        content: { ...styles.content, ...this.calculatePanelLocation(this.buttonRef.current) },
-        overlay: styles.overlay,
-      },
-    });
-    if (helpers && helpers.openModal) {
-      if (!isMobile) {
-        this.props.setKeepOpen(true);
-      }
-      const modalProps = {
-        helpers,
-        modalStyles,
-        isMobile,
-        editorState: getEditorState(),
-        setEditorState,
-        t,
-        theme,
-        modalName: Modals.TEXT_COLOR_PICKER,
-        hidePopup: helpers.closeModal,
-        uiSettings,
-        settings,
-        setKeepToolbarOpen: this.props.setKeepOpen,
-      };
-      helpers.openModal(modalProps);
-    } else {
-      //eslint-disable-next-line no-console
-      console.error(
-        'helpers.openModal function is not defined for toolbar button with keyName ' + keyName
-      );
+  openPanel = () => {
+    const { isMobile, setKeepOpen } = this.props;
+    if (!isMobile) {
+      setKeepOpen && setKeepOpen(true);
     }
+    const { bottom, left } = this.buttonRef.current.getBoundingClientRect();
+    const panelLeft = left - PANEL_WIDTH / 2;
+    this.setState({ isPanelOpen: true, panelLeft, panelTop: bottom });
   };
 
-  calculatePanelLocation = buttonRef => {
-    if (this.props.isMobile) {
-      return {};
-    }
-    if (!buttonRef) {
-      return {};
-    }
-    const { bottom, left } = buttonRef.getBoundingClientRect();
-    const panelTop = bottom + 60;
-    const panelLeft = left - PANEL_WIDTH / 2;
-    return { top: panelTop, left: panelLeft };
+  closePanel = () => {
+    this.setState({ isPanelOpen: false });
+    this.props.setKeepOpen(false);
   };
 
   get isActive() {
@@ -83,7 +44,19 @@ export default class TextColorButton extends Component {
   }
 
   render() {
-    const { theme, isMobile, t, tabIndex } = this.props;
+    const {
+      theme,
+      isMobile,
+      t,
+      tabIndex,
+      setEditorState,
+      getEditorState,
+      setKeepOpen,
+      config,
+      uiSettings,
+    } = this.props;
+    const settings = config[TEXT_COLOR_TYPE];
+    const { isPanelOpen, panelTop, panelLeft } = this.state;
     const tooltip = t('TextColorButton_Tooltip');
     const buttonStyles = {
       button: theme.inlineToolbarButton,
@@ -91,9 +64,14 @@ export default class TextColorButton extends Component {
       icon: theme.inlineToolbarButton_icon,
       active: theme.inlineToolbarButton_active,
     };
+
+    const modalStyle = {
+      content: isMobile ? { top: 'unset', left: 0 } : { top: panelTop, left: panelLeft },
+    };
+
     return (
       <InlineToolbarButton
-        onClick={this.showTextColorPanel}
+        onClick={this.openPanel}
         isActive={this.isActive}
         theme={{ ...theme, ...buttonStyles }}
         isMobile={isMobile}
@@ -101,7 +79,35 @@ export default class TextColorButton extends Component {
         tabIndex={tabIndex}
         icon={TextColorIcon}
         forwardRef={this.buttonRef}
-      />
+      >
+        <Modal
+          onRequestClose={this.closePanel}
+          isOpen={isPanelOpen}
+          parentSelector={TextColorButton.getModalParent}
+          className={classNames({
+            [this.styles.textColorModal]: !isMobile,
+            [this.styles.textColorModal_mobile]: isMobile,
+          })}
+          overlayClassName={classNames({
+            [this.styles.textColorModalOverlay]: !isMobile,
+            [this.styles.textColorModalOverlay_mobile]: isMobile,
+          })}
+          style={modalStyle}
+          ariaHideApp={false}
+        >
+          <TextColorPanel
+            t={t}
+            isMobile={isMobile}
+            theme={theme}
+            closeModal={this.closePanel}
+            editorState={getEditorState()}
+            setEditorState={setEditorState}
+            settings={settings}
+            uiSettings={uiSettings}
+            setKeepToolbarOpen={setKeepOpen}
+          />
+        </Modal>
+      </InlineToolbarButton>
     );
   }
 }
