@@ -84,7 +84,7 @@ class ColorPicker extends PureComponent {
     return <hr className={styles.colorPicker_separator} />;
   }
 
-  renderAddColorButton() {
+  renderAddColorButton(style) {
     const { styles } = this;
     return (
       <div key={`add_color_button_${this.id}`} className={styles.colorPicker_add_color_button}>
@@ -98,15 +98,27 @@ class ColorPicker extends PureComponent {
           className={styles.colorPicker_add_color_label}
           htmlFor={`add_color_button_${this.id}`}
         >
-          <AddColorIcon style={{ transform: 'scale(0.72)' }} />
+          <AddColorIcon style={{ transform: 'scale(0.72)', ...style }} />
         </label>
+      </div>
+    );
+  }
+
+  renderOneRowColors() {
+    return (
+      <div className={this.styles.colorPicker_palette}>
+        <div className={this.styles.colorPicker_buttons_container}>
+          {this.renderAddColorButton(this.props.addButtonStyle)}
+          {this.renderColorButtons(this.props.palette, this.props.schemeAttributes)}{' '}
+          {this.renderColorButtons(this.props.userColors)}
+        </div>
       </div>
     );
   }
 
   render() {
     const { styles } = this;
-    const { t, isMobile, theme } = this.props;
+    const { t, isMobile, theme, isOneRow, addButtonStyle } = this.props;
     return (
       <div className={styles.colorPicker}>
         {this.state.isCustomColorPickerOpened ? (
@@ -119,6 +131,8 @@ class ColorPicker extends PureComponent {
             isMobile,
             theme,
           })
+        ) : isOneRow ? (
+          this.renderOneRowColors()
         ) : (
           <div className={styles.colorPicker_palette}>
             <div className={styles.colorPicker_buttons_container}>
@@ -127,7 +141,7 @@ class ColorPicker extends PureComponent {
             {this.renderSeparator()}
             <div className={styles.colorPicker_buttons_container}>
               {this.renderColorButtons(this.props.userColors)}
-              {this.renderAddColorButton()}
+              {this.renderAddColorButton(addButtonStyle)}
             </div>
           </div>
         )}
@@ -137,7 +151,6 @@ class ColorPicker extends PureComponent {
 }
 
 ColorPicker.propTypes = {
-  userColors: PropTypes.array,
   theme: PropTypes.object.isRequired,
   color: PropTypes.string.isRequired,
   onChange: PropTypes.func,
@@ -150,6 +163,8 @@ ColorPicker.propTypes = {
   onCustomPickerToggle: PropTypes.func,
   onCustomColorPicked: PropTypes.func,
   isMobile: PropTypes.bool,
+  isOneRow: PropTypes.bool,
+  addButtonStyle: PropTypes.object,
 };
 
 const DefaultColorPicker = ({
@@ -181,6 +196,8 @@ DefaultColorPicker.propTypes = {
 ColorPicker.defaultProps = {
   onCustomPickerToggle: props => <DefaultColorPicker {...props} />,
   onCustomColorPicked: () => {},
+  isOneRow: false,
+  addButtonStyle: {},
 };
 
 export default ColorPicker;
