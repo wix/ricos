@@ -36,8 +36,7 @@
   display: flex;
   align-items: center;
   margin-top: 1px;
-  padding: 18px 30px 20px;
-  border-bottom: 1px solid #ededed;
+  padding: 18px 30px 21px;
   height: auto;
   box-sizing: border-box;
 }
@@ -68,7 +67,6 @@
 }
 
 .tabs_headers_option {
-  border-bottom: 1px solid #ededed;
   padding-bottom: 0px;
   padding-top: 0px;
   font-size: 16px;
@@ -94,7 +92,9 @@
   top: 2px;
   left: 130px;
 }
-
+.tabs_headers_option + .tabs_headers_option {
+  border-left: 0;
+}
 .modal_footer {
   padding-right: 29px;
   padding-left: 30px;
@@ -110,7 +110,7 @@
 }
 
 .tabs_panel {
-  height: calc(100vh - 223px);
+  height: calc(100vh - 242px);
   overflow: hidden;
   box-sizing: border-box;
   padding: 0px 30px 0px;
@@ -138,11 +138,28 @@
 }
 
 .settingsPanel_save {
-  width: 78px;
-  height: 40px;
+  width: 165px;
+  height: 42px;
+}
+.settingsPanel_cancel + .settingsPanel_save {
+  margin-left: 30px;
 }
 
 .settingsPanel_cancel {
-  width: 90px;
-  height: 40px;
+  width: 165px;
+  height: 42px;
+}
+.button_primary{
+  font-family: Avenir;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #ffffff;
+  background: #0261ff;
+}
+.button_secondary{
+  font-family: Avenir;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #0261ff;
+  border: 1px solid #0261ff;
 }
