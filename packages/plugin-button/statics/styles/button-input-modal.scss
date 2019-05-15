@@ -1,5 +1,5 @@
-@import '~wix-rich-content-common/dist/statics/styles/mixins';
-@import '~wix-rich-content-common/dist/statics/styles/palette';
+@import "~wix-rich-content-common/dist/statics/styles/mixins";
+@import "~wix-rich-content-common/dist/statics/styles/palette";
 
 .container {
   @include phone {
@@ -36,18 +36,18 @@
   display: flex;
   align-items: center;
   margin-top: 1px;
-  padding: 22px 30px 18px;
+  padding: 18px 30px 20px;
   border-bottom: 1px solid #ededed;
-  height: 80px;
+  height: auto;
   box-sizing: border-box;
 }
 
 .header_text {
-  font-size: 16px;
+  font-size: 20px;
+  font-family: Avenir;
   width: 100%;
   margin-top: 13px;
   margin-bottom: 10px;
-  margin-left: -1px;
   color: #333333;
   @include phone {
     margin: 11px -1px 0;
@@ -71,10 +71,13 @@
   border-bottom: 1px solid #ededed;
   padding-bottom: 0px;
   padding-top: 0px;
+  font-size: 16px;
+  font-weight: normal;
+  font-family: Avenir;
 }
 .tabs_headers {
   border-bottom: none;
-  height: 42px;
+  height: 52px;
 }
 .tabs_headers_option_selected {
   border-bottom: solid 3px #0261ff;
@@ -88,8 +91,8 @@
 
 .errorIcon {
   position: absolute;
-  top: -1px;
-  left: 123px;
+  top: 2px;
+  left: 130px;
 }
 
 .modal_footer {
@@ -115,7 +118,7 @@
 }
 
 .tabLabel {
-  margin-top: 12px;
+  margin-top: 15px;
 }
 
 .scrollbar_thumb {
