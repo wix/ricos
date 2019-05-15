@@ -20,8 +20,9 @@ class ColorToggleComponent extends PureComponent {
   };
 
   render() {
+    const { marginBottom } = this.props;
     return (
-      <div className={this.styles.colorPicker}>
+      <div style={{ marginBottom }} className={this.styles.colorPicker}>
         <div className={this.styles.colorPicker_label}>{this.props.children}</div>
         <div className={this.styles.colorPicker_picker}>
           <button
@@ -41,6 +42,7 @@ ColorToggleComponent.propTypes = {
   color: PropTypes.string,
   index: PropTypes.number.isRequired,
   toggle: PropTypes.func.isRequired,
+  marginBottom: PropTypes.string,
 };
 
 export default ColorToggleComponent;

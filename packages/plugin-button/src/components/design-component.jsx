@@ -159,6 +159,14 @@ class DesignComponent extends PureComponent {
     }
   };
 
+  marginBottom(index) {
+    return !this.props.isMobile &&
+      this.state.colorToggle.index === index &&
+      this.state.colorToggle.isOpened
+      ? '7px'
+      : '24px';
+  }
+
   render() {
     const styles = this.styles;
     const {
@@ -169,7 +177,13 @@ class DesignComponent extends PureComponent {
       selectionBorderColor,
       selectionTextColor,
       palette,
+      isMobile,
     } = this.props;
+    const addButtonStyle = {
+      color: '#000',
+      width: '27px',
+      height: '27px',
+    };
     const buttonSampleList = this.presetStyle.map((style, i) => {
       const active = i === this.state.activeButton;
       return (
@@ -243,19 +257,23 @@ class DesignComponent extends PureComponent {
                 theme={theme}
                 color={this.state.textColor}
                 index={0}
+                isMobile={isMobile}
+                marginBottom={this.marginBottom(0)}
                 toggle={this.onToggled.bind(this)}
               >
                 {t('ButtonModal_Text_Color')}
               </ColorToggleComponent>
               {this.state.colorToggle.index === 0 && this.state.colorToggle.isOpened && (
                 <ColorPicker
-                  key="0000"
                   color={designObj.textColor}
                   selectionColor={selectionTextColor || '#FEFDFD'}
                   palette={palette.slice(0, 7) || DEFAULT_PALETTE}
                   userColors={this.state.textCustomcolors.slice(0, 17)}
                   onColorAdded={this.onTextcolorAdded}
                   theme={this.styles}
+                  isOneRow
+                  isMobile={isMobile}
+                  addButtonStyle={addButtonStyle}
                   onChange={this.onTextColorChange.bind(this)}
                   t={t}
                 />
@@ -264,19 +282,23 @@ class DesignComponent extends PureComponent {
                 theme={theme}
                 color={this.state.borderColor}
                 index={1}
+                isMobile={isMobile}
+                marginBottom={this.marginBottom(1)}
                 toggle={this.onToggled.bind(this)}
               >
                 {t('ButtonModal_Border_Color')}
               </ColorToggleComponent>
               {this.state.colorToggle.index === 1 && this.state.colorToggle.isOpened && (
                 <ColorPicker
-                  key="1111"
                   color={designObj.borderColor}
                   selectionColor={selectionBorderColor || '#FEFDFD'}
                   palette={palette.slice(0, 7) || DEFAULT_PALETTE}
                   userColors={this.state.borderCustomcolors.slice(0, 17)}
                   onColorAdded={this.onBordercolorAdded}
                   theme={this.styles}
+                  isOneRow
+                  isMobile={isMobile}
+                  addButtonStyle={addButtonStyle}
                   onChange={this.onBorderColorChange.bind(this)}
                   t={t}
                 />
@@ -286,19 +308,23 @@ class DesignComponent extends PureComponent {
                 theme={theme}
                 color={this.state.backgroundColor}
                 index={2}
+                isMobile={isMobile}
+                marginBottom={this.marginBottom(2)}
                 toggle={this.onToggled.bind(this)}
               >
                 {t('ButtonModal_Background_Color')}
               </ColorToggleComponent>
               {this.state.colorToggle.index === 2 && this.state.colorToggle.isOpened && (
                 <ColorPicker
-                  key="2222"
                   color={designObj.backgroundColor}
                   selectionColor={selectionBackgroundColor}
                   palette={palette.slice(0, 7) || DEFAULT_PALETTE}
                   userColors={this.state.backgroundCustomcolors.slice(0, 17)}
                   onColorAdded={this.onBackgroundcolorAdded}
                   theme={this.styles}
+                  isOneRow
+                  isMobile={isMobile}
+                  addButtonStyle={addButtonStyle}
                   onChange={this.onBackgroundColorChange.bind(this)}
                   t={t}
                 />
@@ -325,6 +351,7 @@ DesignComponent.propTypes = {
   selectionBorderColor: PropTypes.string,
   selectionTextColor: PropTypes.string,
   palette: PropTypes.arrayOf(PropTypes.string),
+  isMobile: PropTypes.bool,
 };
 
 export default DesignComponent;
