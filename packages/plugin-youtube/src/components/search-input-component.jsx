@@ -84,10 +84,15 @@ class SearchInputComponent extends Component {
     return (
       <div className={this.styles.search_input_container}>
         {textInputValue && (
-          <SearchCancelIcon
+          <div
+            onKeyPress={this.handleOnKeyPressed}
             onClick={this.onCancelClicked}
             className={this.styles.cancel_search_icon}
-          />
+            role="button"
+            tabIndex={-1}
+          >
+            <SearchCancelIcon />
+          </div>
         )}
         {!invalidYoutubeURL ? (
           <SearchIcon className={this.styles.search_icon_container} />

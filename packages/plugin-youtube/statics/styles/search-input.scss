@@ -38,13 +38,16 @@
 
 .cancel_search_icon {
   position: absolute;
-  top: 34px;
+  top: 26px;
   right: 139px;
   z-index: 1;
   cursor: pointer;
   @include phone {
-    right: 20px;
-    top: 28px;
+    height: 24px;
+    width: 24px;
+    text-align: center;
+    right: 13px;
+    top: 20px;
   }
 }
 
