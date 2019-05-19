@@ -13,14 +13,15 @@
 
 .colorPicker_label {
   position: absolute;
-  color: #333333;
+  color: #000;
   font-size: 16px;
   font-weight: 300;
   line-height: 18px;
   top: calc(50% - 9px);
   left: 0px;
   @include phone {
-    top: calc(50% - 12px);
+    top: calc(50% - 18px);
+    font-family: Avenir;
   }
 }
 .colorPicker_picker {

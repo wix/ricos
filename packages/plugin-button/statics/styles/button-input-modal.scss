@@ -3,15 +3,15 @@
 
 .container {
   @include phone {
-    padding: 6px 20px;
-    padding-bottom: 4px;
+    padding: 33px 20px;
+    padding-bottom: 10px;
   }
 }
 
 .design_component_container {
   @include phone {
-    padding-top: 7px;
-    padding-bottom: 0px;
+    padding-top: 24px;
+    padding-bottom: 0;
   }
 }
 
@@ -20,7 +20,7 @@
 }
 
 .separator {
-  border-top: solid 1px rgba(51, 51, 51, 0.2);
+  border-top: solid 1px #ccc;
 }
 
 .scroll {
@@ -49,8 +49,11 @@
   margin-bottom: 10px;
   color: #333333;
   @include phone {
-    margin: 11px -1px 0;
-    font-size: 18px;
+    font-family: Avenir;
+    font-size: 20px;
+    line-height: 1.4;
+    color: #000000;
+    margin-top: 0px;
   }
 }
 
@@ -62,7 +65,8 @@
     padding-left: 20px;
     margin: 9px 0px 0px;
     padding-bottom: 8px;
-    font-size: 18px;
+    font-family: Avenir;
+    font-size: 16px;
   }
 }
 
@@ -145,7 +149,7 @@
   margin-left: 30px;
 }
 
-.settingsPanel_footer{
+.settingsPanel_footer {
   border-top: 0;
 }
 
@@ -153,14 +157,14 @@
   width: 165px;
   height: 42px;
 }
-.button_primary{
+.button_primary {
   font-family: Avenir;
   font-size: 16px;
   line-height: 1.5;
   color: #ffffff;
   background: #0261ff;
 }
-.button_secondary{
+.button_secondary {
   font-family: Avenir;
   font-size: 16px;
   line-height: 1.5;

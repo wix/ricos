@@ -159,11 +159,15 @@ class DesignComponent extends PureComponent {
     }
   };
 
-  marginBottom(index) {
-    return !this.props.isMobile &&
-      this.state.colorToggle.index === index &&
-      this.state.colorToggle.isOpened
+  colorPickerMarginBottom(index) {
+    const { isMobile } = this.props;
+    const { colorToggle } = this.state;
+    return !isMobile && colorToggle.index === index && colorToggle.isOpened
       ? '7px'
+      : isMobile
+      ? colorToggle.index === index && colorToggle.isOpened
+        ? '-4px'
+        : '6px'
       : '24px';
   }
 
@@ -258,7 +262,7 @@ class DesignComponent extends PureComponent {
                 color={this.state.textColor}
                 index={0}
                 isMobile={isMobile}
-                marginBottom={this.marginBottom(0)}
+                marginBottom={this.colorPickerMarginBottom(0)}
                 toggle={this.onToggled.bind(this)}
               >
                 {t('ButtonModal_Text_Color')}
@@ -283,7 +287,7 @@ class DesignComponent extends PureComponent {
                 color={this.state.borderColor}
                 index={1}
                 isMobile={isMobile}
-                marginBottom={this.marginBottom(1)}
+                marginBottom={this.colorPickerMarginBottom(1)}
                 toggle={this.onToggled.bind(this)}
               >
                 {t('ButtonModal_Border_Color')}
@@ -309,7 +313,7 @@ class DesignComponent extends PureComponent {
                 color={this.state.backgroundColor}
                 index={2}
                 isMobile={isMobile}
-                marginBottom={this.marginBottom(2)}
+                marginBottom={this.colorPickerMarginBottom(2)}
                 toggle={this.onToggled.bind(this)}
               >
                 {t('ButtonModal_Background_Color')}
