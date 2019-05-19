@@ -29,7 +29,7 @@ export default ({ helpers, t, settings }) => {
           fullScreen: true,
         });
         const { top, left } = buttonRef.getBoundingClientRect();
-        const modalLeft = left - 63;
+        const modalLeft = left - 66;
         const modalTop = top - 386;
         return {
           ...modalStyles,
