@@ -194,7 +194,7 @@ class ItemsListComponent extends Component {
             {loading ? (
               <MDSpinner
                 singleColor="#000"
-                size={18}
+                size={isMobile ? 38 : 18}
                 borderSize={2}
                 className={this.styles.spinner_container}
               />
@@ -206,7 +206,7 @@ class ItemsListComponent extends Component {
                 loader={
                   <MDSpinner
                     singleColor="#000"
-                    size={18}
+                    size={isMobile ? 38 : 18}
                     borderSize={2}
                     className={this.styles.spinner_container}
                     style={{ marginLeft: 'calc(50% - 20px)' }}
