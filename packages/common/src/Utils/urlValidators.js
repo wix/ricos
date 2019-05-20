@@ -19,7 +19,7 @@ export const matchSoundCloudUrl = url => url.match(soundCloudRegex);
 
 export const isValidUrl = url => linkify.test(url);
 
-export const getUrlMatches = text => linkify.match(text);
+export const getUrlMatches = text => linkify.match(text) || [];
 
 export const normalizeUrl = url => (linkify.match(url) || [{}])[0].url;
 

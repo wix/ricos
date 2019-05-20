@@ -9,6 +9,8 @@
 
 ## [Unreleased]
 ### :bug: Bug Fix
+- `link`
+  - [#305](https://github.com/wix-incubator/rich-content/pull/305) auto links now generates link entities instead of decorating them
 - `general`
   - [#308](https://github.com/wix-incubator/rich-content/pull/308) remove 'rollup-plugin-image-files' and switch rollup copy plugin
 - `common`
