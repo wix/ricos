@@ -8,7 +8,6 @@ import {
   WixUtils,
   getUrlMatches,
   ErrorIcon,
-  Tooltip,
 } from 'wix-rich-content-common';
 import styles from '../../statics/styles/search-input.scss';
 import { SearchIcon, SearchCancelIcon } from './../icons';
@@ -23,6 +22,7 @@ class SearchInputComponent extends Component {
       selectedVideoUrl: this.props.selectedVideoUrl,
       buttonText: t('YoutubePlugin_SearchButton_Text'),
       invalidYoutubeURL: false,
+      showTooltip: false,
     };
   }
 
@@ -74,15 +74,30 @@ class SearchInputComponent extends Component {
   onCancelClicked = () => {
     this.setState({ textInputValue: '', invalidYoutubeURL: false });
   };
+  handleHover = () => {
+    this.setState({ showTooltip: true });
+  };
+  handleHoverOff = () => {
+    this.setState({ showTooltip: false });
+  };
+  renderTooptip = () => {
+    return (
+      <div className={this.styles.tooltip_container}>
+        <div className={this.styles.tooltip}>{this.props.t('YoutubePlugin_Url_ErrorTooltip')}</div>
+        <div className={this.styles.arrow_down} />
+      </div>
+    );
+  };
   render() {
-    const { t, theme } = this.props;
-    const { invalidYoutubeURL, textInputValue } = this.state;
+    const { t } = this.props;
+    const { invalidYoutubeURL, textInputValue, showTooltip } = this.state;
     const textInputStyles = invalidYoutubeURL && {
       borderColor: '#f64d43',
       paddingLeft: 32 + 'px',
     };
     return (
       <div className={this.styles.search_input_container}>
+        {showTooltip && this.renderTooptip()}
         {textInputValue && (
           <div
             onKeyPress={this.handleOnKeyPressed}
@@ -97,15 +112,13 @@ class SearchInputComponent extends Component {
         {!invalidYoutubeURL ? (
           <SearchIcon className={this.styles.search_icon_container} />
         ) : (
-          <Tooltip
-            shouldRebuildOnUpdate={() => t('YoutubePlugin_Url_ErrorTooltip')}
-            content={'Invalid URL'}
-            theme={theme}
-            moveBy={{ y: 0 }}
-            type={'error'}
-          >
-            <ErrorIcon width={18} height={18} className={this.styles.error_icon_container} />
-          </Tooltip>
+          <ErrorIcon
+            onMouseEnter={this.handleHover}
+            onMouseLeave={this.handleHoverOff}
+            width={18}
+            height={18}
+            className={this.styles.error_icon_container}
+          />
         )}
         <form
           action="#"
