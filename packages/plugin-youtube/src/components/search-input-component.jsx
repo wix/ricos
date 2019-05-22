@@ -89,7 +89,7 @@ class SearchInputComponent extends Component {
     );
   };
   render() {
-    const { t } = this.props;
+    const { t, isMobile } = this.props;
     const { invalidYoutubeURL, textInputValue, showTooltip } = this.state;
     const textInputStyles = invalidYoutubeURL && {
       borderColor: '#f64d43',
@@ -97,7 +97,7 @@ class SearchInputComponent extends Component {
     };
     return (
       <div className={this.styles.search_input_container}>
-        {showTooltip && this.renderTooptip()}
+        {!isMobile && showTooltip && this.renderTooptip()}
         {textInputValue && (
           <div
             onKeyPress={this.handleOnKeyPressed}
@@ -162,6 +162,7 @@ SearchInputComponent.propTypes = {
   t: PropTypes.func.isRequired,
   onSearchTextBoxFocused: PropTypes.func,
   onSearchTextBoxBlured: PropTypes.func,
+  isMobile: PropTypes.bool.isRequired,
 };
 
 export default SearchInputComponent;

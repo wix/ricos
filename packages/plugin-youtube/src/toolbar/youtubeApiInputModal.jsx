@@ -94,6 +94,7 @@ export default class YoutubeApiInputModal extends Component {
             onKeyPress={this.handelOnKeyPress.bind(this)}
             onSearchTextBoxFocused={this.onSearchTextBoxFocused.bind(this)}
             onSearchTextBoxBlured={this.onSearchTextBoxBlured.bind(this)}
+            isMobile={isMobile}
             {...this.props}
           />
           <ItemsListComponent
