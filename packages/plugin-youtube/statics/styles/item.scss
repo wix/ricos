@@ -9,7 +9,7 @@
   box-sizing: border-box;
   @include phone {
     width: calc(100vw - 32px);
-    margin-bottom: 24px;
+    margin-bottom: 22px;
   }
 }
 
@@ -18,7 +18,7 @@
   max-width: 100%;
   margin-top: 2px;
   @include phone {
-    margin-top: 0px;
+    margin-top: 2px;
     height: 150px;
     width: calc(100vw - 40px);
   }
