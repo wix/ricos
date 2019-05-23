@@ -5,7 +5,7 @@
   margin-right: 11px;
   display: inline-block;
   width: 186px;
-  margin-bottom: 21px;
+  margin-bottom: 19px;
   box-sizing: border-box;
   @include phone {
     width: calc(100vw - 32px);
@@ -16,7 +16,9 @@
 .thumbnail_container {
   height: 100px;
   max-width: 100%;
+  margin-top: 2px;
   @include phone {
+    margin-top: 0px;
     height: 150px;
     width: calc(100vw - 40px);
   }
@@ -32,8 +34,7 @@
   }
 }
 .image:hover {
-  border: solid 2px #9a87ce;
-  box-sizing: border-box;
+  outline: solid 2px #9a87ce;
 }
 
 .description_container {
