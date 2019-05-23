@@ -9,6 +9,8 @@
 
 ## [Unreleased]
 ### :bug: Bug Fix
+- `general`
+  - [#308](https://github.com/wix-incubator/rich-content/pull/308) remove 'rollup-plugin-image-files' and switch rollup copy plugin
 - `common`
   - [98414497](https://github.com/wix-incubator/rich-content/commit/98414497) CustomColorPicker: text input is editable
 - `example`
