@@ -29,7 +29,7 @@ class NavbarComponent extends Component {
   };
 
   render() {
-    const { selectedVideoUrl, isTextBoxFocused } = this.props;
+    const { selectedVideoUrl, isTextBoxFocused, t } = this.props;
     const disableAadd = !selectedVideoUrl || isTextBoxFocused;
     return (
       <div className={this.styles.navbar_container}>
@@ -42,7 +42,7 @@ class NavbarComponent extends Component {
         >
           <div className={this.styles.back_arrow_button} />
         </div>
-        <div className={this.styles.navbar_title}>YouTube Video</div>
+        <div className={this.styles.navbar_title}>{t('YoutubePlugin_navbar_title')}</div>
         <div
           role="button"
           tabIndex={0}
