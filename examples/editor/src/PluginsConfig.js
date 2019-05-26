@@ -12,12 +12,13 @@ import { TEXT_COLOR_TYPE } from 'wix-rich-content-plugin-text-color';
 import { FILE_UPLOAD_TYPE } from 'wix-rich-content-plugin-file-upload';
 import { BUTTON_TYPE } from 'wix-rich-content-plugin-button';
 import { EXTERNAL_MENTIONS_TYPE } from 'wix-rich-content-plugin-mentions';
-import { HEADERS_MARKDOWN_TYPE } from 'wix-rich-content-plugin-headers-markdown';
 import React from 'react';
 import Highlighter from 'react-highlight-words';
 import casual from 'casual-browserify';
 
-import { TOOLBARS, BUTTONS, DISPLAY_MODE } from 'wix-rich-content-common';
+import { customStyleFn, styleSelectionPredicate, colorScheme } from './text-color-style-fn';
+
+import { TOOLBARS, BUTTONS, DISPLAY_MODE, CustomColorPicker } from 'wix-rich-content-common';
 // import InlineToolbarDecoration from './Components/InlineToolbarDecoration';
 // import StaticToolbarDecoration from './Components/StaticToolbarDecoration';
 // import SideToolbarDecoration from './Components/SideToolbarDecoration';
@@ -25,11 +26,11 @@ import { TOOLBARS, BUTTONS, DISPLAY_MODE } from 'wix-rich-content-common';
 
 const themeColors = {
   color1: '#ffffff',
-  color2: '#ed24d9',
-  color3: '#969696',
-  color4: '#ed24d9',
-  color5: '#000000',
-  color6: '#000000',
+  color2: '#303030',
+  color3: '#3a54b4',
+  color4: '#bfad80',
+  color5: '#bf695c',
+  color6: '#f7f7f7',
   color7: '#000000',
   color8: '#9a87ce',
 };
@@ -206,8 +207,9 @@ export default {
     },
   },
   [TEXT_COLOR_TYPE]: {
-    palette: ['#FEFDFD', '#D5D4D4', '#ABCAFF', '#81B0FF', '#0261FF', '#0141AA'],
-    selectionColor: 'fuchsia',
+    colorScheme,
+    styleSelectionPredicate,
+    customStyleFn,
     onColorAdded: color => (userColors = [color, ...userColors]),
     getUserColors: () => userColors,
   },

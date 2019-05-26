@@ -22,7 +22,9 @@ import {
   mentionsTypeMapper,
 } from 'wix-rich-content-plugin-mentions/dist/module.viewer';
 import { fileUploadTypeMapper } from 'wix-rich-content-plugin-file-upload/dist/module.viewer';
-import { TextColorDecorator } from 'wix-rich-content-plugin-text-color';
+import { createTextColorDecorator, TEXT_COLOR_TYPE } from 'wix-rich-content-plugin-text-color';
+
+import { viewerCustomStyleFn, styleSelectionPredicate } from '../text-color-style-fn';
 
 import 'wix-rich-content-common/dist/styles.min.css';
 import 'wix-rich-content-viewer/dist/styles.min.css';
@@ -73,10 +75,13 @@ export const config = {
   },
   [LINK_TYPE]: linkPluginSettings,
   [MENTION_TYPE]: mentionsPluginSettings,
+  [TEXT_COLOR_TYPE]: {
+    styleSelectionPredicate,
+    customStyleFn: viewerCustomStyleFn,
+  },
 };
 
 export const decorators = [
-  TextColorDecorator,
   {
     strategy: LinkParseStrategy,
     component: ({ children, decoratedText, rel, target }) => (
@@ -107,4 +112,5 @@ export const decorators = [
   },
   new CodeBlockDecorator({ theme }),
   createHeadersMarkdownDecorator(config),
+  createTextColorDecorator(config),
 ];

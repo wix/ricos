@@ -49,7 +49,15 @@ module.exports = env => ({
       },
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
+        use: [
+          {
+            loader: 'style-loader',
+            options: {
+              insertAt: 'top',
+            },
+          },
+          'css-loader',
+        ],
       },
       {
         test: /\.scss$/,

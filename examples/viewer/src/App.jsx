@@ -23,7 +23,7 @@ import {
 import { imageTypeMapper } from 'wix-rich-content-plugin-image/dist/module.viewer';
 import { mapTypeMapper, MAP_TYPE } from 'wix-rich-content-plugin-map/dist/module.viewer';
 import { Strategy as HashTagStrategy, Component as HashTag } from 'wix-rich-content-plugin-hashtag';
-import { TextColorDecorator } from 'wix-rich-content-plugin-text-color';
+import { createTextColorDecorator, TEXT_COLOR_TYPE } from 'wix-rich-content-plugin-text-color';
 import {
   createHeadersMarkdownDecorator,
   HEADERS_MARKDOWN_TYPE,
@@ -57,6 +57,8 @@ import 'wix-rich-content-plugin-button/dist/styles.min.css';
 import TestData from './TestData/initial-state';
 import styles from './App.scss';
 import theme from './theme/theme';
+
+import { viewerCustomStyleFn, styleSelectionPredicate } from './text-color-style-fn';
 
 const modalStyleDefaults = {
   content: {
@@ -134,10 +136,13 @@ class App extends Component {
           isDraggingAllowed: true,
         },
       },
+      [TEXT_COLOR_TYPE]: {
+        styleSelectionPredicate,
+        customStyleFn: viewerCustomStyleFn,
+      },
     };
 
     this.decorators = [
-      TextColorDecorator,
       {
         strategy: LinkParseStrategy,
         component: ({ children, decoratedText, rel, target }) => (
@@ -166,6 +171,7 @@ class App extends Component {
       },
       new CodeBlockDecorator({ theme }),
       createHeadersMarkdownDecorator(this.config),
+      createTextColorDecorator(this.config),
     ];
   }
 

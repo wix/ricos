@@ -13,12 +13,22 @@ const isEmptyContentState = raw =>
 
 const isEmptyBlock = ([_, data]) => data && data.length === 0; //eslint-disable-line no-unused-vars
 
-const textAlignmentStyle = (data, mergedStyles, textDirection, classes) => {
+const getBlockStyleClasses = (data, mergedStyles, textDirection, classes) => {
   const rtl = textDirection || data.textDirection;
   const defaultTextAlignment = rtl ? 'right' : 'left';
   const alignmentClass = data.textAlignment || defaultTextAlignment;
   return classNames(classes, { [mergedStyles.rtl]: rtl }, mergedStyles[alignmentClass]);
 };
+
+const kebabToCamel = s => s.replace(/-([a-z])/, (_, p1) => p1.toUpperCase());
+
+const kebabToCamelObjectKeys = (obj = {}) =>
+  Object.keys(obj).reduce((result, key) => {
+    result[kebabToCamel(key)] = obj[key];
+    return result;
+  }, {});
+
+const blockDataToStyle = ({ dynamicStyles }) => kebabToCamelObjectKeys(dynamicStyles);
 
 const getInline = mergedStyles => {
   return {
@@ -33,69 +43,53 @@ const getInline = mergedStyles => {
   };
 };
 
-const getList = (ordered, mergedStyles, textDirection) => (items, blockProps) => {
-  const fixedItems = items.map(item => (item.length ? item : [' ']));
-
-  const props = {
-    key: blockProps.keys[0],
-    items: fixedItems,
-    ordered,
-    mergedStyles,
-    textDirection,
-    blockProps,
-    textAlignmentStyle,
-  };
-  return <List key={blockProps.keys[0]} {...props} />;
-};
-
-const getUnstyledBlocks = (mergedStyles, textDirection) => (children, blockProps) =>
-  children.map((child, i) => {
-    if (!isEmptyBlock(child)) {
-      return (
-        <p
-          className={textAlignmentStyle(
-            blockProps.data[i],
-            mergedStyles,
-            textDirection,
-            mergedStyles.text
-          )}
-          key={blockProps.keys[i]}
-        >
-          {child}
-        </p>
-      );
-    } else {
-      return <div className={mergedStyles.text} />;
-    }
-  });
-
 const getBlocks = (mergedStyles, textDirection) => {
-  const blockFactory = (Type, style, withDiv) => {
+  const getList = ordered => (items, blockProps) => {
+    const fixedItems = items.map(item => (item.length ? item : [' ']));
+
+    const props = {
+      key: blockProps.keys[0],
+      items: fixedItems,
+      ordered,
+      mergedStyles,
+      textDirection,
+      blockProps,
+      getBlockStyleClasses,
+      blockDataToStyle,
+    };
+    return <List {...props} />;
+  };
+
+  const blockFactory = (type, style, withDiv) => {
     return (children, blockProps) =>
-      children.map((child, i) => (
-        <Type
-          className={textAlignmentStyle(
-            blockProps.data[i],
-            mergedStyles,
-            textDirection,
-            mergedStyles[style]
-          )}
-          key={blockProps.keys[i]}
-        >
-          {withDiv ? <div>{child}</div> : child}
-        </Type>
-      ));
+      children.map((child, i) => {
+        const Type = typeof type === 'string' ? type : type(child);
+        return (
+          <Type
+            className={getBlockStyleClasses(
+              blockProps.data[i],
+              mergedStyles,
+              textDirection,
+              mergedStyles[style]
+            )}
+            style={blockDataToStyle(blockProps.data[i])}
+            key={blockProps.keys[i]}
+          >
+            {withDiv ? <div>{child}</div> : child}
+          </Type>
+        );
+      });
   };
 
   return {
-    unstyled: getUnstyledBlocks(mergedStyles, textDirection),
+    unstyled: blockFactory(child => (isEmptyBlock(child) ? 'div' : 'p'), 'text'),
     blockquote: blockFactory('blockquote', 'quote', true),
     'header-one': blockFactory('h1', 'headerOne'),
     'header-two': blockFactory('h2', 'headerTwo'),
     'header-three': blockFactory('h3', 'headerThree'),
     'code-block': blockFactory('pre', 'codeBlock'),
-    'unordered-list-item': getList(false, mergedStyles, textDirection),
-    'ordered-list-item': getList(true, mergedStyles, textDirection),
+    'unordered-list-item': getList(false),
+    'ordered-list-item': getList(true),
   };
 };
 

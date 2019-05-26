@@ -15,6 +15,7 @@
   "LinkPanelContainer_DoneButton" : "Update",
   "LinkPanelContainer_CancelButton" : "Cancel",
   "LinkPanelContainer_RemoveButton" : "Remove Link",
+  "LineSpacingButton_Tooltip" : "Line Spacing",
   "MobileLinkModal_Title" : "Add a Link",
   "SettingsPanelFooter_Save" : "Save",
   "SettingsPanelFooter_Done" : "Done",
@@ -221,5 +222,6 @@
   "HeadingTwoButton_tooltip": "Heading 2",
   "HeadingThreeButton_tooltip": "Heading 3",
   "NormalTextButton_tooltip": "Normal Text",
-  "TextCodeBlockButton_Tooltip": "Code Block"
+  "TextCodeBlockButton_Tooltip": "Code Block",
+  "TextCodeBlock_InsertButton_Tooltip": "Add a Code Block"
 }

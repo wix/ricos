@@ -9,14 +9,110 @@
 
 ## [Unreleased]
 ### :bug: Bug Fix
-- `text-color`
-  - selection state handled correctly
 - `common`
-  - focus-manager: console log removed
-- `general`
-  - merged styles are used in plugins rather default ones
+  - [98414497](https://github.com/wix-incubator/rich-content/commit/98414497) CustomColorPicker: text input is editable
+- `example`
+  - [68978aff](https://github.com/wix-incubator/rich-content/commit/68978aff) make css load at top so that `theme` is preferred over it
 <hr/>
 
+## 3.4.6 (May 20, 2019)
+### :bug: Bug Fix
+- `line-spacing`
+  - [d91d53b](https://github.com/wix-incubator/rich-content/commit/d91d53b) line-spacing should work now ;)
+<hr/>
+
+## 3.4.5 (May 20, 2019)
+### :bug: Bug Fix
+- `text-color`
+  - [ca95d453](https://github.com/wix-incubator/rich-content/commit/ca95d453) selection state and text are preserved on panel closing
+<hr/>
+
+## 3.4.4 (May 20, 2019)
+### :bug: Bug Fix
+- `text-color`
+  - [55e7609f](https://github.com/wix-incubator/rich-content/commit/55e7609f) `getSelectionStyles` now returns correct style list for multiple block selection
+<hr/>
+
+## 3.4.3 (May 20, 2019)
+### :bug: Bug Fix
+- `line-spacing`
+  - [6e75d9b](https://github.com/wix-incubator/rich-content/commit/6e75d9bad9e604aaf72c59dd89c43a5579e53af9) fix import
+- `text-color`
+  - [6de0cbc](https://github.com/wix-incubator/rich-content/commit/6de0cbcc5dbd83ccf844982e479307b2d4e1423a) selection state is preserved on panel opening
+<hr/>
+
+## 3.4.2 (May 16, 2019)
+### :bug: Bug Fix
+- `editor`
+  - [#304](https://github.com/wix-incubator/rich-content/pull/304) fix list items theme
+<hr/>
+
+## 3.4.1 (May 15, 2019)
+### :bug: Bug Fix
+- `common`
+  - [6f787ae](https://github.com/wix-incubator/rich-content/commit/6f787ae05c42e3ca1897d328a989a758b03674dd) `InlineToolbarButton` `forwardRef` propType changed to support Node
+<hr/>
+
+## 3.4.0 (May 14, 2019)
+### :rocket: New Feature
+- `line-spacing`
+  - [#282](https://github.com/wix-incubator/rich-content/pull/282) new plugin added
+- `common`
+  - [#294](https://github.com/wix-incubator/rich-content/pull/294) ColorPicker now accepts `onCustomPickerToggle`, `onCustomColorPicked` props for higher customability
+  - [#301](https://github.com/wix-incubator/rich-content/pull/301) ColorPicker now accepts `schemeColor`, `schemeAttributes` props for scheme color support
+- `text-color`
+  - [#294](https://github.com/wix-incubator/rich-content/pull/294) plugin config now accepts `onCustomPickerToggle`, `onCustomColorPicked` handlers
+  - [#301](https://github.com/wix-incubator/rich-content/pull/301) plugin config now accepts `colorScheme` mapping instead of `getPaletteColors` and converter functions
+### :bug: Bug Fix
+- `text-color`
+  - [#301](https://github.com/wix-incubator/rich-content/pull/301) viewer decorator does not override other inline styles
+  - [#300](https://github.com/wix-incubator/rich-content/pull/300) missing `getPaletteColors` won't crash
+  - [#300](https://github.com/wix-incubator/rich-content/pull/300) pop-up is opened as internal modal rather external one
+  - [#300](https://github.com/wix-incubator/rich-content/pull/300) pop-up is themable
+- `common`
+  - [86b94cc](https://github.com/wix-incubator/rich-content/commit/86b94cc19fac3fe6d04fe348735de7538992b1ac)&nbsp;&nbsp;`<Loader />`&nbsp;&nbsp;component supports getting theme from context or props (external modals)
+- `editor`
+  - [#297](https://github.com/wix-incubator/rich-content/pull/297) support rtl in lists
+- `link`
+  - [#302](https://github.com/wix-incubator/rich-content/pull/302) apply theme in link panel
+### :book: Documentation
+- [Plugin Customization](./docs/PluginCustomization.md) doc updated
+### :house: Internal
+- `toolbars`
+  - [#296](https://github.com/wix-incubator/rich-content/pull/296) improve performance by eliminating a lot of unnecessary work that was done on the toolbars for every keystroke.
+- `examples`
+  - [#298](https://github.com/wix-incubator/rich-content/pull/296) hmr + error handling for viewer
+<hr/>
+
+## 3.3.3 (Apr 30, 2019)
+### :rocket: New Feature
+- `common`
+  - [#295](https://github.com/wix-incubator/rich-content/pull/295) insert plugin button with `custom-block` type supported [allows to run custom add-block handler]
+- `code-block`
+  - [#295](https://github.com/wix-incubator/rich-content/pull/295) insert-buttons added
+- `text-color`
+  - [#290](https://github.com/wix-incubator/rich-content/pull/290) customization API exposed (defining and handling custom inline styles)
+### :bug: Bug Fix
+- `video`
+  - [#293](https://github.com/wix-incubator/rich-content/pull/293) fix ratio
+### :book: Documentation
+- [#290](https://github.com/wix-incubator/rich-content/pull/290) [Plugin Customization doc]('./docs/PluginCustomization.md') update on `text-color`
+<hr/>
+
+## 3.3.2 (Apr 29, 2019)
+### :bug: Bug Fix
+- `general`
+  - [a720dd6](https://github.com/wix-incubator/rich-content/commit/a720dd604cce4fcd8b9bf9cc22d15fb6840bd8c5) merged styles are used in plugins rather default ones
+- `common`
+  - [0595e88](https://github.com/wix-incubator/rich-content/commit/0595e88c3da6173df9c99c6ce56baf0b3f14fb2c) focus-manager: console log removed
+- `html`
+  - [69ccd8d](https://github.com/wix-incubator/rich-content/commit/69ccd8d38ccf70a4e282c137208c3c366db236fe) limit body width to viewport width
+- `text-color`
+  - [5227d93](https://github.com/wix-incubator/rich-content/commit/5227d9370ff0106ab16f1c44077991ead28ba856) selection state handled correctly
+- `viewer`
+  - [cc09f6f](https://github.com/wix-incubator/rich-content/commit/cc09f6ff1b72926885d357f955c93c54be688b22) atomic class is applied to a proper element [similar to editor layout]
+  - [1a3ddc0](https://github.com/wix-incubator/rich-content/commit/1a3ddc060a32f187d8029488ac24bc3adfd7e8b0) headers line spacing
+<hr/>
 
 ## 3.3.1 (Apr 17, 2019)
 ### :bug: Bug Fix
@@ -24,7 +120,7 @@
   - [#288](https://github.com/wix-incubator/rich-content/pull/288) `link` fix link not using theme
 - `viewer`
   - [#289](https://github.com/wix-incubator/rich-content/pull/289) `atomic-block` now has proper style to comply with the `editor` style
-
+<hr/>
 
 ## 3.3.0 (Apr 17, 2019)
 ### :boom: Breaking Change
@@ -42,7 +138,7 @@
   - [#284](https://github.com/wix-incubator/rich-content/pull/284) `getSelectionStyles` util now accepts `styleSelectionPredicate` function parameter
 ### :book: Documentation
 - [#284](https://github.com/wix-incubator/rich-content/pull/284) [Toolbar Customization](./docs/ToolbarCustomization.md) doc updated
-
+<hr/>
 
 ## 3.2.3 (Apr 14, 2019)
 ### :house: Internal
@@ -70,7 +166,6 @@
 ### :bug: Bug Fix
 - `general`
   - [#285](https://github.com/wix-incubator/rich-content/pull/285) prevent `context` from rerendering unnecessarily
-
 <hr/>
 
 ## 3.1.2 (Mar 28, 2019)
@@ -79,10 +174,6 @@
   - [#283](https://github.com/wix-incubator/rich-content/pull/283) fix image upload `updateEntity` callback
 - `editor`
   - [b1e720b](https://github.com/wix-incubator/rich-content/commit/b1e720b) inline-text-toolbar: link panel on mobile is now displayed as modal neither inline panel
-<<<<<<< HEAD
-=======
-
->>>>>>> develop
 <hr/>
 
 
@@ -277,18 +368,22 @@ _NOTE:_ From this version onwards all modules will have the same version number,
 - `common`
   - [c6b143d](https://github.com/wix-incubator/rich-content/commit/c6b143dc792b3d9c6f7892bf24db1818bc7f4cd9) validate plugin schema only in development
 <hr/>
+
 ## Video Plugin 1.6.0 (Jan 20, 2019)
 ### :rocket: New Feature
 [#234](https://github.com/wix-incubator/rich-content/pull/234) thumbnail support - if you are using relative URLs this requires changes
 <hr/>
+
 ## Image Plugin 1.5.12 (Jan 20, 2019)
 ### :bug: Bug Fix
 - [#233](https://github.com/wix-incubator/rich-content/pull/233) PNG images are loaded as JPG in preload, losing transparency and showing black background
 <hr/>
+
 ## HTML Plugin 1.5.20 (Jan 16, 2019)
 ### :bug: Bug Fix
 - [#232](https://github.com/wix-incubator/rich-content/pull/232) first time iframe onload is fired before React.render(), so it will not refresh
 <hr/>
+
 ## Rich Content 1.7.11 (Jan 16, 2019)
 ### :rocket: New Feature
 - `video`

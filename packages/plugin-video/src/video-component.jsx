@@ -14,8 +14,6 @@ const DEFAULTS = {
   },
 };
 
-const MAX_WAIT_TIME = 5000;
-
 class VideoComponent extends React.Component {
   static type = { VIDEO_TYPE_LEGACY, VIDEO_TYPE };
 
@@ -41,34 +39,13 @@ class VideoComponent extends React.Component {
     this.handlePlayerFocus();
   }
 
-  /* eslint-disable react/no-find-dom-node */
-  // TODO: get rid of this ASAP!
-  // Currently, there's no other means to access the player inner iframe
   handlePlayerFocus() {
-    return (
-      !this.state.isPlayable &&
-      this.player &&
-      findDOMNode(this.player).querySelector('iframe') &&
-      (findDOMNode(this.player).querySelector('iframe').tabIndex = -1)
-    );
-  }
-  /* eslint-enable react/no-find-dom-node */
-
-  handlePlay = event => {
-    event.preventDefault();
-    event.stopPropagation();
-    this.setState({ isLoading: true });
-    setTimeout(() => this.handleReady(), MAX_WAIT_TIME);
-  };
-
-  handleVideoStart = player => {
-    if (this.player !== player) {
-      this.setState({
-        isLoading: false,
-        isLoaded: false,
-      });
+    // eslint-disable-next-line react/no-find-dom-node
+    const element = findDOMNode(this).querySelector('iframe, video');
+    if (element) {
+      element.tabIndex = -1;
     }
-  };
+  }
 
   handleReady = () => {
     if (!this.state.isLoaded) {
@@ -94,7 +71,6 @@ class VideoComponent extends React.Component {
         componentData={componentData}
         settings={settings}
         onReady={this.handleReady}
-        onStart={this.handleStart}
       />
     );
   };

@@ -1,5 +1,5 @@
 import { getSelectedBlocks, getSelectionRange, isInSelectionRange } from './draftUtils';
-
+import uniq from 'lodash/uniq';
 const getBlockStyleRanges = (block, styleSelectionPredicate) => {
   const styleRanges = [];
 
@@ -24,20 +24,20 @@ const getBlockStyleRanges = (block, styleSelectionPredicate) => {
  */
 export const getSelectionStyles = (styleSelectionPredicate, editorState) => {
   const selectedBlocks = getSelectedBlocks(editorState);
+  return uniq(
+    selectedBlocks.reduce((selectedStyles, block) => {
+      const blockSelectionRange = getSelectionRange(editorState, block);
 
-  return selectedBlocks.reduce((selectedStyles, block) => {
-    const blockSelectionRange = getSelectionRange(editorState, block);
+      // for each selected block, get its style ranges (only for styles that meet the styleSelectionPredicate criteria)
+      const blockStyleRanges = getBlockStyleRanges(block, styleSelectionPredicate); // { start, end, style }
 
-    // for each selected block, get its style ranges (only for styles that meet the styleSelectionPredicate criteria)
-    const blockStyleRanges = getBlockStyleRanges(block, styleSelectionPredicate); // { start, end, style }
-
-    // if style range is in selection, add this style to result
-    return selectedStyles
-      .concat(
-        blockStyleRanges
+      // if style range is in selection, add this style to result set
+      return [
+        ...selectedStyles,
+        ...blockStyleRanges
           .filter(range => isInSelectionRange(blockSelectionRange, [range.start, range.end]))
-          .map(range => range.style)
-      )
-      .filter(style => !selectedStyles.includes(style));
-  }, []);
+          .map(range => range.style),
+      ];
+    }, [])
+  );
 };

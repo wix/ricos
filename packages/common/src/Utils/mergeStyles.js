@@ -7,6 +7,7 @@ const cssClassMerger = (defaultStyleClassName, themeClassName) =>
 
 export const mergeStyles = ({ styles, theme }) => {
   if (!theme) {
+    console.warn('mergeStyles invoked without theme!'); //eslint-disable-line no-console
     return styles;
   }
   const themeStyles = pickBy(theme);
