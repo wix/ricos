@@ -1,3 +1,4 @@
+import React from 'react';
 import theme from '../theme/theme';
 import { videoTypeMapper } from 'wix-rich-content-plugin-video/dist/module.viewer';
 import { dividerTypeMapper } from 'wix-rich-content-plugin-divider/dist/module.viewer';
@@ -22,7 +23,7 @@ import {
   mentionsTypeMapper,
 } from 'wix-rich-content-plugin-mentions/dist/module.viewer';
 import { fileUploadTypeMapper } from 'wix-rich-content-plugin-file-upload/dist/module.viewer';
-import { createTextColorDecorator, TEXT_COLOR_TYPE } from 'wix-rich-content-plugin-text-color';
+import { textColorInlineStyleMapper, TEXT_COLOR_TYPE } from 'wix-rich-content-plugin-text-color';
 
 import { viewerCustomStyleFn, styleSelectionPredicate } from '../text-color-style-fn';
 
@@ -40,6 +41,9 @@ import 'wix-rich-content-plugin-video/dist/styles.min.css';
 import 'wix-rich-content-plugin-sound-cloud/dist/styles.min.css';
 import 'wix-rich-content-plugin-map/dist/styles.min.css';
 import 'wix-rich-content-plugin-file-upload/dist/styles.min.css';
+
+const anchorTarget = '_top';
+const relValue = 'noreferrer';
 
 const linkPluginSettings = {
   onClick: (event, url) => console.log('link clicked!', url),
@@ -81,6 +85,8 @@ export const config = {
   },
 };
 
+export const getInlineStyleMappers = raw => [textColorInlineStyleMapper(config, raw)];
+
 export const decorators = [
   {
     strategy: LinkParseStrategy,
@@ -112,5 +118,4 @@ export const decorators = [
   },
   new CodeBlockDecorator({ theme }),
   createHeadersMarkdownDecorator(config),
-  createTextColorDecorator(config),
 ];

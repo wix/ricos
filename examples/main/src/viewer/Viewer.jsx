@@ -1,8 +1,7 @@
-import { PureComponent } from 'react';
+import React, { PureComponent } from 'react';
 import ReactModal from 'react-modal';
 import { RichContentViewer } from 'wix-rich-content-viewer';
 import * as PropTypes from 'prop-types';
-import React from 'react';
 import * as Plugins from './ViewerPlugins';
 import theme from '../theme/theme'; // must import after custom styles
 
@@ -39,6 +38,7 @@ export default class Viewer extends PureComponent {
         <RichContentViewer
           helpers={this.helpers}
           typeMappers={Plugins.typeMappers}
+          inlineStyleMappers={Plugins.getInlineStyleMappers(this.props.initialState)}
           decorators={Plugins.decorators}
           config={Plugins.config}
           initialState={this.props.initialState}
