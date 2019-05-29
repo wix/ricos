@@ -5,6 +5,8 @@ import Measure from 'react-measure';
 import { DISPLAY_MODE } from 'wix-rich-content-common';
 import Styles from '../../../../statics/styles/static-toolbar.scss';
 import debounce from 'lodash/debounce';
+import pickBy from 'lodash/pickBy';
+import identity from 'lodash/identity';
 
 const displayOptionStyles = {
   [DISPLAY_MODE.NORMAL]: {},
@@ -195,10 +197,7 @@ export default class StaticToolbar extends React.PureComponent {
       uiSettings,
     };
 
-    let style = {};
-    if (offset) {
-      style = { top: offset.y || 0, left: offset.x || 0 };
-    }
+    const style = pickBy(offset, identity);
     Object.assign(style, displayOptionStyles[displayOptions.displayMode]);
 
     const props = {
