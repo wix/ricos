@@ -11,6 +11,7 @@ const prodConfig = {
     rules: [
       {
         test: /\.scss$/,
+        exclude: /.global.scss/,
         use: [
           MiniCssExtractPlugin.loader,
           {
@@ -51,5 +52,7 @@ module.exports = env => {
   common.module.rules = common.module.rules.filter(
     rule => rule.test && rule.test.toString() !== /\.scss$/.toString()
   );
-  return merge(common, prodConfig);
+  const config = merge(common, prodConfig);
+  console.log(JSON.stringify(config.module.rules, null, 2));
+  return config;
 };
