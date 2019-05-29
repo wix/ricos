@@ -1,0 +1,210 @@
+$headerHeight: 42px;
+$iconSize: 20px;
+$borderRadius: 4px;
+$primaryColor: lightslategrey;
+$secondaryColor: #8495A6;
+$iconColor: white;
+$hoverColor: #ccc;
+
+@mixin mobile {
+  @media only screen and (max-width: 640px) {
+    @content;
+  }
+}
+
+html,
+body {
+  height: 100% !important;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+
+  svg {
+    fill: currentColor;
+  }
+
+  #root {
+    height: 100%;
+
+    .wrapper {
+      height: 100%;
+
+      .container {
+        display: flex;
+        flex-direction: row;
+        height: 100%;
+
+        .empty-state {
+          display: flex;
+          justify-content: center;
+          align-content: center;
+          flex-direction: column;
+          width: 100%;
+          font-size: 30pt;
+          background: #ddd;
+          text-align: center;
+          font-weight: 300;
+        }
+
+        .section {
+          overflow: auto;
+
+          .placeholder {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 16pt;
+
+            @include mobile {
+              margin-top: 62px;
+            }
+          }
+
+          .header {
+            display: flex;
+            justify-content: space-between;
+            background: $primaryColor;
+            color: white;
+
+            @include mobile {
+              position: fixed;
+              width: 100%;
+            }
+
+            .title {
+              display: flex;
+              padding: 10px 0 10px 10px;
+
+              svg {
+                position: relative;
+                top: 2px;
+                cursor: pointer;
+                color: $iconColor;
+                width: $iconSize;
+                height: $iconSize;
+
+                &:hover {
+                  color: $hoverColor;
+                }
+              }
+
+              h3 {
+                margin: 0;
+                padding-left: 3px;
+              }
+            }
+
+
+            .settings {
+              position: relative;
+              cursor: pointer;
+              padding-right: 10px;
+
+              svg {
+                color: $iconColor;
+                width: $iconSize;
+                height: $iconSize;
+                margin-top: 12px;
+
+                &:hover {
+                  color: $hoverColor;
+                }
+              }
+
+              &:hover {
+                .dropdown {
+                  display: block;
+                }
+              }
+
+              .dropdown {
+                display: none;
+                position: absolute;
+                top: 42px;
+                right: 5px;
+                background: $primaryColor;
+                z-index: 3;
+                box-shadow: -1px 6px 8px -4px rgba(0, 0, 0, 0.75);
+                border-radius: 0 0 $borderRadius $borderRadius;
+
+                ul {
+                  margin: 0;
+                  padding: 0;
+                  list-style: none;
+
+                  li {
+                    white-space: nowrap;
+                    padding: 8px 10px;
+
+                    &:hover {
+                      background: #91A2B3;
+
+                      &:last-child {
+                        border-radius: 0 0 $borderRadius $borderRadius;
+                      }
+                    }
+
+                    &:last-child {
+                      border-radius: 0 0 $borderRadius $borderRadius;
+                    }
+                  }
+                }
+              }
+
+            }
+          }
+
+          .content {
+            height: calc(100% - #{$headerHeight});
+            box-sizing: border-box;
+
+            >div:first-child {
+              width: 100%;
+              min-height: 100%;
+              box-sizing: border-box;
+              padding: 10px 50px 0;
+
+              &.react-monaco-editor-container {
+                padding: 10px 0;
+
+              }
+
+              @include mobile {
+                padding: 0;
+              }
+
+            }
+
+            @include mobile {
+              position: relative;
+              top: 42px;
+            }
+          }
+        }
+
+        .bar {
+          background: $secondaryColor;
+          cursor: col-resize;
+        }
+      }
+    }
+
+    .DraftEditor-editorContainer {
+      @include mobile {
+        padding: 0;
+      }
+    }
+
+    .DraftEditor-root,
+    div[class^='rich-content-viewer__wrapper'] {
+      overflow: visible;
+
+      @include mobile {
+        top: 0;
+        padding: 18px;
+      }
+    }
+  }
+}
