@@ -7,8 +7,8 @@ const { Provider, Consumer } = RichContentContext;
 Provider.propTypes = {
   children: PropTypes.node.isRequired,
   value: PropTypes.shape({
-    setEditorState: PropTypes.func.isRequired,
-    t: PropTypes.func.isRequired,
+    t: PropTypes.func,
+    setEditorState: PropTypes.func,
     theme: PropTypes.object,
     locale: PropTypes.string,
     anchorTarget: PropTypes.string,
