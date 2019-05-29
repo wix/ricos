@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import isFunction from 'lodash/isFunction';
@@ -10,23 +10,12 @@ import {
   Context,
 } from 'wix-rich-content-common';
 
-class AtomicBlock extends React.Component {
-  state = {
-    hasError: false,
-  };
-
-  componentDidCatch() {
-    this.setState({ hasError: true });
-  }
-
+class AtomicBlock extends PureComponent {
   renderComponent(Component, children, props) {
     return <Component {...props}>{children}</Component>;
   }
 
   render() {
-    if (this.state.hasError) {
-      return null;
-    }
     const { type, typeMap, componentData, children, styles } = this.props;
     const { theme, isMobile, anchorTarget, relValue, config } = this.context;
 
