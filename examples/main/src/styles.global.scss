@@ -160,16 +160,39 @@ body {
             height: calc(100% - #{$headerHeight});
             box-sizing: border-box;
 
-            >div:first-child {
-              width: 100%;
+            .editor {
               min-height: 100%;
+              display: flex;
+              flex-direction: column;
+
+              >div:last-child {
+                display: flex;
+                flex-direction: column;
+                flex:1;
+
+                >div {
+                  flex:1;
+                }
+              }
+
+              .DraftEditor-root {
+                display: flex;
+                flex-direction: column;
+                flex:1;
+
+                .DraftEditor-editorContainer{
+                  flex: 1;
+                }
+              }
+            }
+
+            .react-monaco-editor-container {
+              padding: 10px 0;
+            }
+
+            .editor, .viewer {
               box-sizing: border-box;
               padding: 10px 50px 0;
-
-              &.react-monaco-editor-container {
-                padding: 10px 0;
-
-              }
 
               @include mobile {
                 padding: 0;
