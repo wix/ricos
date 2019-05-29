@@ -43,7 +43,7 @@ body {
           align-content: center;
           flex-direction: column;
           width: 100%;
-          font-size: 30pt;
+          font-size: 32pt;
           background: #ddd;
           text-align: center;
           font-weight: 300;
@@ -71,6 +71,7 @@ body {
             @include mobile {
               position: fixed;
               width: 100%;
+              z-index: 1;
             }
 
             .title {
@@ -168,20 +169,30 @@ body {
               >div:last-child {
                 display: flex;
                 flex-direction: column;
-                flex:1;
+                flex: 1;
 
                 >div {
-                  flex:1;
+                  flex: 1;
                 }
               }
 
               .DraftEditor-root {
                 display: flex;
                 flex-direction: column;
-                flex:1;
+                flex: 1;
 
-                .DraftEditor-editorContainer{
+                .DraftEditor-editorContainer {
                   flex: 1;
+                  display: flex;
+                  flex-direction: column;
+
+                  >div:first-child {
+                    flex: 1;
+                  }
+
+                  @include mobile {
+                    padding: 0;
+                  }
                 }
               }
             }
@@ -190,7 +201,8 @@ body {
               padding: 10px 0;
             }
 
-            .editor, .viewer {
+            .editor,
+            .viewer {
               box-sizing: border-box;
               padding: 10px 50px 0;
 
@@ -211,12 +223,6 @@ body {
           background: $secondaryColor;
           cursor: col-resize;
         }
-      }
-    }
-
-    .DraftEditor-editorContainer {
-      @include mobile {
-        padding: 0;
       }
     }
 

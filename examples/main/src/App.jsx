@@ -172,7 +172,7 @@ class App extends PureComponent {
       <div className="wrapper">
         <Container key={containerKey} className="container">
           {showEmptyState ? (
-            <div className="empty-state">Add a Section</div>
+            <div className="empty-state">Wix Rich Content</div>
           ) : (
             this.renderSections()
           )}
