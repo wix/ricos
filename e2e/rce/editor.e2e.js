@@ -1,4 +1,4 @@
-import { TEXT_BUTTONS } from '../../cypress/dataHooks';
+import { TEXT_BUTTONS } from '../cypress/dataHooks';
 
 describe.skip('editor', () => {
   it('should allow to enter text', () => {
