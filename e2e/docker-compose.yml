@@ -1,0 +1,17 @@
+version: "3"
+services:
+  server:
+    build: .
+    ports:
+      - "3002:3002"
+    environment:
+      - PORT=8123
+  cypress:
+    image: "cypress/included:3.3.0"
+    depends_on:
+      - server
+    environment:
+      - CYPRESS_baseUrl=http://server:3002
+    working_dir: /e2e
+    volumes:
+      - ./:/e2e
