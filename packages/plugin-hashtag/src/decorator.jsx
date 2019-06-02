@@ -43,7 +43,11 @@ const Hashtag = ({
 
   const decoratedOnClick = onClick ? event => onClick(event, text) : null;
   const props = href ? { className, href, target, onClick: decoratedOnClick } : { className };
-  return <Component {...props}>{children}</Component>;
+  return (
+    <Component {...props}>
+      {children.some(child => child.type === 'span') ? children : <span>{children}</span>}
+    </Component>
+  );
 };
 
 Hashtag.propTypes = {
