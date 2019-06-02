@@ -1,15 +1,19 @@
-import deepFreeze from 'deep-freeze';
 import uut from './normalizeInitialState';
+
+const createState = ({
+  text = 'bla bla bla  bla   ',
+  type = 'unstyled',
+  inlineStyleRanges = [],
+  entityRanges = [],
+  entityMap = {},
+  data = {},
+}) => ({
+  blocks: [{ text, type, inlineStyleRanges, depth: 0, key: '1', entityRanges, data }],
+  entityMap,
+});
 
 describe('normalizeInitialState', () => {
   describe('inline header removal', () => {
-    const text = 'bla bla bla  bla   ';
-    const createState = ({ type, inlineStyleRanges }) =>
-      deepFreeze({
-        blocks: [{ text, type, inlineStyleRanges, depth: 0, key: '1', entityRanges: [], data: {} }],
-        entityMap: {},
-      });
-
     const INLINE_HEADERS = ['inline-header-one', 'inline-header-two', 'inline-header-three'];
 
     describe('for unstyled block', () => {
@@ -173,5 +177,181 @@ describe('normalizeInitialState', () => {
         expect(actual).toEqual(expected);
       });
     });
+  });
+
+  describe('underline range completion for links', () => {
+    const config = {
+      anchorTarget: '_blank',
+      relValue: 'noopener',
+    };
+
+    it('should add underline style ranges for link entity ranges', () => {
+      const initialState = {
+        text: 'text_1',
+        entityRanges: [
+          {
+            offset: 0,
+            length: 6,
+            key: 0,
+          },
+        ],
+        entityMap: {
+          0: {
+            type: 'LINK',
+            mutability: 'MUTABLE',
+            data: {
+              url: 'link1.com',
+              target: '_blank',
+              rel: 'nofollow',
+            },
+          },
+        },
+      };
+
+      const actual = uut(createState(initialState), config);
+      const expected = createState({
+        ...initialState,
+        inlineStyleRanges: [
+          {
+            offset: 0,
+            length: 6,
+            style: 'UNDERLINE',
+          },
+        ],
+      });
+      expect(actual).toEqual(expected);
+    });
+    it('should skip entity ranges with disabled underline', () => {
+      const initialState = {
+        text: 'text_1 text_2',
+        entityRanges: [
+          {
+            offset: 0,
+            length: 6,
+            key: 0,
+          },
+          {
+            offset: 7,
+            length: 6,
+            key: 1,
+          },
+        ],
+        entityMap: {
+          0: {
+            type: 'LINK',
+            mutability: 'MUTABLE',
+            data: {
+              url: 'link1.com',
+              target: '_blank',
+              rel: 'nofollow',
+            },
+          },
+          1: {
+            type: 'LINK',
+            underline: false,
+            mutability: 'MUTABLE',
+            data: {
+              url: 'link2.com',
+              target: '_blank',
+              rel: 'nofollow',
+            },
+          },
+        },
+      };
+      const actual = uut(createState(initialState), config);
+      const expected = createState({
+        ...initialState,
+        inlineStyleRanges: [
+          {
+            offset: 0,
+            length: 6,
+            style: 'UNDERLINE',
+          },
+        ],
+      });
+      expect(actual).toEqual(expected);
+    });
+    it('should not modify existing inline style ranges', () => {
+      const initialState = {
+        text: 'text_1',
+        inlineStyleRanges: [
+          {
+            offset: 0,
+            length: 6,
+            style: 'BOLD',
+          },
+        ],
+        entityRanges: [
+          {
+            offset: 0,
+            length: 6,
+            key: 0,
+          },
+        ],
+        entityMap: {
+          0: {
+            type: 'LINK',
+            mutability: 'MUTABLE',
+            data: {
+              url: 'link1.com',
+              target: '_blank',
+              rel: 'nofollow',
+            },
+          },
+        },
+      };
+
+      const actual = uut(createState(initialState), config);
+      const expected = createState({
+        ...initialState,
+        inlineStyleRanges: [
+          {
+            offset: 0,
+            length: 6,
+            style: 'BOLD',
+          },
+          {
+            offset: 0,
+            length: 6,
+            style: 'UNDERLINE',
+          },
+        ],
+      });
+      expect(actual).toEqual(expected);
+    });
+    // it('should not duplicate ranges', () => {
+    //   const initialState = {
+    //     text: 'text_1',
+    //     entityRanges: [
+    //       {
+    //         offset: 0,
+    //         length: 6,
+    //         key: 0,
+    //       },
+    //     ],
+    //     entityMap: {
+    //       0: {
+    //         type: 'LINK',
+    //         mutability: 'MUTABLE',
+    //         data: {
+    //           url: 'link1.com',
+    //           target: '_blank',
+    //           rel: 'nofollow',
+    //         },
+    //       },
+    //     },
+    //     inlineStyleRanges: [
+    //       {
+    //         offset: 0,
+    //         length: 6,
+    //         style: 'UNDERLINE',
+    //       },
+    //     ],
+    //   };
+
+    //   const actual = uut(createState(initialState), config);
+    //   const expected = createState(initialState);
+    //   expect(actual).toEqual(expected);
+    // });
   });
 });

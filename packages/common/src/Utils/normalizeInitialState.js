@@ -1,4 +1,5 @@
 import { removeInlineHeaderRanges } from './removeInlineHeaderRanges';
+import { fixAtomicBlockText, fixLinkUnderlineRanges } from './blockUtils';
 import mapValues from 'lodash/mapValues';
 import cloneDeep from 'lodash/cloneDeep';
 import isUndefined from 'lodash/isUndefined';
@@ -13,6 +14,7 @@ const normalizeEntityType = (entityType, entityTypeMap) => {
 
 /* eslint-disable */
 const dataNormalizers = {
+  // converts { targetBlank, nofollow } => { target, rel }
   LINK: (componentData, { anchorTarget, relValue }) => {
     const { targetBlank, nofollow, target, rel } = componentData;
     if (
@@ -98,12 +100,10 @@ export default (initialState, config) => {
   return {
     blocks: blocks
       .map(block => {
-        switch (block.type) {
-          case 'atomic':
-            return { ...block, text: ' ' };
-          default:
-            return block;
-        }
+        let processedBlock = fixAtomicBlockText(block);
+        processedBlock = fixLinkUnderlineRanges(processedBlock, entityMap);
+
+        return processedBlock;
       })
       .map(removeInlineHeaderRanges),
     entityMap: mapValues(entityMap, entity =>

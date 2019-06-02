@@ -45,6 +45,8 @@ export const insertLink = (editorState, { url, targetBlank, nofollow, anchorTarg
     });
   }
 
+  newEditorState = RichUtils.toggleInlineStyle(newEditorState, 'UNDERLINE');
+
   return EditorState.forceSelection(newEditorState, newSelection);
 };
 
