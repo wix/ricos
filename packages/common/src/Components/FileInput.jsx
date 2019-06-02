@@ -53,6 +53,7 @@ class FileInput extends Component {
           type={'file'}
           data-hook={dataHook}
           onChange={onChange}
+          onClick={() => this.value === null}
           accept={accept}
           onFocus={() => this.onFocus()}
           onBlur={() => this.onBlur()}

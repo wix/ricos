@@ -2,6 +2,7 @@ const path = require('path');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const DotenvWebpackPlugin = require('dotenv-webpack');
+const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 
 const PATHS = {
   root: path.join(__dirname, '..'),
@@ -61,6 +62,7 @@ module.exports = env => ({
       },
       {
         test: /\.scss$/,
+        exclude: /.global.scss/,
         use: [
           {
             loader: 'style-loader',
@@ -79,6 +81,10 @@ module.exports = env => ({
         ],
       },
       {
+        test: /\.global.scss$/,
+        use: ['style-loader', 'css-loader', 'sass-loader'],
+      },
+      {
         test: /\.(png|jpg|gif)$/,
         issuer: /\.(css|sass|js|jsx)$/,
         use: [
@@ -94,11 +100,7 @@ module.exports = env => ({
       {
         test: /\.(woff|eot|ttf|svg|woff2)$/,
         issuer: /\.(s)?css$/,
-        use: [
-          {
-            loader: 'url-loader',
-          },
-        ],
+        use: ['url-loader'],
       },
       {
         test: /\.svg$/,
@@ -145,6 +147,39 @@ module.exports = env => ({
     ]),
     new DotenvWebpackPlugin({
       path: path.resolve(PATHS.root, '..', '..', '.env'),
+    }),
+    new MonacoWebpackPlugin({
+      languages: ['json'],
+      features: [
+        'bracketMatching',
+        'caretOperations',
+        'clipboard',
+        'codeAction',
+        'comment',
+        'contextmenu',
+        'coreCommands',
+        'cursorUndo',
+        'find',
+        'folding',
+        'format',
+        'gotoError',
+        'gotoLine',
+        'hover',
+        'inPlaceReplace',
+        'inspectTokens',
+        'linesOperations',
+        'links',
+        'multicursor',
+        'parameterHints',
+        'referenceSearch',
+        'rename',
+        'smartSelect',
+        'suggest',
+        'transpose',
+        'wordHighlighter',
+        'wordOperations',
+        'wordPartOperations',
+      ],
     }),
   ],
 });

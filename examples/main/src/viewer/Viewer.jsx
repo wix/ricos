@@ -22,6 +22,7 @@ const relValue = 'noreferrer';
 export default class Viewer extends PureComponent {
   constructor(props) {
     super(props);
+    ReactModal.setAppElement('#root');
     this.state = {};
   }
 
@@ -34,7 +35,7 @@ export default class Viewer extends PureComponent {
 
   render() {
     return (
-      <div className="viewer">
+      <div id="rich-content-viewer" className="viewer">
         <RichContentViewer
           helpers={this.helpers}
           typeMappers={Plugins.typeMappers}
@@ -43,7 +44,7 @@ export default class Viewer extends PureComponent {
           config={Plugins.config}
           initialState={this.props.initialState}
           theme={theme}
-          isMobile={this.props.mobile}
+          isMobile={this.props.isMobile}
           anchorTarget={anchorTarget}
           relValue={relValue}
         />
@@ -62,6 +63,5 @@ export default class Viewer extends PureComponent {
 
 Viewer.propTypes = {
   initialState: PropTypes.any,
-  mobile: PropTypes.any,
-  config: PropTypes.any,
+  isMobile: PropTypes.bool,
 };

@@ -26,6 +26,7 @@ import { fileUploadTypeMapper } from 'wix-rich-content-plugin-file-upload/dist/m
 import { textColorInlineStyleMapper, TEXT_COLOR_TYPE } from 'wix-rich-content-plugin-text-color';
 
 import { viewerCustomStyleFn, styleSelectionPredicate } from '../text-color-style-fn';
+import { anchorTarget, relValue } from '../consts';
 
 import 'wix-rich-content-common/dist/styles.min.css';
 import 'wix-rich-content-viewer/dist/styles.min.css';

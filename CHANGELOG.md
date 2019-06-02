@@ -8,6 +8,9 @@
 > - :house: [Internal]
 
 ## [Unreleased]
+### :house: Internal
+- `example`
+  - [#309](https://github.com/wix-incubator/rich-content/pull/309) removed standalone editor and viewer examples + overhaul on main example
 <hr/>
 
 ## 3.4.7 (May 29, 2019)

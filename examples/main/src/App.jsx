@@ -1,69 +1,48 @@
 /* eslint-disable */
 import { hot } from 'react-hot-loader/root';
-import React, { Suspense } from 'react';
-import MobileDetect from 'mobile-detect';
-import { convertFromRaw, convertToRaw, EditorState } from '@wix/draft-js';
-import { normalizeInitialState } from 'wix-rich-content-common';
-import './App.css';
-import RichContentRawDataEditor from './RichContentRawDataEditor';
+import React, { PureComponent } from 'react';
+import { Container, Bar } from 'react-simple-resizer';
+import compact from 'lodash/compact';
+import flatMap from 'lodash/flatMap';
+import { convertToRaw, EditorState } from '@wix/draft-js';
+import { ContentStateEditor, ErrorBoundary, Fab, Section } from './Components';
+import { generateKey, isMobile, loadStateFromStorage, saveStateToStorage } from './utils';
 const Editor = React.lazy(() => import('./editor/Editor'));
 const Viewer = React.lazy(() => import('./viewer/Viewer'));
-import Resizable from 're-resizable';
-import startCase from 'lodash/startCase';
-import local from 'local-storage';
 
-// const whyDidYouRender = require('@welldone-software/why-did-you-render/dist/no-classes-transpile/umd/whyDidYouRender.min.js');
-// whyDidYouRender(React, { include: [/.*/], exclude: [/Decor|JSONI/] });
-
-const anchorTarget = '_top';
-const relValue = 'noreferrer';
-function Checkbox({ name, onChange, ...inputProps }) {
-  const handleChange = e => onChange(name, e.target.checked);
-  return (
-    <label>
-      <input type="checkbox" onChange={handleChange} {...inputProps} />
-      {startCase(name)}
-    </label>
-  );
-}
-
-const checkBoxes = [
-  'editor',
-  'viewer',
-  'contentStateEditor',
-  'mounted',
-  'staticToolbar',
-  'mobile',
-  'readOnly',
-];
-const mobileCheckBoxes = ['editor', 'viewer'];
-
-class App extends React.PureComponent {
+class App extends PureComponent {
   constructor(props) {
     super(props);
-    this.state = {
-      lastSave: new Date(),
-      editorState: EditorState.createEmpty(),
-      mounted: true,
-      contentStateEditor: true,
-      showDevToggles: true,
-      editor: true,
-      viewer: true,
-      ...this.getLocalStorageState(),
-    };
-    this.md = window ? new MobileDetect(window.navigator.userAgent) : null;
+    this.isMobile = isMobile();
+    this.state = this.getInitialState();
   }
 
-  getLocalStorageState() {
-    const state = {};
-    [...checkBoxes, 'contentWidth'].forEach(key => {
-      let val = local.get(key);
-      if (val !== null) {
-        state[key] = val;
-      }
-    });
-    return state;
+  getInitialState() {
+    const containerKey = generateKey('container');
+    const editorState = EditorState.createEmpty();
+    const localState = loadStateFromStorage();
+    if (localState) {
+      return { containerKey, editorState, ...JSON.parse(localState) };
+    } else {
+      return {
+        containerKey,
+        editorState,
+        isEditorShown: true,
+        isViewerShown: !this.isMobile,
+        isContentStateShown: false,
+      };
+    }
   }
+
+  componentDidMount() {
+    window && window.addEventListener('resize', () => this.onContentStateEditorResize());
+  }
+
+  componentWillUnmount() {
+    window && window.removeEventListener('resize');
+  }
+
+  setContentStateEditor = ref => (this.contentStateEditor = ref);
 
   setViewerState = editorState => {
     const content = editorState.getCurrentContent();
@@ -72,157 +51,141 @@ class App extends React.PureComponent {
     }
   };
 
+  onContentStateEditorChange = obj => {
+    this.setState(getStateFromObject(obj));
+  };
+
+  onContentStateEditorResize = () =>
+    this.contentStateEditor && this.contentStateEditor.refreshLayout();
+
   onEditorChange = editorState => {
     const state = {
-      lastSave: new Date(),
       editorState,
     };
     this.setState(state);
     this.setViewerState(editorState);
   };
 
-  isMobileDevice = () => {
-    return this.md && this.md.mobile() !== null;
+  onSectionSizeChanged = (sectionName, size) => {
+    this.setState({ [`${sectionName}Size`]: size }, () => saveStateToStorage(this.state));
+    if (sectionName === 'contentState') {
+      this.onContentStateEditorResize();
+    }
   };
 
-  onRichContentRawDataEditorChange = obj => {
-    this.setState(this.convertJsObject(obj));
+  onSectionVisibilityChange = (sectionName, isVisible) => {
+    this.setState(
+      { [`is${sectionName}Shown`]: isVisible, containerKey: generateKey('prefix') },
+      () => {
+        saveStateToStorage(this.state);
+      }
+    );
+    this.onContentStateEditorResize();
   };
 
-  convertJsObject(obj) {
-    const normalizedState = normalizeInitialState(obj, {
-      anchorTarget,
-      relValue,
-    });
-    const editorState = EditorState.createWithContent(convertFromRaw(normalizedState));
-    return { editorState, viewerState: normalizedState };
-  }
-
-  onCheckBoxChange = (name, checked) => {
-    this.setState({ [name]: checked });
-    local.set(name, checked);
-  };
-
-  render() {
-    const {
-      showDevToggles,
-      mobile: simulateMobile,
-      editor: showEditor,
-      viewer: showViewer,
-      contentStateEditor: showContentStateEditor,
-    } = this.state;
-    const isMobileDevice = this.isMobileDevice();
-    const isMobile = simulateMobile || isMobileDevice;
-    const editor = (
-      <Suspense fallback={<div>Loading...</div>}>
-        <ErrorBoundary>
+  renderEditor = () => {
+    const { isEditorShown, editorSize, editorState, staticToolbar } = this.state;
+    const settings = [];
+    if (!isMobile()) {
+      settings.push({
+        name: 'Static Toolbar',
+        action: () => this.setState(state => ({ staticToolbar: !state.staticToolbar })),
+      });
+    }
+    return (
+      isEditorShown && (
+        <Section
+          title="Editor"
+          key="editor-section"
+          settings={settings}
+          defaultSize={editorSize}
+          onHide={this.onSectionVisibilityChange}
+          onSizeChanged={size => this.onSectionSizeChanged('editor', size)}
+        >
           <Editor
             onChange={this.onEditorChange}
-            editorState={this.state.editorState}
-            readOnly={this.state.readOnly}
-            isMobile={isMobile}
-            staticToolbar={this.state.staticToolbar}
+            editorState={editorState}
+            isMobile={this.isMobile}
+            staticToolbar={staticToolbar}
           />
-        </ErrorBoundary>
-      </Suspense>
+        </Section>
+      )
     );
-    const viewer = (
-      <Suspense fallback={<div>Loading...</div>}>
-        <ErrorBoundary>
-          <Viewer initialState={this.state.viewerState} mobile={isMobile} config={this.config} />
-        </ErrorBoundary>
-      </Suspense>
-    );
-    const checkBoxComponents = (isMobileDevice ? mobileCheckBoxes : checkBoxes).map((name, i) => (
-      <div className="toggle" key={i}>
-        <Checkbox name={name} checked={this.state[name]} onChange={this.onCheckBoxChange} />
-      </div>
-    ));
+  };
+
+  renderViewer = () => {
+    const { isViewerShown, viewerSize, viewerState } = this.state;
     return (
-      <div className="wrapper">
-        <div className="container">
-          {!isMobileDevice && (
-            <div className="header">
-              <h1 onClick={() => this.setState({ showDevToggles: !showDevToggles })}>
-                Wix Rich Content Editor
-              </h1>
-              <div
-                className="toggle-container"
-                style={{ display: this.state.showDevToggles ? 'block' : 'none' }}
-              >
-                {checkBoxComponents}
-              </div>
-              <span className="intro">Last saved on {this.state.lastSave.toTimeString()}</span>
-            </div>
-          )}
-          <div className="content">
-            {this.state.mounted && (
-              <div className="columns">
-                {isMobileDevice ? (
-                  <div className={'mobileDevice'} style={{ width: '100%' }}>
-                    <div style={{ display: 'flex' }}>{checkBoxComponents}</div>
-                    {showEditor && editor}
-                    {showViewer && viewer}
-                  </div>
-                ) : (
-                  <Resizable
-                    onResize={(event, direction, { clientWidth }) =>
-                      local.set('contentWidth', clientWidth)
-                    }
-                    defaultSize={{ width: this.state.contentWidth || '85%' }}
-                    className={'resizable'}
-                  >
-                    {showEditor && editor}
-                    {showViewer && viewer}
-                  </Resizable>
-                )}
-                {showContentStateEditor && !isMobileDevice && (
-                  <div className="column side">
-                    <RichContentRawDataEditor
-                      onChange={this.onRichContentRawDataEditorChange}
-                      content={convertToRaw(this.state.editorState.getCurrentContent())}
-                    />
-                  </div>
-                )}
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
+      isViewerShown && (
+        <Section
+          title="Viewer"
+          key="viewer-section"
+          defaultSize={viewerSize}
+          onHide={this.onSectionVisibilityChange}
+          onSizeChanged={size => this.onSectionSizeChanged('viewer', size)}
+        >
+          <ErrorBoundary>
+            <Viewer initialState={viewerState} isMobile={this.isMobile} />
+          </ErrorBoundary>
+        </Section>
+      )
     );
-  }
-}
+  };
 
-class ErrorBoundary extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
+  renderContentState = () => {
+    const { isContentStateShown, contetStateSize, editorState } = this.state;
+    return (
+      isContentStateShown && (
+        <Section
+          title="Content State"
+          key="contentstate-section"
+          defaultSize={contetStateSize}
+          onHide={this.onSectionVisibilityChange}
+          onSizeChanged={size => this.onSectionSizeChanged('contentState', size)}
+        >
+          <ContentStateEditor
+            ref={this.setContentStateEditor}
+            onChange={this.onContentStateEditorChange}
+            contentState={convertToRaw(editorState.getCurrentContent())}
+          />
+        </Section>
+      )
+    );
+  };
 
-  componentDidCatch(error, info) {
-    this.setState({ error, info });
-  }
+  setSectionVisibility = (sectionName, isVisible) =>
+    this.setState({ [`show${sectionName}`]: isVisible });
 
-  retry = () => {
-    this.setState({ error: undefined });
+  renderSections = () => {
+    const sections = compact([this.renderEditor(), this.renderViewer(), this.renderContentState()]);
+
+    return flatMap(sections, (val, i, arr) =>
+      arr.length - 1 !== i ? [val, <Bar size={5} className="bar" key={`bar-${i}`} />] : val
+    );
   };
 
   render() {
-    const { error, info } = this.state;
-    if (error) {
-      return (
-        <div style={{ whiteSpace: 'pre-wrap', marginLeft: '5px' }}>
-          <h1> oh oh :(</h1>
-          <button style={{ fontSize: '20px', background: 'aliceblue' }} onClick={this.retry}>
-            Retry
-          </button>
-          <p>Look for more info in the console</p>
-          <p>{error + info.componentStack}</p>
-        </div>
-      );
-    }
+    const { containerKey, isEditorShown, isViewerShown, isContentStateShown } = this.state;
+    const showEmptyState = !isEditorShown && !isViewerShown && !isContentStateShown;
 
-    return this.props.children;
+    return (
+      <div className="wrapper">
+        <Container key={containerKey} className="container">
+          {showEmptyState ? (
+            <div className="empty-state">Wix Rich Content</div>
+          ) : (
+            this.renderSections()
+          )}
+        </Container>
+        <Fab
+          isMobile={this.isMobile}
+          isEditorShown={isEditorShown}
+          isViewerShown={isViewerShown}
+          isContentStateShown={isContentStateShown}
+          toggleSectionVisibility={this.onSectionVisibilityChange}
+        />
+      </div>
+    );
   }
 }
 

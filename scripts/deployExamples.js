@@ -6,14 +6,6 @@ const execSync = require('child_process').execSync;
 
 const EXAMPLES_TO_DEPLOY = [
   {
-    name: 'rich-content-editor',
-    path: 'examples/editor',
-  },
-  {
-    name: 'rich-content-viewer',
-    path: 'examples/viewer',
-  },
-  {
     name: 'rich-content',
     path: 'examples/main',
   },

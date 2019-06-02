@@ -4,73 +4,58 @@
   @extend .fontElementMap !optional;
 }
 
-.editor {
-}
+.editor {}
 
 .atomic {
   margin: 15px 0;
 }
 
-.toolbar {
-}
+.toolbar {}
 
-.block {
-}
+.block {}
 
-.text {
-}
+.text {}
 
-.quote {
-}
+.quote {}
 
-.headerOne {
-}
+.headerOne {}
 
-.headerTwo {
-}
+.headerTwo {}
 
-.headerThree {
-}
+.headerThree {}
 
 .indent {
   //text-indent: 50px;
 }
 
-.orderedList {
-}
+.orderedList {}
 
-.unorderedList {
-}
+.unorderedList {}
 
-.code {
-}
+.code {}
 
-.codeBlock {
-}
+.codeBlock {}
 
-.desktop {
-}
+.desktop {}
 
-.elementSpacing {
-}
+.elementSpacing {}
 
-.blockStyleSpacing {
-}
+.blockStyleSpacing {}
 
-.left {
-}
+.left {}
 
-.center {
-}
+.center {}
 
-.right {
-}
+.right {}
 
-.justify {
-}
+.justify {}
 
-:global(.public-DraftStyleDefault-ul) {
-}
+:global(.public-DraftStyleDefault-ul) {}
 
-:global(.public-DraftStyleDefault-ol) {
+:global(.public-DraftStyleDefault-ol) {}
+
+@media only screen and (max-width: 640px) {
+  .wrapper {
+    top: 42px;
+  }
 }
