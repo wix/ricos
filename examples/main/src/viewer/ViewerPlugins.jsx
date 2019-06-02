@@ -43,9 +43,6 @@ import 'wix-rich-content-plugin-sound-cloud/dist/styles.min.css';
 import 'wix-rich-content-plugin-map/dist/styles.min.css';
 import 'wix-rich-content-plugin-file-upload/dist/styles.min.css';
 
-const anchorTarget = '_top';
-const relValue = 'noreferrer';
-
 const linkPluginSettings = {
   onClick: (event, url) => console.log('link clicked!', url),
 };
