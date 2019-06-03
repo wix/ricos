@@ -7,7 +7,7 @@ services:
     environment:
       - PORT=8123
   cypress:
-    image: "cypress/included:3.3.0"
+    image: "cypress/included:3.3.1"
     depends_on:
       - server
     environment:
