@@ -17,16 +17,13 @@ export const fixLinkUnderlineRanges = (block, entityMap) => {
     return block;
   }
 
-  const inlineStyleRanges = block.entityRanges
+  let inlineStyleRanges = block.entityRanges
     .filter(
       range => entityMap[range.key].type === 'LINK' && entityMap[range.key].underline !== false
     )
     .map(range => ({ offset: range.offset, length: range.length, style: 'UNDERLINE' }));
 
-  block.inlineStyleRanges = uniqWith(
-    [...(block.inlineStyleRanges || []), ...inlineStyleRanges],
-    isEqual
-  );
+  inlineStyleRanges = uniqWith([...(block.inlineStyleRanges || []), ...inlineStyleRanges], isEqual);
 
-  return block;
+  return { ...block, inlineStyleRanges };
 };

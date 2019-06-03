@@ -1,3 +1,4 @@
+import deepFreeze from 'deep-freeze';
 import uut from './normalizeInitialState';
 
 const createState = ({
@@ -7,10 +8,11 @@ const createState = ({
   entityRanges = [],
   entityMap = {},
   data = {},
-}) => ({
-  blocks: [{ text, type, inlineStyleRanges, depth: 0, key: '1', entityRanges, data }],
-  entityMap,
-});
+}) =>
+  deepFreeze({
+    blocks: [{ text, type, inlineStyleRanges, depth: 0, key: '1', entityRanges, data }],
+    entityMap,
+  });
 
 describe('normalizeInitialState', () => {
   describe('inline header removal', () => {
