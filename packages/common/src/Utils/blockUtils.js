@@ -1,3 +1,6 @@
+import uniqWith from 'lodash/uniqWith';
+import isEqual from 'lodash/isEqual';
+
 /**
  * fixAtomicBlockText
  * @description sets whitespace as atomic block text
@@ -20,7 +23,10 @@ export const fixLinkUnderlineRanges = (block, entityMap) => {
     )
     .map(range => ({ offset: range.offset, length: range.length, style: 'UNDERLINE' }));
 
-  block.inlineStyleRanges = [...(block.inlineStyleRanges || []), ...inlineStyleRanges];
+  block.inlineStyleRanges = uniqWith(
+    [...(block.inlineStyleRanges || []), ...inlineStyleRanges],
+    isEqual
+  );
 
   return block;
 };

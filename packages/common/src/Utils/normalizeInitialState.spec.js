@@ -319,39 +319,39 @@ describe('normalizeInitialState', () => {
       });
       expect(actual).toEqual(expected);
     });
-    // it('should not duplicate ranges', () => {
-    //   const initialState = {
-    //     text: 'text_1',
-    //     entityRanges: [
-    //       {
-    //         offset: 0,
-    //         length: 6,
-    //         key: 0,
-    //       },
-    //     ],
-    //     entityMap: {
-    //       0: {
-    //         type: 'LINK',
-    //         mutability: 'MUTABLE',
-    //         data: {
-    //           url: 'link1.com',
-    //           target: '_blank',
-    //           rel: 'nofollow',
-    //         },
-    //       },
-    //     },
-    //     inlineStyleRanges: [
-    //       {
-    //         offset: 0,
-    //         length: 6,
-    //         style: 'UNDERLINE',
-    //       },
-    //     ],
-    //   };
+    it('should not duplicate ranges', () => {
+      const initialState = {
+        text: 'text_1',
+        entityRanges: [
+          {
+            offset: 0,
+            length: 6,
+            key: 0,
+          },
+        ],
+        entityMap: {
+          0: {
+            type: 'LINK',
+            mutability: 'MUTABLE',
+            data: {
+              url: 'link1.com',
+              target: '_blank',
+              rel: 'nofollow',
+            },
+          },
+        },
+        inlineStyleRanges: [
+          {
+            offset: 0,
+            length: 6,
+            style: 'UNDERLINE',
+          },
+        ],
+      };
 
-    //   const actual = uut(createState(initialState), config);
-    //   const expected = createState(initialState);
-    //   expect(actual).toEqual(expected);
-    // });
+      const actual = uut(createState(initialState), config);
+      const expected = createState(initialState);
+      expect(actual).toEqual(expected);
+    });
   });
 });
