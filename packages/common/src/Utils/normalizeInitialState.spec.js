@@ -196,6 +196,11 @@ describe('normalizeInitialState', () => {
             length: 6,
             key: 0,
           },
+          {
+            offset: 0,
+            length: 1,
+            key: 1,
+          },
         ],
         entityMap: {
           0: {
@@ -205,6 +210,18 @@ describe('normalizeInitialState', () => {
               url: 'link1.com',
               target: '_blank',
               rel: 'nofollow',
+            },
+          },
+          1: {
+            type: 'wix-draft-plugin-divider',
+            mutability: 'IMMUTABLE',
+            data: {
+              type: 'single',
+              config: {
+                size: 'large',
+                alignment: 'center',
+                textWrap: 'nowrap',
+              },
             },
           },
         },
@@ -223,6 +240,7 @@ describe('normalizeInitialState', () => {
       });
       expect(actual).toEqual(expected);
     });
+
     it('should skip entity ranges with disabled underline', () => {
       const initialState = {
         text: 'text_1 text_2',
@@ -273,6 +291,7 @@ describe('normalizeInitialState', () => {
       });
       expect(actual).toEqual(expected);
     });
+
     it('should not modify existing inline style ranges', () => {
       const initialState = {
         text: 'text_1',
@@ -321,6 +340,7 @@ describe('normalizeInitialState', () => {
       });
       expect(actual).toEqual(expected);
     });
+
     it('should not duplicate ranges', () => {
       const initialState = {
         text: 'text_1',
