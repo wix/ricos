@@ -241,7 +241,7 @@ describe('normalizeInitialState', () => {
       expect(actual).toEqual(expected);
     });
 
-    it('should skip entity ranges with disabled underline', () => {
+    it('should skip versioned entity with handled underline', () => {
       const initialState = {
         text: 'text_1 text_2',
         entityRanges: [
@@ -268,7 +268,7 @@ describe('normalizeInitialState', () => {
           },
           1: {
             type: 'LINK',
-            underline: false,
+            version: '3.4.7',
             mutability: 'MUTABLE',
             data: {
               url: 'link2.com',
