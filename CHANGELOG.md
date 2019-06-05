@@ -10,15 +10,23 @@
 ## [Unreleased]
 ### :boom: Breaking Change
 - `text-color`
-  - [#310](https://github.com/wix-incubator/rich-content/pull/310) viewer-side decorator replaced by inline-style-mapper. See [documentation](./docs/PluginCustomization.md) for more details
+  - [#310](https://github.com/wix-incubator/rich-content/pull/310) viewer-side decorator replaced by `inline-style-mapper`. See [documentation](./docs/PluginCustomization.md) for more details
 ### :rocket: New Feature
 - `viewer`
   - [#310](https://github.com/wix-incubator/rich-content/pull/310) `inlineStyleMappers` API exposed
+- `common`
+  - versioning utils added: `getCurrent`, `compare`, `evaluate`
+  - `normalizeInitialState` refactored; now considers versions; adds the underline style to links with version < 3.4.7
+- `link`
+  - underline style can be removed from link
 ### :bug: Bug Fix
+- `text-color`
+  - [#310](https://github.com/wix-incubator/rich-content/pull/310) color applied to `link`, `hashtag` and `mention` correctly
+  - color applied to link underline decoration correctly
 - `mention`
-  - [#310](https://github.com/wix-incubator/rich-content/pull/310) merged styles applied to mention-viewer
+  - [#310](https://github.com/wix-incubator/rich-content/pull/310) merged styles applied to `mention-viewer`
 - `hashtag`
-  - [#310](https://github.com/wix-incubator/rich-content/pull/310) underline-style applied to the hashtag content rather itself
+  - [#310](https://github.com/wix-incubator/rich-content/pull/310) underline style applied to the hashtag content rather itself
 ### :house: Internal
 - `example`
   - [#309](https://github.com/wix-incubator/rich-content/pull/309) removed standalone editor and viewer examples + overhaul on main example
