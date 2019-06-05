@@ -12,17 +12,17 @@
 - `text-color`
   - [#310](https://github.com/wix-incubator/rich-content/pull/310) viewer-side decorator replaced by `inline-style-mapper`. See [documentation](./docs/PluginCustomization.md) for more details
 ### :rocket: New Feature
+- `common`
+  - [#311](https://github.com/wix-incubator/rich-content/pull/311) versioning utils added: `getCurrent`, `compare`, `evaluate`
+  - [#311](https://github.com/wix-incubator/rich-content/pull/311) `normalizeInitialState` refactored; now considers versions; adds the underline style to links with version < 3.4.7
+- `link`
+  - [#311](https://github.com/wix-incubator/rich-content/pull/311) underline style can be removed from link
 - `viewer`
   - [#310](https://github.com/wix-incubator/rich-content/pull/310) `inlineStyleMappers` API exposed
-- `common`
-  - versioning utils added: `getCurrent`, `compare`, `evaluate`
-  - `normalizeInitialState` refactored; now considers versions; adds the underline style to links with version < 3.4.7
-- `link`
-  - underline style can be removed from link
 ### :bug: Bug Fix
 - `text-color`
+  - [#311](https://github.com/wix-incubator/rich-content/pull/311) color applied to link underline decoration correctly
   - [#310](https://github.com/wix-incubator/rich-content/pull/310) color applied to `link`, `hashtag` and `mention` correctly
-  - color applied to link underline decoration correctly
 - `mention`
   - [#310](https://github.com/wix-incubator/rich-content/pull/310) merged styles applied to `mention-viewer`
 - `hashtag`
