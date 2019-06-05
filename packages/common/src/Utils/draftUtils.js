@@ -2,6 +2,7 @@ import { EditorState, Modifier, RichUtils, SelectionState } from '@wix/draft-js'
 import flatMap from 'lodash/flatMap';
 import findIndex from 'lodash/findIndex';
 import findLastIndex from 'lodash/findLastIndex';
+import Version from './versioningUtils';
 
 export const insertLink = (editorState, { url, targetBlank, nofollow, anchorTarget, relValue }) => {
   const selection = getSelection(editorState);
@@ -10,6 +11,7 @@ export const insertLink = (editorState, { url, targetBlank, nofollow, anchorTarg
     url,
     target: targetBlank ? '_blank' : anchorTarget || '_self',
     rel: nofollow ? 'nofollow' : relValue || 'noopener',
+    version: Version.getCurrent(),
   });
   const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
 

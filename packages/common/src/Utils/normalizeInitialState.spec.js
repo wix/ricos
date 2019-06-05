@@ -1,5 +1,6 @@
 import deepFreeze from 'deep-freeze';
 import uut from './normalizeInitialState';
+import Version from './versioningUtils';
 
 const createState = ({
   text = 'bla bla bla  bla   ',
@@ -230,6 +231,19 @@ describe('normalizeInitialState', () => {
       const actual = uut(createState(initialState), config);
       const expected = createState({
         ...initialState,
+        entityMap: {
+          ...initialState.entityMap,
+          0: {
+            type: 'LINK',
+            mutability: 'MUTABLE',
+            data: {
+              url: 'link1.com',
+              target: '_blank',
+              rel: 'nofollow',
+              version: Version.getCurrent(),
+            },
+          },
+        },
         inlineStyleRanges: [
           {
             offset: 0,
@@ -255,6 +269,11 @@ describe('normalizeInitialState', () => {
             length: 6,
             key: 1,
           },
+          {
+            offset: 12,
+            length: 4,
+            key: 2,
+          },
         ],
         entityMap: {
           0: {
@@ -268,9 +287,19 @@ describe('normalizeInitialState', () => {
           },
           1: {
             type: 'LINK',
-            version: '3.4.7',
             mutability: 'MUTABLE',
             data: {
+              version: '3.4.7',
+              url: 'link2.com',
+              target: '_blank',
+              rel: 'nofollow',
+            },
+          },
+          2: {
+            type: 'LINK',
+            mutability: 'MUTABLE',
+            data: {
+              version: '3.4.5',
               url: 'link2.com',
               target: '_blank',
               rel: 'nofollow',
@@ -281,10 +310,38 @@ describe('normalizeInitialState', () => {
       const actual = uut(createState(initialState), config);
       const expected = createState({
         ...initialState,
+        entityMap: {
+          ...initialState.entityMap,
+          0: {
+            type: 'LINK',
+            mutability: 'MUTABLE',
+            data: {
+              url: 'link1.com',
+              target: '_blank',
+              rel: 'nofollow',
+              version: Version.getCurrent(),
+            },
+          },
+          2: {
+            type: 'LINK',
+            mutability: 'MUTABLE',
+            data: {
+              version: Version.getCurrent(),
+              url: 'link2.com',
+              target: '_blank',
+              rel: 'nofollow',
+            },
+          },
+        },
         inlineStyleRanges: [
           {
             offset: 0,
             length: 6,
+            style: 'UNDERLINE',
+          },
+          {
+            offset: 12,
+            length: 4,
             style: 'UNDERLINE',
           },
         ],
@@ -325,6 +382,19 @@ describe('normalizeInitialState', () => {
       const actual = uut(createState(initialState), config);
       const expected = createState({
         ...initialState,
+        entityMap: {
+          ...initialState.entityMap,
+          0: {
+            type: 'LINK',
+            mutability: 'MUTABLE',
+            data: {
+              url: 'link1.com',
+              target: '_blank',
+              rel: 'nofollow',
+              version: Version.getCurrent(),
+            },
+          },
+        },
         inlineStyleRanges: [
           {
             offset: 0,
@@ -372,7 +442,22 @@ describe('normalizeInitialState', () => {
       };
 
       const actual = uut(createState(initialState), config);
-      const expected = createState(initialState);
+      const expected = createState({
+        ...initialState,
+        entityMap: {
+          ...initialState.entityMap,
+          0: {
+            type: 'LINK',
+            mutability: 'MUTABLE',
+            data: {
+              url: 'link1.com',
+              target: '_blank',
+              rel: 'nofollow',
+              version: Version.getCurrent(),
+            },
+          },
+        },
+      });
       expect(actual).toEqual(expected);
     });
   });

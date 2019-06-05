@@ -1,8 +1,8 @@
-import { removeInlineHeaderRanges } from './removeInlineHeaderRanges';
-import { fixAtomicBlockText, fixLinkUnderlineRanges } from './blockUtils';
 import mapValues from 'lodash/mapValues';
 import cloneDeep from 'lodash/cloneDeep';
 import isUndefined from 'lodash/isUndefined';
+import Version from './versioningUtils';
+import { processBlocks } from './processBlocks';
 
 const normalizeEntityType = (entityType, entityTypeMap) => {
   if (entityType in entityTypeMap) {
@@ -16,6 +16,10 @@ const normalizeEntityType = (entityType, entityTypeMap) => {
 const dataNormalizers = {
   // converts { targetBlank, nofollow } => { target, rel }
   LINK: (componentData, { anchorTarget, relValue }) => {
+    if (!componentData.version || Version.lessThan(componentData.version, Version.getCurrent())) {
+      componentData.version = Version.getCurrent();
+    }
+
     const { targetBlank, nofollow, target, rel } = componentData;
     if (
       isUndefined(targetBlank) &&
@@ -29,10 +33,11 @@ const dataNormalizers = {
     delete componentData.targetBlank;
     delete componentData.nofollow;
 
-    return Object.assign(componentData, {
+    return {
+      ...componentData,
       target: targetBlank ? '_blank' : anchorTarget || '_self',
       rel: nofollow ? 'nofollow' : relValue || 'noopener',
-    });
+    };
   },
 };
 
@@ -98,14 +103,7 @@ export default (initialState, config) => {
   const { blocks, entityMap } = initialState;
 
   return {
-    blocks: blocks
-      .map(block => {
-        let processedBlock = fixAtomicBlockText(block);
-        processedBlock = fixLinkUnderlineRanges(processedBlock, entityMap);
-
-        return processedBlock;
-      })
-      .map(removeInlineHeaderRanges),
+    blocks: processBlocks({ blocks, entityMap, config }),
     entityMap: mapValues(entityMap, entity =>
       shouldNormalizeEntityConfig(entity, Object.keys(entityTypeMap.configNormalization))
         ? {

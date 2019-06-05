@@ -27,7 +27,7 @@ const INLINE_HEADER_TO_BLOCK = {
  * & inline-header-two will be converted to header-two block.
  */
 export const removeInlineHeaderRanges = block => {
-  const inlineHeaderRanges = getInlineHeaderRanges(block.inlineStyleRanges);
+  const inlineHeaderRanges = getInlineHeaderRanges(block.inlineStyleRanges || []);
   if (isEmpty(inlineHeaderRanges)) {
     return block;
   }
@@ -35,7 +35,7 @@ export const removeInlineHeaderRanges = block => {
   return {
     ...block,
     type: getBlockType(block.type, block.text, inlineHeaderRanges),
-    inlineStyleRanges: omitInlineHeaderRanges(block.inlineStyleRanges),
+    inlineStyleRanges: omitInlineHeaderRanges(block.inlineStyleRanges || []),
   };
 };
 
