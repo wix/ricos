@@ -30,7 +30,7 @@
     "e2e:updateSnapshots": "npm run e2e:run -- --env updateSnapshots=true",
     "test:unit": "lerna run --parallel --stream test",
     "lint": "lerna run --parallel --stream lint",
-    "test": "npm run test:unit && npm run e2e:ci:"
+    "test": "npm run test:unit && npm run e2e:ci"
   },
   "husky": {
     "hooks": {
