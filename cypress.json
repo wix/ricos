@@ -6,5 +6,6 @@
   "pluginsFile": "e2e/cypress/plugins/index.js",
   "screenshotsFolder": "e2e/cypress/screenshots",
   "supportFile": "e2e/cypress/support/index.js",
+  "video": false,
   "videosFolder": "e2e/cypress/videos"
 }
