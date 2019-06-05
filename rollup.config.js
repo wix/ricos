@@ -13,7 +13,7 @@ import postcssURL from 'postcss-url';
 import pascalCase from 'pascal-case';
 import cloneDeep from 'lodash/cloneDeep';
 import nodeGlobalsPolyfill from 'rollup-plugin-node-globals';
-import { externals, globals, excludedExternals, excludedGlobals } from './rollup.externals';
+import { externals, excludedExternals } from './rollup.externals';
 
 if (!process.env.MODULE_NAME) {
   console.error('Environment variable "MODULE_NAME" is missing!');
@@ -128,24 +128,24 @@ let output = [
     format: 'cjs',
     sourcemap: true,
   },
-  {
-    name: NAME,
-    format: 'iife',
-    file: `dist/${MODULE_NAME}.js`,
-    globals: id => {
-      const isExcluded = excludedGlobals.find(p => p === id);
-      if (!isExcluded) {
-        const globalKey = Object.keys(globals).find(
-          externalName => externalName === id || new RegExp(externalName + '/').test(id)
-        );
-        if (globalKey) {
-          return globals[globalKey];
-        }
-      }
-      return false;
-    },
-    sourcemap: true,
-  },
+  // {
+  //   name: NAME,
+  //   format: 'iife',
+  //   file: `dist/${MODULE_NAME}.js`,
+  //   globals: id => {
+  //     const isExcluded = excludedGlobals.find(p => p === id);
+  //     if (!isExcluded) {
+  //       const globalKey = Object.keys(globals).find(
+  //         externalName => externalName === id || new RegExp(externalName + '/').test(id)
+  //       );
+  //       if (globalKey) {
+  //         return globals[globalKey];
+  //       }
+  //     }
+  //     return false;
+  //   },
+  //   sourcemap: true,
+  // },
 ];
 
 if (process.env.MODULE_WATCH) {

@@ -5,16 +5,13 @@ const { HotModuleReplacementPlugin } = require('webpack');
 const devConfig = {
   mode: 'development',
   devtool: 'eval-source-map',
-  optimization: {
-    namedModules: false,
-  },
   module: {
     rules: [
       {
         test: /\.js$/,
         use: ['source-map-loader'],
         enforce: 'pre',
-        exclude: /node_modules.*node_modules/,
+        exclude: [/node_modules.*node_modules/, /node_modules\/monaco-editor/],
       },
     ],
   },
@@ -26,6 +23,7 @@ const devConfig = {
     compress: true,
     publicPath: '/',
     stats: 'errors-only',
+    disableHostCheck: true,
   },
 };
 

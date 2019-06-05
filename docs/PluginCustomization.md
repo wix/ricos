@@ -91,6 +91,20 @@ The `toolbar` setting refers to plugin functionality toolbar. Currently, it expo
 
 **Note**: `selectionColor` prop is deprecated, please override the `.colorPicker_button_selected::after` class `border-color` rule (theme).
 
+#### Text Color Inline Style Mapper
+The `RichContentViewer` exposes the `inlineStyleMappers` prop. The mapper purpose is to provide a mapping `inlineStyle => Component`, that is used by the `RichContentViewer`. The prop value is expected to be an array of functions of the following signature:
+
+```js
+
+() => {
+  style1: {children, { key }} => <Component1 .../>,
+  style2: {children, { key }} => <Component2 .../>,
+  ...
+}
+
+```
+
+Specifically, the `textColorInlineStyleMapper` API accepts two parameters -- `config` and `raw` (aka ContentState), and returns the mapper array. The custom inline styles are picked from the `raw` according to the `styleSelectionPredicate`, and the style conversion is performed by the `customStyleFn` (2). Both APIs should be provided by the consumer within `config` object.
 
 ## References and Examples
 

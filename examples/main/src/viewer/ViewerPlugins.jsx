@@ -1,3 +1,4 @@
+import React from 'react';
 import theme from '../theme/theme';
 import { videoTypeMapper } from 'wix-rich-content-plugin-video/dist/module.viewer';
 import { dividerTypeMapper } from 'wix-rich-content-plugin-divider/dist/module.viewer';
@@ -22,9 +23,10 @@ import {
   mentionsTypeMapper,
 } from 'wix-rich-content-plugin-mentions/dist/module.viewer';
 import { fileUploadTypeMapper } from 'wix-rich-content-plugin-file-upload/dist/module.viewer';
-import { createTextColorDecorator, TEXT_COLOR_TYPE } from 'wix-rich-content-plugin-text-color';
+import { textColorInlineStyleMapper, TEXT_COLOR_TYPE } from 'wix-rich-content-plugin-text-color';
 
 import { viewerCustomStyleFn, styleSelectionPredicate } from '../text-color-style-fn';
+import { anchorTarget, relValue } from '../consts';
 
 import 'wix-rich-content-common/dist/styles.min.css';
 import 'wix-rich-content-viewer/dist/styles.min.css';
@@ -40,6 +42,7 @@ import 'wix-rich-content-plugin-video/dist/styles.min.css';
 import 'wix-rich-content-plugin-sound-cloud/dist/styles.min.css';
 import 'wix-rich-content-plugin-map/dist/styles.min.css';
 import 'wix-rich-content-plugin-file-upload/dist/styles.min.css';
+import { getHostname } from '../utils';
 
 const linkPluginSettings = {
   onClick: (event, url) => console.log('link clicked!', url),
@@ -71,7 +74,7 @@ export const config = {
     hideMarkdown: true,
   },
   [HTML_TYPE]: {
-    htmlIframeSrc: 'http://localhost:3000/static/html-plugin-embed.html',
+    htmlIframeSrc: `http://${getHostname()}/static/html-plugin-embed.html`,
   },
   [LINK_TYPE]: linkPluginSettings,
   [MENTION_TYPE]: mentionsPluginSettings,
@@ -80,6 +83,8 @@ export const config = {
     customStyleFn: viewerCustomStyleFn,
   },
 };
+
+export const getInlineStyleMappers = raw => [textColorInlineStyleMapper(config, raw)];
 
 export const decorators = [
   {
@@ -112,5 +117,4 @@ export const decorators = [
   },
   new CodeBlockDecorator({ theme }),
   createHeadersMarkdownDecorator(config),
-  createTextColorDecorator(config),
 ];

@@ -1,8 +1,7 @@
-import { PureComponent } from 'react';
+import React, { PureComponent } from 'react';
 import ReactModal from 'react-modal';
 import { RichContentViewer } from 'wix-rich-content-viewer';
 import * as PropTypes from 'prop-types';
-import React from 'react';
 import * as Plugins from './ViewerPlugins';
 import theme from '../theme/theme'; // must import after custom styles
 
@@ -23,6 +22,7 @@ const relValue = 'noreferrer';
 export default class Viewer extends PureComponent {
   constructor(props) {
     super(props);
+    ReactModal.setAppElement('#root');
     this.state = {};
   }
 
@@ -35,15 +35,16 @@ export default class Viewer extends PureComponent {
 
   render() {
     return (
-      <div className="viewer">
+      <div id="rich-content-viewer" className="viewer">
         <RichContentViewer
           helpers={this.helpers}
           typeMappers={Plugins.typeMappers}
+          inlineStyleMappers={Plugins.getInlineStyleMappers(this.props.initialState)}
           decorators={Plugins.decorators}
           config={Plugins.config}
           initialState={this.props.initialState}
           theme={theme}
-          isMobile={this.props.mobile}
+          isMobile={this.props.isMobile}
           anchorTarget={anchorTarget}
           relValue={relValue}
         />
@@ -62,6 +63,5 @@ export default class Viewer extends PureComponent {
 
 Viewer.propTypes = {
   initialState: PropTypes.any,
-  mobile: PropTypes.any,
-  config: PropTypes.any,
+  isMobile: PropTypes.bool,
 };

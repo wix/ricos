@@ -20,7 +20,6 @@ import {
 import { createMapPlugin, MAP_TYPE } from 'wix-rich-content-plugin-map';
 import { createFileUploadPlugin, FILE_UPLOAD_TYPE } from 'wix-rich-content-plugin-file-upload';
 import { createTextColorPlugin, TEXT_COLOR_TYPE } from 'wix-rich-content-plugin-text-color';
-
 import React from 'react';
 import Highlighter from 'react-highlight-words';
 import casual from 'casual-browserify';
@@ -44,6 +43,7 @@ import 'wix-rich-content-plugin-file-upload/dist/styles.min.css';
 import 'wix-rich-content-plugin-text-color/dist/styles.min.css';
 
 import { customStyleFn, styleSelectionPredicate, colorScheme } from '../text-color-style-fn';
+import { getHostname } from '../utils';
 
 // import { TOOLBARS, BUTTONS, DISPLAY_MODE } from 'wix-rich-content-common';
 // import InlineToolbarDecoration from './Components/InlineToolbarDecoration';
@@ -152,7 +152,7 @@ export const config = {
     },
   },
   [HTML_TYPE]: {
-    htmlIframeSrc: 'http://localhost:3000/static/html-plugin-embed.html',
+    htmlIframeSrc: `http://${getHostname()}/static/html-plugin-embed.html`,
     minWidth: 35,
     maxWidth: 740,
     height: 250,
