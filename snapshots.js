@@ -1,5 +1,5 @@
 module.exports = {
-  "__version": "3.3.0",
+  "__version": "3.3.1",
   "editor": {
     "should allow to enter text": {
       "1": {
