@@ -22,7 +22,7 @@
     "createVersion": "node scripts/createVersion",
     "e2e": "start-server-and-test e2e:env http://localhost:3002 e2e:run",
     "e2e:ci": "start-server-and-test e2e:env:run http://localhost:3002 e2e:run:ci",
-    "e2e:run": "docker run -it -v $PWD:/e2e -w /e2e --entrypoint=cypress cypress/included:3.3.1 run --config baseUrl=http://host.docker.internal:3002",
+    "e2e:run": "docker run -it -v $PWD:/e2e -w /e2e --entrypoint=ls cypress/included:3.3.1 packages/common/src -la",
     "e2e:run:ci": "docker run -it -v $PWD:/e2e -w /e2e --network='host' cypress/included:3.3.1",
     "e2e:debug": "cypress open",
     "e2e:env": "cd e2e/test-env && npm run build && npm start",
