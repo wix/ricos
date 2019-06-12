@@ -8,6 +8,9 @@
 > - :house: [Internal]
 
 ## [Unreleased]
+### :house: Internal
+- `example`
+  - content state data validation improved
 <hr/>
 
 ## 3.5.1 (Jun 10, 2019)
