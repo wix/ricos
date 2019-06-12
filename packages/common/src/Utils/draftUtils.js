@@ -3,50 +3,78 @@ import flatMap from 'lodash/flatMap';
 import findIndex from 'lodash/findIndex';
 import findLastIndex from 'lodash/findLastIndex';
 
-export const insertLink = (editorState, { url, targetBlank, nofollow, anchorTarget, relValue }) => {
-  const selection = getSelection(editorState);
-  const content = editorState.getCurrentContent();
-  const contentStateWithEntity = content.createEntity('LINK', 'MUTABLE', {
-    url,
-    target: targetBlank ? '_blank' : anchorTarget || '_self',
-    rel: nofollow ? 'nofollow' : relValue || 'noopener',
+export const insertLinkInPosition = (
+  editorState,
+  blockKey,
+  start,
+  end,
+  { url, targetBlank, nofollow, anchorTarget, relValue }
+) => {
+  const selection = SelectionState.createEmpty(blockKey).merge({
+    anchorOffset: start,
+    focusOffset: end,
   });
-  const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
+  return insertLink(editorState, selection, {
+    url,
+    targetBlank,
+    nofollow,
+    anchorTarget,
+    relValue,
+  });
+};
 
-  let newSelection = selection;
-  let newEditorState;
-
-  if (!selection.isCollapsed()) {
-    newEditorState = RichUtils.toggleLink(editorState, selection, entityKey);
-  } else {
-    const offset = selection.getStartOffset();
-    const focusOffset = offset + url.length;
-    const blockKey = selection.getStartKey();
-    const linkRange = new SelectionState({
-      anchorOffset: offset,
-      anchorKey: blockKey,
-      focusOffset,
-      focusKey: blockKey,
-    });
-
-    const content = editorState.getCurrentContent();
-    const newContent = Modifier.insertText(content, selection, url);
-    newEditorState = RichUtils.toggleLink(
-      EditorState.push(editorState, newContent, 'insert-characters'),
-      linkRange,
-      entityKey
-    );
-
-    newSelection = new SelectionState({
-      anchorOffset: focusOffset,
-      anchorKey: blockKey,
-      focusOffset,
-      focusKey: blockKey,
-    });
+export const insertLinkAtCurrentSelection = (
+  editorState,
+  { url, targetBlank, nofollow, anchorTarget, relValue }
+) => {
+  let selection = getSelection(editorState);
+  let newEditorState = editorState;
+  if (selection.isCollapsed()) {
+    const contentState = Modifier.insertText(editorState.getCurrentContent(), selection, url);
+    selection = selection.merge({ focusOffset: selection.getFocusOffset() + url.length });
+    newEditorState = EditorState.push(editorState, contentState, 'insert-characters');
   }
 
-  return EditorState.forceSelection(newEditorState, newSelection);
+  const editorStateWithLink = insertLink(newEditorState, selection, {
+    url,
+    targetBlank,
+    nofollow,
+    anchorTarget,
+    relValue,
+  });
+
+  return EditorState.forceSelection(
+    editorStateWithLink,
+    selection.merge({ anchorOffset: selection.focusOffset })
+  );
 };
+
+function insertLink(
+  editorState,
+  selection,
+  { url, targetBlank, nofollow, anchorTarget, relValue }
+) {
+  return addEntity(editorState, selection, {
+    type: 'LINK',
+    data: {
+      url,
+      target: targetBlank ? '_blank' : anchorTarget || '_self',
+      rel: nofollow ? 'nofollow' : relValue || 'noopener',
+    },
+  });
+}
+
+function addEntity(editorState, targetSelection, entityData) {
+  const entityKey = createEntity(editorState, entityData);
+  const oldSelection = editorState.getSelection();
+  const newContentState = Modifier.applyEntity(
+    editorState.getCurrentContent(),
+    targetSelection,
+    entityKey
+  ).set('selectionAfter', oldSelection);
+
+  return EditorState.push(editorState, newContentState, 'apply-entity');
+}
 
 export const hasLinksInSelection = editorState => {
   return !!getSelectedLinks(editorState).length;
@@ -194,6 +222,13 @@ function removeLink(editorState, blockKey, [start, end]) {
   selection = selection.set('anchorOffset', start);
   selection = selection.set('focusOffset', end);
   return RichUtils.toggleLink(editorState, selection, null);
+}
+
+function createEntity(editorState, { type, mutability = 'MUTABLE', data }) {
+  return editorState
+    .getCurrentContent()
+    .createEntity(type, mutability, data)
+    .getLastCreatedEntityKey();
 }
 
 function getSelection(editorState) {

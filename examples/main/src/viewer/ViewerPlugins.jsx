@@ -6,9 +6,7 @@ import { HTML_TYPE, htmlTypeMapper } from 'wix-rich-content-plugin-html/dist/mod
 import { soundCloudTypeMapper } from 'wix-rich-content-plugin-sound-cloud/dist/module.viewer';
 import {
   LINK_TYPE,
-  LinkParseStrategy,
   linkTypeMapper,
-  LinkViewer,
 } from 'wix-rich-content-plugin-link/dist/module.viewer';
 import { imageTypeMapper } from 'wix-rich-content-plugin-image/dist/module.viewer';
 import { mapTypeMapper } from 'wix-rich-content-plugin-map/dist/module.viewer';
@@ -42,6 +40,7 @@ import 'wix-rich-content-plugin-video/dist/styles.min.css';
 import 'wix-rich-content-plugin-sound-cloud/dist/styles.min.css';
 import 'wix-rich-content-plugin-map/dist/styles.min.css';
 import 'wix-rich-content-plugin-file-upload/dist/styles.min.css';
+import {CONTENT_STATE_VERSION} from 'wix-rich-content-common';
 import { getBaseUrl } from '../utils';
 
 const linkPluginSettings = {
@@ -82,19 +81,6 @@ export const config = {
 export const getInlineStyleMappers = raw => [textColorInlineStyleMapper(config, raw)];
 
 export const decorators = [
-  {
-    strategy: LinkParseStrategy,
-    component: ({ children, decoratedText, rel, target }) => (
-      <LinkViewer
-        componentData={{ rel, target, url: decoratedText }}
-        anchorTarget={anchorTarget}
-        relValue={relValue}
-        settings={linkPluginSettings}
-      >
-        {children}
-      </LinkViewer>
-    ),
-  },
   new HashtagDecorator({
     theme,
     onClick: (event, text) => {

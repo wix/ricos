@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { EditorState } from '@wix/draft-js';
 import isEmpty from 'lodash/isEmpty';
 import {
-  insertLink,
+  insertLinkAtCurrentSelection,
   getLinkDataInSelection,
   removeLinksInSelection,
   LinkPanelContainer,
@@ -44,7 +44,7 @@ export default class TextLinkPanel extends Component {
     const { anchorTarget, relValue } = this.props;
     if (!isEmpty(url)) {
       const { getEditorState, setEditorState } = this.props;
-      const newEditorState = insertLink(getEditorState(), {
+      const newEditorState = insertLinkAtCurrentSelection(getEditorState(), {
         url,
         targetBlank,
         nofollow,

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { EditorState } from '@wix/draft-js';
 import isEmpty from 'lodash/isEmpty';
 import {
-  insertLink,
+  insertLinkAtCurrentSelection,
   getLinkDataInSelection,
   removeLinksInSelection,
 } from 'wix-rich-content-common';
@@ -15,7 +15,7 @@ export default class MobileTextLinkModal extends Component {
   createLinkEntity = ({ url, targetBlank, nofollow }) => {
     if (!isEmpty(url)) {
       const { getEditorState, setEditorState, anchorTarget, relValue } = this.props;
-      const newEditorState = insertLink(getEditorState(), {
+      const newEditorState = insertLinkAtCurrentSelection(getEditorState(), {
         url,
         targetBlank,
         nofollow,

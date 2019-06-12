@@ -2,6 +2,7 @@ import { removeInlineHeaderRanges } from './removeInlineHeaderRanges';
 import mapValues from 'lodash/mapValues';
 import cloneDeep from 'lodash/cloneDeep';
 import isUndefined from 'lodash/isUndefined';
+import { getUrlMatches } from './urlValidators';
 
 const normalizeEntityType = (entityType, entityTypeMap) => {
   if (entityType in entityTypeMap) {
@@ -82,7 +83,7 @@ const shouldNormalizeEntityConfig = (entity, normalizationMap) =>
 const shouldNormalizeEntityData = (entity, normalizationMap) =>
   normalizationMap.includes(entity.type) && entity.data;
 
-export default (initialState, config) => {
+export default (initialState, config = {}) => {
   const entityTypeMap = {
     configNormalization: {
       IMAGE: 'wix-draft-plugin-image',
@@ -95,7 +96,7 @@ export default (initialState, config) => {
 
   const { blocks, entityMap } = initialState;
 
-  return {
+  const state = {
     blocks: blocks
       .map(block => {
         switch (block.type) {
@@ -121,5 +122,47 @@ export default (initialState, config) => {
           }
         : entity
     ),
+  };
+
+  const linkifyRemovalVersion = 2;
+  if (!initialState.VERSION || initialState.VERSION < linkifyRemovalVersion) {
+    linkify(state, config);
+  }
+  return state;
+};
+
+const linkify = (state, { anchorTarget, relValue }) => {
+  state.blocks.forEach(block => {
+    const { text } = block;
+    getUrlMatches(text)
+      .filter(({ text: url, index: start, lastIndex: end }) => {
+        const alreadyHasEntity = hasEntityInRange(block, start, end);
+        const longEnough = url.length >= 6;
+        return !alreadyHasEntity && longEnough;
+      })
+      .forEach(({ text: url, index: start, lastIndex: end }) => {
+        addEntity(block, state.entityMap, url, start, end, anchorTarget, relValue);
+      });
+  });
+};
+
+const hasEntityInRange = (block, start, end) =>
+  block.entityRanges.some(({ offset, length }) => start < offset + length && end >= offset);
+
+const addEntity = (block, entityMap, url, start, end, anchorTarget, relValue) => {
+  const key = Object.keys(entityMap).length;
+  block.entityRanges.push({
+    offset: start,
+    length: end - start,
+    key,
+  });
+  entityMap[key + ''] = {
+    type: 'LINK',
+    mutability: 'MUTABLE',
+    data: {
+      url,
+      target: anchorTarget || '_blank',
+      rel: relValue || 'nofollow',
+    },
   };
 };

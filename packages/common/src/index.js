@@ -77,7 +77,8 @@ export {
 } from './Utils/urlValidators';
 
 export {
-  insertLink,
+  insertLinkAtCurrentSelection,
+  insertLinkInPosition,
   hasLinksInSelection,
   getLinkDataInSelection,
   removeLinksInSelection,
@@ -102,4 +103,5 @@ export {
   DECORATION_MODE,
   HEADER_BLOCK,
   BLOCK_TYPES,
+  CONTENT_STATE_VERSION,
 } from './consts';
