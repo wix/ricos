@@ -65,11 +65,14 @@
 }
 
 .colorPicker_buttons_container {
-  width: 100%;
+  width: calc(100% - 25px);
   padding-bottom: 34px;
   margin-bottom: 22px;
   margin-left: 2px;
   border-bottom: 1px solid #ccc;
+  @include phone{
+    width: 100%;
+  }
 }
 .colorPicker_add_color_button {
   margin-left: 0px;
