@@ -22,7 +22,7 @@ import { GIPHY_TYPE } from 'wix-rich-content-plugin-giphy';
 import { FILE_UPLOAD_TYPE } from 'wix-rich-content-plugin-file-upload';
 import { SOUND_CLOUD_TYPE } from 'wix-rich-content-plugin-sound-cloud';
 import { MAP_TYPE } from 'wix-rich-content-plugin-map';
-import { BUTTON_TYPE } from 'wix-rich-content-plugin-map';
+import { BUTTON_TYPE } from 'wix-rich-content-plugin-button';
 import { HTML_TYPE } from 'wix-rich-content-plugin-html';
 import { LINK_TYPE } from 'wix-rich-content-plugin-link';
 
