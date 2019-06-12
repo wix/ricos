@@ -20,6 +20,7 @@
   height: 20px;
   margin-right: 8px;
   margin-left: 0px;
+  margin-top: 8px;
   &::after {
     width: 24px;
     height: 24px;
@@ -67,11 +68,13 @@
   width: 100%;
   padding-bottom: 34px;
   margin-bottom: 22px;
+  margin-left: 2px;
   border-bottom: 1px solid #ccc;
 }
 .colorPicker_add_color_button {
   margin-left: 0px;
-  margin-right: 8px;
+  margin-right: 10px;
+  margin-top: 8px;
   @include phone {
     margin-top: 0px;
     margin-bottom: 13px;
