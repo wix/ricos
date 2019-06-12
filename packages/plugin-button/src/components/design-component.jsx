@@ -272,7 +272,7 @@ class DesignComponent extends PureComponent {
                   color={designObj.textColor}
                   selectionColor={selectionTextColor || '#FEFDFD'}
                   palette={palette.slice(0, 7) || DEFAULT_PALETTE}
-                  userColors={this.state.textCustomcolors.slice(0, 17)}
+                  userColors={this.state.textCustomcolors.slice(0, 100)}
                   onColorAdded={this.onTextcolorAdded}
                   theme={this.styles}
                   isOneRow
@@ -297,7 +297,7 @@ class DesignComponent extends PureComponent {
                   color={designObj.borderColor}
                   selectionColor={selectionBorderColor || '#FEFDFD'}
                   palette={palette.slice(0, 7) || DEFAULT_PALETTE}
-                  userColors={this.state.borderCustomcolors.slice(0, 17)}
+                  userColors={this.state.borderCustomcolors.slice(0, 100)}
                   onColorAdded={this.onBordercolorAdded}
                   theme={this.styles}
                   isOneRow
@@ -323,7 +323,7 @@ class DesignComponent extends PureComponent {
                   color={designObj.backgroundColor}
                   selectionColor={selectionBackgroundColor}
                   palette={palette.slice(0, 7) || DEFAULT_PALETTE}
-                  userColors={this.state.backgroundCustomcolors.slice(0, 17)}
+                  userColors={this.state.backgroundCustomcolors.slice(0, 100)}
                   onColorAdded={this.onBackgroundcolorAdded}
                   theme={this.styles}
                   isOneRow
