@@ -15,7 +15,7 @@
 - `viewer`
   - [b7177a60](https://github.com/wix-incubator/rich-content/commit/b7177a60) text-utils refactoring
 - `example`
-  - content state data validation improved
+  -  [#314](https://github.com/wix-incubator/rich-content/pull/314) content state data validation improved
 <hr/>
 
 ## 3.5.1 (Jun 10, 2019)
