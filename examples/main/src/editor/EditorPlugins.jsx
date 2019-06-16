@@ -194,7 +194,6 @@ export const config = {
   },
   [LINK_TYPE]: {
     onClick: (event, url) => console.log('link clicked!', url),
-    // autoLink: false
   },
   [CODE_BLOCK_TYPE]: {},
   [DIVIDER_TYPE]: {},
