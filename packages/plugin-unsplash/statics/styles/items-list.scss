@@ -28,22 +28,15 @@
 }
 
 .unsplash_selecter_error_msg {
-  width: 229px;
-  font-family: Helvetica;
-  font-size: 14px;
-  font-weight: 300;
+  width: 100%;
+  font-family: Avenir;
+  font-size: 16px;
+  line-height: 1.5;
   text-align: center;
-  color: #000000;
-  line-height: 1.57;
-  padding: 0px 20px;
-  box-sizing: border-box;
-  position: absolute;
-  top: 137px;
-  left: 18px;
+  color: #969696;
+  padding-top: 129px;
   @include phone {
-    top: 50%;
-    left: 50%;
-    transform: translateX(-50%) translateY(-50%);
+    padding-top: 113px;
   }
 }
 
