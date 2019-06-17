@@ -120,14 +120,15 @@ class ItemsList extends PureComponent {
   };
 
   render() {
+    const { isMobile } = this.props;
     const { items } = this.state;
     const loader = (
       <MDSpinner
         singleColor="#000"
-        size={18}
+        size={isMobile ? 25 : 18}
         borderSize={2}
         className={this.styles.spinner_container}
-        style={{ marginLeft: 'calc(50% - 20px)' }}
+        style={{ marginLeft: isMobile ? 'calc(50% - 15px)' : 'calc(50% - 20px)' }}
       />
     );
     const photos = [];
@@ -184,6 +185,7 @@ ItemsList.propTypes = {
   pubsub: PropTypes.object,
   onConfirm: PropTypes.fun,
   t: PropTypes.fun,
+  isMobile: PropTypes.bool.isRequired,
 };
 
 export default ItemsList;

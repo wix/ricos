@@ -43,4 +43,7 @@
 .spinner_container {
   margin-left: calc(50% - 17px);
   margin-top: calc(25% - 32px);
+  @include phone{
+    margin-top: calc(25% + 31px);
+  }
 }
