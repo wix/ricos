@@ -43,7 +43,7 @@ import 'wix-rich-content-plugin-file-upload/dist/styles.min.css';
 import 'wix-rich-content-plugin-text-color/dist/styles.min.css';
 
 import { customStyleFn, styleSelectionPredicate, colorScheme } from '../text-color-style-fn';
-import { getHostname } from '../utils';
+import { getBaseUrl } from '../utils';
 
 // import { TOOLBARS, BUTTONS, DISPLAY_MODE } from 'wix-rich-content-common';
 // import InlineToolbarDecoration from './Components/InlineToolbarDecoration';
@@ -152,7 +152,7 @@ export const config = {
     },
   },
   [HTML_TYPE]: {
-    htmlIframeSrc: `http://${getHostname()}/static/html-plugin-embed.html`,
+    htmlIframeSrc: `${getBaseUrl()}/static/html-plugin-embed.html`,
     minWidth: 35,
     maxWidth: 740,
     height: 250,

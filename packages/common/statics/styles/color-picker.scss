@@ -47,7 +47,7 @@
 .colorPicker_button {
   @extend %button;
   border-radius: 50%;
-  border: solid 1px rgba(51, 51, 51, 0.4);
+  border: solid 1px #ccc;
   &::after {
     content: " ";
     border-radius: 50%;
@@ -68,7 +68,7 @@
     outline: 0;
   }
   &:not(.colorPicker_button_selected):focus::after {
-    border-color: rgba(51, 51, 51, 0.4);
+    border-color: #ccc;
   }
 }
 

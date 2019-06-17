@@ -4,7 +4,7 @@ import React, { PureComponent } from 'react';
 import { ReflexContainer, ReflexElement, ReflexSplitter } from 'react-reflex';
 import compact from 'lodash/compact';
 import flatMap from 'lodash/flatMap';
-import { convertToRaw, EditorState } from '@wix/draft-js';
+import { convertToRaw, createEmpty } from 'wix-rich-content-editor';
 import {
   ContentStateEditor,
   ErrorBoundary,
@@ -12,7 +12,13 @@ import {
   SectionHeader,
   SectionContent,
 } from './Components';
-import { generateKey, isMobile, loadStateFromStorage, saveStateToStorage } from './utils';
+import {
+  generateKey,
+  getStateFromObject,
+  isMobile,
+  loadStateFromStorage,
+  saveStateToStorage,
+} from './utils';
 const Editor = React.lazy(() => import('./editor/Editor'));
 const Viewer = React.lazy(() => import('./viewer/Viewer'));
 
@@ -25,7 +31,7 @@ class App extends PureComponent {
 
   getInitialState() {
     const containerKey = generateKey('container');
-    const editorState = EditorState.createEmpty();
+    const editorState = createEmpty();
     const localState = loadStateFromStorage();
     if (localState) {
       return { containerKey, editorState, ...JSON.parse(localState) };

@@ -2,7 +2,7 @@ import debounce from 'lodash/debounce';
 import pick from 'lodash/pick';
 import local from 'local-storage';
 import MobileDetect from 'mobile-detect';
-import { convertFromRaw, EditorState } from '@wix/draft-js';
+import { convertFromRaw, createWithContent } from 'wix-rich-content-editor';
 import { normalizeInitialState } from 'wix-rich-content-common';
 import * as CONSTS from './consts';
 
@@ -34,15 +34,16 @@ export const getStateFromObject = obj => {
     anchorTarget,
     relValue,
   });
-  const editorState = EditorState.createWithContent(convertFromRaw(normalizedState));
+  const editorState = createWithContent(convertFromRaw(normalizedState));
   return { editorState, viewerState: normalizedState };
 };
 
-export const getHostname = () => {
+export const getBaseUrl = () => {
   if (!window) {
     return null;
   }
 
-  const { hostname, port } = window.location;
-  return port ? `${hostname}:${port}` : hostname;
+  const { hostname, port, protocol } = window.location;
+  const baseUrl = `${protocol}//${hostname}`;
+  return port ? `${baseUrl}:${port}` : baseUrl;
 };

@@ -9,6 +9,33 @@
 
 ## [Unreleased]
 ### :boom: Breaking Change
+- `hashtag`
+  - [80d4880](https://github.com/wix-incubator/rich-content/commit/80d4880) replaced ~~`HashTagStrategy`~~ with `HashTagDecorator` please check [`ViewerPlugins.jsx`](https://github.com/wix-incubator/rich-content/blob/develop/examples/main/src/viewer/ViewerPlugins.jsx) for an example of how to implement the new decorator.
+- `version contentState`
+  - [#313](https://github.com/wix-incubator/rich-content/pull/313) add versioning to the ContentState. Allows the removing linkify decorator.
+### :bug: Bug Fix
+- `common`
+  - [2566224a](https://github.com/wix-incubator/rich-content/commit/2566224a) color-picker button style fixed
+### :house: Internal
+- `viewer`
+  - [b7177a60](https://github.com/wix-incubator/rich-content/commit/b7177a60) text-utils refactoring
+- `example`
+  - [#314](https://github.com/wix-incubator/rich-content/pull/314) content state data validation improved
+- `link`
+  - [#313](https://github.com/wix-incubator/rich-content/pull/313) new auto link system generates link entities. Stop using linkify decorator
+<hr/>
+
+## 3.5.1 (Jun 10, 2019)
+### :rocket: New Feature
+- `example`
+  - [e1fb3ae](https://github.com/wix-incubator/rich-content/commit/e1fb3ae) content-state is validated
+### :bug: Bug Fix
+- `hashtag`
+  - [8678c06e](https://github.com/wix-incubator/rich-content/commit/8678c06e) props.children converted to array
+<hr/>
+
+## 3.5.0 (June 6, 2019)
+### :boom: Breaking Change
 - `text-color`
   - [#310](https://github.com/wix-incubator/rich-content/pull/310) viewer-side decorator replaced by `inline-style-mapper`. See [documentation](./docs/PluginCustomization.md) for more details
 ### :rocket: New Feature
@@ -26,12 +53,12 @@
 - `mention`
   - [#310](https://github.com/wix-incubator/rich-content/pull/310) merged styles applied to `mention-viewer`
 - `hashtag`
-  - [#310](https://github.com/wix-incubator/rich-content/pull/310) underline style applied to the hashtag content rather itself
+  - [#310](https://github.com/wix-incubator/rich-content/pull/310) underline-style applied to the hashtag content rather itself
+### :book: Documentation
+- [#310](https://github.com/wix-incubator/rich-content/pull/310) [Plugin Customization doc](./docs/PluginCustomization.md) updated regarding the `text-color` API
 ### :house: Internal
 - `example`
   - [#309](https://github.com/wix-incubator/rich-content/pull/309) removed standalone editor and viewer examples + overhaul on main example
-### :book: Documentation
-- [#310](https://github.com/wix-incubator/rich-content/pull/310) [Plugin Customization doc](./docs/PluginCustomization.md) updated regarding the `text-color` API
 <hr/>
 
 ## 3.4.7 (May 29, 2019)

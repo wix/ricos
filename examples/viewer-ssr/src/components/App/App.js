@@ -9,11 +9,7 @@ import { imageTypeMapper } from 'wix-rich-content-plugin-image/dist/module.viewe
 import { videoTypeMapper } from 'wix-rich-content-plugin-video/dist/module.viewer.cjs';
 import { dividerTypeMapper } from 'wix-rich-content-plugin-divider/dist/module.viewer.cjs';
 import { htmlTypeMapper, HTML_TYPE } from 'wix-rich-content-plugin-html/dist/module.viewer.cjs';
-import {
-  linkTypeMapper,
-  LinkViewer,
-  LinkParseStrategy,
-} from 'wix-rich-content-plugin-link/dist/module.viewer.cjs';
+import { linkTypeMapper, LinkViewer } from 'wix-rich-content-plugin-link/dist/module.viewer.cjs';
 import { Strategy as HashTagStrategy, Component as HashTag } from 'wix-rich-content-plugin-hashtag';
 
 import TestData from './TestData/initial-state';
@@ -73,20 +69,6 @@ class App extends Component {
             >
               {child}
             </HashTag>
-          )),
-      },
-      {
-        strategy: LinkParseStrategy,
-        component: ({ children, decoratedText, rel, target }) =>
-          children.map((child, i) => (
-            <LinkViewer
-              key={i}
-              componentData={{ rel, target, url: decoratedText }}
-              anchorTarget={anchorTarget}
-              relValue={relValue}
-            >
-              {child}
-            </LinkViewer>
           )),
       },
     ];

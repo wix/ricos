@@ -4,15 +4,10 @@ import { videoTypeMapper } from 'wix-rich-content-plugin-video/dist/module.viewe
 import { dividerTypeMapper } from 'wix-rich-content-plugin-divider/dist/module.viewer';
 import { HTML_TYPE, htmlTypeMapper } from 'wix-rich-content-plugin-html/dist/module.viewer';
 import { soundCloudTypeMapper } from 'wix-rich-content-plugin-sound-cloud/dist/module.viewer';
-import {
-  LINK_TYPE,
-  LinkParseStrategy,
-  linkTypeMapper,
-  LinkViewer,
-} from 'wix-rich-content-plugin-link/dist/module.viewer';
+import { LINK_TYPE, linkTypeMapper } from 'wix-rich-content-plugin-link/dist/module.viewer';
 import { imageTypeMapper } from 'wix-rich-content-plugin-image/dist/module.viewer';
 import { mapTypeMapper } from 'wix-rich-content-plugin-map/dist/module.viewer';
-import { Component as HashTag, Strategy as HashTagStrategy } from 'wix-rich-content-plugin-hashtag';
+import { HashtagDecorator } from 'wix-rich-content-plugin-hashtag/dist/module.viewer';
 import {
   createHeadersMarkdownDecorator,
   HEADERS_MARKDOWN_TYPE,
@@ -42,7 +37,8 @@ import 'wix-rich-content-plugin-video/dist/styles.min.css';
 import 'wix-rich-content-plugin-sound-cloud/dist/styles.min.css';
 import 'wix-rich-content-plugin-map/dist/styles.min.css';
 import 'wix-rich-content-plugin-file-upload/dist/styles.min.css';
-import { getHostname } from '../utils';
+
+import { getBaseUrl } from '../utils';
 
 const linkPluginSettings = {
   onClick: (event, url) => console.log('link clicked!', url),
@@ -50,11 +46,6 @@ const linkPluginSettings = {
 const mentionsPluginSettings = {
   onMentionClick: mention => console.log('mention clicked!', mention),
   getMentionLink: () => '/link/to/mention',
-};
-
-const onHashTagClick = (event, text) => {
-  event.preventDefault();
-  console.log(`'${text}' hashtag clicked!`);
 };
 
 export const typeMappers = [
@@ -74,7 +65,7 @@ export const config = {
     hideMarkdown: true,
   },
   [HTML_TYPE]: {
-    htmlIframeSrc: `http://${getHostname()}/static/html-plugin-embed.html`,
+    htmlIframeSrc: `${getBaseUrl()}/static/html-plugin-embed.html`,
   },
   [LINK_TYPE]: linkPluginSettings,
   [MENTION_TYPE]: mentionsPluginSettings,
@@ -87,34 +78,14 @@ export const config = {
 export const getInlineStyleMappers = raw => [textColorInlineStyleMapper(config, raw)];
 
 export const decorators = [
-  {
-    strategy: LinkParseStrategy,
-    component: ({ children, decoratedText, rel, target }) => (
-      <LinkViewer
-        componentData={{ rel, target, url: decoratedText }}
-        anchorTarget={anchorTarget}
-        relValue={relValue}
-        settings={linkPluginSettings}
-      >
-        {children}
-      </LinkViewer>
-    ),
-  },
-  {
-    strategy: HashTagStrategy,
-    component: ({ children, decoratedText }) => (
-      <HashTag
-        theme={theme}
-        onClick={onHashTagClick}
-        createHref={decoratedText =>
-          `/search/posts?query=${encodeURIComponent('#')}${decoratedText}`
-        }
-        decoratedText={decoratedText}
-      >
-        {children}
-      </HashTag>
-    ),
-  },
+  new HashtagDecorator({
+    theme,
+    onClick: (event, text) => {
+      event.preventDefault();
+      console.log(`'${text}' hashtag clicked!`);
+    },
+    createHref: decoratedText => `/search/posts?query=${encodeURIComponent('#')}${decoratedText}`,
+  }),
   new CodeBlockDecorator({ theme }),
   createHeadersMarkdownDecorator(config),
 ];

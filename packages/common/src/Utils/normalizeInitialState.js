@@ -2,7 +2,7 @@ import mapValues from 'lodash/mapValues';
 import cloneDeep from 'lodash/cloneDeep';
 import isUndefined from 'lodash/isUndefined';
 import Version from './versioningUtils';
-import { processBlocks } from './processBlocks';
+import { processContentState } from './processContentState';
 
 const normalizeEntityType = (entityType, entityTypeMap) => {
   if (entityType in entityTypeMap) {
@@ -16,10 +16,6 @@ const normalizeEntityType = (entityType, entityTypeMap) => {
 const dataNormalizers = {
   // converts { targetBlank, nofollow } => { target, rel }
   LINK: (componentData, { anchorTarget, relValue }) => {
-    if (!componentData.version || Version.lessThan(componentData.version, Version.getCurrent())) {
-      componentData.version = Version.getCurrent();
-    }
-
     const { targetBlank, nofollow, target, rel } = componentData;
     if (
       isUndefined(targetBlank) &&
@@ -89,7 +85,7 @@ const shouldNormalizeEntityConfig = (entity, normalizationMap) =>
 const shouldNormalizeEntityData = (entity, normalizationMap) =>
   normalizationMap.includes(entity.type) && entity.data;
 
-export default (initialState, config) => {
+export default (initialState, config = {}) => {
   const entityTypeMap = {
     configNormalization: {
       IMAGE: 'wix-draft-plugin-image',
@@ -100,11 +96,11 @@ export default (initialState, config) => {
     },
   };
 
-  const { blocks, entityMap } = initialState;
+  const processedState = processContentState(initialState, config);
 
   return {
-    blocks: processBlocks({ blocks, entityMap, config }),
-    entityMap: mapValues(entityMap, entity =>
+    blocks: processedState.blocks,
+    entityMap: mapValues(processedState.entityMap, entity =>
       shouldNormalizeEntityConfig(entity, Object.keys(entityTypeMap.configNormalization))
         ? {
             ...entity,
@@ -119,5 +115,6 @@ export default (initialState, config) => {
           }
         : entity
     ),
+    VERSION: processedState.VERSION,
   };
 };

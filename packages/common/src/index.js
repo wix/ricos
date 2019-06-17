@@ -62,7 +62,7 @@ export { simplePubsub } from './Utils/simplePubsub';
 export { getModalStyles } from './Utils/getModalStyles';
 export { mergeStyles } from './Utils/mergeStyles';
 export { default as normalizeInitialState } from './Utils/normalizeInitialState';
-export { validate } from './Utils/data-schema-validator';
+export { validate, getContentStateSchema } from './Utils/data-schema-validator';
 export { isHexColor } from './Components/ColorPicker/utils';
 
 export {
@@ -77,7 +77,8 @@ export {
 } from './Utils/urlValidators';
 
 export {
-  insertLink,
+  insertLinkAtCurrentSelection,
+  insertLinkInPosition,
   hasLinksInSelection,
   getLinkDataInSelection,
   removeLinksInSelection,
@@ -88,6 +89,7 @@ export {
   isAtomicBlockFocused,
   removeBlock,
 } from './Utils/draftUtils';
+export { default as Version } from './Utils/versioningUtils';
 export { default as WixUtils } from './Utils/wixUtils';
 export { sizeClassName, alignmentClassName, textWrapClassName } from './Utils/classNameStrategies';
 export { getSelectionStyles } from './Utils/inlineStyleUtils';
