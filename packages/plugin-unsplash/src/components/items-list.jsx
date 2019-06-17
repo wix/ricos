@@ -119,16 +119,6 @@ class ItemsList extends PureComponent {
     this.searchUnsplash(this.props.searchTerm, this.state.page);
   };
 
-  renderLoader = () => (
-    <div
-      className={
-        styles[`unsplash_selecter_spinner_${this.state.images.length ? 'more' : 'empty_modal'}`]
-      }
-    >
-      <MDSpinner borderSize={1.5} singleColor="#000000" />
-    </div>
-  );
-
   render() {
     const { items } = this.state;
     const loader = (
@@ -154,32 +144,33 @@ class ItemsList extends PureComponent {
     });
     return (
       <div className={this.styles.items_list_container}>
-        <Scrollbars
-          renderThumbVertical={() => <div className={this.styles.scrollbar_thumb} />}
-          autoHide
-        >
-          <InfiniteScroll
-            pageStart={0}
-            loadMore={this.getMoreImages.bind(this)}
-            hasMore={this.state.hasMoreItems}
-            loader={!this.state.didFail ? loader : null}
-            useWindow={false}
-            threshold={3}
-            className={this.styles.InfiniteScroll_container}
+        {!this.state.didFail ? (
+          <Scrollbars
+            renderThumbVertical={() => <div className={this.styles.scrollbar_thumb} />}
+            autoHide
           >
-            <Gallery
-              photos={photos}
-              onClick={this.selectPhoto}
-              renderImage={SelectedImage}
-              columns={3}
-            />
-          </InfiniteScroll>
-        </Scrollbars>
-        {this.state.didFail ? (
+            <InfiniteScroll
+              pageStart={0}
+              loadMore={this.getMoreImages.bind(this)}
+              hasMore={this.state.hasMoreItems}
+              loader={!this.state.didFail ? loader : null}
+              useWindow={false}
+              threshold={3}
+              className={this.styles.InfiniteScroll_container}
+            >
+              <Gallery
+                photos={photos}
+                onClick={this.selectPhoto}
+                renderImage={SelectedImage}
+                columns={3}
+              />
+            </InfiniteScroll>
+          </Scrollbars>
+        ) : (
           <div className={styles.unsplash_selecter_error_msg}>
             {this.props.t('UnsplashPlugin_ApiErrorMsg')}
           </div>
-        ) : null}
+        )}
       </div>
     );
   }
