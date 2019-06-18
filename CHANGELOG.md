@@ -16,9 +16,6 @@
 - `link`
   - [#315](https://github.com/wix-incubator/rich-content/pull/315) remove autolink config option (was never functional)
 ### :rocket: New Feature
-- `common`
-  - [#311](https://github.com/wix-incubator/rich-content/pull/311) versioning utils added: `getCurrent`, `compare`, `evaluate`
-  - [#311](https://github.com/wix-incubator/rich-content/pull/311) `normalizeInitialState` refactored; now considers versions; adds the underline style to links with version < 3.4.7
 - `link`
   - [#311](https://github.com/wix-incubator/rich-content/pull/311) link underline style is removable
 ### :bug: Bug Fix
@@ -27,6 +24,9 @@
 - `text-color`
   - [#311](https://github.com/wix-incubator/rich-content/pull/311) color applied to link underline decoration correctly
 ### :house: Internal
+- `common`
+  - [#311](https://github.com/wix-incubator/rich-content/pull/311) versioning utils added: `getCurrent`, `compare`, `evaluate`
+  - [#311](https://github.com/wix-incubator/rich-content/pull/311) `normalizeInitialState` refactored; now considers versions; adds the underline style to links with version < 3.4.7
 - `viewer`
   - [b7177a60](https://github.com/wix-incubator/rich-content/commit/b7177a60) text-utils refactoring
 - `example`
