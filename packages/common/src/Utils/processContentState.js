@@ -37,59 +37,65 @@ const entityRangeProcessingStrategies = {
 const isVersionCompatible = (strategy, contentStateVersion) =>
   strategy.version ? Version.evaluate(contentStateVersion, strategy.version) : true;
 
+const applyStrategies = (strategies, processed, version, ...args) => {
+  if (!strategies) {
+    return processed;
+  }
+
+  let processedUnit = processed;
+  strategies
+    .filter(strategy => isVersionCompatible(strategy, version))
+    .forEach(strategy => {
+      strategy.processors.reduce((unit, processor) => {
+        processedUnit = processor(unit, ...args);
+        return processedUnit;
+      }, processed);
+    });
+  return processedUnit;
+};
+
 export const processContentState = (contentState, config) => {
   const { VERSION: contentStateVersion = '0.0.0' } = contentState;
 
   //process the whole state
-  let processedState = contentState;
-  contentStateProcessingStrategies
-    .filter(strategy => isVersionCompatible(strategy, contentStateVersion))
-    .forEach(strategy => {
-      strategy.processors.reduce((state, processor) => {
-        processedState = processor(state, config);
-        return processedState;
-      }, processedState);
-    });
+  const processedState = applyStrategies(
+    contentStateProcessingStrategies,
+    contentState,
+    contentStateVersion,
+    config
+  );
 
   const { blocks, entityMap } = processedState;
 
   return {
     blocks: blocks.map(block => {
-      let processed = block;
+      let processedBlock = block;
 
       // process block
-      const blockStrategies = blockProcessingStrategies[block.type];
-      if (blockStrategies) {
-        blockStrategies
-          .filter(strategy => isVersionCompatible(strategy, contentStateVersion))
-          .forEach(strategy => {
-            strategy.processors.reduce((processedBlock, processor) => {
-              processed = processor(processedBlock, entityMap, config);
-              return processed;
-            }, processed);
-          });
-      }
+      processedBlock = applyStrategies(
+        blockProcessingStrategies[block.type],
+        block,
+        contentStateVersion,
+        entityMap,
+        config
+      );
 
       // process block entity ranges
-      if (processed.entityRanges) {
-        processed.entityRanges.forEach(range => {
+      if (processedBlock.entityRanges) {
+        processedBlock.entityRanges.forEach(range => {
           const entityType = entityMap[range.key + ''].type;
-
-          const strategies = entityRangeProcessingStrategies[entityType];
-          if (strategies) {
-            strategies
-              .filter(strategy => isVersionCompatible(strategy, contentStateVersion))
-              .forEach(strategy => {
-                strategy.processors.reduce((processedBlock, processor) => {
-                  processed = processor(processedBlock, range, entityMap, config);
-                  return processed;
-                }, processed);
-              });
-          }
+          processedBlock = applyStrategies(
+            entityRangeProcessingStrategies[entityType],
+            processedBlock,
+            contentStateVersion,
+            range,
+            entityMap,
+            config
+          );
         });
       }
 
-      return processed;
+      return processedBlock;
     }),
     entityMap,
     VERSION: Version.lessThan(contentStateVersion, Version.getCurrent())
