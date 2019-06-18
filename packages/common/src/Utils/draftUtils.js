@@ -8,7 +8,7 @@ export const insertLinkInPosition = (
   blockKey,
   start,
   end,
-  { url, targetBlank, nofollow, anchorTarget, relValue }
+  { url, targetBlank, nofollow, anchorTarget, relValue, trigger }
 ) => {
   const selection = SelectionState.createEmpty(blockKey).merge({
     anchorOffset: start,
@@ -22,13 +22,27 @@ export const insertLinkInPosition = (
     anchorTarget,
     relValue,
   });
+  // if link parsing triggered by a new line, sets selection after the url
+  // TODO: cancel underline, move cursor to the newly added block
+  if (trigger === 'newLine') {
+    return EditorState.forceSelection(
+      newEditorState,
+      selection.merge({ anchorOffset: selection.focusOffset })
+    );
+  } else {
+    // cancel underline, move cursor after the last typed char
+    newEditorState = EditorState.acceptSelection(
+      newEditorState,
+      selection.merge({ anchorOffset: selection.endOffset, focusOffset: selection.endOffset + 1 })
+    );
 
-  newEditorState = EditorState.forceSelection(
-    newEditorState,
-    selection.merge({ anchorOffset: selection.focusOffset })
-  );
+    newEditorState = RichUtils.toggleInlineStyle(newEditorState, 'UNDERLINE');
 
-  return RichUtils.toggleInlineStyle(newEditorState, 'UNDERLINE');
+    return EditorState.forceSelection(
+      newEditorState,
+      selection.merge({ anchorOffset: end + 1, focusOffset: end + 1 })
+    );
+  }
 };
 
 export const insertLinkAtCurrentSelection = (
