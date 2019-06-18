@@ -31,8 +31,8 @@ export default ({ helpers, t, settings, componentData, insertToolbars }) => {
           fullScreen: true,
         });
         const { top, left } = buttonRef.getBoundingClientRect();
-        const modalLeft = left - 70;
-        const modalTop = top - 380;
+        const modalLeft = left - 65;
+        const modalTop = top - 383;
         return {
           ...modalStyles,
           content: {
