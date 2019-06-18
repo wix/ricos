@@ -154,6 +154,8 @@
   "ButtonPlugin_Navbar_Cancel_button": "Cancel",
   "ButtonPlugin_Navbar_Update_button": "Update",
   "UnsplashPlugin_ApiErrorMsg":"No results found. Try another search.",
+  "UnsplashPlugin_InsertButton_Tooltip_Desktop":"Search Unsplash",
+  "UnsplashPlugin_InsertButton_Tooltip_Mobile":"Search Unsplash",
   "TextAlignmentButton_Tooltip": "Alignment",
   "TextLinkButton_Tooltip": "Link",
   "BoldButton_Tooltip": "Bold",

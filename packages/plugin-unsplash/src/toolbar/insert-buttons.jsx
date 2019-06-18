@@ -14,8 +14,10 @@ export default ({ helpers, t, settings, componentData, insertToolbars }) => {
   return [
     {
       type: 'modal',
-      name: 'GIF',
-      tooltipText: t('GiphyPlugin_InsertButton_Tooltip'),
+      name: 'PhotosByUnsplash',
+      tooltipText: WixUtils.isMobile()
+        ? t('UnsplashPlugin_InsertButton_Tooltip_Mobile')
+        : t('UnsplashPlugin_InsertButton_Tooltip_Desktop'),
       Icon: InsertPluginIcon,
       componentData: componentData || DEFAULTS,
       toolbars: insertToolbars || [TOOLBARS.FOOTER],
