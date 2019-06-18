@@ -16,20 +16,26 @@ const createLinkPlugin = (config = {}) => {
   const toolbar = createLinkToolbar(config);
 
   const decorators = [{ strategy: linkEntityStrategy, component: Component }];
-  let handleReturn, handleBeforeInput, onChange;
   let linkifyData;
 
-  handleReturn = (event, editorState) => {
+  const handleReturn = (event, editorState) => {
     linkifyData = getLinkifyData(editorState);
-  };
-
-  handleBeforeInput = (chars, editorState) => {
-    if (/\s/.test(chars)) {
-      linkifyData = getLinkifyData(editorState);
+    if (linkifyData) {
+      linkifyData.trigger = 'newLine';
     }
   };
 
-  onChange = editorState => {
+  const handleBeforeInput = (chars, editorState) => {
+    // inherent URL symbols to be excluded
+    if (/[^\w./\-?&=#!]/.test(chars)) {
+      linkifyData = getLinkifyData(editorState);
+      if (linkifyData) {
+        linkifyData.trigger = chars;
+      }
+    }
+  };
+
+  const onChange = editorState => {
     if (linkifyData) {
       const newEditorState = addLinkAt(linkifyData, editorState);
       linkifyData = false;
@@ -100,11 +106,12 @@ const createLinkPlugin = (config = {}) => {
     return false;
   };
 
-  const addLinkAt = ({ string, index, endIndex, blockKey }, editorState) => {
+  const addLinkAt = ({ string, index, endIndex, blockKey, trigger }, editorState) => {
     return insertLinkInPosition(editorState, blockKey, index, endIndex, {
       url: string,
       anchorTarget,
       relValue,
+      trigger,
     });
   };
 
