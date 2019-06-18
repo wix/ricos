@@ -18,6 +18,8 @@
 ### :bug: Bug Fix
 - `common`
   - [2566224a](https://github.com/wix-incubator/rich-content/commit/2566224a) color-picker button style fixed
+- `video`
+  - [#317](https://github.com/wix-incubator/rich-content/commit/317) color-picker button style fixed
 ### :house: Internal
 - `viewer`
   - [b7177a60](https://github.com/wix-incubator/rich-content/commit/b7177a60) text-utils refactoring
