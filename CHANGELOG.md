@@ -11,13 +11,21 @@
 ### :boom: Breaking Change
 - `hashtag`
   - [80d4880](https://github.com/wix-incubator/rich-content/commit/80d4880) replaced ~~`HashTagStrategy`~~ with `HashTagDecorator` please check [`ViewerPlugins.jsx`](https://github.com/wix-incubator/rich-content/blob/develop/examples/main/src/viewer/ViewerPlugins.jsx) for an example of how to implement the new decorator.
-- `version contentState`
+- `general`
   - [#313](https://github.com/wix-incubator/rich-content/pull/313) add versioning to the ContentState. Allows the removing linkify decorator.
 - `link`
   - [#315](https://github.com/wix-incubator/rich-content/pull/315) remove autolink config option (was never functional)
+### :rocket: New Feature
+- `common`
+  - [#311](https://github.com/wix-incubator/rich-content/pull/311) versioning utils added: `getCurrent`, `compare`, `evaluate`
+  - [#311](https://github.com/wix-incubator/rich-content/pull/311) `normalizeInitialState` refactored; now considers versions; adds the underline style to links with version < 3.4.7
+- `link`
+  - [#311](https://github.com/wix-incubator/rich-content/pull/311) link underline style is removable
 ### :bug: Bug Fix
 - `common`
   - [2566224a](https://github.com/wix-incubator/rich-content/commit/2566224a) color-picker button style fixed
+- `text-color`
+  - [#311](https://github.com/wix-incubator/rich-content/pull/311) color applied to link underline decoration correctly
 ### :house: Internal
 - `viewer`
   - [b7177a60](https://github.com/wix-incubator/rich-content/commit/b7177a60) text-utils refactoring
@@ -41,16 +49,10 @@
 - `text-color`
   - [#310](https://github.com/wix-incubator/rich-content/pull/310) viewer-side decorator replaced by `inline-style-mapper`. See [documentation](./docs/PluginCustomization.md) for more details
 ### :rocket: New Feature
-- `common`
-  - [#311](https://github.com/wix-incubator/rich-content/pull/311) versioning utils added: `getCurrent`, `compare`, `evaluate`
-  - [#311](https://github.com/wix-incubator/rich-content/pull/311) `normalizeInitialState` refactored; now considers versions; adds the underline style to links with version < 3.4.7
-- `link`
-  - [#311](https://github.com/wix-incubator/rich-content/pull/311) underline style can be removed from link
 - `viewer`
   - [#310](https://github.com/wix-incubator/rich-content/pull/310) `inlineStyleMappers` API exposed
 ### :bug: Bug Fix
 - `text-color`
-  - [#311](https://github.com/wix-incubator/rich-content/pull/311) color applied to link underline decoration correctly
   - [#310](https://github.com/wix-incubator/rich-content/pull/310) color applied to `link`, `hashtag` and `mention` correctly
 - `mention`
   - [#310](https://github.com/wix-incubator/rich-content/pull/310) merged styles applied to `mention-viewer`
