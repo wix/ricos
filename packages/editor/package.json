@@ -39,13 +39,13 @@
     }
   },
   "dependencies": {
-    "draft-js-drag-n-drop-plugin": "^2.0.1",
-    "draft-js-focus-plugin": "^2.0.1",
-    "draft-js-plugins-editor": "^2.0.1",
-    "i18next": "^10.5.0",
+    "draft-js-drag-n-drop-plugin": "~2.0.2",
+    "draft-js-focus-plugin": "~2.2.0",
+    "draft-js-plugins-editor": "~2.1.1",
+    "i18next": "~10.6.0",
     "react-click-outside": "github:tj/react-click-outside",
-    "react-i18next": "^7.6.1",
-    "react-measure": "^2.0.2",
+    "react-i18next": "~7.13.0",
+    "react-measure": "~2.3.0",
     "wix-rich-content-common": "^4.0.6"
   },
   "peerDependencies": {

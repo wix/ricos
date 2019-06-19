@@ -51,8 +51,8 @@
     "rollup": "^1.1.0"
   },
   "dependencies": {
-    "draft-js-emoji-plugin": "^2.0.2",
-    "react-icons": "^2.2.7",
+    "draft-js-emoji-plugin": "~2.1.1",
+    "react-icons": "~3.7.0",
     "wix-rich-content-common": "^4.0.6"
   },
   "unpkg": true,

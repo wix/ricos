@@ -14,6 +14,9 @@
 ### :bug: Bug Fix
 - `file-upload`
   - [aa3a4c6d](https://github.com/wix-incubator/rich-content/commit/aa3a4c6d) redundant container removed (in the Viewer)
+### :house: Internal
+- `general`
+  - [#319](https://github.com/wix-incubator/rich-content/pull/319) lock dependencies
 
 ## 4.0.6 (Jul 15, 2019)
 ### :rocket: New Feature
@@ -75,6 +78,8 @@
   - [80d4880](https://github.com/wix-incubator/rich-content/commit/80d4880) replaced ~~`HashTagStrategy`~~ with `HashTagDecorator` please check [`ViewerPlugins.jsx`](https://github.com/wix-incubator/rich-content/blob/develop/examples/main/src/viewer/ViewerPlugins.jsx) for an example of how to implement the new decorator.
 - `general`
   - [#313](https://github.com/wix-incubator/rich-content/pull/313) add versioning to the ContentState. Allows the removing linkify decorator.
+- `hashtag`
+  - [80d4880](https://github.com/wix-incubator/rich-content/commit/80d4880) replaced ~~`HashTagStrategy`~~ with `HashTagDecorator` please check [`ViewerPlugins.jsx`](https://github.com/wix-incubator/rich-content/blob/develop/examples/main/src/viewer/ViewerPlugins.jsx) for an example of how to implement the new decorator.
 - `link`
   - [#315](https://github.com/wix-incubator/rich-content/pull/315) remove autolink config option (was never functional)
 ### :rocket: New Feature

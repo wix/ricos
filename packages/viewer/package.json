@@ -30,8 +30,8 @@
     }
   },
   "dependencies": {
-    "direction": "^1.0.2",
-    "redraft": "^0.9.0",
+    "direction": "~1.0.3",
+    "redraft": "~0.10.2",
     "wix-rich-content-common": "^4.0.6"
   },
   "peerDependencies": {

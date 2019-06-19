@@ -54,11 +54,11 @@
     "rollup": "^1.1.0"
   },
   "dependencies": {
-    "react-custom-scrollbars": "^4.2.1",
-    "react-google-maps": "^9.4.5",
-    "react-google-maps-loader": "^4.2.3",
-    "react-google-places-suggest": "^3.5.0",
-    "uuid": "^3.3.2",
+    "react-custom-scrollbars": "~4.2.1",
+    "react-google-maps": "~9.4.5",
+    "react-google-maps-loader": "~4.2.5",
+    "react-google-places-suggest": "~3.8.0",
+    "uuid": "~3.3.2",
     "wix-rich-content-common": "^4.0.6"
   },
   "unpkg": true,
