@@ -1,6 +1,10 @@
 {
   "baseUrl": "http://localhost:3002",
   "testFiles": "**/*.e2e.js",
+  "ignoreTestFiles": [
+    "**/__snapshots__/*",
+    "**/__image_snapshots__/*"
+  ],
   "integrationFolder": "e2e",
   "fixturesFolder": "e2e/cypress/fixtures",
   "pluginsFile": "e2e/cypress/plugins/index.js",

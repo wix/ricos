@@ -1,5 +1,5 @@
 require('cypress-image-snapshot/command').addMatchImageSnapshotCommand();
-require('@cypress/snapshot').register();
+require('cypress-plugin-snapshots/commands');
 
 if (Cypress.browser.isHeaded) {
   Cypress.Commands.overwrite('matchImageSnapshot', () => {});
@@ -43,7 +43,7 @@ Cypress.Commands.add('matchContentSnapshot', name => {
   cy
     .window()
     .its('__CONTENT_SNAPSHOT__')
-    .snapshot(name ? { name } : undefined);
+    .toMatchSnapshot();
 });
 
 Cypress.Commands.add('matchSnapshots', () => {
