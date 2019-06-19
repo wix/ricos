@@ -20,6 +20,8 @@
   - [2566224a](https://github.com/wix-incubator/rich-content/commit/2566224a) color-picker button style fixed
 - `video`
   - [#317](https://github.com/wix-incubator/rich-content/commit/317) color-picker button style fixed
+- `viewer`
+  - [#318](https://github.com/wix-incubator/rich-content/commit/318) children only from inline components in viewer
 ### :house: Internal
 - `viewer`
   - [b7177a60](https://github.com/wix-incubator/rich-content/commit/b7177a60) text-utils refactoring

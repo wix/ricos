@@ -5,7 +5,7 @@ import redraft from 'redraft';
 import classNames from 'classnames';
 import endsWith from 'lodash/endsWith';
 import List from '../List';
-import getPluginsViewer from '../PluginsViewer';
+import getPluginViewers from '../getPluginViewers';
 import { getTextDirection, kebabToCamelObjectKeys } from './textUtils';
 import { staticInlineStyleMapper } from '../staticInlineStyleMapper';
 
@@ -77,7 +77,7 @@ const getBlocks = (mergedStyles, textDirection) => {
 };
 
 const getEntities = (typeMap, pluginProps, styles) => {
-  return getPluginsViewer(typeMap, pluginProps, styles);
+  return getPluginViewers(typeMap, pluginProps, styles);
 };
 
 const normalizeContentState = contentState => ({

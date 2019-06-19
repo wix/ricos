@@ -10,18 +10,16 @@ import {
   Context,
 } from 'wix-rich-content-common';
 
-class AtomicBlock extends PureComponent {
-  renderComponent(Component, children, props) {
-    return <Component {...props}>{children}</Component>;
-  }
-
+class PluginViewer extends PureComponent {
   render() {
-    const { type, typeMap, componentData, children, styles } = this.props;
+    const { type, pluginComponent, componentData, children, styles } = this.props;
     const { theme, isMobile, anchorTarget, relValue, config } = this.context;
 
-    const { component: Component, elementType } = typeMap[type];
-    const { size, alignment, textWrap, container } = typeMap[type].classNameStrategies || {};
+    const { component: Component, elementType } = pluginComponent;
+    const { size, alignment, textWrap, container } = pluginComponent.classNameStrategies || {};
     const settings = (config && config[type]) || {};
+
+    const componentProps = { componentData, settings, children };
 
     if (Component) {
       Component.contextType = Context.type;
@@ -59,54 +57,58 @@ class AtomicBlock extends PureComponent {
             <ContainerElement className={containerClassNames} {...containerProps}>
               {isFunction(container) ? (
                 <div className={container(theme)}>
-                  {this.renderComponent(Component, children, { componentData, settings })}
+                  <Component {...componentProps} />
                 </div>
               ) : (
-                this.renderComponent(Component, children, { componentData, settings })
+                <Component {...componentProps} />
               )}
             </ContainerElement>
           </div>
         );
       } else {
-        return this.renderComponent(Component, children, { componentData, settings });
+        return <Component {...componentProps} />;
       }
     }
     return null;
   }
 }
 
-AtomicBlock.contextType = Context.type;
+PluginViewer.contextType = Context.type;
 
-AtomicBlock.propTypes = {
+PluginViewer.propTypes = {
   type: PropTypes.string.isRequired,
   componentData: PropTypes.object.isRequired,
-  typeMap: PropTypes.object,
+  pluginComponent: PropTypes.object.isRequired,
   children: PropTypes.node,
   styles: PropTypes.object,
 };
 
-AtomicBlock.defaultProps = {
+PluginViewer.defaultProps = {
   styles: {},
 };
 
 //return a list of types with a function that wraps the viewer
-const getPluginsViewer = (typeMap, pluginProps, styles) => {
+const getPluginViewers = (typeMap, pluginProps, styles) => {
   const res = {};
   Object.keys(typeMap).forEach(type => {
-    res[type] = (children, entity, { key }) => (
-      <AtomicBlock
-        typeMap={typeMap}
-        type={type}
-        key={key}
-        componentData={entity}
-        {...pluginProps}
-        styles={styles}
-      >
-        {children}
-      </AtomicBlock>
-    );
+    res[type] = (children, entity, { key }) => {
+      const pluginComponent = typeMap[type];
+      const isInline = pluginComponent.elementType === 'inline';
+      return (
+        <PluginViewer
+          type={type}
+          pluginComponent={pluginComponent}
+          key={key}
+          componentData={entity}
+          {...pluginProps}
+          styles={styles}
+        >
+          {isInline ? children : null}
+        </PluginViewer>
+      );
+    };
   });
   return res;
 };
 
-export default getPluginsViewer;
+export default getPluginViewers;
