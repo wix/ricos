@@ -10,15 +10,25 @@ const InsertPluginIcon = props => (
     xmlns="http://www.w3.org/2000/svg"
     {...props}
   >
-    <title>Icons / Unsplash</title>
-    <desc>Created with Sketch.</desc>
     <g id="Icons-/-Unsplash" stroke="currentColor" strokeWidth="1" fill="none" fillRule="evenodd">
       <path
-        d="M16.9895133,14 L17,14 L17,5 L4,5 L4,14 L5.83760335,14 L8.4159125,9.6491033 L10.4507425,10.7936952 L13.1741125,8.56548336 L16.7988,13.3984 C16.9054297,13.679384 16.9724273,13.8559318 16.9895133,14 Z M7,14 L15.998,14 L13,10 L10.5555556,12 L8.77777778,11 L7,14 Z M4,4 L17,4 C17.5522847,4 18,4.44771525 18,5 L18,14 C18,14.5522847 17.5522847,15 17,15 L4,15 C3.44771525,15 3,14.5522847 3,14 L3,5 C3,4.44771525 3.44771525,4 4,4 Z M7,9 C6.4485545,9 6,8.5514455 6,8 C6,7.4485545 6.4485545,7 7,7 C7.5514455,7 8,7.4485545 8,8.00017957 C8,8.5514455 7.5514455,9 7,9 Z"
-        id="Combined-Shape"
-        fill="none"
+        d="M17.6,13.4432664 L14.3779762,9.61+841743 L11.3668238,13.144982 L8.44350645,11.9719542 L5.78959358,15.5800857 L16.9199467,15.6025471 C17.4542725,15.6631364 17.6,15.5651102 17.6,15.2431666 C17.6,14.3745154 17.6,14.3314787 17.6,13.4432666 Z"
+        id="Path-3"
+        stroke="currentColor"
+        strokeWidth="0.8"
         fillRule="nonzero"
       />
+      <rect
+        id="Rectangle"
+        stroke="currentColor"
+        strokeWidth="0.8"
+        x="3.4"
+        y="3.4"
+        width="14.2"
+        height="12.2"
+        rx="1"
+      />
+      <circle id="Oval" stroke="currentColor" strokeWidth="0.8" cx="7.5" cy="7.5" r="1.5" />
     </g>
   </svg>
 );
