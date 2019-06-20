@@ -10,9 +10,9 @@ const InsertPluginIcon = props => (
     xmlns="http://www.w3.org/2000/svg"
     {...props}
   >
-    <g id="Icons-/-Unsplash" stroke="currentColor" strokeWidth="1" fill="none" fillRule="evenodd">
+    <g id="Icons-/-Unsplash" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
       <path
-        d="M17.6,13.4432664 L14.3779762,9.61+841743 L11.3668238,13.144982 L8.44350645,11.9719542 L5.78959358,15.5800857 L16.9199467,15.6025471 C17.4542725,15.6631364 17.6,15.5651102 17.6,15.2431666 C17.6,14.3745154 17.6,14.3314787 17.6,13.4432666 Z"
+        d="M17.6,13.4432664 L14.3779762,9.61841743 L11.3668238,13.144982 L8.44350645,11.9719542 L5.78959358,15.5800857 L16.9199467,15.6025471 C17.4542725,15.6631364 17.6,15.5651102 17.6,15.2431666 C17.6,14.3745154 17.6,14.3314787 17.6,13.4432666 Z"
         id="Path-3"
         stroke="currentColor"
         strokeWidth="0.8"
