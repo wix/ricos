@@ -181,6 +181,12 @@ class RichContentEditor extends Component {
     }
   }
 
+  componentDidMount() {
+    if (this.props.scrollContainer) {
+      this.props.scrollContainer.addEventListener('scroll', this.onScrollChanged.bind(this));
+    }
+  }
+
   // TODO: get rid of this ASAP!
   // Currently, there's no way to get a static toolbar ref without consumer interference
   findFocusableChildForElement(id) {
@@ -225,6 +231,11 @@ class RichContentEditor extends Component {
 
   updateBounds = editorBounds => {
     this.subscriberPubsubs.forEach(pubsub => pubsub.set('editorBounds', editorBounds));
+  };
+
+  onScrollChanged = scrollEvent => {
+    const { scrollTop: top, scrollLeft: left } = scrollEvent.target;
+    this.subscriberPubsubs.forEach(pubsub => pubsub.set('editorScroll', { top, left }));
   };
 
   renderToolbars = () => {
@@ -388,6 +399,7 @@ class RichContentEditor extends Component {
 }
 
 RichContentEditor.propTypes = {
+  scrollContainer: PropTypes.node,
   editorKey: PropTypes.string,
   editorState: PropTypes.object,
   initialState: PropTypes.object,

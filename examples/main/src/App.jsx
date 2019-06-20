@@ -99,7 +99,11 @@ class App extends PureComponent {
     }
     return (
       isEditorShown && (
-        <ReflexElement key="editor-section" className="section">
+        <ReflexElement
+          key="editor-section"
+          className="section"
+          ref={el => (this.scrollContainer = el)}
+        >
           <SectionHeader
             title="Editor"
             settings={settings}
@@ -112,6 +116,7 @@ class App extends PureComponent {
                 editorState={editorState}
                 isMobile={this.isMobile}
                 staticToolbar={staticToolbar}
+                scrollContainer={this.scrollContainer}
               />
             </ErrorBoundary>
           </SectionContent>

@@ -63,6 +63,7 @@ const createBaseComponent = ({
       pubsub.subscribe('componentSize', this.onComponentSizeChange);
       pubsub.subscribe('componentTextWrap', this.onComponentTextWrapChange);
       pubsub.subscribe('editorBounds', this.onEditorBoundsChange);
+      pubsub.subscribe('editorScroll', this.onEditorScrollChange);
       const blockKey = this.props.block.getKey();
       this.unsubscribeOnBlock = pubsub.subscribeOnBlock({
         key: 'componentLink',
@@ -84,6 +85,8 @@ const createBaseComponent = ({
       pubsub.unsubscribe('componentSize', this.onComponentSizeChange);
       pubsub.unsubscribe('componentTextWrap', this.onComponentTextWrapChange);
       pubsub.unsubscribe('editorBounds', this.onEditorBoundsChange);
+      pubsub.unsubscribe('editorScroll', this.onEditorScrollChange);
+
       pubsub.set('visibleBlock', null);
       this.unsubscribeOnBlock && this.unsubscribeOnBlock();
     }
@@ -96,6 +99,10 @@ const createBaseComponent = ({
 
     onEditorBoundsChange = editorBounds => {
       this.setState({ editorBounds });
+    };
+
+    onEditorScrollChange = scroll => {
+      console.log({ scroll }); // eslint-disable-line no-console
     };
 
     onComponentDataChange = componentData => {
