@@ -24,8 +24,6 @@ const dirsWithModifiedFiles = execSync('git status --porcelain=1')
   .filter(s => !isEmpty(s))
   .filter(s => !excludedDirs.includes(s));
 
-console.log(dirsWithModifiedFiles);
-
 if (dirsWithModifiedFiles.length) {
   new Set(dirsWithModifiedFiles).forEach(dir => {
     try {

@@ -4,7 +4,7 @@ import deepFreeze from 'deep-freeze';
 import { RichContentEditor } from 'wix-rich-content-editor';
 import 'wix-rich-content-common/dist/styles.min.css';
 import 'wix-rich-content-editor/dist/styles.min.css';
-import theme from '../theme';
+import theme from '../../theme';
 
 class Editor extends Component {
   state = {
@@ -59,6 +59,7 @@ class Editor extends Component {
   handleChange = editorState => {
     this.setState({ editorState });
     if (typeof window !== 'undefined') {
+      // ensures that tests fail when entity map is mutated
       const raw = deepFreeze(convertToRaw(editorState.getCurrentContent()));
       window.__CONTENT_STATE__ = raw;
       window.__CONTENT_SNAPSHOT__ = {

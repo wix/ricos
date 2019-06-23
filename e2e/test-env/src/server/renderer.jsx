@@ -1,8 +1,8 @@
 import React from 'react';
 import { renderToString } from 'react-dom/server';
-import Editor from '../shared/components/Editor';
+import Editor from '../shared/components/Editor/Editor';
 import Viewer from '../shared/components/Viewer';
-import App from '../shared/components/App';
+import App from '../shared/components/App/App';
 
 const COMPONENTS = {
   rce: {
