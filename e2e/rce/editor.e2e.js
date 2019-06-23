@@ -1,6 +1,6 @@
 import { TEXT_BUTTONS } from '../cypress/dataHooks';
 
-describe.skip('editor', () => {
+describe('editor', () => {
   it('should allow to enter text', () => {
     cy
       .editorDesktop()
@@ -11,7 +11,7 @@ describe.skip('editor', () => {
       .matchSnapshots();
   });
 
-  it('should allow to apply inline styles', () => {
+  it.skip('should allow to apply inline styles', () => {
     cy
       .editorDesktop('plain')
       .selectText({ anchorOffset: 0, focusOffset: 5 })
@@ -33,7 +33,7 @@ describe.skip('editor', () => {
       .matchSnapshots();
   });
 
-  it('should allow to create lists', () => {
+  it.skip('should allow to create lists', () => {
     cy
       .editorDesktop('plain')
       .selectText({ anchorBlockIndex: 1, focusBlockIndex: 2, focusOffset: 1 })

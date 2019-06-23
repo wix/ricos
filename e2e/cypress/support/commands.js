@@ -1,11 +1,5 @@
 require('cypress-plugin-snapshots/commands');
 
-if (Cypress.browser.isHeaded) {
-  const noop = () => {};
-  Cypress.Commands.overwrite('matchImageSnapshot', noop);
-  Cypress.Commands.overwrite('toMatchImageSnapshot', noop);
-}
-
 const resizeForDesktop = () => cy.viewport('ipad-2');
 const resizeForMobile = () => cy.viewport('iphone-5');
 
@@ -95,3 +89,10 @@ Cypress.Commands.add('moveSelectionToEnd', () => {
 Cypress.Commands.add('setTextStyle', (buttonSelector) => {
   cy.get(`[data-hook=${buttonSelector}]`).click();
 });
+
+// disable screenshots in debug mode
+if (Cypress.browser.isHeaded) {
+  const noop = () => {};
+  Cypress.Commands.overwrite('matchImageSnapshot', noop);
+  Cypress.Commands.overwrite('toMatchImageSnapshot', noop);
+}
