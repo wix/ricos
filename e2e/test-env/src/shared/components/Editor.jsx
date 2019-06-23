@@ -4,6 +4,7 @@ import deepFreeze from 'deep-freeze';
 import { RichContentEditor } from 'wix-rich-content-editor';
 import 'wix-rich-content-common/dist/styles.min.css';
 import 'wix-rich-content-editor/dist/styles.min.css';
+import theme from '../theme';
 
 class Editor extends Component {
   state = {
@@ -70,7 +71,12 @@ class Editor extends Component {
 
   render() {
     return (
-      <RichContentEditor editorKey="rce" editorState={this.state.editorState} onChange={this.handleChange}/>
+      <RichContentEditor
+        editorKey="rce"
+        editorState={this.state.editorState}
+        onChange={this.handleChange}
+        theme={theme}
+      />
     );
   }
 }

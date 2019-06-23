@@ -32,6 +32,7 @@
     "wix-rich-content-common": "*",
     "wix-rich-content-editor": "*",
     "wix-rich-content-plugin-divider": "*",
+    "wix-rich-content-plugin-image": "*",
     "wix-rich-content-viewer": "*"
   },
   "peerDependencies": {},
