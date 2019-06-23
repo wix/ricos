@@ -33,12 +33,12 @@ const config = [
         babelRule,
         {
           test: /\.css$/,
-          include: /packages\/test-env/,
+          include: /e2e\/test-env/,
           use: ['style-loader', { loader: 'css-loader', options: { modules: true } }],
         },
         {
           test: /\.css$/,
-          exclude: /packages\/test-env/,
+          exclude: /e2e\/test-env/,
           use: ['style-loader', 'css-loader'],
         },
       ],
@@ -63,12 +63,12 @@ const config = [
         babelRule,
         {
           test: /\.css$/,
-          include: /packages\/test-env/,
+          include: /e2e\/test-env/,
           use: { loader: 'css-loader', options: { modules: true, exportOnlyLocals: true } },
         },
         {
           test: /\.css$/,
-          exclude: /packages\/test-env/,
+          exclude: /e2e\/test-env/,
           use: { loader: 'css-loader', options: { exportOnlyLocals: true } },
         },
       ],
