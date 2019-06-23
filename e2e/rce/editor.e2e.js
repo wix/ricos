@@ -1,7 +1,7 @@
 import { TEXT_BUTTONS } from '../cypress/dataHooks';
 
-describe('editor', () => {
-  it.only('should allow to enter text', () => {
+describe.skip('editor', () => {
+  it('should allow to enter text', () => {
     cy
       .editorDesktop()
       .enterParagraphs([

@@ -1,8 +1,9 @@
-require('cypress-image-snapshot/command').addMatchImageSnapshotCommand();
 require('cypress-plugin-snapshots/commands');
 
 if (Cypress.browser.isHeaded) {
-  Cypress.Commands.overwrite('matchImageSnapshot', () => {});
+  const noop = () => {};
+  Cypress.Commands.overwrite('matchImageSnapshot', noop);
+  Cypress.Commands.overwrite('toMatchImageSnapshot', noop);
 }
 
 const resizeForDesktop = () => cy.viewport('ipad-2');
@@ -38,6 +39,12 @@ Cypress.Commands.add('editorMobile', fixtureName => {
 // Editor commands
 
 const getRce = () => cy.window().its('rce');
+
+Cypress.Commands.add('matchImageSnapshot', () => {
+  cy
+    .window()
+    .toMatchImageSnapshot();
+});
 
 Cypress.Commands.add('matchContentSnapshot', name => {
   cy

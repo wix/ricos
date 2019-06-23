@@ -4,8 +4,9 @@ describe('viewer rendering', () => {
   context('desktop', () => {
     fixtures.forEach(fixture => {
       it(`should render ${fixture}`, () => {
-        cy.viewerDesktop(fixture);
-        cy.matchImageSnapshot();
+        cy
+          .viewerDesktop(fixture)
+          .matchImageSnapshot();
       });
     });
   });
@@ -13,8 +14,9 @@ describe('viewer rendering', () => {
   context('mobile', () => {
     fixtures.forEach(fixture => {
       it(`should render ${fixture}`, () => {
-        cy.viewerMobile(fixture);
-        cy.matchImageSnapshot();
+        cy
+          .viewerMobile(fixture)
+          .matchImageSnapshot();
       });
     });
   });
