@@ -29,6 +29,7 @@
     "e2e:debug": "cypress open",
     "e2e:env": "cd e2e/test-env && npm run build && npm start",
     "e2e:env:run": "cd e2e/test-env && npm start",
+    "e2e:env:dev": "cd e2e/test-env && npm run dev",
     "test:unit": "lerna run --parallel --stream test",
     "lint": "lerna run --parallel --stream lint",
     "test": "npm run test:unit && npm run e2e:ci"
