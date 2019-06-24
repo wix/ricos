@@ -26,8 +26,8 @@ class UnsplashComponent extends Component {
   };
 
   renderPlayer = () => {
-    const { componentData } = this.props;
-    return <UnsplashViewer ref={this.setPlayer} componentData={componentData} />;
+    const { componentData, t } = this.props;
+    return <UnsplashViewer ref={this.setPlayer} componentData={componentData} t={t} />;
   };
 
   onKeyDown = (e, handler) => {
@@ -52,6 +52,7 @@ UnsplashComponent.propTypes = {
   componentData: PropTypes.object.isRequired,
   blockProps: PropTypes.object.isRequired,
   onClick: PropTypes.func.isRequired,
+  t: PropTypes.func.isRequired,
 };
 
 export { UnsplashComponent as Component };

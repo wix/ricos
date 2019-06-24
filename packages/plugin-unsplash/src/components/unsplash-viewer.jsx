@@ -19,13 +19,22 @@ class UnsplashViewer extends Component {
   }
 
   render() {
-    const { componentData } = this.props;
+    const { componentData, t } = this.props;
     return (
-      <img
-        className={this.styles.unsplash_player}
-        src={componentData.image.originalUrl}
-        alt="unsplash"
-      />
+      <div className={styles.unsplash_player_container}>
+        <div className={styles.unsplash_image_username}>
+          {t('UnsplashPlugin_PhotoBy_Label')} <u>{componentData.image.username}</u>{' '}
+          {t('UnsplashPlugin_on_Label')}
+          <u>{t('UnsplashPlugin_Unsplash_Label')}</u>
+        </div>
+        <div className={styles.image_container}>
+          <img
+            className={this.styles.unsplash_player}
+            src={componentData.image.originalUrl}
+            alt="unsplash"
+          />
+        </div>
+      </div>
     );
   }
 }
@@ -37,6 +46,7 @@ UnsplashViewer.propTypes = {
   onStart: PropTypes.func,
   width: PropTypes.string,
   height: PropTypes.string,
+  t: PropTypes.func.isRequired,
 };
 
 UnsplashViewer.defaultProps = {

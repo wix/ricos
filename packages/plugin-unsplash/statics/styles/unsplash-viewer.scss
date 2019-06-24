@@ -1,6 +1,43 @@
-@import "~wix-rich-content-common/dist/statics/styles/mixins";
+@import '~wix-rich-content-common/dist/statics/styles/mixins';
 
 .unsplash_player {
- display: block;
- width: 100%;
+  display: block;
+  width: 100%;
+}
+
+.unsplash_player_container {
+  position: relative;
+}
+.image_container::after {
+    display: block;
+  position: relative;
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0, rgba(0,0,0,.3) 100%);
+  margin-top: -500px ;
+  height: 500px;
+  width: 100%;
+  overflow: hidden;
+  content: '';
+  @include phone{
+    margin-top: -180px ;
+  height: 180px;
+  }
+}
+
+.unsplash_image_username {
+  position: absolute;
+  bottom: 15px;
+  left: 22px;
+  font-family: Avenir;
+  font-size: 14px;
+  color: #ffffff;
+  line-height: 1.43;
+  z-index: 1;
+  @include phone{
+    bottom: 13px;
+    left: 13px;
+  }
+}
+
+.unsplash_label{
+    
 }

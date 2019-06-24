@@ -48,6 +48,7 @@ class ItemsList extends PureComponent {
       originalUrl: image.photo.full,
       height: parseInt(image.photo.height),
       width: parseInt(image.photo.width),
+      username: image.photo.username,
     };
     const { componentData, helpers, pubsub, onConfirm } = this.props;
     if (onConfirm) {
