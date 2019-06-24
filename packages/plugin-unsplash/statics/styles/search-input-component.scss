@@ -1,28 +1,35 @@
-@import "~wix-rich-content-common/dist/statics/styles/mixins";
+@import '~wix-rich-content-common/dist/statics/styles/mixins';
 .search_container {
   position: relative;
   margin-right: 12px;
-  @include phone{
+  border-bottom: 1px solid #b1b1b1;
+  @include phone {
     height: 50px;
-    width: 100vw;
+    width: calc(100vw - 40px);
+    margin-left: 20px;
   }
-
 }
 .textInput_input {
   border: 0;
-  padding-left: 40px;
-  @include phone{
+  padding-left: 23px;
+  @include phone {
     height: 50px;
-    padding-left: 44px;
+    padding-left: 26px;
+  }
+}
+.textInput {
+  max-height: 40px;
+  overflow: hidden;
+  @include phone {
+    max-height: 50px;
   }
 }
 .search_icon {
   position: absolute;
-  top: 14px;
-  left: 9px;
+  top: 15px;
+  left: 0px;
   z-index: 1;
-  @include phone{
+  @include phone {
     top: 18px;
-    left: 20px;
   }
 }
