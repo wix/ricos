@@ -159,6 +159,7 @@
   "UnsplashPlugin_PhotoBy_Label": "Photo by",
   "UnsplashPlugin_Unsplash_Label": "Unsplash",
   "UnsplashPlugin_on_Label": "on ",
+  "ReplaceUnsplashButton_Tooltip": "Replace",
   "TextAlignmentButton_Tooltip": "Alignment",
   "TextLinkButton_Tooltip": "Link",
   "BoldButton_Tooltip": "Bold",
