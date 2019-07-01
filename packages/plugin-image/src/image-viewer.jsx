@@ -39,7 +39,7 @@ class ImageViewer extends React.Component {
   getImageSrc(src) {
     const { helpers } = this.context || {};
 
-    if (!src && (helpers && helpers.handleFileSelection)) {
+    if (helpers && helpers.handleFileSelection) {
       return null;
     }
 
@@ -62,7 +62,7 @@ class ImageViewer extends React.Component {
         }
         //keep the image's original ratio
         let requiredHeight =
-          src.height && src.width
+          src && src.height && src.width
             ? Math.ceil((src.height / src.width) * requiredWidth)
             : WIX_MEDIA_DEFAULT.SIZE;
         requiredWidth = Math.ceil(requiredWidth);

@@ -209,6 +209,7 @@ body {
         }
 
         .splitter {
+          cursor: column-resize;
           width: 3px;
           background: $secondaryColor;
           border-right: 1px solid $primaryColor;

@@ -56,13 +56,6 @@ class App extends PureComponent {
 
   setContentStateEditor = ref => (this.contentStateEditor = ref);
 
-  setViewerState = editorState => {
-    const content = editorState.getCurrentContent();
-    if (content !== this.state.editorState.getCurrentContent()) {
-      this.setState({ viewerState: JSON.parse(JSON.stringify(convertToRaw(content))) });
-    }
-  };
-
   onContentStateEditorChange = obj => {
     this.setState(getStateFromObject(obj));
   };
@@ -70,13 +63,7 @@ class App extends PureComponent {
   onContentStateEditorResize = () =>
     this.contentStateEditor && this.contentStateEditor.refreshLayout();
 
-  onEditorChange = editorState => {
-    const state = {
-      editorState,
-    };
-    this.setState(state);
-    this.setViewerState(editorState);
-  };
+  onEditorChange = editorState => this.setState({ editorState });
 
   onSectionVisibilityChange = (sectionName, isVisible) => {
     this.setState(
@@ -121,7 +108,8 @@ class App extends PureComponent {
   };
 
   renderViewer = () => {
-    const { isViewerShown, viewerState } = this.state;
+    const { isViewerShown, editorState } = this.state;
+    const viewerState = JSON.parse(JSON.stringify(convertToRaw(editorState.getCurrentContent()))); //emulate initilState passed in by consumers
     return (
       isViewerShown && (
         <ReflexElement key="viewer-section" className="section">

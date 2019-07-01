@@ -15,7 +15,15 @@ const Hashtag = props => {
 
   const decoratedOnClick = onClick ? event => onClick(event, text) : null;
   const cProps = href ? { className, href, target, onClick: decoratedOnClick } : { className };
-  return <Component {...cProps}>{children}</Component>;
+  return (
+    <Component {...cProps}>
+      {React.Children.toArray(children).some(child => child.type === 'span') ? (
+        children
+      ) : (
+        <span>{children}</span>
+      )}
+    </Component>
+  );
 };
 
 Hashtag.propTypes = {
