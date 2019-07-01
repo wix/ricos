@@ -20,18 +20,11 @@ const createLinkPlugin = (config = {}) => {
 
   const handleReturn = (event, editorState) => {
     linkifyData = getLinkifyData(editorState);
-    if (linkifyData) {
-      linkifyData.trigger = 'newLine';
-    }
   };
 
   const handleBeforeInput = (chars, editorState) => {
-    // inherent URL symbols to be excluded
-    if (/[^\w./\-?&=#!]/.test(chars)) {
+    if (/\s/.test(chars)) {
       linkifyData = getLinkifyData(editorState);
-      if (linkifyData) {
-        linkifyData.trigger = chars;
-      }
     }
   };
 
@@ -106,12 +99,11 @@ const createLinkPlugin = (config = {}) => {
     return false;
   };
 
-  const addLinkAt = ({ string, index, endIndex, blockKey, trigger }, editorState) => {
+  const addLinkAt = ({ string, index, endIndex, blockKey }, editorState) => {
     return insertLinkInPosition(editorState, blockKey, index, endIndex, {
       url: string,
       anchorTarget,
       relValue,
-      trigger,
     });
   };
 

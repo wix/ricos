@@ -8,41 +8,20 @@ export const insertLinkInPosition = (
   blockKey,
   start,
   end,
-  { url, targetBlank, nofollow, anchorTarget, relValue, trigger }
+  { url, targetBlank, nofollow, anchorTarget, relValue }
 ) => {
   const selection = SelectionState.createEmpty(blockKey).merge({
     anchorOffset: start,
     focusOffset: end,
   });
 
-  let newEditorState = insertLink(editorState, selection, {
+  return insertLink(editorState, selection, {
     url,
     targetBlank,
     nofollow,
     anchorTarget,
     relValue,
   });
-  // if link parsing triggered by a new line, sets selection after the url
-  // TODO: cancel underline, move cursor to the newly added block
-  if (trigger === 'newLine') {
-    return EditorState.forceSelection(
-      newEditorState,
-      selection.merge({ anchorOffset: selection.focusOffset })
-    );
-  } else {
-    // cancel underline, move cursor after the last typed char
-    newEditorState = EditorState.acceptSelection(
-      newEditorState,
-      selection.merge({ anchorOffset: selection.endOffset, focusOffset: selection.endOffset + 1 })
-    );
-
-    newEditorState = RichUtils.toggleInlineStyle(newEditorState, 'UNDERLINE');
-
-    return EditorState.forceSelection(
-      newEditorState,
-      selection.merge({ anchorOffset: end + 1, focusOffset: end + 1 })
-    );
-  }
 };
 
 export const insertLinkAtCurrentSelection = (
@@ -76,11 +55,12 @@ function insertLink(
   selection,
   { url, targetBlank, nofollow, anchorTarget, relValue }
 ) {
+  const oldSelection = editorState.getSelection();
   const newContentState = Modifier.applyInlineStyle(
     editorState.getCurrentContent(),
     selection,
     'UNDERLINE'
-  );
+  ).set('selectionAfter', oldSelection);
   const newEditorState = EditorState.push(editorState, newContentState, 'change-inline-style');
 
   return addEntity(newEditorState, selection, {
