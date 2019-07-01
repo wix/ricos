@@ -233,7 +233,6 @@ class DesignComponent extends PureComponent {
                     label={t('ButtonModal_Width_Input')}
                     onChange={this.onBorderWidthChange.bind(this)}
                     theme={this.styles}
-                    onKeyPress
                   />
                 </div>
               </div>
