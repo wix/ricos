@@ -1,4 +1,4 @@
-import { getUrlMatches } from './urlValidators';
+import { getUrlMatches } from '../urlValidators';
 
 export const linkify = (contentState, { anchorTarget, relValue }) => {
   return contentState.blocks.reduce(

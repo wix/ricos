@@ -5,7 +5,7 @@ import negate from 'lodash/negate';
 import last from 'lodash/last';
 import initial from 'lodash/initial';
 import intersection from 'lodash/intersection';
-import { HEADER_BLOCK } from '../consts';
+import { HEADER_BLOCK } from '../../consts';
 
 const INLINE_HEADER = {
   ONE: 'inline-header-one',

@@ -1,6 +1,6 @@
 import deepFreeze from 'deep-freeze';
 import uut from './normalizeInitialState';
-import Version from './versioningUtils';
+import Version from '../versioningUtils';
 
 const createState = ({
   text = 'bla bla bla  bla   ',

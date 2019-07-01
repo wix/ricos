@@ -1,4 +1,4 @@
-import Version from './versioningUtils';
+import Version from '../versioningUtils';
 import { removeInlineHeaderRanges } from './removeInlineHeaderRanges';
 import {
   addLinkUnderlineRange,
