@@ -7,8 +7,9 @@ import {typeMappers} from './viewerPlugins';
 
 const Viewer = props => (
   <RichContentViewer
-    typeMappers={typeMappers}
     theme={theme}
+    typeMappers={typeMappers}
+    inlineStyleMappers={[]}
     {...props}
   />
 );
