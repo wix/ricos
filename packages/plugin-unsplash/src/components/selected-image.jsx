@@ -53,6 +53,13 @@ class SelectedImage extends Component {
   render() {
     const { index, onClick, photo, margin } = this.props;
     const { isMobile } = this;
+    const photoObj = {
+      src: photo.full,
+      height: photo.height,
+      width: photo.width,
+      theme: photo.theme,
+      username: photo.username,
+    };
     return (
       <div
         style={{
@@ -77,7 +84,7 @@ class SelectedImage extends Component {
           onKeyPress={() => null}
           onClick={e => onClick(e, { index, photo })}
         >
-          <img style={{ ...imgStyle }} alt={'Unsplash'} {...photo} />
+          <img style={{ ...imgStyle }} alt={'Unsplash'} {...photoObj} />
         </div>
       </div>
     );
