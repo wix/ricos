@@ -203,7 +203,7 @@ class DesignComponent extends PureComponent {
       );
     });
     return (
-      <div onKeyPress={this.props.onKeyPress}>
+      <div>
         <SettingsSection
           theme={theme}
           ariaProps={{ 'aria-label': 'button sample selection', role: 'region' }}
@@ -233,7 +233,6 @@ class DesignComponent extends PureComponent {
                     label={t('ButtonModal_Width_Input')}
                     onChange={this.onBorderWidthChange.bind(this)}
                     theme={this.styles}
-                    onKeyPress
                   />
                 </div>
               </div>
