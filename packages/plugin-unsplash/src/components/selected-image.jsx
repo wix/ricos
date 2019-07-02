@@ -71,7 +71,14 @@ class SelectedImage extends Component {
         {isMobile
           ? this.renderOverlay(photo, onClick, index, 0.0)
           : this.state.isHovered && this.renderOverlay(photo, onClick, index, 0.2)}
-        <img style={{ ...imgStyle }} alt={'Unsplash'} {...photo} />
+        <div
+          role="button"
+          tabIndex={0}
+          onKeyPress={() => null}
+          onClick={e => onClick(e, { index, photo })}
+        >
+          <img style={{ ...imgStyle }} alt={'Unsplash'} {...photo} />
+        </div>
       </div>
     );
   }
