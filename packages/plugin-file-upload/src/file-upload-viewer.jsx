@@ -15,6 +15,7 @@ class FileUploadViewer extends PureComponent {
     super(props);
     const { componentData } = props;
     validate(componentData, schema);
+    this.fileDownloadIframeId = `${Date.now()}`;
   }
 
   componentWillReceiveProps(nextProps) {
@@ -88,7 +89,7 @@ class FileUploadViewer extends PureComponent {
 
     const resolveFileUrl = () => {
       settings.resolveFileUrl(componentData).then(resolveFileUrl => {
-        document.getElementById('fileDownloadIframe').src = resolveFileUrl;
+        document.getElementById(this.fileDownloadIframeId).src = resolveFileUrl;
         this.setState({ resolveFileUrl });
       });
     };
@@ -113,7 +114,7 @@ class FileUploadViewer extends PureComponent {
       return null;
     }
 
-    return <iframe id="fileDownloadIframe" style={{ display: 'none' }} title="file" />;
+    return <iframe id={this.fileDownloadIframeId} style={{ display: 'none' }} title="file" />;
   }
 
   render() {
