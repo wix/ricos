@@ -88,6 +88,9 @@ class FileUploadViewer extends PureComponent {
     }
 
     const resolveFileUrl = () => {
+      if (!settings.resolveFileUrl) {
+        return;
+      }
       settings.resolveFileUrl(componentData).then(resolveFileUrl => {
         document.getElementById(this.fileDownloadIframeId).src = resolveFileUrl;
         this.setState({ resolveFileUrl });
@@ -139,7 +142,7 @@ FileUploadViewer.propTypes = {
   isLoading: PropTypes.bool.isRequired,
   componentData: PropTypes.object.isRequired,
   error: PropTypes.string,
-  settings: PropTypes.object.isRequired,
+  settings: PropTypes.object,
 };
 
 FileUploadViewer.defaultProps = {
