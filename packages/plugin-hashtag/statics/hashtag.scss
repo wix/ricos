@@ -1,10 +1,10 @@
-@import '~wix-rich-content-common/dist/statics/styles/palette';
+@import "~wix-rich-content-common/dist/statics/styles/palette";
 
 .hashtag {
   color: $accent-color;
   text-decoration: none;
 }
 
-.hashtag_hover:hover {
+.hashtag_hover span:hover {
   text-decoration: underline;
 }

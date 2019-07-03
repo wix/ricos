@@ -9,12 +9,8 @@ import { imageTypeMapper } from 'wix-rich-content-plugin-image/dist/module.viewe
 import { videoTypeMapper } from 'wix-rich-content-plugin-video/dist/module.viewer.cjs';
 import { dividerTypeMapper } from 'wix-rich-content-plugin-divider/dist/module.viewer.cjs';
 import { htmlTypeMapper, HTML_TYPE } from 'wix-rich-content-plugin-html/dist/module.viewer.cjs';
-import {
-  linkTypeMapper,
-  LinkViewer,
-  LinkParseStrategy,
-} from 'wix-rich-content-plugin-link/dist/module.viewer.cjs';
-import { Strategy as HashTagStrategy, Component as HashTag } from 'wix-rich-content-plugin-hashtag';
+import { linkTypeMapper } from 'wix-rich-content-plugin-link/dist/module.viewer.cjs';
+import { HashtagDecorator } from 'wix-rich-content-plugin-hashtag/dist/module.viewer.cjs';
 
 import TestData from './TestData/initial-state';
 
@@ -60,35 +56,15 @@ class App extends Component {
     ];
 
     this.decorators = [
-      {
-        strategy: HashTagStrategy,
-        component: ({ children, decoratedText }) =>
-          children.map((child, i) => (
-            <HashTag
-              key={i}
-              decoratedText={decoratedText}
-              theme={theme}
-              onClick={this.onHashTagClick}
-              createHref={this.createHref}
-            >
-              {child}
-            </HashTag>
-          )),
-      },
-      {
-        strategy: LinkParseStrategy,
-        component: ({ children, decoratedText, rel, target }) =>
-          children.map((child, i) => (
-            <LinkViewer
-              key={i}
-              componentData={{ rel, target, url: decoratedText }}
-              anchorTarget={anchorTarget}
-              relValue={relValue}
-            >
-              {child}
-            </LinkViewer>
-          )),
-      },
+      new HashtagDecorator({
+        theme,
+        onClick: (event, text) => {
+          event.preventDefault();
+          console.log(`'${text}' hashtag clicked!`); // eslint-disable-line no-console
+        },
+        createHref: decoratedText =>
+          `/search/posts?query=${encodeURIComponent('#')}${decoratedText}`,
+      }),
     ];
 
     this.config = {

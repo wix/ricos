@@ -9,6 +9,11 @@ if (process.argv.length !== 3) {
   process.exit(1);
 }
 
+if (process.env.CI) {
+  console.log('In CI - skipping linking');
+  return;
+}
+
 const exampleName = process.argv[process.argv.length - 1];
 const getRootDir = dirname => {
   const pacakgesPath = path.resolve(dirname, 'packages');

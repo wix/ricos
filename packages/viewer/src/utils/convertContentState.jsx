@@ -5,8 +5,9 @@ import redraft from 'redraft';
 import classNames from 'classnames';
 import endsWith from 'lodash/endsWith';
 import List from '../List';
-import getPluginsViewer from '../PluginsViewer';
-import { getTextDirection } from './textUtils';
+import getPluginViewers from '../getPluginViewers';
+import { getTextDirection, kebabToCamelObjectKeys } from './textUtils';
+import { staticInlineStyleMapper } from '../staticInlineStyleMapper';
 
 const isEmptyContentState = raw =>
   !raw || !raw.blocks || (raw.blocks.length === 1 && raw.blocks[0].text === '');
@@ -20,28 +21,10 @@ const getBlockStyleClasses = (data, mergedStyles, textDirection, classes) => {
   return classNames(classes, { [mergedStyles.rtl]: rtl }, mergedStyles[alignmentClass]);
 };
 
-const kebabToCamel = s => s.replace(/-([a-z])/, (_, p1) => p1.toUpperCase());
-
-const kebabToCamelObjectKeys = (obj = {}) =>
-  Object.keys(obj).reduce((result, key) => {
-    result[kebabToCamel(key)] = obj[key];
-    return result;
-  }, {});
-
 const blockDataToStyle = ({ dynamicStyles }) => kebabToCamelObjectKeys(dynamicStyles);
 
-const getInline = mergedStyles => {
-  return {
-    BOLD: (children, { key }) => <strong key={key}>{children}</strong>,
-    ITALIC: (children, { key }) => <em key={key}>{children}</em>,
-    UNDERLINE: (children, { key }) => <u key={key}>{children}</u>,
-    CODE: (children, { key }) => (
-      <span key={key} className={mergedStyles.code}>
-        {children}
-      </span>
-    ),
-  };
-};
+const getInline = (inlineStyleMappers, mergedStyles) =>
+  combineMappers([...inlineStyleMappers, staticInlineStyleMapper], mergedStyles);
 
 const getBlocks = (mergedStyles, textDirection) => {
   const getList = ordered => (items, blockProps) => {
@@ -94,7 +77,7 @@ const getBlocks = (mergedStyles, textDirection) => {
 };
 
 const getEntities = (typeMap, pluginProps, styles) => {
-  return getPluginsViewer(typeMap, pluginProps, styles);
+  return getPluginViewers(typeMap, pluginProps, styles);
 };
 
 const normalizeContentState = contentState => ({
@@ -123,19 +106,26 @@ const normalizeContentState = contentState => ({
   }),
 });
 
-const combineTypeMappers = mappers => {
+const combineMappers = (mappers, ...args) => {
   if (!mappers || !mappers.length || mappers.some(resolver => typeof resolver !== 'function')) {
-    console.warn('typeMappers is expected to be a function array'); // eslint-disable-line no-console
+    console.warn(`${mappers} is expected to be a function array`); // eslint-disable-line no-console
     return {};
   }
-  return mappers.reduce((map, mapper) => Object.assign(map, mapper()), {});
+  return mappers.reduce((map, mapper) => Object.assign(map, mapper(...args)), {});
 };
 
 const redraftOptions = {
   cleanup: {
     after: BLOCK_TYPES.filter(t => t.indexOf('header') === -1),
     split: true,
-    except: ['unordered-list-item', 'ordered-list-item', 'unstyled'],
+    except: [
+      'unordered-list-item',
+      'ordered-list-item',
+      'unstyled',
+      'header-one',
+      'header-two',
+      'header-three',
+    ],
   },
 };
 
@@ -146,6 +136,7 @@ const convertToReact = (
   typeMap,
   entityProps,
   decorators,
+  inlineStyleMappers,
   options = {}
 ) => {
   if (isEmptyContentState(contentState)) {
@@ -155,9 +146,9 @@ const convertToReact = (
   return redraft(
     normalizeContentState(contentState),
     {
-      inline: getInline(mergedStyles),
+      inline: getInline(inlineStyleMappers, mergedStyles),
       blocks: getBlocks(mergedStyles, textDirection),
-      entities: getEntities(combineTypeMappers(typeMap), entityProps, mergedStyles),
+      entities: getEntities(combineMappers(typeMap), entityProps, mergedStyles),
       decorators,
     },
     { ...redraftOptions, ...options }

@@ -1,5 +1,6 @@
 {
-  "$id": "http://path/to/schema.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://wix-rich-content/giphy-content-data-schema.json",
   "type": "object",
   "properties": {
     "gif": {
@@ -54,13 +55,6 @@
           "title": "The Alignment Schema ",
           "default": "center",
           "examples": ["left", "right", "center"]
-        },
-        "key": {
-          "$id": "/properties/config/properties/key",
-          "type": "string",
-          "title": "The Key Schema ",
-          "default": "",
-          "examples": ["7mib0"]
         }
       }
     }
