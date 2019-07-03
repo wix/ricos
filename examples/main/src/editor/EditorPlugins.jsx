@@ -20,6 +20,7 @@ import {
 import { createMapPlugin, MAP_TYPE } from 'wix-rich-content-plugin-map';
 import { createFileUploadPlugin, FILE_UPLOAD_TYPE } from 'wix-rich-content-plugin-file-upload';
 import { createTextColorPlugin, TEXT_COLOR_TYPE } from 'wix-rich-content-plugin-text-color';
+import { createYoutubePlugin, YOUTUBE_TYPE } from 'wix-rich-content-plugin-youtube';
 import React from 'react';
 import Highlighter from 'react-highlight-words';
 import casual from 'casual-browserify';
@@ -41,6 +42,7 @@ import 'wix-rich-content-plugin-giphy/dist/styles.min.css';
 import 'wix-rich-content-plugin-map/dist/styles.min.css';
 import 'wix-rich-content-plugin-file-upload/dist/styles.min.css';
 import 'wix-rich-content-plugin-text-color/dist/styles.min.css';
+import 'wix-rich-content-plugin-youtube/dist/styles.min.css';
 
 import { customStyleFn, styleSelectionPredicate, colorScheme } from '../text-color-style-fn';
 import { getBaseUrl } from '../utils';
@@ -68,6 +70,7 @@ export const editorPlugins = [
   createMapPlugin,
   createFileUploadPlugin,
   createTextColorPlugin,
+  createYoutubePlugin
 ];
 
 const themeColors = {
@@ -232,6 +235,10 @@ export const config = {
   },
   [GIPHY_TYPE]: {
     giphySdkApiKey: process.env.GIPHY_API_KEY,
+  },
+  [YOUTUBE_TYPE]: {
+    googleYoutubeApiKey: process.env.YOUTUBE_API_KEY,
+    colors: themeColors,
   },
   [MAP_TYPE]: {
     googleMapApiKey: process.env.GOOGLE_MAPS_API_KEY,

@@ -53,6 +53,7 @@
     "wix-rich-content-plugin-sound-cloud": "file:../../packages/plugin-sound-cloud",
     "wix-rich-content-plugin-text-color": "file:../../packages/plugin-text-color",
     "wix-rich-content-plugin-video": "file:../../packages/plugin-video",
+    "wix-rich-content-plugin-youtube": "file:../../packages/plugin-youtube",
     "wix-rich-content-viewer": "file:../../packages/viewer"
   },
   "scripts": {
