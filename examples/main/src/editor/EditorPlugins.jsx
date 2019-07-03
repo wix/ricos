@@ -269,7 +269,7 @@ export const config = {
       const data = {
         name,
         type,
-        url: 'http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf',
+        url: '',
       };
       setTimeout(() => updateEntity({ data }), 1000);
     },

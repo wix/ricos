@@ -9,6 +9,12 @@
 
 ## [Unreleased]
 
+## 4.0.2 (Jul 2, 2019)
+### :rocket: New Feature
+- `file-upload`
+  - [#325](https://github.com/wix-incubator/rich-content/pull/325) added ability to resolve file url on demand, to handle private file downloading
+<hr/>
+
 ## 4.0.0 "Lynn" (Jul 1, 2019)
 ### :boom: Breaking Change
 - `hashtag`

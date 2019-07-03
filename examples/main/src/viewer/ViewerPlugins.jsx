@@ -18,7 +18,10 @@ import {
   MENTION_TYPE,
   mentionsTypeMapper,
 } from 'wix-rich-content-plugin-mentions/dist/module.viewer';
-import { fileUploadTypeMapper } from 'wix-rich-content-plugin-file-upload/dist/module.viewer';
+import {
+  fileUploadTypeMapper,
+  FILE_UPLOAD_TYPE,
+} from 'wix-rich-content-plugin-file-upload/dist/module.viewer';
 import { textColorInlineStyleMapper, TEXT_COLOR_TYPE } from 'wix-rich-content-plugin-text-color';
 
 import { viewerCustomStyleFn, styleSelectionPredicate } from '../text-color-style-fn';
@@ -75,6 +78,16 @@ export const config = {
   [TEXT_COLOR_TYPE]: {
     styleSelectionPredicate,
     customStyleFn: viewerCustomStyleFn,
+  },
+  [FILE_UPLOAD_TYPE]: {
+    resolveFileUrl: () =>
+      new Promise(resolve =>
+        setTimeout(
+          () =>
+            resolve('http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf'),
+          100
+        )
+      ),
   },
 };
 
