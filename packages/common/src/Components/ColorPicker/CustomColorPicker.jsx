@@ -6,7 +6,6 @@ import { Saturation, Hue, EditableInput } from 'react-color/lib/components/commo
 import HuePointer from './HuePointer.jsx';
 import SaturationPointer from './SaturationPointer';
 import styles from '../../../statics/styles/custom-color-picker.scss';
-import { isHexColor } from './utils';
 
 const customPicker = CustomPicker;
 
@@ -14,23 +13,8 @@ class CustomColorPicker extends React.Component {
   constructor(props) {
     super(props);
     this.styles = mergeStyles({ styles, theme: props.theme });
-    this.state = {
-      color: props.color,
-    };
   }
 
-  componentWillReceiveProps(newProps) {
-    if (newProps.color !== this.props.color) {
-      this.setState({ color: newProps.color });
-    }
-  }
-
-  onInputChange = color => {
-    if (isHexColor(color.hex)) {
-      this.props.onChange(color.hex);
-    }
-    this.setState({ color: color.hex });
-  };
   render() {
     const { styles } = this;
     const { t, theme } = this.props;
@@ -48,8 +32,6 @@ class CustomColorPicker extends React.Component {
           </div>
           <div className={styles.customColorPicker_input_container}>
             <EditableInput
-              {...this.props}
-              label={'hex'}
               style={{
                 input: {
                   position: 'relative',
@@ -59,12 +41,9 @@ class CustomColorPicker extends React.Component {
                   color: '#333333',
                   border: 'none',
                 },
-                label: {
-                  display: 'none',
-                },
               }}
-              onChange={this.onInputChange}
-              value={this.state.color}
+              value={this.props.color}
+              {...this.props}
             />
           </div>
         </div>

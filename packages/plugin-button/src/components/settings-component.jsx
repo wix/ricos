@@ -122,7 +122,7 @@ class SettingsComponent extends PureComponent {
                   ? '21px'
                   : '25px'
                 : isMobile
-                ? '24px'
+                ? '33px'
                 : '34px',
           }}
           className={this.styles.checkBoxes}
