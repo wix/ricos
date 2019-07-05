@@ -8,6 +8,8 @@
 > - :house: [Internal]
 
 ## [Unreleased]
+- `file-upload`
+    - In viewer show spinner while file download is resolving;
 ### :bug: Bug Fix
 - `text-color`
   - [5cfbd247](https://github.com/wix-incubator/rich-content/commit/5cfbd247) viewer module build definition added
