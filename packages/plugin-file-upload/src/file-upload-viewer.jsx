@@ -9,13 +9,14 @@ import styles from '../statics/styles/file-upload-viewer.scss';
 class FileUploadViewer extends PureComponent {
   state = {
     resolvedFileUrl: null,
+    resolvingUrl: false,
   };
 
   constructor(props) {
     super(props);
     const { componentData } = props;
     validate(componentData, schema);
-    this.fileDownloadIframeId = `${Date.now()}`;
+    this.iframeRef = React.createRef();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -25,7 +26,7 @@ class FileUploadViewer extends PureComponent {
   }
 
   renderLoader() {
-    if (!this.props.isLoading) {
+    if (!this.props.isLoading && !this.state.resolvingUrl) {
       return null;
     }
 
@@ -91,9 +92,15 @@ class FileUploadViewer extends PureComponent {
       if (!settings.resolveFileUrl) {
         return;
       }
+
+      this.setState({ resolvingUrl: true });
       settings.resolveFileUrl(componentData).then(resolveFileUrl => {
-        document.getElementById(this.fileDownloadIframeId).src = resolveFileUrl;
         this.setState({ resolveFileUrl });
+        this.setState({ resolvingUrl: false });
+
+        if (this.iframeRef.current) {
+          this.iframeRef.current.src = resolveFileUrl;
+        }
       });
     };
 
@@ -117,7 +124,7 @@ class FileUploadViewer extends PureComponent {
       return null;
     }
 
-    return <iframe id={this.fileDownloadIframeId} style={{ display: 'none' }} title="file" />;
+    return <iframe ref={this.iframeRef} style={{ display: 'none' }} title="file" />;
   }
 
   render() {

@@ -81,9 +81,11 @@ export const config = {
       new Promise(resolve =>
         setTimeout(
           () =>
-            resolve('http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf'),
-          100
-        )
+            resolve(
+              'https://wixmp-39ab0c0354ff50648f4c4e4f.appspot.com/_api/download/file?downloadToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1cm46YXBwOjZlYTNhM2FjZjlkYjRkMmE4MzE5NjFhZGM1NGZkY2Q3Iiwib2JqIjpudWxsLCJhdWQiOlsidXJuOnNlcnZpY2U6ZmlsZS5kb3dubG9hZCJdLCJpc3MiOiJ1cm46YXBwOjZlYTNhM2FjZjlkYjRkMmE4MzE5NjFhZGM1NGZkY2Q3IiwiaWF0IjoxNTYyMzA5NTM4LCJqdGkiOiIwMmVmNGFhYWI3MWIiLCJleHAiOjE1NjIzMDk4NDksInBheWxvYWQiOnsicGF0aCI6Ii9hZDMxZmY3OC0xMmJiLTQwNTMtYWNkZC1hOWRiMDVhYmEzOWUvMTU2MjI0MzkwNjQ0MC1jYXQud2VicCIsImV4cGlyeSI6MzAwLCJzYXZlQXMiOiJjYXQud2VicCJ9fQ.6GnjC1Z_uN4JuJIkj50ha8fGooG7d0MlrgoLHBqBn6Q',
+            ),
+          1000,
+        ),
       ),
   },
 };
