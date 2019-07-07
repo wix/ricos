@@ -10,7 +10,7 @@
 ## [Unreleased]
 ### :bug: Bug Fix
 - `common`
-  - plugin + text inline toolbars positioning is direction-agnostic
+  - [#328](https://github.com/wix-incubator/rich-content/pull/328) plugin + text inline toolbars positioning is direction-agnostic
 - `file-upload`
   - [#327](https://github.com/wix-incubator/rich-content/pull/327) shows spinner while file URL is being resolved
 - `viewer`
