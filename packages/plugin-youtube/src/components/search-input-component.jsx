@@ -5,7 +5,6 @@ import {
   TextInput,
   Button,
   isVideoUrl,
-  WixUtils,
   getUrlMatches,
   ErrorIcon,
 } from 'wix-rich-content-common';
@@ -138,7 +137,7 @@ class SearchInputComponent extends Component {
             style={{ ...textInputStyles }}
             theme={this.styles}
           />
-          {!WixUtils.isMobile() && (
+          {!isMobile && (
             <Button
               ariaProps={{ disabled: invalidYoutubeURL }}
               onClick={this.onSearchClicked}
