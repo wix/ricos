@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { mergeStyles, isVideoUrl, WixUtils } from 'wix-rich-content-common';
-import ItemsListComponent from './../components/items-list-component';
+import VideoListComponent from './../components/video-list-component';
 import SearchInputComponent from './../components/search-input-component';
 import NavbarComponent from './../components/navbar-component';
 import styles from '../../statics/styles/youtube-api-input-modal.scss';
@@ -97,7 +97,7 @@ export default class YoutubeApiInputModal extends Component {
             isMobile={isMobile}
             {...this.props}
           />
-          <ItemsListComponent
+          <VideoListComponent
             onItemClickedHandler={this.onItemClickedHandler.bind(this)}
             isMobile={isMobile}
             isTextBoxFocused={this.state.onTextBoxFocus}
