@@ -1,16 +1,19 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactPlayer from 'react-player';
-import { mergeStyles } from 'wix-rich-content-common';
+import { mergeStyles, validate, Context } from 'wix-rich-content-common';
+import schema from '../../statics/data-schema.json';
 import styles from '../../statics/styles/youtube-viewer.scss';
 import classNames from 'classnames';
 class YoutubeViewer extends Component {
   constructor(props) {
     super(props);
-    this.styles = mergeStyles({ styles, theme: props.theme });
+    validate(props.componentData, schema);
+    this.state = {};
   }
 
   render() {
+    this.styles = this.styles || mergeStyles({ styles, theme: this.context.theme });
     const {
       componentData: { youtube },
       ...rest
@@ -21,8 +24,9 @@ class YoutubeViewer extends Component {
   }
 }
 
+YoutubeViewer.contextType = Context.type;
+
 YoutubeViewer.propTypes = {
-  theme: PropTypes.object.isRequired,
   componentData: PropTypes.object.isRequired,
 };
 
