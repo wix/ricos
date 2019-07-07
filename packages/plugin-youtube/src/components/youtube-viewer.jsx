@@ -9,7 +9,6 @@ class YoutubeViewer extends Component {
   constructor(props) {
     super(props);
     validate(props.componentData, schema);
-    this.state = {};
   }
 
   render() {
