@@ -5,8 +5,8 @@ import {
   TextInput,
   Button,
   isVideoUrl,
-  getUrlMatches,
   ErrorIcon,
+  isValidUrl,
 } from 'wix-rich-content-common';
 import styles from '../../statics/styles/search-input.scss';
 import { SearchIcon, SearchCancelIcon } from './../icons';
@@ -36,7 +36,7 @@ class SearchInputComponent extends Component {
   onTextInputChanged = e => {
     const { t } = this.props;
     this.setState({ textInputValue: e.target.value });
-    if (getUrlMatches(e.target.value)) {
+    if (isValidUrl(e.target.value)) {
       this.setState({ buttonText: t('YoutubePlugin_AddButton_Text'), invalidYoutubeURL: false });
       if (!isVideoUrl(e.target.value)) {
         this.setState({ invalidYoutubeURL: true });
@@ -48,7 +48,7 @@ class SearchInputComponent extends Component {
 
   onSubmit = () => {
     const { textInputValue } = this.state;
-    if (getUrlMatches(textInputValue)) {
+    if (isValidUrl(textInputValue)) {
       if (isVideoUrl(textInputValue)) {
         this.setState({ searchTerm: textInputValue, invalidYoutubeURL: false });
         this.props.onSearchButtonClicked(textInputValue);
