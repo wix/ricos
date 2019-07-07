@@ -42,7 +42,6 @@ const createEditorToolbars = ({
   getToolbarSettings = () => [],
   uiSettings,
   config,
-  direction,
 }) => {
   const { pluginButtons, pluginTextButtons } = buttons;
 
@@ -131,7 +130,6 @@ const createEditorToolbars = ({
           pluginButtons,
           anchorTarget,
           uiSettings,
-          direction,
           relValue,
           isMobile,
           helpers,

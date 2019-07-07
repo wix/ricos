@@ -44,8 +44,6 @@ class RichContentEditor extends Component {
       props.config.uiSettings || {}
     );
 
-    this.direction = this.getDirection();
-
     this.initContext();
     this.initPlugins();
   }
@@ -66,7 +64,6 @@ class RichContentEditor extends Component {
       config,
       isMobile,
       setEditorState: this.setEditorState,
-      direction: this.direction,
     };
   };
 
@@ -100,7 +97,6 @@ class RichContentEditor extends Component {
       relValue,
       getEditorState: this.getEditorState,
       setEditorState: this.setEditorState,
-      direction: this.direction,
     });
     this.initEditorToolbars(pluginButtons, pluginTextButtons);
     this.pluginKeyBindings = initPluginKeyBindings(pluginTextButtons);
@@ -134,7 +130,6 @@ class RichContentEditor extends Component {
       theme: theme || {},
       getEditorState: this.getEditorState,
       setEditorState: this.setEditorState,
-      direction: this.direction,
       t,
       refId: this.refId,
       getToolbarSettings: config.getToolbarSettings,
@@ -231,8 +226,6 @@ class RichContentEditor extends Component {
   updateBounds = editorBounds => {
     this.subscriberPubsubs.forEach(pubsub => pubsub.set('editorBounds', editorBounds));
   };
-
-  getDirection = () => (['ar', 'he'].includes(this.props.locale) ? 'rtl' : 'ltr');
 
   renderToolbars = () => {
     if (!this.props.readOnly) {
@@ -377,12 +370,7 @@ class RichContentEditor extends Component {
       <Context.Provider value={this.contextualData}>
         <Measure bounds onResize={({ bounds }) => this.updateBounds(bounds)}>
           {({ measureRef }) => (
-            <div
-              style={this.props.style}
-              ref={measureRef}
-              className={wrapperClassName}
-              dir={this.direction}
-            >
+            <div style={this.props.style} ref={measureRef} className={wrapperClassName}>
               {this.renderStyleTag()}
               <div className={classNames(styles.editor, theme.editor)}>
                 {this.renderAccessibilityListener()}
