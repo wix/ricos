@@ -63,7 +63,7 @@ class VideoListComponent extends Component {
   renderResultNotFoundErrorMessage = () => {
     const { t, isMobile } = this.props;
     return (
-      <div className={this.styles.error_message_container}>
+      <div className={this.styles.video_list_error_message_container}>
         {isMobile ? (
           <div>
             <div> {t('YoutubePlugin_NoResult_ErrorMessage_1')}</div>
@@ -196,7 +196,7 @@ class VideoListComponent extends Component {
                 singleColor="#000"
                 size={isMobile ? 38 : 18}
                 borderSize={2}
-                className={this.styles.spinner_container}
+                className={this.styles.video_list_spinner_container}
               />
             ) : (
               <InfiniteScroll
@@ -208,13 +208,13 @@ class VideoListComponent extends Component {
                     singleColor="#000"
                     size={isMobile ? 38 : 18}
                     borderSize={2}
-                    className={this.styles.spinner_container}
+                    className={this.styles.video_list_spinner_container}
                     style={{ marginLeft: 'calc(50% - 20px)' }}
                   />
                 }
                 useWindow={false}
                 threshold={3}
-                className={this.styles.InfiniteScroll_container}
+                className={this.styles.video_list_InfiniteScroll_container}
               >
                 {videoItems}
               </InfiniteScroll>

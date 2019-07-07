@@ -77,7 +77,7 @@ export default class YoutubeApiInputModal extends Component {
   render() {
     const isMobile = WixUtils.isMobile();
     return (
-      <div className={this.styles.modal_container}>
+      <div className={this.styles.youtube_api_input_modal_modal_container}>
         {WixUtils.isMobile() && (
           <NavbarComponent
             selectedVideoUrl={this.state.selectedVideoUrl}
@@ -87,7 +87,7 @@ export default class YoutubeApiInputModal extends Component {
             {...this.props}
           />
         )}
-        <div className={this.styles.search_modal_container}>
+        <div className={this.styles.youtube_api_input_modal_search_modal_container}>
           <SearchInputComponent
             onSearchButtonClicked={this.onSearchButtonClicked.bind(this)}
             selectedVideoUrl={this.state.selectedVideoUrl}

@@ -1,7 +1,7 @@
 @import "~wix-rich-content-common/dist/statics/styles/palette";
 @import "./youtube-viewer";
 
-.video_overlay {
+.youtube_component_video_overlay {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -11,7 +11,7 @@
   background: rgba(0, 0, 0, 0.5);
 }
 
-.video_overlay_message {
+.youtube_component_video_overlay_message {
   position: absolute;
   top: 38%;
   left: 50%;
@@ -19,8 +19,7 @@
   color: $primary-text-color-light;
   font-size: 12px;
 }
-
-.video_container {
+.youtube_component_video_container {
   position: relative;
   overflow: hidden;
   min-width: 350px;

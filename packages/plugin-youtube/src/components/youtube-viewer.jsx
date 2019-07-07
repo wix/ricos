@@ -18,7 +18,11 @@ class YoutubeViewer extends Component {
       ...rest
     } = this.props;
     return (
-      <ReactPlayer className={classNames(this.styles.video_player)} url={youtube.url} {...rest} />
+      <ReactPlayer
+        className={classNames(this.styles.youtube_viewer_video_player)}
+        url={youtube.url}
+        {...rest}
+      />
     );
   }
 }

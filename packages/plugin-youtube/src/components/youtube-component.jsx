@@ -9,8 +9,8 @@ class YoutubeComponent extends Component {
   renderOverlay = (styles, t) => {
     const overlayText = t('VideoComponent_Overlay');
     return (
-      <div className={styles.video_overlay}>
-        <span className={styles.video_overlay_message}>{overlayText}</span>
+      <div className={styles.youtube_component_video_overlay}>
+        <span className={styles.youtube_component_video_overlay_message}>{overlayText}</span>
       </div>
     );
   };
@@ -22,7 +22,10 @@ class YoutubeComponent extends Component {
   render() {
     this.styles = this.styles || mergeStyles({ styles, theme: this.context.theme });
     const { className, t, componentData, settings } = this.props;
-    const containerClassNames = classNames(this.styles.video_container, className || '');
+    const containerClassNames = classNames(
+      this.styles.youtube_component_video_container,
+      className || ''
+    );
     return (
       <div data-hook="videoPlayer" className={containerClassNames}>
         {this.renderOverlay(styles, t)}

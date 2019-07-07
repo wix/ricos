@@ -1,6 +1,6 @@
 @import "~wix-rich-content-common/dist/statics/styles/mixins";
 
-.video_player {
+.youtube_viewer_video_player {
   position: absolute;
   top: 0;
   left: 0;
@@ -8,16 +8,4 @@
   height: 100%;
   border: 0;
   z-index: 0;
-}
-
-.video_container {
-  position: relative;
-  overflow: hidden;
-  min-width: 350px;
-  padding-bottom: 56.25%;
-  padding-top: 25px;
-  height: 0;
-  @include phone {
-    min-width: auto;
-  }
 }
