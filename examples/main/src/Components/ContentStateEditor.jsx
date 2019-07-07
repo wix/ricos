@@ -11,7 +11,6 @@ import giphySchema from 'wix-rich-content-plugin-giphy/dist/statics/data-schema.
 import soundCloudSchema from 'wix-rich-content-plugin-sound-cloud/dist/statics/data-schema.json';
 import fileUploadSchema from 'wix-rich-content-plugin-file-upload/dist/statics/data-schema.json';
 import mapSchema from 'wix-rich-content-plugin-map/dist/statics/data-schema.json';
-import buttonSchema from 'wix-rich-content-plugin-button/dist/statics/data-schema.json';
 import htmlSchema from 'wix-rich-content-plugin-html/dist/statics/data-schema.json';
 import linkSchema from 'wix-rich-content-plugin-link/dist/statics/data-schema.json';
 
@@ -22,7 +21,6 @@ import { GIPHY_TYPE } from 'wix-rich-content-plugin-giphy';
 import { FILE_UPLOAD_TYPE } from 'wix-rich-content-plugin-file-upload';
 import { SOUND_CLOUD_TYPE } from 'wix-rich-content-plugin-sound-cloud';
 import { MAP_TYPE } from 'wix-rich-content-plugin-map';
-import { BUTTON_TYPE } from 'wix-rich-content-plugin-button';
 import { HTML_TYPE } from 'wix-rich-content-plugin-html';
 import { LINK_TYPE } from 'wix-rich-content-plugin-link';
 
@@ -69,7 +67,6 @@ class ContentStateEditor extends PureComponent {
             [FILE_UPLOAD_TYPE]: fileUploadSchema,
             [SOUND_CLOUD_TYPE]: soundCloudSchema,
             [MAP_TYPE]: mapSchema,
-            [BUTTON_TYPE]: buttonSchema,
             [HTML_TYPE]: htmlSchema,
             [LINK_TYPE]: linkSchema,
           }),

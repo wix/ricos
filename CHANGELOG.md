@@ -8,17 +8,44 @@
 > - :house: [Internal]
 
 ## [Unreleased]
+### :bug: Bug Fix
+- `file-upload`
+  - [#327](https://github.com/wix-incubator/rich-content/pull/327) shows spinner while file URL is being resolved
+- `viewer`
+  - [ebca5ef8](https://github.com/wix-incubator/rich-content/commit/ebca5ef8) RTL alignment and class are applied only if textDirection equals 'rtl'
+- `text-color`
+  - [5cfbd247](https://github.com/wix-incubator/rich-content/commit/5cfbd247) viewer module build definition added
+### :house: Internal
+- `examples`
+  - [1286b6e8](https://github.com/wix-incubator/rich-content/commit/1286b6e8) `text-color` plugin added to `examples/viewer-ssr`
+<hr/>
+
+## 4.0.2 (Jul 2, 2019)
+### :rocket: New Feature
+- `file-upload`
+  - [#325](https://github.com/wix-incubator/rich-content/pull/325) added ability to resolve file url on demand, to handle private file downloading
+<hr/>
+
+## 4.0.0 "Lynn" (Jul 1, 2019)
 ### :boom: Breaking Change
 - `hashtag`
   - [80d4880](https://github.com/wix-incubator/rich-content/commit/80d4880) replaced ~~`HashTagStrategy`~~ with `HashTagDecorator` please check [`ViewerPlugins.jsx`](https://github.com/wix-incubator/rich-content/blob/develop/examples/main/src/viewer/ViewerPlugins.jsx) for an example of how to implement the new decorator.
-- `version contentState`
+- `general`
   - [#313](https://github.com/wix-incubator/rich-content/pull/313) add versioning to the ContentState. Allows the removing linkify decorator.
 - `link`
   - [#315](https://github.com/wix-incubator/rich-content/pull/315) remove autolink config option (was never functional)
+### :rocket: New Feature
+- `link`
+  - [#311](https://github.com/wix-incubator/rich-content/pull/311) link underline style is removable
 ### :bug: Bug Fix
 - `common`
   - [2566224a](https://github.com/wix-incubator/rich-content/commit/2566224a) color-picker button style fixed
+- `text-color`
+  - [#311](https://github.com/wix-incubator/rich-content/pull/311) color applied to link underline decoration correctly
 ### :house: Internal
+- `common`
+  - [#311](https://github.com/wix-incubator/rich-content/pull/311) versioning utils added: `getCurrent`, `compare`, `evaluate`
+  - [#311](https://github.com/wix-incubator/rich-content/pull/311) `normalizeInitialState` refactored; now considers versions; adds the underline style to links with version < 3.4.7
 - `viewer`
   - [b7177a60](https://github.com/wix-incubator/rich-content/commit/b7177a60) text-utils refactoring
 - `example`
@@ -55,13 +82,15 @@
 ## 3.5.0 (June 6, 2019)
 ### :boom: Breaking Change
 - `text-color`
-  - [#310](https://github.com/wix-incubator/rich-content/pull/310) viewer-side decorator replaced by inline-style-mapper. See [documentation](./docs/PluginCustomization.md) for more details
+  - [#310](https://github.com/wix-incubator/rich-content/pull/310) viewer-side decorator replaced by `inline-style-mapper`. See [documentation](./docs/PluginCustomization.md) for more details
 ### :rocket: New Feature
 - `viewer`
   - [#310](https://github.com/wix-incubator/rich-content/pull/310) `inlineStyleMappers` API exposed
 ### :bug: Bug Fix
+- `text-color`
+  - [#310](https://github.com/wix-incubator/rich-content/pull/310) color applied to `link`, `hashtag` and `mention` correctly
 - `mention`
-  - [#310](https://github.com/wix-incubator/rich-content/pull/310) merged styles applied to mention-viewer
+  - [#310](https://github.com/wix-incubator/rich-content/pull/310) merged styles applied to `mention-viewer`
 - `hashtag`
   - [#310](https://github.com/wix-incubator/rich-content/pull/310) underline-style applied to the hashtag content rather itself
 ### :book: Documentation

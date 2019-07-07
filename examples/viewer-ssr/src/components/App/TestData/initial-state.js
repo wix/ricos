@@ -121,6 +121,11 @@ const TestData = {
             length: 9,
             style: 'inline-header-two',
           },
+          {
+            offset: 0,
+            length: 9,
+            style: 'color4',
+          },
         ],
         entityRanges: [],
         data: {},
@@ -197,6 +202,11 @@ const TestData = {
             offset: 0,
             length: 18,
             style: 'UNDERLINE',
+          },
+          {
+            offset: 0,
+            length: 18,
+            style: 'color3',
           },
         ],
         entityRanges: [],

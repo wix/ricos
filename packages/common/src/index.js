@@ -61,7 +61,7 @@ export { getToolbarTheme } from './Utils/getToolbarTheme';
 export { simplePubsub } from './Utils/simplePubsub';
 export { getModalStyles } from './Utils/getModalStyles';
 export { mergeStyles } from './Utils/mergeStyles';
-export { default as normalizeInitialState } from './Utils/normalizeInitialState';
+export { default as normalizeInitialState } from './Utils/normalization/normalizeInitialState';
 export { validate, getContentStateSchema } from './Utils/data-schema-validator';
 export { isHexColor } from './Components/ColorPicker/utils';
 
@@ -89,6 +89,7 @@ export {
   isAtomicBlockFocused,
   removeBlock,
 } from './Utils/draftUtils';
+export { default as Version } from './Utils/versioningUtils';
 export { default as WixUtils } from './Utils/wixUtils';
 export { isSSR } from './Utils/ssrUtils';
 export { sizeClassName, alignmentClassName, textWrapClassName } from './Utils/classNameStrategies';
@@ -104,5 +105,4 @@ export {
   DECORATION_MODE,
   HEADER_BLOCK,
   BLOCK_TYPES,
-  CONTENT_STATE_VERSION,
 } from './consts';

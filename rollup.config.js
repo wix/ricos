@@ -4,7 +4,7 @@ import fs from 'fs';
 import path from 'path';
 import resolve from 'rollup-plugin-node-resolve';
 import builtins from 'rollup-plugin-node-builtins';
-import copy from 'rollup-plugin-copy'
+import copy from 'rollup-plugin-copy';
 import commonjs from 'rollup-plugin-commonjs';
 import babel from 'rollup-plugin-babel';
 import json from 'rollup-plugin-json';
@@ -55,7 +55,12 @@ const plugins = [
     },
   }),
   json({
-    include: ['statics/**', 'node_modules/**', '../../node_modules/**'],
+    include: [
+      'statics/**',
+      'node_modules/**',
+      '../../node_modules/**',
+      '../../packages/**/package.json',
+    ],
   }),
   postcss({
     minimize: {

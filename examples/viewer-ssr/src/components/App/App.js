@@ -11,6 +11,11 @@ import { dividerTypeMapper } from 'wix-rich-content-plugin-divider/dist/module.v
 import { htmlTypeMapper, HTML_TYPE } from 'wix-rich-content-plugin-html/dist/module.viewer.cjs';
 import { linkTypeMapper } from 'wix-rich-content-plugin-link/dist/module.viewer.cjs';
 import { HashtagDecorator } from 'wix-rich-content-plugin-hashtag/dist/module.viewer.cjs';
+import {
+  textColorInlineStyleMapper,
+  TEXT_COLOR_TYPE,
+} from 'wix-rich-content-plugin-text-color/dist/module.viewer.cjs';
+import { viewerCustomStyleFn, styleSelectionPredicate } from '../../text-color-style-fn';
 
 import TestData from './TestData/initial-state';
 
@@ -54,7 +59,6 @@ class App extends Component {
       linkTypeMapper,
       imageTypeMapper,
     ];
-
     this.decorators = [
       new HashtagDecorator({
         theme,
@@ -71,7 +75,13 @@ class App extends Component {
       [HTML_TYPE]: {
         htmlIframeSrc: 'http://localhost:3001/static/html-plugin-embed.html',
       },
+      [TEXT_COLOR_TYPE]: {
+        styleSelectionPredicate,
+        customStyleFn: viewerCustomStyleFn,
+      },
     };
+
+    this.getInlineStyleMappers = raw => [textColorInlineStyleMapper(this.config, raw)];
   }
 
   initViewerProps() {
@@ -156,6 +166,7 @@ class App extends Component {
             <RichContentViewer
               helpers={this.helpers}
               typeMappers={this.typeMappers}
+              inlineStyleMappers={this.getInlineStyleMappers(this.state.raw)}
               decorators={this.decorators}
               initialState={this.state.raw}
               theme={theme}

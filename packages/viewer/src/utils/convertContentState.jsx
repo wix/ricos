@@ -15,7 +15,7 @@ const isEmptyContentState = raw =>
 const isEmptyBlock = ([_, data]) => data && data.length === 0; //eslint-disable-line no-unused-vars
 
 const getBlockStyleClasses = (data, mergedStyles, textDirection, classes) => {
-  const rtl = textDirection || data.textDirection;
+  const rtl = textDirection === 'rtl' || data.textDirection === 'rtl';
   const defaultTextAlignment = rtl ? 'right' : 'left';
   const alignmentClass = data.textAlignment || defaultTextAlignment;
   return classNames(classes, { [mergedStyles.rtl]: rtl }, mergedStyles[alignmentClass]);

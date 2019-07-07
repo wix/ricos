@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-plugin-hashtag",
-  "version": "3.5.4",
+  "version": "4.0.2",
   "author": {
     "name": "Jonathan Bachman",
     "email": "jonathanb@wix.com"
@@ -51,7 +51,7 @@
     "rollup": "^1.1.0"
   },
   "dependencies": {
-    "wix-rich-content-common": "^3.5.4"
+    "wix-rich-content-common": "^4.0.2"
   },
   "unpkg": true,
   "publishConfig": {

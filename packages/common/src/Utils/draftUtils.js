@@ -14,6 +14,7 @@ export const insertLinkInPosition = (
     anchorOffset: start,
     focusOffset: end,
   });
+
   return insertLink(editorState, selection, {
     url,
     targetBlank,
@@ -54,7 +55,15 @@ function insertLink(
   selection,
   { url, targetBlank, nofollow, anchorTarget, relValue }
 ) {
-  return addEntity(editorState, selection, {
+  const oldSelection = editorState.getSelection();
+  const newContentState = Modifier.applyInlineStyle(
+    editorState.getCurrentContent(),
+    selection,
+    'UNDERLINE'
+  ).set('selectionAfter', oldSelection);
+  const newEditorState = EditorState.push(editorState, newContentState, 'change-inline-style');
+
+  return addEntity(newEditorState, selection, {
     type: 'LINK',
     data: {
       url,

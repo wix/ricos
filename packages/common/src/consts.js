@@ -60,5 +60,3 @@ export const BLOCK_TYPES = [
   'code-block',
   'unstyled',
 ];
-
-export const CONTENT_STATE_VERSION = 2;

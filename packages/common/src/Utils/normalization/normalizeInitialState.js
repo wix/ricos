@@ -1,8 +1,7 @@
-import { removeInlineHeaderRanges } from './removeInlineHeaderRanges';
 import mapValues from 'lodash/mapValues';
 import cloneDeep from 'lodash/cloneDeep';
 import isUndefined from 'lodash/isUndefined';
-import { getUrlMatches } from './urlValidators';
+import { processContentState } from './processContentState';
 
 const normalizeEntityType = (entityType, entityTypeMap) => {
   if (entityType in entityTypeMap) {
@@ -14,6 +13,7 @@ const normalizeEntityType = (entityType, entityTypeMap) => {
 
 /* eslint-disable */
 const dataNormalizers = {
+  // converts { targetBlank, nofollow } => { target, rel }
   LINK: (componentData, { anchorTarget, relValue }) => {
     const { targetBlank, nofollow, target, rel } = componentData;
     if (
@@ -28,10 +28,11 @@ const dataNormalizers = {
     delete componentData.targetBlank;
     delete componentData.nofollow;
 
-    return Object.assign(componentData, {
+    return {
+      ...componentData,
       target: targetBlank ? '_blank' : anchorTarget || '_self',
       rel: nofollow ? 'nofollow' : relValue || 'noopener',
-    });
+    };
   },
 };
 
@@ -94,20 +95,11 @@ export default (initialState, config = {}) => {
     },
   };
 
-  const { blocks, entityMap } = initialState;
+  const processedState = processContentState(initialState, config);
 
-  const state = {
-    blocks: blocks
-      .map(block => {
-        switch (block.type) {
-          case 'atomic':
-            return { ...block, text: ' ' };
-          default:
-            return block;
-        }
-      })
-      .map(removeInlineHeaderRanges),
-    entityMap: mapValues(entityMap, entity =>
+  return {
+    blocks: processedState.blocks,
+    entityMap: mapValues(processedState.entityMap, entity =>
       shouldNormalizeEntityConfig(entity, Object.keys(entityTypeMap.configNormalization))
         ? {
             ...entity,
@@ -122,47 +114,6 @@ export default (initialState, config = {}) => {
           }
         : entity
     ),
-  };
-
-  const linkifyRemovalVersion = 2;
-  if (!initialState.VERSION || initialState.VERSION < linkifyRemovalVersion) {
-    linkify(state, config);
-  }
-  return state;
-};
-
-const linkify = (state, { anchorTarget, relValue }) => {
-  state.blocks.forEach(block => {
-    const { text } = block;
-    getUrlMatches(text)
-      .filter(({ text: url, index: start, lastIndex: end }) => {
-        const alreadyHasEntity = hasEntityInRange(block, start, end);
-        const longEnough = url.length >= 6;
-        return !alreadyHasEntity && longEnough;
-      })
-      .forEach(({ text: url, index: start, lastIndex: end }) => {
-        addEntity(block, state.entityMap, url, start, end, anchorTarget, relValue);
-      });
-  });
-};
-
-const hasEntityInRange = (block, start, end) =>
-  block.entityRanges.some(({ offset, length }) => start < offset + length && end >= offset);
-
-const addEntity = (block, entityMap, url, start, end, anchorTarget, relValue) => {
-  const key = Object.keys(entityMap).length;
-  block.entityRanges.push({
-    offset: start,
-    length: end - start,
-    key,
-  });
-  entityMap[key + ''] = {
-    type: 'LINK',
-    mutability: 'MUTABLE',
-    data: {
-      url,
-      target: anchorTarget || '_blank',
-      rel: relValue || 'nofollow',
-    },
+    VERSION: processedState.VERSION,
   };
 };
