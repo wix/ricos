@@ -5,7 +5,7 @@ import redraft from 'redraft';
 import classNames from 'classnames';
 import endsWith from 'lodash/endsWith';
 import List from '../List';
-import getPluginsViewer from '../PluginsViewer';
+import getPluginViewers from '../getPluginViewers';
 import { getTextDirection, kebabToCamelObjectKeys } from './textUtils';
 import { staticInlineStyleMapper } from '../staticInlineStyleMapper';
 
@@ -15,7 +15,7 @@ const isEmptyContentState = raw =>
 const isEmptyBlock = ([_, data]) => data && data.length === 0; //eslint-disable-line no-unused-vars
 
 const getBlockStyleClasses = (data, mergedStyles, textDirection, classes) => {
-  const rtl = textDirection || data.textDirection;
+  const rtl = textDirection === 'rtl' || data.textDirection === 'rtl';
   const defaultTextAlignment = rtl ? 'right' : 'left';
   const alignmentClass = data.textAlignment || defaultTextAlignment;
   return classNames(classes, { [mergedStyles.rtl]: rtl }, mergedStyles[alignmentClass]);
@@ -77,7 +77,7 @@ const getBlocks = (mergedStyles, textDirection) => {
 };
 
 const getEntities = (typeMap, pluginProps, styles) => {
-  return getPluginsViewer(typeMap, pluginProps, styles);
+  return getPluginViewers(typeMap, pluginProps, styles);
 };
 
 const normalizeContentState = contentState => ({

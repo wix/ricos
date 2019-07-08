@@ -4,7 +4,7 @@ import React, { PureComponent } from 'react';
 import { ReflexContainer, ReflexElement, ReflexSplitter } from 'react-reflex';
 import compact from 'lodash/compact';
 import flatMap from 'lodash/flatMap';
-import { convertToRaw, EditorState } from '@wix/draft-js';
+import { convertToRaw, createEmpty } from 'wix-rich-content-editor';
 import {
   ContentStateEditor,
   ErrorBoundary,
@@ -31,7 +31,7 @@ class App extends PureComponent {
 
   getInitialState() {
     const containerKey = generateKey('container');
-    const editorState = EditorState.createEmpty();
+    const editorState = createEmpty();
     const localState = loadStateFromStorage();
     if (localState) {
       return { containerKey, editorState, ...JSON.parse(localState) };
@@ -56,13 +56,6 @@ class App extends PureComponent {
 
   setContentStateEditor = ref => (this.contentStateEditor = ref);
 
-  setViewerState = editorState => {
-    const content = editorState.getCurrentContent();
-    if (content !== this.state.editorState.getCurrentContent()) {
-      this.setState({ viewerState: JSON.parse(JSON.stringify(convertToRaw(content))) });
-    }
-  };
-
   onContentStateEditorChange = obj => {
     this.setState(getStateFromObject(obj));
   };
@@ -70,13 +63,7 @@ class App extends PureComponent {
   onContentStateEditorResize = () =>
     this.contentStateEditor && this.contentStateEditor.refreshLayout();
 
-  onEditorChange = editorState => {
-    const state = {
-      editorState,
-    };
-    this.setState(state);
-    this.setViewerState(editorState);
-  };
+  onEditorChange = editorState => this.setState({ editorState });
 
   onSectionVisibilityChange = (sectionName, isVisible) => {
     this.setState(
@@ -126,7 +113,8 @@ class App extends PureComponent {
   };
 
   renderViewer = () => {
-    const { isViewerShown, viewerState } = this.state;
+    const { isViewerShown, editorState } = this.state;
+    const viewerState = JSON.parse(JSON.stringify(convertToRaw(editorState.getCurrentContent()))); //emulate initilState passed in by consumers
     return (
       isViewerShown && (
         <ReflexElement key="viewer-section" className="section">

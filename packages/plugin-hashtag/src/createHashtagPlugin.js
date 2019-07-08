@@ -1,11 +1,10 @@
-import { createBasePlugin, decorateComponentWithProps } from 'wix-rich-content-common';
+import { createBasePlugin } from 'wix-rich-content-common';
 import { HASHTAG_TYPE } from './types';
-import { Strategy, Component } from './decorator';
+import HashtagDecorator from './HashtagDecorator';
 
 const createHashtagPlugin = (config = {}) => {
   const type = HASHTAG_TYPE;
   const { theme, [type]: settings = {}, ...rest } = config;
-  const plugin = { decorators: [] };
 
   const hashtagTheme = {
     hashtag: theme && theme.hashtag,
@@ -13,10 +12,7 @@ const createHashtagPlugin = (config = {}) => {
   };
   const hashtagProps = Object.assign({}, settings, { theme: hashtagTheme });
 
-  plugin.decorators.push({
-    strategy: Strategy,
-    component: decorateComponentWithProps(Component, hashtagProps),
-  });
+  const decorators = [new HashtagDecorator(hashtagProps)];
 
   return createBasePlugin(
     {
@@ -25,7 +21,7 @@ const createHashtagPlugin = (config = {}) => {
       settings,
       ...rest,
     },
-    plugin
+    { decorators }
   );
 };
 

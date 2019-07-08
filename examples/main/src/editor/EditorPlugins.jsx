@@ -194,7 +194,6 @@ export const config = {
   },
   [LINK_TYPE]: {
     onClick: (event, url) => console.log('link clicked!', url),
-    // autoLink: false
   },
   [CODE_BLOCK_TYPE]: {},
   [DIVIDER_TYPE]: {},
@@ -263,7 +262,7 @@ export const config = {
       const data = {
         name,
         type,
-        url: 'http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf',
+        url: '',
       };
       setTimeout(() => updateEntity({ data }), 1000);
     },

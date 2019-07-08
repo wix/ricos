@@ -1,7 +1,7 @@
-import { removeInlineHeaderRanges } from './removeInlineHeaderRanges';
 import mapValues from 'lodash/mapValues';
 import cloneDeep from 'lodash/cloneDeep';
 import isUndefined from 'lodash/isUndefined';
+import { processContentState } from './processContentState';
 
 const normalizeEntityType = (entityType, entityTypeMap) => {
   if (entityType in entityTypeMap) {
@@ -13,6 +13,7 @@ const normalizeEntityType = (entityType, entityTypeMap) => {
 
 /* eslint-disable */
 const dataNormalizers = {
+  // converts { targetBlank, nofollow } => { target, rel }
   LINK: (componentData, { anchorTarget, relValue }) => {
     const { targetBlank, nofollow, target, rel } = componentData;
     if (
@@ -27,10 +28,11 @@ const dataNormalizers = {
     delete componentData.targetBlank;
     delete componentData.nofollow;
 
-    return Object.assign(componentData, {
+    return {
+      ...componentData,
       target: targetBlank ? '_blank' : anchorTarget || '_self',
       rel: nofollow ? 'nofollow' : relValue || 'noopener',
-    });
+    };
   },
 };
 
@@ -82,7 +84,7 @@ const shouldNormalizeEntityConfig = (entity, normalizationMap) =>
 const shouldNormalizeEntityData = (entity, normalizationMap) =>
   normalizationMap.includes(entity.type) && entity.data;
 
-export default (initialState, config) => {
+export default (initialState, config = {}) => {
   const entityTypeMap = {
     configNormalization: {
       IMAGE: 'wix-draft-plugin-image',
@@ -93,20 +95,11 @@ export default (initialState, config) => {
     },
   };
 
-  const { blocks, entityMap } = initialState;
+  const processedState = processContentState(initialState, config);
 
   return {
-    blocks: blocks
-      .map(block => {
-        switch (block.type) {
-          case 'atomic':
-            return { ...block, text: ' ' };
-          default:
-            return block;
-        }
-      })
-      .map(removeInlineHeaderRanges),
-    entityMap: mapValues(entityMap, entity =>
+    blocks: processedState.blocks,
+    entityMap: mapValues(processedState.entityMap, entity =>
       shouldNormalizeEntityConfig(entity, Object.keys(entityTypeMap.configNormalization))
         ? {
             ...entity,
@@ -121,5 +114,6 @@ export default (initialState, config) => {
           }
         : entity
     ),
+    VERSION: processedState.VERSION,
   };
 };

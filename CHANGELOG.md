@@ -10,16 +10,72 @@
 ## [Unreleased]
 ### :bug: Bug Fix
 - `common`
-  - [2566224a](https://github.com/wix-incubator/rich-content/commit/2566224a) color-picker button style fixed
+  - [#328](https://github.com/wix-incubator/rich-content/pull/328) plugin + text inline toolbars positioning is direction-agnostic
+- `file-upload`
+  - [#327](https://github.com/wix-incubator/rich-content/pull/327) shows spinner while file URL is being resolved
+- `viewer`
+  - [ebca5ef8](https://github.com/wix-incubator/rich-content/commit/ebca5ef8) RTL alignment and class are applied only if textDirection equals 'rtl'
+- `text-color`
+  - [5cfbd247](https://github.com/wix-incubator/rich-content/commit/5cfbd247) viewer module build definition added
 ### :house: Internal
+- `examples`
+  - [1286b6e8](https://github.com/wix-incubator/rich-content/commit/1286b6e8) `text-color` plugin added to `examples/viewer-ssr`
+<hr/>
+
+## 4.0.2 (Jul 2, 2019)
+### :rocket: New Feature
+- `file-upload`
+  - [#325](https://github.com/wix-incubator/rich-content/pull/325) added ability to resolve file url on demand, to handle private file downloading
+<hr/>
+
+## 4.0.0 "Lynn" (Jul 1, 2019)
+### :boom: Breaking Change
+- `hashtag`
+  - [80d4880](https://github.com/wix-incubator/rich-content/commit/80d4880) replaced ~~`HashTagStrategy`~~ with `HashTagDecorator` please check [`ViewerPlugins.jsx`](https://github.com/wix-incubator/rich-content/blob/develop/examples/main/src/viewer/ViewerPlugins.jsx) for an example of how to implement the new decorator.
+- `general`
+  - [#313](https://github.com/wix-incubator/rich-content/pull/313) add versioning to the ContentState. Allows the removing linkify decorator.
+- `link`
+  - [#315](https://github.com/wix-incubator/rich-content/pull/315) remove autolink config option (was never functional)
+### :rocket: New Feature
+- `link`
+  - [#311](https://github.com/wix-incubator/rich-content/pull/311) link underline style is removable
+### :bug: Bug Fix
+- `common`
+  - [2566224a](https://github.com/wix-incubator/rich-content/commit/2566224a) color-picker button style fixed
+- `text-color`
+  - [#311](https://github.com/wix-incubator/rich-content/pull/311) color applied to link underline decoration correctly
+### :house: Internal
+- `common`
+  - [#311](https://github.com/wix-incubator/rich-content/pull/311) versioning utils added: `getCurrent`, `compare`, `evaluate`
+  - [#311](https://github.com/wix-incubator/rich-content/pull/311) `normalizeInitialState` refactored; now considers versions; adds the underline style to links with version < 3.4.7
 - `viewer`
   - [b7177a60](https://github.com/wix-incubator/rich-content/commit/b7177a60) text-utils refactoring
+- `example`
+  - [#314](https://github.com/wix-incubator/rich-content/pull/314) content state data validation improved
+  - [ef6b7d14](https://github.com/wix-incubator/rich-content/commit/ef6b7d14) `viewer-ssr` example: hashtag config updated
+- `link`
+  - [#313](https://github.com/wix-incubator/rich-content/pull/313) new auto link system generates link entities. Stop using linkify decorator
 <hr/>
+
+## 3.5.4 (Jun 24, 2019)
+### :bug: Bug Fix
+- `video`
+  - [e70e9d57](https://github.com/wix-incubator/rich-content/commit/e70e9d57) window is undefined on SSR
+### :house: Internal
+- `common`
+  - [9e44b8ff](https://github.com/wix-incubator/rich-content/commit/9e44b8ff) SSR utils: `isWindowAvailable`, `getWindow` implemented
+
+## 3.5.3 (Jun 10, 2019)
+### :bug: Bug Fix
+- `video`
+  - [#317](https://github.com/wix-incubator/rich-content/pull/317) fix vimeo loading when requirejs is used in the site
+- `viewer`
+  - [#318](https://github.com/wix-incubator/rich-content/pull/318) children only from inline components in viewer
 
 ## 3.5.1 (Jun 10, 2019)
 ### :rocket: New Feature
 - `example`
-  - [61b38c61](https://github.com/wix-incubator/rich-content/commit/61b38c61) content-state is validated
+  - [e1fb3ae](https://github.com/wix-incubator/rich-content/commit/e1fb3ae) content-state is validated
 ### :bug: Bug Fix
 - `hashtag`
   - [8678c06e](https://github.com/wix-incubator/rich-content/commit/8678c06e) props.children converted to array
@@ -28,13 +84,15 @@
 ## 3.5.0 (June 6, 2019)
 ### :boom: Breaking Change
 - `text-color`
-  - [#310](https://github.com/wix-incubator/rich-content/pull/310) viewer-side decorator replaced by inline-style-mapper. See [documentation](./docs/PluginCustomization.md) for more details
+  - [#310](https://github.com/wix-incubator/rich-content/pull/310) viewer-side decorator replaced by `inline-style-mapper`. See [documentation](./docs/PluginCustomization.md) for more details
 ### :rocket: New Feature
 - `viewer`
   - [#310](https://github.com/wix-incubator/rich-content/pull/310) `inlineStyleMappers` API exposed
 ### :bug: Bug Fix
+- `text-color`
+  - [#310](https://github.com/wix-incubator/rich-content/pull/310) color applied to `link`, `hashtag` and `mention` correctly
 - `mention`
-  - [#310](https://github.com/wix-incubator/rich-content/pull/310) merged styles applied to mention-viewer
+  - [#310](https://github.com/wix-incubator/rich-content/pull/310) merged styles applied to `mention-viewer`
 - `hashtag`
   - [#310](https://github.com/wix-incubator/rich-content/pull/310) underline-style applied to the hashtag content rather itself
 ### :book: Documentation
