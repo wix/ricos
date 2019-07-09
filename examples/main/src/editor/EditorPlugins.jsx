@@ -157,7 +157,7 @@ export const config = {
     maxWidth: 740,
     width: 350,
     minHeight: 50,
-    maxHeight: 350,
+    maxHeight: 1200,
   },
   [EXTERNAL_MENTIONS_TYPE]: {
     repositionSuggestions: true,

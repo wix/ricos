@@ -21,6 +21,8 @@
   - [e727e8e6](https://github.com/wix-incubator/rich-content/commit/e727e8e6) fix css for overflow-wrap: break-word
 - `text-color`
   - [5cfbd247](https://github.com/wix-incubator/rich-content/commit/5cfbd247) viewer module build definition added
+- `html`
+  - [#329](https://github.com/wix-incubator/rich-content/pull/329) fix embed height on mobile
 ### :house: Internal
 - `examples`
   - [1286b6e8](https://github.com/wix-incubator/rich-content/commit/1286b6e8) `text-color` plugin added to `examples/viewer-ssr`
