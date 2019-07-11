@@ -51,7 +51,7 @@ class VideoListComponent extends Component {
 
   loadMore = () => {
     const { searchTerm, nextPageToken } = this.state;
-    if (nextPageToken && true) {
+    if (nextPageToken && nextPageToken.length > 0) {
       setTimeout(() => {
         this.searchYoutube(searchTerm, nextPageToken);
       }, 1000);
@@ -191,6 +191,7 @@ class VideoListComponent extends Component {
             }}
             renderThumbVertical={() => <div className={styles.scrollbar_thumb} />}
           >
+            {/* TODO: common loader (UX) */}
             {loading ? (
               <MDSpinner
                 singleColor="#000"
