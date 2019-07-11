@@ -212,6 +212,7 @@
   "YoutubePlugin_months_ago_label": " months ago",
   "YoutubePlugin_days_ago_label": " days ago",
   "YoutubePlugin_navbar_title": "YouTube Video",
+  "YoutubePlugin_VideoImage_alt":"Youtube Thumbnail",
   "TitleButton_label": "Title",
   "TitleButton_tooltip": "Title",
   "HeadingOneButton_label": "Heading 1",

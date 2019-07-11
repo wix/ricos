@@ -29,25 +29,25 @@ class VideoComponent extends Component {
   getVideoAge = () => {
     const { publishedDate } = this.props.videoObj;
     const { t } = this.props;
-    const dateAndTime = publishedDate.split('T');
-    const date = dateAndTime[0].split('-');
+    const date = publishedDate.split('T');
+    const [year, month, day] = date[0].split('-');
     const today = new Date();
-    const day = String(today.getDate()).padStart(2, '0');
-    const month = String(today.getMonth() + 1).padStart(2, '0');
-    const year = today.getFullYear();
+    const currentDay = String(today.getDate()).padStart(2, '0');
+    const currentMonth = String(today.getMonth() + 1).padStart(2, '0');
+    const currentYear = today.getFullYear();
     let diff = '';
-    if (year - date[0] !== 0) {
-      diff = year - date[0] + t('YoutubePlugin_years_ago_label');
-    } else if (month - date[1] !== 0) {
-      diff = month - date[1] + t('YoutubePlugin_months_ago_label');
+    if (currentYear - year !== 0) {
+      diff = currentYear - year + t('YoutubePlugin_years_ago_label');
+    } else if (currentMonth - month !== 0) {
+      diff = currentMonth - month + t('YoutubePlugin_months_ago_label');
     } else {
-      diff = day - date[2] + t('YoutubePlugin_days_ago_label');
+      diff = currentDay - day + t('YoutubePlugin_days_ago_label');
     }
     this.setState({ sincePublished: diff });
   };
 
   render() {
-    const { videoObj } = this.props;
+    const { videoObj, t } = this.props;
     return (
       <div
         role="button"
@@ -60,7 +60,7 @@ class VideoComponent extends Component {
           <img
             className={this.styles.video_component_image}
             src={videoObj.thumbnail}
-            alt="Youtube Thumbnail"
+            alt={t('YoutubePlugin_VideoImage_alt')}
           />
         </div>
         <div className={this.styles.video_component_description_container}>
