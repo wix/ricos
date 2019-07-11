@@ -32,17 +32,17 @@ class NavbarComponent extends Component {
     const { selectedVideoUrl, isTextBoxFocused, t } = this.props;
     const disableAadd = !selectedVideoUrl || isTextBoxFocused;
     return (
-      <div className={this.styles.navbar_container}>
+      <div className={this.styles.youtube_navbar_container}>
         <div
           role="button"
           tabIndex={0}
           onKeyPress={this.onKeyPress}
           onClick={this.onBackArrowClicked}
-          className={this.styles.back_arrow_container}
+          className={this.styles.youtube_back_arrow_container}
         >
-          <div className={this.styles.back_arrow_button} />
+          <div className={this.styles.youtube_back_arrow_button} />
         </div>
-        <div className={this.styles.navbar_title}>{t('YoutubePlugin_navbar_title')}</div>
+        <div className={this.styles.youtube_navbar_title}>{t('YoutubePlugin_navbar_title')}</div>
         <div
           role="button"
           tabIndex={0}
@@ -50,7 +50,7 @@ class NavbarComponent extends Component {
           onClick={!disableAadd && this.onAddButtonClicked}
           style={{ opacity: disableAadd ? '0.6' : '1' }}
           disabled={disableAadd}
-          className={this.styles.add_button_container}
+          className={this.styles.youtube_add_button_container}
         >
           <PlusIcon />
         </div>

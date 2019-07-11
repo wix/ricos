@@ -52,27 +52,29 @@ class VideoComponent extends Component {
       <div
         role="button"
         tabIndex={0}
-        className={this.styles.video_component_container}
+        className={this.styles.youtube_video_component_container}
         onKeyPress={null}
         onClick={this.onClickedHandler}
       >
-        <div className={this.styles.video_component_thumbnail_container}>
+        <div className={this.styles.youtube_video_component_thumbnail_container}>
           <img
-            className={this.styles.video_component_image}
+            className={this.styles.youtube_video_component_image}
             src={videoObj.thumbnail}
             alt={t('YoutubePlugin_VideoImage_alt')}
           />
         </div>
-        <div className={this.styles.video_component_description_container}>
-          <div className={this.styles.video_component_video_title}>{videoObj.videoTitle}</div>
-          <div className={this.styles.video_component_video_publisher_name}>
+        <div className={this.styles.youtube_video_component_description_container}>
+          <div className={this.styles.youtube_video_component_video_title}>
+            {videoObj.videoTitle}
+          </div>
+          <div className={this.styles.youtube_video_component_video_publisher_name}>
             {videoObj.publisherName}
           </div>
-          <div className={this.styles.video_component_video_publish_date}>
+          <div className={this.styles.youtube_video_component_video_publish_date}>
             {this.state.sincePublished}
           </div>
         </div>
-        <div className={this.styles.video_component_clearFloating} />
+        <div className={this.styles.youtube_video_component_clearFloating} />
       </div>
     );
   }

@@ -1,7 +1,7 @@
 @import "~wix-rich-content-common/dist/statics/styles/mixins";
 @import "~wix-rich-content-common/dist/statics/styles/palette";
 
-.search_input_container {
+.youtube_search_input_container {
   padding: 22px 20px 0;
   height: 39px;
   @include phone {
@@ -9,7 +9,7 @@
   }
 }
 
-.search_icon_container {
+.youtube_search_icon_container {
   position: absolute;
   top: 31px;
   left: 19px;
@@ -22,7 +22,7 @@
   }
 }
 
-.error_icon_container {
+.youtube_error_icon_container {
   position: absolute;
   top: 29px;
   left: 19px;
@@ -35,7 +35,7 @@
   }
 }
 
-.cancel_search_icon {
+.youtube_cancel_search_icon {
   position: absolute;
   top: 26px;
   right: 139px;
@@ -78,7 +78,7 @@
   }
 }
 
-.tooltip_container {
+.youtube_tooltip_container {
   position: absolute;
   top: -11px;
   left: 11px;
@@ -86,7 +86,7 @@
   width: 110px;
   height: 35px;
   overflow: hidden;
-  .tooltip {
+  .youtube_tooltip {
     width: 110px;
     height: 25px;
     border-radius: 4px;
@@ -99,7 +99,7 @@
     color: #fff;
     overflow: hidden;
   }
-  .arrow_down {
+  .youtube_arrow_down {
     width: 0;
     height: 0;
     position: absolute;

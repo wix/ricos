@@ -83,9 +83,11 @@ class SearchInputComponent extends Component {
   // TODO: align with common tooltips
   renderTooptip = () => {
     return (
-      <div className={this.styles.tooltip_container}>
-        <div className={this.styles.tooltip}>{this.props.t('YoutubePlugin_Url_ErrorTooltip')}</div>
-        <div className={this.styles.arrow_down} />
+      <div className={this.styles.youtube_tooltip_container}>
+        <div className={this.styles.youtube_tooltip}>
+          {this.props.t('YoutubePlugin_Url_ErrorTooltip')}
+        </div>
+        <div className={this.styles.youtube_arrow_down} />
       </div>
     );
   };
@@ -97,13 +99,13 @@ class SearchInputComponent extends Component {
       paddingLeft: 32 + 'px',
     };
     return (
-      <div className={this.styles.search_input_container}>
+      <div className={this.styles.youtube_search_input_container}>
         {!isMobile && showTooltip && this.renderTooptip()}
         {textInputValue && (
           <div
             onKeyPress={this.handleOnKeyPressed}
             onClick={this.onCancelClicked}
-            className={this.styles.cancel_search_icon}
+            className={this.styles.youtube_cancel_search_icon}
             role="button"
             tabIndex={-1}
           >
@@ -111,14 +113,14 @@ class SearchInputComponent extends Component {
           </div>
         )}
         {!invalidYoutubeURL ? (
-          <SearchIcon className={this.styles.search_icon_container} />
+          <SearchIcon className={this.styles.youtube_search_icon_container} />
         ) : (
           <ErrorIcon
             onMouseEnter={this.handleHover}
             onMouseLeave={this.handleHoverOff}
             width={18}
             height={18}
-            className={this.styles.error_icon_container}
+            className={this.styles.youtube_error_icon_container}
           />
         )}
         <form

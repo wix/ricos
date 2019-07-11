@@ -1,10 +1,10 @@
-.navbar_container {
+.youtube_navbar_container {
   background-color: #9a87ce;
   width: 100vh;
   height: 50px;
 }
 
-.back_arrow_button {
+.youtube_back_arrow_button {
   background: inherit;
   border: solid #fff;
   border-width: 0 1px 1px 0;
@@ -13,7 +13,7 @@
   width: 8px;
   transform: rotate(135deg);
 }
-.back_arrow_container {
+.youtube_back_arrow_container {
   width: 28px;
   height: 33px;
   float: left;
@@ -21,7 +21,7 @@
   padding-left: 22px;
 }
 
-.navbar_title {
+.youtube_navbar_title {
   width: calc(100vw - 100px);
   height: 50px;
   float: left;
@@ -31,21 +31,11 @@
   color: #ffffff;
   padding-top: 14px;
 }
-.add_button_container {
+.youtube_add_button_container {
   position: relative;
   color: #fff;
   width: 50px;
   height: 50px;
   text-align: right;
   float: left;
-}
-.add_button {
-  border: none;
-  background: none;
-  color: #fff;
-  margin-right: 11px;
-  cursor: pointer;
-}
-.add_button:disabled {
-  color: #dbdbdb;
 }
