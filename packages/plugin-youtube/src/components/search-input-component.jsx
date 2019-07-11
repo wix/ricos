@@ -79,6 +79,8 @@ class SearchInputComponent extends Component {
   handleHoverOff = () => {
     this.setState({ showTooltip: false });
   };
+
+  // TODO: align with common tooltips
   renderTooptip = () => {
     return (
       <div className={this.styles.tooltip_container}>
