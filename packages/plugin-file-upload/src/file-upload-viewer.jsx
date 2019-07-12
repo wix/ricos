@@ -104,10 +104,17 @@ class FileUploadViewer extends PureComponent {
       });
     };
 
+    const resolveIfEnter = ev => {
+      const enterEvent = 13;
+      if (ev.which === enterEvent) {
+        resolveFileUrl();
+      }
+    };
+
     return (
       <div
         onClick={resolveFileUrl}
-        onKeyUp={resolveFileUrl}
+        onKeyDown={resolveIfEnter}
         role="button"
         tabIndex={0}
         className={this.styles.file_upload_link}
