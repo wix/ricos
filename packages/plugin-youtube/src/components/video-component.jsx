@@ -74,7 +74,6 @@ class VideoComponent extends Component {
             {this.state.sincePublished}
           </div>
         </div>
-        <div className={this.styles.youtube_video_component_clearFloating} />
       </div>
     );
   }
