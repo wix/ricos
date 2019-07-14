@@ -92,7 +92,18 @@ export default class TextColorPanel extends Component {
         t={t}
         setKeepToolbarOpen={setKeepToolbarOpen}
         isMobile={isMobile}
-      />
+      >
+        {({ renderPalette, renderUserColors, renderAddColorButton, mergedStyles }) => (
+          <div className={mergedStyles.colorPicker_palette}>
+            <div className={mergedStyles.colorPicker_buttons_container}>{renderPalette()}</div>
+            <hr className={mergedStyles.colorPicker_separator} />
+            <div className={mergedStyles.colorPicker_buttons_container}>
+              {renderUserColors()}
+              {renderAddColorButton()}
+            </div>
+          </div>
+        )}
+      </ColorPicker>
     );
   }
 }
