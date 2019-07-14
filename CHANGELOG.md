@@ -8,10 +8,15 @@
 > - :house: [Internal]
 
 ## [Unreleased]
+### :rocket: New Feature
+- `common`
+  - `color-picker` layout now rendered by a component consumer via the `children` prop
 ### :bug: Bug Fix
 - `editor`
   - [45968d56](https://github.com/wix-incubator/rich-content/commit/45968d56) static toolbar displays tooltips
 ### :house: Internal
+- `text-color`
+  - `color-picker` layout rendered by a `text-color-panel`
 - `general`
   - [e791fc1b](https://github.com/wix-incubator/rich-content/commit/e791fc1b) isMobile prop passed to internal plugin modals
 <hr/>
