@@ -20,7 +20,7 @@ import {
 import { createMapPlugin, MAP_TYPE } from 'wix-rich-content-plugin-map';
 import { createFileUploadPlugin, FILE_UPLOAD_TYPE } from 'wix-rich-content-plugin-file-upload';
 import { createTextColorPlugin, TEXT_COLOR_TYPE } from 'wix-rich-content-plugin-text-color';
-
+import { createUnsplashPlugin } from 'wix-rich-content-plugin-unsplash';
 import React from 'react';
 import Highlighter from 'react-highlight-words';
 import casual from 'casual-browserify';
@@ -41,14 +41,11 @@ import 'wix-rich-content-plugin-sound-cloud/dist/styles.min.css';
 import 'wix-rich-content-plugin-giphy/dist/styles.min.css';
 import 'wix-rich-content-plugin-map/dist/styles.min.css';
 import 'wix-rich-content-plugin-file-upload/dist/styles.min.css';
+import 'wix-rich-content-plugin-text-color/dist/styles.min.css';
+import 'wix-rich-content-plugin-unsplash/dist/styles.min.css';
 
-import {
-  getPaletteColors,
-  getCustomStyleFn,
-  getColorToStyle,
-  getStyleToColor,
-  getStyleSelectionPredicate,
-} from '../text-color-style-fn';
+import { customStyleFn, styleSelectionPredicate, colorScheme } from '../text-color-style-fn';
+import { getBaseUrl } from '../utils';
 
 // import { TOOLBARS, BUTTONS, DISPLAY_MODE } from 'wix-rich-content-common';
 // import InlineToolbarDecoration from './Components/InlineToolbarDecoration';
@@ -73,6 +70,7 @@ export const editorPlugins = [
   createMapPlugin,
   createFileUploadPlugin,
   createTextColorPlugin,
+  createUnsplashPlugin
 ];
 
 const themeColors = {
@@ -157,13 +155,12 @@ export const config = {
     },
   },
   [HTML_TYPE]: {
-    htmlIframeSrc: 'http://localhost:3000/static/html-plugin-embed.html',
+    htmlIframeSrc: `${getBaseUrl()}/static/html-plugin-embed.html`,
     minWidth: 35,
     maxWidth: 740,
-    height: 250,
-    width: 740,
+    width: 350,
     minHeight: 50,
-    maxHeight: 350,
+    maxHeight: 1200,
   },
   [EXTERNAL_MENTIONS_TYPE]: {
     repositionSuggestions: true,
@@ -193,13 +190,12 @@ export const config = {
     defaultSpacing: {
       'line-height': '1.5',
       'padding-top': '2px',
-      'padding-bottom': '3px'
+      'padding-bottom': '3px',
     },
     onUpdate: spacing => console.log(LINE_SPACING_TYPE, spacing),
   },
   [LINK_TYPE]: {
     onClick: (event, url) => console.log('link clicked!', url),
-    // autoLink: false
   },
   [CODE_BLOCK_TYPE]: {},
   [DIVIDER_TYPE]: {},
@@ -268,7 +264,7 @@ export const config = {
       const data = {
         name,
         type,
-        url: 'http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf',
+        url: '',
       };
       setTimeout(() => updateEntity({ data }), 1000);
     },
@@ -286,14 +282,11 @@ export const config = {
     // },
   },
   [TEXT_COLOR_TYPE]: {
-    getPaletteColors: () => getPaletteColors(themeColors),
-    styleSelectionPredicate: getStyleSelectionPredicate(themeColors),
-    colorToStyle: getColorToStyle(themeColors),
-    styleToColor: getStyleToColor(themeColors),
-    selectionColor: 'fuchsia',
+    colorScheme,
+    styleSelectionPredicate,
+    customStyleFn,
     onColorAdded: color => (userColors = [color, ...userColors]),
     getUserColors: () => userColors,
-    customStyleFn: getCustomStyleFn(themeColors),
   },
   uiSettings,
   getToolbarSettings: ({ pluginButtons, textButtons }) => [

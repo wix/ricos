@@ -1,5 +1,6 @@
 {
-  "$id": "http://path/to/schema.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://wix-rich-content/video-content-data-schema.json",
   "type": "object",
   "properties": {
     "src": {
@@ -8,7 +9,6 @@
           "$id": "/properties/src",
           "type": "string",
           "title": "Video Source URL",
-          "default": "",
           "examples": ["https://www.youtube.com/watch?v=eqZVIiD6wSg"]
         },
         {
@@ -19,7 +19,6 @@
               "$id": "/properties/src/pathname",
               "type": "string",
               "title": "Video Source Pathname",
-              "default": "",
               "examples": ["video-sample/jellyfish-25-mbps-hd-hevc.mp4"]
             },
             "thumbnail": {
@@ -30,22 +29,19 @@
                   "$id": "/properties/src/thumbnail/pathname",
                   "type": "string",
                   "title": "Video Thumbnail Pathname",
-                  "default": "",
                   "examples": ["media/441c23_84f5c058e5e4479ab9e626cd5560a21bf002.jpg"]
                 },
                 "height": {
                   "$id": "/properties/src/thumbnail/height",
-                  "type": "number",
+                  "type": "integer",
                   "title": "Video Thumbnail Height",
-                  "default": "",
-                  "examples": ["1080"]
+                  "examples": [1080]
                 },
                 "width": {
                   "$id": "/properties/src/thumbnail/width",
-                  "type": "number",
+                  "type": "integer",
                   "title": "Video Thumbnail Width",
-                  "default": "",
-                  "examples": ["1920"]
+                  "examples": [1920]
                 }
               }
             }
@@ -55,41 +51,35 @@
     },
     "isCustomVideo": {
       "$id": "/properties/isCustomVideo",
-      "type": "bool",
+      "type": "boolean",
       "title": "Is Custom Video",
-      "default": "false"
+      "default": false
     },
     "config": {
       "$id": "/properties/config",
       "type": "object",
+      "title": "configuration",
       "properties": {
         "size": {
           "$id": "/properties/config/properties/size",
-          "type": "string",
+          "enum": ["content", "small", "fullWidth"],
           "title": "Size",
           "default": "large",
-          "examples": ["medium", "small", "large"]
+          "examples": ["content", "small", "fullWidth"]
         },
         "alignment": {
           "$id": "/properties/config/properties/alignment",
-          "type": "string",
-          "title": "The Alignment Schema ",
+          "enum": ["left", "right", "center"],
+          "title": "Alignment",
           "default": "center",
           "examples": ["left", "right", "center"]
         },
         "textWrap": {
           "$id": "/properties/config/properties/textWrap",
           "type": "string",
-          "title": "The Textwrap Schema ",
+          "title": "Text Wrap",
           "default": "nowrap",
           "examples": ["nowrap"]
-        },
-        "key": {
-          "$id": "/properties/config/properties/key",
-          "type": "string",
-          "title": "The Key Schema ",
-          "default": "",
-          "examples": ["7mib0"]
         }
       }
     }

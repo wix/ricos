@@ -1,5 +1,12 @@
-import { EditorState } from '@wix/draft-js';
 import RichContentEditor from './RichContentEditor';
 import RichContentEditorModal from './RichContentEditor/RichContentEditorModal';
 
-export { EditorState, RichContentEditorModal, RichContentEditor };
+export {
+  EditorState,
+  createEmpty,
+  createWithContent,
+  convertToRaw,
+  convertFromRaw,
+} from './lib/editorStateConversion';
+
+export { RichContentEditorModal, RichContentEditor };

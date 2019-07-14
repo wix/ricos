@@ -88,6 +88,7 @@ class LinkPanel extends Component {
   }
 
   getTextInputProps() {
+    const { styles } = this;
     const textInputClassName = classNames(styles.linkPanel_textInput, {
       [styles.linkPanel_textInput_invalid]: this.hasError(),
     });

@@ -8,20 +8,189 @@
 > - :house: [Internal]
 
 ## [Unreleased]
+<hr/>
+
+## 4.0.5 (Jul 10, 2019)
+### :bug: Bug Fix
+- `editor`
+  - [#331](https://github.com/wix-incubator/rich-content/pull/331) bad import of current version from common
+  - [#331](https://github.com/wix-incubator/rich-content/pull/331) import only package.json vertios. Instead of the whole package.json.   
+
+## 4.0.3 (Jul 10, 2019)
+### :rocket: New Feature
+- `editor`
+  - [b5f9a6e2](https://github.com/wix-incubator/rich-content/commit/b5f9a6e2) split editorStateConversion to a separate entry in editor/dist/lib
+### :bug: Bug Fix
+- `common`
+  - [#328](https://github.com/wix-incubator/rich-content/pull/328) plugin + text inline toolbars positioning is direction-agnostic
+- `file-upload`
+  - [#327](https://github.com/wix-incubator/rich-content/pull/327) shows spinner while file URL is being resolved
+- `viewer`
+  - [ebca5ef8](https://github.com/wix-incubator/rich-content/commit/ebca5ef8) RTL alignment and class are applied only if textDirection equals 'rtl'
+  - [e727e8e6](https://github.com/wix-incubator/rich-content/commit/e727e8e6) fix css for overflow-wrap: break-word
+- `text-color`
+  - [5cfbd247](https://github.com/wix-incubator/rich-content/commit/5cfbd247) viewer module build definition added
+- `html`
+  - [#329](https://github.com/wix-incubator/rich-content/pull/329) fix embed height on mobile
+### :house: Internal
+- `examples`
+  - [1286b6e8](https://github.com/wix-incubator/rich-content/commit/1286b6e8) `text-color` plugin added to `examples/viewer-ssr`
+- `rollup`
+  - [9b31c8e4](https://github.com/wix-incubator/rich-content/commit/9b31c8e4) Every file in src/lib will evaluate to an entry in dist/lib/
+
+## 4.0.2 (Jul 2, 2019)
+### :rocket: New Feature
+- `file-upload`
+  - [#325](https://github.com/wix-incubator/rich-content/pull/325) added ability to resolve file url on demand, to handle private file downloading
+<hr/>
+
+## 4.0.0 "Lynn" (Jul 1, 2019)
+### :boom: Breaking Change
+- `hashtag`
+  - [80d4880](https://github.com/wix-incubator/rich-content/commit/80d4880) replaced ~~`HashTagStrategy`~~ with `HashTagDecorator` please check [`ViewerPlugins.jsx`](https://github.com/wix-incubator/rich-content/blob/develop/examples/main/src/viewer/ViewerPlugins.jsx) for an example of how to implement the new decorator.
+- `general`
+  - [#313](https://github.com/wix-incubator/rich-content/pull/313) add versioning to the ContentState. Allows the removing linkify decorator.
+- `link`
+  - [#315](https://github.com/wix-incubator/rich-content/pull/315) remove autolink config option (was never functional)
+### :rocket: New Feature
+- `link`
+  - [#311](https://github.com/wix-incubator/rich-content/pull/311) link underline style is removable
+### :bug: Bug Fix
+- `common`
+  - [2566224a](https://github.com/wix-incubator/rich-content/commit/2566224a) color-picker button style fixed
+- `text-color`
+  - [#311](https://github.com/wix-incubator/rich-content/pull/311) color applied to link underline decoration correctly
+### :house: Internal
+- `common`
+  - [#311](https://github.com/wix-incubator/rich-content/pull/311) versioning utils added: `getCurrent`, `compare`, `evaluate`
+  - [#311](https://github.com/wix-incubator/rich-content/pull/311) `normalizeInitialState` refactored; now considers versions; adds the underline style to links with version < 3.4.7
+- `viewer`
+  - [b7177a60](https://github.com/wix-incubator/rich-content/commit/b7177a60) text-utils refactoring
+- `example`
+  - [#314](https://github.com/wix-incubator/rich-content/pull/314) content state data validation improved
+  - [ef6b7d14](https://github.com/wix-incubator/rich-content/commit/ef6b7d14) `viewer-ssr` example: hashtag config updated
+- `link`
+  - [#313](https://github.com/wix-incubator/rich-content/pull/313) new auto link system generates link entities. Stop using linkify decorator
+<hr/>
+
+## 3.5.4 (Jun 24, 2019)
+### :bug: Bug Fix
+- `video`
+  - [e70e9d57](https://github.com/wix-incubator/rich-content/commit/e70e9d57) window is undefined on SSR
+### :house: Internal
+- `common`
+  - [9e44b8ff](https://github.com/wix-incubator/rich-content/commit/9e44b8ff) SSR utils: `isWindowAvailable`, `getWindow` implemented
+
+## 3.5.3 (Jun 10, 2019)
+### :bug: Bug Fix
+- `video`
+  - [#317](https://github.com/wix-incubator/rich-content/pull/317) fix vimeo loading when requirejs is used in the site
+- `viewer`
+  - [#318](https://github.com/wix-incubator/rich-content/pull/318) children only from inline components in viewer
+
+## 3.5.1 (Jun 10, 2019)
+### :rocket: New Feature
+- `example`
+  - [e1fb3ae](https://github.com/wix-incubator/rich-content/commit/e1fb3ae) content-state is validated
+### :bug: Bug Fix
+- `hashtag`
+  - [8678c06e](https://github.com/wix-incubator/rich-content/commit/8678c06e) props.children converted to array
+<hr/>
+
+## 3.5.0 (June 6, 2019)
+### :boom: Breaking Change
+- `text-color`
+  - [#310](https://github.com/wix-incubator/rich-content/pull/310) viewer-side decorator replaced by `inline-style-mapper`. See [documentation](./docs/PluginCustomization.md) for more details
+### :rocket: New Feature
+- `viewer`
+  - [#310](https://github.com/wix-incubator/rich-content/pull/310) `inlineStyleMappers` API exposed
+### :bug: Bug Fix
+- `text-color`
+  - [#310](https://github.com/wix-incubator/rich-content/pull/310) color applied to `link`, `hashtag` and `mention` correctly
+- `mention`
+  - [#310](https://github.com/wix-incubator/rich-content/pull/310) merged styles applied to `mention-viewer`
+- `hashtag`
+  - [#310](https://github.com/wix-incubator/rich-content/pull/310) underline-style applied to the hashtag content rather itself
+### :book: Documentation
+- [#310](https://github.com/wix-incubator/rich-content/pull/310) [Plugin Customization doc](./docs/PluginCustomization.md) updated regarding the `text-color` API
+### :house: Internal
+- `example`
+  - [#309](https://github.com/wix-incubator/rich-content/pull/309) removed standalone editor and viewer examples + overhaul on main example
+<hr/>
+
+## 3.4.7 (May 29, 2019)
+### :bug: Bug Fix
+- `viewer`
+  - [8ee5a07e](https://github.com/wix-incubator/rich-content/commit/8ee5a07e) empty headers are not removed (same behavior as in the editor)
+- `general`
+  - [#308](https://github.com/wix-incubator/rich-content/pull/308) remove 'rollup-plugin-image-files' and switch rollup copy plugin
+- `common`
+  - [98414497](https://github.com/wix-incubator/rich-content/commit/98414497) CustomColorPicker: text input is editable
+- `example`
+  - [68978aff](https://github.com/wix-incubator/rich-content/commit/68978aff) make css load at top so that `theme` is preferred over it
+<hr/>
+
+
+## 3.4.6 (May 20, 2019)
+### :bug: Bug Fix
+- `line-spacing`
+  - [d91d53b](https://github.com/wix-incubator/rich-content/commit/d91d53b) line-spacing should work now ;)
+<hr/>
+
+## 3.4.5 (May 20, 2019)
+### :bug: Bug Fix
+- `text-color`
+  - [ca95d453](https://github.com/wix-incubator/rich-content/commit/ca95d453) selection state and text are preserved on panel closing
+<hr/>
+
+## 3.4.4 (May 20, 2019)
+### :bug: Bug Fix
+- `text-color`
+  - [55e7609f](https://github.com/wix-incubator/rich-content/commit/55e7609f) `getSelectionStyles` now returns correct style list for multiple block selection
+<hr/>
+
+## 3.4.3 (May 20, 2019)
+### :bug: Bug Fix
+- `line-spacing`
+  - [6e75d9b](https://github.com/wix-incubator/rich-content/commit/6e75d9bad9e604aaf72c59dd89c43a5579e53af9) fix import
+- `text-color`
+  - [6de0cbc](https://github.com/wix-incubator/rich-content/commit/6de0cbcc5dbd83ccf844982e479307b2d4e1423a) selection state is preserved on panel opening
+<hr/>
+
+## 3.4.2 (May 16, 2019)
+### :bug: Bug Fix
+- `editor`
+  - [#304](https://github.com/wix-incubator/rich-content/pull/304) fix list items theme
+<hr/>
+
+## 3.4.1 (May 15, 2019)
+### :bug: Bug Fix
+- `common`
+  - [6f787ae](https://github.com/wix-incubator/rich-content/commit/6f787ae05c42e3ca1897d328a989a758b03674dd) `InlineToolbarButton` `forwardRef` propType changed to support Node
+<hr/>
+
+## 3.4.0 (May 14, 2019)
 ### :rocket: New Feature
 - `line-spacing`
   - [#282](https://github.com/wix-incubator/rich-content/pull/282) new plugin added
 - `common`
   - [#294](https://github.com/wix-incubator/rich-content/pull/294) ColorPicker now accepts `onCustomPickerToggle`, `onCustomColorPicked` props for higher customability
+  - [#301](https://github.com/wix-incubator/rich-content/pull/301) ColorPicker now accepts `schemeColor`, `schemeAttributes` props for scheme color support
 - `text-color`
   - [#294](https://github.com/wix-incubator/rich-content/pull/294) plugin config now accepts `onCustomPickerToggle`, `onCustomColorPicked` handlers
+  - [#301](https://github.com/wix-incubator/rich-content/pull/301) plugin config now accepts `colorScheme` mapping instead of `getPaletteColors` and converter functions
 ### :bug: Bug Fix
 - `text-color`
-  - missing `getPaletteColors` won't crash
+  - [#301](https://github.com/wix-incubator/rich-content/pull/301) viewer decorator does not override other inline styles
+  - [#300](https://github.com/wix-incubator/rich-content/pull/300) missing `getPaletteColors` won't crash
+  - [#300](https://github.com/wix-incubator/rich-content/pull/300) pop-up is opened as internal modal rather external one
+  - [#300](https://github.com/wix-incubator/rich-content/pull/300) pop-up is themable
 - `common`
   - [86b94cc](https://github.com/wix-incubator/rich-content/commit/86b94cc19fac3fe6d04fe348735de7538992b1ac)&nbsp;&nbsp;`<Loader />`&nbsp;&nbsp;component supports getting theme from context or props (external modals)
 - `editor`
   - [#297](https://github.com/wix-incubator/rich-content/pull/297) support rtl in lists
+- `link`
+  - [#302](https://github.com/wix-incubator/rich-content/pull/302) apply theme in link panel
 ### :book: Documentation
 - [Plugin Customization](./docs/PluginCustomization.md) doc updated
 ### :house: Internal

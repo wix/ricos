@@ -39,7 +39,7 @@ class InlineToolbarButton extends Component {
     tabIndex: PropTypes.number,
     icon: PropTypes.func.isRequired,
     children: PropTypes.node,
-    forwardRef: PropTypes.func,
+    forwardRef: PropTypes.oneOfType([PropTypes.func, PropTypes.shape({ current: PropTypes.func })]),
   };
 
   preventDefault = event => event.preventDefault();

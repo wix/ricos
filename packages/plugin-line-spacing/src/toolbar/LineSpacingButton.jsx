@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import pick from 'lodash/pick';
 import {
   getAnchorBlockData,
-  getModalStyles,
   InlineToolbarButton,
   mergeBlockData,
   mergeStyles,
@@ -11,9 +10,10 @@ import {
 import { EditorState } from '@wix/draft-js';
 
 import { LineSpacingIcon } from '../icons';
+import Modal from 'react-modal';
+import Panel from './LineSpacingPanel';
+import classNames from 'classnames';
 import styles from '../../statics/styles/styles.scss';
-import { MODAL_STYLES } from './modalStyles';
-import { Modals } from '../modals';
 
 const lineHeight = 'line-height';
 const spaceBefore = 'padding-top';
@@ -26,66 +26,25 @@ export default class LineSpacingButton extends Component {
     this.styles = mergeStyles({ styles, theme: props.theme });
   }
 
-  getBlockSpacing(editorState) {
+  static getBlockSpacing(editorState) {
     const { dynamicStyles = {} } = getAnchorBlockData(editorState);
     return pick(dynamicStyles, [lineHeight, spaceBefore, spaceAfter]);
   }
 
   openPanel = () => {
-    const { setKeepOpen, isMobile, helpers, t, defaultSpacing, keyName } = this.props;
-    if (helpers && helpers.openModal) {
-      const editorState = this.props.getEditorState();
-      this.oldEditorState = EditorState.forceSelection(
-        //fixes 'undo' bug, due to the lost selection
-        editorState,
-        editorState.getSelection()
-      );
-      this.currentEditorState = this.oldEditorState;
-      setKeepOpen(true);
-
-      this.oldSpacing = this.getBlockSpacing(this.oldEditorState);
-      this.setState({ isPanelOpen: true });
-
-      const modalProps = {
-        spacing: { ...defaultSpacing, ...this.oldSpacing },
-        onChange: this.updateSpacing,
-        onSave: this.save,
-        onCancel: this.cancel,
-        styles: this.styles,
-        helpers,
-        modalStyles: this.getModalStyles(isMobile),
-        isMobile,
-        t,
-        modalName: Modals.LINE_SPACING,
-        onRequestClose: () => this.save(),
-      };
-      helpers.openModal(modalProps);
-    } else {
-      // eslint-disable-next-line no-console
-      console.error(
-        'helpers.openModal function is not defined for toolbar button with keyName ' + keyName
-      );
-    }
+    this.currentEditorState = this.oldEditorState = this.props.getEditorState();
+    this.selection = this.oldEditorState.getSelection();
+    const spacing = LineSpacingButton.getBlockSpacing(this.oldEditorState);
+    this.oldSpacing = spacing;
+    const { bottom, left } = this.buttonRef.getBoundingClientRect();
+    this.props.setKeepOpen(true);
+    this.setState({ isPanelOpen: true, panelLeft: left, panelTop: bottom, spacing });
   };
 
-  getModalStyles(isMobile) {
-    const styles = isMobile ? MODAL_STYLES.mobile : MODAL_STYLES.desktop;
-    const { bottom, left } = this.buttonRef.getBoundingClientRect();
-    const modalPosition = isMobile
-      ? { left: 0, bottom: 0, right: 0 }
-      : {
-          top: bottom,
-          left,
-        };
-
-    return getModalStyles({
-      fullScreen: false,
-      customStyles: {
-        content: { ...styles.content, ...modalPosition },
-        overlay: styles.overlay,
-      },
-    });
-  }
+  closePanel = () => {
+    this.setState({ isPanelOpen: false });
+    this.props.setKeepOpen(false);
+  };
 
   updateSpacing = spacing => {
     const dynamicStyles = spacing;
@@ -96,43 +55,81 @@ export default class LineSpacingButton extends Component {
     onUpdate(dynamicStyles);
   };
 
-  closePanel = () => {
-    this.setState({ isPanelOpen: false });
-    this.props.helpers.closeModal();
-    this.props.setKeepOpen(false);
-  };
-
   save = spacing => {
     this.closePanel();
     if (spacing) {
       this.updateSpacing(spacing);
     } else {
-      this.props.setEditorState(this.currentEditorState); // fix selection (selection is lost due to focus)
+      this.setEditorState(this.currentEditorState);
     }
   };
 
   cancel = () => {
-    const { setEditorState, onUpdate } = this.props;
-    setEditorState(this.oldEditorState);
+    const { onUpdate } = this.props;
+    this.setEditorState(this.oldEditorState);
     onUpdate(this.oldSpacing);
     this.closePanel();
   };
 
+  setEditorState = editorState =>
+    this.props.setEditorState(this.fixSelection(editorState, this.selection));
+
+  fixSelection = EditorState.forceSelection;
+
+  static getModalParent() {
+    return document.querySelector('.DraftEditor-root').parentNode;
+  }
+
   render() {
-    const { theme, isMobile, t, tabIndex } = this.props;
-    const { isPanelOpen } = this.state;
+    const { theme, isMobile, t, tabIndex, defaultSpacing } = this.props;
+    const { isPanelOpen, spacing, panelTop, panelLeft } = this.state;
+    const { styles } = this;
+
+    const modalStyle = isMobile
+      ? { left: 0, bottom: 0, right: 0 }
+      : {
+          top: panelTop,
+          left: panelLeft,
+        };
 
     return (
       <InlineToolbarButton
         onClick={this.openPanel}
-        isActive={isPanelOpen}
+        isActive={!!isPanelOpen}
         theme={theme}
         isMobile={isMobile}
         tooltipText={t('LineSpacingButton_Tooltip')}
         tabIndex={tabIndex}
         icon={LineSpacingIcon}
         ref={ref => (this.buttonRef = ref)}
-      />
+      >
+        <Modal
+          isOpen={isPanelOpen}
+          onRequestClose={() => this.save()}
+          className={classNames(styles.lineSpacingModal, {
+            [styles.lineSpacingModal_mobile]: isMobile,
+          })}
+          overlayClassName={classNames(styles.lineSpacingModalOverlay, {
+            [styles.lineSpacingModalOverlay_mobile]: isMobile,
+          })}
+          parentSelector={LineSpacingButton.getModalParent}
+          style={{
+            content: modalStyle,
+          }}
+          ariaHideApp={false}
+        >
+          <Panel
+            spacing={{ ...defaultSpacing, ...spacing }}
+            onChange={this.updateSpacing}
+            onSave={this.save}
+            onCancel={this.cancel}
+            styles={this.styles}
+            t={t}
+            isMobile={isMobile}
+            theme={theme}
+          />
+        </Modal>
+      </InlineToolbarButton>
     );
   }
 }

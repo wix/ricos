@@ -23,16 +23,17 @@ class ColorPicker extends PureComponent {
     this.onCustomColorPicked = this.onCustomColorPicked.bind(this);
   }
 
-  onColorButtonClicked = color => {
-    this.setColor(color);
-  };
+  onColorButtonClicked(color, e) {
+    if (e.target.dataset.schemeColor) {
+      this.setColor(e.target.dataset.schemeColor);
+    } else {
+      this.setColor(color);
+    }
+  }
 
   setColor = color => {
-    const selectedColor = color.toUpperCase();
-    this.setState({
-      color: selectedColor,
-    });
-    this.props.onChange(selectedColor);
+    this.setState({ color });
+    this.props.onChange(color);
   };
 
   onCustomColorPicked = color => {
@@ -58,19 +59,22 @@ class ColorPicker extends PureComponent {
     }));
   }
 
-  renderColorButtons(colors) {
+  renderColorButtons(colors, attributes) {
     const { styles } = this;
-    const { selectionColor } = this.props;
+    const { schemeColor } = this.props;
     return colors.map((color, index) => (
       <button
+        data-scheme-color={attributes ? attributes[index] : ''}
         title={color}
         key={`${color}_${index}`}
         className={classNames({
           [styles.colorPicker_button]: true,
-          [styles.colorPicker_button_selected]: this.state.color === color.toUpperCase(),
+          [styles.colorPicker_button_selected]:
+            this.state.color === color &&
+            (!schemeColor || !attributes || attributes[index] === schemeColor),
         })}
-        style={{ background: color, '--border-color': selectionColor }}
-        onClick={this.onColorButtonClicked.bind(this, color)}
+        style={{ background: color }}
+        onClick={e => this.onColorButtonClicked(color, e)}
       />
     ));
   }
@@ -118,7 +122,7 @@ class ColorPicker extends PureComponent {
         ) : (
           <div className={styles.colorPicker_palette}>
             <div className={styles.colorPicker_buttons_container}>
-              {this.renderColorButtons(this.props.palette)}
+              {this.renderColorButtons(this.props.palette, this.props.schemeAttributes)}
             </div>
             {this.renderSeparator()}
             <div className={styles.colorPicker_buttons_container}>
@@ -137,13 +141,14 @@ ColorPicker.propTypes = {
   color: PropTypes.string.isRequired,
   onChange: PropTypes.func,
   palette: PropTypes.arrayOf(PropTypes.string).isRequired,
+  schemeAttributes: PropTypes.arrayOf(PropTypes.string),
+  schemeColor: PropTypes.string,
   userColors: PropTypes.arrayOf(PropTypes.string),
   t: PropTypes.func,
   onColorAdded: PropTypes.func.isRequired,
   onCustomPickerToggle: PropTypes.func,
   onCustomColorPicked: PropTypes.func,
   isMobile: PropTypes.bool,
-  selectionColor: PropTypes.string,
 };
 
 const DefaultColorPicker = ({

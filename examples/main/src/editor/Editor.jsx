@@ -24,6 +24,7 @@ export default class Editor extends PureComponent {
   state = {};
   constructor(props) {
     super(props);
+    ReactModal.setAppElement('#root');
     this.initEditorProps();
   }
 
@@ -130,7 +131,7 @@ export default class Editor extends PureComponent {
     const textToolbarType = this.props.staticToolbar && !this.props.isMobile ? 'static' : null;
     const { onRequestClose } = this.state.modalProps || {};
     return (
-      <div className={'editor'}>
+      <div className="editor">
         {MobileToolbar && <MobileToolbar />}
         {TextToolbar && <TextToolbar />}
         <RichContentEditor
@@ -141,13 +142,13 @@ export default class Editor extends PureComponent {
           config={Plugins.config}
           editorState={this.props.editorState}
           // initialState={this.state.initialState}
-          readOnly={this.props.readOnly}
           isMobile={this.props.isMobile}
           textToolbarType={textToolbarType}
           theme={theme}
           editorKey={'random-editorKey-ssr'}
           anchorTarget={anchorTarget}
           relValue={relValue}
+          locale={'he'}
         />
         <ReactModal
           isOpen={this.state.showModal}
@@ -168,7 +169,7 @@ export default class Editor extends PureComponent {
 Editor.propTypes = {
   onChange: PropTypes.func,
   editorState: PropTypes.object,
-  readOnly: PropTypes.bool,
+  theme: PropTypes.object,
   isMobile: PropTypes.bool,
   staticToolbar: PropTypes.bool,
 };

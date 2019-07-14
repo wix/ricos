@@ -9,6 +9,11 @@ if (process.argv.length !== 3) {
   process.exit(1);
 }
 
+if (process.env.CI) {
+  console.log('In CI - skipping linking');
+  return;
+}
+
 const exampleName = process.argv[process.argv.length - 1];
 const getRootDir = dirname => {
   const pacakgesPath = path.resolve(dirname, 'packages');
@@ -19,10 +24,20 @@ const getRootDir = dirname => {
   }
 };
 
+const getYarnLinkDir = () => {
+  if (process.env.YARN_LINK_DIR) {
+    return path.resolve(process.env.YARN_LINK_DIR);
+  } else if (process.platform === 'win32' && process.env.LOCALAPPDATA) {
+    return path.resolve(process.env.LOCALAPPDATA, 'Yarn', 'config', 'link');
+  } else {
+    return path.resolve(process.env.HOME, '.config', 'yarn', 'link');
+  }
+};
+
 const rootDir = getRootDir(__dirname);
 const PATHS = {
   lernaJson: path.resolve(rootDir, 'lerna.json'),
-  yarnLink: path.resolve(process.env.HOME, '.config', 'yarn', 'link'),
+  yarnLink: getYarnLinkDir(),
   example: path.resolve(rootDir, 'examples', exampleName),
 };
 const packages = [];

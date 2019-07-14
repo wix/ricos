@@ -431,6 +431,7 @@ RichContentEditor.defaultProps = {
   config: {},
   spellCheck: true,
   customStyleFn: () => ({}),
+  locale: 'en',
 };
 
 export default translate(null, { withRef: true })(RichContentEditor);

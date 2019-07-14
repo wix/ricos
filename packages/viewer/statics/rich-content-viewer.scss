@@ -1,7 +1,7 @@
-@import '~wix-rich-content-common/dist/statics/styles/palette';
-@import '~wix-rich-content-common/dist/statics/styles/consts';
-@import '~wix-rich-content-common/dist/statics/styles/global';
-@import '~wix-rich-content-common/dist/statics/styles/fonts';
+@import "~wix-rich-content-common/dist/statics/styles/palette";
+@import "~wix-rich-content-common/dist/statics/styles/consts";
+@import "~wix-rich-content-common/dist/statics/styles/global";
+@import "~wix-rich-content-common/dist/statics/styles/fonts";
 
 .wrapper {
   @extend .fontElementMap;
@@ -21,7 +21,7 @@
         box-sizing: border-box;
 
         &::after {
-          content: '';
+          content: "";
           display: table;
           clear: both;
         }
@@ -43,12 +43,13 @@
   height: 100%;
   line-height: 1.5;
   font-size: 16px;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   color: $primary-text-color;
   white-space: pre-wrap !important;
+  overflow-wrap: break-word;
 
   &::after {
-    content: '';
+    content: "";
     display: table;
     clear: both;
   }
@@ -62,8 +63,15 @@
   margin-top: 20px;
 }
 
+.underline {
+  text-decoration: underline;
+  & * {
+    text-decoration: underline;
+  }
+}
+
 .block {
-  &+& {
+  & + & {
     margin-top: 20px;
   }
 }
@@ -96,7 +104,7 @@
 .left {
   text-align: left !important;
 
-  &>* {
+  & > * {
     text-align: left !important;
   }
 }
@@ -104,7 +112,7 @@
 .center {
   text-align: center !important;
 
-  &>* {
+  & > * {
     text-align: center !important;
   }
 }
@@ -112,7 +120,7 @@
 .right {
   text-align: right !important;
 
-  &>* {
+  & > * {
     text-align: right !important;
   }
 }
@@ -121,7 +129,7 @@
   white-space: pre-line !important;
   text-align: justify !important;
 
-  &>* {
+  & > * {
     white-space: pre-line !important;
     text-align: justify !important;
   }
@@ -199,7 +207,7 @@
 .codeBlock {
   composes: blockStyleSpacing;
   background-color: rgba(0, 0, 0, 0.05);
-  font-family: 'Inconsolata', 'Menlo', 'Consolas', monospace;
+  font-family: "Inconsolata", "Menlo", "Consolas", monospace;
   font-size: 16px;
   line-height: 26px;
   padding: 2px 25px;

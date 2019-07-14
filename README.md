@@ -6,7 +6,7 @@
 
 ![Demo](https://media.giphy.com/media/2rAwp4zLCrtGn2Tlbq/giphy.gif)
 
-You can try it here: [http://rich-content-editor-example.surge.sh/](http://rich-content-editor-example.surge.sh/)
+You can try it here: [https://wix-rich-content.herokuapp.com/](https://wix-rich-content.herokuapp.com/)
 
 ## Installation
 

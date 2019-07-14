@@ -1,5 +1,6 @@
 {
-  "$id": "http://path/to/schema.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://wix-rich-content/file-upload-content-data-schema.json",
   "type": "object",
   "properties": {
     "config": {

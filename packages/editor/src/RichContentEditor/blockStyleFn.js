@@ -7,8 +7,6 @@ const types = {
   'header-two': 'headerTwo',
   'header-three': 'headerThree',
   indent: 'indent',
-  'ordered-list-item': 'orderedList',
-  'unordered-list-item': 'unorderedList',
   atomic: 'atomic',
   'code-block': 'codeBlock',
 };
