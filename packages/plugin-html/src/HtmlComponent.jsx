@@ -15,6 +15,8 @@ import IframeUrl from './IframeUrl';
 import htmlComponentStyles from '../statics/styles/HtmlComponent.scss';
 
 class HtmlComponent extends Component {
+  state = {};
+
   componentDidMount() {
     if (!this.props.componentData.config.width) {
       if (this.props.settings && this.props.settings.width) {
@@ -36,6 +38,14 @@ class HtmlComponent extends Component {
     }
   }
 
+  setHeight = iframeHeight => {
+    if (iframeHeight !== this.state.iframeHeight) {
+      this.setState({ iframeHeight });
+      const { store, block } = this.props;
+      store && store.setBlockHandler('htmlPluginMaxHeight', block.key, iframeHeight);
+    }
+  };
+
   render() {
     this.styles =
       this.styles || mergeStyles({ styles: htmlComponentStyles, theme: this.context.theme });
@@ -50,6 +60,7 @@ class HtmlComponent extends Component {
     const style = {
       width: this.context.isMobile ? 'auto' : currentWidth || width || INIT_WIDTH,
       height: currentHeight || height || INIT_HEIGHT,
+      maxHeight: this.state.iframeHeight,
     };
     const readOnly = blockProps ? blockProps.readOnly : true;
 
@@ -66,6 +77,7 @@ class HtmlComponent extends Component {
             tabIndex={readOnly ? -1 : 0}
             html={src}
             src={htmlIframeSrc}
+            onHeightChange={this.setHeight}
           />
         )}
 
@@ -94,6 +106,8 @@ HtmlComponent.propTypes = {
     minHeight: PropTypes.number,
     maxHeight: PropTypes.number,
   }).isRequired,
+  store: PropTypes.object,
+  block: PropTypes.object,
 };
 
 export { HtmlComponent as Component, DEFAULT_COMPONENT_DATA as DEFAULTS };

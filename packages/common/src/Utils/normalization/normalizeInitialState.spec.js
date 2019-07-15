@@ -44,7 +44,7 @@ describe('normalizeInitialState', () => {
             { offset: 8, length: 7, style: 'UNDERLINE' },
             { offset: 4, length: 7, style: 'BOLD' },
           ],
-          VERSION: Version.getCurrent(),
+          VERSION: Version.currentVersion,
         });
 
         expect(actual).toEqual(expected);
@@ -99,7 +99,7 @@ describe('normalizeInitialState', () => {
           );
           const expected = createState({
             type: expectedType,
-            VERSION: Version.getCurrent(),
+            VERSION: Version.currentVersion,
             inlineStyleRanges: [
               { offset: 2, length: 1, style: 'ITALIC' },
               { offset: 0, length: 2, style: 'UNDERLINE' },
@@ -137,7 +137,7 @@ describe('normalizeInitialState', () => {
           const expected = createState({
             type: expectedType,
             inlineStyleRanges: [],
-            VERSION: Version.getCurrent(),
+            VERSION: Version.currentVersion,
           });
 
           expect(actual).toEqual(expected);
@@ -172,7 +172,7 @@ describe('normalizeInitialState', () => {
         );
         const expected = createState({
           type,
-          VERSION: Version.getCurrent(),
+          VERSION: Version.currentVersion,
           inlineStyleRanges: [
             { offset: 2, length: 1, style: 'ITALIC' },
             { offset: 0, length: 2, style: 'UNDERLINE' },
@@ -200,7 +200,7 @@ describe('normalizeInitialState', () => {
       const actual = uut(createState(initialState), config);
       const expected = createState({
         ...initialState,
-        VERSION: Version.getCurrent(),
+        VERSION: Version.currentVersion,
         entityRanges: [
           {
             offset: 0,
@@ -288,7 +288,7 @@ describe('normalizeInitialState', () => {
       const actual = uut(createState(initialState), config);
       const expected = createState({
         ...initialState,
-        VERSION: Version.getCurrent(),
+        VERSION: Version.currentVersion,
         entityMap: {
           ...initialState.entityMap,
           0: {
@@ -345,7 +345,7 @@ describe('normalizeInitialState', () => {
       const actual = uut(createState(initialState), config);
       const expected = createState({
         ...initialState,
-        VERSION: Version.getCurrent(),
+        VERSION: Version.currentVersion,
         entityMap: {
           ...initialState.entityMap,
           0: {
@@ -407,7 +407,7 @@ describe('normalizeInitialState', () => {
       const actual = uut(createState(initialState), config);
       const expected = createState({
         ...initialState,
-        VERSION: Version.getCurrent(),
+        VERSION: Version.currentVersion,
         entityMap: {
           ...initialState.entityMap,
           0: {
@@ -445,13 +445,13 @@ describe('normalizeInitialState', () => {
             },
           },
         },
-        VERSION: Version.getCurrent(),
+        VERSION: Version.currentVersion,
       };
 
       const actual = uut(createState(initialState), config);
       const expected = createState({
         ...initialState,
-        VERSION: Version.getCurrent(),
+        VERSION: Version.currentVersion,
         entityMap: {
           ...initialState.entityMap,
           0: {

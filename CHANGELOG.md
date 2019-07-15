@@ -8,6 +8,48 @@
 > - :house: [Internal]
 
 ## [Unreleased]
+### :rocket: New Feature
+- `common`
+  - [#333](https://github.com/wix-incubator/rich-content/pull/333) `color-picker` layout now rendered by a component consumer via the `children` prop
+### :bug: Bug Fix
+- `editor`
+  - [45968d56](https://github.com/wix-incubator/rich-content/commit/45968d56) static toolbar displays tooltips
+- `map`
+  - [4c4fc344](https://github.com/wix-incubator/rich-content/commit/4c4fc344) search icon fixed
+### :house: Internal
+- `text-color`
+  - [#333](https://github.com/wix-incubator/rich-content/pull/333) `color-picker` layout rendered by a `text-color-panel`
+- `general`
+  - [e791fc1b](https://github.com/wix-incubator/rich-content/commit/e791fc1b) isMobile prop passed to internal plugin modals
+<hr/>
+
+## 4.0.5 (Jul 10, 2019)
+### :bug: Bug Fix
+- `editor`
+  - [#331](https://github.com/wix-incubator/rich-content/pull/331) bad import of current version from common
+  - [#331](https://github.com/wix-incubator/rich-content/pull/331) import only package.json version rather the whole package.json
+
+## 4.0.3 (Jul 10, 2019)
+### :rocket: New Feature
+- `editor`
+  - [b5f9a6e2](https://github.com/wix-incubator/rich-content/commit/b5f9a6e2) split editorStateConversion to a separate entry in editor/dist/lib
+### :bug: Bug Fix
+- `common`
+  - [#328](https://github.com/wix-incubator/rich-content/pull/328) plugin + text inline toolbars positioning is direction-agnostic
+- `file-upload`
+  - [#327](https://github.com/wix-incubator/rich-content/pull/327) shows spinner while file URL is being resolved
+- `viewer`
+  - [ebca5ef8](https://github.com/wix-incubator/rich-content/commit/ebca5ef8) RTL alignment and class are applied only if textDirection equals 'rtl'
+  - [e727e8e6](https://github.com/wix-incubator/rich-content/commit/e727e8e6) fix css for overflow-wrap: break-word
+- `text-color`
+  - [5cfbd247](https://github.com/wix-incubator/rich-content/commit/5cfbd247) viewer module build definition added
+- `html`
+  - [#329](https://github.com/wix-incubator/rich-content/pull/329) fix embed height on mobile
+### :house: Internal
+- `examples`
+  - [1286b6e8](https://github.com/wix-incubator/rich-content/commit/1286b6e8) `text-color` plugin added to `examples/viewer-ssr`
+- `rollup`
+  - [9b31c8e4](https://github.com/wix-incubator/rich-content/commit/9b31c8e4) Every file in src/lib will evaluate to an entry in dist/lib/
 
 ## 4.0.2 (Jul 2, 2019)
 ### :rocket: New Feature

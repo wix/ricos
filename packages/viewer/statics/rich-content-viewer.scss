@@ -46,6 +46,7 @@
   font-family: "Roboto", sans-serif;
   color: $primary-text-color;
   white-space: pre-wrap !important;
+  overflow-wrap: break-word;
 
   &::after {
     content: "";

@@ -22,7 +22,10 @@ import {
   fileUploadTypeMapper,
   FILE_UPLOAD_TYPE,
 } from 'wix-rich-content-plugin-file-upload/dist/module.viewer';
-import { textColorInlineStyleMapper, TEXT_COLOR_TYPE } from 'wix-rich-content-plugin-text-color';
+import {
+  textColorInlineStyleMapper,
+  TEXT_COLOR_TYPE,
+} from 'wix-rich-content-plugin-text-color/dist/module.viewer';
 
 import { viewerCustomStyleFn, styleSelectionPredicate } from '../text-color-style-fn';
 import { anchorTarget, relValue } from '../consts';
@@ -85,8 +88,8 @@ export const config = {
         setTimeout(
           () =>
             resolve('http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf'),
-          100
-        )
+          1000,
+        ),
       ),
   },
 };

@@ -128,24 +128,6 @@ let output = [
     format: 'cjs',
     sourcemap: true,
   },
-  // {
-  //   name: NAME,
-  //   format: 'iife',
-  //   file: `dist/${MODULE_NAME}.js`,
-  //   globals: id => {
-  //     const isExcluded = excludedGlobals.find(p => p === id);
-  //     if (!isExcluded) {
-  //       const globalKey = Object.keys(globals).find(
-  //         externalName => externalName === id || new RegExp(externalName + '/').test(id)
-  //       );
-  //       if (globalKey) {
-  //         return globals[globalKey];
-  //       }
-  //     }
-  //     return false;
-  //   },
-  //   sourcemap: true,
-  // },
 ];
 
 if (process.env.MODULE_WATCH) {
@@ -164,6 +146,23 @@ const editorEntry = {
   external,
   watch,
 };
+
+let libEntries;
+try {
+  fs.readdirSync('./src/lib/').forEach(file => {
+    libEntries = {
+      input: 'src/lib/' + file,
+      output: output.map(o =>
+        Object.assign(o, {
+          file: o.file.replace('dist/', 'dist/lib/').replace('module', file.replace('.js', '')),
+        })
+      ),
+      plugins,
+      external,
+      watch,
+    };
+  });
+} catch (_) {}
 
 let viewerEntry;
 try {
@@ -185,6 +184,9 @@ const config = [editorEntry];
 
 if (viewerEntry) {
   config.push(viewerEntry);
+}
+if (libEntries) {
+  config.push(libEntries);
 }
 
 export default config;

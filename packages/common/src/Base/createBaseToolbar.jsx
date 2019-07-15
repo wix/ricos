@@ -19,7 +19,7 @@ import buttonStyles from '../../statics/styles/plugin-toolbar-button.scss';
 const toolbarOffset = 12;
 
 const getInitialState = () => ({
-  position: { transform: 'translate(-50%) scale(0)' },
+  position: { transform: 'scale(0)' },
   showLeftArrow: false,
   showRightArrow: false,
   componentData: {},
@@ -198,16 +198,24 @@ export default function createToolbar({
       const { x, y } = this.offset;
       const toolbarNode = findDOMNode(this);
       const toolbarHeight = toolbarNode.offsetHeight;
+      const toolbarWidth = toolbarNode.offsetWidth;
       const offsetParentRect = toolbarNode.offsetParent.getBoundingClientRect();
       const offsetParentTop = offsetParentRect.top;
       const offsetParentLeft = offsetParentRect.left;
 
       const boundingRect = pubsub.get('boundingRect');
       return {
-        top: boundingRect.top - toolbarHeight - toolbarOffset - offsetParentTop + y,
-        left: boundingRect.left + boundingRect.width / 2 - offsetParentLeft + x,
-        transform: 'translate(-50%) scale(1)',
-        transition: 'transform 0.15s cubic-bezier(.3,1.2,.2,1)',
+        '--offset-top': `${boundingRect.top -
+          toolbarHeight -
+          toolbarOffset -
+          offsetParentTop +
+          y}px`,
+        '--offset-left': `${boundingRect.left +
+          boundingRect.width / 2 -
+          offsetParentLeft -
+          toolbarWidth / 2 +
+          x}px`,
+        transform: 'scale(1)',
       };
     }
 
@@ -221,9 +229,9 @@ export default function createToolbar({
         position = this.getRelativePositionStyle();
       } else if (this.displayOptions.displayMode === DISPLAY_MODE.FLOATING) {
         position = {
-          top: this.offset.y,
-          left: this.offset.x,
-          transform: 'translate(-50%) scale(1)',
+          '--offset-top': `${this.offset.y}px`,
+          '--offset-left': `${this.offset.x}px`,
+          transform: 'scale(1)',
           position: 'absolute',
         };
       }

@@ -34,6 +34,37 @@
       });
     })();
 
+    function initSendHeight(parentId) {
+      var oldMaxHeight;
+      function sendHeight() {
+        var scrollHeight = document.body.scrollHeight;
+        if (scrollHeight !== oldMaxHeight) {
+          oldMaxHeight = scrollHeight;
+          parent.postMessage({type: 'htmlPlugin:maxHeight', id: parentId, height: scrollHeight},'*');
+        }
+      }
+
+      function multipleDelayedSendHeight() {
+        setTimeout(function () {
+          sendHeight();
+        }, 0);
+        setTimeout(function () {
+          sendHeight();
+        }, 50);
+        setTimeout(function () {
+          sendHeight();
+        }, 200);
+      }
+
+      var observer = new MutationObserver(multipleDelayedSendHeight); //this handles loading phase
+      observer.observe(document, {
+        childList: true,
+        subtree: true
+      });
+
+      window.onresize = multipleDelayedSendHeight; //this handles width change
+    }
+
     window.addEventListener('message', function (event) {
       if (event.data.type !== 'htmlPlugin:updateContent') {
         return;
@@ -50,6 +81,8 @@
       document.open('text/html', 'replace');
       document.write(content);
       document.close();
+
+      initSendHeight(event.data.id)
     });
   </script>
 </head>

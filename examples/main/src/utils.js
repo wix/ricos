@@ -25,7 +25,7 @@ export const loadStateFromStorage = () => local.get(getStorageKey());
 
 export const saveStateToStorage = debounce(state => {
   const stateToStore = pick(state, getStateKeysToStore());
-  local.set(getStorageKey(), JSON.stringify(stateToStore));
+  local.set(getStorageKey(), stateToStore);
 }, 1000);
 
 export const getStateFromObject = obj => {

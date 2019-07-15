@@ -115,6 +115,7 @@ class RichContentEditor extends Component {
       t,
       config = {},
       textAlignment,
+      locale,
     } = this.props;
     const { theme } = this.state;
     const buttons = { pluginButtons, pluginTextButtons };
@@ -135,6 +136,7 @@ class RichContentEditor extends Component {
       getToolbarSettings: config.getToolbarSettings,
       uiSettings: config.uiSettings,
       config,
+      locale,
     });
   }
 
@@ -431,6 +433,7 @@ RichContentEditor.defaultProps = {
   config: {},
   spellCheck: true,
   customStyleFn: () => ({}),
+  locale: 'en',
 };
 
 export default translate(null, { withRef: true })(RichContentEditor);
