@@ -136,7 +136,6 @@ export default class Editor extends PureComponent {
         {TextToolbar && <TextToolbar />}
         <RichContentEditor
           ref={editor => (this.editor = editor)}
-          scrollContainer={this.props.scrollContainer}
           onChange={this.props.onChange}
           helpers={this.helpers}
           plugins={Plugins.editorPlugins}
@@ -168,7 +167,6 @@ export default class Editor extends PureComponent {
 }
 
 Editor.propTypes = {
-  scrollContainer: PropTypes.node,
   onChange: PropTypes.func,
   editorState: PropTypes.object,
   theme: PropTypes.object,

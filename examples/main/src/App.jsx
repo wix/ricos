@@ -79,7 +79,11 @@ class App extends PureComponent {
     const settings = [
       {
         name: 'Mobile',
-        action: () => this.setState(state => ({ editorIsMobile: !state.editorIsMobile, editorResetKey: state.editorResetKey + 1, })),
+        action: () =>
+          this.setState(state => ({
+            editorIsMobile: !state.editorIsMobile,
+            editorResetKey: state.editorResetKey + 1,
+          })),
       },
     ];
     if (!isMobile()) {
@@ -103,7 +107,6 @@ class App extends PureComponent {
                 editorState={editorState}
                 isMobile={this.state.editorIsMobile || this.isMobile}
                 staticToolbar={staticToolbar}
-                scrollContainer={this.scrollContainer}
               />
             </ErrorBoundary>
           </SectionContent>
@@ -135,7 +138,10 @@ class App extends PureComponent {
           />
           <SectionContent>
             <ErrorBoundary>
-              <Viewer initialState={viewerState} isMobile={this.state.viewerIsMobile || this.isMobile} />
+              <Viewer
+                initialState={viewerState}
+                isMobile={this.state.viewerIsMobile || this.isMobile}
+              />
             </ErrorBoundary>
           </SectionContent>
         </ReflexElement>
