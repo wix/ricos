@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { findDOMNode } from 'react-dom';
 import isNil from 'lodash/isNil';
-import isFunction from 'lodash/isFunction';
 import classNames from 'classnames';
 import createHocName from '../Utils/createHocName';
 import getDisplayName from '../Utils/getDisplayName';
@@ -57,19 +56,22 @@ const createBaseComponent = ({
 
     componentDidMount() {
       this.updateComponent();
-      pubsub.subscribe('componentData', this.onComponentDataChange);
-      pubsub.subscribe('componentState', this.onComponentStateChange);
-      pubsub.subscribe('componentAlignment', this.onComponentAlignmentChange);
-      pubsub.subscribe('componentSize', this.onComponentSizeChange);
-      pubsub.subscribe('componentTextWrap', this.onComponentTextWrapChange);
-      pubsub.subscribe('editorBounds', this.onEditorBoundsChange);
-      pubsub.subscribe('editorScroll', this.onEditorScrollChange);
+      this.subscriptions = [
+        ['componentData', this.onComponentDataChange],
+        ['componentState', this.onComponentStateChange],
+        ['componentAlignment', this.onComponentAlignmentChange],
+        ['componentSize', this.onComponentSizeChange],
+        ['componentTextWrap', this.onComponentTextWrapChange],
+        ['editorBounds', this.onEditorBoundsChange],
+      ];
+      this.subscriptions.forEach(subscription => pubsub.subscribe(...subscription));
       const blockKey = this.props.block.getKey();
-      this.unsubscribeOnBlock = pubsub.subscribeOnBlock({
-        key: 'componentLink',
-        blockKey,
-        callback: this.onComponentLinkChange,
-      });
+      this.subscriptionsOnBlock = [
+        ['htmlPluginMaxHeight', this.onHtmlPluginMaxHeightChange],
+        ['componentLink', this.onComponentLinkChange],
+      ].map(subscription =>
+        pubsub.subscribeOnBlock({ key: subscription[0], callback: subscription[1], blockKey })
+      );
     }
 
     componentDidUpdate() {
@@ -79,16 +81,9 @@ const createBaseComponent = ({
     }
 
     componentWillUnmount() {
-      pubsub.unsubscribe('componentData', this.onComponentDataChange);
-      pubsub.unsubscribe('componentState', this.onComponentStateChange);
-      pubsub.unsubscribe('componentAlignment', this.onComponentAlignmentChange);
-      pubsub.unsubscribe('componentSize', this.onComponentSizeChange);
-      pubsub.unsubscribe('componentTextWrap', this.onComponentTextWrapChange);
-      pubsub.unsubscribe('editorBounds', this.onEditorBoundsChange);
-      pubsub.unsubscribe('editorScroll', this.onEditorScrollChange);
-
+      this.subscriptions.forEach(subscription => pubsub.unsubscribe(...subscription));
+      this.subscriptionsOnBlock.forEach(unsubscribe => unsubscribe());
       pubsub.set('visibleBlock', null);
-      this.unsubscribeOnBlock && this.unsubscribeOnBlock();
     }
 
     isMe = () => {
@@ -131,6 +126,12 @@ const createBaseComponent = ({
     onComponentSizeChange = size => {
       if (size && this.isMeAndIdle) {
         this.updateComponentConfig({ size });
+      }
+    };
+
+    onHtmlPluginMaxHeightChange = htmlPluginMaxHeight => {
+      if (htmlPluginMaxHeight) {
+        this.setState({ htmlPluginMaxHeight });
       }
     };
 
@@ -230,6 +231,12 @@ const createBaseComponent = ({
       const { isFocused } = blockProps;
       const isActive = isFocused && isEditorFocused && !readOnly;
 
+      const classNameStrategies = [
+        PluginComponent.WrappedComponent.alignmentClassName || alignmentClassName,
+        PluginComponent.WrappedComponent.sizeClassName || sizeClassName,
+        PluginComponent.WrappedComponent.textWrapClassName || textWrapClassName,
+      ].map(strategy => strategy(this.state.componentData, theme, Styles, isMobile));
+
       const ContainerClassNames = classNames(
         {
           [Styles.pluginContainer]: !readOnly,
@@ -239,30 +246,7 @@ const createBaseComponent = ({
           [theme.pluginContainerReadOnly]: readOnly,
           [theme.pluginContainerMobile]: isMobile,
         },
-        isFunction(PluginComponent.WrappedComponent.alignmentClassName)
-          ? PluginComponent.WrappedComponent.alignmentClassName(
-              this.state.componentData,
-              theme,
-              Styles,
-              isMobile
-            )
-          : alignmentClassName(this.state.componentData, theme, Styles, isMobile),
-        isFunction(PluginComponent.WrappedComponent.sizeClassName)
-          ? PluginComponent.WrappedComponent.sizeClassName(
-              this.state.componentData,
-              theme,
-              Styles,
-              isMobile
-            )
-          : sizeClassName(this.state.componentData, theme, Styles, isMobile),
-        isFunction(PluginComponent.WrappedComponent.textWrapClassName)
-          ? PluginComponent.WrappedComponent.textWrapClassName(
-              this.state.componentData,
-              theme,
-              Styles,
-              isMobile
-            )
-          : textWrapClassName(this.state.componentData, theme, Styles, isMobile),
+        classNameStrategies,
         className || '',
         {
           [Styles.hasFocus]: isActive,
@@ -276,8 +260,9 @@ const createBaseComponent = ({
       });
 
       const sizeStyles = {
-        width: !isNil(currentWidth) ? currentWidth : initialWidth,
-        height: !isNil(currentHeight) ? currentHeight : initialHeight,
+        width: currentWidth || initialWidth,
+        height: currentHeight || initialHeight,
+        maxHeight: this.state.htmlPluginMaxHeight,
       };
 
       const component = (

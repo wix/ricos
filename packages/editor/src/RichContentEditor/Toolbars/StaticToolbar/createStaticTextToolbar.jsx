@@ -85,6 +85,8 @@ export default ({
   uiSettings,
   toolbarDecorationFn,
   config,
+  locale,
+  setEditorState,
 }) => {
   const staticTextTheme = getStaticTextTheme(theme);
   const structure = getTextButtonsFromList({
@@ -116,5 +118,9 @@ export default ({
     displayOptions,
     uiSettings,
     toolbarDecorationFn,
+    renderTooltips: true,
+    locale,
+    setEditorState,
+    config,
   });
 };

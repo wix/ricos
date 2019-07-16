@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import omit from 'lodash/omit';
 import Iframe from './Iframe';
 
 class IframeHtml extends Component {
   state = { shouldRender: false };
+  id = performance.now().toString(36);
 
   componentDidMount() {
     this.setState({ shouldRender: true });
+    window && window.addEventListener('message', this.handleIframeMessage);
+  }
+
+  componentWillUnmount() {
+    window && window.removeEventListener('message', this.handleIframeMessage);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -19,12 +24,16 @@ class IframeHtml extends Component {
   updateIframeContent = content => {
     this.shouldIgnoreLoad = true;
     this.iframe.contentWindow.postMessage(
-      {
-        type: 'htmlPlugin:updateContent',
-        content,
-      },
+      { type: 'htmlPlugin:updateContent', id: this.id, content },
       '*'
     );
+  };
+
+  handleIframeMessage = ({ data }) => {
+    const { type, id, height } = data;
+    if (type === 'htmlPlugin:maxHeight' && id === this.id) {
+      this.props.onHeightChange(height);
+    }
   };
 
   handleIframeLoad = () => {
@@ -37,11 +46,7 @@ class IframeHtml extends Component {
 
   render() {
     return this.state.shouldRender ? (
-      <Iframe
-        {...omit(this.props, 'html')}
-        iframeRef={this.setIframe}
-        onLoad={this.handleIframeLoad}
-      />
+      <Iframe src={this.props.src} iframeRef={this.setIframe} onLoad={this.handleIframeLoad} />
     ) : null;
   }
 }
@@ -49,6 +54,7 @@ class IframeHtml extends Component {
 IframeHtml.propTypes = {
   html: PropTypes.string.isRequired,
   src: PropTypes.string.isRequired,
+  onHeightChange: PropTypes.any,
 };
 
 export default IframeHtml;

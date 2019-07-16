@@ -97,6 +97,7 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
         pubsub,
         settings,
         t,
+        isMobile,
       }),
     }));
   const PluginComponent =

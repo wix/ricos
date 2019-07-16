@@ -127,7 +127,7 @@
   "GallerySettings_Radios_Scroll_Direction": "Scroll direction",
   "GallerySettings_Image_Ratio": "Image ratio",
   "GallerySettings_Thumbnail_Placement": "Thumbnail placement",
-  "ButtonPlugin_InsertButton_Tooltip": "Add a button",
+  "ButtonPlugin_InsertButton_Tooltip": "Add a Button",
   "ButtonModal_InputLink_Placeholder": "eg: www.example.com",
   "ButtonModal_InputName_Placeholder": "Add text here",
   "ButtonModal_InputLink_ErrorMessage": "Enter a valid link",

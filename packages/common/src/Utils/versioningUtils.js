@@ -1,8 +1,5 @@
 import isNaN from 'lodash/isNaN';
-import commonPackageJson from '../../package.json';
-const getCurrentVersion = (packageJson = commonPackageJson) => {
-  return packageJson.version;
-};
+import { version as currentVersion } from '../../package.json';
 
 // "1.2.3-alpha.4" => [1, 2, 3]
 const toVersion = versionString => {
@@ -54,6 +51,6 @@ export default {
   greaterThan: (left, right) => compareVersions(left, right) > 0,
   equal: (left, right) => compareVersions(left, right) === 0,
   compare: compareVersions,
-  getCurrent: getCurrentVersion,
+  currentVersion,
   evaluate: evaluateVersion,
 };

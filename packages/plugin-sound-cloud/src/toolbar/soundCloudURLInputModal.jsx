@@ -8,7 +8,6 @@ import {
   SettingsPanelFooter,
   TextInput,
   CloseIcon,
-  WixUtils,
 } from 'wix-rich-content-common';
 import styles from '../../statics/styles/sound-cloud-url-input-modal.scss';
 
@@ -73,12 +72,12 @@ export default class SoundCloudURLInputModal extends Component {
 
   render() {
     const { url, submitted } = this.state;
-    const { doneLabel, cancelLabel, t } = this.props;
+    const { doneLabel, cancelLabel, t, isMobile } = this.props;
     const { styles } = this;
 
     return (
       <div className={styles.container} data-hook="soundCloudUploadModal">
-        {!WixUtils.isMobile() && (
+        {!isMobile && (
           <CloseIcon
             className={classNames(styles.closeIcon)}
             onClick={() => this.onCloseRequested()}
@@ -91,7 +90,7 @@ export default class SoundCloudURLInputModal extends Component {
         >
           <SoundCloudIcon className={classNames(styles.header_icon)} />
           <h3 id="sound_cloud_modal_hdr" className={styles.header_text}>
-            {!WixUtils.isMobile()
+            {!isMobile
               ? t('SoundCloudUploadModal_Header')
               : t('SoundCloudUploadModal_Header_Mobile')}
           </h3>
@@ -139,6 +138,7 @@ SoundCloudURLInputModal.propTypes = {
   doneLabel: PropTypes.string,
   cancelLabel: PropTypes.string,
   t: PropTypes.func,
+  isMobile: PropTypes.bool,
 };
 
 SoundCloudURLInputModal.defaultProps = {

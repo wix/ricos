@@ -155,10 +155,9 @@ export const config = {
     htmlIframeSrc: `${getBaseUrl()}/static/html-plugin-embed.html`,
     minWidth: 35,
     maxWidth: 740,
-    height: 250,
-    width: 740,
+    width: 350,
     minHeight: 50,
-    maxHeight: 350,
+    maxHeight: 1200,
   },
   [EXTERNAL_MENTIONS_TYPE]: {
     repositionSuggestions: true,
