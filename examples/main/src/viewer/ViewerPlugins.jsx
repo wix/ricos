@@ -7,6 +7,7 @@ import { soundCloudTypeMapper } from 'wix-rich-content-plugin-sound-cloud/dist/m
 import { LINK_TYPE, linkTypeMapper } from 'wix-rich-content-plugin-link/dist/module.viewer';
 import { imageTypeMapper } from 'wix-rich-content-plugin-image/dist/module.viewer';
 import { mapTypeMapper } from 'wix-rich-content-plugin-map/dist/module.viewer';
+import { unsplashTypeMapper } from 'wix-rich-content-plugin-unsplash/dist/module.viewer';
 import { HashtagDecorator } from 'wix-rich-content-plugin-hashtag/dist/module.viewer';
 import {
   createHeadersMarkdownDecorator,
@@ -43,6 +44,7 @@ import 'wix-rich-content-plugin-video/dist/styles.min.css';
 import 'wix-rich-content-plugin-sound-cloud/dist/styles.min.css';
 import 'wix-rich-content-plugin-map/dist/styles.min.css';
 import 'wix-rich-content-plugin-file-upload/dist/styles.min.css';
+import 'wix-rich-content-plugin-unsplash/dist/styles.min.css';
 
 import { getBaseUrl } from '../utils';
 
@@ -64,6 +66,7 @@ export const typeMappers = [
   imageTypeMapper,
   mapTypeMapper,
   fileUploadTypeMapper,
+  unsplashTypeMapper
 ];
 
 export const config = {

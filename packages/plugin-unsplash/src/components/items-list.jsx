@@ -14,8 +14,8 @@ class ItemsList extends PureComponent {
     super(props);
     this.styles = mergeStyles({ styles, theme: props.theme });
     this.unsplash = new Unsplash({
-      applicationId: 'c4a984b8c17e990022760581df397199202e39dcdd79866e7dd36a1112b89383',
-      secret: '43ba153c889673608e92c912a1d44eb03290d4e6e2c388179c04ddac16c6e5b1',
+      applicationId: props.applicationId || null,
+      secret: props.secretKey || null,
     });
     this.state = {
       items: [],
@@ -77,7 +77,10 @@ class ItemsList extends PureComponent {
   };
 
   searchUnsplash(term, page) {
-    if (term) {
+    const { applicationId, secretKey } = this.props;
+    if (!applicationId || !secretKey) {
+      this.setState({ didFail: true });
+    } else if (term) {
       this.unsplash.search
         .photos(term, page)
         .then(Response => Response.json())
@@ -187,6 +190,8 @@ ItemsList.propTypes = {
   onConfirm: PropTypes.fun,
   t: PropTypes.fun,
   isMobile: PropTypes.bool.isRequired,
+  applicationId: PropTypes.string.isRequired,
+  secretKey: PropTypes.string.isRequired,
 };
 
 export default ItemsList;

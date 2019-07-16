@@ -20,7 +20,7 @@ import {
 import { createMapPlugin, MAP_TYPE } from 'wix-rich-content-plugin-map';
 import { createFileUploadPlugin, FILE_UPLOAD_TYPE } from 'wix-rich-content-plugin-file-upload';
 import { createTextColorPlugin, TEXT_COLOR_TYPE } from 'wix-rich-content-plugin-text-color';
-import { createUnsplashPlugin } from 'wix-rich-content-plugin-unsplash';
+import { createUnsplashPlugin, UNSPLASH_TYPE } from 'wix-rich-content-plugin-unsplash';
 import React from 'react';
 import Highlighter from 'react-highlight-words';
 import casual from 'casual-browserify';
@@ -70,7 +70,7 @@ export const editorPlugins = [
   createMapPlugin,
   createFileUploadPlugin,
   createTextColorPlugin,
-  createUnsplashPlugin
+  createUnsplashPlugin,
 ];
 
 const themeColors = {
@@ -234,6 +234,10 @@ export const config = {
   },
   [GIPHY_TYPE]: {
     giphySdkApiKey: process.env.GIPHY_API_KEY,
+  },
+  [UNSPLASH_TYPE]: {
+    applicationId: process.env.UNSPLASH_APPLCATION_ID,
+    secretKey: process.env.UNSPLASH_SECRET_KEY,
   },
   [MAP_TYPE]: {
     googleMapApiKey: process.env.GOOGLE_MAPS_API_KEY,
