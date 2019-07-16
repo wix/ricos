@@ -13,6 +13,8 @@ import fileUploadSchema from 'wix-rich-content-plugin-file-upload/dist/statics/d
 import mapSchema from 'wix-rich-content-plugin-map/dist/statics/data-schema.json';
 import htmlSchema from 'wix-rich-content-plugin-html/dist/statics/data-schema.json';
 import linkSchema from 'wix-rich-content-plugin-link/dist/statics/data-schema.json';
+import unsplashSchema from 'wix-rich-content-plugin-unsplash/dist/statics/data-schema.json';
+
 
 import { DIVIDER_TYPE } from 'wix-rich-content-plugin-divider';
 import { VIDEO_TYPE } from 'wix-rich-content-plugin-video';
@@ -23,6 +25,7 @@ import { SOUND_CLOUD_TYPE } from 'wix-rich-content-plugin-sound-cloud';
 import { MAP_TYPE } from 'wix-rich-content-plugin-map';
 import { HTML_TYPE } from 'wix-rich-content-plugin-html';
 import { LINK_TYPE } from 'wix-rich-content-plugin-link';
+import { UNSPLASH_TYPE } from 'wix-rich-content-plugin-unsplash';
 
 const stringifyJSON = obj => JSON.stringify(obj, null, 2);
 
@@ -69,6 +72,7 @@ class ContentStateEditor extends PureComponent {
             [MAP_TYPE]: mapSchema,
             [HTML_TYPE]: htmlSchema,
             [LINK_TYPE]: linkSchema,
+            [UNSPLASH_TYPE]: unsplashSchema, 
           }),
         },
       ],
