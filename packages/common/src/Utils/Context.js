@@ -1,7 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import noop from 'lodash/noop';
 
-const RichContentContext = React.createContext();
+const RichContentContext = React.createContext({
+  theme: {},
+  anchorTarget: '',
+  relValue: '',
+  config: {},
+  t: noop,
+  setEditorState: noop,
+  locale: 'en',
+  helpers: {},
+});
 const { Provider, Consumer } = RichContentContext;
 
 Provider.propTypes = {
