@@ -12,7 +12,7 @@ import styles from '../../statics/styles/toolbar-button.scss';
 /**
  * createBaseInsertPluginButton
  */
-export default ({ blockType, button, helpers, pubsub, settings, t }) => {
+export default ({ blockType, button, helpers, pubsub, settings, t, isMobile }) => {
   class InsertPluginButton extends React.PureComponent {
     constructor(props) {
       super(props);
@@ -169,6 +169,7 @@ export default ({ blockType, button, helpers, pubsub, settings, t }) => {
           pubsub,
           helpers,
           t,
+          isMobile,
         });
       }
     };

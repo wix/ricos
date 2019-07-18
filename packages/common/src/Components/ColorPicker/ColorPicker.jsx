@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { mergeStyles } from '../../Utils/mergeStyles';
-import CustomColorPickerDialog from './CustomColorPickerDialog';
+import DefaultColorPicker from './DefaultColorPicker';
 import AddColorIcon from '../../Icons/AddColorIcon';
 import styles from '../../../statics/styles/color-picker.scss';
 
@@ -84,7 +84,7 @@ class ColorPicker extends PureComponent {
     return <hr className={styles.colorPicker_separator} />;
   }
 
-  renderAddColorButton(style) {
+  renderAddColorButton = () => {
     const { styles } = this;
     return (
       <div key={`add_color_button_${this.id}`} className={styles.colorPicker_add_color_button}>
@@ -98,53 +98,36 @@ class ColorPicker extends PureComponent {
           className={styles.colorPicker_add_color_label}
           htmlFor={`add_color_button_${this.id}`}
         >
-          <AddColorIcon style={{ transform: 'scale(0.72)', ...style }} />
+          <AddColorIcon style={{ transform: 'scale(0.72)' }} />
         </label>
       </div>
     );
-  }
+  };
 
-  renderOneRowColors() {
-    return (
-      <div className={this.styles.colorPicker_palette}>
-        <div className={this.styles.colorPicker_buttons_container}>
-          {this.renderAddColorButton(this.props.addButtonStyle)}
-          {this.renderColorButtons(this.props.palette, this.props.schemeAttributes)}{' '}
-          {this.renderColorButtons(this.props.userColors)}
-        </div>
-      </div>
-    );
-  }
+  renderPalette = () => this.renderColorButtons(this.props.palette, this.props.schemeAttributes);
+  renderUserColors = () => this.renderColorButtons(this.props.userColors);
 
   render() {
-    const { styles } = this;
-    const { t, isMobile, theme, isOneRow, addButtonStyle } = this.props;
+    const { styles, renderPalette, renderUserColors, renderAddColorButton } = this;
+    const { t, isMobile, theme, children } = this.props;
     return (
       <div className={styles.colorPicker}>
-        {this.state.isCustomColorPickerOpened ? (
-          this.props.onCustomPickerToggle({
-            color: this.state.color,
-            onCustomColorPicked: this.onCustomColorPicked,
-            onCustomColorCancel: this.onCustomColorCancel,
-            onCustomColorUpdate: this.onCustomColorUpdate,
-            t,
-            isMobile,
-            theme,
-          })
-        ) : isOneRow ? (
-          this.renderOneRowColors()
-        ) : (
-          <div className={styles.colorPicker_palette}>
-            <div className={styles.colorPicker_buttons_container}>
-              {this.renderColorButtons(this.props.palette, this.props.schemeAttributes)}
-            </div>
-            {this.renderSeparator()}
-            <div className={styles.colorPicker_buttons_container}>
-              {this.renderColorButtons(this.props.userColors)}
-              {this.renderAddColorButton(addButtonStyle)}
-            </div>
-          </div>
-        )}
+        {this.state.isCustomColorPickerOpened
+          ? this.props.onCustomPickerToggle({
+              color: this.state.color,
+              onCustomColorPicked: this.onCustomColorPicked,
+              onCustomColorCancel: this.onCustomColorCancel,
+              onCustomColorUpdate: this.onCustomColorUpdate,
+              t,
+              isMobile,
+              theme,
+            })
+          : children({
+              renderPalette,
+              renderUserColors,
+              renderAddColorButton,
+              mergedStyles: styles,
+            })}
       </div>
     );
   }
@@ -163,41 +146,12 @@ ColorPicker.propTypes = {
   onCustomPickerToggle: PropTypes.func,
   onCustomColorPicked: PropTypes.func,
   isMobile: PropTypes.bool,
-  isOneRow: PropTypes.bool,
-  addButtonStyle: PropTypes.object,
-};
-
-const DefaultColorPicker = ({
-  color,
-  onCustomColorPicked,
-  onCustomColorCancel,
-  onCustomColorUpdate,
-  ...props
-}) => (
-  <CustomColorPickerDialog
-    color={color}
-    onChange={onCustomColorPicked}
-    onUpdate={onCustomColorUpdate}
-    onCancel={onCustomColorCancel}
-    {...props}
-  />
-);
-
-DefaultColorPicker.propTypes = {
-  color: PropTypes.string.isRequired,
-  onCustomColorPicked: PropTypes.func,
-  onCustomColorCancel: PropTypes.func,
-  onCustomColorUpdate: PropTypes.func,
-  t: PropTypes.func,
-  isMobile: PropTypes.bool,
-  theme: PropTypes.object.isRequired,
+  children: PropTypes.func.isRequired,
 };
 
 ColorPicker.defaultProps = {
   onCustomPickerToggle: props => <DefaultColorPicker {...props} />,
   onCustomColorPicked: () => {},
-  isOneRow: false,
-  addButtonStyle: {},
 };
 
 export default ColorPicker;

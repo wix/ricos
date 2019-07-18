@@ -54,6 +54,7 @@ export default class InlineToolbar extends Component {
     displayOptions: {
       displayMode: DISPLAY_MODE.NORMAL,
     },
+    offset: { x: 0, y: 0 },
     toolbarDecorationFn: () => null,
   };
 
@@ -63,7 +64,7 @@ export default class InlineToolbar extends Component {
     let position;
 
     if (displayOptions.displayMode === DISPLAY_MODE.FLOATING) {
-      position = { top: offset.y, left: offset.x };
+      position = { '--offset-top': `${offset.y}px`, '--offset-left': `${offset.x}px` };
     }
     this.state = {
       position,
@@ -102,7 +103,7 @@ export default class InlineToolbar extends Component {
     const relativeParent = getRelativeParent(this.toolbar.parentElement);
     const halfToolbarWidth = this.toolbar.clientWidth / 2;
     const toolbarHeight = this.toolbar.clientHeight;
-    const relativeRect = (relativeParent || document.body).getBoundingClientRect();
+    const toolbarParentRect = (relativeParent || document.body).getBoundingClientRect();
     const selectionRect = getVisibleSelectionRect(window);
 
     if (!selectionRect) {
@@ -111,23 +112,22 @@ export default class InlineToolbar extends Component {
 
     let top;
     if (!this.props.isMobile) {
-      top = selectionRect.top - relativeRect.top - toolbarHeight - TOOLBAR_OFFSET;
+      top = selectionRect.top - toolbarParentRect.top - toolbarHeight - TOOLBAR_OFFSET;
     } else {
-      top = selectionRect.bottom - relativeRect.top + TOOLBAR_OFFSET;
+      top = selectionRect.bottom - toolbarParentRect.top + TOOLBAR_OFFSET;
     }
 
-    let left = selectionRect.left - relativeRect.left + selectionRect.width / 2;
+    let left =
+      selectionRect.left - toolbarParentRect.left + selectionRect.width / 2 - halfToolbarWidth;
     // make sure we're not out of bounds, adjust position if we are
-    if (left < halfToolbarWidth) {
-      left = halfToolbarWidth;
-    } else if (left + halfToolbarWidth > relativeRect.width) {
-      left = relativeRect.width - halfToolbarWidth;
+    if (selectionRect.left - toolbarParentRect.left < halfToolbarWidth) {
+      left = 0;
+    } else if (left + this.toolbar.clientWidth > toolbarParentRect.width) {
+      left = toolbarParentRect.width - this.toolbar.clientWidth;
     }
 
-    if (this.props.offset) {
-      top += this.props.offset.y || 0;
-      left += this.props.offset.x || 0;
-    }
+    top += this.props.offset.y;
+    left += this.props.offset.x;
 
     return { top, left };
   }
@@ -144,7 +144,7 @@ export default class InlineToolbar extends Component {
 
     if (displayOptions.displayMode === DISPLAY_MODE.NORMAL && !this.state.keepOpen) {
       const { top, left } = this.getRelativePosition();
-      this.setState({ position: { top, left } });
+      this.setState({ position: { '--offset-top': `${top}px`, '--offset-left': `${left}px` } });
     }
   }, 40);
 
@@ -172,8 +172,7 @@ export default class InlineToolbar extends Component {
     const style = { ...position };
     const defaultDispayStyles = {
       visibility: this.isVisible() ? 'visible' : 'hidden',
-      transform: this.isVisible() ? 'translate(-50%) scale(1)' : 'translate(-50%) scale(1)',
-      transition: this.isVisible() ? 'transform 0.15s cubic-bezier(.3,1.2,.2,1)' : '',
+      transform: this.isVisible() ? 'scale(1)' : 'scale(0)',
     };
 
     Object.assign(style, defaultDispayStyles, displayOptionStyles[displayOptions.displayMode]);

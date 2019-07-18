@@ -148,6 +148,7 @@ export default class Editor extends PureComponent {
           editorKey={'random-editorKey-ssr'}
           anchorTarget={anchorTarget}
           relValue={relValue}
+          locale={'he'}
         />
         <ReactModal
           isOpen={this.state.showModal}

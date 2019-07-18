@@ -4,7 +4,7 @@ import React, { PureComponent } from 'react';
 import { ReflexContainer, ReflexElement, ReflexSplitter } from 'react-reflex';
 import compact from 'lodash/compact';
 import flatMap from 'lodash/flatMap';
-import { convertToRaw, createEmpty } from 'wix-rich-content-editor';
+import { convertToRaw, createEmpty } from 'wix-rich-content-editor/dist/lib/editorStateConversion';
 import {
   ContentStateEditor,
   ErrorBoundary,
@@ -33,17 +33,16 @@ class App extends PureComponent {
     const containerKey = generateKey('container');
     const editorState = createEmpty();
     const localState = loadStateFromStorage();
-    if (localState) {
-      return { containerKey, editorState, ...JSON.parse(localState) };
-    } else {
-      return {
-        containerKey,
-        editorState,
-        isEditorShown: true,
-        isViewerShown: !this.isMobile,
-        isContentStateShown: false,
-      };
-    }
+    return {
+      containerKey,
+      editorState,
+      isEditorShown: true,
+      isViewerShown: !this.isMobile,
+      isContentStateShown: false,
+      viewerResetKey: 0,
+      editorResetKey: 0,
+      ...localState,
+    };
   }
 
   componentDidMount() {
@@ -77,7 +76,12 @@ class App extends PureComponent {
 
   renderEditor = () => {
     const { isEditorShown, editorState, staticToolbar } = this.state;
-    const settings = [];
+    const settings = [
+      {
+        name: 'Mobile',
+        action: () => this.setState(state => ({ editorIsMobile: !state.editorIsMobile, editorResetKey: state.editorResetKey + 1, })),
+      },
+    ];
     if (!isMobile()) {
       settings.push({
         name: 'Static Toolbar',
@@ -86,7 +90,7 @@ class App extends PureComponent {
     }
     return (
       isEditorShown && (
-        <ReflexElement key="editor-section" className="section">
+        <ReflexElement key={`editor-section-${this.state.viewerResetKey}`} className="section">
           <SectionHeader
             title="Editor"
             settings={settings}
@@ -97,7 +101,7 @@ class App extends PureComponent {
               <Editor
                 onChange={this.onEditorChange}
                 editorState={editorState}
-                isMobile={this.isMobile}
+                isMobile={this.state.editorIsMobile || this.isMobile}
                 staticToolbar={staticToolbar}
               />
             </ErrorBoundary>
@@ -109,14 +113,28 @@ class App extends PureComponent {
 
   renderViewer = () => {
     const { isViewerShown, editorState } = this.state;
+    const settings = [
+      {
+        name: 'Mobile',
+        action: () =>
+          this.setState(state => ({
+            viewerIsMobile: !state.viewerIsMobile,
+            viewerResetKey: state.viewerResetKey + 1,
+          })),
+      },
+    ];
     const viewerState = JSON.parse(JSON.stringify(convertToRaw(editorState.getCurrentContent()))); //emulate initilState passed in by consumers
     return (
       isViewerShown && (
-        <ReflexElement key="viewer-section" className="section">
-          <SectionHeader title="Viewer" onHide={this.onSectionVisibilityChange} />
+        <ReflexElement key={`viewer-section-${this.state.viewerResetKey}`} className="section">
+          <SectionHeader
+            title="Viewer"
+            settings={settings}
+            onHide={this.onSectionVisibilityChange}
+          />
           <SectionContent>
             <ErrorBoundary>
-              <Viewer initialState={viewerState} isMobile={this.isMobile} />
+              <Viewer initialState={viewerState} isMobile={this.state.viewerIsMobile || this.isMobile} />
             </ErrorBoundary>
           </SectionContent>
         </ReflexElement>

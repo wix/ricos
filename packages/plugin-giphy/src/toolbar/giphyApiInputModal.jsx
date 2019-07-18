@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { mergeStyles, TextInput, WixUtils } from 'wix-rich-content-common';
+import { mergeStyles, TextInput } from 'wix-rich-content-common';
 import { SearchIcon, CloseIcon } from '../icons';
 import styles from '../../statics/styles/giphy-api-input-modal.scss';
 import GiphySelector from './giphySelector';
@@ -34,7 +34,7 @@ export default class GiphyApiInputModal extends Component {
 
   render() {
     const { styles } = this;
-    const { t, theme } = this.props;
+    const { t, theme, isMobile } = this.props;
     const searchTag = this.state.searchTag;
     const backButton = (
       <div
@@ -54,7 +54,7 @@ export default class GiphyApiInputModal extends Component {
     );
     return (
       <div>
-        {WixUtils.isMobile() ? <div>{mobileNavbar}</div> : null}
+        {isMobile ? <div>{mobileNavbar}</div> : null}
         <div className={styles.giphy_api_input_modal_container} data-hook="giphyUploadModal">
           <div className={styles.giphy_api_input_modal_search_textinput_group}>
             <TextInput
@@ -96,4 +96,5 @@ GiphyApiInputModal.propTypes = {
   searchTag: PropTypes.string,
   theme: PropTypes.object.isRequired,
   t: PropTypes.func,
+  isMobile: PropTypes.bool,
 };

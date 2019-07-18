@@ -1,13 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import {
-  mergeStyles,
-  isVideoUrl,
-  TextInput,
-  CloseIcon,
-  Button,
-  WixUtils,
-} from 'wix-rich-content-common';
+import { mergeStyles, isVideoUrl, TextInput, CloseIcon, Button } from 'wix-rich-content-common';
 import styles from '../../statics/styles/video-selection-input-modal.scss';
 
 export default class VideoSelectionInputModal extends Component {
@@ -91,7 +84,7 @@ export default class VideoSelectionInputModal extends Component {
 
   render() {
     const { url, submitted, errorMsg } = this.state;
-    const { t, handleFileSelection, enableCustomUploadOnMobile } = this.props;
+    const { t, handleFileSelection, enableCustomUploadOnMobile, isMobile } = this.props;
     const { styles } = this;
     const uploadVideoSection = (
       <div>
@@ -126,7 +119,7 @@ export default class VideoSelectionInputModal extends Component {
           className={styles[`video_modal_container_${handleFileSelection ? 'big' : 'small'}`]}
           data-hook="videoUploadModal"
         >
-          {!WixUtils.isMobile() && (
+          {!isMobile && (
             <CloseIcon
               className={styles.video_modal_closeIcon}
               onClick={() => this.onCloseRequested()}
@@ -174,9 +167,7 @@ export default class VideoSelectionInputModal extends Component {
               {t('VideoUploadModal_AddButtonText')}
             </Button>
           </div>
-          {(!WixUtils.isMobile() || enableCustomUploadOnMobile) &&
-            handleFileSelection &&
-            uploadVideoSection}
+          {(!isMobile || enableCustomUploadOnMobile) && handleFileSelection && uploadVideoSection}
         </div>
       </div>
     );
@@ -195,4 +186,5 @@ VideoSelectionInputModal.propTypes = {
   t: PropTypes.func,
   handleFileSelection: PropTypes.func,
   enableCustomUploadOnMobile: PropTypes.bool,
+  isMobile: PropTypes.bool,
 };

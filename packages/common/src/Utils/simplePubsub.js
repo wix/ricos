@@ -25,6 +25,7 @@ export const simplePubsub = initialState => {
     return subscribe(blockHandlerKey(key, blockKey), callback);
   };
 
+  //use to merge objects into store. Merges the the newData with the data for the given key.
   const update = (key, newData) => {
     const data = get(key);
     const newItem = merge({}, data, newData);

@@ -2,7 +2,7 @@ import camelCase from 'lodash/camelCase';
 import StaticToolbar from './StaticToolbar';
 import { simplePubsub, decorateComponentWithProps } from 'wix-rich-content-common';
 
-export default (config = {}) => {
+export default (data = {}) => {
   const pubsub = simplePubsub();
 
   const {
@@ -20,7 +20,11 @@ export default (config = {}) => {
     visibilityFn,
     displayOptions,
     toolbarDecorationFn,
-  } = config;
+    renderTooltips = false,
+    locale,
+    setEditorState,
+    config,
+  } = data;
 
   const toolbarProps = {
     pubsub,
@@ -38,6 +42,10 @@ export default (config = {}) => {
     visibilityFn,
     displayOptions,
     toolbarDecorationFn,
+    renderTooltips,
+    locale,
+    setEditorState,
+    config,
   };
 
   return {

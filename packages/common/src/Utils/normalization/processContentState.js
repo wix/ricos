@@ -98,8 +98,8 @@ export const processContentState = (contentState, config) => {
       return processedBlock;
     }),
     entityMap,
-    VERSION: Version.lessThan(contentStateVersion, Version.getCurrent())
-      ? Version.getCurrent()
+    VERSION: Version.lessThan(contentStateVersion, Version.currentVersion)
+      ? Version.currentVersion
       : contentStateVersion,
   };
 };
