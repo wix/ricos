@@ -183,11 +183,6 @@ class DesignComponent extends PureComponent {
       palette,
       isMobile,
     } = this.props;
-    const addButtonStyle = {
-      color: '#000',
-      width: '27px',
-      height: '27px',
-    };
     const buttonSampleList = this.presetStyle.map((style, i) => {
       const active = i === this.state.activeButton;
       return (
@@ -275,12 +270,19 @@ class DesignComponent extends PureComponent {
                   userColors={this.state.textCustomcolors.slice(0, 100)}
                   onColorAdded={this.onTextcolorAdded}
                   theme={this.styles}
-                  isOneRow
                   isMobile={isMobile}
-                  addButtonStyle={addButtonStyle}
                   onChange={this.onTextColorChange.bind(this)}
                   t={t}
-                />
+                >
+                  {({ renderUserColors, renderAddColorButton, mergedStyles }) => (
+                    <div className={mergedStyles.colorPicker_palette}>
+                      <div className={mergedStyles.colorPicker_buttons_container}>
+                        {renderAddColorButton()}
+                        {renderUserColors()}
+                      </div>
+                    </div>
+                  )}
+                </ColorPicker>
               )}
               <ColorToggleComponent
                 theme={theme}
@@ -300,12 +302,19 @@ class DesignComponent extends PureComponent {
                   userColors={this.state.borderCustomcolors.slice(0, 100)}
                   onColorAdded={this.onBordercolorAdded}
                   theme={this.styles}
-                  isOneRow
                   isMobile={isMobile}
-                  addButtonStyle={addButtonStyle}
                   onChange={this.onBorderColorChange.bind(this)}
                   t={t}
-                />
+                >
+                  {({ renderUserColors, renderAddColorButton, mergedStyles }) => (
+                    <div className={mergedStyles.colorPicker_palette}>
+                      <div className={mergedStyles.colorPicker_buttons_container}>
+                        {renderAddColorButton()}
+                        {renderUserColors()}
+                      </div>
+                    </div>
+                  )}
+                </ColorPicker>
               )}
 
               <ColorToggleComponent
@@ -326,12 +335,19 @@ class DesignComponent extends PureComponent {
                   userColors={this.state.backgroundCustomcolors.slice(0, 100)}
                   onColorAdded={this.onBackgroundcolorAdded}
                   theme={this.styles}
-                  isOneRow
                   isMobile={isMobile}
-                  addButtonStyle={addButtonStyle}
                   onChange={this.onBackgroundColorChange.bind(this)}
                   t={t}
-                />
+                >
+                  {({ renderUserColors, renderAddColorButton, mergedStyles }) => (
+                    <div className={mergedStyles.colorPicker_palette}>
+                      <div className={mergedStyles.colorPicker_buttons_container}>
+                        {renderAddColorButton()}
+                        {renderUserColors()}
+                      </div>
+                    </div>
+                  )}
+                </ColorPicker>
               )}
             </div>
           </SettingsSection>

@@ -83,9 +83,11 @@ const themeColors = {
   color7: '#000000',
   color8: '#9a87ce',
 };
-let userButtonTextColors = [];
-let userButtonBackgroundColors = [];
-let userButtonBorderColors = [];
+
+const buttonDefaultPalette = ['#FEFDFD', '#D5D4D4', '#ABCAFF', '#81B0FF', '#0261FF', '#0141AA'];
+let userButtonTextColors = [...buttonDefaultPalette];
+let userButtonBackgroundColors = [...buttonDefaultPalette];
+let userButtonBorderColors = [...buttonDefaultPalette];
 
 const getLinkPanelDropDownConfig = () => {
   const getItems = () => {
