@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { mergeStyles } from 'wix-rich-content-common';
-import PlusIcon from './plus-icon';
+import { AddIcon } from './../icons';
 import styles from '../../statics/styles/navbar-component.scss';
 
 class NavbarComponent extends Component {
@@ -52,7 +52,7 @@ class NavbarComponent extends Component {
           disabled={disableAadd}
           className={this.styles.youtube_add_button_container}
         >
-          <PlusIcon />
+          <AddIcon className={this.styles.youtube_add_icon_container} />
         </div>
         <div style={{ clear: 'both' }} />
       </div>
