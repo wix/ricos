@@ -1,5 +1,5 @@
 import { TOOLBARS } from 'wix-rich-content-common';
-import { getDefault } from './../image-component';
+import { getDefault } from '../consts';
 import { InsertPluginIcon } from '../icons';
 
 export default ({ helpers, t }) => {
