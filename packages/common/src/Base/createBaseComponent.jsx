@@ -2,7 +2,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { findDOMNode } from 'react-dom';
-import { Waypoint } from 'react-waypoint';
 import isNil from 'lodash/isNil';
 import classNames from 'classnames';
 import createHocName from '../Utils/createHocName';
@@ -95,10 +94,6 @@ const createBaseComponent = ({
 
     onEditorBoundsChange = editorBounds => {
       this.setState({ editorBounds });
-    };
-
-    onEditorScrollChange = scroll => {
-      console.log({ scroll }); // eslint-disable-line no-console
     };
 
     onComponentDataChange = componentData => {
@@ -212,18 +207,6 @@ const createBaseComponent = ({
       }
     }
 
-    onComponentEnterViewport = () => {
-      this.setState({
-        insideViewport: true,
-      });
-    };
-
-    onComponentLeaveViewport = () => {
-      this.setState({
-        insideViewport: false,
-      });
-    };
-
     updateUnselectedComponent() {
       const batchUpdates = {};
       batchUpdates.visibleBlock = null;
@@ -309,30 +292,24 @@ const createBaseComponent = ({
       });
       /* eslint-disable jsx-a11y/anchor-has-content */
       return (
-        <Waypoint onEnter={this.onComponentEnterViewport} onLeave={this.onComponentLeaveViewport}>
-          {this.state.insideViewport ? (
-            <div style={sizeStyles} className={ContainerClassNames}>
-              {!isNil(link) ? (
-                <div>
-                  {component}
-                  <a className={anchorClass} {...anchorProps} />
-                </div>
-              ) : (
-                component
-              )}
-              {!this.state.readOnly && (
-                <div
-                  role="none"
-                  data-hook={'componentOverlay'}
-                  onClick={onClick}
-                  className={overlayClassNames}
-                />
-              )}
+        <div style={sizeStyles} className={ContainerClassNames}>
+          {!isNil(link) ? (
+            <div>
+              {component}
+              <a className={anchorClass} {...anchorProps} />
             </div>
           ) : (
-            <div>{'PLACEHOLDER'}</div>
+            component
           )}
-        </Waypoint>
+          {!this.state.readOnly && (
+            <div
+              role="none"
+              data-hook={'componentOverlay'}
+              onClick={onClick}
+              className={overlayClassNames}
+            />
+          )}
+        </div>
       );
       /* eslint-enable jsx-a11y/anchor-has-content */
     };
