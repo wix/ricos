@@ -18,11 +18,7 @@ export default class Placeholder extends Component {
     const { theme } = this.context;
     this.styles = this.styles || mergeStyles({ styles, theme });
 
-    return (
-      <div className={this.styles.placeholder} style={style}>
-        Loading...
-      </div>
-    );
+    return <div className={this.styles.placeholder} style={style} />;
   }
 }
 
