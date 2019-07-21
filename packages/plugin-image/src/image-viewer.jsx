@@ -2,29 +2,25 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import includes from 'lodash/includes';
+
 import get from 'lodash/get';
 import isFunction from 'lodash/isFunction';
-import { mergeStyles, Loader, validate, Context } from 'wix-rich-content-common';
+import { mergeStyles, Loader, validate, Context, Placeholder } from 'wix-rich-content-common';
 import isEqual from 'lodash/isEqual';
 import getImageSrc from './get-image-source';
 import { WIX_MEDIA_DEFAULT } from './get-wix-media-url';
+import { getDefault } from './consts';
 import schema from '../statics/data-schema.json';
 import styles from '../statics/styles/image-viewer.scss';
-
-const getDefault = () => ({
-  config: {
-    alignment: 'center',
-    size: 'content',
-    showTitle: true,
-    showDescription: true,
-  },
-});
+import { Waypoint } from 'react-waypoint';
 
 class ImageViewer extends React.Component {
   constructor(props) {
     super(props);
     validate(props.componentData, schema);
-    this.state = {};
+    this.state = {
+      insideViewport: true,
+    };
   }
 
   componentDidMount() {
@@ -36,6 +32,7 @@ class ImageViewer extends React.Component {
       validate(nextProps.componentData, schema);
     }
   }
+
   getImageSrc(src) {
     const { helpers } = this.context || {};
 
@@ -94,14 +91,26 @@ class ImageViewer extends React.Component {
       componentData: { src },
     } = this.props;
 
-    if (src && src.fallback) {
+    if (src && src.Placeholder) {
       this.setState({
-        fallbackImageSrc: {
-          preload: src.fallback,
-          highres: src.fallback,
+        PlaceholderImageSrc: {
+          preload: src.Placeholder,
+          highres: src.Placeholder,
         },
       });
     }
+  };
+
+  onEnterViewport = () => {
+    this.setState({
+      insideViewport: true,
+    });
+  };
+
+  onLeaveViewport = () => {
+    this.setState({
+      insideViewport: false,
+    });
   };
 
   renderImage(imageClassName, imageSrc, alt, props) {
@@ -203,14 +212,14 @@ class ImageViewer extends React.Component {
       settings,
       defaultCaption,
     } = this.props;
-    const { fallbackImageSrc } = this.state;
+    const { PlaceholderImageSrc } = this.state;
     const data = componentData || getDefault();
     data.config = data.config || {};
     const { metadata = {} } = componentData;
 
     const itemClassName = classNames(this.styles.imageContainer, className);
     const imageClassName = classNames(this.styles.image);
-    const imageSrc = fallbackImageSrc || this.getImageSrc(data.src);
+    const imageSrc = PlaceholderImageSrc || this.getImageSrc(data.src);
     let imageProps = {};
     if (data.src && settings && isFunction(settings.imageProps)) {
       imageProps = settings.imageProps(data.src);
@@ -218,24 +227,42 @@ class ImageViewer extends React.Component {
       imageProps = settings.imageProps;
     }
 
+    const PlaceholderHeight = this.state.container
+      ? this.state.container.getBoundingClientRect().height
+      : 0;
+
     /* eslint-disable jsx-a11y/no-static-element-interactions */
     return (
-      <div
-        data-hook="imageViewer"
-        onClick={onClick}
-        className={itemClassName}
-        onKeyDown={e => this.onKeyDown(e, onClick)}
-        ref={e => this.handleRef(e)}
-      >
-        <div className={this.styles.imageWrapper}>
-          {imageSrc && this.renderImage(imageClassName, imageSrc, metadata.alt, imageProps)}
-          {this.renderLoader()}
+      <Waypoint onEnter={this.onEnterViewport} onLeave={this.onLeaveViewport}>
+        <div
+          data-hook="imageViewer"
+          onClick={onClick}
+          className={itemClassName}
+          onKeyDown={e => this.onKeyDown(e, onClick)}
+          ref={e => this.handleRef(e)}
+        >
+          {this.state.insideViewport ? (
+            <div>
+              <div className={this.styles.imageWrapper}>
+                {imageSrc && this.renderImage(imageClassName, imageSrc, metadata.alt, imageProps)}
+                {this.renderLoader()}
+              </div>
+              {this.renderTitle(data, this.styles)}
+              {this.renderDescription(data, this.styles)}
+              {this.shouldRenderCaption() &&
+                this.renderCaption(
+                  metadata.caption,
+                  isFocused,
+                  readOnly,
+                  this.styles,
+                  defaultCaption
+                )}
+            </div>
+          ) : (
+            <Placeholder {...this.props} style={{ height: PlaceholderHeight }} />
+          )}
         </div>
-        {this.renderTitle(data, this.styles)}
-        {this.renderDescription(data, this.styles)}
-        {this.shouldRenderCaption() &&
-          this.renderCaption(metadata.caption, isFocused, readOnly, this.styles, defaultCaption)}
-      </div>
+      </Waypoint>
     );
     /* eslint-enable jsx-a11y/no-static-element-interactions */
   }
@@ -255,4 +282,4 @@ ImageViewer.propTypes = {
   defaultCaption: PropTypes.string,
 };
 
-export { ImageViewer, getDefault };
+export default ImageViewer;
