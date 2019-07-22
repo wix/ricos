@@ -48,7 +48,7 @@ export { default as Tooltip } from './Components/Tooltip';
 export { default as TooltipHost } from './Components/TooltipHost';
 export { default as ColorPicker } from './Components/ColorPicker/ColorPicker';
 export { default as CustomColorPicker } from './Components/ColorPicker/CustomColorPicker';
-export { default as Placeholder } from './Components/Placeholder';
+export { default as ViewportRenderer } from './Components/ViewportRenderer';
 
 //Modals
 export { default as EditorModals } from './Modals/EditorModals';
