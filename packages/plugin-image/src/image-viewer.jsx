@@ -5,14 +5,13 @@ import includes from 'lodash/includes';
 
 import get from 'lodash/get';
 import isFunction from 'lodash/isFunction';
-import { mergeStyles, Loader, validate, Context, Placeholder } from 'wix-rich-content-common';
+import { mergeStyles, Loader, validate, Context, ViewportRenderer } from 'wix-rich-content-common';
 import isEqual from 'lodash/isEqual';
 import getImageSrc from './get-image-source';
 import { WIX_MEDIA_DEFAULT } from './get-wix-media-url';
 import { getDefault } from './consts';
 import schema from '../statics/data-schema.json';
 import styles from '../statics/styles/image-viewer.scss';
-import { Waypoint } from 'react-waypoint';
 
 class ImageViewer extends React.Component {
   constructor(props) {
@@ -50,20 +49,7 @@ class ImageViewer extends React.Component {
     } else {
       imageUrl.preload = getImageSrc(src, helpers);
       if (this.state.container) {
-        const { width } = this.state.container.getBoundingClientRect();
-        let requiredWidth = width || src.width || 1;
-        if (this.context.isMobile) {
-          //adjust the image width to viewport scaling and device pixel ratio
-          requiredWidth *= (window && window.devicePixelRatio) || 1;
-          requiredWidth *= (window && window.screen.width / document.body.clientWidth) || 1;
-        }
-        //keep the image's original ratio
-        let requiredHeight =
-          src && src.height && src.width
-            ? Math.ceil((src.height / src.width) * requiredWidth)
-            : WIX_MEDIA_DEFAULT.SIZE;
-        requiredWidth = Math.ceil(requiredWidth);
-        requiredHeight = Math.ceil(requiredHeight);
+        const { requiredWidth, requiredHeight } = this.calculateImageSize(src);
 
         imageUrl.highres = getImageSrc(src, helpers, {
           requiredWidth,
@@ -91,27 +77,33 @@ class ImageViewer extends React.Component {
       componentData: { src },
     } = this.props;
 
-    if (src && src.Placeholder) {
+    if (src && src.fallback) {
       this.setState({
-        PlaceholderImageSrc: {
-          preload: src.Placeholder,
-          highres: src.Placeholder,
+        fallbackImageSrc: {
+          preload: src.fallback,
+          highres: src.fallback,
         },
       });
     }
   };
 
-  onEnterViewport = () => {
-    this.setState({
-      insideViewport: true,
-    });
-  };
-
-  onLeaveViewport = () => {
-    this.setState({
-      insideViewport: false,
-    });
-  };
+  calculateImageSize(src) {
+    const { width } = this.state.container.getBoundingClientRect();
+    let requiredWidth = width || src.width || 1;
+    if (this.context.isMobile) {
+      //adjust the image width to viewport scaling and device pixel ratio
+      requiredWidth *= (window && window.devicePixelRatio) || 1;
+      requiredWidth *= (window && window.screen.width / document.body.clientWidth) || 1;
+    }
+    //keep the image's original ratio
+    let requiredHeight =
+      src && src.height && src.width
+        ? Math.ceil((src.height / src.width) * requiredWidth)
+        : WIX_MEDIA_DEFAULT.SIZE;
+    requiredWidth = Math.ceil(requiredWidth);
+    requiredHeight = Math.ceil(requiredHeight);
+    return { requiredWidth, requiredHeight };
+  }
 
   renderImage(imageClassName, imageSrc, alt, props) {
     return [
@@ -212,14 +204,14 @@ class ImageViewer extends React.Component {
       settings,
       defaultCaption,
     } = this.props;
-    const { PlaceholderImageSrc } = this.state;
+    const { fallbackImageSrc } = this.state;
     const data = componentData || getDefault();
     data.config = data.config || {};
     const { metadata = {} } = componentData;
 
     const itemClassName = classNames(this.styles.imageContainer, className);
     const imageClassName = classNames(this.styles.image);
-    const imageSrc = PlaceholderImageSrc || this.getImageSrc(data.src);
+    const imageSrc = fallbackImageSrc || this.getImageSrc(data.src);
     let imageProps = {};
     if (data.src && settings && isFunction(settings.imageProps)) {
       imageProps = settings.imageProps(data.src);
@@ -227,13 +219,15 @@ class ImageViewer extends React.Component {
       imageProps = settings.imageProps;
     }
 
-    const PlaceholderHeight = this.state.container
-      ? this.state.container.getBoundingClientRect().height
-      : 0;
+    // TODO: optimize this calc
+    if (this.state.container && data.src) {
+      this.placeholderHeight =
+        this.placeholderHeight || this.calculateImageSize(data.src).requiredHeight;
+    }
 
     /* eslint-disable jsx-a11y/no-static-element-interactions */
     return (
-      <Waypoint onEnter={this.onEnterViewport} onLeave={this.onLeaveViewport}>
+      <ViewportRenderer placeholderStyle={{ height: this.placeholderHeight }}>
         <div
           data-hook="imageViewer"
           onClick={onClick}
@@ -241,28 +235,16 @@ class ImageViewer extends React.Component {
           onKeyDown={e => this.onKeyDown(e, onClick)}
           ref={e => this.handleRef(e)}
         >
-          {this.state.insideViewport ? (
-            <div>
-              <div className={this.styles.imageWrapper}>
-                {imageSrc && this.renderImage(imageClassName, imageSrc, metadata.alt, imageProps)}
-                {this.renderLoader()}
-              </div>
-              {this.renderTitle(data, this.styles)}
-              {this.renderDescription(data, this.styles)}
-              {this.shouldRenderCaption() &&
-                this.renderCaption(
-                  metadata.caption,
-                  isFocused,
-                  readOnly,
-                  this.styles,
-                  defaultCaption
-                )}
-            </div>
-          ) : (
-            <Placeholder {...this.props} style={{ height: PlaceholderHeight }} />
-          )}
+          <div className={this.styles.imageWrapper}>
+            {imageSrc && this.renderImage(imageClassName, imageSrc, metadata.alt, imageProps)}
+            {this.renderLoader()}
+          </div>
+          {this.renderTitle(data, this.styles)}
+          {this.renderDescription(data, this.styles)}
+          {this.shouldRenderCaption() &&
+            this.renderCaption(metadata.caption, isFocused, readOnly, this.styles, defaultCaption)}
         </div>
-      </Waypoint>
+      </ViewportRenderer>
     );
     /* eslint-enable jsx-a11y/no-static-element-interactions */
   }

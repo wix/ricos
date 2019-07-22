@@ -49,7 +49,7 @@ class ViewportRenderer extends Component {
     return (
       <Waypoint onEnter={this.onEnterViewport} onLeave={this.onLeaveViewport}>
         {shouldRenderChildren ? (
-          children
+          <div>{children}</div>
         ) : (
           <div className={this.styles.placeholder} style={placeholderStyle} />
         )}
