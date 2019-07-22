@@ -171,18 +171,49 @@ class DesignComponent extends PureComponent {
       : '24px';
   }
 
+  renderColorPicker(stateColor, index, propColor, userColors, onColorAdded, onChange, label) {
+    const { t, isMobile, theme, palette } = this.props;
+
+    return (
+      <div>
+        <ColorToggleComponent
+          theme={theme}
+          color={stateColor}
+          index={index}
+          isMobile={isMobile}
+          marginBottom={this.colorPickerMarginBottom(index)}
+          toggle={this.onToggled.bind(this)}
+        >
+          {label}
+        </ColorToggleComponent>
+        {this.state.colorToggle.index === index && this.state.colorToggle.isOpened && (
+          <ColorPicker
+            color={propColor}
+            palette={palette.slice(0, 7) || DEFAULT_PALETTE}
+            userColors={userColors.slice(0, 100)}
+            onColorAdded={onColorAdded}
+            theme={this.styles}
+            isMobile={isMobile}
+            onChange={onChange.bind(this)}
+            t={t}
+          >
+            {({ renderUserColors, renderAddColorButton, mergedStyles }) => (
+              <div className={mergedStyles.colorPicker_palette}>
+                <div className={mergedStyles.colorPicker_buttons_container}>
+                  {renderAddColorButton()}
+                  {renderUserColors()}
+                </div>
+              </div>
+            )}
+          </ColorPicker>
+        )}
+      </div>
+    );
+  }
+
   render() {
     const styles = this.styles;
-    const {
-      theme,
-      t,
-      designObj,
-      selectionBackgroundColor,
-      selectionBorderColor,
-      selectionTextColor,
-      palette,
-      isMobile,
-    } = this.props;
+    const { theme, t, designObj } = this.props;
     const buttonSampleList = this.presetStyle.map((style, i) => {
       const active = i === this.state.activeButton;
       return (
@@ -252,102 +283,32 @@ class DesignComponent extends PureComponent {
             <div className={styles.colorPicker_container}>
               <div className={styles.section_header_color}>{t('ButtonModal_Color_Section')}</div>
 
-              <ColorToggleComponent
-                theme={theme}
-                color={this.state.textColor}
-                index={0}
-                isMobile={isMobile}
-                marginBottom={this.colorPickerMarginBottom(0)}
-                toggle={this.onToggled.bind(this)}
-              >
-                {t('ButtonModal_Text_Color')}
-              </ColorToggleComponent>
-              {this.state.colorToggle.index === 0 && this.state.colorToggle.isOpened && (
-                <ColorPicker
-                  color={designObj.textColor}
-                  selectionColor={selectionTextColor || '#FEFDFD'}
-                  palette={palette.slice(0, 7) || DEFAULT_PALETTE}
-                  userColors={this.state.textCustomcolors.slice(0, 100)}
-                  onColorAdded={this.onTextcolorAdded}
-                  theme={this.styles}
-                  isMobile={isMobile}
-                  onChange={this.onTextColorChange.bind(this)}
-                  t={t}
-                >
-                  {({ renderUserColors, renderAddColorButton, mergedStyles }) => (
-                    <div className={mergedStyles.colorPicker_palette}>
-                      <div className={mergedStyles.colorPicker_buttons_container}>
-                        {renderAddColorButton()}
-                        {renderUserColors()}
-                      </div>
-                    </div>
-                  )}
-                </ColorPicker>
+              {this.renderColorPicker(
+                this.state.textColor,
+                0,
+                designObj.textColor,
+                this.state.textCustomcolors,
+                this.onTextcolorAdded,
+                this.onTextColorChange,
+                t('ButtonModal_Text_Color')
               )}
-              <ColorToggleComponent
-                theme={theme}
-                color={this.state.borderColor}
-                index={1}
-                isMobile={isMobile}
-                marginBottom={this.colorPickerMarginBottom(1)}
-                toggle={this.onToggled.bind(this)}
-              >
-                {t('ButtonModal_Border_Color')}
-              </ColorToggleComponent>
-              {this.state.colorToggle.index === 1 && this.state.colorToggle.isOpened && (
-                <ColorPicker
-                  color={designObj.borderColor}
-                  selectionColor={selectionBorderColor || '#FEFDFD'}
-                  palette={palette.slice(0, 7) || DEFAULT_PALETTE}
-                  userColors={this.state.borderCustomcolors.slice(0, 100)}
-                  onColorAdded={this.onBordercolorAdded}
-                  theme={this.styles}
-                  isMobile={isMobile}
-                  onChange={this.onBorderColorChange.bind(this)}
-                  t={t}
-                >
-                  {({ renderUserColors, renderAddColorButton, mergedStyles }) => (
-                    <div className={mergedStyles.colorPicker_palette}>
-                      <div className={mergedStyles.colorPicker_buttons_container}>
-                        {renderAddColorButton()}
-                        {renderUserColors()}
-                      </div>
-                    </div>
-                  )}
-                </ColorPicker>
+              {this.renderColorPicker(
+                this.state.borderColor,
+                1,
+                designObj.borderColor,
+                this.state.borderCustomcolors,
+                this.onBordercolorAdded,
+                this.onBorderColorChange,
+                t('ButtonModal_Border_Color')
               )}
-
-              <ColorToggleComponent
-                theme={theme}
-                color={this.state.backgroundColor}
-                index={2}
-                isMobile={isMobile}
-                marginBottom={this.colorPickerMarginBottom(2)}
-                toggle={this.onToggled.bind(this)}
-              >
-                {t('ButtonModal_Background_Color')}
-              </ColorToggleComponent>
-              {this.state.colorToggle.index === 2 && this.state.colorToggle.isOpened && (
-                <ColorPicker
-                  color={designObj.backgroundColor}
-                  selectionColor={selectionBackgroundColor}
-                  palette={palette.slice(0, 7) || DEFAULT_PALETTE}
-                  userColors={this.state.backgroundCustomcolors.slice(0, 100)}
-                  onColorAdded={this.onBackgroundcolorAdded}
-                  theme={this.styles}
-                  isMobile={isMobile}
-                  onChange={this.onBackgroundColorChange.bind(this)}
-                  t={t}
-                >
-                  {({ renderUserColors, renderAddColorButton, mergedStyles }) => (
-                    <div className={mergedStyles.colorPicker_palette}>
-                      <div className={mergedStyles.colorPicker_buttons_container}>
-                        {renderAddColorButton()}
-                        {renderUserColors()}
-                      </div>
-                    </div>
-                  )}
-                </ColorPicker>
+              {this.renderColorPicker(
+                this.state.backgroundColor,
+                2,
+                designObj.backgroundColor,
+                this.state.backgroundCustomcolors,
+                this.onBackgroundcolorAdded,
+                this.onBackgroundColorChange,
+                t('ButtonModal_Background_Color')
               )}
             </div>
           </SettingsSection>
@@ -367,9 +328,6 @@ DesignComponent.propTypes = {
   getTextColors: PropTypes.func,
   getBorderColors: PropTypes.func,
   getBackgroundColors: PropTypes.func,
-  selectionBackgroundColor: PropTypes.string,
-  selectionBorderColor: PropTypes.string,
-  selectionTextColor: PropTypes.string,
   palette: PropTypes.arrayOf(PropTypes.string),
   isMobile: PropTypes.bool,
 };
