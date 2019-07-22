@@ -249,7 +249,7 @@ class DesignComponent extends PureComponent {
             theme={theme}
             ariaProps={{ 'aria-label': 'color selection', role: 'region' }}
           >
-            <div style={{ border: 'none' }} className={styles.colorPicker_container}>
+            <div className={styles.colorPicker_container}>
               <div className={styles.section_header_color}>{t('ButtonModal_Color_Section')}</div>
 
               <ColorToggleComponent
