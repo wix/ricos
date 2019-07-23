@@ -8,8 +8,9 @@
 > - :house: [Internal]
 
 ## [Unreleased]
-
-
+### :boom: Breaking Change
+- `file-upload`
+  - [#335](https://github.com/wix-incubator/rich-content/pull/335) visual update, styling and class name changes
 ## 4.0.6 (Jul 15, 2019)
 ### :rocket: New Feature
 - `common`
