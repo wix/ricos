@@ -11,6 +11,10 @@
 ### :boom: Breaking Change
 - `file-upload`
   - [#335](https://github.com/wix-incubator/rich-content/pull/335) visual update, styling and class name changes
+### :bug: Bug Fix
+- `file-upload`
+  - [aa3a4c6d](https://github.com/wix-incubator/rich-content/commit/aa3a4c6d) redundant container removed (in the Viewer)
+
 ## 4.0.6 (Jul 15, 2019)
 ### :rocket: New Feature
 - `common`
