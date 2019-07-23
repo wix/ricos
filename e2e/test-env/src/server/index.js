@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const configureApp = require('./configure-app');
 
-const startApp = (port) => {
+const startApp = port => {
   const app = express();
 
   configureApp(app);

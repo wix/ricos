@@ -3,6 +3,7 @@
 
 <head>
     <title>Rich Content Test Env</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no">
 </head>
 
 <body>
@@ -11,6 +12,7 @@
 
 <script>
     window.__CONTENT_STATE__ = <%- JSON.stringify(initialState) %>;
+    window.isMobile = <%- isMobile %>;
 </script>
 <script src="/<%- bundleName %>.bundle.js"></script>
 

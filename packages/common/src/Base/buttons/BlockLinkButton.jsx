@@ -69,7 +69,6 @@ class BlockLinkButton extends Component {
     const linkButtonTooltip = t('TextLinkButton_Tooltip');
     return (
       <LinkButton
-        data-hook="blockLinkButton"
         onClick={this.showLinkPanel}
         isActive={this.isActive}
         theme={theme}

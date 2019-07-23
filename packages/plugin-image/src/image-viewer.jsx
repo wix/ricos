@@ -203,7 +203,6 @@ class ImageViewer extends React.Component {
     } = this.props;
     const { fallbackImageSrc } = this.state;
     const data = componentData || getDefault();
-    data.config = data.config || {};
     const { metadata = {} } = componentData;
 
     const itemClassName = classNames(this.styles.imageContainer, className);

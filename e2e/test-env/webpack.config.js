@@ -6,10 +6,17 @@ const output = {
   filename: '[name].bundle.js',
 };
 
-const resolve = {
-  extensions: ['.js', '.jsx'],
-  alias: {
-    'draft-js': '@wix/draft-js',
+const common = {
+  mode: 'development',
+  devtool: 'eval-source-map',
+  performance: {
+    hints: false,
+  },
+  resolve: {
+    extensions: ['.js', '.jsx'],
+    alias: {
+      'draft-js': '@wix/draft-js',
+    },
   },
 };
 
@@ -21,31 +28,25 @@ const babelRule = {
 
 const config = [
   {
+    ...common,
     name: 'client',
     entry: {
-      viewer: './src/client/viewer',
+      combined: './src/client/combined',
       editor: './src/client/editor',
     },
     output,
-    resolve,
     module: {
       rules: [
         babelRule,
         {
           test: /\.css$/,
-          include: /e2e\/test-env/,
-          use: ['style-loader', { loader: 'css-loader', options: { modules: true } }],
-        },
-        {
-          test: /\.css$/,
-          exclude: /e2e\/test-env/,
           use: ['style-loader', 'css-loader'],
         },
       ],
     },
-    mode: 'development',
   },
   {
+    ...common,
     name: 'server',
     entry: {
       renderer: './src/server/renderer',
@@ -53,27 +54,19 @@ const config = [
     output: {
       ...output,
       libraryTarget: 'commonjs2',
-      publicPath: '/static/'
+      publicPath: '/static/',
     },
-    resolve,
     target: 'node',
-    externals: [nodeExternals({ whitelist: [/.css/ , /^wix-rich-content/] })],
+    externals: [nodeExternals({ whitelist: [/.css/, /^wix-rich-content/] })],
     module: {
       rules: [
         babelRule,
         {
           test: /\.css$/,
-          include: /e2e\/test-env/,
-          use: { loader: 'css-loader', options: { modules: true, exportOnlyLocals: true } },
-        },
-        {
-          test: /\.css$/,
-          exclude: /e2e\/test-env/,
           use: { loader: 'css-loader', options: { exportOnlyLocals: true } },
         },
       ],
     },
-    mode: 'development',
   },
 ];
 

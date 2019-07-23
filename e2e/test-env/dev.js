@@ -9,10 +9,12 @@ const start = () => {
   const app = express();
   const multiCompiler = webpack(webpackConfig);
 
-  app.use(webpackDevMiddleware(multiCompiler, {
-    publicPath: '/',
-    serverSideRender: true,
-  }));
+  app.use(
+    webpackDevMiddleware(multiCompiler, {
+      publicPath: '/',
+      serverSideRender: true,
+    })
+  );
 
   configureApp(app);
   app.use(webpackHotServerMiddleware(multiCompiler, { chunkName: 'renderer' }));

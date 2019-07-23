@@ -1,32 +1,32 @@
 import React from 'react';
 import { renderToString } from 'react-dom/server';
-import Editor from '../shared/components/Editor/Editor';
+import Editor from '../shared/components/Editor';
 import Viewer from '../shared/components/Viewer';
-import App from '../shared/components/App/App';
 
 const COMPONENTS = {
   rce: {
-    Component: Editor,
+    Components: [Editor],
     bundleName: 'editor',
   },
-  rcv: {
-    Component: Viewer,
-    bundleName: 'viewer',
+  combined: {
+    Components: [Editor, Viewer],
+    bundleName: 'combined',
   },
 };
 
 export default function renderer() {
   return (req, res) => {
-    const [componentId, fixtureName = 'empty'] = req.path.replace(/^\//, '').split('/');
-    const { Component, bundleName } = COMPONENTS[componentId] || {};
-    const props = { initialState: null };
+    const [componentId, fixtureName = 'empty'] = req.path.replace(/^\/|\/$/g, '').split('/');
+    const isMobile = req.query.mobile === '';
+    const { Components, bundleName } = COMPONENTS[componentId] || {};
+    const props = { initialState: null, isMobile };
 
-    if (!Component) {
+    if (!Components) {
       return res.status(404).send(`Component for ${componentId} not found`);
     }
 
     try {
-      props.initialState = require(`./fixtures/${fixtureName}.json`);
+      props.initialState = require(`../../../tests/fixtures/${fixtureName}.json`);
     } catch (error) {
       console.log(error);
       return res.status(404).send(`Fixture ${fixtureName} not found`);
@@ -34,12 +34,15 @@ export default function renderer() {
 
     res.render('index', {
       html: renderToString(
-        <App>
-          <Component {...props}/>
-        </App>
+        <>
+          {Components.map((Comp, i) => (
+            <Comp key={i} {...props} />
+          ))}
+        </>
       ),
       initialState: props.initialState,
       bundleName,
+      isMobile,
     });
   };
-};
+}

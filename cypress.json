@@ -12,12 +12,6 @@
   "supportFile": "e2e/cypress/support/index.js",
   "video": false,
   "videosFolder": "e2e/cypress/videos",
-  "env": {
-    "cypress-plugin-snapshots": {
-      "imageConfig": {
-        "threshold": 0,
-        "thresholdType": "pixel"
-      }
-    }
-  }
+  "env": {},
+  "projectId": "6yj6sr"
 }

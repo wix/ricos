@@ -1,68 +1,59 @@
 require('cypress-plugin-snapshots/commands');
+import { addMatchImageSnapshotCommand } from 'cypress-image-snapshot/command';
+addMatchImageSnapshotCommand();
+import { INLINE_TOOLBAR_BUTTONS } from '../dataHooks';
 
-const resizeForDesktop = () => cy.viewport('ipad-2');
+const resizeForDesktop = () => cy.viewport('macbook-15');
 const resizeForMobile = () => cy.viewport('iphone-5');
 
-const getUrl = (componentId, fixtureName) => {
-  const path = `/${componentId}`;
-  return fixtureName ? `${path}/${fixtureName}` : path;
-};
+const getUrl = (componentId, fixtureName = '') =>
+  `/${componentId}/${fixtureName}${isMobile ? '?mobile' : ''}`;
 
 // Viewport size commands
 
-Cypress.Commands.add('viewerDesktop', fixtureName => {
-  resizeForDesktop();
-  cy.visit(getUrl('rcv', fixtureName));
-});
+const run = (app, fixtureName) => {
+  cy.visit(getUrl(app, fixtureName));
+};
 
-Cypress.Commands.add('viewerMobile', fixtureName => {
+let isMobile = false;
+
+Cypress.Commands.add('switchToMobile', () => {
+  isMobile = true;
   resizeForMobile();
-  cy.visit(`${getUrl('rcv', fixtureName)}?mobile=true`);
 });
 
-Cypress.Commands.add('editorDesktop', fixtureName => {
+Cypress.Commands.add('switchToDesktop', () => {
+  isMobile = false;
   resizeForDesktop();
-  cy.visit(getUrl('rce', fixtureName));
 });
 
-Cypress.Commands.add('editorMobile', fixtureName => {
-  resizeForMobile();
-  cy.visit(`${getUrl('rce', fixtureName)}?mobile=true`);
+Cypress.Commands.add('loadEditorAndViewer', fixtureName => {
+  run('combined', fixtureName);
 });
 
-// Editor commands
-
-const getRce = () => cy.window().its('rce');
-
-Cypress.Commands.add('matchImageSnapshot', () => {
-  cy
-    .window()
-    .toMatchImageSnapshot();
+Cypress.Commands.add('loadEditor', fixtureName => {
+  run('rce', fixtureName);
 });
 
-Cypress.Commands.add('matchContentSnapshot', name => {
-  cy
-    .window()
+Cypress.Commands.add('matchContentSnapshot', () => {
+  cy.window()
     .its('__CONTENT_SNAPSHOT__')
     .toMatchSnapshot();
 });
 
 Cypress.Commands.add('matchSnapshots', () => {
-  cy
-    .matchImageSnapshot()
-    .matchContentSnapshot();
+  cy.matchImageSnapshot().matchContentSnapshot();
 });
 
-Cypress.Commands.add('enterParagraphs', pagraphs => {
-  cy
-    .get('[contenteditable="true"]')
-    .type(pagraphs.join('{enter}'));
-});
+// Editor commands
+const getEditor = () => cy.get('[contenteditable="true"]');
 
 Cypress.Commands.add('enterText', text => {
-  cy
-    .get('[contenteditable="true"]')
-    .type(text);
+  getEditor().type(text);
+});
+
+Cypress.Commands.add('enterParagraphs', paragraphs => {
+  cy.enterText(paragraphs.join('{enter}'));
 });
 
 Cypress.Commands.add('newLine', () => {
@@ -70,29 +61,82 @@ Cypress.Commands.add('newLine', () => {
 });
 
 Cypress.Commands.add('blurEditor', () => {
-  getRce().blur();
+  getEditor().blur();
 });
 
-Cypress.Commands.add('selectText', ({ anchorBlockIndex, anchorOffset, focusOffset, focusBlockIndex }) => {
-  getRce().invoke('setSelection', {
-    anchorOffset,
-    anchorBlockIndex,
-    focusOffset,
-    focusBlockIndex,
+Cypress.Commands.add('focusEditor', () => {
+  getEditor().focus();
+});
+
+function getTextElments(rootElement) {
+  let textElement,
+    offset = 0;
+  const textElements = [],
+    textOffsets = [];
+  const walk = rootElement.ownerDocument.createTreeWalker(
+    rootElement,
+    NodeFilter.SHOW_TEXT,
+    null,
+    false
+  );
+  while ((textElement = walk.nextNode())) {
+    textElements.push(textElement);
+    offset += textElement.length;
+    textOffsets.push(offset);
+  }
+  return offset => {
+    const i = textOffsets.findIndex(v => v > offset);
+    return { element: textElements[i], offset: i === 0 ? offset : offset - textOffsets[i - 1] };
+  };
+}
+
+Cypress.Commands.add('setSelection', (start, offset) => {
+  cy.focusEditor().then(args => {
+    const getTextElmentAndLocalOffset = getTextElments(args[0]);
+    const document = args.context;
+    const range = document.createRange();
+    const startObj = getTextElmentAndLocalOffset(start);
+    range.setStart(startObj.element, startObj.offset);
+    const endObj = getTextElmentAndLocalOffset(start + offset);
+    range.setEnd(endObj.element, endObj.offset);
+    document.getSelection().removeAllRanges(range);
+    document.getSelection().addRange(range);
   });
 });
 
-Cypress.Commands.add('moveSelectionToEnd', () => {
-  getRce().invoke('moveSelectionToEnd');
+Cypress.Commands.add('moveCursorToStart', () => {
+  cy.focusEditor().type('{selectall}{uparrow}');
 });
 
-Cypress.Commands.add('setTextStyle', (buttonSelector) => {
+Cypress.Commands.add('moveCursorToEnd', () => {
+  cy.focusEditor().type('{selectall}{downarrow}');
+});
+
+Cypress.Commands.add('setTextStyle', (buttonSelector, selection) => {
+  if (selection) {
+    cy.setSelection(selection[0], selection[1]);
+  }
   cy.get(`[data-hook=${buttonSelector}]`).click();
 });
 
-// disable screenshots in debug mode
+function setInlineToolbarMenueItem(item, selection, butttonIndex) {
+  cy.setTextStyle(item, selection)
+    .get('.ReactModalPortal')
+    .find('button')
+    .eq(butttonIndex)
+    .click();
+}
+
+Cypress.Commands.add('setColor', (butttonIndex = 3, selection) => {
+  setInlineToolbarMenueItem(INLINE_TOOLBAR_BUTTONS.COLOR, selection, butttonIndex);
+});
+
+Cypress.Commands.add('setLineSpacing', (butttonIndex = 3, selection) => {
+  setInlineToolbarMenueItem(INLINE_TOOLBAR_BUTTONS.LINE_SPACING, selection, butttonIndex);
+});
+
+// disable screenshots in debug mode. So there is no diffrence to ci.
 if (Cypress.browser.isHeaded) {
   const noop = () => {};
   Cypress.Commands.overwrite('matchImageSnapshot', noop);
-  Cypress.Commands.overwrite('toMatchImageSnapshot', noop);
 }

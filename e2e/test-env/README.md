@@ -10,7 +10,7 @@ E2E testing environment
 ### Editor
 `http://localhost:3002/rce/:fixture`
 
-### Viewer
-`http://localhost:3002/rcv/:fixture`
+### Combined - Editor + Viewer
+`http://localhost:3002/combined/:fixture`
 
 

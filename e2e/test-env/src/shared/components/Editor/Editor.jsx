@@ -1,87 +1,87 @@
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { convertFromRaw, convertToRaw, EditorState, SelectionState } from '@wix/draft-js';
+import { convertFromRaw, convertToRaw, EditorState } from '@wix/draft-js';
 import deepFreeze from 'deep-freeze';
 import { RichContentEditor } from 'wix-rich-content-editor';
 import 'wix-rich-content-common/dist/styles.min.css';
 import 'wix-rich-content-editor/dist/styles.min.css';
 import theme from '../../theme';
+import * as Plugins from './editorPlugins';
 
 class Editor extends Component {
+  static propTypes = {
+    initialState: PropTypes.object,
+    isMobile: PropTypes.bool,
+  };
+
   state = {
     editorState: EditorState.createWithContent(convertFromRaw(this.props.initialState)),
-  };
-
-  constructor(props) {
-    super(props);
-
-    if (isBrowser()) {
-      window.rce = {
-        setSelection: this.setSelection,
-        moveSelectionToEnd: this.moveSelectionToEnd,
-        focus: this.focus,
-      };
-    }
-  }
-
-  focus = ({}) => {
-    const { editorState } = this.state;
-    this.setState({
-      editorState: EditorState.forceSelection(editorState, editorState.getSelection()),
-    })
-  };
-
-  setSelection = ({
-    anchorBlockIndex = 0,
-    anchorOffset = 0,
-    focusBlockIndex = anchorBlockIndex,
-    focusOffset = anchorOffset,
-  }) => {
-    const { editorState } = this.state;
-    const blocks = editorState.getCurrentContent().getBlocksAsArray();
-    const selection = new SelectionState({
-      anchorKey: blocks[anchorBlockIndex].key,
-      anchorOffset,
-      focusKey: blocks[focusBlockIndex].key,
-      focusOffset,
-    });
-
-    this.setState({
-      editorState: EditorState.forceSelection(editorState, selection),
-    });
-  };
-
-  moveSelectionToEnd = () => {
-    this.setState({
-      editorState: EditorState.moveFocusToEnd(this.state.editorState),
-    });
   };
 
   handleChange = editorState => {
     this.setState({ editorState });
     if (typeof window !== 'undefined') {
       // ensures that tests fail when entity map is mutated
-      const raw = deepFreeze(convertToRaw(editorState.getCurrentContent()));
+      const rr = convertToRaw(editorState.getCurrentContent());
+      const raw = deepFreeze(rr);
       window.__CONTENT_STATE__ = raw;
       window.__CONTENT_SNAPSHOT__ = {
         ...raw,
         // blocks keys are random so for snapshot diffing they are changed to indexes
-        blocks: raw.blocks.map((block, index) => ({ ...block, key: index})),
+        blocks: raw.blocks.map((block, index) => ({ ...block, key: index })),
       };
     }
   };
 
+  helpers = {
+    onFilesChange: () => {},
+    onVideoSelected: () => {},
+    openModal: data => {
+      const { modalStyles, ...modalProps } = data;
+      try {
+        document.documentElement.style.height = '100%';
+        document.documentElement.style.position = 'relative';
+      } catch (e) {
+        console.warn('Cannot change document styles', e);
+      }
+      this.setState({
+        showModal: true,
+        modalProps,
+        modalStyles,
+      });
+    },
+    closeModal: () => {
+      try {
+        document.documentElement.style.height = 'initial';
+        document.documentElement.style.position = 'initial';
+      } catch (e) {
+        console.warn('Cannot change document styles', e);
+      }
+      this.setState({
+        showModal: false,
+        modalProps: null,
+        modalStyles: null,
+        modalContent: null,
+      });
+    },
+  };
   render() {
     return (
-      <RichContentEditor
-        editorKey="rce"
-        editorState={this.state.editorState}
-        onChange={this.handleChange}
-        theme={theme}
-      />
+      <>
+        Editor
+        <RichContentEditor
+          editorKey="rce"
+          editorState={this.state.editorState}
+          onChange={this.handleChange}
+          theme={theme}
+          plugins={Plugins.editorPlugins}
+          config={Plugins.config}
+          isMobile={this.props.isMobile}
+          helpers={this.helpers}
+        />
+      </>
     );
   }
 }
-
-const isBrowser = () => typeof window !== 'undefined';
 
 export default Editor;

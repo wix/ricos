@@ -17,6 +17,8 @@
 - `mentions`
   - [#354](https://github.com/wix-incubator/rich-content/pull/354) fix Google 'Touch to Search' trigger when clicking on mention
 ### :house: Internal
+- `tests`
+    [#334](https://github.com/wix-incubator/rich-content/pull/334) add Cypress
 - `example`
   - [#350](https://github.com/wix-incubator/rich-content/pull/350) ability to change locale
 <hr/>
