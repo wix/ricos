@@ -1,7 +1,7 @@
 @import "~wix-rich-content-common/dist/statics/styles/mixins";
 @import "~wix-rich-content-common/dist/statics/styles/palette";
 
-.row {
+.button_row {
   height: auto;
   width: 100%;
   border-bottom: 1px solid #cccccc;
@@ -95,7 +95,7 @@
   display: none;
 }
 
-.colorPicker_container {
+.button_colorPicker_container {
   height: auto;
   width: 100%;
   padding-bottom: 10px;
@@ -126,14 +126,14 @@
     margin-left: 7px;
   }
 }
-.design_component {
+.button_design_component {
   padding-right: 30px;
   @include phone {
     padding: 0px 20px;
   }
 }
 
-.section_header_color {
+.button_section_header_color {
   padding-bottom: 38px;
   padding-top: 6px;
   font-size: 16px;
@@ -146,7 +146,7 @@
   }
 }
 
-.section_header_border {
+.button_section_header_border {
   padding-bottom: 31px;
   padding-top: 8px;
   font-size: 16px;
@@ -188,11 +188,11 @@
   padding-top: 5px;
 }
 
-.input_container_width {
+.button_input_container_width {
   padding-bottom: 19px;
 }
 
-.input_container_corner {
+.button_input_container_corner {
   padding-bottom: 17px;
 }
 

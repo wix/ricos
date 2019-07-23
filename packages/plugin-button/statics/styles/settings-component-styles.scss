@@ -1,7 +1,7 @@
 @import "~wix-rich-content-common/dist/statics/styles/mixins";
 @import "~wix-rich-content-common/dist/statics/styles/palette";
 
-.header_ButtonText {
+.button_header_ButtonText {
   font-size: 14px;
   margin: 7px 0 7px 0;
   line-height: 1.5;
@@ -14,7 +14,7 @@
     font-family: Avenir;
   }
 }
-.header_ButtonLink {
+.button_header_ButtonLink {
   font-size: 14px;
   margin: 9px 0 7px 0;
   line-height: 1.5;
@@ -30,7 +30,7 @@
   margin-top: 6px;
   margin-left: 0px;
 }
-.errorMessage {
+.button_errorMessage {
   color: #ee5951;
   font-size: 12px;
   padding-top: 7px;
@@ -41,7 +41,7 @@
     line-height: 1.5;
   }
 }
-.checkBoxes {
+.button_checkBoxes {
   padding-top: 13px;
   @include phone {
     padding-top: 22px;
@@ -65,7 +65,7 @@
     padding-bottom: 28px;
   }
 }
-.section_content {
+.button_section_content {
   padding-right: 30px;
   padding-top: 22px;
   @include phone {

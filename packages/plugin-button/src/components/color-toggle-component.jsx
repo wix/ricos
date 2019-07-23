@@ -22,12 +22,12 @@ class ColorToggleComponent extends PureComponent {
   render() {
     const { marginBottom } = this.props;
     return (
-      <div style={{ marginBottom }} className={this.styles.colorPicker}>
-        <div className={this.styles.colorPicker_label}>{this.props.children}</div>
-        <div className={this.styles.colorPicker_picker}>
+      <div style={{ marginBottom }} className={this.styles.button_colorPicker}>
+        <div className={this.styles.button_colorPicker_label}>{this.props.children}</div>
+        <div className={this.styles.button_colorPicker_picker}>
           <button
             style={{ background: this.state.color }}
-            className={this.styles.colorPicker_pickerButton}
+            className={this.styles.button_colorPicker_pickerButton}
             onClick={this.onClicked}
           />
         </div>

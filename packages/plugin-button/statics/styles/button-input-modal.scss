@@ -1,29 +1,29 @@
 @import "~wix-rich-content-common/dist/statics/styles/mixins";
 @import "~wix-rich-content-common/dist/statics/styles/palette";
 
-.container {
+.button_modal_container {
   @include phone {
     padding: 33px 20px;
     padding-bottom: 10px;
   }
 }
 
-.design_component_container {
+.button_design_component_container {
   @include phone {
     padding-top: 24px;
     padding-bottom: 0;
   }
 }
 
-.focus_manager {
+.button_focus_manager {
   border-top: 1px solid #ededed;
 }
 
-.separator {
+.button_separator {
   border-top: solid 1px #ccc;
 }
 
-.scroll {
+.button_scroll {
   height: calc(100vh - 152px);
   overflow-y: scroll;
   @include phone {
@@ -32,7 +32,7 @@
   }
 }
 
-.header {
+.button_header {
   display: flex;
   align-items: center;
   margin-top: 1px;
@@ -41,7 +41,7 @@
   box-sizing: border-box;
 }
 
-.header_text {
+.button_header_text {
   font-size: 20px;
   font-family: Avenir;
   width: 100%;
@@ -57,7 +57,7 @@
   }
 }
 
-.design_header_text {
+.button_design_header_text {
   font-size: 16px;
   margin: 10px 0px;
   width: 100%;
@@ -91,7 +91,7 @@
   color: red;
 }
 
-.errorIcon {
+.button_errorIcon {
   position: absolute;
   top: 2px;
   left: 130px;
@@ -99,12 +99,12 @@
 .tabs_headers_option + .tabs_headers_option {
   border-left: 0;
 }
-.modal_footer {
+.button_modal_footer {
   padding-right: 29px;
   padding-left: 30px;
 }
 
-.settingTab {
+.button_settingTab {
   position: relative;
   width: 100%;
 }
@@ -121,11 +121,11 @@
   padding-right: 0px;
 }
 
-.tabLabel {
+.button_tabLabel {
   margin-top: 15px;
 }
 
-.scrollbar_thumb {
+.button_scrollbar_thumb {
   background: #000000;
   border-radius: 4px;
   width: 4px;
@@ -137,7 +137,7 @@
   opacity: 0.8;
 }
 
-.customize_scrollbar_container {
+.button_customize_scrollbar_container {
   height: 100%;
 }
 

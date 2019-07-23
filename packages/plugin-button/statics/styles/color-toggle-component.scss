@@ -1,6 +1,6 @@
 @import "~wix-rich-content-common/dist/statics/styles/mixins";
 
-.colorPicker {
+.button_colorPicker {
   height: auto;
   width: 100%;
   margin-bottom: 25px;
@@ -11,7 +11,7 @@
   }
 }
 
-.colorPicker_label {
+.button_colorPicker_label {
   position: absolute;
   color: #000;
   font-size: 16px;
@@ -24,14 +24,14 @@
     font-family: Avenir;
   }
 }
-.colorPicker_picker {
+.button_colorPicker_picker {
   width: 50%;
   height: auto;
   direction: rtl;
   display: inline-block;
 }
 
-.colorPicker_pickerButton {
+.button_colorPicker_pickerButton {
   width: 20px;
   height: 20px;
   border-radius: 28px;
