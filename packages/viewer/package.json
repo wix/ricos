@@ -44,7 +44,7 @@
     "@babel/runtime": "7.2.0",
     "classnames": "^2.2.6",
     "cross-env": "^5.2.0",
-    "eslint": "^4.19.1",
+    "eslint": "^6.1.0",
     "jest": "^23.1.0",
     "lodash": "^4.17.10",
     "prop-types": "^15.6.2",

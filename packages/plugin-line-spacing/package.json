@@ -41,7 +41,7 @@
     "@babel/runtime": "7.2.0",
     "@wix/draft-js": "0.10.272",
     "classnames": "^2.2.6",
-    "eslint": "^4.19.1",
+    "eslint": "^6.1.0",
     "lodash": "^4.17.10",
     "prop-types": "^15.6.2",
     "react": "16.6.3",
