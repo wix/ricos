@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import {
@@ -78,7 +79,7 @@ class DesignComponent extends PureComponent {
       textCustomcolors: getTextColors() || [],
       borderCustomcolors: getBorderColors() || [],
       backgroundCustomcolors: getBackgroundColors() || [],
-      colorToggle: { index: -1, isOpened: false },
+      colorToggleIndex: -1,
     };
 
     this.onBackgroundcolorAdded = this.onBackgroundcolorAdded.bind(this);
@@ -151,21 +152,17 @@ class DesignComponent extends PureComponent {
     this.alignButtonSample(this.state.activeButton);
   }
 
-  onToggled = (index, isOpened) => {
-    if (index !== this.state.colorToggle.index) {
-      this.setState({ colorToggle: { index, isOpened: true } });
-    } else {
-      this.setState({ colorToggle: { index, isOpened } });
-    }
+  onToggled = index => {
+    index !== this.state.colorToggleIndex && this.setState({ colorToggleIndex: index });
   };
-
+  //TODO: bashar: change it to class style
   colorPickerMarginBottom(index) {
     const { isMobile } = this.props;
-    const { colorToggle } = this.state;
-    return !isMobile && colorToggle.index === index && colorToggle.isOpened
+    const { colorToggleIndex } = this.state;
+    return !isMobile && colorToggleIndex === index
       ? '7px'
       : isMobile
-      ? colorToggle.index === index && colorToggle.isOpened
+      ? colorToggleIndex === index
         ? '-4px'
         : '6px'
       : '24px';
@@ -186,7 +183,7 @@ class DesignComponent extends PureComponent {
         >
           {label}
         </ColorToggleComponent>
-        {this.state.colorToggle.index === index && this.state.colorToggle.isOpened && (
+        {this.state.colorToggleIndex === index && (
           <ColorPicker
             color={propColor}
             palette={palette.slice(0, 7) || DEFAULT_PALETTE}
