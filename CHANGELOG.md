@@ -8,6 +8,9 @@
 > - :house: [Internal]
 
 ## [Unreleased]
+### :house: Internal
+- `general`
+  - [#330](https://github.com/wix-incubator/rich-content/pull/330) updated to eslint 6
 <hr/>
 
 ## 4.0.3 (Jul 10, 2019)
