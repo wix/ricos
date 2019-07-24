@@ -4,7 +4,7 @@ import Iframe from './Iframe';
 
 class IframeHtml extends Component {
   state = { shouldRender: false };
-  id = performance.now().toString(36);
+  id = window && performance.now().toString(36);
 
   componentDidMount() {
     this.setState({ shouldRender: true });
