@@ -155,21 +155,10 @@ class DesignComponent extends PureComponent {
   onToggled = index => {
     index !== this.state.colorToggleIndex && this.setState({ colorToggleIndex: index });
   };
-  //TODO: bashar: change it to class style
-  colorPickerMarginBottom(index) {
-    const { isMobile } = this.props;
-    const { colorToggleIndex } = this.state;
-    return !isMobile && colorToggleIndex === index
-      ? '7px'
-      : isMobile
-      ? colorToggleIndex === index
-        ? '-4px'
-        : '6px'
-      : '24px';
-  }
 
   renderColorPicker(stateColor, index, propColor, userColors, onColorAdded, onChange, label) {
     const { t, isMobile, theme, palette } = this.props;
+    const { colorToggleIndex } = this.state;
 
     return (
       <div>
@@ -178,7 +167,11 @@ class DesignComponent extends PureComponent {
           color={stateColor}
           index={index}
           isMobile={isMobile}
-          marginBottom={this.colorPickerMarginBottom(index)}
+          marginButtonClassName={
+            colorToggleIndex === index
+              ? this.styles.button_marginBottomOpenedColorPicker
+              : this.styles.button_marginBottomClosedColorPicker
+          }
           toggle={this.onToggled.bind(this)}
         >
           {label}

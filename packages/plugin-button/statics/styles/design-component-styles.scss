@@ -15,6 +15,19 @@
   }
 }
 
+.button_marginBottomOpenedColorPicker{
+margin-bottom: 7px;
+@include phone{
+  margin-bottom: -4px;
+}
+}
+.button_marginBottomClosedColorPicker{
+  margin-bottom: 24px;
+  @include phone{
+    margin-bottom: 6px;
+  }
+}
+
 .colorPicker_button {
   width: 20px;
   height: 20px;

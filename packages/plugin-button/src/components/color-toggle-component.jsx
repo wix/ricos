@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import { mergeStyles } from 'wix-rich-content-common';
 import styles from '../../statics/styles/color-toggle-component.scss';
 
@@ -20,9 +21,9 @@ class ColorToggleComponent extends PureComponent {
   };
 
   render() {
-    const { marginBottom } = this.props;
+    const { marginButtonClassName } = this.props;
     return (
-      <div style={{ marginBottom }} className={this.styles.button_colorPicker}>
+      <div className={classNames(this.styles.button_colorPicker, marginButtonClassName)}>
         <div className={this.styles.button_colorPicker_label}>{this.props.children}</div>
         <div className={this.styles.button_colorPicker_picker}>
           <button
@@ -43,6 +44,7 @@ ColorToggleComponent.propTypes = {
   index: PropTypes.number.isRequired,
   toggle: PropTypes.func.isRequired,
   marginBottom: PropTypes.string,
+  marginButtonClassName: PropTypes.string,
 };
 
 export default ColorToggleComponent;
