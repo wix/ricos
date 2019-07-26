@@ -6,6 +6,14 @@ import { DocumentIcon, LoaderIcon } from './icons';
 import schema from '../statics/data-schema.json';
 import styles from '../statics/styles/file-upload-viewer.scss';
 
+const getNameWithoutType = fileName => {
+  if (!fileName.includes('.')) {
+    return fileName;
+  }
+  const s = fileName.split('.');
+  return s.slice(0, s.length - 1).join('.');
+};
+
 class FileUploadViewer extends PureComponent {
   state = {
     resolvedFileUrl: null,
@@ -40,7 +48,7 @@ class FileUploadViewer extends PureComponent {
 
   renderViewerBody({ type, name }) {
     const showLoader = this.props.isLoading || this.state.resolvingUrl;
-    const nameWithoutType = name ? name.split('.')[0] : name;
+    const nameWithoutType = getNameWithoutType(name);
     return (
       <React.Fragment>
         {showLoader ? (
