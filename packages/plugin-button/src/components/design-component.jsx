@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import {
@@ -79,7 +78,7 @@ class DesignComponent extends PureComponent {
       textCustomcolors: getTextColors() || [],
       borderCustomcolors: getBorderColors() || [],
       backgroundCustomcolors: getBackgroundColors() || [],
-      colorToggleIndex: -1,
+      colorToggle: { index: -1, isOpened: false },
     };
 
     this.onBackgroundcolorAdded = this.onBackgroundcolorAdded.bind(this);
@@ -152,13 +151,17 @@ class DesignComponent extends PureComponent {
     this.alignButtonSample(this.state.activeButton);
   }
 
-  onToggled = index => {
-    index !== this.state.colorToggleIndex && this.setState({ colorToggleIndex: index });
+  onToggled = (index, isOpened) => {
+    if (index !== this.state.colorToggle.index) {
+      this.setState({ colorToggle: { index, isOpened: true } });
+    } else {
+      this.setState({ colorToggle: { index, isOpened } });
+    }
   };
 
   renderColorPicker(stateColor, index, propColor, userColors, onColorAdded, onChange, label) {
     const { t, isMobile, theme, palette } = this.props;
-    const { colorToggleIndex } = this.state;
+    const { colorToggle } = this.state;
 
     return (
       <div>
@@ -168,7 +171,7 @@ class DesignComponent extends PureComponent {
           index={index}
           isMobile={isMobile}
           marginButtonClassName={
-            colorToggleIndex === index
+            colorToggle.index === index && colorToggle.isOpened
               ? this.styles.button_marginBottomOpenedColorPicker
               : this.styles.button_marginBottomClosedColorPicker
           }
@@ -176,7 +179,7 @@ class DesignComponent extends PureComponent {
         >
           {label}
         </ColorToggleComponent>
-        {this.state.colorToggleIndex === index && (
+        {this.state.colorToggle.index === index && this.state.colorToggle.isOpened && (
           <ColorPicker
             color={propColor}
             palette={palette.slice(0, 7) || DEFAULT_PALETTE}
