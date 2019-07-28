@@ -78,7 +78,7 @@ class DesignComponent extends PureComponent {
       textCustomcolors: getTextColors() || [],
       borderCustomcolors: getBorderColors() || [],
       backgroundCustomcolors: getBackgroundColors() || [],
-      colorToggle: { index: -1, isOpened: false },
+      colorToggleIndex: -1,
     };
 
     this.onBackgroundcolorAdded = this.onBackgroundcolorAdded.bind(this);
@@ -151,17 +151,13 @@ class DesignComponent extends PureComponent {
     this.alignButtonSample(this.state.activeButton);
   }
 
-  onToggled = (index, isOpened) => {
-    if (index !== this.state.colorToggle.index) {
-      this.setState({ colorToggle: { index, isOpened: true } });
-    } else {
-      this.setState({ colorToggle: { index, isOpened } });
-    }
+  onToggled = index => {
+    this.setState({ colorToggleIndex: index !== this.state.colorToggleIndex ? index : -1 });
   };
 
   renderColorPicker(stateColor, index, propColor, userColors, onColorAdded, onChange, label) {
     const { t, isMobile, theme, palette } = this.props;
-    const { colorToggle } = this.state;
+    const { colorToggleIndex } = this.state;
 
     return (
       <div>
@@ -171,7 +167,7 @@ class DesignComponent extends PureComponent {
           index={index}
           isMobile={isMobile}
           marginButtonClassName={
-            colorToggle.index === index && colorToggle.isOpened
+            colorToggleIndex === index
               ? this.styles.button_marginBottomOpenedColorPicker
               : this.styles.button_marginBottomClosedColorPicker
           }
@@ -179,7 +175,7 @@ class DesignComponent extends PureComponent {
         >
           {label}
         </ColorToggleComponent>
-        {this.state.colorToggle.index === index && this.state.colorToggle.isOpened && (
+        {colorToggleIndex === index && (
           <ColorPicker
             color={propColor}
             palette={palette.slice(0, 7) || DEFAULT_PALETTE}
