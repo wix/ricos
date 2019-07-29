@@ -7,7 +7,7 @@ import schema from '../statics/data-schema.json';
 import styles from '../statics/styles/file-upload-viewer.scss';
 
 const getNameWithoutType = fileName => {
-  if (!fileName.includes('.')) {
+  if (!fileName || !fileName.includes('.')) {
     return fileName;
   }
   const s = fileName.split('.');
