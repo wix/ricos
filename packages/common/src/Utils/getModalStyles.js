@@ -1,5 +1,5 @@
 import WixUtils from './wixUtils';
-import merge from 'lodash/merge';
+import { merge } from 'lodash';
 
 const mobileModalStyles = {
   overlay: {

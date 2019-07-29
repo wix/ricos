@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { getVisibleSelectionRect } from '@wix/draft-js';
 import Measure from 'react-measure';
+import ClickOutside from 'react-click-outside';
+import { debounce } from 'lodash';
 import { DISPLAY_MODE } from 'wix-rich-content-common';
 import Styles from '../../../../statics/styles/inline-toolbar.scss';
-import ClickOutside from 'react-click-outside';
-import debounce from 'lodash/debounce';
 
 const TOOLBAR_OFFSET = 5;
 

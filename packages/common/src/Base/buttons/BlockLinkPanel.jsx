@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
 import decorateComponentWithProps from '../../Utils/decorateComponentWithProps';
-import isEmpty from 'lodash/isEmpty';
+import { isEmpty } from 'lodash';
 import LinkPanelContainer from '../../Components/LinkPanelContainer';
 
 class BlockLinkPanel extends Component {

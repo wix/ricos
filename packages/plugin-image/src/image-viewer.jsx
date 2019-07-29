@@ -1,11 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import includes from 'lodash/includes';
-import get from 'lodash/get';
-import isFunction from 'lodash/isFunction';
+import { get, includes, isEqual, isFunction } from 'lodash';
 import { mergeStyles, Loader, validate, Context } from 'wix-rich-content-common';
-import isEqual from 'lodash/isEqual';
 import getImageSrc from './get-image-source';
 import { WIX_MEDIA_DEFAULT } from './get-wix-media-url';
 import schema from '../statics/data-schema.json';

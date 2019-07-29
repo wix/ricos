@@ -13,6 +13,9 @@
   - [#342](https://github.com/wix-incubator/rich-content/pull/342) in editor image is not show when helpers are provided
 - `viewer`
   - [139f023](https://github.com/wix-incubator/rich-content/commit/139f023) atomic blocks are no longer rendered in `<p>` tags
+### :house: Internal
+- `general`
+  - [#344](https://github.com/wix-incubator/rich-content/pull/344) import destructed members from `lodash`
 <hr/>
 
 ## 4.0.9 (Jul 25, 2019)

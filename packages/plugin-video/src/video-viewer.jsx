@@ -4,7 +4,7 @@ import ReactPlayerWrapper from './reactPlayerWrapper';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { mergeStyles, validate, Context } from 'wix-rich-content-common';
-import isEqual from 'lodash/isEqual';
+import { isEqual } from 'lodash';
 import getVideoSrc from './get-video-source';
 import schema from '../statics/data-schema.json';
 import styles from '../statics/styles/video-viewer.scss';

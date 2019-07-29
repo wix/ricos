@@ -2,8 +2,7 @@
 import { hot } from 'react-hot-loader/root';
 import React, { PureComponent } from 'react';
 import { ReflexContainer, ReflexElement, ReflexSplitter } from 'react-reflex';
-import compact from 'lodash/compact';
-import flatMap from 'lodash/flatMap';
+import { compact, flatMap } from 'lodash';
 import { convertToRaw, createEmpty } from 'wix-rich-content-editor/dist/lib/editorStateConversion';
 import {
   ContentStateEditor,
@@ -79,7 +78,11 @@ class App extends PureComponent {
     const settings = [
       {
         name: 'Mobile',
-        action: () => this.setState(state => ({ editorIsMobile: !state.editorIsMobile, editorResetKey: state.editorResetKey + 1, })),
+        action: () =>
+          this.setState(state => ({
+            editorIsMobile: !state.editorIsMobile,
+            editorResetKey: state.editorResetKey + 1,
+          })),
       },
     ];
     if (!isMobile()) {
@@ -134,7 +137,10 @@ class App extends PureComponent {
           />
           <SectionContent>
             <ErrorBoundary>
-              <Viewer initialState={viewerState} isMobile={this.state.viewerIsMobile || this.isMobile} />
+              <Viewer
+                initialState={viewerState}
+                isMobile={this.state.viewerIsMobile || this.isMobile}
+              />
             </ErrorBoundary>
           </SectionContent>
         </ReflexElement>

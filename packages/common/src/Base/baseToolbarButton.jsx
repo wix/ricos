@@ -3,7 +3,7 @@ import React from 'react';
 import { findDOMNode } from 'react-dom';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import isEmpty from 'lodash/isEmpty';
+import { isEmpty } from 'lodash';
 import Context from '../Utils/Context';
 import Dropdown from '../Components/Dropdown';
 import FileInput from '../Components/FileInput';

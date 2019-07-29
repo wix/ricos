@@ -1,4 +1,4 @@
-import pickBy from 'lodash/pickBy';
+import { pickBy } from 'lodash';
 
 export const getToolbarTheme = (theme, type) => ({
   toolbarStyles: pickBy(theme, (value, key) => key.startsWith(`${type}Toolbar`)),

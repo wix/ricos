@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import isEqual from 'lodash/isEqual';
+import { isEqual } from 'lodash';
 import { mergeStyles, validate, Context } from 'wix-rich-content-common';
 import { DocumentIcon, LoaderIcon } from './icons';
 import schema from '../statics/data-schema.json';

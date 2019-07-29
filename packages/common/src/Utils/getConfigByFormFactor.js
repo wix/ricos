@@ -1,4 +1,4 @@
-import get from 'lodash/get';
+import { get } from 'lodash';
 import WixUtils from './wixUtils';
 
 export const getConfigByFormFactor = ({ config, isMobile, defaultValue }) => {

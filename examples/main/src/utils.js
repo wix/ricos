@@ -1,5 +1,4 @@
-import debounce from 'lodash/debounce';
-import pick from 'lodash/pick';
+import { debounce, pick } from 'lodash';
 import local from 'local-storage';
 import MobileDetect from 'mobile-detect';
 import { convertFromRaw, createWithContent } from 'wix-rich-content-editor';

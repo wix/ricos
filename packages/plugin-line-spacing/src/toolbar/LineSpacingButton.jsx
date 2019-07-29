@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import pick from 'lodash/pick';
+import { pick } from 'lodash';
 import {
   getAnchorBlockData,
   InlineToolbarButton,

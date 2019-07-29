@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import isEmpty from 'lodash/isEmpty';
+import { isEmpty } from 'lodash';
 import MobileLinkModal from './MobileLinkModal';
 
 export default class MobileBlockLinkModal extends Component {

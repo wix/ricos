@@ -10,8 +10,7 @@ import {
   hasProtocol,
   mergeStyles,
 } from 'wix-rich-content-common';
-import identity from 'lodash/identity';
-import trimStart from 'lodash/trimStart';
+import { identity, trimStart } from 'lodash';
 import { SRC_TYPE_HTML, SRC_TYPE_URL } from '../constants';
 import styles from '../../statics/styles/HtmlEditPanel.scss';
 

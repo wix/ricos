@@ -1,10 +1,4 @@
-import isEmpty from 'lodash/isEmpty';
-import includes from 'lodash/includes';
-import sortBy from 'lodash/sortBy';
-import negate from 'lodash/negate';
-import last from 'lodash/last';
-import initial from 'lodash/initial';
-import intersection from 'lodash/intersection';
+import { initial, includes, intersection, isEmpty, last, negate, sortBy } from 'lodash';
 import { HEADER_BLOCK } from '../../consts';
 
 const INLINE_HEADER = {
