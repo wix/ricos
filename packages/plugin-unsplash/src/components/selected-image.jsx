@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { mergeStyles, WixUtils } from 'wix-rich-content-common';
@@ -15,7 +16,7 @@ const cont = {
 class SelectedImage extends Component {
   constructor(props) {
     super(props);
-    this.styles = mergeStyles({ styles, theme: props.theme });
+    this.styles = mergeStyles({ styles, theme: props.photo.theme });
     this.isMobile = WixUtils.isMobile();
     this.state = {
       isHovered: false,
@@ -74,6 +75,7 @@ class SelectedImage extends Component {
         className={this.styles.image_container}
         onMouseEnter={this.onMouseEntered}
         onMouseLeave={this.onMouseLeft}
+        key={index}
       >
         {isMobile
           ? this.renderOverlay(photo, onClick, index, 0.0)
@@ -92,7 +94,6 @@ class SelectedImage extends Component {
 }
 
 SelectedImage.propTypes = {
-  theme: PropTypes.object.isRequired,
   index: PropTypes.number.isRequired,
   onClick: PropTypes.func.isRequired,
   photo: PropTypes.object.isRequired,

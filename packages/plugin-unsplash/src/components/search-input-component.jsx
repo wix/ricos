@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
 import { mergeStyles, TextInput } from 'wix-rich-content-common';
@@ -15,11 +16,12 @@ class SearchInputComponent extends PureComponent {
   };
 
   render() {
+    const { t } = this.props;
     return (
       <div className={this.styles.search_container}>
         <SearchIcon className={this.styles.search_icon} />
         <TextInput
-          placeholder={'Search Unsplash ...'}
+          placeholder={t('UnsplashPlugin_search_input_placeholder')}
           onChange={this.onTextChanged.bind(this)}
           theme={this.styles}
         />
@@ -31,6 +33,7 @@ class SearchInputComponent extends PureComponent {
 SearchInputComponent.propTypes = {
   theme: PropTypes.object.isRequired,
   onTextChanged: PropTypes.func,
+  t: PropTypes.func.isRequired,
 };
 
 export default SearchInputComponent;

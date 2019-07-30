@@ -1,8 +1,20 @@
 export const UNSPLASH_TYPE = 'wix-draft-plugin-unsplash';
 export const DEFAULTS = {
   config: {
-    size: 'content',
+    size: 'center',
     alignment: 'center',
+  },
+  image: {
+    alt: '',
+    caption: '',
+    height: 0,
+    isValidUrl: false,
+    nofollow: false,
+    originalUrl: ``,
+    targetBlank: false,
+    url: '',
+    username: '',
+    width: 0,
   },
 };
 

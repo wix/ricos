@@ -1,6 +1,7 @@
+/* eslint-disable no-undef */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { mergeStyles, validate } from 'wix-rich-content-common';
+import { mergeStyles, validate, normalizeUrl } from 'wix-rich-content-common';
 import isEqual from 'lodash/isEqual';
 import schema from '../../statics/data-schema.json';
 import styles from '../../statics/styles/unsplash-viewer.scss';
@@ -18,23 +19,38 @@ class UnsplashViewer extends Component {
     }
   }
 
+  renderCaption = (caption, defaultCaption) => {
+    return <div className={styles.unsplash_imageCaption}>{caption ? caption : defaultCaption}</div>;
+  };
+
   render() {
-    const { componentData, t } = this.props;
+    // console.log('props', this.props);
+    const {
+      componentData: { image },
+      defaultCaption,
+      isFocused,
+    } = this.props;
+
+    const linkAttributes = {
+      rel: image.nofollow ? 'nofollow' : '',
+      target: image.targetBlank ? '_blanck' : '',
+    };
+
     return (
-      <div className={styles.unsplash_player_container}>
-        <div className={styles.unsplash_image_username}>
-          {t('UnsplashPlugin_PhotoBy_Label')} <u>{componentData.image.username}</u>{' '}
-          {t('UnsplashPlugin_on_Label')}
-          <u>{t('UnsplashPlugin_Unsplash_Label')}</u>
+      <a href={normalizeUrl(image.url)} {...linkAttributes}>
+        <div className={styles.unsplash_player_container}>
+          <div className={styles.unsplash_image_username}>
+            Photo By <u>{image.username}</u> on
+            <u> Unsplash</u>
+          </div>
+          <div className={styles.image_container}>
+            <img className={this.styles.unsplash_player} src={image.originalUrl} alt={image.alt} />
+          </div>
         </div>
-        <div className={styles.image_container}>
-          <img
-            className={this.styles.unsplash_player}
-            src={componentData.image.originalUrl}
-            alt="unsplash"
-          />
-        </div>
-      </div>
+        {!image.caption && isFocused
+          ? this.renderCaption(image.caption, defaultCaption)
+          : image.caption && this.renderCaption(image.caption, defaultCaption)}
+      </a>
     );
   }
 }
@@ -46,7 +62,8 @@ UnsplashViewer.propTypes = {
   onStart: PropTypes.func,
   width: PropTypes.string,
   height: PropTypes.string,
-  t: PropTypes.func.isRequired,
+  defaultCaption: PropTypes.string,
+  isFocused: PropTypes.bool,
 };
 
 UnsplashViewer.defaultProps = {

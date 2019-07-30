@@ -4,13 +4,23 @@ import {
   WixUtils,
   DECORATION_MODE,
   decorateComponentWithProps,
+  PluginSettingsIcon,
 } from 'wix-rich-content-common';
 import { MediaReplaceIcon } from '../icons';
 import UnsplashApiInputModal from './unsplashApiInputModal';
+import UnsplashImageSettingsModal from './unsplashImageSettingsModal';
 import { MobileFullScreenCustomStyle, DesktopFlyOutModalStyles } from '../constants';
 import Arrow from './arrow';
 
-export default ({ t, settings }) => {
+const modalStyles = getModalStyles();
+
+export default ({ t, settings, anchorTarget, relValue, uiSettings }) => {
+  const settingsModalProps = {
+    anchorTarget,
+    relValue,
+    ...settings,
+    ...uiSettings,
+  };
   return [
     { keyName: 'sizeOriginal', type: BUTTONS.SIZE_ORIGINAL, mobile: false },
     { keyName: 'sizeSmallCenter', type: BUTTONS.SIZE_SMALL_CENTER, mobile: false },
@@ -20,6 +30,16 @@ export default ({ t, settings }) => {
     { keyName: 'sizeSmallLeft', type: BUTTONS.SIZE_SMALL_LEFT, mobile: false },
     { keyName: 'sizeSimallRight', type: BUTTONS.SIZE_SMALL_RIGHT, mobile: false },
     { keyName: 'separator2', type: BUTTONS.SEPARATOR, mobile: false },
+    {
+      keyName: 'settings',
+      type: BUTTONS.EXTERNAL_MODAL,
+      icon: PluginSettingsIcon,
+      modalElement: decorateComponentWithProps(UnsplashImageSettingsModal, settingsModalProps),
+      modalStyles,
+      t,
+      mobile: true,
+      tooltipTextKey: 'SettingsButton_Tooltip',
+    },
     {
       keyName: 'replace',
       type: BUTTONS.EXTERNAL_MODAL,

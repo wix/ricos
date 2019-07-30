@@ -1,47 +1,78 @@
 {
-  "$id": "http://path/to/schema.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://wix-rich-content/unsplash-content-data-schema.json",
   "type": "object",
   "properties": {
-    "gif": {
-      "$id": "/properties/gif",
+    "image": {
+      "$id": "/properties/image",
       "type": "object",
-      "title": "Unsplash Source",
       "properties": {
-        "originalUrl": {
-          "$id": "/properties/gif/properties/originalUrl",
+        "alt": {
+          "$id": "/properties/image/properties/alt",
           "type": "string",
-          "title": "original gif url",
+          "title": "Alt",
           "default": "",
-          "examples": [
-            ""
-          ]
+          "examples": ["Unsplash"]
         },
-        "stillUrl": {
-          "$id": "/properties/gif/properties/stillUrl",
+        "caption": {
+          "$id": "/properties/image/properties/caption",
           "type": "string",
-          "title": "still gif image url",
+          "title": "Caption",
           "default": "",
-          "examples": [
-            ""
-          ]
+          "examples": ["Unsplash"]
         },
         "height": {
-          "$id": "/properties/gif/properties/height",
-          "type": "integer",
-          "title": "gif height",
-          "default": "",
-          "examples": [
-            "50"
-          ]
+          "$id": "/properties/image/properties/height",
+          "type": "number",
+          "title": "Photo Height",
+          "default": 100
         },
         "width": {
-          "$id": "/properties/gif/properties/width",
-          "type": "integer",
-          "title": "gif width",
-          "default": "",
-          "examples": [
-            "50"
-          ]
+          "$id": "/properties/image/properties/width",
+          "type": "number",
+          "title": "Photo Width",
+          "default": 100
+        },
+        "isValidUrl": {
+          "$id": "/properties/image/properties/isValidUrl",
+          "type": "boolean",
+          "title": "URL Validation",
+          "default": true,
+          "examples": [true, false]
+
+        },
+        "nofollow": {
+          "$id": "/properties/image/properties/nofollow",
+          "type": "boolean",
+          "title": "Rel value",
+          "default": true,
+          "examples": [true, false]
+        },
+        "originalUrl": {
+          "$id": "/properties/image/properties/originalUrl",
+          "type": "string",
+          "title": "Photo URL",
+          "default": "https://images.unsplash.com/photo-1558981403-c5f9899a28bc?ixlib=rb-1.2.1&q=85&fm=jpg&crop=entropy&cs=srgb&ixid=eyJhcHBfaWQiOjY4OTI4fQ"
+        },
+        "targetBlank": {
+          "$id": "/properties/image/properties/targetBlank",
+          "type": "string",
+          "title": "Target Value",
+          "default": true,
+          "examples": [true, false]
+        },
+        "url": {
+          "$id": "/properties/image/properties/url",
+          "type": "string",
+          "title": "url",
+          "default": "https://example-link.com/",
+          "examples": ["google.com"]
+        },
+        "username": {
+          "$id": "/properties/image/properties/username",
+          "type": "string",
+          "title": "username",
+          "default": ""
         }
       }
     },
@@ -52,38 +83,18 @@
         "size": {
           "$id": "/properties/config/properties/size",
           "type": "string",
-          "title": "Size",
-          "default": "large",
-          "examples": [
-            "medium",
-            "small",
-            "large"
-          ]
+          "title": "size",
+          "default": "center"
         },
         "alignment": {
           "$id": "/properties/config/properties/alignment",
           "type": "string",
-          "title": "The Alignment Schema ",
+          "title": "alignment",
           "default": "center",
-          "examples": [
-            "left",
-            "right",
-            "center"
-          ]
-        },
-        "key": {
-          "$id": "/properties/config/properties/key",
-          "type": "string",
-          "title": "The Key Schema ",
-          "default": "",
-          "examples": [
-            "7mib0"
-          ]
+          "examples": ["center", "right", "left"]
         }
       }
     }
   },
-  "required": [
-    "unsplashImage"
-  ]
+  "required": ["url", "rel", "target", "height", "width", "username"]
 }

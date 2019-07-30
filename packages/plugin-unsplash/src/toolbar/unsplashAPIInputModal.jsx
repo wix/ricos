@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { mergeStyles, WixUtils } from 'wix-rich-content-common';
 import SearchInputCompnent from '../components/search-input-component';
 import Navbar from '../components/navbar';
-import ItemsList from '../components/items-list';
+import ImagesList from '../components/images-list';
 import styles from '../../statics/styles/unsplash-api-input-modal.scss';
 
 class UnsplashApiInputModal extends Component {
@@ -24,7 +24,7 @@ class UnsplashApiInputModal extends Component {
     this.props.helpers.closeModal();
   };
   render() {
-    const { theme } = this.props;
+    const { theme, t } = this.props;
     return (
       <div>
         {this.isMobile && <Navbar onBackClicked={this.onBackClickedHandler} {...this.props} />}
@@ -32,8 +32,9 @@ class UnsplashApiInputModal extends Component {
           onTextChanged={this.onTextChanged.bind(this)}
           theme={theme}
           isMobile={this.isMobile}
+          t={t}
         />
-        <ItemsList
+        <ImagesList
           searchTerm={this.state.searchTerm}
           theme={theme}
           isMobile={this.isMobile}
@@ -44,6 +45,10 @@ class UnsplashApiInputModal extends Component {
   }
 }
 
-UnsplashApiInputModal.propTypes = { theme: PropTypes.object, helpers: PropTypes.object };
+UnsplashApiInputModal.propTypes = {
+  theme: PropTypes.object,
+  helpers: PropTypes.object,
+  t: PropTypes.func.isRequired,
+};
 
 export default UnsplashApiInputModal;

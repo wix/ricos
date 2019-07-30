@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
 import Unsplash from 'unsplash-js';
@@ -7,9 +8,9 @@ import { Scrollbars } from 'react-custom-scrollbars';
 import MDSpinner from 'react-md-spinner';
 import { mergeStyles } from 'wix-rich-content-common';
 import SelectedImage from './selected-image';
-import styles from '../../statics/styles/items-list.scss';
+import styles from '../../statics/styles/images-list.scss';
 
-class ItemsList extends PureComponent {
+class ImagesList extends PureComponent {
   constructor(props) {
     super(props);
     this.styles = mergeStyles({ styles, theme: props.theme });
@@ -44,13 +45,14 @@ class ItemsList extends PureComponent {
   };
 
   onClick = image => {
+    const { componentData, helpers, pubsub, onConfirm } = this.props;
     const imageObj = {
+      ...componentData.image,
       originalUrl: image.photo.full,
       height: parseInt(image.photo.height),
       width: parseInt(image.photo.width),
       username: image.photo.username,
     };
-    const { componentData, helpers, pubsub, onConfirm } = this.props;
     if (onConfirm) {
       onConfirm({ ...componentData, image: imageObj });
     } else {
@@ -124,7 +126,7 @@ class ItemsList extends PureComponent {
   };
 
   render() {
-    const { isMobile } = this.props;
+    const { isMobile, t } = this.props;
     const { items } = this.state;
     const loader = (
       <MDSpinner
@@ -173,7 +175,7 @@ class ItemsList extends PureComponent {
           </Scrollbars>
         ) : (
           <div className={styles.unsplash_selecter_error_msg}>
-            {this.props.t('UnsplashPlugin_ApiErrorMsg')}
+            {t('UnsplashPlugin_ApiErrorMsg')}
           </div>
         )}
       </div>
@@ -181,17 +183,17 @@ class ItemsList extends PureComponent {
   }
 }
 
-ItemsList.propTypes = {
+ImagesList.propTypes = {
   theme: PropTypes.object.isRequired,
   searchTerm: PropTypes.string,
   componentData: PropTypes.object,
   helpers: PropTypes.object,
   pubsub: PropTypes.object,
-  onConfirm: PropTypes.fun,
-  t: PropTypes.fun,
+  onConfirm: PropTypes.any,
+  t: PropTypes.func,
   isMobile: PropTypes.bool.isRequired,
   applicationId: PropTypes.string.isRequired,
   secretKey: PropTypes.string.isRequired,
 };
 
-export default ItemsList;
+export default ImagesList;

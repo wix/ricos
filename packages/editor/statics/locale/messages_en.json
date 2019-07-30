@@ -160,6 +160,8 @@
   "UnsplashPlugin_PhotoBy_Label": "Photo by",
   "UnsplashPlugin_Unsplash_Label": "Unsplash",
   "UnsplashPlugin_on_Label": "on ",
+  "UnsplashPlugin_navbar_header_Label": "Choose an image",
+  "UnsplashPlugin_search_input_placeholder": "Search Unsplash ...",
   "ReplaceUnsplashButton_Tooltip": "Replace",
   "TextAlignmentButton_Tooltip": "Alignment",
   "TextLinkButton_Tooltip": "Link",

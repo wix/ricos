@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
 import { mergeStyles } from 'wix-rich-content-common';
@@ -18,6 +19,7 @@ class Navbar extends PureComponent {
     this.props.onBackClicked();
   };
   render() {
+    const { t } = this.props;
     return (
       <div className={this.styles.navbar_container}>
         <div
@@ -29,7 +31,7 @@ class Navbar extends PureComponent {
         >
           <div className={this.styles.back_arrow_button} />
         </div>
-        <div className={this.styles.navbar_title}>Choose an image</div>
+        <div className={this.styles.navbar_title}>{t('UnsplashPlugin_navbar_header_Label')}</div>
       </div>
     );
   }
@@ -38,6 +40,7 @@ class Navbar extends PureComponent {
 Navbar.propTypes = {
   theme: PropTypes.object.isRequired,
   onBackClicked: PropTypes.func.isRequired,
+  t: PropTypes.func.isRequired,
 };
 
 export default Navbar;

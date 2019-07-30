@@ -26,8 +26,19 @@ class UnsplashComponent extends Component {
   };
 
   renderPlayer = () => {
-    const { componentData, t } = this.props;
-    return <UnsplashViewer ref={this.setPlayer} componentData={componentData} t={t} />;
+    const {
+      componentData,
+      t,
+      blockProps: { isFocused },
+    } = this.props;
+    return (
+      <UnsplashViewer
+        ref={this.setPlayer}
+        componentData={componentData}
+        defaultCaption={t('ImageViewer_Caption')}
+        isFocused={isFocused}
+      />
+    );
   };
 
   onKeyDown = (e, handler) => {
