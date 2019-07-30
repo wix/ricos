@@ -10,6 +10,8 @@
 ## [Unreleased]
 - `file-upload`
   - [#345](https://github.com/wix-incubator/rich-content/pull/345) handle empty file name
+- `editor`
+  - [#349](https://github.com/wix-incubator/rich-content/pull/349) Add rtlcss ignore directives
 <hr/>
 
 ## 4.0.10 (Jul 29, 2019)
