@@ -147,6 +147,7 @@ class ImagesList extends PureComponent {
         username:
           image.user.first_name + ' ' + (image.user.last_name === null ? '' : image.user.last_name),
         theme: this.props.theme,
+        isMobile,
       });
     });
     return (

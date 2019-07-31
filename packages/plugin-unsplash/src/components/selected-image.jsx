@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { mergeStyles, WixUtils } from 'wix-rich-content-common';
+import { mergeStyles } from 'wix-rich-content-common';
 import styles from '../../statics/styles/selected-image.scss';
 const imgStyle = {
   transition: 'transform .135s cubic-bezier(0.0,0.0,0.2,1),opacity linear .15s',
@@ -17,7 +17,6 @@ class SelectedImage extends Component {
   constructor(props) {
     super(props);
     this.styles = mergeStyles({ styles, theme: props.photo.theme });
-    this.isMobile = WixUtils.isMobile();
     this.state = {
       isHovered: false,
     };
@@ -52,8 +51,13 @@ class SelectedImage extends Component {
   };
 
   render() {
-    const { index, onClick, photo, margin } = this.props;
-    const { isMobile } = this;
+    const {
+      index,
+      onClick,
+      photo,
+      margin,
+      photo: { isMobile },
+    } = this.props;
     const photoObj = {
       src: photo.full,
       height: photo.height,
