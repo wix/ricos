@@ -5,7 +5,7 @@ import {
   SizeSmallCenterIcon,
 } from 'wix-rich-content-common';
 import { MapSettingsModal } from './MapSettingsModal';
-import get from 'lodash/get';
+import { get } from 'lodash';
 import { DEFAULTS } from '../constants';
 
 const getAlignmentButtonProps = ({ store, componentData }) => {

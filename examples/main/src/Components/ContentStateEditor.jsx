@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import MonacoEditor from 'react-monaco-editor';
-import debounce from 'lodash/debounce';
+import { debounce } from 'lodash';
 import { getContentStateSchema } from 'wix-rich-content-common';
 
 import dividerSchema from 'wix-rich-content-plugin-divider/dist/statics/data-schema.json';

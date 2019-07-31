@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withGoogleMap, GoogleMap, Marker, InfoWindow } from 'react-google-maps';
 import ReactGoogleMapLoader from 'react-google-maps-loader';
-import isEqual from 'lodash/isEqual';
+import { isEqual } from 'lodash';
 import { validate, Context } from 'wix-rich-content-common';
 import schema from '../statics/data-schema.json';
 

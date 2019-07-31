@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { debounce } from 'lodash';
 import { DISPLAY_MODE } from 'wix-rich-content-common';
 import DraftOffsetKey from '@wix/draft-js/lib/DraftOffsetKey';
 import Styles from '../../../../statics/styles/side-toolbar-wrapper.scss';
-import debounce from 'lodash/debounce';
 
 export default class SideToolbar extends Component {
   static propTypes = {

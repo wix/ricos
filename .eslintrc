@@ -65,6 +65,7 @@
     "no-param-reassign": "warn",
     "jsx-a11y/label-has-for": "off",
     "jsx-a11y/aria-proptypes": "off",
-    "prettier/prettier": "error"
+    "prettier/prettier": "error",
+    "lodash/import-scope": [2, "member"],
   }
 }

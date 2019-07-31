@@ -10,11 +10,82 @@
 ## [Unreleased]
 <hr/>
 
+## 4.0.11 (Jul 31, 2019)
+### :bug: Bug Fix
+- `file-upload`
+  - [#345](https://github.com/wix-incubator/rich-content/pull/345) handle empty file name
+- `html`
+  - [c2b2101d](https://github.com/wix-incubator/rich-content/commit/c2b2101d) fix height on iphone
+<hr/>
+
+## 4.0.10 (Jul 29, 2019)
+### :bug: Bug Fix
+- `image`
+  - [#342](https://github.com/wix-incubator/rich-content/pull/342) in editor image is not show when helpers are provided
+- `viewer`
+  - [139f023](https://github.com/wix-incubator/rich-content/commit/139f023) atomic blocks are no longer rendered in `<p>` tags
+- `file-upload`
+  - [#343](https://github.com/wix-incubator/rich-content/pull/343) improve name function
+### :house: Internal
+- `general`
+  - [#344](https://github.com/wix-incubator/rich-content/pull/344) import destructed members from `lodash`
+<hr/>
+
+## 4.0.9 (Jul 25, 2019)
+### :bug: Bug Fix
+- `html`
+  - [#341](https://github.com/wix-incubator/rich-content/pull/341) fix ssr
+- `image`
+  - [#341](https://github.com/wix-incubator/rich-content/pull/341) fix ssr
+<hr/>
+
+## 4.0.8 (Jul 24, 2019)
+### :bug: Bug Fix
+- `html`
+  - [#338](https://github.com/wix-incubator/rich-content/pull/338) fix performance.now() breaks ssr 
+- `file-upload`
+  - [#340](https://github.com/wix-incubator/rich-content/pull/340) unique ids for icons
+<hr/>
+
+## 4.0.7 (Jul 24, 2019)
+### :boom: Breaking Change
+- `file-upload`
+  - [#335](https://github.com/wix-incubator/rich-content/pull/335) visual update, styling and class name changes
+### :bug: Bug Fix
+- `file-upload`
+  - [aa3a4c6d](https://github.com/wix-incubator/rich-content/commit/aa3a4c6d) redundant container removed (in the Viewer)
+### :house: Internal
+- `general`
+  - [#319](https://github.com/wix-incubator/rich-content/pull/319) lock dependencies
+  - [15de167](https://github.com/wix-incubator/rich-content/commit/15de167) upgrade to node 12
+  - [#337](https://github.com/wix-incubator/rich-content/pull/337) upgrade to eslint 6
+<hr/>
+
+## 4.0.6 (Jul 15, 2019)
+### :rocket: New Feature
+- `common`
+  - [#333](https://github.com/wix-incubator/rich-content/pull/333) `color-picker` layout now rendered by a component consumer via the `children` prop
+- `file-upload`
+  - [#332](https://github.com/wix-incubator/rich-content/pull/332) a11y: download triggered on Enter key
+### :bug: Bug Fix
+- `common`
+  - [bbfc9038](https://github.com/wix-incubator/rich-content/commit/bbfc9038) `Context`: default value provided
+- `editor`
+  - [45968d56](https://github.com/wix-incubator/rich-content/commit/45968d56) static toolbar displays tooltips
+- `map`
+  - [4c4fc344](https://github.com/wix-incubator/rich-content/commit/4c4fc344) search icon fixed
+### :house: Internal
+- `text-color`
+  - [#333](https://github.com/wix-incubator/rich-content/pull/333) `color-picker` layout rendered by a `text-color-panel`
+- `general`
+  - [e791fc1b](https://github.com/wix-incubator/rich-content/commit/e791fc1b) isMobile prop passed to internal plugin modals
+<hr/>
+
 ## 4.0.5 (Jul 10, 2019)
 ### :bug: Bug Fix
 - `editor`
   - [#331](https://github.com/wix-incubator/rich-content/pull/331) bad import of current version from common
-  - [#331](https://github.com/wix-incubator/rich-content/pull/331) import only package.json vertios. Instead of the whole package.json.   
+  - [#331](https://github.com/wix-incubator/rich-content/pull/331) import only package.json version rather the whole package.json
 
 ## 4.0.3 (Jul 10, 2019)
 ### :rocket: New Feature
@@ -50,6 +121,8 @@
   - [80d4880](https://github.com/wix-incubator/rich-content/commit/80d4880) replaced ~~`HashTagStrategy`~~ with `HashTagDecorator` please check [`ViewerPlugins.jsx`](https://github.com/wix-incubator/rich-content/blob/develop/examples/main/src/viewer/ViewerPlugins.jsx) for an example of how to implement the new decorator.
 - `general`
   - [#313](https://github.com/wix-incubator/rich-content/pull/313) add versioning to the ContentState. Allows the removing linkify decorator.
+- `hashtag`
+  - [80d4880](https://github.com/wix-incubator/rich-content/commit/80d4880) replaced ~~`HashTagStrategy`~~ with `HashTagDecorator` please check [`ViewerPlugins.jsx`](https://github.com/wix-incubator/rich-content/blob/develop/examples/main/src/viewer/ViewerPlugins.jsx) for an example of how to implement the new decorator.
 - `link`
   - [#315](https://github.com/wix-incubator/rich-content/pull/315) remove autolink config option (was never functional)
 ### :rocket: New Feature

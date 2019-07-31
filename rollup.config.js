@@ -11,7 +11,7 @@ import json from 'rollup-plugin-json';
 import postcss from 'rollup-plugin-postcss';
 import postcssURL from 'postcss-url';
 import pascalCase from 'pascal-case';
-import cloneDeep from 'lodash/cloneDeep';
+import { cloneDeep } from 'lodash';
 import nodeGlobalsPolyfill from 'rollup-plugin-node-globals';
 import { externals, excludedExternals } from './rollup.externals';
 

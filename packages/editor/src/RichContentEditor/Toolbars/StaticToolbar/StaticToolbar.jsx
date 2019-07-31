@@ -2,11 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Measure from 'react-measure';
-import { DISPLAY_MODE } from 'wix-rich-content-common';
+import { debounce, identity, pickBy } from 'lodash';
+import { DISPLAY_MODE, Context, TooltipHost } from 'wix-rich-content-common';
 import Styles from '../../../../statics/styles/static-toolbar.scss';
-import debounce from 'lodash/debounce';
-import pickBy from 'lodash/pickBy';
-import identity from 'lodash/identity';
 
 const displayOptionStyles = {
   [DISPLAY_MODE.NORMAL]: {},
@@ -36,6 +34,10 @@ export default class StaticToolbar extends React.PureComponent {
     }),
     uiSettings: PropTypes.object,
     toolbarDecorationFn: PropTypes.func,
+    renderTooltips: PropTypes.bool,
+    locale: PropTypes.string,
+    setEditorState: PropTypes.func,
+    config: PropTypes.object,
   };
 
   static defaultProps = {
@@ -43,6 +45,7 @@ export default class StaticToolbar extends React.PureComponent {
       displayMode: DISPLAY_MODE.NORMAL,
     },
     toolbarDecorationFn: () => null,
+    createContext: false,
   };
 
   constructor(props) {
@@ -176,6 +179,10 @@ export default class StaticToolbar extends React.PureComponent {
       offset,
       uiSettings,
       displayOptions,
+      renderTooltips,
+      locale,
+      setEditorState,
+      config,
     } = this.props;
     const { extendContent: ExtendContent } = this.state;
 
@@ -209,29 +216,44 @@ export default class StaticToolbar extends React.PureComponent {
       'data-hook': dataHook,
     };
 
-    if (this.ToolbarDecoration) {
-      const { ToolbarDecoration } = this;
+    const ToolbarDecoration = this.ToolbarDecoration ? this.ToolbarDecoration : 'div';
+
+    if (renderTooltips) {
+      const context = {
+        isMobile,
+        theme,
+        t,
+        anchorTarget,
+        relValue,
+        locale,
+        helpers,
+        config,
+        setEditorState,
+      };
       return (
-        <ToolbarDecoration {...props}>
-          {this.renderToolbarContent(childrenProps)}
-          {ExtendContent && (
-            <div className={extendClassNames}>
-              <ExtendContent {...childrenProps} />
-            </div>
-          )}
-        </ToolbarDecoration>
+        <Context.Provider value={context}>
+          <ToolbarDecoration {...props}>
+            {this.renderToolbarContent(childrenProps)}
+            {ExtendContent && (
+              <div className={extendClassNames}>
+                <ExtendContent {...childrenProps} />
+              </div>
+            )}
+          </ToolbarDecoration>
+          <TooltipHost />
+        </Context.Provider>
       );
     }
 
     return (
-      <div {...props}>
+      <ToolbarDecoration {...props}>
         {this.renderToolbarContent(childrenProps)}
         {ExtendContent && (
           <div className={extendClassNames}>
             <ExtendContent {...childrenProps} />
           </div>
         )}
-      </div>
+      </ToolbarDecoration>
     );
   }
 }

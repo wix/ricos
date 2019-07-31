@@ -149,7 +149,7 @@ body {
 
           .content {
             position: relative;
-            top: $headerHeight;
+            // top: $headerHeight;
             height: calc(100% - #{$headerHeight});
             box-sizing: border-box;
             padding-bottom: 10px;
@@ -209,6 +209,7 @@ body {
 
         .splitter {
           cursor: column-resize;
+          z-index: 5;
           width: 3px;
           background: $secondaryColor;
           border-right: 1px solid $primaryColor;

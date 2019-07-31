@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { AtomicBlockUtils, EditorState, SelectionState } from '@wix/draft-js';
-import cloneDeep from 'lodash/cloneDeep';
-import isEmpty from 'lodash/isEmpty';
+import { cloneDeep, isEmpty } from 'lodash';
 import classNames from 'classnames';
 import { mergeStyles } from '../Utils/mergeStyles';
 import FileInput from '../Components/FileInput';
@@ -12,7 +11,7 @@ import styles from '../../statics/styles/toolbar-button.scss';
 /**
  * createBaseInsertPluginButton
  */
-export default ({ blockType, button, helpers, pubsub, settings, t }) => {
+export default ({ blockType, button, helpers, pubsub, settings, t, isMobile }) => {
   class InsertPluginButton extends React.PureComponent {
     constructor(props) {
       super(props);
@@ -169,6 +168,7 @@ export default ({ blockType, button, helpers, pubsub, settings, t }) => {
           pubsub,
           helpers,
           t,
+          isMobile,
         });
       }
     };

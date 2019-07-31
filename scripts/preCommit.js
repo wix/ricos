@@ -3,7 +3,7 @@
 const path = require('path');
 const execSync = require('child_process').execSync;
 const chalk = require('chalk');
-const isEmpty = require('lodash/isEmpty');
+const isEmpty = require('lodash').isEmpty;
 
 const baseDir = 'packages/';
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { EditorState } from '@wix/draft-js';
-import isEmpty from 'lodash/isEmpty';
+import { isEmpty } from 'lodash';
 import {
   insertLinkAtCurrentSelection,
   getLinkDataInSelection,

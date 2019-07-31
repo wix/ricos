@@ -42,6 +42,7 @@ const createEditorToolbars = ({
   getToolbarSettings = () => [],
   uiSettings,
   config,
+  locale,
 }) => {
   const { pluginButtons, pluginTextButtons } = buttons;
 
@@ -135,6 +136,7 @@ const createEditorToolbars = ({
           helpers,
           config,
           pubsub,
+          locale,
           refId,
           t,
         });

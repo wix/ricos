@@ -3,9 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { EditorState, convertFromRaw } from '@wix/draft-js';
 import Editor from 'draft-js-plugins-editor';
-import get from 'lodash/get';
-import merge from 'lodash/merge';
-import includes from 'lodash/includes';
+import { get, includes, merge } from 'lodash';
 import Measure from 'react-measure';
 import { translate } from 'react-i18next';
 import createEditorToolbars from './Toolbars';
@@ -115,6 +113,7 @@ class RichContentEditor extends Component {
       t,
       config = {},
       textAlignment,
+      locale,
     } = this.props;
     const { theme } = this.state;
     const buttons = { pluginButtons, pluginTextButtons };
@@ -135,6 +134,7 @@ class RichContentEditor extends Component {
       getToolbarSettings: config.getToolbarSettings,
       uiSettings: config.uiSettings,
       config,
+      locale,
     });
   }
 

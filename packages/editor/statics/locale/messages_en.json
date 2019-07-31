@@ -1,5 +1,6 @@
 {
   "FileUploadInsertButton_tooltip": "Add a File Upload",
+  "FileUploadReplaceButton_tooltip": "Replace File",
   "TextColorButton_Tooltip": "Text Color",
   "ColorPickerButtonLabel_Cancel": "Cancel",
   "ColorPickerButtonLabel_Update": "Update",

@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import JSONInput from 'react-json-editor-ajrm';
-import get from 'lodash/get';
-import set from 'lodash/set';
+import { get, set } from 'lodash';
 
 class RichContentRawDataViewer extends Component {
   constructor(props) {

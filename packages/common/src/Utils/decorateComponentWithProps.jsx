@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import getDisplayName from './getDisplayName';
 
-/* eslint-disable space-before-keywords */
+/* eslint-disable keyword-spacing */
 export default (EmbeddedComponent, props) =>
   class extends Component {
     static displayName = `Decorated(${getDisplayName(EmbeddedComponent)})`;
