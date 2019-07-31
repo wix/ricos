@@ -1,7 +1,6 @@
 import {
   BUTTONS,
   getModalStyles,
-  WixUtils,
   DECORATION_MODE,
   decorateComponentWithProps,
   PluginSettingsIcon,
@@ -14,13 +13,15 @@ import Arrow from './arrow';
 
 const modalStyles = getModalStyles();
 
-export default ({ t, settings, anchorTarget, relValue, uiSettings }) => {
+export default ({ t, settings, anchorTarget, relValue, uiSettings, isMobile }) => {
   const settingsModalProps = {
     anchorTarget,
     relValue,
+    isMobile,
     ...settings,
     ...uiSettings,
   };
+
   return [
     { keyName: 'sizeOriginal', type: BUTTONS.SIZE_ORIGINAL, mobile: false },
     { keyName: 'sizeSmallCenter', type: BUTTONS.SIZE_SMALL_CENTER, mobile: false },
@@ -45,7 +46,7 @@ export default ({ t, settings, anchorTarget, relValue, uiSettings }) => {
       type: BUTTONS.EXTERNAL_MODAL,
       icon: MediaReplaceIcon,
       modalElement: decorateComponentWithProps(UnsplashApiInputModal, settings),
-      modalStyles: WixUtils.isMobile()
+      modalStyles: isMobile
         ? getModalStyles({ customStyles: MobileFullScreenCustomStyle, fullScreen: true })
         : null,
       modalStylesFn: ({ buttonRef }) => {

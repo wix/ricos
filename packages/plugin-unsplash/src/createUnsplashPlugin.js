@@ -5,7 +5,16 @@ import { createBasePlugin } from 'wix-rich-content-common';
 
 const createUnsplashPlugin = (config = {}) => {
   const type = UNSPLASH_TYPE;
-  const { helpers, t, anchorTarget, relValue, [type]: settings = {}, uiSettings, ...rest } = config;
+  const {
+    helpers,
+    t,
+    anchorTarget,
+    relValue,
+    [type]: settings = {},
+    uiSettings,
+    isMobile,
+    ...rest
+  } = config;
   return createBasePlugin({
     component: Component,
     type: UNSPLASH_TYPE,
@@ -16,6 +25,7 @@ const createUnsplashPlugin = (config = {}) => {
       t,
       uiSettings,
       settings,
+      isMobile,
     }),
     helpers,
     settings,
@@ -23,6 +33,7 @@ const createUnsplashPlugin = (config = {}) => {
     anchorTarget,
     relValue,
     uiSettings,
+    isMobile,
     ...rest,
   });
 };

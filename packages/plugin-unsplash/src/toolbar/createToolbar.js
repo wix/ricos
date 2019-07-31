@@ -8,6 +8,7 @@ export default function createToolbar({
   relValue,
   uiSettings,
   settings,
+  isMobile,
 }) {
   return {
     InlineButtons: createInlineButtons({
@@ -17,8 +18,9 @@ export default function createToolbar({
       relValue,
       uiSettings,
       settings,
+      isMobile,
     }),
-    InsertButtons: createInsertButtons({ helpers, t, settings }),
+    InsertButtons: createInsertButtons({ helpers, t, settings, isMobile }),
     name: 'unsplash',
   };
 }

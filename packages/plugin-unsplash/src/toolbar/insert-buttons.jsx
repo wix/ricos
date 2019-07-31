@@ -1,6 +1,5 @@
 import {
   TOOLBARS,
-  WixUtils,
   DECORATION_MODE,
   decorateComponentWithProps,
   getModalStyles,
@@ -10,19 +9,20 @@ import UnsplashApiInputModal from './unsplashApiInputModal';
 import Arrow from './arrow';
 import { InsertPluginIcon } from '../icons';
 
-export default ({ helpers, t, settings, componentData, insertToolbars }) => {
+export default ({ helpers, t, settings, componentData, insertToolbars, isMobile }) => {
   return [
     {
       type: 'modal',
       name: 'PhotosByUnsplash',
-      tooltipText: WixUtils.isMobile()
+      tooltipText: isMobile
         ? t('UnsplashPlugin_InsertButton_Tooltip_Mobile')
         : t('UnsplashPlugin_InsertButton_Tooltip_Desktop'),
+      mobile: true,
       Icon: InsertPluginIcon,
       componentData: componentData || DEFAULTS,
       toolbars: insertToolbars || [TOOLBARS.FOOTER],
-      modalElement: decorateComponentWithProps(UnsplashApiInputModal, settings),
-      modalStyles: WixUtils.isMobile()
+      modalElement: decorateComponentWithProps(UnsplashApiInputModal, { ...settings, isMobile }),
+      modalStyles: isMobile
         ? getModalStyles({ customStyles: MobileFullScreenCustomStyle, fullScreen: true })
         : null,
       modalStylesFn: ({ buttonRef }) => {
