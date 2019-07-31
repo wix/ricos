@@ -56,7 +56,7 @@
         },
         "targetBlank": {
           "$id": "/properties/image/properties/targetBlank",
-          "type": "string",
+          "type": "boolean",
           "title": "Target Value",
           "default": true,
           "examples": [true, false]
@@ -95,6 +95,5 @@
         }
       }
     }
-  },
-  "required": ["url", "rel", "target", "height", "width", "username"]
+  }
 }
