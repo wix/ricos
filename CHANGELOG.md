@@ -8,6 +8,9 @@
 > - :house: [Internal]
 
 ## [Unreleased]
+### :house: Internal
+- `example`
+  - [#350](https://github.com/wix-incubator/rich-content/pull/350) ability to change locale 
 <hr/>
 
 ## 4.0.11 (Jul 31, 2019)

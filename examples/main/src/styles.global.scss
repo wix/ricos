@@ -1,6 +1,7 @@
 $headerHeight: 42px;
 $iconSize: 20px;
 $borderRadius: 4px;
+$transitionLength: 0.3s;
 $primaryColor: lightslategrey;
 $secondaryColor: #8495A6;
 $iconColor: white;
@@ -106,16 +107,19 @@ body {
 
               &:hover {
                 .dropdown {
-                  display: block;
+                  visibility: visible;
+                  opacity: 1;
                 }
               }
 
               .dropdown {
-                display: none;
+                visibility: hidden;
+                opacity: 0;
                 position: absolute;
                 top: $headerHeight;
                 right: 5px;
                 background: $primaryColor;
+                transition: all $transitionLength ease;
                 z-index: 3;
                 box-shadow: -1px 6px 8px -4px rgba(0, 0, 0, 0.75);
                 border-radius: 0 0 $borderRadius $borderRadius;
@@ -126,11 +130,17 @@ body {
                   list-style: none;
 
                   li {
+                    position: relative;
                     white-space: nowrap;
                     padding: 8px 10px;
 
                     &:hover {
                       background: #91A2B3;
+
+                      &>ul {
+                        visibility: visible;
+                        opacity: 1;
+                      }
 
                       &:last-child {
                         border-radius: 0 0 $borderRadius $borderRadius;
@@ -140,10 +150,32 @@ body {
                     &:last-child {
                       border-radius: 0 0 $borderRadius $borderRadius;
                     }
+
+                    &.active {
+                      background: #67727d;
+                    }
+
+                    ul {
+                      position: absolute;
+                      top: 0;
+                      right: 100%;
+                      overflow: auto;
+                      visibility: hidden;
+                      opacity: 0;
+                      max-height: 230px;
+                      transition: all $transitionLength ease;
+                      background: $primaryColor;
+                      box-shadow: -1px 6px 8px -4px rgba(0, 0, 0, 0.75);
+                      border-radius: $borderRadius 0 $borderRadius $borderRadius;
+
+                      &:hover {
+                        visibility: visible;
+                        opacity: 1;
+                      }
+                    }
                   }
                 }
               }
-
             }
           }
 
