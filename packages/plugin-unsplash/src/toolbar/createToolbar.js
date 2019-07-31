@@ -10,7 +10,14 @@ export default function createToolbar({
   settings,
 }) {
   return {
-    InlineButtons: createInlineButtons({ helpers, t, anchorTarget, relValue, uiSettings }),
+    InlineButtons: createInlineButtons({
+      helpers,
+      t,
+      anchorTarget,
+      relValue,
+      uiSettings,
+      settings,
+    }),
     InsertButtons: createInsertButtons({ helpers, t, settings }),
     name: 'unsplash',
   };
