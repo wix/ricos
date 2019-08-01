@@ -11,6 +11,7 @@ class SoundCloudViewer extends Component {
   constructor(props) {
     super(props);
     validate(props.componentData, schema);
+    this.state = { playing: false };
   }
 
   componentWillReceiveProps(nextProps) {
@@ -27,6 +28,9 @@ class SoundCloudViewer extends Component {
         className={classNames(this.styles.soundCloud_player)}
         url={matchSoundCloudUrl(componentData.src)}
         {...rest}
+        playing={this.context.disabled ? false : this.state.playing}
+        onPlay={() => this.setState({ playing: true })}
+        onPause={() => this.setState({ playing: false })}
       />
     );
   }
