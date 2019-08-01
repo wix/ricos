@@ -39,7 +39,12 @@ class VideoViewer extends Component {
     const { componentData, settings, ...rest } = this.props;
     this.styles = this.styles || mergeStyles({ styles, theme: this.context.theme });
     const url = this.normalizeUrl(getVideoSrc(componentData.src, settings));
-    const props = { ...rest, url, onReady: this.fixVideoRatio };
+    const props = {
+      ...rest,
+      url,
+      onReady: this.fixVideoRatio,
+      disabled: this.context.disabled,
+    };
     return <ReactPlayerWrapper className={classNames(this.styles.video_player)} {...props} />;
   }
 }
