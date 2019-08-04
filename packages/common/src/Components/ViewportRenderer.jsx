@@ -9,11 +9,13 @@ class ViewportRenderer extends Component {
   static propTypes = {
     children: PropTypes.node.isRequired,
     placeholderStyle: PropTypes.object,
+    containerStyle: PropTypes.object,
     alwaysRenderChildren: PropTypes.bool,
   };
 
   static defaultProps = {
     placeholderStyle: {},
+    containerStyle: {},
     alwaysRenderChildren: false,
   };
 
@@ -43,13 +45,19 @@ class ViewportRenderer extends Component {
   };
   render() {
     const { shouldRenderChildren } = this.state;
-    const { children, placeholderStyle } = this.props;
+    const { children, placeholderStyle, containerStyle } = this.props;
     const { theme } = this.context;
     this.styles = this.styles || mergeStyles({ styles, theme });
+
     return (
-      <Waypoint onEnter={this.onEnterViewport} onLeave={this.onLeaveViewport}>
+      <Waypoint
+        fireOnRapidScroll={false}
+        debug={false}
+        onEnter={this.onEnterViewport}
+        onLeave={this.onLeaveViewport}
+      >
         {shouldRenderChildren ? (
-          <div>{children}</div>
+          <div style={containerStyle}>{children}</div>
         ) : (
           <div className={this.styles.placeholder} style={placeholderStyle} />
         )}
