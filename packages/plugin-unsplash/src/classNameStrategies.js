@@ -1,7 +1,5 @@
 import classNames from 'classnames';
-import upperFirst from 'lodash/upperFirst';
-import camelCase from 'lodash/camelCase';
-import isNumber from 'lodash/isNumber';
+import { upperFirst, camelCase, isNumber } from 'lodash';
 
 export const alignmentClassName = (componentData, theme, styles, isMobile) => {
   const { alignment, size } = componentData.config || {};
