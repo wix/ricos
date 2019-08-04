@@ -24,7 +24,6 @@ class UnsplashViewer extends Component {
   };
 
   render() {
-    // console.log('props', this.props);
     const {
       componentData: { image },
       defaultCaption,
