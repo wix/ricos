@@ -39,10 +39,10 @@ export default class ReactPlayerWrapper extends Component {
     }
     return (
       <ReactPlayer
-        {...this.props}
         playing={this.state.playing}
         onPlay={() => this.setState({ playing: true })}
         onPause={() => this.setState({ playing: false })}
+        {...this.props}
       />
     );
   }
