@@ -14,18 +14,17 @@ export default class RichContentViewer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      raw: this.getInitialState(props.initialState),
+      raw: RichContentViewer.getInitialState(props.initialState),
+      contextualData: this.initContext(),
     };
     this.styles = mergeStyles({ styles, theme: props.theme });
-
-    this.initContext();
   }
 
-  getInitialState = initialState =>
-    initialState
-      ? normalizeInitialState(initialState, {
-          anchorTarget: this.props.anchorTarget,
-          relValue: this.props.relValue,
+  static getInitialState = props =>
+    props.initialState
+      ? normalizeInitialState(props.initialState, {
+          anchorTarget: props.anchorTarget,
+          relValue: props.relValue,
         })
       : {};
 
@@ -40,7 +39,7 @@ export default class RichContentViewer extends Component {
       locale,
       disabled,
     } = this.props;
-    this.contextualData = {
+    return {
       theme,
       isMobile,
       anchorTarget,
@@ -52,15 +51,16 @@ export default class RichContentViewer extends Component {
     };
   };
 
-  componentWillReceiveProps(nextProps) {
-    if (this.props.initialState !== nextProps.initialState) {
-      this.setState({ raw: this.getInitialState(nextProps.initialState) });
-    }
+  static getDerivedStateFromProps(props, state) {
+    return {
+      raw: RichContentViewer.getInitialState(props),
+      contextualData: { ...state.contextualData, disabled: props.disabled },
+    };
   }
 
   render() {
     const { styles } = this;
-    const { textDirection, typeMappers, decorators, inlineStyleMappers, disabled } = this.props;
+    const { textDirection, typeMappers, decorators, inlineStyleMappers } = this.props;
 
     const wrapperClassName = classNames(styles.wrapper, {
       [styles.desktop]: !this.props.platform || this.props.platform === 'desktop',
@@ -69,21 +69,19 @@ export default class RichContentViewer extends Component {
       [styles.rtl]: textDirection === 'rtl',
     });
 
-    this.contextualData = { ...this.contextualData, disabled };
-
     const output = convertToReact(
       this.state.raw,
       styles,
       textDirection,
       typeMappers,
-      this.contextualData,
+      this.state.contextualData,
       decorators,
       inlineStyleMappers
     );
 
     return (
       <div className={wrapperClassName}>
-        <Context.Provider value={this.contextualData}>
+        <Context.Provider value={this.state.contextualData}>
           <div className={editorClassName}>{output}</div>
           <AccessibilityListener />
         </Context.Provider>
