@@ -16,6 +16,8 @@ class VideoViewer extends Component {
     validate(props.componentData, schema);
     this.state = {
       isPlaying: false,
+      isReady: false,
+      placeholderStyle: {},
     };
   }
 
@@ -37,11 +39,25 @@ class VideoViewer extends Component {
     const wrapper = ReactDOM.findDOMNode(this).parentNode;
     const ratio = this.getVideoRatio(wrapper);
     wrapper.style['padding-bottom'] = ratio * 100 + '%';
+    this.setState({
+      placeholderStyle: {
+        height: wrapper.clientHeight,
+      },
+    });
   };
 
   onStart = () => {
     this.setState({ isPlaying: true });
     this.props.onStart();
+  };
+
+  onReady = () => {
+    if (!this.state.isReady) {
+      this.fixVideoRatio();
+      this.setState({
+        isReady: true,
+      });
+    }
   };
 
   onEnded = () => this.setState({ isPlaying: false });
@@ -50,9 +66,15 @@ class VideoViewer extends Component {
     const { componentData, settings, ...rest } = this.props;
     this.styles = this.styles || mergeStyles({ styles, theme: this.context.theme });
     const url = this.normalizeUrl(getVideoSrc(componentData.src, settings));
-    const props = { ...rest, url, onReady: this.fixVideoRatio };
+    const props = { ...rest, url, onReady: this.onReady };
+    const { isReady, isPlaying, placeholderStyle } = this.state;
+
     return (
-      <ViewportRenderer alwaysRenderChildren={this.state.isPlaying}>
+      <ViewportRenderer
+        alwaysRenderChildren={isPlaying || !isReady}
+        placeholderStyle={placeholderStyle}
+        containerStyle={placeholderStyle}
+      >
         <ReactPlayerWrapper
           className={classNames(this.styles.video_player)}
           {...props}

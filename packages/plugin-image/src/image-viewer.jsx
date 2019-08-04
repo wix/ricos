@@ -221,30 +221,29 @@ class ImageViewer extends React.Component {
 
     // TODO: optimize this calc
     if (this.state.container && data.src) {
-      this.placeholderHeight =
-        this.placeholderHeight || this.calculateImageSize(data.src).requiredHeight;
+      this.placeholderHeight = this.calculateImageSize(data.src).requiredHeight;
     }
 
     /* eslint-disable jsx-a11y/no-static-element-interactions */
     return (
-      <ViewportRenderer placeholderStyle={{ height: this.placeholderHeight }}>
-        <div
-          data-hook="imageViewer"
-          onClick={onClick}
-          className={itemClassName}
-          onKeyDown={e => this.onKeyDown(e, onClick)}
-          ref={e => this.handleRef(e)}
-        >
+      <div
+        data-hook="imageViewer"
+        onClick={onClick}
+        className={itemClassName}
+        onKeyDown={e => this.onKeyDown(e, onClick)}
+        ref={e => this.handleRef(e)}
+      >
+        <ViewportRenderer placeholderStyle={{ height: this.placeholderHeight }}>
           <div className={this.styles.imageWrapper}>
             {imageSrc && this.renderImage(imageClassName, imageSrc, metadata.alt, imageProps)}
             {this.renderLoader()}
           </div>
-          {this.renderTitle(data, this.styles)}
-          {this.renderDescription(data, this.styles)}
-          {this.shouldRenderCaption() &&
-            this.renderCaption(metadata.caption, isFocused, readOnly, this.styles, defaultCaption)}
-        </div>
-      </ViewportRenderer>
+        </ViewportRenderer>
+        {this.renderTitle(data, this.styles)}
+        {this.renderDescription(data, this.styles)}
+        {this.shouldRenderCaption() &&
+          this.renderCaption(metadata.caption, isFocused, readOnly, this.styles, defaultCaption)}
+      </div>
     );
     /* eslint-enable jsx-a11y/no-static-element-interactions */
   }
