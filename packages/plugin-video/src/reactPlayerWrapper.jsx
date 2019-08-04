@@ -50,7 +50,7 @@ export default class ReactPlayerWrapper extends Component {
 
 ReactPlayerWrapper.propTypes = {
   url: PropTypes.string.isRequired,
-  disabled: PropTypes.bool.isRequired,
+  disabled: PropTypes.bool,
 };
 
 function isVimeoUrl(url) {

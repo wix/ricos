@@ -57,7 +57,7 @@ export default class Viewer extends PureComponent {
           isMobile={this.props.isMobile}
           anchorTarget={anchorTarget}
           relValue={relValue}
-          disabled={this.state.disabled}
+          disabled={this.state && this.state.disabled}
         />
         <ReactModal
           isOpen={this.state.showModal}
