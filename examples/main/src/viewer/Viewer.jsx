@@ -28,14 +28,6 @@ export default class Viewer extends PureComponent {
     };
   }
 
-  componentDidMount() {
-    this.interval = setInterval(() => this.setState({ disabled: document.webkitHidden }), 100);
-  }
-
-  componentWillUnmount() {
-    this.interval();
-  }
-
   closeModal = () => {
     this.setState({
       showModal: false,
@@ -57,7 +49,7 @@ export default class Viewer extends PureComponent {
           isMobile={this.props.isMobile}
           anchorTarget={anchorTarget}
           relValue={relValue}
-          disabled={this.state && this.state.disabled}
+          disabled={this.state.disabled}
         />
         <ReactModal
           isOpen={this.state.showModal}
