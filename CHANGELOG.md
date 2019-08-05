@@ -8,6 +8,9 @@
 > - :house: [Internal]
 
 ## [Unreleased]
+### :rocket: New Feature
+- `viewer`
+  - [#351](https://github.com/wix-incubator/rich-content/pull/351) `diasble` prop allows pausing media
 ### :house: Internal
 - `example`
   - [#350](https://github.com/wix-incubator/rich-content/pull/350) ability to change locale 
