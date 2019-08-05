@@ -21,46 +21,39 @@ export default theme => {
     'public-DraftStyleDefault-list' + direction,
     'public-DraftStyleDefault-reset',
   ];
+  const listTypes = Object.freeze({
+    UnorderedList: 'ul',
+    OrderedList: 'ol',
+  });
 
-  const OrderedListItem = ({ children }) => (
-    <ol className={'public-DraftStyleDefault-ol'}>
-      {children.map((child, i) => {
-        const direction = get(child, 'props.children.props.direction', 'LTR');
-        return (
-          <li
-            className={classNames(
-              mergedStyles.orderedList,
-              'public-DraftStyleDefault-orderedListItem',
-              listClassNames(direction)
-            )}
-            key={i}
-          >
-            {child}
-          </li>
-        );
-      })}
-    </ol>
-  );
+  const listItem = (children, listType) => {
+    const { className, type } = listItemMap[listType];
+    const List = className;
+    return (
+      <List className={`public-DraftStyleDefault-${className}`}>
+        {children.map((child, i) => {
+          const direction = get(child, 'props.children.props.direction', 'LTR');
+          return (
+            <li
+              className={classNames(
+                mergedStyles[type],
+                `public-DraftStyleDefault-${type}Item`,
+                listClassNames(direction),
+                child.props.className.match(/\w*line-height(\w|-)*/g)
+              )}
+              key={i}
+            >
+              {child}
+            </li>
+          );
+        })}
+      </List>
+    );
+  };
 
-  const UnorderedListItem = ({ children }) => (
-    <ul className={'public-DraftStyleDefault-ul'}>
-      {children.map((child, i) => {
-        const direction = get(child, 'props.children.props.direction', 'LTR');
-        return (
-          <li
-            className={classNames(
-              mergedStyles.unorderedList,
-              'public-DraftStyleDefault-unorderedListItem',
-              listClassNames(direction)
-            )}
-            key={i}
-          >
-            {child}
-          </li>
-        );
-      })}
-    </ul>
-  );
+  const OrderedListItem = ({ children }) => listItem(children, listTypes.OrderedList);
+
+  const UnorderedListItem = ({ children }) => listItem(children, listTypes.UnorderedList);
 
   OrderedListItem.propTypes = UnorderedListItem.propTypes = {
     children: PropTypes.node,
@@ -76,6 +69,17 @@ export default theme => {
       wrapper: <OrderedListItem />,
     },
   });
+
+  const listItemMap = {
+    [listTypes.OrderedList]: {
+      className: 'ol',
+      type: 'orderedList',
+    },
+    [listTypes.UnorderedList]: {
+      className: 'ul',
+      type: 'unorderedList',
+    },
+  };
 
   return DefaultDraftBlockRenderMap.merge(blockRenderMap);
 };
