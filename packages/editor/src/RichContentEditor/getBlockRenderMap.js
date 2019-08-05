@@ -51,9 +51,38 @@ export default theme => {
     );
   };
 
-  const OrderedListItem = ({ children }) => listItem(children, listTypes.OrderedList);
+  const listNameMap = {
+    ol: 'orderedList',
+    ul: 'unorderedList',
+  };
 
-  const UnorderedListItem = ({ children }) => listItem(children, listTypes.UnorderedList);
+  const listItem = (children, ListElement) => {
+    const listName = listNameMap[ListElement];
+    return (
+      <ListElement className={`public-DraftStyleDefault-${ListElement}`}>
+        {children.map((child, i) => {
+          const direction = get(child, 'props.children.props.direction', 'LTR');
+          return (
+            <li
+              className={classNames(
+                mergedStyles[listName],
+                `public-DraftStyleDefault-${listName}Item`,
+                listClassNames(direction),
+                child.props.className.match(/rich_content_line-height-(\d|_)*/g)
+              )}
+              key={i}
+            >
+              {child}
+            </li>
+          );
+        })}
+      </ListElement>
+    );
+  };
+
+  const OrderedListItem = ({ children }) => listItem(children, 'ol');
+
+  const UnorderedListItem = ({ children }) => listItem(children, 'ul');
 
   OrderedListItem.propTypes = UnorderedListItem.propTypes = {
     children: PropTypes.node,
