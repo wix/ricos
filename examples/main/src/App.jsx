@@ -14,6 +14,7 @@ import {
 import {
   generateKey,
   getStateFromObject,
+  getRequestedLocale,
   isMobile,
   loadStateFromStorage,
   saveStateToStorage,
@@ -26,6 +27,10 @@ class App extends PureComponent {
     super(props);
     this.isMobile = isMobile();
     this.state = this.getInitialState();
+    const locale = getRequestedLocale();
+    if (locale !== 'en') {
+      this.setLocale(locale);
+    }
   }
 
   getInitialState() {
@@ -73,14 +78,28 @@ class App extends PureComponent {
     this.onContentStateEditorResize();
   };
 
+  setLocale = locale => {
+    import(`wix-rich-content-editor/statics/locale/messages_${locale}.json`).then(localeResource =>
+      this.setState({ locale, localeResource: localeResource.default })
+    );
+  };
+
   renderEditor = () => {
-    const { isEditorShown, editorState, staticToolbar } = this.state;
+    const {
+      isEditorShown,
+      editorState,
+      editorIsMobile,
+      staticToolbar,
+      locale,
+      localeResource,
+    } = this.state;
     const settings = [
       {
         name: 'Mobile',
+        active: editorIsMobile,
         action: () =>
           this.setState(state => ({
-            editorIsMobile: !state.editorIsMobile,
+            editorIsMobile: !editorIsMobile,
             editorResetKey: state.editorResetKey + 1,
           })),
       },
@@ -88,7 +107,14 @@ class App extends PureComponent {
     if (!isMobile()) {
       settings.push({
         name: 'Static Toolbar',
+        active: staticToolbar,
         action: () => this.setState(state => ({ staticToolbar: !state.staticToolbar })),
+      });
+      settings.push({
+        name: 'Locale',
+        active: locale,
+        action: selectedLocale => this.setLocale(selectedLocale),
+        items: this.props.allLocales,
       });
     }
     return (
@@ -106,6 +132,8 @@ class App extends PureComponent {
                 editorState={editorState}
                 isMobile={this.state.editorIsMobile || this.isMobile}
                 staticToolbar={staticToolbar}
+                locale={locale}
+                localeResource={localeResource}
               />
             </ErrorBoundary>
           </SectionContent>
