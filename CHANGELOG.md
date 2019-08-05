@@ -8,12 +8,15 @@
 > - :house: [Internal]
 
 ## [Unreleased]
+### :bug: Bug Fix
+- `editor`
+  - [#353](https://github.com/wix-incubator/rich-content/pull/353) fix line spacing in lists
 ### :rocket: New Feature
 - `viewer`
   - [#351](https://github.com/wix-incubator/rich-content/pull/351) `disable` prop allows pausing media
 ### :house: Internal
 - `example`
-  - [#350](https://github.com/wix-incubator/rich-content/pull/350) ability to change locale 
+  - [#350](https://github.com/wix-incubator/rich-content/pull/350) ability to change locale
 <hr/>
 
 ## 4.0.11 (Jul 31, 2019)
