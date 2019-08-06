@@ -27,6 +27,7 @@ class ImagesList extends PureComponent {
       page: 0,
       didFail: false,
     };
+    this.scrollbarRef = '';
     this.selectPhoto = this.selectPhoto.bind(this);
   }
 
@@ -34,6 +35,12 @@ class ImagesList extends PureComponent {
     if (this.timer !== null) {
       clearTimeout(this.timer);
     }
+
+    const { searchTerm } = this.state;
+    if (searchTerm !== nextProps.searchTerm) {
+      this.scrollbarRef && this.scrollbarRef.scrollTop(0);
+    }
+
     this.timer = setTimeout(() => {
       this.searchUnsplash(nextProps.searchTerm);
       this.setState({ searchTerm: nextProps.searchTerm });
@@ -154,6 +161,9 @@ class ImagesList extends PureComponent {
       <div className={this.styles.items_list_container}>
         {!this.state.didFail ? (
           <Scrollbars
+            ref={ref => {
+              this.scrollbarRef = ref;
+            }}
             renderThumbVertical={() => <div className={this.styles.scrollbar_thumb} />}
             autoHide
           >
