@@ -14,14 +14,14 @@
   }
 }
 
-.modal_arrow_down {
+.unsplash_modal_arrow_down {
   @extend %modal_arrow;
   transform: rotate(45deg);
   bottom: -7px;
   left: 68px;
 }
 
-.modal_arrow_up {
+.unsplash_modal_arrow_up {
   @extend %modal_arrow;
   transform: rotate(-135deg);
   bottom: 364px;

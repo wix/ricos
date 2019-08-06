@@ -20,16 +20,16 @@ class ImageSettingsNavbar extends Component {
 
     return (
       <div role="menu">
-        <div className={this.styles.imageSettingsMobileHeader_headerPlaceholder} />
-        <div className={this.styles.imageSettingsMobileHeader_header}>
+        <div className={this.styles.unsplash_imageSettingsMobileHeader_headerPlaceholder} />
+        <div className={this.styles.unsplash_imageSettingsMobileHeader_header}>
           <button
             data-hook="ImageSettingsMobileHeaderCancel"
             role="menuitem"
             aria-label={cancelLabel}
             onClick={() => cancel()}
             className={classNames(
-              this.styles.imageSettingsMobileHeader_button,
-              this.styles.imageSettingsMobileHeader_cancel
+              this.styles.unsplash_imageSettingsMobileHeader_button,
+              this.styles.unsplash_imageSettingsMobileHeader_cancel
             )}
           >
             {cancelLabel}
@@ -41,8 +41,8 @@ class ImageSettingsNavbar extends Component {
               data-hook="ImageSettingsMobileHeaderMore"
               onClick={() => this.setState({ showMenu: !this.state.showMenu })}
               className={classNames(
-                this.styles.imageSettingsMobileHeader_button,
-                this.styles.imageSettingsMobileHeader_menuIcon
+                this.styles.unsplash_imageSettingsMobileHeader_button,
+                this.styles.unsplash_imageSettingsMobileHeader_menuIcon
               )}
             >
               <MoreIcon />
@@ -54,15 +54,15 @@ class ImageSettingsNavbar extends Component {
             role="menuitem"
             aria-label={saveLabel}
             className={classNames(
-              this.styles.imageSettingsMobileHeader_button,
-              this.styles.imageSettingsMobileHeader_done
+              this.styles.unsplash_imageSettingsMobileHeader_button,
+              this.styles.unsplash_imageSettingsMobileHeader_done
             )}
           >
             {saveLabel}
           </button>
         </div>
         {this.state.showMenu ? (
-          <div className={this.styles.imageSettingsMobileHeader_menu}>
+          <div className={this.styles.unsplash_imageSettingsMobileHeader_menu}>
             <SelectionList
               theme={theme}
               dataSource={[otherTab]}

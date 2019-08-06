@@ -1,4 +1,4 @@
-.imageSettingsMobileHeader_header {
+.unsplash_imageSettingsMobileHeader_header {
     display: block;
     padding: 0 9px;
     position: fixed;
@@ -11,7 +11,7 @@
     z-index: 5;
   }
   
-  .imageSettingsMobileHeader_headerPlaceholder {
+  .unsplash_imageSettingsMobileHeader_headerPlaceholder {
     display: block;
     position: relative;
     width: 100vw;
@@ -19,7 +19,7 @@
     background: transparent;
   }
   
-  .imageSettingsMobileHeader_button {
+  .unsplash_imageSettingsMobileHeader_button {
     color: #fff;
     font-size: 14px;
     line-height: 40px;
@@ -28,7 +28,7 @@
     border: none;
   }
   
-  .imageSettingsMobileHeader_menuIcon {
+  .unsplash_imageSettingsMobileHeader_menuIcon {
     float: right;
   
     svg {
@@ -41,7 +41,7 @@
     }
   }
   
-  .imageSettingsMobileHeader_menu {
+  .unsplash_imageSettingsMobileHeader_menu {
     position: fixed;
     top: 40px;
     right: 20px;
@@ -62,11 +62,11 @@
     }
   }
   
-  .imageSettingsMobileHeader_done {
+  .unsplash_imageSettingsMobileHeader_done {
     float: right;
   }
   
-  .imageSettingsMobileHeader_cancel {
+  .unsplash_imageSettingsMobileHeader_cancel {
     float: left;
   }
   

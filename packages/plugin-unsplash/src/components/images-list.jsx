@@ -140,7 +140,7 @@ class ImagesList extends PureComponent {
         singleColor="#000"
         size={isMobile ? 25 : 18}
         borderSize={2}
-        className={this.styles.spinner_container}
+        className={this.styles.unsplash_spinner_container}
         style={{ marginLeft: isMobile ? 'calc(50% - 15px)' : 'calc(50% - 20px)' }}
       />
     );
@@ -158,13 +158,13 @@ class ImagesList extends PureComponent {
       });
     });
     return (
-      <div className={this.styles.items_list_container}>
+      <div className={this.styles.unsplash_items_list_container}>
         {!this.state.didFail ? (
           <Scrollbars
             ref={ref => {
               this.scrollbarRef = ref;
             }}
-            renderThumbVertical={() => <div className={this.styles.scrollbar_thumb} />}
+            renderThumbVertical={() => <div className={this.styles.unsplash_scrollbar_thumb} />}
             autoHide
           >
             <InfiniteScroll
@@ -174,7 +174,7 @@ class ImagesList extends PureComponent {
               loader={!this.state.didFail ? loader : null}
               useWindow={false}
               threshold={3}
-              className={this.styles.InfiniteScroll_container}
+              className={this.styles.unsplash_InfiniteScroll_container}
             >
               <Gallery
                 photos={photos}

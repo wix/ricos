@@ -18,8 +18,8 @@ class SearchInputComponent extends PureComponent {
   render() {
     const { t } = this.props;
     return (
-      <div className={this.styles.search_container}>
-        <SearchIcon className={this.styles.search_icon} />
+      <div className={this.styles.unsplash_search_container}>
+        <SearchIcon className={this.styles.unsplash_search_icon} />
         <TextInput
           placeholder={t('UnsplashPlugin_search_input_placeholder')}
           onChange={this.onTextChanged.bind(this)}

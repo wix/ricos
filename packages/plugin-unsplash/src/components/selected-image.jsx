@@ -32,7 +32,7 @@ class SelectedImage extends Component {
   renderOverlay = (photo, onClick, index, opacity) => {
     return (
       <div
-        className={this.styles.image_overlay}
+        className={this.styles.unsplash_image_overlay}
         role="button"
         tabIndex={0}
         onKeyPress={() => null}
@@ -76,7 +76,7 @@ class SelectedImage extends Component {
         }}
         role="button"
         tabIndex={0}
-        className={this.styles.image_container}
+        className={this.styles.unsplash_image_container}
         onMouseEnter={this.onMouseEntered}
         onMouseLeave={this.onMouseLeft}
         key={index}

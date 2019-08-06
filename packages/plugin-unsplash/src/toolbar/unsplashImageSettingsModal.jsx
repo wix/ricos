@@ -78,7 +78,7 @@ class UnsplashImageSettingsModal extends PureComponent {
       nofollowRelToggleVisibilityFn && nofollowRelToggleVisibilityFn(relValue);
 
     return (
-      <div className={this.styles.imageSettings} data-hook="imageSettings">
+      <div className={this.styles.unsplash_imageSettings} data-hook="imageSettings">
         {isMobile ? (
           <ImageSettingsNavbar
             t={t}
@@ -88,11 +88,11 @@ class UnsplashImageSettingsModal extends PureComponent {
             saveName={this.updateLabel}
           />
         ) : (
-          <h3 className={this.styles.imageSettingsTitle}>{this.headerText}</h3>
+          <h3 className={this.styles.unsplash_imageSettingsTitle}>{this.headerText}</h3>
         )}
         <div
-          className={classNames(styles.imageSettings_scrollContainer, {
-            [styles.imageSettings_mobile]: isMobile,
+          className={classNames(styles.unsplash_imageSettings_scrollContainer, {
+            [styles.unsplash_imageSettings_mobile]: isMobile,
           })}
         >
           <SettingsSection
@@ -102,14 +102,14 @@ class UnsplashImageSettingsModal extends PureComponent {
             <Image
               alt={'image preview'}
               resizeMode={'contain'}
-              className={this.styles.imageSettingsImage}
+              className={this.styles.unsplash_imageSettingsImage}
               src={componentData.image.originalUrl}
               theme={theme}
             />
           </SettingsSection>
           <SettingsSection
             theme={theme}
-            className={this.styles.imageSettingsSection}
+            className={this.styles.unsplash_imageSettingsSection}
             ariaProps={{ 'aria-label': 'image caption', role: 'region' }}
           >
             <InputWithLabel
@@ -124,7 +124,7 @@ class UnsplashImageSettingsModal extends PureComponent {
           </SettingsSection>
           <SettingsSection
             theme={theme}
-            className={this.styles.imageSettingsSection}
+            className={this.styles.unsplash_imageSettingsSection}
             ariaProps={{ 'aria-label': 'image alt text', role: 'region' }}
           >
             <InputWithLabel
@@ -139,10 +139,13 @@ class UnsplashImageSettingsModal extends PureComponent {
           </SettingsSection>
           <SettingsSection
             theme={theme}
-            className={this.styles.imageSettingsSection}
+            className={this.styles.unsplash_imageSettingsSection}
             ariaProps={{ 'aria-label': 'image link', role: 'region' }}
           >
-            <span id="image_settings_link_lbl" className={this.styles.inputWithLabel_label}>
+            <span
+              id="image_settings_link_lbl"
+              className={this.styles.unsplash_inputWithLabel_label}
+            >
               {this.linkLabel}
             </span>
             <LinkPanel

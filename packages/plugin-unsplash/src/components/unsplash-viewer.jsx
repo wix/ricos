@@ -42,7 +42,7 @@ class UnsplashViewer extends Component {
             Photo By <u>{image.username}</u> on
             <u> Unsplash</u>
           </div>
-          <div className={styles.image_container}>
+          <div className={styles.unsplash_image_container}>
             <img className={this.styles.unsplash_player} src={image.originalUrl} alt={image.alt} />
           </div>
         </div>

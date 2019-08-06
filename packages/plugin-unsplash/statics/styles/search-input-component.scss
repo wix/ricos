@@ -1,5 +1,5 @@
 @import '~wix-rich-content-common/dist/statics/styles/mixins';
-.search_container {
+.unsplash_search_container {
   position: relative;
   margin-right: 12px;
   border-bottom: 1px solid #b1b1b1;
@@ -24,7 +24,7 @@
     max-height: 50px;
   }
 }
-.search_icon {
+.unsplash_search_icon {
   position: absolute;
   top: 15px;
   left: 0px;

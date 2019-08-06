@@ -16,7 +16,7 @@ class Arrow extends Component {
 
     return (
       <div>
-        <div className={styles[`modal_arrow_${top > 357 ? 'down' : 'up'}`]} />
+        <div className={styles[`unsplash_modal_arrow_${top > 357 ? 'down' : 'up'}`]} />
       </div>
     );
   }

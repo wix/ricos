@@ -1,10 +1,10 @@
-.navbar_container {
+.unsplash_navbar_container {
   background-color: #9a87ce;
   width: 100vw;
   height: 50px;
   overflow: hidden;
 }
-.back_arrow_button {
+.unsplash_back_arrow_button {
   background: inherit;
   border: solid #fff;
   border-width: 0 1px 1px 0;
@@ -13,7 +13,7 @@
   width: 10px;
   transform: rotate(135deg);
 }
-.back_arrow_container {
+.unsplash_back_arrow_container {
   width: 27px;
   height: 35px;
   float: left;
@@ -21,7 +21,7 @@
   padding-left: 23px;
 }
 
-.navbar_title {
+.unsplash_navbar_title {
   width: calc(100vw - 100px);
   height: 35px;
   float: left;

@@ -21,17 +21,19 @@ class Navbar extends PureComponent {
   render() {
     const { t } = this.props;
     return (
-      <div className={this.styles.navbar_container}>
+      <div className={this.styles.unsplash_navbar_container}>
         <div
           role="button"
           tabIndex={0}
           onKeyPress={this.onKeyPress}
           onClick={this.onBackArrowClicked}
-          className={this.styles.back_arrow_container}
+          className={this.styles.unsplash_back_arrow_container}
         >
-          <div className={this.styles.back_arrow_button} />
+          <div className={this.styles.unsplash_back_arrow_button} />
         </div>
-        <div className={this.styles.navbar_title}>{t('UnsplashPlugin_navbar_header_Label')}</div>
+        <div className={this.styles.unsplash_navbar_title}>
+          {t('UnsplashPlugin_navbar_header_Label')}
+        </div>
       </div>
     );
   }

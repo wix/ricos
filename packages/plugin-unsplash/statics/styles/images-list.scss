@@ -1,7 +1,7 @@
 @import '~wix-rich-content-common/dist/statics/styles/mixins';
 @import '~wix-rich-content-common/dist/statics/styles/palette';
 
-.items_list_container {
+.unsplash_items_list_container {
   height: 312px;
   width: 100%;
   padding-right: 10px;
@@ -11,14 +11,14 @@
   }
 }
 
-.scrollbar_thumb {
+.unsplash_scrollbar_thumb {
   background: #b2b2b2;
   border-radius: 4px;
   width: 6px;
   cursor: pointer;
 }
 
-.InfiniteScroll_container {
+.unsplash_InfiniteScroll_container {
   padding-right: 8px;
   margin-top: 8px;
   margin-left: -2px;
@@ -42,7 +42,7 @@
   }
 }
 
-.spinner_container {
+.unsplash_spinner_container {
   margin-left: calc(50% - 17px);
   margin-top: calc(25% - 32px);
   @include phone {
