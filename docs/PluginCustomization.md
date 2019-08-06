@@ -68,6 +68,21 @@ The `toolbar` setting refers to plugin functionality toolbar. Currently, it expo
 | `componentDataDefaults` | Default component data                                                         | `{ config: { size: 'content', alignment: 'center' } }` | No           | editor               |
 | `insertToolbars`        | Which toolbars to add insert button to                                         | `[TOOLBARS.FOOTER]`                                    | No           | editor               |
 
+### Unsplash Plugin Settings
+
+| setting key   | description                                                                                                            | default value | is required? | editor/viewer config |
+| ------------- | ---------------------------------------------------------------------------------------------------------------------- | ------------- | ------------ | -------------------- |
+| `alt`         | An alternate text for an image                                                                                         | `null`        | No           | both                 |
+| `caption`     | Default component data                                                                                                 | `null`        | No           | both                 |
+| `width`       | Unsplash photo width in pixels                                                                                         | Auto          | Yes          | both                 |
+| `height`      | Unsplash photo height in pixels                                                                                        | Auto          | Yes          | both                 |
+| `isValidUrl`  | Flag to check the validity of the URL                                                                                  | `true`        | No           | Editor               |
+| `nofollow`    | The rel attribute for the clickable image                                                                              | `false`       | No           | both                 |
+| `originalUrl` | The unsplash URL for added photo.                                                                                      | `null`        | Yes          | Editor               |
+| `targetBlank` | The target attribute for the clickable image                                                                           | `false`       | No           | both                 |
+| `url`         | Editable URL that can be added to the photo, so when clicking on the added image, the browser will be redirected to it | `null`        | No           | both                 |
+| `username`    | The publisher name for the added unsplash image                                                                        | `null`        | Yes          | both                 |
+
 
 ### Text Color Plugin
 
