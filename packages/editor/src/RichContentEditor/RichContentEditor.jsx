@@ -24,6 +24,7 @@ import {
 } from 'wix-rich-content-common';
 import styles from '../../statics/styles/rich-content-editor.scss';
 import draftStyles from '../../statics/styles/draft.scss';
+import * as rtlDetect from 'rtl-detect';
 
 class RichContentEditor extends Component {
   constructor(props) {
@@ -62,6 +63,7 @@ class RichContentEditor extends Component {
       config,
       isMobile,
       setEditorState: this.setEditorState,
+      languageDir: rtlDetect.getLangDir(locale),
     };
   };
 
