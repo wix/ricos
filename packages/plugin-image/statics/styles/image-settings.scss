@@ -15,14 +15,8 @@ $MOBILE_HEADER_HEIGHT: 50px;
 
 .imageSettingsTitle {
   position: fixed;
+  margin: 46px 0 27px 30px;
   font-size: 18px;
-
-  [dir=ltr] & {
-    margin: 46px 0 27px 30px;
-  }
-  [dir=rtl] & {
-    margin: 46px 30px 27px 0;
-  }
 }
 
 .imageSettingsImage {

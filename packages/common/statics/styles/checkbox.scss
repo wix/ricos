@@ -37,10 +37,5 @@
 }
 
 .checkbox_label {
-  [dir=ltr] & {
-    margin-left: 12px;
-  }
-  [dir=rtl] & {
-    margin-right: 12px;
-  }
+  margin-left: 12px;
 }
