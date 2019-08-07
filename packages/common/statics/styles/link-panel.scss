@@ -39,7 +39,14 @@
   font-stretch: normal;
   line-height: 1.5;
   letter-spacing: normal;
-  text-align: left;
+
+  [dir=ltr] {
+    text-align: left;
+  }
+
+  [dir=rtl] {
+    text-align: right;
+  }
 }
 
 .linkPanel_Input {
@@ -65,9 +72,16 @@
 .linkPanel_textInput {
   height: 42px;
   padding: 0 18px;
-  text-align: left;
   &::placeholder {
     opacity: 0.4;
+  }
+
+  [dir=ltr] {
+    text-align: left;
+  }
+
+  [dir=rtl] {
+    text-align: right;
   }
 }
 
@@ -91,11 +105,18 @@
 
 .linkPanel_errorIcon {
   position: absolute;
-  right: 12px;
   bottom: 0;
   top: 0;
   margin: auto;
   width: 13px;
+
+  [dir=ltr] & {
+    right: 12px;
+  }
+
+  [dir=rtl] & {
+    left: 12px;
+  }
 }
 
 .linkPanel_actionsDivider {
