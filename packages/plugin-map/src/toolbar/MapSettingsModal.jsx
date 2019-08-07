@@ -326,7 +326,7 @@ export class MapSettingsModal extends Component {
   }
 
   render() {
-    const { t, isMobile } = this.props;
+    const { t, isMobile, languageDir } = this.props;
 
     const wrapWithScrollBars = jsx => (
       <Scrollbars
@@ -340,7 +340,7 @@ export class MapSettingsModal extends Component {
     );
 
     return (
-      <div>
+      <div dir={languageDir}>
         {this.renderInjectedStyles()}
         {isMobile && this.renderMobileNavBar()}
 
@@ -399,4 +399,5 @@ MapSettingsModal.propTypes = {
   uiSettings: PropTypes.object.isRequired,
   t: PropTypes.func,
   isMobile: PropTypes.bool,
+  languageDir: PropTypes.string,
 };
