@@ -171,23 +171,6 @@ class WixUtils {
     }
   }
 
-  isMobile() {
-    const _isMobile = () => {
-      const isWixMobile = this.isWixMobile();
-      const isUserAgentMobile = this.isUserAgentMobile();
-
-      return this.isUndefined(isWixMobile) ? isUserAgentMobile : isWixMobile;
-    };
-
-    if (this.isTest()) {
-      return false;
-    } else if (!this.isSite()) {
-      return _isMobile();
-    } else {
-      return this.getOrPutFromCache('isMobile', _isMobile);
-    }
-  }
-
   isiOS() {
     return this.getOrPutFromCache('isiOS', () => {
       try {

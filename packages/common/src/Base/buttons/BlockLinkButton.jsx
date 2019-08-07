@@ -25,7 +25,7 @@ class BlockLinkButton extends Component {
       t,
       uiSettings,
     } = this.props;
-    const modalStyles = getModalStyles({ fullScreen: false });
+    const modalStyles = getModalStyles({ fullScreen: false, isMobile });
     if (isMobile) {
       if (helpers && helpers.openModal) {
         const modalProps = {
