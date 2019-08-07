@@ -10,10 +10,9 @@
 ## [Unreleased]
 ### :bug: Bug Fix
 - `editor`
-  - [#354](https://github.com/wix-incubator/rich-content/pull/354) Fix Google 'Touch to Search' trigger when clicking on mention
-### :bug: Bug Fix
-- `editor`
   - [#353](https://github.com/wix-incubator/rich-content/pull/353) fix line spacing in lists
+- `mentions`
+  - [#354](https://github.com/wix-incubator/rich-content/pull/354) Fix Google 'Touch to Search' trigger when clicking on mention
 ### :rocket: New Feature
 - `viewer`
   - [#351](https://github.com/wix-incubator/rich-content/pull/351) `disable` prop allows pausing media
