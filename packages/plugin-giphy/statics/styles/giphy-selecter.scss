@@ -14,20 +14,12 @@
 .giphy_selecter_infinite_scroll_container {
   position: absolute;
   width: calc(100% - 21px);
+  left: 18px;
   bottom: 0px;
   z-index: 7;
   height: calc(100% - 70px);
   overflow: auto;
-  [dir=ltr] & {
-    padding-right: 6px;
-    left: 18px;
-  }
-
-  [dir=rtl] & {
-    padding-left: 6px;
-    right: 18px;
-  }
-
+  padding-right: 6px;
   @include phone {
     position: relative;
     width: auto;
@@ -54,27 +46,15 @@
 }
 
 .giphy_selecter_headerInfiniteScroll {
+  padding-right: 18px;
   padding-bottom: 6px;
-  [dir=ltr] & {
-    padding-right: 18px;
-  }
-
-  [dir=rtl] & {
-    padding-left: 18px;
-  }
 }
 
 .giphy_selecter_scrollbarThumb {
   background: #000000;
   border-radius: 4px;
   width: 4px;
-  [dir=ltr] & {
-    margin-left: -2px;
-  }
-
-  [dir=rtl] & {
-    margin-right: -2px;
-  }
+  margin-left: -2px;
 }
 
 .giphy_selecter_trending {
@@ -87,29 +67,15 @@
   letter-spacing: normal;
   color: rgba(0, 0, 0, 0.3);
   width: auto;
-  [dir=ltr] & {
-    float: left;
-  }
-
-  [dir=rtl] & {
-    float: right;
-  }
+  float: left;
 }
 
 .giphy_selecter_powerdByGiphy {
+  text-align: right;
+  float: right;
   padding-top: 4px;
-  [dir=ltr] & {
-    text-align: right;
-    float: right;
-  }
-
-  [dir=rtl] & {
-    text-align: left;
-    float: left;
-  }
   @include phone {
     padding-right: 0px;
-    padding-left: 0px;
   }
 }
 
@@ -140,21 +106,11 @@
 .giphy_selecter_spinner_empty_modal {
   position: absolute;
   top: calc(50% - 17px);
+  left: calc(50% - 17px);
   transform: translateX(-50%) translateY(-50%);
-  [dir=ltr] & {
-    left: calc(50% - 17px);
-    @include phone {
-      top: 50%;
-      left: 50%;
-    }
-  }
-
-  [dir=rtl] & {
-    right: calc(50% - 17px);
-    @include phone {
-      top: 50%;
-      right: 50%;
-    }
+  @include phone {
+    top: 50%;
+    left: 50%;
   }
 }
 
@@ -170,22 +126,10 @@
   box-sizing: border-box;
   position: absolute;
   top: 137px;
-
-  [dir=ltr] & {
-    left: 18px;
-    @include phone {
-      top: 50%;
-      left: 50%;
-      transform: translateX(-50%) translateY(-50%);
-    }
-  }
-
-  [dir=rtl] & {
-    right: 18px;
-    @include phone {
-      top: 50%;
-      right: 50%;
-      transform: translateX(-50%) translateY(-50%);
-    }
+  left: 18px;
+  @include phone {
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
   }
 }
