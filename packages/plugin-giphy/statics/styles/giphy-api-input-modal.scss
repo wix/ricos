@@ -30,7 +30,6 @@
   width: 100%;
   box-sizing: border-box;
   padding: 0px;
-  padding-right: 20px;
   height: 17px;
   font-family: Helvetica;
   font-size: 14px;
@@ -38,6 +37,13 @@
   color: black;
   border: none;
   border-radius: 0px;
+  [dir=ltr] & {
+    padding-right: 20px;
+  }
+
+  [dir=rtl] & {
+    padding-left: 20px;
+  }
 }
 
 .giphy_api_input_modal_search::placeholder {
@@ -49,9 +55,16 @@
   width: auto;
   display: inline-block;
   position: absolute;
-  right: 0px;
   top: 2px;
   height: 17px;
+
+  [dir=ltr] & {
+    right: 0px;
+  }
+
+  [dir=rtl] & {
+    left: 0px;
+  }
 }
 
 .giphy_api_input_modal_closeIcon {
