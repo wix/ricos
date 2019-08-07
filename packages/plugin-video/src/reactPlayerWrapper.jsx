@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactPlayer from 'react-player';
-import { isSSR } from 'wix-rich-content-common';
+import { isSSR, ViewportRenderer } from 'wix-rich-content-common';
 
 const VIMEO_SDK_URL = 'https://player.vimeo.com/api/player.js';
 const VIMEO_GLOBAL = 'Vimeo';
@@ -30,7 +30,11 @@ export default class ReactPlayerWrapper extends Component {
     if (!this.state.vimeoLoaded && this.isVimeoAndRequireJS()) {
       return null;
     }
-    return <ReactPlayer {...this.props} />;
+    return (
+      <ViewportRenderer placeholderClass={this.props.className}>
+        <ReactPlayer {...this.props} />
+      </ViewportRenderer>
+    );
   }
 }
 

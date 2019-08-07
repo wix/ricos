@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Waypoint } from 'react-waypoint';
+import Observer from 'react-intersection-observer';
 import Context from '../Utils/Context';
+import classnames from 'classnames';
 import { mergeStyles } from '../Utils/mergeStyles';
 import styles from '../../statics/styles/placeholder.scss';
 
@@ -9,7 +10,9 @@ class ViewportRenderer extends Component {
   static propTypes = {
     children: PropTypes.node.isRequired,
     placeholderStyle: PropTypes.object,
+    placeholderClass: PropTypes.string,
     containerStyle: PropTypes.object,
+    containerClass: PropTypes.string,
     alwaysRenderChildren: PropTypes.bool,
   };
 
@@ -17,6 +20,8 @@ class ViewportRenderer extends Component {
     placeholderStyle: {},
     containerStyle: {},
     alwaysRenderChildren: false,
+    placeholderClass: '',
+    containerClass: '',
   };
 
   constructor(props) {
@@ -45,23 +50,30 @@ class ViewportRenderer extends Component {
   };
   render() {
     const { shouldRenderChildren } = this.state;
-    const { children, placeholderStyle, containerStyle } = this.props;
+    const {
+      children,
+      placeholderStyle,
+      placeholderClass,
+      containerStyle,
+      containerClass,
+    } = this.props;
     const { theme } = this.context;
     this.styles = this.styles || mergeStyles({ styles, theme });
 
+    // return <div style={containerStyle}>{children}</div>
     return (
-      <Waypoint
-        fireOnRapidScroll={false}
-        debug={false}
-        onEnter={this.onEnterViewport}
-        onLeave={this.onLeaveViewport}
-      >
+      <Observer onChange={inView => (inView ? this.onEnterViewport() : this.onLeaveViewport())}>
         {shouldRenderChildren ? (
-          <div style={containerStyle}>{children}</div>
+          <div style={containerStyle} className={containerClass}>
+            {children}
+          </div>
         ) : (
-          <div className={this.styles.placeholder} style={placeholderStyle} />
+          <div
+            className={classnames(this.styles.placeholder, placeholderClass)}
+            style={placeholderStyle}
+          />
         )}
-      </Waypoint>
+      </Observer>
     );
   }
 }
