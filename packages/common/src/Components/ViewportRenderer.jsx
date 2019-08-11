@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Observer from 'react-intersection-observer';
+import { InView } from 'react-intersection-observer';
 import Context from '../Utils/Context';
 import classnames from 'classnames';
 import { mergeStyles } from '../Utils/mergeStyles';
@@ -24,32 +24,7 @@ class ViewportRenderer extends Component {
     containerClass: '',
   };
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      shouldRenderChildren: props.alwaysRenderChildren,
-    };
-  }
-
-  onEnterViewport = () => {
-    if (this.props.alwaysRenderChildren) {
-      return;
-    }
-    this.setState({
-      shouldRenderChildren: true,
-    });
-  };
-
-  onLeaveViewport = () => {
-    if (this.props.alwaysRenderChildren) {
-      return;
-    }
-    this.setState({
-      shouldRenderChildren: false,
-    });
-  };
   render() {
-    const { shouldRenderChildren } = this.state;
     const {
       children,
       placeholderStyle,
@@ -62,18 +37,21 @@ class ViewportRenderer extends Component {
 
     // return <div style={containerStyle}>{children}</div>
     return (
-      <Observer onChange={inView => (inView ? this.onEnterViewport() : this.onLeaveViewport())}>
-        {shouldRenderChildren ? (
-          <div style={containerStyle} className={containerClass}>
-            {children}
-          </div>
-        ) : (
-          <div
-            className={classnames(this.styles.placeholder, placeholderClass)}
-            style={placeholderStyle}
-          />
-        )}
-      </Observer>
+      <InView triggerOnce>
+        {({ inView, ref }) =>
+          inView ? (
+            <div ref={ref} style={containerStyle} className={containerClass}>
+              {children}
+            </div>
+          ) : (
+            <div
+              ref={ref}
+              className={classnames(this.styles.placeholder, placeholderClass)}
+              style={placeholderStyle}
+            />
+          )
+        }
+      </InView>
     );
   }
 }
