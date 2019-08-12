@@ -74,7 +74,12 @@ const plugins = [
     extract: 'dist/styles.min.css',
     inject: false,
     plugins: [
-      postcssRTL({}),
+      postcssRTL({addPrefixToSelector: (selector, prefix) => {
+        if (prefix === '[dir]')
+          return `${selector}`
+        else
+          return `${prefix} ${selector}`
+      }}),
       postcssURL({
         url: asset => asset.url.replace('../', '/statics/'),
       }),
