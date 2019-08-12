@@ -2,9 +2,8 @@ import { BUTTONS, PluginSettingsIcon, getModalStyles } from 'wix-rich-content-co
 import { Modals } from '../modals';
 import { MediaReplaceIcon } from '../icons';
 
-const modalStyles = getModalStyles();
-
-export default ({ t, anchorTarget, relValue, uiSettings }) => {
+export default ({ t, anchorTarget, relValue, uiSettings, isMobile }) => {
+  const modalStyles = getModalStyles({ isMobile });
   return [
     { keyName: 'sizeOriginal', type: BUTTONS.SIZE_ORIGINAL, mobile: false },
     { keyName: 'sizeSmallCenter', type: BUTTONS.SIZE_SMALL_CENTER, mobile: false },

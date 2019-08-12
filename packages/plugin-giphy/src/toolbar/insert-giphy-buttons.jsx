@@ -2,7 +2,6 @@ import { DEFAULTS, MobileFullScreenCustomStyle, DesktopFlyOutModalStyles } from 
 import {
   getModalStyles,
   TOOLBARS,
-  WixUtils,
   DECORATION_MODE,
   decorateComponentWithProps,
 } from 'wix-rich-content-common';
@@ -10,23 +9,25 @@ import GiphyApiInputModal from './giphyApiInputModal';
 import { InsertPluginIcon, InsertPluginMobileIcon } from '../icons';
 import Arrow from './arrow';
 
-export default ({ helpers, t, settings }) => {
+export default ({ helpers, t, settings, isMobile }) => {
+  const modalStyles = isMobile
+    ? getModalStyles({ customStyles: MobileFullScreenCustomStyle, fullScreen: true, isMobile })
+    : null;
   return [
     {
       type: 'modal',
       name: 'GIF',
       tooltipText: t('GiphyPlugin_InsertButton_Tooltip'),
-      Icon: WixUtils.isMobile() ? InsertPluginMobileIcon : InsertPluginIcon,
+      Icon: isMobile ? InsertPluginMobileIcon : InsertPluginIcon,
       componentData: settings.componentDataDefaults || DEFAULTS,
       toolbars: settings.insertToolbars || [TOOLBARS.FOOTER],
       modalElement: decorateComponentWithProps(GiphyApiInputModal, settings),
-      modalStyles: WixUtils.isMobile()
-        ? getModalStyles({ customStyles: MobileFullScreenCustomStyle, fullScreen: true })
-        : null,
+      modalStyles,
       modalStylesFn: ({ buttonRef }) => {
         const modalStyles = getModalStyles({
           customStyles: DesktopFlyOutModalStyles,
           fullScreen: true,
+          isMobile,
         });
         const { top, left } = buttonRef.getBoundingClientRect();
         const modalLeft = left - 15;

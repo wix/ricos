@@ -5,7 +5,7 @@ import createToolbar from './toolbar';
 
 const createMapPlugin = (config = {}) => {
   const type = MAP_TYPE;
-  const { helpers, theme, t, [type]: settings = {}, ...rest } = config;
+  const { helpers, theme, t, [type]: settings = {}, isMobile, ...rest } = config;
 
   return createBasePlugin({
     component: MapViewer,
@@ -17,9 +17,11 @@ const createMapPlugin = (config = {}) => {
       helpers,
       theme,
       t,
+      isMobile,
     }),
     helpers,
     t,
+    isMobile,
     ...rest,
   });
 };

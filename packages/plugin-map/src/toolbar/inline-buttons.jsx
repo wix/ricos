@@ -17,7 +17,7 @@ const getAlignmentButtonProps = ({ store, componentData }) => {
   };
 };
 
-export default ({ settings, t, helpers }) => {
+export default ({ settings, t, helpers, isMobile }) => {
   const { maxWidth, minWidth, maxHeight, minHeight } = settings;
 
   return [
@@ -66,7 +66,7 @@ export default ({ settings, t, helpers }) => {
       type: BUTTONS.EXTERNAL_MODAL,
       icon: PluginSettingsIcon,
       modalElement: MapSettingsModal,
-      modalStyles: getModalStyles(),
+      modalStyles: getModalStyles({ isMobile }),
       mobile: true,
       tooltipTextKey: 'MapPluginButton_Settings_Tooltip',
       helpers,

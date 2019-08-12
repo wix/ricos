@@ -5,7 +5,16 @@ import { IMAGE_TYPE, IMAGE_TYPE_LEGACY } from './types';
 
 const createImagePlugin = (config = {}) => {
   const type = IMAGE_TYPE;
-  const { helpers, t, anchorTarget, relValue, [type]: settings = {}, uiSettings, ...rest } = config;
+  const {
+    helpers,
+    t,
+    anchorTarget,
+    relValue,
+    [type]: settings = {},
+    uiSettings,
+    isMobile,
+    ...rest
+  } = config;
 
   return createBasePlugin({
     component: Component,
@@ -17,6 +26,7 @@ const createImagePlugin = (config = {}) => {
       relValue,
       t,
       uiSettings,
+      isMobile,
     }),
     helpers,
     anchorTarget,
@@ -24,6 +34,7 @@ const createImagePlugin = (config = {}) => {
     settings,
     uiSettings,
     t,
+    isMobile,
     ...rest,
   });
 };

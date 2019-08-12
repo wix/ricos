@@ -99,6 +99,7 @@ export default class LineSpacingButton extends Component {
         theme={theme}
         isMobile={isMobile}
         tooltipText={t('LineSpacingButton_Tooltip')}
+        dataHook={'LineSpacingButton'}
         tabIndex={tabIndex}
         icon={LineSpacingIcon}
         ref={ref => (this.buttonRef = ref)}

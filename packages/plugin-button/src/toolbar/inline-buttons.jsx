@@ -20,6 +20,7 @@ const MobileFullScreenCustomStyle = {
 };
 
 export default ({ settings, isMobile }) => {
+  const customStyles = isMobile ? MobileFullScreenCustomStyle : DesktopCustomModalStyles;
   return [
     { keyName: 'sizeSmallLeft', type: BUTTONS.SIZE_SMALL_LEFT, mobile: false },
     { keyName: 'sizeSmallCenter', type: BUTTONS.SIZE_SMALL_CENTER, mobile: false },
@@ -32,9 +33,7 @@ export default ({ settings, isMobile }) => {
       modalName: Modals.BUTTON_INPUT,
       activeTab: 'advanced_settings',
       modalElement: decorateComponentWithProps(ButtonInputModal, settings),
-      modalStyles: isMobile
-        ? getModalStyles({ customStyles: MobileFullScreenCustomStyle })
-        : getModalStyles({ customStyles: DesktopCustomModalStyles }),
+      modalStyles: getModalStyles({ customStyles, isMobile }),
       mobile: true,
       tooltipTextKey: 'SettingsButton_Tooltip',
       settings,
