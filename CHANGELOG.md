@@ -8,6 +8,9 @@
 > - :house: [Internal]
 
 ## [Unreleased]
+### :bug: Bug Fix
+- `editor`
+  - [#357](https://github.com/wix-incubator/rich-content/pull/357) fix footerToolbar css
 ### :house: Internal
 - `general`
   - [#356](https://github.com/wix-incubator/rich-content/pull/356) removed `WixUtils.isMobile`
