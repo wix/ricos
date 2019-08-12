@@ -40,6 +40,7 @@ export default function createToolbar({
   name,
   uiSettings,
   getToolbarSettings = () => [],
+  getEditorBounds,
 }) {
   class BaseToolbar extends Component {
     constructor(props) {
@@ -107,7 +108,6 @@ export default function createToolbar({
         key: 'componentLink',
         callback: this.onComponentLinkChange,
       });
-      pubsub.subscribe('editorBounds', this.onEditorBoundsChange);
     }
 
     componentWillUnmount() {
@@ -117,17 +117,12 @@ export default function createToolbar({
       pubsub.unsubscribe('componentAlignment', this.onComponentAlignmentChange);
       pubsub.unsubscribe('componentSize', this.onComponentSizeChange);
       pubsub.unsubscribe('componentTextWrap', this.onComponentTextWrapChange);
-      pubsub.unsubscribe('editorBounds', this.onEditorBoundsChange);
       this.unsubscribeOnBlock && this.unsubscribeOnBlock();
     }
 
     shouldComponentUpdate() {
       return !!this.state.isVisible;
     }
-
-    onEditorBoundsChange = editorBounds => {
-      this.setState({ editorBounds });
-    };
 
     onOverrideContent = overrideContent => {
       this.setState({ overrideContent });
@@ -362,6 +357,7 @@ export default function createToolbar({
               displayInlinePanel={this.displayInlinePanel}
               hideInlinePanel={this.hidePanels}
               uiSettings={uiSettings}
+              getEditorBounds={getEditorBounds}
               {...buttonProps}
             />
           );
@@ -450,6 +446,7 @@ export default function createToolbar({
             content={panel.PanelContent}
             keyName={panel.keyName}
             close={this.hidePanels}
+            getEditorBounds={getEditorBounds}
           />
         </div>
       ) : null;
