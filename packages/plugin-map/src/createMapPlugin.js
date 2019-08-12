@@ -5,7 +5,7 @@ import createToolbar from './toolbar';
 
 const createMapPlugin = (config = {}) => {
   const type = MAP_TYPE;
-  const { helpers, theme, t, [type]: settings = {}, ...rest } = config;
+  const { helpers, theme, t, [type]: settings = {}, getEditorBounds, ...rest } = config;
 
   return createBasePlugin({
     component: MapViewer,
@@ -13,12 +13,14 @@ const createMapPlugin = (config = {}) => {
     settings,
     theme,
     toolbar: createToolbar({
+      getEditorBounds,
       settings,
       helpers,
       theme,
       t,
     }),
     helpers,
+    getEditorBounds,
     t,
     ...rest,
   });
