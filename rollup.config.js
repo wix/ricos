@@ -10,6 +10,7 @@ import babel from 'rollup-plugin-babel';
 import json from 'rollup-plugin-json';
 import postcss from 'rollup-plugin-postcss';
 import postcssURL from 'postcss-url';
+import postcssRTL from 'postcss-rtl';
 import pascalCase from 'pascal-case';
 import { cloneDeep } from 'lodash';
 import nodeGlobalsPolyfill from 'rollup-plugin-node-globals';
@@ -63,16 +64,17 @@ const plugins = [
     ],
   }),
   postcss({
-    minimize: {
-      reduceIdents: false,
-      safe: true,
-    },
+    // minimize: {
+    //   reduceIdents: false,
+    //   safe: true,
+    // },
     modules: {
-      generateScopedName: IS_DEV_ENV ? '[name]__[local]___[hash:base64:5]' : '[hash:base64:5]',
+      generateScopedName: '[name]__[local]___[hash:base64:5]',
     },
     extract: 'dist/styles.min.css',
     inject: false,
     plugins: [
+      postcssRTL({}),
       postcssURL({
         url: asset => asset.url.replace('../', '/statics/'),
       }),
@@ -89,16 +91,16 @@ if (!IS_DEV_ENV) {
     })
   );
 
-  const uglify = require('rollup-plugin-terser').terser;
-  plugins.push(
-    uglify({
-      mangle: false,
-      sourcemap: {
-        filename: 'out.js',
-        url: 'out.js.map',
-      },
-    })
-  );
+  // const uglify = require('rollup-plugin-terser').terser;
+  // plugins.push(
+  //   uglify({
+  //     mangle: false,
+  //     sourcemap: {
+  //       filename: 'out.js',
+  //       url: 'out.js.map',
+  //     },
+  //   })
+  // );
 }
 
 if (process.env.MODULE_ANALYZE) {
