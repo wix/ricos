@@ -10,7 +10,7 @@
 ## [Unreleased]
 ### :rocket: New Feature
 - `general`
-  - viewport based lazy loading for plugin components
+  - [#358](https://github.com/wix-incubator/rich-content/pull/358) viewport based lazy loading for plugin components
 ### :house: Internal
 - `general`
   - [#356](https://github.com/wix-incubator/rich-content/pull/356) removed `WixUtils.isMobile`
