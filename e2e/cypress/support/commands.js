@@ -68,6 +68,34 @@ Cypress.Commands.add('focusEditor', () => {
   getEditor().focus();
 });
 
+Cypress.on('window:before:load', win => {
+  delete win.IntersectionObserver;
+  win.IntersectionObserver = class IntersectionObserverMock {
+    constructor(cb, options) {
+      this.cb = cb;
+      this.options = options;
+    }
+
+    thresholds = [0];
+    root = win;
+    rootMargin = '0px';
+    observe = element =>
+      this.cb([
+        {
+          boundingClientRect: element.getBoundingClientRect(),
+          intersectionRatio: 1,
+          intersectionRect: element.getBoundingClientRect(),
+          isIntersecting: true,
+          rootBounds: {},
+          target: element,
+          time: new Date().getTime(),
+        },
+      ]);
+    unobserve = () => null;
+    disconnect = () => {};
+  };
+});
+
 function getTextElments(rootElement) {
   let textElement,
     offset = 0;
