@@ -4,7 +4,7 @@ import noop from 'lodash/noop';
 import ReactPlayerWrapper from './reactPlayerWrapper';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { mergeStyles, validate, Context } from 'wix-rich-content-common';
+import { mergeStyles, validate, Context, ViewportRenderer } from 'wix-rich-content-common';
 import isEqual from 'lodash/isEqual';
 import getVideoSrc from './get-video-source';
 import schema from '../statics/data-schema.json';
@@ -67,15 +67,16 @@ class VideoViewer extends Component {
     this.styles = this.styles || mergeStyles({ styles, theme: this.context.theme });
     const url = this.normalizeUrl(getVideoSrc(componentData.src, settings));
     const props = { ...rest, url, onReady: this.onReady };
-    const { isReady, isPlaying, placeholderStyle } = this.state;
 
     return (
-      <ReactPlayerWrapper
-        className={classNames(this.styles.video_player)}
-        {...props}
-        onStart={this.onStart}
-        onEnded={this.onEnded}
-      />
+      <ViewportRenderer>
+        <ReactPlayerWrapper
+          className={classNames(this.styles.video_player)}
+          {...props}
+          onStart={this.onStart}
+          onEnded={this.onEnded}
+        />
+      </ViewportRenderer>
     );
   }
 }
