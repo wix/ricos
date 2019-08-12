@@ -30,6 +30,7 @@ const DividerLine = ({
   styles,
   className,
   contextType,
+  fillParent,
 }) => {
   const lines = getLines(type, width, multilineDinstance);
   const { Consumer } = contextType || Context;
@@ -44,7 +45,7 @@ const DividerLine = ({
           className
         );
         return (
-          <svg className={lineClassName}>
+          <svg className={lineClassName} style={{ width: fillParent ? 'inherit' : '' }}>
             {lines.map((props, i) => (
               <line key={i} {...props} />
             ))}
@@ -64,6 +65,7 @@ DividerLine.propTypes = {
   width: PropTypes.number,
   multilineDinstance: PropTypes.number,
   contextType: PropTypes.object,
+  fillParent: PropTypes.bool,
 };
 
 export default DividerLine;
