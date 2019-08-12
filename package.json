@@ -81,6 +81,7 @@
     "optimize-css-assets-webpack-plugin": "^4.0.2",
     "pascal-case": "2.0.1",
     "postcss-url": "^7.3.2",
+    "postcss-rtl": "^1.4.0",
     "prompts": "^0.1.8",
     "react-svg-loader": "^2.1.0",
     "rollup": "^1.1.0",
