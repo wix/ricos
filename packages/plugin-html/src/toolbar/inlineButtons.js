@@ -19,9 +19,9 @@ import {
 } from '../constants';
 import EditPanel from './HtmlEditPanel';
 
-const getAlignmentButtonProps = ({ store, componentData }) => {
-  const bounds = store.get('editorBounds');
-  const maxAlignmentWidth = bounds ? bounds.width - 1 : MAX_ALIGNMENT_WIDTH;
+const getAlignmentButtonPropsFn = getEditorBounds => ({ componentData }) => {
+  const editorBounds = getEditorBounds();
+  const maxAlignmentWidth = editorBounds ? editorBounds.width - 1 : MAX_ALIGNMENT_WIDTH;
   return {
     disabled: get(componentData, 'config.width', 0) > maxAlignmentWidth,
   };
@@ -35,7 +35,7 @@ const TOOLTIP_TEXT_BY_SRC_TYPE = {
 /**
  * createInlineButtons
  */
-export default ({ settings = {} }) => {
+export default ({ settings = {}, getEditorBounds }) => {
   const {
     maxWidth,
     minWidth = MIN_WIDTH,
@@ -55,10 +55,11 @@ export default ({ settings = {} }) => {
     { type: BUTTONS.SEPARATOR, keyName: 'separator1' },
     {
       type: BUTTONS.WIDTH,
+      getEditorBounds,
       keyName: 'width',
       min: minWidth,
-      mapStoreDataToPanelProps: ({ store }) => {
-        const bounds = store.get('editorBounds');
+      mapStoreDataToPanelProps: () => {
+        const bounds = getEditorBounds();
         if (bounds && bounds.width) {
           return { max: maxWidth ? Math.min(maxWidth, bounds.width) : bounds.width };
         } else {
@@ -78,7 +79,7 @@ export default ({ settings = {} }) => {
       type: BUTTONS.ALIGNMENT_LEFT,
       keyName: 'alignLeft',
       icon: SizeSmallLeftIcon,
-      mapStoreDataToButtonProps: getAlignmentButtonProps,
+      mapStoreDataToButtonProps: getAlignmentButtonPropsFn(getEditorBounds),
     },
     {
       type: BUTTONS.ALIGNMENT_CENTER,
@@ -89,7 +90,7 @@ export default ({ settings = {} }) => {
       type: BUTTONS.ALIGNMENT_RIGHT,
       keyName: 'alignRight',
       icon: SizeSmallRightIcon,
-      mapStoreDataToButtonProps: getAlignmentButtonProps,
+      mapStoreDataToButtonProps: getAlignmentButtonPropsFn(getEditorBounds),
     },
     { type: BUTTONS.SEPARATOR, keyName: 'separator3' },
     { type: BUTTONS.DELETE, keyName: 'delete', mobile: true },
