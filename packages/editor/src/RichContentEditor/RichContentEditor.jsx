@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import { EditorState, convertFromRaw } from '@wix/draft-js';
 import Editor from 'draft-js-plugins-editor';
 import get from 'lodash/get';
+import debounce from 'lodash/debounce';
 import merge from 'lodash/merge';
 import includes from 'lodash/includes';
 import Measure from 'react-measure';
@@ -33,6 +34,7 @@ class RichContentEditor extends Component {
     this.state = {
       editorState: this.getInitialEditorState(),
       theme: props.theme || {},
+      editorBounds: {},
     };
     this.refId = Math.floor(Math.random() * 9999);
 
@@ -64,8 +66,11 @@ class RichContentEditor extends Component {
       config,
       isMobile,
       setEditorState: this.setEditorState,
+      getEditorBounds: this.getEditorBounds,
     };
   };
+
+  getEditorBounds = () => this.state.editorBounds;
 
   initPlugins() {
     const {
@@ -97,6 +102,7 @@ class RichContentEditor extends Component {
       relValue,
       getEditorState: this.getEditorState,
       setEditorState: this.setEditorState,
+      getEditorBounds: this.getEditorBounds,
     });
     this.initEditorToolbars(pluginButtons, pluginTextButtons);
     this.pluginKeyBindings = initPluginKeyBindings(pluginTextButtons);
@@ -131,6 +137,7 @@ class RichContentEditor extends Component {
       theme: theme || {},
       getEditorState: this.getEditorState,
       setEditorState: this.setEditorState,
+      getEditorBounds: this.getEditorBounds,
       t,
       refId: this.refId,
       getToolbarSettings: config.getToolbarSettings,
@@ -226,7 +233,7 @@ class RichContentEditor extends Component {
   setEditor = ref => (this.editor = get(ref, 'editor', ref));
 
   updateBounds = editorBounds => {
-    this.subscriberPubsubs.forEach(pubsub => pubsub.set('editorBounds', editorBounds));
+    this.setState({ editorBounds });
   };
 
   renderToolbars = () => {
@@ -361,6 +368,8 @@ class RichContentEditor extends Component {
     return <style id="dynamicStyles">{css}</style>;
   };
 
+  onResize = debounce(({ bounds }) => this.updateBounds(bounds), 100);
+
   render() {
     const { isMobile } = this.props;
     const { theme } = this.state;
@@ -370,7 +379,7 @@ class RichContentEditor extends Component {
     });
     return (
       <Context.Provider value={this.contextualData}>
-        <Measure bounds onResize={({ bounds }) => this.updateBounds(bounds)}>
+        <Measure bounds onResize={this.onResize}>
           {({ measureRef }) => (
             <div style={this.props.style} ref={measureRef} className={wrapperClassName}>
               {this.renderStyleTag()}
