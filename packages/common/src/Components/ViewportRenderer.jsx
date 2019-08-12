@@ -35,7 +35,6 @@ class ViewportRenderer extends Component {
     const { theme } = this.context;
     this.styles = this.styles || mergeStyles({ styles, theme });
 
-    // return <div style={containerStyle}>{children}</div>
     return (
       <InView triggerOnce>
         {({ inView, ref }) =>
