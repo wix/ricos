@@ -73,7 +73,7 @@ class BaseToolbarButton extends React.Component {
       ...otherProps
     } = this.props;
 
-    const { helpers, theme, t, anchorTarget, relValue, languageDir } = this.context;
+    const { helpers, theme, t, anchorTarget, relValue } = this.context;
 
     if (this.props.type === BUTTONS.FILES && !this.shouldHandleFileSelection) {
       const updateEntity = pubsub.getBlockHandler('handleFilesAdded');
@@ -141,7 +141,6 @@ class BaseToolbarButton extends React.Component {
           uiSettings,
           modalStyles: appliedModalStyles,
           buttonRef: event.target,
-          languageDir,
           ...otherProps,
         };
         helpers.openModal(modalProps);

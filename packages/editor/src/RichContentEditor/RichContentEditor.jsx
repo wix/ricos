@@ -431,7 +431,7 @@ RichContentEditor.propTypes = {
   handlePastedText: PropTypes.func,
   handleReturn: PropTypes.func,
   customStyleFn: PropTypes.func,
-  locale: PropTypes.string,
+  locale: PropTypes.string.isRequired,
 };
 
 RichContentEditor.defaultProps = {

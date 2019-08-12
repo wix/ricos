@@ -159,7 +159,11 @@ export default class Editor extends PureComponent {
           onRequestClose={onRequestClose || this.helpers.closeModal}
         >
           {this.state.showModal && (
-            <RichContentEditorModal modalsMap={ModalsMap} {...this.state.modalProps} />
+            <RichContentEditorModal
+              modalsMap={ModalsMap}
+              locale={this.props.locale}
+              {...this.state.modalProps}
+            />
           )}
         </ReactModal>
       </div>

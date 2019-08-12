@@ -170,7 +170,6 @@ export default ({ blockType, button, helpers, pubsub, settings, t, isMobile }) =
           helpers,
           t,
           isMobile,
-          languageDir: this.context.languageDir,
         });
       }
     };
