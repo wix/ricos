@@ -3,7 +3,7 @@ import ReactPlayer from 'react-player';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { mergeStyles, validate, matchSoundCloudUrl, Context } from 'wix-rich-content-common';
-import isEqual from 'lodash/isEqual';
+import { isEqual } from 'lodash';
 import schema from '../statics/data-schema.json';
 import styles from '../statics/styles/sound-cloud-viewer.scss';
 
@@ -11,6 +11,7 @@ class SoundCloudViewer extends Component {
   constructor(props) {
     super(props);
     validate(props.componentData, schema);
+    this.state = { playing: false };
   }
 
   componentWillReceiveProps(nextProps) {
@@ -27,6 +28,9 @@ class SoundCloudViewer extends Component {
         className={classNames(this.styles.soundCloud_player)}
         url={matchSoundCloudUrl(componentData.src)}
         {...rest}
+        playing={this.context.disabled ? false : this.state.playing}
+        onPlay={() => this.setState({ playing: true })}
+        onPause={() => this.setState({ playing: false })}
       />
     );
   }

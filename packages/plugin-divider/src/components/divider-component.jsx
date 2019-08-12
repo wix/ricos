@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { mergeStyles, validate, Context } from 'wix-rich-content-common';
-import isEqual from 'lodash/isEqual';
+import { isEqual } from 'lodash';
 import { getType, getConfig } from '../toolbar/selectors';
 import DividerLine from './divider-line';
 import schema from '../../statics/data-schema.json';

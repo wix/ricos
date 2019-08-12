@@ -31,10 +31,19 @@ export default class AddPluginFloatingToolbar extends Component {
   };
 
   openAddPluginModal = () => {
-    const { getEditorState, setEditorState, structure, pubsub, theme, helpers, t } = this.props;
+    const {
+      getEditorState,
+      setEditorState,
+      structure,
+      pubsub,
+      theme,
+      helpers,
+      t,
+      isMobile,
+    } = this.props;
     helpers.openModal({
       modalName: EditorModals.MOBILE_ADD_PLUGIN,
-      modalStyles: getModalStyles({ fullScreen: false }),
+      modalStyles: getModalStyles({ fullScreen: false, isMobile }),
       structure: structure.map(Button => ({ component: Button })),
       theme,
       hidePopup: helpers.closeModal,

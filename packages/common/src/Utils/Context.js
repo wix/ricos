@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import noop from 'lodash/noop';
+import { noop } from 'lodash';
 
 const RichContentContext = React.createContext({
   theme: {},

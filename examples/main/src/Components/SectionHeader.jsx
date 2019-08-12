@@ -1,8 +1,8 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { MdClose, MdSettings } from 'react-icons/md';
 
-export default class SectionHeader extends PureComponent {
+export default class SectionHeader extends Component {
   onHideClick = () => {
     this.props.onHide(this.props.title.replace(' ', ''), false);
   };
@@ -22,9 +22,26 @@ export default class SectionHeader extends PureComponent {
             <MdSettings />
             <div className="dropdown">
               <ul>
-                {settings.map(({ name, action }) => (
-                  <li key={`${title}-settings-${name}`} onClick={action}>
+                {settings.map(({ name, active, action, items }) => (
+                  <li
+                    key={`${title}-settings-${name}`}
+                    onClick={!items ? action : null}
+                    className={!items && active ? 'active' : null}
+                  >
                     <span>{name}</span>
+                    {items && (
+                      <ul>
+                        {items.map(item => (
+                          <li
+                            key={item}
+                            onClick={() => action(item)}
+                            className={item === active ? 'active' : null}
+                          >
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
                   </li>
                 ))}
               </ul>

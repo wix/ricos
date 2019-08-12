@@ -1,4 +1,4 @@
-import camelCase from 'lodash/camelCase';
+import { camelCase } from 'lodash';
 import StaticToolbar from './StaticToolbar';
 import { simplePubsub, decorateComponentWithProps } from 'wix-rich-content-common';
 

@@ -37,7 +37,7 @@
     function initSendHeight(parentId) {
       var oldMaxHeight;
       function sendHeight() {
-        var scrollHeight = document.body.scrollHeight;
+        var scrollHeight = document.body.clientHeight;
         if (scrollHeight !== oldMaxHeight) {
           oldMaxHeight = scrollHeight;
           parent.postMessage({type: 'htmlPlugin:maxHeight', id: parentId, height: scrollHeight},'*');

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import isEmpty from 'lodash/isEmpty';
+import { isEmpty } from 'lodash';
 import ToolbarButton from '../../Components/ToolbarButton';
 
 export default ({ size, Icon, tooltipTextKey }) =>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import isEmpty from 'lodash/isEmpty';
+import { isEmpty } from 'lodash';
 import ToolbarButton from './ToolbarButton';
 import styles from '../../statics/styles/inline-toolbar-button.scss';
 
@@ -34,6 +34,7 @@ class InlineToolbarButton extends Component {
     onClick: PropTypes.func.isRequired,
     isActive: PropTypes.bool.isRequired,
     theme: PropTypes.object.isRequired,
+    dataHook: PropTypes.string.isRequired,
     isMobile: PropTypes.bool,
     tooltipText: PropTypes.string,
     tabIndex: PropTypes.number,
@@ -45,7 +46,16 @@ class InlineToolbarButton extends Component {
   preventDefault = event => event.preventDefault();
 
   render() {
-    const { isActive, theme, isMobile, tooltipText, tabIndex, icon: Icon, forwardRef } = this.props;
+    const {
+      isActive,
+      theme,
+      isMobile,
+      tooltipText,
+      dataHook,
+      tabIndex,
+      icon: Icon,
+      forwardRef,
+    } = this.props;
     const { styles } = this;
     const showTooltip = !isMobile && !isEmpty(tooltipText);
 
@@ -60,7 +70,7 @@ class InlineToolbarButton extends Component {
           tabIndex={tabIndex}
           aria-label={tooltipText}
           aria-pressed={isActive}
-          data-hook="codeBlockButton"
+          data-hook={dataHook}
           onClick={this.props.onClick}
           className={styles.button}
           ref={forwardRef}

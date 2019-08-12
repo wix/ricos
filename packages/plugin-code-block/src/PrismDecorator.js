@@ -1,6 +1,5 @@
-import _reduce from 'lodash/reduce';
-import range from 'lodash/range';
 import React from 'react';
+import { range, reduce as _reduce } from 'lodash';
 import PropTypes from 'prop-types';
 import Immutable from 'immutable';
 import Prism from 'prismjs';

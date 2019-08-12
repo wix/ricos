@@ -1,12 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import includes from 'lodash/includes';
-
-import get from 'lodash/get';
-import isFunction from 'lodash/isFunction';
+import { get, includes, isEqual, isFunction } from 'lodash';
 import { mergeStyles, Loader, validate, Context, ViewportRenderer } from 'wix-rich-content-common';
-import isEqual from 'lodash/isEqual';
 import getImageSrc from './get-image-source';
 import { WIX_MEDIA_DEFAULT } from './get-wix-media-url';
 import { getDefault } from './consts';
@@ -35,7 +31,7 @@ class ImageViewer extends React.Component {
   getImageSrc(src) {
     const { helpers } = this.context || {};
 
-    if (helpers && helpers.handleFileSelection) {
+    if (!src && (helpers && helpers.handleFileSelection)) {
       return null;
     }
 
@@ -49,7 +45,21 @@ class ImageViewer extends React.Component {
     } else {
       imageUrl.preload = getImageSrc(src, helpers);
       if (this.state.container) {
-        const { requiredWidth, requiredHeight } = this.calculateImageSize(src);
+        const { width } = this.state.container.getBoundingClientRect();
+        let requiredWidth = width || src.width || 1;
+        if (this.context.isMobile) {
+          const isSSR = typeof window === 'undefined';
+          //adjust the image width to viewport scaling and device pixel ratio
+          requiredWidth *= (!isSSR && window.devicePixelRatio) || 1;
+          requiredWidth *= (!isSSR && window.screen.width / document.body.clientWidth) || 1;
+        }
+        //keep the image's original ratio
+        let requiredHeight =
+          src && src.height && src.width
+            ? Math.ceil((src.height / src.width) * requiredWidth)
+            : WIX_MEDIA_DEFAULT.SIZE;
+        requiredWidth = Math.ceil(requiredWidth);
+        requiredHeight = Math.ceil(requiredHeight);
 
         imageUrl.highres = getImageSrc(src, helpers, {
           requiredWidth,
@@ -86,24 +96,6 @@ class ImageViewer extends React.Component {
       });
     }
   };
-
-  calculateImageSize(src) {
-    const { width } = this.state.container.getBoundingClientRect();
-    let requiredWidth = width || src.width || 1;
-    if (this.context.isMobile) {
-      //adjust the image width to viewport scaling and device pixel ratio
-      requiredWidth *= (window && window.devicePixelRatio) || 1;
-      requiredWidth *= (window && window.screen.width / document.body.clientWidth) || 1;
-    }
-    //keep the image's original ratio
-    let requiredHeight =
-      src && src.height && src.width
-        ? Math.ceil((src.height / src.width) * requiredWidth)
-        : WIX_MEDIA_DEFAULT.SIZE;
-    requiredWidth = Math.ceil(requiredWidth);
-    requiredHeight = Math.ceil(requiredHeight);
-    return { requiredWidth, requiredHeight };
-  }
 
   renderImage(imageClassName, imageSrc, alt, props) {
     return [
@@ -206,7 +198,6 @@ class ImageViewer extends React.Component {
     } = this.props;
     const { fallbackImageSrc } = this.state;
     const data = componentData || getDefault();
-    data.config = data.config || {};
     const { metadata = {} } = componentData;
 
     const itemClassName = classNames(this.styles.imageContainer, className);

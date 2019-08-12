@@ -5,5 +5,7 @@ import registerServiceWorker from './registerServiceWorker';
 import 'react-reflex/styles.css';
 import './styles.global.scss';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const allLocales = preval`module.exports = require('./getAllLocales')`;
+
+ReactDOM.render(<App allLocales={allLocales} />, document.getElementById('root'));
 registerServiceWorker();

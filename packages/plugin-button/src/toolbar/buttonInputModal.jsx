@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import isEqual from 'lodash/isEqual';
+import { isEqual } from 'lodash';
 import { Scrollbars } from 'react-custom-scrollbars';
 import {
   mergeStyles,

@@ -207,7 +207,7 @@ export class MyApp extends React.Component {
 }
 ```
 
-You can find a full list of classes you can override in [here](./examples/editor/src/theme).
+You can find a full list of classes you can override in [here](./examples/main/src/theme).
 
 #### Plugins
 

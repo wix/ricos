@@ -148,7 +148,8 @@ export default class Editor extends PureComponent {
           editorKey={'random-editorKey-ssr'}
           anchorTarget={anchorTarget}
           relValue={relValue}
-          locale={'he'}
+          locale={this.props.locale}
+          localeResource={this.props.localeResource}
         />
         <ReactModal
           isOpen={this.state.showModal}
@@ -172,4 +173,6 @@ Editor.propTypes = {
   theme: PropTypes.object,
   isMobile: PropTypes.bool,
   staticToolbar: PropTypes.bool,
+  locale: PropTypes.string,
+  localeResource: PropTypes.object,
 };

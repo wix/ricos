@@ -1,4 +1,4 @@
-import merge from 'lodash/merge';
+import { merge } from 'lodash';
 
 export function mergeToolbarSettings({ defaultSettings, customSettings }) {
   return defaultSettings.reduce((mergedSettings, defaultSetting) => {
