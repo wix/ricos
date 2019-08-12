@@ -8,6 +8,9 @@
 > - :house: [Internal]
 
 ## [Unreleased]
+### :rocket: New Feature
+- `editor`
+  - [#358](https://github.com/wix-incubator/rich-content/pull/358) added support for rtl in editor modals
 ### :bug: Bug Fix
 - `editor`
   - [#357](https://github.com/wix-incubator/rich-content/pull/357) fix footerToolbar css
