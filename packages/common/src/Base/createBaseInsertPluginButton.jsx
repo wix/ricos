@@ -7,7 +7,7 @@ import { mergeStyles } from '../Utils/mergeStyles';
 import FileInput from '../Components/FileInput';
 import ToolbarButton from '../Components/ToolbarButton';
 import styles from '../../statics/styles/toolbar-button.scss';
-import { Context } from 'wix-rich-content-common';
+import Context from '../Utils/Context/';
 
 /**
  * createBaseInsertPluginButton
