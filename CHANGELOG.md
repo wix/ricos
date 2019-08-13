@@ -11,6 +11,9 @@
 ### :rocket: New Feature
 - `general`
   - [#358](https://github.com/wix-incubator/rich-content/pull/358) viewport based lazy loading for plugin components
+### :bug: Bug Fix
+- `editor`
+  - [#357](https://github.com/wix-incubator/rich-content/pull/357) fix footerToolbar css
 ### :house: Internal
 - `general`
   - [#356](https://github.com/wix-incubator/rich-content/pull/356) removed `WixUtils.isMobile`
