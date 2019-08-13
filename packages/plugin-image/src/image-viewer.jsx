@@ -13,9 +13,6 @@ class ImageViewer extends React.Component {
   constructor(props) {
     super(props);
     validate(props.componentData, schema);
-    this.state = {
-      insideViewport: true,
-    };
   }
 
   componentDidMount() {

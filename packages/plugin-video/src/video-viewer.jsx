@@ -13,10 +13,6 @@ class VideoViewer extends Component {
   constructor(props) {
     super(props);
     validate(props.componentData, schema);
-    this.state = {
-      isPlaying: false,
-      placeholderStyle: {},
-    };
   }
 
   componentWillReceiveProps(nextProps) {
@@ -37,19 +33,7 @@ class VideoViewer extends Component {
     const wrapper = ReactDOM.findDOMNode(this).parentNode;
     const ratio = this.getVideoRatio(wrapper);
     wrapper.style['padding-bottom'] = ratio * 100 + '%';
-    this.setState({
-      placeholderStyle: {
-        height: wrapper.clientHeight,
-      },
-    });
   };
-
-  onStart = () => {
-    this.setState({ isPlaying: true });
-    this.props.onStart();
-  };
-
-  onEnded = () => this.setState({ isPlaying: false });
 
   render() {
     const { componentData, settings, ...rest } = this.props;
@@ -76,7 +60,6 @@ VideoViewer.propTypes = {
   width: PropTypes.string,
   height: PropTypes.string,
   settings: PropTypes.object.isRequired,
-  playing: PropTypes.bool,
 };
 
 VideoViewer.contextType = Context.type;
@@ -85,7 +68,6 @@ VideoViewer.defaultProps = {
   width: '100%',
   height: '100%',
   controls: true,
-  playing: false,
 };
 
 export default VideoViewer;
