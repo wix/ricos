@@ -205,6 +205,11 @@ body {
                     flex: 1;
                   }
                 }
+
+                @include mobile {
+                  display: block;
+                  flex: 0;
+                }
               }
 
               .DraftEditor-root {
