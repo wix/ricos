@@ -9,6 +9,7 @@ import {
 } from 'wix-rich-content-common';
 import { convertToReact } from './utils/convertContentState';
 import styles from '../statics/rich-content-viewer.scss';
+import * as rtlDetect from 'rtl-detect';
 
 export default class RichContentViewer extends Component {
   constructor(props) {
@@ -60,7 +61,7 @@ export default class RichContentViewer extends Component {
 
   render() {
     const { styles } = this;
-    const { textDirection, typeMappers, decorators, inlineStyleMappers } = this.props;
+    const { textDirection, typeMappers, decorators, inlineStyleMappers, locale } = this.props;
 
     const wrapperClassName = classNames(styles.wrapper, {
       [styles.desktop]: !this.props.platform || this.props.platform === 'desktop',
@@ -80,7 +81,7 @@ export default class RichContentViewer extends Component {
     );
 
     return (
-      <div className={wrapperClassName}>
+      <div className={wrapperClassName} dir={rtlDetect.getLangDir(locale)}>
         <Context.Provider value={this.state.contextualData}>
           <div className={editorClassName}>{output}</div>
           <AccessibilityListener />
