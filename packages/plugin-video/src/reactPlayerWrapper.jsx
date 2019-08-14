@@ -26,16 +26,31 @@ export default class ReactPlayerWrapper extends Component {
     }
   }
 
+  static getDerivedStateFromProps(props) {
+    if (props.disabled) {
+      return { playing: false };
+    }
+    return null;
+  }
+
   render() {
     if (!this.state.vimeoLoaded && this.isVimeoAndRequireJS()) {
       return null;
     }
-    return <ReactPlayer {...this.props} />;
+    return (
+      <ReactPlayer
+        playing={this.state.playing}
+        onPlay={() => this.setState({ playing: true })}
+        onPause={() => this.setState({ playing: false })}
+        {...this.props}
+      />
+    );
   }
 }
 
 ReactPlayerWrapper.propTypes = {
   url: PropTypes.string.isRequired,
+  disabled: PropTypes.bool,
 };
 
 function isVimeoUrl(url) {

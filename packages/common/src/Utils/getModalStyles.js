@@ -1,5 +1,4 @@
-import WixUtils from './wixUtils';
-import merge from 'lodash/merge';
+import { merge } from 'lodash';
 
 const mobileModalStyles = {
   overlay: {
@@ -115,9 +114,14 @@ const inlineStyles = {
   },
 };
 
-export const getModalStyles = ({ customStyles = null, fullScreen = true, inline = false } = {}) => {
+export const getModalStyles = ({
+  customStyles = null,
+  fullScreen = true,
+  inline = false,
+  isMobile = false,
+} = {}) => {
   const overrideStyles = [];
-  if (WixUtils.isMobile()) {
+  if (isMobile) {
     if (fullScreen) {
       overrideStyles.push(mobileFullScreenOverrideStyles);
     }

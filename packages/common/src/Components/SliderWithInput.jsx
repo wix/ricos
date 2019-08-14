@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import debounce from 'lodash/debounce';
-import isNumber from 'lodash/isNumber';
+import { debounce, isNumber } from 'lodash';
 
 import { mergeStyles } from '../Utils/mergeStyles';
 import Slider from './Slider';

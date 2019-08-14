@@ -2,11 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Measure from 'react-measure';
+import { debounce, identity, pickBy } from 'lodash';
 import { DISPLAY_MODE, Context, TooltipHost } from 'wix-rich-content-common';
 import Styles from '../../../../statics/styles/static-toolbar.scss';
-import debounce from 'lodash/debounce';
-import pickBy from 'lodash/pickBy';
-import identity from 'lodash/identity';
 
 const displayOptionStyles = {
   [DISPLAY_MODE.NORMAL]: {},

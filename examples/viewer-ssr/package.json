@@ -62,6 +62,7 @@
     "wix-rich-content-plugin-mentions": "file:../../packages/plugin-mentions",
     "wix-rich-content-plugin-video": "file:../../packages/plugin-video",
     "wix-rich-content-plugin-image": "file:../../packages/plugin-image",
+    "wix-rich-content-plugin-text-color": "file:../../packages/plugin-text-color",
     "wix-rich-content-viewer": "file:../../packages/viewer",
     "wix-run-mode": "latest",
     "yoshi-runtime": "latest"

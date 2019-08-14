@@ -14,24 +14,22 @@ export default class RichContentViewer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      raw: this.getInitialState(props.initialState),
+      raw: RichContentViewer.getInitialState(props.initialState),
+      contextualData: this.initContext(),
     };
     this.styles = mergeStyles({ styles, theme: props.theme });
-
-    this.initContext();
   }
 
-  getInitialState = initialState =>
-    initialState
-      ? normalizeInitialState(initialState, {
-          anchorTarget: this.props.anchorTarget,
-          relValue: this.props.relValue,
+  static getInitialState = props =>
+    props.initialState
+      ? normalizeInitialState(props.initialState, {
+          anchorTarget: props.anchorTarget,
+          relValue: props.relValue,
         })
       : {};
 
   initContext = () => {
-    const { theme, isMobile, anchorTarget, relValue, config, helpers, locale } = this.props;
-    this.contextualData = {
+    const {
       theme,
       isMobile,
       anchorTarget,
@@ -39,13 +37,25 @@ export default class RichContentViewer extends Component {
       config,
       helpers,
       locale,
+      disabled,
+    } = this.props;
+    return {
+      theme,
+      isMobile,
+      anchorTarget,
+      relValue,
+      config,
+      helpers,
+      locale,
+      disabled,
     };
   };
 
-  componentWillReceiveProps(nextProps) {
-    if (this.props.initialState !== nextProps.initialState) {
-      this.setState({ raw: this.getInitialState(nextProps.initialState) });
-    }
+  static getDerivedStateFromProps(props, state) {
+    return {
+      raw: RichContentViewer.getInitialState(props),
+      contextualData: { ...state.contextualData, disabled: props.disabled },
+    };
   }
 
   render() {
@@ -64,14 +74,14 @@ export default class RichContentViewer extends Component {
       styles,
       textDirection,
       typeMappers,
-      this.contextualData,
+      this.state.contextualData,
       decorators,
       inlineStyleMappers
     );
 
     return (
       <div className={wrapperClassName}>
-        <Context.Provider value={this.contextualData}>
+        <Context.Provider value={this.state.contextualData}>
           <div className={editorClassName}>{output}</div>
           <AccessibilityListener />
         </Context.Provider>
@@ -106,6 +116,7 @@ RichContentViewer.propTypes = {
   relValue: PropTypes.string,
   config: PropTypes.object,
   textDirection: PropTypes.oneOf(['rtl', 'ltr']),
+  disabled: PropTypes.bool,
 };
 
 RichContentViewer.defaultProps = {

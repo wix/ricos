@@ -1,4 +1,4 @@
-import get from 'lodash/get';
+import { get } from 'lodash';
 import { translate } from 'react-i18next';
 import {
   BUTTONS,

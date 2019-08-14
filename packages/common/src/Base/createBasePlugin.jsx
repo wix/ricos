@@ -1,6 +1,5 @@
 import { SelectionState, EditorState, Modifier } from '@wix/draft-js';
-import includes from 'lodash/includes';
-import cloneDeep from 'lodash/cloneDeep';
+import { cloneDeep, includes } from 'lodash';
 import createBaseComponent from './createBaseComponent';
 import createToolbar from './createBaseToolbar';
 import createInsertPluginButton from './createBaseInsertPluginButton';

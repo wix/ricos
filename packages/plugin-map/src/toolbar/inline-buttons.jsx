@@ -5,7 +5,7 @@ import {
   SizeSmallCenterIcon,
 } from 'wix-rich-content-common';
 import { MapSettingsModal } from './MapSettingsModal';
-import get from 'lodash/get';
+import { get } from 'lodash';
 import { DEFAULTS } from '../constants';
 
 const getAlignmentButtonPropsFn = getEditorBounds => ({ componentData }) => {
@@ -17,7 +17,7 @@ const getAlignmentButtonPropsFn = getEditorBounds => ({ componentData }) => {
   };
 };
 
-export default ({ settings, t, helpers, getEditorBounds }) => {
+export default ({ settings, t, helpers, getEditorBounds, isMobile }) => {
   const { maxWidth, minWidth, maxHeight, minHeight } = settings;
 
   return [
@@ -67,7 +67,7 @@ export default ({ settings, t, helpers, getEditorBounds }) => {
       type: BUTTONS.EXTERNAL_MODAL,
       icon: PluginSettingsIcon,
       modalElement: MapSettingsModal,
-      modalStyles: getModalStyles(),
+      modalStyles: getModalStyles({ isMobile }),
       mobile: true,
       tooltipTextKey: 'MapPluginButton_Settings_Tooltip',
       helpers,

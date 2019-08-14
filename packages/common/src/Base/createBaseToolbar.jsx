@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
 import classNames from 'classnames';
-import pickBy from 'lodash/pickBy';
+import { pickBy } from 'lodash';
 import Measure from 'react-measure';
 import { TOOLBARS, DISPLAY_MODE } from '../consts';
 import { getConfigByFormFactor } from '../Utils/getConfigByFormFactor';

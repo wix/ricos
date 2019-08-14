@@ -129,17 +129,13 @@ export class MapSettingsModal extends Component {
     const navBarClassName = `map_settings_modal_mobile_navbar_dynamic_${uniqueClassesId}`;
     const dividerClassName = `map_settings_modal_divider_dynamic_${uniqueClassesId}`;
 
-    /* eslint-disable camelcase*/
+    /* eslint-disable camelcase, max-len */
     this.styles.button_primary = `${buttonPrimaryClassName} ${this.styles.button_primary}`;
     this.styles.button_secondary = `${buttonSecondaryClassName} ${this.styles.button_secondary}`;
     this.styles.textInput_input = `${textInputClassName} ${this.styles.textInput_input}`;
-    this.styles.map_settings_modal_mobile_navbar = `${navBarClassName} ${
-      this.styles.map_settings_modal_mobile_navbar
-    }`;
-    this.styles.map_settings_modal_divider = `${dividerClassName} ${
-      this.styles.map_settings_modal_divider
-    }`;
-    /*eslint-enable camelcase */
+    this.styles.map_settings_modal_mobile_navbar = `${navBarClassName} ${this.styles.map_settings_modal_mobile_navbar}`;
+    this.styles.map_settings_modal_divider = `${dividerClassName} ${this.styles.map_settings_modal_divider}`;
+    /*eslint-enable camelcase, max-len */
 
     const style = `
       .${buttonPrimaryClassName} {

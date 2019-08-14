@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { InView } from 'react-intersection-observer';
 import Context from '../Utils/Context';
 import classnames from 'classnames';
+import { isSSR } from '../Utils/ssrUtils';
 import { mergeStyles } from '../Utils/mergeStyles';
 import styles from '../../statics/styles/placeholder.scss';
 
@@ -35,7 +36,10 @@ class ViewportRenderer extends Component {
     const { theme } = this.context;
     this.styles = this.styles || mergeStyles({ styles, theme });
 
-    // return <div style={containerStyle}>{children}</div>
+    if (isSSR() || typeof window.IntersectionObserver === 'undefined') {
+      return children;
+    }
+
     return (
       <InView triggerOnce>
         {({ inView, ref }) =>

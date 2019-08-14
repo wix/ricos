@@ -102,9 +102,11 @@
 }
 
 .left {
+  /*!rtl:ignore*/
   text-align: left !important;
 
   & > * {
+    /*!rtl:ignore*/
     text-align: left !important;
   }
 }
@@ -118,9 +120,11 @@
 }
 
 .right {
+  /*!rtl:ignore*/
   text-align: right !important;
 
   & > * {
+    /*!rtl:ignore*/
     text-align: right !important;
   }
 }
@@ -225,5 +229,6 @@
 }
 
 .rtl {
+  /*!rtl:ignore*/
   direction: rtl;
 }

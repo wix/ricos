@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import isEmpty from 'lodash/isEmpty';
+import { isEmpty } from 'lodash';
 import classNames from 'classnames';
 import { mergeStyles, ToolbarButton } from 'wix-rich-content-common';
 

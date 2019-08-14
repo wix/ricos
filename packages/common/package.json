@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-common",
-  "version": "4.0.6",
+  "version": "4.0.12",
   "author": {
     "name": "Jonathan Bachman",
     "email": "jonathanb@wix.com"
@@ -45,7 +45,7 @@
     "classnames": "^2.2.6",
     "cross-env": "^5.2.0",
     "deep-freeze": "0.0.1",
-    "eslint": "^4.19.1",
+    "eslint": "^6.1.0",
     "jest": "^23.1.0",
     "lodash": "^4.17.10",
     "prop-types": "^15.6.2",
@@ -55,14 +55,14 @@
   },
   "dependencies": {
     "downshift": "3.1.12",
-    "focus-trap": "^2.4.5",
-    "jsonschema": "^1.2.4",
-    "linkify-it": "^2.0.3",
-    "react-color": "^2.17.0",
-    "react-intersection-observer": "^8.24.1",
-    "react-measure": "^2.0.2",
-    "react-tooltip": "^3.6.1",
-    "react-window": "1.5.0"
+    "focus-trap": "~2.4.6",
+    "jsonschema": "~1.2.4",
+    "linkify-it": "~2.1.0",
+    "react-color": "~2.17.3",
+    "react-intersection-observer": "~8.24.1",
+    "react-measure": "~2.3.0",
+    "react-tooltip": "~3.10.0",
+    "react-window": "~1.5.0"
   },
   "unpkg": true,
   "publishConfig": {

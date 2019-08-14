@@ -1,7 +1,6 @@
 import {
   BUTTONS,
   getModalStyles,
-  WixUtils,
   DECORATION_MODE,
   decorateComponentWithProps,
 } from 'wix-rich-content-common';
@@ -10,7 +9,10 @@ import GiphyApiInputModal from './giphyApiInputModal';
 import { MobileFullScreenCustomStyle, DesktopFlyOutModalStyles } from '../constants';
 import Arrow from './arrow';
 
-export default ({ t, settings }) => {
+export default ({ t, settings, isMobile }) => {
+  const modalStyles = isMobile
+    ? getModalStyles({ customStyles: MobileFullScreenCustomStyle, fullScreen: true, isMobile })
+    : null;
   return [
     { keyName: 'sizeOriginal', type: BUTTONS.SIZE_ORIGINAL, mobile: false },
     { keyName: 'sizeSmallCenter', type: BUTTONS.SIZE_SMALL_CENTER, mobile: false },
@@ -25,13 +27,12 @@ export default ({ t, settings }) => {
       type: BUTTONS.EXTERNAL_MODAL,
       icon: MediaReplaceIcon,
       modalElement: decorateComponentWithProps(GiphyApiInputModal, settings),
-      modalStyles: WixUtils.isMobile()
-        ? getModalStyles({ customStyles: MobileFullScreenCustomStyle, fullScreen: true })
-        : null,
+      modalStyles,
       modalStylesFn: ({ buttonRef }) => {
         const modalStyles = getModalStyles({
           customStyles: DesktopFlyOutModalStyles,
           fullScreen: true,
+          isMobile,
         });
         const { top, left } = buttonRef.getBoundingClientRect();
         const modalLeft = left - 15;

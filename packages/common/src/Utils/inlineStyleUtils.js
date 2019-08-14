@@ -1,5 +1,6 @@
 import { getSelectedBlocks, getSelectionRange, isInSelectionRange } from './draftUtils';
-import uniq from 'lodash/uniq';
+import { uniq } from 'lodash';
+
 const getBlockStyleRanges = (block, styleSelectionPredicate) => {
   const styleRanges = [];
 

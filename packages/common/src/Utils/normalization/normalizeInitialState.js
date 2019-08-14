@@ -1,6 +1,4 @@
-import mapValues from 'lodash/mapValues';
-import cloneDeep from 'lodash/cloneDeep';
-import isUndefined from 'lodash/isUndefined';
+import { cloneDeep, isUndefined, mapValues } from 'lodash';
 import { processContentState } from './processContentState';
 
 const normalizeEntityType = (entityType, entityTypeMap) => {

@@ -1,5 +1,4 @@
-import debounce from 'lodash/debounce';
-import pick from 'lodash/pick';
+import { debounce, pick } from 'lodash';
 import local from 'local-storage';
 import MobileDetect from 'mobile-detect';
 import { convertFromRaw, createWithContent } from 'wix-rich-content-editor';
@@ -47,3 +46,12 @@ export const getBaseUrl = () => {
   const baseUrl = `${protocol}//${hostname}`;
   return port ? `${baseUrl}:${port}` : baseUrl;
 };
+
+export const getRequestedLocale = () => getUrlParameter('locale') || 'en';
+
+function getUrlParameter(name) {
+  name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+  var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+  var results = regex.exec(location.search);
+  return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+}

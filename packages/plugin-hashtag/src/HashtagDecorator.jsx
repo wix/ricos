@@ -1,5 +1,5 @@
 import Immutable from 'immutable';
-import range from 'lodash/range';
+import { range } from 'lodash';
 import Hashtag from './HashtagComponent';
 import hashtagRegexes from './hashtagRegexes';
 

@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import isFunction from 'lodash/isFunction';
+import { isFunction } from 'lodash';
 import {
   sizeClassName,
   alignmentClassName,

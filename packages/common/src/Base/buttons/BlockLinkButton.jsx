@@ -25,7 +25,7 @@ class BlockLinkButton extends Component {
       t,
       uiSettings,
     } = this.props;
-    const modalStyles = getModalStyles({ fullScreen: false });
+    const modalStyles = getModalStyles({ fullScreen: false, isMobile });
     if (isMobile) {
       if (helpers && helpers.openModal) {
         const modalProps = {
@@ -69,7 +69,6 @@ class BlockLinkButton extends Component {
     const linkButtonTooltip = t('TextLinkButton_Tooltip');
     return (
       <LinkButton
-        data-hook="blockLinkButton"
         onClick={this.showLinkPanel}
         isActive={this.isActive}
         theme={theme}

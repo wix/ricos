@@ -1,0 +1,50 @@
+{
+  "blocks": [
+    {
+      "key": "foo",
+      "text": "Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition. Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment.",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [
+        {
+          "offset": 9,
+          "length": 5,
+          "style": "BOLD"
+        },
+        {
+          "offset": 15,
+          "length": 21,
+          "style": "BOLD"
+        },
+        {
+          "offset": 105,
+          "length": 9,
+          "style": "BOLD"
+        },
+        {
+          "offset": 9,
+          "length": 5,
+          "style": "ITALIC"
+        },
+        {
+          "offset": 276,
+          "length": 25,
+          "style": "ITALIC"
+        },
+        {
+          "offset": 59,
+          "length": 20,
+          "style": "UNDERLINE"
+        },
+        {
+          "offset": 105,
+          "length": 9,
+          "style": "UNDERLINE"
+        }
+      ],
+      "entityRanges": [],
+      "data": {}
+    }
+  ],
+  "entityMap": {}
+}

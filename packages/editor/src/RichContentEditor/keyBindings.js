@@ -1,5 +1,5 @@
 import { KeyBindingUtil, getDefaultKeyBinding } from '@wix/draft-js';
-import isEqual from 'lodash/isEqual';
+import { isEqual } from 'lodash';
 import { COMMANDS, MODIFIERS } from 'wix-rich-content-common';
 
 const COMMAND_BY_SHORTCUT = [
