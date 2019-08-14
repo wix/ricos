@@ -355,7 +355,7 @@ class RichContentEditor extends Component {
       );
     });
     const css = Object.entries(styles).reduce(
-      (cssString, [className, css]) => `${cssString} .${className} {${css}}`,
+      (cssString, [className, css]) => `${cssString}[dir] .${className} {${css}}`,
       ''
     );
     return <style id="dynamicStyles">{css}</style>;
@@ -372,19 +372,16 @@ class RichContentEditor extends Component {
       <Context.Provider value={this.contextualData}>
         <Measure bounds onResize={({ bounds }) => this.updateBounds(bounds)}>
           {({ measureRef }) => (
-            <div
-              style={this.props.style}
-              ref={measureRef}
-              className={wrapperClassName}
-              dir={this.contextualData.languageDir}
-            >
-              {this.renderStyleTag()}
-              <div className={classNames(styles.editor, theme.editor)}>
-                {this.renderAccessibilityListener()}
-                {this.renderEditor()}
-                {this.renderToolbars()}
-                {this.renderInlineModals()}
-                {this.renderTooltipHost()}
+            <div dir={this.contextualData.languageDir}>
+              <div style={this.props.style} ref={measureRef} className={wrapperClassName}>
+                {this.renderStyleTag()}
+                <div className={classNames(styles.editor, theme.editor)}>
+                  {this.renderAccessibilityListener()}
+                  {this.renderEditor()}
+                  {this.renderToolbars()}
+                  {this.renderInlineModals()}
+                  {this.renderTooltipHost()}
+                </div>
               </div>
             </div>
           )}

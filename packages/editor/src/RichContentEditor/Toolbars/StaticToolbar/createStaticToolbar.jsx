@@ -1,6 +1,8 @@
+import React from 'react';
 import { camelCase } from 'lodash';
 import StaticToolbar from './StaticToolbar';
-import { simplePubsub, decorateComponentWithProps } from 'wix-rich-content-common';
+import { simplePubsub } from 'wix-rich-content-common';
+import * as rtlDetect from 'rtl-detect';
 
 export default (data = {}) => {
   const pubsub = simplePubsub();
@@ -59,6 +61,10 @@ export default (data = {}) => {
       pubsub.set('selection', editorState.getSelection());
       return editorState;
     },
-    Toolbar: decorateComponentWithProps(StaticToolbar, toolbarProps),
+    Toolbar: props => (
+      <div dir={rtlDetect.getLangDir(locale)}>
+        <StaticToolbar {...toolbarProps} {...props} />
+      </div>
+    ),
   };
 };

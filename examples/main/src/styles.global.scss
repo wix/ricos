@@ -190,14 +190,20 @@ body {
               min-height: 100%;
               display: flex;
               flex-direction: column;
-
-              >div:last-child {
+              
+              >div {
                 display: flex;
                 flex-direction: column;
                 flex: 1;
 
-                >div {
+                >div:last-child {
+                  display: flex;
+                  flex-direction: column;
                   flex: 1;
+
+                  >div {
+                    flex: 1;
+                  }
                 }
               }
 
