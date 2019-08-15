@@ -1,5 +1,6 @@
 import { composeDecorators } from 'draft-js-plugins-editor';
 import createFocusPlugin from 'draft-js-focus-plugin';
+import createResizeablePlugin from 'draft-js-resizeable-plugin';
 import createBlockDndPlugin from 'draft-js-drag-n-drop-plugin';
 
 const createPlugins = ({
@@ -15,9 +16,14 @@ const createPlugins = ({
   setEditorState,
 }) => {
   const focusPlugin = createFocusPlugin();
+  const resizePlugin = createResizeablePlugin();
   const dndPlugin = createBlockDndPlugin();
 
-  const wixPluginsDecorators = composeDecorators(focusPlugin.decorator, dndPlugin.decorator);
+  const wixPluginsDecorators = composeDecorators(
+    focusPlugin.decorator,
+    dndPlugin.decorator,
+    resizePlugin.decorator
+  );
   const wixPluginConfig = {
     decorator: wixPluginsDecorators,
     helpers,
@@ -51,7 +57,7 @@ const createPlugins = ({
     ];
   });
 
-  const pluginInstances = [focusPlugin, dndPlugin, ...wixPlugins];
+  const pluginInstances = [focusPlugin, resizePlugin, dndPlugin, ...wixPlugins];
 
   return {
     pluginInstances,
