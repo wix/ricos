@@ -1,7 +1,7 @@
-import { composeDecorators } from 'draft-js-plugins-editor';
-import createFocusPlugin from 'draft-js-focus-plugin';
+// import { composeDecorators } from 'draft-js-plugins-editor';
+// import createFocusPlugin from 'draft-js-focus-plugin';
 import createResizeablePlugin from 'draft-js-resizeable-plugin';
-import createBlockDndPlugin from 'draft-js-drag-n-drop-plugin';
+// import createBlockDndPlugin from 'draft-js-drag-n-drop-plugin';
 
 const createPlugins = ({
   plugins,
@@ -15,15 +15,15 @@ const createPlugins = ({
   getEditorState,
   setEditorState,
 }) => {
-  const focusPlugin = createFocusPlugin();
-  const resizePlugin = createResizeablePlugin();
-  const dndPlugin = createBlockDndPlugin();
+  // const focusPlugin = createFocusPlugin();
+  const resizePlugin = createResizeablePlugin({
+    horizontal: 'auto',
+    vertical: 'auto',
+  });
+  // const dndPlugin = createBlockDndPlugin();
 
-  const wixPluginsDecorators = composeDecorators(
-    focusPlugin.decorator,
-    dndPlugin.decorator,
-    resizePlugin.decorator
-  );
+  const wixPluginsDecorators = resizePlugin.decorator;
+
   const wixPluginConfig = {
     decorator: wixPluginsDecorators,
     helpers,
@@ -57,7 +57,7 @@ const createPlugins = ({
     ];
   });
 
-  const pluginInstances = [focusPlugin, resizePlugin, dndPlugin, ...wixPlugins];
+  const pluginInstances = [resizePlugin, ...wixPlugins];
 
   return {
     pluginInstances,

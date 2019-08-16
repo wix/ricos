@@ -52,22 +52,22 @@ import { getBaseUrl } from '../utils';
 // import PluginToolbarDecoration from './Components/PluginToolbarDecoration';
 
 export const editorPlugins = [
-  createImagePlugin,
-  createVideoPlugin,
-  createHtmlPlugin,
+  // createImagePlugin,
+  // createVideoPlugin,
+  // createHtmlPlugin,
   createDividerPlugin,
-  // createExternalEmojiPlugin,
-  createLineSpacingPlugin,
-  createLinkPlugin,
-  createHashtagPlugin,
-  createExternalMentionsPlugin,
-  createCodeBlockPlugin,
-  createSoundCloudPlugin,
-  createGiphyPlugin,
-  createHeadersMarkdownPlugin,
-  createMapPlugin,
-  createFileUploadPlugin,
-  createTextColorPlugin,
+  // // createExternalEmojiPlugin,
+  // createLineSpacingPlugin,
+  // createLinkPlugin,
+  // createHashtagPlugin,
+  // createExternalMentionsPlugin,
+  // createCodeBlockPlugin,
+  // createSoundCloudPlugin,
+  // createGiphyPlugin,
+  // createHeadersMarkdownPlugin,
+  // createMapPlugin,
+  // createFileUploadPlugin,
+  // createTextColorPlugin,
 ];
 
 const themeColors = {
