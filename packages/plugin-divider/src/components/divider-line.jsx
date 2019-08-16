@@ -42,10 +42,11 @@ const DividerLine = ({
           styles[`divider--${type}`],
           styles[`divider--${size}${context.isMobile ? '--mobile' : ''}`],
           styles[`divider--${alignment}`],
+          fillParent ? styles['divider--fill-parent'] : '',
           className
         );
         return (
-          <svg className={lineClassName} style={{ width: fillParent ? 'inherit' : '' }}>
+          <svg className={lineClassName}>
             {lines.map((props, i) => (
               <line key={i} {...props} />
             ))}

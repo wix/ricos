@@ -64,12 +64,12 @@ const plugins = [
     ],
   }),
   postcss({
-    // minimize: {
-    //   reduceIdents: false,
-    //   safe: true,
-    // },
+    minimize: {
+      reduceIdents: false,
+      safe: true,
+    },
     modules: {
-      generateScopedName: '[name]__[local]___[hash:base64:5]',
+      generateScopedName: IS_DEV_ENV ? '[name]__[local]___[hash:base64:5]' : '[hash:base64:5]',
     },
     extract: 'dist/styles.min.css',
     inject: false,
@@ -91,16 +91,16 @@ if (!IS_DEV_ENV) {
     })
   );
 
-  // const uglify = require('rollup-plugin-terser').terser;
-  // plugins.push(
-  //   uglify({
-  //     mangle: false,
-  //     sourcemap: {
-  //       filename: 'out.js',
-  //       url: 'out.js.map',
-  //     },
-  //   })
-  // );
+  const uglify = require('rollup-plugin-terser').terser;
+  plugins.push(
+    uglify({
+      mangle: false,
+      sourcemap: {
+        filename: 'out.js',
+        url: 'out.js.map',
+      },
+    })
+  );
 }
 
 if (process.env.MODULE_ANALYZE) {

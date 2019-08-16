@@ -57,7 +57,6 @@ export class LabeledToggle extends Component {
                     : this.styles.labeled_toggle_slider_unchecked
                 }
                 style={{
-                  // transform: checked ? 'translateX(22px)' : 'translateX(1px)',
                   background: sliderColor,
                 }}
               />

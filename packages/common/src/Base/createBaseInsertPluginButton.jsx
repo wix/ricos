@@ -7,7 +7,6 @@ import { mergeStyles } from '../Utils/mergeStyles';
 import FileInput from '../Components/FileInput';
 import ToolbarButton from '../Components/ToolbarButton';
 import styles from '../../statics/styles/toolbar-button.scss';
-import Context from '../Utils/Context/';
 
 /**
  * createBaseInsertPluginButton
@@ -245,8 +244,6 @@ export default ({ blockType, button, helpers, pubsub, settings, t, isMobile }) =
       );
     }
   }
-
-  InsertPluginButton.contextType = Context.type;
 
   InsertPluginButton.propTypes = {
     getEditorState: PropTypes.func.isRequired,
