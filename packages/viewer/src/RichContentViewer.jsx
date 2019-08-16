@@ -9,7 +9,7 @@ import {
 } from 'wix-rich-content-common';
 import { convertToReact } from './utils/convertContentState';
 import styles from '../statics/rich-content-viewer.scss';
-import * as rtlDetect from 'rtl-detect';
+import { getLangDir } from 'rtl-detect';
 
 export default class RichContentViewer extends Component {
   constructor(props) {
@@ -81,7 +81,7 @@ export default class RichContentViewer extends Component {
     );
 
     return (
-      <div className={wrapperClassName} dir={rtlDetect.getLangDir(locale)}>
+      <div className={wrapperClassName} dir={getLangDir(locale)}>
         <Context.Provider value={this.state.contextualData}>
           <div className={editorClassName}>{output}</div>
           <AccessibilityListener />

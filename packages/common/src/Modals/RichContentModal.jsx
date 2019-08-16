@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import FocusManager from '../Components/FocusManager';
 import { DECORATION_MODE } from '../consts';
-import * as rtlDetect from 'rtl-detect';
+import { getLangDir } from 'rtl-detect';
 
 const renderWrappedModalElement = (wrapping, ModalElement, modalProps) => {
   if (wrapping.length === 0) {
@@ -30,7 +30,7 @@ const RichContentModal = ({ modalElement, modalDecorations, locale, ...modalProp
     .map(({ decorator }) => decorator);
 
   return (
-    <FocusManager dir={rtlDetect.getLangDir(locale)}>
+    <FocusManager dir={getLangDir(locale)}>
       {prepended.length > 0 &&
         prepended.map((Prepended, index) => (
           <Prepended key={`prepended_decorator_${index}`} {...modalProps} />
