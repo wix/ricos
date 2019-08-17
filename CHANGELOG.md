@@ -14,6 +14,8 @@
 ### :bug: Bug Fix
 - `editor`
   - [#357](https://github.com/wix-incubator/rich-content/pull/357) fix footerToolbar css
+- `giphy`
+  - [fa229a0a](https://github.com/wix-incubator/rich-content/commit/fa229a0a) giphy viewer exposes GIPHY_TYPE
 ### :house: Internal
 - `general`
   - [#356](https://github.com/wix-incubator/rich-content/pull/356) removed `WixUtils.isMobile`
