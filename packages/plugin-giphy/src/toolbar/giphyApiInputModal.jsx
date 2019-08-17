@@ -73,8 +73,14 @@ export default class GiphyApiInputModal extends Component {
               {!this.state.searchTag ? (
                 <SearchIcon />
               ) : (
-                <div onClick={this.handleClearText} role="button" tabIndex="0" onKeyPress={null}>
-                  <CloseIcon className={styles.closeIcon} />
+                <div
+                  onClick={this.handleClearText}
+                  role="button"
+                  tabIndex="0"
+                  onKeyPress={null}
+                  className={styles.giphy_api_input_modal_closeIcon}
+                >
+                  <CloseIcon />
                 </div>
               )}
             </div>

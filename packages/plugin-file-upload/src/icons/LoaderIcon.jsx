@@ -13,8 +13,8 @@ const LoaderIcon = props => (
       <mask id="file-upload-loader-mask" fill="#fff">
         <use xlinkHref="#file-upload-loader-icon-path" />
       </mask>
-      <use fill="#000" xlinkHref="#file-upload-loader-icon-path" />
-      <path fill="#000" d="M-4-4h24v24H-4z" mask="url(#file-upload-loader-mask)" />
+      <use fill="currentColor" xlinkHref="#file-upload-loader-icon-path" />
+      <path fill="currentColor" d="M-4-4h24v24H-4z" mask="url(#file-upload-loader-mask)" />
     </g>
   </svg>
 );
