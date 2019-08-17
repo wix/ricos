@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import classNames from 'clsx';
 import { findDOMNode } from 'react-dom';
 import { mergeStyles, Context } from 'wix-rich-content-common';
 import VideoViewer from './video-viewer';

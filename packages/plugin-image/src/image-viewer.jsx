@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import classNames from 'clsx';
 import { get, includes, isEqual, isFunction } from 'lodash';
 import { mergeStyles, Loader, validate, Context, ViewportRenderer } from 'wix-rich-content-common';
 import getImageSrc from './get-image-source';

@@ -2,7 +2,7 @@
 import React from 'react';
 import { findDOMNode } from 'react-dom';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import classNames from 'clsx';
 import { isEmpty } from 'lodash';
 import Context from '../Utils/Context';
 import Dropdown from '../Components/Dropdown';

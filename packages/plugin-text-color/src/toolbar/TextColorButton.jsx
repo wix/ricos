@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import classNames from 'clsx';
 import Modal from 'react-modal';
 import { EditorState } from '@wix/draft-js';
 import { InlineToolbarButton, getSelectionStyles, mergeStyles } from 'wix-rich-content-common';

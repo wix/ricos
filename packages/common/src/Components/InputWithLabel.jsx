@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { omit } from 'lodash';
-import classNames from 'classnames';
+import classNames from 'clsx';
 import { mergeStyles } from '../Utils/mergeStyles';
 import styles from '../../statics/styles/input-with-label.scss';
 

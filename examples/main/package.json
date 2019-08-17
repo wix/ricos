@@ -14,7 +14,7 @@
     "babel-jest": "^23.6.0",
     "casual-browserify": "1.5.19-2",
     "chalk": "^2.4.1",
-    "classnames": "^2.2.6",
+    "clsx": "^1.0.4",
     "jest": "^23.1.0",
     "local-storage": "1.4.2",
     "lodash": "^4.17.11",

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styles from '../../statics/styles/styles.scss';
 import { mergeStyles } from 'wix-rich-content-common';
-import classNames from 'classnames';
+import classNames from 'clsx';
 
 const LineHeightsPanel = ({ selectedHeight, onSave, showCustomPanel, styles, t }) => {
   const lineHeightElement = (height, isSelected, onClick) => (

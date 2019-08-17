@@ -3,7 +3,7 @@ import { range, reduce as _reduce } from 'lodash';
 import PropTypes from 'prop-types';
 import Immutable from 'immutable';
 import Prism from 'prismjs';
-import classNames from 'classnames';
+import classNames from 'clsx';
 import highlightingTheme from '../statics/styles/highlighting-theme.scss';
 
 const DEFAULT_SYNTAX = 'javascript';

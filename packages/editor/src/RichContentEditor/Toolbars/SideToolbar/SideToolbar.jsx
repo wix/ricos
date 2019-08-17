@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import classNames from 'clsx';
 import { debounce } from 'lodash';
 import { DISPLAY_MODE } from 'wix-rich-content-common';
 import DraftOffsetKey from '@wix/draft-js/lib/DraftOffsetKey';

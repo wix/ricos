@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import classNames from 'clsx';
 
 import { mergeStyles } from '../Utils/mergeStyles';
 import { ErrorIcon } from '../Icons';

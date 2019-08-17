@@ -1,7 +1,7 @@
 /* eslint-disable react/no-find-dom-node */
 import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
-import classNames from 'classnames';
+import classNames from 'clsx';
 import { pickBy } from 'lodash';
 import Measure from 'react-measure';
 import { TOOLBARS, DISPLAY_MODE } from '../consts';

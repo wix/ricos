@@ -6,7 +6,7 @@ import {
   SettingsSection,
   mergeStyles,
 } from 'wix-rich-content-common';
-import classNames from 'classnames';
+import classNames from 'clsx';
 import ButtonSample from '../components/button-sample';
 import styles from '../../statics/styles/design-component-styles.scss';
 

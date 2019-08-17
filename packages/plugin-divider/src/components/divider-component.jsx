@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import classNames from 'clsx';
 import { mergeStyles, validate, Context } from 'wix-rich-content-common';
 import { isEqual } from 'lodash';
 import { getType, getConfig } from '../toolbar/selectors';

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { AtomicBlockUtils, EditorState, SelectionState } from '@wix/draft-js';
 import { cloneDeep, isEmpty } from 'lodash';
-import classNames from 'classnames';
+import classNames from 'clsx';
 import { mergeStyles } from '../Utils/mergeStyles';
 import FileInput from '../Components/FileInput';
 import ToolbarButton from '../Components/ToolbarButton';

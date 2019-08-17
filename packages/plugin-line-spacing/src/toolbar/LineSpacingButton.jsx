@@ -12,7 +12,7 @@ import { EditorState } from '@wix/draft-js';
 import { LineSpacingIcon } from '../icons';
 import Modal from 'react-modal';
 import Panel from './LineSpacingPanel';
-import classNames from 'classnames';
+import classNames from 'clsx';
 import styles from '../../statics/styles/styles.scss';
 
 const lineHeight = 'line-height';

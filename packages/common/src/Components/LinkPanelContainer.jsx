@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import classNames from 'clsx';
 import LinkPanel from './LinkPanel';
 import FocusManager from './FocusManager';
 import { mergeStyles } from '../Utils/mergeStyles';

@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import classNames from 'clsx';
 import { camelCase, upperFirst } from 'lodash';
 
 export const alignmentClassName = (componentData, theme, styles) => {

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import classNames from 'clsx';
 import Measure from 'react-measure';
 import { debounce, identity, pickBy } from 'lodash';
 import { DISPLAY_MODE, Context, TooltipHost } from 'wix-rich-content-common';

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styles from '../../statics/styles/map-settings-modal.scss';
-import classNames from 'classnames';
+import classNames from 'clsx';
 import { mergeStyles } from 'wix-rich-content-common';
 
 export class LabeledToggle extends Component {

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { InView } from 'react-intersection-observer';
 import Context from '../Utils/Context';
-import classnames from 'classnames';
+import classnames from 'clsx';
 import { isSSR } from '../Utils/ssrUtils';
 import { mergeStyles } from '../Utils/mergeStyles';
 import styles from '../../statics/styles/placeholder.scss';

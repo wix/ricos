@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import classNames from 'clsx';
 
 import createStaticToolbar from './createStaticToolbar';
 import { getTextButtonsFromList } from '../buttons/utils';

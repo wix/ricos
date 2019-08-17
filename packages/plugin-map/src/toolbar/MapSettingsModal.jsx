@@ -7,7 +7,7 @@ import styles from '../../statics/styles/map-settings-modal.scss';
 import { LabeledToggle } from './LabeledToggle';
 import { SearchIcon } from '../icons/SearchIcon';
 import { Scrollbars } from 'react-custom-scrollbars';
-import classNames from 'classnames';
+import classNames from 'clsx';
 const uuidv4 = require('uuid/v4');
 
 export class MapSettingsModal extends Component {

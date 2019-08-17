@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import classNames from 'clsx';
 import { isEmpty } from 'lodash';
 import ToolbarButton from '../../Components/ToolbarButton';
 

@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import classNames from 'clsx';
 import styles from '../../statics/styles/rich-content-editor.scss';
 
 const types = {
