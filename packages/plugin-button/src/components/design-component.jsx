@@ -166,11 +166,7 @@ class DesignComponent extends PureComponent {
           color={stateColor}
           index={index}
           isMobile={isMobile}
-          marginButtonClassName={
-            colorToggleIndex === index
-              ? this.styles.button_marginBottomOpenedColorPicker
-              : this.styles.button_marginBottomClosedColorPicker
-          }
+          isToggle={colorToggleIndex === index}
           toggle={this.onToggled.bind(this)}
         >
           {label}

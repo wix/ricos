@@ -21,7 +21,10 @@ class ColorToggleComponent extends PureComponent {
   };
 
   render() {
-    const { marginButtonClassName } = this.props;
+    const { isToggle } = this.props;
+    const marginButtonClassName = isToggle
+      ? this.styles.button_marginBottomOpenedColorPicker
+      : this.styles.button_marginBottomClosedColorPicker;
     return (
       <div className={classNames(this.styles.button_colorPicker, marginButtonClassName)}>
         <div className={this.styles.button_colorPicker_label}>{this.props.children}</div>
@@ -45,6 +48,7 @@ ColorToggleComponent.propTypes = {
   toggle: PropTypes.func.isRequired,
   marginBottom: PropTypes.string,
   marginButtonClassName: PropTypes.string,
+  isToggle: PropTypes.bool,
 };
 
 export default ColorToggleComponent;
