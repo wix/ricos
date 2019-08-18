@@ -256,12 +256,12 @@ export default class InlineToolbar extends Component {
       toolbarStyles.inlineToolbar_responsiveArrow
     );
     const leftArrowIconClassNames = classNames(
-      Styles.inlineToolbar_responsiveArrowLeft_icon,
-      toolbarStyles.responsiveArrowLeft_icon
+      Styles.inlineToolbar_responsiveArrowStart_icon,
+      toolbarStyles.responsiveArrowStart_icon
     );
     const rightArrowIconClassNames = classNames(
-      Styles.inlineToolbar_responsiveArrowRight_icon,
-      toolbarStyles.responsiveArrowRight_icon
+      Styles.inlineToolbar_responsiveArrowEnd_icon,
+      toolbarStyles.responsiveArrowEnd_icon
     );
 
     const childrenProps = {

@@ -24,6 +24,7 @@ import {
 } from 'wix-rich-content-common';
 import styles from '../../statics/styles/rich-content-editor.scss';
 import draftStyles from '../../statics/styles/draft.scss';
+import { getLangDir } from 'rtl-detect';
 
 class RichContentEditor extends Component {
   constructor(props) {
@@ -62,6 +63,7 @@ class RichContentEditor extends Component {
       config,
       isMobile,
       setEditorState: this.setEditorState,
+      languageDir: getLangDir(locale),
     };
   };
 
@@ -353,7 +355,7 @@ class RichContentEditor extends Component {
       );
     });
     const css = Object.entries(styles).reduce(
-      (cssString, [className, css]) => `${cssString} .${className} {${css}}`,
+      (cssString, [className, css]) => `${cssString}[dir] .${className} {${css}}`,
       ''
     );
     return <style id="dynamicStyles">{css}</style>;
@@ -370,14 +372,16 @@ class RichContentEditor extends Component {
       <Context.Provider value={this.contextualData}>
         <Measure bounds onResize={({ bounds }) => this.updateBounds(bounds)}>
           {({ measureRef }) => (
-            <div style={this.props.style} ref={measureRef} className={wrapperClassName}>
-              {this.renderStyleTag()}
-              <div className={classNames(styles.editor, theme.editor)}>
-                {this.renderAccessibilityListener()}
-                {this.renderEditor()}
-                {this.renderToolbars()}
-                {this.renderInlineModals()}
-                {this.renderTooltipHost()}
+            <div dir={this.contextualData.languageDir}>
+              <div style={this.props.style} ref={measureRef} className={wrapperClassName}>
+                {this.renderStyleTag()}
+                <div className={classNames(styles.editor, theme.editor)}>
+                  {this.renderAccessibilityListener()}
+                  {this.renderEditor()}
+                  {this.renderToolbars()}
+                  {this.renderInlineModals()}
+                  {this.renderTooltipHost()}
+                </div>
               </div>
             </div>
           )}
@@ -424,7 +428,7 @@ RichContentEditor.propTypes = {
   handlePastedText: PropTypes.func,
   handleReturn: PropTypes.func,
   customStyleFn: PropTypes.func,
-  locale: PropTypes.string,
+  locale: PropTypes.string.isRequired,
 };
 
 RichContentEditor.defaultProps = {

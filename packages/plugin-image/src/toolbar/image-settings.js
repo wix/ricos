@@ -103,7 +103,16 @@ class ImageSettings extends Component {
   };
 
   render() {
-    const { helpers, theme, t, anchorTarget, relValue, isMobile, uiSettings } = this.props;
+    const {
+      helpers,
+      theme,
+      t,
+      anchorTarget,
+      relValue,
+      isMobile,
+      uiSettings,
+      languageDir,
+    } = this.props;
     const { src, metadata = {} } = this.state;
 
     const { linkPanel } = uiSettings || {};
@@ -118,7 +127,7 @@ class ImageSettings extends Component {
     }
 
     return (
-      <div className={this.styles.imageSettings} data-hook="imageSettings">
+      <div className={this.styles.imageSettings} data-hook="imageSettings" dir={languageDir}>
         {isMobile ? (
           <ImageSettingsMobileHeader
             t={t}
@@ -197,6 +206,7 @@ class ImageSettings extends Component {
               theme={theme}
               t={t}
               ariaProps={{ 'aria-labelledby': 'image_settings_link_lbl' }}
+              languageDir={languageDir}
             />
           </SettingsSection>
         </div>
@@ -223,6 +233,7 @@ ImageSettings.propTypes = {
   relValue: PropTypes.string,
   isMobile: PropTypes.bool,
   uiSettings: PropTypes.object,
+  languageDir: PropTypes.string,
 };
 
 export default ImageSettings;

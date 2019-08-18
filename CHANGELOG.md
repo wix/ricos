@@ -8,7 +8,12 @@
 > - :house: [Internal]
 
 ## [Unreleased]
+### :boom: Breaking Change
+- `editor`
+  - [#359](https://github.com/wix-incubator/rich-content/pull/359) updated inline/text static/mobile toolbar theme classes
 ### :rocket: New Feature
+- `editor`
+  - [#359](https://github.com/wix-incubator/rich-content/pull/359) added support for rtl in editor modals
 - `general`
   - [#358](https://github.com/wix-incubator/rich-content/pull/358) viewport based lazy loading for plugin components
 ### :bug: Bug Fix
@@ -16,6 +21,8 @@
   - [#357](https://github.com/wix-incubator/rich-content/pull/357) fix footerToolbar css
 - `general`
   - [#361](https://github.com/wix-incubator/rich-content/pull/361) icons: hard-coded `fill` values replaced by `currentColor` to support theming
+- `giphy`
+  - [fa229a0a](https://github.com/wix-incubator/rich-content/commit/fa229a0a) giphy viewer exposes GIPHY_TYPE
 ### :house: Internal
 - `general`
   - [#356](https://github.com/wix-incubator/rich-content/pull/356) removed `WixUtils.isMobile`
