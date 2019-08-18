@@ -1,7 +1,7 @@
 import { createLinkPlugin, LINK_TYPE } from 'wix-rich-content-plugin-link';
 import { createLineSpacingPlugin, LINE_SPACING_TYPE } from 'wix-rich-content-plugin-line-spacing';
 import { createHashtagPlugin, HASHTAG_TYPE } from 'wix-rich-content-plugin-hashtag';
-// import { createExternalEmojiPlugin, EXTERNAL_EMOJI_TYPE } from 'wix-rich-content-plugin-emoji';
+import { createEmojiPlugin, EMOJI_TYPE } from 'wix-rich-content-plugin-emoji';
 import { createImagePlugin } from 'wix-rich-content-plugin-image';
 import { createVideoPlugin, VIDEO_TYPE } from 'wix-rich-content-plugin-video';
 import { createHtmlPlugin, HTML_TYPE } from 'wix-rich-content-plugin-html';
@@ -28,7 +28,7 @@ import 'wix-rich-content-common/dist/styles.min.css';
 import 'wix-rich-content-editor/dist/styles.min.css';
 // import 'wix-rich-content-plugin-code-block/dist/styles.min.css';
 import 'wix-rich-content-plugin-divider/dist/styles.min.css';
-// import 'wix-rich-content-plugin-emoji/dist/styles.min.css';
+import 'wix-rich-content-plugin-emoji/dist/styles.min.css';
 import 'wix-rich-content-plugin-html/dist/styles.min.css';
 import 'wix-rich-content-plugin-hashtag/dist/styles.min.css';
 import 'wix-rich-content-plugin-line-spacing/dist/styles.min.css';
@@ -68,6 +68,7 @@ export const editorPlugins = [
   createMapPlugin,
   createFileUploadPlugin,
   createTextColorPlugin,
+  createEmojiPlugin
 ];
 
 const themeColors = {

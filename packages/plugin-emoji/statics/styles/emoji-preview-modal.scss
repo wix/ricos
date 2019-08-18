@@ -1,0 +1,9 @@
+.emoji_icons_container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.emoji_icon:hover{
+    opacity: .5;
+}
