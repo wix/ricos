@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { InView } from 'react-intersection-observer';
 import Context from '../Utils/Context';
-import classnames from 'clsx';
+import clsx from 'clsx';
 import { isSSR } from '../Utils/ssrUtils';
 import { mergeStyles } from '../Utils/mergeStyles';
 import styles from '../../statics/styles/placeholder.scss';
@@ -50,7 +50,7 @@ class ViewportRenderer extends Component {
           ) : (
             <div
               ref={ref}
-              className={classnames(this.styles.placeholder, placeholderClass)}
+              className={clsx(this.styles.placeholder, placeholderClass)}
               style={placeholderStyle}
             />
           )

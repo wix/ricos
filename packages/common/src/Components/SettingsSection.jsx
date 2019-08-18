@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'clsx';
+import clsx from 'clsx';
 import { mergeStyles } from '../Utils/mergeStyles';
 import styles from '../../statics/styles/settings-section.scss';
 
@@ -14,7 +14,7 @@ class SettingsSection extends React.Component {
     const { styles } = this;
     const { children, ariaProps, className } = this.props;
     return (
-      <div className={classNames(styles.section, className)} {...ariaProps}>
+      <div className={clsx(styles.section, className)} {...ariaProps}>
         {children}
       </div>
     );

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styles from '../../statics/styles/styles.scss';
 import { mergeStyles } from 'wix-rich-content-common';
-import classNames from 'clsx';
+import clsx from 'clsx';
 
 const LineHeightsPanel = ({ selectedHeight, onSave, showCustomPanel, styles, t }) => {
   const lineHeightElement = (height, isSelected, onClick) => (
@@ -181,7 +181,7 @@ export default class Panel extends Component {
       // eslint-disable-next-line jsx-a11y/no-static-element-interactions
       <div
         onBlur={this.onBlur}
-        className={classNames(styles.lineSpacingContainer, {
+        className={clsx(styles.lineSpacingContainer, {
           [styles.lineSpacingContainer_mobile]: isMobile,
         })}
       >

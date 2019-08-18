@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactPlayer from 'react-player';
 import PropTypes from 'prop-types';
-import classNames from 'clsx';
+import clsx from 'clsx';
 import {
   mergeStyles,
   validate,
@@ -32,7 +32,7 @@ class SoundCloudViewer extends Component {
     return (
       <ViewportRenderer>
         <ReactPlayer
-          className={classNames(this.styles.soundCloud_player)}
+          className={clsx(this.styles.soundCloud_player)}
           url={matchSoundCloudUrl(componentData.src)}
           {...rest}
           playing={this.context.disabled ? false : this.state.playing}

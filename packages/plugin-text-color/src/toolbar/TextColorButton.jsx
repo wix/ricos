@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'clsx';
+import clsx from 'clsx';
 import Modal from 'react-modal';
 import { EditorState } from '@wix/draft-js';
 import { InlineToolbarButton, getSelectionStyles, mergeStyles } from 'wix-rich-content-common';
@@ -94,11 +94,11 @@ export default class TextColorButton extends Component {
           onRequestClose={() => this.closePanel()}
           isOpen={isPanelOpen}
           parentSelector={TextColorButton.getModalParent}
-          className={classNames({
+          className={clsx({
             [this.styles.textColorModal]: !isMobile,
             [this.styles.textColorModal_mobile]: isMobile,
           })}
-          overlayClassName={classNames({
+          overlayClassName={clsx({
             [this.styles.textColorModalOverlay]: !isMobile,
             [this.styles.textColorModalOverlay_mobile]: isMobile,
           })}

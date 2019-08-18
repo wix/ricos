@@ -3,7 +3,7 @@ import { range, reduce as _reduce } from 'lodash';
 import PropTypes from 'prop-types';
 import Immutable from 'immutable';
 import Prism from 'prismjs';
-import classNames from 'clsx';
+import clsx from 'clsx';
 import highlightingTheme from '../statics/styles/highlighting-theme.scss';
 
 const DEFAULT_SYNTAX = 'javascript';
@@ -70,7 +70,7 @@ export default class PrismDecorator {
     const tokId = parts[1];
     const { type } = this.highlighted[blockKey][tokId];
     return {
-      className: classNames(CODE_TOKEN_CLASS_NAMES[type], this.theme[`codeBlock_${type}`]),
+      className: clsx(CODE_TOKEN_CLASS_NAMES[type], this.theme[`codeBlock_${type}`]),
     };
   }
 }

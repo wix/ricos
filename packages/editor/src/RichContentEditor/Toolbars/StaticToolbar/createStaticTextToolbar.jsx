@@ -1,4 +1,4 @@
-import classNames from 'clsx';
+import clsx from 'clsx';
 
 import createStaticToolbar from './createStaticToolbar';
 import { getTextButtonsFromList } from '../buttons/utils';
@@ -16,39 +16,39 @@ const getStaticTextTheme = theme => {
 
   return {
     toolbarStyles: {
-      toolbar: classNames(toolbarStyles.textToolbar, toolbarTheme && toolbarTheme.textToolbar),
-      scrollableContainer: classNames(
+      toolbar: clsx(toolbarStyles.textToolbar, toolbarTheme && toolbarTheme.textToolbar),
+      scrollableContainer: clsx(
         toolbarStyles.textToolbar_scrollableContainer,
         toolbarTheme && toolbarTheme.textToolbar_scrollableContainer
       ),
-      buttons: classNames(
+      buttons: clsx(
         toolbarStyles.textToolbar_buttons,
         toolbarTheme && toolbarTheme.textToolbar_buttons
       ),
-      extend: classNames(
+      extend: clsx(
         toolbarStyles.textToolbar_extend,
         toolbarTheme && toolbarTheme.textToolbar_extend
       ),
       responsiveSpacer: toolbarStyles.textToolbar_responsiveSpacer,
-      responsiveArrow: classNames(
+      responsiveArrow: clsx(
         toolbarStyles.textToolbar_responsiveArrow,
         toolbarTheme && toolbarTheme.textToolbar_responsiveArrow
       ),
-      responsiveArrowLeft: classNames(
+      responsiveArrowLeft: clsx(
         toolbarStyles.textToolbar_responsiveArrowLeft,
         toolbarTheme && toolbarTheme.textToolbar_responsiveArrowLeft
       ),
-      responsiveArrowRight: classNames(
+      responsiveArrowRight: clsx(
         toolbarStyles.textToolbar_responsiveArrowRight,
         toolbarTheme && toolbarTheme.textToolbar_responsiveArrowRight
       ),
       //eslint-disable-next-line camelcase
-      responsiveArrowLeft_icon: classNames(
+      responsiveArrowLeft_icon: clsx(
         toolbarStyles.textToolbar_responsiveArrowLeft_icon,
         toolbarTheme && toolbarTheme.textToolbar_responsiveArrowLeft_icon
       ),
       //eslint-disable-next-line camelcase
-      responsiveArrowRight_icon: classNames(
+      responsiveArrowRight_icon: clsx(
         toolbarStyles.textToolbar_responsiveArrowRight_icon,
         toolbarTheme && toolbarTheme.textToolbar_responsiveArrowRight_icon
       ),
@@ -59,7 +59,7 @@ const getStaticTextTheme = theme => {
       inlineToolbarButton_icon: buttonTheme && buttonTheme.textToolbarButton_icon, //eslint-disable-line camelcase
     },
     separatorStyles: {
-      separator: classNames(
+      separator: clsx(
         separatorStyles.textToolbarSeparator,
         separatorTheme && separatorTheme.textToolbarSeparator
       ),

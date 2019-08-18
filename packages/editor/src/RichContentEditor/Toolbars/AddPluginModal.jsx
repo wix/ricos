@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'clsx';
+import clsx from 'clsx';
 import Styles from '../../../statics/styles/add-plugin-modal.scss';
 
 const getPlaceHolderCount = buttonCount => {
@@ -17,17 +17,14 @@ export default class AddPluginModal extends Component {
 
   render() {
     const { getEditorState, setEditorState, structure, theme } = this.props;
-    const tileClassNames = classNames(
-      Styles.addPluginModal_tile,
-      theme && theme.addPluginModal_tile
-    );
+    const tileClassNames = clsx(Styles.addPluginModal_tile, theme && theme.addPluginModal_tile);
     const placeHolderCount = getPlaceHolderCount(structure.length);
     /* eslint-disable jsx-a11y/no-noninteractive-element-to-interactive-role */
     return (
       <ul
         role="toolbar"
         aria-label="Add Plugin"
-        className={classNames(Styles.addPluginModal_list, theme && theme.addPluginModal_list)}
+        className={clsx(Styles.addPluginModal_list, theme && theme.addPluginModal_list)}
       >
         {structure.map(({ component: Component }, index) => (
           <li key={index} className={tileClassNames}>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'clsx';
+import clsx from 'clsx';
 import {
   mergeStyles,
   Image,
@@ -131,7 +131,7 @@ class ImageSettings extends Component {
           <h3 className={this.styles.imageSettingsTitle}>{this.headerText}</h3>
         )}
         <div
-          className={classNames(styles.imageSettings_scrollContainer, {
+          className={clsx(styles.imageSettings_scrollContainer, {
             [styles.imageSettings_mobile]: isMobile,
           })}
         >

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'clsx';
+import clsx from 'clsx';
 import styles from '../../statics/styles/image.scss';
 import { mergeStyles } from '../Utils/mergeStyles';
 
@@ -30,7 +30,7 @@ class Image extends Component {
       backgroundSize: resizeMode,
     };
     return (
-      <div className={classNames(styles.image_container, className)} style={imageStyle}>
+      <div className={clsx(styles.image_container, className)} style={imageStyle}>
         <img src={src} className={styles.image_placeholder} alt={alt} />
       </div>
     );

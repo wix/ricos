@@ -1,4 +1,4 @@
-import classNames from 'clsx';
+import clsx from 'clsx';
 import createStaticToolbar from './createStaticToolbar';
 import toolbarStyles from '../../../../statics/styles/footer-toolbar.scss';
 
@@ -8,38 +8,38 @@ const getFooterTheme = theme => {
 
   return {
     toolbarStyles: {
-      toolbar: classNames(toolbarStyles.footerToolbar, toolbarTheme && toolbarTheme.footerToolbar),
-      scrollableContainer: classNames(
+      toolbar: clsx(toolbarStyles.footerToolbar, toolbarTheme && toolbarTheme.footerToolbar),
+      scrollableContainer: clsx(
         toolbarStyles.footerToolbar_scrollableContainer,
         toolbarTheme && toolbarTheme.footerToolbar_scrollableContainer
       ),
-      buttons: classNames(
+      buttons: clsx(
         toolbarStyles.footerToolbar_buttons,
         toolbarTheme && toolbarTheme.footerToolbar_buttons
       ),
-      extend: classNames(
+      extend: clsx(
         toolbarStyles.footerToolbar_extend,
         toolbarTheme && toolbarTheme.footerToolbar_extend
       ),
-      responsiveArrow: classNames(
+      responsiveArrow: clsx(
         toolbarStyles.footerToolbar_responsiveArrow,
         toolbarTheme && toolbarTheme.footerToolbar_responsiveArrow
       ),
-      responsiveArrowLeft: classNames(
+      responsiveArrowLeft: clsx(
         toolbarStyles.footerToolbar_responsiveArrowLeft,
         toolbarTheme && toolbarTheme.footerToolbar_responsiveArrowLeft
       ),
-      responsiveArrowRight: classNames(
+      responsiveArrowRight: clsx(
         toolbarStyles.footerToolbar_responsiveArrowRight,
         toolbarTheme && toolbarTheme.footerToolbar_responsiveArrowRight
       ),
       //eslint-disable-next-line camelcase
-      responsiveArrowLeft_icon: classNames(
+      responsiveArrowLeft_icon: clsx(
         toolbarStyles.footerToolbar_responsiveArrowLeft_icon,
         toolbarTheme && toolbarTheme.footerToolbar_responsiveArrowLeft_icon
       ),
       //eslint-disable-next-line camelcase
-      responsiveArrowRight_icon: classNames(
+      responsiveArrowRight_icon: clsx(
         toolbarStyles.footerToolbar_responsiveArrowRight_icon,
         toolbarTheme && toolbarTheme.footerToolbar_responsiveArrowRight_icon
       ),

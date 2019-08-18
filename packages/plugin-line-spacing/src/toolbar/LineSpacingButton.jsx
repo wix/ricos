@@ -12,7 +12,7 @@ import { EditorState } from '@wix/draft-js';
 import { LineSpacingIcon } from '../icons';
 import Modal from 'react-modal';
 import Panel from './LineSpacingPanel';
-import classNames from 'clsx';
+import clsx from 'clsx';
 import styles from '../../statics/styles/styles.scss';
 
 const lineHeight = 'line-height';
@@ -107,10 +107,10 @@ export default class LineSpacingButton extends Component {
         <Modal
           isOpen={isPanelOpen}
           onRequestClose={() => this.save()}
-          className={classNames(styles.lineSpacingModal, {
+          className={clsx(styles.lineSpacingModal, {
             [styles.lineSpacingModal_mobile]: isMobile,
           })}
-          overlayClassName={classNames(styles.lineSpacingModalOverlay, {
+          overlayClassName={clsx(styles.lineSpacingModalOverlay, {
             [styles.lineSpacingModalOverlay_mobile]: isMobile,
           })}
           parentSelector={LineSpacingButton.getModalParent}

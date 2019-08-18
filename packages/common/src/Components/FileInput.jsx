@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classnames from 'clsx';
+import clsx from 'clsx';
 import { mergeStyles } from '../Utils/mergeStyles';
 
 import styles from '../../statics/styles/global.scss';
@@ -42,7 +42,7 @@ class FileInput extends Component {
     return (
       <label
         htmlFor={this.id}
-        className={classnames({ [className]: true, [styles.focused]: this.state.focused })}
+        className={clsx({ [className]: true, [styles.focused]: this.state.focused })}
         style={this.props.style}
         title={title}
       >

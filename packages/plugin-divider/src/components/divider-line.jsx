@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'clsx';
+import clsx from 'clsx';
 import { Context } from 'wix-rich-content-common';
 
 import { LINE_DOUBLE } from '../constants';
@@ -36,7 +36,7 @@ const DividerLine = ({
   return (
     <Consumer>
       {context => {
-        const lineClassName = classNames(
+        const lineClassName = clsx(
           styles.divider,
           styles[`divider--${type}`],
           styles[`divider--${size}${context.isMobile ? '--mobile' : ''}`],

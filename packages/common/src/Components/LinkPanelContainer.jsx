@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'clsx';
+import clsx from 'clsx';
 import LinkPanel from './LinkPanel';
 import FocusManager from './FocusManager';
 import { mergeStyles } from '../Utils/mergeStyles';
@@ -63,13 +63,10 @@ class LinkPanelContainer extends PureComponent {
     const doneButtonText = t('LinkPanelContainer_DoneButton');
     const cancelButtonText = t('LinkPanelContainer_CancelButton');
     const removeButtonText = t('LinkPanelContainer_RemoveButton');
-    const doneButtonClassName = classNames(styles.linkPanel_FooterButton, styles.linkPanel_enabled);
-    const cancelButtonClassName = classNames(
-      styles.linkPanel_FooterButton,
-      styles.linkPanel_Cancel
-    );
-    const removeButtonClassName = classNames(styles.linkPanel_FooterButton);
-    const linkPanelContainerClassName = classNames(styles.linkPanel_container, {
+    const doneButtonClassName = clsx(styles.linkPanel_FooterButton, styles.linkPanel_enabled);
+    const cancelButtonClassName = clsx(styles.linkPanel_FooterButton, styles.linkPanel_Cancel);
+    const removeButtonClassName = clsx(styles.linkPanel_FooterButton);
+    const linkPanelContainerClassName = clsx(styles.linkPanel_container, {
       [styles.linkPanel_container_isMobile]: isMobile,
     });
 

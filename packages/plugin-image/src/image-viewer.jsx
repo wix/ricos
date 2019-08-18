@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'clsx';
+import clsx from 'clsx';
 import { get, includes, isEqual, isFunction } from 'lodash';
 import { mergeStyles, Loader, validate, Context, ViewportRenderer } from 'wix-rich-content-common';
 import getImageSrc from './get-image-source';
@@ -100,7 +100,7 @@ class ImageViewer extends React.Component {
       <img
         key="preload"
         ref={ref => (this.preloadImage = ref)}
-        className={classNames(imageClassName, this.styles.imagePreload)}
+        className={clsx(imageClassName, this.styles.imagePreload)}
         src={imageSrc.preload}
         alt={alt}
         onError={this.onImageLoadError}
@@ -108,7 +108,7 @@ class ImageViewer extends React.Component {
       <img
         {...props}
         key="highres"
-        className={classNames(imageClassName, this.styles.imageHighres)}
+        className={clsx(imageClassName, this.styles.imageHighres)}
         src={imageSrc.highres}
         alt={alt}
         onLoad={e => this.onHighResLoad(e)}
@@ -131,7 +131,7 @@ class ImageViewer extends React.Component {
     const config = data.config || {};
     return (
       !!config.showTitle && (
-        <div className={classNames(styles.imageTitle)}>{(data && data.title) || ''}</div>
+        <div className={clsx(styles.imageTitle)}>{(data && data.title) || ''}</div>
       )
     );
   }
@@ -140,9 +140,7 @@ class ImageViewer extends React.Component {
     const config = data.config || {};
     return (
       !!config.showDescription && (
-        <div className={classNames(styles.imageDescription)}>
-          {(data && data.description) || ''}
-        </div>
+        <div className={clsx(styles.imageDescription)}>{(data && data.description) || ''}</div>
       )
     );
   }
@@ -198,8 +196,8 @@ class ImageViewer extends React.Component {
     const data = componentData || getDefault();
     const { metadata = {} } = componentData;
 
-    const itemClassName = classNames(this.styles.imageContainer, className);
-    const imageClassName = classNames(this.styles.image);
+    const itemClassName = clsx(this.styles.imageContainer, className);
+    const imageClassName = clsx(this.styles.image);
     const imageSrc = fallbackImageSrc || this.getImageSrc(data.src);
     let imageProps = {};
     if (data.src && settings && isFunction(settings.imageProps)) {

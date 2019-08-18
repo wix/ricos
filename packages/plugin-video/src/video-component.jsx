@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'clsx';
+import clsx from 'clsx';
 import { findDOMNode } from 'react-dom';
 import { mergeStyles, Context } from 'wix-rich-content-common';
 import VideoViewer from './video-viewer';
@@ -57,7 +57,7 @@ class VideoComponent extends React.Component {
     const { isLoaded } = this.state;
     const overlayText = t('VideoComponent_Overlay');
     return (
-      <div className={classNames(styles.video_overlay)}>
+      <div className={clsx(styles.video_overlay)}>
         {isLoaded && <span className={styles.video_overlay_message}>{overlayText}</span>}
       </div>
     );
@@ -85,7 +85,7 @@ class VideoComponent extends React.Component {
     this.styles = this.styles || mergeStyles({ styles, theme: this.context.theme });
     const { className, onClick } = this.props;
     const { isPlayable } = this.state;
-    const containerClassNames = classNames(this.styles.video_container, className || '');
+    const containerClassNames = clsx(this.styles.video_container, className || '');
     /* eslint-disable jsx-a11y/no-static-element-interactions */
     return (
       <div

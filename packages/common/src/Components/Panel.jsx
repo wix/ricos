@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'clsx';
+import clsx from 'clsx';
 import Styles from '../../statics/styles/global.scss';
 
 export default class Panel extends Component {
@@ -34,7 +34,7 @@ export default class Panel extends Component {
 
   render = () => {
     const Content = this.props.content;
-    const modalClasses = classNames(Styles.panelContainer, this.props.theme.panelContainer);
+    const modalClasses = clsx(Styles.panelContainer, this.props.theme.panelContainer);
     return (
       <div className={modalClasses} style={this.state.style}>
         <Content

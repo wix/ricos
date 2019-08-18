@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { SoundCloudIcon } from '../icons';
-import classNames from 'clsx';
+import clsx from 'clsx';
 import {
   mergeStyles,
   isSoundCloudUrl,
@@ -78,17 +78,10 @@ export default class SoundCloudURLInputModal extends Component {
     return (
       <div className={styles.container} data-hook="soundCloudUploadModal">
         {!isMobile && (
-          <CloseIcon
-            className={classNames(styles.closeIcon)}
-            onClick={() => this.onCloseRequested()}
-          />
+          <CloseIcon className={clsx(styles.closeIcon)} onClick={() => this.onCloseRequested()} />
         )}
-        <div
-          role="heading"
-          aria-labelledby="sound_cloud_modal_hdr"
-          className={classNames(styles.header)}
-        >
-          <SoundCloudIcon className={classNames(styles.header_icon)} />
+        <div role="heading" aria-labelledby="sound_cloud_modal_hdr" className={clsx(styles.header)}>
+          <SoundCloudIcon className={clsx(styles.header_icon)} />
           <h3 id="sound_cloud_modal_hdr" className={styles.header_text}>
             {!isMobile
               ? t('SoundCloudUploadModal_Header')

@@ -1,4 +1,4 @@
-import classNames from 'clsx';
+import clsx from 'clsx';
 import { camelCase, upperFirst } from 'lodash';
 
 export const alignmentClassName = (componentData, theme, styles) => {
@@ -7,7 +7,7 @@ export const alignmentClassName = (componentData, theme, styles) => {
     return '';
   }
   const key = `align${upperFirst(alignment)}`;
-  return classNames(styles[key], theme[key]);
+  return clsx(styles[key], theme[key]);
 };
 
 export const sizeClassName = (componentData, theme, styles) => {
@@ -16,7 +16,7 @@ export const sizeClassName = (componentData, theme, styles) => {
     return '';
   }
   const key = `size${upperFirst(camelCase(size))}`;
-  return classNames(styles[key], theme[key]);
+  return clsx(styles[key], theme[key]);
 };
 
 export const textWrapClassName = (componentData, theme, styles) => {
@@ -25,5 +25,5 @@ export const textWrapClassName = (componentData, theme, styles) => {
     return '';
   }
   const key = `textWrap${upperFirst(camelCase(textWrap))}`;
-  return classNames(styles[key], theme[key]);
+  return clsx(styles[key], theme[key]);
 };

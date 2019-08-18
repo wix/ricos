@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'clsx';
+import clsx from 'clsx';
 import { isEmpty } from 'lodash';
 import ToolbarButton from './ToolbarButton';
 import styles from '../../statics/styles/inline-toolbar-button.scss';
@@ -11,19 +11,19 @@ class InlineToolbarButton extends Component {
     const { buttonStyles } = props.theme || {};
 
     this.styles = {
-      button: classNames(styles.inlineToolbarButton, {
+      button: clsx(styles.inlineToolbarButton, {
         [buttonStyles.inlineToolbarButton]: !!buttonStyles.inlineToolbarButton,
         [buttonStyles.pluginToolbarButton]: !!buttonStyles.pluginToolbarButton,
       }),
-      buttonWrapper: classNames(styles.inlineToolbarButton_wrapper, {
+      buttonWrapper: clsx(styles.inlineToolbarButton_wrapper, {
         [buttonStyles.inlineToolbarButton_wrapper]: !!buttonStyles.inlineToolbarButton_wrapper,
         [buttonStyles.pluginToolbarButton_wrapper]: !!buttonStyles.pluginToolbarButton_wrapper,
       }),
-      icon: classNames(styles.inlineToolbarButton_icon, {
+      icon: clsx(styles.inlineToolbarButton_icon, {
         [buttonStyles.inlineToolbarButton_icon]: !!buttonStyles.inlineToolbarButton_icon,
         [buttonStyles.pluginToolbarButton_icon]: !!buttonStyles.pluginToolbarButton_icon,
       }),
-      active: classNames(styles.inlineToolbarButton_active, {
+      active: clsx(styles.inlineToolbarButton_active, {
         [buttonStyles.inlineToolbarButton_active]: !!buttonStyles.inlineToolbarButton_active,
         [buttonStyles.pluginToolbarButton_active]: !!buttonStyles.pluginToolbarButton_active,
       }),
@@ -59,7 +59,7 @@ class InlineToolbarButton extends Component {
     const { styles } = this;
     const showTooltip = !isMobile && !isEmpty(tooltipText);
 
-    const iconClassNames = classNames(styles.icon, {
+    const iconClassNames = clsx(styles.icon, {
       [styles.active]: isActive,
     });
 

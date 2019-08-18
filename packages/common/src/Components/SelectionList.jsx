@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classnames from 'clsx';
+import clsx from 'clsx';
 import { mergeStyles } from '../Utils/mergeStyles';
 import styles from '../../statics/styles/selection-list.scss';
 
@@ -112,7 +112,7 @@ class SelectionList extends Component {
     return (
       <div
         ref={el => (this.ref = el)}
-        className={classnames(styles.selectionList, className)}
+        className={clsx(styles.selectionList, className)}
         role={'listbox'}
         aria-disabled={readOnly}
         aria-orientation={'horizontal'}
@@ -188,7 +188,7 @@ class SelectionListOption extends Component {
         aria-disabled={readOnly}
         ref={el => (this.ref = el)}
         onKeyDown={e => onKeyDown(e)}
-        className={classnames(
+        className={clsx(
           this.styles.selectionListOption,
           { [this.styles.selectionListOption_selected]: selected },
           optionClassName

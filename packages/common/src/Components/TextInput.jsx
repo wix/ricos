@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'clsx';
+import clsx from 'clsx';
 
 import { mergeStyles } from '../Utils/mergeStyles';
 import { ErrorIcon } from '../Icons';
@@ -26,7 +26,7 @@ export default class TextInput extends React.Component {
       <div className={styles.textInput}>
         <input
           ref={inputRef}
-          className={classNames(styles.textInput_input, {
+          className={clsx(styles.textInput_input, {
             [styles.textInput_input_invalid]: error,
           })}
           {...otherProps}

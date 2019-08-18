@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'clsx';
+import clsx from 'clsx';
 import { isFunction } from 'lodash';
 import {
   sizeClassName,
@@ -26,7 +26,7 @@ class PluginViewer extends PureComponent {
       if (elementType !== 'inline') {
         const hasLink = componentData.config && componentData.config.link;
         const ContainerElement = !hasLink ? 'div' : 'a';
-        const containerClassNames = classNames(
+        const containerClassNames = clsx(
           styles.pluginContainerReadOnly,
           {
             [styles.pluginContainerMobile]: isMobile,

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'clsx';
+import clsx from 'clsx';
 import {
   mergeStyles,
   AccessibilityListener,
@@ -62,10 +62,10 @@ export default class RichContentViewer extends Component {
     const { styles } = this;
     const { textDirection, typeMappers, decorators, inlineStyleMappers } = this.props;
 
-    const wrapperClassName = classNames(styles.wrapper, {
+    const wrapperClassName = clsx(styles.wrapper, {
       [styles.desktop]: !this.props.platform || this.props.platform === 'desktop',
     });
-    const editorClassName = classNames(styles.editor, {
+    const editorClassName = clsx(styles.editor, {
       [styles.rtl]: textDirection === 'rtl',
     });
 
