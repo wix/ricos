@@ -84,7 +84,13 @@ export default class VideoSelectionInputModal extends Component {
 
   render() {
     const { url, submitted, errorMsg } = this.state;
-    const { t, handleFileSelection, enableCustomUploadOnMobile, isMobile } = this.props;
+    const {
+      t,
+      handleFileSelection,
+      enableCustomUploadOnMobile,
+      isMobile,
+      languageDir,
+    } = this.props;
     const { styles } = this;
     const uploadVideoSection = (
       <div>
@@ -114,7 +120,7 @@ export default class VideoSelectionInputModal extends Component {
       </div>
     );
     return (
-      <div>
+      <div dir={languageDir}>
         <div
           className={styles[`video_modal_container_${handleFileSelection ? 'big' : 'small'}`]}
           data-hook="videoUploadModal"
@@ -187,4 +193,5 @@ VideoSelectionInputModal.propTypes = {
   handleFileSelection: PropTypes.func,
   enableCustomUploadOnMobile: PropTypes.bool,
   isMobile: PropTypes.bool,
+  languageDir: PropTypes.string,
 };

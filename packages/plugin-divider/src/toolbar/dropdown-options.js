@@ -10,6 +10,7 @@ const createDropdownOptionComponent = ({ type, styles }) => () => {
         type={type}
         styles={styles}
         width={60}
+        fillParent
         multilineDinstance={4}
         className={styles['divider-dropdown__divider']}
       />

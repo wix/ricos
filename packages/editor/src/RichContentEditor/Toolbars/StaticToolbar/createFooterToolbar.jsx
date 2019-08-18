@@ -25,23 +25,23 @@ const getFooterTheme = theme => {
         toolbarStyles.footerToolbar_responsiveArrow,
         toolbarTheme && toolbarTheme.footerToolbar_responsiveArrow
       ),
-      responsiveArrowLeft: classNames(
-        toolbarStyles.footerToolbar_responsiveArrowLeft,
-        toolbarTheme && toolbarTheme.footerToolbar_responsiveArrowLeft
+      responsiveArrowStart: classNames(
+        toolbarStyles.footerToolbar_responsiveArrowStart,
+        toolbarTheme && toolbarTheme.footerToolbar_responsiveArrowStart
       ),
-      responsiveArrowRight: classNames(
-        toolbarStyles.footerToolbar_responsiveArrowRight,
-        toolbarTheme && toolbarTheme.footerToolbar_responsiveArrowRight
-      ),
-      //eslint-disable-next-line camelcase
-      responsiveArrowLeft_icon: classNames(
-        toolbarStyles.footerToolbar_responsiveArrowLeft_icon,
-        toolbarTheme && toolbarTheme.footerToolbar_responsiveArrowLeft_icon
+      responsiveArrowEnd: classNames(
+        toolbarStyles.footerToolbar_responsiveArrowEnd,
+        toolbarTheme && toolbarTheme.footerToolbar_responsiveArrowEnd
       ),
       //eslint-disable-next-line camelcase
-      responsiveArrowRight_icon: classNames(
-        toolbarStyles.footerToolbar_responsiveArrowRight_icon,
-        toolbarTheme && toolbarTheme.footerToolbar_responsiveArrowRight_icon
+      responsiveArrowStart_icon: classNames(
+        toolbarStyles.footerToolbar_responsiveArrowStart_icon,
+        toolbarTheme && toolbarTheme.footerToolbar_responsiveArrowStart_icon
+      ),
+      //eslint-disable-next-line camelcase
+      responsiveArrowEnd_icon: classNames(
+        toolbarStyles.footerToolbar_responsiveArrowEnd_icon,
+        toolbarTheme && toolbarTheme.footerToolbar_responsiveArrowEnd_icon
       ),
     },
     buttonStyles: {

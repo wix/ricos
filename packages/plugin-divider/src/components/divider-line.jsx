@@ -30,6 +30,7 @@ const DividerLine = ({
   styles,
   className,
   contextType,
+  fillParent,
 }) => {
   const lines = getLines(type, width, multilineDinstance);
   const { Consumer } = contextType || Context;
@@ -41,6 +42,7 @@ const DividerLine = ({
           styles[`divider--${type}`],
           styles[`divider--${size}${context.isMobile ? '--mobile' : ''}`],
           styles[`divider--${alignment}`],
+          fillParent ? styles['divider--fill-parent'] : '',
           className
         );
         return (
@@ -64,6 +66,7 @@ DividerLine.propTypes = {
   width: PropTypes.number,
   multilineDinstance: PropTypes.number,
   contextType: PropTypes.object,
+  fillParent: PropTypes.bool,
 };
 
 export default DividerLine;
