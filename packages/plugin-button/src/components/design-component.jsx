@@ -217,26 +217,26 @@ class DesignComponent extends PureComponent {
           theme={theme}
           ariaProps={{ 'aria-label': 'button sample selection', role: 'region' }}
         >
-          <div className={styles.button_samples_container}>
+          <div className={styles.button_designComponent_samples_container}>
             <div
-              className={classNames(styles.button_samples)}
+              className={classNames(styles.button_designComponent_samples)}
               ref={ref => (this.sampleContainer = ref)}
             >
               {buttonSampleList}
             </div>
           </div>
         </SettingsSection>
-        <div className={styles.button_design_component}>
+        <div className={styles.button_designComponent_design_component}>
           <SettingsSection
             theme={theme}
             ariaProps={{ 'aria-label': 'border selection', role: 'region' }}
           >
-            <div className={styles.button_row}>
-              <div className={styles.button_section_header_border}>
+            <div className={styles.button_designComponent_row}>
+              <div className={styles.button_designComponent_section_header_border}>
                 {t('ButtonModal_Border_Section')}
               </div>
-              <div className={styles.button_input_container_width}>
-                <div className={styles.button_slider_with_input}>
+              <div className={styles.button_designComponent_input_container_width}>
+                <div className={styles.button_designComponent_slider_with_input}>
                   <SliderWithInput
                     value={parseInt(this.state.borderWidth)}
                     min={0}
@@ -247,8 +247,8 @@ class DesignComponent extends PureComponent {
                   />
                 </div>
               </div>
-              <div className={styles.button_input_container_corner}>
-                <div className={styles.button_slider_with_input}>
+              <div className={styles.button_designComponent_input_container_corner}>
+                <div className={styles.button_designComponent_slider_with_input}>
                   <SliderWithInput
                     value={parseInt(this.state.borderRadius)}
                     min={0}
@@ -265,8 +265,8 @@ class DesignComponent extends PureComponent {
             theme={theme}
             ariaProps={{ 'aria-label': 'color selection', role: 'region' }}
           >
-            <div className={styles.button_colorPicker_container}>
-              <div className={styles.button_section_header_color}>
+            <div className={styles.button_designComponent_colorPicker_container}>
+              <div className={styles.button_designComponent_section_header_color}>
                 {t('ButtonModal_Color_Section')}
               </div>
 

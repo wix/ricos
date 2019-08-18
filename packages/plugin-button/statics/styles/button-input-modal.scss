@@ -1,29 +1,29 @@
 @import "~wix-rich-content-common/dist/statics/styles/mixins";
 @import "~wix-rich-content-common/dist/statics/styles/palette";
 
-.button_modal_container {
+.button_inputModal_container {
   @include phone {
     padding: 33px 20px;
     padding-bottom: 10px;
   }
 }
 
-.button_design_component_container {
+.button_inputModal_design_component_container {
   @include phone {
     padding-top: 24px;
     padding-bottom: 0;
   }
 }
 
-.button_focus_manager {
-  border-top: 1px solid #ededed;
+.button_inputModal_focus_manager {
+  border-top: none;
 }
 
-.button_separator {
+.button_inputModal_separator {
   border-top: solid 1px #ccc;
 }
 
-.button_scroll {
+.button_inputModal_scroll {
   height: calc(100vh - 152px);
   overflow-y: scroll;
   @include phone {
@@ -32,7 +32,7 @@
   }
 }
 
-.button_header {
+.button_inputModal_header {
   display: flex;
   align-items: center;
   margin-top: 1px;
@@ -41,7 +41,7 @@
   box-sizing: border-box;
 }
 
-.button_header_text {
+.button_inputModal_header_text {
   font-size: 20px;
   font-family: Avenir;
   width: 100%;
@@ -57,7 +57,7 @@
   }
 }
 
-.button_design_header_text {
+.button_inputModal_design_header_text {
   font-size: 16px;
   margin: 10px 0px;
   width: 100%;
@@ -91,7 +91,7 @@
   color: red;
 }
 
-.button_errorIcon {
+.button_inputModal_errorIcon {
   position: absolute;
   top: 2px;
   left: 130px;
@@ -99,12 +99,12 @@
 .tabs_headers_option + .tabs_headers_option {
   border-left: 0;
 }
-.button_modal_footer {
+.button_inputModal_modal_footer {
   padding-right: 29px;
   padding-left: 30px;
 }
 
-.button_settingTab {
+.button_inputModal_settingTab {
   position: relative;
   width: 100%;
 }
@@ -121,11 +121,11 @@
   padding-right: 0px;
 }
 
-.button_tabLabel {
+.button_inputModal_tabLabel {
   margin-top: 15px;
 }
 
-.button_scrollbar_thumb {
+.button_inputModal_scrollbar_thumb {
   background: #000000;
   border-radius: 4px;
   width: 4px;
@@ -137,7 +137,7 @@
   opacity: 0.8;
 }
 
-.button_customize_scrollbar_container {
+.button_inputModal_customize_scrollbar_container {
   height: 100%;
 }
 

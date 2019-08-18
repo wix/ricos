@@ -190,16 +190,18 @@ export default class ButtonInputModal extends Component {
     const { theme, t, uiSettings, doneLabel, cancelLabel, isMobile } = this.props;
     const { styles } = this;
     const settingTabLabel = (
-      <div className={styles.button_settingTab}>
-        <div className={styles.button_tabTitle}>
-          <p className={styles.button_tabLabel}>{t('ButtonModal_Settings_Tab')}</p>
+      <div className={styles.button_inputModal_settingTab}>
+        <div className={styles.button_inputModal_tabTitle}>
+          <p className={styles.button_inputModal_tabLabel}>{t('ButtonModal_Settings_Tab')}</p>
         </div>
-        <div className={styles.button_errorIcon}>
+        <div className={styles.button_inputModal_errorIcon}>
           {!this.state.isValidUrl ? <ErrorIcon width="18" height="18" /> : null}
         </div>
       </div>
     );
-    const designTabLabel = <p className={styles.button_tabLabel}>{t('ButtonModal_Design_Tab')}</p>;
+    const designTabLabel = (
+      <p className={styles.button_inputModal_tabLabel}>{t('ButtonModal_Design_Tab')}</p>
+    );
     const settingsComponent = (
       <SettingsComponent
         t={t}
@@ -233,14 +235,21 @@ export default class ButtonInputModal extends Component {
         <div>
           <Navbar onConfirm={this.onConfirm} onCancel={this.onCloseRequested} {...this.props} />
           <PreviewComponent buttonObj={this.state} {...this.props} />
-          <div className={styles.button_scroll} ref={this.setScrollbarRef}>
-            <div className={styles.button_modal_container} data-hook="ButtonInputModal">
-              <div className={styles.button_header_text}>{t('ButtonModal_Settings_Tab')}</div>
+          <div className={styles.button_inputModal_scroll} ref={this.setScrollbarRef}>
+            <div className={styles.button_inputModal_container} data-hook="ButtonInputModal">
+              <div className={styles.button_inputModal_header_text}>
+                {t('ButtonModal_Settings_Tab')}
+              </div>
               {settingsComponent}
             </div>
-            <div className={styles.button_separator} />
-            <div className={styles.button_design_component_container} data-hook="ButtonInputModal">
-              <div className={styles.button_design_header_text}>{t('ButtonModal_Design_Tab')}</div>
+            <div className={styles.button_inputModal_separator} />
+            <div
+              className={styles.button_inputModal_design_component_container}
+              data-hook="ButtonInputModal"
+            >
+              <div className={styles.button_inputModal_design_header_text}>
+                {t('ButtonModal_Design_Tab')}
+              </div>
               {designComponent}
             </div>
           </div>
@@ -252,17 +261,19 @@ export default class ButtonInputModal extends Component {
         {isMobile ? (
           mobileView
         ) : (
-          <div className={styles.button_modal_container} data-hook="ButtonInputModal">
+          <div className={styles.button_inputModal_container} data-hook="ButtonInputModal">
             <div>
               <div
                 role="heading"
                 aria-labelledby="button_modal_hdr"
-                className={styles.button_header}
+                className={styles.button_inputModal_header}
               >
-                <div className={styles.button_header_text}>{t('ButtonModal_Header')}</div>
+                <div className={styles.button_inputModal_header_text}>
+                  {t('ButtonModal_Header')}
+                </div>
               </div>
               <FocusManager>
-                <div className={styles.button_focus_mhanager}>
+                <div className={styles.button_inputModal_focus_manager}>
                   <Tabs
                     value={this.state.activeTab}
                     theme={this.styles}
@@ -282,12 +293,12 @@ export default class ButtonInputModal extends Component {
                         ref={this.setScrollbarRef}
                         renderThumbVertical={() =>
                           this.state.isHover ? (
-                            <div className={styles.button_scrollbar_thumb} />
+                            <div className={styles.button_inputModal_scrollbar_thumb} />
                           ) : (
                             <div />
                           )
                         }
-                        className={styles.button_customize_scrollbar_container}
+                        className={styles.button_inputModal_customize_scrollbar_container}
                         onMouseEnter={this.handleOnMouseEnterDesign}
                         onMouseLeave={this.handleOnMouseLeaveDesign}
                       >
@@ -299,7 +310,7 @@ export default class ButtonInputModal extends Component {
               </FocusManager>
             </div>
             <SettingsPanelFooter
-              className={styles.button_modal_footer}
+              className={styles.button_inputModal_modal_footer}
               save={() => this.onConfirm()}
               cancel={() => this.onCloseRequested()}
               saveLabel={doneLabel}
