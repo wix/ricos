@@ -19,6 +19,8 @@
 ### :bug: Bug Fix
 - `editor`
   - [#357](https://github.com/wix-incubator/rich-content/pull/357) fix footerToolbar css
+- `html`
+  - [#364](https://github.com/wix-incubator/rich-content/pull/364) fix html embed height
 - `general`
   - [#361](https://github.com/wix-incubator/rich-content/pull/361) icons: hard-coded `fill` values replaced by `currentColor` to support theming
 - `giphy`

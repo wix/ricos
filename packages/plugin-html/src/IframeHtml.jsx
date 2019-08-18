@@ -33,7 +33,7 @@ class IframeHtml extends Component {
 
   handleIframeMessage = ({ data }) => {
     const { type, id, height } = data;
-    if (type === 'htmlPlugin:maxHeight' && id === this.id) {
+    if (type === 'htmlPlugin:heightResize' && id === this.id) {
       this.props.onHeightChange(height);
     }
   };
