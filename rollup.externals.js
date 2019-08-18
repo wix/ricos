@@ -1,7 +1,7 @@
 export const externals = [
   '@wix/draft-js',
   'assert',
-  'classnames',
+  'clsx',
   'draft-js',
   'lodash',
   'prop-types',
