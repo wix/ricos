@@ -10,13 +10,12 @@ class ColorToggleComponent extends PureComponent {
     this.styles = mergeStyles({ styles, theme: props.theme });
     this.state = {
       color: props.color || '#FFF',
-      index: props.index || 0,
       isOpened: false,
     };
   }
 
   onClicked = () => {
-    this.props.toggle(this.state.index, !this.state.isOpened);
+    this.props.toggle(this.props.pickerType);
     this.setState({ isOpened: !this.state.isOpened });
   };
 
@@ -44,11 +43,11 @@ ColorToggleComponent.propTypes = {
   theme: PropTypes.object.isRequired,
   children: PropTypes.string,
   color: PropTypes.string,
-  index: PropTypes.number.isRequired,
   toggle: PropTypes.func.isRequired,
   marginBottom: PropTypes.string,
   marginButtonClassName: PropTypes.string,
   isToggle: PropTypes.bool,
+  pickerType: PropTypes.string.isRequired,
 };
 
 export default ColorToggleComponent;

@@ -9,7 +9,7 @@ import {
 import classNames from 'classnames';
 import ButtonSample from '../components/button-sample';
 import ColorToggleComponent from './color-toggle-component';
-import { DEFAULT_PALETTE } from '../constants';
+import { DEFAULT_PALETTE, COLOR_PICKER_TYPE } from '../constants';
 import styles from '../../statics/styles/design-component-styles.scss';
 
 class DesignComponent extends PureComponent {
@@ -78,7 +78,7 @@ class DesignComponent extends PureComponent {
       textCustomcolors: getTextColors() || [],
       borderCustomcolors: getBorderColors() || [],
       backgroundCustomcolors: getBackgroundColors() || [],
-      colorToggleIndex: -1,
+      pickerType: '',
     };
 
     this.onBackgroundcolorAdded = this.onBackgroundcolorAdded.bind(this);
@@ -151,27 +151,25 @@ class DesignComponent extends PureComponent {
     this.alignButtonSample(this.state.activeButton);
   }
 
-  onToggled = index => {
-    this.setState({ colorToggleIndex: index !== this.state.colorToggleIndex ? index : -1 });
+  onToggled = pickerType => {
+    this.setState({ pickerType: pickerType !== this.state.pickerType ? pickerType : '' });
   };
 
-  renderColorPicker(stateColor, index, propColor, userColors, onColorAdded, onChange, label) {
+  renderColorPicker(stateColor, propColor, userColors, onColorAdded, onChange, pickerType, label) {
     const { t, isMobile, theme, palette } = this.props;
-    const { colorToggleIndex } = this.state;
-
     return (
       <div>
         <ColorToggleComponent
           theme={theme}
           color={stateColor}
-          index={index}
+          pickerType={pickerType}
           isMobile={isMobile}
-          isToggle={colorToggleIndex === index}
+          isToggle={this.state.pickerType === pickerType}
           toggle={this.onToggled.bind(this)}
         >
           {label}
         </ColorToggleComponent>
-        {colorToggleIndex === index && (
+        {this.state.pickerType === pickerType && (
           <ColorPicker
             color={propColor}
             palette={palette.slice(0, 7) || DEFAULT_PALETTE}
@@ -274,29 +272,29 @@ class DesignComponent extends PureComponent {
 
               {this.renderColorPicker(
                 this.state.textColor,
-                0,
                 designObj.textColor,
                 this.state.textCustomcolors,
                 this.onTextcolorAdded,
                 this.onTextColorChange,
+                COLOR_PICKER_TYPE.TEXT_COLOR,
                 t('ButtonModal_Text_Color')
               )}
               {this.renderColorPicker(
                 this.state.borderColor,
-                1,
                 designObj.borderColor,
                 this.state.borderCustomcolors,
                 this.onBordercolorAdded,
                 this.onBorderColorChange,
+                COLOR_PICKER_TYPE.BORDER_COLOR,
                 t('ButtonModal_Border_Color')
               )}
               {this.renderColorPicker(
                 this.state.backgroundColor,
-                2,
                 designObj.backgroundColor,
                 this.state.backgroundCustomcolors,
                 this.onBackgroundcolorAdded,
                 this.onBackgroundColorChange,
+                COLOR_PICKER_TYPE.BACKGROUND_COLOR,
                 t('ButtonModal_Background_Color')
               )}
             </div>
