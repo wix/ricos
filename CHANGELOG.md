@@ -8,9 +8,6 @@
 > - :house: [Internal]
 
 ## [Unreleased]
-### :bug: Bug Fix
-- `giphy`
-  - [#363](https://github.com/wix-incubator/rich-content/pull/363) giphy plugin popup positioned correctly in RTL
 ### :boom: Breaking Change
 - `editor`
   - [#359](https://github.com/wix-incubator/rich-content/pull/359) updated inline/text static/mobile toolbar theme classes
@@ -24,6 +21,7 @@
   - [#357](https://github.com/wix-incubator/rich-content/pull/357) fix footerToolbar css
 - `giphy`
   - [fa229a0a](https://github.com/wix-incubator/rich-content/commit/fa229a0a) giphy viewer exposes GIPHY_TYPE
+  - [#363](https://github.com/wix-incubator/rich-content/pull/363) giphy plugin popup positioned correctly in RTL
 ### :house: Internal
 - `general`
   - [#356](https://github.com/wix-incubator/rich-content/pull/356) removed `WixUtils.isMobile`
