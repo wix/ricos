@@ -107,12 +107,12 @@ export default class StaticToolbar extends React.PureComponent {
       toolbarStyles.responsiveArrow
     );
     const leftArrowIconClassNames = clsx(
-      Styles.staticToolbar_responsiveArrowLeft_icon,
-      toolbarStyles.responsiveArrowLeft_icon
+      Styles.staticToolbar_responsiveArrowStart_icon,
+      toolbarStyles.responsiveArrowStart_icon
     );
     const rightArrowIconClassNames = clsx(
-      Styles.staticToolbar_responsiveArrowRight_icon,
-      toolbarStyles.responsiveArrowRight_icon
+      Styles.staticToolbar_responsiveArrowEnd_icon,
+      toolbarStyles.responsiveArrowEnd_icon
     );
 
     const buttonClassNames = clsx(Styles.staticToolbar_buttons, toolbarStyles.buttons);

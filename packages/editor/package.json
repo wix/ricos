@@ -46,7 +46,8 @@
     "react-click-outside": "github:tj/react-click-outside",
     "react-i18next": "~7.13.0",
     "react-measure": "~2.3.0",
-    "wix-rich-content-common": "^4.0.12"
+    "wix-rich-content-common": "^4.0.12",
+    "rtl-detect": "^1.0.2"
   },
   "peerDependencies": {
     "@babel/runtime": "7.2.0",

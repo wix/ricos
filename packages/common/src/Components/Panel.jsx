@@ -45,6 +45,7 @@ export default class Panel extends Component {
           theme={this.props.theme}
           t={this.props.t}
           tabIndex={this.state.visible ? 0 : -1}
+          getEditorBounds={this.props.getEditorBounds}
         />
       </div>
     );
@@ -59,5 +60,6 @@ Panel.propTypes = {
   componentData: PropTypes.object.isRequired,
   componentState: PropTypes.object.isRequired,
   helpers: PropTypes.object,
+  getEditorBounds: PropTypes.func,
   t: PropTypes.func,
 };

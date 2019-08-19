@@ -33,7 +33,8 @@ class DividerComponent extends PureComponent {
 
   render() {
     this.styles = this.styles || mergeStyles({ styles, theme: this.context.theme });
-    const { editorBounds } = this.props;
+    // NOTE: editor-only logic in viewer component
+    const editorBounds = this.context.getEditorBounds && this.context.getEditorBounds();
     const editorWidth = editorBounds ? editorBounds.width : 740;
     const { type, size, alignment } = this.state;
     const className = clsx(
@@ -63,7 +64,6 @@ DividerComponent.propTypes = {
   store: PropTypes.object,
   blockProps: PropTypes.object,
   className: PropTypes.string,
-  editorBounds: PropTypes.object,
 };
 
 DividerComponent.contextType = Context.type;

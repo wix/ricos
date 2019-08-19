@@ -88,23 +88,23 @@ const getMobileTheme = theme => {
         toolbarStyles.mobileToolbar_responsiveArrow,
         toolbarTheme && toolbarTheme.mobileToolbar_responsiveArrow
       ),
-      responsiveArrowLeft: clsx(
-        toolbarStyles.mobileToolbar_responsiveArrowLeft,
-        toolbarTheme && toolbarTheme.mobileToolbar_responsiveArrowLeft
+      responsiveArrowStart: clsx(
+        toolbarStyles.mobileToolbar_responsiveArrowStart,
+        toolbarTheme && toolbarTheme.mobileToolbar_responsiveArrowStart
       ),
-      responsiveArrowRight: clsx(
-        toolbarStyles.mobileToolbar_responsiveArrowRight,
-        toolbarTheme && toolbarTheme.mobileToolbar_responsiveArrowRight
-      ),
-      //eslint-disable-next-line camelcase
-      responsiveArrowLeft_icon: clsx(
-        toolbarStyles.mobileToolbar_responsiveArrowLeft_icon,
-        toolbarTheme && toolbarTheme.mobileToolbar_responsiveArrowLeft_icon
+      responsiveArrowEnd: clsx(
+        toolbarStyles.mobileToolbar_responsiveArrowEnd,
+        toolbarTheme && toolbarTheme.mobileToolbar_responsiveArrowEnd
       ),
       //eslint-disable-next-line camelcase
-      responsiveArrowRight_icon: clsx(
-        toolbarStyles.mobileToolbar_responsiveArrowRight_icon,
-        toolbarTheme && toolbarTheme.mobileToolbar_responsiveArrowRight_icon
+      responsiveArrowStart_icon: clsx(
+        toolbarStyles.mobileToolbar_responsiveArrowStart_icon,
+        toolbarTheme && toolbarTheme.mobileToolbar_responsiveArrowStart_icon
+      ),
+      //eslint-disable-next-line camelcase
+      responsiveArrowEnd_icon: clsx(
+        toolbarStyles.mobileToolbar_responsiveArrowEnd_icon,
+        toolbarTheme && toolbarTheme.mobileToolbar_responsiveArrowEnd_icon
       ),
     },
     buttonStyles: {

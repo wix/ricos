@@ -60,7 +60,7 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
   const settings = { ...DEFAULT_SETTINGS, ...config.settings };
   const helpers = config.helpers || {};
   const isMobile = config.isMobile || false;
-  const { t, anchorTarget, relValue, customStyleFn } = config;
+  const { t, anchorTarget, relValue, customStyleFn, getEditorBounds } = config;
 
   const toolbarTheme = { ...getToolbarTheme(config.theme, 'plugin'), ...config.theme };
   const Toolbar =
@@ -82,6 +82,7 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
       name: config.toolbar.name,
       uiSettings: config.uiSettings,
       getToolbarSettings: config.getToolbarSettings,
+      getEditorBounds,
     });
   const InsertPluginButtons =
     settings.showInsertButtons &&
@@ -115,6 +116,7 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
       anchorTarget,
       relValue,
       isMobile,
+      getEditorBounds,
     });
 
   const InlineModals = config.inlineModals;
