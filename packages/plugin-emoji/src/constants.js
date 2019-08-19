@@ -1,17 +1,10 @@
-import { FaSmile, FaPaw, FaPlane, FaBell, FaHeart, FaFlag, FaBeer } from 'react-icons/fa';
-
+/* eslint-disable react/jsx-key */
+import React from 'react';
+import { FaSmile, FaPaw, FaPlane, FaBell, FaHeart, FaFlag } from 'react-icons/fa';
 export const EMOJI_TYPE = 'wix-draft-plugin-emoji';
 export const ALIGN_CENTER = 'center';
 
-export const faIcons = [
-  () => <FaBeer />,
-  <FaBell />,
-  <FaSmile />,
-  <FaPaw />,
-  <FaPlane />,
-  <FaHeart />,
-  <FaFlag />,
-];
+export const FAICONS = [<FaBell />, <FaSmile />, <FaPaw />, <FaPlane />, <FaHeart />, <FaFlag />];
 
 export const DEFAULTS = {
   config: {
