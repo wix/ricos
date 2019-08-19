@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import clsx from 'clsx';
 import {
   mergeStyles,
   Image,
@@ -103,7 +103,16 @@ class ImageSettings extends Component {
   };
 
   render() {
-    const { helpers, theme, t, anchorTarget, relValue, isMobile, uiSettings } = this.props;
+    const {
+      helpers,
+      theme,
+      t,
+      anchorTarget,
+      relValue,
+      isMobile,
+      uiSettings,
+      languageDir,
+    } = this.props;
     const { src, metadata = {} } = this.state;
 
     const { linkPanel } = uiSettings || {};
@@ -118,7 +127,7 @@ class ImageSettings extends Component {
     }
 
     return (
-      <div className={this.styles.imageSettings} data-hook="imageSettings">
+      <div className={this.styles.imageSettings} data-hook="imageSettings" dir={languageDir}>
         {isMobile ? (
           <ImageSettingsMobileHeader
             t={t}
@@ -131,7 +140,7 @@ class ImageSettings extends Component {
           <h3 className={this.styles.imageSettingsTitle}>{this.headerText}</h3>
         )}
         <div
-          className={classNames(styles.imageSettings_scrollContainer, {
+          className={clsx(styles.imageSettings_scrollContainer, {
             [styles.imageSettings_mobile]: isMobile,
           })}
         >
@@ -197,6 +206,7 @@ class ImageSettings extends Component {
               theme={theme}
               t={t}
               ariaProps={{ 'aria-labelledby': 'image_settings_link_lbl' }}
+              languageDir={languageDir}
             />
           </SettingsSection>
         </div>
@@ -223,6 +233,7 @@ ImageSettings.propTypes = {
   relValue: PropTypes.string,
   isMobile: PropTypes.bool,
   uiSettings: PropTypes.object,
+  languageDir: PropTypes.string,
 };
 
 export default ImageSettings;

@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import clsx from 'clsx';
 import { mergeStyles } from '../../Utils/mergeStyles';
 import DefaultColorPicker from './DefaultColorPicker';
 import AddColorIcon from '../../Icons/AddColorIcon';
@@ -67,7 +67,7 @@ class ColorPicker extends PureComponent {
         data-scheme-color={attributes ? attributes[index] : ''}
         title={color}
         key={`${color}_${index}`}
-        className={classNames({
+        className={clsx({
           [styles.colorPicker_button]: true,
           [styles.colorPicker_button_selected]:
             this.state.color === color &&

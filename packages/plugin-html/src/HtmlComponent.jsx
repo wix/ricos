@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { mergeStyles, isValidUrl, normalizeUrl, validate, Context } from 'wix-rich-content-common';
+import {
+  mergeStyles,
+  isValidUrl,
+  normalizeUrl,
+  validate,
+  Context,
+  ViewportRenderer,
+} from 'wix-rich-content-common';
 
 import {
   SRC_TYPE_HTML,
@@ -65,28 +72,30 @@ class HtmlComponent extends Component {
     const readOnly = blockProps ? blockProps.readOnly : true;
 
     return (
-      <div
-        className={this.styles.htmlComponent}
-        ref={ref => (this.element = ref)}
-        style={style}
-        data-hook="HtmlComponent"
-      >
-        {srcType === SRC_TYPE_HTML && src && (
-          <IframeHtml
-            key={SRC_TYPE_HTML}
-            tabIndex={readOnly ? -1 : 0}
-            html={src}
-            src={htmlIframeSrc}
-            onHeightChange={this.setHeight}
-          />
-        )}
+      <ViewportRenderer>
+        <div
+          className={this.styles.htmlComponent}
+          ref={ref => (this.element = ref)}
+          style={style}
+          data-hook="HtmlComponent"
+        >
+          {srcType === SRC_TYPE_HTML && src && (
+            <IframeHtml
+              key={SRC_TYPE_HTML}
+              tabIndex={readOnly ? -1 : 0}
+              html={src}
+              src={htmlIframeSrc}
+              onHeightChange={this.setHeight}
+            />
+          )}
 
-        {srcType === SRC_TYPE_URL && isValidUrl(src) && (
-          <IframeUrl key={SRC_TYPE_URL} tabIndex={readOnly ? -1 : 0} src={normalizeUrl(src)} />
-        )}
+          {srcType === SRC_TYPE_URL && isValidUrl(src) && (
+            <IframeUrl key={SRC_TYPE_URL} tabIndex={readOnly ? -1 : 0} src={normalizeUrl(src)} />
+          )}
 
-        {!src && !isValidUrl(src) && <div className={this.styles.htmlComponent_placeholder} />}
-      </div>
+          {!src && !isValidUrl(src) && <div className={this.styles.htmlComponent_placeholder} />}
+        </div>
+      </ViewportRenderer>
     );
   }
 }

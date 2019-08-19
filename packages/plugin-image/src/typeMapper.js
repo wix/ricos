@@ -1,4 +1,4 @@
-import { ImageViewer } from './image-viewer';
+import ImageViewer from './image-viewer';
 import { IMAGE_TYPE_LEGACY, IMAGE_TYPE } from './types';
 import { sizeClassName, alignmentClassName } from './classNameStrategies';
 

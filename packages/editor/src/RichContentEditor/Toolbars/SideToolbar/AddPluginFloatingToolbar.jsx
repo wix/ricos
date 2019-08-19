@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import clsx from 'clsx';
 import { FocusManager, EditorModals, getModalStyles } from 'wix-rich-content-common';
 import { PlusIcon, PlusActiveIcon } from '../../Icons';
 import Styles from '../../../../statics/styles/side-toolbar.scss';
@@ -31,10 +31,19 @@ export default class AddPluginFloatingToolbar extends Component {
   };
 
   openAddPluginModal = () => {
-    const { getEditorState, setEditorState, structure, pubsub, theme, helpers, t } = this.props;
+    const {
+      getEditorState,
+      setEditorState,
+      structure,
+      pubsub,
+      theme,
+      helpers,
+      t,
+      isMobile,
+    } = this.props;
     helpers.openModal({
       modalName: EditorModals.MOBILE_ADD_PLUGIN,
-      modalStyles: getModalStyles({ fullScreen: false }),
+      modalStyles: getModalStyles({ fullScreen: false, isMobile }),
       structure: structure.map(Button => ({ component: Button })),
       theme,
       hidePopup: helpers.closeModal,
@@ -108,18 +117,15 @@ export default class AddPluginFloatingToolbar extends Component {
   render() {
     const { theme, getEditorState, setEditorState } = this.props;
     const { toolbarStyles } = theme || {};
-    const floatingContainerClassNames = classNames(
+    const floatingContainerClassNames = clsx(
       Styles.sideToolbar_floatingContainer,
       toolbarStyles && toolbarStyles.sideToolbar_floatingContainer
     );
-    const floatingIconClassNames = classNames(
+    const floatingIconClassNames = clsx(
       Styles.sideToolbar_floatingIcon,
       toolbarStyles && toolbarStyles.sideToolbar_floatingIcon
     );
-    const popoupClassNames = classNames(
-      Styles.sideToolbar,
-      toolbarStyles && toolbarStyles.sideToolbar
-    );
+    const popoupClassNames = clsx(Styles.sideToolbar, toolbarStyles && toolbarStyles.sideToolbar);
     return (
       <FocusManager
         role="toolbar"

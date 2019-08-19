@@ -8,25 +8,26 @@ import { MapSettingsModal } from './MapSettingsModal';
 import { get } from 'lodash';
 import { DEFAULTS } from '../constants';
 
-const getAlignmentButtonProps = ({ store, componentData }) => {
+const getAlignmentButtonPropsFn = getEditorBounds => ({ componentData }) => {
   const MAX_ALIGNMENT_WIDTH = 739;
-  const bounds = store.get('editorBounds');
-  const maxAlignmentWidth = bounds ? bounds.width - 1 : MAX_ALIGNMENT_WIDTH;
+  const editorBounds = getEditorBounds();
+  const maxAlignmentWidth = editorBounds ? editorBounds.width - 1 : MAX_ALIGNMENT_WIDTH;
   return {
     disabled: get(componentData, 'config.width', 0) > maxAlignmentWidth,
   };
 };
 
-export default ({ settings, t, helpers }) => {
+export default ({ settings, t, helpers, getEditorBounds, isMobile }) => {
   const { maxWidth, minWidth, maxHeight, minHeight } = settings;
 
   return [
     {
       type: BUTTONS.WIDTH,
+      getEditorBounds,
       keyName: 'width',
       min: minWidth || DEFAULTS.minWidth,
-      mapStoreDataToPanelProps: ({ store }) => {
-        const bounds = store.get('editorBounds');
+      mapStoreDataToPanelProps: () => {
+        const bounds = getEditorBounds();
         if (bounds && bounds.width) {
           return { max: maxWidth ? Math.min(maxWidth, bounds.width) : bounds.width };
         } else {
@@ -45,7 +46,7 @@ export default ({ settings, t, helpers }) => {
     {
       keyName: 'sizeSmallLeft',
       type: BUTTONS.SIZE_SMALL_LEFT,
-      mapStoreDataToButtonProps: getAlignmentButtonProps,
+      mapStoreDataToButtonProps: getAlignmentButtonPropsFn(getEditorBounds),
       mobile: false,
     },
     {
@@ -57,7 +58,7 @@ export default ({ settings, t, helpers }) => {
     {
       keyName: 'sizeSmallRight',
       type: BUTTONS.SIZE_SMALL_RIGHT,
-      mapStoreDataToButtonProps: getAlignmentButtonProps,
+      mapStoreDataToButtonProps: getAlignmentButtonPropsFn(getEditorBounds),
       mobile: false,
     },
     { keyName: 'separator2', type: BUTTONS.SEPARATOR, mobile: false },
@@ -66,7 +67,7 @@ export default ({ settings, t, helpers }) => {
       type: BUTTONS.EXTERNAL_MODAL,
       icon: PluginSettingsIcon,
       modalElement: MapSettingsModal,
-      modalStyles: getModalStyles(),
+      modalStyles: getModalStyles({ isMobile }),
       mobile: true,
       tooltipTextKey: 'MapPluginButton_Settings_Tooltip',
       helpers,

@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 import React from 'react';
 
-const pickedIcon = props => (
+const PickedIcon = props => (
   <svg
     width={20}
     height={20}
@@ -16,7 +16,7 @@ const pickedIcon = props => (
         <rect fill="transparent" x="0" y="0" width="534" height="448" />
         <g id="Group" transform="translate(75.000000, 308.000000)" stroke="#FFFFFF">
           <g id="Picked" transform="translate(1.000000, 1.000000)">
-            <circle id="Oval" fill="#23D6B5" fillRule="evenodd" cx="9" cy="9" r="9" />
+            <circle id="Oval" fill="currentColor" fillRule="evenodd" cx="9" cy="9" r="9" />
             <polyline
               id="Path-8"
               strokeLinecap="round"
@@ -30,4 +30,4 @@ const pickedIcon = props => (
   </svg>
 );
 
-export default pickedIcon;
+export default PickedIcon;

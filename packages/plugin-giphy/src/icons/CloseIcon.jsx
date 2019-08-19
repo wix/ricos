@@ -11,7 +11,7 @@ const CloseIcon = props => (
     {...props}
   >
     <g id="giphy-Master" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
-      <g id="Giphy-02-Search" transform="translate(-974.000000, -258.000000)" fill="#333333">
+      <g id="Giphy-02-Search" transform="translate(-974.000000, -258.000000)" fill="currentColor">
         <g id="Giphy-window" transform="translate(736.000000, 232.000000)">
           <g id="giphy-Window" transform="translate(238.000000, 26.000000)">
             <g id="giphy-Xicon">

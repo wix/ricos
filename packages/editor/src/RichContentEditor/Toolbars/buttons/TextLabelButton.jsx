@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { isEmpty } from 'lodash';
-import classNames from 'classnames';
+import clsx from 'clsx';
 import { mergeStyles, ToolbarButton } from 'wix-rich-content-common';
 
 import styles from '../../../../statics/styles/text-label-button.scss';
@@ -56,7 +56,7 @@ export default class TextLabelButton extends Component {
         <button
           tabIndex={tabIndex}
           aria-label={tooltipText}
-          className={classNames(styles.textLabelButton, className)}
+          className={clsx(styles.textLabelButton, className)}
           data-hook={dataHook}
           onClick={this.handleClick}
         >

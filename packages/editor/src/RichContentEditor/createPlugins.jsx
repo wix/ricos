@@ -13,6 +13,7 @@ const createPlugins = ({
   relValue,
   getEditorState,
   setEditorState,
+  getEditorBounds,
 }) => {
   const focusPlugin = createFocusPlugin();
   const dndPlugin = createBlockDndPlugin();
@@ -28,6 +29,7 @@ const createPlugins = ({
     relValue,
     getEditorState,
     setEditorState,
+    getEditorBounds,
     ...config,
   };
   const wixPlugins = (plugins || []).map(createPlugin => createPlugin(wixPluginConfig));

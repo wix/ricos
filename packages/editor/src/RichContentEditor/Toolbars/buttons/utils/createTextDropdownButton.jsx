@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import clsx from 'clsx';
 import TextButton from '../TextButton';
 import { mergeStyles, Tooltip } from 'wix-rich-content-common';
 import styles from '../../../../../statics/styles/inline-toolbar-dropdown-button.scss';
@@ -33,16 +33,16 @@ export default ({ buttons, activeItem, onChange, tooltipTextKey }) =>
         ...theme,
         buttonStyles: {
           //eslint-disable-next-line camelcase
-          inlineToolbarButton_wrapper: classNames(
+          inlineToolbarButton_wrapper: clsx(
             styles.inlineToolbarDropdownButton_wrapper,
             theme && theme.inlineToolbarDropdownButton_wrapper
           ),
-          inlineToolbarButton: classNames(
+          inlineToolbarButton: clsx(
             styles.inlineToolbarDropdownButton,
             theme && theme.inlineToolbarDropdownButton
           ),
           //eslint-disable-next-line camelcase
-          inlineToolbarButton_icon: classNames(
+          inlineToolbarButton_icon: clsx(
             styles.inlineToolbarDropdownButton_icon,
             theme && theme.inlineToolbarDropdownButton_icon
           ),

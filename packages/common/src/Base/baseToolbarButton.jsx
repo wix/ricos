@@ -2,7 +2,7 @@
 import React from 'react';
 import { findDOMNode } from 'react-dom';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import clsx from 'clsx';
 import { isEmpty } from 'lodash';
 import Context from '../Utils/Context';
 import Dropdown from '../Components/Dropdown';
@@ -219,11 +219,11 @@ class BaseToolbarButton extends React.Component {
     } = this.props;
     const tooltipText = t(tooltipTextKey);
     const showTooltip = !isMobile && !isEmpty(tooltipText);
-    const replaceButtonWrapperClassNames = classNames(styles.buttonWrapper);
+    const replaceButtonWrapperClassNames = clsx(styles.buttonWrapper);
     const filesButton = (
       <div className={replaceButtonWrapperClassNames}>
         <FileInput
-          className={classNames(buttonClassNames)}
+          className={clsx(buttonClassNames)}
           theme={theme}
           tabIndex={tabIndex}
           dataHook={this.getDataHook()}
@@ -272,8 +272,8 @@ class BaseToolbarButton extends React.Component {
   render = () => {
     const { disabled, theme: themedStyles } = this.props;
     const { isActive } = this.state;
-    const buttonWrapperClassNames = classNames(themedStyles.buttonWrapper);
-    const buttonClassNames = classNames({
+    const buttonWrapperClassNames = clsx(themedStyles.buttonWrapper);
+    const buttonClassNames = clsx({
       [themedStyles.button]: true,
       [themedStyles.active]: isActive,
       [themedStyles.disabled]: disabled,

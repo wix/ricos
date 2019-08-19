@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import clsx from 'clsx';
 import { getVisibleSelectionRect } from '@wix/draft-js';
 import Measure from 'react-measure';
 import ClickOutside from 'react-click-outside';
@@ -230,7 +230,7 @@ export default class InlineToolbar extends Component {
     const hasArrow = showLeftArrow || showRightArrow;
     const { toolbarStyles } = theme || {};
 
-    const buttonClassNames = classNames(
+    const buttonClassNames = clsx(
       Styles.inlineToolbar_buttons,
       toolbarStyles && toolbarStyles.inlineToolbar_buttons,
       {
@@ -238,12 +238,12 @@ export default class InlineToolbar extends Component {
         [toolbarStyles.inlineToolbar_overrideContent]: !!OverrideContent,
       }
     );
-    const extendClassNames = classNames(
+    const extendClassNames = clsx(
       Styles.inlineToolbar_extend,
       toolbarStyles && toolbarStyles.inlineToolbar_extend
     );
 
-    const scrollableClassNames = classNames(
+    const scrollableClassNames = clsx(
       Styles.inlineToolbar_scrollableContainer,
       toolbarStyles && toolbarStyles.inlineToolbar_scrollableContainer,
       {
@@ -251,17 +251,17 @@ export default class InlineToolbar extends Component {
       }
     );
 
-    const arrowClassNames = classNames(
+    const arrowClassNames = clsx(
       Styles.inlineToolbar_responsiveArrow,
       toolbarStyles.inlineToolbar_responsiveArrow
     );
-    const leftArrowIconClassNames = classNames(
-      Styles.inlineToolbar_responsiveArrowLeft_icon,
-      toolbarStyles.responsiveArrowLeft_icon
+    const leftArrowIconClassNames = clsx(
+      Styles.inlineToolbar_responsiveArrowStart_icon,
+      toolbarStyles.responsiveArrowStart_icon
     );
-    const rightArrowIconClassNames = classNames(
-      Styles.inlineToolbar_responsiveArrowRight_icon,
-      toolbarStyles.responsiveArrowRight_icon
+    const rightArrowIconClassNames = clsx(
+      Styles.inlineToolbar_responsiveArrowEnd_icon,
+      toolbarStyles.responsiveArrowEnd_icon
     );
 
     const childrenProps = {
@@ -330,7 +330,7 @@ export default class InlineToolbar extends Component {
     const { toolbarStyles } = theme || {};
 
     const props = {
-      className: classNames(Styles.inlineToolbar, toolbarStyles && toolbarStyles.inlineToolbar),
+      className: clsx(Styles.inlineToolbar, toolbarStyles && toolbarStyles.inlineToolbar),
       style: this.getStyle(),
       tabIndex: this.isVisible() ? 0 : -1,
       role: 'toolbar',

@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { SoundCloudIcon } from '../icons';
-import classNames from 'classnames';
+import clsx from 'clsx';
 import {
   mergeStyles,
   isSoundCloudUrl,
@@ -72,23 +72,16 @@ export default class SoundCloudURLInputModal extends Component {
 
   render() {
     const { url, submitted } = this.state;
-    const { doneLabel, cancelLabel, t, isMobile } = this.props;
+    const { doneLabel, cancelLabel, t, isMobile, languageDir } = this.props;
     const { styles } = this;
 
     return (
-      <div className={styles.container} data-hook="soundCloudUploadModal">
+      <div className={styles.container} data-hook="soundCloudUploadModal" dir={languageDir}>
         {!isMobile && (
-          <CloseIcon
-            className={classNames(styles.closeIcon)}
-            onClick={() => this.onCloseRequested()}
-          />
+          <CloseIcon className={clsx(styles.closeIcon)} onClick={() => this.onCloseRequested()} />
         )}
-        <div
-          role="heading"
-          aria-labelledby="sound_cloud_modal_hdr"
-          className={classNames(styles.header)}
-        >
-          <SoundCloudIcon className={classNames(styles.header_icon)} />
+        <div role="heading" aria-labelledby="sound_cloud_modal_hdr" className={clsx(styles.header)}>
+          <SoundCloudIcon className={clsx(styles.header_icon)} />
           <h3 id="sound_cloud_modal_hdr" className={styles.header_text}>
             {!isMobile
               ? t('SoundCloudUploadModal_Header')
@@ -139,6 +132,7 @@ SoundCloudURLInputModal.propTypes = {
   cancelLabel: PropTypes.string,
   t: PropTypes.func,
   isMobile: PropTypes.bool,
+  languageDir: PropTypes.string,
 };
 
 SoundCloudURLInputModal.defaultProps = {

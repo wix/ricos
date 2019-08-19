@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import clsx from 'clsx';
 import {
   mergeStyles,
   AccessibilityListener,
@@ -9,6 +9,7 @@ import {
 } from 'wix-rich-content-common';
 import { convertToReact } from './utils/convertContentState';
 import styles from '../statics/rich-content-viewer.scss';
+import { getLangDir } from 'rtl-detect';
 
 export default class RichContentViewer extends Component {
   constructor(props) {
@@ -60,12 +61,12 @@ export default class RichContentViewer extends Component {
 
   render() {
     const { styles } = this;
-    const { textDirection, typeMappers, decorators, inlineStyleMappers } = this.props;
+    const { textDirection, typeMappers, decorators, inlineStyleMappers, locale } = this.props;
 
-    const wrapperClassName = classNames(styles.wrapper, {
+    const wrapperClassName = clsx(styles.wrapper, {
       [styles.desktop]: !this.props.platform || this.props.platform === 'desktop',
     });
-    const editorClassName = classNames(styles.editor, {
+    const editorClassName = clsx(styles.editor, {
       [styles.rtl]: textDirection === 'rtl',
     });
 
@@ -80,7 +81,7 @@ export default class RichContentViewer extends Component {
     );
 
     return (
-      <div className={wrapperClassName}>
+      <div className={wrapperClassName} dir={getLangDir(locale)}>
         <Context.Provider value={this.state.contextualData}>
           <div className={editorClassName}>{output}</div>
           <AccessibilityListener />

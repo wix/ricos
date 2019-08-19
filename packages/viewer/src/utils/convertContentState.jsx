@@ -2,7 +2,7 @@ import React from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { BLOCK_TYPES } from 'wix-rich-content-common';
 import redraft from 'redraft';
-import classNames from 'classnames';
+import clsx from 'clsx';
 import { endsWith } from 'lodash';
 import List from '../List';
 import getPluginViewers from '../getPluginViewers';
@@ -18,7 +18,7 @@ const getBlockStyleClasses = (data, mergedStyles, textDirection, classes) => {
   const rtl = textDirection === 'rtl' || data.textDirection === 'rtl';
   const defaultTextAlignment = rtl ? 'right' : 'left';
   const alignmentClass = data.textAlignment || defaultTextAlignment;
-  return classNames(classes, { [mergedStyles.rtl]: rtl }, mergedStyles[alignmentClass]);
+  return clsx(classes, { [mergedStyles.rtl]: rtl }, mergedStyles[alignmentClass]);
 };
 
 const blockDataToStyle = ({ dynamicStyles }) => kebabToCamelObjectKeys(dynamicStyles);

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import clsx from 'clsx';
 import { mergeStyles } from '../Utils/mergeStyles';
 import styles from '../../statics/styles/tabs.scss';
 
@@ -78,7 +78,7 @@ export class Tabs extends Component {
                 tabIndex={0}
                 name={`tabs`}
                 key={value}
-                className={classNames(styles.tabs_headers_option, {
+                className={clsx(styles.tabs_headers_option, {
                   [styles.tabs_headers_option_selected]: isSelected,
                 })}
                 data-hook={`${value}_Tab`}

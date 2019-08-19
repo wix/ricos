@@ -1,7 +1,7 @@
 export const externals = [
   '@wix/draft-js',
   'assert',
-  'classnames',
+  'clsx',
   'draft-js',
   'lodash',
   'prop-types',
@@ -19,26 +19,6 @@ export const excludedExternals = [
   '@wix/draft-js/lib/isSoftNewlineEvent',
   /wix-rich-content-common\/.*?\.scss/,
 ];
-
-export const globals = {
-  '@wix/draft-js': 'Draft',
-  classnames: 'classNames',
-  'draft-js': 'Draft',
-  'draft-js-code': 'CodeUtils',
-  lodash: '_',
-  'prop-types': 'PropTypes',
-  react: 'React',
-  'react-custom-scrollbars': 'ReactCustomScrollbars',
-  'react-dom': 'ReactDOM',
-  'react-i18next': 'reactI18next',
-  'react-infinite-scroller': 'InfiniteScroll',
-  'react-md-spinner': 'MDSpinner',
-  'react-measure': 'Measure',
-  'react-player': 'ReactPlayer',
-  'react-sortable-hoc': 'reactSortableHoc',
-  'react-tooltip': 'ReactTooltip',
-  'wix-rich-content-common': 'WixRichContentCommon',
-};
 
 export const excludedGlobals = [
   'draft-js-plugins-editor',

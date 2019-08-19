@@ -1,10 +1,5 @@
 import { DEFAULTS } from '../video-component';
-import {
-  getModalStyles,
-  TOOLBARS,
-  decorateComponentWithProps,
-  WixUtils,
-} from 'wix-rich-content-common';
+import { getModalStyles, TOOLBARS, decorateComponentWithProps } from 'wix-rich-content-common';
 import VideoSelectionInputModal from './videoSelectionInputModal';
 import { InsertPluginIcon } from '../icons';
 import {
@@ -12,7 +7,13 @@ import {
   ExtendedSelectionModalCustomStyle,
 } from './selectionModalCustomStyles';
 
-export default ({ helpers, t, settings }) => {
+export default ({ helpers, t, settings, isMobile }) => {
+  //apply the extended input modal styles if handleFileSelection is avilable in plugin config
+  //& on mobile if enableCustomUploadOnMobile is set to true, otherwise the normal modal styles is applied
+  const customStyles =
+    (!isMobile || settings.enableCustomUploadOnMobile) && settings.handleFileSelection
+      ? ExtendedSelectionModalCustomStyle
+      : SelectionModalCustomStyle;
   return [
     {
       type: 'modal',
@@ -23,14 +24,9 @@ export default ({ helpers, t, settings }) => {
       toolbars: [TOOLBARS.FOOTER, TOOLBARS.SIDE],
       modalElement: decorateComponentWithProps(VideoSelectionInputModal, settings),
       modalStyles: getModalStyles({
-        //apply the extended input modal styles if handleFileSelection is avilable in plugin config
-        //& on mobile if enableCustomUploadOnMobile is set to true, otherwise the normal modal styles is applied
-        customStyles:
-          (!WixUtils.isMobile() || settings.enableCustomUploadOnMobile) &&
-          settings.handleFileSelection
-            ? ExtendedSelectionModalCustomStyle
-            : SelectionModalCustomStyle,
+        customStyles,
         fullScreen: false,
+        isMobile,
       }),
       helpers,
     },

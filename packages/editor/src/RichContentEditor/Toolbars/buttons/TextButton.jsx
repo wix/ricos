@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import clsx from 'clsx';
 import { isEmpty } from 'lodash';
 
 import { mergeStyles, ToolbarButton } from 'wix-rich-content-common';
@@ -44,7 +44,7 @@ export default class TextButton extends Component {
     const { styles } = this;
     const { icon: Icon, theme, isMobile, tooltipText, dataHook, tabIndex } = this.props;
     const showTooltip = !isMobile && !isEmpty(tooltipText);
-    const iconClassNames = classNames(styles.inlineToolbarButton_icon, {
+    const iconClassNames = clsx(styles.inlineToolbarButton_icon, {
       [styles.inlineToolbarButton_active]: this.isActive(),
     });
 

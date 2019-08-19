@@ -6,7 +6,7 @@ import {
   SettingsSection,
   mergeStyles,
 } from 'wix-rich-content-common';
-import classNames from 'classnames';
+import clsx from 'clsx';
 import ButtonSample from '../components/button-sample';
 import styles from '../../statics/styles/design-component-styles.scss';
 
@@ -159,10 +159,7 @@ class DesignComponent extends PureComponent {
           ariaProps={{ 'aria-label': 'button sample selection', role: 'region' }}
         >
           <div className={styles.button_samples_container}>
-            <div
-              className={classNames(styles.button_samples)}
-              ref={ref => (this.sampleContainer = ref)}
-            >
+            <div className={clsx(styles.button_samples)} ref={ref => (this.sampleContainer = ref)}>
               {buttonSampleList}
             </div>
           </div>

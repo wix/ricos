@@ -7,6 +7,33 @@
 > - :book: [Documentation]
 > - :house: [Internal]
 
+## [Unreleased]
+### :boom: Breaking Change
+- `editor`
+  - [#359](https://github.com/wix-incubator/rich-content/pull/359) updated inline/text static/mobile toolbar theme classes
+### :rocket: New Feature
+- `editor`
+  - [#359](https://github.com/wix-incubator/rich-content/pull/359) added support for rtl in editor modals
+- `general`
+  - [#358](https://github.com/wix-incubator/rich-content/pull/358) viewport based lazy loading for plugin components
+### :bug: Bug Fix
+- `editor`
+  - [#357](https://github.com/wix-incubator/rich-content/pull/357) fix footerToolbar css
+- `html`
+  - [#364](https://github.com/wix-incubator/rich-content/pull/364) fix html embed height
+- `general`
+  - [#361](https://github.com/wix-incubator/rich-content/pull/361) icons: hard-coded `fill` values replaced by `currentColor` to support theming
+- `giphy`
+  - [fa229a0a](https://github.com/wix-incubator/rich-content/commit/fa229a0a) giphy viewer exposes GIPHY_TYPE
+  - [#363](https://github.com/wix-incubator/rich-content/pull/363) giphy plugin popup positioned correctly in RTL
+### :house: Internal
+- `general`
+  - [#356](https://github.com/wix-incubator/rich-content/pull/356) removed `WixUtils.isMobile`
+  - [#356](https://github.com/wix-incubator/rich-content/pull/356) renamed `WixUtils` to `isiOS` and deleted everything except for isiOS
+  - [#362](https://github.com/wix-incubator/rich-content/pull/362) `classnames` dependency replaced by `clsx`
+  - [#360](https://github.com/wix-incubator/rich-content/pull/360)  `editorBounds` pusub subscription replaced by `getEditorBounds` function passed via the context and params for plugin initialization
+<hr/>
+
 ## 4.0.12 (Aug 7, 2019)
 ### :rocket: New Feature
 - `viewer`
@@ -17,6 +44,8 @@
 - `mentions`
   - [#354](https://github.com/wix-incubator/rich-content/pull/354) fix Google 'Touch to Search' trigger when clicking on mention
 ### :house: Internal
+- `tests`
+    [#334](https://github.com/wix-incubator/rich-content/pull/334) add Cypress
 - `example`
   - [#350](https://github.com/wix-incubator/rich-content/pull/350) ability to change locale
 <hr/>

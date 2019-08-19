@@ -1,21 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import clsx from 'clsx';
 import { get, includes, isEqual, isFunction } from 'lodash';
-import { mergeStyles, Loader, validate, Context } from 'wix-rich-content-common';
+import { mergeStyles, Loader, validate, Context, ViewportRenderer } from 'wix-rich-content-common';
 import getImageSrc from './get-image-source';
 import { WIX_MEDIA_DEFAULT } from './get-wix-media-url';
+import { getDefault } from './consts';
 import schema from '../statics/data-schema.json';
 import styles from '../statics/styles/image-viewer.scss';
-
-const getDefault = () => ({
-  config: {
-    alignment: 'center',
-    size: 'content',
-    showTitle: true,
-    showDescription: true,
-  },
-});
 
 class ImageViewer extends React.Component {
   constructor(props) {
@@ -33,6 +25,7 @@ class ImageViewer extends React.Component {
       validate(nextProps.componentData, schema);
     }
   }
+
   getImageSrc(src) {
     const { helpers } = this.context || {};
 
@@ -107,7 +100,7 @@ class ImageViewer extends React.Component {
       <img
         key="preload"
         ref={ref => (this.preloadImage = ref)}
-        className={classNames(imageClassName, this.styles.imagePreload)}
+        className={clsx(imageClassName, this.styles.imagePreload)}
         src={imageSrc.preload}
         alt={alt}
         onError={this.onImageLoadError}
@@ -115,7 +108,7 @@ class ImageViewer extends React.Component {
       <img
         {...props}
         key="highres"
-        className={classNames(imageClassName, this.styles.imageHighres)}
+        className={clsx(imageClassName, this.styles.imageHighres)}
         src={imageSrc.highres}
         alt={alt}
         onLoad={e => this.onHighResLoad(e)}
@@ -138,7 +131,7 @@ class ImageViewer extends React.Component {
     const config = data.config || {};
     return (
       !!config.showTitle && (
-        <div className={classNames(styles.imageTitle)}>{(data && data.title) || ''}</div>
+        <div className={clsx(styles.imageTitle)}>{(data && data.title) || ''}</div>
       )
     );
   }
@@ -147,9 +140,7 @@ class ImageViewer extends React.Component {
     const config = data.config || {};
     return (
       !!config.showDescription && (
-        <div className={classNames(styles.imageDescription)}>
-          {(data && data.description) || ''}
-        </div>
+        <div className={clsx(styles.imageDescription)}>{(data && data.description) || ''}</div>
       )
     );
   }
@@ -203,11 +194,10 @@ class ImageViewer extends React.Component {
     } = this.props;
     const { fallbackImageSrc } = this.state;
     const data = componentData || getDefault();
-    data.config = data.config || {};
     const { metadata = {} } = componentData;
 
-    const itemClassName = classNames(this.styles.imageContainer, className);
-    const imageClassName = classNames(this.styles.image);
+    const itemClassName = clsx(this.styles.imageContainer, className);
+    const imageClassName = clsx(this.styles.image);
     const imageSrc = fallbackImageSrc || this.getImageSrc(data.src);
     let imageProps = {};
     if (data.src && settings && isFunction(settings.imageProps)) {
@@ -218,22 +208,24 @@ class ImageViewer extends React.Component {
 
     /* eslint-disable jsx-a11y/no-static-element-interactions */
     return (
-      <div
-        data-hook="imageViewer"
-        onClick={onClick}
-        className={itemClassName}
-        onKeyDown={e => this.onKeyDown(e, onClick)}
-        ref={e => this.handleRef(e)}
-      >
-        <div className={this.styles.imageWrapper}>
-          {imageSrc && this.renderImage(imageClassName, imageSrc, metadata.alt, imageProps)}
-          {this.renderLoader()}
+      <ViewportRenderer>
+        <div
+          data-hook="imageViewer"
+          onClick={onClick}
+          className={itemClassName}
+          onKeyDown={e => this.onKeyDown(e, onClick)}
+          ref={e => this.handleRef(e)}
+        >
+          <div className={this.styles.imageWrapper}>
+            {imageSrc && this.renderImage(imageClassName, imageSrc, metadata.alt, imageProps)}
+            {this.renderLoader()}
+          </div>
+          {this.renderTitle(data, this.styles)}
+          {this.renderDescription(data, this.styles)}
+          {this.shouldRenderCaption() &&
+            this.renderCaption(metadata.caption, isFocused, readOnly, this.styles, defaultCaption)}
         </div>
-        {this.renderTitle(data, this.styles)}
-        {this.renderDescription(data, this.styles)}
-        {this.shouldRenderCaption() &&
-          this.renderCaption(metadata.caption, isFocused, readOnly, this.styles, defaultCaption)}
-      </div>
+      </ViewportRenderer>
     );
     /* eslint-enable jsx-a11y/no-static-element-interactions */
   }
@@ -253,4 +245,4 @@ ImageViewer.propTypes = {
   defaultCaption: PropTypes.string,
 };
 
-export { ImageViewer, getDefault };
+export default ImageViewer;

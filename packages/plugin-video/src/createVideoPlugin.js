@@ -5,7 +5,7 @@ import { createBasePlugin } from 'wix-rich-content-common';
 
 const createVideoPlugin = (config = {}) => {
   const type = VIDEO_TYPE;
-  const { helpers, t, [type]: settings = {}, ...rest } = config;
+  const { helpers, t, [type]: settings = {}, isMobile, ...rest } = config;
 
   return createBasePlugin({
     component: Component,
@@ -15,10 +15,12 @@ const createVideoPlugin = (config = {}) => {
       helpers,
       t,
       settings,
+      isMobile,
     }),
     helpers,
     settings,
     t,
+    isMobile,
     ...rest,
   });
 };

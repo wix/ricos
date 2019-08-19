@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
-import classNames from 'classnames';
+import clsx from 'clsx';
 import { mergeStyles } from '../Utils/mergeStyles';
 import styles from '../../statics/styles/dropdown.scss';
 import { DropdownArrowIcon } from '../Icons';
@@ -113,7 +113,7 @@ class Dropdown extends Component {
 
   renderOption(option) {
     const { styles } = this;
-    const optionClass = classNames({
+    const optionClass = clsx({
       [styles['Dropdown-option']]: true,
       [styles['Dropdown-option-selected']]: option === this.state.selected,
     });
@@ -202,7 +202,7 @@ class Dropdown extends Component {
       </div>
     ) : null;
 
-    const dropdownClass = classNames({
+    const dropdownClass = clsx({
       [styles['Dropdown-root']]: true,
       [styles['Dropdown-root-isOpen']]: this.state.isOpen,
     });
@@ -214,18 +214,14 @@ class Dropdown extends Component {
           role="combobox"
           aria-controls={`${this.id}_menu`}
           aria-expanded={this.state.isOpen}
-          className={classNames(
-            styles['Dropdown-control'],
-            this.props.controlClassName,
-            disabledClass
-          )}
+          className={clsx(styles['Dropdown-control'], this.props.controlClassName, disabledClass)}
           data-hook={dataHook}
           onClick={this.handleMouseDown.bind(this)}
           onTouchEnd={this.handleMouseDown.bind(this)}
         >
           {value}
           <span
-            className={classNames(styles['Dropdown-arrow'], {
+            className={clsx(styles['Dropdown-arrow'], {
               [styles['Dropdown-arrow-isOpen']]: this.state.isOpen,
             })}
           >

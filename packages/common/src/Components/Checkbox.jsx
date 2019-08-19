@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classnames from 'classnames';
+import clsx from 'clsx';
 import { mergeStyles } from '../Utils/mergeStyles';
 import { CheckIcon } from '../Icons';
 import styles from '../../statics/styles/checkbox.scss';
@@ -48,7 +48,7 @@ export default class Checkbox extends React.Component {
     return (
       <label
         htmlFor={this.id}
-        className={classnames({
+        className={clsx({
           [styles.checkbox]: true,
           [globalStyles.focused]: this.state.focused,
         })}
@@ -66,7 +66,7 @@ export default class Checkbox extends React.Component {
           {...isChecked}
         />
         <i
-          className={classnames(
+          className={clsx(
             styles.checkbox_icon,
             checked ? styles.checkbox_icon_checked : styles.checkbox_icon_unchecked
           )}

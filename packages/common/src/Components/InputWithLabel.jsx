@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { omit } from 'lodash';
-import classNames from 'classnames';
+import clsx from 'clsx';
 import { mergeStyles } from '../Utils/mergeStyles';
 import styles from '../../statics/styles/input-with-label.scss';
 
@@ -15,7 +15,7 @@ class InputWithLabel extends Component {
     const { styles } = this;
     const { id, isTextArea, isFullHeight, dataHook, ...otherProps } = this.props;
     const inputProps = omit(otherProps, ['theme']);
-    const inputClassName = classNames(styles.inputWithLabel_input, {
+    const inputClassName = clsx(styles.inputWithLabel_input, {
       [styles.inputWithLabel_textArea]: isTextArea,
       [styles.inputWithLabel_fullHeight]: isFullHeight,
     });

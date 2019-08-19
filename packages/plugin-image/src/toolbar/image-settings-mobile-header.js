@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import clsx from 'clsx';
 import { mergeStyles, SelectionList } from 'wix-rich-content-common';
 import styles from '../../statics/styles/image-settings-mobile-header.scss';
 import { MoreIcon } from '../icons';
@@ -27,7 +27,7 @@ class ImageSettingsMobileHeader extends Component {
             role="menuitem"
             aria-label={cancelLabel}
             onClick={() => cancel()}
-            className={classNames(
+            className={clsx(
               this.styles.imageSettingsMobileHeader_button,
               this.styles.imageSettingsMobileHeader_cancel
             )}
@@ -40,7 +40,7 @@ class ImageSettingsMobileHeader extends Component {
               aria-label="More"
               data-hook="ImageSettingsMobileHeaderMore"
               onClick={() => this.setState({ showMenu: !this.state.showMenu })}
-              className={classNames(
+              className={clsx(
                 this.styles.imageSettingsMobileHeader_button,
                 this.styles.imageSettingsMobileHeader_menuIcon
               )}
@@ -53,7 +53,7 @@ class ImageSettingsMobileHeader extends Component {
             onClick={() => save()}
             role="menuitem"
             aria-label={saveLabel}
-            className={classNames(
+            className={clsx(
               this.styles.imageSettingsMobileHeader_button,
               this.styles.imageSettingsMobileHeader_done
             )}

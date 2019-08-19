@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import clsx from 'clsx';
 import { mergeStyles } from '../Utils/mergeStyles';
 import styles from '../../statics/styles/button.scss';
 
@@ -31,7 +31,7 @@ class Button extends Component {
         {...ariaProps}
         data-hook={dataHook}
         onClick={onClick}
-        className={classNames(this.styles[`button_${type}`], className)}
+        className={clsx(this.styles[`button_${type}`], className)}
       >
         {children}
       </button>

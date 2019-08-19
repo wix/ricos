@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import clsx from 'clsx';
 import Button from './Button';
 import { mergeStyles } from '../Utils/mergeStyles';
 import styles from '../../statics/styles/settings-panel-footer.scss';
@@ -18,7 +18,7 @@ class SettingsPanelFooter extends Component {
 
     return (
       <div
-        className={classNames(this.styles.settingsPanel_footer, className, {
+        className={clsx(this.styles.settingsPanel_footer, className, {
           [this.styles.settingsPanel_footer_fixed]: fixed || false,
         })}
       >

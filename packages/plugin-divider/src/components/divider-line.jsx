@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import clsx from 'clsx';
 import { Context } from 'wix-rich-content-common';
 
 import { LINE_DOUBLE } from '../constants';
@@ -30,17 +30,19 @@ const DividerLine = ({
   styles,
   className,
   contextType,
+  fillParent,
 }) => {
   const lines = getLines(type, width, multilineDinstance);
   const { Consumer } = contextType || Context;
   return (
     <Consumer>
       {context => {
-        const lineClassName = classNames(
+        const lineClassName = clsx(
           styles.divider,
           styles[`divider--${type}`],
           styles[`divider--${size}${context.isMobile ? '--mobile' : ''}`],
           styles[`divider--${alignment}`],
+          fillParent ? styles['divider--fill-parent'] : '',
           className
         );
         return (
@@ -64,6 +66,7 @@ DividerLine.propTypes = {
   width: PropTypes.number,
   multilineDinstance: PropTypes.number,
   contextType: PropTypes.object,
+  fillParent: PropTypes.bool,
 };
 
 export default DividerLine;

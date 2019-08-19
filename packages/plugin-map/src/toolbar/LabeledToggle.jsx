@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styles from '../../statics/styles/map-settings-modal.scss';
-import classNames from 'classnames';
+import clsx from 'clsx';
 import { mergeStyles } from 'wix-rich-content-common';
 
 export class LabeledToggle extends Component {
@@ -39,7 +39,7 @@ export class LabeledToggle extends Component {
           role="button"
         >
           <div
-            className={classNames(this.styles.labeled_toggle_input_container, {
+            className={clsx(this.styles.labeled_toggle_input_container, {
               [this.styles.labeled_toggle_input_container_off]: !checked,
             })}
           >
@@ -51,9 +51,12 @@ export class LabeledToggle extends Component {
                 }}
               />
               <span
-                className={this.styles.labeled_toggle_slider}
+                className={
+                  checked
+                    ? this.styles.labeled_toggle_slider_checked
+                    : this.styles.labeled_toggle_slider_unchecked
+                }
                 style={{
-                  transform: checked ? 'translateX(22px)' : 'translateX(1px)',
                   background: sliderColor,
                 }}
               />

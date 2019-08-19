@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { findDOMNode } from 'react-dom';
 import { isNil } from 'lodash';
-import classNames from 'classnames';
+import clsx from 'clsx';
 import createHocName from '../Utils/createHocName';
 import getDisplayName from '../Utils/getDisplayName';
 import { alignmentClassName, sizeClassName, textWrapClassName } from '../Utils/classNameStrategies';
@@ -27,6 +27,7 @@ const createBaseComponent = ({
   relValue,
   t,
   isMobile,
+  getEditorBounds,
 }) => {
   class WrappedComponent extends Component {
     static displayName = createHocName('BaseComponent', PluginComponent);
@@ -62,7 +63,6 @@ const createBaseComponent = ({
         ['componentAlignment', this.onComponentAlignmentChange],
         ['componentSize', this.onComponentSizeChange],
         ['componentTextWrap', this.onComponentTextWrapChange],
-        ['editorBounds', this.onEditorBoundsChange],
       ];
       this.subscriptions.forEach(subscription => pubsub.subscribe(...subscription));
       const blockKey = this.props.block.getKey();
@@ -90,10 +90,6 @@ const createBaseComponent = ({
       const { block } = this.props;
       const updatedVisibleBlock = pubsub.get('visibleBlock');
       return updatedVisibleBlock === block.getKey();
-    };
-
-    onEditorBoundsChange = editorBounds => {
-      this.setState({ editorBounds });
     };
 
     onComponentDataChange = componentData => {
@@ -233,7 +229,7 @@ const createBaseComponent = ({
         PluginComponent.WrappedComponent.textWrapClassName || textWrapClassName,
       ].map(strategy => strategy(this.state.componentData, theme, Styles, isMobile));
 
-      const ContainerClassNames = classNames(
+      const ContainerClassNames = clsx(
         {
           [Styles.pluginContainer]: !readOnly,
           [Styles.pluginContainerReadOnly]: readOnly,
@@ -250,7 +246,7 @@ const createBaseComponent = ({
         }
       );
 
-      const overlayClassNames = classNames(Styles.overlay, theme.overlay, {
+      const overlayClassNames = clsx(Styles.overlay, theme.overlay, {
         [Styles.hidden]: readOnly,
         [theme.hidden]: readOnly,
       });
@@ -272,7 +268,7 @@ const createBaseComponent = ({
           componentState={this.state.componentState}
           helpers={helpers}
           t={t}
-          editorBounds={this.state.editorBounds}
+          editorBounds={getEditorBounds()}
         />
       );
 
@@ -284,7 +280,7 @@ const createBaseComponent = ({
           rel: link.rel ? link.rel : relValue || 'noopener',
         };
       }
-      const anchorClass = classNames(Styles.absFull, Styles.anchor, {
+      const anchorClass = clsx(Styles.absFull, Styles.anchor, {
         [Styles.isImage]:
           getDisplayName(PluginComponent)
             .toLowerCase()

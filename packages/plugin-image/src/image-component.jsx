@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ImageViewer, getDefault } from './image-viewer';
+import ImageViewer from './image-viewer';
+import { getDefault } from './consts';
 import { sizeClassName, alignmentClassName } from './classNameStrategies';
 import { Context } from 'wix-rich-content-common';
 

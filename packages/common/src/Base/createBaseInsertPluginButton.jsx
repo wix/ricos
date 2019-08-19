@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { AtomicBlockUtils, EditorState, SelectionState } from '@wix/draft-js';
 import { cloneDeep, isEmpty } from 'lodash';
-import classNames from 'classnames';
+import clsx from 'clsx';
 import { mergeStyles } from '../Utils/mergeStyles';
 import FileInput from '../Components/FileInput';
 import ToolbarButton from '../Components/ToolbarButton';
@@ -196,7 +196,7 @@ export default ({ blockType, button, helpers, pubsub, settings, t, isMobile }) =
       return (
         <FileInput
           dataHook={`${button.name}_file_input`}
-          className={classNames(styles.button, styles.fileUploadButton)}
+          className={clsx(styles.button, styles.fileUploadButton)}
           onChange={this.handleFileChange}
           accept={accept}
           multiple={button.multi}
@@ -223,7 +223,7 @@ export default ({ blockType, button, helpers, pubsub, settings, t, isMobile }) =
       const shouldRenderFileUploadButton =
         button.type === 'file' &&
         !((settings && settings.handleFileSelection) || (helpers && helpers.handleFileSelection));
-      const buttonWrapperClassNames = classNames(styles.buttonWrapper, {
+      const buttonWrapperClassNames = clsx(styles.buttonWrapper, {
         [styles.mobile]: isMobile,
       });
 

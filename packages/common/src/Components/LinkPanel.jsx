@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import clsx from 'clsx';
 
 import { mergeStyles } from '../Utils/mergeStyles';
 import { isValidUrl } from '../Utils/urlValidators';
@@ -89,7 +89,7 @@ class LinkPanel extends Component {
 
   getTextInputProps() {
     const { styles } = this;
-    const textInputClassName = classNames(styles.linkPanel_textInput, {
+    const textInputClassName = clsx(styles.linkPanel_textInput, {
       [styles.linkPanel_textInput_invalid]: this.hasError(),
     });
     return {

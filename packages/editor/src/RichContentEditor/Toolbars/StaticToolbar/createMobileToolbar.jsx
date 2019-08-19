@@ -1,5 +1,5 @@
-import classNames from 'classnames';
-import { decorateComponentWithProps, WixUtils } from 'wix-rich-content-common';
+import clsx from 'clsx';
+import { decorateComponentWithProps, isiOS } from 'wix-rich-content-common';
 import createStaticToolbar from './createStaticToolbar';
 import { AddPluginButton } from '../buttons';
 import { getTextButtonsFromList } from '../buttons/utils';
@@ -66,65 +66,65 @@ const getMobileTheme = theme => {
 
   return {
     toolbarStyles: {
-      toolbar: classNames(toolbarStyles.mobileToolbar, toolbarTheme && toolbarTheme.mobileToolbar, {
-        [toolbarStyles.mobileToolbar_fixed]: !WixUtils.isiOS(),
+      toolbar: clsx(toolbarStyles.mobileToolbar, toolbarTheme && toolbarTheme.mobileToolbar, {
+        [toolbarStyles.mobileToolbar_fixed]: !isiOS(),
         [toolbarTheme.mobileToolbar_fixed]:
-          toolbarTheme && toolbarTheme.mobileToolbar_fixed && !WixUtils.isiOS(),
+          toolbarTheme && toolbarTheme.mobileToolbar_fixed && !isiOS(),
       }),
-      scrollableContainer: classNames(
+      scrollableContainer: clsx(
         toolbarStyles.mobileToolbar_scrollableContainer,
         toolbarTheme && toolbarTheme.mobileToolbar_scrollableContainer
       ),
-      buttons: classNames(
+      buttons: clsx(
         toolbarStyles.mobileToolbar_buttons,
         toolbarTheme && toolbarTheme.mobileToolbar_buttons
       ),
-      extend: classNames(
+      extend: clsx(
         toolbarStyles.mobileToolbar_extend,
         toolbarTheme && toolbarTheme.mobileToolbar_extend
       ),
       responsiveSpacer: toolbarStyles.mobileToolbar_responsiveSpacer,
-      responsiveArrow: classNames(
+      responsiveArrow: clsx(
         toolbarStyles.mobileToolbar_responsiveArrow,
         toolbarTheme && toolbarTheme.mobileToolbar_responsiveArrow
       ),
-      responsiveArrowLeft: classNames(
-        toolbarStyles.mobileToolbar_responsiveArrowLeft,
-        toolbarTheme && toolbarTheme.mobileToolbar_responsiveArrowLeft
+      responsiveArrowStart: clsx(
+        toolbarStyles.mobileToolbar_responsiveArrowStart,
+        toolbarTheme && toolbarTheme.mobileToolbar_responsiveArrowStart
       ),
-      responsiveArrowRight: classNames(
-        toolbarStyles.mobileToolbar_responsiveArrowRight,
-        toolbarTheme && toolbarTheme.mobileToolbar_responsiveArrowRight
-      ),
-      //eslint-disable-next-line camelcase
-      responsiveArrowLeft_icon: classNames(
-        toolbarStyles.mobileToolbar_responsiveArrowLeft_icon,
-        toolbarTheme && toolbarTheme.mobileToolbar_responsiveArrowLeft_icon
+      responsiveArrowEnd: clsx(
+        toolbarStyles.mobileToolbar_responsiveArrowEnd,
+        toolbarTheme && toolbarTheme.mobileToolbar_responsiveArrowEnd
       ),
       //eslint-disable-next-line camelcase
-      responsiveArrowRight_icon: classNames(
-        toolbarStyles.mobileToolbar_responsiveArrowRight_icon,
-        toolbarTheme && toolbarTheme.mobileToolbar_responsiveArrowRight_icon
+      responsiveArrowStart_icon: clsx(
+        toolbarStyles.mobileToolbar_responsiveArrowStart_icon,
+        toolbarTheme && toolbarTheme.mobileToolbar_responsiveArrowStart_icon
+      ),
+      //eslint-disable-next-line camelcase
+      responsiveArrowEnd_icon: clsx(
+        toolbarStyles.mobileToolbar_responsiveArrowEnd_icon,
+        toolbarTheme && toolbarTheme.mobileToolbar_responsiveArrowEnd_icon
       ),
     },
     buttonStyles: {
       //eslint-disable-next-line camelcase
-      inlineToolbarButton_wrapper: classNames(
+      inlineToolbarButton_wrapper: clsx(
         buttonStyles.mobileToolbarButton_wrapper,
         buttonTheme && buttonTheme.mobileToolbarButton_wrapper
       ),
-      inlineToolbarButton: classNames(
+      inlineToolbarButton: clsx(
         buttonStyles.mobileToolbarButton,
         buttonTheme && buttonTheme.mobileToolbarButton
       ),
       //eslint-disable-next-line camelcase
-      inlineToolbarButton_icon: classNames(
+      inlineToolbarButton_icon: clsx(
         buttonStyles.mobileToolbarButton_icon,
         buttonTheme && buttonTheme.mobileToolbarButton_icon
       ),
     },
     separatorStyles: {
-      separator: classNames(
+      separator: clsx(
         separatorStyles.mobileToolbarSeparator,
         separatorTheme && separatorTheme.mobileToolbarSeparator
       ),

@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import clsx from 'clsx';
 import { camelCase, isNumber, upperFirst } from 'lodash';
 
 export const alignmentClassName = (componentData, theme, styles, isMobile) => {
@@ -13,7 +13,7 @@ export const alignmentClassName = (componentData, theme, styles, isMobile) => {
       align = 'center';
     }
   }
-  return classNames(styles[`align${upperFirst(align)}`], theme[`align${upperFirst(align)}`]);
+  return clsx(styles[`align${upperFirst(align)}`], theme[`align${upperFirst(align)}`]);
 };
 
 export const sizeClassName = (componentData, theme, styles, isMobile) => {
@@ -22,8 +22,8 @@ export const sizeClassName = (componentData, theme, styles, isMobile) => {
     return '';
   }
   return isMobile
-    ? classNames(styles.sizeFullWidth, theme.sizeFullWidth)
-    : classNames(
+    ? clsx(styles.sizeFullWidth, theme.sizeFullWidth)
+    : clsx(
         styles[`size${upperFirst(camelCase(size))}`],
         theme[`size${upperFirst(camelCase(size))}`]
       );

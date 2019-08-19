@@ -1,4 +1,3 @@
-export { default as BackArrowIcon } from './BackArrowIcon';
 export { default as BlockQuoteIcon } from './BlockQuoteIcon';
 export { default as BoldIcon } from './BoldIcon';
 export { default as IndentIcon } from './IndentIcon';

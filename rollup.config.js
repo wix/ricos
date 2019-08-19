@@ -10,6 +10,7 @@ import babel from 'rollup-plugin-babel';
 import json from 'rollup-plugin-json';
 import postcss from 'rollup-plugin-postcss';
 import postcssURL from 'postcss-url';
+import postcssRTL from 'postcss-rtl';
 import pascalCase from 'pascal-case';
 import { cloneDeep } from 'lodash';
 import nodeGlobalsPolyfill from 'rollup-plugin-node-globals';
@@ -73,6 +74,7 @@ const plugins = [
     extract: 'dist/styles.min.css',
     inject: false,
     plugins: [
+      postcssRTL({}),
       postcssURL({
         url: asset => asset.url.replace('../', '/statics/'),
       }),
