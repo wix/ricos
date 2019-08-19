@@ -8,6 +8,9 @@
 > - :house: [Internal]
 
 ## [Unreleased]
+### :bug: Bug Fix
+- `giphy`
+  - [#363](https://github.com/wix-incubator/rich-content/pull/363) giphy plugin popup positioned correctly in RTL
 ### :boom: Breaking Change
 - `editor`
   - [#359](https://github.com/wix-incubator/rich-content/pull/359) updated inline/text static/mobile toolbar theme classes
