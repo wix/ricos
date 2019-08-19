@@ -29,8 +29,14 @@ export default ({ helpers, t, settings, isMobile }) => {
           fullScreen: true,
           isMobile,
         });
-        const { top, left } = buttonRef.getBoundingClientRect();
-        const modalLeft = left - 15;
+        const { top, left, right } = buttonRef.getBoundingClientRect();
+        const isRtl = buttonRef.closest('[dir=rtl]') !== null;
+        let modalLeft, modalRight;
+        if (isRtl) {
+          modalRight = window.innerWidth - right - 8;
+        } else {
+          modalLeft = left - 15;
+        }
         const modalTop = top - 365;
         return {
           ...modalStyles,
@@ -38,6 +44,7 @@ export default ({ helpers, t, settings, isMobile }) => {
             ...modalStyles.content,
             top: modalTop,
             left: modalLeft,
+            right: modalRight,
             margin: 0,
             position: 'absolute',
           },
