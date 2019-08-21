@@ -2,7 +2,7 @@ import React from 'react';
 import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import TestData from './TestData/initial-state';
-const Common = require('../../common/src/index');
+const Common = require('../../../common/web/src/index');
 
 Enzyme.configure({ adapter: new Adapter() });
 const { shallow } = Enzyme;

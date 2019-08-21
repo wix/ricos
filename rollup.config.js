@@ -48,11 +48,11 @@ const plugins = [
   }),
   commonjs({
     namedExports: {
-      '../../node_modules/image-client-api/dist/imageClientSDK.js': [
+      '../../../node_modules/image-client-api/dist/imageClientSDK.js': [
         ...NAMED_EXPORTS.imageClientAPI,
       ],
       'node_modules/image-client-api/dist/imageClientSDK.js': [...NAMED_EXPORTS.imageClientAPI],
-      '../../node_modules/immutable/dist/immutable.js': [...NAMED_EXPORTS.immutable],
+      '../../../node_modules/immutable/dist/immutable.js': [...NAMED_EXPORTS.immutable],
       'node_modules/immutable/dist/immutable.js': [...NAMED_EXPORTS.immutable],
     },
   }),
@@ -60,8 +60,8 @@ const plugins = [
     include: [
       'statics/**',
       'node_modules/**',
-      '../../node_modules/**',
-      '../../packages/**/package.json',
+      '../../../node_modules/**',
+      '../../../packages/**/package.json',
     ],
   }),
   postcss({

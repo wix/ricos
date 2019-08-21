@@ -1,9 +1,9 @@
 {
-  "name": "wix-rich-content-plugin-text-color",
+  "name": "wix-rich-content-plugin-divider",
   "version": "4.0.14",
   "author": {
-    "name": "Alex Greenstein",
-    "email": "alexgr@wix.com"
+    "name": "Jonathan Bachman",
+    "email": "jonathanb@wix.com"
   },
   "repository": {
     "type": "git",
@@ -13,7 +13,7 @@
   "bugs": {
     "url": "https://github.com/wix-incubator/rich-content/issues"
   },
-  "homepage": "https://github.com/wix-incubator/rich-content/tree/master/rich-content-plugin-text-color",
+  "homepage": "https://github.com/wix-incubator/rich-content/tree/master/packages/plugin-divider",
   "files": [
     "dist"
   ],
@@ -23,7 +23,7 @@
   "scripts": {
     "clean": "rm -rf dist/",
     "prebuild": "npm run clean",
-    "build": "rollup --environment MODULE_NAME:plugin-text-color -c ../../rollup.config.js",
+    "build": "rollup --environment MODULE_NAME:plugin-divider -c ../../../rollup.config.js",
     "build:dev": "cross-env NODE_ENV=development npm run build",
     "build:analyze": "npm run build -- --environment MODULE_ANALYZE && open stats.html",
     "watch": "cross-env NODE_ENV=development MODULE_WATCH=1 npm run build -- --watch",
@@ -51,7 +51,6 @@
     "rollup": "^1.1.0"
   },
   "dependencies": {
-    "react-modal": "~3.8.1",
     "wix-rich-content-common": "^4.0.14"
   },
   "unpkg": true,

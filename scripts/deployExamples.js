@@ -27,12 +27,6 @@ const generateSubdomain = exampleName => {
   return subdomain;
 };
 
-function bootstrap() {
-  const bootstrapCommand = `yarn`;
-  console.log(chalk.magenta(`Running: ${bootstrapCommand}"`));
-  exec(bootstrapCommand);
-}
-
 function build() {
   const buildCommand = 'npm run build';
   console.log(chalk.magenta(`Running: "${buildCommand}"`));
@@ -72,7 +66,6 @@ function run() {
     process.chdir(path.resolve(process.cwd(), example.path));
 
     console.log(chalk.blue(`\nDeploying ${example.name} example...`));
-    bootstrap();
     build();
     deploy(example.name);
 

@@ -28,7 +28,7 @@ The `textButtons` and `pluginTextButtons` parameters are objects of the followin
 }
 ```
 
-The `pluginButtons` parameter is an `inline-button` data array (see divider plugin [inline-buttons](../packages/plugin-divider/src/toolbar/inline-buttons.jsx) for reference).
+The `pluginButtons` parameter is an `inline-button` data array (see divider plugin [inline-buttons](../packages/plugin-divider/web/src/toolbar/inline-buttons.jsx) for reference).
 
 The `Setting` type is defined as follows:
 
@@ -102,7 +102,7 @@ The following toolbar types are available:
   - Footer toolbar
 - Plugin functionality toolbars
 
-All the toolbar types are exposed by the `TOOLBARS` const found in [consts.js](https://github.com/wix-incubator/rich-content/blob/master/packages/common/src/consts.js).
+All the toolbar types are exposed by the `TOOLBARS` const found in [consts.js](https://github.com/wix-incubator/rich-content/blob/master/packages/common/web/src/consts.js).
 
 ### `Settings` properties
 
@@ -116,11 +116,11 @@ All the toolbar types are exposed by the `TOOLBARS` const found in [consts.js](h
 | `getToolbarDecorationFn` | component to be rendered instead of default toolbar container (see the following sections for details)                                                                                                                                                                          | all                                         |
 | `getButtons` (1)         | a list of the toolbar button components                                                                                                                                                                                                                                         | plugin insertion and functionality toolbars |
 | `getButtons` (2)         | a list of inline button names                                                                                                                                                                                                                                                   | text editing toolbars                       |
-| `getTextPluginButtons`   | a map of inline buttons added by plugins. The keys are derived from the `PluginTextButtonMappers` -- see the `link-plugin`'s [createLinkToolbar](https://github.com/wix-incubator/rich-content/blob/master/packages/plugin-link/src/toolbar/createLinkToolbar.js) for reference | text editing toolbars                       |
+| `getTextPluginButtons`   | a map of inline buttons added by plugins. The keys are derived from the `PluginTextButtonMappers` -- see the `link-plugin`'s [createLinkToolbar](https://github.com/wix-incubator/rich-content/blob/master/packages/plugin-link/web/src/toolbar/createLinkToolbar.js) for reference | text editing toolbars                       |
 
 #### Display Options
 
-At the moment, the `getDisplayOptions` API consists of a single property `displayMode`. This property accepts two values (defined in [consts.js](https://github.com/wix-incubator/rich-content/blob/master/packages/common/src/consts.js)):
+At the moment, the `getDisplayOptions` API consists of a single property `displayMode`. This property accepts two values (defined in [consts.js](https://github.com/wix-incubator/rich-content/blob/master/packages/common/web/src/consts.js)):
 
 - `DISPLAY_MODE.NORMAL` is the default; the toolbars are normally-positioned
 - `DISPLAY_MODE.FLOATING` the toolbars are in fixed position. This, combined with `getVisibilityFn` and `getPositionOffset` properties, causes toolbars to "float".
@@ -157,4 +157,4 @@ The `hidden` value is expected to be a string array, where every string is the p
 
 ## References and examples
 
-The [default-toolbar-settings.js](https://github.com/wix-incubator/rich-content/blob/master/packages/editor/src/RichContentEditor/Toolbars/default-toolbar-settings.js) contains the default toolbar settings, and the `getToolbarSettings` code example could be found in [PluginConfig.js](https://github.com/wix-incubator/rich-content/blob/master/examples/editor/src/PluginConfig.js) (commented by default).
+The [default-toolbar-settings.js](https://github.com/wix-incubator/rich-content/blob/master/packages/editor/web/src/RichContentEditor/Toolbars/default-toolbar-settings.js) contains the default toolbar settings, and the `getToolbarSettings` code example could be found in [PluginConfig.js](https://github.com/wix-incubator/rich-content/blob/master/examples/editor/src/PluginConfig.js) (commented by default).

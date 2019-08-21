@@ -24,7 +24,7 @@ const commonPlugins = [
 const testPlugins = ['@babel/plugin-transform-modules-commonjs'];
 
 module.exports = {
-  babelrcRoots: ['.', 'packages/*', 'examples/*'],
+  babelrcRoots: ['.', 'packages/**/*', 'examples/*'],
   presets: [presetEnvESM, ...commonPresets],
   plugins: [...commonPlugins],
   env: {

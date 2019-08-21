@@ -11,11 +11,11 @@
     "postinstall": "npm run bootstrap",
     "reinstall": "lerna clean --yes && rm -rf node_modules && rm -f package-lock.json && npm install",
     "rebuild": "npm run reinstall && npm run build",
-    "build": "lerna run --stream build",
-    "build:dev": "lerna run --stream build:dev",
+    "build": "lerna run --stream --ignore 'wix-rich-content-@(test-env|example)' build",
+    "build:dev": "lerna run --stream --ignore 'wix-rich-content-@(test-env|example)' build:dev",
     "build:core": "npm run build:dev -- --ignore 'wix-rich-content-plugin-*'",
     "prewatch": "lerna run build --scope wix-rich-content-common",
-    "watch": "lerna run --parallel --ignore ${LERNA_IGNORE:-''} watch",
+    "watch": "lerna run --parallel --ignore ${LERNA_IGNORE:-'wix-rich-content-@(test-env|example)'} watch",
     "watch:core": "LERNA_IGNORE='wix-rich-content-plugin-*' npm run watch",
     "release": "node scripts/publishPackages",
     "deploy": "node scripts/deployExamples",
@@ -32,7 +32,8 @@
     "e2e:app:dev": "cd e2e/test-env && npm run dev",
     "test:unit": "lerna run --parallel --stream test",
     "lint": "lerna run --parallel --stream lint",
-    "test": "npm run test:unit && npm run e2e:ci"
+    "pretest": "npm run build --prefix e2e/test-env",
+    "test": "npm run test:unit"
   },
   "husky": {
     "hooks": {
@@ -65,8 +66,10 @@
     "eslint": "^6.1.0",
     "eslint-config-prettier": "^4.0.0",
     "eslint-config-wix": "^1.1.18",
+    "eslint-import-resolver-lerna": "^1.0.0",
     "eslint-plugin-fp": "^2.3.0",
     "eslint-plugin-jsx-a11y": "6.2.3",
+    "eslint-plugin-import": "2.8.0",
     "eslint-plugin-lodash": "^2.7.0",
     "eslint-plugin-prettier": "^3.0.1",
     "eslint-plugin-react": "^7.7.0",

@@ -10,8 +10,9 @@
     }
   },
   "packages": [
-    "e2e/test-env",
-    "packages/*"
+    "packages/**/*",
+    "examples/main",
+    "e2e/test-env"
   ],
   "npmClientArgs": [
     "--no-lockfile"

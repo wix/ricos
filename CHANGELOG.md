@@ -19,6 +19,9 @@
 ### :bug: Bug Fix
 - `example`
   - [32580b58](https://github.com/wix-incubator/rich-content/commit/32580b58) webpack: SCSS plugin rule exclude fixed
+### :house: Internal
+- `general`
+  - [#365](https://github.com/wix-incubator/rich-content/pull/365) moved packages into web directory
 <hr/>
 
 ## 4.0.14 (Aug 19, 2019)
