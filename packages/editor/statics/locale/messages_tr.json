@@ -97,6 +97,7 @@
   "ImageSettings_Alt_Input_Placeholder" : "Bu görüntüyü açıklayın",
   "UnorderedListButton_Tooltip" : "Madde İmleri",
   "ImageSettings_Alt_Label" : "Alt Metin",
+  "FileUploadReplaceButton_tooltip" : "Dosyayı Değiştirin",
   "GalleryPlugin_Layout_Slides" : "Kaydırıcı",
   "ButtonModal_Radius_Input" : "Köşe Yarıçapı (px)",
   "SoundCloudComponent_Overlay" : "Bu parçayı oynatmak için canlı sitenizde görüntüleyin.",

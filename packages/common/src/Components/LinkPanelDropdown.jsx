@@ -6,7 +6,7 @@ import { mergeStyles } from '../Utils/mergeStyles';
 
 import { FixedSizeList as List } from 'react-window';
 import Downshift from 'downshift/dist/downshift.cjs.js';
-import isUndefined from 'lodash/isUndefined';
+import { isUndefined } from 'lodash';
 
 function isSubString(str, subStr) {
   return str.toLowerCase().includes(subStr.toLowerCase());

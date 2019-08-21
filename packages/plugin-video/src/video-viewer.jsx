@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import ReactPlayerWrapper from './reactPlayerWrapper';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { mergeStyles, validate, Context } from 'wix-rich-content-common';
-import isEqual from 'lodash/isEqual';
+import { mergeStyles, validate, Context, ViewportRenderer } from 'wix-rich-content-common';
+import { isEqual } from 'lodash';
 import getVideoSrc from './get-video-source';
 import schema from '../statics/data-schema.json';
 import styles from '../statics/styles/video-viewer.scss';
@@ -39,14 +39,22 @@ class VideoViewer extends Component {
     const { componentData, settings, ...rest } = this.props;
     this.styles = this.styles || mergeStyles({ styles, theme: this.context.theme });
     const url = this.normalizeUrl(getVideoSrc(componentData.src, settings));
-    const props = { ...rest, url, onReady: this.fixVideoRatio };
-    return <ReactPlayerWrapper className={classNames(this.styles.video_player)} {...props} />;
+    const props = {
+      ...rest,
+      url,
+      onReady: this.fixVideoRatio,
+      disabled: this.context.disabled,
+    };
+    return (
+      <ViewportRenderer>
+        <ReactPlayerWrapper className={classNames(this.styles.video_player)} {...props} />
+      </ViewportRenderer>
+    );
   }
 }
 
 VideoViewer.propTypes = {
   componentData: PropTypes.object.isRequired,
-  onReady: PropTypes.func,
   onStart: PropTypes.func,
   controls: PropTypes.bool,
   width: PropTypes.string,

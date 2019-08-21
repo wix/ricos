@@ -3,9 +3,7 @@
 
 .mobileToolbar_buttons {}
 
-.mobileToolbar_fixed {
-  top: 42px;
-}
+.mobileToolbar_fixed {}
 
 .mobileToolbar_extend {}
 
@@ -21,10 +19,10 @@
 
 .mobileToolbar_responsiveArrow {}
 
-.mobileToolbar_responsiveArrowLeft_icon {
+.mobileToolbar_responsiveArrowStart_icon {
   border-color: green;
 }
 
-.mobileToolbar_responsiveArrowRight_icon {
+.mobileToolbar_responsiveArrowEnd_icon {
   border-color: cyan;
 }

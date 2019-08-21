@@ -97,6 +97,7 @@
   "ImageSettings_Alt_Input_Placeholder" : "Jelaskan gambar ini",
   "UnorderedListButton_Tooltip" : "Butir",
   "ImageSettings_Alt_Label" : "Teks alt",
+  "FileUploadReplaceButton_tooltip" : "Replace File",
   "GalleryPlugin_Layout_Slides" : "Penayang Slaid",
   "ButtonModal_Radius_Input" : "Corner Radius (px)",
   "SoundCloudComponent_Overlay" : "To play this track, view this post from your live site.",

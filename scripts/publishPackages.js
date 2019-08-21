@@ -2,8 +2,7 @@
 const execSync = require('child_process').execSync;
 const chalk = require('chalk');
 const semver = require('semver');
-const memoize = require('lodash/memoize');
-const get = require('lodash/get');
+const { get, memoize } = require('lodash');
 const lernaPackages = require('lerna-packages');
 
 const LATEST_TAG = 'latest';

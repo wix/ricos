@@ -1,15 +1,20 @@
 {
-  "lerna": "3.0.3",
+  "lerna": "3.16.4",
   "command": {
     "version": {
       "allowBranch": [
-        "develop"
+        "develop",
+        "master"
       ],
       "message": "[*] chore(release): %s"
     }
   },
   "packages": [
+    "e2e/test-env",
     "packages/*"
   ],
-  "version": "4.0.6"
+  "npmClientArgs": [
+    "--no-lockfile"
+  ],
+  "version": "4.0.14"
 }

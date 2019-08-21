@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import noop from 'lodash/noop';
+import { noop } from 'lodash';
 
 const RichContentContext = React.createContext({
   theme: {},
@@ -11,6 +11,7 @@ const RichContentContext = React.createContext({
   setEditorState: noop,
   locale: 'en',
   helpers: {},
+  languageDir: 'ltr',
 });
 const { Provider, Consumer } = RichContentContext;
 
@@ -26,6 +27,7 @@ Provider.propTypes = {
     helpers: PropTypes.object,
     config: PropTypes.object,
     isMobile: PropTypes.bool,
+    languageDir: PropTypes.string,
   }),
 };
 

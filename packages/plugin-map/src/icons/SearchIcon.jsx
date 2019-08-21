@@ -10,7 +10,7 @@ export const SearchIcon = props => (
       />
     </defs>
     <g fill="none" fillRule="evenodd">
-      <use fill="#333" fillRule="nonzero" xlinkHref="#SearchIcon" />
+      <use fill="currentColor" fillRule="nonzero" xlinkHref="#SearchIcon" />
     </g>
   </svg>
 );

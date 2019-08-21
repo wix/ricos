@@ -1,10 +1,18 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import isEqual from 'lodash/isEqual';
-import { mergeStyles, validate, Context, Loader } from 'wix-rich-content-common';
-import { DocumentIcon } from './icons';
+import { isEqual } from 'lodash';
+import { mergeStyles, validate, Context } from 'wix-rich-content-common';
+import { DocumentIcon, LoaderIcon } from './icons';
 import schema from '../statics/data-schema.json';
 import styles from '../statics/styles/file-upload-viewer.scss';
+
+const getNameWithoutType = fileName => {
+  if (!fileName || !fileName.includes('.')) {
+    return fileName;
+  }
+  const s = fileName.split('.');
+  return s.slice(0, s.length - 1).join('.');
+};
 
 class FileUploadViewer extends PureComponent {
   state = {
@@ -25,18 +33,6 @@ class FileUploadViewer extends PureComponent {
     }
   }
 
-  renderLoader() {
-    if (!this.props.isLoading && !this.state.resolvingUrl) {
-      return null;
-    }
-
-    return (
-      <div className={this.styles.file_upload_overlay}>
-        <Loader type="mini" />
-      </div>
-    );
-  }
-
   renderError() {
     const { error } = this.props;
     if (!error) {
@@ -51,14 +47,18 @@ class FileUploadViewer extends PureComponent {
   }
 
   renderViewerBody({ type, name }) {
+    const showLoader = this.props.isLoading || this.state.resolvingUrl;
+    const nameWithoutType = getNameWithoutType(name);
     return (
       <React.Fragment>
-        <div className={this.styles.file_upload_icon_container}>
+        {showLoader ? (
+          <LoaderIcon className={this.styles.file_loader_icon} />
+        ) : (
           <DocumentIcon className={this.styles.file_upload_icon} />
-          <span className={this.styles.file_upload_type}>{type}</span>
-        </div>
+        )}
         <div className={this.styles.file_upload_name_container}>
-          <span className={this.styles.file_upload_name}>{name}</span>
+          <span className={this.styles.file_upload_name}>{nameWithoutType}</span>
+          <span className={this.styles.file_upload_type}>{type}</span>
         </div>
       </React.Fragment>
     );
@@ -144,7 +144,6 @@ class FileUploadViewer extends PureComponent {
     return (
       <div className={this.styles.file_upload_container}>
         {fileUrl ? this.renderViewer(fileUrl) : this.renderFileUrlResolver()}
-        {this.renderLoader()}
         {this.renderError()}
         {this.renderAutoDownloadIframe()}
       </div>

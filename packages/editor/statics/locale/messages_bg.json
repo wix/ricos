@@ -97,6 +97,7 @@
   "ImageSettings_Alt_Input_Placeholder" : "Опишете това изображение",
   "UnorderedListButton_Tooltip" : "Водещи символи",
   "ImageSettings_Alt_Label" : "Алт. текст",
+  "FileUploadReplaceButton_tooltip" : "Replace File",
   "GalleryPlugin_Layout_Slides" : "Плъзгач",
   "ButtonModal_Radius_Input" : "Corner Radius (px)",
   "SoundCloudComponent_Overlay" : "To play this track, view this post from your live site.",

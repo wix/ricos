@@ -1,5 +1,4 @@
-import uniqWith from 'lodash/uniqWith';
-import isEqual from 'lodash/isEqual';
+import { isEqual, uniqWith } from 'lodash';
 
 /**
  * fixAtomicBlockText

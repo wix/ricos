@@ -97,6 +97,7 @@
   "ImageSettings_Alt_Input_Placeholder" : "Opisz to zdjęcie",
   "UnorderedListButton_Tooltip" : "Podpunkty",
   "ImageSettings_Alt_Label" : "Alternatywny tekst",
+  "FileUploadReplaceButton_tooltip" : "Zmień plik",
   "GalleryPlugin_Layout_Slides" : "Slider",
   "ButtonModal_Radius_Input" : "Promień naroża (px)",
   "SoundCloudComponent_Overlay" : "Aby zagrać ten utwór, zobacz ten post na opublikowanej witrynie.",

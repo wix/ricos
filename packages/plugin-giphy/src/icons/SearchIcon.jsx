@@ -11,7 +11,7 @@ const SearchIcon = props => (
           id="giphy-Find-Member-Copy"
           opacity="0.7"
           transform="translate(234.000000, 20.000000)"
-          fill="#000000"
+          fill="currentColor"
           fillRule="nonzero"
         >
           <g id="giphy-Find-Member">
@@ -24,7 +24,7 @@ const SearchIcon = props => (
           d="M18.4852814,366.263456 L25.2487373,359.5 L263,359.5 C263.828427,359.5 264.5,358.828427 264.5,358 L264.5,2 C264.5,1.17157288 263.828427,0.5 263,0.5 L2,0.5 C1.17157288,0.5 0.5,1.17157288 0.5,2 L0.5,358 C0.5,358.828427 1.17157288,359.5 2,359.5 L11.7218254,359.5 L18.4852814,366.263456 Z"
           id="Combined-Shape"
           strokeOpacity="0.2"
-          stroke="#000000"
+          stroke="currentColor"
         />
       </g>
     </g>

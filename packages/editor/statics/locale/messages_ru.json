@@ -97,6 +97,7 @@
   "ImageSettings_Alt_Input_Placeholder" : "Опишите фотографию",
   "UnorderedListButton_Tooltip" : "Список",
   "ImageSettings_Alt_Label" : "Alt-текст",
+  "FileUploadReplaceButton_tooltip" : "Заменить файл",
   "GalleryPlugin_Layout_Slides" : "Слайдер",
   "ButtonModal_Radius_Input" : "Закругление уголков (пикс.)",
   "SoundCloudComponent_Overlay" : "Чтобы воспроизвести трек, откройте пост на опубликованном сайте.",

@@ -8,7 +8,105 @@
 > - :house: [Internal]
 
 ## [Unreleased]
+### :boom: Breaking Change
+- `editor`
+  - [#359](https://github.com/wix-incubator/rich-content/pull/359) updated inline/text static/mobile toolbar theme classes
+### :rocket: New Feature
+- `editor`
+  - [#359](https://github.com/wix-incubator/rich-content/pull/359) added support for rtl in editor modals
+- `general`
+  - [#358](https://github.com/wix-incubator/rich-content/pull/358) viewport based lazy loading for plugin components
+### :bug: Bug Fix
+- `example`
+  - [32580b58](https://github.com/wix-incubator/rich-content/commit/32580b58) webpack: SCSS plugin rule exclude fixed
+<hr/>
 
+## 4.0.14 (Aug 19, 2019)
+### :bug: Bug Fix
+- `editor`
+  - [#357](https://github.com/wix-incubator/rich-content/pull/357) fix footerToolbar css
+- `html`
+  - [#364](https://github.com/wix-incubator/rich-content/pull/364) fix html embed height
+- `general`
+  - [#361](https://github.com/wix-incubator/rich-content/pull/361) icons: hard-coded `fill` values replaced by `currentColor` to support theming
+- `giphy`
+  - [fa229a0a](https://github.com/wix-incubator/rich-content/commit/fa229a0a) giphy viewer exposes GIPHY_TYPE
+  - [#363](https://github.com/wix-incubator/rich-content/pull/363) giphy plugin popup positioned correctly in RTL
+### :house: Internal
+- `general`
+  - [#356](https://github.com/wix-incubator/rich-content/pull/356) removed `WixUtils.isMobile`
+  - [#356](https://github.com/wix-incubator/rich-content/pull/356) renamed `WixUtils` to `isiOS` and deleted everything except for isiOS
+  - [#360](https://github.com/wix-incubator/rich-content/pull/360)  `editorBounds` pusub subscription replaced by `getEditorBounds` function passed via the context and params for plugin initialization
+<hr/>
+
+## 4.0.12 (Aug 7, 2019)
+### :rocket: New Feature
+- `viewer`
+  - [#351](https://github.com/wix-incubator/rich-content/pull/351) `disable` prop allows pausing media
+### :bug: Bug Fix
+- `editor`
+  - [#353](https://github.com/wix-incubator/rich-content/pull/353) fix line spacing in lists
+- `mentions`
+  - [#354](https://github.com/wix-incubator/rich-content/pull/354) fix Google 'Touch to Search' trigger when clicking on mention
+### :house: Internal
+- `tests`
+    [#334](https://github.com/wix-incubator/rich-content/pull/334) add Cypress
+- `example`
+  - [#350](https://github.com/wix-incubator/rich-content/pull/350) ability to change locale
+<hr/>
+
+## 4.0.11 (Jul 31, 2019)
+### :bug: Bug Fix
+- `file-upload`
+  - [#345](https://github.com/wix-incubator/rich-content/pull/345) handle empty file name
+- `editor`
+  - [#349](https://github.com/wix-incubator/rich-content/pull/349) Add rtlcss ignore directives
+- `html`
+  - [c2b2101d](https://github.com/wix-incubator/rich-content/commit/c2b2101d) fix height on iphone
+<hr/>
+
+## 4.0.10 (Jul 29, 2019)
+### :bug: Bug Fix
+- `image`
+  - [#342](https://github.com/wix-incubator/rich-content/pull/342) in editor image is not show when helpers are provided
+- `viewer`
+  - [139f023](https://github.com/wix-incubator/rich-content/commit/139f023) atomic blocks are no longer rendered in `<p>` tags
+- `file-upload`
+  - [#343](https://github.com/wix-incubator/rich-content/pull/343) improve name function
+### :house: Internal
+- `general`
+  - [#344](https://github.com/wix-incubator/rich-content/pull/344) import destructed members from `lodash`
+<hr/>
+
+## 4.0.9 (Jul 25, 2019)
+### :bug: Bug Fix
+- `html`
+  - [#341](https://github.com/wix-incubator/rich-content/pull/341) fix ssr
+- `image`
+  - [#341](https://github.com/wix-incubator/rich-content/pull/341) fix ssr
+<hr/>
+
+## 4.0.8 (Jul 24, 2019)
+### :bug: Bug Fix
+- `html`
+  - [#338](https://github.com/wix-incubator/rich-content/pull/338) fix performance.now() breaks ssr
+- `file-upload`
+  - [#340](https://github.com/wix-incubator/rich-content/pull/340) unique ids for icons
+<hr/>
+
+## 4.0.7 (Jul 24, 2019)
+### :boom: Breaking Change
+- `file-upload`
+  - [#335](https://github.com/wix-incubator/rich-content/pull/335) visual update, styling and class name changes
+### :bug: Bug Fix
+- `file-upload`
+  - [aa3a4c6d](https://github.com/wix-incubator/rich-content/commit/aa3a4c6d) redundant container removed (in the Viewer)
+### :house: Internal
+- `general`
+  - [#319](https://github.com/wix-incubator/rich-content/pull/319) lock dependencies
+  - [15de167](https://github.com/wix-incubator/rich-content/commit/15de167) upgrade to node 12
+  - [#337](https://github.com/wix-incubator/rich-content/pull/337) upgrade to eslint 6
+<hr/>
 
 ## 4.0.6 (Jul 15, 2019)
 ### :rocket: New Feature
@@ -70,6 +168,8 @@
   - [80d4880](https://github.com/wix-incubator/rich-content/commit/80d4880) replaced ~~`HashTagStrategy`~~ with `HashTagDecorator` please check [`ViewerPlugins.jsx`](https://github.com/wix-incubator/rich-content/blob/develop/examples/main/src/viewer/ViewerPlugins.jsx) for an example of how to implement the new decorator.
 - `general`
   - [#313](https://github.com/wix-incubator/rich-content/pull/313) add versioning to the ContentState. Allows the removing linkify decorator.
+- `hashtag`
+  - [80d4880](https://github.com/wix-incubator/rich-content/commit/80d4880) replaced ~~`HashTagStrategy`~~ with `HashTagDecorator` please check [`ViewerPlugins.jsx`](https://github.com/wix-incubator/rich-content/blob/develop/examples/main/src/viewer/ViewerPlugins.jsx) for an example of how to implement the new decorator.
 - `link`
   - [#315](https://github.com/wix-incubator/rich-content/pull/315) remove autolink config option (was never functional)
 ### :rocket: New Feature

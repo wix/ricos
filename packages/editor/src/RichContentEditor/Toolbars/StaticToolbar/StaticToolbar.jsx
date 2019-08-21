@@ -2,11 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Measure from 'react-measure';
+import { debounce, identity, pickBy } from 'lodash';
 import { DISPLAY_MODE, Context, TooltipHost } from 'wix-rich-content-common';
 import Styles from '../../../../statics/styles/static-toolbar.scss';
-import debounce from 'lodash/debounce';
-import pickBy from 'lodash/pickBy';
-import identity from 'lodash/identity';
 
 const displayOptionStyles = {
   [DISPLAY_MODE.NORMAL]: {},
@@ -109,12 +107,12 @@ export default class StaticToolbar extends React.PureComponent {
       toolbarStyles.responsiveArrow
     );
     const leftArrowIconClassNames = classNames(
-      Styles.staticToolbar_responsiveArrowLeft_icon,
-      toolbarStyles.responsiveArrowLeft_icon
+      Styles.staticToolbar_responsiveArrowStart_icon,
+      toolbarStyles.responsiveArrowStart_icon
     );
     const rightArrowIconClassNames = classNames(
-      Styles.staticToolbar_responsiveArrowRight_icon,
-      toolbarStyles.responsiveArrowRight_icon
+      Styles.staticToolbar_responsiveArrowEnd_icon,
+      toolbarStyles.responsiveArrowEnd_icon
     );
 
     const buttonClassNames = classNames(Styles.staticToolbar_buttons, toolbarStyles.buttons);

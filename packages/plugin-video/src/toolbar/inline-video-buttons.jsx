@@ -1,9 +1,4 @@
-import {
-  BUTTONS,
-  getModalStyles,
-  decorateComponentWithProps,
-  WixUtils,
-} from 'wix-rich-content-common';
+import { BUTTONS, getModalStyles, decorateComponentWithProps } from 'wix-rich-content-common';
 import { MediaReplaceIcon } from '../icons';
 import VideoSelectionInputModal from './videoSelectionInputModal';
 import {
@@ -11,7 +6,13 @@ import {
   ExtendedSelectionModalCustomStyle,
 } from './selectionModalCustomStyles';
 
-export default ({ t, settings }) => {
+export default ({ t, settings, isMobile }) => {
+  //apply the extended input modal styles if handleFileSelection is avilable in plugin config
+  //& on mobile if enableCustomUploadOnMobile is set to true, otherwise the normal modal styles is applied
+  const customStyles =
+    (!isMobile || settings.enableCustomUploadOnMobile) && settings.handleFileSelection
+      ? ExtendedSelectionModalCustomStyle
+      : SelectionModalCustomStyle;
   return [
     { keyName: 'sizeSmallCenter', type: BUTTONS.SIZE_SMALL_CENTER, mobile: false },
     { keyName: 'sizeContent', type: BUTTONS.SIZE_CONTENT, mobile: false },
@@ -26,14 +27,9 @@ export default ({ t, settings }) => {
       icon: MediaReplaceIcon,
       modalElement: decorateComponentWithProps(VideoSelectionInputModal, settings),
       modalStyles: getModalStyles({
-        //apply the extended input modal styles if handleFileSelection is avilable in plugin config
-        //& on mobile if enableCustomUploadOnMobile is set to true, otherwise the normal modal styles is applied
-        customStyles:
-          (!WixUtils.isMobile() || settings.enableCustomUploadOnMobile) &&
-          settings.handleFileSelection
-            ? ExtendedSelectionModalCustomStyle
-            : SelectionModalCustomStyle,
+        customStyles,
         fullScreen: false,
+        isMobile,
       }),
       mobile: true,
       tooltipTextKey: 'ReplaceVideoButton_Tooltip',

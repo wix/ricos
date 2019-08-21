@@ -1,24 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import includes from 'lodash/includes';
-import get from 'lodash/get';
-import isFunction from 'lodash/isFunction';
-import { mergeStyles, Loader, validate, Context } from 'wix-rich-content-common';
-import isEqual from 'lodash/isEqual';
+import { get, includes, isEqual, isFunction } from 'lodash';
+import { mergeStyles, Loader, validate, Context, ViewportRenderer } from 'wix-rich-content-common';
 import getImageSrc from './get-image-source';
 import { WIX_MEDIA_DEFAULT } from './get-wix-media-url';
+import { getDefault } from './consts';
 import schema from '../statics/data-schema.json';
 import styles from '../statics/styles/image-viewer.scss';
-
-const getDefault = () => ({
-  config: {
-    alignment: 'center',
-    size: 'content',
-    showTitle: true,
-    showDescription: true,
-  },
-});
 
 class ImageViewer extends React.Component {
   constructor(props) {
@@ -36,10 +25,11 @@ class ImageViewer extends React.Component {
       validate(nextProps.componentData, schema);
     }
   }
+
   getImageSrc(src) {
     const { helpers } = this.context || {};
 
-    if (helpers && helpers.handleFileSelection) {
+    if (!src && (helpers && helpers.handleFileSelection)) {
       return null;
     }
 
@@ -56,9 +46,10 @@ class ImageViewer extends React.Component {
         const { width } = this.state.container.getBoundingClientRect();
         let requiredWidth = width || src.width || 1;
         if (this.context.isMobile) {
+          const isSSR = typeof window === 'undefined';
           //adjust the image width to viewport scaling and device pixel ratio
-          requiredWidth *= (window && window.devicePixelRatio) || 1;
-          requiredWidth *= (window && window.screen.width / document.body.clientWidth) || 1;
+          requiredWidth *= (!isSSR && window.devicePixelRatio) || 1;
+          requiredWidth *= (!isSSR && window.screen.width / document.body.clientWidth) || 1;
         }
         //keep the image's original ratio
         let requiredHeight =
@@ -205,7 +196,6 @@ class ImageViewer extends React.Component {
     } = this.props;
     const { fallbackImageSrc } = this.state;
     const data = componentData || getDefault();
-    data.config = data.config || {};
     const { metadata = {} } = componentData;
 
     const itemClassName = classNames(this.styles.imageContainer, className);
@@ -220,22 +210,24 @@ class ImageViewer extends React.Component {
 
     /* eslint-disable jsx-a11y/no-static-element-interactions */
     return (
-      <div
-        data-hook="imageViewer"
-        onClick={onClick}
-        className={itemClassName}
-        onKeyDown={e => this.onKeyDown(e, onClick)}
-        ref={e => this.handleRef(e)}
-      >
-        <div className={this.styles.imageWrapper}>
-          {imageSrc && this.renderImage(imageClassName, imageSrc, metadata.alt, imageProps)}
-          {this.renderLoader()}
+      <ViewportRenderer>
+        <div
+          data-hook="imageViewer"
+          onClick={onClick}
+          className={itemClassName}
+          onKeyDown={e => this.onKeyDown(e, onClick)}
+          ref={e => this.handleRef(e)}
+        >
+          <div className={this.styles.imageWrapper}>
+            {imageSrc && this.renderImage(imageClassName, imageSrc, metadata.alt, imageProps)}
+            {this.renderLoader()}
+          </div>
+          {this.renderTitle(data, this.styles)}
+          {this.renderDescription(data, this.styles)}
+          {this.shouldRenderCaption() &&
+            this.renderCaption(metadata.caption, isFocused, readOnly, this.styles, defaultCaption)}
         </div>
-        {this.renderTitle(data, this.styles)}
-        {this.renderDescription(data, this.styles)}
-        {this.shouldRenderCaption() &&
-          this.renderCaption(metadata.caption, isFocused, readOnly, this.styles, defaultCaption)}
-      </div>
+      </ViewportRenderer>
     );
     /* eslint-enable jsx-a11y/no-static-element-interactions */
   }
@@ -255,4 +247,4 @@ ImageViewer.propTypes = {
   defaultCaption: PropTypes.string,
 };
 
-export { ImageViewer, getDefault };
+export default ImageViewer;

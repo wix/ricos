@@ -1,6 +1,7 @@
 @import '~wix-rich-content-common/dist/statics/styles/mixins';
 @import '~wix-rich-content-common/dist/statics/styles/palette';
 
+// TODO: add soundCloud_urlInput_ prefix to all the classes
 .container {
   padding: 51px 60px 60px;
   @include phone {
@@ -13,6 +14,7 @@
   right: 30px;
   top: 30px;
   cursor: pointer;
+  color: #333;
 }
 
 .cameraIcon {

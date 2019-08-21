@@ -97,6 +97,7 @@
   "ImageSettings_Alt_Input_Placeholder" : "इस छवि की व्याख्या करें",
   "UnorderedListButton_Tooltip" : "बुलेट",
   "ImageSettings_Alt_Label" : "Alt टेक्स्ट",
+  "FileUploadReplaceButton_tooltip" : "फ़ाइल बदलें",
   "GalleryPlugin_Layout_Slides" : "स्लाइडर",
   "ButtonModal_Radius_Input" : "कोनों की त्रिज्या (px)",
   "SoundCloudComponent_Overlay" : "इस ट्रैक को चलाने के लिए, इस पोस्ट को अपनी लाइव साइट से देखें।",

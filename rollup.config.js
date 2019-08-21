@@ -9,9 +9,11 @@ import commonjs from 'rollup-plugin-commonjs';
 import babel from 'rollup-plugin-babel';
 import json from 'rollup-plugin-json';
 import postcss from 'rollup-plugin-postcss';
+import postcssExclude from 'postcss-exclude-files';
 import postcssURL from 'postcss-url';
+import postcssRTL from 'postcss-rtl';
 import pascalCase from 'pascal-case';
-import cloneDeep from 'lodash/cloneDeep';
+import { cloneDeep } from 'lodash';
 import nodeGlobalsPolyfill from 'rollup-plugin-node-globals';
 import { externals, excludedExternals } from './rollup.externals';
 
@@ -71,8 +73,11 @@ const plugins = [
       generateScopedName: IS_DEV_ENV ? '[name]__[local]___[hash:base64:5]' : '[hash:base64:5]',
     },
     extract: 'dist/styles.min.css',
-    inject: false,
     plugins: [
+      postcssExclude({
+        filter: '**/*.global.scss',
+        plugins: [postcssRTL()],
+      }),
       postcssURL({
         url: asset => asset.url.replace('../', '/statics/'),
       }),

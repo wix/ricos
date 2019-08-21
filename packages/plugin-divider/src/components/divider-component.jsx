@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { mergeStyles, validate, Context } from 'wix-rich-content-common';
-import isEqual from 'lodash/isEqual';
+import { isEqual } from 'lodash';
 import { getType, getConfig } from '../toolbar/selectors';
 import DividerLine from './divider-line';
 import schema from '../../statics/data-schema.json';
@@ -33,7 +33,8 @@ class DividerComponent extends PureComponent {
 
   render() {
     this.styles = this.styles || mergeStyles({ styles, theme: this.context.theme });
-    const { editorBounds } = this.props;
+    // NOTE: editor-only logic in viewer component
+    const editorBounds = this.context.getEditorBounds && this.context.getEditorBounds();
     const editorWidth = editorBounds ? editorBounds.width : 740;
     const { type, size, alignment } = this.state;
     const className = classNames(
@@ -63,7 +64,6 @@ DividerComponent.propTypes = {
   store: PropTypes.object,
   blockProps: PropTypes.object,
   className: PropTypes.string,
-  editorBounds: PropTypes.object,
 };
 
 DividerComponent.contextType = Context.type;

@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { get } from 'lodash';
 import { DefaultDraftBlockRenderMap } from '@wix/draft-js';
 import { mergeStyles } from 'wix-rich-content-common';
 import styles from '../../statics/styles/rich-content-editor.scss';
-import get from 'lodash/get';
 
 /**
   getBlockRenderMap util
@@ -22,45 +22,38 @@ export default theme => {
     'public-DraftStyleDefault-reset',
   ];
 
-  const OrderedListItem = ({ children }) => (
-    <ol className={'public-DraftStyleDefault-ol'}>
-      {children.map((child, i) => {
-        const direction = get(child, 'props.children.props.direction', 'LTR');
-        return (
-          <li
-            className={classNames(
-              mergedStyles.orderedList,
-              'public-DraftStyleDefault-orderedListItem',
-              listClassNames(direction)
-            )}
-            key={i}
-          >
-            {child}
-          </li>
-        );
-      })}
-    </ol>
-  );
+  const listNameMap = {
+    ol: 'orderedList',
+    ul: 'unorderedList',
+  };
 
-  const UnorderedListItem = ({ children }) => (
-    <ul className={'public-DraftStyleDefault-ul'}>
-      {children.map((child, i) => {
-        const direction = get(child, 'props.children.props.direction', 'LTR');
-        return (
-          <li
-            className={classNames(
-              mergedStyles.unorderedList,
-              'public-DraftStyleDefault-unorderedListItem',
-              listClassNames(direction)
-            )}
-            key={i}
-          >
-            {child}
-          </li>
-        );
-      })}
-    </ul>
-  );
+  const listItem = (children, ListElement) => {
+    const listName = listNameMap[ListElement];
+    return (
+      <ListElement className={`public-DraftStyleDefault-${ListElement}`}>
+        {children.map((child, i) => {
+          const direction = get(child, 'props.children.props.direction', 'LTR');
+          return (
+            <li
+              className={classNames(
+                mergedStyles[listName],
+                `public-DraftStyleDefault-${listName}Item`,
+                listClassNames(direction),
+                child.props.className.match(/rich_content_line-height-(\d|_)*/g)
+              )}
+              key={i}
+            >
+              {child}
+            </li>
+          );
+        })}
+      </ListElement>
+    );
+  };
+
+  const OrderedListItem = ({ children }) => listItem(children, 'ol');
+
+  const UnorderedListItem = ({ children }) => listItem(children, 'ul');
 
   OrderedListItem.propTypes = UnorderedListItem.propTypes = {
     children: PropTypes.node,

@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import get from 'lodash/get';
+import { get } from 'lodash';
 import { Context, normalizeUrl } from 'wix-rich-content-common';
 import { COLORS } from '../constants';
 import ButtonViewer from './button-viewer';

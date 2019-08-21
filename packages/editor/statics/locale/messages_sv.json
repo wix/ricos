@@ -97,6 +97,7 @@
   "ImageSettings_Alt_Input_Placeholder" : "Beskriv denna bild",
   "UnorderedListButton_Tooltip" : "Punkter",
   "ImageSettings_Alt_Label" : "ALT-text",
+  "FileUploadReplaceButton_tooltip" : "Ersätt fil",
   "GalleryPlugin_Layout_Slides" : "Slider",
   "ButtonModal_Radius_Input" : "Hörnradie (px)",
   "SoundCloudComponent_Overlay" : "För att spela detta spår, se detta inlägg från din live-sida.",

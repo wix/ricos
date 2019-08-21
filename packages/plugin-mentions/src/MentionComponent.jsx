@@ -14,6 +14,7 @@ const MentionComponent = ({ children, mention, settings, contextType }) => {
           <a
             href={getMentionLink(mention)}
             rel="noopener noreferrer"
+            tabIndex="0"
             className={mergedStyles.mention}
             onClick={() => onMentionClick(mention)}
           >

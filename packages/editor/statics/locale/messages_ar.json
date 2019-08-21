@@ -97,6 +97,7 @@
   "ImageSettings_Alt_Input_Placeholder" : "صِف هذه الصورة",
   "UnorderedListButton_Tooltip" : "تعداد نقطي",
   "ImageSettings_Alt_Label" : "نص بديل",
+  "FileUploadReplaceButton_tooltip" : "Replace File",
   "GalleryPlugin_Layout_Slides" : "شريط التمرير",
   "ButtonModal_Radius_Input" : "Corner Radius (px)",
   "SoundCloudComponent_Overlay" : "To play this track, view this post from your live site.",

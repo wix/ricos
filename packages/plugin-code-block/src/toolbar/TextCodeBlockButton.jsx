@@ -21,6 +21,7 @@ export default class TextCodeBlockButton extends Component {
         theme={theme}
         isMobile={isMobile}
         tooltipText={t('TextCodeBlockButton_Tooltip')}
+        dataHook={'TextCodeBlockButton'}
         tabIndex={tabIndex}
         icon={CodeBlockIcon}
       />

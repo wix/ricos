@@ -5,15 +5,16 @@ import { createBasePlugin } from 'wix-rich-content-common';
 
 const createSoundCloudPlugin = (config = {}) => {
   const type = SOUND_CLOUD_TYPE;
-  const { helpers, t, [type]: settings = {}, ...rest } = config;
+  const { helpers, t, [type]: settings = {}, isMobile, ...rest } = config;
 
   return createBasePlugin({
     component: Component,
     settings,
     type,
-    toolbar: createToolbar({ helpers, t }),
+    toolbar: createToolbar({ helpers, t, isMobile }),
     helpers,
     t,
+    isMobile,
     ...rest,
   });
 };

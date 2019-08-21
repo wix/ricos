@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withGoogleMap, GoogleMap, Marker, InfoWindow } from 'react-google-maps';
 import ReactGoogleMapLoader from 'react-google-maps-loader';
-import isEqual from 'lodash/isEqual';
-import { validate, Context } from 'wix-rich-content-common';
+import { isEqual } from 'lodash';
+import { validate, Context, ViewportRenderer } from 'wix-rich-content-common';
 import schema from '../statics/data-schema.json';
 
 const GoogleMapWrapper = withGoogleMap(props => (
@@ -81,40 +81,44 @@ export class MapViewer extends Component {
     };
 
     return (
-      <div ref={this.setRootElementRef} style={style}>
-        <ReactGoogleMapLoader
-          params={{
-            key: googleMapApiKey,
-            libraries: 'geometry,drawing,places',
-          }}
-          render={googleMaps =>
-            googleMaps && (
-              <GoogleMapWrapper
-                isMarkerShown={mapSettings.isMarkerShown}
-                loadingElement={<div style={{ height: `100%` }} />}
-                containerElement={<div style={style} />}
-                mapElement={<div style={{ height: `100%` }} />}
-                lat={Number(mapSettings.lat)}
-                lng={Number(mapSettings.lng)}
-                markerTitle={mapSettings.address}
-                markerTooltipContent={mapSettings.locationDisplayName}
-                zoom={mapSettings.zoom}
-                onMarkerTooltipCloseClick={() => this.setState({ isMarkerTooltipRendered: false })}
-                onMarkerClick={() =>
-                  this.setState({ isMarkerTooltipRendered: !this.state.isMarkerTooltipRendered })
-                }
-                isMarkerTooltipRendered={this.state.isMarkerTooltipRendered}
-                mode={mapSettings.mode}
-                isZoomControlShown={mapSettings.isZoomControlShown}
-                isStreetViewControlShown={mapSettings.isStreetViewControlShown}
-                isViewControlShown={mapSettings.isViewControlShown}
-                isDraggingAllowed={mapSettings.isDraggingAllowed}
-                {...this.props}
-              />
-            )
-          }
-        />
-      </div>
+      <ViewportRenderer>
+        <div ref={this.setRootElementRef} style={style}>
+          <ReactGoogleMapLoader
+            params={{
+              key: googleMapApiKey,
+              libraries: 'geometry,drawing,places',
+            }}
+            render={googleMaps =>
+              googleMaps && (
+                <GoogleMapWrapper
+                  isMarkerShown={mapSettings.isMarkerShown}
+                  loadingElement={<div style={{ height: `100%` }} />}
+                  containerElement={<div style={style} />}
+                  mapElement={<div style={{ height: `100%` }} />}
+                  lat={Number(mapSettings.lat)}
+                  lng={Number(mapSettings.lng)}
+                  markerTitle={mapSettings.address}
+                  markerTooltipContent={mapSettings.locationDisplayName}
+                  zoom={mapSettings.zoom}
+                  onMarkerTooltipCloseClick={() =>
+                    this.setState({ isMarkerTooltipRendered: false })
+                  }
+                  onMarkerClick={() =>
+                    this.setState({ isMarkerTooltipRendered: !this.state.isMarkerTooltipRendered })
+                  }
+                  isMarkerTooltipRendered={this.state.isMarkerTooltipRendered}
+                  mode={mapSettings.mode}
+                  isZoomControlShown={mapSettings.isZoomControlShown}
+                  isStreetViewControlShown={mapSettings.isStreetViewControlShown}
+                  isViewControlShown={mapSettings.isViewControlShown}
+                  isDraggingAllowed={mapSettings.isDraggingAllowed}
+                  {...this.props}
+                />
+              )
+            }
+          />
+        </div>
+      </ViewportRenderer>
     );
   }
 }

@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { decorateComponentWithProps, WixUtils } from 'wix-rich-content-common';
+import { decorateComponentWithProps, isiOS } from 'wix-rich-content-common';
 import createStaticToolbar from './createStaticToolbar';
 import { AddPluginButton } from '../buttons';
 import { getTextButtonsFromList } from '../buttons/utils';
@@ -67,9 +67,9 @@ const getMobileTheme = theme => {
   return {
     toolbarStyles: {
       toolbar: classNames(toolbarStyles.mobileToolbar, toolbarTheme && toolbarTheme.mobileToolbar, {
-        [toolbarStyles.mobileToolbar_fixed]: !WixUtils.isiOS(),
+        [toolbarStyles.mobileToolbar_fixed]: !isiOS(),
         [toolbarTheme.mobileToolbar_fixed]:
-          toolbarTheme && toolbarTheme.mobileToolbar_fixed && !WixUtils.isiOS(),
+          toolbarTheme && toolbarTheme.mobileToolbar_fixed && !isiOS(),
       }),
       scrollableContainer: classNames(
         toolbarStyles.mobileToolbar_scrollableContainer,
@@ -88,23 +88,23 @@ const getMobileTheme = theme => {
         toolbarStyles.mobileToolbar_responsiveArrow,
         toolbarTheme && toolbarTheme.mobileToolbar_responsiveArrow
       ),
-      responsiveArrowLeft: classNames(
-        toolbarStyles.mobileToolbar_responsiveArrowLeft,
-        toolbarTheme && toolbarTheme.mobileToolbar_responsiveArrowLeft
+      responsiveArrowStart: classNames(
+        toolbarStyles.mobileToolbar_responsiveArrowStart,
+        toolbarTheme && toolbarTheme.mobileToolbar_responsiveArrowStart
       ),
-      responsiveArrowRight: classNames(
-        toolbarStyles.mobileToolbar_responsiveArrowRight,
-        toolbarTheme && toolbarTheme.mobileToolbar_responsiveArrowRight
-      ),
-      //eslint-disable-next-line camelcase
-      responsiveArrowLeft_icon: classNames(
-        toolbarStyles.mobileToolbar_responsiveArrowLeft_icon,
-        toolbarTheme && toolbarTheme.mobileToolbar_responsiveArrowLeft_icon
+      responsiveArrowEnd: classNames(
+        toolbarStyles.mobileToolbar_responsiveArrowEnd,
+        toolbarTheme && toolbarTheme.mobileToolbar_responsiveArrowEnd
       ),
       //eslint-disable-next-line camelcase
-      responsiveArrowRight_icon: classNames(
-        toolbarStyles.mobileToolbar_responsiveArrowRight_icon,
-        toolbarTheme && toolbarTheme.mobileToolbar_responsiveArrowRight_icon
+      responsiveArrowStart_icon: classNames(
+        toolbarStyles.mobileToolbar_responsiveArrowStart_icon,
+        toolbarTheme && toolbarTheme.mobileToolbar_responsiveArrowStart_icon
+      ),
+      //eslint-disable-next-line camelcase
+      responsiveArrowEnd_icon: classNames(
+        toolbarStyles.mobileToolbar_responsiveArrowEnd_icon,
+        toolbarTheme && toolbarTheme.mobileToolbar_responsiveArrowEnd_icon
       ),
     },
     buttonStyles: {

@@ -97,6 +97,7 @@
   "ImageSettings_Alt_Input_Placeholder" : "Descrie această imagine",
   "UnorderedListButton_Tooltip" : "Marcatori",
   "ImageSettings_Alt_Label" : "Text alt",
+  "FileUploadReplaceButton_tooltip" : "Replace File",
   "GalleryPlugin_Layout_Slides" : "Slider",
   "ButtonModal_Radius_Input" : "Corner Radius (px)",
   "SoundCloudComponent_Overlay" : "To play this track, view this post from your live site.",

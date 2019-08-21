@@ -97,6 +97,7 @@
   "ImageSettings_Alt_Input_Placeholder" : "Опишіть це зображення",
   "UnorderedListButton_Tooltip" : "Маркери",
   "ImageSettings_Alt_Label" : "Альт. текст",
+  "FileUploadReplaceButton_tooltip" : "Замінити файл",
   "GalleryPlugin_Layout_Slides" : "Слайдер",
   "ButtonModal_Radius_Input" : "Скруглення кутів (пікс.)",
   "SoundCloudComponent_Overlay" : "Щоб відтворити цю композицію, перегляньте допис на опублікованому сайті.",

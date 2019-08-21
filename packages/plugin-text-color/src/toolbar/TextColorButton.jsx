@@ -85,6 +85,7 @@ export default class TextColorButton extends Component {
         theme={{ ...theme, ...buttonStyles }}
         isMobile={isMobile}
         tooltipText={tooltip}
+        dataHook={'TextColorButton'}
         tabIndex={tabIndex}
         icon={TextColorIcon}
         forwardRef={this.buttonRef}

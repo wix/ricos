@@ -97,6 +97,7 @@
   "ImageSettings_Alt_Input_Placeholder" : "代替テキストを入力して下さい",
   "UnorderedListButton_Tooltip" : "箇条書き",
   "ImageSettings_Alt_Label" : "代替テキスト",
+  "FileUploadReplaceButton_tooltip" : "ファイルを置き換える",
   "GalleryPlugin_Layout_Slides" : "スライダー",
   "ButtonModal_Radius_Input" : "角の丸み",
   "SoundCloudComponent_Overlay" : "音楽を再生するには、公開後のサイトにアクセスしてください。",

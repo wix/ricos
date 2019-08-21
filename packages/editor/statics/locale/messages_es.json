@@ -97,6 +97,7 @@
   "ImageSettings_Alt_Input_Placeholder" : "Describe esta imagen",
   "UnorderedListButton_Tooltip" : "Viñetas",
   "ImageSettings_Alt_Label" : "Alt Text",
+  "FileUploadReplaceButton_tooltip" : "Reemplazar archivo",
   "GalleryPlugin_Layout_Slides" : "Tipo cinta",
   "ButtonModal_Radius_Input" : "Radio de la esquina (px)",
   "SoundCloudComponent_Overlay" : "Para reproducir este video, mira el contenido desde tu sitio publicado.",

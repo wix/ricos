@@ -1,0 +1,7 @@
+{
+  "env": {
+    "cypress-plugin-snapshots": {
+      "updateSnapshots": true
+    }
+  }
+}

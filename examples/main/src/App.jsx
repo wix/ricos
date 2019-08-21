@@ -2,8 +2,7 @@
 import { hot } from 'react-hot-loader/root';
 import React, { PureComponent } from 'react';
 import { ReflexContainer, ReflexElement, ReflexSplitter } from 'react-reflex';
-import compact from 'lodash/compact';
-import flatMap from 'lodash/flatMap';
+import { compact, flatMap } from 'lodash';
 import { convertToRaw, createEmpty } from 'wix-rich-content-editor/dist/lib/editorStateConversion';
 import {
   ContentStateEditor,
@@ -15,6 +14,7 @@ import {
 import {
   generateKey,
   getStateFromObject,
+  getRequestedLocale,
   isMobile,
   loadStateFromStorage,
   saveStateToStorage,
@@ -27,6 +27,10 @@ class App extends PureComponent {
     super(props);
     this.isMobile = isMobile();
     this.state = this.getInitialState();
+    const locale = getRequestedLocale();
+    if (locale !== 'en') {
+      this.setLocale(locale);
+    }
   }
 
   getInitialState() {
@@ -74,18 +78,43 @@ class App extends PureComponent {
     this.onContentStateEditorResize();
   };
 
+  setLocale = locale => {
+    import(`wix-rich-content-editor/statics/locale/messages_${locale}.json`).then(localeResource =>
+      this.setState({ locale, localeResource: localeResource.default })
+    );
+  };
+
   renderEditor = () => {
-    const { isEditorShown, editorState, staticToolbar } = this.state;
+    const {
+      isEditorShown,
+      editorState,
+      editorIsMobile,
+      staticToolbar,
+      locale,
+      localeResource,
+    } = this.state;
     const settings = [
       {
         name: 'Mobile',
-        action: () => this.setState(state => ({ editorIsMobile: !state.editorIsMobile, editorResetKey: state.editorResetKey + 1, })),
+        active: editorIsMobile,
+        action: () =>
+          this.setState(state => ({
+            editorIsMobile: !editorIsMobile,
+            editorResetKey: state.editorResetKey + 1,
+          })),
       },
     ];
     if (!isMobile()) {
       settings.push({
         name: 'Static Toolbar',
+        active: staticToolbar,
         action: () => this.setState(state => ({ staticToolbar: !state.staticToolbar })),
+      });
+      settings.push({
+        name: 'Locale',
+        active: locale,
+        action: selectedLocale => this.setLocale(selectedLocale),
+        items: this.props.allLocales,
       });
     }
     return (
@@ -103,6 +132,8 @@ class App extends PureComponent {
                 editorState={editorState}
                 isMobile={this.state.editorIsMobile || this.isMobile}
                 staticToolbar={staticToolbar}
+                locale={locale}
+                localeResource={localeResource}
               />
             </ErrorBoundary>
           </SectionContent>
@@ -134,7 +165,10 @@ class App extends PureComponent {
           />
           <SectionContent>
             <ErrorBoundary>
-              <Viewer initialState={viewerState} isMobile={this.state.viewerIsMobile || this.isMobile} />
+              <Viewer
+                initialState={viewerState}
+                isMobile={this.state.viewerIsMobile || this.isMobile}
+              />
             </ErrorBoundary>
           </SectionContent>
         </ReflexElement>

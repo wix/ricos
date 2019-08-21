@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
 import classNames from 'classnames';
-import pickBy from 'lodash/pickBy';
+import { pickBy } from 'lodash';
 import Measure from 'react-measure';
 import { TOOLBARS, DISPLAY_MODE } from '../consts';
 import { getConfigByFormFactor } from '../Utils/getConfigByFormFactor';
@@ -40,6 +40,7 @@ export default function createToolbar({
   name,
   uiSettings,
   getToolbarSettings = () => [],
+  getEditorBounds,
 }) {
   class BaseToolbar extends Component {
     constructor(props) {
@@ -107,7 +108,6 @@ export default function createToolbar({
         key: 'componentLink',
         callback: this.onComponentLinkChange,
       });
-      pubsub.subscribe('editorBounds', this.onEditorBoundsChange);
     }
 
     componentWillUnmount() {
@@ -117,17 +117,12 @@ export default function createToolbar({
       pubsub.unsubscribe('componentAlignment', this.onComponentAlignmentChange);
       pubsub.unsubscribe('componentSize', this.onComponentSizeChange);
       pubsub.unsubscribe('componentTextWrap', this.onComponentTextWrapChange);
-      pubsub.unsubscribe('editorBounds', this.onEditorBoundsChange);
       this.unsubscribeOnBlock && this.unsubscribeOnBlock();
     }
 
     shouldComponentUpdate() {
       return !!this.state.isVisible;
     }
-
-    onEditorBoundsChange = editorBounds => {
-      this.setState({ editorBounds });
-    };
 
     onOverrideContent = overrideContent => {
       this.setState({ overrideContent });
@@ -362,6 +357,7 @@ export default function createToolbar({
               displayInlinePanel={this.displayInlinePanel}
               hideInlinePanel={this.hidePanels}
               uiSettings={uiSettings}
+              getEditorBounds={getEditorBounds}
               {...buttonProps}
             />
           );
@@ -450,6 +446,7 @@ export default function createToolbar({
             content={panel.PanelContent}
             keyName={panel.keyName}
             close={this.hidePanels}
+            getEditorBounds={getEditorBounds}
           />
         </div>
       ) : null;
@@ -506,12 +503,12 @@ export default function createToolbar({
         toolbarTheme && toolbarTheme.pluginToolbar_responsiveArrow
       );
       const leftArrowIconClassNames = classNames(
-        toolbarStyles.pluginToolbar_responsiveArrowLeft_icon,
-        toolbarTheme && toolbarTheme.responsiveArrowLeft_icon
+        toolbarStyles.pluginToolbar_responsiveArrowStart_icon,
+        toolbarTheme && toolbarTheme.responsiveArrowStart_icon
       );
       const rightArrowIconClassNames = classNames(
-        toolbarStyles.pluginToolbar_responsiveArrowRight_icon,
-        toolbarTheme && toolbarTheme.responsiveArrowRight_icon
+        toolbarStyles.pluginToolbar_responsiveArrowEnd_icon,
+        toolbarTheme && toolbarTheme.responsiveArrowEnd_icon
       );
       const separatorClassNames = classNames(
         toolbarStyles.pluginToolbarSeparator,

@@ -97,6 +97,7 @@
   "ImageSettings_Alt_Input_Placeholder" : "描述此圖片",
   "UnorderedListButton_Tooltip" : "項目符號",
   "ImageSettings_Alt_Label" : "替代文字",
+  "FileUploadReplaceButton_tooltip" : "取代檔案",
   "GalleryPlugin_Layout_Slides" : "滑桿",
   "ButtonModal_Radius_Input" : "角半徑 (px) ",
   "SoundCloudComponent_Overlay" : "要播放此曲目，請從您的即時網站查看此貼文。",

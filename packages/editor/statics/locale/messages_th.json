@@ -97,6 +97,7 @@
   "ImageSettings_Alt_Input_Placeholder" : "บรรยายภาพนี้",
   "UnorderedListButton_Tooltip" : "หัวข้อย่อย",
   "ImageSettings_Alt_Label" : "ข้อความบรรยาย",
+  "FileUploadReplaceButton_tooltip" : "แทนที่ไฟล์",
   "GalleryPlugin_Layout_Slides" : "แถบเลื่อน",
   "ButtonModal_Radius_Input" : "รัศมีมุม (px)",
   "SoundCloudComponent_Overlay" : "หากต้องการเล่นเพลงนี้ให้ดูโพสต์นี้จากเว็บไซต์ที่ใช้งานจริงของคุณ",

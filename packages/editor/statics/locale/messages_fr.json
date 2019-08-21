@@ -97,6 +97,7 @@
   "ImageSettings_Alt_Input_Placeholder" : "Décrivez cette image",
   "UnorderedListButton_Tooltip" : "Puces",
   "ImageSettings_Alt_Label" : "Alt Text",
+  "FileUploadReplaceButton_tooltip" : "Remplacer fichier",
   "GalleryPlugin_Layout_Slides" : "Slider",
   "ButtonModal_Radius_Input" : "Rayon des angles (px)",
   "SoundCloudComponent_Overlay" : "Pour lire ce morceau, veuillez accédez à ce post depuis votre site en ligne.",

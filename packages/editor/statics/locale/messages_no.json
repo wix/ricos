@@ -97,6 +97,7 @@
   "ImageSettings_Alt_Input_Placeholder" : "Beskriv dette bildet",
   "UnorderedListButton_Tooltip" : "Punkter",
   "ImageSettings_Alt_Label" : "Alternativ tekst",
+  "FileUploadReplaceButton_tooltip" : "Erstatt fil",
   "GalleryPlugin_Layout_Slides" : "Slider",
   "ButtonModal_Radius_Input" : "Hjørneradius i piksler",
   "SoundCloudComponent_Overlay" : "Vis dette innlegget fra nettstedet ditt for å spille dette sporet.",

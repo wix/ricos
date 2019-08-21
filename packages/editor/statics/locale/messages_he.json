@@ -97,6 +97,7 @@
   "ImageSettings_Alt_Input_Placeholder" : "תאר תמונה זו",
   "UnorderedListButton_Tooltip" : "תבליטים",
   "ImageSettings_Alt_Label" : "טקסט חלופי",
+  "FileUploadReplaceButton_tooltip" : "Replace File",
   "GalleryPlugin_Layout_Slides" : "מחוון",
   "ButtonModal_Radius_Input" : "רדיוס פינות מעוגלות (פיקסלים)",
   "SoundCloudComponent_Overlay" : "To play this track, view this post from your live site.",

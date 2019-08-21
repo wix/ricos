@@ -2,17 +2,19 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Iframe from './Iframe';
 
+const isSSR = typeof window === 'undefined';
+
 class IframeHtml extends Component {
   state = { shouldRender: false };
-  id = performance.now().toString(36);
+  id = !isSSR && performance.now().toString(36);
 
   componentDidMount() {
     this.setState({ shouldRender: true });
-    window && window.addEventListener('message', this.handleIframeMessage);
+    !isSSR && window.addEventListener('message', this.handleIframeMessage);
   }
 
   componentWillUnmount() {
-    window && window.removeEventListener('message', this.handleIframeMessage);
+    !isSSR && window.removeEventListener('message', this.handleIframeMessage);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -31,7 +33,7 @@ class IframeHtml extends Component {
 
   handleIframeMessage = ({ data }) => {
     const { type, id, height } = data;
-    if (type === 'htmlPlugin:maxHeight' && id === this.id) {
+    if (type === 'htmlPlugin:heightResize' && id === this.id) {
       this.props.onHeightChange(height);
     }
   };

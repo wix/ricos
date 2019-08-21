@@ -4,7 +4,14 @@ import SliderWithInput from './SliderWithInput';
 import styles from '../../statics/styles/slider-panel.scss';
 
 const SliderPanel = props => {
-  const { theme, getValue, onChange, mapStoreDataToPanelProps, ...otherProps } = props;
+  const {
+    theme,
+    getValue,
+    onChange,
+    mapStoreDataToPanelProps,
+    getEditorBounds,
+    ...otherProps
+  } = props;
 
   const mappedProps = { ...otherProps, ...mapStoreDataToPanelProps(otherProps) };
 
@@ -14,7 +21,7 @@ const SliderPanel = props => {
         {...mappedProps}
         theme={theme}
         value={getValue(props)}
-        onChange={onChange(props)}
+        onChange={onChange({ ...props, getEditorBounds })}
         sliderDataHook="sliderPanel_Slider"
         inputDataHook="sliderPanel_Input"
       />
@@ -27,6 +34,7 @@ SliderPanel.propTypes = {
   onChange: PropTypes.func.isRequired,
   theme: PropTypes.object.isRequired,
   mapStoreDataToPanelProps: PropTypes.func,
+  getEditorBounds: PropTypes.func,
 };
 
 SliderPanel.defaultProps = {

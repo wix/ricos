@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { getVisibleSelectionRect } from '@wix/draft-js';
 import Measure from 'react-measure';
+import ClickOutside from 'react-click-outside';
+import { debounce } from 'lodash';
 import { DISPLAY_MODE } from 'wix-rich-content-common';
 import Styles from '../../../../statics/styles/inline-toolbar.scss';
-import ClickOutside from 'react-click-outside';
-import debounce from 'lodash/debounce';
 
 const TOOLBAR_OFFSET = 5;
 
@@ -256,12 +256,12 @@ export default class InlineToolbar extends Component {
       toolbarStyles.inlineToolbar_responsiveArrow
     );
     const leftArrowIconClassNames = classNames(
-      Styles.inlineToolbar_responsiveArrowLeft_icon,
-      toolbarStyles.responsiveArrowLeft_icon
+      Styles.inlineToolbar_responsiveArrowStart_icon,
+      toolbarStyles.responsiveArrowStart_icon
     );
     const rightArrowIconClassNames = classNames(
-      Styles.inlineToolbar_responsiveArrowRight_icon,
-      toolbarStyles.responsiveArrowRight_icon
+      Styles.inlineToolbar_responsiveArrowEnd_icon,
+      toolbarStyles.responsiveArrowEnd_icon
     );
 
     const childrenProps = {

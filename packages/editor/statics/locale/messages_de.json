@@ -97,6 +97,7 @@
   "ImageSettings_Alt_Input_Placeholder" : "Beschreiben Sie dieses Bild",
   "UnorderedListButton_Tooltip" : "Aufzählungszeichen",
   "ImageSettings_Alt_Label" : "Alt-Text",
+  "FileUploadReplaceButton_tooltip" : "Replace File",
   "GalleryPlugin_Layout_Slides" : "Slider",
   "ButtonModal_Radius_Input" : "Eckenradius (px)",
   "SoundCloudComponent_Overlay" : "Um den Titel abzuspielen, sehen Sie sich diesen Beitrag live an.",

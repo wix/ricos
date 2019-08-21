@@ -97,6 +97,7 @@
   "ImageSettings_Alt_Input_Placeholder" : "Descreva esta imagem",
   "UnorderedListButton_Tooltip" : "Marcadores",
   "ImageSettings_Alt_Label" : "Alt Text",
+  "FileUploadReplaceButton_tooltip" : "Substituir arquivo",
   "GalleryPlugin_Layout_Slides" : "Slider",
   "ButtonModal_Radius_Input" : "Raios do canto (px)",
   "SoundCloudComponent_Overlay" : "Para reproduzir essa faixa, veja esse post no seu site ao vivo.",

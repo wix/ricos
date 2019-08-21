@@ -22,7 +22,9 @@ module.exports = env => ({
     extensions: ['.js', '.jsx', '.json'],
     symlinks: false,
     alias: {
-      'react-hot-loader': path.resolve(path.join(__dirname, '..', 'node_modules', 'react-hot-loader')),
+      'react-hot-loader': path.resolve(
+        path.join(__dirname, '..', 'node_modules', 'react-hot-loader')
+      ),
       'draft-js': path.resolve(__dirname, '..', '..', '..', 'node_modules', '@wix', 'draft-js'),
       '@wix/draft-js': path.resolve(
         __dirname,
@@ -64,7 +66,7 @@ module.exports = env => ({
       },
       {
         test: /\.scss$/,
-        exclude: /.global.scss/,
+        exclude: /styles\.global\.scss/,
         use: [
           {
             loader: 'style-loader',

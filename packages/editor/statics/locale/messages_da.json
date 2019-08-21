@@ -97,6 +97,7 @@
   "ImageSettings_Alt_Input_Placeholder" : "Beskriv dette billede",
   "UnorderedListButton_Tooltip" : "Punkttegn",
   "ImageSettings_Alt_Label" : "Alt-tekst",
+  "FileUploadReplaceButton_tooltip" : "Replace File",
   "GalleryPlugin_Layout_Slides" : "Diasstribe",
   "ButtonModal_Radius_Input" : "Hjørneradius (px)",
   "SoundCloudComponent_Overlay" : "For at afspille dette nummer, vis dit indlæg fra din live hjemmeside.",

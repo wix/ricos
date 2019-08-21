@@ -1,0 +1,12 @@
+.placeholder {
+  background: #666;
+  color: #fff;
+  font-size: 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &::before {
+    content: 'Loading...';
+  }
+}

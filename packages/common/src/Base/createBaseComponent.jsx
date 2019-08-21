@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { findDOMNode } from 'react-dom';
-import isNil from 'lodash/isNil';
+import { isNil } from 'lodash';
 import classNames from 'classnames';
 import createHocName from '../Utils/createHocName';
 import getDisplayName from '../Utils/getDisplayName';
@@ -27,6 +27,7 @@ const createBaseComponent = ({
   relValue,
   t,
   isMobile,
+  getEditorBounds,
 }) => {
   class WrappedComponent extends Component {
     static displayName = createHocName('BaseComponent', PluginComponent);
@@ -62,7 +63,6 @@ const createBaseComponent = ({
         ['componentAlignment', this.onComponentAlignmentChange],
         ['componentSize', this.onComponentSizeChange],
         ['componentTextWrap', this.onComponentTextWrapChange],
-        ['editorBounds', this.onEditorBoundsChange],
       ];
       this.subscriptions.forEach(subscription => pubsub.subscribe(...subscription));
       const blockKey = this.props.block.getKey();
@@ -90,10 +90,6 @@ const createBaseComponent = ({
       const { block } = this.props;
       const updatedVisibleBlock = pubsub.get('visibleBlock');
       return updatedVisibleBlock === block.getKey();
-    };
-
-    onEditorBoundsChange = editorBounds => {
-      this.setState({ editorBounds });
     };
 
     onComponentDataChange = componentData => {
@@ -272,7 +268,7 @@ const createBaseComponent = ({
           componentState={this.state.componentState}
           helpers={helpers}
           t={t}
-          editorBounds={this.state.editorBounds}
+          editorBounds={getEditorBounds()}
         />
       );
 

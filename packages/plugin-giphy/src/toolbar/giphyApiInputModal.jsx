@@ -34,7 +34,7 @@ export default class GiphyApiInputModal extends Component {
 
   render() {
     const { styles } = this;
-    const { t, theme, isMobile } = this.props;
+    const { t, theme, isMobile, languageDir } = this.props;
     const searchTag = this.state.searchTag;
     const backButton = (
       <div
@@ -53,7 +53,7 @@ export default class GiphyApiInputModal extends Component {
       </div>
     );
     return (
-      <div>
+      <div dir={languageDir}>
         {isMobile ? <div>{mobileNavbar}</div> : null}
         <div className={styles.giphy_api_input_modal_container} data-hook="giphyUploadModal">
           <div className={styles.giphy_api_input_modal_search_textinput_group}>
@@ -73,8 +73,14 @@ export default class GiphyApiInputModal extends Component {
               {!this.state.searchTag ? (
                 <SearchIcon />
               ) : (
-                <div onClick={this.handleClearText} role="button" tabIndex="0" onKeyPress={null}>
-                  <CloseIcon className={styles.closeIcon} />
+                <div
+                  onClick={this.handleClearText}
+                  role="button"
+                  tabIndex="0"
+                  onKeyPress={null}
+                  className={styles.giphy_api_input_modal_closeIcon}
+                >
+                  <CloseIcon />
                 </div>
               )}
             </div>
@@ -97,4 +103,5 @@ GiphyApiInputModal.propTypes = {
   theme: PropTypes.object.isRequired,
   t: PropTypes.func,
   isMobile: PropTypes.bool,
+  languageDir: PropTypes.string,
 };

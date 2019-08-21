@@ -148,7 +148,8 @@ export default class Editor extends PureComponent {
           editorKey={'random-editorKey-ssr'}
           anchorTarget={anchorTarget}
           relValue={relValue}
-          locale={'he'}
+          locale={this.props.locale}
+          localeResource={this.props.localeResource}
         />
         <ReactModal
           isOpen={this.state.showModal}
@@ -158,7 +159,11 @@ export default class Editor extends PureComponent {
           onRequestClose={onRequestClose || this.helpers.closeModal}
         >
           {this.state.showModal && (
-            <RichContentEditorModal modalsMap={ModalsMap} {...this.state.modalProps} />
+            <RichContentEditorModal
+              modalsMap={ModalsMap}
+              locale={this.props.locale}
+              {...this.state.modalProps}
+            />
           )}
         </ReactModal>
       </div>
@@ -172,4 +177,6 @@ Editor.propTypes = {
   theme: PropTypes.object,
   isMobile: PropTypes.bool,
   staticToolbar: PropTypes.bool,
+  locale: PropTypes.string,
+  localeResource: PropTypes.object,
 };

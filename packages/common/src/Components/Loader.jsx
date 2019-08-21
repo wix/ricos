@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import get from 'lodash/get';
+import { get } from 'lodash';
 import { mergeStyles } from '../Utils/mergeStyles';
 import Context from '../Utils/Context';
 import styles from '../../statics/styles/loaders.scss';

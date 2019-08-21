@@ -97,6 +97,7 @@
   "ImageSettings_Alt_Input_Placeholder" : "Popište tento obrázek",
   "UnorderedListButton_Tooltip" : "Odrážky",
   "ImageSettings_Alt_Label" : "Alternativní text",
+  "FileUploadReplaceButton_tooltip" : "Nahradit soubor",
   "GalleryPlugin_Layout_Slides" : "Posuvník",
   "ButtonModal_Radius_Input" : "Poloměr rohů (px)",
   "SoundCloudComponent_Overlay" : "Pro přehrání skladby přejděte na zveřejněný web.",
