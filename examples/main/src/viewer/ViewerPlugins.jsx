@@ -6,6 +6,7 @@ import { HTML_TYPE, htmlTypeMapper } from 'wix-rich-content-plugin-html/dist/mod
 import { soundCloudTypeMapper } from 'wix-rich-content-plugin-sound-cloud/dist/module.viewer';
 import { LINK_TYPE, linkTypeMapper } from 'wix-rich-content-plugin-link/dist/module.viewer';
 import { imageTypeMapper } from 'wix-rich-content-plugin-image/dist/module.viewer';
+import { galleryTypeMapper } from 'wix-rich-content-plugin-gallery/dist/module.viewer';
 import { mapTypeMapper } from 'wix-rich-content-plugin-map/dist/module.viewer';
 import { giphyTypeMapper, GIPHY_TYPE } from 'wix-rich-content-plugin-giphy/dist/module.viewer';
 import { HashtagDecorator } from 'wix-rich-content-plugin-hashtag/dist/module.viewer';
@@ -38,6 +39,7 @@ import 'wix-rich-content-plugin-emoji/dist/styles.min.css';
 import 'wix-rich-content-plugin-hashtag/dist/styles.min.css';
 import 'wix-rich-content-plugin-html/dist/styles.min.css';
 import 'wix-rich-content-plugin-image/dist/styles.min.css';
+import 'wix-rich-content-plugin-gallery/dist/styles.min.css';
 import 'wix-rich-content-plugin-link/dist/styles.min.css';
 import 'wix-rich-content-plugin-mentions/dist/styles.min.css';
 import 'wix-rich-content-plugin-video/dist/styles.min.css';
@@ -64,6 +66,7 @@ export const typeMappers = [
   soundCloudTypeMapper,
   mentionsTypeMapper,
   imageTypeMapper,
+  galleryTypeMapper,
   mapTypeMapper,
   fileUploadTypeMapper,
   giphyTypeMapper,

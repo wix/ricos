@@ -2,9 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { get, includes, isEqual, isFunction } from 'lodash';
-import { mergeStyles, Loader, validate, Context, ViewportRenderer } from 'wix-rich-content-common';
-import getImageSrc from './get-image-source';
-import { WIX_MEDIA_DEFAULT } from './get-wix-media-url';
+import {
+  mergeStyles,
+  getImageSrc,
+  Loader,
+  validate,
+  Context,
+  ViewportRenderer,
+  WIX_MEDIA_DEFAULT,
+} from 'wix-rich-content-common';
 import { getDefault } from './consts';
 import schema from '../statics/data-schema.json';
 import styles from '../statics/styles/image-viewer.scss';
@@ -26,7 +32,7 @@ class ImageViewer extends React.Component {
     }
   }
 
-  getImageSrc(src) {
+  getImageUrl(src) {
     const { helpers } = this.context || {};
 
     if (!src && (helpers && helpers.handleFileSelection)) {
@@ -205,7 +211,7 @@ class ImageViewer extends React.Component {
 
     const itemClassName = classNames(this.styles.imageContainer, className);
     const imageClassName = classNames(this.styles.image);
-    const imageSrc = fallbackImageSrc || this.getImageSrc(data.src);
+    const imageSrc = fallbackImageSrc || this.getImageUrl(data.src);
     let imageProps = {};
     if (data.src && settings && isFunction(settings.imageProps)) {
       imageProps = settings.imageProps(data.src);

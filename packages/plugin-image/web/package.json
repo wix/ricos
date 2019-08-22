@@ -36,7 +36,8 @@
     "lodash": "^4.0.0",
     "prop-types": "^15.0.0",
     "react": "^16.6.3",
-    "react-dom": "^16.6.3"
+    "react-dom": "^16.6.3",
+    "react-i18next": "^7.0.0"
   },
   "devDependencies": {
     "@babel/runtime": "7.2.0",

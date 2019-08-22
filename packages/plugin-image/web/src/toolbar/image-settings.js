@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import {
   mergeStyles,
+  getImageSrc,
   Image,
   Loader,
   InputWithLabel,
@@ -10,7 +11,6 @@ import {
   SettingsPanelFooter,
   SettingsSection,
 } from 'wix-rich-content-common';
-import getImageSrc from '../get-image-source';
 import ImageSettingsMobileHeader from './image-settings-mobile-header';
 import styles from '../../statics/styles/image-settings.scss';
 

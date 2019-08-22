@@ -65,6 +65,7 @@ export { mergeStyles } from './Utils/mergeStyles';
 export { default as normalizeInitialState } from './Utils/normalization/normalizeInitialState';
 export { validate, getContentStateSchema } from './Utils/data-schema-validator';
 export { isHexColor } from './Components/ColorPicker/utils';
+export { getImageSrc, WIX_MEDIA_DEFAULT } from './Utils/imageUtils';
 
 export {
   isValidUrl,
