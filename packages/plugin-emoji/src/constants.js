@@ -1,10 +1,60 @@
 /* eslint-disable react/jsx-key */
 import React from 'react';
-import { FaSmile, FaPaw, FaPlane, FaBell, FaHeart, FaFlag } from 'react-icons/fa';
+import {
+  FaSmile,
+  FaPaw,
+  FaPlane,
+  FaBell,
+  FaHeart,
+  FaFlag,
+  FaUtensils,
+  FaRegFutbol,
+} from 'react-icons/fa';
 export const EMOJI_TYPE = 'wix-draft-plugin-emoji';
 export const ALIGN_CENTER = 'center';
 
-export const FAICONS = [<FaBell />, <FaSmile />, <FaPaw />, <FaPlane />, <FaHeart />, <FaFlag />];
+export const getEmojiGroups = t => [
+  {
+    title: t('EmojiPlugin_EmojiGroups_People'),
+    icon: <FaSmile />,
+    category: 'people',
+  },
+  {
+    title: t('EmojiPlugin_EmojiGroups_Nature'),
+    icon: <FaPaw />,
+    category: 'nature',
+  },
+  {
+    title: t('EmojiPlugin_EmojiGroups_Food'),
+    icon: <FaUtensils />,
+    category: 'food',
+  },
+  {
+    title: t('EmojiPlugin_EmojiGroups_Activity'),
+    icon: <FaRegFutbol />,
+    category: 'activity',
+  },
+  {
+    title: t('EmojiPlugin_EmojiGroups_Travel'),
+    icon: <FaPlane />,
+    category: 'travel',
+  },
+  {
+    title: t('EmojiPlugin_EmojiGroups_Objects'),
+    icon: <FaBell />,
+    category: 'objects',
+  },
+  {
+    title: t('EmojiPlugin_EmojiGroups_Symbols'),
+    icon: <FaHeart />,
+    category: 'symbols',
+  },
+  {
+    title: t('EmojiPlugin_EmojiGroups_Flags'),
+    icon: <FaFlag />,
+    category: 'flags',
+  },
+];
 
 export const DEFAULTS = {
   config: {

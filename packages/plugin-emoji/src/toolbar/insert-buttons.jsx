@@ -1,14 +1,9 @@
 import { DEFAULTS, MobileFullScreenCustomStyle, DesktopFlyOutModalStyles } from '../constants';
-import {
-  TOOLBARS,
-  decorateComponentWithProps,
-  WixUtils,
-  getModalStyles,
-} from 'wix-rich-content-common';
+import { TOOLBARS, decorateComponentWithProps, getModalStyles } from 'wix-rich-content-common';
 import EmojiPreviewModal from './emojiPreviewModal';
 import { EmojiPluginIcon } from '../icons';
 
-export default ({ helpers, t, settings }) => {
+export default ({ helpers, t, settings, isMobile }) => {
   return [
     {
       type: 'modal',
@@ -18,7 +13,7 @@ export default ({ helpers, t, settings }) => {
       componentData: settings.componentDataDefaults || DEFAULTS,
       toolbars: settings.insertToolbars || [TOOLBARS.FOOTER, TOOLBARS.SIDE],
       modalElement: decorateComponentWithProps(EmojiPreviewModal, settings),
-      modalStyles: WixUtils.isMobile()
+      modalStyles: isMobile
         ? getModalStyles({ customStyles: MobileFullScreenCustomStyle, fullScreen: true })
         : null,
       modalStylesFn: ({ buttonRef }) => {

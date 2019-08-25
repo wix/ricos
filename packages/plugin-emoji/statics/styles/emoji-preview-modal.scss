@@ -1,9 +1,28 @@
-.emoji_icons_container{
+.emojiPreviewModal_emoji_icons_container{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    border-bottom: 1px solid #778899;
+    padding-bottom: 10px;
+    cursor: pointer;
 }
 
-.emoji_icon:hover{
+.emojiPreviewModal_emoji_icon:hover{
+    opacity: .5;
+}
+
+.emojiPreviewModal_emojis_container{
+    width: 100%;
+    height: 252px;
+    padding-top: 5px;
+    overflow-y: scroll;
+}
+.emojiPreviewModal_emoji{
+    width: 30px;
+    height: 30px;
+    margin-right: 5px;
+    cursor: pointer;
+}
+.emojiPreviewModal_emoji:hover{
     opacity: .5;
 }
