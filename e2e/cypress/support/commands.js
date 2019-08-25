@@ -7,16 +7,16 @@ const resizeForDesktop = () => cy.viewport('macbook-15');
 const resizeForMobile = () => cy.viewport('iphone-5');
 
 const buildQuery = params => {
-  const parameters = Object.keys(params).filter(param => params[param]);
+  const parameters = params.filter(param => param);
   if (parameters.length === 0) return '';
   return '?' + parameters.join('&');
 };
 
 const getUrl = (componentId, fixtureName = '') =>
-  `/${componentId}${fixtureName ? '/' + fixtureName : ''}${buildQuery({
-    mobile: isMobile,
-    hebrew: isHebrew,
-  })}`;
+  `/${componentId}${fixtureName ? '/' + fixtureName : ''}${buildQuery([
+    isMobile ? 'mobile' : '',
+    isHebrew ? 'he' : '',
+  ])}`;
 
 // Viewport size commands
 
@@ -195,6 +195,11 @@ Cypress.Commands.add('openImageSettings', () => {
   cy.get('[data-hook=imageViewer] [data-hook=imageViewer]:first').click({ force: true });
   cy.get('[aria-label=Settings]').click();
   cy.get('[data-hook="imageSettings"]');
+});
+
+Cypress.Commands.add('openPluginToolbar', () => {
+  cy.get('[aria-label="Plugin Toolbar"]').click();
+  cy.get('#side_bar');
 });
 
 // disable screenshots in debug mode. So there is no diffrence to ci.
