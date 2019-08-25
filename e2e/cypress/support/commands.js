@@ -218,6 +218,11 @@ Cypress.Commands.add('openPluginToolbar', () => {
   cy.get('#side_bar');
 });
 
+Cypress.Commands.add('openImageSettings', () => {
+  cy.get('[data-hook=imageViewer] [data-hook=imageViewer]:first').click({ force: true });
+  cy.get('[data-tip=Settings]').click();
+});
+
 // disable screenshots in debug mode. So there is no diffrence to ci.
 if (Cypress.browser.isHeaded) {
   const noop = () => {};
