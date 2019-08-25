@@ -13,7 +13,7 @@ export const withResizeHandlers = Component => ({
     onMouseDown={onMouseDown}
     onMouseMove={onMouseMove}
     onMouseLeave={onMouseLeave}
-    style={{ ...style, 'min-width': '100px' }}
+    style={{ ...style, minWidth: '100px' }}
   >
     <Component {...rest} />
   </div>
