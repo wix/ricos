@@ -228,9 +228,9 @@ const createBaseComponent = ({
       const isActive = isFocused && isEditorFocused && !readOnly;
 
       const classNameStrategies = [
-        PluginComponent.WrappedComponent.alignmentClassName || alignmentClassName,
-        PluginComponent.WrappedComponent.sizeClassName || sizeClassName,
-        PluginComponent.WrappedComponent.textWrapClassName || textWrapClassName,
+        PluginComponent.alignmentClassName || alignmentClassName,
+        PluginComponent.sizeClassName || sizeClassName,
+        PluginComponent.textWrapClassName || textWrapClassName,
       ].map(strategy => strategy(this.state.componentData, theme, Styles, isMobile));
 
       const ContainerClassNames = classNames(
@@ -290,6 +290,7 @@ const createBaseComponent = ({
             .toLowerCase()
             .indexOf('image') !== -1,
       });
+
       /* eslint-disable jsx-a11y/anchor-has-content */
       return (
         <div style={sizeStyles} className={ContainerClassNames}>

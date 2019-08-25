@@ -5,6 +5,7 @@ import createToolbar from './createBaseToolbar';
 import createInsertPluginButton from './createBaseInsertPluginButton';
 import { simplePubsub } from '../Utils/simplePubsub';
 import { getToolbarTheme } from '../Utils/getToolbarTheme';
+import { withResizeHandlers } from '../Utils/withResizeHandlers';
 
 const updateEntityData = (contentBlock, { getEditorState, setEditorState }, getNewData) => {
   const entityKey = contentBlock.getEntityAt(0);
@@ -99,10 +100,9 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
         isMobile,
       }),
     }));
-  const PluginComponent =
-    config.component && config.decorator ? config.decorator(config.component) : config.component;
+  const PluginComponent = config.component;
 
-  const CompWithBase =
+  const baseComponent =
     PluginComponent &&
     createBaseComponent({
       PluginComponent,
@@ -116,6 +116,13 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
       relValue,
       isMobile,
     });
+
+  const resizableBaseComponent = withResizeHandlers(baseComponent);
+
+  const decoratedCompWithBase =
+    resizableBaseComponent && config.decorator
+      ? config.decorator(resizableBaseComponent)
+      : resizableBaseComponent;
 
   const InlineModals = config.inlineModals;
 
@@ -132,7 +139,7 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
         const pluginTypes = [config.type, config.legacyType];
         if (includes(pluginTypes, type)) {
           return {
-            component: CompWithBase,
+            component: decoratedCompWithBase,
             editable: false,
             props: {
               getData: getData(contentBlock, { getEditorState }),
