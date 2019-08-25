@@ -54,6 +54,10 @@ describe('editor', () => {
       cy.loadEditor('hebrew');
     });
 
+    it('should render external modal in rtl', () => {
+      cy.loadEditor('images').openImageSettings();
+    });
+
     afterEach(() => cy.matchSnapshots());
   });
 });
