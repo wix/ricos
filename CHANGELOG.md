@@ -24,6 +24,7 @@
   - [#365](https://github.com/wix-incubator/rich-content/pull/365) moved packages into web directory
 - `e2e`
   - [4bb51408](https://github.com/wix-incubator/rich-content/commit/4bb51408) hide toolbar before snapshot comparison
+  - [#368](https://github.com/wix-incubator/rich-content/pull/368) test rtl support in toolbars, text and external modals
 <hr/>
 
 ## 4.0.14 (Aug 19, 2019)
