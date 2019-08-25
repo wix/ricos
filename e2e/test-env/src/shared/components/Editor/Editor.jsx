@@ -12,6 +12,7 @@ class Editor extends Component {
   static propTypes = {
     initialState: PropTypes.object,
     isMobile: PropTypes.bool,
+    locale: PropTypes.string,
   };
 
   state = {
@@ -78,6 +79,7 @@ class Editor extends Component {
           config={Plugins.config}
           isMobile={this.props.isMobile}
           helpers={this.helpers}
+          locale={this.props.locale}
         />
       </>
     );

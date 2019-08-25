@@ -37,4 +37,24 @@ describe('editor', () => {
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.UNORDERED_LIST, [550, 1])
       .matchSnapshots();
   });
+
+  context('when in hebrew locale', () => {
+    beforeEach(() => cy.switchToHebrew());
+
+    it('should render plugin toolbar in rtl', () => {
+      cy.loadEditor()
+        .focusEditor()
+        .openPluginToolbar();
+    });
+
+    it('should render text toolbar in rtl', () => {
+      cy.loadEditor('plain').setSelection(0, 8);
+    });
+
+    it('should render rtl and ltr text correctly', () => {
+      cy.loadEditor('hebrew');
+    });
+
+    afterEach(() => cy.matchSnapshots());
+  });
 });
