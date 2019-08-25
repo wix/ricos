@@ -62,6 +62,7 @@
   - [#372](https://github.com/wix-incubator/rich-content/pull/372) github actions
 - `e2e`
   - [4bb51408](https://github.com/wix-incubator/rich-content/commit/4bb51408) hide toolbar before snapshot comparison
+  - [#368](https://github.com/wix-incubator/rich-content/pull/368) test rtl support in toolbars, text and external modals
   - [#373](https://github.com/wix-incubator/rich-content/pull/373) fix flaky test
 - `gallery`
   - [#376](https://github.com/wix-incubator/rich-content/pull/376) migrated from `rich-content-plugins-wix` and updated to latest `pro-gallery`
