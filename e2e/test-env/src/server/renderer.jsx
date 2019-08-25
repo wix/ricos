@@ -18,8 +18,9 @@ export default function renderer() {
   return (req, res) => {
     const [componentId, fixtureName = 'empty'] = req.path.replace(/^\/|\/$/g, '').split('/');
     const isMobile = req.query.mobile === '';
+    const locale = req.query.he === '' ? 'he' : 'en';
     const { Components, bundleName } = COMPONENTS[componentId] || {};
-    const props = { initialState: null, isMobile };
+    const props = { initialState: null, isMobile, locale };
 
     if (!Components) {
       return res.status(404).send(`Component for ${componentId} not found`);

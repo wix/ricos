@@ -6,8 +6,17 @@ import { INLINE_TOOLBAR_BUTTONS } from '../dataHooks';
 const resizeForDesktop = () => cy.viewport('macbook-15');
 const resizeForMobile = () => cy.viewport('iphone-5');
 
+const buildQuery = params => {
+  const parameters = params.filter(param => param);
+  if (parameters.length === 0) return '';
+  return '?' + parameters.join('&');
+};
+
 const getUrl = (componentId, fixtureName = '') =>
-  `/${componentId}/${fixtureName}${isMobile ? '?mobile' : ''}`;
+  `/${componentId}${fixtureName ? '/' + fixtureName : ''}${buildQuery([
+    isMobile ? 'mobile' : '',
+    isHebrew ? 'he' : '',
+  ])}`;
 
 // Viewport size commands
 
@@ -16,6 +25,7 @@ const run = (app, fixtureName) => {
 };
 
 let isMobile = false;
+let isHebrew = false;
 
 Cypress.Commands.add('switchToMobile', () => {
   isMobile = true;
@@ -25,6 +35,14 @@ Cypress.Commands.add('switchToMobile', () => {
 Cypress.Commands.add('switchToDesktop', () => {
   isMobile = false;
   resizeForDesktop();
+});
+
+Cypress.Commands.add('switchToHebrew', () => {
+  isHebrew = true;
+});
+
+Cypress.Commands.add('switchToEnglish', () => {
+  isHebrew = false;
 });
 
 Cypress.Commands.add('loadEditorAndViewer', fixtureName => {
@@ -161,6 +179,11 @@ Cypress.Commands.add('setColor', (butttonIndex = 3, selection) => {
 
 Cypress.Commands.add('setLineSpacing', (butttonIndex = 3, selection) => {
   setInlineToolbarMenueItem(INLINE_TOOLBAR_BUTTONS.LINE_SPACING, selection, butttonIndex);
+});
+
+Cypress.Commands.add('openPluginToolbar', () => {
+  cy.get('[aria-label="Plugin Toolbar"]').click();
+  cy.get('#side_bar');
 });
 
 // disable screenshots in debug mode. So there is no diffrence to ci.
