@@ -44,6 +44,7 @@ export default function renderer() {
       initialState: props.initialState,
       bundleName,
       isMobile,
+      locale,
     });
   };
 }
