@@ -2,12 +2,24 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { convertFromRaw, convertToRaw, EditorState } from '@wix/draft-js';
 import deepFreeze from 'deep-freeze';
-import { RichContentEditor } from 'wix-rich-content-editor';
+import { RichContentEditor, RichContentEditorModal } from 'wix-rich-content-editor';
 import 'wix-rich-content-common/dist/styles.min.css';
 import 'wix-rich-content-editor/dist/styles.min.css';
 import theme from '../../theme';
 import * as Plugins from './editorPlugins';
+import ReactModal from 'react-modal';
+import ModalsMap from './ModalsMap';
 
+const modalStyleDefaults = {
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
+  },
+};
 class Editor extends Component {
   static propTypes = {
     initialState: PropTypes.object,
@@ -67,6 +79,17 @@ class Editor extends Component {
     },
   };
   render() {
+    const modalStyles = {
+      content: Object.assign(
+        {},
+        (this.state.modalStyles || modalStyleDefaults).content
+      ),
+      overlay: Object.assign(
+        {},
+        (this.state.modalStyles || modalStyleDefaults).overlay
+      ),
+    };
+    const { onRequestClose } = this.state.modalProps || {};
     return (
       <>
         Editor
@@ -81,6 +104,21 @@ class Editor extends Component {
           helpers={this.helpers}
           locale={this.props.locale}
         />
+        <ReactModal
+          isOpen={this.state.showModal}
+          contentLabel="External Modal Example"
+          style={modalStyles}
+          role="dialog"
+          onRequestClose={onRequestClose || this.helpers.closeModal}
+        >
+          {this.state.showModal && (
+            <RichContentEditorModal
+              modalsMap={ModalsMap}
+              locale={this.props.locale}
+              {...this.state.modalProps}
+            />
+          )}
+        </ReactModal>
       </>
     );
   }
