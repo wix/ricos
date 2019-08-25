@@ -17,6 +17,8 @@
 - `general`
   - [#358](https://github.com/wix-incubator/rich-content/pull/358) viewport based lazy loading for plugin components
 ### :bug: Bug Fix
+- `html`
+  - [#369](https://github.com/wix-incubator/rich-content/pull/369) instagram height bug on ios
 - `example`
   - [32580b58](https://github.com/wix-incubator/rich-content/commit/32580b58) webpack: SCSS plugin rule exclude fixed
 ### :house: Internal

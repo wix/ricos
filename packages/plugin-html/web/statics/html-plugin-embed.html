@@ -32,6 +32,7 @@
       }
     </style>
     <script>
+      var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
       (function fixInstagramWidth() {
         // This is a fallback for the styles above. Because inline styles can't be overridden in ios.
         var callback = function() {
@@ -113,6 +114,22 @@
           multipleDelayedSendHeight();
         }
 
+        function handleIframeAdded(iframe) {
+          if (isIOS) {
+            var src = iframe.src;
+            iframe.onload = function() {
+              console.log('reload iframe');
+              if (src.indexOf('reloadMe') > -1) {
+                return;
+              }
+              if (src.indexOf('&') > -1) {
+                iframe.src = src.replace('?', '?reloadMe=1&');
+              } else {
+                iframe.src += '?reloadMe';
+              }
+            };
+          }
+        }
 
         var timerId;
         function multipleDelayedSendHeight() {
@@ -139,9 +156,16 @@
 
         function setupMutationObserver() {
           var target = document.querySelector('body');
-          var observer = new MutationObserver(function() {
+          var observer = new MutationObserver(function(mutations) {
             addImageLoadListeners();
             handleResize();
+            mutations.forEach(function(mutation) {
+              mutation.addedNodes.forEach(function(el) {
+                if (el.nodeName === 'IFRAME') {
+                  handleIframeAdded(el);
+                }
+              });
+            });
           });
 
           var config = {

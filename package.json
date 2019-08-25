@@ -33,7 +33,7 @@
     "test:unit": "lerna run --parallel --stream test",
     "lint": "lerna run --parallel --stream lint",
     "pretest": "npm run build --prefix e2e/test-env",
-    "test": "npm run test:unit"
+    "test": "npm run test:unit && npm run e2e:ci"
   },
   "husky": {
     "hooks": {
