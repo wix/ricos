@@ -1,8 +1,6 @@
 import { INLINE_TOOLBAR_BUTTONS } from '../cypress/dataHooks';
 
 describe('editor', () => {
-  Cypress.env('RETRIES', 2);
-
   beforeEach(() => cy.switchToDesktop());
 
   it('should allow to enter text', () => {
