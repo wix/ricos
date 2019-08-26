@@ -50,6 +50,5 @@
     "wix-rich-content-plugin-video": "5.0.1",
     "wix-rich-content-viewer": "5.0.1"
   },
-  "private": true,
-  "devDependencies": {}
+  "private": true
 }
