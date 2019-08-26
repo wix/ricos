@@ -7,16 +7,16 @@ const resizeForDesktop = () => cy.viewport('macbook-15');
 const resizeForMobile = () => cy.viewport('iphone-5');
 
 const buildQuery = params => {
-  const parameters = params.filter(param => param);
+  const parameters = Object.keys(params).filter(param => params[param]);
   if (parameters.length === 0) return '';
   return '?' + parameters.join('&');
 };
 
 const getUrl = (componentId, fixtureName = '') =>
-  `/${componentId}${fixtureName ? '/' + fixtureName : ''}${buildQuery([
-    isMobile ? 'mobile' : '',
-    isHebrew ? 'he' : '',
-  ])}`;
+  `/${componentId}${fixtureName ? '/' + fixtureName : ''}${buildQuery({
+    mobile: isMobile,
+    he: isHebrew,
+  })}`;
 
 // Viewport size commands
 
@@ -59,8 +59,8 @@ Cypress.Commands.add('matchContentSnapshot', () => {
     .toMatchSnapshot();
 });
 
-Cypress.Commands.add('matchSnapshots', () => {
-  cy.matchImageSnapshot().matchContentSnapshot();
+Cypress.Commands.add('matchSnapshots', options => {
+  cy.matchImageSnapshot(options).matchContentSnapshot();
 });
 
 // Editor commands
