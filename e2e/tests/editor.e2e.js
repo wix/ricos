@@ -62,7 +62,7 @@ describe('editor', () => {
         cy.loadEditor('images').openImageSettings();
       });
 
-      afterEach(() => cy.matchSnapshots());
+      afterEach(() => cy.matchSnapshots({ capture: 'viewport' }));
     });
 
     context('mobile', () => {
@@ -82,7 +82,7 @@ describe('editor', () => {
         cy.loadEditor('images').openImageSettings();
       });
 
-      afterEach(() => cy.matchSnapshots());
+      afterEach(() => cy.matchSnapshots({ capture: 'viewport' }));
     });
   });
 });
