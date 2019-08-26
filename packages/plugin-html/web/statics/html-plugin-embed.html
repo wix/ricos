@@ -145,13 +145,9 @@
           }, delay);
         }
 
-        var oldHeight;
         var sendHeight = function() {
           var height = getHeight();
-          if (height !== oldHeight) {
-            oldHeight = height;
-            parent.postMessage({ type: 'htmlPlugin:heightResize', id: id, height: height }, '*');
-          }
+          parent.postMessage({ type: 'htmlPlugin:heightResize', id: id, height: height }, '*');
         };
 
         function setupMutationObserver() {

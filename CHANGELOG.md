@@ -28,6 +28,12 @@
   - [4bb51408](https://github.com/wix-incubator/rich-content/commit/4bb51408) hide toolbar before snapshot comparison
 <hr/>
 
+## 4.0.17 (Aug 26, 2019)
+### :bug: Bug Fix
+- `html`
+  - [#370](https://github.com/wix-incubator/rich-content/pull/370) flaky sendHeight from html
+<hr/>
+
 ## 4.0.16 (Aug 26, 2019)
 ### :bug: Bug Fix
 - `html`
