@@ -202,9 +202,15 @@ Cypress.Commands.add('openPluginToolbar', () => {
   cy.get('#side_bar');
 });
 
+Cypress.Commands.add('openAddPluginModal', () => {
+  cy.get('[data-hook="addPluginFloatingToolbar"]').click();
+  cy.get('[aria-label="Add Plugin"]');
+});
+
 Cypress.Commands.add('openImageSettings', () => {
   cy.get('[data-hook=imageViewer] [data-hook=imageViewer]:first').click({ force: true });
-  cy.get('[data-tip=Settings]').click();
+  cy.get('[aria-label=Settings]').click();
+  cy.get('[data-hook="imageSettings"]');
 });
 
 // disable screenshots in debug mode. So there is no diffrence to ci.
