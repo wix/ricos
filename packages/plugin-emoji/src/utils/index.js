@@ -7,6 +7,7 @@ import getWordAt from './getWordAt';
 import mapUnicode from './mappedUnicode';
 import positionSuggestions from './positionSuggestions';
 import getGroupEmojis from './getGroupEmojis';
+import addEmojiBlock from './addEmojiBlock';
 
 export {
   convertShortNameToUnicode,
@@ -18,4 +19,5 @@ export {
   mapUnicode,
   positionSuggestions,
   getGroupEmojis,
+  addEmojiBlock,
 };

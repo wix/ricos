@@ -11,7 +11,6 @@ import {
   FaRegFutbol,
 } from 'react-icons/fa';
 export const EMOJI_TYPE = 'wix-draft-plugin-emoji';
-export const ALIGN_CENTER = 'center';
 
 export const getEmojiGroups = t => [
   {
@@ -58,7 +57,7 @@ export const getEmojiGroups = t => [
 
 export const DEFAULTS = {
   config: {
-    alignment: ALIGN_CENTER,
+    alignment: 'left',
     size: 'small',
     width: 'fit-content',
   },

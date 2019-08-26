@@ -11,21 +11,7 @@ class EmojiComponent extends PureComponent {
   }
 
   render() {
-    return (
-      <span
-        className="emoji___dIvkU"
-        title=":mount_fuji:"
-        style={{
-          backgroundImage: `url("//cdn.jsdelivr.net/emojione/assets/svg/1f5fb.svg?v=2.2.7")`,
-        }}
-      >
-        <span data-offset-key="2n2oa-7-0">
-          <span role="img" aria-label="emoji-img-label" data-text="true">
-            🗻
-          </span>
-        </span>
-      </span>
-    );
+    return <span>{this.props.componentData.emoji}</span>;
   }
 }
 

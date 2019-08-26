@@ -3,7 +3,7 @@ import { TOOLBARS, decorateComponentWithProps, getModalStyles } from 'wix-rich-c
 import EmojiPreviewModal from './emojiPreviewModal';
 import { EmojiPluginIcon } from '../icons';
 
-export default ({ helpers, t, settings, isMobile }) => {
+export default ({ helpers, t, settings, isMobile, getEditorState }) => {
   return [
     {
       type: 'modal',
@@ -12,7 +12,7 @@ export default ({ helpers, t, settings, isMobile }) => {
       Icon: EmojiPluginIcon,
       componentData: settings.componentDataDefaults || DEFAULTS,
       toolbars: settings.insertToolbars || [TOOLBARS.FOOTER, TOOLBARS.SIDE],
-      modalElement: decorateComponentWithProps(EmojiPreviewModal, settings),
+      modalElement: decorateComponentWithProps(EmojiPreviewModal, { getEditorState, ...settings }),
       modalStyles: isMobile
         ? getModalStyles({ customStyles: MobileFullScreenCustomStyle, fullScreen: true })
         : null,
