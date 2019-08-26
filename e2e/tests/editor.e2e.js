@@ -41,24 +41,48 @@ describe('editor', () => {
   context('when in hebrew locale', () => {
     beforeEach(() => cy.switchToHebrew());
 
-    it('should render plugin toolbar in rtl', () => {
-      cy.loadEditor()
-        .focusEditor()
-        .openPluginToolbar();
+    context('desktop', () => {
+      beforeEach(() => cy.switchToDesktop());
+
+      it('should render plugin toolbar in rtl', () => {
+        cy.loadEditor()
+          .focusEditor()
+          .openPluginToolbar();
+      });
+
+      it('should render text toolbar in rtl', () => {
+        cy.loadEditor('plain').setSelection(0, 8);
+      });
+
+      it('should render rtl and ltr text correctly', () => {
+        cy.loadEditor('hebrew');
+      });
+
+      it('should render external modal in rtl', () => {
+        cy.loadEditor('images').openImageSettings();
+      });
+
+      afterEach(() => cy.matchSnapshots());
     });
 
-    it('should render text toolbar in rtl', () => {
-      cy.loadEditor('plain').setSelection(0, 8);
-    });
+    context('mobile', () => {
+      beforeEach(() => cy.switchToMobile());
 
-    it('should render rtl and ltr text correctly', () => {
-      cy.loadEditor('hebrew');
-    });
+      it('should render add plugin modal in rtl', () => {
+        cy.loadEditor()
+          .focusEditor()
+          .openAddPluginModal();
+      });
 
-    it('should render external modal in rtl', () => {
-      cy.loadEditor('images').openImageSettings();
-    });
+      it('should render rtl and ltr text correctly', () => {
+        cy.loadEditor('hebrew');
+      });
 
-    afterEach(() => cy.matchSnapshots());
+      it('should render external modal in rtl', () => {
+        cy.loadEditor('images').openImageSettings();
+      });
+
+      afterEach(() => cy.matchSnapshots());
+    });
   });
 });
