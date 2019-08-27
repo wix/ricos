@@ -65,7 +65,6 @@ export { mergeStyles } from './Utils/mergeStyles';
 export { default as normalizeInitialState } from './Utils/normalization/normalizeInitialState';
 export { validate, getContentStateSchema } from './Utils/data-schema-validator';
 export { isHexColor } from './Components/ColorPicker/utils';
-export { withResizeHandlers } from './Utils/withResizeHandlers';
 
 export {
   isValidUrl,

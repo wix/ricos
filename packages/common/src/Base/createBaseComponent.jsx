@@ -33,7 +33,7 @@ const createBaseComponent = ({
 
     constructor(props) {
       super(props);
-      this.state = { componentState: {}, ...this.stateFromProps(props) };
+      this.state = { componentState: {}, ...this.stateFromProps(props), init: true };
     }
 
     componentWillReceiveProps(nextProps) {
@@ -72,6 +72,7 @@ const createBaseComponent = ({
       ].map(subscription =>
         pubsub.subscribeOnBlock({ key: subscription[0], callback: subscription[1], blockKey })
       );
+      this.setState({ init: false });
     }
 
     componentDidUpdate() {
@@ -219,7 +220,22 @@ const createBaseComponent = ({
     }
 
     render = () => {
-      const { blockProps, className, onClick, selection } = this.props;
+      const {
+        blockProps,
+        className,
+        onClick,
+        selection,
+        onMouseDown,
+        onMouseMove,
+        onMouseLeave,
+        style,
+      } = this.props;
+      const resizeProps = {
+        onMouseDown,
+        onMouseMove,
+        onMouseLeave,
+        style: { ...style, minWidth: 350 },
+      };
       const { componentData, readOnly } = this.state;
       const { link, width: currentWidth, height: currentHeight } = componentData.config || {};
       const { width: initialWidth, height: initialHeight } = settings || {};
@@ -293,7 +309,7 @@ const createBaseComponent = ({
 
       /* eslint-disable jsx-a11y/anchor-has-content */
       return (
-        <div style={sizeStyles} className={ContainerClassNames}>
+        <div style={sizeStyles} className={ContainerClassNames} {...resizeProps}>
           {!isNil(link) ? (
             <div>
               {component}
@@ -322,6 +338,10 @@ const createBaseComponent = ({
     selection: PropTypes.object.isRequired,
     className: PropTypes.string,
     onClick: PropTypes.func,
+    onMouseMove: PropTypes.func,
+    onMouseDown: PropTypes.func,
+    onMouseLeave: PropTypes.func,
+    style: PropTypes.object,
   };
 
   return WrappedComponent;

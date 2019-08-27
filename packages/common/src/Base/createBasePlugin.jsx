@@ -5,7 +5,6 @@ import createToolbar from './createBaseToolbar';
 import createInsertPluginButton from './createBaseInsertPluginButton';
 import { simplePubsub } from '../Utils/simplePubsub';
 import { getToolbarTheme } from '../Utils/getToolbarTheme';
-import { withResizeHandlers } from '../Utils/withResizeHandlers';
 
 const updateEntityData = (contentBlock, { getEditorState, setEditorState }, getNewData) => {
   const entityKey = contentBlock.getEntityAt(0);
@@ -117,12 +116,8 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
       isMobile,
     });
 
-  const resizableBaseComponent = withResizeHandlers(baseComponent);
-
   const decoratedCompWithBase =
-    resizableBaseComponent && config.decorator
-      ? config.decorator(resizableBaseComponent)
-      : resizableBaseComponent;
+    baseComponent && config.decorator ? config.decorator(baseComponent) : baseComponent;
 
   const InlineModals = config.inlineModals;
 
