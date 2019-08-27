@@ -6,7 +6,9 @@ const isSSR = typeof window === 'undefined';
 
 class IframeHtml extends Component {
   state = { shouldRender: false };
-  id = !isSSR && performance.now().toString(36);
+  id = Math.random()
+    .toString(36)
+    .substr(2, 9);
 
   componentDidMount() {
     this.setState({ shouldRender: true });

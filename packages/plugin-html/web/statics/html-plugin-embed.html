@@ -145,10 +145,10 @@
           }, delay);
         }
 
-        var sendHeight = function() {
+        function sendHeight() {
           var height = getHeight();
           parent.postMessage({ type: 'htmlPlugin:heightResize', id: id, height: height }, '*');
-        };
+        }
 
         function setupMutationObserver() {
           var target = document.querySelector('body');
@@ -195,7 +195,6 @@
         document.open('text/html', 'replace');
         document.write(content);
         document.close();
-
         initSendHeight(event.data.id);
       });
     </script>
