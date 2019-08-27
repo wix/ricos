@@ -234,7 +234,7 @@ const createBaseComponent = ({
         onMouseDown,
         onMouseMove,
         onMouseLeave,
-        style: { ...style, minWidth: 350 },
+        style,
       };
       const { componentData, readOnly } = this.state;
       const { link, width: currentWidth, height: currentHeight } = componentData.config || {};
