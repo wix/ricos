@@ -9,6 +9,7 @@ describe('editor', () => {
         'Leverage agile frameworks',
         'to provide a robust synopsis for high level overviews.',
       ])
+      .blurEditor()
       .matchSnapshots();
   });
 
