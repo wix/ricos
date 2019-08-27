@@ -27,6 +27,7 @@ const createBaseComponent = ({
   relValue,
   t,
   isMobile,
+  pluginDecorationProps = () => ({}),
 }) => {
   class WrappedComponent extends Component {
     static displayName = createHocName('BaseComponent', PluginComponent);
@@ -220,22 +221,8 @@ const createBaseComponent = ({
     }
 
     render = () => {
-      const {
-        blockProps,
-        className,
-        onClick,
-        selection,
-        onMouseDown,
-        onMouseMove,
-        onMouseLeave,
-        style,
-      } = this.props;
-      const resizeProps = {
-        onMouseDown,
-        onMouseMove,
-        onMouseLeave,
-        style,
-      };
+      const { blockProps, className, onClick, selection } = this.props;
+      const decorationProps = pluginDecorationProps(this.props);
       const { componentData, readOnly } = this.state;
       const { link, width: currentWidth, height: currentHeight } = componentData.config || {};
       const { width: initialWidth, height: initialHeight } = settings || {};
@@ -309,7 +296,7 @@ const createBaseComponent = ({
 
       /* eslint-disable jsx-a11y/anchor-has-content */
       return (
-        <div style={sizeStyles} className={ContainerClassNames} {...resizeProps}>
+        <div style={sizeStyles} className={ContainerClassNames} {...decorationProps}>
           {!isNil(link) ? (
             <div>
               {component}
@@ -338,10 +325,6 @@ const createBaseComponent = ({
     selection: PropTypes.object.isRequired,
     className: PropTypes.string,
     onClick: PropTypes.func,
-    onMouseMove: PropTypes.func,
-    onMouseDown: PropTypes.func,
-    onMouseLeave: PropTypes.func,
-    style: PropTypes.object,
   };
 
   return WrappedComponent;

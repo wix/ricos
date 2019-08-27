@@ -1,5 +1,9 @@
 import createToolbar from './toolbar';
-import { createBasePlugin } from 'wix-rich-content-common';
+import {
+  createBasePlugin,
+  PLUGIN_DECORATION_PROPS,
+  PLUGIN_DECORATIONS,
+} from 'wix-rich-content-common';
 import { Component } from './image-component';
 import { IMAGE_TYPE, IMAGE_TYPE_LEGACY } from './types';
 
@@ -20,6 +24,7 @@ const createImagePlugin = (config = {}) => {
     component: Component,
     type: IMAGE_TYPE,
     legacyType: IMAGE_TYPE_LEGACY,
+    pluginDecorationProps: PLUGIN_DECORATION_PROPS[PLUGIN_DECORATIONS.RESIZEABLE],
     toolbar: createToolbar({
       helpers,
       anchorTarget,
