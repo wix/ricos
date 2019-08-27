@@ -11,7 +11,7 @@ class IframeHtml extends Component {
     .substr(2, 9);
 
   componentDidMount() {
-    this.setState({ shouldRender: true })
+    this.setState({ shouldRender: true });
     !isSSR && window.addEventListener('message', this.handleIframeMessage);
   }
 

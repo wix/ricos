@@ -27,6 +27,8 @@
 - `e2e`
   - [4bb51408](https://github.com/wix-incubator/rich-content/commit/4bb51408) hide toolbar before snapshot comparison
   - [#373](https://github.com/wix-incubator/rich-content/pull/373) fix flaky test
+- `general`
+  - [#372](https://github.com/wix-incubator/rich-content/pull/372) github actions
 <hr/>
 
 ## 4.0.18 (Aug 27, 2019)
@@ -358,7 +360,7 @@
 - `video`
   - [#293](https://github.com/wix-incubator/rich-content/pull/293) fix ratio
 ### :book: Documentation
-- [#290](https://github.com/wix-incubator/rich-content/pull/290) [Plugin Customization doc]('./docs/PluginCustomization.md') update on `text-color`
+  - [#290](https://github.com/wix-incubator/rich-content/pull/290) [Plugin Customization doc]('./docs/PluginCustomization.md') update on `text-color`
 <hr/>
 
 ## 3.3.2 (Apr 29, 2019)
