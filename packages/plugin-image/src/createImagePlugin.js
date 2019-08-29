@@ -24,7 +24,15 @@ const createImagePlugin = (config = {}) => {
     component: Component,
     type: IMAGE_TYPE,
     legacyType: IMAGE_TYPE_LEGACY,
-    pluginDecorationProps: PLUGIN_DECORATION_PROPS[PLUGIN_DECORATIONS.RESIZEABLE],
+    pluginDecorationProps: (props, componentData) => {
+      const resizeableProps = PLUGIN_DECORATION_PROPS[PLUGIN_DECORATIONS.RESIZEABLE](props);
+      const { size } = componentData.config;
+      const isInlineSize = !size || size === 'inline';
+      const { width, ...rest } = resizeableProps.style;
+      const style = isInlineSize ? { ...rest, width: Math.max(width, 350) } : { ...rest };
+
+      return { ...resizeableProps, style };
+    },
     toolbar: createToolbar({
       helpers,
       anchorTarget,
