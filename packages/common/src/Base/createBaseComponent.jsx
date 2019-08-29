@@ -34,7 +34,7 @@ const createBaseComponent = ({
 
     constructor(props) {
       super(props);
-      this.state = { componentState: {}, ...this.stateFromProps(props), init: true };
+      this.state = { componentState: {}, ...this.stateFromProps(props) };
     }
 
     componentWillReceiveProps(nextProps) {
@@ -73,7 +73,6 @@ const createBaseComponent = ({
       ].map(subscription =>
         pubsub.subscribeOnBlock({ key: subscription[0], callback: subscription[1], blockKey })
       );
-      this.setState({ init: false });
     }
 
     componentDidUpdate() {
@@ -222,8 +221,8 @@ const createBaseComponent = ({
 
     render = () => {
       const { blockProps, className, onClick, selection } = this.props;
-      const decorationProps = pluginDecorationProps(this.props);
       const { componentData, readOnly } = this.state;
+      const decorationProps = pluginDecorationProps(this.props, componentData);
       const { link, width: currentWidth, height: currentHeight } = componentData.config || {};
       const { width: initialWidth, height: initialHeight } = settings || {};
       const isEditorFocused = selection.getHasFocus();
