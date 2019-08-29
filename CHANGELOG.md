@@ -16,6 +16,7 @@
 ### :rocket: New Feature
 - `editor`
   - [#359](https://github.com/wix-incubator/rich-content/pull/359) added support for rtl in editor modals
+  - [#374](https://github.com/wix-incubator/rich-content/pull/374) when removing line adjacent to atomic block removes line and not block
 - `general`
   - [#358](https://github.com/wix-incubator/rich-content/pull/358) viewport based lazy loading for plugin components
 ### :bug: Bug Fix
