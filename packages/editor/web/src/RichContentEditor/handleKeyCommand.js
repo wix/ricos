@@ -1,5 +1,7 @@
 import { EditorState, RichUtils, Modifier } from '@wix/draft-js';
-import { isAtomicBlockFocused, removeBlock, COMMANDS } from 'wix-rich-content-common';
+import { COMMANDS } from 'wix-rich-content-common';
+import handleBackspaceCommand from './handleBackspaceCommand';
+import handleDeleteCommand from './handleDeleteCommand';
 
 export default (updateEditorState, customHandlers) => (command, editorState) => {
   let newState, contentState;
@@ -27,10 +29,10 @@ export default (updateEditorState, customHandlers) => (command, editorState) => 
         newState = RichUtils.toggleBlockType(editorState, command);
         break;
       case COMMANDS.BACKSPACE:
+        newState = handleBackspaceCommand(editorState);
+        break;
       case COMMANDS.DELETE:
-        if (isAtomicBlockFocused(editorState)) {
-          newState = removeBlock(editorState, editorState.getSelection().getAnchorKey());
-        }
+        newState = handleDeleteCommand(editorState);
         break;
       default:
         newState = RichUtils.handleKeyCommand(editorState, command);
