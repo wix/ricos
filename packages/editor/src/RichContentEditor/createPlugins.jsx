@@ -1,6 +1,6 @@
 import { composeDecorators } from 'draft-js-plugins-editor';
 import createFocusPlugin from 'draft-js-focus-plugin';
-import createResizeablePlugin from 'draft-js-resizeable-plugin';
+import createResizeablePlugin from 'wix-rich-content-plugin-resize';
 // import createBlockDndPlugin from 'draft-js-drag-n-drop-plugin';
 
 const createPlugins = ({
