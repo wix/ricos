@@ -18,6 +18,7 @@ const createPlugins = ({
   const focusPlugin = createFocusPlugin();
   const resizePlugin = createResizeablePlugin({
     horizontal: 'absolute',
+    minWidth: 350,
   });
   // const dndPlugin = createBlockDndPlugin();
 

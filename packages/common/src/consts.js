@@ -71,5 +71,6 @@ export const PLUGIN_DECORATION_PROPS = {
     onMouseMove: props.onMouseMove,
     onMouseLeave: props.onMouseLeave,
     style: props.style,
+    width: props.width,
   }),
 };

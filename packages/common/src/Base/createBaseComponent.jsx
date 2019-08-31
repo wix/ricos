@@ -28,6 +28,7 @@ const createBaseComponent = ({
   t,
   isMobile,
   pluginDecorationProps = () => ({}),
+  componentWillReceiveDecorationProps = () => {},
 }) => {
   class WrappedComponent extends Component {
     static displayName = createHocName('BaseComponent', PluginComponent);
@@ -38,8 +39,13 @@ const createBaseComponent = ({
     }
 
     componentWillReceiveProps(nextProps) {
+      componentWillReceiveDecorationProps(this.props, nextProps, this.onResize);
       this.setState(this.stateFromProps(nextProps));
     }
+
+    onResize = () => {
+      this.updateComponentConfig({ size: 'inline' });
+    };
 
     stateFromProps(props) {
       const { getData, readOnly } = props.blockProps;
@@ -70,9 +76,7 @@ const createBaseComponent = ({
       this.subscriptionsOnBlock = [
         ['htmlPluginMaxHeight', this.onHtmlPluginMaxHeightChange],
         ['componentLink', this.onComponentLinkChange],
-      ].map(subscription =>
-        pubsub.subscribeOnBlock({ key: subscription[0], callback: subscription[1], blockKey })
-      );
+      ].map(([key, callback]) => pubsub.subscribeOnBlock({ key, callback, blockKey }));
     }
 
     componentDidUpdate() {

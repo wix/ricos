@@ -27,11 +27,19 @@ const createImagePlugin = (config = {}) => {
     pluginDecorationProps: (props, componentData) => {
       const resizeableProps = PLUGIN_DECORATION_PROPS[PLUGIN_DECORATIONS.RESIZEABLE](props);
       const { size } = componentData.config;
-      const isInlineSize = !size || size === 'inline';
-      const { width, ...rest } = resizeableProps.style;
-      const style = isInlineSize ? { ...rest, width: Math.max(width, 350) } : { ...rest };
-
+      const isInlineSize = size === 'inline';
+      const { width, ...rest } = resizeableProps.style; // eslint-disable-line
+      const style = isInlineSize ? resizeableProps.style : { ...rest };
       return { ...resizeableProps, style };
+    },
+    componentWillReceiveDecorationProps: (props, nextProps, onChange) => {
+      const { width } = PLUGIN_DECORATION_PROPS[PLUGIN_DECORATIONS.RESIZEABLE](props);
+      const { width: nextWidth } = PLUGIN_DECORATION_PROPS[PLUGIN_DECORATIONS.RESIZEABLE](
+        nextProps
+      );
+      if (width !== nextWidth) {
+        onChange();
+      }
     },
     toolbar: createToolbar({
       helpers,

@@ -108,6 +108,7 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
       theme: config.theme,
       type: config.type,
       pluginDecorationProps: config.pluginDecorationProps,
+      componentWillReceiveDecorationProps: config.componentWillReceiveDecorationProps,
       pubsub,
       settings,
       helpers,

@@ -20,11 +20,15 @@ export default ({ config, store }) => WrappedComponent =>
       horizontal: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
       style: PropTypes.object,
       resizeSteps: PropTypes.number,
+      minHeight: PropTypes.number,
+      minWidth: PropTypes.number,
     };
     static defaultProps = {
       horizontal: 'relative',
       vertical: false,
       resizeSteps: 1,
+      minHeight: 40,
+      minWidth: 40,
       ...config,
     };
     state = {
@@ -120,14 +124,18 @@ export default ({ config, store }) => WrappedComponent =>
         const newState = {};
         if ((isLeft || isRight) && horizontal === 'relative') {
           newState.width = resizeSteps ? round(widthPerc, resizeSteps) : widthPerc;
+          newState.width = Math.max(widthPerc, this.props.minWidth);
         } else if ((isLeft || isRight) && horizontal === 'absolute') {
           newState.width = resizeSteps ? round(width, resizeSteps) : width;
+          newState.width = Math.max(width, this.props.minWidth);
         }
 
         if ((isTop || isBottom) && vertical === 'relative') {
           newState.height = resizeSteps ? round(heightPerc, resizeSteps) : heightPerc;
+          newState.height = Math.max(heightPerc, this.props.minHeight);
         } else if ((isTop || isBottom) && vertical === 'absolute') {
           newState.height = resizeSteps ? round(height, resizeSteps) : height;
+          newState.height = Math.max(height, this.props.minHeight);
         }
 
         dragEvent.preventDefault();
@@ -172,17 +180,17 @@ export default ({ config, store }) => WrappedComponent =>
       if (horizontal === 'auto') {
         styles.width = 'auto';
       } else if (horizontal === 'relative') {
-        styles.width = `${width || blockProps.resizeData.width || 40}%`;
+        styles.width = `${width || blockProps.resizeData.width || this.props.minWidth}%`;
       } else if (horizontal === 'absolute') {
-        styles.width = `${width || blockProps.resizeData.width || 40}px`;
+        styles.width = `${width || blockProps.resizeData.width || this.props.minWidth}px`;
       }
 
       if (vertical === 'auto') {
         styles.height = 'auto';
       } else if (vertical === 'relative') {
-        styles.height = `${height || blockProps.resizeData.height || 40}%`;
+        styles.height = `${height || blockProps.resizeData.height || this.props.minHeight}%`;
       } else if (vertical === 'absolute') {
-        styles.height = `${height || blockProps.resizeData.height || 40}px`;
+        styles.height = `${height || blockProps.resizeData.height || this.props.minHeight}px`;
       }
 
       // Handle cursor
@@ -204,6 +212,7 @@ export default ({ config, store }) => WrappedComponent =>
             onMouseDown: this.mouseDown,
             onMouseMove: this.mouseMove,
             onMouseLeave: this.mouseLeave,
+            width: this.state.width || this.props.minWidth,
           };
 
       return (
