@@ -15,7 +15,7 @@ const buildQuery = params => {
 const getUrl = (componentId, fixtureName = '') =>
   `/${componentId}${fixtureName ? '/' + fixtureName : ''}${buildQuery({
     mobile: isMobile,
-    he: isHebrew,
+    hebrew: isHebrew,
   })}`;
 
 // Viewport size commands
