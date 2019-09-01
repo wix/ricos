@@ -59,7 +59,10 @@ describe('editor', () => {
       });
 
       it('should render external modal in rtl', () => {
-        cy.loadEditor('images').openImageSettings();
+        cy.loadEditor('images')
+          .openImageSettings()
+          .get('[data-hook="imageSettingsCaptionInput"]')
+          .blur();
       });
 
       afterEach(() => cy.matchSnapshots({ capture: 'viewport' }));
@@ -79,7 +82,10 @@ describe('editor', () => {
       });
 
       it('should render external modal in rtl', () => {
-        cy.loadEditor('images').openImageSettings();
+        cy.loadEditor('images')
+          .openImageSettings()
+          .get('[aria-label="Cancel"]')
+          .blur();
       });
 
       afterEach(() => cy.matchSnapshots({ capture: 'viewport' }));

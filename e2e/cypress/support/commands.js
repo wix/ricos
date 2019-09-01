@@ -226,7 +226,6 @@ Cypress.Commands.add('openAddPluginModal', () => {
 Cypress.Commands.add('openImageSettings', () => {
   cy.get('[data-hook=imageViewer] [data-hook=imageViewer]:first').click({ force: true });
   cy.get('[aria-label=Settings]').click();
-  cy.get('[data-hook="imageSettings"]');
 });
 
 // disable screenshots in debug mode. So there is no diffrence to ci.
