@@ -22,6 +22,8 @@
 ### :bug: Bug Fix
 - `example`
   - [32580b58](https://github.com/wix-incubator/rich-content/commit/32580b58) webpack: SCSS plugin rule exclude fixed
+- `image`
+  - [#375](https://github.com/wix-incubator/rich-content/pull/375) image plugin doesn't render default or empty caption
 ### :house: Internal
 - `general`
   - [#365](https://github.com/wix-incubator/rich-content/pull/365) moved packages into web directory
