@@ -260,9 +260,9 @@ export default function createToolbar({
       };
 
       switch (button.type) {
-        case BUTTONS.ALIGNMENT_LEFT:
-        case BUTTONS.ALIGNMENT_CENTER:
-        case BUTTONS.ALIGNMENT_RIGHT:
+        case BUTTONS.TEXT_ALIGN_LEFT:
+        case BUTTONS.TEXT_ALIGN_CENTER:
+        case BUTTONS.TEXT_ALIGN_RIGHT:
           return (
             <Button
               alignment={alignment}
@@ -293,9 +293,9 @@ export default function createToolbar({
         case BUTTONS.SIZE_ORIGINAL:
         case BUTTONS.SIZE_CONTENT:
         case BUTTONS.SIZE_FULL_WIDTH:
-        case BUTTONS.SIZE_SMALL_LEFT:
+        case BUTTONS.ALIGN_LEFT:
         case BUTTONS.SIZE_SMALL_CENTER:
-        case BUTTONS.SIZE_SMALL_RIGHT:
+        case BUTTONS.ALIGN_RIGHT:
           return (
             <Button
               size={size}

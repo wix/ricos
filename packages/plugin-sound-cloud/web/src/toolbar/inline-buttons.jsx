@@ -8,8 +8,8 @@ export default ({ t, isMobile }) => {
     { keyName: 'sizeContent', type: BUTTONS.SIZE_CONTENT, mobile: false },
     { keyName: 'sizeFullWidth', type: BUTTONS.SIZE_FULL_WIDTH, mobile: false },
     { keyName: 'separator1', type: BUTTONS.SEPARATOR, mobile: false },
-    { keyName: 'sizeSmallLeft', type: BUTTONS.SIZE_SMALL_LEFT, mobile: false },
-    { keyName: 'sizeSimallRight', type: BUTTONS.SIZE_SMALL_RIGHT, mobile: false },
+    { keyName: 'sizeSmallLeft', type: BUTTONS.ALIGN_LEFT, mobile: false },
+    { keyName: 'sizeSimallRight', type: BUTTONS.ALIGN_RIGHT, mobile: false },
     { keyName: 'separator2', type: BUTTONS.SEPARATOR, mobile: false },
     {
       keyName: 'replace',

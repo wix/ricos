@@ -34,8 +34,8 @@ export default ({ t, anchorTarget, relValue }) => {
     { keyName: 'sizeContent', type: BUTTONS.SIZE_CONTENT, mobile: false },
     { keyName: 'sizeFullWidth', type: BUTTONS.SIZE_FULL_WIDTH, mobile: false },
     { keyName: 'separator2', type: BUTTONS.SEPARATOR, mobile: false },
-    { keyName: 'sizeSmallLeft', type: BUTTONS.SIZE_SMALL_LEFT, mobile: false },
-    { keyName: 'sizeSmallRight', type: BUTTONS.SIZE_SMALL_RIGHT, mobile: false },
+    { keyName: 'sizeSmallLeft', type: BUTTONS.ALIGN_LEFT, mobile: false },
+    { keyName: 'sizeSmallRight', type: BUTTONS.ALIGN_RIGHT, mobile: false },
     { keyName: 'separator3', type: BUTTONS.SEPARATOR, mobile: true },
     {
       keyName: 'manage_media',
