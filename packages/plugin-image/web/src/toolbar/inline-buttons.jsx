@@ -5,7 +5,6 @@ import { MediaReplaceIcon } from '../icons';
 export default ({ t, anchorTarget, relValue, uiSettings, isMobile }) => {
   const modalStyles = getModalStyles({ isMobile });
   return [
-    { keyName: 'sizeOriginal', type: BUTTONS.SIZE_ORIGINAL, mobile: false },
     { keyName: 'sizeSmallCenter', type: BUTTONS.SIZE_SMALL_CENTER, mobile: false },
     { keyName: 'sizeContent', type: BUTTONS.SIZE_CONTENT, mobile: false },
     { keyName: 'sizeFullWidth', type: BUTTONS.SIZE_FULL_WIDTH, mobile: false },
