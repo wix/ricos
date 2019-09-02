@@ -78,14 +78,18 @@ export const SizeSmallCenterButton = createBlockAlignmentAndSizeButton({
 });
 
 export const SizeSmallLeftButton = createBlockAlignmentAndSizeButton({
-  size: 'small',
   alignment: 'left',
   Icon: SizeSmallLeftIcon,
   tooltipTextKey: 'SizeSmallLeftButton_Tooltip',
 });
 
+export const AlignCenterButton = createBlockAlignmentAndSizeButton({
+  alignment: 'center',
+  Icon: SizeSmallCenterIcon,
+  tooltipTextKey: 'AlignCenterButton_Tooltip',
+});
+
 export const SizeSmallRightButton = createBlockAlignmentAndSizeButton({
-  size: 'small',
   alignment: 'right',
   Icon: SizeSmallRightIcon,
   tooltipTextKey: 'SizeSmallRightButton_Tooltip',
@@ -141,6 +145,7 @@ export const BUTTONS_BY_KEY = {
   [BUTTONS.SIZE_FULL_WIDTH]: SizeFullWidthButton,
   [BUTTONS.ALIGN_LEFT]: SizeSmallLeftButton,
   [BUTTONS.SIZE_SMALL_CENTER]: SizeSmallCenterButton,
+  [BUTTONS.ALIGN_CENTER]: AlignCenterButton,
   [BUTTONS.ALIGN_RIGHT]: SizeSmallRightButton,
   [BUTTONS.TEXT_ALIGN_LEFT]: AlignmentLeftButton,
   [BUTTONS.TEXT_ALIGN_CENTER]: AlignmentCenterButton,

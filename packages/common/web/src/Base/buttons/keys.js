@@ -10,6 +10,7 @@ export default {
   SIZE_SMALL_CENTER: 'size-small-center',
   ALIGN_LEFT: 'size-small-left',
   ALIGN_RIGHT: 'size-small-right',
+  ALIGN_CENTER: 'align-center',
   SIZE_CONTENT: 'size-content',
   SIZE_FULL_WIDTH: 'size-full-width',
   SIZE_SMALL: 'size-small',

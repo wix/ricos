@@ -296,6 +296,7 @@ export default function createToolbar({
         case BUTTONS.ALIGN_LEFT:
         case BUTTONS.SIZE_SMALL_CENTER:
         case BUTTONS.ALIGN_RIGHT:
+        case BUTTONS.ALIGN_CENTER:
           return (
             <Button
               size={size}
