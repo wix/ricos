@@ -11,6 +11,10 @@
 ### :rocket: New Feature
 - `general`
   - [#358](https://github.com/wix-incubator/rich-content/pull/358) viewport based lazy loading for plugin components
+- `image`
+  - [#377](https://github.com/wix-incubator/rich-content/pull/377) custom resizing implemented
+- `resize`
+  - [#377](https://github.com/wix-incubator/rich-content/pull/377) new plugin added (based on `draftjs-resizeable-plugin`)
 ### :bug: Bug Fix
 - `editor`
   - [#357](https://github.com/wix-incubator/rich-content/pull/357) fix footerToolbar css
