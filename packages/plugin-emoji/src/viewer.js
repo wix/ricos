@@ -1,2 +1,2 @@
-export { typeMapper as EMOJITYPEMAPPER } from './typeMapper';
+export { typeMapper as emojiTypeMapper } from './typeMapper';
 export { EMOJI_TYPE } from './constants';

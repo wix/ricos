@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    border-bottom: 1px solid #778899;
+    padding-top: 10px;
     padding-bottom: 10px;
     cursor: pointer;
 }
@@ -13,9 +13,10 @@
 
 .emojiPreviewModal_emojis_container{
     width: 100%;
-    height: 252px;
+    height: 285px;
     padding-top: 5px;
     overflow-y: scroll;
+    overflow-x: hidden;
 }
 .emojiPreviewModal_emoji{
     width: 30px;
@@ -25,4 +26,20 @@
 }
 .emojiPreviewModal_emoji:hover{
     opacity: .5;
+}
+
+.emojiPreviewModal_headerTitle{
+    color: #6e7175;
+    font-size: 20px;
+    font-weight: bold;
+}
+.emojiPreviewModal_scrollbar_thumb{   
+    background: #b2b2b2;
+    border-radius: 4px;
+    width: 4px;
+    margin-left: 1px;
+    cursor: pointer;
+}
+.emojiPreviewModal_scrollbar_thumb:hover{
+    background: #000;
 }

@@ -4,7 +4,6 @@ import decodeOffsetKey from './decodeOffsetKey';
 import emojiList from './emojiList';
 import getSearchText from './getSearchText';
 import getWordAt from './getWordAt';
-import mapUnicode from './mappedUnicode';
 import positionSuggestions from './positionSuggestions';
 import getGroupEmojis from './getGroupEmojis';
 import addEmojiBlock from './addEmojiBlock';
@@ -16,7 +15,6 @@ export {
   emojiList,
   getSearchText,
   getWordAt,
-  mapUnicode,
   positionSuggestions,
   getGroupEmojis,
   addEmojiBlock,

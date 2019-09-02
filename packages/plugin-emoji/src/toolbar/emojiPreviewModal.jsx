@@ -3,6 +3,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import Scrollbars from 'react-custom-scrollbars';
 import { mergeStyles } from 'wix-rich-content-common';
 import { getGroupEmojis } from '../utils';
 import { getEmojiGroups } from '../constants';
@@ -13,16 +14,19 @@ export default class EmojiPreviewModal extends Component {
     super(props);
     this.styles = mergeStyles({ styles, theme: props.theme });
     const { t } = props;
+    this.scrollbarRef = '';
     const getGroup = getEmojiGroups(t)[0];
     this.state = {
       activeGroup: getGroup || {},
       emojis: getGroupEmojis(getGroup.category) || [],
+      index: -1,
     };
   }
 
   onNavIconClicked = group => {
     this.setState({ activeGroup: group });
     this.setState({ emojis: getGroupEmojis(group.category) });
+    this.scrollbarRef.scrollToTop();
   };
 
   renderNavIcons = () => {
@@ -64,11 +68,24 @@ export default class EmojiPreviewModal extends Component {
     });
     return (
       <div>
-        <h3>{activeGroup.title}</h3>
+        <div className={this.styles.emojiPreviewModal_headerTitle}>{activeGroup.title}</div>
+        <Scrollbars
+          ref={ref => {
+            this.scrollbarRef = ref;
+          }}
+          style={{
+            height: '285px',
+          }}
+          renderThumbVertical={() => (
+            <div className={this.styles.emojiPreviewModal_scrollbar_thumb} />
+          )}
+          // onScroll={this.handleScroll}
+        >
+          {renderEmojis}
+        </Scrollbars>
         <div className={this.styles.emojiPreviewModal_emoji_icons_container}>
           {this.renderNavIcons()}
         </div>
-        <div className={this.styles.emojiPreviewModal_emojis_container}>{renderEmojis}</div>
       </div>
     );
   }
