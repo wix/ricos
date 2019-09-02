@@ -1,0 +1,39 @@
+@import '~wix-rich-content-common/dist/statics/styles/palette';
+@import '~wix-rich-content-common/dist/statics/styles/mixins';
+
+.textToolbar {
+  position: relative;
+  border: 1px solid #ddd;
+}
+
+.textToolbar_scrollableContainer {
+  width: 100%;
+  padding: 90px 0;
+  margin: -90px 0;
+  pointer-events: none;
+  & > * {
+    pointer-events: initial;
+  }
+}
+
+.textToolbar_buttons {
+}
+
+.textToolbar_responsiveSpacer {
+}
+
+.textToolbar_responsiveArrow {
+}
+
+.textToolbar_responsiveArrowStart,
+.textToolbar_responsiveArrowEnd {
+}
+
+.textToolbar_responsiveArrowStart_icon {
+}
+
+.textToolbar_responsiveArrowEnd_icon {
+}
+
+.textToolbar_extend {
+}

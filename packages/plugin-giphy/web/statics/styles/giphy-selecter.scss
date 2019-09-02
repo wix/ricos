@@ -1,0 +1,135 @@
+@import '~wix-rich-content-common/dist/statics/styles/mixins';
+@import '~wix-rich-content-common/dist/statics/styles/palette';
+
+.giphy_selecter_container {
+  padding-bottom: 17px;
+  width: 100%;
+  padding-top: 4px;
+  display: block;
+  @include phone {
+    padding-top: 5px;
+  }
+}
+
+.giphy_selecter_infinite_scroll_container {
+  position: absolute;
+  width: calc(100% - 21px);
+  left: 18px;
+  bottom: 0px;
+  z-index: 7;
+  height: calc(100% - 70px);
+  overflow: auto;
+  padding-right: 6px;
+  @include phone {
+    position: relative;
+    width: auto;
+    left: auto;
+    bottom: auto;
+    transform: none;
+    height: calc(100vh - 124px);
+    margin-top: 6px;
+    padding-right: 0px;
+    padding-left: 0px;
+    overflow: hidden;
+  }
+}
+
+.giphy_selecter_infinite_scroll {
+  width: calc(100% - 15px);
+  @include phone {
+    width: 100%;
+  }
+}
+
+.giphy_selecter_customize_scrollbar_container {
+  height: 100%;
+}
+
+.giphy_selecter_headerInfiniteScroll {
+  padding-right: 18px;
+  padding-bottom: 6px;
+}
+
+.giphy_selecter_scrollbarThumb {
+  background: #000000;
+  border-radius: 4px;
+  width: 4px;
+  margin-left: -2px;
+}
+
+.giphy_selecter_trending {
+  font-family: Helvetica;
+  font-size: 10px;
+  font-weight: 300;
+  font-style: oblique;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: rgba(0, 0, 0, 0.3);
+  width: auto;
+  float: left;
+}
+
+.giphy_selecter_powerdByGiphy {
+  text-align: right;
+  float: right;
+  padding-top: 4px;
+  @include phone {
+    padding-right: 0px;
+  }
+}
+
+.giphy_selecter_gif_img_container {
+  margin-bottom: 18px;
+  @include phone {
+    margin-right: 0px;
+  }
+  cursor: pointer;
+}
+
+.giphy_selecter_gif_img {
+  background: #eee;
+  min-height: 50px;
+  width: 100%;
+  display: block;
+  @include phone {
+    width: 100%;
+    margin-bottom: 21px;
+  }
+}
+
+.giphy_selecter_spinner_more {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.giphy_selecter_spinner_empty_modal {
+  position: absolute;
+  top: calc(50% - 17px);
+  left: calc(50% - 17px);
+  transform: translateX(-50%) translateY(-50%);
+  @include phone {
+    top: 50%;
+    left: 50%;
+  }
+}
+
+.giphy_selecter_error_msg {
+  width: 229px;
+  font-family: Helvetica;
+  font-size: 14px;
+  font-weight: 300;
+  text-align: center;
+  color: #000000;
+  line-height: 1.57;
+  padding: 0px 20px;
+  box-sizing: border-box;
+  position: absolute;
+  top: 137px;
+  left: 18px;
+  @include phone {
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+  }
+}

@@ -27,7 +27,7 @@ const dirsWithModifiedFiles = execSync('git status --porcelain=1')
 if (dirsWithModifiedFiles.length) {
   new Set(dirsWithModifiedFiles).forEach(dir => {
     try {
-      const npmTestCommand = `npm test --prefix ${baseDir}${dir}`;
+      const npmTestCommand = `npm test --prefix ${baseDir}${dir}/web`;
       console.log(chalk.blue(`Executing: ${npmTestCommand}`));
       execSync(npmTestCommand, { stdio: 'inherit' });
     } catch (error) {

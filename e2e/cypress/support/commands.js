@@ -155,15 +155,15 @@ function setInlineToolbarMenueItem(item, selection, butttonIndex) {
     .click();
 }
 
-Cypress.Commands.add('setColor', (butttonIndex = 3, selection) => {
-  setInlineToolbarMenueItem(INLINE_TOOLBAR_BUTTONS.COLOR, selection, butttonIndex);
+Cypress.Commands.add('setColor', (buttonIndex = 3, selection) => {
+  setInlineToolbarMenueItem(INLINE_TOOLBAR_BUTTONS.COLOR, selection, buttonIndex);
 });
 
-Cypress.Commands.add('setLineSpacing', (butttonIndex = 3, selection) => {
-  setInlineToolbarMenueItem(INLINE_TOOLBAR_BUTTONS.LINE_SPACING, selection, butttonIndex);
+Cypress.Commands.add('setLineSpacing', (buttonIndex = 3, selection) => {
+  setInlineToolbarMenueItem(INLINE_TOOLBAR_BUTTONS.LINE_SPACING, selection, buttonIndex);
 });
 
-// disable screenshots in debug mode. So there is no diffrence to ci.
+// disable screenshots in debug mode. So there is no difference to ci.
 if (Cypress.browser.isHeaded) {
   const noop = () => {};
   Cypress.Commands.overwrite('matchImageSnapshot', noop);

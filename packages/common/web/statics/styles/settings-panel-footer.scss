@@ -1,0 +1,42 @@
+.settingsPanel_footer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 30px 42px 30px;
+  border-top: solid 1px #ededed;
+  width: 100%;
+  max-width: 419px;
+  height: 100px;
+  box-sizing: border-box;
+  background: #fff;
+  font-size: 14px;
+}
+
+.settingsPanel_footer_fixed {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: 5;
+}
+
+%panel_button {
+  padding: 8.5px 24px;
+  border-style: none;
+}
+
+.settingsPanel_save {
+  @extend %panel_button;
+}
+
+.settingsPanel_cancel + .settingsPanel_save {
+  margin-left: 24px;
+}
+
+.settingsPanel_cancel {
+  @extend %panel_button;
+  border-style: solid;
+}
+
+.settingsPanel_cancel:hover {
+  background: #fff;
+  color: #4990e2;
+}

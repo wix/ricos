@@ -47,3 +47,10 @@ export const excludedGlobals = [
   '@wix/draft-js/lib/DraftOffsetKey',
   '@wix/draft-js/lib/isSoftNewlineEvent',
 ];
+
+export const isExternal = id =>
+  !id.startsWith('\0') &&
+  !id.startsWith('.') &&
+  !id.startsWith('/') &&
+  !excludedExternals.find(regex => (typeof regex === 'string' ? regex === id : regex.test(id))) &&
+  !!externals.find(externalName => new RegExp(externalName).test(id));

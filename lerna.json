@@ -3,17 +3,19 @@
   "command": {
     "version": {
       "allowBranch": [
-        "develop"
+        "develop",
+        "master"
       ],
       "message": "[*] chore(release): %s"
     }
   },
   "packages": [
-    "packages/*",
-    "e2e/test-env"
+    "e2e/test-env",
+    "examples/main",
+    "packages/**/*"
   ],
   "npmClientArgs": [
     "--no-lockfile"
   ],
-  "version": "4.0.12"
+  "version": "5.0.0"
 }

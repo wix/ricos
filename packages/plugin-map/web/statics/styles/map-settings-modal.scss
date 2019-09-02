@@ -1,0 +1,267 @@
+@import "~wix-rich-content-common/dist/statics/styles/mixins";
+@import "./labeled-toggle.scss";
+
+.button_primary {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.button_primary:hover {
+  opacity: 0.8;
+}
+
+.button_secondary {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.button_secondary:hover {
+  opacity: 0.6;
+  background: transparent;
+}
+
+.textInput_input {
+  font-size: 16px;
+  line-height: 1.5px;
+  text-overflow: ellipsis;
+  padding-right: 45px;
+  opacity: 0.6;
+
+  @include phone {
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    padding-left: 0;
+  }
+}
+
+.textInput_input:hover {
+  opacity: 1;
+}
+
+.textInput_input:focus {
+  opacity: 1;
+}
+
+.map_settings_modal_main_content_block {
+  padding: 0px 40px;
+  @include phone {
+    padding: 0px 20px;
+  }
+}
+
+.map_settings_modal_settings_container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+
+
+  @include phone {
+    height: 100%;
+    padding-bottom: 30px;
+  }
+}
+
+.map_settings_modal_title_container {
+  height: 120px;
+  flex: none;
+  padding-top: 42px;
+  padding-bottom: 34px;
+  box-sizing: border-box;
+
+  @include phone {
+    padding: 30px 20px;
+    height: auto;
+  }
+}
+
+.map_settings_modal_settings {
+  flex: 1 1 auto;
+  min-height: 0px;
+
+  @include phone {
+    overflow: initial;
+  }
+}
+
+.map_settings_modal_map_options {
+  padding-top: 2px;
+
+  @include phone {
+    padding-top: 0px;
+  }
+}
+
+.map_settings_modal_map_options_sub_header {
+  font-size: 16px;
+  line-height: 1.5;
+  margin: 0px;
+
+   @include phone {
+    margin-bottom: 32px;
+  }
+}
+
+
+.map_settings_modal_footer_button {
+  width: 182px;
+  height: 42px;
+}
+
+.map_settings_modal_footer_cancel_button {
+  @extend .map_settings_modal_footer_button;
+  margin-right: 32px;
+  width: 186px;
+  outline: none;
+  padding: 0px;
+}
+
+.map_settings_modal_footer_save_button {
+  @extend .map_settings_modal_footer_button;
+  border: none;
+}
+
+.map_settings_modal_footer {
+  height: 124px;
+  display: flex;
+  flex: none;
+  padding-top: 40px;
+  padding-bottom: 42px;
+  box-sizing: border-box;
+}
+
+.map_settings_modal_mobile_navbar {
+  display: flex;
+  flex-direction: row;
+  padding: 0px 20px;
+  min-height: 50px;
+}
+
+.map_settings_modal_mobile_navbar p {
+  margin: 0px;
+}
+
+.map_settings_modal_mobile_navbar_button {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+
+.map_settings_modal_mobile_navbar_save_button {
+  @extend .map_settings_modal_mobile_navbar_button;
+  margin-left: auto;
+}
+
+.map_settings_modal_mobile_navbar_cancel_button {
+  @extend .map_settings_modal_mobile_navbar_button;
+}
+
+
+.map_settings_modal_location_suggestion {
+  font-size: 16px;
+  line-height: 24px;
+  padding-left: 24px;
+  padding-right: 15px;
+  min-height: 42px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.06);
+  }
+}
+
+.map_settings_modal_title {
+  font-size: 30px;
+  line-height: 1.47;
+
+  @include phone {
+    font-size: 20px;
+    line-height: 1.5;
+    min-height: 30px;
+  }
+}
+
+.map_settings_modal_text_input_label {
+  font-size: 14px;
+  margin-bottom: 8px;
+  min-height: 20px;
+}
+
+.map_settings_modal_divider_wrapper {
+  padding: 40px 0px;
+
+  @include phone {
+    padding: 36px 0px;
+  }
+}
+
+.map_settings_modal_divider {
+  height: 1px;
+  opacity: 0.2;
+}
+
+
+.map_settings_modal_map_modes {
+  padding-top: 30px;
+  display: flex;
+
+  @include phone {
+    padding-top: 24px;
+  }
+}
+
+.map_settings_modal_location_display_name_settings_section {
+  @include phone {
+    margin-bottom: 42px;
+  }
+}
+
+
+.map_settings_modal_search_icon_wrapper {
+  position: relative;
+}
+
+.map_settings_modal_search_icon {
+  position: absolute;
+  z-index: 10;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  height: 100%;
+  padding-right: 13px;
+  color: #333;
+
+  @include phone {
+    padding-right: 0px;
+    margin-right: -2.5px;
+  }
+}
+
+.map_settings_modal_location_input_settings_section {
+  padding-top: 16px;
+  padding-bottom: 30px;
+
+  @include phone {
+    padding-top: 0px;
+  }
+}
+
+.map_settings_modal_scrollbar_thumb {
+  background: #000000;
+  border-radius: 4px;
+  width: 4px;
+  opacity: 0.3;
+  cursor: pointer;
+}
+
+.map_settings_modal_scrollbar_thumb:hover {
+  opacity: 0.8;
+}
+
+.map_settings_modal_scrollbar_container {
+  height: 100%;
+}

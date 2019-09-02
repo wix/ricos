@@ -1,0 +1,106 @@
+@import "~wix-rich-content-common/dist/statics/styles/palette";
+@import "~wix-rich-content-common/dist/statics/styles/mixins";
+$borderRadius: 6px;
+
+.inlineToolbar {
+  min-height: 50px;
+  left: var(--offset-left);
+  top: var(--offset-top);
+  transform: scale(0);
+  position: absolute;
+  border: 1px solid $toolbar-border-color;
+  background: #fff;
+  border-radius: $borderRadius;
+  z-index: 4;
+  box-sizing: border-box;
+  max-width: 100%;
+  transition: transform 0.15s cubic-bezier(.3,1.2,.2,1);
+  direction: ltr;
+}
+
+.inlineToolbar_buttons {
+  display: flex;
+  height: 50px;
+}
+
+.inlineToolbar_overrideContent {
+  height: auto;
+  padding: 0;
+}
+
+.inlineToolbar_responsiveArrow {
+  flex: 0 0 40px;
+  height: 100%;
+  background: transparent;
+  cursor: pointer;
+  border: none;
+  border-left: 1px solid $toolbar-border-color;
+
+  > i {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border: 1px solid $toolbar-font-color;
+    border-width: 0 0 1px 1px;
+  }
+}
+
+.inlineToolbar_responsiveArrowStart_icon {
+  margin-right: -3px;
+  transform: rotate(45deg);
+}
+
+.inlineToolbar_responsiveArrowEnd_icon {
+  margin-right: 3px;
+  transform: rotate(225deg);
+}
+
+.inlineToolbar_scrollableContainer {
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  width: 100%;
+  padding: 90px 19px;
+  margin: -90px 0;
+  pointer-events: none;
+  scroll-behavior: smooth;
+
+  & > * {
+    pointer-events: initial;
+  }
+
+  &.mobile {
+    pointer-events: initial;
+    padding: 0 10px;
+    margin: 0;
+    transform: translateZ(0);
+    overflow-x: scroll;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  &::-webkit-scrollbar {
+    display: none;
+    width: 0 !important;
+  }
+}
+
+.inlineToolbar_extend {
+  border-top: 1px solid $toolbar-border-color;
+}
+
+@include phone {
+  .inlineToolbar_buttons {
+    display: flex;
+    width: auto;
+    max-width: 100%;
+
+    .inlineToolbar_responsiveSpacer {
+      display: block;
+    }
+
+    .inlineToolbar_responsiveArrow {
+      display: block;
+      height: 49px;
+    }
+  }
+}

@@ -3,6 +3,7 @@ import { createLineSpacingPlugin, LINE_SPACING_TYPE } from 'wix-rich-content-plu
 import { createHashtagPlugin, HASHTAG_TYPE } from 'wix-rich-content-plugin-hashtag';
 // import { createExternalEmojiPlugin, EXTERNAL_EMOJI_TYPE } from 'wix-rich-content-plugin-emoji';
 import { createImagePlugin } from 'wix-rich-content-plugin-image';
+import { createGalleryPlugin } from 'wix-rich-content-plugin-gallery';
 import { createVideoPlugin, VIDEO_TYPE } from 'wix-rich-content-plugin-video';
 import { createHtmlPlugin, HTML_TYPE } from 'wix-rich-content-plugin-html';
 import { createDividerPlugin, DIVIDER_TYPE } from 'wix-rich-content-plugin-divider';
@@ -35,6 +36,7 @@ import 'wix-rich-content-plugin-line-spacing/dist/styles.min.css';
 import 'wix-rich-content-plugin-link/dist/styles.min.css';
 import 'wix-rich-content-plugin-mentions/dist/styles.min.css';
 import 'wix-rich-content-plugin-image/dist/styles.min.css';
+import 'wix-rich-content-plugin-gallery/dist/styles.min.css';
 import 'wix-rich-content-plugin-video/dist/styles.min.css';
 import 'wix-rich-content-plugin-sound-cloud/dist/styles.min.css';
 import 'wix-rich-content-plugin-giphy/dist/styles.min.css';
@@ -53,6 +55,7 @@ import { getBaseUrl } from '../utils';
 
 export const editorPlugins = [
   createImagePlugin,
+  createGalleryPlugin,
   createVideoPlugin,
   createHtmlPlugin,
   createDividerPlugin,
