@@ -8,6 +8,9 @@
 > - :house: [Internal]
 
 ## [Unreleased]
+### :rocket: New Feature
+- `editor`
+  - [#378](https://github.com/wix-incubator/rich-content/pull/378) plus icon is displayed next to text
 <hr/>
 
 ## 5.0.0 "Mamtak" (Sep 2, 2019)
