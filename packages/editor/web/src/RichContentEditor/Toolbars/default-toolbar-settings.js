@@ -12,7 +12,7 @@ const defaultSideToolbarVisibilityFn = editorState => {
   const selection = editorState.getSelection();
   const currentContent = editorState.getCurrentContent();
   const currentBlock = currentContent.getBlockForKey(selection.getStartKey());
-  return currentBlock.getLength() === 0;
+  return currentBlock.getLength() === 0 || currentBlock.getType() === 'unstyled';
 };
 
 const defaultDisplayOptions = {
