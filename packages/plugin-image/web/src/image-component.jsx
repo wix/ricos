@@ -19,7 +19,7 @@ class ImageComponent extends React.Component {
     super(props);
     this.state = Object.assign({ isMounted: false }, this.stateFromProps(props));
 
-    const { block, store } = this.props;
+    const { block, store, settings } = this.props;
     if (store) {
       const blockKey = block.getKey();
       store.setBlockHandler('handleFilesSelected', blockKey, this.handleFilesSelected.bind(this));

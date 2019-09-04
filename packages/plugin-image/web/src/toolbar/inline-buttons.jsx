@@ -2,7 +2,7 @@ import { BUTTONS, PluginSettingsIcon, getModalStyles } from 'wix-rich-content-co
 import { Modals } from '../modals';
 import { MediaReplaceIcon } from '../icons';
 
-export default ({ t, anchorTarget, relValue, uiSettings, isMobile }) => {
+export default ({ t, anchorTarget, relValue, uiSettings, isMobile, settings }) => {
   const modalStyles = getModalStyles({ isMobile });
   return [
     { keyName: 'sizeOriginal', type: BUTTONS.SIZE_ORIGINAL, mobile: false },
@@ -14,6 +14,17 @@ export default ({ t, anchorTarget, relValue, uiSettings, isMobile }) => {
     { keyName: 'sizeSimallRight', type: BUTTONS.SIZE_SMALL_RIGHT, mobile: false },
     { keyName: 'separator2', type: BUTTONS.SEPARATOR, mobile: false },
     { keyName: 'link', type: BUTTONS.LINK, mobile: false },
+    {
+      keyName: 'imageEditor',
+      type: BUTTONS.EXTERNAL_MODAL,
+      icon: PluginSettingsIcon,
+      modalName: Modals.IMAGE_EDITOR,
+      modalStyles,
+      t,
+      settings,
+      mobile: false,
+      tooltipTextKey: 'ImageEditorButton_Tooltip',
+    },
     {
       keyName: 'settings',
       type: BUTTONS.EXTERNAL_MODAL,

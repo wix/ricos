@@ -27,6 +27,7 @@ const createImagePlugin = (config = {}) => {
       t,
       uiSettings,
       isMobile,
+      settings,
     }),
     helpers,
     anchorTarget,

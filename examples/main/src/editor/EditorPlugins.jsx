@@ -2,7 +2,7 @@ import { createLinkPlugin, LINK_TYPE } from 'wix-rich-content-plugin-link';
 import { createLineSpacingPlugin, LINE_SPACING_TYPE } from 'wix-rich-content-plugin-line-spacing';
 import { createHashtagPlugin, HASHTAG_TYPE } from 'wix-rich-content-plugin-hashtag';
 // import { createExternalEmojiPlugin, EXTERNAL_EMOJI_TYPE } from 'wix-rich-content-plugin-emoji';
-import { createImagePlugin } from 'wix-rich-content-plugin-image';
+import { createImagePlugin, IMAGE_TYPE } from 'wix-rich-content-plugin-image';
 import { createGalleryPlugin } from 'wix-rich-content-plugin-gallery';
 import { createVideoPlugin, VIDEO_TYPE } from 'wix-rich-content-plugin-video';
 import { createHtmlPlugin, HTML_TYPE } from 'wix-rich-content-plugin-html';
@@ -147,6 +147,13 @@ const uiSettings = {
 };
 
 export const config = {
+  [IMAGE_TYPE]: {
+    initiator: 'some-initiator',
+    siteToken: 'JWS.eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Im5FUXljQzlOIn0.eyJpYXQiOjE1Njc1MjY3NzQsImRhdGEiOiJ7XCJ1c2VySWRcIjpcIjE5YTY0YTRjLWVlZTAtNGYxNC1iNjI3LTY3MmQ1ZjE2OGJkNFwiLFwibWV0YXNpdGVJZFwiOlwiNTM4ZmE2YzYtYzk1My00Y2RkLTg2YzQtNGI4NjlhZWNmOTgwXCJ9IiwiZXhwIjoxNTY4NzM2Mzc0fQ.n21OxIzSbqi8N3v30b6cIxMdshBnkkf2WQLWEFVXsLk',
+    metasiteId: '538fa6c6-c953-4cdd-86c4-4b869aecf980',
+    mediaRoot: 'some-mediaRoot',
+    // locale: 'en',
+  },
   [HASHTAG_TYPE]: {
     createHref: decoratedText => `/search/posts?query=${encodeURIComponent('#')}${decoratedText}`,
     onClick: (event, text) => {

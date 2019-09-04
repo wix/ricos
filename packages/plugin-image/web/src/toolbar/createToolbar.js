@@ -8,9 +8,10 @@ export default function createToolbar({
   relValue,
   uiSettings,
   isMobile,
+  settings
 }) {
   return {
-    InlineButtons: createInlineButtons({ t, anchorTarget, relValue, uiSettings, isMobile }),
+    InlineButtons: createInlineButtons({ t, anchorTarget, relValue, uiSettings, isMobile, settings }),
     InsertButtons: createInsertButtons({ helpers, t }),
     name: 'image',
   };
