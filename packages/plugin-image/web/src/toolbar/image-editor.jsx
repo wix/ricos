@@ -100,20 +100,14 @@ class ImageSettings extends Component {
     });
 
     mediaImageStudio.once(MediaImageStudioEvents.ImageData, imageData => {
-      // pubsub.update('componentData', initialComponentData);
-      console.log('imageData', imageData);
-
-      const hasFileChangeHelper = helpers && helpers.onFilesChange;
-      if (hasFileChangeHelper) {
-        helpers.onFilesChange(file, ({ data }) => this.handleFilesAdded({ data, itemIdx }));
-      } else {
-        console.warn('Missing upload function'); //eslint-disable-line no-console
-      }
+      const reader = new FileReader();
+      const handleImageEdit = this.props.pubsub.getBlockHandler('handleImageEdit');
+      reader.onload = e => handleImageEdit(e.target.result);
+      reader.readAsDataURL(imageData);
       mediaImageStudio.hide();
     });
 
     mediaImageStudio.once(MediaImageStudioEvents.Close, () => {
-      console.log('Closed !!!');
       helpers.closeModal();
     });
 

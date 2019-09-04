@@ -22,6 +22,7 @@ class ImageComponent extends React.Component {
     const { block, store, settings } = this.props;
     if (store) {
       const blockKey = block.getKey();
+      store.setBlockHandler('handleImageEdit', blockKey, this.handleImageEdit.bind(this));
       store.setBlockHandler('handleFilesSelected', blockKey, this.handleFilesSelected.bind(this));
       store.setBlockHandler('handleFilesAdded', blockKey, this.handleFilesAdded.bind(this));
     }
@@ -109,6 +110,10 @@ class ImageComponent extends React.Component {
     Object.assign(state, { isLoading: true, dataUrl: EMPTY_SMALL_PLACEHOLDER });
 
     return state;
+  };
+
+  handleImageEdit = dataUrl => {
+    this.setState({ isLoading: true, dataUrl });
   };
 
   handleFilesAdded = ({ data, error }) => {

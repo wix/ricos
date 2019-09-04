@@ -4,6 +4,7 @@ import { MediaReplaceIcon } from '../icons';
 
 export default ({ t, anchorTarget, relValue, uiSettings, isMobile, settings }) => {
   const modalStyles = getModalStyles({ isMobile });
+  const imageEditorStyles = getModalStyles({ customStyles: { overlay: { visibility: 'hidden' } } });
   return [
     { keyName: 'sizeOriginal', type: BUTTONS.SIZE_ORIGINAL, mobile: false },
     { keyName: 'sizeSmallCenter', type: BUTTONS.SIZE_SMALL_CENTER, mobile: false },
@@ -19,7 +20,7 @@ export default ({ t, anchorTarget, relValue, uiSettings, isMobile, settings }) =
       type: BUTTONS.EXTERNAL_MODAL,
       icon: PluginSettingsIcon,
       modalName: Modals.IMAGE_EDITOR,
-      modalStyles,
+      modalStyles: imageEditorStyles,
       t,
       settings,
       mobile: false,
