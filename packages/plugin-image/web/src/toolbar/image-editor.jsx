@@ -1,136 +1,68 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {
-  MediaImageStudio,
-  MediaImageStudioEvents,
-} from '@wix/media-image-studio-opener/dist/src';
+import { loadImageStudioOpenerPackage } from '../image-studio-opener';
+import ImageEditorLogic from './image-editor-logic';
 
 class ImageSettings extends Component {
   constructor(props) {
     super(props);
 
-    this.initMediaImageStudio();
+    this.state = {
+      mediaImageStudio: undefined,
+      mediaImageStudioEvents: undefined
+    };
+
+    // This is script loading warmup
+    loadImageStudioOpenerPackage();
   }
 
   componentDidMount() {
-    const { componentData: { src } } = this.props;
-
-    if (!src) {
-      return;
-    }
-
-    this.mediaImageStudio.show({
-      fileId: `${src.file_name}`,
+    loadImageStudioOpenerPackage(pkg => {
+      this.setState({
+        mediaImageStudio: this.createMediaImageStudio(pkg.MediaImageStudio),
+        mediaImageStudioEvents: pkg.MediaImageStudioEvents
+      });
     });
   }
 
-  componentWillUnmount() {
-    // TODO: implement
-  }
-
-  /*revertComponentData() {
-    const { componentData, helpers, pubsub } = this.props;
-    if (this.initialState) {
-      const initialComponentData = Object.assign({}, componentData, { ...this.initialState });
-      pubsub.update('componentData', initialComponentData);
-      this.setState({ ...this.initialState });
-    }
-    helpers.closeModal();
-  }
-
-  metadataUpdated = (metadata, value) => {
-    const updatedMetadata = Object.assign({}, metadata, value);
-    this.setState({ metadata: updatedMetadata });
-  };
-
-  addMetadataToBlock = () => {
-    const { pubsub } = this.props;
-    const metadata = this.state.metadata || {};
-    pubsub.update('componentData', { metadata });
-  };
-
-  onDoneClick = () => {
-    const { helpers } = this.props;
-    this.saveLink();
-    if (this.state.metadata) {
-      this.addMetadataToBlock();
-    }
-    helpers.closeModal();
-  };
-
-  saveLink = () => {
-    const { linkPanelValues } = this.state;
-    if (linkPanelValues.url === '') {
-      this.setBlockLink(null);
-    } else if (linkPanelValues.isValid) {
-      this.setBlockLink(linkPanelValues);
-    }
-  };
-
-  setBlockLink = item => this.props.pubsub.setBlockData({ key: 'componentLink', item });
-
-  onLinkPanelChange = linkPanelValues => {
-    this.setState({ linkPanelValues });
-  };*/
-
-  initMediaImageStudio = () => {
-    if (this.mediaImageStudio) {
-      this.mediaImageStudio.kill();
-    }
-
-    this.mediaImageStudio = this.createMediaImageStudio();
-  };
-
-  createMediaImageStudio = () => {
-    const { settings: { siteToken, metasiteId, initiator, mediaRoot }, helpers } = this.props;
-    /*const {
-      appVersion,
-      saveStrategy,
-      segmentationType,
-      locale,
-      blogInstanceToken,
-    } = this.state;*/
+  createMediaImageStudio = (MediaImageStudio) => {
+    const { settings: { imageEditorWixSettings } } = this.props;
+    const { siteToken, metasiteId, initiator, mediaRoot } = imageEditorWixSettings;
 
     const mediaImageStudio = new MediaImageStudio({
       siteToken,
       metasiteId,
       initiator,
       mediaRoot,
-      // saveStrategy -- use default
-    });
-
-    mediaImageStudio.once(MediaImageStudioEvents.ImageData, imageData => {
-      const reader = new FileReader();
-      const handleImageEdit = this.props.pubsub.getBlockHandler('handleImageEdit');
-      reader.onload = e => handleImageEdit(e.target.result);
-      reader.readAsDataURL(imageData);
-      mediaImageStudio.hide();
-    });
-
-    mediaImageStudio.once(MediaImageStudioEvents.Close, () => {
-      helpers.closeModal();
     });
 
     return mediaImageStudio;
   };
 
   render() {
-    return null;
+    const { mediaImageStudio, mediaImageStudioEvents } = this.state;
+    const { componentData: { src }, helpers, pubsub } = this.props;
+
+    if (!mediaImageStudio || !src || !mediaImageStudioEvents) {
+      return null;
+    }
+
+    return (
+      <ImageEditorLogic
+        mediaImageStudio={mediaImageStudio}
+        mediaImageStudioEvents={mediaImageStudioEvents}
+        fileId={src.file_name}
+        helpers={helpers}
+        pubsub={pubsub}
+      />
+    );
   }
 }
 ImageSettings.propTypes = {
-  siteToken: PropTypes.string,
-
+  settings: PropTypes.object.isRequired,
   componentData: PropTypes.any.isRequired,
   helpers: PropTypes.object,
-  theme: PropTypes.object.isRequired,
-  pubsub: PropTypes.any,
-  t: PropTypes.func,
-  anchorTarget: PropTypes.string,
-  relValue: PropTypes.string,
-  isMobile: PropTypes.bool,
-  uiSettings: PropTypes.object,
-  languageDir: PropTypes.string,
+  pubsub: PropTypes.any
 };
 
 export default ImageSettings;
