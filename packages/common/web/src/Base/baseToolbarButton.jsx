@@ -23,10 +23,18 @@ class BaseToolbarButton extends React.Component {
 
   componentDidMount() {
     this.props.pubsub.subscribe('componentState', this.onComponentStateChange);
+    this.props.pubsub.subscribe('onClickTrigger', this.onComponentClickButtonTrigger);
   }
 
   componentWillUnmount() {
     this.props.pubsub.unsubscribe('componentState', this.onComponentStateChange);
+    this.props.pubsub.unsubscribe('onClickTrigger', this.onComponentClickButtonTrigger);
+  }
+
+  onComponentClickButtonTrigger = clickState => {
+    const { keyName } = this.props;
+    const { event, key } = clickState;
+    key === keyName ? this.handleClick(event) : event.preventDefault();
   }
 
   handleFileChange = event => {

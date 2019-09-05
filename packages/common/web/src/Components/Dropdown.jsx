@@ -179,18 +179,18 @@ class Dropdown extends Component {
       typeof selected === 'string'
         ? selected
         : (() => {
-            const label = selected.label || '';
-            const Icon = selected.icon || null;
-            const OptionComponent = selected.component || null;
+          const label = selected.label || '';
+          const Icon = selected.icon || null;
+          const OptionComponent = selected.component || null;
 
-            return (
-              <span>
-                {Icon ? <Icon className={styles['Dropdown-option-icon']} /> : null}
-                {label && <span className={styles['Dropdown-option-label']}>{label}</span>}
-                {OptionComponent && <OptionComponent />}
-              </span>
-            );
-          })();
+          return (
+            <span>
+              {Icon ? <Icon className={styles['Dropdown-option-icon']} /> : null}
+              {label && <span className={styles['Dropdown-option-label']}>{label}</span>}
+              {OptionComponent && <OptionComponent />}
+            </span>
+          );
+        })();
     const value = (
       <div className={styles['Dropdown-placeholder']} role="textbox">
         {placeHolderValue}

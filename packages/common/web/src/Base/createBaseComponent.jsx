@@ -28,13 +28,14 @@ const createBaseComponent = ({
   t,
   isMobile,
   getEditorBounds,
+  shouldRenderOverlay,
 }) => {
   class WrappedComponent extends Component {
     static displayName = createHocName('BaseComponent', PluginComponent);
 
     constructor(props) {
       super(props);
-      this.state = { componentState: {}, ...this.stateFromProps(props) };
+      this.state = { componentState: {}, overlay: true, ...this.stateFromProps(props) };
     }
 
     componentWillReceiveProps(nextProps) {
@@ -70,6 +71,7 @@ const createBaseComponent = ({
         { key: 'htmlPluginMaxHeight', callback: this.onHtmlPluginMaxHeightChange },
         { key: 'componentLink', callback: this.onComponentLinkChange },
       ].map(({ key, callback }) => pubsub.subscribeOnBlock({ key, callback, blockKey }));
+      shouldRenderOverlay && this.setState({ overlay: shouldRenderOverlay({ componentData: this.state.componentData }) });
     }
 
     componentDidUpdate() {
@@ -92,7 +94,14 @@ const createBaseComponent = ({
 
     onComponentDataChange = componentData => {
       if (this.isMeAndIdle) {
-        this.setState({ componentData: componentData || {} }, () => {
+        const updatedState = {
+          componentData: componentData || {},
+        }
+        if (shouldRenderOverlay && this.state.componentData !== componentData) {
+          updatedState.overlay = shouldRenderOverlay({ componentData });
+        }
+
+        this.setState(updatedState, () => {
           const {
             blockProps: { setData },
           } = this.props;
@@ -136,10 +145,10 @@ const createBaseComponent = ({
       if (this.isMeAndIdle) {
         const link = url
           ? {
-              url,
-              target: targetBlank === true ? '_blank' : anchorTarget || '_self',
-              rel: nofollow === true ? 'nofollow' : relValue || 'noopener',
-            }
+            url,
+            target: targetBlank === true ? '_blank' : anchorTarget || '_self',
+            rel: nofollow === true ? 'nofollow' : relValue || 'noopener',
+          }
           : null;
 
         this.updateComponentConfig({ link });
@@ -214,7 +223,7 @@ const createBaseComponent = ({
 
     render = () => {
       const { blockProps, className, onClick, selection } = this.props;
-      const { componentData, readOnly } = this.state;
+      const { componentData, readOnly, overlay } = this.state;
       const { link, width: currentWidth, height: currentHeight } = componentData.config || {};
       const { width: initialWidth, height: initialHeight } = settings || {};
       const isEditorFocused = selection.getHasFocus();
@@ -293,9 +302,9 @@ const createBaseComponent = ({
               <a className={anchorClass} {...anchorProps} />
             </div>
           ) : (
-            component
-          )}
-          {!this.state.readOnly && (
+              component
+            )}
+          {!this.state.readOnly && overlay && (
             <div
               role="none"
               data-hook={'componentOverlay'}

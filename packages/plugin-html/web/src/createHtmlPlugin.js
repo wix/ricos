@@ -8,6 +8,7 @@ const createHtmlPlugin = (config = {}) => {
   const { helpers, isMobile, t, [type]: settings = {}, getEditorBounds, ...rest } = config;
 
   return createBasePlugin({
+    shouldRenderOverlay: ({ componentData }) => !!componentData.src,
     component: Component,
     settings,
     type: HTML_TYPE,
