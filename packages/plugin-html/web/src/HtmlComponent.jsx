@@ -55,9 +55,12 @@ class HtmlComponent extends Component {
   };
 
   handleClick = e => {
-    const { componentData: { src }, store } = this.props;
+    const {
+      componentData: { src },
+      store,
+    } = this.props;
     !src && store && store.set('onClickTrigger', { event: e, key: 'edit' });
-  }
+  };
 
   render() {
     this.styles =
@@ -79,13 +82,16 @@ class HtmlComponent extends Component {
 
     return (
       <ViewportRenderer>
+        {/* eslint-disable */}
         <div
+          role="container"
           className={this.styles.htmlComponent}
           ref={ref => (this.element = ref)}
           style={style}
           data-hook="HtmlComponent"
           onClick={this.handleClick}
         >
+          {/* eslint-enable */}
           {srcType === SRC_TYPE_HTML && src && (
             <IframeHtml
               key={SRC_TYPE_HTML}
