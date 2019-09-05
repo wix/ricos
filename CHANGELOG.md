@@ -9,6 +9,9 @@
 
 ## [Unreleased]
 ### :rocket: New Feature
+- `html`
+  - [#379](https://github.com/wix-incubator/rich-content/pull/379) edit panel opens on click when src is blank
+### :rocket: New Feature
 - `editor`
   - [#378](https://github.com/wix-incubator/rich-content/pull/378) plus icon is displayed next to text
 <hr/>

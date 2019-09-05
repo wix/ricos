@@ -71,7 +71,10 @@ const createBaseComponent = ({
         { key: 'htmlPluginMaxHeight', callback: this.onHtmlPluginMaxHeightChange },
         { key: 'componentLink', callback: this.onComponentLinkChange },
       ].map(({ key, callback }) => pubsub.subscribeOnBlock({ key, callback, blockKey }));
-      shouldRenderOverlay && this.setState({ overlay: shouldRenderOverlay({ componentData: this.state.componentData }) });
+      shouldRenderOverlay &&
+        this.setState({
+          overlay: shouldRenderOverlay({ componentData: this.state.componentData }),
+        });
     }
 
     componentDidUpdate() {
@@ -96,7 +99,7 @@ const createBaseComponent = ({
       if (this.isMeAndIdle) {
         const updatedState = {
           componentData: componentData || {},
-        }
+        };
         if (shouldRenderOverlay && this.state.componentData !== componentData) {
           updatedState.overlay = shouldRenderOverlay({ componentData });
         }
@@ -145,10 +148,10 @@ const createBaseComponent = ({
       if (this.isMeAndIdle) {
         const link = url
           ? {
-            url,
-            target: targetBlank === true ? '_blank' : anchorTarget || '_self',
-            rel: nofollow === true ? 'nofollow' : relValue || 'noopener',
-          }
+              url,
+              target: targetBlank === true ? '_blank' : anchorTarget || '_self',
+              rel: nofollow === true ? 'nofollow' : relValue || 'noopener',
+            }
           : null;
 
         this.updateComponentConfig({ link });
@@ -302,8 +305,8 @@ const createBaseComponent = ({
               <a className={anchorClass} {...anchorProps} />
             </div>
           ) : (
-              component
-            )}
+            component
+          )}
           {!this.state.readOnly && overlay && (
             <div
               role="none"

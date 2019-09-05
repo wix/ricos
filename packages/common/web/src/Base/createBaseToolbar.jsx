@@ -140,10 +140,10 @@ export default function createToolbar({
       const { url, targetBlank, nofollow } = linkData || {};
       const link = url
         ? {
-          url,
-          target: targetBlank ? '_blank' : anchorTarget || '_self',
-          rel: nofollow ? 'nofollow' : relValue || 'noopener',
-        }
+            url,
+            target: targetBlank ? '_blank' : anchorTarget || '_self',
+            rel: nofollow ? 'nofollow' : relValue || 'noopener',
+          }
         : null;
 
       pubsub.update('componentData', { config: { link } });
@@ -535,16 +535,16 @@ export default function createToolbar({
                 {OverrideContent ? (
                   <OverrideContent {...overrideProps} />
                 ) : (
-                    this.structure.map((button, index) =>
-                      this.renderButton(
-                        button,
-                        index,
-                        themedButtonStyle,
-                        separatorClassNames,
-                        tabIndex
-                      )
+                  this.structure.map((button, index) =>
+                    this.renderButton(
+                      button,
+                      index,
+                      themedButtonStyle,
+                      separatorClassNames,
+                      tabIndex
                     )
-                  )}
+                  )
+                )}
               </div>
             )}
           </Measure>
