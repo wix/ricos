@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { loadImageStudioOpenerPackage } from '../image-studio-opener';
 import ImageEditorLogic from './image-editor-logic';
 
-class ImageSettings extends Component {
+class ImageEditor extends Component {
   constructor(props) {
     super(props);
 
@@ -58,11 +58,11 @@ class ImageSettings extends Component {
     );
   }
 }
-ImageSettings.propTypes = {
+ImageEditor.propTypes = {
   settings: PropTypes.object.isRequired,
   componentData: PropTypes.any.isRequired,
   helpers: PropTypes.object,
   pubsub: PropTypes.any
 };
 
-export default ImageSettings;
+export default ImageEditor;
