@@ -1,6 +1,6 @@
 import {
   AlignLeftIcon,
-  AlignCenterIcon,
+  AlignTextCenterIcon,
   AlignRightIcon,
   AlignJustifyIcon,
   HEADER_BLOCK,
@@ -66,7 +66,7 @@ export const AlignTextLeftButton = createTextAlignmentButton({
 
 export const AlignTextCenterButton = createTextAlignmentButton({
   alignment: 'center',
-  Icon: AlignCenterIcon,
+  Icon: AlignTextCenterIcon,
   tooltipTextKey: 'AlignTextCenterButton_Tooltip',
 });
 
