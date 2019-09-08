@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import Scrollbars from 'react-custom-scrollbars';
 import { mergeStyles } from 'wix-rich-content-common';
+import addEmoji from '../modifiers/addEmoji';
 import { getGroupEmojis } from '../utils';
 import { getEmojiGroups } from '../constants';
 import styles from '../../statics/styles/emoji-preview-modal.scss';
@@ -19,7 +20,6 @@ export default class EmojiPreviewModal extends Component {
     this.state = {
       activeGroup: getGroup || {},
       emojis: getGroupEmojis(getGroup.category) || [],
-      index: -1,
     };
   }
 
@@ -29,41 +29,39 @@ export default class EmojiPreviewModal extends Component {
     this.scrollbarRef.scrollToTop();
   };
 
-  renderNavIcons = () => {
+  renderNavIcons = activeGroup => {
     const { t } = this.props;
-
-    return getEmojiGroups(t).map((group, index) => (
-      <div
-        key={index}
-        className={this.styles.emoji_icon}
-        onClick={this.onNavIconClicked.bind(this, group)}
-      >
-        {group.icon}
-      </div>
-    ));
+    return getEmojiGroups(t).map((group, index) => {
+      const color = activeGroup.title === group.title ? '#42A5F5' : '#bdbdbd';
+      return (
+        <div
+          key={index}
+          className={this.styles.emojiPreviewModal_nav_icon}
+          onClick={this.onNavIconClicked.bind(this, group)}
+          style={{ color }}
+        >
+          {group.icon}
+        </div>
+      );
+    });
   };
 
   onEmojiClicked = emoji => {
-    const { componentData, pubsub, onConfirm } = this.props;
-
-    if (onConfirm) {
-      onConfirm({ ...componentData, emoji });
-    } else {
-      pubsub.update('componentData', { emoji });
-    }
+    const newEditorState = addEmoji(this.props.getEditorState(), emoji);
+    this.props.setEditorState(newEditorState);
   };
 
   render() {
     const { activeGroup, emojis } = this.state;
     const renderEmojis = emojis.map((emoji, index) => {
       return (
-        <span
+        <div
           className={this.styles.emojiPreviewModal_emoji}
           key={index}
           onClick={this.onEmojiClicked.bind(this, emoji)}
         >
           {emoji}
-        </span>
+        </div>
       );
     });
     return (
@@ -74,17 +72,16 @@ export default class EmojiPreviewModal extends Component {
             this.scrollbarRef = ref;
           }}
           style={{
-            height: '285px',
+            height: '300px',
           }}
           renderThumbVertical={() => (
             <div className={this.styles.emojiPreviewModal_scrollbar_thumb} />
           )}
-          // onScroll={this.handleScroll}
         >
           {renderEmojis}
         </Scrollbars>
         <div className={this.styles.emojiPreviewModal_emoji_icons_container}>
-          {this.renderNavIcons()}
+          {this.renderNavIcons(activeGroup)}
         </div>
       </div>
     );

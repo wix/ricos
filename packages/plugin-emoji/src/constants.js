@@ -81,9 +81,9 @@ export const DesktopFlyOutModalStyles = {
     zIndex: 5,
   },
   content: {
-    width: '265px',
+    width: '330px',
     boxSizing: 'border-box',
-    height: '357px',
+    height: '387px',
     overflow: 'visible',
     border: '1px solid #ccc',
     paddingRight: '10px',
