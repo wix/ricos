@@ -8,7 +8,8 @@ import createHocName from '../Utils/createHocName';
 import getDisplayName from '../Utils/getDisplayName';
 import { alignmentClassName, sizeClassName, textWrapClassName } from '../Utils/classNameStrategies';
 import { normalizeUrl } from '../Utils/urlValidators';
-import Styles from '../../statics/styles/global.scss';
+import styles from '../../statics/styles/general.scss';
+import rtlIgnoredStyles from '../../statics/styles/general.rtlignore.scss';
 
 const DEFAULTS = {
   alignment: null,
@@ -35,6 +36,7 @@ const createBaseComponent = ({
     constructor(props) {
       super(props);
       this.state = { componentState: {}, ...this.stateFromProps(props) };
+      this.styles = { ...styles, ...rtlIgnoredStyles };
     }
 
     componentWillReceiveProps(nextProps) {
@@ -225,13 +227,13 @@ const createBaseComponent = ({
         PluginComponent.WrappedComponent.alignmentClassName || alignmentClassName,
         PluginComponent.WrappedComponent.sizeClassName || sizeClassName,
         PluginComponent.WrappedComponent.textWrapClassName || textWrapClassName,
-      ].map(strategy => strategy(this.state.componentData, theme, Styles, isMobile));
+      ].map(strategy => strategy(this.state.componentData, theme, this.styles, isMobile));
 
       const ContainerClassNames = classNames(
         {
-          [Styles.pluginContainer]: !readOnly,
-          [Styles.pluginContainerReadOnly]: readOnly,
-          [Styles.pluginContainerMobile]: isMobile,
+          [this.styles.pluginContainer]: !readOnly,
+          [this.styles.pluginContainerReadOnly]: readOnly,
+          [this.styles.pluginContainerMobile]: isMobile,
           [theme.pluginContainer]: !readOnly,
           [theme.pluginContainerReadOnly]: readOnly,
           [theme.pluginContainerMobile]: isMobile,
@@ -239,13 +241,13 @@ const createBaseComponent = ({
         classNameStrategies,
         className || '',
         {
-          [Styles.hasFocus]: isActive,
+          [this.styles.hasFocus]: isActive,
           [theme.hasFocus]: isActive,
         }
       );
 
-      const overlayClassNames = classNames(Styles.overlay, theme.overlay, {
-        [Styles.hidden]: readOnly,
+      const overlayClassNames = classNames(this.styles.overlay, theme.overlay, {
+        [this.styles.hidden]: readOnly,
         [theme.hidden]: readOnly,
       });
 
@@ -278,8 +280,8 @@ const createBaseComponent = ({
           rel: link.rel ? link.rel : relValue || 'noopener',
         };
       }
-      const anchorClass = classNames(Styles.absFull, Styles.anchor, {
-        [Styles.isImage]:
+      const anchorClass = classNames(this.styles.absFull, this.styles.anchor, {
+        [this.styles.isImage]:
           getDisplayName(PluginComponent)
             .toLowerCase()
             .indexOf('image') !== -1,

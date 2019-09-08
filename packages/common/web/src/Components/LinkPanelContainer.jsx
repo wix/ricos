@@ -104,7 +104,7 @@ class LinkPanelContainer extends PureComponent {
           <div className={styles.linkPanel_actionsDivider} role="separator" />
         </div>
         <div className={styles.linkPanel_Footer}>
-          <div className={styles.linkPanel_LeftActions}>
+          <div className={styles.linkPanel_FooterActions}>
             <button
               tabIndex={tabIndex}
               aria-label={cancelButtonText}

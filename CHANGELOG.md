@@ -8,6 +8,9 @@
 > - :house: [Internal]
 
 ## [Unreleased]
+### :bug: Bug Fix
+- `general`
+  - [#381](https://github.com/wix-incubator/rich-content/pull/381) atomic block alignment functionality restored
 <hr/>
 
 ## 5.0.0 "Mamtak" (Sep 2, 2019)

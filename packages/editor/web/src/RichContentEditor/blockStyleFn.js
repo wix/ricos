@@ -1,6 +1,8 @@
 import classNames from 'classnames';
-import styles from '../../statics/styles/rich-content-editor.scss';
+import editorStyles from '../../statics/styles/rich-content-editor.scss';
+import alignmentStyles from '../../statics/styles/rich-content-editor-alignment.rtlignore.scss';
 
+const styles = { ...editorStyles, ...alignmentStyles };
 const types = {
   blockquote: 'quote',
   'header-one': 'headerOne',

@@ -1,6 +1,6 @@
 @import '~wix-rich-content-common/dist/statics/styles/palette';
 @import '~wix-rich-content-common/dist/statics/styles/consts';
-@import '~wix-rich-content-common/dist/statics/styles/global';
+@import '~wix-rich-content-common/dist/statics/styles/general';
 @import '~wix-rich-content-common/dist/statics/styles/fonts';
 
 .wrapper {
@@ -86,26 +86,6 @@
 
   &:empty {
     height: 24px;
-  }
-}
-
-.left {
-  &>* {
-    /*!rtl:ignore*/
-    text-align: left !important;
-  }
-}
-
-.center {
-  &>* {
-    text-align: center !important;
-  }
-}
-
-.right {
-  &>* {
-    /*!rtl:ignore*/
-    text-align: right !important;
   }
 }
 
