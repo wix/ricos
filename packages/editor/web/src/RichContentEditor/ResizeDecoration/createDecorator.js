@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
+import { mergeStyles, Context } from 'wix-rich-content-common';
+import deafultStyles from '../../../statics/styles/resizeable.rtlignore.scss';
 
 const getDisplayName = WrappedComponent => {
   const component = WrappedComponent.WrappedComponent || WrappedComponent;
@@ -11,6 +14,7 @@ const round = (x, steps) => Math.ceil(x / steps) * steps;
 
 export default ({ config, store }) => WrappedComponent =>
   class BlockResizeableDecorator extends Component {
+    static contextType = Context.type;
     static displayName = `Resizable(${getDisplayName(WrappedComponent)})`;
     static WrappedComponent = WrappedComponent.WrappedComponent || WrappedComponent;
 
@@ -51,8 +55,9 @@ export default ({ config, store }) => WrappedComponent =>
     // used to save the hoverPosition so it can be leveraged to determine if a
     // drag should happen on mousedown
     mouseMove = evt => {
-      const { vertical, horizontal } = this.props;
-
+      const { vertical, horizontal, blockProps } = this.props;
+      const componentData = blockProps.getData();
+      const { size, alignment } = componentData.config;
       const hoverPosition = this.state.hoverPosition;
       const tolerance = 6;
       // TODO figure out if and how to achieve this without fetching the DOM node
@@ -63,10 +68,13 @@ export default ({ config, store }) => WrappedComponent =>
       const y = evt.clientY - b.top;
 
       const isTop = vertical && vertical !== 'auto' ? y < tolerance : false;
-      const isLeft = horizontal ? x < tolerance : false;
-      const isRight = horizontal ? x >= b.width - tolerance : false;
+      let isLeft = horizontal ? x < tolerance : false;
+      let isRight = horizontal ? x >= b.width - tolerance : false;
       const isBottom =
         vertical && vertical !== 'auto' ? y >= b.height - tolerance && y < b.height : false;
+
+      isLeft = isLeft && alignment !== 'left' && size !== 'fullWidth';
+      isRight = isRight && alignment !== 'right' && size !== 'fullWidth';
 
       const canResize = isTop || isLeft || isRight || isBottom;
 
@@ -175,7 +183,12 @@ export default ({ config, store }) => WrappedComponent =>
       const { width, height, hoverPosition } = this.state;
       const { isTop, isLeft, isRight, isBottom } = hoverPosition;
 
+      const componentData = blockProps.getData();
+      const { size, alignment } = componentData.config;
       const styles = { position: 'relative', ...style };
+
+      this.mergedStyles =
+        this.mergedStyles || mergeStyles({ styles: deafultStyles, theme: this.context.theme });
 
       if (horizontal === 'auto') {
         styles.width = 'auto';
@@ -206,6 +219,11 @@ export default ({ config, store }) => WrappedComponent =>
         styles.cursor = 'default';
       }
 
+      const containerClassName = classNames({
+        [this.mergedStyles.resizeHandleR]: alignment !== 'right' && size !== 'fullWidth',
+        [this.mergedStyles.resizeHandleL]: alignment !== 'left' && size !== 'fullWidth',
+      });
+
       const interactionProps = store.getReadOnly()
         ? {}
         : {
@@ -213,6 +231,7 @@ export default ({ config, store }) => WrappedComponent =>
             onMouseMove: this.mouseMove,
             onMouseLeave: this.mouseLeave,
             width: this.state.width || this.props.minWidth,
+            containerClassName,
           };
 
       return (
