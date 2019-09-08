@@ -1,5 +1,6 @@
 // @create-index
 
+export { default as AlignTextCenterIcon } from './AlignTextCenterIcon';
 export { default as AlignCenterIcon } from './AlignCenterIcon';
 export { default as AlignJustifyIcon } from './AlignJustifyIcon';
 export { default as AlignLeftIcon } from './AlignLeftIcon';

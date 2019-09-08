@@ -17,6 +17,7 @@ import {
   SizeFullWidthIcon,
   AlignLeftIcon,
   AlignCenterIcon,
+  AlignTextCenterIcon,
   AlignRightIcon,
   WidthIcon,
   HeightIcon,
@@ -53,7 +54,7 @@ export const AlignmentLeftButton = createBlockAlignmentButton({
 
 export const AlignmentCenterButton = createBlockAlignmentButton({
   alignment: 'center',
-  Icon: AlignCenterIcon,
+  Icon: AlignTextCenterIcon,
   tooltipTextKey: 'AlignTextCenterButton_Tooltip',
 });
 
@@ -85,7 +86,7 @@ export const SizeSmallLeftButton = createBlockAlignmentAndSizeButton({
 
 export const AlignCenterButton = createBlockAlignmentAndSizeButton({
   alignment: 'center',
-  Icon: SizeSmallCenterIcon,
+  Icon: AlignCenterIcon,
   tooltipTextKey: 'AlignCenterButton_Tooltip',
 });
 
