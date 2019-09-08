@@ -28,7 +28,7 @@ const createImagePlugin = (config = {}) => {
       const resizeableProps = PLUGIN_DECORATION_PROPS[PLUGIN_DECORATIONS.RESIZEABLE](props);
       const { size } = componentData.config;
       const isInlineSize = size === 'inline';
-      const { width, ...rest } = resizeableProps.style; // eslint-disable-line
+      const { width, ...rest } = resizeableProps.style; // eslint-disable-line no-unused-vars
       const style = isInlineSize ? resizeableProps.style : { ...rest };
       return { ...resizeableProps, style };
     },

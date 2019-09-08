@@ -222,7 +222,10 @@ const createBaseComponent = ({
     render = () => {
       const { blockProps, className, onClick, selection } = this.props;
       const { componentData, readOnly } = this.state;
-      const decorationProps = pluginDecorationProps(this.props, componentData);
+      const { containerClassName, ...decorationProps } = pluginDecorationProps(
+        this.props,
+        componentData
+      );
       const { link, width: currentWidth, height: currentHeight } = componentData.config || {};
       const { width: initialWidth, height: initialHeight } = settings || {};
       const isEditorFocused = selection.getHasFocus();
@@ -243,6 +246,7 @@ const createBaseComponent = ({
           [theme.pluginContainer]: !readOnly,
           [theme.pluginContainerReadOnly]: readOnly,
           [theme.pluginContainerMobile]: isMobile,
+          [containerClassName]: !!containerClassName,
         },
         classNameStrategies,
         className || '',
@@ -295,7 +299,12 @@ const createBaseComponent = ({
 
       /* eslint-disable jsx-a11y/anchor-has-content */
       return (
-        <div style={sizeStyles} className={ContainerClassNames} {...decorationProps}>
+        <div
+          style={sizeStyles}
+          className={ContainerClassNames}
+          data-focus={isActive}
+          {...decorationProps}
+        >
           {!isNil(link) ? (
             <div>
               {component}
