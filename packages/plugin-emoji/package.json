@@ -51,7 +51,6 @@
     "rollup": "^1.1.0"
   },
   "dependencies": {
-    "draft-js-code": "~0.3.0",
     "emojione": "^2.2.7",
     "react-custom-scrollbars": "^4.2.1",
     "react-icons": "^3.7.0",
