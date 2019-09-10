@@ -22,6 +22,7 @@
 ### :house: Internal
 - `general`
   - [d100a69d](https://github.com/wix-incubator/rich-content/commit/d100a69d) rollup version fixed due to breaking changes
+  - [#384](https://github.com/wix-incubator/rich-content/pull/384) upload e2e snapshots in ci
 <hr/>
 
 ## 5.0.0 "Mamtak" (Sep 2, 2019)

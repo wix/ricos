@@ -33,7 +33,8 @@
     "test:unit": "lerna run --parallel --stream test",
     "lint": "lerna run --parallel --stream lint",
     "pretest": "npm run build --prefix e2e/test-env",
-    "test": "npm run test:unit && npm run e2e:ci"
+    "test": "npm run test:unit && npm run e2e:ci",
+    "uploadSnapshots": "cd e2e/ && find . -type f -name *diff* -exec curl -T {} https://transfer.sh \\;  -exec echo  \\;"
   },
   "husky": {
     "hooks": {
