@@ -1,8 +1,26 @@
 import createInsertButtons from './insert-buttons';
 
-export default function createToolbar({ settings, helpers, styles, t, isMobile, getEditorState, setEditorState }) {
+export default function createToolbar({
+  settings,
+  helpers,
+  styles,
+  t,
+  isMobile,
+  getEditorState,
+  setEditorState,
+}) {
   return {
-    InsertButtons: createInsertButtons({ settings, helpers, styles, t, isMobile, getEditorState, setEditorState }),
+    InsertButtons:
+      !isMobile &&
+      createInsertButtons({
+        settings,
+        helpers,
+        styles,
+        t,
+        isMobile,
+        getEditorState,
+        setEditorState,
+      }),
     name: 'emoji',
   };
 }

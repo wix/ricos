@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-key */
 import React from 'react';
 import {
   FaSmile,
@@ -60,18 +59,6 @@ export const DEFAULTS = {
     alignment: 'left',
     size: 'small',
     width: 'fit-content',
-  },
-};
-
-export const MobileFullScreenCustomStyle = {
-  overlay: {
-    backgroundColor: 'transparent',
-  },
-  content: {
-    top: 0,
-    left: 0,
-    overflow: 'hidden',
-    paddingRight: '6px',
   },
 };
 

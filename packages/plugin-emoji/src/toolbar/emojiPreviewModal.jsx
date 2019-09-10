@@ -65,7 +65,7 @@ export default class EmojiPreviewModal extends Component {
       );
     });
     return (
-      <div>
+      <div className={this.styles.emojiPreviewModal_container}>
         <div className={this.styles.emojiPreviewModal_headerTitle}>{activeGroup.title}</div>
         <Scrollbars
           ref={ref => {
@@ -98,4 +98,5 @@ EmojiPreviewModal.propTypes = {
   helpers: PropTypes.object,
   isMobile: PropTypes.bool,
   getEditorState: PropTypes.func,
+  setEditorState: PropTypes.func,
 };

@@ -1,8 +1,6 @@
-import { createBasePlugin, mergeStyles } from 'wix-rich-content-common';
+import { createBasePlugin } from 'wix-rich-content-common';
 import createToolbar from './toolbar';
 import { EMOJI_TYPE } from './constants';
-import EmojiDecorator from './emojiDecorator';
-import Styles from '../statics/styles/default-styles.scss';
 
 const createEmojiPlugin = (config = {}) => {
   const type = EMOJI_TYPE;
@@ -17,10 +15,8 @@ const createEmojiPlugin = (config = {}) => {
     ...rest
   } = config;
 
-  const styles = mergeStyles({ styles: Styles, theme });
   const toolbar = createToolbar({
     helpers,
-    styles,
     settings,
     isMobile,
     getEditorState,
@@ -28,8 +24,7 @@ const createEmojiPlugin = (config = {}) => {
     theme,
     t,
   });
-  const emojiProps = Object.assign({}, settings, { theme, displayName: 'Emoji' });
-  const decorators = [new EmojiDecorator(emojiProps)];
+
   return createBasePlugin({
     settings,
     theme,

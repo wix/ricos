@@ -9,7 +9,7 @@ import { imageTypeMapper } from 'wix-rich-content-plugin-image/dist/module.viewe
 import { mapTypeMapper } from 'wix-rich-content-plugin-map/dist/module.viewer';
 import { giphyTypeMapper, GIPHY_TYPE } from 'wix-rich-content-plugin-giphy/dist/module.viewer';
 import { HashtagDecorator } from 'wix-rich-content-plugin-hashtag/dist/module.viewer';
-import { emojiTypeMapper } from 'wix-rich-content-plugin-emoji/dist/module.viewer';
+
 import {
   createHeadersMarkdownDecorator,
   HEADERS_MARKDOWN_TYPE,
@@ -35,7 +35,6 @@ import 'wix-rich-content-common/dist/styles.min.css';
 import 'wix-rich-content-viewer/dist/styles.min.css';
 // import 'wix-rich-content-plugin-code-block/dist/styles.min.css';
 import 'wix-rich-content-plugin-divider/dist/styles.min.css';
-import 'wix-rich-content-plugin-emoji/dist/styles.min.css';
 import 'wix-rich-content-plugin-hashtag/dist/styles.min.css';
 import 'wix-rich-content-plugin-html/dist/styles.min.css';
 import 'wix-rich-content-plugin-image/dist/styles.min.css';
@@ -68,7 +67,6 @@ export const typeMappers = [
   mapTypeMapper,
   fileUploadTypeMapper,
   giphyTypeMapper,
-  emojiTypeMapper,
 ];
 
 export const config = {

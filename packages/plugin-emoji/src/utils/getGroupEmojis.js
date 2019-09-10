@@ -1,5 +1,3 @@
-/* eslint-disable no-prototype-builtins */
-/* eslint-disable fp/no-loops */
 import { toArray } from 'lodash';
 import { emojiList, createEmojisFromStrategy, convertShortNameToUnicode } from './index';
 import strategy from 'emojione/emoji.json';

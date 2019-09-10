@@ -1,9 +1,15 @@
-import { DEFAULTS, MobileFullScreenCustomStyle, DesktopFlyOutModalStyles } from '../constants';
-import { TOOLBARS, decorateComponentWithProps, getModalStyles } from 'wix-rich-content-common';
+import { DEFAULTS, DesktopFlyOutModalStyles } from '../constants';
+import {
+  TOOLBARS,
+  decorateComponentWithProps,
+  getModalStyles,
+  DECORATION_MODE,
+} from 'wix-rich-content-common';
 import EmojiPreviewModal from './emojiPreviewModal';
+import Arrow from './arrow';
 import { EmojiPluginIcon } from '../icons';
 
-export default ({ helpers, t, settings, isMobile, getEditorState, setEditorState }) => {
+export default ({ helpers, t, settings, getEditorState, setEditorState }) => {
   return [
     {
       type: 'modal',
@@ -11,15 +17,12 @@ export default ({ helpers, t, settings, isMobile, getEditorState, setEditorState
       tooltipText: t('GiphyPlugin_InsertButton_Tooltip'),
       Icon: EmojiPluginIcon,
       componentData: settings.componentDataDefaults || DEFAULTS,
-      toolbars: settings.insertToolbars || [TOOLBARS.FOOTER, TOOLBARS.SIDE],
+      toolbars: settings.insertToolbars || [TOOLBARS.FOOTER],
       modalElement: decorateComponentWithProps(EmojiPreviewModal, {
         getEditorState,
         setEditorState,
         ...settings,
       }),
-      modalStyles: isMobile
-        ? getModalStyles({ customStyles: MobileFullScreenCustomStyle, fullScreen: true })
-        : null,
       modalStylesFn: ({ buttonRef }) => {
         const modalStyles = getModalStyles({
           customStyles: DesktopFlyOutModalStyles,
@@ -27,7 +30,7 @@ export default ({ helpers, t, settings, isMobile, getEditorState, setEditorState
         });
         const { top, left } = buttonRef.getBoundingClientRect();
         const modalLeft = left - 15;
-        const modalTop = top - 395;
+        const modalTop = top - 401;
         return {
           ...modalStyles,
           content: {
@@ -39,6 +42,12 @@ export default ({ helpers, t, settings, isMobile, getEditorState, setEditorState
           },
         };
       },
+      modalDecorations: [
+        {
+          decorationMode: DECORATION_MODE.APPEND,
+          decorator: Arrow,
+        },
+      ],
       helpers,
     },
   ];

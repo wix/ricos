@@ -1,10 +1,13 @@
+//Idea got from https://github.com/draft-js-plugins/draft-js-plugins/tree/master/draft-js-emoji-plugin/
+/* eslint-disable fp/no-loops */
+/* eslint-disable no-prototype-builtins */
 import emojione from 'emojione';
 
-const newEmojiListWithOutPriorityList = (priorityList) => {
+const newEmojiListWithOutPriorityList = priorityList => {
   const list = {};
-  for (const key in emojione.emojioneList) { // eslint-disable-line no-restricted-syntax
-    if (priorityList.hasOwnProperty(key)) { // eslint-disable-line no-prototype-builtins
-      continue; // eslint-disable-line no-continue
+  for (const key in emojione.emojioneList) {
+    if (priorityList.hasOwnProperty(key)) {
+      continue;
     }
     list[key] = emojione.emojioneList[key].unicode;
   }
@@ -14,13 +17,11 @@ const newEmojiListWithOutPriorityList = (priorityList) => {
 
 const emojiList = {};
 
-emojiList.setPriorityList = (newPriorityList) => {
-  // re-generate emojiList when set PriorityList
+emojiList.setPriorityList = newPriorityList => {
   emojiList.list = newEmojiListWithOutPriorityList(newPriorityList);
 };
 
-// init emojiList
-const priorityList = {
+const initPriorityList = {
   ':thumbsup:': ['1f44d'],
   ':smile:': ['1f604'],
   ':heart:': ['2764-fe0f', '2764'],
@@ -31,6 +32,6 @@ const priorityList = {
   ':raised_hands:': ['1f64c'],
   ':100:': ['1f4af'],
 };
-emojiList.setPriorityList(priorityList);
+emojiList.setPriorityList(initPriorityList);
 
 export default emojiList;
