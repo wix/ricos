@@ -34,8 +34,8 @@ class ImageSettings extends Component {
     this.props.onDeleteImage();
   }
 
-  replaceItem = event => {
-    this.props.handleFileChange(event);
+  replaceItem = files => {
+    this.props.handleFileChange(files);
   };
 
   getImageUrl = image =>

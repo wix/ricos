@@ -29,16 +29,15 @@ class BaseToolbarButton extends React.Component {
     this.props.pubsub.unsubscribe('componentState', this.onComponentStateChange);
   }
 
-  handleFileChange = event => {
-    if (event.target.files && event.target.files.length > 0) {
+  handleFileChange = files => {
+    if (files.length > 0) {
       const { helpers, onFilesSelected } = this.props;
       const { handleFileSelection } = helpers;
       if (handleFileSelection) {
         handleFileSelection({ ...this.props });
       } else if (onFilesSelected) {
-        onFilesSelected(this.props.pubsub, event.target.files);
+        onFilesSelected(this.props.pubsub, files);
       } else {
-        const files = Array.from(event.target.files);
         const state = { userSelectedFiles: { files } };
         this.props.pubsub.update('componentState', state);
       }

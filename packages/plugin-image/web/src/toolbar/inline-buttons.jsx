@@ -1,24 +1,27 @@
 import { BUTTONS, PluginSettingsIcon, getModalStyles } from 'wix-rich-content-common';
 import { Modals } from '../modals';
-import { MediaReplaceIcon, ImageEditor } from '../icons';
+import { MediaReplaceIcon, ImageEditorIcon } from '../icons';
 
 const removeEmpty = list => list.filter(item => !!item);
 
-export default ({ t, anchorTarget, relValue, uiSettings, isMobile, settings }) => {
+export default ({ t, anchorTarget, relValue, uiSettings, isMobile, imageEditorWixSettings }) => {
   const modalStyles = getModalStyles({ isMobile });
-  const imageEditorStyles = getModalStyles({ customStyles: { overlay: { visibility: 'hidden' } } });
-  const imageEditorButton = settings && settings.imageEditorWixSettings ? {
-    keyName: 'imageEditor',
-    type: BUTTONS.EXTERNAL_MODAL,
-    icon: ImageEditor,
-    modalName: Modals.IMAGE_EDITOR,
-    modalStyles: imageEditorStyles,
-    t,
-    settings,
-    mobile: false,
-    tooltipTextKey: 'ImageEditorButton_Tooltip',
-  } : null;
-
+  const imageEditorStyles = getModalStyles({
+    customStyles: { content: { maxWidth: '100%', background: 'transparent' } },
+  });
+  const imageEditorButton = imageEditorWixSettings
+    ? {
+        keyName: 'imageEditor',
+        type: BUTTONS.EXTERNAL_MODAL,
+        icon: ImageEditorIcon,
+        modalName: Modals.IMAGE_EDITOR,
+        modalStyles: imageEditorStyles,
+        t,
+        imageEditorWixSettings,
+        mobile: false,
+        tooltipTextKey: 'ImageEditorButton_Tooltip',
+      }
+    : null;
 
   const buttons = [
     { keyName: 'sizeOriginal', type: BUTTONS.SIZE_ORIGINAL, mobile: false },

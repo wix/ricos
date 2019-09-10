@@ -1,5 +1,5 @@
 import ImageSettingsModal from './toolbar/image-settings';
-import ImageEditorModal from './toolbar/image-editor';
+import ImageEditorModal from './imageStudio/image-editor';
 
 const Modals = {
   IMAGE_SETTINGS: 'image-settings',

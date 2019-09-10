@@ -8,10 +8,17 @@ export default function createToolbar({
   relValue,
   uiSettings,
   isMobile,
-  settings
+  settings,
 }) {
   return {
-    InlineButtons: createInlineButtons({ t, anchorTarget, relValue, uiSettings, isMobile, settings }),
+    InlineButtons: createInlineButtons({
+      t,
+      anchorTarget,
+      relValue,
+      uiSettings,
+      isMobile,
+      imageEditorWixSettings: settings.imageEditorWixSettings,
+    }),
     InsertButtons: createInsertButtons({ helpers, t }),
     name: 'image',
   };
