@@ -17,6 +17,7 @@
 
 ## 5.0.1 (Sep 10, 2019)
 ### :rocket: New Feature
+- `editor`
   - [#378](https://github.com/wix-incubator/rich-content/pull/378) plus icon is displayed next to text
 ### :bug: Bug Fix
 - `general`
