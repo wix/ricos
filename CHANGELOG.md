@@ -11,9 +11,13 @@
 ### :rocket: New Feature
 - `editor`
   - [#377](https://github.com/wix-incubator/rich-content/pull/377) resize decoration added (based on `draftjs-resizeable-plugin`)
-  - [#378](https://github.com/wix-incubator/rich-content/pull/378) plus icon is displayed next to text
 - `image`
   - [#377](https://github.com/wix-incubator/rich-content/pull/377) custom resizing implemented
+<hr/>
+
+## 5.0.1 (Sep 10, 2019)
+### :rocket: New Feature
+  - [#378](https://github.com/wix-incubator/rich-content/pull/378) plus icon is displayed next to text
 ### :bug: Bug Fix
 - `general`
   - [#381](https://github.com/wix-incubator/rich-content/pull/381) atomic block alignment functionality restored
