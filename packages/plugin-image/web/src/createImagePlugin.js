@@ -32,13 +32,13 @@ const createImagePlugin = (config = {}) => {
       const style = isInlineSize ? resizeableProps.style : { ...rest };
       return { ...resizeableProps, style };
     },
-    componentWillReceiveDecorationProps: (props, nextProps, onChange) => {
+    componentWillReceiveDecorationProps: (props, nextProps, onPropsChange) => {
       const { width } = PLUGIN_DECORATION_PROPS[PLUGIN_DECORATIONS.RESIZEABLE](props);
       const { width: nextWidth } = PLUGIN_DECORATION_PROPS[PLUGIN_DECORATIONS.RESIZEABLE](
         nextProps
       );
       if (width !== nextWidth) {
-        onChange();
+        onPropsChange({ size: 'inline' });
       }
     },
     toolbar: createToolbar({

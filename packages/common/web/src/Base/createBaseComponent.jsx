@@ -42,13 +42,9 @@ const createBaseComponent = ({
     }
 
     componentWillReceiveProps(nextProps) {
-      componentWillReceiveDecorationProps(this.props, nextProps, this.onResize);
+      componentWillReceiveDecorationProps(this.props, nextProps, this.updateComponentConfig);
       this.setState(this.stateFromProps(nextProps));
     }
-
-    onResize = () => {
-      this.updateComponentConfig({ size: 'inline' });
-    };
 
     stateFromProps(props) {
       const { getData, readOnly } = props.blockProps;
