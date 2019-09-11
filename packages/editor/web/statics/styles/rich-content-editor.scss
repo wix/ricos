@@ -1,0 +1,157 @@
+@import '~wix-rich-content-common/dist/statics/styles/palette';
+@import '~wix-rich-content-common/dist/statics/styles/consts';
+@import '~wix-rich-content-common/dist/statics/styles/general';
+@import '~wix-rich-content-common/dist/statics/styles/fonts';
+
+.wrapper {
+  @extend .fontElementMap;
+  position: relative;
+  height: 100%;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  * {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  }
+
+  &.desktop {
+    .editor {
+      :global(.DraftEditor-root) {
+        box-sizing: border-box;
+
+        &::after {
+          content: '';
+          display: table;
+          clear: both;
+        }
+      }
+
+      :global(.public-DraftEditorPlaceholder-root) {
+        margin: 0;
+      }
+    }
+  }
+}
+
+.editor {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  line-height: 1.5;
+  font-size: 16px;
+  font-family: 'Roboto', sans-serif;
+  color: $primary-text-color;
+
+  &::after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+}
+
+.atomic {
+  margin: 2px 0;
+}
+
+.toolbar {
+  margin-top: 20px;
+}
+
+.block {
+  &+& {
+    margin-top: 20px;
+  }
+}
+
+.elementSpacing {
+  margin: 0;
+
+  @include phone {
+    margin: 0;
+  }
+}
+
+.blockStyleSpacing {
+  margin: 15px 18px;
+
+  @include phone {
+    margin: 15px calc((18px + (100% - #{$textMobileWidth}) / 2));
+  }
+}
+
+.text {
+  composes: elementSpacing;
+
+  &:empty {
+    height: 24px;
+  }
+}
+
+.justify {
+  &>* {
+    white-space: pre-line !important;
+    text-align: justify !important;
+  }
+}
+
+.quote {
+  composes: blockStyleSpacing;
+  border-left-width: 3px;
+  border-left-style: solid;
+  font-size: 18px;
+  line-height: 26px;
+  padding: 6px 0 6px 18px;
+  font-style: normal;
+}
+
+.headerOne,
+.headerTwo,
+.headerThree {
+  composes: elementSpacing;
+  font: inherit;
+}
+
+.headerOne {
+  font-size: 32px;
+  line-height: $headerOneHeight;
+}
+
+.headerTwo {
+  font-size: 28px;
+  line-height: $headerTwoHeight;
+}
+
+.headerThree {
+  font-size: 22px;
+  line-height: $headerThreeHeight;
+}
+
+.indent {
+  composes: elementSpacing;
+  text-indent: 5%;
+}
+
+.orderedList {
+  composes: elementSpacing;
+}
+
+.unorderedList {
+  composes: elementSpacing;
+}
+
+.code,
+.codeBlock {
+  composes: blockStyleSpacing;
+  background-color: rgba(0, 0, 0, 0.05);
+  font-family: 'Inconsolata', 'Menlo', 'Consolas', monospace;
+  font-size: 16px;
+  line-height: 26px;
+  padding: 2px 25px;
+  white-space: pre-wrap;
+}
+
+.transformed {
+  transform: translate3d(0, 0, 0);
+}

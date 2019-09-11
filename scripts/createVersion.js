@@ -34,7 +34,7 @@ prompts({
     console.log(chalk.red('Release aborted'));
   } else {
     try {
-      let lernaCmd = `${lernaPath} version --no-commit-hooks --force-publish="*"`;
+      let lernaCmd = `${lernaPath} version --exact --no-commit-hooks --force-publish="*"`;
       if (argv.release) {
         lernaCmd = `${lernaCmd} ${argv.release}`;
       }

@@ -11,7 +11,7 @@ const prodConfig = {
     rules: [
       {
         test: /\.scss$/,
-        exclude: /.global.scss/,
+        exclude: /styles\.global\.scss/,
         use: [
           MiniCssExtractPlugin.loader,
           {

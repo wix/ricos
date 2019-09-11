@@ -5,6 +5,7 @@ const DotenvWebpackPlugin = require('dotenv-webpack');
 const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 
 const PATHS = {
+  monorepo_root: path.join(__dirname, '..', '..', '..'),
   root: path.join(__dirname, '..'),
   src: path.join(__dirname, '../src'),
   dist: path.join(__dirname, '../dist'),
@@ -22,18 +23,10 @@ module.exports = env => ({
     extensions: ['.js', '.jsx', '.json'],
     symlinks: false,
     alias: {
-      'react-hot-loader': path.resolve(path.join(__dirname, '..', 'node_modules', 'react-hot-loader')),
-      'draft-js': path.resolve(__dirname, '..', '..', '..', 'node_modules', '@wix', 'draft-js'),
-      '@wix/draft-js': path.resolve(
-        __dirname,
-        '..',
-        '..',
-        '..',
-        'node_modules',
-        '@wix',
-        'draft-js'
-      ),
-      'wix-rich-content-common': path.resolve(__dirname, '..', '..', '..', 'packages', 'common'),
+      'draft-js': path.resolve(PATHS.monorepo_root, 'node_modules', '@wix', 'draft-js'),
+      'react-hot-loader': path.resolve(PATHS.monorepo_root, 'node_modules', 'react-hot-loader'),
+      '@wix/draft-js': path.resolve(PATHS.monorepo_root, 'node_modules', '@wix', 'draft-js'),
+      'wix-rich-content-common': path.resolve(PATHS.monorepo_root, 'packages', 'common', 'web'),
     },
   },
   module: {
@@ -64,7 +57,7 @@ module.exports = env => ({
       },
       {
         test: /\.scss$/,
-        exclude: /.global.scss/,
+        exclude: /styles\.global\.scss/,
         use: [
           {
             loader: 'style-loader',

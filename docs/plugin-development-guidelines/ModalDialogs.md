@@ -12,7 +12,7 @@ Since different consumers have different ways to display modal dialogs, the `ric
 
 ### `RichContentModal` and `RichContentEditorModal` Components
 
-Any `rich-content` consumer application should render at least one instance of [RichContentModal](../../packages/common/src/Modals/RichContentModal.jsx) **or** [RichContentEditorModal](../../packages/editor/src/RichContentEditor/RichContentEditorModal.jsx).
+Any `rich-content` consumer application should render at least one instance of [RichContentModal](../../packages/common/web/src/Modals/RichContentModal.jsx) **or** [RichContentEditorModal](../../packages/editor/web/src/RichContentEditor/RichContentEditorModal.jsx).
 
 The `RichContentModal` is a dialog host, while the `RichContentEditorModal` is a wrapper whose responsibility is to integrate all the installed plugin dialogs into the `RichContentEditor`.
 
@@ -103,4 +103,4 @@ The number of decorators is not limited, and their rendering order is defined by
 
 #### Decoration Modes
 
-The `DECORATION_MODE` emuneration is defined in [consts.js](../../packages/common/src/consts). It defines 3 possible values: PREPEND, APPEND, and WRAP. The PREPEND mode adds a decorator before the dialog content, WRAP mode wraps the dialog content in decorator, and the APPEND adds the decorator after the content.
+The `DECORATION_MODE` emuneration is defined in [consts.js](../../packages/common/web/src/consts). It defines 3 possible values: PREPEND, APPEND, and WRAP. The PREPEND mode adds a decorator before the dialog content, WRAP mode wraps the dialog content in decorator, and the APPEND adds the decorator after the content.

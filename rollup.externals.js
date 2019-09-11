@@ -1,7 +1,7 @@
 export const externals = [
   '@wix/draft-js',
   'assert',
-  'clsx',
+  'classnames',
   'draft-js',
   'lodash',
   'prop-types',
@@ -20,6 +20,26 @@ export const excludedExternals = [
   /wix-rich-content-common\/.*?\.scss/,
 ];
 
+export const globals = {
+  '@wix/draft-js': 'Draft',
+  classnames: 'classNames',
+  'draft-js': 'Draft',
+  'draft-js-code': 'CodeUtils',
+  lodash: '_',
+  'prop-types': 'PropTypes',
+  react: 'React',
+  'react-custom-scrollbars': 'ReactCustomScrollbars',
+  'react-dom': 'ReactDOM',
+  'react-i18next': 'reactI18next',
+  'react-infinite-scroller': 'InfiniteScroll',
+  'react-md-spinner': 'MDSpinner',
+  'react-measure': 'Measure',
+  'react-player': 'ReactPlayer',
+  'react-sortable-hoc': 'reactSortableHoc',
+  'react-tooltip': 'ReactTooltip',
+  'wix-rich-content-common': 'WixRichContentCommon',
+};
+
 export const excludedGlobals = [
   'draft-js-plugins-editor',
   /draft-js-.*?-plugin/,
@@ -27,3 +47,10 @@ export const excludedGlobals = [
   '@wix/draft-js/lib/DraftOffsetKey',
   '@wix/draft-js/lib/isSoftNewlineEvent',
 ];
+
+export const isExternal = id =>
+  !id.startsWith('\0') &&
+  !id.startsWith('.') &&
+  !id.startsWith('/') &&
+  !excludedExternals.find(regex => (typeof regex === 'string' ? regex === id : regex.test(id))) &&
+  !!externals.find(externalName => new RegExp(externalName).test(id));
