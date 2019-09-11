@@ -11,13 +11,6 @@ const PATHS = {
   dist: path.join(__dirname, '../dist'),
 };
 
-console.log('monorepo_root', PATHS.monorepo_root);
-console.log(
-  'react-hot-loader',
-  path.resolve(PATHS.monorepo_root, 'node_modules', 'react-hot-loader')
-);
-console.log('common', path.resolve(PATHS.monorepo_root, 'packages', 'common'));
-
 module.exports = env => ({
   entry: [require.resolve('./polyfills'), path.resolve(PATHS.src, 'index.js')],
   output: {

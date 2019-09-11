@@ -36,9 +36,9 @@
     }
   },
   "dependencies": {
-    "draft-js-drag-n-drop-plugin": "~2.0.2",
-    "draft-js-focus-plugin": "~2.2.0",
-    "draft-js-plugins-editor": "~2.1.1",
+    "draft-js-drag-n-drop-plugin": "~2.0.4",
+    "draft-js-focus-plugin": "~3.0.1",
+    "draft-js-plugins-editor": "~3.0.0",
     "i18next": "~10.6.0",
     "react-click-outside": "github:tj/react-click-outside",
     "react-i18next": "~7.13.0",
