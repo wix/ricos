@@ -45,7 +45,7 @@ export default ({ settings, t, helpers, getEditorBounds, isMobile }) => {
     { keyName: 'separator1', type: BUTTONS.SEPARATOR, mobile: false },
     {
       keyName: 'sizeSmallLeft',
-      type: BUTTONS.ALIGN_LEFT,
+      type: BUTTONS.SIZE_SMALL_LEFT,
       mapStoreDataToButtonProps: getAlignmentButtonPropsFn(getEditorBounds),
       mobile: false,
     },
@@ -57,7 +57,7 @@ export default ({ settings, t, helpers, getEditorBounds, isMobile }) => {
     },
     {
       keyName: 'sizeSmallRight',
-      type: BUTTONS.ALIGN_RIGHT,
+      type: BUTTONS.SIZE_SMALL_RIGHT,
       mapStoreDataToButtonProps: getAlignmentButtonPropsFn(getEditorBounds),
       mobile: false,
     },
