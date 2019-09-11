@@ -120,7 +120,7 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
       getEditorBounds,
     });
 
-  const decoratedCompWithBase =
+  const DecoratedCompWithBase =
     baseComponent && config.decorator ? config.decorator(baseComponent) : baseComponent;
 
   const InlineModals = config.inlineModals;
