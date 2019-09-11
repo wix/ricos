@@ -121,7 +121,7 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
     });
 
   const DecoratedCompWithBase =
-    baseComponent && config.decorator ? config.decorator(baseComponent) : baseComponent;
+    BaseComponent && config.decorator ? config.decorator(BaseComponent) : BaseComponent;
 
   const InlineModals = config.inlineModals;
 
@@ -138,7 +138,7 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
         const pluginTypes = [config.type, config.legacyType];
         if (includes(pluginTypes, type)) {
           return {
-            component: decoratedCompWithBase,
+            component: DecoratedCompWithBase,
             editable: false,
             props: {
               getData: getData(contentBlock, { getEditorState }),
