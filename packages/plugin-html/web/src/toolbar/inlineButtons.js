@@ -1,3 +1,4 @@
+// flow
 import { get } from 'lodash';
 import { translate } from 'react-i18next';
 import {
@@ -32,10 +33,7 @@ const TOOLTIP_TEXT_BY_SRC_TYPE = {
   [SRC_TYPE_URL]: 'HtmlPlugin_EditUrl_Tooltip',
 };
 
-/**
- * createInlineButtons
- */
-export default ({ settings = {}, getEditorBounds }) => {
+const createInlineButtons /*: CreateInlineButtons*/ = ({ settings = {}, getEditorBounds }) => {
   const {
     maxWidth,
     minWidth = MIN_WIDTH,
@@ -96,3 +94,5 @@ export default ({ settings = {}, getEditorBounds }) => {
     { type: BUTTONS.DELETE, keyName: 'delete', mobile: true },
   ];
 };
+
+export default createInlineButtons;

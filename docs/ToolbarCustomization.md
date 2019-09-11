@@ -34,7 +34,7 @@ The `Setting` type is defined as follows:
 
 ```javascript
 {
-  name: TOOLBARS.TYPE,
+  name: TOOLBARS,
   shouldCreate: () => {
     desktop: boolean,
     mobile: {
@@ -45,8 +45,8 @@ The `Setting` type is defined as follows:
   getVisibilityFn: () => {
     desktop: editorState => boolean,
     mobile: {
-      ios: editorState => boolean,
-      android: editorState => boolean
+      ios: (editorState: any) => boolean,
+      android: (editorState: any) => boolean
     }
   },
   getPositionOffset: () => {
@@ -71,17 +71,17 @@ The `Setting` type is defined as follows:
     }
   },
   getButtons: () => {
-    desktop: Array<Component> | Array<string>,
+    desktop: Array<any>,
     mobile: {
-      ios: Array<Component> | Array<string>,
-      android: Array<Component> | Array<string>
+      ios: Array<any>,
+      android: Array<any>
     }
   },
-   getTextPluginButtons: () => {
-    desktop: Map<Component>,
+  getTextPluginButtons: () => {
+    desktop: { [key:string]: Component },
     mobile: {
-      ios: Map<Component>,
-      android: Map<Component>
+      ios: { [key:string]: Component },
+      android: { [key:string]: Component }
     }
   }
 }
@@ -106,16 +106,16 @@ All the toolbar types are exposed by the `TOOLBARS` const found in [consts.js](h
 
 ### `Settings` properties
 
-| property                 | description                                                                                                                                                                                                                                                                     | affected toolbars                           |
-| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------- |
-| `name`                   | one of the toolbar types (see `TOOLBARS` const for details)                                                                                                                                                                                                                     | all                                         |
-| `shouldCreate`           | determines whether the toolbar should be created at the first place                                                                                                                                                                                                             | all                                         |
-| `getVisibilityFn`        | toolbar visibility function                                                                                                                                                                                                                                                     | all                                         |
-| `getPositionOffset`      | toolbar offset point in pixels, relatively to the default toolbar position                                                                                                                                                                                                      | all                                         |
-| `getDisplayOptions`      | toolbar display options (see next section for details)                                                                                                                                                                                                                          | all                                         |
-| `getToolbarDecorationFn` | component to be rendered instead of default toolbar container (see the following sections for details)                                                                                                                                                                          | all                                         |
-| `getButtons` (1)         | a list of the toolbar button components                                                                                                                                                                                                                                         | plugin insertion and functionality toolbars |
-| `getButtons` (2)         | a list of inline button names                                                                                                                                                                                                                                                   | text editing toolbars                       |
+| property                 | description                                                                                                                                                                                                                                                                         | affected toolbars                           |
+| ------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------- |
+| `name`                   | one of the toolbar types (see `TOOLBARS` const for details)                                                                                                                                                                                                                         | all                                         |
+| `shouldCreate`           | determines whether the toolbar should be created at the first place                                                                                                                                                                                                                 | all                                         |
+| `getVisibilityFn`        | toolbar visibility function                                                                                                                                                                                                                                                         | all                                         |
+| `getPositionOffset`      | toolbar offset point in pixels, relatively to the default toolbar position                                                                                                                                                                                                          | all                                         |
+| `getDisplayOptions`      | toolbar display options (see next section for details)                                                                                                                                                                                                                              | all                                         |
+| `getToolbarDecorationFn` | component to be rendered instead of default toolbar container (see the following sections for details)                                                                                                                                                                              | all                                         |
+| `getButtons` (1)         | a list of the toolbar button components                                                                                                                                                                                                                                             | plugin insertion and functionality toolbars |
+| `getButtons` (2)         | a list of inline button names                                                                                                                                                                                                                                                       | text editing toolbars                       |
 | `getTextPluginButtons`   | a map of inline buttons added by plugins. The keys are derived from the `PluginTextButtonMappers` -- see the `link-plugin`'s [createLinkToolbar](https://github.com/wix-incubator/rich-content/blob/master/packages/plugin-link/web/src/toolbar/createLinkToolbar.js) for reference | text editing toolbars                       |
 
 #### Display Options

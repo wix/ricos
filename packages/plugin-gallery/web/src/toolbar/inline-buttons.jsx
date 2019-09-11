@@ -1,3 +1,4 @@
+// @flow
 import { BUTTONS, PluginSettingsIcon, getModalStyles } from 'wix-rich-content-common';
 import { Modals } from '../modals';
 import { ManageMediaIcon, UploadIcon } from '../icons';
@@ -5,7 +6,7 @@ import { galleryLayoutsDropdown, switchLayout, getCurrentLayout } from '../helpe
 
 const modalStyles = getModalStyles();
 
-export default ({ t, anchorTarget, relValue }) => {
+const createInlineButtons /*: CreateInlineButtons*/ = ({ t, anchorTarget, relValue }) => {
   return [
     {
       keyName: 'add',
@@ -20,7 +21,7 @@ export default ({ t, anchorTarget, relValue }) => {
       multiple: true,
       tooltipTextKey: 'UploadMediaButton_Tooltip',
     },
-    { type: BUTTONS.SEPARATOR, mobile: false },
+    { type: BUTTONS.SEPARATOR, mobile: false, keyName: 'separator0' },
     {
       keyName: 'layout',
       type: BUTTONS.DROPDOWN,
@@ -67,3 +68,4 @@ export default ({ t, anchorTarget, relValue }) => {
     { keyName: 'delete', type: BUTTONS.DELETE, mobile: true },
   ];
 };
+export default createInlineButtons;

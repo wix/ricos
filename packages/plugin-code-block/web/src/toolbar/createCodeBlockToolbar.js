@@ -1,3 +1,4 @@
+// flow
 import { MODIFIERS } from 'wix-rich-content-common';
 import TextCodeBlockButton from './TextCodeBlockButton';
 import { CODE_BLOCK_TYPE } from '../types';
@@ -10,7 +11,7 @@ export default ({ setEditorState, helpers, t }) => {
   };
 
   return {
-    TextButtonMapper: () => ({
+    TextButtonMapper /*: TextButtonMapper */: () => ({
       CodeBlock: {
         component: TextCodeBlockButton,
         isMobile: true,
