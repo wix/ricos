@@ -102,7 +102,7 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
     }));
   const PluginComponent = config.component;
 
-  const baseComponent =
+  const BaseComponent =
     PluginComponent &&
     createBaseComponent({
       PluginComponent,
