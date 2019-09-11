@@ -59,7 +59,8 @@ declare type Store = {|
   get: (key: string) => any,
 |};
 
-declare type Pubsub = (initialState: any) => {|
+declare type Pubsub = {|
+  getBlockHandler: (key: string) => any,
   subscribe: (key: string, callback: Function) => void,
   unsubscribe: (key: string, callback: Function) => void,
   update: (key: string, newData: any) => void,

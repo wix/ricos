@@ -168,7 +168,7 @@ declare module "react-color" {
   declare export var TwitterPicker: Class<Component<TwitterPickerProps>>;
 
   declare export function CustomPicker<Props: {...}>(
-    Component: ComponentType<InjectedColorProps & $Supertype<Props>>
+    Component: ComponentType<InjectedColorProps>
   ): ComponentType<Props>;
 }
 

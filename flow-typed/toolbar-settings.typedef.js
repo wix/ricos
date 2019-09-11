@@ -43,6 +43,11 @@ declare type TextButtons = {
   mobile: Array<string>
 };
 
+declare type PluginTextButtons = {
+	desktop: { [key:string]: Component },
+	mobile: { [key:string]: Component }
+};
+
 declare type GetToolbarSettings =
-  ({ textButtons: TextButtons, pluginButtons: Array<any>, pluginTextButtons: Array<any> }) => Array<ToolbarSettings>;
+  ({ textButtons: TextButtons, pluginButtons: Array<any>, pluginTextButtons: PluginTextButtons }) => Array<ToolbarSettings>;
 */

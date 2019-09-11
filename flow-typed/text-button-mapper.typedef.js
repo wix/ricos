@@ -31,7 +31,8 @@ declare type TextButtonMappingParams = {
   theme: any,
   getEditorState: () => any,
   setEditorState: (editorState: any) => void,
-  settings: any
+  settings: any,
+  uiSettings: any,
  };
 
  declare type TextButtonMapper = (params: TextButtonMappingParams) => {

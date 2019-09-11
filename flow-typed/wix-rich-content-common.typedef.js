@@ -1,4 +1,3 @@
-import {DISPLAY_MODE} from '../packages/common/web/src/consts';
 /*::
 declare module 'wix-rich-content-common' {
   declare export function hasLinksInSelection(editorState: any): boolean;

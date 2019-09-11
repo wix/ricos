@@ -1,3 +1,4 @@
+//@flow
 import {
   MODIFIERS,
   hasLinksInSelection,
@@ -43,7 +44,7 @@ const openLinkModal = ({
   }
 };
 
-export default config => ({
+const linkTextButtonMapper /*: TextButtonMapper */ = config => ({
   TextButtonMapper: () => ({
     Link: {
       component: TextLinkButton,
@@ -68,3 +69,5 @@ export default config => ({
     },
   }),
 });
+
+export default linkTextButtonMapper;
