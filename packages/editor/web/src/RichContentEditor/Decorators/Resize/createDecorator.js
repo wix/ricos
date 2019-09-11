@@ -1,3 +1,13 @@
+/*
+ * Based on draft-js-resizeable-plugin with following changes:
+ *  - additional props width, containerClassName are rendered on WrappedComponent
+ *  - styles for handles added
+ *  - context is available (for theme access)
+ *  - onMove: isLeft, isRight calculation considers current size and alignment
+ *  - config accepts minHeight, minWidth instead of hard-coded values
+ *
+ *  TODO: mouse handlers can be optimized (vertical resizing is disabled)
+ */
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
