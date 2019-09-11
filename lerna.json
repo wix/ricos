@@ -4,7 +4,8 @@
     "version": {
       "allowBranch": [
         "develop",
-        "master"
+        "master",
+        "feat/draft-0.11.0"
       ],
       "message": "[*] chore(release): %s"
     }
