@@ -1,6 +1,6 @@
 import { composeDecorators } from 'draft-js-plugins-editor';
 import createFocusPlugin from 'draft-js-focus-plugin';
-import createResizeDecoration from './ResizeDecoration';
+import createResizeDecoration from './Decorators/Resize';
 // import createBlockDndPlugin from 'draft-js-drag-n-drop-plugin';
 
 const createPlugins = ({
