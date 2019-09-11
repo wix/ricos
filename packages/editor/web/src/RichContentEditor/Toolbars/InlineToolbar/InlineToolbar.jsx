@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { getVisibleSelectionRect } from '@wix/draft-js';
+import { getVisibleSelectionRect } from 'draft-js';
 import Measure from 'react-measure';
 import ClickOutside from 'react-click-outside';
 import { debounce } from 'lodash';

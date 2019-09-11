@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { debounce } from 'lodash';
 import { DISPLAY_MODE } from 'wix-rich-content-common';
-import DraftOffsetKey from '@wix/draft-js/lib/DraftOffsetKey';
+import DraftOffsetKey from 'draft-js/lib/DraftOffsetKey';
 import Styles from '../../../../statics/styles/side-toolbar-wrapper.scss';
 
 export default class SideToolbar extends Component {

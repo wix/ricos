@@ -105,6 +105,8 @@
 - `viewer`
   - [#390](https://github.com/wix-incubator/rich-content/pull/390) justified text new lines disappear
 ### :house: Internal
+- `general`
+  - [#347](https://github.com/wix-incubator/rich-content/pull/347) draft-js version updated to 0.11.0
 - `e2e`
   - [#368](https://github.com/wix-incubator/rich-content/pull/368) test rtl support in toolbars, text and external modals
 <hr/>

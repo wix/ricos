@@ -1,4 +1,4 @@
-import { EditorState, Modifier, RichUtils, SelectionState } from '@wix/draft-js';
+import { EditorState, Modifier, RichUtils, SelectionState } from 'draft-js';
 import { flatMap, findIndex, findLastIndex } from 'lodash';
 
 export const insertLinkInPosition = (

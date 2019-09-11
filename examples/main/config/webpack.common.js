@@ -11,6 +11,13 @@ const PATHS = {
   dist: path.join(__dirname, '../dist'),
 };
 
+console.log('monorepo_root', PATHS.monorepo_root);
+console.log(
+  'react-hot-loader',
+  path.resolve(PATHS.monorepo_root, 'node_modules', 'react-hot-loader')
+);
+console.log('common', path.resolve(PATHS.monorepo_root, 'packages', 'common'));
+
 module.exports = env => ({
   entry: [require.resolve('./polyfills'), path.resolve(PATHS.src, 'index.js')],
   output: {
@@ -23,9 +30,7 @@ module.exports = env => ({
     extensions: ['.js', '.jsx', '.json'],
     symlinks: false,
     alias: {
-      'draft-js': path.resolve(PATHS.monorepo_root, 'node_modules', '@wix', 'draft-js'),
       'react-hot-loader': path.resolve(PATHS.monorepo_root, 'node_modules', 'react-hot-loader'),
-      '@wix/draft-js': path.resolve(PATHS.monorepo_root, 'node_modules', '@wix', 'draft-js'),
       'wix-rich-content-common': path.resolve(PATHS.monorepo_root, 'packages', 'common', 'web'),
     },
   },
@@ -141,7 +146,7 @@ module.exports = env => ({
       },
     ]),
     new DotenvWebpackPlugin({
-      path: path.resolve(PATHS.root, '..', '..', '.env'),
+      path: path.resolve(PATHS.monorepo_root, '.env'),
     }),
     new MonacoWebpackPlugin({
       languages: ['json'],

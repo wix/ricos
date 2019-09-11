@@ -1,4 +1,4 @@
-import { EditorState, SelectionState } from '@wix/draft-js';
+import { EditorState, SelectionState } from 'draft-js';
 import DraftOffsetKey from '@wix/draft-js/lib/DraftOffsetKey';
 
 function setNativeSelectionToBlock(block) {

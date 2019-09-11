@@ -1,4 +1,4 @@
-import { SelectionState, EditorState, Modifier } from '@wix/draft-js';
+import { SelectionState, EditorState, Modifier } from 'draft-js';
 import { cloneDeep, includes } from 'lodash';
 import createBaseComponent from './createBaseComponent';
 import createToolbar from './createBaseToolbar';
