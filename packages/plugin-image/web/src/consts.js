@@ -1,11 +1,10 @@
 export const getDefault = () => ({
   config: {
     alignment: 'center',
-    size: 'original',
+    size: 'content',
     showTitle: true,
     showDescription: true,
   },
 });
 
 export const SMALL_SIZE_WIDTH = 350;
-export const FULL_WIDTH = 740;
