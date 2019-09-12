@@ -34,15 +34,15 @@ export default ({ styles }) => {
     { keyName: 'separator2', type: BUTTONS.SEPARATOR, mobile: true },
     {
       keyName: 'alignLeft',
-      type: BUTTONS.ALIGNMENT_LEFT,
+      type: BUTTONS.TEXT_ALIGN_LEFT,
       mapComponentDataToButtonProps: componentData => ({
         disabled: isAlignmentDisabled(componentData),
       }),
     },
-    { keyName: 'alignCenter', type: BUTTONS.ALIGNMENT_CENTER },
+    { keyName: 'alignCenter', type: BUTTONS.TEXT_ALIGN_CENTER },
     {
       keyName: 'alignRight',
-      type: BUTTONS.ALIGNMENT_RIGHT,
+      type: BUTTONS.TEXT_ALIGN_RIGHT,
       mapComponentDataToButtonProps: componentData => ({
         disabled: isAlignmentDisabled(componentData),
       }),

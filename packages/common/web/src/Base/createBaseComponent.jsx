@@ -28,6 +28,8 @@ const createBaseComponent = ({
   relValue,
   t,
   isMobile,
+  pluginDecorationProps = () => ({}),
+  componentWillReceiveDecorationProps = () => {},
   getEditorBounds,
 }) => {
   class WrappedComponent extends Component {
@@ -40,6 +42,7 @@ const createBaseComponent = ({
     }
 
     componentWillReceiveProps(nextProps) {
+      componentWillReceiveDecorationProps(this.props, nextProps, this.updateComponentConfig);
       this.setState(this.stateFromProps(nextProps));
     }
 
@@ -217,6 +220,10 @@ const createBaseComponent = ({
     render = () => {
       const { blockProps, className, onClick, selection } = this.props;
       const { componentData, readOnly } = this.state;
+      const { containerClassName, ...decorationProps } = pluginDecorationProps(
+        this.props,
+        componentData
+      );
       const { link, width: currentWidth, height: currentHeight } = componentData.config || {};
       const { width: initialWidth, height: initialHeight } = settings || {};
       const isEditorFocused = selection.getHasFocus();
@@ -224,9 +231,9 @@ const createBaseComponent = ({
       const isActive = isFocused && isEditorFocused && !readOnly;
 
       const classNameStrategies = [
-        PluginComponent.WrappedComponent.alignmentClassName || alignmentClassName,
-        PluginComponent.WrappedComponent.sizeClassName || sizeClassName,
-        PluginComponent.WrappedComponent.textWrapClassName || textWrapClassName,
+        PluginComponent.alignmentClassName || alignmentClassName,
+        PluginComponent.sizeClassName || sizeClassName,
+        PluginComponent.textWrapClassName || textWrapClassName,
       ].map(strategy => strategy(this.state.componentData, theme, this.styles, isMobile));
 
       const ContainerClassNames = classNames(
@@ -237,6 +244,7 @@ const createBaseComponent = ({
           [theme.pluginContainer]: !readOnly,
           [theme.pluginContainerReadOnly]: readOnly,
           [theme.pluginContainerMobile]: isMobile,
+          [containerClassName]: !!containerClassName,
         },
         classNameStrategies,
         className || '',
@@ -286,9 +294,15 @@ const createBaseComponent = ({
             .toLowerCase()
             .indexOf('image') !== -1,
       });
+
       /* eslint-disable jsx-a11y/anchor-has-content */
       return (
-        <div style={sizeStyles} className={ContainerClassNames}>
+        <div
+          style={sizeStyles}
+          className={ContainerClassNames}
+          data-focus={isActive}
+          {...decorationProps}
+        >
           {!isNil(link) ? (
             <div>
               {component}

@@ -178,6 +178,7 @@
   "SizeOriginalButton_Tooltip": "Original",
   "SizeSmallCenterButton_Tooltip": "Small",
   "SizeSmallLeftButton_Tooltip": "Align Left",
+  "AlignCenterButton_Tooltip": "Align Center",
   "SizeSmallRightButton_Tooltip": "Align Right",
   "SizeContentButton_Tooltip": "Best Fit",
   "SizeFullWidthButton_Tooltip": "Full Width",

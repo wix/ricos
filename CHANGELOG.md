@@ -8,6 +8,11 @@
 > - :house: [Internal]
 
 ## [Unreleased]
+### :rocket: New Feature
+- `editor`
+  - [#377](https://github.com/wix-incubator/rich-content/pull/377) resize decoration added (based on `draftjs-resizeable-plugin`)
+- `image`
+  - [#377](https://github.com/wix-incubator/rich-content/pull/377) custom resizing implemented
 <hr/>
 
 ## 5.0.1 (Sep 10, 2019)
@@ -383,7 +388,7 @@
 - `video`
   - [#293](https://github.com/wix-incubator/rich-content/pull/293) fix ratio
 ### :book: Documentation
-  - [#290](https://github.com/wix-incubator/rich-content/pull/290) [Plugin Customization doc]('./docs/PluginCustomization.md') update on `text-color`
+- [#290](https://github.com/wix-incubator/rich-content/pull/290) [Plugin Customization doc]('./docs/PluginCustomization.md') update on `text-color`
 <hr/>
 
 ## 3.3.2 (Apr 29, 2019)

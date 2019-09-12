@@ -31,6 +31,7 @@ class App extends PureComponent {
     if (locale !== 'en') {
       this.setLocale(locale);
     }
+    window.onbeforeunload = function() { return "Your work will be lost."; };
   }
 
   getInitialState() {
