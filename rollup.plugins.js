@@ -1,4 +1,5 @@
 import path from 'path';
+const svgr = require('@svgr/rollup').default;
 
 const IS_DEV_ENV = process.env.NODE_ENV === 'development';
 
@@ -125,6 +126,7 @@ const visualizer = () => {
 };
 
 let plugins = [
+  svgr(),
   resolve(),
   builtins(),
   copy(),

@@ -1,0 +1,23 @@
+%resizeableHandle {
+  content: '';
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  z-index: 1;
+  background: #fff;
+  border: 2px solid #3899ec;
+  position: absolute;
+  top: 50%;
+}
+
+/*!rtl:ignore*/
+[data-focus='true'].resizeHandleR::before {
+  @extend %resizeableHandle;
+  right: -8px;
+}
+
+/*!rtl:ignore*/
+[data-focus='true'].resizeHandleL::after {
+  @extend %resizeableHandle;
+  left: -8px;
+}

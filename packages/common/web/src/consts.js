@@ -60,3 +60,18 @@ export const BLOCK_TYPES = [
   'code-block',
   'unstyled',
 ];
+
+export const PLUGIN_DECORATIONS = {
+  RESIZEABLE: 'RESIZEABLE',
+};
+
+export const PLUGIN_DECORATION_PROPS = {
+  [PLUGIN_DECORATIONS.RESIZEABLE]: props => ({
+    onMouseDown: props.onMouseDown,
+    onMouseMove: props.onMouseMove,
+    onMouseLeave: props.onMouseLeave,
+    style: props.style,
+    width: props.width,
+    containerClassName: props.containerClassName,
+  }),
+};

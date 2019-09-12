@@ -22,7 +22,7 @@ describe('editor', () => {
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.UNDERLINE)
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.ITALIC)
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.ALIGNMENT)
-      .setTextStyle(INLINE_TOOLBAR_BUTTONS.ALIGNMENT_CENTER)
+      .setTextStyle(INLINE_TOOLBAR_BUTTONS.TEXT_ALIGN_CENTER)
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.QUOTE, [30, 170])
       .setColor(3, [20, 30])
       .setLineSpacing(3, [30, 100])

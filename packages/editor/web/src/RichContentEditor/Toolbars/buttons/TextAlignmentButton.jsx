@@ -2,7 +2,7 @@ import {
   getTextAlignment,
   setTextAlignment,
   AlignLeftIcon,
-  AlignCenterIcon,
+  AlignTextCenterIcon,
   AlignRightIcon,
   AlignJustifyIcon,
 } from 'wix-rich-content-common';
@@ -17,7 +17,7 @@ import createTextDropdownButton from './utils/createTextDropdownButton';
 const activeIcon = textAlignment => {
   switch (textAlignment) {
     case 'center':
-      return AlignCenterIcon;
+      return AlignTextCenterIcon;
     case 'right':
       return AlignRightIcon;
     case 'justify':

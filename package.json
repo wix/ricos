@@ -52,7 +52,7 @@
     "@babel/preset-env": "7.2.3",
     "@babel/preset-react": "7.0.0",
     "@babel/runtime": "7.2.0",
-    "@svgr/cli": "^2.0.0",
+    "@svgr/rollup": "4.3.2",
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^23.6.0",
     "babel-loader": "^8.0.5",
@@ -69,8 +69,8 @@
     "eslint-config-wix": "^1.1.18",
     "eslint-import-resolver-lerna": "^1.0.0",
     "eslint-plugin-fp": "^2.3.0",
-    "eslint-plugin-jsx-a11y": "6.2.3",
     "eslint-plugin-import": "2.8.0",
+    "eslint-plugin-jsx-a11y": "6.2.3",
     "eslint-plugin-lodash": "^2.7.0",
     "eslint-plugin-prettier": "^3.0.1",
     "eslint-plugin-react": "^7.7.0",
@@ -86,8 +86,8 @@
     "optimize-css-assets-webpack-plugin": "^4.0.2",
     "pascal-case": "2.0.1",
     "postcss-exclude-files": "^1.0.15",
-    "postcss-url": "^7.3.2",
     "postcss-rtl": "^1.4.0",
+    "postcss-url": "^7.3.2",
     "prompts": "^0.1.8",
     "react-svg-loader": "^2.1.0",
     "rollup": "1.20.3",
@@ -119,5 +119,6 @@
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
-  }
+  },
+  "dependencies": {}
 }

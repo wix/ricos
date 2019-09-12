@@ -8,6 +8,8 @@ const createHtmlPlugin = (config = {}) => {
   const { helpers, isMobile, t, [type]: settings = {}, getEditorBounds, ...rest } = config;
 
   return createBasePlugin({
+    onOverlayClick: ({ e, pubsub, componentData }) =>
+      !componentData.src ? pubsub.set('onClickTrigger', { event: e, key: 'edit' }) : null,
     component: Component,
     settings,
     type: HTML_TYPE,

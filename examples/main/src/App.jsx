@@ -31,6 +31,7 @@ class App extends PureComponent {
     if (locale !== 'en') {
       this.setLocale(locale);
     }
+    window.onbeforeunload = function() { return "Your work will be lost."; };
   }
 
   getInitialState() {
@@ -45,6 +46,7 @@ class App extends PureComponent {
       isContentStateShown: false,
       viewerResetKey: 0,
       editorResetKey: 0,
+      shouldMockUpload: true,
       ...localState,
     };
   }
@@ -92,6 +94,7 @@ class App extends PureComponent {
       staticToolbar,
       locale,
       localeResource,
+      shouldMockUpload,
     } = this.state;
     const settings = [
       {
@@ -101,6 +104,14 @@ class App extends PureComponent {
           this.setState(state => ({
             editorIsMobile: !editorIsMobile,
             editorResetKey: state.editorResetKey + 1,
+          })),
+      },
+      {
+        name: 'Mock Upload',
+        active: shouldMockUpload,
+        action: () =>
+          this.setState(state => ({
+            shouldMockUpload: !shouldMockUpload,
           })),
       },
     ];
@@ -131,6 +142,7 @@ class App extends PureComponent {
                 onChange={this.onEditorChange}
                 editorState={editorState}
                 isMobile={this.state.editorIsMobile || this.isMobile}
+                shouldMockUpload={this.state.shouldMockUpload}
                 staticToolbar={staticToolbar}
                 locale={locale}
                 localeResource={localeResource}
