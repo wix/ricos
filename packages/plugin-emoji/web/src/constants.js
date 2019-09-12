@@ -54,14 +54,6 @@ export const getEmojiGroups = t => [
   },
 ];
 
-export const DEFAULTS = {
-  config: {
-    alignment: 'left',
-    size: 'small',
-    width: 'fit-content',
-  },
-};
-
 export const DesktopFlyOutModalStyles = {
   overlay: {
     backgroundColor: 'rgba(0, 0, 0, 0)',

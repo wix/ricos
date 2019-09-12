@@ -1,4 +1,4 @@
-import { DEFAULTS, DesktopFlyOutModalStyles } from '../constants';
+import { DesktopFlyOutModalStyles } from '../constants';
 import {
   TOOLBARS,
   decorateComponentWithProps,
@@ -16,7 +16,7 @@ export default ({ helpers, t, settings, getEditorState, setEditorState }) => {
       name: 'EMOJI',
       tooltipText: t('GiphyPlugin_InsertButton_Tooltip'),
       Icon: EmojiPluginIcon,
-      componentData: settings.componentDataDefaults || DEFAULTS,
+      componentData: settings.componentDataDefaults || {},
       toolbars: settings.insertToolbars || [TOOLBARS.FOOTER],
       modalElement: decorateComponentWithProps(EmojiPreviewModal, {
         getEditorState,
