@@ -98,10 +98,7 @@ const createBaseComponent = ({
 
     onComponentDataChange = componentData => {
       if (this.isMeAndIdle) {
-        const updatedState = {
-          componentData: componentData || {},
-        };
-        this.setState(updatedState, () => {
+        this.setState({ componentData: componentData || {} }, () => {
           const {
             blockProps: { setData },
           } = this.props;
