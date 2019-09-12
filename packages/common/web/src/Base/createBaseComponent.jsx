@@ -28,14 +28,14 @@ const createBaseComponent = ({
   t,
   isMobile,
   getEditorBounds,
-  shouldRenderOverlay,
+  onOverlayClick,
 }) => {
   class WrappedComponent extends Component {
     static displayName = createHocName('BaseComponent', PluginComponent);
 
     constructor(props) {
       super(props);
-      this.state = { componentState: {}, overlay: true, ...this.stateFromProps(props) };
+      this.state = { componentState: {}, ...this.stateFromProps(props) };
     }
 
     componentWillReceiveProps(nextProps) {
@@ -71,10 +71,6 @@ const createBaseComponent = ({
         { key: 'htmlPluginMaxHeight', callback: this.onHtmlPluginMaxHeightChange },
         { key: 'componentLink', callback: this.onComponentLinkChange },
       ].map(({ key, callback }) => pubsub.subscribeOnBlock({ key, callback, blockKey }));
-      shouldRenderOverlay &&
-        this.setState({
-          overlay: shouldRenderOverlay({ componentData: this.state.componentData }),
-        });
     }
 
     componentDidUpdate() {
@@ -100,10 +96,6 @@ const createBaseComponent = ({
         const updatedState = {
           componentData: componentData || {},
         };
-        if (shouldRenderOverlay && this.state.componentData !== componentData) {
-          updatedState.overlay = shouldRenderOverlay({ componentData });
-        }
-
         this.setState(updatedState, () => {
           const {
             blockProps: { setData },
@@ -176,6 +168,15 @@ const createBaseComponent = ({
       return this.isMe() && !this.duringUpdate;
     }
 
+    handleClick = e => {
+      if (onOverlayClick) {
+        const { componentData } = this.state;
+        onOverlayClick({ e, pubsub, componentData });
+      }
+      const { onClick } = this.props;
+      onClick && onClick(e);
+    };
+
     updateComponentConfig = newConfig => {
       pubsub.update('componentData', { config: newConfig });
     };
@@ -225,8 +226,8 @@ const createBaseComponent = ({
     }
 
     render = () => {
-      const { blockProps, className, onClick, selection } = this.props;
-      const { componentData, readOnly, overlay } = this.state;
+      const { blockProps, className, selection } = this.props;
+      const { componentData, readOnly } = this.state;
       const { link, width: currentWidth, height: currentHeight } = componentData.config || {};
       const { width: initialWidth, height: initialHeight } = settings || {};
       const isEditorFocused = selection.getHasFocus();
@@ -307,11 +308,11 @@ const createBaseComponent = ({
           ) : (
             component
           )}
-          {!this.state.readOnly && overlay && (
+          {!this.state.readOnly && (
             <div
               role="none"
               data-hook={'componentOverlay'}
-              onClick={onClick}
+              onClick={this.handleClick}
               className={overlayClassNames}
             />
           )}
