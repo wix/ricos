@@ -79,9 +79,8 @@ export default ({ blockType, button, helpers, pubsub, settings, t, isMobile }) =
       }
     };
 
-    handleFileChange = event => {
-      if (event.target.files.length > 0) {
-        const files = Array.from(event.target.files);
+    handleFileChange = files => {
+      if (files.length > 0) {
         const { newBlock, newSelection, newEditorState } = this.createBlock(button.componentData);
         const state = { userSelectedFiles: { files } };
         pubsub.set('initialState_' + newBlock.getKey(), state);

@@ -530,9 +530,9 @@ export class SortableComponent extends Component {
     });
   };
 
-  handleFileChange = event => {
+  handleFileChange = files => {
     const { editedImageIndex } = this.state;
-    this.props.handleFileChange(event, editedImageIndex);
+    this.props.handleFileChange(files, editedImageIndex);
     this.props.onItemsChange(this.state.items);
   };
 
