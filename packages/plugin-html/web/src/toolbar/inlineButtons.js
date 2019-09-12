@@ -76,18 +76,18 @@ export default ({ settings = {}, getEditorBounds }) => {
     },
     { type: BUTTONS.SEPARATOR, keyName: 'separator2' },
     {
-      type: BUTTONS.ALIGNMENT_LEFT,
+      type: BUTTONS.TEXT_ALIGN_LEFT,
       keyName: 'alignLeft',
       icon: SizeSmallLeftIcon,
       mapStoreDataToButtonProps: getAlignmentButtonPropsFn(getEditorBounds),
     },
     {
-      type: BUTTONS.ALIGNMENT_CENTER,
+      type: BUTTONS.TEXT_ALIGN_CENTER,
       keyName: 'alignCenter',
       icon: SizeSmallCenterIcon,
     },
     {
-      type: BUTTONS.ALIGNMENT_RIGHT,
+      type: BUTTONS.TEXT_ALIGN_RIGHT,
       keyName: 'alignRight',
       icon: SizeSmallRightIcon,
       mapStoreDataToButtonProps: getAlignmentButtonPropsFn(getEditorBounds),

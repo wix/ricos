@@ -6,7 +6,7 @@ import { isEqual } from 'lodash';
 import { getType, getConfig } from '../toolbar/selectors';
 import DividerLine from './divider-line';
 import schema from '../../statics/data-schema.json';
-import styles from '../../statics/styles/divider-viewer.scss';
+import styles from '../../statics/styles/divider-viewer.rtlignore.scss';
 
 class DividerComponent extends PureComponent {
   constructor(props) {

@@ -8,7 +8,8 @@ import createHocName from '../Utils/createHocName';
 import getDisplayName from '../Utils/getDisplayName';
 import { alignmentClassName, sizeClassName, textWrapClassName } from '../Utils/classNameStrategies';
 import { normalizeUrl } from '../Utils/urlValidators';
-import Styles from '../../statics/styles/global.scss';
+import styles from '../../statics/styles/general.scss';
+import rtlIgnoredStyles from '../../statics/styles/general.rtlignore.scss';
 
 const DEFAULTS = {
   alignment: null,
@@ -27,6 +28,8 @@ const createBaseComponent = ({
   relValue,
   t,
   isMobile,
+  pluginDecorationProps = () => ({}),
+  componentWillReceiveDecorationProps = () => {},
   getEditorBounds,
   onOverlayClick,
 }) => {
@@ -36,9 +39,11 @@ const createBaseComponent = ({
     constructor(props) {
       super(props);
       this.state = { componentState: {}, ...this.stateFromProps(props) };
+      this.styles = { ...styles, ...rtlIgnoredStyles };
     }
 
     componentWillReceiveProps(nextProps) {
+      componentWillReceiveDecorationProps(this.props, nextProps, this.updateComponentConfig);
       this.setState(this.stateFromProps(nextProps));
     }
 
@@ -228,6 +233,10 @@ const createBaseComponent = ({
     render = () => {
       const { blockProps, className, selection } = this.props;
       const { componentData, readOnly } = this.state;
+      const { containerClassName, ...decorationProps } = pluginDecorationProps(
+        this.props,
+        componentData
+      );
       const { link, width: currentWidth, height: currentHeight } = componentData.config || {};
       const { width: initialWidth, height: initialHeight } = settings || {};
       const isEditorFocused = selection.getHasFocus();
@@ -235,30 +244,31 @@ const createBaseComponent = ({
       const isActive = isFocused && isEditorFocused && !readOnly;
 
       const classNameStrategies = [
-        PluginComponent.WrappedComponent.alignmentClassName || alignmentClassName,
-        PluginComponent.WrappedComponent.sizeClassName || sizeClassName,
-        PluginComponent.WrappedComponent.textWrapClassName || textWrapClassName,
-      ].map(strategy => strategy(this.state.componentData, theme, Styles, isMobile));
+        PluginComponent.alignmentClassName || alignmentClassName,
+        PluginComponent.sizeClassName || sizeClassName,
+        PluginComponent.textWrapClassName || textWrapClassName,
+      ].map(strategy => strategy(this.state.componentData, theme, this.styles, isMobile));
 
       const ContainerClassNames = classNames(
         {
-          [Styles.pluginContainer]: !readOnly,
-          [Styles.pluginContainerReadOnly]: readOnly,
-          [Styles.pluginContainerMobile]: isMobile,
+          [this.styles.pluginContainer]: !readOnly,
+          [this.styles.pluginContainerReadOnly]: readOnly,
+          [this.styles.pluginContainerMobile]: isMobile,
           [theme.pluginContainer]: !readOnly,
           [theme.pluginContainerReadOnly]: readOnly,
           [theme.pluginContainerMobile]: isMobile,
+          [containerClassName]: !!containerClassName,
         },
         classNameStrategies,
         className || '',
         {
-          [Styles.hasFocus]: isActive,
+          [this.styles.hasFocus]: isActive,
           [theme.hasFocus]: isActive,
         }
       );
 
-      const overlayClassNames = classNames(Styles.overlay, theme.overlay, {
-        [Styles.hidden]: readOnly,
+      const overlayClassNames = classNames(this.styles.overlay, theme.overlay, {
+        [this.styles.hidden]: readOnly,
         [theme.hidden]: readOnly,
       });
 
@@ -291,15 +301,21 @@ const createBaseComponent = ({
           rel: link.rel ? link.rel : relValue || 'noopener',
         };
       }
-      const anchorClass = classNames(Styles.absFull, Styles.anchor, {
-        [Styles.isImage]:
+      const anchorClass = classNames(this.styles.absFull, this.styles.anchor, {
+        [this.styles.isImage]:
           getDisplayName(PluginComponent)
             .toLowerCase()
             .indexOf('image') !== -1,
       });
+
       /* eslint-disable jsx-a11y/anchor-has-content */
       return (
-        <div style={sizeStyles} className={ContainerClassNames}>
+        <div
+          style={sizeStyles}
+          className={ContainerClassNames}
+          data-focus={isActive}
+          {...decorationProps}
+        >
           {!isNil(link) ? (
             <div>
               {component}

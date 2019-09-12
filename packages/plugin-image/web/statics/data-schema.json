@@ -11,9 +11,9 @@
       "properties": {
         "size": {
           "$id": "/properties/config/properties/size",
-          "enum": ["content", "small", "original", "fullWidth"],
+          "enum": ["content", "small", "original", "fullWidth", "inline"],
           "title": "size",
-          "examples": ["content", "small", "original", "fullWidth"]
+          "examples": ["content", "small", "original", "fullWidth", "inline"]
         },
         "alignment": {
           "$id": "/properties/config/properties/alignment",

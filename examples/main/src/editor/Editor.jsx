@@ -132,8 +132,16 @@ export default class Editor extends PureComponent {
     const { onRequestClose } = this.state.modalProps || {};
     return (
       <div className="editor">
-        {MobileToolbar && <MobileToolbar />}
-        {TextToolbar && <TextToolbar />}
+        {MobileToolbar && (
+          <div className="toolbar-wrapper">
+            <MobileToolbar />
+          </div>
+        )}
+        {TextToolbar && (
+          <div className="toolbar-wrapper">
+            <TextToolbar />
+          </div>
+        )}
         <RichContentEditor
           ref={editor => (this.editor = editor)}
           onChange={this.props.onChange}

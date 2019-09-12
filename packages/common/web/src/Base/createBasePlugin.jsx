@@ -99,15 +99,15 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
         isMobile,
       }),
     }));
-  const PluginComponent =
-    config.component && config.decorator ? config.decorator(config.component) : config.component;
+  const PluginComponent = config.component;
 
-  const CompWithBase =
+  const BaseComponent =
     PluginComponent &&
     createBaseComponent({
       PluginComponent,
       theme: config.theme,
-      type: config.type,
+      type: config.type,pluginDecorationProps: config.pluginDecorationProps,
+      componentWillReceiveDecorationProps: config.componentWillReceiveDecorationProps,
       onOverlayClick,
       pubsub,
       settings,
@@ -118,6 +118,9 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
       isMobile,
       getEditorBounds,
     });
+
+  const DecoratedCompWithBase =
+    BaseComponent && config.decorator ? config.decorator(BaseComponent) : BaseComponent;
 
   const InlineModals = config.inlineModals;
 
@@ -134,7 +137,7 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
         const pluginTypes = [config.type, config.legacyType];
         if (includes(pluginTypes, type)) {
           return {
-            component: CompWithBase,
+            component: DecoratedCompWithBase,
             editable: false,
             props: {
               getData: getData(contentBlock, { getEditorState }),

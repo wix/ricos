@@ -9,8 +9,8 @@ const SaturationPointer = theme => {
     <div className={styles.saturationPointer}>
       <div className={styles.saturationPointer_top_path} />
       <div className={styles.saturationPointer_bottom_path} />
-      <div className={styles.saturationPointer_left_path} />
-      <div className={styles.saturationPointer_right_path} />
+      <div className={styles.saturationPointer_l_path} />
+      <div className={styles.saturationPointer_r_path} />
       <div className={styles.saturationPointer_circle} />
     </div>
   );

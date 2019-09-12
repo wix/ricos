@@ -22,3 +22,5 @@ jobs:
       - run: npm install
       - run: npm run build
       - run: npm run test
+      - if: failure()
+        run: npm run uploadSnapshots
