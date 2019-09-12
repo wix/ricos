@@ -10,7 +10,7 @@
 ## [Unreleased]
 ### :bug: Bug Fix
 - `viewer`
-  - [#386] (https://github.com/wix-incubator/rich-content/pull/386) Fix code block duplication
+  - [#386] (https://github.com/wix-incubator/rich-content/pull/386) code block duplication
 <hr/>
 
 ## 5.0.1 (Sep 10, 2019)
