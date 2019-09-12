@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Immutable from 'immutable';
 import Prism from 'prismjs';
 import classNames from 'classnames';
+import { hasLinksInBlock } from 'wix-rich-content-common';
 import highlightingTheme from '../statics/styles/highlighting-theme.scss';
 
 const DEFAULT_SYNTAX = 'javascript';
@@ -27,14 +28,14 @@ export default class PrismDecorator {
     this.theme = theme;
   }
 
-  getDecorations(block) {
+  getDecorations(block, contentState) {
     const blockKey = block.getKey();
     const blockText = block.getText();
     const decorations = Array(blockText.length).fill(null);
 
     this.highlighted[blockKey] = {};
 
-    if (block.getType() !== 'code-block') {
+    if (block.getType() !== 'code-block' || hasLinksInBlock(block, contentState)) {
       return Immutable.List(decorations); // eslint-disable-line new-cap
     }
 
