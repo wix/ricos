@@ -37,9 +37,6 @@ class BaseToolbarButton extends React.Component {
     key === keyName ? this.handleClick(event) : event.preventDefault();
   };
 
-  handleFileChange = event => {
-    if (event.target.files && event.target.files.length > 0) {
-
   handleFileChange = files => {
     if (files.length > 0) {
       const { helpers, onFilesSelected } = this.props;

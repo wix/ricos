@@ -74,14 +74,12 @@ class HtmlComponent extends Component {
 
     return (
       <ViewportRenderer>
-        {/* eslint-disable */}
         <div
           className={this.styles.htmlComponent}
           ref={ref => (this.element = ref)}
           style={style}
           data-hook="HtmlComponent"
         >
-          {/* eslint-enable */}
           {srcType === SRC_TYPE_HTML && src && (
             <IframeHtml
               key={SRC_TYPE_HTML}
