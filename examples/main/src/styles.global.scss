@@ -3,7 +3,7 @@ $iconSize: 20px;
 $borderRadius: 4px;
 $transitionLength: 0.3s;
 $primaryColor: lightslategrey;
-$secondaryColor: #8495A6;
+$secondaryColor: #8495a6;
 $iconColor: white;
 $hoverColor: #ccc;
 
@@ -88,7 +88,6 @@ body {
               }
             }
 
-
             .settings {
               position: relative;
               cursor: pointer;
@@ -135,9 +134,9 @@ body {
                     padding: 8px 10px;
 
                     &:hover {
-                      background: #91A2B3;
+                      background: #91a2b3;
 
-                      &>ul {
+                      & > ul {
                         visibility: visible;
                         opacity: 1;
                       }
@@ -190,18 +189,21 @@ body {
               min-height: 100%;
               display: flex;
               flex-direction: column;
-              
-              >div {
+
+              .toolbar-wrapper {
+                flex: 0;
+              }
+              > div {
                 display: flex;
                 flex-direction: column;
                 flex: 1;
 
-                >div:last-child {
+                > div:last-child {
                   display: flex;
                   flex-direction: column;
                   flex: 1;
 
-                  >div {
+                  > div {
                     flex: 1;
                   }
                 }
@@ -222,7 +224,7 @@ body {
                   display: flex;
                   flex-direction: column;
 
-                  >div:first-child {
+                  > div:first-child {
                     flex: 1;
                   }
 
@@ -245,7 +247,6 @@ body {
               @include mobile {
                 padding: 0;
               }
-
             }
           }
         }

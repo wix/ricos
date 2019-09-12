@@ -23,7 +23,7 @@ import {
   Context,
 } from 'wix-rich-content-common';
 import styles from '../../statics/styles/rich-content-editor.scss';
-import draftStyles from '../../statics/styles/draft.global.scss';
+import draftStyles from '../../statics/styles/draft.rtlignore.scss';
 import { getLangDir } from 'rtl-detect';
 
 class RichContentEditor extends Component {

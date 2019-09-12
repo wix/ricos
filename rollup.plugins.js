@@ -84,7 +84,7 @@ const postcss = () => {
     extract: 'dist/styles.min.css',
     plugins: [
       postcssExclude({
-        filter: '**/*.global.scss',
+        filter: '**/*.rtlignore.scss',
         plugins: [postcssRTL()],
       }),
       postcssURL({

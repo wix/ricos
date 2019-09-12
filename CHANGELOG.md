@@ -11,9 +11,25 @@
 ### :rocket: New Feature
 - `html`
   - [#379](https://github.com/wix-incubator/rich-content/pull/379) edit panel opens on click when src is blank
+- `editor`
+  - [#377](https://github.com/wix-incubator/rich-content/pull/377) resize decoration added (based on `draftjs-resizeable-plugin`)
+- `image`
+  - [#377](https://github.com/wix-incubator/rich-content/pull/377) custom resizing implemented
+<hr/>
+
+## 5.0.1 (Sep 10, 2019)
 ### :rocket: New Feature
 - `editor`
   - [#378](https://github.com/wix-incubator/rich-content/pull/378) plus icon is displayed next to text
+### :bug: Bug Fix
+- `general`
+  - [#381](https://github.com/wix-incubator/rich-content/pull/381) atomic block alignment functionality restored
+- `example`
+  - [84b10276](https://github.com/wix-incubator/rich-content/commit/84b10276) static toolbar styles
+### :house: Internal
+- `general`
+  - [d100a69d](https://github.com/wix-incubator/rich-content/commit/d100a69d) rollup version fixed due to breaking changes
+  - [#384](https://github.com/wix-incubator/rich-content/pull/384) upload e2e snapshots in ci
 <hr/>
 
 ## 5.0.0 "Mamtak" (Sep 2, 2019)
@@ -374,7 +390,7 @@
 - `video`
   - [#293](https://github.com/wix-incubator/rich-content/pull/293) fix ratio
 ### :book: Documentation
-  - [#290](https://github.com/wix-incubator/rich-content/pull/290) [Plugin Customization doc]('./docs/PluginCustomization.md') update on `text-color`
+- [#290](https://github.com/wix-incubator/rich-content/pull/290) [Plugin Customization doc]('./docs/PluginCustomization.md') update on `text-color`
 <hr/>
 
 ## 3.3.2 (Apr 29, 2019)

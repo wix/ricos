@@ -52,6 +52,10 @@ class PluginViewer extends PureComponent {
             rel: rel || relValue || 'noopener',
           };
         }
+        // TODO: more generic logic?
+        if (componentData.config && componentData.config.size === 'inline') {
+          containerProps.style = { width: componentData.width };
+        }
         return (
           <div className={styles.atomic}>
             <ContainerElement className={containerClassNames} {...containerProps}>

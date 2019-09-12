@@ -50,7 +50,7 @@ export default ({ settings, t, helpers, getEditorBounds, isMobile }) => {
       mobile: false,
     },
     {
-      type: BUTTONS.ALIGNMENT_CENTER,
+      type: BUTTONS.TEXT_ALIGN_CENTER,
       keyName: 'alignCenter',
       icon: SizeSmallCenterIcon,
       mobile: false,

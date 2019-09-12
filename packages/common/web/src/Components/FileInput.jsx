@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { mergeStyles } from '../Utils/mergeStyles';
-
-import styles from '../../statics/styles/global.scss';
+import styles from '../../statics/styles/general.scss';
 
 class FileInput extends Component {
   constructor(props) {

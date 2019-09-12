@@ -1,6 +1,6 @@
 @import "~wix-rich-content-common/dist/statics/styles/palette";
 @import "~wix-rich-content-common/dist/statics/styles/consts";
-@import "~wix-rich-content-common/dist/statics/styles/global";
+@import "~wix-rich-content-common/dist/statics/styles/general";
 @import "~wix-rich-content-common/dist/statics/styles/fonts";
 
 .wrapper {
@@ -65,13 +65,14 @@
 
 .underline {
   text-decoration: underline;
+
   & * {
     text-decoration: underline;
   }
 }
 
 .block {
-  & + & {
+  &+& {
     margin-top: 20px;
   }
 }
@@ -101,39 +102,11 @@
   }
 }
 
-.left {
-  /*!rtl:ignore*/
-  text-align: left !important;
-
-  & > * {
-    /*!rtl:ignore*/
-    text-align: left !important;
-  }
-}
-
-.center {
-  text-align: center !important;
-
-  & > * {
-    text-align: center !important;
-  }
-}
-
-.right {
-  /*!rtl:ignore*/
-  text-align: right !important;
-
-  & > * {
-    /*!rtl:ignore*/
-    text-align: right !important;
-  }
-}
-
 .justify {
   white-space: pre-line !important;
   text-align: justify !important;
 
-  & > * {
+  &>* {
     white-space: pre-line !important;
     text-align: justify !important;
   }
@@ -188,7 +161,7 @@
   padding: 0;
   margin: 0;
 
-  [dir] & > * {
+  [dir] &>* {
     margin-inline-start: 40px;
   }
 }
@@ -202,7 +175,7 @@
   padding: 0;
   margin: 0;
 
-  [dir] & > * {
+  [dir] &>* {
     margin-inline-start: 40px;
   }
 }
