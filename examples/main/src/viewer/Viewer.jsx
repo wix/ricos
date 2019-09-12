@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import ReactModal from 'react-modal';
 import { RichContentViewer } from 'wix-rich-content-viewer';
+import { RichContentModal } from 'wix-rich-content-common';
 import * as PropTypes from 'prop-types';
 import * as Plugins from './ViewerPlugins';
 import theme from '../theme/theme'; // must import after custom styles

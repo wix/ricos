@@ -17,6 +17,7 @@ import {
   SizeFullWidthIcon,
   AlignLeftIcon,
   AlignCenterIcon,
+  AlignTextCenterIcon,
   AlignRightIcon,
   WidthIcon,
   HeightIcon,
@@ -53,7 +54,7 @@ export const AlignmentLeftButton = createBlockAlignmentButton({
 
 export const AlignmentCenterButton = createBlockAlignmentButton({
   alignment: 'center',
-  Icon: AlignCenterIcon,
+  Icon: AlignTextCenterIcon,
   tooltipTextKey: 'AlignTextCenterButton_Tooltip',
 });
 
@@ -78,14 +79,32 @@ export const SizeSmallCenterButton = createBlockAlignmentAndSizeButton({
 });
 
 export const SizeSmallLeftButton = createBlockAlignmentAndSizeButton({
-  size: 'small',
   alignment: 'left',
+  size: 'small',
   Icon: SizeSmallLeftIcon,
   tooltipTextKey: 'SizeSmallLeftButton_Tooltip',
 });
 
 export const SizeSmallRightButton = createBlockAlignmentAndSizeButton({
   size: 'small',
+  alignment: 'right',
+  Icon: SizeSmallRightIcon,
+  tooltipTextKey: 'SizeSmallRightButton_Tooltip',
+});
+
+export const AlignLeftButton = createBlockAlignmentButton({
+  alignment: 'left',
+  Icon: SizeSmallLeftIcon,
+  tooltipTextKey: 'SizeSmallLeftButton_Tooltip',
+});
+
+export const AlignCenterButton = createBlockAlignmentButton({
+  alignment: 'center',
+  Icon: AlignCenterIcon,
+  tooltipTextKey: 'AlignCenterButton_Tooltip',
+});
+
+export const AlignRightButton = createBlockAlignmentButton({
   alignment: 'right',
   Icon: SizeSmallRightIcon,
   tooltipTextKey: 'SizeSmallRightButton_Tooltip',
@@ -139,12 +158,15 @@ export const BUTTONS_BY_KEY = {
   [BUTTONS.SIZE_ORIGINAL]: SizeOriginalButton,
   [BUTTONS.SIZE_CONTENT]: SizeContentButton,
   [BUTTONS.SIZE_FULL_WIDTH]: SizeFullWidthButton,
-  [BUTTONS.SIZE_SMALL_LEFT]: SizeSmallLeftButton,
+  [BUTTONS.ALIGN_LEFT]: AlignLeftButton,
   [BUTTONS.SIZE_SMALL_CENTER]: SizeSmallCenterButton,
   [BUTTONS.SIZE_SMALL_RIGHT]: SizeSmallRightButton,
-  [BUTTONS.ALIGNMENT_LEFT]: AlignmentLeftButton,
-  [BUTTONS.ALIGNMENT_CENTER]: AlignmentCenterButton,
-  [BUTTONS.ALIGNMENT_RIGHT]: AlignmentRightButton,
+  [BUTTONS.SIZE_SMALL_LEFT]: SizeSmallLeftButton,
+  [BUTTONS.ALIGN_CENTER]: AlignCenterButton,
+  [BUTTONS.ALIGN_RIGHT]: AlignRightButton,
+  [BUTTONS.TEXT_ALIGN_LEFT]: AlignmentLeftButton,
+  [BUTTONS.TEXT_ALIGN_CENTER]: AlignmentCenterButton,
+  [BUTTONS.TEXT_ALIGN_RIGHT]: AlignmentRightButton,
   [BUTTONS.WIDTH]: WidthButton,
   [BUTTONS.HEIGHT]: HeightButton,
 };

@@ -250,6 +250,7 @@ export default function createToolbar({
         : Math.min(this.scrollContainer.scrollLeft + clientWidth, scrollWidth);
     }
 
+    /*eslint-disable complexity*/
     renderButton = (button, key, themedStyle, separatorClassNames, tabIndex) => {
       const { alignment, size } = this.state;
       const Button = BUTTONS_BY_KEY[button.type] || BaseToolbarButton;
@@ -260,9 +261,9 @@ export default function createToolbar({
       };
 
       switch (button.type) {
-        case BUTTONS.ALIGNMENT_LEFT:
-        case BUTTONS.ALIGNMENT_CENTER:
-        case BUTTONS.ALIGNMENT_RIGHT:
+        case BUTTONS.TEXT_ALIGN_LEFT:
+        case BUTTONS.TEXT_ALIGN_CENTER:
+        case BUTTONS.TEXT_ALIGN_RIGHT:
           return (
             <Button
               alignment={alignment}
@@ -293,9 +294,12 @@ export default function createToolbar({
         case BUTTONS.SIZE_ORIGINAL:
         case BUTTONS.SIZE_CONTENT:
         case BUTTONS.SIZE_FULL_WIDTH:
-        case BUTTONS.SIZE_SMALL_LEFT:
         case BUTTONS.SIZE_SMALL_CENTER:
+        case BUTTONS.SIZE_SMALL_LEFT:
         case BUTTONS.SIZE_SMALL_RIGHT:
+        case BUTTONS.ALIGN_RIGHT:
+        case BUTTONS.ALIGN_LEFT:
+        case BUTTONS.ALIGN_CENTER:
           return (
             <Button
               size={size}
@@ -363,7 +367,7 @@ export default function createToolbar({
           );
       }
     };
-
+    /*eslint-enable complexity*/
     mapComponentDataToButtonProps = (button, componentData) => {
       if (!button.mapComponentDataToButtonProps) {
         return button;
