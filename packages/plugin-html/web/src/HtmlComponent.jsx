@@ -76,7 +76,6 @@ class HtmlComponent extends Component {
       <ViewportRenderer>
         {/* eslint-disable */}
         <div
-          role="container"
           className={this.styles.htmlComponent}
           ref={ref => (this.element = ref)}
           style={style}
