@@ -6,7 +6,7 @@ import Measure from 'react-measure';
 import ClickOutside from 'react-click-outside';
 import { debounce } from 'lodash';
 import { DISPLAY_MODE } from 'wix-rich-content-common';
-import Styles from '../../../../statics/styles/inline-toolbar.scss';
+import Styles from '../../../../statics/styles/inline-toolbar.rtlignore.scss';
 
 const TOOLBAR_OFFSET = 5;
 
