@@ -86,6 +86,7 @@ export default class Editor extends PureComponent {
         try {
           document.documentElement.style.height = 'initial';
           document.documentElement.style.position = 'initial';
+
         } catch (e) {
           console.warn('Cannot change document styles', e);
         }
@@ -100,6 +101,7 @@ export default class Editor extends PureComponent {
   }
 
   componentDidMount() {
+    setTimeout(() => this.editor && this.editor.focus(), 0);
     ReactModal.setAppElement('body');
     this.setEditorToolbars();
   }
