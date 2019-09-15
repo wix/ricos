@@ -51,7 +51,9 @@ describe('editor', () => {
       });
 
       it('should render text toolbar in rtl', () => {
-        cy.loadEditor('plain').setSelection(0, 8);
+        cy.loadEditor('plain')
+          .setSelection(0, 8)
+          .get('[data-hook=inlineToolbar]');
       });
 
       it('should render rtl and ltr text correctly', () => {

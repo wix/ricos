@@ -79,7 +79,10 @@ Cypress.Commands.add('newLine', () => {
 });
 
 Cypress.Commands.add('blurEditor', () => {
-  getEditor().blur();
+  getEditor()
+    .blur()
+    .get('[data-hook=inlineToolbar]')
+    .should('not.exist');
 });
 
 Cypress.Commands.add('focusEditor', () => {
