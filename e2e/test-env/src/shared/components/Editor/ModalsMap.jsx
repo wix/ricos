@@ -10,6 +10,10 @@ export default {
   ...SoundCloudModalsMap,
   ...GiphyModalsMap,
   ...ImageModalsMap,
+<<<<<<< HEAD
+=======
+  //...GalleryModalsMap,
+>>>>>>> [e2e/test-env/../editor] fix(editor): toolbar plugins (video,html,gif)
   ...TextColorModalsMap,
   ...LineSpacingModalsMap,
 };
