@@ -5,10 +5,10 @@ import deepFreeze from 'deep-freeze';
 import { RichContentEditor, RichContentEditorModal } from 'wix-rich-content-editor';
 import 'wix-rich-content-common/dist/styles.min.css';
 import 'wix-rich-content-editor/dist/styles.min.css';
-import theme from '../../theme';
-import * as Plugins from './editorPlugins';
 import ReactModal from 'react-modal';
 import ModalsMap from './ModalsMap';
+import * as Plugins from './editorPlugins';
+import theme from '../../theme';
 
 const modalStyleDefaults = {
   content: {
@@ -20,6 +20,9 @@ const modalStyleDefaults = {
     transform: 'translate(-50%, -50%)',
   },
 };
+const anchorTarget = '_blank';
+const relValue = 'nofollow';
+
 class Editor extends Component {
   static propTypes = {
     initialState: PropTypes.object,
@@ -30,13 +33,16 @@ class Editor extends Component {
   state = {
     editorState: EditorState.createWithContent(convertFromRaw(this.props.initialState)),
   };
+  componentDidMount() {
+    ReactModal.setAppElement('#root');
+  }
 
   handleChange = editorState => {
     this.setState({ editorState });
     if (typeof window !== 'undefined') {
       // ensures that tests fail when entity map is mutated
-      const rr = convertToRaw(editorState.getCurrentContent());
-      const raw = deepFreeze(rr);
+      const raw = convertToRaw(editorState.getCurrentContent());
+      // const raw = deepFreeze(rr);
       window.__CONTENT_STATE__ = raw;
       window.__CONTENT_SNAPSHOT__ = {
         ...raw,
@@ -48,7 +54,12 @@ class Editor extends Component {
 
   helpers = {
     onFilesChange: () => {},
-    onVideoSelected: () => {},
+    onVideoSelected: (url, updateEntity) => {
+      setTimeout(() => {
+        const testVideo = testVideos[Math.floor(Math.random() * testVideos.length)];
+        updateEntity(testVideo);
+      }, 500);
+    },
     openModal: data => {
       const { modalStyles, ...modalProps } = data;
       try {
@@ -80,8 +91,7 @@ class Editor extends Component {
   };
   render() {
     const modalStyles = {
-      content: Object.assign({}, (this.state.modalStyles || modalStyleDefaults).content),
-      overlay: Object.assign({}, (this.state.modalStyles || modalStyleDefaults).overlay),
+      content: Object.assign({}, modalStyleDefaults.content),
     };
     const { onRequestClose } = this.state.modalProps || {};
     return (
@@ -95,8 +105,11 @@ class Editor extends Component {
           plugins={Plugins.editorPlugins}
           config={Plugins.config}
           isMobile={this.props.isMobile}
+          anchorTarget={anchorTarget}
+          relValue={relValue}
           helpers={this.helpers}
           locale={this.props.locale}
+          localeResource={this.props.localeResource}
         />
         <ReactModal
           isOpen={this.state.showModal}
