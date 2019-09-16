@@ -8,23 +8,25 @@
 > - :house: [Internal]
 
 ## [Unreleased]
+<hr/>
+
+## 5.1.0 (Sep 16, 2019)
 ### :rocket: New Feature
 - `html`
   - [#379](https://github.com/wix-incubator/rich-content/pull/379) edit panel opens on click when src is blank
-- `editor`
-  - [#377](https://github.com/wix-incubator/rich-content/pull/377) resize decoration added (based on `draftjs-resizeable-plugin`)
 - `image`
   - [#377](https://github.com/wix-incubator/rich-content/pull/377) custom resizing implemented
   - [#380](https://github.com/wix-incubator/rich-content/pull/380) Image Editor (Wix Image Studio)
 ### :bug: Bug Fix
-  - `html`
-    - [#385](https://github.com/wix-incubator/rich-content/pull/385) edit panel resets to default state when focusing on different instances of the same plugin
-  - `viewer`
+- `html`
+  - [#385](https://github.com/wix-incubator/rich-content/pull/385) edit panel resets to default state when focusing on different instances of the same plugin
+- `viewer`
   - [#386](https://github.com/wix-incubator/rich-content/pull/386) code block duplication
 ### :house: Internal
 - `e2e`
   - [#368](https://github.com/wix-incubator/rich-content/pull/368) test rtl support in toolbars, text and external modals
-
+- `editor`
+  - [#377](https://github.com/wix-incubator/rich-content/pull/377) resize decoration added (based on `draftjs-resizeable-plugin`)
 <hr/>
 
 ## 5.0.1 (Sep 10, 2019)
