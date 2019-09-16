@@ -20,8 +20,7 @@ describe('editor', () => {
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.UNDERLINE, [10, 5])
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.ITALIC, [20, 5])
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.BOLD, [30, 5])
-      .setLineSpacing(1, [10, 50])
-      .setColor(2, [200, 208])
+      .setColor(4, [200, 208])
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.UNDERLINE)
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.ITALIC)
       .setAlignment(INLINE_TOOLBAR_BUTTONS.TEXT_ALIGN_CENTER)
@@ -35,8 +34,7 @@ describe('editor', () => {
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.QUOTE, [250, 260])
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.ORDERED_LIST)
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.UNORDERED_LIST)
-      .setLineSpacing(3, [100, 150])
-      .setTextStyle(INLINE_TOOLBAR_BUTTONS.CODE_BLOCK, [300, 100])
+      .setTextStyle(INLINE_TOOLBAR_BUTTONS.CODE_BLOCK, [100, 300])
       .setLink([15, 30], 'https://www.sport5.co.il/')
       .setSelection(0, 0)
       .enterParagraphs(['#LIVING THE DREAM', ''])
@@ -53,6 +51,11 @@ describe('editor', () => {
     cy.loadEditor('plain')
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.ORDERED_LIST, [300, 100])
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.UNORDERED_LIST, [550, 1])
+      .matchSnapshots();
+  });
+  it('should allow to add links', () => {
+    cy.loadEditor('plain')
+      .setLink([0, 10], 'https://www.wix.com/')
       .matchSnapshots();
   });
 
@@ -119,10 +122,5 @@ describe('editor', () => {
 
       afterEach(() => cy.matchSnapshots({ capture: 'viewport' }));
     });
-  });
-  it('should allow to add links', () => {
-    cy.loadEditor('plain')
-      .setLink([0, 10], 'https://www.wix.com/')
-      .matchSnapshots();
   });
 });
