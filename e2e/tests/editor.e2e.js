@@ -53,6 +53,7 @@ describe('editor', () => {
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.UNORDERED_LIST, [550, 1])
       .matchSnapshots();
   });
+<<<<<<< HEAD
   it('should allow to add links', () => {
     cy.loadEditor('plain')
       .setLink([0, 10], 'https://www.wix.com/')
@@ -184,4 +185,6 @@ describe('editor', () => {
 >>>>>>> rebase with develop
 =======
 >>>>>>> [e2e/test-env/../editor] test(link inline button)
+=======
+>>>>>>> [e2e/test-env/../editor] test(inline toolbar buttons): test has been updated
 });
