@@ -189,7 +189,7 @@ The `ContentStateBuilder` exposes API for ContentState generation, based on the 
 
 #### `with-` methods
 
-The `with-` mathods allow to add an entity to the constructed ContentState. E.g. `withImage` method allows to add an image. The `with-` methods caould be chained: 
+The `with-` methods allow to add an entity to the constructed ContentState. E.g. `withImage` method allows to add an image. The `with-` methods could be chained: 
 
 ```js
 
