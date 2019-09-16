@@ -120,4 +120,9 @@ describe('editor', () => {
       afterEach(() => cy.matchSnapshots({ capture: 'viewport' }));
     });
   });
+  it('should allow to add links', () => {
+    cy.loadEditor('plain')
+      .setLink([0, 10], 'https://www.wix.com/')
+      .matchSnapshots();
+  });
 });
