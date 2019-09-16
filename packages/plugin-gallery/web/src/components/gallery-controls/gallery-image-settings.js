@@ -25,9 +25,11 @@ class ImageSettings extends Component {
     this.headerLabel = t('GalleryImageSettings_Header');
     this.ReplaceLabel = t('GalleryImageSettings_Replace_Label');
     this.deleteLabel = t('GalleryImageSettings_Delete_Label');
-    this.titleLabel = t('GalleryImageSettings_Title_Label');
-    this.titleInputPlaceholder = t('GalleryImageSettings_Title_Input_Placeholder');
+    // this.titleLabel = t('GalleryImageSettings_Title_Label');
+    // this.titleInputPlaceholder = t('GalleryImageSettings_Title_Input_Placeholder');
     this.linkLabel = t('GalleryImageSettings_Link_Label');
+    this.captionLabel = t('ImageSettings_Caption_Label');
+    this.captionInputPlaceholder = t('GalleryImageSettings_Title_Input_Placeholder');
   }
 
   deleteImage() {
@@ -192,15 +194,15 @@ class ImageSettings extends Component {
                   </button>
                 </div>
                 <SettingsSection
-                  ariaProps={{ 'aria-label': 'image properties', role: 'region' }}
+                  ariaProps={{ title: 'image properties', role: 'region' }}
                   theme={theme}
                   className={styles.galleryImageSettings_section}
                 >
                   <InputWithLabel
                     theme={theme}
                     id="galleryImageTitleInput"
-                    label={this.titleLabel}
-                    placeholder={this.titleInputPlaceholder}
+                    label={this.captionLabel}
+                    placeholder={this.captionInputPlaceholder}
                     value={metadata.title || ''}
                     dataHook="galleryImageTitleInput"
                     onChange={event => onUpdateImage({ title: event.target.value })}

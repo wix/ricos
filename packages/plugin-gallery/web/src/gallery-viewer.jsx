@@ -58,7 +58,12 @@ class GalleryViewer extends React.Component {
   stateFromProps = props => {
     const defaults = getDefault();
     const items = props.componentData.items || defaults.items;
-    const styleParams = Object.assign(defaults.styles, props.componentData.styles || {});
+    let styleParams = Object.assign(defaults.styles, props.componentData.styles || {});
+    // TODO fix and remove layout conditions.
+    styleParams =
+      styleParams.galleryLayout !== 4 && styleParams.galleryLayout !== 7 && this.haveTitle(items)
+        ? { ...styleParams, ...this.showTitleStyleParams }
+        : styleParams;
 
     return {
       items,
@@ -101,6 +106,25 @@ class GalleryViewer extends React.Component {
         break;
     }
   };
+
+  haveTitle = items => {
+    return items.some(item => {
+      return item.metadata && item.metadata.title;
+    });
+  };
+
+  get showTitleStyleParams() {
+    return {
+      isVertical: this.state.styleParams.galleryLayout === 1,
+      allowTitle: true,
+      titlePlacement: 'SHOW_BELOW',
+      galleryTextAlign: 'center',
+      textsHorizontalPadding: 0,
+      imageInfoType: 'NO_BACKGROUND',
+      calculateTextBoxHeightMode: 'AUTOMATIC',
+      textsVerticalPadding: 0,
+    };
+  }
 
   render() {
     this.styles = this.styles || mergeStyles({ styles: viewerStyles, theme: this.context.theme });
