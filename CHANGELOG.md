@@ -8,6 +8,12 @@
 > - :house: [Internal]
 
 ## [Unreleased]
+### :bug: Bug Fix
+- `image`
+  - [#388](https://github.com/wix-incubator/rich-content/pull/388) changed default image alignment
+### :house: Internal
+- `e2e`
+  - [#368](https://github.com/wix-incubator/rich-content/pull/368) test rtl support in toolbars, text and external modals
 <hr/>
 
 ## 5.1.0 (Sep 16, 2019)
@@ -23,8 +29,6 @@
 - `viewer`
   - [#386](https://github.com/wix-incubator/rich-content/pull/386) code block duplication
 ### :house: Internal
-- `e2e`
-  - [#368](https://github.com/wix-incubator/rich-content/pull/368) test rtl support in toolbars, text and external modals
 - `editor`
   - [#377](https://github.com/wix-incubator/rich-content/pull/377) resize decoration added (based on `draftjs-resizeable-plugin`)
 <hr/>
