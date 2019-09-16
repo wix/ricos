@@ -50,6 +50,7 @@ describe('editor', () => {
       .setLink([0, 10], 'https://www.wix.com/')
       .matchSnapshots();
   });
+<<<<<<< HEAD
 
 <<<<<<< HEAD
   it('should align atomic blocks correctly', () => {
@@ -172,4 +173,6 @@ describe('editor', () => {
   //   });
   // });
 >>>>>>> rebase with develop
+=======
+>>>>>>> [e2e/test-env/../editor] test(link inline button)
 });
