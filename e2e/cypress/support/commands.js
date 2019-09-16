@@ -164,7 +164,6 @@ Cypress.Commands.add('moveCursorToEnd', () => {
 Cypress.Commands.add('setTextStyle', (buttonSelector, selection) => {
   if (selection) {
     cy.setSelection(selection[0], selection[1]);
-    cy.get(`[data-hook="inlineToolbar"] [data-hook=${buttonSelector}]`).click();
   }
   cy.get(`[data-hook="inlineToolbar"] [data-hook=${buttonSelector}]`).click();
 });
