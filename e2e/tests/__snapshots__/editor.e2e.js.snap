@@ -32,8 +32,7 @@ exports[`editor > should allow to apply inline styles #0`] =
           "line-height": "2.5",
           "padding-bottom": "3px",
           "padding-top": "2px"
-        },
-        "textAlignment": "center"
+        }
       },
       "depth": 0,
       "entityRanges": [],
@@ -55,17 +54,7 @@ exports[`editor > should allow to apply inline styles #0`] =
         },
         {
           "length": 5,
-          "offset": 30,
-          "style": "UNDERLINE"
-        },
-        {
-          "length": 5,
           "offset": 20,
-          "style": "ITALIC"
-        },
-        {
-          "length": 5,
-          "offset": 30,
           "style": "ITALIC"
         },
         {
@@ -225,6 +214,7 @@ exports[`editor > should allow to create lists #0`] =
 };
 
 exports[`editor > when in hebrew locale > toolbar should render rtl #0`] =
+exports[`editor > should allow to add links #0`] =
 {
   "blocks": [
     {
@@ -883,6 +873,22 @@ exports[`editor > when in hebrew locale > mobile > should render rtl and ltr tex
       "inlineStyleRanges": [],
       "key": 0,
       "text": "לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית נולום ארווס סאפיאן - פוסיליס קוויס, אקווזמן צש בליא, מנסוטו צמלח לביקו ננבי, צמוקו בלוקריה שיצמה ברורק. ושבעגט ליבם סולגק. בראיט ולחת צורק מונחף, בגורמי מגמש. תרבנך וסתעד לכנו סתשם השמה - לתכי מורגם בורק? לתיג ישבעס.",
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 10,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [
+        {
+          "length": 10,
+          "offset": 0,
+          "style": "UNDERLINE"
+        }
+      ],
+      "key": 0,
+      "text": "Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition. ",
       "type": "unstyled"
     },
     {
@@ -892,6 +898,7 @@ exports[`editor > when in hebrew locale > mobile > should render rtl and ltr tex
       "inlineStyleRanges": [],
       "key": 1,
       "text": "",
+      "text": "Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment.",
       "type": "unstyled"
     },
     {
@@ -926,6 +933,7 @@ exports[`editor > when in hebrew locale > mobile > should render external modal 
       "inlineStyleRanges": [],
       "key": 1,
       "text": "",
+      "text": "Bring to the table win-win survival strategies to ensure proactive domination.",
       "type": "unstyled"
     },
     {
@@ -950,6 +958,10 @@ exports[`editor > when in hebrew locale > mobile > should render external modal 
       "inlineStyleRanges": [],
       "key": 3,
       "text": "",
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 3,
+      "text": "At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution. ",
       "type": "unstyled"
     },
     {
@@ -959,6 +971,7 @@ exports[`editor > when in hebrew locale > mobile > should render external modal 
       "inlineStyleRanges": [],
       "key": 4,
       "text": "Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment.",
+      "text": "User generated content in real-time will have multiple touchpoints for offshoring.",
       "type": "unstyled"
     },
     {
@@ -968,6 +981,7 @@ exports[`editor > when in hebrew locale > mobile > should render external modal 
       "inlineStyleRanges": [],
       "key": 5,
       "text": "Bring to the table win-win survival strategies to ensure proactive domination.",
+      "text": "Capitalize on low hanging fruit to identify a ballpark value added activity to beta test. ",
       "type": "unstyled"
     },
     {
@@ -1001,6 +1015,7 @@ exports[`editor > when in hebrew locale > mobile > should render external modal 
       "inlineStyleRanges": [],
       "key": 8,
       "text": "",
+      "text": "Override the digital divide with additional clickthroughs from DevOps.",
       "type": "unstyled"
     },
     {
@@ -1010,6 +1025,8 @@ exports[`editor > when in hebrew locale > mobile > should render external modal 
       "inlineStyleRanges": [],
       "key": 9,
       "text": "At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution.",
+      "key": 7,
+      "text": "Nanotechnology immersion along the information highway will close the loop on focusing solely on the bottom line.",
       "type": "unstyled"
     }
   ],
@@ -1069,6 +1086,15 @@ exports[`editor > when in hebrew locale > mobile > should render add plugin moda
     }
   ],
   "entityMap": {}
+};
+        "rel": "nofollow",
+        "target": "_blank",
+        "url": "https://www.wix.com/"
+      },
+      "mutability": "MUTABLE",
+      "type": "LINK"
+    }
+  }
 };
 
 exports[`editor > should allow to apply inline styles and links #0`] =
