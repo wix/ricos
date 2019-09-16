@@ -23,7 +23,7 @@
 - [#386](https://github.com/wix-incubator/rich-content/pull/386) code block duplication
 ### :house: Internal
 - `mentions`
-  - data validation schema added
+- [#387](https://github.com/wix-incubator/rich-content/pull/387) data validation schema added
 <hr/>
 
 ## 5.0.1 (Sep 10, 2019)
