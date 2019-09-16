@@ -80,14 +80,8 @@ class Editor extends Component {
   };
   render() {
     const modalStyles = {
-      content: Object.assign(
-        {},
-        (this.state.modalStyles || modalStyleDefaults).content
-      ),
-      overlay: Object.assign(
-        {},
-        (this.state.modalStyles || modalStyleDefaults).overlay
-      ),
+      content: Object.assign({}, (this.state.modalStyles || modalStyleDefaults).content),
+      overlay: Object.assign({}, (this.state.modalStyles || modalStyleDefaults).overlay),
     };
     const { onRequestClose } = this.state.modalProps || {};
     return (
@@ -111,13 +105,11 @@ class Editor extends Component {
           role="dialog"
           onRequestClose={onRequestClose || this.helpers.closeModal}
         >
-          {this.state.showModal && (
-            <RichContentEditorModal
-              modalsMap={ModalsMap}
-              locale={this.props.locale}
-              {...this.state.modalProps}
-            />
-          )}
+          <RichContentEditorModal
+            modalsMap={ModalsMap}
+            locale={this.props.locale}
+            {...this.state.modalProps}
+          />
         </ReactModal>
       </>
     );
