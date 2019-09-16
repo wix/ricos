@@ -18,10 +18,6 @@ const getUrl = (componentId, fixtureName = '') =>
     hebrew: isHebrew,
   })}`;
 
-const inputURLLink = 'linkPanelInput';
-const updateLinkButton = 'linkPanelContainerDone';
-const linkPanelContainer = 'linkPanelContainer';
-
 // Viewport size commands
 
 const run = (app, fixtureName) => {
