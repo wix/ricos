@@ -18,10 +18,6 @@ const getUrl = (componentId, fixtureName = '') =>
     hebrew: isHebrew,
   })}`;
 
-const inputURLLink = 'linkPanelInput';
-const updateLinkButton = 'linkPanelContainerDone';
-const linkPanelContainer = 'linkPanelContainer';
-
 // Viewport size commands
 
 const run = (app, fixtureName) => {
@@ -174,9 +170,9 @@ Cypress.Commands.add('setTextStyle', (buttonSelector, selection) => {
 
 Cypress.Commands.add('setLink', (selection, link) => {
   cy.setTextStyle(INLINE_TOOLBAR_BUTTONS.LINK, selection)
-    .get(`[data-hook=${linkPanelContainer}] [data-hook=${inputURLLink}]`)
+    .get(`[data-hook=linkPanelContainer] [data-hook=linkPanelInput]`)
     .type(link)
-    .get(`[data-hook=${updateLinkButton}]`)
+    .get(`[data-hook=linkPanelContainerDone]`)
     .click();
 });
 
