@@ -115,7 +115,6 @@ class ImageComponent extends React.Component {
     // we need to use a sync method to change the EditorState.
     // The broadcast is good if the toolbar is displaying some status or image
     const imageData = data.length ? data[0] : data;
-    
     this.props.componentData.src = imageData;
     this.props.componentData.config.alignment = imageData.width >= 740 ? 'center' : 'left';
     const { setData } = this.props.blockProps;
