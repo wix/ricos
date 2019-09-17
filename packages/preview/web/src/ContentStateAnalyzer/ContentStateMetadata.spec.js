@@ -76,11 +76,11 @@ describe('content state text metadata', () => {
 
 
   it('should return the code-block text', () => {
-    expect(metadata.text.code()).toEqual('const codeBlock = this;');
+    expect(metadata.text.code()).toEqual(['const codeBlock = this;']);
   });
 
   it('should return the code-block text array', () => {
-    expect(metadata.text.code.array()).toEqual(['const codeBlock = this;']);
+    expect(metadata.text.code.array()).toEqual([['const codeBlock = this;']]);
   });
 
   it('should return the quote text', () => {
@@ -91,6 +91,26 @@ describe('content state text metadata', () => {
   it('should return the quote text array', () => {
     expect(metadata.text.quote.array()).toEqual(['Listen, Jerry, I don’t want to overstep my bounds or  anything. It’s your house. It’s your world. You’re a real Julius Caesar,  but I’ll tell you some, tell you how-how I feel about school, Jerry.  It’s a waste of time, a bunch of people running around, bumping into  each other. G-guy up front says, “two plus two.” The people in the back  say, “four.” Then the bell rings, and they give you a carton of milk and  a piece of paper that says you can take a dump or something. I mean,  it’s—it’s not a place for smart people, Jerry, and I know that’s not a  popular opinion, but it’s my two cents on the issue.']);
   });
+
+  it('should return ordered list texts', () => {
+    expect(metadata.text.ol()).toEqual(['ordered list item 1ordered list item 2ordered list item 3']);
+  });
+  
+
+  it('should return ordered list text arrays', () => {
+    expect(metadata.text.ol.array()).toEqual([['ordered list item 1', 'ordered list item 2', 'ordered list item 3']]);
+  });
+
+
+  it('should return unordered list texts', () => {
+    expect(metadata.text.ul()).toEqual(['unordered list item 1unordered list item 2unordered list item 3']);
+  });
+  
+
+  it('should return unordered list text arrays', () => {
+    expect(metadata.text.ul.array()).toEqual([['unordered list item 1', 'unordered list item 2', 'unordered list item 3']]);
+  });
+  
 });
 
 /*eslint-enable*/

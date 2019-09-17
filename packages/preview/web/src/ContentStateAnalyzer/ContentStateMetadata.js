@@ -3,12 +3,11 @@ const extractTextFromBlocks = (
   blockFilter,
   textReducer = (text, block) => text + block.text,
   initValue = ''
-) => {
-  return blocks.filter(blockFilter).reduce((text, block, index) => {
+) =>
+  blocks.filter(blockFilter).reduce((text, block, index) => {
     const newText = textReducer(text, block, index);
     return newText;
   }, initValue);
-};
 
 const extractTextAsArray = (raw, blockTypeFilter) =>
   extractTextFromBlocks(
@@ -21,33 +20,67 @@ const extractTextAsArray = (raw, blockTypeFilter) =>
     []
   );
 
+// extracts an array of same-type sequential block text arrays:
+// [ {li1}, {li2}, {plain}, {quote}, {li1}, {li2}, {li3} ] =>
+// [
+//  [{li1}, {li2}],
+//  [{li1}, {li2}, {li3}]
+// ]
+// useful for list and code fragments extraction
+const extractSequentialBlockArrays = ({ blocks }, blockType) => {
+  const blockArrayResult = blocks.reduce(
+    (result, block, idx) => {
+      if (block.type === blockType) {
+        if (result.lastItemIndex === -1) {
+          result.list.push([]);
+        }
+        result.lastItemIndex = idx;
+        result.list[result.list.length - 1].push(block);
+      } else {
+        result.lastItemIndex = -1;
+      }
+
+      return result;
+    },
+    { list: [], lastItemIndex: -1 }
+  );
+
+  return blockArrayResult.list;
+};
+
 const getContentStateMetadata = raw => {
   const text = () => extractTextFromBlocks(raw, ({ type }) => type !== 'atomic');
   text.array = () => extractTextAsArray(raw, type => type !== 'atomic');
 
-  text.plain = () => extractTextFromBlocks(raw, ({ type }) => type === 'unstyled');
-  text.plain.array = () => extractTextAsArray(raw, type => type === 'unstyled');
+  // non-grouped block text API
+  Object.entries({
+    plain: 'unstyled',
+    h2: 'header-two',
+    h3: 'header-three',
+    h4: 'header-four',
+    h5: 'header-five',
+    h6: 'header-six',
+    quote: 'blockquote',
+  }).forEach(([func, blockType]) => {
+    text[func] = () => extractTextFromBlocks(raw, ({ type }) => type === blockType);
+    text[func].array = () => extractTextAsArray(raw, type => type === blockType);
+  });
 
-  text.h2 = () => extractTextFromBlocks(raw, ({ type }) => type === 'header-two');
-  text.h2.array = () => extractTextAsArray(raw, type => type === 'header-two');
-
-  text.h3 = () => extractTextFromBlocks(raw, ({ type }) => type === 'header-three');
-  text.h3.array = () => extractTextAsArray(raw, type => type === 'header-three');
-
-  text.h4 = () => extractTextFromBlocks(raw, ({ type }) => type === 'header-four');
-  text.h4.array = () => extractTextAsArray(raw, type => type === 'header-four');
-
-  text.h5 = () => extractTextFromBlocks(raw, ({ type }) => type === 'header-five');
-  text.h5.array = () => extractTextAsArray(raw, type => type === 'header-five');
-
-  text.h6 = () => extractTextFromBlocks(raw, ({ type }) => type === 'header-six');
-  text.h6.array = () => extractTextAsArray(raw, type => type === 'header-six');
-
-  text.code = () => extractTextFromBlocks(raw, ({ type }) => type === 'code-block');
-  text.code.array = () => extractTextAsArray(raw, type => type === 'code-block');
-
-  text.quote = () => extractTextFromBlocks(raw, ({ type }) => type === 'blockquote');
-  text.quote.array = () => extractTextAsArray(raw, type => type === 'blockquote');
+  // grouped block text API
+  Object.entries({
+    code: 'code-block',
+    ol: 'ordered-list-item',
+    ul: 'unordered-list-item',
+  }).forEach(([func, blockType]) => {
+    text[func] = () =>
+      extractSequentialBlockArrays(raw, blockType).map(blockArray =>
+        extractTextFromBlocks({ blocks: blockArray }, ({ type }) => type === blockType)
+      );
+    text[func].array = () =>
+      extractSequentialBlockArrays(raw, blockType).map(blockArray =>
+        extractTextAsArray({ blocks: blockArray }, type => type === blockType)
+      );
+  });
 
   return { text };
 };
