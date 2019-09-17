@@ -50,12 +50,8 @@ const extractSequentialBlockArrays = ({ blocks }, blockType) => {
   return blockArrayResult.list;
 };
 
-const extractMedia = ({ entityMap }) => {
-  entityMap.reduce((media, entity) => {
-    media.push(convertEntity(entity));
-    return media;
-  }, []);
-};
+const extractMedia = ({ entityMap }) =>
+  Object.values(entityMap).reduce((media, entity) => [...media, ...convertEntity(entity)], []);
 
 const getContentStateMetadata = raw => {
   const text = () => extractTextFromBlocks(raw, ({ type }) => type !== 'atomic');
@@ -92,6 +88,10 @@ const getContentStateMetadata = raw => {
   });
 
   const media = () => extractMedia(raw);
+  media.images = () => extractMedia(raw).filter(({ type }) => type === 'image');
+  media.videos = () => extractMedia(raw).filter(({ type }) => type === 'video');
+  media.files = () => extractMedia(raw).filter(({ type }) => type === 'file');
+  media.maps = () => extractMedia(raw).filter(({ type }) => type === 'map');
 
   const toObject = () => ({
     text: {

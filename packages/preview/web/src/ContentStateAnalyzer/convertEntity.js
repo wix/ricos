@@ -3,7 +3,7 @@
  *  every converter function signature:
  *  entity => [ { type, ...specificMediaData } ]
  * */
-const defaultEntitiyConverter = entity => [entity];
+const defaultEntitiyConverter = () => [];
 
 /*
  * wix-draft-plugin-image data format:
@@ -36,7 +36,7 @@ const imageConverter = entity => [
 ];
 
 const galleryConverter = entity =>
-  entity.items.map(({ metadata, url }) => ({
+  entity.data.items.map(({ metadata, url }) => ({
     url,
     height: metadata.height,
     width: metadata.width,
@@ -54,8 +54,9 @@ const converters = {
   'wix-draft-plugin-video': defaultEntitiyConverter,
   'wix-draft-plugin-sound-cloud': defaultEntitiyConverter,
   'wix-draft-plugin-giphy': defaultEntitiyConverter,
+  LINK: defaultEntitiyConverter,
 };
 
-const convertEntity = entity => converters[entity.type]();
+const convertEntity = entity => converters[entity.type](entity);
 
 export default convertEntity;
