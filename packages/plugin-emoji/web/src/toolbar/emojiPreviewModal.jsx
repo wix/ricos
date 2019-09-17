@@ -1,6 +1,3 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable no-undef */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import Scrollbars from 'react-custom-scrollbars';
@@ -36,6 +33,9 @@ export default class EmojiPreviewModal extends Component {
       return (
         <div
           key={index}
+          role="button"
+          onKeyPress={null}
+          tabIndex={0}
           className={this.styles.emojiPreviewModal_nav_icon}
           onClick={this.onNavIconClicked.bind(this, group)}
           style={{ color }}
@@ -56,6 +56,9 @@ export default class EmojiPreviewModal extends Component {
     const renderEmojis = emojis.map((emoji, index) => {
       return (
         <div
+          role="button"
+          onKeyPress={null}
+          tabIndex={0}
           className={this.styles.emojiPreviewModal_emoji}
           key={index}
           onClick={this.onEmojiClicked.bind(this, emoji)}
