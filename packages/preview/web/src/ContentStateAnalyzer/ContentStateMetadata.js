@@ -1,3 +1,5 @@
+import convertEntity from './convertEntity';
+
 const extractTextFromBlocks = (
   { blocks },
   blockFilter,
@@ -48,6 +50,13 @@ const extractSequentialBlockArrays = ({ blocks }, blockType) => {
   return blockArrayResult.list;
 };
 
+const extractMedia = ({ entityMap }) => {
+  entityMap.reduce((media, entity) => {
+    media.push(convertEntity(entity));
+    return media;
+  }, []);
+};
+
 const getContentStateMetadata = raw => {
   const text = () => extractTextFromBlocks(raw, ({ type }) => type !== 'atomic');
   text.array = () => extractTextAsArray(raw, type => type !== 'atomic');
@@ -82,7 +91,18 @@ const getContentStateMetadata = raw => {
       );
   });
 
-  return { text };
+  const media = () => extractMedia(raw);
+
+  const toObject = () => ({
+    text: {
+      ...['plain', 'h2', 'h3', 'h4', 'h5', 'h6', 'quote', 'code', 'ol', 'ul'].reduce(
+        (obj, func) => ({ ...obj, [func]: text[func].array() }),
+        { all: text.array() }
+      ),
+    },
+  });
+
+  return { media, text, toObject };
 };
 
 export default getContentStateMetadata;

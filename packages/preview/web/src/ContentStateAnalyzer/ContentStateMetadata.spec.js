@@ -95,7 +95,6 @@ describe('content state text metadata', () => {
   it('should return ordered list texts', () => {
     expect(metadata.text.ol()).toEqual(['ordered list item 1ordered list item 2ordered list item 3']);
   });
-  
 
   it('should return ordered list text arrays', () => {
     expect(metadata.text.ol.array()).toEqual([['ordered list item 1', 'ordered list item 2', 'ordered list item 3']]);
@@ -105,12 +104,10 @@ describe('content state text metadata', () => {
   it('should return unordered list texts', () => {
     expect(metadata.text.ul()).toEqual(['unordered list item 1unordered list item 2unordered list item 3']);
   });
-  
 
   it('should return unordered list text arrays', () => {
     expect(metadata.text.ul.array()).toEqual([['unordered list item 1', 'unordered list item 2', 'unordered list item 3']]);
   });
-  
 });
 
 /*eslint-enable*/
