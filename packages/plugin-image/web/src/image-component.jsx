@@ -77,8 +77,7 @@ class ImageComponent extends React.Component {
     this.props.store.update('componentState', { isLoading: false, userSelectedFiles: null });
   };
 
-  fileLoaded = (event, fileList) => {
-    const fileDataUrl = event.target.result;
+  fileLoaded = (fileDataUrl, fileList) => {
     if (this.state.isMounted) {
       this.setState({ isLoading: true, dataUrl: fileDataUrl });
     } else {
@@ -104,7 +103,7 @@ class ImageComponent extends React.Component {
   handleFilesSelected = files => {
     const state = {};
     const reader = new FileReader();
-    reader.onload = e => this.fileLoaded(e, files);
+    reader.onload = e => this.fileLoaded(e.target.result, files);
     reader.readAsDataURL(files[0]);
     Object.assign(state, { isLoading: true, dataUrl: EMPTY_SMALL_PLACEHOLDER });
 

@@ -30,19 +30,20 @@ export default class Editor extends PureComponent {
 
   initEditorProps() {
     const mockUpload = (files, updateEntity) => {
-      //mock upload
-      const testItem = testImages[Math.floor(Math.random() * testImages.length)];
-      const data = {
-        id: testItem.photoId,
-        original_file_name: files && files[0] ? files[0].name : testItem.url,
-        file_name: testItem.url,
-        width: testItem.metadata.width,
-        height: testItem.metadata.height,
-      };
-      setTimeout(() => {
-        updateEntity({ data, files });
-        console.log('consumer uploaded', data);
-      }, 500);
+      if (this.props.shouldMockUpload) {
+        const testItem = testImages[Math.floor(Math.random() * testImages.length)];
+        const data = {
+          id: testItem.photoId,
+          original_file_name: files && files[0] ? files[0].name : testItem.url,
+          file_name: testItem.url,
+          width: testItem.metadata.width,
+          height: testItem.metadata.height,
+        };
+        setTimeout(() => {
+          updateEntity({ data, files });
+          console.log('consumer uploaded', data);
+        }, 500);
+      }
     };
     this.helpers = {
       onFilesChange: (files, updateEntity) => mockUpload(files, updateEntity),
@@ -166,13 +167,11 @@ export default class Editor extends PureComponent {
           role="dialog"
           onRequestClose={onRequestClose || this.helpers.closeModal}
         >
-          {this.state.showModal && (
-            <RichContentEditorModal
-              modalsMap={ModalsMap}
-              locale={this.props.locale}
-              {...this.state.modalProps}
-            />
-          )}
+          <RichContentEditorModal
+            modalsMap={ModalsMap}
+            locale={this.props.locale}
+            {...this.state.modalProps}
+          />
         </ReactModal>
       </div>
     );

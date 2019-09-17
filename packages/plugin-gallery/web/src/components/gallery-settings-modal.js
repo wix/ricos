@@ -22,12 +22,11 @@ class ManageMediaSection extends Component {
     store.set('componentData', componentData);
   };
 
-  handleFileChange = (event, itemPos) => {
-    if (event.target.files.length > 0) {
+  handleFileChange = (files, itemPos) => {
+    if (files.length > 0) {
       const handleFilesSelected = this.props.store.getBlockHandler('handleFilesSelected');
-      handleFilesSelected(event.target.files, itemPos);
+      handleFilesSelected(files, itemPos);
     }
-    event.target.value = ''; //reset the input
   };
 
   handleFileSelection = (index, multiple, handleFilesAdded, deleteBlock) => {

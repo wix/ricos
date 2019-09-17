@@ -7,11 +7,13 @@ const checkedProps = ['active', 'paused', 'tag', 'focusTrapOptions', '_createFoc
 export default class FocusTrap extends React.Component {
   componentDidMount() {
     this.focusTrap = this.props._createFocusTrap(this.node, this.props.focusTrapOptions);
-    if (this.props.active) {
-      this.focusTrap.activate();
-    }
-    if (this.props.paused) {
-      this.focusTrap.pause();
+    if (!this.node.firstElementChild.hasAttribute('nofocus')) {
+      if (this.props.active) {
+        this.focusTrap.activate();
+      }
+      if (this.props.paused) {
+        this.focusTrap.pause();
+      }
     }
   }
 
