@@ -14,7 +14,7 @@ export default ({ helpers, t, settings, getEditorState, setEditorState }) => {
     {
       type: 'modal',
       name: 'EMOJI',
-      tooltipText: t('GiphyPlugin_InsertButton_Tooltip'),
+      tooltipText: t('EmojiPlugin_InsertButton_Tooltip'),
       Icon: EmojiPluginIcon,
       componentData: settings.componentDataDefaults || {},
       toolbars: settings.insertToolbars || [TOOLBARS.FOOTER],
