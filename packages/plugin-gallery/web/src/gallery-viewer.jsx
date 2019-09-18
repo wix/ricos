@@ -59,11 +59,13 @@ class GalleryViewer extends React.Component {
     const defaults = getDefault();
     const items = props.componentData.items || defaults.items;
     let styleParams = Object.assign(defaults.styles, props.componentData.styles || {});
-    // TODO fix and remove layout conditions.
-    styleParams =
-      styleParams.galleryLayout !== 4 && styleParams.galleryLayout !== 7 && this.haveTitle(items)
-        ? { ...styleParams, ...this.showTitleStyleParams }
-        : styleParams;
+    // styleParams =
+    //   styleParams.galleryLayout !== 4 && styleParams.galleryLayout !== 7 && this.hasTitle(items)
+    //     ? { ...styleParams, ...this.showTitleStyleParams(styleParams) }
+    //     : styleParams;
+    styleParams = this.hasTitle(items)
+      ? { ...styleParams, ...this.showTitleStyleParams(styleParams) }
+      : styleParams;
 
     return {
       items,
@@ -92,6 +94,7 @@ class GalleryViewer extends React.Component {
         if (this.state.styleParams.galleryLayout === 3) {
           return;
         }
+        // return;
         this.container && (this.container.style.height = `${data.layoutHeight}px`);
         this.setState(prevState => {
           this.setState({
@@ -107,15 +110,15 @@ class GalleryViewer extends React.Component {
     }
   };
 
-  haveTitle = items => {
+  hasTitle = items => {
     return items.some(item => {
       return item.metadata && item.metadata.title;
     });
   };
 
-  get showTitleStyleParams() {
+  showTitleStyleParams = styleParams => {
     return {
-      isVertical: this.state.styleParams.galleryLayout === 1,
+      isVertical: styleParams.galleryLayout === 1,
       allowTitle: true,
       titlePlacement: 'SHOW_BELOW',
       galleryTextAlign: 'center',
@@ -124,7 +127,7 @@ class GalleryViewer extends React.Component {
       calculateTextBoxHeightMode: 'AUTOMATIC',
       textsVerticalPadding: 0,
     };
-  }
+  };
 
   render() {
     this.styles = this.styles || mergeStyles({ styles: viewerStyles, theme: this.context.theme });
