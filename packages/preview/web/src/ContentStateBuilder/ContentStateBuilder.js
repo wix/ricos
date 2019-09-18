@@ -1,4 +1,5 @@
 import { currentVersion } from 'wix-rich-content-common';
+import { METHOD_BLOCK_MAP, METHOD_GROUPED_BLOCK_MAP } from '../const';
 import { toArray, addBlock } from './utils';
 
 const DEFAULT_STATE = { blocks: [], entityMap: {}, VERSION: currentVersion };
@@ -11,41 +12,6 @@ class ContentStateBuilder {
   get() {
     return this.contentState;
   }
-
-  text(text, config) {
-    const content = toArray(text);
-
-    this.contentState = content.reduce(
-      (state, blockText) =>
-        addBlock({
-          contentState: state,
-          text: blockText,
-          type: 'unstyled',
-          config,
-        }),
-      this.contentState
-    );
-
-    return this;
-  }
-
-  // ul(items) {}
-  //
-  // ol(items) {}
-  //
-  // code(content) {}
-  //
-  // quote(content) {}
-  //
-  // h2(content) {}
-  //
-  // h3(content) {}
-  //
-  // h4(content) {}
-  //
-  // h5(content) {}
-  //
-  // h6(content) {}
 
   image() {}
 
@@ -63,5 +29,26 @@ class ContentStateBuilder {
 
   map() {}
 }
+
+Object.entries({
+  ...METHOD_BLOCK_MAP,
+  ...METHOD_GROUPED_BLOCK_MAP,
+}).forEach(([method, type]) => {
+  ContentStateBuilder.prototype[method] = function(text, config) {
+    const content = toArray(text);
+
+    this.contentState = content.reduce(
+      (state, blockText) =>
+        addBlock({
+          contentState: state,
+          text: blockText,
+          type,
+          config,
+        }),
+      this.contentState
+    );
+    return this;
+  };
+});
 
 export default ContentStateBuilder;

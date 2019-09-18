@@ -1,4 +1,5 @@
 import convertEntity from './convertEntity';
+import { METHOD_BLOCK_MAP, METHOD_GROUPED_BLOCK_MAP } from '../const';
 
 const extractTextFromBlocks = (
   { blocks },
@@ -57,25 +58,13 @@ const getContentStateMetadata = raw => {
   text.array = () => extractTextAsArray(raw, type => type !== 'atomic');
 
   // non-grouped block text API
-  Object.entries({
-    plain: 'unstyled',
-    h2: 'header-two',
-    h3: 'header-three',
-    h4: 'header-four',
-    h5: 'header-five',
-    h6: 'header-six',
-    quote: 'blockquote',
-  }).forEach(([func, blockType]) => {
+  Object.entries(METHOD_BLOCK_MAP).forEach(([func, blockType]) => {
     text[func] = () => extractTextFromBlocks(raw, ({ type }) => type === blockType);
     text[func].array = () => extractTextAsArray(raw, type => type === blockType);
   });
 
   // grouped block text API
-  Object.entries({
-    code: 'code-block',
-    ol: 'ordered-list-item',
-    ul: 'unordered-list-item',
-  }).forEach(([func, blockType]) => {
+  Object.entries(METHOD_GROUPED_BLOCK_MAP).forEach(([func, blockType]) => {
     text[func] = () =>
       extractSequentialBlockArrays(raw, blockType).map(blockArray =>
         extractTextFromBlocks({ blocks: blockArray }, ({ type }) => type === blockType)
