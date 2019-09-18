@@ -87,6 +87,7 @@ const getContentStateMetadata = raw => {
       );
   });
 
+  // TODO: optimize the extractMedia call (cache?)
   const media = () => extractMedia(raw);
   media.images = () => extractMedia(raw).filter(({ type }) => type === 'image');
   media.videos = () => extractMedia(raw).filter(({ type }) => type === 'video');

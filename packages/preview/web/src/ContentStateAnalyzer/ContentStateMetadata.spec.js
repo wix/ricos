@@ -136,6 +136,17 @@ describe('content state media metadata', () => {
       url: '8bb438_0795e40ac4db438a8a723ea98dbeda10.jpg',
       width: 1621,
     },
+    {
+      type: 'video',
+      url: 'http://mirrors.standaloneinstaller.com/video-sample/jellyfish-25-mbps-hd-hevc.mp4',
+    },
+    {
+      type: 'image',
+      height: 270,
+      width: 360,
+      url: 'https://media3.giphy.com/media/uL0lBBzFn98eQ/giphy.gif',
+      thumbnail: 'https://media3.giphy.com/media/uL0lBBzFn98eQ/giphy_s.gif',
+    },
   ];
 
   it('should return all the media data', () => {
@@ -144,5 +155,9 @@ describe('content state media metadata', () => {
 
   it('should return all the image data', () => {
     expect(metadata.media.images()).toEqual(mediaData.filter(({ type }) => type === 'image'));
+  });
+
+  it('should return all the video data', () => {
+    expect(metadata.media.videos()).toEqual(mediaData.filter(({ type }) => type === 'video'));
   });
 });

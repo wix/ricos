@@ -24,7 +24,7 @@ const defaultEntitiyConverter = () => [];
  *
  * common representation:
  *
- * { width, height, url, type: 'image' }
+ * { width, height, url, type: 'image', thumbnail? }
  * */
 const imageConverter = entity => [
   {
@@ -43,17 +43,43 @@ const galleryConverter = entity =>
     type: 'image',
   }));
 
+const giphyConverter = entity => [
+  {
+    type: 'image',
+    url: entity.data.gif.originalUrl,
+    thumbnail: entity.data.gif.stillUrl,
+    width: entity.data.gif.width,
+    height: entity.data.gif.height,
+  },
+];
+
+/*
+ * wix-draft-plugin-video, wix-draft-plugin-sound-cloud data format:
+ * { src: 'url_string' }
+ *
+ * common representation:
+ *
+ * { url, type: 'video', thumbnail? }
+ *
+ */
+
+const videoConverter = entity => [
+  {
+    type: 'video',
+    url: entity.data.src,
+  },
+];
+
 const converters = {
-  'wix-draft-plugin-image': entity => imageConverter(entity),
-  'wix-draft-plugin-gallery': entity => galleryConverter(entity),
+  'wix-draft-plugin-image': imageConverter,
+  'wix-draft-plugin-gallery': galleryConverter,
   'wix-draft-plugin-divider': defaultEntitiyConverter,
+  'wix-draft-plugin-video': videoConverter,
+  'wix-draft-plugin-sound-cloud': videoConverter,
+  'wix-draft-plugin-giphy': giphyConverter,
   'wix-draft-plugin-file-upload': defaultEntitiyConverter,
   'wix-draft-plugin-map': defaultEntitiyConverter,
   mention: defaultEntitiyConverter,
-  // TODO: video, sound-cloud, giphy
-  'wix-draft-plugin-video': defaultEntitiyConverter,
-  'wix-draft-plugin-sound-cloud': defaultEntitiyConverter,
-  'wix-draft-plugin-giphy': defaultEntitiyConverter,
   LINK: defaultEntitiyConverter,
 };
 

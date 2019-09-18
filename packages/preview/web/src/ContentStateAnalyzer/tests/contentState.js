@@ -481,6 +481,22 @@ export const contentState = deepFreeze({
           "padding-bottom": "3px"
         }
       }
+    },
+    {
+
+      "key": "bra1e",
+      "text": " ",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 8
+        }
+      ],
+      "data": {}
     }
   ],
   "entityMap": {
@@ -688,6 +704,22 @@ export const contentState = deepFreeze({
         "mention": {
           "name": "Test One",
           "slug": "testone"
+        }
+      }
+    },
+    "8": {
+      "type": "wix-draft-plugin-giphy",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "config": {
+          "size": "content",
+          "alignment": "center"
+        },
+        "gif": {
+          "originalUrl": "https://media3.giphy.com/media/uL0lBBzFn98eQ/giphy.gif",
+          "stillUrl": "https://media3.giphy.com/media/uL0lBBzFn98eQ/giphy_s.gif",
+          "height": 270,
+          "width": 360
         }
       }
     }
