@@ -1,64 +1,72 @@
 # API
 
-## ContentStateMetadata
+## getContentStateMetadata
 
 The metadata is derived from ContentState and exposes its details:
 
 ```js
 
-const metadata = new ContentStateMetdata(contentState);
+const metadata = getContentStateMetdata(contentState);
 
 ```
 
-These details are categorized by content type rather native ContentState structure.
+These details are categorized by content type rather actual ContentState structure.
 
 ### ContentStateMetdata.text
 
 The `ContentStateMetdata.text` exposes all the textual content.
 
+### ContentStateMetdata.text.array
+
+The `ContentStateMetdata.text` exposes all the textual content a string array.
+
 #### ContentStateMetdata.text.plain
 
 The `ContentStateMetdata.text.plain` exposes the textual content extracted from `unstyled` blocks.
 
-##### ContentStateMetdata.text.plain[index]
+##### ContentStateMetdata.text.plain.array
 
-The `ContentStateMetdata.text.plain[index]` exposes the textual content extracted from a single `unstyled` block (access by index).
+The `ContentStateMetdata.text.plain.array` exposes the textual content extracted from the `unstyled` blocks as a string array.
 
-#### ContentStateMetdata.text.lists
+##### ContentStateMetdata.text.ol
 
-The `ContentStateMetdata.text.lists` exposes the textual content extracted from list blocks.
+The `ContentStateMetdata.text.ol` exposes the textual content extracted from ordered list blocks.
 
-##### ContentStateMetdata.text.lists.ordered
+###### ContentStateMetdata.text.ol.array
 
-The `ContentStateMetdata.text.lists.ordered` exposes the textual content extracted from ordered list blocks.
+The `ContentStateMetdata.text.ol` exposes the textual content extracted from the ordered list blocks as a string array.
 
-###### ContentStateMetdata.text.lists.ordered[index]
+##### ContentStateMetdata.text.ul
 
-The `ContentStateMetdata.text.lists.ordered` exposes the textual content extracted from a single ordered list block (access by index).
+The `ContentStateMetdata.text.ul` exposes the textual content extracted from unordered list blocks.
 
-##### ContentStateMetdata.text.lists.unordered
+###### ContentStateMetdata.text.ul.array
 
-The `ContentStateMetdata.text.lists.unordered` exposes the textual content extracted from unordered list blocks.
-
-###### ContentStateMetdata.text.lists.unordered[index]
-
-The `ContentStateMetdata.text.lists.unordered[index]` exposes the textual content extracted from a single unordered list block (access by index).
+The `ContentStateMetdata.text.ul.array` exposes the textual content extracted from the unordered list blocks as a string array.
 
 #### ContentStateMetdata.text.quotes
 
-The `ContentStateMetdata.text.quotes` exposes the textual content extracted from `block-quote` blocks.
+The `ContentStateMetdata.text.quotes` exposes the textual content extracted from `blockquote` blocks.
 
-##### ContentStateMetdata.text.quotes[index]
+##### ContentStateMetdata.text.quotes.array
 
-The `ContentStateMetdata.text.quotes[index]` exposes the textual content extracted from a single `block-quote` block (access by index).
+The `ContentStateMetdata.text.quotes.array` exposes the textual content extracted from the `blockquote` blocks as a string array.
 
-#### ContentStateMetdata.text.codeBlocks
+#### ContentStateMetdata.text.code
 
-The `ContentStateMetdata.text.codeBlocks` exposes the textual content extracted from `code-block` blocks.
+The `ContentStateMetdata.text.code` exposes the textual content extracted from `code-block` blocks.
 
-##### ContentStateMetdata.text.codeBlocks[index]
+##### ContentStateMetdata.text.code.array
 
-The `ContentStateMetdata.text.codeBlocks[index]` exposes the textual content extracted from a single `code-block` block (access by index).
+The `ContentStateMetdata.text.code.array` exposes the textual content extracted from the `code-block` blocks as a string array.
+
+#### ContentStateMetdata.text.h2/h3/h4/h5/h6
+
+The `ContentStateMetdata.text.h2/h3/h4/h5/h6` exposes the textual content extracted from heading blocks.
+
+##### ContentStateMetdata.text.h2/h3/h4/h5/h6.array
+
+The `ContentStateMetdata.text.h2/h3/h4/h5/h6.array` exposes the textual content extracted from the heading blocks as a string array.
 
 ## ContentStateMetdata.media
 
@@ -68,33 +76,17 @@ The `ContentStateMetdata.media` exposes all the media-related entities.
 
 The `ContentStateMetdata.media.images` exposes the data extracted from `image` / `gallery` / `giphy` entities.
 
-#### ContentStateMetdata.media.images[index]
-
-The `ContentStateMetdata.media.images[index]` exposes a single data entry extracted from `image` / `gallery` / `giphy` entities (access by index).
-
 ### ContentStateMetdata.media.videos
 
 The `ContentStateMetdata.media.videos` exposes the data extracted from `video` / `sound-cloud` / `youtube` entities.
-
-#### ContentStateMetdata.media.videos[index]
-
-The `ContentStateMetdata.media.videos[index]` exposes a single data entry extracted from `video` / `sound-cloud` / `youtube` entities (access by index).
 
 ### ContentStateMetdata.media.files
 
 The `ContentStateMetdata.media.files` exposes the data extracted from `file-upload` entities.
 
-#### ContentStateMetdata.media.files[index]
-
-The `ContentStateMetdata.media.files[index]` exposes a single data entry extracted from `file-upload` entities (access by index).
-
 ### ContentStateMetdata.media.maps
 
 The `ContentStateMetdata.media.maps` exposes the data extracted from `google-map` entities.
-
-#### ContentStateMetdata.media.maps[index]
-
-The `ContentStateMetdata.media.maps[index]` exposes a single data entry extracted from `google-map` entities (access by index).
 
 ## ContentStateBuilder
 

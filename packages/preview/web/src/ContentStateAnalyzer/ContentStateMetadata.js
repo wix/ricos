@@ -41,7 +41,6 @@ const extractSequentialBlockArrays = ({ blocks }, blockType) => {
       } else {
         result.lastItemIndex = -1;
       }
-
       return result;
     },
     { list: [], lastItemIndex: -1 }
@@ -101,6 +100,7 @@ const getContentStateMetadata = raw => {
         { all: text.array() }
       ),
     },
+    media: media(),
   });
 
   return { media, text, toObject };
