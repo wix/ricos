@@ -93,6 +93,7 @@ const getContentStateMetadata = raw => {
   media.files = () => extractMedia(raw).filter(({ type }) => type === 'file');
   media.maps = () => extractMedia(raw).filter(({ type }) => type === 'map');
 
+  // for debugging
   const toObject = () => ({
     text: {
       ...['plain', 'h2', 'h3', 'h4', 'h5', 'h6', 'quote', 'code', 'ol', 'ul'].reduce(
