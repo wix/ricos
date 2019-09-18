@@ -70,6 +70,22 @@ const videoConverter = entity => [
   },
 ];
 
+const fileConverter = entity => [
+  {
+    name: entity.data.name,
+    type: 'file',
+    fileType: entity.data.type,
+    url: entity.data.url,
+  },
+];
+
+const mapConverter = entity => [
+  {
+    type: 'map',
+    mapSettings: entity.data.mapSettings,
+  },
+];
+
 const converters = {
   'wix-draft-plugin-image': imageConverter,
   'wix-draft-plugin-gallery': galleryConverter,
@@ -77,8 +93,8 @@ const converters = {
   'wix-draft-plugin-video': videoConverter,
   'wix-draft-plugin-sound-cloud': videoConverter,
   'wix-draft-plugin-giphy': giphyConverter,
-  'wix-draft-plugin-file-upload': defaultEntitiyConverter,
-  'wix-draft-plugin-map': defaultEntitiyConverter,
+  'wix-draft-plugin-file-upload': fileConverter,
+  'wix-draft-plugin-map': mapConverter,
   mention: defaultEntitiyConverter,
   LINK: defaultEntitiyConverter,
 };

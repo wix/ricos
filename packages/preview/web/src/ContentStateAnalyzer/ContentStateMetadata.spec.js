@@ -141,11 +141,27 @@ describe('content state media metadata', () => {
       url: 'http://mirrors.standaloneinstaller.com/video-sample/jellyfish-25-mbps-hd-hevc.mp4',
     },
     {
-      type: 'image',
+      mapSettings: {
+        address: 'Wix HQ, Nemal Tel Aviv Street, Tel Aviv-Yafo, Israel',
+        isDraggingAllowed: true,
+        isMarkerShown: true,
+        isStreetViewControlShown: true,
+        isZoomControlShown: true,
+        lat: 32.097235,
+        lng: 34.77427,
+        locationDisplayName: 'Wix HQ, Nemal Tel Aviv Street, Tel Aviv-Yafo, Israel',
+        mode: 'roadmap',
+        zoom: 18,
+      },
+      type: 'map',
+    },
+    { fileType: 'jpg', name: '[95438] 811 х 1187..jpg', type: 'file', url: '' },
+    {
       height: 270,
-      width: 360,
-      url: 'https://media3.giphy.com/media/uL0lBBzFn98eQ/giphy.gif',
       thumbnail: 'https://media3.giphy.com/media/uL0lBBzFn98eQ/giphy_s.gif',
+      type: 'image',
+      url: 'https://media3.giphy.com/media/uL0lBBzFn98eQ/giphy.gif',
+      width: 360,
     },
   ];
 
@@ -159,5 +175,13 @@ describe('content state media metadata', () => {
 
   it('should return all the video data', () => {
     expect(metadata.media.videos()).toEqual(mediaData.filter(({ type }) => type === 'video'));
+  });
+
+  it('should return all the file-upload data', () => {
+    expect(metadata.media.files()).toEqual(mediaData.filter(({ type }) => type === 'file'));
+  });
+
+  it('should return all the maps data', () => {
+    expect(metadata.media.maps()).toEqual(mediaData.filter(({ type }) => type === 'map'));
   });
 });
