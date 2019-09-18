@@ -11,6 +11,18 @@ class InputWithLabel extends Component {
     this.styles = mergeStyles({ styles, theme: props.theme });
   }
 
+  // hasError = () => {
+  //   const { value, maxLength } = this.props;
+  //   return maxLength && value.length >= maxLength;
+  // };
+
+  // handleKeyDown = e => {
+  //   const { value, maxLength } = this.props;
+  //   if (e.key !== 'Enter' && e.key !== 'Escape' && value.length > maxLength) {
+  //     this.setState({ is });
+  //   }
+  // };
+
   renderInput = () => {
     const { styles } = this;
     const { id, isTextArea, isFullHeight, dataHook, ...otherProps } = this.props;
@@ -26,14 +38,20 @@ class InputWithLabel extends Component {
     );
   };
 
+  renderCharacterCapacity = () => {
+    const { value, maxLength } = this.props;
+    return <span className={styles.inputWithLabel_label}>{value.length + '/' + maxLength}</span>;
+  };
+
   render() {
     const { styles } = this;
-    const { id, label } = this.props;
+    const { id, label, maxLength } = this.props;
     if (label) {
       return (
         <label htmlFor={id}>
           <span className={styles.inputWithLabel_label}>{label}</span>
           {this.renderInput()}
+          {maxLength && this.renderCharacterCapacity()}
         </label>
       );
     } else {
@@ -49,6 +67,8 @@ InputWithLabel.propTypes = {
   isTextArea: PropTypes.bool,
   isFullHeight: PropTypes.bool,
   dataHook: PropTypes.string,
+  value: PropTypes.string,
+  maxLength: PropTypes.number,
 };
 
 export default InputWithLabel;

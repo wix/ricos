@@ -49,6 +49,8 @@ class ImageSettings extends Component {
       240
     );
 
+  onInputWithLableChange = event => this.props.onUpdateImage({ title: event.target.value });
+
   onLinkPanelChange = linkPanelValues => {
     this.props.onUpdateImage({ link: this.linkPanelToLink(linkPanelValues) });
   };
@@ -66,7 +68,6 @@ class ImageSettings extends Component {
     nofollow: rel === 'nofollow',
     isValid,
   });
-
   render() {
     const styles = this.styles;
     const {
@@ -82,7 +83,6 @@ class ImageSettings extends Component {
       onNextImage,
       onPreviousImage,
       onDeleteImage,
-      onUpdateImage,
       visibleLeftArrow,
       visibleRightArrow,
       uiSettings,
@@ -204,8 +204,9 @@ class ImageSettings extends Component {
                     label={this.captionLabel}
                     placeholder={this.captionInputPlaceholder}
                     value={metadata.title || ''}
+                    maxLength={30}
                     dataHook="galleryImageTitleInput"
-                    onChange={event => onUpdateImage({ title: event.target.value })}
+                    onChange={this.onInputWithLableChange}
                   />
                 </SettingsSection>
                 <SettingsSection
