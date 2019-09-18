@@ -54,4 +54,24 @@ describe('content state text builder', () => {
     const contentState = new UUT().plain('plain text with inline styles', config).get();
     expect(butKey(contentState.blocks[0])).toEqual(butKey(expected.blocks[5]));
   });
+
+  it('should add an ordered list to the content', () => {
+    const contentState = new UUT()
+      .ol(['ordered list item 1', 'ordered list item 2', 'ordered list item 3'])
+      .get();
+
+    expect(butKey(contentState.blocks[0])).toEqual(butKey(expected.blocks[17]));
+    expect(butKey(contentState.blocks[1])).toEqual(butKey(expected.blocks[18]));
+    expect(butKey(contentState.blocks[2])).toEqual(butKey(expected.blocks[19]));
+  });
+
+  it('should add an unordered list to the content', () => {
+    const contentState = new UUT()
+      .ul(['unordered list item 1', 'unordered list item 2', 'unordered list item 3'])
+      .get();
+
+    expect(butKey(contentState.blocks[0])).toEqual(butKey(expected.blocks[23]));
+    expect(butKey(contentState.blocks[1])).toEqual(butKey(expected.blocks[24]));
+    expect(butKey(contentState.blocks[2])).toEqual(butKey(expected.blocks[25]));
+  });
 });
