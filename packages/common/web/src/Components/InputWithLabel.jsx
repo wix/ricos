@@ -40,7 +40,7 @@ class InputWithLabel extends Component {
 
   renderCharacterCapacity = () => {
     const { value, maxLength } = this.props;
-    return <span className={styles.inputWithLabel_label}>{value.length + '/' + maxLength}</span>;
+    return <span className={styles.inputWithLabel_capacity}>{value.length + '/' + maxLength}</span>;
   };
 
   render() {
