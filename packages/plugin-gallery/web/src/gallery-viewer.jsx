@@ -88,7 +88,6 @@ class GalleryViewer extends React.Component {
       // container size change callback
       case 'GALLERY_CHANGE':
         // ignore thumbnails layout
-        //
         // if (this.state.styleParams.galleryLayout === 3) {
         //   return;
         // }
