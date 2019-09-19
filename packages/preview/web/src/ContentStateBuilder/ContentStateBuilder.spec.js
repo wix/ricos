@@ -3,7 +3,7 @@ import UUT from './ContentStateBuilder';
 import { contentState as expected } from '../tests/contentState';
 
 const butKey = obj => omit(obj, 'key');
-
+/* eslint-disable max-len */
 describe('content state text builder', () => {
   it('should add a single plain text block', () => {
     const contentState = new UUT().plain('the first block plain text').get();
@@ -74,4 +74,30 @@ describe('content state text builder', () => {
     expect(butKey(contentState.blocks[1])).toEqual(butKey(expected.blocks[24]));
     expect(butKey(contentState.blocks[2])).toEqual(butKey(expected.blocks[25]));
   });
+
+  it('should add a code block to the content', () => {
+    const contentState = new UUT().code(['const codeBlock = this;']).get();
+    expect(butKey(contentState.blocks[0])).toEqual(butKey(expected.blocks[34]));
+  });
+
+  it('should add a quote to the content', () => {
+    const quote =
+      'Listen, Jerry, I don’t want to overstep my bounds or  anything. It’s your house. It’s your world. You’re a real Julius Caesar,  but I’ll tell you some, tell you how-how I feel about school, Jerry.  It’s a waste of time, a bunch of people running around, bumping into  each other. G-guy up front says, “two plus two.” The people in the back  say, “four.” Then the bell rings, and they give you a carton of milk and  a piece of paper that says you can take a dump or something. I mean,  it’s—it’s not a place for smart people, Jerry, and I know that’s not a  popular opinion, but it’s my two cents on the issue.';
+    const contentState = new UUT().quote(quote).get();
+    expect(butKey(contentState.blocks[0])).toEqual(butKey(expected.blocks[35]));
+  });
+
+  it('should add headings to the content', () => {
+    Object.entries({
+      h2: 'heading2',
+      h3: 'heading3',
+      h4: 'heading4',
+      h5: 'heading5',
+      h6: 'heading6',
+    }).forEach(([method, text], idx) => {
+      const contentState = new UUT()[method](text).get();
+      expect(butKey(contentState.blocks[0])).toEqual(butKey(expected.blocks[36 + idx]));
+    });
+  });
 });
+/*eslint-enable max-len*/
