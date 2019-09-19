@@ -11,6 +11,8 @@
 ### :bug: Bug Fix
 - `image`
   - [#388](https://github.com/wix-incubator/rich-content/pull/388) changed default image alignment
+- `viewer`
+  - [#390](https://github.com/wix-incubator/rich-content/pull/390) justified text new lines disappear
 ### :house: Internal
 - `e2e`
   - [#368](https://github.com/wix-incubator/rich-content/pull/368) test rtl support in toolbars, text and external modals
