@@ -59,10 +59,6 @@ class GalleryViewer extends React.Component {
     const defaults = getDefault();
     const items = props.componentData.items || defaults.items;
     let styleParams = Object.assign(defaults.styles, props.componentData.styles || {});
-    // styleParams =
-    //   styleParams.galleryLayout !== 4 && styleParams.galleryLayout !== 7 && this.hasTitle(items)
-    //     ? { ...styleParams, ...this.showTitleStyleParams(styleParams) }
-    //     : styleParams;
     styleParams = this.hasTitle(items)
       ? { ...styleParams, ...this.showTitleStyleParams(styleParams) }
       : styleParams;
@@ -92,10 +88,10 @@ class GalleryViewer extends React.Component {
       // container size change callback
       case 'GALLERY_CHANGE':
         // ignore thumbnails layout
+        //
         // if (this.state.styleParams.galleryLayout === 3) {
         //   return;
         // }
-        // return;
         this.container && (this.container.style.height = `${data.layoutHeight}px`);
         this.setState(prevState => ({
           size: {
