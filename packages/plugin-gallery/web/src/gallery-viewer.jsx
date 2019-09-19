@@ -66,8 +66,9 @@ class GalleryViewer extends React.Component {
     styleParams = this.hasTitle(items)
       ? { ...styleParams, ...this.showTitleStyleParams(styleParams) }
       : styleParams;
-
+    const galleryKey = Math.random();
     return {
+      galleryKey,
       items,
       styleParams,
     };
@@ -91,19 +92,17 @@ class GalleryViewer extends React.Component {
       // container size change callback
       case 'GALLERY_CHANGE':
         // ignore thumbnails layout
-        if (this.state.styleParams.galleryLayout === 3) {
-          return;
-        }
+        // if (this.state.styleParams.galleryLayout === 3) {
+        //   return;
+        // }
         // return;
         this.container && (this.container.style.height = `${data.layoutHeight}px`);
-        this.setState(prevState => {
-          this.setState({
-            size: {
-              ...prevState.size,
-              height: data.layoutHeight,
-            },
-          });
-        });
+        this.setState(prevState => ({
+          size: {
+            ...prevState.size,
+            height: data.layoutHeight,
+          },
+        }));
         break;
       default:
         break;
@@ -131,12 +130,14 @@ class GalleryViewer extends React.Component {
 
   render() {
     this.styles = this.styles || mergeStyles({ styles: viewerStyles, theme: this.context.theme });
-    const { styleParams, size = { width: 300 } } = this.state;
+    const { galleryKey, styleParams, size = { width: 300 } } = this.state;
+    const items = this.getItems();
     return (
       <ViewportRenderer>
         <div ref={elem => (this.container = elem)} className={this.styles.gallery_container}>
           <ProGallery
-            items={this.getItems()}
+            key={galleryKey}
+            items={items}
             styles={styleParams}
             container={size}
             settings={this.props.settings}

@@ -25,11 +25,9 @@ class ImageSettings extends Component {
     this.headerLabel = t('GalleryImageSettings_Header');
     this.ReplaceLabel = t('GalleryImageSettings_Replace_Label');
     this.deleteLabel = t('GalleryImageSettings_Delete_Label');
-    // this.titleLabel = t('GalleryImageSettings_Title_Label');
-    // this.titleInputPlaceholder = t('GalleryImageSettings_Title_Input_Placeholder');
+    this.titleLabel = t('GalleryImageSettings_Title_Label');
+    this.titleInputPlaceholder = t('GalleryImageSettings_Title_Input_Placeholder');
     this.linkLabel = t('GalleryImageSettings_Link_Label');
-    this.captionLabel = t('ImageSettings_Caption_Label');
-    this.captionInputPlaceholder = t('GalleryImageSettings_Title_Input_Placeholder');
   }
 
   deleteImage() {
@@ -201,8 +199,8 @@ class ImageSettings extends Component {
                   <InputWithLabel
                     theme={theme}
                     id="galleryImageTitleInput"
-                    label={this.captionLabel}
-                    placeholder={this.captionInputPlaceholder}
+                    label={this.titleLabel}
+                    placeholder={this.titleInputPlaceholder}
                     value={metadata.title || ''}
                     maxLength={30}
                     dataHook="galleryImageTitleInput"
