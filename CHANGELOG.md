@@ -9,6 +9,8 @@
 
 ## [Unreleased]
 ### :bug: Bug Fix
+- `editor`
+  - [#392](https://github.com/wix-incubator/rich-content/pull/392) text in line toolbar has tooltips
 - `example`
   - [9add0fbc](https://github.com/wix-incubator/rich-content/commit/9add0fbc) gallery validation schema used for content validation 
 <hr/>

@@ -18,7 +18,12 @@ class ToolbarButton extends Component {
     const { theme, showTooltip, tooltipText, button, tooltipOffset } = this.props;
     if (showTooltip) {
       return (
-        <Tooltip content={tooltipText} moveBy={tooltipOffset} theme={theme}>
+        <Tooltip
+          content={tooltipText}
+          moveBy={tooltipOffset}
+          shouldRebuildOnUpdate={() => true}
+          theme={theme}
+        >
           {button}
         </Tooltip>
       );
