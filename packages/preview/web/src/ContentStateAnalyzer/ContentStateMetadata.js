@@ -1,4 +1,4 @@
-import convertEntity from './convertEntity';
+import extractEntityData from './extractEntityData';
 import { METHOD_BLOCK_MAP, METHOD_GROUPED_BLOCK_MAP } from '../const';
 
 const extractTextFromBlocks = (
@@ -51,7 +51,7 @@ const extractSequentialBlockArrays = ({ blocks }, blockType) => {
 };
 
 const extractMedia = ({ entityMap }) =>
-  Object.values(entityMap).reduce((media, entity) => [...media, ...convertEntity(entity)], []);
+  Object.values(entityMap).reduce((media, entity) => [...media, ...extractEntityData(entity)], []);
 
 const getContentStateMetadata = raw => {
   const text = () => extractTextFromBlocks(raw, ({ type }) => type !== 'atomic');

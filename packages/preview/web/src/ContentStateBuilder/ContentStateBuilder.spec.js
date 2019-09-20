@@ -3,7 +3,7 @@ import UUT from './ContentStateBuilder';
 import { contentState as expected } from '../tests/contentState';
 
 const butKey = obj => omit(obj, 'key');
-/* eslint-disable max-len */
+/* eslint-disable max-len*/
 describe('content state text builder', () => {
   it('should add a single plain text block', () => {
     const contentState = new UUT().plain('the first block plain text').get();
@@ -100,4 +100,18 @@ describe('content state text builder', () => {
     });
   });
 });
+
+// describe('content state media builder', () => {
+//   it('should add an image to the content', () => {
+//     const contentState = new UUT()
+//       .image({
+//         url: '',
+//         width: '',
+//         height: '',
+//       })
+//       .get();
+//     expect(butKey(contentState.blocks[0])).toEqual(butKey(expected.blocks[3]));
+//     expect(contentState.entityMap[0]).toEqual(expected.entityMap[0]);
+//   });
+// });
 /*eslint-enable max-len*/

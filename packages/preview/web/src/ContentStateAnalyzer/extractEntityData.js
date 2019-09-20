@@ -99,6 +99,6 @@ const converters = {
   LINK: defaultEntitiyConverter,
 };
 
-const convertEntity = entity => converters[entity.type](entity);
+const extractEntityData = entity => converters[entity.type](entity);
 
-export default convertEntity;
+export default extractEntityData;

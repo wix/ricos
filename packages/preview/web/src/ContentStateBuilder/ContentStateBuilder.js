@@ -1,6 +1,6 @@
 import { currentVersion } from 'wix-rich-content-common';
-import { METHOD_BLOCK_MAP, METHOD_GROUPED_BLOCK_MAP } from '../const';
-import { toArray, addBlock } from './utils';
+import { METHOD_BLOCK_MAP, METHOD_GROUPED_BLOCK_MAP, METHOD_PLUGIN_DATA_MAP } from '../const';
+import { toArray, addBlock, addPlugin } from './utils';
 
 const DEFAULT_STATE = { blocks: [], entityMap: {}, VERSION: currentVersion };
 
@@ -12,22 +12,6 @@ class ContentStateBuilder {
   get() {
     return this.contentState;
   }
-
-  image() {}
-
-  gallery() {}
-
-  divider() {}
-
-  video() {}
-
-  soundCloud() {}
-
-  giphy() {}
-
-  file() {}
-
-  map() {}
 }
 
 Object.entries({
@@ -47,6 +31,17 @@ Object.entries({
         }),
       this.contentState
     );
+    return this;
+  };
+});
+
+Object.entries({ METHOD_PLUGIN_DATA_MAP }).forEach(([method, defaultConfig]) => {
+  ContentStateBuilder.prototype[method] = function(entityData, config = {}) {
+    this.contentState = addPlugin({
+      contentState: this.contentState,
+      data: entityData,
+      config: { ...defaultConfig, ...config },
+    });
     return this;
   };
 });

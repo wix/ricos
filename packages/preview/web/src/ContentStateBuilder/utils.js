@@ -1,4 +1,5 @@
 import { isArray } from 'lodash';
+import mergeEntityData from './mergeEntityData';
 
 const DEFAULT_BLOCK_CONFIG = {
   data: {},
@@ -24,8 +25,29 @@ export const addBlock = ({ contentState, text, type, config }) => ({
   blocks: [...contentState.blocks, createBlock(type, text, config)],
 });
 
-// export const addEntity = ({ contentState, entity, config }) => {};
+export const addEntity = ({ contentState, data, config }) => {
+  const mergedEntity = mergeEntityData(data, config);
+  return {
+    ...contentState,
+    entityMap: {
+      ...contentState.entityMap,
+      [Object.keys(contentState.entityMap).length]: mergedEntity,
+    },
+  };
+};
 
-// export const addPluginData = ({ contentState, data, type, config }) => {};
+export const addPlugin = ({ contentState, data, config }) => {
+  const contentStateWithBlock = addBlock({
+    contentState,
+    text: ' ',
+    type: 'atomic',
+  });
+
+  return addEntity({
+    contentState: contentStateWithBlock,
+    data,
+    config,
+  });
+};
 
 export const toArray = content => (isArray(content) ? content : [content]);
