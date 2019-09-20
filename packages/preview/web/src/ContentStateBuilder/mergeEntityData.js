@@ -1,9 +1,14 @@
 const defaultMerger = (mediaInfo, entity) => ({ ...mediaInfo, ...entity });
 
-const imageMerger = ({ url, width, height }, entity) => ({
+const imageMerger = ({ url, width, height, metadata, link }, entity) => ({
   ...entity,
   data: {
     ...entity.data,
+    config: {
+      ...entity.config,
+      link,
+    },
+    metadata,
     src: {
       width,
       height,
@@ -39,4 +44,6 @@ const mergers = {
   LINK: defaultMerger,
 };
 
-export default (mediaInfo, entity) => mergers[entity.type](mediaInfo, entity);
+export default (mediaInfo, entity) => {
+  return mergers[entity.type](mediaInfo, entity);
+};

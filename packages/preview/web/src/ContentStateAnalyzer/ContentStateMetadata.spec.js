@@ -117,6 +117,8 @@ describe('content state media metadata', () => {
       type: 'image',
       url: '8bb438_c1089eafb4ab405ba328b528e3ecc63e.jpg',
       width: 1920,
+      link: { rel: 'nofollow', target: '_blank', url: 'images.com' },
+      metadata: { alt: 'alt text', caption: 'image caption' },
     },
     {
       height: 2800,

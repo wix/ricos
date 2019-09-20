@@ -32,6 +32,8 @@ const imageConverter = entity => [
     height: entity.data.src.height,
     url: entity.data.src.file_name,
     type: 'image',
+    metadata: entity.data.metadata,
+    link: entity.data.config.link,
   },
 ];
 

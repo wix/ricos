@@ -35,12 +35,18 @@ Object.entries({
   };
 });
 
-Object.entries({ METHOD_PLUGIN_DATA_MAP }).forEach(([method, defaultConfig]) => {
-  ContentStateBuilder.prototype[method] = function(entityData, config = {}) {
+Object.entries(METHOD_PLUGIN_DATA_MAP).forEach(([method, defaultEntityData]) => {
+  ContentStateBuilder.prototype[method] = function(mediaInfo, config = {}) {
     this.contentState = addPlugin({
       contentState: this.contentState,
-      data: entityData,
-      config: { ...defaultConfig, ...config },
+      data: mediaInfo,
+      config: {
+        ...defaultEntityData,
+        data: {
+          ...defaultEntityData.data,
+          config: { ...defaultEntityData.config, ...config },
+        },
+      },
     });
     return this;
   };

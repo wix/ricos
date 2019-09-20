@@ -101,17 +101,27 @@ describe('content state text builder', () => {
   });
 });
 
-// describe('content state media builder', () => {
-//   it('should add an image to the content', () => {
-//     const contentState = new UUT()
-//       .image({
-//         url: '',
-//         width: '',
-//         height: '',
-//       })
-//       .get();
-//     expect(butKey(contentState.blocks[0])).toEqual(butKey(expected.blocks[3]));
-//     expect(contentState.entityMap[0]).toEqual(expected.entityMap[0]);
-//   });
-// });
-/*eslint-enable max-len*/
+//describe('content state media builder', () => {
+//it('should add an image to the content', () => {
+//const contentState = new UUT()
+//.image(
+//{
+//url: '8bb438_c1089eafb4ab405ba328b528e3ecc63e.jpg',
+//height: 1920,
+//width: 1920,
+//link: { rel: 'nofollow', target: '_blank', url: 'images.com' },
+//metadata: { alt: 'alt text', caption: 'image caption' },
+//},
+//{
+//showDescription: true,
+//showTitle: true,
+//size: 'inline',
+//alignment: 'center',
+//}
+//)
+//.get();
+//expect(butKey(contentState.blocks[0])).toEqual(butKey(expected.blocks[2]));
+//expect(contentState.entityMap[0]).toEqual(expected.entityMap[0]);
+//});
+//});
+//// eslint-enable max-len

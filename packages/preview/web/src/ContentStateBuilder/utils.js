@@ -41,6 +41,15 @@ export const addPlugin = ({ contentState, data, config }) => {
     contentState,
     text: ' ',
     type: 'atomic',
+    config: {
+      entityRanges: [
+        {
+          offset: 0,
+          length: 1,
+          key: Object.keys(contentState.entityMap).length,
+        },
+      ],
+    },
   });
 
   return addEntity({
