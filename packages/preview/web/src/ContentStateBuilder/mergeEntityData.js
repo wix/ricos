@@ -1,11 +1,17 @@
-const defaultMerger = (mediaInfo, entity) => ({ ...mediaInfo, ...entity });
+const defaultMerger = (mediaInfo, entity) => ({
+  ...entity,
+  data: {
+    ...entity.data,
+    ...mediaInfo,
+  },
+});
 
 const imageMerger = ({ url, width, height, metadata, link }, entity) => ({
   ...entity,
   data: {
     ...entity.data,
     config: {
-      ...entity.config,
+      ...entity.data.config,
       link,
     },
     metadata,
@@ -31,19 +37,57 @@ const galleryMerger = (items, entity) => ({
   },
 });
 
+const videoMerger = ({ url, isCustom }, entity) => ({
+  ...entity,
+  data: {
+    ...entity.data,
+    src: url,
+    isCustomVideo: !!isCustom,
+  },
+});
+
+const giphyMerger = ({ width, height, url, thumbnail }, entity) => ({
+  ...entity,
+  data: {
+    ...entity.data,
+    gif: {
+      width,
+      height,
+      originalUrl: url,
+      stillUrl: thumbnail,
+    },
+  },
+});
+
+const fileMerger = ({ fileType, name, url }, entity) => ({
+  ...entity,
+  data: {
+    ...entity.data,
+    type: fileType,
+    name,
+    url,
+  },
+});
+
+const mapMerger = (mapSettings, entity) => ({
+  ...entity,
+  data: {
+    ...entity.data,
+    mapSettings,
+  },
+});
+
 const mergers = {
   'wix-draft-plugin-image': imageMerger,
   'wix-draft-plugin-gallery': galleryMerger,
-  'wix-draft-plugin-giphy': defaultMerger,
-  'wix-draft-plugin-video': defaultMerger,
-  'wix-draft-plugin-sound-cloud': defaultMerger,
-  'wix-draft-plugin-file-upload': defaultMerger,
-  'wix-draft-plugin-map': defaultMerger,
+  'wix-draft-plugin-giphy': giphyMerger,
+  'wix-draft-plugin-video': videoMerger,
+  'wix-draft-plugin-sound-cloud': videoMerger,
+  'wix-draft-plugin-file-upload': fileMerger,
+  'wix-draft-plugin-map': mapMerger,
   'wix-draft-plugin-divider': defaultMerger,
   mention: defaultMerger,
   LINK: defaultMerger,
 };
 
-export default (mediaInfo, entity) => {
-  return mergers[entity.type](mediaInfo, entity);
-};
+export default (mediaInfo, entity) => mergers[entity.type](mediaInfo, entity);

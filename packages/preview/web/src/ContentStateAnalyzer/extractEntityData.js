@@ -69,6 +69,7 @@ const videoConverter = entity => [
   {
     type: 'video',
     url: entity.data.src,
+    isCustom: entity.data.isCustomVideo,
   },
 ];
 

@@ -537,27 +537,21 @@ export const contentState = deepFreeze({
             "metadata": {
               "height": 2800,
               "width": 4200,
-              "processedByConsumer": true
             },
-            "itemId": "9c0c752ebc1b7b27dc3b02b98f2a4181",
             "url": "8bb438_e78b371c75ce42de8719dccfc97298a4.jpg"
           },
           {
             "metadata": {
               "height": 1280,
               "width": 1920,
-              "processedByConsumer": true
             },
-            "itemId": "711b734cd45cfb65becf32d557b6f980",
             "url": "8bb438_281af3d3281f4584a5a864c6c60f3a00.jpg"
           },
           {
             "metadata": {
               "height": 1081,
               "width": 1621,
-              "processedByConsumer": true
             },
-            "itemId": "75318326db54174bea73594c3c25873a",
             "url": "8bb438_0795e40ac4db438a8a723ea98dbeda10.jpg"
           }
         ],

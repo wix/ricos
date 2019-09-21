@@ -44,7 +44,7 @@ Object.entries(METHOD_PLUGIN_DATA_MAP).forEach(([method, defaultEntityData]) => 
         ...defaultEntityData,
         data: {
           ...defaultEntityData.data,
-          config: { ...defaultEntityData.config, ...config },
+          config: { ...defaultEntityData.data.config, ...config },
         },
       },
     });

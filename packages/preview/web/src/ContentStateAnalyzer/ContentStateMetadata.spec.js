@@ -140,6 +140,7 @@ describe('content state media metadata', () => {
     },
     {
       type: 'video',
+      isCustom: true,
       url: 'http://mirrors.standaloneinstaller.com/video-sample/jellyfish-25-mbps-hd-hevc.mp4',
     },
     {
