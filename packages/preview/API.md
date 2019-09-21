@@ -180,4 +180,4 @@ The `ContentStateBuilder.h2/h3/h4/h5/h6` methods append a header block with give
 #### ContentStateBuilder.image(data, config)
 
 The `ContentStateBuilder.image` method appends an `atomic` block to the `blocks` and a `wix-draft-plugin-image` entity to the `entityMap`. The optional `config` is merged with the entity config.
-The `data` param is expected to be an image data object returned by `ContentStateMetdata.media.images` method. 
+The `data` param is expected to be an image data object returned by [ContentStateMetdata.media.images](./API.md#ContentStateMetdatamediaimages) method. 
