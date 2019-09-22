@@ -4,11 +4,14 @@ import UUT from './ContentStateTransformation';
 /* eslint-disable max-len */
 describe('Content State Transformation', () => {
   it('should apply the rule "if images > 3 => add a gallery with 3 items" on given content state', () => {
-    const tranformer = new UUT({
+    const transformer = new UUT({
       _if: metadata => metadata.media.images().length > 3,
-      _then: (metadata, preview) => preview.gallery(metadata.media.images().slice(0, 3)),
+      _then: (metadata, preview) =>
+        preview.gallery({
+          mediaInfo: metadata.media.images().slice(0, 3),
+        }),
     });
-    const preview = tranformer.apply(contentState);
+    const preview = transformer.apply(contentState);
     expect(preview.entityMap[0]).toEqual({
       data: {
         config: { alignment: 'center', layout: 'small', size: 'content', spacing: 0 },

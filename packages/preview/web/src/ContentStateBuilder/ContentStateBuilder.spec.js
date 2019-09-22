@@ -106,21 +106,21 @@ describe('content state text builder', () => {
 describe('content state media builder', () => {
   it('should add an image to the content', () => {
     const contentState = new UUT()
-      .image(
-        {
+      .image({
+        mediaInfo: {
           url: '8bb438_c1089eafb4ab405ba328b528e3ecc63e.jpg',
           height: 1920,
           width: 1920,
           link: { rel: 'nofollow', target: '_blank', url: 'images.com' },
           metadata: { alt: 'alt text', caption: 'image caption' },
         },
-        {
+        config: {
           showDescription: true,
           showTitle: true,
           size: 'inline',
           alignment: 'center',
-        }
-      )
+        },
+      })
       .get();
     expect(butKey(contentState.blocks[0])).toEqual(butKey(expected.blocks[2]));
     expect(contentState.entityMap[0]).toEqual(
@@ -130,8 +130,8 @@ describe('content state media builder', () => {
 
   it('should add a gallery to the content', () => {
     const contentState = new UUT()
-      .gallery(
-        [
+      .gallery({
+        mediaInfo: [
           {
             height: 2800,
             type: 'image',
@@ -151,13 +151,13 @@ describe('content state media builder', () => {
             width: 1621,
           },
         ],
-        {
+        config: {
           alignment: 'center',
           layout: 'small',
           size: 'content',
           spacing: 0,
-        }
-      )
+        },
+      })
       .get();
 
     expect(contentState.entityMap[0]).toEqual(expected.entityMap[1]);
@@ -165,16 +165,16 @@ describe('content state media builder', () => {
 
   it('should add a video to the content', () => {
     const contentState = new UUT()
-      .video(
-        {
+      .video({
+        mediaInfo: {
           url: 'http://mirrors.standaloneinstaller.com/video-sample/jellyfish-25-mbps-hd-hevc.mp4',
           isCustom: true,
         },
-        {
+        config: {
           size: 'content',
           alignment: 'center',
-        }
-      )
+        },
+      })
       .get();
     expect(contentState.entityMap[0]).toEqual(but(expected.entityMap[3], 'data.metadata'));
   });
@@ -182,11 +182,13 @@ describe('content state media builder', () => {
   it('should add a giphy to the content', () => {
     const contentState = new UUT()
       .giphy({
-        height: 270,
-        thumbnail: 'https://media3.giphy.com/media/uL0lBBzFn98eQ/giphy_s.gif',
-        type: 'image',
-        url: 'https://media3.giphy.com/media/uL0lBBzFn98eQ/giphy.gif',
-        width: 360,
+        mediaInfo: {
+          height: 270,
+          thumbnail: 'https://media3.giphy.com/media/uL0lBBzFn98eQ/giphy_s.gif',
+          type: 'image',
+          url: 'https://media3.giphy.com/media/uL0lBBzFn98eQ/giphy.gif',
+          width: 360,
+        },
       })
       .get();
     expect(contentState.entityMap[0]).toEqual(expected.entityMap[8]);
@@ -195,10 +197,12 @@ describe('content state media builder', () => {
   it('should add a file to the content', () => {
     const contentState = new UUT()
       .file({
-        fileType: 'jpg',
-        name: '[95438] 811 х 1187..jpg',
-        type: 'file',
-        url: '',
+        mediaInfo: {
+          fileType: 'jpg',
+          name: '[95438] 811 х 1187..jpg',
+          type: 'file',
+          url: '',
+        },
       })
       .get();
     expect(contentState.entityMap[0]).toEqual(expected.entityMap[6]);
@@ -207,16 +211,18 @@ describe('content state media builder', () => {
   it('should add a map to the content', () => {
     const contentState = new UUT()
       .map({
-        address: 'Wix HQ, Nemal Tel Aviv Street, Tel Aviv-Yafo, Israel',
-        locationDisplayName: 'Wix HQ, Nemal Tel Aviv Street, Tel Aviv-Yafo, Israel',
-        lat: 32.097235,
-        lng: 34.77427,
-        zoom: 18,
-        mode: 'roadmap',
-        isMarkerShown: true,
-        isZoomControlShown: true,
-        isStreetViewControlShown: true,
-        isDraggingAllowed: true,
+        mediaInfo: {
+          address: 'Wix HQ, Nemal Tel Aviv Street, Tel Aviv-Yafo, Israel',
+          locationDisplayName: 'Wix HQ, Nemal Tel Aviv Street, Tel Aviv-Yafo, Israel',
+          lat: 32.097235,
+          lng: 34.77427,
+          zoom: 18,
+          mode: 'roadmap',
+          isMarkerShown: true,
+          isZoomControlShown: true,
+          isStreetViewControlShown: true,
+          isDraggingAllowed: true,
+        },
       })
       .get();
     expect(contentState.entityMap[0]).toEqual(expected.entityMap[5]);

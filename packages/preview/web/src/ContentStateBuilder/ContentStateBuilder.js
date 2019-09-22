@@ -36,7 +36,7 @@ Object.entries({
 });
 
 Object.entries(METHOD_PLUGIN_DATA_MAP).forEach(([method, defaultEntityData]) => {
-  ContentStateBuilder.prototype[method] = function(mediaInfo, config = {}) {
+  ContentStateBuilder.prototype[method] = function({ mediaInfo, config = {}, overrides = {} }) {
     this.contentState = addPlugin({
       contentState: this.contentState,
       data: mediaInfo,
@@ -46,6 +46,7 @@ Object.entries(METHOD_PLUGIN_DATA_MAP).forEach(([method, defaultEntityData]) => 
           ...defaultEntityData.data,
           config: { ...defaultEntityData.data.config, ...config },
         },
+        ...overrides,
       },
     });
     return this;
