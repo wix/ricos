@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactTooltip from 'react-tooltip';
+import { debounce } from 'lodash';
 class Tooltip extends React.Component {
   static propTypes = {
     content: PropTypes.string.isRequired,
@@ -16,12 +17,13 @@ class Tooltip extends React.Component {
     shouldRebuildOnUpdate: () => false,
   };
 
+  static rebuildTooltips = debounce(ReactTooltip.rebuild, 50);
   componentDidMount() {
-    this.props.shouldRebuildOnUpdate() && ReactTooltip.rebuild();
+    Tooltip.rebuildTooltips();
   }
 
   componentDidUpdate() {
-    this.props.shouldRebuildOnUpdate() && ReactTooltip.rebuild();
+    this.props.shouldRebuildOnUpdate() && Tooltip.rebuildTooltips();
   }
 
   render() {
