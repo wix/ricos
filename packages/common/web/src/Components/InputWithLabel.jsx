@@ -11,18 +11,6 @@ class InputWithLabel extends Component {
     this.styles = mergeStyles({ styles, theme: props.theme });
   }
 
-  // hasError = () => {
-  //   const { value, maxLength } = this.props;
-  //   return maxLength && value.length >= maxLength;
-  // };
-
-  // handleKeyDown = e => {
-  //   const { value, maxLength } = this.props;
-  //   if (e.key !== 'Enter' && e.key !== 'Escape' && value.length > maxLength) {
-  //     this.setState({ is });
-  //   }
-  // };
-
   renderInput = () => {
     const { styles } = this;
     const { id, isTextArea, isFullHeight, dataHook, ...otherProps } = this.props;

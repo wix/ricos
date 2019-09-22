@@ -62,6 +62,7 @@ class GalleryViewer extends React.Component {
     styleParams = this.hasTitle(items)
       ? { ...styleParams, ...this.showTitleStyleParams(styleParams) }
       : styleParams;
+    // TODO remove gallery key
     const galleryKey = Math.random();
     return {
       galleryKey,
@@ -125,12 +126,14 @@ class GalleryViewer extends React.Component {
 
   render() {
     this.styles = this.styles || mergeStyles({ styles: viewerStyles, theme: this.context.theme });
+    // TODO remove gallery key
     const { galleryKey, styleParams, size = { width: 300 } } = this.state;
     const items = this.getItems();
     return (
       <ViewportRenderer>
         <div ref={elem => (this.container = elem)} className={this.styles.gallery_container}>
           <ProGallery
+            // TODO remove gallery key
             key={galleryKey}
             items={items}
             styles={styleParams}
