@@ -1,6 +1,7 @@
 import React from 'react';
 import { renderToString } from 'react-dom/server';
-import RichContentApp from '../../../../examples/main/shared/RichContentApp';
+import Editor from '../../../../examples/main/src/editor/Editor.jsx';
+import Viewer from '../shared/components/Viewer';
 
 const COMPONENTS = {
   rce: {
@@ -22,7 +23,8 @@ export default function renderer() {
     }
 
     try {
-      props.initialState = require(`../../../tests/fixtures/${fixtureName}.json`);
+      const initialState = require(`../../../tests/fixtures/${fixtureName}.json`);
+      props.initialState = initialState;
     } catch (error) {
       console.log(error);
       return res.status(404).send(`Fixture ${fixtureName} not found`);
