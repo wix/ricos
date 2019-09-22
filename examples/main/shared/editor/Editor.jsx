@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
 import { RichContentEditor, RichContentEditorModal } from 'wix-rich-content-editor';
-import { isSSR } from 'wix-rich-content-common';
 import { convertToRaw } from '@wix/draft-js';
 import * as PropTypes from 'prop-types';
 import ReactModal from 'react-modal';
@@ -26,9 +25,7 @@ export default class Editor extends PureComponent {
   state = {};
   constructor(props) {
     super(props);
-    if (!isSSR()) {
-      ReactModal.setAppElement('#root');
-    }
+    // ReactModal.setAppElement('#root');
     this.initEditorProps();
   }
 
@@ -132,7 +129,7 @@ export default class Editor extends PureComponent {
         blocks: raw.blocks.map((block, index) => ({ ...block, key: index })),
       };
     }
-    this.props.onChange && this.props.onChange(editorState);
+    this.props.onChange && this.props.onChange();
   };
 
   render() {
