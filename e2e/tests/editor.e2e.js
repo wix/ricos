@@ -14,7 +14,7 @@ describe('editor', () => {
       .matchSnapshots();
   });
 
-  it('should allow to apply inline toolbar plugins', () => {
+  it('should allow to apply inline styles and links', () => {
     cy.loadEditor('plain')
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.BOLD, [40, 10])
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.UNDERLINE, [10, 5])
@@ -55,15 +55,13 @@ describe('editor', () => {
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.UNORDERED_LIST, [550, 1])
       .matchSnapshots();
   });
-<<<<<<< HEAD
+
   it('should allow to add links', () => {
     cy.loadEditor('plain')
       .setLink([0, 10], 'https://www.wix.com/')
       .matchSnapshots();
   });
-<<<<<<< HEAD
 
-<<<<<<< HEAD
   it('should align atomic blocks correctly', () => {
     cy.loadEditor('images')
       .alignImage('left')
@@ -128,65 +126,4 @@ describe('editor', () => {
       afterEach(() => cy.matchSnapshots({ capture: 'viewport' }));
     });
   });
-=======
-  // context('when in hebrew locale', () => {
-  //   beforeEach(() => cy.switchToHebrew());
-
-  //   context('desktop', () => {
-  //     beforeEach(() => cy.switchToDesktop());
-
-  //     it('should render plugin toolbar in rtl', () => {
-  //       cy.loadEditor()
-  //         .focusEditor()
-  //         .openPluginToolbar();
-  //     });
-
-  //     it('should render text toolbar in rtl', () => {
-  //       cy.loadEditor('plain')
-  //         .setSelection(0, 8)
-  //         .get('[data-hook=inlineToolbar]');
-  //     });
-
-  //     it('should render rtl and ltr text correctly', () => {
-  //       cy.loadEditor('hebrew');
-  //     });
-
-  //     it('should render external modal in rtl', () => {
-  //       cy.loadEditor('images')
-  //         .openImageSettings()
-  //         .get('[data-hook="imageSettingsCaptionInput"]')
-  //         .blur();
-  //     });
-
-  //     afterEach(() => cy.matchSnapshots({ capture: 'viewport' }));
-  //   });
-
-  //   context('mobile', () => {
-  //     beforeEach(() => cy.switchToMobile());
-
-  //     it('should render add plugin modal in rtl', () => {
-  //       cy.loadEditor()
-  //         .focusEditor()
-  //         .openAddPluginModal();
-  //     });
-
-  //     it('should render rtl and ltr text correctly', () => {
-  //       cy.loadEditor('hebrew');
-  //     });
-
-  //     it('should render external modal in rtl', () => {
-  //       cy.loadEditor('images')
-  //         .openImageSettings()
-  //         .get('[aria-label="Cancel"]')
-  //         .blur();
-  //     });
-
-  //     afterEach(() => cy.matchSnapshots({ capture: 'viewport' }));
-  //   });
-  // });
->>>>>>> rebase with develop
-=======
->>>>>>> [e2e/test-env/../editor] test(link inline button)
-=======
->>>>>>> [e2e/test-env/../editor] test(inline toolbar buttons): test has been updated
 });

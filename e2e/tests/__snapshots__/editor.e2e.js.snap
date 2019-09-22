@@ -1930,3 +1930,201 @@ exports[`editor > should allow to add 1 Bold style #0`] =
   ],
   "entityMap": {}
 };
+
+exports[`editor > should allow to apply inline styles and links #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {
+        "textAlignment": "center"
+      },
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 10,
+          "offset": 0
+        },
+        {
+          "key": 1,
+          "length": 30,
+          "offset": 15
+        },
+        {
+          "key": 2,
+          "length": 65,
+          "offset": 50
+        }
+      ],
+      "inlineStyleRanges": [
+        {
+          "length": 5,
+          "offset": 0,
+          "style": "BOLD"
+        },
+        {
+          "length": 5,
+          "offset": 30,
+          "style": "BOLD"
+        },
+        {
+          "length": 45,
+          "offset": 0,
+          "style": "UNDERLINE"
+        },
+        {
+          "length": 65,
+          "offset": 50,
+          "style": "UNDERLINE"
+        },
+        {
+          "length": 102,
+          "offset": 201,
+          "style": "UNDERLINE"
+        },
+        {
+          "length": 78,
+          "offset": 304,
+          "style": "UNDERLINE"
+        },
+        {
+          "length": 28,
+          "offset": 383,
+          "style": "UNDERLINE"
+        },
+        {
+          "length": 5,
+          "offset": 20,
+          "style": "ITALIC"
+        },
+        {
+          "length": 102,
+          "offset": 201,
+          "style": "ITALIC"
+        },
+        {
+          "length": 78,
+          "offset": 304,
+          "style": "ITALIC"
+        },
+        {
+          "length": 28,
+          "offset": 383,
+          "style": "ITALIC"
+        },
+        {
+          "length": 100,
+          "offset": 201,
+          "style": "color5"
+        },
+        {
+          "length": 2,
+          "offset": 301,
+          "style": "color2"
+        },
+        {
+          "length": 78,
+          "offset": 304,
+          "style": "color2"
+        },
+        {
+          "length": 149,
+          "offset": 383,
+          "style": "color2"
+        }
+      ],
+      "key": 1,
+      "text": "Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition. \nOrganically grow the holistic world view of disruptive innovation via workplace diversity and empowerment.\nBring to the table win-win survival strategies to ensure proactive domination.\nAt the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution. ",
+      "type": "code-block"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [
+        {
+          "length": 76,
+          "offset": 0,
+          "style": "color2"
+        }
+      ],
+      "key": 3,
+      "text": "User generated content in real-time will have multiple touchpoints for offshoring.",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 4,
+      "text": "Capitalize on low hanging fruit to identify a ballpark value added activity to beta test. ",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 5,
+      "text": "Override the digital divide with additional clickthroughs from DevOps.",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 6,
+      "text": "Nanotechnology immersion along the information highway will close the loop on focusing solely on the bottom line.",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "rel": "nofollow",
+        "target": "_blank",
+        "url": "https://www.wix.com/"
+      },
+      "mutability": "MUTABLE",
+      "type": "LINK"
+    },
+    "1": {
+      "data": {
+        "rel": "nofollow",
+        "target": "_blank",
+        "url": "https://www.sport5.co.il/"
+      },
+      "mutability": "MUTABLE",
+      "type": "LINK"
+    },
+    "2": {
+      "data": {
+        "rel": "nofollow",
+        "target": "_blank",
+        "url": "https://www.one.co.il/"
+      },
+      "mutability": "MUTABLE",
+      "type": "LINK"
+    }
+  }
+};
