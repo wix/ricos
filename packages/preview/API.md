@@ -234,3 +234,18 @@ _then = (ContentStateMetadata, ContentStateBuilder) => ContentStateBuilder
 ```
 
 The optional argument `initialPreviewState` allows to pass an initial preview state.
+
+The following fragment demonstrates the "if content images > 3 => add a gallery with 3 items" rule definition:
+
+```js
+
+const transformation = new ContentStateTransformation({
+  _if: metadata => metadata.media.images().length > 3,
+  _then: (metadata, preview) =>
+    preview.gallery({
+      mediaInfo: metadata.media.images().slice(0, 3),
+    }),
+});
+const preview = transformation.apply(contentState);
+
+```
