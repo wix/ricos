@@ -1,7 +1,7 @@
 import React from 'react';
 import { hydrate } from 'react-dom';
 import './app.css';
-import Editor from '../shared/components/Editor';
+import Editor from '../../../../examples/main/src/editor/Editor.jsx';
 
 const props = {
   initialState: window.__CONTENT_STATE__,
