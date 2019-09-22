@@ -6,7 +6,7 @@ const DEFAULT_STATE = { blocks: [], entityMap: {}, VERSION: currentVersion };
 
 class ContentStateBuilder {
   constructor(initialState) {
-    this.contentState = initialState || DEFAULT_STATE;
+    this.contentState = { ...DEFAULT_STATE, ...(initialState || {}) };
   }
 
   get() {

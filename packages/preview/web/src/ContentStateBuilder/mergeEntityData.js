@@ -23,6 +23,7 @@ const imageMerger = ({ url, width, height, metadata, link }, entity) => ({
   },
 });
 
+// TODO: styles override
 const galleryMerger = (items, entity) => ({
   ...entity,
   data: {
