@@ -227,9 +227,9 @@ In the code fragment above, the `_if` and `_then` arguments are functions follow
 
 ```js
 
-_if = CotnentStateMetadata => boolean
+_if = ContentStateMetadata => boolean
 
-_then = (CotnentStateMetadata, ContentStateBuilder) => ContentStateBuilder
+_then = (ContentStateMetadata, ContentStateBuilder) => ContentStateBuilder
 
 ```
 
