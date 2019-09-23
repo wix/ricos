@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import Scrollbars from 'react-custom-scrollbars';
 import { mergeStyles } from 'wix-rich-content-common';
 import addEmoji from '../modifiers/addEmoji';
+import { JoyPixelsIcon } from '../icons';
 import { getGroupEmojis } from '../utils';
 import { getEmojiGroups } from '../constants';
 import styles from '../../statics/styles/emoji-preview-modal.scss';
@@ -69,13 +70,23 @@ export default class EmojiPreviewModal extends Component {
     });
     return (
       <div className={this.styles.emojiPreviewModal_container}>
-        <div className={this.styles.emojiPreviewModal_headerTitle}>{activeGroup.title}</div>
+        <div className={this.styles.emojiPreviewModal_headerTitle}>
+          <div>{activeGroup.title}</div>
+          <div>
+            <span className={this.styles.emojiPreviewModal_PoweredBy_label}>
+              {this.props.t('EmojiPlugin_PoweredBy_label')}
+            </span>
+            <JoyPixelsIcon className={this.styles.emojiPreviewModal_JoyPixelsIcon} />
+          </div>
+        </div>
         <Scrollbars
           ref={ref => {
             this.scrollbarRef = ref;
           }}
           style={{
-            height: '300px',
+            height: '192px',
+            marginLeft: '12px',
+            width: 'calc(100% - 12px)',
           }}
           renderThumbVertical={() => (
             <div className={this.styles.emojiPreviewModal_scrollbar_thumb} />
