@@ -17,13 +17,14 @@ class Tooltip extends React.Component {
     shouldRebuildOnUpdate: () => false,
   };
 
-  static rebuildTooltips = debounce(ReactTooltip.rebuild, 50);
+  rebuildTooltips = debounce(ReactTooltip.rebuild, 50);
+
   componentDidMount() {
-    Tooltip.rebuildTooltips();
+    this.props.shouldRebuildOnUpdate() && this.rebuildTooltips();
   }
 
   componentDidUpdate() {
-    this.props.shouldRebuildOnUpdate() && Tooltip.rebuildTooltips();
+    this.props.shouldRebuildOnUpdate() && this.rebuildTooltips();
   }
 
   render() {

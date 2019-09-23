@@ -323,7 +323,8 @@ export default class InlineToolbar extends Component {
   }
 
   render() {
-    if (!this.isVisible()) {
+    //checking false since undefined is not good
+    if (this.isVisible() === false) {
       return null;
     }
     const { theme } = this.props;

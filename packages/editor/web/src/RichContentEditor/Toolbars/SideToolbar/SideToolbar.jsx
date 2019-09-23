@@ -119,7 +119,8 @@ export default class SideToolbar extends Component {
   }
 
   render() {
-    if (!this.state.isVisible) {
+    //checking false since undefined is not good
+    if (this.state.isVisible === false) {
       return null;
     }
     const { theme } = this.props;
