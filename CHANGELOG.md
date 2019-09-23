@@ -11,6 +11,7 @@
 ### :bug: Bug Fix
 - `example`
   - [9add0fbc](https://github.com/wix-incubator/rich-content/commit/9add0fbc) gallery validation schema used for content validation
+  - [#395](https://github.com/wix-incubator/rich-content/pull/395) removed external div in editor
 ### :house: Internal
 - `e2e`
   - [#393](https://github.com/wix-incubator/rich-content/pull/393) added atomic block alignment testing
