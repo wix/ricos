@@ -8,11 +8,30 @@
 > - :house: [Internal]
 
 ## [Unreleased]
+### :bug: Bug Fix
+- `example`
+  - [9add0fbc](https://github.com/wix-incubator/rich-content/commit/9add0fbc) gallery validation schema used for content validation
+### :house: Internal
+- `mentions`
+  - [#387](https://github.com/wix-incubator/rich-content/pull/387) data validation schema added
+<hr/>
+
+## 5.1.1 (Sep 22, 2019)
+### :rocket: New Feature
+- `image`
+  - [#388](https://github.com/wix-incubator/rich-content/pull/388) changed default image alignment
+### :bug: Bug Fix
+- `viewer`
+  - [#390](https://github.com/wix-incubator/rich-content/pull/390) justified text new lines disappear
+### :house: Internal
+- `e2e`
+  - [#368](https://github.com/wix-incubator/rich-content/pull/368) test rtl support in toolbars, text and external modals
+<hr/>
+
+## 5.1.0 (Sep 16, 2019)
 ### :rocket: New Feature
 - `html`
   - [#379](https://github.com/wix-incubator/rich-content/pull/379) edit panel opens on click when src is blank
-- `editor`
-  - [#377](https://github.com/wix-incubator/rich-content/pull/377) resize decoration added (based on `draftjs-resizeable-plugin`)
 - `image`
   - [#377](https://github.com/wix-incubator/rich-content/pull/377) custom resizing implemented
   - [#380](https://github.com/wix-incubator/rich-content/pull/380) Image Editor (Wix Image Studio)
@@ -20,10 +39,9 @@
 - `html`
   - [#385](https://github.com/wix-incubator/rich-content/pull/385) edit panel resets to default state when focusing on different instances of the same plugin
 - `viewer`
-- [#386](https://github.com/wix-incubator/rich-content/pull/386) code block duplication
-### :house: Internal
-- `mentions`
-- [#387](https://github.com/wix-incubator/rich-content/pull/387) data validation schema added
+  - [#386](https://github.com/wix-incubator/rich-content/pull/386) code block duplication
+- `editor`
+  - [#377](https://github.com/wix-incubator/rich-content/pull/377) resize decoration added (based on `draftjs-resizeable-plugin`)
 <hr/>
 
 ## 5.0.1 (Sep 10, 2019)
