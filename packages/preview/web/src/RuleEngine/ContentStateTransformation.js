@@ -1,22 +1,32 @@
+import { isFunction } from 'lodash';
 import ContentStateBuilder from '../ContentStateBuilder/ContentStateBuilder';
 import getContentStateMetadata from '../ContentStateAnalyzer/ContentStateMetadata';
 
 class ContentStateTransformation {
   constructor({ _if, _then, initialPreviewState }) {
-    this._if = _if;
-    this._then = _then;
-    this.initialPreviewState = initialPreviewState;
+    this.rules = [];
+    this.rule({ _if, _then });
+    this.previewState = initialPreviewState;
+  }
+
+  rule({ _if, _then }) {
+    if (!isFunction(_if) || !isFunction(_then)) {
+      throw new TypeError('invalid rule added: `_if` and `_then` should be functions ');
+    }
+    this.rules.push({ _if, _then });
+    return this;
   }
 
   apply(contentState) {
-    const previewState = this.initialPreviewState || {};
+    const previewState = this.previewState || {};
     const previewStateBuilder = new ContentStateBuilder(previewState);
     const metadata = getContentStateMetadata(contentState);
-
-    if (this._if(metadata)) {
-      return this._then(metadata, previewStateBuilder);
-    }
-    return previewStateBuilder;
+    return this.rules.reduce((builder, rule) => {
+      if (rule._if(metadata)) {
+        return rule._then(metadata, builder);
+      }
+      return builder;
+    }, previewStateBuilder);
   }
 }
 
