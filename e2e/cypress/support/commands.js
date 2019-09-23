@@ -6,8 +6,17 @@ import { INLINE_TOOLBAR_BUTTONS } from '../dataHooks';
 const resizeForDesktop = () => cy.viewport('macbook-15');
 const resizeForMobile = () => cy.viewport('iphone-5');
 
+const buildQuery = params => {
+  const parameters = Object.keys(params).filter(param => params[param]);
+  if (parameters.length === 0) return '';
+  return '?' + parameters.join('&');
+};
+
 const getUrl = (componentId, fixtureName = '') =>
-  `/${componentId}/${fixtureName}${isMobile ? '?mobile' : ''}`;
+  `/${componentId}${fixtureName ? '/' + fixtureName : ''}${buildQuery({
+    mobile: isMobile,
+    hebrew: isHebrew,
+  })}`;
 
 // Viewport size commands
 
@@ -16,6 +25,7 @@ const run = (app, fixtureName) => {
 };
 
 let isMobile = false;
+let isHebrew = false;
 
 Cypress.Commands.add('switchToMobile', () => {
   isMobile = true;
@@ -25,6 +35,14 @@ Cypress.Commands.add('switchToMobile', () => {
 Cypress.Commands.add('switchToDesktop', () => {
   isMobile = false;
   resizeForDesktop();
+});
+
+Cypress.Commands.add('switchToHebrew', () => {
+  isHebrew = true;
+});
+
+Cypress.Commands.add('switchToEnglish', () => {
+  isHebrew = false;
 });
 
 Cypress.Commands.add('loadEditorAndViewer', fixtureName => {
@@ -41,8 +59,8 @@ Cypress.Commands.add('matchContentSnapshot', () => {
     .toMatchSnapshot();
 });
 
-Cypress.Commands.add('matchSnapshots', () => {
-  cy.matchImageSnapshot().matchContentSnapshot();
+Cypress.Commands.add('matchSnapshots', options => {
+  cy.matchImageSnapshot(options).matchContentSnapshot();
 });
 
 // Editor commands
@@ -61,7 +79,10 @@ Cypress.Commands.add('newLine', () => {
 });
 
 Cypress.Commands.add('blurEditor', () => {
-  getEditor().blur();
+  getEditor()
+    .blur()
+    .get('[data-hook=inlineToolbar]')
+    .should('not.exist');
 });
 
 Cypress.Commands.add('focusEditor', () => {
@@ -163,7 +184,25 @@ Cypress.Commands.add('setLineSpacing', (buttonIndex = 3, selection) => {
   setInlineToolbarMenueItem(INLINE_TOOLBAR_BUTTONS.LINE_SPACING, selection, buttonIndex);
 });
 
-// disable screenshots in debug mode. So there is no difference to ci.
+Cypress.Commands.add('openPluginToolbar', () => {
+  cy.get('[aria-label="Plugin Toolbar"]').click();
+  cy.get('#side_bar');
+});
+
+Cypress.Commands.add('openAddPluginModal', () => {
+  cy.get('[data-hook="addPluginFloatingToolbar"]').click();
+  cy.get('[aria-label="Add Plugin"]');
+});
+
+Cypress.Commands.add('openImageSettings', () => {
+  cy.get('[data-hook=imageViewer]:first')
+    .parent()
+    .click();
+  cy.get('[aria-label=Settings]').click();
+  cy.get('[data-hook="imageSettings"]');
+});
+
+// disable screenshots in debug mode. So there is no diffrence to ci.
 if (Cypress.browser.isHeaded) {
   const noop = () => {};
   Cypress.Commands.overwrite('matchImageSnapshot', noop);

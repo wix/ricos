@@ -4,7 +4,7 @@ import './app.css';
 import Editor from '../shared/components/Editor';
 import Viewer from '../shared/components/Viewer';
 
-const props = { initialState: window.__CONTENT_STATE__, isMobile: window.isMobile };
+const props = { initialState: window.__CONTENT_STATE__, isMobile: window.isMobile, locale: window.locale, };
 const app = (
   <>
     <Editor {...props} />
