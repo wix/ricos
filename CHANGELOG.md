@@ -83,7 +83,7 @@
   - [d0986f3](https://github.com/wix-incubator/rich-content/commit/d0986f3) height issues - disabled above the fold 
 ### :house: Internal
 - `example`
-  - [9add0fbc](https://github.com/wix-incubator/rich-content/commit/9add0fbc) gallery validation schema used for content validation
+  - [9add0fbc](https://github.com/wix-incubator/rich-content/commit/9add0fbc) gallery validation schema used for content validation  
 <hr/>
 
 ## 5.1.1 (Sep 22, 2019)
