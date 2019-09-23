@@ -112,15 +112,18 @@ class GalleryViewer extends React.Component {
   };
 
   showTitleStyleParams = styleParams => {
+    const display = this.context.isMobile
+      ? { titlePlacement: 'SHOW_BELOW', calculateTextBoxHeightMode: 'AUTOMATIC' }
+      : { titlePlacement: 'SHOW_ON_HOVER', allowHover: true, galleryVerticalAlign: 'flex-end' };
     return {
       isVertical: styleParams.galleryLayout === 1,
       allowTitle: true,
-      titlePlacement: 'SHOW_BELOW',
       galleryTextAlign: 'center',
       textsHorizontalPadding: 0,
       imageInfoType: 'NO_BACKGROUND',
-      calculateTextBoxHeightMode: 'AUTOMATIC',
+      hoveringBehaviour: 'APPEARS',
       textsVerticalPadding: 0,
+      ...display,
     };
   };
 
