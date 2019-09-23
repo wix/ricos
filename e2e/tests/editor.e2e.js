@@ -1,16 +1,24 @@
 import { INLINE_TOOLBAR_BUTTONS } from '../cypress/dataHooks';
 
 describe('editor', () => {
+  before(() =>
+    cy.eyesOpen({
+      appName: 'Rich Content Editor',
+      browser: { width: 800, height: 600 },
+      batchName: 'rich-content',
+    })
+  );
   beforeEach(() => cy.switchToDesktop());
 
   it('should allow to enter text', () => {
     cy.loadEditor()
       .enterParagraphs([
         'Leverage agile frameworks',
-        'to provide a robust synopsis for high level overviews.',
+        'to  a robust synopsis for high level overviews.',
       ])
-      .blurEditor()
-      .matchSnapshots();
+      .blurEditor();
+    cy.eyesCheckWindow('should allow to enter text');
+    // .matchSnapshots();
   });
 
   it('should allow to apply inline styles', () => {
@@ -27,15 +35,17 @@ describe('editor', () => {
       .setColor(3, [20, 30])
       .setLineSpacing(3, [30, 100])
       .setSelection(0, 0)
-      .blurEditor()
-      .matchSnapshots();
+      .blurEditor();
+    // .matchSnapshots();
+    cy.eyesCheckWindow('should allow to apply inline styles');
   });
 
   it('should allow to create lists', () => {
     cy.loadEditor('plain')
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.ORDERED_LIST, [300, 100])
-      .setTextStyle(INLINE_TOOLBAR_BUTTONS.UNORDERED_LIST, [550, 1])
-      .matchSnapshots();
+      .setTextStyle(INLINE_TOOLBAR_BUTTONS.UNORDERED_LIST, [550, 1]);
+    // .matchSnapshots();
+    cy.eyesCheckWindow('should allow to create lists');
   });
 
   it('should align atomic blocks correctly', () => {
@@ -56,16 +66,19 @@ describe('editor', () => {
         cy.loadEditor()
           .focusEditor()
           .openPluginToolbar();
+        cy.eyesCheckWindow('should render plugin toolbar in rtl');
       });
 
       it('should render text toolbar in rtl', () => {
         cy.loadEditor('plain')
           .setSelection(0, 8)
           .get('[data-hook=inlineToolbar]');
+        cy.eyesCheckWindow('should render text toolbar in rtl');
       });
 
       it('should render rtl and ltr text correctly', () => {
         cy.loadEditor('hebrew');
+        cy.eyesCheckWindow('should render rtl and ltr text correctly');
       });
 
       it('should render external modal in rtl', () => {
@@ -73,9 +86,10 @@ describe('editor', () => {
           .openImageSettings()
           .get('[data-hook="imageSettingsCaptionInput"]')
           .blur();
+        cy.eyesCheckWindow('should render external modal in rtl');
       });
 
-      afterEach(() => cy.matchSnapshots({ capture: 'viewport' }));
+      // afterEach(() => cy.matchSnapshots({ capture: 'viewport' }));
     });
 
     context('mobile', () => {
@@ -85,10 +99,12 @@ describe('editor', () => {
         cy.loadEditor()
           .focusEditor()
           .openAddPluginModal();
+        cy.eyesCheckWindow('should render add plugin modal in rtl');
       });
 
       it('should render rtl and ltr text correctly', () => {
         cy.loadEditor('hebrew');
+        cy.eyesCheckWindow('should render rtl and ltr text correctly');
       });
 
       it('should render external modal in rtl', () => {
@@ -96,9 +112,12 @@ describe('editor', () => {
           .openImageSettings()
           .get('[aria-label="Cancel"]')
           .blur();
+        cy.eyesCheckWindow('should render external modal in rtl');
       });
 
-      afterEach(() => cy.matchSnapshots({ capture: 'viewport' }));
+      after(() => {
+        cy.eyesClose();
+      });
     });
   });
 });
