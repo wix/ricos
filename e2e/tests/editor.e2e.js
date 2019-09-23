@@ -15,7 +15,7 @@ describe('editor', () => {
 
   it('should allow to apply inline styles and links', () => {
     cy.loadEditor('plain')
-      .setTextStyle(INLINE_TOOLBAR_BUTTONS.BOLD, [0, 5])
+      .setTextStyle(INLINE_TOOLBAR_BUTTONS.BOLD, [40, 10])
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.UNDERLINE, [10, 5])
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.ITALIC, [20, 5])
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.BOLD, [30, 5])
@@ -45,12 +45,6 @@ describe('editor', () => {
     cy.loadEditor('plain')
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.ORDERED_LIST, [300, 100])
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.UNORDERED_LIST, [550, 1])
-      .matchSnapshots();
-  });
-
-  it('should allow to add links', () => {
-    cy.loadEditor('plain')
-      .setLink([0, 10], 'https://www.wix.com/')
       .matchSnapshots();
   });
 
