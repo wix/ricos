@@ -56,12 +56,6 @@ describe('editor', () => {
       .matchSnapshots();
   });
 
-  it('should allow to add links', () => {
-    cy.loadEditor('plain')
-      .setLink([0, 10], 'https://www.wix.com/')
-      .matchSnapshots();
-  });
-
   it('should align atomic blocks correctly', () => {
     cy.loadEditor('images')
       .alignImage('left')

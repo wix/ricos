@@ -1,8 +1,7 @@
 import React from 'react';
 import { hydrate } from 'react-dom';
+import Editor from '../../../../examples/main/src/editor/Editor';
 import './app.css';
-import Editor from '../../../../examples/main/src/editor/Editor.jsx';
-import Viewer from '../shared/components/Viewer';
 
 const props = {
   initialState: window.__CONTENT_STATE__,
@@ -11,8 +10,8 @@ const props = {
 };
 const app = (
   <>
+    Editor
     <Editor {...props} />
-    <Viewer {...props} />
   </>
 );
 
