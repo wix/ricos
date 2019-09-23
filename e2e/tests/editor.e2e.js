@@ -38,6 +38,14 @@ describe('editor', () => {
       .matchSnapshots();
   });
 
+  it('should align atomic blocks correctly', () => {
+    cy.loadEditor('images')
+      .alignImage('left')
+      .alignImage('center')
+      .alignImage('right')
+      .matchSnapshots();
+  });
+
   context('when in hebrew locale', () => {
     beforeEach(() => cy.switchToHebrew());
 
