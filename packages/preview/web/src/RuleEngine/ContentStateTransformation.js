@@ -14,9 +14,9 @@ class ContentStateTransformation {
     const metadata = getContentStateMetadata(contentState);
 
     if (this._if(metadata)) {
-      const transformedPreview = this._then(metadata, previewStateBuilder);
-      return transformedPreview.get();
+      return this._then(metadata, previewStateBuilder);
     }
+    return previewStateBuilder;
   }
 }
 

@@ -3,7 +3,7 @@
  *  every converter function signature:
  *  entity => [ { type, ...specificMediaData } ]
  * */
-const defaultEntitiyConverter = () => [];
+const defaultEntityConverter = () => [];
 
 /*
  * wix-draft-plugin-image data format:
@@ -92,14 +92,16 @@ const mapConverter = entity => [
 const converters = {
   'wix-draft-plugin-image': imageConverter,
   'wix-draft-plugin-gallery': galleryConverter,
-  'wix-draft-plugin-divider': defaultEntitiyConverter,
+  'wix-draft-plugin-divider': defaultEntityConverter,
   'wix-draft-plugin-video': videoConverter,
   'wix-draft-plugin-sound-cloud': videoConverter,
   'wix-draft-plugin-giphy': giphyConverter,
   'wix-draft-plugin-file-upload': fileConverter,
   'wix-draft-plugin-map': mapConverter,
-  mention: defaultEntitiyConverter,
-  LINK: defaultEntitiyConverter,
+  mention: defaultEntityConverter,
+  'wix-draft-plugin-headers-markdown': defaultEntityConverter,
+  'wix-draft-plugin-button': defaultEntityConverter,
+  LINK: defaultEntityConverter,
 };
 
 const extractEntityData = entity => converters[entity.type](entity);

@@ -11,7 +11,7 @@ describe('Content State Transformation', () => {
           mediaInfo: metadata.media.images().slice(0, 3),
         }),
     });
-    const preview = transformer.apply(contentState);
+    const preview = transformer.apply(contentState).get();
     expect(preview.entityMap[0]).toEqual({
       data: {
         config: { alignment: 'center', layout: 'small', size: 'content', spacing: 0 },
