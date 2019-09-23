@@ -82,7 +82,7 @@ export class MapViewer extends Component {
 
     return (
       <ViewportRenderer>
-        <div ref={this.setRootElementRef} style={style}>
+        <div ref={this.setRootElementRef} style={style} data-hook="mapViewer">
           <ReactGoogleMapLoader
             params={{
               key: googleMapApiKey,

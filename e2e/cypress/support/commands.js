@@ -196,7 +196,7 @@ Cypress.Commands.add('setLineSpacing', (buttonIndex = 3, selection) => {
   setInlineToolbarMenueItem(INLINE_TOOLBAR_BUTTONS.LINE_SPACING, selection, buttonIndex);
 });
 
-Cypress.Commands.add('openPluginToolbar', () => {
+Cypress.Commands.add('openSideToolbar', () => {
   cy.get('[aria-label="Plugin Toolbar"]').click();
   cy.get('#side_bar');
 });
@@ -231,6 +231,13 @@ Cypress.Commands.add('alignImage', alignment => {
     .parent()
     .click();
   cy.get(`[data-hook=${button}]:first`).click();
+});
+
+Cypress.Commands.add('openPluginToolbar', plugin => {
+  cy.get(`[data-hook=${plugin}]:first`)
+    .parent()
+    .click();
+  cy.get('[data-hook*="PluginToolbar"]:first');
 });
 
 // disable screenshots in debug mode. So there is no diffrence to ci.

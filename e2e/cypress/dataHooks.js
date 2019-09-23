@@ -28,3 +28,15 @@ export const PLUGIN_TOOLBAR_BUTTONS = {
   SETTINGS: 'baseToolbarButton_settings',
   DELETE: 'blockButton_delete',
 };
+
+export const PLUGIN_COMPONENT = {
+  IMAGE: 'imageViewer',
+  VIDEO: 'videoPlayer',
+  GALLERY: 'galleryViewer',
+  HTML: 'HtmlComponent',
+  DIVIDER: 'divider',
+  GIF: 'giphyPlayer',
+  SOUND_CLOUD: 'soundCloudPlayer',
+  MAP: 'mapViewer',
+  FILE_UPLOAD: 'fileUploadViewer',
+};

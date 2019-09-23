@@ -142,7 +142,7 @@ class FileUploadViewer extends PureComponent {
     const fileUrl = componentData.url || this.state.resolveFileUrl;
 
     return (
-      <div className={this.styles.file_upload_container}>
+      <div className={this.styles.file_upload_container} data-hook="fileUploadViewer">
         {fileUrl ? this.renderViewer(fileUrl) : this.renderFileUrlResolver()}
         {this.renderError()}
         {this.renderAutoDownloadIframe()}
