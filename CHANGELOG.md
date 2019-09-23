@@ -8,12 +8,16 @@
 > - :house: [Internal]
 
 ## [Unreleased]
+### :bug: Bug Fix
+- `example`
+  - [9add0fbc](https://github.com/wix-incubator/rich-content/commit/9add0fbc) gallery validation schema used for content validation 
 <hr/>
 
 ## 5.1.1 (Sep 22, 2019)
-### :bug: Bug Fix
+### :rocket: New Feature
 - `image`
   - [#388](https://github.com/wix-incubator/rich-content/pull/388) changed default image alignment
+### :bug: Bug Fix
 - `viewer`
   - [#390](https://github.com/wix-incubator/rich-content/pull/390) justified text new lines disappear
 ### :house: Internal
