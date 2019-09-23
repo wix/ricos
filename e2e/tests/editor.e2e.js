@@ -19,7 +19,7 @@ describe('editor', () => {
     cy.loadEditor()
       .enterParagraphs([
         'Leverage agile frameworks',
-        'to provide a robust synopsis for high level overviews.',
+        'to  a robust synopsis for high level overviews.',
       ])
       .setSelection(0, 0)
       .blurEditor();
