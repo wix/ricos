@@ -210,7 +210,7 @@ The `mediaInfo` param is expected to be a file data object returned by [ContentS
 #### ContentStateBuilder.map({ mediaInfo, config, overrides })
 
 The `ContentStateBuilder.map` method appends an `atomic` block to the `blocks` and a `wix-draft-plugin-map` entity to the `entityMap`. The optional params `config` and `overrides` are merged with the `entity.data.config` and `entity.data`, respectively.
-The `mediaInfo` param is expected to be a map data object returned by [ContentStateMetdata.media.maps](./API.md#ContentStateMetdatamediamaps) method.
+The `mediaInfo` parameter is expected to be a map data object returned by [ContentStateMetdata.media.maps](./API.md#ContentStateMetdatamediamaps) method.
 
 ## ContentStateTransformation
 
@@ -247,5 +247,15 @@ const transformation = new ContentStateTransformation({
     }),
 });
 const preview = transformation.apply(contentState);
+
+```
+
+The `rule` method allows to chain multiple rules. They will be applied one after another:
+
+```js
+
+const transformation = new ContentStateTransformation({ _if: ..., _then: ... })
+  .rule({ _if: ..., _then: ... })
+  .rule({ _if: ..., _then: ... });
 
 ```
