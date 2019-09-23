@@ -52,9 +52,8 @@ export default class EmojiPreviewModal extends Component {
     this.props.setEditorState(newEditorState);
   };
 
-  render() {
-    const { activeGroup, emojis } = this.state;
-    const renderEmojis = emojis.map((emoji, index) => {
+  renderEmojis = () =>
+    this.state.emojis.map((emoji, index) => {
       return (
         <div
           role="button"
@@ -68,6 +67,10 @@ export default class EmojiPreviewModal extends Component {
         </div>
       );
     });
+
+  render() {
+    const { activeGroup } = this.state;
+
     return (
       <div className={this.styles.emojiPreviewModal_container}>
         <div className={this.styles.emojiPreviewModal_headerTitle}>
@@ -79,21 +82,21 @@ export default class EmojiPreviewModal extends Component {
             <JoyPixelsIcon className={this.styles.emojiPreviewModal_JoyPixelsIcon} />
           </div>
         </div>
-        <Scrollbars
-          ref={ref => {
-            this.scrollbarRef = ref;
-          }}
-          style={{
-            height: '192px',
-            marginLeft: '12px',
-            width: 'calc(100% - 12px)',
-          }}
-          renderThumbVertical={() => (
-            <div className={this.styles.emojiPreviewModal_scrollbar_thumb} />
-          )}
-        >
-          {renderEmojis}
-        </Scrollbars>
+        <div className={this.styles.emojiPreviewModal_emojis_groups_container}>
+          <Scrollbars
+            ref={ref => {
+              this.scrollbarRef = ref;
+            }}
+            style={{
+              height: '192px',
+            }}
+            renderThumbVertical={() => (
+              <div className={this.styles.emojiPreviewModal_scrollbar_thumb} />
+            )}
+          >
+            {this.renderEmojis()}
+          </Scrollbars>
+        </div>
         <div className={this.styles.emojiPreviewModal_emoji_icons_container}>
           {this.renderNavIcons(activeGroup)}
         </div>
