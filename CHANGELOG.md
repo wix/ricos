@@ -13,8 +13,8 @@
   - [9add0fbc](https://github.com/wix-incubator/rich-content/commit/9add0fbc) gallery validation schema used for content validation
 ### :house: Internal
 - `e2e`
+  - [#393] (https://github.com/wix-incubator/rich-content/pull/393) added atomic block alignment testing
   - [#394](https://github.com/wix-incubator/rich-content/pull/394)  test-env changed to match main example
-  - 
 <hr/>
 
 ## 5.1.1 (Sep 22, 2019)
