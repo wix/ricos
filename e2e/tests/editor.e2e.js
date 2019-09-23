@@ -71,10 +71,10 @@ describe('editor', () => {
     context('desktop', () => {
       beforeEach(() => cy.switchToDesktop());
 
-      it('should render plugin toolbar in rtl', () => {
+      it('should render side toolbar in rtl', () => {
         cy.loadEditor()
           .focusEditor()
-          .openPluginToolbar();
+          .openSideToolbar();
       });
 
       it('should render text toolbar in rtl', () => {

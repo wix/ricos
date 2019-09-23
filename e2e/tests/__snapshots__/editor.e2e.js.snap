@@ -1416,3 +1416,19 @@ exports[`editor > should align atomic blocks correctly #0`] =
     }
   }
 };
+
+exports[`editor > when in hebrew locale > desktop > should render side toolbar in rtl #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {}
+};

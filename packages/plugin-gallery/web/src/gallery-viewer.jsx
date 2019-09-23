@@ -133,7 +133,11 @@ class GalleryViewer extends React.Component {
     const { galleryKey, styleParams, size = { width: 300 } } = this.state;
     const items = this.getItems();
     return (
-      <div ref={elem => (this.container = elem)} className={this.styles.gallery_container}>
+      <div
+        ref={elem => (this.container = elem)}
+        className={this.styles.gallery_container}
+        data-hook="galleryViewer"
+      >
         <ProGallery
           // TODO remove gallery key
           key={galleryKey}
