@@ -129,7 +129,7 @@ export default class Editor extends PureComponent {
         blocks: raw.blocks.map((block, index) => ({ ...block, key: index })),
       };
     }
-    this.props.onChange && this.props.onChange();
+    this.props.onChange && this.props.onChange(editorState);
   };
 
   render() {
