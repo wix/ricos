@@ -13,7 +13,7 @@ describe('editor', () => {
       .matchSnapshots();
   });
 
-  it('should allow to apply inline toolbar plugins', () => {
+  it.only('should allow to apply inline toolbar plugins', () => {
     cy.loadEditor('plain')
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.BOLD, [40, 10])
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.UNDERLINE, [10, 5])
@@ -47,6 +47,7 @@ describe('editor', () => {
       .enterParagraphs(['@NO MORE', ''])
       .setLink([0, 10], 'https://www.wix.com/')
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.CODE_BLOCK, [0, 10])
+
       .blurEditor()
       .matchSnapshots();
   });
