@@ -45,8 +45,9 @@ describe('editor', () => {
       .setLink([0, 17], 'https://www.sport5.co.il')
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.CODE_BLOCK, [0, 10])
       .enterParagraphs(['@NO MORE', ''])
-      .setLink([0, 10], 'https://www.wix.com/')
-      .setTextStyle(INLINE_TOOLBAR_BUTTONS.CODE_BLOCK, [0, 10])
+      //.setLink([0, 10], 'https://www.wix.com/')
+      //.setTextStyle(INLINE_TOOLBAR_BUTTONS.CODE_BLOCK, [0, 10])
+      .setSelection(0, 0)
       .blurEditor()
       .matchSnapshots();
   });
