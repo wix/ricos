@@ -40,12 +40,15 @@ describe('editor', () => {
       .setLineSpacing(3, [100, 150])
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.CODE_BLOCK, [300, 100])
       .setLink([15, 30], 'https://www.sport5.co.il/')
-      .setSelection(0, 0)
-      .enterParagraphs(['#LIVING THE DREAM', ''])
-      .setLink([0, 17], 'https://www.sport5.co.il')
-      .setTextStyle(INLINE_TOOLBAR_BUTTONS.CODE_BLOCK, [0, 10])
       .blurEditor()
       .matchSnapshots();
+  });
+
+  it('should allow to apply hashtags and mentions', () => {
+    cy.loadEditor()
+      .enterParagraphs(['#LIVING THE DREAM ', ''])
+      .setLink([0, 17], 'https://www.sport5.co.il')
+      .setTextStyle(INLINE_TOOLBAR_BUTTONS.CODE_BLOCK, [0, 17]);
   });
 
   it('should allow to create lists', () => {
