@@ -22,13 +22,17 @@ describe('plugins', () => {
   });
 
   context('html', () => {
-    it('should render plugin toolbar', () => {});
+    it('should render plugin toolbar', () => {
+      cy.loadEditor('html').openPluginToolbar(PLUGIN_COMPONENT.HTML);
+    });
 
     it('should render settings', () => {});
   });
 
   context('divider', () => {
-    it('should render plugin toolbar', () => {});
+    it.only('should render plugin toolbar', () => {
+      cy.loadEditor('divider').openPluginToolbar(PLUGIN_COMPONENT.DIVIDER);
+    });
 
     it('should render settings', () => {});
   });
