@@ -6,7 +6,21 @@ describe('plugins', () => {
       cy.loadEditor('images').openPluginToolbar(PLUGIN_COMPONENT.IMAGE);
     });
 
-    it('should render settings', () => {});
+    it('should render settings', () => {
+      cy.loadEditor('images').openImageSettings();
+    });
+
+    it('should allow to add a title', () => {
+      cy.loadEditor('images')
+        .openImageSettings()
+        .addImageTitle();
+    });
+
+    it('should allow to add a link', () => {
+      cy.loadEditor('images')
+        .openImageSettings()
+        .addImageLink();
+    });
   });
 
   context('gallery', () => {

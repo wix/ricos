@@ -29,6 +29,12 @@ export const PLUGIN_TOOLBAR_BUTTONS = {
   DELETE: 'blockButton_delete',
 };
 
+export const IMAGE_SETTINGS = {
+  CAPTION: 'imageSettingsCaptionInput',
+  LINK: 'linkPanelInput',
+  DONE: 'settingPanelFooterDone',
+};
+
 export const PLUGIN_COMPONENT = {
   IMAGE: 'imageViewer',
   VIDEO: 'videoPlayer',
