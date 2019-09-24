@@ -227,6 +227,14 @@ Cypress.Commands.add('openMapSettings', () => {
   cy.get('[data-hook="mapSettings"]');
 });
 
+Cypress.Commands.add('openGalleryImageSettings', () => {
+  cy.get('[data-hook=galleryViewer]:first')
+    .parent()
+    .click();
+  cy.get(`[data-hook=${PLUGIN_TOOLBAR_BUTTONS.ADV_SETTINGS}]:first`).click();
+  cy.get('[data-hook="manage_media_Tab"]').click();
+});
+
 Cypress.Commands.add('addImageTitle', () => {
   cy.get(`[data-hook=${IMAGE_SETTINGS.CAPTION}]`)
     .click()
@@ -241,7 +249,7 @@ Cypress.Commands.add('addImageLink', () => {
     .type('www.wix.com')
     .get(`[data-hook=${IMAGE_SETTINGS.DONE}]`)
     .click();
-  // .find(`[href=www.wix.com]`);
+  // .get('href=www.wix.com');
 });
 
 Cypress.Commands.add('alignImage', alignment => {

@@ -28,9 +28,13 @@ describe('plugins', () => {
   });
 
   context('gallery', () => {
-    it('should render plugin toolbar', () => {});
+    it('should render plugin toolbar', () => {
+      cy.loadEditor('gallery').openPluginToolbar(PLUGIN_COMPONENT.GALLERY);
+    });
 
-    it('should render settings', () => {});
+    it('should render settings', () => {
+      cy.loadEditor('gallery').openGalleryImageSettings();
+    });
   });
 
   context('video', () => {
@@ -48,7 +52,9 @@ describe('plugins', () => {
   });
 
   context('divider', () => {
-    before('load editor', () => cy.loadEditor('divider'));
+    it('should render plugin toolbar', () => {
+      cy.loadEditor('divider').openPluginToolbar(PLUGIN_COMPONENT.DIVIDER);
+    });
 
     it('should render plugin toolbar and change styling', () => {
       cy.openPluginToolbar(PLUGIN_COMPONENT.DIVIDER).openDropdownMenu();

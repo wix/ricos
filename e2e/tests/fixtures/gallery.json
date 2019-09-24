@@ -1,0 +1,135 @@
+{
+    "blocks": [
+      {
+        "key": "dt8o4",
+        "text": "",
+        "type": "unstyled",
+        "depth": 0,
+        "inlineStyleRanges": [],
+        "entityRanges": [],
+        "data": {}
+      },
+      {
+        "key": "7bknf",
+        "text": " ",
+        "type": "atomic",
+        "depth": 0,
+        "inlineStyleRanges": [],
+        "entityRanges": [
+          {
+            "offset": 0,
+            "length": 1,
+            "key": 0
+          }
+        ],
+        "data": {}
+      },
+      {
+        "key": "fiduu",
+        "text": "",
+        "type": "unstyled",
+        "depth": 0,
+        "inlineStyleRanges": [],
+        "entityRanges": [],
+        "data": {}
+      }
+    ],
+    "entityMap": {
+      "0": {
+        "type": "wix-draft-plugin-gallery",
+        "mutability": "IMMUTABLE",
+        "data": {
+          "items": [
+            {
+              "metadata": {
+                "height": 2126,
+                "width": 1695,
+                "processedByConsumer": true
+              },
+              "itemId": "0d134f293b71f7c0a9638c5f1a8435e5",
+              "url": "8bb438_5b9f0c9151f24ba8a8ebdba378e260b7.jpg"
+            },
+            {
+              "metadata": {
+                "height": 3648,
+                "width": 5472,
+                "processedByConsumer": true
+              },
+              "itemId": "2103f7d2c4be85e4467d2f9cba4aeded",
+              "url": "8bb438_e1c242b87eb74abab740e5af5104a520.jpg"
+            },
+            {
+              "metadata": {
+                "height": 1081,
+                "width": 1621,
+                "processedByConsumer": true
+              },
+              "itemId": "4f8cf05deeb154bda3b878e68656e4c5",
+              "url": "8bb438_9f28a805bac543feb934a831a6636e03.jpg"
+            },
+            {
+              "metadata": {
+                "height": 2124,
+                "width": 3148,
+                "processedByConsumer": true
+              },
+              "itemId": "0e44a5c7c0c10166dbc1664c1018b9ea",
+              "url": "8bb438_0660e79effa64f8ea139c4fc03e0b773.jpg"
+            },
+            {
+              "metadata": {
+                "height": 3727,
+                "width": 5600,
+                "processedByConsumer": true
+              },
+              "itemId": "cf6787a4653057bd8af8cb05888dc9b1",
+              "url": "8bb438_f7612090677241d1a5b8fee6752954e9.jpg"
+            },
+            {
+              "metadata": {
+                "height": 3737,
+                "width": 5600,
+                "processedByConsumer": true
+              },
+              "itemId": "860df034014674abd7a2e73abe0b851b",
+              "url": "8bb438_ff062a651e174cf5926fe5c088be1099.jpg"
+            }
+          ],
+          "styles": {
+            "galleryLayout": 2,
+            "gallerySizeType": "px",
+            "gallerySizePx": 300,
+            "galleryMargin": 0,
+            "oneRow": false,
+            "cubeRatio": 1,
+            "galleryThumbnailsAlignment": "bottom",
+            "isVertical": false,
+            "numberOfImagesPerRow": 3,
+            "imageMargin": 20,
+            "thumbnailSpacings": 0,
+            "cubeType": "fill",
+            "enableInfiniteScroll": true,
+            "titlePlacement": "SHOW_ON_HOVER",
+            "allowHover": false,
+            "itemClick": "link",
+            "fullscreen": false,
+            "showArrows": false,
+            "gridStyle": 1,
+            "loveButton": false,
+            "allowSocial": false,
+            "allowDownload": false,
+            "mobileSwipeAnimation": "NO_EFFECT",
+            "thumbnailSize": 120,
+            "gotStyleParams": true
+          },
+          "config": {
+            "alignment": "center",
+            "size": "content",
+            "layout": "small",
+            "spacing": 0
+          }
+        }
+      }
+    },
+    "VERSION": "5.1.1"
+  }

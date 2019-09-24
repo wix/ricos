@@ -30,6 +30,7 @@ export const PLUGIN_TOOLBAR_BUTTONS = {
   LINK: 'LinkButton',
   SETTINGS: 'baseToolbarButton_settings',
   REPLACE: 'baseToolbarButton_replace',
+  ADV_SETTINGS: 'baseToolbarButton_advanced_settings',
   DELETE: 'blockButton_delete',
 };
 
