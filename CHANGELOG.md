@@ -13,6 +13,8 @@
   - [#389](https://github.com/wix-incubator/rich-content/pull/389) fullscreen for gallery and images :)
 - `gallery`
   - [#391](https://github.com/wix-incubator/rich-content/pull/391) gallery image titles
+- `editor`
+  - [#396](https://github.com/wix-incubator/rich-content/pull/396) sticky static toolbar on all platforms
 ### :bug: Bug Fix
 - `editor`
   - [#392](https://github.com/wix-incubator/rich-content/pull/392) text in line toolbar has tooltips

@@ -3,6 +3,7 @@ import { camelCase } from 'lodash';
 import StaticToolbar from './StaticToolbar';
 import { simplePubsub } from 'wix-rich-content-common';
 import { getLangDir } from 'rtl-detect';
+import Styles from '../../../../statics/styles/static-toolbar.scss';
 
 export default (data = {}) => {
   const pubsub = simplePubsub();
@@ -62,7 +63,10 @@ export default (data = {}) => {
       return editorState;
     },
     Toolbar: props => (
-      <div dir={getLangDir(locale)}>
+      <div
+        className={toolbarProps.isMobile ? Styles.staticToolbarWrapper : null}
+        dir={getLangDir(locale)}
+      >
         <StaticToolbar {...toolbarProps} {...props} />
       </div>
     ),

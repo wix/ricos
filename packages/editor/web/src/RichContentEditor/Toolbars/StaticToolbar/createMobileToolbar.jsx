@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { decorateComponentWithProps, isiOS } from 'wix-rich-content-common';
+import { decorateComponentWithProps } from 'wix-rich-content-common';
 import createStaticToolbar from './createStaticToolbar';
 import { AddPluginButton } from '../buttons';
 import { getTextButtonsFromList } from '../buttons/utils';
@@ -66,11 +66,14 @@ const getMobileTheme = theme => {
 
   return {
     toolbarStyles: {
-      toolbar: classNames(toolbarStyles.mobileToolbar, toolbarTheme && toolbarTheme.mobileToolbar, {
-        [toolbarStyles.mobileToolbar_fixed]: !isiOS(),
-        [toolbarTheme.mobileToolbar_fixed]:
-          toolbarTheme && toolbarTheme.mobileToolbar_fixed && !isiOS(),
-      }),
+      toolbar: classNames(
+        toolbarStyles.mobileToolbar,
+        toolbarStyles.mobileToolbar_fixed,
+        toolbarTheme && toolbarTheme.mobileToolbar,
+        {
+          [toolbarTheme.mobileToolbar_fixed]: toolbarTheme && toolbarTheme.mobileToolbar_fixed,
+        }
+      ),
       scrollableContainer: classNames(
         toolbarStyles.mobileToolbar_scrollableContainer,
         toolbarTheme && toolbarTheme.mobileToolbar_scrollableContainer
