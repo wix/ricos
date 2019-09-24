@@ -8,11 +8,20 @@
 > - :house: [Internal]
 
 ## [Unreleased]
+### :rocket: New Feature
+- `gallery`
+  - [#391](https://github.com/wix-incubator/rich-content/pull/391) gallery image titles
 ### :bug: Bug Fix
 - `editor`
   - [#392](https://github.com/wix-incubator/rich-content/pull/392) text in line toolbar has tooltips
+- `image`
+  - [75336e34](https://github.com/wix-incubator/rich-content/commit/75336e34) open imageStudio on crop tab
 - `example`
-  - [9add0fbc](https://github.com/wix-incubator/rich-content/commit/9add0fbc) gallery validation schema used for content validation 
+  - [9add0fbc](https://github.com/wix-incubator/rich-content/commit/9add0fbc) gallery validation schema used for content validation
+  - [#395](https://github.com/wix-incubator/rich-content/pull/395) removed div wrapping editor that was added in [#359](https://github.com/wix-incubator/rich-content/pull/359)
+### :house: Internal
+- `e2e`
+  - [#393](https://github.com/wix-incubator/rich-content/pull/393) added atomic block alignment testing
 <hr/>
 
 ## 5.1.1 (Sep 22, 2019)

@@ -217,11 +217,16 @@ const ItemActionsMenu = props => {
     </FileInput>
   );
 
-  const separator = <span className={styles.seperator}>·</span>;
+  const separator = key => (
+    <span className={styles.seperator} key={key}>
+      ·
+    </span>
+  );
   const buttons = [];
   const toggleSortingLabel = isMobileSorting ? finishSortingLabel : sortItemsLabel;
   const toggleSortingButton = (
     <button
+      key="toggleSortingButton"
       className={styles.topBarLink}
       data-hook="galleryItemsSortableToggleSorting"
       onClick={toggleSorting}
@@ -233,6 +238,7 @@ const ItemActionsMenu = props => {
   );
   const selectAllButton = (
     <button
+      key="selectAllButton"
       className={styles.topBarLink}
       data-hook="galleryItemsSortableSelectAll"
       onClick={() => setAllItemsValue('selected', true)}
@@ -244,6 +250,7 @@ const ItemActionsMenu = props => {
   );
   const deselectAllButton = (
     <button
+      key="deselectAllButton"
       className={styles.topBarLink}
       data-hook="galleryItemsSortableDeselectAll"
       onClick={() => setAllItemsValue('selected', false)}
@@ -256,6 +263,7 @@ const ItemActionsMenu = props => {
 
   const deleteButton = (
     <button
+      key="deleteButton"
       className={styles.topBarLink}
       data-hook="galleryItemsSortableDelete"
       onClick={() => deleteSelectedItems()}
@@ -268,6 +276,7 @@ const ItemActionsMenu = props => {
 
   const itemSettingsButton = (
     <button
+      key="itemSettingsButton"
       className={styles.topBarLink}
       data-hook="galleryItemsSortableItemSettings"
       onClick={() => toggleImageSettings(true)}
@@ -279,22 +288,22 @@ const ItemActionsMenu = props => {
   );
   if (isMobile && selectedItems.length === 0) {
     buttons.push(toggleSortingButton);
-    buttons.push(separator);
+    buttons.push(separator('sep-0'));
   }
   if (!isMobileSorting) {
     if (hasUnselectedItems) {
       buttons.push(selectAllButton);
-      buttons.push(separator);
+      buttons.push(separator('sep-1'));
     }
     if (hasSelectedItems) {
       buttons.push(deselectAllButton);
-      buttons.push(separator);
+      buttons.push(separator('sep-2'));
       buttons.push(deleteButton);
-      buttons.push(separator);
+      buttons.push(separator('sep-3'));
     }
     if (selectedItems.length === 1) {
       buttons.push(itemSettingsButton);
-      buttons.push(separator);
+      buttons.push(separator('sep-4'));
     }
   }
   buttons.splice(buttons.length - 1, 1);

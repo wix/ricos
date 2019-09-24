@@ -15,3 +15,16 @@ export const INLINE_TOOLBAR_BUTTONS = {
   LINK: 'LinkButton',
   CODE_BLOCK: 'TextCodeBlockButton',
 };
+
+export const PLUGIN_TOOLBAR_BUTTONS = {
+  ORIGINAL: 'blockAlignmentAndSizeButton_sizeOriginal',
+  SMALL: 'blockAlignmentAndSizeButton_sizeSmallCenter',
+  BEST_FIT: 'blockAlignmentAndSizeButton_sizeContent',
+  FULL_WIDTH: 'blockAlignmentAndSizeButton_sizeFullWidth',
+  ALIGN_LEFT: 'blockAlignmentButton_alignLeft',
+  ALIGN_CENTER: 'blockAlignmentButton_alignCenter',
+  ALIGN_RIGHT: 'blockAlignmentButton_alignRight',
+  LINK: 'LinkButton',
+  SETTINGS: 'baseToolbarButton_settings',
+  DELETE: 'blockButton_delete',
+};

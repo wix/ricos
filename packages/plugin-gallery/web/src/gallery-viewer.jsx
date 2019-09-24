@@ -58,9 +58,14 @@ class GalleryViewer extends React.Component {
   stateFromProps = props => {
     const defaults = getDefault();
     const items = props.componentData.items || defaults.items;
-    const styleParams = Object.assign(defaults.styles, props.componentData.styles || {});
-
+    const styleParams = this.getStyleParams(
+      Object.assign(defaults.styles, props.componentData.styles || {}),
+      this.hasTitle(items)
+    );
+    // TODO remove gallery key
+    const galleryKey = Math.random();
     return {
+      galleryKey,
       items,
       styleParams,
     };
@@ -83,33 +88,57 @@ class GalleryViewer extends React.Component {
     switch (name) {
       // container size change callback
       case 'GALLERY_CHANGE':
-        // ignore thumbnails layout
-        if (this.state.styleParams.galleryLayout === 3) {
-          return;
-        }
         this.container && (this.container.style.height = `${data.layoutHeight}px`);
-        this.setState(prevState => {
-          this.setState({
-            size: {
-              ...prevState.size,
-              height: data.layoutHeight,
-            },
-          });
-        });
+        this.setState(prevState => ({
+          size: {
+            ...prevState.size,
+            height: data.layoutHeight,
+          },
+        }));
         break;
       default:
         break;
     }
   };
 
+  hasTitle = items => {
+    return items.some(item => {
+      return item.metadata && item.metadata.title;
+    });
+  };
+
+  getStyleParams = (styleParams, shouldRenderTitle) => {
+    if (!shouldRenderTitle) {
+      return styleParams;
+    }
+    const display = this.context.isMobile
+      ? { titlePlacement: 'SHOW_BELOW', calculateTextBoxHeightMode: 'AUTOMATIC' }
+      : { titlePlacement: 'SHOW_ON_HOVER', allowHover: true, galleryVerticalAlign: 'flex-end' };
+    return {
+      ...styleParams,
+      isVertical: styleParams.galleryLayout === 1,
+      allowTitle: true,
+      galleryTextAlign: 'center',
+      textsHorizontalPadding: 0,
+      imageInfoType: 'NO_BACKGROUND',
+      hoveringBehaviour: 'APPEARS',
+      textsVerticalPadding: 0,
+      ...display,
+    };
+  };
+
   render() {
     this.styles = this.styles || mergeStyles({ styles: viewerStyles, theme: this.context.theme });
-    const { styleParams, size = { width: 300 } } = this.state;
+    // TODO remove gallery key
+    const { galleryKey, styleParams, size = { width: 300 } } = this.state;
+    const items = this.getItems();
     return (
       <ViewportRenderer>
         <div ref={elem => (this.container = elem)} className={this.styles.gallery_container}>
           <ProGallery
-            items={this.getItems()}
+            // TODO remove gallery key
+            key={galleryKey}
+            items={items}
             styles={styleParams}
             container={size}
             settings={this.props.settings}
