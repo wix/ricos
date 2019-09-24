@@ -176,6 +176,10 @@ Cypress.Commands.add('setLink', (selection, link) => {
     .click();
 });
 
+Cypress.Commands.add('setAlignment', alignment => {
+  cy.setTextStyle(INLINE_TOOLBAR_BUTTONS.ALIGNMENT).setTextStyle(alignment);
+});
+
 function setInlineToolbarMenueItem(item, selection, butttonIndex) {
   cy.setTextStyle(item, selection)
     .get('.ReactModalPortal')
