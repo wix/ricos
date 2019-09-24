@@ -8,6 +8,9 @@
 > - :house: [Internal]
 
 ## [Unreleased]
+### :rocket: New Feature
+- `gallery`
+  - [#391](https://github.com/wix-incubator/rich-content/pull/391) gallery image titles
 ### :bug: Bug Fix
 - `example`
   - [9add0fbc](https://github.com/wix-incubator/rich-content/commit/9add0fbc) gallery validation schema used for content validation 
@@ -23,9 +26,6 @@
 ### :house: Internal
 - `e2e`
   - [#368](https://github.com/wix-incubator/rich-content/pull/368) test rtl support in toolbars, text and external modals
-### :rocket: New Feature
-- `gallery`
-  - [#391](https://github.com/wix-incubator/rich-content/pull/391) gallery image titles
 <hr/>
 
 ## 5.1.0 (Sep 16, 2019)

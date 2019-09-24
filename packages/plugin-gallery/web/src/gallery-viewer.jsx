@@ -58,10 +58,10 @@ class GalleryViewer extends React.Component {
   stateFromProps = props => {
     const defaults = getDefault();
     const items = props.componentData.items || defaults.items;
-    let styleParams = Object.assign(defaults.styles, props.componentData.styles || {});
-    styleParams = this.hasTitle(items)
-      ? { ...styleParams, ...this.showTitleStyleParams(styleParams) }
-      : styleParams;
+    const styleParams = this.getStyleParams(
+      Object.assign(defaults.styles, props.componentData.styles || {}),
+      this.hasTitle(items)
+    );
     // TODO remove gallery key
     const galleryKey = Math.random();
     return {
@@ -88,10 +88,6 @@ class GalleryViewer extends React.Component {
     switch (name) {
       // container size change callback
       case 'GALLERY_CHANGE':
-        // ignore thumbnails layout
-        // if (this.state.styleParams.galleryLayout === 3) {
-        //   return;
-        // }
         this.container && (this.container.style.height = `${data.layoutHeight}px`);
         this.setState(prevState => ({
           size: {
@@ -111,11 +107,15 @@ class GalleryViewer extends React.Component {
     });
   };
 
-  showTitleStyleParams = styleParams => {
+  getStyleParams = (styleParams, shouldRenderTitle) => {
+    if (!shouldRenderTitle) {
+      return styleParams;
+    }
     const display = this.context.isMobile
       ? { titlePlacement: 'SHOW_BELOW', calculateTextBoxHeightMode: 'AUTOMATIC' }
       : { titlePlacement: 'SHOW_ON_HOVER', allowHover: true, galleryVerticalAlign: 'flex-end' };
     return {
+      ...styleParams,
       isVertical: styleParams.galleryLayout === 1,
       allowTitle: true,
       galleryTextAlign: 'center',

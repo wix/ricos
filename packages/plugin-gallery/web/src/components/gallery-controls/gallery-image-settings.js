@@ -47,7 +47,7 @@ class ImageSettings extends Component {
       240
     );
 
-  onInputWithLableChange = event => this.props.onUpdateImage({ title: event.target.value });
+  onInputWithLabelChange = event => this.props.onUpdateImage({ title: event.target.value });
 
   onLinkPanelChange = linkPanelValues => {
     this.props.onUpdateImage({ link: this.linkPanelToLink(linkPanelValues) });
@@ -192,7 +192,7 @@ class ImageSettings extends Component {
                   </button>
                 </div>
                 <SettingsSection
-                  ariaProps={{ title: 'image properties', role: 'region' }}
+                  ariaProps={{ 'aria-label': 'image properties', role: 'region' }}
                   theme={theme}
                   className={styles.galleryImageSettings_section}
                 >
@@ -204,7 +204,7 @@ class ImageSettings extends Component {
                     value={metadata.title || ''}
                     maxLength={30}
                     dataHook="galleryImageTitleInput"
-                    onChange={this.onInputWithLableChange}
+                    onChange={this.onInputWithLabelChange}
                   />
                 </SettingsSection>
                 <SettingsSection
