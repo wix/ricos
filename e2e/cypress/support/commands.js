@@ -1,7 +1,7 @@
 require('cypress-plugin-snapshots/commands');
 import { addMatchImageSnapshotCommand } from 'cypress-image-snapshot/command';
 addMatchImageSnapshotCommand();
-import { INLINE_TOOLBAR_BUTTONS, PLUGIN_TOOLBAR_BUTTONS } from '../dataHooks';
+import { INLINE_TOOLBAR_BUTTONS, PLUGIN_TOOLBAR_BUTTONS, IMAGE_SETTINGS } from '../dataHooks';
 
 const resizeForDesktop = () => cy.viewport('macbook-15');
 const resizeForMobile = () => cy.viewport('iphone-5');
@@ -212,6 +212,23 @@ Cypress.Commands.add('openImageSettings', () => {
     .click();
   cy.get(`[data-hook=${PLUGIN_TOOLBAR_BUTTONS.SETTINGS}]:first`).click();
   cy.get('[data-hook="imageSettings"]');
+});
+
+Cypress.Commands.add('addImageTitle', () => {
+  cy.get(`[data-hook=${IMAGE_SETTINGS.CAPTION}]`)
+    .click()
+    .type('Title')
+    .get(`[data-hook=${IMAGE_SETTINGS.DONE}]`)
+    .click();
+});
+
+Cypress.Commands.add('addImageLink', () => {
+  cy.get(`[data-hook=${IMAGE_SETTINGS.LINK}]`)
+    .click()
+    .type('www.wix.com')
+    .get(`[data-hook=${IMAGE_SETTINGS.DONE}]`)
+    .click();
+  // .find(`[href=www.wix.com]`);
 });
 
 Cypress.Commands.add('alignImage', alignment => {
