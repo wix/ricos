@@ -1491,6 +1491,15 @@ exports[`editor > should allow to apply inline toolbar plugins #0`] =
 {
   "blocks": [
     {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
       "data": {
         "dynamicStyles": {
           "line-height": "2.5",
@@ -1502,16 +1511,76 @@ exports[`editor > should allow to apply inline toolbar plugins #0`] =
       "entityRanges": [
         {
           "key": 0,
+          "length": 8,
+          "offset": 0
+        },
+        {
+          "key": 0,
+          "length": 2,
+          "offset": 10
+        },
+        {
+          "key": 1,
+          "length": 15,
+          "offset": 12
+        }
+      ],
+      "inlineStyleRanges": [
+        {
+          "length": 8,
+          "offset": 0,
+          "style": "UNDERLINE"
+        },
+        {
+          "length": 17,
+          "offset": 10,
+          "style": "UNDERLINE"
+        }
+      ],
+      "key": 1,
+      "text": "@NO MORE\n\n#LIVING THE DREAM",
+      "type": "code-block"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 3,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {
+        "dynamicStyles": {
+          "line-height": "2.5",
+          "padding-bottom": "3px",
+          "padding-top": "2px"
+        }
+      },
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 2,
           "length": 10,
           "offset": 0
         },
         {
-          "key": 1,
+          "key": 3,
           "length": 30,
           "offset": 15
         },
         {
-          "key": 2,
+          "key": 4,
           "length": 65,
           "offset": 50
         }
@@ -1543,7 +1612,7 @@ exports[`editor > should allow to apply inline toolbar plugins #0`] =
           "style": "BOLD"
         }
       ],
-      "key": 0,
+      "key": 4,
       "text": "Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition. ",
       "type": "blockquote"
     },
@@ -1552,7 +1621,7 @@ exports[`editor > should allow to apply inline toolbar plugins #0`] =
       "depth": 0,
       "entityRanges": [],
       "inlineStyleRanges": [],
-      "key": 1,
+      "key": 5,
       "text": "",
       "type": "unstyled"
     },
@@ -1614,7 +1683,7 @@ exports[`editor > should allow to apply inline toolbar plugins #0`] =
           "style": "color2"
         }
       ],
-      "key": 2,
+      "key": 6,
       "text": "Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment.\nBring to the table win-win survival strategies to ensure proactive domination.\nAt the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution. ",
       "type": "code-block"
     },
@@ -1623,7 +1692,7 @@ exports[`editor > should allow to apply inline toolbar plugins #0`] =
       "depth": 0,
       "entityRanges": [],
       "inlineStyleRanges": [],
-      "key": 3,
+      "key": 7,
       "text": "",
       "type": "unstyled"
     },
@@ -1638,7 +1707,7 @@ exports[`editor > should allow to apply inline toolbar plugins #0`] =
           "style": "color2"
         }
       ],
-      "key": 4,
+      "key": 8,
       "text": "User generated content in real-time will have multiple touchpoints for offshoring.",
       "type": "unstyled"
     },
@@ -1647,7 +1716,7 @@ exports[`editor > should allow to apply inline toolbar plugins #0`] =
       "depth": 0,
       "entityRanges": [],
       "inlineStyleRanges": [],
-      "key": 5,
+      "key": 9,
       "text": "Capitalize on low hanging fruit to identify a ballpark value added activity to beta test. ",
       "type": "unstyled"
     },
@@ -1656,7 +1725,7 @@ exports[`editor > should allow to apply inline toolbar plugins #0`] =
       "depth": 0,
       "entityRanges": [],
       "inlineStyleRanges": [],
-      "key": 6,
+      "key": 10,
       "text": "Override the digital divide with additional clickthroughs from DevOps.",
       "type": "unstyled"
     },
@@ -1665,7 +1734,7 @@ exports[`editor > should allow to apply inline toolbar plugins #0`] =
       "depth": 0,
       "entityRanges": [],
       "inlineStyleRanges": [],
-      "key": 7,
+      "key": 11,
       "text": "Nanotechnology immersion along the information highway will close the loop on focusing solely on the bottom line.",
       "type": "unstyled"
     }
@@ -1684,12 +1753,30 @@ exports[`editor > should allow to apply inline toolbar plugins #0`] =
       "data": {
         "rel": "nofollow",
         "target": "_blank",
-        "url": "https://www.sport5.co.il/"
+        "url": "https://www.sport5.co.il"
       },
       "mutability": "MUTABLE",
       "type": "LINK"
     },
     "2": {
+      "data": {
+        "rel": "nofollow",
+        "target": "_blank",
+        "url": "https://www.wix.com/"
+      },
+      "mutability": "MUTABLE",
+      "type": "LINK"
+    },
+    "3": {
+      "data": {
+        "rel": "nofollow",
+        "target": "_blank",
+        "url": "https://www.sport5.co.il/"
+      },
+      "mutability": "MUTABLE",
+      "type": "LINK"
+    },
+    "4": {
       "data": {
         "rel": "nofollow",
         "target": "_blank",
