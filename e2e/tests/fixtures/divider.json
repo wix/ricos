@@ -1,0 +1,160 @@
+{
+  "blocks": [
+    {
+      "key": "1s74d",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "121kb",
+      "text": " ",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 0
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "bg3pb",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "ec5dm",
+      "text": " ",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 1
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "3cinj",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "aerv3",
+      "text": " ",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 2
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "2qsa7",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "a21rv",
+      "text": " ",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 3
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "s0m1",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "type": "wix-draft-plugin-divider",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "type": "single",
+        "config": {
+          "size": "large",
+          "alignment": "center",
+          "textWrap": "nowrap"
+        }
+      }
+    },
+    "1": {
+      "type": "wix-draft-plugin-divider",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "type": "double",
+        "config": {
+          "size": "large",
+          "alignment": "center",
+          "textWrap": "nowrap"
+        }
+      }
+    },
+    "2": {
+      "type": "wix-draft-plugin-divider",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "type": "dashed",
+        "config": {
+          "size": "large",
+          "alignment": "center",
+          "textWrap": "nowrap"
+        }
+      }
+    },
+    "3": {
+      "type": "wix-draft-plugin-divider",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "type": "dotted",
+        "config": {
+          "size": "large",
+          "alignment": "center",
+          "textWrap": "nowrap"
+        }
+      }
+    }
+  },
+  "VERSION": "5.1.1"
+}

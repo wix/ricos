@@ -234,7 +234,7 @@ Cypress.Commands.add('alignImage', alignment => {
 });
 
 Cypress.Commands.add('openPluginToolbar', plugin => {
-  cy.get(`[data-hook=${plugin}]:first`)
+  cy.get(`[data-hook*=${plugin}]:first`)
     .parent()
     .click();
   cy.get('[data-hook*="PluginToolbar"]:first');
