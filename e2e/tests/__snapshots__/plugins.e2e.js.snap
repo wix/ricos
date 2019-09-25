@@ -7,6 +7,15 @@ exports[`plugins > divider > should render plugin toolbar #0`] =
       "entityRanges": [],
       "inlineStyleRanges": [],
       "key": 0,
+      "text": "Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition. ",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 1,
       "text": "",
       "type": "unstyled"
     },
@@ -21,7 +30,7 @@ exports[`plugins > divider > should render plugin toolbar #0`] =
         }
       ],
       "inlineStyleRanges": [],
-      "key": 1,
+      "key": 2,
       "text": " ",
       "type": "atomic"
     },
@@ -30,7 +39,7 @@ exports[`plugins > divider > should render plugin toolbar #0`] =
       "depth": 0,
       "entityRanges": [],
       "inlineStyleRanges": [],
-      "key": 2,
+      "key": 3,
       "text": "",
       "type": "unstyled"
     },

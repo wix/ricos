@@ -26,22 +26,29 @@ describe('plugins', () => {
   });
 
   context('gallery', () => {
-    beforeEach('load editor', () => cy.loadEditor('gallery'));
+    beforeEach('load editor', () => cy.loadEditorAndViewer('gallery'));
 
     it('should render plugin toolbar', () => {
       cy.openPluginToolbar(PLUGIN_COMPONENT.GALLERY);
     });
 
-    // it('should have 8 layouts in dropdown menu', () => {
-    //   cy.openPluginToolbar(PLUGIN_COMPONENT.GALLERY).openDropdownMenu();
-    // });
+    it('should render advanced gallery settings', () => {
+      cy.openGalleryAdvancedSettings();
+    });
 
-    it('should render settings', () => {
-      cy.openGalleryImageSettings();
+    it('should render gallery settings', () => {
+      cy.openGalleryAdvancedSettings().openGallerySettings();
+    });
+
+    it('should render gallery image settings', () => {
+      cy.openGalleryAdvancedSettings()
+        .openGallerySettings()
+        .openGalleryImageSettings();
     });
 
     it('should allow to add a title', () => {
-      cy.loadEditorAndViewer('gallery')
+      cy.openGalleryAdvancedSettings()
+        .openGallerySettings()
         .openGalleryImageSettings()
         .addGalleryImageTitle()
         .checkTitle();
