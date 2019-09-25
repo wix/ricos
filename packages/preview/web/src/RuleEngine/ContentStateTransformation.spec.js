@@ -86,7 +86,7 @@ describe('Content State Transformation', () => {
           mediaInfo: metadata.media.images().slice(0, 3),
         }),
     });
-    const preview = transformer.apply(contentState).get();
+    const preview = transformer.apply(contentState);
     expect(preview.entityMap[0]).toEqual(expectedEntity);
   });
 
@@ -101,7 +101,7 @@ describe('Content State Transformation', () => {
       _if: metadata => metadata.text.plain.array().length > 0,
       _then: (metadata, preview) => preview.plain(metadata.text.plain.array()[0]),
     });
-    const preview = transformer.apply(contentState).get();
+    const preview = transformer.apply(contentState);
     expect(butKey(preview.blocks[1])).toEqual(butKey(expectedBlock));
     expect(preview.entityMap[0]).toEqual(expectedEntity);
   });

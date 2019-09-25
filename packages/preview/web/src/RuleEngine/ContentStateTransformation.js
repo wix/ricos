@@ -21,12 +21,13 @@ class ContentStateTransformation {
     const previewState = this.previewState || {};
     const previewStateBuilder = new ContentStateBuilder(previewState);
     const metadata = getContentStateMetadata(contentState);
-    return this.rules.reduce((builder, rule) => {
+    const appliedRuleBuilder = this.rules.reduce((builder, rule) => {
       if (rule._if(metadata)) {
         return rule._then(metadata, builder);
       }
       return builder;
     }, previewStateBuilder);
+    return appliedRuleBuilder.get();
   }
 
   toObject() {

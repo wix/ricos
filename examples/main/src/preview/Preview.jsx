@@ -64,7 +64,7 @@ export default class Preview extends PureComponent {
             inlineStyleMappers={Plugins.getInlineStyleMappers(this.props.initialState)}
             decorators={Plugins.decorators}
             config={Plugins.config}
-            initialState={this.transformation.apply(this.props.initialState).get()}
+            initialState={this.transformation.apply(this.props.initialState)}
             theme={theme}
             isMobile={this.props.isMobile}
             anchorTarget={anchorTarget}
