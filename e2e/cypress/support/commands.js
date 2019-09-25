@@ -232,11 +232,10 @@ Cypress.Commands.add('openMapSettings', () => {
 });
 
 Cypress.Commands.add('openGalleryImageSettings', () => {
-  cy.get('[data-hook=galleryViewer]:first')
+  cy.get(`[data-hook=${PLUGIN_COMPONENT.GALLERY}]:first`)
     .parent()
     .click();
   cy.get(`[data-hook=${PLUGIN_TOOLBAR_BUTTONS.ADV_SETTINGS}]:first`).click();
-  cy.get('[data-hook="manage_media_Tab"]').click();
 });
 
 Cypress.Commands.add('addImageTitle', () => {
@@ -248,12 +247,15 @@ Cypress.Commands.add('addImageTitle', () => {
 });
 
 Cypress.Commands.add('addGalleryImageTitle', () => {
+  cy.get('[data-hook="manage_media_Tab"]')
+    .click()
+    .matchSnapshots();
   cy.get(`[data-hook=${GALLERY_SETTINGS.IMAGE}]:first`).click();
   cy.get(`[data-hook=${GALLERY_SETTINGS.EDIT_IMAGE}]`).click();
   cy.get(`[data-hook=${GALLERY_SETTINGS.TITLE}]`).type('Title');
   cy.get(`[data-hook=${SETTINGS_PANEL.DONE}]:first`).click({ multiple: true });
   cy.get(`[data-hook=${SETTINGS_PANEL.DONE}]`).click();
-  cy.get('[data-hook=imageViewer]:first')
+  cy.get(`[data-hook=${PLUGIN_COMPONENT.IMAGE}]:first`)
     .parent()
     .click();
 });
