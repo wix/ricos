@@ -8,6 +8,8 @@ import {
   GALLERY_SETTINGS,
   VIDEO_PLUGIN,
   PLUGIN_COMPONENT,
+  STATIC_TOOLBAR_BUTTONS,
+  SETTINGS_PANEL,
 } from '../dataHooks';
 
 const resizeForDesktop = () => cy.viewport('macbook-15');
@@ -241,7 +243,7 @@ Cypress.Commands.add('addImageTitle', () => {
   cy.get(`[data-hook=${IMAGE_SETTINGS.CAPTION}]`)
     .click()
     .type('Title')
-    .get(`[data-hook=${IMAGE_SETTINGS.DONE}]`)
+    .get(`[data-hook=${SETTINGS_PANEL.DONE}]`)
     .click();
 });
 
@@ -249,8 +251,8 @@ Cypress.Commands.add('addGalleryImageTitle', () => {
   cy.get(`[data-hook=${GALLERY_SETTINGS.IMAGE}]:first`).click();
   cy.get(`[data-hook=${GALLERY_SETTINGS.EDIT_IMAGE}]`).click();
   cy.get(`[data-hook=${GALLERY_SETTINGS.TITLE}]`).type('Title');
-  cy.get(`[data-hook=${GALLERY_SETTINGS.DONE}]:first`).click({ multiple: true });
-  cy.get(`[data-hook=${GALLERY_SETTINGS.DONE}]`).click();
+  cy.get(`[data-hook=${SETTINGS_PANEL.DONE}]:first`).click({ multiple: true });
+  cy.get(`[data-hook=${SETTINGS_PANEL.DONE}]`).click();
   cy.get('[data-hook=imageViewer]:first')
     .parent()
     .click();
@@ -267,7 +269,7 @@ Cypress.Commands.add('addImageLink', () => {
   cy.get(`[data-hook=${IMAGE_SETTINGS.LINK}]`)
     .click()
     .type('www.wix.com')
-    .get(`[data-hook=${IMAGE_SETTINGS.DONE}]`)
+    .get(`[data-hook=${SETTINGS_PANEL.DONE}]`)
     .click();
   // .get('href=www.wix.com');
 });
@@ -306,11 +308,34 @@ Cypress.Commands.add('openDropdownMenu', (selector = '') => {
   }
 });
 
-Cypress.Commands.add('addVideo', () => {
-  cy.get(`[data-hook*=${VIDEO_PLUGIN.STATIC_TOOLBAR_VIDEO}]:first`).click();
-  // applitools match
+Cypress.Commands.add('openVideoUploadModal', () => {
+  cy.get(`[data-hook*=${STATIC_TOOLBAR_BUTTONS.VIDEO}]:first`).click();
+});
+
+Cypress.Commands.add('openSoundCloudModal', () => {
+  cy.get(`[data-hook*=${STATIC_TOOLBAR_BUTTONS.SOUND_CLOUD}]:first`).click();
+});
+
+Cypress.Commands.add('addSoundCloud', () => {
+  cy.get(`[data-hook*=${'soundCloudUploadModalInput'}]`).type(
+    'https://soundcloud.com/nlechoppa/camelot'
+  );
+  cy.get(`[data-hook*=${SETTINGS_PANEL.DONE}]`).click();
+  cy.get(`[data-hook=${PLUGIN_COMPONENT.SOUND_CLOUD}]:first`)
+    .parent()
+    .click();
+});
+
+Cypress.Commands.add('addVideoFromURI', () => {
   cy.get(`[data-hook*=${VIDEO_PLUGIN.INPUT}]`).type('https://www.youtube.com/watch?v=Xj3gU3jACe8');
   cy.get(`[data-hook*=${VIDEO_PLUGIN.ADD}]`).click();
+  cy.get(`[data-hook=${PLUGIN_COMPONENT.VIDEO}]:first`)
+    .parent()
+    .click();
+});
+
+Cypress.Commands.add('addCustomVideo', () => {
+  cy.get(`[data-hook*=${VIDEO_PLUGIN.CUSTOM}]`).click();
   cy.get(`[data-hook=${PLUGIN_COMPONENT.VIDEO}]:first`)
     .parent()
     .click();

@@ -6,34 +6,38 @@ import {
 
 describe('plugins', () => {
   context('image', () => {
+    beforeEach('load editor', () => cy.loadEditor('images'));
+
     it('should render plugin toolbar', () => {
-      cy.loadEditor('images').openPluginToolbar(PLUGIN_COMPONENT.IMAGE);
+      cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE);
     });
 
     it('should render settings', () => {
-      cy.loadEditor('images').openImageSettings();
+      cy.openImageSettings();
     });
 
     it('should allow to add a title', () => {
-      cy.loadEditor('images')
-        .openImageSettings()
-        .addImageTitle();
+      cy.openImageSettings().addImageTitle();
     });
 
     it('should allow to add a link', () => {
-      cy.loadEditor('images')
-        .openImageSettings()
-        .addImageLink();
+      cy.openImageSettings().addImageLink();
     });
   });
 
   context('gallery', () => {
+    beforeEach('load editor', () => cy.loadEditor('gallery'));
+
     it('should render plugin toolbar', () => {
-      cy.loadEditor('gallery').openPluginToolbar(PLUGIN_COMPONENT.GALLERY);
+      cy.openPluginToolbar(PLUGIN_COMPONENT.GALLERY);
     });
 
+    // it('should have 8 layouts in dropdown menu', () => {
+    //   cy.openPluginToolbar(PLUGIN_COMPONENT.GALLERY).openDropdownMenu();
+    // });
+
     it('should render settings', () => {
-      cy.loadEditor('gallery').openGalleryImageSettings();
+      cy.openGalleryImageSettings();
     });
 
     it('should allow to add a title', () => {
@@ -45,8 +49,30 @@ describe('plugins', () => {
   });
 
   context('video', () => {
-    it('should enable to add a video', () => {
-      cy.loadEditor('empty').addVideo();
+    beforeEach('load editor', () => cy.loadEditor('empty'));
+
+    it('should render upload modal', () => {
+      cy.openVideoUploadModal();
+    });
+
+    it('should enable to add a video from URI', () => {
+      cy.openVideoUploadModal().addVideoFromURI();
+    });
+
+    it('should enable to add a custom video', () => {
+      cy.openVideoUploadModal().addCustomVideo();
+    });
+  });
+
+  context('soundcloud', () => {
+    beforeEach('load editor', () => cy.loadEditor('empty'));
+
+    it('should render upload modal', () => {
+      cy.openSoundCloudModal();
+    });
+
+    it('should enable to add a soundcloud URI', () => {
+      cy.openSoundCloudModal().addSoundCloud();
     });
   });
 
