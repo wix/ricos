@@ -41,6 +41,7 @@ export const PLUGIN_TOOLBAR_BUTTONS = {
   REPLACE: 'baseToolbarButton_replace',
   ADV_SETTINGS: 'baseToolbarButton_advanced_settings',
   DELETE: 'blockButton_delete',
+  EDIT: 'baseToolbarButton_edit',
 };
 
 export const IMAGE_SETTINGS = {
@@ -59,6 +60,12 @@ export const VIDEO_PLUGIN = {
   INPUT: 'videoUploadModalInput',
   ADD: 'videoUploadModalAddButton',
   CUSTOM: 'videoUploadModalCustomVideo',
+};
+
+export const HTML_PLUGIN = {
+  STATIC_TOOLBAR_BUTTON: 'HTML_insert_plugin_button',
+  INPUT: 'htmlEditPanel_htmlInput',
+  UPDATE: 'htmlEditPanel_Update',
 };
 
 export const PLUGIN_COMPONENT = {

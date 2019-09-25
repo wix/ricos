@@ -87,9 +87,13 @@ describe('plugins', () => {
     afterEach(() => cy.matchSnapshots({ capture: 'viewport' }));
   });
 
-  context.only('html', () => {
+  context('html', () => {
     it('should render plugin toolbar', () => {
-      cy.loadEditor('html').openPluginToolbar(PLUGIN_COMPONENT.HTML);
+      cy.loadEditor('empty').addHtml();
+      cy.get(`[data-hook*=${PLUGIN_TOOLBAR_BUTTONS.EDIT}]`)
+        .click({ multiple: true })
+        .click();
+      // applitools eyes
     });
 
     it('should render settings', () => {});
