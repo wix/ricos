@@ -40,6 +40,20 @@ export const IMAGE_SETTINGS = {
   DONE: 'settingPanelFooterDone',
 };
 
+export const GALLERY_SETTINGS = {
+  IMAGE: 'galleryItemsSortable',
+  EDIT_IMAGE: 'galleryItemsSortableItemSettings',
+  TITLE: 'galleryImageTitleInput',
+  VIEWER_IMAGE: 'item-social',
+  DONE: 'settingPanelFooterDone',
+};
+
+export const VIDEO_PLUGIN = {
+  STATIC_TOOLBAR_VIDEO: 'Video_insert_plugin_button',
+  INPUT: 'videoUploadModalInput',
+  ADD: 'videoUploadModalAddButton',
+};
+
 export const PLUGIN_COMPONENT = {
   IMAGE: 'imageViewer',
   VIDEO: 'videoPlayer',
