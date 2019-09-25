@@ -23,6 +23,7 @@ describe('plugins', () => {
     it('should allow to add a link', () => {
       cy.openImageSettings().addImageLink();
     });
+    afterEach(() => cy.matchSnapshots({ capture: 'viewport' }));
   });
 
   context('gallery', () => {
@@ -53,6 +54,7 @@ describe('plugins', () => {
         .addGalleryImageTitle(PLUGIN_COMPONENT.IMAGE)
         .checkTitle();
     });
+    afterEach(() => cy.matchSnapshots({ capture: 'viewport' }));
   });
 
   context('video', () => {
@@ -69,6 +71,7 @@ describe('plugins', () => {
     it('should enable to add a custom video', () => {
       cy.openVideoUploadModal().addCustomVideo();
     });
+    afterEach(() => cy.matchSnapshots({ capture: 'viewport' }));
   });
 
   context('soundcloud', () => {
@@ -81,6 +84,7 @@ describe('plugins', () => {
     it('should enable to add a soundcloud URI', () => {
       cy.openSoundCloudModal().addSoundCloud();
     });
+    afterEach(() => cy.matchSnapshots({ capture: 'viewport' }));
   });
 
   context('html', () => {
@@ -89,6 +93,7 @@ describe('plugins', () => {
     });
 
     it('should render settings', () => {});
+    afterEach(() => cy.matchSnapshots({ capture: 'viewport' }));
   });
 
   context('divider', () => {
@@ -117,6 +122,7 @@ describe('plugins', () => {
       );
       // applitools eyes
     });
+    afterEach(() => cy.matchSnapshots({ capture: 'viewport' }));
   });
 
   context('gif', () => {
@@ -129,6 +135,7 @@ describe('plugins', () => {
       cy.get(`button[data-hook=${PLUGIN_TOOLBAR_BUTTONS.REPLACE}][tabindex=0]`).click();
       // applitools eyes
     });
+    afterEach(() => cy.matchSnapshots({ capture: 'viewport' }));
   });
 
   context('map', () => {
@@ -139,7 +146,7 @@ describe('plugins', () => {
       // applitools eyes
       cy.openMapSettings();
     });
-  });
 
-  // afterEach(() => cy.matchSnapshots({ capture: 'viewport' }));
+    afterEach(() => cy.matchSnapshots({ capture: 'viewport' }));
+  });
 });
