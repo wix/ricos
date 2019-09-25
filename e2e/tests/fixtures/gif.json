@@ -1,0 +1,56 @@
+{
+  "blocks": [
+    {
+      "key": "8s1v3",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "1u5r4",
+      "text": " ",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 0
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "bsrvp",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "type": "wix-draft-plugin-giphy",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "config": {
+          "size": "content",
+          "alignment": "center"
+        },
+        "gif": {
+          "originalUrl": "https://media1.giphy.com/media/hrk8ehR4lCZ27FtjPA/giphy_s.gif",
+          "stillUrl": "https://media1.giphy.com/media/hrk8ehR4lCZ27FtjPA/giphy_s.gif",
+          "height": 400,
+          "width": 480
+        }
+      }
+    }
+  },
+  "VERSION": "5.1.1"
+}

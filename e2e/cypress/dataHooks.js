@@ -17,8 +17,11 @@ export const INLINE_TOOLBAR_BUTTONS = {
 };
 
 export const PLUGIN_TOOLBAR_BUTTONS = {
+  SMALL: 'blockSizeButton_sizeSmall',
+  MEDIUM: 'blockSizeButton_sizeMedium',
+  LARGE: 'blockSizeButton_sizeLarge',
   ORIGINAL: 'blockAlignmentAndSizeButton_sizeOriginal',
-  SMALL: 'blockAlignmentAndSizeButton_sizeSmallCenter',
+  SMALL_CENTER: 'blockAlignmentAndSizeButton_sizeSmallCenter',
   BEST_FIT: 'blockAlignmentAndSizeButton_sizeContent',
   FULL_WIDTH: 'blockAlignmentAndSizeButton_sizeFullWidth',
   ALIGN_LEFT: 'blockAlignmentButton_alignLeft',
@@ -26,6 +29,7 @@ export const PLUGIN_TOOLBAR_BUTTONS = {
   ALIGN_RIGHT: 'blockAlignmentButton_alignRight',
   LINK: 'LinkButton',
   SETTINGS: 'baseToolbarButton_settings',
+  REPLACE: 'baseToolbarButton_replace',
   DELETE: 'blockButton_delete',
 };
 
@@ -45,4 +49,11 @@ export const PLUGIN_COMPONENT = {
   SOUND_CLOUD: 'soundCloudPlayer',
   MAP: 'mapViewer',
   FILE_UPLOAD: 'fileUploadViewer',
+};
+
+export const DIVIDER_DROPDOWN_OPTIONS = {
+  SINGLE: 'single_dropdown_option',
+  DOUBLE: 'double_dropdown_option',
+  DASHED: 'dashed_dropdown_option',
+  DOTTED: 'dotted_dropdown_option',
 };

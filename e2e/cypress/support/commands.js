@@ -1,7 +1,12 @@
 require('cypress-plugin-snapshots/commands');
 import { addMatchImageSnapshotCommand } from 'cypress-image-snapshot/command';
 addMatchImageSnapshotCommand();
-import { INLINE_TOOLBAR_BUTTONS, PLUGIN_TOOLBAR_BUTTONS, IMAGE_SETTINGS } from '../dataHooks';
+import {
+  INLINE_TOOLBAR_BUTTONS,
+  PLUGIN_TOOLBAR_BUTTONS,
+  IMAGE_SETTINGS,
+  PLUGIN_COMPONENT,
+} from '../dataHooks';
 
 const resizeForDesktop = () => cy.viewport('macbook-15');
 const resizeForMobile = () => cy.viewport('iphone-5');
@@ -207,11 +212,19 @@ Cypress.Commands.add('openAddPluginModal', () => {
 });
 
 Cypress.Commands.add('openImageSettings', () => {
-  cy.get('[data-hook=imageViewer]:first')
+  cy.get(`[data-hook=${PLUGIN_COMPONENT.IMAGE}]:first`)
     .parent()
     .click();
-  cy.get(`[data-hook=${PLUGIN_TOOLBAR_BUTTONS.SETTINGS}]:first`).click();
+  cy.get(`[data-hook=${PLUGIN_TOOLBAR_BUTTONS.SETTINGS}][tabindex=0]`).click();
   cy.get('[data-hook="imageSettings"]');
+});
+
+Cypress.Commands.add('openMapSettings', () => {
+  cy.get(`[data-hook=${PLUGIN_COMPONENT.MAP}]:first`)
+    .parent()
+    .click();
+  cy.get(`[data-hook=${PLUGIN_TOOLBAR_BUTTONS.SETTINGS}][tabindex=0]`).click();
+  cy.get('[data-hook="mapSettings"]');
 });
 
 Cypress.Commands.add('addImageTitle', () => {
@@ -251,10 +264,18 @@ Cypress.Commands.add('alignImage', alignment => {
 });
 
 Cypress.Commands.add('openPluginToolbar', plugin => {
-  cy.get(`[data-hook*=${plugin}]:first`)
+  cy.get(`[data-hook*=${plugin}]`)
+    .first()
     .parent()
     .click();
   cy.get('[data-hook*="PluginToolbar"]:first');
+});
+
+Cypress.Commands.add('openDropdownMenu', (selector = '') => {
+  cy.get('button[role=combobox][data-hook=baseToolbarButton_type]').click();
+  if (selector) {
+    cy.get(selector).click();
+  }
 });
 
 // disable screenshots in debug mode. So there is no diffrence to ci.
