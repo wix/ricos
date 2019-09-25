@@ -501,16 +501,16 @@ exports[`plugins > soundcloud > should enable to add a soundcloud URI #0`] =
           "author_name": "Wix.com",
           "author_url": "https://www.youtube.com/user/Wix",
           "height": 270,
-          "html": "<iframe width=\"480\" height=\"270\" src=\"https://www.youtube.com/embed/_zuIxexRrtk?feature=oembed\" frameborder=\"0\" allow=\"autoplay; encrypted-media\" allowfullscreen></iframe>",
+          "html": "<iframe width=\"480\" height=\"270\" src=\"https://www.youtube.com/embed/BBu5codsO6Y?feature=oembed\" frameborder=\"0\" allow=\"autoplay; encrypted-media\" allowfullscreen></iframe>",
           "provider_name": "YouTube",
           "provider_url": "https://www.youtube.com/",
           "thumbnail_height": 360,
-          "thumbnail_url": "https://i.ytimg.com/vi/_zuIxexRrtk/hqdefault.jpg",
+          "thumbnail_url": "https://i.ytimg.com/vi/BBu5codsO6Y/hqdefault.jpg",
           "thumbnail_width": 480,
-          "title": "How to Build a Wix Website for Your Business | James Veitch",
+          "title": "iJustine | Create a Website with Wix Artificial Design Intelligence",
           "type": "video",
           "version": "1.0",
-          "video_url": "https://youtu.be/_zuIxexRrtk",
+          "video_url": "https://youtu.be/BBu5codsO6Y",
           "width": 480
         },
         "src": "https://soundcloud.com/nlechoppa/camelot"
@@ -532,9 +532,47 @@ exports[`plugins > html > should render plugin toolbar #0`] =
       "key": 0,
       "text": "",
       "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "",
+      "type": "unstyled"
     }
   ],
-  "entityMap": {}
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "height": 550,
+          "width": 350
+        },
+        "src": "<blockquote class=\"twitter-tweet\" data-lang=\"en\"><p lang=\"en\" dir=\"ltr\">The updates, insights and stories of the engineering challenges we encounter, and our way of solving them. Subscribe to our fresh, monthly newsletter and get these goodies right to your e-mail:<a href=\"https://t.co/0ziRSJJAxK\">https://t.co/0ziRSJJAxK</a> <a href=\"https://t.co/nTHlsG5z2a\">pic.twitter.com/nTHlsG5z2a</a></p>&mdash; Wix Engineering (@WixEng) <a href=\"https://twitter.com/WixEng/status/1076810144774868992?ref_src=twsrc%5Etfw\">December 23, 2018</a></blockquote> <script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script>",
+        "srcType": "html"
+      },
+      "mutability": "IMMUTABLE",
+      "type": "wix-draft-plugin-html"
+    }
+  }
 };
 
 exports[`plugins > html > should render settings #0`] =
@@ -548,7 +586,45 @@ exports[`plugins > html > should render settings #0`] =
       "key": 0,
       "text": "",
       "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "",
+      "type": "unstyled"
     }
   ],
-  "entityMap": {}
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "height": 550,
+          "width": 350
+        },
+        "src": "<blockquote class=\"twitter-tweet\" data-lang=\"en\"><p lang=\"en\" dir=\"ltr\">The updates, insights and stories of the engineering challenges we encounter, and our way of solving them. Subscribe to our fresh, monthly newsletter and get these goodies right to your e-mail:<a href=\"https://t.co/0ziRSJJAxK\">https://t.co/0ziRSJJAxK</a> <a href=\"https://t.co/nTHlsG5z2a\">pic.twitter.com/nTHlsG5z2a</a></p>&mdash; Wix Engineering (@WixEng) <a href=\"https://twitter.com/WixEng/status/1076810144774868992?ref_src=twsrc%5Etfw\">December 23, 2018</a></blockquote> <script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script>",
+        "srcType": "html"
+      },
+      "mutability": "IMMUTABLE",
+      "type": "wix-draft-plugin-html"
+    }
+  }
 };
