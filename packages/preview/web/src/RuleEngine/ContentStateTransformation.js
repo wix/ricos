@@ -28,6 +28,13 @@ class ContentStateTransformation {
       return builder;
     }, previewStateBuilder);
   }
+
+  toObject() {
+    return this.rules.map(rule => ({
+      _if: rule._if.toString(),
+      _then: rule._then.toString(),
+    }));
+  }
 }
 
 export default ContentStateTransformation;

@@ -55,7 +55,8 @@
     "wix-rich-content-plugin-text-color": "5.0.1",
     "wix-rich-content-plugin-video": "5.0.1",
     "wix-rich-content-viewer": "5.0.1",
-    "wix-rich-content-preview": "5.0.1"
+    "wix-rich-content-preview": "5.0.1",
+    "dedent": "latest"
   },
   "scripts": {
     "clean": "rm -rf dist/",
