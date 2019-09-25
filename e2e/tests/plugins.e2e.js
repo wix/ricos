@@ -87,7 +87,7 @@ describe('plugins', () => {
     afterEach(() => cy.matchSnapshots({ capture: 'viewport' }));
   });
 
-  context('html', () => {
+  context.only('html', () => {
     it('should render plugin toolbar', () => {
       cy.loadEditor('html').openPluginToolbar(PLUGIN_COMPONENT.HTML);
     });
@@ -149,4 +149,15 @@ describe('plugins', () => {
 
     afterEach(() => cy.matchSnapshots({ capture: 'viewport' }));
   });
+
+  context('file-upload', () => {
+    before('load editor', () => cy.loadEditor('file-upload'));
+
+    it('should render plugin toolbar', () => {
+      cy.openPluginToolbar(PLUGIN_COMPONENT.FILE_UPLOAD);
+      // applitools eyes
+    });
+  });
+
+  //   afterEach(() => cy.matchSnapshots({ capture: 'viewport' }));
 });

@@ -344,7 +344,7 @@ export class MapSettingsModal extends Component {
         {this.renderInjectedStyles()}
         {isMobile && this.renderMobileNavBar()}
 
-        <div className={this.styles.map_settings_modal_settings_container}>
+        <div className={this.styles.map_settings_modal_settings_container} data-hook="mapSettings">
           <div
             className={classNames(
               this.styles.map_settings_modal_title_container,
