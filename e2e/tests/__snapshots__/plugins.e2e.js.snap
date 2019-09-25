@@ -344,6 +344,22 @@ exports[`plugins > video > should enable to add a video from URI #0`] =
           "size": "content"
         },
         "isCustomVideo": false,
+        "metadata": {
+          "author_name": "Wix.com",
+          "author_url": "https://www.youtube.com/user/Wix",
+          "height": 270,
+          "html": "<iframe width=\"480\" height=\"270\" src=\"https://www.youtube.com/embed/jhXlnvYZZQs?feature=oembed\" frameborder=\"0\" allow=\"autoplay; encrypted-media\" allowfullscreen></iframe>",
+          "provider_name": "YouTube",
+          "provider_url": "https://www.youtube.com/",
+          "thumbnail_height": 360,
+          "thumbnail_url": "https://i.ytimg.com/vi/jhXlnvYZZQs/hqdefault.jpg",
+          "thumbnail_width": 480,
+          "title": "Wix.com Official 2018 Big Game Ad with Rhett & Link — Extended Version",
+          "type": "video",
+          "version": "1.0",
+          "video_url": "https://youtu.be/jhXlnvYZZQs",
+          "width": 480
+        },
         "src": "https://www.youtube.com/watch?v=Xj3gU3jACe8"
       },
       "mutability": "IMMUTABLE",
@@ -397,6 +413,22 @@ exports[`plugins > video > should enable to add a custom video #0`] =
           "size": "content"
         },
         "isCustomVideo": true,
+        "metadata": {
+          "author_name": "Wix.com",
+          "author_url": "https://www.youtube.com/user/Wix",
+          "height": 270,
+          "html": "<iframe width=\"480\" height=\"270\" src=\"https://www.youtube.com/embed/BBu5codsO6Y?feature=oembed\" frameborder=\"0\" allow=\"autoplay; encrypted-media\" allowfullscreen></iframe>",
+          "provider_name": "YouTube",
+          "provider_url": "https://www.youtube.com/",
+          "thumbnail_height": 360,
+          "thumbnail_url": "https://i.ytimg.com/vi/BBu5codsO6Y/hqdefault.jpg",
+          "thumbnail_width": 480,
+          "title": "iJustine | Create a Website with Wix Artificial Design Intelligence",
+          "type": "video",
+          "version": "1.0",
+          "video_url": "https://youtu.be/BBu5codsO6Y",
+          "width": 480
+        },
         "src": "http://mirrors.standaloneinstaller.com/video-sample/jellyfish-25-mbps-hd-hevc.mp4"
       },
       "mutability": "IMMUTABLE",
@@ -464,6 +496,22 @@ exports[`plugins > soundcloud > should enable to add a soundcloud URI #0`] =
         "config": {
           "alignment": "center",
           "size": "content"
+        },
+        "metadata": {
+          "author_name": "Wix.com",
+          "author_url": "https://www.youtube.com/user/Wix",
+          "height": 270,
+          "html": "<iframe width=\"480\" height=\"270\" src=\"https://www.youtube.com/embed/_zuIxexRrtk?feature=oembed\" frameborder=\"0\" allow=\"autoplay; encrypted-media\" allowfullscreen></iframe>",
+          "provider_name": "YouTube",
+          "provider_url": "https://www.youtube.com/",
+          "thumbnail_height": 360,
+          "thumbnail_url": "https://i.ytimg.com/vi/_zuIxexRrtk/hqdefault.jpg",
+          "thumbnail_width": 480,
+          "title": "How to Build a Wix Website for Your Business | James Veitch",
+          "type": "video",
+          "version": "1.0",
+          "video_url": "https://youtu.be/_zuIxexRrtk",
+          "width": 480
         },
         "src": "https://soundcloud.com/nlechoppa/camelot"
       },
