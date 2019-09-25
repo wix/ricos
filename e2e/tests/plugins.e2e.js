@@ -161,7 +161,6 @@ describe('plugins', () => {
       cy.openPluginToolbar(PLUGIN_COMPONENT.FILE_UPLOAD);
       // applitools eyes
     });
+    afterEach(() => cy.matchSnapshots({ capture: 'viewport' }));
   });
-
-  //   afterEach(() => cy.matchSnapshots({ capture: 'viewport' }));
 });
