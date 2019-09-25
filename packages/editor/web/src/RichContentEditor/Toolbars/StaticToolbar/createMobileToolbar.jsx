@@ -25,6 +25,7 @@ const createMobileToolbar = ({
   displayOptions,
   toolbarDecorationFn,
   config,
+  locale,
 }) => {
   const mobileTheme = getMobileTheme(theme);
   return createStaticToolbar({
@@ -53,6 +54,7 @@ const createMobileToolbar = ({
     uiSettings,
     displayOptions,
     toolbarDecorationFn,
+    locale,
   });
 };
 
