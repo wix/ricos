@@ -35,12 +35,19 @@ describe('plugins', () => {
     it('should render settings', () => {
       cy.loadEditor('gallery').openGalleryImageSettings();
     });
+
+    it('should allow to add a title', () => {
+      cy.loadEditorAndViewer('gallery')
+        .openGalleryImageSettings()
+        .addGalleryImageTitle()
+        .checkTitle();
+    });
   });
 
   context('video', () => {
-    it('should render plugin toolbar', () => {});
-
-    it('should render settings', () => {});
+    it('should enable to add a video', () => {
+      cy.loadEditor('empty').addVideo();
+    });
   });
 
   context('html', () => {

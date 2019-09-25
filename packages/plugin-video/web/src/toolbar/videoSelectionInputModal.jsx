@@ -169,6 +169,7 @@ export default class VideoSelectionInputModal extends Component {
               }
               onClick={() => this.onConfirm()}
               ariaProps={!this.state.url && { disabled: 'disabled' }}
+              dataHook="videoUploadModalAddButton"
             >
               {t('VideoUploadModal_AddButtonText')}
             </Button>
