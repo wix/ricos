@@ -98,7 +98,7 @@ describe('plugins', () => {
     });
   });
 
-  context.only('map', () => {
+  context('map', () => {
     before('load editor', () => cy.loadEditor('map'));
 
     it('should render plugin toolbar', () => {
