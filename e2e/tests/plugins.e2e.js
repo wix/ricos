@@ -50,7 +50,7 @@ describe('plugins', () => {
       cy.openGalleryAdvancedSettings()
         .openGallerySettings()
         .openGalleryImageSettings()
-        .addGalleryImageTitle()
+        .addGalleryImageTitle(PLUGIN_COMPONENT.IMAGE)
         .checkTitle();
     });
   });

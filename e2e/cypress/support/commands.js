@@ -246,6 +246,7 @@ Cypress.Commands.add('openGalleryImageSettings', () => {
   cy.get(`[data-hook=${GALLERY_SETTINGS.IMAGE}]:first`).click();
   cy.get(`[data-hook=${GALLERY_SETTINGS.EDIT_IMAGE}]`).click();
 });
+
 Cypress.Commands.add('addImageTitle', () => {
   cy.get(`[data-hook=${IMAGE_SETTINGS.CAPTION}]`)
     .click()
@@ -254,13 +255,15 @@ Cypress.Commands.add('addImageTitle', () => {
     .click();
 });
 
-Cypress.Commands.add('addGalleryImageTitle', () => {
+Cypress.Commands.add('addGalleryImageTitle', (pluginToClick = null) => {
   cy.get(`[data-hook=${GALLERY_SETTINGS.TITLE}]`).type('Title');
   cy.get(`[data-hook=${SETTINGS_PANEL.DONE}]:first`).click({ multiple: true });
   cy.get(`[data-hook=${SETTINGS_PANEL.DONE}]`).click();
-  cy.get(`[data-hook=${PLUGIN_COMPONENT.IMAGE}]:first`)
-    .parent()
-    .click();
+  pluginToClick &&
+    cy
+      .get(`[data-hook=${pluginToClick}]:first`)
+      .parent()
+      .click();
 });
 
 Cypress.Commands.add('checkTitle', () => {
