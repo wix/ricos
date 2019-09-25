@@ -124,37 +124,14 @@ exports[`plugins > divider > should render plugin toolbar #0`] =
       "data": {
         "config": {
           "alignment": "center",
-          "size": "large",
-          "textWrap": "nowrap"
+          "showDescription": true,
+          "showTitle": true,
+          "size": "content"
         },
         "type": "double"
       },
       "mutability": "IMMUTABLE",
-      "type": "wix-draft-plugin-divider"
-    },
-    "2": {
-      "data": {
-        "config": {
-          "alignment": "center",
-          "size": "large",
-          "textWrap": "nowrap"
-        },
-        "type": "dashed"
-      },
-      "mutability": "IMMUTABLE",
-      "type": "wix-draft-plugin-divider"
-    },
-    "3": {
-      "data": {
-        "config": {
-          "alignment": "center",
-          "size": "large",
-          "textWrap": "nowrap"
-        },
-        "type": "dotted"
-      },
-      "mutability": "IMMUTABLE",
-      "type": "wix-draft-plugin-divider"
+      "type": "wix-draft-plugin-image"
     }
   }
 };
@@ -224,7 +201,7 @@ exports[`plugins > divider > should render settings #0`] =
       "depth": 0,
       "entityRanges": [
         {
-          "key": 2,
+          "key": 0,
           "length": 1,
           "offset": 0
         }
@@ -248,7 +225,7 @@ exports[`plugins > divider > should render settings #0`] =
       "depth": 0,
       "entityRanges": [
         {
-          "key": 3,
+          "key": 1,
           "length": 1,
           "offset": 0
         }
@@ -285,37 +262,236 @@ exports[`plugins > divider > should render settings #0`] =
       "data": {
         "config": {
           "alignment": "center",
-          "size": "large",
-          "textWrap": "nowrap"
+          "showDescription": true,
+          "showTitle": true,
+          "size": "content"
         },
         "type": "double"
       },
       "mutability": "IMMUTABLE",
-      "type": "wix-draft-plugin-divider"
-    },
-    "2": {
-      "data": {
-        "config": {
-          "alignment": "center",
-          "size": "large",
-          "textWrap": "nowrap"
-        },
-        "type": "dashed"
-      },
-      "mutability": "IMMUTABLE",
-      "type": "wix-draft-plugin-divider"
-    },
-    "3": {
-      "data": {
-        "config": {
-          "alignment": "center",
-          "size": "large",
-          "textWrap": "nowrap"
-        },
-        "type": "dotted"
-      },
-      "mutability": "IMMUTABLE",
-      "type": "wix-draft-plugin-divider"
+      "type": "wix-draft-plugin-image"
     }
   }
+};
+
+exports[`plugins > video > should render upload modal #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {}
+};
+
+exports[`plugins > video > should enable to add a video from URI #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "size": "content"
+        },
+        "isCustomVideo": false,
+        "src": "https://www.youtube.com/watch?v=Xj3gU3jACe8"
+      },
+      "mutability": "IMMUTABLE",
+      "type": "wix-draft-plugin-video"
+    }
+  }
+};
+
+exports[`plugins > video > should enable to add a custom video #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "size": "content"
+        },
+        "isCustomVideo": true,
+        "src": "http://mirrors.standaloneinstaller.com/video-sample/jellyfish-25-mbps-hd-hevc.mp4"
+      },
+      "mutability": "IMMUTABLE",
+      "type": "wix-draft-plugin-video"
+    }
+  }
+};
+
+exports[`plugins > soundcloud > should render upload modal #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {}
+};
+
+exports[`plugins > soundcloud > should enable to add a soundcloud URI #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "size": "content"
+        },
+        "src": "https://soundcloud.com/nlechoppa/camelot"
+      },
+      "mutability": "IMMUTABLE",
+      "type": "wix-draft-plugin-sound-cloud"
+    }
+  }
+};
+
+exports[`plugins > html > should render plugin toolbar #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {}
+};
+
+exports[`plugins > html > should render settings #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {}
 };

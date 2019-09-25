@@ -134,5 +134,5 @@ describe('plugins', () => {
     });
   });
 
-  //   afterEach(() => cy.matchSnapshots({ capture: 'viewport' }));
+  // afterEach(() => cy.matchSnapshots({ capture: 'viewport' }));
 });
