@@ -16,6 +16,15 @@ export const INLINE_TOOLBAR_BUTTONS = {
   CODE_BLOCK: 'TextCodeBlockButton',
 };
 
+export const STATIC_TOOLBAR_BUTTONS = {
+  VIDEO: 'Video_insert_plugin_button',
+  SOUND_CLOUD: 'SoundCloud_insert_plugin_button',
+};
+
+export const SETTINGS_PANEL = {
+  DONE: 'settingPanelFooterDone',
+};
+
 export const PLUGIN_TOOLBAR_BUTTONS = {
   SMALL: 'blockSizeButton_sizeSmall',
   MEDIUM: 'blockSizeButton_sizeMedium',
@@ -37,7 +46,6 @@ export const PLUGIN_TOOLBAR_BUTTONS = {
 export const IMAGE_SETTINGS = {
   CAPTION: 'imageSettingsCaptionInput',
   LINK: 'linkPanelInput',
-  DONE: 'settingPanelFooterDone',
 };
 
 export const GALLERY_SETTINGS = {
@@ -45,13 +53,12 @@ export const GALLERY_SETTINGS = {
   EDIT_IMAGE: 'galleryItemsSortableItemSettings',
   TITLE: 'galleryImageTitleInput',
   VIEWER_IMAGE: 'item-social',
-  DONE: 'settingPanelFooterDone',
 };
 
 export const VIDEO_PLUGIN = {
-  STATIC_TOOLBAR_VIDEO: 'Video_insert_plugin_button',
   INPUT: 'videoUploadModalInput',
   ADD: 'videoUploadModalAddButton',
+  CUSTOM: 'videoUploadModalCustomVideo',
 };
 
 export const PLUGIN_COMPONENT = {
