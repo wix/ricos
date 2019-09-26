@@ -51,7 +51,7 @@ export const IMAGE_SETTINGS = {
 };
 
 export const GALLERY_SETTINGS = {
-  IMAGE: 'galleryItemsSortable',
+  IMAGE: 'galleryItemPreview',
   EDIT_IMAGE: 'galleryItemsSortableItemSettings',
   TITLE: 'galleryImageTitleInput',
   VIEWER_IMAGE: 'item-social',

@@ -1,7 +1,7 @@
 {
   "blocks": [
     {
-      "key": "1h24c",
+      "key": "d4rfh",
       "text": "",
       "type": "unstyled",
       "depth": 0,
@@ -10,7 +10,7 @@
       "data": {}
     },
     {
-      "key": "9nc8d",
+      "key": "ubva",
       "text": " ",
       "type": "atomic",
       "depth": 0,
@@ -25,7 +25,7 @@
       "data": {}
     },
     {
-      "key": "2bth4",
+      "key": "ecgbs",
       "text": "",
       "type": "unstyled",
       "depth": 0,
@@ -34,7 +34,16 @@
       "data": {}
     },
     {
-      "key": "s26f",
+      "key": "1k6h4",
+      "text": "This is a test of the gallery plugin.",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "6078v",
       "text": "",
       "type": "unstyled",
       "depth": 0,
@@ -43,7 +52,7 @@
       "data": {}
     },
     {
-      "key": "cvokh",
+      "key": "1ie98",
       "text": " ",
       "type": "atomic",
       "depth": 0,
@@ -58,7 +67,7 @@
       "data": {}
     },
     {
-      "key": "ai4af",
+      "key": "64sma",
       "text": "",
       "type": "unstyled",
       "depth": 0,
@@ -75,57 +84,21 @@
         "items": [
           {
             "metadata": {
-              "height": 3413,
-              "width": 5120,
+              "height": 1893,
+              "width": 2839,
               "processedByConsumer": true
             },
-            "itemId": "482299c977636db0d6e6d7c91642478e",
-            "url": "8bb438_0a2865bde9ab4fa5bc6b1cea232cf197.jpg"
+            "itemId": "65a6266ba23a8a55da3f469157f15237",
+            "url": "8bb438_2d651ff17f644d0db766521a18bf888b.jpg"
           },
           {
             "metadata": {
-              "height": 4200,
-              "width": 2799,
+              "height": 2829,
+              "width": 4200,
               "processedByConsumer": true
             },
-            "itemId": "098281dfb9701c0068f786bc8aab0390",
-            "url": "8bb438_0d738ee5a4a04f54891e08488fd7c7bc.jpg"
-          },
-          {
-            "metadata": {
-              "height": 1280,
-              "width": 1920,
-              "processedByConsumer": true
-            },
-            "itemId": "5172248b57a96f7c30bc23b2faea99ce",
-            "url": "8bb438_06c1495cace048508cf7ad6db10918a8.jpg"
-          },
-          {
-            "metadata": {
-              "height": 3737,
-              "width": 5600,
-              "processedByConsumer": true
-            },
-            "itemId": "5dd5a6e757c702b2856a3a2f4bb00154",
-            "url": "8bb438_2798f080526a4d3f8cb89d93e305a0b8.jpg"
-          },
-          {
-            "metadata": {
-              "height": 3733,
-              "width": 5600,
-              "processedByConsumer": true
-            },
-            "itemId": "c28d48f6383e8b3a71b218ad25bd4bb9",
-            "url": "8bb438_603549efcb714170bb71fe0757f37561.jpg"
-          },
-          {
-            "metadata": {
-              "height": 1081,
-              "width": 1621,
-              "processedByConsumer": true
-            },
-            "itemId": "75318326db54174bea73594c3c25873a",
-            "url": "8bb438_0795e40ac4db438a8a723ea98dbeda10.jpg"
+            "itemId": "ea8ec1609e052b7f196935318316299d",
+            "url": "8bb438_149b418b9bfb47e0adafc569ca55c5e9.jpg"
           }
         ],
         "styles": {
@@ -174,11 +147,11 @@
           "showDescription": true
         },
         "src": {
-          "id": "b091d8ac038d07476546bef2475a7b03",
-          "original_file_name": "8bb438_e353d9a6ec324041a17a28d10e21819d.jpg",
-          "file_name": "8bb438_e353d9a6ec324041a17a28d10e21819d.jpg",
-          "width": 5600,
-          "height": 3727
+          "id": "d052fe7e6db2fd246708f8e56ddc3684",
+          "original_file_name": "8bb438_4a6550d4df364f9890180f52243fb396.jpg",
+          "file_name": "8bb438_4a6550d4df364f9890180f52243fb396.jpg",
+          "width": 1621,
+          "height": 1081
         }
       }
     }

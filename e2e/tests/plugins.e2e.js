@@ -38,7 +38,13 @@ describe('plugins', () => {
   });
 
   context('gallery', () => {
-    beforeEach('load editor', () => cy.loadEditorAndViewer('gallery'));
+    beforeEach('load editor', () =>
+      cy
+        .loadEditorAndViewer('gallery')
+        .get(`[data-hook=${'image-item'}]:first`)
+        .get(`[data-hook=${'image-item'}]`)
+        .eq(1)
+    );
 
     it('should render plugin toolbar', () => {
       cy.openPluginToolbar(PLUGIN_COMPONENT.GALLERY).shrinkPlugin();
@@ -55,6 +61,8 @@ describe('plugins', () => {
         .shrinkPlugin()
         .openGalleryAdvancedSettings()
         .openGallerySettings();
+      cy.get(`[data-hook=${GALLERY_SETTINGS.IMAGE}]:first`);
+      cy.get(`[data-hook=${GALLERY_SETTINGS.IMAGE}]`).eq(1);
     });
 
     it('should render gallery image settings', () => {
@@ -72,7 +80,7 @@ describe('plugins', () => {
         .openGalleryAdvancedSettings()
         .openGallerySettings()
         .openGalleryImageSettings()
-        .addGalleryImageTitle(PLUGIN_COMPONENT.IMAGE)
+        .addGalleryImageTitle()
         .checkTitle();
     });
     afterEach(() => cy.matchSnapshots({ capture: 'viewport' }));
@@ -85,19 +93,19 @@ describe('plugins', () => {
       cy.openVideoUploadModal();
     });
 
-    it('should enable to add a video from URI', () => {
-      cy.openVideoUploadModal()
-        .addVideoFromURI()
-        .shrinkPlugin();
-      cy.get(`[data-hook=${PLUGIN_COMPONENT.VIDEO}]:first`);
-    });
+    //   it('should enable to add a video from URI', () => {
+    //     cy.openVideoUploadModal()
+    //       .addVideoFromURI()
+    //       .shrinkPlugin();
+    //     cy.get(`[data-hook=${PLUGIN_COMPONENT.VIDEO}]:first`);
+    //   });
 
-    // it('should enable to add a custom video', () => {
-    //   cy.openVideoUploadModal()
-    //     .addCustomVideo()
-    //     .shrinkPlugin();
-    //   cy.get(`[data-hook=${PLUGIN_COMPONENT.VIDEO}]:first`);
-    // });
+    //   it('should enable to add a custom video', () => {
+    //     cy.openVideoUploadModal()
+    //       .addCustomVideo()
+    //       .shrinkPlugin();
+    //     cy.get(`[data-hook=${PLUGIN_COMPONENT.VIDEO}]:first`);
+    //   });
     afterEach(() => cy.matchSnapshots({ capture: 'viewport' }));
   });
 
@@ -108,12 +116,12 @@ describe('plugins', () => {
       cy.openSoundCloudModal();
     });
 
-    it('should enable to add a soundcloud URI', () => {
-      cy.openSoundCloudModal()
-        .addSoundCloud()
-        .shrinkPlugin();
-      cy.get(`[data-hook=${PLUGIN_COMPONENT.SOUND_CLOUD}]:first`);
-    });
+    // it('should enable to add a soundcloud URI', () => {
+    //   cy.openSoundCloudModal()
+    //     .addSoundCloud()
+    //     .shrinkPlugin();
+    //   cy.get(`[data-hook=${PLUGIN_COMPONENT.SOUND_CLOUD}]:first`);
+    // });
     afterEach(() => cy.matchSnapshots({ capture: 'viewport' }));
   });
 
