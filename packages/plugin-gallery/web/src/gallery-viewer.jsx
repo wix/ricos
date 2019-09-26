@@ -63,7 +63,10 @@ class GalleryViewer extends React.Component {
       this.hasTitle(items)
     );
     // TODO remove gallery key
-    const galleryKey = Math.random();
+    const galleryKey =
+      this.state && isEqual(this.state.styleParams, styleParams) && isEqual(this.state.items, items)
+        ? this.state.galleryKey
+        : Math.random();
     return {
       galleryKey,
       items,
