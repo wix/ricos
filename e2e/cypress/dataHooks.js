@@ -47,6 +47,7 @@ export const PLUGIN_TOOLBAR_BUTTONS = {
 export const IMAGE_SETTINGS = {
   CAPTION: 'imageSettingsCaptionInput',
   LINK: 'linkPanelInput',
+  PREVIEW: 'imagePreview',
 };
 
 export const GALLERY_SETTINGS = {
@@ -54,6 +55,7 @@ export const GALLERY_SETTINGS = {
   EDIT_IMAGE: 'galleryItemsSortableItemSettings',
   TITLE: 'galleryImageTitleInput',
   VIEWER_IMAGE: 'item-social',
+  PREVIEW: 'galleryImagePreview',
 };
 
 export const VIDEO_PLUGIN = {
