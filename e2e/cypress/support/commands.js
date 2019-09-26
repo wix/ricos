@@ -239,6 +239,12 @@ Cypress.Commands.add('openGalleryAdvancedSettings', () => {
   cy.get(`[data-hook=${PLUGIN_TOOLBAR_BUTTONS.ADV_SETTINGS}]:first`).click();
 });
 
+Cypress.Commands.add('shrinkPlugin', () => {
+  cy.get(`button[data-hook=${PLUGIN_TOOLBAR_BUTTONS.SMALL_CENTER}][tabindex=0]`)
+    .click({ multiple: true })
+    .click();
+});
+
 Cypress.Commands.add('openGallerySettings', () => {
   cy.get('[data-hook="manage_media_Tab"]').click();
 });

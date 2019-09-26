@@ -142,6 +142,7 @@ class ImageSettings extends Component {
                     className={classNames(styles.galleryImageSettings_nav, {
                       [styles.galleryImageSettings_nav_mobile]: isMobile,
                     })}
+                    data-hook="galleryImagePreview"
                   >
                     <button
                       className={classNames(styles.galleryImageSettings_previous, {
