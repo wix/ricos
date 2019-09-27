@@ -172,6 +172,7 @@ export const config = {
   },
   [EXTERNAL_MENTIONS_TYPE]: {
     repositionSuggestions: true,
+    visibleItemsBeforeOverflow: 5,
     onMentionClick: mention => console.log({ mention }),
     getMentions: searchQuery =>
       new Promise(resolve =>
@@ -184,6 +185,10 @@ export const config = {
               { name: 'Test One.2', slug: 'testone2' },
               { name: 'Test One.3', slug: 'testone3' },
               { name: 'Test One.4', slug: 'testone4' },
+              { name: 'Test One.5', slug: 'testone5' },
+              { name: 'Test One.6', slug: 'testone6' },
+              { name: 'Test One.7', slug: 'testone7' },
+              { name: 'Test One.8', slug: 'testone8' },
               {
                 name: 'Test Two',
                 slug: 'testwo',
