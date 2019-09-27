@@ -17,7 +17,6 @@ export const positionSuggestions = ({
   reposition = false,
   visibleItemsBeforeOverflow,
 } = {}) => ({ decoratorRect, popover, state, props }) => {
-  console.log({ visibleItemsBeforeOverflow });
   const relativeParent = getRelativeParent(popover.parentElement);
   const relativeRect = {};
 
