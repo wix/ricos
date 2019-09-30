@@ -11,6 +11,8 @@
 ### :rocket: New Feature
 - `gallery`
   - [#391](https://github.com/wix-incubator/rich-content/pull/391) gallery image titles
+- `mentions`
+  - [#402](https://github.com/wix-incubator/rich-content/pull/402) mentions suggestion box size controll
 ### :bug: Bug Fix
 - `editor`
   - [#392](https://github.com/wix-incubator/rich-content/pull/392) text in line toolbar has tooltips
