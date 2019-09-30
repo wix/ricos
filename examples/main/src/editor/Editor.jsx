@@ -86,7 +86,6 @@ export default class Editor extends PureComponent {
         try {
           document.documentElement.style.height = 'initial';
           document.documentElement.style.position = 'initial';
-
         } catch (e) {
           console.warn('Cannot change document styles', e);
         }
