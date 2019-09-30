@@ -1,7 +1,7 @@
 require('cypress-plugin-snapshots/commands');
 import { addMatchImageSnapshotCommand } from 'cypress-image-snapshot/command';
 addMatchImageSnapshotCommand();
-import { INLINE_TOOLBAR_BUTTONS } from '../dataHooks';
+import { INLINE_TOOLBAR_BUTTONS, PLUGIN_TOOLBAR_BUTTONS } from '../dataHooks';
 
 const resizeForDesktop = () => cy.viewport('macbook-15');
 const resizeForMobile = () => cy.viewport('iphone-5');
@@ -82,7 +82,7 @@ Cypress.Commands.add('blurEditor', () => {
   getEditor()
     .blur()
     .get('[data-hook=inlineToolbar]')
-    .should('not.exist');
+    .should('not.visible');
 });
 
 Cypress.Commands.add('focusEditor', () => {
@@ -198,8 +198,27 @@ Cypress.Commands.add('openImageSettings', () => {
   cy.get('[data-hook=imageViewer]:first')
     .parent()
     .click();
-  cy.get('[aria-label=Settings]').click();
+  cy.get(`[data-hook=${PLUGIN_TOOLBAR_BUTTONS.SETTINGS}]:first`).click();
   cy.get('[data-hook="imageSettings"]');
+});
+
+Cypress.Commands.add('alignImage', alignment => {
+  let button;
+  switch (alignment) {
+    case 'left':
+      button = PLUGIN_TOOLBAR_BUTTONS.ALIGN_LEFT;
+      break;
+    case 'center':
+      button = PLUGIN_TOOLBAR_BUTTONS.ALIGN_CENTER;
+      break;
+    case 'right':
+    default:
+      button = PLUGIN_TOOLBAR_BUTTONS.ALIGN_RIGHT;
+  }
+  cy.get('[data-hook=imageViewer]:first')
+    .parent()
+    .click();
+  cy.get(`[data-hook=${button}]:first`).click();
 });
 
 // disable screenshots in debug mode. So there is no diffrence to ci.

@@ -380,16 +380,19 @@ class RichContentEditor extends Component {
       <Context.Provider value={this.contextualData}>
         <Measure bounds onResize={this.onResize}>
           {({ measureRef }) => (
-            <div dir={this.contextualData.languageDir}>
-              <div style={this.props.style} ref={measureRef} className={wrapperClassName}>
-                {this.renderStyleTag()}
-                <div className={classNames(styles.editor, theme.editor)}>
-                  {this.renderAccessibilityListener()}
-                  {this.renderEditor()}
-                  {this.renderToolbars()}
-                  {this.renderInlineModals()}
-                  {this.renderTooltipHost()}
-                </div>
+            <div
+              style={this.props.style}
+              ref={measureRef}
+              className={wrapperClassName}
+              dir={this.contextualData.languageDir}
+            >
+              {this.renderStyleTag()}
+              <div className={classNames(styles.editor, theme.editor)}>
+                {this.renderAccessibilityListener()}
+                {this.renderEditor()}
+                {this.renderToolbars()}
+                {this.renderInlineModals()}
+                {this.renderTooltipHost()}
               </div>
             </div>
           )}

@@ -2,9 +2,14 @@
 
 import imageClientAPI from 'image-client-api';
 
-const getWixFilename = url => url.replace('https://static.wixstatic.com/media/', '');
+const WIX_MEDIA_BASE_URL = 'https://static.wixstatic.com/media/';
 
-const resizeUrlImp = (
+const getWixFilename = url => url.replace(WIX_MEDIA_BASE_URL, '');
+
+const getImageAbsoluteUrl = imageUrl =>
+  imageUrl.indexOf(WIX_MEDIA_BASE_URL) === -1 ? WIX_MEDIA_BASE_URL + imageUrl : imageUrl;
+
+const getResizedImageUrl = (
   item,
   originalUrl,
   resizeMethod,
@@ -115,9 +120,9 @@ const resizeMediaUrl = (
   if (resizeMethod === 'video') {
     return originalUrl;
   } else if (requiredWidth >= item.maxWidth && requiredHeight >= item.maxHeight) {
-    return item.url;
+    return getImageAbsoluteUrl(item.url);
   } else {
-    return resizeUrlImp(
+    return getResizedImageUrl(
       item,
       originalUrl,
       resizeMethod,
