@@ -224,5 +224,27 @@ describe('content state media builder', () => {
       .get();
     expect(contentState.entityMap[0]).toEqual(expected.entityMap[5]);
   });
+
+  it('should chain content methods with readMore interaction', () => {
+    const contentState = new UUT()
+      .plain('the first block plain text')
+      .readMore({ lines: 5 })
+      .plain('')
+      .get();
+    const expectedBlockWithReadMoreSettings = {
+      ...expected.blocks[0],
+      data: {
+        interactions: [
+          {
+            type: 'READ_MORE',
+            settings: { lines: 5 },
+          },
+        ],
+      },
+    };
+
+    expect(butKey(contentState.blocks[0])).toEqual(butKey(expectedBlockWithReadMoreSettings));
+    expect(butKey(contentState.blocks[1])).toEqual(butKey(expected.blocks[1]));
+  });
 });
 // eslint-enable max-len

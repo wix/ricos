@@ -1,6 +1,7 @@
 import { currentVersion } from 'wix-rich-content-common';
 import { METHOD_BLOCK_MAP, METHOD_GROUPED_BLOCK_MAP, METHOD_PLUGIN_DATA_MAP } from '../const';
 import { toArray, addBlock, addPlugin } from './builder-utils';
+import { readMore } from '../Interactions/interaction-utils';
 
 const DEFAULT_STATE = { blocks: [], entityMap: {}, VERSION: currentVersion };
 
@@ -52,5 +53,9 @@ Object.entries(METHOD_PLUGIN_DATA_MAP).forEach(([method, defaultEntityData]) => 
     return this;
   };
 });
+
+ContentStateBuilder.prototype.readMore = function(settings) {
+  return readMore(this, settings);
+};
 
 export default ContentStateBuilder;
