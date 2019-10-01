@@ -1,9 +1,6 @@
-import { omit } from 'lodash';
 import { contentState } from '../tests/contentState';
 import UUT from './ContentStateTransformation';
-
-const butKey = obj => omit(obj, 'key');
-
+import { butKey } from '../tests/test-utils';
 /* eslint-disable max-len */
 describe('Content State Transformation', () => {
   const expectedEntity = {

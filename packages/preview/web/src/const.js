@@ -146,3 +146,9 @@ export const METHOD_PLUGIN_DATA_MAP = {
     },
   },
 };
+
+export const INTERACTIONS = {
+  READ_MORE: 'READ_MORE',
+  IMAGE_COUNTER: 'IMAGE_COUNTER',
+  SEE_FULL_CONTENT: 'SEE_FULL_CONTENT',
+};

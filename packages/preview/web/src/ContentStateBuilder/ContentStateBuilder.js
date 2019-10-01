@@ -1,6 +1,6 @@
 import { currentVersion } from 'wix-rich-content-common';
 import { METHOD_BLOCK_MAP, METHOD_GROUPED_BLOCK_MAP, METHOD_PLUGIN_DATA_MAP } from '../const';
-import { toArray, addBlock, addPlugin } from './utils';
+import { toArray, addBlock, addPlugin } from './builder-utils';
 
 const DEFAULT_STATE = { blocks: [], entityMap: {}, VERSION: currentVersion };
 

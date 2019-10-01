@@ -1,9 +1,6 @@
-import { omit } from 'lodash';
 import UUT from './ContentStateBuilder';
 import { contentState as expected } from '../tests/contentState';
-
-const butKey = obj => omit(obj, 'key');
-const but = (obj, keys) => omit(obj, keys);
+import { butKey, but } from '../tests/test-utils.js';
 
 /* eslint-disable max-len*/
 describe('content state text builder', () => {
