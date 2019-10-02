@@ -33,10 +33,13 @@ class GalleryViewer extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    // TODO: remove galleryKey
+    let galleryKey = this.state && this.state.galleryKey;
     if (!isEqual(nextProps.componentData, this.props.componentData)) {
       validate(nextProps.componentData, schema);
+      galleryKey = Math.random();
     }
-    this.setState(this.stateFromProps(nextProps), () => this.updateDimensions());
+    this.setState({ galleryKey, ...this.stateFromProps(nextProps) }, () => this.updateDimensions());
   }
 
   componentDidMount() {
@@ -62,10 +65,7 @@ class GalleryViewer extends React.Component {
       Object.assign(defaults.styles, props.componentData.styles || {}),
       this.hasTitle(items)
     );
-    // TODO remove gallery key
-    const galleryKey = Math.random();
     return {
-      galleryKey,
       items,
       styleParams,
     };
