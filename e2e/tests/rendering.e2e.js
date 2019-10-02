@@ -11,18 +11,31 @@ import { fixtures } from './constants';
 const testFixture = fixture =>
   it(`should render ${fixture}`, () => {
     cy.loadEditorAndViewer(fixture);
-    cy.matchImageSnapshot();
-    // testViewerAndEditorAreEqual();
+    cy.eyesCheckWindow(`should render ${fixture}`);
   });
 
 describe('editor rendering', () => {
+  afterEach(() => cy.eyesClose());
+
   context('desktop', () => {
-    beforeEach(() => cy.switchToDesktop());
+    beforeEach(() => {
+      cy.eyesOpen({
+        batchName: 'Rendering',
+        browser: [{ width: 1440, height: 900, name: 'chrome' }],
+      });
+      cy.switchToDesktop();
+    });
     fixtures.forEach(testFixture);
   });
 
   context('mobile', () => {
-    beforeEach(() => cy.switchToMobile());
+    beforeEach(() => {
+      cy.eyesOpen({
+        batchName: 'Rendering',
+        browser: { deviceName: 'iPhone 6/7/8' },
+      });
+      cy.switchToMobile();
+    });
     fixtures.forEach(testFixture);
   });
 });
