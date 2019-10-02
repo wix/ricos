@@ -521,7 +521,7 @@ export class SortableComponent extends Component {
     const { editedImageIndex, items } = this.state;
     const newItems = items.filter(item => !item.selected);
     const newIndex = Math.min(editedImageIndex, newItems.length - 1);
-    const newEditedImage = newItems.length === 0 ? { metadata: '', title: '' } : newItems[newIndex];
+    const newEditedImage = newItems.length !== 0 ? newItems[newIndex] : { metadata: '', title: '' };
     newEditedImage.selected = true;
     this.props.onItemsChange(newItems);
     this.setState(
