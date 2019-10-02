@@ -19,11 +19,11 @@ describe('editor', () => {
     cy.loadEditor()
       .enterParagraphs([
         'Leverage agile frameworks',
-        'to  a robust synopsis for high level overviews.',
+        'to provide a robust synopsis for high level overviews.',
       ])
       .setSelection(0, 0)
       .blurEditor();
-      cy.eyesCheckWindow('should allow to enter text');
+    cy.eyesCheckWindow('should allow to enter text');
   });
 
   it('should allow to apply inline styles and links', () => {
@@ -58,7 +58,7 @@ describe('editor', () => {
       .setLink([0, 10], 'https://www.wix.com/')
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.CODE_BLOCK, [0, 10])
       .blurEditor();
-      cy.eyesCheckWindow('should allow to apply inline styles');
+    cy.eyesCheckWindow('should allow to apply inline styles');
   });
 
   it('should allow to create lists', () => {
