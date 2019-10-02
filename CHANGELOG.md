@@ -17,7 +17,7 @@
 - `image`
   - [75336e34](https://github.com/wix-incubator/rich-content/commit/75336e34) open imageStudio on crop tab
 - `gallery`
-  - [#404](https://github.com/wix-incubator/rich-content/pull/404) delete sole image in image settings returns to gallery settings
+  - [#404](https://github.com/wix-incubator/rich-content/pull/404) delete last remaining image in image settings returns to gallery settings
 ### :house: Internal
 - `e2e`
   - [#393](https://github.com/wix-incubator/rich-content/pull/393) added atomic block alignment testing
