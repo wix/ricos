@@ -14,7 +14,7 @@ import {
 } from '../dataHooks';
 
 const resizeForDesktop = () => cy.viewport('macbook-15');
-const resizeForMobile = () => cy.viewport('iphone-5');
+const resizeForMobile = () => cy.viewport('iphone-6');
 
 const buildQuery = params => {
   const parameters = Object.keys(params).filter(param => params[param]);

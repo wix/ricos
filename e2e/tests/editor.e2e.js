@@ -3,20 +3,21 @@ import { INLINE_TOOLBAR_BUTTONS } from '../cypress/dataHooks';
 /* eslint-disable mocha/no-skipped-tests */
 
 describe('editor', () => {
-  before(() =>
+  beforeEach(() => {
     cy.eyesOpen({
-      appName: 'Rich Content Editor',
-      browser: { width: 800, height: 600 },
-      batchName: 'rich-content',
-    })
-  );
-  beforeEach(() => cy.switchToDesktop());
+      batchName: 'Editor',
+      browser: [{ width: 1440, height: 900, name: 'chrome' }],
+    });
+    cy.switchToDesktop();
+  });
+
+  afterEach(() => cy.eyesClose().matchContentSnapshot());
 
   it('should allow to enter text', () => {
     cy.loadEditor()
       .enterParagraphs([
         'Leverage agile frameworks',
-        'to  a robust synopsis for high level overviews.',
+        'to provide a robust synopsis for high level overviews.',
       ])
       .setSelection(0, 0)
       .blurEditor();
@@ -70,72 +71,7 @@ describe('editor', () => {
       .alignImage('left')
       .alignImage('center')
       .alignImage('right')
-      .setSelection(0, 0)
-      .matchSnapshots();
-  });
-
-  context('when in hebrew locale', () => {
-    beforeEach(() => cy.switchToHebrew());
-
-    context('desktop', () => {
-      beforeEach(() => cy.switchToDesktop());
-
-      it('should render side toolbar in rtl', () => {
-        cy.loadEditor()
-          .focusEditor()
-          .openSideToolbar();
-        cy.eyesCheckWindow('should render plugin toolbar in rtl');
-      });
-
-      it('should render text toolbar in rtl', () => {
-        cy.loadEditor('plain')
-          .setSelection(0, 8)
-          .get('[data-hook=inlineToolbar]');
-        cy.eyesCheckWindow('should render text toolbar in rtl');
-      });
-
-      it('should render rtl and ltr text correctly', () => {
-        cy.loadEditor('hebrew');
-        cy.eyesCheckWindow('should render rtl and ltr text correctly');
-      });
-
-      it('should render external modal in rtl', () => {
-        cy.loadEditor('images')
-          .openImageSettings()
-          .get('[data-hook="imageSettingsCaptionInput"]')
-          .blur();
-        cy.eyesCheckWindow('should render external modal in rtl');
-      });
-
-      // afterEach(() => cy.matchSnapshots({ capture: 'viewport' }));
-    });
-
-    context('mobile', () => {
-      beforeEach(() => cy.switchToMobile());
-
-      it('should render add plugin modal in rtl', () => {
-        cy.loadEditor()
-          .focusEditor()
-          .openAddPluginModal();
-        cy.eyesCheckWindow('should render add plugin modal in rtl');
-      });
-
-      it('should render rtl and ltr text correctly', () => {
-        cy.loadEditor('hebrew');
-        cy.eyesCheckWindow('should render rtl and ltr text correctly');
-      });
-
-      it('should render external modal in rtl', () => {
-        cy.loadEditor('images')
-          .openImageSettings()
-          .get('[aria-label="Cancel"]')
-          .blur();
-        cy.eyesCheckWindow('should render external modal in rtl');
-      });
-
-      after(() => {
-        cy.eyesClose();
-      });
-    });
+      .setSelection(0, 0);
+    cy.eyesCheckWindow('should allow to create lists');
   });
 });
