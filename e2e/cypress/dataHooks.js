@@ -55,7 +55,14 @@ export const GALLERY_SETTINGS = {
   EDIT_IMAGE: 'galleryItemsSortableItemSettings',
   TITLE: 'galleryImageTitleInput',
   VIEWER_IMAGE: 'item-social',
+  SELECT_ALL: 'galleryItemsSortableSelectAll',
+  DELETE: 'galleryItemsSortableDelete',
+  UPLOAD: 'galleryItemsSortableFileInputTop',
+};
+
+export const GALLERY_IMAGE_SETTINGS = {
   PREVIEW: 'galleryImagePreview',
+  DELETE: 'galleryImageSettingsDeleteImage',
 };
 
 export const VIDEO_PLUGIN = {

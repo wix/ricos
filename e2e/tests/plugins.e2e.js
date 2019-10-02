@@ -3,6 +3,7 @@ import {
   PLUGIN_TOOLBAR_BUTTONS,
   DIVIDER_DROPDOWN_OPTIONS,
   GALLERY_SETTINGS,
+  GALLERY_IMAGE_SETTINGS,
   IMAGE_SETTINGS,
 } from '../cypress/dataHooks';
 
@@ -56,32 +57,69 @@ describe('plugins', () => {
         .openGalleryAdvancedSettings();
     });
 
-    it('should render gallery settings', () => {
-      cy.openPluginToolbar(PLUGIN_COMPONENT.GALLERY)
-        .shrinkPlugin()
-        .openGalleryAdvancedSettings()
-        .openGallerySettings();
-      cy.get(`[data-hook=${GALLERY_SETTINGS.IMAGE}]:first`);
-      cy.get(`[data-hook=${GALLERY_SETTINGS.IMAGE}]`).eq(1);
+    context('organize media', () => {
+      beforeEach('load editor', () =>
+        cy
+          .loadEditorAndViewer('gallery')
+          .openPluginToolbar(PLUGIN_COMPONENT.GALLERY)
+          .shrinkPlugin()
+          .openGalleryAdvancedSettings()
+          .openGallerySettings()
+      );
+
+      it('should render gallery settings', () => {
+        cy.get(`[data-hook=${GALLERY_SETTINGS.IMAGE}]:first`);
+        cy.get(`[data-hook=${GALLERY_SETTINGS.IMAGE}]`).eq(1);
+      });
+
+      it('should allow to select an item', () => {
+        cy.get(`[data-hook=${GALLERY_SETTINGS.IMAGE}]:first`).click();
+      });
+
+      it('should allow to select all items', () => {
+        cy.get(`[data-hook=${GALLERY_SETTINGS.SELECT_ALL}]`).click();
+      });
+
+      it('should allow to delete an item', () => {
+        cy.get(`[data-hook=${GALLERY_SETTINGS.IMAGE}]:first`).click();
+        cy.get(`[data-hook=${GALLERY_SETTINGS.DELETE}]`).click();
+      });
+
+      it('should allow to delete all items', () => {
+        cy.get(`[data-hook=${GALLERY_SETTINGS.SELECT_ALL}]`).click();
+        cy.get(`[data-hook=${GALLERY_SETTINGS.DELETE}]`).click();
+      });
     });
 
-    it('should render gallery image settings', () => {
-      cy.openPluginToolbar(PLUGIN_COMPONENT.GALLERY)
-        .shrinkPlugin()
-        .openGalleryAdvancedSettings()
-        .openGallerySettings()
-        .openGalleryImageSettings();
-      cy.get(`[data-hook=${GALLERY_SETTINGS.PREVIEW}]:first`);
-    });
+    context('image settings', () => {
+      beforeEach('load editor', () =>
+        cy
+          .loadEditorAndViewer('gallery')
+          .openPluginToolbar(PLUGIN_COMPONENT.GALLERY)
+          .shrinkPlugin()
+          .openGalleryAdvancedSettings()
+          .openGallerySettings()
+          .openGalleryImageSettings()
+      );
+      it('should render gallery image settings', () => {
+        cy.get(`[data-hook=${GALLERY_IMAGE_SETTINGS.PREVIEW}]:first`);
+      });
 
-    it('should allow to add a title', () => {
-      cy.openPluginToolbar(PLUGIN_COMPONENT.GALLERY)
-        .shrinkPlugin()
-        .openGalleryAdvancedSettings()
-        .openGallerySettings()
-        .openGalleryImageSettings()
-        .addGalleryImageTitle()
-        .checkTitle();
+      it('should allow to add a title', () => {
+        cy.addGalleryImageTitle().checkTitle();
+      });
+
+      it('should allow to delete an image', () => {
+        cy.get(`[data-hook=${GALLERY_IMAGE_SETTINGS.DELETE}]`).click();
+        cy.get(`[data-hook=${GALLERY_IMAGE_SETTINGS.PREVIEW}]:first`);
+      });
+
+      // it('should allow to delete all images', () => {
+      //   cy.get(`[data-hook=${GALLERY_IMAGE_SETTINGS.DELETE}]`)
+      //     .click({ multiple: true })
+      //     .click();
+      //   cy.get(`[data-hook=${GALLERY_SETTINGS.UPLOAD}]`);
+      // });
     });
     afterEach(() => cy.matchSnapshots({ capture: 'viewport' }));
   });
