@@ -1,23 +1,31 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { debounce } from 'lodash';
-import { convertToRaw } from 'wix-rich-content-editor/dist/lib/editorStateConversion';
+import { convertToRaw, createEmpty } from 'wix-rich-content-editor/dist/lib/editorStateConversion';
 import ExampleApp from '../src/ExampleApp';
 import TestApp from '../../../e2e/test-env/src/client/TestApp';
 import { getRequestedLocale, isMobile } from '../src/utils';
 
+const generateViewerState = editorState =>
+  JSON.parse(JSON.stringify(convertToRaw(editorState.getCurrentContent())));
+
 class RichContentApp extends PureComponent {
   constructor(props) {
     super(props);
+
+    this.state = this.getInitialState(props);
+  }
+
+  getInitialState = ({ initialState }) => {
     const locale = getRequestedLocale();
-    this.state = {
-      viewerState: props.initialState || {},
-      locale,
-    };
     if (locale !== 'en') {
       this.setLocaleResource(locale);
     }
-  }
+    return {
+      viewerState: initialState || generateViewerState(createEmpty()),
+      locale,
+    };
+  };
 
   setLocaleResource = locale => {
     import(`wix-rich-content-editor/statics/locale/messages_${locale}.json`).then(localeResource =>
@@ -27,18 +35,20 @@ class RichContentApp extends PureComponent {
 
   onEditorChange = debounce(editorState => {
     this.setState({
-      viewerState: JSON.parse(JSON.stringify(convertToRaw(editorState.getCurrentContent()))),
+      editorState,
+      viewerState: generateViewerState(editorState),
     });
     this.props.onEditorChange && this.props.onEditorChange(editorState);
   }, 100);
 
   render() {
-    const { viewerState, locale, localeResource } = this.state;
+    const { editorState, viewerState, locale, localeResource } = this.state;
     const { initialState, mode } = this.props;
     if (mode === 'demo') {
       return (
         <ExampleApp
           initialState={initialState}
+          editorState={editorState}
           viewerState={viewerState}
           locale={locale}
           isMobile={isMobile()}
@@ -51,6 +61,7 @@ class RichContentApp extends PureComponent {
       return (
         <TestApp
           initialState={initialState}
+          editorState={editorState}
           viewerState={viewerState}
           locale={locale}
           isMobile={isMobile()}

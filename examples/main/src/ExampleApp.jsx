@@ -12,7 +12,6 @@ import {
   SectionContent,
 } from './Components';
 import { generateKey, getStateFromObject, loadStateFromStorage, saveStateToStorage } from './utils';
-import { editor } from 'monaco-editor';
 const Editor = React.lazy(() => import('../shared/editor/Editor'));
 const Viewer = React.lazy(() => import('../shared/viewer/Viewer'));
 
