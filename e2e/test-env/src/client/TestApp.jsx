@@ -1,20 +1,17 @@
 import React, { PureComponent } from 'react';
-import Editor from '../../../../examples/main/shared/editor/Editor.jsx';
-import Viewer from '../../../../examples/main/shared/viewer/Viewer.jsx';
-import { convertToRaw } from 'wix-rich-content-editor/dist/lib/editorStateConversion';
+import Editor from '../../../../examples/main/shared/editor/Editor';
+import Viewer from '../../../../examples/main/shared/viewer/Viewer';
 
 class TestApp extends PureComponent {
   constructor(props) {
     super(props);
   }
-
   renderEditor = () => {
-    const { editorState, locale, localeResource, onEditorChange, isMobile } = this.props;
-
+    const { initialState, onEditorChange, locale, localeResource, isMobile } = this.props;
     return (
       <Editor
         onChange={onEditorChange}
-        editorState={editorState}
+        initialState={initialState}
         isMobile={isMobile}
         shouldMockUpload={true}
         locale={locale}
@@ -24,9 +21,7 @@ class TestApp extends PureComponent {
   };
 
   renderViewer = () => {
-    const { editorState, isMobile } = this.props;
-    const viewerState = JSON.parse(JSON.stringify(convertToRaw(editorState.getCurrentContent()))); //emulate initilState passed in by consumers
-
+    const { isMobile, viewerState } = this.props;
     return <Viewer initialState={viewerState} isMobile={isMobile} />;
   };
 

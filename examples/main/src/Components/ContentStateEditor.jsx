@@ -31,8 +31,7 @@ class ContentStateEditor extends PureComponent {
   constructor(props) {
     super(props);
 
-    const MonacoEditor = !isSSR && require('react-monaco-editor');
-
+    const MonacoEditor = !isSSR() && require('react-monaco-editor').default;
     this.state = {
       contentState: stringifyJSON(this.props.contentState),
       MonacoEditor,

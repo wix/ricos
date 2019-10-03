@@ -66,8 +66,7 @@ const config = [
     ...common,
     name: 'client',
     entry: {
-      combined: './src/client/combined',
-      editor: './src/client/editor',
+      index: './src/client/index',
     },
     output,
     module: {

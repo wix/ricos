@@ -100,7 +100,10 @@ export const config = {
   },
 };
 
-export const getInlineStyleMappers = raw => [textColorInlineStyleMapper(config, raw)];
+export const getInlineStyleMappers = raw => {
+  console.log({ raw });
+  return [textColorInlineStyleMapper(config, raw)];
+};
 
 export const decorators = [
   new HashtagDecorator({

@@ -3,7 +3,7 @@ import { hot } from 'react-hot-loader/root';
 import React, { PureComponent } from 'react';
 import { ReflexContainer, ReflexElement, ReflexSplitter } from 'react-reflex';
 import { compact, flatMap } from 'lodash';
-import { convertToRaw } from 'wix-rich-content-editor/dist/lib/editorStateConversion';
+import { createEmpty, convertToRaw } from 'wix-rich-content-editor/dist/lib/editorStateConversion';
 import {
   ContentStateEditor,
   ErrorBoundary,
@@ -12,13 +12,17 @@ import {
   SectionContent,
 } from './Components';
 import { generateKey, getStateFromObject, loadStateFromStorage, saveStateToStorage } from './utils';
+import { editor } from 'monaco-editor';
 const Editor = React.lazy(() => import('../shared/editor/Editor'));
 const Viewer = React.lazy(() => import('../shared/viewer/Viewer'));
+
+const getContentStateFromEditorState = editorState => convertToRaw(editorState.getCurrentContent());
 
 class ExampleApp extends PureComponent {
   constructor(props) {
     super(props);
     this.state = this.getInitialState();
+    console.log('initial contentState', this.state.contentState);
     disableBrowserBackButton();
   }
 
@@ -26,8 +30,10 @@ class ExampleApp extends PureComponent {
     const { isMobile } = this.props;
     const containerKey = generateKey('container');
     const localState = loadStateFromStorage();
+    const contentState = getContentStateFromEditorState(createEmpty());
     return {
       containerKey,
+      contentState,
       isEditorShown: true,
       isViewerShown: !isMobile,
       isContentStateShown: false,
@@ -46,10 +52,18 @@ class ExampleApp extends PureComponent {
     window && window.removeEventListener('resize', this.onContentStateEditorResize);
   }
 
+  onEditorChange = editorState => {
+    this.setState({ contentState: getContentStateFromEditorState(editorState) });
+    this.props.onEditorChange && this.props.onEditorChange(editorState);
+  };
+
   setContentStateEditor = ref => (this.contentStateEditor = ref);
 
   onContentStateEditorChange = obj => {
-    this.setState(getStateFromObject(obj));
+    if (this.props.onEditorChange) {
+      const { editorState } = getStateFromObject(obj);
+      this.props.onEditorChange(editorState);
+    }
   };
 
   onContentStateEditorResize = () =>
@@ -66,15 +80,7 @@ class ExampleApp extends PureComponent {
   };
 
   renderEditor = () => {
-    const {
-      allLocales,
-      editorState,
-      locale,
-      localeResource,
-      isMobile,
-      setLocale,
-      onEditorChange,
-    } = this.props;
+    const { allLocales, editorState, locale, localeResource, isMobile, setLocale } = this.props;
     const { isEditorShown, staticToolbar, shouldMockUpload, editorIsMobile } = this.state;
     const settings = [
       {
@@ -119,7 +125,7 @@ class ExampleApp extends PureComponent {
           <SectionContent>
             <ErrorBoundary>
               <Editor
-                onChange={onEditorChange}
+                onChange={this.onEditorChange}
                 editorState={editorState}
                 //isMobile={isMobile}
                 isMobile={this.state.editorIsMobile || isMobile}
@@ -136,7 +142,7 @@ class ExampleApp extends PureComponent {
   };
 
   renderViewer = () => {
-    const { editorState, isMobile } = this.props;
+    const { viewerState, isMobile } = this.props;
     const { isViewerShown } = this.state;
     const settings = [
       {
@@ -148,7 +154,6 @@ class ExampleApp extends PureComponent {
           })),
       },
     ];
-    const viewerState = JSON.parse(JSON.stringify(convertToRaw(editorState.getCurrentContent()))); //emulate initilState passed in by consumers
     return (
       isViewerShown && (
         <ReflexElement key={`viewer-section-${this.state.viewerResetKey}`} className="section">
@@ -168,8 +173,7 @@ class ExampleApp extends PureComponent {
   };
 
   renderContentState = () => {
-    const { editorState } = this.props;
-    const { isContentStateShown } = this.state;
+    const { contentState, isContentStateShown } = this.state;
     return (
       isContentStateShown && (
         <ReflexElement
@@ -182,7 +186,7 @@ class ExampleApp extends PureComponent {
             <ContentStateEditor
               ref={this.setContentStateEditor}
               onChange={this.onContentStateEditorChange}
-              contentState={convertToRaw(editorState.getCurrentContent())}
+              contentState={contentState}
             />
           </SectionContent>
         </ReflexElement>
