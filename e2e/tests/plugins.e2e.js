@@ -74,6 +74,7 @@ describe('plugins', () => {
 
       it('should allow to select an item', () => {
         cy.get(`[data-hook=${GALLERY_SETTINGS.IMAGE}]:first`).click();
+        cy.get(`[data-hook=${GALLERY_SETTINGS.IMAGE}]:first`);
       });
 
       it('should allow to select all items', () => {
@@ -88,6 +89,12 @@ describe('plugins', () => {
       it('should allow to delete all items', () => {
         cy.get(`[data-hook=${GALLERY_SETTINGS.SELECT_ALL}]`).click();
         cy.get(`[data-hook=${GALLERY_SETTINGS.DELETE}]`).click();
+      });
+
+      it('should allow to re-organize', () => {
+        const src = `[data-hook=${GALLERY_SETTINGS.IMAGE}]:first`;
+        const dest = `[data-hook=${GALLERY_SETTINGS.IMAGE}]`;
+        cy.dragAndDrop(src, dest, 1);
       });
     });
 

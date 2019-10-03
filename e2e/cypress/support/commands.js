@@ -366,6 +366,25 @@ Cypress.Commands.add('addHtml', () => {
   cy.get(`[data-hook*=${HTML_PLUGIN.UPDATE}]`).click();
 });
 
+Cypress.Commands.add('addCustomVideo', () => {
+  cy.get(`[data-hook*=${VIDEO_PLUGIN.CUSTOM}]`).click();
+  cy.get(`[data-hook=${PLUGIN_COMPONENT.VIDEO}]:first`)
+    .parent()
+    .click();
+});
+
+Cypress.Commands.add('dragAndDrop', (src, dest, elem = 0) => {
+  cy.get(dest)
+    .eq(elem)
+    .then(target => {
+      const dest = target[0].getBoundingClientRect();
+      cy.get(src)
+        .trigger('mousedown', { which: 1 })
+        .trigger('mousemove', { which: 1, pageX: dest.x, pageY: dest.y })
+        .trigger('mouseup', { force: true });
+    });
+});
+
 // disable screenshots in debug mode. So there is no diffrence to ci.
 if (Cypress.browser.isHeaded) {
   const noop = () => {};
