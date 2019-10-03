@@ -14,6 +14,8 @@
 ### :bug: Bug Fix
 - `editor`
   - [#392](https://github.com/wix-incubator/rich-content/pull/392) text in line toolbar has tooltips
+- `divider`
+  - [#406](https://github.com/wix-incubator/rich-content/pull/406) small-sized divider container is centered when center alignment is applied
 - `image`
   - [75336e34](https://github.com/wix-incubator/rich-content/commit/75336e34) open imageStudio on crop tab
 - `gallery`
