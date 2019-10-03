@@ -61,7 +61,7 @@ export const GALLERY_SETTINGS = {
 };
 
 export const GALLERY_IMAGE_SETTINGS = {
-  PREVIEW: 'galleryImagePreview',
+  PREVIEW: 'galleryImageSettingsPreview',
   DELETE: 'galleryImageSettingsDeleteImage',
 };
 

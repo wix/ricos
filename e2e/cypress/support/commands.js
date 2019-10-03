@@ -262,6 +262,14 @@ Cypress.Commands.add('addImageTitle', () => {
     .click();
 });
 
+Cypress.Commands.add('deleteImageTitle', () => {
+  cy.get(`[data-hook=${IMAGE_SETTINGS.CAPTION}]`)
+    .click()
+    .clear()
+    .get(`[data-hook=${SETTINGS_PANEL.DONE}]`)
+    .click();
+});
+
 Cypress.Commands.add('addGalleryImageTitle', (pluginToClick = null) => {
   cy.get(`[data-hook=${GALLERY_SETTINGS.TITLE}]`).type('Title');
   cy.get(`[data-hook=${SETTINGS_PANEL.DONE}]:first`).click({ multiple: true });

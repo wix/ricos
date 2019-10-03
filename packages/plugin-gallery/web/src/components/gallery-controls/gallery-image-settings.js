@@ -129,7 +129,11 @@ class ImageSettings extends Component {
               <div>
                 <SettingsSection
                   theme={theme}
-                  ariaProps={{ 'aria-label': 'image navigation', role: 'region' }}
+                  ariaProps={{
+                    'aria-label': 'image navigation',
+                    role: 'region',
+                    'data-hook': 'galleryImageSettingsPreview',
+                  }}
                 >
                   <Image
                     alt={metadata.title || 'gallery image preview'}

@@ -35,6 +35,14 @@ describe('plugins', () => {
         .openImageSettings()
         .addImageLink();
     });
+
+    it('should allow to delete a title', () => {
+      cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE)
+        .shrinkPlugin()
+        .openImageSettings()
+        .addImageTitle();
+      cy.openImageSettings().deleteImageTitle();
+    });
     afterEach(() => cy.matchSnapshots({ capture: 'viewport' }));
   });
 
@@ -117,7 +125,7 @@ describe('plugins', () => {
       });
 
       it('should allow to delete an image', () => {
-        cy.get(`[data-hook=${GALLERY_IMAGE_SETTINGS.DELETE}]`).click();
+        cy.get(`[data-hook=${GALLERY_IMAGE_SETTINGS.DELETE}]`).click({ force: true });
         cy.get(`[data-hook=${GALLERY_IMAGE_SETTINGS.PREVIEW}]:first`);
       });
 
