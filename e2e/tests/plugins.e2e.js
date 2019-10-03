@@ -62,6 +62,9 @@ describe('plugins', () => {
     it('should render advanced gallery settings', () => {
       cy.openPluginToolbar(PLUGIN_COMPONENT.GALLERY)
         .shrinkPlugin()
+        .get(`[data-hook=${'image-item'}]:first`)
+        .get(`[data-hook=${'image-item'}]`)
+        .eq(1)
         .openGalleryAdvancedSettings();
     });
 
@@ -71,6 +74,9 @@ describe('plugins', () => {
           .loadEditorAndViewer('gallery')
           .openPluginToolbar(PLUGIN_COMPONENT.GALLERY)
           .shrinkPlugin()
+          .get(`[data-hook=${'image-item'}]:first`)
+          .get(`[data-hook=${'image-item'}]`)
+          .eq(1)
           .openGalleryAdvancedSettings()
           .openGallerySettings()
       );
@@ -82,7 +88,7 @@ describe('plugins', () => {
 
       it('should allow to select an item', () => {
         cy.get(`[data-hook=${GALLERY_SETTINGS.IMAGE}]:first`).click();
-        cy.get(`[data-hook=${GALLERY_SETTINGS.IMAGE}]:first`);
+        cy.get(`[data-hook=${GALLERY_SETTINGS.SELECT_ALL}]:first`);
       });
 
       it('should allow to select all items', () => {
@@ -112,6 +118,9 @@ describe('plugins', () => {
           .loadEditorAndViewer('gallery')
           .openPluginToolbar(PLUGIN_COMPONENT.GALLERY)
           .shrinkPlugin()
+          .get(`[data-hook=${'image-item'}]:first`)
+          .get(`[data-hook=${'image-item'}]`)
+          .eq(1)
           .openGalleryAdvancedSettings()
           .openGallerySettings()
           .openGalleryImageSettings()
@@ -240,6 +249,7 @@ describe('plugins', () => {
       cy.openPluginToolbar(PLUGIN_COMPONENT.MAP);
       // applitools eyes
       cy.openMapSettings();
+      cy.get('.gm-style-cc');
     });
 
     afterEach(() => cy.matchSnapshots({ capture: 'viewport' }));
