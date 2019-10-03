@@ -10,7 +10,7 @@
   "pluginsFile": "e2e/cypress/plugins/index.js",
   "screenshotsFolder": "e2e/cypress/screenshots",
   "supportFile": "e2e/cypress/support/index.js",
-  "video": false,
+  "video": true,
   "videosFolder": "e2e/cypress/videos",
   "env": {},
   "projectId": "6yj6sr"
