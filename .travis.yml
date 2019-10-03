@@ -8,6 +8,7 @@ script:
   - export APPLITOOLS_BATCH_ID=`echo ${TRAVIS_PULL_REQUEST_SHA:=$TRAVIS_COMMIT}`
   - export APPLITOOLS_CONCURRENCY=500
   - echo $APPLITOOLS_BATCH_ID
+  - printenv
   - npm run build || travis_terminate 1;
   - npm run test || travis_terminate 1;
   - npm run release || travis_terminate 1;
