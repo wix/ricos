@@ -1,11 +1,13 @@
 import { INLINE_TOOLBAR_BUTTONS } from '../cypress/dataHooks';
 
 describe('editor', () => {
-  beforeEach(() => {
+  beforeEach(function() {
     cy.eyesOpen({
       batchName: 'Editor',
       browser: [{ width: 1440, height: 900, name: 'chrome' }],
+      branchName: this.currentBranch,
     });
+    cy.log(process.env);
     cy.switchToDesktop();
   });
 
@@ -51,6 +53,6 @@ describe('editor', () => {
       .alignImage('left')
       .alignImage('center')
       .alignImage('right');
-    cy.eyesCheckWindow('should allow to create lists');
+    cy.eyesCheckWindow('should align atomic blocks correctly');
   });
 });

@@ -18,10 +18,11 @@ describe('editor rendering', () => {
   afterEach(() => cy.eyesClose());
 
   context('desktop', () => {
-    beforeEach(() => {
+    beforeEach(function() {
       cy.eyesOpen({
         batchName: 'Rendering',
         browser: [{ width: 1440, height: 900, name: 'chrome' }],
+        branchName: this.currentBranch,
       });
       cy.switchToDesktop();
     });
@@ -29,10 +30,11 @@ describe('editor rendering', () => {
   });
 
   context('mobile', () => {
-    beforeEach(() => {
+    beforeEach(function() {
       cy.eyesOpen({
         batchName: 'Rendering',
         browser: { deviceName: 'iPhone 6/7/8' },
+        branchName: this.currentBranch,
       });
       cy.switchToMobile();
     });
