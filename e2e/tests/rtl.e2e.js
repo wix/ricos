@@ -4,10 +4,11 @@ describe('rtl', () => {
   afterEach(() => cy.eyesClose().matchContentSnapshot());
 
   context('desktop', () => {
-    beforeEach(() => {
+    beforeEach(function() {
       cy.eyesOpen({
         batchName: 'RTL',
         browser: [{ width: 1440, height: 900, name: 'chrome' }],
+        branchName: this.currentBranch,
       });
       cy.switchToDesktop();
     });
@@ -23,6 +24,8 @@ describe('rtl', () => {
       cy.loadEditor('plain')
         .setSelection(0, 8)
         .get('[data-hook=inlineToolbar]')
+        .should('be.visible')
+        .get('[data-hook=addPluginFloatingToolbar]')
         .should('be.visible');
       cy.eyesCheckWindow('should render text toolbar in rtl');
     });
@@ -42,10 +45,11 @@ describe('rtl', () => {
   });
 
   context('mobile', () => {
-    beforeEach(() => {
+    beforeEach(function() {
       cy.eyesOpen({
         batchName: 'RTL',
         browser: { deviceName: 'iPhone 6/7/8' },
+        branchName: this.currentBranch,
       });
       cy.switchToMobile();
     });
