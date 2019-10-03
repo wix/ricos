@@ -31,13 +31,13 @@ export default class Preview extends PureComponent {
       disabled: false,
     };
     this.transformation = new ContentStateTransformation({
+      _if: metadata => metadata.text.plain.array().length > 0,
+      _then: (metadata, preview) => preview.plain(metadata.text.plain.array()[0]).readMore({ lines: 3 })
+    }).rule({
       _if: metadata => metadata.media.images().length > 3,
       _then: (metadata, preview) => preview.gallery({
         mediaInfo: metadata.media.images().slice(0, 3),
       })
-    }).rule({
-        _if: metadata => metadata.text.plain.array().length > 0,
-        _then: (metadata, preview) => preview.plain(metadata.text.plain.array()[0])
     });
   }
 
@@ -55,36 +55,37 @@ export default class Preview extends PureComponent {
   };
 
   render() {
+    const previewState = this.transformation.apply(this.props.initialState);
     return (
-      <div id="rich-content-preview" className="viewer">
-        <div style={{ height: '50vh', width: '100%' }}>
-          <RichContentViewer
-            helpers={this.helpers}
-            typeMappers={Plugins.typeMappers}
-            inlineStyleMappers={Plugins.getInlineStyleMappers(this.props.initialState)}
-            decorators={Plugins.decorators}
-            config={Plugins.config}
-            initialState={this.transformation.apply(this.props.initialState)}
-            theme={theme}
-            isMobile={this.props.isMobile}
-            anchorTarget={anchorTarget}
-            relValue={relValue}
-            disabled={this.state.disabled}
-          />
-          <ReactModal
-            isOpen={this.state.showModal}
-            contentLabel="External Modal Example"
-            style={this.state.modalStyles || modalStyleDefaults}
-            onRequestClose={this.closeModal}
-          >
+<div id="rich-content-preview" className="viewer">
+  <div style={{ height: '50vh', width: '100%' }}>
+    <RichContentViewer
+      helpers={this.helpers}
+      typeMappers={Plugins.typeMappers}
+      inlineStyleMappers={Plugins.getInlineStyleMappers(this.props.initialState)}
+      decorators={Plugins.decorators}
+      config={Plugins.config}
+      initialState={previewState}
+      theme={theme}
+      isMobile={this.props.isMobile}
+      anchorTarget={anchorTarget}
+      relValue={relValue}
+      disabled={this.state.disabled}
+    />
+        <ReactModal
+          isOpen={this.state.showModal}
+          contentLabel="External Modal Example"
+          style={this.state.modalStyles || modalStyleDefaults}
+          onRequestClose={this.closeModal}
+        >
             {this.state.showModal && <RichContentModal {...this.state.modalProps} />}
-          </ReactModal>
-      </div>
-      <div style={{ height: '50vh', width: '100%' }}>
-        <MonacoEditor language="es6" value={dedent`Rules: 
-          ${ this.formatCode(this.transformation.toObject()) }`}/>  
-      </div>
-    </div>
+              </ReactModal>
+                </div>
+                  <div style={{ height: '50vh', width: '100%' }}>
+                    <MonacoEditor language="es6" value={dedent`Rules: 
+          ${ this.formatCode(this.transformation.toObject()) }`}/>
+                      </div>
+                        </div>
     );
   }
 }

@@ -3,7 +3,7 @@ import { renderToStaticMarkup } from 'react-dom/server';
 import { BLOCK_TYPES } from 'wix-rich-content-common';
 import redraft from 'redraft';
 import classNames from 'classnames';
-import { endsWith } from 'lodash';
+import { endsWith, isArray } from 'lodash';
 import List from '../List';
 import getPluginViewers from '../getPluginViewers';
 import { getTextDirection, kebabToCamelObjectKeys } from './textUtils';
@@ -26,7 +26,7 @@ const blockDataToStyle = ({ dynamicStyles }) => kebabToCamelObjectKeys(dynamicSt
 const getInline = (inlineStyleMappers, mergedStyles) =>
   combineMappers([...inlineStyleMappers, staticInlineStyleMapper], mergedStyles);
 
-const getBlocks = (mergedStyles, textDirection) => {
+const getBlocks = (mergedStyles, textDirection, contentInteractionMappers) => {
   const getList = ordered => (items, blockProps) => {
     const fixedItems = items.map(item => (item.length ? item : [' ']));
 
@@ -43,23 +43,40 @@ const getBlocks = (mergedStyles, textDirection) => {
     return <List {...props} />;
   };
 
+  const interactionMap = combineMappers(contentInteractionMappers, mergedStyles);
+
   const blockFactory = (type, style, withDiv) => {
     return (children, blockProps) =>
       children.map((child, i) => {
+        let BlockWrapper = children => <div>{children}</div>;
         const Type = typeof type === 'string' ? type : type(child);
+        const { interactions } = blockProps.data[i];
+        if (isArray(interactions)) {
+          BlockWrapper = children =>
+            interactions.reduce((Wrapper, { type, settings }) => {
+              const Interaction = interactionMap[type];
+              return (
+                <Interaction {...settings}>
+                  <Wrapper>{children}</Wrapper>
+                </Interaction>
+              );
+            }, BlockWrapper);
+        }
         return (
-          <Type
-            className={getBlockStyleClasses(
-              blockProps.data[i],
-              mergedStyles,
-              textDirection,
-              mergedStyles[style]
-            )}
-            style={blockDataToStyle(blockProps.data[i])}
-            key={blockProps.keys[i]}
-          >
-            {withDiv ? <div>{child}</div> : child}
-          </Type>
+          <BlockWrapper key={`${blockProps.key[i]}_wrap`}>
+            <Type
+              className={getBlockStyleClasses(
+                blockProps.data[i],
+                mergedStyles,
+                textDirection,
+                mergedStyles[style]
+              )}
+              style={blockDataToStyle(blockProps.data[i])}
+              key={blockProps.keys[i]}
+            >
+              {withDiv ? <div>{child}</div> : child}
+            </Type>
+          </BlockWrapper>
         );
       });
   };
