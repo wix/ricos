@@ -98,7 +98,7 @@ describe('editor', () => {
     context('mobile', () => {
       beforeEach(() => cy.switchToMobile());
 
-      it.only('should render add plugin modal in rtl', () => {
+      it('should render add plugin modal in rtl', () => {
         cy.loadEditor()
           .focusEditor()
           .openAddPluginModal();

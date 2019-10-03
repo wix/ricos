@@ -46,7 +46,7 @@ Cypress.Commands.add('switchToEnglish', () => {
 });
 
 Cypress.Commands.add('loadEditorAndViewer', fixtureName => {
-  run('combined', fixtureName);
+  run('rce', fixtureName);
 });
 
 Cypress.Commands.add('loadEditor', fixtureName => {
