@@ -44,8 +44,8 @@ import 'wix-rich-content-plugin-map/dist/styles.min.css';
 import 'wix-rich-content-plugin-file-upload/dist/styles.min.css';
 import 'wix-rich-content-plugin-text-color/dist/styles.min.css';
 
-import { customStyleFn, styleSelectionPredicate, colorScheme } from '../text-color-style-fn';
-import { getBaseUrl } from '../utils';
+import { customStyleFn, styleSelectionPredicate, colorScheme } from '../../src/text-color-style-fn';
+import { getBaseUrl } from '../../src/utils';
 
 // import { TOOLBARS, BUTTONS, DISPLAY_MODE } from 'wix-rich-content-common';
 // import InlineToolbarDecoration from './Components/InlineToolbarDecoration';
@@ -96,7 +96,7 @@ const getLinkPanelDropDownConfig = () => {
 
     const items = [];
     const amount = 1000;
-    for (var i = 0; i < amount; ++i) {
+    for (let i = 0; i < amount; ++i) {
       items.push(casual.item);
     }
     return items;
@@ -150,10 +150,11 @@ export const config = {
   [IMAGE_TYPE]: {
     imageEditorWixSettings: {
       initiator: 'some-initiator',
-      siteToken: 'JWS.eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Im5FUXljQzlOIn0.eyJpYXQiOjE1Njc1MjY3NzQsImRhdGEiOiJ7XCJ1c2VySWRcIjpcIjE5YTY0YTRjLWVlZTAtNGYxNC1iNjI3LTY3MmQ1ZjE2OGJkNFwiLFwibWV0YXNpdGVJZFwiOlwiNTM4ZmE2YzYtYzk1My00Y2RkLTg2YzQtNGI4NjlhZWNmOTgwXCJ9IiwiZXhwIjoxNTY4NzM2Mzc0fQ.n21OxIzSbqi8N3v30b6cIxMdshBnkkf2WQLWEFVXsLk',
+      siteToken:
+        'JWS.eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Im5FUXljQzlOIn0.eyJpYXQiOjE1Njc1MjY3NzQsImRhdGEiOiJ7XCJ1c2VySWRcIjpcIjE5YTY0YTRjLWVlZTAtNGYxNC1iNjI3LTY3MmQ1ZjE2OGJkNFwiLFwibWV0YXNpdGVJZFwiOlwiNTM4ZmE2YzYtYzk1My00Y2RkLTg2YzQtNGI4NjlhZWNmOTgwXCJ9IiwiZXhwIjoxNTY4NzM2Mzc0fQ.n21OxIzSbqi8N3v30b6cIxMdshBnkkf2WQLWEFVXsLk',
       metaSiteId: '538fa6c6-c953-4cdd-86c4-4b869aecf980',
       mediaRoot: 'some-mediaRoot',
-    }
+    },
   },
   [HASHTAG_TYPE]: {
     createHref: decoratedText => `/search/posts?query=${encodeURIComponent('#')}${decoratedText}`,

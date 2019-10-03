@@ -3,11 +3,7 @@ import { hot } from 'react-hot-loader/root';
 import React, { PureComponent } from 'react';
 import { ReflexContainer, ReflexElement, ReflexSplitter } from 'react-reflex';
 import { compact, flatMap } from 'lodash';
-import {
-  convertToRaw,
-  createEmpty,
-  createWithContent,
-} from 'wix-rich-content-editor/dist/lib/editorStateConversion';
+import { convertToRaw } from 'wix-rich-content-editor/dist/lib/editorStateConversion';
 import {
   ContentStateEditor,
   ErrorBoundary,
@@ -15,38 +11,25 @@ import {
   SectionHeader,
   SectionContent,
 } from './Components';
-import {
-  generateKey,
-  getStateFromObject,
-  getRequestedLocale,
-  isMobile,
-  loadStateFromStorage,
-  saveStateToStorage,
-} from './utils';
-const Editor = React.lazy(() => import('./editor/Editor'));
-const Viewer = React.lazy(() => import('./viewer/Viewer'));
+import { generateKey, getStateFromObject, loadStateFromStorage, saveStateToStorage } from './utils';
+const Editor = React.lazy(() => import('../shared/editor/Editor'));
+const Viewer = React.lazy(() => import('../shared/viewer/Viewer'));
 
-class App extends PureComponent {
+class ExampleApp extends PureComponent {
   constructor(props) {
     super(props);
-    this.isMobile = isMobile();
     this.state = this.getInitialState();
-    const locale = getRequestedLocale();
-    if (locale !== 'en') {
-      this.setLocale(locale);
-    }
     disableBrowserBackButton();
   }
 
   getInitialState() {
+    const { isMobile } = this.props;
     const containerKey = generateKey('container');
-    const editorState = createEmpty();
     const localState = loadStateFromStorage();
     return {
       containerKey,
-      editorState,
       isEditorShown: true,
-      isViewerShown: !this.isMobile,
+      isViewerShown: !isMobile,
       isContentStateShown: false,
       viewerResetKey: 0,
       editorResetKey: 0,
@@ -72,8 +55,6 @@ class App extends PureComponent {
   onContentStateEditorResize = () =>
     this.contentStateEditor && this.contentStateEditor.refreshLayout();
 
-  onEditorChange = editorState => this.setState({ editorState });
-
   onSectionVisibilityChange = (sectionName, isVisible) => {
     this.setState(
       { [`is${sectionName}Shown`]: isVisible, containerKey: generateKey('prefix') },
@@ -84,22 +65,17 @@ class App extends PureComponent {
     this.onContentStateEditorResize();
   };
 
-  setLocale = locale => {
-    import(`wix-rich-content-editor/statics/locale/messages_${locale}.json`).then(localeResource =>
-      this.setState({ locale, localeResource: localeResource.default })
-    );
-  };
-
   renderEditor = () => {
     const {
-      isEditorShown,
+      allLocales,
       editorState,
-      editorIsMobile,
-      staticToolbar,
       locale,
       localeResource,
-      shouldMockUpload,
-    } = this.state;
+      isMobile,
+      setLocale,
+      onEditorChange,
+    } = this.props;
+    const { isEditorShown, staticToolbar, shouldMockUpload, editorIsMobile } = this.state;
     const settings = [
       {
         name: 'Mobile',
@@ -115,11 +91,11 @@ class App extends PureComponent {
         active: shouldMockUpload,
         action: () =>
           this.setState(state => ({
-            shouldMockUpload: !shouldMockUpload,
+            shouldMockUpload: !state.shouldMockUpload, //changed
           })),
       },
     ];
-    if (!isMobile()) {
+    if (!isMobile) {
       settings.push({
         name: 'Static Toolbar',
         active: staticToolbar,
@@ -128,8 +104,8 @@ class App extends PureComponent {
       settings.push({
         name: 'Locale',
         active: locale,
-        action: selectedLocale => this.setLocale(selectedLocale),
-        items: this.props.allLocales,
+        action: selectedLocale => setLocale(selectedLocale),
+        items: allLocales,
       });
     }
     return (
@@ -143,9 +119,10 @@ class App extends PureComponent {
           <SectionContent>
             <ErrorBoundary>
               <Editor
-                onChange={this.onEditorChange}
+                onChange={onEditorChange}
                 editorState={editorState}
-                isMobile={this.state.editorIsMobile || this.isMobile}
+                //isMobile={isMobile}
+                isMobile={this.state.editorIsMobile || isMobile}
                 shouldMockUpload={this.state.shouldMockUpload}
                 staticToolbar={staticToolbar}
                 locale={locale}
@@ -159,7 +136,8 @@ class App extends PureComponent {
   };
 
   renderViewer = () => {
-    const { isViewerShown, editorState } = this.state;
+    const { editorState, isMobile } = this.props;
+    const { isViewerShown } = this.state;
     const settings = [
       {
         name: 'Mobile',
@@ -181,10 +159,7 @@ class App extends PureComponent {
           />
           <SectionContent>
             <ErrorBoundary>
-              <Viewer
-                initialState={viewerState}
-                isMobile={this.state.viewerIsMobile || this.isMobile}
-              />
+              <Viewer initialState={viewerState} isMobile={this.state.viewerIsMobile || isMobile} />
             </ErrorBoundary>
           </SectionContent>
         </ReflexElement>
@@ -193,7 +168,8 @@ class App extends PureComponent {
   };
 
   renderContentState = () => {
-    const { isContentStateShown, editorState } = this.state;
+    const { editorState } = this.props;
+    const { isContentStateShown } = this.state;
     return (
       isContentStateShown && (
         <ReflexElement
@@ -228,6 +204,7 @@ class App extends PureComponent {
   };
 
   render() {
+    const { isMobile } = this.props;
     const { isEditorShown, isViewerShown, isContentStateShown } = this.state;
     const showEmptyState = !isEditorShown && !isViewerShown && !isContentStateShown;
 
@@ -241,7 +218,7 @@ class App extends PureComponent {
           )}
         </ReflexContainer>
         <Fab
-          isMobile={this.isMobile}
+          isMobile={isMobile}
           isEditorShown={isEditorShown}
           isViewerShown={isViewerShown}
           isContentStateShown={isContentStateShown}
@@ -280,4 +257,4 @@ function disableBrowserBackButton() {
   })(window);
 }
 
-export default hot(App);
+export default hot(ExampleApp);

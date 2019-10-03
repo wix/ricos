@@ -1,16 +1,12 @@
 import React from 'react';
 import { renderToString } from 'react-dom/server';
-import Editor from '../../../../examples/main/src/editor/Editor.jsx';
-import Viewer from '../shared/components/Viewer';
+import RichContentApp from '../../../../examples/main/shared/RichContentApp.jsx';
+import Editor from '../../../../examples/main/shared/editor/Editor.jsx';
 
 const COMPONENTS = {
   rce: {
-    Components: [Editor],
+    Components: [RichContentApp],
     bundleName: 'editor',
-  },
-  combined: {
-    Components: [Editor, Viewer],
-    bundleName: 'combined',
   },
 };
 
@@ -38,7 +34,7 @@ export default function renderer() {
       html: renderToString(
         <>
           {Components.map((Comp, i) => (
-            <Comp key={i} {...props} />
+            <Comp key={i} mode ={'test'} {...props}/>
           ))}
         </>
       ),
