@@ -9,6 +9,8 @@
 
 ## [Unreleased]
 ### :rocket: New Feature
+- `fullscreen`
+  - [#389](https://github.com/wix-incubator/rich-content/pull/389) fullscreen for gallery and images :)
 - `gallery`
   - [#391](https://github.com/wix-incubator/rich-content/pull/391) gallery image titles
 ### :bug: Bug Fix
