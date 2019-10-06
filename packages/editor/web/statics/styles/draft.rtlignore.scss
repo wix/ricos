@@ -1,7 +1,7 @@
 @import '~wix-rich-content-common/dist/statics/styles/consts';
 @import '~wix-rich-content-common/dist/statics/styles/mixins';
 
-.wrapper {
+[dir].wrapper {
   :global {
 
     .DraftEditor-editorContainer,
@@ -92,7 +92,7 @@
       padding: 0;
 
       &>* {
-        margin-inline-start: 40px !important;
+        margin-inline-start: 40px;
       }
     }
   }
