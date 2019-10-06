@@ -4,7 +4,7 @@ import ReactModal from 'react-modal';
 import MonacoEditor from 'react-monaco-editor';
 import { RichContentViewer } from 'wix-rich-content-viewer';
 import { RichContentModal } from 'wix-rich-content-common';
-import { ContentStateTransformation } from 'wix-rich-content-preview';
+import { ContentStateTransformation, interactionMap } from 'wix-rich-content-preview';
 import * as PropTypes from 'prop-types';
 import * as Plugins from './PreviewPlugins';
 import theme from '../theme/theme'; // must import after custom styles
@@ -32,7 +32,7 @@ export default class Preview extends PureComponent {
     };
     this.transformation = new ContentStateTransformation({
       _if: metadata => metadata.text.plain.array().length > 0,
-      _then: (metadata, preview) => preview.plain(metadata.text.plain.array()[0]).readMore({ lines: 3 })
+      _then: (metadata, preview) => preview.plain(metadata.text.plain.array()[0]).readMore({ lines: 5 })
     }).rule({
       _if: metadata => metadata.media.images().length > 3,
       _then: (metadata, preview) => preview.gallery({
@@ -60,6 +60,7 @@ export default class Preview extends PureComponent {
 <div id="rich-content-preview" className="viewer">
   <div style={{ height: '50vh', width: '100%' }}>
     <RichContentViewer
+      contentInteractionMappers={[interactionMap]}
       helpers={this.helpers}
       typeMappers={Plugins.typeMappers}
       inlineStyleMappers={Plugins.getInlineStyleMappers(this.props.initialState)}

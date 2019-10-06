@@ -1,41 +1,49 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import LinesEllipsis from 'react-lines-ellipsis';
-import { Context, mergeStyles } from 'wix-rich-content-common';
-import Styles from '../../statics/styles/read-more.scss';
+import { getChildrenText } from '../utils';
+import '../../statics/styles/read-more.scss';
 
 class ReadMore extends PureComponent {
   static propTypes = {
     ellipsis: PropTypes.string,
     label: PropTypes.string,
     lines: PropTypes.number,
-    text: PropTypes.string.isRequired,
+    children: PropTypes.node.isRequired,
+    styles: PropTypes.object.isRequired,
   };
 
   static defaultProps = {
     ellipsis: '…',
-    label: 'read more…',
+    label: 'read more',
     lines: 3,
   };
 
   constructor(props) {
     super(props);
-    this.styles = mergeStyles({ styles: Styles, theme: this.context.theme });
+    this.state = {
+      readMoreActive: true,
+    };
   }
 
+  onTextClick = e => {
+    e.preventDefault();
+    this.setState({ readMoreActive: false });
+  };
+
   render() {
-    const { lines, label, ellipsis, ...rest } = this.props;
+    const { lines, label, ellipsis, children, styles } = this.props;
+    const text = getChildrenText(children);
     return (
       <LinesEllipsis
-        className={this.styles.readMore}
-        {...rest}
-        maxLine={lines}
+        onClick={this.onTextClick}
+        text={text}
+        className={styles.readMore}
+        maxLine={this.state.readMoreActive ? lines : Infinity}
         ellipsis={`${ellipsis} ${label}`}
       />
     );
   }
 }
-
-ReadMore.contextType = Context.type;
 
 export default ReadMore;

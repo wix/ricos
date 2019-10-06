@@ -37,6 +37,7 @@
     }
   },
   "dependencies": {
+    "react-lines-ellipsis": "0.14.1",
     "wix-rich-content-common": "5.0.1",
     "wix-rich-content-viewer": "5.0.1"
   },
@@ -60,7 +61,7 @@
     "jest": "^23.1.0",
     "lodash": "^4.17.10",
     "prop-types": "^15.6.2",
-    "react": "16.6.3",
+    "react": "^16.6.3",
     "react-dom": "16.6.3",
     "rollup": "1.20.3"
   },

@@ -45,14 +45,16 @@ const getBlocks = (mergedStyles, textDirection, contentInteractionMappers) => {
 
   const interactionMap = combineMappers(contentInteractionMappers, mergedStyles);
 
+  const DefaultBlockWrapper = ({ children }) => children;
+
   const blockFactory = (type, style, withDiv) => {
     return (children, blockProps) =>
       children.map((child, i) => {
-        let BlockWrapper = children => <div>{children}</div>;
         const Type = typeof type === 'string' ? type : type(child);
+        let BlockWrapper = DefaultBlockWrapper;
         const { interactions } = blockProps.data[i];
         if (isArray(interactions)) {
-          BlockWrapper = children =>
+          BlockWrapper = ({ children }) =>
             interactions.reduce((Wrapper, { type, settings }) => {
               const Interaction = interactionMap[type];
               return (
@@ -63,7 +65,7 @@ const getBlocks = (mergedStyles, textDirection, contentInteractionMappers) => {
             }, BlockWrapper);
         }
         return (
-          <BlockWrapper key={`${blockProps.key[i]}_wrap`}>
+          <BlockWrapper key={`${blockProps.keys[i]}_wrap`}>
             <Type
               className={getBlockStyleClasses(
                 blockProps.data[i],
@@ -154,6 +156,7 @@ const convertToReact = (
   entityProps,
   decorators,
   inlineStyleMappers,
+  contentInteractionMappers,
   options = {}
 ) => {
   if (isEmptyContentState(contentState)) {
@@ -164,7 +167,7 @@ const convertToReact = (
     normalizeContentState(contentState),
     {
       inline: getInline(inlineStyleMappers, mergedStyles),
-      blocks: getBlocks(mergedStyles, textDirection),
+      blocks: getBlocks(mergedStyles, textDirection, contentInteractionMappers),
       entities: getEntities(combineMappers(typeMap), entityProps, mergedStyles),
       decorators,
     },
