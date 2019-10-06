@@ -4,7 +4,7 @@ import ReadMore from './Components/ReadMore';
 
 export { default as ContentStateTransformation } from './RuleEngine/ContentStateTransformation';
 export const interactionMap = mergedStyles => ({
-  [INTERACTIONS.READ_MORE]: ({ children, ...props }) => (
+  [INTERACTIONS.READ_MORE]: ({ children, ...props }) => ( // eslint-disable-line
     <ReadMore styles={mergedStyles} {...props}>
       {children}
     </ReadMore>

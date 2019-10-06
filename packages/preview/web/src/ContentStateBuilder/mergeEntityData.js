@@ -18,7 +18,7 @@ const imageMerger = ({ url, width, height, metadata, link }, entity) => ({
     src: {
       width,
       height,
-      file_name: url,
+      file_name: url, // eslint-disable-line
     },
   },
 });
