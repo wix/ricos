@@ -118,7 +118,10 @@ class ExampleApp extends PureComponent {
     }
     return (
       isEditorShown && (
-        <ReflexElement key={`editor-section-${this.state.viewerResetKey}`} className="section">
+        <ReflexElement
+          key={`editor-section-${this.state.viewerResetKey}`}
+          className="section editor-example"
+        >
           <SectionHeader
             title="Editor"
             settings={settings}
@@ -157,7 +160,10 @@ class ExampleApp extends PureComponent {
     ];
     return (
       isViewerShown && (
-        <ReflexElement key={`viewer-section-${this.state.viewerResetKey}`} className="section">
+        <ReflexElement
+          key={`viewer-section-${this.state.viewerResetKey}`}
+          className="section viewer-example"
+        >
           <SectionHeader
             title="Viewer"
             settings={settings}

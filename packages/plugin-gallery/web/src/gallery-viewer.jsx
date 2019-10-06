@@ -6,7 +6,7 @@ import { convertItemData } from './helpers/convert-item-data';
 import { getDefault, isHorizontalLayout } from './constants';
 import resizeMediaUrl from './helpers/resize-media-url';
 import schema from '../statics/data-schema.json';
-import styles from '../statics/styles/viewer.scss';
+import viewerStyles from '../statics/styles/viewer.scss';
 import 'pro-gallery/dist/statics/main.min.css';
 import ExpandIcon from './icons/expand.svg';
 
@@ -158,7 +158,7 @@ class GalleryViewer extends React.Component {
   hoverElement = itemProps => {
     return itemProps.linkData.url ? (
       <ExpandIcon
-        className={this.styles.expandIcon}
+        className={this.viewerStyles.expandIcon}
         onClick={e => {
           e.preventDefault();
           this.handleExpand(itemProps);
@@ -168,7 +168,8 @@ class GalleryViewer extends React.Component {
   };
 
   render() {
-    this.styles = this.styles || mergeStyles({ styles, theme: this.context.theme });
+    this.styles = this.styles || mergeStyles({ styles: viewerStyles, theme: this.context.theme });
+    const { scrollingElement, ...settings } = this.props.settings;
     // TODO remove gallery key
     const { galleryKey, styleParams, size = { width: 300 } } = this.state;
     const items = this.getItems();
@@ -182,7 +183,8 @@ class GalleryViewer extends React.Component {
           items={items}
           styles={styleParams}
           container={size}
-          settings={this.props.settings}
+          settings={settings}
+          scrollingElement={scrollingElement}
           eventsListener={this.handleGalleryEvents}
           resizeMediaUrl={resizeMediaUrl}
           customHoverRenderer={this.hoverElement}
