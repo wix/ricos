@@ -9,7 +9,7 @@ import { getRequestedLocale, isMobile } from '../src/utils';
 
 const generateViewerState = editorState =>
   JSON.parse(JSON.stringify(convertToRaw(editorState.getCurrentContent())));
-
+var locale;
 class RichContentApp extends PureComponent {
   constructor(props) {
     super(props);
@@ -17,14 +17,14 @@ class RichContentApp extends PureComponent {
   }
 
   getInitialState = ({ initialState, localeFromProps }) => {
-    const locale = localeFromProps ? localeFromProps : getRequestedLocale();
+    locale = localeFromProps ? localeFromProps : getRequestedLocale();
     //todo: check this
-    if (!isSSR() && locale && locale !== 'en') {
+    if (!isSSR() && locale !== 'en') {
       this.setLocaleResource(locale);
     }
     return {
       viewerState: initialState || generateViewerState(createEmpty()),
-      locale,
+      // locale,
     };
   };
 
@@ -43,7 +43,7 @@ class RichContentApp extends PureComponent {
   }, 100);
 
   render() {
-    const { editorState, viewerState, locale, localeResource } = this.state;
+    const { editorState, viewerState, localeResource } = this.state; //locale, localeResource
     const { allLocales, initialState, mode } = this.props;
     const App = mode === 'demo' ? ExampleApp : TestApp;
     return (
