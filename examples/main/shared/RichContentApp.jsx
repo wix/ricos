@@ -6,7 +6,7 @@ import ExampleApp from '../src/ExampleApp';
 import { isSSR } from 'wix-rich-content-common';
 import TestApp from '../../../e2e/test-env/src/client/TestApp';
 import { getRequestedLocale, isMobile } from '../src/utils';
-const isItMobile = isMobile;
+
 const generateViewerState = editorState =>
   JSON.parse(JSON.stringify(convertToRaw(editorState.getCurrentContent())));
 
@@ -16,7 +16,7 @@ class RichContentApp extends PureComponent {
     this.state = this.getInitialState(props);
   }
 
-  getInitialState = ({ initialState, isMobile, localeFromProps }) => {
+  getInitialState = ({ initialState, localeFromProps }) => {
     const locale = localeFromProps ? localeFromProps : getRequestedLocale();
     //todo: check this
     if (!isSSR() && locale && locale !== 'en') {
@@ -25,7 +25,6 @@ class RichContentApp extends PureComponent {
     return {
       viewerState: initialState || generateViewerState(createEmpty()),
       locale,
-      isMobile,
     };
   };
 
@@ -44,16 +43,17 @@ class RichContentApp extends PureComponent {
   }, 100);
 
   render() {
-    const { editorState, viewerState, locale, localeResource, isMobile } = this.state;
-    const { initialState, mode } = this.props;
+    const { editorState, viewerState, locale, localeResource } = this.state;
+    const { allLocales, initialState, mode } = this.props;
     const App = mode === 'demo' ? ExampleApp : TestApp;
     return (
       <App
+        allLocales={allLocales}
         initialState={initialState}
         editorState={editorState}
         viewerState={viewerState}
         locale={locale}
-        isMobile={isMobile || isItMobile()}
+        isMobile={mode === 'demo' ? isMobile() : this.props.isMobile}
         localeResource={localeResource}
         onEditorChange={this.onEditorChange}
         setLocale={this.setLocaleResource}
