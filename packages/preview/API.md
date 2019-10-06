@@ -259,3 +259,36 @@ const transformation = new ContentStateTransformation({ _if: ..., _then: ... })
   .rule({ _if: ..., _then: ... });
 
 ```
+
+## Content Interactions
+
+The content interaction indicate that the preview content is collapsed, and provide a way to expand it. Content interactions work at the block level. Every interaction consists of the following elements:
+
+- *ContentStateBuilder API* allows a consumer to add an interaction to the preview state and configure it. These APIs can be chained just like any other ContentStateBuilder method:
+
+  ```js
+
+    builder.plain('some looong text').readMore({ lines: 5 }).image({ mediaInfo: {...} })
+
+  ```
+
+  In this example, the `readMore` interaction is being applied to the previous `plain` block.
+
+- *block data interactions array* contains configuration data for all the interactions applied to the block 
+- *UI component* defines the appearance of the interaction element
+
+### ReadMore
+
+The `ReadMore` component comes to display a portion of a long text, appending it an ellipsis symbol and label (by default, those are '… read more'). The mouse click on text expands the collapsed portion.
+The ContentStateBuilder exposes `readMore` API that accepts configuration object:
+
+```js
+
+  {
+    lines: number,
+    ellipsis: string,
+    label: string
+  }
+
+```
+
