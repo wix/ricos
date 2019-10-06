@@ -16,8 +16,8 @@ class RichContentApp extends PureComponent {
     this.state = this.getInitialState(props);
   }
 
-  getInitialState = ({ initialState, isMobile, locale }) => {
-    if (!locale) locale = getRequestedLocale();
+  getInitialState = ({ initialState, isMobile, localeFromProps }) => {
+    const locale = localeFromProps ? localeFromProps : getRequestedLocale();
     //todo: check this
     if (!isSSR() && locale && locale !== 'en') {
       this.setLocaleResource(locale);
@@ -56,7 +56,7 @@ class RichContentApp extends PureComponent {
         isMobile={isMobile || isItMobile()}
         localeResource={localeResource}
         onEditorChange={this.onEditorChange}
-        setLocale={this.setLocale}
+        setLocale={this.setLocaleResource}
       />
     );
   }

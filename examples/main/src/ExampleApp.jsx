@@ -126,7 +126,6 @@ class ExampleApp extends PureComponent {
               <Editor
                 onChange={this.onEditorChange}
                 editorState={editorState}
-                //isMobile={isMobile}
                 isMobile={this.state.editorIsMobile || isMobile}
                 shouldMockUpload={this.state.shouldMockUpload}
                 staticToolbar={staticToolbar}
