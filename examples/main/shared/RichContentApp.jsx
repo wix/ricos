@@ -9,41 +9,47 @@ import { getRequestedLocale, isMobile } from '../src/utils';
 
 const generateViewerState = editorState =>
   JSON.parse(JSON.stringify(convertToRaw(editorState.getCurrentContent())));
-var locale;
+
 class RichContentApp extends PureComponent {
   constructor(props) {
     super(props);
     this.state = this.getInitialState(props);
   }
 
-  getInitialState = ({ initialState, localeFromProps }) => {
-    locale = localeFromProps ? localeFromProps : getRequestedLocale();
+  getInitialState = ({ initialState, locale }) => {
+    const tmpLocale = locale ? locale : getRequestedLocale();
     //todo: check this
-    if (!isSSR() && locale !== 'en') {
-      this.setLocaleResource(locale);
+    if (!isSSR() && this.props.mode === 'demo' && tmpLocale !== 'en') {
+      this.setLocaleResource(tmpLocale);
     }
     return {
       viewerState: initialState || generateViewerState(createEmpty()),
-      // locale,
+      locale: tmpLocale,
     };
   };
 
   setLocaleResource = locale => {
     import(`wix-rich-content-editor/statics/locale/messages_${locale}.json`).then(localeResource =>
-      this.setState({ localeResource: localeResource.default })
+      this.setState({ locale, localeResource: localeResource.default })
     );
   };
-
-  onEditorChange = debounce(editorState => {
+  onChange = editorState => {
     this.setState({
       editorState,
       viewerState: generateViewerState(editorState),
     });
     this.props.onEditorChange && this.props.onEditorChange(editorState);
-  }, 100);
+  };
+  onEditorChange = editorState => {
+    if (this.props.mode === 'demo') {
+      debounce(this.onChange(editorState), 100);
+    } else {
+      this.onChange(editorState);
+    }
+  };
 
   render() {
-    const { editorState, viewerState, localeResource } = this.state; //locale, localeResource
+    const { editorState, viewerState, localeResource, locale } = this.state;
     const { allLocales, initialState, mode } = this.props;
     const App = mode === 'demo' ? ExampleApp : TestApp;
     return (

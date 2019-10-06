@@ -77,9 +77,13 @@ class ExampleApp extends PureComponent {
     );
     this.onContentStateEditorResize();
   };
+  onSetLocale = locale => {
+    this.setState({ locale });
+    this.props.setLocale && this.props.setLocale(locale);
+  };
 
   renderEditor = () => {
-    const { allLocales, editorState, locale, localeResource, isMobile, setLocale } = this.props;
+    const { allLocales, editorState, locale, localeResource, isMobile } = this.props;
     const { isEditorShown, staticToolbar, shouldMockUpload, editorIsMobile } = this.state;
     const settings = [
       {
@@ -109,7 +113,7 @@ class ExampleApp extends PureComponent {
       settings.push({
         name: 'Locale',
         active: locale,
-        action: selectedLocale => setLocale(selectedLocale),
+        action: selectedLocale => this.onSetLocale(selectedLocale),
         items: allLocales,
       });
     }

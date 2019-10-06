@@ -9,6 +9,7 @@ describe('editor', () => {
         'Leverage agile frameworks',
         'to provide a robust synopsis for high level overviews.',
       ])
+      .setSelection(0, 0)
       .blurEditor()
       .matchSnapshots();
   });
@@ -60,6 +61,7 @@ describe('editor', () => {
       .alignImage('left')
       .alignImage('center')
       .alignImage('right')
+      .setSelection(0, 0)
       .matchSnapshots();
   });
 
