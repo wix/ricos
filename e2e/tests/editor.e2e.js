@@ -7,7 +7,6 @@ describe('editor', () => {
     cy.eyesOpen({
       batchName: 'Editor',
       browser: [{ width: 1440, height: 900, name: 'chrome' }],
-      // branchName: this.currentBranch,
     });
     cy.log(process.env);
     cy.switchToDesktop();
