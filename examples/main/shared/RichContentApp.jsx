@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { debounce } from 'lodash';
+// import { debounce } from 'lodash';
 import { convertToRaw, createEmpty } from 'wix-rich-content-editor/dist/lib/editorStateConversion';
 import ExampleApp from '../src/ExampleApp';
 import { isSSR } from 'wix-rich-content-common';
@@ -41,11 +41,11 @@ class RichContentApp extends PureComponent {
     this.props.onEditorChange && this.props.onEditorChange(editorState);
   };
   onEditorChange = editorState => {
-    if (this.props.mode === 'demo') {
-      debounce(this.onChange(editorState), 100);
-    } else {
-      this.onChange(editorState);
-    }
+    // if (this.props.mode === 'demo') {
+    //   debounce(this.onChange(editorState), 100);
+    // } else {
+    this.onChange(editorState);
+    //}
   };
 
   render() {
