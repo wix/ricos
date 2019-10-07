@@ -1,5 +1,7 @@
 import { INLINE_TOOLBAR_BUTTONS } from '../cypress/dataHooks';
 
+/* eslint-disable mocha/no-skipped-tests */
+
 describe('editor', () => {
   beforeEach(() => cy.switchToDesktop());
 

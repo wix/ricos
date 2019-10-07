@@ -1943,16 +1943,6 @@ exports[`plugins > gallery > organize media > should allow to re-organize #0`] =
         },
         "items": [
           {
-            "itemId": "65a6266ba23a8a55da3f469157f15237",
-            "metadata": {
-              "height": 1893,
-              "processedByConsumer": true,
-              "width": 2839
-            },
-            "selected": false,
-            "url": "8bb438_2d651ff17f644d0db766521a18bf888b.jpg"
-          },
-          {
             "itemId": "ea8ec1609e052b7f196935318316299d",
             "metadata": {
               "height": 2829,
@@ -1961,6 +1951,16 @@ exports[`plugins > gallery > organize media > should allow to re-organize #0`] =
             },
             "selected": false,
             "url": "8bb438_149b418b9bfb47e0adafc569ca55c5e9.jpg"
+          },
+          {
+            "itemId": "65a6266ba23a8a55da3f469157f15237",
+            "metadata": {
+              "height": 1893,
+              "processedByConsumer": true,
+              "width": 2839
+            },
+            "selected": false,
+            "url": "8bb438_2d651ff17f644d0db766521a18bf888b.jpg"
           }
         ],
         "styles": {
@@ -2585,28 +2585,7 @@ exports[`plugins > gallery > image settings > should allow to delete all images 
           "size": "small",
           "spacing": 0
         },
-        "items": [
-          {
-            "itemId": "65a6266ba23a8a55da3f469157f15237",
-            "metadata": {
-              "height": 1893,
-              "processedByConsumer": true,
-              "width": 2839
-            },
-            "selected": false,
-            "url": "8bb438_2d651ff17f644d0db766521a18bf888b.jpg"
-          },
-          {
-            "itemId": "ea8ec1609e052b7f196935318316299d",
-            "metadata": {
-              "height": 2829,
-              "processedByConsumer": true,
-              "width": 4200
-            },
-            "selected": false,
-            "url": "8bb438_149b418b9bfb47e0adafc569ca55c5e9.jpg"
-          }
-        ],
+        "items": [],
         "styles": {
           "allowDownload": false,
           "allowHover": false,
@@ -2703,9 +2682,47 @@ exports[`plugins > html > should render plugin toolbar #0`] =
       "key": 0,
       "text": "",
       "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "",
+      "type": "unstyled"
     }
   ],
-  "entityMap": {}
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "height": 550,
+          "width": 350
+        },
+        "src": "<blockquote class=\"twitter-tweet\" data-lang=\"en\"><p lang=\"en\" dir=\"ltr\">The updates, insights and stories of the engineering challenges we encounter, and our way of solving them. Subscribe to our fresh, monthly newsletter and get these goodies right to your e-mail:<a href=\"https://t.co/0ziRSJJAxK\">https://t.co/0ziRSJJAxK</a> <a href=\"https://t.co/nTHlsG5z2a\">pic.twitter.com/nTHlsG5z2a</a></p>&mdash; Wix Engineering (@WixEng) <a href=\"https://twitter.com/WixEng/status/1076810144774868992?ref_src=twsrc%5Etfw\">December 23, 2018</a></blockquote> <script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script>",
+        "srcType": "html"
+      },
+      "mutability": "IMMUTABLE",
+      "type": "wix-draft-plugin-html"
+    }
+  }
 };
 
 exports[`plugins > divider > should render plugin toolbar #0`] =
@@ -2994,8 +3011,8 @@ exports[`plugins > divider > should render plugin toolbar and change styling #0`
     "1": {
       "data": {
         "config": {
-          "alignment": "center",
-          "size": "large",
+          "alignment": "right",
+          "size": "medium",
           "textWrap": "nowrap"
         },
         "type": "double"
@@ -3010,7 +3027,7 @@ exports[`plugins > divider > should render plugin toolbar and change styling #0`
           "size": "large",
           "textWrap": "nowrap"
         },
-        "type": "dashed"
+        "type": "double"
       },
       "mutability": "IMMUTABLE",
       "type": "wix-draft-plugin-divider"

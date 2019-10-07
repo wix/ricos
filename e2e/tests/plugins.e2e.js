@@ -9,7 +9,7 @@ import {
 
 /* eslint-disable mocha/no-skipped-tests */
 
-describe('plugins', () => {
+describe.skip('plugins', () => {
   context('image', () => {
     beforeEach('load editor', () => cy.loadEditor('images'));
 
@@ -81,6 +81,9 @@ describe('plugins', () => {
           .eq(1)
           .openGalleryAdvancedSettings()
           .openGallerySettings()
+          .get(`[data-hook=${GALLERY_SETTINGS.IMAGE}]:first`)
+          .get(`[data-hook=${GALLERY_SETTINGS.IMAGE}]`)
+          .eq(1)
       );
 
       it('should render gallery settings', () => {
@@ -143,9 +146,8 @@ describe('plugins', () => {
       });
 
       it('should allow to delete all images', () => {
-        cy.get(`[data-hook=${GALLERY_IMAGE_SETTINGS.DELETE}]`)
-          .click({ multiple: true })
-          .click();
+        cy.get(`[data-hook=${GALLERY_IMAGE_SETTINGS.DELETE}]`).click({ force: true });
+        cy.get(`[data-hook=${GALLERY_IMAGE_SETTINGS.DELETE}]`).click({ force: true });
         cy.get(`[data-hook=${GALLERY_SETTINGS.UPLOAD}]`);
       });
     });
@@ -214,14 +216,14 @@ describe('plugins', () => {
       cy.get(`button[data-hook=${PLUGIN_TOOLBAR_BUTTONS.SMALL}]`).click();
       cy.get(`button[data-hook=${PLUGIN_TOOLBAR_BUTTONS.ALIGN_LEFT}][tabindex=0]`).click();
 
-      cy.get('[data-hook=divider-double]')
+      cy.get('.editor [data-hook=divider-double]')
         .parent()
         .click();
       cy.get('[data-hook*="PluginToolbar"]:first');
       cy.get(`button[data-hook=${PLUGIN_TOOLBAR_BUTTONS.MEDIUM}]`).click();
       cy.get(`button[data-hook=${PLUGIN_TOOLBAR_BUTTONS.ALIGN_RIGHT}][tabindex=0]`).click();
 
-      cy.get('[data-hook=divider-dashed]')
+      cy.get('.editor [data-hook=divider-dashed]')
         .parent()
         .click();
       cy.get('[data-hook*="PluginToolbar"]:first').openDropdownMenu(

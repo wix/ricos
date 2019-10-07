@@ -36,106 +36,138 @@ exports[`editor > should allow to apply inline styles and links #0`] =
       "type": "unstyled"
     },
     {
-      "data": {
-        "textAlignment": "center"
-      },
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
       "depth": 0,
       "entityRanges": [
         {
           "key": 0,
-          "length": 10,
+          "length": 8,
           "offset": 0
         },
         {
+          "key": 0,
+          "length": 2,
+          "offset": 9
+        },
+        {
           "key": 1,
-          "length": 30,
-          "offset": 15
+          "length": 5,
+          "offset": 11
         },
         {
           "key": 2,
+          "length": 10,
+          "offset": 17
+        },
+        {
+          "key": 3,
+          "length": 30,
+          "offset": 32
+        },
+        {
+          "key": 4,
           "length": 65,
-          "offset": 50
+          "offset": 67
         }
       ],
       "inlineStyleRanges": [
         {
-          "length": 45,
+          "length": 8,
           "offset": 0,
           "style": "UNDERLINE"
         },
         {
+          "length": 7,
+          "offset": 9,
+          "style": "UNDERLINE"
+        },
+        {
+          "length": 45,
+          "offset": 17,
+          "style": "UNDERLINE"
+        },
+        {
           "length": 65,
-          "offset": 50,
+          "offset": 67,
           "style": "UNDERLINE"
         },
         {
           "length": 102,
-          "offset": 201,
+          "offset": 218,
           "style": "UNDERLINE"
         },
         {
           "length": 78,
-          "offset": 304,
+          "offset": 321,
           "style": "UNDERLINE"
         },
         {
           "length": 28,
-          "offset": 383,
+          "offset": 400,
           "style": "UNDERLINE"
         },
         {
           "length": 5,
-          "offset": 20,
+          "offset": 37,
           "style": "ITALIC"
         },
         {
           "length": 102,
-          "offset": 201,
+          "offset": 218,
           "style": "ITALIC"
         },
         {
           "length": 78,
-          "offset": 304,
+          "offset": 321,
           "style": "ITALIC"
         },
         {
           "length": 28,
-          "offset": 383,
+          "offset": 400,
           "style": "ITALIC"
         },
         {
           "length": 5,
-          "offset": 30,
+          "offset": 47,
           "style": "BOLD"
         },
         {
           "length": 10,
-          "offset": 40,
+          "offset": 57,
           "style": "BOLD"
         },
         {
           "length": 100,
-          "offset": 201,
+          "offset": 218,
           "style": "color5"
         },
         {
           "length": 2,
-          "offset": 301,
+          "offset": 318,
           "style": "color2"
         },
         {
           "length": 78,
-          "offset": 304,
+          "offset": 321,
           "style": "color2"
         },
         {
           "length": 149,
-          "offset": 383,
+          "offset": 400,
           "style": "color2"
         }
       ],
-      "key": 1,
-      "text": "Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition. \nOrganically grow the holistic world view of disruptive innovation via workplace diversity and empowerment.\nBring to the table win-win survival strategies to ensure proactive domination.\nAt the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution. ",
+      "key": 2,
+      "text": "@NO MORE\nE DREAM\nLeverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition. \nOrganically grow the holistic world view of disruptive innovation via workplace diversity and empowerment.\nBring to the table win-win survival strategies to ensure proactive domination.\nAt the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution. ",
       "type": "code-block"
     },
     {
@@ -143,7 +175,16 @@ exports[`editor > should allow to apply inline styles and links #0`] =
       "depth": 0,
       "entityRanges": [],
       "inlineStyleRanges": [],
-      "key": 2,
+      "key": 3,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 4,
       "text": "",
       "type": "unstyled"
     },
@@ -158,7 +199,7 @@ exports[`editor > should allow to apply inline styles and links #0`] =
           "style": "color2"
         }
       ],
-      "key": 3,
+      "key": 5,
       "text": "User generated content in real-time will have multiple touchpoints for offshoring.",
       "type": "unstyled"
     },
@@ -167,7 +208,7 @@ exports[`editor > should allow to apply inline styles and links #0`] =
       "depth": 0,
       "entityRanges": [],
       "inlineStyleRanges": [],
-      "key": 4,
+      "key": 6,
       "text": "Capitalize on low hanging fruit to identify a ballpark value added activity to beta test. ",
       "type": "unstyled"
     },
@@ -176,7 +217,7 @@ exports[`editor > should allow to apply inline styles and links #0`] =
       "depth": 0,
       "entityRanges": [],
       "inlineStyleRanges": [],
-      "key": 5,
+      "key": 7,
       "text": "Override the digital divide with additional clickthroughs from DevOps.",
       "type": "unstyled"
     },
@@ -185,7 +226,7 @@ exports[`editor > should allow to apply inline styles and links #0`] =
       "depth": 0,
       "entityRanges": [],
       "inlineStyleRanges": [],
-      "key": 6,
+      "key": 8,
       "text": "Nanotechnology immersion along the information highway will close the loop on focusing solely on the bottom line.",
       "type": "unstyled"
     }
@@ -204,12 +245,30 @@ exports[`editor > should allow to apply inline styles and links #0`] =
       "data": {
         "rel": "nofollow",
         "target": "_blank",
-        "url": "https://www.sport5.co.il/"
+        "url": "https://www.sport5.co.il"
       },
       "mutability": "MUTABLE",
       "type": "LINK"
     },
     "2": {
+      "data": {
+        "rel": "nofollow",
+        "target": "_blank",
+        "url": "https://www.wix.com/"
+      },
+      "mutability": "MUTABLE",
+      "type": "LINK"
+    },
+    "3": {
+      "data": {
+        "rel": "nofollow",
+        "target": "_blank",
+        "url": "https://www.sport5.co.il/"
+      },
+      "mutability": "MUTABLE",
+      "type": "LINK"
+    },
+    "4": {
       "data": {
         "rel": "nofollow",
         "target": "_blank",
