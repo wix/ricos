@@ -22,8 +22,7 @@ export default function renderer() {
     }
 
     try {
-      const initialState = require(`../../../tests/fixtures/${fixtureName}.json`);
-      props.initialState = initialState;
+      props.initialState = require(`../../../tests/fixtures/${fixtureName}.json`);
     } catch (error) {
       console.log(error);
       return res.status(404).send(`Fixture ${fixtureName} not found`);

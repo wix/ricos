@@ -332,11 +332,11 @@ Cypress.Commands.add('openDropdownMenu', (selector = '') => {
 });
 
 Cypress.Commands.add('openVideoUploadModal', () => {
-  cy.get(`[data-hook*=${STATIC_TOOLBAR_BUTTONS.VIDEO}]:first`).click();
+  cy.get(`[data-hook*=${STATIC_TOOLBAR_BUTTONS.VIDEO}][tabindex!=-1]`).click();
 });
 
 Cypress.Commands.add('openSoundCloudModal', () => {
-  cy.get(`[data-hook*=${STATIC_TOOLBAR_BUTTONS.SOUND_CLOUD}]:first`).click();
+  cy.get(`[data-hook*=${STATIC_TOOLBAR_BUTTONS.SOUND_CLOUD}][tabindex!=-1]`).click();
 });
 
 Cypress.Commands.add('addSoundCloud', () => {
@@ -357,15 +357,8 @@ Cypress.Commands.add('addVideoFromURI', () => {
     .click();
 });
 
-Cypress.Commands.add('addCustomVideo', () => {
-  cy.get(`[data-hook*=${VIDEO_PLUGIN.CUSTOM}]`).click();
-  cy.get(`[data-hook=${PLUGIN_COMPONENT.VIDEO}]:first`)
-    .parent()
-    .click();
-});
-
 Cypress.Commands.add('addHtml', () => {
-  cy.get(`[data-hook*=${HTML_PLUGIN.STATIC_TOOLBAR_BUTTON}]`).click();
+  cy.get(`[data-hook*=${HTML_PLUGIN.STATIC_TOOLBAR_BUTTON}][tabindex!=-1]`).click();
   cy.get(`[data-hook*=${PLUGIN_TOOLBAR_BUTTONS.EDIT}]`).click();
   cy.get(`[data-hook*=${HTML_PLUGIN.INPUT}]`).type(
     '<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">The updates, insights and stories of the engineering challenges we encounter, and our way of solving them. Subscribe to our fresh, monthly newsletter and get these goodies right to your e-mail:<a href="https://t.co/0ziRSJJAxK">https://t.co/0ziRSJJAxK</a> <a href="https://t.co/nTHlsG5z2a">pic.twitter.com/nTHlsG5z2a</a></p>&mdash; Wix Engineering (@WixEng) <a href="https://twitter.com/WixEng/status/1076810144774868992?ref_src=twsrc%5Etfw">December 23, 2018</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>',
@@ -388,7 +381,7 @@ Cypress.Commands.add('dragAndDrop', (src, dest, elem = 0) => {
       const dest = target[0].getBoundingClientRect();
       cy.get(src)
         .trigger('mousedown', { which: 1 })
-        .trigger('mousemove', { which: 1, pageX: dest.x, pageY: dest.y })
+        .trigger('mousemove', { which: 1, pageX: dest.x + 50, pageY: dest.y + 20 })
         .trigger('mouseup', { force: true });
     });
 });
