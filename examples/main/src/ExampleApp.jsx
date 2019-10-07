@@ -21,7 +21,6 @@ class ExampleApp extends PureComponent {
   constructor(props) {
     super(props);
     this.state = this.getInitialState();
-    console.log('initial contentState', this.state.contentState);
     disableBrowserBackButton();
   }
 
@@ -100,7 +99,7 @@ class ExampleApp extends PureComponent {
         active: shouldMockUpload,
         action: () =>
           this.setState(state => ({
-            shouldMockUpload: !state.shouldMockUpload, //changed
+            shouldMockUpload: !state.shouldMockUpload,
           })),
       },
     ];

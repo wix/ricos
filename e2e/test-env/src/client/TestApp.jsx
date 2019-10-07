@@ -2,10 +2,7 @@ import React, { PureComponent } from 'react';
 import Editor from '../../../../examples/main/shared/editor/Editor';
 import Viewer from '../../../../examples/main/shared/viewer/Viewer';
 
-class TestApp extends PureComponent {
-  constructor(props) {
-    super(props);
-  }
+class TestApp extends PureComponent {  
   renderEditor = () => {
     const { initialState, onEditorChange, locale, localeResource, isMobile } = this.props;
     return (

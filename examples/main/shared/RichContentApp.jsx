@@ -1,9 +1,9 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-// import { debounce } from 'lodash';
+import { debounce } from 'lodash';
 import { convertToRaw, createEmpty } from 'wix-rich-content-editor/dist/lib/editorStateConversion';
-import ExampleApp from '../src/ExampleApp';
 import { isSSR } from 'wix-rich-content-common';
+import ExampleApp from '../src/ExampleApp';
 import TestApp from '../../../e2e/test-env/src/client/TestApp';
 import { getRequestedLocale, isMobile } from '../src/utils';
 
@@ -16,15 +16,13 @@ class RichContentApp extends PureComponent {
     this.state = this.getInitialState(props);
   }
 
-  getInitialState = ({ initialState, locale }) => {
-    const tmpLocale = locale ? locale : getRequestedLocale();
-    //todo: check this
-    if (!isSSR() && this.props.mode === 'demo' && tmpLocale !== 'en') {
-      this.setLocaleResource(tmpLocale);
+  getInitialState = ({ initialState, locale = getRequestedLocale(), mode }) => {
+    if (!isSSR() && mode === 'demo' && locale !== 'en') {
+      this.setLocaleResource(locale);
     }
     return {
       viewerState: initialState || generateViewerState(createEmpty()),
-      locale: tmpLocale,
+      locale,
     };
   };
 
@@ -33,6 +31,7 @@ class RichContentApp extends PureComponent {
       this.setState({ locale, localeResource: localeResource.default })
     );
   };
+
   onChange = editorState => {
     this.setState({
       editorState,
@@ -40,12 +39,13 @@ class RichContentApp extends PureComponent {
     });
     this.props.onEditorChange && this.props.onEditorChange(editorState);
   };
+
   onEditorChange = editorState => {
-    // if (this.props.mode === 'demo') {
-    //   debounce(this.onChange(editorState), 100);
-    // } else {
-    this.onChange(editorState);
-    //}
+    if (this.props.mode === 'demo') {
+      debounce(this.onChange(editorState), 100);
+    } else {
+      this.onChange(editorState);
+    }
   };
 
   render() {
