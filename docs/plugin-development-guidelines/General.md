@@ -6,10 +6,7 @@ In opposite to the original [draft-js-plugins](https://github.com/draft-js-plugi
 
 ## Source Code
 
-Basically, there is no limitation on plugin source code hosting. At the moment, there are two main GitHub repositories:
-
-- [wix-incubator/rich-content](https://github.com/wix-incubator/rich-content) is a to-be open-source repository that hosts the editor, viewer, and majority of the plugins
-- [wix-incubator/rich-content-plugins-wix](https://github.com/wix-incubator/rich-content-plugins-wix) is a repository that hosts plugins dependent on proprietary Wix code
+Basically, there is no limitation on plugin source code hosting. At the moment, all the plugins are hosted in this repo, under the /packages dir.
 
 ## Contribution Policy
 
