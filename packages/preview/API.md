@@ -277,7 +277,9 @@ The content interaction indicate that the preview content is collapsed, and prov
 - *block data interactions array* contains configuration data for all the interactions applied to the block 
 - *UI component* defines the appearance of the interaction element
 
-### ReadMore
+### Predefined Interactions
+
+#### ReadMore
 
 The `ReadMore` component comes to display a portion of a long text, appending it an ellipsis symbol and label (by default, those are '… read more'). The mouse click on text expands the collapsed portion.
 The ContentStateBuilder exposes `readMore` API that accepts configuration object:
@@ -291,4 +293,18 @@ The ContentStateBuilder exposes `readMore` API that accepts configuration object
   }
 
 ```
+
+#### SeeFullPost
+
+#### ImageCounter
+
+### RichContentViewer Integration
+
+RichContentViewer `contentInteractionMappers` prop allows to pass the interactions as a function array, similar to the `typeMappers` and `inlineStyleMappers`. The `preview` package exports the `interactionMap` API containing three predefined interactions mentioned in previous section.
+
+### Custom Interactions
+
+It is possible to create a custom interaction. TBD
+
+
 
