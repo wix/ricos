@@ -142,7 +142,7 @@ describe('plugins', () => {
         cy.get(`[data-hook=${GALLERY_IMAGE_SETTINGS.PREVIEW}]:first`);
       });
 
-      it.skip('should allow to delete all images', () => {
+      it('should allow to delete all images', () => {
         cy.get(`[data-hook=${GALLERY_IMAGE_SETTINGS.DELETE}]`)
           .click({ multiple: true })
           .click();

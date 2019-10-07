@@ -2,7 +2,6 @@ import { hydrate } from 'react-dom';
 import React from 'react';
 import RichContentApp from '../../../../examples/main/shared/RichContentApp';
 import './app.css';
-import Editor from '../../../../examples/main/src/editor/Editor.jsx';
 
 const props = {
   initialState: window.__CONTENT_STATE__,
