@@ -1,8 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import MonacoEditor from 'react-monaco-editor';
 import { debounce } from 'lodash';
-import { getContentStateSchema } from 'wix-rich-content-common';
+import { getContentStateSchema, isSSR } from 'wix-rich-content-common';
 
 import dividerSchema from 'wix-rich-content-plugin-divider/dist/statics/data-schema.json';
 import imageSchema from 'wix-rich-content-plugin-image/dist/statics/data-schema.json';
@@ -34,8 +33,10 @@ class ContentStateEditor extends PureComponent {
   constructor(props) {
     super(props);
 
+    const MonacoEditor = !isSSR() && require('react-monaco-editor').default;
     this.state = {
       contentState: stringifyJSON(this.props.contentState),
+      MonacoEditor,
     };
 
     this.editorOptions = {
@@ -95,7 +96,11 @@ class ContentStateEditor extends PureComponent {
   refreshLayout = () => this.refs.monaco && this.refs.monaco.editor.layout();
 
   render = () => {
-    const { contentState } = this.state;
+    const { contentState, MonacoEditor } = this.state;
+    if (!MonacoEditor) {
+      return null;
+    }
+
     return (
       <MonacoEditor
         ref="monaco"

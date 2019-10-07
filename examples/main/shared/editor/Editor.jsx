@@ -1,5 +1,7 @@
 import React, { PureComponent } from 'react';
 import { RichContentEditor, RichContentEditorModal } from 'wix-rich-content-editor';
+import { isSSR } from 'wix-rich-content-common';
+import { convertToRaw } from '@wix/draft-js';
 import * as PropTypes from 'prop-types';
 import ReactModal from 'react-modal';
 import { testImages, testVideos } from './mock';
@@ -24,7 +26,9 @@ export default class Editor extends PureComponent {
   state = {};
   constructor(props) {
     super(props);
-    ReactModal.setAppElement('#root');
+    if (!isSSR()) {
+      ReactModal.setAppElement('#root');
+    }
     this.initEditorProps();
   }
 
@@ -115,6 +119,22 @@ export default class Editor extends PureComponent {
     this.setState({ MobileToolbar, TextToolbar });
   };
 
+  handleChange = editorState => {
+    this.setState({ editorState });
+    if (typeof window !== 'undefined') {
+      // ensures that tests fail when entity map is mutated
+      const raw = convertToRaw(editorState.getCurrentContent());
+      // const raw = deepFreeze(rr);
+      window.__CONTENT_STATE__ = raw;
+      window.__CONTENT_SNAPSHOT__ = {
+        ...raw,
+        // blocks keys are random so for snapshot diffing they are changed to indexes
+        blocks: raw.blocks.map((block, index) => ({ ...block, key: index })),
+      };
+    }
+    this.props.onChange && this.props.onChange(editorState);
+  };
+
   render() {
     const modalStyles = {
       content: Object.assign(
@@ -145,12 +165,12 @@ export default class Editor extends PureComponent {
         )}
         <RichContentEditor
           ref={editor => (this.editor = editor)}
-          onChange={this.props.onChange}
+          onChange={this.handleChange}
           helpers={this.helpers}
           plugins={Plugins.editorPlugins}
           config={Plugins.config}
           editorState={this.props.editorState}
-          // initialState={this.state.initialState}
+          initialState={this.props.initialState}
           isMobile={this.props.isMobile}
           textToolbarType={textToolbarType}
           theme={theme}
