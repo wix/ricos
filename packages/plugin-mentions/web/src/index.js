@@ -1,3 +1,3 @@
 export { createExternalMentionsPlugin } from './createMentionsPlugin';
 export { addMentionToEditorState, getMentionsFromEditorState } from './utils';
-export { EXTERNAL_MENTIONS_TYPE } from './types';
+export { EXTERNAL_MENTIONS_TYPE, MENTION_TYPE } from './types';

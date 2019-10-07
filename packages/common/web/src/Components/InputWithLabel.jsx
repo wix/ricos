@@ -26,14 +26,21 @@ class InputWithLabel extends Component {
     );
   };
 
+  renderCharacterCapacity = () => {
+    const { styles } = this;
+    const { value, maxLength } = this.props;
+    return <span className={styles.inputWithLabel_capacity}>{value.length + '/' + maxLength}</span>;
+  };
+
   render() {
     const { styles } = this;
-    const { id, label } = this.props;
+    const { id, label, maxLength } = this.props;
     if (label) {
       return (
         <label htmlFor={id}>
           <span className={styles.inputWithLabel_label}>{label}</span>
           {this.renderInput()}
+          {maxLength && this.renderCharacterCapacity()}
         </label>
       );
     } else {
@@ -49,6 +56,8 @@ InputWithLabel.propTypes = {
   isTextArea: PropTypes.bool,
   isFullHeight: PropTypes.bool,
   dataHook: PropTypes.string,
+  value: PropTypes.string,
+  maxLength: PropTypes.number,
 };
 
 export default InputWithLabel;

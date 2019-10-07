@@ -8,13 +8,49 @@
 > - :house: [Internal]
 
 ## [Unreleased]
+### :rocket: New Feature
+- `gallery`
+  - [#391](https://github.com/wix-incubator/rich-content/pull/391) gallery image titles
 ### :bug: Bug Fix
-- `example`
-  - [9add0fbc](https://github.com/wix-incubator/rich-content/commit/9add0fbc) gallery validation schema used for content validation
+- `editor`
+  - [#392](https://github.com/wix-incubator/rich-content/pull/392) text in line toolbar has tooltips
+- `image`
+  - [75336e34](https://github.com/wix-incubator/rich-content/commit/75336e34) open imageStudio on crop tab
+- `gallery`
+  - [#404](https://github.com/wix-incubator/rich-content/pull/404) delete last remaining image in image settings returns to gallery settings
+  - [#403](https://github.com/wix-incubator/rich-content/pull/403) re-render gallery on change only
 ### :house: Internal
 - `e2e`
   - [#393](https://github.com/wix-incubator/rich-content/pull/393) added atomic block alignment testing
   - [#394](https://github.com/wix-incubator/rich-content/pull/394) test-env changed to match main example
+- `mentions`
+  - [#387](https://github.com/wix-incubator/rich-content/pull/387) data validation schema added
+<hr/>
+
+## 5.1.5 (Oct 2, 2019)
+### :bug: Bug Fix
+- `image`
+  - [38c6c4d](https://github.com/wix-incubator/rich-content/commit/38c6c4d)  disabled above the fold
+<hr/>
+
+## 5.1.4 (Sep 26, 2019)
+### :bug: Bug Fix
+- `gallery`
+  - [#401](https://github.com/wix-incubator/rich-content/pull/401) resize media url returns absolute url when not resizing
+### :house: Internal
+- `gallery`
+  - [#401](https://github.com/wix-incubator/rich-content/pull/401) `pro-gallery` updated to `v1.3.17`
+<hr/>
+
+## 5.1.2 (Sep 25, 2019)
+### :bug: Bug Fix
+- `editor`
+  - [#395](https://github.com/wix-incubator/rich-content/pull/395) removed div wrapping editor that was added in [#359](https://github.com/wix-incubator/rich-content/pull/359)
+- `gallery`
+  - [d0986f3](https://github.com/wix-incubator/rich-content/commit/d0986f3) height issues - disabled above the fold 
+### :house: Internal
+- `example`
+  - [9add0fbc](https://github.com/wix-incubator/rich-content/commit/9add0fbc) gallery validation schema used for content validation
 <hr/>
 
 ## 5.1.1 (Sep 22, 2019)
