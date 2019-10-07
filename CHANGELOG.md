@@ -21,8 +21,9 @@
   - [#403](https://github.com/wix-incubator/rich-content/pull/403) re-render gallery on change only
 ### :house: Internal
 - `e2e`
-  - [#393] (https://github.com/wix-incubator/rich-content/pull/393) added atomic block alignment testing
-  - [#394](https://github.com/wix-incubator/rich-content/pull/394)  test-env changed to match main example
+  - [#393](https://github.com/wix-incubator/rich-content/pull/393) added atomic block alignment testing
+  - [#394](https://github.com/wix-incubator/rich-content/pull/394) test-env changed to match main example
+  - [#409](https://github.com/wix-incubator/rich-content/pull/409) added plugin tests
 <hr/>
 
 ## 5.1.1 (Sep 22, 2019)
