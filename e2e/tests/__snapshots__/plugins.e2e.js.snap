@@ -2583,60 +2583,6 @@ exports[`plugins > html > should render plugin toolbar #0`] =
   }
 };
 
-exports[`plugins > html > should render settings #0`] =
-{
-  "blocks": [
-    {
-      "data": {},
-      "depth": 0,
-      "entityRanges": [],
-      "inlineStyleRanges": [],
-      "key": 0,
-      "text": "",
-      "type": "unstyled"
-    },
-    {
-      "data": {},
-      "depth": 0,
-      "entityRanges": [
-        {
-          "key": 0,
-          "length": 1,
-          "offset": 0
-        }
-      ],
-      "inlineStyleRanges": [],
-      "key": 1,
-      "text": " ",
-      "type": "atomic"
-    },
-    {
-      "data": {},
-      "depth": 0,
-      "entityRanges": [],
-      "inlineStyleRanges": [],
-      "key": 2,
-      "text": "",
-      "type": "unstyled"
-    }
-  ],
-  "entityMap": {
-    "0": {
-      "data": {
-        "config": {
-          "alignment": "center",
-          "height": 550,
-          "width": 350
-        },
-        "src": "<blockquote class=\"twitter-tweet\" data-lang=\"en\"><p lang=\"en\" dir=\"ltr\">The updates, insights and stories of the engineering challenges we encounter, and our way of solving them. Subscribe to our fresh, monthly newsletter and get these goodies right to your e-mail:<a href=\"https://t.co/0ziRSJJAxK\">https://t.co/0ziRSJJAxK</a> <a href=\"https://t.co/nTHlsG5z2a\">pic.twitter.com/nTHlsG5z2a</a></p>&mdash; Wix Engineering (@WixEng) <a href=\"https://twitter.com/WixEng/status/1076810144774868992?ref_src=twsrc%5Etfw\">December 23, 2018</a></blockquote> <script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script>",
-        "srcType": "html"
-      },
-      "mutability": "IMMUTABLE",
-      "type": "wix-draft-plugin-html"
-    }
-  }
-};
-
 exports[`plugins > divider > should render plugin toolbar and change styling #0`] =
 {
   "blocks": [
@@ -2851,71 +2797,6 @@ exports[`plugins > gif > should render plugin toolbar #0`] =
       },
       "mutability": "IMMUTABLE",
       "type": "wix-draft-plugin-giphy"
-    }
-  }
-};
-
-exports[`plugins > map > should render plugin toolbar #0`] =
-{
-  "blocks": [
-    {
-      "data": {},
-      "depth": 0,
-      "entityRanges": [],
-      "inlineStyleRanges": [],
-      "key": 0,
-      "text": "",
-      "type": "unstyled"
-    },
-    {
-      "data": {},
-      "depth": 0,
-      "entityRanges": [
-        {
-          "key": 0,
-          "length": 1,
-          "offset": 0
-        }
-      ],
-      "inlineStyleRanges": [],
-      "key": 1,
-      "text": " ",
-      "type": "atomic"
-    },
-    {
-      "data": {},
-      "depth": 0,
-      "entityRanges": [],
-      "inlineStyleRanges": [],
-      "key": 2,
-      "text": "",
-      "type": "unstyled"
-    }
-  ],
-  "entityMap": {
-    "0": {
-      "data": {
-        "config": {
-          "alignment": "center",
-          "height": 400,
-          "size": "content",
-          "width": 400
-        },
-        "mapSettings": {
-          "address": "Wix HQ, Nemal Tel Aviv Street, Tel Aviv-Yafo, Israel",
-          "isDraggingAllowed": true,
-          "isMarkerShown": true,
-          "isStreetViewControlShown": true,
-          "isZoomControlShown": true,
-          "lat": 32.097235,
-          "lng": 34.77427,
-          "locationDisplayName": "Wix HQ, Nemal Tel Aviv Street, Tel Aviv-Yafo, Israel",
-          "mode": "roadmap",
-          "zoom": 18
-        }
-      },
-      "mutability": "IMMUTABLE",
-      "type": "wix-draft-plugin-map"
     }
   }
 };

@@ -7,6 +7,8 @@ import {
   IMAGE_SETTINGS,
 } from '../cypress/dataHooks';
 
+/* eslint-disable mocha/no-skipped-tests */
+
 describe('plugins', () => {
   context('image', () => {
     beforeEach('load editor', () => cy.loadEditor('images'));
@@ -88,7 +90,7 @@ describe('plugins', () => {
 
       it('should allow to select an item', () => {
         cy.get(`[data-hook=${GALLERY_SETTINGS.IMAGE}]:first`).click();
-        cy.get(`[data-hook=${GALLERY_SETTINGS.SELECT_ALL}]:first`);
+        cy.get(`[data-hook=${GALLERY_SETTINGS.DELETE}]`);
       });
 
       it('should allow to select all items', () => {
@@ -98,6 +100,7 @@ describe('plugins', () => {
       it('should allow to delete an item', () => {
         cy.get(`[data-hook=${GALLERY_SETTINGS.IMAGE}]:first`).click();
         cy.get(`[data-hook=${GALLERY_SETTINGS.DELETE}]`).click();
+        cy.get(`[data-hook=${GALLERY_SETTINGS.IMAGE}]:first`);
       });
 
       it('should allow to delete all items', () => {
@@ -124,6 +127,7 @@ describe('plugins', () => {
           .openGalleryAdvancedSettings()
           .openGallerySettings()
           .openGalleryImageSettings()
+          .get(`[data-hook=${GALLERY_IMAGE_SETTINGS.PREVIEW}]:first`)
       );
       it('should render gallery image settings', () => {
         cy.get(`[data-hook=${GALLERY_IMAGE_SETTINGS.PREVIEW}]:first`);
@@ -138,12 +142,12 @@ describe('plugins', () => {
         cy.get(`[data-hook=${GALLERY_IMAGE_SETTINGS.PREVIEW}]:first`);
       });
 
-      // it('should allow to delete all images', () => {
-      //   cy.get(`[data-hook=${GALLERY_IMAGE_SETTINGS.DELETE}]`)
-      //     .click({ multiple: true })
-      //     .click();
-      //   cy.get(`[data-hook=${GALLERY_SETTINGS.UPLOAD}]`);
-      // });
+      it.skip('should allow to delete all images', () => {
+        cy.get(`[data-hook=${GALLERY_IMAGE_SETTINGS.DELETE}]`)
+          .click({ multiple: true })
+          .click();
+        cy.get(`[data-hook=${GALLERY_SETTINGS.UPLOAD}]`);
+      });
     });
     afterEach(() => cy.matchSnapshots({ capture: 'viewport' }));
   });
@@ -155,19 +159,19 @@ describe('plugins', () => {
       cy.openVideoUploadModal();
     });
 
-    //   it('should enable to add a video from URI', () => {
-    //     cy.openVideoUploadModal()
-    //       .addVideoFromURI()
-    //       .shrinkPlugin();
-    //     cy.get(`[data-hook=${PLUGIN_COMPONENT.VIDEO}]:first`);
-    //   });
+    it.skip('should enable to add a video from URI', () => {
+      cy.openVideoUploadModal()
+        .addVideoFromURI()
+        .shrinkPlugin();
+      cy.get(`[data-hook=${PLUGIN_COMPONENT.VIDEO}]:first`);
+    });
 
-    //   it('should enable to add a custom video', () => {
-    //     cy.openVideoUploadModal()
-    //       .addCustomVideo()
-    //       .shrinkPlugin();
-    //     cy.get(`[data-hook=${PLUGIN_COMPONENT.VIDEO}]:first`);
-    //   });
+    it.skip('should enable to add a custom video', () => {
+      cy.openVideoUploadModal()
+        .addCustomVideo()
+        .shrinkPlugin();
+      cy.get(`[data-hook=${PLUGIN_COMPONENT.VIDEO}]:first`);
+    });
     afterEach(() => cy.matchSnapshots({ capture: 'viewport' }));
   });
 
@@ -178,12 +182,12 @@ describe('plugins', () => {
       cy.openSoundCloudModal();
     });
 
-    // it('should enable to add a soundcloud URI', () => {
-    //   cy.openSoundCloudModal()
-    //     .addSoundCloud()
-    //     .shrinkPlugin();
-    //   cy.get(`[data-hook=${PLUGIN_COMPONENT.SOUND_CLOUD}]:first`);
-    // });
+    it.skip('should enable to add a soundcloud URI', () => {
+      cy.openSoundCloudModal()
+        .addSoundCloud()
+        .shrinkPlugin();
+      cy.get(`[data-hook=${PLUGIN_COMPONENT.SOUND_CLOUD}]:first`);
+    });
     afterEach(() => cy.matchSnapshots({ capture: 'viewport' }));
   });
 
@@ -196,7 +200,6 @@ describe('plugins', () => {
       // applitools eyes
     });
 
-    it('should render settings', () => {});
     afterEach(() => cy.matchSnapshots({ capture: 'viewport' }));
   });
 
@@ -242,7 +245,7 @@ describe('plugins', () => {
     afterEach(() => cy.matchSnapshots({ capture: 'viewport' }));
   });
 
-  context('map', () => {
+  context.skip('map', () => {
     before('load editor', () => cy.loadEditor('map'));
 
     it('should render plugin toolbar', () => {
