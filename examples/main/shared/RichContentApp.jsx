@@ -14,6 +14,9 @@ class RichContentApp extends PureComponent {
   constructor(props) {
     super(props);
     this.state = this.getInitialState(props);
+    if (this.props.mode === 'demo') {
+      this.onEditorChange = debounce(this.onEditorChange, 100);
+    }
   }
 
   getInitialState = ({ initialState, locale = getRequestedLocale(), mode }) => {
@@ -32,20 +35,12 @@ class RichContentApp extends PureComponent {
     );
   };
 
-  onChange = editorState => {
+  onEditorChange = editorState => {
     this.setState({
       editorState,
       viewerState: generateViewerState(editorState),
     });
     this.props.onEditorChange && this.props.onEditorChange(editorState);
-  };
-
-  onEditorChange = editorState => {
-    if (this.props.mode === 'demo') {
-      debounce(this.onChange(editorState), 100);
-    } else {
-      this.onChange(editorState);
-    }
   };
 
   render() {
