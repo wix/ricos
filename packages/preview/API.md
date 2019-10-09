@@ -281,7 +281,7 @@ The content interaction indicate that the preview content is collapsed, and prov
 
 #### ReadMore
 
-The `ReadMore` component comes to display a portion of a long text, appending it an ellipsis symbol and label (by default, those are '… read more'). The mouse click on text expands the collapsed portion.
+The `ReadMore` component comes to display a portion of a long text, appending it an ellipsis symbol and label (by default, those are '… read more').
 The ContentStateBuilder exposes `readMore` API that accepts configuration object:
 
 ```js
@@ -289,10 +289,14 @@ The ContentStateBuilder exposes `readMore` API that accepts configuration object
   {
     lines: number,
     ellipsis: string,
-    label: string
+    label: string,
+    onClick: Function,
+    expandMode: EXPAND_MODES.BLOCK | EXPAND_MODES.FULL_CONTENT
   }
 
 ```
+
+The `onClick` and  `expandMode` fields are common for all the interactions. They define the ineraction click behavior. The `expandMode` defines which portion of collapsed content should be expanded, and `onClick` allows to intercept the expansion click.
 
 #### SeeFullPost
 
@@ -300,11 +304,25 @@ The ContentStateBuilder exposes `readMore` API that accepts configuration object
 
 ### RichContentViewer Integration
 
-RichContentViewer `contentInteractionMappers` prop allows to pass the interactions as a function array, similar to the `typeMappers` and `inlineStyleMappers`. The `preview` package exports the `interactionMap` API containing three predefined interactions mentioned in previous section.
+RichContentViewer `config` prop now allows to pass the preview related configuration, by adding the following entry: 
+
+```js
+
+  config: {
+    PREVIEW: {
+      contentInteractionMappers: [ () => Component, ... ],
+      onPreviewExpand: Function,
+    }
+  }
+
+```
+
+The `contentInteractionMappers` field allows to pass the interactions as a function array, similar to the `typeMappers` and `inlineStyleMappers`. The `preview` package exports the `interactionMap` API containing three predefined interactions mentioned in previous section.
+
+The `onPreviewExpand` handler determines the behavior on content expansion when the interaction `expandMode` is set to `EXPAND_MODES.FULL_CONTENT`. The `Preview` component provides default handler.
 
 ### Custom Interactions
 
 It is possible to create a custom interaction. TBD
-
 
 
