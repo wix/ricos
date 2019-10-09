@@ -2,9 +2,8 @@ import dedent from 'dedent';
 import React, { PureComponent } from 'react';
 import ReactModal from 'react-modal';
 import MonacoEditor from 'react-monaco-editor';
-import { RichContentViewer } from 'wix-rich-content-viewer';
 import { RichContentModal } from 'wix-rich-content-common';
-import { ContentStateTransformation, interactionMap } from 'wix-rich-content-preview';
+import { ContentStateTransformation, RichContentPreview } from 'wix-rich-content-preview';
 import * as PropTypes from 'prop-types';
 import * as Plugins from './PreviewPlugins';
 import theme from '../theme/theme'; // must import after custom styles
@@ -55,18 +54,17 @@ export default class Preview extends PureComponent {
   };
 
   render() {
-    const previewState = this.transformation.apply(this.props.initialState);
     return (
 <div id="rich-content-preview" className="viewer">
   <div style={{ height: '50vh', width: '100%' }}>
-    <RichContentViewer
-      contentInteractionMappers={[interactionMap]}
+    <RichContentPreview
       helpers={this.helpers}
       typeMappers={Plugins.typeMappers}
       inlineStyleMappers={Plugins.getInlineStyleMappers(this.props.initialState)}
       decorators={Plugins.decorators}
       config={Plugins.config}
-      initialState={previewState}
+      initialState={this.props.initialState}
+      transformation={this.transformation}
       theme={theme}
       isMobile={this.props.isMobile}
       anchorTarget={anchorTarget}
