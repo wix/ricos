@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import LinesEllipsis from 'react-lines-ellipsis';
+import { EXPAND_MODES } from '../const';
 import { getChildrenText } from '../utils';
 import '../../statics/styles/read-more.scss';
 
@@ -11,12 +12,16 @@ class ReadMore extends PureComponent {
     lines: PropTypes.number,
     children: PropTypes.node.isRequired,
     styles: PropTypes.object.isRequired,
+    expandMode: PropTypes.oneOf([EXPAND_MODES.BLOCK, EXPAND_MODES.FULL_CONTENT]),
+    onClick: PropTypes.func,
   };
 
   static defaultProps = {
     ellipsis: '…',
     label: 'read more',
     lines: 3,
+    expandMode: EXPAND_MODES.FULL_CONTENT,
+    onClick: () => {},
   };
 
   constructor(props) {
@@ -28,6 +33,7 @@ class ReadMore extends PureComponent {
 
   onTextClick = e => {
     e.preventDefault();
+    this.props.onClick();
     this.setState({ readMoreActive: false });
   };
 
