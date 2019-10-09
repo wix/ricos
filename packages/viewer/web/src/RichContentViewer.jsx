@@ -63,14 +63,7 @@ export default class RichContentViewer extends Component {
 
   render() {
     const { styles } = this;
-    const {
-      textDirection,
-      typeMappers,
-      decorators,
-      inlineStyleMappers,
-      contentInteractionMappers,
-      locale,
-    } = this.props;
+    const { textDirection, typeMappers, decorators, inlineStyleMappers, locale } = this.props;
 
     const wrapperClassName = classNames(styles.wrapper, {
       [styles.desktop]: !this.props.platform || this.props.platform === 'desktop',
@@ -86,8 +79,7 @@ export default class RichContentViewer extends Component {
       typeMappers,
       this.state.contextualData,
       decorators,
-      inlineStyleMappers,
-      contentInteractionMappers
+      inlineStyleMappers
     );
 
     return (

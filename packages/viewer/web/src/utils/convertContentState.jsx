@@ -26,7 +26,7 @@ const blockDataToStyle = ({ dynamicStyles }) => kebabToCamelObjectKeys(dynamicSt
 const getInline = (inlineStyleMappers, mergedStyles) =>
   combineMappers([...inlineStyleMappers, staticInlineStyleMapper], mergedStyles);
 
-const getBlocks = (mergedStyles, textDirection, contentInteractionMappers) => {
+const getBlocks = (mergedStyles, textDirection, { config }) => {
   const getList = ordered => (items, blockProps) => {
     const fixedItems = items.map(item => (item.length ? item : [' ']));
 
@@ -43,8 +43,6 @@ const getBlocks = (mergedStyles, textDirection, contentInteractionMappers) => {
     return <List {...props} />;
   };
 
-  const interactionMap = combineMappers(contentInteractionMappers, mergedStyles);
-
   const DefaultBlockWrapper = ({ children }) => children;
 
   const blockFactory = (type, style, withDiv) => {
@@ -53,10 +51,18 @@ const getBlocks = (mergedStyles, textDirection, contentInteractionMappers) => {
         const Type = typeof type === 'string' ? type : type(child);
         let BlockWrapper = DefaultBlockWrapper;
         const { interactions } = blockProps.data[i];
+
         if (isArray(interactions)) {
+          const { contentInteractionMappers = [], onPreviewExpand = () => {} } =
+            config.PREVIEW || {};
+          const interactionMap = combineMappers(
+            contentInteractionMappers,
+            mergedStyles,
+            onPreviewExpand
+          );
           BlockWrapper = ({ children }) =>
             interactions.reduce((Wrapper, { type, settings }) => {
-              const Interaction = interactionMap[type];
+              const Interaction = interactionMap[type] || DefaultBlockWrapper;
               return (
                 <Interaction {...settings}>
                   <Wrapper>{children}</Wrapper>
@@ -156,7 +162,6 @@ const convertToReact = (
   entityProps,
   decorators,
   inlineStyleMappers,
-  contentInteractionMappers,
   options = {}
 ) => {
   if (isEmptyContentState(contentState)) {
@@ -167,7 +172,7 @@ const convertToReact = (
     normalizeContentState(contentState),
     {
       inline: getInline(inlineStyleMappers, mergedStyles),
-      blocks: getBlocks(mergedStyles, textDirection, contentInteractionMappers),
+      blocks: getBlocks(mergedStyles, textDirection, entityProps),
       entities: getEntities(combineMappers(typeMap), entityProps, mergedStyles),
       decorators,
     },
