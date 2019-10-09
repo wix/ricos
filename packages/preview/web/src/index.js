@@ -1,12 +1,3 @@
-import React from 'react';
-import { INTERACTIONS } from './const';
-import ReadMore from './Components/ReadMore';
-
 export { default as ContentStateTransformation } from './RuleEngine/ContentStateTransformation';
-export const interactionMap = mergedStyles => ({
-  [INTERACTIONS.READ_MORE]: ({ children, ...props }) => ( // eslint-disable-line
-    <ReadMore styles={mergedStyles} {...props}>
-      {children}
-    </ReadMore>
-  ),
-});
+export { interactionMap } from './Interactions/interactionMap';
+export { default as RichContentPreview } from './Components/RichContentPreview';
