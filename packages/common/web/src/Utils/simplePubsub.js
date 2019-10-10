@@ -87,6 +87,8 @@ export const simplePubsub = initialState => {
   const store = {
     get,
     getBlockHandler,
+    getBlockData,
+    setBlockData,
     update,
     set,
     setBlockHandler,
