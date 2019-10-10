@@ -308,7 +308,7 @@ RichContentViewer `config` prop now allows to pass the preview related configura
 
 The `contentInteractionMappers` field allows to pass the interactions as a function array, similar to the `typeMappers` and `inlineStyleMappers`. The `preview` package exports the `interactionMap` API containing three predefined interactions mentioned in previous section.
 
-The `onPreviewExpand` handler determines the behavior on content expansion when the interaction `expandMode` is set to `EXPAND_MODES.FULL_CONTENT`. The `Preview` component provides default handler.
+The `onPreviewExpand` handler determines the behavior on content expansion when the interaction `expandMode` is set to `EXPAND_MODES.FULL_CONTENT`. The `RichContentPreview` component wraps the `RichContentViewer` while providing default `PREVIEW` configuration.
 
 ### Custom Interactions
 
