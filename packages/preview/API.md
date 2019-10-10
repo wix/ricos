@@ -279,7 +279,7 @@ The ContentStateBuilder exposes `readMore` API that accepts configuration object
     lines: number,
     ellipsis: string,
     label: string,
-    onClick: Function,
+    onClick: function,
     expandMode: EXPAND_MODES.BLOCK | EXPAND_MODES.FULL_CONTENT
   }
 
@@ -296,7 +296,7 @@ The `SeeFullPost` interaction adds an overlay containing a link-like label (by d
     label: string,
     overlayStyle: object,
     labelStyle: object,
-    onClick: Function,
+    onClick: function,
   }
 
 ```
@@ -304,6 +304,20 @@ The `SeeFullPost` interaction adds an overlay containing a link-like label (by d
 The `ContentStateBuilder` exposes `seeFullPost` method that applies the interaction on the previous block data.
 
 #### ImageCounter
+
+The `ImageCounter` serves as a counter of media entities in collapsed content. The configuration object structure:
+
+```js
+
+  {
+    counter: number,
+    formatLabel: number => string,
+    style: object,
+    onClick: function,
+  }
+
+```
+The `counter` field is self-explanatory, the `formatLabel` defines the format of the label (by default, it is `counter => \`+${ counter }\``). The `ContentStateBuilder` exposes imageCoutner` method that applies the interaction on previous block data. 
 
 ### RichContentViewer Integration
 
@@ -314,7 +328,7 @@ RichContentViewer `config` prop now allows to pass the preview related configura
   config: {
     PREVIEW: {
       contentInteractionMappers: [ () => Component, ... ],
-      onPreviewExpand: Function,
+      onPreviewExpand: function,
     }
   }
 
