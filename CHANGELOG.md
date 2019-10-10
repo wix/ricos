@@ -27,6 +27,15 @@
   - [#387](https://github.com/wix-incubator/rich-content/pull/387) data validation schema added
 <hr/>
 
+## 5.1.6 (Oct 10, 2019)
+### :bug: Bug Fix
+- `gallery`
+  - [#410](https://github.com/wix-incubator/rich-content/pull/410) layout change and events handler
+### :house: Internal
+- `gallery`
+  - [#410](https://github.com/wix-incubator/rich-content/pull/410) `pro-gallery` updated to `v1.3.21`
+<hr/>
+
 ## 5.1.5 (Oct 2, 2019)
 ### :bug: Bug Fix
 - `image`
