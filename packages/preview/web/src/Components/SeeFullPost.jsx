@@ -26,13 +26,15 @@ class SeeFullPost extends PureComponent {
 
   render() {
     const { label, children, overlayStyles, labelStyles } = this.props;
+    /* eslint-disable */
     return (
-      // eslint-disable-next-line
-      <div className={styles.seeFullPost_overlay} style={overlayStyles} onClick={this.onClick}>
-        <span className={styles.seeFullPost_label} style={labelStyles}>
-          {label}
-        </span>
+      <div>
         {children}
+        <div className={styles.seeFullPost_overlay} style={overlayStyles} onClick={this.onClick}>
+          <span className={styles.seeFullPost_label} style={labelStyles}>
+            {label}
+          </span>
+        </div>
       </div>
     );
   }
