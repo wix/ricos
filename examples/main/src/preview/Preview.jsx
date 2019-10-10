@@ -36,7 +36,7 @@ export default class Preview extends PureComponent {
       _if: metadata => metadata.media.images().length > 3,
       _then: (metadata, preview) => preview.gallery({
         mediaInfo: metadata.media.images().slice(0, 3),
-      })
+      }).seeFullPost({ label: 'SEE FULL STORY' })
     });
   }
 
