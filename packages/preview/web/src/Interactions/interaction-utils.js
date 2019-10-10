@@ -86,3 +86,14 @@ export const seeFullPost = (builder, settings = {}) => {
   });
   return builder;
 };
+
+export const imageCounter = (builder, settings = {}) => {
+  builder.contentState = interactionDataMerger({
+    contentState: builder.contentState,
+    settings,
+    blockFilter: block => block.type !== 'atomic',
+    type: INTERACTIONS.IMAGE_COUNTER,
+    schema: ['counter', 'formatLabel', 'onClick', 'style'],
+  });
+  return builder;
+};
