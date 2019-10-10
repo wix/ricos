@@ -15,6 +15,8 @@ const testFixture = fixture =>
   });
 
 describe('editor rendering', () => {
+  afterEach(() => cy.eyesClose());
+
   context('desktop', () => {
     before(function() {
       cy.eyesOpen({
