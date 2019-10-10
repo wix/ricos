@@ -22,23 +22,47 @@ const interactionDataMerger = ({
     console.error(`Warning: invalid ${type} interaction settings found`, invalidSettings);
   }
 
-  const modifiedBlock = {
-    ...lastBlock,
-    data: {
-      ...lastBlock.data,
-      interactions: [
-        ...(lastBlock.data.interactions || []),
-        {
-          type,
-          settings,
+  if (lastBlock.type !== 'atomic') {
+    const modifiedBlock = {
+      ...lastBlock,
+      data: {
+        ...lastBlock.data,
+        interactions: [
+          ...(lastBlock.data.interactions || []),
+          {
+            type,
+            settings,
+          },
+        ],
+      },
+    };
+    return {
+      ...contentState,
+      blocks: [...contentState.blocks.slice(0, contentState.blocks.length - 1), modifiedBlock],
+    };
+  } else {
+    const lastBlockEntityKey = lastBlock.entityRanges.length > 0 && lastBlock.entityRanges[0].key;
+    if (lastBlockEntityKey !== false) {
+      const lastBlockEntity =
+        lastBlock.entityRanges.length > 0 && contentState.entityMap[lastBlockEntityKey];
+      const modifiedEntity = {
+        ...lastBlockEntity,
+        data: {
+          ...lastBlockEntity.data,
+          interactions: [...(lastBlockEntity.data.interactions || []), { type, settings }],
         },
-      ],
-    },
-  };
-  return {
-    ...contentState,
-    blocks: [...contentState.blocks.slice(0, contentState.blocks.length - 1), modifiedBlock],
-  };
+      };
+      return {
+        ...contentState,
+        entityMap: {
+          ...contentState.entityMap,
+          [lastBlockEntityKey]: modifiedEntity,
+        },
+      };
+    } else {
+      return contentState;
+    }
+  }
 };
 
 export const readMore = (builder, settings = {}) => {

@@ -52,7 +52,7 @@ describe('read more interaction', () => {
 });
 
 describe('seeFullPost interaction', () => {
-  it('should apply on any block', () => {
+  it('should apply on atomic block entity data', () => {
     const builder = new ContentStateBuilder().image({
       mediaInfo: {
         url: '',
@@ -60,13 +60,21 @@ describe('seeFullPost interaction', () => {
         height: 1200,
       },
     });
-    const expectedBlock = {
-      type: 'atomic',
-      text: ' ',
-      depth: 0,
-      inlineStyleRanges: [],
-      entityRanges: [{ key: 0, length: 1, offset: 0 }],
+    const expectedEntity = {
+      type: 'wix-draft-plugin-image',
+      mutability: 'IMMUTABLE',
       data: {
+        src: {
+          file_name: '',
+          width: 1200,
+          height: 1200,
+        },
+        config: {
+          size: 'content',
+          alignment: 'center',
+          showDescription: false,
+          showTitle: false,
+        },
         interactions: [
           {
             type: 'SEE_FULL_CONTENT',
@@ -76,8 +84,8 @@ describe('seeFullPost interaction', () => {
       },
     };
     const interacted = seeFullPost(builder, { label: 'See full post' });
-    const actualBlock = interacted.contentState.blocks[0];
+    const actualEntity = interacted.contentState.entityMap[0];
 
-    expect(butKey(actualBlock)).toEqual(expectedBlock);
+    expect(actualEntity).toEqual(expectedEntity);
   });
 });
