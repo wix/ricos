@@ -7,12 +7,17 @@ import {
   IMAGE_SETTINGS,
 } from '../cypress/dataHooks';
 
-const eyesOpen = cy.eyesOpen({
-  appName: 'Rich Content - Plugins',
-  batchName: 'Plugins',
-  testName: this.test.parent.title,
-  browser: [{ width: 1440, height: 900, name: 'chrome' }],
-});
+const eyesOpen = ({
+  test: {
+    parent: { title },
+  },
+}) =>
+  cy.eyesOpen({
+    appName: 'Rich Content - Plugins',
+    batchName: 'Plugins',
+    testName: title,
+    browser: [{ width: 1440, height: 900, name: 'chrome' }],
+  });
 
 describe('plugins', () => {
   beforeEach(function() {
@@ -23,7 +28,7 @@ describe('plugins', () => {
 
   context('image', () => {
     before(function() {
-      eyesOpen();
+      eyesOpen(this);
     });
 
     beforeEach('load editor', () => cy.loadEditor('images'));
@@ -72,7 +77,7 @@ describe('plugins', () => {
 
   context('gallery', () => {
     before(function() {
-      eyesOpen();
+      eyesOpen(this);
     });
 
     beforeEach('load editor', () =>
@@ -196,7 +201,7 @@ describe('plugins', () => {
 
   context('video', () => {
     before(function() {
-      eyesOpen();
+      eyesOpen(this);
     });
 
     beforeEach('load editor', () => cy.loadEditor('empty'));
@@ -227,7 +232,7 @@ describe('plugins', () => {
 
   context('soundcloud', () => {
     before(function() {
-      eyesOpen();
+      eyesOpen(this);
     });
 
     beforeEach('load editor', () => cy.loadEditor('empty'));
@@ -250,7 +255,7 @@ describe('plugins', () => {
 
   context('html', () => {
     before(function() {
-      eyesOpen();
+      eyesOpen(this);
     });
 
     after(() => cy.eyesClose());
@@ -266,7 +271,7 @@ describe('plugins', () => {
 
   context('divider', () => {
     before(function() {
-      eyesOpen();
+      eyesOpen(this);
     });
 
     after(() => cy.eyesClose());
@@ -299,7 +304,7 @@ describe('plugins', () => {
 
   context('gif', () => {
     before('load editor', function() {
-      eyesOpen();
+      eyesOpen(this);
       cy.loadEditor('gif');
     });
 
@@ -316,7 +321,7 @@ describe('plugins', () => {
 
   context('map', () => {
     before('load editor', function() {
-      eyesOpen();
+      eyesOpen(this);
       cy.loadEditor('map');
     });
 
@@ -334,7 +339,7 @@ describe('plugins', () => {
 
   context('file-upload', () => {
     before('load editor', function() {
-      eyesOpen();
+      eyesOpen(this);
       cy.loadEditor('file-upload');
     });
 
