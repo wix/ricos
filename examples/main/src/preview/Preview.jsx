@@ -3,7 +3,7 @@ import React, { PureComponent } from 'react';
 import ReactModal from 'react-modal';
 import MonacoEditor from 'react-monaco-editor';
 import { RichContentModal } from 'wix-rich-content-common';
-import { ContentStateTransformation, RichContentPreview } from 'wix-rich-content-preview';
+import { ContentStateTransformation, RichContentPreview, EXPAND_MODES } from 'wix-rich-content-preview';
 import * as PropTypes from 'prop-types';
 import * as Plugins from './PreviewPlugins';
 import theme from '../theme/theme'; // must import after custom styles
@@ -31,7 +31,7 @@ export default class Preview extends PureComponent {
     };
     this.transformation = new ContentStateTransformation({
       _if: metadata => metadata.text.plain.array().length > 0,
-      _then: (metadata, preview) => preview.plain(metadata.text.plain.array()[0]).readMore({ lines: 5 })
+      _then: (metadata, preview) => preview.plain(metadata.text.plain.array()[0]).readMore({ lines: 3, expandMode: EXPAND_MODES.BLOCK })
     }).rule({
       _if: metadata => metadata.media.images().length > 3,
       _then: (metadata, preview) => preview.gallery({
