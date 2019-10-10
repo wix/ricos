@@ -224,7 +224,9 @@ describe('content state media builder', () => {
       .get();
     expect(contentState.entityMap[0]).toEqual(expected.entityMap[5]);
   });
+});
 
+describe('content state interactions', () => {
   it('should chain content methods with readMore interaction', () => {
     const contentState = new UUT()
       .plain('the first block plain text')
@@ -244,6 +246,28 @@ describe('content state media builder', () => {
     };
 
     expect(butKey(contentState.blocks[0])).toEqual(butKey(expectedBlockWithReadMoreSettings));
+    expect(butKey(contentState.blocks[1])).toEqual(butKey(expected.blocks[1]));
+  });
+
+  it('should chain content methods with seeFullPost interaction', () => {
+    const contentState = new UUT()
+      .plain('the first block plain text')
+      .seeFullPost({ label: 'See full post' })
+      .plain('')
+      .get();
+    const expectedBlockWithSeeFullPostSettings = {
+      ...expected.blocks[0],
+      data: {
+        interactions: [
+          {
+            type: 'SEE_FULL_CONTENT',
+            settings: { label: 'See full post' },
+          },
+        ],
+      },
+    };
+
+    expect(butKey(contentState.blocks[0])).toEqual(butKey(expectedBlockWithSeeFullPostSettings));
     expect(butKey(contentState.blocks[1])).toEqual(butKey(expected.blocks[1]));
   });
 });

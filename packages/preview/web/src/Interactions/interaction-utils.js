@@ -1,12 +1,25 @@
 import { INTERACTIONS } from '../const';
-const readMoreMerger = (contentState, settings = {}) => {
+const interactionDataMerger = ({
+  contentState,
+  settings = {},
+  blockFilter = () => {},
+  type,
+  schema = [],
+}) => {
   if (!contentState.blocks || contentState.blocks.length === 0) {
     return contentState;
   }
 
   const lastBlock = contentState.blocks.slice(-1)[0];
-  if (lastBlock.type === 'atomic') {
+  if (blockFilter(lastBlock)) {
     return contentState;
+  }
+
+  const invalidSettings = Object.keys(settings).filter(key => !schema.includes(key));
+
+  if (invalidSettings.length > 0) {
+    // eslint-disable-next-line
+    console.error(`Warning: invalid ${type} interaction settings found`, invalidSettings);
   }
 
   const modifiedBlock = {
@@ -16,7 +29,7 @@ const readMoreMerger = (contentState, settings = {}) => {
       interactions: [
         ...(lastBlock.data.interactions || []),
         {
-          type: INTERACTIONS.READ_MORE,
+          type,
           settings,
         },
       ],
@@ -29,6 +42,23 @@ const readMoreMerger = (contentState, settings = {}) => {
 };
 
 export const readMore = (builder, settings = {}) => {
-  builder.contentState = readMoreMerger(builder.contentState, settings);
+  builder.contentState = interactionDataMerger({
+    contentState: builder.contentState,
+    settings,
+    blockFilter: block => block.type === 'atomic',
+    type: INTERACTIONS.READ_MORE,
+    schema: ['label', 'ellipsis', 'onClick', 'expandMode', 'lines'],
+  });
+  return builder;
+};
+
+export const seeFullPost = (builder, settings = {}) => {
+  builder.contentState = interactionDataMerger({
+    contentState: builder.contentState,
+    settings,
+    blockFilter: () => false,
+    type: INTERACTIONS.SEE_FULL_CONTENT,
+    schema: ['label', 'labelStyles', 'overlayStyles', 'onClick'],
+  });
   return builder;
 };
