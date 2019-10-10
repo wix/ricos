@@ -8,6 +8,8 @@ import List from '../List';
 import getPluginViewers from '../getPluginViewers';
 import { getTextDirection, kebabToCamelObjectKeys } from './textUtils';
 import { staticInlineStyleMapper } from '../staticInlineStyleMapper';
+import { combineMappers } from './combineMappers';
+import { getInteractionWrapper, DefaultInteractionWrapper } from './getInteractionWrapper';
 
 const isEmptyContentState = raw =>
   !raw || !raw.blocks || (raw.blocks.length === 1 && raw.blocks[0].text === '');
@@ -43,33 +45,15 @@ const getBlocks = (mergedStyles, textDirection, { config }) => {
     return <List {...props} />;
   };
 
-  const DefaultBlockWrapper = ({ children }) => children;
-
   const blockFactory = (type, style, withDiv) => {
     return (children, blockProps) =>
       children.map((child, i) => {
         const Type = typeof type === 'string' ? type : type(child);
-        let BlockWrapper = DefaultBlockWrapper;
         const { interactions } = blockProps.data[i];
+        const BlockWrapper = isArray(interactions)
+          ? getInteractionWrapper({ interactions, config, mergedStyles })
+          : DefaultInteractionWrapper;
 
-        if (isArray(interactions)) {
-          const { contentInteractionMappers = [], onPreviewExpand = () => {} } =
-            config.PREVIEW || {};
-          const interactionMap = combineMappers(
-            contentInteractionMappers,
-            mergedStyles,
-            onPreviewExpand
-          );
-          BlockWrapper = ({ children }) =>
-            interactions.reduce((Wrapper, { type, settings }) => {
-              const Interaction = interactionMap[type] || DefaultBlockWrapper;
-              return (
-                <Interaction {...settings}>
-                  <Wrapper>{children}</Wrapper>
-                </Interaction>
-              );
-            }, BlockWrapper);
-        }
         return (
           <BlockWrapper key={`${blockProps.keys[i]}_wrap`}>
             <Type
@@ -130,14 +114,6 @@ const normalizeContentState = contentState => ({
     };
   }),
 });
-
-const combineMappers = (mappers, ...args) => {
-  if (!mappers || !mappers.length || mappers.some(resolver => typeof resolver !== 'function')) {
-    console.warn(`${mappers} is expected to be a function array`); // eslint-disable-line no-console
-    return {};
-  }
-  return mappers.reduce((map, mapper) => Object.assign(map, mapper(...args)), {});
-};
 
 const redraftOptions = {
   cleanup: {
