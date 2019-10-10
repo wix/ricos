@@ -7,6 +7,13 @@ import {
   IMAGE_SETTINGS,
 } from '../cypress/dataHooks';
 
+const eyesOpen = cy.eyesOpen({
+  appName: 'Rich Content - Plugins',
+  batchName: 'Plugins',
+  testName: this.test.parent.title,
+  browser: [{ width: 1440, height: 900, name: 'chrome' }],
+});
+
 describe('plugins', () => {
   beforeEach(function() {
     cy.switchToDesktop();
@@ -16,11 +23,7 @@ describe('plugins', () => {
 
   context('image', () => {
     before(function() {
-      cy.eyesOpen({
-        testName: this.test.parent.title,
-        batchName: 'Plugins',
-        browser: [{ width: 1440, height: 900, name: 'chrome' }],
-      });
+      eyesOpen();
     });
 
     beforeEach('load editor', () => cy.loadEditor('images'));
@@ -69,11 +72,7 @@ describe('plugins', () => {
 
   context('gallery', () => {
     before(function() {
-      cy.eyesOpen({
-        testName: this.test.parent.title,
-        batchName: 'Plugins',
-        browser: [{ width: 1440, height: 900, name: 'chrome' }],
-      });
+      eyesOpen();
     });
 
     beforeEach('load editor', () =>
@@ -197,11 +196,7 @@ describe('plugins', () => {
 
   context('video', () => {
     before(function() {
-      cy.eyesOpen({
-        testName: this.test.parent.title,
-        batchName: 'Plugins',
-        browser: [{ width: 1440, height: 900, name: 'chrome' }],
-      });
+      eyesOpen();
     });
 
     beforeEach('load editor', () => cy.loadEditor('empty'));
@@ -232,11 +227,7 @@ describe('plugins', () => {
 
   context('soundcloud', () => {
     before(function() {
-      cy.eyesOpen({
-        testName: this.test.parent.title,
-        batchName: 'Plugins',
-        browser: [{ width: 1440, height: 900, name: 'chrome' }],
-      });
+      eyesOpen();
     });
 
     beforeEach('load editor', () => cy.loadEditor('empty'));
@@ -259,11 +250,7 @@ describe('plugins', () => {
 
   context('html', () => {
     before(function() {
-      cy.eyesOpen({
-        testName: this.test.parent.title,
-        batchName: 'Plugins',
-        browser: [{ width: 1440, height: 900, name: 'chrome' }],
-      });
+      eyesOpen();
     });
 
     after(() => cy.eyesClose());
@@ -279,11 +266,7 @@ describe('plugins', () => {
 
   context('divider', () => {
     before(function() {
-      cy.eyesOpen({
-        testName: this.test.parent.title,
-        batchName: 'Plugins',
-        browser: [{ width: 1440, height: 900, name: 'chrome' }],
-      });
+      eyesOpen();
     });
 
     after(() => cy.eyesClose());
@@ -316,11 +299,7 @@ describe('plugins', () => {
 
   context('gif', () => {
     before('load editor', function() {
-      cy.eyesOpen({
-        testName: this.test.parent.title,
-        batchName: 'Plugins',
-        browser: [{ width: 1440, height: 900, name: 'chrome' }],
-      });
+      eyesOpen();
       cy.loadEditor('gif');
     });
 
@@ -337,11 +316,7 @@ describe('plugins', () => {
 
   context('map', () => {
     before('load editor', function() {
-      cy.eyesOpen({
-        testName: this.test.parent.title,
-        batchName: 'Plugins',
-        browser: [{ width: 1440, height: 900, name: 'chrome' }],
-      });
+      eyesOpen();
       cy.loadEditor('map');
     });
 
@@ -359,11 +334,7 @@ describe('plugins', () => {
 
   context('file-upload', () => {
     before('load editor', function() {
-      cy.eyesOpen({
-        testName: this.test.parent.title,
-        batchName: 'Plugins',
-        browser: [{ width: 1440, height: 900, name: 'chrome' }],
-      });
+      eyesOpen();
       cy.loadEditor('file-upload');
     });
 

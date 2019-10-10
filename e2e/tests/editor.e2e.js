@@ -5,8 +5,9 @@ import { INLINE_TOOLBAR_BUTTONS } from '../cypress/dataHooks';
 describe('editor', () => {
   before(function() {
     cy.eyesOpen({
-      testName: this.test.parent.title,
+      appName: 'Rich Content - Editor',
       batchName: 'Editor',
+      testName: this.test.parent.title,
       browser: [{ width: 1440, height: 900, name: 'chrome' }],
     });
   });

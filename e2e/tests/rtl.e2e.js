@@ -6,8 +6,9 @@ describe('rtl', () => {
   context('desktop', () => {
     before(function() {
       cy.eyesOpen({
-        testName: this.test.parent.title,
+        appName: 'Rich Content - RTL',
         batchName: 'RTL',
+        testName: this.test.parent.title,
         browser: { width: 1440, height: 900, name: 'chrome' },
       });
     });
@@ -50,8 +51,9 @@ describe('rtl', () => {
   context('mobile', () => {
     before(function() {
       cy.eyesOpen({
-        testName: this.test.parent.title,
+        appName: 'Rich Content - RTL',
         batchName: 'RTL',
+        testName: this.test.parent.title,
         browser: { deviceName: 'iPhone 6/7/8' },
       });
     });

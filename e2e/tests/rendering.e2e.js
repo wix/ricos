@@ -18,8 +18,9 @@ describe('editor rendering', () => {
   context('desktop', () => {
     before(function() {
       cy.eyesOpen({
-        testName: this.test.parent.title,
+        appName: 'Rich Content - Rendering',
         batchName: 'Rendering',
+        testName: this.test.parent.title,
         browser: [{ width: 1440, height: 900, name: 'chrome' }],
       });
     });
@@ -34,8 +35,9 @@ describe('editor rendering', () => {
   context('mobile', () => {
     before(function() {
       cy.eyesOpen({
-        testName: this.test.parent.title,
+        appName: 'Rich Content - Rendering',
         batchName: 'Rendering',
+        testName: this.test.parent.title,
         browser: { deviceName: 'iPhone 6/7/8' },
       });
     });
