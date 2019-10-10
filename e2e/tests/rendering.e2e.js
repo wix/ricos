@@ -9,33 +9,41 @@ import { fixtures } from './constants';
 // }
 
 const testFixture = fixture =>
-  it(`should render ${fixture}`, () => {
+  it(`render ${fixture}`, function() {
     cy.loadEditorAndViewer(fixture);
-    cy.eyesCheckWindow(`should render ${fixture}`);
+    cy.eyesCheckWindow(this.test.title);
   });
 
 describe('editor rendering', () => {
-  afterEach(() => cy.eyesClose());
-
   context('desktop', () => {
-    beforeEach(function() {
+    before(function() {
       cy.eyesOpen({
+        testName: this.test.parent.title,
         batchName: 'Rendering',
         browser: [{ width: 1440, height: 900, name: 'chrome' }],
       });
-      cy.switchToDesktop();
     });
+
+    beforeEach(() => cy.switchToDesktop());
+
+    after(() => cy.eyesClose());
+
     fixtures.forEach(testFixture);
   });
 
   context('mobile', () => {
-    beforeEach(function() {
+    before(function() {
       cy.eyesOpen({
+        testName: this.test.parent.title,
         batchName: 'Rendering',
         browser: { deviceName: 'iPhone 6/7/8' },
       });
-      cy.switchToMobile();
     });
+
+    beforeEach(() => cy.switchToMobile());
+
+    after(() => cy.eyesClose());
+
     fixtures.forEach(testFixture);
   });
 });

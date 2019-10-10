@@ -1,75 +1,83 @@
 describe('rtl', () => {
   beforeEach(() => cy.switchToHebrew());
 
-  afterEach(() => cy.eyesClose().matchContentSnapshot());
+  afterEach(() => cy.matchContentSnapshot());
 
   context('desktop', () => {
-    beforeEach(function() {
+    before(function() {
       cy.eyesOpen({
+        testName: this.test.parent.title,
         batchName: 'RTL',
-        browser: [{ width: 1440, height: 900, name: 'chrome' }],
+        browser: { width: 1440, height: 900, name: 'chrome' },
       });
-      cy.switchToDesktop();
     });
 
-    it('should render plugin toolbar in rtl', () => {
+    beforeEach(() => cy.switchToDesktop());
+
+    after(() => cy.eyesClose());
+
+    it('render plugin toolbar in rtl', function() {
       cy.loadEditor()
         .focusEditor()
-        .openPluginToolbar();
-      cy.eyesCheckWindow('should render plugin toolbar in rtl');
+        .openSideToolbar();
+      cy.eyesCheckWindow(this.test.title);
     });
 
-    it('should render text toolbar in rtl', () => {
+    it('render text toolbar in rtl', function() {
       cy.loadEditor('plain')
         .setSelection(0, 8)
         .get('[data-hook=inlineToolbar]')
         .should('be.visible')
         .get('[data-hook=addPluginFloatingToolbar]')
         .should('be.visible');
-      cy.eyesCheckWindow('should render text toolbar in rtl');
+      cy.eyesCheckWindow(this.test.title);
     });
 
-    it('should render rtl and ltr text correctly', () => {
+    it('render rtl and ltr text correctly', function() {
       cy.loadEditor('hebrew');
-      cy.eyesCheckWindow('should render rtl and ltr text correctly');
+      cy.eyesCheckWindow(this.test.title);
     });
 
-    it('should render external modal in rtl', () => {
+    it('render external modal in rtl', function() {
       cy.loadEditor('images')
         .openImageSettings()
         .get('[data-hook="imageSettingsCaptionInput"]')
         .blur();
-      cy.eyesCheckWindow('should render external modal in rtl');
+      cy.eyesCheckWindow(this.test.title);
     });
   });
 
   context('mobile', () => {
-    beforeEach(function() {
+    before(function() {
       cy.eyesOpen({
+        testName: this.test.parent.title,
         batchName: 'RTL',
         browser: { deviceName: 'iPhone 6/7/8' },
       });
-      cy.switchToMobile();
     });
 
-    it('should render add plugin modal in rtl', () => {
+    beforeEach(() => cy.switchToMobile());
+
+    after(() => cy.eyesClose());
+
+    it('render add plugin modal in rtl', function() {
       cy.loadEditor()
         .focusEditor()
         .openAddPluginModal();
-      cy.eyesCheckWindow('should render add plugin modal in rtl');
+      cy.eyesCheckWindow(this.test.title);
     });
 
-    it('should render rtl and ltr text correctly', () => {
+    it('render rtl and ltr text correctly', function() {
       cy.loadEditor('hebrew');
-      cy.eyesCheckWindow('should render rtl and ltr text correctly');
+      cy.eyesCheckWindow(this.test.title);
     });
 
-    it('should render external modal in rtl', () => {
+    it('render external modal in rtl', function() {
       cy.loadEditor('images')
         .openImageSettings()
         .get('[aria-label="Cancel"]')
         .blur();
-      cy.eyesCheckWindow('should render external modal in rtl');
+      cy.eyesCheckWindow(this.test.title);
     });
   });
 });

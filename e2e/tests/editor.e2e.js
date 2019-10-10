@@ -3,18 +3,21 @@ import { INLINE_TOOLBAR_BUTTONS } from '../cypress/dataHooks';
 /* eslint-disable mocha/no-skipped-tests */
 
 describe('editor', () => {
-  beforeEach(function() {
+  before(function() {
     cy.eyesOpen({
+      testName: this.test.parent.title,
       batchName: 'Editor',
       browser: [{ width: 1440, height: 900, name: 'chrome' }],
     });
-    cy.log(process.env);
-    cy.switchToDesktop();
   });
 
-  afterEach(() => cy.eyesClose().matchContentSnapshot());
+  beforeEach(() => cy.switchToDesktop());
 
-  it('should allow to enter text', () => {
+  afterEach(() => cy.matchContentSnapshot());
+
+  after(() => cy.eyesClose());
+
+  it('allow to enter text', function() {
     cy.loadEditor()
       .enterParagraphs([
         'Leverage agile frameworks',
@@ -22,10 +25,10 @@ describe('editor', () => {
       ])
       .setSelection(0, 0)
       .blurEditor();
-    cy.eyesCheckWindow('should allow to enter text');
+    cy.eyesCheckWindow(this.test.title);
   });
 
-  it('should allow to apply inline styles and links', () => {
+  it('allow to apply inline styles and links', function() {
     cy.loadEditor('plain')
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.BOLD, [40, 10])
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.UNDERLINE, [10, 5])
@@ -57,22 +60,22 @@ describe('editor', () => {
       .setLink([0, 10], 'https://www.wix.com/')
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.CODE_BLOCK, [0, 10])
       .blurEditor();
-    cy.eyesCheckWindow('should allow to apply inline styles');
+    cy.eyesCheckWindow(this.test.title);
   });
 
-  it('should allow to create lists', () => {
+  it('allow to create lists', function() {
     cy.loadEditor('plain')
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.ORDERED_LIST, [300, 100])
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.UNORDERED_LIST, [550, 1]);
-    cy.eyesCheckWindow('should allow to create lists');
+    cy.eyesCheckWindow(this.test.title);
   });
 
-  it('should align atomic blocks correctly', () => {
+  it('align atomic blocks correctly', function() {
     cy.loadEditor('images')
       .alignImage('left')
       .alignImage('center')
       .alignImage('right')
       .setSelection(0, 0);
-    cy.eyesCheckWindow('should align atomic blocks correctly');
+    cy.eyesCheckWindow(this.test.title);
   });
 });
