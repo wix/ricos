@@ -192,12 +192,14 @@ export default function createToolbar({
     getRelativePositionStyle() {
       const { x, y } = this.offset;
       const toolbarNode = findDOMNode(this);
-      const toolbarHeight = toolbarNode.offsetHeight;
+      if (!this.offsetHeight) {
+        this.offsetHeight = toolbarNode.offsetHeight;
+      }
+      const toolbarHeight = this.offsetHeight;
       const toolbarWidth = toolbarNode.offsetWidth;
       const offsetParentRect = toolbarNode.offsetParent.getBoundingClientRect();
       const offsetParentTop = offsetParentRect.top;
       const offsetParentLeft = offsetParentRect.left;
-
       const boundingRect = pubsub.get('boundingRect');
       return {
         '--offset-top': `${boundingRect.top -
