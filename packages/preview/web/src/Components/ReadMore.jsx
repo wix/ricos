@@ -12,8 +12,9 @@ class ReadMore extends PureComponent {
     lines: PropTypes.number,
     children: PropTypes.node.isRequired,
     styles: PropTypes.object.isRequired,
-    expandMode: PropTypes.oneOf([EXPAND_MODES.BLOCK, EXPAND_MODES.FULL_CONTENT]),
+    onPreviewExpand: PropTypes.func.isRequired,
     onClick: PropTypes.func,
+    expandMode: PropTypes.oneOf([EXPAND_MODES.BLOCK, EXPAND_MODES.FULL_CONTENT]),
   };
 
   static defaultProps = {
@@ -32,9 +33,14 @@ class ReadMore extends PureComponent {
   }
 
   onTextClick = e => {
+    const { onClick, expandMode, onPreviewExpand } = this.props;
     e.preventDefault();
-    this.props.onClick();
-    this.setState({ readMoreActive: false });
+    onClick();
+    if (expandMode === EXPAND_MODES.FULL_CONTENT) {
+      onPreviewExpand();
+    } else {
+      this.setState({ readMoreActive: false });
+    }
   };
 
   render() {

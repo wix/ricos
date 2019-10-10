@@ -1,5 +1,5 @@
 import { INTERACTIONS } from '../const';
-const readMoreMerger = (contentState, { lines, ellipsis, label } = {}) => {
+const readMoreMerger = (contentState, settings = {}) => {
   if (!contentState.blocks || contentState.blocks.length === 0) {
     return contentState;
   }
@@ -17,7 +17,7 @@ const readMoreMerger = (contentState, { lines, ellipsis, label } = {}) => {
         ...(lastBlock.data.interactions || []),
         {
           type: INTERACTIONS.READ_MORE,
-          settings: { lines, ellipsis, label },
+          settings,
         },
       ],
     },
@@ -28,7 +28,7 @@ const readMoreMerger = (contentState, { lines, ellipsis, label } = {}) => {
   };
 };
 
-export const readMore = (builder, { lines, ellipsis, label } = {}) => {
-  builder.contentState = readMoreMerger(builder.contentState, { lines, ellipsis, label });
+export const readMore = (builder, settings = {}) => {
+  builder.contentState = readMoreMerger(builder.contentState, settings);
   return builder;
 };
