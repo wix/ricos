@@ -13,6 +13,7 @@ class TestApp extends PureComponent {
         shouldMockUpload={true}
         locale={locale}
         localeResource={localeResource}
+        mockImageIndex={1}
       />
     );
   };

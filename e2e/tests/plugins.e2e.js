@@ -221,7 +221,8 @@ describe('plugins', () => {
       cy.eyesCheckWindow(this.test.title);
     });
 
-    it('enable to add a custom video', function() {
+    // eslint-disable-next-line mocha/no-skipped-tests
+    it.skip('enable to add a custom video', function() {
       cy.openVideoUploadModal()
         .addCustomVideo()
         .shrinkPlugin();
