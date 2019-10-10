@@ -289,6 +289,20 @@ The `onClick` and `expandMode` fields are common for all the interactions. They 
 
 #### SeeFullPost
 
+The `SeeFullPost` interaction adds an overlay containing a link-like label (by default, it says `See Full Post`). The click on label expands the full content. The settings object:
+
+```js
+  {
+    label: string,
+    overlayStyle: object,
+    labelStyle: object,
+    onClick: Function,
+  }
+
+```
+
+The `ContentStateBuilder` exposes `seeFullPost` method that applies the interaction on the previous block data.
+
 #### ImageCounter
 
 ### RichContentViewer Integration
