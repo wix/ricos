@@ -5,9 +5,7 @@
 The metadata is derived from ContentState and exposes its details:
 
 ```js
-
 const metadata = getContentStateMetdata(contentState);
-
 ```
 
 These details are categorized by content type rather actual ContentState structure.
@@ -103,7 +101,6 @@ The properties marked with `?` are optional and relevant only for some of the im
 
 The `ContentStateMetdata.media.videos` exposes the data extracted from `video` / `sound-cloud` / `youtube` entities.
 
-
 The video data object structure is:
 
 ```js
@@ -145,12 +142,10 @@ The `ContentStateBuilder` exposes API for ContentState generation, based on the 
 The basic `ContentStateBuilder` methods allow to add content elements to the constructed ContentState. The methods named after the content type being added, e.g. is `image` method allows to add an image, and `plain` method adds plain text. The methods could be chained:
 
 ```js
-
 const previewState = new ContentStateBuilder(initialState)
-                          .image(imageData, config)
-                          .gallery(items, config)
-                          .plain(text);
-
+  .image(imageData, config)
+  .gallery(items, config)
+  .plain(text);
 ```
 
 #### ContentStateBuilder.plain(text, config)
@@ -217,20 +212,16 @@ The `mediaInfo` parameter is expected to be a map data object returned by [Conte
 The `ContentStateTransformation` represents a rule to be applied on content state in order to achieve the desired preview state:
 
 ```js
-
 const transformation = new ContentStateTransformation({ _if, _then, initialPreviewState });
 const previewState = transformation.apply(contentState);
-
 ```
 
 In the code fragment above, the `_if` and `_then` arguments are functions following the convention:
 
 ```js
+_if = ContentStateMetadata => boolean;
 
-_if = ContentStateMetadata => boolean
-
-_then = (ContentStateMetadata, ContentStateBuilder) => ContentStateBuilder
-
+_then = (ContentStateMetadata, ContentStateBuilder) => ContentStateBuilder;
 ```
 
 The optional argument `initialPreviewState` allows to pass an initial preview state.
@@ -238,7 +229,6 @@ The optional argument `initialPreviewState` allows to pass an initial preview st
 The following fragment demonstrates the "if content images > 3 => add a gallery with 3 items" rule definition:
 
 ```js
-
 const transformation = new ContentStateTransformation({
   _if: metadata => metadata.media.images().length > 3,
   _then: (metadata, preview) =>
@@ -247,7 +237,6 @@ const transformation = new ContentStateTransformation({
     }),
 });
 const preview = transformation.apply(contentState);
-
 ```
 
 The `rule` method allows to chain multiple rules. They will be applied one after another:
@@ -264,7 +253,7 @@ const transformation = new ContentStateTransformation({ _if: ..., _then: ... })
 
 The content interaction indicate that the preview content is collapsed, and provide a way to expand it. Content interactions work at the block level. Every interaction consists of the following elements:
 
-- *ContentStateBuilder API* allows a consumer to add an interaction to the preview state and configure it. These APIs can be chained just like any other ContentStateBuilder method:
+- _ContentStateBuilder API_ allows a consumer to add an interaction to the preview state and configure it. These APIs can be chained just like any other ContentStateBuilder method:
 
   ```js
 
@@ -274,8 +263,8 @@ The content interaction indicate that the preview content is collapsed, and prov
 
   In this example, the `readMore` interaction is being applied to the previous `plain` block.
 
-- *block data interactions array* contains configuration data for all the interactions applied to the block 
-- *UI component* defines the appearance of the interaction element
+- _block data interactions array_ contains configuration data for all the interactions applied to the block
+- _UI component_ defines the appearance of the interaction element
 
 ### Predefined Interactions
 
@@ -296,7 +285,7 @@ The ContentStateBuilder exposes `readMore` API that accepts configuration object
 
 ```
 
-The `onClick` and  `expandMode` fields are common for all the interactions. They define the ineraction click behavior. The `expandMode` defines which portion of collapsed content should be expanded, and `onClick` allows to intercept the expansion click.
+The `onClick` and `expandMode` fields are common for all the interactions. They define the ineraction click behavior. The `expandMode` defines which portion of collapsed content should be expanded, and `onClick` allows to intercept the expansion click.
 
 #### SeeFullPost
 
@@ -304,7 +293,7 @@ The `onClick` and  `expandMode` fields are common for all the interactions. They
 
 ### RichContentViewer Integration
 
-RichContentViewer `config` prop now allows to pass the preview related configuration, by adding the following entry: 
+RichContentViewer `config` prop now allows to pass the preview related configuration, by adding the following entry:
 
 ```js
 
@@ -323,6 +312,4 @@ The `onPreviewExpand` handler determines the behavior on content expansion when 
 
 ### Custom Interactions
 
-It is possible to create a custom interaction. TBD
-
-
+TBD
