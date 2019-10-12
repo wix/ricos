@@ -312,12 +312,15 @@ The `ImageCounter` serves as a counter of media entities in collapsed content. T
   {
     counter: number,
     formatLabel: number => string,
+    imageSelector: images[] => image,
     style: object,
     onClick: function,
   }
 
 ```
-The `counter` field is self-explanatory, the `formatLabel` defines the format of the label (by default, it is `counter => \`+${ counter }\``). The `ContentStateBuilder` exposes imageCoutner` method that applies the interaction on previous block data. 
+The `counter` field is self-explanatory, the `formatLabel` defines the format of the label (by default, it is `counter => \`+ ${ counter }\``). The `imageSelector` function selects an image that should be decorated by the counter label, among the images found within `ImageCounter` children. By default, last image is selected. If the `ImageCounter` contains a single image, this function is ignored.
+
+The `ContentStateBuilder` exposes `imageCounter` method that applies the interaction on previous block data. 
 
 ### RichContentViewer Integration
 
