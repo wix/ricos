@@ -1,4 +1,4 @@
-import { readMore, seeFullPost } from './interaction-utils.js';
+import { readMore, seeFullPost, imageCounter } from './interaction-utils.js';
 import ContentStateBuilder from '../ContentStateBuilder/ContentStateBuilder';
 import { butKey } from '../tests/test-utils';
 
@@ -52,7 +52,8 @@ describe('read more interaction', () => {
 });
 
 describe('seeFullPost interaction', () => {
-  it('should apply on atomic block entity data', () => {
+  it('should be appied on atomic block entity data', () => {
+    // TODO: refactor image and entity
     const builder = new ContentStateBuilder().image({
       mediaInfo: {
         url: '',
@@ -87,5 +88,59 @@ describe('seeFullPost interaction', () => {
     const actualEntity = interacted.contentState.entityMap[0];
 
     expect(actualEntity).toEqual(expectedEntity);
+  });
+});
+
+describe('image counter interaction', function() {
+  it('should be appied on atomic block entity data', () => {
+    const builder = new ContentStateBuilder().image({
+      mediaInfo: {
+        url: '',
+        width: 1200,
+        height: 1200,
+      },
+    });
+    const expectedEntity = {
+      type: 'wix-draft-plugin-image',
+      mutability: 'IMMUTABLE',
+      data: {
+        src: {
+          file_name: '',
+          width: 1200,
+          height: 1200,
+        },
+        config: {
+          size: 'content',
+          alignment: 'center',
+          showDescription: false,
+          showTitle: false,
+        },
+        interactions: [
+          {
+            type: 'IMAGE_COUNTER',
+            settings: { counter: 5 },
+          },
+        ],
+      },
+    };
+    const interacted = imageCounter(builder, { counter: 5 });
+    const actualEntity = interacted.contentState.entityMap[0];
+    expect(actualEntity).toEqual(expectedEntity);
+  });
+
+  it('should ignore non-atomic blocks', () => {
+    const builder = new ContentStateBuilder().plain('some text');
+    const interacted = imageCounter(builder, { counter: 5 });
+    const expectedBlock = {
+      type: 'unstyled',
+      text: 'some text',
+      depth: 0,
+      inlineStyleRanges: [],
+      entityRanges: [],
+      data: {},
+    };
+
+    const actualBlock = interacted.contentState.blocks[0];
+    expect(butKey(actualBlock)).toEqual(expectedBlock);
   });
 });

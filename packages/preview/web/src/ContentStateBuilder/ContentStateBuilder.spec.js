@@ -270,5 +270,43 @@ describe('content state interactions', () => {
     expect(butKey(contentState.blocks[0])).toEqual(butKey(expectedBlockWithSeeFullPostSettings));
     expect(butKey(contentState.blocks[1])).toEqual(butKey(expected.blocks[1]));
   });
+
+  it('should chain content methods with imageCounter interaction', () => {
+    const contentState = new UUT()
+      .image({
+        mediaInfo: {
+          url: '8bb438_c1089eafb4ab405ba328b528e3ecc63e.jpg',
+          height: 1920,
+          width: 1920,
+          link: { rel: 'nofollow', target: '_blank', url: 'images.com' },
+          metadata: { alt: 'alt text', caption: 'image caption' },
+        },
+        config: {
+          showDescription: true,
+          showTitle: true,
+          size: 'inline',
+          alignment: 'center',
+        },
+      })
+      .imageCounter({ counter: 5 })
+      .plain('')
+      .get();
+    const expectedEntityWithImageCounterSettings = {
+      ...expected.entityMap[0],
+      data: {
+        ...expected.entityMap[0].data,
+        interactions: [
+          {
+            type: 'IMAGE_COUNTER',
+            settings: { counter: 5 },
+          },
+        ],
+      },
+    };
+
+    expect(contentState.entityMap[0]).toEqual(
+      but(expectedEntityWithImageCounterSettings, ['data.src.id', 'data.src.original_file_name'])
+    );
+  });
 });
 // eslint-enable max-len
