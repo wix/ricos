@@ -1,7 +1,7 @@
 require('cypress-plugin-snapshots/commands');
 import { addMatchImageSnapshotCommand } from 'cypress-image-snapshot/command';
 addMatchImageSnapshotCommand();
-import { INLINE_TOOLBAR_BUTTONS } from '../dataHooks';
+import { INLINE_TOOLBAR_BUTTONS, PLUGIN_TOOLBAR_BUTTONS } from '../dataHooks';
 
 const resizeForDesktop = () => cy.viewport('macbook-15');
 const resizeForMobile = () => cy.viewport('iphone-5');
@@ -46,7 +46,7 @@ Cypress.Commands.add('switchToEnglish', () => {
 });
 
 Cypress.Commands.add('loadEditorAndViewer', fixtureName => {
-  run('combined', fixtureName);
+  run('rce', fixtureName);
 });
 
 Cypress.Commands.add('loadEditor', fixtureName => {
@@ -82,7 +82,7 @@ Cypress.Commands.add('blurEditor', () => {
   getEditor()
     .blur()
     .get('[data-hook=inlineToolbar]')
-    .should('not.exist');
+    .should('not.visible');
 });
 
 Cypress.Commands.add('focusEditor', () => {
@@ -165,7 +165,19 @@ Cypress.Commands.add('setTextStyle', (buttonSelector, selection) => {
   if (selection) {
     cy.setSelection(selection[0], selection[1]);
   }
-  cy.get(`[data-hook=${buttonSelector}]`).click();
+  cy.get(`[data-hook=inlineToolbar] [data-hook=${buttonSelector}]`).click();
+});
+
+Cypress.Commands.add('setLink', (selection, link) => {
+  cy.setTextStyle(INLINE_TOOLBAR_BUTTONS.LINK, selection)
+    .get(`[data-hook=linkPanelContainer] [data-hook=linkPanelInput]`)
+    .type(link)
+    .get(`[data-hook=linkPanelContainerDone]`)
+    .click();
+});
+
+Cypress.Commands.add('setAlignment', alignment => {
+  cy.setTextStyle(INLINE_TOOLBAR_BUTTONS.ALIGNMENT).setTextStyle(alignment);
 });
 
 function setInlineToolbarMenueItem(item, selection, butttonIndex) {
@@ -195,9 +207,30 @@ Cypress.Commands.add('openAddPluginModal', () => {
 });
 
 Cypress.Commands.add('openImageSettings', () => {
-  cy.get('[data-hook=imageViewer] [data-hook=imageViewer]:first').click({ force: true });
-  cy.get('[aria-label=Settings]').click();
+  cy.get('[data-hook=imageViewer]:first')
+    .parent()
+    .click();
+  cy.get(`[data-hook=${PLUGIN_TOOLBAR_BUTTONS.SETTINGS}]:first`).click();
   cy.get('[data-hook="imageSettings"]');
+});
+
+Cypress.Commands.add('alignImage', alignment => {
+  let button;
+  switch (alignment) {
+    case 'left':
+      button = PLUGIN_TOOLBAR_BUTTONS.ALIGN_LEFT;
+      break;
+    case 'center':
+      button = PLUGIN_TOOLBAR_BUTTONS.ALIGN_CENTER;
+      break;
+    case 'right':
+    default:
+      button = PLUGIN_TOOLBAR_BUTTONS.ALIGN_RIGHT;
+  }
+  cy.get('[data-hook=imageViewer]:first')
+    .parent()
+    .click();
+  cy.get(`[data-hook=${button}]:first`).click();
 });
 
 // disable screenshots in debug mode. So there is no diffrence to ci.

@@ -1,7 +1,11 @@
 import { getImageStudioPackage } from './image-studio-opener-loader';
 
 async function setupImageEditor(imageEditorWixSettings, rootElementId, fileName, onSave, onClose) {
-  const { MediaImageStudio, MediaImageStudioEvents } = await getImageStudioPackage();
+  const {
+    MediaImageStudio,
+    MediaImageStudioEvents,
+    MediaImageStudioMode,
+  } = await getImageStudioPackage();
   const mediaImageStudio = new MediaImageStudio({
     ...imageEditorWixSettings,
     appendTo: document.querySelector(`[id=${rootElementId}]`),
@@ -21,6 +25,7 @@ async function setupImageEditor(imageEditorWixSettings, rootElementId, fileName,
   });
 
   mediaImageStudio.show({
+    mode: MediaImageStudioMode.Transform,
     fileId: fileName,
   });
 }

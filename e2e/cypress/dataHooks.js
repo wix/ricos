@@ -9,9 +9,22 @@ export const INLINE_TOOLBAR_BUTTONS = {
   UNORDERED_LIST: 'textBlockStyleButton_Bullets',
   ALIGNMENT: 'textDropDownButton_Alignment',
   TEXT_ALIGN_CENTER: 'textAlignmentButton_Center',
-  TEXT_ALIGN_LEFT: 'textAlignmentButton_Left',
-  TEXT_ALIGN_RIGHT: 'textAlignmentButton_Right',
+  TEXT_ALIGN_LEFT: 'textAlignmentButton_AlignLeft',
+  TEXT_ALIGN_RIGHT: 'textAlignmentButton_AlignRight',
   LINE_SPACING: 'LineSpacingButton',
   LINK: 'LinkButton',
   CODE_BLOCK: 'TextCodeBlockButton',
+};
+
+export const PLUGIN_TOOLBAR_BUTTONS = {
+  ORIGINAL: 'blockAlignmentAndSizeButton_sizeOriginal',
+  SMALL: 'blockAlignmentAndSizeButton_sizeSmallCenter',
+  BEST_FIT: 'blockAlignmentAndSizeButton_sizeContent',
+  FULL_WIDTH: 'blockAlignmentAndSizeButton_sizeFullWidth',
+  ALIGN_LEFT: 'blockAlignmentButton_alignLeft',
+  ALIGN_CENTER: 'blockAlignmentButton_alignCenter',
+  ALIGN_RIGHT: 'blockAlignmentButton_alignRight',
+  LINK: 'LinkButton',
+  SETTINGS: 'baseToolbarButton_settings',
+  DELETE: 'blockButton_delete',
 };
