@@ -20,11 +20,19 @@ class GiphyViewer extends Component {
   render() {
     this.styles = this.styles || mergeStyles({ styles, theme: this.context.theme });
     const { componentData } = this.props;
+    /* eslint-disable jsx-a11y/no-redundant-roles */
     return (
       <ViewportRenderer>
-        <img className={this.styles.giphy_player} src={componentData.gif.originalUrl} alt="gif" />
+        <img
+          role="img"
+          aria-label="gif"
+          className={this.styles.giphy_player}
+          src={componentData.gif.originalUrl}
+          alt="gif"
+        />
       </ViewportRenderer>
     );
+    /* eslint-enable jsx-a11y/no-redundant-roles */
   }
 }
 
