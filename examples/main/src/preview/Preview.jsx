@@ -3,7 +3,11 @@ import React, { PureComponent } from 'react';
 import ReactModal from 'react-modal';
 import MonacoEditor from 'react-monaco-editor';
 import { RichContentModal } from 'wix-rich-content-common';
-import { ContentStateTransformation, RichContentPreview, EXPAND_MODES } from 'wix-rich-content-preview';
+import {
+  ContentStateTransformation,
+  RichContentPreview,
+  EXPAND_MODES,
+} from 'wix-rich-content-preview';
 import * as PropTypes from 'prop-types';
 import * as Plugins from './PreviewPlugins';
 import theme from '../theme/theme'; // must import after custom styles
@@ -31,20 +35,34 @@ export default class Preview extends PureComponent {
     };
     this.transformation = new ContentStateTransformation({
       _if: metadata => metadata.text.plain.array().length > 0,
-      _then: (metadata, preview) => preview.plain(metadata.text.plain.array()[0]).readMore({ lines: 3, expandMode: EXPAND_MODES.BLOCK })
+      _then: (metadata, preview) =>
+        preview
+          .plain(metadata.text.plain.array()[0])
+          .readMore({ lines: 3, expandMode: EXPAND_MODES.BLOCK }),
     }).rule({
       _if: metadata => metadata.media.images().length > 3,
-      _then: (metadata, preview) => preview.gallery({
-        mediaInfo: metadata.media.images().slice(0, 3),
-      }).seeFullPost({ label: 'SEE FULL STORY' })
+      _then: (metadata, preview) =>
+        preview
+          .gallery({
+            mediaInfo: metadata.media.images().slice(0, 3),
+          })
+          .imageCounter({ counter: metadata.media.images().length - 3 }),
     });
   }
 
-  formatCode = (rules) => rules.reduce((formatted, rule) => {
-    return formatted.concat(dedent(`if: ${ rule._if.replace('function _if(metadata)', 'metadata => ')
-                            .replace('{return ', '').slice(0, -1) }
-                   then: ${ rule._then.replace('function _then(metadata,preview)', '(metadata, preview) => ').replace('{return ', '').slice(0, -1) }`).concat('\n\n'));
-  }, '');
+  formatCode = rules =>
+    rules.reduce((formatted, rule) => {
+      return formatted.concat(
+        dedent(`if: ${rule._if
+          .replace('function _if(metadata)', 'metadata => ')
+          .replace('{return ', '')
+          .slice(0, -1)}
+                   then: ${rule._then
+                     .replace('function _then(metadata,preview)', '(metadata, preview) => ')
+                     .replace('{return ', '')
+                     .slice(0, -1)}`).concat('\n\n')
+      );
+    }, '');
 
   closeModal = () => {
     this.setState({
@@ -55,36 +73,39 @@ export default class Preview extends PureComponent {
 
   render() {
     return (
-<div id="rich-content-preview" className="viewer">
-  <div style={{ height: '50vh', width: '100%' }}>
-    <RichContentPreview
-      helpers={this.helpers}
-      typeMappers={Plugins.typeMappers}
-      inlineStyleMappers={Plugins.getInlineStyleMappers(this.props.initialState)}
-      decorators={Plugins.decorators}
-      config={Plugins.config}
-      initialState={this.props.initialState}
-      transformation={this.transformation}
-      theme={theme}
-      isMobile={this.props.isMobile}
-      anchorTarget={anchorTarget}
-      relValue={relValue}
-      disabled={this.state.disabled}
-    />
-        <ReactModal
-          isOpen={this.state.showModal}
-          contentLabel="External Modal Example"
-          style={this.state.modalStyles || modalStyleDefaults}
-          onRequestClose={this.closeModal}
-        >
+      <div id="rich-content-preview" className="viewer">
+        <div style={{ height: '50vh', width: '100%' }}>
+          <RichContentPreview
+            helpers={this.helpers}
+            typeMappers={Plugins.typeMappers}
+            inlineStyleMappers={Plugins.getInlineStyleMappers(this.props.initialState)}
+            decorators={Plugins.decorators}
+            config={Plugins.config}
+            initialState={this.props.initialState}
+            transformation={this.transformation}
+            theme={theme}
+            isMobile={this.props.isMobile}
+            anchorTarget={anchorTarget}
+            relValue={relValue}
+            disabled={this.state.disabled}
+          />
+          <ReactModal
+            isOpen={this.state.showModal}
+            contentLabel="External Modal Example"
+            style={this.state.modalStyles || modalStyleDefaults}
+            onRequestClose={this.closeModal}
+          >
             {this.state.showModal && <RichContentModal {...this.state.modalProps} />}
-              </ReactModal>
-                </div>
-                  <div style={{ height: '50vh', width: '100%' }}>
-                    <MonacoEditor language="es6" value={dedent`Rules: 
-          ${ this.formatCode(this.transformation.toObject()) }`}/>
-                      </div>
-                        </div>
+          </ReactModal>
+        </div>
+        <div style={{ height: '50vh', width: '100%' }}>
+          <MonacoEditor
+            language="es6"
+            value={dedent`Rules:
+          ${this.formatCode(this.transformation.toObject())}`}
+          />
+        </div>
+      </div>
     );
   }
 }
