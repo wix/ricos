@@ -1,6 +1,12 @@
 import { DesktopFlyOutModalStyles } from '../constants';
-import { TOOLBARS, decorateComponentWithProps, getModalStyles } from 'wix-rich-content-common';
+import {
+  TOOLBARS,
+  decorateComponentWithProps,
+  getModalStyles,
+  DECORATION_MODE,
+} from 'wix-rich-content-common';
 import EmojiPreviewModal from './emojiPreviewModal';
+import Arrow from './arrow';
 import { EmojiPluginIcon } from '../icons';
 
 export default ({ helpers, t, settings, getEditorState, setEditorState }) => {
@@ -23,8 +29,8 @@ export default ({ helpers, t, settings, getEditorState, setEditorState }) => {
           fullScreen: true,
         });
         const { top, left } = buttonRef.getBoundingClientRect();
-        const modalLeft = left - 311;
-        const modalTop = top - 287;
+        const modalLeft = left - 288;
+        const modalTop = top - 293;
         return {
           ...modalStyles,
           content: {
@@ -36,6 +42,12 @@ export default ({ helpers, t, settings, getEditorState, setEditorState }) => {
           },
         };
       },
+      modalDecorations: [
+        {
+          decorationMode: DECORATION_MODE.APPEND,
+          decorator: Arrow,
+        },
+      ],
       helpers,
     },
   ];
