@@ -27,11 +27,17 @@ class ImageCounter extends PureComponent {
   };
 
   componentDidMount() {
+    const { formatLabel, counter } = this.props;
     if (this.el) {
       setTimeout(() => {
         const images = this.el.querySelectorAll('[role=img]');
         const imagesToDecorate = this.props.imageSelector(images);
-        imagesToDecorate.forEach(img => img.classList.add(styles.imageCounter_container));
+        imagesToDecorate.forEach(img => {
+          const decoration = document.createElement('div');
+          decoration.classList.add(styles.imageCounter_container);
+          decoration.innerText = formatLabel(counter);
+          img.parentNode.insertBefore(decoration, img);
+        });
       }, 0);
     }
   }
@@ -39,15 +45,7 @@ class ImageCounter extends PureComponent {
   element = el => (this.el = el);
 
   render() {
-    const { formatLabel, children, counter } = this.props;
-    const label = formatLabel(counter);
-    /* eslint-disable */
-    return (
-      <div ref={this.element}>
-        {label}
-        {children}
-      </div>
-    );
+    return <div ref={this.element}>{this.props.children}</div>;
   }
 }
 
