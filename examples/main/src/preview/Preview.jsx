@@ -11,7 +11,7 @@ import {
 import * as PropTypes from 'prop-types';
 import * as Plugins from './PreviewPlugins';
 import theme from '../theme/theme'; // must import after custom styles
-
+import 'wix-rich-content-preview/dist/styles.min.css';
 const modalStyleDefaults = {
   content: {
     top: '50%',
