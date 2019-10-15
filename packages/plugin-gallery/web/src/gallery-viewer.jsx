@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { isEqual } from 'lodash';
+import { isEqual, get } from 'lodash';
 import { validate, mergeStyles, Context } from 'wix-rich-content-common';
 import { convertItemData } from './helpers/convert-item-data';
 import { getDefault, isHorizontalLayout } from './constants';
@@ -36,6 +36,7 @@ class GalleryViewer extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    let galleryKey = this.state && this.state.galleryKey;
     if (!isEqual(nextProps.componentData, this.props.componentData)) {
       const { galleryLayout: currentGalleryLayout } = this.props.componentData.styles;
       const { galleryLayout: nextGalleryLayout } = nextProps.componentData.styles;
@@ -43,8 +44,9 @@ class GalleryViewer extends React.Component {
         this.handleGalleryLayoutChange(nextProps.componentData.styles);
       }
       validate(nextProps.componentData, schema);
+      galleryKey = get(nextProps, 'componentData.styles.galleryLayout', Math.random());
     }
-    this.setState(this.stateFromProps(nextProps), () => this.updateDimensions());
+    this.setState({ galleryKey, ...this.stateFromProps(nextProps) }, () => this.updateDimensions());
   }
 
   componentDidMount() {
@@ -59,7 +61,12 @@ class GalleryViewer extends React.Component {
   updateDimensions = () => {
     if (this.container && this.container.getBoundingClientRect) {
       const width = Math.floor(this.container.getBoundingClientRect().width);
-      this.setState({ size: { width } });
+      this.setState(state => ({
+        size: {
+          ...state.size,
+          width,
+        },
+      }));
     }
   };
 
@@ -89,7 +96,7 @@ class GalleryViewer extends React.Component {
     if (this.container) {
       if (isHorizontalLayout(styleParams)) {
         const { width } = this.container.getBoundingClientRect();
-        const height = width ? (width * 9) / 16 : 300;
+        const height = width ? Math.floor((width * 3) / 4) : 300;
         this.setState(state => ({
           size: {
             ...state.size,
@@ -120,9 +127,14 @@ class GalleryViewer extends React.Component {
 
   render() {
     this.styles = this.styles || mergeStyles({ styles: viewerStyles, theme: this.context.theme });
-    const { styleParams, size = { width: 300 } } = this.state;
+    // TODO remove gallery key
+    const { galleryKey, styleParams, size = { width: 300 } } = this.state;
     return (
-      <div ref={elem => (this.container = elem)} className={this.styles.gallery_container}>
+      <div
+        key={galleryKey}
+        ref={elem => (this.container = elem)}
+        className={this.styles.gallery_container}
+      >
         <ProGallery
           items={this.getItems()}
           styles={styleParams}

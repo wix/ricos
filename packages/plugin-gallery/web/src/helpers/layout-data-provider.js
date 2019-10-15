@@ -23,6 +23,8 @@ const layouts = [
     groupSize: 1,
     groupTypes: '1',
     fixedColumns: 0,
+    numberOfImagesPerRow: 0,
+    gridStyle: 0,
     hasThumbnails: false,
     galleryThumbnailsAlignment: 'none',
     enableScroll: true,

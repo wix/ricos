@@ -13,6 +13,12 @@
 ## 5.1.6 (Oct 10, 2019)
 ### :bug: Bug Fix
 - `gallery`
+  - [#412](https://github.com/wix-incubator/rich-content/pull/412) height issues
+<hr/>
+
+## 5.1.6 (Oct 10, 2019)
+### :bug: Bug Fix
+- `gallery`
   - [#410](https://github.com/wix-incubator/rich-content/pull/410) layout change and events handler
 ### :house: Internal
 - `gallery`
