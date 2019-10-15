@@ -60,12 +60,14 @@ class ImageCounter extends PureComponent {
   handleContainer = el => (this.container = el);
 
   render() {
+    /* eslint-disable */
     return (
-      <div ref={this.handleWrapper}>
+      <div ref={this.handleWrapper} onClick={this.onClick}>
         <div ref={this.handleContainer} className={styles.imageCounter_overlay} />
         {this.props.children}
       </div>
     );
+    /* eslint-enable */
   }
 }
 
