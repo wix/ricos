@@ -26,19 +26,19 @@ export const simplePubsub = initialState => {
   };
 
   //use to merge objects into store. Merges the the newData with the data for the given key.
-  const update = (key, newData) => {
+  const update = (key, newData, blockKey) => {
     const data = get(key);
     const newItem = merge({}, data, newData);
-    set(key, newItem);
+    blockKey ? _setSingle(key, newItem, blockKey) : set(key, newItem);
   };
 
-  const _setSingle = (key, item) => {
+  const _setSingle = (key, item, blockKey) => {
     state = {
       ...state,
       [key]: item,
     };
     if (listeners[key]) {
-      listeners[key].forEach(listener => listener(state[key]));
+      listeners[key].forEach(listener => listener(state[key], blockKey));
     }
   };
 

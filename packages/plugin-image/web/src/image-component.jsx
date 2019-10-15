@@ -23,7 +23,7 @@ class ImageComponent extends React.Component {
     if (store) {
       const blockKey = block.getKey();
       store.setBlockHandler('handleFilesSelected', blockKey, this.handleFilesSelected.bind(this));
-      store.setBlockHandler('handleFilesAdded', blockKey, this.handleFilesAdded.bind(this));
+      store.set('handleFilesAdded', this.handleFilesAdded.bind(this));
     }
   }
 
@@ -93,8 +93,7 @@ class ImageComponent extends React.Component {
     const hasFileChangeHelper = helpers && helpers.onFilesChange;
     if (hasFileChangeHelper && fileList.length > 0) {
       helpers.onFilesChange(fileList[0], ({ data, error }) =>
-        // this.handleFilesAdded(this.props.block.getKey(), { data, error })
-        this.handleFilesAdded({ data, error })
+        this.handleFilesAdded(this.props.block.getKey(), { data, error })
       );
     } else {
       this.resetLoadingState({ msg: 'Missing upload function' });
@@ -111,47 +110,18 @@ class ImageComponent extends React.Component {
     return state;
   };
 
-  // handleFilesAdded = ({ data, error }) => {
-  //   //when updating componentData on an async method like this one,
-  //   // we need to use a sync method to change the EditorState.
-  //   // The broadcast is good if the toolbar is displaying some status or image
-  //   const imageData = data.length ? data[0] : data;
-  //   this.props.componentData.src = imageData;
-  //   this.props.componentData.config.alignment = imageData.width >= 740 ? 'center' : 'left';
-  //   const { setData } = this.props.blockProps;
-  //   setData(this.props.componentData);
-
-  //   // this.props.store.update('componentData', { src: imageData });
-  //   this.resetLoadingState(error);
-  // };
-
   handleFilesAdded = (blockKey, { data, error }) => {
     //when updating componentData on an async method like this one,
     // we need to use a sync method to change the EditorState.
     // The broadcast is good if the toolbar is displaying some status or image
-    //BAD IMPLEMENTATION - WORKS WITH CHANGE OF PROPS
     const imageData = data.length ? data[0] : data;
-    const componentData = { ...this.props.componentData, src: imageData };
-    setData(componentData);
-    this.props.componentData.src = imageData;
-    this.props.componentData.config.alignment = imageData.width >= 740 ? 'center' : 'left';
-    const { setData } = this.props.blockProps;
-    setData(this.props.componentData);
-
-    // const { getDataByBlockKey, setDataByBlockKey } = this.props.blockProps;
-    // let blockData = getDataByBlockKey(blockKey);
-    // blockData = { ...blockData, src: imageData };
-    // blockData.config.alignment = imageData.width >= 740 ? 'center' : 'left';
-    // setData(blockData);
-    // setDataByBlockKey(blockKey, blockData);
-    // this.props.store.setBlockData({
-    //   key: 'componentData',
-    //   blockKey,
-    //   item: blockData,
-    // });
-    //console.log(blockData);
-    // this.props.store.update('componentData', { src: imageData });
-    // this.props.store.update('componentData', componentData);
+    const config = { ...this.props.componentData.config };
+    config.alignment = imageData.width >= 740 ? 'center' : 'left';
+    const componentData = {
+      config,
+      src: imageData,
+    };
+    this.props.store.update('componentData', componentData, blockKey);
     this.resetLoadingState(error);
   };
 
