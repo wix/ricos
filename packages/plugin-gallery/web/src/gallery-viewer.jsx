@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { isEqual } from 'lodash';
+import { isEqual, get } from 'lodash';
 import { validate, mergeStyles, Context } from 'wix-rich-content-common';
 import { convertItemData } from './helpers/convert-item-data';
 import { getDefault, isHorizontalLayout } from './constants';
@@ -45,7 +45,7 @@ class GalleryViewer extends React.Component {
         this.handleGalleryLayoutChange(nextProps.componentData.styles);
       }
       validate(nextProps.componentData, schema);
-      galleryKey = Math.random();
+      galleryKey = get(nextProps, 'componentData.styles.galleryLayout', Math.random());
     }
     this.setState({ galleryKey, ...this.stateFromProps(nextProps) }, () => this.updateDimensions());
   }
@@ -62,7 +62,12 @@ class GalleryViewer extends React.Component {
   updateDimensions = () => {
     if (this.container && this.container.getBoundingClientRect) {
       const width = Math.floor(this.container.getBoundingClientRect().width);
-      this.setState({ size: { width } });
+      this.setState(state => ({
+        size: {
+          ...state.size,
+          width,
+        },
+      }));
     }
   };
 
@@ -94,7 +99,7 @@ class GalleryViewer extends React.Component {
     if (this.container) {
       if (isHorizontalLayout(styleParams)) {
         const { width } = this.container.getBoundingClientRect();
-        const height = width ? (width * 9) / 16 : 300;
+        const height = width ? Math.floor((width * 3) / 4) : 300;
         this.setState(state => ({
           size: {
             ...state.size,
@@ -155,7 +160,11 @@ class GalleryViewer extends React.Component {
     const { galleryKey, styleParams, size = { width: 300 } } = this.state;
     const items = this.getItems();
     return (
-      <div ref={elem => (this.container = elem)} className={this.styles.gallery_container}>
+      <div
+        key={galleryKey}
+        ref={elem => (this.container = elem)}
+        className={this.styles.gallery_container}
+      >
         <ProGallery
           // TODO remove gallery key
           key={galleryKey}
