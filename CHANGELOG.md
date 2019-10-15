@@ -10,6 +10,13 @@
 ## [Unreleased]
 <hr/>
 
+## 5.1.8 (Oct 15, 2019)
+### :bug: Bug Fix
+- `gallery`
+  - [#414](https://github.com/wix-incubator/rich-content/pull/414) additional height issues
+<hr/>
+
+
 ## 5.1.7 (Oct 15, 2019)
 ### :bug: Bug Fix
 - `gallery`
