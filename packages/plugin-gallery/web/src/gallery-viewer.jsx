@@ -42,32 +42,33 @@ class GalleryViewer extends React.Component {
       const { galleryLayout: currentGalleryLayout } = this.props.componentData.styles;
       const { galleryLayout: nextGalleryLayout } = nextProps.componentData.styles;
       if (currentGalleryLayout !== nextGalleryLayout) {
-        this.handleGalleryLayoutChange(nextProps.componentData.styles);
+        this.updateDimensions(nextProps.componentData.styles);
       }
       validate(nextProps.componentData, schema);
       galleryKey = get(nextProps, 'componentData.styles.galleryLayout', Math.random());
     }
-    this.setState({ galleryKey, ...this.stateFromProps(nextProps) }, () => this.updateDimensions());
+    this.setState({ galleryKey, ...this.stateFromProps(nextProps) });
   }
 
   componentDidMount() {
     this.updateDimensions();
-    window.addEventListener('resize', this.updateDimensions);
+    window.addEventListener('resize', this.handleResize);
   }
 
   componentWillUnmount() {
-    window.removeEventListener('resize', this.updateDimensions);
+    window.removeEventListener('resize', this.handleResize);
   }
 
-  updateDimensions = () => {
+  handleResize = () => this.updateDimensions();
+
+  updateDimensions = (styleParams = this.props.componentData.styles) => {
     if (this.container && this.container.getBoundingClientRect) {
       const width = Math.floor(this.container.getBoundingClientRect().width);
-      this.setState(state => ({
-        size: {
-          ...state.size,
-          width,
-        },
-      }));
+      let height;
+      if (isHorizontalLayout(styleParams)) {
+        height = width ? Math.floor((width * 3) / 4) : 300;
+      }
+      this.setState({ size: { width, height } });
     }
   };
 
@@ -94,23 +95,6 @@ class GalleryViewer extends React.Component {
       return this.sampleItems;
     }
   }
-
-  handleGalleryLayoutChange = styleParams => {
-    if (this.container) {
-      if (isHorizontalLayout(styleParams)) {
-        const { width } = this.container.getBoundingClientRect();
-        const height = width ? Math.floor((width * 3) / 4) : 300;
-        this.setState(state => ({
-          size: {
-            ...state.size,
-            height,
-          },
-        }));
-      } else {
-        this.setState({ size: { height: undefined } });
-      }
-    }
-  };
 
   handleGalleryEvents = (name, data) => {
     switch (name) {
