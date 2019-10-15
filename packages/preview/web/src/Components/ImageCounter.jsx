@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import styles from '../../statics/styles/image-counter.scss';
 
@@ -26,26 +27,45 @@ class ImageCounter extends PureComponent {
     onPreviewExpand();
   };
 
-  componentDidMount() {
+  renderDecoration = element => {
     const { formatLabel, counter } = this.props;
-    if (this.el) {
+    const rect = element.getBoundingClientRect();
+    const parentRect = this.container.getBoundingClientRect();
+    const style = {
+      width: rect.width,
+      height: rect.height,
+      top: rect.top - parentRect.top,
+      left: rect.left - parentRect.left,
+    };
+    return (
+      <div className={styles.imageCounter_container} style={style}>
+        <span className={styles.imageCounter_label}>{formatLabel(counter)}</span>
+      </div>
+    );
+  };
+
+  componentDidMount() {
+    if (this.wrapper) {
       setTimeout(() => {
-        const images = this.el.querySelectorAll('[role=img]');
+        const images = this.wrapper.querySelectorAll('[role=img]');
         const imagesToDecorate = this.props.imageSelector(images);
-        imagesToDecorate.forEach(img => {
-          const decoration = document.createElement('div');
-          decoration.classList.add(styles.imageCounter_container);
-          decoration.innerText = formatLabel(counter);
-          img.parentNode.insertBefore(decoration, img);
-        });
+        const decorations = imagesToDecorate.map(img => this.renderDecoration(img));
+        ReactDOM.render(decorations, this.container);
       }, 0);
     }
   }
 
-  element = el => (this.el = el);
+  handleWrapper = el => (this.wrapper = el);
+
+  handleContainer = el => (this.container = el);
 
   render() {
-    return <div ref={this.element}>{this.props.children}</div>;
+    return (
+      <div ref={this.handleWrapper}>
+        <div ref={this.handleContainer} className={styles.imageCounter_overlay} />
+        {this.props.children}
+      </div>
+    );
   }
 }
 
