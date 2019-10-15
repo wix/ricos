@@ -19,23 +19,6 @@ const updateEntityData = (contentBlock, { getEditorState, setEditorState }, getN
   }
 };
 
-const getDataByBlockKey = ({ getEditorState }) => {
-  return blockKey => {
-    const contentState = getEditorState().getCurrentContent();
-    const contentBlock = contentState.getBlockForKey(blockKey);
-    const entity = contentState.getEntity(contentBlock.getEntityAt(0));
-    return entity.getData();
-  };
-};
-
-const setDataByBlockKey = ({ getEditorState, setEditorState }) => {
-  return (blockKey, data) => {
-    const contentState = getEditorState().getCurrentContent();
-    const contentBlock = contentState.getBlockForKey(blockKey);
-    return updateEntityData(contentBlock, { getEditorState, setEditorState }, data);
-  };
-};
-
 const setData = (contentBlock, { getEditorState, setEditorState }) => {
   return newDataFunc =>
     updateEntityData(contentBlock, { getEditorState, setEditorState }, newDataFunc);
@@ -162,8 +145,6 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
               setData: setData(contentBlock, { getEditorState, setEditorState }),
               deleteBlock: deleteEntity(contentBlock, { getEditorState, setEditorState }),
               readOnly: getReadOnly(),
-              getDataByBlockKey: getDataByBlockKey({ getEditorState }),
-              setDataByBlockKey: setDataByBlockKey({ getEditorState, setEditorState }),
             },
           };
         }
