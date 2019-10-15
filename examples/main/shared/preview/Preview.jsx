@@ -1,8 +1,8 @@
 import dedent from 'dedent';
 import React, { PureComponent } from 'react';
 import ReactModal from 'react-modal';
-import MonacoEditor from 'react-monaco-editor';
-import { RichContentModal } from 'wix-rich-content-common';
+// import MonacoEditor from 'react-monaco-editor';
+import { RichContentModal, isSSR } from 'wix-rich-content-common';
 import {
   ContentStateTransformation,
   RichContentPreview,
@@ -29,7 +29,9 @@ const relValue = 'noreferrer';
 export default class Preview extends PureComponent {
   constructor(props) {
     super(props);
-    ReactModal.setAppElement('#root');
+    if (!isSSR()) {
+      ReactModal.setAppElement('#root');
+    }
     this.state = {
       disabled: false,
     };
@@ -75,37 +77,28 @@ export default class Preview extends PureComponent {
   render() {
     return (
       <div id="rich-content-preview" className="viewer">
-        <div style={{ height: '50vh', width: '100%' }}>
-          <RichContentPreview
-            helpers={this.helpers}
-            typeMappers={Plugins.typeMappers}
-            inlineStyleMappers={Plugins.getInlineStyleMappers(this.props.initialState)}
-            decorators={Plugins.decorators}
-            config={Plugins.config}
-            initialState={this.props.initialState}
-            transformation={this.transformation}
-            theme={theme}
-            isMobile={this.props.isMobile}
-            anchorTarget={anchorTarget}
-            relValue={relValue}
-            disabled={this.state.disabled}
-          />
-          <ReactModal
-            isOpen={this.state.showModal}
-            contentLabel="External Modal Example"
-            style={this.state.modalStyles || modalStyleDefaults}
-            onRequestClose={this.closeModal}
-          >
-            {this.state.showModal && <RichContentModal {...this.state.modalProps} />}
-          </ReactModal>
-        </div>
-        <div style={{ height: '50vh', width: '100%' }}>
-          <MonacoEditor
-            language="es6"
-            value={dedent`Rules:
-          ${this.formatCode(this.transformation.toObject())}`}
-          />
-        </div>
+        <RichContentPreview
+          helpers={this.helpers}
+          typeMappers={Plugins.typeMappers}
+          inlineStyleMappers={Plugins.getInlineStyleMappers(this.props.initialState)}
+          decorators={Plugins.decorators}
+          config={Plugins.config}
+          initialState={this.props.initialState}
+          transformation={this.transformation}
+          theme={theme}
+          isMobile={this.props.isMobile}
+          anchorTarget={anchorTarget}
+          relValue={relValue}
+          disabled={this.state.disabled}
+        />
+        <ReactModal
+          isOpen={this.state.showModal}
+          contentLabel="External Modal Example"
+          style={this.state.modalStyles || modalStyleDefaults}
+          onRequestClose={this.closeModal}
+        >
+          {this.state.showModal && <RichContentModal {...this.state.modalProps} />}
+        </ReactModal>
       </div>
     );
   }

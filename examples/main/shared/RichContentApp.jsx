@@ -53,6 +53,7 @@ class RichContentApp extends PureComponent {
         initialState={initialState}
         editorState={editorState}
         viewerState={viewerState}
+        previewState={viewerState}
         locale={locale}
         isMobile={mode === 'demo' ? isMobile() : this.props.isMobile}
         localeResource={localeResource}

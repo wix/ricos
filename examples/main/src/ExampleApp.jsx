@@ -14,7 +14,7 @@ import {
 import { generateKey, getStateFromObject, loadStateFromStorage, saveStateToStorage } from './utils';
 const Editor = React.lazy(() => import('../shared/editor/Editor'));
 const Viewer = React.lazy(() => import('../shared/viewer/Viewer'));
-const Preview = React.lazy(() => import('./preview/Preview'));
+const Preview = React.lazy(() => import('../shared/preview/Preview'));
 
 const getContentStateFromEditorState = editorState => convertToRaw(editorState.getCurrentContent());
 
@@ -121,7 +121,7 @@ class ExampleApp extends PureComponent {
     }
     return (
       isEditorShown && (
-        <ReflexElement key={`editor-section-${this.state.viewerResetKey}`} className="section">
+        <ReflexElement key={`editor-section-${this.state.editorResetKey}`} className="section">
           <SectionHeader
             title="Editor"
             settings={settings}
@@ -147,7 +147,8 @@ class ExampleApp extends PureComponent {
 
 
   renderPreview = () => {
-    const { isPreviewShown, editorState } = this.state;
+    const { previewState, isMobile } = this.props;
+    const { isPreviewShown } = this.state;
     const settings = [
       {
         name: 'Mobile',
@@ -158,7 +159,6 @@ class ExampleApp extends PureComponent {
           })),
       },
     ];
-    const previewState = JSON.parse(JSON.stringify(convertToRaw(editorState.getCurrentContent()))); //emulate initilState passed in by consumers
     return (
       isPreviewShown && (
         <ReflexElement key={`preview-section-${this.state.previewResetKey}`} className="section">
@@ -169,10 +169,7 @@ class ExampleApp extends PureComponent {
           />
           <SectionContent>
             <ErrorBoundary>
-              <Preview
-                initialState={previewState}
-                isMobile={this.state.previewIsMobile || this.isMobile}
-              />
+              <Preview initialState={previewState} isMobile={this.state.previewIsMobile || isMobile} />
             </ErrorBoundary>
           </SectionContent>
         </ReflexElement>

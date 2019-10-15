@@ -54,7 +54,8 @@
     "wix-rich-content-plugin-sound-cloud": "5.1.8",
     "wix-rich-content-plugin-text-color": "5.1.8",
     "wix-rich-content-plugin-video": "5.1.8",
-    "wix-rich-content-viewer": "5.1.8"
+    "wix-rich-content-viewer": "5.1.8",
+    "wix-rich-content-preview": "5.1.8"
   },
   "scripts": {
     "clean": "rm -rf dist/",
