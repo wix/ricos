@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import ReactModal from 'react-modal';
 import { RichContentViewer } from 'wix-rich-content-viewer';
-import { RichContentModal } from 'wix-rich-content-common';
+import { RichContentModal, isSSR } from 'wix-rich-content-common';
 import * as PropTypes from 'prop-types';
 import * as Plugins from './ViewerPlugins';
 import theme from '../theme/theme'; // must import after custom styles
@@ -23,7 +23,10 @@ const relValue = 'noreferrer';
 export default class Viewer extends PureComponent {
   constructor(props) {
     super(props);
-    ReactModal.setAppElement('#root');
+
+    if (!isSSR()) {
+      ReactModal.setAppElement('#root');
+    }
     this.state = {
       disabled: false,
     };

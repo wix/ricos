@@ -9,10 +9,99 @@
 
 ## [Unreleased]
 ### :rocket: New Feature
+- `gallery`
+  - [#391](https://github.com/wix-incubator/rich-content/pull/391) gallery image titles
+### :bug: Bug Fix
 - `editor`
-  - [#377](https://github.com/wix-incubator/rich-content/pull/377) resize decoration added (based on `draftjs-resizeable-plugin`)
+  - [#392](https://github.com/wix-incubator/rich-content/pull/392) text in line toolbar has tooltips
+- `image`
+  - [75336e34](https://github.com/wix-incubator/rich-content/commit/75336e34) open imageStudio on crop tab
+- `gallery`
+  - [#404](https://github.com/wix-incubator/rich-content/pull/404) delete last remaining image in image settings returns to gallery settings
+  - [#403](https://github.com/wix-incubator/rich-content/pull/403) re-render gallery on change only
+### :house: Internal
+- `e2e`
+  - [#393](https://github.com/wix-incubator/rich-content/pull/393) added atomic block alignment testing
+  - [#394](https://github.com/wix-incubator/rich-content/pull/394) test-env changed to match main example
+- `mentions`
+  - [#387](https://github.com/wix-incubator/rich-content/pull/387) data validation schema added
+<hr/>
+
+## 5.1.8 (Oct 15, 2019)
+### :bug: Bug Fix
+- `gallery`
+  - [#414](https://github.com/wix-incubator/rich-content/pull/414) additional height issues
+<hr/>
+
+
+## 5.1.7 (Oct 15, 2019)
+### :bug: Bug Fix
+- `gallery`
+  - [#412](https://github.com/wix-incubator/rich-content/pull/412) height issues
+<hr/>
+
+## 5.1.6 (Oct 10, 2019)
+### :bug: Bug Fix
+- `gallery`
+  - [#410](https://github.com/wix-incubator/rich-content/pull/410) layout change and events handler
+### :house: Internal
+- `gallery`
+  - [#410](https://github.com/wix-incubator/rich-content/pull/410) `pro-gallery` updated to `v1.3.21`
+<hr/>
+
+## 5.1.5 (Oct 2, 2019)
+### :bug: Bug Fix
+- `image`
+  - [38c6c4d](https://github.com/wix-incubator/rich-content/commit/38c6c4d)  disabled above the fold
+<hr/>
+
+## 5.1.4 (Sep 26, 2019)
+### :bug: Bug Fix
+- `gallery`
+  - [#401](https://github.com/wix-incubator/rich-content/pull/401) resize media url returns absolute url when not resizing
+### :house: Internal
+- `gallery`
+  - [#401](https://github.com/wix-incubator/rich-content/pull/401) `pro-gallery` updated to `v1.3.17`
+<hr/>
+
+## 5.1.2 (Sep 25, 2019)
+### :bug: Bug Fix
+- `editor`
+  - [#395](https://github.com/wix-incubator/rich-content/pull/395) removed div wrapping editor that was added in [#359](https://github.com/wix-incubator/rich-content/pull/359)
+- `gallery`
+  - [d0986f3](https://github.com/wix-incubator/rich-content/commit/d0986f3) height issues - disabled above the fold 
+### :house: Internal
+- `example`
+  - [9add0fbc](https://github.com/wix-incubator/rich-content/commit/9add0fbc) gallery validation schema used for content validation
+<hr/>
+
+## 5.1.1 (Sep 22, 2019)
+### :rocket: New Feature
+- `image`
+  - [#388](https://github.com/wix-incubator/rich-content/pull/388) changed default image alignment
+### :bug: Bug Fix
+- `viewer`
+  - [#390](https://github.com/wix-incubator/rich-content/pull/390) justified text new lines disappear
+### :house: Internal
+- `e2e`
+  - [#368](https://github.com/wix-incubator/rich-content/pull/368) test rtl support in toolbars, text and external modals
+<hr/>
+
+## 5.1.0 (Sep 16, 2019)
+### :rocket: New Feature
+- `html`
+  - [#379](https://github.com/wix-incubator/rich-content/pull/379) edit panel opens on click when src is blank
 - `image`
   - [#377](https://github.com/wix-incubator/rich-content/pull/377) custom resizing implemented
+  - [#380](https://github.com/wix-incubator/rich-content/pull/380) Image Editor (Wix Image Studio)
+### :bug: Bug Fix
+- `html`
+  - [#385](https://github.com/wix-incubator/rich-content/pull/385) edit panel resets to default state when focusing on different instances of the same plugin
+- `viewer`
+  - [#386](https://github.com/wix-incubator/rich-content/pull/386) code block duplication
+### :house: Internal
+- `editor`
+  - [#377](https://github.com/wix-incubator/rich-content/pull/377) resize decoration added (based on `draftjs-resizeable-plugin`)
 <hr/>
 
 ## 5.0.1 (Sep 10, 2019)

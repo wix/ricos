@@ -81,6 +81,7 @@
             "IMAGE",
             "VIDEO-EMBED",
             "LINK",
+            "mention",
             "wix-draft-plugin-image",
             "wix-draft-plugin-button",
             "wix-draft-plugin-video",
@@ -101,7 +102,7 @@
         "mutability": {
           "$id": "#/properties/mutability",
           "type": "string",
-          "enum": ["MUTABLE", "IMMUTABLE"],
+          "enum": ["MUTABLE", "IMMUTABLE", "SEGMENTED"],
           "title": "entity mutability",
           "examples": ["IMMUTABLE"]
         },

@@ -34,8 +34,8 @@ class ImageSettings extends Component {
     this.props.onDeleteImage();
   }
 
-  replaceItem = event => {
-    this.props.handleFileChange(event);
+  replaceItem = files => {
+    this.props.handleFileChange(files);
   };
 
   getImageUrl = image =>
@@ -46,6 +46,8 @@ class ImageSettings extends Component {
       420,
       240
     );
+
+  onInputWithLabelChange = event => this.props.onUpdateImage({ title: event.target.value });
 
   onLinkPanelChange = linkPanelValues => {
     this.props.onUpdateImage({ link: this.linkPanelToLink(linkPanelValues) });
@@ -64,7 +66,6 @@ class ImageSettings extends Component {
     nofollow: rel === 'nofollow',
     isValid,
   });
-
   render() {
     const styles = this.styles;
     const {
@@ -80,7 +81,6 @@ class ImageSettings extends Component {
       onNextImage,
       onPreviousImage,
       onDeleteImage,
-      onUpdateImage,
       visibleLeftArrow,
       visibleRightArrow,
       uiSettings,
@@ -202,8 +202,9 @@ class ImageSettings extends Component {
                     label={this.titleLabel}
                     placeholder={this.titleInputPlaceholder}
                     value={metadata.title || ''}
+                    maxLength={30}
                     dataHook="galleryImageTitleInput"
-                    onChange={event => onUpdateImage({ title: event.target.value })}
+                    onChange={this.onInputWithLabelChange}
                   />
                 </SettingsSection>
                 <SettingsSection

@@ -89,7 +89,7 @@
   "GalleryPlugin_Layout_Columns" : "Columnas",
   "LineSpacing_afterParagraph" : "Después del párrafo",
   "LinkPanel_Nofollow_Checkbox" : "Agregar un tag nofollow",
-  "GalleryImageSettings_Title_Label" : "Alt Text",
+  "GalleryImageSettings_Title_Label" : "Título",
   "HtmlEditPanel_Update" : "Actualizar",
   "GallerySettings_Delete" : "Eliminar",
   "MapSettings_Title" : "Map Settings",

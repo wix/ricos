@@ -28,8 +28,8 @@ import {
   TEXT_COLOR_TYPE,
 } from 'wix-rich-content-plugin-text-color/dist/module.viewer';
 
-import { viewerCustomStyleFn, styleSelectionPredicate } from '../text-color-style-fn';
-import { anchorTarget, relValue } from '../consts';
+import { viewerCustomStyleFn, styleSelectionPredicate } from '../../src/text-color-style-fn';
+import { anchorTarget, relValue } from '../../src/consts';
 
 import 'wix-rich-content-common/dist/styles.min.css';
 import 'wix-rich-content-viewer/dist/styles.min.css';
@@ -48,7 +48,7 @@ import 'wix-rich-content-plugin-map/dist/styles.min.css';
 import 'wix-rich-content-plugin-file-upload/dist/styles.min.css';
 import 'wix-rich-content-plugin-giphy/dist/styles.min.css';
 
-import { getBaseUrl } from '../utils';
+import { getBaseUrl } from '../../src/utils';
 
 const linkPluginSettings = {
   onClick: (event, url) => console.log('link clicked!', url),

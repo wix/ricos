@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { isEqual } from 'lodash';
-import { validate, mergeStyles, Context, ViewportRenderer } from 'wix-rich-content-common';
+import { isEqual, get } from 'lodash';
+import { validate, mergeStyles, Context } from 'wix-rich-content-common';
 import { convertItemData } from './helpers/convert-item-data';
-import { getDefault } from './constants';
+import { getDefault, isHorizontalLayout } from './constants';
 import resizeMediaUrl from './helpers/resize-media-url';
 import schema from '../statics/data-schema.json';
 import viewerStyles from '../statics/styles/viewer.scss';
@@ -16,7 +16,10 @@ class GalleryViewer extends React.Component {
     validate(props.componentData, schema);
     super(props);
 
-    this.state = this.stateFromProps(props);
+    this.state = {
+      size: {},
+      ...this.stateFromProps(props),
+    };
 
     this.sampleItems = [1, 2, 3].map(i => {
       return {
@@ -33,33 +36,49 @@ class GalleryViewer extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    // TODO: remove galleryKey
+    let galleryKey = this.state && this.state.galleryKey;
     if (!isEqual(nextProps.componentData, this.props.componentData)) {
+      const { galleryLayout: currentGalleryLayout } = this.props.componentData.styles;
+      const { galleryLayout: nextGalleryLayout } = nextProps.componentData.styles;
+      if (currentGalleryLayout !== nextGalleryLayout) {
+        this.updateDimensions(nextProps.componentData.styles);
+      }
       validate(nextProps.componentData, schema);
+      galleryKey = get(nextProps, 'componentData.styles.galleryLayout', Math.random());
     }
-    this.setState(this.stateFromProps(nextProps), () => this.updateDimensions());
+    this.setState({ galleryKey, ...this.stateFromProps(nextProps) });
   }
 
   componentDidMount() {
     this.updateDimensions();
-    window.addEventListener('resize', this.updateDimensions);
+    window.addEventListener('resize', this.handleResize);
   }
 
   componentWillUnmount() {
-    window.removeEventListener('resize', this.updateDimensions);
+    window.removeEventListener('resize', this.handleResize);
   }
 
-  updateDimensions = () => {
+  handleResize = () => this.updateDimensions();
+
+  updateDimensions = (styleParams = this.props.componentData.styles) => {
     if (this.container && this.container.getBoundingClientRect) {
       const width = Math.floor(this.container.getBoundingClientRect().width);
-      this.setState({ size: { width } });
+      let height;
+      if (isHorizontalLayout(styleParams)) {
+        height = width ? Math.floor((width * 3) / 4) : 300;
+      }
+      this.setState({ size: { width, height } });
     }
   };
 
   stateFromProps = props => {
     const defaults = getDefault();
     const items = props.componentData.items || defaults.items;
-    const styleParams = Object.assign(defaults.styles, props.componentData.styles || {});
-
+    const styleParams = this.getStyleParams(
+      Object.assign(defaults.styles, props.componentData.styles || {}),
+      this.hasTitle(items)
+    );
     return {
       items,
       styleParams,
@@ -77,47 +96,70 @@ class GalleryViewer extends React.Component {
     }
   }
 
-  // handle pro-gallery events
-  // https://github.com/wix-incubator/pro-gallery/blob/master/packages/gallery/src/utils/constants/events.js
   handleGalleryEvents = (name, data) => {
     switch (name) {
-      // container size change callback
       case 'GALLERY_CHANGE':
-        // ignore thumbnails layout
-        if (this.state.styleParams.galleryLayout === 3) {
-          return;
+        if (this.container) {
+          if (!isHorizontalLayout(this.state.styleParams)) {
+            this.container.style.height = `${data.layoutHeight}px`;
+          } else {
+            this.container.style.height = 'auto';
+          }
         }
-        this.container && (this.container.style.height = `${data.layoutHeight}px`);
-        this.setState(prevState => {
-          this.setState({
-            size: {
-              ...prevState.size,
-              height: data.layoutHeight,
-            },
-          });
-        });
         break;
       default:
         break;
     }
   };
 
+  hasTitle = items => {
+    return items.some(item => {
+      return item.metadata && item.metadata.title;
+    });
+  };
+
+  getStyleParams = (styleParams, shouldRenderTitle) => {
+    if (!shouldRenderTitle) {
+      return styleParams;
+    }
+    const display = this.context.isMobile
+      ? { titlePlacement: 'SHOW_BELOW', calculateTextBoxHeightMode: 'AUTOMATIC' }
+      : { titlePlacement: 'SHOW_ON_HOVER', allowHover: true, galleryVerticalAlign: 'flex-end' };
+    return {
+      ...styleParams,
+      isVertical: styleParams.galleryLayout === 1,
+      allowTitle: true,
+      galleryTextAlign: 'center',
+      textsHorizontalPadding: 0,
+      imageInfoType: 'NO_BACKGROUND',
+      hoveringBehaviour: 'APPEARS',
+      textsVerticalPadding: 0,
+      ...display,
+    };
+  };
+
   render() {
     this.styles = this.styles || mergeStyles({ styles: viewerStyles, theme: this.context.theme });
-    const { styleParams, size = { width: 300 } } = this.state;
+    // TODO remove gallery key
+    const { galleryKey, styleParams, size = { width: 300 } } = this.state;
+    const items = this.getItems();
     return (
-      <ViewportRenderer>
-        <div ref={elem => (this.container = elem)} className={this.styles.gallery_container}>
-          <ProGallery
-            items={this.getItems()}
-            styles={styleParams}
-            container={size}
-            settings={this.props.settings}
-            eventsListener={this.handleGalleryEvents}
-            resizeMediaUrl={resizeMediaUrl}
-          />
-        </div>
-      </ViewportRenderer>
+      <div
+        key={galleryKey}
+        ref={elem => (this.container = elem)}
+        className={this.styles.gallery_container}
+      >
+        <ProGallery
+          // TODO remove gallery key
+          key={galleryKey}
+          items={items}
+          styles={styleParams}
+          container={size}
+          settings={this.props.settings}
+          eventsListener={this.handleGalleryEvents}
+          resizeMediaUrl={resizeMediaUrl}
+        />
+      </div>
     );
   }
 }

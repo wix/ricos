@@ -6,7 +6,7 @@ import Measure from 'react-measure';
 import ClickOutside from 'react-click-outside';
 import { debounce } from 'lodash';
 import { DISPLAY_MODE } from 'wix-rich-content-common';
-import Styles from '../../../../statics/styles/inline-toolbar.scss';
+import Styles from '../../../../statics/styles/inline-toolbar.rtlignore.scss';
 
 const TOOLBAR_OFFSET = 5;
 
@@ -323,7 +323,8 @@ export default class InlineToolbar extends Component {
   }
 
   render() {
-    if (!this.isVisible()) {
+    //checking false since undefined is not good
+    if (this.isVisible() === false) {
       return null;
     }
     const { theme } = this.props;

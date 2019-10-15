@@ -47,12 +47,6 @@ class HtmlEditPanel extends Component {
 
   shouldSaveOnUnmount = true;
 
-  componentWillUnmount() {
-    if (this.shouldSaveOnUnmount && this.isValid()) {
-      this.updateComponentData();
-    }
-  }
-
   handleSrcTypeChange = srcType => {
     this.setState({ srcType });
   };

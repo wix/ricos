@@ -31,6 +31,7 @@ const createBaseComponent = ({
   pluginDecorationProps = () => ({}),
   componentWillReceiveDecorationProps = () => {},
   getEditorBounds,
+  onOverlayClick,
 }) => {
   class WrappedComponent extends Component {
     static displayName = createHocName('BaseComponent', PluginComponent);
@@ -169,6 +170,15 @@ const createBaseComponent = ({
       return this.isMe() && !this.duringUpdate;
     }
 
+    handleClick = e => {
+      if (onOverlayClick) {
+        const { componentData } = this.state;
+        onOverlayClick({ e, pubsub, componentData });
+      }
+      const { onClick } = this.props;
+      onClick && onClick(e);
+    };
+
     updateComponentConfig = newConfig => {
       pubsub.update('componentData', { config: newConfig });
     };
@@ -218,7 +228,7 @@ const createBaseComponent = ({
     }
 
     render = () => {
-      const { blockProps, className, onClick, selection } = this.props;
+      const { blockProps, className, selection } = this.props;
       const { componentData, readOnly } = this.state;
       const { containerClassName, ...decorationProps } = pluginDecorationProps(
         this.props,
@@ -315,7 +325,7 @@ const createBaseComponent = ({
             <div
               role="none"
               data-hook={'componentOverlay'}
-              onClick={onClick}
+              onClick={this.handleClick}
               className={overlayClassNames}
             />
           )}

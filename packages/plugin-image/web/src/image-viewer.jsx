@@ -8,7 +8,6 @@ import {
   Loader,
   validate,
   Context,
-  ViewportRenderer,
   WIX_MEDIA_DEFAULT,
 } from 'wix-rich-content-common';
 import { getDefault } from './consts';
@@ -221,24 +220,22 @@ class ImageViewer extends React.Component {
 
     /* eslint-disable jsx-a11y/no-static-element-interactions */
     return (
-      <ViewportRenderer>
-        <div
-          data-hook="imageViewer"
-          onClick={onClick}
-          className={itemClassName}
-          onKeyDown={e => this.onKeyDown(e, onClick)}
-          ref={e => this.handleRef(e)}
-        >
-          <div className={this.styles.imageWrapper} role="img" aria-label={metadata.alt}>
-            {imageSrc && this.renderImage(imageClassName, imageSrc, metadata.alt, imageProps)}
-            {this.renderLoader()}
-          </div>
-          {this.renderTitle(data, this.styles)}
-          {this.renderDescription(data, this.styles)}
-          {this.shouldRenderCaption() &&
-            this.renderCaption(metadata.caption, isFocused, readOnly, this.styles, defaultCaption)}
+      <div
+        data-hook="imageViewer"
+        onClick={onClick}
+        className={itemClassName}
+        onKeyDown={e => this.onKeyDown(e, onClick)}
+        ref={e => this.handleRef(e)}
+      >
+        <div className={this.styles.imageWrapper} role="img" aria-label={metadata.alt}>
+          {imageSrc && this.renderImage(imageClassName, imageSrc, metadata.alt, imageProps)}
+          {this.renderLoader()}
         </div>
-      </ViewportRenderer>
+        {this.renderTitle(data, this.styles)}
+        {this.renderDescription(data, this.styles)}
+        {this.shouldRenderCaption() &&
+          this.renderCaption(metadata.caption, isFocused, readOnly, this.styles, defaultCaption)}
+      </div>
     );
     /* eslint-enable jsx-a11y/no-static-element-interactions */
   }

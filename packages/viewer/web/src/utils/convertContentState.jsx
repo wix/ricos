@@ -1,9 +1,10 @@
 import React from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
+import { convertFromRaw } from '@wix/draft-js';
 import { BLOCK_TYPES } from 'wix-rich-content-common';
 import redraft from 'redraft';
 import classNames from 'classnames';
-import { endsWith, isArray } from 'lodash';
+import { endsWith, isEmpty, isArray } from 'lodash';
 import List from '../List';
 import getPluginViewers from '../getPluginViewers';
 import { getTextDirection, kebabToCamelObjectKeys } from './textUtils';
@@ -107,6 +108,10 @@ const normalizeContentState = contentState => ({
       text += '\n';
     }
 
+    if (block.type === 'unstyled' && isEmpty(text.trim())) {
+      text = '\u00A0'; // non-breaking space
+    }
+
     return {
       ...block,
       data,
@@ -116,6 +121,7 @@ const normalizeContentState = contentState => ({
 });
 
 const redraftOptions = {
+  convertFromRaw,
   cleanup: {
     after: BLOCK_TYPES.filter(t => t.indexOf('header') === -1),
     split: true,
