@@ -19,6 +19,7 @@ const HORIZONTAL_LAYOUTS = [
   GALLERY_LAYOUTS.THUMBNAIL,
   GALLERY_LAYOUTS.SLIDER,
   GALLERY_LAYOUTS.SLIDESHOW,
+  GALLERY_LAYOUTS.COLUMN,
   GALLERY_LAYOUTS.FULLSIZE,
 ];
 
@@ -33,7 +34,6 @@ export const getDefault = () => ({
     cubeRatio: 1,
     galleryThumbnailsAlignment: 'bottom',
     isVertical: false,
-    numberOfImagesPerRow: 3,
     imageMargin: 20,
     thumbnailSpacings: 0,
     cubeType: 'fill',

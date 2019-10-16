@@ -152,11 +152,7 @@ export default class Editor extends PureComponent {
     const { onRequestClose } = this.state.modalProps || {};
     return (
       <div className="editor">
-        {MobileToolbar && (
-          <div className="toolbar-wrapper">
-            <MobileToolbar />
-          </div>
-        )}
+        {MobileToolbar && <MobileToolbar />}
         {TextToolbar && (
           <div className="toolbar-wrapper">
             <TextToolbar />

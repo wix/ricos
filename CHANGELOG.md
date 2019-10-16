@@ -9,16 +9,27 @@
 
 ## [Unreleased]
 ### :rocket: New Feature
+- `fullscreen`
+  - [#389](https://github.com/wix-incubator/rich-content/pull/389) fullscreen for gallery and images :)
 - `gallery`
   - [#391](https://github.com/wix-incubator/rich-content/pull/391) gallery image titles
-### :bug: Bug Fix
 - `editor`
-  - [#392](https://github.com/wix-incubator/rich-content/pull/392) text in line toolbar has tooltips
+  - [#396](https://github.com/wix-incubator/rich-content/pull/396) sticky static toolbar on all platforms
+### :bug: Bug Fix
+- `common`
+  - [#411](https://github.com/wix-incubator/rich-content/pull/411) base toolbar height calculated once
+- `editor`
+  - [#392](https://github.com/wix-incubator/rich-content/pull/392) text inline toolbar tooltips
+  - [#400](https://github.com/wix-incubator/rich-content/pull/400) inline and mobile toolbar RTL support
+  - [#407](https://github.com/wix-incubator/rich-content/pull/407) list indentation
+- `divider`
+  - [#406](https://github.com/wix-incubator/rich-content/pull/406) divider center alignment
 - `image`
   - [75336e34](https://github.com/wix-incubator/rich-content/commit/75336e34) open imageStudio on crop tab
 - `gallery`
   - [#404](https://github.com/wix-incubator/rich-content/pull/404) delete last remaining image in image settings returns to gallery settings
   - [#403](https://github.com/wix-incubator/rich-content/pull/403) re-render gallery on change only
+  - [#408](https://github.com/wix-incubator/rich-content/pull/408) panorama layout displays all items
 ### :house: Internal
 - `e2e`
   - [#393](https://github.com/wix-incubator/rich-content/pull/393) added atomic block alignment testing
@@ -26,6 +37,19 @@
   - [#409](https://github.com/wix-incubator/rich-content/pull/409) added plugin tests
 - `mentions`
   - [#387](https://github.com/wix-incubator/rich-content/pull/387) data validation schema added
+<hr/>
+
+## 5.1.8 (Oct 15, 2019)
+### :bug: Bug Fix
+- `gallery`
+  - [#414](https://github.com/wix-incubator/rich-content/pull/414) additional height issues
+<hr/>
+
+
+## 5.1.7 (Oct 15, 2019)
+### :bug: Bug Fix
+- `gallery`
+  - [#412](https://github.com/wix-incubator/rich-content/pull/412) height issues
 <hr/>
 
 ## 5.1.6 (Oct 10, 2019)
@@ -60,7 +84,7 @@
   - [d0986f3](https://github.com/wix-incubator/rich-content/commit/d0986f3) height issues - disabled above the fold 
 ### :house: Internal
 - `example`
-  - [9add0fbc](https://github.com/wix-incubator/rich-content/commit/9add0fbc) gallery validation schema used for content validation
+  - [9add0fbc](https://github.com/wix-incubator/rich-content/commit/9add0fbc) gallery validation schema used for content validation  
 <hr/>
 
 ## 5.1.1 (Sep 22, 2019)

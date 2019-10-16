@@ -1,9 +1,9 @@
 {
-  "name": "wix-rich-content-plugin-link",
-  "version": "5.1.8",
+  "name": "wix-rich-content-fullscreen",
+  "version": "5.1.1",
   "author": {
-    "name": "Jonathan Bachman",
-    "email": "jonathanb@wix.com"
+    "name": "Shaul Goral",
+    "email": "shaulg@wix.com"
   },
   "repository": {
     "type": "git",
@@ -13,7 +13,7 @@
   "bugs": {
     "url": "https://github.com/wix-incubator/rich-content/issues"
   },
-  "homepage": "https://github.com/wix-incubator/rich-content/tree/master/rich-content-plugin-link",
+  "homepage": "https://github.com/wix-incubator/rich-content/tree/master/packages/fullscreen",
   "files": [
     "dist"
   ],
@@ -23,7 +23,7 @@
   "scripts": {
     "clean": "rm -rf dist/",
     "prebuild": "npm run clean",
-    "build": "rollup --environment MODULE_NAME:plugin-link -c ../../../rollup.config.js",
+    "build": "rollup --environment MODULE_NAME:fullscreen -c ../../../rollup.config.js",
     "build:dev": "cross-env NODE_ENV=development npm run build",
     "build:analyze": "npm run build -- --environment MODULE_ANALYZE && open stats.html",
     "watch": "cross-env NODE_ENV=development MODULE_WATCH=1 npm run build -- --watch",
@@ -31,27 +31,15 @@
   },
   "peerDependencies": {
     "@babel/runtime": "7.2.0",
-    "@wix/draft-js": "0.10.272",
     "classnames": "^2.0.0",
     "lodash": "^4.0.0",
     "prop-types": "^15.0.0",
     "react": "^16.6.3",
     "react-dom": "^16.6.3"
   },
-  "devDependencies": {
-    "@babel/runtime": "7.2.0",
-    "@wix/draft-js": "0.10.272",
-    "classnames": "^2.2.6",
-    "cross-env": "^5.2.0",
-    "eslint": "^6.1.0",
-    "lodash": "^4.17.10",
-    "prop-types": "^15.6.2",
-    "react": "16.6.3",
-    "react-dom": "16.6.3",
-    "rollup": "1.20.3"
-  },
+  "devDependencies": {},
   "dependencies": {
-    "wix-rich-content-common": "5.1.8"
+    "react-images": "1.0.0"
   },
   "unpkg": true,
   "publishConfig": {

@@ -19,15 +19,6 @@
   }
 }
 
-.alignCenter {
-  display: block;
-
-  &:not(.textWrapNowrap) {
-    margin-left: auto;
-    margin-right: auto;
-  }
-}
-
 .alignRight {
   /* rtl:ignore */
   float: right;
