@@ -319,7 +319,15 @@ The `ImageCounter` serves as a counter of media entities in collapsed content. T
 
 ```
 
-The `counter` field is self-explanatory, the `formatLabel` defines the format of the label (by default, it is `counter => \`+ \${ counter }\``). The`imageSelector`function selects images that should be decorated by the counter label, among the images found within`ImageCounter`children. By default, last image is selected. If the`ImageCounter` contains a single image, this function is ignored.
+The `counter` field is self-explanatory, the `formatLabel` defines the format of the label. The default implementation is:
+
+```js 
+
+  counter => `+ \${ counter }`
+
+```
+
+The `imageSelector` function selects images that should be decorated by the counter label, among the images found within `ImageCounter` children. By default, last image is selected.
 
 The `ContentStateBuilder` exposes `imageCounter` method that applies the interaction on previous block data.
 
