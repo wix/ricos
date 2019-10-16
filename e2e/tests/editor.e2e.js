@@ -1,5 +1,7 @@
 import { INLINE_TOOLBAR_BUTTONS } from '../cypress/dataHooks';
 
+/* eslint-disable mocha/no-skipped-tests */
+
 describe('editor', () => {
   beforeEach(() => cy.switchToDesktop());
 
@@ -14,14 +16,14 @@ describe('editor', () => {
       .matchSnapshots();
   });
 
-  it('should allow to apply inline toolbar plugins', () => {
+  it('should allow to apply inline styles and links', () => {
     cy.loadEditor('plain')
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.BOLD, [40, 10])
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.UNDERLINE, [10, 5])
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.ITALIC, [20, 5])
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.BOLD, [30, 5])
       .setLineSpacing(1, [10, 50])
-      .setColor(2, [200, 208])
+      .setColor(4, [200, 208])
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.UNDERLINE)
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.ITALIC)
       .setAlignment(INLINE_TOOLBAR_BUTTONS.TEXT_ALIGN_CENTER)
@@ -36,7 +38,7 @@ describe('editor', () => {
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.ORDERED_LIST)
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.UNORDERED_LIST)
       .setLineSpacing(3, [100, 150])
-      .setTextStyle(INLINE_TOOLBAR_BUTTONS.CODE_BLOCK, [300, 100])
+      .setTextStyle(INLINE_TOOLBAR_BUTTONS.CODE_BLOCK, [100, 300])
       .setLink([15, 30], 'https://www.sport5.co.il/')
       .setSelection(0, 0)
       .enterParagraphs(['#LIVING THE DREAM\n'])
@@ -71,10 +73,10 @@ describe('editor', () => {
     context('desktop', () => {
       beforeEach(() => cy.switchToDesktop());
 
-      it('should render plugin toolbar in rtl', () => {
+      it('should render side toolbar in rtl', () => {
         cy.loadEditor()
           .focusEditor()
-          .openPluginToolbar();
+          .openSideToolbar();
       });
 
       it('should render text toolbar in rtl', () => {

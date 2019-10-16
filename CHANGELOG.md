@@ -34,6 +34,7 @@
 - `e2e`
   - [#393](https://github.com/wix-incubator/rich-content/pull/393) added atomic block alignment testing
   - [#394](https://github.com/wix-incubator/rich-content/pull/394) test-env changed to match main example
+  - [#409](https://github.com/wix-incubator/rich-content/pull/409) added plugin tests
 - `mentions`
   - [#387](https://github.com/wix-incubator/rich-content/pull/387) data validation schema added
 <hr/>
@@ -83,7 +84,7 @@
   - [d0986f3](https://github.com/wix-incubator/rich-content/commit/d0986f3) height issues - disabled above the fold 
 ### :house: Internal
 - `example`
-  - [9add0fbc](https://github.com/wix-incubator/rich-content/commit/9add0fbc) gallery validation schema used for content validation
+  - [9add0fbc](https://github.com/wix-incubator/rich-content/commit/9add0fbc) gallery validation schema used for content validation  
 <hr/>
 
 ## 5.1.1 (Sep 22, 2019)

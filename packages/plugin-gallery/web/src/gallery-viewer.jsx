@@ -178,6 +178,7 @@ class GalleryViewer extends React.Component {
         key={galleryKey}
         ref={elem => (this.container = elem)}
         className={this.styles.gallery_container}
+        data-hook="galleryViewer"
       >
         <ProGallery
           items={items}
