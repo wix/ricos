@@ -21,9 +21,44 @@ const common = {
 };
 
 const babelRule = {
-  test: /\.jsx?$/,
+  test: /\.js(x)?$/,
   exclude: /node_modules/,
-  use: 'babel-loader',
+  use: {
+    loader: 'babel-loader',
+    options: {
+      compact: true,
+      rootMode: 'upward',
+    },
+  },
+};
+
+const scssRule = {
+  test: /\.scss$/,
+  use: [
+    {
+      loader: 'style-loader',
+    },
+    {
+      loader: 'css-loader',
+      options: {
+        modules: true,
+        importLoaders: 1,
+        localIdentName: '[name]_[local]',
+      },
+    },
+    {
+      loader: 'sass-loader',
+    },
+  ],
+};
+
+const scssServerRule = { ...scssRule };
+scssServerRule.use.shift();
+
+const urlRule = {
+  test: /\.(woff|eot|ttf|svg|woff2)$/,
+  issuer: /\.(s)?css$/,
+  use: ['url-loader'],
 };
 
 const config = [
@@ -31,13 +66,14 @@ const config = [
     ...common,
     name: 'client',
     entry: {
-      combined: './src/client/combined',
-      editor: './src/client/editor',
+      index: './src/client/index',
     },
     output,
     module: {
       rules: [
         babelRule,
+        scssRule,
+        urlRule,
         {
           test: /\.css$/,
           use: ['style-loader', 'css-loader'],
@@ -61,6 +97,8 @@ const config = [
     module: {
       rules: [
         babelRule,
+        scssServerRule,
+        urlRule,
         {
           test: /\.css$/,
           use: { loader: 'css-loader', options: { exportOnlyLocals: true } },

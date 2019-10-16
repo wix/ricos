@@ -46,7 +46,7 @@ Cypress.Commands.add('switchToEnglish', () => {
 });
 
 Cypress.Commands.add('loadEditorAndViewer', fixtureName => {
-  run('combined', fixtureName);
+  run('rce', fixtureName);
 });
 
 Cypress.Commands.add('loadEditor', fixtureName => {
@@ -165,7 +165,19 @@ Cypress.Commands.add('setTextStyle', (buttonSelector, selection) => {
   if (selection) {
     cy.setSelection(selection[0], selection[1]);
   }
-  cy.get(`[data-hook=${buttonSelector}]`).click();
+  cy.get(`[data-hook=inlineToolbar] [data-hook=${buttonSelector}]`).click();
+});
+
+Cypress.Commands.add('setLink', (selection, link) => {
+  cy.setTextStyle(INLINE_TOOLBAR_BUTTONS.LINK, selection)
+    .get(`[data-hook=linkPanelContainer] [data-hook=linkPanelInput]`)
+    .type(link)
+    .get(`[data-hook=linkPanelContainerDone]`)
+    .click();
+});
+
+Cypress.Commands.add('setAlignment', alignment => {
+  cy.setTextStyle(INLINE_TOOLBAR_BUTTONS.ALIGNMENT).setTextStyle(alignment);
 });
 
 function setInlineToolbarMenueItem(item, selection, butttonIndex) {

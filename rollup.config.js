@@ -4,7 +4,7 @@ import fs from 'fs';
 import path from 'path';
 import pascalCase from 'pascal-case';
 import { cloneDeep } from 'lodash';
-import plugins from './rollup.plugins' ;
+import plugins from './rollup.plugins';
 import { isExternal as external } from './rollup.externals';
 
 if (!process.env.MODULE_NAME) {

@@ -9,11 +9,16 @@
 
 ## [Unreleased]
 ### :rocket: New Feature
+- `fullscreen`
+  - [#389](https://github.com/wix-incubator/rich-content/pull/389) fullscreen for gallery and images :)
 - `gallery`
   - [#391](https://github.com/wix-incubator/rich-content/pull/391) gallery image titles
+- `editor`
+  - [#396](https://github.com/wix-incubator/rich-content/pull/396) sticky static toolbar on all platforms
 ### :bug: Bug Fix
 - `editor`
   - [#392](https://github.com/wix-incubator/rich-content/pull/392) text in line toolbar has tooltips
+  - [#400](https://github.com/wix-incubator/rich-content/pull/400) inline and mobile toolbar RTL support
 - `divider`
   - [#406](https://github.com/wix-incubator/rich-content/pull/406) divider center alignment
 - `image`
@@ -24,8 +29,31 @@
 ### :house: Internal
 - `e2e`
   - [#393](https://github.com/wix-incubator/rich-content/pull/393) added atomic block alignment testing
+  - [#394](https://github.com/wix-incubator/rich-content/pull/394) test-env changed to match main example
 - `mentions`
   - [#387](https://github.com/wix-incubator/rich-content/pull/387) data validation schema added
+<hr/>
+
+## 5.1.8 (Oct 15, 2019)
+### :bug: Bug Fix
+- `gallery`
+  - [#414](https://github.com/wix-incubator/rich-content/pull/414) additional height issues
+<hr/>
+
+
+## 5.1.7 (Oct 15, 2019)
+### :bug: Bug Fix
+- `gallery`
+  - [#412](https://github.com/wix-incubator/rich-content/pull/412) height issues
+<hr/>
+
+## 5.1.6 (Oct 10, 2019)
+### :bug: Bug Fix
+- `gallery`
+  - [#410](https://github.com/wix-incubator/rich-content/pull/410) layout change and events handler
+### :house: Internal
+- `gallery`
+  - [#410](https://github.com/wix-incubator/rich-content/pull/410) `pro-gallery` updated to `v1.3.21`
 <hr/>
 
 ## 5.1.5 (Oct 2, 2019)
