@@ -13,6 +13,8 @@
   - [#389](https://github.com/wix-incubator/rich-content/pull/389) fullscreen for gallery and images :)
 - `gallery`
   - [#391](https://github.com/wix-incubator/rich-content/pull/391) gallery image titles
+- `mentions`
+  - [#402](https://github.com/wix-incubator/rich-content/pull/402) mentions suggestion box size controll
 - `editor`
   - [#396](https://github.com/wix-incubator/rich-content/pull/396) sticky static toolbar on all platforms
 ### :bug: Bug Fix
@@ -26,6 +28,7 @@
   - [#406](https://github.com/wix-incubator/rich-content/pull/406) divider center alignment
 - `image`
   - [75336e34](https://github.com/wix-incubator/rich-content/commit/75336e34) open imageStudio on crop tab
+  - [#413](https://github.com/wix-incubator/rich-content/pull/413) new image doesn't replace existing image
 - `gallery`
   - [#404](https://github.com/wix-incubator/rich-content/pull/404) delete last remaining image in image settings returns to gallery settings
   - [#403](https://github.com/wix-incubator/rich-content/pull/403) re-render gallery on change only
@@ -37,6 +40,12 @@
   - [#409](https://github.com/wix-incubator/rich-content/pull/409) added plugin tests
 - `mentions`
   - [#387](https://github.com/wix-incubator/rich-content/pull/387) data validation schema added
+<hr/>
+
+## 5.1.9 (Oct 16, 2019)
+### :bug: Bug Fix
+- `gallery`
+  - [#416](https://github.com/wix-incubator/rich-content/pull/416) alignment issues
 <hr/>
 
 ## 5.1.8 (Oct 15, 2019)
