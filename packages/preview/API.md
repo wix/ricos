@@ -12,59 +12,31 @@ These details are categorized by content type rather actual ContentState structu
 
 ### ContentStateMetdata.text
 
-The `ContentStateMetdata.text` exposes all the textual content.
-
-### ContentStateMetdata.text.array
-
 The `ContentStateMetdata.text` exposes all the textual content a string array.
 
-#### ContentStateMetdata.text.plain
+##### ContentStateMetdata.text.plain
 
-The `ContentStateMetdata.text.plain` exposes the textual content extracted from `unstyled` blocks.
+The `ContentStateMetdata.text.plain` exposes the textual content extracted from the `unstyled` blocks as a string array.
 
-##### ContentStateMetdata.text.plain.array
-
-The `ContentStateMetdata.text.plain.array` exposes the textual content extracted from the `unstyled` blocks as a string array.
-
-##### ContentStateMetdata.text.ol
-
-The `ContentStateMetdata.text.ol` exposes the textual content extracted from ordered list blocks.
-
-###### ContentStateMetdata.text.ol.array
+###### ContentStateMetdata.text.ol
 
 The `ContentStateMetdata.text.ol` exposes the textual content extracted from the ordered list blocks as a string array.
 
-##### ContentStateMetdata.text.ul
+###### ContentStateMetdata.text.ul
 
-The `ContentStateMetdata.text.ul` exposes the textual content extracted from unordered list blocks.
+The `ContentStateMetdata.text.ul` exposes the textual content extracted from the unordered list blocks as a string array.
 
-###### ContentStateMetdata.text.ul.array
+##### ContentStateMetdata.text.quotes
 
-The `ContentStateMetdata.text.ul.array` exposes the textual content extracted from the unordered list blocks as a string array.
+The `ContentStateMetdata.text.quotes` exposes the textual content extracted from the `blockquote` blocks as a string array.
 
-#### ContentStateMetdata.text.quotes
+##### ContentStateMetdata.text.code
 
-The `ContentStateMetdata.text.quotes` exposes the textual content extracted from `blockquote` blocks.
+The `ContentStateMetdata.text.code` exposes the textual content extracted from the `code-block` blocks as a string array.
 
-##### ContentStateMetdata.text.quotes.array
+##### ContentStateMetdata.text.h2/h3/h4/h5/h6
 
-The `ContentStateMetdata.text.quotes.array` exposes the textual content extracted from the `blockquote` blocks as a string array.
-
-#### ContentStateMetdata.text.code
-
-The `ContentStateMetdata.text.code` exposes the textual content extracted from `code-block` blocks.
-
-##### ContentStateMetdata.text.code.array
-
-The `ContentStateMetdata.text.code.array` exposes the textual content extracted from the `code-block` blocks as a string array.
-
-#### ContentStateMetdata.text.h2/h3/h4/h5/h6
-
-The `ContentStateMetdata.text.h2/h3/h4/h5/h6` exposes the textual content extracted from heading blocks.
-
-##### ContentStateMetdata.text.h2/h3/h4/h5/h6.array
-
-The `ContentStateMetdata.text.h2/h3/h4/h5/h6.array` exposes the textual content extracted from the heading blocks as a string array.
+The `ContentStateMetdata.text.h2/h3/h4/h5/h6` exposes the textual content extracted from the heading blocks as a string array.
 
 ## ContentStateMetdata.media
 
@@ -321,9 +293,9 @@ The `ImageCounter` serves as a counter of media entities in collapsed content. T
 
 The `counter` field is self-explanatory, the `formatLabel` defines the format of the label. The default implementation is:
 
-```js 
+```js
 
-  counter => `+ \${ counter }`
+  counter => `+ ${ counter }`
 
 ```
 
