@@ -282,7 +282,7 @@ describe('plugins', () => {
       cy.loadEditor('divider')
         .openPluginToolbar(PLUGIN_COMPONENT.DIVIDER)
         .openDropdownMenu();
-      cy.eyesCheckWindow('should render divider plugin toolbar');
+      cy.eyesCheckWindow('render divider plugin toolbar');
 
       cy.get(`button[data-hook=${PLUGIN_TOOLBAR_BUTTONS.SMALL}]`).click();
       cy.get(`button[data-hook=${PLUGIN_TOOLBAR_BUTTONS.ALIGN_LEFT}][tabindex=0]`).click();
@@ -300,7 +300,7 @@ describe('plugins', () => {
       cy.get('[data-hook*="PluginToolbar"]:first').openDropdownMenu(
         `[data-hook=${DIVIDER_DROPDOWN_OPTIONS.DOUBLE}]`
       );
-      cy.eyesCheckWindow('should change divider styling');
+      cy.eyesCheckWindow('change divider styling');
     });
   });
 
