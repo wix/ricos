@@ -54,7 +54,7 @@ export const GALLERY_SETTINGS = {
   IMAGE: 'galleryItemPreview',
   EDIT_IMAGE: 'galleryItemsSortableItemSettings',
   TITLE: 'galleryImageTitleInput',
-  VIEWER_IMAGE: 'item-social',
+  VIEWER_IMAGE: 'image-item',
   SELECT_ALL: 'galleryItemsSortableSelectAll',
   DELETE: 'galleryItemsSortableDelete',
   UPLOAD: 'galleryItemsSortableFileInputTop',
