@@ -3,7 +3,7 @@ import { createLineSpacingPlugin, LINE_SPACING_TYPE } from 'wix-rich-content-plu
 import { createHashtagPlugin, HASHTAG_TYPE } from 'wix-rich-content-plugin-hashtag';
 // import { createExternalEmojiPlugin, EXTERNAL_EMOJI_TYPE } from 'wix-rich-content-plugin-emoji';
 import { createImagePlugin, IMAGE_TYPE } from 'wix-rich-content-plugin-image';
-import { createGalleryPlugin } from 'wix-rich-content-plugin-gallery';
+import { createGalleryPlugin, GALLERY_TYPE } from 'wix-rich-content-plugin-gallery';
 import { createVideoPlugin, VIDEO_TYPE } from 'wix-rich-content-plugin-video';
 import { createHtmlPlugin, HTML_TYPE } from 'wix-rich-content-plugin-html';
 import { createDividerPlugin, DIVIDER_TYPE } from 'wix-rich-content-plugin-divider';
@@ -147,6 +147,9 @@ const uiSettings = {
 };
 
 export const config = {
+  [GALLERY_TYPE]: {
+    scrollingElement: document.getElementsByClassName('editor-example')[0],
+  },
   [IMAGE_TYPE]: {
     imageEditorWixSettings: {
       initiator: 'some-initiator',
