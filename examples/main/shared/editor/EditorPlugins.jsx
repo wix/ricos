@@ -21,6 +21,7 @@ import {
 import { createMapPlugin, MAP_TYPE } from 'wix-rich-content-plugin-map';
 import { createFileUploadPlugin, FILE_UPLOAD_TYPE } from 'wix-rich-content-plugin-file-upload';
 import { createTextColorPlugin, TEXT_COLOR_TYPE } from 'wix-rich-content-plugin-text-color';
+import { createTextHighlightPlugin, TEXT_HIGHLIGHT_TYPE } from 'wix-rich-content-plugin-text-color';
 import React from 'react';
 import Highlighter from 'react-highlight-words';
 import casual from 'casual-browserify';
@@ -44,7 +45,12 @@ import 'wix-rich-content-plugin-map/dist/styles.min.css';
 import 'wix-rich-content-plugin-file-upload/dist/styles.min.css';
 import 'wix-rich-content-plugin-text-color/dist/styles.min.css';
 
-import { customStyleFn, styleSelectionPredicate, colorScheme } from '../../src/text-color-style-fn';
+import {
+  customStyleFn,
+  styleSelectionPredicate,
+  colorScheme,
+  customBackgroundStyleFn,
+} from '../../src/text-color-style-fn';
 import { getBaseUrl } from '../../src/utils';
 
 // import { TOOLBARS, BUTTONS, DISPLAY_MODE } from 'wix-rich-content-common';
@@ -71,6 +77,7 @@ export const editorPlugins = [
   createMapPlugin,
   createFileUploadPlugin,
   createTextColorPlugin,
+  createTextHighlightPlugin,
 ];
 
 const themeColors = {
@@ -289,6 +296,13 @@ export const config = {
     //   };
     //   setTimeout(() => updateEntity({ data }), 500);
     // },
+  },
+  [TEXT_HIGHLIGHT_TYPE]: {
+    colorScheme,
+    styleSelectionPredicate,
+    customBackgroundStyleFn,
+    onColorAdded: color => (userColors = [color, ...userColors]),
+    getUserColors: () => userColors,
   },
   [TEXT_COLOR_TYPE]: {
     colorScheme,

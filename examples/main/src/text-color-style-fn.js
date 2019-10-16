@@ -45,5 +45,23 @@ export const customStyleFn = styles =>
     };
   }, {});
 
+export const viewerCustomBackgroundStyleFn = style => {
+  let colorRule = {};
+  if (colorScheme[style] && isHexColor(colorScheme[style].color)) {
+    colorRule = { backgroundColor: colorScheme[style].color, transition: 'all .8s' };
+  } else if (isHexColor(style)) {
+    colorRule = { backgroundColor: style, transition: 'all .8s' };
+  }
+  return colorRule;
+};
+
+export const customBackgroundStyleFn = styles =>
+  styles.toArray().reduce((cssStyle, style) => {
+    return {
+      ...cssStyle,
+      ...viewerCustomBackgroundStyleFn(style),
+    };
+  }, {});
+
 export const styleSelectionPredicate = style =>
   (colorScheme[style] && isHexColor(colorScheme[style].color)) || isHexColor(style);
