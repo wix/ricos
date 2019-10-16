@@ -51,7 +51,7 @@ class ImageCounter extends PureComponent {
         const imagesToDecorate = this.props.imageSelector(images);
         const decorations = imagesToDecorate.map(img => this.renderDecoration(img));
         ReactDOM.render(decorations, this.container);
-      }, 0);
+      }, 500);
     }
   }
 
