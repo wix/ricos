@@ -108,6 +108,7 @@ const SortableItem = sortableElement(props => {
         {url ? (
           <img
             alt="Gallery Item Thumbnail"
+            data-hook="galleryItemPreview"
             className={styles.itemImage}
             src={url}
             style={{
@@ -519,24 +520,23 @@ export class SortableComponent extends Component {
 
   onDeleteImage = () => {
     const { editedImageIndex, items } = this.state;
-    if (editedImageIndex === 0 && items.length === 1) {
-      this.setState({
-        editedImageIndex: -1,
-        editedImage: null,
-        items: [],
-      });
-      return;
-    }
     const newItems = items.filter(item => !item.selected);
     const newIndex = Math.min(editedImageIndex, newItems.length - 1);
-    const newEditedImage = newItems[newIndex];
+    const newEditedImage = newItems.length !== 0 ? newItems[newIndex] : { metadata: '', title: '' };
     newEditedImage.selected = true;
     this.props.onItemsChange(newItems);
-    this.setState({
-      editedImageIndex: newIndex,
-      editedImage: newEditedImage,
-      items: newItems,
-    });
+    this.setState(
+      {
+        editedImageIndex: newIndex,
+        editedImage: newEditedImage,
+        items: newItems,
+      },
+      () => {
+        if (newItems.length === 0) {
+          this.toggleImageSettings(false);
+        }
+      }
+    );
   };
 
   handleFileChange = files => {

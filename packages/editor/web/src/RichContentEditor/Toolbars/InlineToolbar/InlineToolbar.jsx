@@ -7,6 +7,7 @@ import ClickOutside from 'react-click-outside';
 import { debounce } from 'lodash';
 import { DISPLAY_MODE } from 'wix-rich-content-common';
 import Styles from '../../../../statics/styles/inline-toolbar.rtlignore.scss';
+import { getLangDir } from 'rtl-detect';
 
 const TOOLBAR_OFFSET = 5;
 
@@ -48,6 +49,7 @@ export default class InlineToolbar extends Component {
       y: PropTypes.number,
     }),
     toolbarDecorationFn: PropTypes.func,
+    locale: PropTypes.string,
   };
 
   static defaultProps = {
@@ -217,6 +219,7 @@ export default class InlineToolbar extends Component {
       anchorTarget,
       relValue,
       t,
+      locale,
     } = this.props;
     const {
       showLeftArrow,
@@ -283,7 +286,7 @@ export default class InlineToolbar extends Component {
 
     return (
       <ClickOutside onClickOutside={this.onClickOutside}>
-        <div className={buttonClassNames}>
+        <div className={buttonClassNames} dir={getLangDir(locale)}>
           <Measure
             client
             scroll

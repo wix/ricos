@@ -1,8 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import MonacoEditor from 'react-monaco-editor';
 import { debounce } from 'lodash';
-import { getContentStateSchema } from 'wix-rich-content-common';
+import { getContentStateSchema, isSSR } from 'wix-rich-content-common';
 
 import dividerSchema from 'wix-rich-content-plugin-divider/dist/statics/data-schema.json';
 import imageSchema from 'wix-rich-content-plugin-image/dist/statics/data-schema.json';
@@ -13,6 +12,7 @@ import fileUploadSchema from 'wix-rich-content-plugin-file-upload/dist/statics/d
 import mapSchema from 'wix-rich-content-plugin-map/dist/statics/data-schema.json';
 import htmlSchema from 'wix-rich-content-plugin-html/dist/statics/data-schema.json';
 import linkSchema from 'wix-rich-content-plugin-link/dist/statics/data-schema.json';
+import mentionSchema from 'wix-rich-content-plugin-mentions/dist/statics/data-schema.json';
 import gallerySchema from 'wix-rich-content-plugin-gallery/dist/statics/data-schema.json';
 
 import { DIVIDER_TYPE } from 'wix-rich-content-plugin-divider';
@@ -24,6 +24,7 @@ import { SOUND_CLOUD_TYPE } from 'wix-rich-content-plugin-sound-cloud';
 import { MAP_TYPE } from 'wix-rich-content-plugin-map';
 import { HTML_TYPE } from 'wix-rich-content-plugin-html';
 import { LINK_TYPE } from 'wix-rich-content-plugin-link';
+import { MENTION_TYPE } from 'wix-rich-content-plugin-mentions';
 import { GALLERY_TYPE } from 'wix-rich-content-plugin-gallery';
 
 const stringifyJSON = obj => JSON.stringify(obj, null, 2);
@@ -32,8 +33,10 @@ class ContentStateEditor extends PureComponent {
   constructor(props) {
     super(props);
 
+    const MonacoEditor = !isSSR() && require('react-monaco-editor').default;
     this.state = {
       contentState: stringifyJSON(this.props.contentState),
+      MonacoEditor,
     };
 
     this.editorOptions = {
@@ -71,6 +74,7 @@ class ContentStateEditor extends PureComponent {
             [MAP_TYPE]: mapSchema,
             [HTML_TYPE]: htmlSchema,
             [LINK_TYPE]: linkSchema,
+            [MENTION_TYPE]: mentionSchema,
             [GALLERY_TYPE]: gallerySchema,
           }),
         },
@@ -92,7 +96,11 @@ class ContentStateEditor extends PureComponent {
   refreshLayout = () => this.refs.monaco && this.refs.monaco.editor.layout();
 
   render = () => {
-    const { contentState } = this.state;
+    const { contentState, MonacoEditor } = this.state;
+    if (!MonacoEditor) {
+      return null;
+    }
+
     return (
       <MonacoEditor
         ref="monaco"

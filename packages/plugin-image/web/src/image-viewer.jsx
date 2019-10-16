@@ -8,12 +8,12 @@ import {
   Loader,
   validate,
   Context,
-  ViewportRenderer,
   WIX_MEDIA_DEFAULT,
 } from 'wix-rich-content-common';
 import { getDefault } from './consts';
 import schema from '../statics/data-schema.json';
 import styles from '../statics/styles/image-viewer.scss';
+import ExpandIcon from './icons/expand.svg';
 
 class ImageViewer extends React.Component {
   constructor(props) {
@@ -194,51 +194,55 @@ class ImageViewer extends React.Component {
     return true;
   }
 
+  handleExpand = e => {
+    e.preventDefault();
+    const { onExpand } = this.context.helpers;
+    onExpand && onExpand(this.props.entityIndex);
+  };
+
   render() {
     this.styles = this.styles || mergeStyles({ styles, theme: this.context.theme });
-    const {
-      componentData,
-      className,
-      onClick,
-      isFocused,
-      readOnly,
-      settings,
-      defaultCaption,
-    } = this.props;
+    const { componentData, className, isFocused, readOnly, settings, defaultCaption } = this.props;
     const { fallbackImageSrc } = this.state;
     const data = componentData || getDefault();
     const { metadata = {} } = componentData;
 
-    const itemClassName = classNames(this.styles.imageContainer, className);
+    const hasLink = data.config && data.config.link;
+    const hasExpand = this.context.helpers && this.context.helpers.onExpand;
+
+    const itemClassName = classNames(this.styles.imageContainer, className, {
+      [this.styles.pointer]: hasExpand,
+    });
     const imageClassName = classNames(this.styles.image);
     const imageSrc = fallbackImageSrc || this.getImageUrl(data.src);
     let imageProps = {};
-    if (data.src && settings && isFunction(settings.imageProps)) {
-      imageProps = settings.imageProps(data.src);
-    } else if (data.src && settings) {
-      imageProps = settings.imageProps;
+    if (data.src && settings) {
+      imageProps = isFunction(settings.imageProps)
+        ? settings.imageProps(data.src)
+        : settings.imageProps;
     }
 
     /* eslint-disable jsx-a11y/no-static-element-interactions */
     return (
-      <ViewportRenderer>
-        <div
-          data-hook="imageViewer"
-          onClick={onClick}
-          className={itemClassName}
-          onKeyDown={e => this.onKeyDown(e, onClick)}
-          ref={e => this.handleRef(e)}
-        >
-          <div className={this.styles.imageWrapper}>
-            {imageSrc && this.renderImage(imageClassName, imageSrc, metadata.alt, imageProps)}
-            {this.renderLoader()}
-          </div>
-          {this.renderTitle(data, this.styles)}
-          {this.renderDescription(data, this.styles)}
-          {this.shouldRenderCaption() &&
-            this.renderCaption(metadata.caption, isFocused, readOnly, this.styles, defaultCaption)}
+      <div
+        data-hook="imageViewer"
+        onClick={!hasLink && this.handleExpand}
+        className={itemClassName}
+        onKeyDown={e => this.onKeyDown(e, this.onClick)}
+        ref={e => this.handleRef(e)}
+      >
+        <div className={this.styles.imageWrapper}>
+          {imageSrc && this.renderImage(imageClassName, imageSrc, metadata.alt, imageProps)}
+          {this.renderLoader()}
+          {hasLink && hasExpand && (
+            <ExpandIcon className={this.styles.expandIcon} onClick={this.handleExpand} />
+          )}
         </div>
-      </ViewportRenderer>
+        {this.renderTitle(data, this.styles)}
+        {this.renderDescription(data, this.styles)}
+        {this.shouldRenderCaption() &&
+          this.renderCaption(metadata.caption, isFocused, readOnly, this.styles, defaultCaption)}
+      </div>
     );
     /* eslint-enable jsx-a11y/no-static-element-interactions */
   }
@@ -248,7 +252,6 @@ ImageViewer.contextType = Context.type;
 
 ImageViewer.propTypes = {
   componentData: PropTypes.object.isRequired,
-  onClick: PropTypes.func,
   className: PropTypes.string,
   isLoading: PropTypes.bool,
   dataUrl: PropTypes.string,
@@ -256,6 +259,7 @@ ImageViewer.propTypes = {
   readOnly: PropTypes.bool,
   settings: PropTypes.object,
   defaultCaption: PropTypes.string,
+  entityIndex: PropTypes.number,
 };
 
 export default ImageViewer;

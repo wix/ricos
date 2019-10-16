@@ -2,10 +2,10 @@ import { debounce, pick } from 'lodash';
 import local from 'local-storage';
 import MobileDetect from 'mobile-detect';
 import { convertFromRaw, createWithContent } from 'wix-rich-content-editor';
-import { normalizeInitialState } from 'wix-rich-content-common';
+import { normalizeInitialState, isSSR } from 'wix-rich-content-common';
 import * as CONSTS from './consts';
 
-const mobileDetect = window ? new MobileDetect(window.navigator.userAgent) : null;
+const mobileDetect = !isSSR() ? new MobileDetect(window.navigator.userAgent) : null;
 export const isMobile = () => mobileDetect && mobileDetect.mobile() !== null;
 
 export const generateKey = prefix => `${prefix}-${new Date().getTime()}`;
@@ -38,7 +38,7 @@ export const getStateFromObject = obj => {
 };
 
 export const getBaseUrl = () => {
-  if (!window) {
+  if (isSSR()) {
     return null;
   }
 
@@ -50,8 +50,11 @@ export const getBaseUrl = () => {
 export const getRequestedLocale = () => getUrlParameter('locale') || 'en';
 
 function getUrlParameter(name) {
+  if (isSSR()) {
+    return '';
+  }
   name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
   var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
-  var results = regex.exec(location.search);
+  var results = regex.exec(window.location.search);
   return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
 }
