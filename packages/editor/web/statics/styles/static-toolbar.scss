@@ -71,3 +71,9 @@
 .staticToolbar_extend {
   outline: none;
 }
+
+.staticToolbarWrapper{
+  position: sticky; 
+  top: 0;
+  z-Index: 2; 
+}
