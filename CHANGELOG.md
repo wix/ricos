@@ -13,6 +13,8 @@
   - [#389](https://github.com/wix-incubator/rich-content/pull/389) fullscreen for gallery and images :)
 - `gallery`
   - [#391](https://github.com/wix-incubator/rich-content/pull/391) gallery image titles
+- `mentions`
+  - [#402](https://github.com/wix-incubator/rich-content/pull/402) mentions suggestion box size controll
 - `editor`
   - [#396](https://github.com/wix-incubator/rich-content/pull/396) sticky static toolbar on all platforms
 ### :bug: Bug Fix
