@@ -1,10 +1,12 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, Suspense } from 'react';
 import ReactModal from 'react-modal';
 import { RichContentViewer } from 'wix-rich-content-viewer';
 import { RichContentModal, isSSR } from 'wix-rich-content-common';
 import * as PropTypes from 'prop-types';
 import * as Plugins from './ViewerPlugins';
 import theme from '../theme/theme'; // must import after custom styles
+import getImagesData from 'wix-rich-content-fullscreen/src/lib/getImagesData';
+const Fullscreen = React.lazy(() => import('wix-rich-content-fullscreen'));
 
 const modalStyleDefaults = {
   content: {
@@ -30,6 +32,13 @@ export default class Viewer extends PureComponent {
     this.state = {
       disabled: false,
     };
+    this.expandModeData = getImagesData(this.props.initialState);
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.initialState !== this.props.initialState) {
+      this.expandModeData = getImagesData(this.props.initialState);
+    }
   }
 
   closeModal = () => {
@@ -39,7 +48,18 @@ export default class Viewer extends PureComponent {
     });
   };
 
+  helpers = {
+    onExpand: (entityIndex, innerIndex = 0) => {
+      //galleries can have an innerIndex (i.e. second image will have innerIndex=1)
+      this.setState({
+        expendModeIsOpen: true,
+        expandModeIndex: this.expandModeData.imageMap[entityIndex] + innerIndex,
+      });
+    },
+  };
+
   render() {
+    const { expendModeIsOpen, expandModeIndex } = this.state;
     return (
       <div id="rich-content-viewer" className="viewer">
         <RichContentViewer
@@ -61,8 +81,16 @@ export default class Viewer extends PureComponent {
           style={this.state.modalStyles || modalStyleDefaults}
           onRequestClose={this.closeModal}
         >
-          {this.state.showModal && <RichContentModal {...this.state.modalProps} />}
+          <RichContentModal {...this.state.modalProps} />
         </ReactModal>
+        <Suspense fallback={<div>Loading...</div>}>
+          <Fullscreen
+            isOpen={expendModeIsOpen}
+            images={this.expandModeData.images}
+            onClose={() => this.setState({ expendModeIsOpen: false })}
+            index={expandModeIndex}
+          />
+        </Suspense>
       </div>
     );
   }

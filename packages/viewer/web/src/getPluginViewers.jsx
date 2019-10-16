@@ -12,14 +12,14 @@ import {
 
 class PluginViewer extends PureComponent {
   render() {
-    const { type, pluginComponent, componentData, children, styles } = this.props;
+    const { type, pluginComponent, componentData, children, styles, entityIndex } = this.props;
     const { theme, isMobile, anchorTarget, relValue, config } = this.context;
 
     const { component: Component, elementType } = pluginComponent;
     const { size, alignment, textWrap, container } = pluginComponent.classNameStrategies || {};
     const settings = (config && config[type]) || {};
 
-    const componentProps = { componentData, settings, children };
+    const componentProps = { componentData, settings, children, entityIndex };
 
     if (Component) {
       Component.contextType = Context.type;
@@ -83,6 +83,7 @@ PluginViewer.propTypes = {
   type: PropTypes.string.isRequired,
   componentData: PropTypes.object.isRequired,
   pluginComponent: PropTypes.object.isRequired,
+  entityIndex: PropTypes.number,
   children: PropTypes.node,
   styles: PropTypes.object,
 };
@@ -104,6 +105,7 @@ const getPluginViewers = (typeMap, pluginProps, styles) => {
           pluginComponent={pluginComponent}
           key={key}
           componentData={entity}
+          entityIndex={key}
           {...pluginProps}
           styles={styles}
         >
