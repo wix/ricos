@@ -41,6 +41,12 @@
   - [#387](https://github.com/wix-incubator/rich-content/pull/387) data validation schema added
 <hr/>
 
+## 5.1.9 (Oct 16, 2019)
+### :bug: Bug Fix
+- `gallery`
+  - [#416](https://github.com/wix-incubator/rich-content/pull/416) alignment issues
+<hr/>
+
 ## 5.1.8 (Oct 15, 2019)
 ### :bug: Bug Fix
 - `gallery`
