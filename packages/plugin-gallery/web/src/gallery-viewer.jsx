@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { isEqual, get } from 'lodash';
 import { validate, mergeStyles, Context } from 'wix-rich-content-common';
 import { convertItemData } from './helpers/convert-item-data';
-import { getDefault, isHorizontalLayout } from './constants';
+import { getDefault, isHorizontalLayout, sampleItems } from './constants';
 import resizeMediaUrl from './helpers/resize-media-url';
 import schema from '../statics/data-schema.json';
 import viewerStyles from '../statics/styles/viewer.scss';
@@ -20,51 +20,48 @@ class GalleryViewer extends React.Component {
       size: {},
       ...this.stateFromProps(props),
     };
+  }
 
-    this.sampleItems = [1, 2, 3].map(i => {
-      return {
-        metadata: {
-          height: 10,
-          width: 10,
-        },
-        orderIndex: i,
-        itemId: 'sampleItem-' + i,
-        url:
-          'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAALEwAACxMBAJqcGAAAAVlpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IlhNUCBDb3JlIDUuNC4wIj4KICAgPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4KICAgICAgPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIKICAgICAgICAgICAgeG1sbnM6dGlmZj0iaHR0cDovL25zLmFkb2JlLmNvbS90aWZmLzEuMC8iPgogICAgICAgICA8dGlmZjpPcmllbnRhdGlvbj4xPC90aWZmOk9yaWVudGF0aW9uPgogICAgICA8L3JkZjpEZXNjcmlwdGlvbj4KICAgPC9yZGY6UkRGPgo8L3g6eG1wbWV0YT4KTMInWQAAAA1JREFUCB1jePv27X8ACVkDxyMHIvwAAAAASUVORK5CYII=', //eslint-disable-line
-      };
-    });
+  componentDidMount() {
+    this.updateDimensions();
+    window.addEventListener('resize', this.updateDimensions);
   }
 
   componentWillReceiveProps(nextProps) {
     let galleryKey = this.state && this.state.galleryKey;
     if (!isEqual(nextProps.componentData, this.props.componentData)) {
-      const { galleryLayout: currentGalleryLayout } = this.props.componentData.styles;
-      const { galleryLayout: nextGalleryLayout } = nextProps.componentData.styles;
-      if (currentGalleryLayout !== nextGalleryLayout) {
-        this.updateDimensions(nextProps.componentData.styles);
-      }
-      validate(nextProps.componentData, schema);
-      galleryKey = get(nextProps, 'componentData.styles.galleryLayout', Math.random());
+      galleryKey = get(this, 'props.componentData.styles.galleryLayout', Math.random());
     }
     this.setState({ galleryKey, ...this.stateFromProps(nextProps) });
   }
 
-  componentDidMount() {
-    this.updateDimensions();
-    window.addEventListener('resize', this.handleResize);
+  componentDidUpdate(prevProps) {
+    if (this.shouldUpdateDimensions(prevProps.componentData)) {
+      this.updateDimensions();
+    }
   }
 
   componentWillUnmount() {
-    window.removeEventListener('resize', this.handleResize);
+    window.removeEventListener('resize', this.updateDimensions);
   }
 
-  handleResize = () => this.updateDimensions();
+  shouldUpdateDimensions = prevComponentData => {
+    const { galleryLayout: prevGalleryLayout } = prevComponentData.styles;
+    const { galleryLayout: currentGalleryLayout } = this.state.styleParams;
+    if (currentGalleryLayout !== prevGalleryLayout) {
+      return true;
+    }
 
-  updateDimensions = (styleParams = this.props.componentData.styles) => {
+    if (!isEqual(prevComponentData.config, this.props.componentData.config)) {
+      return true;
+    }
+  };
+
+  updateDimensions = () => {
     if (this.container && this.container.getBoundingClientRect) {
       const width = Math.floor(this.container.getBoundingClientRect().width);
       let height;
-      if (isHorizontalLayout(styleParams)) {
+      if (isHorizontalLayout(this.state.styleParams)) {
         height = width ? Math.floor((width * 3) / 4) : 300;
       }
       this.setState({ size: { width, height } });
@@ -89,7 +86,7 @@ class GalleryViewer extends React.Component {
     if (items.length > 0) {
       return convertItemData({ items, anchorTarget, relValue });
     } else {
-      return this.sampleItems;
+      return sampleItems;
     }
   }
 
