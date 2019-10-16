@@ -45,11 +45,11 @@ export default class Preview extends PureComponent {
       _if: metadata => metadata.media.images().length > 3,
       _then: (metadata, preview) =>
         preview
-          .image({
-            mediaInfo: metadata.media.images()[0],
+          .gallery({
+            mediaInfo: metadata.media.images().slice(0, 3),
           })
-          .imageCounter({ counter: metadata.media.images().length - 1 })
-          // .seeFullPost({ label: 'SEE FULL STORY' })
+          .imageCounter({ counter: metadata.media.images().length - 3 })
+          .seeFullPost({ label: 'SEE FULL STORY' })
     });
   }
 
