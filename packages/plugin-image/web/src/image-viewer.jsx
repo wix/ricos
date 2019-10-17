@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { get, includes, isEqual, isFunction } from 'lodash';
 import {
+  isSSR,
   mergeStyles,
   getImageSrc,
   Loader,
@@ -52,10 +53,9 @@ class ImageViewer extends React.Component {
         const { width } = this.state.container.getBoundingClientRect();
         let requiredWidth = width || src.width || 1;
         if (this.context.isMobile) {
-          const isSSR = typeof window === 'undefined';
           //adjust the image width to viewport scaling and device pixel ratio
-          requiredWidth *= (!isSSR && window.devicePixelRatio) || 1;
-          requiredWidth *= (!isSSR && window.screen.width / document.body.clientWidth) || 1;
+          requiredWidth *= (!isSSR() && window.devicePixelRatio) || 1;
+          requiredWidth *= (!isSSR() && window.screen.width / document.body.clientWidth) || 1;
         }
         //keep the image's original ratio
         let requiredHeight =
@@ -73,7 +73,6 @@ class ImageViewer extends React.Component {
         });
       }
     }
-
     if (this._isMounted && !imageUrl.preload) {
       console.error(`image plugin mounted with invalid image source!`, src); //eslint-disable-line no-console
     }
