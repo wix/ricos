@@ -225,7 +225,7 @@ class RichContentEditor extends Component {
     },
   });
 
-  focus = () => this.editor.focus();
+  focus = () => setTimeout(this.editor.focus());
 
   blur = () => this.editor.blur();
 
