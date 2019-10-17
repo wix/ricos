@@ -1,4 +1,4 @@
-import { EditorState } from '@wix/draft-js';
+import { EditorState } from 'draft-js';
 import createDecorator from './createDecorator';
 
 const createSetResizeData = (contentBlock, { getEditorState, setEditorState }) => data => {

@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { RichContentEditor, RichContentEditorModal } from 'wix-rich-content-editor';
-import { convertToRaw } from '@wix/draft-js';
+import { convertToRaw } from 'draft-js';
 import * as PropTypes from 'prop-types';
 import ReactModal from 'react-modal';
 import { testImages, testVideos } from './mock';

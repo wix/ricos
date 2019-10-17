@@ -1,6 +1,6 @@
 import React from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
-import { convertFromRaw } from '@wix/draft-js';
+import { convertFromRaw } from 'draft-js';
 import { BLOCK_TYPES } from 'wix-rich-content-common';
 import redraft from 'redraft';
 import classNames from 'classnames';

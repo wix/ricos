@@ -8,6 +8,9 @@
 > - :house: [Internal]
 
 ## [Unreleased]
+### :boom: Breaking Change
+- `general`
+  - [#347](https://github.com/wix-incubator/rich-content/pull/347) replaced `@wix/draft-js@0.10.272` with `draft-js@0.11.0`
 ### :rocket: New Feature
 - `fullscreen`
   - [#389](https://github.com/wix-incubator/rich-content/pull/389) fullscreen for gallery and images :)
@@ -105,8 +108,6 @@
 - `viewer`
   - [#390](https://github.com/wix-incubator/rich-content/pull/390) justified text new lines disappear
 ### :house: Internal
-- `general`
-  - [#347](https://github.com/wix-incubator/rich-content/pull/347) draft-js version updated to 0.11.0
 - `e2e`
   - [#368](https://github.com/wix-incubator/rich-content/pull/368) test rtl support in toolbars, text and external modals
 <hr/>
