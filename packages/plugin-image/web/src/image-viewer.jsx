@@ -11,7 +11,7 @@ import {
   Context,
   WIX_MEDIA_DEFAULT,
 } from 'wix-rich-content-common';
-import { getDefault } from './consts';
+import { getDefault, SEO_IMAGE_WIDTH } from './consts';
 import schema from '../statics/data-schema.json';
 import styles from '../statics/styles/image-viewer.scss';
 import ExpandIcon from './icons/expand.svg';
@@ -33,8 +33,14 @@ class ImageViewer extends React.Component {
     }
   }
 
+  calculateHeight(width = 1, src) {
+    return src && src.height && src.width
+      ? Math.ceil((src.height / src.width) * width)
+      : WIX_MEDIA_DEFAULT.SIZE;
+  }
+
   getImageUrl(src) {
-    const { helpers } = this.context || {};
+    const { helpers, isSeo } = this.context || {};
 
     if (!src && (helpers && helpers.handleFileSelection)) {
       return null;
@@ -48,30 +54,30 @@ class ImageViewer extends React.Component {
     if (this.props.dataUrl) {
       imageUrl.preload = imageUrl.highres = this.props.dataUrl;
     } else {
+      let requiredWidth, requiredHeight;
       imageUrl.preload = getImageSrc(src, helpers);
-      if (this.state.container) {
+      if (isSeo) {
+        requiredWidth = src && src.width <= SEO_IMAGE_WIDTH ? src.width : SEO_IMAGE_WIDTH;
+        requiredHeight = this.calculateHeight(SEO_IMAGE_WIDTH, src);
+      } else if (this.state.container) {
         const { width } = this.state.container.getBoundingClientRect();
-        let requiredWidth = width || src.width || 1;
+        requiredWidth = width || src.width || 1;
         if (this.context.isMobile) {
           //adjust the image width to viewport scaling and device pixel ratio
           requiredWidth *= (!isSSR() && window.devicePixelRatio) || 1;
           requiredWidth *= (!isSSR() && window.screen.width / document.body.clientWidth) || 1;
         }
         //keep the image's original ratio
-        let requiredHeight =
-          src && src.height && src.width
-            ? Math.ceil((src.height / src.width) * requiredWidth)
-            : WIX_MEDIA_DEFAULT.SIZE;
+        requiredHeight = this.calculateHeight(requiredWidth, src);
         requiredWidth = Math.ceil(requiredWidth);
         requiredHeight = Math.ceil(requiredHeight);
-
-        imageUrl.highres = getImageSrc(src, helpers, {
-          requiredWidth,
-          requiredHeight,
-          requiredQuality: 90,
-          imageType: 'highRes',
-        });
       }
+      imageUrl.highres = getImageSrc(src, helpers, {
+        requiredWidth,
+        requiredHeight,
+        requiredQuality: 90,
+        imageType: 'highRes',
+      });
     }
     if (this._isMounted && !imageUrl.preload) {
       console.error(`image plugin mounted with invalid image source!`, src); //eslint-disable-line no-console
