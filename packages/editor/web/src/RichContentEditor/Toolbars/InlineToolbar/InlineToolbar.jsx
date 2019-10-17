@@ -49,7 +49,7 @@ export default class InlineToolbar extends Component {
       y: PropTypes.number,
     }),
     toolbarDecorationFn: PropTypes.func,
-    locale: PropTypes.string,
+    locale: PropTypes.string.isRequired,
   };
 
   static defaultProps = {

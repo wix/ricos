@@ -32,7 +32,8 @@ export default class Editor extends PureComponent {
   initEditorProps() {
     const mockUpload = (files, updateEntity) => {
       if (this.props.shouldMockUpload) {
-        const testItem = testImages[Math.floor(Math.random() * testImages.length)];
+        const mockImageIndex = this.props.mockImageIndex || Math.floor(Math.random() * testImages.length);
+        const testItem = testImages[mockImageIndex];
         const data = {
           id: testItem.photoId,
           original_file_name: files && files[0] ? files[0].name : testItem.url,
@@ -65,7 +66,8 @@ export default class Editor extends PureComponent {
       // },
       onVideoSelected: (url, updateEntity) => {
         setTimeout(() => {
-          const testVideo = testVideos[Math.floor(Math.random() * testVideos.length)];
+          const mockVideoIndex = this.props.mockImageIndex || Math.floor(Math.random() * testVideos.length);
+          const testVideo = testVideos[mockVideoIndex];
           updateEntity(testVideo);
         }, 500);
       },

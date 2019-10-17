@@ -63,7 +63,7 @@ DividerLine.propTypes = {
   alignment: PropTypes.string,
   styles: PropTypes.object.isRequired,
   className: PropTypes.string,
-  width: PropTypes.number,
+  width: PropTypes.number.isRequired,
   multilineDinstance: PropTypes.number,
   contextType: PropTypes.object,
   fillParent: PropTypes.bool,

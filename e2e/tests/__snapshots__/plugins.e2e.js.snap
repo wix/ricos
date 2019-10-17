@@ -1,4 +1,4 @@
-exports[`plugins > image > should render plugin toolbar #0`] =
+exports[`plugins > image > render image plugin toolbar #0`] =
 {
   "blocks": [
     {
@@ -146,7 +146,7 @@ exports[`plugins > image > should render plugin toolbar #0`] =
   }
 };
 
-exports[`plugins > image > should render settings #0`] =
+exports[`plugins > image > render settings #0`] =
 {
   "blocks": [
     {
@@ -294,7 +294,7 @@ exports[`plugins > image > should render settings #0`] =
   }
 };
 
-exports[`plugins > image > should allow to add a title #0`] =
+exports[`plugins > image > allow to add a title #0`] =
 {
   "blocks": [
     {
@@ -446,7 +446,7 @@ exports[`plugins > image > should allow to add a title #0`] =
   }
 };
 
-exports[`plugins > image > should allow to add a link #0`] =
+exports[`plugins > image > allow to add a link #0`] =
 {
   "blocks": [
     {
@@ -599,7 +599,7 @@ exports[`plugins > image > should allow to add a link #0`] =
   }
 };
 
-exports[`plugins > image > should allow to delete a title #0`] =
+exports[`plugins > image > allow to delete a title #0`] =
 {
   "blocks": [
     {
@@ -751,7 +751,7 @@ exports[`plugins > image > should allow to delete a title #0`] =
   }
 };
 
-exports[`plugins > gallery > should render plugin toolbar #0`] =
+exports[`plugins > gallery > render gallery plugin toolbar #0`] =
 {
   "blocks": [
     {
@@ -912,7 +912,7 @@ exports[`plugins > gallery > should render plugin toolbar #0`] =
   }
 };
 
-exports[`plugins > gallery > should render advanced gallery settings #0`] =
+exports[`plugins > gallery > render advanced gallery settings #0`] =
 {
   "blocks": [
     {
@@ -1073,7 +1073,7 @@ exports[`plugins > gallery > should render advanced gallery settings #0`] =
   }
 };
 
-exports[`plugins > gallery > organize media > should render gallery settings #0`] =
+exports[`plugins > gallery > organize media > render gallery settings #0`] =
 {
   "blocks": [
     {
@@ -1234,7 +1234,7 @@ exports[`plugins > gallery > organize media > should render gallery settings #0`
   }
 };
 
-exports[`plugins > gallery > organize media > should allow to select an item #0`] =
+exports[`plugins > gallery > organize media > allow to select an item #0`] =
 {
   "blocks": [
     {
@@ -1397,7 +1397,7 @@ exports[`plugins > gallery > organize media > should allow to select an item #0`
   }
 };
 
-exports[`plugins > gallery > organize media > should allow to select all items #0`] =
+exports[`plugins > gallery > organize media > allow to select all items #0`] =
 {
   "blocks": [
     {
@@ -1558,7 +1558,7 @@ exports[`plugins > gallery > organize media > should allow to select all items #
   }
 };
 
-exports[`plugins > gallery > organize media > should allow to delete an item #0`] =
+exports[`plugins > gallery > organize media > allow to delete an item #0`] =
 {
   "blocks": [
     {
@@ -1711,7 +1711,7 @@ exports[`plugins > gallery > organize media > should allow to delete an item #0`
   }
 };
 
-exports[`plugins > gallery > organize media > should allow to delete all items #0`] =
+exports[`plugins > gallery > organize media > allow to delete all items #0`] =
 {
   "blocks": [
     {
@@ -1853,7 +1853,7 @@ exports[`plugins > gallery > organize media > should allow to delete all items #
   }
 };
 
-exports[`plugins > gallery > organize media > should allow to re-organize #0`] =
+exports[`plugins > gallery > organize media > allow to re-organize #0`] =
 {
   "blocks": [
     {
@@ -2016,7 +2016,7 @@ exports[`plugins > gallery > organize media > should allow to re-organize #0`] =
   }
 };
 
-exports[`plugins > gallery > image settings > should render gallery image settings #0`] =
+exports[`plugins > gallery > image settings > render gallery image settings #0`] =
 {
   "blocks": [
     {
@@ -2179,7 +2179,7 @@ exports[`plugins > gallery > image settings > should render gallery image settin
   }
 };
 
-exports[`plugins > gallery > image settings > should allow to add a title #0`] =
+exports[`plugins > gallery > image settings > allow to add a title #0`] =
 {
   "blocks": [
     {
@@ -2344,7 +2344,7 @@ exports[`plugins > gallery > image settings > should allow to add a title #0`] =
   }
 };
 
-exports[`plugins > gallery > image settings > should allow to delete an image #0`] =
+exports[`plugins > gallery > image settings > allow to delete an image #0`] =
 {
   "blocks": [
     {
@@ -2497,7 +2497,7 @@ exports[`plugins > gallery > image settings > should allow to delete an image #0
   }
 };
 
-exports[`plugins > gallery > image settings > should allow to delete all images #0`] =
+exports[`plugins > gallery > image settings > allow to delete all images #0`] =
 {
   "blocks": [
     {
@@ -2639,7 +2639,7 @@ exports[`plugins > gallery > image settings > should allow to delete all images 
   }
 };
 
-exports[`plugins > video > should render upload modal #0`] =
+exports[`plugins > video > render upload modal #0`] =
 {
   "blocks": [
     {
@@ -2655,7 +2655,145 @@ exports[`plugins > video > should render upload modal #0`] =
   "entityMap": {}
 };
 
-exports[`plugins > soundcloud > should render upload modal #0`] =
+exports[`plugins > video > enable to add a video from URI #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "size": "small"
+        },
+        "isCustomVideo": false,
+        "metadata": {
+          "author_name": "Wix.com",
+          "author_url": "https://www.youtube.com/user/Wix",
+          "height": 270,
+          "html": "<iframe width=\"480\" height=\"270\" src=\"https://www.youtube.com/embed/BBu5codsO6Y?feature=oembed\" frameborder=\"0\" allow=\"autoplay; encrypted-media\" allowfullscreen></iframe>",
+          "provider_name": "YouTube",
+          "provider_url": "https://www.youtube.com/",
+          "thumbnail_height": 360,
+          "thumbnail_url": "https://i.ytimg.com/vi/BBu5codsO6Y/hqdefault.jpg",
+          "thumbnail_width": 480,
+          "title": "iJustine | Create a Website with Wix Artificial Design Intelligence",
+          "type": "video",
+          "version": "1.0",
+          "video_url": "https://youtu.be/BBu5codsO6Y",
+          "width": 480
+        },
+        "src": "https://youtu.be/BBu5codsO6Y"
+      },
+      "mutability": "IMMUTABLE",
+      "type": "wix-draft-plugin-video"
+    }
+  }
+};
+
+exports[`plugins > video > enable to add a custom video #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "size": "small"
+        },
+        "isCustomVideo": true,
+        "metadata": {
+          "author_name": "Wix.com",
+          "author_url": "https://www.youtube.com/user/Wix",
+          "height": 270,
+          "html": "<iframe width=\"480\" height=\"270\" src=\"https://www.youtube.com/embed/BBu5codsO6Y?feature=oembed\" frameborder=\"0\" allow=\"autoplay; encrypted-media\" allowfullscreen></iframe>",
+          "provider_name": "YouTube",
+          "provider_url": "https://www.youtube.com/",
+          "thumbnail_height": 360,
+          "thumbnail_url": "https://i.ytimg.com/vi/BBu5codsO6Y/hqdefault.jpg",
+          "thumbnail_width": 480,
+          "title": "iJustine | Create a Website with Wix Artificial Design Intelligence",
+          "type": "video",
+          "version": "1.0",
+          "video_url": "https://youtu.be/BBu5codsO6Y",
+          "width": 480
+        },
+        "src": "http://mirrors.standaloneinstaller.com/video-sample/jellyfish-25-mbps-hd-hevc.mp4"
+      },
+      "mutability": "IMMUTABLE",
+      "type": "wix-draft-plugin-video"
+    }
+  }
+};
+
+exports[`plugins > soundcloud > render upload modal #0`] =
 {
   "blocks": [
     {
@@ -2671,7 +2809,75 @@ exports[`plugins > soundcloud > should render upload modal #0`] =
   "entityMap": {}
 };
 
-exports[`plugins > html > should render plugin toolbar #0`] =
+exports[`plugins > soundcloud > enable to add a soundcloud URI #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "size": "small"
+        },
+        "metadata": {
+          "author_name": "Wix.com",
+          "author_url": "https://www.youtube.com/user/Wix",
+          "height": 270,
+          "html": "<iframe width=\"480\" height=\"270\" src=\"https://www.youtube.com/embed/BBu5codsO6Y?feature=oembed\" frameborder=\"0\" allow=\"autoplay; encrypted-media\" allowfullscreen></iframe>",
+          "provider_name": "YouTube",
+          "provider_url": "https://www.youtube.com/",
+          "thumbnail_height": 360,
+          "thumbnail_url": "https://i.ytimg.com/vi/BBu5codsO6Y/hqdefault.jpg",
+          "thumbnail_width": 480,
+          "title": "iJustine | Create a Website with Wix Artificial Design Intelligence",
+          "type": "video",
+          "version": "1.0",
+          "video_url": "https://youtu.be/BBu5codsO6Y",
+          "width": 480
+        },
+        "src": "https://soundcloud.com/nlechoppa/camelot"
+      },
+      "mutability": "IMMUTABLE",
+      "type": "wix-draft-plugin-sound-cloud"
+    }
+  }
+};
+
+exports[`plugins > html > render html plugin toolbar #0`] =
 {
   "blocks": [
     {
@@ -2725,168 +2931,7 @@ exports[`plugins > html > should render plugin toolbar #0`] =
   }
 };
 
-exports[`plugins > divider > should render plugin toolbar #0`] =
-{
-  "blocks": [
-    {
-      "data": {},
-      "depth": 0,
-      "entityRanges": [],
-      "inlineStyleRanges": [],
-      "key": 0,
-      "text": "",
-      "type": "unstyled"
-    },
-    {
-      "data": {},
-      "depth": 0,
-      "entityRanges": [
-        {
-          "key": 0,
-          "length": 1,
-          "offset": 0
-        }
-      ],
-      "inlineStyleRanges": [],
-      "key": 1,
-      "text": " ",
-      "type": "atomic"
-    },
-    {
-      "data": {},
-      "depth": 0,
-      "entityRanges": [],
-      "inlineStyleRanges": [],
-      "key": 2,
-      "text": "",
-      "type": "unstyled"
-    },
-    {
-      "data": {},
-      "depth": 0,
-      "entityRanges": [
-        {
-          "key": 1,
-          "length": 1,
-          "offset": 0
-        }
-      ],
-      "inlineStyleRanges": [],
-      "key": 3,
-      "text": " ",
-      "type": "atomic"
-    },
-    {
-      "data": {},
-      "depth": 0,
-      "entityRanges": [],
-      "inlineStyleRanges": [],
-      "key": 4,
-      "text": "",
-      "type": "unstyled"
-    },
-    {
-      "data": {},
-      "depth": 0,
-      "entityRanges": [
-        {
-          "key": 2,
-          "length": 1,
-          "offset": 0
-        }
-      ],
-      "inlineStyleRanges": [],
-      "key": 5,
-      "text": " ",
-      "type": "atomic"
-    },
-    {
-      "data": {},
-      "depth": 0,
-      "entityRanges": [],
-      "inlineStyleRanges": [],
-      "key": 6,
-      "text": "",
-      "type": "unstyled"
-    },
-    {
-      "data": {},
-      "depth": 0,
-      "entityRanges": [
-        {
-          "key": 3,
-          "length": 1,
-          "offset": 0
-        }
-      ],
-      "inlineStyleRanges": [],
-      "key": 7,
-      "text": " ",
-      "type": "atomic"
-    },
-    {
-      "data": {},
-      "depth": 0,
-      "entityRanges": [],
-      "inlineStyleRanges": [],
-      "key": 8,
-      "text": "",
-      "type": "unstyled"
-    }
-  ],
-  "entityMap": {
-    "0": {
-      "data": {
-        "config": {
-          "alignment": "center",
-          "size": "large",
-          "textWrap": "nowrap"
-        },
-        "type": "single"
-      },
-      "mutability": "IMMUTABLE",
-      "type": "wix-draft-plugin-divider"
-    },
-    "1": {
-      "data": {
-        "config": {
-          "alignment": "center",
-          "size": "large",
-          "textWrap": "nowrap"
-        },
-        "type": "double"
-      },
-      "mutability": "IMMUTABLE",
-      "type": "wix-draft-plugin-divider"
-    },
-    "2": {
-      "data": {
-        "config": {
-          "alignment": "center",
-          "size": "large",
-          "textWrap": "nowrap"
-        },
-        "type": "dashed"
-      },
-      "mutability": "IMMUTABLE",
-      "type": "wix-draft-plugin-divider"
-    },
-    "3": {
-      "data": {
-        "config": {
-          "alignment": "center",
-          "size": "large",
-          "textWrap": "nowrap"
-        },
-        "type": "dotted"
-      },
-      "mutability": "IMMUTABLE",
-      "type": "wix-draft-plugin-divider"
-    }
-  }
-};
-
-exports[`plugins > divider > should render plugin toolbar and change styling #0`] =
+exports[`plugins > divider > render plugin toolbar and change styling #0`] =
 {
   "blocks": [
     {
@@ -3047,7 +3092,7 @@ exports[`plugins > divider > should render plugin toolbar and change styling #0`
   }
 };
 
-exports[`plugins > gif > should render plugin toolbar #0`] =
+exports[`plugins > gif > render giphy plugin toolbar #0`] =
 {
   "blocks": [
     {
@@ -3104,7 +3149,72 @@ exports[`plugins > gif > should render plugin toolbar #0`] =
   }
 };
 
-exports[`plugins > file-upload > should render plugin toolbar #0`] =
+exports[`plugins > map > render map plugin toolbar and settings #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "height": 400,
+          "size": "content",
+          "width": 400
+        },
+        "mapSettings": {
+          "address": "Wix HQ, Nemal Tel Aviv Street, Tel Aviv-Yafo, Israel",
+          "isDraggingAllowed": true,
+          "isMarkerShown": true,
+          "isStreetViewControlShown": true,
+          "isZoomControlShown": true,
+          "lat": 32.097235,
+          "lng": 34.77427,
+          "locationDisplayName": "Wix HQ, Nemal Tel Aviv Street, Tel Aviv-Yafo, Israel",
+          "mode": "roadmap",
+          "zoom": 18
+        }
+      },
+      "mutability": "IMMUTABLE",
+      "type": "wix-draft-plugin-map"
+    }
+  }
+};
+
+exports[`plugins > file-upload > render file-upload plugin toolbar #0`] =
 {
   "blocks": [
     {

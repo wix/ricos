@@ -38,6 +38,7 @@
   - [#393](https://github.com/wix-incubator/rich-content/pull/393) added atomic block alignment testing
   - [#394](https://github.com/wix-incubator/rich-content/pull/394) test-env changed to match main example
   - [#409](https://github.com/wix-incubator/rich-content/pull/409) added plugin tests
+  - [#405](https://github.com/wix-incubator/rich-content/pull/405) visual tests run on applitools
 - `mentions`
   - [#387](https://github.com/wix-incubator/rich-content/pull/387) data validation schema added
 <hr/>

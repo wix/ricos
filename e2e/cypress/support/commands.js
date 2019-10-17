@@ -14,7 +14,7 @@ import {
 } from '../dataHooks';
 
 const resizeForDesktop = () => cy.viewport('macbook-15');
-const resizeForMobile = () => cy.viewport('iphone-5');
+const resizeForMobile = () => cy.viewport('iphone-6');
 
 const buildQuery = params => {
   const parameters = Object.keys(params).filter(param => params[param]);
@@ -350,7 +350,7 @@ Cypress.Commands.add('addSoundCloud', () => {
 });
 
 Cypress.Commands.add('addVideoFromURI', () => {
-  cy.get(`[data-hook*=${VIDEO_PLUGIN.INPUT}]`).type('https://www.youtube.com/watch?v=Xj3gU3jACe8');
+  cy.get(`[data-hook*=${VIDEO_PLUGIN.INPUT}]`).type('https://youtu.be/BBu5codsO6Y');
   cy.get(`[data-hook*=${VIDEO_PLUGIN.ADD}]`).click();
   cy.get(`[data-hook=${PLUGIN_COMPONENT.VIDEO}]:first`)
     .parent()
