@@ -47,32 +47,26 @@ const extractSequentialBlockArrays = ({ blocks }, blockType) => {
     { list: [], lastItemIndex: -1 }
   );
 
-  return blockArrayResult.list;
+  return blockArrayResult.list.filter(arr => arr.length > 0);
 };
 
 const extractMedia = ({ entityMap }) =>
   Object.values(entityMap).reduce((media, entity) => [...media, ...extractEntityData(entity)], []);
 
 const getContentStateMetadata = raw => {
-  const text = () => extractTextFromBlocks(raw, ({ type }) => type !== 'atomic');
-  text.array = () => extractTextAsArray(raw, type => type !== 'atomic');
+  const text = () => extractTextAsArray(raw, type => type !== 'atomic');
 
   // non-grouped block text API
   Object.entries(METHOD_BLOCK_MAP).forEach(([func, blockType]) => {
-    text[func] = () => extractTextFromBlocks(raw, ({ type }) => type === blockType);
-    text[func].array = () => extractTextAsArray(raw, type => type === blockType);
+    text[func] = () => extractTextAsArray(raw, type => type === blockType);
   });
 
   // grouped block text API
   Object.entries(METHOD_GROUPED_BLOCK_MAP).forEach(([func, blockType]) => {
     text[func] = () =>
-      extractSequentialBlockArrays(raw, blockType).map(blockArray =>
-        extractTextFromBlocks({ blocks: blockArray }, ({ type }) => type === blockType)
-      );
-    text[func].array = () =>
-      extractSequentialBlockArrays(raw, blockType).map(blockArray =>
-        extractTextAsArray({ blocks: blockArray }, type => type === blockType)
-      );
+      extractSequentialBlockArrays(raw, blockType)
+        .map(blockArray => extractTextAsArray({ blocks: blockArray }, type => type === blockType))
+        .filter(arr => arr.length > 0);
   });
 
   // TODO: optimize the extractMedia call (cache?)

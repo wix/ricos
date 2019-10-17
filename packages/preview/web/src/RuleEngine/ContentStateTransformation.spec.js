@@ -95,8 +95,8 @@ describe('Content State Transformation', () => {
           mediaInfo: metadata.media.images().slice(0, 3),
         }),
     }).rule({
-      _if: metadata => metadata.text.plain.array().length > 0,
-      _then: (metadata, preview) => preview.plain(metadata.text.plain.array()[0]),
+      _if: metadata => metadata.text.plain().length > 0,
+      _then: (metadata, preview) => preview.plain(metadata.text.plain()[0]),
     });
     const preview = transformer.apply(contentState);
     expect(butKey(preview.blocks[1])).toEqual(butKey(expectedBlock));

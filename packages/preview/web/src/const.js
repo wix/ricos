@@ -1,5 +1,4 @@
 export const METHOD_BLOCK_MAP = {
-  plain: 'unstyled',
   h2: 'header-two',
   h3: 'header-three',
   h4: 'header-four',
@@ -9,6 +8,7 @@ export const METHOD_BLOCK_MAP = {
 };
 
 export const METHOD_GROUPED_BLOCK_MAP = {
+  plain: 'unstyled',
   code: 'code-block',
   ol: 'ordered-list-item',
   ul: 'unordered-list-item',
