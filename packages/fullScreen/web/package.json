@@ -40,7 +40,7 @@
   "devDependencies": {},
   "dependencies": {
     "react-images": "1.0.0",
-    "wix-rich-content-common": "5.1.8"
+    "wix-rich-content-common": "5.1.9"
   },
   "unpkg": true,
   "publishConfig": {
