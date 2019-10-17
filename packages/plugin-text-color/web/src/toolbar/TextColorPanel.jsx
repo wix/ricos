@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Modifier, EditorState } from '@wix/draft-js';
 import { ColorPicker, getSelectionStyles } from 'wix-rich-content-common';
-import { DEFAULT_COLOR, DEFAULT_STYLE_SELECTION_PREDICATE } from '../constants';
+import { DEFAULT_COLOR } from '../constants';
 
 import {
   extractColor,
@@ -15,7 +15,7 @@ export default class TextColorPanel extends Component {
   constructor(props) {
     super(props);
     const styleSelectionPredicate =
-      props.settings.styleSelectionPredicate || DEFAULT_STYLE_SELECTION_PREDICATE;
+      props.settings.styleSelectionPredicate || props.defaultStyleSelectionPredicate;
     if (props.settings.colorScheme && !validateColorScheme(props.settings.colorScheme)) {
       console.error('Error: colorScheme is not valid'); // eslint-disable-line no-console
     }
@@ -49,9 +49,9 @@ export default class TextColorPanel extends Component {
   }
 
   getInlineColorState(color) {
-    const { editorState, settings } = this.props;
+    const { editorState, settings, defaultStyleSelectionPredicate, styleMapper } = this.props;
     const styleSelectionPredicate =
-      settings.styleSelectionPredicate || DEFAULT_STYLE_SELECTION_PREDICATE;
+      settings.styleSelectionPredicate || defaultStyleSelectionPredicate;
     const selection = editorState.getSelection();
     const currentColors = getSelectionStyles(styleSelectionPredicate, editorState);
     const newEditorState = currentColors.reduce((nextEditorState, prevColor) => {
@@ -60,7 +60,7 @@ export default class TextColorPanel extends Component {
       return EditorState.push(nextEditorState, nextContentState, 'change-inline-style');
     }, editorState);
     const contentState = newEditorState.getCurrentContent();
-    const newContentState = Modifier.applyInlineStyle(contentState, selection, color);
+    const newContentState = Modifier.applyInlineStyle(contentState, selection, styleMapper(color));
     return EditorState.push(newEditorState, newContentState, 'change-inline-style');
   }
 
@@ -125,4 +125,6 @@ TextColorPanel.propTypes = {
   setKeepToolbarOpen: PropTypes.func,
   closeModal: PropTypes.func.isRequired,
   isMobile: PropTypes.bool.isRequired,
+  defaultStyleSelectionPredicate: PropTypes.func.isRequired,
+  styleMapper: PropTypes.func.isRequired,
 };

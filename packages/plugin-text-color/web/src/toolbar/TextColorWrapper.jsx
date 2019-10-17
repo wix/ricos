@@ -7,6 +7,7 @@ import { InlineToolbarButton, getSelectionStyles, mergeStyles } from 'wix-rich-c
 import TextColorPanel from './TextColorPanel';
 import { PANEL_WIDTH, DEFAULT_STYLE_SELECTION_PREDICATE } from '../constants';
 import styles from '../../statics/styles/text-color-modal.scss';
+import { styleMapper } from '../text-decorations-utils';
 
 export default class TextColorWrapper extends Component {
   constructor(props) {
@@ -14,6 +15,7 @@ export default class TextColorWrapper extends Component {
     this.state = { showPanel: false };
     this.styles = mergeStyles({ styles, theme: props.theme });
     this.buttonRef = this.props.buttonRef;
+    this.styleMapper = styleMapper(props.decorator.type);
   }
 
   static getModalParent() {
@@ -44,7 +46,7 @@ export default class TextColorWrapper extends Component {
   }
 
   get isActive() {
-    const settings = this.props.config[this.props.type.TYPE] || {};
+    const settings = this.props.config[this.props.decorator.type] || {};
     const styleSelectionPredicate =
       settings.styleSelectionPredicate || DEFAULT_STYLE_SELECTION_PREDICATE;
     return getSelectionStyles(styleSelectionPredicate, this.props.getEditorState()).length > 0;
@@ -61,11 +63,11 @@ export default class TextColorWrapper extends Component {
       setKeepOpen,
       config,
       uiSettings,
-      type,
+      decorator,
     } = this.props;
-    const settings = config[type.TYPE];
+    const settings = config[decorator.type];
     const { isPanelOpen, panelTop, panelLeft } = this.state;
-    const tooltip = t(type.toolTip);
+    const tooltip = t(decorator.toolTip);
     const buttonStyles = {
       button: theme.inlineToolbarButton,
       buttonWrapper: theme.inlineToolbarButton_wrapper,
@@ -84,9 +86,9 @@ export default class TextColorWrapper extends Component {
         theme={{ ...theme, ...buttonStyles }}
         isMobile={isMobile}
         tooltipText={tooltip}
-        dataHook={type.dataHook}
+        dataHook={decorator.dataHook}
         tabIndex={tabIndex}
-        icon={type.icon}
+        icon={decorator.icon}
         forwardRef={this.buttonRef}
       >
         <Modal
@@ -114,6 +116,8 @@ export default class TextColorWrapper extends Component {
             settings={settings}
             uiSettings={uiSettings}
             setKeepToolbarOpen={setKeepOpen}
+            defaultStyleSelectionPredicate={decorator.defaultStyleSelectionPredicate}
+            styleMapper={this.styleMapper}
           />
         </Modal>
       </InlineToolbarButton>
@@ -138,7 +142,7 @@ TextColorWrapper.propTypes = {
   uiSettings: PropTypes.object,
   config: PropTypes.object,
   setKeepOpen: PropTypes.func,
-  type: PropTypes.object.isRequired,
+  decorator: PropTypes.object.isRequired,
   buttonRef: PropTypes.oneOfType([PropTypes.func, PropTypes.shape({ current: PropTypes.func })]),
 };
 

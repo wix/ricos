@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import TextColorIcon from './TextColorIcon';
 import { TEXT_COLOR_TYPE } from '../types';
 import TextColorWrapper from './TextColorWrapper';
+import { DEFAULT_STYLE_SELECTION_PREDICATE } from '../constants';
 
 export default class TextColorButton extends Component {
   constructor(props) {
@@ -11,13 +12,14 @@ export default class TextColorButton extends Component {
   }
 
   render() {
-    const type = {
+    const decorator = {
       dataHook: 'TextColorButton',
       toolTip: 'TextColorButton_Tooltip',
       icon: TextColorIcon,
-      TYPE: TEXT_COLOR_TYPE,
+      type: TEXT_COLOR_TYPE,
+      defaultStyleSelectionPredicate: DEFAULT_STYLE_SELECTION_PREDICATE,
     };
-    return <TextColorWrapper buttonRef={this.buttonRef} type={type} {...this.props} />;
+    return <TextColorWrapper buttonRef={this.buttonRef} decorator={decorator} {...this.props} />;
   }
 }
 

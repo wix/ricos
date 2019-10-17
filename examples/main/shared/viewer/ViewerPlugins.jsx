@@ -28,7 +28,7 @@ import {
   TEXT_COLOR_TYPE,
 } from 'wix-rich-content-plugin-text-color/dist/module.viewer';
 
-import { viewerCustomStyleFn, styleSelectionPredicate } from '../../src/text-color-style-fn';
+import { viewerCustomStyleFn, styleSelectionFGPredicate } from '../../src/text-color-style-fn';
 import { anchorTarget, relValue } from '../../src/consts';
 
 import 'wix-rich-content-common/dist/styles.min.css';
@@ -85,7 +85,7 @@ export const config = {
   [LINK_TYPE]: linkPluginSettings,
   [MENTION_TYPE]: mentionsPluginSettings,
   [TEXT_COLOR_TYPE]: {
-    styleSelectionPredicate,
+    styleSelectionFGPredicate,
     customStyleFn: viewerCustomStyleFn,
   },
   [FILE_UPLOAD_TYPE]: {

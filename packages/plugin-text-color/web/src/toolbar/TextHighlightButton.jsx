@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import TextColorIcon from './TextColorIcon';
 import { TEXT_HIGHLIGHT_TYPE } from '../types';
 import TextColorWrapper from './TextColorWrapper';
+import { DEFAULT_STYLE_SELECTION_HIGHLIGHT_PREDICATE } from '../constants';
 
 export default class TextHighlightButton extends Component {
   constructor(props) {
@@ -10,13 +11,14 @@ export default class TextHighlightButton extends Component {
     this.buttonRef = React.createRef();
   }
   render() {
-    const type = {
+    const decorator = {
       dataHook: 'TextHighlightButton',
       toolTip: 'TextHighlightButton_Tooltip',
       icon: TextColorIcon,
-      TYPE: TEXT_HIGHLIGHT_TYPE,
+      type: TEXT_HIGHLIGHT_TYPE,
+      defaultStyleSelectionPredicate: DEFAULT_STYLE_SELECTION_HIGHLIGHT_PREDICATE,
     };
-    return <TextColorWrapper buttonRef={this.buttonRef} type={type} {...this.props} />;
+    return <TextColorWrapper buttonRef={this.buttonRef} decorator={decorator} {...this.props} />;
   }
 }
 
