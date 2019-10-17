@@ -44,7 +44,7 @@ class ImageCounter extends PureComponent {
     );
   };
 
-  componentDidMount() {
+  decorateImages() {
     if (this.wrapper) {
       setTimeout(() => {
         const images = this.wrapper.querySelectorAll('[role=img]');
@@ -53,6 +53,14 @@ class ImageCounter extends PureComponent {
         ReactDOM.render(decorations, this.container);
       }, 500);
     }
+  }
+
+  // componentDidUpdate() {
+  //   this.decorateImages();
+  // }
+
+  componentDidMount() {
+    this.decorateImages();
   }
 
   handleWrapper = el => (this.wrapper = el);
