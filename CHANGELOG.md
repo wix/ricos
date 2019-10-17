@@ -25,6 +25,7 @@
   - [#411](https://github.com/wix-incubator/rich-content/pull/411) base toolbar height calculated once
 - `editor`
   - [#392](https://github.com/wix-incubator/rich-content/pull/392) text inline toolbar tooltips
+  - resize-decorator is not activated on mobile
   - [#400](https://github.com/wix-incubator/rich-content/pull/400) inline and mobile toolbar RTL support
   - [#407](https://github.com/wix-incubator/rich-content/pull/407) list indentation
 - `divider`

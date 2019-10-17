@@ -83,8 +83,8 @@ export default ({ config, store }) => WrappedComponent =>
       const isBottom =
         vertical && vertical !== 'auto' ? y >= b.height - tolerance && y < b.height : false;
 
-      isLeft = isLeft && alignment !== 'left' && size !== 'fullWidth';
-      isRight = isRight && alignment !== 'right' && size !== 'fullWidth';
+      isLeft = isLeft && alignment !== 'left' && size !== 'fullWidth' && !this.context.isMobile;
+      isRight = isRight && alignment !== 'right' && size !== 'fullWidth' && !this.context.isMobile;
 
       const canResize = isTop || isLeft || isRight || isBottom;
 
@@ -230,8 +230,10 @@ export default ({ config, store }) => WrappedComponent =>
       }
 
       const containerClassName = classNames({
-        [this.mergedStyles.resizeHandleR]: alignment !== 'right' && size !== 'fullWidth',
-        [this.mergedStyles.resizeHandleL]: alignment !== 'left' && size !== 'fullWidth',
+        [this.mergedStyles.resizeHandleR]:
+          alignment !== 'right' && size !== 'fullWidth' && !this.context.isMobile,
+        [this.mergedStyles.resizeHandleL]:
+          alignment !== 'left' && size !== 'fullWidth' && !this.context.isMobile,
       });
 
       const interactionProps = store.getReadOnly()
