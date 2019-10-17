@@ -75,11 +75,8 @@ export default class EmojiPreviewModal extends Component {
       <div className={this.styles.emojiPreviewModal_container}>
         <div className={this.styles.emojiPreviewModal_headerTitle}>
           <div>{activeGroup.title}</div>
-          <div>
-            <span className={this.styles.emojiPreviewModal_PoweredBy_label}>
-              {this.props.t('EmojiPlugin_PoweredBy_label')}
-            </span>
-            <JoyPixelsIcon className={this.styles.emojiPreviewModal_JoyPixelsIcon} />
+          <div className={this.styles.emojiPreviewModal_JoyPixelsIcon}>
+            <JoyPixelsIcon />
           </div>
         </div>
         <div className={this.styles.emojiPreviewModal_emojis_groups_container}>
