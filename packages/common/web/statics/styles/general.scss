@@ -74,6 +74,15 @@
   max-width: 100%;
 }
 
+.alignCenter {
+  display: block;
+
+  &:not(.textWrapNowrap) {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
 .sizeFullWidth,
 .textWrapNowrap {
   width: 100%;

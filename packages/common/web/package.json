@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-common",
-  "version": "5.1.1",
+  "version": "5.1.9",
   "author": {
     "name": "Jonathan Bachman",
     "email": "jonathanb@wix.com"
@@ -31,8 +31,8 @@
   },
   "peerDependencies": {
     "@babel/runtime": "7.2.0",
-    "@wix/draft-js": "0.10.272",
     "classnames": "^2.0.0",
+    "draft-js": "0.11.0",
     "lodash": "^4.0.0",
     "prop-types": "^15.0.0",
     "react": "^16.6.3",
@@ -40,11 +40,11 @@
   },
   "devDependencies": {
     "@babel/runtime": "7.2.0",
-    "@wix/draft-js": "0.10.272",
     "babel-jest": "^23.6.0",
     "classnames": "^2.2.6",
     "cross-env": "^5.2.0",
     "deep-freeze": "0.0.1",
+    "draft-js": "0.11.0",
     "eslint": "^6.1.0",
     "jest": "^23.1.0",
     "lodash": "^4.17.10",
@@ -77,10 +77,7 @@
     },
     "moduleNameMapper": {
       "\\.(jpg|jpeg|png|gif|svg)$": "<rootDir>/__mocks__/fileMock.js",
-      "\\.(css|scss)$": "<rootDir>/__mocks__/styleMock.js",
-      "^draft-js$": "<rootDir>/../../../node_modules/@wix/draft-js/dist/Draft.min.js",
-      "^draft-js/.*$": "<rootDir>/../../../node_modules/@wix/draft-js/dist/Draft.min.js",
-      "^@wix/draft-js$": "<rootDir>/../../../node_modules/@wix/draft-js/dist/Draft.min.js"
+      "\\.(css|scss)$": "<rootDir>/__mocks__/styleMock.js"
     }
   }
 }

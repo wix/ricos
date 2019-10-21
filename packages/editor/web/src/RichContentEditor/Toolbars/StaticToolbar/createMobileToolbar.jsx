@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { decorateComponentWithProps, isiOS } from 'wix-rich-content-common';
+import { decorateComponentWithProps, mergeStyles } from 'wix-rich-content-common';
 import createStaticToolbar from './createStaticToolbar';
 import { AddPluginButton } from '../buttons';
 import { getTextButtonsFromList } from '../buttons/utils';
@@ -25,6 +25,7 @@ const createMobileToolbar = ({
   displayOptions,
   toolbarDecorationFn,
   config,
+  locale,
 }) => {
   const mobileTheme = getMobileTheme(theme);
   return createStaticToolbar({
@@ -53,6 +54,7 @@ const createMobileToolbar = ({
     uiSettings,
     displayOptions,
     toolbarDecorationFn,
+    locale,
   });
 };
 
@@ -64,70 +66,34 @@ const getMobileTheme = theme => {
     ...rest
   } = theme || {};
 
+  const toolbarMergeStyles = mergeStyles({ styles: toolbarStyles, theme: toolbarTheme });
+  const buttonMergeStyles = mergeStyles({ styles: buttonStyles, theme: buttonTheme });
+  const separatorMergeStyles = mergeStyles({ styles: separatorStyles, theme: separatorTheme });
+
   return {
     toolbarStyles: {
-      toolbar: classNames(toolbarStyles.mobileToolbar, toolbarTheme && toolbarTheme.mobileToolbar, {
-        [toolbarStyles.mobileToolbar_fixed]: !isiOS(),
-        [toolbarTheme.mobileToolbar_fixed]:
-          toolbarTheme && toolbarTheme.mobileToolbar_fixed && !isiOS(),
-      }),
-      scrollableContainer: classNames(
-        toolbarStyles.mobileToolbar_scrollableContainer,
-        toolbarTheme && toolbarTheme.mobileToolbar_scrollableContainer
-      ),
-      buttons: classNames(
-        toolbarStyles.mobileToolbar_buttons,
-        toolbarTheme && toolbarTheme.mobileToolbar_buttons
-      ),
-      extend: classNames(
-        toolbarStyles.mobileToolbar_extend,
-        toolbarTheme && toolbarTheme.mobileToolbar_extend
-      ),
-      responsiveSpacer: toolbarStyles.mobileToolbar_responsiveSpacer,
-      responsiveArrow: classNames(
-        toolbarStyles.mobileToolbar_responsiveArrow,
-        toolbarTheme && toolbarTheme.mobileToolbar_responsiveArrow
-      ),
-      responsiveArrowStart: classNames(
-        toolbarStyles.mobileToolbar_responsiveArrowStart,
-        toolbarTheme && toolbarTheme.mobileToolbar_responsiveArrowStart
-      ),
-      responsiveArrowEnd: classNames(
-        toolbarStyles.mobileToolbar_responsiveArrowEnd,
-        toolbarTheme && toolbarTheme.mobileToolbar_responsiveArrowEnd
-      ),
+      toolbar: classNames(toolbarMergeStyles.mobileToolbar, toolbarMergeStyles.mobileToolbar_fixed),
+      scrollableContainer: toolbarMergeStyles.mobileToolbar_scrollableContainer,
+      buttons: toolbarMergeStyles.mobileToolbar_buttons,
+      extend: toolbarMergeStyles.mobileToolbar_extend,
+      responsiveSpacer: toolbarMergeStyles.mobileToolbar_responsiveSpacer,
+      responsiveArrow: toolbarMergeStyles.mobileToolbar_responsiveArrow,
+      responsiveArrowStart: toolbarMergeStyles.mobileToolbar_responsiveArrowStart,
+      responsiveArrowEnd: toolbarMergeStyles.mobileToolbar_responsiveArrowEnd,
       //eslint-disable-next-line camelcase
-      responsiveArrowStart_icon: classNames(
-        toolbarStyles.mobileToolbar_responsiveArrowStart_icon,
-        toolbarTheme && toolbarTheme.mobileToolbar_responsiveArrowStart_icon
-      ),
+      responsiveArrowStart_icon: toolbarMergeStyles.mobileToolbar_responsiveArrowStart_icon,
       //eslint-disable-next-line camelcase
-      responsiveArrowEnd_icon: classNames(
-        toolbarStyles.mobileToolbar_responsiveArrowEnd_icon,
-        toolbarTheme && toolbarTheme.mobileToolbar_responsiveArrowEnd_icon
-      ),
+      responsiveArrowEnd_icon: toolbarMergeStyles.mobileToolbar_responsiveArrowEnd_icon,
     },
     buttonStyles: {
       //eslint-disable-next-line camelcase
-      inlineToolbarButton_wrapper: classNames(
-        buttonStyles.mobileToolbarButton_wrapper,
-        buttonTheme && buttonTheme.mobileToolbarButton_wrapper
-      ),
-      inlineToolbarButton: classNames(
-        buttonStyles.mobileToolbarButton,
-        buttonTheme && buttonTheme.mobileToolbarButton
-      ),
+      inlineToolbarButton_wrapper: buttonMergeStyles.mobileToolbarButton_wrapper,
+      inlineToolbarButton: buttonMergeStyles.mobileToolbarButton,
       //eslint-disable-next-line camelcase
-      inlineToolbarButton_icon: classNames(
-        buttonStyles.mobileToolbarButton_icon,
-        buttonTheme && buttonTheme.mobileToolbarButton_icon
-      ),
+      inlineToolbarButton_icon: buttonMergeStyles.mobileToolbarButton_icon,
     },
     separatorStyles: {
-      separator: classNames(
-        separatorStyles.mobileToolbarSeparator,
-        separatorTheme && separatorTheme.mobileToolbarSeparator
-      ),
+      separator: separatorMergeStyles.mobileToolbarSeparator,
     },
     ...rest,
   };

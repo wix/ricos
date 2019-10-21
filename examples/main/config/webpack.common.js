@@ -23,9 +23,7 @@ module.exports = env => ({
     extensions: ['.js', '.jsx', '.json'],
     symlinks: false,
     alias: {
-      'draft-js': path.resolve(PATHS.monorepo_root, 'node_modules', '@wix', 'draft-js'),
       'react-hot-loader': path.resolve(PATHS.monorepo_root, 'node_modules', 'react-hot-loader'),
-      '@wix/draft-js': path.resolve(PATHS.monorepo_root, 'node_modules', '@wix', 'draft-js'),
       'wix-rich-content-common': path.resolve(PATHS.monorepo_root, 'packages', 'common', 'web'),
     },
   },
@@ -141,7 +139,7 @@ module.exports = env => ({
       },
     ]),
     new DotenvWebpackPlugin({
-      path: path.resolve(PATHS.root, '..', '..', '.env'),
+      path: path.resolve(PATHS.monorepo_root, '.env'),
     }),
     new MonacoWebpackPlugin({
       languages: ['json'],

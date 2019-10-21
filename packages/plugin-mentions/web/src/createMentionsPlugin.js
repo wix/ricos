@@ -18,6 +18,7 @@ Interface Settings {
   mentionPrefix?: string;
   mentionTrigger?: string;
   getMentionLink?: (mention: Mention) => string;
+  visibleItemsBeforeOverflow?: number, // how many items should be visible before overflowing
   getMentions: (search: string) => Promise<Mention[]>
   onMentionClick: (mention: Mention) => void;
   repositionSuggestions: boolean, // when you are in iframe and want suggestions to be repositioned if they go out of iframe
@@ -41,6 +42,7 @@ const createExternalMentionsPlugin = (config = {}) => {
       entryHeight: settings.entryHeight,
       additionalHeight: settings.additionalHeight,
       reposition: settings.repositionSuggestions,
+      visibleItemsBeforeOverflow: settings.visibleItemsBeforeOverflow,
     }),
   });
 

@@ -8,23 +8,61 @@
 > - :house: [Internal]
 
 ## [Unreleased]
+### :boom: Breaking Change
+- `general`
+  - [#347](https://github.com/wix-incubator/rich-content/pull/347) replaced `@wix/draft-js@0.10.272` with `draft-js@0.11.0`
 ### :rocket: New Feature
+- `fullscreen`
+  - [#389](https://github.com/wix-incubator/rich-content/pull/389) fullscreen for gallery and images :)
 - `gallery`
   - [#391](https://github.com/wix-incubator/rich-content/pull/391) gallery image titles
-### :bug: Bug Fix
+- `mentions`
+  - [#402](https://github.com/wix-incubator/rich-content/pull/402) mentions suggestion box size controll
 - `editor`
-  - [#392](https://github.com/wix-incubator/rich-content/pull/392) text in line toolbar has tooltips
+  - [#396](https://github.com/wix-incubator/rich-content/pull/396) sticky static toolbar on all platforms
+### :bug: Bug Fix
+- `common`
+  - [#411](https://github.com/wix-incubator/rich-content/pull/411) base toolbar height calculated once
+- `editor`
+  - [#392](https://github.com/wix-incubator/rich-content/pull/392) text inline toolbar tooltips
+  - [#400](https://github.com/wix-incubator/rich-content/pull/400) inline and mobile toolbar RTL support
+  - [#407](https://github.com/wix-incubator/rich-content/pull/407) list indentation
+- `divider`
+  - [#406](https://github.com/wix-incubator/rich-content/pull/406) divider center alignment
 - `image`
   - [75336e34](https://github.com/wix-incubator/rich-content/commit/75336e34) open imageStudio on crop tab
+  - [#413](https://github.com/wix-incubator/rich-content/pull/413) new image doesn't replace existing image
 - `gallery`
   - [#404](https://github.com/wix-incubator/rich-content/pull/404) delete last remaining image in image settings returns to gallery settings
   - [#403](https://github.com/wix-incubator/rich-content/pull/403) re-render gallery on change only
+  - [#408](https://github.com/wix-incubator/rich-content/pull/408) panorama layout displays all items
 ### :house: Internal
 - `e2e`
   - [#393](https://github.com/wix-incubator/rich-content/pull/393) added atomic block alignment testing
   - [#394](https://github.com/wix-incubator/rich-content/pull/394) test-env changed to match main example
+  - [#409](https://github.com/wix-incubator/rich-content/pull/409) added plugin tests
+  - [#405](https://github.com/wix-incubator/rich-content/pull/405) visual tests run on applitools
 - `mentions`
   - [#387](https://github.com/wix-incubator/rich-content/pull/387) data validation schema added
+<hr/>
+
+## 5.1.9 (Oct 16, 2019)
+### :bug: Bug Fix
+- `gallery`
+  - [#416](https://github.com/wix-incubator/rich-content/pull/416) alignment issues
+<hr/>
+
+## 5.1.8 (Oct 15, 2019)
+### :bug: Bug Fix
+- `gallery`
+  - [#414](https://github.com/wix-incubator/rich-content/pull/414) additional height issues
+<hr/>
+
+
+## 5.1.7 (Oct 15, 2019)
+### :bug: Bug Fix
+- `gallery`
+  - [#412](https://github.com/wix-incubator/rich-content/pull/412) height issues
 <hr/>
 
 ## 5.1.6 (Oct 10, 2019)

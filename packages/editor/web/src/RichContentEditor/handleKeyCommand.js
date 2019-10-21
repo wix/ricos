@@ -1,4 +1,4 @@
-import { EditorState, RichUtils, Modifier } from '@wix/draft-js';
+import { EditorState, RichUtils, Modifier } from 'draft-js';
 import { COMMANDS } from 'wix-rich-content-common';
 import handleBackspaceCommand from './handleBackspaceCommand';
 import handleDeleteCommand from './handleDeleteCommand';
