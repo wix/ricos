@@ -6,7 +6,6 @@ import { RichContentModal, isSSR } from 'wix-rich-content-common';
 import {
   ContentStateTransformation,
   RichContentPreview,
-  EXPAND_MODES,
 } from 'wix-rich-content-preview';
 import * as PropTypes from 'prop-types';
 import * as Plugins from './PreviewPlugins';
@@ -36,11 +35,11 @@ export default class Preview extends PureComponent {
       disabled: false,
     };
     this.transformation = new ContentStateTransformation({
-      _if: metadata => metadata.text.plain.array().length > 0,
+      _if: metadata => metadata.text.plain().length > 0,
       _then: (metadata, preview) =>
         preview
-          .plain(metadata.text.plain.array()[0])
-          .readMore({ lines: 3, expandMode: EXPAND_MODES.BLOCK }),
+          .plain(metadata.text.plain()[0])
+          .readMore({ lines: 3 }),
     }).rule({
       _if: metadata => metadata.media.images().length > 3,
       _then: (metadata, preview) =>
