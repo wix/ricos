@@ -252,12 +252,11 @@ The ContentStateBuilder exposes `readMore` API that accepts configuration object
     ellipsis: string,
     label: string,
     onClick: function,
-    expandMode: EXPAND_MODES.BLOCK | EXPAND_MODES.FULL_CONTENT
   }
 
 ```
 
-The `onClick` and `expandMode` fields are common for all the interactions. They define the ineraction click behavior. The `expandMode` defines which portion of collapsed content should be expanded, and `onClick` allows to intercept the expansion click.
+The `onClick` field is common for all the interactions. It defines the ineraction click behavior, by intercepting the expansion click.
 
 #### SeeFullPost
 
@@ -320,7 +319,7 @@ RichContentViewer `config` prop now allows to pass the preview related configura
 
 The `contentInteractionMappers` field allows to pass the interactions as a function array, similar to the `typeMappers` and `inlineStyleMappers`. The `preview` package exports the `interactionMap` API containing three predefined interactions mentioned in previous section.
 
-The `onPreviewExpand` handler determines the behavior on content expansion when the interaction `expandMode` is set to `EXPAND_MODES.FULL_CONTENT`. The `RichContentPreview` component wraps the `RichContentViewer` while providing default `PREVIEW` configuration.
+The `onPreviewExpand` handler determines the behavior on content expansion. The `RichContentPreview` component wraps the `RichContentViewer` while providing default `PREVIEW` configuration.
 
 ### Custom Interactions
 
