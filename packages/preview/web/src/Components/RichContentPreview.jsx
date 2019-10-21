@@ -16,11 +16,11 @@ class RichContentPreview extends Component {
   constructor(props) {
     super(props);
     this.styles = mergeStyles({ styles, theme: props.theme });
-    this.state = { isExpanded: false };
+    this.state = { isPreviewExpanded: false };
   }
 
-  onExpand = () => {
-    this.setState({ isExpanded: true });
+  onPreviewExpand = () => {
+    this.setState({ isPreviewExpanded: true });
   };
 
   onResize = debounce(({ bounds }) => this.updateBounds(bounds), 100);
@@ -31,17 +31,19 @@ class RichContentPreview extends Component {
 
   render() {
     const { transformation, initialState, config, ...rest } = this.props;
-    const previewState = this.state.isExpanded ? initialState : transformation.apply(initialState);
+    const previewState = this.state.isPreviewExpanded
+      ? initialState
+      : transformation.apply(initialState);
     const previewConfig = {
       ...config,
       PREVIEW: {
-        onPreviewExpand: this.onExpand,
+        onPreviewExpand: this.onPreviewExpand,
         contentInteractionMappers: [interactionMap],
         ...config.PREVIEW,
       },
     };
     return (
-      <Measure bounds onResize={this.onResize}>
+      <Measure onResize={this.onResize}>
         {({ measureRef }) => (
           <div className={styles.preview_container} ref={measureRef}>
             <RichContentViewer initialState={previewState} config={previewConfig} {...rest} />
