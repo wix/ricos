@@ -35,6 +35,8 @@
   - [75336e34](https://github.com/wix-incubator/rich-content/commit/75336e34) open imageStudio on crop tab
   - [#413](https://github.com/wix-incubator/rich-content/pull/413) new image doesn't replace existing image
   - [#423](https://github.com/wix-incubator/rich-content/pull/423) images are rendered in high resolution for seo
+- `file-upload`
+  - [#426](https://github.com/wix-incubator/rich-content/pull/426) apply spinner animation to file upload plugin
 - `gallery`
   - [#404](https://github.com/wix-incubator/rich-content/pull/404) delete last remaining image in image settings returns to gallery settings
   - [#403](https://github.com/wix-incubator/rich-content/pull/403) re-render gallery on change only
