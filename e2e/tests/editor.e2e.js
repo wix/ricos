@@ -4,7 +4,6 @@ describe('editor', () => {
   before(function() {
     cy.eyesOpen({
       appName: 'Rich Content - Editor',
-      batchName: 'Editor',
       testName: this.test.parent.title,
       browser: [{ width: 1440, height: 900, name: 'chrome' }],
     });
