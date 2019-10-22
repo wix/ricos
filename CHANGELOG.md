@@ -39,6 +39,8 @@
   - [#404](https://github.com/wix-incubator/rich-content/pull/404) delete last remaining image in image settings returns to gallery settings
   - [#403](https://github.com/wix-incubator/rich-content/pull/403) re-render gallery on change only
   - [#408](https://github.com/wix-incubator/rich-content/pull/408) panorama layout displays all items
+- `example`
+  - editor + viewer: gallery config field `scrollingElement` value is a function
 ### :house: Internal
 - `e2e`
   - [#393](https://github.com/wix-incubator/rich-content/pull/393) added atomic block alignment testing
