@@ -1,0 +1,29 @@
+@import '~wix-rich-content-common/dist/statics/styles/general.rtlignore';
+
+.left {
+  /*!rtl:ignore*/
+  text-align: left !important;
+
+  & > * {
+    /*!rtl:ignore*/
+    text-align: left !important;
+  }
+}
+
+.center {
+  text-align: center !important;
+
+  & > * {
+    text-align: center !important;
+  }
+}
+
+.right {
+  /*!rtl:ignore*/
+  text-align: right !important;
+
+  & > * {
+    /*!rtl:ignore*/
+    text-align: right !important;
+  }
+}

@@ -27,12 +27,6 @@ const generateSubdomain = exampleName => {
   return subdomain;
 };
 
-function bootstrap() {
-  const bootstrapCommand = `yarn`;
-  console.log(chalk.magenta(`Running: ${bootstrapCommand}"`));
-  exec(bootstrapCommand);
-}
-
 function build() {
   const buildCommand = 'npm run build';
   console.log(chalk.magenta(`Running: "${buildCommand}"`));
@@ -56,8 +50,8 @@ function deploy(name) {
 function run() {
   let skip;
   const { SURGE_LOGIN, TRAVIS_BRANCH, TRAVIS_PULL_REQUEST, CI } = process.env;
-  if (TRAVIS_BRANCH !== 'master' && TRAVIS_PULL_REQUEST === 'false') {
-    skip = 'Not master or PR';
+  if (TRAVIS_BRANCH !== 'release' && TRAVIS_PULL_REQUEST === 'false') {
+    skip = 'Not on release branch or PR';
   } else if (!CI) {
     skip = 'Not in CI';
   } else if (!SURGE_LOGIN) {
@@ -72,7 +66,6 @@ function run() {
     process.chdir(path.resolve(process.cwd(), example.path));
 
     console.log(chalk.blue(`\nDeploying ${example.name} example...`));
-    bootstrap();
     build();
     deploy(example.name);
 

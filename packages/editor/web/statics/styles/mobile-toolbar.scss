@@ -1,0 +1,35 @@
+@import '~wix-rich-content-common/dist/statics/styles/palette';
+@import '~wix-rich-content-common/dist/statics/styles/mixins';
+
+.mobileToolbar {
+  position: relative;
+  border-bottom: 1px solid rgba($secondary-text-color, 0.2);
+}
+
+.mobileToolbar_scrollableContainer {
+}
+
+.mobileToolbar_fixed {
+}
+
+.mobileToolbar_buttons {
+}
+
+.mobileToolbar_responsiveSpacer {
+}
+
+.mobileToolbar_responsiveArrow {
+}
+
+.mobileToolbar_responsiveArrowStart,
+.mobileToolbar_responsiveArrowEnd {
+}
+
+.mobileToolbar_responsiveArrowStart_icon {
+}
+
+.mobileToolbar_responsiveArrowEnd_icon {
+}
+
+.mobileToolbar_extend {
+}

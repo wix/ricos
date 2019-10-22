@@ -1,0 +1,148 @@
+@import './consts';
+@import './mixins';
+@import './palette';
+@import './fonts';
+
+//*** GENERIC ***//
+.flex {
+  display: flex;
+}
+
+.absFull {
+  display: absolute;
+  top: 0;
+  left: 0;
+}
+
+// *:focus,
+.focused {
+  outline: 1px dashed;
+}
+
+.noOutline {
+  *:focus {
+    outline: none;
+    box-shadow: none;
+  }
+}
+
+.visuallyHidden {
+  width: 0.1px;
+  height: 0.1px;
+  overflow: hidden;
+  position: absolute;
+  opacity: 0;
+  z-index: -1;
+}
+
+//*** BLOCK ***//
+.hasFocus {
+  @include block-select;
+}
+
+.overlay {
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.hidden {
+  display: none;
+}
+
+.pluginContainer,
+.pluginContainerReadOnly {
+  position: relative;
+}
+
+.pluginContainerReadOnly {
+  @extend .fontElementMap;
+}
+
+.pluginContainer {
+  @extend .fontElementMap;
+
+  &:hover {
+    @include block-select;
+  }
+}
+
+.pluginContainerMobile {
+  max-width: 100%;
+}
+
+.alignCenter {
+  display: block;
+
+  &:not(.textWrapNowrap) {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.sizeFullWidth,
+.textWrapNowrap {
+  width: 100%;
+}
+
+.sizeContent {
+  &:not(.textWrapNowrap) {
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.sizeSmall {
+  &:not(.textWrapNowrap) {
+    width: 350px;
+  }
+}
+
+.sizeSmallCenter {
+  &:not(.textWrapNowrap) {
+    width: 350px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+//*** PANEL ***//
+.panelContainer {
+  @extend .fontElementMap;
+  position: absolute;
+  display: flex;
+  padding: 12px 24px;
+  background: white;
+  color: $secondary-text-color;
+  border: 1px solid #ddd;
+  border-radius: $toolbarBorderRadius;
+  box-shadow: rgb(220, 220, 220) 1px 1px 3px 1px;
+}
+
+:global {
+  .ReactModal__Body--open {
+    overflow-y: hidden;
+  }
+
+  .ReactModal__Content {
+    font-weight: 300;
+    direction: ltr;
+  }
+
+  .ReactModalPortal {
+    @extend .glob_fontElementMap;
+  }
+}
+
+.isImage {
+  text-decoration: none;
+  color: #333333;
+}
+
+.anchor {
+  display: block;
+}

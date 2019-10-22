@@ -1,0 +1,84 @@
+.imageRatioSelector_label {
+  display: block;
+  margin-bottom: 13px;
+}
+
+.imageRatioSelector_readOnly {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+@supports (display: grid) {
+  .imageRatioSelector_grid {
+    grid-template-columns: 56px 56px 56px 56px 56px;
+    grid-template-rows: 56px;
+  }
+}
+
+@supports not (display: grid) {
+  .imageRatioSelector_option {
+    display: inline-block;
+    width: 56px;
+    height: 56px;
+  }
+}
+
+.imageRatioSelector_tile {
+  margin-right: 24px;
+}
+
+.imageRatioSelector_ratioButton {
+  width: 32px;
+  height: 32px;
+  background-color: rgba(51, 51, 51, 0.1);
+  border-radius: 2px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+.imageRatioSelector_ratioButton_selected {
+  background-color: #0261ff;
+}
+
+.imageRatioSelector_ratioLabel {
+  margin-top: 7px;
+  display: block;
+}
+
+.imageRatioSelector_ratioIcon {
+  border: 1px solid #111;
+  margin: auto;
+  &:focus {
+    border: 1px solid #fff;
+  }
+}
+
+.imageRatioSelector_ratioIcon_selected {
+  border: 1px solid #fff;
+}
+
+.imageRatioSelector_16_9 {
+  width: 22px;
+  height: 12px;
+}
+
+.imageRatioSelector_4_3 {
+  width: 20px;
+  height: 14px;
+}
+
+.imageRatioSelector_1_1 {
+  width: 20px;
+  height: 20px;
+}
+
+.imageRatioSelector_3_4 {
+  width: 14px;
+  height: 20px;
+}
+
+.imageRatioSelector_9_16 {
+  width: 12px;
+  height: 22px;
+}

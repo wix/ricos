@@ -1,0 +1,19 @@
+.left {
+  &>* {
+    /*!rtl:ignore*/
+    text-align: left !important;
+  }
+}
+
+.center {
+  &>* {
+    text-align: center !important;
+  }
+}
+
+.right {
+  &>* {
+    /*!rtl:ignore*/
+    text-align: right !important;
+  }
+}

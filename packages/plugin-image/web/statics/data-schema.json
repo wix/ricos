@@ -1,0 +1,123 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://wix-rich-content/image-content-data-schema.json",
+  "type": "object",
+  "required": ["src"],
+  "properties": {
+    "config": {
+      "$id": "/properties/config",
+      "type": "object",
+      "title": "configuration",
+      "properties": {
+        "size": {
+          "$id": "/properties/config/properties/size",
+          "enum": ["content", "small", "original", "fullWidth", "inline"],
+          "title": "size",
+          "examples": ["content", "small", "original", "fullWidth", "inline"]
+        },
+        "alignment": {
+          "$id": "/properties/config/properties/alignment",
+          "enum": ["left", "right", "center"],
+          "title": "alignment",
+          "examples": ["left", "right", "center"]
+        },
+        "showTitle": {
+          "$id": "/properties/config/properties/showTitle",
+          "type": "boolean",
+          "title": "show title",
+          "default": false,
+          "examples": [true]
+        },
+        "showDescription": {
+          "$id": "/properties/config/properties/showDescription",
+          "type": "boolean",
+          "title": "show description",
+          "default": false,
+          "examples": [true]
+        },
+        "link": {
+          "$id": "/properties/config/properties/link",
+          "type": ["object", "null"],
+          "required": ["url"],
+          "properties": {
+            "url": {
+              "$id": "/properties/config/properties/link/properties/url",
+              "type": "string",
+              "title": "URL",
+              "examples": ["wix.com"]
+            },
+            "target": {
+              "$id": "/properties/config/properties/link/properties/target",
+              "enum": ["_blank", "_self", "_top"],
+              "title": "link target",
+              "examples": ["_blank"]
+            },
+            "rel": {
+              "$id": "/properties/config/properties/link/properties/rel",
+              "type": "string",
+              "title": "link rel",
+              "default": "noopener",
+              "examples": ["nofollow", "noreferrer"]
+            }
+          }
+        }
+      }
+    },
+    "src": {
+      "$id": "/properties/src",
+      "type": ["object", "string", "null"],
+      "properties": {
+        "id": {
+          "$id": "/properties/src/properties/id",
+          "type": "string",
+          "title": "id",
+          "examples": ["8310d26374ed948918b9914ea076e411"]
+        },
+        "original_file_name": {
+          "$id": "/properties/src/properties/original_file_name",
+          "type": "string",
+          "title": "The original file name",
+          "examples": ["8bb438_b5957febd0ed45d3be9a0e91669c65b4.jpg"]
+        },
+        "file_name": {
+          "$id": "/properties/src/properties/file_name",
+          "type": "string",
+          "title": "The file name",
+          "examples": ["8bb438_b5957febd0ed45d3be9a0e91669c65b4.jpg"]
+        },
+        "width": {
+          "$id": "/properties/src/properties/width",
+          "type": "integer",
+          "title": "image width",
+          "default": 0,
+          "examples": [1621]
+        },
+        "height": {
+          "$id": "/properties/src/properties/height",
+          "type": "integer",
+          "title": "image height",
+          "default": 0,
+          "examples": [1081]
+        }
+      }
+    },
+    "metadata": {
+      "$id": "/properties/metadata",
+      "type": "object",
+      "properties": {
+        "alt": {
+          "$id": "/properties/metadata/properties/alt",
+          "type": "string",
+          "title": "alt text",
+          "examples": ["alt"]
+        },
+        "caption": {
+          "$id": "/properties/metadata/properties/caption",
+          "type": "string",
+          "title": "Image caption",
+          "examples": ["Wanted dead or alive"]
+        }
+      }
+    }
+  }
+}

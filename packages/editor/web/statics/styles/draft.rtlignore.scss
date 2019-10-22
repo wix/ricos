@@ -1,0 +1,99 @@
+@import '~wix-rich-content-common/dist/statics/styles/consts';
+@import '~wix-rich-content-common/dist/statics/styles/mixins';
+
+[dir].wrapper {
+  :global {
+
+    .DraftEditor-editorContainer,
+    .DraftEditor-root,
+    .public-DraftEditor-content {
+      height: inherit;
+      text-align: initial;
+    }
+
+    .public-DraftEditor-content[contenteditable='true'] {
+      -webkit-user-modify: read-write-plaintext-only;
+    }
+
+    .DraftEditor-root {
+      position: relative;
+    }
+
+    .DraftEditor-alignLeft .public-DraftStyleDefault-block {
+      /*!rtl:begin:ignore*/
+      text-align: left;
+      /*!rtl:end:ignore*/
+    }
+
+    .DraftEditor-alignLeft .public-DraftEditorPlaceholder-root {
+      /*!rtl:begin:ignore*/
+      left: 0;
+      text-align: left;
+      /*!rtl:end:ignore*/
+    }
+
+    .DraftEditor-alignCenter .public-DraftStyleDefault-block {
+      text-align: center;
+    }
+
+    .DraftEditor-alignCenter .public-DraftEditorPlaceholder-root {
+      margin: 0 auto;
+      text-align: center;
+      width: 100%;
+    }
+
+    .DraftEditor-alignRight .public-DraftStyleDefault-block {
+      /*!rtl:begin:ignore*/
+      text-align: right;
+      /*!rtl:end:ignore*/
+    }
+
+    .DraftEditor-alignRight .public-DraftEditorPlaceholder-root {
+      /*!rtl:begin:ignore*/
+      right: 0;
+      text-align: right;
+      /*!rtl:end:ignore*/
+    }
+
+    .public-DraftStyleDefault-block {
+      position: relative;
+      white-space: pre-wrap;
+    }
+
+    .public-DraftStyleDefault-ltr {
+      /*!rtl:begin:ignore*/
+      direction: ltr;
+      text-align: left;
+      /*!rtl:end:ignore*/
+    }
+
+    .public-DraftStyleDefault-rtl {
+      /*!rtl:begin:ignore*/
+      direction: rtl;
+      text-align: right;
+      /*!rtl:end:ignore*/
+    }
+
+    .public-DraftStyleDefault-listLTR {
+      /*!rtl:begin:ignore*/
+      direction: ltr;
+      /*!rtl:end:ignore*/
+    }
+
+    .public-DraftStyleDefault-listRTL {
+      /*!rtl:begin:ignore*/
+      direction: rtl;
+      /*!rtl:end:ignore*/
+    }
+
+    .public-DraftStyleDefault-ol,
+    .public-DraftStyleDefault-ul {
+      margin: 0;
+      padding: 0;
+
+      &>* {
+        margin-inline-start: 40px;
+      }
+    }
+  }
+}

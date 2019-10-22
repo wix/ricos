@@ -1,5 +1,5 @@
 export const externals = [
-  '@wix/draft-js',
+  'draft-js',
   'assert',
   'classnames',
   'draft-js',
@@ -15,13 +15,12 @@ export const excludedExternals = [
   /draft-js-plugins-editor/,
   /draft-js-.*?-plugin/,
   /react-click-outside/,
-  '@wix/draft-js/lib/DraftOffsetKey',
-  '@wix/draft-js/lib/isSoftNewlineEvent',
+  'draft-js/lib/DraftOffsetKey',
   /wix-rich-content-common\/.*?\.scss/,
 ];
 
 export const globals = {
-  '@wix/draft-js': 'Draft',
+  'draft-js': 'Draft',
   classnames: 'classNames',
   'draft-js': 'Draft',
   'draft-js-code': 'CodeUtils',
@@ -44,6 +43,12 @@ export const excludedGlobals = [
   'draft-js-plugins-editor',
   /draft-js-.*?-plugin/,
   'react-click-outside',
-  '@wix/draft-js/lib/DraftOffsetKey',
-  '@wix/draft-js/lib/isSoftNewlineEvent',
+  'draft-js/lib/DraftOffsetKey',
 ];
+
+export const isExternal = id =>
+  !id.startsWith('\0') &&
+  !id.startsWith('.') &&
+  !id.startsWith('/') &&
+  !excludedExternals.find(regex => (typeof regex === 'string' ? regex === id : regex.test(id))) &&
+  !!externals.find(externalName => new RegExp(externalName).test(id));

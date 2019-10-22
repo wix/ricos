@@ -1,0 +1,53 @@
+@mixin thumbnail_icon($rotation) {
+  transform: rotateZ($rotation + deg);
+}
+
+.thumbnailPlacementSelector_label {
+  display: block;
+  margin-bottom: 13px;
+}
+
+@supports (display: grid) {
+  .thumbnailPlacementSelector_grid {
+    grid-template-columns: 25% 25% 25% 25%;
+    grid-template-rows: 100%;
+  }
+}
+
+@supports not (display: grid) {
+  .thumbnailPlacementSelector_option {
+    display: inline-block;
+    width: 25%;
+  }
+}
+
+.thumbnailPlacementSelector_tile {
+  width: 46px;
+  height: 46px;
+  display: inline-block;
+}
+
+.thumbnailPlacementSelector_icon {
+  width: 46px;
+  height: 46px;
+}
+
+.thumbnailPlacementSelector_icon_selected {
+  color: #0261ff;
+}
+
+.thumbnailPlacementSelector_bottom {
+  transform: rotateZ(0);
+}
+
+.thumbnailPlacementSelector_left {
+  transform: rotateZ(90deg);
+}
+
+.thumbnailPlacementSelector_top {
+  transform: rotateZ(180deg);
+}
+
+.thumbnailPlacementSelector_right {
+  transform: rotateZ(270deg);
+}

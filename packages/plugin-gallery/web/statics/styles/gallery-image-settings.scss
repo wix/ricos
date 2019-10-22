@@ -1,0 +1,160 @@
+$TITLE_HEIGHT: 0px;
+$FOOTER_HEIGHT: 100px;
+$MOBILE_HEADER_HEIGHT: 50px;
+
+.galleryImageSettings {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  color: #333333;
+  background: #fff;
+  z-index: 7;
+}
+
+.galleryImageSettings_content {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+}
+
+%icon {
+  display: inline-block;
+  vertical-align: bottom;
+  margin-right: 8.5px;
+  width: 19px;
+  height: 19px;
+}
+
+.galleryImageSettings_backIcon {
+  @extend %icon;
+  cursor: pointer;
+  margin-right: 10px;
+  transform: rotateY(180deg);
+}
+
+.galleryImageSettings_title {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 43px 28px 22px;
+  top: 0;
+  margin: 0;
+  color: #333333;
+  background-color: #fff;
+  line-height: 30px;
+  font-size: 18px;
+  border-bottom: 1px solid #ededed;
+  z-index: 7;
+}
+
+.galleryImageSettings_image {
+  width: 100%;
+  height: 240px;
+  background-color: rgba(51, 51, 51, 0.1);
+}
+
+.galleryImageSettings_manageImageGrid {
+  height: 47px;
+  width: 100%;
+}
+
+%manage_button {
+  padding: 12px 15px;
+  margin: 0;
+  line-height: normal;
+  text-align: center;
+  display: inline-block;
+  box-sizing: border-box;
+  width: 50%;
+  font-size: 14px;
+  font-weight: 300;
+  font-family: Lato;
+  border-bottom: 1px #ededed solid;
+  cursor: pointer;
+}
+
+.galleryImageSettings_replace {
+  @extend %manage_button;
+}
+
+.galleryImageSettings_replace_icon {
+  @extend %icon;
+}
+
+.galleryImageSettings_delete {
+  @extend %manage_button;
+  border-left: 1px #ededed solid;
+  clear: both;
+}
+
+.galleryImageSettings_delete_icon {
+  @extend %icon;
+}
+
+.galleryImageSettings_nav {
+  width: 100%;
+  height: 240px;
+  position: absolute;
+  top: 96px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.galleryImageSettings_nav_mobile {
+  top: $MOBILE_HEADER_HEIGHT;
+}
+
+%nav {
+  display: block;
+  border: none;
+  background-size: 25px;
+  background-color: transparent;
+  background-position: bottom center;
+  background-repeat: no-repeat;
+  width: 27px;
+  height: 27px;
+  font-size: 24px;
+  font-style: normal;
+  text-align: center;
+  margin: 16px 18px;
+  cursor: pointer;
+}
+
+.galleryImageSettings_next {
+  @extend %nav;
+  right: 0;
+}
+
+.galleryImageSettings_previous {
+  @extend %nav;
+  left: 0;
+}
+
+.galleryImageSettings_hidden {
+  visibility: hidden;
+}
+
+.galleryImageSettings_section {
+  padding: 20px 30px 0 30px;
+  font-size: 14px;
+}
+
+.galleryImageSettings_scrollContainer {
+  height: calc(100% - #{$FOOTER_HEIGHT});
+  margin: $TITLE_HEIGHT auto $FOOTER_HEIGHT auto;
+  width: 100%;
+}
+
+.galleryImageSettings_scrollContainer_mobile {
+  margin: 0 auto;
+}
+
+.galleryImageSettings_footer {
+  z-index: 7;
+}

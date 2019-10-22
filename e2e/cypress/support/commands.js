@@ -1,13 +1,32 @@
 require('cypress-plugin-snapshots/commands');
 import { addMatchImageSnapshotCommand } from 'cypress-image-snapshot/command';
 addMatchImageSnapshotCommand();
-import { INLINE_TOOLBAR_BUTTONS } from '../dataHooks';
+import {
+  INLINE_TOOLBAR_BUTTONS,
+  PLUGIN_TOOLBAR_BUTTONS,
+  IMAGE_SETTINGS,
+  GALLERY_SETTINGS,
+  VIDEO_PLUGIN,
+  HTML_PLUGIN,
+  PLUGIN_COMPONENT,
+  STATIC_TOOLBAR_BUTTONS,
+  SETTINGS_PANEL,
+} from '../dataHooks';
 
 const resizeForDesktop = () => cy.viewport('macbook-15');
-const resizeForMobile = () => cy.viewport('iphone-5');
+const resizeForMobile = () => cy.viewport('iphone-6');
+
+const buildQuery = params => {
+  const parameters = Object.keys(params).filter(param => params[param]);
+  if (parameters.length === 0) return '';
+  return '?' + parameters.join('&');
+};
 
 const getUrl = (componentId, fixtureName = '') =>
-  `/${componentId}/${fixtureName}${isMobile ? '?mobile' : ''}`;
+  `/${componentId}${fixtureName ? '/' + fixtureName : ''}${buildQuery({
+    mobile: isMobile,
+    hebrew: isHebrew,
+  })}`;
 
 // Viewport size commands
 
@@ -16,6 +35,7 @@ const run = (app, fixtureName) => {
 };
 
 let isMobile = false;
+let isHebrew = false;
 
 Cypress.Commands.add('switchToMobile', () => {
   isMobile = true;
@@ -27,8 +47,16 @@ Cypress.Commands.add('switchToDesktop', () => {
   resizeForDesktop();
 });
 
+Cypress.Commands.add('switchToHebrew', () => {
+  isHebrew = true;
+});
+
+Cypress.Commands.add('switchToEnglish', () => {
+  isHebrew = false;
+});
+
 Cypress.Commands.add('loadEditorAndViewer', fixtureName => {
-  run('combined', fixtureName);
+  run('rce', fixtureName);
 });
 
 Cypress.Commands.add('loadEditor', fixtureName => {
@@ -41,8 +69,8 @@ Cypress.Commands.add('matchContentSnapshot', () => {
     .toMatchSnapshot();
 });
 
-Cypress.Commands.add('matchSnapshots', () => {
-  cy.matchImageSnapshot().matchContentSnapshot();
+Cypress.Commands.add('matchSnapshots', options => {
+  cy.matchImageSnapshot(options).matchContentSnapshot();
 });
 
 // Editor commands
@@ -61,7 +89,10 @@ Cypress.Commands.add('newLine', () => {
 });
 
 Cypress.Commands.add('blurEditor', () => {
-  getEditor().blur();
+  getEditor()
+    .blur()
+    .get('[data-hook=inlineToolbar]')
+    .should('not.visible');
 });
 
 Cypress.Commands.add('focusEditor', () => {
@@ -144,7 +175,19 @@ Cypress.Commands.add('setTextStyle', (buttonSelector, selection) => {
   if (selection) {
     cy.setSelection(selection[0], selection[1]);
   }
-  cy.get(`[data-hook=${buttonSelector}]`).click();
+  cy.get(`[data-hook=inlineToolbar] [data-hook=${buttonSelector}]`).click();
+});
+
+Cypress.Commands.add('setLink', (selection, link) => {
+  cy.setTextStyle(INLINE_TOOLBAR_BUTTONS.LINK, selection)
+    .get(`[data-hook=linkPanelContainer] [data-hook=linkPanelInput]`)
+    .type(link)
+    .get(`[data-hook=linkPanelContainerDone]`)
+    .click();
+});
+
+Cypress.Commands.add('setAlignment', alignment => {
+  cy.setTextStyle(INLINE_TOOLBAR_BUTTONS.ALIGNMENT).setTextStyle(alignment);
 });
 
 function setInlineToolbarMenueItem(item, selection, butttonIndex) {
@@ -155,12 +198,192 @@ function setInlineToolbarMenueItem(item, selection, butttonIndex) {
     .click();
 }
 
-Cypress.Commands.add('setColor', (butttonIndex = 3, selection) => {
-  setInlineToolbarMenueItem(INLINE_TOOLBAR_BUTTONS.COLOR, selection, butttonIndex);
+Cypress.Commands.add('setColor', (buttonIndex = 3, selection) => {
+  setInlineToolbarMenueItem(INLINE_TOOLBAR_BUTTONS.COLOR, selection, buttonIndex);
 });
 
-Cypress.Commands.add('setLineSpacing', (butttonIndex = 3, selection) => {
-  setInlineToolbarMenueItem(INLINE_TOOLBAR_BUTTONS.LINE_SPACING, selection, butttonIndex);
+Cypress.Commands.add('setLineSpacing', (buttonIndex = 3, selection) => {
+  setInlineToolbarMenueItem(INLINE_TOOLBAR_BUTTONS.LINE_SPACING, selection, buttonIndex);
+});
+
+Cypress.Commands.add('openSideToolbar', () => {
+  cy.get('[aria-label="Plugin Toolbar"]').click();
+  cy.get('#side_bar');
+});
+
+Cypress.Commands.add('openAddPluginModal', () => {
+  cy.get('[data-hook="addPluginFloatingToolbar"]').click();
+  cy.get('[aria-label="Add Plugin"]');
+});
+
+Cypress.Commands.add('openImageSettings', () => {
+  cy.get(`[data-hook=${PLUGIN_COMPONENT.IMAGE}]:first`)
+    .parent()
+    .click();
+  cy.get(`[data-hook=${PLUGIN_TOOLBAR_BUTTONS.SETTINGS}][tabindex=0]`).click();
+  cy.get('[data-hook="imageSettings"]');
+});
+
+Cypress.Commands.add('openMapSettings', () => {
+  cy.get(`[data-hook=${PLUGIN_COMPONENT.MAP}]:first`)
+    .parent()
+    .click();
+  cy.get(`[data-hook=${PLUGIN_TOOLBAR_BUTTONS.SETTINGS}][tabindex=0]`).click();
+  cy.get('[data-hook="mapSettings"]');
+});
+
+Cypress.Commands.add('openGalleryAdvancedSettings', () => {
+  cy.get(`[data-hook=${PLUGIN_COMPONENT.GALLERY}]:first`)
+    .parent()
+    .click();
+  cy.get(`[data-hook=${PLUGIN_TOOLBAR_BUTTONS.ADV_SETTINGS}]:first`).click();
+});
+
+Cypress.Commands.add('shrinkPlugin', () => {
+  cy.get(`button[data-hook=${PLUGIN_TOOLBAR_BUTTONS.SMALL_CENTER}][tabindex=0]`)
+    .click({ multiple: true })
+    .click();
+});
+
+Cypress.Commands.add('openGallerySettings', () => {
+  cy.get('[data-hook="manage_media_Tab"]').click();
+});
+
+Cypress.Commands.add('openGalleryImageSettings', () => {
+  cy.get(`[data-hook=${GALLERY_SETTINGS.IMAGE}]:first`).click();
+  cy.get(`[data-hook=${GALLERY_SETTINGS.EDIT_IMAGE}]`).click();
+});
+
+Cypress.Commands.add('addImageTitle', () => {
+  cy.get(`[data-hook=${IMAGE_SETTINGS.CAPTION}]`)
+    .click()
+    .type('Title')
+    .get(`[data-hook=${SETTINGS_PANEL.DONE}]`)
+    .click();
+});
+
+Cypress.Commands.add('deleteImageTitle', () => {
+  cy.get(`[data-hook=${IMAGE_SETTINGS.CAPTION}]`)
+    .click()
+    .clear()
+    .get(`[data-hook=${SETTINGS_PANEL.DONE}]`)
+    .click();
+});
+
+Cypress.Commands.add('addGalleryImageTitle', (pluginToClick = null) => {
+  cy.get(`[data-hook=${GALLERY_SETTINGS.TITLE}]`).type('Title');
+  cy.get(`[data-hook=${SETTINGS_PANEL.DONE}]:first`).click({ multiple: true });
+  cy.get(`[data-hook=${SETTINGS_PANEL.DONE}]`).click();
+  pluginToClick &&
+    cy
+      .get(`[data-hook=${pluginToClick}]:first`)
+      .parent()
+      .click();
+});
+
+Cypress.Commands.add('checkTitle', () => {
+  cy.get('[data-hook=galleryViewer]:first')
+    .parent()
+    .click();
+  cy.get(`[data-hook=${GALLERY_SETTINGS.VIEWER_IMAGE}]:first`);
+});
+
+Cypress.Commands.add('addImageLink', () => {
+  cy.get(`[data-hook=${IMAGE_SETTINGS.LINK}]`)
+    .click()
+    .type('www.wix.com')
+    .get(`[data-hook=${SETTINGS_PANEL.DONE}]`)
+    .click();
+  // .get('href=www.wix.com');
+});
+
+Cypress.Commands.add('alignImage', alignment => {
+  let button;
+  switch (alignment) {
+    case 'left':
+      button = PLUGIN_TOOLBAR_BUTTONS.ALIGN_LEFT;
+      break;
+    case 'center':
+      button = PLUGIN_TOOLBAR_BUTTONS.ALIGN_CENTER;
+      break;
+    case 'right':
+    default:
+      button = PLUGIN_TOOLBAR_BUTTONS.ALIGN_RIGHT;
+  }
+  cy.get('[data-hook=imageViewer]:first')
+    .parent()
+    .click();
+  cy.get(`[data-hook=${button}]:first`).click();
+});
+
+Cypress.Commands.add('openPluginToolbar', plugin => {
+  cy.get(`[data-hook*=${plugin}]`)
+    .first()
+    .parent()
+    .click();
+  cy.get('[data-hook*="PluginToolbar"]:first');
+});
+
+Cypress.Commands.add('openDropdownMenu', (selector = '') => {
+  cy.get('button[role=combobox][data-hook=baseToolbarButton_type]').click();
+  if (selector) {
+    cy.get(selector).click();
+  }
+});
+
+Cypress.Commands.add('openVideoUploadModal', () => {
+  cy.get(`[data-hook*=${STATIC_TOOLBAR_BUTTONS.VIDEO}][tabindex!=-1]`).click();
+});
+
+Cypress.Commands.add('openSoundCloudModal', () => {
+  cy.get(`[data-hook*=${STATIC_TOOLBAR_BUTTONS.SOUND_CLOUD}][tabindex!=-1]`).click();
+});
+
+Cypress.Commands.add('addSoundCloud', () => {
+  cy.get(`[data-hook*=${'soundCloudUploadModalInput'}]`).type(
+    'https://soundcloud.com/nlechoppa/camelot'
+  );
+  cy.get(`[data-hook*=${SETTINGS_PANEL.DONE}]`).click();
+  cy.get(`[data-hook=${PLUGIN_COMPONENT.SOUND_CLOUD}]:first`)
+    .parent()
+    .click();
+});
+
+Cypress.Commands.add('addVideoFromURI', () => {
+  cy.get(`[data-hook*=${VIDEO_PLUGIN.INPUT}]`).type('https://youtu.be/BBu5codsO6Y');
+  cy.get(`[data-hook*=${VIDEO_PLUGIN.ADD}]`).click();
+  cy.get(`[data-hook=${PLUGIN_COMPONENT.VIDEO}]:first`)
+    .parent()
+    .click();
+});
+
+Cypress.Commands.add('addHtml', () => {
+  cy.get(`[data-hook*=${HTML_PLUGIN.STATIC_TOOLBAR_BUTTON}][tabindex!=-1]`).click();
+  cy.get(`[data-hook*=${PLUGIN_TOOLBAR_BUTTONS.EDIT}]`).click();
+  cy.get(`[data-hook*=${HTML_PLUGIN.INPUT}]`).type(
+    '<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">The updates, insights and stories of the engineering challenges we encounter, and our way of solving them. Subscribe to our fresh, monthly newsletter and get these goodies right to your e-mail:<a href="https://t.co/0ziRSJJAxK">https://t.co/0ziRSJJAxK</a> <a href="https://t.co/nTHlsG5z2a">pic.twitter.com/nTHlsG5z2a</a></p>&mdash; Wix Engineering (@WixEng) <a href="https://twitter.com/WixEng/status/1076810144774868992?ref_src=twsrc%5Etfw">December 23, 2018</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>',
+    { delay: 0 }
+  );
+  cy.get(`[data-hook*=${HTML_PLUGIN.UPDATE}]`).click();
+});
+
+Cypress.Commands.add('addCustomVideo', () => {
+  cy.get(`[data-hook*=${VIDEO_PLUGIN.CUSTOM}]`).click();
+  cy.get(`[data-hook=${PLUGIN_COMPONENT.VIDEO}]:first`)
+    .parent()
+    .click();
+});
+
+Cypress.Commands.add('dragAndDrop', (src, dest, elem = 0) => {
+  cy.get(dest)
+    .eq(elem)
+    .then(target => {
+      const dest = target[0].getBoundingClientRect();
+      cy.get(src)
+        .trigger('mousedown', { which: 1 })
+        .trigger('mousemove', { which: 1, pageX: dest.x + 50, pageY: dest.y + 20 })
+        .trigger('mouseup', { force: true });
+    });
 });
 
 // disable screenshots in debug mode. So there is no diffrence to ci.

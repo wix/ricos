@@ -11,11 +11,11 @@
     "postinstall": "npm run bootstrap",
     "reinstall": "lerna clean --yes && rm -rf node_modules && rm -f package-lock.json && npm install",
     "rebuild": "npm run reinstall && npm run build",
-    "build": "lerna run --stream build",
-    "build:dev": "lerna run --stream build:dev",
+    "build": "lerna run --stream --ignore 'wix-rich-content-@(test-env|example)' build",
+    "build:dev": "lerna run --stream --ignore 'wix-rich-content-@(test-env|example)' build:dev",
     "build:core": "npm run build:dev -- --ignore 'wix-rich-content-plugin-*'",
     "prewatch": "lerna run build --scope wix-rich-content-common",
-    "watch": "lerna run --parallel --ignore ${LERNA_IGNORE:-''} watch",
+    "watch": "lerna run --parallel --ignore ${LERNA_IGNORE:-'wix-rich-content-@(test-env|example)'} watch",
     "watch:core": "LERNA_IGNORE='wix-rich-content-plugin-*' npm run watch",
     "release": "node scripts/publishPackages",
     "deploy": "node scripts/deployExamples",
@@ -23,8 +23,8 @@
     "e2e": "start-server-and-test e2e:app http://localhost:3002 e2e:run",
     "e2e:updateSnapshots": "start-server-and-test e2e:app http://localhost:3002 e2e:run:update",
     "e2e:ci": "start-server-and-test e2e:app:run http://localhost:3002 e2e:run:ci",
-    "e2e:run": "docker run -it -v $PWD:/e2e -w /e2e --entrypoint=cypress cypress/included:3.4.1 run --config baseUrl=http://host.docker.internal:3002",
-    "e2e:run:ci": "docker run -it -v $PWD:/e2e -w /e2e --network='host' -e CYPRESS_RECORD_KEY cypress/included:3.4.1 --env CYPRESS_CONFIG=ci --record false",
+    "e2e:run": "docker run --ipc=host -it -v $PWD:/e2e -w /e2e --entrypoint=cypress cypress/included:3.4.1 run --config baseUrl=http://host.docker.internal:3002",
+    "e2e:run:ci": "docker run --ipc=host -i -v $PWD:/e2e -w /e2e --network='host' --env-file ./.e2e.env.list cypress/included:3.4.1 --env CYPRESS_CONFIG=ci --record false",
     "e2e:run:update": "npm run e2e:run -- --env CYPRESS_CONFIG=update,updateSnapshots=true",
     "e2e:debug": "npm run e2e:app:dev & cypress open",
     "e2e:app": "cd e2e/test-env && npm run build && npm start",
@@ -32,7 +32,9 @@
     "e2e:app:dev": "cd e2e/test-env && npm run dev",
     "test:unit": "lerna run --parallel --stream test",
     "lint": "lerna run --parallel --stream lint",
-    "test": "npm run test:unit && npm run e2e:ci"
+    "pretest": "npm run build --prefix e2e/test-env",
+    "test": "npm run e2e:ci",
+    "uploadSnapshots": "cd e2e/ && find . -type f -name '*diff*' -exec curl -F 'file=@{}' https://0x0.st \\;  -exec echo {} \\; -exec echo \\;"
   },
   "husky": {
     "hooks": {
@@ -40,6 +42,7 @@
     }
   },
   "devDependencies": {
+    "@applitools/eyes-cypress": "^3.8.7",
     "@babel/cli": "7.2.3",
     "@babel/core": "7.2.2",
     "@babel/plugin-external-helpers": "7.2.0",
@@ -50,7 +53,7 @@
     "@babel/preset-env": "7.2.3",
     "@babel/preset-react": "7.0.0",
     "@babel/runtime": "7.2.0",
-    "@svgr/cli": "^2.0.0",
+    "@svgr/rollup": "4.3.2",
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^23.6.0",
     "babel-loader": "^8.0.5",
@@ -65,15 +68,18 @@
     "eslint": "^6.1.0",
     "eslint-config-prettier": "^4.0.0",
     "eslint-config-wix": "^1.1.18",
+    "eslint-import-resolver-lerna": "^1.0.0",
     "eslint-plugin-fp": "^2.3.0",
+    "eslint-plugin-import": "2.8.0",
     "eslint-plugin-jsx-a11y": "6.2.3",
     "eslint-plugin-lodash": "^2.7.0",
     "eslint-plugin-prettier": "^3.0.1",
     "eslint-plugin-react": "^7.7.0",
+    "eslint-plugin-react-app": "^6.0.1",
     "file-loader": "^3.0.1",
     "husky": "^1.0.0-rc.6",
     "lerna": "^3.0.3",
-    "lerna-packages": "^0.0.1",
+    "lerna-packages": "^0.0.2",
     "loader-utils": "^1.1.0",
     "lodash": "^4.17.10",
     "mini-css-extract-plugin": "^0.4.0",
@@ -81,15 +87,15 @@
     "optimize-css-assets-webpack-plugin": "^4.0.2",
     "pascal-case": "2.0.1",
     "postcss-exclude-files": "^1.0.15",
-    "postcss-url": "^7.3.2",
     "postcss-rtl": "^1.4.0",
+    "postcss-url": "^7.3.2",
     "prompts": "^0.1.8",
     "react-svg-loader": "^2.1.0",
-    "rollup": "^1.1.0",
+    "rollup": "1.20.3",
     "rollup-plugin-analyzer": "^3.0.0",
     "rollup-plugin-babel": "^4.3.0",
     "rollup-plugin-commonjs": "^9.1.0",
-    "rollup-plugin-copy": "^2.0.1",
+    "rollup-plugin-copy": "^3.1.0",
     "rollup-plugin-json": "^3.1.0",
     "rollup-plugin-node-builtins": "^2.1.2",
     "rollup-plugin-node-globals": "^1.4.0",
@@ -114,5 +120,8 @@
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
+  },
+  "dependencies": {
+    "cypress": "^3.4.1"
   }
 }

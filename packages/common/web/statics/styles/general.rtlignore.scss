@@ -1,0 +1,38 @@
+@import './consts';
+@import './mixins';
+
+.alignLeft {
+  /* rtl:ignore */
+  float: left;
+  z-index: 1;
+
+  &:not(.textWrapNowrap) {
+    /* rtl:begin:ignore */
+    margin-right: $innerSpacing;
+    margin-left: 0;
+    /* rtl:end:ignore */
+
+    @include phone {
+      /* rtl:ignore */
+      margin-right: 0;
+    }
+  }
+}
+
+.alignRight {
+  /* rtl:ignore */
+  float: right;
+  z-index: 1;
+
+  &:not(.textWrapNowrap) {
+    /* rtl:begin:ignore */
+    margin-left: $innerSpacing;
+    margin-right: 0;
+    /* rtl:end:ignore */
+
+    @include phone {
+      /* rtl:ignore */
+      margin-left: 0;
+    }
+  }
+}

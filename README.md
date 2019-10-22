@@ -2,7 +2,7 @@
 
 [![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lernajs.io/) [![Build Status](https://travis-ci.org/wix-incubator/rich-content.svg?branch=master)](https://travis-ci.org/wix-incubator/rich-content)
 
-## A super charged rich text editor with an extensible plugin system
+## A React based, super charged rich text editor with an extensible plugin system
 
 ![Demo](https://media.giphy.com/media/2rAwp4zLCrtGn2Tlbq/giphy.gif)
 
@@ -260,8 +260,7 @@ The compiled package also contains a CommonJS bundle, which you can consume if y
    1. `npm run build` - build once and bundles
    2. `npm run watch` - rebuild on changes
 4. Choose an [example](./examples/) and run:
-   1. `yarn` (We use yarn to install since it works better than npm with `file://` dependencies)
-   2. `npm start`
+   1. `npm start`
 
 #### Examples
 
