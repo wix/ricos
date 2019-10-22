@@ -25,13 +25,16 @@
   - [#411](https://github.com/wix-incubator/rich-content/pull/411) base toolbar height calculated once
 - `editor`
   - [#392](https://github.com/wix-incubator/rich-content/pull/392) text inline toolbar tooltips
+  - [#421](https://github.com/wix-incubator/rich-content/pull/421) resize-decorator is not activated on mobile
   - [#400](https://github.com/wix-incubator/rich-content/pull/400) inline and mobile toolbar RTL support
   - [#407](https://github.com/wix-incubator/rich-content/pull/407) list indentation
+  - [#427](https://github.com/wix-incubator/rich-content/pull/427) focus
 - `divider`
   - [#406](https://github.com/wix-incubator/rich-content/pull/406) divider center alignment
 - `image`
   - [75336e34](https://github.com/wix-incubator/rich-content/commit/75336e34) open imageStudio on crop tab
   - [#413](https://github.com/wix-incubator/rich-content/pull/413) new image doesn't replace existing image
+  - [#423](https://github.com/wix-incubator/rich-content/pull/423) images are rendered in high resolution for seo
 - `gallery`
   - [#404](https://github.com/wix-incubator/rich-content/pull/404) delete last remaining image in image settings returns to gallery settings
   - [#403](https://github.com/wix-incubator/rich-content/pull/403) re-render gallery on change only
