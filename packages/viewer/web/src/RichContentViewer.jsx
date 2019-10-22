@@ -100,7 +100,7 @@ RichContentViewer.propTypes = {
   isMobile: PropTypes.bool,
   helpers: PropTypes.object,
   platform: PropTypes.string,
-  locale: PropTypes.string,
+  locale: PropTypes.string.isRequired,
   typeMappers: PropTypes.arrayOf(PropTypes.func),
   inlineStyleMappers: PropTypes.arrayOf(PropTypes.func),
   decorators: PropTypes.arrayOf(
