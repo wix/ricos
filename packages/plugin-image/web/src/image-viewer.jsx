@@ -57,7 +57,7 @@ class ImageViewer extends React.Component {
       let requiredWidth, requiredHeight;
       imageUrl.preload = getImageSrc(src, helpers);
       if (isSeo) {
-        requiredWidth = src && src.width <= SEO_IMAGE_WIDTH ? src.width : SEO_IMAGE_WIDTH;
+        requiredWidth = src && src.width && Math.min(src.width, SEO_IMAGE_WIDTH);
         requiredHeight = this.calculateHeight(SEO_IMAGE_WIDTH, src);
       } else if (this.state.container) {
         const { width } = this.state.container.getBoundingClientRect();
