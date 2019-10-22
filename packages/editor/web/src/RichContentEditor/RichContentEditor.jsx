@@ -62,7 +62,7 @@ class RichContentEditor extends Component {
       helpers,
       config,
       isMobile,
-      isSeo,
+      shouldRenderOptimizedImages,
     } = this.props;
     this.contextualData = {
       theme,
@@ -76,7 +76,7 @@ class RichContentEditor extends Component {
       setEditorState: this.setEditorState,
       getEditorBounds: this.getEditorBounds,
       languageDir: getLangDir(locale),
-      isSeo,
+      shouldRenderOptimizedImages,
     };
   };
 
@@ -451,7 +451,7 @@ RichContentEditor.propTypes = {
   handleReturn: PropTypes.func,
   customStyleFn: PropTypes.func,
   locale: PropTypes.string.isRequired,
-  isSeo: PropTypes.bool,
+  shouldRenderOptimizedImages: PropTypes.bool,
 };
 
 RichContentEditor.defaultProps = {

@@ -40,7 +40,7 @@ class ImageViewer extends React.Component {
   }
 
   getImageUrl(src) {
-    const { helpers, isSeo } = this.context || {};
+    const { helpers, shouldRenderOptimizedImages } = this.context || {};
 
     if (!src && (helpers && helpers.handleFileSelection)) {
       return null;
@@ -56,7 +56,7 @@ class ImageViewer extends React.Component {
     } else {
       let requiredWidth, requiredHeight;
       imageUrl.preload = getImageSrc(src, helpers);
-      if (isSeo) {
+      if (shouldRenderOptimizedImages) {
         requiredWidth = src && src.width && Math.min(src.width, SEO_IMAGE_WIDTH);
         requiredHeight = this.calculateHeight(SEO_IMAGE_WIDTH, src);
       } else if (this.state.container) {

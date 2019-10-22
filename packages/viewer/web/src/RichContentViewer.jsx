@@ -41,7 +41,7 @@ export default class RichContentViewer extends Component {
       helpers,
       locale,
       disabled,
-      isSeo,
+      shouldRenderOptimizedImages,
     } = this.props;
     return {
       theme,
@@ -52,7 +52,7 @@ export default class RichContentViewer extends Component {
       helpers,
       locale,
       disabled,
-      isSeo,
+      shouldRenderOptimizedImages,
     };
   };
 
@@ -122,7 +122,7 @@ RichContentViewer.propTypes = {
   config: PropTypes.object,
   textDirection: PropTypes.oneOf(['rtl', 'ltr']),
   disabled: PropTypes.bool,
-  isSeo: PropTypes.bool,
+  shouldRenderOptimizedImages: PropTypes.bool,
 };
 
 RichContentViewer.defaultProps = {
