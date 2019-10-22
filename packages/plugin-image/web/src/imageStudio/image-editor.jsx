@@ -29,7 +29,11 @@ class ImageEditor extends Component {
     };
 
     this.id = 'imageEditor';
-    setupImageEditor(imageEditorWixSettings, this.id, src.file_name, onSave, onClose);
+    if (src) {
+      setupImageEditor(imageEditorWixSettings, this.id, src.file_name, onSave, onClose);
+    } else {
+      onClose();
+    }
   }
 
   render() {

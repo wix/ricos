@@ -5,7 +5,7 @@ import {
   mergeStyles,
   getImageSrc,
   Image,
-  Loader,
+  // Loader,
   InputWithLabel,
   LinkPanel,
   SettingsPanelFooter,
@@ -55,7 +55,10 @@ class ImageSettings extends Component {
     this.props.pubsub.unsubscribe('componentData', this.onComponentUpdate);
   }
 
-  onComponentUpdate = () => this.forceUpdate();
+  onComponentUpdate = () => {
+    this.setState({ src: this.props.pubsub.get('componentData').src });
+    this.forceUpdate(); //figure out what it does
+  };
 
   revertComponentData() {
     const { componentData, helpers, pubsub } = this.props;
@@ -122,9 +125,9 @@ class ImageSettings extends Component {
     const showRelValueCheckbox =
       nofollowRelToggleVisibilityFn && nofollowRelToggleVisibilityFn(relValue);
 
-    if (!src) {
-      return <Loader type={'medium'} />; //do not render until the src is passed
-    }
+    // if (!src) {
+    //   return <Loader type={'medium'} />; //do not render until the src is passed
+    // }
 
     return (
       <div className={this.styles.imageSettings} data-hook="imageSettings" dir={languageDir}>

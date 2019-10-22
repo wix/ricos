@@ -44,7 +44,7 @@ export default class Editor extends PureComponent {
         setTimeout(() => {
           updateEntity({ data, files });
           console.log('consumer uploaded', data);
-        }, 500);
+        }, 5000);
       }
     };
     this.helpers = {
