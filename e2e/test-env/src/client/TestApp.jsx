@@ -19,8 +19,8 @@ class TestApp extends PureComponent {
   };
 
   renderViewer = () => {
-    const { isMobile, viewerState } = this.props;
-    return <Viewer initialState={viewerState} isMobile={isMobile} />;
+    const { isMobile, viewerState, locale } = this.props;
+    return <Viewer initialState={viewerState} isMobile={isMobile} locale={locale} />;
   };
 
   render() {
