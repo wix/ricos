@@ -10,6 +10,7 @@ import {
 import { convertToReact } from './utils/convertContentState';
 import viewerStyles from '../statics/rich-content-viewer.scss';
 import viewerAlignmentStyles from '../statics/rich-content-viewer-alignment.rtlignore.scss';
+import rtlStyle from '../statics/rich-content-viewer-rtl.rtlignore.scss';
 import { getLangDir } from 'rtl-detect';
 
 export default class RichContentViewer extends Component {
@@ -19,7 +20,7 @@ export default class RichContentViewer extends Component {
       raw: RichContentViewer.getInitialState(props.initialState),
       contextualData: this.initContext(),
     };
-    const styles = { ...viewerStyles, ...viewerAlignmentStyles };
+    const styles = { ...viewerStyles, ...viewerAlignmentStyles, ...rtlStyle };
     this.styles = mergeStyles({ styles, theme: props.theme });
   }
 
