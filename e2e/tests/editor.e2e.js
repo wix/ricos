@@ -17,6 +17,9 @@ describe('editor', () => {
   after(() => cy.eyesClose());
 
   it('allow to enter text', function() {
+    cy.log(Cypress.env('APPLITOOLS_BATCH_ID'));
+    console.log(Cypress.env('APPLITOOLS_BATCH_ID'));
+    cy.exec(`echo ${Cypress.env('APPLITOOLS_BATCH_ID')}`);
     cy.loadEditor()
       .enterParagraphs([
         'Leverage agile frameworks',
