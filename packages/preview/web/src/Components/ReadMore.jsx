@@ -1,8 +1,9 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import { Context, mergeStyles } from 'wix-rich-content-common';
 import LinesEllipsis from 'react-lines-ellipsis';
 import { getChildrenText } from '../utils';
-import defaultStyles from '../../statics/styles/read-more.scss';
+import styles from '../../statics/styles/read-more.scss';
 
 class ReadMore extends PureComponent {
   static propTypes = {
@@ -10,7 +11,6 @@ class ReadMore extends PureComponent {
     label: PropTypes.string,
     lines: PropTypes.number,
     children: PropTypes.node.isRequired,
-    styles: PropTypes.object.isRequired,
     onPreviewExpand: PropTypes.func.isRequired,
     onClick: PropTypes.func,
   };
@@ -31,14 +31,15 @@ class ReadMore extends PureComponent {
 
   /* eslint-disable */
   render() {
-    const { lines, label, ellipsis, children, styles } = this.props;
+    this.styles = this.styles || mergeStyles({ styles, theme: this.context.theme });
+    const { lines, label, ellipsis, children } = this.props;
     const text = getChildrenText(children);
     return (
       <div>
-        <div className={defaultStyles.readMore_wrapper} onClick={this.onClick}/>
+        <div className={this.styles.readMore_wrapper} onClick={this.onClick}/>
        <LinesEllipsis
           text={text}
-          className={styles.readMore}
+          className={this.styles.readMore}
           maxLine={lines}
           ellipsis={`${ellipsis} ${label}`}
         />
@@ -47,5 +48,7 @@ class ReadMore extends PureComponent {
   }
   /* eslint-enable */
 }
+
+ReadMore.contextType = Context.type;
 
 export default ReadMore;

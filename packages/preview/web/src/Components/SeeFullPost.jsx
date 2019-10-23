@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import { Context, mergeStyles } from 'wix-rich-content-common';
 import styles from '../../statics/styles/see-full-post.scss';
 
 class SeeFullPost extends PureComponent {
@@ -25,13 +26,14 @@ class SeeFullPost extends PureComponent {
   };
 
   render() {
+    this.styles = this.styles || mergeStyles({ styles, theme: this.context.theme });
     const { label, children, overlayStyles, labelStyles } = this.props;
     /* eslint-disable */
     return (
       <div>
         {children}
-        <div className={styles.seeFullPost_overlay} style={overlayStyles} onClick={this.onClick}>
-          <span className={styles.seeFullPost_label} style={labelStyles}>
+        <div className={this.styles.seeFullPost_overlay} style={overlayStyles} onClick={this.onClick}>
+          <span className={this.styles.seeFullPost_label} style={labelStyles}>
             {label}
           </span>
         </div>
@@ -39,5 +41,7 @@ class SeeFullPost extends PureComponent {
     );
   }
 }
+
+SeeFullPost.contextType = Context.type;
 
 export default SeeFullPost;

@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import { Context, mergeStyles } from 'wix-rich-content-common';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import styles from '../../statics/styles/image-counter.scss';
@@ -9,7 +10,6 @@ class ImageCounter extends PureComponent {
     children: PropTypes.node.isRequired,
     counter: PropTypes.number.isRequired,
     onPreviewExpand: PropTypes.func.isRequired,
-    style: PropTypes.object,
     onClick: PropTypes.func,
     imageSelector: PropTypes.func,
   };
@@ -38,26 +38,22 @@ class ImageCounter extends PureComponent {
       left: rect.left - parentRect.left,
     };
     return (
-      <div className={styles.imageCounter_container} style={style}>
-        <span className={styles.imageCounter_label}>{formatLabel(counter)}</span>
+      <div className={this.styles.imageCounter_container} style={style}>
+        <span className={this.styles.imageCounter_label}>{formatLabel(counter)}</span>
       </div>
     );
   };
 
   decorateImages() {
-    if (this.wrapper) {
-      setTimeout(() => {
+    setTimeout(() => {
+      if (this.wrapper) {
         const images = this.wrapper.querySelectorAll('[role=img]');
         const imagesToDecorate = this.props.imageSelector(images);
         const decorations = imagesToDecorate.map(img => this.renderDecoration(img));
         ReactDOM.render(decorations, this.container);
-      }, 500);
-    }
+      }
+    }, 500);
   }
-
-  // componentDidUpdate() {
-  //   this.decorateImages();
-  // }
 
   componentDidMount() {
     this.decorateImages();
@@ -68,15 +64,18 @@ class ImageCounter extends PureComponent {
   handleContainer = el => (this.container = el);
 
   render() {
+    this.styles = this.styles || mergeStyles({ styles, theme: this.context.theme });
     /* eslint-disable */
     return (
       <div ref={this.handleWrapper} onClick={this.onClick}>
-        <div ref={this.handleContainer} className={styles.imageCounter_overlay} />
+        <div ref={this.handleContainer} className={this.styles.imageCounter_overlay} />
         {this.props.children}
       </div>
     );
     /* eslint-enable */
   }
 }
+
+ImageCounter.contextType = Context.type;
 
 export default ImageCounter;
