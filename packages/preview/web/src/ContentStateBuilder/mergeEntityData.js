@@ -90,6 +90,7 @@ const mergers = {
   LINK: defaultMerger,
   'wix-draft-plugin-headers-markdown': defaultMerger,
   'wix-draft-plugin-button': defaultMerger,
+  'wix-draft-plugin-html': defaultMerger,
 };
 
 export default (mediaInfo, entity) => mergers[entity.type](mediaInfo, entity);

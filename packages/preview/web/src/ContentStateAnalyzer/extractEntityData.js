@@ -102,6 +102,7 @@ const converters = {
   'wix-draft-plugin-headers-markdown': defaultEntityConverter,
   'wix-draft-plugin-button': defaultEntityConverter,
   LINK: defaultEntityConverter,
+  'wix-draft-plugin-html': defaultEntityConverter,
 };
 
 const extractEntityData = entity => converters[entity.type](entity);
