@@ -23,6 +23,7 @@
 ### :bug: Bug Fix
 - `common`
   - [#411](https://github.com/wix-incubator/rich-content/pull/411) base toolbar height calculated once
+  - [#432](https://github.com/wix-incubator/rich-content/pull/432) fixed divider sizer when aligned
 - `editor`
   - [#392](https://github.com/wix-incubator/rich-content/pull/392) text inline toolbar tooltips
   - [#421](https://github.com/wix-incubator/rich-content/pull/421) resize-decorator is not activated on mobile
