@@ -1,4 +1,5 @@
-describe('rtl', () => {
+// eslint-disable-next-line mocha/no-skipped-tests
+describe.skip('rtl', () => {
   beforeEach(() => cy.switchToHebrew());
 
   afterEach(() => cy.matchContentSnapshot());

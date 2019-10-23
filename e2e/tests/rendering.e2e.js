@@ -14,7 +14,8 @@ const testFixture = fixture =>
     cy.eyesCheckWindow(this.test.title);
   });
 
-describe('editor rendering', () => {
+// eslint-disable-next-line mocha/no-skipped-tests
+describe.skip('editor rendering', () => {
   context('desktop', () => {
     before(function() {
       cy.eyesOpen({
