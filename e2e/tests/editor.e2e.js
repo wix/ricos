@@ -11,7 +11,7 @@ describe('editor', () => {
 
   beforeEach(() => cy.switchToDesktop());
 
-  afterEach(() => cy.matchContentSnapshot());
+  // afterEach(() => cy.matchContentSnapshot());
 
   after(() => cy.eyesClose());
 
@@ -30,7 +30,7 @@ describe('editor', () => {
     cy.loadEditor('plain')
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.BOLD, [40, 10])
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.UNDERLINE, [10, 5])
-      // .setTextStyle(INLINE_TOOLBAR_BUTTONS.ITALIC, [20, 5])
+      .setTextStyle(INLINE_TOOLBAR_BUTTONS.ITALIC, [20, 5])
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.BOLD, [30, 5])
       .setLineSpacing(1, [10, 50])
       .setColor(4, [200, 208])
