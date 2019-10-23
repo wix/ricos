@@ -5,7 +5,7 @@ import {
   mergeStyles,
   getImageSrc,
   Image,
-  // Loader,
+  Loader,
   InputWithLabel,
   LinkPanel,
   SettingsPanelFooter,
@@ -163,7 +163,9 @@ class ImageSettings extends Component {
                 theme={theme}
               />
             ) : (
-              <div style={{ textAlign: 'center' }}>loading...</div> //suppose to be loader - need to check why it is not working
+              <div className={this.styles.imageSettingsImage}>
+                <Loader type={'medium'} />
+              </div>
             )}
           </SettingsSection>
           <SettingsSection
