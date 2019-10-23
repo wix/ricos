@@ -6,6 +6,7 @@ describe('editor', () => {
       appName: 'Rich Content - Editor',
       testName: this.test.parent.title,
       browser: [{ width: 1440, height: 900, name: 'chrome' }],
+      batchId: Cypress.env('APPLITOOLS_BATCH_ID'),
     });
   });
 
