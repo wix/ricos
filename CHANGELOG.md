@@ -29,6 +29,7 @@
   - [#400](https://github.com/wix-incubator/rich-content/pull/400) inline and mobile toolbar RTL support
   - [#407](https://github.com/wix-incubator/rich-content/pull/407) list indentation
   - [#427](https://github.com/wix-incubator/rich-content/pull/427) focus
+  - [#434](https://github.com/wix-incubator/rich-content/pull/434) text dropdown buttons tooltips display
 - `divider`
   - [#406](https://github.com/wix-incubator/rich-content/pull/406) divider center alignment
 - `image`
