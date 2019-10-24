@@ -86,7 +86,7 @@ export default class AddPluginFloatingToolbar extends Component {
   showPopup = () => {
     this.setState({
       style: {
-        left: this.getPopupOffset(),
+        ...this.getPopupOffset(),
         transform: 'translate(-50%) scale(1)',
         transition: 'transform 0.15s cubic-bezier(.3,1.2,.2,1)',
       },
@@ -108,7 +108,10 @@ export default class AddPluginFloatingToolbar extends Component {
   getPopupOffset = () => {
     if (!this.popupOffset) {
       if (this.popup) {
-        this.popupOffset = this.popup.offsetWidth / 2 + 30;
+        this.popupOffset = {
+          left: this.popup.offsetWidth / 2 + 30,
+          right: -this.popup.offsetWidth / 2 + 30,
+        };
       }
     }
     return this.popupOffset;
