@@ -1,4 +1,3 @@
-import dedent from 'dedent';
 import React, { PureComponent } from 'react';
 import ReactModal from 'react-modal';
 // import MonacoEditor from 'react-monaco-editor';
@@ -51,20 +50,6 @@ export default class Preview extends PureComponent {
           .seeFullPost({ label: 'SEE FULL STORY' })
     });
   }
-
-  formatCode = rules =>
-    rules.reduce((formatted, rule) => {
-      return formatted.concat(
-        dedent(`if: ${rule._if
-          .replace('function _if(metadata)', 'metadata => ')
-          .replace('{return ', '')
-          .slice(0, -1)}
-                   then: ${rule._then
-                     .replace('function _then(metadata,preview)', '(metadata, preview) => ')
-                     .replace('{return ', '')
-                     .slice(0, -1)}`).concat('\n\n')
-      );
-    }, '');
 
   closeModal = () => {
     this.setState({
