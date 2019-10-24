@@ -210,7 +210,7 @@ export const getDefaultToolbarSettings = ({ pluginButtons, textButtons, pluginTe
       shouldCreate: () => ({
         desktop: true,
         mobile: {
-          ios: true,
+          ios: false,
           android: false,
         },
       }),

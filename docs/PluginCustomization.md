@@ -59,6 +59,8 @@ The `toolbar` setting refers to plugin functionality toolbar. Currently, it expo
 | ---------------- | ------------------------------------------------------------------------------------------ | ------------- | ------------ | -------------------- |
 | `getMentions`    | function that retrieves a list of suggestions according to provided search query parameter | none          | Yes          | both                 |
 | `onMentionClick` | optional Mention click handler                                                             | none          | No           | both                 |
+| `getMentionLink` | given the mention return link for it                                                       | none          | Yes          | both                 |
+| `visibleItemsBeforeOverflow` | boolean how many items should be visible before overflowing                    | none          | No           | editor               |
 
 ### Giphy Plugin Settings
 

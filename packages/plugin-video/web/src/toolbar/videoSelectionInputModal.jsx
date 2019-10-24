@@ -100,6 +100,7 @@ export default class VideoSelectionInputModal extends Component {
         <div className={styles.video_modal_upload_video}>
           <div
             role="button"
+            data-hook="videoUploadModalCustomVideo"
             onClick={() =>
               handleFileSelection(
                 ({ data, error }) => this.handleCustomVideoUpload({ data, error }),
@@ -169,6 +170,7 @@ export default class VideoSelectionInputModal extends Component {
               }
               onClick={() => this.onConfirm()}
               ariaProps={!this.state.url && { disabled: 'disabled' }}
+              dataHook="videoUploadModalAddButton"
             >
               {t('VideoUploadModal_AddButtonText')}
             </Button>

@@ -3,7 +3,7 @@ import { createLineSpacingPlugin, LINE_SPACING_TYPE } from 'wix-rich-content-plu
 import { createHashtagPlugin, HASHTAG_TYPE } from 'wix-rich-content-plugin-hashtag';
 // import { createExternalEmojiPlugin, EXTERNAL_EMOJI_TYPE } from 'wix-rich-content-plugin-emoji';
 import { createImagePlugin, IMAGE_TYPE } from 'wix-rich-content-plugin-image';
-import { createGalleryPlugin } from 'wix-rich-content-plugin-gallery';
+import { createGalleryPlugin, GALLERY_TYPE } from 'wix-rich-content-plugin-gallery';
 import { createVideoPlugin, VIDEO_TYPE } from 'wix-rich-content-plugin-video';
 import { createHtmlPlugin, HTML_TYPE } from 'wix-rich-content-plugin-html';
 import { createDividerPlugin, DIVIDER_TYPE } from 'wix-rich-content-plugin-divider';
@@ -147,6 +147,9 @@ const uiSettings = {
 };
 
 export const config = {
+  [GALLERY_TYPE]: {
+    scrollingElement: typeof window !== 'undefined' && document.getElementsByClassName('editor-example')[0],
+  },
   [IMAGE_TYPE]: {
     imageEditorWixSettings: {
       initiator: 'some-initiator',
@@ -173,6 +176,7 @@ export const config = {
   },
   [EXTERNAL_MENTIONS_TYPE]: {
     repositionSuggestions: true,
+    visibleItemsBeforeOverflow: 5,
     onMentionClick: mention => console.log({ mention }),
     getMentions: searchQuery =>
       new Promise(resolve =>
@@ -185,6 +189,10 @@ export const config = {
               { name: 'Test One.2', slug: 'testone2' },
               { name: 'Test One.3', slug: 'testone3' },
               { name: 'Test One.4', slug: 'testone4' },
+              { name: 'Test One.5', slug: 'testone5' },
+              { name: 'Test One.6', slug: 'testone6' },
+              { name: 'Test One.7', slug: 'testone7' },
+              { name: 'Test One.8', slug: 'testone8' },
               {
                 name: 'Test Two',
                 slug: 'testwo',

@@ -1,0 +1,49 @@
+{
+  "name": "wix-rich-content-fullscreen",
+  "version": "5.1.1",
+  "author": {
+    "name": "Shaul Goral",
+    "email": "shaulg@wix.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wix-incubator/rich-content.git"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wix-incubator/rich-content/issues"
+  },
+  "homepage": "https://github.com/wix-incubator/rich-content/tree/master/packages/fullscreen",
+  "files": [
+    "dist"
+  ],
+  "main": "dist/module.cjs.js",
+  "module": "dist/module.js",
+  "style": "dist/styles.min.scss",
+  "scripts": {
+    "clean": "rm -rf dist/",
+    "prebuild": "npm run clean",
+    "build": "rollup --environment MODULE_NAME:fullscreen -c ../../../rollup.config.js",
+    "build:dev": "cross-env NODE_ENV=development npm run build",
+    "build:analyze": "npm run build -- --environment MODULE_ANALYZE && open stats.html",
+    "watch": "cross-env NODE_ENV=development MODULE_WATCH=1 npm run build -- --watch",
+    "lint": "eslint 'src/**/*.{js,jsx}'"
+  },
+  "peerDependencies": {
+    "@babel/runtime": "7.2.0",
+    "classnames": "^2.0.0",
+    "lodash": "^4.0.0",
+    "prop-types": "^15.0.0",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3"
+  },
+  "devDependencies": {},
+  "dependencies": {
+    "react-images": "1.0.0",
+    "wix-rich-content-common": "5.1.9"
+  },
+  "unpkg": true,
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  }
+}

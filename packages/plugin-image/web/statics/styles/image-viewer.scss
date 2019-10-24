@@ -5,6 +5,39 @@ $opacityTransition: opacity 0.8s ease;
   overflow: hidden;
 }
 
+.expandIcon {
+  height: 40px;
+  width: 40px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 10;
+  color: white;
+  background-image: radial-gradient(
+    circle,
+    rgba(0, 0, 0, 0.3),
+    rgba(0, 0, 0, 0.1),
+    rgba(0, 0, 0, 0.01),
+    transparent
+  );
+
+  path {
+    opacity: 0.8;
+  }
+  &:hover path {
+    opacity: 1;
+  }
+
+  display: none;
+  .imageContainer:hover & {
+    display: block;
+  }
+}
+
+.pointer {
+  cursor: pointer;
+}
+
 .imageWrapper {
   overflow: hidden; // &:before {
   //   content: " ";

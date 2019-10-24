@@ -10,6 +10,7 @@ import {
 import { convertToReact } from './utils/convertContentState';
 import viewerStyles from '../statics/rich-content-viewer.scss';
 import viewerAlignmentStyles from '../statics/rich-content-viewer-alignment.rtlignore.scss';
+import rtlStyle from '../statics/rich-content-viewer-rtl.rtlignore.scss';
 import { getLangDir } from 'rtl-detect';
 
 export default class RichContentViewer extends Component {
@@ -19,7 +20,7 @@ export default class RichContentViewer extends Component {
       raw: RichContentViewer.getInitialState(props.initialState),
       contextualData: this.initContext(),
     };
-    const styles = { ...viewerStyles, ...viewerAlignmentStyles };
+    const styles = { ...viewerStyles, ...viewerAlignmentStyles, ...rtlStyle };
     this.styles = mergeStyles({ styles, theme: props.theme });
   }
 
@@ -41,6 +42,7 @@ export default class RichContentViewer extends Component {
       helpers,
       locale,
       disabled,
+      shouldRenderOptimizedImages,
     } = this.props;
     return {
       theme,
@@ -51,6 +53,7 @@ export default class RichContentViewer extends Component {
       helpers,
       locale,
       disabled,
+      shouldRenderOptimizedImages,
     };
   };
 
@@ -98,7 +101,7 @@ RichContentViewer.propTypes = {
   isMobile: PropTypes.bool,
   helpers: PropTypes.object,
   platform: PropTypes.string,
-  locale: PropTypes.string,
+  locale: PropTypes.string.isRequired,
   typeMappers: PropTypes.arrayOf(PropTypes.func),
   inlineStyleMappers: PropTypes.arrayOf(PropTypes.func),
   contentInteractionMappers: PropTypes.arrayOf(PropTypes.func),
@@ -121,6 +124,7 @@ RichContentViewer.propTypes = {
   config: PropTypes.object,
   textDirection: PropTypes.oneOf(['rtl', 'ltr']),
   disabled: PropTypes.bool,
+  shouldRenderOptimizedImages: PropTypes.bool,
 };
 
 RichContentViewer.defaultProps = {

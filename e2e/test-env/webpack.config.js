@@ -14,9 +14,6 @@ const common = {
   },
   resolve: {
     extensions: ['.js', '.jsx'],
-    alias: {
-      'draft-js': '@wix/draft-js',
-    },
   },
 };
 

@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-viewer",
-  "version": "5.1.8",
+  "version": "5.1.9",
   "author": {
     "name": "Jonathan Bachman",
     "email": "jonathanb@wix.com"
@@ -23,16 +23,13 @@
   "jest": {
     "moduleNameMapper": {
       "\\.(jpg|jpeg|png|gif|svg)$": "<rootDir>/__mocks__/fileMock.js",
-      "\\.(css|scss)$": "<rootDir>/__mocks__/styleMock.js",
-      "^draft-js$": "<rootDir>/node_modules/@wix/draft-js/dist/Draft.min.js",
-      "^draft-js/.*$": "<rootDir>/node_modules/@wix/draft-js/dist/Draft.min.js",
-      "^@wix/draft-js$": "<rootDir>/node_modules/@wix/draft-js/dist/Draft.min.js"
+      "\\.(css|scss)$": "<rootDir>/__mocks__/styleMock.js"
     }
   },
   "dependencies": {
     "direction": "~1.0.3",
     "redraft": "~0.9.1",
-    "wix-rich-content-common": "5.1.8"
+    "wix-rich-content-common": "5.1.9"
   },
   "peerDependencies": {
     "@babel/runtime": "7.2.0",

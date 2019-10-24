@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import { RichContentEditor, RichContentEditorModal } from 'wix-rich-content-editor';
-import { isSSR } from 'wix-rich-content-common';
-import { convertToRaw } from '@wix/draft-js';
+import { convertToRaw } from 'draft-js';
 import * as PropTypes from 'prop-types';
 import ReactModal from 'react-modal';
 import { testImages, testVideos } from './mock';
@@ -26,16 +25,15 @@ export default class Editor extends PureComponent {
   state = {};
   constructor(props) {
     super(props);
-    if (!isSSR()) {
-      ReactModal.setAppElement('#root');
-    }
+    // ReactModal.setAppElement('#root');
     this.initEditorProps();
   }
 
   initEditorProps() {
     const mockUpload = (files, updateEntity) => {
       if (this.props.shouldMockUpload) {
-        const testItem = testImages[Math.floor(Math.random() * testImages.length)];
+        const mockImageIndex = this.props.mockImageIndex || Math.floor(Math.random() * testImages.length);
+        const testItem = testImages[mockImageIndex];
         const data = {
           id: testItem.photoId,
           original_file_name: files && files[0] ? files[0].name : testItem.url,
@@ -68,7 +66,8 @@ export default class Editor extends PureComponent {
       // },
       onVideoSelected: (url, updateEntity) => {
         setTimeout(() => {
-          const testVideo = testVideos[Math.floor(Math.random() * testVideos.length)];
+          const mockVideoIndex = this.props.mockImageIndex || Math.floor(Math.random() * testVideos.length);
+          const testVideo = testVideos[mockVideoIndex];
           updateEntity(testVideo);
         }, 500);
       },
@@ -153,11 +152,7 @@ export default class Editor extends PureComponent {
     const { onRequestClose } = this.state.modalProps || {};
     return (
       <div className="editor">
-        {MobileToolbar && (
-          <div className="toolbar-wrapper">
-            <MobileToolbar />
-          </div>
-        )}
+        {MobileToolbar && <MobileToolbar />}
         {TextToolbar && (
           <div className="toolbar-wrapper">
             <TextToolbar />

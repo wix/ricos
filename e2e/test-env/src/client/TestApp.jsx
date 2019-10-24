@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import Editor from '../../../../examples/main/shared/editor/Editor';
 import Viewer from '../../../../examples/main/shared/viewer/Viewer';
 
-class TestApp extends PureComponent {  
+class TestApp extends PureComponent {
   renderEditor = () => {
     const { initialState, onEditorChange, locale, localeResource, isMobile } = this.props;
     return (
@@ -13,13 +13,14 @@ class TestApp extends PureComponent {
         shouldMockUpload={true}
         locale={locale}
         localeResource={localeResource}
+        mockImageIndex={1}
       />
     );
   };
 
   renderViewer = () => {
-    const { isMobile, viewerState } = this.props;
-    return <Viewer initialState={viewerState} isMobile={isMobile} />;
+    const { isMobile, viewerState, locale } = this.props;
+    return <Viewer initialState={viewerState} isMobile={isMobile} locale={locale} />;
   };
 
   render() {
