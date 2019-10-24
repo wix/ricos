@@ -3,7 +3,7 @@ import { hot } from 'react-hot-loader/root';
 import React, { PureComponent } from 'react';
 import { ReflexContainer, ReflexElement, ReflexSplitter } from 'react-reflex';
 import { compact, flatMap } from 'lodash';
-import { createEmpty, convertToRaw } from 'wix-rich-content-editor/dist/lib/editorStateConversion';
+import { convertToRaw, createEmpty } from 'wix-rich-content-editor/dist/lib/editorStateConversion';
 import {
   ContentStateEditor,
   ErrorBoundary,
