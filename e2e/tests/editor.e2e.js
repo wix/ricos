@@ -7,6 +7,7 @@ describe('editor', () => {
       testName: this.test.parent.title,
       browser: [{ width: 1440, height: 900, name: 'chrome' }],
       batchId: Cypress.env('APPLITOOLS_BATCH_ID'),
+      showLogs: true,
     });
   });
 
