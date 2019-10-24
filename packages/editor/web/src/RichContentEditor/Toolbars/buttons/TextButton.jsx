@@ -22,7 +22,7 @@ export default class TextButton extends Component {
     tooltipText: PropTypes.string,
     dataHook: PropTypes.string,
     tabIndex: PropTypes.number,
-    shouldRebuildOnUpdate: PropTypes.func,
+    shouldRefreshTooltips: PropTypes.func,
   };
 
   static defaultProps = {
@@ -50,7 +50,7 @@ export default class TextButton extends Component {
       tooltipText,
       dataHook,
       tabIndex,
-      shouldRebuildOnUpdate,
+      shouldRefreshTooltips,
     } = this.props;
     const showTooltip = !isMobile && !isEmpty(tooltipText);
     const iconClassNames = classNames(styles.inlineToolbarButton_icon, {
@@ -83,7 +83,7 @@ export default class TextButton extends Component {
         tooltipText={tooltipText}
         button={textButton}
         tooltipOffset={{ y: -20 }}
-        shouldRebuildOnUpdate={shouldRebuildOnUpdate}
+        shouldRefreshTooltips={shouldRefreshTooltips}
       />
     );
   }

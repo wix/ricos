@@ -73,7 +73,7 @@ export default ({ buttons, activeItem, onChange, tooltipTextKey }) =>
         onClick,
         ...this.props,
         theme: this.theme,
-        shouldRebuildOnUpdate: () => isOpen,
+        shouldRefreshTooltips: () => isOpen,
       };
       return (
         <ClickOutside
