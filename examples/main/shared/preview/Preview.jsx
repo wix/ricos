@@ -58,6 +58,9 @@ export default class Preview extends PureComponent {
     });
   };
 
+
+  helpers = {};
+
   render() {
     return (
       <div id="rich-content-preview" className="viewer">
