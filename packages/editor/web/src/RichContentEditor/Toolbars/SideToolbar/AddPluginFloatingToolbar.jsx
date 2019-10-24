@@ -89,6 +89,7 @@ export default class AddPluginFloatingToolbar extends Component {
         ...this.getPopupOffset(),
         transform: 'translate(-50%) scale(1)',
         transition: 'transform 0.15s cubic-bezier(.3,1.2,.2,1)',
+        width: this.popup.offsetWidth,
       },
       isActive: true,
       tabIndex: 0,
