@@ -1,9 +1,9 @@
-import { currentVersion } from 'wix-rich-content-common';
+import { Version } from 'wix-rich-content-common';
 import { METHOD_BLOCK_MAP, METHOD_GROUPED_BLOCK_MAP, METHOD_PLUGIN_DATA_MAP } from '../const';
 import { toArray, addBlock, addPlugin } from './builder-utils';
 import { readMore, seeFullPost, imageCounter } from '../Interactions/interaction-utils';
 
-const DEFAULT_STATE = { blocks: [], entityMap: {}, VERSION: currentVersion };
+const DEFAULT_STATE = { blocks: [], entityMap: {}, VERSION: Version.currentVersion };
 
 class ContentStateBuilder {
   constructor(initialState) {

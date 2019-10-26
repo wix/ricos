@@ -9,7 +9,7 @@ import styles from '../../statics/styles/preview.scss';
 
 class RichContentPreview extends Component {
   static propTypes = {
-    transformation: PropTypes.func.isRequired,
+    transformation: PropTypes.object.isRequired,
     ...RichContentViewer.propTypes,
   };
 
