@@ -12,6 +12,8 @@
 - `general`
   - [#347](https://github.com/wix-incubator/rich-content/pull/347) replaced `@wix/draft-js@0.10.272` with `draft-js@0.11.0`
 ### :rocket: New Feature
+- `preview`
+  - package added
 - `fullscreen`
   - [#389](https://github.com/wix-incubator/rich-content/pull/389) fullscreen for gallery and images :)
 - `gallery`
@@ -49,6 +51,9 @@
   - [#405](https://github.com/wix-incubator/rich-content/pull/405) visual tests run on applitools
 - `mentions`
   - [#387](https://github.com/wix-incubator/rich-content/pull/387) data validation schema added
+### :book: Documentation
+- `preview`
+  - [documentation](./docs/rich-content-preview.md) added
 <hr/>
 
 ## 5.1.9 (Oct 16, 2019)
