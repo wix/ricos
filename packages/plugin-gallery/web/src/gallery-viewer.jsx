@@ -49,7 +49,7 @@ class GalleryViewer extends React.Component {
   }
 
   componentWillUnmount() {
-    window.removeEventListener('resize', this.handleResize);
+    window.removeEventListener('resize', this.updateDimensions);
   }
 
   shouldUpdateDimensions = prevComponentData => {
