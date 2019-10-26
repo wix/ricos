@@ -104,7 +104,6 @@ RichContentViewer.propTypes = {
   locale: PropTypes.string.isRequired,
   typeMappers: PropTypes.arrayOf(PropTypes.func),
   inlineStyleMappers: PropTypes.arrayOf(PropTypes.func),
-  contentInteractionMappers: PropTypes.arrayOf(PropTypes.func),
   decorators: PropTypes.arrayOf(
     PropTypes.oneOfType([
       PropTypes.shape({
