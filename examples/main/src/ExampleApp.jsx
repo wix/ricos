@@ -149,7 +149,7 @@ class ExampleApp extends PureComponent {
 
 
   renderPreview = () => {
-    const { previewState, isMobile } = this.props;
+    const { previewState, isMobile, locale } = this.props;
     const { isPreviewShown } = this.state;
     const settings = [
       {
@@ -171,7 +171,7 @@ class ExampleApp extends PureComponent {
           />
           <SectionContent>
             <ErrorBoundary>
-              <Preview initialState={previewState} isMobile={this.state.previewIsMobile || isMobile} />
+              <Preview initialState={previewState} isMobile={this.state.previewIsMobile || isMobile} locale={locale} />
             </ErrorBoundary>
           </SectionContent>
         </ReflexElement>

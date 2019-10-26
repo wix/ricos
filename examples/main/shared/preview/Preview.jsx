@@ -65,6 +65,7 @@ export default class Preview extends PureComponent {
     return (
       <div id="rich-content-preview" className="viewer">
         <RichContentPreview
+          locale={this.props.locale}
           helpers={this.helpers}
           typeMappers={Plugins.typeMappers}
           inlineStyleMappers={Plugins.getInlineStyleMappers(this.props.initialState)}
