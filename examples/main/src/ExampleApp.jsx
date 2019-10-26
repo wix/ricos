@@ -171,7 +171,7 @@ class ExampleApp extends PureComponent {
           />
           <SectionContent>
             <ErrorBoundary>
-              <Preview initialState={previewState} isMobile={this.state.previewIsMobile || isMobile} locale={locale} />
+              <Preview initialState={previewState} isMobile={this.state.previewIsMobile || isMobile} locale={locale}/>
             </ErrorBoundary>
           </SectionContent>
         </ReflexElement>

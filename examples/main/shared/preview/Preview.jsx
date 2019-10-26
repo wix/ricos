@@ -33,22 +33,27 @@ export default class Preview extends PureComponent {
     this.state = {
       disabled: false,
     };
-    this.transformation = new ContentStateTransformation({
-      _if: metadata => metadata.text.plain().length > 0,
-      _then: (metadata, preview) =>
+    this.transformations = [
+      new ContentStateTransformation({
+        _if: metadata => metadata.text.plain().length > 0,
+        _then: (metadata, preview) =>
         preview
-          .plain(metadata.text.plain()[0])
-          .readMore({ lines: 3 }),
-    }).rule({
-      _if: metadata => metadata.media.images().length > 3,
-      _then: (metadata, preview) =>
-        preview
-          .gallery({
-            mediaInfo: metadata.media.images().slice(0, 3),
-          })
-          .imageCounter({ counter: metadata.media.images().length - 3 })
-          .seeFullPost({ label: 'SEE FULL STORY' })
-    });
+        .plain(metadata.text.plain()[0])
+        .readMore({ lines: 3 }),
+      }),
+      new ContentStateTransformation({
+        _if: metadata => metadata.media.images().length > 0,
+        _then: (metadata, preview) => preview.image({ mediaInfo: metadata.media.images()[0] }).seeFullPost({ label: 'SEE FULL STORY' }),
+      }),
+      new ContentStateTransformation({
+        _if: metadata => metadata.text.plain().length > 0,
+        _then: (metadata, preview) => preview.plain(metadata.text.plain()[0]).readMore({ lines: 1 }),
+      }).rule({
+        _if: metadata => metadata.media.images().length > 3,
+        _then: (metadata, preview) => preview.gallery({ mediaInfo: metadata.media.images().slice(0, 3), }).imageCounter({ counter: metadata.media.images().length - 3 })
+      }),
+
+    ]
   }
 
   closeModal = () => {
@@ -64,21 +69,68 @@ export default class Preview extends PureComponent {
   render() {
     return (
       <div id="rich-content-preview" className="viewer">
-        <RichContentPreview
-          locale={this.props.locale}
-          helpers={this.helpers}
-          typeMappers={Plugins.typeMappers}
-          inlineStyleMappers={Plugins.getInlineStyleMappers(this.props.initialState)}
-          decorators={Plugins.decorators}
-          config={Plugins.config}
-          initialState={this.props.initialState}
-          transformation={this.transformation}
-          theme={theme}
-          isMobile={this.props.isMobile}
-          anchorTarget={anchorTarget}
-          relValue={relValue}
-          disabled={this.state.disabled}
-        />
+        <h2>{'Rule I'}</h2>
+        <p>{'_if: metadata => metadata.text.plain().length > 0'}</p>
+        <p>{'_then: (metadata, preview) => preview .plain(metadata.text.plain()[0]) .readMore({ lines: 3 })'}</p>
+        <div className="content-preview">
+            <RichContentPreview
+              locale={this.props.locale}
+              helpers={this.helpers}
+              typeMappers={Plugins.typeMappers}
+              inlineStyleMappers={Plugins.getInlineStyleMappers(this.props.initialState)}
+              decorators={Plugins.decorators}
+              config={Plugins.config}
+              initialState={this.props.initialState}
+              transformation={this.transformations[0]}
+              theme={theme}
+              isMobile={this.props.isMobile}
+              anchorTarget={anchorTarget}
+              relValue={relValue}
+              disabled={this.state.disabled}
+            />
+        </div>
+        <h2>{'Rule II'}</h2>
+        <p>{'_if: metadata => metadata.media.images().length > 0'}</p>
+        <p>{'_then: (metadata, preview) => preview.image({ mediaInfo: metadata.media.images()[0] }).seeFullPost({ label: "SEE FULL STORY" })'}</p>
+        <div className="content-preview">
+          <RichContentPreview
+            locale={this.props.locale}
+            helpers={this.helpers}
+            typeMappers={Plugins.typeMappers}
+            inlineStyleMappers={Plugins.getInlineStyleMappers(this.props.initialState)}
+            decorators={Plugins.decorators}
+            config={Plugins.config}
+            initialState={this.props.initialState}
+            transformation={this.transformations[1]}
+            theme={theme}
+            isMobile={this.props.isMobile}
+            anchorTarget={anchorTarget}
+            relValue={relValue}
+            disabled={this.state.disabled}
+          />
+        </div>
+        <h2>{'Rule III'}</h2>
+        <p>{'_if: metadata => metadata.text.plain().length > 0'}</p>
+        <p>{'_then: (metadata, preview) => preview .plain(metadata.text.plain()[0]) .readMore({ lines: 1 })'}</p>
+        <p>{'_if: metadata => metadata.media.images().length > 3'}</p>
+        <p>{'_then: (metadata, preview) => preview .gallery({ mediaInfo: metadata.media.images().slice(0, 3), }) .imageCounter({ counter: metadata.media.images().length - 3 })'}</p>
+        <div className="content-preview">
+          <RichContentPreview
+            locale={this.props.locale}
+            helpers={this.helpers}
+            typeMappers={Plugins.typeMappers}
+            inlineStyleMappers={Plugins.getInlineStyleMappers(this.props.initialState)}
+            decorators={Plugins.decorators}
+            config={Plugins.config}
+            initialState={this.props.initialState}
+            transformation={this.transformations[2]}
+            theme={theme}
+            isMobile={this.props.isMobile}
+            anchorTarget={anchorTarget}
+            relValue={relValue}
+            disabled={this.state.disabled}
+          />
+        </div>
         <ReactModal
           isOpen={this.state.showModal}
           contentLabel="External Modal Example"
