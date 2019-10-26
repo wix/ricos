@@ -1,6 +1,65 @@
-# API
+# rich-content-preview
 
-## getContentStateMetadata
+## Introduction
+
+The Preview project comes to meet the requirement for a brief content preview; similar concept could be found in social media applications.
+
+## Architecture
+
+The core idea is to transform the content state and to display it within `RichContentViewer`. This transformation is a product of content state metadata and a set of rules defined by the consumer. This section discusses the main logic elements required to perform such a transformation.
+
+### Content State Analyzer
+
+The content state analyzer retrives content metadata containing the info regarding the data rather draft block and entity structure.
+
+For example, the metadata could provide the following details:
+- number of images and videos
+- length of text (in total and per block)
+- lists and code-blocks consisting of multiple sequential blocks are retrieved as a whole
+
+### Content State Builder
+
+The content state builder provides a way to create a preview content state using the retrieved metadata. The preview state then can be rendered by `RichContentViewer`.
+
+### Rule Engine
+
+The rule engine provides a way to define transformation rules and to apply them on a given `ContentState` according to the metadata.
+
+#### Transformation Rule
+
+The transformation rule consists of condition and transform action.
+
+Example:
+
+```js
+
+  if: metadata => metadata.media.images().length >= 4
+  then: (metadata, preview) => preview.gallery({
+      items: metadata.images.slice(0, 4),
+      config: { layout: 'grid', imageWidth: 40 }
+  })
+
+```
+
+### Preview Interactions
+
+The preview interactons allow to expand hidden content. The `rich-content` repo introduces 3 predefined intertactions. The Content State Builder exposes methods to add interactions to the preview state, and the `RichContentViewer` renders the interacton components.
+
+#### 'Read More'
+
+The `Read More` interacton relies on [react-lines-ellipsis](https://github.com/xiaody/react-lines-ellipsis) package. It displays required number of lines appended by an ellipsis. Although the package is capable to handle the HTML content, this feature is experimental. The current interacton is limited to work with plain text only. Mouse click expands the full post.
+
+#### 'See Full Post'
+
+The `See Full Post` displays a text label over an overlay. Mouse click expands the full post.
+
+#### Image Counter
+
+The `Image Counter` renders hidden image counter. By default, the counter label placed above the last visible image element. The image elements are selected by `role='img'` attribute.
+
+## APIs
+
+### getContentStateMetadata
 
 The metadata is derived from ContentState and exposes its details:
 
@@ -10,39 +69,39 @@ const metadata = getContentStateMetdata(contentState);
 
 These details are categorized by content type rather actual ContentState structure.
 
-### ContentStateMetdata.text
+#### ContentStateMetdata.text
 
 The `ContentStateMetdata.text` exposes all the textual content a string array.
 
-##### ContentStateMetdata.text.plain
+###### ContentStateMetdata.text.plain
 
 The `ContentStateMetdata.text.plain` exposes the textual content extracted from the `unstyled` blocks as a string array.
 
-###### ContentStateMetdata.text.ol
+####### ContentStateMetdata.text.ol
 
 The `ContentStateMetdata.text.ol` exposes the textual content extracted from the ordered list blocks as a string array.
 
-###### ContentStateMetdata.text.ul
+####### ContentStateMetdata.text.ul
 
 The `ContentStateMetdata.text.ul` exposes the textual content extracted from the unordered list blocks as a string array.
 
-##### ContentStateMetdata.text.quotes
+###### ContentStateMetdata.text.quotes
 
 The `ContentStateMetdata.text.quotes` exposes the textual content extracted from the `blockquote` blocks as a string array.
 
-##### ContentStateMetdata.text.code
+###### ContentStateMetdata.text.code
 
 The `ContentStateMetdata.text.code` exposes the textual content extracted from the `code-block` blocks as a string array.
 
-##### ContentStateMetdata.text.h2/h3/h4/h5/h6
+###### ContentStateMetdata.text.h2/h3/h4/h5/h6
 
 The `ContentStateMetdata.text.h2/h3/h4/h5/h6` exposes the textual content extracted from the heading blocks as a string array.
 
-## ContentStateMetdata.media
+### ContentStateMetdata.media
 
 The `ContentStateMetdata.media` exposes all the media-related entities.
 
-### ContentStateMetdata.media.images
+#### ContentStateMetdata.media.images
 
 The `ContentStateMetdata.media.images` exposes the data extracted from `image` / `gallery` / `giphy` entities.
 The image data object structure is:
@@ -69,7 +128,7 @@ The image data object structure is:
 
 The properties marked with `?` are optional and relevant only for some of the image entities.
 
-### ContentStateMetdata.media.videos
+#### ContentStateMetdata.media.videos
 
 The `ContentStateMetdata.media.videos` exposes the data extracted from `video` / `sound-cloud` / `youtube` entities.
 
@@ -85,7 +144,7 @@ The video data object structure is:
 
 ```
 
-### ContentStateMetdata.media.files
+#### ContentStateMetdata.media.files
 
 The `ContentStateMetdata.media.files` exposes the data extracted from `file-upload` entities.
 
@@ -101,15 +160,15 @@ The file object structure:
 
 ```
 
-### ContentStateMetdata.media.maps
+#### ContentStateMetdata.media.maps
 
 The `ContentStateMetdata.media.maps` exposes the data extracted from `google-map` entities. The map data structure is similar to `mapSettings` object structure (found in the map entity data).
 
-## ContentStateBuilder
+### ContentStateBuilder
 
 The `ContentStateBuilder` exposes API for ContentState generation, based on the Builder design pattern.
 
-### Content generation methods
+#### Content generation methods
 
 The basic `ContentStateBuilder` methods allow to add content elements to the constructed ContentState. The methods named after the content type being added, e.g. is `image` method allows to add an image, and `plain` method adds plain text. The methods could be chained:
 
@@ -120,66 +179,66 @@ const previewState = new ContentStateBuilder(initialState)
   .plain(text);
 ```
 
-#### ContentStateBuilder.plain(text, config)
+##### ContentStateBuilder.plain(text, config)
 
 The `ContentStateBuilder.plain` method appends an `unstyled` block with given `text`. If the `text` param is a string array, then it will append block for each string. The optional `config` is merged to the block data.
 
-#### ContentStateBuilder.ul(text, config)
+##### ContentStateBuilder.ul(text, config)
 
 The `ContentStateBuilder.ul` method appends an `unordered-list-item` block with given `text`. If the `text` param is a string array, then it will append block for each string. The optional `config` is merged to the block data.
 
-#### ContentStateBuilder.ol(text, config)
+##### ContentStateBuilder.ol(text, config)
 
 The `ContentStateBuilder.ol` method appends an `ordered-list-item` block with given `text`. If the `text` param is a string array, then it will append block for each string. The optional `config` is merged to the block data.
 
-#### ContentStateBuilder.code(text, config)
+##### ContentStateBuilder.code(text, config)
 
 The `ContentStateBuilder.code` method appends a `code-block` block with given `text`. If the `text` param is a string array, then it will append block for each string. The optional `config` is merged to the block data.
 
-#### ContentStateBuilder.quote(text, config)
+##### ContentStateBuilder.quote(text, config)
 
 The `ContentStateBuilder.quote` method appends a `blockquote` block with given `text`. If the `text` param is a string array, then it will append block for each string. The optional `config` is merged to the block data.
 
-#### ContentStateBuilder.h2/h3/h4/h5/h6(text, config)
+##### ContentStateBuilder.h2/h3/h4/h5/h6(text, config)
 
 The `ContentStateBuilder.h2/h3/h4/h5/h6` methods append a header block with given `text`. If the `text` param is a string array, then it will append block for each string. The optional `config` is merged to the block data.
 
-#### ContentStateBuilder.image({ mediaInfo, config, overrides })
+##### ContentStateBuilder.image({ mediaInfo, config, overrides })
 
 The `ContentStateBuilder.image` method appends an `atomic` block to the `blocks` and a `wix-draft-plugin-image` entity to the `entityMap`. The optional params `config` and `overrides` are merged with the `entity.data.config` and `entity.data`, respectively.
 The `mediaInfo` param is expected to be an image data object returned by [ContentStateMetdata.media.images](./API.md#ContentStateMetdatamediaimages) method.
 
-#### ContentStateBuilder.giphy({ mediaInfo, config, overrides })
+##### ContentStateBuilder.giphy({ mediaInfo, config, overrides })
 
 The `ContentStateBuilder.giphy` method appends an `atomic` block to the `blocks` and a `wix-draft-plugin-giphy` entity to the `entityMap`. The optional params `config` and `overrides` are merged with the `entity.data.config` and `entity.data`, respectively.
 The `mediaInfo` param is expected to be an image data object returned by [ContentStateMetdata.media.images](./API.md#ContentStateMetdatamediaimages) method.
 
-#### ContentStateBuilder.gallery({ mediaInfo, config, overrides })
+##### ContentStateBuilder.gallery({ mediaInfo, config, overrides })
 
 The `ContentStateBuilder.gallery` method appends an `atomic` block to the `blocks` and a `wix-draft-plugin-gallery` entity to the `entityMap`. The optional params `config` and `overrides` are merged with the `entity.data.config` and `entity.data`, respectively.
 The `items` param is expected to be an array of image data objects returned by [ContentStateMetdata.media.images](./API.md#ContentStateMetdatamediaimages) method.
 
-#### ContentStateBuilder.video({ mediaInfo, config, overrides })
+##### ContentStateBuilder.video({ mediaInfo, config, overrides })
 
 The `ContentStateBuilder.video` method appends an `atomic` block to the `blocks` and a `wix-draft-plugin-video` entity to the `entityMap`. The optional params `config` and `overrides` are merged with the `entity.data.config` and `entity.data`, respectively.
 The `mediaInfo` param is expected to be a video data object returned by [ContentStateMetdata.media.videos](./API.md#ContentStateMetdatamediavideos) method.
 
-#### ContentStateBuilder.soundCloud({ mediaInfo, config, overrides })
+##### ContentStateBuilder.soundCloud({ mediaInfo, config, overrides })
 
 The `ContentStateBuilder.soundCloud` method appends an `atomic` block to the `blocks` and a `wix-draft-plugin-sound-cloud` entity to the `entityMap`. The optional params `config` and `overrides` are merged with the `entity.data.config` and `entity.data`, respectively.
 The `mediaInfo` param is expected to be a video data object returned by [ContentStateMetdata.media.videos](./API.md#ContentStateMetdatamediavideos) method.
 
-#### ContentStateBuilder.file({ mediaInfo, config, overrides })
+##### ContentStateBuilder.file({ mediaInfo, config, overrides })
 
 The `ContentStateBuilder.file` method appends an `atomic` block to the `blocks` and a `wix-draft-plugin-file-upload` entity to the `entityMap`. The optional params `config` and `overrides` are merged with the `entity.data.config` and `entity.data`, respectively.
 The `mediaInfo` param is expected to be a file data object returned by [ContentStateMetdata.media.files](./API.md#ContentStateMetdatamediafiles) method.
 
-#### ContentStateBuilder.map({ mediaInfo, config, overrides })
+##### ContentStateBuilder.map({ mediaInfo, config, overrides })
 
 The `ContentStateBuilder.map` method appends an `atomic` block to the `blocks` and a `wix-draft-plugin-map` entity to the `entityMap`. The optional params `config` and `overrides` are merged with the `entity.data.config` and `entity.data`, respectively.
 The `mediaInfo` parameter is expected to be a map data object returned by [ContentStateMetdata.media.maps](./API.md#ContentStateMetdatamediamaps) method.
 
-## ContentStateTransformation
+### ContentStateTransformation
 
 The `ContentStateTransformation` represents a rule to be applied on content state in order to achieve the desired preview state:
 
@@ -221,7 +280,7 @@ const transformation = new ContentStateTransformation({ _if: ..., _then: ... })
 
 ```
 
-## Content Interactions
+### Content Interactions
 
 The content interaction indicate that the preview content is collapsed, and provide a way to expand it. Content interactions work at the block level. Every interaction consists of the following elements:
 
@@ -238,9 +297,9 @@ The content interaction indicate that the preview content is collapsed, and prov
 - _block data interactions array_ contains configuration data for all the interactions applied to the block
 - _UI component_ defines the appearance of the interaction element
 
-### Predefined Interactions
+#### Predefined Interactions
 
-#### ReadMore
+##### ReadMore
 
 The `ReadMore` component comes to display a portion of a long text, appending it an ellipsis symbol and label (by default, those are '… read more').
 The ContentStateBuilder exposes `readMore` API that accepts configuration object:
@@ -258,7 +317,7 @@ The ContentStateBuilder exposes `readMore` API that accepts configuration object
 
 The `onClick` field is common for all the interactions. It defines the ineraction click behavior, by intercepting the expansion click.
 
-#### SeeFullPost
+##### SeeFullPost
 
 The `SeeFullPost` interaction adds an overlay containing a link-like label (by default, it says `See Full Post`). The click on label expands the full content. The settings object:
 
@@ -274,7 +333,7 @@ The `SeeFullPost` interaction adds an overlay containing a link-like label (by d
 
 The `ContentStateBuilder` exposes `seeFullPost` method that applies the interaction on the previous block data.
 
-#### ImageCounter
+##### ImageCounter
 
 The `ImageCounter` serves as a counter of media entities in collapsed content. The configuration object structure:
 
@@ -302,7 +361,7 @@ The `imageSelector` function selects images that should be decorated by the coun
 
 The `ContentStateBuilder` exposes `imageCounter` method that applies the interaction on previous block data.
 
-### RichContentViewer Integration
+#### RichContentViewer Integration
 
 RichContentViewer `config` prop now allows to pass the preview related configuration, by adding the following entry:
 
@@ -321,6 +380,6 @@ The `contentInteractionMappers` field allows to pass the interactions as a funct
 
 The `onPreviewExpand` handler determines the behavior on content expansion. The `RichContentPreview` component wraps the `RichContentViewer` while providing default `PREVIEW` configuration.
 
-### Custom Interactions
+#### Custom Interactions
 
 TBD
