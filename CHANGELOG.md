@@ -22,7 +22,7 @@
   - [#396](https://github.com/wix-incubator/rich-content/pull/396) sticky static toolbar on all platforms
 ### :bug: Bug Fix
 - `common`
-  - data-normalization: missing entity protection added
+  - [#436](https://github.com/wix-incubator/rich-content/pull/436) data-normalization: missing entity protection added
   - [#411](https://github.com/wix-incubator/rich-content/pull/411) base toolbar height calculated once
   - [#432](https://github.com/wix-incubator/rich-content/pull/432) fixed divider sizer when aligned
 - `editor`
