@@ -23,6 +23,7 @@
 ### :bug: Bug Fix
 - `common`
   - [#411](https://github.com/wix-incubator/rich-content/pull/411) base toolbar height calculated once
+  - [#432](https://github.com/wix-incubator/rich-content/pull/432) fixed divider sizer when aligned
 - `editor`
   - [#392](https://github.com/wix-incubator/rich-content/pull/392) text inline toolbar tooltips
   - [#421](https://github.com/wix-incubator/rich-content/pull/421) resize-decorator is not activated on mobile
@@ -30,6 +31,7 @@
   - [#407](https://github.com/wix-incubator/rich-content/pull/407) list indentation
   - [#427](https://github.com/wix-incubator/rich-content/pull/427) focus
   - [#434](https://github.com/wix-incubator/rich-content/pull/434) text dropdown buttons tooltips display
+  - [#433](https://github.com/wix-incubator/rich-content/pull/433) side toolbar is positioned to the right in RTL
 - `divider`
   - [#406](https://github.com/wix-incubator/rich-content/pull/406) divider center alignment
 - `image`
@@ -42,6 +44,8 @@
   - [#404](https://github.com/wix-incubator/rich-content/pull/404) delete last remaining image in image settings returns to gallery settings
   - [#403](https://github.com/wix-incubator/rich-content/pull/403) re-render gallery on change only
   - [#408](https://github.com/wix-incubator/rich-content/pull/408) panorama layout displays all items
+- `example`
+  - [#430](https://github.com/wix-incubator/rich-content/pull/430) editor + viewer: gallery config field `scrollingElement` value is a function
 ### :house: Internal
 - `e2e`
   - [#393](https://github.com/wix-incubator/rich-content/pull/393) added atomic block alignment testing
