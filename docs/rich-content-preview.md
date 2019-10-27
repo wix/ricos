@@ -35,7 +35,7 @@ Example:
 
   if: metadata => metadata.media.images().length >= 4
   then: (metadata, preview) => preview.gallery({
-      items: metadata.images.slice(0, 4),
+      items: metadata.media.images.slice(0, 4),
       config: { layout: 'grid', imageWidth: 40 }
   })
 
