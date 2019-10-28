@@ -90,14 +90,17 @@ const createBaseComponent = ({
       pubsub.set('visibleBlock', null);
     }
 
-    isMe = () => {
+    isMe = blockKey => {
       const { block } = this.props;
-      const updatedVisibleBlock = pubsub.get('visibleBlock');
-      return updatedVisibleBlock === block.getKey();
+      if (blockKey) {
+        return blockKey === block.getKey();
+      } else {
+        return pubsub.get('visibleBlock') === block.getKey();
+      }
     };
 
-    onComponentDataChange = componentData => {
-      if (this.isMeAndIdle) {
+    onComponentDataChange = (componentData, blockKey) => {
+      if (this.isMeAndIdle(blockKey)) {
         this.setState({ componentData: componentData || {} }, () => {
           const {
             blockProps: { setData },
@@ -108,19 +111,19 @@ const createBaseComponent = ({
     };
 
     onComponentStateChange = componentState => {
-      if (this.isMeAndIdle) {
+      if (this.isMeAndIdle()) {
         this.setState({ componentState: componentState || {} });
       }
     };
 
     onComponentAlignmentChange = alignment => {
-      if (alignment && this.isMeAndIdle) {
+      if (alignment && this.isMeAndIdle()) {
         this.updateComponentConfig({ alignment });
       }
     };
 
     onComponentSizeChange = size => {
-      if (size && this.isMeAndIdle) {
+      if (size && this.isMeAndIdle()) {
         this.updateComponentConfig({ size });
       }
     };
@@ -132,14 +135,14 @@ const createBaseComponent = ({
     };
 
     onComponentTextWrapChange = textWrap => {
-      if (textWrap && this.isMeAndIdle) {
+      if (textWrap && this.isMeAndIdle()) {
         this.updateComponentConfig({ textWrap });
       }
     };
 
     onComponentLinkChange = linkData => {
       const { url, targetBlank, nofollow } = linkData || {};
-      if (this.isMeAndIdle) {
+      if (this.isMeAndIdle()) {
         const link = url
           ? {
               url,
@@ -166,9 +169,9 @@ const createBaseComponent = ({
       }
     }
 
-    get isMeAndIdle() {
-      return this.isMe() && !this.duringUpdate;
-    }
+    isMeAndIdle = blockKey => {
+      return this.isMe(blockKey) && !this.duringUpdate;
+    };
 
     handleClick = e => {
       if (onOverlayClick) {

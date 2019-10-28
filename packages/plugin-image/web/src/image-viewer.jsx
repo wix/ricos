@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { get, includes, isEqual, isFunction } from 'lodash';
 import {
+  isSSR,
   mergeStyles,
   getImageSrc,
   Loader,
@@ -10,9 +11,10 @@ import {
   Context,
   WIX_MEDIA_DEFAULT,
 } from 'wix-rich-content-common';
-import { getDefault } from './consts';
+import { getDefault, SEO_IMAGE_WIDTH } from './consts';
 import schema from '../statics/data-schema.json';
 import styles from '../statics/styles/image-viewer.scss';
+import ExpandIcon from './icons/expand.svg';
 
 class ImageViewer extends React.Component {
   constructor(props) {
@@ -31,8 +33,14 @@ class ImageViewer extends React.Component {
     }
   }
 
+  calculateHeight(width = 1, src) {
+    return src && src.height && src.width
+      ? Math.ceil((src.height / src.width) * width)
+      : WIX_MEDIA_DEFAULT.SIZE;
+  }
+
   getImageUrl(src) {
-    const { helpers } = this.context || {};
+    const { helpers, shouldRenderOptimizedImages } = this.context || {};
 
     if (!src && (helpers && helpers.handleFileSelection)) {
       return null;
@@ -46,33 +54,31 @@ class ImageViewer extends React.Component {
     if (this.props.dataUrl) {
       imageUrl.preload = imageUrl.highres = this.props.dataUrl;
     } else {
+      let requiredWidth, requiredHeight;
       imageUrl.preload = getImageSrc(src, helpers);
-      if (this.state.container) {
+      if (shouldRenderOptimizedImages) {
+        requiredWidth = src && src.width && Math.min(src.width, SEO_IMAGE_WIDTH);
+        requiredHeight = this.calculateHeight(SEO_IMAGE_WIDTH, src);
+      } else if (this.state.container) {
         const { width } = this.state.container.getBoundingClientRect();
-        let requiredWidth = width || src.width || 1;
+        requiredWidth = width || src.width || 1;
         if (this.context.isMobile) {
-          const isSSR = typeof window === 'undefined';
           //adjust the image width to viewport scaling and device pixel ratio
-          requiredWidth *= (!isSSR && window.devicePixelRatio) || 1;
-          requiredWidth *= (!isSSR && window.screen.width / document.body.clientWidth) || 1;
+          requiredWidth *= (!isSSR() && window.devicePixelRatio) || 1;
+          requiredWidth *= (!isSSR() && window.screen.width / document.body.clientWidth) || 1;
         }
         //keep the image's original ratio
-        let requiredHeight =
-          src && src.height && src.width
-            ? Math.ceil((src.height / src.width) * requiredWidth)
-            : WIX_MEDIA_DEFAULT.SIZE;
+        requiredHeight = this.calculateHeight(requiredWidth, src);
         requiredWidth = Math.ceil(requiredWidth);
         requiredHeight = Math.ceil(requiredHeight);
-
-        imageUrl.highres = getImageSrc(src, helpers, {
-          requiredWidth,
-          requiredHeight,
-          requiredQuality: 90,
-          imageType: 'highRes',
-        });
       }
+      imageUrl.highres = getImageSrc(src, helpers, {
+        requiredWidth,
+        requiredHeight,
+        requiredQuality: 90,
+        imageType: 'highRes',
+      });
     }
-
     if (this._isMounted && !imageUrl.preload) {
       console.error(`image plugin mounted with invalid image source!`, src); //eslint-disable-line no-console
     }
@@ -193,43 +199,49 @@ class ImageViewer extends React.Component {
     return true;
   }
 
+  handleExpand = e => {
+    e.preventDefault();
+    const { onExpand } = this.context.helpers;
+    onExpand && onExpand(this.props.entityIndex);
+  };
+
   render() {
     this.styles = this.styles || mergeStyles({ styles, theme: this.context.theme });
-    const {
-      componentData,
-      className,
-      onClick,
-      isFocused,
-      readOnly,
-      settings,
-      defaultCaption,
-    } = this.props;
+    const { componentData, className, isFocused, readOnly, settings, defaultCaption } = this.props;
     const { fallbackImageSrc } = this.state;
     const data = componentData || getDefault();
     const { metadata = {} } = componentData;
 
-    const itemClassName = classNames(this.styles.imageContainer, className);
+    const hasLink = data.config && data.config.link;
+    const hasExpand = this.context.helpers && this.context.helpers.onExpand;
+
+    const itemClassName = classNames(this.styles.imageContainer, className, {
+      [this.styles.pointer]: hasExpand,
+    });
     const imageClassName = classNames(this.styles.image);
     const imageSrc = fallbackImageSrc || this.getImageUrl(data.src);
     let imageProps = {};
-    if (data.src && settings && isFunction(settings.imageProps)) {
-      imageProps = settings.imageProps(data.src);
-    } else if (data.src && settings) {
-      imageProps = settings.imageProps;
+    if (data.src && settings) {
+      imageProps = isFunction(settings.imageProps)
+        ? settings.imageProps(data.src)
+        : settings.imageProps;
     }
 
     /* eslint-disable jsx-a11y/no-static-element-interactions */
     return (
       <div
         data-hook="imageViewer"
-        onClick={onClick}
+        onClick={!hasLink && this.handleExpand}
         className={itemClassName}
-        onKeyDown={e => this.onKeyDown(e, onClick)}
+        onKeyDown={e => this.onKeyDown(e, this.onClick)}
         ref={e => this.handleRef(e)}
       >
         <div className={this.styles.imageWrapper}>
           {imageSrc && this.renderImage(imageClassName, imageSrc, metadata.alt, imageProps)}
           {this.renderLoader()}
+          {hasLink && hasExpand && (
+            <ExpandIcon className={this.styles.expandIcon} onClick={this.handleExpand} />
+          )}
         </div>
         {this.renderTitle(data, this.styles)}
         {this.renderDescription(data, this.styles)}
@@ -245,7 +257,6 @@ ImageViewer.contextType = Context.type;
 
 ImageViewer.propTypes = {
   componentData: PropTypes.object.isRequired,
-  onClick: PropTypes.func,
   className: PropTypes.string,
   isLoading: PropTypes.bool,
   dataUrl: PropTypes.string,
@@ -253,6 +264,7 @@ ImageViewer.propTypes = {
   readOnly: PropTypes.bool,
   settings: PropTypes.object,
   defaultCaption: PropTypes.string,
+  entityIndex: PropTypes.number,
 };
 
 export default ImageViewer;

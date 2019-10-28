@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { debounce } from 'lodash';
 import { DISPLAY_MODE } from 'wix-rich-content-common';
-import DraftOffsetKey from '@wix/draft-js/lib/DraftOffsetKey';
+import DraftOffsetKey from 'draft-js/lib/DraftOffsetKey';
 import Styles from '../../../../statics/styles/side-toolbar-wrapper.scss';
 
 export default class SideToolbar extends Component {
@@ -86,7 +86,7 @@ export default class SideToolbar extends Component {
           this.setState({
             position: {
               top: top - parentTop + offset.y,
-              [!isMobile ? 'left' : 'right']: offset.x,
+              ...(isMobile ? { right: offset.x } : { left: offset.x, right: offset.x }),
               transform: `scale(${isMobile ? 0.76 : 1})`, //mobile plus is smaller
               transition: 'transform 0.15s cubic-bezier(.3,1.2,.2,1)',
             },
@@ -97,6 +97,7 @@ export default class SideToolbar extends Component {
           position: {
             top: offset.y,
             left: offset.x,
+            right: offset.x,
             transform: `scale(${isMobile ? 0.76 : 1})`, //mobile plus is smaller
             transition: 'transform 0.15s cubic-bezier(.3,1.2,.2,1)',
             position: 'absolute',

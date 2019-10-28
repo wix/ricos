@@ -4,5 +4,5 @@ export const fixtures = [
   'images',
   'inline-styles',
   'lists',
-  'quote'
+  'quote',
 ];

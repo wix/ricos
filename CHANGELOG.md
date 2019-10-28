@@ -8,23 +8,94 @@
 > - :house: [Internal]
 
 ## [Unreleased]
+### :boom: Breaking Change
+- `general`
+  - [#347](https://github.com/wix-incubator/rich-content/pull/347) replaced `@wix/draft-js@0.10.272` with `draft-js@0.11.0`
 ### :rocket: New Feature
+- `fullscreen`
+  - [#389](https://github.com/wix-incubator/rich-content/pull/389) fullscreen for gallery and images :)
 - `gallery`
   - [#391](https://github.com/wix-incubator/rich-content/pull/391) gallery image titles
-### :bug: Bug Fix
+- `mentions`
+  - [#402](https://github.com/wix-incubator/rich-content/pull/402) mentions suggestion box size controll
 - `editor`
-  - [#392](https://github.com/wix-incubator/rich-content/pull/392) text in line toolbar has tooltips
+  - [#396](https://github.com/wix-incubator/rich-content/pull/396) sticky static toolbar on all platforms
+### :bug: Bug Fix
+- `common`
+  - [#436](https://github.com/wix-incubator/rich-content/pull/436) data-normalization: missing entity protection added
+  - [#411](https://github.com/wix-incubator/rich-content/pull/411) base toolbar height calculated once
+  - [#432](https://github.com/wix-incubator/rich-content/pull/432) fixed divider sizer when aligned
+- `editor`
+  - [#392](https://github.com/wix-incubator/rich-content/pull/392) text inline toolbar tooltips
+  - [#421](https://github.com/wix-incubator/rich-content/pull/421) resize-decorator is not activated on mobile
+  - [#400](https://github.com/wix-incubator/rich-content/pull/400) inline and mobile toolbar RTL support
+  - [#407](https://github.com/wix-incubator/rich-content/pull/407) list indentation
+  - [#427](https://github.com/wix-incubator/rich-content/pull/427) focus
+  - [#434](https://github.com/wix-incubator/rich-content/pull/434) text dropdown buttons tooltips display
+  - [#433](https://github.com/wix-incubator/rich-content/pull/433) side toolbar is positioned to the right in RTL
+- `divider`
+  - [#406](https://github.com/wix-incubator/rich-content/pull/406) divider center alignment
 - `image`
   - [75336e34](https://github.com/wix-incubator/rich-content/commit/75336e34) open imageStudio on crop tab
+  - [#413](https://github.com/wix-incubator/rich-content/pull/413) new image doesn't replace existing image
+  - [#428](https://github.com/wix-incubator/rich-content/pull/428) image settings works while uploading
+  - [#423](https://github.com/wix-incubator/rich-content/pull/423) images are rendered in high resolution for seo
+- `file-upload`
+  - [#426](https://github.com/wix-incubator/rich-content/pull/426) apply spinner animation to file upload plugin
 - `gallery`
   - [#404](https://github.com/wix-incubator/rich-content/pull/404) delete last remaining image in image settings returns to gallery settings
   - [#403](https://github.com/wix-incubator/rich-content/pull/403) re-render gallery on change only
+- `example`
+  - [#430](https://github.com/wix-incubator/rich-content/pull/430) editor + viewer: gallery config field `scrollingElement` value is a function
 ### :house: Internal
 - `e2e`
   - [#393](https://github.com/wix-incubator/rich-content/pull/393) added atomic block alignment testing
   - [#394](https://github.com/wix-incubator/rich-content/pull/394) test-env changed to match main example
+  - [#409](https://github.com/wix-incubator/rich-content/pull/409) added plugin tests
+  - [#405](https://github.com/wix-incubator/rich-content/pull/405) visual tests run on applitools
 - `mentions`
   - [#387](https://github.com/wix-incubator/rich-content/pull/387) data validation schema added
+<hr/>
+
+## 5.1.11 (Oct 28, 2019)
+### :bug: Bug Fix
+- `html`
+  - [#439](https://github.com/wix-incubator/rich-content/pull/439) apply style on container
+<hr/>
+
+## 5.1.10 (Oct 23, 2019)
+### :bug: Bug Fix
+- `gallery`
+  - [#408](https://github.com/wix-incubator/rich-content/pull/408) `scrollingElement` should be passed within gallery config
+<hr/>
+
+
+## 5.1.9 (Oct 16, 2019)
+### :bug: Bug Fix
+- `gallery`
+  - [#416](https://github.com/wix-incubator/rich-content/pull/416) alignment issues
+<hr/>
+
+## 5.1.8 (Oct 15, 2019)
+### :bug: Bug Fix
+- `gallery`
+  - [#414](https://github.com/wix-incubator/rich-content/pull/414) additional height issues
+<hr/>
+
+
+## 5.1.7 (Oct 15, 2019)
+### :bug: Bug Fix
+- `gallery`
+  - [#412](https://github.com/wix-incubator/rich-content/pull/412) height issues
+<hr/>
+
+## 5.1.6 (Oct 10, 2019)
+### :bug: Bug Fix
+- `gallery`
+  - [#410](https://github.com/wix-incubator/rich-content/pull/410) layout change and events handler
+### :house: Internal
+- `gallery`
+  - [#410](https://github.com/wix-incubator/rich-content/pull/410) `pro-gallery` updated to `v1.3.21`
 <hr/>
 
 ## 5.1.5 (Oct 2, 2019)

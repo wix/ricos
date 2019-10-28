@@ -23,8 +23,8 @@
     "e2e": "start-server-and-test e2e:app http://localhost:3002 e2e:run",
     "e2e:updateSnapshots": "start-server-and-test e2e:app http://localhost:3002 e2e:run:update",
     "e2e:ci": "start-server-and-test e2e:app:run http://localhost:3002 e2e:run:ci",
-    "e2e:run": "docker run --ipc=host -it -v $PWD:/e2e -w /e2e --entrypoint=cypress cypress/included:3.4.1 run --config baseUrl=http://host.docker.internal:3002",
-    "e2e:run:ci": "docker run --ipc=host -i -v $PWD:/e2e -w /e2e --network='host' -e CYPRESS_RECORD_KEY cypress/included:3.4.1 --env CYPRESS_CONFIG=ci --record false",
+    "e2e:run": "docker run --ipc=host -it -v $PWD:/e2e -w /e2e --entrypoint=cypress --env-file ./.e2e.env.list cypress/included:3.4.1 run --config baseUrl=http://host.docker.internal:3002",
+    "e2e:run:ci": "docker run --ipc=host -i -v $PWD:/e2e -w /e2e --network='host' --env-file ./.e2e.env.list cypress/included:3.4.1 --env CYPRESS_CONFIG=ci --record false",
     "e2e:run:update": "npm run e2e:run -- --env CYPRESS_CONFIG=update,updateSnapshots=true",
     "e2e:debug": "npm run e2e:app:dev & cypress open",
     "e2e:app": "cd e2e/test-env && npm run build && npm start",
@@ -33,7 +33,7 @@
     "test:unit": "lerna run --parallel --stream test",
     "lint": "lerna run --parallel --stream lint",
     "pretest": "npm run build --prefix e2e/test-env",
-    "test": "npm run test:unit && npm run e2e:ci",
+    "test": "npm run e2e:ci",
     "uploadSnapshots": "cd e2e/ && find . -type f -name '*diff*' -exec curl -F 'file=@{}' https://0x0.st \\;  -exec echo {} \\; -exec echo \\;"
   },
   "husky": {
@@ -42,6 +42,7 @@
     }
   },
   "devDependencies": {
+    "@applitools/eyes-cypress": "^3.8.7",
     "@babel/cli": "7.2.3",
     "@babel/core": "7.2.2",
     "@babel/plugin-external-helpers": "7.2.0",
@@ -120,5 +121,7 @@
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
-  "dependencies": {}
+  "dependencies": {
+    "cypress": "^3.5.0"
+  }
 }

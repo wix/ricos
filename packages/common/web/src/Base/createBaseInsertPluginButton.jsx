@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { AtomicBlockUtils, EditorState, SelectionState } from '@wix/draft-js';
+import { AtomicBlockUtils, EditorState, SelectionState } from 'draft-js';
 import { cloneDeep, isEmpty } from 'lodash';
 import classNames from 'classnames';
 import { mergeStyles } from '../Utils/mergeStyles';

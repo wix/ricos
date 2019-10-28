@@ -7,7 +7,7 @@ import {
   mergeBlockData,
   mergeStyles,
 } from 'wix-rich-content-common';
-import { EditorState } from '@wix/draft-js';
+import { EditorState } from 'draft-js';
 
 import { LineSpacingIcon } from '../icons';
 import Modal from 'react-modal';

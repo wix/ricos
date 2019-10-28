@@ -108,6 +108,7 @@ const SortableItem = sortableElement(props => {
         {url ? (
           <img
             alt="Gallery Item Thumbnail"
+            data-hook="galleryItemPreview"
             className={styles.itemImage}
             src={url}
             style={{

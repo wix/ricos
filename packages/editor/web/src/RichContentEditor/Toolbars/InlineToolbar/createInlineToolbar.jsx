@@ -17,6 +17,7 @@ const createInlineToolbar = (config = {}) => {
     visibilityFn,
     displayOptions,
     toolbarDecorationFn,
+    locale,
   } = config;
 
   const toolbarProps = {
@@ -33,6 +34,7 @@ const createInlineToolbar = (config = {}) => {
     visibilityFn,
     displayOptions,
     toolbarDecorationFn,
+    locale,
   };
 
   return {

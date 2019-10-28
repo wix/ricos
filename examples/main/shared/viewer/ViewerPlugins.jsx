@@ -6,7 +6,10 @@ import { HTML_TYPE, htmlTypeMapper } from 'wix-rich-content-plugin-html/dist/mod
 import { soundCloudTypeMapper } from 'wix-rich-content-plugin-sound-cloud/dist/module.viewer';
 import { LINK_TYPE, linkTypeMapper } from 'wix-rich-content-plugin-link/dist/module.viewer';
 import { imageTypeMapper } from 'wix-rich-content-plugin-image/dist/module.viewer';
-import { galleryTypeMapper } from 'wix-rich-content-plugin-gallery/dist/module.viewer';
+import {
+  galleryTypeMapper,
+  GALLERY_TYPE,
+} from 'wix-rich-content-plugin-gallery/dist/module.viewer';
 import { mapTypeMapper } from 'wix-rich-content-plugin-map/dist/module.viewer';
 import { giphyTypeMapper, GIPHY_TYPE } from 'wix-rich-content-plugin-giphy/dist/module.viewer';
 import { HashtagDecorator } from 'wix-rich-content-plugin-hashtag/dist/module.viewer';
@@ -78,6 +81,9 @@ export const typeMappers = [
 ];
 
 export const config = {
+  [GALLERY_TYPE]: {
+    scrollingElement: () => typeof window !== 'undefined' && document.getElementsByClassName('viewer-example')[0],
+  },
   [HEADERS_MARKDOWN_TYPE]: {
     hideMarkdown: true,
   },

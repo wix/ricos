@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { EditorState, convertFromRaw } from '@wix/draft-js';
+import { EditorState, convertFromRaw } from 'draft-js';
 import Editor from 'draft-js-plugins-editor';
 import { get, includes, merge, debounce } from 'lodash';
 import Measure from 'react-measure';
@@ -53,7 +53,17 @@ class RichContentEditor extends Component {
   setEditorState = editorState => this.setState({ editorState });
 
   initContext = () => {
-    const { theme, t, locale, anchorTarget, relValue, helpers, config, isMobile } = this.props;
+    const {
+      theme,
+      t,
+      locale,
+      anchorTarget,
+      relValue,
+      helpers,
+      config,
+      isMobile,
+      shouldRenderOptimizedImages,
+    } = this.props;
     this.contextualData = {
       theme,
       t,
@@ -66,6 +76,7 @@ class RichContentEditor extends Component {
       setEditorState: this.setEditorState,
       getEditorBounds: this.getEditorBounds,
       languageDir: getLangDir(locale),
+      shouldRenderOptimizedImages,
     };
   };
 
@@ -225,7 +236,7 @@ class RichContentEditor extends Component {
     },
   });
 
-  focus = () => this.editor.focus();
+  focus = () => setTimeout(this.editor.focus);
 
   blur = () => this.editor.blur();
 
@@ -440,6 +451,7 @@ RichContentEditor.propTypes = {
   handleReturn: PropTypes.func,
   customStyleFn: PropTypes.func,
   locale: PropTypes.string.isRequired,
+  shouldRenderOptimizedImages: PropTypes.bool,
 };
 
 RichContentEditor.defaultProps = {

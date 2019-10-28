@@ -1,7 +1,7 @@
 {
   "private": false,
   "name": "wix-rich-content-editor",
-  "version": "5.1.1",
+  "version": "5.1.11",
   "author": {
     "name": "Jonathan Bachman",
     "email": "jonathanb@wix.com"
@@ -32,36 +32,34 @@
     },
     "moduleNameMapper": {
       "\\.(jpg|jpeg|png|gif|svg)$": "<rootDir>/__mocks__/fileMock.js",
-      "\\.(css|scss)$": "<rootDir>/__mocks__/styleMock.js",
-      "^draft-js$": "<rootDir>/../../../node_modules/@wix/draft-js/dist/Draft.min.js",
-      "^draft-js/.*$": "<rootDir>/../../../node_modules/@wix/draft-js/dist/Draft.min.js",
-      "^@wix/draft-js$": "<rootDir>/../../../node_modules/@wix/draft-js/dist/Draft.min.js"
+      "\\.(css|scss)$": "<rootDir>/__mocks__/styleMock.js"
     }
   },
   "dependencies": {
-    "draft-js-drag-n-drop-plugin": "~2.0.2",
-    "draft-js-focus-plugin": "~2.2.0",
-    "draft-js-plugins-editor": "~2.1.1",
+    "draft-js-drag-n-drop-plugin": "~2.0.4",
+    "draft-js-focus-plugin": "~3.0.1",
+    "draft-js-plugins-editor": "~3.0.0",
     "i18next": "~10.6.0",
     "react-click-outside": "github:tj/react-click-outside",
     "react-i18next": "~7.13.0",
     "react-measure": "~2.3.0",
     "rtl-detect": "^1.0.2",
-    "wix-rich-content-common": "5.1.1"
+    "wix-rich-content-common": "5.1.11"
   },
   "peerDependencies": {
     "@babel/runtime": "7.2.0",
     "classnames": "^2.0.0",
+    "draft-js": "0.11.0",
     "lodash": "^4.0.0",
     "react": "^16.6.3",
     "react-dom": "^16.6.3"
   },
   "devDependencies": {
     "@babel/runtime": "7.2.0",
-    "@wix/draft-js": "0.10.272",
     "babel-jest": "^23.6.0",
     "classnames": "^2.2.6",
     "cross-env": "^5.2.0",
+    "draft-js": "0.11.0",
     "enzyme": "^3.8.0",
     "enzyme-adapter-react-16": "^1.9.1",
     "eslint": "^6.1.0",

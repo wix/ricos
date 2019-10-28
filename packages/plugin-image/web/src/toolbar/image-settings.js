@@ -55,7 +55,9 @@ class ImageSettings extends Component {
     this.props.pubsub.unsubscribe('componentData', this.onComponentUpdate);
   }
 
-  onComponentUpdate = () => this.forceUpdate();
+  onComponentUpdate = () => {
+    this.setState({ src: this.props.pubsub.get('componentData').src });
+  };
 
   revertComponentData() {
     const { componentData, helpers, pubsub } = this.props;
@@ -122,10 +124,6 @@ class ImageSettings extends Component {
     const showRelValueCheckbox =
       nofollowRelToggleVisibilityFn && nofollowRelToggleVisibilityFn(relValue);
 
-    if (!src) {
-      return <Loader type={'medium'} />; //do not render until the src is passed
-    }
-
     return (
       <div className={this.styles.imageSettings} data-hook="imageSettings" dir={languageDir}>
         {isMobile ? (
@@ -146,19 +144,29 @@ class ImageSettings extends Component {
         >
           <SettingsSection
             theme={theme}
-            ariaProps={{ 'aria-label': 'image preview', role: 'region' }}
+            ariaProps={{
+              'aria-label': 'image preview',
+              role: 'region',
+              'data-hook': 'imagePreview',
+            }}
           >
-            <Image
-              alt={metadata.alt || 'image preview'}
-              resizeMode={'contain'}
-              className={this.styles.imageSettingsImage}
-              src={getImageSrc(src, helpers, {
-                requiredWidth: 1000,
-                requiredHeight: 250,
-                requiredQuality: 80,
-              })}
-              theme={theme}
-            />
+            {src ? (
+              <Image
+                alt={metadata.alt || 'image preview'}
+                resizeMode={'contain'}
+                className={this.styles.imageSettingsImage}
+                src={getImageSrc(src, helpers, {
+                  requiredWidth: 1000,
+                  requiredHeight: 250,
+                  requiredQuality: 80,
+                })}
+                theme={theme}
+              />
+            ) : (
+              <div className={this.styles.imageSettingsImage}>
+                <Loader type={'medium'} />
+              </div>
+            )}
           </SettingsSection>
           <SettingsSection
             theme={theme}

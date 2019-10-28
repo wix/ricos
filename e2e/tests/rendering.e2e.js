@@ -9,20 +9,41 @@ import { fixtures } from './constants';
 // }
 
 const testFixture = fixture =>
-  it(`should render ${fixture}`, () => {
+  it(`render ${fixture}`, function() {
     cy.loadEditorAndViewer(fixture);
-    cy.matchImageSnapshot();
-    // testViewerAndEditorAreEqual();
+    cy.eyesCheckWindow(this.test.title);
   });
 
 describe('editor rendering', () => {
   context('desktop', () => {
+    before(function() {
+      cy.eyesOpen({
+        appName: 'Rendering',
+        testName: this.test.parent.title,
+        browser: [{ width: 1440, height: 900, name: 'chrome' }],
+      });
+    });
+
     beforeEach(() => cy.switchToDesktop());
+
+    after(() => cy.eyesClose());
+
     fixtures.forEach(testFixture);
   });
 
   context('mobile', () => {
+    before(function() {
+      cy.eyesOpen({
+        appName: 'Rendering',
+        testName: this.test.parent.title,
+        browser: { deviceName: 'iPhone 6/7/8' },
+      });
+    });
+
     beforeEach(() => cy.switchToMobile());
+
+    after(() => cy.eyesClose());
+
     fixtures.forEach(testFixture);
   });
 });

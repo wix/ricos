@@ -13,13 +13,14 @@ class TestApp extends PureComponent {
         shouldMockUpload={true}
         locale={locale}
         localeResource={localeResource}
+        mockImageIndex={1}
       />
     );
   };
 
   renderViewer = () => {
-    const { isMobile, viewerState } = this.props;
-    return <Viewer initialState={viewerState} isMobile={isMobile} />;
+    const { isMobile, viewerState, locale } = this.props;
+    return <Viewer initialState={viewerState} isMobile={isMobile} locale={locale} />;
   };
 
   render() {

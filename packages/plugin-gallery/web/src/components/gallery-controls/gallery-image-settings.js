@@ -129,7 +129,11 @@ class ImageSettings extends Component {
               <div>
                 <SettingsSection
                   theme={theme}
-                  ariaProps={{ 'aria-label': 'image navigation', role: 'region' }}
+                  ariaProps={{
+                    'aria-label': 'image navigation',
+                    role: 'region',
+                    'data-hook': 'galleryImageSettingsPreview',
+                  }}
                 >
                   <Image
                     alt={metadata.title || 'gallery image preview'}
@@ -142,6 +146,7 @@ class ImageSettings extends Component {
                     className={classNames(styles.galleryImageSettings_nav, {
                       [styles.galleryImageSettings_nav_mobile]: isMobile,
                     })}
+                    data-hook="galleryImagePreview"
                   >
                     <button
                       className={classNames(styles.galleryImageSettings_previous, {

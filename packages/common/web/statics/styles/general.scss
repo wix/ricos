@@ -74,33 +74,6 @@
   max-width: 100%;
 }
 
-.sizeFullWidth,
-.textWrapNowrap {
-  width: 100%;
-}
-
-.sizeContent {
-  &:not(.textWrapNowrap) {
-    max-width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-  }
-}
-
-.sizeSmall {
-  &:not(.textWrapNowrap) {
-    width: 350px;
-  }
-}
-
-.sizeSmallCenter {
-  &:not(.textWrapNowrap) {
-    width: 350px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-}
-
 //*** PANEL ***//
 .panelContainer {
   @extend .fontElementMap;
