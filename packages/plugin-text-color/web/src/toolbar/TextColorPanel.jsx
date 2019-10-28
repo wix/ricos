@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Modifier, EditorState } from 'draft-js';
 import { ColorPicker, getSelectionStyles } from 'wix-rich-content-common';
 import { DEFAULT_COLOR, DEFAULT_STYLE_SELECTION_PREDICATE } from '../constants';
+import { getColor } from '../text-decorations-utils';
 
 import {
   extractColor,
@@ -24,9 +25,9 @@ export default class TextColorPanel extends Component {
     this.state = {
       currentColor:
         currentColors.length > 0
-          ? extractColor(props.settings.colorScheme, currentColors[0])
+          ? extractColor(props.settings.colorScheme, getColor(currentColors[0]))
           : DEFAULT_COLOR,
-      currentSchemeColor: currentColors[0],
+      currentSchemeColor: currentColors[0] && getColor(currentColors[0]),
       userColors: props.settings.getUserColors() || [],
     };
     this.setColor = this.setColor.bind(this);
