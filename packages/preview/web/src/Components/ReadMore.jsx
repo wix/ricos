@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Context, mergeStyles } from 'wix-rich-content-common';
 import LinesEllipsis from 'react-lines-ellipsis';
@@ -35,7 +35,7 @@ class ReadMore extends PureComponent {
     const { lines, label, ellipsis, children } = this.props;
     const text = getChildrenText(children);
     return (
-      <div>
+      <Fragment>
         <div className={this.styles.readMore_wrapper} onClick={this.onClick}/>
        <LinesEllipsis
           text={text}
@@ -43,7 +43,7 @@ class ReadMore extends PureComponent {
           maxLine={lines}
           ellipsis={`${ellipsis} ${label}`}
         />
-      </div>
+      </Fragment>
     );
   }
   /* eslint-enable */
