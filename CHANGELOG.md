@@ -20,6 +20,8 @@
   - [#402](https://github.com/wix-incubator/rich-content/pull/402) mentions suggestion box size controll
 - `editor`
   - [#396](https://github.com/wix-incubator/rich-content/pull/396) sticky static toolbar on all platforms
+- `text-color`
+  - [#440](https://github.com/wix-incubator/rich-content/pull/440) text highlight plugin
 ### :bug: Bug Fix
 - `common`
   - [#436](https://github.com/wix-incubator/rich-content/pull/436) data-normalization: missing entity protection added
