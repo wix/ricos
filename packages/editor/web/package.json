@@ -1,7 +1,7 @@
 {
   "private": false,
   "name": "wix-rich-content-editor",
-  "version": "5.1.9",
+  "version": "5.1.11",
   "author": {
     "name": "Jonathan Bachman",
     "email": "jonathanb@wix.com"
@@ -44,7 +44,7 @@
     "react-i18next": "~7.13.0",
     "react-measure": "~2.3.0",
     "rtl-detect": "^1.0.2",
-    "wix-rich-content-common": "5.1.9"
+    "wix-rich-content-common": "5.1.11"
   },
   "peerDependencies": {
     "@babel/runtime": "7.2.0",

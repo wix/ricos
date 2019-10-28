@@ -77,7 +77,6 @@ class ExampleApp extends PureComponent {
     this.onContentStateEditorResize();
   };
   onSetLocale = locale => {
-    this.setState({ locale });
     this.props.setLocale && this.props.setLocale(locale);
   };
 
@@ -146,7 +145,7 @@ class ExampleApp extends PureComponent {
   };
 
   renderViewer = () => {
-    const { viewerState, isMobile } = this.props;
+    const { viewerState, isMobile, locale } = this.props;
     const { isViewerShown } = this.state;
     const settings = [
       {
@@ -171,7 +170,7 @@ class ExampleApp extends PureComponent {
           />
           <SectionContent>
             <ErrorBoundary>
-              <Viewer initialState={viewerState} isMobile={this.state.viewerIsMobile || isMobile} />
+              <Viewer initialState={viewerState} isMobile={this.state.viewerIsMobile || isMobile} locale={locale} />
             </ErrorBoundary>
           </SectionContent>
         </ReflexElement>
