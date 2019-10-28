@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { translate } from 'react-i18next';
 import {
   mergeStyles,
   AccessibilityListener,
@@ -13,7 +14,7 @@ import viewerAlignmentStyles from '../statics/rich-content-viewer-alignment.rtli
 import rtlStyle from '../statics/rich-content-viewer-rtl.rtlignore.scss';
 import { getLangDir } from 'rtl-detect';
 
-export default class RichContentViewer extends Component {
+class RichContentViewer extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -102,6 +103,7 @@ RichContentViewer.propTypes = {
   helpers: PropTypes.object,
   platform: PropTypes.string,
   locale: PropTypes.string.isRequired,
+  localeResource: PropTypes.object,
   typeMappers: PropTypes.arrayOf(PropTypes.func),
   inlineStyleMappers: PropTypes.arrayOf(PropTypes.func),
   decorators: PropTypes.arrayOf(
@@ -117,6 +119,7 @@ RichContentViewer.propTypes = {
       }),
     ])
   ),
+  t: PropTypes.func,
   theme: PropTypes.object,
   anchorTarget: PropTypes.string,
   relValue: PropTypes.string,
@@ -132,3 +135,5 @@ RichContentViewer.defaultProps = {
   typeMappers: [],
   locale: 'en',
 };
+
+export default translate(null, { withRef: true })(RichContentViewer);
