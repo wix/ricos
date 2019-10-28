@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Modifier, EditorState } from '@wix/draft-js';
 import { ColorPicker, getSelectionStyles } from 'wix-rich-content-common';
-import { DEFAULT_COLOR } from '../constants';
+import { DEFAULT_COLOR, DEFAULT_STYLE_SELECTION_PREDICATE } from '../constants';
 
 import {
   extractColor,
@@ -14,8 +14,9 @@ import {
 export default class TextColorPanel extends Component {
   constructor(props) {
     super(props);
-    const styleSelectionPredicate =
-      props.settings.styleSelectionPredicate || props.defaultStyleSelectionPredicate;
+    const styleSelectionPredicate = props.predicateWrapper(
+      props.settings.styleSelectionPredicate || DEFAULT_STYLE_SELECTION_PREDICATE
+    );
     if (props.settings.colorScheme && !validateColorScheme(props.settings.colorScheme)) {
       console.error('Error: colorScheme is not valid'); // eslint-disable-line no-console
     }
@@ -49,9 +50,10 @@ export default class TextColorPanel extends Component {
   }
 
   getInlineColorState(color) {
-    const { editorState, settings, defaultStyleSelectionPredicate, styleMapper } = this.props;
-    const styleSelectionPredicate =
-      settings.styleSelectionPredicate || defaultStyleSelectionPredicate;
+    const { editorState, settings, styleMapper, predicateWrapper } = this.props;
+    const styleSelectionPredicate = predicateWrapper(
+      settings.styleSelectionPredicate || DEFAULT_STYLE_SELECTION_PREDICATE
+    );
     const selection = editorState.getSelection();
     const currentColors = getSelectionStyles(styleSelectionPredicate, editorState);
     const newEditorState = currentColors.reduce((nextEditorState, prevColor) => {
@@ -125,6 +127,6 @@ TextColorPanel.propTypes = {
   setKeepToolbarOpen: PropTypes.func,
   closeModal: PropTypes.func.isRequired,
   isMobile: PropTypes.bool.isRequired,
-  defaultStyleSelectionPredicate: PropTypes.func.isRequired,
   styleMapper: PropTypes.func.isRequired,
+  predicateWrapper: PropTypes.func,
 };

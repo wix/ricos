@@ -14,7 +14,7 @@ export default class TextColorWrapper extends Component {
     super(props);
     this.state = { showPanel: false };
     this.styles = mergeStyles({ styles, theme: props.theme });
-    this.buttonRef = this.props.buttonRef;
+    this.buttonRef = props.buttonRef;
     this.styleMapper = styleMapper(props.decorator.type);
   }
 
@@ -46,10 +46,12 @@ export default class TextColorWrapper extends Component {
   }
 
   get isActive() {
-    const settings = this.props.config[this.props.decorator.type] || {};
-    const styleSelectionPredicate =
-      settings.styleSelectionPredicate || DEFAULT_STYLE_SELECTION_PREDICATE;
-    return getSelectionStyles(styleSelectionPredicate, this.props.getEditorState()).length > 0;
+    const { config, decorator, getEditorState } = this.props;
+    const settings = config[decorator.type] || {};
+    const styleSelectionPredicate = decorator.predicateWrapper(
+      settings.styleSelectionPredicate || DEFAULT_STYLE_SELECTION_PREDICATE
+    );
+    return getSelectionStyles(styleSelectionPredicate, getEditorState()).length > 0;
   }
 
   render() {
@@ -116,8 +118,8 @@ export default class TextColorWrapper extends Component {
             settings={settings}
             uiSettings={uiSettings}
             setKeepToolbarOpen={setKeepOpen}
-            defaultStyleSelectionPredicate={decorator.defaultStyleSelectionPredicate}
             styleMapper={this.styleMapper}
+            predicateWrapper={decorator.predicateWrapper}
           />
         </Modal>
       </InlineToolbarButton>

@@ -47,8 +47,7 @@ import 'wix-rich-content-plugin-text-color/dist/styles.min.css';
 
 import {
   customStyleFn,
-  styleSelectionBGPredicate,
-  styleSelectionFGPredicate,
+  styleSelectionPredicate,
   colorScheme,
   customBackgroundStyleFn,
 } from '../../src/text-color-style-fn';
@@ -300,14 +299,14 @@ export const config = {
   },
   [TEXT_HIGHLIGHT_TYPE]: {
     colorScheme,
-    styleSelectionPredicate: styleSelectionBGPredicate,
-    customBackgroundStyleFn,
+    styleSelectionPredicate,
+    customStyleFn: customBackgroundStyleFn,
     onColorAdded: color => (userColors = [color, ...userColors]),
     getUserColors: () => userColors,
   },
   [TEXT_COLOR_TYPE]: {
     colorScheme,
-    styleSelectionPredicate: styleSelectionFGPredicate,
+    styleSelectionPredicate,
     customStyleFn,
     onColorAdded: color => (userColors = [color, ...userColors]),
     getUserColors: () => userColors,
