@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import TextColorIcon from './TextColorIcon';
 import { TEXT_COLOR_TYPE } from '../types';
-import TextColorWrapper from './TextColorWrapper';
+import BaseTextColor from './BaseTextColor';
 import { textColorPredicateWrapper } from '../text-decorations-utils';
 
 export default class TextColorButton extends Component {
@@ -19,7 +19,7 @@ export default class TextColorButton extends Component {
       type: TEXT_COLOR_TYPE,
       predicateWrapper: textColorPredicateWrapper,
     };
-    return <TextColorWrapper buttonRef={this.buttonRef} decorator={decorator} {...this.props} />;
+    return <BaseTextColor buttonRef={this.buttonRef} decorator={decorator} {...this.props} />;
   }
 }
 

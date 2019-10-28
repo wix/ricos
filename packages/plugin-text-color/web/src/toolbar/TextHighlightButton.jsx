@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import TextColorIcon from './TextColorIcon';
 import { TEXT_HIGHLIGHT_TYPE } from '../types';
-import TextColorWrapper from './TextColorWrapper';
+import BaseTextColor from './BaseTextColor';
 import { textHighlightPredicateWrapper } from '../text-decorations-utils';
 
 export default class TextHighlightButton extends Component {
@@ -18,7 +18,7 @@ export default class TextHighlightButton extends Component {
       type: TEXT_HIGHLIGHT_TYPE,
       predicateWrapper: textHighlightPredicateWrapper,
     };
-    return <TextColorWrapper buttonRef={this.buttonRef} decorator={decorator} {...this.props} />;
+    return <BaseTextColor buttonRef={this.buttonRef} decorator={decorator} {...this.props} />;
   }
 }
 

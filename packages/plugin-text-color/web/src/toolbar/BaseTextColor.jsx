@@ -9,7 +9,7 @@ import { PANEL_WIDTH, DEFAULT_STYLE_SELECTION_PREDICATE } from '../constants';
 import styles from '../../statics/styles/text-color-modal.scss';
 import { styleMapper } from '../text-decorations-utils';
 
-export default class TextColorWrapper extends Component {
+export default class BaseTextColor extends Component {
   constructor(props) {
     super(props);
     this.state = { showPanel: false };
@@ -96,7 +96,7 @@ export default class TextColorWrapper extends Component {
         <Modal
           onRequestClose={() => this.closePanel()}
           isOpen={isPanelOpen}
-          parentSelector={TextColorWrapper.getModalParent}
+          parentSelector={BaseTextColor.getModalParent}
           className={classNames({
             [this.styles.textColorModal]: !isMobile,
             [this.styles.textColorModal_mobile]: isMobile,
@@ -127,7 +127,7 @@ export default class TextColorWrapper extends Component {
   }
 }
 
-TextColorWrapper.propTypes = {
+BaseTextColor.propTypes = {
   getEditorState: PropTypes.func.isRequired,
   setEditorState: PropTypes.func.isRequired,
   onExtendContent: PropTypes.func.isRequired,
@@ -148,6 +148,6 @@ TextColorWrapper.propTypes = {
   buttonRef: PropTypes.oneOfType([PropTypes.func, PropTypes.shape({ current: PropTypes.func })]),
 };
 
-TextColorWrapper.defaultProps = {
+BaseTextColor.defaultProps = {
   setKeepOpen: () => {},
 };
