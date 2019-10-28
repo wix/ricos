@@ -84,7 +84,7 @@ class ExampleApp extends PureComponent {
   };
 
   renderEditor = () => {
-    const { allLocales, editorState, locale, localeResource, isMobile } = this.props;
+    const { allLocales, editorState, locale, editorLocaleResource, isMobile } = this.props;
     const { isEditorShown, staticToolbar, shouldMockUpload, editorIsMobile } = this.state;
     const settings = [
       {
@@ -138,7 +138,7 @@ class ExampleApp extends PureComponent {
                 shouldMockUpload={this.state.shouldMockUpload}
                 staticToolbar={staticToolbar}
                 locale={locale}
-                localeResource={localeResource}
+                localeResource={editorLocaleResource}
               />
             </ErrorBoundary>
           </SectionContent>
@@ -149,7 +149,7 @@ class ExampleApp extends PureComponent {
 
 
   renderPreview = () => {
-    const { previewState, isMobile, locale } = this.props;
+    const { previewState, isMobile, locale, viewerLocaleResource } = this.props;
     const { isPreviewShown } = this.state;
     const settings = [
       {
@@ -171,7 +171,7 @@ class ExampleApp extends PureComponent {
           />
           <SectionContent>
             <ErrorBoundary>
-              <Preview initialState={previewState} isMobile={this.state.previewIsMobile || isMobile} locale={locale}/>
+              <Preview initialState={previewState} isMobile={this.state.previewIsMobile || isMobile} locale={locale} localeResource={viewerLocaleResource}/>
             </ErrorBoundary>
           </SectionContent>
         </ReflexElement>
@@ -180,7 +180,7 @@ class ExampleApp extends PureComponent {
   };
 
   renderViewer = () => {
-    const { viewerState, isMobile, locale } = this.props;
+    const { viewerState, isMobile, locale, viewerLocaleResource } = this.props;
     const { isViewerShown } = this.state;
     const settings = [
       {
@@ -205,7 +205,7 @@ class ExampleApp extends PureComponent {
           />
           <SectionContent>
             <ErrorBoundary>
-              <Viewer initialState={viewerState} isMobile={this.state.viewerIsMobile || isMobile} locale={locale} />
+              <Viewer initialState={viewerState} isMobile={this.state.viewerIsMobile || isMobile} locale={locale} localeResource={viewerLocaleResource}/>
             </ErrorBoundary>
           </SectionContent>
         </ReflexElement>
