@@ -82,6 +82,17 @@ class RichContentEditor extends Component {
 
   getEditorBounds = () => this.state.editorBounds;
 
+  onAtomicBlockFocus = blockKey => {
+    const { onAtomicBlockFocus } = this.props;
+    if (blockKey && onAtomicBlockFocus) {
+      const contentState = this.getEditorState().getCurrentContent();
+      const block = contentState.getBlockForKey(blockKey);
+      const entityKey = block.getEntityAt(0);
+      const entity = contentState.getEntity(entityKey);
+      onAtomicBlockFocus(blockKey, entity.type, entity.data);
+    }
+  };
+
   initPlugins() {
     const {
       helpers,
@@ -110,6 +121,7 @@ class RichContentEditor extends Component {
       isMobile,
       anchorTarget,
       relValue,
+      onAtomicBlockFocus: this.onAtomicBlockFocus,
       getEditorState: this.getEditorState,
       setEditorState: this.setEditorState,
       getEditorBounds: this.getEditorBounds,
@@ -452,6 +464,7 @@ RichContentEditor.propTypes = {
   customStyleFn: PropTypes.func,
   locale: PropTypes.string.isRequired,
   shouldRenderOptimizedImages: PropTypes.bool,
+  onAtomicBlockFocus: PropTypes.func,
 };
 
 RichContentEditor.defaultProps = {

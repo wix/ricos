@@ -27,7 +27,15 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
   const settings = { ...DEFAULT_SETTINGS, ...config.settings };
   const helpers = config.helpers || {};
   const isMobile = config.isMobile || false;
-  const { t, anchorTarget, relValue, customStyleFn, getEditorBounds, onOverlayClick } = config;
+  const {
+    t,
+    anchorTarget,
+    relValue,
+    customStyleFn,
+    getEditorBounds,
+    onOverlayClick,
+    onAtomicBlockFocus,
+  } = config;
   const toolbarTheme = { ...getToolbarTheme(config.theme, 'plugin'), ...config.theme };
   const Toolbar =
     config.toolbar &&
@@ -77,6 +85,7 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
       pluginDecorationProps: config.pluginDecorationProps,
       componentWillReceiveDecorationProps: config.componentWillReceiveDecorationProps,
       onOverlayClick,
+      onAtomicBlockFocus,
       pubsub,
       settings,
       helpers,

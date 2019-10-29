@@ -57,6 +57,8 @@
 - `example`
   - [#430](https://github.com/wix-incubator/rich-content/pull/430) editor + viewer: gallery config field `scrollingElement` value is a function
 ### :house: Internal
+- `common`
+  - [#441](https://github.com/wix-incubator/rich-content/pull/441) export `replaceWithEmptyBlock`, `deleteBlock` and `updateEntityData`
 - `e2e`
   - [#393](https://github.com/wix-incubator/rich-content/pull/393) added atomic block alignment testing
   - [#394](https://github.com/wix-incubator/rich-content/pull/394) test-env changed to match main example

@@ -32,6 +32,7 @@ const createBaseComponent = ({
   componentWillReceiveDecorationProps = () => {},
   getEditorBounds,
   onOverlayClick,
+  onAtomicBlockFocus,
 }) => {
   class WrappedComponent extends Component {
     static displayName = createHocName('BaseComponent', PluginComponent);
@@ -211,6 +212,7 @@ const createBaseComponent = ({
         batchUpdates.deleteBlock = this.deleteBlock;
         batchUpdates.visibleBlock = visibleBlock;
         pubsub.set(batchUpdates);
+        onAtomicBlockFocus(visibleBlock);
       } else {
         //maybe just the position has changed
         const blockNode = findDOMNode(this);
