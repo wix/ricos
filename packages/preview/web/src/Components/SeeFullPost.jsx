@@ -14,7 +14,6 @@ class SeeFullPost extends PureComponent {
   };
 
   static defaultProps = {
-    label: 'See full post',
     onClick: () => {},
   };
 
@@ -27,7 +26,12 @@ class SeeFullPost extends PureComponent {
 
   render() {
     this.styles = this.styles || mergeStyles({ styles, theme: this.context.theme });
-    const { label, children, overlayStyles, labelStyles } = this.props;
+    const {
+      label = this.context.t('Preview_SeeFullPost_Label'),
+      children,
+      overlayStyles,
+      labelStyles,
+    } = this.props;
     /* eslint-disable */
     return (
       <Fragment>

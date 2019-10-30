@@ -17,7 +17,6 @@ class ReadMore extends PureComponent {
 
   static defaultProps = {
     ellipsis: '…',
-    label: 'read more',
     lines: 3,
     onClick: () => {},
   };
@@ -32,7 +31,7 @@ class ReadMore extends PureComponent {
   /* eslint-disable */
   render() {
     this.styles = this.styles || mergeStyles({ styles, theme: this.context.theme });
-    const { lines, label, ellipsis, children } = this.props;
+    const { lines, label = this.context.t('Preview_ReadMore_Label'), ellipsis, children } = this.props;
     const text = getChildrenText(children);
     return (
       <Fragment>
