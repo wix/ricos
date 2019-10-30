@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { translate } from 'react-i18next';
 import {
   mergeStyles,
   AccessibilityListener,
@@ -35,6 +34,7 @@ class RichContentViewer extends Component {
 
   initContext = () => {
     const {
+      t,
       theme,
       isMobile,
       anchorTarget,
@@ -46,6 +46,7 @@ class RichContentViewer extends Component {
       shouldRenderOptimizedImages,
     } = this.props;
     return {
+      t,
       theme,
       isMobile,
       anchorTarget,
@@ -136,4 +137,4 @@ RichContentViewer.defaultProps = {
   locale: 'en',
 };
 
-export default translate(null, { withRef: true })(RichContentViewer);
+export default RichContentViewer;
