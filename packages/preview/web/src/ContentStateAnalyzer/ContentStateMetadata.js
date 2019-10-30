@@ -1,3 +1,4 @@
+import { memoize } from 'lodash';
 import extractEntityData from './extractEntityData';
 import { METHOD_BLOCK_MAP, METHOD_GROUPED_BLOCK_MAP } from '../const';
 
@@ -50,8 +51,9 @@ const extractSequentialBlockArrays = ({ blocks }, blockType) => {
   return blockArrayResult.list.filter(arr => arr.length > 0);
 };
 
-const extractMedia = ({ entityMap }) =>
-  Object.values(entityMap).reduce((media, entity) => [...media, ...extractEntityData(entity)], []);
+const extractMedia = memoize(({ entityMap }) =>
+  Object.values(entityMap).reduce((media, entity) => [...media, ...extractEntityData(entity)], [])
+);
 
 const getContentStateMetadata = raw => {
   const text = () => extractTextAsArray(raw, type => type !== 'atomic');

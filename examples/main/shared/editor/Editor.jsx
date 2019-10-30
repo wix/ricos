@@ -115,8 +115,10 @@ export default class Editor extends PureComponent {
 
   setEditorToolbars = () => {
     // TODO: fix the wrappedInstance issue
-    const { MobileToolbar, TextToolbar } = this.editor.wrappedInstance.getToolbars();
-    this.setState({ MobileToolbar, TextToolbar });
+    if (this.editor && this.editor.wrappedInstance) {
+      const { MobileToolbar, TextToolbar } = this.editor.wrappedInstance.getToolbars();
+      this.setState({ MobileToolbar, TextToolbar });
+    }
   };
 
   handleChange = editorState => {
