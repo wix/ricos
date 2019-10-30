@@ -5,7 +5,6 @@ import { EditorState, convertFromRaw } from 'draft-js';
 import Editor from 'draft-js-plugins-editor';
 import { get, includes, merge, debounce } from 'lodash';
 import Measure from 'react-measure';
-import { translate } from 'react-i18next';
 import createEditorToolbars from './Toolbars';
 import createPlugins from './createPlugins';
 import { keyBindingFn, initPluginKeyBindings } from './keyBindings';
@@ -461,4 +460,4 @@ RichContentEditor.defaultProps = {
   locale: 'en',
 };
 
-export default translate(null, { withRef: true })(RichContentEditor);
+export default RichContentEditor;
