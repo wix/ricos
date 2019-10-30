@@ -43,7 +43,7 @@ export default class Preview extends PureComponent {
       }),
       new ContentStateTransformation({
         _if: metadata => metadata.media.images().length > 0,
-        _then: (metadata, preview) => preview.image({ mediaInfo: metadata.media.images()[0] }).seeFullPost({ label: 'SEE FULL STORY' }),
+        _then: (metadata, preview) => preview.image({ mediaInfo: metadata.media.images()[0] }).seeFullPost(),
       }),
       new ContentStateTransformation({
         _if: metadata => metadata.text.plain().length > 0,
@@ -91,7 +91,7 @@ export default class Preview extends PureComponent {
         </div>
         <h2>{'Rule II'}</h2>
         <p>{'_if: metadata => metadata.media.images().length > 0'}</p>
-        <p>{'_then: (metadata, preview) => preview.image({ mediaInfo: metadata.media.images()[0] }).seeFullPost({ label: "SEE FULL STORY" })'}</p>
+        <p>{'_then: (metadata, preview) => preview.image({ mediaInfo: metadata.media.images()[0] }).seeFullPost()'}</p>
         <div className="content-preview">
           <RichContentPreview
             locale={this.props.locale}
