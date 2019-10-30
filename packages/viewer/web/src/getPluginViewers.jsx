@@ -18,7 +18,6 @@ class PluginViewer extends PureComponent {
     const { component: Component, elementType } = pluginComponent;
     const { size, alignment, textWrap, container } = pluginComponent.classNameStrategies || {};
     const settings = (config && config[type]) || {};
-
     const componentProps = { componentData, settings, children, entityIndex };
 
     if (Component) {
@@ -55,6 +54,9 @@ class PluginViewer extends PureComponent {
         // TODO: more generic logic?
         if (componentData.config && componentData.config.size === 'inline') {
           containerProps.style = { width: componentData.width };
+        } else {
+          const { width: currentWidth, height: currentHeight } = componentData.config;
+          containerProps.style = { width: currentWidth, height: currentHeight };
         }
         return (
           <div className={styles.atomic}>
