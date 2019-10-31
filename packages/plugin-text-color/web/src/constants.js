@@ -11,7 +11,7 @@ export const DEFAULT_STYLE_SELECTION_PREDICATE = style => isHexColor(style);
 export const DEFAULT_STYLE_FN = style => {
   if (isTextColor(style)) {
     const color = getColor(style);
-    return isHexColor(color) ? { color: getColor(style) } : {};
+    return isHexColor(color) ? { color } : {};
   }
   return {};
 };
@@ -20,7 +20,7 @@ export const DEFAULT_STYLE_FN_DRAFT = styles =>
   styles.toArray().reduce((cssStyle, style) => ({ ...cssStyle, ...DEFAULT_STYLE_FN(style) }), {}); // eslint-disable-line new-cap
 
 export const DEFAULT_BACKGROUND_STYLE_FN = style =>
-  isTextHighlight(style) ? { 'background-color': getColor(style), transition: 'all .8s' } : {};
+  isTextHighlight(style) ? { backgroundColor: getColor(style), transition: 'all .8s' } : {};
 
 export const DEFAULT_BACKGROUND_STYLE_FN_DRAFT = styles =>
   styles
