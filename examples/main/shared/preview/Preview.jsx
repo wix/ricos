@@ -69,6 +69,23 @@ export default class Preview extends PureComponent {
   render() {
     return (
       <div id="rich-content-preview" className="viewer">
+        <h2>{'Default Rule'}</h2>
+        <div className="content-preview">
+            <RichContentPreview
+              locale={this.props.locale}
+              helpers={this.helpers}
+              typeMappers={Plugins.typeMappers}
+              inlineStyleMappers={Plugins.getInlineStyleMappers(this.props.initialState)}
+              decorators={Plugins.decorators}
+              config={Plugins.config}
+              initialState={this.props.initialState}
+              theme={theme}
+              isMobile={this.props.isMobile}
+              anchorTarget={anchorTarget}
+              relValue={relValue}
+              disabled={this.state.disabled}
+            />
+        </div>
         <h2>{'Rule I'}</h2>
         <p>{'_if: metadata => metadata.text.plain().length > 0'}</p>
         <p>{'_then: (metadata, preview) => preview .plain(metadata.text.plain()[0]) .readMore({ lines: 3 })'}</p>
