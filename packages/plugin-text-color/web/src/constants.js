@@ -8,7 +8,13 @@ export const PANEL_HEIGHT = 116;
 
 export const DEFAULT_STYLE_SELECTION_PREDICATE = style => isHexColor(style);
 
-export const DEFAULT_STYLE_FN = style => (isTextColor(style) ? { color: getColor(style) } : {});
+export const DEFAULT_STYLE_FN = style => {
+  if (isTextColor(style)) {
+    const color = getColor(style);
+    return isHexColor(color) ? { color: getColor(style) } : {};
+  }
+  return {};
+};
 
 export const DEFAULT_STYLE_FN_DRAFT = styles =>
   styles.toArray().reduce((cssStyle, style) => ({ ...cssStyle, ...DEFAULT_STYLE_FN(style) }), {}); // eslint-disable-line new-cap

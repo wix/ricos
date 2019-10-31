@@ -15,7 +15,7 @@ const splitStyle = style => {
     const _style = JSON.parse(style);
     return [...Object.keys(_style), ...Object.values(_style)];
   } else {
-    return [];
+    return [style];
   }
 };
 
@@ -26,12 +26,15 @@ const isTextDecoration = (style, type) => {
 
 const getColorByType = (style, type) => {
   const splitted = splitStyle(style);
-  return splitted.length === 2 && splitted[0] === type ? splitStyle(style)[1] : '';
+  if (splitted.length === 2) {
+    return splitted[0] === type ? splitted[1] : '';
+  }
+  return type === 'FG' ? style : '';
 };
 
 export const getColor = style => {
   const splitted = splitStyle(style);
-  return splitted.length === 2 ? splitStyle(style)[1] : '';
+  return splitted.length === 2 ? splitted[1] : splitted[0];
 };
 
 export const textColorPredicateWrapper = styleSelectionPredicate => {
@@ -58,7 +61,7 @@ export const viewerCustomStyleFnWrapper = (viewerCustomStyleFn, styleFilter) => 
 
 export const isTextHighlight = style => isTextDecoration(style, 'BG');
 
-export const isTextColor = style => isTextDecoration(style, 'FG');
+export const isTextColor = style => !isTextDecoration(style, 'BG');
 
 export const styleMapper = type => {
   return type === TEXT_HIGHLIGHT_TYPE ? textHighlightMapper : textColorMapper;
