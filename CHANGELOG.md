@@ -16,6 +16,10 @@
 </details>
 <hr/>
 
+### :rocket: [New Feature]
+- `video`
+  - [#443](https://github.com/wix-incubator/rich-content/pull/443) Adds async url resolving support
+
 ## 6.0.0 "MOAV" (Oct 30, 2019)
 ### :boom: Breaking Change
 - `general`
