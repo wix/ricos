@@ -16,6 +16,10 @@
 </details>
 <hr/>
 
+### :rocket: [New Feature]
+- `video`
+  - [#444](https://github.com/wix-incubator/rich-content/pull/444) Adds support for file upload
+
 ## 6.0.0 "MOAV" (Oct 30, 2019)
 ### :boom: Breaking Change
 - `general`
