@@ -88,6 +88,7 @@ describe('content state text builder', () => {
 
   it('should add headings to the content', () => {
     Object.entries({
+      h1: 'heading1',
       h2: 'heading2',
       h3: 'heading3',
       h4: 'heading4',

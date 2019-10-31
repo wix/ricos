@@ -399,6 +399,15 @@ export const contentState = deepFreeze({
       "data": {}
     },
     {
+      "key": "abcd123",
+      "text": "heading1",
+      "type": "header-one",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
       "key": "jbdi",
       "text": "heading2",
       "type": "header-two",

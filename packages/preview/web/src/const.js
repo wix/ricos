@@ -1,4 +1,5 @@
 export const METHOD_BLOCK_MAP = {
+  h1: 'header-one',
   h2: 'header-two',
   h3: 'header-three',
   h4: 'header-four',
