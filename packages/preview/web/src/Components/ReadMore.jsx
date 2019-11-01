@@ -13,6 +13,7 @@ class ReadMore extends PureComponent {
     children: PropTypes.node.isRequired,
     onPreviewExpand: PropTypes.func.isRequired,
     onClick: PropTypes.func,
+    text: PropTypes.string,
   };
 
   static defaultProps = {
@@ -31,13 +32,13 @@ class ReadMore extends PureComponent {
   /* eslint-disable */
   render() {
     this.styles = this.styles || mergeStyles({ styles, theme: this.context.theme });
-    const { lines, label = this.context.t('Preview_ReadMore_Label'), ellipsis, children } = this.props;
-    const text = getChildrenText(children);
+    const { lines, label = this.context.t('Preview_ReadMore_Label'), ellipsis, children, text } = this.props;
+    const textToCollapse = text || getChildrenText(children);
     return (
       <Fragment>
         <div className={this.styles.readMore_wrapper} onClick={this.onClick}/>
        <LinesEllipsis
-          text={text}
+          text={textToCollapse}
           className={this.styles.readMore}
           maxLine={lines}
           ellipsis={`${ellipsis} ${label}`}
