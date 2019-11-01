@@ -163,7 +163,7 @@ class ExampleApp extends PureComponent {
     ];
     return (
       isPreviewShown && (
-        <ReflexElement key={`preview-section-${this.state.previewResetKey}`} className="section">
+        <ReflexElement key={`preview-section-${this.state.previewResetKey}`} className="section preview-example">
           <SectionHeader
             title="Preview"
             settings={settings}

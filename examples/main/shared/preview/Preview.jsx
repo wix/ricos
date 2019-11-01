@@ -38,7 +38,7 @@ export default class Preview extends PureComponent {
         _if: metadata => metadata.text.plain().length > 0,
         _then: (metadata, preview) =>
         preview
-        .plain(metadata.text.plain()[0])
+        .plain(metadata.text.plain()[0].join(''))
         .readMore({ lines: 3 }),
       }),
       new ContentStateTransformation({
@@ -47,7 +47,7 @@ export default class Preview extends PureComponent {
       }),
       new ContentStateTransformation({
         _if: metadata => metadata.text.plain().length > 0,
-        _then: (metadata, preview) => preview.plain(metadata.text.plain()[0]).readMore({ lines: 1 }),
+        _then: (metadata, preview) => preview.plain(metadata.text.plain()[0].join('')).readMore({ lines: 1 }),
       }).rule({
         _if: metadata => metadata.media.images().length > 3,
         _then: (metadata, preview) => preview.gallery({ mediaInfo: metadata.media.images().slice(0, 3), }).imageCounter({ counter: metadata.media.images().length - 3 })
@@ -88,7 +88,7 @@ export default class Preview extends PureComponent {
         </div>
         <h2>{'Rule I'}</h2>
         <p>{'_if: metadata => metadata.text.plain().length > 0'}</p>
-        <p>{'_then: (metadata, preview) => preview .plain(metadata.text.plain()[0]) .readMore({ lines: 3 })'}</p>
+        <p>{'_then: (metadata, preview) => preview .plain(metadata.text.plain()[0].join(\'\')).readMore({ lines: 3 })'}</p>
         <div className="content-preview">
             <RichContentPreview
               locale={this.props.locale}
@@ -128,7 +128,7 @@ export default class Preview extends PureComponent {
         </div>
         <h2>{'Rule III'}</h2>
         <p>{'_if: metadata => metadata.text.plain().length > 0'}</p>
-        <p>{'_then: (metadata, preview) => preview .plain(metadata.text.plain()[0]) .readMore({ lines: 1 })'}</p>
+        <p>{'_then: (metadata, preview) => preview .plain(metadata.text.plain()[0].join(\'\')).readMore({ lines: 1 })'}</p>
         <p>{'_if: metadata => metadata.media.images().length > 3'}</p>
         <p>{'_then: (metadata, preview) => preview .gallery({ mediaInfo: metadata.media.images().slice(0, 3), }) .imageCounter({ counter: metadata.media.images().length - 3 })'}</p>
         <div className="content-preview">
