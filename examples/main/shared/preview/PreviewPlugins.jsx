@@ -1,4 +1,3 @@
-import React from 'react';
 import theme from '../theme/theme';
 import { videoTypeMapper } from 'wix-rich-content-plugin-video/dist/module.viewer';
 import { dividerTypeMapper } from 'wix-rich-content-plugin-divider/dist/module.viewer';
@@ -23,7 +22,6 @@ import {
 } from 'wix-rich-content-plugin-text-color/dist/module.viewer';
 
 import { viewerCustomStyleFn, styleSelectionPredicate } from '../../src/text-color-style-fn';
-import { anchorTarget, relValue } from '../../src/consts';
 
 import 'wix-rich-content-common/dist/styles.min.css';
 import 'wix-rich-content-viewer/dist/styles.min.css';
