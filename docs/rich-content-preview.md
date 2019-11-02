@@ -378,7 +378,38 @@ RichContentViewer `config` prop now allows to pass the preview related configura
 
 The `contentInteractionMappers` field allows to pass the interactions as a function array, similar to the `typeMappers` and `inlineStyleMappers`. The `preview` package exports the `interactionMap` API containing three predefined interactions mentioned in previous section.
 
-The `onPreviewExpand` handler determines the behavior on content expansion. The `RichContentPreview` component wraps the `RichContentViewer` while providing default `PREVIEW` configuration.
+The `onPreviewExpand` handler determines the behavior on content expansion. The `RichContentPreview` component wraps the `RichContentViewer` while providing the default `PREVIEW` configuration, interacton map, and default transformation rule:
+
+```js
+
+const defaultTransformation = new ContentStateTransformation({
+  _if: metadata => metadata.text.plain().length > 0,
+  _then: (metadata, preview) =>
+    preview.plain(metadata.text.plain()[0].join('')).readMore({ lines: 3 }),
+})
+  .rule({
+    _if: metadata => metadata.media.images().length > 0 && metadata.media.images().length < 5,
+    _then: (metadata, preview) =>
+      preview.image({ mediaInfo: metadata.media.images()[0] }).seeFullPost(),
+  })
+  .rule({
+    _if: metadata => metadata.media.images().length >= 5,
+    _then: (metadata, preview) =>
+      preview
+        .gallery({
+          mediaInfo: metadata.media.images().slice(0, 4),
+          overrides: {
+            styles: {
+              galleryLayout: 2,
+              ...
+            },
+          },
+        })
+        .imageCounter({ counter: metadata.media.images().length - 4 }),
+  });
+
+```
+The default rule displays 3 lines of plain text, and a single image appended by 'See Full Post' label, if the ContentState contains less than 5 images; otherwise, it displays a gallery grid of 4 images with image counter.
 
 #### Custom Interactions
 
