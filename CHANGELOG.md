@@ -13,6 +13,11 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+
+  ### :bug: Bug Fix
+  - `html`
+    - [#442](https://github.com/wix-incubator/rich-content/pull/442) alignment in viewer
+
 </details>
 <hr/>
 
