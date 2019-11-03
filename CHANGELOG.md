@@ -14,18 +14,20 @@
     Click to see more.
   </summary>
 
-  ### :rocket: New Feature
-  - `video`
-    - [#443](https://github.com/wix-incubator/rich-content/pull/443) async url resolving support
-  ### :bug: Bug Fix
-  - `divider`
-    - [#438](https://github.com/wix-incubator/rich-content/pull/438) container alignment
-  - `viewer`
-    - [#442](https://github.com/wix-incubator/rich-content/pull/442) html plugin alignment
-  ### :house: Internal
-  - `gallery`
-    - [#446](https://github.com/wix-incubator/rich-content/pull/446) `pro-gallery` updated to `v1.5.25`
-    
+### :rocket: New Feature
+- `video`
+  - [#443](https://github.com/wix-incubator/rich-content/pull/443) async url resolving support
+- `editor`
+  - [#445](https://github.com/wix-incubator/rich-content/pull/445) initial intent for all plugins except file-upload plugins
+### :bug: Bug Fix
+- `divider`
+  - [#438](https://github.com/wix-incubator/rich-content/pull/438) container alignment
+- `viewer`
+  - [#442](https://github.com/wix-incubator/rich-content/pull/442) html plugin alignment
+### :house: Internal
+- `gallery`
+  - [#446](https://github.com/wix-incubator/rich-content/pull/446) `pro-gallery` updated to `v1.5.25`
+  
 </details>
 <hr/>
 
