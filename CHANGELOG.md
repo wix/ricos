@@ -15,8 +15,8 @@
   </summary>
 
   ### :bug: Bug Fix
-  - `html`
-    - [#442](https://github.com/wix-incubator/rich-content/pull/442) alignment in viewer
+  - `viewer`
+    - [#442](https://github.com/wix-incubator/rich-content/pull/442) html plugin alignment
 
 </details>
 <hr/>
