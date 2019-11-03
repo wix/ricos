@@ -11,12 +11,35 @@ import {
 } from 'wix-rich-content-common';
 
 class PluginViewer extends PureComponent {
+  getContainerClassNames = hasLink => {
+    const { pluginComponent, componentData, styles } = this.props;
+    const { theme, isMobile } = this.context;
+    const { size, alignment, textWrap, custom } = pluginComponent.classNameStrategies || {};
+    return classNames(
+      styles.pluginContainerReadOnly,
+      {
+        [styles.pluginContainerMobile]: isMobile,
+        [styles.anchor]: hasLink,
+        [theme.anchor]: hasLink && theme.anchor,
+      },
+      isFunction(alignment)
+        ? alignment(componentData, theme, styles, isMobile)
+        : alignmentClassName(componentData, theme, styles, isMobile),
+      isFunction(size)
+        ? size(componentData, theme, styles, isMobile)
+        : sizeClassName(componentData, theme, styles, isMobile),
+      isFunction(textWrap)
+        ? textWrap(componentData, theme, styles, isMobile)
+        : textWrapClassName(componentData, theme, styles, isMobile),
+      isFunction(custom) ? custom(componentData, theme, styles, isMobile) : null
+    );
+  };
+
   render() {
     const { type, pluginComponent, componentData, children, styles, entityIndex } = this.props;
-    const { theme, isMobile, anchorTarget, relValue, config } = this.context;
-
+    const { theme, anchorTarget, relValue, config } = this.context;
     const { component: Component, elementType } = pluginComponent;
-    const { size, alignment, textWrap, container } = pluginComponent.classNameStrategies || {};
+    const { container } = pluginComponent.classNameStrategies || {};
     const settings = (config && config[type]) || {};
 
     const componentProps = { componentData, settings, children, entityIndex };
@@ -26,23 +49,7 @@ class PluginViewer extends PureComponent {
       if (elementType !== 'inline') {
         const hasLink = componentData.config && componentData.config.link;
         const ContainerElement = !hasLink ? 'div' : 'a';
-        const containerClassNames = classNames(
-          styles.pluginContainerReadOnly,
-          {
-            [styles.pluginContainerMobile]: isMobile,
-            [styles.anchor]: hasLink,
-            [theme.anchor]: hasLink && theme.anchor,
-          },
-          isFunction(alignment)
-            ? alignment(componentData, theme, styles, isMobile)
-            : alignmentClassName(componentData, theme, styles, isMobile),
-          isFunction(size)
-            ? size(componentData, theme, styles, isMobile)
-            : sizeClassName(componentData, theme, styles, isMobile),
-          isFunction(textWrap)
-            ? textWrap(componentData, theme, styles, isMobile)
-            : textWrapClassName(componentData, theme, styles, isMobile)
-        );
+        const containerClassNames = this.getContainerClassNames(hasLink);
         let containerProps = {};
         if (hasLink) {
           const { url, target, rel } = componentData.config.link;

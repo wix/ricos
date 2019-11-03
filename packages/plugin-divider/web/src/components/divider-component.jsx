@@ -5,10 +5,14 @@ import { mergeStyles, validate, Context } from 'wix-rich-content-common';
 import { isEqual } from 'lodash';
 import { getType, getConfig } from '../toolbar/selectors';
 import DividerLine from './divider-line';
+import { customClassName } from '../classNameStrategies';
 import schema from '../../statics/data-schema.json';
 import styles from '../../statics/styles/divider-viewer.rtlignore.scss';
 
 class DividerComponent extends PureComponent {
+  static customClassName = (componentData, theme, styles, isMobile) =>
+    customClassName(componentData, theme, styles, isMobile);
+
   constructor(props) {
     super(props);
     validate(props.componentData, schema);

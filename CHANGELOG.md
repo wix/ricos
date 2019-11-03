@@ -33,6 +33,7 @@
   - [#433](https://github.com/wix-incubator/rich-content/pull/433) side toolbar is positioned to the right in RTL
 - `divider`
   - [#406](https://github.com/wix-incubator/rich-content/pull/406) divider center alignment
+  - [#438](https://github.com/wix-incubator/rich-content/pull/438) align divider container correctly
 - `image`
   - [75336e34](https://github.com/wix-incubator/rich-content/commit/75336e34) open imageStudio on crop tab
   - [#413](https://github.com/wix-incubator/rich-content/pull/413) new image doesn't replace existing image
