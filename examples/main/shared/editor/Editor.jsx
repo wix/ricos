@@ -114,8 +114,8 @@ export default class Editor extends PureComponent {
   }
 
   setEditorToolbars = () => {
-      const { MobileToolbar, TextToolbar } = this.editor.getToolbars();
-      this.setState({ MobileToolbar, TextToolbar });
+    const { MobileToolbar, TextToolbar } = this.editor.getToolbars();
+    this.setState({ MobileToolbar, TextToolbar });
   };
 
   handleChange = editorState => {
