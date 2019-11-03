@@ -1,4 +1,5 @@
 import { INTERACTIONS } from '../const';
+
 const interactionDataMerger = ({
   contentState,
   settings = {},
