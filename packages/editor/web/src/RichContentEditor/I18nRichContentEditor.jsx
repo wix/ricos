@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withI18n } from 'wix-rich-content-common';
-import englishResources from '../../statics/locale/messages_en.json';
+import englishResources from 'wix-rich-content-common/dist/statics/locale/messages_en.json';
 import RichContentEditor from './RichContentEditor';
 
 const WrappedEditor = withI18n(RichContentEditor, englishResources);
