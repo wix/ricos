@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { AtomicBlockUtils, EditorState, SelectionState } from 'draft-js';
 import { cloneDeep, isEmpty } from 'lodash';
+import Context from '../Utils/Context';
 import classNames from 'classnames';
 import { mergeStyles } from '../Utils/mergeStyles';
 import FileInput from '../Components/FileInput';
@@ -18,7 +19,20 @@ export default ({ blockType, button, helpers, pubsub, settings, t, isMobile }) =
       this.state = {};
       const { buttonStyles } = props.theme || {};
       this.styles = mergeStyles({ styles, theme: buttonStyles });
+      this.myRef = React.createRef();
     }
+
+    componentDidMount() {
+      this.initialIntent();
+    }
+
+    initialIntent = () => {
+      const { initialIntent } = this.context;
+      if (initialIntent && initialIntent === blockType) {
+        const { myRef } = this;
+        myRef && myRef.current && myRef.current.click();
+      }
+    };
 
     addBlock = data => this.createBlock(data, true);
 
@@ -113,6 +127,7 @@ export default ({ blockType, button, helpers, pubsub, settings, t, isMobile }) =
             className={styles.button}
             data-hook={`${name.replace(' ', '_')}_insert_plugin_button`}
             onClick={this.onClick}
+            ref={this.myRef}
           >
             <div className={styles.icon}>
               <ButtonElement key="0" />
@@ -132,6 +147,7 @@ export default ({ blockType, button, helpers, pubsub, settings, t, isMobile }) =
             className={styles.button}
             data-hook={`${name.replace(' ', '_')}_insert_plugin_button`}
             onClick={this.onClick}
+            ref={this.myRef}
           >
             <div className={styles.icon}>
               <Icon key="0" />
@@ -243,6 +259,7 @@ export default ({ blockType, button, helpers, pubsub, settings, t, isMobile }) =
       );
     }
   }
+  InsertPluginButton.contextType = Context.type;
 
   InsertPluginButton.propTypes = {
     getEditorState: PropTypes.func.isRequired,

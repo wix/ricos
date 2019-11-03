@@ -47,6 +47,15 @@ class RichContentEditor extends Component {
     this.initContext();
     this.initPlugins();
   }
+  componentDidMount() {
+    this.resetInitialIntent();
+  }
+
+  resetInitialIntent = () => {
+    if (this.contextualData.initialIntent) {
+      this.contextualData.initialIntent = '';
+    }
+  };
 
   getEditorState = () => this.state.editorState;
 
@@ -63,6 +72,7 @@ class RichContentEditor extends Component {
       config,
       isMobile,
       shouldRenderOptimizedImages,
+      initialIntent,
     } = this.props;
     this.contextualData = {
       theme,
@@ -77,6 +87,7 @@ class RichContentEditor extends Component {
       getEditorBounds: this.getEditorBounds,
       languageDir: getLangDir(locale),
       shouldRenderOptimizedImages,
+      initialIntent,
     };
   };
 
@@ -452,6 +463,7 @@ RichContentEditor.propTypes = {
   customStyleFn: PropTypes.func,
   locale: PropTypes.string.isRequired,
   shouldRenderOptimizedImages: PropTypes.bool,
+  initialIntent: PropTypes.string,
 };
 
 RichContentEditor.defaultProps = {
