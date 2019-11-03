@@ -19,7 +19,7 @@ export default ({ blockType, button, helpers, pubsub, settings, t, isMobile }) =
       this.state = {};
       const { buttonStyles } = props.theme || {};
       this.styles = mergeStyles({ styles, theme: buttonStyles });
-      this.myRef = React.createRef();
+      this.buttonRef = React.createRef();
     }
 
     componentDidMount() {
@@ -29,8 +29,8 @@ export default ({ blockType, button, helpers, pubsub, settings, t, isMobile }) =
     initialIntent = () => {
       const { initialIntent } = this.context;
       if (initialIntent && initialIntent === blockType) {
-        const { myRef } = this;
-        myRef && myRef.current && myRef.current.click();
+        const { buttonRef } = this;
+        buttonRef && buttonRef.current && buttonRef.current.click();
       }
     };
 
@@ -127,7 +127,7 @@ export default ({ blockType, button, helpers, pubsub, settings, t, isMobile }) =
             className={styles.button}
             data-hook={`${name.replace(' ', '_')}_insert_plugin_button`}
             onClick={this.onClick}
-            ref={this.myRef}
+            ref={this.buttonRef}
           >
             <div className={styles.icon}>
               <ButtonElement key="0" />
@@ -147,7 +147,7 @@ export default ({ blockType, button, helpers, pubsub, settings, t, isMobile }) =
             className={styles.button}
             data-hook={`${name.replace(' ', '_')}_insert_plugin_button`}
             onClick={this.onClick}
-            ref={this.myRef}
+            ref={this.buttonRef}
           >
             <div className={styles.icon}>
               <Icon key="0" />
