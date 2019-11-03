@@ -20,6 +20,7 @@
   - [#402](https://github.com/wix-incubator/rich-content/pull/402) mentions suggestion box size controll
 - `editor`
   - [#396](https://github.com/wix-incubator/rich-content/pull/396) sticky static toolbar on all platforms
+  - [#445](https://github.com/wix-incubator/rich-content/pull/445) initial intent for all plugins except file-upload plugins
 ### :bug: Bug Fix
 - `common`
   - [#436](https://github.com/wix-incubator/rich-content/pull/436) data-normalization: missing entity protection added
