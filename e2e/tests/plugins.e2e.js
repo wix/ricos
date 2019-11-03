@@ -6,6 +6,7 @@ import {
   GALLERY_IMAGE_SETTINGS,
   IMAGE_SETTINGS,
 } from '../cypress/dataHooks';
+import { DEFAULT_DESKTOP_BROWSERS } from '../tests/constants';
 
 const eyesOpen = ({
   test: {
@@ -15,7 +16,7 @@ const eyesOpen = ({
   cy.eyesOpen({
     appName: 'Plugins',
     testName: title,
-    browser: [{ width: 1440, height: 900, name: 'chrome' }],
+    browser: DEFAULT_DESKTOP_BROWSERS,
   });
 
 describe('plugins', () => {

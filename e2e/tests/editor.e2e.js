@@ -1,11 +1,12 @@
 import { INLINE_TOOLBAR_BUTTONS } from '../cypress/dataHooks';
+import { DEFAULT_DESKTOP_BROWSERS } from '../tests/constants';
 
 describe('editor', () => {
   before(function() {
     cy.eyesOpen({
       appName: 'Editor',
       testName: this.test.parent.title,
-      browser: [{ width: 1440, height: 900, name: 'chrome' }],
+      browser: DEFAULT_DESKTOP_BROWSERS,
     });
   });
 
