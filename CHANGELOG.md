@@ -13,12 +13,14 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
-  
-  
+
   ### :rocket: New Feature
   - `video`
     - [#443](https://github.com/wix-incubator/rich-content/pull/443) async url resolving support
-  
+  ### :bug: Bug Fix
+  - `viewer`
+    - [#442](https://github.com/wix-incubator/rich-content/pull/442) html plugin alignment
+    
 </details>
 <hr/>
 

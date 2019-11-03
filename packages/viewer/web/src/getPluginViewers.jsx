@@ -11,6 +11,7 @@ import {
 } from 'wix-rich-content-common';
 
 class PluginViewer extends PureComponent {
+  /* eslint-disable complexity */
   render() {
     const { type, pluginComponent, componentData, children, styles, entityIndex } = this.props;
     const { theme, isMobile, anchorTarget, relValue, config } = this.context;
@@ -18,7 +19,6 @@ class PluginViewer extends PureComponent {
     const { component: Component, elementType } = pluginComponent;
     const { size, alignment, textWrap, container } = pluginComponent.classNameStrategies || {};
     const settings = (config && config[type]) || {};
-
     const componentProps = { componentData, settings, children, entityIndex };
 
     if (Component) {
@@ -52,9 +52,15 @@ class PluginViewer extends PureComponent {
             rel: rel || relValue || 'noopener',
           };
         }
-        // TODO: more generic logic?
-        if (componentData.config && componentData.config.size === 'inline') {
-          containerProps.style = { width: componentData.width };
+        if (componentData.config) {
+          // TODO: more generic logic?
+          if (componentData.config.size === 'inline') {
+            containerProps.style = { width: componentData.width };
+          }
+          if (type === 'wix-draft-plugin-html') {
+            const { width: currentWidth, height: currentHeight } = componentData.config;
+            containerProps.style = { width: currentWidth, height: currentHeight };
+          }
         }
         return (
           <div className={styles.atomic}>
@@ -75,6 +81,7 @@ class PluginViewer extends PureComponent {
     }
     return null;
   }
+  /* eslint-enable complexity */
 }
 
 PluginViewer.contextType = Context.type;
