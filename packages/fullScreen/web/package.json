@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-fullscreen",
-  "version": "5.1.1",
+  "version": "6.0.0",
   "author": {
     "name": "Shaul Goral",
     "email": "shaulg@wix.com"
@@ -37,10 +37,9 @@
     "react": "^16.6.3",
     "react-dom": "^16.6.3"
   },
-  "devDependencies": {},
   "dependencies": {
     "react-images": "1.0.0",
-    "wix-rich-content-common": "5.1.9"
+    "wix-rich-content-common": "6.0.0"
   },
   "unpkg": true,
   "publishConfig": {

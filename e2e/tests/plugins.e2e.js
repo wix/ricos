@@ -13,8 +13,7 @@ const eyesOpen = ({
   },
 }) =>
   cy.eyesOpen({
-    appName: 'Rich Content - Plugins',
-    batchName: 'Plugins',
+    appName: 'Plugins',
     testName: title,
     browser: [{ width: 1440, height: 900, name: 'chrome' }],
   });

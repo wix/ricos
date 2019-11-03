@@ -8,6 +8,23 @@
 > - :house: [Internal]
 
 ## [Unreleased]
+<details>
+  <summary>
+    Changes that have landed in master but are not yet released.
+    Click to see more.
+  </summary>
+
+  ### :rocket: New Feature
+  - `video`
+    - [#443](https://github.com/wix-incubator/rich-content/pull/443) async url resolving support
+  ### :bug: Bug Fix
+  - `viewer`
+    - [#442](https://github.com/wix-incubator/rich-content/pull/442) html plugin alignment
+    
+</details>
+<hr/>
+
+## 6.0.0 "MOAV" (Oct 30, 2019)
 ### :boom: Breaking Change
 - `general`
   - [#347](https://github.com/wix-incubator/rich-content/pull/347) replaced `@wix/draft-js@0.10.272` with `draft-js@0.11.0`
@@ -22,6 +39,7 @@
   - [#396](https://github.com/wix-incubator/rich-content/pull/396) sticky static toolbar on all platforms
 ### :bug: Bug Fix
 - `common`
+  - [#436](https://github.com/wix-incubator/rich-content/pull/436) data-normalization: missing entity protection added
   - [#411](https://github.com/wix-incubator/rich-content/pull/411) base toolbar height calculated once
   - [#432](https://github.com/wix-incubator/rich-content/pull/432) fixed divider sizer when aligned
 - `editor`
@@ -29,7 +47,8 @@
   - [#421](https://github.com/wix-incubator/rich-content/pull/421) resize-decorator is not activated on mobile
   - [#400](https://github.com/wix-incubator/rich-content/pull/400) inline and mobile toolbar RTL support
   - [#407](https://github.com/wix-incubator/rich-content/pull/407) list indentation
-  - [#427](https://github.com/wix-incubator/rich-content/pull/427) focus
+  - [#427](https://github.com/wix-incubator/rich-content/pull/427) focus race condition
+  - [#434](https://github.com/wix-incubator/rich-content/pull/434) text dropdown buttons tooltips display
   - [#433](https://github.com/wix-incubator/rich-content/pull/433) side toolbar is positioned to the right in RTL
 - `divider`
   - [#406](https://github.com/wix-incubator/rich-content/pull/406) divider center alignment
@@ -37,16 +56,18 @@
 - `image`
   - [75336e34](https://github.com/wix-incubator/rich-content/commit/75336e34) open imageStudio on crop tab
   - [#413](https://github.com/wix-incubator/rich-content/pull/413) new image doesn't replace existing image
+  - [#428](https://github.com/wix-incubator/rich-content/pull/428) image settings works while uploading
   - [#423](https://github.com/wix-incubator/rich-content/pull/423) images are rendered in high resolution for seo
 - `file-upload`
   - [#426](https://github.com/wix-incubator/rich-content/pull/426) apply spinner animation to file upload plugin
 - `gallery`
   - [#404](https://github.com/wix-incubator/rich-content/pull/404) delete last remaining image in image settings returns to gallery settings
   - [#403](https://github.com/wix-incubator/rich-content/pull/403) re-render gallery on change only
-  - [#408](https://github.com/wix-incubator/rich-content/pull/408) panorama layout displays all items
 - `example`
   - [#430](https://github.com/wix-incubator/rich-content/pull/430) editor + viewer: gallery config field `scrollingElement` value is a function
 ### :house: Internal
+- `common`
+  - [#441](https://github.com/wix-incubator/rich-content/pull/441) export `replaceWithEmptyBlock`, `deleteBlock` and `updateEntityData`
 - `e2e`
   - [#393](https://github.com/wix-incubator/rich-content/pull/393) added atomic block alignment testing
   - [#394](https://github.com/wix-incubator/rich-content/pull/394) test-env changed to match main example
@@ -55,6 +76,19 @@
 - `mentions`
   - [#387](https://github.com/wix-incubator/rich-content/pull/387) data validation schema added
 <hr/>
+
+## 5.1.11 (Oct 28, 2019)
+### :bug: Bug Fix
+- `html`
+  - [#439](https://github.com/wix-incubator/rich-content/pull/439) apply style on container
+<hr/>
+
+## 5.1.10 (Oct 23, 2019)
+### :bug: Bug Fix
+- `gallery`
+  - [#408](https://github.com/wix-incubator/rich-content/pull/408) `scrollingElement` should be passed within gallery config
+<hr/>
+
 
 ## 5.1.9 (Oct 16, 2019)
 ### :bug: Bug Fix

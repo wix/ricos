@@ -1,55 +1,22 @@
-import { SelectionState, EditorState, Modifier } from 'draft-js';
-import { cloneDeep, includes } from 'lodash';
+import { includes } from 'lodash';
 import createBaseComponent from './createBaseComponent';
 import createToolbar from './createBaseToolbar';
 import createInsertPluginButton from './createBaseInsertPluginButton';
+import { deleteBlock, updateEntityData } from '../Utils/draftUtils';
 import { simplePubsub } from '../Utils/simplePubsub';
 import { getToolbarTheme } from '../Utils/getToolbarTheme';
 
-const updateEntityData = (contentBlock, { getEditorState, setEditorState }, getNewData) => {
-  const entityKey = contentBlock.getEntityAt(0);
-  if (entityKey) {
-    const editorState = getEditorState();
-    const contentState = editorState.getCurrentContent();
-    const entityData = contentState.getEntity(entityKey).getData();
-    const data =
-      typeof getNewData === 'function' ? cloneDeep(getNewData(entityData)) : cloneDeep(getNewData);
-    contentState.replaceEntityData(entityKey, data);
-    setEditorState(editorState);
-  }
-};
+const getData = (contentBlock, { getEditorState }) => () =>
+  getEditorState()
+    .getCurrentContent()
+    .getEntity(contentBlock.getEntityAt(0))
+    .getData();
 
-const setData = (contentBlock, { getEditorState, setEditorState }) => {
-  return newDataFunc =>
-    updateEntityData(contentBlock, { getEditorState, setEditorState }, newDataFunc);
-};
+const setData = (contentBlock, { getEditorState, setEditorState }) => newDataFunc =>
+  setEditorState(updateEntityData(getEditorState(), contentBlock.getKey(), newDataFunc));
 
-const getData = (contentBlock, { getEditorState }) => {
-  return () => {
-    const contentState = getEditorState().getCurrentContent();
-    const entity = contentState.getEntity(contentBlock.getEntityAt(0));
-    return entity.getData();
-  };
-};
-
-const deleteEntity = (contentBlock, { getEditorState, setEditorState }) => {
-  return () => {
-    const blockKey = contentBlock.getKey();
-    const editorState = getEditorState();
-    const contentState = editorState.getCurrentContent();
-    const block = contentState.getBlockForKey(blockKey);
-    const previousBlock = contentState.getBlockBefore(blockKey);
-    const selectionRange = new SelectionState({
-      anchorOffset: previousBlock.text.length,
-      anchorKey: previousBlock.key,
-      focusOffset: block.text.length,
-      focusKey: blockKey,
-    });
-    const newContentState = Modifier.removeRange(contentState, selectionRange, 'forward');
-    const newEditorState = EditorState.push(editorState, newContentState, 'remove-range');
-    setEditorState(newEditorState);
-  };
-};
+const deleteEntity = (contentBlock, { getEditorState, setEditorState }) => () =>
+  setEditorState(deleteBlock(getEditorState(), contentBlock.getKey()));
 
 const DEFAULT_SETTINGS = {
   showInsertButtons: true,
@@ -60,7 +27,15 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
   const settings = { ...DEFAULT_SETTINGS, ...config.settings };
   const helpers = config.helpers || {};
   const isMobile = config.isMobile || false;
-  const { t, anchorTarget, relValue, customStyleFn, getEditorBounds, onOverlayClick } = config;
+  const {
+    t,
+    anchorTarget,
+    relValue,
+    customStyleFn,
+    getEditorBounds,
+    onOverlayClick,
+    onAtomicBlockFocus,
+  } = config;
   const toolbarTheme = { ...getToolbarTheme(config.theme, 'plugin'), ...config.theme };
   const Toolbar =
     config.toolbar &&
@@ -110,6 +85,7 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
       pluginDecorationProps: config.pluginDecorationProps,
       componentWillReceiveDecorationProps: config.componentWillReceiveDecorationProps,
       onOverlayClick,
+      onAtomicBlockFocus,
       pubsub,
       settings,
       helpers,
