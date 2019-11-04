@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import { get } from 'lodash';
 import { mergeStyles } from '../Utils/mergeStyles';
 import Context from '../Utils/Context';
-import styles from '../../statics/styles/loaders.scss';
+import styles from '../../statics/styles/loaders.rtlignore.scss';
 
 class Loader extends React.Component {
   get styles() {

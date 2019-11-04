@@ -73,11 +73,10 @@ class HtmlComponent extends Component {
     const readOnly = blockProps ? blockProps.readOnly : true;
 
     return (
-      <ViewportRenderer>
+      <ViewportRenderer containerStyle={style}>
         <div
           className={this.styles.htmlComponent}
           ref={ref => (this.element = ref)}
-          style={style}
           data-hook="HtmlComponent"
         >
           {srcType === SRC_TYPE_HTML && src && (
