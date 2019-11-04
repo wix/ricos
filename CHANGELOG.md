@@ -13,10 +13,20 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
-  
-   ### :rocket: New Feature
-   - `video`
-     - [#444](https://github.com/wix-incubator/rich-content/pull/444) file upload support
+
+  ### :rocket: New Feature
+  - `video`
+    - [#443](https://github.com/wix-incubator/rich-content/pull/443) async url resolving support
+    - [#444](https://github.com/wix-incubator/rich-content/pull/444) file upload support
+  ### :bug: Bug Fix
+  - `divider`
+    - [#438](https://github.com/wix-incubator/rich-content/pull/438) container alignment
+  - `viewer`
+    - [#442](https://github.com/wix-incubator/rich-content/pull/442) html plugin alignment
+  ### :house: Internal
+  - `gallery`
+    - [#446](https://github.com/wix-incubator/rich-content/pull/446) `pro-gallery` updated to `v1.5.25`
+    
 </details>
 <hr/>
 
@@ -47,7 +57,7 @@
   - [#434](https://github.com/wix-incubator/rich-content/pull/434) text dropdown buttons tooltips display
   - [#433](https://github.com/wix-incubator/rich-content/pull/433) side toolbar is positioned to the right in RTL
 - `divider`
-  - [#406](https://github.com/wix-incubator/rich-content/pull/406) divider center alignment
+  - [#406](https://github.com/wix-incubator/rich-content/pull/406) center alignment
 - `image`
   - [75336e34](https://github.com/wix-incubator/rich-content/commit/75336e34) open imageStudio on crop tab
   - [#413](https://github.com/wix-incubator/rich-content/pull/413) new image doesn't replace existing image
