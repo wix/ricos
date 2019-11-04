@@ -13,12 +13,12 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+  
+   ### :rocket: New Feature
+   - `video`
+     - [#444](https://github.com/wix-incubator/rich-content/pull/444) file upload support
 </details>
 <hr/>
-
-### :rocket: [New Feature]
-- `video`
-  - [#444](https://github.com/wix-incubator/rich-content/pull/444) Adds support for file upload
 
 ## 6.0.0 "MOAV" (Oct 30, 2019)
 ### :boom: Breaking Change
