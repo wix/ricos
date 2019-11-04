@@ -24,7 +24,7 @@
   - `viewer`
     - [#442](https://github.com/wix-incubator/rich-content/pull/442) html plugin alignment
   - editor
-    - placeholder style fixed
+    - [#448](https://github.com/wix-incubator/rich-content/pull/448) placeholder style fixed
 </details>
 <hr/>
 
