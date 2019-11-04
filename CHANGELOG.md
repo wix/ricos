@@ -14,18 +14,17 @@
     Click to see more.
   </summary>
 
-  ### :rocket: New Feature
-  - `video`
-    - [#443](https://github.com/wix-incubator/rich-content/pull/443) async url resolving support
-    - [#444](https://github.com/wix-incubator/rich-content/pull/444) file upload support
-  - `text-color`
-    - [#440](https://github.com/wix-incubator/rich-content/pull/440) text highlight plugin
-  ### :bug: Bug Fix
-  - `divider`
-    - [#438](https://github.com/wix-incubator/rich-content/pull/438) container alignment
-  - `viewer`
-    - [#442](https://github.com/wix-incubator/rich-content/pull/442) html plugin alignment
-    
+### :rocket: New Feature
+- `video`
+  - [#443](https://github.com/wix-incubator/rich-content/pull/443) async url resolving support
+  - [#444](https://github.com/wix-incubator/rich-content/pull/444) file upload support
+- `text-color`
+  - [#440](https://github.com/wix-incubator/rich-content/pull/440) text highlight plugin
+### :bug: Bug Fix
+- `divider`
+  - [#438](https://github.com/wix-incubator/rich-content/pull/438) container alignment
+- `viewer`
+  - [#442](https://github.com/wix-incubator/rich-content/pull/442) html plugin alignment
 </details>
 <hr/>
 
@@ -42,8 +41,6 @@
   - [#402](https://github.com/wix-incubator/rich-content/pull/402) mentions suggestion box size controll
 - `editor`
   - [#396](https://github.com/wix-incubator/rich-content/pull/396) sticky static toolbar on all platforms
-- `text-color`
-  - [#440](https://github.com/wix-incubator/rich-content/pull/440) text highlight plugin
 ### :bug: Bug Fix
 - `common`
   - [#436](https://github.com/wix-incubator/rich-content/pull/436) data-normalization: missing entity protection added
@@ -85,8 +82,8 @@
 
 ## 5.1.12 (Nov 4, 2019)
 ### :house: Internal
-  - `gallery`
-    - [#446](https://github.com/wix-incubator/rich-content/pull/446) `pro-gallery` updated to `v1.5.25`
+- `gallery`
+  - [#446](https://github.com/wix-incubator/rich-content/pull/446) `pro-gallery` updated to `v1.5.25`
 
 ## 5.1.11 (Oct 28, 2019)
 ### :bug: Bug Fix
@@ -149,7 +146,7 @@
 - `editor`
   - [#395](https://github.com/wix-incubator/rich-content/pull/395) removed div wrapping editor that was added in [#359](https://github.com/wix-incubator/rich-content/pull/359)
 - `gallery`
-  - [d0986f3](https://github.com/wix-incubator/rich-content/commit/d0986f3) height issues - disabled above the fold 
+  - [d0986f3](https://github.com/wix-incubator/rich-content/commit/d0986f3) height issues - disabled above the fold
 ### :house: Internal
 - `example`
   - [9add0fbc](https://github.com/wix-incubator/rich-content/commit/9add0fbc) gallery validation schema used for content validation
