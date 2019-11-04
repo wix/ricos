@@ -10,7 +10,7 @@ target
 maven
 stats.html
 .env
-applitools.config.js
+applitools.private.config.js
 
 #Webstorm
 **/.idea/*

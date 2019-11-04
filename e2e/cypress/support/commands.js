@@ -152,7 +152,7 @@ function getTextElments(rootElement) {
 Cypress.Commands.add('setSelection', (start, offset) => {
   cy.focusEditor().then(args => {
     const getTextElmentAndLocalOffset = getTextElments(args[0]);
-    const document = args.context;
+    const document = args[0].ownerDocument;
     const range = document.createRange();
     const startObj = getTextElmentAndLocalOffset(start);
     range.setStart(startObj.element, startObj.offset);
