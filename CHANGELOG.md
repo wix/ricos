@@ -23,7 +23,8 @@
     - [#438](https://github.com/wix-incubator/rich-content/pull/438) container alignment
   - `viewer`
     - [#442](https://github.com/wix-incubator/rich-content/pull/442) html plugin alignment
-    
+  - editor
+    - placeholder style fixed
 </details>
 <hr/>
 
