@@ -87,35 +87,52 @@ export default class VideoSelectionInputModal extends Component {
     const {
       t,
       handleFileSelection,
+      handleFileUpload,
       enableCustomUploadOnMobile,
       isMobile,
       languageDir,
     } = this.props;
     const { styles } = this;
+    const hasCustomFileUpload = handleFileUpload || handleFileSelection;
+    let handleClick;
+    if (handleFileUpload) {
+      handleClick = () =>
+        handleFileUpload(
+          this.inputFile.value,
+          ({ data, error }) => this.handleCustomVideoUpload({ data, error }),
+          () => this.onCloseRequested()
+        );
+    } else if (handleFileSelection) {
+      handleClick = evt => {
+        evt.preventDefault();
+        return handleFileSelection(
+          ({ data, error }) => this.handleCustomVideoUpload({ data, error }),
+          () => this.onCloseRequested()
+        );
+      };
+    }
     const uploadVideoSection = (
       <div>
         <div className={styles.video_modal_or_upload_video_from}>
           {t('VideoUploadModal_CustomVideoHeader')}
         </div>
         <div className={styles.video_modal_upload_video}>
-          <div
+          <input
+            id="VideoUploadModal_FileInput"
+            type="file"
+            className={styles.fileInput}
+            ref={node => (this.inputFile = node)}
+            onClick={handleClick}
+          />
+          <label
+            htmlFor="VideoUploadModal_FileInput"
+            className={styles.fileInputLabel}
             role="button"
             data-hook="videoUploadModalCustomVideo"
-            onClick={() =>
-              handleFileSelection(
-                ({ data, error }) => this.handleCustomVideoUpload({ data, error }),
-                () => this.onCloseRequested()
-              )
-            }
             tabIndex={0}
-            onKeyDown={() =>
-              handleFileSelection(({ data, error }) =>
-                this.handleCustomVideoUpload({ data, error })
-              )
-            }
           >
             + {t('VideoUploadModal_CustomVideoClickText')}
-          </div>
+          </label>
           {errorMsg.length > 0 && <div className={styles.video_modal_error_msg}>{errorMsg}</div>}
         </div>
       </div>
@@ -123,7 +140,7 @@ export default class VideoSelectionInputModal extends Component {
     return (
       <div dir={languageDir}>
         <div
-          className={styles[`video_modal_container_${handleFileSelection ? 'big' : 'small'}`]}
+          className={styles[`video_modal_container_${hasCustomFileUpload ? 'big' : 'small'}`]}
           data-hook="videoUploadModal"
         >
           {!isMobile && (
@@ -145,7 +162,7 @@ export default class VideoSelectionInputModal extends Component {
           <div>
             <div
               className={
-                styles[`video_modal_textInput_${handleFileSelection ? 'customWidth' : 'fullWidth'}`]
+                styles[`video_modal_textInput_${hasCustomFileUpload ? 'customWidth' : 'fullWidth'}`]
               }
             >
               <TextInput
@@ -166,7 +183,7 @@ export default class VideoSelectionInputModal extends Component {
             </div>
             <Button
               className={
-                styles[`video_modal_add_button_${handleFileSelection ? 'inline' : 'inMiddle'}`]
+                styles[`video_modal_add_button_${hasCustomFileUpload ? 'inline' : 'inMiddle'}`]
               }
               onClick={() => this.onConfirm()}
               ariaProps={!this.state.url && { disabled: 'disabled' }}
@@ -175,7 +192,7 @@ export default class VideoSelectionInputModal extends Component {
               {t('VideoUploadModal_AddButtonText')}
             </Button>
           </div>
-          {(!isMobile || enableCustomUploadOnMobile) && handleFileSelection && uploadVideoSection}
+          {(!isMobile || enableCustomUploadOnMobile) && hasCustomFileUpload && uploadVideoSection}
         </div>
       </div>
     );
@@ -193,6 +210,7 @@ VideoSelectionInputModal.propTypes = {
   cancelLabel: PropTypes.string,
   t: PropTypes.func,
   handleFileSelection: PropTypes.func,
+  handleFileUpload: PropTypes.func,
   enableCustomUploadOnMobile: PropTypes.bool,
   isMobile: PropTypes.bool,
   languageDir: PropTypes.string,
