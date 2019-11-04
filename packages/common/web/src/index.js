@@ -90,7 +90,9 @@ export {
   getAnchorBlockData,
   mergeBlockData,
   isAtomicBlockFocused,
-  removeBlock,
+  updateEntityData,
+  replaceWithEmptyBlock,
+  deleteBlock,
 } from './Utils/draftUtils';
 export { default as Version } from './Utils/versioningUtils';
 export { isJSON } from './Utils/textUtils';

@@ -8,6 +8,26 @@
 > - :house: [Internal]
 
 ## [Unreleased]
+<details>
+  <summary>
+    Changes that have landed in master but are not yet released.
+    Click to see more.
+  </summary>
+
+  ### :rocket: New Feature
+  - `video`
+    - [#443](https://github.com/wix-incubator/rich-content/pull/443) async url resolving support
+    - [#444](https://github.com/wix-incubator/rich-content/pull/444) file upload support
+  ### :bug: Bug Fix
+  - `divider`
+    - [#438](https://github.com/wix-incubator/rich-content/pull/438) container alignment
+  - `viewer`
+    - [#442](https://github.com/wix-incubator/rich-content/pull/442) html plugin alignment
+    
+</details>
+<hr/>
+
+## 6.0.0 "MOAV" (Oct 30, 2019)
 ### :boom: Breaking Change
 - `general`
   - [#347](https://github.com/wix-incubator/rich-content/pull/347) replaced `@wix/draft-js@0.10.272` with `draft-js@0.11.0`
@@ -32,11 +52,11 @@
   - [#421](https://github.com/wix-incubator/rich-content/pull/421) resize-decorator is not activated on mobile
   - [#400](https://github.com/wix-incubator/rich-content/pull/400) inline and mobile toolbar RTL support
   - [#407](https://github.com/wix-incubator/rich-content/pull/407) list indentation
-  - [#427](https://github.com/wix-incubator/rich-content/pull/427) focus
+  - [#427](https://github.com/wix-incubator/rich-content/pull/427) focus race condition
   - [#434](https://github.com/wix-incubator/rich-content/pull/434) text dropdown buttons tooltips display
   - [#433](https://github.com/wix-incubator/rich-content/pull/433) side toolbar is positioned to the right in RTL
 - `divider`
-  - [#406](https://github.com/wix-incubator/rich-content/pull/406) divider center alignment
+  - [#406](https://github.com/wix-incubator/rich-content/pull/406) center alignment
 - `image`
   - [75336e34](https://github.com/wix-incubator/rich-content/commit/75336e34) open imageStudio on crop tab
   - [#413](https://github.com/wix-incubator/rich-content/pull/413) new image doesn't replace existing image
@@ -50,6 +70,8 @@
 - `example`
   - [#430](https://github.com/wix-incubator/rich-content/pull/430) editor + viewer: gallery config field `scrollingElement` value is a function
 ### :house: Internal
+- `common`
+  - [#441](https://github.com/wix-incubator/rich-content/pull/441) export `replaceWithEmptyBlock`, `deleteBlock` and `updateEntityData`
 - `e2e`
   - [#393](https://github.com/wix-incubator/rich-content/pull/393) added atomic block alignment testing
   - [#394](https://github.com/wix-incubator/rich-content/pull/394) test-env changed to match main example
@@ -58,6 +80,11 @@
 - `mentions`
   - [#387](https://github.com/wix-incubator/rich-content/pull/387) data validation schema added
 <hr/>
+
+## 5.1.12 (Nov 4, 2019)
+### :house: Internal
+  - `gallery`
+    - [#446](https://github.com/wix-incubator/rich-content/pull/446) `pro-gallery` updated to `v1.5.25`
 
 ## 5.1.11 (Oct 28, 2019)
 ### :bug: Bug Fix

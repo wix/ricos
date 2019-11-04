@@ -1,11 +1,11 @@
-import { isAtomicBlockFocused, removeBlock } from 'wix-rich-content-common';
+import { isAtomicBlockFocused, replaceWithEmptyBlock } from 'wix-rich-content-common';
 import removeBlockAdjacentToAtomic from './atomicBlockRemovalUtil';
 
 export default editorState => {
   const selection = editorState.getSelection();
 
   if (isAtomicBlockFocused(editorState)) {
-    return removeBlock(editorState, selection.getAnchorKey());
+    return replaceWithEmptyBlock(editorState, selection.getAnchorKey());
   }
 
   if (!selection.isCollapsed()) {

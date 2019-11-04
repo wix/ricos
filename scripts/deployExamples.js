@@ -50,8 +50,8 @@ function deploy(name) {
 function run() {
   let skip;
   const { SURGE_LOGIN, TRAVIS_BRANCH, TRAVIS_PULL_REQUEST, CI } = process.env;
-  if (TRAVIS_BRANCH !== 'release' && TRAVIS_PULL_REQUEST === 'false') {
-    skip = 'Not on release branch or PR';
+  if (!TRAVIS_BRANCH.startsWith('release') && TRAVIS_PULL_REQUEST === 'false') {
+    skip = 'Not on a release branch or PR';
   } else if (!CI) {
     skip = 'Not in CI';
   } else if (!SURGE_LOGIN) {

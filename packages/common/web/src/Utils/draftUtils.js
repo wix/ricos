@@ -1,5 +1,5 @@
 import { EditorState, Modifier, RichUtils, SelectionState } from 'draft-js';
-import { flatMap, findIndex, findLastIndex } from 'lodash';
+import { cloneDeep, flatMap, findIndex, findLastIndex } from 'lodash';
 
 export const insertLinkInPosition = (
   editorState,
@@ -158,13 +158,27 @@ export const getAnchorBlockData = editorState => {
   return block.get('data').toJS();
 };
 
+export const updateEntityData = (editorState, blockKey, newData) => {
+  const contentState = editorState.getCurrentContent();
+  const block = contentState.getBlockForKey(blockKey);
+  const entityKey = block.getEntityAt(0);
+  if (entityKey) {
+    const contentState = editorState.getCurrentContent();
+    const entityData = contentState.getEntity(entityKey).getData();
+    const data =
+      typeof newData === 'function' ? cloneDeep(newData(entityData)) : cloneDeep(newData);
+    contentState.replaceEntityData(entityKey, data);
+  }
+  return editorState;
+};
+
 export const isAtomicBlockFocused = editorState => {
   const { anchorKey, focusKey } = editorState.getSelection();
   const block = editorState.getCurrentContent().getBlockForKey(anchorKey).type;
   return anchorKey === focusKey && block === 'atomic';
 };
 
-export const removeBlock = (editorState, blockKey) => {
+export const replaceWithEmptyBlock = (editorState, blockKey) => {
   const contentState = editorState.getCurrentContent();
   const block = contentState.getBlockForKey(blockKey);
   const blockRange = new SelectionState({
@@ -181,6 +195,20 @@ export const removeBlock = (editorState, blockKey) => {
   );
   const newState = EditorState.push(editorState, resetBlock, 'remove-range');
   return EditorState.forceSelection(newState, resetBlock.getSelectionAfter());
+};
+
+export const deleteBlock = (editorState, blockKey) => {
+  const contentState = editorState.getCurrentContent();
+  const block = contentState.getBlockForKey(blockKey);
+  const previousBlock = contentState.getBlockBefore(blockKey);
+  const selectionRange = new SelectionState({
+    anchorKey: previousBlock.key,
+    anchorOffset: previousBlock.text.length,
+    focusKey: blockKey,
+    focusOffset: block.text.length,
+  });
+  const newContentState = Modifier.removeRange(contentState, selectionRange, 'forward');
+  return EditorState.push(editorState, newContentState, 'remove-range');
 };
 
 export const getSelectedBlocks = editorState => {
