@@ -14,17 +14,17 @@
     Click to see more.
   </summary>
 
-### :rocket: New Feature
-- `video`
-  - [#443](https://github.com/wix-incubator/rich-content/pull/443) async url resolving support
-  - [#444](https://github.com/wix-incubator/rich-content/pull/444) file upload support
-- `text-color`
-  - [#440](https://github.com/wix-incubator/rich-content/pull/440) text highlight plugin
-### :bug: Bug Fix
-- `divider`
-  - [#438](https://github.com/wix-incubator/rich-content/pull/438) container alignment
-- `viewer`
-  - [#442](https://github.com/wix-incubator/rich-content/pull/442) html plugin alignment
+  ### :rocket: New Feature
+  - `video`
+    - [#443](https://github.com/wix-incubator/rich-content/pull/443) async url resolving support
+    - [#444](https://github.com/wix-incubator/rich-content/pull/444) file upload support
+  - `text-color`
+    - [#440](https://github.com/wix-incubator/rich-content/pull/440) text highlight plugin
+  ### :bug: Bug Fix
+  - `divider`
+    - [#438](https://github.com/wix-incubator/rich-content/pull/438) container alignment
+  - `viewer`
+    - [#442](https://github.com/wix-incubator/rich-content/pull/442) html plugin alignment
 </details>
 <hr/>
 
