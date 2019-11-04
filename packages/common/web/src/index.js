@@ -93,6 +93,7 @@ export {
   removeBlock,
 } from './Utils/draftUtils';
 export { default as Version } from './Utils/versioningUtils';
+export { isJSON } from './Utils/textUtils';
 export { isiOS } from './Utils/isiOS';
 export { isSSR } from './Utils/ssrUtils';
 export { sizeClassName, alignmentClassName, textWrapClassName } from './Utils/classNameStrategies';

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import TextColorIcon from './TextColorIcon';
+import TextHighlightIcon from './TextHighlightIcon';
 import { TEXT_HIGHLIGHT_TYPE } from '../types';
 import BaseTextColor from './BaseTextColor';
 import { textHighlightPredicateWrapper } from '../text-decorations-utils';
@@ -14,7 +14,7 @@ export default class TextHighlightButton extends Component {
     const decorator = {
       dataHook: 'TextHighlightButton',
       toolTip: 'TextHighlightButton_Tooltip',
-      icon: TextColorIcon,
+      icon: TextHighlightIcon,
       type: TEXT_HIGHLIGHT_TYPE,
       predicateWrapper: textHighlightPredicateWrapper,
     };

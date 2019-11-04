@@ -1,17 +1,11 @@
 import { TEXT_HIGHLIGHT_TYPE } from './types';
+import { isJSON } from 'wix-rich-content-common';
 
 const textColorMapper = color => JSON.stringify({ FG: color });
 const textHighlightMapper = color => JSON.stringify({ BG: color });
 
 const splitStyle = style => {
-  if (
-    /^[\],:{}\s]*$/.test(
-      style
-        .replace(/\\["\\/bfnrtu]/g, '@')
-        .replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+-]?\d+)?/g, ']')
-        .replace(/(?:^|:|,)(?:\s*\[)+/g, '')
-    )
-  ) {
+  if (isJSON(style)) {
     const _style = JSON.parse(style);
     return [...Object.keys(_style), ...Object.values(_style)];
   } else {
