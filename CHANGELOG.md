@@ -18,6 +18,8 @@
   - `video`
     - [#443](https://github.com/wix-incubator/rich-content/pull/443) async url resolving support
     - [#444](https://github.com/wix-incubator/rich-content/pull/444) file upload support
+    - [#449](https://github.com/wix-incubator/rich-content/pull/444) forces video mime type for video uploads
+
   ### :bug: Bug Fix
   - `divider`
     - [#438](https://github.com/wix-incubator/rich-content/pull/438) container alignment
