@@ -120,6 +120,7 @@ export default class VideoSelectionInputModal extends Component {
           <input
             id="VideoUploadModal_FileInput"
             type="file"
+            accept="video/*"
             className={styles.fileInput}
             ref={node => (this.inputFile = node)}
             onClick={handleClick}
