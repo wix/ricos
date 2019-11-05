@@ -405,109 +405,104 @@ exports[`text > allow to apply inline styles and links #0`] =
         },
         {
           "key": 1,
-          "length": 9,
+          "length": 16,
           "offset": 10
         },
         {
           "key": 2,
           "length": 10,
-          "offset": 20
+          "offset": 27
         },
         {
           "key": 3,
           "length": 30,
-          "offset": 35
+          "offset": 42
         },
         {
           "key": 4,
           "length": 65,
-          "offset": 70
+          "offset": 77
         }
       ],
       "inlineStyleRanges": [
         {
-          "length": 19,
+          "length": 72,
           "offset": 0,
           "style": "UNDERLINE"
         },
         {
-          "length": 45,
-          "offset": 20,
-          "style": "UNDERLINE"
-        },
-        {
           "length": 65,
-          "offset": 70,
+          "offset": 77,
           "style": "UNDERLINE"
         },
         {
           "length": 102,
-          "offset": 221,
+          "offset": 228,
           "style": "UNDERLINE"
         },
         {
           "length": 78,
-          "offset": 324,
+          "offset": 331,
           "style": "UNDERLINE"
         },
         {
           "length": 28,
-          "offset": 403,
+          "offset": 410,
           "style": "UNDERLINE"
         },
         {
           "length": 5,
-          "offset": 40,
+          "offset": 47,
           "style": "ITALIC"
         },
         {
           "length": 102,
-          "offset": 221,
+          "offset": 228,
           "style": "ITALIC"
         },
         {
           "length": 78,
-          "offset": 324,
+          "offset": 331,
           "style": "ITALIC"
         },
         {
           "length": 28,
-          "offset": 403,
+          "offset": 410,
           "style": "ITALIC"
         },
         {
           "length": 5,
-          "offset": 50,
+          "offset": 57,
           "style": "BOLD"
         },
         {
           "length": 10,
-          "offset": 60,
+          "offset": 67,
           "style": "BOLD"
         },
         {
           "length": 100,
-          "offset": 221,
+          "offset": 228,
           "style": "color5"
         },
         {
           "length": 2,
-          "offset": 321,
+          "offset": 328,
           "style": "color2"
         },
         {
           "length": 78,
-          "offset": 324,
+          "offset": 331,
           "style": "color2"
         },
         {
           "length": 149,
-          "offset": 403,
+          "offset": 410,
           "style": "color2"
         }
       ],
       "key": 2,
-      "text": "@N#LIVING THE DREAM\nLeverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition. \nOrganically grow the holistic world view of disruptive innovation via workplace diversity and empowerment.\nBring to the table win-win survival strategies to ensure proactive domination.\nAt the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution. ",
+      "text": "@NO_MORE\n#LIVING THE DREAM\nLeverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition. \nOrganically grow the holistic world view of disruptive innovation via workplace diversity and empowerment.\nBring to the table win-win survival strategies to ensure proactive domination.\nAt the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution. ",
       "type": "code-block"
     },
     {
