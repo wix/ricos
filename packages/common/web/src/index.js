@@ -90,7 +90,7 @@ export {
   getAnchorBlockData,
   mergeBlockData,
   isAtomicBlockFocused,
-  updateEntityData,
+  setEntityData,
   replaceWithEmptyBlock,
   deleteBlock,
 } from './Utils/draftUtils';

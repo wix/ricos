@@ -34,6 +34,8 @@
     - [#446](https://github.com/wix-incubator/rich-content/pull/446) `pro-gallery` updated to `v1.5.25`
   - `e2e`
     - [#447](https://github.com/wix-incubator/rich-content/pull/447) added more supported browsers
+  - `resize`
+    - [#450](https://github.com/wix-incubator/rich-content/pull/450) moved width into data.config from data
 </details>
 <hr/>
 
