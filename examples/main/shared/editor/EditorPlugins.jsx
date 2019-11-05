@@ -46,7 +46,7 @@ import 'wix-rich-content-plugin-file-upload/dist/styles.min.css';
 import 'wix-rich-content-plugin-text-color/dist/styles.min.css';
 
 import {
-  customStyleFn,
+  customForegroundStyleFn,
   styleSelectionPredicate,
   colorScheme,
   customBackgroundStyleFn,
@@ -316,7 +316,7 @@ export const config = {
   [TEXT_COLOR_TYPE]: {
     colorScheme,
     styleSelectionPredicate,
-    customStyleFn,
+    customStyleFn: customForegroundStyleFn,
     onColorAdded: color => (userColors = [color, ...userColors]),
     getUserColors: () => userColors,
   },

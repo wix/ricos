@@ -34,7 +34,7 @@ import {
 } from 'wix-rich-content-plugin-text-color/dist/module.viewer';
 
 import {
-  viewerCustomStyleFn,
+  viewerCustomForegroundStyleFn,
   styleSelectionPredicate,
   viewerCustomBackgroundStyleFn,
 } from '../../src/text-color-style-fn';
@@ -82,7 +82,8 @@ export const typeMappers = [
 
 export const config = {
   [GALLERY_TYPE]: {
-    scrollingElement: () => typeof window !== 'undefined' && document.getElementsByClassName('viewer-example')[0],
+    scrollingElement: () =>
+      typeof window !== 'undefined' && document.getElementsByClassName('viewer-example')[0],
   },
   [HEADERS_MARKDOWN_TYPE]: {
     hideMarkdown: true,
@@ -101,7 +102,7 @@ export const config = {
   },
   [TEXT_COLOR_TYPE]: {
     styleSelectionPredicate,
-    customStyleFn: viewerCustomStyleFn,
+    customStyleFn: viewerCustomForegroundStyleFn,
   },
   [FILE_UPLOAD_TYPE]: {
     resolveFileUrl: () =>

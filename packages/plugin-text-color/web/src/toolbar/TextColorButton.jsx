@@ -12,14 +12,14 @@ export default class TextColorButton extends Component {
   }
 
   render() {
-    const decorator = {
+    const pluginParams = {
       dataHook: 'TextColorButton',
       toolTip: 'TextColorButton_Tooltip',
       icon: TextColorIcon,
       type: TEXT_COLOR_TYPE,
       predicateWrapper: textColorPredicateWrapper,
     };
-    return <BaseTextColor buttonRef={this.buttonRef} decorator={decorator} {...this.props} />;
+    return <BaseTextColor buttonRef={this.buttonRef} pluginParams={pluginParams} {...this.props} />;
   }
 }
 

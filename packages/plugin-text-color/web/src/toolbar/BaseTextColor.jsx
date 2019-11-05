@@ -15,7 +15,7 @@ export default class BaseTextColor extends Component {
     this.state = { showPanel: false };
     this.styles = mergeStyles({ styles, theme: props.theme });
     this.buttonRef = props.buttonRef;
-    this.styleMapper = styleMapper(props.decorator.type);
+    this.styleMapper = styleMapper(props.pluginParams.type);
   }
 
   static getModalParent() {
@@ -46,9 +46,9 @@ export default class BaseTextColor extends Component {
   }
 
   get isActive() {
-    const { config, decorator, getEditorState } = this.props;
-    const settings = config[decorator.type] || {};
-    const styleSelectionPredicate = decorator.predicateWrapper(
+    const { config, pluginParams, getEditorState } = this.props;
+    const settings = config[pluginParams.type] || {};
+    const styleSelectionPredicate = pluginParams.predicateWrapper(
       settings.styleSelectionPredicate || DEFAULT_STYLE_SELECTION_PREDICATE
     );
     return getSelectionStyles(styleSelectionPredicate, getEditorState()).length > 0;
@@ -65,11 +65,11 @@ export default class BaseTextColor extends Component {
       setKeepOpen,
       config,
       uiSettings,
-      decorator,
+      pluginParams,
     } = this.props;
-    const settings = config[decorator.type];
+    const settings = config[pluginParams.type];
     const { isPanelOpen, panelTop, panelLeft } = this.state;
-    const tooltip = t(decorator.toolTip);
+    const tooltip = t(pluginParams.toolTip);
     const buttonStyles = {
       button: theme.inlineToolbarButton,
       buttonWrapper: theme.inlineToolbarButton_wrapper,
@@ -88,9 +88,9 @@ export default class BaseTextColor extends Component {
         theme={{ ...theme, ...buttonStyles }}
         isMobile={isMobile}
         tooltipText={tooltip}
-        dataHook={decorator.dataHook}
+        dataHook={pluginParams.dataHook}
         tabIndex={tabIndex}
-        icon={decorator.icon}
+        icon={pluginParams.icon}
         forwardRef={this.buttonRef}
       >
         <Modal
@@ -119,7 +119,7 @@ export default class BaseTextColor extends Component {
             uiSettings={uiSettings}
             setKeepToolbarOpen={setKeepOpen}
             styleMapper={this.styleMapper}
-            predicateWrapper={decorator.predicateWrapper}
+            predicateWrapper={pluginParams.predicateWrapper}
           />
         </Modal>
       </InlineToolbarButton>
@@ -144,7 +144,7 @@ BaseTextColor.propTypes = {
   uiSettings: PropTypes.object,
   config: PropTypes.object,
   setKeepOpen: PropTypes.func,
-  decorator: PropTypes.object.isRequired,
+  pluginParams: PropTypes.object.isRequired,
   buttonRef: PropTypes.oneOfType([PropTypes.func, PropTypes.shape({ current: PropTypes.func })]),
 };
 

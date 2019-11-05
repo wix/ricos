@@ -1,34 +1,26 @@
 import { TEXT_HIGHLIGHT_TYPE } from './types';
-import { isJSON } from 'wix-rich-content-common';
 
-const textColorMapper = color => JSON.stringify({ FG: color });
-const textHighlightMapper = color => JSON.stringify({ BG: color });
-
-const splitStyle = style => {
-  if (isJSON(style)) {
-    const _style = JSON.parse(style);
-    return [...Object.keys(_style), ...Object.values(_style)];
-  } else {
-    return [style];
+const normalizeStyle = style => {
+  try {
+    return JSON.parse(style);
+  } catch (e) {
+    return { FG: style };
   }
 };
 
 const isTextDecoration = (style, type) => {
-  const splitted = splitStyle(style);
-  return splitted.length === 2 && splitted[0] === type;
+  const parsed = normalizeStyle(style);
+  return !!parsed[type];
 };
 
 const getColorByType = (style, type) => {
-  const splitted = splitStyle(style);
-  if (splitted.length === 2) {
-    return splitted[0] === type ? splitted[1] : '';
-  }
-  return type === 'FG' ? style : '';
+  const parsed = normalizeStyle(style);
+  return parsed[type] || '';
 };
 
 export const getColor = style => {
-  const splitted = splitStyle(style);
-  return splitted.length === 2 ? splitted[1] : splitted[0];
+  const parsed = normalizeStyle(style);
+  return Object.values(parsed)[0];
 };
 
 export const textColorPredicateWrapper = styleSelectionPredicate => {
@@ -58,5 +50,7 @@ export const isTextHighlight = style => isTextDecoration(style, 'BG');
 export const isTextColor = style => !isTextDecoration(style, 'BG');
 
 export const styleMapper = type => {
-  return type === TEXT_HIGHLIGHT_TYPE ? textHighlightMapper : textColorMapper;
+  return type === TEXT_HIGHLIGHT_TYPE
+    ? color => JSON.stringify({ BG: color })
+    : color => JSON.stringify({ FG: color });
 };

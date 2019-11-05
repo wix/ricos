@@ -8,7 +8,7 @@ export const PANEL_HEIGHT = 116;
 
 export const DEFAULT_STYLE_SELECTION_PREDICATE = style => isHexColor(style);
 
-export const DEFAULT_STYLE_FN = style => {
+export const DEFAULT_FOREGROUND_STYLE_FN = style => {
   if (isTextColor(style)) {
     const color = getColor(style);
     return isHexColor(color) ? { color } : {};
@@ -16,8 +16,10 @@ export const DEFAULT_STYLE_FN = style => {
   return {};
 };
 
-export const DEFAULT_STYLE_FN_DRAFT = styles =>
-  styles.toArray().reduce((cssStyle, style) => ({ ...cssStyle, ...DEFAULT_STYLE_FN(style) }), {}); // eslint-disable-line new-cap
+export const DEFAULT_FOREGROUND_STYLE_FN_DRAFT = styles =>
+  styles
+    .toArray()
+    .reduce((cssStyle, style) => ({ ...cssStyle, ...DEFAULT_FOREGROUND_STYLE_FN(style) }), {}); // eslint-disable-line new-cap
 
 export const DEFAULT_BACKGROUND_STYLE_FN = style =>
   isTextHighlight(style) ? { backgroundColor: getColor(style), transition: 'all .8s' } : {};

@@ -27,7 +27,7 @@ export const colorScheme = {
   },
 };
 
-export const viewerCustomStyleFn = style => {
+export const viewerCustomForegroundStyleFn = style => {
   let colorRule = {};
   if (colorScheme[style] && isHexColor(colorScheme[style].color)) {
     colorRule = { color: colorScheme[style].color };
@@ -37,11 +37,11 @@ export const viewerCustomStyleFn = style => {
   return colorRule;
 };
 
-export const customStyleFn = styles =>
+export const customForegroundStyleFn = styles =>
   styles.toArray().reduce((cssStyle, style) => {
     return {
       ...cssStyle,
-      ...viewerCustomStyleFn(style),
+      ...viewerCustomForegroundStyleFn(style),
     };
   }, {});
 

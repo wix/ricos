@@ -11,14 +11,14 @@ export default class TextHighlightButton extends Component {
     this.buttonRef = React.createRef();
   }
   render() {
-    const decorator = {
+    const pluginParams = {
       dataHook: 'TextHighlightButton',
       toolTip: 'TextHighlightButton_Tooltip',
       icon: TextHighlightIcon,
       type: TEXT_HIGHLIGHT_TYPE,
       predicateWrapper: textHighlightPredicateWrapper,
     };
-    return <BaseTextColor buttonRef={this.buttonRef} decorator={decorator} {...this.props} />;
+    return <BaseTextColor buttonRef={this.buttonRef} pluginParams={pluginParams} {...this.props} />;
   }
 }
 
