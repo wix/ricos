@@ -90,12 +90,14 @@ class SoundCloud extends Component {
 
   renderPlayer = () => {
     const { componentData } = this.props;
+    const { isPlayable } = this.state;
     return (
       <SoundCloudViewer
         ref={this.setPlayer}
         componentData={componentData}
         onReady={this.handleReady}
         onStart={this.handleStart}
+        isPlayable={isPlayable}
       />
     );
   };
@@ -118,6 +120,7 @@ class SoundCloud extends Component {
         onClick={onClick}
         className={containerClassNames}
         onKeyDown={e => this.onKeyDown(e, onClick)}
+        draggable
       >
         {!isPlayable && this.renderOverlay(this.styles, this.context.t)}
         {this.renderPlayer()}
