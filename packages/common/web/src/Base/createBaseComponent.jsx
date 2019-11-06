@@ -233,7 +233,7 @@ const createBaseComponent = ({
     }
 
     render = () => {
-      const { blockProps, className, selection } = this.props;
+      const { blockProps, className, selection, onDragStart } = this.props;
       const { componentData, readOnly } = this.state;
       const { containerClassName, ...decorationProps } = pluginDecorationProps(
         this.props,
@@ -314,9 +314,11 @@ const createBaseComponent = ({
       /* eslint-disable jsx-a11y/anchor-has-content */
       return (
         <div
+          role="none"
           style={sizeStyles}
           className={ContainerClassNames}
           data-focus={isActive}
+          onDragStart={onDragStart}
           {...decorationProps}
         >
           {!isNil(link) ? (
@@ -333,6 +335,7 @@ const createBaseComponent = ({
               data-hook={'componentOverlay'}
               onClick={this.handleClick}
               className={overlayClassNames}
+              draggable="true"
             />
           )}
         </div>
@@ -347,6 +350,7 @@ const createBaseComponent = ({
     selection: PropTypes.object.isRequired,
     className: PropTypes.string,
     onClick: PropTypes.func,
+    onDragStart: PropTypes.func,
   };
 
   return WrappedComponent;
