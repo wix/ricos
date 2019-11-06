@@ -1,3 +1,4 @@
+import React from 'react';
 import { createLinkPlugin, LINK_TYPE } from 'wix-rich-content-plugin-link';
 import { createLineSpacingPlugin, LINE_SPACING_TYPE } from 'wix-rich-content-plugin-line-spacing';
 import { createHashtagPlugin, HASHTAG_TYPE } from 'wix-rich-content-plugin-hashtag';
@@ -22,7 +23,6 @@ import { createMapPlugin, MAP_TYPE } from 'wix-rich-content-plugin-map';
 import { createFileUploadPlugin, FILE_UPLOAD_TYPE } from 'wix-rich-content-plugin-file-upload';
 import { createTextColorPlugin, TEXT_COLOR_TYPE } from 'wix-rich-content-plugin-text-color';
 import { createButtonPlugin, BUTTON_TYPE } from 'wix-rich-content-plugin-button';
-import React from 'react';
 import Highlighter from 'react-highlight-words';
 import casual from 'casual-browserify';
 
@@ -156,7 +156,8 @@ const uiSettings = {
 
 export const config = {
   [GALLERY_TYPE]: {
-    scrollingElement: () => typeof window !== 'undefined' && document.getElementsByClassName('editor-example')[0],
+    scrollingElement: () =>
+      typeof window !== 'undefined' && document.getElementsByClassName('editor-example')[0],
   },
   [IMAGE_TYPE]: {
     imageEditorWixSettings: {
@@ -185,7 +186,10 @@ export const config = {
   [EXTERNAL_MENTIONS_TYPE]: {
     repositionSuggestions: true,
     visibleItemsBeforeOverflow: 5,
+    popoverComponent: <div />,
+    handleDropdownOpen: () => console.log('mentions dropdown opened'),
     onMentionClick: mention => console.log({ mention }),
+    handleDropdownClose: () => console.log('mentions dropdown closed'),
     getMentions: searchQuery =>
       new Promise(resolve =>
         setTimeout(
