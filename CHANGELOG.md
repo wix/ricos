@@ -15,6 +15,8 @@
   </summary>
 
   ### :rocket: New Feature
+  - `mentions`
+    - [#452](https://github.com/wix-incubator/rich-content/pull/452) `handleDropdownOpen`, `handleDropdownClose` and `popoverComponent` added to plugin settings
   - `video`
     - [#443](https://github.com/wix-incubator/rich-content/pull/443) async url resolving support
     - [#444](https://github.com/wix-incubator/rich-content/pull/444) file upload support
