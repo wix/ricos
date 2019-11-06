@@ -15,6 +15,7 @@ export default class VideoSelectionInputModal extends Component {
       isCustomVideo: false,
       errorMsg: '',
     };
+    this.id = `VideoUploadModal_FileInput_${Math.floor(Math.random() * 9999)}`;
   }
 
   onUrlChange = e => {
@@ -118,7 +119,7 @@ export default class VideoSelectionInputModal extends Component {
         </div>
         <div className={styles.video_modal_upload_video}>
           <input
-            id="VideoUploadModal_FileInput"
+            id={this.id}
             type="file"
             accept="video/*"
             className={styles.fileInput}
@@ -126,7 +127,7 @@ export default class VideoSelectionInputModal extends Component {
             onClick={handleClick}
           />
           <label
-            htmlFor="VideoUploadModal_FileInput"
+            htmlFor={this.id}
             className={styles.fileInputLabel}
             role="button"
             data-hook="videoUploadModalCustomVideo"
