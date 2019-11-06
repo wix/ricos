@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { findDOMNode } from 'react-dom';
-import { isNil } from 'lodash';
+import { compact, isNil } from 'lodash';
 import classNames from 'classnames';
 import createHocName from '../Utils/createHocName';
 import getDisplayName from '../Utils/getDisplayName';
@@ -32,6 +32,7 @@ const createBaseComponent = ({
   componentWillReceiveDecorationProps = () => {},
   getEditorBounds,
   onOverlayClick,
+  onAtomicBlockFocus,
 }) => {
   class WrappedComponent extends Component {
     static displayName = createHocName('BaseComponent', PluginComponent);
@@ -211,6 +212,7 @@ const createBaseComponent = ({
         batchUpdates.deleteBlock = this.deleteBlock;
         batchUpdates.visibleBlock = visibleBlock;
         pubsub.set(batchUpdates);
+        onAtomicBlockFocus(visibleBlock);
       } else {
         //maybe just the position has changed
         const blockNode = findDOMNode(this);
@@ -243,11 +245,12 @@ const createBaseComponent = ({
       const { isFocused } = blockProps;
       const isActive = isFocused && isEditorFocused && !readOnly;
 
-      const classNameStrategies = [
+      const classNameStrategies = compact([
         PluginComponent.alignmentClassName || alignmentClassName,
         PluginComponent.sizeClassName || sizeClassName,
         PluginComponent.textWrapClassName || textWrapClassName,
-      ].map(strategy => strategy(this.state.componentData, theme, this.styles, isMobile));
+        PluginComponent.customClassName,
+      ]).map(strategy => strategy(this.state.componentData, theme, this.styles, isMobile));
 
       const ContainerClassNames = classNames(
         {

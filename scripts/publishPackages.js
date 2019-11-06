@@ -101,8 +101,8 @@ function publishPackages() {
 function run() {
   let skip;
   const { FORCE_PUBLISH, TRAVIS_BRANCH, CI } = process.env;
-  if (TRAVIS_BRANCH !== 'release' && !FORCE_PUBLISH) {
-    skip = 'Not on release branch';
+  if (!TRAVIS_BRANCH.startsWith('release') && !FORCE_PUBLISH) {
+    skip = 'Not on a release branch';
   } else if (!CI) {
     skip = 'Not in CI';
   }

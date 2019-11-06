@@ -156,7 +156,7 @@ const uiSettings = {
 
 export const config = {
   [GALLERY_TYPE]: {
-    scrollingElement: typeof window !== 'undefined' && document.getElementsByClassName('editor-example')[0],
+    scrollingElement: () => typeof window !== 'undefined' && document.getElementsByClassName('editor-example')[0],
   },
   [IMAGE_TYPE]: {
     imageEditorWixSettings: {

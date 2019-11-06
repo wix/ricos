@@ -83,15 +83,18 @@ export const processContentState = (contentState, config) => {
       // process block entity ranges
       if (processedBlock.entityRanges) {
         processedBlock.entityRanges.forEach(range => {
-          const entityType = entityMap[range.key + ''].type;
-          processedBlock = applyStrategies(
-            entityRangeProcessingStrategies[entityType],
-            processedBlock,
-            contentStateVersion,
-            range,
-            entityMap,
-            config
-          );
+          const entityType =
+            entityMap && entityMap[range.key + ''] && entityMap[range.key + ''].type;
+          if (entityType) {
+            processedBlock = applyStrategies(
+              entityRangeProcessingStrategies[entityType],
+              processedBlock,
+              contentStateVersion,
+              range,
+              entityMap,
+              config
+            );
+          }
         });
       }
 

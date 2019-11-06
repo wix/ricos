@@ -80,7 +80,7 @@ export const typeMappers = [
 
 export const config = {
   [GALLERY_TYPE]: {
-    scrollingElement: typeof window !== 'undefined' && document.getElementsByClassName('viewer-example')[0],
+    scrollingElement: () => typeof window !== 'undefined' && document.getElementsByClassName('viewer-example')[0],
   },
   [HEADERS_MARKDOWN_TYPE]: {
     hideMarkdown: true,

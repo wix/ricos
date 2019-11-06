@@ -1,10 +1,10 @@
-import { EditorState, RichUtils, Modifier } from 'draft-js';
-import { COMMANDS } from 'wix-rich-content-common';
+import { RichUtils } from 'draft-js';
+import { COMMANDS, mergeBlockData } from 'wix-rich-content-common';
 import handleBackspaceCommand from './handleBackspaceCommand';
 import handleDeleteCommand from './handleDeleteCommand';
 
 export default (updateEditorState, customHandlers) => (command, editorState) => {
-  let newState, contentState;
+  let newState;
   if (customHandlers[command]) {
     newState = customHandlers[command](editorState);
   } else {
@@ -13,12 +13,7 @@ export default (updateEditorState, customHandlers) => (command, editorState) => 
       case COMMANDS.ALIGN_LEFT:
       case COMMANDS.ALIGN_CENTER:
       case COMMANDS.JUSTIFY:
-        contentState = Modifier.mergeBlockData(
-          editorState.getCurrentContent(),
-          editorState.getSelection(),
-          { textAlignment: command }
-        );
-        newState = EditorState.push(editorState, contentState, 'change-block-data');
+        newState = mergeBlockData(editorState, { textAlignment: command });
         break;
       case COMMANDS.TITLE:
       case COMMANDS.SUBTITLE:
