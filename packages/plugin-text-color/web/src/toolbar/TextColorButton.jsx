@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import TextColorIcon from './TextColorIcon';
 import { TEXT_COLOR_TYPE } from '../types';
 import BaseTextColor from './BaseTextColor';
-import { textColorPredicateWrapper } from '../text-decorations-utils';
+import { textForegroundPredicate } from '../text-decorations-utils';
 
 export default class TextColorButton extends Component {
   constructor(props) {
@@ -17,7 +17,7 @@ export default class TextColorButton extends Component {
       toolTip: 'TextColorButton_Tooltip',
       icon: TextColorIcon,
       type: TEXT_COLOR_TYPE,
-      predicateWrapper: textColorPredicateWrapper,
+      predicate: textForegroundPredicate,
     };
     return <BaseTextColor buttonRef={this.buttonRef} pluginParams={pluginParams} {...this.props} />;
   }

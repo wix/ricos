@@ -15,7 +15,7 @@ import {
 export default class TextColorPanel extends Component {
   constructor(props) {
     super(props);
-    const styleSelectionPredicate = props.predicateWrapper(
+    const styleSelectionPredicate = props.predicate(
       props.settings.styleSelectionPredicate || DEFAULT_STYLE_SELECTION_PREDICATE
     );
     if (props.settings.colorScheme && !validateColorScheme(props.settings.colorScheme)) {
@@ -51,8 +51,8 @@ export default class TextColorPanel extends Component {
   }
 
   getInlineColorState(color) {
-    const { editorState, settings, styleMapper, predicateWrapper } = this.props;
-    const styleSelectionPredicate = predicateWrapper(
+    const { editorState, settings, styleMapper, predicate } = this.props;
+    const styleSelectionPredicate = predicate(
       (settings && settings.styleSelectionPredicate) || DEFAULT_STYLE_SELECTION_PREDICATE
     );
     const selection = editorState.getSelection();
@@ -129,5 +129,5 @@ TextColorPanel.propTypes = {
   closeModal: PropTypes.func.isRequired,
   isMobile: PropTypes.bool.isRequired,
   styleMapper: PropTypes.func.isRequired,
-  predicateWrapper: PropTypes.func,
+  predicate: PropTypes.func,
 };

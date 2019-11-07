@@ -2,7 +2,7 @@ import { createBasePlugin } from 'wix-rich-content-common';
 import { TEXT_HIGHLIGHT_TYPE } from './types';
 import { createTextHighlightToolbar } from './toolbar/createTextColorToolbar';
 import { DEFAULT_BACKGROUND_STYLE_FN_DRAFT } from './constants';
-import { isTextHighlight, customStyleFnWrapper } from './text-decorations-utils';
+import { isTextHighlight, styleFnFilter } from './text-decorations-utils';
 
 const createTextHighlightPlugin = (config = {}) => {
   const type = TEXT_HIGHLIGHT_TYPE;
@@ -14,7 +14,7 @@ const createTextHighlightPlugin = (config = {}) => {
     type,
     settings,
     customStyleFn:
-      (settings.customStyleFn && customStyleFnWrapper(settings.customStyleFn, isTextHighlight)) ||
+      (settings.customStyleFn && styleFnFilter(settings.customStyleFn, isTextHighlight)) ||
       DEFAULT_BACKGROUND_STYLE_FN_DRAFT,
     ...rest,
   });

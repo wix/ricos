@@ -23,22 +23,22 @@ export const getColor = style => {
   return Object.values(parsed)[0];
 };
 
-export const textColorPredicateWrapper = styleSelectionPredicate => {
+export const textForegroundPredicate = styleSelectionPredicate => {
   return style => styleSelectionPredicate(getColorByType(style, 'FG'));
 };
 
-export const textHighlightPredicateWrapper = styleSelectionPredicate => {
+export const textBackgroundPredicate = styleSelectionPredicate => {
   return style => styleSelectionPredicate(getColorByType(style, 'BG'));
 };
 
-export const customStyleFnWrapper = (customStyleFn, styleFilter) => {
+export const styleFnFilter = (customStyleFn, styleFilter) => {
   return styles => {
     const _styles = styles.filter(style => styleFilter(style)).map(style => getColor(style));
     return customStyleFn(_styles);
   };
 };
 
-export const viewerCustomStyleFnWrapper = (viewerCustomStyleFn, styleFilter) => {
+export const viewerStyleFnFilter = (viewerCustomStyleFn, styleFilter) => {
   return style => {
     const _style = styleFilter(style) ? getColor(style) : '';
     return viewerCustomStyleFn(_style);

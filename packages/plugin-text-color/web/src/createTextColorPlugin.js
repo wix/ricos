@@ -2,7 +2,7 @@ import { createBasePlugin } from 'wix-rich-content-common';
 import { TEXT_COLOR_TYPE } from './types';
 import { createTextColorToolbar } from './toolbar/createTextColorToolbar';
 import { DEFAULT_FOREGROUND_STYLE_FN_DRAFT } from './constants';
-import { isTextColor, customStyleFnWrapper } from './text-decorations-utils';
+import { isTextColor, styleFnFilter } from './text-decorations-utils';
 
 const createTextColorPlugin = (config = {}) => {
   const type = TEXT_COLOR_TYPE;
@@ -14,7 +14,7 @@ const createTextColorPlugin = (config = {}) => {
     type,
     settings,
     customStyleFn:
-      (settings.customStyleFn && customStyleFnWrapper(settings.customStyleFn, isTextColor)) ||
+      (settings.customStyleFn && styleFnFilter(settings.customStyleFn, isTextColor)) ||
       DEFAULT_FOREGROUND_STYLE_FN_DRAFT,
     ...rest,
   });

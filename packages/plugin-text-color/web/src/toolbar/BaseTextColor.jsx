@@ -48,7 +48,7 @@ export default class BaseTextColor extends Component {
   get isActive() {
     const { config, pluginParams, getEditorState } = this.props;
     const settings = config[pluginParams.type] || {};
-    const styleSelectionPredicate = pluginParams.predicateWrapper(
+    const styleSelectionPredicate = pluginParams.predicate(
       settings.styleSelectionPredicate || DEFAULT_STYLE_SELECTION_PREDICATE
     );
     return getSelectionStyles(styleSelectionPredicate, getEditorState()).length > 0;
@@ -119,7 +119,7 @@ export default class BaseTextColor extends Component {
             uiSettings={uiSettings}
             setKeepToolbarOpen={setKeepOpen}
             styleMapper={this.styleMapper}
-            predicateWrapper={pluginParams.predicateWrapper}
+            predicate={pluginParams.predicate}
           />
         </Modal>
       </InlineToolbarButton>

@@ -2,8 +2,8 @@ import React from 'react';
 import { DEFAULT_STYLE_SELECTION_PREDICATE, DEFAULT_BACKGROUND_STYLE_FN } from './constants';
 import { TEXT_HIGHLIGHT_TYPE } from './types';
 import {
-  textHighlightPredicateWrapper,
-  viewerCustomStyleFnWrapper,
+  textBackgroundPredicate,
+  viewerStyleFnFilter,
   isTextHighlight,
 } from './text-decorations-utils';
 
@@ -15,12 +15,11 @@ import {
  */
 export default (config, raw = { blocks: [] }) => {
   const settings = config[TEXT_HIGHLIGHT_TYPE] || {};
-  const styleSelectionPredicate = textHighlightPredicateWrapper(
+  const styleSelectionPredicate = textBackgroundPredicate(
     settings.styleSelectionPredicate || DEFAULT_STYLE_SELECTION_PREDICATE
   );
   const customStyleFn =
-    (settings.customStyleFn &&
-      viewerCustomStyleFnWrapper(settings.customStyleFn, isTextHighlight)) ||
+    (settings.customStyleFn && viewerStyleFnFilter(settings.customStyleFn, isTextHighlight)) ||
     DEFAULT_BACKGROUND_STYLE_FN;
   const mapper = raw.blocks.reduce((map, block) => {
     if (block.inlineStyleRanges) {
