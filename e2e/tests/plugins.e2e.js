@@ -353,6 +353,23 @@ describe('plugins', () => {
     });
   });
 
+  context('drag and drop', () => {
+    before('load editor', function() {
+      eyesOpen(this);
+      cy.loadEditor('dragAndDrop');
+    });
+
+    after(() => cy.eyesClose());
+
+    it('drag and drop plugins', function() {
+      cy.focusEditor();
+      const src = `[data-hook=${PLUGIN_COMPONENT.IMAGE}] + [data-hook=componentOverlay]`;
+      const dest = `span[data-offset-key="fjkhf-0-0"]`;
+      cy.dragAndDropPlugin(src, dest);
+      cy.eyesCheckWindow(this.test.title);
+    });
+  });
+
   context('general', () => {
     before(function() {
       eyesOpen(this);
