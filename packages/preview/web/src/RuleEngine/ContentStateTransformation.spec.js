@@ -77,10 +77,10 @@ describe('Content State Transformation', () => {
 
   it('should apply the rule "if images > 3 => add a gallery with 3 items" on given content state', () => {
     const transformer = new UUT({
-      _if: metadata => metadata.media.images().length > 3,
+      _if: metadata => metadata.images.length > 3,
       _then: (metadata, preview) =>
         preview.gallery({
-          mediaInfo: metadata.media.images().slice(0, 3),
+          mediaInfo: metadata.images.slice(0, 3),
         }),
     });
     const preview = transformer.apply(contentState);
@@ -89,14 +89,14 @@ describe('Content State Transformation', () => {
 
   it('should run chained rules', () => {
     const transformer = new UUT({
-      _if: metadata => metadata.media.images().length > 3,
+      _if: metadata => metadata.images.length > 3,
       _then: (metadata, preview) =>
         preview.gallery({
-          mediaInfo: metadata.media.images().slice(0, 3),
+          mediaInfo: metadata.images.slice(0, 3),
         }),
     }).rule({
-      _if: metadata => metadata.text.plain().length > 0,
-      _then: (metadata, preview) => preview.plain(metadata.text.plain()[0]),
+      _if: metadata => metadata.plain.length > 0,
+      _then: (metadata, preview) => preview.plain(metadata.plain[0]),
     });
     const preview = transformer.apply(contentState);
     expect(butKey(preview.blocks[1])).toEqual(butKey(expectedBlock));

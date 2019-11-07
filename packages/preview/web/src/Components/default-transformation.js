@@ -1,21 +1,19 @@
 import ContentStateTransformation from '../RuleEngine/ContentStateTransformation';
 
 export const defaultTransformation = new ContentStateTransformation({
-  _if: metadata => metadata.text.plain().length > 0,
-  _then: (metadata, preview) =>
-    preview.plain(metadata.text.plain()[0].join('')).readMore({ lines: 3 }),
+  _if: metadata => metadata.plain.length > 0,
+  _then: (metadata, preview) => preview.plain(metadata.plain[0].join('')).readMore({ lines: 3 }),
 })
   .rule({
-    _if: metadata => metadata.media.images().length > 0 && metadata.media.images().length < 5,
-    _then: (metadata, preview) =>
-      preview.image({ mediaInfo: metadata.media.images()[0] }).seeFullPost(),
+    _if: metadata => metadata.images.length > 0 && metadata.images.length < 5,
+    _then: (metadata, preview) => preview.image({ mediaInfo: metadata.images[0] }).seeFullPost(),
   })
   .rule({
-    _if: metadata => metadata.media.images().length >= 5,
+    _if: metadata => metadata.images.length >= 5,
     _then: (metadata, preview) =>
       preview
         .gallery({
-          mediaInfo: metadata.media.images().slice(0, 4),
+          mediaInfo: metadata.images.slice(0, 4),
           overrides: {
             styles: {
               galleryLayout: 2,
@@ -43,5 +41,5 @@ export const defaultTransformation = new ContentStateTransformation({
             },
           },
         })
-        .imageCounter({ counter: metadata.media.images().length - 4 }),
+        .imageCounter({ counter: metadata.images.length - 4 }),
   });

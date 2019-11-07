@@ -1,4 +1,3 @@
-import { memoize } from 'lodash';
 import extractEntityData from './extractEntityData';
 import { METHOD_BLOCK_MAP, METHOD_GROUPED_BLOCK_MAP } from '../const';
 
@@ -51,45 +50,31 @@ const extractSequentialBlockArrays = ({ blocks }, blockType) => {
   return blockArrayResult.list.filter(arr => arr.length > 0);
 };
 
-const extractMedia = memoize(({ entityMap }) =>
-  Object.values(entityMap).reduce((media, entity) => [...media, ...extractEntityData(entity)], [])
-);
+const extractMedia = ({ entityMap }) =>
+  Object.values(entityMap).reduce((media, entity) => [...media, ...extractEntityData(entity)], []);
 
 const getContentStateMetadata = raw => {
-  const text = () => extractTextAsArray(raw, type => type !== 'atomic');
+  const metadata = { allText: extractTextAsArray(raw, type => type !== 'atomic') };
 
   // non-grouped block text API
   Object.entries(METHOD_BLOCK_MAP).forEach(([func, blockType]) => {
-    text[func] = () => extractTextAsArray(raw, type => type === blockType);
+    metadata[func] = extractTextAsArray(raw, type => type === blockType);
   });
 
   // grouped block text API
   Object.entries(METHOD_GROUPED_BLOCK_MAP).forEach(([func, blockType]) => {
-    text[func] = () =>
-      extractSequentialBlockArrays(raw, blockType)
-        .map(blockArray => extractTextAsArray({ blocks: blockArray }, type => type === blockType))
-        .filter(arr => arr.length > 0);
+    metadata[func] = extractSequentialBlockArrays(raw, blockType)
+      .map(blockArray => extractTextAsArray({ blocks: blockArray }, type => type === blockType))
+      .filter(arr => arr.length > 0);
   });
 
-  // TODO: optimize the extractMedia call (cache?)
-  const media = () => extractMedia(raw);
-  media.images = () => extractMedia(raw).filter(({ type }) => type === 'image');
-  media.videos = () => extractMedia(raw).filter(({ type }) => type === 'video');
-  media.files = () => extractMedia(raw).filter(({ type }) => type === 'file');
-  media.maps = () => extractMedia(raw).filter(({ type }) => type === 'map');
+  const media = extractMedia(raw);
+  metadata.images = media.filter(({ type }) => type === 'image');
+  metadata.videos = media.filter(({ type }) => type === 'video');
+  metadata.files = media.filter(({ type }) => type === 'file');
+  metadata.maps = media.filter(({ type }) => type === 'map');
 
-  // for debugging
-  const toObject = () => ({
-    text: {
-      ...['plain', 'h2', 'h3', 'h4', 'h5', 'h6', 'quote', 'code', 'ol', 'ul'].reduce(
-        (obj, func) => ({ ...obj, [func]: text[func].array() }),
-        { all: text.array() }
-      ),
-    },
-    media: media(),
-  });
-
-  return { media, text, toObject };
+  return metadata;
 };
 
 export default getContentStateMetadata;

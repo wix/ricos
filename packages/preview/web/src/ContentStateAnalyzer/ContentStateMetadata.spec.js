@@ -5,7 +5,7 @@ const metadata = uut(contentState);
 /*eslint-disable max-len*/
 describe('content state text metadata', () => {
   it('should return all the text', () => {
-    expect(metadata.text()).toEqual([
+    expect(metadata.allText).toEqual([
       'the first block plain text',
       'plain text with\nsoft new line',
       'plain text with inline styles',
@@ -35,7 +35,7 @@ describe('content state text metadata', () => {
   });
 
   it('should return the plain text', () => {
-    expect(metadata.text.plain()).toEqual([
+    expect(metadata.plain).toEqual([
       ['the first block plain text'],
       ['plain text with\nsoft new line', 'plain text with inline styles'],
       ['plain text aligned to right', 'plain text with link', 'טקסט בעברית', 'по-русски'],
@@ -47,31 +47,31 @@ describe('content state text metadata', () => {
   });
 
   it('should return the headers text', () => {
-    expect(metadata.text.h2()).toEqual(['heading2']);
-    expect(metadata.text.h3()).toEqual(['heading3']);
-    expect(metadata.text.h4()).toEqual(['heading4']);
-    expect(metadata.text.h5()).toEqual(['heading5']);
-    expect(metadata.text.h6()).toEqual(['heading6']);
+    expect(metadata.h2).toEqual(['heading2']);
+    expect(metadata.h3).toEqual(['heading3']);
+    expect(metadata.h4).toEqual(['heading4']);
+    expect(metadata.h5).toEqual(['heading5']);
+    expect(metadata.h6).toEqual(['heading6']);
   });
 
   it('should return the code-block text', () => {
-    expect(metadata.text.code()).toEqual([['const codeBlock = this;']]);
+    expect(metadata.code).toEqual([['const codeBlock = this;']]);
   });
 
   it('should return the quote text', () => {
-    expect(metadata.text.quote()).toEqual([
+    expect(metadata.quote).toEqual([
       'Listen, Jerry, I don’t want to overstep my bounds or  anything. It’s your house. It’s your world. You’re a real Julius Caesar,  but I’ll tell you some, tell you how-how I feel about school, Jerry.  It’s a waste of time, a bunch of people running around, bumping into  each other. G-guy up front says, “two plus two.” The people in the back  say, “four.” Then the bell rings, and they give you a carton of milk and  a piece of paper that says you can take a dump or something. I mean,  it’s—it’s not a place for smart people, Jerry, and I know that’s not a  popular opinion, but it’s my two cents on the issue.',
     ]);
   });
 
   it('should return ordered list text', () => {
-    expect(metadata.text.ol()).toEqual([
+    expect(metadata.ol).toEqual([
       ['ordered list item 1', 'ordered list item 2', 'ordered list item 3'],
     ]);
   });
 
   it('should return unordered list text', () => {
-    expect(metadata.text.ul()).toEqual([
+    expect(metadata.ul).toEqual([
       ['unordered list item 1', 'unordered list item 2', 'unordered list item 3'],
     ]);
   });
@@ -135,23 +135,19 @@ describe('content state media metadata', () => {
     },
   ];
 
-  it('should return all the media data', () => {
-    expect(metadata.media()).toEqual(mediaData);
-  });
-
   it('should return all the image data', () => {
-    expect(metadata.media.images()).toEqual(mediaData.filter(({ type }) => type === 'image'));
+    expect(metadata.images).toEqual(mediaData.filter(({ type }) => type === 'image'));
   });
 
   it('should return all the video data', () => {
-    expect(metadata.media.videos()).toEqual(mediaData.filter(({ type }) => type === 'video'));
+    expect(metadata.videos).toEqual(mediaData.filter(({ type }) => type === 'video'));
   });
 
   it('should return all the file-upload data', () => {
-    expect(metadata.media.files()).toEqual(mediaData.filter(({ type }) => type === 'file'));
+    expect(metadata.files).toEqual(mediaData.filter(({ type }) => type === 'file'));
   });
 
   it('should return all the maps data', () => {
-    expect(metadata.media.maps()).toEqual(mediaData.filter(({ type }) => type === 'map'));
+    expect(metadata.maps).toEqual(mediaData.filter(({ type }) => type === 'map'));
   });
 });
