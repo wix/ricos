@@ -26,6 +26,23 @@
   }
 }
 
+.titleText {
+  color: white;
+  position: absolute;
+  font-size: 20px;
+  width: 100%;
+  text-align: center;
+}
+
+.titleBox {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.6);
+  height: 25%;
+  width: 100%;
+  bottom: 0;
+  overflow: hidden;
+}
+
 :global {
   .gallery-item-hover {
     &::before { //removes the background we get from the gallery

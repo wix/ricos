@@ -38,6 +38,7 @@ class GalleryViewer extends React.Component {
     let galleryKey = this.state && this.state.galleryKey;
     if (!isEqual(nextProps.componentData, this.props.componentData)) {
       galleryKey = get(this, 'props.componentData.styles.galleryLayout', Math.random());
+      // galleryKey = Math.random();
     }
     this.setState({ galleryKey, ...this.stateFromProps(nextProps) });
   }
@@ -80,11 +81,8 @@ class GalleryViewer extends React.Component {
     const items = props.componentData.items || defaults.items;
     const styleParams = this.getStyleParams(
       Object.assign(defaults.styles, props.componentData.styles || {}),
-      this.hasTitle(items)
+      items
     );
-    if (this.context && this.context.helpers.onExpand) {
-      styleParams.allowHover = true;
-    }
     return {
       items,
       styleParams,
@@ -132,36 +130,53 @@ class GalleryViewer extends React.Component {
     });
   };
 
-  getStyleParams = (styleParams, shouldRenderTitle) => {
-    if (!shouldRenderTitle) {
-      return styleParams;
+  getStyleParams = (styleParams, items) => {
+    if (this.context && !this.context.isMobile) {
+      return { ...styleParams, allowHover: true };
     }
-    const display = this.context.isMobile
-      ? { titlePlacement: 'SHOW_BELOW', calculateTextBoxHeightMode: 'AUTOMATIC' }
-      : { titlePlacement: 'SHOW_ON_HOVER', allowHover: true, galleryVerticalAlign: 'flex-end' };
-    return {
-      ...styleParams,
-      isVertical: styleParams.galleryLayout === 1,
-      allowTitle: true,
-      galleryTextAlign: 'center',
-      textsHorizontalPadding: 0,
-      imageInfoType: 'NO_BACKGROUND',
-      hoveringBehaviour: 'APPEARS',
-      textsVerticalPadding: 0,
-      ...display,
-    };
+    return this.hasTitle(items)
+      ? {
+          ...styleParams,
+          isVertical: styleParams.galleryLayout === 1,
+          allowTitle: true,
+          galleryTextAlign: 'center',
+          textsHorizontalPadding: 0,
+          imageInfoType: 'NO_BACKGROUND',
+          hoveringBehaviour: 'APPEARS',
+          textsVerticalPadding: 0,
+          titlePlacement: 'SHOW_BELOW',
+          calculateTextBoxHeightMode: 'AUTOMATIC',
+        }
+      : styleParams;
   };
 
-  hoverElement = itemProps => {
+  renderExpandIcon = itemProps => {
     return itemProps.linkData.url ? (
       <ExpandIcon
-        className={this.viewerStyles.expandIcon}
+        className={viewerStyles.expandIcon}
         onClick={e => {
           e.preventDefault();
           this.handleExpand(itemProps);
         }}
       />
     ) : null;
+  };
+
+  renderTitle = alt => {
+    return alt ? (
+      <div className={viewerStyles.titleBox}>
+        <div className={viewerStyles.titleText}>{alt}</div>
+      </div>
+    ) : null;
+  };
+
+  hoverElement = itemProps => {
+    return (
+      <div>
+        {this.renderExpandIcon(itemProps)}
+        {this.renderTitle(itemProps.alt)}
+      </div>
+    );
   };
 
   render() {
