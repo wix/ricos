@@ -21,8 +21,13 @@ export const DEFAULT_FOREGROUND_STYLE_FN_DRAFT = styles =>
     .toArray()
     .reduce((cssStyle, style) => ({ ...cssStyle, ...DEFAULT_FOREGROUND_STYLE_FN(style) }), {}); // eslint-disable-line new-cap
 
-export const DEFAULT_BACKGROUND_STYLE_FN = style =>
-  isTextHighlight(style) ? { backgroundColor: getColor(style), transition: 'all .8s' } : {};
+export const DEFAULT_BACKGROUND_STYLE_FN = style => {
+  if (isTextHighlight(style)) {
+    const color = getColor(style);
+    return isHexColor(color) ? { backgroundColor: color, transition: 'all .8s' } : {};
+  }
+  return {};
+};
 
 export const DEFAULT_BACKGROUND_STYLE_FN_DRAFT = styles =>
   styles
