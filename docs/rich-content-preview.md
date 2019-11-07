@@ -93,9 +93,9 @@ The `ContentStateMetadata.quotes` exposes the textual content extracted from the
 
 The `ContentStateMetadata.code` exposes the textual content extracted from the `code-block` blocks as a string array.
 
-#### ContentStateMetadata.h2/h3/h4/h5/h6
+#### ContentStateMetadata.h1/h2/h3/h4/h5/h6
 
-The `ContentStateMetadata.h2/h3/h4/h5/h6` exposes the textual content extracted from the heading blocks as a string array.
+The `ContentStateMetadata.h1/h2/h3/h4/h5/h6` exposes the textual content extracted from the heading blocks as a string array.
 
 #### ContentStateMetadata.images
 
@@ -195,9 +195,9 @@ The `ContentStateBuilder.code` method appends a `code-block` block with given `t
 
 The `ContentStateBuilder.quote` method appends a `blockquote` block with given `text`. If the `text` param is a string array, then it will append block for each string. The optional `config` is merged to the block data.
 
-##### ContentStateBuilder.h2/h3/h4/h5/h6(text, config)
+##### ContentStateBuilder.h1/h2/h3/h4/h5/h6(text, config)
 
-The `ContentStateBuilder.h2/h3/h4/h5/h6` methods append a header block with given `text`. If the `text` param is a string array, then it will append block for each string. The optional `config` is merged to the block data.
+The `ContentStateBuilder.h1/h2/h3/h4/h5/h6` methods append a header block with given `text`. If the `text` param is a string array, then it will append block for each string. The optional `config` is merged to the block data.
 
 ##### ContentStateBuilder.image({ mediaInfo, config, overrides })
 
