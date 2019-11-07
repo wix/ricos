@@ -1,3 +1,5 @@
+import { DEFAULT_DESKTOP_BROWSERS, DEFAULT_MOBILE_BROWSERS } from '../tests/constants';
+
 describe('rtl', () => {
   beforeEach(() => cy.switchToHebrew());
 
@@ -8,7 +10,7 @@ describe('rtl', () => {
       cy.eyesOpen({
         appName: 'RTL',
         testName: this.test.parent.title,
-        browser: { width: 1440, height: 900, name: 'chrome' },
+        browser: DEFAULT_DESKTOP_BROWSERS,
       });
     });
 
@@ -52,7 +54,7 @@ describe('rtl', () => {
       cy.eyesOpen({
         appName: 'RTL',
         testName: this.test.parent.title,
-        browser: { deviceName: 'iPhone 6/7/8' },
+        browser: DEFAULT_MOBILE_BROWSERS,
       });
     });
 
