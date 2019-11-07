@@ -10,7 +10,8 @@ export default ({ t, settings, isMobile }) => {
   //apply the extended input modal styles if handleFileSelection is avilable in plugin config
   //& on mobile if enableCustomUploadOnMobile is set to true, otherwise the normal modal styles is applied
   const customStyles =
-    (!isMobile || settings.enableCustomUploadOnMobile) && settings.handleFileSelection
+    (!isMobile || settings.enableCustomUploadOnMobile) &&
+    (settings.handleFileSelection || settings.handleFileUpload)
       ? ExtendedSelectionModalCustomStyle
       : SelectionModalCustomStyle;
   return [
