@@ -73,15 +73,15 @@ These details are categorized by content type rather actual ContentState structu
 
 The `ContentStateMetadata.allText` exposes all the textual content a string array.
 
-##### ContentStateMetadata.plain
+#### ContentStateMetadata.plain
 
 The `ContentStateMetadata.plain` exposes the textual content extracted from the `unstyled` blocks as a string array.
 
-##### ContentStateMetadata.ol
+#### ContentStateMetadata.ol
 
 The `ContentStateMetadata.ol` exposes the textual content extracted from the ordered list blocks as a string array.
 
-##### ContentStateMetadata.ul
+#### ContentStateMetadata.ul
 
 The `ContentStateMetadata.ul` exposes the textual content extracted from the unordered list blocks as a string array.
 
