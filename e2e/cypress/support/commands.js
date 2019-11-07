@@ -386,6 +386,17 @@ Cypress.Commands.add('dragAndDrop', (src, dest, elem = 0) => {
     });
 });
 
+Cypress.Commands.add('dragAndDropPlugin', (src, dest) => {
+  const dataTransfer = new DataTransfer();
+  cy.get(src)
+    .trigger('mousedown')
+    .trigger('dragstart', { dataTransfer })
+    .get(dest)
+    .trigger('dragenter', { dataTransfer })
+    .trigger('dragover', { dataTransfer })
+    .trigger('drop', { dataTransfer });
+});
+
 // disable screenshots in debug mode. So there is no diffrence to ci.
 if (Cypress.browser.isHeaded) {
   const noop = () => {};
