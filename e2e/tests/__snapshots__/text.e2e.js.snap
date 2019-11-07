@@ -346,7 +346,276 @@ exports[`editor > allow to create lists #0`] =
   "entityMap": {}
 };
 
-exports[`editor > align atomic blocks correctly #0`] =
+exports[`text > allow to enter text #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "Leverage agile frameworks",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": "to provide a robust synopsis for high level overviews.",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {}
+};
+
+exports[`text > allow to apply inline styles and links #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {
+        "textAlignment": "left"
+      },
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 10,
+          "offset": 0
+        },
+        {
+          "key": 1,
+          "length": 16,
+          "offset": 10
+        },
+        {
+          "key": 2,
+          "length": 10,
+          "offset": 27
+        },
+        {
+          "key": 3,
+          "length": 30,
+          "offset": 42
+        },
+        {
+          "key": 4,
+          "length": 65,
+          "offset": 77
+        }
+      ],
+      "inlineStyleRanges": [
+        {
+          "length": 72,
+          "offset": 0,
+          "style": "UNDERLINE"
+        },
+        {
+          "length": 65,
+          "offset": 77,
+          "style": "UNDERLINE"
+        },
+        {
+          "length": 102,
+          "offset": 228,
+          "style": "UNDERLINE"
+        },
+        {
+          "length": 78,
+          "offset": 331,
+          "style": "UNDERLINE"
+        },
+        {
+          "length": 28,
+          "offset": 410,
+          "style": "UNDERLINE"
+        },
+        {
+          "length": 5,
+          "offset": 47,
+          "style": "ITALIC"
+        },
+        {
+          "length": 102,
+          "offset": 228,
+          "style": "ITALIC"
+        },
+        {
+          "length": 78,
+          "offset": 331,
+          "style": "ITALIC"
+        },
+        {
+          "length": 28,
+          "offset": 410,
+          "style": "ITALIC"
+        },
+        {
+          "length": 5,
+          "offset": 57,
+          "style": "BOLD"
+        },
+        {
+          "length": 10,
+          "offset": 67,
+          "style": "BOLD"
+        },
+        {
+          "length": 100,
+          "offset": 228,
+          "style": "color5"
+        },
+        {
+          "length": 2,
+          "offset": 328,
+          "style": "color2"
+        },
+        {
+          "length": 78,
+          "offset": 331,
+          "style": "color2"
+        },
+        {
+          "length": 149,
+          "offset": 410,
+          "style": "color2"
+        }
+      ],
+      "key": 2,
+      "text": "@NO_MORE\n#LIVING THE DREAM\nLeverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition. \nOrganically grow the holistic world view of disruptive innovation via workplace diversity and empowerment.\nBring to the table win-win survival strategies to ensure proactive domination.\nAt the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution. ",
+      "type": "code-block"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 3,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 4,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [
+        {
+          "length": 76,
+          "offset": 0,
+          "style": "color2"
+        }
+      ],
+      "key": 5,
+      "text": "User generated content in real-time will have multiple touchpoints for offshoring.",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 6,
+      "text": "Capitalize on low hanging fruit to identify a ballpark value added activity to beta test. ",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 7,
+      "text": "Override the digital divide with additional clickthroughs from DevOps.",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 8,
+      "text": "Nanotechnology immersion along the information highway will close the loop on focusing solely on the bottom line.",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "rel": "nofollow",
+        "target": "_blank",
+        "url": "https://www.wix.com/"
+      },
+      "mutability": "MUTABLE",
+      "type": "LINK"
+    },
+    "1": {
+      "data": {
+        "rel": "nofollow",
+        "target": "_blank",
+        "url": "https://www.sport5.co.il"
+      },
+      "mutability": "MUTABLE",
+      "type": "LINK"
+    },
+    "2": {
+      "data": {
+        "rel": "nofollow",
+        "target": "_blank",
+        "url": "https://www.wix.com/"
+      },
+      "mutability": "MUTABLE",
+      "type": "LINK"
+    },
+    "3": {
+      "data": {
+        "rel": "nofollow",
+        "target": "_blank",
+        "url": "https://www.sport5.co.il/"
+      },
+      "mutability": "MUTABLE",
+      "type": "LINK"
+    },
+    "4": {
+      "data": {
+        "rel": "nofollow",
+        "target": "_blank",
+        "url": "https://www.one.co.il/"
+      },
+      "mutability": "MUTABLE",
+      "type": "LINK"
+    }
+  }
+};
+
+exports[`text > allow to create lists #0`] =
 {
   "blocks": [
     {
@@ -364,23 +633,17 @@ exports[`editor > align atomic blocks correctly #0`] =
       "entityRanges": [],
       "inlineStyleRanges": [],
       "key": 1,
-      "text": "",
-      "type": "unstyled"
+      "text": "Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment.",
+      "type": "ordered-list-item"
     },
     {
       "data": {},
       "depth": 0,
-      "entityRanges": [
-        {
-          "key": 0,
-          "length": 1,
-          "offset": 0
-        }
-      ],
+      "entityRanges": [],
       "inlineStyleRanges": [],
       "key": 2,
-      "text": " ",
-      "type": "atomic"
+      "text": "Bring to the table win-win survival strategies to ensure proactive domination.",
+      "type": "ordered-list-item"
     },
     {
       "data": {},
@@ -388,8 +651,8 @@ exports[`editor > align atomic blocks correctly #0`] =
       "entityRanges": [],
       "inlineStyleRanges": [],
       "key": 3,
-      "text": "",
-      "type": "unstyled"
+      "text": "At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution. ",
+      "type": "ordered-list-item"
     },
     {
       "data": {},
@@ -397,8 +660,8 @@ exports[`editor > align atomic blocks correctly #0`] =
       "entityRanges": [],
       "inlineStyleRanges": [],
       "key": 4,
-      "text": "Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment.",
-      "type": "unstyled"
+      "text": "User generated content in real-time will have multiple touchpoints for offshoring.",
+      "type": "unordered-list-item"
     },
     {
       "data": {},
@@ -406,7 +669,7 @@ exports[`editor > align atomic blocks correctly #0`] =
       "entityRanges": [],
       "inlineStyleRanges": [],
       "key": 5,
-      "text": "Bring to the table win-win survival strategies to ensure proactive domination.",
+      "text": "Capitalize on low hanging fruit to identify a ballpark value added activity to beta test. ",
       "type": "unstyled"
     },
     {
@@ -415,81 +678,18 @@ exports[`editor > align atomic blocks correctly #0`] =
       "entityRanges": [],
       "inlineStyleRanges": [],
       "key": 6,
-      "text": "",
+      "text": "Override the digital divide with additional clickthroughs from DevOps.",
       "type": "unstyled"
     },
     {
       "data": {},
       "depth": 0,
-      "entityRanges": [
-        {
-          "key": 1,
-          "length": 1,
-          "offset": 0
-        }
-      ],
+      "entityRanges": [],
       "inlineStyleRanges": [],
       "key": 7,
-      "text": " ",
-      "type": "atomic"
-    },
-    {
-      "data": {},
-      "depth": 0,
-      "entityRanges": [],
-      "inlineStyleRanges": [],
-      "key": 8,
-      "text": "",
-      "type": "unstyled"
-    },
-    {
-      "data": {},
-      "depth": 0,
-      "entityRanges": [],
-      "inlineStyleRanges": [],
-      "key": 9,
-      "text": "At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution.",
+      "text": "Nanotechnology immersion along the information highway will close the loop on focusing solely on the bottom line.",
       "type": "unstyled"
     }
   ],
-  "entityMap": {
-    "0": {
-      "data": {
-        "config": {
-          "alignment": "right",
-          "showDescription": true,
-          "showTitle": true,
-          "size": "small"
-        },
-        "src": {
-          "file_name": "8bb438_131a7e1872bc45ec827bb61e56b840fe.jpg",
-          "height": 3354,
-          "id": "036c6bf6cef5e4409848eb4eb6f80de1",
-          "original_file_name": "8bb438_131a7e1872bc45ec827bb61e56b840fe.jpg",
-          "width": 2898
-        }
-      },
-      "mutability": "IMMUTABLE",
-      "type": "wix-draft-plugin-image"
-    },
-    "1": {
-      "data": {
-        "config": {
-          "alignment": "center",
-          "showDescription": true,
-          "showTitle": true,
-          "size": "content"
-        },
-        "src": {
-          "file_name": "8bb438_83e03311e53a47ce9ba8bda910fdad88.jpg",
-          "height": 3526,
-          "id": "b12907da5fbb55a31a760e49fb0bb4e6",
-          "original_file_name": "8bb438_83e03311e53a47ce9ba8bda910fdad88.jpg",
-          "width": 5177
-        }
-      },
-      "mutability": "IMMUTABLE",
-      "type": "wix-draft-plugin-image"
-    }
-  }
+  "entityMap": {}
 };
