@@ -202,37 +202,37 @@ The `ContentStateBuilder.h1/h2/h3/h4/h5/h6` methods append a header block with g
 ##### ContentStateBuilder.image({ mediaInfo, config, overrides })
 
 The `ContentStateBuilder.image` method appends an `atomic` block to the `blocks` and a `wix-draft-plugin-image` entity to the `entityMap`. The optional params `config` and `overrides` are merged with the `entity.data.config` and `entity.data`, respectively.
-The `mediaInfo` param is expected to be an image data object returned by [ContentStateMetadata.images](./API.md#ContentStateMetadataimages) method.
+The `mediaInfo` param is expected to be an image data object returned by [ContentStateMetadata.images](./rich-content-preview.md#contentstatemetadataimages) method.
 
 ##### ContentStateBuilder.giphy({ mediaInfo, config, overrides })
 
 The `ContentStateBuilder.giphy` method appends an `atomic` block to the `blocks` and a `wix-draft-plugin-giphy` entity to the `entityMap`. The optional params `config` and `overrides` are merged with the `entity.data.config` and `entity.data`, respectively.
-The `mediaInfo` param is expected to be an image data object returned by [ContentStateMetadata.images](./API.md#ContentStateMetadataimages) method.
+The `mediaInfo` param is expected to be an image data object returned by [ContentStateMetadata.images](./rich-content-preview.md#contentstatemetadataimages) method.
 
 ##### ContentStateBuilder.gallery({ mediaInfo, config, overrides })
 
 The `ContentStateBuilder.gallery` method appends an `atomic` block to the `blocks` and a `wix-draft-plugin-gallery` entity to the `entityMap`. The optional params `config` and `overrides` are merged with the `entity.data.config` and `entity.data`, respectively.
-The `items` param is expected to be an array of image data objects returned by [ContentStateMetadata.images](./API.md#ContentStateMetadataimages) method.
+The `items` param is expected to be an array of image data objects returned by [ContentStateMetadata.images](./rich-content-preview.md#contentstatemetadataimages) method.
 
 ##### ContentStateBuilder.video({ mediaInfo, config, overrides })
 
 The `ContentStateBuilder.video` method appends an `atomic` block to the `blocks` and a `wix-draft-plugin-video` entity to the `entityMap`. The optional params `config` and `overrides` are merged with the `entity.data.config` and `entity.data`, respectively.
-The `mediaInfo` param is expected to be a video data object returned by [ContentStateMetadata.videos](./API.md#ContentStateMetadatavideos) method.
+The `mediaInfo` param is expected to be a video data object returned by [ContentStateMetadata.videos](./rich-content-preview.md#contentstatemetadatavideos) method.
 
 ##### ContentStateBuilder.soundCloud({ mediaInfo, config, overrides })
 
 The `ContentStateBuilder.soundCloud` method appends an `atomic` block to the `blocks` and a `wix-draft-plugin-sound-cloud` entity to the `entityMap`. The optional params `config` and `overrides` are merged with the `entity.data.config` and `entity.data`, respectively.
-The `mediaInfo` param is expected to be a video data object returned by [ContentStateMetadata.videos](./API.md#ContentStateMetadatavideos) method.
+The `mediaInfo` param is expected to be a video data object returned by [ContentStateMetadata.videos](./rich-content-preview.md#contentstatemetadatavideos) method.
 
 ##### ContentStateBuilder.file({ mediaInfo, config, overrides })
 
 The `ContentStateBuilder.file` method appends an `atomic` block to the `blocks` and a `wix-draft-plugin-file-upload` entity to the `entityMap`. The optional params `config` and `overrides` are merged with the `entity.data.config` and `entity.data`, respectively.
-The `mediaInfo` param is expected to be a file data object returned by [ContentStateMetadata.files](./API.md#ContentStateMetadatafiles) method.
+The `mediaInfo` param is expected to be a file data object returned by [ContentStateMetadata.files](./rich-content-preview.md#contentstatemetadatafiles) method.
 
 ##### ContentStateBuilder.map({ mediaInfo, config, overrides })
 
 The `ContentStateBuilder.map` method appends an `atomic` block to the `blocks` and a `wix-draft-plugin-map` entity to the `entityMap`. The optional params `config` and `overrides` are merged with the `entity.data.config` and `entity.data`, respectively.
-The `mediaInfo` parameter is expected to be a map data object returned by [ContentStateMetadata.maps](./API.md#ContentStateMetadatamaps) method.
+The `mediaInfo` parameter is expected to be a map data object returned by [ContentStateMetadata.maps](./rich-content-preview.md#contentstatemetadatamaps) method.
 
 ### ContentStateTransformation
 
