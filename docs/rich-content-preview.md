@@ -33,9 +33,9 @@ Example:
 
 ```js
 
-  if: metadata => metadata.media.images().length >= 4
+  if: metadata => metadata.images.length >= 4
   then: (metadata, preview) => preview.gallery({
-      items: metadata.media.images.slice(0, 4),
+      items: metadata.images.slice(0, 4),
       config: { layout: 'grid', imageWidth: 40 }
   })
 
@@ -64,46 +64,42 @@ The `Image Counter` renders hidden image counter. By default, the counter label 
 The metadata is derived from ContentState and exposes its details:
 
 ```js
-const metadata = getContentStateMetdata(contentState);
+const metadata = getContentStateMetadata(contentState);
 ```
 
 These details are categorized by content type rather actual ContentState structure.
 
-#### ContentStateMetdata.text
+#### ContentStateMetadata.allText
 
-The `ContentStateMetdata.text` exposes all the textual content a string array.
+The `ContentStateMetadata.allText` exposes all the textual content a string array.
 
-###### ContentStateMetdata.text.plain
+##### ContentStateMetadata.plain
 
-The `ContentStateMetdata.text.plain` exposes the textual content extracted from the `unstyled` blocks as a string array.
+The `ContentStateMetadata.plain` exposes the textual content extracted from the `unstyled` blocks as a string array.
 
-####### ContentStateMetdata.text.ol
+##### ContentStateMetadata.ol
 
-The `ContentStateMetdata.text.ol` exposes the textual content extracted from the ordered list blocks as a string array.
+The `ContentStateMetadata.ol` exposes the textual content extracted from the ordered list blocks as a string array.
 
-####### ContentStateMetdata.text.ul
+##### ContentStateMetadata.ul
 
-The `ContentStateMetdata.text.ul` exposes the textual content extracted from the unordered list blocks as a string array.
+The `ContentStateMetadata.ul` exposes the textual content extracted from the unordered list blocks as a string array.
 
-###### ContentStateMetdata.text.quotes
+#### ContentStateMetadata.quotes
 
-The `ContentStateMetdata.text.quotes` exposes the textual content extracted from the `blockquote` blocks as a string array.
+The `ContentStateMetadata.quotes` exposes the textual content extracted from the `blockquote` blocks as a string array.
 
-###### ContentStateMetdata.text.code
+#### ContentStateMetadata.code
 
-The `ContentStateMetdata.text.code` exposes the textual content extracted from the `code-block` blocks as a string array.
+The `ContentStateMetadata.code` exposes the textual content extracted from the `code-block` blocks as a string array.
 
-###### ContentStateMetdata.text.h2/h3/h4/h5/h6
+#### ContentStateMetadata.h2/h3/h4/h5/h6
 
-The `ContentStateMetdata.text.h2/h3/h4/h5/h6` exposes the textual content extracted from the heading blocks as a string array.
+The `ContentStateMetadata.h2/h3/h4/h5/h6` exposes the textual content extracted from the heading blocks as a string array.
 
-### ContentStateMetdata.media
+#### ContentStateMetadata.images
 
-The `ContentStateMetdata.media` exposes all the media-related entities.
-
-#### ContentStateMetdata.media.images
-
-The `ContentStateMetdata.media.images` exposes the data extracted from `image` / `gallery` / `giphy` entities.
+The `ContentStateMetadata.images` exposes the data extracted from `image` / `gallery` / `giphy` entities.
 The image data object structure is:
 
 ```js
@@ -128,9 +124,9 @@ The image data object structure is:
 
 The properties marked with `?` are optional and relevant only for some of the image entities.
 
-#### ContentStateMetdata.media.videos
+#### ContentStateMetadata.videos
 
-The `ContentStateMetdata.media.videos` exposes the data extracted from `video` / `sound-cloud` / `youtube` entities.
+The `ContentStateMetadata.videos` exposes the data extracted from `video` / `sound-cloud` / `youtube` entities.
 
 The video data object structure is:
 
@@ -144,9 +140,9 @@ The video data object structure is:
 
 ```
 
-#### ContentStateMetdata.media.files
+#### ContentStateMetadata.files
 
-The `ContentStateMetdata.media.files` exposes the data extracted from `file-upload` entities.
+The `ContentStateMetadata.files` exposes the data extracted from `file-upload` entities.
 
 The file object structure:
 
@@ -160,9 +156,9 @@ The file object structure:
 
 ```
 
-#### ContentStateMetdata.media.maps
+#### ContentStateMetadata.maps
 
-The `ContentStateMetdata.media.maps` exposes the data extracted from `google-map` entities. The map data structure is similar to `mapSettings` object structure (found in the map entity data).
+The `ContentStateMetadata.maps` exposes the data extracted from `google-map` entities. The map data structure is similar to `mapSettings` object structure (found in the map entity data).
 
 ### ContentStateBuilder
 
@@ -206,37 +202,37 @@ The `ContentStateBuilder.h2/h3/h4/h5/h6` methods append a header block with give
 ##### ContentStateBuilder.image({ mediaInfo, config, overrides })
 
 The `ContentStateBuilder.image` method appends an `atomic` block to the `blocks` and a `wix-draft-plugin-image` entity to the `entityMap`. The optional params `config` and `overrides` are merged with the `entity.data.config` and `entity.data`, respectively.
-The `mediaInfo` param is expected to be an image data object returned by [ContentStateMetdata.media.images](./API.md#ContentStateMetdatamediaimages) method.
+The `mediaInfo` param is expected to be an image data object returned by [ContentStateMetadata.images](./API.md#ContentStateMetadataimages) method.
 
 ##### ContentStateBuilder.giphy({ mediaInfo, config, overrides })
 
 The `ContentStateBuilder.giphy` method appends an `atomic` block to the `blocks` and a `wix-draft-plugin-giphy` entity to the `entityMap`. The optional params `config` and `overrides` are merged with the `entity.data.config` and `entity.data`, respectively.
-The `mediaInfo` param is expected to be an image data object returned by [ContentStateMetdata.media.images](./API.md#ContentStateMetdatamediaimages) method.
+The `mediaInfo` param is expected to be an image data object returned by [ContentStateMetadata.images](./API.md#ContentStateMetadataimages) method.
 
 ##### ContentStateBuilder.gallery({ mediaInfo, config, overrides })
 
 The `ContentStateBuilder.gallery` method appends an `atomic` block to the `blocks` and a `wix-draft-plugin-gallery` entity to the `entityMap`. The optional params `config` and `overrides` are merged with the `entity.data.config` and `entity.data`, respectively.
-The `items` param is expected to be an array of image data objects returned by [ContentStateMetdata.media.images](./API.md#ContentStateMetdatamediaimages) method.
+The `items` param is expected to be an array of image data objects returned by [ContentStateMetadata.images](./API.md#ContentStateMetadataimages) method.
 
 ##### ContentStateBuilder.video({ mediaInfo, config, overrides })
 
 The `ContentStateBuilder.video` method appends an `atomic` block to the `blocks` and a `wix-draft-plugin-video` entity to the `entityMap`. The optional params `config` and `overrides` are merged with the `entity.data.config` and `entity.data`, respectively.
-The `mediaInfo` param is expected to be a video data object returned by [ContentStateMetdata.media.videos](./API.md#ContentStateMetdatamediavideos) method.
+The `mediaInfo` param is expected to be a video data object returned by [ContentStateMetadata.videos](./API.md#ContentStateMetadatavideos) method.
 
 ##### ContentStateBuilder.soundCloud({ mediaInfo, config, overrides })
 
 The `ContentStateBuilder.soundCloud` method appends an `atomic` block to the `blocks` and a `wix-draft-plugin-sound-cloud` entity to the `entityMap`. The optional params `config` and `overrides` are merged with the `entity.data.config` and `entity.data`, respectively.
-The `mediaInfo` param is expected to be a video data object returned by [ContentStateMetdata.media.videos](./API.md#ContentStateMetdatamediavideos) method.
+The `mediaInfo` param is expected to be a video data object returned by [ContentStateMetadata.videos](./API.md#ContentStateMetadatavideos) method.
 
 ##### ContentStateBuilder.file({ mediaInfo, config, overrides })
 
 The `ContentStateBuilder.file` method appends an `atomic` block to the `blocks` and a `wix-draft-plugin-file-upload` entity to the `entityMap`. The optional params `config` and `overrides` are merged with the `entity.data.config` and `entity.data`, respectively.
-The `mediaInfo` param is expected to be a file data object returned by [ContentStateMetdata.media.files](./API.md#ContentStateMetdatamediafiles) method.
+The `mediaInfo` param is expected to be a file data object returned by [ContentStateMetadata.files](./API.md#ContentStateMetadatafiles) method.
 
 ##### ContentStateBuilder.map({ mediaInfo, config, overrides })
 
 The `ContentStateBuilder.map` method appends an `atomic` block to the `blocks` and a `wix-draft-plugin-map` entity to the `entityMap`. The optional params `config` and `overrides` are merged with the `entity.data.config` and `entity.data`, respectively.
-The `mediaInfo` parameter is expected to be a map data object returned by [ContentStateMetdata.media.maps](./API.md#ContentStateMetdatamediamaps) method.
+The `mediaInfo` parameter is expected to be a map data object returned by [ContentStateMetadata.maps](./API.md#ContentStateMetadatamaps) method.
 
 ### ContentStateTransformation
 
@@ -261,10 +257,10 @@ The following fragment demonstrates the "if content images > 3 => add a gallery 
 
 ```js
 const transformation = new ContentStateTransformation({
-  _if: metadata => metadata.media.images().length > 3,
+  _if: metadata => metadata.images.length > 3,
   _then: (metadata, preview) =>
     preview.gallery({
-      mediaInfo: metadata.media.images().slice(0, 3),
+      mediaInfo: metadata.images.slice(0, 3),
     }),
 });
 const preview = transformation.apply(contentState);
@@ -311,10 +307,11 @@ The ContentStateBuilder exposes `readMore` API that accepts configuration object
     ellipsis: string,
     label: string,
     onClick: function,
+    text: string,
   }
 
 ```
-
+The `text` field allows to specify the text to be displayed. By default, the text is taken from the wrapped children.
 The `onClick` field is common for all the interactions. It defines the ineraction click behavior, by intercepting the expansion click.
 
 ##### SeeFullPost
@@ -383,21 +380,21 @@ The `onPreviewExpand` handler determines the behavior on content expansion. The 
 ```js
 
 const defaultTransformation = new ContentStateTransformation({
-  _if: metadata => metadata.text.plain().length > 0,
+  _if: metadata => metadata.plain.length > 0,
   _then: (metadata, preview) =>
-    preview.plain(metadata.text.plain()[0].join('')).readMore({ lines: 3 }),
+    preview.plain(metadata.plain[0].join('')).readMore({ lines: 3 }),
 })
   .rule({
-    _if: metadata => metadata.media.images().length > 0 && metadata.media.images().length < 5,
+    _if: metadata => metadata.images.length > 0 && metadata.images.length < 5,
     _then: (metadata, preview) =>
-      preview.image({ mediaInfo: metadata.media.images()[0] }).seeFullPost(),
+      preview.image({ mediaInfo: metadata.images[0] }).seeFullPost(),
   })
   .rule({
-    _if: metadata => metadata.media.images().length >= 5,
+    _if: metadata => metadata.images.length >= 5,
     _then: (metadata, preview) =>
       preview
         .gallery({
-          mediaInfo: metadata.media.images().slice(0, 4),
+          mediaInfo: metadata.images.slice(0, 4),
           overrides: {
             styles: {
               galleryLayout: 2,
@@ -405,7 +402,7 @@ const defaultTransformation = new ContentStateTransformation({
             },
           },
         })
-        .imageCounter({ counter: metadata.media.images().length - 4 }),
+        .imageCounter({ counter: metadata.images.length - 4 }),
   });
 
 ```
