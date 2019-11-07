@@ -18,6 +18,8 @@
   - `video`
     - [#443](https://github.com/wix-incubator/rich-content/pull/443) async url resolving support
     - [#444](https://github.com/wix-incubator/rich-content/pull/444) file upload support
+  - `editor`
+    - [#453](https://github.com/wix-incubator/rich-content/pull/453) added drag and drop capability to plugins
   ### :bug: Bug Fix
   - `divider`
     - [#438](https://github.com/wix-incubator/rich-content/pull/438) container alignment
