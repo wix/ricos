@@ -19,6 +19,7 @@ const commonPlugins = [
   ['@babel/plugin-proposal-class-properties', { loose: true }],
   '@babel/plugin-transform-runtime',
   '@babel/plugin-syntax-dynamic-import',
+  '@babel/plugin-proposal-optional-chaining',
 ];
 
 const testPlugins = ['@babel/plugin-transform-modules-commonjs'];

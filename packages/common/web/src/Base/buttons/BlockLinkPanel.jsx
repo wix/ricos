@@ -7,8 +7,8 @@ import LinkPanelContainer from '../../Components/LinkPanelContainer';
 class BlockLinkPanel extends Component {
   componentDidMount() {
     const { anchorTarget, relValue, theme, t, uiSettings } = this.props;
-    const componentLink = this.props.pubsub.getBlockData({ key: 'componentLink' });
-    const { url, targetBlank, nofollow } = componentLink || {};
+    const componentData = this.props.pubsub.get('componentData');
+    const { url, targetBlank, nofollow } = componentData.config.link || {};
     const linkContainerProps = {
       url,
       targetBlank,
@@ -17,7 +17,7 @@ class BlockLinkPanel extends Component {
       anchorTarget,
       relValue,
       t,
-      isActive: !!componentLink,
+      isActive: !!url,
       onDone: this.wrapBlockInLink,
       onCancel: this.hideLinkPanel,
       onDelete: this.deleteLink,
