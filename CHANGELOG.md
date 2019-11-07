@@ -23,6 +23,8 @@
     - [#438](https://github.com/wix-incubator/rich-content/pull/438) container alignment
   - `viewer`
     - [#442](https://github.com/wix-incubator/rich-content/pull/442) html plugin alignment
+  - `gallery`
+    - [#455](https://github.com/wix-incubator/rich-content/pull/455) gallery image titles appears
     
 </details>
 <hr/>
