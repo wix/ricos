@@ -1,4 +1,5 @@
 import { BUTTONS, PluginSettingsIcon, getModalStyles } from 'wix-rich-content-common';
+import { isEmpty } from 'lodash';
 import { Modals } from '../modals';
 import { MediaReplaceIcon, ImageEditorIcon } from '../icons';
 
@@ -20,6 +21,9 @@ export default ({ t, anchorTarget, relValue, uiSettings, isMobile, imageEditorWi
         imageEditorWixSettings,
         mobile: false,
         tooltipTextKey: 'ImageEditorButton_Tooltip',
+        mapComponentDataToButtonProps: componentData => ({
+          disabled: isEmpty(componentData.src),
+        }),
       }
     : null;
 

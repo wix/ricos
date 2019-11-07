@@ -12,13 +12,26 @@ class ToolbarButton extends Component {
       x: PropTypes.number,
       y: PropTypes.number,
     }),
+    shouldRefreshTooltips: PropTypes.func,
   };
 
   render() {
-    const { theme, showTooltip, tooltipText, button, tooltipOffset } = this.props;
+    const {
+      theme,
+      showTooltip,
+      tooltipText,
+      button,
+      tooltipOffset,
+      shouldRefreshTooltips,
+    } = this.props;
     if (showTooltip) {
       return (
-        <Tooltip content={tooltipText} moveBy={tooltipOffset} theme={theme}>
+        <Tooltip
+          content={tooltipText}
+          moveBy={tooltipOffset}
+          theme={theme}
+          shouldRebuildOnUpdate={shouldRefreshTooltips}
+        >
           {button}
         </Tooltip>
       );

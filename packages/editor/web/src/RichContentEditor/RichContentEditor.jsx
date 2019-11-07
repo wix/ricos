@@ -47,13 +47,33 @@ class RichContentEditor extends Component {
     this.initContext();
     this.initPlugins();
   }
+  componentDidMount() {
+    this.resetInitialIntent();
+  }
+
+  resetInitialIntent = () => {
+    if (this.contextualData.initialIntent) {
+      this.contextualData.initialIntent = '';
+    }
+  };
 
   getEditorState = () => this.state.editorState;
 
   setEditorState = editorState => this.setState({ editorState });
 
   initContext = () => {
-    const { theme, t, locale, anchorTarget, relValue, helpers, config, isMobile } = this.props;
+    const {
+      theme,
+      t,
+      locale,
+      anchorTarget,
+      relValue,
+      helpers,
+      config,
+      isMobile,
+      shouldRenderOptimizedImages,
+      initialIntent,
+    } = this.props;
     this.contextualData = {
       theme,
       t,
@@ -66,10 +86,23 @@ class RichContentEditor extends Component {
       setEditorState: this.setEditorState,
       getEditorBounds: this.getEditorBounds,
       languageDir: getLangDir(locale),
+      shouldRenderOptimizedImages,
+      initialIntent,
     };
   };
 
   getEditorBounds = () => this.state.editorBounds;
+
+  onAtomicBlockFocus = blockKey => {
+    const { onAtomicBlockFocus } = this.props;
+    if (blockKey && onAtomicBlockFocus) {
+      const contentState = this.getEditorState().getCurrentContent();
+      const block = contentState.getBlockForKey(blockKey);
+      const entityKey = block.getEntityAt(0);
+      const entity = contentState.getEntity(entityKey);
+      onAtomicBlockFocus(blockKey, entity.type, entity.data);
+    }
+  };
 
   initPlugins() {
     const {
@@ -99,6 +132,7 @@ class RichContentEditor extends Component {
       isMobile,
       anchorTarget,
       relValue,
+      onAtomicBlockFocus: this.onAtomicBlockFocus,
       getEditorState: this.getEditorState,
       setEditorState: this.setEditorState,
       getEditorBounds: this.getEditorBounds,
@@ -225,7 +259,7 @@ class RichContentEditor extends Component {
     },
   });
 
-  focus = () => this.editor.focus();
+  focus = () => setTimeout(this.editor.focus);
 
   blur = () => this.editor.blur();
 
@@ -440,6 +474,9 @@ RichContentEditor.propTypes = {
   handleReturn: PropTypes.func,
   customStyleFn: PropTypes.func,
   locale: PropTypes.string.isRequired,
+  shouldRenderOptimizedImages: PropTypes.bool,
+  onAtomicBlockFocus: PropTypes.func,
+  initialIntent: PropTypes.string,
 };
 
 RichContentEditor.defaultProps = {

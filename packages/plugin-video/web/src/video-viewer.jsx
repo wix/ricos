@@ -13,11 +13,26 @@ class VideoViewer extends Component {
   constructor(props) {
     super(props);
     validate(props.componentData, schema);
+    this.state = { url: undefined };
+    const url = getVideoSrc(props.componentData.src, props.settings);
+    if (typeof url === 'string') {
+      this.state = { url: this.normalizeUrl(url) };
+    } else if (url && typeof url.then === 'function') {
+      url.then(url => this.setState({ url: this.normalizeUrl(url) }));
+    }
   }
 
   componentWillReceiveProps(nextProps) {
     if (!isEqual(nextProps.componentData, this.props.componentData)) {
       validate(nextProps.componentData, schema);
+      if (nextProps.componentData.src !== this.props.componentData.src) {
+        const url = getVideoSrc(nextProps.componentData.src, nextProps.settings);
+        if (typeof url === 'string') {
+          this.setState({ url: this.normalizeUrl(url) });
+        } else if (url && typeof url.then === 'function') {
+          url.then(url => this.setState({ url: this.normalizeUrl(url) }));
+        }
+      }
     }
   }
 
@@ -36,11 +51,10 @@ class VideoViewer extends Component {
   };
 
   render() {
-    const { componentData, settings, ...rest } = this.props;
     this.styles = this.styles || mergeStyles({ styles, theme: this.context.theme });
-    const url = this.normalizeUrl(getVideoSrc(componentData.src, settings));
+    const { url } = this.state;
     const props = {
-      ...rest,
+      ...this.props,
       url,
       onReady: this.fixVideoRatio,
       disabled: this.context.disabled,

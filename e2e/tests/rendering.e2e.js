@@ -1,4 +1,5 @@
 import { fixtures } from './constants';
+import { DEFAULT_DESKTOP_BROWSERS, DEFAULT_MOBILE_BROWSERS } from '../tests/constants';
 
 // function testViewerAndEditorAreEqual() {
 //   function getTitle(test = Cypress.mocha.getRunner().test) {
@@ -18,10 +19,9 @@ describe('editor rendering', () => {
   context('desktop', () => {
     before(function() {
       cy.eyesOpen({
-        appName: 'Rich Content - Rendering',
-        batchName: 'Rendering',
+        appName: 'Rendering',
         testName: this.test.parent.title,
-        browser: [{ width: 1440, height: 900, name: 'chrome' }],
+        browser: DEFAULT_DESKTOP_BROWSERS,
       });
     });
 
@@ -35,10 +35,9 @@ describe('editor rendering', () => {
   context('mobile', () => {
     before(function() {
       cy.eyesOpen({
-        appName: 'Rich Content - Rendering',
-        batchName: 'Rendering',
+        appName: 'Rendering',
         testName: this.test.parent.title,
-        browser: { deviceName: 'iPhone 6/7/8' },
+        browser: DEFAULT_MOBILE_BROWSERS,
       });
     });
 

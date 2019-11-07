@@ -3,12 +3,16 @@
 
 [dir].wrapper {
   :global {
-
     .DraftEditor-editorContainer,
     .DraftEditor-root,
     .public-DraftEditor-content {
       height: inherit;
       text-align: initial;
+    }
+
+    .public-DraftEditorPlaceholder-root {
+      color: #9197a3;
+      position: absolute;
     }
 
     .public-DraftEditor-content[contenteditable='true'] {
@@ -91,7 +95,7 @@
       margin: 0;
       padding: 0;
 
-      &>* {
+      & > * {
         margin-inline-start: 40px;
       }
     }

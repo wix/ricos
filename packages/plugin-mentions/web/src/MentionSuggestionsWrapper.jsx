@@ -27,13 +27,27 @@ class MentionSuggestionsWrapper extends Component {
     this.setState({ mentions: [] });
   };
 
+  onOpen = () => {
+    const { handleDropdownOpen } = this.props.settings;
+    handleDropdownOpen && handleDropdownOpen();
+  };
+
+  onClose = () => {
+    const { handleDropdownClose } = this.props.settings;
+    handleDropdownClose && handleDropdownClose();
+  };
+
   render() {
-    const Comp = this.props.component;
+    const MentionSuggestions = this.props.component;
+    const { popoverComponent = <div /> } = this.props.settings;
     return (
-      <Comp
+      <MentionSuggestions
         onSearchChange={this.handleSearchChange}
         onAddMention={this.onAddMention}
         suggestions={this.state.mentions}
+        onOpen={this.onOpen}
+        popoverComponent={popoverComponent}
+        onClose={this.onClose}
       />
     );
   }
