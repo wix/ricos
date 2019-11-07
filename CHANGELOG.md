@@ -15,9 +15,15 @@
   </summary>
 
   ### :rocket: New Feature
+  - `editor`
+    - [#445](https://github.com/wix-incubator/rich-content/pull/445) initial intent for all plugins except file-upload plugins
+  - `mentions`
+    - [#452](https://github.com/wix-incubator/rich-content/pull/452) `handleDropdownOpen`, `handleDropdownClose` and `popoverComponent` added to plugin settings
   - `video`
     - [#443](https://github.com/wix-incubator/rich-content/pull/443) async url resolving support
     - [#444](https://github.com/wix-incubator/rich-content/pull/444) file upload support
+    - [#449](https://github.com/wix-incubator/rich-content/pull/449) force video mime type for uploads
+    - [#451](https://github.com/wix-incubator/rich-content/pull/451) uses unique file input id
   - `editor`
     - [#453](https://github.com/wix-incubator/rich-content/pull/453) added drag and drop capability to plugins
   ### :bug: Bug Fix
@@ -25,6 +31,8 @@
     - [#438](https://github.com/wix-incubator/rich-content/pull/438) container alignment
   - `viewer`
     - [#442](https://github.com/wix-incubator/rich-content/pull/442) html plugin alignment
+  - editor
+    - [#448](https://github.com/wix-incubator/rich-content/pull/448) placeholder style fixed
   ### :house: Internal
   - `gallery`
     - [#446](https://github.com/wix-incubator/rich-content/pull/446) `pro-gallery` updated to `v1.5.25`
@@ -46,6 +54,7 @@
   - [#402](https://github.com/wix-incubator/rich-content/pull/402) mentions suggestion box size controll
 - `editor`
   - [#396](https://github.com/wix-incubator/rich-content/pull/396) sticky static toolbar on all platforms
+  - [#445](https://github.com/wix-incubator/rich-content/pull/445) initial intent for all plugins except file-upload plugins
 ### :bug: Bug Fix
 - `common`
   - [#436](https://github.com/wix-incubator/rich-content/pull/436) data-normalization: missing entity protection added
