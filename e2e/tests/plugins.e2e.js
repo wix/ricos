@@ -221,7 +221,7 @@ describe('plugins', () => {
         .addVideoFromURI()
         .shrinkPlugin();
       cy.get('[data-loaded=true]');
-      cy.get(`[data-hook="${PLUGIN_COMPONENT.VIDEO}"] [class*="placeholder"]`).should('not.exist');
+      cy.get(`[data-hook="${PLUGIN_COMPONENT.VIDEO}"]`).scrollIntoView();
       cy.eyesCheckWindow(this.test.title);
     });
 
@@ -231,7 +231,7 @@ describe('plugins', () => {
         .addCustomVideo()
         .shrinkPlugin();
       cy.get('[data-loaded=true]');
-      cy.get(`[data-hook="${PLUGIN_COMPONENT.VIDEO}"] [class*="placeholder"]`).should('not.exist');
+      cy.get(`[data-hook="${PLUGIN_COMPONENT.VIDEO}"]`).scrollIntoView();
       cy.eyesCheckWindow(this.test.title);
     });
   });
@@ -255,9 +255,7 @@ describe('plugins', () => {
         .addSoundCloud()
         .shrinkPlugin();
       cy.get('[data-loaded=true]');
-      cy.get(`[data-hook="${PLUGIN_COMPONENT.SOUND_CLOUD}"] [class*="placeholder"]`).should(
-        'not.exist'
-      );
+      cy.get(`[data-hook="${PLUGIN_COMPONENT.SOUND_CLOUD}"]`).scrollIntoView();
       cy.eyesCheckWindow(this.test.title);
     });
   });
