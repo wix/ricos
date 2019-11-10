@@ -24,6 +24,8 @@
     - [#444](https://github.com/wix-incubator/rich-content/pull/444) file upload support
     - [#449](https://github.com/wix-incubator/rich-content/pull/449) force video mime type for uploads
     - [#451](https://github.com/wix-incubator/rich-content/pull/451) uses unique file input id
+  - `html`
+    - [#456](https://github.com/wix-incubator/rich-content/pull/456) adsense support
   ### :bug: Bug Fix
   - `divider`
     - [#438](https://github.com/wix-incubator/rich-content/pull/438) container alignment
