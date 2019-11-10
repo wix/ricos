@@ -196,8 +196,8 @@ export default ({ config, store }) => WrappedComponent =>
       const { size, alignment } = componentData.config;
 
       const {
-        width = componentData.width,
-        height = componentData.height,
+        width = componentData.config.width,
+        height = componentData.config.height,
         hoverPosition,
       } = this.state;
       const { isTop, isLeft, isRight, isBottom } = hoverPosition;
