@@ -17,8 +17,6 @@
   ### :rocket: New Feature
   - `editor`
     - [#445](https://github.com/wix-incubator/rich-content/pull/445) initial intent for all plugins except file-upload plugins
-  - `common`
-    - [#454](https://github.com/wix-incubator/rich-content/pull/454) fix linkPanel not loading link data after page refresh
   - `mentions`
     - [#452](https://github.com/wix-incubator/rich-content/pull/452) `handleDropdownOpen`, `handleDropdownClose` and `popoverComponent` added to plugin settings
   - `video`
@@ -27,6 +25,8 @@
     - [#449](https://github.com/wix-incubator/rich-content/pull/449) force video mime type for uploads
     - [#451](https://github.com/wix-incubator/rich-content/pull/451) uses unique file input id
   ### :bug: Bug Fix
+  - `common`
+    - [#454](https://github.com/wix-incubator/rich-content/pull/454) link panel not loading link data after page refresh
   - `divider`
     - [#438](https://github.com/wix-incubator/rich-content/pull/438) container alignment
   - `viewer`
