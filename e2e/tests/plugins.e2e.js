@@ -221,7 +221,7 @@ describe('plugins', () => {
         .addVideoFromURI()
         .shrinkPlugin();
       cy.get('[style*="background-image"]');
-      cy.get('iframe[src*="https://www.youtube.com"]');
+      cy.get('iframe[src*="https://www.youtube.com"]', { timeout: 5000 });
       cy.eyesCheckWindow(this.test.title);
     });
 
@@ -257,7 +257,7 @@ describe('plugins', () => {
         .addSoundCloud()
         .shrinkPlugin();
       cy.get('[style*="background-image"]');
-      cy.get('iframe[src*="https://w.soundcloud.com"]');
+      cy.get('iframe[src*="https://w.soundcloud.com"]', { timeout: 5000 });
       cy.eyesCheckWindow(this.test.title);
     });
   });
