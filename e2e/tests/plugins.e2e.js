@@ -6,6 +6,7 @@ import {
   GALLERY_IMAGE_SETTINGS,
   IMAGE_SETTINGS,
 } from '../cypress/dataHooks';
+import { DEFAULT_DESKTOP_BROWSERS } from '../tests/constants';
 
 const eyesOpen = ({
   test: {
@@ -15,7 +16,7 @@ const eyesOpen = ({
   cy.eyesOpen({
     appName: 'Plugins',
     testName: title,
-    browser: [{ width: 1440, height: 900, name: 'chrome' }],
+    browser: DEFAULT_DESKTOP_BROWSERS,
   });
 
 describe('plugins', () => {
@@ -348,6 +349,24 @@ describe('plugins', () => {
 
     it('render file-upload plugin toolbar', function() {
       cy.openPluginToolbar(PLUGIN_COMPONENT.FILE_UPLOAD);
+      cy.eyesCheckWindow(this.test.title);
+    });
+  });
+
+  context('general', () => {
+    before(function() {
+      eyesOpen(this);
+    });
+
+    beforeEach('load editor', () => cy.loadEditor('images'));
+
+    after(() => cy.eyesClose());
+    it('align atomic blocks correctly', function() {
+      cy.loadEditor('images')
+        .alignImage('left')
+        .alignImage('center')
+        .alignImage('right')
+        .setSelection(0, 0);
       cy.eyesCheckWindow(this.test.title);
     });
   });

@@ -14,16 +14,26 @@
     Click to see more.
   </summary>
 
-### :rocket: New Feature
-- `video`
-  - [#443](https://github.com/wix-incubator/rich-content/pull/443) async url resolving support
-  - [#444](https://github.com/wix-incubator/rich-content/pull/444) file upload support
-### :bug: Bug Fix
-- `divider`
-  - [#438](https://github.com/wix-incubator/rich-content/pull/438) container alignment
-- `viewer`
-  - [#442](https://github.com/wix-incubator/rich-content/pull/442) html plugin alignment
-
+  ### :rocket: New Feature
+  - `mentions`
+    - [#452](https://github.com/wix-incubator/rich-content/pull/452) `handleDropdownOpen`, `handleDropdownClose` and `popoverComponent` added to plugin settings
+  - `video`
+    - [#443](https://github.com/wix-incubator/rich-content/pull/443) async url resolving support
+    - [#444](https://github.com/wix-incubator/rich-content/pull/444) file upload support
+    - [#449](https://github.com/wix-incubator/rich-content/pull/449) force video mime type for uploads
+    - [#451](https://github.com/wix-incubator/rich-content/pull/451) uses unique file input id
+  ### :bug: Bug Fix
+  - `divider`
+    - [#438](https://github.com/wix-incubator/rich-content/pull/438) container alignment
+  - `viewer`
+    - [#442](https://github.com/wix-incubator/rich-content/pull/442) html plugin alignment
+  - editor
+    - [#448](https://github.com/wix-incubator/rich-content/pull/448) placeholder style fixed
+  ### :house: Internal
+  - `gallery`
+    - [#446](https://github.com/wix-incubator/rich-content/pull/446) `pro-gallery` updated to `v1.5.25`
+  - `e2e`
+    - [#447](https://github.com/wix-incubator/rich-content/pull/447) added more supported browsers
 </details>
 <hr/>
 
@@ -62,8 +72,6 @@
   - [#413](https://github.com/wix-incubator/rich-content/pull/413) new image doesn't replace existing image
   - [#428](https://github.com/wix-incubator/rich-content/pull/428) image settings works while uploading
   - [#423](https://github.com/wix-incubator/rich-content/pull/423) images are rendered in high resolution for seo
-- `file-upload`
-  - [#426](https://github.com/wix-incubator/rich-content/pull/426) apply spinner animation to file upload plugin
 - `gallery`
   - [#404](https://github.com/wix-incubator/rich-content/pull/404) delete last remaining image in image settings returns to gallery settings
   - [#403](https://github.com/wix-incubator/rich-content/pull/403) re-render gallery on change only
@@ -84,21 +92,17 @@
   - [#435](https://github.com/wix-incubator/rich-content/pull/435) [documentation](./docs/rich-content-preview.md) added
 <hr/>
 
-## 5.1.12 (Nov 4, 2019)
-### :house: Internal
-- `gallery`
-  - [#446](https://github.com/wix-incubator/rich-content/pull/446) `pro-gallery` updated to `v1.5.25`
-
-## 5.1.11 (Oct 28, 2019)
+## 5.1.13 (Nov 5, 2019)
 ### :bug: Bug Fix
-- `html`
-  - [#439](https://github.com/wix-incubator/rich-content/pull/439) apply style on container
-<hr/>
+  - `viewer`
+    - [#426](https://github.com/wix-incubator/rich-content/pull/426) rtl issues
+  - `file-upload`
+    - [#426](https://github.com/wix-incubator/rich-content/pull/426) spinner animation
 
 ## 5.1.12 (Nov 4, 2019)
 ### :house: Internal
-- `gallery`
-  - [#446](https://github.com/wix-incubator/rich-content/pull/446) `pro-gallery` updated to `v1.5.25`
+  - `gallery`
+    - [#446](https://github.com/wix-incubator/rich-content/pull/446) `pro-gallery` updated to `v1.5.25`
 
 ## 5.1.11 (Oct 28, 2019)
 ### :bug: Bug Fix

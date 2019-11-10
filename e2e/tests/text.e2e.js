@@ -1,11 +1,12 @@
 import { INLINE_TOOLBAR_BUTTONS } from '../cypress/dataHooks';
+import { DEFAULT_DESKTOP_BROWSERS } from './constants';
 
-describe('editor', () => {
+describe('text', () => {
   before(function() {
     cy.eyesOpen({
-      appName: 'Editor',
+      appName: 'Text',
       testName: this.test.parent.title,
-      browser: [{ width: 1440, height: 900, name: 'chrome' }],
+      browser: DEFAULT_DESKTOP_BROWSERS,
     });
   });
 
@@ -66,15 +67,6 @@ describe('editor', () => {
     cy.loadEditor('plain')
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.ORDERED_LIST, [300, 100])
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.UNORDERED_LIST, [550, 1]);
-    cy.eyesCheckWindow(this.test.title);
-  });
-
-  it('align atomic blocks correctly', function() {
-    cy.loadEditor('images')
-      .alignImage('left')
-      .alignImage('center')
-      .alignImage('right')
-      .setSelection(0, 0);
     cy.eyesCheckWindow(this.test.title);
   });
 });
