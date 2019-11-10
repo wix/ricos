@@ -88,11 +88,6 @@ exports[`text > allow to apply inline styles and links #0`] =
           "style": "UNDERLINE"
         },
         {
-          "length": 45,
-          "offset": 22,
-          "style": "UNDERLINE"
-        },
-        {
           "length": 65,
           "offset": 68,
           "style": "UNDERLINE"

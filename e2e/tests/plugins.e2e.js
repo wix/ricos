@@ -101,7 +101,9 @@ describe('plugins', () => {
         .get(`[data-hook=${'image-item'}]:first`)
         .get(`[data-hook=${'image-item'}]`)
         .eq(1)
-        .openGalleryAdvancedSettings();
+        .openGalleryAdvancedSettings()
+        .get('.__react_component_tooltip.show')
+        .should('not.exist');
       cy.eyesCheckWindow(this.test.title);
     });
 
@@ -218,7 +220,8 @@ describe('plugins', () => {
       cy.openVideoUploadModal()
         .addVideoFromURI()
         .shrinkPlugin();
-      cy.get('iframe');
+      cy.get('[style*="background-image"]');
+      cy.get('iframe[src*="https://www.youtube.com"]');
       cy.eyesCheckWindow(this.test.title);
     });
 
@@ -227,7 +230,10 @@ describe('plugins', () => {
       cy.openVideoUploadModal()
         .addCustomVideo()
         .shrinkPlugin();
-      cy.get('iframe');
+      cy.get('[style*="background-image"]');
+      cy.get(
+        'video[src="src="http://mirrors.standaloneinstaller.com/video-sample/jellyfish-25-mbps-hd-hevc.mp4"]'
+      );
       cy.eyesCheckWindow(this.test.title);
     });
   });
@@ -250,7 +256,8 @@ describe('plugins', () => {
       cy.openSoundCloudModal()
         .addSoundCloud()
         .shrinkPlugin();
-      cy.get('iframe');
+      cy.get('[style*="background-image"]');
+      cy.get('iframe[src*="https://w.soundcloud.com"]');
       cy.eyesCheckWindow(this.test.title);
     });
   });
@@ -317,6 +324,7 @@ describe('plugins', () => {
         .get(`button[data-hook=${PLUGIN_TOOLBAR_BUTTONS.SMALL_CENTER}][tabindex=0]`)
         .click();
       cy.get(`button[data-hook=${PLUGIN_TOOLBAR_BUTTONS.REPLACE}][tabindex=0]`).click();
+      cy.get('.__react_component_tooltip.show').should('not.exist');
       cy.eyesCheckWindow(this.test.title);
     });
   });
