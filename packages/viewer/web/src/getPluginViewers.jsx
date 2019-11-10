@@ -63,7 +63,7 @@ class PluginViewer extends PureComponent {
         if (componentData.config) {
           // TODO: more generic logic?
           if (componentData.config.size === 'inline') {
-            containerProps.style = { width: componentData.width };
+            containerProps.style = { width: componentData.config.width };
           }
           if (type === 'wix-draft-plugin-html') {
             const { width: currentWidth, height: currentHeight } = componentData.config;

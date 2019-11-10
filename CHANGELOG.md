@@ -13,8 +13,19 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
-
   ### :rocket: New Feature
+  - `preview`
+    - [#435](https://github.com/wix-incubator/rich-content/pull/435) package added
+  ### :book: Documentation
+  - `preview`
+    - [#435](https://github.com/wix-incubator/rich-content/pull/435) [documentation](./docs/rich-content-preview.md) added
+</details>
+<hr/>
+
+## 6.1.0 (Nov 10, 2019)
+### :rocket: New Feature
+- `editor`
+  - [#445](https://github.com/wix-incubator/rich-content/pull/445) initial intent for all plugins except file-upload plugins
   - `mentions`
     - [#452](https://github.com/wix-incubator/rich-content/pull/452) `handleDropdownOpen`, `handleDropdownClose` and `popoverComponent` added to plugin settings
   - `video`
@@ -22,19 +33,24 @@
     - [#444](https://github.com/wix-incubator/rich-content/pull/444) file upload support
     - [#449](https://github.com/wix-incubator/rich-content/pull/449) force video mime type for uploads
     - [#451](https://github.com/wix-incubator/rich-content/pull/451) uses unique file input id
-  ### :bug: Bug Fix
-  - `divider`
-    - [#438](https://github.com/wix-incubator/rich-content/pull/438) container alignment
-  - `viewer`
-    - [#442](https://github.com/wix-incubator/rich-content/pull/442) html plugin alignment
-  - editor
-    - [#448](https://github.com/wix-incubator/rich-content/pull/448) placeholder style fixed
-  ### :house: Internal
-  - `gallery`
-    - [#446](https://github.com/wix-incubator/rich-content/pull/446) `pro-gallery` updated to `v1.5.25`
-  - `e2e`
-    - [#447](https://github.com/wix-incubator/rich-content/pull/447) added more supported browsers
-</details>
+### :bug: Bug Fix
+- `common`
+  - [#454](https://github.com/wix-incubator/rich-content/pull/454) link panel not loading link data after page refresh
+- `divider`
+  - [#438](https://github.com/wix-incubator/rich-content/pull/438) container alignment
+- `viewer`
+  - [#442](https://github.com/wix-incubator/rich-content/pull/442) html plugin alignment
+- editor
+  - [#448](https://github.com/wix-incubator/rich-content/pull/448) placeholder style fixed
+### :house: Internal
+- `gallery`
+  - [#446](https://github.com/wix-incubator/rich-content/pull/446) `pro-gallery` updated to `v1.5.25`
+- `e2e`
+  - [#447](https://github.com/wix-incubator/rich-content/pull/447) added more supported browsers
+- `resize`
+  - [#450](https://github.com/wix-incubator/rich-content/pull/450) moved width from data into data.config
+- `babel`
+  - [#454](https://github.com/wix-incubator/rich-content/pull/454) add optional chaining support
 <hr/>
 
 ## 6.0.0 "MOAV" (Oct 30, 2019)
@@ -42,8 +58,6 @@
 - `general`
   - [#347](https://github.com/wix-incubator/rich-content/pull/347) replaced `@wix/draft-js@0.10.272` with `draft-js@0.11.0`
 ### :rocket: New Feature
-- `preview`
-  - [#435](https://github.com/wix-incubator/rich-content/pull/435) package added
 - `fullscreen`
   - [#389](https://github.com/wix-incubator/rich-content/pull/389) fullscreen for gallery and images :)
 - `gallery`
@@ -52,6 +66,7 @@
   - [#402](https://github.com/wix-incubator/rich-content/pull/402) mentions suggestion box size controll
 - `editor`
   - [#396](https://github.com/wix-incubator/rich-content/pull/396) sticky static toolbar on all platforms
+  - [#445](https://github.com/wix-incubator/rich-content/pull/445) initial intent for all plugins except file-upload plugins
 ### :bug: Bug Fix
 - `common`
   - [#436](https://github.com/wix-incubator/rich-content/pull/436) data-normalization: missing entity protection added
@@ -87,9 +102,6 @@
   - [#405](https://github.com/wix-incubator/rich-content/pull/405) visual tests run on applitools
 - `mentions`
   - [#387](https://github.com/wix-incubator/rich-content/pull/387) data validation schema added
-### :book: Documentation
-- `preview`
-  - [#435](https://github.com/wix-incubator/rich-content/pull/435) [documentation](./docs/rich-content-preview.md) added
 <hr/>
 
 ## 5.1.13 (Nov 5, 2019)
