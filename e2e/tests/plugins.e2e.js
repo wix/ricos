@@ -250,7 +250,7 @@ describe('plugins', () => {
       cy.eyesCheckWindow(this.test.title);
     });
 
-    it('enable to add a soundcloud URI', function() {
+    it.only('enable to add a soundcloud URI', function() {
       cy.openSoundCloudModal()
         .addSoundCloud()
         .shrinkPlugin();
