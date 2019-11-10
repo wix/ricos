@@ -163,11 +163,7 @@ class GalleryViewer extends React.Component {
   };
 
   renderTitle = alt => {
-    return alt ? (
-      <div className={viewerStyles.titleBox}>
-        <div className={viewerStyles.titleText}>{alt}</div>
-      </div>
-    ) : null;
+    return alt ? <div className={viewerStyles.imageTitle}>{alt}</div> : null;
   };
 
   hoverElement = itemProps => {
