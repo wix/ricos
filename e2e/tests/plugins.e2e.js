@@ -218,7 +218,7 @@ describe('plugins', () => {
       cy.openVideoUploadModal()
         .addVideoFromURI()
         .shrinkPlugin();
-      cy.get(`[data-hook=${PLUGIN_COMPONENT.VIDEO}]:first`);
+      cy.get('iframe');
       cy.eyesCheckWindow(this.test.title);
     });
 
@@ -227,7 +227,7 @@ describe('plugins', () => {
       cy.openVideoUploadModal()
         .addCustomVideo()
         .shrinkPlugin();
-      cy.get(`[data-hook=${PLUGIN_COMPONENT.VIDEO}]:first`);
+      cy.get('iframe');
       cy.eyesCheckWindow(this.test.title);
     });
   });
@@ -250,7 +250,7 @@ describe('plugins', () => {
       cy.openSoundCloudModal()
         .addSoundCloud()
         .shrinkPlugin();
-      cy.get(`[data-hook=${PLUGIN_COMPONENT.SOUND_CLOUD}]:first`);
+      cy.get('iframe');
       cy.eyesCheckWindow(this.test.title);
     });
   });
