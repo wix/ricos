@@ -54,6 +54,34 @@ class HtmlComponent extends Component {
     }
   };
 
+  replaceAllOccurrences = (target, search, replacement) => {
+    return target.replace(new RegExp(search, 'g'), replacement);
+  };
+
+  getPageURL = () => {
+    const { siteDomain } = this.context;
+    const { settings } = this.props;
+    const regex = /http.+com/gm;
+    const res =
+      regex.exec(siteDomain) ||
+      (settings && settings.htmlIframeSrc && regex.exec && regex.exec(settings.htmlIframeSrc));
+    if (res) {
+      return res[0];
+    }
+    return res;
+  };
+
+  handleAdsenseSupport() {
+    const { componentData } = this.props;
+    let html = componentData && componentData.src;
+    const pageURL = this.getPageURL();
+    if (pageURL && html && html.includes && html.includes('adsbygoogle')) {
+      const updatedAd = `<ins class="adsbygoogle"\n\tdata-page-url="${pageURL}"`;
+      html = this.replaceAllOccurrences(html, '<ins class="adsbygoogle"', updatedAd);
+    }
+    return html;
+  }
+
   render() {
     this.styles =
       this.styles || mergeStyles({ styles: htmlComponentStyles, theme: this.context.theme });
@@ -83,7 +111,7 @@ class HtmlComponent extends Component {
             <IframeHtml
               key={SRC_TYPE_HTML}
               tabIndex={readOnly ? -1 : 0}
-              html={src}
+              html={this.handleAdsenseSupport()}
               src={htmlIframeSrc}
               onHeightChange={this.setHeight}
             />
