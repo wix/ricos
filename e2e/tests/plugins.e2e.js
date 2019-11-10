@@ -220,8 +220,8 @@ describe('plugins', () => {
       cy.openVideoUploadModal()
         .addVideoFromURI()
         .shrinkPlugin();
-      cy.get('[style*="background-image"]');
-      cy.get('iframe[src*="https://www.youtube.com"]', { timeout: 5000 });
+      cy.get(`[data-hook="${PLUGIN_COMPONENT.VIDEO}"] [class*="placeholder"]`).should('not.exist');
+      cy.get('iframe[src*="https://www.youtube.com"]');
       cy.eyesCheckWindow(this.test.title);
     });
 
@@ -230,10 +230,7 @@ describe('plugins', () => {
       cy.openVideoUploadModal()
         .addCustomVideo()
         .shrinkPlugin();
-      cy.get('[style*="background-image"]');
-      cy.get(
-        'video[src="src="http://mirrors.standaloneinstaller.com/video-sample/jellyfish-25-mbps-hd-hevc.mp4"]'
-      );
+      cy.get('video[src*="jellyfish-25-mbps-hd-hevc.mp4"]');
       cy.eyesCheckWindow(this.test.title);
     });
   });
@@ -256,8 +253,10 @@ describe('plugins', () => {
       cy.openSoundCloudModal()
         .addSoundCloud()
         .shrinkPlugin();
-      cy.get('[style*="background-image"]');
-      cy.get('iframe[src*="https://w.soundcloud.com"]', { timeout: 5000 });
+      cy.get(`[data-hook="${PLUGIN_COMPONENT.SOUND_CLOUD}"] [class*="placeholder"]`).should(
+        'not.exist'
+      );
+      cy.get('iframe[src*="https://w.soundcloud.com"]');
       cy.eyesCheckWindow(this.test.title);
     });
   });
