@@ -15,6 +15,8 @@
   </summary>
 
   ### :rocket: New Feature
+  - `editor`
+    - [#445](https://github.com/wix-incubator/rich-content/pull/445) initial intent for all plugins except file-upload plugins
   - `mentions`
     - [#452](https://github.com/wix-incubator/rich-content/pull/452) `handleDropdownOpen`, `handleDropdownClose` and `popoverComponent` added to plugin settings
   - `video`
@@ -23,6 +25,8 @@
     - [#449](https://github.com/wix-incubator/rich-content/pull/449) force video mime type for uploads
     - [#451](https://github.com/wix-incubator/rich-content/pull/451) uses unique file input id
   ### :bug: Bug Fix
+  - `common`
+    - [#454](https://github.com/wix-incubator/rich-content/pull/454) link panel not loading link data after page refresh
   - `divider`
     - [#438](https://github.com/wix-incubator/rich-content/pull/438) container alignment
   - `viewer`
@@ -35,7 +39,9 @@
   - `e2e`
     - [#447](https://github.com/wix-incubator/rich-content/pull/447) added more supported browsers
   - `resize`
-    - [#450](https://github.com/wix-incubator/rich-content/pull/450) moved width into data.config from data
+    - [#450](https://github.com/wix-incubator/rich-content/pull/450) moved width from data into data.config
+  - `babel`
+    - [#454](https://github.com/wix-incubator/rich-content/pull/454) add optional chaining support   
 </details>
 <hr/>
 
@@ -52,6 +58,7 @@
   - [#402](https://github.com/wix-incubator/rich-content/pull/402) mentions suggestion box size controll
 - `editor`
   - [#396](https://github.com/wix-incubator/rich-content/pull/396) sticky static toolbar on all platforms
+  - [#445](https://github.com/wix-incubator/rich-content/pull/445) initial intent for all plugins except file-upload plugins
 ### :bug: Bug Fix
 - `common`
   - [#436](https://github.com/wix-incubator/rich-content/pull/436) data-normalization: missing entity protection added
