@@ -24,6 +24,8 @@
   - `file-upload`
     - [#533](https://github.com/wix-incubator/rich-content/pull/533) add multiple files at once
   ### :bug: Bug Fix
+  - `editor`
+    - [#504](https://github.com/wix-incubator/rich-content/pull/504) pasted links get the configured anchorTarget and relValue
   - `undo-redo`
     - [#543](https://github.com/wix-incubator/rich-content/pull/543) fix undo-redo icons on mobile
   - `divider`
