@@ -220,8 +220,7 @@ describe('plugins', () => {
       cy.openVideoUploadModal()
         .addVideoFromURI()
         .shrinkPlugin();
-      cy.get(`[data-hook="${PLUGIN_COMPONENT.VIDEO}"] [class*="placeholder"]`).should('not.exist');
-      cy.get('iframe[src*="https://www.youtube.com"]');
+      cy.get('[data-loaded=true]');
       cy.eyesCheckWindow(this.test.title);
     });
 
@@ -230,7 +229,7 @@ describe('plugins', () => {
       cy.openVideoUploadModal()
         .addCustomVideo()
         .shrinkPlugin();
-      cy.get('video[src*="jellyfish-25-mbps-hd-hevc.mp4"]');
+      cy.get('[data-loaded=true]');
       cy.eyesCheckWindow(this.test.title);
     });
   });
@@ -253,10 +252,7 @@ describe('plugins', () => {
       cy.openSoundCloudModal()
         .addSoundCloud()
         .shrinkPlugin();
-      cy.get(`[data-hook="${PLUGIN_COMPONENT.SOUND_CLOUD}"] [class*="placeholder"]`).should(
-        'not.exist'
-      );
-      cy.get('iframe[src*="https://w.soundcloud.com"]');
+      cy.get('[data-loaded=true]');
       cy.eyesCheckWindow(this.test.title);
     });
   });
