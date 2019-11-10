@@ -97,7 +97,7 @@ PluginViewer.propTypes = {
   type: PropTypes.string.isRequired,
   componentData: PropTypes.object.isRequired,
   pluginComponent: PropTypes.object.isRequired,
-  entityIndex: PropTypes.number,
+  entityIndex: PropTypes.number.isRequired,
   children: PropTypes.node,
   styles: PropTypes.object,
 };
