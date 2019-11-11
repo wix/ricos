@@ -38,7 +38,6 @@ class GalleryViewer extends React.Component {
     let galleryKey = this.state && this.state.galleryKey;
     if (!isEqual(nextProps.componentData, this.props.componentData)) {
       galleryKey = get(this, 'props.componentData.styles.galleryLayout', Math.random());
-      // galleryKey = Math.random();
     }
     this.setState({ galleryKey, ...this.stateFromProps(nextProps) });
   }
