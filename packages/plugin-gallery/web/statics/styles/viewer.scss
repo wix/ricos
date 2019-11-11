@@ -28,12 +28,23 @@
 
 .imageTitle {
   color: white;
-  position: absolute;
+  position: relative;
   font-size: 20px;
-  width: 100%;
+  font-size: 2.5vh;
+  width: 90%;
+  max-height: 100%;
   text-align: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  overflow: hidden;
+}
+
+.imageTitleContainer {
+  position: absolute;
+  width: 100%;
   background-color: rgba(0, 0, 0, 0.6);
-  height: 25%;
+  height: 35%;
   bottom: 0;
 }
 

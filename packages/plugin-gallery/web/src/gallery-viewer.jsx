@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { isEqual, get } from 'lodash';
 import { validate, mergeStyles, Context } from 'wix-rich-content-common';
@@ -162,17 +162,19 @@ class GalleryViewer extends React.Component {
   };
 
   renderTitle = alt => {
-    return alt ? <div className={viewerStyles.imageTitle}>{alt}</div> : null;
+    return alt ? (
+      <div className={viewerStyles.imageTitleContainer}>
+        <div className={viewerStyles.imageTitle}>{alt}</div>
+      </div>
+    ) : null;
   };
 
-  hoverElement = itemProps => {
-    return (
-      <div>
-        {this.renderExpandIcon(itemProps)}
-        {this.renderTitle(itemProps.alt)}
-      </div>
-    );
-  };
+  hoverElement = itemProps => (
+    <Fragment>
+      {this.renderExpandIcon(itemProps)}
+      {this.renderTitle(itemProps.alt)}
+    </Fragment>
+  );
 
   render() {
     this.styles = this.styles || mergeStyles({ styles: viewerStyles, theme: this.context.theme });
