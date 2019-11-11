@@ -1,6 +1,10 @@
 import { getUrlMatches } from '../urlValidators';
 
 export const linkify = (contentState, { anchorTarget, relValue }) => {
+  let lastKey =
+    Object.keys(contentState.entityMap).length > 0
+      ? Math.max(...Object.keys(contentState.entityMap)) + 1
+      : 0;
   return contentState.blocks.reduce(
     (state, block) => {
       const { text } = block;
@@ -10,16 +14,10 @@ export const linkify = (contentState, { anchorTarget, relValue }) => {
           const longEnough = url.length >= 6;
           return !alreadyHasEntity && longEnough;
         })
-        .map(({ text: url, index: start, lastIndex: end }, idx) =>
-          createEntity(
-            Object.keys(state.entityMap).length + idx,
-            url,
-            start,
-            end,
-            anchorTarget,
-            relValue
-          )
-        );
+        .map(({ text: url, index: start, lastIndex: end }, idx) => {
+          lastKey += idx;
+          return createEntity(lastKey, url, start, end, anchorTarget, relValue);
+        });
       return {
         blocks: [
           ...state.blocks,
