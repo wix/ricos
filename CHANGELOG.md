@@ -17,6 +17,8 @@
   ### :rocket: New Feature
   - `video`
     - [#443](https://github.com/wix-incubator/rich-content/pull/443) async url resolving support
+  - `editor`
+    - [#462](https://github.com/wix-incubator/rich-content/pull/462) custom icons for all the button
   ### :bug: Bug Fix
   - `divider`
     - [#438](https://github.com/wix-incubator/rich-content/pull/438) container alignment
