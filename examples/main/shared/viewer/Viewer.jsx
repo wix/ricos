@@ -75,6 +75,7 @@ export default class Viewer extends PureComponent {
           relValue={relValue}
           disabled={this.state.disabled}
           locale={this.props.locale}
+          // siteDomain="https://www.wix.com"
         />
         <ReactModal
           isOpen={this.state.showModal}

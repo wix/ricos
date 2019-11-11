@@ -22,6 +22,10 @@ import IframeUrl from './IframeUrl';
 import htmlComponentStyles from '../statics/styles/HtmlComponent.scss';
 
 const getPageURL = (htmlIframeSrc, siteDomain) => {
+  if (!siteDomain) {
+    return;
+  }
+
   const regex = /http.+com/gm;
   const res = regex.exec(siteDomain) || (htmlIframeSrc && regex.exec && regex.exec(htmlIframeSrc));
   if (res) {
@@ -31,16 +35,12 @@ const getPageURL = (htmlIframeSrc, siteDomain) => {
 };
 
 class HtmlComponent extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      siteDomain: this.context && this.context.siteDomain,
-    };
-  }
+  state = {
+    siteDomain: undefined,
+  };
 
   componentDidMount() {
     const { componentData, settings } = this.props;
-    const { siteDomain } = this.context;
     if (!componentData.config.width) {
       if (settings && settings.width) {
         componentData.config.width = settings.width;
@@ -59,23 +59,24 @@ class HtmlComponent extends Component {
         componentData.config.height = INIT_HEIGHT;
       }
     }
+    const { siteDomain } = this.context;
     this.setState({ siteDomain });
   }
 
   static getDerivedStateFromProps(props, state) {
     const { componentData, settings } = props;
-    let html = componentData && componentData.src;
-    if (componentData.srcType === 'html' && state.siteDomain) {
+    if (componentData.srcType === 'html') {
+      let html = componentData && componentData.src;
       const { htmlIframeSrc } = settings;
       const pageURL = getPageURL(htmlIframeSrc, state.siteDomain);
       if (pageURL && html && html.includes && html.includes('adsbygoogle')) {
         const updatedAd = `<ins class="adsbygoogle"\n\tdata-page-url="${pageURL}"`;
         html = html.replace(new RegExp('<ins class="adsbygoogle"', 'g'), updatedAd);
       }
+      return {
+        html,
+      };
     }
-    return {
-      html,
-    };
   }
 
   setHeight = iframeHeight => {
