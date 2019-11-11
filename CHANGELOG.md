@@ -14,9 +14,24 @@
     Click to see more.
   </summary>
 
-  
 </details>
 <hr/>
+
+## 6.2.0 (Nov 11, 2019)
+### :rocket: New Feature
+- `preview`
+  - [#435](https://github.com/wix-incubator/rich-content/pull/435) package added
+### :bug: Bug Fix
+- `common`
+  - [#458](https://github.com/wix-incubator/rich-content/pull/458) normalization: sparse entity map keys handled correctly
+- `fullscreen`
+  - [#457](https://github.com/wix-incubator/rich-content/pull/457) fix fullscreen
+### :book: Documentation
+- `preview`
+  - [#435](https://github.com/wix-incubator/rich-content/pull/435) [documentation](./docs/rich-content-preview.md) added
+### :house: Internal
+- `locale`
+  - [#435](https://github.com/wix-incubator/rich-content/pull/435) `messages_xx.json` files moved to `wix-rich-content-common`
 
 ## 6.1.0 (Nov 10, 2019)
 ### :rocket: New Feature
@@ -38,7 +53,7 @@
     - [#438](https://github.com/wix-incubator/rich-content/pull/438) container alignment
   - `viewer`
     - [#442](https://github.com/wix-incubator/rich-content/pull/442) html plugin alignment
-  - editor
+  - `editor`
     - [#448](https://github.com/wix-incubator/rich-content/pull/448) placeholder style fixed
   ### :house: Internal
   - `gallery`
@@ -48,7 +63,7 @@
   - `resize`
     - [#450](https://github.com/wix-incubator/rich-content/pull/450) moved width from data into data.config
   - `babel`
-    - [#454](https://github.com/wix-incubator/rich-content/pull/454) add optional chaining support   
+    - [#454](https://github.com/wix-incubator/rich-content/pull/454) add optional chaining support
 <hr/>
 
 ## 6.0.0 "MOAV" (Oct 30, 2019)
@@ -175,7 +190,7 @@
 - `editor`
   - [#395](https://github.com/wix-incubator/rich-content/pull/395) removed div wrapping editor that was added in [#359](https://github.com/wix-incubator/rich-content/pull/359)
 - `gallery`
-  - [d0986f3](https://github.com/wix-incubator/rich-content/commit/d0986f3) height issues - disabled above the fold 
+  - [d0986f3](https://github.com/wix-incubator/rich-content/commit/d0986f3) height issues - disabled above the fold
 ### :house: Internal
 - `example`
   - [9add0fbc](https://github.com/wix-incubator/rich-content/commit/9add0fbc) gallery validation schema used for content validation

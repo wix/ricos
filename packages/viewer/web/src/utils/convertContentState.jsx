@@ -4,11 +4,13 @@ import { convertFromRaw } from 'draft-js';
 import { BLOCK_TYPES } from 'wix-rich-content-common';
 import redraft from 'redraft';
 import classNames from 'classnames';
-import { endsWith, isEmpty } from 'lodash';
+import { endsWith, isEmpty, isArray } from 'lodash';
 import List from '../List';
 import getPluginViewers from '../getPluginViewers';
 import { getTextDirection, kebabToCamelObjectKeys } from './textUtils';
 import { staticInlineStyleMapper } from '../staticInlineStyleMapper';
+import { combineMappers } from './combineMappers';
+import { getInteractionWrapper, DefaultInteractionWrapper } from './getInteractionWrapper';
 
 const isEmptyContentState = raw =>
   !raw || !raw.blocks || (raw.blocks.length === 1 && raw.blocks[0].text === '');
@@ -31,7 +33,7 @@ const blockDataToStyle = ({ dynamicStyles }) => kebabToCamelObjectKeys(dynamicSt
 const getInline = (inlineStyleMappers, mergedStyles) =>
   combineMappers([...inlineStyleMappers, staticInlineStyleMapper], mergedStyles);
 
-const getBlocks = (mergedStyles, textDirection) => {
+const getBlocks = (mergedStyles, textDirection, { config }) => {
   const getList = ordered => (items, blockProps) => {
     const fixedItems = items.map(item => (item.length ? item : [' ']));
 
@@ -52,19 +54,26 @@ const getBlocks = (mergedStyles, textDirection) => {
     return (children, blockProps) =>
       children.map((child, i) => {
         const Type = typeof type === 'string' ? type : type(child);
+        const { interactions } = blockProps.data[i];
+        const BlockWrapper = isArray(interactions)
+          ? getInteractionWrapper({ interactions, config, mergedStyles })
+          : DefaultInteractionWrapper;
+
         return (
-          <Type
-            className={getBlockStyleClasses(
-              blockProps.data[i],
-              mergedStyles,
-              textDirection,
-              mergedStyles[style]
-            )}
-            style={blockDataToStyle(blockProps.data[i])}
-            key={blockProps.keys[i]}
-          >
-            {withDiv ? <div>{child}</div> : child}
-          </Type>
+          <BlockWrapper key={`${blockProps.keys[i]}_wrap`}>
+            <Type
+              className={getBlockStyleClasses(
+                blockProps.data[i],
+                mergedStyles,
+                textDirection,
+                mergedStyles[style]
+              )}
+              style={blockDataToStyle(blockProps.data[i])}
+              key={blockProps.keys[i]}
+            >
+              {withDiv ? <div>{child}</div> : child}
+            </Type>
+          </BlockWrapper>
         );
       });
   };
@@ -115,14 +124,6 @@ const normalizeContentState = contentState => ({
   }),
 });
 
-const combineMappers = (mappers, ...args) => {
-  if (!mappers || !mappers.length || mappers.some(resolver => typeof resolver !== 'function')) {
-    console.warn(`${mappers} is expected to be a function array`); // eslint-disable-line no-console
-    return {};
-  }
-  return mappers.reduce((map, mapper) => Object.assign(map, mapper(...args)), {});
-};
-
 const redraftOptions = {
   convertFromRaw,
   cleanup: {
@@ -157,7 +158,7 @@ const convertToReact = (
     normalizeContentState(contentState),
     {
       inline: getInline(inlineStyleMappers, mergedStyles),
-      blocks: getBlocks(mergedStyles, textDirection),
+      blocks: getBlocks(mergedStyles, textDirection, entityProps),
       entities: getEntities(combineMappers(typeMap), entityProps, mergedStyles),
       decorators,
     },

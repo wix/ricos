@@ -3,7 +3,7 @@ import { hot } from 'react-hot-loader/root';
 import React, { PureComponent } from 'react';
 import { ReflexContainer, ReflexElement, ReflexSplitter } from 'react-reflex';
 import { compact, flatMap } from 'lodash';
-import { convertToRaw, createEmpty } from 'wix-rich-content-editor/dist/lib/editorStateConversion';
+import { createEmpty, convertToRaw } from 'wix-rich-content-editor/dist/lib/editorStateConversion';
 import {
   ContentStateEditor,
   ErrorBoundary,
@@ -14,6 +14,7 @@ import {
 import { generateKey, getStateFromObject, loadStateFromStorage, saveStateToStorage } from './utils';
 const Editor = React.lazy(() => import('../shared/editor/Editor'));
 const Viewer = React.lazy(() => import('../shared/viewer/Viewer'));
+const Preview = React.lazy(() => import('../shared/preview/Preview'));
 
 const getContentStateFromEditorState = editorState => convertToRaw(editorState.getCurrentContent());
 
@@ -34,8 +35,10 @@ class ExampleApp extends PureComponent {
       contentState,
       isEditorShown: true,
       isViewerShown: !isMobile,
+      isPreviewShown: !isMobile,
       isContentStateShown: false,
       viewerResetKey: 0,
+      previewResetKey: 0,
       editorResetKey: 0,
       shouldMockUpload: true,
       ...localState,
@@ -118,7 +121,7 @@ class ExampleApp extends PureComponent {
     return (
       isEditorShown && (
         <ReflexElement
-          key={`editor-section-${this.state.viewerResetKey}`}
+          key={`editor-section-${this.state.editorResetKey}`}
           className="section editor-example"
         >
           <SectionHeader
@@ -144,8 +147,47 @@ class ExampleApp extends PureComponent {
     );
   };
 
+  renderPreview = () => {
+    const { previewState, isMobile, locale, localeResource } = this.props;
+    const { isPreviewShown } = this.state;
+    const settings = [
+      {
+        name: 'Mobile',
+        action: () =>
+          this.setState(state => ({
+            previewIsMobile: !state.previewIsMobile,
+            previewResetKey: state.previewResetKey + 1,
+          })),
+      },
+    ];
+    return (
+      isPreviewShown && (
+        <ReflexElement
+          key={`preview-section-${this.state.previewResetKey}`}
+          className="section preview-example"
+        >
+          <SectionHeader
+            title="Preview"
+            settings={settings}
+            onHide={this.onSectionVisibilityChange}
+          />
+          <SectionContent>
+            <ErrorBoundary>
+              <Preview
+                initialState={previewState}
+                isMobile={this.state.previewIsMobile || isMobile}
+                locale={locale}
+                localeResource={localeResource}
+              />
+            </ErrorBoundary>
+          </SectionContent>
+        </ReflexElement>
+      )
+    );
+  };
+
   renderViewer = () => {
-    const { viewerState, isMobile, locale } = this.props;
+    const { viewerState, isMobile, locale, localeResource } = this.props;
     const { isViewerShown } = this.state;
     const settings = [
       {
@@ -170,7 +212,12 @@ class ExampleApp extends PureComponent {
           />
           <SectionContent>
             <ErrorBoundary>
-              <Viewer initialState={viewerState} isMobile={this.state.viewerIsMobile || isMobile} locale={locale} />
+              <Viewer
+                initialState={viewerState}
+                isMobile={this.state.viewerIsMobile || isMobile}
+                locale={locale}
+                localeResource={localeResource}
+              />
             </ErrorBoundary>
           </SectionContent>
         </ReflexElement>
@@ -204,7 +251,12 @@ class ExampleApp extends PureComponent {
     this.setState({ [`show${sectionName}`]: isVisible });
 
   renderSections = () => {
-    const sections = compact([this.renderEditor(), this.renderViewer(), this.renderContentState()]);
+    const sections = compact([
+      this.renderEditor(),
+      this.renderViewer(),
+      this.renderPreview(),
+      this.renderContentState(),
+    ]);
 
     return flatMap(sections, (val, i, arr) =>
       arr.length - 1 !== i
@@ -215,8 +267,9 @@ class ExampleApp extends PureComponent {
 
   render() {
     const { isMobile } = this.props;
-    const { isEditorShown, isViewerShown, isContentStateShown } = this.state;
-    const showEmptyState = !isEditorShown && !isViewerShown && !isContentStateShown;
+    const { isEditorShown, isViewerShown, isContentStateShown, isPreviewShown } = this.state;
+    const showEmptyState =
+      !isEditorShown && !isViewerShown && !isContentStateShown && !isPreviewShown;
 
     return (
       <div className="wrapper">
@@ -231,6 +284,7 @@ class ExampleApp extends PureComponent {
           isMobile={isMobile}
           isEditorShown={isEditorShown}
           isViewerShown={isViewerShown}
+          isPreviewShown={isPreviewShown}
           isContentStateShown={isContentStateShown}
           toggleSectionVisibility={this.onSectionVisibilityChange}
         />
