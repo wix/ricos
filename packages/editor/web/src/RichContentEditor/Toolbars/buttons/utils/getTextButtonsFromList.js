@@ -19,10 +19,10 @@ import { TOOLBARS } from 'wix-rich-content-common/src/consts';
 
 export default ({ buttons, theme, t, isMobile, textPluginButtons, uiSettings, config }) => {
   const themedSeparator = horizontal => createThemedSeparator({ theme, horizontal });
-  const customSettings =
-    config.getToolbarSettings &&
-    config.getToolbarSettings({}).find(setting => setting.name === TOOLBARS.TEXT);
-  const icons = (customSettings && customSettings.getIcons && customSettings.getIcons()) || {};
+  const customSettings = config
+    ?.getToolbarSettings?.({})
+    .find(setting => setting.name === TOOLBARS.TEXT);
+  const icons = customSettings?.getIcons?.() || {};
   const buttonByName = {
     Bold: boldButton(icons.Bold),
     Italic: italicButton(icons.Italic),
