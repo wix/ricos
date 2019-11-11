@@ -43,11 +43,12 @@ class VideoViewer extends Component {
     return element.clientHeight / element.clientWidth;
   };
 
-  fixVideoRatio = () => {
+  onReactPlayerReady = () => {
     // eslint-disable-next-line react/no-find-dom-node
     const wrapper = ReactDOM.findDOMNode(this).parentNode;
     const ratio = this.getVideoRatio(wrapper);
     wrapper.style['padding-bottom'] = ratio * 100 + '%';
+
     if (!this.state.isLoaded) {
       this.setState({ isLoaded: true });
     }
@@ -59,7 +60,7 @@ class VideoViewer extends Component {
     const props = {
       ...this.props,
       url,
-      onReady: this.fixVideoRatio,
+      onReady: this.onReactPlayerReady,
       disabled: this.context.disabled,
     };
     return (
