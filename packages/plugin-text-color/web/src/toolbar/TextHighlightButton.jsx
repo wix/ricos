@@ -4,6 +4,7 @@ import TextHighlightIcon from './TextHighlightIcon';
 import { TEXT_HIGHLIGHT_TYPE } from '../types';
 import BaseTextColor from './BaseTextColor';
 import { textBackgroundPredicate } from '../text-decorations-utils';
+import { get } from 'lodash';
 
 export default class TextHighlightButton extends Component {
   constructor(props) {
@@ -11,10 +12,12 @@ export default class TextHighlightButton extends Component {
     this.buttonRef = React.createRef();
   }
   render() {
+    const settings = this.props.config[TEXT_HIGHLIGHT_TYPE];
+    const icon = get(settings, 'toolbar.icons.TextHighlight');
     const pluginParams = {
       dataHook: 'TextHighlightButton',
       toolTip: 'TextHighlightButton_Tooltip',
-      icon: TextHighlightIcon,
+      icon: icon || TextHighlightIcon,
       type: TEXT_HIGHLIGHT_TYPE,
       predicate: textBackgroundPredicate,
     };
