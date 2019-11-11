@@ -18,7 +18,7 @@
   - [#435](https://github.com/wix-incubator/rich-content/pull/435) package added
 ### :bug: Bug Fix
 - `common`
-  - normalization: sparse entity map keys handled correctly
+  - [#458](https://github.com/wix-incubator/rich-content/pull/458) normalization: sparse entity map keys handled correctly
 ### :book: Documentation
 - `preview`
   - [#435](https://github.com/wix-incubator/rich-content/pull/435) [documentation](./docs/rich-content-preview.md) added
