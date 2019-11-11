@@ -12,7 +12,8 @@ export default ({ t, settings, isMobile }) => {
   //& on mobile if enableCustomUploadOnMobile is set to true, otherwise the normal modal styles is applied
   const icons = get(settings, 'toolbar.icons') || {};
   const customStyles =
-    (!isMobile || settings.enableCustomUploadOnMobile) && settings.handleFileSelection
+    (!isMobile || settings.enableCustomUploadOnMobile) &&
+    (settings.handleFileSelection || settings.handleFileUpload)
       ? ExtendedSelectionModalCustomStyle
       : SelectionModalCustomStyle;
   return [

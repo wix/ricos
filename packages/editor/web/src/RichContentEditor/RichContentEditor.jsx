@@ -5,7 +5,6 @@ import { EditorState, convertFromRaw } from 'draft-js';
 import Editor from 'draft-js-plugins-editor';
 import { get, includes, merge, debounce } from 'lodash';
 import Measure from 'react-measure';
-import { translate } from 'react-i18next';
 import createEditorToolbars from './Toolbars';
 import createPlugins from './createPlugins';
 import { keyBindingFn, initPluginKeyBindings } from './keyBindings';
@@ -47,6 +46,15 @@ class RichContentEditor extends Component {
     this.initContext();
     this.initPlugins();
   }
+  componentDidMount() {
+    this.resetInitialIntent();
+  }
+
+  resetInitialIntent = () => {
+    if (this.contextualData.initialIntent) {
+      this.contextualData.initialIntent = '';
+    }
+  };
 
   getEditorState = () => this.state.editorState;
 
@@ -63,6 +71,7 @@ class RichContentEditor extends Component {
       config,
       isMobile,
       shouldRenderOptimizedImages,
+      initialIntent,
     } = this.props;
     this.contextualData = {
       theme,
@@ -77,6 +86,7 @@ class RichContentEditor extends Component {
       getEditorBounds: this.getEditorBounds,
       languageDir: getLangDir(locale),
       shouldRenderOptimizedImages,
+      initialIntent,
     };
   };
 
@@ -465,6 +475,7 @@ RichContentEditor.propTypes = {
   locale: PropTypes.string.isRequired,
   shouldRenderOptimizedImages: PropTypes.bool,
   onAtomicBlockFocus: PropTypes.func,
+  initialIntent: PropTypes.string,
 };
 
 RichContentEditor.defaultProps = {
@@ -474,4 +485,4 @@ RichContentEditor.defaultProps = {
   locale: 'en',
 };
 
-export default translate(null, { withRef: true })(RichContentEditor);
+export default RichContentEditor;

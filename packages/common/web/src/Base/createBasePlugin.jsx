@@ -2,7 +2,7 @@ import { includes, get } from 'lodash';
 import createBaseComponent from './createBaseComponent';
 import createToolbar from './createBaseToolbar';
 import createInsertPluginButton from './createBaseInsertPluginButton';
-import { deleteBlock, updateEntityData } from '../Utils/draftUtils';
+import { deleteBlock, setEntityData } from '../Utils/draftUtils';
 import { simplePubsub } from '../Utils/simplePubsub';
 import { getToolbarTheme } from '../Utils/getToolbarTheme';
 
@@ -12,8 +12,8 @@ const getData = (contentBlock, { getEditorState }) => () =>
     .getEntity(contentBlock.getEntityAt(0))
     .getData();
 
-const setData = (contentBlock, { getEditorState, setEditorState }) => newDataFunc =>
-  setEditorState(updateEntityData(getEditorState(), contentBlock.getKey(), newDataFunc));
+const setData = (contentBlock, { getEditorState, setEditorState }) => newData =>
+  setEditorState(setEntityData(getEditorState(), contentBlock.getEntityAt(0), newData));
 
 const deleteEntity = (contentBlock, { getEditorState, setEditorState }) => () =>
   setEditorState(deleteBlock(getEditorState(), contentBlock.getKey()));

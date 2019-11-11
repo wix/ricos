@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-plugin-link",
-  "version": "6.0.0",
+  "version": "6.2.0",
   "author": {
     "name": "Jonathan Bachman",
     "email": "jonathanb@wix.com"
@@ -51,7 +51,7 @@
     "rollup": "1.20.3"
   },
   "dependencies": {
-    "wix-rich-content-common": "6.0.0"
+    "wix-rich-content-common": "6.2.0"
   },
   "unpkg": true,
   "publishConfig": {

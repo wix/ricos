@@ -55,6 +55,7 @@ export { default as EditorModals } from './Modals/EditorModals';
 export { default as RichContentModal } from './Modals/RichContentModal';
 
 //Utils
+export { default as withI18n } from './Utils/withI18n';
 export { default as createHocName } from './Utils/createHocName';
 export { default as getDisplayName } from './Utils/getDisplayName';
 export { default as decorateComponentWithProps } from './Utils/decorateComponentWithProps';
@@ -90,7 +91,7 @@ export {
   getAnchorBlockData,
   mergeBlockData,
   isAtomicBlockFocused,
-  updateEntityData,
+  setEntityData,
   replaceWithEmptyBlock,
   deleteBlock,
 } from './Utils/draftUtils';

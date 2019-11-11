@@ -7,15 +7,16 @@ import 'react-tiny-fab/dist/styles.min.css';
 const Fab = ({
   isMobile,
   isEditorShown,
+  isPreviewShown,
   isViewerShown,
   isContentStateShown,
   toggleSectionVisibility,
 }) => {
   let hideFab = true;
   if (!isMobile) {
-    hideFab = isEditorShown && isViewerShown && isContentStateShown;
+    hideFab = isEditorShown && isViewerShown && isContentStateShown && isPreviewShown;
   } else {
-    hideFab = isEditorShown || isViewerShown || isContentStateShown;
+    hideFab = isEditorShown || isViewerShown || isContentStateShown || isPreviewShown;
   }
   if (hideFab) {
     return null;
@@ -44,6 +45,17 @@ const Fab = ({
       </Action>
     );
   }
+  if (!isPreviewShown) {
+    FabActions.push(
+      <Action
+        text="Preview"
+        key="preview-action"
+        onClick={() => toggleSectionVisibility('Preview', true)}
+      >
+        <MdRemoveRedEye />
+      </Action>
+    );
+  }
   if (!isContentStateShown) {
     FabActions.push(
       <Action
@@ -67,6 +79,7 @@ Fab.propTypes = {
   isMobile: PropTypes.bool.isRequired,
   isEditorShown: PropTypes.bool.isRequired,
   isViewerShown: PropTypes.bool.isRequired,
+  isPreviewShown: PropTypes.bool.isRequired,
   isContentStateShown: PropTypes.bool.isRequired,
   toggleSectionVisibility: PropTypes.func.isRequired,
 };

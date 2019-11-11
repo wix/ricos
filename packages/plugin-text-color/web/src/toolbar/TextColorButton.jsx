@@ -13,7 +13,6 @@ import styles from '../../statics/styles/text-color-modal.scss';
 export default class TextColorButton extends Component {
   constructor(props) {
     super(props);
-    this.buttonRef = React.createRef();
     this.state = { showPanel: false };
     this.styles = mergeStyles({ styles, theme: props.theme });
   }
@@ -27,7 +26,7 @@ export default class TextColorButton extends Component {
     if (!isMobile) {
       setKeepOpen && setKeepOpen(true);
     }
-    const { bottom, left } = this.buttonRef.current.getBoundingClientRect();
+    const { bottom, left } = this.buttonRef.getBoundingClientRect();
     const panelLeft = left - PANEL_WIDTH / 2;
     this.setState({ isPanelOpen: true, panelLeft, panelTop: bottom });
   };
@@ -88,7 +87,7 @@ export default class TextColorButton extends Component {
         dataHook={'TextColorButton'}
         tabIndex={tabIndex}
         icon={TextColorIcon}
-        forwardRef={this.buttonRef}
+        ref={ref => (this.buttonRef = ref)}
       >
         <Modal
           onRequestClose={() => this.closePanel()}

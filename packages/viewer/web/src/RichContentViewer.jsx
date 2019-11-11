@@ -13,7 +13,7 @@ import viewerAlignmentStyles from '../statics/rich-content-viewer-alignment.rtli
 import rtlStyle from '../statics/rich-content-viewer-rtl.rtlignore.scss';
 import { getLangDir } from 'rtl-detect';
 
-export default class RichContentViewer extends Component {
+class RichContentViewer extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -34,6 +34,7 @@ export default class RichContentViewer extends Component {
 
   initContext = () => {
     const {
+      t,
       theme,
       isMobile,
       anchorTarget,
@@ -45,6 +46,7 @@ export default class RichContentViewer extends Component {
       shouldRenderOptimizedImages,
     } = this.props;
     return {
+      t,
       theme,
       isMobile,
       anchorTarget,
@@ -117,6 +119,7 @@ RichContentViewer.propTypes = {
       }),
     ])
   ),
+  t: PropTypes.func,
   theme: PropTypes.object,
   anchorTarget: PropTypes.string,
   relValue: PropTypes.string,
@@ -132,3 +135,5 @@ RichContentViewer.defaultProps = {
   typeMappers: [],
   locale: 'en',
 };
+
+export default RichContentViewer;
