@@ -13,7 +13,10 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
-
+  
+  ### :bug: Bug Fix
+  - `fullscreen`
+    - [#457](https://github.com/wix-incubator/rich-content/pull/457) fix fullscreen
   
 </details>
 <hr/>
@@ -38,8 +41,6 @@
     - [#442](https://github.com/wix-incubator/rich-content/pull/442) html plugin alignment
   - `editor`
     - [#448](https://github.com/wix-incubator/rich-content/pull/448) placeholder style fixed
-  - `fullscreen`
-    - [#457](https://github.com/wix-incubator/rich-content/pull/457) fix fullscreen
   ### :house: Internal
   - `gallery`
     - [#446](https://github.com/wix-incubator/rich-content/pull/446) `pro-gallery` updated to `v1.5.25`
