@@ -92,6 +92,7 @@ describe('plugins', () => {
 
     it('render gallery plugin toolbar', function() {
       cy.openPluginToolbar(PLUGIN_COMPONENT.GALLERY).shrinkPlugin();
+      cy.get('.__react_component_tooltip.show').should('not.exist');
       cy.eyesCheckWindow(this.test.title);
     });
 

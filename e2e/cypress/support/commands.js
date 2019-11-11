@@ -243,7 +243,6 @@ Cypress.Commands.add('shrinkPlugin', () => {
   cy.get(`button[data-hook=${PLUGIN_TOOLBAR_BUTTONS.SMALL_CENTER}][tabindex=0]`)
     .click({ multiple: true })
     .click();
-  cy.get('.__react_component_tooltip.show').should('not.exist');
 });
 
 Cypress.Commands.add('openGallerySettings', () => {
