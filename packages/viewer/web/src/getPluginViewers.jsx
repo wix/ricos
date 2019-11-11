@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { isFunction } from 'lodash';
+import { isFunction, isArray } from 'lodash';
 import {
   sizeClassName,
   alignmentClassName,
@@ -9,6 +9,7 @@ import {
   normalizeUrl,
   Context,
 } from 'wix-rich-content-common';
+import { getInteractionWrapper, DefaultInteractionWrapper } from './utils/getInteractionWrapper';
 
 class PluginViewer extends PureComponent {
   getContainerClassNames = hasLink => {
@@ -113,18 +114,25 @@ const getPluginViewers = (typeMap, pluginProps, styles) => {
     res[type] = (children, entity, { key }) => {
       const pluginComponent = typeMap[type];
       const isInline = pluginComponent.elementType === 'inline';
+      const { interactions } = entity;
+
+      const ViewerWrapper = isArray(interactions)
+        ? getInteractionWrapper({ interactions, config: pluginProps.config, mergedStyles: styles })
+        : DefaultInteractionWrapper;
       return (
-        <PluginViewer
-          type={type}
-          pluginComponent={pluginComponent}
-          key={key}
-          componentData={entity}
-          entityIndex={key}
-          {...pluginProps}
-          styles={styles}
-        >
-          {isInline ? children : null}
-        </PluginViewer>
+        <ViewerWrapper>
+          <PluginViewer
+            type={type}
+            pluginComponent={pluginComponent}
+            key={key}
+            componentData={entity}
+            entityIndex={key}
+            {...pluginProps}
+            styles={styles}
+          >
+            {isInline ? children : null}
+          </PluginViewer>
+        </ViewerWrapper>
       );
     };
   });

@@ -36,6 +36,7 @@ import mobileAddModalTheme from './toolbars/mobile-add-modal.theme.scss';
 import toolbarSeparatorTheme from './toolbars/toolbar-separator.theme.scss';
 import addPluginModalTheme from './toolbars/add-plugin-modal.theme.scss';
 import videoUploadTheme from './toolbars/modals/video/video-upload-modal.theme.scss';
+import interactionsTheme from './interactions.scss';
 
 const modalTheme = {
   content: {},
@@ -86,6 +87,7 @@ const theme = {
   ...mobileToolbarTheme,
   ...mobileAddModalTheme,
   ...toolbarSeparatorTheme,
+  ...interactionsTheme,
 };
 
 export default theme;

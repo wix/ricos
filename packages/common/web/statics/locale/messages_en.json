@@ -212,5 +212,7 @@
   "HeadingThreeButton_tooltip" : "Heading 3",
   "NormalTextButton_tooltip" : "Normal Text",
   "TextCodeBlockButton_Tooltip" : "Code Block",
-  "TextCodeBlock_InsertButton_Tooltip" : "Add a Code Block"
+  "TextCodeBlock_InsertButton_Tooltip" : "Add a Code Block",
+  "Preview_ReadMore_Label": "read more",
+  "Preview_SeeFullPost_Label": "See Full Post"
 }

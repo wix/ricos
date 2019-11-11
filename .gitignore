@@ -33,3 +33,4 @@ e2e/cypress/screenshots
 e2e/cypress/snapshots/All\sSpecs
 e2e/test-env/report.*.json
 tags
+applitools.config.js

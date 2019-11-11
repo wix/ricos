@@ -236,7 +236,7 @@ class ImageViewer extends React.Component {
         onKeyDown={e => this.onKeyDown(e, this.onClick)}
         ref={e => this.handleRef(e)}
       >
-        <div className={this.styles.imageWrapper}>
+        <div className={this.styles.imageWrapper} role="img" aria-label={metadata.alt}>
           {imageSrc && this.renderImage(imageClassName, imageSrc, metadata.alt, imageProps)}
           {this.renderLoader()}
           {hasLink && hasExpand && (
