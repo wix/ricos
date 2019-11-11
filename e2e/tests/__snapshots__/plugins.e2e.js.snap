@@ -3214,7 +3214,6 @@ exports[`plugins > map > render map plugin toolbar and settings #0`] =
   }
 };
 
-
 exports[`plugins > file-upload > render file-upload plugin toolbar #0`] =
 {
   "blocks": [
