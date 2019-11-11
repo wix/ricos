@@ -1,38 +1,42 @@
 import { decorateComponentWithProps } from 'wix-rich-content-common';
 import {
-  BoldButton,
-  ItalicButton,
-  UnderlineButton,
-  IndentButton,
-  TitleButton,
-  BlockquoteButton,
-  TextAlignmentButton,
-  AlignTextLeftButton,
-  AlignTextCenterButton,
-  AlignTextRightButton,
-  AlignTextJustifyButton,
-  UnorderedListButton,
-  OrderedListButton,
+  boldButton,
+  italicButton,
+  underlineButton,
+  indentButton,
+  titleButton,
+  blockquoteButton,
+  alignTextLeftButton,
+  alignTextCenterButton,
+  alignTextRightButton,
+  alignTextJustifyButton,
+  orderedListButton,
+  unorderedListButton,
+  textAlignmentButton,
 } from '../index';
 import createThemedSeparator from './createThemedSeparator';
+import { TOOLBARS } from 'wix-rich-content-common/src/consts';
 
 export default ({ buttons, theme, t, isMobile, textPluginButtons, uiSettings, config }) => {
   const themedSeparator = horizontal => createThemedSeparator({ theme, horizontal });
-
+  const customSettings =
+    config.getToolbarSettings &&
+    config.getToolbarSettings({}).find(setting => setting.name === TOOLBARS.TEXT);
+  const icons = (customSettings && customSettings.getIcons && customSettings.getIcons()) || {};
   const buttonByName = {
-    Bold: BoldButton,
-    Italic: ItalicButton,
-    Underline: UnderlineButton,
-    Indent: IndentButton,
-    Title: TitleButton,
-    Blockquote: BlockquoteButton,
-    Alignment: TextAlignmentButton,
-    AlignLeft: AlignTextLeftButton,
-    AlignCenter: AlignTextCenterButton,
-    AlignRight: AlignTextRightButton,
-    AlignJustify: AlignTextJustifyButton,
-    OrderedList: OrderedListButton,
-    UnorderedList: UnorderedListButton,
+    Bold: boldButton(icons.Bold),
+    Italic: italicButton(icons.Italic),
+    Underline: underlineButton(icons.Underline),
+    Indent: indentButton(icons.Indent),
+    Title: titleButton(icons.inactiveIconTitle, icons.TitleOne, icons.TitleTwo),
+    Blockquote: blockquoteButton(icons.Blockquote),
+    Alignment: textAlignmentButton(icons),
+    AlignLeft: alignTextLeftButton(icons.AlignLeft),
+    AlignCenter: alignTextCenterButton(icons.AlignCenter),
+    AlignRight: alignTextRightButton(icons.AlignRight),
+    AlignJustify: alignTextJustifyButton(icons.AlignJustify),
+    OrderedList: orderedListButton(icons.OrderedList),
+    UnorderedList: unorderedListButton(icons.UnorderedList),
     Separator: themedSeparator(false),
     HorizontalSeparator: themedSeparator(true),
   };

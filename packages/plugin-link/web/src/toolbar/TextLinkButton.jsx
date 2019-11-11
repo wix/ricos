@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { get } from 'lodash';
 import {
   hasLinksInSelection,
   getModalStyles,
@@ -70,7 +71,7 @@ export default class TextLinkButton extends Component {
   }
 
   render() {
-    const { theme, isMobile, t, tabIndex } = this.props;
+    const { theme, isMobile, t, tabIndex, config } = this.props;
     const linkButtonTooltip = t('TextLinkButton_Tooltip');
     const buttonStyles = {
       button: theme.inlineToolbarButton,
@@ -78,6 +79,7 @@ export default class TextLinkButton extends Component {
       icon: theme.inlineToolbarButton_icon,
       active: theme.inlineToolbarButton_active,
     };
+    const icon = get(config, 'LINK.toolbar.icons.link');
     return (
       <LinkButton
         onClick={this.showLinkPanel}
@@ -86,6 +88,7 @@ export default class TextLinkButton extends Component {
         isMobile={isMobile}
         tooltipText={linkButtonTooltip}
         tabIndex={tabIndex}
+        icon={icon}
       />
     );
   }
@@ -106,4 +109,5 @@ TextLinkButton.propTypes = {
   t: PropTypes.func,
   tabIndex: PropTypes.number,
   uiSettings: PropTypes.object,
+  config: PropTypes.object,
 };

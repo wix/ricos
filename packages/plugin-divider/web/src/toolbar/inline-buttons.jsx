@@ -2,9 +2,11 @@ import { BUTTONS, AlignCenterIcon, SizeLargeIcon } from 'wix-rich-content-common
 import { changeType, changeAlignmentMobile, changeSizeMobile } from './actions';
 import { isAlignmentDisabled, getNextSizeIcon, getNextAlignmentIcon } from './selectors';
 import { getDropdownOptions, createDropdownValueGetter } from './dropdown-options';
+import { get } from 'lodash';
 
-export default ({ styles }) => {
+export default ({ styles, settings }) => {
   const dropdownOptions = getDropdownOptions(styles);
+  const icons = get(settings, 'toolbar.icons') || {};
   return [
     {
       keyName: 'type',
@@ -23,7 +25,7 @@ export default ({ styles }) => {
     {
       keyName: 'sizeMobile',
       type: 'custom',
-      icon: SizeLargeIcon,
+      icon: icons.sizeMobile || SizeLargeIcon,
       onClick: changeSizeMobile,
       mobile: true,
       desktop: false,
@@ -50,7 +52,7 @@ export default ({ styles }) => {
     {
       keyName: 'alignMobile',
       type: 'custom',
-      icon: AlignCenterIcon,
+      icon: icons.alignMobile || AlignCenterIcon,
       onClick: changeAlignmentMobile,
       mobile: true,
       desktop: false,

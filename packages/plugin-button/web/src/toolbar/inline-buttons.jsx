@@ -6,6 +6,7 @@ import {
 } from 'wix-rich-content-common';
 import { Modals } from '../modals';
 import ButtonInputModal from './buttonInputModal';
+import { get } from 'lodash';
 
 const DesktopCustomModalStyles = {
   content: {
@@ -21,6 +22,7 @@ const MobileFullScreenCustomStyle = {
 
 export default ({ settings, isMobile }) => {
   const customStyles = isMobile ? MobileFullScreenCustomStyle : DesktopCustomModalStyles;
+  const icons = get(settings, 'toolbar.icons') || {};
   return [
     { keyName: 'sizeSmallLeft', type: BUTTONS.SIZE_SMALL_LEFT, mobile: false },
     { keyName: 'sizeSmallCenter', type: BUTTONS.SIZE_SMALL_CENTER, mobile: false },
@@ -29,7 +31,7 @@ export default ({ settings, isMobile }) => {
     {
       keyName: 'advanced_settings',
       type: BUTTONS.EXTERNAL_MODAL,
-      icon: PluginSettingsIcon,
+      icon: icons.advanced_settings || PluginSettingsIcon,
       modalName: Modals.BUTTON_INPUT,
       activeTab: 'advanced_settings',
       modalElement: decorateComponentWithProps(ButtonInputModal, settings),

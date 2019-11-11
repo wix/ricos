@@ -1,6 +1,7 @@
 import { createLinkPlugin, LINK_TYPE } from 'wix-rich-content-plugin-link';
 import { createLineSpacingPlugin, LINE_SPACING_TYPE } from 'wix-rich-content-plugin-line-spacing';
 import { createHashtagPlugin, HASHTAG_TYPE } from 'wix-rich-content-plugin-hashtag';
+// import { createButtonPlugin, BUTTON_TYPE } from 'wix-rich-content-plugin-button';
 // import { createExternalEmojiPlugin, EXTERNAL_EMOJI_TYPE } from 'wix-rich-content-plugin-emoji';
 import { createImagePlugin, IMAGE_TYPE } from 'wix-rich-content-plugin-image';
 import { createGalleryPlugin, GALLERY_TYPE } from 'wix-rich-content-plugin-gallery';
@@ -12,7 +13,7 @@ import {
   EXTERNAL_MENTIONS_TYPE,
 } from 'wix-rich-content-plugin-mentions';
 import { createCodeBlockPlugin, CODE_BLOCK_TYPE } from 'wix-rich-content-plugin-code-block';
-import { createSoundCloudPlugin } from 'wix-rich-content-plugin-sound-cloud';
+import { createSoundCloudPlugin, SOUND_CLOUD_TYPE } from 'wix-rich-content-plugin-sound-cloud';
 import { createGiphyPlugin, GIPHY_TYPE } from 'wix-rich-content-plugin-giphy';
 import {
   createHeadersMarkdownPlugin,
@@ -46,7 +47,7 @@ import 'wix-rich-content-plugin-text-color/dist/styles.min.css';
 
 import { customStyleFn, styleSelectionPredicate, colorScheme } from '../../src/text-color-style-fn';
 import { getBaseUrl } from '../../src/utils';
-
+// import { MyCustomIcon, SizeSmallRightIcon, TOOLBARS } from 'wix-rich-content-common';
 // import { TOOLBARS, BUTTONS, DISPLAY_MODE } from 'wix-rich-content-common';
 // import InlineToolbarDecoration from './Components/InlineToolbarDecoration';
 // import StaticToolbarDecoration from './Components/StaticToolbarDecoration';
@@ -54,6 +55,8 @@ import { getBaseUrl } from '../../src/utils';
 // import PluginToolbarDecoration from './Components/PluginToolbarDecoration';
 
 export const editorPlugins = [
+  // createInlineTextToolbar,
+  // createButtonPlugin,
   createImagePlugin,
   createGalleryPlugin,
   createVideoPlugin,
@@ -147,8 +150,28 @@ const uiSettings = {
 };
 
 export const config = {
+  // [BUTTON_TYPE]: {
+  //   toolbar: {
+  //     icons: {
+  //       Button: MyCustomIcon, // insert plugin icon
+  //     },
+  //   },
+  // },
+  [SOUND_CLOUD_TYPE]: {
+    // toolbar: {
+    //   icons: {
+    //     SoundCloud: MyCustomIcon, // insert plugin icon
+    //   },
+    // },
+  },
   [GALLERY_TYPE]: {
-    scrollingElement: () => typeof window !== 'undefined' && document.getElementsByClassName('editor-example')[0],
+    scrollingElement: () =>
+      typeof window !== 'undefined' && document.getElementsByClassName('editor-example')[0],
+    // toolbar: {
+    //   icons: {
+    //     Gallery: MyCustomIcon, // insert plugin icon
+    //   },
+    // },
   },
   [IMAGE_TYPE]: {
     imageEditorWixSettings: {
@@ -158,6 +181,23 @@ export const config = {
       metaSiteId: '538fa6c6-c953-4cdd-86c4-4b869aecf980',
       mediaRoot: 'some-mediaRoot',
     },
+    // toolbar: {
+    //   icons: {
+    //     Image: MyCustomIcon, // insert plugin icon
+    //     alignLeft: MyCustomIcon,
+    //     link: MyCustomIcon,
+    //     sizeOriginal: MyCustomIcon,
+    //     sizeSmallCenter: MyCustomIcon,
+    //     sizeContent: MyCustomIcon,
+    //     imageEditor: MyCustomIcon,
+    //     sizeFullWidth: MyCustomIcon,
+    //     alignCenter: MyCustomIcon,
+    //     alignRight: MyCustomIcon,
+    //     settings: MyCustomIcon,
+    //     replace: MyCustomIcon,
+    //     delete: SizeSmallRightIcon,
+    //   },
+    // },
   },
   [HASHTAG_TYPE]: {
     createHref: decoratedText => `/search/posts?query=${encodeURIComponent('#')}${decoratedText}`,
@@ -173,6 +213,11 @@ export const config = {
     width: 350,
     minHeight: 50,
     maxHeight: 1200,
+    // toolbar: {
+    //   icons: {
+    //     HTML: MyCustomIcon, // insert plugin icon
+    //   },
+    // },
   },
   [EXTERNAL_MENTIONS_TYPE]: {
     repositionSuggestions: true,
@@ -204,6 +249,11 @@ export const config = {
       ),
   },
   [LINE_SPACING_TYPE]: {
+    // toolbar: {
+    //   icons: {
+    //     'line-spacing': MyCustomIcon, // insert plugin icon
+    //   },
+    // },
     defaultSpacing: {
       'line-height': '1.5',
       'padding-top': '2px',
@@ -212,14 +262,34 @@ export const config = {
     onUpdate: spacing => console.log(LINE_SPACING_TYPE, spacing),
   },
   [LINK_TYPE]: {
+    // toolbar: {
+    //   icons: {
+    //     link: MyCustomIcon, // insert plugin icon
+    //   },
+    // },
     onClick: (event, url) => console.log('link clicked!', url),
   },
-  [CODE_BLOCK_TYPE]: {},
-  [DIVIDER_TYPE]: {},
+  [CODE_BLOCK_TYPE]: {
+    // toolbar: {
+    //   icons: {
+    //     codeBlock: MyCustomIcon, //insert plugin icon
+    //   },
+    // },
+  },
+  [DIVIDER_TYPE]: {
+    // toolbar: {
+    //   icons: {
+    //     Divider: MyCustomIcon, //insert plugin icon
+    //   },
+    // },
+  },
   // [EXTERNAL_EMOJI_TYPE]: {},
   [VIDEO_TYPE]: {
     toolbar: {
       hidden: [],
+      // icons: {
+      //   Video: MyCustomIcon, //insert plugin icon
+      // },
     },
     //Here you can call your custom video upload functionality (comment function to disable custom upload)
     handleFileSelection: (updateEntity, removeEntity) => {
@@ -251,6 +321,11 @@ export const config = {
   },
   [GIPHY_TYPE]: {
     giphySdkApiKey: process.env.GIPHY_API_KEY,
+    // toolbar: {
+    //   icons: {
+    //     GIF: MyCustomIcon, // insert plugin icon
+    //   },
+    // },
   },
   [MAP_TYPE]: {
     googleMapApiKey: process.env.GOOGLE_MAPS_API_KEY,
@@ -270,8 +345,18 @@ export const config = {
       isStreetViewControlShown: true,
       isDraggingAllowed: true,
     },
+    // toolbar: {
+    //   icons: {
+    //     Map: MyCustomIcon,  // insert plugin icon
+    //   },
+    // },
   },
   [FILE_UPLOAD_TYPE]: {
+    // toolbar: {
+    //   icons: {
+    // UploadFile: MyCustomIcon, // insert plugin icon
+    //   },
+    // },
     accept: '*',
     onFileSelected: (file, updateEntity) => {
       const name = file.name;
@@ -307,6 +392,26 @@ export const config = {
   },
   uiSettings,
   getToolbarSettings: ({ pluginButtons, textButtons }) => [
+    // {
+    //   name: TOOLBARS.TEXT,
+    //   getIcons: () => ({
+    //     Bold: MyCustomIcon,
+    //     Italic: MyCustomIcon,
+    //     Underline: MyCustomIcon,
+    //     Indent: MyCustomIcon,
+    //     inactiveIconTitle: SizeSmallRightIcon,
+    //     TitleOne: MyCustomIcon,
+    //     TitleTwo: SizeSmallRightIcon,
+    //     Blockquote: MyCustomIcon,
+    //     Alignment: MyCustomIcon,
+    //     AlignLeft: MyCustomIcon,
+    //     AlignCenter: MyCustomIcon,
+    //     AlignRight: MyCustomIcon,
+    //     AlignJustify: MyCustomIcon,
+    //     OrderedList: MyCustomIcon,
+    //     UnorderedList: MyCustomIcon,
+    //   }),
+    // },
     // {
     //   name: TOOLBARS.PLUGIN,
     //   getVisibilityFn: () => ({

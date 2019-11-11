@@ -26,19 +26,19 @@ export const MobileTextButtonList = [
   'UnorderedList',
 ];
 
-export { default as TextAlignmentButton } from './TextAlignmentButton';
+export { textAlignmentButton } from './TextAlignmentButton';
 export { default as AddPluginButton } from './AddPluginButton';
 export {
-  BoldButton,
-  ItalicButton,
-  UnderlineButton,
-  IndentButton,
-  TitleButton,
-  BlockquoteButton,
-  AlignTextLeftButton,
-  AlignTextCenterButton,
-  AlignTextRightButton,
-  AlignTextJustifyButton,
-  OrderedListButton,
-  UnorderedListButton,
+  boldButton,
+  italicButton,
+  underlineButton,
+  indentButton,
+  titleButton,
+  blockquoteButton,
+  alignTextLeftButton,
+  alignTextCenterButton,
+  alignTextRightButton,
+  alignTextJustifyButton,
+  orderedListButton,
+  unorderedListButton,
 } from './TextButtons';

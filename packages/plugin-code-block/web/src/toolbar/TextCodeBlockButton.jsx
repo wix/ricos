@@ -4,6 +4,7 @@ import { InlineToolbarButton } from 'wix-rich-content-common';
 import { CODE_BLOCK_TYPE } from '../types';
 import { hasBlockType, toggleBlockTypeAndEnsureSpaces } from './blockTypeModifiers';
 import { CodeBlockIcon } from '../icons';
+import { get } from 'lodash';
 
 export default class TextCodeBlockButton extends Component {
   get isActive() {
@@ -11,7 +12,8 @@ export default class TextCodeBlockButton extends Component {
   }
 
   render() {
-    const { theme, isMobile, t, tabIndex, setEditorState, getEditorState } = this.props;
+    const { theme, isMobile, t, tabIndex, setEditorState, getEditorState, config } = this.props;
+    const icon = get(config, 'code-block.toolbar.icons.codeBlock');
     return (
       <InlineToolbarButton
         onClick={() =>
@@ -23,7 +25,7 @@ export default class TextCodeBlockButton extends Component {
         tooltipText={t('TextCodeBlockButton_Tooltip')}
         dataHook={'TextCodeBlockButton'}
         tabIndex={tabIndex}
-        icon={CodeBlockIcon}
+        icon={icon || CodeBlockIcon}
       />
     );
   }
@@ -42,4 +44,5 @@ TextCodeBlockButton.propTypes = {
   relValue: PropTypes.string,
   t: PropTypes.func,
   tabIndex: PropTypes.number,
+  config: PropTypes.object,
 };

@@ -8,8 +8,10 @@ import {
 import GiphyApiInputModal from './giphyApiInputModal';
 import { InsertPluginIcon, InsertPluginMobileIcon } from '../icons';
 import Arrow from './arrow';
+import { get } from 'lodash';
 
 export default ({ helpers, t, settings, isMobile }) => {
+  const icon = get(settings, 'toolbar.icons.GIF');
   const modalStyles = isMobile
     ? getModalStyles({ customStyles: MobileFullScreenCustomStyle, fullScreen: true, isMobile })
     : null;
@@ -18,7 +20,7 @@ export default ({ helpers, t, settings, isMobile }) => {
       type: 'modal',
       name: 'GIF',
       tooltipText: t('GiphyPlugin_InsertButton_Tooltip'),
-      Icon: isMobile ? InsertPluginMobileIcon : InsertPluginIcon,
+      Icon: icon || (isMobile ? InsertPluginMobileIcon : InsertPluginIcon),
       componentData: settings.componentDataDefaults || DEFAULTS,
       toolbars: settings.insertToolbars || [TOOLBARS.FOOTER],
       modalElement: decorateComponentWithProps(GiphyApiInputModal, settings),

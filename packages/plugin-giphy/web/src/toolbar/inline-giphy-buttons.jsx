@@ -4,12 +4,14 @@ import {
   DECORATION_MODE,
   decorateComponentWithProps,
 } from 'wix-rich-content-common';
+import { get } from 'lodash';
 import { MediaReplaceIcon } from '../icons';
 import GiphyApiInputModal from './giphyApiInputModal';
 import { MobileFullScreenCustomStyle, DesktopFlyOutModalStyles } from '../constants';
 import Arrow from './arrow';
 
 export default ({ t, settings, isMobile }) => {
+  const icons = get(settings, 'toolbar.icons') || {};
   const modalStyles = isMobile
     ? getModalStyles({ customStyles: MobileFullScreenCustomStyle, fullScreen: true, isMobile })
     : null;
@@ -25,7 +27,7 @@ export default ({ t, settings, isMobile }) => {
     {
       keyName: 'replace',
       type: BUTTONS.EXTERNAL_MODAL,
-      icon: MediaReplaceIcon,
+      icon: icons.replace || MediaReplaceIcon,
       modalElement: decorateComponentWithProps(GiphyApiInputModal, settings),
       modalStyles,
       modalStylesFn: ({ buttonRef }) => {

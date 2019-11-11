@@ -21,75 +21,99 @@ import createTextInlineStyleButton from './utils/createTextInlineStyleButton';
 import createTextBlockStyleButton from './utils/createTextBlockStyleButton';
 import createTextAlignmentButton from './utils/createTextAlignmentButton';
 
-export const BoldButton = createTextInlineStyleButton({
-  style: 'BOLD',
-  Icon: BoldIcon,
-  tooltipTextKey: 'BoldButton_Tooltip',
-});
+export const boldButton = icon =>
+  createTextInlineStyleButton({
+    style: 'BOLD',
+    Icon: icon || BoldIcon,
+    tooltipTextKey: 'BoldButton_Tooltip',
+  });
 
-export const ItalicButton = createTextInlineStyleButton({
-  style: 'ITALIC',
-  Icon: ItalicIcon,
-  tooltipTextKey: 'ItalicButton_Tooltip',
-});
+export const italicButton = icon =>
+  createTextInlineStyleButton({
+    style: 'ITALIC',
+    Icon: icon || ItalicIcon,
+    tooltipTextKey: 'ItalicButton_Tooltip',
+  });
 
-export const UnderlineButton = createTextInlineStyleButton({
-  style: 'UNDERLINE',
-  Icon: UnderlineIcon,
-  tooltipTextKey: 'UnderlineButton_Tooltip',
-});
+export const underlineButton = icon =>
+  createTextInlineStyleButton({
+    style: 'UNDERLINE',
+    Icon: icon || UnderlineIcon,
+    tooltipTextKey: 'UnderlineButton_Tooltip',
+  });
 
-export const IndentButton = createTextBlockStyleButton({
-  blockTypes: ['indent'],
-  Icons: [IndentIcon],
-  tooltipTextKey: 'IndentButton_Tooltip',
-});
+export const indentButton = icon =>
+  createTextBlockStyleButton({
+    blockTypes: ['indent'],
+    Icons: [icon || IndentIcon],
+    tooltipTextKey: 'IndentButton_Tooltip',
+  });
 
-export const TitleButton = createTextBlockStyleButton({
-  blockTypes: [HEADER_BLOCK.TWO, HEADER_BLOCK.THREE],
-  Icons: [TitleOneIcon, TitleTwoIcon],
-  InactiveIcon: TitleIcon,
-  tooltipTextKey: 'TitleButton_Tooltip',
-});
+export const titleButton = (inactiveIconTitle, iconForTitleOne, iconForTitleTwo) =>
+  createTextBlockStyleButton({
+    blockTypes: [HEADER_BLOCK.TWO, HEADER_BLOCK.THREE],
+    Icons: [iconForTitleOne || TitleOneIcon, iconForTitleTwo || TitleTwoIcon],
+    InactiveIcon: inactiveIconTitle || TitleIcon,
+    tooltipTextKey: 'TitleButton_Tooltip',
+  });
 
-export const BlockquoteButton = createTextBlockStyleButton({
-  blockTypes: ['blockquote'],
-  Icons: [BlockQuoteIcon],
-  tooltipTextKey: 'QuoteButton_Tooltip',
-});
+export const blockquoteButton = icon =>
+  createTextBlockStyleButton({
+    blockTypes: ['blockquote'],
+    Icons: [icon || BlockQuoteIcon],
+    tooltipTextKey: 'QuoteButton_Tooltip',
+  });
 
-export const AlignTextLeftButton = createTextAlignmentButton({
-  alignment: 'left',
-  Icon: AlignLeftIcon,
-  tooltipTextKey: 'AlignTextLeftButton_Tooltip',
-});
+// const alignButtonFactory = (alignment, defaultIcon, tooltipTextKey) =>
+//   icon => createTextAlignmentButton({
+//     alignment,
+//     Icon: icon || defaultIcon,
+//     tooltipTextKey,
+//   });
 
-export const AlignTextCenterButton = createTextAlignmentButton({
-  alignment: 'center',
-  Icon: AlignTextCenterIcon,
-  tooltipTextKey: 'AlignTextCenterButton_Tooltip',
-});
+// export const alignTextLeftButton = alignButtonFactory('left', AlignLeftIcon, 'AlignTextLeftButton_Tooltip');
+// export const alignTextCenterButton = alignButtonFactory('center', AlignTextCenterIcon, 'AlignTextCenterButton_Tooltip');
+// export const alignTextRightButton = alignButtonFactory('right', AlignRightIcon, 'AlignTextRightButton_Tooltip');
+// export const alignTextJustifyButton = alignButtonFactory('justify', AlignJustifyIcon, 'AlignTextJustifyButton_Tooltip');
 
-export const AlignTextRightButton = createTextAlignmentButton({
-  alignment: 'right',
-  Icon: AlignRightIcon,
-  tooltipTextKey: 'AlignTextRightButton_Tooltip',
-});
+export const alignTextLeftButton = icon =>
+  createTextAlignmentButton({
+    alignment: 'left',
+    Icon: icon || AlignLeftIcon,
+    tooltipTextKey: 'AlignTextLeftButton_Tooltip',
+  });
 
-export const AlignTextJustifyButton = createTextAlignmentButton({
-  alignment: 'justify',
-  Icon: AlignJustifyIcon,
-  tooltipTextKey: 'AlignTextJustifyButton_Tooltip',
-});
+export const alignTextCenterButton = icon =>
+  createTextAlignmentButton({
+    alignment: 'center',
+    Icon: icon || AlignTextCenterIcon,
+    tooltipTextKey: 'AlignTextCenterButton_Tooltip',
+  });
 
-export const OrderedListButton = createTextBlockStyleButton({
-  blockTypes: ['ordered-list-item'],
-  Icons: [OrderedListIcon],
-  tooltipTextKey: 'OrderedListButton_Tooltip',
-});
+export const alignTextRightButton = icon =>
+  createTextAlignmentButton({
+    alignment: 'right',
+    Icon: icon || AlignRightIcon,
+    tooltipTextKey: 'AlignTextRightButton_Tooltip',
+  });
 
-export const UnorderedListButton = createTextBlockStyleButton({
-  blockTypes: ['unordered-list-item'],
-  Icons: [UnorderedListIcon],
-  tooltipTextKey: 'UnorderedListButton_Tooltip',
-});
+export const alignTextJustifyButton = icon =>
+  createTextAlignmentButton({
+    alignment: 'justify',
+    Icon: icon || AlignJustifyIcon,
+    tooltipTextKey: 'AlignTextJustifyButton_Tooltip',
+  });
+
+export const orderedListButton = icon =>
+  createTextBlockStyleButton({
+    blockTypes: ['ordered-list-item'],
+    Icons: [icon || OrderedListIcon],
+    tooltipTextKey: 'OrderedListButton_Tooltip',
+  });
+
+export const unorderedListButton = icon =>
+  createTextBlockStyleButton({
+    blockTypes: ['unordered-list-item'],
+    Icons: [icon || UnorderedListIcon],
+    tooltipTextKey: 'UnorderedListButton_Tooltip',
+  });

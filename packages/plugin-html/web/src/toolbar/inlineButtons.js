@@ -42,12 +42,13 @@ export default ({ settings = {}, getEditorBounds }) => {
     maxHeight = MAX_HEIGHT,
     minHeight = MIN_HEIGHT,
   } = settings;
+  const icons = get(settings, 'toolbar.icons') || {};
   return [
     {
       type: BUTTONS.INLINE_PANEL,
       keyName: 'edit',
       panelContent: translate(null)(EditPanel),
-      icon: EditIcon,
+      icon: icons.edit || EditIcon,
       mapComponentDataToButtonProps: ({ src, srcType }) => ({
         tooltipTextKey: src ? TOOLTIP_TEXT_BY_SRC_TYPE[srcType] : 'HtmlPlugin_EditEmpty_Tooltip',
       }),
@@ -78,18 +79,18 @@ export default ({ settings = {}, getEditorBounds }) => {
     {
       type: BUTTONS.TEXT_ALIGN_LEFT,
       keyName: 'alignLeft',
-      icon: SizeSmallLeftIcon,
+      icon: icons.alignLeft || SizeSmallLeftIcon,
       mapStoreDataToButtonProps: getAlignmentButtonPropsFn(getEditorBounds),
     },
     {
       type: BUTTONS.TEXT_ALIGN_CENTER,
       keyName: 'alignCenter',
-      icon: SizeSmallCenterIcon,
+      icon: icons.alignCenter || SizeSmallCenterIcon,
     },
     {
       type: BUTTONS.TEXT_ALIGN_RIGHT,
       keyName: 'alignRight',
-      icon: SizeSmallRightIcon,
+      icon: icons.alignRight || SizeSmallRightIcon,
       mapStoreDataToButtonProps: getAlignmentButtonPropsFn(getEditorBounds),
     },
     { type: BUTTONS.SEPARATOR, keyName: 'separator3' },

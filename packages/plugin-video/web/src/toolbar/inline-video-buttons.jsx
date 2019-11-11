@@ -5,10 +5,12 @@ import {
   SelectionModalCustomStyle,
   ExtendedSelectionModalCustomStyle,
 } from './selectionModalCustomStyles';
+import { get } from 'lodash';
 
 export default ({ t, settings, isMobile }) => {
   //apply the extended input modal styles if handleFileSelection is avilable in plugin config
   //& on mobile if enableCustomUploadOnMobile is set to true, otherwise the normal modal styles is applied
+  const icons = get(settings, 'toolbar.icons') || {};
   const customStyles =
     (!isMobile || settings.enableCustomUploadOnMobile) && settings.handleFileSelection
       ? ExtendedSelectionModalCustomStyle
@@ -24,7 +26,7 @@ export default ({ t, settings, isMobile }) => {
     {
       keyName: 'replace',
       type: BUTTONS.EXTERNAL_MODAL,
-      icon: MediaReplaceIcon,
+      icon: icons.replace || MediaReplaceIcon,
       modalElement: decorateComponentWithProps(VideoSelectionInputModal, settings),
       modalStyles: getModalStyles({
         customStyles,

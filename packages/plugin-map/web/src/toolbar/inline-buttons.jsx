@@ -19,7 +19,7 @@ const getAlignmentButtonPropsFn = getEditorBounds => ({ componentData }) => {
 
 export default ({ settings, t, helpers, getEditorBounds, isMobile }) => {
   const { maxWidth, minWidth, maxHeight, minHeight } = settings;
-
+  const icons = get(settings, 'toolbar.icons') || {};
   return [
     {
       type: BUTTONS.WIDTH,
@@ -52,7 +52,7 @@ export default ({ settings, t, helpers, getEditorBounds, isMobile }) => {
     {
       type: BUTTONS.TEXT_ALIGN_CENTER,
       keyName: 'alignCenter',
-      icon: SizeSmallCenterIcon,
+      icon: icons.alignCenter || SizeSmallCenterIcon,
       mobile: false,
     },
     {
@@ -65,7 +65,7 @@ export default ({ settings, t, helpers, getEditorBounds, isMobile }) => {
     {
       keyName: 'settings',
       type: BUTTONS.EXTERNAL_MODAL,
-      icon: PluginSettingsIcon,
+      icon: icons.settings || PluginSettingsIcon,
       modalElement: MapSettingsModal,
       modalStyles: getModalStyles({ isMobile }),
       mobile: true,

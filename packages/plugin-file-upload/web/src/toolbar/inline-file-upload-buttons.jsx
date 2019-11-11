@@ -1,7 +1,9 @@
 import { BUTTONS } from 'wix-rich-content-common';
 import { MediaReplaceIcon } from '../icons';
+import { get } from 'lodash';
 
 export default ({ settings, t }) => {
+  const icon = get(settings, 'toolbar.icons') || {};
   return [
     { keyName: 'sizeSmallLeft', type: BUTTONS.SIZE_SMALL_LEFT, mobile: false },
     { keyName: 'sizeSmallCenter', type: BUTTONS.SIZE_SMALL_CENTER, mobile: false },
@@ -10,7 +12,7 @@ export default ({ settings, t }) => {
     {
       keyName: 'replace',
       type: BUTTONS.FILES,
-      icon: MediaReplaceIcon,
+      icon: icon.replace || MediaReplaceIcon,
       settings,
       tooltipTextKey: t('FileUploadReplaceButton_tooltip'),
     },

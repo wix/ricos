@@ -22,11 +22,12 @@ export const MODIFIERS = {
 
 export const TOOLBARS = {
   SIDE: 'SIDE',
-  MOBILE: 'MOBILE',
+  MOBILE: 'MOBILE', //Text Toolbar
   FOOTER: 'FOOTER',
-  STATIC: 'TEXT',
-  INLINE: 'INLINE',
+  STATIC: 'TEXT', //Text Toolbar
+  INLINE: 'INLINE', //Text Toolbar
   PLUGIN: 'PLUGIN',
+  TEXT: 'ALL-TEXT-TOOLBARS',
 };
 
 export const DISPLAY_MODE = {
