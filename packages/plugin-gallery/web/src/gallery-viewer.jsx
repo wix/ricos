@@ -6,7 +6,7 @@ import { convertItemData } from './helpers/convert-item-data';
 import { getDefault, isHorizontalLayout, sampleItems } from './constants';
 import resizeMediaUrl from './helpers/resize-media-url';
 import schema from '../statics/data-schema.json';
-import viewerStyles from '../statics/styles/viewer.scss';
+import styles from '../statics/styles/viewer.scss';
 import 'pro-gallery/dist/statics/main.min.css';
 import ExpandIcon from './icons/expand.svg';
 
@@ -152,7 +152,7 @@ class GalleryViewer extends React.Component {
   renderExpandIcon = itemProps => {
     return itemProps.linkData.url ? (
       <ExpandIcon
-        className={viewerStyles.expandIcon}
+        className={this.styles.expandIcon}
         onClick={e => {
           e.preventDefault();
           this.handleExpand(itemProps);
@@ -177,7 +177,7 @@ class GalleryViewer extends React.Component {
   );
 
   render() {
-    this.styles = this.styles || mergeStyles({ styles: viewerStyles, theme: this.context.theme });
+    this.styles = this.styles || mergeStyles({ styles, theme: this.context.theme });
     const { scrollingElement, ...settings } = this.props.settings;
     // TODO remove gallery key
     const { galleryKey, styleParams, size = { width: 300 } } = this.state;
@@ -206,7 +206,7 @@ class GalleryViewer extends React.Component {
 
 GalleryViewer.propTypes = {
   componentData: PropTypes.object.isRequired,
-  entityIndex: PropTypes.number.isRequired,
+  entityIndex: PropTypes.number,
   onClick: PropTypes.func,
   className: PropTypes.string,
   settings: PropTypes.object,

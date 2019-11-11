@@ -14,7 +14,27 @@
     Click to see more.
   </summary>
 
-  ### :rocket: New Feature
+</details>
+<hr/>
+
+## 6.2.0 (Nov 11, 2019)
+### :boom: Breaking Change
+- `locale`
+  - [#435](https://github.com/wix-incubator/rich-content/pull/435) `messages_xx.json` files moved to `wix-rich-content-common`
+### :rocket: New Feature
+- `preview`
+  - [#435](https://github.com/wix-incubator/rich-content/pull/435) package added
+### :bug: Bug Fix
+- `common`
+  - [#458](https://github.com/wix-incubator/rich-content/pull/458) normalization: sparse entity map keys handled correctly
+- `fullscreen`
+  - [#457](https://github.com/wix-incubator/rich-content/pull/457) fix fullscreen
+### :book: Documentation
+- `preview`
+  - [#435](https://github.com/wix-incubator/rich-content/pull/435) [documentation](./docs/rich-content-preview.md) added
+
+## 6.1.0 (Nov 10, 2019)
+### :rocket: New Feature
   - `editor`
     - [#445](https://github.com/wix-incubator/rich-content/pull/445) initial intent for all plugins except file-upload plugins
   - `mentions`
@@ -25,6 +45,8 @@
     - [#449](https://github.com/wix-incubator/rich-content/pull/449) force video mime type for uploads
     - [#451](https://github.com/wix-incubator/rich-content/pull/451) uses unique file input id
   ### :bug: Bug Fix
+  - `common`
+    - [#454](https://github.com/wix-incubator/rich-content/pull/454) link panel not loading link data after page refresh
   - `divider`
     - [#438](https://github.com/wix-incubator/rich-content/pull/438) container alignment
   - `viewer`
@@ -38,7 +60,10 @@
     - [#446](https://github.com/wix-incubator/rich-content/pull/446) `pro-gallery` updated to `v1.5.25`
   - `e2e`
     - [#447](https://github.com/wix-incubator/rich-content/pull/447) added more supported browsers
-</details>
+  - `resize`
+    - [#450](https://github.com/wix-incubator/rich-content/pull/450) moved width from data into data.config
+  - `babel`
+    - [#454](https://github.com/wix-incubator/rich-content/pull/454) add optional chaining support
 <hr/>
 
 ## 6.0.0 "MOAV" (Oct 30, 2019)
@@ -165,7 +190,7 @@
 - `editor`
   - [#395](https://github.com/wix-incubator/rich-content/pull/395) removed div wrapping editor that was added in [#359](https://github.com/wix-incubator/rich-content/pull/359)
 - `gallery`
-  - [d0986f3](https://github.com/wix-incubator/rich-content/commit/d0986f3) height issues - disabled above the fold 
+  - [d0986f3](https://github.com/wix-incubator/rich-content/commit/d0986f3) height issues - disabled above the fold
 ### :house: Internal
 - `example`
   - [9add0fbc](https://github.com/wix-incubator/rich-content/commit/9add0fbc) gallery validation schema used for content validation

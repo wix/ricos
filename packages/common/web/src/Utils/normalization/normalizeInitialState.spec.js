@@ -237,6 +237,90 @@ describe('normalizeInitialState', () => {
       expect(actual.blocks[0].entityRanges).toEqual(expected.blocks[0].entityRanges);
       expect(actual.entityMap).toEqual(expected.entityMap);
     });
+
+    it('should set proper entity keys for the entity map', () => {
+      const initialState = {
+        text: 'google.com some other text wix.com',
+        entityMap: {
+          0: {
+            type: 'LINK',
+            mutability: 'MUTABLE',
+            data: {
+              url: 'reddit.com',
+              target: '_self',
+              rel: 'noopener',
+            },
+          },
+          2: {
+            type: 'LINK',
+            mutability: 'MUTABLE',
+            data: {
+              url: 'test.com',
+              target: '_self',
+              rel: 'noopener',
+            },
+          },
+        },
+      };
+
+      const actual = uut(createState(initialState), config);
+      const expected = createState({
+        ...initialState,
+        VERSION: Version.currentVersion,
+        entityRanges: [
+          {
+            offset: 0,
+            length: 10,
+            key: 3,
+          },
+          {
+            offset: 27,
+            length: 7,
+            key: 4,
+          },
+        ],
+        entityMap: {
+          0: {
+            type: 'LINK',
+            mutability: 'MUTABLE',
+            data: {
+              url: 'reddit.com',
+              target: '_self',
+              rel: 'noopener',
+            },
+          },
+          2: {
+            type: 'LINK',
+            mutability: 'MUTABLE',
+            data: {
+              url: 'test.com',
+              target: '_self',
+              rel: 'noopener',
+            },
+          },
+          3: {
+            type: 'LINK',
+            mutability: 'MUTABLE',
+            data: {
+              url: 'google.com',
+              target: '_self',
+              rel: 'noopener',
+            },
+          },
+          4: {
+            type: 'LINK',
+            mutability: 'MUTABLE',
+            data: {
+              url: 'wix.com',
+              target: '_self',
+              rel: 'noopener',
+            },
+          },
+        },
+      });
+      expect(actual.blocks[0].entityRanges).toEqual(expected.blocks[0].entityRanges);
+      expect(actual.entityMap).toEqual(expected.entityMap);
+    });
   });
 
   describe('underline range completion for links', () => {
