@@ -35,7 +35,8 @@ describe('plugins', () => {
 
     after(() => cy.eyesClose());
 
-    it('render image plugin toolbar', function() {
+    // eslint-disable-next-line mocha/no-skipped-tests
+    it.skip('render image plugin toolbar', function() {
       cy.log(this);
       cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE).shrinkPlugin();
       cy.eyesCheckWindow(this.test.title);
