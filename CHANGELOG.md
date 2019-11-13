@@ -14,22 +14,27 @@
     Click to see more.
   </summary>
 
-  ### :rocket: New Feature
-  - `preview`
-    - [#435](https://github.com/wix-incubator/rich-content/pull/435) package added
-  - `emoji`
-    - plugin rewrite
   ### :bug: Bug Fix
-  - `common`
-    - [#458](https://github.com/wix-incubator/rich-content/pull/458) normalization: sparse entity map keys handled correctly
   - `fullscreen`
-    - [#457](https://github.com/wix-incubator/rich-content/pull/457) fix fullscreen
-  ### :book: Documentation
-  - `preview`
-    - [#435](https://github.com/wix-incubator/rich-content/pull/435) [documentation](./docs/rich-content-preview.md) added
-
+    - [#465](https://github.com/wix-incubator/rich-content/pull/465) fix fullscreen - getImagesData not working correctly
 </details>
 <hr/>
+
+## 6.2.0 (Nov 11, 2019)
+### :boom: Breaking Change
+- `locale`
+  - [#435](https://github.com/wix-incubator/rich-content/pull/435) `messages_xx.json` files moved to `wix-rich-content-common`
+### :rocket: New Feature
+- `preview`
+  - [#435](https://github.com/wix-incubator/rich-content/pull/435) package added
+### :bug: Bug Fix
+- `common`
+  - [#458](https://github.com/wix-incubator/rich-content/pull/458) normalization: sparse entity map keys handled correctly
+- `fullscreen`
+  - [#457](https://github.com/wix-incubator/rich-content/pull/457) fix fullscreen
+### :book: Documentation
+- `preview`
+  - [#435](https://github.com/wix-incubator/rich-content/pull/435) [documentation](./docs/rich-content-preview.md) added
 
 ## 6.1.0 (Nov 10, 2019)
 ### :rocket: New Feature
