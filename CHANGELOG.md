@@ -14,6 +14,7 @@
     Click to see more.
   </summary>
   ### :rocket: New Feature
+
   - `emoji`
     - plugin reworked
   ### :bug: Bug Fix
