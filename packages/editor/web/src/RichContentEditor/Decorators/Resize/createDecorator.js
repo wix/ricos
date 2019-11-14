@@ -50,8 +50,10 @@ export default ({ config, store }) => WrappedComponent =>
       clicked: false,
     };
 
-    setEntityData = data => {
-      this.props.blockProps.setResizeData(data);
+    updateEntityData = (width, height) => {
+      const { setData, getData } = this.props.blockProps;
+      const data = getData();
+      setData({ ...data, config: { ...data.config, width, height } });
     };
 
     // used to save the hoverPosition so it can be leveraged to determine if a
@@ -169,7 +171,7 @@ export default ({ config, store }) => WrappedComponent =>
 
         const { width, height } = this.state;
         this.setState({ clicked: false });
-        this.setEntityData({ width, height });
+        this.updateEntityData(width, height);
       };
 
       // TODO clean up event listeners
@@ -190,11 +192,16 @@ export default ({ config, store }) => WrappedComponent =>
         resizeSteps, // eslint-disable-line no-unused-vars
         ...elementProps
       } = this.props;
-      const { width, height, hoverPosition } = this.state;
-      const { isTop, isLeft, isRight, isBottom } = hoverPosition;
-
       const componentData = blockProps.getData();
       const { size, alignment } = componentData.config;
+
+      const {
+        width = componentData.config.width,
+        height = componentData.config.height,
+        hoverPosition,
+      } = this.state;
+      const { isTop, isLeft, isRight, isBottom } = hoverPosition;
+
       const styles = { position: 'relative', ...style };
 
       this.mergedStyles =
@@ -203,17 +210,17 @@ export default ({ config, store }) => WrappedComponent =>
       if (horizontal === 'auto') {
         styles.width = 'auto';
       } else if (horizontal === 'relative') {
-        styles.width = `${width || blockProps.resizeData.width || this.props.minWidth}%`;
+        styles.width = `${width || this.props.minWidth}%`;
       } else if (horizontal === 'absolute') {
-        styles.width = `${width || blockProps.resizeData.width || this.props.minWidth}px`;
+        styles.width = `${width || this.props.minWidth}px`;
       }
 
       if (vertical === 'auto') {
         styles.height = 'auto';
       } else if (vertical === 'relative') {
-        styles.height = `${height || blockProps.resizeData.height || this.props.minHeight}%`;
+        styles.height = `${height || this.props.minHeight}%`;
       } else if (vertical === 'absolute') {
-        styles.height = `${height || blockProps.resizeData.height || this.props.minHeight}px`;
+        styles.height = `${height || this.props.minHeight}px`;
       }
 
       // Handle cursor

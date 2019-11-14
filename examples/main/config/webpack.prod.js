@@ -10,6 +10,17 @@ const prodConfig = {
   module: {
     rules: [
       {
+        test: /\.js(x)?$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            compact: true,
+            rootMode: 'upward',
+          },
+        },
+      },
+      {
         test: /\.scss$/,
         exclude: /styles\.global\.scss/,
         use: [

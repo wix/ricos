@@ -158,16 +158,10 @@ export const getAnchorBlockData = editorState => {
   return block.get('data').toJS();
 };
 
-export const updateEntityData = (editorState, blockKey, newData) => {
-  const contentState = editorState.getCurrentContent();
-  const block = contentState.getBlockForKey(blockKey);
-  const entityKey = block.getEntityAt(0);
+export const setEntityData = (editorState, entityKey, data) => {
   if (entityKey) {
     const contentState = editorState.getCurrentContent();
-    const entityData = contentState.getEntity(entityKey).getData();
-    const data =
-      typeof newData === 'function' ? cloneDeep(newData(entityData)) : cloneDeep(newData);
-    contentState.replaceEntityData(entityKey, data);
+    contentState.replaceEntityData(entityKey, cloneDeep(data));
   }
   return editorState;
 };

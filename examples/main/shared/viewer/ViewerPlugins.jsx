@@ -1,4 +1,3 @@
-import React from 'react';
 import theme from '../theme/theme';
 import { videoTypeMapper } from 'wix-rich-content-plugin-video/dist/module.viewer';
 import { dividerTypeMapper } from 'wix-rich-content-plugin-divider/dist/module.viewer';
