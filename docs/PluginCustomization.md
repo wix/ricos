@@ -28,6 +28,21 @@ The `width` and `height` are expected to be integers. They serve as **initial** 
 
 The `toolbar` setting refers to plugin functionality toolbar. Currently, it exposes a single field `hidden` which is expected to be an array of toolbar button `keynames` to be removed from toolbar.
 
+### Button Plugin Settings
+
+| setting key       | description                 | default value | is required? | editor/viewer config |
+| ----------------- | --------------------------- | ------------- | ------------ | -------------------- |
+| `activeButton`    | The index of the chosen preset button design | 0          | No           | both                 |
+| `borderRadius`    | The border radius in pixels | 0          | No           | both                 |
+| `borderWidth`     | The border width in pixels | 0          | No           | both                 |
+| `buttonText`      | The button label | `Click Me`          | No           | both                 |
+| `url`             | The URL that should be redirected when clicking on the button | none          | Yes           | both                 |
+| `rel`             | The relationship between the current URL and the linked URL  | `nofollow`          | Yes           | both                 |
+| `target`          | Specifies where to open URL in new tab or in current tab | `_blank`          | Yes           | both                 |
+| `textColor`       | The color of button text in Hex. | `#FEFDFD`          | No           | both                 |
+| `borderColor`     | The color of button border in Hex. | `#0161FF`          | No           | both                 |
+| `backgroundColor` | The color of button background in Hex. | `#0161FF`          | No           | both                 |
+
 ### HTML Plugin Settings
 
 | setting key     | description                                                                                                | default value | is required? | editor/viewer config |

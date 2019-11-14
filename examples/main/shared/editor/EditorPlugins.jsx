@@ -22,11 +22,13 @@ import {
 import { createMapPlugin, MAP_TYPE } from 'wix-rich-content-plugin-map';
 import { createFileUploadPlugin, FILE_UPLOAD_TYPE } from 'wix-rich-content-plugin-file-upload';
 import { createTextColorPlugin, TEXT_COLOR_TYPE } from 'wix-rich-content-plugin-text-color';
+import { createButtonPlugin, BUTTON_TYPE } from 'wix-rich-content-plugin-button';
 import Highlighter from 'react-highlight-words';
 import casual from 'casual-browserify';
 
 import 'wix-rich-content-common/dist/styles.min.css';
 import 'wix-rich-content-editor/dist/styles.min.css';
+import 'wix-rich-content-plugin-button/dist/styles.min.css';
 // import 'wix-rich-content-plugin-code-block/dist/styles.min.css';
 import 'wix-rich-content-plugin-divider/dist/styles.min.css';
 // import 'wix-rich-content-plugin-emoji/dist/styles.min.css';
@@ -54,6 +56,7 @@ import { getBaseUrl } from '../../src/utils';
 // import PluginToolbarDecoration from './Components/PluginToolbarDecoration';
 
 export const editorPlugins = [
+  createButtonPlugin,
   createImagePlugin,
   createGalleryPlugin,
   createVideoPlugin,
@@ -83,6 +86,11 @@ const themeColors = {
   color7: '#000000',
   color8: '#9a87ce',
 };
+
+const buttonDefaultPalette = ['#FEFDFD', '#D5D4D4', '#ABCAFF', '#81B0FF', '#0261FF', '#0141AA'];
+let userButtonTextColors = [...buttonDefaultPalette];
+let userButtonBackgroundColors = [...buttonDefaultPalette];
+let userButtonBorderColors = [...buttonDefaultPalette];
 
 const getLinkPanelDropDownConfig = () => {
   const getItems = () => {
@@ -301,6 +309,31 @@ export const config = {
     //   };
     //   setTimeout(() => updateEntity({ data }), 500);
     // },
+  },
+  [BUTTON_TYPE]: {
+    palette: ['#FEFDFD', '#D5D4D4', '#ABCAFF', '#81B0FF', '#0261FF', '#0141AA'],
+    selectionBackgroundColor: 'fuchsia',
+    selectionBorderColor: '#FFF',
+    selectionTextColor: '#FFF',
+    colors: {
+      color1: '#FEFDFD',
+      color2: '#D5D4D4',
+      color3: '#000000',
+      color4: '#000000',
+      color5: '#000000',
+      color6: '#ABCAFF',
+      color7: '#81B0FF',
+      color8: '#0261FF',
+      color9: '#0141AA',
+      color10: '#012055',
+    },
+    onTextColorAdded: color => (userButtonTextColors = [color, ...userButtonTextColors]),
+    onBackgroundColorAdded: color =>
+      (userButtonBackgroundColors = [color, ...userButtonBackgroundColors]),
+    onBorderColorAdded: color => (userButtonBorderColors = [color, ...userButtonBorderColors]),
+    getTextColors: () => userButtonTextColors,
+    getBorderColors: () => userButtonBorderColors,
+    getBackgroundColors: () => userButtonBackgroundColors,
   },
   [TEXT_COLOR_TYPE]: {
     colorScheme,
