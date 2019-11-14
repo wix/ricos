@@ -56,7 +56,6 @@ import { getBaseUrl } from '../../src/utils';
 // import PluginToolbarDecoration from './Components/PluginToolbarDecoration';
 
 export const editorPlugins = [
-  createButtonPlugin,
   createImagePlugin,
   createGalleryPlugin,
   createVideoPlugin,
@@ -73,6 +72,7 @@ export const editorPlugins = [
   createHeadersMarkdownPlugin,
   createMapPlugin,
   createFileUploadPlugin,
+  createButtonPlugin,
   createTextColorPlugin,
 ];
 
