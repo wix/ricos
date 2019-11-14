@@ -1,7 +1,7 @@
 import { composeDecorators } from 'draft-js-plugins-editor';
 import createFocusPlugin from 'draft-js-focus-plugin';
 import createResizeDecoration from './Decorators/Resize';
-import createBlockDndPlugin from 'draft-js-drag-n-drop-plugin';
+import { draftPluginNames } from '../consts.js';
 
 const createPlugins = ({
   plugins,
@@ -22,16 +22,21 @@ const createPlugins = ({
     horizontal: 'absolute',
     minWidth: 350,
   });
-  const dndPlugin = createBlockDndPlugin();
 
-  const wixPluginsDecorators = composeDecorators(
-    dndPlugin.decorator,
-    resizePlugin.decorator,
-    focusPlugin.decorator
-  );
+  const draftPlugins = plugins?.filter(plugin => draftPluginNames.includes(plugin.name));
+
+  const dndPlugin = draftPlugins?.find(plugin => plugin.name === 'createBlockDndPlugin')?.();
+
+  const wixPluginsDecorators = [resizePlugin.decorator, focusPlugin.decorator];
+  const pluginInstances = [resizePlugin, focusPlugin];
+
+  if (dndPlugin) {
+    wixPluginsDecorators.push(dndPlugin.decorator);
+    pluginInstances.push(dndPlugin);
+  }
 
   const wixPluginConfig = {
-    decorator: wixPluginsDecorators,
+    decorator: composeDecorators(...wixPluginsDecorators),
     helpers,
     theme,
     t,
@@ -44,7 +49,10 @@ const createPlugins = ({
     getEditorBounds,
     ...config,
   };
-  const wixPlugins = (plugins || []).map(createPlugin => createPlugin(wixPluginConfig));
+
+  const wixPlugins = (plugins || [])
+    ?.filter(plugin => !draftPluginNames.includes(plugin.name))
+    .map(createPlugin => createPlugin(wixPluginConfig));
 
   let pluginButtons = [];
   let pluginTextButtons = [];
@@ -65,7 +73,7 @@ const createPlugins = ({
     ];
   });
 
-  const pluginInstances = [resizePlugin, focusPlugin, dndPlugin, ...wixPlugins];
+  pluginInstances.push(...wixPlugins);
 
   return {
     pluginInstances,

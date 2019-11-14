@@ -10,6 +10,8 @@ import { alignmentClassName, sizeClassName, textWrapClassName } from '../Utils/c
 import { normalizeUrl } from '../Utils/urlValidators';
 import styles from '../../statics/styles/general.scss';
 import rtlIgnoredStyles from '../../statics/styles/general.rtlignore.scss';
+import draggableStyle from '../../statics/styles/draggable.scss';
+import Context from '../Utils/Context';
 
 const DEFAULTS = {
   alignment: null,
@@ -235,6 +237,7 @@ const createBaseComponent = ({
     render = () => {
       const { blockProps, className, selection, onDragStart } = this.props;
       const { componentData, readOnly } = this.state;
+      const { enableDragAndDrop } = this.context;
       const { containerClassName, ...decorationProps } = pluginDecorationProps(
         this.props,
         componentData
@@ -273,6 +276,7 @@ const createBaseComponent = ({
       const overlayClassNames = classNames(this.styles.overlay, theme.overlay, {
         [this.styles.hidden]: readOnly,
         [theme.hidden]: readOnly,
+        [draggableStyle.draggable]: enableDragAndDrop,
       });
 
       const sizeStyles = {
@@ -335,7 +339,7 @@ const createBaseComponent = ({
               data-hook={'componentOverlay'}
               onClick={this.handleClick}
               className={overlayClassNames}
-              draggable="true"
+              draggable={enableDragAndDrop}
             />
           )}
         </div>
@@ -352,6 +356,8 @@ const createBaseComponent = ({
     onClick: PropTypes.func,
     onDragStart: PropTypes.func,
   };
+
+  WrappedComponent.contextType = Context.type;
 
   return WrappedComponent;
 };

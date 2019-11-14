@@ -22,6 +22,7 @@ import {
 import { createMapPlugin, MAP_TYPE } from 'wix-rich-content-plugin-map';
 import { createFileUploadPlugin, FILE_UPLOAD_TYPE } from 'wix-rich-content-plugin-file-upload';
 import { createTextColorPlugin, TEXT_COLOR_TYPE } from 'wix-rich-content-plugin-text-color';
+import createBlockDndPlugin from 'draft-js-drag-n-drop-plugin';
 import Highlighter from 'react-highlight-words';
 import casual from 'casual-browserify';
 
@@ -71,6 +72,7 @@ export const editorPlugins = [
   createMapPlugin,
   createFileUploadPlugin,
   createTextColorPlugin,
+  createBlockDndPlugin,
 ];
 
 const themeColors = {
