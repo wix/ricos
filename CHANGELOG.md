@@ -13,7 +13,9 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
-
+  ### :rocket: New Feature
+  - `emoji`
+    - plugin reworked
   ### :bug: Bug Fix
   - `fullscreen`
     - [#465](https://github.com/wix-incubator/rich-content/pull/465) fix fullscreen - getImagesData not working correctly
@@ -1688,3 +1690,4 @@ _NOTE:_ From this version onwards all modules will have the same version number,
 - `editor`
   - [#58](https://github.com/wix-incubator/rich-content/pull/58) Default `locale` is `'en'`, English texts are imported statically
     Set the `locale` and `localeResource` props to use another language
+
