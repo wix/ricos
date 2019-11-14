@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { isEqual, get } from 'lodash';
 import { validate, mergeStyles, Context } from 'wix-rich-content-common';
@@ -80,11 +80,8 @@ class GalleryViewer extends React.Component {
     const items = props.componentData.items || defaults.items;
     const styleParams = this.getStyleParams(
       Object.assign(defaults.styles, props.componentData.styles || {}),
-      this.hasTitle(items)
+      items
     );
-    if (this.context && this.context.helpers.onExpand) {
-      styleParams.allowHover = true;
-    }
     return {
       items,
       styleParams,
@@ -132,27 +129,27 @@ class GalleryViewer extends React.Component {
     });
   };
 
-  getStyleParams = (styleParams, shouldRenderTitle) => {
-    if (!shouldRenderTitle) {
-      return styleParams;
+  getStyleParams = (styleParams, items) => {
+    if (this.context && !this.context.isMobile) {
+      return { ...styleParams, allowHover: true };
     }
-    const display = this.context.isMobile
-      ? { titlePlacement: 'SHOW_BELOW', calculateTextBoxHeightMode: 'AUTOMATIC' }
-      : { titlePlacement: 'SHOW_ON_HOVER', allowHover: true, galleryVerticalAlign: 'flex-end' };
-    return {
-      ...styleParams,
-      isVertical: styleParams.galleryLayout === 1,
-      allowTitle: true,
-      galleryTextAlign: 'center',
-      textsHorizontalPadding: 0,
-      imageInfoType: 'NO_BACKGROUND',
-      hoveringBehaviour: 'APPEARS',
-      textsVerticalPadding: 0,
-      ...display,
-    };
+    return this.hasTitle(items)
+      ? {
+          ...styleParams,
+          isVertical: styleParams.galleryLayout === 1,
+          allowTitle: true,
+          galleryTextAlign: 'center',
+          textsHorizontalPadding: 0,
+          imageInfoType: 'NO_BACKGROUND',
+          hoveringBehaviour: 'APPEARS',
+          textsVerticalPadding: 0,
+          titlePlacement: 'SHOW_BELOW',
+          calculateTextBoxHeightMode: 'AUTOMATIC',
+        }
+      : styleParams;
   };
 
-  hoverElement = itemProps => {
+  renderExpandIcon = itemProps => {
     return itemProps.linkData.url ? (
       <ExpandIcon
         className={this.styles.expandIcon}
@@ -163,6 +160,21 @@ class GalleryViewer extends React.Component {
       />
     ) : null;
   };
+
+  renderTitle = alt => {
+    return alt ? (
+      <div className={viewerStyles.imageTitleContainer}>
+        <div className={viewerStyles.imageTitle}>{alt}</div>
+      </div>
+    ) : null;
+  };
+
+  hoverElement = itemProps => (
+    <Fragment>
+      {this.renderExpandIcon(itemProps)}
+      {this.renderTitle(itemProps.alt)}
+    </Fragment>
+  );
 
   render() {
     this.styles = this.styles || mergeStyles({ styles, theme: this.context.theme });
