@@ -45,7 +45,6 @@ import 'wix-rich-content-plugin-giphy/dist/styles.min.css';
 import 'wix-rich-content-plugin-map/dist/styles.min.css';
 import 'wix-rich-content-plugin-file-upload/dist/styles.min.css';
 import 'wix-rich-content-plugin-text-color/dist/styles.min.css';
-import { TrashIcon } from 'wix-rich-content-common';
 import {
   customForegroundStyleFn,
   styleSelectionPredicate,
@@ -311,11 +310,11 @@ export const config = {
     // },
   },
   [TEXT_HIGHLIGHT_TYPE]: {
-    toolbar: {
-      icons: {
-        TextHighlight: TrashIcon,
-      },
-    },
+    // toolbar: {
+    //   icons: {
+    //     TextHighlight: CustomIcon,
+    //   },
+    // },
     colorScheme,
     styleSelectionPredicate,
     customStyleFn: customBackgroundStyleFn,
@@ -323,11 +322,11 @@ export const config = {
     getUserColors: () => userColors,
   },
   [TEXT_COLOR_TYPE]: {
-    toolbar: {
-      icons: {
-        TextColor: TrashIcon,
-      },
-    },
+    // toolbar: {
+    //   icons: {
+    //     TextColor: CustomIcon,
+    //   },
+    // },
     colorScheme,
     styleSelectionPredicate,
     customStyleFn: customForegroundStyleFn,

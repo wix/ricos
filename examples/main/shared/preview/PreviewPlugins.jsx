@@ -5,7 +5,10 @@ import { HTML_TYPE, htmlTypeMapper } from 'wix-rich-content-plugin-html/dist/mod
 import { soundCloudTypeMapper } from 'wix-rich-content-plugin-sound-cloud/dist/module.viewer';
 import { LINK_TYPE, linkTypeMapper } from 'wix-rich-content-plugin-link/dist/module.viewer';
 import { imageTypeMapper } from 'wix-rich-content-plugin-image/dist/module.viewer';
-import { galleryTypeMapper, GALLERY_TYPE } from 'wix-rich-content-plugin-gallery/dist/module.viewer';
+import {
+  galleryTypeMapper,
+  GALLERY_TYPE,
+} from 'wix-rich-content-plugin-gallery/dist/module.viewer';
 import { mapTypeMapper } from 'wix-rich-content-plugin-map/dist/module.viewer';
 import { giphyTypeMapper, GIPHY_TYPE } from 'wix-rich-content-plugin-giphy/dist/module.viewer';
 import {
@@ -21,7 +24,10 @@ import {
   TEXT_COLOR_TYPE,
 } from 'wix-rich-content-plugin-text-color/dist/module.viewer';
 
-import { viewerCustomStyleFn, styleSelectionPredicate } from '../../src/text-color-style-fn';
+import {
+  viewerCustomForegroundStyleFn,
+  styleSelectionPredicate,
+} from '../../src/text-color-style-fn';
 
 import 'wix-rich-content-common/dist/styles.min.css';
 import 'wix-rich-content-viewer/dist/styles.min.css';
@@ -66,7 +72,8 @@ export const typeMappers = [
 
 export const config = {
   [GALLERY_TYPE]: {
-    scrollingElement: typeof window !== 'undefined' && document.getElementsByClassName('preview-example')[0],
+    scrollingElement:
+      typeof window !== 'undefined' && document.getElementsByClassName('preview-example')[0],
   },
   [GIPHY_TYPE]: {
     giphySdkApiKey: process.env.GIPHY_API_KEY,
@@ -78,7 +85,7 @@ export const config = {
   [MENTION_TYPE]: mentionsPluginSettings,
   [TEXT_COLOR_TYPE]: {
     styleSelectionPredicate,
-    customStyleFn: viewerCustomStyleFn,
+    customStyleFn: viewerCustomForegroundStyleFn,
   },
   [FILE_UPLOAD_TYPE]: {
     resolveFileUrl: () =>
