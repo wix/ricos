@@ -15,6 +15,8 @@
   </summary>
   
   ### :bug: Bug Fix
+  - `gallery`
+    - styles reference fixed
   - `fullscreen`
     - [#465](https://github.com/wix-incubator/rich-content/pull/465) fix fullscreen - getImagesData not working correctly
   ### :house: Internal
