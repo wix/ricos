@@ -16,10 +16,9 @@
   
   ### :bug: Bug Fix
   - `fullscreen`
-    - [#465](https://github.com/wix-incubator/rich-content/pull/465) fix fullscreen - getImagesData not working correctly
+    - [#465](https://github.com/wix-incubator/rich-content/pull/465) getImagesData not working correctly
   - `video`
-    - [#468](https://github.com/wix-incubator/rich-content/pull/468) fixes video file upload selection
-  
+    - [#468](https://github.com/wix-incubator/rich-content/pull/468) video file upload selection  
   ### :house: Internal
   - `gallery`
     - [#467](https://github.com/wix-incubator/rich-content/pull/467) `pro-gallery` updated to `v1.5.33`
