@@ -10,10 +10,10 @@ You can try it here: [https://wix-rich-content.herokuapp.com/](https://wix-rich-
 
 ## Installation
 
-To install this package as editor, use the following command:
+To install this package as editor, use the following command ([draft-js version](https://github.com/wix-incubator/rich-content/blob/master/packages/editor/web/package.json#L50)):
 
 ```bash
-npm install --save wix-rich-content-editor
+npm install --save wix-rich-content-editor draft-js
 ```
 
 To install this package as viewer, use the following command:
@@ -211,21 +211,21 @@ You can find a full list of classes you can override in [here](./examples/main/s
 
 #### Plugins
 
-[wix-rich-content-plugin-divider](./pacakges/plugin-divider) add dividers to your content
+[wix-rich-content-plugin-divider](./packages/plugin-divider) add dividers to your content
 
-[wix-rich-content-plugin-emoji](./pacakges/plugin-emoji) add emojis to your content
+[wix-rich-content-plugin-emoji](./packages/plugin-emoji) add emojis to your content
 
-[wix-rich-content-plugin-hashtag](./pacakges/plugin-hashtag) convert plain text #hastags into dynamic elements
+[wix-rich-content-plugin-hashtag](./packages/plugin-hashtag) convert plain text #hastags into dynamic elements
 
-[wix-rich-content-plugin-html](./pacakges/plugin-html) embed html code or sites in your content
+[wix-rich-content-plugin-html](./packages/plugin-html) embed html code or sites in your content
 
-[wix-rich-content-plugin-link](./pacakges/plugin-link) convert plain text URLs into `<a>` tags
+[wix-rich-content-plugin-link](./packages/plugin-link) convert plain text URLs into `<a>` tags
 
-[wix-rich-content-plugin-mentions](./pacakges/plugin-video) add videos to your content
+[wix-rich-content-plugin-video](./packages/plugin-video) add videos to your content
 
-[wix-rich-content-plugin-video](./pacakges/plugin-mentions) mention users in your content
+[wix-rich-content-plugin-mentions](./packages/plugin-mentions) mention users in your content
 
-[wix-rich-content-plugin-code-block](./pacakges/plugin-code-block) displays code block
+[wix-rich-content-plugin-code-block](./packages/plugin-code-block) displays code block
 
 [wix-rich-content-plugin-image](./packages/plugin-image) embed images in your content
 

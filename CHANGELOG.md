@@ -13,11 +13,17 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
-
+  
+  ### :bug: Bug Fix
+  - `fullscreen`
+    - [#465](https://github.com/wix-incubator/rich-content/pull/465) fix fullscreen - getImagesData not working correctly
 </details>
 <hr/>
 
 ## 6.2.0 (Nov 11, 2019)
+### :boom: Breaking Change
+- `locale`
+  - [#435](https://github.com/wix-incubator/rich-content/pull/435) `messages_xx.json` files moved to `wix-rich-content-common`
 ### :rocket: New Feature
 - `preview`
   - [#435](https://github.com/wix-incubator/rich-content/pull/435) package added
@@ -29,9 +35,6 @@
 ### :book: Documentation
 - `preview`
   - [#435](https://github.com/wix-incubator/rich-content/pull/435) [documentation](./docs/rich-content-preview.md) added
-### :house: Internal
-- `locale`
-  - [#435](https://github.com/wix-incubator/rich-content/pull/435) `messages_xx.json` files moved to `wix-rich-content-common`
 
 ## 6.1.0 (Nov 10, 2019)
 ### :rocket: New Feature
@@ -46,6 +49,8 @@
     - [#451](https://github.com/wix-incubator/rich-content/pull/451) uses unique file input id
   - `editor`
     - [#453](https://github.com/wix-incubator/rich-content/pull/453) added drag and drop capability to plugins
+  - `html`
+    - [#460](https://github.com/wix-incubator/rich-content/pull/460) adsense support
   ### :bug: Bug Fix
   - `common`
     - [#454](https://github.com/wix-incubator/rich-content/pull/454) link panel not loading link data after page refresh
@@ -53,7 +58,9 @@
     - [#438](https://github.com/wix-incubator/rich-content/pull/438) container alignment
   - `viewer`
     - [#442](https://github.com/wix-incubator/rich-content/pull/442) html plugin alignment
-  - `editor`
+  - `gallery`
+    - [#455](https://github.com/wix-incubator/rich-content/pull/455) gallery image titles appears
+  - editor
     - [#448](https://github.com/wix-incubator/rich-content/pull/448) placeholder style fixed
   ### :house: Internal
   - `gallery`

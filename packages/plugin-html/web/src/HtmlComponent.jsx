@@ -21,8 +21,23 @@ import IframeHtml from './IframeHtml';
 import IframeUrl from './IframeUrl';
 import htmlComponentStyles from '../statics/styles/HtmlComponent.scss';
 
+const getPageURL = (htmlIframeSrc, siteDomain) => {
+  if (!siteDomain) {
+    return;
+  }
+
+  const regex = /http.+com/gm;
+  const res = regex.exec(siteDomain) || (htmlIframeSrc && regex.exec && regex.exec(htmlIframeSrc));
+  if (res) {
+    return res[0];
+  }
+  return res;
+};
+
 class HtmlComponent extends Component {
-  state = {};
+  state = {
+    siteDomain: undefined,
+  };
 
   componentDidMount() {
     const { componentData, settings } = this.props;
@@ -44,6 +59,24 @@ class HtmlComponent extends Component {
         componentData.config.height = INIT_HEIGHT;
       }
     }
+    const { siteDomain } = this.context;
+    this.setState({ siteDomain });
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    const { componentData, settings } = props;
+    if (componentData.srcType === 'html') {
+      let html = componentData && componentData.src;
+      const { htmlIframeSrc } = settings;
+      const pageURL = getPageURL(htmlIframeSrc, state.siteDomain);
+      if (pageURL && html && html.includes && html.includes('adsbygoogle')) {
+        const updatedAd = `<ins class="adsbygoogle"\n\tdata-page-url="${pageURL}"`;
+        html = html.replace(new RegExp('<ins class="adsbygoogle"', 'g'), updatedAd);
+      }
+      return {
+        html,
+      };
+    }
   }
 
   setHeight = iframeHeight => {
@@ -55,6 +88,7 @@ class HtmlComponent extends Component {
   };
 
   render() {
+    const { html } = this.state;
     this.styles =
       this.styles || mergeStyles({ styles: htmlComponentStyles, theme: this.context.theme });
     const { props } = this;
@@ -83,7 +117,7 @@ class HtmlComponent extends Component {
             <IframeHtml
               key={SRC_TYPE_HTML}
               tabIndex={readOnly ? -1 : 0}
-              html={src}
+              html={html}
               src={htmlIframeSrc}
               onHeightChange={this.setHeight}
             />
