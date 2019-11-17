@@ -13,7 +13,9 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
-  
+  ### :rocket: New Feature
+  - `button`
+    - plugin improved
   ### :bug: Bug Fix
   - `fullscreen`
     - [#465](https://github.com/wix-incubator/rich-content/pull/465) fix fullscreen - getImagesData not working correctly
