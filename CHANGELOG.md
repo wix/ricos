@@ -15,7 +15,7 @@
   </summary>
   ### :rocket: New Feature
   - `button`
-    - plugin improved
+    - [#472](https://github.com/wix-incubator/rich-content/pull/472) plugin improved
   ### :bug: Bug Fix
   - `fullscreen`
     - [#465](https://github.com/wix-incubator/rich-content/pull/465) fix fullscreen - getImagesData not working correctly
