@@ -1,13 +1,8 @@
 import classnames from 'classnames';
 import { upperFirst } from 'lodash';
 import { mergeStyles } from 'wix-rich-content-common';
-import styles from '../statics/styles/default-styles.scss';
 import alignmentStyles from '../statics/styles/alignment.rtlignore.scss';
-
-export const containerClassName = theme => {
-  const mergedStyles = mergeStyles({ styles, theme });
-  return mergedStyles.button_container;
-};
+import styles from '../statics/styles/default-styles.scss';
 
 export const alignmentClassName = (componentData, theme, styles) => {
   const { alignment = 'center' } = componentData.config || {};
@@ -17,4 +12,9 @@ export const alignmentClassName = (componentData, theme, styles) => {
     styles[`align${upperFirst(alignment)}`],
     theme[`align${upperFirst(alignment)}`]
   );
+};
+
+export const sizeClassName = (componentData, theme) => {
+  const mergedStyles = mergeStyles({ styles, theme });
+  return mergedStyles.button_size_content;
 };
