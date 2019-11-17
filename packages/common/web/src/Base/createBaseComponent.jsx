@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { findDOMNode } from 'react-dom';
-import { compact, isNil } from 'lodash';
+import { merge, compact, isNil } from 'lodash';
 import classNames from 'classnames';
 import createHocName from '../Utils/createHocName';
 import getDisplayName from '../Utils/getDisplayName';
@@ -39,7 +39,7 @@ const createBaseComponent = ({
 
     constructor(props) {
       super(props);
-      this.state = { componentState: {}, ...this.stateFromProps(props) };
+      this.state = { componentState: {}, ...this.stateFromProps(props, settings) };
       this.styles = { ...styles, ...rtlIgnoredStyles };
     }
 
@@ -48,19 +48,50 @@ const createBaseComponent = ({
       this.setState(this.stateFromProps(nextProps));
     }
 
-    stateFromProps(props) {
-      const { getData, readOnly } = props.blockProps;
+    stateFromProps(props, settings) {
+      const { readOnly } = props.blockProps;
       const initialState = pubsub.get('initialState_' + props.block.getKey());
       if (initialState) {
         //reset the initial state
         pubsub.set('initialState_' + props.block.getKey(), undefined);
       }
       return {
-        componentData: getData() || { config: DEFAULTS },
+        componentData: this.getData(props, settings),
         readOnly: !!readOnly,
         componentState: initialState || {},
       };
     }
+
+    getData(props, settings) {
+      const { getData } = props.blockProps;
+      const data = getData() || { config: DEFAULTS };
+      if (settings?.defaultData) {
+        const defaultData = this.createDefaultData(settings.defaultData);
+        if (defaultData) {
+          merge(data, defaultData);
+        }
+      }
+      return data;
+    }
+
+    createDefaultData = defaultData => {
+      // Divider type
+      if (defaultData.type) {
+        const { type, ...rest } = defaultData;
+        return { type, config: { ...rest } };
+      }
+      // Html src
+      if (defaultData.src && defaultData.srcType) {
+        const { src, srcType, ...rest } = defaultData;
+        return { src, srcType, config: { ...rest } };
+      }
+      // Gallery styles
+      if (defaultData.styles) {
+        const { styles, ...rest } = defaultData;
+        return { styles, config: { ...rest } };
+      }
+      return { config: defaultData };
+    };
 
     componentDidMount() {
       this.updateComponent();
