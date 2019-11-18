@@ -14,6 +14,9 @@
     Click to see more.
   </summary>
   
+  ### :rocket: New Feature
+  - `giphy`
+    - [#474](https://github.com/wix-incubator/rich-content/pull/474) giphy plugin supports mp4 gifs and lower res gifs
   ### :bug: Bug Fix
   - `fullscreen`
     - [#465](https://github.com/wix-incubator/rich-content/pull/465) getImagesData not working correctly
