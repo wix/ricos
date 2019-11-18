@@ -240,9 +240,7 @@ Cypress.Commands.add('openGalleryAdvancedSettings', () => {
 });
 
 Cypress.Commands.add('shrinkPlugin', () => {
-  cy.get(`button[data-hook=${PLUGIN_TOOLBAR_BUTTONS.SMALL_CENTER}][tabindex=0]`)
-    .click({ multiple: true })
-    .click();
+  cy.get(`button[data-hook=${PLUGIN_TOOLBAR_BUTTONS.SMALL_CENTER}][tabindex=0]`).click();
 });
 
 Cypress.Commands.add('openGallerySettings', () => {

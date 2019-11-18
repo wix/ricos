@@ -248,6 +248,28 @@ export const config = {
         console.log('consumer uploaded ', videoToUpload);
       }, 500);
     },
+    // handleFileUpload: (file, updateEntity, removeEntity) => {
+    //   console.log('consumer wants to upload custom video', file);
+    //   const videoWithAbsoluteUrl = {
+    //     url: 'http://mirrors.standaloneinstaller.com/video-sample/jellyfish-25-mbps-hd-hevc.mp4',
+    //   };
+    //   const videoWithRelativeUrl = {
+    //     pathname: 'video/441c23_84f5c058e5e4479ab9e626cd5560a21b/file',
+    //     thumbnail: {
+    //       pathname: 'media/441c23_84f5c058e5e4479ab9e626cd5560a21bf000.jpg',
+    //       height: 1080,
+    //       width: 1920,
+    //     },
+    //   };
+    //   // You can provide either absolute or relative URL.
+    //   // If relative URL is provided, a function 'getVideoUrl' will be invoked to form a full URL.
+    //   const videoToUpload = videoWithAbsoluteUrl;
+    //   setTimeout(() => {
+    //     updateEntity({ data: videoToUpload });
+    //     //updateEntity({ error: { msg: 'Upload Failed' } });
+    //     console.log('consumer uploaded ', videoToUpload);
+    //   }, 500);
+    // },
     enableCustomUploadOnMobile: true,
     // Function is invoked when rendering video which has relative URL.
     // You should take the pathname and form a full URL.
