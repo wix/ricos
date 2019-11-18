@@ -201,17 +201,14 @@ export default function createToolbar({
       const offsetParentTop = offsetParentRect.top;
       const offsetParentLeft = offsetParentRect.left;
       const boundingRect = pubsub.get('boundingRect');
+      const top = boundingRect.top - toolbarHeight - toolbarOffset - offsetParentTop + y;
+      let left =
+        boundingRect.left + boundingRect.width / 2 - offsetParentLeft - toolbarWidth / 2 + x;
+      const maxLeft = boundingRect.right - toolbarWidth;
+      left = left >= 0 && left <= maxLeft ? left : left < 0 ? 0 : maxLeft;
       return {
-        '--offset-top': `${boundingRect.top -
-          toolbarHeight -
-          toolbarOffset -
-          offsetParentTop +
-          y}px`,
-        '--offset-left': `${boundingRect.left +
-          boundingRect.width / 2 -
-          offsetParentLeft -
-          toolbarWidth / 2 +
-          x}px`,
+        '--offset-top': `${top}px`,
+        '--offset-left': `${left}px`,
         transform: 'scale(1)',
       };
     }
