@@ -28,6 +28,10 @@ The `width` and `height` are expected to be integers. They serve as **initial** 
 
 The `toolbar` setting refers to plugin functionality toolbar. Currently, it exposes a single field `hidden` which is expected to be an array of toolbar button `keynames` to be removed from toolbar.
 
+#### `defaultData`
+
+The `defaultData` setting refers to plugins functionality. It enables to set default data configuration to each plugin and it expects an content state data object.
+
 ### HTML Plugin Settings
 
 | setting key     | description                                                                                                | default value | is required? | editor/viewer config |
@@ -55,12 +59,12 @@ The `toolbar` setting refers to plugin functionality toolbar. Currently, it expo
 
 ### Mentions Plugin Settings
 
-| setting key      | description                                                                                | default value | is required? | editor/viewer config |
-| ---------------- | ------------------------------------------------------------------------------------------ | ------------- | ------------ | -------------------- |
-| `getMentions`    | function that retrieves a list of suggestions according to provided search query parameter | none          | Yes          | both                 |
-| `onMentionClick` | optional Mention click handler                                                             | none          | No           | both                 |
-| `getMentionLink` | given the mention return link for it                                                       | none          | Yes          | both                 |
-| `visibleItemsBeforeOverflow` | boolean how many items should be visible before overflowing                    | none          | No           | editor               |
+| setting key                  | description                                                                                | default value | is required? | editor/viewer config |
+| ---------------------------- | ------------------------------------------------------------------------------------------ | ------------- | ------------ | -------------------- |
+| `getMentions`                | function that retrieves a list of suggestions according to provided search query parameter | none          | Yes          | both                 |
+| `onMentionClick`             | optional Mention click handler                                                             | none          | No           | both                 |
+| `getMentionLink`             | given the mention return link for it                                                       | none          | Yes          | both                 |
+| `visibleItemsBeforeOverflow` | boolean how many items should be visible before overflowing                                | none          | No           | editor               |
 
 ### Giphy Plugin Settings
 

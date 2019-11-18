@@ -148,59 +148,16 @@ const uiSettings = {
 
 export const config = {
   [GALLERY_TYPE]: {
-    // defaultData: {
-    //   alignment: 'left', ////IF ALIGNMENT LEFT || RIGHT NEEDS TO HAVE SIZE AND LAYOUT: SMALL
-    //   size: 'small',
-    //   layout: 'small',
-    //   styles: {
-    //     galleryLayout: 1,
-    //     gallerySizeType: 'px',
-    //     gallerySizePx: 300,
-    //     galleryMargin: 0,
-    //     oneRow: false,
-    //     cubeRatio: 1,
-    //     galleryThumbnailsAlignment: 'none',
-    //     isVertical: false,
-    //     imageMargin: 20,
-    //     thumbnailSpacings: 0,
-    //     cubeType: 'fill',
-    //     enableInfiniteScroll: true,
-    //     titlePlacement: 'SHOW_ON_HOVER',
-    //     allowHover: false,
-    //     itemClick: 'link',
-    //     fullscreen: false,
-    //     showArrows: false,
-    //     gridStyle: 0,
-    //     loveButton: false,
-    //     allowSocial: false,
-    //     allowDownload: false,
-    //     mobileSwipeAnimation: 'NO_EFFECT',
-    //     thumbnailSize: 120,
-    //     gotStyleParams: true,
-    //     cubeImages: false,
-    //     groupSize: 1,
-    //     groupTypes: '1',
-    //     fixedColumns: 0,
-    //     numberOfImagesPerRow: 0,
-    //     hasThumbnails: false,
-    //     enableScroll: true,
-    //     isGrid: false,
-    //     isSlider: false,
-    //     isColumns: false,
-    //     isSlideshow: false,
-    //     cropOnlyFill: false,
-    //   },
-    // },
     scrollingElement: () =>
       typeof window !== 'undefined' && document.getElementsByClassName('editor-example')[0],
   },
   [IMAGE_TYPE]: {
     // defaultData: {
-    //   alignment: 'left',
-    //   link: {
-    //     url: 'wix.com',
-    //     target: '_blank',
-    //     rel: 'nofollow',
+    //   config: {
+    //     alignment: 'left',
+    //     size: 'content',
+    //     showTitle: true,
+    //     showDescription: true,
     //   },
     // },
     imageEditorWixSettings: {
@@ -219,13 +176,6 @@ export const config = {
     },
   },
   [HTML_TYPE]: {
-    // defaultData: {
-    //   alignment: 'left',
-    //   width: 600,
-    //   height: 700,
-    //   src: '<div></div>', //||   src: 'www.wix.com',
-    //   srcType: 'html', //||   srcType: 'url',
-    // },
     htmlIframeSrc: `${getBaseUrl()}/static/html-plugin-embed.html`,
     minWidth: 35,
     maxWidth: 740,
@@ -280,15 +230,9 @@ export const config = {
     // defaultData: { alignment: 'left' }, //IF ALIGNMENT LEFT || RIGHT NEEDS TO HAVE SIZE: SMALL
   },
   [CODE_BLOCK_TYPE]: {},
-  [DIVIDER_TYPE]: {
-    // defaultData: {
-    //   size: 'medium',
-    //   type: 'double',
-    // },
-  },
+  [DIVIDER_TYPE]: {},
   // [EXTERNAL_EMOJI_TYPE]: {},
   [VIDEO_TYPE]: {
-    // defaultData: { alignment: 'left', size: 'small' }, //IF ALIGNMENT LEFT || RIGHT NEEDS TO HAVE SIZE: SMALL
     toolbar: {
       hidden: [],
     },
@@ -321,11 +265,9 @@ export const config = {
     getVideoUrl: src => `https://video.wixstatic.com/${src.pathname}`,
   },
   [GIPHY_TYPE]: {
-    // defaultData: { alignment: 'left', size: 'small' }, //IF ALIGNMENT LEFT || RIGHT NEEDS TO HAVE SIZE: SMALL
     giphySdkApiKey: process.env.GIPHY_API_KEY,
   },
   [MAP_TYPE]: {
-    // defaultData: { alignment: 'left', width: 200, height: 500, size: 'small' }, //IF ALIGNMENT LEFT || RIGHT NEEDS TO HAVE SIZE: SMALL
     googleMapApiKey: process.env.GOOGLE_MAPS_API_KEY,
     minWidth: 100,
     maxWidth: 740,
@@ -345,7 +287,6 @@ export const config = {
     },
   },
   [FILE_UPLOAD_TYPE]: {
-    // defaultData: { alignment: 'left' },
     accept: '*',
     onFileSelected: (file, updateEntity) => {
       const name = file.name;

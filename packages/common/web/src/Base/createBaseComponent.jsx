@@ -66,32 +66,10 @@ const createBaseComponent = ({
       const { getData } = props.blockProps;
       const data = getData() || { config: DEFAULTS };
       if (settings?.defaultData) {
-        const defaultData = this.createDefaultData(settings.defaultData);
-        if (defaultData) {
-          merge(data, defaultData);
-        }
+        merge(data, settings.defaultData);
       }
       return data;
     }
-
-    createDefaultData = defaultData => {
-      // Divider type
-      if (defaultData.type) {
-        const { type, ...rest } = defaultData;
-        return { type, config: { ...rest } };
-      }
-      // Html src
-      if (defaultData.src && defaultData.srcType) {
-        const { src, srcType, ...rest } = defaultData;
-        return { src, srcType, config: { ...rest } };
-      }
-      // Gallery styles
-      if (defaultData.styles) {
-        const { styles, ...rest } = defaultData;
-        return { styles, config: { ...rest } };
-      }
-      return { config: defaultData };
-    };
 
     componentDidMount() {
       this.updateComponent();
