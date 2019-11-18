@@ -75,13 +75,15 @@ export const typeMappers = [
 
 export const config = {
   [GALLERY_TYPE]: {
-    scrollingElement: () => typeof window !== 'undefined' && document.getElementsByClassName('viewer-example')[0],
+    scrollingElement: () =>
+      typeof window !== 'undefined' && document.getElementsByClassName('viewer-example')[0],
   },
   [HEADERS_MARKDOWN_TYPE]: {
     hideMarkdown: true,
   },
   [GIPHY_TYPE]: {
     giphySdkApiKey: process.env.GIPHY_API_KEY,
+    sizes: { desktop: 'original', mobile: 'original' },
   },
   [HTML_TYPE]: {
     htmlIframeSrc: `${getBaseUrl()}/static/html-plugin-embed.html`,
