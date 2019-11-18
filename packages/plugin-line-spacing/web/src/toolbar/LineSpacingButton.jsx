@@ -84,7 +84,7 @@ export default class LineSpacingButton extends Component {
     const { theme, isMobile, t, tabIndex, defaultSpacing, toolbar } = this.props;
     const { isPanelOpen, spacing, panelTop, panelLeft } = this.state;
     const { styles } = this;
-    const icon = get(toolbar, 'icons.line-spacing');
+    const icon = get(toolbar, 'icons.line-spacing', LineSpacingIcon);
     const modalStyle = isMobile
       ? { left: 0, bottom: 0, right: 0 }
       : {
@@ -101,7 +101,7 @@ export default class LineSpacingButton extends Component {
         tooltipText={t('LineSpacingButton_Tooltip')}
         dataHook={'LineSpacingButton'}
         tabIndex={tabIndex}
-        icon={icon || LineSpacingIcon}
+        icon={icon}
         ref={ref => (this.buttonRef = ref)}
       >
         <Modal

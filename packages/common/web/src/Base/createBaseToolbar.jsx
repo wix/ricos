@@ -255,7 +255,7 @@ export default function createToolbar({
     /*eslint-disable complexity*/
     renderButton = (button, key, themedStyle, separatorClassNames, tabIndex) => {
       const { alignment, size } = this.state;
-      const icons = get(settings, 'toolbar.icons') || {};
+      const icons = get(settings, 'toolbar.icons', {});
       const buttonByKey = BUTTONS_BY_KEY[button.type];
       const Button = (buttonByKey && buttonByKey(icons[button.keyName])) || BaseToolbarButton;
       const buttonProps = {

@@ -6,7 +6,7 @@ import { get } from 'lodash';
 
 export default ({ styles, settings }) => {
   const dropdownOptions = getDropdownOptions(styles);
-  const icons = get(settings, 'toolbar.icons') || {};
+  const icons = get(settings, 'toolbar.icons', {});
   return [
     {
       keyName: 'type',

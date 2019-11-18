@@ -43,7 +43,7 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
     createToolbar({
       buttons: {
         all: config.toolbar.InlineButtons,
-        hidden: get(settings, 'toolbar.hidden') || [],
+        hidden: get(settings, 'toolbar.hidden', []),
       },
       theme: { ...toolbarTheme, ...config.theme },
       pubsub,

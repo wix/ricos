@@ -42,7 +42,7 @@
   - `video`
     - [#443](https://github.com/wix-incubator/rich-content/pull/443) async url resolving support
   - `editor`
-    - [#462](https://github.com/wix-incubator/rich-content/pull/462) custom icons for all the button
+    - [#462](https://github.com/wix-incubator/rich-content/pull/462) custom icons for all the buttons
     - [#444](https://github.com/wix-incubator/rich-content/pull/444) file upload support
     - [#449](https://github.com/wix-incubator/rich-content/pull/449) force video mime type for uploads
     - [#451](https://github.com/wix-incubator/rich-content/pull/451) uses unique file input id
