@@ -226,9 +226,7 @@ export const config = {
   [LINK_TYPE]: {
     onClick: (event, url) => console.log('link clicked!', url),
   },
-  [SOUND_CLOUD_TYPE]: {
-    // defaultData: { alignment: 'left' }, //IF ALIGNMENT LEFT || RIGHT NEEDS TO HAVE SIZE: SMALL
-  },
+  [SOUND_CLOUD_TYPE]: {},
   [CODE_BLOCK_TYPE]: {},
   [DIVIDER_TYPE]: {},
   // [EXTERNAL_EMOJI_TYPE]: {},

@@ -14,6 +14,10 @@
     Click to see more.
   </summary>
 
+### :rocket: New Feature
+- `editor`
+  - [#473](https://github.com/wix-incubator/rich-content/pull/473) consumers now able to set plugin defaults
+
 </details>
 <hr/>
 
