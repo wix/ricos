@@ -1,5 +1,5 @@
-import { BUTTONS, PluginSettingsIcon, getModalStyles } from 'wix-rich-content-common';
 import { get, isEmpty } from 'lodash';
+import { BUTTONS, PluginSettingsIcon, getModalStyles } from 'wix-rich-content-common';
 import { Modals } from '../modals';
 import { MediaReplaceIcon, ImageEditorIcon } from '../icons';
 
@@ -14,7 +14,7 @@ export default ({
   imageEditorWixSettings,
   settings,
 }) => {
-  const icons = get(settings, 'toolbar.icons') || {};
+  const icons = get(settings, 'toolbar.icons', {});
   const modalStyles = getModalStyles({ isMobile });
   const imageEditorStyles = getModalStyles({
     customStyles: { content: { maxWidth: '100%', background: 'transparent' } },

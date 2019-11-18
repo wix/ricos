@@ -11,7 +11,7 @@ import {
 export default ({ helpers, t, settings, isMobile }) => {
   //apply the extended input modal styles if handleFileSelection is avilable in plugin config
   //& on mobile if enableCustomUploadOnMobile is set to true, otherwise the normal modal styles is applied
-  const icon = get(settings, 'toolbar.icons.Video');
+  const icon = get(settings, 'toolbar.icons.Video', InsertPluginIcon);
   const customStyles =
     (!isMobile || settings.enableCustomUploadOnMobile) &&
     (settings.handleFileSelection || settings.handleFileUpload)
@@ -22,7 +22,7 @@ export default ({ helpers, t, settings, isMobile }) => {
       type: 'modal',
       name: 'Video',
       tooltipText: t('VideoPlugin_InsertButton_Tooltip'),
-      Icon: icon || InsertPluginIcon,
+      Icon: icon,
       componentData: DEFAULTS,
       toolbars: [TOOLBARS.FOOTER, TOOLBARS.SIDE],
       modalElement: decorateComponentWithProps(VideoSelectionInputModal, settings),

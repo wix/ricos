@@ -1,17 +1,17 @@
+import { get } from 'lodash';
 import {
   BUTTONS,
   getModalStyles,
   DECORATION_MODE,
   decorateComponentWithProps,
 } from 'wix-rich-content-common';
-import { get } from 'lodash';
 import { MediaReplaceIcon } from '../icons';
 import GiphyApiInputModal from './giphyApiInputModal';
 import { MobileFullScreenCustomStyle, DesktopFlyOutModalStyles } from '../constants';
 import Arrow from './arrow';
 
 export default ({ t, settings, isMobile }) => {
-  const icons = get(settings, 'toolbar.icons') || {};
+  const icons = get(settings, 'toolbar.icons', {});
   const modalStyles = isMobile
     ? getModalStyles({ customStyles: MobileFullScreenCustomStyle, fullScreen: true, isMobile })
     : null;

@@ -1,3 +1,4 @@
+import { get } from 'lodash';
 import {
   BUTTONS,
   getModalStyles,
@@ -5,7 +6,6 @@ import {
   SizeSmallCenterIcon,
 } from 'wix-rich-content-common';
 import { MapSettingsModal } from './MapSettingsModal';
-import { get } from 'lodash';
 import { DEFAULTS } from '../constants';
 
 const getAlignmentButtonPropsFn = getEditorBounds => ({ componentData }) => {
@@ -19,7 +19,7 @@ const getAlignmentButtonPropsFn = getEditorBounds => ({ componentData }) => {
 
 export default ({ settings, t, helpers, getEditorBounds, isMobile }) => {
   const { maxWidth, minWidth, maxHeight, minHeight } = settings;
-  const icons = get(settings, 'toolbar.icons') || {};
+  const icons = get(settings, 'toolbar.icons', {});
   return [
     {
       type: BUTTONS.WIDTH,

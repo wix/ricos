@@ -1,10 +1,10 @@
+import { get } from 'lodash';
 import { BUTTONS, getModalStyles } from 'wix-rich-content-common';
 import { Modals } from '../modals';
 import { MediaReplaceIcon } from '../icons';
-import { get } from 'lodash';
 
 export default ({ t, isMobile, settings }) => {
-  const icons = get(settings, 'toolbar.icons') || {};
+  const icons = get(settings, 'toolbar.icons', {});
   return [
     { keyName: 'sizeSmallCenter', type: BUTTONS.SIZE_SMALL_CENTER, mobile: false },
     { keyName: 'sizeContent', type: BUTTONS.SIZE_CONTENT, mobile: false },

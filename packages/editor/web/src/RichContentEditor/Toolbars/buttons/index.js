@@ -26,7 +26,7 @@ export const MobileTextButtonList = [
   'UnorderedList',
 ];
 
-export { textAlignmentButton } from './TextAlignmentButton';
+export { default as textAlignmentButton } from './TextAlignmentButton';
 export { default as AddPluginButton } from './AddPluginButton';
 export {
   boldButton,

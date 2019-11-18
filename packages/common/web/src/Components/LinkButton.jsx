@@ -3,10 +3,9 @@ import PropTypes from 'prop-types';
 import InlineToolbarButton from './InlineToolbarButton';
 import { LinkIcon } from '../Icons';
 
-const LinkButton = props => {
-  const { icon, ...otherProps } = props;
-  return <InlineToolbarButton icon={icon || LinkIcon} dataHook={'LinkButton'} {...otherProps} />;
-};
+const LinkButton = ({ icon, ...otherProps }) => (
+  <InlineToolbarButton icon={icon || LinkIcon} dataHook={'LinkButton'} {...otherProps} />
+);
 
 LinkButton.propTypes = {
   onClick: PropTypes.func.isRequired,

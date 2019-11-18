@@ -1,12 +1,8 @@
 {
   "editor.formatOnSave": true,
-  "prettier.eslintIntegration": true,
-  "prettier.requireConfig": true,
   "prettier.disableLanguages": ["vue", "css", "scss", "sass", "markdown"],
   "[json]": {
     "editor.formatOnSave": false
   },
-  "eslint.workingDirectories": [
-    "**/src/**"
-  ]
+  "eslint.workingDirectories": ["**/src/**"]
 }

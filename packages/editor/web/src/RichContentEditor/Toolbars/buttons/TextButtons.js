@@ -64,18 +64,6 @@ export const blockquoteButton = icon =>
     tooltipTextKey: 'QuoteButton_Tooltip',
   });
 
-// const alignButtonFactory = (alignment, defaultIcon, tooltipTextKey) =>
-//   icon => createTextAlignmentButton({
-//     alignment,
-//     Icon: icon || defaultIcon,
-//     tooltipTextKey,
-//   });
-
-// export const alignTextLeftButton = alignButtonFactory('left', AlignLeftIcon, 'AlignTextLeftButton_Tooltip');
-// export const alignTextCenterButton = alignButtonFactory('center', AlignTextCenterIcon, 'AlignTextCenterButton_Tooltip');
-// export const alignTextRightButton = alignButtonFactory('right', AlignRightIcon, 'AlignTextRightButton_Tooltip');
-// export const alignTextJustifyButton = alignButtonFactory('justify', AlignJustifyIcon, 'AlignTextJustifyButton_Tooltip');
-
 export const alignTextLeftButton = icon =>
   createTextAlignmentButton({
     alignment: 'left',

@@ -42,7 +42,7 @@ export default ({ settings = {}, getEditorBounds }) => {
     maxHeight = MAX_HEIGHT,
     minHeight = MIN_HEIGHT,
   } = settings;
-  const icons = get(settings, 'toolbar.icons') || {};
+  const icons = get(settings, 'toolbar.icons', {});
   return [
     {
       type: BUTTONS.INLINE_PANEL,

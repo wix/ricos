@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { get } from 'lodash';
 import { InlineToolbarButton } from 'wix-rich-content-common';
 import { CODE_BLOCK_TYPE } from '../types';
 import { hasBlockType, toggleBlockTypeAndEnsureSpaces } from './blockTypeModifiers';
 import { CodeBlockIcon } from '../icons';
-import { get } from 'lodash';
 
 export default class TextCodeBlockButton extends Component {
   get isActive() {

@@ -1,3 +1,4 @@
+import { get } from 'lodash';
 import {
   BUTTONS,
   getModalStyles,
@@ -6,7 +7,6 @@ import {
 } from 'wix-rich-content-common';
 import { Modals } from '../modals';
 import ButtonInputModal from './buttonInputModal';
-import { get } from 'lodash';
 
 const DesktopCustomModalStyles = {
   content: {

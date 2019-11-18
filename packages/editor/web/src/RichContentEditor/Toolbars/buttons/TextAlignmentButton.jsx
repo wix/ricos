@@ -13,7 +13,6 @@ import {
   alignTextJustifyButton,
 } from './TextButtons';
 import createTextDropdownButton from './utils/createTextDropdownButton';
-// import { TextAlignmentButton } from '.';
 
 const activeIcon = (textAlignment, icons) => {
   const { AlignLeft, AlignCenter, AlignRight, AlignJustify } = icons;
@@ -30,7 +29,7 @@ const activeIcon = (textAlignment, icons) => {
   }
 };
 
-export const textAlignmentButton = icons => {
+export default icons => {
   const { AlignLeft, AlignCenter, AlignRight, AlignJustify } = icons;
   return createTextDropdownButton({
     buttons: [
