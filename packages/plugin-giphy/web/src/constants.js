@@ -10,6 +10,8 @@ export const DEFAULTS = {
   },
 };
 
+export const DEFAULT_RESOLUTION = { desktop: 'original', mobile: 'original' };
+
 export const MobileFullScreenCustomStyle = {
   overlay: {
     backgroundColor: 'transparent',
