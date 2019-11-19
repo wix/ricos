@@ -159,6 +159,7 @@ export const config = {
       metaSiteId: '538fa6c6-c953-4cdd-86c4-4b869aecf980',
       mediaRoot: 'some-mediaRoot',
     },
+    onImageEditorOpen: () => console.log('Media Studio Launched'),
   },
   [HASHTAG_TYPE]: {
     createHref: decoratedText => `/search/posts?query=${encodeURIComponent('#')}${decoratedText}`,
