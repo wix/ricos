@@ -73,9 +73,14 @@ export const typeMappers = [
   giphyTypeMapper,
 ];
 
+const uiSettings = {
+  // disableRightClick: true,
+};
+
 export const config = {
   [GALLERY_TYPE]: {
-    scrollingElement: () => typeof window !== 'undefined' && document.getElementsByClassName('viewer-example')[0],
+    scrollingElement: () =>
+      typeof window !== 'undefined' && document.getElementsByClassName('viewer-example')[0],
   },
   [HEADERS_MARKDOWN_TYPE]: {
     hideMarkdown: true,
@@ -102,6 +107,7 @@ export const config = {
         )
       ),
   },
+  uiSettings,
 };
 
 export const getInlineStyleMappers = raw => [textColorInlineStyleMapper(config, raw)];

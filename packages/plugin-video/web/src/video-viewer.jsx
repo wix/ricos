@@ -68,6 +68,7 @@ class VideoViewer extends Component {
         <ReactPlayerWrapper
           className={classNames(this.styles.video_player)}
           data-loaded={isLoaded}
+          onContextMenu={this.context.disableRightClick ? e => e.preventDefault(e) : undefined}
           {...props}
         />
       </ViewportRenderer>

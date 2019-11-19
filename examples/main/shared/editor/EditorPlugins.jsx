@@ -146,6 +146,7 @@ const uiSettings = {
     nofollowRelToggleVisibilityFn: () => true,
     dropDown: getLinkPanelDropDownConfig(),
   },
+  // disableRightClick: true,
 };
 
 export const config = {

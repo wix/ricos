@@ -35,6 +35,7 @@ const createBaseComponent = ({
   getEditorBounds,
   onOverlayClick,
   onAtomicBlockFocus,
+  disableRightClick,
 }) => {
   class WrappedComponent extends Component {
     static displayName = createHocName('BaseComponent', PluginComponent);
@@ -323,6 +324,7 @@ const createBaseComponent = ({
           className={ContainerClassNames}
           data-focus={isActive}
           onDragStart={onDragStart}
+          onContextMenu={disableRightClick ? e => e.preventDefault(e) : undefined}
           {...decorationProps}
         >
           {!isNil(link) ? (

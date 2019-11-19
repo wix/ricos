@@ -188,6 +188,8 @@ class GalleryViewer extends React.Component {
         ref={elem => (this.container = elem)}
         className={this.styles.gallery_container}
         data-hook="galleryViewer"
+        role="none"
+        onContextMenu={this.context.disableRightClick ? e => e.preventDefault(e) : undefined}
       >
         <ProGallery
           items={items}

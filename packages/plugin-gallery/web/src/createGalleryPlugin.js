@@ -22,6 +22,7 @@ const createGalleryPlugin = (config = {}) => {
     helpers,
     anchorTarget,
     relValue,
+    disableRightClick: config?.uiSettings?.disableRightClick,
     ...rest,
   });
 };
