@@ -14,6 +14,9 @@
     Click to see more.
   </summary>
   
+  ### :rocket: New Feature
+  - `plugins`
+    - [#477](https://github.com/wix-incubator/rich-content/pull/477) `disableRightClick` configuration enables right click protection
   ### :bug: Bug Fix
   - `gallery`
     - [#469](https://github.com/wix-incubator/rich-content/pull/469) styles reference
