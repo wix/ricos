@@ -31,6 +31,8 @@
   - [#481](https://github.com/wix-incubator/rich-content/pull/481) fixed layout transition behavior
 - `giphy`
   - [#485](https://github.com/wix-incubator/rich-content/pull/485) giphy-viewer: `data.config.sizes` fallbacks to empty object
+- `image`
+  - [#478](https://github.com/wix-incubator/rich-content/pull/478) fixed image alignment strategy
   
 </details>
 <hr/>
