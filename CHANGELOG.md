@@ -15,6 +15,8 @@
   </summary>
   
   ### :rocket: New Feature
+  - `image`
+    - [#476](https://github.com/wix-incubator/rich-content/pull/476) `config.onImageEditorOpen` is invoked when media studio is launched
   - `plugins`
     - [#477](https://github.com/wix-incubator/rich-content/pull/477) `disableRightClick` configuration enables right click protection
   ### :bug: Bug Fix
@@ -133,6 +135,12 @@
 - `mentions`
   - [#387](https://github.com/wix-incubator/rich-content/pull/387) data validation schema added
 <hr/>
+
+## 5.1.15 (Hotfix - Nov 19, 2019)
+### :rocket: New Feature
+- `image`
+  - [#476](https://github.com/wix-incubator/rich-content/pull/476) `config.onImageEditorOpen` is invoked when media studio is launched
+<hr />
 
 ## 5.1.14 (Hotfix - Nov 14, 2019)
 ### :house: Internal
