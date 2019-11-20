@@ -3,7 +3,7 @@ import { BUTTONS } from 'wix-rich-content-common';
 import { MediaReplaceIcon } from '../icons';
 
 export default ({ settings, t }) => {
-  const icon = get(settings, 'toolbar.icons', {});
+  const icon = get(settings, 'toolbar.icons.replace', MediaReplaceIcon);
   return [
     { keyName: 'sizeSmallLeft', type: BUTTONS.SIZE_SMALL_LEFT, mobile: false },
     { keyName: 'sizeSmallCenter', type: BUTTONS.SIZE_SMALL_CENTER, mobile: false },
@@ -12,7 +12,7 @@ export default ({ settings, t }) => {
     {
       keyName: 'replace',
       type: BUTTONS.FILES,
-      icon: icon.replace || MediaReplaceIcon,
+      icon,
       settings,
       tooltipTextKey: t('FileUploadReplaceButton_tooltip'),
     },

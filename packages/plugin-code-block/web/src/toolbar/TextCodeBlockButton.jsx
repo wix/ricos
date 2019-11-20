@@ -13,7 +13,7 @@ export default class TextCodeBlockButton extends Component {
 
   render() {
     const { theme, isMobile, t, tabIndex, setEditorState, getEditorState, config } = this.props;
-    const icon = get(config, 'code-block.toolbar.icons.codeBlock');
+    const icon = get(config, 'code-block.toolbar.icons.codeBlock', CodeBlockIcon);
     return (
       <InlineToolbarButton
         onClick={() =>
@@ -25,7 +25,7 @@ export default class TextCodeBlockButton extends Component {
         tooltipText={t('TextCodeBlockButton_Tooltip')}
         dataHook={'TextCodeBlockButton'}
         tabIndex={tabIndex}
-        icon={icon || CodeBlockIcon}
+        icon={icon}
       />
     );
   }

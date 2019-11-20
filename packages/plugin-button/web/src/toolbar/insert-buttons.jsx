@@ -4,13 +4,13 @@ import { InsertPluginIcon } from '../icons';
 import { DEFAULTS } from '../constants';
 
 export default ({ helpers, t, settings }) => {
-  const icon = get(settings, 'toolbar.icons.Button');
+  const Icon = get(settings, 'toolbar.icons.Button', InsertPluginIcon);
   return [
     {
       name: 'Button',
       tooltipText: t('ButtonPlugin_InsertButton_Tooltip'),
       toolbars: [TOOLBARS.FOOTER, TOOLBARS.SIDE],
-      Icon: icon || InsertPluginIcon,
+      Icon,
       componentData: DEFAULTS,
       helpers,
       t,

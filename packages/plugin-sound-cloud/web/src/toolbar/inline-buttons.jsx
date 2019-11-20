@@ -4,7 +4,7 @@ import { Modals } from '../modals';
 import { MediaReplaceIcon } from '../icons';
 
 export default ({ t, isMobile, settings }) => {
-  const icons = get(settings, 'toolbar.icons', {});
+  const icon = get(settings, 'toolbar.icons.replace', MediaReplaceIcon);
   return [
     { keyName: 'sizeSmallCenter', type: BUTTONS.SIZE_SMALL_CENTER, mobile: false },
     { keyName: 'sizeContent', type: BUTTONS.SIZE_CONTENT, mobile: false },
@@ -16,7 +16,7 @@ export default ({ t, isMobile, settings }) => {
     {
       keyName: 'replace',
       type: BUTTONS.EXTERNAL_MODAL,
-      icon: icons.replace || MediaReplaceIcon,
+      icon,
       modalName: Modals.SOUND_CLOUD_URL_INPUT,
       modalStyles: getModalStyles({ fullScreen: false, isMobile }),
       mobile: true,
