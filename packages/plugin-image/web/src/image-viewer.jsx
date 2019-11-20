@@ -60,7 +60,7 @@ class ImageViewer extends React.Component {
         requiredHeight = this.calculateHeight(SEO_IMAGE_WIDTH, src);
       } else if (this.state.container) {
         const { width } = this.state.container.getBoundingClientRect();
-        requiredWidth = width || src.width || 1;
+        requiredWidth = width || src?.width || 1;
         if (this.context.isMobile) {
           //adjust the image width to viewport scaling and device pixel ratio
           requiredWidth *= (!isSSR() && window.devicePixelRatio) || 1;
@@ -204,6 +204,8 @@ class ImageViewer extends React.Component {
     onExpand && onExpand(this.props.entityIndex);
   };
 
+  handleContextMenu = e => this.context.disableRightClick && e.preventDefault();
+
   render() {
     this.styles = this.styles || mergeStyles({ styles, theme: this.context.theme });
     const { componentData, className, isFocused, readOnly, settings, defaultCaption } = this.props;
@@ -234,6 +236,7 @@ class ImageViewer extends React.Component {
         className={itemClassName}
         onKeyDown={e => this.onKeyDown(e, this.onClick)}
         ref={e => this.handleRef(e)}
+        onContextMenu={this.handleContextMenu}
       >
         <div className={this.styles.imageWrapper} role="img" aria-label={metadata.alt}>
           {imageSrc && this.renderImage(imageClassName, imageSrc, metadata.alt, imageProps)}

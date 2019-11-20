@@ -15,9 +15,17 @@
   </summary>
   
   ### :rocket: New Feature
+  - `editor`
+    - [#473](https://github.com/wix-incubator/rich-content/pull/473) enable consumers to set plugin defaults
+  - `image`
+    - [#476](https://github.com/wix-incubator/rich-content/pull/476) `config.onImageEditorOpen` is invoked when media studio is launched
+  - `plugins`
+    - [#477](https://github.com/wix-incubator/rich-content/pull/477) `uiSettings.disableRightClick` enables right click protection   
   - `giphy`
-    - [#474](https://github.com/wix-incubator/rich-content/pull/474) giphy plugin supports mp4 gifs and lower res gifs
+    - [#474](https://github.com/wix-incubator/rich-content/pull/474) mp4 gifs and lower res gifs support
   ### :bug: Bug Fix
+  - `preview`
+    -[#479](https://github.com/wix-incubator/rich-content/pull/479) seeFullPost default style fixed
   - `gallery`
     - [#469](https://github.com/wix-incubator/rich-content/pull/469) styles reference
   - `fullscreen`
@@ -27,6 +35,7 @@
   ### :house: Internal
   - `gallery`
     - [#467](https://github.com/wix-incubator/rich-content/pull/467) `pro-gallery` updated to `v1.5.33`
+
 </details>
 <hr/>
 
@@ -133,6 +142,12 @@
 - `mentions`
   - [#387](https://github.com/wix-incubator/rich-content/pull/387) data validation schema added
 <hr/>
+
+## 5.1.15 (Hotfix - Nov 19, 2019)
+### :rocket: New Feature
+- `image`
+  - [#476](https://github.com/wix-incubator/rich-content/pull/476) `config.onImageEditorOpen` is invoked when media studio is launched
+<hr />
 
 ## 5.1.14 (Hotfix - Nov 14, 2019)
 ### :house: Internal

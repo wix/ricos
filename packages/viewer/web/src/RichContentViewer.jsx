@@ -58,6 +58,7 @@ class RichContentViewer extends Component {
       disabled,
       shouldRenderOptimizedImages,
       siteDomain,
+      disableRightClick: config?.uiSettings?.disableRightClick,
     };
   };
 

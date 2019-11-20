@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { findDOMNode } from 'react-dom';
-import { compact, isNil } from 'lodash';
+import { merge, compact, isNil } from 'lodash';
 import classNames from 'classnames';
 import createHocName from '../Utils/createHocName';
 import getDisplayName from '../Utils/getDisplayName';
@@ -35,6 +35,7 @@ const createBaseComponent = ({
   getEditorBounds,
   onOverlayClick,
   onAtomicBlockFocus,
+  disableRightClick,
 }) => {
   class WrappedComponent extends Component {
     static displayName = createHocName('BaseComponent', PluginComponent);
@@ -51,17 +52,26 @@ const createBaseComponent = ({
     }
 
     stateFromProps(props) {
-      const { getData, readOnly } = props.blockProps;
+      const { readOnly } = props.blockProps;
       const initialState = pubsub.get('initialState_' + props.block.getKey());
       if (initialState) {
         //reset the initial state
         pubsub.set('initialState_' + props.block.getKey(), undefined);
       }
       return {
-        componentData: getData() || { config: DEFAULTS },
+        componentData: this.getData(props),
         readOnly: !!readOnly,
         componentState: initialState || {},
       };
+    }
+
+    getData(props) {
+      const { getData } = props.blockProps;
+      const data = getData() || { config: DEFAULTS };
+      if (settings?.defaultData) {
+        merge(data, settings.defaultData);
+      }
+      return data;
     }
 
     componentDidMount() {
@@ -234,6 +244,8 @@ const createBaseComponent = ({
       pubsub.set(batchUpdates);
     }
 
+    handleContextMenu = e => disableRightClick && e.preventDefault();
+
     render = () => {
       const { blockProps, className, selection, onDragStart } = this.props;
       const { componentData, readOnly } = this.state;
@@ -323,6 +335,7 @@ const createBaseComponent = ({
           className={ContainerClassNames}
           data-focus={isActive}
           onDragStart={onDragStart}
+          onContextMenu={this.handleContextMenu}
           {...decorationProps}
         >
           {!isNil(link) ? (

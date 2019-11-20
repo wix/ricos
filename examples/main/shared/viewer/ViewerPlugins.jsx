@@ -73,6 +73,10 @@ export const typeMappers = [
   giphyTypeMapper,
 ];
 
+const uiSettings = {
+  // disableRightClick: true,
+};
+
 export const config = {
   [GALLERY_TYPE]: {
     scrollingElement: () =>
@@ -104,6 +108,7 @@ export const config = {
         )
       ),
   },
+  uiSettings,
 };
 
 export const getInlineStyleMappers = raw => [textColorInlineStyleMapper(config, raw)];
