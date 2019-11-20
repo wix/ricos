@@ -14,7 +14,10 @@
     Click to see more.
   </summary>
   
-
+### :bug: Bug Fix
+- `video`
+  - [#480](https://github.com/wix-incubator/rich-content/pull/480) video file selection 
+  
   
 </details>
 <hr/>
