@@ -30,7 +30,7 @@ The `toolbar` setting refers to plugin functionality toolbar. Currently, it expo
 
 #### `defaultData`
 
-The `defaultData` setting refers to plugins functionality. It enables to set default data configuration to each plugin and it expects an content state data object.
+The `defaultData` setting enables consumers to set the default data for a plugin when it is inserted into the editor.  It is an object with the same fields as the plugins entity data.
 
 ### HTML Plugin Settings
 

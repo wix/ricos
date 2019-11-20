@@ -39,7 +39,7 @@ const createBaseComponent = ({
 
     constructor(props) {
       super(props);
-      this.state = { componentState: {}, ...this.stateFromProps(props, settings) };
+      this.state = { componentState: {}, ...this.stateFromProps(props) };
       this.styles = { ...styles, ...rtlIgnoredStyles };
     }
 
@@ -48,7 +48,7 @@ const createBaseComponent = ({
       this.setState(this.stateFromProps(nextProps));
     }
 
-    stateFromProps(props, settings) {
+    stateFromProps(props) {
       const { readOnly } = props.blockProps;
       const initialState = pubsub.get('initialState_' + props.block.getKey());
       if (initialState) {
@@ -56,13 +56,13 @@ const createBaseComponent = ({
         pubsub.set('initialState_' + props.block.getKey(), undefined);
       }
       return {
-        componentData: this.getData(props, settings),
+        componentData: this.getData(props),
         readOnly: !!readOnly,
         componentState: initialState || {},
       };
     }
 
-    getData(props, settings) {
+    getData(props) {
       const { getData } = props.blockProps;
       const data = getData() || { config: DEFAULTS };
       if (settings?.defaultData) {
