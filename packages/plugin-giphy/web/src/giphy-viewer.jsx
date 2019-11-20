@@ -26,7 +26,7 @@ class GiphyViewer extends Component {
     switch (size) {
       case 'original':
         return componentData.gif.originalMp4 || componentData.gif.originalUrl;
-      case '200KB':
+      case 'downsizedSmall':
         return componentData.gif.downsizedSmallMp4 || componentData.gif.originalUrl;
       default:
         return componentData.gif.originalUrl;

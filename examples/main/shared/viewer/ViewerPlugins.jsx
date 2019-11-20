@@ -83,7 +83,7 @@ export const config = {
   },
   [GIPHY_TYPE]: {
     giphySdkApiKey: process.env.GIPHY_API_KEY,
-    sizes: { desktop: 'original', mobile: 'original' },
+    sizes: { desktop: 'original', mobile: 'original' }, // original or downsizedSmall are supported
   },
   [HTML_TYPE]: {
     htmlIframeSrc: `${getBaseUrl()}/static/html-plugin-embed.html`,
