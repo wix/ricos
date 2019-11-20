@@ -99,7 +99,7 @@ export default class VideoSelectionInputModal extends Component {
     if (handleFileUpload) {
       handleChange = () =>
         handleFileUpload(
-          this.inputFile.value,
+          this.inputFile.files[0],
           ({ data, error }) => this.handleCustomVideoUpload({ data, error }),
           () => this.onCloseRequested()
         );
