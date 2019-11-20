@@ -235,6 +235,8 @@ const createBaseComponent = ({
       pubsub.set(batchUpdates);
     }
 
+    handleContextMenu = e => disableRightClick && e.preventDefault();
+
     render = () => {
       const { blockProps, className, selection, onDragStart } = this.props;
       const { componentData, readOnly } = this.state;
@@ -324,7 +326,7 @@ const createBaseComponent = ({
           className={ContainerClassNames}
           data-focus={isActive}
           onDragStart={onDragStart}
-          onContextMenu={disableRightClick ? e => e.preventDefault(e) : undefined}
+          onContextMenu={this.handleContextMenu}
           {...decorationProps}
         >
           {!isNil(link) ? (

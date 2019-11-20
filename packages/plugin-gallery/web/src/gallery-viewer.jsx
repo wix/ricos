@@ -176,6 +176,8 @@ class GalleryViewer extends React.Component {
     </Fragment>
   );
 
+  handleContextMenu = e => this.context.disableRightClick && e.preventDefault();
+
   render() {
     this.styles = this.styles || mergeStyles({ styles, theme: this.context.theme });
     const { scrollingElement, ...settings } = this.props.settings;
@@ -189,7 +191,7 @@ class GalleryViewer extends React.Component {
         className={this.styles.gallery_container}
         data-hook="galleryViewer"
         role="none"
-        onContextMenu={this.context.disableRightClick ? e => e.preventDefault(e) : undefined}
+        onContextMenu={this.handleContextMenu}
       >
         <ProGallery
           items={items}

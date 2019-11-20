@@ -204,6 +204,8 @@ class ImageViewer extends React.Component {
     onExpand && onExpand(this.props.entityIndex);
   };
 
+  handleContextMenu = e => this.context.disableRightClick && e.preventDefault();
+
   render() {
     this.styles = this.styles || mergeStyles({ styles, theme: this.context.theme });
     const { componentData, className, isFocused, readOnly, settings, defaultCaption } = this.props;
@@ -234,7 +236,7 @@ class ImageViewer extends React.Component {
         className={itemClassName}
         onKeyDown={e => this.onKeyDown(e, this.onClick)}
         ref={e => this.handleRef(e)}
-        onContextMenu={this.context.disableRightClick ? e => e.preventDefault(e) : undefined}
+        onContextMenu={this.handleContextMenu}
       >
         <div className={this.styles.imageWrapper} role="img" aria-label={metadata.alt}>
           {imageSrc && this.renderImage(imageClassName, imageSrc, metadata.alt, imageProps)}
