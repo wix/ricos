@@ -20,7 +20,6 @@ export const excludedExternals = [
 ];
 
 export const globals = {
-  'draft-js': 'Draft',
   classnames: 'classNames',
   'draft-js': 'Draft',
   'draft-js-code': 'CodeUtils',

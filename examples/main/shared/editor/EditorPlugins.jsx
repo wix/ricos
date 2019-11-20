@@ -22,6 +22,7 @@ import {
 import { createMapPlugin, MAP_TYPE } from 'wix-rich-content-plugin-map';
 import { createFileUploadPlugin, FILE_UPLOAD_TYPE } from 'wix-rich-content-plugin-file-upload';
 import { createTextColorPlugin, TEXT_COLOR_TYPE } from 'wix-rich-content-plugin-text-color';
+import createBlockDndPlugin from 'draft-js-drag-n-drop-plugin';
 import Highlighter from 'react-highlight-words';
 import casual from 'casual-browserify';
 
@@ -71,6 +72,7 @@ export const editorPlugins = [
   createMapPlugin,
   createFileUploadPlugin,
   createTextColorPlugin,
+  createBlockDndPlugin,
 ];
 
 const themeColors = {
@@ -167,6 +169,7 @@ export const config = {
       metaSiteId: '538fa6c6-c953-4cdd-86c4-4b869aecf980',
       mediaRoot: 'some-mediaRoot',
     },
+    onImageEditorOpen: () => console.log('Media Studio Launched'),
   },
   [HASHTAG_TYPE]: {
     createHref: decoratedText => `/search/posts?query=${encodeURIComponent('#')}${decoratedText}`,
@@ -257,6 +260,28 @@ export const config = {
         console.log('consumer uploaded ', videoToUpload);
       }, 500);
     },
+    // handleFileUpload: (file, updateEntity, removeEntity) => {
+    //   console.log('consumer wants to upload custom video', file);
+    //   const videoWithAbsoluteUrl = {
+    //     url: 'http://mirrors.standaloneinstaller.com/video-sample/jellyfish-25-mbps-hd-hevc.mp4',
+    //   };
+    //   const videoWithRelativeUrl = {
+    //     pathname: 'video/441c23_84f5c058e5e4479ab9e626cd5560a21b/file',
+    //     thumbnail: {
+    //       pathname: 'media/441c23_84f5c058e5e4479ab9e626cd5560a21bf000.jpg',
+    //       height: 1080,
+    //       width: 1920,
+    //     },
+    //   };
+    //   // You can provide either absolute or relative URL.
+    //   // If relative URL is provided, a function 'getVideoUrl' will be invoked to form a full URL.
+    //   const videoToUpload = videoWithAbsoluteUrl;
+    //   setTimeout(() => {
+    //     updateEntity({ data: videoToUpload });
+    //     //updateEntity({ error: { msg: 'Upload Failed' } });
+    //     console.log('consumer uploaded ', videoToUpload);
+    //   }, 500);
+    // },
     enableCustomUploadOnMobile: true,
     // Function is invoked when rendering video which has relative URL.
     // You should take the pathname and form a full URL.

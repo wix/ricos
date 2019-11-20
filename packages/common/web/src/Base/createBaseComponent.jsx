@@ -10,6 +10,8 @@ import { alignmentClassName, sizeClassName, textWrapClassName } from '../Utils/c
 import { normalizeUrl } from '../Utils/urlValidators';
 import styles from '../../statics/styles/general.scss';
 import rtlIgnoredStyles from '../../statics/styles/general.rtlignore.scss';
+import draggableStyle from '../../statics/styles/draggable.scss';
+import Context from '../Utils/Context';
 
 const DEFAULTS = {
   alignment: null,
@@ -242,8 +244,9 @@ const createBaseComponent = ({
     }
 
     render = () => {
-      const { blockProps, className, selection } = this.props;
+      const { blockProps, className, selection, onDragStart } = this.props;
       const { componentData, readOnly } = this.state;
+      const { enableDragAndDrop } = this.context;
       const { containerClassName, ...decorationProps } = pluginDecorationProps(
         this.props,
         componentData
@@ -282,6 +285,7 @@ const createBaseComponent = ({
       const overlayClassNames = classNames(this.styles.overlay, theme.overlay, {
         [this.styles.hidden]: readOnly,
         [theme.hidden]: readOnly,
+        [draggableStyle.draggable]: enableDragAndDrop,
       });
 
       const sizeStyles = {
@@ -323,9 +327,11 @@ const createBaseComponent = ({
       /* eslint-disable jsx-a11y/anchor-has-content */
       return (
         <div
+          role="none"
           style={sizeStyles}
           className={ContainerClassNames}
           data-focus={isActive}
+          onDragStart={onDragStart}
           {...decorationProps}
         >
           {!isNil(link) ? (
@@ -342,6 +348,7 @@ const createBaseComponent = ({
               data-hook={'componentOverlay'}
               onClick={this.handleClick}
               className={overlayClassNames}
+              draggable={enableDragAndDrop}
             />
           )}
         </div>
@@ -356,7 +363,10 @@ const createBaseComponent = ({
     selection: PropTypes.object.isRequired,
     className: PropTypes.string,
     onClick: PropTypes.func,
+    onDragStart: PropTypes.func,
   };
+
+  WrappedComponent.contextType = Context.type;
 
   return WrappedComponent;
 };

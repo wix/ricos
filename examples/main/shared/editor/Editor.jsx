@@ -172,11 +172,12 @@ export default class Editor extends PureComponent {
           isMobile={this.props.isMobile}
           textToolbarType={textToolbarType}
           theme={theme}
-          editorKey={'random-editorKey-ssr'}
+          editorKey="random-editorKey-ssr"
           anchorTarget={anchorTarget}
           relValue={relValue}
           locale={this.props.locale}
           localeResource={this.props.localeResource}
+          // siteDomain="https://www.wix.com"
         />
         <ReactModal
           isOpen={this.state.showModal}

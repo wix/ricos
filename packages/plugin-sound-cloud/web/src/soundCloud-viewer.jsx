@@ -17,7 +17,7 @@ class SoundCloudViewer extends Component {
   constructor(props) {
     super(props);
     validate(props.componentData, schema);
-    this.state = { playing: false };
+    this.state = { playing: false, isLoaded: false };
   }
 
   componentWillReceiveProps(nextProps) {
@@ -26,18 +26,29 @@ class SoundCloudViewer extends Component {
     }
   }
 
+  handleReady = () => {
+    if (!this.state.isLoaded) {
+      this.setState({ isLoaded: true });
+    }
+  };
+
   render() {
     this.styles = mergeStyles({ styles, theme: this.context.theme });
-    const { componentData, ...rest } = this.props;
+    const { componentData, isPlayable, ...rest } = this.props;
+    const { isLoaded } = this.state;
+    const url = matchSoundCloudUrl(componentData.src);
     return (
       <ViewportRenderer>
         <ReactPlayer
           className={classNames(this.styles.soundCloud_player)}
-          url={matchSoundCloudUrl(componentData.src)}
+          url={url && url[0]}
           {...rest}
           playing={this.context.disabled ? false : this.state.playing}
           onPlay={() => this.setState({ playing: true })}
           onPause={() => this.setState({ playing: false })}
+          light={!isPlayable}
+          onReady={this.handleReady}
+          data-loaded={isLoaded}
         />
       </ViewportRenderer>
     );
@@ -53,12 +64,15 @@ SoundCloudViewer.propTypes = {
   controls: PropTypes.bool,
   width: PropTypes.string,
   height: PropTypes.string,
+  isPlayable: PropTypes.bool,
+  isLoaded: PropTypes.bool,
 };
 
 SoundCloudViewer.defaultProps = {
   width: '100%',
   height: '100%',
   controls: true,
+  isPlayable: true,
 };
 
 export default SoundCloudViewer;
