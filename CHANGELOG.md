@@ -13,7 +13,22 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
-
+  
+  ### :rocket: New Feature
+  - `image`
+    - [#476](https://github.com/wix-incubator/rich-content/pull/476) `config.onImageEditorOpen` is invoked when media studio is launched
+  ### :bug: Bug Fix
+  - `preview`
+    -[#479](https://github.com/wix-incubator/rich-content/pull/479) seeFullPost default style fixed
+  - `gallery`
+    - [#469](https://github.com/wix-incubator/rich-content/pull/469) styles reference
+  - `fullscreen`
+    - [#465](https://github.com/wix-incubator/rich-content/pull/465) getImagesData was not working correctly
+  - `video`
+    - [#468](https://github.com/wix-incubator/rich-content/pull/468) video file upload selection  
+  ### :house: Internal
+  - `gallery`
+    - [#467](https://github.com/wix-incubator/rich-content/pull/467) `pro-gallery` updated to `v1.5.33`
 </details>
 <hr/>
 
@@ -46,6 +61,10 @@
     - [#444](https://github.com/wix-incubator/rich-content/pull/444) file upload support
     - [#449](https://github.com/wix-incubator/rich-content/pull/449) force video mime type for uploads
     - [#451](https://github.com/wix-incubator/rich-content/pull/451) uses unique file input id
+  - `editor`
+    - [#453](https://github.com/wix-incubator/rich-content/pull/453) added drag and drop capability to plugins
+  - `html`
+    - [#460](https://github.com/wix-incubator/rich-content/pull/460) adsense support
   ### :bug: Bug Fix
   - `common`
     - [#454](https://github.com/wix-incubator/rich-content/pull/454) link panel not loading link data after page refresh
@@ -53,7 +72,9 @@
     - [#438](https://github.com/wix-incubator/rich-content/pull/438) container alignment
   - `viewer`
     - [#442](https://github.com/wix-incubator/rich-content/pull/442) html plugin alignment
-  - `editor`
+  - `gallery`
+    - [#455](https://github.com/wix-incubator/rich-content/pull/455) gallery image titles appears
+  - editor
     - [#448](https://github.com/wix-incubator/rich-content/pull/448) placeholder style fixed
   ### :house: Internal
   - `gallery`
@@ -117,14 +138,26 @@
   - [#387](https://github.com/wix-incubator/rich-content/pull/387) data validation schema added
 <hr/>
 
-## 5.1.13 (Nov 5, 2019)
+## 5.1.15 (Hotfix - Nov 19, 2019)
+### :rocket: New Feature
+- `image`
+  - [#476](https://github.com/wix-incubator/rich-content/pull/476) `config.onImageEditorOpen` is invoked when media studio is launched
+<hr />
+
+## 5.1.14 (Hotfix - Nov 14, 2019)
+### :house: Internal
+  - `gallery`
+    - [#467](https://github.com/wix-incubator/rich-content/pull/467) `pro-gallery` updated to `v1.5.33`
+<hr />
+
+## 5.1.13 (Hotfix - Nov 5, 2019)
 ### :bug: Bug Fix
   - `viewer`
     - [#426](https://github.com/wix-incubator/rich-content/pull/426) rtl issues
   - `file-upload`
     - [#426](https://github.com/wix-incubator/rich-content/pull/426) spinner animation
 
-## 5.1.12 (Nov 4, 2019)
+## 5.1.12 (Hotfix - Nov 4, 2019)
 ### :house: Internal
   - `gallery`
     - [#446](https://github.com/wix-incubator/rich-content/pull/446) `pro-gallery` updated to `v1.5.25`

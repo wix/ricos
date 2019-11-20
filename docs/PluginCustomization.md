@@ -117,4 +117,4 @@ Specifically, the `textColorInlineStyleMapper` API accepts two parameters -- `co
 
 ## References and Examples
 
-Both [editor-example](../examples/editor/src/PluginsConfig.js) and [viewer-example](../examples/viewer/src/App.jsx) apps demonstrate the plugin customization capabilities.
+Both [editor-example](../examples/main/shared/editor/EditorPlugins.jsx) and [viewer-example](../examples/main/shared/viewer/ViewerPlugins.jsx) apps demonstrate the plugin customization capabilities.

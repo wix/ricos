@@ -85,7 +85,7 @@ export default class Fullscreen extends React.Component {
 
 Fullscreen.propTypes = {
   images: PropTypes.array.isRequired,
-  index: PropTypes.number.isRequired,
+  index: PropTypes.number,
   isOpen: PropTypes.bool,
   onClose: PropTypes.func.isRequired,
 };

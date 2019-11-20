@@ -50,18 +50,15 @@ function convertEntryToUrls(entry) {
   }
 }
 
-function isSupportedEntityType(type) {
-  return type === imageType || type === galleryType;
-}
-
 export default function getImagesData({ entityMap }) {
   let sum = 0;
   const imageMap = {};
   const images = Object.values(entityMap)
-    .filter(entry => isSupportedEntityType(entry.type))
     .map(convertEntryToUrls)
     .reduce((urls, entryUrls, i) => {
-      imageMap[i] = sum;
+      if (entryUrls.length > 0) {
+        imageMap[i] = sum;
+      }
       sum += entryUrls.length;
       return urls.concat(entryUrls);
     }, [])

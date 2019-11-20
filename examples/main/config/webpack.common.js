@@ -23,24 +23,11 @@ module.exports = env => ({
     extensions: ['.js', '.jsx', '.json'],
     symlinks: false,
     alias: {
-      'react-hot-loader': path.resolve(PATHS.monorepo_root, 'node_modules', 'react-hot-loader'),
       'wix-rich-content-common': path.resolve(PATHS.monorepo_root, 'packages', 'common', 'web'),
     },
   },
   module: {
     rules: [
-      {
-        test: /\.js(x)?$/,
-        exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            compact: true,
-            rootMode: 'upward',
-            plugins: ['react-hot-loader/babel'],
-          },
-        },
-      },
       {
         test: /\.css$/,
         use: [

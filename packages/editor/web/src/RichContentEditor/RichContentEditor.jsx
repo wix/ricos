@@ -72,7 +72,14 @@ class RichContentEditor extends Component {
       isMobile,
       shouldRenderOptimizedImages,
       initialIntent,
+      siteDomain,
+      plugins,
     } = this.props;
+
+    const enableDragAndDrop = (plugins || []).some(
+      plugin => plugin.name === 'createBlockDndPlugin'
+    );
+
     this.contextualData = {
       theme,
       t,
@@ -87,6 +94,8 @@ class RichContentEditor extends Component {
       languageDir: getLangDir(locale),
       shouldRenderOptimizedImages,
       initialIntent,
+      siteDomain,
+      enableDragAndDrop,
     };
   };
 
@@ -476,6 +485,7 @@ RichContentEditor.propTypes = {
   shouldRenderOptimizedImages: PropTypes.bool,
   onAtomicBlockFocus: PropTypes.func,
   initialIntent: PropTypes.string,
+  siteDomain: PropTypes.string,
 };
 
 RichContentEditor.defaultProps = {

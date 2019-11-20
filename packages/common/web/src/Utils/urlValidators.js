@@ -5,7 +5,7 @@ const linkify = linkifyIt();
 const youtubeRegex = /(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})$/;
 const facebookRegex = /facebook\.com\/([^/?].+\/)?video(s|\.php)[/?].*$/;
 const vimeoRegex = /(?:www\.|player\.)?vimeo.com\/(?:(?:channels|ondemand)\/(?:\w+\/)?|groups\/([^/]*)\/videos\/|album\/(\d+)\/video\/|video\/|)(\d+)(?:$|\/|\?)/;
-const soundCloudRegex = /soundcloud\.com\/\S+\/\S+$/;
+const soundCloudRegex = /https:\/\/soundcloud\.com\/\S+\/\S+$/;
 /* eslint-enable max-len, no-useless-escape */
 
 const isYoutube = url => youtubeRegex.test(url);

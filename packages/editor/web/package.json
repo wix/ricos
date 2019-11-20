@@ -35,8 +35,7 @@
       "\\.(css|scss)$": "<rootDir>/__mocks__/styleMock.js"
     }
   },
-  "dependencies": {
-    "draft-js-drag-n-drop-plugin": "~2.0.4",
+  "dependencies": {    
     "draft-js-focus-plugin": "~3.0.1",
     "draft-js-plugins-editor": "~3.0.0",
     "react-click-outside": "github:tj/react-click-outside",
