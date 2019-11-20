@@ -18,7 +18,7 @@
   - `image`
     - [#476](https://github.com/wix-incubator/rich-content/pull/476) `config.onImageEditorOpen` is invoked when media studio is launched
   - `plugins`
-    - [#477](https://github.com/wix-incubator/rich-content/pull/477) `disableRightClick` configuration enables right click protection
+    - [#477](https://github.com/wix-incubator/rich-content/pull/477) `uiSettings.disableRightClick` enables right click protection
   ### :bug: Bug Fix
   - `gallery`
     - [#469](https://github.com/wix-incubator/rich-content/pull/469) styles reference
