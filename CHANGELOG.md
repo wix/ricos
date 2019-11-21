@@ -14,7 +14,10 @@
     Click to see more.
   </summary>
   
-
+### :bug: Bug Fix
+- `video`
+  - [#480](https://github.com/wix-incubator/rich-content/pull/480) video file selection 
+  
   
 </details>
 <hr/>
@@ -30,6 +33,8 @@
 - `giphy`
     - [#474](https://github.com/wix-incubator/rich-content/pull/474) mp4 gifs and lower res gifs support
 ### :bug: Bug Fix
+- `imageEditor`
+  - [#482](https://github.com/wix-incubator/rich-content/pull/482) fix imageEditor doesn't load when requireJS is present
 - `preview`
   - [#479](https://github.com/wix-incubator/rich-content/pull/479) seeFullPost default style fixed
 - `gallery`
@@ -43,6 +48,8 @@
   - [#467](https://github.com/wix-incubator/rich-content/pull/467) `pro-gallery` updated to `v1.5.33`
 - `draftjs`
   - [#483](https://github.com/wix-incubator/rich-content/pull/483) update draftjs 0.11 => 0.11.2
+- `e2e`
+  - [#484](https://github.com/wix-incubator/rich-content/pull/484) fix atomic block alignment tests
 <hr/>
 
 ## 6.2.0 (Nov 11, 2019)
