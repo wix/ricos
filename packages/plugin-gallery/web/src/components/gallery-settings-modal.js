@@ -87,9 +87,16 @@ ManageMediaSection.propTypes = {
 class AdvancedSettingsSection extends Component {
   applyGallerySetting = setting => {
     const { data, store } = this.props;
+    // const prevLayoutData = layoutData[data.styles.galleryLayout || 0];
+    // const customSettings = {};
+    // Object.keys(data.styles).forEach(key => {
+    //   if (!(key in prevLayoutData)) {
+    //     customSettings[key] = data.styles[key];
+    //   }
+    // });
     const componentData = {
       ...data,
-      styles: Object.assign({}, data.styles, setting),
+      styles: Object.assign({}, setting),
     };
     store.set('componentData', componentData);
   };
