@@ -41,6 +41,8 @@
 ### :house: Internal
 - `gallery`
   - [#467](https://github.com/wix-incubator/rich-content/pull/467) `pro-gallery` updated to `v1.5.33`
+- `draftjs`
+  - [#483](https://github.com/wix-incubator/rich-content/pull/483) update draftjs 0.11 => 0.11.2
 <hr/>
 
 ## 6.2.0 (Nov 11, 2019)
