@@ -73,15 +73,21 @@ export const typeMappers = [
   giphyTypeMapper,
 ];
 
+const uiSettings = {
+  // disableRightClick: true,
+};
+
 export const config = {
   [GALLERY_TYPE]: {
-    scrollingElement: () => typeof window !== 'undefined' && document.getElementsByClassName('viewer-example')[0],
+    scrollingElement: () =>
+      typeof window !== 'undefined' && document.getElementsByClassName('viewer-example')[0],
   },
   [HEADERS_MARKDOWN_TYPE]: {
     hideMarkdown: true,
   },
   [GIPHY_TYPE]: {
     giphySdkApiKey: process.env.GIPHY_API_KEY,
+    sizes: { desktop: 'original', mobile: 'original' }, // original or downsizedSmall are supported
   },
   [HTML_TYPE]: {
     htmlIframeSrc: `${getBaseUrl()}/static/html-plugin-embed.html`,
@@ -102,6 +108,7 @@ export const config = {
         )
       ),
   },
+  uiSettings,
 };
 
 export const getInlineStyleMappers = raw => [textColorInlineStyleMapper(config, raw)];

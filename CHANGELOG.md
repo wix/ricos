@@ -27,6 +27,30 @@
 </details>
 <hr/>
 
+## 6.3.0 (Nov 20, 2019)
+### :rocket: New Feature
+- `general`
+  - [#477](https://github.com/wix-incubator/rich-content/pull/477) `uiSettings.disableRightClick` enables right click protection for gallery, video and image plugins
+- `editor`
+  - [#473](https://github.com/wix-incubator/rich-content/pull/473) enable consumers to set plugin defaults
+- `image`
+  - [#476](https://github.com/wix-incubator/rich-content/pull/476) `config.onImageEditorOpen` is invoked when media studio is launched
+- `giphy`
+    - [#474](https://github.com/wix-incubator/rich-content/pull/474) mp4 gifs and lower res gifs support
+### :bug: Bug Fix
+- `preview`
+  - [#479](https://github.com/wix-incubator/rich-content/pull/479) seeFullPost default style fixed
+- `gallery`
+  - [#469](https://github.com/wix-incubator/rich-content/pull/469) styles reference
+- `fullscreen`
+  - [#465](https://github.com/wix-incubator/rich-content/pull/465) getImagesData was not working correctly
+- `video`
+  - [#468](https://github.com/wix-incubator/rich-content/pull/468) video file upload selection  
+### :house: Internal
+- `gallery`
+  - [#467](https://github.com/wix-incubator/rich-content/pull/467) `pro-gallery` updated to `v1.5.33`
+<hr/>
+
 ## 6.2.0 (Nov 11, 2019)
 ### :boom: Breaking Change
 - `locale`
@@ -54,6 +78,8 @@
     - [#444](https://github.com/wix-incubator/rich-content/pull/444) file upload support
     - [#449](https://github.com/wix-incubator/rich-content/pull/449) force video mime type for uploads
     - [#451](https://github.com/wix-incubator/rich-content/pull/451) uses unique file input id
+  - `editor`
+    - [#453](https://github.com/wix-incubator/rich-content/pull/453) added drag and drop capability to plugins
   - `html`
     - [#460](https://github.com/wix-incubator/rich-content/pull/460) adsense support
   ### :bug: Bug Fix
@@ -128,6 +154,12 @@
 - `mentions`
   - [#387](https://github.com/wix-incubator/rich-content/pull/387) data validation schema added
 <hr/>
+
+## 5.1.15 (Hotfix - Nov 19, 2019)
+### :rocket: New Feature
+- `image`
+  - [#476](https://github.com/wix-incubator/rich-content/pull/476) `config.onImageEditorOpen` is invoked when media studio is launched
+<hr />
 
 ## 5.1.14 (Hotfix - Nov 14, 2019)
 ### :house: Internal

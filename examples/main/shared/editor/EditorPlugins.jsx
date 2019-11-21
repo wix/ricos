@@ -13,7 +13,7 @@ import {
   EXTERNAL_MENTIONS_TYPE,
 } from 'wix-rich-content-plugin-mentions';
 import { createCodeBlockPlugin, CODE_BLOCK_TYPE } from 'wix-rich-content-plugin-code-block';
-import { createSoundCloudPlugin } from 'wix-rich-content-plugin-sound-cloud';
+import { createSoundCloudPlugin, SOUND_CLOUD_TYPE } from 'wix-rich-content-plugin-sound-cloud';
 import { createGiphyPlugin, GIPHY_TYPE } from 'wix-rich-content-plugin-giphy';
 import {
   createHeadersMarkdownPlugin,
@@ -22,6 +22,7 @@ import {
 import { createMapPlugin, MAP_TYPE } from 'wix-rich-content-plugin-map';
 import { createFileUploadPlugin, FILE_UPLOAD_TYPE } from 'wix-rich-content-plugin-file-upload';
 import { createTextColorPlugin, TEXT_COLOR_TYPE } from 'wix-rich-content-plugin-text-color';
+import createBlockDndPlugin from 'draft-js-drag-n-drop-plugin';
 import Highlighter from 'react-highlight-words';
 import casual from 'casual-browserify';
 
@@ -71,6 +72,7 @@ export const editorPlugins = [
   createMapPlugin,
   createFileUploadPlugin,
   createTextColorPlugin,
+  createBlockDndPlugin,
 ];
 
 const themeColors = {
@@ -144,6 +146,7 @@ const uiSettings = {
     nofollowRelToggleVisibilityFn: () => true,
     dropDown: getLinkPanelDropDownConfig(),
   },
+  // disableRightClick: true,
 };
 
 export const config = {
@@ -152,6 +155,14 @@ export const config = {
       typeof window !== 'undefined' && document.getElementsByClassName('editor-example')[0],
   },
   [IMAGE_TYPE]: {
+    // defaultData: {
+    //   config: {
+    //     alignment: 'left',
+    //     size: 'content',
+    //     showTitle: true,
+    //     showDescription: true,
+    //   },
+    // },
     imageEditorWixSettings: {
       initiator: 'some-initiator',
       siteToken:
@@ -159,6 +170,7 @@ export const config = {
       metaSiteId: '538fa6c6-c953-4cdd-86c4-4b869aecf980',
       mediaRoot: 'some-mediaRoot',
     },
+    onImageEditorOpen: () => console.log('Media Studio Launched'),
   },
   [HASHTAG_TYPE]: {
     createHref: decoratedText => `/search/posts?query=${encodeURIComponent('#')}${decoratedText}`,
@@ -218,6 +230,7 @@ export const config = {
   [LINK_TYPE]: {
     onClick: (event, url) => console.log('link clicked!', url),
   },
+  [SOUND_CLOUD_TYPE]: {},
   [CODE_BLOCK_TYPE]: {},
   [DIVIDER_TYPE]: {},
   // [EXTERNAL_EMOJI_TYPE]: {},
@@ -277,6 +290,7 @@ export const config = {
   },
   [GIPHY_TYPE]: {
     giphySdkApiKey: process.env.GIPHY_API_KEY,
+    sizes: { desktop: 'original', mobile: 'original' }, // original or downsizedSmall are supported
   },
   [MAP_TYPE]: {
     googleMapApiKey: process.env.GOOGLE_MAPS_API_KEY,
