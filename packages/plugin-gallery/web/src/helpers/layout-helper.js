@@ -22,14 +22,6 @@ import layoutData from './layout-data-provider';
 export const switchLayout = (layout, _componentData, store) => {
   const galleryLayout = layout.value;
   const layoutStyles = Object.assign({ galleryLayout }, layoutData[galleryLayout]);
-  // const prevComponentData = store.get('componentData');
-  // const prevLayoutData = layoutData[prevComponentData.styles.galleryLayout || 0];
-  // const customSettings = {};
-  // Object.keys(prevComponentData.styles).forEach(key => {
-  //   if (!(key in prevLayoutData)) {
-  //     customSettings[key] = prevComponentData.styles[key];
-  //   }
-  // });
   const componentData = {
     ..._componentData,
     styles: Object.assign({}, layoutStyles),

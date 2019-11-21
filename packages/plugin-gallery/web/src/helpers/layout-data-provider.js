@@ -18,7 +18,7 @@ const layouts = [
     galleryType: 'Columns',
     imageMargin: 20,
     gallerySizePx: '300',
-  }, //Collage
+  }, // Collage
   {
     showArrows: false,
     cubeImages: false,
@@ -87,7 +87,7 @@ const layouts = [
     floatingImages: 0,
     thumbnailSpacings: 0,
     galleryMargin: 0,
-  }, //Thumbnails
+  }, // Thumbnails
   {
     showArrows: true,
     cubeImages: true,
@@ -198,7 +198,7 @@ const layouts = [
     floatingImages: 0,
     galleryMargin: 0,
     imageMargin: 0,
-  }, //Fullsize
+  }, // Fullsize
 ];
 
 export default layouts;
