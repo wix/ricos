@@ -46,6 +46,8 @@
 ### :house: Internal
 - `gallery`
   - [#467](https://github.com/wix-incubator/rich-content/pull/467) `pro-gallery` updated to `v1.5.33`
+- `e2e`
+  - [#484](https://github.com/wix-incubator/rich-content/pull/484) fix atomic block alignment tests
 <hr/>
 
 ## 6.2.0 (Nov 11, 2019)

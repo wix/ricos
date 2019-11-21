@@ -375,21 +375,24 @@ describe('plugins', () => {
     });
   });
 
-  context('general', () => {
+  context('alignment', () => {
     before(function() {
       eyesOpen(this);
     });
 
-    beforeEach('load editor', () => cy.loadEditor('images'));
-
     after(() => cy.eyesClose());
-    it('align atomic blocks correctly', function() {
-      cy.loadEditor('images')
-        .alignImage('left')
-        .alignImage('center')
-        .alignImage('right')
-        .setSelection(0, 0);
-      cy.eyesCheckWindow(this.test.title);
-    });
+
+    function testAtomicBlockAlignment(align) {
+      it('align atomic block ' + align, function() {
+        cy.loadEditor('images')
+          .alignImage(align)
+          .hideTooltip();
+        cy.eyesCheckWindow(this.test.title);
+      });
+    }
+
+    testAtomicBlockAlignment('left');
+    testAtomicBlockAlignment('center');
+    testAtomicBlockAlignment('right');
   });
 });
