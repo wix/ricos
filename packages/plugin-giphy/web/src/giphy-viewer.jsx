@@ -20,7 +20,7 @@ class GiphyViewer extends Component {
 
   getSourceUrl = () => {
     const { componentData } = this.props;
-    let { sizes } = this.context?.config?.[GIPHY_TYPE];
+    let { sizes } = this.context?.config?.[GIPHY_TYPE] || {};
     sizes = { ...DEFAULT_RESOLUTION, ...sizes };
     const size = this.context.isMobile ? sizes.mobile : sizes.desktop;
     switch (size) {
