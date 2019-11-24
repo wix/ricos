@@ -79,6 +79,10 @@ export const typeMappers = [
   giphyTypeMapper,
 ];
 
+const uiSettings = {
+  // disableRightClick: true,
+};
+
 export const config = {
   [GALLERY_TYPE]: {
     scrollingElement: () =>
@@ -89,6 +93,7 @@ export const config = {
   },
   [GIPHY_TYPE]: {
     giphySdkApiKey: process.env.GIPHY_API_KEY,
+    sizes: { desktop: 'original', mobile: 'original' }, // original or downsizedSmall are supported
   },
   [HTML_TYPE]: {
     htmlIframeSrc: `${getBaseUrl()}/static/html-plugin-embed.html`,
@@ -113,6 +118,7 @@ export const config = {
         )
       ),
   },
+  uiSettings,
 };
 
 export const getInlineStyleMappers = raw => [

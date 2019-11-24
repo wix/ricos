@@ -44,6 +44,7 @@ class RichContentViewer extends Component {
       locale,
       disabled,
       shouldRenderOptimizedImages,
+      siteDomain,
     } = this.props;
     return {
       t,
@@ -56,6 +57,8 @@ class RichContentViewer extends Component {
       locale,
       disabled,
       shouldRenderOptimizedImages,
+      siteDomain,
+      disableRightClick: config?.uiSettings?.disableRightClick,
     };
   };
 
@@ -127,6 +130,7 @@ RichContentViewer.propTypes = {
   textDirection: PropTypes.oneOf(['rtl', 'ltr']),
   disabled: PropTypes.bool,
   shouldRenderOptimizedImages: PropTypes.bool,
+  siteDomain: PropTypes.string,
 };
 
 RichContentViewer.defaultProps = {

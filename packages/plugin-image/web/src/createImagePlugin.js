@@ -57,6 +57,7 @@ const createImagePlugin = (config = {}) => {
     uiSettings,
     t,
     isMobile,
+    disableRightClick: config?.uiSettings?.disableRightClick,
     ...rest,
   });
 };

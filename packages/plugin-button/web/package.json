@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-plugin-button",
-  "version": "6.2.0",
+  "version": "6.3.0",
   "author": {
     "name": "Bashar Qaddumi",
     "email": "bqaddumi@asaltech.com"
@@ -32,7 +32,7 @@
   "peerDependencies": {
     "@babel/runtime": "7.2.0",
     "classnames": "^2.0.0",
-    "draft-js": "0.11.0",
+    "draft-js": "0.11.2",
     "lodash": "^4.0.0",
     "prop-types": "^15.0.0",
     "react": "^16.6.3",
@@ -54,7 +54,7 @@
   },
   "dependencies": {
     "react-custom-scrollbars": "~4.2.1",
-    "wix-rich-content-common": "6.2.0"
+    "wix-rich-content-common": "6.3.0"
   },
   "unpkg": true,
   "publishConfig": {
