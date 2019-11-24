@@ -22,12 +22,15 @@ import {
 import { createMapPlugin, MAP_TYPE } from 'wix-rich-content-plugin-map';
 import { createFileUploadPlugin, FILE_UPLOAD_TYPE } from 'wix-rich-content-plugin-file-upload';
 import { createTextColorPlugin, TEXT_COLOR_TYPE } from 'wix-rich-content-plugin-text-color';
+import { createButtonPlugin, BUTTON_TYPE } from 'wix-rich-content-plugin-button';
+import { createTextHighlightPlugin, TEXT_HIGHLIGHT_TYPE } from 'wix-rich-content-plugin-text-color';
 import createBlockDndPlugin from 'draft-js-drag-n-drop-plugin';
 import Highlighter from 'react-highlight-words';
 import casual from 'casual-browserify';
 
 import 'wix-rich-content-common/dist/styles.min.css';
 import 'wix-rich-content-editor/dist/styles.min.css';
+import 'wix-rich-content-plugin-button/dist/styles.min.css';
 // import 'wix-rich-content-plugin-code-block/dist/styles.min.css';
 import 'wix-rich-content-plugin-divider/dist/styles.min.css';
 // import 'wix-rich-content-plugin-emoji/dist/styles.min.css';
@@ -44,8 +47,12 @@ import 'wix-rich-content-plugin-giphy/dist/styles.min.css';
 import 'wix-rich-content-plugin-map/dist/styles.min.css';
 import 'wix-rich-content-plugin-file-upload/dist/styles.min.css';
 import 'wix-rich-content-plugin-text-color/dist/styles.min.css';
-
-import { customStyleFn, styleSelectionPredicate, colorScheme } from '../../src/text-color-style-fn';
+import {
+  customForegroundStyleFn,
+  styleSelectionPredicate,
+  colorScheme,
+  customBackgroundStyleFn,
+} from '../../src/text-color-style-fn';
 import { getBaseUrl } from '../../src/utils';
 // import { MyCustomIcon, SizeSmallRightIcon, TOOLBARS } from 'wix-rich-content-common';
 // import { TOOLBARS, BUTTONS, DISPLAY_MODE } from 'wix-rich-content-common';
@@ -71,7 +78,9 @@ export const editorPlugins = [
   createHeadersMarkdownPlugin,
   createMapPlugin,
   createFileUploadPlugin,
+  createButtonPlugin,
   createTextColorPlugin,
+  createTextHighlightPlugin,
   createBlockDndPlugin,
 ];
 
@@ -85,6 +94,11 @@ const themeColors = {
   color7: '#000000',
   color8: '#9a87ce',
 };
+
+const buttonDefaultPalette = ['#FEFDFD', '#D5D4D4', '#ABCAFF', '#81B0FF', '#0261FF', '#0141AA'];
+let userButtonTextColors = [...buttonDefaultPalette];
+let userButtonBackgroundColors = [...buttonDefaultPalette];
+let userButtonBorderColors = [...buttonDefaultPalette];
 
 const getLinkPanelDropDownConfig = () => {
   const getItems = () => {
@@ -146,6 +160,7 @@ const uiSettings = {
     nofollowRelToggleVisibilityFn: () => true,
     dropDown: getLinkPanelDropDownConfig(),
   },
+  // disableRightClick: true,
 };
 
 export const config = {
@@ -156,13 +171,6 @@ export const config = {
   //     },
   //   },
   // },
-  [SOUND_CLOUD_TYPE]: {
-    // toolbar: {
-    //   icons: {
-    //     SoundCloud: MyCustomIcon, // insert plugin icon
-    //   },
-    // },
-  },
   [GALLERY_TYPE]: {
     scrollingElement: () =>
       typeof window !== 'undefined' && document.getElementsByClassName('editor-example')[0],
@@ -173,6 +181,14 @@ export const config = {
     // },
   },
   [IMAGE_TYPE]: {
+    // defaultData: {
+    //   config: {
+    //     alignment: 'left',
+    //     size: 'content',
+    //     showTitle: true,
+    //     showDescription: true,
+    //   },
+    // },
     imageEditorWixSettings: {
       initiator: 'some-initiator',
       siteToken:
@@ -272,20 +288,9 @@ export const config = {
     // },
     onClick: (event, url) => console.log('link clicked!', url),
   },
-  [CODE_BLOCK_TYPE]: {
-    // toolbar: {
-    //   icons: {
-    //     codeBlock: MyCustomIcon, //insert plugin icon
-    //   },
-    // },
-  },
-  [DIVIDER_TYPE]: {
-    // toolbar: {
-    //   icons: {
-    //     Divider: MyCustomIcon, //insert plugin icon
-    //   },
-    // },
-  },
+  [SOUND_CLOUD_TYPE]: {},
+  [CODE_BLOCK_TYPE]: {},
+  [DIVIDER_TYPE]: {},
   // [EXTERNAL_EMOJI_TYPE]: {},
   [VIDEO_TYPE]: {
     toolbar: {
@@ -351,6 +356,7 @@ export const config = {
     //     GIF: MyCustomIcon, // insert plugin icon
     //   },
     // },
+    sizes: { desktop: 'original', mobile: 'original' }, // original or downsizedSmall are supported
   },
   [MAP_TYPE]: {
     googleMapApiKey: process.env.GOOGLE_MAPS_API_KEY,
@@ -408,10 +414,52 @@ export const config = {
     //   setTimeout(() => updateEntity({ data }), 500);
     // },
   },
-  [TEXT_COLOR_TYPE]: {
+  [BUTTON_TYPE]: {
+    palette: ['#FEFDFD', '#D5D4D4', '#ABCAFF', '#81B0FF', '#0261FF', '#0141AA'],
+    selectionBackgroundColor: 'fuchsia',
+    selectionBorderColor: '#FFF',
+    selectionTextColor: '#FFF',
+    colors: {
+      color1: '#FEFDFD',
+      color2: '#D5D4D4',
+      color3: '#000000',
+      color4: '#000000',
+      color5: '#000000',
+      color6: '#ABCAFF',
+      color7: '#81B0FF',
+      color8: '#0261FF',
+      color9: '#0141AA',
+      color10: '#012055',
+    },
+    onTextColorAdded: color => (userButtonTextColors = [color, ...userButtonTextColors]),
+    onBackgroundColorAdded: color =>
+      (userButtonBackgroundColors = [color, ...userButtonBackgroundColors]),
+    onBorderColorAdded: color => (userButtonBorderColors = [color, ...userButtonBorderColors]),
+    getTextColors: () => userButtonTextColors,
+    getBorderColors: () => userButtonBorderColors,
+    getBackgroundColors: () => userButtonBackgroundColors,
+  },
+  [TEXT_HIGHLIGHT_TYPE]: {
+    // toolbar: {
+    //   icons: {
+    //     TextHighlight: CustomIcon,
+    //   },
+    // },
     colorScheme,
     styleSelectionPredicate,
-    customStyleFn,
+    customStyleFn: customBackgroundStyleFn,
+    onColorAdded: color => (userColors = [color, ...userColors]),
+    getUserColors: () => userColors,
+  },
+  [TEXT_COLOR_TYPE]: {
+    // toolbar: {
+    //   icons: {
+    //     TextColor: CustomIcon,
+    //   },
+    // },
+    colorScheme,
+    styleSelectionPredicate,
+    customStyleFn: customForegroundStyleFn,
     onColorAdded: color => (userColors = [color, ...userColors]),
     getUserColors: () => userColors,
   },

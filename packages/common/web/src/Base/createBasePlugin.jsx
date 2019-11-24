@@ -35,6 +35,7 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
     getEditorBounds,
     onOverlayClick,
     onAtomicBlockFocus,
+    disableRightClick,
   } = config;
   const toolbarTheme = { ...getToolbarTheme(config.theme, 'plugin'), ...config.theme };
   const Toolbar =
@@ -94,6 +95,7 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
       relValue,
       isMobile,
       getEditorBounds,
+      disableRightClick,
     });
 
   const DecoratedCompWithBase =

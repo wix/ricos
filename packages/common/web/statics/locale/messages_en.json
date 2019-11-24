@@ -2,6 +2,7 @@
   "FileUploadInsertButton_tooltip" : "Add a File",
   "FileUploadReplaceButton_tooltip" : "Replace File",
   "TextColorButton_Tooltip" : "Text Color",
+  "TextHighlightButton_Tooltip" : "Text Highlight",
   "ColorPickerButtonLabel_Cancel" : "Cancel",
   "ColorPickerButtonLabel_Update" : "Update",
   "LineSpacing_customSpacing" : "Custom Spacing",
