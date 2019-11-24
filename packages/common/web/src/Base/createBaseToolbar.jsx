@@ -7,6 +7,7 @@ import Measure from 'react-measure';
 import { TOOLBARS, DISPLAY_MODE } from '../consts';
 import { getConfigByFormFactor } from '../Utils/getConfigByFormFactor';
 import { mergeToolbarSettings } from '../Utils/mergeToolbarSettings';
+import Context from '../Utils/Context';
 
 import Separator from '../Components/Separator';
 import BaseToolbarButton from './baseToolbarButton';
@@ -16,7 +17,8 @@ import Panel from '../Components/Panel';
 import toolbarStyles from '../../statics/styles/plugin-toolbar.scss';
 import buttonStyles from '../../statics/styles/plugin-toolbar-button.scss';
 
-const toolbarOffset = 12;
+const toolbarTopOffset = 12;
+const toolbarLeftOffset = 15;
 
 const getInitialState = () => ({
   position: { transform: 'scale(0)' },
@@ -201,17 +203,36 @@ export default function createToolbar({
       const offsetParentTop = offsetParentRect.top;
       const offsetParentLeft = offsetParentRect.left;
       const boundingRect = pubsub.get('boundingRect');
-      const top = boundingRect.top - toolbarHeight - toolbarOffset - offsetParentTop + y;
-      let left =
+      const top = boundingRect.top - toolbarHeight - toolbarTopOffset - offsetParentTop + y;
+      const tmpLeft =
         boundingRect.left + boundingRect.width / 2 - offsetParentLeft - toolbarWidth / 2 + x;
-      const maxLeft = boundingRect.right - toolbarWidth;
-      left = left >= 0 && left <= maxLeft ? left : left < 0 ? 0 : maxLeft;
+      const maxLeft = offsetParentRect.right - toolbarWidth - toolbarLeftOffset;
+      const left = this.calculateLeftOffset(tmpLeft, maxLeft);
       return {
         '--offset-top': `${top}px`,
         '--offset-left': `${left}px`,
         transform: 'scale(1)',
       };
     }
+
+    calculateLeftOffset = (left, maxLeft) => {
+      if (this.context?.languageDir === 'ltr') {
+        if (left < 0) {
+          return -toolbarLeftOffset * 2;
+        } else {
+          return Math.min(left, maxLeft);
+        }
+      } else {
+        // eslint-disable-next-line no-lonely-if
+        if (left > maxLeft) {
+          return -toolbarLeftOffset * 2;
+        } else if (left < 0) {
+          return maxLeft;
+        } else {
+          return left;
+        }
+      }
+    };
 
     showToolbar = () => {
       if (!this.visibilityFn()) {
@@ -606,5 +627,6 @@ export default function createToolbar({
       }
     }
   }
+  BaseToolbar.contextType = Context.type;
   return BaseToolbar;
 }
