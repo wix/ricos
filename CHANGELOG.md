@@ -18,7 +18,7 @@
 - `text-color`
   - [#440](https://github.com/wix-incubator/rich-content/pull/440) text highlight plugin   
 - `editor`
-  - [#462](https://github.com/wix-incubator/rich-content/pull/462) custom icons for all the buttons
+  - [#462](https://github.com/wix-incubator/rich-content/pull/462) custom icons for all toolbar buttons
 - `button`
   - [#472](https://github.com/wix-incubator/rich-content/pull/472) plugin improved
 ### :bug: Bug Fix
