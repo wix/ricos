@@ -1,59 +1,161 @@
 @import '~wix-rich-content-common/dist/statics/styles/mixins';
 @import '~wix-rich-content-common/dist/statics/styles/palette';
 
-.row {
+.button_designComponent_row {
   height: auto;
   width: 100%;
-  border-bottom: 1px solid #ededed;
-  padding-top: 14px;
+  border-bottom: 1px solid #cccccc;
+  padding-top: 13px;
+  padding-bottom: 15px;
   @include phone {
-    padding-top: 16px;
+    padding-top: 32px;
     margin-left: -1px;
+    padding-bottom: 13px;
+    border-top: 1px solid #ccc;
   }
 }
 
-.colorPicker_container {
+.colorPicker_button {
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+  margin-left: 0px;
+  margin-top: 8px;
+  &::after {
+    width: 24px;
+    height: 24px;
+  }
+  @include phone {
+    margin-top: 0px;
+    margin-bottom: 13px;
+    margin-left: 0px;
+    margin-right: 13px;
+  }
+}
+
+.colorPicker_button:nth-child(6n + 1) {
+  @include phone {
+    margin-left: 0px;
+    margin-right: 13px;
+  }
+}
+
+.colorPickerDialog_buttons {
+  padding-left: calc(100% - 126px);
+  margin-top: 12px;
+  padding-bottom: 13px;
+  border-bottom: 1px solid #cccccc;
+  margin-bottom: 22px;
+}
+
+.colorPickerDialog_button {
+  margin-right: 19px;
+  font-size: 16px;
+}
+.colorPicker_palette {
+  margin: 0px;
+}
+
+.customColorPicker_container {
+  width: 100%;
+}
+
+.colorPickerDialog {
+  margin: 24px 0px 15px;
+}
+
+.colorPicker_buttons_container {
+  width: calc(100% - 25px);
+  padding-bottom: 34px;
+  margin-bottom: 22px;
+  margin-left: 2px;
+  border-bottom: 1px solid #ccc;
+  @include phone {
+    width: 100%;
+  }
+}
+.colorPicker_add_color_button {
+  margin-left: 0px;
+  margin-right: 10px;
+  margin-top: 8px;
+  @include phone {
+    margin-top: 0px;
+    margin-bottom: 13px;
+    margin-right: 13px;
+  }
+}
+.customColorPicker_container {
+  height: 100%;
+}
+.customColorPicker_saturation {
+  height: 112px;
+}
+
+.colorPickerDialog_separator {
+  display: none;
+}
+
+.button_designComponent_colorPicker_container {
   height: auto;
   width: 100%;
-  border-bottom: 1px solid #ededed;
   padding-bottom: 10px;
   padding-top: 14px;
   @include phone {
-    padding-top: 15px;
+    padding-top: 32px;
     margin-left: -1px;
   }
 }
 
-.design_component {
+.customColorPicker_hue {
+  @include phone {
+    height: 24px;
+    margin-top: 12px;
+  }
+}
+
+.customColorPicker_editable_input_container {
+  @include phone {
+    padding-top: 7px;
+  }
+}
+
+.huePointer_vertical_line {
+  @include phone {
+    width: 1px;
+    height: 24px;
+    margin-left: 7px;
+  }
+}
+.button_designComponent_design_component {
   padding-right: 30px;
   @include phone {
     padding: 0px 20px;
   }
 }
 
-.section_header_color {
-  padding-bottom: 6px;
+.button_designComponent_section_header_color {
+  padding-bottom: 38px;
   padding-top: 6px;
   font-size: 16px;
   font-weight: 300;
   height: auto;
   @include phone {
-    padding-bottom: 19px;
+    padding-bottom: 35px;
     padding-top: 0px;
-    font-size: 18px;
+    font-family: Avenir;
   }
 }
 
-.section_header_border {
-  padding-bottom: 14px;
+.button_designComponent_section_header_border {
+  padding-bottom: 31px;
   padding-top: 8px;
   font-size: 16px;
   font-weight: 300;
   height: 24px;
   @include phone {
     padding-top: 0px;
-    font-size: 18px;
-    padding-bottom: 17px;
+    padding-bottom: 31px;
+    font-family: Avenir;
   }
 }
 
@@ -61,15 +163,17 @@
   padding: 30px 0px;
 }
 
-.button_samples {
-  border-bottom: 1px solid #ededed;
-  padding-top: 25px;
-  padding-bottom: 6px;
+.button_designComponent_samples {
+  border-bottom: 1px solid #cccccc;
+  padding-top: 27px;
+  padding-bottom: 8px;
+  margin-right: 30px;
   @include phone {
     width: 100%;
     height: auto;
-    padding-bottom: 24px;
-    padding-top: 12px;
+    border-bottom: 0;
+    padding-bottom: 32px;
+    padding-top: 20px;
     white-space: nowrap;
     position: relative;
     overflow-x: scroll;
@@ -79,16 +183,16 @@
   }
 }
 
-.button_samples_container {
+.button_designComponent_samples_container {
   position: relative;
   padding-top: 5px;
 }
 
-.input_container_width {
-  padding-bottom: 15px;
+.button_designComponent_input_container_width {
+  padding-bottom: 19px;
 }
 
-.input_container_corner {
+.button_designComponent_input_container_corner {
   padding-bottom: 17px;
 }
 
@@ -97,7 +201,8 @@
   font-size: 14px;
   padding-bottom: 4px;
   @include phone {
-    padding-bottom: 5px;
+    padding-bottom: 0px;
+    font-family: Avenir;
   }
 }
 
@@ -157,14 +262,14 @@
   height: 4px;
   cursor: pointer;
   box-shadow: 1px 1px 1px rgba(0, 0, 0, 0), 0px 0px 1px rgba(13, 13, 13, 0);
-  background: #eef1f6;
+  background: #e2ecff;
   border-radius: 0px;
   border: 0px solid rgba(1, 1, 94, 0.61);
 }
 
 // Chrome slider track on Focus
 .slider:focus::-webkit-slider-runnable-track {
-  background: #eef1f6;
+  background: #e2ecff;
 }
 
 // Mozila slider thumb
@@ -184,14 +289,14 @@
   height: 4px;
   cursor: pointer;
   box-shadow: 1px 1px 1px rgba(0, 0, 0, 0), 0px 0px 1px rgba(13, 13, 13, 0);
-  background: #eef1f6;
+  background: #e2ecff;
   border-radius: 0px;
   border: 0px solid rgba(1, 1, 94, 0.61);
 }
 
 // Mozilla slider track active bar
 .slider::-moz-range-progress {
-  background-color: #eef1f6;
+  background-color: #e2ecff;
 }
 
 // MS slider thumb
@@ -220,13 +325,13 @@
 
 // MS slider track
 .slider::-ms-fill-lower {
-  background: #eef1f6;
+  background: #e2ecff;
   border: 0px solid rgba(1, 1, 94, 0.61);
   border-radius: 0px;
   box-shadow: 1px 1px 1px rgba(0, 0, 0, 0), 0px 0px 1px rgba(13, 13, 13, 0);
 }
 .slider::-ms-fill-upper {
-  background: #eef1f6;
+  background: #e2ecff;
   border: 0px solid rgba(1, 1, 94, 0.61);
   border-radius: 0px;
   box-shadow: 1px 1px 1px rgba(0, 0, 0, 0), 0px 0px 1px rgba(13, 13, 13, 0);
@@ -234,8 +339,8 @@
 
 // MS slider track on Focus
 .slider:focus::-ms-fill-lower {
-  background: #eef1f6;
+  background: #e2ecff;
 }
 .slider:focus::-ms-fill-upper {
-  background: #eef1f6;
+  background: #e2ecff;
 }

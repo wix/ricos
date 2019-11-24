@@ -14,16 +14,21 @@
     Click to see more.
   </summary>
   
-  ### :bug: Bug Fix
-  - `fullscreen`
-    - [#465](https://github.com/wix-incubator/rich-content/pull/465) getImagesData not working correctly
-  - `video`
-    - [#468](https://github.com/wix-incubator/rich-content/pull/468) video file upload selection  
-  - `gallery`
-    - [#481](https://github.com/wix-incubator/rich-content/pull/481) fixed layout transition behavior
-  ### :house: Internal
-  - `gallery`
-    - [#467](https://github.com/wix-incubator/rich-content/pull/467) `pro-gallery` updated to `v1.5.33`
+### :rocket: New Feature
+- `text-color`
+  - [#440](https://github.com/wix-incubator/rich-content/pull/440) text highlight plugin   
+- `editor`
+  - [#462](https://github.com/wix-incubator/rich-content/pull/462) custom icons for all toolbar buttons
+- `button`
+  - [#472](https://github.com/wix-incubator/rich-content/pull/472) plugin improved
+### :bug: Bug Fix
+- `video`
+  - [#480](https://github.com/wix-incubator/rich-content/pull/480) video file selection
+- `giphy`
+  - [#485](https://github.com/wix-incubator/rich-content/pull/485) giphy-viewer: `data.config.sizes` fallbacks to empty object
+- `gallery`
+  - [#481](https://github.com/wix-incubator/rich-content/pull/481) fixed layout transition behavior
+  
 </details>
 <hr/>
 
@@ -38,6 +43,8 @@
 - `giphy`
     - [#474](https://github.com/wix-incubator/rich-content/pull/474) mp4 gifs and lower res gifs support
 ### :bug: Bug Fix
+- `imageEditor`
+  - [#482](https://github.com/wix-incubator/rich-content/pull/482) fix imageEditor doesn't load when requireJS is present
 - `preview`
   - [#479](https://github.com/wix-incubator/rich-content/pull/479) seeFullPost default style fixed
 - `gallery`
@@ -49,6 +56,10 @@
 ### :house: Internal
 - `gallery`
   - [#467](https://github.com/wix-incubator/rich-content/pull/467) `pro-gallery` updated to `v1.5.33`
+- `draftjs`
+  - [#483](https://github.com/wix-incubator/rich-content/pull/483) update draftjs 0.11 => 0.11.2
+- `e2e`
+  - [#484](https://github.com/wix-incubator/rich-content/pull/484) fix atomic block alignment tests
 <hr/>
 
 ## 6.2.0 (Nov 11, 2019)
@@ -75,7 +86,7 @@
     - [#452](https://github.com/wix-incubator/rich-content/pull/452) `handleDropdownOpen`, `handleDropdownClose` and `popoverComponent` added to plugin settings
   - `video`
     - [#443](https://github.com/wix-incubator/rich-content/pull/443) async url resolving support
-    - [#444](https://github.com/wix-incubator/rich-content/pull/444) file upload support
+    - [#444](https://github.com/wix-incubator/rich-content/pull/444) file upload support  
     - [#449](https://github.com/wix-incubator/rich-content/pull/449) force video mime type for uploads
     - [#451](https://github.com/wix-incubator/rich-content/pull/451) uses unique file input id
   - `editor`
@@ -176,8 +187,8 @@
 
 ## 5.1.12 (Hotfix - Nov 4, 2019)
 ### :house: Internal
-  - `gallery`
-    - [#446](https://github.com/wix-incubator/rich-content/pull/446) `pro-gallery` updated to `v1.5.25`
+- `gallery`
+  - [#446](https://github.com/wix-incubator/rich-content/pull/446) `pro-gallery` updated to `v1.5.25`
 
 ## 5.1.11 (Oct 28, 2019)
 ### :bug: Bug Fix

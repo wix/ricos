@@ -22,12 +22,15 @@ import {
 import { createMapPlugin, MAP_TYPE } from 'wix-rich-content-plugin-map';
 import { createFileUploadPlugin, FILE_UPLOAD_TYPE } from 'wix-rich-content-plugin-file-upload';
 import { createTextColorPlugin, TEXT_COLOR_TYPE } from 'wix-rich-content-plugin-text-color';
+import { createButtonPlugin, BUTTON_TYPE } from 'wix-rich-content-plugin-button';
+import { createTextHighlightPlugin, TEXT_HIGHLIGHT_TYPE } from 'wix-rich-content-plugin-text-color';
 import createBlockDndPlugin from 'draft-js-drag-n-drop-plugin';
 import Highlighter from 'react-highlight-words';
 import casual from 'casual-browserify';
 
 import 'wix-rich-content-common/dist/styles.min.css';
 import 'wix-rich-content-editor/dist/styles.min.css';
+import 'wix-rich-content-plugin-button/dist/styles.min.css';
 // import 'wix-rich-content-plugin-code-block/dist/styles.min.css';
 import 'wix-rich-content-plugin-divider/dist/styles.min.css';
 // import 'wix-rich-content-plugin-emoji/dist/styles.min.css';
@@ -44,10 +47,14 @@ import 'wix-rich-content-plugin-giphy/dist/styles.min.css';
 import 'wix-rich-content-plugin-map/dist/styles.min.css';
 import 'wix-rich-content-plugin-file-upload/dist/styles.min.css';
 import 'wix-rich-content-plugin-text-color/dist/styles.min.css';
-
-import { customStyleFn, styleSelectionPredicate, colorScheme } from '../../src/text-color-style-fn';
+import {
+  customForegroundStyleFn,
+  styleSelectionPredicate,
+  colorScheme,
+  customBackgroundStyleFn,
+} from '../../src/text-color-style-fn';
 import { getBaseUrl } from '../../src/utils';
-
+// import { MyCustomIcon, SizeSmallRightIcon, TOOLBARS } from 'wix-rich-content-common';
 // import { TOOLBARS, BUTTONS, DISPLAY_MODE } from 'wix-rich-content-common';
 // import InlineToolbarDecoration from './Components/InlineToolbarDecoration';
 // import StaticToolbarDecoration from './Components/StaticToolbarDecoration';
@@ -71,7 +78,9 @@ export const editorPlugins = [
   createHeadersMarkdownPlugin,
   createMapPlugin,
   createFileUploadPlugin,
+  createButtonPlugin,
   createTextColorPlugin,
+  createTextHighlightPlugin,
   createBlockDndPlugin,
 ];
 
@@ -85,6 +94,11 @@ const themeColors = {
   color7: '#000000',
   color8: '#9a87ce',
 };
+
+const buttonDefaultPalette = ['#FEFDFD', '#D5D4D4', '#ABCAFF', '#81B0FF', '#0261FF', '#0141AA'];
+let userButtonTextColors = [...buttonDefaultPalette];
+let userButtonBackgroundColors = [...buttonDefaultPalette];
+let userButtonBorderColors = [...buttonDefaultPalette];
 
 const getLinkPanelDropDownConfig = () => {
   const getItems = () => {
@@ -150,9 +164,21 @@ const uiSettings = {
 };
 
 export const config = {
+  // [BUTTON_TYPE]: {
+  //   toolbar: {
+  //     icons: {
+  //       Button: MyCustomIcon, // insert plugin icon
+  //     },
+  //   },
+  // },
   [GALLERY_TYPE]: {
     scrollingElement: () =>
       typeof window !== 'undefined' && document.getElementsByClassName('editor-example')[0],
+    // toolbar: {
+    //   icons: {
+    //     Gallery: MyCustomIcon, // insert plugin icon
+    //   },
+    // },
   },
   [IMAGE_TYPE]: {
     // defaultData: {
@@ -171,6 +197,23 @@ export const config = {
       mediaRoot: 'some-mediaRoot',
     },
     onImageEditorOpen: () => console.log('Media Studio Launched'),
+    // toolbar: {
+    //   icons: {
+    //     Image: MyCustomIcon, // insert plugin icon
+    //     alignLeft: MyCustomIcon,
+    //     link: MyCustomIcon,
+    //     sizeOriginal: MyCustomIcon,
+    //     sizeSmallCenter: MyCustomIcon,
+    //     sizeContent: MyCustomIcon,
+    //     imageEditor: MyCustomIcon,
+    //     sizeFullWidth: MyCustomIcon,
+    //     alignCenter: MyCustomIcon,
+    //     alignRight: MyCustomIcon,
+    //     settings: MyCustomIcon,
+    //     replace: MyCustomIcon,
+    //     delete: SizeSmallRightIcon,
+    //   },
+    // },
   },
   [HASHTAG_TYPE]: {
     createHref: decoratedText => `/search/posts?query=${encodeURIComponent('#')}${decoratedText}`,
@@ -186,6 +229,11 @@ export const config = {
     width: 350,
     minHeight: 50,
     maxHeight: 1200,
+    // toolbar: {
+    //   icons: {
+    //     HTML: MyCustomIcon, // insert plugin icon
+    //   },
+    // },
   },
   [EXTERNAL_MENTIONS_TYPE]: {
     repositionSuggestions: true,
@@ -220,6 +268,11 @@ export const config = {
       ),
   },
   [LINE_SPACING_TYPE]: {
+    // toolbar: {
+    //   icons: {
+    //     'line-spacing': MyCustomIcon, // insert plugin icon
+    //   },
+    // },
     defaultSpacing: {
       'line-height': '1.5',
       'padding-top': '2px',
@@ -228,6 +281,11 @@ export const config = {
     onUpdate: spacing => console.log(LINE_SPACING_TYPE, spacing),
   },
   [LINK_TYPE]: {
+    // toolbar: {
+    //   icons: {
+    //     link: MyCustomIcon, // insert plugin icon
+    //   },
+    // },
     onClick: (event, url) => console.log('link clicked!', url),
   },
   [SOUND_CLOUD_TYPE]: {},
@@ -237,6 +295,9 @@ export const config = {
   [VIDEO_TYPE]: {
     toolbar: {
       hidden: [],
+      // icons: {
+      //   Video: MyCustomIcon, //insert plugin icon
+      // },
     },
     //Here you can call your custom video upload functionality (comment function to disable custom upload)
     handleFileSelection: (updateEntity, removeEntity) => {
@@ -290,6 +351,11 @@ export const config = {
   },
   [GIPHY_TYPE]: {
     giphySdkApiKey: process.env.GIPHY_API_KEY,
+    // toolbar: {
+    //   icons: {
+    //     GIF: MyCustomIcon, // insert plugin icon
+    //   },
+    // },
     sizes: { desktop: 'original', mobile: 'original' }, // original or downsizedSmall are supported
   },
   [MAP_TYPE]: {
@@ -310,8 +376,18 @@ export const config = {
       isStreetViewControlShown: true,
       isDraggingAllowed: true,
     },
+    // toolbar: {
+    //   icons: {
+    //     Map: MyCustomIcon,  // insert plugin icon
+    //   },
+    // },
   },
   [FILE_UPLOAD_TYPE]: {
+    // toolbar: {
+    //   icons: {
+    // UploadFile: MyCustomIcon, // insert plugin icon
+    //   },
+    // },
     accept: '*',
     onFileSelected: (file, updateEntity) => {
       const name = file.name;
@@ -338,15 +414,77 @@ export const config = {
     //   setTimeout(() => updateEntity({ data }), 500);
     // },
   },
-  [TEXT_COLOR_TYPE]: {
+  [BUTTON_TYPE]: {
+    palette: ['#FEFDFD', '#D5D4D4', '#ABCAFF', '#81B0FF', '#0261FF', '#0141AA'],
+    selectionBackgroundColor: 'fuchsia',
+    selectionBorderColor: '#FFF',
+    selectionTextColor: '#FFF',
+    colors: {
+      color1: '#FEFDFD',
+      color2: '#D5D4D4',
+      color3: '#000000',
+      color4: '#000000',
+      color5: '#000000',
+      color6: '#ABCAFF',
+      color7: '#81B0FF',
+      color8: '#0261FF',
+      color9: '#0141AA',
+      color10: '#012055',
+    },
+    onTextColorAdded: color => (userButtonTextColors = [color, ...userButtonTextColors]),
+    onBackgroundColorAdded: color =>
+      (userButtonBackgroundColors = [color, ...userButtonBackgroundColors]),
+    onBorderColorAdded: color => (userButtonBorderColors = [color, ...userButtonBorderColors]),
+    getTextColors: () => userButtonTextColors,
+    getBorderColors: () => userButtonBorderColors,
+    getBackgroundColors: () => userButtonBackgroundColors,
+  },
+  [TEXT_HIGHLIGHT_TYPE]: {
+    // toolbar: {
+    //   icons: {
+    //     TextHighlight: CustomIcon,
+    //   },
+    // },
     colorScheme,
     styleSelectionPredicate,
-    customStyleFn,
+    customStyleFn: customBackgroundStyleFn,
+    onColorAdded: color => (userColors = [color, ...userColors]),
+    getUserColors: () => userColors,
+  },
+  [TEXT_COLOR_TYPE]: {
+    // toolbar: {
+    //   icons: {
+    //     TextColor: CustomIcon,
+    //   },
+    // },
+    colorScheme,
+    styleSelectionPredicate,
+    customStyleFn: customForegroundStyleFn,
     onColorAdded: color => (userColors = [color, ...userColors]),
     getUserColors: () => userColors,
   },
   uiSettings,
   getToolbarSettings: ({ pluginButtons, textButtons }) => [
+    // {
+    //   name: TOOLBARS.TEXT,
+    //   getIcons: () => ({
+    //     Bold: MyCustomIcon,
+    //     Italic: MyCustomIcon,
+    //     Underline: MyCustomIcon,
+    //     Indent: MyCustomIcon,
+    //     inactiveIconTitle: SizeSmallRightIcon,
+    //     TitleOne: MyCustomIcon,
+    //     TitleTwo: SizeSmallRightIcon,
+    //     Blockquote: MyCustomIcon,
+    //     Alignment: MyCustomIcon,
+    //     AlignLeft: MyCustomIcon,
+    //     AlignCenter: MyCustomIcon,
+    //     AlignRight: MyCustomIcon,
+    //     AlignJustify: MyCustomIcon,
+    //     OrderedList: MyCustomIcon,
+    //     UnorderedList: MyCustomIcon,
+    //   }),
+    // },
     // {
     //   name: TOOLBARS.PLUGIN,
     //   getVisibilityFn: () => ({

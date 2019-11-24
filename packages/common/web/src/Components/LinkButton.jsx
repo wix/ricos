@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import InlineToolbarButton from './InlineToolbarButton';
 import { LinkIcon } from '../Icons';
 
-const LinkButton = props => (
-  <InlineToolbarButton icon={LinkIcon} dataHook={'LinkButton'} {...props} />
+const LinkButton = ({ icon, ...otherProps }) => (
+  <InlineToolbarButton icon={icon || LinkIcon} dataHook={'LinkButton'} {...otherProps} />
 );
 
 LinkButton.propTypes = {
@@ -14,6 +14,7 @@ LinkButton.propTypes = {
   isMobile: PropTypes.bool,
   tooltipText: PropTypes.string,
   tabIndex: PropTypes.number,
+  icon: PropTypes.func,
 };
 
 export default LinkButton;

@@ -11,6 +11,7 @@ import {
 } from 'wix-rich-content-plugin-gallery/dist/module.viewer';
 import { mapTypeMapper } from 'wix-rich-content-plugin-map/dist/module.viewer';
 import { giphyTypeMapper, GIPHY_TYPE } from 'wix-rich-content-plugin-giphy/dist/module.viewer';
+import { buttonTypeMapper } from 'wix-rich-content-plugin-button/dist/module.viewer';
 import { HashtagDecorator } from 'wix-rich-content-plugin-hashtag/dist/module.viewer';
 import {
   createHeadersMarkdownDecorator,
@@ -28,13 +29,20 @@ import {
 import {
   textColorInlineStyleMapper,
   TEXT_COLOR_TYPE,
+  TEXT_HIGHLIGHT_TYPE,
+  textHighlightInlineStyleMapper,
 } from 'wix-rich-content-plugin-text-color/dist/module.viewer';
 
-import { viewerCustomStyleFn, styleSelectionPredicate } from '../../src/text-color-style-fn';
+import {
+  viewerCustomForegroundStyleFn,
+  styleSelectionPredicate,
+  viewerCustomBackgroundStyleFn,
+} from '../../src/text-color-style-fn';
 
 import 'wix-rich-content-common/dist/styles.min.css';
 import 'wix-rich-content-viewer/dist/styles.min.css';
 // import 'wix-rich-content-plugin-code-block/dist/styles.min.css';
+import 'wix-rich-content-plugin-button/dist/styles.min.css';
 import 'wix-rich-content-plugin-divider/dist/styles.min.css';
 import 'wix-rich-content-plugin-emoji/dist/styles.min.css';
 import 'wix-rich-content-plugin-hashtag/dist/styles.min.css';
@@ -61,6 +69,7 @@ const mentionsPluginSettings = {
 
 export const typeMappers = [
   videoTypeMapper,
+  buttonTypeMapper,
   dividerTypeMapper,
   htmlTypeMapper,
   linkTypeMapper,
@@ -94,9 +103,13 @@ export const config = {
   },
   [LINK_TYPE]: linkPluginSettings,
   [MENTION_TYPE]: mentionsPluginSettings,
+  [TEXT_HIGHLIGHT_TYPE]: {
+    styleSelectionPredicate,
+    customStyleFn: viewerCustomBackgroundStyleFn,
+  },
   [TEXT_COLOR_TYPE]: {
     styleSelectionPredicate,
-    customStyleFn: viewerCustomStyleFn,
+    customStyleFn: viewerCustomForegroundStyleFn,
   },
   [FILE_UPLOAD_TYPE]: {
     resolveFileUrl: () =>
@@ -111,7 +124,10 @@ export const config = {
   uiSettings,
 };
 
-export const getInlineStyleMappers = raw => [textColorInlineStyleMapper(config, raw)];
+export const getInlineStyleMappers = raw => [
+  textColorInlineStyleMapper(config, raw),
+  textHighlightInlineStyleMapper(config, raw),
+];
 
 export const decorators = [
   new HashtagDecorator({

@@ -19,7 +19,7 @@ export default function createToolbar({
       isMobile,
       settings,
     }),
-    InsertButtons: createInsertButtons({ helpers, t }),
+    InsertButtons: createInsertButtons({ helpers, t, settings }),
     name: 'image',
   };
 }
