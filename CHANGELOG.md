@@ -15,6 +15,8 @@
   </summary>
   
   ### :bug: Bug Fix
+   - `mentions`
+    - [#486](https://github.com/wix-incubator/rich-content/pull/486) the suggestions can be navigated by the arrows on the keyboard
   - `gallery`
     - [#469](https://github.com/wix-incubator/rich-content/pull/469) styles reference
   - `fullscreen`
