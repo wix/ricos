@@ -23,6 +23,9 @@
   - [2a1e1b4a](https://github.com/wix-incubator/rich-content/commit/2a1e1b4a) fix import from common/src
 - `e2e`
   - [98d8c980](https://github.com/wix-incubator/rich-content/commit/98d8c980) fix e2e
+### :house: Internal
+- `draftjs`
+  - [#487](https://github.com/wix-incubator/rich-content/pull/487) update draftjs 0.11 => 0.11.2
   
 ## 6.4.0 (Nov 25, 2019)
 ### :rocket: New Feature

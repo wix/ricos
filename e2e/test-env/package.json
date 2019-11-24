@@ -20,7 +20,7 @@
     "casual-browserify": "1.5.19-2",
     "css-loader": "^2.1.0",
     "deep-freeze": "0.0.1",
-    "draft-js": "0.11.0",
+    "draft-js": "0.11.2",
     "express": "^4.17.1",
     "ignore-styles": "^5.0.1",
     "qs": "^6.6.0",
