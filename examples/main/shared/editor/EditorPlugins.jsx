@@ -22,68 +22,50 @@ import {
 } from "wix-rich-content-plugin-divider";
 import {
   createExternalMentionsPlugin,
-  EXTERNAL_MENTIONS_TYPE
-} from "wix-rich-content-plugin-mentions";
-import {
-  createCodeBlockPlugin,
-  CODE_BLOCK_TYPE
-} from "wix-rich-content-plugin-code-block";
-import {
-  createSoundCloudPlugin,
-  SOUND_CLOUD_TYPE
-} from "wix-rich-content-plugin-sound-cloud";
-import { createGiphyPlugin, GIPHY_TYPE } from "wix-rich-content-plugin-giphy";
+  EXTERNAL_MENTIONS_TYPE,
+} from 'wix-rich-content-plugin-mentions';
+import { createCodeBlockPlugin, CODE_BLOCK_TYPE } from 'wix-rich-content-plugin-code-block';
+import { createSoundCloudPlugin, SOUND_CLOUD_TYPE } from 'wix-rich-content-plugin-sound-cloud';
+import { createGiphyPlugin, GIPHY_TYPE } from 'wix-rich-content-plugin-giphy';
 import {
   createHeadersMarkdownPlugin,
-  HEADERS_MARKDOWN_TYPE
-} from "wix-rich-content-plugin-headers-markdown";
-import { createMapPlugin, MAP_TYPE } from "wix-rich-content-plugin-map";
-import {
-  createFileUploadPlugin,
-  FILE_UPLOAD_TYPE
-} from "wix-rich-content-plugin-file-upload";
-import {
-  createTextColorPlugin,
-  TEXT_COLOR_TYPE
-} from "wix-rich-content-plugin-text-color";
-import {
-  createButtonPlugin,
-  BUTTON_TYPE
-} from "wix-rich-content-plugin-button";
-import {
-  createTextHighlightPlugin,
-  TEXT_HIGHLIGHT_TYPE
-} from "wix-rich-content-plugin-text-color";
-import createBlockDndPlugin from "draft-js-drag-n-drop-plugin";
-import Highlighter from "react-highlight-words";
-import casual from "casual-browserify";
+  HEADERS_MARKDOWN_TYPE,
+} from 'wix-rich-content-plugin-headers-markdown';
+import { createMapPlugin, MAP_TYPE } from 'wix-rich-content-plugin-map';
+import { createFileUploadPlugin, FILE_UPLOAD_TYPE } from 'wix-rich-content-plugin-file-upload';
+import { createTextColorPlugin, TEXT_COLOR_TYPE } from 'wix-rich-content-plugin-text-color';
+import { createButtonPlugin, BUTTON_TYPE } from 'wix-rich-content-plugin-button';
+import { createTextHighlightPlugin, TEXT_HIGHLIGHT_TYPE } from 'wix-rich-content-plugin-text-color';
+import createBlockDndPlugin from 'draft-js-drag-n-drop-plugin';
+import Highlighter from 'react-highlight-words';
+import casual from 'casual-browserify';
 
-import "wix-rich-content-common/dist/styles.min.css";
-import "wix-rich-content-editor/dist/styles.min.css";
-import "wix-rich-content-plugin-button/dist/styles.min.css";
+import 'wix-rich-content-common/dist/styles.min.css';
+import 'wix-rich-content-editor/dist/styles.min.css';
+import 'wix-rich-content-plugin-button/dist/styles.min.css';
 // import 'wix-rich-content-plugin-code-block/dist/styles.min.css';
-import "wix-rich-content-plugin-divider/dist/styles.min.css";
-import "wix-rich-content-plugin-emoji/dist/styles.min.css";
-import "wix-rich-content-plugin-html/dist/styles.min.css";
-import "wix-rich-content-plugin-hashtag/dist/styles.min.css";
-import "wix-rich-content-plugin-line-spacing/dist/styles.min.css";
-import "wix-rich-content-plugin-link/dist/styles.min.css";
-import "wix-rich-content-plugin-mentions/dist/styles.min.css";
-import "wix-rich-content-plugin-image/dist/styles.min.css";
-import "wix-rich-content-plugin-gallery/dist/styles.min.css";
-import "wix-rich-content-plugin-video/dist/styles.min.css";
-import "wix-rich-content-plugin-sound-cloud/dist/styles.min.css";
-import "wix-rich-content-plugin-giphy/dist/styles.min.css";
-import "wix-rich-content-plugin-map/dist/styles.min.css";
-import "wix-rich-content-plugin-file-upload/dist/styles.min.css";
-import "wix-rich-content-plugin-text-color/dist/styles.min.css";
+import 'wix-rich-content-plugin-divider/dist/styles.min.css';
+// import 'wix-rich-content-plugin-emoji/dist/styles.min.css';
+import 'wix-rich-content-plugin-html/dist/styles.min.css';
+import 'wix-rich-content-plugin-hashtag/dist/styles.min.css';
+import 'wix-rich-content-plugin-line-spacing/dist/styles.min.css';
+import 'wix-rich-content-plugin-link/dist/styles.min.css';
+import 'wix-rich-content-plugin-mentions/dist/styles.min.css';
+import 'wix-rich-content-plugin-image/dist/styles.min.css';
+import 'wix-rich-content-plugin-gallery/dist/styles.min.css';
+import 'wix-rich-content-plugin-video/dist/styles.min.css';
+import 'wix-rich-content-plugin-sound-cloud/dist/styles.min.css';
+import 'wix-rich-content-plugin-giphy/dist/styles.min.css';
+import 'wix-rich-content-plugin-map/dist/styles.min.css';
+import 'wix-rich-content-plugin-file-upload/dist/styles.min.css';
+import 'wix-rich-content-plugin-text-color/dist/styles.min.css';
 import {
   customForegroundStyleFn,
   styleSelectionPredicate,
   colorScheme,
-  customBackgroundStyleFn
-} from "../../src/text-color-style-fn";
-import { getBaseUrl } from "../../src/utils";
+  customBackgroundStyleFn,
+} from '../../src/text-color-style-fn';
+import { getBaseUrl } from '../../src/utils';
 // import { MyCustomIcon, SizeSmallRightIcon, TOOLBARS } from 'wix-rich-content-common';
 // import { TOOLBARS, BUTTONS, DISPLAY_MODE } from 'wix-rich-content-common';
 // import InlineToolbarDecoration from './Components/InlineToolbarDecoration';
@@ -125,14 +107,7 @@ const themeColors = {
   color8: "#9a87ce"
 };
 
-const buttonDefaultPalette = [
-  "#FEFDFD",
-  "#D5D4D4",
-  "#ABCAFF",
-  "#81B0FF",
-  "#0261FF",
-  "#0141AA"
-];
+const buttonDefaultPalette = ['#FEFDFD', '#D5D4D4', '#ABCAFF', '#81B0FF', '#0261FF', '#0141AA'];
 let userButtonTextColors = [...buttonDefaultPalette];
 let userButtonBackgroundColors = [...buttonDefaultPalette];
 let userButtonBorderColors = [...buttonDefaultPalette];
@@ -203,8 +178,8 @@ const uiSettings = {
   linkPanel: {
     blankTargetToggleVisibilityFn: () => true,
     nofollowRelToggleVisibilityFn: () => true,
-    dropDown: getLinkPanelDropDownConfig()
-  }
+    dropDown: getLinkPanelDropDownConfig(),
+  },
   // disableRightClick: true,
 };
 
@@ -218,8 +193,7 @@ export const config = {
   // },
   [GALLERY_TYPE]: {
     scrollingElement: () =>
-      typeof window !== "undefined" &&
-      document.getElementsByClassName("editor-example")[0]
+      typeof window !== 'undefined' && document.getElementsByClassName('editor-example')[0],
     // toolbar: {
     //   icons: {
     //     Gallery: MyCustomIcon, // insert plugin icon
@@ -242,7 +216,7 @@ export const config = {
       metaSiteId: "538fa6c6-c953-4cdd-86c4-4b869aecf980",
       mediaRoot: "some-mediaRoot"
     },
-    onImageEditorOpen: () => console.log("Media Studio Launched")
+    onImageEditorOpen: () => console.log('Media Studio Launched'),
     // toolbar: {
     //   icons: {
     //     Image: MyCustomIcon, // insert plugin icon
@@ -275,7 +249,7 @@ export const config = {
     maxWidth: 740,
     width: 350,
     minHeight: 50,
-    maxHeight: 1200
+    maxHeight: 1200,
     // toolbar: {
     //   icons: {
     //     HTML: MyCustomIcon, // insert plugin icon
@@ -333,7 +307,7 @@ export const config = {
     //     link: MyCustomIcon, // insert plugin icon
     //   },
     // },
-    onClick: (event, url) => console.log("link clicked!", url)
+    onClick: (event, url) => console.log('link clicked!', url),
   },
   [SOUND_CLOUD_TYPE]: {},
   [CODE_BLOCK_TYPE]: {},
@@ -341,7 +315,7 @@ export const config = {
   // [EXTERNAL_EMOJI_TYPE]: {},
   [VIDEO_TYPE]: {
     toolbar: {
-      hidden: []
+      hidden: [],
       // icons: {
       //   Video: MyCustomIcon, //insert plugin icon
       // },
@@ -404,7 +378,7 @@ export const config = {
     //     GIF: MyCustomIcon, // insert plugin icon
     //   },
     // },
-    sizes: { desktop: "original", mobile: "original" } // original or downsizedSmall are supported
+    sizes: { desktop: 'original', mobile: 'original' }, // original or downsizedSmall are supported
   },
   [MAP_TYPE]: {
     googleMapApiKey: process.env.GOOGLE_MAPS_API_KEY,
@@ -423,8 +397,8 @@ export const config = {
       isMarkerShown: true,
       isZoomControlShown: true,
       isStreetViewControlShown: true,
-      isDraggingAllowed: true
-    }
+      isDraggingAllowed: true,
+    },
     // toolbar: {
     //   icons: {
     //     Map: MyCustomIcon,  // insert plugin icon
@@ -437,7 +411,7 @@ export const config = {
     // UploadFile: MyCustomIcon, // insert plugin icon
     //   },
     // },
-    accept: "*",
+    accept: '*',
     onFileSelected: (file, updateEntity) => {
       const name = file.name;
       const filenameParts = name.split(".");
@@ -464,31 +438,29 @@ export const config = {
     // },
   },
   [BUTTON_TYPE]: {
-    palette: ["#FEFDFD", "#D5D4D4", "#ABCAFF", "#81B0FF", "#0261FF", "#0141AA"],
-    selectionBackgroundColor: "fuchsia",
-    selectionBorderColor: "#FFF",
-    selectionTextColor: "#FFF",
+    palette: ['#FEFDFD', '#D5D4D4', '#ABCAFF', '#81B0FF', '#0261FF', '#0141AA'],
+    selectionBackgroundColor: 'fuchsia',
+    selectionBorderColor: '#FFF',
+    selectionTextColor: '#FFF',
     colors: {
-      color1: "#FEFDFD",
-      color2: "#D5D4D4",
-      color3: "#000000",
-      color4: "#000000",
-      color5: "#000000",
-      color6: "#ABCAFF",
-      color7: "#81B0FF",
-      color8: "#0261FF",
-      color9: "#0141AA",
-      color10: "#012055"
+      color1: '#FEFDFD',
+      color2: '#D5D4D4',
+      color3: '#000000',
+      color4: '#000000',
+      color5: '#000000',
+      color6: '#ABCAFF',
+      color7: '#81B0FF',
+      color8: '#0261FF',
+      color9: '#0141AA',
+      color10: '#012055',
     },
-    onTextColorAdded: color =>
-      (userButtonTextColors = [color, ...userButtonTextColors]),
+    onTextColorAdded: color => (userButtonTextColors = [color, ...userButtonTextColors]),
     onBackgroundColorAdded: color =>
       (userButtonBackgroundColors = [color, ...userButtonBackgroundColors]),
-    onBorderColorAdded: color =>
-      (userButtonBorderColors = [color, ...userButtonBorderColors]),
+    onBorderColorAdded: color => (userButtonBorderColors = [color, ...userButtonBorderColors]),
     getTextColors: () => userButtonTextColors,
     getBorderColors: () => userButtonBorderColors,
-    getBackgroundColors: () => userButtonBackgroundColors
+    getBackgroundColors: () => userButtonBackgroundColors,
   },
   [TEXT_HIGHLIGHT_TYPE]: {
     // toolbar: {
@@ -500,7 +472,7 @@ export const config = {
     styleSelectionPredicate,
     customStyleFn: customBackgroundStyleFn,
     onColorAdded: color => (userColors = [color, ...userColors]),
-    getUserColors: () => userColors
+    getUserColors: () => userColors,
   },
   [TEXT_COLOR_TYPE]: {
     // toolbar: {

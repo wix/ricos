@@ -13,7 +13,6 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
-
 ### :rocket: New Feature
 - `emoji`
   - [#470](https://github.com/wix-incubator/rich-content/pull/470) plugin reworked
@@ -86,7 +85,7 @@
     - [#452](https://github.com/wix-incubator/rich-content/pull/452) `handleDropdownOpen`, `handleDropdownClose` and `popoverComponent` added to plugin settings
   - `video`
     - [#443](https://github.com/wix-incubator/rich-content/pull/443) async url resolving support
-    - [#444](https://github.com/wix-incubator/rich-content/pull/444) file upload support
+    - [#444](https://github.com/wix-incubator/rich-content/pull/444) file upload support  
     - [#449](https://github.com/wix-incubator/rich-content/pull/449) force video mime type for uploads
     - [#451](https://github.com/wix-incubator/rich-content/pull/451) uses unique file input id
   - `editor`
