@@ -1,5 +1,7 @@
 import { toArray } from 'lodash';
-import { emojiList, createEmojisFromStrategy, convertShortNameToUnicode } from './index';
+import convertShortNameToUnicode from './convertShortNameToUnicode';
+import createEmojisFromStrategy from './createEmojisFromStrategy';
+import emojiList from './emojiList';
 import strategy from 'emojione/emoji.json';
 
 const getGroupEmojis = category => {
