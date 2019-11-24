@@ -13,7 +13,7 @@ import {
   EXTERNAL_MENTIONS_TYPE,
 } from 'wix-rich-content-plugin-mentions';
 import { createCodeBlockPlugin, CODE_BLOCK_TYPE } from 'wix-rich-content-plugin-code-block';
-import { createSoundCloudPlugin } from 'wix-rich-content-plugin-sound-cloud';
+import { createSoundCloudPlugin, SOUND_CLOUD_TYPE } from 'wix-rich-content-plugin-sound-cloud';
 import { createGiphyPlugin, GIPHY_TYPE } from 'wix-rich-content-plugin-giphy';
 import {
   createHeadersMarkdownPlugin,
@@ -23,6 +23,8 @@ import { createMapPlugin, MAP_TYPE } from 'wix-rich-content-plugin-map';
 import { createFileUploadPlugin, FILE_UPLOAD_TYPE } from 'wix-rich-content-plugin-file-upload';
 import { createTextColorPlugin, TEXT_COLOR_TYPE } from 'wix-rich-content-plugin-text-color';
 import { createButtonPlugin, BUTTON_TYPE } from 'wix-rich-content-plugin-button';
+import { createTextHighlightPlugin, TEXT_HIGHLIGHT_TYPE } from 'wix-rich-content-plugin-text-color';
+import createBlockDndPlugin from 'draft-js-drag-n-drop-plugin';
 import Highlighter from 'react-highlight-words';
 import casual from 'casual-browserify';
 
@@ -45,8 +47,12 @@ import 'wix-rich-content-plugin-giphy/dist/styles.min.css';
 import 'wix-rich-content-plugin-map/dist/styles.min.css';
 import 'wix-rich-content-plugin-file-upload/dist/styles.min.css';
 import 'wix-rich-content-plugin-text-color/dist/styles.min.css';
-
-import { customStyleFn, styleSelectionPredicate, colorScheme } from '../../src/text-color-style-fn';
+import {
+  customForegroundStyleFn,
+  styleSelectionPredicate,
+  colorScheme,
+  customBackgroundStyleFn,
+} from '../../src/text-color-style-fn';
 import { getBaseUrl } from '../../src/utils';
 
 // import { TOOLBARS, BUTTONS, DISPLAY_MODE } from 'wix-rich-content-common';
@@ -74,6 +80,8 @@ export const editorPlugins = [
   createFileUploadPlugin,
   createButtonPlugin,
   createTextColorPlugin,
+  createTextHighlightPlugin,
+  createBlockDndPlugin,
 ];
 
 const themeColors = {
@@ -152,6 +160,7 @@ const uiSettings = {
     nofollowRelToggleVisibilityFn: () => true,
     dropDown: getLinkPanelDropDownConfig(),
   },
+  // disableRightClick: true,
 };
 
 export const config = {
@@ -160,6 +169,14 @@ export const config = {
       typeof window !== 'undefined' && document.getElementsByClassName('editor-example')[0],
   },
   [IMAGE_TYPE]: {
+    // defaultData: {
+    //   config: {
+    //     alignment: 'left',
+    //     size: 'content',
+    //     showTitle: true,
+    //     showDescription: true,
+    //   },
+    // },
     imageEditorWixSettings: {
       initiator: 'some-initiator',
       siteToken:
@@ -167,6 +184,7 @@ export const config = {
       metaSiteId: '538fa6c6-c953-4cdd-86c4-4b869aecf980',
       mediaRoot: 'some-mediaRoot',
     },
+    onImageEditorOpen: () => console.log('Media Studio Launched'),
   },
   [HASHTAG_TYPE]: {
     createHref: decoratedText => `/search/posts?query=${encodeURIComponent('#')}${decoratedText}`,
@@ -226,6 +244,7 @@ export const config = {
   [LINK_TYPE]: {
     onClick: (event, url) => console.log('link clicked!', url),
   },
+  [SOUND_CLOUD_TYPE]: {},
   [CODE_BLOCK_TYPE]: {},
   [DIVIDER_TYPE]: {},
   // [EXTERNAL_EMOJI_TYPE]: {},
@@ -256,6 +275,28 @@ export const config = {
         console.log('consumer uploaded ', videoToUpload);
       }, 500);
     },
+    // handleFileUpload: (file, updateEntity, removeEntity) => {
+    //   console.log('consumer wants to upload custom video', file);
+    //   const videoWithAbsoluteUrl = {
+    //     url: 'http://mirrors.standaloneinstaller.com/video-sample/jellyfish-25-mbps-hd-hevc.mp4',
+    //   };
+    //   const videoWithRelativeUrl = {
+    //     pathname: 'video/441c23_84f5c058e5e4479ab9e626cd5560a21b/file',
+    //     thumbnail: {
+    //       pathname: 'media/441c23_84f5c058e5e4479ab9e626cd5560a21bf000.jpg',
+    //       height: 1080,
+    //       width: 1920,
+    //     },
+    //   };
+    //   // You can provide either absolute or relative URL.
+    //   // If relative URL is provided, a function 'getVideoUrl' will be invoked to form a full URL.
+    //   const videoToUpload = videoWithAbsoluteUrl;
+    //   setTimeout(() => {
+    //     updateEntity({ data: videoToUpload });
+    //     //updateEntity({ error: { msg: 'Upload Failed' } });
+    //     console.log('consumer uploaded ', videoToUpload);
+    //   }, 500);
+    // },
     enableCustomUploadOnMobile: true,
     // Function is invoked when rendering video which has relative URL.
     // You should take the pathname and form a full URL.
@@ -263,6 +304,7 @@ export const config = {
   },
   [GIPHY_TYPE]: {
     giphySdkApiKey: process.env.GIPHY_API_KEY,
+    sizes: { desktop: 'original', mobile: 'original' }, // original or downsizedSmall are supported
   },
   [MAP_TYPE]: {
     googleMapApiKey: process.env.GOOGLE_MAPS_API_KEY,
@@ -335,10 +377,27 @@ export const config = {
     getBorderColors: () => userButtonBorderColors,
     getBackgroundColors: () => userButtonBackgroundColors,
   },
-  [TEXT_COLOR_TYPE]: {
+  [TEXT_HIGHLIGHT_TYPE]: {
+    // toolbar: {
+    //   icons: {
+    //     TextHighlight: CustomIcon,
+    //   },
+    // },
     colorScheme,
     styleSelectionPredicate,
-    customStyleFn,
+    customStyleFn: customBackgroundStyleFn,
+    onColorAdded: color => (userColors = [color, ...userColors]),
+    getUserColors: () => userColors,
+  },
+  [TEXT_COLOR_TYPE]: {
+    // toolbar: {
+    //   icons: {
+    //     TextColor: CustomIcon,
+    //   },
+    // },
+    colorScheme,
+    styleSelectionPredicate,
+    customStyleFn: customForegroundStyleFn,
     onColorAdded: color => (userColors = [color, ...userColors]),
     getUserColors: () => userColors,
   },

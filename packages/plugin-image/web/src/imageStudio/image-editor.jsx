@@ -6,7 +6,6 @@ import { setupImageEditor } from './image-editor-logic';
 class ImageEditor extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       mediaImageStudio: undefined,
       mediaImageStudioEvents: undefined,
@@ -17,6 +16,7 @@ class ImageEditor extends Component {
       helpers,
       pubsub,
       imageEditorWixSettings,
+      onImageEditorOpen,
     } = this.props;
 
     const onSave = file => {
@@ -27,6 +27,8 @@ class ImageEditor extends Component {
     const onClose = () => {
       helpers.closeModal();
     };
+
+    onImageEditorOpen && onImageEditorOpen();
 
     this.id = 'imageEditor';
     setupImageEditor(imageEditorWixSettings, this.id, src.file_name, onSave, onClose);
@@ -44,6 +46,7 @@ ImageEditor.propTypes = {
     initiator: PropTypes.string,
     mediaRoot: PropTypes.string,
   }).isRequired,
+  onImageEditorOpen: PropTypes.func,
   componentData: PropTypes.any.isRequired,
   helpers: PropTypes.object,
   pubsub: PropTypes.any,

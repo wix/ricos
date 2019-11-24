@@ -13,7 +13,7 @@ class VideoViewer extends Component {
   constructor(props) {
     super(props);
     validate(props.componentData, schema);
-    this.state = { url: undefined };
+    this.state = { url: undefined, isLoaded: false };
     const url = getVideoSrc(props.componentData.src, props.settings);
     if (typeof url === 'string') {
       this.state = { url: this.normalizeUrl(url) };
@@ -43,25 +43,36 @@ class VideoViewer extends Component {
     return element.clientHeight / element.clientWidth;
   };
 
-  fixVideoRatio = () => {
+  onReactPlayerReady = () => {
     // eslint-disable-next-line react/no-find-dom-node
     const wrapper = ReactDOM.findDOMNode(this).parentNode;
     const ratio = this.getVideoRatio(wrapper);
     wrapper.style['padding-bottom'] = ratio * 100 + '%';
+
+    if (!this.state.isLoaded) {
+      this.setState({ isLoaded: true });
+    }
   };
+
+  handleContextMenu = e => this.context.disableRightClick && e.preventDefault();
 
   render() {
     this.styles = this.styles || mergeStyles({ styles, theme: this.context.theme });
-    const { url } = this.state;
+    const { url, isLoaded } = this.state;
     const props = {
       ...this.props,
       url,
-      onReady: this.fixVideoRatio,
+      onReady: this.onReactPlayerReady,
       disabled: this.context.disabled,
     };
     return (
       <ViewportRenderer>
-        <ReactPlayerWrapper className={classNames(this.styles.video_player)} {...props} />
+        <ReactPlayerWrapper
+          className={classNames(this.styles.video_player)}
+          data-loaded={isLoaded}
+          onContextMenu={this.handleContextMenu}
+          {...props}
+        />
       </ViewportRenderer>
     );
   }

@@ -163,8 +163,8 @@ class GalleryViewer extends React.Component {
 
   renderTitle = alt => {
     return alt ? (
-      <div className={viewerStyles.imageTitleContainer}>
-        <div className={viewerStyles.imageTitle}>{alt}</div>
+      <div className={this.styles.imageTitleContainer}>
+        <div className={this.styles.imageTitle}>{alt}</div>
       </div>
     ) : null;
   };
@@ -175,6 +175,8 @@ class GalleryViewer extends React.Component {
       {this.renderTitle(itemProps.alt)}
     </Fragment>
   );
+
+  handleContextMenu = e => this.context.disableRightClick && e.preventDefault();
 
   render() {
     this.styles = this.styles || mergeStyles({ styles, theme: this.context.theme });
@@ -188,6 +190,8 @@ class GalleryViewer extends React.Component {
         ref={elem => (this.container = elem)}
         className={this.styles.gallery_container}
         data-hook="galleryViewer"
+        role="none"
+        onContextMenu={this.handleContextMenu}
       >
         <ProGallery
           items={items}
