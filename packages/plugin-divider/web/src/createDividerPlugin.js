@@ -15,6 +15,7 @@ const createDividerPlugin = (config = {}) => {
     theme,
     type,
     toolbar: createToolbar({
+      settings,
       helpers,
       styles,
       theme,

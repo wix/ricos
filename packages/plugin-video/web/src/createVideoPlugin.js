@@ -21,6 +21,7 @@ const createVideoPlugin = (config = {}) => {
     settings,
     t,
     isMobile,
+    disableRightClick: config?.uiSettings?.disableRightClick,
     ...rest,
   });
 };

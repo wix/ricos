@@ -14,6 +14,7 @@ const createGalleryPlugin = (config = {}) => {
     t,
     type,
     toolbar: createToolbar({
+      settings,
       helpers,
       t,
       anchorTarget,
@@ -22,6 +23,7 @@ const createGalleryPlugin = (config = {}) => {
     helpers,
     anchorTarget,
     relValue,
+    disableRightClick: config?.uiSettings?.disableRightClick,
     ...rest,
   });
 };

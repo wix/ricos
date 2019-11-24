@@ -229,19 +229,15 @@ You can find a full list of classes you can override in [here](./examples/main/s
 
 [wix-rich-content-plugin-image](./packages/plugin-image) embed images in your content
 
-##### Private Wix Plugins
-
-[wix-rich-content-plugin-gallery](https://github.com/wix-incubator/rich-content-plugins-wix/tree/master/packages/plugin-gallery) embed Wix `pro-gallery` component in your content
-
-Note: these plugins are found in a [separate repository](https://github.com/wix-incubator/rich-content-plugins-wix) since they are dependent on private Wix code
+[wix-rich-content-plugin-gallery](./packages/plugin-gallery) embed Wix `pro-gallery` component in your content
 
 ### Usage with [Yoshi](https://github.com/wix/yoshi)
 
-To use the editor with Yoshi, you should do the same bootstrapping process, but make sure to include the package's `.css` files from a `.scss` file, or add `.global` to the import:
+To use the editor with Yoshi, you should do the same bootstrapping process, but make sure to include the package's `.css` files from a `.global.scss` file.  For example, create a file named `rich-content.global.scss` with the following content (make sure to import styles from any plugins you are using as well):
 
-```es6
-import 'wix-rich-content-common/dist/styles.min.global.css';
-import 'wix-rich-content-editor/dist/styles.min.global.css';
+```scss
+@import '~wix-rich-content-common/dist/styles.min.css';
+@import '~wix-rich-content-editor/dist/styles.min.css';
 ```
 
 > This workaround is required because Yoshi re-compiles CSS files, and applies css-modules again.
@@ -264,13 +260,12 @@ The compiled package also contains a CommonJS bundle, which you can consume if y
 
 #### Examples
 
-[rich-content-editor-example](./examples/editor) to see how to consume the Component as an editor.
+[rich-content-editor-example](./examples/main) to see how to consume the Component as:
+- [editor](./examples/main/shared/editor/Editor.jsx)
+- [viewer](./examples/main/shared/viewre/Viewer.jsx)
 
-[rich-content-viewer-example](./examples/viewer) to see how to consume the Component as a viewer.
 
 [rich-content-viewer-ssr](./examples/viewer-ssr) to see how to consume the Component as a viewer within a Yoshi-based SSR Application.
-
-[rich-content-editor-tpa](./examples/editor-tpa) to see how to consume the Component as an editor within a Wix Third Party Application.
 
 ### Modules
 

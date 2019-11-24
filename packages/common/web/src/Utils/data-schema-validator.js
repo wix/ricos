@@ -1,8 +1,8 @@
 import contentStateSchema from '../../statics/content-state.schema.json';
 
 export const validate = (data, schema) => {
-  const Validator = require('jsonschema').Validator;
   if (process.env.NODE_ENV !== 'production') {
+    const Validator = require('jsonschema').Validator;
     const validator = new Validator();
     const result = validator.validate(data, schema);
     if (!result.valid && result.errors) {

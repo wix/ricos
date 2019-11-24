@@ -20,6 +20,7 @@
   display: inline-block;
   margin-right: 24px;
   margin-bottom: 24px;
+  color: #1ED6B5;
   @include phone {
     margin-bottom: 0px;
   }
@@ -32,7 +33,7 @@
   }
 }
 
-.button_sample_picked {
+.button_picked {
   position: absolute;
   right: -7px;
   top: -7px;

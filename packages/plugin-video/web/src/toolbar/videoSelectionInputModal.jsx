@@ -95,11 +95,11 @@ export default class VideoSelectionInputModal extends Component {
     } = this.props;
     const { styles } = this;
     const hasCustomFileUpload = handleFileUpload || handleFileSelection;
-    let handleClick;
+    let handleClick, handleChange;
     if (handleFileUpload) {
-      handleClick = () =>
+      handleChange = () =>
         handleFileUpload(
-          this.inputFile.value,
+          this.inputFile.files[0],
           ({ data, error }) => this.handleCustomVideoUpload({ data, error }),
           () => this.onCloseRequested()
         );
@@ -125,6 +125,7 @@ export default class VideoSelectionInputModal extends Component {
             className={styles.fileInput}
             ref={node => (this.inputFile = node)}
             onClick={handleClick}
+            onChange={handleChange}
           />
           <label
             htmlFor={this.id}
@@ -190,6 +191,7 @@ export default class VideoSelectionInputModal extends Component {
               onClick={() => this.onConfirm()}
               ariaProps={!this.state.url && { disabled: 'disabled' }}
               dataHook="videoUploadModalAddButton"
+              theme={styles}
             >
               {t('VideoUploadModal_AddButtonText')}
             </Button>
