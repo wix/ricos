@@ -1,0 +1,79 @@
+@import "~wix-rich-content-common/dist/statics/styles/mixins";
+
+.emojiPreviewModal_emoji_icons_container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 21px;
+  padding-right: 23px;
+  cursor: pointer;
+}
+
+.emojiPreviewModal_nav_icon {
+  color: #bdbdbd;
+}
+
+.emojiPreviewModal_emoji_icon:hover {
+  opacity: 0.5;
+}
+
+.emojiPreviewModal_emojis_container {
+  width: 100%;
+  height: 285px;
+  padding-top: 5px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+.emojiPreviewModal_emoji {
+  width: 37px;
+  height: 37px;
+  text-align: center;
+  padding: 5px;
+  float: left;
+  font-size: 20px;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+.emojiPreviewModal_emoji:hover {
+  background: #efefef;
+}
+
+.emojiPreviewModal_headerTitle {
+  font-family: Lato;
+  font-size: 14px;
+  font-weight: 300;
+  color: #333;
+  display: flex;
+  justify-content: space-between;
+  padding-left: 17px;
+  padding-right: 17px;
+  margin-bottom: 11px;
+}
+
+.emojiPreviewModal_emojis_groups_container {
+  width: calc(100% - 12px);
+  margin-left: 12px;
+}
+
+.emojiPreviewModal_JoyPixelsIcon {
+  height: 14px;
+  width: auto;
+  padding-top: 3px;
+  color: #333;
+}
+
+.emojiPreviewModal_PoweredBy_label {
+  font-size: 10px;
+}
+.emojiPreviewModal_scrollbar_thumb {
+  background: #b2b2b2;
+  border-radius: 4px;
+  width: 4px;
+  margin-left: 1px;
+  cursor: pointer;
+}
+.emojiPreviewModal_scrollbar_thumb:hover {
+  background: #000;
+}

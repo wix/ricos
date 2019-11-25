@@ -13,21 +13,24 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
-  
+
 ### :rocket: New Feature
+- `emoji`
+  - [#470](https://github.com/wix-incubator/rich-content/pull/470) plugin reworked
 - `text-color`
-  - [#440](https://github.com/wix-incubator/rich-content/pull/440) text highlight plugin   
+  - [#440](https://github.com/wix-incubator/rich-content/pull/440) text highlight plugin
 - `editor`
   - [#462](https://github.com/wix-incubator/rich-content/pull/462) custom icons for all toolbar buttons
+  - [#475](https://github.com/wix-incubator/rich-content/pull/475) plugin toolbar alignment
 - `button`
   - [#472](https://github.com/wix-incubator/rich-content/pull/472) plugin improved
 ### :bug: Bug Fix
 - `video`
   - [#480](https://github.com/wix-incubator/rich-content/pull/480) video file selection
-- `giphy`
-  - [#485](https://github.com/wix-incubator/rich-content/pull/485) giphy-viewer: `data.config.sizes` fallbacks to empty object
 - `gallery`
   - [#481](https://github.com/wix-incubator/rich-content/pull/481) fixed layout transition behavior
+- `giphy`
+  - [#485](https://github.com/wix-incubator/rich-content/pull/485) giphy-viewer: `data.config.sizes` fallbacks to empty object
   
 </details>
 <hr/>
@@ -52,12 +55,12 @@
 - `fullscreen`
   - [#465](https://github.com/wix-incubator/rich-content/pull/465) getImagesData was not working correctly
 - `video`
-  - [#468](https://github.com/wix-incubator/rich-content/pull/468) video file upload selection  
+  - [#468](https://github.com/wix-incubator/rich-content/pull/468) video file upload selection
 ### :house: Internal
 - `gallery`
   - [#467](https://github.com/wix-incubator/rich-content/pull/467) `pro-gallery` updated to `v1.5.33`
 - `draftjs`
-  - [#483](https://github.com/wix-incubator/rich-content/pull/483) update draftjs 0.11 => 0.11.2
+  - reverted in next release. [#483](https://github.com/wix-incubator/rich-content/pull/483) update draftjs 0.11 => 0.11.2
 - `e2e`
   - [#484](https://github.com/wix-incubator/rich-content/pull/484) fix atomic block alignment tests
 <hr/>
@@ -1735,3 +1738,4 @@ _NOTE:_ From this version onwards all modules will have the same version number,
 - `editor`
   - [#58](https://github.com/wix-incubator/rich-content/pull/58) Default `locale` is `'en'`, English texts are imported statically
     Set the `locale` and `localeResource` props to use another language
+
