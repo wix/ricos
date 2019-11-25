@@ -16,7 +16,9 @@ const layouts = [
     cropOnlyFill: false,
     oneRow: false,
     galleryType: 'Columns',
-  }, //Collage
+    imageMargin: 20,
+    gallerySizePx: '300',
+  }, // Collage
   {
     showArrows: false,
     cubeImages: false,
@@ -24,6 +26,8 @@ const layouts = [
     groupTypes: '1',
     fixedColumns: 0,
     numberOfImagesPerRow: 0,
+    imageMargin: 20,
+    gallerySizePx: '300',
     gridStyle: 0,
     hasThumbnails: false,
     galleryThumbnailsAlignment: 'none',
@@ -42,6 +46,9 @@ const layouts = [
     imageResize: false,
     galleryImageRatio: 2,
     numberOfImagesPerRow: 3,
+    imageMargin: 20,
+    cubeType: 'fill',
+    cubeRatio: 1,
     isVertical: true,
     galleryType: 'Columns',
     groupSize: 1,
@@ -78,9 +85,9 @@ const layouts = [
     isSlideshow: false,
     cropOnlyFill: false,
     floatingImages: 0,
+    thumbnailSpacings: 0,
     galleryMargin: 0,
-    imageMargin: 0,
-  }, //Thumbnails
+  }, // Thumbnails
   {
     showArrows: true,
     cubeImages: true,
@@ -99,6 +106,9 @@ const layouts = [
     isColumns: false,
     isSlideshow: false,
     cropOnlyFill: true,
+    imageMargin: 20,
+    cubeType: 'fill',
+    cubeRatio: 1,
   }, // Slider
   {
     showArrows: true,
@@ -141,6 +151,7 @@ const layouts = [
     isSlider: false,
     isSlideshow: false,
     cropOnlyFill: false,
+    imageMargin: 20,
   }, // Panorama
   {
     showArrows: true,
@@ -162,6 +173,7 @@ const layouts = [
     isSlider: false,
     isSlideshow: false,
     cropOnlyFill: false,
+    imageMargin: 20,
   }, // Columns
   {}, //magic layout ???
   {
@@ -186,7 +198,7 @@ const layouts = [
     floatingImages: 0,
     galleryMargin: 0,
     imageMargin: 0,
-  }, //Fullsize
+  }, // Fullsize
 ];
 
 export default layouts;

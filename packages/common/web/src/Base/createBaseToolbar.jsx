@@ -4,9 +4,10 @@ import { findDOMNode } from 'react-dom';
 import classNames from 'classnames';
 import { get, pickBy } from 'lodash';
 import Measure from 'react-measure';
-import { TOOLBARS, DISPLAY_MODE } from '../consts';
+import { TOOLBARS, TOOLBAR_OFFSETS, DISPLAY_MODE } from '../consts';
 import { getConfigByFormFactor } from '../Utils/getConfigByFormFactor';
 import { mergeToolbarSettings } from '../Utils/mergeToolbarSettings';
+import Context from '../Utils/Context';
 import Separator from '../Components/Separator';
 import BaseToolbarButton from './baseToolbarButton';
 import { getDefaultToolbarSettings } from './default-toolbar-settings';
@@ -14,8 +15,6 @@ import { BUTTONS, BUTTONS_BY_KEY, BlockLinkButton, deleteButton } from './button
 import Panel from '../Components/Panel';
 import toolbarStyles from '../../statics/styles/plugin-toolbar.scss';
 import buttonStyles from '../../statics/styles/plugin-toolbar-button.scss';
-
-const toolbarOffset = 12;
 
 const getInitialState = () => ({
   position: { transform: 'scale(0)' },
@@ -201,20 +200,29 @@ export default function createToolbar({
       const offsetParentTop = offsetParentRect.top;
       const offsetParentLeft = offsetParentRect.left;
       const boundingRect = pubsub.get('boundingRect');
+      const top = boundingRect.top - toolbarHeight - TOOLBAR_OFFSETS.top - offsetParentTop + y;
+      const tmpLeft =
+        boundingRect.left + boundingRect.width / 2 - offsetParentLeft - toolbarWidth / 2 + x;
+      const maxLeft = offsetParentRect.right - toolbarWidth - TOOLBAR_OFFSETS.left;
+      const left = this.calculateLeftOffset(tmpLeft, maxLeft);
       return {
-        '--offset-top': `${boundingRect.top -
-          toolbarHeight -
-          toolbarOffset -
-          offsetParentTop +
-          y}px`,
-        '--offset-left': `${boundingRect.left +
-          boundingRect.width / 2 -
-          offsetParentLeft -
-          toolbarWidth / 2 +
-          x}px`,
+        '--offset-top': `${top}px`,
+        '--offset-left': `${left}px`,
         transform: 'scale(1)',
       };
     }
+
+    calculateLeftOffset = (left, maxLeft) => {
+      const isLtr = this.context?.languageDir === 'ltr';
+      const outOfMargins = isLtr ? left < 0 : left > maxLeft;
+      if (outOfMargins) {
+        return -TOOLBAR_OFFSETS.left * 2;
+      }
+      if (isLtr) {
+        return Math.min(left, maxLeft);
+      }
+      return left < 0 ? maxLeft : left;
+    };
 
     showToolbar = () => {
       if (!this.visibilityFn()) {
@@ -615,5 +623,6 @@ export default function createToolbar({
       }
     }
   }
+  BaseToolbar.contextType = Context.type;
   return BaseToolbar;
 }

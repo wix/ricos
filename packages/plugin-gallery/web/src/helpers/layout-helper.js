@@ -24,7 +24,7 @@ export const switchLayout = (layout, _componentData, store) => {
   const layoutStyles = Object.assign({ galleryLayout }, layoutData[galleryLayout]);
   const componentData = {
     ..._componentData,
-    styles: Object.assign({}, _componentData.styles, layoutStyles),
+    styles: Object.assign({}, layoutStyles),
   };
   store.set('componentData', componentData);
 };

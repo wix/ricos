@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { isEqual, get } from 'lodash';
+import { isEqual } from 'lodash';
 import { validate, mergeStyles, Context } from 'wix-rich-content-common';
 import { convertItemData } from './helpers/convert-item-data';
 import { getDefault, isHorizontalLayout, sampleItems } from './constants';
@@ -35,11 +35,7 @@ class GalleryViewer extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    let galleryKey = this.state && this.state.galleryKey;
-    if (!isEqual(nextProps.componentData, this.props.componentData)) {
-      galleryKey = get(this, 'props.componentData.styles.galleryLayout', Math.random());
-    }
-    this.setState({ galleryKey, ...this.stateFromProps(nextProps) });
+    this.setState({ ...this.stateFromProps(nextProps) });
   }
 
   componentDidUpdate(prevProps) {
@@ -181,12 +177,10 @@ class GalleryViewer extends React.Component {
   render() {
     this.styles = this.styles || mergeStyles({ styles, theme: this.context.theme });
     const { scrollingElement, ...settings } = this.props.settings;
-    // TODO remove gallery key
-    const { galleryKey, styleParams, size = { width: 300 } } = this.state;
+    const { styleParams, size = { width: 300 } } = this.state;
     const items = this.getItems();
     return (
       <div
-        key={galleryKey}
         ref={elem => (this.container = elem)}
         className={this.styles.gallery_container}
         data-hook="galleryViewer"
