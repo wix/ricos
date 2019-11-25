@@ -17,9 +17,9 @@ export default function createToolbar({
       relValue,
       uiSettings,
       isMobile,
-      imageEditorWixSettings: settings.imageEditorWixSettings,
+      settings,
     }),
-    InsertButtons: createInsertButtons({ helpers, t }),
+    InsertButtons: createInsertButtons({ helpers, t, settings }),
     name: 'image',
   };
 }

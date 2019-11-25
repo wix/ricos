@@ -28,145 +28,163 @@ export { BUTTONS };
 
 export { BlockLinkButton };
 
-export const SizeSmallButton = createBlockSizeButton({
-  size: 'small',
-  Icon: SizeSmallIcon,
-  tooltipTextKey: 'SizeSmallButton_Tooltip',
-});
+export const sizeSmallButton = icon =>
+  createBlockSizeButton({
+    size: 'small',
+    Icon: icon || SizeSmallIcon,
+    tooltipTextKey: 'SizeSmallButton_Tooltip',
+  });
 
-export const SizeMediumButton = createBlockSizeButton({
-  size: 'medium',
-  Icon: SizeMediumIcon,
-  tooltipTextKey: 'SizeMediumButton_Tooltip',
-});
+export const sizeMediumButton = icon =>
+  createBlockSizeButton({
+    size: 'medium',
+    Icon: icon || SizeMediumIcon,
+    tooltipTextKey: 'SizeMediumButton_Tooltip',
+  });
 
-export const SizeLargeButton = createBlockSizeButton({
-  size: 'large',
-  Icon: SizeLargeIcon,
-  tooltipTextKey: 'SizeLargeButton_Tooltip',
-});
+export const sizeLargeButton = icon =>
+  createBlockSizeButton({
+    size: 'large',
+    Icon: icon || SizeLargeIcon,
+    tooltipTextKey: 'SizeLargeButton_Tooltip',
+  });
 
-export const AlignmentLeftButton = createBlockAlignmentButton({
-  alignment: 'left',
-  Icon: AlignLeftIcon,
-  tooltipTextKey: 'AlignTextLeftButton_Tooltip',
-});
+export const alignmentLeftButton = icon =>
+  createBlockAlignmentButton({
+    alignment: 'left',
+    Icon: icon || AlignLeftIcon,
+    tooltipTextKey: 'AlignTextLeftButton_Tooltip',
+  });
 
-export const AlignmentCenterButton = createBlockAlignmentButton({
-  alignment: 'center',
-  Icon: AlignTextCenterIcon,
-  tooltipTextKey: 'AlignTextCenterButton_Tooltip',
-});
+export const alignmentCenterButton = icon =>
+  createBlockAlignmentButton({
+    alignment: 'center',
+    Icon: icon || AlignTextCenterIcon,
+    tooltipTextKey: 'AlignTextCenterButton_Tooltip',
+  });
 
-export const AlignmentRightButton = createBlockAlignmentButton({
-  alignment: 'right',
-  Icon: AlignRightIcon,
-  tooltipTextKey: 'AlignTextRightButton_Tooltip',
-});
+export const alignmentRightButton = icon =>
+  createBlockAlignmentButton({
+    alignment: 'right',
+    Icon: icon || AlignRightIcon,
+    tooltipTextKey: 'AlignTextRightButton_Tooltip',
+  });
 
-export const SizeOriginalButton = createBlockAlignmentAndSizeButton({
-  size: 'original',
-  alignment: 'left',
-  Icon: SizeOriginalIcon,
-  tooltipTextKey: 'SizeOriginalButton_Tooltip',
-});
+export const sizeOriginalButton = icon =>
+  createBlockAlignmentAndSizeButton({
+    size: 'original',
+    alignment: 'left',
+    Icon: icon || SizeOriginalIcon,
+    tooltipTextKey: 'SizeOriginalButton_Tooltip',
+  });
 
-export const SizeSmallCenterButton = createBlockAlignmentAndSizeButton({
-  size: 'small',
-  alignment: 'center',
-  Icon: SizeSmallCenterIcon,
-  tooltipTextKey: 'SizeSmallCenterButton_Tooltip',
-});
+export const sizeSmallCenterButton = icon =>
+  createBlockAlignmentAndSizeButton({
+    size: 'small',
+    alignment: 'center',
+    Icon: icon || SizeSmallCenterIcon,
+    tooltipTextKey: 'SizeSmallCenterButton_Tooltip',
+  });
 
-export const SizeSmallLeftButton = createBlockAlignmentAndSizeButton({
-  alignment: 'left',
-  size: 'small',
-  Icon: SizeSmallLeftIcon,
-  tooltipTextKey: 'SizeSmallLeftButton_Tooltip',
-});
+export const sizeSmallLeftButton = icon =>
+  createBlockAlignmentAndSizeButton({
+    alignment: 'left',
+    size: 'small',
+    Icon: icon || SizeSmallLeftIcon,
+    tooltipTextKey: 'SizeSmallLeftButton_Tooltip',
+  });
 
-export const SizeSmallRightButton = createBlockAlignmentAndSizeButton({
-  size: 'small',
-  alignment: 'right',
-  Icon: SizeSmallRightIcon,
-  tooltipTextKey: 'SizeSmallRightButton_Tooltip',
-});
+export const sizeSmallRightButton = icon =>
+  createBlockAlignmentAndSizeButton({
+    size: 'small',
+    alignment: 'right',
+    Icon: icon || SizeSmallRightIcon,
+    tooltipTextKey: 'SizeSmallRightButton_Tooltip',
+  });
 
-export const AlignLeftButton = createBlockAlignmentButton({
-  alignment: 'left',
-  Icon: SizeSmallLeftIcon,
-  tooltipTextKey: 'SizeSmallLeftButton_Tooltip',
-});
+export const alignLeftButton = icon =>
+  createBlockAlignmentButton({
+    alignment: 'left',
+    Icon: icon || SizeSmallLeftIcon,
+    tooltipTextKey: 'SizeSmallLeftButton_Tooltip',
+  });
 
-export const AlignCenterButton = createBlockAlignmentButton({
-  alignment: 'center',
-  Icon: AlignCenterIcon,
-  tooltipTextKey: 'AlignCenterButton_Tooltip',
-});
+export const alignCenterButton = icon =>
+  createBlockAlignmentButton({
+    alignment: 'center',
+    Icon: icon || AlignCenterIcon,
+    tooltipTextKey: 'AlignCenterButton_Tooltip',
+  });
 
-export const AlignRightButton = createBlockAlignmentButton({
-  alignment: 'right',
-  Icon: SizeSmallRightIcon,
-  tooltipTextKey: 'SizeSmallRightButton_Tooltip',
-});
+export const alignRightButton = icon =>
+  createBlockAlignmentButton({
+    alignment: 'right',
+    Icon: icon || SizeSmallRightIcon,
+    tooltipTextKey: 'SizeSmallRightButton_Tooltip',
+  });
 
-export const SizeContentButton = createBlockAlignmentAndSizeButton({
-  size: 'content',
-  alignment: 'center',
-  Icon: SizeBestFitIcon,
-  tooltipTextKey: 'SizeContentButton_Tooltip',
-});
+export const sizeContentButton = icon =>
+  createBlockAlignmentAndSizeButton({
+    size: 'content',
+    alignment: 'center',
+    Icon: icon || SizeBestFitIcon,
+    tooltipTextKey: 'SizeContentButton_Tooltip',
+  });
 
-export const SizeFullWidthButton = createBlockAlignmentAndSizeButton({
-  size: 'fullWidth',
-  alignment: 'center',
-  Icon: SizeFullWidthIcon,
-  tooltipTextKey: 'SizeFullWidthButton_Tooltip',
-});
+export const sizeFullWidthButton = icon =>
+  createBlockAlignmentAndSizeButton({
+    size: 'fullWidth',
+    alignment: 'center',
+    Icon: icon || SizeFullWidthIcon,
+    tooltipTextKey: 'SizeFullWidthButton_Tooltip',
+  });
 
-export const DeleteButton = createBlockButton({
-  Icon: TrashIcon,
-  tooltipTextKey: 'DeleteButton_Tooltip',
-});
+export const deleteButton = icon =>
+  createBlockButton({
+    Icon: icon || TrashIcon,
+    tooltipTextKey: 'DeleteButton_Tooltip',
+  });
 
-export const WidthButton = createSliderPanelButton({
-  Icon: WidthIcon,
-  tooltipTextKey: 'WidthButton_Tooltip',
-  getValue: ({ componentData }) => componentData.config.width,
-  onChange: ({ getEditorBounds, store }) => width => {
-    const bounds = getEditorBounds();
-    const editorWidth = bounds ? bounds.width : 740;
-    if (width >= editorWidth && store.get('componentAlignment')) {
-      store.set('componentAlignment', 'center');
-    }
+export const widthButton = icon =>
+  createSliderPanelButton({
+    Icon: icon || WidthIcon,
+    tooltipTextKey: 'WidthButton_Tooltip',
+    getValue: ({ componentData }) => componentData.config.width,
+    onChange: ({ getEditorBounds, store }) => width => {
+      const bounds = getEditorBounds();
+      const editorWidth = bounds ? bounds.width : 740;
+      if (width >= editorWidth && store.get('componentAlignment')) {
+        store.set('componentAlignment', 'center');
+      }
 
-    store.update('componentData', { config: { width } });
-  },
-});
+      store.update('componentData', { config: { width } });
+    },
+  });
 
-export const HeightButton = createSliderPanelButton({
-  Icon: HeightIcon,
-  tooltipTextKey: 'HeightButton_Tooltip',
-  getValue: ({ componentData }) => componentData.config.height,
-  onChange: ({ store }) => height => store.update('componentData', { config: { height } }),
-});
+export const heightButton = icon =>
+  createSliderPanelButton({
+    Icon: icon || HeightIcon,
+    tooltipTextKey: 'HeightButton_Tooltip',
+    getValue: ({ componentData }) => componentData.config.height,
+    onChange: ({ store }) => height => store.update('componentData', { config: { height } }),
+  });
 
 export const BUTTONS_BY_KEY = {
-  [BUTTONS.SIZE_SMALL]: SizeSmallButton,
-  [BUTTONS.SIZE_MEDIUM]: SizeMediumButton,
-  [BUTTONS.SIZE_LARGE]: SizeLargeButton,
-  [BUTTONS.SIZE_ORIGINAL]: SizeOriginalButton,
-  [BUTTONS.SIZE_CONTENT]: SizeContentButton,
-  [BUTTONS.SIZE_FULL_WIDTH]: SizeFullWidthButton,
-  [BUTTONS.ALIGN_LEFT]: AlignLeftButton,
-  [BUTTONS.SIZE_SMALL_CENTER]: SizeSmallCenterButton,
-  [BUTTONS.SIZE_SMALL_RIGHT]: SizeSmallRightButton,
-  [BUTTONS.SIZE_SMALL_LEFT]: SizeSmallLeftButton,
-  [BUTTONS.ALIGN_CENTER]: AlignCenterButton,
-  [BUTTONS.ALIGN_RIGHT]: AlignRightButton,
-  [BUTTONS.TEXT_ALIGN_LEFT]: AlignmentLeftButton,
-  [BUTTONS.TEXT_ALIGN_CENTER]: AlignmentCenterButton,
-  [BUTTONS.TEXT_ALIGN_RIGHT]: AlignmentRightButton,
-  [BUTTONS.WIDTH]: WidthButton,
-  [BUTTONS.HEIGHT]: HeightButton,
+  [BUTTONS.SIZE_SMALL]: icon => sizeSmallButton(icon),
+  [BUTTONS.SIZE_MEDIUM]: icon => sizeMediumButton(icon),
+  [BUTTONS.SIZE_LARGE]: icon => sizeLargeButton(icon),
+  [BUTTONS.SIZE_ORIGINAL]: icon => sizeOriginalButton(icon),
+  [BUTTONS.SIZE_CONTENT]: icon => sizeContentButton(icon),
+  [BUTTONS.SIZE_FULL_WIDTH]: icon => sizeFullWidthButton(icon),
+  [BUTTONS.ALIGN_LEFT]: icon => alignLeftButton(icon),
+  [BUTTONS.SIZE_SMALL_CENTER]: icon => sizeSmallCenterButton(icon),
+  [BUTTONS.SIZE_SMALL_RIGHT]: icon => sizeSmallRightButton(icon),
+  [BUTTONS.SIZE_SMALL_LEFT]: icon => sizeSmallLeftButton(icon),
+  [BUTTONS.ALIGN_CENTER]: icon => alignCenterButton(icon),
+  [BUTTONS.ALIGN_RIGHT]: icon => alignRightButton(icon),
+  [BUTTONS.TEXT_ALIGN_LEFT]: icon => alignmentLeftButton(icon),
+  [BUTTONS.TEXT_ALIGN_CENTER]: icon => alignmentCenterButton(icon),
+  [BUTTONS.TEXT_ALIGN_RIGHT]: icon => alignmentRightButton(icon),
+  [BUTTONS.WIDTH]: icon => widthButton(icon),
+  [BUTTONS.HEIGHT]: icon => heightButton(icon),
 };

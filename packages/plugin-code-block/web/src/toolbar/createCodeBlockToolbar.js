@@ -4,7 +4,7 @@ import { CODE_BLOCK_TYPE } from '../types';
 import { toggleBlockTypeAndEnsureSpaces } from './blockTypeModifiers';
 import createInsertButtons from './codeBlockInsertButtons';
 
-export default ({ setEditorState, helpers, t }) => {
+export default ({ setEditorState, helpers, t, icon }) => {
   const commandHandler = editorState => {
     setEditorState(toggleBlockTypeAndEnsureSpaces(CODE_BLOCK_TYPE, editorState));
   };
@@ -29,7 +29,7 @@ export default ({ setEditorState, helpers, t }) => {
         ],
       },
     }),
-    InsertButtons: createInsertButtons({ helpers, t, addBlockHandler: commandHandler }),
+    InsertButtons: createInsertButtons({ helpers, t, addBlockHandler: commandHandler, icon }),
     name: 'code-block',
   };
 };

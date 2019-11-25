@@ -14,8 +14,14 @@ import { HashtagDecorator } from 'wix-rich-content-plugin-hashtag/dist/module.vi
 import {
   textColorInlineStyleMapper,
   TEXT_COLOR_TYPE,
+  TEXT_HIGHLIGHT_TYPE,
+  textHighlightInlineStyleMapper,
 } from 'wix-rich-content-plugin-text-color/dist/module.viewer.cjs';
-import { viewerCustomStyleFn, styleSelectionPredicate } from '../../text-color-style-fn';
+import {
+  viewerCustomStyleFn,
+  styleSelectionPredicate,
+  viewerCustomBackgroundStyleFn,
+} from '../../text-color-style-fn';
 
 import TestData from './TestData/initial-state';
 
@@ -79,9 +85,16 @@ class App extends Component {
         styleSelectionPredicate,
         customStyleFn: viewerCustomStyleFn,
       },
+      [TEXT_HIGHLIGHT_TYPE]: {
+        styleSelectionPredicate,
+        customStyleFn: viewerCustomBackgroundStyleFn,
+      },
     };
 
-    this.getInlineStyleMappers = raw => [textColorInlineStyleMapper(this.config, raw)];
+    this.getInlineStyleMappers = raw => [
+      textColorInlineStyleMapper(this.config, raw),
+      textHighlightInlineStyleMapper(config, raw),
+    ];
   }
 
   initViewerProps() {

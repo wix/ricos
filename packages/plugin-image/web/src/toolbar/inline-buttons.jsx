@@ -1,24 +1,27 @@
+import { get, isEmpty } from 'lodash';
 import { BUTTONS, PluginSettingsIcon, getModalStyles } from 'wix-rich-content-common';
-import { isEmpty } from 'lodash';
 import { Modals } from '../modals';
 import { MediaReplaceIcon, ImageEditorIcon } from '../icons';
 
 const removeEmpty = list => list.filter(item => !!item);
 
-export default ({ t, anchorTarget, relValue, uiSettings, isMobile, imageEditorWixSettings }) => {
+export default ({ t, anchorTarget, relValue, uiSettings, isMobile, settings = {} }) => {
+  const icons = get(settings, 'toolbar.icons', {});
   const modalStyles = getModalStyles({ isMobile });
   const imageEditorStyles = getModalStyles({
     customStyles: { content: { maxWidth: '100%', background: 'transparent' } },
   });
+  const { imageEditorWixSettings, onImageEditorOpen } = settings;
   const imageEditorButton = imageEditorWixSettings
     ? {
         keyName: 'imageEditor',
         type: BUTTONS.EXTERNAL_MODAL,
-        icon: ImageEditorIcon,
+        icon: icons.imageEditor || ImageEditorIcon,
         modalName: Modals.IMAGE_EDITOR,
         modalStyles: imageEditorStyles,
         t,
         imageEditorWixSettings,
+        onImageEditorOpen,
         mobile: false,
         tooltipTextKey: 'ImageEditorButton_Tooltip',
         mapComponentDataToButtonProps: componentData => ({
@@ -42,7 +45,7 @@ export default ({ t, anchorTarget, relValue, uiSettings, isMobile, imageEditorWi
     {
       keyName: 'settings',
       type: BUTTONS.EXTERNAL_MODAL,
-      icon: PluginSettingsIcon,
+      icon: icons.settings || PluginSettingsIcon,
       modalName: Modals.IMAGE_SETTINGS,
       modalStyles,
       anchorTarget,
@@ -60,7 +63,7 @@ export default ({ t, anchorTarget, relValue, uiSettings, isMobile, imageEditorWi
           pubsub.getBlockHandler('handleFilesSelected')(files);
         }
       },
-      icon: MediaReplaceIcon,
+      icon: icons.replace || MediaReplaceIcon,
       mobile: true,
       tooltipTextKey: 'ReplaceImageButton_Tooltip',
       t,

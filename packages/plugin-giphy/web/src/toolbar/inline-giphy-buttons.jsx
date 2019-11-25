@@ -1,3 +1,4 @@
+import { get } from 'lodash';
 import {
   BUTTONS,
   getModalStyles,
@@ -10,6 +11,7 @@ import { MobileFullScreenCustomStyle, DesktopFlyOutModalStyles } from '../consta
 import Arrow from './arrow';
 
 export default ({ t, settings, isMobile }) => {
+  const icon = get(settings, 'toolbar.icons.replace', MediaReplaceIcon);
   const modalStyles = isMobile
     ? getModalStyles({ customStyles: MobileFullScreenCustomStyle, fullScreen: true, isMobile })
     : null;
@@ -25,7 +27,7 @@ export default ({ t, settings, isMobile }) => {
     {
       keyName: 'replace',
       type: BUTTONS.EXTERNAL_MODAL,
-      icon: MediaReplaceIcon,
+      icon,
       modalElement: decorateComponentWithProps(GiphyApiInputModal, settings),
       modalStyles,
       modalStylesFn: ({ buttonRef }) => {

@@ -3,6 +3,14 @@ export const ALIGN_CENTER = 'center';
 export const settingsTabValue = 'settings';
 export const designTabValue = 'design';
 export const BUTTON_TYPES = ['primary', 'secondary'];
+export const DEFAULT_PALETTE = ['#FEFDFD', '#D5D4D4', '#000000', '#ABCAFF', '#81B0FF', '#0261FF'];
+export const DEFAULT_COLOR = '#000000';
+export const DEFAULT_SELECTION_COLOR = '#000000';
+export const COLOR_PICKER_TYPE = {
+  TEXT_COLOR: 'textColor',
+  BORDER_COLOR: 'borderColor',
+  BACKGROUND_COLOR: 'backgroundColor',
+};
 export const DEFAULTS = {
   config: {
     alignment: ALIGN_CENTER,

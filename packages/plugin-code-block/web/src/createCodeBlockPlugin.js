@@ -1,4 +1,5 @@
 import CodeUtils from 'draft-js-code';
+import { get } from 'lodash';
 import { createBasePlugin } from 'wix-rich-content-common';
 import { CODE_BLOCK_TYPE } from './types';
 // import PrismDecorator from './PrismDecorator';
@@ -55,6 +56,7 @@ const createUnderlyingPlugin = (/*{ theme }*/) => ({
 
 const createCodeBlockPlugin = (config = {}) => {
   const type = CODE_BLOCK_TYPE;
+  const icon = get(config, 'code-block.toolbar.icons.codeBlock');
   const {
     helpers,
     theme,
@@ -78,6 +80,7 @@ const createCodeBlockPlugin = (config = {}) => {
     relValue,
     getEditorState,
     setEditorState,
+    icon,
   });
 
   return createBasePlugin(

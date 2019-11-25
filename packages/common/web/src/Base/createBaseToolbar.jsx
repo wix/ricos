@@ -2,17 +2,16 @@
 import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
 import classNames from 'classnames';
-import { pickBy } from 'lodash';
+import { get, pickBy } from 'lodash';
 import Measure from 'react-measure';
 import { TOOLBARS, TOOLBAR_OFFSETS, DISPLAY_MODE } from '../consts';
 import { getConfigByFormFactor } from '../Utils/getConfigByFormFactor';
 import { mergeToolbarSettings } from '../Utils/mergeToolbarSettings';
 import Context from '../Utils/Context';
-
 import Separator from '../Components/Separator';
 import BaseToolbarButton from './baseToolbarButton';
 import { getDefaultToolbarSettings } from './default-toolbar-settings';
-import { BUTTONS, BUTTONS_BY_KEY, BlockLinkButton, DeleteButton } from './buttons';
+import { BUTTONS, BUTTONS_BY_KEY, BlockLinkButton, deleteButton } from './buttons';
 import Panel from '../Components/Panel';
 import toolbarStyles from '../../statics/styles/plugin-toolbar.scss';
 import buttonStyles from '../../statics/styles/plugin-toolbar-button.scss';
@@ -32,6 +31,7 @@ export default function createToolbar({
   theme,
   pubsub,
   helpers,
+  settings,
   isMobile,
   anchorTarget,
   relValue,
@@ -263,13 +263,14 @@ export default function createToolbar({
     /*eslint-disable complexity*/
     renderButton = (button, key, themedStyle, separatorClassNames, tabIndex) => {
       const { alignment, size } = this.state;
-      const Button = BUTTONS_BY_KEY[button.type] || BaseToolbarButton;
+      const icons = get(settings, 'toolbar.icons', {});
+      const buttonByKey = BUTTONS_BY_KEY[button.type];
+      const Button = (buttonByKey && buttonByKey(icons[button.keyName])) || BaseToolbarButton;
       const buttonProps = {
         ...this.mapComponentDataToButtonProps(button, this.state.componentData),
         ...this.mapStoreDataToButtonProps(button, pubsub.store, this.state.componentData),
         settings: button.settings,
       };
-
       switch (button.type) {
         case BUTTONS.TEXT_ALIGN_LEFT:
         case BUTTONS.TEXT_ALIGN_CENTER:
@@ -342,19 +343,24 @@ export default function createToolbar({
               relValue={relValue}
               t={t}
               uiSettings={uiSettings}
+              icons={icons.link}
             />
           );
-        case BUTTONS.DELETE:
+        case BUTTONS.DELETE: {
+          const DeleteButtonComponent = deleteButton(icons.delete);
           return (
-            <DeleteButton
+            <DeleteButtonComponent
               tabIndex={tabIndex}
               onClick={pubsub.get('deleteBlock')}
               theme={themedStyle}
               key={key}
               t={t}
+              icon={icons.delete}
               {...buttonProps}
             />
           );
+        }
+
         default:
           return (
             <Button

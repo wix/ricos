@@ -75,9 +75,11 @@ class SettingsComponent extends PureComponent {
     const { buttonText, url, validUrl } = this.state;
     const errorTooltip = !validUrl || !this.props.validUrl ? t('ButtonModal_Invalid_Link') : null;
     return (
-      <div className={this.styles.section_content}>
-        <div className={this.styles.button_name_feild}>
-          <div className={this.styles.header_ButtonText}>{t('ButtonModal_Button_Text')}</div>
+      <div className={this.styles.button_settingsComponent_section_content}>
+        <div className={this.styles.button_settingsComponent_name_feild}>
+          <div className={this.styles.button_settingsComponent_header_ButtonText}>
+            {t('ButtonModal_Button_Text')}
+          </div>
           <div>
             <TextInput
               inputRef={ref => {
@@ -93,7 +95,7 @@ class SettingsComponent extends PureComponent {
             />
           </div>
         </div>
-        <div className={this.styles.header_ButtonLink} ref={linkInputRef}>
+        <div className={this.styles.button_settingsComponent_header_ButtonLink} ref={linkInputRef}>
           {t('ButtonModal_Button_Link')}
         </div>
         <TextInput
@@ -112,7 +114,9 @@ class SettingsComponent extends PureComponent {
           data-hook="ButtonInputModal"
         />
         {!this.state.validUrl || !this.props.validUrl ? (
-          <div className={this.styles.errorMessage}>{t('ButtonModal_InputLink_ErrorMessage')}</div>
+          <div className={this.styles.button_settingsComponent_errorMessage}>
+            {t('ButtonModal_InputLink_ErrorMessage')}
+          </div>
         ) : null}
         <div
           style={{
@@ -122,10 +126,10 @@ class SettingsComponent extends PureComponent {
                   ? '21px'
                   : '25px'
                 : isMobile
-                ? '24px'
+                ? '33px'
                 : '34px',
           }}
-          className={this.styles.checkBoxes}
+          className={this.styles.button_settingsComponent_checkBoxes}
         >
           <Checkbox
             label={t('LinkPanel_Target_Checkbox')}

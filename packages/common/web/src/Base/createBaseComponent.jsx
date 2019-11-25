@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { findDOMNode } from 'react-dom';
-import { compact, isNil } from 'lodash';
+import { merge, compact, isNil } from 'lodash';
 import classNames from 'classnames';
 import createHocName from '../Utils/createHocName';
 import getDisplayName from '../Utils/getDisplayName';
@@ -10,6 +10,8 @@ import { alignmentClassName, sizeClassName, textWrapClassName } from '../Utils/c
 import { normalizeUrl } from '../Utils/urlValidators';
 import styles from '../../statics/styles/general.scss';
 import rtlIgnoredStyles from '../../statics/styles/general.rtlignore.scss';
+import draggableStyle from '../../statics/styles/draggable.scss';
+import Context from '../Utils/Context';
 
 const DEFAULTS = {
   alignment: null,
@@ -33,6 +35,7 @@ const createBaseComponent = ({
   getEditorBounds,
   onOverlayClick,
   onAtomicBlockFocus,
+  disableRightClick,
 }) => {
   class WrappedComponent extends Component {
     static displayName = createHocName('BaseComponent', PluginComponent);
@@ -49,17 +52,26 @@ const createBaseComponent = ({
     }
 
     stateFromProps(props) {
-      const { getData, readOnly } = props.blockProps;
+      const { readOnly } = props.blockProps;
       const initialState = pubsub.get('initialState_' + props.block.getKey());
       if (initialState) {
         //reset the initial state
         pubsub.set('initialState_' + props.block.getKey(), undefined);
       }
       return {
-        componentData: getData() || { config: DEFAULTS },
+        componentData: this.getData(props),
         readOnly: !!readOnly,
         componentState: initialState || {},
       };
+    }
+
+    getData(props) {
+      const { getData } = props.blockProps;
+      const data = getData() || { config: DEFAULTS };
+      if (settings?.defaultData) {
+        merge(data, settings.defaultData);
+      }
+      return data;
     }
 
     componentDidMount() {
@@ -232,9 +244,12 @@ const createBaseComponent = ({
       pubsub.set(batchUpdates);
     }
 
+    handleContextMenu = e => disableRightClick && e.preventDefault();
+
     render = () => {
-      const { blockProps, className, selection } = this.props;
+      const { blockProps, className, selection, onDragStart } = this.props;
       const { componentData, readOnly } = this.state;
+      const { enableDragAndDrop } = this.context;
       const { containerClassName, ...decorationProps } = pluginDecorationProps(
         this.props,
         componentData
@@ -273,6 +288,7 @@ const createBaseComponent = ({
       const overlayClassNames = classNames(this.styles.overlay, theme.overlay, {
         [this.styles.hidden]: readOnly,
         [theme.hidden]: readOnly,
+        [draggableStyle.draggable]: enableDragAndDrop,
       });
 
       const sizeStyles = {
@@ -314,9 +330,12 @@ const createBaseComponent = ({
       /* eslint-disable jsx-a11y/anchor-has-content */
       return (
         <div
+          role="none"
           style={sizeStyles}
           className={ContainerClassNames}
           data-focus={isActive}
+          onDragStart={onDragStart}
+          onContextMenu={this.handleContextMenu}
           {...decorationProps}
         >
           {!isNil(link) ? (
@@ -333,6 +352,7 @@ const createBaseComponent = ({
               data-hook={'componentOverlay'}
               onClick={this.handleClick}
               className={overlayClassNames}
+              draggable={enableDragAndDrop}
             />
           )}
         </div>
@@ -347,7 +367,10 @@ const createBaseComponent = ({
     selection: PropTypes.object.isRequired,
     className: PropTypes.string,
     onClick: PropTypes.func,
+    onDragStart: PropTypes.func,
   };
+
+  WrappedComponent.contextType = Context.type;
 
   return WrappedComponent;
 };

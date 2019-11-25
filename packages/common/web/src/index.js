@@ -2,13 +2,13 @@
 export { default as BlockLinkButton } from './Base/buttons/BlockLinkButton';
 export { default as BlockLinkPanel } from './Base/buttons/BlockLinkPanel';
 export {
-  SizeOriginalButton,
-  SizeSmallCenterButton,
-  SizeSmallLeftButton,
-  SizeSmallRightButton,
-  SizeContentButton,
-  SizeFullWidthButton,
-  DeleteButton,
+  sizeOriginalButton,
+  sizeSmallCenterButton,
+  sizeSmallLeftButton,
+  sizeSmallRightButton,
+  sizeContentButton,
+  sizeFullWidthButton,
+  deleteButton,
 } from './Base/buttons';
 export * from './Icons';
 export { default as BUTTONS } from './Base/buttons/keys';
