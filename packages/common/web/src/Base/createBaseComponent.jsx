@@ -79,9 +79,6 @@ const createBaseComponent = ({
       this.subscriptions = [
         ['componentData', this.onComponentDataChange],
         ['componentState', this.onComponentStateChange],
-        ['componentAlignment', this.onComponentAlignmentChange],
-        ['componentSize', this.onComponentSizeChange],
-        ['componentTextWrap', this.onComponentTextWrapChange],
       ];
       this.subscriptions.forEach(subscription => pubsub.subscribe(...subscription));
       const blockKey = this.props.block.getKey();
@@ -129,27 +126,9 @@ const createBaseComponent = ({
       }
     };
 
-    onComponentAlignmentChange = alignment => {
-      if (alignment && this.isMeAndIdle()) {
-        this.updateComponentConfig({ alignment });
-      }
-    };
-
-    onComponentSizeChange = size => {
-      if (size && this.isMeAndIdle()) {
-        this.updateComponentConfig({ size });
-      }
-    };
-
     onHtmlPluginMaxHeightChange = htmlPluginMaxHeight => {
       if (htmlPluginMaxHeight) {
         this.setState({ htmlPluginMaxHeight });
-      }
-    };
-
-    onComponentTextWrapChange = textWrap => {
-      if (textWrap && this.isMeAndIdle()) {
-        this.updateComponentConfig({ textWrap });
       }
     };
 
@@ -213,14 +192,10 @@ const createBaseComponent = ({
         const batchUpdates = {};
         const blockNode = findDOMNode(this);
         const componentData = this.state.componentData;
-        const config = componentData.config || {};
         const boundingRect = this.getBoundingClientRectAsObject(blockNode);
         batchUpdates.boundingRect = boundingRect;
         batchUpdates.componentData = componentData;
         batchUpdates.componentState = {};
-        batchUpdates.componentSize = config.size;
-        batchUpdates.componentAlignment = config.alignment;
-        batchUpdates.componentTextWrap = config.textWrap;
         batchUpdates.deleteBlock = this.deleteBlock;
         batchUpdates.visibleBlock = visibleBlock;
         pubsub.set(batchUpdates);
@@ -238,9 +213,6 @@ const createBaseComponent = ({
       batchUpdates.visibleBlock = null;
       batchUpdates.componentData = {};
       batchUpdates.componentState = {};
-      batchUpdates.componentSize = null;
-      batchUpdates.componentAlignment = null;
-      batchUpdates.componentTextWrap = null;
       pubsub.set(batchUpdates);
     }
 
