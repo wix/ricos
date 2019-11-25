@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Modifier, EditorState } from 'draft-js';
 import { ColorPicker, getSelectionStyles } from 'wix-rich-content-common';
 import { DEFAULT_COLOR, DEFAULT_STYLE_SELECTION_PREDICATE } from '../constants';
+import { getColor } from '../text-decorations-utils';
 
 import {
   extractColor,
@@ -14,8 +15,9 @@ import {
 export default class TextColorPanel extends Component {
   constructor(props) {
     super(props);
-    const styleSelectionPredicate =
-      props.settings.styleSelectionPredicate || DEFAULT_STYLE_SELECTION_PREDICATE;
+    const styleSelectionPredicate = props.predicate(
+      props.settings.styleSelectionPredicate || DEFAULT_STYLE_SELECTION_PREDICATE
+    );
     if (props.settings.colorScheme && !validateColorScheme(props.settings.colorScheme)) {
       console.error('Error: colorScheme is not valid'); // eslint-disable-line no-console
     }
@@ -23,9 +25,9 @@ export default class TextColorPanel extends Component {
     this.state = {
       currentColor:
         currentColors.length > 0
-          ? extractColor(props.settings.colorScheme, currentColors[0])
+          ? extractColor(props.settings.colorScheme, getColor(currentColors[0]))
           : DEFAULT_COLOR,
-      currentSchemeColor: currentColors[0],
+      currentSchemeColor: currentColors[0] && getColor(currentColors[0]),
       userColors: props.settings.getUserColors() || [],
     };
     this.setColor = this.setColor.bind(this);
@@ -49,9 +51,10 @@ export default class TextColorPanel extends Component {
   }
 
   getInlineColorState(color) {
-    const { editorState, settings } = this.props;
-    const styleSelectionPredicate =
-      settings.styleSelectionPredicate || DEFAULT_STYLE_SELECTION_PREDICATE;
+    const { editorState, settings, styleMapper, predicate } = this.props;
+    const styleSelectionPredicate = predicate(
+      (settings && settings.styleSelectionPredicate) || DEFAULT_STYLE_SELECTION_PREDICATE
+    );
     const selection = editorState.getSelection();
     const currentColors = getSelectionStyles(styleSelectionPredicate, editorState);
     const newEditorState = currentColors.reduce((nextEditorState, prevColor) => {
@@ -60,7 +63,7 @@ export default class TextColorPanel extends Component {
       return EditorState.push(nextEditorState, nextContentState, 'change-inline-style');
     }, editorState);
     const contentState = newEditorState.getCurrentContent();
-    const newContentState = Modifier.applyInlineStyle(contentState, selection, color);
+    const newContentState = Modifier.applyInlineStyle(contentState, selection, styleMapper(color));
     return EditorState.push(newEditorState, newContentState, 'change-inline-style');
   }
 
@@ -125,4 +128,6 @@ TextColorPanel.propTypes = {
   setKeepToolbarOpen: PropTypes.func,
   closeModal: PropTypes.func.isRequired,
   isMobile: PropTypes.bool.isRequired,
+  styleMapper: PropTypes.func.isRequired,
+  predicate: PropTypes.func,
 };

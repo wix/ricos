@@ -1,7 +1,7 @@
 import { TOOLBARS } from 'wix-rich-content-common';
 import { CodeBlockIcon } from '../icons';
 
-export default ({ helpers, t, addBlockHandler }) => {
+export default ({ helpers, t, addBlockHandler, icon }) => {
   return [
     {
       name: 'code-block',
@@ -9,7 +9,7 @@ export default ({ helpers, t, addBlockHandler }) => {
       addBlockHandler,
       tooltipText: t('TextCodeBlock_InsertButton_Tooltip'),
       toolbars: [TOOLBARS.FOOTER, TOOLBARS.SIDE],
-      Icon: CodeBlockIcon,
+      Icon: icon || CodeBlockIcon,
       helpers,
       t,
     },

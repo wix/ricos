@@ -11,7 +11,7 @@ const createSoundCloudPlugin = (config = {}) => {
     component: Component,
     settings,
     type,
-    toolbar: createToolbar({ helpers, t, isMobile }),
+    toolbar: createToolbar({ helpers, t, isMobile, settings }),
     helpers,
     t,
     isMobile,

@@ -397,6 +397,10 @@ Cypress.Commands.add('dragAndDropPlugin', (src, dest) => {
     .trigger('drop', { dataTransfer });
 });
 
+Cypress.Commands.add('hideTooltip', { prevSubject: 'optional' }, subject => {
+  cy.get(subject).trigger('mouseleave');
+});
+
 // disable screenshots in debug mode. So there is no diffrence to ci.
 if (Cypress.browser.isHeaded) {
   const noop = () => {};

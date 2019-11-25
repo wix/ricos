@@ -2,10 +2,17 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { get } from 'lodash';
 import { Context, normalizeUrl } from 'wix-rich-content-common';
+import { alignmentClassName, sizeClassName } from '../classNameStrategies.js';
 import { COLORS } from '../constants';
 import ButtonViewer from './button-viewer';
 
 class ButtonComponent extends PureComponent {
+  static alignmentClassName = (componentData, theme, styles, isMobile) =>
+    alignmentClassName(componentData, theme, styles, isMobile);
+
+  static sizeClassName = (componentData, theme, styles, isMobile) =>
+    sizeClassName(componentData, theme, styles, isMobile);
+
   constructor(props) {
     super(props);
     const {
@@ -21,7 +28,6 @@ class ButtonComponent extends PureComponent {
     const {
       componentData: { button },
       buttonObj,
-      blockProps,
     } = this.props;
     const { anchorTarget = '_self', relValue = '', theme } = this.context || this.props;
     let buttonText = button.buttonText;
@@ -45,15 +51,6 @@ class ButtonComponent extends PureComponent {
       borderColor: button.borderColor ? button.borderColor : colors.color8,
     };
     url = button.url;
-    const textColor = blockProps &&
-      !blockProps.isFocused &&
-      !url && {
-        color: '#5D9AFF',
-      };
-    style = {
-      ...style,
-      ...textColor,
-    };
     if (buttonObj) {
       style = {
         ...style,

@@ -1,14 +1,16 @@
+import { get } from 'lodash';
 import { TOOLBARS } from 'wix-rich-content-common';
 import { InsertPluginIcon } from '../icons';
 import { DEFAULTS } from '../constants';
 
 export default ({ helpers, t, settings }) => {
+  const icon = get(settings, 'toolbar.icons.Map', InsertPluginIcon);
   return [
     {
       name: 'Map',
       tooltipText: t('MapPlugin_InsertButton_Tooltip'),
       toolbars: [TOOLBARS.FOOTER, TOOLBARS.SIDE],
-      Icon: InsertPluginIcon,
+      Icon: icon,
       // NOTE: settings contains google maps sdk key, should not be exposed
       componentData: {
         config: {

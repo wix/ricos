@@ -1,10 +1,10 @@
 import createInlineButtons from './inline-buttons';
 import createInsertButtons from './insert-buttons';
 
-export default function createToolbar({ helpers, styles, t }) {
+export default function createToolbar({ settings, helpers, styles, t }) {
   return {
-    InlineButtons: createInlineButtons({ styles }),
-    InsertButtons: createInsertButtons({ helpers, t }),
+    InlineButtons: createInlineButtons({ styles, settings }),
+    InsertButtons: createInsertButtons({ helpers, t, settings }),
     name: 'divider',
   };
 }

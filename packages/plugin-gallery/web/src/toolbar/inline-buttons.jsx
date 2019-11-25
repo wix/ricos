@@ -1,3 +1,4 @@
+import { get } from 'lodash';
 import { BUTTONS, PluginSettingsIcon, getModalStyles } from 'wix-rich-content-common';
 import { Modals } from '../modals';
 import { ManageMediaIcon, UploadIcon } from '../icons';
@@ -5,12 +6,13 @@ import { galleryLayoutsDropdown, switchLayout, getCurrentLayout } from '../helpe
 
 const modalStyles = getModalStyles();
 
-export default ({ t, anchorTarget, relValue }) => {
+export default ({ settings, t, anchorTarget, relValue }) => {
+  const icons = get(settings, 'toolbar.icons', {});
   return [
     {
       keyName: 'add',
       type: BUTTONS.FILES,
-      icon: UploadIcon,
+      icon: icons.add || UploadIcon,
       onFilesSelected: (pubsub, files) => {
         if (files.length > 0) {
           pubsub.getBlockHandler('handleFilesSelected')(files);
@@ -40,7 +42,7 @@ export default ({ t, anchorTarget, relValue }) => {
     {
       keyName: 'manage_media',
       type: BUTTONS.EXTERNAL_MODAL,
-      icon: ManageMediaIcon,
+      icon: icons.manage_media || ManageMediaIcon,
       modalName: Modals.GALLERY_SETTINGS,
       activeTab: 'manage_media',
       modalStyles,
@@ -53,7 +55,7 @@ export default ({ t, anchorTarget, relValue }) => {
     {
       keyName: 'advanced_settings',
       type: BUTTONS.EXTERNAL_MODAL,
-      icon: PluginSettingsIcon,
+      icon: icons.advanced_settings || PluginSettingsIcon,
       modalName: Modals.GALLERY_SETTINGS,
       activeTab: 'advanced_settings',
       modalStyles,

@@ -1,4 +1,4 @@
-import { includes } from 'lodash';
+import { includes, get } from 'lodash';
 import createBaseComponent from './createBaseComponent';
 import createToolbar from './createBaseToolbar';
 import createInsertPluginButton from './createBaseInsertPluginButton';
@@ -35,6 +35,7 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
     getEditorBounds,
     onOverlayClick,
     onAtomicBlockFocus,
+    disableRightClick,
   } = config;
   const toolbarTheme = { ...getToolbarTheme(config.theme, 'plugin'), ...config.theme };
   const Toolbar =
@@ -43,7 +44,7 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
     createToolbar({
       buttons: {
         all: config.toolbar.InlineButtons,
-        hidden: settings.toolbar ? settings.toolbar.hidden : [],
+        hidden: get(settings, 'toolbar.hidden', []),
       },
       theme: { ...toolbarTheme, ...config.theme },
       pubsub,
@@ -94,6 +95,7 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
       relValue,
       isMobile,
       getEditorBounds,
+      disableRightClick,
     });
 
   const DecoratedCompWithBase =
