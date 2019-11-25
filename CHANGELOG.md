@@ -14,7 +14,7 @@
     Click to see more.
   </summary>
 
-### :rocket: New Featur
+### :rocket: New Feature
 - `editor`
   - [#462](https://github.com/wix-incubator/rich-content/pull/462) custom icons for all toolbar buttons
   - [#475](https://github.com/wix-incubator/rich-content/pull/475) plugin toolbar alignment  
