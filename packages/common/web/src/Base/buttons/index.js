@@ -78,6 +78,14 @@ export const sizeOriginalButton = icon =>
     tooltipTextKey: 'SizeOriginalButton_Tooltip',
   });
 
+export const sizeContentCenterButton = icon =>
+  createBlockAlignmentAndSizeButton({
+    size: 'content',
+    alignment: 'center',
+    Icon: icon || AlignCenterIcon,
+    tooltipTextKey: 'AlignCenterButton_Tooltip',
+  });
+
 export const sizeSmallCenterButton = icon =>
   createBlockAlignmentAndSizeButton({
     size: 'small',
@@ -174,6 +182,7 @@ export const BUTTONS_BY_KEY = {
   [BUTTONS.SIZE_MEDIUM]: icon => sizeMediumButton(icon),
   [BUTTONS.SIZE_LARGE]: icon => sizeLargeButton(icon),
   [BUTTONS.SIZE_ORIGINAL]: icon => sizeOriginalButton(icon),
+  [BUTTONS.SIZE_CONTENT_CENTER]: icon => sizeContentCenterButton(icon),
   [BUTTONS.SIZE_CONTENT]: icon => sizeContentButton(icon),
   [BUTTONS.SIZE_FULL_WIDTH]: icon => sizeFullWidthButton(icon),
   [BUTTONS.ALIGN_LEFT]: icon => alignLeftButton(icon),
