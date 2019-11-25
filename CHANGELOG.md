@@ -18,7 +18,7 @@
 - `emoji`
   - [#470](https://github.com/wix-incubator/rich-content/pull/470) plugin reworked
 - `file-upload`
-  - [#489](https://github.com/wix-incubator/rich-content/pull/489) adding the option for the consumers to open the file in a new tab
+  - [#489](https://github.com/wix-incubator/rich-content/pull/489) `config.downloadTarget` enables consumers to control in which tab files are opened
 - `text-color`
   - [#440](https://github.com/wix-incubator/rich-content/pull/440) text highlight plugin
 - `editor`
