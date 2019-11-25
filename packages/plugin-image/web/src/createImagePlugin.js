@@ -38,7 +38,7 @@ const createImagePlugin = (config = {}) => {
         nextProps
       );
       if (width !== nextWidth) {
-        onPropsChange({ size: 'inline' });
+        onPropsChange({ size: 'inline', width: nextWidth });
       }
     },
     toolbar: createToolbar({
