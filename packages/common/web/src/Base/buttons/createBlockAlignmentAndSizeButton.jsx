@@ -26,7 +26,12 @@ export default ({ alignment, size, Icon, tooltipTextKey }) =>
       if (this.props.disabled) {
         return;
       }
-      this.props.setLayoutProps({ alignment, size });
+      // aligning a custom size block (inline) should not change size
+      if (this.props.keyName.includes('align') && this.props.size === 'inline') {
+        this.props.setLayoutProps({ alignment });
+      } else {
+        this.props.setLayoutProps({ alignment, size });
+      }
     };
 
     preventBubblingUp = event => {

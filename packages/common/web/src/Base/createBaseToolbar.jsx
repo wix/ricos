@@ -2,7 +2,6 @@
 import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
 import classNames from 'classnames';
-import { pickBy } from 'lodash';
 import Measure from 'react-measure';
 import { TOOLBARS, DISPLAY_MODE } from '../consts';
 import { getConfigByFormFactor } from '../Utils/getConfigByFormFactor';
@@ -101,9 +100,6 @@ export default function createToolbar({
       pubsub.subscribe('visibleBlock', this.onVisibilityChanged);
       pubsub.subscribe('componentState', this.onComponentStateChanged);
       pubsub.subscribe('componentData', this.onComponentDataChanged);
-      pubsub.subscribe('componentAlignment', this.onComponentAlignmentChange);
-      pubsub.subscribe('componentSize', this.onComponentSizeChange);
-      pubsub.subscribe('componentTextWrap', this.onComponentTextWrapChange);
       this.unsubscribeOnBlock = pubsub.subscribeOnBlock({
         key: 'componentLink',
         callback: this.onComponentLinkChange,
@@ -114,9 +110,6 @@ export default function createToolbar({
       pubsub.unsubscribe('visibleBlock', this.onVisibilityChanged);
       pubsub.unsubscribe('componentState', this.onComponentStateChanged);
       pubsub.unsubscribe('componentData', this.onComponentDataChanged);
-      pubsub.unsubscribe('componentAlignment', this.onComponentAlignmentChange);
-      pubsub.unsubscribe('componentSize', this.onComponentSizeChange);
-      pubsub.unsubscribe('componentTextWrap', this.onComponentTextWrapChange);
       this.unsubscribeOnBlock && this.unsubscribeOnBlock();
     }
 
@@ -133,7 +126,7 @@ export default function createToolbar({
     };
 
     onComponentDataChanged = componentData => {
-      this.setState({ componentData });
+      this.setState({ componentData }, () => this.onVisibilityChanged(pubsub.get('visibleBlock')));
     };
 
     onComponentLinkChange = linkData => {
@@ -149,26 +142,8 @@ export default function createToolbar({
       pubsub.update('componentData', { config: { link } });
     };
 
-    setLayoutProps = ({
-      alignment: componentAlignment,
-      size: componentSize,
-      textWrap: componentTextWrap,
-    }) => {
-      pubsub.set(pickBy({ componentAlignment, componentSize, componentTextWrap }));
-    };
-
-    onComponentSizeChange = size => {
-      this.setState({ size });
-    };
-
-    onComponentAlignmentChange = alignment => {
-      this.setState({ alignment }, () => {
-        this.onVisibilityChanged(pubsub.get('visibleBlock'));
-      });
-    };
-
-    onComponentTextWrapChange = textWrap => {
-      this.setState({ textWrap });
+    setLayoutProps = ({ alignment, size, textWrap }) => {
+      pubsub.update('componentData', { config: { alignment, size, textWrap } });
     };
 
     onVisibilityChanged = visibleBlock => {
@@ -254,7 +229,7 @@ export default function createToolbar({
 
     /*eslint-disable complexity*/
     renderButton = (button, key, themedStyle, separatorClassNames, tabIndex) => {
-      const { alignment, size } = this.state;
+      const { alignment, size } = this.state.componentData.config || {};
       const Button = BUTTONS_BY_KEY[button.type] || BaseToolbarButton;
       const buttonProps = {
         ...this.mapComponentDataToButtonProps(button, this.state.componentData),
@@ -296,6 +271,7 @@ export default function createToolbar({
         case BUTTONS.SIZE_ORIGINAL:
         case BUTTONS.SIZE_CONTENT:
         case BUTTONS.SIZE_FULL_WIDTH:
+        case BUTTONS.SIZE_CONTENT_CENTER:
         case BUTTONS.SIZE_SMALL_CENTER:
         case BUTTONS.SIZE_SMALL_LEFT:
         case BUTTONS.SIZE_SMALL_RIGHT:
