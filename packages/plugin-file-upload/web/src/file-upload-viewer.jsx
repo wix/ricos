@@ -69,13 +69,15 @@ class FileUploadViewer extends PureComponent {
       error,
       componentData: { name, type },
     } = this.props;
+    const { openInANewTab } = this.props.settings;
+    const target = openInANewTab ? '_blank' : '_self';
 
     if (error) {
       return null;
     }
 
     return (
-      <a href={fileUrl} className={this.styles.file_upload_link}>
+      <a href={fileUrl} target={target} className={this.styles.file_upload_link}>
         {this.renderViewerBody({ name, type })}
       </a>
     );
