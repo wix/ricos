@@ -120,7 +120,7 @@ export const config = {
           1000
         )
       ),
-    openInANewTab: true,
+    downloadTarget: '_blank',
   },
   uiSettings,
 };
