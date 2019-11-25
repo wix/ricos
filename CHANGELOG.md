@@ -14,6 +14,12 @@
     Click to see more.
   </summary>
 
+
+  
+</details>
+<hr/>
+
+## 6.4.0 (Nov 25, 2019)
 ### :rocket: New Feature
 - `emoji`
   - [#470](https://github.com/wix-incubator/rich-content/pull/470) plugin reworked
@@ -31,9 +37,7 @@
   - [#481](https://github.com/wix-incubator/rich-content/pull/481) fixed layout transition behavior
 - `giphy`
   - [#485](https://github.com/wix-incubator/rich-content/pull/485) giphy-viewer: `data.config.sizes` fallbacks to empty object
-  
-</details>
-<hr/>
+  <hr/>
 
 ## 6.3.0 (Nov 20, 2019)
 ### :rocket: New Feature
