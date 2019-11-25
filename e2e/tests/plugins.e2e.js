@@ -38,21 +38,19 @@ describe('plugins', () => {
     // eslint-disable-next-line mocha/no-skipped-tests
     it.skip('render image plugin toolbar', function() {
       cy.log(this);
-      cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE).shrinkPlugin();
+      cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE);
       cy.eyesCheckWindow(this.test.title);
     });
 
     it('render settings', function() {
-      cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE)
-        .shrinkPlugin()
-        .openImageSettings();
+      cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE).openImageSettings();
       cy.get(`[data-hook=${IMAGE_SETTINGS.PREVIEW}]:first`);
       cy.eyesCheckWindow(this.test.title);
     });
 
     it('allow to add a title', function() {
       cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE)
-        .shrinkPlugin()
+
         .openImageSettings()
         .addImageTitle();
       cy.eyesCheckWindow(this.test.title);
@@ -60,7 +58,7 @@ describe('plugins', () => {
 
     it('allow to add a link', function() {
       cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE)
-        .shrinkPlugin()
+
         .openImageSettings()
         .addImageLink();
       cy.eyesCheckWindow(this.test.title);
@@ -68,7 +66,7 @@ describe('plugins', () => {
 
     it('allow to delete a title', function() {
       cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE)
-        .shrinkPlugin()
+
         .openImageSettings()
         .addImageTitle();
       cy.openImageSettings().deleteImageTitle();
@@ -93,13 +91,13 @@ describe('plugins', () => {
 
     // eslint-disable-next-line mocha/no-skipped-tests
     it.skip('render gallery plugin toolbar', function() {
-      cy.openPluginToolbar(PLUGIN_COMPONENT.GALLERY).shrinkPlugin();
+      cy.openPluginToolbar(PLUGIN_COMPONENT.GALLERY);
       cy.eyesCheckWindow(this.test.title);
     });
 
     it('render advanced gallery settings', function() {
       cy.openPluginToolbar(PLUGIN_COMPONENT.GALLERY)
-        .shrinkPlugin()
+
         .get(`[data-hook=${'image-item'}]:first`)
         .get(`[data-hook=${'image-item'}]`)
         .eq(1)
@@ -114,7 +112,6 @@ describe('plugins', () => {
         cy
           .loadEditorAndViewer('gallery')
           .openPluginToolbar(PLUGIN_COMPONENT.GALLERY)
-          .shrinkPlugin()
           .get(`[data-hook=${'image-item'}]:first`)
           .get(`[data-hook=${'image-item'}]`)
           .eq(1)
@@ -168,7 +165,6 @@ describe('plugins', () => {
         cy
           .loadEditorAndViewer('gallery')
           .openPluginToolbar(PLUGIN_COMPONENT.GALLERY)
-          .shrinkPlugin()
           .get(`[data-hook=${'image-item'}]:first`)
           .get(`[data-hook=${'image-item'}]`)
           .eq(1)
@@ -219,18 +215,14 @@ describe('plugins', () => {
     });
 
     it('enable to add a video from URI', function() {
-      cy.openVideoUploadModal()
-        .addVideoFromURI()
-        .shrinkPlugin();
+      cy.openVideoUploadModal().addVideoFromURI();
       cy.get('[data-loaded=true]');
       cy.eyesCheckWindow(this.test.title);
     });
 
     // eslint-disable-next-line mocha/no-skipped-tests
     it.skip('enable to add a custom video', function() {
-      cy.openVideoUploadModal()
-        .addCustomVideo()
-        .shrinkPlugin();
+      cy.openVideoUploadModal().addCustomVideo();
       cy.get('[data-loaded=true]');
       cy.eyesCheckWindow(this.test.title);
     });
@@ -251,9 +243,7 @@ describe('plugins', () => {
     });
 
     it('enable to add a soundcloud URI', function() {
-      cy.openSoundCloudModal()
-        .addSoundCloud()
-        .shrinkPlugin();
+      cy.openSoundCloudModal().addSoundCloud();
       cy.get('[data-loaded=true]');
       cy.eyesCheckWindow(this.test.title);
     });
@@ -375,7 +365,7 @@ describe('plugins', () => {
     });
   });
 
-  context('alignment', () => {
+  context.skip('alignment', () => {
     before(function() {
       eyesOpen(this);
     });
