@@ -75,3 +75,8 @@ export const PLUGIN_DECORATION_PROPS = {
     containerClassName: props.containerClassName,
   }),
 };
+
+export const TOOLBAR_OFFSETS = {
+  top: 12,
+  left: 15,
+};

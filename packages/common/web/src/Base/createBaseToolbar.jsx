@@ -4,7 +4,7 @@ import { findDOMNode } from 'react-dom';
 import classNames from 'classnames';
 import { pickBy } from 'lodash';
 import Measure from 'react-measure';
-import { TOOLBARS, DISPLAY_MODE } from '../consts';
+import { TOOLBARS, TOOLBAR_OFFSETS, DISPLAY_MODE } from '../consts';
 import { getConfigByFormFactor } from '../Utils/getConfigByFormFactor';
 import { mergeToolbarSettings } from '../Utils/mergeToolbarSettings';
 import Context from '../Utils/Context';
@@ -16,9 +16,6 @@ import { BUTTONS, BUTTONS_BY_KEY, BlockLinkButton, DeleteButton } from './button
 import Panel from '../Components/Panel';
 import toolbarStyles from '../../statics/styles/plugin-toolbar.scss';
 import buttonStyles from '../../statics/styles/plugin-toolbar-button.scss';
-
-const toolbarTopOffset = 12;
-const toolbarLeftOffset = 15;
 
 const getInitialState = () => ({
   position: { transform: 'scale(0)' },
@@ -203,10 +200,10 @@ export default function createToolbar({
       const offsetParentTop = offsetParentRect.top;
       const offsetParentLeft = offsetParentRect.left;
       const boundingRect = pubsub.get('boundingRect');
-      const top = boundingRect.top - toolbarHeight - toolbarTopOffset - offsetParentTop + y;
+      const top = boundingRect.top - toolbarHeight - TOOLBAR_OFFSETS.top - offsetParentTop + y;
       const tmpLeft =
         boundingRect.left + boundingRect.width / 2 - offsetParentLeft - toolbarWidth / 2 + x;
-      const maxLeft = offsetParentRect.right - toolbarWidth - toolbarLeftOffset;
+      const maxLeft = offsetParentRect.right - toolbarWidth - TOOLBAR_OFFSETS.left;
       const left = this.calculateLeftOffset(tmpLeft, maxLeft);
       return {
         '--offset-top': `${top}px`,
@@ -216,22 +213,15 @@ export default function createToolbar({
     }
 
     calculateLeftOffset = (left, maxLeft) => {
-      if (this.context?.languageDir === 'ltr') {
-        if (left < 0) {
-          return -toolbarLeftOffset * 2;
-        } else {
-          return Math.min(left, maxLeft);
-        }
-      } else {
-        // eslint-disable-next-line no-lonely-if
-        if (left > maxLeft) {
-          return -toolbarLeftOffset * 2;
-        } else if (left < 0) {
-          return maxLeft;
-        } else {
-          return left;
-        }
+      const isLtr = this.context?.languageDir === 'ltr';
+      const outOfMargins = isLtr ? left < 0 : left > maxLeft;
+      if (outOfMargins) {
+        return -TOOLBAR_OFFSETS.left * 2;
       }
+      if (isLtr) {
+        return Math.min(left, maxLeft);
+      }
+      return left < 0 ? maxLeft : left;
     };
 
     showToolbar = () => {
