@@ -13,9 +13,12 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+
 ### :rocket: New Feature
 - `emoji`
   - [#470](https://github.com/wix-incubator/rich-content/pull/470) plugin reworked
+- `file-upload`
+  - [#489](https://github.com/wix-incubator/rich-content/pull/489) adding the option for the consumers to open the file in a new tab
 - `text-color`
   - [#440](https://github.com/wix-incubator/rich-content/pull/440) text highlight plugin
 - `editor`
