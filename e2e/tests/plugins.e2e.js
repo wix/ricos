@@ -35,10 +35,10 @@ describe('plugins', () => {
 
     after(() => cy.eyesClose());
 
-    // eslint-disable-next-line mocha/no-skipped-tests
-    it.skip('render image plugin toolbar', function() {
-      cy.log(this);
-      cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE).shrinkPlugin();
+    it('render image plugin toolbar', function() {
+      cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE)
+        .shrinkPlugin()
+        .hideTooltip();
       cy.eyesCheckWindow(this.test.title);
     });
 
@@ -91,9 +91,10 @@ describe('plugins', () => {
 
     after(() => cy.eyesClose());
 
-    // eslint-disable-next-line mocha/no-skipped-tests
-    it.skip('render gallery plugin toolbar', function() {
-      cy.openPluginToolbar(PLUGIN_COMPONENT.GALLERY).shrinkPlugin();
+    it('render gallery plugin toolbar', function() {
+      cy.openPluginToolbar(PLUGIN_COMPONENT.GALLERY)
+        .shrinkPlugin()
+        .hideTooltip();
       cy.eyesCheckWindow(this.test.title);
     });
 
@@ -288,15 +289,16 @@ describe('plugins', () => {
         .openDropdownMenu();
       cy.eyesCheckWindow('render divider plugin toolbar');
 
-      cy.get(`button[data-hook=${PLUGIN_TOOLBAR_BUTTONS.SMALL}]`).click();
-      cy.get(`button[data-hook=${PLUGIN_TOOLBAR_BUTTONS.ALIGN_LEFT}][tabindex=0]`).click();
+      cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.SMALL);
+      cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.ALIGN_LEFT);
 
       cy.get('.editor [data-hook=divider-double]')
         .parent()
         .click();
       cy.get('[data-hook*="PluginToolbar"]:first');
-      cy.get(`button[data-hook=${PLUGIN_TOOLBAR_BUTTONS.MEDIUM}]`).click();
-      cy.get(`button[data-hook=${PLUGIN_TOOLBAR_BUTTONS.ALIGN_RIGHT}][tabindex=0]`).click();
+
+      cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.MEDIUM);
+      cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.ALIGN_RIGHT);
 
       cy.get('.editor [data-hook=divider-dashed]')
         .parent()
@@ -317,9 +319,9 @@ describe('plugins', () => {
     after(() => cy.eyesClose());
 
     it('render giphy plugin toolbar', function() {
-      cy.openPluginToolbar(PLUGIN_COMPONENT.GIF)
-        .get(`button[data-hook=${PLUGIN_TOOLBAR_BUTTONS.SMALL_CENTER}][tabindex=0]`)
-        .click();
+      cy.openPluginToolbar(PLUGIN_COMPONENT.GIF).clickToolbarButton(
+        PLUGIN_TOOLBAR_BUTTONS.SMALL_CENTER
+      );
       cy.get(`button[data-hook=${PLUGIN_TOOLBAR_BUTTONS.REPLACE}][tabindex=0]`).click();
       cy.get('.__react_component_tooltip.show').should('not.exist');
       cy.eyesCheckWindow(this.test.title);

@@ -13,6 +13,17 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+</details>
+<hr/>
+
+## 6.5.0 (Nov 25, 2019)
+### :bug: Bug Fix
+- `editor`
+  - [2a1e1b4a](https://github.com/wix-incubator/rich-content/commit/2a1e1b4a) fix import from common/src
+- `e2e`
+  - [98d8c980](https://github.com/wix-incubator/rich-content/commit/98d8c980) fix e2e
+  
+## 6.4.0 (Nov 25, 2019)
 
 ### :rocket: New Feature
 - `emoji`
@@ -23,17 +34,17 @@
   - [#440](https://github.com/wix-incubator/rich-content/pull/440) text highlight plugin
 - `editor`
   - [#462](https://github.com/wix-incubator/rich-content/pull/462) custom icons for all toolbar buttons
+  - [#475](https://github.com/wix-incubator/rich-content/pull/475) plugin toolbar alignment
 - `button`
   - [#472](https://github.com/wix-incubator/rich-content/pull/472) plugin improved
 ### :bug: Bug Fix
 - `video`
   - [#480](https://github.com/wix-incubator/rich-content/pull/480) video file selection
+- `gallery`
+  - [#481](https://github.com/wix-incubator/rich-content/pull/481) fixed layout transition behavior
 - `giphy`
   - [#485](https://github.com/wix-incubator/rich-content/pull/485) giphy-viewer: `data.config.sizes` fallbacks to empty object
-- `draftjs`
-  - revert [#483](https://github.com/wix-incubator/rich-content/pull/483) update draftjs 0.11 => 0.11.2
-</details>
-<hr/>
+  <hr/>
 
 ## 6.3.0 (Nov 20, 2019)
 ### :rocket: New Feature

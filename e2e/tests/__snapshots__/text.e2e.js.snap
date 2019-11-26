@@ -140,22 +140,22 @@ exports[`text > allow to apply inline styles and links #0`] =
         {
           "length": 100,
           "offset": 219,
-          "style": "color5"
+          "style": "{\"FG\":\"color5\"}"
         },
         {
           "length": 2,
           "offset": 319,
-          "style": "color2"
+          "style": "{\"FG\":\"color2\"}"
         },
         {
           "length": 78,
           "offset": 322,
-          "style": "color2"
+          "style": "{\"FG\":\"color2\"}"
         },
         {
           "length": 149,
           "offset": 401,
-          "style": "color2"
+          "style": "{\"FG\":\"color2\"}"
         }
       ],
       "key": 2,
@@ -188,7 +188,7 @@ exports[`text > allow to apply inline styles and links #0`] =
         {
           "length": 76,
           "offset": 0,
-          "style": "color2"
+          "style": "{\"FG\":\"color2\"}"
         }
       ],
       "key": 5,
