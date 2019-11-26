@@ -305,14 +305,14 @@ Cypress.Commands.add('alignImage', alignment => {
   let button;
   switch (alignment) {
     case 'left':
-      button = PLUGIN_TOOLBAR_BUTTONS.ALIGN_LEFT;
+      button = PLUGIN_TOOLBAR_BUTTONS.SMALL_LEFT;
       break;
     case 'center':
-      button = PLUGIN_TOOLBAR_BUTTONS.ALIGN_CENTER;
+      button = PLUGIN_TOOLBAR_BUTTONS.SMALL_CENTER;
       break;
     case 'right':
     default:
-      button = PLUGIN_TOOLBAR_BUTTONS.ALIGN_RIGHT;
+      button = PLUGIN_TOOLBAR_BUTTONS.SMALL_RIGHT;
   }
   cy.get('[data-hook=imageViewer]:first')
     .parent()
