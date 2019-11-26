@@ -161,8 +161,8 @@ export const widthButton = icon =>
     onChange: ({ getEditorBounds, store }) => width => {
       const bounds = getEditorBounds();
       const editorWidth = bounds ? bounds.width : 740;
-      if (width >= editorWidth && store.get('componentAlignment')) {
-        store.set('componentAlignment', 'center');
+      if (width >= editorWidth && store.get('componentData')?.config.alignment) {
+        store.update('componentData', { config: { alignment: 'center' } });
       }
 
       store.update('componentData', { config: { width } });
