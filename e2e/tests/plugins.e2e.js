@@ -35,10 +35,10 @@ describe('plugins', () => {
 
     after(() => cy.eyesClose());
 
-    // eslint-disable-next-line mocha/no-skipped-tests
-    it.skip('render image plugin toolbar', function() {
-      cy.log(this);
-      cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE).shrinkPlugin();
+    it('render image plugin toolbar', function() {
+      cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE)
+        .shrinkPlugin()
+        .hideTooltip();
       cy.eyesCheckWindow(this.test.title);
     });
 
@@ -91,9 +91,10 @@ describe('plugins', () => {
 
     after(() => cy.eyesClose());
 
-    // eslint-disable-next-line mocha/no-skipped-tests
-    it.skip('render gallery plugin toolbar', function() {
-      cy.openPluginToolbar(PLUGIN_COMPONENT.GALLERY).shrinkPlugin();
+    it('render gallery plugin toolbar', function() {
+      cy.openPluginToolbar(PLUGIN_COMPONENT.GALLERY)
+        .shrinkPlugin()
+        .hideTooltip();
       cy.eyesCheckWindow(this.test.title);
     });
 
