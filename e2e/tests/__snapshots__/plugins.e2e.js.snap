@@ -3485,7 +3485,7 @@ exports[`plugins > drag and drop > drag and drop plugins #0`] =
   }
 };
 
-exports[`plugins > general > align atomic block left #0`] =
+exports[`plugins > alignment > align atomic block left #0`] =
 {
   "blocks": [
     {
@@ -3633,7 +3633,7 @@ exports[`plugins > general > align atomic block left #0`] =
   }
 };
 
-exports[`plugins > general > align atomic block center #0`] =
+exports[`plugins > alignment > align atomic block center #0`] =
 {
   "blocks": [
     {
@@ -3781,7 +3781,7 @@ exports[`plugins > general > align atomic block center #0`] =
   }
 };
 
-exports[`plugins > general > align atomic block right #0`] =
+exports[`plugins > alignment > align atomic block right #0`] =
 {
   "blocks": [
     {

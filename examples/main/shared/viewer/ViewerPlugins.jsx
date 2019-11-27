@@ -120,6 +120,7 @@ export const config = {
           1000
         )
       ),
+    downloadTarget: '_blank',
   },
   uiSettings,
 };

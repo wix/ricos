@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-preview",
-  "version": "6.3.0",
+  "version": "6.4.0",
   "author": {
     "name": "Alex Greenstein",
     "email": "alexgr@wix.com"
@@ -30,21 +30,18 @@
     },
     "moduleNameMapper": {
       "\\.(jpg|jpeg|png|gif|svg)$": "<rootDir>/__mocks__/fileMock.js",
-      "\\.(css|scss)$": "<rootDir>/__mocks__/styleMock.js",
-      "^draft-js$": "<rootDir>/../../../node_modules/@wix/draft-js/dist/Draft.min.js",
-      "^draft-js/.*$": "<rootDir>/../../../node_modules/@wix/draft-js/dist/Draft.min.js",
-      "^@wix/draft-js$": "<rootDir>/../../../node_modules/@wix/draft-js/dist/Draft.min.js"
+      "\\.(css|scss)$": "<rootDir>/__mocks__/styleMock.js"
     }
   },
   "dependencies": {
     "react-lines-ellipsis": "0.14.1",
     "react-measure": "~2.3.0",
-    "wix-rich-content-common": "6.3.0",
-    "wix-rich-content-viewer": "6.3.0"
+    "wix-rich-content-common": "6.4.0",
+    "wix-rich-content-viewer": "6.4.0"
   },
   "peerDependencies": {
     "@babel/runtime": "7.2.0",
-    "@wix/draft-js": "0.10.272",
+    "draft-js": "0.11.2",
     "classnames": "^2.0.0",
     "lodash": "^4.0.0",
     "prop-types": "^15.0.0",
@@ -53,7 +50,7 @@
   },
   "devDependencies": {
     "@babel/runtime": "7.2.0",
-    "@wix/draft-js": "0.10.272",
+    "draft-js": "0.11.2",
     "babel-jest": "^23.6.0",
     "classnames": "^2.2.6",
     "cross-env": "^5.2.0",

@@ -78,6 +78,14 @@ export const sizeOriginalButton = icon =>
     tooltipTextKey: 'SizeOriginalButton_Tooltip',
   });
 
+export const sizeContentCenterButton = icon =>
+  createBlockAlignmentAndSizeButton({
+    size: 'content',
+    alignment: 'center',
+    Icon: icon || AlignCenterIcon,
+    tooltipTextKey: 'AlignCenterButton_Tooltip',
+  });
+
 export const sizeSmallCenterButton = icon =>
   createBlockAlignmentAndSizeButton({
     size: 'small',
@@ -153,8 +161,8 @@ export const widthButton = icon =>
     onChange: ({ getEditorBounds, store }) => width => {
       const bounds = getEditorBounds();
       const editorWidth = bounds ? bounds.width : 740;
-      if (width >= editorWidth && store.get('componentAlignment')) {
-        store.set('componentAlignment', 'center');
+      if (width >= editorWidth && store.get('componentData')?.config.alignment) {
+        store.update('componentData', { config: { alignment: 'center' } });
       }
 
       store.update('componentData', { config: { width } });
@@ -174,6 +182,7 @@ export const BUTTONS_BY_KEY = {
   [BUTTONS.SIZE_MEDIUM]: icon => sizeMediumButton(icon),
   [BUTTONS.SIZE_LARGE]: icon => sizeLargeButton(icon),
   [BUTTONS.SIZE_ORIGINAL]: icon => sizeOriginalButton(icon),
+  [BUTTONS.SIZE_CONTENT_CENTER]: icon => sizeContentCenterButton(icon),
   [BUTTONS.SIZE_CONTENT]: icon => sizeContentButton(icon),
   [BUTTONS.SIZE_FULL_WIDTH]: icon => sizeFullWidthButton(icon),
   [BUTTONS.ALIGN_LEFT]: icon => alignLeftButton(icon),
