@@ -13,6 +13,14 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+
+### :rocket: New Feature
+- `file-upload`
+  - [#489](https://github.com/wix-incubator/rich-content/pull/489) `config.downloadTarget` enables consumers to control in which tab files are opened
+### :bug: Bug Fix
+- `image`
+  - [#478](https://github.com/wix-incubator/rich-content/pull/478) margin & size (alignment strategy updated)
+  
 </details>
 <hr/>
 
@@ -22,14 +30,15 @@
   - [2a1e1b4a](https://github.com/wix-incubator/rich-content/commit/2a1e1b4a) fix import from common/src
 - `e2e`
   - [98d8c980](https://github.com/wix-incubator/rich-content/commit/98d8c980) fix e2e
-  
-## 6.4.0 (Nov 25, 2019)
+### :house: Internal
+- `draftjs`
+  - [#487](https://github.com/wix-incubator/rich-content/pull/487) update draftjs 0.11 => 0.11.2
+<hr/>
 
+## 6.4.0 (Nov 25, 2019)
 ### :rocket: New Feature
 - `emoji`
   - [#470](https://github.com/wix-incubator/rich-content/pull/470) plugin reworked
-- `file-upload`
-  - [#489](https://github.com/wix-incubator/rich-content/pull/489) `config.downloadTarget` enables consumers to control in which tab files are opened
 - `text-color`
   - [#440](https://github.com/wix-incubator/rich-content/pull/440) text highlight plugin
 - `editor`
