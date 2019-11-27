@@ -10,7 +10,7 @@ import {
   LinkPanel,
   SettingsPanelFooter,
   SettingsSection,
-} from 'wix-rich-content-common';
+} from 'wix-rich-content-editor-common';
 import ImageSettingsMobileHeader from './image-settings-mobile-header';
 import styles from '../../statics/styles/image-settings.scss';
 

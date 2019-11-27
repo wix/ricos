@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import ImageViewer from './image-viewer';
 import { getDefault } from './consts';
 import { sizeClassName, alignmentClassName } from './classNameStrategies';
-import { Context } from 'wix-rich-content-common';
+import { Context } from 'wix-rich-content-editor-common';
 
 const EMPTY_SMALL_PLACEHOLDER =
   'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';

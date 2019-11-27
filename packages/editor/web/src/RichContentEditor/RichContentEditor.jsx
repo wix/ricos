@@ -20,7 +20,7 @@ import {
   TooltipHost,
   TOOLBARS,
   Context,
-} from 'wix-rich-content-common';
+} from 'wix-rich-content-editor-common';
 import styles from '../../statics/styles/rich-content-editor.scss';
 import draftStyles from '../../statics/styles/draft.rtlignore.scss';
 import { getLangDir } from 'rtl-detect';

@@ -1,4 +1,4 @@
-import { createBasePlugin } from 'wix-rich-content-common';
+import { createBasePlugin } from 'wix-rich-content-editor-common';
 import { HASHTAG_TYPE } from './types';
 import HashtagDecorator from './HashtagDecorator';
 

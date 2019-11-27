@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { RichContentViewer } from 'wix-rich-content-viewer';
 import { debounce } from 'lodash';
 import Measure from 'react-measure';
-import { mergeStyles } from 'wix-rich-content-common';
+import { mergeStyles } from 'wix-rich-content-editor-common';
 import { interactionMap } from '../Interactions/interactionMap';
 import { defaultTransformation } from './default-transformation';
 import styles from '../../statics/styles/preview.scss';

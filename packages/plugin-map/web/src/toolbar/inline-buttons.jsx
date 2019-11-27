@@ -4,7 +4,7 @@ import {
   getModalStyles,
   PluginSettingsIcon,
   SizeSmallCenterIcon,
-} from 'wix-rich-content-common';
+} from 'wix-rich-content-editor-common';
 import { MapSettingsModal } from './MapSettingsModal';
 import { DEFAULTS } from '../constants';
 

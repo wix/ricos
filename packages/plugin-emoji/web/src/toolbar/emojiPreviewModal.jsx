@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import Scrollbars from 'react-custom-scrollbars';
-import { mergeStyles } from 'wix-rich-content-common';
+import { mergeStyles } from 'wix-rich-content-editor-common';
 import addEmoji from '../modifiers/addEmoji';
 import { JoyPixelsIcon } from '../icons';
 import { getGroupEmojis } from '../utils';

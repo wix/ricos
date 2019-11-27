@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { mergeStyles } from 'wix-rich-content-common';
+import { mergeStyles } from 'wix-rich-content-editor-common';
 import InfiniteScroll from 'react-infinite-scroller';
 import MDSpinner from 'react-md-spinner';
 import { Scrollbars } from 'react-custom-scrollbars';

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { normalizeUrl, mergeStyles, validate, Context } from 'wix-rich-content-common';
+import { normalizeUrl, mergeStyles, validate, Context } from 'wix-rich-content-editor-common';
 import { invoke, isEqual } from 'lodash';
 import schema from '../statics/data-schema.json';
 import styles from '../statics/link-viewer.scss';

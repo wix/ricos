@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { Context, mergeStyles } from 'wix-rich-content-common';
+import { Context, mergeStyles } from 'wix-rich-content-editor-common';
 import styles from '../../statics/styles/default-styles.scss';
 class ButtonViewer extends PureComponent {
   render() {

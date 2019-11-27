@@ -1,6 +1,6 @@
 import CodeUtils from 'draft-js-code';
 import { get } from 'lodash';
-import { createBasePlugin } from 'wix-rich-content-common';
+import { createBasePlugin } from 'wix-rich-content-editor-common';
 import { CODE_BLOCK_TYPE } from './types';
 // import PrismDecorator from './PrismDecorator';
 import createCodeBlockToolbar from './toolbar/createCodeBlockToolbar';

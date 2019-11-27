@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styles from '../../statics/styles/styles.scss';
-import { mergeStyles } from 'wix-rich-content-common';
+import { mergeStyles } from 'wix-rich-content-editor-common';
 import classNames from 'classnames';
 
 const LineHeightsPanel = ({ selectedHeight, onSave, showCustomPanel, styles, t }) => {

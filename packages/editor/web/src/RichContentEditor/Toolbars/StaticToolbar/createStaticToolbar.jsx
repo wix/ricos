@@ -1,7 +1,7 @@
 import React from 'react';
 import { camelCase } from 'lodash';
 import StaticToolbar from './StaticToolbar';
-import { simplePubsub } from 'wix-rich-content-common';
+import { simplePubsub } from 'wix-rich-content-editor-common';
 import { getLangDir } from 'rtl-detect';
 import Styles from '../../../../statics/styles/static-toolbar.scss';
 import classNames from 'classnames';

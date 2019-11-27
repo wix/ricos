@@ -1,6 +1,6 @@
 import React, { PureComponent, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { Context, mergeStyles } from 'wix-rich-content-common';
+import { Context, mergeStyles } from 'wix-rich-content-editor-common';
 import LinesEllipsis from 'react-lines-ellipsis';
 import { getChildrenText } from '../utils';
 import styles from '../../statics/styles/read-more.scss';

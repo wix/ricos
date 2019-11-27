@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Measure from 'react-measure';
 import { debounce, identity, pickBy } from 'lodash';
-import { DISPLAY_MODE, Context, TooltipHost } from 'wix-rich-content-common';
+import { DISPLAY_MODE, Context, TooltipHost } from 'wix-rich-content-editor-common';
 import Styles from '../../../../statics/styles/static-toolbar.scss';
 
 const displayOptionStyles = {

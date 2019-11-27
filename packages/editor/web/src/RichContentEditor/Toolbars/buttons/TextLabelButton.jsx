@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { isEmpty } from 'lodash';
 import classNames from 'classnames';
-import { mergeStyles, ToolbarButton } from 'wix-rich-content-common';
+import { mergeStyles, ToolbarButton } from 'wix-rich-content-editor-common';
 
 import styles from '../../../../statics/styles/text-label-button.scss';
 

@@ -8,7 +8,7 @@ import {
   matchSoundCloudUrl,
   Context,
   ViewportRenderer,
-} from 'wix-rich-content-common';
+} from 'wix-rich-content-editor-common';
 import { isEqual } from 'lodash';
 import schema from '../statics/data-schema.json';
 import styles from '../statics/styles/sound-cloud-viewer.scss';

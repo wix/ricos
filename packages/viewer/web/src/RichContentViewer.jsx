@@ -6,7 +6,7 @@ import {
   AccessibilityListener,
   normalizeInitialState,
   Context,
-} from 'wix-rich-content-common';
+} from 'wix-rich-content-editor-common';
 import { convertToReact } from './utils/convertContentState';
 import viewerStyles from '../statics/rich-content-viewer.scss';
 import viewerAlignmentStyles from '../statics/rich-content-viewer-alignment.rtlignore.scss';

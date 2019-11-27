@@ -5,7 +5,7 @@ import {
   TOOLBARS,
   DISPLAY_MODE,
   mergeToolbarSettings,
-} from 'wix-rich-content-common';
+} from 'wix-rich-content-editor-common';
 import { getDefaultToolbarSettings } from './default-toolbar-settings';
 import { MobileTextButtonList, DesktopTextButtonList } from './buttons';
 import {

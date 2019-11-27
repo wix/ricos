@@ -1,4 +1,4 @@
-import { createBasePlugin, mergeStyles } from 'wix-rich-content-common';
+import { createBasePlugin, mergeStyles } from 'wix-rich-content-editor-common';
 
 import { DIVIDER_TYPE } from './constants';
 import DividerComponent from './components/divider-component';

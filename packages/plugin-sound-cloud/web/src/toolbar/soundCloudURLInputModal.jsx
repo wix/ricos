@@ -8,7 +8,7 @@ import {
   SettingsPanelFooter,
   TextInput,
   CloseIcon,
-} from 'wix-rich-content-common';
+} from 'wix-rich-content-editor-common';
 import styles from '../../statics/styles/sound-cloud-url-input-modal.scss';
 
 export default class SoundCloudURLInputModal extends Component {

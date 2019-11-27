@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { mergeStyles, TextInput } from 'wix-rich-content-common';
+import { mergeStyles, TextInput } from 'wix-rich-content-editor-common';
 import { SearchIcon, CloseIcon } from '../icons';
 import styles from '../../statics/styles/giphy-api-input-modal.scss';
 import GiphySelector from './giphySelector';

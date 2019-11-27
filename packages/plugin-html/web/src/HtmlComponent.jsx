@@ -7,7 +7,7 @@ import {
   validate,
   Context,
   ViewportRenderer,
-} from 'wix-rich-content-common';
+} from 'wix-rich-content-editor-common';
 
 import {
   SRC_TYPE_HTML,

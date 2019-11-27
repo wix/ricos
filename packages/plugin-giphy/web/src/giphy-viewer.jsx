@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { mergeStyles, validate, Context, ViewportRenderer } from 'wix-rich-content-common';
+import { mergeStyles, validate, Context, ViewportRenderer } from 'wix-rich-content-editor-common';
 import { isEqual } from 'lodash';
 import schema from '../statics/data-schema.json';
 import styles from '../statics/styles/giphy-viewer.scss';

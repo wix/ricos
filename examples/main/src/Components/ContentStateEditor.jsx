@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { debounce } from 'lodash';
-import { getContentStateSchema, isSSR } from 'wix-rich-content-common';
+import { getContentStateSchema, isSSR } from 'wix-rich-content-editor-common';
 
 import dividerSchema from 'wix-rich-content-plugin-divider/dist/statics/data-schema.json';
 import imageSchema from 'wix-rich-content-plugin-image/dist/statics/data-schema.json';

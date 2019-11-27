@@ -8,7 +8,7 @@ import {
   removeLinksInSelection,
   LinkPanelContainer,
   decorateComponentWithProps,
-} from 'wix-rich-content-common';
+} from 'wix-rich-content-editor-common';
 
 export default class TextLinkPanel extends Component {
   componentDidMount() {
