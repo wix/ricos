@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { mergeStyles } from 'wix-rich-content-common';
+import { mergeStyles } from 'wix-rich-content-editor-common';
 import styles from '../../statics/styles/giphy-modal-arrow.scss';
 
 class Arrow extends Component {

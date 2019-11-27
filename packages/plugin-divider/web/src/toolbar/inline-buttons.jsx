@@ -1,5 +1,5 @@
 import { get } from 'lodash';
-import { BUTTONS, AlignCenterIcon, SizeLargeIcon } from 'wix-rich-content-common';
+import { BUTTONS, AlignCenterIcon, SizeLargeIcon } from 'wix-rich-content-editor-common';
 import { changeType, changeAlignmentMobile, changeSizeMobile } from './actions';
 import { isAlignmentDisabled, getNextSizeIcon, getNextAlignmentIcon } from './selectors';
 import { getDropdownOptions, createDropdownValueGetter } from './dropdown-options';

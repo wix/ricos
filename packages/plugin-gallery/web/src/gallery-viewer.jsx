@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { isEqual } from 'lodash';
-import { validate, mergeStyles, Context } from 'wix-rich-content-common';
+import { validate, mergeStyles, Context } from 'wix-rich-content-editor-common';
 import { convertItemData } from './helpers/convert-item-data';
 import { getDefault, isHorizontalLayout, sampleItems } from './constants';
 import resizeMediaUrl from './helpers/resize-media-url';

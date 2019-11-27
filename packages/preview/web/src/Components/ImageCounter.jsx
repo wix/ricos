@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Context, mergeStyles } from 'wix-rich-content-common';
+import { Context, mergeStyles } from 'wix-rich-content-editor-common';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import styles from '../../statics/styles/image-counter.scss';

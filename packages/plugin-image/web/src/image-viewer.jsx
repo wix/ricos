@@ -10,7 +10,7 @@ import {
   validate,
   Context,
   WIX_MEDIA_DEFAULT,
-} from 'wix-rich-content-common';
+} from 'wix-rich-content-editor-common';
 import { getDefault, SEO_IMAGE_WIDTH } from './consts';
 import schema from '../statics/data-schema.json';
 import styles from '../statics/styles/image-viewer.scss';

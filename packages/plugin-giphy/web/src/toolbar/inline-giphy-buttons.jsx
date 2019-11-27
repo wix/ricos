@@ -4,7 +4,7 @@ import {
   getModalStyles,
   DECORATION_MODE,
   decorateComponentWithProps,
-} from 'wix-rich-content-common';
+} from 'wix-rich-content-editor-common';
 import { MediaReplaceIcon } from '../icons';
 import GiphyApiInputModal from './giphyApiInputModal';
 import { MobileFullScreenCustomStyle, DesktopFlyOutModalStyles } from '../constants';

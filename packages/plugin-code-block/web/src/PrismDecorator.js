@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Immutable from 'immutable';
 import Prism from 'prismjs';
 import classNames from 'classnames';
-import { hasLinksInBlock } from 'wix-rich-content-common';
+import { hasLinksInBlock } from 'wix-rich-content-editor-common';
 import highlightingTheme from '../statics/styles/highlighting-theme.scss';
 
 const DEFAULT_SYNTAX = 'javascript';

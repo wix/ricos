@@ -29,7 +29,7 @@ import {
   styleSelectionPredicate,
 } from '../../src/text-color-style-fn';
 
-import 'wix-rich-content-common/dist/styles.min.css';
+import 'wix-rich-content-editor-common/dist/styles.min.css';
 import 'wix-rich-content-viewer/dist/styles.min.css';
 // import 'wix-rich-content-plugin-code-block/dist/styles.min.css';
 import 'wix-rich-content-plugin-divider/dist/styles.min.css';

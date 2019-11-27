@@ -1,5 +1,5 @@
 import { get } from 'lodash';
-import { TOOLBARS } from 'wix-rich-content-common';
+import { TOOLBARS } from 'wix-rich-content-editor-common';
 import { getDefault } from './../gallery-component';
 import { InsertPluginIcon } from '../icons';
 

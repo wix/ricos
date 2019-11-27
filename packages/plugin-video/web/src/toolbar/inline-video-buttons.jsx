@@ -1,5 +1,9 @@
 import { get } from 'lodash';
-import { BUTTONS, getModalStyles, decorateComponentWithProps } from 'wix-rich-content-common';
+import {
+  BUTTONS,
+  getModalStyles,
+  decorateComponentWithProps,
+} from 'wix-rich-content-editor-common';
 import { MediaReplaceIcon } from '../icons';
 import VideoSelectionInputModal from './videoSelectionInputModal';
 import {

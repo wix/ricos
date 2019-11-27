@@ -1,6 +1,12 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { mergeStyles, isVideoUrl, TextInput, CloseIcon, Button } from 'wix-rich-content-common';
+import {
+  mergeStyles,
+  isVideoUrl,
+  TextInput,
+  CloseIcon,
+  Button,
+} from 'wix-rich-content-editor-common';
 import styles from '../../statics/styles/video-selection-input-modal.scss';
 
 export default class VideoSelectionInputModal extends Component {

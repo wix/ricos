@@ -3,7 +3,7 @@ import {
   // getUrlMatches,
   insertLinkInPosition,
   isValidUrl,
-} from 'wix-rich-content-common';
+} from 'wix-rich-content-editor-common';
 import { LINK_TYPE } from './types';
 import { Component } from './LinkComponent';
 import { linkEntityStrategy } from './strategy';

@@ -5,7 +5,7 @@ import {
   SliderWithInput,
   SettingsSection,
   mergeStyles,
-} from 'wix-rich-content-common';
+} from 'wix-rich-content-editor-common';
 import classNames from 'classnames';
 import ButtonSample from '../components/button-sample';
 import ColorToggleComponent from './color-toggle-component';

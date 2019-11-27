@@ -1,6 +1,6 @@
 import { get } from 'lodash';
 import { DEFAULTS } from '../soundCloud';
-import { getModalStyles, TOOLBARS } from 'wix-rich-content-common';
+import { getModalStyles, TOOLBARS } from 'wix-rich-content-editor-common';
 import SoundCloudURLInputModal from './soundCloudURLInputModal';
 import { InsertPluginIcon } from '../icons';
 

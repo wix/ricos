@@ -10,7 +10,7 @@ import {
   ErrorIcon,
   SettingsPanelFooter,
   isValidUrl,
-} from 'wix-rich-content-common';
+} from 'wix-rich-content-editor-common';
 import DesignComponent from './../components/design-component';
 import SettingsComponent from './../components/settings-component';
 import Navbar from './../components/navbar';

@@ -1,4 +1,4 @@
-import { Version } from 'wix-rich-content-common';
+import { Version } from 'wix-rich-content-editor-common';
 import { METHOD_BLOCK_MAP, METHOD_GROUPED_BLOCK_MAP, METHOD_PLUGIN_DATA_MAP } from '../const';
 import { toArray, addBlock, addPlugin } from './builder-utils';
 import { readMore, seeFullPost, imageCounter } from '../Interactions/interaction-utils';

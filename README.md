@@ -22,14 +22,14 @@ To install this package as viewer, use the following command:
 npm install --save wix-rich-content-viewer
 ```
 
-To use the editor with `<script>` tag, consume the following JS file: `dist/Common.js` and `dist/Editor.js` from the bundle, and load the matching CSS files:
+To use the editor with `<script>` tag, consume the following JS file: `dist/EditorCommon.js` and `dist/Editor.js` from the bundle, and load the matching CSS files:
 
 ```html
 <html>
   <head>
-    <script src="https://unpkg.com/wix-rich-content-common/dist/Common.js"></script>
+    <script src="https://unpkg.com/wix-rich-content-editor-common/dist/EditorCommon.js"></script>
     <script src="https://unpkg.com/wix-rich-content-editor/dist/Editor.js"></script>
-    <link rel="stylesheet" href="https://unpkg.com/wix-rich-content-common/dist/styles.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/wix-rich-content-editor-common/dist/styles.min.css" />
     <link rel="stylesheet" href="https://unpkg.com/wix-rich-content-editor/dist/styles.min.css" />
   </head>
   <body>
@@ -94,7 +94,7 @@ Now, to make sure you are getting the most of the rich-content editor, include t
 `app.js`
 
 ```jsx
-import 'wix-rich-content-common/dist/styles.min.css';
+import 'wix-rich-content-editor-common/dist/styles.min.css';
 import 'wix-rich-content-editor/dist/styles.min.css';
 import 'wix-rich-content-plugin-...'/dist/styles.min.css';
 ```
@@ -236,7 +236,7 @@ You can find a full list of classes you can override in [here](./examples/main/s
 To use the editor with Yoshi, you should do the same bootstrapping process, but make sure to include the package's `.css` files from a `.global.scss` file.  For example, create a file named `rich-content.global.scss` with the following content (make sure to import styles from any plugins you are using as well):
 
 ```scss
-@import '~wix-rich-content-common/dist/styles.min.css';
+@import '~wix-rich-content-editor-common/dist/styles.min.css';
 @import '~wix-rich-content-editor/dist/styles.min.css';
 ```
 
@@ -273,4 +273,4 @@ The compiled package also contains a CommonJS bundle, which you can consume if y
 
 [wix-rich-content-viewer](./packages/viewer) is the rich content viewer React Component.
 
-[wix-rich-content-common](./packages/common) is a shared library utilized by the rest of the modules.
+[wix-rich-content-editor-common](./packages/editor-common) is a shared library utilized by the rest of the modules.

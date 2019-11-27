@@ -5,7 +5,7 @@ import {
   TOOLBARS,
   DECORATION_MODE,
   decorateComponentWithProps,
-} from 'wix-rich-content-common';
+} from 'wix-rich-content-editor-common';
 import GiphyApiInputModal from './giphyApiInputModal';
 import { InsertPluginIcon, InsertPluginMobileIcon } from '../icons';
 import Arrow from './arrow';

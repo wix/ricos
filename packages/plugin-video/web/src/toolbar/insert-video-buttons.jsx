@@ -1,5 +1,9 @@
 import { DEFAULTS } from '../video-component';
-import { getModalStyles, TOOLBARS, decorateComponentWithProps } from 'wix-rich-content-common';
+import {
+  getModalStyles,
+  TOOLBARS,
+  decorateComponentWithProps,
+} from 'wix-rich-content-editor-common';
 import VideoSelectionInputModal from './videoSelectionInputModal';
 import { InsertPluginIcon } from '../icons';
 import { get } from 'lodash';

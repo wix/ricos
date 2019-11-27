@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import TextButton from '../TextButton';
-import { mergeStyles, Tooltip } from 'wix-rich-content-common';
+import { mergeStyles, Tooltip } from 'wix-rich-content-editor-common';
 import styles from '../../../../../statics/styles/inline-toolbar-dropdown-button.scss';
 import ClickOutside from 'react-click-outside';
 

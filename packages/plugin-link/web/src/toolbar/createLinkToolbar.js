@@ -4,7 +4,7 @@ import {
   removeLinksInSelection,
   EditorModals,
   getModalStyles,
-} from 'wix-rich-content-common';
+} from 'wix-rich-content-editor-common';
 import TextLinkButton from './TextLinkButton';
 
 const openLinkModal = ({

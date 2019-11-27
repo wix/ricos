@@ -1,4 +1,4 @@
-import { normalizeUrl } from 'wix-rich-content-common';
+import { normalizeUrl } from 'wix-rich-content-editor-common';
 
 /**
  * convertItemData - converts the old gallery metadata format to the new metaData format

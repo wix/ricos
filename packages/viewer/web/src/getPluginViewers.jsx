@@ -8,7 +8,7 @@ import {
   textWrapClassName,
   normalizeUrl,
   Context,
-} from 'wix-rich-content-common';
+} from 'wix-rich-content-editor-common';
 import { getInteractionWrapper, DefaultInteractionWrapper } from './utils/getInteractionWrapper';
 
 class PluginViewer extends PureComponent {

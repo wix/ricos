@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactModal from 'react-modal';
 import MobileDetect from 'mobile-detect';
-import { RichContentModal, mergeStyles, normalizeInitialState } from 'wix-rich-content-common';
+import { RichContentModal, mergeStyles, normalizeInitialState } from 'wix-rich-content-editor-common';
 
 import { RichContentViewer } from 'wix-rich-content-viewer';
 

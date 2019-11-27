@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { isEqual } from 'lodash';
-import { Context } from 'wix-rich-content-common';
+import { Context } from 'wix-rich-content-editor-common';
 import GalleryViewer from './gallery-viewer';
 import { getDefault } from './constants';
 
