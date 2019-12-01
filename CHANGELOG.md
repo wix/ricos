@@ -20,7 +20,10 @@
 - `image`
   - [#478](https://github.com/wix-incubator/rich-content/pull/478) margin & size (alignment strategy updated)
 - `mentions`
-  - [#486](https://github.com/wix-incubator/rich-content/pull/486) suggestions can be navigated using keyboard arrows  
+  - [#486](https://github.com/wix-incubator/rich-content/pull/486) suggestions can be navigated using keyboard arrows
+### :house: Internal
+- `common`
+  - [#493](https://github.com/wix-incubator/rich-content/pull/493) `common` package was split into `editor-common` and `common` in order to reduce `viewer` bundle size
   
 </details>
 <hr/>
