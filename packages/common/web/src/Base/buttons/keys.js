@@ -21,6 +21,7 @@ export default {
   TEXT_ALIGN_LEFT: 'alignment-left',
   TEXT_ALIGN_CENTER: 'alignment-center',
   TEXT_ALIGN_RIGHT: 'alignment-right',
+  // UNDO_REDO: 'undo-redo',
   WIDTH: 'width',
   HEIGHT: 'height',
   LINK: 'link',

@@ -360,7 +360,10 @@ export default function createToolbar({
             />
           );
         }
-
+        // case 'undo-redo': {
+        //   const UndoButton = button.buttonToRender;
+        //   return <UndoButton />;
+        // }
         default:
           return (
             <Button

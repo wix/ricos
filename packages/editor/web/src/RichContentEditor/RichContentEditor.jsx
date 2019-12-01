@@ -25,6 +25,8 @@ import styles from '../../statics/styles/rich-content-editor.scss';
 import draftStyles from '../../statics/styles/draft.rtlignore.scss';
 import { getLangDir } from 'rtl-detect';
 
+// import createUndoPlugin from 'draft-js-undo-plugin';
+
 class RichContentEditor extends Component {
   constructor(props) {
     super(props);
@@ -339,7 +341,12 @@ class RichContentEditor extends Component {
       handleReturn,
     } = this.props;
     const { editorState, theme } = this.state;
+    // const undoPlugin = createUndoPlugin();
+    // const { UndoButton, RedoButton } = undoPlugin;
+    // const plugins = [undoPlugin, ...this.plugins];
+
     return (
+      // <div>
       <Editor
         ref={this.setEditor}
         handleReturn={
@@ -381,6 +388,9 @@ class RichContentEditor extends Component {
         onFocus={onFocus}
         textAlignment={textAlignment}
       />
+      // {/* <UndoButton />
+      // <RedoButton /> */}
+      // {/* </div> */}
     );
   };
 
@@ -411,6 +421,18 @@ class RichContentEditor extends Component {
 
   onResize = debounce(({ bounds }) => this.updateBounds(bounds), 100);
 
+  // undoButton = () => {
+  //   // const newEditorState = EditorState.undo(this.state.editorState);
+  //   // this.setState({ newEditorState });
+  //   this.setState({ editorState: EditorState.undo(this.state.editorState) });
+  // };
+
+  // redoButton = () => {
+  //   // const newEditorState = EditorState.undo(this.state.editorState);
+  //   // this.setState({ newEditorState });
+  //   this.setState({ editorState: EditorState.redo(this.state.editorState) });
+  // };
+
   render() {
     const { isMobile } = this.props;
     const { theme } = this.state;
@@ -428,6 +450,8 @@ class RichContentEditor extends Component {
               className={wrapperClassName}
               dir={this.contextualData.languageDir}
             >
+              {/* <button onClick={this.undoButton}>Undo Button</button>
+              <button onClick={this.redoButton}>Redo Button</button> */}
               {this.renderStyleTag()}
               <div className={classNames(styles.editor, theme.editor)}>
                 {this.renderAccessibilityListener()}
@@ -435,6 +459,8 @@ class RichContentEditor extends Component {
                 {this.renderToolbars()}
                 {this.renderInlineModals()}
                 {this.renderTooltipHost()}
+                {/* <UndoButton />
+                <RedoButton /> */}
               </div>
             </div>
           )}

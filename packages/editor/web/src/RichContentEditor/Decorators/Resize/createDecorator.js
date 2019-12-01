@@ -193,11 +193,12 @@ export default ({ config, store }) => WrappedComponent =>
         ...elementProps
       } = this.props;
       const componentData = blockProps.getData();
-      const { size, alignment } = componentData.config;
+      const config = componentData.config || {};
+      const { size, alignment } = config;
 
       const {
-        width = componentData.config.width,
-        height = componentData.config.height,
+        width = componentData.config?.width,
+        height = componentData.config?.height,
         hoverPosition,
       } = this.state;
       const { isTop, isLeft, isRight, isBottom } = hoverPosition;

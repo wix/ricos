@@ -121,6 +121,10 @@ export default ({ blockType, button, helpers, pubsub, settings, t, isMobile }) =
       const { showName, tabIndex } = this.props;
       const { name, Icon, ButtonElement, wrappingComponent } = button;
       const WrappingComponent = wrappingComponent || 'button';
+      // if (name === 'Undo') {
+      //   return <WrappingComponent className={styles.button} />;
+      //   // return <ButtonElement className={styles.button} />;
+      // }
       if (ButtonElement) {
         return (
           <WrappingComponent
@@ -232,7 +236,7 @@ export default ({ blockType, button, helpers, pubsub, settings, t, isMobile }) =
 
     render() {
       const { styles } = this;
-      const { theme, isMobile } = this.props;
+      const { theme, isMobile, getEditorState, setEditorState } = this.props;
       const { tooltipText } = button;
       const showTooltip = !isMobile && !isEmpty(tooltipText);
       const shouldRenderFileUploadButton =
@@ -241,12 +245,18 @@ export default ({ blockType, button, helpers, pubsub, settings, t, isMobile }) =
       const buttonWrapperClassNames = classNames(styles.buttonWrapper, {
         [styles.mobile]: isMobile,
       });
+      const { name, wrappingComponent } = button;
+      const WrappingComponent = wrappingComponent || 'button';
+      const store = { getEditorState, setEditorState, ...pubsub.store };
 
-      const Button = (
-        <div className={buttonWrapperClassNames}>
-          {shouldRenderFileUploadButton ? this.renderFileUploadButton() : this.renderButton()}
-        </div>
-      );
+      const Button =
+        name === 'Undo' ? (
+          <WrappingComponent className={styles.button} store={store} {...this.props} />
+        ) : (
+          <div className={buttonWrapperClassNames}>
+            {shouldRenderFileUploadButton ? this.renderFileUploadButton() : this.renderButton()}
+          </div>
+        );
 
       return (
         <ToolbarButton

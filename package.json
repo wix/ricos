@@ -125,6 +125,8 @@
     "registry": "https://registry.npmjs.org/"
   },
   "dependencies": {
-    "cypress": "^3.5.0"
+    "cypress": "^3.5.0",
+    "draft-js-plugins-editor": "^3.0.0",
+    "draft-js-undo-plugin": "^2.0.3"
   }
 }
