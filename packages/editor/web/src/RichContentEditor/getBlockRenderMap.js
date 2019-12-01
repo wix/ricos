@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { get } from 'lodash';
 import { DefaultDraftBlockRenderMap } from 'draft-js';
-import { mergeStyles } from 'wix-rich-content-editor-common';
+import { mergeStyles } from 'wix-rich-content-common';
 import styles from '../../statics/styles/rich-content-editor.scss';
 
 /**

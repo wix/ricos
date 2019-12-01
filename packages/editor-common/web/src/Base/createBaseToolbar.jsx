@@ -7,7 +7,7 @@ import Measure from 'react-measure';
 import { TOOLBARS, TOOLBAR_OFFSETS, DISPLAY_MODE } from '../consts';
 import { getConfigByFormFactor } from '../Utils/getConfigByFormFactor';
 import { mergeToolbarSettings } from '../Utils/mergeToolbarSettings';
-import Context from '../Utils/Context';
+import { Context } from 'wix-rich-content-common';
 import Separator from '../Components/Separator';
 import BaseToolbarButton from './baseToolbarButton';
 import { getDefaultToolbarSettings } from './default-toolbar-settings';

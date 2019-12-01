@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-import { mergeStyles } from '../Utils/mergeStyles';
-import { isValidUrl } from '../Utils/urlValidators';
+import { mergeStyles, isValidUrl } from 'wix-rich-content-common';
 import Tooltip from './Tooltip';
 import Checkbox from './Checkbox';
 import { ErrorIcon } from '../Icons';

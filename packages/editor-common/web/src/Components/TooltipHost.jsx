@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactTooltip from 'react-tooltip';
-import Context from '../Utils/Context';
-import { mergeStyles } from '../Utils/mergeStyles';
+import { mergeStyles, Context } from 'wix-rich-content-common';
 import styles from '../../statics/styles/tooltip.scss';
 
 // TODO: add tooltip configuration ability

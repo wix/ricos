@@ -1,5 +1,6 @@
 import classNames from 'classnames';
-import { decorateComponentWithProps, mergeStyles } from 'wix-rich-content-editor-common';
+import { mergeStyles } from 'wix-rich-content-common';
+import { decorateComponentWithProps } from 'wix-rich-content-editor-common';
 import createStaticToolbar from './createStaticToolbar';
 import { AddPluginButton } from '../buttons';
 import { getTextButtonsFromList } from '../buttons/utils';

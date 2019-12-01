@@ -1,7 +1,7 @@
 import React from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { convertFromRaw } from 'draft-js';
-import { BLOCK_TYPES } from 'wix-rich-content-editor-common';
+import { BLOCK_TYPES } from 'wix-rich-content-common';
 import redraft from 'redraft';
 import classNames from 'classnames';
 import { endsWith, isEmpty, isArray } from 'lodash';

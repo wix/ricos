@@ -3,14 +3,14 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { get, includes, isEqual, isFunction } from 'lodash';
 import {
-  isSSR,
+  Context,
   mergeStyles,
+  validate,
+  isSSR,
   getImageSrc,
   Loader,
-  validate,
-  Context,
   WIX_MEDIA_DEFAULT,
-} from 'wix-rich-content-editor-common';
+} from 'wix-rich-content-common';
 import { getDefault, SEO_IMAGE_WIDTH } from './consts';
 import schema from '../statics/data-schema.json';
 import styles from '../statics/styles/image-viewer.scss';

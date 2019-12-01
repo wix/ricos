@@ -4,14 +4,18 @@ import PropTypes from 'prop-types';
 import { findDOMNode } from 'react-dom';
 import { merge, compact, isNil } from 'lodash';
 import classNames from 'classnames';
-import createHocName from '../Utils/createHocName';
-import getDisplayName from '../Utils/getDisplayName';
-import { alignmentClassName, sizeClassName, textWrapClassName } from '../Utils/classNameStrategies';
-import { normalizeUrl } from '../Utils/urlValidators';
-import styles from '../../statics/styles/general.scss';
-import rtlIgnoredStyles from '../../statics/styles/general.rtlignore.scss';
+import {
+  getDisplayName,
+  alignmentClassName,
+  sizeClassName,
+  textWrapClassName,
+  normalizeUrl,
+  createHocName,
+  Context,
+} from 'wix-rich-content-common';
+import styles from 'wix-rich-content-common/dist/statics/styles/general.scss';
+import rtlIgnoredStyles from 'wix-rich-content-common/dist/statics/styles/general.rtlignore.scss';
 import draggableStyle from '../../statics/styles/draggable.scss';
-import Context from '../Utils/Context';
 
 const DEFAULTS = {
   alignment: null,

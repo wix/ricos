@@ -1,4 +1,4 @@
-import { getImageSrc } from 'wix-rich-content-editor-common';
+import { getImageSrc } from 'wix-rich-content-common';
 
 const imageType = 'wix-draft-plugin-image';
 const galleryType = 'wix-draft-plugin-gallery';

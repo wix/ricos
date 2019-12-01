@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { debounce, isNumber } from 'lodash';
 
-import { mergeStyles } from '../Utils/mergeStyles';
+import { mergeStyles } from 'wix-rich-content-common';
 import Slider from './Slider';
 import styles from '../../statics/styles/slider-with-input.scss';
 

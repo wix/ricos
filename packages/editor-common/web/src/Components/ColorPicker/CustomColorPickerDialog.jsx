@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { mergeStyles } from '../../Utils/mergeStyles';
+import { mergeStyles } from 'wix-rich-content-common';
 import CustomColorPicker from './CustomColorPicker';
 import styles from '../../../statics/styles/custom-color-picker-dialog.scss';
 

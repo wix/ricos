@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { InView } from 'react-intersection-observer';
-import Context from '../Utils/Context';
 import classnames from 'classnames';
-import { isSSR } from '../Utils/ssrUtils';
+import { default as Context } from '../Utils/Context';
 import { mergeStyles } from '../Utils/mergeStyles';
+import { isSSR } from '../Utils/ssrUtils';
 import styles from '../../statics/styles/placeholder.scss';
 
 class ViewportRenderer extends Component {

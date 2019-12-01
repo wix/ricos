@@ -12,7 +12,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { mergeStyles, Context } from 'wix-rich-content-editor-common';
+import { mergeStyles, Context } from 'wix-rich-content-common';
 import deafultStyles from '../../../../statics/styles/resizeable.rtlignore.scss';
 
 const getDisplayName = WrappedComponent => {

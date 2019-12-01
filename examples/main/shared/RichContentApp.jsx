@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { debounce } from 'lodash';
 import { convertToRaw, createEmpty } from 'wix-rich-content-editor/dist/lib/editorStateConversion';
-import { isSSR } from 'wix-rich-content-editor-common';
+import { isSSR } from 'wix-rich-content-common';
 import ExampleApp from '../src/ExampleApp';
 import TestApp from '../../../e2e/test-env/src/client/TestApp';
 import { getRequestedLocale, isMobile } from '../src/utils';
@@ -30,9 +30,9 @@ class RichContentApp extends PureComponent {
   };
 
   setLocaleResource = locale => {
-    import(
-      `wix-rich-content-editor-common/statics/locale/messages_${locale}.json`
-    ).then(localeResource => this.setState({ locale, localeResource: localeResource.default }));
+    import(`wix-rich-content-common/statics/locale/messages_${locale}.json`).then(localeResource =>
+      this.setState({ locale, localeResource: localeResource.default })
+    );
   };
 
   onEditorChange = editorState => {

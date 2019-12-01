@@ -3,14 +3,13 @@ import React, { Component } from 'react';
 import { isEqual } from 'lodash';
 import { Scrollbars } from 'react-custom-scrollbars';
 import {
-  mergeStyles,
   Tabs,
   Tab,
   FocusManager,
   ErrorIcon,
   SettingsPanelFooter,
-  isValidUrl,
 } from 'wix-rich-content-editor-common';
+import { isValidUrl, mergeStyles } from 'wix-rich-content-common';
 import DesignComponent from './../components/design-component';
 import SettingsComponent from './../components/settings-component';
 import Navbar from './../components/navbar';

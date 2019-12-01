@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { findDOMNode } from 'react-dom';
-import { mergeStyles, Context } from 'wix-rich-content-editor-common';
+import { mergeStyles, Context } from 'wix-rich-content-common';
 import SoundCloudViewer from './soundCloud-viewer';
 import styles from '../statics/styles/default-sound-cloud-styles.scss';
 import { SOUND_CLOUD_TYPE } from './types';
