@@ -29,6 +29,7 @@ import Highlighter from 'react-highlight-words';
 import casual from 'casual-browserify';
 
 import 'wix-rich-content-editor-common/dist/styles.min.css';
+import 'wix-rich-content-common/dist/styles.min.css';
 import 'wix-rich-content-editor/dist/styles.min.css';
 import 'wix-rich-content-plugin-button/dist/styles.min.css';
 // import 'wix-rich-content-plugin-code-block/dist/styles.min.css';
