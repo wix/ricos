@@ -1,12 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { CustomPicker } from 'react-color';
-import { mergeStyles } from '../../Utils/mergeStyles';
+import { mergeStyles, isHexColor } from 'wix-rich-content-common';
 import { Saturation, Hue, EditableInput } from 'react-color/lib/components/common';
 import HuePointer from './HuePointer.jsx';
 import SaturationPointer from './SaturationPointer';
 import styles from '../../../statics/styles/custom-color-picker.scss';
-import { isHexColor } from './utils';
 
 const customPicker = CustomPicker;
 

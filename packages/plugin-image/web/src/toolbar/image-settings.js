@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { mergeStyles, getImageSrc, Loader } from 'wix-rich-content-common';
 import {
-  mergeStyles,
-  getImageSrc,
   Image,
-  Loader,
   InputWithLabel,
   LinkPanel,
   SettingsPanelFooter,

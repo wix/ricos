@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import Context from '../Utils/Context';
+import { default as Context } from '../Utils/Context';
 import styles from '../../statics/styles/general.scss';
 
 export default class AccessibilityListener extends Component {

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import classNames from 'classnames';
-import { mergeStyles } from '../Utils/mergeStyles';
+import { mergeStyles } from 'wix-rich-content-common';
 import styles from '../../statics/styles/dropdown.scss';
 import { DropdownArrowIcon } from '../Icons';
 

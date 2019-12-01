@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import LinkPanel from './LinkPanel';
 import FocusManager from './FocusManager';
-import { mergeStyles } from '../Utils/mergeStyles';
+import { mergeStyles } from 'wix-rich-content-common';
 import RadioGroupHorizontal from './RadioGroupHorizontal';
 import styles from '../../statics/styles/link-panel.scss';
 const LinkType = props => (

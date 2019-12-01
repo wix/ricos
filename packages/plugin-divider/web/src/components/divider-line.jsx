@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { Context } from 'wix-rich-content-editor-common';
+import { Context } from 'wix-rich-content-common';
 
 import { LINE_DOUBLE } from '../constants';
 

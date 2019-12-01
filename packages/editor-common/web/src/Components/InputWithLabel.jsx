@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { omit } from 'lodash';
 import classNames from 'classnames';
-import { mergeStyles } from '../Utils/mergeStyles';
+import { mergeStyles } from 'wix-rich-content-common';
 import styles from '../../statics/styles/input-with-label.scss';
 
 class InputWithLabel extends Component {

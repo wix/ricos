@@ -1,9 +1,9 @@
+import { HEADER_BLOCK } from 'wix-rich-content-common';
 import {
   AlignLeftIcon,
   AlignTextCenterIcon,
   AlignRightIcon,
   AlignJustifyIcon,
-  HEADER_BLOCK,
 } from 'wix-rich-content-editor-common';
 import {
   BoldIcon,

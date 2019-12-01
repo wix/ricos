@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { mergeStyles } from '../Utils/mergeStyles';
+import { mergeStyles } from 'wix-rich-content-common';
 import styles from '../../statics/styles/slider.scss';
 
 class Slider extends Component {

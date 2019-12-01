@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { mergeStyles } from 'wix-rich-content-editor-common';
+import { mergeStyles } from 'wix-rich-content-common';
 import styles from '../../statics/styles/preview-component.scss';
 import ButtonComponent from './button-component';
 

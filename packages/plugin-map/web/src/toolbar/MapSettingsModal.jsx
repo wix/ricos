@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { mergeStyles, SettingsSection, TextInput, Button } from 'wix-rich-content-editor-common';
+import { mergeStyles } from 'wix-rich-content-common';
+import { SettingsSection, TextInput, Button } from 'wix-rich-content-editor-common';
 import ReactGoogleMapLoader from 'react-google-maps-loader';
 import ReactGooglePlacesSuggest from 'react-google-places-suggest';
 import styles from '../../statics/styles/map-settings-modal.scss';

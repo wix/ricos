@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Context, mergeStyles } from 'wix-rich-content-editor-common';
+import { Context, mergeStyles } from 'wix-rich-content-common';
 import styles from '../statics/mentions.scss';
 
 const MentionComponent = ({ children, mention, settings, contextType }) => {

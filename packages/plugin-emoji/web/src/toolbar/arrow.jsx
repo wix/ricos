@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { mergeStyles } from 'wix-rich-content-editor-common';
+import { mergeStyles } from 'wix-rich-content-common';
 import styles from '../../statics/styles/emoji-modal-arrow.scss';
 
 class Arrow extends Component {

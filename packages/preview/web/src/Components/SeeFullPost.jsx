@@ -1,6 +1,6 @@
 import React, { PureComponent, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { Context, mergeStyles } from 'wix-rich-content-editor-common';
+import { Context, mergeStyles } from 'wix-rich-content-common';
 import styles from '../../statics/styles/see-full-post.scss';
 
 class SeeFullPost extends PureComponent {
@@ -36,7 +36,11 @@ class SeeFullPost extends PureComponent {
     return (
       <Fragment>
         {children}
-        <div className={this.styles.seeFullPost_overlay} style={overlayStyles} onClick={this.onClick}>
+        <div
+          className={this.styles.seeFullPost_overlay}
+          style={overlayStyles}
+          onClick={this.onClick}
+        >
           <span className={this.styles.seeFullPost_label} style={labelStyles}>
             {label}
           </span>

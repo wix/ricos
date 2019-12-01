@@ -1,5 +1,5 @@
 import { isTextHighlight, isTextColor, getColor } from './text-decorations-utils';
-import { isHexColor } from 'wix-rich-content-editor-common';
+import { isHexColor } from 'wix-rich-content-common';
 
 export const DEFAULT_PALETTE = ['#303030', '#303030', '#3a54b4', '#bfad80', '#bf695c', '#f7f7f7'];
 export const DEFAULT_COLOR = '#000000';

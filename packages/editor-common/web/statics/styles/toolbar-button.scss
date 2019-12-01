@@ -1,6 +1,6 @@
-@import './mixins';
-@import './palette';
-@import './consts';
+@import '~wix-rich-content-common/dist/statics/styles/mixins';
+@import '~wix-rich-content-common/dist/statics/styles/palette';
+@import '~wix-rich-content-common/dist/statics/styles/consts';
 
 .buttonWrapper {
   position: relative;

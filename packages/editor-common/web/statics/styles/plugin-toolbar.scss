@@ -1,6 +1,6 @@
-@import './consts';
-@import './palette';
-@import './mixins';
+@import '~wix-rich-content-common/dist/statics/styles/consts';
+@import '~wix-rich-content-common/dist/statics/styles/palette';
+@import '~wix-rich-content-common/dist/statics/styles/mixins';
 
 .pluginToolbar {
   min-height: 50px;

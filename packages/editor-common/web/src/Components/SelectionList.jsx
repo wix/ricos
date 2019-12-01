@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import { mergeStyles } from '../Utils/mergeStyles';
+import { mergeStyles } from 'wix-rich-content-common';
 import styles from '../../statics/styles/selection-list.scss';
 
 function defaultDataMapper(item) {

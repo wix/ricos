@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import { getGalleryLayouts } from '../../helpers';
-import { mergeStyles, SelectionList } from 'wix-rich-content-editor-common';
+import { mergeStyles } from 'wix-rich-content-common';
+import { SelectionList } from 'wix-rich-content-editor-common';
 import styles from '../../../statics/styles/layout-selector.scss';
 
 class LayoutSelector extends Component {

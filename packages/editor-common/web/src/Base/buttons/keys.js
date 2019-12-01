@@ -7,6 +7,7 @@ export default {
   DROPDOWN: 'dropdown',
   SEPARATOR: 'separator',
   SIZE_ORIGINAL: 'size-original',
+  SIZE_CONTENT_CENTER: 'size-content-center',
   SIZE_SMALL_CENTER: 'size-small-center',
   SIZE_SMALL_LEFT: 'size-small-left',
   SIZE_SMALL_RIGHT: 'size-small-right',

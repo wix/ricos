@@ -8,6 +8,7 @@ export const externals = [
   'react',
   'react-dom',
   'wix-rich-content-editor-common',
+  'wix-rich-content-common',
   'react-i18next',
 ];
 
@@ -17,6 +18,7 @@ export const excludedExternals = [
   /react-click-outside/,
   'draft-js/lib/DraftOffsetKey',
   /wix-rich-content-editor-common\/.*?\.scss/,
+  /wix-rich-content-common\/.*?\.scss/,
 ];
 
 export const globals = {
@@ -36,6 +38,7 @@ export const globals = {
   'react-sortable-hoc': 'reactSortableHoc',
   'react-tooltip': 'ReactTooltip',
   'wix-rich-content-editor-common': 'WixRichContentEditorCommon',
+  'wix-rich-content-common': 'WixRichContentCommon',
 };
 
 export const excludedGlobals = [

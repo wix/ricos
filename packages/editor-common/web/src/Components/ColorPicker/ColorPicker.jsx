@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { mergeStyles } from '../../Utils/mergeStyles';
+import { mergeStyles } from 'wix-rich-content-common';
 import DefaultColorPicker from './DefaultColorPicker';
 import AddColorIcon from '../../Icons/AddColorIcon';
 import styles from '../../../statics/styles/color-picker.scss';

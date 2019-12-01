@@ -4,7 +4,7 @@ import { findDOMNode } from 'react-dom';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { isEmpty } from 'lodash';
-import Context from '../Utils/Context';
+import { Context } from 'wix-rich-content-common';
 import Dropdown from '../Components/Dropdown';
 import FileInput from '../Components/FileInput';
 import ToolbarButton from '../Components/ToolbarButton';

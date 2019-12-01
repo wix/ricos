@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import getDisplayName from './getDisplayName';
+import { getDisplayName } from 'wix-rich-content-common';
 
 /* eslint-disable keyword-spacing */
 export default (EmbeddedComponent, props) =>

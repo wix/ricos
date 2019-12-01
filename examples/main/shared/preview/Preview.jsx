@@ -1,7 +1,8 @@
 import React, { PureComponent } from 'react';
 import ReactModal from 'react-modal';
 // import MonacoEditor from 'react-monaco-editor';
-import { RichContentModal, isSSR } from 'wix-rich-content-editor-common';
+import { isSSR } from 'wix-rich-content-common';
+import { RichContentModal } from 'wix-rich-content-editor-common';
 import { ContentStateTransformation, RichContentPreview } from 'wix-rich-content-preview';
 import * as PropTypes from 'prop-types';
 import * as Plugins from './PreviewPlugins';

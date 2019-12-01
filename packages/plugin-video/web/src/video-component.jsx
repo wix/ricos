@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { findDOMNode } from 'react-dom';
-import { mergeStyles, Context } from 'wix-rich-content-editor-common';
+import { mergeStyles, Context } from 'wix-rich-content-common';
 import VideoViewer from './video-viewer';
 import styles from '../statics/styles/default-video-styles.scss';
 import { VIDEO_TYPE_LEGACY, VIDEO_TYPE } from './types';

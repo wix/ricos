@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import { mergeStyles } from '../Utils/mergeStyles';
+import { mergeStyles } from 'wix-rich-content-common';
 import { CheckIcon } from '../Icons';
 import styles from '../../statics/styles/checkbox.scss';
-import generalStyles from '../../statics/styles/general.scss';
+import generalStyles from 'wix-rich-content-common/dist/statics/styles/general.scss';
 
 export default class Checkbox extends React.Component {
   static propTypes = {

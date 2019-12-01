@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import imageClientAPI from 'image-client-api';
+import { mergeStyles } from 'wix-rich-content-common';
 import {
-  mergeStyles,
   FileInput,
   Image,
   InputWithLabel,
