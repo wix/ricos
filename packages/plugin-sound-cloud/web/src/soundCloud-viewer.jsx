@@ -8,21 +8,22 @@ import {
   matchSoundCloudUrl,
   Context,
   ViewportRenderer,
+  pluginSoundCloudSchema,
 } from 'wix-rich-content-common';
 import { isEqual } from 'lodash';
-import schema from '../statics/data-schema.json';
+// import schema from '../statics/data-schema.json';
 import styles from '../statics/styles/sound-cloud-viewer.scss';
 
 class SoundCloudViewer extends Component {
   constructor(props) {
     super(props);
-    validate(props.componentData, schema);
+    validate(props.componentData, pluginSoundCloudSchema);
     this.state = { playing: false, isLoaded: false };
   }
 
   componentWillReceiveProps(nextProps) {
     if (!isEqual(nextProps.componentData, this.props.componentData)) {
-      validate(nextProps.componentData, schema);
+      validate(nextProps.componentData, pluginSoundCloudSchema);
     }
   }
 

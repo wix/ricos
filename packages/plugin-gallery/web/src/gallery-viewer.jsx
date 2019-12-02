@@ -1,11 +1,11 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { isEqual, get } from 'lodash';
-import { validate, mergeStyles, Context } from 'wix-rich-content-common';
+import { validate, mergeStyles, Context, pluginGallerySchema } from 'wix-rich-content-common';
 import { convertItemData } from './helpers/convert-item-data';
 import { getDefault, isHorizontalLayout, sampleItems } from './constants';
 import resizeMediaUrl from './helpers/resize-media-url';
-import schema from '../statics/data-schema.json';
+// import schema from '../statics/data-schema.json';
 import styles from '../statics/styles/viewer.scss';
 import 'pro-gallery/dist/statics/main.min.css';
 import ExpandIcon from './icons/expand.svg';
@@ -14,7 +14,7 @@ const { ProGallery } = process.env.SANTA ? {} : require('pro-gallery');
 
 class GalleryViewer extends React.Component {
   constructor(props) {
-    validate(props.componentData, schema);
+    validate(props.componentData, pluginGallerySchema);
     super(props);
 
     this.state = {

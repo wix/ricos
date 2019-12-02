@@ -3,16 +3,22 @@ import ReactDOM from 'react-dom';
 import ReactPlayerWrapper from './reactPlayerWrapper';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { mergeStyles, validate, Context, ViewportRenderer } from 'wix-rich-content-common';
+import {
+  mergeStyles,
+  validate,
+  Context,
+  ViewportRenderer,
+  pluginVideoSchema,
+} from 'wix-rich-content-common';
 import { isEqual } from 'lodash';
 import getVideoSrc from './get-video-source';
-import schema from '../statics/data-schema.json';
+// import schema from '../statics/data-schema.json';
 import styles from '../statics/styles/video-viewer.scss';
 
 class VideoViewer extends Component {
   constructor(props) {
     super(props);
-    validate(props.componentData, schema);
+    validate(props.componentData, pluginVideoSchema);
     this.state = { url: undefined, isLoaded: false };
     const url = getVideoSrc(props.componentData.src, props.settings);
     if (typeof url === 'string') {
@@ -24,7 +30,7 @@ class VideoViewer extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (!isEqual(nextProps.componentData, this.props.componentData)) {
-      validate(nextProps.componentData, schema);
+      validate(nextProps.componentData, pluginVideoSchema);
       if (nextProps.componentData.src !== this.props.componentData.src) {
         const url = getVideoSrc(nextProps.componentData.src, nextProps.settings);
         if (typeof url === 'string') {

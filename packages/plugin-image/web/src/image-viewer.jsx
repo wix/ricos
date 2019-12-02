@@ -10,16 +10,17 @@ import {
   validate,
   Context,
   WIX_MEDIA_DEFAULT,
+  pluginImageSchema,
 } from 'wix-rich-content-common';
 import { getDefault, SEO_IMAGE_WIDTH } from './consts';
-import schema from '../statics/data-schema.json';
+// import schema from '../statics/data-schema.json';
 import styles from '../statics/styles/image-viewer.scss';
 import ExpandIcon from './icons/expand.svg';
 
 class ImageViewer extends React.Component {
   constructor(props) {
     super(props);
-    validate(props.componentData, schema);
+    validate(props.componentData, pluginImageSchema);
     this.state = {};
   }
 
@@ -29,7 +30,7 @@ class ImageViewer extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if (!isEqual(nextProps.componentData, this.props.componentData)) {
-      validate(nextProps.componentData, schema);
+      validate(nextProps.componentData, pluginImageSchema);
     }
   }
 
