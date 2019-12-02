@@ -93,7 +93,7 @@ class App extends Component {
 
     this.getInlineStyleMappers = raw => [
       textColorInlineStyleMapper(this.config, raw),
-      textHighlightInlineStyleMapper(config, raw),
+      textHighlightInlineStyleMapper(this.config, raw),
     ];
   }
 
