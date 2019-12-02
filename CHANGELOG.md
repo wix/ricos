@@ -18,7 +18,7 @@
   - [#489](https://github.com/wix-incubator/rich-content/pull/489) `config.downloadTarget` enables consumers to control in which tab files are opened
 ### :bug: Bug Fix
 - `examples/viewer-ssr`
-  - highlight plugin configuration fixed
+  - [#499](https://github.com/wix-incubator/rich-content/pull/499) highlight plugin configuration fixed
 - `image`
   - [#478](https://github.com/wix-incubator/rich-content/pull/478) margin & size (alignment strategy updated)
 - `mentions`
