@@ -17,6 +17,8 @@
 - `file-upload`
   - [#489](https://github.com/wix-incubator/rich-content/pull/489) `config.downloadTarget` enables consumers to control in which tab files are opened
 ### :bug: Bug Fix
+- `fullscreen`
+  - [#496](https://github.com/wix-incubator/rich-content/pull/496) adds support for legacy image type
 - `image`
   - [#478](https://github.com/wix-incubator/rich-content/pull/478) margin & size (alignment strategy updated)
 - `mentions`
