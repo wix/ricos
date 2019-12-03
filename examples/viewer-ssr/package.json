@@ -52,6 +52,7 @@
     "wix-bootstrap-ng": "latest",
     "wix-express-csrf": "latest",
     "wix-express-require-https": "latest",
+    "wix-rich-content-common": "file:../../packages/common/web",
     "wix-rich-content-editor-common": "file:../../packages/editor-common/web",
     "wix-rich-content-plugin-code-block": "file:../../packages/plugin-code-block/web",
     "wix-rich-content-plugin-divider": "file:../../packages/plugin-divider/web",
