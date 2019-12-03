@@ -63,7 +63,7 @@ const createPlugins = ({
     /* eslint-disable new-cap */
     pluginTextButtons = [
       ...pluginTextButtons,
-      ...(wixPlugin.TextButtonMapper ? [wixPlugin.TextButtonMapper()] : []),
+      ...(wixPlugin.TextButtonMapper ? [wixPlugin.TextButtonMapper(wixPlugin.pubsub)] : []),
     ];
     /* eslint-enable new-cap */
     pubsubs = [...pubsubs, ...(wixPlugin.pubsub ? [wixPlugin.pubsub] : [])];

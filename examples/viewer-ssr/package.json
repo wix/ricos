@@ -63,6 +63,7 @@
     "wix-rich-content-plugin-video": "file:../../packages/plugin-video/web",
     "wix-rich-content-plugin-image": "file:../../packages/plugin-image/web",
     "wix-rich-content-plugin-text-color": "file:../../packages/plugin-text-color/web",
+    "wix-rich-content-plugin-undo-redo": "file:../../packages/plugin-undo-redo/web",
     "wix-rich-content-viewer": "file:../../packages/viewer/web",
     "wix-run-mode": "latest",
     "yoshi-runtime": "latest"
