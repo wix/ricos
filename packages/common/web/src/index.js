@@ -22,7 +22,7 @@ export { mergeStyles } from './Utils/mergeStyles';
 export { default as normalizeInitialState } from './Utils/normalization/normalizeInitialState';
 export { default as getDisplayName } from './Utils/getDisplayName';
 export { default as Version } from './Utils/versioningUtils';
-export { hasLinksInViewerBlock } from './Utils/draftUtils';
+export { hasLinksInBlock } from './Utils/draftUtils';
 export { validate, getContentStateSchema } from './Utils/data-schema-validator';
 export { isSSR } from './Utils/ssrUtils';
 export { getImageSrc, WIX_MEDIA_DEFAULT } from './Utils/imageUtils';

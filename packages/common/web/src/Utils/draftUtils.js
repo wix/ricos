@@ -1,4 +1,4 @@
-export const hasLinksInViewerBlock = (block, contentState) => {
+export const hasLinksInBlock = (block, contentState) => {
   try {
     if (block.entityRanges && block.entityRanges.length) {
       return block.entityRanges.some(entityRange => {

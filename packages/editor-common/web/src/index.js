@@ -60,7 +60,7 @@ export { getModalStyles } from './Utils/getModalStyles';
 export {
   insertLinkAtCurrentSelection,
   insertLinkInPosition,
-  hasLinksInEditorBlock,
+  hasLinksInBlock,
   hasLinksInSelection,
   getLinkDataInSelection,
   removeLinksInSelection,
