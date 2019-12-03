@@ -136,6 +136,7 @@ const redraftOptions = {
       'header-three',
     ],
   },
+  convertFromRaw: contentState => contentState,
 };
 
 const convertToReact = (
