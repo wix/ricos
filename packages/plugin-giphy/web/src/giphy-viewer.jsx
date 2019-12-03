@@ -8,7 +8,6 @@ import {
   pluginGiphySchema,
 } from 'wix-rich-content-common';
 import { isEqual } from 'lodash';
-// import schema from '../statics/data-schema.json';
 import styles from '../statics/styles/giphy-viewer.scss';
 import { GIPHY_TYPE, DEFAULT_RESOLUTION } from './constants';
 

@@ -8,7 +8,6 @@ import {
   pluginLinkSchema,
 } from 'wix-rich-content-common';
 import { invoke, isEqual } from 'lodash';
-// import schema from '../statics/data-schema.json';
 import styles from '../statics/link-viewer.scss';
 
 class LinkViewer extends Component {

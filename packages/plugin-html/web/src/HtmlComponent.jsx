@@ -17,7 +17,6 @@ import {
   INIT_HEIGHT,
   INIT_WIDTH,
 } from './constants';
-// import schema from '../statics/data-schema.json';
 import IframeHtml from './IframeHtml';
 import IframeUrl from './IframeUrl';
 import htmlComponentStyles from '../statics/styles/HtmlComponent.scss';

@@ -13,7 +13,6 @@ import {
   pluginImageSchema,
 } from 'wix-rich-content-common';
 import { getDefault, SEO_IMAGE_WIDTH } from './consts';
-// import schema from '../statics/data-schema.json';
 import styles from '../statics/styles/image-viewer.scss';
 import ExpandIcon from './icons/expand.svg';
 

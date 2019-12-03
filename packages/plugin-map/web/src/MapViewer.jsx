@@ -4,7 +4,6 @@ import { withGoogleMap, GoogleMap, Marker, InfoWindow } from 'react-google-maps'
 import ReactGoogleMapLoader from 'react-google-maps-loader';
 import { isEqual } from 'lodash';
 import { validate, Context, ViewportRenderer, pluginMapSchema } from 'wix-rich-content-common';
-// import schema from '../statics/data-schema.json';
 
 const GoogleMapWrapper = withGoogleMap(props => (
   <GoogleMap

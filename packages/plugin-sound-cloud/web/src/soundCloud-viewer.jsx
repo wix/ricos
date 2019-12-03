@@ -11,7 +11,6 @@ import {
   pluginSoundCloudSchema,
 } from 'wix-rich-content-common';
 import { isEqual } from 'lodash';
-// import schema from '../statics/data-schema.json';
 import styles from '../statics/styles/sound-cloud-viewer.scss';
 
 class SoundCloudViewer extends Component {
