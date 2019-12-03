@@ -84,13 +84,7 @@ function addEntity(editorState, targetSelection, entityData) {
 }
 
 export const hasLinksInBlock = (block, contentState) => {
-  try {
-    if (block.findEntityRanges) {
-      return !!getLinkRangesInBlock(block, contentState).length;
-    }
-  } catch (e) {
-    return false;
-  }
+  return !!getLinkRangesInBlock(block, contentState).length;
 };
 
 export const hasLinksInSelection = editorState => {
