@@ -213,9 +213,6 @@ Cypress.Commands.add('openAddPluginModal', () => {
 });
 
 Cypress.Commands.add('openImageSettings', () => {
-  cy.get(`[data-hook=${PLUGIN_COMPONENT.IMAGE}]:first`)
-    .parent()
-    .click();
   cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.SETTINGS);
   cy.get('[data-hook="imageSettings"]');
 });
