@@ -220,7 +220,7 @@ Cypress.Commands.add('openImageSettings', () => {
   cy.get(`[data-hook=${PLUGIN_COMPONENT.IMAGE}]:first`)
     .parent()
     .click();
-  cy.get(`[data-hook=${PLUGIN_TOOLBAR_BUTTONS.SETTINGS}][tabindex=0]`).click();
+  cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.SETTINGS);
   cy.get('[data-hook="imageSettings"]');
 });
 
@@ -228,7 +228,7 @@ Cypress.Commands.add('openMapSettings', () => {
   cy.get(`[data-hook=${PLUGIN_COMPONENT.MAP}]:first`)
     .parent()
     .click();
-  cy.get(`[data-hook=${PLUGIN_TOOLBAR_BUTTONS.SETTINGS}][tabindex=0]`).click();
+  cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.SETTINGS);
   cy.get('[data-hook="mapSettings"]');
 });
 
@@ -240,7 +240,13 @@ Cypress.Commands.add('openGalleryAdvancedSettings', () => {
 });
 
 Cypress.Commands.add('shrinkPlugin', () => {
-  cy.get(`button[data-hook=${PLUGIN_TOOLBAR_BUTTONS.SMALL_CENTER}][tabindex=0]`).click();
+  cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.SMALL_CENTER);
+});
+
+Cypress.Commands.add('clickToolbarButton', buttonName => {
+  cy.get(`button[data-hook=${buttonName}][tabindex=0]`).click({
+    force: true, //fixes element getting detached from dom and not clicking (maybe because of click scroll strategy)
+  });
 });
 
 Cypress.Commands.add('openGallerySettings', () => {
@@ -299,19 +305,19 @@ Cypress.Commands.add('alignImage', alignment => {
   let button;
   switch (alignment) {
     case 'left':
-      button = PLUGIN_TOOLBAR_BUTTONS.ALIGN_LEFT;
+      button = PLUGIN_TOOLBAR_BUTTONS.SMALL_LEFT;
       break;
     case 'center':
-      button = PLUGIN_TOOLBAR_BUTTONS.ALIGN_CENTER;
+      button = PLUGIN_TOOLBAR_BUTTONS.SMALL_CENTER;
       break;
     case 'right':
     default:
-      button = PLUGIN_TOOLBAR_BUTTONS.ALIGN_RIGHT;
+      button = PLUGIN_TOOLBAR_BUTTONS.SMALL_RIGHT;
   }
   cy.get('[data-hook=imageViewer]:first')
     .parent()
     .click();
-  cy.get(`[data-hook=${button}]:first`).click();
+  cy.clickToolbarButton(button);
 });
 
 Cypress.Commands.add('openPluginToolbar', plugin => {
@@ -398,7 +404,7 @@ Cypress.Commands.add('dragAndDropPlugin', (src, dest) => {
 });
 
 Cypress.Commands.add('hideTooltip', { prevSubject: 'optional' }, subject => {
-  cy.get(subject).trigger('mouseleave');
+  cy.get('.editor').trigger('mouseleave');
 });
 
 // disable screenshots in debug mode. So there is no diffrence to ci.

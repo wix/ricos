@@ -89,7 +89,7 @@ class AdvancedSettingsSection extends Component {
     const { data, store } = this.props;
     const componentData = {
       ...data,
-      styles: Object.assign({}, data.styles, setting),
+      styles: Object.assign({}, setting),
     };
     store.set('componentData', componentData);
   };

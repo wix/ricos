@@ -42,6 +42,7 @@ export const getDefault = () => ({
     galleryLayout: 2,
     gallerySizeType: 'px',
     gallerySizePx: 300,
+    numberOfImagesPerRow: 3,
     galleryMargin: 0,
     oneRow: false,
     cubeRatio: 1,
