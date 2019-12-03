@@ -219,20 +219,18 @@ describe('plugins', () => {
       cy.eyesCheckWindow(this.test.title);
     });
 
-    it('enable to add a video from URI', function() {
-      cy.openVideoUploadModal()
-        .addVideoFromURI()
-        .shrinkPlugin();
+    it.only('enable to add a video from URI', function() {
+      cy.openVideoUploadModal().addVideoFromURI();
       cy.get('[data-loaded=true]');
+      cy.shrinkPlugin();
       cy.eyesCheckWindow(this.test.title);
     });
 
     // eslint-disable-next-line mocha/no-skipped-tests
     it.skip('enable to add a custom video', function() {
-      cy.openVideoUploadModal()
-        .addCustomVideo()
-        .shrinkPlugin();
+      cy.openVideoUploadModal().addCustomVideo();
       cy.get('[data-loaded=true]');
+      cy.shrinkPlugin();
       cy.eyesCheckWindow(this.test.title);
     });
   });
@@ -252,10 +250,9 @@ describe('plugins', () => {
     });
 
     it('enable to add a soundcloud URI', function() {
-      cy.openSoundCloudModal()
-        .addSoundCloud()
-        .shrinkPlugin();
+      cy.openSoundCloudModal().addSoundCloud();
       cy.get('[data-loaded=true]');
+      cy.shrinkPlugin();
       cy.eyesCheckWindow(this.test.title);
     });
   });
