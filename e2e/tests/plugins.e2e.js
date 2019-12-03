@@ -219,7 +219,7 @@ describe('plugins', () => {
       cy.eyesCheckWindow(this.test.title);
     });
 
-    it.only('enable to add a video from URI', function() {
+    it('enable to add a video from URI', function() {
       cy.openVideoUploadModal().addVideoFromURI();
       cy.get('[data-loaded=true]');
       cy.shrinkPlugin();
