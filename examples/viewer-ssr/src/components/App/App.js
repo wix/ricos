@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import ReactModal from 'react-modal';
 import MobileDetect from 'mobile-detect';
-import { RichContentModal } from 'wix-rich-content-editor-common';
 import { mergeStyles, normalizeInitialState } from 'wix-rich-content-common';
 
 import { RichContentViewer } from 'wix-rich-content-viewer';
@@ -102,13 +100,6 @@ class App extends Component {
     this.helpers = {};
   }
 
-  closeModal = () => {
-    this.setState({
-      showModal: false,
-      modalContent: null,
-    });
-  };
-
   handleContentChange = () => {
     const value = document.getElementById('testData').value;
     this.setState({
@@ -189,14 +180,6 @@ class App extends Component {
               relValue={relValue}
               config={this.config}
             />
-            <ReactModal
-              isOpen={this.state.showModal}
-              contentLabel="External Modal Example"
-              style={this.state.modalStyles || modalStyleDefaults}
-              onRequestClose={this.closeModal}
-            >
-              {this.state.showModal && <RichContentModal {...this.state.modalProps} />}
-            </ReactModal>
           </div>
         </div>
       </div>
