@@ -24,6 +24,7 @@
 ### :house: Internal
 - `common`
   - [#493](https://github.com/wix-incubator/rich-content/pull/493) `common` package was split into `editor-common` and `common` in order to reduce `viewer` bundle size
+  - [#502](https://github.com/wix-incubator/rich-content/pull/502) removed external dependency for detecting rtl
 - `viewer examples`
   - [#493](https://github.com/wix-incubator/rich-content/pull/493) remove RichContentModal from viewer examples
 - `e2e`
@@ -31,7 +32,6 @@
 - `viewer`
   - [d58d8916](https://github.com/wix-incubator/rich-content/commit/d58d8916) remove draftjs
   - [a02b632a](https://github.com/wix-incubator/rich-content/commit/a02b632a) remove draftjs
-  
 </details>
 <hr/>
 
