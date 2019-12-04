@@ -1,22 +1,22 @@
 import { Component } from 'react';
 import { default as Context } from '../Utils/Context';
-import styles from '../../statics/styles/general.scss';
+import noOutlineStyle from '../../statics/styles/no-outline.scss';
 
 export default class AccessibilityListener extends Component {
   handleTabKeyUp = e => {
-    if (e.which === 9 && document.body.classList.contains(styles.noOutline)) {
-      document.body.classList.remove(styles.noOutline);
+    if (e.which === 9 && document.body.classList.contains(noOutlineStyle.noOutline)) {
+      document.body.classList.remove(noOutlineStyle.noOutline);
     }
   };
 
   handleClick = () => {
-    if (!document.body.classList.contains(styles.noOutline)) {
-      document.body.classList.add(styles.noOutline);
+    if (!document.body.classList.contains(noOutlineStyle.noOutline)) {
+      document.body.classList.add(noOutlineStyle.noOutline);
     }
   };
 
   componentDidMount() {
-    document.body.classList.add(styles.noOutline);
+    document.body.classList.add(noOutlineStyle.noOutline);
 
     if (!this.context.isMobile) {
       document.addEventListener('keyup', this.handleTabKeyUp);

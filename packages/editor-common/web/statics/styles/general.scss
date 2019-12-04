@@ -19,13 +19,6 @@
   outline: 1px dashed;
 }
 
-.noOutline {
-  *:focus {
-    outline: none;
-    box-shadow: none;
-  }
-}
-
 .visuallyHidden {
   width: 0.1px;
   height: 0.1px;

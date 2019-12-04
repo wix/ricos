@@ -13,7 +13,7 @@ import {
   createHocName,
   Context,
 } from 'wix-rich-content-common';
-import styles from 'wix-rich-content-common/dist/statics/styles/general.scss';
+import styles from '../../statics/styles/general.scss';
 import rtlIgnoredStyles from 'wix-rich-content-common/dist/statics/styles/general.rtlignore.scss';
 import draggableStyle from '../../statics/styles/draggable.scss';
 

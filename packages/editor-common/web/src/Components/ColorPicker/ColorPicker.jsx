@@ -94,7 +94,7 @@ class ColorPicker extends PureComponent {
           onClick={this.toggleCustomColorPicker}
         />
         <label
-          tabIndex={0}
+          tabIndex={0} // eslint-disable-line
           className={styles.colorPicker_add_color_label}
           htmlFor={`add_color_button_${this.id}`}
         >
