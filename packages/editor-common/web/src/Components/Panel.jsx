@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import Styles from 'wix-rich-content-common/dist/statics/styles/general.scss';
+import styles from '../../statics/styles/general.scss';
 
 export default class Panel extends Component {
   constructor(props) {
@@ -34,7 +34,7 @@ export default class Panel extends Component {
 
   render = () => {
     const Content = this.props.content;
-    const modalClasses = classNames(Styles.panelContainer, this.props.theme.panelContainer);
+    const modalClasses = classNames(styles.panelContainer, this.props.theme.panelContainer);
     return (
       <div className={modalClasses} style={this.state.style}>
         <Content
