@@ -6,12 +6,12 @@ import {
   AccessibilityListener,
   normalizeInitialState,
   Context,
+  getLangDir,
 } from 'wix-rich-content-common';
 import { convertToReact } from './utils/convertContentState';
 import viewerStyles from '../statics/rich-content-viewer.scss';
 import viewerAlignmentStyles from '../statics/rich-content-viewer-alignment.rtlignore.scss';
 import rtlStyle from '../statics/rich-content-viewer-rtl.rtlignore.scss';
-import { getLangDir } from 'rtl-detect';
 
 class RichContentViewer extends Component {
   constructor(props) {

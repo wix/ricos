@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import FocusManager from '../Components/FocusManager';
 import { DECORATION_MODE } from '../consts';
-import { getLangDir } from 'rtl-detect';
+import { getLangDir } from 'wix-rich-content-common';
 
 const renderWrappedModalElement = (wrapping, ModalElement, modalProps) => {
   if (wrapping.length === 0) {
