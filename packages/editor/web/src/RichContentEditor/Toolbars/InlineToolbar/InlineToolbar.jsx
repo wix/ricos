@@ -7,7 +7,7 @@ import ClickOutside from 'react-click-outside';
 import { debounce } from 'lodash';
 import { DISPLAY_MODE } from 'wix-rich-content-editor-common';
 import Styles from '../../../../statics/styles/inline-toolbar.rtlignore.scss';
-import { getLangDir } from 'rtl-detect';
+import { getLangDir } from 'wix-rich-content-common';
 
 const TOOLBAR_OFFSET = 5;
 

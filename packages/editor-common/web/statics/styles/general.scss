@@ -1,7 +1,7 @@
-@import './consts';
-@import './mixins';
-@import './palette';
-@import './fonts';
+@import '~wix-rich-content-common/dist/statics/styles/consts';
+@import "~wix-rich-content-common/dist/statics/styles/mixins";
+@import '~wix-rich-content-common/dist/statics/styles/palette';
+@import '~wix-rich-content-common/dist/statics/styles/fonts';
 
 //*** GENERIC ***//
 .flex {
