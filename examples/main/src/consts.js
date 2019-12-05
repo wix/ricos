@@ -7,4 +7,5 @@ export const STATE_KEYS_TO_STORE = [
   'isViewerShown',
   'isContentStateShown',
   'isPreviewShown',
+  'contentState',
 ];
