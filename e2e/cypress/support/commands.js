@@ -212,7 +212,8 @@ Cypress.Commands.add('openAddPluginModal', () => {
   cy.get('[aria-label="Add Plugin"]');
 });
 
-Cypress.Commands.add('openImageSettings', () => {
+Cypress.Commands.add('openImageSettings', (shouldOpenToolbar = true) => {
+  shouldOpenToolbar && cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE);
   cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.SETTINGS);
   cy.get('[data-hook="imageSettings"]');
 });

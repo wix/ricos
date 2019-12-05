@@ -45,9 +45,9 @@ describe('plugins', () => {
       cy.eyesCheckWindow(this.test.title);
       cy.addImageLink();
       cy.eyesCheckWindow(this.test.title);
-      cy.openImageSettings().addImageTitle();
+      cy.openImageSettings(false).addImageTitle();
       cy.eyesCheckWindow(this.test.title);
-      cy.openImageSettings().deleteImageTitle();
+      cy.openImageSettings(false).deleteImageTitle();
       cy.eyesCheckWindow(this.test.title);
     });
   });
