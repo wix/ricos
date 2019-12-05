@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { TextInput, CloseIcon, Button } from 'wix-rich-content-editor-common';
-import { mergeStyles, isVideoUrl } from 'wix-rich-content-common';
+import { mergeStyles } from 'wix-rich-content-common';
+import ReactPlayer from 'react-player';
 import styles from '../../statics/styles/video-selection-input-modal.scss';
 
 export default class VideoSelectionInputModal extends Component {
@@ -29,7 +30,7 @@ export default class VideoSelectionInputModal extends Component {
   onConfirm = () => {
     const { url, pathname, thumbnail, isCustomVideo } = this.state;
     const src = pathname.length ? { pathname, thumbnail } : url;
-    if (isVideoUrl(url) || isCustomVideo) {
+    if (ReactPlayer.canPlay(url) || isCustomVideo) {
       const { componentData, helpers, pubsub, onConfirm } = this.props;
       if (onConfirm) {
         onConfirm({ ...componentData, src, isCustomVideo: this.state.isCustomVideo });
@@ -131,7 +132,7 @@ export default class VideoSelectionInputModal extends Component {
           <label
             htmlFor={this.id}
             className={styles.fileInputLabel}
-            role="button"
+            role="button" // eslint-disable-line jsx-a11y/no-noninteractive-element-to-interactive-role
             data-hook="videoUploadModalCustomVideo"
             tabIndex={0}
           >
@@ -178,7 +179,9 @@ export default class VideoSelectionInputModal extends Component {
                 onChange={this.onUrlChange}
                 value={url}
                 error={
-                  !isVideoUrl(url) && submitted ? t('VideoUploadModal_Input_InvalidUrl') : null
+                  !ReactPlayer.canPlay(url) && submitted
+                    ? t('VideoUploadModal_Input_InvalidUrl')
+                    : null
                 }
                 placeholder={t('VideoUploadModal_Input_Placeholder')}
                 theme={styles}
