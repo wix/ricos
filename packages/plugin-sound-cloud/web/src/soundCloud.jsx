@@ -6,7 +6,6 @@ import { mergeStyles, Context } from 'wix-rich-content-common';
 import SoundCloudViewer from './soundCloud-viewer';
 import styles from '../statics/styles/default-sound-cloud-styles.scss';
 import { SOUND_CLOUD_TYPE } from './types';
-import draggableStyle from 'wix-rich-content-editor-common/dist/statics/styles/draggable.scss';
 
 const DEFAULTS = {
   config: {
@@ -83,11 +82,7 @@ class SoundCloud extends Component {
     const { isLoaded } = this.state;
     const overlayText = t('SoundCloudComponent_Overlay');
     return (
-      <div
-        className={classNames(styles.soundCloud_overlay, {
-          [draggableStyle.draggable]: this.context.enableDragAndDrop,
-        })}
-      >
+      <div className={classNames(styles.soundCloud_overlay)}>
         {isLoaded && <span className={styles.soundCloud_overlay_message}>{overlayText}</span>}
       </div>
     );
@@ -125,7 +120,7 @@ class SoundCloud extends Component {
         onClick={onClick}
         className={containerClassNames}
         onKeyDown={e => this.onKeyDown(e, onClick)}
-        draggable={this.context.enableDragAndDrop}
+        draggable
       >
         {!isPlayable && this.renderOverlay(this.styles, this.context.t)}
         {this.renderPlayer()}

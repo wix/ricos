@@ -6,7 +6,6 @@ import { mergeStyles, Context } from 'wix-rich-content-common';
 import VideoViewer from './video-viewer';
 import styles from '../statics/styles/default-video-styles.scss';
 import { VIDEO_TYPE_LEGACY, VIDEO_TYPE } from './types';
-import draggableStyle from 'wix-rich-content-editor-common/dist/statics/styles/draggable.scss';
 
 const DEFAULTS = {
   config: {
@@ -58,11 +57,7 @@ class VideoComponent extends React.Component {
     const { isLoaded } = this.state;
     const overlayText = t('VideoComponent_Overlay');
     return (
-      <div
-        className={classNames(styles.video_overlay, {
-          [draggableStyle.draggable]: this.context.enableDragAndDrop,
-        })}
-      >
+      <div className={classNames(styles.video_overlay)}>
         {isLoaded && <span className={styles.video_overlay_message}>{overlayText}</span>}
       </div>
     );
@@ -100,7 +95,7 @@ class VideoComponent extends React.Component {
         onClick={onClick}
         className={containerClassNames}
         onKeyDown={e => this.onKeyDown(e, onClick)}
-        draggable={this.context.enableDragAndDrop}
+        draggable
       >
         {!isPlayable && this.renderOverlay(this.styles, this.context.t)}
         {this.renderPlayer()}
