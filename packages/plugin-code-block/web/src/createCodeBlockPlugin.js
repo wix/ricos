@@ -12,7 +12,7 @@ const createUnderlyingPlugin = (/*{ theme }*/) => ({
     }
   },
 
-  handleKeyCommand: (command, editorState, { setEditorState }) => {
+  handleKeyCommand: (command, editorState, timestamp, { setEditorState }) => {
     if (CodeUtils.hasSelectionInBlock(editorState)) {
       const newState = CodeUtils.handleKeyCommand(editorState, command);
       if (newState) {
