@@ -23,6 +23,8 @@
   - [#478](https://github.com/wix-incubator/rich-content/pull/478) margin & size (alignment strategy updated)
 - `mentions`
   - [#486](https://github.com/wix-incubator/rich-content/pull/486) suggestions can be navigated using keyboard arrows
+- `code-block`
+  - [#506](https://github.com/wix-incubator/rich-content/pull/506) fixed functinality of custom key handler
 ### :house: Internal
 - `rollup`
   - [#501](https://github.com/wix-incubator/rich-content/pull/501) remove rollup-plugin-node-builtins and rollup-plugin-node-globals
