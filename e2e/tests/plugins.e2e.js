@@ -48,7 +48,7 @@ describe('plugins', () => {
       cy.openImageSettings(false).deleteImageTitle();
       cy.eyesCheckWindow(this.test.title);
       cy.openImageSettings(false).addImageLink();
-      cy.get(PLUGIN_COMPONENT.IMAGE);
+      cy.hideTooltip();
       cy.eyesCheckWindow(this.test.title);
     });
   });
