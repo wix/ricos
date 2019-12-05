@@ -159,6 +159,7 @@ describe('plugins', () => {
       cy.eyesCheckWindow(this.test.title);
     });
 
+    // TODO: remove skip once custom mock upload is stablized
     // eslint-disable-next-line mocha/no-skipped-tests
     it.skip('enable to add a custom video', function() {
       cy.openVideoUploadModal().addCustomVideo();
@@ -206,7 +207,7 @@ describe('plugins', () => {
       cy.eyesCheckWindow(this.test.title);
     });
   });
-
+  // TODO: remove skip once divider alignment bug is fixed
   // eslint-disable-next-line mocha/no-skipped-tests
   context('divider', () => {
     before(function() {
