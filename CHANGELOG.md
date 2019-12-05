@@ -16,6 +16,10 @@
 ### :rocket: New Feature
 - `file-upload`
   - [#489](https://github.com/wix-incubator/rich-content/pull/489) `config.downloadTarget` enables consumers to control in which tab files are opened
+- `video`
+  - [#507](https://github.com/wix-incubator/rich-content/pull/507) support all video platform urls supported by `react-player`
+- `soundcloud`
+  - [#507](https://github.com/wix-incubator/rich-content/pull/507) support all audio platform urls supported by `react-player`
 ### :bug: Bug Fix
 - `fullscreen`
   - [#496](https://github.com/wix-incubator/rich-content/pull/496) adds support for legacy image type
