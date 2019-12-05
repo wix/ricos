@@ -66,8 +66,9 @@ class ExampleApp extends PureComponent {
   setContentStateEditor = ref => (this.contentStateEditor = ref);
 
   onContentStateEditorChange = obj => {
+    const { editorState } = getStateFromObject(obj);
+    this.setState({ editorState });
     if (this.props.onEditorChange) {
-      const { editorState } = getStateFromObject(obj);
       this.props.onEditorChange(editorState);
     }
   };
