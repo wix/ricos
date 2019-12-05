@@ -68,12 +68,7 @@ class RichContentEditor extends Component {
       shouldRenderOptimizedImages,
       initialIntent,
       siteDomain,
-      plugins,
     } = this.props;
-
-    const enableDragAndDrop = (plugins || []).some(
-      plugin => plugin.name === 'createBlockDndPlugin'
-    );
 
     this.contextualData = {
       theme,
@@ -90,7 +85,6 @@ class RichContentEditor extends Component {
       shouldRenderOptimizedImages,
       initialIntent,
       siteDomain,
-      enableDragAndDrop,
     };
   };
 

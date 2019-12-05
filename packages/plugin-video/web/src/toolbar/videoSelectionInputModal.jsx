@@ -131,7 +131,7 @@ export default class VideoSelectionInputModal extends Component {
           <label
             htmlFor={this.id}
             className={styles.fileInputLabel}
-            role="button"
+            role="button" // eslint-disable-line jsx-a11y/no-noninteractive-element-to-interactive-role
             data-hook="videoUploadModalCustomVideo"
             tabIndex={0}
           >
