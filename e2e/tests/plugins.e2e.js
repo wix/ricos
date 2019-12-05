@@ -43,11 +43,11 @@ describe('plugins', () => {
       cy.openImageSettings();
       cy.get(`[data-hook=${IMAGE_SETTINGS.PREVIEW}]:first`);
       cy.eyesCheckWindow(this.test.title);
-      cy.addImageLink();
-      cy.eyesCheckWindow(this.test.title);
-      cy.openImageSettings(false).addImageTitle();
+      cy.addImageTitle();
       cy.eyesCheckWindow(this.test.title);
       cy.openImageSettings(false).deleteImageTitle();
+      cy.eyesCheckWindow(this.test.title);
+      cy.openImageSettings(false).addImageLink();
       cy.eyesCheckWindow(this.test.title);
     });
   });
