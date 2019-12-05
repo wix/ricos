@@ -205,6 +205,7 @@ describe('plugins', () => {
       cy.get(`[data-hook*=${PLUGIN_TOOLBAR_BUTTONS.EDIT}]`)
         .click({ multiple: true })
         .click();
+      cy.hideTooltip();
       cy.eyesCheckWindow(this.test.title);
     });
   });
