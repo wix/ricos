@@ -138,7 +138,7 @@ describe('plugins', () => {
     });
   });
 
-  context.only('video', () => {
+  context('video', () => {
     before(function() {
       eyesOpen(this);
     });
