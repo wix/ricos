@@ -501,7 +501,7 @@ exports[`plugins > video > enable to add a video from URI #0`] =
       "data": {
         "config": {
           "alignment": "center",
-          "size": "small"
+          "size": "content"
         },
         "isCustomVideo": false,
         "metadata": {
