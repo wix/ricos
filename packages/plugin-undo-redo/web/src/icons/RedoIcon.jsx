@@ -18,7 +18,7 @@ const redoIcon = props => (
               <use href="#Redopath-1" />
             </mask>
             <polygon
-              fill="#000000"
+              fill="currentColor"
               mask="url(#Redomask-2)"
               points="-5.14583333 17.5919563 15.4375 17.5919563 15.4375 -5.20678083 -5.14583333 -5.20678083"
             />

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { EditorState } from 'draft-js';
-import clsx from 'clsx';
+import classNames from 'classnames';
 import { get } from 'lodash';
 import undoIcon from './icons/UndoIcon';
 
@@ -41,13 +41,12 @@ class UndoButton extends Component {
   render() {
     const { editorState } = this.state;
     const { isMobile, theme = {}, children, className, config } = this.props;
-    const combinedClassName = clsx(theme.undo, className);
+    const combinedClassName = classNames(theme.undo, className);
     const icon = get(config, 'toolbar.icons.Undo', undoIcon());
 
     return (
       <button
-        disabled={editorState?.getUndoStack().isEmpty()}
-        type="button"
+        disabled={editorState ? editorState.getUndoStack().isEmpty() : true}
         onClick={this.onClick}
         className={combinedClassName}
       >
