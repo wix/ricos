@@ -2,7 +2,6 @@
 import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
 import classNames from 'classnames';
-import { get } from 'lodash';
 import Measure from 'react-measure';
 import { TOOLBARS, TOOLBAR_OFFSETS, DISPLAY_MODE } from '../consts';
 import { getConfigByFormFactor } from '../Utils/getConfigByFormFactor';
@@ -239,7 +238,7 @@ export default function createToolbar({
     /*eslint-disable complexity*/
     renderButton = (button, key, themedStyle, separatorClassNames, tabIndex) => {
       const { alignment, size } = this.state.componentData.config || {};
-      const icons = get(settings, 'toolbar.icons', {});
+      const icons = settings?.toolbar?.icons || {};
       const buttonByKey = BUTTONS_BY_KEY[button.type];
       const Button = (buttonByKey && buttonByKey(icons[button.keyName])) || BaseToolbarButton;
       const buttonProps = {

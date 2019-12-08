@@ -296,7 +296,13 @@ export const config = {
     onClick: (event, url) => console.log('link clicked!', url),
   },
   [SOUND_CLOUD_TYPE]: {},
-  [CODE_BLOCK_TYPE]: {},
+  [CODE_BLOCK_TYPE]: {
+    // toolbar: {
+    //   icons: {
+    //     codeBlock: MyCustomIcon, // insert plugin icon
+    //   },
+    // },
+  },
   [DIVIDER_TYPE]: {},
   // [EXTERNAL_EMOJI_TYPE]: {},
   [VIDEO_TYPE]: {

@@ -1,4 +1,3 @@
-import { get } from 'lodash';
 import { DEFAULTS, MobileFullScreenCustomStyle, DesktopFlyOutModalStyles } from '../constants';
 import {
   getModalStyles,
@@ -11,11 +10,8 @@ import { InsertPluginIcon, InsertPluginMobileIcon } from '../icons';
 import Arrow from './arrow';
 
 export default ({ helpers, t, settings, isMobile }) => {
-  const Icon = get(
-    settings,
-    'toolbar.icons.GIF',
-    isMobile ? InsertPluginMobileIcon : InsertPluginIcon
-  );
+  const Icon =
+    settings?.toolbar?.icons?.GIF || isMobile ? InsertPluginMobileIcon : InsertPluginIcon;
   const modalStyles = isMobile
     ? getModalStyles({ customStyles: MobileFullScreenCustomStyle, fullScreen: true, isMobile })
     : null;

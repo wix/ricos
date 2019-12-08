@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { get } from 'lodash';
 import {
   hasLinksInSelection,
   getModalStyles,
@@ -79,7 +78,7 @@ export default class TextLinkButton extends Component {
       icon: theme.inlineToolbarButton_icon,
       active: theme.inlineToolbarButton_active,
     };
-    const icon = get(config, 'LINK.toolbar.icons.link');
+    const icon = config?.LINK?.toolbar?.icons?.link;
     return (
       <LinkButton
         onClick={this.showLinkPanel}
