@@ -231,7 +231,13 @@ class RichContentEditor extends Component {
     return element && element.querySelector('*[tabindex="0"]');
   }
 
+  // calculateDiff = (prevState, newState) => {
+  //   console.log(JSON.stringify(prevState));
+  //   console.log(JSON.stringify(newState));
+  // };
+
   updateEditorState = editorState => {
+    //this.calculateDiff(this.state.editorState, editorState);
     this.setEditorState(editorState);
     this.props.onChange && this.props.onChange(editorState);
   };
