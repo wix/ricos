@@ -31,7 +31,7 @@ describe('plugins', () => {
       eyesOpen(this);
     });
 
-    beforeEach('load editor', () => cy.loadEditor('images'));
+    beforeEach('load editor', () => cy.loadEditorAndViewer('images'));
 
     after(() => cy.eyesClose());
 
@@ -210,7 +210,7 @@ describe('plugins', () => {
       eyesOpen(this);
     });
 
-    beforeEach('load editor', () => cy.loadEditor('empty'));
+    beforeEach('load editor', () => cy.loadEditorAndViewer('empty'));
 
     after(() => cy.eyesClose());
 
@@ -240,7 +240,7 @@ describe('plugins', () => {
       eyesOpen(this);
     });
 
-    beforeEach('load editor', () => cy.loadEditor('empty'));
+    beforeEach('load editor', () => cy.loadEditorAndViewer('empty'));
 
     after(() => cy.eyesClose());
 
@@ -265,7 +265,7 @@ describe('plugins', () => {
     after(() => cy.eyesClose());
 
     it('render html plugin toolbar', function() {
-      cy.loadEditor('empty').addHtml();
+      cy.loadEditorAndViewer('empty').addHtml();
       cy.get(`[data-hook*=${PLUGIN_TOOLBAR_BUTTONS.EDIT}]`)
         .click({ multiple: true })
         .click();
@@ -282,7 +282,7 @@ describe('plugins', () => {
     after(() => cy.eyesClose());
 
     it('render plugin toolbar and change styling', function() {
-      cy.loadEditor('divider')
+      cy.loadEditorAndViewer('divider')
         .openPluginToolbar(PLUGIN_COMPONENT.DIVIDER)
         .openDropdownMenu();
       cy.eyesCheckWindow('render divider plugin toolbar');
@@ -311,7 +311,7 @@ describe('plugins', () => {
   context('gif', () => {
     before('load editor', function() {
       eyesOpen(this);
-      cy.loadEditor('gif');
+      cy.loadEditorAndViewer('gif');
     });
 
     after(() => cy.eyesClose());
@@ -329,7 +329,7 @@ describe('plugins', () => {
   context('map', () => {
     before('load editor', function() {
       eyesOpen(this);
-      cy.loadEditor('map');
+      cy.loadEditorAndViewer('map');
     });
 
     after(() => cy.eyesClose());
@@ -347,7 +347,7 @@ describe('plugins', () => {
   context('file-upload', () => {
     before('load editor', function() {
       eyesOpen(this);
-      cy.loadEditor('file-upload');
+      cy.loadEditorAndViewer('file-upload');
     });
 
     after(() => cy.eyesClose());
@@ -361,7 +361,7 @@ describe('plugins', () => {
   context('drag and drop', () => {
     before('load editor', function() {
       eyesOpen(this);
-      cy.loadEditor('dragAndDrop');
+      cy.loadEditorAndViewer('dragAndDrop');
     });
 
     after(() => cy.eyesClose());
@@ -385,7 +385,7 @@ describe('plugins', () => {
 
     function testAtomicBlockAlignment(align) {
       it('align atomic block ' + align, function() {
-        cy.loadEditor('images')
+        cy.loadEditorAndViewer('images')
           .alignImage(align)
           .hideTooltip();
         cy.eyesCheckWindow(this.test.title);

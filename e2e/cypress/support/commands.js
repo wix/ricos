@@ -59,10 +59,6 @@ Cypress.Commands.add('loadEditorAndViewer', fixtureName => {
   run('rce', fixtureName);
 });
 
-Cypress.Commands.add('loadEditor', fixtureName => {
-  run('rce', fixtureName);
-});
-
 Cypress.Commands.add('matchContentSnapshot', () => {
   cy.window()
     .its('__CONTENT_SNAPSHOT__')
