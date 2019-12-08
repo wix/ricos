@@ -19,18 +19,11 @@ export default ({ blockType, button, helpers, pubsub, settings, t, isMobile }) =
       const { buttonStyles } = props.theme || {};
       this.styles = mergeStyles({ styles, theme: buttonStyles });
       this.buttonRef = React.createRef();
-      this.biCallbacks = this.setBiCallbacks(helpers);
+      this.onPluginAdd = this.getOnPluginAdd(helpers);
     }
 
-    setBiCallbacks = ({
-      biCallbacks: {
-        onPluginAdd = () => false,
-        onPluginDelete = () => false,
-        onPluginChange = () => false,
-        onPublish = () => false,
-      },
-    }) => {
-      return { onPluginAdd, onPluginDelete, onPluginChange, onPublish };
+    getOnPluginAdd = ({ biCallbacks: { onPluginAdd = () => false } }) => {
+      return onPluginAdd;
     };
 
     componentDidMount() {
@@ -46,7 +39,7 @@ export default ({ blockType, button, helpers, pubsub, settings, t, isMobile }) =
     };
 
     addBlock = (data, name) => {
-      this.biCallbacks.onPluginAdd(name);
+      this.onPluginAdd(name);
       this.createBlock(data, true);
     };
 
@@ -92,17 +85,16 @@ export default ({ blockType, button, helpers, pubsub, settings, t, isMobile }) =
 
     onClick = event => {
       event.preventDefault();
-      const { onPluginAdd } = this.biCallbacks;
       switch (button.type) {
         case 'file':
-          onPluginAdd(button.name);
+          this.onPluginAdd(button.name);
           this.toggleFileSelection();
           break;
         case 'modal':
           this.toggleButtonModal(event);
           break;
         case 'custom-block':
-          onPluginAdd(button.name);
+          this.onPluginAdd(button.name);
           this.addCustomBlock(button);
           break;
         default:
@@ -113,7 +105,7 @@ export default ({ blockType, button, helpers, pubsub, settings, t, isMobile }) =
 
     handleFileChange = files => {
       if (files.length > 0) {
-        this.biCallbacks.onPluginAdd(button.name);
+        this.onPluginAdd(button.name);
         const { newBlock, newSelection, newEditorState } = this.createBlock(button.componentData);
         const state = { userSelectedFiles: { files } };
         pubsub.set('initialState_' + newBlock.getKey(), state);
