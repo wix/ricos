@@ -9,9 +9,6 @@ export { default as createHocName } from './Utils/createHocName';
 export { sizeClassName, alignmentClassName, textWrapClassName } from './Utils/classNameStrategies';
 export {
   isValidUrl,
-  isSoundCloudUrl,
-  matchSoundCloudUrl,
-  isVideoUrl,
   normalizeUrl,
   getUrlMatches,
   startsWithHttps,

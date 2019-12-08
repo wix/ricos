@@ -3,7 +3,8 @@ import React, { Component } from 'react';
 import { SoundCloudIcon } from '../icons';
 import classNames from 'classnames';
 import { SettingsPanelFooter, TextInput, CloseIcon } from 'wix-rich-content-editor-common';
-import { isSoundCloudUrl, mergeStyles } from 'wix-rich-content-common';
+import { mergeStyles } from 'wix-rich-content-common';
+import ReactPlayer from 'react-player';
 import styles from '../../statics/styles/sound-cloud-url-input-modal.scss';
 
 export default class SoundCloudURLInputModal extends Component {
@@ -25,7 +26,7 @@ export default class SoundCloudURLInputModal extends Component {
 
   onConfirm = () => {
     const { url } = this.state;
-    if (url && isSoundCloudUrl(url)) {
+    if (url && ReactPlayer.canPlay(url)) {
       const { componentData, helpers, pubsub, onConfirm } = this.props;
       if (onConfirm) {
         onConfirm({ ...componentData, src: url });
@@ -100,7 +101,7 @@ export default class SoundCloudURLInputModal extends Component {
             onChange={this.onUrlChange}
             value={url}
             error={
-              !isSoundCloudUrl(url) && submitted
+              !ReactPlayer.canPlay(url) && submitted
                 ? t('SoundCloudUploadModal_Input_InvalidUrl')
                 : null
             }

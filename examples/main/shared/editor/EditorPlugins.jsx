@@ -25,7 +25,6 @@ import { createFileUploadPlugin, FILE_UPLOAD_TYPE } from 'wix-rich-content-plugi
 import { createTextColorPlugin, TEXT_COLOR_TYPE } from 'wix-rich-content-plugin-text-color';
 import { createButtonPlugin, BUTTON_TYPE } from 'wix-rich-content-plugin-button';
 import { createTextHighlightPlugin, TEXT_HIGHLIGHT_TYPE } from 'wix-rich-content-plugin-text-color';
-import createBlockDndPlugin from 'draft-js-drag-n-drop-plugin';
 import Highlighter from 'react-highlight-words';
 import casual from 'casual-browserify';
 
