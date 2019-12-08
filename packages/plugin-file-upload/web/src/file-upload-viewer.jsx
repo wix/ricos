@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { isEqual } from 'lodash';
-import { mergeStyles, validate, Context } from 'wix-rich-content-common';
+import { mergeStyles, Context, validate } from 'wix-rich-content-common';
 import { DocumentIcon, LoaderIcon } from './icons';
 import schema from '../statics/data-schema.json';
 import styles from '../statics/styles/file-upload-viewer.scss';
@@ -69,13 +69,14 @@ class FileUploadViewer extends PureComponent {
       error,
       componentData: { name, type },
     } = this.props;
+    const { downloadTarget } = this.props.settings;
 
     if (error) {
       return null;
     }
 
     return (
-      <a href={fileUrl} className={this.styles.file_upload_link}>
+      <a href={fileUrl} target={downloadTarget} className={this.styles.file_upload_link}>
         {this.renderViewerBody({ name, type })}
       </a>
     );

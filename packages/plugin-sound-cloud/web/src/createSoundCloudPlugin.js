@@ -1,7 +1,7 @@
 import createToolbar from './toolbar';
 import { Component } from './soundCloud';
 import { SOUND_CLOUD_TYPE } from './types';
-import { createBasePlugin } from 'wix-rich-content-common';
+import { createBasePlugin } from 'wix-rich-content-editor-common';
 
 const createSoundCloudPlugin = (config = {}) => {
   const type = SOUND_CLOUD_TYPE;

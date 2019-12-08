@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { setTextAlignment } from 'wix-rich-content-common';
+import { setTextAlignment } from 'wix-rich-content-editor-common';
 
 import TextButton from '../TextButton';
 

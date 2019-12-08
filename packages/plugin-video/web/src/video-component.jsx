@@ -6,7 +6,7 @@ import { mergeStyles, Context } from 'wix-rich-content-common';
 import VideoViewer from './video-viewer';
 import styles from '../statics/styles/default-video-styles.scss';
 import { VIDEO_TYPE_LEGACY, VIDEO_TYPE } from './types';
-import draggableStyle from 'wix-rich-content-common/dist/statics/styles/draggable.scss';
+import draggableStyle from 'wix-rich-content-editor-common/dist/statics/styles/draggable.scss';
 
 const DEFAULTS = {
   config: {

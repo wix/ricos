@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { debounce } from 'lodash';
-import { DISPLAY_MODE } from 'wix-rich-content-common';
+import { DISPLAY_MODE } from 'wix-rich-content-editor-common';
 import DraftOffsetKey from 'draft-js/lib/DraftOffsetKey';
 import Styles from '../../../../statics/styles/side-toolbar-wrapper.scss';
 

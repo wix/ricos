@@ -1,5 +1,5 @@
 import { get } from 'lodash';
-import { BUTTONS, PluginSettingsIcon, getModalStyles } from 'wix-rich-content-common';
+import { BUTTONS, PluginSettingsIcon, getModalStyles } from 'wix-rich-content-editor-common';
 import { Modals } from '../modals';
 import { ManageMediaIcon, UploadIcon } from '../icons';
 import { galleryLayoutsDropdown, switchLayout, getCurrentLayout } from '../helpers';

@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { isEmpty } from 'lodash';
 
-import { mergeStyles, ToolbarButton } from 'wix-rich-content-common';
-import styles from 'wix-rich-content-common/dist/statics/styles/inline-toolbar-button.scss';
+import { mergeStyles } from 'wix-rich-content-common';
+import { ToolbarButton } from 'wix-rich-content-editor-common';
+import styles from 'wix-rich-content-editor-common/dist/statics/styles/inline-toolbar-button.scss';
 
 export default class TextButton extends Component {
   constructor(props) {

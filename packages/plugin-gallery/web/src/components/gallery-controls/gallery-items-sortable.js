@@ -11,7 +11,8 @@ import imageClientAPI from 'image-client-api';
 
 import Styles from '../../../statics/styles/gallery-items-sortable.scss';
 import ImageSettings from './gallery-image-settings';
-import { mergeStyles, FileInput, Loader } from 'wix-rich-content-common';
+import { mergeStyles, Loader } from 'wix-rich-content-common';
+import { FileInput } from 'wix-rich-content-editor-common';
 
 import { FabIcon, UploadIcon, SelectedIcon, NotSelectedIcon } from '../../icons';
 

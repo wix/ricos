@@ -1,5 +1,5 @@
 import LineSpacingButton from './LineSpacingButton';
-import { decorateComponentWithProps } from 'wix-rich-content-common';
+import { decorateComponentWithProps } from 'wix-rich-content-editor-common';
 
 export default settings => ({
   TextButtonMapper: () => ({

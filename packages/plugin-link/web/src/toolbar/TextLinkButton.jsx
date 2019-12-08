@@ -7,7 +7,7 @@ import {
   LinkButton,
   EditorModals,
   decorateComponentWithProps,
-} from 'wix-rich-content-common';
+} from 'wix-rich-content-editor-common';
 import TextLinkPanel from './TextLinkPanel';
 
 export default class TextLinkButton extends Component {

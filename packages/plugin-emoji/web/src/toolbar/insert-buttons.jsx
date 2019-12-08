@@ -4,7 +4,7 @@ import {
   decorateComponentWithProps,
   getModalStyles,
   DECORATION_MODE,
-} from 'wix-rich-content-common';
+} from 'wix-rich-content-editor-common';
 import EmojiPreviewModal from './emojiPreviewModal';
 import Arrow from './arrow';
 import { EmojiPluginIcon } from '../icons';

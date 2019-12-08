@@ -1,5 +1,5 @@
 import { get } from 'lodash';
-import { BUTTONS } from 'wix-rich-content-common';
+import { BUTTONS } from 'wix-rich-content-editor-common';
 import { MediaReplaceIcon } from '../icons';
 
 export default ({ settings, t }) => {

@@ -11,11 +11,6 @@ const resolve = () => {
   });
 };
 
-const builtins = () => {
-  const builtins = require('rollup-plugin-node-builtins');
-  return builtins();
-};
-
 const copy = () => {
   const copy = require('rollup-plugin-copy');
   const targets = [{ src: 'statics', dest: 'dist' }];
@@ -95,11 +90,6 @@ const postcss = () => {
   });
 };
 
-const nodeGlobalsPolyfill = () => {
-  const nodeGlobalsPolyfill = require('rollup-plugin-node-globals');
-  return nodeGlobalsPolyfill();
-};
-
 const replace = () => {
   const replacePlugin = require('rollup-plugin-replace');
   return replacePlugin({
@@ -125,17 +115,7 @@ const visualizer = () => {
   });
 };
 
-let plugins = [
-  svgr(),
-  resolve(),
-  builtins(),
-  copy(),
-  babel(),
-  commonjs(),
-  json(),
-  postcss(),
-  nodeGlobalsPolyfill(),
-];
+let plugins = [svgr(), resolve(), copy(), babel(), commonjs(), json(), postcss()];
 
 if (!IS_DEV_ENV) {
   plugins = [...plugins, replace(), uglify()];

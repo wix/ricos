@@ -1,11 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import {
-  ColorPicker,
-  SliderWithInput,
-  SettingsSection,
-  mergeStyles,
-} from 'wix-rich-content-common';
+import { ColorPicker, SliderWithInput, SettingsSection } from 'wix-rich-content-editor-common';
+import { mergeStyles } from 'wix-rich-content-common';
 import classNames from 'classnames';
 import ButtonSample from '../components/button-sample';
 import ColorToggleComponent from './color-toggle-component';

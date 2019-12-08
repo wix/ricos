@@ -32,7 +32,7 @@
   "peerDependencies": {
     "@babel/runtime": "7.2.0",
     "classnames": "^2.0.0",
-    "draft-js": "0.11.0",
+    "draft-js": "0.11.2",
     "lodash": "^4.0.0",
     "prop-types": "^15.0.0",
     "react": "^16.6.3",
@@ -42,7 +42,7 @@
     "@babel/runtime": "7.2.0",
     "classnames": "^2.2.6",
     "cross-env": "^5.2.0",
-    "draft-js": "0.11.0",
+    "draft-js": "0.11.2",
     "eslint": "^6.1.0",
     "lodash": "^4.17.10",
     "prop-types": "^15.6.2",
@@ -51,6 +51,7 @@
     "rollup": "1.20.3"
   },
   "dependencies": {
+    "wix-rich-content-editor-common": "6.4.0",
     "wix-rich-content-common": "6.4.0"
   },
   "unpkg": true,

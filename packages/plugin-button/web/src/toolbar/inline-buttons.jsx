@@ -4,7 +4,7 @@ import {
   getModalStyles,
   PluginSettingsIcon,
   decorateComponentWithProps,
-} from 'wix-rich-content-common';
+} from 'wix-rich-content-editor-common';
 import { Modals } from '../modals';
 import ButtonInputModal from './buttonInputModal';
 

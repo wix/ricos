@@ -1,6 +1,5 @@
 import React from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
-import { convertFromRaw } from 'draft-js';
 import { BLOCK_TYPES } from 'wix-rich-content-common';
 import redraft from 'redraft';
 import classNames from 'classnames';
@@ -125,7 +124,6 @@ const normalizeContentState = contentState => ({
 });
 
 const redraftOptions = {
-  convertFromRaw,
   cleanup: {
     after: BLOCK_TYPES.filter(t => t.indexOf('header') === -1),
     split: true,
@@ -138,6 +136,7 @@ const redraftOptions = {
       'header-three',
     ],
   },
+  convertFromRaw: contentState => contentState,
 };
 
 const convertToReact = (

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { RadioGroupHorizontal } from 'wix-rich-content-common';
+import { RadioGroupHorizontal } from 'wix-rich-content-editor-common';
 
 const propTypes = {
   onChange: PropTypes.func.isRequired,

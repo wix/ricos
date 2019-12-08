@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { mergeStyles, TextInput, Checkbox, isValidUrl } from 'wix-rich-content-common';
+import { TextInput, Checkbox } from 'wix-rich-content-editor-common';
+import { isValidUrl, mergeStyles } from 'wix-rich-content-common';
 import styles from '../../statics/styles/settings-component-styles.scss';
 
 class SettingsComponent extends PureComponent {

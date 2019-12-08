@@ -2,13 +2,8 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { SoundCloudIcon } from '../icons';
 import classNames from 'classnames';
-import {
-  mergeStyles,
-  isSoundCloudUrl,
-  SettingsPanelFooter,
-  TextInput,
-  CloseIcon,
-} from 'wix-rich-content-common';
+import { SettingsPanelFooter, TextInput, CloseIcon } from 'wix-rich-content-editor-common';
+import { isSoundCloudUrl, mergeStyles } from 'wix-rich-content-common';
 import styles from '../../statics/styles/sound-cloud-url-input-modal.scss';
 
 export default class SoundCloudURLInputModal extends Component {

@@ -102,7 +102,7 @@ The following toolbar types are available:
   - Footer toolbar
 - Plugin functionality toolbars
 
-All the toolbar types are exposed by the `TOOLBARS` const found in [consts.js](https://github.com/wix-incubator/rich-content/blob/master/packages/common/web/src/consts.js).
+All the toolbar types are exposed by the `TOOLBARS` const found in [consts.js](https://github.com/wix-incubator/rich-content/blob/master/packages/editor-common/web/src/consts.js).
 
 ### Customizing Text Toolbar Button Icons
 
@@ -137,7 +137,7 @@ All available button names are listed in the [EditorPlugins](https://github.com/
 
 #### Display Options
 
-At the moment, the `getDisplayOptions` API consists of a single property `displayMode`. This property accepts two values (defined in [consts.js](https://github.com/wix-incubator/rich-content/blob/master/packages/common/web/src/consts.js)):
+At the moment, the `getDisplayOptions` API consists of a single property `displayMode`. This property accepts two values (defined in [consts.js](https://github.com/wix-incubator/rich-content/blob/master/packages/editor-common/web/src/consts.js)):
 
 - `DISPLAY_MODE.NORMAL` is the default; the toolbars are normally-positioned
 - `DISPLAY_MODE.FLOATING` the toolbars are in fixed position. This, combined with `getVisibilityFn` and `getPositionOffset` properties, causes toolbars to "float".

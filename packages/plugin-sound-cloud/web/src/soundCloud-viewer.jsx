@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import {
   mergeStyles,
-  validate,
-  matchSoundCloudUrl,
   Context,
+  matchSoundCloudUrl,
+  validate,
   ViewportRenderer,
 } from 'wix-rich-content-common';
 import { isEqual } from 'lodash';

@@ -29,6 +29,7 @@ import createBlockDndPlugin from 'draft-js-drag-n-drop-plugin';
 import Highlighter from 'react-highlight-words';
 import casual from 'casual-browserify';
 
+import 'wix-rich-content-editor-common/dist/styles.min.css';
 import 'wix-rich-content-common/dist/styles.min.css';
 import 'wix-rich-content-editor/dist/styles.min.css';
 import 'wix-rich-content-plugin-button/dist/styles.min.css';
@@ -55,8 +56,8 @@ import {
   customBackgroundStyleFn,
 } from '../../src/text-color-style-fn';
 import { getBaseUrl } from '../../src/utils';
-// import { MyCustomIcon, SizeSmallRightIcon, TOOLBARS } from 'wix-rich-content-common';
-// import { TOOLBARS, BUTTONS, DISPLAY_MODE } from 'wix-rich-content-common';
+// import { MyCustomIcon, SizeSmallRightIcon, TOOLBARS } from 'wix-rich-content-editor-common';
+// import { TOOLBARS, BUTTONS, DISPLAY_MODE } from 'wix-rich-content-editor-common';
 // import InlineToolbarDecoration from './Components/InlineToolbarDecoration';
 // import StaticToolbarDecoration from './Components/StaticToolbarDecoration';
 // import SideToolbarDecoration from './Components/SideToolbarDecoration';

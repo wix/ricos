@@ -1,4 +1,4 @@
-import { decorateComponentWithProps } from 'wix-rich-content-common';
+import { decorateComponentWithProps, TOOLBARS } from 'wix-rich-content-editor-common';
 import {
   boldButton,
   italicButton,
@@ -15,7 +15,6 @@ import {
   textAlignmentButton,
 } from '../index';
 import createThemedSeparator from './createThemedSeparator';
-import { TOOLBARS } from 'wix-rich-content-common/src/consts';
 
 export default ({ buttons, theme, t, isMobile, textPluginButtons, uiSettings, config }) => {
   const themedSeparator = horizontal => createThemedSeparator({ theme, horizontal });
