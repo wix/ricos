@@ -23,6 +23,8 @@
 - `soundcloud`
   - [#507](https://github.com/wix-incubator/rich-content/pull/507) support all audio platform urls supported by `react-player`
 ### :bug: Bug Fix
+- `examples/viewer-ssr`
+  - [#499](https://github.com/wix-incubator/rich-content/pull/499) highlight plugin configuration fixed
 - `fullscreen`
   - [#496](https://github.com/wix-incubator/rich-content/pull/496) adds support for legacy image type
 - `image`
@@ -31,6 +33,8 @@
   - [#486](https://github.com/wix-incubator/rich-content/pull/486) suggestions can be navigated using keyboard arrows
 - `giphy|emoji`
   - [#512](https://github.com/wix-incubator/rich-content/pull/512) correct popup positions of emojy & giphy
+- `code-block`
+  - [#506](https://github.com/wix-incubator/rich-content/pull/506) fixed functinality of custom key handler
 ### :house: Internal
 - `rollup`
   - [#501](https://github.com/wix-incubator/rich-content/pull/501) remove rollup-plugin-node-builtins and rollup-plugin-node-globals
@@ -45,6 +49,7 @@
 - `viewer`
   - [d58d8916](https://github.com/wix-incubator/rich-content/commit/d58d8916) remove draftjs
   - [a02b632a](https://github.com/wix-incubator/rich-content/commit/a02b632a) remove draftjs
+  - [#513](https://github.com/wix-incubator/rich-content/pull/513) removed `Immutable.js` dependency from `viewer`
 </details>
 <hr/>
 
