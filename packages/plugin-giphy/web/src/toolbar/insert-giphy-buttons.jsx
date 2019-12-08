@@ -43,7 +43,8 @@ export default ({ helpers, t, settings, isMobile }) => {
         } else {
           modalLeft = left - 15;
         }
-        const modalTop = top - 365;
+        const isAboveButton = top - 365 > 0;
+        const modalTop = isAboveButton ? top - 365 : top + 30;
         return {
           ...modalStyles,
           content: {
