@@ -47,7 +47,7 @@
     "react-json-editor-ajrm": "^2.5.3",
     "react-modal": "^3.5.1",
     "regenerator-runtime": "^0.11.0",
-    "serialize-javascript": "~1.4.0",
+    "serialize-javascript": "~2.1.1",
     "wix-axios-config": "latest",
     "wix-bootstrap-ng": "latest",
     "wix-express-csrf": "latest",
