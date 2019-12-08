@@ -41,6 +41,8 @@
 - `viewer`
   - [d58d8916](https://github.com/wix-incubator/rich-content/commit/d58d8916) remove draftjs
   - [a02b632a](https://github.com/wix-incubator/rich-content/commit/a02b632a) remove draftjs
+- `editor`
+  - [#510](https://github.com/wix-incubator/rich-content/pull/510) custom icons code refactoring
 </details>
 <hr/>
 
