@@ -2,13 +2,7 @@ import React, { Component } from 'react';
 import ReactPlayer from 'react-player';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import {
-  mergeStyles,
-  Context,
-  matchSoundCloudUrl,
-  validate,
-  ViewportRenderer,
-} from 'wix-rich-content-common';
+import { mergeStyles, Context, validate, ViewportRenderer } from 'wix-rich-content-common';
 import { isEqual } from 'lodash';
 import schema from '../statics/data-schema.json';
 import styles from '../statics/styles/sound-cloud-viewer.scss';
@@ -36,12 +30,11 @@ class SoundCloudViewer extends Component {
     this.styles = mergeStyles({ styles, theme: this.context.theme });
     const { componentData, isPlayable, ...rest } = this.props;
     const { isLoaded } = this.state;
-    const url = matchSoundCloudUrl(componentData.src);
     return (
       <ViewportRenderer>
         <ReactPlayer
           className={classNames(this.styles.soundCloud_player)}
-          url={url && url[0]}
+          url={componentData.src}
           {...rest}
           playing={this.context.disabled ? false : this.state.playing}
           onPlay={() => this.setState({ playing: true })}
