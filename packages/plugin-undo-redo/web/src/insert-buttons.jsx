@@ -1,11 +1,10 @@
-import { get } from 'lodash';
-import { TOOLBARS } from 'wix-rich-content-common';
+import { TOOLBARS } from 'wix-rich-content-editor-common';
 import UndoIcon from './icons/UndoIcon';
 import RedoIcon from './icons/RedoIcon';
 
 export default ({ helpers, t, settings, UndoButton, RedoButton }) => {
-  const undoIcon = get(settings, 'toolbar.icons.Undo', UndoIcon);
-  const redoIcon = get(settings, 'toolbar.icons.Redo', RedoIcon);
+  const undoIcon = settings?.toolbar?.icons?.Undo || UndoIcon;
+  const redoIcon = settings?.toolbar?.icons?.Redo || RedoIcon;
   return [
     {
       type: 'undo-redo',

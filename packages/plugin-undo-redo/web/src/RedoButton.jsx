@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { EditorState } from 'draft-js';
 import classNames from 'classnames';
-import { get } from 'lodash';
 import redoIcon from './icons/RedoIcon';
 
 class RedoButton extends Component {
@@ -42,7 +41,7 @@ class RedoButton extends Component {
     const { editorState } = this.state;
     const { isMobile, theme = {}, children, className, config } = this.props;
     const combinedClassName = classNames(theme.redo, className);
-    const icon = get(config, 'toolbar.icons.Redo', redoIcon());
+    const icon = config?.toolbar?.icons?.Redo || redoIcon();
 
     return (
       <button
