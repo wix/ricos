@@ -7,6 +7,7 @@ import { testImages, testVideos } from './mock';
 import * as Plugins from './EditorPlugins';
 import ModalsMap from './ModalsMap';
 import theme from '../theme/theme'; // must import after custom styles
+import { debugBiLoggers } from '../../config/biService';
 
 const modalStyleDefaults = {
   content: {
@@ -49,6 +50,7 @@ export default class Editor extends PureComponent {
       }
     };
     this.helpers = {
+      biCallbacks: { ...debugBiLoggers() },
       onFilesChange: (files, updateEntity) => mockUpload(files, updateEntity),
       // handleFileSelection: (index, multiple, updateEntity, removeEntity) => {
       //   const count = multiple ? [1,2,3] : [1];
@@ -177,7 +179,7 @@ export default class Editor extends PureComponent {
           relValue={relValue}
           locale={this.props.locale}
           localeResource={this.props.localeResource}
-          // siteDomain="https://www.wix.com"
+        // siteDomain="https://www.wix.com"
         />
         <ReactModal
           isOpen={this.state.showModal}
