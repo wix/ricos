@@ -35,7 +35,7 @@ export default (hasLinksInBlock, immutableList) =>
           }
         );
       }
-      // In editor returns an Immutable.js List object
+      // In editor returns an Immutable.js List object. In the Viewer return an array.
       return immutableList ? immutableList(decorations) : decorations;
     }
 
