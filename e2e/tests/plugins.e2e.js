@@ -274,7 +274,7 @@ describe('plugins', () => {
   });
 
   // eslint-disable-next-line mocha/no-skipped-tests
-  context.skip('divider', () => {
+  context('divider', () => {
     before(function() {
       eyesOpen(this);
     });
