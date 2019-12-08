@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { isEqual } from 'lodash';
-import { mergeStyles, validate, Context } from 'wix-rich-content-common';
+import { mergeStyles, Context, validate } from 'wix-rich-content-common';
 import { DocumentIcon, LoaderIcon } from './icons';
 import schema from '../statics/data-schema.json';
 import styles from '../statics/styles/file-upload-viewer.scss';

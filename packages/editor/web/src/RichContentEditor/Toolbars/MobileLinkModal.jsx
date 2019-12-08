@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { LinkPanelContainer } from 'wix-rich-content-common';
+import { LinkPanelContainer } from 'wix-rich-content-editor-common';
 import { LinkIcon } from '../Icons';
 import styles from '../../../statics/styles/mobile-link-modal.scss';
 

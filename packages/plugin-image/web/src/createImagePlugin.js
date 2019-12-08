@@ -3,7 +3,7 @@ import {
   createBasePlugin,
   PLUGIN_DECORATION_PROPS,
   PLUGIN_DECORATIONS,
-} from 'wix-rich-content-common';
+} from 'wix-rich-content-editor-common';
 import { Component } from './image-component';
 import { IMAGE_TYPE, IMAGE_TYPE_LEGACY } from './types';
 

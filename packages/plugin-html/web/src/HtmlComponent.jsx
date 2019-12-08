@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
   mergeStyles,
-  isValidUrl,
-  normalizeUrl,
-  validate,
   Context,
+  normalizeUrl,
+  isValidUrl,
+  validate,
   ViewportRenderer,
 } from 'wix-rich-content-common';
 

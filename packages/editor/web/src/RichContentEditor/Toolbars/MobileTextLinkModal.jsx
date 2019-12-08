@@ -6,7 +6,7 @@ import {
   insertLinkAtCurrentSelection,
   getLinkDataInSelection,
   removeLinksInSelection,
-} from 'wix-rich-content-common';
+} from 'wix-rich-content-editor-common';
 import MobileLinkModal from './MobileLinkModal';
 
 export default class MobileTextLinkModal extends Component {

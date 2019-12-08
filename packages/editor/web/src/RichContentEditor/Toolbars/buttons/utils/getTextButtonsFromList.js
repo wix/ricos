@@ -1,4 +1,4 @@
-import { decorateComponentWithProps, TOOLBARS } from 'wix-rich-content-common';
+import { decorateComponentWithProps, TOOLBARS } from 'wix-rich-content-editor-common';
 import {
   boldButton,
   italicButton,

@@ -403,8 +403,12 @@ Cypress.Commands.add('dragAndDropPlugin', (src, dest) => {
     .trigger('drop', { dataTransfer });
 });
 
-Cypress.Commands.add('hideTooltip', { prevSubject: 'optional' }, subject => {
+Cypress.Commands.add('hideTooltip', { prevSubject: 'optional' }, () => {
   cy.get('.editor').trigger('mouseleave');
+});
+
+Cypress.Commands.add('waitForVideoToLoad', { prevSubject: 'optional' }, () => {
+  cy.get('[data-loaded=true]', { timeout: 15000 });
 });
 
 // disable screenshots in debug mode. So there is no diffrence to ci.

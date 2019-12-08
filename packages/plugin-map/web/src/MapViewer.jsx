@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { withGoogleMap, GoogleMap, Marker, InfoWindow } from 'react-google-maps';
 import ReactGoogleMapLoader from 'react-google-maps-loader';
 import { isEqual } from 'lodash';
-import { validate, Context, ViewportRenderer } from 'wix-rich-content-common';
+import { Context, validate, ViewportRenderer } from 'wix-rich-content-common';
 import schema from '../statics/data-schema.json';
 
 const GoogleMapWrapper = withGoogleMap(props => (

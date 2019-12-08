@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 // import { translate } from 'react-i18next';
-
-import { mergeStyles, decorateComponentWithProps, SettingsSection } from 'wix-rich-content-common';
+import { mergeStyles } from 'wix-rich-content-common';
+import { decorateComponentWithProps, SettingsSection } from 'wix-rich-content-editor-common';
 import styles from '../../statics/styles/gallery-settings-modal.scss';
 import { Spacing, ItemsPerRow, ThumbnailSize } from './gallery-controls/sliders';
 import {

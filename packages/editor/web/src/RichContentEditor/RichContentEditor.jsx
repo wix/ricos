@@ -14,16 +14,15 @@ import blockStyleFn from './blockStyleFn';
 import getBlockRenderMap from './getBlockRenderMap';
 import { combineStyleFns } from './combineStyleFns';
 import { getStaticTextToolbarId } from './Toolbars/toolbar-id';
+import { TooltipHost, TOOLBARS } from 'wix-rich-content-editor-common';
 import {
+  Context,
   AccessibilityListener,
   normalizeInitialState,
-  TooltipHost,
-  TOOLBARS,
-  Context,
+  getLangDir,
 } from 'wix-rich-content-common';
 import styles from '../../statics/styles/rich-content-editor.scss';
 import draftStyles from '../../statics/styles/draft.rtlignore.scss';
-import { getLangDir } from 'rtl-detect';
 
 class RichContentEditor extends Component {
   constructor(props) {
@@ -73,12 +72,7 @@ class RichContentEditor extends Component {
       shouldRenderOptimizedImages,
       initialIntent,
       siteDomain,
-      plugins,
     } = this.props;
-
-    const enableDragAndDrop = (plugins || []).some(
-      plugin => plugin.name === 'createBlockDndPlugin'
-    );
 
     this.contextualData = {
       theme,
@@ -95,7 +89,6 @@ class RichContentEditor extends Component {
       shouldRenderOptimizedImages,
       initialIntent,
       siteDomain,
-      enableDragAndDrop,
     };
   };
 

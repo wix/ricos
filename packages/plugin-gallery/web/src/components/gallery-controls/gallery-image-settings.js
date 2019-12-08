@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import imageClientAPI from 'image-client-api';
+import { mergeStyles } from 'wix-rich-content-common';
 import {
-  mergeStyles,
   FileInput,
   Image,
   InputWithLabel,
@@ -11,7 +11,7 @@ import {
   SettingsSection,
   SettingsPanelFooter,
   FocusManager,
-} from 'wix-rich-content-common';
+} from 'wix-rich-content-editor-common';
 import { BackIcon, DeleteIcon, ReplaceIcon, NextIcon, PreviousIcon } from '../../icons';
 import styles from '../../../statics/styles/gallery-image-settings.scss';
 import GallerySettingsMobileHeader from './gallery-settings-mobile-header';

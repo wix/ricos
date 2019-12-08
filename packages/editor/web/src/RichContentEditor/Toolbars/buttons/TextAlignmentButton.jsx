@@ -5,7 +5,7 @@ import {
   AlignTextCenterIcon,
   AlignRightIcon,
   AlignJustifyIcon,
-} from 'wix-rich-content-common';
+} from 'wix-rich-content-editor-common';
 import {
   alignTextLeftButton,
   alignTextCenterButton,

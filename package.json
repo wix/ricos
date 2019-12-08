@@ -14,7 +14,7 @@
     "build": "lerna run --stream --ignore 'wix-rich-content-@(test-env|example)' build",
     "build:dev": "lerna run --stream --ignore 'wix-rich-content-@(test-env|example)' build:dev",
     "build:core": "npm run build:dev -- --scope 'wix-rich-content-@(common|editor|viewer)'",
-    "prewatch": "lerna run build --scope wix-rich-content-common",
+    "prewatch": "lerna run build --scope wix-rich-content-*common",
     "watch": "lerna run --parallel --ignore ${LERNA_IGNORE:-'wix-rich-content-@(test-env|example)'} watch",
     "watch:core": "LERNA_IGNORE='wix-rich-content-@(plugin-*|fullscreen)' npm run watch",
     "release": "node scripts/publishPackages",
@@ -23,8 +23,8 @@
     "e2e": "start-server-and-test e2e:app http://localhost:3002 e2e:run",
     "e2e:updateSnapshots": "start-server-and-test e2e:app http://localhost:3002 e2e:run:update",
     "e2e:ci": "start-server-and-test e2e:app:run http://localhost:3002 e2e:run:ci",
-    "e2e:run": "docker run --ipc=host -it -v $PWD:/e2e -w /e2e --entrypoint=cypress --env-file ./.e2e.env.list cypress/included:3.6.0 run --config baseUrl=http://host.docker.internal:3002",
-    "e2e:run:ci": "docker run --ipc=host -i -v $PWD:/e2e -w /e2e --network='host' --env-file ./.e2e.env.list cypress/included:3.6.0 --env CYPRESS_CONFIG=ci --record false",
+    "e2e:run": "docker run --ipc=host -it -v $PWD:/e2e -w /e2e --entrypoint=cypress --env-file ./.e2e.env.list cypress/included:3.7.0 run --config baseUrl=http://host.docker.internal:3002",
+    "e2e:run:ci": "docker run --ipc=host -i -v $PWD:/e2e -w /e2e --network='host' --env-file ./.e2e.env.list cypress/included:3.7.0 --env CYPRESS_CONFIG=ci --record false",
     "e2e:run:update": "npm run e2e:run -- --env CYPRESS_CONFIG=update,updateSnapshots=true",
     "e2e:debug": "npm run e2e:app:dev & cypress open",
     "e2e:app": "cd e2e/test-env && npm run build && npm start",
@@ -87,21 +87,19 @@
     "lodash": "^4.17.10",
     "mini-css-extract-plugin": "^0.4.0",
     "node-sass": "^4.8.3",
-    "optimize-css-assets-webpack-plugin": "^4.0.2",
+    "optimize-css-assets-webpack-plugin": "^5.0.3",
     "pascal-case": "2.0.1",
     "postcss-exclude-files": "^1.0.15",
     "postcss-rtl": "^1.4.0",
     "postcss-url": "^7.3.2",
     "prompts": "^0.1.8",
-    "react-svg-loader": "^2.1.0",
+    "react-svg-loader": "^3.0.3",
     "rollup": "1.20.3",
     "rollup-plugin-analyzer": "^3.0.0",
     "rollup-plugin-babel": "^4.3.0",
     "rollup-plugin-commonjs": "^9.1.0",
     "rollup-plugin-copy": "^3.1.0",
     "rollup-plugin-json": "^3.1.0",
-    "rollup-plugin-node-builtins": "^2.1.2",
-    "rollup-plugin-node-globals": "^1.4.0",
     "rollup-plugin-node-resolve": "^4.0.0",
     "rollup-plugin-postcss": "^2.0.3",
     "rollup-plugin-replace": "^2.1.0",
@@ -125,6 +123,6 @@
     "registry": "https://registry.npmjs.org/"
   },
   "dependencies": {
-    "cypress": "^3.5.0"
+    "cypress": "3.7.0"
   }
 }

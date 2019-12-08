@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { pick, get } from 'lodash';
+import { mergeStyles } from 'wix-rich-content-common';
 import {
   getAnchorBlockData,
   InlineToolbarButton,
   mergeBlockData,
-  mergeStyles,
-} from 'wix-rich-content-common';
+} from 'wix-rich-content-editor-common';
 import { EditorState } from 'draft-js';
 
 import { LineSpacingIcon } from '../icons';
