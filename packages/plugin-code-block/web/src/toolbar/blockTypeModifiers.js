@@ -18,9 +18,8 @@ export const hasBlockType = (blockType, editorState) => {
   return blockType === currentBlockType;
 };
 
-export const toggleBlockType = (blockType, editorState) => {
+export const toggleBlockType = (blockType, editorState) =>
   RichUtils.toggleBlockType(editorState, blockType);
-};
 
 export const toggleBlockTypeAndEnsureSpaces = (blockType, editorState) => {
   if (hasBlockType(blockType, editorState)) {

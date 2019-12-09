@@ -23,7 +23,7 @@ export default ({ blockType, button, helpers, pubsub, settings, t, isMobile }) =
     }
 
     getOnPluginAdd = ({ biCallbacks: { onPluginAdd = () => false } }) => {
-      return onPluginAdd;
+      return () => onPluginAdd(blockType);
     };
 
     componentDidMount() {
@@ -38,10 +38,7 @@ export default ({ blockType, button, helpers, pubsub, settings, t, isMobile }) =
       }
     };
 
-    addBlock = (data, name) => {
-      this.onPluginAdd(name);
-      this.createBlock(data, true);
-    };
+    addBlock = data => this.createBlock(data, true);
 
     addCustomBlock = buttonData => {
       const { getEditorState } = this.props;
@@ -52,6 +49,7 @@ export default ({ blockType, button, helpers, pubsub, settings, t, isMobile }) =
     };
 
     createBlock = (data, shouldSetEditorState = false) => {
+      this.onPluginAdd();
       const { getEditorState, setEditorState, hidePopup } = this.props;
       const contentState = getEditorState().getCurrentContent();
       const contentStateWithEntity = contentState.createEntity(
@@ -87,25 +85,24 @@ export default ({ blockType, button, helpers, pubsub, settings, t, isMobile }) =
       event.preventDefault();
       switch (button.type) {
         case 'file':
-          this.onPluginAdd(button.name);
+          //this.onPluginAdd();
           this.toggleFileSelection();
           break;
         case 'modal':
           this.toggleButtonModal(event);
           break;
         case 'custom-block':
-          this.onPluginAdd(button.name);
+          this.onPluginAdd();
           this.addCustomBlock(button);
           break;
         default:
-          this.addBlock(button.componentData || {}, button.name || {});
+          this.addBlock(button.componentData || {}, blockType || {});
           break;
       }
     };
 
     handleFileChange = files => {
       if (files.length > 0) {
-        this.onPluginAdd(button.name);
         const { newBlock, newSelection, newEditorState } = this.createBlock(button.componentData);
         const state = { userSelectedFiles: { files } };
         pubsub.set('initialState_' + newBlock.getKey(), state);
@@ -190,7 +187,7 @@ export default ({ blockType, button, helpers, pubsub, settings, t, isMobile }) =
           modalStyles,
           theme: this.props.theme,
           componentData: button.componentData,
-          onConfirm: data => this.addBlock(data, button.name),
+          onConfirm: this.addBlock,
           pubsub,
           helpers,
           t,
