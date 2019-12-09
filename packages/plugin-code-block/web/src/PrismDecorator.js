@@ -1,7 +1,6 @@
 import React from 'react';
 import { range, reduce as _reduce } from 'lodash';
 import PropTypes from 'prop-types';
-import Immutable from 'immutable';
 import Prism from 'prismjs';
 import classNames from 'classnames';
 import { hasLinksInBlock } from 'wix-rich-content-common';
@@ -36,7 +35,7 @@ export default class PrismDecorator {
     this.highlighted[blockKey] = {};
 
     if (block.getType() !== 'code-block' || hasLinksInBlock(block, contentState)) {
-      return Immutable.List(decorations); // eslint-disable-line new-cap
+      return decorations;
     }
 
     // Parse text using Prism
@@ -58,7 +57,7 @@ export default class PrismDecorator {
       }
     });
 
-    return Immutable.List(decorations); // eslint-disable-line new-cap
+    return decorations;
   }
 
   getComponentForKey() {

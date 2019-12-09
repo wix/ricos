@@ -117,9 +117,10 @@ export default ({ blockType, button, helpers, pubsub, settings, t, isMobile }) =
 
     renderButton = () => {
       const { styles } = this;
-      const { showName, tabIndex } = this.props;
+      const { showName, tabIndex, setEditorState } = this.props;
       const { name, Icon, ButtonElement, wrappingComponent } = button;
       const WrappingComponent = wrappingComponent || 'button';
+
       if (ButtonElement) {
         return (
           <WrappingComponent
@@ -147,6 +148,8 @@ export default ({ blockType, button, helpers, pubsub, settings, t, isMobile }) =
             data-hook={`${name.replace(' ', '_')}_insert_plugin_button`}
             onClick={this.onClick}
             ref={this.buttonRef}
+            pubsub={pubsub}
+            setEditorState={setEditorState}
           >
             <div className={styles.icon}>
               <Icon key="0" />

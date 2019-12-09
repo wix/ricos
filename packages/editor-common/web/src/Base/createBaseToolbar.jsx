@@ -245,6 +245,7 @@ export default function createToolbar({
         ...this.mapComponentDataToButtonProps(button, this.state.componentData),
         ...this.mapStoreDataToButtonProps(button, pubsub.store, this.state.componentData),
         settings: button.settings,
+        pubsub,
       };
       switch (button.type) {
         case BUTTONS.TEXT_ALIGN_LEFT:
@@ -336,7 +337,6 @@ export default function createToolbar({
             />
           );
         }
-
         default:
           return (
             <Button

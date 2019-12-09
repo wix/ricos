@@ -12,21 +12,39 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+  
+  ### :house: Internal
+  - `editor`
+    - [#510](https://github.com/wix-incubator/rich-content/pull/510) custom icons code refactoring
 
+</details>
+<hr/>
+
+## 6.6.0 (Dec 8, 2019)
 ### :rocket: New Feature
 - `file-upload`
   - [#489](https://github.com/wix-incubator/rich-content/pull/489) `config.downloadTarget` enables consumers to control in which tab files are opened
+- `undo-redo`
+  - [#495](https://github.com/wix-incubator/rich-content/pull/495) creates undo redo plugin 
+- `editor`
+  - [#503](https://github.com/wix-incubator/rich-content/pull/503) activated drag and drop capability by default
 - `video`
   - [#507](https://github.com/wix-incubator/rich-content/pull/507) support all video platform urls supported by `react-player`
 - `soundcloud`
   - [#507](https://github.com/wix-incubator/rich-content/pull/507) support all audio platform urls supported by `react-player`
 ### :bug: Bug Fix
+- `examples/viewer-ssr`
+  - [#499](https://github.com/wix-incubator/rich-content/pull/499) highlight plugin configuration fixed
 - `fullscreen`
   - [#496](https://github.com/wix-incubator/rich-content/pull/496) adds support for legacy image type
 - `image`
   - [#478](https://github.com/wix-incubator/rich-content/pull/478) margin & size (alignment strategy updated)
 - `mentions`
   - [#486](https://github.com/wix-incubator/rich-content/pull/486) suggestions can be navigated using keyboard arrows
+- `giphy|emoji`
+  - [#512](https://github.com/wix-incubator/rich-content/pull/512) correct popup positions on desktop
+- `code-block`
+  - [#506](https://github.com/wix-incubator/rich-content/pull/506) fixed functinality of custom key handler
 ### :house: Internal
 - `rollup`
   - [#501](https://github.com/wix-incubator/rich-content/pull/501) remove rollup-plugin-node-builtins and rollup-plugin-node-globals
@@ -41,10 +59,7 @@
 - `viewer`
   - [d58d8916](https://github.com/wix-incubator/rich-content/commit/d58d8916) remove draftjs
   - [a02b632a](https://github.com/wix-incubator/rich-content/commit/a02b632a) remove draftjs
-- `editor`
-  - [#510](https://github.com/wix-incubator/rich-content/pull/510) custom icons code refactoring
-</details>
-<hr/>
+  - [#513](https://github.com/wix-incubator/rich-content/pull/513) removed `Immutable.js` dependency from `viewer`
 
 ## 6.5.0 (Nov 25, 2019)
 ### :bug: Bug Fix

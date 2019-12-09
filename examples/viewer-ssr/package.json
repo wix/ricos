@@ -47,7 +47,7 @@
     "react-json-editor-ajrm": "^2.5.3",
     "react-modal": "^3.5.1",
     "regenerator-runtime": "^0.11.0",
-    "serialize-javascript": "~1.4.0",
+    "serialize-javascript": "~2.1.1",
     "wix-axios-config": "latest",
     "wix-bootstrap-ng": "latest",
     "wix-express-csrf": "latest",
@@ -63,6 +63,7 @@
     "wix-rich-content-plugin-video": "file:../../packages/plugin-video/web",
     "wix-rich-content-plugin-image": "file:../../packages/plugin-image/web",
     "wix-rich-content-plugin-text-color": "file:../../packages/plugin-text-color/web",
+    "wix-rich-content-plugin-undo-redo": "file:../../packages/plugin-undo-redo/web",
     "wix-rich-content-viewer": "file:../../packages/viewer/web",
     "wix-run-mode": "latest",
     "yoshi-runtime": "latest"
