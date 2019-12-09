@@ -96,7 +96,7 @@ export default ({ blockType, button, helpers, pubsub, settings, t, isMobile }) =
           this.addCustomBlock(button);
           break;
         default:
-          this.addBlock(button.componentData || {}, blockType || {});
+          this.addBlock(button.componentData || {});
           break;
       }
     };

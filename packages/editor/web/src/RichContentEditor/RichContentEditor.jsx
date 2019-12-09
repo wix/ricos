@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { EditorState, convertFromRaw } from 'draft-js';
+import { EditorState, convertFromRaw, convertToRaw } from 'draft-js';
 import Editor from 'draft-js-plugins-editor';
 import { get, includes, merge, debounce } from 'lodash';
 import Measure from 'react-measure';
@@ -231,13 +231,45 @@ class RichContentEditor extends Component {
     return element && element.querySelector('*[tabindex="0"]');
   }
 
-  // calculateDiff = (prevState, newState) => {
-  //   console.log(JSON.stringify(prevState));
-  //   console.log(JSON.stringify(newState));
-  // };
+  calculateDiff = (prevState, newState) => {
+    const blocks = state =>
+      state
+        .getCurrentContent()
+        .getBlocksAsArray()
+        .map(block => block.type);
+    const onlyRelevant = blocksArr =>
+      blocksArr.filter(type => type !== 'unstyled' && type !== 'atomic');
+
+    const entities = state => {
+      return Object.values(convertToRaw(state.getCurrentContent()).entityMap).map(
+        entity => entity.type
+      );
+    };
+
+    const reduce = blocks =>
+      blocks.reduce((countArray, curr) => {
+        return {
+          ...countArray,
+          [curr]: countArray[curr] !== null ? 1 : countArray[curr] + 1,
+        };
+      }, {});
+
+    const beforePlugins = reduce(onlyRelevant(blocks(prevState)).concat(entities(prevState)));
+    const afterPlugins = reduce(onlyRelevant(blocks(newState)).concat(entities(newState)));
+
+    const { helpers: { biCallbacks: { onPluginDelete = () => false } = {} } = {} } = this.props;
+    if (onPluginDelete) {
+      Object.keys(beforePlugins).forEach(type => {
+        if (afterPlugins[type] === undefined || afterPlugins[type] < beforePlugins[type]) {
+          onPluginDelete(type);
+        }
+      });
+    }
+    return beforePlugins;
+  };
 
   updateEditorState = editorState => {
-    //this.calculateDiff(this.state.editorState, editorState);
+    this.calculateDiff(this.state.editorState, editorState);
     this.setEditorState(editorState);
     this.props.onChange && this.props.onChange(editorState);
   };
