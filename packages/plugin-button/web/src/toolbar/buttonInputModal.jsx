@@ -114,23 +114,10 @@ export default class ButtonInputModal extends Component {
   onConfirm = () => {
     const { url } = this.state.data;
     const {
-      componentData,
-      pubsub,
-      onConfirm,
       helpers: { closeModal },
     } = this.props;
-    const buttonObj = {
-      data: { ...this.state.data },
-      design: { ...this.state.design },
-    };
     if (isValidUrl(url)) {
       this.setState({ isValidUrl: true });
-      if (onConfirm) {
-        onConfirm({ ...componentData, button: buttonObj });
-      } else {
-        pubsub.update('componentData', { button: buttonObj });
-      }
-
       this.setState({ isOpen: false });
       closeModal();
       this.setState({ submitted: true });

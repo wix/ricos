@@ -13,16 +13,6 @@ class ButtonComponent extends PureComponent {
   static sizeClassName = (componentData, theme, styles, isMobile) =>
     sizeClassName(componentData, theme, styles, isMobile);
 
-  constructor(props) {
-    super(props);
-    const {
-      componentData: { button },
-    } = this.props;
-    this.state = {
-      style: button,
-    };
-  }
-
   render() {
     const colors = get(this.props, 'settings.colors', COLORS);
     const {
