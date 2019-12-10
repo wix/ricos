@@ -21,13 +21,15 @@
 - `file-upload`
   - [#489](https://github.com/wix-incubator/rich-content/pull/489) `config.downloadTarget` enables consumers to control in which tab files are opened
 - `undo-redo`
-  - [#495](https://github.com/wix-incubator/rich-content/pull/495) creates undo redo plugin 
+  - [#495](https://github.com/wix-incubator/rich-content/pull/495) creates undo redo plugin
 - `editor`
   - [#503](https://github.com/wix-incubator/rich-content/pull/503) activated drag and drop capability by default
 - `video`
   - [#507](https://github.com/wix-incubator/rich-content/pull/507) support all video platform urls supported by `react-player`
 - `soundcloud`
   - [#507](https://github.com/wix-incubator/rich-content/pull/507) support all audio platform urls supported by `react-player`
+- `viewer-toolbar`
+  - [#523](https://github.com/wix-incubator/rich-content/pull/523) create viewer toolbar with tweet option
 ### :bug: Bug Fix
 - `examples/viewer-ssr`
   - [#499](https://github.com/wix-incubator/rich-content/pull/499) highlight plugin configuration fixed
@@ -142,7 +144,7 @@
     - [#452](https://github.com/wix-incubator/rich-content/pull/452) `handleDropdownOpen`, `handleDropdownClose` and `popoverComponent` added to plugin settings
   - `video`
     - [#443](https://github.com/wix-incubator/rich-content/pull/443) async url resolving support
-    - [#444](https://github.com/wix-incubator/rich-content/pull/444) file upload support  
+    - [#444](https://github.com/wix-incubator/rich-content/pull/444) file upload support
     - [#449](https://github.com/wix-incubator/rich-content/pull/449) force video mime type for uploads
     - [#451](https://github.com/wix-incubator/rich-content/pull/451) uses unique file input id
   - `editor`
