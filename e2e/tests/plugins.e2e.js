@@ -209,8 +209,7 @@ describe('plugins', () => {
       cy.eyesCheckWindow(this.test.title);
     });
   });
-  // TODO: remove skip once divider alignment bug is fixed
-  // eslint-disable-next-line mocha/no-skipped-tests
+
   context('divider', () => {
     before(function() {
       eyesOpen(this);
