@@ -59,6 +59,12 @@ class ColorPicker extends PureComponent {
     }));
   }
 
+  resetColor = () => {
+    const { defaultColor } = this.props;
+    this.setState({ color: defaultColor });
+    this.props.onChange(defaultColor);
+  };
+
   renderColorButtons(colors, attributes) {
     const { styles } = this;
     const { schemeColor } = this.props;
@@ -104,11 +110,37 @@ class ColorPicker extends PureComponent {
     );
   };
 
+  renderResetColorButton = () => {
+    const { styles } = this;
+    return (
+      <div key={`reset_color_button_${this.id}`} className={styles.colorPicker_reset_color_button}>
+        <button
+          id={`reset_color_button_${this.id}`}
+          className={styles.colorPicker_reset_color_button_hidden}
+          onClick={this.resetColor}
+        />
+        <label
+          tabIndex={0} // eslint-disable-line
+          className={styles.colorPicker_reset_color_label}
+          htmlFor={`reset_color_button_${this.id}`}
+        >
+          reset to default color
+        </label>
+      </div>
+    );
+  };
+
   renderPalette = () => this.renderColorButtons(this.props.palette, this.props.schemeAttributes);
   renderUserColors = () => this.renderColorButtons(this.props.userColors);
 
   render() {
-    const { styles, renderPalette, renderUserColors, renderAddColorButton } = this;
+    const {
+      styles,
+      renderPalette,
+      renderUserColors,
+      renderAddColorButton,
+      renderResetColorButton,
+    } = this;
     const { t, isMobile, theme, children } = this.props;
     return (
       <div className={styles.colorPicker}>
@@ -126,6 +158,7 @@ class ColorPicker extends PureComponent {
               renderPalette,
               renderUserColors,
               renderAddColorButton,
+              renderResetColorButton,
               mergedStyles: styles,
             })}
       </div>
@@ -136,6 +169,7 @@ class ColorPicker extends PureComponent {
 ColorPicker.propTypes = {
   theme: PropTypes.object.isRequired,
   color: PropTypes.string.isRequired,
+  defaultColor: PropTypes.string.isRequired,
   onChange: PropTypes.func,
   palette: PropTypes.arrayOf(PropTypes.string).isRequired,
   schemeAttributes: PropTypes.arrayOf(PropTypes.string),

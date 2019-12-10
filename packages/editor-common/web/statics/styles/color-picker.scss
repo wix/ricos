@@ -116,3 +116,26 @@
     width: 100%;
   }
 }
+
+.colorPicker_reset_color_button_hidden {
+  position: absolute;
+  opacity: 0;
+  width: 0.1px;
+  height: 0.1px;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.colorPicker_reset_color_button {
+  @extend %button;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.colorPicker_reset_color_label {
+  height: 10px;
+  color: $accent-color;
+  cursor: pointer;
+  position: fixed;
+  text-decoration: underline;
+}
