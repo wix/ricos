@@ -101,11 +101,11 @@
   color: $accent-color;
   cursor: pointer;
   position: relative;
-  top: -4px;
-  left: -4px;
 }
 
 .colorPicker_buttons_container {
+  justify-content: space-between;
+  display: flex;
   flex-direction: row;
   display: -webkit-flex;
   display: flex;
@@ -133,9 +133,13 @@
 }
 
 .colorPicker_reset_color_label {
-  height: 10px;
+  font-size: 14px;
+  font-stretch: normal;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 1.5;
+  letter-spacing: normal;
   color: $accent-color;
   cursor: pointer;
   position: fixed;
-  text-decoration: underline;
 }

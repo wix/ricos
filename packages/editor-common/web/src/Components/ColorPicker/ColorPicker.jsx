@@ -124,7 +124,7 @@ class ColorPicker extends PureComponent {
           className={styles.colorPicker_reset_color_label}
           htmlFor={`reset_color_button_${this.id}`}
         >
-          reset to default color
+          Set to Default
         </label>
       </div>
     );
