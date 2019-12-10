@@ -60,11 +60,9 @@ export default theme => {
 
   const blockRenderMap = map({
     'unordered-list-item': {
-      element: 'p',
       wrapper: <UnorderedListItem />,
     },
     'ordered-list-item': {
-      element: 'p',
       wrapper: <OrderedListItem />,
     },
   });
