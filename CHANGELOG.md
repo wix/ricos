@@ -12,9 +12,16 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+  
+  ### :bug: Bug Fix
+  - `divider`
+    - [#511](https://github.com/wix-incubator/rich-content/pull/511) divider's width set to 100% in editor&viewer when no initial state of width is given
   ### :house: Internal
+  - `editor`
+    - [#510](https://github.com/wix-incubator/rich-content/pull/510) custom icons code refactoring
   - `button`
     - [#517](https://github.com/wix-incubator/rich-content/pull/517) plugin button refactor
+
 </details>
 <hr/>
 
@@ -40,7 +47,7 @@
 - `mentions`
   - [#486](https://github.com/wix-incubator/rich-content/pull/486) suggestions can be navigated using keyboard arrows
 - `giphy|emoji`
-  - [#512](https://github.com/wix-incubator/rich-content/pull/512) correct popup positions of emojy & giphy
+  - [#512](https://github.com/wix-incubator/rich-content/pull/512) correct popup positions on desktop
 - `code-block`
   - [#506](https://github.com/wix-incubator/rich-content/pull/506) fixed functinality of custom key handler
 ### :house: Internal
