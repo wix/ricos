@@ -7,6 +7,7 @@ import * as Plugins from './ViewerPlugins';
 import theme from '../theme/theme'; // must import after custom styles
 import getImagesData from 'wix-rich-content-fullscreen/src/lib/getImagesData';
 import Fullscreen from 'wix-rich-content-fullscreen';
+import { SelectedText, ToolBar } from 'wix-rich-content-text-selection-toolbar';
 
 const anchorTarget = '_top';
 const relValue = 'noreferrer';
@@ -59,14 +60,15 @@ export default class Viewer extends PureComponent {
           locale={this.props.locale}
           // siteDomain="https://www.wix.com"
         />
-        {!isSSR() && (
+        {!isSSR() && [
           <Fullscreen
             isOpen={expendModeIsOpen}
             images={this.expandModeData.images}
             onClose={() => this.setState({ expendModeIsOpen: false })}
             index={expandModeIndex}
-          />
-        )}
+          />,
+          <SelectedText id={'rich-content-viewer'} ToolBar={ToolBar} />,
+        ]}
       </div>
     );
   }
