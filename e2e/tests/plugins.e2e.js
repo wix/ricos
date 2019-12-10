@@ -223,6 +223,7 @@ describe('plugins', () => {
       cy.openVideoUploadModal().addVideoFromURI();
       cy.shrinkPlugin();
       cy.waitForVideoToLoad();
+      cy.focusEditor().enterParagraphs(['Will this fix the flakiness?']);
       cy.eyesCheckWindow(this.test.title);
     });
 
@@ -253,6 +254,7 @@ describe('plugins', () => {
       cy.openSoundCloudModal().addSoundCloud();
       cy.waitForVideoToLoad();
       cy.shrinkPlugin();
+      cy.focusEditor().enterParagraphs(['Will this fix the flakiness?']);
       cy.eyesCheckWindow(this.test.title);
     });
   });
