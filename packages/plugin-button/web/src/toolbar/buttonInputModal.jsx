@@ -9,7 +9,7 @@ import {
   ErrorIcon,
   SettingsPanelFooter,
 } from 'wix-rich-content-editor-common';
-import { isValidUrl, mergeStyles } from 'wix-rich-content-common';
+import { mergeStyles } from 'wix-rich-content-common';
 import DesignComponent from './../components/design-component';
 import SettingsComponent from './../components/settings-component';
 import Navbar from './../components/navbar';
@@ -49,11 +49,31 @@ export default class ButtonInputModal extends Component {
       buttonObj = { ...buttonObj, ...initialButtonColors };
     }
 
+    const defaultSettings = {
+      url: buttonObj.url,
+      buttonText: buttonObj.buttonText,
+      target: buttonObj.target,
+      rel: buttonObj.rel,
+      validUrl: buttonObj.validUrl,
+      submitted: buttonObj.submitted,
+    };
+
+    const defaultDesign = {
+      borderRadius: buttonObj.borderRadius,
+      borderWidth: buttonObj.borderWidth,
+      backgroundColor: buttonObj.backgroundColor,
+      textColor: buttonObj.textColor,
+      borderColor: buttonObj.borderColor,
+      padding: buttonObj.padding,
+      activeButton: buttonObj.activeButton,
+      pickerType: '',
+    };
+
     this.state = {
       isValidUrl: true,
-      data: { ...buttonObj },
-      design: { ...buttonObj },
-      initialComponentData: {},
+      data: { ...defaultSettings },
+      design: { ...defaultDesign },
+      initialComponentData: { ...buttonObj },
       isHover: false,
       activeTab: settingsTabValue,
     };
@@ -63,35 +83,17 @@ export default class ButtonInputModal extends Component {
     };
   }
 
-  componentDidMount = () => {
-    const {
-      settings: { colors },
-      componentData: { button },
-    } = this.props;
-    const initialButtonColors = {
-      textColor: colors.color1,
-      borderColor: colors.color8,
-      backgroundColor: colors.color8,
-    };
-    if (!button.textColor) {
-      this.setState({ initialComponentData: { ...button, ...initialButtonColors } });
-    } else {
-      this.setState({ initialComponentData: button });
-    }
-  };
-
   onValidUrl = isValidUrl => {
     this.setState({ isValidUrl });
   };
 
   onSettingsChanged = data => {
-    const buttonObj = {
-      ...this.state.data,
-      ...data,
-    };
     if (!isEqual(data, this.state.data)) {
-      const { pubsub } = this.props;
-      pubsub.update('componentData', { button: buttonObj });
+      const {
+        pubsub,
+        componentData: { button },
+      } = this.props;
+      pubsub.update('componentData', { button: { ...button, ...data } });
       this.setState({ data });
     }
   };
@@ -100,13 +102,12 @@ export default class ButtonInputModal extends Component {
     if (this.state.activeTab !== designTabValue) {
       this.setState({ activeTab: designTabValue });
     }
-    const buttonObj = {
-      ...this.state.data,
-      ...design,
-    };
     if (!isEqual(design, this.state.design)) {
-      const { pubsub } = this.props;
-      pubsub.update('componentData', { button: buttonObj });
+      const {
+        pubsub,
+        componentData: { button },
+      } = this.props;
+      pubsub.update('componentData', { button: { ...button, ...design } });
       this.setState({ design });
     }
   };
@@ -117,10 +118,10 @@ export default class ButtonInputModal extends Component {
       helpers: { closeModal },
     } = this.props;
     if (isValidUrl) {
-      this.setState({ isValidUrl: true, submitted: true, isOpen: false });
+      this.setState({ submitted: true, isOpen: false });
       closeModal();
     } else {
-      this.setState({ isValidUrl: false, activeTab: settingsTabValue });
+      this.setState({ activeTab: settingsTabValue });
       this.linkInput.scrollIntoView(false);
     }
   };
@@ -164,12 +165,6 @@ export default class ButtonInputModal extends Component {
     this.setState({ activeTab: settingsTabValue });
   };
 
-  onTabSelected = tabValue => {
-    const { url } = this.state.data;
-    if (!isValidUrl(url) && tabValue === designTabValue) {
-      this.setState({ isValidUrl: false });
-    }
-  };
   render() {
     const { theme, t, uiSettings, doneLabel, cancelLabel, isMobile } = this.props;
     const { styles } = this;
@@ -258,11 +253,7 @@ export default class ButtonInputModal extends Component {
               </div>
               <FocusManager>
                 <div className={styles.button_inputModal_focus_manager}>
-                  <Tabs
-                    value={this.state.activeTab}
-                    theme={this.styles}
-                    onTabSelected={this.onTabSelected.bind(this)}
-                  >
+                  <Tabs value={this.state.activeTab} theme={this.styles}>
                     <Tab label={settingTabLabel} value={settingsTabValue} theme={this.styles}>
                       <div
                         role="button"

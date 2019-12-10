@@ -18,11 +18,10 @@ class ButtonComponent extends PureComponent {
     const {
       componentData: { button },
     } = this.props;
-    const { anchorTarget = '_self', relValue = '', theme } = this.context || this.props;
+    const { theme } = this.context || this.props;
     const buttonText = button.buttonText;
-    const target =
-      typeof button.target === 'undefined' ? anchorTarget : button.target ? '_blank' : '_self';
-    const rel = typeof button.rel === 'undefined' ? relValue : button.rel ? 'nofollow' : '';
+    const target = button.target ? '_blank' : '_self';
+    const rel = button.rel ? 'nofollow' : '';
     const style = {
       border: '0px solid blue',
       ...this.props.style,
