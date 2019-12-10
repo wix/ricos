@@ -23,8 +23,6 @@ export default class ButtonInputModal extends Component {
     const {
       settings: { colors },
       componentData,
-      relValue,
-      anchorTarget,
     } = this.props;
     const initialButtonColors = {
       textColor: colors.color1,
@@ -38,12 +36,6 @@ export default class ButtonInputModal extends Component {
         ...componentData.button,
       };
     }
-    if (!('rel' in buttonObj) && relValue === 'nofollow') {
-      buttonObj.rel = true;
-    }
-    if (!('target' in buttonObj) && anchorTarget === '_blank') {
-      buttonObj.target = true;
-    }
 
     if (!buttonObj.textColor) {
       buttonObj = { ...buttonObj, ...initialButtonColors };
@@ -52,8 +44,8 @@ export default class ButtonInputModal extends Component {
     const defaultSettings = {
       url: buttonObj.url,
       buttonText: buttonObj.buttonText,
-      target: buttonObj.target,
-      rel: buttonObj.rel,
+      target: buttonObj.target || false,
+      rel: buttonObj.rel || false,
       validUrl: buttonObj.validUrl,
       submitted: buttonObj.submitted,
     };
