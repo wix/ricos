@@ -34,41 +34,20 @@ class SettingsComponent extends PureComponent {
 
   onLinkChanged = e => {
     const url = e.target.value;
-    this.setState({ url });
-    if (isValidUrl(url) || !url) {
-      this.setState({ validUrl: true });
-      this.props.isValidUrl(true);
-    }
+    const validUrl = isValidUrl(url) || !url;
+    this.setState({ url, validUrl }, () => this.props.isValidUrl(validUrl));
   };
 
   handleTargetChange = event => {
-    const { url } = this.state;
-    this.setState({ target: event.target.checked });
-    if (isValidUrl(url)) {
-      this.setState({ validUrl: true });
-    } else {
-      this.setState({ validUrl: false });
-    }
+    this.setState({ target: event.target.checked, validUrl: isValidUrl(this.state.url) });
   };
 
   handleRelChange = event => {
-    const { url } = this.state;
-    this.setState({ rel: event.target.checked });
-    if (isValidUrl(url)) {
-      this.setState({ validUrl: true });
-    } else {
-      this.setState({ validUrl: false });
-    }
+    this.setState({ rel: event.target.checked, validUrl: isValidUrl(this.state.url) });
   };
 
   onBlur = event => {
-    const { url } = this.state;
-    this.setState({ target: event.target.checked });
-    if (isValidUrl(url)) {
-      this.setState({ validUrl: true });
-    } else {
-      this.setState({ validUrl: false });
-    }
+    this.setState({ target: event.target.checked, validUrl: isValidUrl(this.state.url) });
   };
 
   render() {

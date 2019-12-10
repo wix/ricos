@@ -17,22 +17,15 @@ class ButtonComponent extends PureComponent {
     const colors = get(this.props, 'settings.colors', COLORS);
     const {
       componentData: { button },
-      buttonObj,
     } = this.props;
     const { anchorTarget = '_self', relValue = '', theme } = this.context || this.props;
-    let buttonText = button.buttonText;
-    let rel = '';
-    let url = '';
-    let style = {
-      border: '0px solid blue',
-      ...this.props.style,
-    };
-
+    const buttonText = button.buttonText;
     const target =
       typeof button.target === 'undefined' ? anchorTarget : button.target ? '_blank' : '_self';
-    rel = typeof button.rel === 'undefined' ? relValue : button.rel ? 'nofollow' : '';
-    style = {
-      ...style,
+    const rel = typeof button.rel === 'undefined' ? relValue : button.rel ? 'nofollow' : '';
+    const style = {
+      border: '0px solid blue',
+      ...this.props.style,
       borderWidth: button.borderWidth + 'px',
       padding: button.padding + 'px',
       borderRadius: button.borderRadius,
@@ -40,20 +33,7 @@ class ButtonComponent extends PureComponent {
       background: button.backgroundColor ? button.backgroundColor : colors.color8,
       borderColor: button.borderColor ? button.borderColor : colors.color8,
     };
-    url = button.url;
-    if (buttonObj) {
-      style = {
-        ...style,
-        borderWidth: buttonObj.design.borderWidth + 'px',
-        padding: buttonObj.design.padding + 'px',
-        borderRadius: buttonObj.design.borderRadius,
-        color: buttonObj.design.textColor,
-        background: buttonObj.design.backgroundColor,
-        borderColor: buttonObj.design.borderColor,
-      };
-      buttonText = buttonObj.data.buttonText;
-    }
-
+    const url = button.url;
     return (
       <ButtonViewer
         url={normalizeUrl(url)}

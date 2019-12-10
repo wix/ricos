@@ -112,15 +112,13 @@ export default class ButtonInputModal extends Component {
   };
 
   onConfirm = () => {
-    const { url } = this.state.data;
+    const { isValidUrl } = this.state;
     const {
       helpers: { closeModal },
     } = this.props;
-    if (isValidUrl(url)) {
-      this.setState({ isValidUrl: true });
-      this.setState({ isOpen: false });
+    if (isValidUrl) {
+      this.setState({ isValidUrl: true, submitted: true, isOpen: false });
       closeModal();
-      this.setState({ submitted: true });
     } else {
       this.setState({ isValidUrl: false, activeTab: settingsTabValue });
       this.linkInput.scrollIntoView(false);
