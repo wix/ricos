@@ -75,6 +75,9 @@
       /*!rtl:begin:ignore*/
       direction: rtl;
       text-align: right;
+      @include phone {
+        margin-right: 10px;
+      }
       /*!rtl:end:ignore*/
     }
 
@@ -87,6 +90,7 @@
     .public-DraftStyleDefault-listRTL {
       /*!rtl:begin:ignore*/
       direction: rtl;
+      margin-right: 40px;
       /*!rtl:end:ignore*/
     }
 
@@ -94,9 +98,9 @@
     .public-DraftStyleDefault-ul {
       margin: 0;
       padding: 0;
-
+      direction: ltr;
       & > * {
-        margin-inline-start: 40px;
+        margin-left: 40px;
       }
     }
   }
