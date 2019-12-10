@@ -60,7 +60,7 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
     });
   const InsertPluginButtons =
     settings.showInsertButtons &&
-    config?.toolbar?.InsertButtons?.map?.(button => ({
+    config?.toolbar?.InsertButtons?.map(button => ({
       buttonSettings: button,
       component: createInsertPluginButton({
         blockType: config.type,
