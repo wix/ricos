@@ -96,12 +96,16 @@ class RichContentEditor extends Component {
 
   onAtomicBlockFocus = blockKey => {
     const { onAtomicBlockFocus } = this.props;
-    if (blockKey && onAtomicBlockFocus) {
-      const contentState = this.getEditorState().getCurrentContent();
-      const block = contentState.getBlockForKey(blockKey);
-      const entityKey = block.getEntityAt(0);
-      const entity = contentState.getEntity(entityKey);
-      onAtomicBlockFocus(blockKey, entity.type, entity.data);
+    if (onAtomicBlockFocus) {
+      if (blockKey) {
+        const contentState = this.getEditorState().getCurrentContent();
+        const block = contentState.getBlockForKey(blockKey);
+        const entityKey = block.getEntityAt(0);
+        const entity = contentState.getEntity(entityKey);
+        onAtomicBlockFocus(blockKey, entity.type, entity.data);
+      } else {
+        onAtomicBlockFocus(undefined);
+      }
     }
   };
 
