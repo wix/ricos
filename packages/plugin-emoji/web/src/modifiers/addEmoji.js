@@ -1,9 +1,16 @@
 //Idea got from https://github.com/draft-js-plugins/draft-js-plugins/tree/master/draft-js-emoji-plugin/
 import { Modifier, EditorState } from 'draft-js';
+import { createEntity } from '../Utils/draftUtils';
 
 const addEmoji = (editorState, emoji) => {
   const contentState = editorState.getCurrentContent();
   const currentSelectionState = editorState.getSelection();
+  const emojiData = {
+    type: 'EMOJI_TYPE',
+    mutability: 'IMMUTABLE',
+    data: { emojiUnicode: emoji },
+  };
+  const emojiEntityKey = createEntity(editorState, emojiData);
 
   let emojiAddedContent;
   let emojiEndPos = 0;
@@ -19,7 +26,13 @@ const addEmoji = (editorState, emoji) => {
   // deciding on the position to insert emoji
   const targetSelection = afterRemovalContentState.getSelectionAfter();
 
-  emojiAddedContent = Modifier.insertText(afterRemovalContentState, targetSelection, emoji, null);
+  emojiAddedContent = Modifier.insertText(
+    afterRemovalContentState,
+    targetSelection,
+    emoji,
+    null,
+    emojiEntityKey
+  );
 
   emojiEndPos = targetSelection.getAnchorOffset();
   const blockKey = targetSelection.getAnchorKey();
