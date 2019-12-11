@@ -12,40 +12,13 @@ const addEmoji = (editorState, emoji) => {
   };
   const emojiEntityKey = createEntity(editorState, emojiData);
 
-  let emojiAddedContent;
-  let emojiEndPos = 0;
-  let blockSize = 0;
-
-  // in case text is selected it is removed and then the emoji is added
-  const afterRemovalContentState = Modifier.removeRange(
+  const emojiAddedContent = Modifier.replaceText(
     contentState,
     currentSelectionState,
-    'backward'
-  );
-
-  // deciding on the position to insert emoji
-  const targetSelection = afterRemovalContentState.getSelectionAfter();
-
-  emojiAddedContent = Modifier.insertText(
-    afterRemovalContentState,
-    targetSelection,
     emoji,
     null,
     emojiEntityKey
   );
-
-  emojiEndPos = targetSelection.getAnchorOffset();
-  const blockKey = targetSelection.getAnchorKey();
-  blockSize = contentState.getBlockForKey(blockKey).getLength();
-
-  // add space after insert emoji
-  if (emojiEndPos === blockSize) {
-    emojiAddedContent = Modifier.insertText(
-      emojiAddedContent,
-      emojiAddedContent.getSelectionAfter(),
-      ' '
-    );
-  }
 
   const newEditorState = EditorState.push(editorState, emojiAddedContent, 'insert-emoji');
   return EditorState.forceSelection(newEditorState, emojiAddedContent.getSelectionAfter());
