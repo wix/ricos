@@ -13,6 +13,10 @@
     Click to see more.
   </summary>
   
+### :house: Internal
+- `codeBlock`
+  - [#527](https://github.com/wix-incubator/rich-content/pull/527) remove onTab (moved to keyBindingFn/handleKeyCommand)
+  
 </details>
 <hr/>
 
