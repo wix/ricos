@@ -186,11 +186,11 @@ Cypress.Commands.add('setAlignment', alignment => {
   cy.setTextStyle(INLINE_TOOLBAR_BUTTONS.ALIGNMENT).setTextStyle(alignment);
 });
 
-function setInlineToolbarMenueItem(item, selection, butttonIndex) {
+function setInlineToolbarMenueItem(item, selection, buttonIndex) {
   cy.setTextStyle(item, selection)
     .get('.ReactModalPortal')
     .find('button')
-    .eq(butttonIndex)
+    .eq(buttonIndex)
     .click();
 }
 
@@ -212,10 +212,8 @@ Cypress.Commands.add('openAddPluginModal', () => {
   cy.get('[aria-label="Add Plugin"]');
 });
 
-Cypress.Commands.add('openImageSettings', () => {
-  cy.get(`[data-hook=${PLUGIN_COMPONENT.IMAGE}]:first`)
-    .parent()
-    .click();
+Cypress.Commands.add('openImageSettings', (shouldOpenToolbar = true) => {
+  shouldOpenToolbar && cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE);
   cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.SETTINGS);
   cy.get('[data-hook="imageSettings"]');
 });

@@ -257,7 +257,7 @@ function removeLink(editorState, blockKey, [start, end]) {
   return RichUtils.toggleLink(editorState, selection, null);
 }
 
-function createEntity(editorState, { type, mutability = 'MUTABLE', data }) {
+export function createEntity(editorState, { type, mutability = 'MUTABLE', data }) {
   return editorState
     .getCurrentContent()
     .createEntity(type, mutability, data)

@@ -13,17 +13,25 @@
     Click to see more.
   </summary>
   
-  ### :bug: Bug Fix
-  - `divider`
-    - [#511](https://github.com/wix-incubator/rich-content/pull/511) divider's width set to 100% in editor&viewer when no initial state of width is given
   ### :house: Internal
-  - `editor`
-    - [#510](https://github.com/wix-incubator/rich-content/pull/510) custom icons code refactoring
   - `button`
     - [#517](https://github.com/wix-incubator/rich-content/pull/517) plugin button refactor
 
 </details>
 <hr/>
+
+## 6.6.1 (Dec 11, 2019)
+### :rocket: New Feature
+- `fullscreen`
+  - [#519](https://github.com/wix-incubator/rich-content/pull/519) add props: topMargin, backgroundColor, foregroundColor. Remove counter when only 1 image. Larger z-index
+### :bug: Bug Fix
+- `divider`
+  - [#511](https://github.com/wix-incubator/rich-content/pull/511) divider's width set to 100% in editor&viewer when no initial state of width is given
+- `emoji`
+  - [#525](https://github.com/wix-incubator/rich-content/pull/525) fix emoji delete bug
+### :house: Internal
+- `editor`
+  - [#510](https://github.com/wix-incubator/rich-content/pull/510) custom icons code refactoring
 
 ## 6.6.0 (Dec 8, 2019)
 ### :rocket: New Feature
