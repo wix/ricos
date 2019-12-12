@@ -273,7 +273,6 @@ describe('plugins', () => {
     it('render map plugin toolbar and settings', function() {
       cy.openPluginToolbar(PLUGIN_COMPONENT.MAP);
       cy.eyesCheckWindow('render map plugin toolbar');
-
       cy.openMapSettings();
       cy.get('.gm-style-cc');
       cy.eyesCheckWindow('render map settings');
