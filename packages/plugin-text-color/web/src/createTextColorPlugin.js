@@ -1,4 +1,4 @@
-import { createBasePlugin } from 'wix-rich-content-common';
+import { createBasePlugin } from 'wix-rich-content-editor-common';
 import { TEXT_COLOR_TYPE } from './types';
 import { createTextColorToolbar } from './toolbar/createTextColorToolbar';
 import { DEFAULT_FOREGROUND_STYLE_FN_DRAFT } from './constants';

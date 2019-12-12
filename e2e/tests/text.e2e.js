@@ -17,7 +17,7 @@ describe('text', () => {
   after(() => cy.eyesClose());
 
   it('allow to enter text', function() {
-    cy.loadEditor()
+    cy.loadEditorAndViewer()
       .enterParagraphs([
         'Leverage agile frameworks',
         'to provide a robust synopsis for high level overviews.',
@@ -28,7 +28,7 @@ describe('text', () => {
   });
 
   it('allow to apply inline styles and links', function() {
-    cy.loadEditor('plain')
+    cy.loadEditorAndViewer('plain')
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.BOLD, [40, 10])
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.UNDERLINE, [10, 5])
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.ITALIC, [20, 5])
@@ -65,7 +65,7 @@ describe('text', () => {
   });
 
   it('allow to create lists', function() {
-    cy.loadEditor('plain')
+    cy.loadEditorAndViewer('plain')
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.ORDERED_LIST, [300, 100])
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.UNORDERED_LIST, [550, 1]);
     cy.eyesCheckWindow(this.test.title);

@@ -1,7 +1,7 @@
 import { composeDecorators } from 'draft-js-plugins-editor';
 import createFocusPlugin from 'draft-js-focus-plugin';
 import createResizeDecoration from './Decorators/Resize';
-import { draftPluginNames } from '../consts.js';
+import createBlockDndPlugin from 'draft-js-drag-n-drop-plugin';
 
 const createPlugins = ({
   plugins,
@@ -23,20 +23,16 @@ const createPlugins = ({
     minWidth: 350,
   });
 
-  const draftPlugins = plugins?.filter(plugin => draftPluginNames.includes(plugin.name));
+  const dndPlugin = createBlockDndPlugin();
 
-  const dndPlugin = draftPlugins?.find(plugin => plugin.name === 'createBlockDndPlugin')?.();
-
-  const wixPluginsDecorators = [resizePlugin.decorator, focusPlugin.decorator];
-  const pluginInstances = [resizePlugin, focusPlugin];
-
-  if (dndPlugin) {
-    wixPluginsDecorators.push(dndPlugin.decorator);
-    pluginInstances.push(dndPlugin);
-  }
+  const wixPluginsDecorators = composeDecorators(
+    dndPlugin.decorator,
+    resizePlugin.decorator,
+    focusPlugin.decorator
+  );
 
   const wixPluginConfig = {
-    decorator: composeDecorators(...wixPluginsDecorators),
+    decorator: wixPluginsDecorators,
     helpers,
     theme,
     t,
@@ -50,9 +46,7 @@ const createPlugins = ({
     ...config,
   };
 
-  const wixPlugins = (plugins || [])
-    ?.filter(plugin => !draftPluginNames.includes(plugin.name))
-    .map(createPlugin => createPlugin(wixPluginConfig));
+  const wixPlugins = (plugins || []).map(createPlugin => createPlugin(wixPluginConfig));
 
   let pluginButtons = [];
   let pluginTextButtons = [];
@@ -63,7 +57,7 @@ const createPlugins = ({
     /* eslint-disable new-cap */
     pluginTextButtons = [
       ...pluginTextButtons,
-      ...(wixPlugin.TextButtonMapper ? [wixPlugin.TextButtonMapper()] : []),
+      ...(wixPlugin.TextButtonMapper ? [wixPlugin.TextButtonMapper(wixPlugin.pubsub)] : []),
     ];
     /* eslint-enable new-cap */
     pubsubs = [...pubsubs, ...(wixPlugin.pubsub ? [wixPlugin.pubsub] : [])];
@@ -73,7 +67,7 @@ const createPlugins = ({
     ];
   });
 
-  pluginInstances.push(...wixPlugins);
+  const pluginInstances = [resizePlugin, focusPlugin, dndPlugin, ...wixPlugins];
 
   return {
     pluginInstances,

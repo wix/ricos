@@ -1,5 +1,6 @@
 import createToolbar from './toolbar';
-import { createBasePlugin, mergeStyles } from 'wix-rich-content-common';
+import { mergeStyles } from 'wix-rich-content-common';
+import { createBasePlugin } from 'wix-rich-content-editor-common';
 
 import { BUTTON_TYPE } from './constants';
 

@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import { isEqual } from 'lodash';
 import { mergeStyles, validate, Context, pluginFileUploadSchema } from 'wix-rich-content-common';
 import { DocumentIcon, LoaderIcon } from './icons';
-// import schema from '../statics/data-schema.json';
-// import schema from '../../../../common/web/statics/schemas/plugin-file-upload.schema.json';
 import styles from '../statics/styles/file-upload-viewer.scss';
 
 const getNameWithoutType = fileName => {

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { mergeStyles, SelectionList } from 'wix-rich-content-common';
+import { mergeStyles } from 'wix-rich-content-common';
+import { SelectionList } from 'wix-rich-content-editor-common';
 import styles from '../../../statics/styles/gallery-settings-mobile-header.scss';
 import { MoreIcon } from '../../icons';
 

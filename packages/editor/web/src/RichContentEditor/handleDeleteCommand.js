@@ -1,4 +1,4 @@
-import { isAtomicBlockFocused, replaceWithEmptyBlock } from 'wix-rich-content-common';
+import { isAtomicBlockFocused, replaceWithEmptyBlock } from 'wix-rich-content-editor-common';
 import removeBlockAdjacentToAtomic from './atomicBlockRemovalUtil';
 
 export default editorState => {

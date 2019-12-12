@@ -1,10 +1,9 @@
-import { get } from 'lodash';
-import { TOOLBARS } from 'wix-rich-content-common';
+import { TOOLBARS } from 'wix-rich-content-editor-common';
 import { getDefault } from '../consts';
 import { InsertPluginIcon } from '../icons';
 
 export default ({ helpers, t, settings }) => {
-  const icon = get(settings, 'toolbar.icons.Image', InsertPluginIcon);
+  const icon = settings?.toolbar?.icons?.Image || InsertPluginIcon;
   return [
     {
       type: 'file',

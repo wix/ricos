@@ -12,11 +12,11 @@
 .footerToolbarButton_wrapper {
 }
 
-.footerToolbarButton {
+.footerToolbarButton:hover:not([disabled]) .footerToolbarButton_icon{
+  color: red;
 }
 
-.footerToolbarButton_wrapper:hover .footerToolbarButton_icon {
-  color: red;
+.footerToolbarButton_wrapper:hover  {
 }
 
 /* Separator */

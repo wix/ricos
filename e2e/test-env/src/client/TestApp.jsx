@@ -4,13 +4,14 @@ import Viewer from '../../../../examples/main/shared/viewer/Viewer';
 
 class TestApp extends PureComponent {
   renderEditor = () => {
+    // eslint-disable-next-line react/prop-types
     const { initialState, onEditorChange, locale, localeResource, isMobile } = this.props;
     return (
       <Editor
         onChange={onEditorChange}
         initialState={initialState}
         isMobile={isMobile}
-        shouldMockUpload={true}
+        shouldMockUpload
         locale={locale}
         localeResource={localeResource}
         mockImageIndex={1}
@@ -19,6 +20,7 @@ class TestApp extends PureComponent {
   };
 
   renderViewer = () => {
+    // eslint-disable-next-line react/prop-types
     const { isMobile, viewerState, locale } = this.props;
     return <Viewer initialState={viewerState} isMobile={isMobile} locale={locale} />;
   };

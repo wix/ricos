@@ -59,10 +59,6 @@ Cypress.Commands.add('loadEditorAndViewer', fixtureName => {
   run('rce', fixtureName);
 });
 
-Cypress.Commands.add('loadEditor', fixtureName => {
-  run('rce', fixtureName);
-});
-
 Cypress.Commands.add('matchContentSnapshot', () => {
   cy.window()
     .its('__CONTENT_SNAPSHOT__')
@@ -190,11 +186,11 @@ Cypress.Commands.add('setAlignment', alignment => {
   cy.setTextStyle(INLINE_TOOLBAR_BUTTONS.ALIGNMENT).setTextStyle(alignment);
 });
 
-function setInlineToolbarMenueItem(item, selection, butttonIndex) {
+function setInlineToolbarMenueItem(item, selection, buttonIndex) {
   cy.setTextStyle(item, selection)
     .get('.ReactModalPortal')
     .find('button')
-    .eq(butttonIndex)
+    .eq(buttonIndex)
     .click();
 }
 
@@ -403,8 +399,12 @@ Cypress.Commands.add('dragAndDropPlugin', (src, dest) => {
     .trigger('drop', { dataTransfer });
 });
 
-Cypress.Commands.add('hideTooltip', { prevSubject: 'optional' }, subject => {
+Cypress.Commands.add('hideTooltip', { prevSubject: 'optional' }, () => {
   cy.get('.editor').trigger('mouseleave');
+});
+
+Cypress.Commands.add('waitForVideoToLoad', { prevSubject: 'optional' }, () => {
+  cy.get('[data-loaded=true]', { timeout: 15000 });
 });
 
 // disable screenshots in debug mode. So there is no diffrence to ci.

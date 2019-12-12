@@ -1,21 +1,17 @@
-import { get } from 'lodash';
 import { DEFAULTS, MobileFullScreenCustomStyle, DesktopFlyOutModalStyles } from '../constants';
 import {
   getModalStyles,
   TOOLBARS,
   DECORATION_MODE,
   decorateComponentWithProps,
-} from 'wix-rich-content-common';
+} from 'wix-rich-content-editor-common';
 import GiphyApiInputModal from './giphyApiInputModal';
 import { InsertPluginIcon, InsertPluginMobileIcon } from '../icons';
 import Arrow from './arrow';
 
 export default ({ helpers, t, settings, isMobile }) => {
-  const Icon = get(
-    settings,
-    'toolbar.icons.GIF',
-    isMobile ? InsertPluginMobileIcon : InsertPluginIcon
-  );
+  const Icon =
+    settings?.toolbar?.icons?.GIF || isMobile ? InsertPluginMobileIcon : InsertPluginIcon;
   const modalStyles = isMobile
     ? getModalStyles({ customStyles: MobileFullScreenCustomStyle, fullScreen: true, isMobile })
     : null;
@@ -43,7 +39,8 @@ export default ({ helpers, t, settings, isMobile }) => {
         } else {
           modalLeft = left - 15;
         }
-        const modalTop = top - 365;
+        const isAboveButton = top - 365 > 0;
+        const modalTop = isAboveButton ? top - 365 : top + 30;
         return {
           ...modalStyles,
           content: {

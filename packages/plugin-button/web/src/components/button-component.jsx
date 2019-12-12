@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { get } from 'lodash';
 import { Context, normalizeUrl } from 'wix-rich-content-common';
 import { alignmentClassName, sizeClassName } from '../classNameStrategies.js';
 import { COLORS } from '../constants';
@@ -24,7 +23,7 @@ class ButtonComponent extends PureComponent {
   }
 
   render() {
-    const colors = get(this.props, 'settings.colors', COLORS);
+    const colors = this.props?.settings?.colors || COLORS;
     const {
       componentData: { button },
       buttonObj,

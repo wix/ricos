@@ -1,6 +1,7 @@
 import { getImageSrc } from 'wix-rich-content-common';
 
 const imageType = 'wix-draft-plugin-image';
+const imageTypeLegacy = 'IMAGE';
 const galleryType = 'wix-draft-plugin-gallery';
 
 // eslint-disable-next-line camelcase
@@ -42,6 +43,7 @@ function convertGalleryItemToImage(item) {
 function convertEntryToUrls(entry) {
   switch (entry.type) {
     case imageType:
+    case imageTypeLegacy:
       return [imageEntryToUrl(entry)];
     case galleryType:
       return galleryEntryToUrls(entry);

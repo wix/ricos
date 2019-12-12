@@ -1,6 +1,5 @@
-import { get } from 'lodash';
 import { DEFAULTS } from '../soundCloud';
-import { getModalStyles, TOOLBARS } from 'wix-rich-content-common';
+import { getModalStyles, TOOLBARS } from 'wix-rich-content-editor-common';
 import SoundCloudURLInputModal from './soundCloudURLInputModal';
 import { InsertPluginIcon } from '../icons';
 
@@ -15,7 +14,7 @@ export default ({ helpers, t, isMobile, settings }) => {
   if (isMobile) {
     customStyles.content.minHeight = '202px';
   }
-  const icon = get(settings, 'toolbar.icons.SoundCloud', InsertPluginIcon);
+  const icon = settings?.toolbar?.icons?.SoundCloud || InsertPluginIcon;
   return [
     {
       type: 'modal',

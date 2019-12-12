@@ -1,8 +1,7 @@
+import { createBasePlugin, insertLinkInPosition } from 'wix-rich-content-editor-common';
 import {
-  createBasePlugin,
-  // getUrlMatches,
-  insertLinkInPosition,
   isValidUrl,
+  // getUrlMatches,
 } from 'wix-rich-content-common';
 import { LINK_TYPE } from './types';
 import { Component } from './LinkComponent';

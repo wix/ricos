@@ -1,10 +1,9 @@
-import { get } from 'lodash';
 import {
   BUTTONS,
   getModalStyles,
   PluginSettingsIcon,
   decorateComponentWithProps,
-} from 'wix-rich-content-common';
+} from 'wix-rich-content-editor-common';
 import { Modals } from '../modals';
 import ButtonInputModal from './buttonInputModal';
 
@@ -22,7 +21,7 @@ const MobileFullScreenCustomStyle = {
 
 export default ({ settings, isMobile }) => {
   const customStyles = isMobile ? MobileFullScreenCustomStyle : DesktopCustomModalStyles;
-  const icon = get(settings, 'toolbar.icons.advanced_settings', PluginSettingsIcon);
+  const icon = settings?.toolbar?.icons?.['advanced_settings'] || PluginSettingsIcon;
   return [
     { keyName: 'sizeSmallLeft', type: BUTTONS.SIZE_SMALL_LEFT, mobile: false },
     { keyName: 'sizeSmallCenter', type: BUTTONS.SIZE_SMALL_CENTER, mobile: false },

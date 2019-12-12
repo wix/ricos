@@ -1,5 +1,4 @@
-import { get } from 'lodash';
-import { BUTTONS, PluginSettingsIcon, getModalStyles } from 'wix-rich-content-common';
+import { BUTTONS, PluginSettingsIcon, getModalStyles } from 'wix-rich-content-editor-common';
 import { Modals } from '../modals';
 import { ManageMediaIcon, UploadIcon } from '../icons';
 import { galleryLayoutsDropdown, switchLayout, getCurrentLayout } from '../helpers';
@@ -7,7 +6,7 @@ import { galleryLayoutsDropdown, switchLayout, getCurrentLayout } from '../helpe
 const modalStyles = getModalStyles();
 
 export default ({ settings, t, anchorTarget, relValue }) => {
-  const icons = get(settings, 'toolbar.icons', {});
+  const icons = settings?.toolbar?.icons || {};
   return [
     {
       keyName: 'add',

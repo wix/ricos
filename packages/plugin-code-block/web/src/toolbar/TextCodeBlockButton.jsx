@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { get } from 'lodash';
-import { InlineToolbarButton } from 'wix-rich-content-common';
+import { InlineToolbarButton } from 'wix-rich-content-editor-common';
 import { CODE_BLOCK_TYPE } from '../types';
 import { hasBlockType, toggleBlockTypeAndEnsureSpaces } from './blockTypeModifiers';
 import { CodeBlockIcon } from '../icons';
@@ -13,7 +12,7 @@ export default class TextCodeBlockButton extends Component {
 
   render() {
     const { theme, isMobile, t, tabIndex, setEditorState, getEditorState, config } = this.props;
-    const icon = get(config, 'code-block.toolbar.icons.codeBlock', CodeBlockIcon);
+    const icon = config?.['code-block']?.toolbar?.icons?.codeBlock || CodeBlockIcon;
     return (
       <InlineToolbarButton
         onClick={() =>

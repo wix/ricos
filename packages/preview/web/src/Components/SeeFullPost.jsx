@@ -36,7 +36,11 @@ class SeeFullPost extends PureComponent {
     return (
       <Fragment>
         {children}
-        <div className={this.styles.seeFullPost_overlay} style={overlayStyles} onClick={this.onClick}>
+        <div
+          className={this.styles.seeFullPost_overlay}
+          style={overlayStyles}
+          onClick={this.onClick}
+        >
           <span className={this.styles.seeFullPost_label} style={labelStyles}>
             {label}
           </span>

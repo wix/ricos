@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { get, includes, isEqual, isFunction } from 'lodash';
 import {
-  isSSR,
+  Context,
   mergeStyles,
+  validate,
+  isSSR,
   getImageSrc,
   Loader,
-  validate,
-  Context,
   WIX_MEDIA_DEFAULT,
   pluginImageSchema,
 } from 'wix-rich-content-common';

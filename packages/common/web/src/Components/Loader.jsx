@@ -1,15 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { get } from 'lodash';
+import { default as Context } from '../Utils/Context';
 import { mergeStyles } from '../Utils/mergeStyles';
-import Context from '../Utils/Context';
 import styles from '../../statics/styles/loaders.rtlignore.scss';
 
 class Loader extends React.Component {
   get styles() {
     if (!this._styles) {
-      const theme = get(this, 'context.theme', this.props.theme);
+      const theme = this.context?.theme || this.props.theme;
       this._styles = mergeStyles({ styles, theme });
     }
     return this._styles;

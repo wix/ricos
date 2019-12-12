@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import ReactModal from 'react-modal';
 import MobileDetect from 'mobile-detect';
-import { RichContentModal, mergeStyles, normalizeInitialState } from 'wix-rich-content-common';
+import { mergeStyles, normalizeInitialState } from 'wix-rich-content-common';
 
 import { RichContentViewer } from 'wix-rich-content-viewer';
 
@@ -27,17 +26,6 @@ import TestData from './TestData/initial-state';
 
 import theme from './theme/theme';
 import styles from './App.scss';
-
-const modalStyleDefaults = {
-  content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
-  },
-};
 
 const anchorTarget = '_top';
 const relValue = 'noreferrer';
@@ -93,20 +81,13 @@ class App extends Component {
 
     this.getInlineStyleMappers = raw => [
       textColorInlineStyleMapper(this.config, raw),
-      textHighlightInlineStyleMapper(config, raw),
+      textHighlightInlineStyleMapper(this.config, raw),
     ];
   }
 
   initViewerProps() {
     this.helpers = {};
   }
-
-  closeModal = () => {
-    this.setState({
-      showModal: false,
-      modalContent: null,
-    });
-  };
 
   handleContentChange = () => {
     const value = document.getElementById('testData').value;
@@ -188,14 +169,6 @@ class App extends Component {
               relValue={relValue}
               config={this.config}
             />
-            <ReactModal
-              isOpen={this.state.showModal}
-              contentLabel="External Modal Example"
-              style={this.state.modalStyles || modalStyleDefaults}
-              onRequestClose={this.closeModal}
-            >
-              {this.state.showModal && <RichContentModal {...this.state.modalProps} />}
-            </ReactModal>
           </div>
         </div>
       </div>

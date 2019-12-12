@@ -66,7 +66,7 @@ describe('seeFullPost interaction', () => {
       mutability: 'IMMUTABLE',
       data: {
         src: {
-          file_name: '',
+          file_name: '', //eslint-disable-line camelcase
           width: 1200,
           height: 1200,
         },
@@ -105,7 +105,7 @@ describe('image counter interaction', function() {
       mutability: 'IMMUTABLE',
       data: {
         src: {
-          file_name: '',
+          file_name: '', //eslint-disable-line camelcase
           width: 1200,
           height: 1200,
         },

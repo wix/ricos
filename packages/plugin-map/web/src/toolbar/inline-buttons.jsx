@@ -1,10 +1,9 @@
-import { get } from 'lodash';
 import {
   BUTTONS,
   getModalStyles,
   PluginSettingsIcon,
   SizeSmallCenterIcon,
-} from 'wix-rich-content-common';
+} from 'wix-rich-content-editor-common';
 import { MapSettingsModal } from './MapSettingsModal';
 import { DEFAULTS } from '../constants';
 
@@ -13,13 +12,13 @@ const getAlignmentButtonPropsFn = getEditorBounds => ({ componentData }) => {
   const editorBounds = getEditorBounds();
   const maxAlignmentWidth = editorBounds ? editorBounds.width - 1 : MAX_ALIGNMENT_WIDTH;
   return {
-    disabled: get(componentData, 'config.width', 0) > maxAlignmentWidth,
+    disabled: (componentData?.config?.width || 0) > maxAlignmentWidth,
   };
 };
 
 export default ({ settings, t, helpers, getEditorBounds, isMobile }) => {
   const { maxWidth, minWidth, maxHeight, minHeight } = settings;
-  const icons = get(settings, 'toolbar.icons', {});
+  const icons = settings?.toolbar?.icons || {};
   return [
     {
       type: BUTTONS.WIDTH,

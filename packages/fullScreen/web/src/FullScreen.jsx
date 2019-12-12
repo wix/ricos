@@ -20,7 +20,6 @@ function addChildTo(Comp, Child) {
 function HeaderFullscreen(props) {
   // eslint-disable-next-line react/prop-types
   const isEnterFullscreen = props.innerProps.title.indexOf('Enter') === 0;
-  //todo fix both icons to correct assets
   return (
     <carouselComponents.HeaderFullscreen {...props}>
       {isEnterFullscreen ? <ExpandIcon width="100%" /> : <DecreaseIcon />}
@@ -30,17 +29,32 @@ function HeaderFullscreen(props) {
 HeaderFullscreen.displayName = 'HeaderFullscreen';
 
 export default class Fullscreen extends React.Component {
+  static defaultProps = {
+    topMargin: 0,
+    backgroundColor: '#000',
+    foregroundColor: '#fff',
+  };
+
   modalStyles = {
-    blanket: base => ({ ...base, zIndex: 10 }),
-    positioner: base => ({ ...base, zIndex: 11 }),
-    dialog: base => ({ ...base, zIndex: 12 }),
+    blanket: base => ({
+      ...base,
+      zIndex: 1000,
+      backgroundColor: this.props.backgroundColor,
+    }),
+    positioner: base => ({
+      ...base,
+      zIndex: 1001,
+      top: this.props.topMargin,
+      '& button': { color: this.props.foregroundColor },
+    }),
+    dialog: base => ({ ...base, zIndex: 1002 }),
   };
   styles = {
     view: base => ({
       ...base,
-      margin: '0 100',
+      maxHeight: `calc(100vh - ${200 + this.props.topMargin}px)`,
       '>img': {
-        maxHeight: 'calc(100vh - 200px)',
+        maxHeight: 'inherit',
       },
     }),
     header: base => ({
@@ -52,13 +66,19 @@ export default class Fullscreen extends React.Component {
         justifyContent: 'space-between',
       },
     }),
+    navigation: base => ({ ...base, width: '100vw' }),
     navigationNext: base => ({
       ...base,
       background: 'transparent !important',
       opacity: 0.7,
       '&:hover': { opacity: 1 },
     }),
+    footerCount: base => {
+      const display = this.props.images.length === 1 && 'none';
+      return { ...base, color: this.props.foregroundColor, display };
+    },
   };
+
   render() {
     const { onClose, index, images, isOpen } = this.props;
     return (
@@ -88,4 +108,7 @@ Fullscreen.propTypes = {
   index: PropTypes.number,
   isOpen: PropTypes.bool,
   onClose: PropTypes.func.isRequired,
+  topMargin: PropTypes.number,
+  backgroundColor: PropTypes.string,
+  foregroundColor: PropTypes.string,
 };

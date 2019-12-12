@@ -10,17 +10,15 @@ export default function createToolbar({
   setEditorState,
 }) {
   return {
-    InsertButtons:
-      !isMobile &&
-      createInsertButtons({
-        settings,
-        helpers,
-        styles,
-        t,
-        isMobile,
-        getEditorState,
-        setEditorState,
-      }),
+    InsertButtons: createInsertButtons({
+      settings,
+      helpers,
+      styles,
+      t,
+      isMobile,
+      getEditorState,
+      setEditorState,
+    }),
     name: 'emoji',
   };
 }

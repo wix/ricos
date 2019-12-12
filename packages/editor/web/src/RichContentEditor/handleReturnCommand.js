@@ -1,5 +1,5 @@
 import { RichUtils, Modifier, EditorState, KeyBindingUtil } from 'draft-js';
-import { getAnchorBlockData } from 'wix-rich-content-common';
+import { getAnchorBlockData } from 'wix-rich-content-editor-common';
 
 export default updateEditorState => (command, editorState) => {
   if (KeyBindingUtil.isSoftNewlineEvent(command)) {
