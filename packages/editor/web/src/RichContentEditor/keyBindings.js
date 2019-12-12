@@ -74,7 +74,7 @@ function getCommandByShortcut(shortcut, bindingMap) {
   return commands.length > 0 ? commands[0] : undefined;
 }
 
-export const keyBindingFn = customCommands => {
+export const createKeyBindingFn = customCommands => {
   const bindingMap = [...COMMAND_BY_SHORTCUT, ...customCommands];
   return e => {
     const shortcut = { modifiers: getModifiers(e), key: e.key };
