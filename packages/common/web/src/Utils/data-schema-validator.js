@@ -1,11 +1,11 @@
 import contentStateSchema from '../../statics/schemas/content-state.schema.json';
 
-export const validate = (data, schema, alert = true) => {
+export const validate = (data, schema) => {
   if (process.env.NODE_ENV !== 'production') {
     const Validator = require('jsonschema').Validator;
     const validator = new Validator();
     const result = validator.validate(data, schema);
-    if (alert && !result.valid && result.errors) {
+    if (!result.valid && result.errors) {
       result.errors.forEach(error => console.warn('schema validation error:', error)); // eslint-disable-line no-console
     }
     return result.valid;

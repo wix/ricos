@@ -41,5 +41,5 @@ export const isValidEditorData = payload => {
     [GALLERY_TYPE]: gallerySchema,
     [MENTION_TYPE]: mentionsSchema,
   });
-  return validate(payload, schema, false);
+  return validate(payload, schema);
 };
