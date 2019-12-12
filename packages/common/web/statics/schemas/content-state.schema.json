@@ -144,7 +144,7 @@
             "title": "text",
             "default": "",
             "examples": ["test"],
-            "pattern": "^([^]*)$"
+            "pattern": "^(.|\n)*$"
           },
           "type": {
             "$id": "#/properties/blocks/items/properties/type",
