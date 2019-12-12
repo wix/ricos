@@ -9,7 +9,7 @@ import {
   ErrorIcon,
   SettingsPanelFooter,
 } from 'wix-rich-content-editor-common';
-import { mergeStyles } from 'wix-rich-content-common';
+import { mergeStyles, isValidUrl } from 'wix-rich-content-common';
 import DesignComponent from './../components/design-component';
 import SettingsComponent from './../components/settings-component';
 import Navbar from './../components/navbar';
@@ -20,15 +20,7 @@ export default class ButtonInputModal extends Component {
   constructor(props) {
     super(props);
     this.styles = mergeStyles({ styles, theme: props.theme });
-    const {
-      settings: { colors },
-      componentData,
-    } = this.props;
-    const initialButtonColors = {
-      textColor: colors.color1,
-      borderColor: colors.color8,
-      backgroundColor: colors.color8,
-    };
+    const { componentData } = this.props;
 
     let buttonObj = {};
     if (componentData.button) {
@@ -37,34 +29,10 @@ export default class ButtonInputModal extends Component {
       };
     }
 
-    if (!buttonObj.textColor) {
-      buttonObj = { ...buttonObj, ...initialButtonColors };
-    }
-
-    const defaultSettings = {
-      url: buttonObj.url,
-      buttonText: buttonObj.buttonText,
-      target: buttonObj.target || false,
-      rel: buttonObj.rel || false,
-      validUrl: buttonObj.validUrl,
-      submitted: buttonObj.submitted,
-    };
-
-    const defaultDesign = {
-      borderRadius: buttonObj.borderRadius,
-      borderWidth: buttonObj.borderWidth,
-      backgroundColor: buttonObj.backgroundColor,
-      textColor: buttonObj.textColor,
-      borderColor: buttonObj.borderColor,
-      padding: buttonObj.padding,
-      activeButton: buttonObj.activeButton,
-      pickerType: '',
-    };
-
     this.state = {
-      isValidUrl: true,
-      data: { ...defaultSettings },
-      design: { ...defaultDesign },
+      validUrl: isValidUrl(buttonObj.settings.url),
+      settings: { ...buttonObj.settings },
+      design: { ...buttonObj.design },
       initialComponentData: { ...buttonObj },
       isHover: false,
       activeTab: settingsTabValue,
@@ -75,22 +43,24 @@ export default class ButtonInputModal extends Component {
     };
   }
 
-  onValidUrl = isValidUrl => {
-    this.setState({ isValidUrl });
+  onValidUrl = validUrl => {
+    this.setState({ validUrl });
   };
 
-  onSettingsChanged = data => {
-    if (!isEqual(data, this.state.data)) {
+  onSettingsChanged = settings => {
+    const { design } = this.state;
+    if (!isEqual(settings, this.state.settings)) {
       const {
         pubsub,
         componentData: { button },
       } = this.props;
-      pubsub.update('componentData', { button: { ...button, ...data } });
-      this.setState({ data });
+      pubsub.update('componentData', { button: { ...button, settings, design } });
+      this.setState({ settings });
     }
   };
 
   onDesignChanged = design => {
+    const { settings } = this.state;
     if (this.state.activeTab !== designTabValue) {
       this.setState({ activeTab: designTabValue });
     }
@@ -99,17 +69,17 @@ export default class ButtonInputModal extends Component {
         pubsub,
         componentData: { button },
       } = this.props;
-      pubsub.update('componentData', { button: { ...button, ...design } });
+      pubsub.update('componentData', { button: { ...button, design, settings } });
       this.setState({ design });
     }
   };
 
   onConfirm = () => {
-    const { isValidUrl } = this.state;
+    const { validUrl } = this.state;
     const {
       helpers: { closeModal },
     } = this.props;
-    if (isValidUrl) {
+    if (validUrl) {
       this.setState({ submitted: true, isOpen: false });
       closeModal();
     } else {
@@ -166,7 +136,7 @@ export default class ButtonInputModal extends Component {
           <p className={styles.button_inputModal_tabLabel}>{t('ButtonModal_Settings_Tab')}</p>
         </div>
         <div className={styles.button_inputModal_errorIcon}>
-          {!this.state.isValidUrl ? <ErrorIcon width="18" height="18" /> : null}
+          {!this.state.validUrl ? <ErrorIcon width="18" height="18" /> : null}
         </div>
       </div>
     );
@@ -181,8 +151,8 @@ export default class ButtonInputModal extends Component {
         {...this.props}
         isValidUrl={this.onValidUrl.bind(this)}
         onSettingsChange={this.onSettingsChanged.bind(this)}
-        validUrl={this.state.isValidUrl}
-        settingsObj={this.state.data}
+        validUrl={this.state.validUrl}
+        settingsObj={this.state.settings}
         onKeyPress={this.handleKeyPress}
         linkInputRef={ref => {
           this.linkInput = ref;

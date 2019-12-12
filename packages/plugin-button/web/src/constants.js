@@ -11,21 +11,7 @@ export const COLOR_PICKER_TYPE = {
   BORDER_COLOR: 'borderColor',
   BACKGROUND_COLOR: 'backgroundColor',
 };
-export const DEFAULTS = {
-  config: {
-    alignment: ALIGN_CENTER,
-    size: 'small',
-    width: 'fit-content',
-  },
-  button: {
-    activeButton: 0,
-    borderRadius: 0,
-    borderWidth: 0,
-    padding: 12,
-    buttonText: 'Click Me',
-    url: '',
-  },
-};
+
 export const COLORS = {
   color1: '#FEFDFD',
   color2: '#D5D4D4',
@@ -37,4 +23,29 @@ export const COLORS = {
   color8: '#0261FF',
   color9: '#0141AA',
   color10: '#012055',
+};
+
+export const DEFAULTS = {
+  config: {
+    alignment: ALIGN_CENTER,
+    size: 'small',
+    width: 'fit-content',
+  },
+  button: {
+    settings: {
+      buttonText: 'Click Me',
+      url: '',
+      rel: false,
+      target: false,
+    },
+    design: {
+      activeButton: 0,
+      borderRadius: 0,
+      borderWidth: 0,
+      padding: 12,
+      background: COLORS.color8,
+      color: COLORS.color1,
+      borderColor: COLORS.color8,
+    },
+  },
 };
