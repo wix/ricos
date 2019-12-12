@@ -19,9 +19,9 @@ export const simplePubsub = initialState => {
     listeners[key] = listeners[key].filter(listener => listener !== callback);
   };
 
-  // If unsubscribe is called on componentWillUnmount, the state.visibleBlock key is null
+  // If unsubscribe is called on componentWillUnmount, the state.focusedBlock key is null
   // so, the return value is used for unsubscribe
-  const subscribeOnBlock = ({ key, blockKey = state.visibleBlock, callback }) => {
+  const subscribeOnBlock = ({ key, blockKey = state.focusedBlock, callback }) => {
     return subscribe(blockHandlerKey(key, blockKey), callback);
   };
 
@@ -68,17 +68,17 @@ export const simplePubsub = initialState => {
     _setSingle(blockHandlerKey(key, blockKey), item);
   };
 
-  const setBlockData = ({ key, blockKey = state.visibleBlock, item }) => {
+  const setBlockData = ({ key, blockKey = state.focusedBlock, item }) => {
     _setSingle(blockHandlerKey(key, blockKey), item);
   };
 
   const get = key => state[key];
 
-  const getBlockHandler = (key, blockKey = state.visibleBlock) => {
+  const getBlockHandler = (key, blockKey = state.focusedBlock) => {
     return state[blockHandlerKey(key, blockKey)];
   };
 
-  const getBlockData = ({ key, blockKey = state.visibleBlock }) => {
+  const getBlockData = ({ key, blockKey = state.focusedBlock }) => {
     return state[blockHandlerKey(key, blockKey)];
   };
 

@@ -59,6 +59,7 @@ export const GALLERY_SETTINGS = {
   TITLE: 'galleryImageTitleInput',
   VIEWER_IMAGE: 'image-item',
   SELECT_ALL: 'galleryItemsSortableSelectAll',
+  DESELECT: 'galleryItemsSortableDeselectAll',
   DELETE: 'galleryItemsSortableDelete',
   UPLOAD: 'galleryItemsSortableFileInputTop',
 };
