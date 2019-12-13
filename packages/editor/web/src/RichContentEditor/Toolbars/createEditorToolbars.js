@@ -135,7 +135,7 @@ const createEditorToolbars = ({
           uiSettings,
           relValue,
           isMobile,
-          helpers,
+          helpers: { ...helpers, toolbarName: name },
           config,
           pubsub,
           locale,

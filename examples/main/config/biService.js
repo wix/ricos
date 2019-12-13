@@ -44,22 +44,22 @@ export default () => {
 	return {
 		onPluginAdd: (plugin_id, entry_point) => {
 			biLogSafe(biLog => {
-				biLog("onPluginAdd", { plugin_id, entry_point });
+				biLog("addPlugin", { plugin_id, entry_point });
 			})
 		},
 		onPluginDelete: (plugin_id) => {
 			biLogSafe(biLog => {
-				biLog("onPluginDelete", { plugin_id });
+				biLog("deletePlugin", { plugin_id });
 			})
 		},
-		onPluginChange: (plugin_id, changeObj) => {
+		onPluginChange: (plugin_id, { from, to }) => {
 			biLogSafe(biLog => {
-				biLog("onPluginChange", { plugin_id, changeObj });
+				biLog("changePlugin", { plugin_id, value: { from, to } });
 			})
 		},
 		onPublish: (text) => {
 			biLogSafe(biLog => {
-				biLog("onPublish", { text });
+				biLog("publishPost", { text });
 			})
 		},
 	}

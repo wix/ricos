@@ -231,18 +231,19 @@ class RichContentEditor extends Component {
     return element && element.querySelector('*[tabindex="0"]');
   }
 
-  calculateDiff = (prevState, newState) => {
-    const blocks = state =>
-      state
-        .getCurrentContent()
-        .getBlocksAsArray()
-        .map(block => block.type);
+  calculateDiff = async (prevState, newState) => {
+    const blocks = state => state.getCurrentContent().getBlocksAsArray();
     const onlyRelevant = blocksArr =>
-      blocksArr.filter(type => type !== 'unstyled' && type !== 'atomic');
+      blocksArr.filter(block => block.type !== 'unstyled' && block.type !== 'atomic');
 
     const entities = state => {
       return Object.values(convertToRaw(state.getCurrentContent()).entityMap).map(
-        entity => entity.type
+        (value, index) => {
+          return {
+            ...value,
+            key: index,
+          };
+        }
       );
     };
 
@@ -250,22 +251,30 @@ class RichContentEditor extends Component {
       blocks.reduce((countArray, curr) => {
         return {
           ...countArray,
-          [curr]: countArray[curr] !== null ? 1 : countArray[curr] + 1,
+          [curr.key]: curr,
         };
       }, {});
 
     const beforePlugins = reduce(onlyRelevant(blocks(prevState)).concat(entities(prevState)));
     const afterPlugins = reduce(onlyRelevant(blocks(newState)).concat(entities(newState)));
 
-    const { helpers: { biCallbacks: { onPluginDelete = () => false } = {} } = {} } = this.props;
-    if (onPluginDelete) {
-      Object.keys(beforePlugins).forEach(type => {
-        if (afterPlugins[type] === undefined || afterPlugins[type] < beforePlugins[type]) {
-          onPluginDelete(type);
-        }
-      });
-    }
-    return beforePlugins;
+    const {
+      helpers: {
+        biCallbacks: { onPluginDelete = () => false, onPluginChange = () => false } = {},
+      } = {},
+    } = this.props;
+
+    Object.keys(beforePlugins).forEach(key => {
+      const type = beforePlugins[key].type;
+      if (afterPlugins[key] === undefined) {
+        onPluginDelete(type);
+      } else {
+        const before = beforePlugins[key];
+        const after = afterPlugins[key];
+        if (JSON.stringify(before) !== JSON.stringify(after))
+          onPluginChange(type, { from: before, to: after });
+      }
+    });
   };
 
   updateEditorState = editorState => {
