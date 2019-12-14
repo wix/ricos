@@ -1,5 +1,5 @@
-// import webBiLogger from '@wix/web-bi-logger';
-// import initSchemaLogger from '@wix/bi-logger-rich-content'; //We need to create this one
+//import webBiLogger from '@wix/web-bi-logger';
+//import initSchemaLogger from '@wix/bi-logger-rich-editor'; //We need to create this one
 
 const webBiLogger = ''; //DUMMY, needs to be removed
 const initSchemaLogger = () => () => true; //DUMMY, needs to be removed
@@ -40,7 +40,7 @@ export const debugBiLoggers = () => {
 //This will be the final BI handler.
 //TODO: Change event names according to their future creationg
 //TODO: Decide params & change them here accordingly
-export default () => {
+export const biLoggers = () => {
 	return {
 		onPluginAdd: (plugin_id, entry_point) => {
 			biLogSafe(biLog => {

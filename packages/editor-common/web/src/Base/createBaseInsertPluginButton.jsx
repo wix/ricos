@@ -22,7 +22,7 @@ export default ({ blockType, button, helpers, pubsub, settings, t, isMobile }) =
       this.onPluginAdd = this.getOnPluginAdd(helpers);
     }
 
-    getOnPluginAdd = ({ biCallbacks: { onPluginAdd = () => false }, toolbarName }) => {
+    getOnPluginAdd = ({ activityCallbacks: { onPluginAdd = () => false }, toolbarName }) => {
       return () => onPluginAdd(blockType, toolbarName);
     };
 

@@ -8,6 +8,7 @@ import * as Plugins from './EditorPlugins';
 import ModalsMap from './ModalsMap';
 import theme from '../theme/theme'; // must import after custom styles
 import { debugBiLoggers } from '../../config/biService';
+import WrapWithCallbacks from '../../config/WrapWithCallbacks';
 
 const modalStyleDefaults = {
   content: {
@@ -50,7 +51,6 @@ export default class Editor extends PureComponent {
       }
     };
     this.helpers = {
-      biCallbacks: { ...debugBiLoggers() },
       onFilesChange: (files, updateEntity) => mockUpload(files, updateEntity),
       // handleFileSelection: (index, multiple, updateEntity, removeEntity) => {
       //   const count = multiple ? [1,2,3] : [1];
@@ -162,25 +162,29 @@ export default class Editor extends PureComponent {
             <TextToolbar />
           </div>
         )}
-        <RichContentEditor
-          placeholder={'Add some text!'}
-          ref={editor => (this.editor = editor)}
-          onChange={this.handleChange}
-          helpers={this.helpers}
-          plugins={Plugins.editorPlugins}
-          config={Plugins.config}
-          editorState={this.props.editorState}
-          initialState={this.props.initialState}
-          isMobile={this.props.isMobile}
-          textToolbarType={textToolbarType}
-          theme={theme}
-          editorKey="random-editorKey-ssr"
-          anchorTarget={anchorTarget}
-          relValue={relValue}
-          locale={this.props.locale}
-          localeResource={this.props.localeResource}
-        // siteDomain="https://www.wix.com"
-        />
+        <WrapWithCallbacks
+          container="main-example"
+          {...debugBiLoggers()}>
+          <RichContentEditor
+            placeholder={'Add some text!'}
+            ref={editor => (this.editor = editor)}
+            onChange={this.handleChange}
+            helpers={this.helpers}
+            plugins={Plugins.editorPlugins}
+            config={Plugins.config}
+            editorState={this.props.editorState}
+            initialState={this.props.initialState}
+            isMobile={this.props.isMobile}
+            textToolbarType={textToolbarType}
+            theme={theme}
+            editorKey="random-editorKey-ssr"
+            anchorTarget={anchorTarget}
+            relValue={relValue}
+            locale={this.props.locale}
+            localeResource={this.props.localeResource}
+          // siteDomain="https://www.wix.com"
+          />
+        </WrapWithCallbacks>
         <ReactModal
           isOpen={this.state.showModal}
           contentLabel="External Modal Example"

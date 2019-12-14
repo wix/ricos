@@ -260,7 +260,7 @@ class RichContentEditor extends Component {
 
     const {
       helpers: {
-        biCallbacks: { onPluginDelete = () => false, onPluginChange = () => false } = {},
+        activityCallbacks: { onPluginDelete = () => false, onPluginChange = () => false } = {},
       } = {},
     } = this.props;
 
