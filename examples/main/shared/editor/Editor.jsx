@@ -163,7 +163,6 @@ export default class Editor extends PureComponent {
           </div>
         )}
         <WrapWithCallbacks
-          container="main-example"
           {...debugBiLoggers()}>
           <RichContentEditor
             placeholder={'Add some text!'}
