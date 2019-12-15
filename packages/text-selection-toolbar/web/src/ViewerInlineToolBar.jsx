@@ -23,12 +23,7 @@ export default class ViewerInlineToolBar extends React.Component {
   }
   getOptionButton = (action, option) => {
     return (
-      <button
-        id={`viewer-toolbar-${option}`}
-        key={option}
-        className={style.option}
-        onClick={action}
-      >
+      <button key={option} className={style.option} onClick={action}>
         {option}
       </button>
     );
@@ -58,7 +53,6 @@ export default class ViewerInlineToolBar extends React.Component {
           left: x - left + width * 0.5,
           position: 'absolute',
         }}
-        id="viewer-toolbar"
       >
         {this.getToolbarOptions()}
       </div>

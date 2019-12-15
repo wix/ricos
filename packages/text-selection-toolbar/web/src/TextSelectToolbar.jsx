@@ -10,8 +10,8 @@ export default class TextSelectToolbar extends React.Component {
   componentDidMount() {
     const { id } = this.props;
     const specifiedElement = document.getElementById(id);
-    specifiedElement.addEventListener('mouseup', e => {
-      !e.target.id.includes('viewer-toolbar') && this.getSelectionText();
+    specifiedElement.addEventListener('mouseup', () => {
+      this.getSelectionText();
     });
     document.addEventListener('click', e => {
       if (!specifiedElement.contains(e.target)) {
@@ -42,7 +42,6 @@ export default class TextSelectToolbar extends React.Component {
     return selectedText !== '' ? (
       <ToolBar
         selectedText={selectedText}
-        id="viewer-toolbar"
         options={[TWITTER]}
         selectionRect={selectionRect}
         elementId={id}

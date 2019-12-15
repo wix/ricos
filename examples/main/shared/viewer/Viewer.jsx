@@ -44,7 +44,7 @@ export default class Viewer extends PureComponent {
   render() {
     const { expendModeIsOpen, expandModeIndex } = this.state;
     return (
-      <div id="rich-content-viewer" className="viewer">
+      <div className="viewer">
         <RichContentViewer
           helpers={this.helpers}
           typeMappers={Plugins.typeMappers}
