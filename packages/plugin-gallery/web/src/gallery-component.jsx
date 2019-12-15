@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { isEqual } from 'lodash';
 import { Context } from 'wix-rich-content-common';
 import GalleryViewer from './gallery-viewer';
-import { getDefault } from './constants';
+import { DEFAULTS } from './constants';
 
 //eslint-disable-next-line no-unused-vars
 const EMPTY_SMALL_PLACEHOLDER =
@@ -34,8 +34,7 @@ class GalleryComponent extends PureComponent {
 
   stateFromProps = props => {
     const items = props.componentData.items || []; // || DEFAULTS.items;
-    const defaults = getDefault();
-    const styles = Object.assign(defaults.styles, props.componentData.styles || {});
+    const styles = Object.assign(DEFAULTS.styles, props.componentData.styles || {});
     const isLoading = (props.componentState && props.componentState.isLoading) || 0;
     const state = {
       items,
@@ -176,4 +175,4 @@ GalleryComponent.propTypes = {
 
 GalleryComponent.contextType = Context.type;
 
-export { GalleryComponent as Component, getDefault };
+export { GalleryComponent as Component, DEFAULTS };
