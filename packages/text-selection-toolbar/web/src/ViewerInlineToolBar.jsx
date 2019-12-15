@@ -1,10 +1,11 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { TWITTER } from './toolbarOptions';
+import { TWEET_ON_TWITTER_URL } from '../../../common/web/src/consts';
 import * as style from './toolBar.scss';
 
 function handleTweetClick(selectedText) {
-  window.open('https://twitter.com/intent/tweet?text=' + encodeURI(selectedText));
+  window.open(TWEET_ON_TWITTER_URL + encodeURI(selectedText));
 }
 
 const toolbarOptionsActions = {
@@ -14,10 +15,11 @@ const toolbarOptionsActions = {
   },
 };
 
-export default class ToolBar extends React.Component {
+export default class ViewerInlineToolBar extends React.Component {
   constructor(props) {
     super(props);
-    this.viewerRect = document.getElementById('rich-content-viewer').getBoundingClientRect();
+    const { elementId } = props;
+    this.viewerRect = document.getElementById(elementId).getBoundingClientRect();
   }
   getOptionButton = (action, option) => {
     return (
@@ -64,8 +66,9 @@ export default class ToolBar extends React.Component {
   }
 }
 
-ToolBar.propTypes = {
+ViewerInlineToolBar.propTypes = {
   options: PropTypes.array.isRequired,
   selectedText: PropTypes.string.isRequired,
   selectionRect: PropTypes.object.isRequired,
+  elementId: PropTypes.string.isRequired,
 };

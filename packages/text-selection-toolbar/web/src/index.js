@@ -1,3 +1,3 @@
-import SelectedText from './SelectedText.jsx';
-import ToolBar from './ToolBar.jsx';
-export { SelectedText, ToolBar };
+import TextSelectToolbar from './TextSelectToolbar.jsx';
+import ViewerInlineToolBar from './ViewerInlineToolBar.jsx';
+export { TextSelectToolbar, ViewerInlineToolBar };

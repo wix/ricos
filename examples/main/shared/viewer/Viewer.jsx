@@ -7,7 +7,7 @@ import * as Plugins from './ViewerPlugins';
 import theme from '../theme/theme'; // must import after custom styles
 import getImagesData from 'wix-rich-content-fullscreen/src/lib/getImagesData';
 import Fullscreen from 'wix-rich-content-fullscreen';
-import { SelectedText, ToolBar } from 'wix-rich-content-text-selection-toolbar';
+import { TextSelectToolbar, ViewerInlineToolBar } from 'wix-rich-content-text-selection-toolbar';
 
 const anchorTarget = '_top';
 const relValue = 'noreferrer';
@@ -67,7 +67,7 @@ export default class Viewer extends PureComponent {
             onClose={() => this.setState({ expendModeIsOpen: false })}
             index={expandModeIndex}
           />,
-          <SelectedText id={'rich-content-viewer'} ToolBar={ToolBar} />,
+          <TextSelectToolbar id={'rich-content-viewer'} ToolBar={ViewerInlineToolBar} />,
         ]}
       </div>
     );

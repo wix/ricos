@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { TWITTER } from './toolbarOptions';
 
-export default class SelectedText extends React.Component {
+export default class TextSelectToolbar extends React.Component {
   constructor(props) {
     super(props);
     this.state = { selectedText: '' };
@@ -28,9 +28,6 @@ export default class SelectedText extends React.Component {
       selection = window.getSelection();
       text = selection.toString();
     }
-    // else if (document.selection && document.selection.type !== 'Control') {
-    //   text = document.selection.createRange().text;
-    // }
     if (selectedText !== text) {
       const selectionRect = selection.getRangeAt(0).getBoundingClientRect();
       this.setState({ selectedText: text, selectionRect });
@@ -40,7 +37,7 @@ export default class SelectedText extends React.Component {
   };
 
   render() {
-    const { ToolBar } = this.props;
+    const { ToolBar, id } = this.props;
     const { selectedText, selectionRect } = this.state;
     return selectedText !== '' ? (
       <ToolBar
@@ -48,6 +45,7 @@ export default class SelectedText extends React.Component {
         id="viewer-toolbar"
         options={[TWITTER]}
         selectionRect={selectionRect}
+        elementId={id}
       />
     ) : (
       <div />
@@ -55,7 +53,7 @@ export default class SelectedText extends React.Component {
   }
 }
 
-SelectedText.propTypes = {
+TextSelectToolbar.propTypes = {
   id: PropTypes.string.isRequired,
   ToolBar: PropTypes.any.isRequired,
 };

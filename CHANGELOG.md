@@ -28,7 +28,7 @@
   - [#507](https://github.com/wix-incubator/rich-content/pull/507) support all video platform urls supported by `react-player`
 - `soundcloud`
   - [#507](https://github.com/wix-incubator/rich-content/pull/507) support all audio platform urls supported by `react-player`
-- `viewer-toolbar`
+- `text-selection-toolbar`
   - [#523](https://github.com/wix-incubator/rich-content/pull/523) create viewer toolbar with tweet option
 ### :bug: Bug Fix
 - `examples/viewer-ssr`

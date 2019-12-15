@@ -18,3 +18,5 @@ export const BLOCK_TYPES = [
   'code-block',
   'unstyled',
 ];
+
+export const TWEET_ON_TWITTER_URL = 'https://twitter.com/intent/tweet?text=';
