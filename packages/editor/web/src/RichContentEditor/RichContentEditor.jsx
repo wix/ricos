@@ -122,13 +122,7 @@ class RichContentEditor extends Component {
     } = this.props;
 
     const { theme } = this.state;
-    const {
-      pluginInstances,
-      pluginButtons,
-      pluginTextButtons,
-      pubsubs,
-      pluginStyleFns,
-    } = createPlugins({
+    const { pluginInstances, pluginButtons, pluginTextButtons, pluginStyleFns } = createPlugins({
       plugins,
       config,
       helpers,
@@ -145,7 +139,6 @@ class RichContentEditor extends Component {
     this.initEditorToolbars(pluginButtons, pluginTextButtons);
     this.pluginKeyBindings = initPluginKeyBindings(pluginTextButtons);
     this.plugins = [...pluginInstances, ...Object.values(this.toolbars)];
-    this.subscriberPubsubs = pubsubs || [];
     this.customStyleFn = combineStyleFns([...pluginStyleFns, customStyleFn]);
   }
 
