@@ -1,0 +1,336 @@
+{
+  "$id": "http://path/to/schema.json",
+  "type": "object",
+  "properties": {
+    "items": {
+      "$id": "/properties/items",
+      "type": "array",
+      "items": {
+        "$id": "/properties/items/items",
+        "type": "object",
+        "properties": {
+          "metadata": {
+            "$id": "/properties/items/items/properties/metadata",
+            "type": "object",
+            "properties": {
+              "height": {
+                "$id": "/properties/items/items/properties/metadata/properties/height",
+                "type": "integer",
+                "title": "The Height Schema ",
+                "default": 0,
+                "examples": [3744]
+              },
+              "width": {
+                "$id": "/properties/items/items/properties/metadata/properties/width",
+                "type": "integer",
+                "title": "The Width Schema ",
+                "default": 0,
+                "examples": [5616]
+              },
+              "processedByConsumer": {
+                "$id": "/properties/items/items/properties/metadata/properties/processedByConsumer",
+                "type": "boolean",
+                "title": "The Processedbyconsumer Schema ",
+                "default": false,
+                "examples": [true]
+              },
+              "title": {
+                "$id": "/properties/items/items/properties/metadata/properties/title",
+                "type": "string",
+                "title": "The Title Schema ",
+                "default": "",
+                "examples": ["alt1"]
+              }
+            }
+          },
+          "itemId": {
+            "$id": "/properties/items/items/properties/itemId",
+            "type": "string",
+            "title": "The Itemid Schema ",
+            "default": "",
+            "examples": ["fdc7334a437c6d0a889a7e4520b49baf"]
+          },
+          "url": {
+            "$id": "/properties/items/items/properties/url",
+            "type": "string",
+            "title": "The Url Schema ",
+            "default": "",
+            "examples": ["8bb438_d843f0485fcb4791b160a03e5906bd29.jpg"]
+          },
+          "selected": {
+            "$id": "/properties/items/items/properties/selected",
+            "type": "boolean",
+            "title": "The Selected Schema ",
+            "default": false,
+            "examples": [false]
+          }
+        }
+      }
+    },
+    "styles": {
+      "$id": "/properties/styles",
+      "type": "object",
+      "properties": {
+        "galleryLayout": {
+          "$id": "/properties/styles/properties/galleryLayout",
+          "type": "integer",
+          "title": "The Gallerylayout Schema ",
+          "default": 0,
+          "examples": [1]
+        },
+        "gallerySizeType": {
+          "$id": "/properties/styles/properties/gallerySizeType",
+          "type": "string",
+          "title": "The Gallerysizetype Schema ",
+          "default": "",
+          "examples": ["px"]
+        },
+        "gallerySizePx": {
+          "$id": "/properties/styles/properties/gallerySizePx",
+          "type": "integer",
+          "title": "The Gallerysizepx Schema ",
+          "default": 0,
+          "examples": [213]
+        },
+        "oneRow": {
+          "$id": "/properties/styles/properties/oneRow",
+          "type": "boolean",
+          "title": "The Onerow Schema ",
+          "default": false,
+          "examples": [false]
+        },
+        "cubeRatio": {
+          "$id": "/properties/styles/properties/cubeRatio",
+          "type": ["number", "null"],
+          "title": "The Cuberatio Schema",
+          "default": 0,
+          "examples": [1]
+        },
+        "galleryThumbnailsAlignment": {
+          "$id": "/properties/styles/properties/galleryThumbnailsAlignment",
+          "type": "string",
+          "title": "The Gallerythumbnailsalignment Schema ",
+          "default": "",
+          "examples": ["bottom"]
+        },
+        "isVertical": {
+          "$id": "/properties/styles/properties/isVertical",
+          "type": "boolean",
+          "title": "The Isvertical Schema ",
+          "default": false,
+          "examples": [false]
+        },
+        "numberOfImagesPerRow": {
+          "$id": "/properties/styles/properties/numberOfImagesPerRow",
+          "type": ["integer", "null"],
+          "title": "The Numberofimagesperrow Schema ",
+          "default": 0,
+          "examples": [false]
+        },
+        "imageMargin": {
+          "$id": "/properties/styles/properties/imageMargin",
+          "type": "integer",
+          "title": "The Imagemargin Schema ",
+          "default": 0,
+          "examples": [6]
+        },
+        "thumbnailSpacings": {
+          "$id": "/properties/styles/properties/thumbnailSpacings",
+          "type": "integer",
+          "title": "The Thumbnailspacings Schema ",
+          "default": 0,
+          "examples": [0]
+        },
+        "cubeType": {
+          "$id": "/properties/styles/properties/cubeType",
+          "type": "string",
+          "title": "The Cubetype Schema ",
+          "default": "",
+          "examples": ["fill"]
+        },
+        "enableInfiniteScroll": {
+          "$id": "/properties/styles/properties/enableInfiniteScroll",
+          "type": "boolean",
+          "title": "The Enableinfinitescroll Schema ",
+          "default": false,
+          "examples": [true]
+        },
+        "titlePlacement": {
+          "$id": "/properties/styles/properties/titlePlacement",
+          "type": "string",
+          "title": "The Titleplacement Schema ",
+          "default": "",
+          "examples": ["SHOW_ON_HOVER"]
+        },
+        "allowHover": {
+          "$id": "/properties/styles/properties/allowHover",
+          "type": "boolean",
+          "title": "The Allowhover Schema ",
+          "default": false,
+          "examples": [false]
+        },
+        "itemClick": {
+          "$id": "/properties/styles/properties/itemClick",
+          "type": "string",
+          "title": "The Itemclick Schema ",
+          "default": "",
+          "examples": ["link"]
+        },
+        "showArrows": {
+          "$id": "/properties/styles/properties/showArrows",
+          "type": "boolean",
+          "title": "The Showarrows Schema ",
+          "default": false,
+          "examples": [false]
+        },
+        "gridStyle": {
+          "$id": "/properties/styles/properties/gridStyle",
+          "type": "integer",
+          "title": "The Gridstyle Schema ",
+          "default": 0,
+          "examples": [1]
+        },
+        "loveButton": {
+          "$id": "/properties/styles/properties/loveButton",
+          "type": "boolean",
+          "title": "The Lovebutton Schema ",
+          "default": false,
+          "examples": [false]
+        },
+        "allowSocial": {
+          "$id": "/properties/styles/properties/allowSocial",
+          "type": "boolean",
+          "title": "The Allowsocial Schema ",
+          "default": false,
+          "examples": [false]
+        },
+        "allowDownload": {
+          "$id": "/properties/styles/properties/allowDownload",
+          "type": "boolean",
+          "title": "The Allowdownload Schema ",
+          "default": false,
+          "examples": [false]
+        },
+        "cubeImages": {
+          "$id": "/properties/styles/properties/cubeImages",
+          "type": "boolean",
+          "title": "The Cubeimages Schema ",
+          "default": false,
+          "examples": [false]
+        },
+        "groupSize": {
+          "$id": "/properties/styles/properties/groupSize",
+          "type": "integer",
+          "title": "The Groupsize Schema ",
+          "default": 0,
+          "examples": [1]
+        },
+        "groupTypes": {
+          "$id": "/properties/styles/properties/groupTypes",
+          "type": "string",
+          "title": "The Grouptypes Schema ",
+          "default": "",
+          "examples": ["1"]
+        },
+        "fixedColumns": {
+          "$id": "/properties/styles/properties/fixedColumns",
+          "type": "integer",
+          "title": "The Fixedcolumns Schema ",
+          "default": 0,
+          "examples": [0]
+        },
+        "hasThumbnails": {
+          "$id": "/properties/styles/properties/hasThumbnails",
+          "type": "boolean",
+          "title": "The Hasthumbnails Schema ",
+          "default": false,
+          "examples": [false]
+        },
+        "enableScroll": {
+          "$id": "/properties/styles/properties/enableScroll",
+          "type": "boolean",
+          "title": "The Enablescroll Schema ",
+          "default": false,
+          "examples": [true]
+        },
+        "isGrid": {
+          "$id": "/properties/styles/properties/isGrid",
+          "type": "boolean",
+          "title": "The Isgrid Schema ",
+          "default": false,
+          "examples": [false]
+        },
+        "isSlider": {
+          "$id": "/properties/styles/properties/isSlider",
+          "type": "boolean",
+          "title": "The Isslider Schema ",
+          "default": false,
+          "examples": [false]
+        },
+        "isColumns": {
+          "$id": "/properties/styles/properties/isColumns",
+          "type": "boolean",
+          "title": "The Iscolumns Schema ",
+          "default": false,
+          "examples": [false]
+        },
+        "isSlideshow": {
+          "$id": "/properties/styles/properties/isSlideshow",
+          "type": "boolean",
+          "title": "The Isslideshow Schema ",
+          "default": false,
+          "examples": [false]
+        },
+        "cropOnlyFill": {
+          "$id": "/properties/styles/properties/cropOnlyFill",
+          "type": "boolean",
+          "title": "The Croponlyfill Schema ",
+          "default": false,
+          "examples": [false]
+        }
+      }
+    },
+    "config": {
+      "$id": "/properties/config",
+      "type": "object",
+      "properties": {
+        "alignment": {
+          "$id": "/properties/config/properties/alignment",
+          "type": "string",
+          "title": "The Alignment Schema ",
+          "default": "",
+          "examples": ["left"]
+        },
+        "size": {
+          "$id": "/properties/config/properties/size",
+          "type": "string",
+          "title": "The Size Schema ",
+          "default": "",
+          "examples": ["small"]
+        },
+        "layout": {
+          "$id": "/properties/config/properties/layout",
+          "type": "string",
+          "title": "The Layout Schema ",
+          "default": "",
+          "examples": ["small"]
+        },
+        "spacing": {
+          "$id": "/properties/config/properties/spacing",
+          "type": "integer",
+          "title": "The Spacing Schema ",
+          "default": 0,
+          "examples": [0]
+        },
+        "key": {
+          "$id": "/properties/config/properties/key",
+          "type": "string",
+          "title": "The Key Schema ",
+          "default": "",
+          "examples": ["4bp6l"]
+        }
+      }
+    }
+  },
+  "required": ["items"]
+}

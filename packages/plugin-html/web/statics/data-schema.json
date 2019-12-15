@@ -1,0 +1,49 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://wix-rich-content/html-content-data-schema.json",
+  "type": "object",
+  "properties": {
+    "src": {
+      "$id": "/properties/src",
+      "type": "string",
+      "title": "source URL",
+      "default": "",
+      "examples": ["https://wix.com"]
+    },
+    "srcType": {
+      "$id": "/properties/srcType",
+      "type": "string",
+      "title": "source type",
+      "default": "html",
+      "examples": ["url", "html"]
+    },
+    "config": {
+      "$id": "/properties/config",
+      "type": "object",
+      "properties": {
+        "width": {
+          "$id": "/properties/config/properties/width",
+          "type": "integer",
+          "title": "frame width",
+          "default": 740,
+          "examples": [500]
+        },
+        "height": {
+          "$id": "/properties/config/properties/height",
+          "type": "integer",
+          "title": "frame height",
+          "default": 242,
+          "examples": [200]
+        },
+        "safe": {
+          "$id": "/properties/config/properties/safe",
+          "type": "boolean",
+          "title": "source safety",
+          "default": false,
+          "examples": [true]
+        }
+      }
+    }
+  },
+  "required": ["src"]
+}

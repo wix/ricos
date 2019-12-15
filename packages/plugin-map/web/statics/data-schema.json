@@ -1,0 +1,43 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://wix-rich-content/map-content-data-schema.json",
+  "type": "object",
+  "properties": {
+    "zoom": {
+      "$id": "/properties/zoom",
+      "type": "integer",
+      "title": "zoom value",
+      "default": "8"
+    },
+    "config": {
+      "$id": "/properties/config",
+      "type": "object",
+      "properties": {
+        "size": {
+          "$id": "/properties/config/properties/size",
+          "type": "string",
+          "title": "Size",
+          "default": "large",
+          "examples": [
+            "medium",
+            "small",
+            "large"
+          ]
+        },
+        "alignment": {
+          "$id": "/properties/config/properties/alignment",
+          "type": "string",
+          "title": "The Alignment Schema ",
+          "default": "center",
+          "examples": [
+            "left",
+            "right",
+            "center"
+          ]
+        }
+      }
+    }
+  },
+  "required": [
+  ]
+}

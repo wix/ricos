@@ -7,7 +7,6 @@ import {
   isValidUrl,
   validate,
   ViewportRenderer,
-  pluginHtmlSchema,
 } from 'wix-rich-content-common';
 
 import {
@@ -17,6 +16,7 @@ import {
   INIT_HEIGHT,
   INIT_WIDTH,
 } from './constants';
+import schema from '../statics/data-schema.json';
 import IframeHtml from './IframeHtml';
 import IframeUrl from './IframeUrl';
 import htmlComponentStyles from '../statics/styles/HtmlComponent.scss';
@@ -92,7 +92,7 @@ class HtmlComponent extends Component {
     this.styles =
       this.styles || mergeStyles({ styles: htmlComponentStyles, theme: this.context.theme });
     const { props } = this;
-    validate(props.componentData, pluginHtmlSchema);
+    validate(props.componentData, schema);
     const {
       blockProps,
       componentData: { src, srcType, config: { width: currentWidth, height: currentHeight } = {} },

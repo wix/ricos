@@ -1,25 +1,20 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {
-  mergeStyles,
-  validate,
-  Context,
-  ViewportRenderer,
-  pluginGiphySchema,
-} from 'wix-rich-content-common';
+import { mergeStyles, Context, validate, ViewportRenderer } from 'wix-rich-content-common';
 import { isEqual } from 'lodash';
+import schema from '../statics/data-schema.json';
 import styles from '../statics/styles/giphy-viewer.scss';
 import { GIPHY_TYPE, DEFAULT_RESOLUTION } from './constants';
 
 class GiphyViewer extends Component {
   constructor(props) {
     super(props);
-    validate(props.componentData, pluginGiphySchema);
+    validate(props.componentData, schema);
   }
 
   componentWillReceiveProps(nextProps) {
     if (!isEqual(nextProps.componentData, this.props.componentData)) {
-      validate(nextProps.componentData, pluginGiphySchema);
+      validate(nextProps.componentData, schema);
     }
   }
 

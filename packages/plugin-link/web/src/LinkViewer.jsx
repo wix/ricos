@@ -1,13 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {
-  normalizeUrl,
-  mergeStyles,
-  validate,
-  Context,
-  pluginLinkSchema,
-} from 'wix-rich-content-common';
+import { Context, normalizeUrl, mergeStyles, validate } from 'wix-rich-content-common';
 import { invoke, isEqual } from 'lodash';
+import schema from '../statics/data-schema.json';
 import styles from '../statics/link-viewer.scss';
 
 class LinkViewer extends Component {
@@ -22,13 +17,13 @@ class LinkViewer extends Component {
 
   constructor(props) {
     super(props);
-    validate(props.componentData, pluginLinkSchema);
+    validate(props.componentData, schema);
     this.state = { styles };
   }
 
   componentWillReceiveProps(nextProps) {
     if (!isEqual(nextProps.componentData, this.props.componentData)) {
-      validate(nextProps.componentData, pluginLinkSchema);
+      validate(nextProps.componentData, schema);
     }
   }
 

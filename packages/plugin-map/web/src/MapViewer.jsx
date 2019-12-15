@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import { withGoogleMap, GoogleMap, Marker, InfoWindow } from 'react-google-maps';
 import ReactGoogleMapLoader from 'react-google-maps-loader';
 import { isEqual } from 'lodash';
-import { validate, Context, ViewportRenderer, pluginMapSchema } from 'wix-rich-content-common';
+import { Context, validate, ViewportRenderer } from 'wix-rich-content-common';
+import schema from '../statics/data-schema.json';
 
 const GoogleMapWrapper = withGoogleMap(props => (
   <GoogleMap
@@ -39,12 +40,12 @@ export class MapViewer extends Component {
     this.state = {
       isMarkerTooltipRendered: true,
     };
-    validate(props.componentData, pluginMapSchema);
+    validate(props.componentData, schema);
   }
 
   componentWillReceiveProps(nextProps) {
     if (!isEqual(nextProps.componentData, this.props.componentData)) {
-      validate(nextProps.componentData, pluginMapSchema);
+      validate(nextProps.componentData, schema);
     }
   }
 

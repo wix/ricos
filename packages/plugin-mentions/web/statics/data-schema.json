@@ -1,0 +1,26 @@
+
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://wix-rich-content/mention-content-data-schema.json",
+  "type": "object",
+  "properties": {
+    "mention": {
+      "type": "object",
+      "title": "mention data",
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "name",
+          "examples": ["Mamtak"]
+        },
+        "slug": {
+          "type": "string",
+          "title": "mention slug",
+          "examples": ["mamtak"]
+        }
+      },
+      "required": ["name", "slug"]
+    }
+  },
+  "required": ["mention"]
+}
