@@ -47,6 +47,11 @@ export default ({ buttons, activeItem, onChange, tooltipTextKey }) =>
             styles.inlineToolbarDropdownButton_icon,
             theme && theme.inlineToolbarDropdownButton_icon
           ),
+          //eslint-disable-next-line camelcase
+          inlineToolbarButton_active: classNames(
+            styles.inlineToolbarButton_active,
+            theme && theme.inlineToolbarButton_active
+          ),
         },
       };
       this.styles = mergeStyles({ styles, theme: this.theme });
