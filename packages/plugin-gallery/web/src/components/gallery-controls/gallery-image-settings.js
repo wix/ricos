@@ -87,7 +87,7 @@ class ImageSettings extends Component {
     } = this.props;
 
     const { linkPanel } = uiSettings || {};
-    const { blankTargetToggleVisibilityFn, nofollowRelToggleVisibilityFn, linkPlaceHolder } =
+    const { blankTargetToggleVisibilityFn, nofollowRelToggleVisibilityFn, placeHolder } =
       linkPanel || {};
     const showTargetBlankCheckbox =
       blankTargetToggleVisibilityFn && blankTargetToggleVisibilityFn(anchorTarget);
@@ -229,7 +229,7 @@ class ImageSettings extends Component {
                     theme={theme}
                     t={t}
                     ariaProps={{ 'aria-labelledby': 'gallery_image_link_lbl' }}
-                    linkPlaceHolder={linkPlaceHolder}
+                    placeHolder={placeHolder}
                   />
                 </SettingsSection>
               </div>

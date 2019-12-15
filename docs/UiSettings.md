@@ -23,3 +23,10 @@ The `uiSettings` object exposes the following properties:
   This function determines the 'Add a nofollow tag' link panel checkbox visiblity.
 
   By default, its predicate is `relValue !== 'nofollow'`
+
+- `placeHolder` : 
+
+  This variable is an url place holder of type string
+
+  By default, its value is `"Enter a URL here"` translated by localization
+

@@ -94,8 +94,8 @@ class LinkPanel extends Component {
     return {
       type: 'url',
       className: textInputClassName,
-      placeholder: this.props.linkPlaceHolder
-        ? this.props.linkPlaceHolder
+      placeholder: this.props.placeHolder
+        ? this.props.placeHolder
         : this.props.t('LinkPanel_InputPlaceholder'),
       'data-hook': 'linkPanelInput',
       onBlur: () => this.setState({ showValidation: true }),
@@ -174,6 +174,6 @@ LinkPanel.propTypes = {
   dropDown: PropTypes.object,
   onEnter: PropTypes.func,
   onEscape: PropTypes.func,
-  linkPlaceHolder: PropTypes.string,
+  placeHolder: PropTypes.string,
 };
 export default LinkPanel;
