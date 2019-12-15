@@ -20,8 +20,12 @@ const modalStyleDefaults = {
 };
 const anchorTarget = '_blank';
 const relValue = 'nofollow';
+<<<<<<< HEAD
 const preview_img =
   'https://image.winudf.com/v2/image/Y29tLmJsYWNrYmFja2dyb3VuZHdhbGxwYXBlcnNpbWFnZXNfc2NyZWVuXzFfMTUwOTI1MjEyOV8wNzU/screen-1.jpg?fakeurl=1&type=.jpg';
+=======
+// const preview_img = 'https://i.pinimg.com/originals/b0/fc/18/b0fc18f7ad25cb3af09cc0905ecb39db.jpg';
+>>>>>>> [Editor,Loader] feat(loader with progress& localurl image) : loading image using progress loader works
 
 export default class Editor extends PureComponent {
   state = {};
