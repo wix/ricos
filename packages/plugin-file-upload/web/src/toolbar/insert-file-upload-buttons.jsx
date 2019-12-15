@@ -7,6 +7,7 @@ export default ({ helpers, settings, t }) => {
   return [
     {
       type: 'file',
+      multi: true,
       name: 'UploadFile',
       tooltipText: t('FileUploadInsertButton_tooltip'),
       Icon: icon,
