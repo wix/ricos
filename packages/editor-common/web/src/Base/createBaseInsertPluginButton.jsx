@@ -11,7 +11,17 @@ import styles from '../../statics/styles/toolbar-button.scss';
 /**
  * createBaseInsertPluginButton
  */
-export default ({ blockType, button, helpers, pubsub, settings, t, isMobile }) => {
+export default ({
+  blockType,
+  button,
+  helpers,
+  pubsub,
+  commonPubsub,
+  settings,
+  t,
+  isMobile,
+  pluginDefaults,
+}) => {
   class InsertPluginButton extends React.PureComponent {
     constructor(props) {
       super(props);
@@ -43,16 +53,13 @@ export default ({ blockType, button, helpers, pubsub, settings, t, isMobile }) =
       }
     };
 
-    createBlock = (data, shouldSetEditorState = false) => {
+    createBlock = (data, shouldSetEditorState = false, type = blockType, editorState) => {
       const { getEditorState, setEditorState, hidePopup } = this.props;
-      const contentState = getEditorState().getCurrentContent();
-      const contentStateWithEntity = contentState.createEntity(
-        blockType,
-        'IMMUTABLE',
-        cloneDeep(data)
-      );
+      const currentEditorState = editorState || getEditorState();
+      const contentState = currentEditorState.getCurrentContent();
+      const contentStateWithEntity = contentState.createEntity(type, 'IMMUTABLE', cloneDeep(data));
       const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
-      const newEditorState = AtomicBlockUtils.insertAtomicBlock(getEditorState(), entityKey, ' ');
+      const newEditorState = AtomicBlockUtils.insertAtomicBlock(currentEditorState, entityKey, ' ');
       if (hidePopup) {
         hidePopup();
       }
@@ -75,6 +82,18 @@ export default ({ blockType, button, helpers, pubsub, settings, t, isMobile }) =
       return { newBlock, newSelection, newEditorState };
     };
 
+    createBlockFromFiles = (files, editorState, data, type) => {
+      const { newBlock, newSelection, newEditorState } = this.createBlock(
+        data,
+        false,
+        type,
+        editorState
+      );
+      const state = { userSelectedFiles: { files } };
+      commonPubsub.set('initialState_' + newBlock.getKey(), state);
+      return { newEditorState, newSelection };
+    };
+
     onClick = event => {
       event.preventDefault();
       switch (button.type) {
@@ -94,10 +113,34 @@ export default ({ blockType, button, helpers, pubsub, settings, t, isMobile }) =
 
     handleFileChange = files => {
       if (files.length > 0) {
-        const { newBlock, newSelection, newEditorState } = this.createBlock(button.componentData);
-        const state = { userSelectedFiles: { files } };
-        pubsub.set('initialState_' + newBlock.getKey(), state);
-        this.props.setEditorState(EditorState.forceSelection(newEditorState, newSelection));
+        let editorState = this.props.getEditorState();
+        let selection;
+
+        const galleryType = Object.keys(pluginDefaults).find(key => key.includes('gallery'));
+        const galleryData = pluginDefaults[galleryType];
+
+        if (blockType === galleryType || (settings.shouldCreateGallery && files.length > 1)) {
+          const { newEditorState, newSelection } = this.createBlockFromFiles(
+            files,
+            editorState,
+            galleryData,
+            galleryType
+          );
+          editorState = newEditorState;
+          selection = newSelection;
+        } else {
+          files.forEach(file => {
+            const { newEditorState, newSelection } = this.createBlockFromFiles(
+              [file],
+              editorState,
+              button.componentData
+            );
+            editorState = newEditorState;
+            selection = selection || newSelection;
+          });
+        }
+
+        this.props.setEditorState(EditorState.forceSelection(editorState, selection));
       }
     };
 
@@ -210,6 +253,7 @@ export default ({ blockType, button, helpers, pubsub, settings, t, isMobile }) =
       const { name, Icon } = button;
       const { accept } = settings || {};
       const { styles } = this;
+
       return (
         <FileInput
           dataHook={`${button.name}_file_input`}

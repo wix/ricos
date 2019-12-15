@@ -36,6 +36,8 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
     onOverlayClick,
     onAtomicBlockFocus,
     disableRightClick,
+    commonPubsub,
+    pluginDefaults,
   } = config;
   const toolbarTheme = { ...getToolbarTheme(config.theme, 'plugin'), ...config.theme };
   const Toolbar =
@@ -67,9 +69,11 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
         button,
         helpers,
         pubsub,
+        commonPubsub,
         settings,
         t,
         isMobile,
+        pluginDefaults,
       }),
     }));
   const PluginComponent = config.component;
@@ -85,6 +89,7 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
       onOverlayClick,
       onAtomicBlockFocus,
       pubsub,
+      commonPubsub,
       settings,
       helpers,
       t,
@@ -133,7 +138,6 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
     InsertPluginButtons,
     InlineModals,
     TextButtonMapper,
-    pubsub,
     customStyleFn,
   };
 
