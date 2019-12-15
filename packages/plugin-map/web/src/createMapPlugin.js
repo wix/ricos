@@ -1,11 +1,22 @@
 import { createBasePlugin } from 'wix-rich-content-editor-common';
-import { MAP_TYPE } from './constants';
+import { MAP_TYPE, DEFAULTS } from './constants';
 import { MapViewer } from './MapViewer';
 import createToolbar from './toolbar';
 
 const createMapPlugin = (config = {}) => {
   const type = MAP_TYPE;
-  const { helpers, theme, t, [type]: settings = {}, getEditorBounds, isMobile, ...rest } = config;
+  const {
+    helpers,
+    theme,
+    t,
+    [type]: settings = {},
+    getEditorBounds,
+    isMobile,
+    pluginDefaults,
+    ...rest
+  } = config;
+
+  pluginDefaults[type] = DEFAULTS;
 
   return createBasePlugin({
     component: MapViewer,
@@ -24,6 +35,7 @@ const createMapPlugin = (config = {}) => {
     getEditorBounds,
     t,
     isMobile,
+    pluginDefaults,
     ...rest,
   });
 };
