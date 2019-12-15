@@ -103,7 +103,7 @@ let userButtonBorderColors = [...buttonDefaultPalette];
 
 const getLinkPanelDropDownConfig = () => {
   const getItems = () => {
-    casual.define('item', function() {
+    casual.define('item', function () {
       return {
         value: casual.url,
         label: casual.catch_phrase,
@@ -166,6 +166,7 @@ const uiSettings = {
     blankTargetToggleVisibilityFn: () => true,
     nofollowRelToggleVisibilityFn: () => true,
     dropDown: getLinkPanelDropDownConfig(),
+    linkPlaceHolder: "Here Here!!",
   },
   // disableRightClick: true,
 };
