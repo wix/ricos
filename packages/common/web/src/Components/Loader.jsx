@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { default as Context } from '../Utils/Context';
 import { mergeStyles } from '../Utils/mergeStyles';
 import styles from '../../statics/styles/loaders.rtlignore.scss';
 
-class Loader extends React.Component {
+class Loader extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
   get styles() {
     if (!this._styles) {
       const theme = this.context?.theme || this.props.theme;
@@ -14,17 +19,57 @@ class Loader extends React.Component {
     return this._styles;
   }
 
+  updateProgress = (progress, localUrl) => {
+    this.setState({ progress, localUrl });
+  };
+
+  componentDidMount() {
+    this.context?.helpers?.onProgressChange(this.updateProgress);
+  }
+
+  renderLocalUrl() {
+    return (
+      <div>
+        {this.state.localUrl && (
+          <div
+            className={classNames(this.props.overlayClassName, this.styles.preview_img)}
+            style={{
+              backgroundImage: `url(${this.state.localUrl})`,
+            }}
+          />
+        )}
+      </div>
+    );
+  }
+  renderProgress() {
+    return (
+      <div>
+        {this.state.progress && (
+          <div
+            className={classNames(this.props.loaderClassName, this.styles.progress, {
+              [this.styles[this.props.type]]: this.props.type,
+            })}
+          >
+            {this.state.progress + '%'}
+          </div>
+        )}
+      </div>
+    );
+  }
+
   render() {
     return (
       <div
         className={classNames(this.props.overlayClassName, this.styles.loaderOverlay)}
         data-hook="loader"
       >
+        {this.renderLocalUrl()}
         <div
           className={classNames(this.props.loaderClassName, this.styles.loader, {
             [this.styles[this.props.type]]: this.props.type,
           })}
         />
+        {this.renderProgress()}
       </div>
     );
   }
