@@ -13,9 +13,9 @@
     Click to see more.
   </summary>
   
-  ### :rocket: New Feature
+  ### :boom: Breaking Change
   - `text-color`
-    - [#520](https://github.com/wix-incubator/rich-content/pull/520) Color Picker- adding an option to change back to default color
+    - [#520](https://github.com/wix-incubator/rich-content/pull/520) color Picker- adding an option to change back to default color
   ### :bug: Bug Fix
   - `divider`
     - [#511](https://github.com/wix-incubator/rich-content/pull/511) divider's width set to 100% in editor&viewer when no initial state of width is given

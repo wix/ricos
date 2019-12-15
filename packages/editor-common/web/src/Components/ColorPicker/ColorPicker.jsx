@@ -96,7 +96,7 @@ class ColorPicker extends PureComponent {
       <div key={`add_color_button_${this.id}`} className={styles.colorPicker_add_color_button}>
         <button
           id={`add_color_button_${this.id}`}
-          className={styles.colorPicker_add_color_button_hidden}
+          className={styles.colorPicker_color_button_hidden}
           onClick={this.toggleCustomColorPicker}
         />
         <label
@@ -112,11 +112,12 @@ class ColorPicker extends PureComponent {
 
   renderResetColorButton = () => {
     const { styles } = this;
+    const { t } = this.props;
     return (
       <div key={`reset_color_button_${this.id}`} className={styles.colorPicker_reset_color_button}>
         <button
           id={`reset_color_button_${this.id}`}
-          className={styles.colorPicker_reset_color_button_hidden}
+          className={styles.colorPicker_color_button_hidden}
           onClick={this.resetColor}
         />
         <label
@@ -124,7 +125,7 @@ class ColorPicker extends PureComponent {
           className={styles.colorPicker_reset_color_label}
           htmlFor={`reset_color_button_${this.id}`}
         >
-          Set to Default
+          {t('ColorPicker_SetToDefault_ButtonLabel')}
         </label>
       </div>
     );

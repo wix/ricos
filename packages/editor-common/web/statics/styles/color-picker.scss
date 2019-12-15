@@ -80,15 +80,6 @@
   }
 }
 
-.colorPicker_add_color_button_hidden {
-  position: absolute;
-  opacity: 0;
-  width: 0.1px;
-  height: 0.1px;
-  overflow: hidden;
-  z-index: -1;
-}
-
 .colorPicker_add_color_button {
   @extend %button;
   display: inline-block;
@@ -105,7 +96,6 @@
 
 .colorPicker_buttons_container {
   justify-content: space-between;
-  display: flex;
   flex-direction: row;
   display: -webkit-flex;
   display: flex;
@@ -117,7 +107,7 @@
   }
 }
 
-.colorPicker_reset_color_button_hidden {
+.colorPicker_color_button_hidden {
   position: absolute;
   opacity: 0;
   width: 0.1px;
