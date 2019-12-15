@@ -8,7 +8,8 @@ import * as Plugins from './EditorPlugins';
 import ModalsMap from './ModalsMap';
 import theme from '../theme/theme'; // must import after custom styles
 import { debugBiLoggers } from '../../config/biService';
-import WrapWithCallbacks from '../../config/WrapWithCallbacks';
+//import WrapWithCallbacks from '../../config/WrapWithCallbacks';
+import { EditorBIWrapper } from '@wix/rich-content-bi';
 
 const modalStyleDefaults = {
   content: {
@@ -162,7 +163,10 @@ export default class Editor extends PureComponent {
             <TextToolbar />
           </div>
         )}
-        <WrapWithCallbacks
+        {/* <WrapWithCallbacks
+          {...debugBiLoggers()}> */}
+        <EditorBIWrapper
+          container={"examples-main"}
           {...debugBiLoggers()}>
           <RichContentEditor
             placeholder={'Add some text!'}
@@ -183,7 +187,8 @@ export default class Editor extends PureComponent {
             localeResource={this.props.localeResource}
           // siteDomain="https://www.wix.com"
           />
-        </WrapWithCallbacks>
+        </EditorBIWrapper>
+        {/* </WrapWithCallbacks> */}
         <ReactModal
           isOpen={this.state.showModal}
           contentLabel="External Modal Example"
