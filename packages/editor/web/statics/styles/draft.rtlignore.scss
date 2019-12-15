@@ -24,16 +24,12 @@
     }
 
     .DraftEditor-alignLeft .public-DraftStyleDefault-block {
-      /*!rtl:begin:ignore*/
       text-align: left;
-      /*!rtl:end:ignore*/
     }
 
     .DraftEditor-alignLeft .public-DraftEditorPlaceholder-root {
-      /*!rtl:begin:ignore*/
       left: 0;
       text-align: left;
-      /*!rtl:end:ignore*/
     }
 
     .DraftEditor-alignCenter .public-DraftStyleDefault-block {
@@ -47,51 +43,40 @@
     }
 
     .DraftEditor-alignRight .public-DraftStyleDefault-block {
-      /*!rtl:begin:ignore*/
       text-align: right;
-      /*!rtl:end:ignore*/
     }
 
     .DraftEditor-alignRight .public-DraftEditorPlaceholder-root {
-      /*!rtl:begin:ignore*/
       right: 0;
       text-align: right;
-      /*!rtl:end:ignore*/
     }
 
     .public-DraftStyleDefault-block {
       position: relative;
       white-space: pre-wrap;
-    }
-
-    .public-DraftStyleDefault-ltr {
-      /*!rtl:begin:ignore*/
-      direction: ltr;
-      text-align: left;
-      /*!rtl:end:ignore*/
-    }
-
-    .public-DraftStyleDefault-rtl {
-      /*!rtl:begin:ignore*/
-      direction: rtl;
-      text-align: right;
       @include phone {
         margin-right: 10px;
       }
-      /*!rtl:end:ignore*/
+    }
+
+    .public-DraftStyleDefault-ltr {
+      direction: ltr;
+      text-align: left;
+    }
+
+    .public-DraftStyleDefault-rtl {
+      direction: rtl;
+      text-align: right;
     }
 
     .public-DraftStyleDefault-listLTR {
-      /*!rtl:begin:ignore*/
       direction: ltr;
-      /*!rtl:end:ignore*/
+      margin-left: 40px;
     }
 
     .public-DraftStyleDefault-listRTL {
-      /*!rtl:begin:ignore*/
       direction: rtl;
       margin-right: 40px;
-      /*!rtl:end:ignore*/
     }
 
     .public-DraftStyleDefault-ol,
@@ -99,9 +84,6 @@
       margin: 0;
       padding: 0;
       direction: ltr;
-      & > * {
-        margin-left: 40px;
-      }
     }
   }
 }
