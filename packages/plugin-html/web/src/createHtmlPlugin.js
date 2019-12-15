@@ -1,11 +1,21 @@
 import createToolbar from './toolbar';
 import { createBasePlugin } from 'wix-rich-content-editor-common';
-import { Component } from './HtmlComponent';
+import { Component, DEFAULTS } from './HtmlComponent';
 import { HTML_TYPE } from './types';
 
 const createHtmlPlugin = (config = {}) => {
   const type = HTML_TYPE;
-  const { helpers, isMobile, t, [type]: settings = {}, getEditorBounds, ...rest } = config;
+  const {
+    helpers,
+    isMobile,
+    t,
+    [type]: settings = {},
+    getEditorBounds,
+    pluginDefaults,
+    ...rest
+  } = config;
+
+  pluginDefaults[type] = DEFAULTS;
 
   return createBasePlugin({
     onOverlayClick: ({ e, pubsub, componentData }) =>
@@ -24,6 +34,7 @@ const createHtmlPlugin = (config = {}) => {
     isMobile,
     t,
     getEditorBounds,
+    pluginDefaults,
     ...rest,
   });
 };

@@ -9,13 +9,7 @@ import {
   ViewportRenderer,
 } from 'wix-rich-content-common';
 
-import {
-  SRC_TYPE_HTML,
-  SRC_TYPE_URL,
-  DEFAULT_COMPONENT_DATA,
-  INIT_HEIGHT,
-  INIT_WIDTH,
-} from './constants';
+import { SRC_TYPE_HTML, SRC_TYPE_URL, DEFAULTS, INIT_HEIGHT, INIT_WIDTH } from './constants';
 import schema from '../statics/data-schema.json';
 import IframeHtml from './IframeHtml';
 import IframeUrl from './IframeUrl';
@@ -153,4 +147,4 @@ HtmlComponent.propTypes = {
   block: PropTypes.object,
 };
 
-export { HtmlComponent as Component, DEFAULT_COMPONENT_DATA as DEFAULTS };
+export { HtmlComponent as Component, DEFAULTS };

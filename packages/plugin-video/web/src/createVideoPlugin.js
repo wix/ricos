@@ -1,11 +1,13 @@
 import createToolbar from './toolbar';
-import { Component } from './video-component';
+import { Component, DEFAULTS } from './video-component';
 import { VIDEO_TYPE, VIDEO_TYPE_LEGACY } from './types';
 import { createBasePlugin } from 'wix-rich-content-editor-common';
 
 const createVideoPlugin = (config = {}) => {
   const type = VIDEO_TYPE;
-  const { helpers, t, [type]: settings = {}, isMobile, ...rest } = config;
+  const { helpers, t, [type]: settings = {}, isMobile, pluginDefaults, ...rest } = config;
+
+  pluginDefaults[type] = DEFAULTS;
 
   return createBasePlugin({
     component: Component,
@@ -22,6 +24,7 @@ const createVideoPlugin = (config = {}) => {
     t,
     isMobile,
     disableRightClick: config?.uiSettings?.disableRightClick,
+    pluginDefaults,
     ...rest,
   });
 };

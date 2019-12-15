@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ImageViewer from './image-viewer';
-import { getDefault } from './consts';
+import { DEFAULTS } from './consts';
 import { sizeClassName, alignmentClassName } from './classNameStrategies';
 import { Context } from 'wix-rich-content-common';
 
@@ -162,4 +162,4 @@ ImageComponent.propTypes = {
   settings: PropTypes.object,
 };
 
-export { ImageComponent as Component, getDefault };
+export { ImageComponent as Component, DEFAULTS };
