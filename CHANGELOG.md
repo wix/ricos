@@ -16,6 +16,8 @@
   ### :bug: Bug Fix
   - `divider`
     - [#511](https://github.com/wix-incubator/rich-content/pull/511) divider's width set to 100% in editor&viewer when no initial state of width is given
+  - `editor`
+    - [#521](https://github.com/wix-incubator/rich-content/pull/521) replace p element with div element in lists
   ### :house: Internal
   - `editor`
     - [#510](https://github.com/wix-incubator/rich-content/pull/510) custom icons code refactoring
