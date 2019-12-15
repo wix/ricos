@@ -5,7 +5,7 @@ import { createBasePlugin } from 'wix-rich-content-editor-common';
 
 const createSoundCloudPlugin = (config = {}) => {
   const type = SOUND_CLOUD_TYPE;
-  const { helpers, t, [type]: settings = {}, isMobile, pluginDefaults = {}, ...rest } = config;
+  const { helpers, t, [type]: settings = {}, isMobile, pluginDefaults, ...rest } = config;
 
   pluginDefaults[type] = DEFAULTS;
 

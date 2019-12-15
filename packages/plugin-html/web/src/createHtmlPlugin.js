@@ -11,7 +11,7 @@ const createHtmlPlugin = (config = {}) => {
     t,
     [type]: settings = {},
     getEditorBounds,
-    pluginDefaults = {},
+    pluginDefaults,
     ...rest
   } = config;
 

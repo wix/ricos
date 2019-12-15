@@ -12,7 +12,7 @@ const createGalleryPlugin = (config = {}) => {
     anchorTarget,
     relValue,
     [type]: settings = {},
-    pluginDefaults = {},
+    pluginDefaults,
     ...rest
   } = config;
 

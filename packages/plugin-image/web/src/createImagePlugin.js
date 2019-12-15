@@ -17,7 +17,7 @@ const createImagePlugin = (config = {}) => {
     [type]: settings = {},
     uiSettings,
     isMobile,
-    pluginDefaults = {},
+    pluginDefaults,
     ...rest
   } = config;
 
