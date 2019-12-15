@@ -20,6 +20,7 @@ const modalStyleDefaults = {
 };
 const anchorTarget = '_blank';
 const relValue = 'nofollow';
+// const preview_img = 'https://i.pinimg.com/originals/b0/fc/18/b0fc18f7ad25cb3af09cc0905ecb39db.jpg';
 
 export default class Editor extends PureComponent {
   state = {};
@@ -45,7 +46,7 @@ export default class Editor extends PureComponent {
         setTimeout(() => {
           updateEntity({ data, files });
           console.log('consumer uploaded', data);
-        }, 500);
+        }, 5500);
       }
     };
     this.helpers = {
@@ -71,6 +72,15 @@ export default class Editor extends PureComponent {
             this.props.mockImageIndex || Math.floor(Math.random() * testVideos.length);
           const testVideo = testVideos[mockVideoIndex];
           updateEntity(testVideo);
+        }, 500);
+      },
+      onProgressChange: updatePercentage => {
+        let percent = 0;
+        const interval = setInterval(() => {
+          updatePercentage(percent);
+          // updatePercentage(percent, preview_img);
+          percent += 10;
+          if (percent === 110) clearInterval(interval);
         }, 500);
       },
       openModal: data => {
