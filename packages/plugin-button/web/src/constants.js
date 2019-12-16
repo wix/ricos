@@ -49,3 +49,51 @@ export const DEFAULTS = {
     },
   },
 };
+
+export const buttonPreviews = colors => [
+  {
+    className: 'button_primary',
+    border: '0px solid #' + colors.color8,
+    borderRadius: '0px',
+    borderWidth: '0px',
+    background: colors.color8,
+    color: colors.color1,
+    borderColor: colors.color8,
+  },
+  {
+    className: 'button_secondary',
+    border: '1px solid ' + colors.color8,
+    borderRadius: '0px',
+    borderWidth: '1px',
+    background: colors.color1,
+    color: colors.color8,
+    borderColor: colors.color8,
+  },
+  {
+    className: 'button_secondary',
+    border: '1px solid ' + colors.color8,
+    borderRadius: '0px',
+    borderWidth: '1px',
+    background: colors.color7,
+    color: colors.color8,
+    borderColor: colors.color8,
+  },
+  {
+    className: 'button_secondary',
+    border: '1px solid ' + colors.color8,
+    borderRadius: '10px',
+    borderWidth: '1px',
+    background: colors.color7,
+    color: colors.color8,
+    borderColor: colors.color8,
+  },
+  {
+    className: 'button_secondary',
+    border: '1px solid ' + colors.color8,
+    borderWidth: '5px',
+    borderRadius: '0px',
+    background: colors.color1,
+    color: colors.color8,
+    borderColor: colors.color8,
+  },
+];

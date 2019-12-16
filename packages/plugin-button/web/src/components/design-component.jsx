@@ -5,7 +5,7 @@ import { mergeStyles } from 'wix-rich-content-common';
 import classNames from 'classnames';
 import ButtonSample from '../components/button-sample';
 import ColorToggleComponent from './color-toggle-component';
-import { DEFAULT_PALETTE, COLOR_PICKER_TYPE } from '../constants';
+import { DEFAULT_PALETTE, COLOR_PICKER_TYPE, buttonPreviews, COLORS } from '../constants';
 import styles from '../../statics/styles/design-component-styles.scss';
 
 class DesignComponent extends PureComponent {
@@ -16,53 +16,7 @@ class DesignComponent extends PureComponent {
     const {
       settings: { colors },
     } = this.props;
-    this.presetStyle = [
-      {
-        className: 'button_primary',
-        border: '0px solid #' + colors.color8,
-        borderRadius: '0px',
-        borderWidth: '0px',
-        background: colors.color8,
-        color: colors.color1,
-        borderColor: colors.color8,
-      },
-      {
-        className: 'button_secondary',
-        border: '1px solid ' + colors.color8,
-        borderRadius: '0px',
-        borderWidth: '1px',
-        background: colors.color1,
-        color: colors.color8,
-        borderColor: colors.color8,
-      },
-      {
-        className: 'button_secondary',
-        border: '1px solid ' + colors.color8,
-        borderRadius: '0px',
-        borderWidth: '1px',
-        background: colors.color7,
-        color: colors.color8,
-        borderColor: colors.color8,
-      },
-      {
-        className: 'button_secondary',
-        border: '1px solid ' + colors.color8,
-        borderRadius: '10px',
-        borderWidth: '1px',
-        background: colors.color7,
-        color: colors.color8,
-        borderColor: colors.color8,
-      },
-      {
-        className: 'button_secondary',
-        border: '1px solid ' + colors.color8,
-        borderWidth: '5px',
-        borderRadius: '0px',
-        background: colors.color1,
-        color: colors.color8,
-        borderColor: colors.color8,
-      },
-    ];
+    this.presetStyle = buttonPreviews(colors || COLORS);
     this.state = {
       design: {
         borderWidth: designObj.borderWidth,
