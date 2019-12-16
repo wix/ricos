@@ -20,20 +20,15 @@ export default class ButtonInputModal extends Component {
   constructor(props) {
     super(props);
     this.styles = mergeStyles({ styles, theme: props.theme });
-    const { componentData } = this.props;
-
-    let buttonObj = {};
-    if (componentData.button) {
-      buttonObj = {
-        ...componentData.button,
-      };
-    }
+    const {
+      componentData: { button },
+    } = this.props;
 
     this.state = {
-      validUrl: isValidUrl(buttonObj.settings.url),
-      settings: { ...buttonObj.settings },
-      design: { ...buttonObj.design },
-      initialComponentData: { ...buttonObj },
+      validUrl: isValidUrl(button.settings.url),
+      settings: { ...button.settings },
+      design: { ...button.design },
+      initialComponentData: { ...button },
       isHover: false,
       activeTab: settingsTabValue,
     };

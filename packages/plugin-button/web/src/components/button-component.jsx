@@ -13,7 +13,6 @@ class ButtonComponent extends PureComponent {
     sizeClassName(componentData, theme, styles, isMobile);
 
   render() {
-    // const colors = this.props?.settings?.colors || COLORS;
     const {
       componentData: { button },
     } = this.props;
@@ -25,12 +24,6 @@ class ButtonComponent extends PureComponent {
       border: '0px solid blue',
       ...this.props.style,
       ...button.design,
-      // borderWidth: button.borderWidth + 'px',
-      // padding: button.padding + 'px',
-      // borderRadius: button.borderRadius,
-      // color: button.textColor ? button.textColor : colors.color1,
-      // background: button.backgroundColor ? button.backgroundColor : colors.color8,
-      // borderColor: button.borderColor ? button.borderColor : colors.color8,
     };
     const url = button.settings.url;
     return (
