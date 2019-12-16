@@ -55,7 +55,6 @@ class Loader extends Component {
           backgroundImage: `url(${this.state?.localUrl})`,
         }}
       >
-        {this.renderLocalUrl()}
         <div
           className={classNames(this.props.loaderClassName, this.styles.loader, {
             [this.styles[this.props.type]]: this.props.type,
