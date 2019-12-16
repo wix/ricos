@@ -16,9 +16,13 @@
   ### :rocket: New Feature
   - `fullscreen`
     - [#519](https://github.com/wix-incubator/rich-content/pull/519) add props: topMargin, backgroundColor, foregroundColor. Remove counter when only 1 image. Larger z-index
-  - `editor-common` 
+  - `editor-common`
     - [#526](https://github.com/wix-incubator/rich-content/pull/526) `onAtomicBlockFocus` is invoked with `undefined` when an atomic block loses focus
-    - [#530](https://github.com/wix-incubator/rich-content/pull/530)`uiSettings.linkPanel.placeholder` determines the link panel's placeholder
+    - [#530](https://github.com/wix-incubator/rich-content/pull/530) `uiSettings.linkPanel.placeholder` determines the link panel's placeholder
+  - `image`
+    - [#533](https://github.com/wix-incubator/rich-content/pull/533) add multiple images at once, enabling `config.shouldCreateGallery` renders them as a gallery
+  - `file-upload`
+    - [#533](https://github.com/wix-incubator/rich-content/pull/533) add multiple files at once
   ### :bug: Bug Fix
   - `divider`
     - [#511](https://github.com/wix-incubator/rich-content/pull/511) divider's width set to 100% in editor&viewer when no initial state of width is given
