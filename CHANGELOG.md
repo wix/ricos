@@ -20,7 +20,7 @@
     - [#526](https://github.com/wix-incubator/rich-content/pull/526) `onAtomicBlockFocus` is invoked with `undefined` when an atomic block loses focus
     - [#530](https://github.com/wix-incubator/rich-content/pull/530) `uiSettings.linkPanel.placeholder` determines the link panel's placeholder
   - `image`
-    - [#533](https://github.com/wix-incubator/rich-content/pull/533) add multiple images at once, enabling `config.shouldCreateGallery` renders them as a gallery
+    - [#533](https://github.com/wix-incubator/rich-content/pull/533) add multiple images at once, enabling `config.createGalleryForMultipleImages` renders them as a gallery
   - `file-upload`
     - [#533](https://github.com/wix-incubator/rich-content/pull/533) add multiple files at once
   ### :bug: Bug Fix

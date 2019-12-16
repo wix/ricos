@@ -116,10 +116,13 @@ export default ({
         let editorState = this.props.getEditorState();
         let selection;
 
-        const galleryType = Object.keys(pluginDefaults).find(key => key.includes('gallery'));
-        const galleryData = pluginDefaults[galleryType];
+        const galleryType = 'wix-draft-plugin-gallery';
 
-        if (blockType === galleryType || (settings.shouldCreateGallery && files.length > 1)) {
+        if (
+          blockType === galleryType ||
+          (settings.createGalleryForMultipleImages && files.length > 1)
+        ) {
+          const galleryData = pluginDefaults[galleryType];
           const { newEditorState, newSelection } = this.createBlockFromFiles(
             files,
             editorState,

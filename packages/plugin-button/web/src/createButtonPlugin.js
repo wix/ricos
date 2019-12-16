@@ -17,11 +17,8 @@ const createButtonPlugin = (config = {}) => {
     relValue,
     isMobile,
     [type]: settings = {},
-    pluginDefaults = {},
     ...rest
   } = config;
-
-  pluginDefaults[type] = DEFAULTS;
 
   const styles = mergeStyles({ styles: Styles, theme });
 
@@ -44,7 +41,7 @@ const createButtonPlugin = (config = {}) => {
     }),
     helpers,
     t,
-    pluginDefaults,
+    defaultContentState: DEFAULTS,
     ...rest,
   });
 };

@@ -8,9 +8,7 @@ import Styles from '../statics/styles/default-styles.scss';
 
 const createDividerPlugin = (config = {}) => {
   const type = DIVIDER_TYPE;
-  const { helpers, theme, t, [type]: settings = {}, pluginDefaults = {}, ...rest } = config;
-
-  pluginDefaults[type] = DEFAULTS;
+  const { helpers, theme, t, [type]: settings = {}, ...rest } = config;
 
   const styles = mergeStyles({ styles: Styles, theme });
 
@@ -28,7 +26,7 @@ const createDividerPlugin = (config = {}) => {
     }),
     helpers,
     t,
-    pluginDefaults,
+    defaultContentState: DEFAULTS,
     ...rest,
   });
 };

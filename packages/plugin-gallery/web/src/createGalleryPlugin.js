@@ -5,18 +5,7 @@ import { GALLERY_TYPE } from './types';
 
 const createGalleryPlugin = (config = {}) => {
   const type = GALLERY_TYPE;
-  const {
-    helpers,
-    theme,
-    t,
-    anchorTarget,
-    relValue,
-    [type]: settings = {},
-    pluginDefaults = {},
-    ...rest
-  } = config;
-
-  pluginDefaults[type] = DEFAULTS;
+  const { helpers, theme, t, anchorTarget, relValue, [type]: settings = {}, ...rest } = config;
 
   return createBasePlugin({
     component: Component,
@@ -35,7 +24,7 @@ const createGalleryPlugin = (config = {}) => {
     anchorTarget,
     relValue,
     disableRightClick: config?.uiSettings?.disableRightClick,
-    pluginDefaults,
+    defaultContentState: DEFAULTS,
     ...rest,
   });
 };

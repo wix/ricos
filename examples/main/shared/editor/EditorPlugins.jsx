@@ -206,7 +206,7 @@ export const config = {
       mediaRoot: 'some-mediaRoot',
     },
     onImageEditorOpen: () => console.log('Media Studio Launched'),
-    // shouldCreateGallery: true,
+    // createGalleryForMultipleImages: true,
     // toolbar: {
     //   icons: {
     //     Image: MyCustomIcon, // insert plugin icon
