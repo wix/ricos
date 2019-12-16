@@ -6,14 +6,27 @@ import createCodeBlockToolbar from './toolbar/createCodeBlockToolbar';
 
 const createUnderlyingPlugin = (/*{ theme }*/) => ({
   keyBindingFn: (event, { getEditorState }) => {
-    if (CodeUtils.hasSelectionInBlock(getEditorState())) {
-      return CodeUtils.getKeyBinding(event);
+    const editorState = getEditorState();
+    if (CodeUtils.hasSelectionInBlock(editorState)) {
+      if (event.key === 'Tab' && event.shiftKey) {
+        // since backspace removes tabs in CodeUtils
+        // https://github.com/SamyPesse/draft-js-code/blob/9783c0f6bbedda6b7089712f9c657a72fdae636d/lib/handleKeyCommand.js#L11
+        return 'backspace';
+      } else {
+        return CodeUtils.getKeyBinding(event);
+      }
     }
   },
 
   handleKeyCommand: (command, editorState, timestamp, { setEditorState }) => {
     if (CodeUtils.hasSelectionInBlock(editorState)) {
-      const newState = CodeUtils.handleKeyCommand(editorState, command);
+      let newState;
+      if (command === 'tab') {
+        const mockEvent = { preventDefault: () => {} };
+        newState = CodeUtils.onTab(mockEvent, editorState);
+      } else {
+        newState = CodeUtils.handleKeyCommand(editorState, command);
+      }
       if (newState) {
         setEditorState(newState);
         return 'handled';
@@ -26,26 +39,6 @@ const createUnderlyingPlugin = (/*{ theme }*/) => ({
     if (CodeUtils.hasSelectionInBlock(editorState)) {
       setEditorState(CodeUtils.handleReturn(event, editorState));
       return 'handled';
-    }
-    return 'not-handled';
-  },
-
-  onTab: (event, { getEditorState, setEditorState }) => {
-    const editorState = getEditorState();
-    if (CodeUtils.hasSelectionInBlock(editorState)) {
-      let newState;
-      if (event.shiftKey) {
-        // since backspace removes tabs in CodeUtils
-        // https://github.com/SamyPesse/draft-js-code/blob/9783c0f6bbedda6b7089712f9c657a72fdae636d/lib/handleKeyCommand.js#L11
-        event.preventDefault();
-        newState = CodeUtils.handleKeyCommand(editorState, 'backspace');
-      } else {
-        newState = CodeUtils.onTab(event, editorState);
-      }
-      if (newState) {
-        setEditorState(newState);
-        return 'handled';
-      }
     }
     return 'not-handled';
   },

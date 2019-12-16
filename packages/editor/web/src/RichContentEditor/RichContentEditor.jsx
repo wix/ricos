@@ -7,7 +7,7 @@ import { get, includes, merge, debounce } from 'lodash';
 import Measure from 'react-measure';
 import createEditorToolbars from './Toolbars';
 import createPlugins from './createPlugins';
-import { keyBindingFn, initPluginKeyBindings } from './keyBindings';
+import { createKeyBindingFn, initPluginKeyBindings } from './keyBindings';
 import handleKeyCommand from './handleKeyCommand';
 import handleReturnCommand from './handleReturnCommand';
 import blockStyleFn from './blockStyleFn';
@@ -96,12 +96,16 @@ class RichContentEditor extends Component {
 
   onAtomicBlockFocus = blockKey => {
     const { onAtomicBlockFocus } = this.props;
-    if (blockKey && onAtomicBlockFocus) {
-      const contentState = this.getEditorState().getCurrentContent();
-      const block = contentState.getBlockForKey(blockKey);
-      const entityKey = block.getEntityAt(0);
-      const entity = contentState.getEntity(entityKey);
-      onAtomicBlockFocus(blockKey, entity.type, entity.data);
+    if (onAtomicBlockFocus) {
+      if (blockKey) {
+        const contentState = this.getEditorState().getCurrentContent();
+        const block = contentState.getBlockForKey(blockKey);
+        const entityKey = block.getEntityAt(0);
+        const entity = contentState.getEntity(entityKey);
+        onAtomicBlockFocus(blockKey, entity.type, entity.data);
+      } else {
+        onAtomicBlockFocus(undefined);
+      }
     }
   };
 
@@ -353,7 +357,7 @@ class RichContentEditor extends Component {
           this.getCustomCommandHandlers().commandHanders
         )}
         editorKey={editorKey}
-        keyBindingFn={keyBindingFn(this.getCustomCommandHandlers().commands || [])}
+        keyBindingFn={createKeyBindingFn(this.getCustomCommandHandlers().commands || [])}
         customStyleFn={this.customStyleFn}
         helpers={helpers}
         tabIndex={tabIndex}

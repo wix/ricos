@@ -13,10 +13,24 @@
     Click to see more.
   </summary>
   
+  ### :rocket: New Feature
+  - `fullscreen`
+    - [#519](https://github.com/wix-incubator/rich-content/pull/519) add props: topMargin, backgroundColor, foregroundColor. Remove counter when only 1 image. Larger z-index
+  - `editor-common` 
+    - [#526](https://github.com/wix-incubator/rich-content/pull/526) `onAtomicBlockFocus` is invoked with `undefined` when an atomic block loses focus
+  ### :bug: Bug Fix
+  - `divider`
+    - [#511](https://github.com/wix-incubator/rich-content/pull/511) divider's width set to 100% in editor&viewer when no initial state of width is given
+  - `editor`
+    - [#522](https://github.com/wix-incubator/rich-content/pull/522) support legacy margin scss attributes
   ### :house: Internal
+  - `codeBlock`
+    - [#527](https://github.com/wix-incubator/rich-content/pull/527) remove onTab (moved to keyBindingFn/handleKeyCommand)
+  - `pubsub`
+    - [#528](https://github.com/wix-incubator/rich-content/pull/528) rename visibleBlock to focusedBlock
   - `button`
     - [#517](https://github.com/wix-incubator/rich-content/pull/517) plugin button refactor
-
+  
 </details>
 <hr/>
 
