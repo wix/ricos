@@ -15,14 +15,15 @@ export default ({ blockType, button, helpers, pubsub, settings, t, isMobile }) =
   class InsertPluginButton extends React.PureComponent {
     constructor(props) {
       super(props);
-      this.state = {};
+      this.state = { toolbarName: '' };
       const { buttonStyles } = props.theme || {};
+      const { toolbarName } = props;
       this.styles = mergeStyles({ styles, theme: buttonStyles });
       this.buttonRef = React.createRef();
-      this.onPluginAdd = this.getOnPluginAdd(helpers);
+      this.onPluginAdd = this.getOnPluginAdd(helpers, toolbarName);
     }
 
-    getOnPluginAdd = ({ activityCallbacks: { onPluginAdd = () => false }, toolbarName }) => {
+    getOnPluginAdd = ({ activityCallbacks: { onPluginAdd = () => false } }, toolbarName) => {
       return () => onPluginAdd(blockType, toolbarName);
     };
 
@@ -49,7 +50,7 @@ export default ({ blockType, button, helpers, pubsub, settings, t, isMobile }) =
     };
 
     createBlock = (data, shouldSetEditorState = false) => {
-      this.onPluginAdd();
+      this.onPluginAdd(blockType, this.state.toolbarName);
       const { getEditorState, setEditorState, hidePopup } = this.props;
       const contentState = getEditorState().getCurrentContent();
       const contentStateWithEntity = contentState.createEntity(
@@ -81,18 +82,26 @@ export default ({ blockType, button, helpers, pubsub, settings, t, isMobile }) =
       return { newBlock, newSelection, newEditorState };
     };
 
+    find(element) {
+      const name = element.parentElement.parentElement.id;
+      const options = ['side_bar', 'footer'];
+      if (options.find(name) !== undefined) return name;
+    }
+
     onClick = event => {
       event.preventDefault();
+      const toolbarName = event.currentTarget.parentElement.parentElement.id;
+      const name = toolbarName === 'side_bar' ? toolbarName : 'footer';
+      this.setState({ toolbarName: name });
       switch (button.type) {
         case 'file':
-          //this.onPluginAdd();
           this.toggleFileSelection();
           break;
         case 'modal':
           this.toggleButtonModal(event);
           break;
         case 'custom-block':
-          this.onPluginAdd();
+          this.onPluginAdd(blockType, name);
           this.addCustomBlock(button);
           break;
         default:
@@ -278,6 +287,7 @@ export default ({ blockType, button, helpers, pubsub, settings, t, isMobile }) =
     isMobile: PropTypes.bool,
     t: PropTypes.func,
     tabIndex: PropTypes.number,
+    toolbarName: PropTypes.string,
   };
 
   return InsertPluginButton;

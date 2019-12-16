@@ -125,6 +125,8 @@ export default class StaticToolbar extends React.PureComponent {
       }
     );
 
+    childrenProps.toolbarName = 'Footer';
+
     return (
       <div className={buttonClassNames}>
         <Measure

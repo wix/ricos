@@ -171,6 +171,7 @@ export default class AddPluginFloatingToolbar extends Component {
               setEditorState={setEditorState}
               theme={theme}
               hidePopup={this.hidePopup}
+              toolbarName={'Sidebar'}
             />
           ))}
         </div>
