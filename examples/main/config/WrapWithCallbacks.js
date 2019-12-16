@@ -1,6 +1,6 @@
 import React, { Children } from 'react';
 import PropTypes from 'prop-types';
-import { getEntities } from '../../../packages/editor/web/src/lib/editorStateConversion';
+import { getPostContentSummary } from '../../../packages/editor-common/web/src/Utils/draftUtils';
 
 export default class WrapWithCallbacks extends React.Component {
 
@@ -17,21 +17,7 @@ export default class WrapWithCallbacks extends React.Component {
 }
 
 WrapWithCallbacks.publish = async (post_id, editorState = {}, callBack = data => true) => {
-	if (Object.entries(editorState).length === 0)
-		return;
-	const blocks = editorState.getCurrentContent().getBlocksAsArray();
-	const entries = getEntities(editorState);
-	const count = arr => arr.reduce((countArray, curr) => {
-		return {
-			...countArray,
-			[curr]: !countArray[curr] ? 1 : countArray[curr] + 1,
-		};
-	}, {});
-	const blockPlugins = blocks.filter(block => block.type !== 'unstyled' && block.type !== 'atomic').map(block => block.type);
-	const entityPlugins = entries.map(entry => entry.entity.type);
-	const post_content = {
-		...count(blockPlugins), ...(count(entityPlugins))
-	};
+	const post_content = getPostContentSummary(editorState);
 	callBack({ post_id, post_content });
 }
 

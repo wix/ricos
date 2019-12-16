@@ -15,6 +15,7 @@ import getBlockRenderMap from './getBlockRenderMap';
 import { combineStyleFns } from './combineStyleFns';
 import { getStaticTextToolbarId } from './Toolbars/toolbar-id';
 import { TooltipHost, TOOLBARS } from 'wix-rich-content-editor-common';
+import { getEntities } from 'wix-rich-content-editor-common/src/Utils/draftUtils';
 import {
   Context,
   AccessibilityListener,
@@ -23,7 +24,6 @@ import {
 } from 'wix-rich-content-common';
 import styles from '../../statics/styles/rich-content-editor.scss';
 import draftStyles from '../../statics/styles/draft.rtlignore.scss';
-import { getEntities } from '../lib/editorStateConversion';
 
 class RichContentEditor extends Component {
   constructor(props) {

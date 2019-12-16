@@ -278,3 +278,53 @@ function getSelection(editorState) {
 
   return selection;
 }
+
+export const getEntities = (editorState, entityType = null) => {
+  const content = editorState.getCurrentContent();
+  const entities = [];
+  content.getBlocksAsArray().forEach(block => {
+    let selectedEntity = null;
+    block.findEntityRanges(
+      character => {
+        if (character.getEntity() !== null) {
+          const entity = content.getEntity(character.getEntity());
+          if (!entityType || (entityType && entity.getType() === entityType)) {
+            selectedEntity = {
+              entityKey: character.getEntity(),
+              blockKey: block.getKey(),
+              type: entity.getType(),
+              entity,
+            };
+            return true;
+          }
+        }
+        return false;
+      },
+      (start, end) => {
+        entities.push({ ...selectedEntity, start, end });
+      }
+    );
+  });
+  return entities;
+};
+
+export function getPostContentSummary(editorState) {
+  if (Object.entries(editorState).length === 0) return;
+  const blocks = editorState.getCurrentContent().getBlocksAsArray();
+  const entries = getEntities(editorState);
+  const count = arr =>
+    arr.reduce((countArray, curr) => {
+      return {
+        ...countArray,
+        [curr]: !countArray[curr] ? 1 : countArray[curr] + 1,
+      };
+    }, {});
+  const blockPlugins = blocks
+    .filter(block => block.type !== 'unstyled' && block.type !== 'atomic')
+    .map(block => block.type);
+  const entityPlugins = entries.map(entry => entry.entity.type);
+  return {
+    ...count(blockPlugins),
+    ...count(entityPlugins),
+  };
+}
