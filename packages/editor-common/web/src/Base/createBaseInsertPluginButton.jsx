@@ -20,12 +20,8 @@ export default ({ blockType, button, helpers, pubsub, settings, t, isMobile }) =
       const { toolbarName } = props;
       this.styles = mergeStyles({ styles, theme: buttonStyles });
       this.buttonRef = React.createRef();
-      this.onPluginAdd = this.getOnPluginAdd(helpers, toolbarName);
+      this.onPluginAdd = () => helpers?.activityCallbacks?.onPluginAdd?.(blockType, toolbarName);
     }
-
-    getOnPluginAdd = ({ activityCallbacks: { onPluginAdd = () => false } }, toolbarName) => {
-      return () => onPluginAdd(blockType, toolbarName);
-    };
 
     componentDidMount() {
       this.initialIntent();
