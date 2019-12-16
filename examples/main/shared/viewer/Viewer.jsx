@@ -67,7 +67,7 @@ export default class Viewer extends PureComponent {
             onClose={() => this.setState({ expendModeIsOpen: false })}
             index={expandModeIndex}
           />,
-          <TextSelectToolbar id={'rich-content-viewer'} ToolBar={ViewerInlineToolBar} />,
+          <TextSelectToolbar targetId={'rich-content-viewer'} ToolBar={ViewerInlineToolBar} />,
         ]}
       </div>
     );

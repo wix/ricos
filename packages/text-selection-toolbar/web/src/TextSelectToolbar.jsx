@@ -8,8 +8,8 @@ export default class TextSelectToolbar extends React.Component {
     this.state = { selectedText: '' };
   }
   componentDidMount() {
-    const { id } = this.props;
-    const specifiedElement = document.getElementById(id);
+    const { targetId } = this.props;
+    const specifiedElement = document.getElementById(targetId);
     specifiedElement.addEventListener('mouseup', () => {
       this.getSelectionText();
     });
@@ -37,14 +37,14 @@ export default class TextSelectToolbar extends React.Component {
   };
 
   render() {
-    const { ToolBar, id } = this.props;
+    const { ToolBar, targetId } = this.props;
     const { selectedText, selectionRect } = this.state;
     return selectedText !== '' ? (
       <ToolBar
         selectedText={selectedText}
         options={[TWITTER]}
         selectionRect={selectionRect}
-        elementId={id}
+        targetId={targetId}
       />
     ) : (
       <div />
@@ -53,6 +53,6 @@ export default class TextSelectToolbar extends React.Component {
 }
 
 TextSelectToolbar.propTypes = {
-  id: PropTypes.string.isRequired,
+  targetId: PropTypes.string.isRequired,
   ToolBar: PropTypes.any.isRequired,
 };
