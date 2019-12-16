@@ -21,6 +21,8 @@
   ### :bug: Bug Fix
   - `divider`
     - [#511](https://github.com/wix-incubator/rich-content/pull/511) divider's width set to 100% in editor&viewer when no initial state of width is given
+  - `gallery-settings`
+    - [#535](https://github.com/wix-incubator/rich-content/pull/535) in the gallery settings, make the header, tabs and footer sticky
   - `editor`
     - [#522](https://github.com/wix-incubator/rich-content/pull/522) support legacy margin scss attributes
   ### :house: Internal
