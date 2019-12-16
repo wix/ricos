@@ -154,6 +154,7 @@ export default class Editor extends PureComponent {
     const { MobileToolbar, TextToolbar } = this.state;
     const textToolbarType = this.props.staticToolbar && !this.props.isMobile ? 'static' : null;
     const { onRequestClose } = this.state.modalProps || {};
+    const { onPluginAdd, onPluginChange, onPluginDelete } = debugBiLoggers();
     return (
       <div className="editor">
         {MobileToolbar && <MobileToolbar />}
@@ -163,7 +164,9 @@ export default class Editor extends PureComponent {
           </div>
         )}
         <WrapWithCallbacks
-          {...debugBiLoggers()}>
+          onPluginAdd={onPluginAdd}
+          onPluginChange={onPluginChange}
+          onPluginDelete={onPluginDelete}>
           <RichContentEditor
             placeholder={'Add some text!'}
             ref={editor => (this.editor = editor)}

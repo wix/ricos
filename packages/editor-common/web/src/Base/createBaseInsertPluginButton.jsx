@@ -15,7 +15,7 @@ export default ({ blockType, button, helpers, pubsub, settings, t, isMobile }) =
   class InsertPluginButton extends React.PureComponent {
     constructor(props) {
       super(props);
-      this.state = { toolbarName: '' };
+      this.state = {};
       const { buttonStyles } = props.theme || {};
       const { toolbarName } = props;
       this.styles = mergeStyles({ styles, theme: buttonStyles });
@@ -82,17 +82,8 @@ export default ({ blockType, button, helpers, pubsub, settings, t, isMobile }) =
       return { newBlock, newSelection, newEditorState };
     };
 
-    find(element) {
-      const name = element.parentElement.parentElement.id;
-      const options = ['side_bar', 'footer'];
-      if (options.find(name) !== undefined) return name;
-    }
-
     onClick = event => {
       event.preventDefault();
-      const toolbarName = event.currentTarget.parentElement.parentElement.id;
-      const name = toolbarName === 'side_bar' ? toolbarName : 'footer';
-      this.setState({ toolbarName: name });
       switch (button.type) {
         case 'file':
           this.toggleFileSelection();
