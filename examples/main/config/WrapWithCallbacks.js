@@ -8,9 +8,9 @@ export default class WrapWithCallbacks extends React.Component {
 		const { onPluginAdd, onPluginChange, onPluginDelete, children } = this.props;
 		const { props: { helpers = {} } = {} } = children;
 		helpers.activityCallbacks = {
-			onPluginAdd,
-			onPluginChange,
-			onPluginDelete,
+			onPluginAdd: async (...args) => onPluginAdd(args),
+			onPluginChange: async (...args) => onPluginChange(args),
+			onPluginDelete: async (...args) => onPluginDelete(args),
 		}
 		return Children.only(React.cloneElement(children, { helpers }));
 	}

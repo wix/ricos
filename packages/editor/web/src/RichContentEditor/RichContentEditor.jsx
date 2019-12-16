@@ -255,7 +255,8 @@ class RichContentEditor extends Component {
 
     const {
       helpers: {
-        activityCallbacks: { onPluginDelete = () => false, onPluginChange = () => false } = {},
+        //activityCallbacks: { onPluginDelete = () => false, onPluginChange = () => false } = {},
+        activityCallbacks: { onPluginDelete = () => false } = {},
       } = {},
     } = this.props;
 
@@ -263,12 +264,14 @@ class RichContentEditor extends Component {
       const type = beforePlugins[key].type;
       if (afterPlugins[key] === undefined) {
         onPluginDelete(type);
-      } else {
-        const before = beforePlugins[key];
-        const after = afterPlugins[key];
-        if (JSON.stringify(before) !== JSON.stringify(after))
-          onPluginChange(type, { from: before, to: after });
       }
+      // onPluginChange -> for Phase 2
+      //else {
+      // const before = beforePlugins[key];
+      // const after = afterPlugins[key];
+      // if (JSON.stringify(before) !== JSON.stringify(after))
+      //   onPluginChange(type, { from: before, to: after });
+      //}
     });
   };
 
