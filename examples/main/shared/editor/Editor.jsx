@@ -8,8 +8,8 @@ import * as Plugins from './EditorPlugins';
 import ModalsMap from './ModalsMap';
 import theme from '../theme/theme'; // must import after custom styles
 import { debugBiLoggers } from '../../config/biService';
-//import WrapWithCallbacks from '../../config/WrapWithCallbacks';
-import { EditorBIWrapper } from '@wix/rich-content-bi';
+import WrapWithCallbacks from '../../config/WrapWithCallbacks';
+//import { EditorBIWrapper } from '@wix/rich-content-bi';
 
 const modalStyleDefaults = {
   content: {
@@ -30,6 +30,11 @@ export default class Editor extends PureComponent {
     super(props);
     // ReactModal.setAppElement('#root');
     this.initEditorProps();
+    const continuously = (func) => {
+      WrapWithCallbacks.publish('123', this.props.editorState, data => console.log('Data received', data));
+      setTimeout(() => func(func), 5000);
+    };
+    continuously(continuously);
   }
 
   initEditorProps() {
@@ -163,11 +168,9 @@ export default class Editor extends PureComponent {
             <TextToolbar />
           </div>
         )}
-        {/* <WrapWithCallbacks
-          {...debugBiLoggers()}> */}
-        <EditorBIWrapper
-          container={"examples-main"}
+        <WrapWithCallbacks
           {...debugBiLoggers()}>
+          {/* <EditorBIWrapper */}
           <RichContentEditor
             placeholder={'Add some text!'}
             ref={editor => (this.editor = editor)}
@@ -187,8 +190,8 @@ export default class Editor extends PureComponent {
             localeResource={this.props.localeResource}
           // siteDomain="https://www.wix.com"
           />
-        </EditorBIWrapper>
-        {/* </WrapWithCallbacks> */}
+          {/* </EditorBIWrapper> */}
+        </WrapWithCallbacks>
         <ReactModal
           isOpen={this.state.showModal}
           contentLabel="External Modal Example"

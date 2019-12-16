@@ -15,6 +15,52 @@ export default class WrapWithCallbacks extends React.Component {
 	}
 }
 
+const getEntities = (editorState, entityType = null) => {
+	const content = editorState.getCurrentContent();
+	const entities = [];
+	content.getBlocksAsArray().forEach((block) => {
+		let selectedEntity = null;
+		block.findEntityRanges(
+			(character) => {
+				if (character.getEntity() !== null) {
+					const entity = content.getEntity(character.getEntity());
+					if (!entityType || (entityType && entity.getType() === entityType)) {
+						selectedEntity = {
+							entityKey: character.getEntity(),
+							blockKey: block.getKey(),
+							entity,
+						};
+						return true;
+					}
+				}
+				return false;
+			},
+			(start, end) => {
+				entities.push({ ...selectedEntity, start, end });
+			});
+	});
+	return entities;
+};
+
+WrapWithCallbacks.publish = async (post_id, editorState = {}, callBack = data => true) => {
+	if (Object.entries(editorState).length === 0)
+		return;
+	const blocks = editorState.getCurrentContent().getBlocksAsArray();
+	const entries = getEntities(editorState);
+	const count = arr => arr.reduce((countArray, curr) => {
+		return {
+			...countArray,
+			[curr]: !countArray[curr] ? 1 : countArray[curr] + 1,
+		};
+	}, {});
+	const blockPlugins = blocks.filter(block => block.type !== 'unstyled' && block.type !== 'atomic').map(block => block.type);
+	const entityPlugins = entries.map(entry => entry.entity.type);
+	const post_content = {
+		...count(blockPlugins), ...(count(entityPlugins))
+	};
+	callBack({ post_id, post_content });
+}
+
 WrapWithCallbacks.propTypes = {
 	onAdd: PropTypes.func,
 	onChange: PropTypes.func,
