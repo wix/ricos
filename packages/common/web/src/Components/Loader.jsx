@@ -24,23 +24,9 @@ class Loader extends Component {
   };
 
   componentDidMount() {
-    this.context?.helpers?.onProgressChange(this.updateProgress);
+    this.context?.helpers?.onProgressChange?.(this.updateProgress);
   }
 
-  renderLocalUrl() {
-    return (
-      <div>
-        {this.state.localUrl && (
-          <div
-            className={classNames(this.props.overlayClassName, this.styles.preview_img)}
-            style={{
-              backgroundImage: `url(${this.state.localUrl})`,
-            }}
-          />
-        )}
-      </div>
-    );
-  }
   renderProgress() {
     return (
       <div>
@@ -62,8 +48,10 @@ class Loader extends Component {
       <div
         className={classNames(this.props.overlayClassName, this.styles.loaderOverlay)}
         data-hook="loader"
+        style={{
+          backgroundImage: `url(${this.state?.localUrl})`,
+        }}
       >
-        {this.renderLocalUrl()}
         <div
           className={classNames(this.props.loaderClassName, this.styles.loader, {
             [this.styles[this.props.type]]: this.props.type,
