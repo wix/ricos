@@ -166,7 +166,7 @@ const uiSettings = {
     blankTargetToggleVisibilityFn: () => true,
     nofollowRelToggleVisibilityFn: () => true,
     dropDown: getLinkPanelDropDownConfig(),
-    placeHolder: "Here Here!!",
+    placeholder: "Enter a URL here",
   },
   // disableRightClick: true,
 };

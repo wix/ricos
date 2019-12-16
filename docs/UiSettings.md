@@ -24,9 +24,8 @@ The `uiSettings` object exposes the following properties:
 
   By default, its predicate is `relValue !== 'nofollow'`
 
-- `placeHolder` : 
+- `placeholder` : `string`
 
-  This variable is an url place holder of type string
+  This variable determines the placeholder to use for the link panel.
 
   By default, its value is `"Enter a URL here"` translated by localization
-

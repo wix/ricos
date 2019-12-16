@@ -174,6 +174,6 @@ LinkPanel.propTypes = {
   dropDown: PropTypes.object,
   onEnter: PropTypes.func,
   onEscape: PropTypes.func,
-  placeHolder: PropTypes.string,
+  placeholder: PropTypes.string,
 };
 export default LinkPanel;

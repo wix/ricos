@@ -18,8 +18,7 @@
     - [#519](https://github.com/wix-incubator/rich-content/pull/519) add props: topMargin, backgroundColor, foregroundColor. Remove counter when only 1 image. Larger z-index
   - `editor-common` 
     - [#526](https://github.com/wix-incubator/rich-content/pull/526) `onAtomicBlockFocus` is invoked with `undefined` when an atomic block loses focus
-  - `link place holder`
-    - [#530](https://github.com/wix-incubator/rich-content/pull/530) add customized link place holder
+    - [#530](https://github.com/wix-incubator/rich-content/pull/530)`uiSettings.linkPanel.placeholder` determines the link panel's placeholder
   ### :bug: Bug Fix
   - `divider`
     - [#511](https://github.com/wix-incubator/rich-content/pull/511) divider's width set to 100% in editor&viewer when no initial state of width is given
@@ -1820,4 +1819,3 @@ _NOTE:_ From this version onwards all modules will have the same version number,
 - `editor`
   - [#58](https://github.com/wix-incubator/rich-content/pull/58) Default `locale` is `'en'`, English texts are imported statically
     Set the `locale` and `localeResource` props to use another language
-
