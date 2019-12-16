@@ -215,7 +215,7 @@ class DesignComponent extends PureComponent {
               {this.renderColorPicker(
                 design.color,
                 designObj.color,
-                settings.getTextColors(),
+                settings.getTextColors() || [],
                 this.onTextColorAdded,
                 this.onTextColorChange,
                 COLOR_PICKER_TYPE.TEXT_COLOR,
@@ -224,7 +224,7 @@ class DesignComponent extends PureComponent {
               {this.renderColorPicker(
                 design.borderColor,
                 designObj.borderColor,
-                settings.getBorderColors(),
+                settings.getBorderColors() || [],
                 this.onBorderColorAdded,
                 this.onBorderColorChange,
                 COLOR_PICKER_TYPE.BORDER_COLOR,
@@ -233,7 +233,7 @@ class DesignComponent extends PureComponent {
               {this.renderColorPicker(
                 design.background,
                 designObj.background,
-                settings.getBackgroundColors(),
+                settings.getBackgroundColors() || [],
                 this.onBackgroundColorAdded,
                 this.onBackgroundColorChange,
                 COLOR_PICKER_TYPE.BACKGROUND_COLOR,
