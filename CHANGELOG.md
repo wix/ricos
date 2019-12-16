@@ -22,6 +22,8 @@
   - [#507](https://github.com/wix-incubator/rich-content/pull/507) support all video platform urls supported by `react-player`
 - `soundcloud`
   - [#507](https://github.com/wix-incubator/rich-content/pull/507) support all audio platform urls supported by `react-player`
+- `bi-events`
+  - [#514](https://github.com/wix-incubator/rich-content/pull/514) supports `onPluginAdd` (toolbar only) and `onPluginDelete` callback via a new `<WrapWithCallbacks />` component
 ### :bug: Bug Fix
 - `fullscreen`
   - [#496](https://github.com/wix-incubator/rich-content/pull/496) adds support for legacy image type
