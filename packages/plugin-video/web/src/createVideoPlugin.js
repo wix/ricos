@@ -5,7 +5,7 @@ import { createBasePlugin } from 'wix-rich-content-editor-common';
 
 const createVideoPlugin = (config = {}) => {
   const type = VIDEO_TYPE;
-  const { helpers, t, [type]: settings = {}, isMobile, pluginDefaults, ...rest } = config;
+  const { helpers, t, [type]: settings = {}, isMobile, pluginDefaults = {}, ...rest } = config;
 
   pluginDefaults[type] = DEFAULTS;
 

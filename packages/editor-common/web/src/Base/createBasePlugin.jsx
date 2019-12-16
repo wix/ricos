@@ -138,6 +138,7 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
     InsertPluginButtons,
     InlineModals,
     TextButtonMapper,
+    pubsub,
     customStyleFn,
   };
 

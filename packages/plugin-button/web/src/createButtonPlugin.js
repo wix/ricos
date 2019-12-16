@@ -17,7 +17,7 @@ const createButtonPlugin = (config = {}) => {
     relValue,
     isMobile,
     [type]: settings = {},
-    pluginDefaults,
+    pluginDefaults = {},
     ...rest
   } = config;
 
