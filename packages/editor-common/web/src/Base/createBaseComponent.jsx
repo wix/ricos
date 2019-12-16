@@ -216,6 +216,7 @@ const createBaseComponent = ({
       batchUpdates.componentData = {};
       batchUpdates.componentState = {};
       pubsub.set(batchUpdates);
+      onAtomicBlockFocus(undefined);
     }
 
     handleContextMenu = e => disableRightClick && e.preventDefault();
