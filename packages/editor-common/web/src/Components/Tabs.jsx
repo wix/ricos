@@ -98,6 +98,11 @@ export class Tabs extends Component {
             );
           })}
         </div>
+        <div className={classNames(styles.tabs_headers, styles.tabs_headers_placeholder)}>
+          <button className={styles.tabs_headers_option}>
+            <span className={this.styles.tabs_headers_option_label}>{'placeholder'}</span>
+          </button>
+        </div>
         {this.renderTabs()}
       </div>
     );

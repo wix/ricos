@@ -11,16 +11,21 @@ $FOOTER_HEIGHT: 100px;
 
 .gallerySettings_title {
   font-size: 18px;
-  width: 100%;
+  width: calc(420px - 60px);
   color: #333333;
   line-height: 30px;
   padding: 45px 30px 24px;
   margin: 0;
   border-bottom: 1px solid #ededed;
-  position: relative;
+  position: fixed;
   top: 0;
   background-color: #fff;
   z-index: 5;
+}
+
+.gallerySettings_title_placeholder{
+  position: relative;
+  visibility: hidden;
 }
 
 .gallerySettings_divider {
