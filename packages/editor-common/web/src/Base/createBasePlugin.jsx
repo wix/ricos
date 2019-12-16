@@ -37,8 +37,10 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
     onAtomicBlockFocus,
     disableRightClick,
     commonPubsub,
+    defaultContentState,
     pluginDefaults,
   } = config;
+  pluginDefaults[config.type] = defaultContentState;
   const toolbarTheme = { ...getToolbarTheme(config.theme, 'plugin'), ...config.theme };
   const Toolbar =
     config?.toolbar?.InlineButtons &&

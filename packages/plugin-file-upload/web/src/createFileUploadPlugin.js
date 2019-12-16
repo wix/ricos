@@ -5,9 +5,7 @@ import { createBasePlugin } from 'wix-rich-content-editor-common';
 
 const createFileUploadPlugin = (config = {}) => {
   const type = FILE_UPLOAD_TYPE;
-  const { helpers, t, [type]: settings = {}, pluginDefaults = {}, ...rest } = config;
-
-  pluginDefaults[type] = DEFAULTS;
+  const { helpers, t, [type]: settings = {}, ...rest } = config;
 
   return createBasePlugin({
     component: Component,
@@ -20,7 +18,7 @@ const createFileUploadPlugin = (config = {}) => {
     helpers,
     settings,
     t,
-    pluginDefaults,
+    defaultContentState: DEFAULTS,
     ...rest,
   });
 };

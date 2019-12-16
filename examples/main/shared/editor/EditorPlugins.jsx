@@ -103,7 +103,7 @@ let userButtonBorderColors = [...buttonDefaultPalette];
 
 const getLinkPanelDropDownConfig = () => {
   const getItems = () => {
-    casual.define('item', function () {
+    casual.define('item', function() {
       return {
         value: casual.url,
         label: casual.catch_phrase,
@@ -212,7 +212,7 @@ export const config = {
       mediaRoot: 'some-mediaRoot',
     },
     onImageEditorOpen: () => console.log('Media Studio Launched'),
-    // shouldCreateGallery: true,
+    // createGalleryForMultipleImages: true,
     // toolbar: {
     //   icons: {
     //     Image: MyCustomIcon, // insert plugin icon

@@ -5,17 +5,7 @@ import { HTML_TYPE } from './types';
 
 const createHtmlPlugin = (config = {}) => {
   const type = HTML_TYPE;
-  const {
-    helpers,
-    isMobile,
-    t,
-    [type]: settings = {},
-    getEditorBounds,
-    pluginDefaults = {},
-    ...rest
-  } = config;
-
-  pluginDefaults[type] = DEFAULTS;
+  const { helpers, isMobile, t, [type]: settings = {}, getEditorBounds, ...rest } = config;
 
   return createBasePlugin({
     onOverlayClick: ({ e, pubsub, componentData }) =>
@@ -34,7 +24,7 @@ const createHtmlPlugin = (config = {}) => {
     isMobile,
     t,
     getEditorBounds,
-    pluginDefaults,
+    defaultContentState: DEFAULTS,
     ...rest,
   });
 };

@@ -17,11 +17,8 @@ const createImagePlugin = (config = {}) => {
     [type]: settings = {},
     uiSettings,
     isMobile,
-    pluginDefaults = {},
     ...rest
   } = config;
-
-  pluginDefaults[type] = DEFAULTS;
 
   return createBasePlugin({
     component: Component,
@@ -61,7 +58,7 @@ const createImagePlugin = (config = {}) => {
     t,
     isMobile,
     disableRightClick: config?.uiSettings?.disableRightClick,
-    pluginDefaults,
+    defaultContentState: DEFAULTS,
     ...rest,
   });
 };
