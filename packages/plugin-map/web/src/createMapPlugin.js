@@ -12,7 +12,7 @@ const createMapPlugin = (config = {}) => {
     [type]: settings = {},
     getEditorBounds,
     isMobile,
-    pluginDefaults,
+    pluginDefaults = {},
     ...rest
   } = config;
 
