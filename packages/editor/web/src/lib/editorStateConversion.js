@@ -26,6 +26,7 @@ const getEntities = (editorState, entityType = null) => {
             selectedEntity = {
               entityKey: character.getEntity(),
               blockKey: block.getKey(),
+              type: entity.getType(),
               entity,
             };
             return true;
