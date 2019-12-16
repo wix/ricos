@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { EditorState, convertFromRaw, convertToRaw } from 'draft-js';
+import { EditorState, convertFromRaw } from 'draft-js';
 import Editor from 'draft-js-plugins-editor';
 import { get, includes, merge, debounce } from 'lodash';
 import Measure from 'react-measure';
@@ -23,6 +23,7 @@ import {
 } from 'wix-rich-content-common';
 import styles from '../../statics/styles/rich-content-editor.scss';
 import draftStyles from '../../statics/styles/draft.rtlignore.scss';
+import { getEntities } from '../lib/editorStateConversion';
 
 class RichContentEditor extends Component {
   constructor(props) {
@@ -236,16 +237,10 @@ class RichContentEditor extends Component {
     const onlyRelevant = blocksArr =>
       blocksArr.filter(block => block.type !== 'unstyled' && block.type !== 'atomic');
 
-    const entities = state => {
-      return Object.values(convertToRaw(state.getCurrentContent()).entityMap).map(
-        (value, index) => {
-          return {
-            ...value,
-            key: index,
-          };
-        }
-      );
-    };
+    const entities = state =>
+      getEntities(state).map(value => {
+        return { ...value, key: value.entityKey };
+      });
 
     const reduce = blocks =>
       blocks.reduce((countArray, curr) => {

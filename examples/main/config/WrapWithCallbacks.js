@@ -1,5 +1,6 @@
 import React, { Children } from 'react';
 import PropTypes from 'prop-types';
+import { getEntities } from '../../../packages/editor/web/src/lib/editorStateConversion';
 
 export default class WrapWithCallbacks extends React.Component {
 
@@ -14,33 +15,6 @@ export default class WrapWithCallbacks extends React.Component {
 		return Children.only(React.cloneElement(children, { helpers }));
 	}
 }
-
-const getEntities = (editorState, entityType = null) => {
-	const content = editorState.getCurrentContent();
-	const entities = [];
-	content.getBlocksAsArray().forEach((block) => {
-		let selectedEntity = null;
-		block.findEntityRanges(
-			(character) => {
-				if (character.getEntity() !== null) {
-					const entity = content.getEntity(character.getEntity());
-					if (!entityType || (entityType && entity.getType() === entityType)) {
-						selectedEntity = {
-							entityKey: character.getEntity(),
-							blockKey: block.getKey(),
-							entity,
-						};
-						return true;
-					}
-				}
-				return false;
-			},
-			(start, end) => {
-				entities.push({ ...selectedEntity, start, end });
-			});
-	});
-	return entities;
-};
 
 WrapWithCallbacks.publish = async (post_id, editorState = {}, callBack = data => true) => {
 	if (Object.entries(editorState).length === 0)

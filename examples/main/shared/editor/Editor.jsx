@@ -29,12 +29,7 @@ export default class Editor extends PureComponent {
   constructor(props) {
     super(props);
     // ReactModal.setAppElement('#root');
-    this.initEditorProps();
-    const continuously = (func) => {
-      WrapWithCallbacks.publish('123', this.props.editorState, data => console.log('Data received', data));
-      setTimeout(() => func(func), 5000);
-    };
-    continuously(continuously);
+    this.initEditorProps();;
   }
 
   initEditorProps() {

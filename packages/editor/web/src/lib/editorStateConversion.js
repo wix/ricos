@@ -13,4 +13,32 @@ const createEmpty = () => addVersion(EditorState.createEmpty(), version);
 const createWithContent = contentState =>
   addVersion(EditorState.createWithContent(contentState), contentState.VERSION);
 
-export { EditorState, createEmpty, createWithContent, convertToRaw, convertFromRaw };
+const getEntities = (editorState, entityType = null) => {
+  const content = editorState.getCurrentContent();
+  const entities = [];
+  content.getBlocksAsArray().forEach(block => {
+    let selectedEntity = null;
+    block.findEntityRanges(
+      character => {
+        if (character.getEntity() !== null) {
+          const entity = content.getEntity(character.getEntity());
+          if (!entityType || (entityType && entity.getType() === entityType)) {
+            selectedEntity = {
+              entityKey: character.getEntity(),
+              blockKey: block.getKey(),
+              entity,
+            };
+            return true;
+          }
+        }
+        return false;
+      },
+      (start, end) => {
+        entities.push({ ...selectedEntity, start, end });
+      }
+    );
+  });
+  return entities;
+};
+
+export { EditorState, createEmpty, createWithContent, convertToRaw, convertFromRaw, getEntities };
