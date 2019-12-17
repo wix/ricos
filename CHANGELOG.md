@@ -29,7 +29,7 @@
   - `pubsub`
     - [#528](https://github.com/wix-incubator/rich-content/pull/528) rename visibleBlock to focusedBlock
   - `common`
-    - [#534](https://github.com/wix-incubator/rich-content/pull/534) export isValidEditorData and normalization from common/src/lib
+    - [#534](https://github.com/wix-incubator/rich-content/pull/534) exposes data normalization and data validation utils as separate entries
   
 </details>
 <hr/>
@@ -1822,4 +1822,3 @@ _NOTE:_ From this version onwards all modules will have the same version number,
 - `editor`
   - [#58](https://github.com/wix-incubator/rich-content/pull/58) Default `locale` is `'en'`, English texts are imported statically
     Set the `locale` and `localeResource` props to use another language
-
