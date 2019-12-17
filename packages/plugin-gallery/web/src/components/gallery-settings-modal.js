@@ -14,7 +14,6 @@ import LayoutControlsSection from './layout-controls-section';
 import { SortableComponent } from './gallery-controls/gallery-items-sortable';
 import layoutData from '../helpers/layout-data-provider';
 import GallerySettingsMobileHeader from './gallery-controls/gallery-settings-mobile-header';
-import classNames from 'classnames';
 
 class ManageMediaSection extends Component {
   applyItems = items => {
@@ -268,14 +267,6 @@ export class GallerySettingsModal extends Component {
           dir={languageDir}
         >
           <h3 className={styles.gallerySettings_title}>{headerText}</h3>
-          <h3
-            className={classNames(
-              styles.gallerySettings_title,
-              styles.gallerySettings_title_placeholder
-            )}
-          >
-            {'placeholder'}
-          </h3>
           <div>
             <Tabs value={activeTab} theme={this.props.theme} onTabSelected={this.onTabSelected}>
               <Tab

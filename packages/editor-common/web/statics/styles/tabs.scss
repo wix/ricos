@@ -3,8 +3,8 @@
 }
 
 .tabs_headers {
-  position: fixed;
-  width: 420px;
+  position: sticky;
+  top: 100px;
   display: flex;
   justify-content: space-evenly;
   height: 50px;
@@ -14,11 +14,6 @@
   cursor: pointer;
   background-color: white;
   z-index: 1;
-}
-
-.tabs_headers_placeholder{
-  visibility: hidden;
-  position: static;
 }
 
 .tabs_headers_option {
