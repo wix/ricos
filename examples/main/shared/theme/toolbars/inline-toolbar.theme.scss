@@ -36,7 +36,6 @@
 }
 
 .inlineToolbarButton_active {
-  color: cyan;
 }
 
 .inlineToolbarSeparator {
@@ -48,6 +47,10 @@
 }
 
 .inlineToolbarDropdownButton_wrapper:hover .inlineToolbarDropdownButton_icon {
+  color: cyan;
+}
+
+.inlineToolbarDropdownButton_active {
   color: cyan;
 }
 

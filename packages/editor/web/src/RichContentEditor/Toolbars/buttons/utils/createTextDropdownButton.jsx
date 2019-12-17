@@ -50,7 +50,7 @@ export default ({ buttons, activeItem, onChange, tooltipTextKey }) =>
           //eslint-disable-next-line camelcase
           inlineToolbarButton_active: classNames(
             styles.inlineToolbarButton_active,
-            theme && theme.inlineToolbarButton_active
+            theme && theme.inlineToolbarDropdownButton_active
           ),
         },
       };
