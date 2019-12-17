@@ -14,6 +14,11 @@ class ColorToggleComponent extends PureComponent {
     };
   }
 
+  static getDerivedStateFromProps(props, state) {
+    const { color } = props;
+    return color === state.color ? null : { ...state, color };
+  }
+
   onClicked = () => {
     this.props.toggle(this.props.pickerType);
     this.setState({ isOpened: !this.state.isOpened });
