@@ -20,7 +20,7 @@ const createGiphyPlugin = (config = {}) => {
     settings,
     t,
     isMobile,
-    defaultContentState: DEFAULTS,
+    defaultPluginData: DEFAULTS,
     ...rest,
   });
 };

@@ -22,7 +22,7 @@ const createVideoPlugin = (config = {}) => {
     t,
     isMobile,
     disableRightClick: config?.uiSettings?.disableRightClick,
-    defaultContentState: DEFAULTS,
+    defaultPluginData: DEFAULTS,
     ...rest,
   });
 };

@@ -41,7 +41,7 @@ const createButtonPlugin = (config = {}) => {
     }),
     helpers,
     t,
-    defaultContentState: DEFAULTS,
+    defaultPluginData: DEFAULTS,
     ...rest,
   });
 };

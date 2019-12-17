@@ -18,7 +18,7 @@ const createFileUploadPlugin = (config = {}) => {
     helpers,
     settings,
     t,
-    defaultContentState: DEFAULTS,
+    defaultPluginData: DEFAULTS,
     ...rest,
   });
 };

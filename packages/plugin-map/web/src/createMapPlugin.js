@@ -24,7 +24,7 @@ const createMapPlugin = (config = {}) => {
     getEditorBounds,
     t,
     isMobile,
-    defaultContentState: DEFAULTS,
+    defaultPluginData: DEFAULTS,
     ...rest,
   });
 };

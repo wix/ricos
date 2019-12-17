@@ -24,7 +24,7 @@ const createGalleryPlugin = (config = {}) => {
     anchorTarget,
     relValue,
     disableRightClick: config?.uiSettings?.disableRightClick,
-    defaultContentState: DEFAULTS,
+    defaultPluginData: DEFAULTS,
     ...rest,
   });
 };

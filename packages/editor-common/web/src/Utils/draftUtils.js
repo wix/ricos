@@ -171,7 +171,7 @@ export const replaceWithEmptyBlock = (editorState, blockKey) => {
   return EditorState.forceSelection(newState, resetBlock.getSelectionAfter());
 };
 
-export const createBlock = (editorState, data, type, setEditorState) => {
+export const createBlock = (editorState, data, type) => {
   const currentEditorState = editorState;
   const contentState = currentEditorState.getCurrentContent();
   const contentStateWithEntity = contentState.createEntity(type, 'IMMUTABLE', cloneDeep(data));
@@ -182,14 +182,7 @@ export const createBlock = (editorState, data, type, setEditorState) => {
   // so get the block before the space
   const newBlock = newEditorState.getCurrentContent().getBlockBefore(recentlyCreatedKey);
 
-  const newSelection = new SelectionState({
-    anchorKey: newBlock.getKey(),
-    anchorOffset: 0,
-    focusKey: newBlock.getKey(),
-    focusOffset: 0,
-  });
-
-  setEditorState?.(EditorState.forceSelection(newEditorState, newSelection));
+  const newSelection = SelectionState.createEmpty(newBlock.getKey());
 
   return { newBlock, newSelection, newEditorState };
 };

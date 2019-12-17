@@ -15,7 +15,7 @@ const createSoundCloudPlugin = (config = {}) => {
     helpers,
     t,
     isMobile,
-    defaultContentState: DEFAULTS,
+    defaultPluginData: DEFAULTS,
     ...rest,
   });
 };

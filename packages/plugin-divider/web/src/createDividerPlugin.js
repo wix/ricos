@@ -26,7 +26,7 @@ const createDividerPlugin = (config = {}) => {
     }),
     helpers,
     t,
-    defaultContentState: DEFAULTS,
+    defaultPluginData: DEFAULTS,
     ...rest,
   });
 };

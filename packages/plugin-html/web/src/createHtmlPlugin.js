@@ -24,7 +24,7 @@ const createHtmlPlugin = (config = {}) => {
     isMobile,
     t,
     getEditorBounds,
-    defaultContentState: DEFAULTS,
+    defaultPluginData: DEFAULTS,
     ...rest,
   });
 };

@@ -46,7 +46,8 @@ export default ({
 
     addBlock = data => {
       const { getEditorState, setEditorState } = this.props;
-      this.createBlock(getEditorState(), data, blockType, setEditorState);
+      const { newSelection, newEditorState } = this.createBlock(getEditorState(), data, blockType);
+      setEditorState(EditorState.forceSelection(newEditorState, newSelection));
     };
 
     addCustomBlock = buttonData => {
@@ -54,16 +55,15 @@ export default ({
       buttonData.addBlockHandler?.(getEditorState());
     };
 
-    createBlock = (editorState, data, type, setEditorState) => {
+    createBlock = (editorState, data, type) => {
       this.props.hidePopup?.();
-      return createBlock(editorState, data, type, setEditorState);
+      return createBlock(editorState, data, type);
     };
 
-    createBlocksFromFiles = (files, multiblock, data, type) => {
-      const filesArray = multiblock ? files : [files];
+    createBlocksFromFiles = (files, data, type) => {
       let editorState = this.props.getEditorState();
       let selection;
-      filesArray.forEach(file => {
+      files.forEach(file => {
         const { newBlock, newSelection, newEditorState } = this.createBlock(
           editorState,
           data,
@@ -71,7 +71,7 @@ export default ({
         );
         editorState = newEditorState;
         selection = selection || newSelection;
-        const state = { userSelectedFiles: { files: multiblock ? [file] : file } };
+        const state = { userSelectedFiles: { files: Array.isArray(file) ? file : [file] } };
         commonPubsub.set('initialState_' + newBlock.getKey(), state);
       });
 
@@ -104,8 +104,8 @@ export default ({
           (galleryData && settings.createGalleryForMultipleImages && files.length > 1);
 
         const { newEditorState, newSelection } = shouldCreateGallery
-          ? this.createBlocksFromFiles(files, false, galleryData, galleryType)
-          : this.createBlocksFromFiles(files, true, button.componentData, blockType);
+          ? this.createBlocksFromFiles([files], galleryData, galleryType)
+          : this.createBlocksFromFiles(files, button.componentData, blockType);
 
         this.props.setEditorState(EditorState.forceSelection(newEditorState, newSelection));
       }
