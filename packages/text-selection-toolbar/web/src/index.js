@@ -1,3 +1,3 @@
-import TextSelectToolbar from './TextSelectToolbar.jsx';
+import TextSelectionListener from './TextSelectionListener.jsx';
 import ViewerInlineToolBar from './ViewerInlineToolBar.jsx';
-export { TextSelectToolbar, ViewerInlineToolBar };
+export { TextSelectionListener, ViewerInlineToolBar };

@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { TWITTER } from './toolbarOptions';
 import { TWEET_ON_TWITTER_URL } from '../../../common/web/src/consts';
-import * as style from './toolBar.scss';
+import styles from '../statics/styles/viewer-inline-toolbar.scss';
 
 function handleTweetClick(selectedText) {
   window.open(TWEET_ON_TWITTER_URL + encodeURI(selectedText));
@@ -19,11 +19,14 @@ export default class ViewerInlineToolBar extends React.Component {
   constructor(props) {
     super(props);
     const { targetId } = props;
-    this.viewerRect = document.getElementById(targetId).getBoundingClientRect();
+    this.viewerRect =
+      (document.getElementById(targetId) &&
+        document.getElementById(targetId).getBoundingClientRect()) ||
+      {};
   }
   getOptionButton = (action, option) => {
     return (
-      <button key={option} className={style.option} onClick={action}>
+      <button key={option} className={styles.option} onClick={action}>
         {option}
       </button>
     );
@@ -47,11 +50,10 @@ export default class ViewerInlineToolBar extends React.Component {
     const { top, left } = this.viewerRect;
     return (
       <div
-        className={style.container}
+        className={styles.container}
         style={{
           top: y - height - top,
           left: x - left + width * 0.5,
-          position: 'absolute',
         }}
       >
         {this.getToolbarOptions()}

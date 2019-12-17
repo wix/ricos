@@ -91,7 +91,7 @@ class RichContentViewer extends Component {
     );
 
     return (
-      <div className={wrapperClassName} dir={getLangDir(locale)} id="rich-content-viewer">
+      <div className={wrapperClassName} dir={getLangDir(locale)}>
         <Context.Provider value={this.state.contextualData}>
           <div className={editorClassName}>{output}</div>
           <AccessibilityListener />

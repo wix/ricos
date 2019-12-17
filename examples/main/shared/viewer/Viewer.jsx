@@ -7,7 +7,10 @@ import * as Plugins from './ViewerPlugins';
 import theme from '../theme/theme'; // must import after custom styles
 import getImagesData from 'wix-rich-content-fullscreen/src/lib/getImagesData';
 import Fullscreen from 'wix-rich-content-fullscreen';
-import { TextSelectToolbar, ViewerInlineToolBar } from 'wix-rich-content-text-selection-toolbar';
+import {
+  TextSelectionListener,
+  ViewerInlineToolBar,
+} from 'wix-rich-content-text-selection-toolbar';
 
 const anchorTarget = '_top';
 const relValue = 'noreferrer';
@@ -43,8 +46,8 @@ export default class Viewer extends PureComponent {
 
   render() {
     const { expendModeIsOpen, expandModeIndex } = this.state;
-    return (
-      <div className="viewer">
+    return [
+      <div className="viewer" id="rich-content-viewer">
         <RichContentViewer
           helpers={this.helpers}
           typeMappers={Plugins.typeMappers}
@@ -60,17 +63,19 @@ export default class Viewer extends PureComponent {
           locale={this.props.locale}
           // siteDomain="https://www.wix.com"
         />
-        {!isSSR() && [
+        {!isSSR() && (
           <Fullscreen
             isOpen={expendModeIsOpen}
             images={this.expandModeData.images}
             onClose={() => this.setState({ expendModeIsOpen: false })}
             index={expandModeIndex}
-          />,
-          <TextSelectToolbar targetId={'rich-content-viewer'} ToolBar={ViewerInlineToolBar} />,
-        ]}
-      </div>
-    );
+          />
+        )}
+      </div>,
+      !isSSR() && (
+        <TextSelectionListener targetId={'rich-content-viewer'} ToolBar={ViewerInlineToolBar} />
+      ),
+    ];
   }
 }
 

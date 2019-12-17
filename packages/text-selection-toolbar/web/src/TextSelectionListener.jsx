@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { TWITTER } from './toolbarOptions';
 
-export default class TextSelectToolbar extends React.Component {
+export default class TextSelectionListener extends React.Component {
   constructor(props) {
     super(props);
     this.state = { selectedText: '' };
@@ -52,7 +52,7 @@ export default class TextSelectToolbar extends React.Component {
   }
 }
 
-TextSelectToolbar.propTypes = {
+TextSelectionListener.propTypes = {
   targetId: PropTypes.string.isRequired,
   ToolBar: PropTypes.any.isRequired,
 };
