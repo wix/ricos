@@ -14,8 +14,6 @@ class SettingsComponent extends PureComponent {
       buttonText: settingsObj.buttonText,
       target: settingsObj.target || false,
       rel: settingsObj.rel || false,
-      validUrl: settingsObj.validUrl || true,
-      submitted: settingsObj.submitted || true,
     };
   }
 
@@ -34,47 +32,26 @@ class SettingsComponent extends PureComponent {
 
   onLinkChanged = e => {
     const url = e.target.value;
-    this.setState({ url });
-    if (isValidUrl(url) || !url) {
-      this.setState({ validUrl: true });
-      this.props.isValidUrl(true);
-    }
+    const validUrl = isValidUrl(url) || !url;
+    this.setState({ url }, () => this.props.isValidUrl(validUrl));
   };
 
   handleTargetChange = event => {
-    const { url } = this.state;
     this.setState({ target: event.target.checked });
-    if (isValidUrl(url)) {
-      this.setState({ validUrl: true });
-    } else {
-      this.setState({ validUrl: false });
-    }
   };
 
   handleRelChange = event => {
-    const { url } = this.state;
     this.setState({ rel: event.target.checked });
-    if (isValidUrl(url)) {
-      this.setState({ validUrl: true });
-    } else {
-      this.setState({ validUrl: false });
-    }
   };
 
   onBlur = event => {
-    const { url } = this.state;
     this.setState({ target: event.target.checked });
-    if (isValidUrl(url)) {
-      this.setState({ validUrl: true });
-    } else {
-      this.setState({ validUrl: false });
-    }
   };
 
   render() {
     const { t, linkInputRef, isMobile } = this.props;
-    const { buttonText, url, validUrl } = this.state;
-    const errorTooltip = !validUrl || !this.props.validUrl ? t('ButtonModal_Invalid_Link') : null;
+    const { buttonText, url } = this.state;
+    const errorTooltip = !this.props.validUrl ? t('ButtonModal_Invalid_Link') : null;
     return (
       <div className={this.styles.button_settingsComponent_section_content}>
         <div className={this.styles.button_settingsComponent_name_feild}>
@@ -114,21 +91,20 @@ class SettingsComponent extends PureComponent {
           showTooltip={false}
           data-hook="ButtonInputModal"
         />
-        {!this.state.validUrl || !this.props.validUrl ? (
+        {!this.props.validUrl ? (
           <div className={this.styles.button_settingsComponent_errorMessage}>
             {t('ButtonModal_InputLink_ErrorMessage')}
           </div>
         ) : null}
         <div
           style={{
-            paddingTop:
-              !this.state.validUrl || !this.props.validUrl
-                ? isMobile
-                  ? '21px'
-                  : '25px'
-                : isMobile
-                ? '33px'
-                : '34px',
+            paddingTop: !this.props.validUrl
+              ? isMobile
+                ? '21px'
+                : '25px'
+              : isMobile
+              ? '33px'
+              : '34px',
           }}
           className={this.styles.button_settingsComponent_checkBoxes}
         >

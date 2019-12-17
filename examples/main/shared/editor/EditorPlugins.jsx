@@ -166,6 +166,7 @@ const uiSettings = {
     blankTargetToggleVisibilityFn: () => true,
     nofollowRelToggleVisibilityFn: () => true,
     dropDown: getLinkPanelDropDownConfig(),
+    //placeholder: "Enter a URL here",
   },
   // disableRightClick: true,
 };
@@ -178,13 +179,7 @@ export const config = {
     //   },
     // },
   },
-  // [BUTTON_TYPE]: {
-  //   toolbar: {
-  //     icons: {
-  //       Button: MyCustomIcon, // insert plugin icon
-  //     },
-  //   },
-  // },
+
   [GALLERY_TYPE]: {
     scrollingElement: () =>
       typeof window !== 'undefined' && document.getElementsByClassName('editor-example')[0],
@@ -435,6 +430,11 @@ export const config = {
     // },
   },
   [BUTTON_TYPE]: {
+    //   toolbar: {
+    //     icons: {
+    //       Button: MyCustomIcon, // insert plugin icon
+    //     },
+    //   },
     palette: ['#FEFDFD', '#D5D4D4', '#ABCAFF', '#81B0FF', '#0261FF', '#0141AA'],
     selectionBackgroundColor: 'fuchsia',
     selectionBorderColor: '#FFF',

@@ -13,17 +13,45 @@
     Click to see more.
   </summary>
   
+  ### :rocket: New Feature
+  - `fullscreen`
+    - [#519](https://github.com/wix-incubator/rich-content/pull/519) add props: topMargin, backgroundColor, foregroundColor. Remove counter when only 1 image. Larger z-index
+  - `editor-common` 
+    - [#526](https://github.com/wix-incubator/rich-content/pull/526) `onAtomicBlockFocus` is invoked with `undefined` when an atomic block loses focus
+    - [#530](https://github.com/wix-incubator/rich-content/pull/530)`uiSettings.linkPanel.placeholder` determines the link panel's placeholder
   ### :bug: Bug Fix
   - `divider`
     - [#511](https://github.com/wix-incubator/rich-content/pull/511) divider's width set to 100% in editor&viewer when no initial state of width is given
   - `editor`
     - [#521](https://github.com/wix-incubator/rich-content/pull/521) replace p element with div element in lists
   ### :house: Internal
+  - `gallery-settings`
+    - [#535](https://github.com/wix-incubator/rich-content/pull/535) gallery setting's header, tabs and footer position
   - `editor`
-    - [#510](https://github.com/wix-incubator/rich-content/pull/510) custom icons code refactoring
-
+    - [#522](https://github.com/wix-incubator/rich-content/pull/522) support legacy margin scss attributes
+  ### :house: Internal
+  - `codeBlock`
+    - [#527](https://github.com/wix-incubator/rich-content/pull/527) remove onTab (moved to keyBindingFn/handleKeyCommand)
+  - `pubsub`
+    - [#528](https://github.com/wix-incubator/rich-content/pull/528) rename visibleBlock to focusedBlock
+  - `button`
+    - [#517](https://github.com/wix-incubator/rich-content/pull/517) plugin button refactor
+  
 </details>
 <hr/>
+
+## 6.6.1 (Dec 11, 2019)
+### :rocket: New Feature
+- `fullscreen`
+  - [#519](https://github.com/wix-incubator/rich-content/pull/519) add props: topMargin, backgroundColor, foregroundColor. Remove counter when only 1 image. Larger z-index
+### :bug: Bug Fix
+- `divider`
+  - [#511](https://github.com/wix-incubator/rich-content/pull/511) divider's width set to 100% in editor&viewer when no initial state of width is given
+- `emoji`
+  - [#525](https://github.com/wix-incubator/rich-content/pull/525) fix emoji delete bug
+### :house: Internal
+- `editor`
+  - [#510](https://github.com/wix-incubator/rich-content/pull/510) custom icons code refactoring
 
 ## 6.6.0 (Dec 8, 2019)
 ### :rocket: New Feature
@@ -1800,4 +1828,3 @@ _NOTE:_ From this version onwards all modules will have the same version number,
 - `editor`
   - [#58](https://github.com/wix-incubator/rich-content/pull/58) Default `locale` is `'en'`, English texts are imported statically
     Set the `locale` and `localeResource` props to use another language
-
