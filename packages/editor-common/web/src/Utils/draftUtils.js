@@ -1,4 +1,4 @@
-import { EditorState, Modifier, RichUtils, SelectionState } from 'draft-js';
+import { EditorState, Modifier, RichUtils, SelectionState, AtomicBlockUtils } from 'draft-js';
 import { cloneDeep, flatMap, findIndex, findLastIndex } from 'lodash';
 
 export const insertLinkInPosition = (
@@ -169,6 +169,29 @@ export const replaceWithEmptyBlock = (editorState, blockKey) => {
   );
   const newState = EditorState.push(editorState, resetBlock, 'remove-range');
   return EditorState.forceSelection(newState, resetBlock.getSelectionAfter());
+};
+
+export const createBlock = (editorState, data, type, setEditorState) => {
+  const currentEditorState = editorState;
+  const contentState = currentEditorState.getCurrentContent();
+  const contentStateWithEntity = contentState.createEntity(type, 'IMMUTABLE', cloneDeep(data));
+  const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
+  const newEditorState = AtomicBlockUtils.insertAtomicBlock(currentEditorState, entityKey, ' ');
+  const recentlyCreatedKey = newEditorState.getSelection().getAnchorKey();
+  // when adding atomic block, there is the atomic itself, and then there is a text block with one space,
+  // so get the block before the space
+  const newBlock = newEditorState.getCurrentContent().getBlockBefore(recentlyCreatedKey);
+
+  const newSelection = new SelectionState({
+    anchorKey: newBlock.getKey(),
+    anchorOffset: 0,
+    focusKey: newBlock.getKey(),
+    focusOffset: 0,
+  });
+
+  setEditorState?.(EditorState.forceSelection(newEditorState, newSelection));
+
+  return { newBlock, newSelection, newEditorState };
 };
 
 export const deleteBlock = (editorState, blockKey) => {

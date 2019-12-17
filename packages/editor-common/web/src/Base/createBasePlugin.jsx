@@ -40,7 +40,7 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
     defaultContentState,
     pluginDefaults,
   } = config;
-  pluginDefaults[config.type] = defaultContentState;
+  pluginDefaults && (pluginDefaults[config.type] = defaultContentState);
   const toolbarTheme = { ...getToolbarTheme(config.theme, 'plugin'), ...config.theme };
   const Toolbar =
     config?.toolbar?.InlineButtons &&
