@@ -2,47 +2,46 @@ import React from 'react';
 import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import TestData from './TestData/initial-state';
-// const Common = require('../../../common/web/src/index');
-// const EditorCommon = require('../../../editor-common/web/src/index');
-import { RichContentEditor } from '../src/index';
+const Common = require('../../../common/web/src/index');
+const EditorCommon = require('../../../editor-common/web/src/index');
 
 Enzyme.configure({ adapter: new Adapter() });
 const { shallow } = Enzyme;
 
 // the mock is needed to overcome the 'Context is undefined' issue
-// const getRichContentEditor = () => {
-//   jest.doMock('wix-rich-content-common', () => ({
-//     ...Common,
-//   }));
+const getRichContentEditor = () => {
+  jest.doMock('wix-rich-content-common', () => ({
+    ...Common,
+  }));
 
-//   jest.doMock('wix-rich-content-editor-common', () => ({
-//     ...EditorCommon,
-//   }));
+  jest.doMock('wix-rich-content-editor-common', () => ({
+    ...EditorCommon,
+  }));
 
-//   return require('../src/index').RichContentEditor;
-// };
+  return require('../src/index').RichContentEditor;
+};
 
 describe('RichContentEditor', () => {
   it('should render', async () => {
-    // const RichContentEditor = getRichContentEditor();
+    const RichContentEditor = getRichContentEditor();
     const wrapper = shallow(<RichContentEditor />);
     expect(wrapper.html()).toEqual(expect.stringContaining('class="DraftEditor-root"'));
   });
 
   it('should render edit mode', async () => {
-    // const RichContentEditor = getRichContentEditor();
+    const RichContentEditor = getRichContentEditor();
     const wrapper = shallow(<RichContentEditor />);
     expect(wrapper.html()).toEqual(expect.stringContaining('contenteditable="true"'));
   });
 
   it('should render read only mode', async () => {
-    // const RichContentEditor = getRichContentEditor();
+    const RichContentEditor = getRichContentEditor();
     const wrapper = shallow(<RichContentEditor readOnly />);
     expect(wrapper.html()).toEqual(expect.stringContaining('contenteditable="false"'));
   });
 
   it('should render text only', async () => {
-    // const RichContentEditor = getRichContentEditor();
+    const RichContentEditor = getRichContentEditor();
     const wrapper = shallow(<RichContentEditor initialState={TestData.onlyText} />);
     expect(wrapper.html()).toEqual(expect.stringContaining('Hello text only'));
   });
