@@ -23,7 +23,7 @@
     "e2e": "start-server-and-test e2e:app http://localhost:3002 e2e:run",
     "e2e:updateSnapshots": "start-server-and-test e2e:app http://localhost:3002 e2e:run:update",
     "e2e:ci": "start-server-and-test e2e:app:run http://localhost:3002 e2e:run:ci",
-    "e2e:run": "docker run --ipc=host -it -v $PWD:/e2e -w /e2e --entrypoint=cypress --env-file ./.e2e.env.list cypress/included:3.7.0 run --config baseUrl=http://host.docker.internal:3002",
+    "e2e:run": "npx cypress run",
     "e2e:run:ci": "docker run --ipc=host -i -v $PWD:/e2e -w /e2e --network='host' --env-file ./.e2e.env.list cypress/included:3.7.0 --env CYPRESS_CONFIG=ci --record false",
     "e2e:run:update": "npm run e2e:run -- --env CYPRESS_CONFIG=update,updateSnapshots=true",
     "e2e:debug": "npm run e2e:app:dev & cypress open",
