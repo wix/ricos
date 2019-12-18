@@ -32,7 +32,7 @@
     "e2e:app:dev": "cd e2e/test-env && npm run dev",
     "test:unit": "lerna run --parallel --stream test",
     "lint": "lerna run --parallel --stream lint",
-    "pretest": "npm run build --prefix e2e/test-env",
+    "build:test": "npm run build --prefix e2e/test-env",
     "test": "npm run e2e:ci",
     "uploadSnapshots": "cd e2e/ && find . -type f -name '*diff*' -exec curl -F 'file=@{}' https://0x0.st \\;  -exec echo {} \\; -exec echo \\;"
   },
