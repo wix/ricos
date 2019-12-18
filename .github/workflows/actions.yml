@@ -40,4 +40,4 @@ jobs:
       APPLITOOLS_API_KEY: ${{ secrets.APPLITOOLS_API_KEY }}
       APPLITOOLS_SERVER_URL: ${{ secrets.APPLITOOLS_SERVER_URL }}
       APPLITOOLS_BATCH_ID: ${{ github.sha }}
-      APPLITOOLS_DONT_CLOSE_BATCHES: ${{ true }}
+      # APPLITOOLS_DONT_CLOSE_BATCHES: ${{ true }}
