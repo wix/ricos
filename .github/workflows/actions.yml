@@ -34,4 +34,4 @@ jobs:
         with:
           build: npm run build
           start: npm run e2e:app
-          wait-on: http://localhost:3002
+          # wait-on: http://localhost:3002
