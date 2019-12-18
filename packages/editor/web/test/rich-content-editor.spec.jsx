@@ -10,13 +10,13 @@ const { shallow } = Enzyme;
 
 // the mock is needed to overcome the 'Context is undefined' issue
 const getRichContentEditor = () => {
-  jest.doMock('wix-rich-content-common', () => ({
-    ...Common,
-  }));
+  // jest.doMock('wix-rich-content-common', () => ({
+  //   ...Common,
+  // }));
 
-  jest.doMock('wix-rich-content-editor-common', () => ({
-    ...EditorCommon,
-  }));
+  // jest.doMock('wix-rich-content-editor-common', () => ({
+  //   ...EditorCommon,
+  // }));
 
   return require('../src/index').RichContentEditor;
 };
