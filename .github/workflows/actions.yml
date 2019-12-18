@@ -35,3 +35,7 @@ jobs:
           build: npm run build:test
           start: npm run e2e:app:run
           wait-on: 'http://localhost:3002'
+    env:
+      APPLITOOLS_API_KEY: ${{ secrets.APPLITOOLS_API_KEY }}
+      APPLITOOLS_SERVER_URL: ${{ secrets.APPLITOOLS_SERVER_URL }}
+      CYPRESS_VIDEO: false
