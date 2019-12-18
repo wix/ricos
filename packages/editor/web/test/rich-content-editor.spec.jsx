@@ -12,6 +12,9 @@ const { shallow } = Enzyme;
 const getRichContentEditor = () => {
   jest.doMock('wix-rich-content-common', () => ({
     ...Common,
+  }));
+
+  jest.doMock('wix-rich-content-editor-common', () => ({
     ...EditorCommon,
   }));
 
