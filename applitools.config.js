@@ -11,9 +11,10 @@ function getHeadHash() {
     .trim();
 }
 
+process.env.APPLITOOLS_DONT_CLOSE_BATCHES = true;
+
 module.exports = {
   ...privateConfig,
   concurrency: 200,
   batchId: getHeadHash(),
-  applitoolsDontCloseBatches: true,
 };
