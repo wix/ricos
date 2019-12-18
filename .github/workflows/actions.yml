@@ -2,15 +2,6 @@ name: action
 on: push
 
 jobs:
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 12
-      - run: npm install
-      - run: npm run lint
   cypress-run:
     runs-on: ubuntu-latest
     steps:
@@ -28,3 +19,12 @@ jobs:
       APPLITOOLS_API_KEY: ${{ secrets.APPLITOOLS_API_KEY }}
       APPLITOOLS_SERVER_URL: ${{ secrets.APPLITOOLS_SERVER_URL }}
       APPLITOOLS_BATCH_ID: ${{ github.sha }}
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - run: npm install
+      - run: npm run lint
