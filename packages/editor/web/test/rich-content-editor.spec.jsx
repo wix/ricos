@@ -3,7 +3,6 @@ import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import TestData from './TestData/initial-state';
 const Common = require('../../../common/web/src/index');
-const EditorCommon = require('../../../editor-common/web/src/index');
 
 Enzyme.configure({ adapter: new Adapter() });
 const { shallow } = Enzyme;
@@ -12,10 +11,6 @@ const { shallow } = Enzyme;
 const getRichContentEditor = () => {
   jest.doMock('wix-rich-content-common', () => ({
     ...Common,
-  }));
-
-  jest.doMock('wix-rich-content-editor-common', () => ({
-    ...EditorCommon,
   }));
 
   return require('../src/index').RichContentEditor;
