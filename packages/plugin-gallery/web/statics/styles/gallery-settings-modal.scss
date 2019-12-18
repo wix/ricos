@@ -11,12 +11,13 @@ $FOOTER_HEIGHT: 100px;
 
 .gallerySettings_title {
   font-size: 18px;
+  width: 100%;
   color: #333333;
   line-height: 30px;
   padding: 45px 30px 24px;
   margin: 0;
   border-bottom: 1px solid #ededed;
-  position: sticky;
+  position: relative;
   top: 0;
   background-color: #fff;
   z-index: 5;
@@ -40,6 +41,6 @@ $FOOTER_HEIGHT: 100px;
 .gallerySettings {
   height: calc(100% - #{$TITLE_HEIGHT} - #{$FOOTER_HEIGHT});
   margin: $TITLE_HEIGHT auto $FOOTER_HEIGHT auto;
-  // overflow-y: auto;
-  // overflow-x: hidden;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
