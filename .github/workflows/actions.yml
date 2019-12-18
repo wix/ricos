@@ -33,5 +33,5 @@ jobs:
         uses: cypress-io/github-action@v1
         with:
           build: npm run build
-          start: npm run e2e:app
+          start: npm run e2e:app:run
           wait-on: 'http://localhost:3002'
