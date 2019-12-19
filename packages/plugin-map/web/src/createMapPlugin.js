@@ -1,5 +1,5 @@
 import { createBasePlugin } from 'wix-rich-content-editor-common';
-import { MAP_TYPE } from './constants';
+import { MAP_TYPE, DEFAULTS } from './constants';
 import { MapViewer } from './MapViewer';
 import createToolbar from './toolbar';
 
@@ -24,6 +24,7 @@ const createMapPlugin = (config = {}) => {
     getEditorBounds,
     t,
     isMobile,
+    defaultPluginData: DEFAULTS,
     ...rest,
   });
 };

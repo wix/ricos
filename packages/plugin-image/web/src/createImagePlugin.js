@@ -4,7 +4,7 @@ import {
   PLUGIN_DECORATION_PROPS,
   PLUGIN_DECORATIONS,
 } from 'wix-rich-content-editor-common';
-import { Component } from './image-component';
+import { Component, DEFAULTS } from './image-component';
 import { IMAGE_TYPE, IMAGE_TYPE_LEGACY } from './types';
 
 const createImagePlugin = (config = {}) => {
@@ -58,6 +58,7 @@ const createImagePlugin = (config = {}) => {
     t,
     isMobile,
     disableRightClick: config?.uiSettings?.disableRightClick,
+    defaultPluginData: DEFAULTS,
     ...rest,
   });
 };

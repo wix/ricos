@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { validate, mergeStyles, Context, pluginGallerySchema } from 'wix-rich-content-common';
 import { isEqual } from 'lodash';
 import { convertItemData } from './helpers/convert-item-data';
-import { getDefault, isHorizontalLayout, sampleItems } from './constants';
+import { DEFAULTS, isHorizontalLayout, sampleItems } from './constants';
 import resizeMediaUrl from './helpers/resize-media-url';
 import styles from '../statics/styles/viewer.scss';
 import 'pro-gallery/dist/statics/main.min.css';
@@ -71,10 +71,9 @@ class GalleryViewer extends React.Component {
   };
 
   stateFromProps = props => {
-    const defaults = getDefault();
-    const items = props.componentData.items || defaults.items;
+    const items = props.componentData.items || DEFAULTS.items;
     const styleParams = this.getStyleParams(
-      Object.assign(defaults.styles, props.componentData.styles || {}),
+      Object.assign(DEFAULTS.styles, props.componentData.styles || {}),
       items
     );
     return {

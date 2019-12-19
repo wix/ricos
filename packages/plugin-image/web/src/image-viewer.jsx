@@ -12,7 +12,7 @@ import {
   WIX_MEDIA_DEFAULT,
   pluginImageSchema,
 } from 'wix-rich-content-common';
-import { getDefault, SEO_IMAGE_WIDTH } from './consts';
+import { DEFAULTS, SEO_IMAGE_WIDTH } from './consts';
 import styles from '../statics/styles/image-viewer.scss';
 import ExpandIcon from './icons/expand.svg';
 
@@ -191,7 +191,7 @@ class ImageViewer extends React.Component {
     if (!metadata || metadata.caption === defaultCaption || metadata.caption === '') {
       return false;
     }
-    const data = componentData || getDefault();
+    const data = componentData || DEFAULTS;
     if (data.config.size === 'original' && data.src && data.src.width) {
       return data.src.width >= 350;
     }
@@ -210,7 +210,7 @@ class ImageViewer extends React.Component {
     this.styles = this.styles || mergeStyles({ styles, theme: this.context.theme });
     const { componentData, className, isFocused, readOnly, settings, defaultCaption } = this.props;
     const { fallbackImageSrc } = this.state;
-    const data = componentData || getDefault();
+    const data = componentData || DEFAULTS;
     const { metadata = {} } = componentData;
 
     const hasLink = data.config && data.config.link;

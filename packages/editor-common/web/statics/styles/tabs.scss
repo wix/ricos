@@ -3,8 +3,6 @@
 }
 
 .tabs_headers {
-  position: sticky;
-  top: 100px;
   display: flex;
   justify-content: space-evenly;
   height: 50px;
@@ -12,8 +10,6 @@
   font-size: 14px;
   line-height: 1.5;
   cursor: pointer;
-  background-color: white;
-  z-index: 1;
 }
 
 .tabs_headers_option {

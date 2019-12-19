@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { AtomicBlockUtils, EditorState, SelectionState } from 'draft-js';
-import { cloneDeep, isEmpty } from 'lodash';
+import { EditorState } from 'draft-js';
+import { isEmpty } from 'lodash';
 import { mergeStyles, Context } from 'wix-rich-content-common';
+import { createBlock } from '../Utils/draftUtils.js';
 import classNames from 'classnames';
 import FileInput from '../Components/FileInput';
 import ToolbarButton from '../Components/ToolbarButton';
@@ -11,7 +12,17 @@ import styles from '../../statics/styles/toolbar-button.scss';
 /**
  * createBaseInsertPluginButton
  */
-export default ({ blockType, button, helpers, pubsub, settings, t, isMobile }) => {
+export default ({
+  blockType,
+  button,
+  helpers,
+  pubsub,
+  commonPubsub,
+  settings,
+  t,
+  isMobile,
+  pluginDefaults,
+}) => {
   class InsertPluginButton extends React.PureComponent {
     constructor(props) {
       super(props);
@@ -33,46 +44,38 @@ export default ({ blockType, button, helpers, pubsub, settings, t, isMobile }) =
       }
     };
 
-    addBlock = data => this.createBlock(data, true);
+    addBlock = data => {
+      const { getEditorState, setEditorState } = this.props;
+      const { newSelection, newEditorState } = this.createBlock(getEditorState(), data, blockType);
+      setEditorState(EditorState.forceSelection(newEditorState, newSelection));
+    };
 
     addCustomBlock = buttonData => {
       const { getEditorState } = this.props;
-      if (buttonData.addBlockHandler) {
-        const editorState = getEditorState();
-        buttonData.addBlockHandler(editorState);
-      }
+      buttonData.addBlockHandler?.(getEditorState());
     };
 
-    createBlock = (data, shouldSetEditorState = false) => {
-      const { getEditorState, setEditorState, hidePopup } = this.props;
-      const contentState = getEditorState().getCurrentContent();
-      const contentStateWithEntity = contentState.createEntity(
-        blockType,
-        'IMMUTABLE',
-        cloneDeep(data)
-      );
-      const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
-      const newEditorState = AtomicBlockUtils.insertAtomicBlock(getEditorState(), entityKey, ' ');
-      if (hidePopup) {
-        hidePopup();
-      }
-      const recentlyCreatedKey = newEditorState.getSelection().getAnchorKey();
-      // when adding atomic block, there is the atomic itself, and then there is a text block with one space,
-      // so get the block before the space
-      const newBlock = newEditorState.getCurrentContent().getBlockBefore(recentlyCreatedKey);
+    createBlock = (editorState, data, type) => {
+      this.props.hidePopup?.();
+      return createBlock(editorState, data, type);
+    };
 
-      const newSelection = new SelectionState({
-        anchorKey: newBlock.getKey(),
-        anchorOffset: 0,
-        focusKey: newBlock.getKey(),
-        focusOffset: 0,
+    createBlocksFromFiles = (files, data, type) => {
+      let editorState = this.props.getEditorState();
+      let selection;
+      files.forEach(file => {
+        const { newBlock, newSelection, newEditorState } = this.createBlock(
+          editorState,
+          data,
+          type
+        );
+        editorState = newEditorState;
+        selection = selection || newSelection;
+        const state = { userSelectedFiles: { files: Array.isArray(file) ? file : [file] } };
+        commonPubsub.set('initialState_' + newBlock.getKey(), state);
       });
 
-      if (shouldSetEditorState) {
-        setEditorState(EditorState.forceSelection(newEditorState, newSelection));
-      }
-
-      return { newBlock, newSelection, newEditorState };
+      return { newEditorState: editorState, newSelection: selection };
     };
 
     onClick = event => {
@@ -94,9 +97,16 @@ export default ({ blockType, button, helpers, pubsub, settings, t, isMobile }) =
 
     handleFileChange = files => {
       if (files.length > 0) {
-        const { newBlock, newSelection, newEditorState } = this.createBlock(button.componentData);
-        const state = { userSelectedFiles: { files } };
-        pubsub.set('initialState_' + newBlock.getKey(), state);
+        const galleryType = 'wix-draft-plugin-gallery';
+        const galleryData = pluginDefaults[galleryType];
+        const shouldCreateGallery =
+          blockType === galleryType ||
+          (galleryData && settings.createGalleryForMultipleImages && files.length > 1);
+
+        const { newEditorState, newSelection } = shouldCreateGallery
+          ? this.createBlocksFromFiles([files], galleryData, galleryType)
+          : this.createBlocksFromFiles(files, button.componentData, blockType);
+
         this.props.setEditorState(EditorState.forceSelection(newEditorState, newSelection));
       }
     };
@@ -210,6 +220,7 @@ export default ({ blockType, button, helpers, pubsub, settings, t, isMobile }) =
       const { name, Icon } = button;
       const { accept } = settings || {};
       const { styles } = this;
+
       return (
         <FileInput
           dataHook={`${button.name}_file_input`}

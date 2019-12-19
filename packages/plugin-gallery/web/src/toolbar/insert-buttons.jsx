@@ -1,5 +1,5 @@
 import { TOOLBARS } from 'wix-rich-content-editor-common';
-import { getDefault } from './../gallery-component';
+import { DEFAULTS } from './../gallery-component';
 import { InsertPluginIcon } from '../icons';
 
 export default ({ helpers, t, settings }) => {
@@ -11,7 +11,7 @@ export default ({ helpers, t, settings }) => {
       name: 'Gallery',
       tooltipText: t('GalleryPlugin_InsertButton_Tooltip'),
       Icon: icon,
-      componentData: getDefault(),
+      componentData: DEFAULTS,
       helpers,
       toolbars: [TOOLBARS.FOOTER, TOOLBARS.SIDE],
     },

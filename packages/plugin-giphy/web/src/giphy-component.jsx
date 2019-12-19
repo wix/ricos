@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import GiphyViewer from './giphy-viewer';
-import { GIPHY_TYPE } from './constants';
+import { GIPHY_TYPE, DEFAULTS } from './constants';
 
 class GiphyComponent extends Component {
   static type = {
@@ -53,4 +53,4 @@ GiphyComponent.propTypes = {
   onClick: PropTypes.func.isRequired,
 };
 
-export { GiphyComponent as Component };
+export { GiphyComponent as Component, DEFAULTS };

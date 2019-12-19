@@ -1,6 +1,6 @@
 import createToolbar from './toolbar';
 import { createBasePlugin } from 'wix-rich-content-editor-common';
-import { Component } from './HtmlComponent';
+import { Component, DEFAULTS } from './HtmlComponent';
 import { HTML_TYPE } from './types';
 
 const createHtmlPlugin = (config = {}) => {
@@ -24,6 +24,7 @@ const createHtmlPlugin = (config = {}) => {
     isMobile,
     t,
     getEditorBounds,
+    defaultPluginData: DEFAULTS,
     ...rest,
   });
 };

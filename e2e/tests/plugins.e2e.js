@@ -1,3 +1,4 @@
+/*global cy*/
 import {
   PLUGIN_COMPONENT,
   PLUGIN_TOOLBAR_BUTTONS,
@@ -50,6 +51,42 @@ describe('plugins', () => {
       cy.openImageSettings(false).addImageLink();
       cy.hideTooltip();
       cy.eyesCheckWindow(this.test.title);
+    });
+  });
+
+  context('full screen', () => {
+    before(function() {
+      eyesOpen(this);
+    });
+
+    after(() => cy.eyesClose());
+
+    context('image full screen', () => {
+      beforeEach('load editor', () => cy.loadEditorAndViewer('images'));
+
+      it('expand image on full screen', function() {
+        cy.get(`[data-hook=${PLUGIN_COMPONENT.IMAGE}]:last`)
+          .parent()
+          .click();
+        cy.eyesCheckWindow(this.test.title);
+      });
+    });
+
+    context('gallery full screen', () => {
+      beforeEach('load editor', () =>
+        cy
+          .loadEditorAndViewer('gallery')
+          .get(`[data-hook=${'image-item'}]:first`)
+          .get(`[data-hook=${'image-item'}]`)
+          .eq(1)
+      );
+
+      it('expand gallery image on full screen', function() {
+        cy.get(`[data-hook=${'image-item'}]:last`)
+          .parent()
+          .click();
+        cy.eyesCheckWindow(this.test.title);
+      });
     });
   });
 
