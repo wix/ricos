@@ -21,17 +21,16 @@
     "deploy": "node scripts/deployExamples",
     "createVersion": "node scripts/createVersion",
     "e2e": "start-server-and-test e2e:app http://localhost:3002 e2e:run",
+    "e2e:debug": "npm run e2e:app:dev & cypress open",
     "e2e:updateSnapshots": "start-server-and-test e2e:app http://localhost:3002 e2e:run:update",
     "e2e:run": "npx cypress run",
     "e2e:run:update": "npm run e2e:run --env CYPRESS_CONFIG=update,updateSnapshots=true",
-    "e2e:debug": "npm run e2e:app:dev & cypress open",
     "e2e:app": "cd e2e/test-env && npm run build && npm start",
     "e2e:app:run": "cd e2e/test-env && npm start",
     "e2e:app:dev": "cd e2e/test-env && npm run dev",
     "test:unit": "lerna run --parallel --stream test",
     "lint": "lerna run --parallel --stream lint",
-    "build:test": "npm run build && npm run build --prefix e2e/test-env",
-    "uploadSnapshots": "cd e2e/ && find . -type f -name '*diff*' -exec curl -F 'file=@{}' https://0x0.st \\;  -exec echo {} \\; -exec echo \\;"
+    "build:test": "npm run build && npm run build --prefix e2e/test-env"
   },
   "husky": {
     "hooks": {
