@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Measure from 'react-measure';
 import { debounce, identity, pickBy } from 'lodash';
-import { DISPLAY_MODE, TooltipHost } from 'wix-rich-content-editor-common';
+import { DISPLAY_MODE, TooltipHost, TOOLBARS } from 'wix-rich-content-editor-common';
 import { Context } from 'wix-rich-content-common';
 import Styles from '../../../../statics/styles/static-toolbar.scss';
 
@@ -125,7 +125,7 @@ export default class StaticToolbar extends React.PureComponent {
       }
     );
 
-    childrenProps.toolbarName = 'Footer';
+    childrenProps.toolbarName = TOOLBARS.FOOTER;
 
     return (
       <div className={buttonClassNames}>

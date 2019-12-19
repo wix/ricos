@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { FocusManager, EditorModals, getModalStyles } from 'wix-rich-content-editor-common';
+import {
+  FocusManager,
+  EditorModals,
+  getModalStyles,
+  TOOLBARS,
+} from 'wix-rich-content-editor-common';
 import { PlusIcon, PlusActiveIcon } from '../../Icons';
 import Styles from '../../../../statics/styles/side-toolbar.scss';
 
@@ -172,7 +177,7 @@ export default class AddPluginFloatingToolbar extends Component {
               setEditorState={setEditorState}
               theme={theme}
               hidePopup={this.hidePopup}
-              toolbarName={'Sidebar'}
+              toolbarName={TOOLBARS.SIDE}
             />
           ))}
         </div>
