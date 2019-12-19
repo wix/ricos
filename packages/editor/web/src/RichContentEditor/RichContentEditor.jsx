@@ -15,7 +15,7 @@ import getBlockRenderMap from './getBlockRenderMap';
 import { combineStyleFns } from './combineStyleFns';
 import { getStaticTextToolbarId } from './Toolbars/toolbar-id';
 import { TooltipHost, TOOLBARS } from 'wix-rich-content-editor-common';
-import { getEntities } from 'wix-rich-content-editor-common/src/Utils/draftUtils';
+import { calculateDiff } from 'wix-rich-content-editor-common/src/Utils/draftUtils';
 import {
   Context,
   AccessibilityListener,
@@ -229,51 +229,14 @@ class RichContentEditor extends Component {
     return element && element.querySelector('*[tabindex="0"]');
   }
 
-  calculateDiff = async (prevState, newState) => {
-    const blocks = state => state.getCurrentContent().getBlocksAsArray();
-    const onlyRelevant = blocksArr =>
-      blocksArr.filter(block => block.type !== 'unstyled' && block.type !== 'atomic');
-
-    const entities = state =>
-      getEntities(state).map(value => {
-        return { ...value, key: value.entityKey };
-      });
-
-    const reduce = blocks =>
-      blocks.reduce((countArray, curr) => {
-        return {
-          ...countArray,
-          [curr.key]: curr,
-        };
-      }, {});
-
-    const beforePlugins = reduce(onlyRelevant(blocks(prevState)).concat(entities(prevState)));
-    const afterPlugins = reduce(onlyRelevant(blocks(newState)).concat(entities(newState)));
-
+  updateEditorState = editorState => {
     const {
       helpers: {
         //activityCallbacks: { onPluginDelete = () => false, onPluginChange = () => false } = {},
         activityCallbacks: { onPluginDelete = () => false } = {},
       } = {},
     } = this.props;
-
-    Object.keys(beforePlugins).forEach(key => {
-      const type = beforePlugins[key].type;
-      if (afterPlugins[key] === undefined) {
-        onPluginDelete(type);
-      }
-      // onPluginChange -> for Phase 2
-      //else {
-      // const before = beforePlugins[key];
-      // const after = afterPlugins[key];
-      // if (JSON.stringify(before) !== JSON.stringify(after))
-      //   onPluginChange(type, { from: before, to: after });
-      //}
-    });
-  };
-
-  updateEditorState = editorState => {
-    this.calculateDiff(this.state.editorState, editorState);
+    calculateDiff(this.state.editorState, editorState, onPluginDelete);
     this.setEditorState(editorState);
     this.props.onChange && this.props.onChange(editorState);
   };
