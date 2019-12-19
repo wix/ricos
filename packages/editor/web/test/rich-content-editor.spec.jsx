@@ -9,19 +9,19 @@ Enzyme.configure({ adapter: new Adapter() });
 const { shallow } = Enzyme;
 
 // the mock is needed to overcome the 'Context is undefined' issue
-const getRichContentEditor = () => {
-  jest.doMock('wix-rich-content-common', () => ({
-    ...Common,
-  }));
-
-  jest.doMock('wix-rich-content-editor-common', () => ({
-    ...EditorCommon,
-  }));
-
-  return require('../src/index').RichContentEditor;
-};
+const getRichContentEditor = () => require('../src/index').RichContentEditor;
 
 describe('RichContentEditor', () => {
+  beforeAll(() => {
+    jest.doMock('wix-rich-content-common', () => ({
+      ...Common,
+    }));
+
+    jest.doMock('wix-rich-content-editor-common', () => ({
+      ...EditorCommon,
+    }));
+  });
+
   it('should render', async () => {
     const RichContentEditor = getRichContentEditor();
     const wrapper = shallow(<RichContentEditor />);
