@@ -46,6 +46,7 @@
     - [#534](https://github.com/wix-incubator/rich-content/pull/534) exposes data normalization and data validation utils as separate entries
   - `button`
     - [#517](https://github.com/wix-incubator/rich-content/pull/517) plugin button refactor
+  
 </details>
 <hr/>
 
