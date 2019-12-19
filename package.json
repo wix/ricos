@@ -120,6 +120,5 @@
     "registry": "https://registry.npmjs.org/"
   },
   "dependencies": {
-    "cypress": "3.7.0"
   }
 }
