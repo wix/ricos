@@ -15,7 +15,10 @@ import getBlockRenderMap from './getBlockRenderMap';
 import { combineStyleFns } from './combineStyleFns';
 import { getStaticTextToolbarId } from './Toolbars/toolbar-id';
 import { TooltipHost, TOOLBARS } from 'wix-rich-content-editor-common';
-import { calculateDiff } from 'wix-rich-content-editor-common/src/Utils/draftUtils';
+import {
+  calculateDiff,
+  getPostContentSummary,
+} from 'wix-rich-content-editor-common/src/Utils/draftUtils';
 import {
   Context,
   AccessibilityListener,
@@ -123,10 +126,11 @@ class RichContentEditor extends Component {
     } = this.props;
 
     const { theme } = this.state;
+    const { onPluginAdd = () => false } = this.props;
     const { pluginInstances, pluginButtons, pluginTextButtons, pluginStyleFns } = createPlugins({
       plugins,
       config,
-      helpers,
+      helpers: { ...helpers, onPluginAdd },
       theme,
       t,
       isMobile,
@@ -230,12 +234,7 @@ class RichContentEditor extends Component {
   }
 
   updateEditorState = editorState => {
-    const {
-      helpers: {
-        //activityCallbacks: { onPluginDelete = () => false, onPluginChange = () => false } = {},
-        activityCallbacks: { onPluginDelete = () => false } = {},
-      } = {},
-    } = this.props;
+    const { onPluginDelete = () => false } = this.props;
     calculateDiff(this.state.editorState, editorState, onPluginDelete);
     this.setEditorState(editorState);
     this.props.onChange && this.props.onChange(editorState);
@@ -443,6 +442,11 @@ class RichContentEditor extends Component {
   }
 }
 
+RichContentEditor.publish = async (postId, editorState = {}, callBack = () => true) => {
+  const postContent = getPostContentSummary(editorState);
+  callBack({ postId, postContent });
+};
+
 RichContentEditor.propTypes = {
   editorKey: PropTypes.string,
   editorState: PropTypes.object,
@@ -485,6 +489,9 @@ RichContentEditor.propTypes = {
   onAtomicBlockFocus: PropTypes.func,
   initialIntent: PropTypes.string,
   siteDomain: PropTypes.string,
+  onPluginAdd: PropTypes.func,
+  onPluginChange: PropTypes.func,
+  onPluginDelete: PropTypes.func,
 };
 
 RichContentEditor.defaultProps = {

@@ -31,7 +31,7 @@ export default ({
       const { toolbarName } = props;
       this.styles = mergeStyles({ styles, theme: buttonStyles });
       this.buttonRef = React.createRef();
-      this.onPluginAdd = () => helpers?.activityCallbacks?.onPluginAdd?.(blockType, toolbarName);
+      this.onPluginAdd = () => helpers?.onPluginAdd?.(blockType, toolbarName);
     }
 
     componentDidMount() {
