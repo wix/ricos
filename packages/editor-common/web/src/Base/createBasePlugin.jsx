@@ -1,4 +1,4 @@
-import { includes, get } from 'lodash';
+import { includes } from 'lodash';
 import createBaseComponent from './createBaseComponent';
 import createToolbar from './createBaseToolbar';
 import createInsertPluginButton from './createBaseInsertPluginButton';
@@ -36,15 +36,18 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
     onOverlayClick,
     onAtomicBlockFocus,
     disableRightClick,
+    commonPubsub,
+    defaultPluginData,
+    pluginDefaults,
   } = config;
+  defaultPluginData && (pluginDefaults[config.type] = defaultPluginData);
   const toolbarTheme = { ...getToolbarTheme(config.theme, 'plugin'), ...config.theme };
   const Toolbar =
-    config.toolbar &&
-    config.toolbar.InlineButtons &&
+    config?.toolbar?.InlineButtons &&
     createToolbar({
       buttons: {
         all: config.toolbar.InlineButtons,
-        hidden: get(settings, 'toolbar.hidden', []),
+        hidden: settings?.toolbar?.hidden || [],
       },
       theme: { ...toolbarTheme, ...config.theme },
       pubsub,
@@ -54,25 +57,25 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
       anchorTarget,
       relValue,
       t,
-      name: config.toolbar.name,
+      name: config?.toolbar?.name,
       uiSettings: config.uiSettings,
       getToolbarSettings: config.getToolbarSettings,
       getEditorBounds,
     });
   const InsertPluginButtons =
     settings.showInsertButtons &&
-    config.toolbar &&
-    config.toolbar.InsertButtons &&
-    config.toolbar.InsertButtons.map(button => ({
+    config?.toolbar?.InsertButtons?.map(button => ({
       buttonSettings: button,
       component: createInsertPluginButton({
         blockType: config.type,
         button,
         helpers,
         pubsub,
+        commonPubsub,
         settings,
         t,
         isMobile,
+        pluginDefaults,
       }),
     }));
   const PluginComponent = config.component;
@@ -88,6 +91,7 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
       onOverlayClick,
       onAtomicBlockFocus,
       pubsub,
+      commonPubsub,
       settings,
       helpers,
       t,

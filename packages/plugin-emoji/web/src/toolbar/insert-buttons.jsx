@@ -30,7 +30,8 @@ export default ({ helpers, t, settings, getEditorState, setEditorState }) => {
         });
         const { top, left } = buttonRef.getBoundingClientRect();
         const modalLeft = left - 288;
-        const modalTop = top - 293;
+        const isAboveButton = top - 293 > 0;
+        const modalTop = isAboveButton ? top - 293 : top + 30;
         return {
           ...modalStyles,
           content: {

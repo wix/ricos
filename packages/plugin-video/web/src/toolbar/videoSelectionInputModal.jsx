@@ -33,9 +33,9 @@ export default class VideoSelectionInputModal extends Component {
     if (ReactPlayer.canPlay(url) || isCustomVideo) {
       const { componentData, helpers, pubsub, onConfirm } = this.props;
       if (onConfirm) {
-        onConfirm({ ...componentData, src, isCustomVideo: this.state.isCustomVideo });
+        onConfirm({ ...componentData, src, isCustomVideo });
       } else {
-        pubsub.update('componentData', { src, isCustomVideo: this.state.isCustomVideo });
+        pubsub.update('componentData', { src, isCustomVideo });
       }
 
       if (helpers && helpers.onVideoSelected) {

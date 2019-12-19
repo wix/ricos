@@ -2,18 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { Context } from 'wix-rich-content-common';
-
 import { LINE_DOUBLE } from '../constants';
 
-const getLines = (type, width, multilineDinstance = 7) => {
+const getLines = (type, width, multilineDistance = 7) => {
   switch (type) {
     case LINE_DOUBLE:
       return [
         { x2: width, y1: 1, y2: 1 },
         {
           x2: width,
-          y1: multilineDinstance,
-          y2: multilineDinstance,
+          y1: multilineDistance,
+          y2: multilineDistance,
         },
       ];
     default:
@@ -26,13 +25,13 @@ const DividerLine = ({
   size,
   alignment,
   width,
-  multilineDinstance,
+  multilineDistance,
   styles,
   className,
   contextType,
   fillParent,
 }) => {
-  const lines = getLines(type, width, multilineDinstance);
+  const lines = getLines(type, width, multilineDistance);
   const { Consumer } = contextType || Context;
   return (
     <Consumer>
@@ -63,8 +62,8 @@ DividerLine.propTypes = {
   alignment: PropTypes.string,
   styles: PropTypes.object.isRequired,
   className: PropTypes.string,
-  width: PropTypes.number.isRequired,
-  multilineDinstance: PropTypes.number,
+  width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+  multilineDistance: PropTypes.number,
   contextType: PropTypes.object,
   fillParent: PropTypes.bool,
 };

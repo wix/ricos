@@ -1,4 +1,3 @@
-import { get } from 'lodash';
 import { BUTTONS, AlignCenterIcon, SizeLargeIcon } from 'wix-rich-content-editor-common';
 import { changeType, changeAlignmentMobile, changeSizeMobile } from './actions';
 import { isAlignmentDisabled, getNextSizeIcon, getNextAlignmentIcon } from './selectors';
@@ -6,7 +5,7 @@ import { getDropdownOptions, createDropdownValueGetter } from './dropdown-option
 
 export default ({ styles, settings }) => {
   const dropdownOptions = getDropdownOptions(styles);
-  const icons = get(settings, 'toolbar.icons', {});
+  const icons = settings?.toolbar?.icons || {};
   return [
     {
       keyName: 'type',

@@ -1,9 +1,8 @@
-import Immutable from 'immutable';
 import { range } from 'lodash';
 import Hashtag from './HashtagComponent';
 import hashtagRegexes from './hashtagRegexes';
 
-export default hasLinksInBlock =>
+export default (hasLinksInBlock, immutableList) =>
   class HashtagDecorator {
     constructor(componentProps) {
       this.componentProps = componentProps;
@@ -16,27 +15,28 @@ export default hasLinksInBlock =>
       const decorations = Array(text.length).fill(null);
 
       if (
-        type === 'code-block' ||
-        !text ||
-        hasLinksInBlock(block, contentState) ||
-        !text.match(hashtagRegexes.hashSigns)
+        type !== 'code-block' &&
+        text &&
+        !hasLinksInBlock(block, contentState) &&
+        text.match(hashtagRegexes.hashSigns)
       ) {
-        return Immutable.List(decorations); // eslint-disable-line new-cap
+        text.replace(
+          hashtagRegexes.validHashtag,
+          (match, before, hash, hashText, offset, chunk) => {
+            const after = chunk.slice(offset + match.length);
+            if (after.match(hashtagRegexes.endHashtagMatch)) {
+              return;
+            }
+            const start = offset + before.length;
+            const end = start + hashText.length + 1;
+            const htagId = `htag${start}${end}`;
+            const tagRange = range(start, end, 1);
+            tagRange.forEach(i => (decorations[i] = `${key}-${htagId}`));
+          }
+        );
       }
-
-      text.replace(hashtagRegexes.validHashtag, (match, before, hash, hashText, offset, chunk) => {
-        const after = chunk.slice(offset + match.length);
-        if (after.match(hashtagRegexes.endHashtagMatch)) {
-          return;
-        }
-        const start = offset + before.length;
-        const end = start + hashText.length + 1;
-        const htagId = `htag${start}${end}`;
-        const tagRange = range(start, end, 1);
-        tagRange.forEach(i => (decorations[i] = `${key}-${htagId}`));
-      });
-
-      return Immutable.List(decorations); // eslint-disable-line new-cap
+      // In editor returns an Immutable.js List object. In the Viewer return an array.
+      return immutableList ? immutableList(decorations) : decorations;
     }
 
     getComponentForKey() {

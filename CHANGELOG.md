@@ -12,10 +12,61 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+  
+  ### :rocket: New Feature
+  - `fullscreen`
+    - [#519](https://github.com/wix-incubator/rich-content/pull/519) add props: topMargin, backgroundColor, foregroundColor. Remove counter when only 1 image. Larger z-index
+  - `editor-common`
+    - [#526](https://github.com/wix-incubator/rich-content/pull/526) `onAtomicBlockFocus` is invoked with `undefined` when an atomic block loses focus
+    - [#530](https://github.com/wix-incubator/rich-content/pull/530) `uiSettings.linkPanel.placeholder` determines the link panel's placeholder
+  - `image`
+    - [#533](https://github.com/wix-incubator/rich-content/pull/533) add multiple images at once, enabling `config.createGalleryForMultipleImages` renders them as a gallery
+  - `file-upload`
+    - [#533](https://github.com/wix-incubator/rich-content/pull/533) add multiple files at once
+  ### :bug: Bug Fix
+  - `divider`
+    - [#511](https://github.com/wix-incubator/rich-content/pull/511) divider's width set to 100% in editor&viewer when no initial state of width is given
+  - `editor`
+    - [#521](https://github.com/wix-incubator/rich-content/pull/521) replace p element with div element in lists
+  ### :house: Internal
+  - `gallery-settings`
+    - [#535](https://github.com/wix-incubator/rich-content/pull/535) gallery setting's header, tabs and footer position
+  - `images-settings`
+    - [#537](https://github.com/wix-incubator/rich-content/pull/537) image and gallery setting's header, tabs and footer position
+  - `editor`
+    - [#522](https://github.com/wix-incubator/rich-content/pull/522) support legacy margin scss attributes
+  ### :house: Internal
+  - `codeBlock`
+    - [#527](https://github.com/wix-incubator/rich-content/pull/527) remove onTab (moved to keyBindingFn/handleKeyCommand)
+  - `pubsub`
+    - [#528](https://github.com/wix-incubator/rich-content/pull/528) rename visibleBlock to focusedBlock
+  - `common`
+    - [#534](https://github.com/wix-incubator/rich-content/pull/534) exposes data normalization and data validation utils as separate entries
+  - `button`
+    - [#517](https://github.com/wix-incubator/rich-content/pull/517) plugin button refactor
+  
+</details>
+<hr/>
 
+## 6.6.1 (Dec 11, 2019)
+### :rocket: New Feature
+- `fullscreen`
+  - [#519](https://github.com/wix-incubator/rich-content/pull/519) add props: topMargin, backgroundColor, foregroundColor. Remove counter when only 1 image. Larger z-index
+### :bug: Bug Fix
+- `divider`
+  - [#511](https://github.com/wix-incubator/rich-content/pull/511) divider's width set to 100% in editor&viewer when no initial state of width is given
+- `emoji`
+  - [#525](https://github.com/wix-incubator/rich-content/pull/525) fix emoji delete bug
+### :house: Internal
+- `editor`
+  - [#510](https://github.com/wix-incubator/rich-content/pull/510) custom icons code refactoring
+
+## 6.6.0 (Dec 8, 2019)
 ### :rocket: New Feature
 - `file-upload`
   - [#489](https://github.com/wix-incubator/rich-content/pull/489) `config.downloadTarget` enables consumers to control in which tab files are opened
+- `undo-redo`
+  - [#495](https://github.com/wix-incubator/rich-content/pull/495) creates undo redo plugin 
 - `editor`
   - [#503](https://github.com/wix-incubator/rich-content/pull/503) activated drag and drop capability by default
 - `video`
@@ -25,12 +76,18 @@
 - `bi-events`
   - [#514](https://github.com/wix-incubator/rich-content/pull/514) supports `onPluginAdd` (toolbar only) and `onPluginDelete` callback via a new `<WrapWithCallbacks />` component
 ### :bug: Bug Fix
+- `examples/viewer-ssr`
+  - [#499](https://github.com/wix-incubator/rich-content/pull/499) highlight plugin configuration fixed
 - `fullscreen`
   - [#496](https://github.com/wix-incubator/rich-content/pull/496) adds support for legacy image type
 - `image`
   - [#478](https://github.com/wix-incubator/rich-content/pull/478) margin & size (alignment strategy updated)
 - `mentions`
   - [#486](https://github.com/wix-incubator/rich-content/pull/486) suggestions can be navigated using keyboard arrows
+- `giphy|emoji`
+  - [#512](https://github.com/wix-incubator/rich-content/pull/512) correct popup positions on desktop
+- `code-block`
+  - [#506](https://github.com/wix-incubator/rich-content/pull/506) fixed functinality of custom key handler
 ### :house: Internal
 - `rollup`
   - [#501](https://github.com/wix-incubator/rich-content/pull/501) remove rollup-plugin-node-builtins and rollup-plugin-node-globals
@@ -45,8 +102,7 @@
 - `viewer`
   - [d58d8916](https://github.com/wix-incubator/rich-content/commit/d58d8916) remove draftjs
   - [a02b632a](https://github.com/wix-incubator/rich-content/commit/a02b632a) remove draftjs
-</details>
-<hr/>
+  - [#513](https://github.com/wix-incubator/rich-content/pull/513) removed `Immutable.js` dependency from `viewer`
 
 ## 6.5.0 (Nov 25, 2019)
 ### :bug: Bug Fix
@@ -1782,4 +1838,3 @@ _NOTE:_ From this version onwards all modules will have the same version number,
 - `editor`
   - [#58](https://github.com/wix-incubator/rich-content/pull/58) Default `locale` is `'en'`, English texts are imported statically
     Set the `locale` and `localeResource` props to use another language
-

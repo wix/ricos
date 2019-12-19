@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { get } from 'lodash';
 import { DefaultDraftBlockRenderMap } from 'draft-js';
 import { mergeStyles } from 'wix-rich-content-common';
 import styles from '../../statics/styles/rich-content-editor.scss';
@@ -32,7 +31,7 @@ export default theme => {
     return (
       <ListElement className={`public-DraftStyleDefault-${ListElement}`}>
         {children.map((child, i) => {
-          const direction = get(child, 'props.children.props.direction', 'LTR');
+          const direction = child?.props?.children?.props?.direction || 'LTR';
           return (
             <li
               className={classNames(
@@ -61,11 +60,11 @@ export default theme => {
 
   const blockRenderMap = map({
     'unordered-list-item': {
-      element: 'p',
+      element: 'div',
       wrapper: <UnorderedListItem />,
     },
     'ordered-list-item': {
-      element: 'p',
+      element: 'div',
       wrapper: <OrderedListItem />,
     },
   });

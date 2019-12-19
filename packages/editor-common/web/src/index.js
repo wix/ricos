@@ -72,6 +72,7 @@ export {
   setEntityData,
   replaceWithEmptyBlock,
   deleteBlock,
+  createEntity,
 } from './Utils/draftUtils';
 export { isiOS } from './Utils/isiOS';
 export { getSelectionStyles } from './Utils/inlineStyleUtils';

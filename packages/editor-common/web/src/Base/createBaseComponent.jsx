@@ -27,6 +27,7 @@ const createBaseComponent = ({
   theme,
   settings,
   pubsub,
+  commonPubsub,
   helpers,
   anchorTarget,
   relValue,
@@ -55,10 +56,10 @@ const createBaseComponent = ({
 
     stateFromProps(props) {
       const { readOnly } = props.blockProps;
-      const initialState = pubsub.get('initialState_' + props.block.getKey());
+      const initialState = commonPubsub.get('initialState_' + props.block.getKey());
       if (initialState) {
         //reset the initial state
-        pubsub.set('initialState_' + props.block.getKey(), undefined);
+        commonPubsub.set('initialState_' + props.block.getKey(), undefined);
       }
       return {
         componentData: this.getData(props),
@@ -99,7 +100,7 @@ const createBaseComponent = ({
     componentWillUnmount() {
       this.subscriptions.forEach(subscription => pubsub.unsubscribe(...subscription));
       this.subscriptionsOnBlock.forEach(unsubscribe => unsubscribe());
-      pubsub.set('visibleBlock', null);
+      pubsub.set('focusedBlock', null);
     }
 
     isMe = blockKey => {
@@ -107,7 +108,7 @@ const createBaseComponent = ({
       if (blockKey) {
         return blockKey === block.getKey();
       } else {
-        return pubsub.get('visibleBlock') === block.getKey();
+        return pubsub.get('focusedBlock') === block.getKey();
       }
     };
 
@@ -150,7 +151,7 @@ const createBaseComponent = ({
     };
 
     deleteBlock = () => {
-      pubsub.set('visibleBlock', null);
+      pubsub.set('focusedBlock', null);
       this.props.blockProps.deleteBlock();
     };
 
@@ -158,7 +159,7 @@ const createBaseComponent = ({
       const { block, blockProps } = this.props;
       if (blockProps.isFocused && blockProps.isCollapsedSelection) {
         this.updateSelectedComponent();
-      } else if (pubsub.get('visibleBlock') === block.getKey()) {
+      } else if (pubsub.get('focusedBlock') === block.getKey()) {
         this.updateUnselectedComponent();
       }
     }
@@ -188,9 +189,9 @@ const createBaseComponent = ({
     updateSelectedComponent() {
       const { block } = this.props;
 
-      const oldVisibleBlock = pubsub.get('visibleBlock');
-      const visibleBlock = block.getKey();
-      if (oldVisibleBlock !== visibleBlock) {
+      const oldFocusedBlock = pubsub.get('focusedBlock');
+      const focusedBlock = block.getKey();
+      if (oldFocusedBlock !== focusedBlock) {
         const batchUpdates = {};
         const blockNode = findDOMNode(this);
         const componentData = this.state.componentData;
@@ -199,9 +200,9 @@ const createBaseComponent = ({
         batchUpdates.componentData = componentData;
         batchUpdates.componentState = {};
         batchUpdates.deleteBlock = this.deleteBlock;
-        batchUpdates.visibleBlock = visibleBlock;
+        batchUpdates.focusedBlock = focusedBlock;
         pubsub.set(batchUpdates);
-        onAtomicBlockFocus(visibleBlock);
+        onAtomicBlockFocus(focusedBlock);
       } else {
         //maybe just the position has changed
         const blockNode = findDOMNode(this);
@@ -212,10 +213,11 @@ const createBaseComponent = ({
 
     updateUnselectedComponent() {
       const batchUpdates = {};
-      batchUpdates.visibleBlock = null;
+      batchUpdates.focusedBlock = null;
       batchUpdates.componentData = {};
       batchUpdates.componentState = {};
       pubsub.set(batchUpdates);
+      onAtomicBlockFocus(undefined);
     }
 
     handleContextMenu = e => disableRightClick && e.preventDefault();

@@ -1,9 +1,8 @@
-import { get } from 'lodash';
 import { BUTTONS } from 'wix-rich-content-editor-common';
 import { MediaReplaceIcon } from '../icons';
 
 export default ({ settings, t }) => {
-  const icon = get(settings, 'toolbar.icons.replace', MediaReplaceIcon);
+  const icon = settings?.toolbar?.icons?.replace || MediaReplaceIcon;
   return [
     { keyName: 'sizeSmallLeft', type: BUTTONS.SIZE_SMALL_LEFT, mobile: false },
     { keyName: 'sizeSmallCenter', type: BUTTONS.SIZE_SMALL_CENTER, mobile: false },

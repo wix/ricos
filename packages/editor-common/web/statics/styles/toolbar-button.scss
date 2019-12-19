@@ -10,13 +10,6 @@
   &:last-child {
     margin-right: 0;
   }
-
-  &:hover {
-    .icon {
-      color: $accent-color;
-      @include svg-fill;
-    }
-  }
 }
 
 .button {
@@ -26,12 +19,21 @@
   vertical-align: bottom;
   height: 100%;
   pointer-events: initial;
+  
+  &:hover:not([disabled]),
+  &:focus:not([disabled]) {
+    .icon {
+      cursor: pointer;
+      color: $accent-color;
+      @include svg-fill;
+    }
+  }
 
-  &:hover,
-  &:focus {
-    cursor: pointer;
-    color: $accent-color;
-    @include svg-fill;
+  &:disabled {
+    &>*{
+      opacity: 0.4;
+      cursor: default;
+    }
   }
 }
 
