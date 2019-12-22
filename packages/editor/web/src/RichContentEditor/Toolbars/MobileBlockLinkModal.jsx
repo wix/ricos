@@ -24,7 +24,7 @@ export default class MobileBlockLinkModal extends Component {
     const { pubsub, theme, isMobile, anchorTarget, relValue, t, uiSettings } = this.props;
     const componentLink = pubsub.getBlockData({ key: 'componentLink' });
     const { url, target, rel } = componentLink || {};
-    const targetBlank = target === '_blank';
+    const targetBlank = target === undefined ? anchorTarget === '_blank' : target === '_blank';
     const nofollow = rel === 'nofollow';
     return (
       <MobileLinkModal
