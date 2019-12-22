@@ -37,6 +37,7 @@
     - [#522](https://github.com/wix-incubator/rich-content/pull/522) support legacy margin scss attributes
   - `e2e`
     - [#538](https://github.com/wix-incubator/rich-content/pull/538) moved tests out of Docker, e2e and unit tests run in github actions
+    - [#542](https://github.com/wix-incubator/rich-content/pull/542) e2e tests run visual tests and content snapshots separately
   ### :house: Internal
   - `codeBlock`
     - [#527](https://github.com/wix-incubator/rich-content/pull/527) remove onTab (moved to keyBindingFn/handleKeyCommand)
