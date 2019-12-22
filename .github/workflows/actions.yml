@@ -19,7 +19,7 @@ jobs:
       APPLITOOLS_API_KEY: ${{ secrets.APPLITOOLS_API_KEY }}
       APPLITOOLS_SERVER_URL: ${{ secrets.APPLITOOLS_SERVER_URL }}
       APPLITOOLS_BATCH_ID: ${{ github.sha }}
-  e2e-content-tests:
+  e2e-content-state-tests:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -32,7 +32,7 @@ jobs:
           start: npm run e2e:app:run
           wait-on: 'http://localhost:3002'
           config: video=false
-          env: MATCH_CONTENT=true
+          env: MATCH_CONTENT_STATE=true
     env:
       APPLITOOLS_IS_DISABLED: true
   unit-tests:
