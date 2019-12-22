@@ -16,4 +16,5 @@ module.exports = {
   concurrency: 200,
   batchId: getHeadHash(),
   dontCloseBatches: true,
+  notifyOnCompletion: true,
 };
