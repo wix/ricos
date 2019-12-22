@@ -18,10 +18,7 @@ class RedoButton extends Component {
     t: PropTypes.func,
   };
 
-  constructor(props) {
-    super(props);
-    this.state = { isActive: false };
-  }
+  state = {};
 
   componentDidMount() {
     this.props.pubsub.subscribe('editorState', this.onEditorStateChange);
@@ -50,7 +47,7 @@ class RedoButton extends Component {
       <InlineToolbarButton
         disabled={editorState ? editorState.getRedoStack().isEmpty() : true}
         onClick={this.onClick}
-        isActive={this.state.isActive}
+        isActive={false}
         theme={theme}
         isMobile={isMobile}
         tooltipText={t('undoButton_Tooltip')}

@@ -24,6 +24,8 @@
   - `file-upload`
     - [#533](https://github.com/wix-incubator/rich-content/pull/533) add multiple files at once
   ### :bug: Bug Fix
+  - `undo-redo`
+    - [#543](https://github.com/wix-incubator/rich-content/pull/543) fix undo-redo icons on mobile
   - `divider`
     - [#511](https://github.com/wix-incubator/rich-content/pull/511) divider's width set to 100% in editor&viewer when no initial state of width is given
   - `editor`
