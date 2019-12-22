@@ -17,6 +17,10 @@ const testFixture = fixture =>
   });
 
 describe('editor rendering', () => {
+  before(function() {
+    if (Cypress.env('MATCH_CONTENT')) this.skip();
+  });
+
   context('desktop', () => {
     before(function() {
       cy.eyesOpen({

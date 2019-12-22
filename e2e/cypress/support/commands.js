@@ -61,9 +61,10 @@ Cypress.Commands.add('loadEditorAndViewer', fixtureName => {
 });
 
 Cypress.Commands.add('matchContentSnapshot', () => {
-  cy.window()
-    .its('__CONTENT_SNAPSHOT__')
-    .toMatchSnapshot();
+  if (Cypress.env('MATCH_CONTENT'))
+    cy.window()
+      .its('__CONTENT_SNAPSHOT__')
+      .toMatchSnapshot();
 });
 
 Cypress.Commands.add('matchSnapshots', options => {
