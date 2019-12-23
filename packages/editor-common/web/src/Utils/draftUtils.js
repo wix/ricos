@@ -48,7 +48,11 @@ export const insertLinkAtCurrentSelection = (
   );
 };
 
-function insertLink(editorState, selection, { url, targetBlank, nofollow }) {
+function insertLink(
+  editorState,
+  selection,
+  { url, targetBlank, nofollow, anchorTarget, relValue }
+) {
   const oldSelection = editorState.getSelection();
   const newContentState = Modifier.applyInlineStyle(
     editorState.getCurrentContent(),
@@ -57,12 +61,15 @@ function insertLink(editorState, selection, { url, targetBlank, nofollow }) {
   ).set('selectionAfter', oldSelection);
   const newEditorState = EditorState.push(editorState, newContentState, 'change-inline-style');
 
+  const target = targetBlank ? '_blank' : anchorTarget !== '_blank' ? anchorTarget : '_self';
+  const rel = nofollow ? 'nofollow' : relValue !== 'nofollow' ? relValue : 'noopener';
+
   return addEntity(newEditorState, selection, {
     type: 'LINK',
     data: {
       url,
-      target: targetBlank ? '_blank' : '_self',
-      rel: nofollow ? 'nofollow' : 'noopener',
+      target,
+      rel,
     },
   });
 }

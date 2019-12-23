@@ -90,9 +90,10 @@ class ImageSettings extends Component {
 
   saveLink = () => {
     const { linkPanelValues } = this.state;
+    const { anchorTarget, relValue } = this.props;
     const { url, targetBlank, nofollow, isValid } = linkPanelValues;
-    const target = targetBlank ? '_blank' : '_self';
-    const rel = nofollow ? 'nofollow' : 'noopener';
+    const target = targetBlank ? '_blank' : anchorTarget !== '_blank' ? anchorTarget : '_self';
+    const rel = nofollow ? 'nofollow' : relValue !== 'nofollow' ? relValue : 'noopener';
     if (url === '') {
       this.setBlockLink(null);
     } else if (isValid) {

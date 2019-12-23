@@ -55,8 +55,16 @@ class ImageSettings extends Component {
 
   linkPanelToLink = ({ url, targetBlank, nofollow, isValid }) => ({
     url,
-    target: targetBlank ? '_blank' : '_self',
-    rel: nofollow ? 'nofollow' : 'noopener',
+    target: targetBlank
+      ? '_blank'
+      : this.props.anchorTarget !== '_blank'
+      ? this.props.anchorTarget
+      : '_self',
+    rel: nofollow
+      ? 'nofollow'
+      : this.props.relValue !== 'nofollow'
+      ? this.props.relValue
+      : 'noopener',
     isValid,
   });
 

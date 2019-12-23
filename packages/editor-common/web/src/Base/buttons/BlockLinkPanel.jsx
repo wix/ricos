@@ -36,9 +36,10 @@ class BlockLinkPanel extends Component {
   }
 
   wrapBlockInLink = ({ url, targetBlank, nofollow }) => {
-    const { pubsub } = this.props;
-    const target = targetBlank ? '_blank' : '_self';
-    const rel = nofollow ? 'nofollow' : 'noopener';
+    const { pubsub, anchorTarget, relValue } = this.props;
+
+    const target = targetBlank ? '_blank' : anchorTarget !== '_blank' ? anchorTarget : '_self';
+    const rel = nofollow ? 'nofollow' : relValue !== 'nofollow' ? relValue : 'noopener';
     if (!isEmpty(url)) {
       pubsub.setBlockData({
         key: 'componentLink',
