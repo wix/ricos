@@ -11,7 +11,7 @@ jobs:
       - name: Update Applitools batch status
         uses: wei/curl@v1.1.1
         with:
-          args: -X POST -d "" https://wixeyesapi.applitools.com/api/externals/github/servers/github.com/commit/${{ github.sha }}/complete?apiKey=${{ secrets.APPLITOOLS_API_KEY }}
+          args: -d "" -X POST https://wixeyesapi.applitools.com/api/externals/github/servers/github.com/commit/${{ github.sha }}/complete?apiKey=${{ secrets.APPLITOOLS_API_KEY }}
 
       - name: Cypress run
         uses: cypress-io/github-action@v1.16.1
