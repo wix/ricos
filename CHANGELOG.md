@@ -15,6 +15,9 @@
   
   ### :boom: Breaking Change
   - `text-color`
+    - [#520](https://github.com/wix-incubator/rich-content/pull/520) the class name "colorPicker_add_color_button_hidden" was changed to "colorPicker_color_button_hidden" in the CSS file "color-picker.scss"
+  ### :rocket: New Feature
+  - `text-color`
     - [#520](https://github.com/wix-incubator/rich-content/pull/520) color Picker- adding an option to change back to default color
   ### :bug: Bug Fix
   - `divider`
