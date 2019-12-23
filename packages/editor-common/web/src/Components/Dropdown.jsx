@@ -162,7 +162,7 @@ class Dropdown extends Component {
   handleDocumentClick = event => {
     if (this.mounted) {
       //eslint-disable-next-line
-      if (!ReactDOM.findDOMNode(this).contains(event.target)) {
+      if (!ReactDOM.findDOMNode(this)?.contains(event.target)) {
         if (this.state.isOpen) {
           this.setState({ isOpen: false });
         }
