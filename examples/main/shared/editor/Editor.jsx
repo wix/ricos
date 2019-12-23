@@ -48,7 +48,7 @@ export default class Editor extends PureComponent {
         setTimeout(() => {
           updateEntity({ data, files });
           console.log('consumer uploaded', data);
-        }, 2500);
+        }, 500);
       }
     };
     this.helpers = {
@@ -78,6 +78,7 @@ export default class Editor extends PureComponent {
       },
       onProgressChange: updatePercentage => {
         let percent = 0;
+        updatePercentage(percent, preview_img);
         const interval = setInterval(() => {
           // updatePercentage(percent);
           updatePercentage(percent, preview_img);

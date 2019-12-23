@@ -40,15 +40,16 @@ export default class Viewer extends PureComponent {
         expandModeIndex: this.expandModeData.imageMap[entityIndex] + innerIndex,
       });
     },
-    // onProgressChange: updatePercentage => {
-    //   let percent = 0;
-    //   const interval = setInterval(() => {
-    //     // updatePercentage(percent);
-    //     updatePercentage(percent, preview_img);
-    //     percent += 10;
-    //     if (percent === 110) clearInterval(interval);
-    //   }, 500);
-    // },
+    onProgressChange: updatePercentage => {
+      let percent = 0;
+      updatePercentage(percent, preview_img);
+      const interval = setInterval(() => {
+        // updatePercentage(percent);
+        updatePercentage(percent, preview_img);
+        percent += 10;
+        if (percent === 110) clearInterval(interval);
+      }, 500);
+    },
   };
 
   render() {
