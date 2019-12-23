@@ -8,6 +8,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Update Applitools batch status
+        uses: wei/curl@v1.1.1
+        with:
+          args: -X POST -d "" https://wixeyesapi.applitools.com/api/externals/github/servers/github.com/commit/${{ github.sha }}/complete?apiKey=${{ secrets.APPLITOOLS_API_KEY }}
+
       - name: Cypress run
         uses: cypress-io/github-action@v1.16.1
         with:
@@ -15,11 +20,6 @@ jobs:
           start: npm run e2e:app:run
           wait-on: 'http://localhost:3002'
           config: video=false
-
-      - name: Update Applitools batch status
-        uses: wei/curl@v1.1.1
-        with:
-          args: -X POST https://wixeyesapi.applitools.com/api/externals/github/servers/github.com/commit/${{ github.sha }}/complete?apiKey=${{ secrets.APPLITOOLS_API_KEY }}
 
     env:
       APPLITOOLS_API_KEY: ${{ secrets.APPLITOOLS_API_KEY }}
