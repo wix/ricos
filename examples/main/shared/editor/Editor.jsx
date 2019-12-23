@@ -20,8 +20,8 @@ const modalStyleDefaults = {
 };
 const anchorTarget = '_blank';
 const relValue = 'nofollow';
-const preview_img =
-  'https://image.winudf.com/v2/image/Y29tLmJsYWNrYmFja2dyb3VuZHdhbGxwYXBlcnNpbWFnZXNfc2NyZWVuXzFfMTUwOTI1MjEyOV8wNzU/screen-1.jpg?fakeurl=1&type=.jpg';
+// const preview_img =
+//   'https://image.winudf.com/v2/image/Y29tLmJsYWNrYmFja2dyb3VuZHdhbGxwYXBlcnNpbWFnZXNfc2NyZWVuXzFfMTUwOTI1MjEyOV8wNzU/screen-1.jpg?fakeurl=1&type=.jpg';
 
 export default class Editor extends PureComponent {
   state = {};
@@ -47,7 +47,7 @@ export default class Editor extends PureComponent {
         setTimeout(() => {
           updateEntity({ data, files });
           console.log('consumer uploaded', data);
-        }, 2500);
+        }, 500);
       }
     };
     this.helpers = {
@@ -75,15 +75,15 @@ export default class Editor extends PureComponent {
           updateEntity(testVideo);
         }, 500);
       },
-      onProgressChange: updatePercentage => {
-        let percent = 0;
-        const interval = setInterval(() => {
-          // updatePercentage(percent);
-          updatePercentage(percent, preview_img);
-          percent += 10;
-          if (percent === 110) clearInterval(interval);
-        }, 250);
-      },
+      // onProgressChange: updatePercentage => {
+      //   let percent = 0;
+      //   const interval = setInterval(() => {
+      //     // updatePercentage(percent);
+      //     updatePercentage(percent, preview_img);
+      //     percent += 10;
+      //     if (percent === 110) clearInterval(interval);
+      //   }, 250);
+      // },
       openModal: data => {
         const { modalStyles, ...modalProps } = data;
         try {

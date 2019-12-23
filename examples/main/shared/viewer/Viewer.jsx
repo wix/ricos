@@ -10,8 +10,8 @@ import Fullscreen from 'wix-rich-content-fullscreen';
 
 const anchorTarget = '_top';
 const relValue = 'noreferrer';
-const preview_img =
-  'https://image.winudf.com/v2/image/Y29tLmJsYWNrYmFja2dyb3VuZHdhbGxwYXBlcnNpbWFnZXNfc2NyZWVuXzFfMTUwOTI1MjEyOV8wNzU/screen-1.jpg?fakeurl=1&type=.jpg';
+// const preview_img =
+//   'https://image.winudf.com/v2/image/Y29tLmJsYWNrYmFja2dyb3VuZHdhbGxwYXBlcnNpbWFnZXNfc2NyZWVuXzFfMTUwOTI1MjEyOV8wNzU/screen-1.jpg?fakeurl=1&type=.jpg';
 
 export default class Viewer extends PureComponent {
   constructor(props) {
