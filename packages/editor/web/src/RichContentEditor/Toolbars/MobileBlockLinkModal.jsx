@@ -8,8 +8,10 @@ export default class MobileBlockLinkModal extends Component {
 
   wrapBlockInLink = ({ url, targetBlank, nofollow }) => {
     const { pubsub } = this.props;
+    const target = targetBlank ? '_blank' : '_self';
+    const rel = nofollow ? 'nofollow' : 'noopener';
     if (!isEmpty(url)) {
-      pubsub.setBlockData({ key: 'componentLink', item: { url, targetBlank, nofollow } });
+      pubsub.setBlockData({ key: 'componentLink', item: { url, target, rel } });
     } else {
       pubsub.setBlockData({ key: 'componentLink', item: null });
     }

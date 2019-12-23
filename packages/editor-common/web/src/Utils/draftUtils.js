@@ -48,11 +48,7 @@ export const insertLinkAtCurrentSelection = (
   );
 };
 
-function insertLink(
-  editorState,
-  selection,
-  { url, targetBlank, nofollow, anchorTarget, relValue }
-) {
+function insertLink(editorState, selection, { url, targetBlank, nofollow }) {
   const oldSelection = editorState.getSelection();
   const newContentState = Modifier.applyInlineStyle(
     editorState.getCurrentContent(),
@@ -65,8 +61,8 @@ function insertLink(
     type: 'LINK',
     data: {
       url,
-      target: targetBlank ? '_blank' : anchorTarget || '_self',
-      rel: nofollow ? 'nofollow' : relValue || 'noopener',
+      target: targetBlank ? '_blank' : '_self',
+      rel: nofollow ? 'nofollow' : 'noopener',
     },
   });
 }

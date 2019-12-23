@@ -39,7 +39,8 @@ class ImageSettings extends Component {
       metadata,
       linkPanelValues: {
         url,
-        targetBlank: target === '_blank',
+        targetBlank:
+          target === undefined ? this.props.anchorTarget === '_blank' : target === '_blank',
         nofollow: rel === 'nofollow',
       },
     };
@@ -89,10 +90,13 @@ class ImageSettings extends Component {
 
   saveLink = () => {
     const { linkPanelValues } = this.state;
-    if (linkPanelValues.url === '') {
+    const { url, targetBlank, nofollow, isValid } = linkPanelValues;
+    const target = targetBlank ? '_blank' : '_self';
+    const rel = nofollow ? 'nofollow' : 'noopener';
+    if (url === '') {
       this.setBlockLink(null);
-    } else if (linkPanelValues.isValid) {
-      this.setBlockLink(linkPanelValues);
+    } else if (isValid) {
+      this.setBlockLink({ url, target, rel });
     }
   };
 
