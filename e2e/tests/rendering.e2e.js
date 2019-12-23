@@ -1,3 +1,4 @@
+/*global cy*/
 import { fixtures } from './constants';
 import { DEFAULT_DESKTOP_BROWSERS, DEFAULT_MOBILE_BROWSERS } from '../tests/constants';
 
@@ -16,6 +17,10 @@ const testFixture = fixture =>
   });
 
 describe('editor rendering', () => {
+  before(function() {
+    if (Cypress.env('MATCH_CONTENT_STATE')) this.skip();
+  });
+
   context('desktop', () => {
     before(function() {
       cy.eyesOpen({

@@ -24,7 +24,7 @@ class RedoButton extends Component {
     this.props.pubsub.subscribe('editorState', this.onEditorStateChange);
   }
 
-  componentWillUnMount() {
+  componentWillUnmount() {
     this.props.pubsub.unsubscribe('editorState', this.onEditorStateChange);
   }
 

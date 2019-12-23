@@ -10,16 +10,16 @@ import {
   getImageSrc,
   Loader,
   WIX_MEDIA_DEFAULT,
+  pluginImageSchema,
 } from 'wix-rich-content-common';
-import { getDefault, SEO_IMAGE_WIDTH } from './consts';
-import schema from '../statics/data-schema.json';
+import { DEFAULTS, SEO_IMAGE_WIDTH } from './consts';
 import styles from '../statics/styles/image-viewer.scss';
 import ExpandIcon from './icons/expand.svg';
 
 class ImageViewer extends React.Component {
   constructor(props) {
     super(props);
-    validate(props.componentData, schema);
+    validate(props.componentData, pluginImageSchema);
     this.state = {};
   }
 
@@ -29,7 +29,7 @@ class ImageViewer extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if (!isEqual(nextProps.componentData, this.props.componentData)) {
-      validate(nextProps.componentData, schema);
+      validate(nextProps.componentData, pluginImageSchema);
     }
   }
 
@@ -191,7 +191,7 @@ class ImageViewer extends React.Component {
     if (!metadata || metadata.caption === defaultCaption || metadata.caption === '') {
       return false;
     }
-    const data = componentData || getDefault();
+    const data = componentData || DEFAULTS;
     if (data.config.size === 'original' && data.src && data.src.width) {
       return data.src.width >= 350;
     }
@@ -210,7 +210,7 @@ class ImageViewer extends React.Component {
     this.styles = this.styles || mergeStyles({ styles, theme: this.context.theme });
     const { componentData, className, isFocused, readOnly, settings, defaultCaption } = this.props;
     const { fallbackImageSrc } = this.state;
-    const data = componentData || getDefault();
+    const data = componentData || DEFAULTS;
     const { metadata = {} } = componentData;
 
     const hasLink = data.config && data.config.link;

@@ -1,9 +1,9 @@
 {
   "name": "wix-rich-content-editor-common",
-  "version": "6.6.0",
+  "version": "6.6.1",
   "author": {
-    "name": "Jonathan Bachman",
-    "email": "jonathanb@wix.com"
+    "name": "Matan Harsat",
+    "email": "matanha@wix.com"
   },
   "repository": {
     "type": "git",
@@ -64,7 +64,7 @@
     "react-measure": "~2.3.0",
     "react-tooltip": "~3.10.0",
     "react-window": "~1.5.0",
-    "wix-rich-content-common": "6.6.0"
+    "wix-rich-content-common": "6.6.1"
   },
   "unpkg": true,
   "publishConfig": {

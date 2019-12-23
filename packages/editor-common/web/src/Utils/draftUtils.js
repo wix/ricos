@@ -1,4 +1,4 @@
-import { EditorState, Modifier, RichUtils, SelectionState } from 'draft-js';
+import { EditorState, Modifier, RichUtils, SelectionState, AtomicBlockUtils } from 'draft-js';
 import { cloneDeep, flatMap, findIndex, findLastIndex } from 'lodash';
 
 export const insertLinkInPosition = (
@@ -171,6 +171,22 @@ export const replaceWithEmptyBlock = (editorState, blockKey) => {
   return EditorState.forceSelection(newState, resetBlock.getSelectionAfter());
 };
 
+export const createBlock = (editorState, data, type) => {
+  const currentEditorState = editorState;
+  const contentState = currentEditorState.getCurrentContent();
+  const contentStateWithEntity = contentState.createEntity(type, 'IMMUTABLE', cloneDeep(data));
+  const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
+  const newEditorState = AtomicBlockUtils.insertAtomicBlock(currentEditorState, entityKey, ' ');
+  const recentlyCreatedKey = newEditorState.getSelection().getAnchorKey();
+  // when adding atomic block, there is the atomic itself, and then there is a text block with one space,
+  // so get the block before the space
+  const newBlock = newEditorState.getCurrentContent().getBlockBefore(recentlyCreatedKey);
+
+  const newSelection = SelectionState.createEmpty(newBlock.getKey());
+
+  return { newBlock, newSelection, newEditorState };
+};
+
 export const deleteBlock = (editorState, blockKey) => {
   const contentState = editorState.getCurrentContent();
   const block = contentState.getBlockForKey(blockKey);
@@ -257,7 +273,7 @@ function removeLink(editorState, blockKey, [start, end]) {
   return RichUtils.toggleLink(editorState, selection, null);
 }
 
-function createEntity(editorState, { type, mutability = 'MUTABLE', data }) {
+export function createEntity(editorState, { type, mutability = 'MUTABLE', data }) {
   return editorState
     .getCurrentContent()
     .createEntity(type, mutability, data)

@@ -1,3 +1,4 @@
+/*global cy*/
 import { INLINE_TOOLBAR_BUTTONS } from '../cypress/dataHooks';
 import { DEFAULT_DESKTOP_BROWSERS } from './constants';
 

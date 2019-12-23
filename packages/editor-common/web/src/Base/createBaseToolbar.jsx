@@ -96,7 +96,7 @@ export default function createToolbar({
     }
 
     componentDidMount() {
-      pubsub.subscribe('visibleBlock', this.onVisibilityChanged);
+      pubsub.subscribe('focusedBlock', this.onVisibilityChanged);
       pubsub.subscribe('componentState', this.onComponentStateChanged);
       pubsub.subscribe('componentData', this.onComponentDataChanged);
       this.unsubscribeOnBlock = pubsub.subscribeOnBlock({
@@ -106,7 +106,7 @@ export default function createToolbar({
     }
 
     componentWillUnmount() {
-      pubsub.unsubscribe('visibleBlock', this.onVisibilityChanged);
+      pubsub.unsubscribe('focusedBlock', this.onVisibilityChanged);
       pubsub.unsubscribe('componentState', this.onComponentStateChanged);
       pubsub.unsubscribe('componentData', this.onComponentDataChanged);
       this.unsubscribeOnBlock && this.unsubscribeOnBlock();
@@ -125,7 +125,7 @@ export default function createToolbar({
     };
 
     onComponentDataChanged = componentData => {
-      this.setState({ componentData }, () => this.onVisibilityChanged(pubsub.get('visibleBlock')));
+      this.setState({ componentData }, () => this.onVisibilityChanged(pubsub.get('focusedBlock')));
     };
 
     onComponentLinkChange = linkData => {
@@ -145,18 +145,18 @@ export default function createToolbar({
       pubsub.update('componentData', { config: { alignment, size, textWrap } });
     };
 
-    onVisibilityChanged = visibleBlock => {
-      if (visibleBlock) {
+    onVisibilityChanged = focusedBlock => {
+      if (focusedBlock) {
         this.showToolbar();
       } else {
         this.hideToolbar();
       }
 
-      if (visibleBlock !== this.visibleBlock) {
+      if (focusedBlock !== this.focusedBlock) {
         this.hidePanels();
       }
 
-      this.visibleBlock = visibleBlock;
+      this.focusedBlock = focusedBlock;
     };
 
     hideToolbar = () => {

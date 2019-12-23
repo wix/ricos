@@ -12,7 +12,7 @@ export const INIT_HEIGHT = 550;
 export const MAX_HEIGHT = 1200;
 export const MAX_HEIGHT_INPUT = 9999;
 
-export const DEFAULT_COMPONENT_DATA = {
+export const DEFAULTS = {
   srcType: SRC_TYPE_HTML,
   src: '',
   config: {

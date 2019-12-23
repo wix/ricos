@@ -36,7 +36,7 @@ export const sampleItems = [1, 2, 3].map(i => {
   };
 });
 
-export const getDefault = () => ({
+export const DEFAULTS = {
   items: [],
   styles: {
     galleryLayout: 2,
@@ -71,7 +71,7 @@ export const getDefault = () => ({
     layout: 'small',
     spacing: 0,
   },
-});
+};
 
 export const isHorizontalLayout = ({ galleryLayout }) =>
   HORIZONTAL_LAYOUTS.indexOf(galleryLayout) > -1;

@@ -1,11 +1,10 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
+import { validate, mergeStyles, Context, pluginGallerySchema } from 'wix-rich-content-common';
 import { isEqual } from 'lodash';
-import { mergeStyles, Context, validate } from 'wix-rich-content-common';
 import { convertItemData } from './helpers/convert-item-data';
-import { getDefault, isHorizontalLayout, sampleItems } from './constants';
+import { DEFAULTS, isHorizontalLayout, sampleItems } from './constants';
 import resizeMediaUrl from './helpers/resize-media-url';
-import schema from '../statics/data-schema.json';
 import styles from '../statics/styles/viewer.scss';
 import 'pro-gallery/dist/statics/main.min.css';
 import ExpandIcon from './icons/expand.svg';
@@ -14,7 +13,7 @@ const { ProGallery } = process.env.SANTA ? {} : require('pro-gallery');
 
 class GalleryViewer extends React.Component {
   constructor(props) {
-    validate(props.componentData, schema);
+    validate(props.componentData, pluginGallerySchema);
     super(props);
 
     this.state = {
@@ -72,10 +71,9 @@ class GalleryViewer extends React.Component {
   };
 
   stateFromProps = props => {
-    const defaults = getDefault();
-    const items = props.componentData.items || defaults.items;
+    const items = props.componentData.items || DEFAULTS.items;
     const styleParams = this.getStyleParams(
-      Object.assign(defaults.styles, props.componentData.styles || {}),
+      Object.assign(DEFAULTS.styles, props.componentData.styles || {}),
       items
     );
     return {
