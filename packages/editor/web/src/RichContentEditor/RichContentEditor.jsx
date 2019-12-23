@@ -24,6 +24,7 @@ import {
   AccessibilityListener,
   normalizeInitialState,
   getLangDir,
+  Version,
 } from 'wix-rich-content-common';
 import styles from '../../statics/styles/rich-content-editor.scss';
 import draftStyles from '../../statics/styles/draft.rtlignore.scss';
@@ -130,7 +131,10 @@ class RichContentEditor extends Component {
     const { pluginInstances, pluginButtons, pluginTextButtons, pluginStyleFns } = createPlugins({
       plugins,
       config,
-      helpers: { ...helpers, onPluginAdd },
+      helpers: {
+        ...helpers,
+        onPluginAdd: (...args) => onPluginAdd(...args, Version.currentVersion),
+      },
       theme,
       t,
       isMobile,
@@ -235,7 +239,9 @@ class RichContentEditor extends Component {
 
   updateEditorState = editorState => {
     const { onPluginDelete = () => false } = this.props;
-    calculateDiff(this.state.editorState, editorState, onPluginDelete);
+    calculateDiff(this.state.editorState, editorState, (...args) =>
+      onPluginDelete(...args, Version.currentVersion)
+    );
     this.setEditorState(editorState);
     this.props.onChange && this.props.onChange(editorState);
   };

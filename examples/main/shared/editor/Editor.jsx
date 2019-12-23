@@ -8,7 +8,6 @@ import * as Plugins from './EditorPlugins';
 import ModalsMap from './ModalsMap';
 import theme from '../theme/theme'; // must import after custom styles
 import { debugBiLoggers } from '../../config/biService';
-import { Version } from 'wix-rich-content-common';
 
 const modalStyleDefaults = {
   content: {
@@ -155,7 +154,6 @@ export default class Editor extends PureComponent {
     const textToolbarType = this.props.staticToolbar && !this.props.isMobile ? 'static' : null;
     const { onRequestClose } = this.state.modalProps || {};
     const { onPluginAdd, onPluginChange, onPluginDelete } = debugBiLoggers();
-    const version = Version.currentVersion;
     return (
       <div className="editor">
         {MobileToolbar && <MobileToolbar />}
@@ -181,11 +179,12 @@ export default class Editor extends PureComponent {
           relValue={relValue}
           locale={this.props.locale}
           localeResource={this.props.localeResource}
-          onPluginAdd={async (...args) => onPluginAdd(...args, version)}
-          onPluginChange={async (...args) => onPluginChange(...args, version)}
-          onPluginDelete={async (...args) => onPluginDelete(...args, version)}
+          onPluginAdd={onPluginAdd}
+          onPluginChange={onPluginChange}
+          onPluginDelete={onPluginDelete}
         // siteDomain="https://www.wix.com"
         />
+
         <ReactModal
           isOpen={this.state.showModal}
           contentLabel="External Modal Example"
