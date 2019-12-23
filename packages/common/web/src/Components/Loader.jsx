@@ -21,6 +21,9 @@ class Loader extends Component {
 
   updateProgress = (progress, localUrl) => {
     this.setState({ progress, localUrl });
+    if (progress === 100) {
+      this.props?.onLoadGallery?.();
+    }
   };
 
   componentDidMount() {
@@ -70,6 +73,7 @@ Loader.propTypes = {
   overlayClassName: PropTypes.string,
   loaderClassName: PropTypes.string,
   theme: PropTypes.object,
+  onLoadGallery: PropTypes.func,
 };
 
 Loader.defaultProps = {
