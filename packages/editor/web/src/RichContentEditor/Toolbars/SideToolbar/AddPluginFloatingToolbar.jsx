@@ -158,25 +158,23 @@ export default class AddPluginFloatingToolbar extends Component {
         >
           {!this.state.isActive ? <PlusIcon /> : <PlusActiveIcon />}
         </button>
-        {this.state.isActive && (
-          <div
-            id={this.id}
-            className={popoupClassNames}
-            style={this.state.style}
-            ref={el => (this.popup = el)}
-          >
-            {this.props.structure.map((Component, index) => (
-              <Component
-                tabIndex={this.state.tabIndex}
-                key={index}
-                getEditorState={getEditorState}
-                setEditorState={setEditorState}
-                theme={theme}
-                hidePopup={this.hidePopup}
-              />
-            ))}
-          </div>
-        )}
+        <div
+          id={this.id}
+          className={popoupClassNames}
+          style={this.state.style}
+          ref={el => (this.popup = el)}
+        >
+          {this.props.structure.map((Component, index) => (
+            <Component
+              tabIndex={this.state.tabIndex}
+              key={index}
+              getEditorState={getEditorState}
+              setEditorState={setEditorState}
+              theme={theme}
+              hidePopup={this.hidePopup}
+            />
+          ))}
+        </div>
       </FocusManager>
     );
   }
