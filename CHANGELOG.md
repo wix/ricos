@@ -33,6 +33,8 @@
     - [#533](https://github.com/wix-incubator/rich-content/pull/533) add multiple images at once, enabling `config.createGalleryForMultipleImages` renders them as a gallery
   - `file-upload`
     - [#533](https://github.com/wix-incubator/rich-content/pull/533) add multiple files at once
+  - `progress-loader`
+    - [#544](https://github.com/wix-incubator/rich-content/pull/544) gallery and image supports progress loader
   ### :bug: Bug Fix
   - `editor`
     - [#504](https://github.com/wix-incubator/rich-content/pull/504) pasted links get the configured anchorTarget and relValue
