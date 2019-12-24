@@ -6,10 +6,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v2*
 
       - name: Cypress run
-        uses: cypress-io/github-action@v1.16.1
+        uses: cypress-io/github-action@v1*
         with:
           build: npm run build:test
           start: npm run e2e:app:run
@@ -17,7 +17,7 @@ jobs:
           config: video=false
 
       - name: Update Applitools batch status
-        uses: wei/curl@v1.1.1
+        uses: wei/curl@v1*
         with:
           args: -d "" -X POST https://wixeyesapi.applitools.com/api/externals/github/servers/github.com/commit/${{ github.sha }}/complete?apiKey=${{ secrets.APPLITOOLS_API_KEY }}
 
@@ -29,10 +29,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v2*
 
       - name: Cypress run
-        uses: cypress-io/github-action@v1.16.1
+        uses: cypress-io/github-action@v1*
         with:
           build: npm run build:test
           start: npm run e2e:app:run
@@ -44,8 +44,8 @@ jobs:
   unit-tests:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1.1.0
+      - uses: actions/checkout@v2*
+      - uses: actions/setup-node@v1*
         with:
           node-version: 12
       - run: npm install
@@ -54,8 +54,8 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1.1.0
+      - uses: actions/checkout@v2*
+      - uses: actions/setup-node@v1*
         with:
           node-version: 12
       - run: npm install
