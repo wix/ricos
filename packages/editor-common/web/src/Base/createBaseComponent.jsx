@@ -39,6 +39,7 @@ const createBaseComponent = ({
   onOverlayClick,
   onAtomicBlockFocus,
   disableRightClick,
+  onComponentMount,
 }) => {
   class WrappedComponent extends Component {
     static displayName = createHocName('BaseComponent', PluginComponent);
@@ -89,6 +90,9 @@ const createBaseComponent = ({
         { key: 'htmlPluginMaxHeight', callback: this.onHtmlPluginMaxHeightChange },
         { key: 'componentLink', callback: this.onComponentLinkChange },
       ].map(({ key, callback }) => pubsub.subscribeOnBlock({ key, callback, blockKey }));
+      const { componentData } = this.state;
+      const e = { preventDefault: () => {} };
+      onComponentMount && onComponentMount({ e, pubsub, componentData });
     }
 
     componentDidUpdate() {

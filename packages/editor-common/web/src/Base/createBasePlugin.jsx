@@ -39,6 +39,7 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
     commonPubsub,
     defaultPluginData,
     pluginDefaults,
+    onComponentMount,
   } = config;
   defaultPluginData && (pluginDefaults[config.type] = defaultPluginData);
   const toolbarTheme = { ...getToolbarTheme(config.theme, 'plugin'), ...config.theme };
@@ -100,6 +101,7 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
       isMobile,
       getEditorBounds,
       disableRightClick,
+      onComponentMount,
     });
 
   const DecoratedCompWithBase =
