@@ -12,6 +12,7 @@ import EmojiPluginIcon from '../icons/EmojiPluginIcon.svg';
 export default ({ helpers, t, settings, getEditorState, setEditorState }) => {
   return [
     {
+      shouldKeepSideToolbar: true,
       type: 'modal',
       name: 'EMOJI',
       tooltipText: t('EmojiPlugin_InsertButton_Tooltip'),

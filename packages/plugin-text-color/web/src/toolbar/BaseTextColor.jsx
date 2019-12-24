@@ -30,7 +30,9 @@ export default class BaseTextColor extends Component {
     }
     const { bottom, left } = this.buttonRef.current.getBoundingClientRect();
     const panelLeft = left - PANEL_WIDTH / 2;
-    this.setState({ isPanelOpen: true, panelLeft, panelTop: bottom });
+    const isAboveButton = bottom - 110 > 0;
+    const top = isAboveButton ? bottom - 150 : bottom;
+    this.setState({ isPanelOpen: true, panelLeft, panelTop: top });
   };
 
   closePanel = editorState => {

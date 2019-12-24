@@ -1,7 +1,9 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { mergeStyles } from 'wix-rich-content-common';
-import { TextInput } from 'wix-rich-content-editor-common';
+import ClickOutside from 'react-click-outside';
+// eslint-disable-next-line no-unused-vars
+import { TextInput, TooltipHost } from 'wix-rich-content-editor-common';
 import { SearchIcon, CloseIcon } from '../icons';
 import styles from '../../statics/styles/giphy-api-input-modal.scss';
 import GiphySelector from './giphySelector';
@@ -14,6 +16,11 @@ export default class GiphyApiInputModal extends Component {
       searchTag: '',
     };
   }
+
+  onClickOutside = () => {
+    this.props?.onClose?.();
+    this.onCloseRequested();
+  };
 
   onChange = e => {
     this.setState({ searchTag: e.target.value });
@@ -54,45 +61,47 @@ export default class GiphyApiInputModal extends Component {
       </div>
     );
     return (
-      <div dir={languageDir}>
-        {isMobile ? <div>{mobileNavbar}</div> : null}
-        <div className={styles.giphy_api_input_modal_container} data-hook="giphyUploadModal">
-          <div className={styles.giphy_api_input_modal_search_textinput_group}>
-            <TextInput
-              inputRef={ref => {
-                this.input = ref;
-              }}
-              className={styles.giphy_api_input_modal_search}
-              onKeyPress={this.handleKeyPress}
-              onChange={this.onChange}
-              value={this.state.searchTag}
-              placeholder={t('GiphyUploadModal_Input_Placeholder')}
-              theme={theme}
-              data-hook="giphyUploadModalInput"
-            />
-            <div className={styles.giphy_api_input_modal_searchIcon}>
-              {!this.state.searchTag ? (
-                <SearchIcon />
-              ) : (
-                <div
-                  onClick={this.handleClearText}
-                  role="button"
-                  tabIndex="0"
-                  onKeyPress={null}
-                  className={styles.giphy_api_input_modal_closeIcon}
-                >
-                  <CloseIcon />
-                </div>
-              )}
+      <ClickOutside onClickOutside={this.onClickOutside}>
+        <div dir={languageDir}>
+          {isMobile ? <div>{mobileNavbar}</div> : null}
+          <div className={styles.giphy_api_input_modal_container} data-hook="giphyUploadModal">
+            <div className={styles.giphy_api_input_modal_search_textinput_group}>
+              <TextInput
+                inputRef={ref => {
+                  this.input = ref;
+                }}
+                className={styles.giphy_api_input_modal_search}
+                onKeyPress={this.handleKeyPress}
+                onChange={this.onChange}
+                value={this.state.searchTag}
+                placeholder={t('GiphyUploadModal_Input_Placeholder')}
+                theme={theme}
+                data-hook="giphyUploadModalInput"
+              />
+              <div className={styles.giphy_api_input_modal_searchIcon}>
+                {!this.state.searchTag ? (
+                  <SearchIcon />
+                ) : (
+                  <div
+                    onClick={this.handleClearText}
+                    role="button"
+                    tabIndex="0"
+                    onKeyPress={null}
+                    className={styles.giphy_api_input_modal_closeIcon}
+                  >
+                    <CloseIcon />
+                  </div>
+                )}
+              </div>
             </div>
+            <GiphySelector
+              searchTag={searchTag}
+              onCloseRequested={this.onCloseRequested}
+              {...this.props}
+            />
           </div>
-          <GiphySelector
-            searchTag={searchTag}
-            onCloseRequested={this.onCloseRequested}
-            {...this.props}
-          />
         </div>
-      </div>
+      </ClickOutside>
     );
   }
 }

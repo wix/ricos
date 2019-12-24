@@ -56,7 +56,6 @@ export default ({
     };
 
     createBlock = (editorState, data, type) => {
-      this.props.hidePopup?.();
       return createBlock(editorState, data, type);
     };
 
@@ -80,6 +79,7 @@ export default ({
 
     onClick = event => {
       event.preventDefault();
+      this.props?.shouldKeepOpen?.(button.shouldKeepSideToolbar);
       switch (button.type) {
         case 'file':
           this.toggleFileSelection();
@@ -192,6 +192,7 @@ export default ({
           theme: this.props.theme,
           componentData: button.componentData,
           onConfirm: this.addBlock,
+          onClose: () => this.props?.shouldKeepOpen?.(false),
           pubsub,
           helpers,
           t,
@@ -278,7 +279,7 @@ export default ({
     getEditorState: PropTypes.func.isRequired,
     setEditorState: PropTypes.func.isRequired,
     theme: PropTypes.object,
-    hidePopup: PropTypes.func,
+    shouldKeepOpen: PropTypes.func,
     showName: PropTypes.bool,
     isMobile: PropTypes.bool,
     t: PropTypes.func,
