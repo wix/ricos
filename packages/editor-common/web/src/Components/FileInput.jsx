@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-//import classnames from 'classnames';
+import classnames from 'classnames';
 import { mergeStyles } from 'wix-rich-content-common';
 import styles from '../../statics/styles/general.scss';
 
@@ -36,8 +36,7 @@ class FileInput extends Component {
     return (
       <label
         htmlFor={this.id}
-        //className={classnames({ [className]: true, [styles.focused]: this.state.focused })}
-        className={className}
+        className={classnames({ [className]: true, [styles.focused]: this.state.focused })}
         style={this.props.style}
         title={title}
       >
