@@ -146,7 +146,7 @@ export default function createToolbar({
     };
 
     onVisibilityChanged = focusedBlock => {
-      if (focusedBlock) {
+      if (this.shouldCreate && focusedBlock) {
         this.showToolbar();
       } else {
         this.hideToolbar();
