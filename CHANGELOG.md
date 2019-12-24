@@ -28,6 +28,8 @@
   ### :bug: Bug Fix
   - `editor`
     - [#504](https://github.com/wix-incubator/rich-content/pull/504) pasted links get the configured anchorTarget and relValue
+  - `editor`
+    - [#554](https://github.com/wix-incubator/rich-content/pull/554) change align shortcuts from cmd to cmd + shift
   - `undo-redo`
     - [#543](https://github.com/wix-incubator/rich-content/pull/543) fix undo-redo icons on mobile
   - `editor`
