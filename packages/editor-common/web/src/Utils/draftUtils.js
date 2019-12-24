@@ -1,5 +1,12 @@
-import { EditorState, Modifier, RichUtils, SelectionState } from 'draft-js';
+import { EditorState, Modifier, RichUtils, SelectionState, AtomicBlockUtils } from 'draft-js';
 import { cloneDeep, flatMap, findIndex, findLastIndex } from 'lodash';
+
+function createSelection({ blockKey, anchorOffset, focusOffset }) {
+  return SelectionState.createEmpty(blockKey).merge({
+    anchorOffset,
+    focusOffset,
+  });
+}
 
 export const insertLinkInPosition = (
   editorState,
@@ -8,10 +15,7 @@ export const insertLinkInPosition = (
   end,
   { url, targetBlank, nofollow, anchorTarget, relValue }
 ) => {
-  const selection = SelectionState.createEmpty(blockKey).merge({
-    anchorOffset: start,
-    focusOffset: end,
-  });
+  const selection = createSelection({ blockKey, anchorOffset: start, focusOffset: end });
 
   return insertLink(editorState, selection, {
     url,
@@ -47,6 +51,9 @@ export const insertLinkAtCurrentSelection = (
     selection.merge({ anchorOffset: selection.focusOffset })
   );
 };
+
+const defaultAnchorTarget = '_self';
+const defaultRelValue = 'noopener';
 
 function insertLink(
   editorState,
@@ -174,6 +181,22 @@ export const replaceWithEmptyBlock = (editorState, blockKey) => {
   return EditorState.forceSelection(newState, resetBlock.getSelectionAfter());
 };
 
+export const createBlock = (editorState, data, type) => {
+  const currentEditorState = editorState;
+  const contentState = currentEditorState.getCurrentContent();
+  const contentStateWithEntity = contentState.createEntity(type, 'IMMUTABLE', cloneDeep(data));
+  const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
+  const newEditorState = AtomicBlockUtils.insertAtomicBlock(currentEditorState, entityKey, ' ');
+  const recentlyCreatedKey = newEditorState.getSelection().getAnchorKey();
+  // when adding atomic block, there is the atomic itself, and then there is a text block with one space,
+  // so get the block before the space
+  const newBlock = newEditorState.getCurrentContent().getBlockBefore(recentlyCreatedKey);
+
+  const newSelection = SelectionState.createEmpty(newBlock.getKey());
+
+  return { newBlock, newSelection, newEditorState };
+};
+
 export const deleteBlock = (editorState, blockKey) => {
   const contentState = editorState.getCurrentContent();
   const block = contentState.getBlockForKey(blockKey);
@@ -254,9 +277,7 @@ function getLinkRangesInBlock(block, contentState) {
 }
 
 function removeLink(editorState, blockKey, [start, end]) {
-  let selection = SelectionState.createEmpty(blockKey);
-  selection = selection.set('anchorOffset', start);
-  selection = selection.set('focusOffset', end);
+  const selection = createSelection({ blockKey, anchorOffset: start, focusOffset: end });
   return RichUtils.toggleLink(editorState, selection, null);
 }
 
@@ -280,4 +301,38 @@ function getSelection(editorState) {
   }
 
   return selection;
+}
+
+// a selection of the new content from the last change
+function createLastChangeSelection(editorState) {
+  const content = editorState.getCurrentContent();
+  const selectionBefore = content.getSelectionBefore();
+  return content.getSelectionAfter().merge({
+    anchorKey: selectionBefore.getStartKey(),
+    anchorOffset: selectionBefore.getStartOffset(),
+  });
+}
+
+export function fixPastedLinks(editorState, { anchorTarget, relValue }) {
+  const lastChangeSelection = createLastChangeSelection(editorState);
+  const links = getSelectedLinks(setSelection(editorState, lastChangeSelection));
+  const content = editorState.getCurrentContent();
+  links.forEach(({ key: blockKey, range }) => {
+    const block = content.getBlockForKey(blockKey);
+    const entityKey = block.getEntityAt(range[0]);
+    const data = content.getEntity(entityKey).getData();
+    const url = data.url || data.href;
+    if (url) {
+      content.replaceEntityData(entityKey, {
+        url,
+        target: anchorTarget || defaultAnchorTarget,
+        rel: relValue || defaultRelValue,
+      });
+    }
+  });
+  return editorState;
+}
+
+export function setSelection(editorState, selection) {
+  return EditorState.acceptSelection(editorState, selection);
 }

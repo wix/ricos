@@ -1,5 +1,5 @@
 import createToolbar from './toolbar';
-import { Component } from './soundCloud';
+import { Component, DEFAULTS } from './soundCloud';
 import { SOUND_CLOUD_TYPE } from './types';
 import { createBasePlugin } from 'wix-rich-content-editor-common';
 
@@ -15,6 +15,7 @@ const createSoundCloudPlugin = (config = {}) => {
     helpers,
     t,
     isMobile,
+    defaultPluginData: DEFAULTS,
     ...rest,
   });
 };

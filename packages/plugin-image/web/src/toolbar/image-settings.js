@@ -39,9 +39,8 @@ class ImageSettings extends Component {
       metadata,
       linkPanelValues: {
         url,
-        targetBlank:
-          target === undefined ? this.props.anchorTarget === '_blank' : target === '_blank',
-        nofollow: rel === 'nofollow',
+        targetBlank: target ? target === '_blank' : this.props.anchorTarget === '_blank',
+        nofollow: rel ? rel === 'nofollow' : this.props.relValue === 'nofollow',
       },
     };
   }
@@ -121,7 +120,8 @@ class ImageSettings extends Component {
     const { src, metadata = {} } = this.state;
 
     const { linkPanel } = uiSettings || {};
-    const { blankTargetToggleVisibilityFn, nofollowRelToggleVisibilityFn } = linkPanel || {};
+    const { blankTargetToggleVisibilityFn, nofollowRelToggleVisibilityFn, placeholder } =
+      linkPanel || {};
     const showTargetBlankCheckbox =
       blankTargetToggleVisibilityFn && blankTargetToggleVisibilityFn(anchorTarget);
     const showRelValueCheckbox =
@@ -218,6 +218,7 @@ class ImageSettings extends Component {
               t={t}
               ariaProps={{ 'aria-labelledby': 'image_settings_link_lbl' }}
               languageDir={languageDir}
+              placeholder={placeholder}
             />
           </SettingsSection>
         </div>

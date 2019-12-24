@@ -1,3 +1,4 @@
+/*global cy*/
 import { DEFAULT_DESKTOP_BROWSERS, DEFAULT_MOBILE_BROWSERS } from '../tests/constants';
 
 describe('rtl', () => {

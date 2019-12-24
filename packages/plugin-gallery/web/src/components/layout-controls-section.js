@@ -54,6 +54,11 @@ class LayoutControlsSection extends Component {
 
   applyGallerySetting = setting => {
     const { data, store } = this.props;
+    const { cubeRatio } = setting;
+    // hotfix- till pro gallery will support cubeRatio field in slider layout
+    if (cubeRatio && data.styles.galleryLayout === 4) {
+      setting.gallerySliderImageRatio = cubeRatio;
+    }
     const componentData = { ...data, styles: Object.assign({}, data.styles, setting) };
     store.set('componentData', componentData);
   };
@@ -128,7 +133,9 @@ class LayoutControlsSection extends Component {
     imageOrientation: {
       component: ImageOrientation,
       props: {
-        onChange: value => this.applyGallerySetting({ isVertical: value === '1' }),
+        onChange: value => {
+          this.applyGallerySetting({ isVertical: value === '1' });
+        },
         value: this.getValueFromComponentStyles('isVertical') ? '1' : '0',
         options: {
           readOnly: this.getValueFromComponentStyles('oneRow'),

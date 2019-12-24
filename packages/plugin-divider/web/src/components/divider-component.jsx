@@ -1,12 +1,11 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { mergeStyles, Context, validate } from 'wix-rich-content-common';
+import { mergeStyles, validate, Context, pluginDividerSchema } from 'wix-rich-content-common';
 import { isEqual } from 'lodash';
 import { getType, getConfig } from '../toolbar/selectors';
 import DividerLine from './divider-line';
 import { customClassName } from '../classNameStrategies';
-import schema from '../../statics/data-schema.json';
 import styles from '../../statics/styles/divider-viewer.rtlignore.scss';
 
 class DividerComponent extends PureComponent {
@@ -15,13 +14,13 @@ class DividerComponent extends PureComponent {
 
   constructor(props) {
     super(props);
-    validate(props.componentData, schema);
+    validate(props.componentData, pluginDividerSchema);
     this.state = this.stateFromProps(props);
   }
 
   componentWillReceiveProps(nextProps) {
     if (!isEqual(nextProps.componentData, this.props.componentData)) {
-      validate(nextProps.componentData, schema);
+      validate(nextProps.componentData, pluginDividerSchema);
     }
     this.setState(this.stateFromProps(nextProps));
   }

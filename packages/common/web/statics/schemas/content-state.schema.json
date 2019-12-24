@@ -118,7 +118,7 @@
   "$id": "https://wix-rich-content/content-state-schema.json",
   "type": "object",
   "title": "content state",
-  "required": ["blocks"],
+  "required": ["blocks", "entityMap", "VERSION"],
   "properties": {
     "blocks": {
       "$id": "#/properties/blocks",
@@ -128,7 +128,7 @@
         "$id": "#/properties/blocks/items",
         "type": "object",
         "title": "block",
-        "required": ["key", "text", "type", "inlineStyleRanges"],
+        "required": ["key", "text", "type", "inlineStyleRanges", "entityRanges", "data"],
         "properties": {
           "key": {
             "$id": "#/properties/blocks/items/properties/key",
@@ -144,7 +144,7 @@
             "title": "text",
             "default": "",
             "examples": ["test"],
-            "pattern": "^(.*)$"
+            "pattern": "^(.|\n)*$"
           },
           "type": {
             "$id": "#/properties/blocks/items/properties/type",

@@ -3,17 +3,18 @@ import PropTypes from 'prop-types';
 import { debounce } from 'lodash';
 import { getContentStateSchema, isSSR } from 'wix-rich-content-common';
 
-import dividerSchema from 'wix-rich-content-plugin-divider/dist/statics/data-schema.json';
-import imageSchema from 'wix-rich-content-plugin-image/dist/statics/data-schema.json';
-import videoSchema from 'wix-rich-content-plugin-video/dist/statics/data-schema.json';
-import giphySchema from 'wix-rich-content-plugin-giphy/dist/statics/data-schema.json';
-import soundCloudSchema from 'wix-rich-content-plugin-sound-cloud/dist/statics/data-schema.json';
-import fileUploadSchema from 'wix-rich-content-plugin-file-upload/dist/statics/data-schema.json';
-import mapSchema from 'wix-rich-content-plugin-map/dist/statics/data-schema.json';
-import htmlSchema from 'wix-rich-content-plugin-html/dist/statics/data-schema.json';
-import linkSchema from 'wix-rich-content-plugin-link/dist/statics/data-schema.json';
-import mentionSchema from 'wix-rich-content-plugin-mentions/dist/statics/data-schema.json';
-import gallerySchema from 'wix-rich-content-plugin-gallery/dist/statics/data-schema.json';
+import dividerSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-divider.schema.json';
+import imageSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-image.schema.json';
+import videoSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-video.schema.json';
+import giphySchema from 'wix-rich-content-common/dist/statics/schemas/plugin-giphy.schema.json';
+import soundCloudSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-sound-cloud.schema.json';
+import fileUploadSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-file-upload.schema.json';
+import mapSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-map.schema.json';
+import htmlSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-html.schema.json';
+import linkSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-link.schema.json';
+import mentionSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-mentions.schema.json';
+import gallerySchema from 'wix-rich-content-common/dist/statics/schemas/plugin-gallery.schema.json';
+import buttonSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-button.schema.json';
 
 import { DIVIDER_TYPE } from 'wix-rich-content-plugin-divider';
 import { VIDEO_TYPE } from 'wix-rich-content-plugin-video';
@@ -26,6 +27,7 @@ import { HTML_TYPE } from 'wix-rich-content-plugin-html';
 import { LINK_TYPE } from 'wix-rich-content-plugin-link';
 import { MENTION_TYPE } from 'wix-rich-content-plugin-mentions';
 import { GALLERY_TYPE } from 'wix-rich-content-plugin-gallery';
+import { BUTTON_TYPE } from 'wix-rich-content-plugin-button';
 
 const stringifyJSON = obj => JSON.stringify(obj, null, 2);
 
@@ -76,6 +78,7 @@ class ContentStateEditor extends PureComponent {
             [LINK_TYPE]: linkSchema,
             [MENTION_TYPE]: mentionSchema,
             [GALLERY_TYPE]: gallerySchema,
+            [BUTTON_TYPE]: buttonSchema,
           }),
         },
       ],

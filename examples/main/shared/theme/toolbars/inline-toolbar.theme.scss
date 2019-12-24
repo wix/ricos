@@ -46,6 +46,14 @@
 .inlineToolbarDropdown_wrapper {
 }
 
+.inlineToolbarDropdownButton_wrapper:hover .inlineToolbarDropdownButton_icon {
+  color: cyan;
+}
+
+.inlineToolbarDropdownButton_active {
+  color: cyan;
+}
+
 .inlineToolbarDropdown_options {
 }
 

@@ -36,7 +36,7 @@ export const toggleBlockTypeAndEnsureSpaces = (blockType, editorState) => {
   const selectedBlocks = getBlockRange(firstKey, lastKey, allBlocks);
   const newContentState = setBlockTypeAndMerge(blockType, selectedBlocks, initialContentState);
 
-  const newEditorState = EditorState.push(editorState, newContentState, 'insert-fragment');
+  const newEditorState = EditorState.push(editorState, newContentState, 'change-block-type');
   return EditorState.forceSelection(newEditorState, editorState.getSelection());
 };
 

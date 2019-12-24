@@ -27,6 +27,7 @@ const createBaseComponent = ({
   theme,
   settings,
   pubsub,
+  commonPubsub,
   helpers,
   anchorTarget,
   relValue,
@@ -55,10 +56,10 @@ const createBaseComponent = ({
 
     stateFromProps(props) {
       const { readOnly } = props.blockProps;
-      const initialState = pubsub.get('initialState_' + props.block.getKey());
+      const initialState = commonPubsub.get('initialState_' + props.block.getKey());
       if (initialState) {
         //reset the initial state
-        pubsub.set('initialState_' + props.block.getKey(), undefined);
+        commonPubsub.set('initialState_' + props.block.getKey(), undefined);
       }
       return {
         componentData: this.getData(props),

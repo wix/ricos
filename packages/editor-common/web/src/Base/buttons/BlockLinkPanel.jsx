@@ -7,11 +7,9 @@ class BlockLinkPanel extends Component {
   componentDidMount() {
     const { anchorTarget, relValue, theme, t, uiSettings, pubsub } = this.props;
     const componentLink = pubsub.getBlockData({ key: 'componentLink' });
-    const targetBlank = componentLink?.target
-      ? componentLink.target === '_blank'
-      : anchorTarget === '_blank';
-    const nofollow = componentLink?.rel === 'nofollow';
-    const { url } = componentLink || {};
+    const { url, target, rel } = componentLink || {};
+    const targetBlank = target ? target === '_blank' : anchorTarget === '_blank';
+    const nofollow = rel ? rel === 'nofollow' : relValue === 'nofollow';
     const linkContainerProps = {
       url,
       targetBlank,
