@@ -36,7 +36,7 @@ export default class Checkbox extends React.Component {
   }
 
   render() {
-    const { styles, generalStyles } = this;
+    const { styles } = this;
     const { onChange, label, checked, dataHook } = this.props;
     const isChecked = checked ? { defaultChecked: 'checked' } : {};
     const a11yProps = {
@@ -48,10 +48,11 @@ export default class Checkbox extends React.Component {
     return (
       <label
         htmlFor={this.id}
-        className={classnames({
-          [styles.checkbox]: true,
-          [generalStyles.focused]: this.state.focused,
-        })}
+        className={styles.checkbox}
+        // className={classnames({
+        //   [styles.checkbox]: true,
+        //   [generalStyles.focused]: this.state.focused,
+        // })}
       >
         <input
           id={this.id}
