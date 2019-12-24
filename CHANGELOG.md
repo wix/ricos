@@ -13,6 +13,9 @@
     Click to see more.
   </summary>
 
+  ### :rocket: New Feature
+  - `link`
+    - [#551](https://github.com/wix-incubator/rich-content/pull/551) adding a tooltip for nofollow tag explanation
 </details>
 <hr/>
 
