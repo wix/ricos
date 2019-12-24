@@ -12,7 +12,7 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
-  
+
   ### :rocket: New Feature
   - `fullscreen`
     - [#519](https://github.com/wix-incubator/rich-content/pull/519) add props: topMargin, backgroundColor, foregroundColor. Remove counter when only 1 image. Larger z-index
@@ -28,6 +28,8 @@
     - [#511](https://github.com/wix-incubator/rich-content/pull/511) divider's width set to 100% in editor&viewer when no initial state of width is given
   - `editor`
     - [#521](https://github.com/wix-incubator/rich-content/pull/521) replace p element with div element in lists
+  - `html plugin`
+    - [#549](https://github.com/wix-incubator/rich-content/pull/549) open edit option when opening html plugin
   ### :house: Internal
   - `gallery-settings`
     - [#535](https://github.com/wix-incubator/rich-content/pull/535) gallery setting's header, tabs and footer position
@@ -67,7 +69,7 @@
 - `file-upload`
   - [#489](https://github.com/wix-incubator/rich-content/pull/489) `config.downloadTarget` enables consumers to control in which tab files are opened
 - `undo-redo`
-  - [#495](https://github.com/wix-incubator/rich-content/pull/495) creates undo redo plugin 
+  - [#495](https://github.com/wix-incubator/rich-content/pull/495) creates undo redo plugin
 - `editor`
   - [#503](https://github.com/wix-incubator/rich-content/pull/503) activated drag and drop capability by default
 - `video`
@@ -188,7 +190,7 @@
     - [#452](https://github.com/wix-incubator/rich-content/pull/452) `handleDropdownOpen`, `handleDropdownClose` and `popoverComponent` added to plugin settings
   - `video`
     - [#443](https://github.com/wix-incubator/rich-content/pull/443) async url resolving support
-    - [#444](https://github.com/wix-incubator/rich-content/pull/444) file upload support  
+    - [#444](https://github.com/wix-incubator/rich-content/pull/444) file upload support
     - [#449](https://github.com/wix-incubator/rich-content/pull/449) force video mime type for uploads
     - [#451](https://github.com/wix-incubator/rich-content/pull/451) uses unique file input id
   - `editor`
