@@ -10,7 +10,15 @@ const TooltipHost = () => {
       {context => {
         const { theme } = context;
         const mergedStyles = mergeStyles({ styles, theme });
-        return <ReactTooltip className={mergedStyles.tooltip} effect={'solid'} delayShow={300} />;
+        return (
+          <ReactTooltip
+            className={mergedStyles.tooltip}
+            effect={'solid'}
+            delayShow={300}
+            // eslint-disable-next-line react/jsx-boolean-value
+            multiline={true}
+          />
+        );
       }}
     </Context.Consumer>
   );

@@ -150,6 +150,20 @@ class LinkPanel extends Component {
               onChange={this.handleNofollowChange}
             />
           )}
+          {showRelValueCheckbox && (
+            <Tooltip
+              shouldRebuildOnUpdate={() => showRelValueCheckbox}
+              data-hook="linkPanelNoFollowTooltip"
+              content={t('LinkPanel_NoFollowTagExplanationTooltip')}
+              theme={theme}
+              moveBy={{ y: 0 }}
+            >
+              <ErrorIcon
+                data-hook="linkPanelNoFollow"
+                className={styles.linkPanel_noFollowExplanationIcon}
+              />
+            </Tooltip>
+          )}
         </div>
       </div>
     );

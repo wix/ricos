@@ -15,6 +15,7 @@
   "LinkPanel_Nofollow_Checkbox" : "Add a nofollow tag",
   "LinkPanel_InputPlaceholder" : "Enter a URL here",
   "LinkPanel_ErrorTooltip" : "Double check this URL.",
+  "LinkPanel_NoFollowTagExplanationTooltip" : "The nofollow tag is a way publishers can tell search engines not to count some of their links to other pages as “votes” in favor of that content.<br />Doing so can help them avoid problems with search engines believing they are selling influence or are somehow involved in schemes deemed as unacceptable SEO practices.",
   "LinkPanelContainer_DoneButton" : "Update",
   "LinkPanelContainer_CancelButton" : "Cancel",
   "LinkPanelContainer_RemoveButton" : "Remove Link",
