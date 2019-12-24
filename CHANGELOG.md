@@ -32,6 +32,8 @@
     - [#543](https://github.com/wix-incubator/rich-content/pull/543) fix undo-redo icons on mobile
   - `editor`
     - [#521](https://github.com/wix-incubator/rich-content/pull/521) replace p element with div element in lists
+  - `editor`
+    - [#552](https://github.com/wix-incubator/rich-content/pull/552) fix Plugin toolbar shouldCreate config crush
   - `gallery`
     - [#545](https://github.com/wix-incubator/rich-content/pull/545) fix image ratio change in gallery slider layout
   ### :house: Internal
