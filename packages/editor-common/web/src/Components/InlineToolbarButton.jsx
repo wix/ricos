@@ -41,6 +41,7 @@ class InlineToolbarButton extends Component {
     icon: PropTypes.func.isRequired,
     children: PropTypes.node,
     forwardRef: PropTypes.oneOfType([PropTypes.func, PropTypes.shape({ current: PropTypes.func })]),
+    disabled: PropTypes.bool,
   };
 
   preventDefault = event => event.preventDefault();
@@ -55,6 +56,7 @@ class InlineToolbarButton extends Component {
       tabIndex,
       icon: Icon,
       forwardRef,
+      disabled,
     } = this.props;
     const { styles } = this;
     const showTooltip = !isMobile && !isEmpty(tooltipText);
@@ -67,6 +69,7 @@ class InlineToolbarButton extends Component {
       /* eslint-disable jsx-a11y/no-static-element-interactions */
       <div className={styles.buttonWrapper}>
         <button
+          disabled={disabled}
           tabIndex={tabIndex}
           aria-label={tooltipText}
           aria-pressed={isActive}
