@@ -178,6 +178,7 @@
   "VideoUploadModal_Title" : "동영상 추가",
   "EmojiPlugin_EmojiGroups_Nature" : "자연",
   "ButtonModal_Border_Section" : "테두리",
+  "ColorPicker_SetToDefault_ButtonLabel" : "Reset to Default",
   "ImageSettings_Alt_Input_Placeholder" : "이미지 대체 텍스트를 추가하세요.",
   "ButtonModal_Text_Color" : "텍스트",
   "ButtonModal_Color_Section" : "색상",
