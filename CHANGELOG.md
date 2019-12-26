@@ -43,6 +43,8 @@
     - [#521](https://github.com/wix-incubator/rich-content/pull/521) replace p element with div element in lists
   - `gallery`
     - [#545](https://github.com/wix-incubator/rich-content/pull/545) fix image ratio change in gallery slider layout
+  - `accessibility`
+    - [#547](https://github.com/wix-incubator/rich-content/pull/547) accessibility issue fixed: focus on hidden elements when tab-clicking
   ### :house: Internal
   - `gallery-settings`
     - [#535](https://github.com/wix-incubator/rich-content/pull/535) gallery setting's header, tabs and footer position
