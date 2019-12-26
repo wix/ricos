@@ -13,9 +13,20 @@
     Click to see more.
   </summary>
   
+  ### :boom: Breaking Change
+  - `text-color`
+    - [#520](https://github.com/wix-incubator/rich-content/pull/520) the class name "colorPicker_add_color_button_hidden" was changed to "colorPicker_color_button_hidden" in the CSS file "color-picker.scss"
   ### :rocket: New Feature
+  - `text-color`
+    - [#520](https://github.com/wix-incubator/rich-content/pull/520) color Picker- adding an option to change back to default color
   - `fullscreen`
     - [#519](https://github.com/wix-incubator/rich-content/pull/519) add props: topMargin, backgroundColor, foregroundColor. Remove counter when only 1 image. Larger z-index
+
+</details>
+<hr/>
+
+## 6.6.2 (Dec 11, 2019)
+ ### :rocket: New Feature
   - `editor-common`
     - [#526](https://github.com/wix-incubator/rich-content/pull/526) `onAtomicBlockFocus` is invoked with `undefined` when an atomic block loses focus
     - [#530](https://github.com/wix-incubator/rich-content/pull/530) `uiSettings.linkPanel.placeholder` determines the link panel's placeholder
@@ -24,10 +35,14 @@
   - `file-upload`
     - [#533](https://github.com/wix-incubator/rich-content/pull/533) add multiple files at once
   ### :bug: Bug Fix
-  - `divider`
-    - [#511](https://github.com/wix-incubator/rich-content/pull/511) divider's width set to 100% in editor&viewer when no initial state of width is given
+  - `editor`
+    - [#504](https://github.com/wix-incubator/rich-content/pull/504) pasted links get the configured anchorTarget and relValue
+  - `undo-redo`
+    - [#543](https://github.com/wix-incubator/rich-content/pull/543) fix undo-redo icons on mobile
   - `editor`
     - [#521](https://github.com/wix-incubator/rich-content/pull/521) replace p element with div element in lists
+  - `gallery`
+    - [#545](https://github.com/wix-incubator/rich-content/pull/545) fix image ratio change in gallery slider layout
   ### :house: Internal
   - `gallery-settings`
     - [#535](https://github.com/wix-incubator/rich-content/pull/535) gallery setting's header, tabs and footer position
@@ -37,7 +52,7 @@
     - [#522](https://github.com/wix-incubator/rich-content/pull/522) support legacy margin scss attributes
   - `e2e`
     - [#538](https://github.com/wix-incubator/rich-content/pull/538) moved tests out of Docker, e2e and unit tests run in github actions
-  ### :house: Internal
+    - [#542](https://github.com/wix-incubator/rich-content/pull/542) e2e tests run visual tests and content snapshots separately
   - `codeBlock`
     - [#527](https://github.com/wix-incubator/rich-content/pull/527) remove onTab (moved to keyBindingFn/handleKeyCommand)
   - `pubsub`
@@ -46,9 +61,7 @@
     - [#534](https://github.com/wix-incubator/rich-content/pull/534) exposes data normalization and data validation utils as separate entries
   - `button`
     - [#517](https://github.com/wix-incubator/rich-content/pull/517) plugin button refactor
-</details>
-<hr/>
-
+    
 ## 6.6.1 (Dec 11, 2019)
 ### :rocket: New Feature
 - `fullscreen`
@@ -67,7 +80,7 @@
 - `file-upload`
   - [#489](https://github.com/wix-incubator/rich-content/pull/489) `config.downloadTarget` enables consumers to control in which tab files are opened
 - `undo-redo`
-  - [#495](https://github.com/wix-incubator/rich-content/pull/495) creates undo redo plugin 
+  - [#495](https://github.com/wix-incubator/rich-content/pull/495) creates undo redo plugin
 - `editor`
   - [#503](https://github.com/wix-incubator/rich-content/pull/503) activated drag and drop capability by default
 - `video`
@@ -190,7 +203,7 @@
     - [#452](https://github.com/wix-incubator/rich-content/pull/452) `handleDropdownOpen`, `handleDropdownClose` and `popoverComponent` added to plugin settings
   - `video`
     - [#443](https://github.com/wix-incubator/rich-content/pull/443) async url resolving support
-    - [#444](https://github.com/wix-incubator/rich-content/pull/444) file upload support  
+    - [#444](https://github.com/wix-incubator/rich-content/pull/444) file upload support
     - [#449](https://github.com/wix-incubator/rich-content/pull/449) force video mime type for uploads
     - [#451](https://github.com/wix-incubator/rich-content/pull/451) uses unique file input id
   - `editor`

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { EditorState } from 'draft-js';
 import classNames from 'classnames';
 import undoIcon from './icons/UndoIcon';
+import { InlineToolbarButton } from 'wix-rich-content-editor-common';
 
 class UndoButton extends Component {
   static propTypes = {
@@ -13,12 +14,11 @@ class UndoButton extends Component {
     className: PropTypes.string,
     pubsub: PropTypes.object,
     config: PropTypes.object,
+    tabIndex: PropTypes.number,
+    t: PropTypes.func,
   };
 
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
+  state = {};
 
   componentDidMount() {
     this.props.pubsub.subscribe('editorState', this.onEditorStateChange);
@@ -39,17 +39,30 @@ class UndoButton extends Component {
 
   render() {
     const { editorState } = this.state;
-    const { isMobile, theme = {}, children, className, config } = this.props;
+    const { isMobile, theme = {}, children, className, config, tabIndex, t } = this.props;
     const combinedClassName = classNames(theme.undo, className);
-    const icon = config?.toolbar?.icons?.Undo || undoIcon();
+    const icon = config?.toolbar?.icons?.Undo || undoIcon;
 
-    return (
+    return isMobile ? (
+      <InlineToolbarButton
+        disabled={editorState ? editorState.getUndoStack().isEmpty() : true}
+        onClick={this.onClick}
+        isActive={false}
+        theme={theme}
+        isMobile={isMobile}
+        tooltipText={t('undoButton_Tooltip')}
+        dataHook={'undoButton'}
+        tabIndex={tabIndex}
+        icon={icon}
+      >
+        {children}
+      </InlineToolbarButton>
+    ) : (
       <button
         disabled={editorState ? editorState.getUndoStack().isEmpty() : true}
         onClick={this.onClick}
         className={combinedClassName}
       >
-        {isMobile && icon}
         {children}
       </button>
     );
