@@ -25,7 +25,7 @@ const COMMAND_BY_SHORTCUT = [
   },
   {
     command: COMMANDS.ALIGN_CENTER,
-    modifiers: [MODIFIERS.COMMAND],
+    modifiers: [MODIFIERS.COMMAND, MODIFIERS.SHIFT],
     key: 'e',
   },
   {
