@@ -20,7 +20,6 @@ const modalStyleDefaults = {
 };
 const anchorTarget = '_blank';
 const relValue = 'nofollow';
-
 const preview_img =
   'https://image.winudf.com/v2/image/Y29tLmJsYWNrYmFja2dyb3VuZHdhbGxwYXBlcnNpbWFnZXNfc2NyZWVuXzFfMTUwOTI1MjEyOV8wNzU/screen-1.jpg?fakeurl=1&type=.jpg';
 
