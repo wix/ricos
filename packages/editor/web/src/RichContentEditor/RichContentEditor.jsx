@@ -14,7 +14,12 @@ import blockStyleFn from './blockStyleFn';
 import getBlockRenderMap from './getBlockRenderMap';
 import { combineStyleFns } from './combineStyleFns';
 import { getStaticTextToolbarId } from './Toolbars/toolbar-id';
-import { TooltipHost, TOOLBARS } from 'wix-rich-content-editor-common';
+import {
+  TooltipHost,
+  TOOLBARS,
+  getBlockInfo,
+  getFocusedBlockKey,
+} from 'wix-rich-content-editor-common';
 import {
   Context,
   AccessibilityListener,
@@ -48,6 +53,29 @@ class RichContentEditor extends Component {
   componentDidMount() {
     this.resetInitialIntent();
   }
+
+  componentDidUpdate() {
+    this.handleBlockFocus(this.state.editorState);
+  }
+
+  handleBlockFocus(editorState) {
+    const focusedBlockKey = getFocusedBlockKey(editorState);
+    if (focusedBlockKey !== this.focusedBlockKey) {
+      this.focusedBlockKey = focusedBlockKey;
+      this.onChangedFocusedBlock(focusedBlockKey);
+    }
+  }
+
+  onChangedFocusedBlock = blockKey => {
+    const { onAtomicBlockFocus } = this.props;
+    if (onAtomicBlockFocus) {
+      if (blockKey) {
+        const { type, entityData: data } = getBlockInfo(blockKey);
+        onAtomicBlockFocus({ blockKey, type, data });
+      }
+      onAtomicBlockFocus({});
+    }
+  };
 
   resetInitialIntent = () => {
     if (this.contextualData.initialIntent) {
@@ -94,21 +122,6 @@ class RichContentEditor extends Component {
 
   getEditorBounds = () => this.state.editorBounds;
 
-  onAtomicBlockFocus = blockKey => {
-    const { onAtomicBlockFocus } = this.props;
-    if (onAtomicBlockFocus) {
-      if (blockKey) {
-        const contentState = this.getEditorState().getCurrentContent();
-        const block = contentState.getBlockForKey(blockKey);
-        const entityKey = block.getEntityAt(0);
-        const entity = contentState.getEntity(entityKey);
-        onAtomicBlockFocus(blockKey, entity.type, entity.data);
-      } else {
-        onAtomicBlockFocus(undefined);
-      }
-    }
-  };
-
   initPlugins() {
     const {
       helpers,
@@ -131,7 +144,6 @@ class RichContentEditor extends Component {
       isMobile,
       anchorTarget,
       relValue,
-      onAtomicBlockFocus: this.onAtomicBlockFocus,
       getEditorState: this.getEditorState,
       setEditorState: this.setEditorState,
       getEditorBounds: this.getEditorBounds,

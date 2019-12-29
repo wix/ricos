@@ -14,8 +14,15 @@
   </summary>
 
   ### :rocket: New Feature
+  - `text-color`
+    - [#520](https://github.com/wix-incubator/rich-content/pull/520) color Picker- adding an option to change back to default color
+  - `fullscreen`
+    - [#519](https://github.com/wix-incubator/rich-content/pull/519) add props: topMargin, backgroundColor, foregroundColor. Remove counter when only 1 image. Larger z-index
   - `link`
     - [#551](https://github.com/wix-incubator/rich-content/pull/551) adding a tooltip for nofollow tag explanation
+  ### :bug: Bug Fix
+  - `editor`
+    - [#556](https://github.com/wix-incubator/rich-content/pull/556) fix onAtomicBlockFocus to work when alternating focus between different kinds of plugins
 </details>
 <hr/>
 
