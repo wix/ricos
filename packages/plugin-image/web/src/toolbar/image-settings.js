@@ -91,8 +91,14 @@ class ImageSettings extends Component {
     const { linkPanelValues } = this.state;
     const { anchorTarget, relValue } = this.props;
     const { url, targetBlank, nofollow, isValid } = linkPanelValues;
-    const target = targetBlank ? '_blank' : anchorTarget !== '_blank' ? anchorTarget : '_self';
-    const rel = nofollow ? 'nofollow' : relValue !== 'nofollow' ? relValue : 'noopener';
+    let target = '_blank',
+      rel = 'nofollow';
+    if (!targetBlank) {
+      target = anchorTarget !== '_blank' ? anchorTarget : '_self';
+    }
+    if (!nofollow) {
+      rel = relValue !== 'nofollow' ? relValue : 'noopener';
+    }
     if (url === '') {
       this.setBlockLink(null);
     } else if (isValid) {

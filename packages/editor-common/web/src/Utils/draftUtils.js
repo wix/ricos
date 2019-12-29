@@ -68,8 +68,14 @@ function insertLink(
   ).set('selectionAfter', oldSelection);
   const newEditorState = EditorState.push(editorState, newContentState, 'change-inline-style');
 
-  const target = targetBlank ? '_blank' : anchorTarget !== '_blank' ? anchorTarget : '_self';
-  const rel = nofollow ? 'nofollow' : relValue !== 'nofollow' ? relValue : 'noopener';
+  let target = '_blank',
+    rel = 'nofollow';
+  if (!targetBlank) {
+    target = anchorTarget !== '_blank' ? anchorTarget : '_self';
+  }
+  if (!nofollow) {
+    rel = relValue !== 'nofollow' ? relValue : 'noopener';
+  }
 
   return addEntity(newEditorState, selection, {
     type: 'LINK',

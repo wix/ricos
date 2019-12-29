@@ -25,7 +25,7 @@ export const COLORS = {
   color10: '#012055',
 };
 
-export const defaultContentState = (rel, target) => {
+export const getDefaultComponentData = (rel, target) => {
   return {
     config: {
       alignment: ALIGN_CENTER,

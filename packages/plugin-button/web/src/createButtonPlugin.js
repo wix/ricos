@@ -2,7 +2,7 @@ import createToolbar from './toolbar';
 import { mergeStyles } from 'wix-rich-content-common';
 import { createBasePlugin } from 'wix-rich-content-editor-common';
 
-import { BUTTON_TYPE, defaultContentState } from './constants';
+import { BUTTON_TYPE, getDefaultComponentData } from './constants';
 
 import Styles from '../statics/styles/default-styles.scss';
 import ButtonComponent from './components/button-component';
@@ -43,7 +43,7 @@ const createButtonPlugin = (config = {}) => {
     }),
     helpers,
     t,
-    defaultPluginData: defaultContentState(rel, target),
+    defaultPluginData: getDefaultComponentData(rel, target),
     ...rest,
   });
 };
