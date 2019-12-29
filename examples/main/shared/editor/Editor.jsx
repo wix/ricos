@@ -77,9 +77,11 @@ export default class Editor extends PureComponent {
       },
       // onProgressChange: updatePercentage => {
       //   let percent = 0;
+      //   updatePercentage(percent);
+      //   // updatePercentage(percent, preview_img);
       //   const interval = setInterval(() => {
-      //     // updatePercentage(percent);
-      //     updatePercentage(percent, preview_img);
+      //     updatePercentage(percent);
+      //     // updatePercentage(percent, preview_img);
       //     percent += 10;
       //     if (percent === 110) clearInterval(interval);
       //   }, 250);
