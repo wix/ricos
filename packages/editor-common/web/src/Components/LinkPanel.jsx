@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import { mergeStyles, isValidUrl } from 'wix-rich-content-common';
 import Tooltip from './Tooltip';
 import Checkbox from './Checkbox';
-import { ErrorIcon } from '../Icons';
+import { ErrorIcon, InfoIcon } from '../Icons';
 import styles from '../../statics/styles/link-panel.scss';
 import { LinkPanelDropdown } from './LinkPanelDropdown';
 
@@ -154,11 +154,11 @@ class LinkPanel extends Component {
             <Tooltip
               shouldRebuildOnUpdate={() => showRelValueCheckbox}
               data-hook="linkPanelNoFollowTooltip"
-              content={t('LinkPanel_NoFollowTagExplanationTooltip')}
+              content={t('LinkPanel_Nofollow_Checkbox_Tooltip')}
               theme={theme}
               moveBy={{ y: 0 }}
             >
-              <ErrorIcon
+              <InfoIcon
                 data-hook="linkPanelNoFollow"
                 className={styles.linkPanel_noFollowExplanationIcon}
               />

@@ -101,12 +101,15 @@
 }
 
 .linkPanel_noFollowExplanationIcon {
-  position: absolute;
-  right: 12px;
-  bottom: 0;
-  top: 0;
   margin: auto;
-  width: 13px;
+  margin-top: -32px;
+  margin-left: 207px;
+  display: flex;
+  position: inherit;
+
+  &:hover {
+    color: #0161FF;
+  }
 }
 .linkPanel_actionsDivider {
   margin: 0 4px;
