@@ -58,6 +58,9 @@ Cypress.Commands.add('switchToEnglish', () => {
 
 Cypress.Commands.add('loadEditorAndViewer', fixtureName => {
   run('rce', fixtureName);
+  if (fixtureName === 'gallery') {
+    cy.wait(1500);
+  }
 });
 
 Cypress.Commands.add('matchContentSnapshot', () => {
