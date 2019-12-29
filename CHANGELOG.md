@@ -14,6 +14,8 @@
   </summary>
 
   ### :bug: Bug Fix
+  - `editor-common`
+    - getBlockInfo util arguments fixed
   - `link`
     - [#546](https://github.com/wix-incubator/rich-content/pull/546) saves the last data and the initial state of the checkboxes("Open in a new tab", "Add a nofollow tag") is according to the defaults (anchorTarget, relValue)
 </details>
