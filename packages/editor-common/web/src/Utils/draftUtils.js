@@ -344,8 +344,8 @@ export function getFocusedBlockKey(editorState) {
   return selection.isCollapsed() && selection.getAnchorKey();
 }
 
-export function getBlockInfo(blockKey) {
-  const contentState = this.getEditorState().getCurrentContent();
+export function getBlockInfo(editorState, blockKey) {
+  const contentState = editorState.getCurrentContent();
   const block = contentState.getBlockForKey(blockKey);
   const type = block.type;
   const entityKey = block.getEntityAt(0);
