@@ -23,8 +23,8 @@
     - [#533](https://github.com/wix-incubator/rich-content/pull/533) add multiple images at once, enabling `config.createGalleryForMultipleImages` renders them as a gallery
   - `file-upload`
     - [#533](https://github.com/wix-incubator/rich-content/pull/533) add multiple files at once
-  - `progress-loader`
-    - [#544](https://github.com/wix-incubator/rich-content/pull/544) gallery and image supports progress loader
+  - `common`
+    - [#544](https://github.com/wix-incubator/rich-content/pull/544) loader supports progress updates
   ### :bug: Bug Fix
   - `divider`
     - [#511](https://github.com/wix-incubator/rich-content/pull/511) divider's width set to 100% in editor&viewer when no initial state of width is given
