@@ -218,7 +218,7 @@ class GalleryViewer extends React.Component {
       </div>
     );
     if (!this.isLoadingProgress()) {
-      return gallery;
+      return <div>{gallery}</div>;
     }
     return (
       <div>
