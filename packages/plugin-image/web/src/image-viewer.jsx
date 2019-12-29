@@ -157,15 +157,41 @@ class ImageViewer extends React.Component {
     );
   }
 
-  renderCaption(caption, isFocused, readOnly, styles, defaultCaption) {
-    return caption ? (
-      <div className={styles.imageCaption} data-hook="imageViewerCaption">
-        {caption}
-      </div>
-    ) : (
-      !readOnly && isFocused && defaultCaption && (
-        <div className={styles.imageCaption}>{defaultCaption}</div>
-      )
+  updateMetadata = newMetadata => {
+    const metadata = this.state.metadata || {};
+    this.setState({ metadata: { ...metadata, ...newMetadata } });
+  };
+
+  addMetadataToBlock = () => {
+    const { handleMetadataChange, componentData } = this.props;
+    const metadata = this.state.metadata || componentData.metadata;
+    handleMetadataChange(metadata);
+  };
+
+  handleEditText = () => {
+    this.context.setInlineMode(true);
+  };
+
+  handleStopEditText = () => {
+    this.context.setInlineMode(false);
+    this.addMetadataToBlock();
+  };
+
+  handleTextChanged = e => this.updateMetadata({ caption: e.target.value });
+
+  renderCaption(caption) {
+    const { isViewerComponent } = this.props;
+    const className = this.styles[isViewerComponent ? 'imageCaptionViewer' : 'imageCaption'];
+    return (
+      <input
+        className={className}
+        data-hook="imageViewerCaption"
+        value={caption}
+        readOnly={isViewerComponent}
+        onChange={this.handleTextChanged}
+        onFocus={this.handleEditText}
+        onBlur={this.handleStopEditText}
+      />
     );
   }
 
@@ -183,12 +209,12 @@ class ImageViewer extends React.Component {
 
   shouldRenderCaption() {
     const { settings, componentData, defaultCaption } = this.props;
-    const { metadata } = componentData;
+    const { caption } = componentData.metadata;
 
     if (includes(get(settings, 'toolbar.hidden'), 'settings')) {
       return false;
     }
-    if (!metadata || metadata.caption === defaultCaption || metadata.caption === '') {
+    if (!caption || caption === defaultCaption) {
       return false;
     }
     const data = componentData || DEFAULTS;
@@ -208,10 +234,10 @@ class ImageViewer extends React.Component {
 
   render() {
     this.styles = this.styles || mergeStyles({ styles, theme: this.context.theme });
-    const { componentData, className, isFocused, readOnly, settings, defaultCaption } = this.props;
+    const { componentData, className, settings } = this.props;
     const { fallbackImageSrc } = this.state;
+    const metadata = this.state.metadata || componentData.metadata || {};
     const data = componentData || DEFAULTS;
-    const { metadata = {} } = componentData;
 
     const hasLink = data.config && data.config.link;
     const hasExpand = this.context.helpers && this.context.helpers.onExpand;
@@ -247,8 +273,7 @@ class ImageViewer extends React.Component {
         </div>
         {this.renderTitle(data, this.styles)}
         {this.renderDescription(data, this.styles)}
-        {this.shouldRenderCaption() &&
-          this.renderCaption(metadata.caption, isFocused, readOnly, this.styles, defaultCaption)}
+        {this.shouldRenderCaption() && this.renderCaption(metadata.caption)}
       </div>
     );
     /* eslint-enable jsx-a11y/no-static-element-interactions */
@@ -267,6 +292,8 @@ ImageViewer.propTypes = {
   settings: PropTypes.object,
   defaultCaption: PropTypes.string,
   entityIndex: PropTypes.number,
+  isViewerComponent: PropTypes.bool,
+  handleMetadataChange: PropTypes.func,
 };
 
 export default ImageViewer;
