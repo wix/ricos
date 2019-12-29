@@ -4,6 +4,7 @@ import TextHighlightIcon from './TextHighlightIcon';
 import { TEXT_HIGHLIGHT_TYPE } from '../types';
 import BaseTextColor from './BaseTextColor';
 import { textBackgroundPredicate } from '../text-decorations-utils';
+import { DEFAULT_HIGHLIGHT_COLOR } from '../constants';
 
 export default class TextHighlightButton extends Component {
   constructor(props) {
@@ -19,6 +20,7 @@ export default class TextHighlightButton extends Component {
       icon: iconTextHighlight,
       type: TEXT_HIGHLIGHT_TYPE,
       predicate: textBackgroundPredicate,
+      defaultColor: DEFAULT_HIGHLIGHT_COLOR,
     };
     return <BaseTextColor buttonRef={this.buttonRef} pluginParams={pluginParams} {...this.props} />;
   }

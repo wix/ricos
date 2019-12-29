@@ -80,15 +80,6 @@
   }
 }
 
-.colorPicker_add_color_button_hidden {
-  position: absolute;
-  opacity: 0;
-  width: 0.1px;
-  height: 0.1px;
-  overflow: hidden;
-  z-index: -1;
-}
-
 .colorPicker_add_color_button {
   @extend %button;
   display: inline-block;
@@ -101,11 +92,10 @@
   color: $accent-color;
   cursor: pointer;
   position: relative;
-  top: -4px;
-  left: -4px;
 }
 
 .colorPicker_buttons_container {
+  justify-content: space-between;
   flex-direction: row;
   display: -webkit-flex;
   display: flex;
@@ -115,4 +105,31 @@
   @include phone {
     width: 100%;
   }
+}
+
+.colorPicker_color_button_hidden {
+  position: absolute;
+  opacity: 0;
+  width: 0.1px;
+  height: 0.1px;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.colorPicker_reset_color_button {
+  @extend %button;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.colorPicker_reset_color_label {
+  font-size: 14px;
+  font-stretch: normal;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: $accent-color;
+  cursor: pointer;
+  position: fixed;
 }

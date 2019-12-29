@@ -326,7 +326,7 @@ export function fixPastedLinks(editorState, { anchorTarget, relValue }) {
   links.forEach(({ key: blockKey, range }) => {
     const block = content.getBlockForKey(blockKey);
     const entityKey = block.getEntityAt(range[0]);
-    const data = content.getEntity(entityKey).getData();
+    const data = entityKey && content.getEntity(entityKey).getData();
     const url = data.url || data.href;
     if (url) {
       content.replaceEntityData(entityKey, {
@@ -337,6 +337,20 @@ export function fixPastedLinks(editorState, { anchorTarget, relValue }) {
     }
   });
   return editorState;
+}
+
+export function getFocusedBlockKey(editorState) {
+  const selection = editorState.getSelection();
+  return selection.isCollapsed() && selection.getAnchorKey();
+}
+
+export function getBlockInfo(blockKey) {
+  const contentState = this.getEditorState().getCurrentContent();
+  const block = contentState.getBlockForKey(blockKey);
+  const type = block.type;
+  const entityKey = block.getEntityAt(0);
+  const entityData = entityKey && contentState.getEntity(entityKey)?.data;
+  return { type, entityData };
 }
 
 export function setSelection(editorState, selection) {

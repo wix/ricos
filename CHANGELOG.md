@@ -19,6 +19,14 @@
 </details>
 <hr/>
 
+## 6.6.3 (Dec 29, 2019)
+  ### :rocket: New Feature
+   - `text-color`
+     - [#520](https://github.com/wix-incubator/rich-content/pull/520) color Picker- adding an option to change back to default color
+  ### :bug: Bug Fix
+    - `editor`
+      - [#556](https://github.com/wix-incubator/rich-content/pull/556) fix onAtomicBlockFocus to work when alternating focus between different kinds of plugins
+    
 ## 6.6.2 (Dec 11, 2019)
  ### :rocket: New Feature
   - `editor-common`

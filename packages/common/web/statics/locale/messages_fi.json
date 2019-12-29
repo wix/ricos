@@ -178,6 +178,7 @@
   "VideoUploadModal_Title" : "Add a Video",
   "EmojiPlugin_EmojiGroups_Nature" : "Nature",
   "ButtonModal_Border_Section" : "Border",
+  "ColorPicker_SetToDefault_ButtonLabel" : "Reset to Default",
   "ImageSettings_Alt_Input_Placeholder" : "Kuvaile tätä kuvaa",
   "ButtonModal_Text_Color" : "Text",
   "ButtonModal_Color_Section" : "Color",

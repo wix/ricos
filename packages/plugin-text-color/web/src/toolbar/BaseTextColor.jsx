@@ -121,6 +121,7 @@ export default class BaseTextColor extends Component {
             setKeepToolbarOpen={setKeepOpen}
             styleMapper={this.styleMapper}
             predicate={pluginParams.predicate}
+            defaultColor={pluginParams.defaultColor}
           />
         </Modal>
       </InlineToolbarButton>
