@@ -117,6 +117,7 @@ class RichContentEditor extends Component {
       shouldRenderOptimizedImages,
       initialIntent,
       siteDomain,
+      setInlineMode: this.setInlineMode,
     };
   };
 
@@ -273,7 +274,14 @@ class RichContentEditor extends Component {
 
   blur = () => this.editor.blur();
 
+  deactivateDraftObservation = () => this.editor.setMode('render');
+
+  activateDraftObservation = () => this.editor.setMode('edit');
+
   setEditor = ref => (this.editor = get(ref, 'editor', ref));
+
+  setInlineMode = isInInlineMode =>
+    isInInlineMode ? this.deactivateDraftObservation() : this.activateDraftObservation();
 
   updateBounds = editorBounds => {
     this.setState({ editorBounds });
