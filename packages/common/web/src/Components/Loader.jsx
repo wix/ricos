@@ -13,8 +13,10 @@ class Loader extends Component {
   }
 
   initiateStyles() {
-    const theme = this.context?.theme || this.props.theme;
-    this._styles = mergeStyles({ styles, theme });
+    if (!this.styles) {
+      const theme = this.context?.theme || this.props.theme;
+      this.styles = mergeStyles({ styles, theme });
+    }
   }
 
   updateProgress = (progress, localUrl) => {
@@ -31,8 +33,8 @@ class Loader extends Component {
     return (
       <div>
         <div
-          className={classNames(this.props.loaderClassName, this._styles.progress, {
-            [this._styles[this.props.type]]: this.props.type,
+          className={classNames(this.props.loaderClassName, this.styles.progress, {
+            [this.styles[this.props.type]]: this.props.type,
           })}
         >
           {this.state.progress + '%'}
@@ -42,20 +44,18 @@ class Loader extends Component {
   }
 
   render() {
-    if (!this._styles) {
-      this.initiateStyles();
-    }
+    this.initiateStyles();
     return (
       <div
-        className={classNames(this.props.overlayClassName, this._styles.loaderOverlay)}
+        className={classNames(this.props.overlayClassName, this.styles.loaderOverlay)}
         data-hook="loader"
         style={{
           backgroundImage: this.state.localUrl ? `url(${this.state.localUrl})` : null,
         }}
       >
         <div
-          className={classNames(this.props.loaderClassName, this._styles.loader, {
-            [this._styles[this.props.type]]: this.props.type,
+          className={classNames(this.props.loaderClassName, this.styles.loader, {
+            [this.styles[this.props.type]]: this.props.type,
           })}
         />
         {this.renderProgress()}
