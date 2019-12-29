@@ -6,10 +6,7 @@ import { mergeStyles } from '../Utils/mergeStyles';
 import styles from '../../statics/styles/loaders.rtlignore.scss';
 
 class Loader extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
+  state = {};
 
   get styles() {
     if (!this._styles) {
@@ -22,7 +19,7 @@ class Loader extends Component {
   updateProgress = (progress, localUrl) => {
     this.setState({ progress, localUrl });
     if (progress === 100) {
-      this.props?.onLoadGallery?.();
+      this.props.onLoad?.();
     }
   };
 
@@ -31,17 +28,18 @@ class Loader extends Component {
   }
 
   renderProgress() {
+    if (!this.state.progress) {
+      return null;
+    }
     return (
       <div>
-        {this.state.progress && (
-          <div
-            className={classNames(this.props.loaderClassName, this.styles.progress, {
-              [this.styles[this.props.type]]: this.props.type,
-            })}
-          >
-            {this.state.progress + '%'}
-          </div>
-        )}
+        <div
+          className={classNames(this.props.loaderClassName, this.styles.progress, {
+            [this.styles[this.props.type]]: this.props.type,
+          })}
+        >
+          {this.state.progress + '%'}
+        </div>
       </div>
     );
   }
@@ -52,7 +50,7 @@ class Loader extends Component {
         className={classNames(this.props.overlayClassName, this.styles.loaderOverlay)}
         data-hook="loader"
         style={{
-          backgroundImage: `url(${this.state?.localUrl})`,
+          backgroundImage: this.state.localUrl ? `url(${this.state.localUrl})` : null,
         }}
       >
         <div
@@ -73,7 +71,7 @@ Loader.propTypes = {
   overlayClassName: PropTypes.string,
   loaderClassName: PropTypes.string,
   theme: PropTypes.object,
-  onLoadGallery: PropTypes.func,
+  onLoad: PropTypes.func,
 };
 
 Loader.defaultProps = {
