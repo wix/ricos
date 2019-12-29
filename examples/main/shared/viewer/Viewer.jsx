@@ -10,6 +10,8 @@ import Fullscreen from 'wix-rich-content-fullscreen';
 
 const anchorTarget = '_top';
 const relValue = 'noreferrer';
+const preview_img =
+  'https://image.winudf.com/v2/image/Y29tLmJsYWNrYmFja2dyb3VuZHdhbGxwYXBlcnNpbWFnZXNfc2NyZWVuXzFfMTUwOTI1MjEyOV8wNzU/screen-1.jpg?fakeurl=1&type=.jpg';
 
 export default class Viewer extends PureComponent {
   constructor(props) {
@@ -37,6 +39,15 @@ export default class Viewer extends PureComponent {
         expendModeIsOpen: true,
         expandModeIndex: this.expandModeData.imageMap[entityIndex] + innerIndex,
       });
+    },
+    onProgressChange: updatePercentage => {
+      let percent = 0;
+      updatePercentage(percent, preview_img);
+      const interval = setInterval(() => {
+        updatePercentage(percent, preview_img);
+        percent += 10;
+        if (percent === 110) clearInterval(interval);
+      }, 100);
     },
   };
 
