@@ -20,7 +20,7 @@
     - [#546](https://github.com/wix-incubator/rich-content/pull/546) saves the last data and the initial state of the checkboxes("Open in a new tab", "Add a nofollow tag") is according to the defaults (anchorTarget, relValue)
   ### :house: Internal
   - `general`
-    - [#560](https://github.com/wix-incubator/rich-content/pull/561) refactor - cleanup readOnly prop from code
+    - [#561](https://github.com/wix-incubator/rich-content/pull/561) refactor - cleanup readOnly prop from code
 
 </details>
 <hr/>
