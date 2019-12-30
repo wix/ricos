@@ -139,13 +139,13 @@ const createBaseComponent = ({
     };
 
     onComponentLinkChange = linkData => {
-      const { url, targetBlank, nofollow } = linkData || {};
+      const { url, target, rel } = linkData || {};
       if (this.isMeAndIdle()) {
         const link = url
           ? {
               url,
-              target: targetBlank === true ? '_blank' : anchorTarget || '_self',
-              rel: nofollow === true ? 'nofollow' : relValue || 'noopener',
+              target,
+              rel,
             }
           : null;
 

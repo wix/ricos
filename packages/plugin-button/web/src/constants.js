@@ -25,29 +25,31 @@ export const COLORS = {
   color10: '#012055',
 };
 
-export const DEFAULTS = {
-  config: {
-    alignment: ALIGN_CENTER,
-    size: 'small',
-    width: 'fit-content',
-  },
-  button: {
-    settings: {
-      buttonText: 'Click Me',
-      url: '',
-      rel: false,
-      target: false,
+export const getDefaultComponentData = (rel, target) => {
+  return {
+    config: {
+      alignment: ALIGN_CENTER,
+      size: 'small',
+      width: 'fit-content',
     },
-    design: {
-      activeButton: 0,
-      borderRadius: 0,
-      borderWidth: 0,
-      padding: 12,
-      background: COLORS.color8,
-      color: COLORS.color1,
-      borderColor: COLORS.color8,
+    button: {
+      settings: {
+        buttonText: 'Click Me',
+        url: '',
+        rel,
+        target,
+      },
+      design: {
+        activeButton: 0,
+        borderRadius: 0,
+        borderWidth: 0,
+        padding: 12,
+        background: COLORS.color8,
+        color: COLORS.color1,
+        borderColor: COLORS.color8,
+      },
     },
-  },
+  };
 };
 
 export const buttonPreviews = colors => [

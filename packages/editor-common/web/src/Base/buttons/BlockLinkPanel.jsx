@@ -3,12 +3,13 @@ import PropTypes from 'prop-types';
 import decorateComponentWithProps from '../../Utils/decorateComponentWithProps';
 import { isEmpty } from 'lodash';
 import LinkPanelContainer from '../../Components/LinkPanelContainer';
-
 class BlockLinkPanel extends Component {
   componentDidMount() {
-    const { anchorTarget, relValue, theme, t, uiSettings } = this.props;
-    const componentData = this.props.pubsub.get('componentData');
-    const { url, targetBlank, nofollow } = componentData.config.link || {};
+    const { anchorTarget, relValue, theme, t, uiSettings, pubsub } = this.props;
+    const componentLink = pubsub.getBlockData({ key: 'componentLink' });
+    const { url, target, rel } = componentLink || {};
+    const targetBlank = target ? target === '_blank' : anchorTarget === '_blank';
+    const nofollow = rel ? rel === 'nofollow' : relValue === 'nofollow';
     const linkContainerProps = {
       url,
       targetBlank,
@@ -33,9 +34,21 @@ class BlockLinkPanel extends Component {
   }
 
   wrapBlockInLink = ({ url, targetBlank, nofollow }) => {
-    const { pubsub } = this.props;
+    const { pubsub, anchorTarget, relValue } = this.props;
+    let target = '_blank',
+      rel = 'nofollow';
+    if (!targetBlank) {
+      target = anchorTarget !== '_blank' ? anchorTarget : '_self';
+    }
+    if (!nofollow) {
+      rel = relValue !== 'nofollow' ? relValue : 'noopener';
+    }
+
     if (!isEmpty(url)) {
-      pubsub.setBlockData({ key: 'componentLink', item: { url, targetBlank, nofollow } });
+      pubsub.setBlockData({
+        key: 'componentLink',
+        item: { url, target, rel },
+      });
     } else {
       pubsub.setBlockData({ key: 'componentLink', item: null });
     }
