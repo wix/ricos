@@ -74,6 +74,9 @@ export {
   replaceWithEmptyBlock,
   deleteBlock,
   createEntity,
+  createBlock,
+  getBlockInfo,
+  getFocusedBlockKey,
 } from './Utils/draftUtils';
 export { isiOS } from './Utils/isiOS';
 export { getSelectionStyles } from './Utils/inlineStyleUtils';
