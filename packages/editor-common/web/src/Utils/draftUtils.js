@@ -347,10 +347,12 @@ export function getFocusedBlockKey(editorState) {
 export function getBlockInfo(editorState, blockKey) {
   const contentState = editorState.getCurrentContent();
   const block = contentState.getBlockForKey(blockKey);
-  const type = block.type;
   const entityKey = block.getEntityAt(0);
-  const entityData = entityKey && contentState.getEntity(entityKey)?.data;
-  return { type, entityData };
+  const entity = entityKey && contentState.getEntity(entityKey);
+  const entityData = entity?.data;
+  const type = entity?.type;
+
+  return { type: type || 'text', entityData };
 }
 
 export function setSelection(editorState, selection) {
