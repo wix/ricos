@@ -83,7 +83,7 @@ export default class Editor extends PureComponent {
           updatePercentage(percent, preview_img);
           percent += 10;
           if (percent === 110) clearInterval(interval);
-        }, 250);
+        }, 100);
       },
       openModal: data => {
         const { modalStyles, ...modalProps } = data;

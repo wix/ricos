@@ -59,7 +59,7 @@ Cypress.Commands.add('switchToEnglish', () => {
 Cypress.Commands.add('loadEditorAndViewer', fixtureName => {
   run('rce', fixtureName);
   if (fixtureName === 'gallery') {
-    cy.wait(1500);
+    cy.wait(2000);
   }
 });
 
@@ -235,6 +235,7 @@ Cypress.Commands.add('openMapSettings', () => {
 Cypress.Commands.add('openGalleryAdvancedSettings', () => {
   cy.get(`[data-hook=${PLUGIN_COMPONENT.GALLERY}]:first`)
     .parent()
+    .parent()
     .click();
   cy.get(`[data-hook=${PLUGIN_TOOLBAR_BUTTONS.ADV_SETTINGS}]:first`).click();
 });
@@ -321,8 +322,17 @@ Cypress.Commands.add('alignImage', alignment => {
 });
 
 Cypress.Commands.add('openPluginToolbar', plugin => {
-  cy.get(`[data-hook*=${plugin}]`)
+  cy.get(`[data-hook*=${plugin}][tabindex!=-1]`)
     .first()
+    .parent()
+    .click();
+  cy.get('[data-hook*="PluginToolbar"]:first');
+});
+
+Cypress.Commands.add('openGalleryPluginToolbar', () => {
+  cy.get(`[data-hook*=galleryViewer][tabindex!=-1]`)
+    .first()
+    .parent()
     .parent()
     .click();
   cy.get('[data-hook*="PluginToolbar"]:first');

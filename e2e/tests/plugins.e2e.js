@@ -102,7 +102,7 @@ describe('plugins', () => {
         .get(`[data-hook=${'image-item'}]:first`)
         .get(`[data-hook=${'image-item'}]`)
         .eq(1);
-      cy.openPluginToolbar(PLUGIN_COMPONENT.GALLERY)
+      cy.openGalleryPluginToolbar()
         .shrinkPlugin()
         .hideTooltip();
       cy.eyesCheckWindow(this.test.title);
@@ -117,7 +117,7 @@ describe('plugins', () => {
         const firstImage = `[data-hook=${GALLERY_SETTINGS.IMAGE}]:first`;
         const anyImage = `[data-hook=${GALLERY_SETTINGS.IMAGE}]`;
         cy.loadEditorAndViewer('gallery')
-          .openPluginToolbar(PLUGIN_COMPONENT.GALLERY)
+          .openGalleryPluginToolbar()
           .shrinkPlugin()
           .get(`[data-hook=${'image-item'}]:first`)
           .get(`[data-hook=${'image-item'}]`)
@@ -149,7 +149,7 @@ describe('plugins', () => {
     context('image settings', () => {
       it('should allow to update image content', function() {
         cy.loadEditorAndViewer('gallery')
-          .openPluginToolbar(PLUGIN_COMPONENT.GALLERY)
+          .openGalleryPluginToolbar()
           .shrinkPlugin()
           .get(`[data-hook=${'image-item'}]:first`)
           .get(`[data-hook=${'image-item'}]`)
