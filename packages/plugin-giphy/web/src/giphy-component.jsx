@@ -10,11 +10,9 @@ class GiphyComponent extends Component {
 
   constructor(props) {
     super(props);
-    const isPlayable = !props.blockProps || props.blockProps.readOnly === true;
     this.state = {
       isLoading: false,
       isLoaded: false,
-      isPlayable,
     };
   }
 

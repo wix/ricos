@@ -50,13 +50,11 @@ class SelectionList extends Component {
     value: PropTypes.any.isRequired,
     onChange: PropTypes.func.isRequired,
     optionClassName: PropTypes.string,
-    readOnly: PropTypes.bool,
   };
 
   static defaultProps = {
     dataMapper: defaultDataMapper,
     renderItem: defaultRenderItem,
-    readOnly: false,
   };
 
   mapItemToOptionData(item) {
@@ -69,7 +67,7 @@ class SelectionList extends Component {
   }
 
   onKeyDown(event) {
-    if (this.props.dataSource.length < 2 || this.props.readOnly) {
+    if (this.props.dataSource.length < 2) {
       return;
     }
     const index = this.state.focusIndex === -1 ? 0 : this.state.focusIndex;
@@ -100,28 +98,19 @@ class SelectionList extends Component {
   }
 
   render() {
-    const {
-      dataSource,
-      className,
-      onChange,
-      renderItem,
-      theme,
-      optionClassName,
-      readOnly,
-    } = this.props;
+    const { dataSource, className, onChange, renderItem, theme, optionClassName } = this.props;
     return (
       <div
         ref={el => (this.ref = el)}
         className={classnames(styles.selectionList, className)}
         role={'listbox'}
-        aria-disabled={readOnly}
         aria-orientation={'horizontal'}
       >
         {dataSource
           .map(item => this.mapItemToOptionData(item))
           .map(({ item, option, selected }, i) => (
             <SelectionListOption
-              tabIndex={i === 0 && !readOnly ? 0 : -1}
+              tabIndex={i === 0 ? 0 : -1}
               selected={selected}
               focused={i === this.state.focusIndex}
               dataHook={item.dataHook}
@@ -131,7 +120,6 @@ class SelectionList extends Component {
               value={option.value}
               optionClassName={optionClassName}
               onKeyDown={e => this.onKeyDown(e)}
-              readOnly={readOnly}
             >
               {renderItem({ item, option, selected })}
             </SelectionListOption>
@@ -153,7 +141,6 @@ class SelectionListOption extends Component {
     dataHook: PropTypes.string,
     tabIndex: PropTypes.number,
     onKeyDown: PropTypes.func,
-    readOnly: PropTypes.bool,
   };
 
   constructor(props) {
@@ -177,7 +164,6 @@ class SelectionListOption extends Component {
       dataHook,
       tabIndex,
       onKeyDown,
-      readOnly,
     } = this.props;
 
     return (
@@ -185,7 +171,6 @@ class SelectionListOption extends Component {
         tabIndex={tabIndex}
         role={'option'}
         aria-selected={selected}
-        aria-disabled={readOnly}
         ref={el => (this.ref = el)}
         onKeyDown={e => onKeyDown(e)}
         className={classnames(
