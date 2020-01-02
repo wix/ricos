@@ -7,7 +7,7 @@ import { testImages, testVideos } from './mock';
 import * as Plugins from './EditorPlugins';
 import ModalsMap from './ModalsMap';
 import theme from '../theme/theme'; // must import after custom styles
-import RichContentBaseWrapper from '../../../../packages/editor-common/web/src/wrapper/RichContentBaseWrapper';
+import RichContentBaseWrapper from 'wix-rich-content-wrapper';
 import inlineToolbarTheme from '../theme/toolbars/inline-toolbar.theme.scss';
 
 const modalStyleDefaults = {
