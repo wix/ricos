@@ -14,16 +14,19 @@
   </summary>
 
   ### :bug: Bug Fix
-  - `editor-common`
-    - [#560](https://github.com/wix-incubator/rich-content/pull/560) getBlockInfo returns entity type rather block type
   - `link`
     - [#546](https://github.com/wix-incubator/rich-content/pull/546) saves the last data and the initial state of the checkboxes("Open in a new tab", "Add a nofollow tag") is according to the defaults (anchorTarget, relValue)
   ### :house: Internal
   - `general`
     - [#561](https://github.com/wix-incubator/rich-content/pull/561) refactor - cleanup readOnly prop from code
-
+    - [#562](https://github.com/wix-incubator/rich-content/pull/562) use `@lerna/project` to get all lerna packages
 </details>
 <hr/>
+
+## 6.6.5 (Dec 30, 2019)
+### :bug: Bug Fix
+- `editor-common`
+  - [#560](https://github.com/wix-incubator/rich-content/pull/560) getBlockInfo returns entity type rather block type
 
 ## 6.6.4 (Dec 30, 2019)
 ### :bug: Bug Fix
