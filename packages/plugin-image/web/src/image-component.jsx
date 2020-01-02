@@ -125,8 +125,9 @@ class ImageComponent extends React.Component {
     this.resetLoadingState(error);
   };
 
-  handleMetadataChange = metadata => {
+  handleMetadataChange = newMetadata => {
     const { componentData } = this.props;
+    const metadata = { ...componentData.metadata, ...newMetadata };
     this.props.store.update(
       'componentData',
       { ...componentData, metadata },
@@ -141,6 +142,8 @@ class ImageComponent extends React.Component {
     return { alreadyLoading, isLoading, userSelectedFiles };
   };
 
+  handleCaptionChange = e => this.handleMetadataChange({ caption: e.target.value });
+
   render() {
     const { settings, componentData, onClick, className, blockProps } = this.props;
     return (
@@ -153,7 +156,8 @@ class ImageComponent extends React.Component {
         isFocused={blockProps.isFocused}
         settings={settings}
         defaultCaption={this.context.t('ImageViewer_Caption')}
-        handleMetadataChange={this.handleMetadataChange}
+        onCaptionChange={this.handleCaptionChange}
+        setFocusToBlock={blockProps.setFocusToBlock}
       />
     );
   }

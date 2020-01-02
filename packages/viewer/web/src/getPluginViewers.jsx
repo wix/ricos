@@ -48,7 +48,6 @@ class PluginViewer extends PureComponent {
       settings,
       children,
       entityIndex,
-      isViewerComponent: true,
     };
 
     if (Component) {

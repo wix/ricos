@@ -15,6 +15,7 @@ import {
 import { DEFAULTS, SEO_IMAGE_WIDTH } from './consts';
 import styles from '../statics/styles/image-viewer.scss';
 import ExpandIcon from './icons/expand.svg';
+import InPluginInput from './InPluginInput';
 
 class ImageViewer extends React.Component {
   constructor(props) {
@@ -162,42 +163,21 @@ class ImageViewer extends React.Component {
     this.setState({ metadata: { ...metadata, ...newMetadata } });
   };
 
-  addMetadataToBlock = () => {
-    const { handleMetadataChange, componentData } = this.props;
-    const metadata = this.state.metadata || componentData.metadata;
-    handleMetadataChange(metadata);
-  };
-
-  handleEditText = () => {
-    this.context.setInlineMode(true);
-  };
-
-  handleStopEditText = () => {
-    this.context.setInlineMode(false);
-    this.addMetadataToBlock();
-  };
-
-  handleTextChanged = e => this.updateMetadata({ caption: e.target.value });
-
   renderCaption(caption) {
-    const { isViewerComponent } = this.props;
-    const className = this.styles[isViewerComponent ? 'imageCaptionViewer' : 'imageCaption'];
+    const { onCaptionChange, setFocusToBlock } = this.props;
     return (
-      <input
-        className={className}
-        data-hook="imageViewerCaption"
+      <InPluginInput
+        className={this.styles.imageCaption}
         value={caption}
-        readOnly={isViewerComponent}
-        onChange={this.handleTextChanged}
-        onFocus={this.handleEditText}
-        onBlur={this.handleStopEditText}
+        onChange={onCaptionChange}
+        setFocusToBlock={setFocusToBlock}
       />
     );
   }
 
   onKeyDown = (e, handler) => {
     if (e.key === 'Enter' || e.key === ' ') {
-      handler();
+      handler?.();
     }
   };
 
@@ -291,8 +271,8 @@ ImageViewer.propTypes = {
   settings: PropTypes.object,
   defaultCaption: PropTypes.string,
   entityIndex: PropTypes.number,
-  isViewerComponent: PropTypes.bool,
-  handleMetadataChange: PropTypes.func,
+  onCaptionChange: PropTypes.func.isRequired,
+  setFocusToBlock: PropTypes.func,
 };
 
 export default ImageViewer;

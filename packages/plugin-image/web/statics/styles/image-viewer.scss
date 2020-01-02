@@ -78,17 +78,6 @@ $opacityTransition: opacity 0.8s ease;
 .imageCaption {
   text-align: center;
   padding: 18px 0;
-  font-size: 14px;
-  line-height: 21px;
-  border: none;
-  width: 100%;
-  position: relative;
-  z-index: 1;
-
-  &Viewer {
-    @extend .imageCaption;
-    cursor: pointer;
-  }
 }
 
 .imagePreload {
