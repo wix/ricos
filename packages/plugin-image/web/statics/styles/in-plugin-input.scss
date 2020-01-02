@@ -1,0 +1,13 @@
+.inPluginInput {
+    font-size: 14px;
+    line-height: 21px;
+    border: none;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+
+    &Viewer {
+        @extend .inPluginInput;
+        cursor: pointer;
+    }
+}
