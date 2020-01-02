@@ -46,6 +46,8 @@ describe('plugins', () => {
       cy.eyesCheckWindow(this.test.title + ' - settings');
       cy.addImageTitle();
       cy.eyesCheckWindow(this.test.title + ' - add image title');
+      cy.editImageTitle();
+      cy.eyesCheckWindow(this.test.title + ' - in plugin editing');
       cy.openImageSettings(false).deleteImageTitle();
       cy.eyesCheckWindow(this.test.title + ' - delete image title');
       cy.openImageSettings(false).addImageLink();
