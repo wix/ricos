@@ -107,7 +107,7 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
 
   const TextButtonMapper = config.toolbar && config.toolbar.TextButtonMapper;
 
-  const blockRendererFn = (contentBlock, { getEditorState, setEditorState, getReadOnly }) => {
+  const blockRendererFn = (contentBlock, { getEditorState, setEditorState }) => {
     if (contentBlock.getType() === 'atomic') {
       // TODO subject to change for draft-js next release
       const contentState = getEditorState().getCurrentContent();
@@ -124,7 +124,6 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
               getData: getData(contentBlock, { getEditorState }),
               setData: setData(contentBlock, { getEditorState, setEditorState }),
               deleteBlock: deleteEntity(contentBlock, { getEditorState, setEditorState }),
-              readOnly: getReadOnly(),
             },
           };
         }

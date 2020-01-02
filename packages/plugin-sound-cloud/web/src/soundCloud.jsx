@@ -23,7 +23,7 @@ class SoundCloud extends Component {
 
   constructor(props) {
     super(props);
-    const isPlayable = !props.blockProps || props.blockProps.readOnly === true;
+    const isPlayable = !props.blockProps;
     this.state = {
       isLoading: false,
       isLoaded: false,
