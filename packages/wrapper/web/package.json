@@ -5,12 +5,21 @@
     "name": "Alex Greenstein",
     "email": "alexgr@wix.com"
   },
-  "main": "dist/module.cjs.js",
-  "module": "dist/module.js",
-  "style": "dist/styles.min.scss",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wix-incubator/rich-content.git"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wix-incubator/rich-content/issues"
+  },
+  "homepage": "https://github.com/wix-incubator/rich-content/tree/master/rich-content-wrapper",
   "files": [
     "dist"
   ],
+  "main": "dist/module.cjs.js",
+  "module": "dist/module.js",
+  "style": "dist/styles.min.scss",
   "scripts": {
     "clean": "rm -rf dist/",
     "prebuild": "npm run clean",
@@ -18,41 +27,31 @@
     "build:dev": "cross-env NODE_ENV=development npm run build",
     "build:analyze": "npm run build -- --environment MODULE_ANALYZE && open stats.html",
     "watch": "cross-env NODE_ENV=development MODULE_WATCH=1 npm run build -- --watch.chokidar",
-    "lint": "eslint 'src/**/*.{js,jsx}'",
-    "test": "jest --verbose"
-  },
-  "jest": {
-    "globals": {
-      "NODE_ENV": "test"
-    },
-    "transform": {
-      "^.+\\.jsx?$": "<rootDir>/../../../babel.jest.monorepo.js"
-    },
-    "moduleNameMapper": {
-      "\\.(jpg|jpeg|png|gif|svg)$": "<rootDir>/__mocks__/fileMock.js",
-      "\\.(css|scss)$": "<rootDir>/__mocks__/styleMock.js"
-    }
-  },
-  "dependencies": {
-    "react-jss": "^10.0.3"
+    "lint": "eslint 'src/**/*.{js,jsx}'"
   },
   "peerDependencies": {
-    "react": "^16.6.3"
+    "@babel/runtime": "7.2.0",
+    "classnames": "^2.0.0",
+    "draft-js": "0.11.2",
+    "lodash": "^4.0.0",
+    "prop-types": "^15.0.0",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3"
   },
   "devDependencies": {
     "@babel/runtime": "7.2.0",
-    "babel-jest": "^23.6.0",
     "classnames": "^2.2.6",
     "cross-env": "^5.2.0",
-    "deep-freeze": "0.0.1",
     "draft-js": "0.11.2",
     "eslint": "^6.1.0",
-    "jest": "^23.1.0",
     "lodash": "^4.17.15",
     "prop-types": "^15.6.2",
     "react": "16.6.3",
     "react-dom": "16.6.3",
     "rollup": "1.20.3"
+  },
+  "dependencies": {
+    "react-jss": "^10.0.3"
   },
   "unpkg": true,
   "publishConfig": {
