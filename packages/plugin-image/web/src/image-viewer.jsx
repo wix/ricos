@@ -158,11 +158,6 @@ class ImageViewer extends React.Component {
     );
   }
 
-  updateMetadata = newMetadata => {
-    const metadata = this.state.metadata || {};
-    this.setState({ metadata: { ...metadata, ...newMetadata } });
-  };
-
   renderCaption(caption) {
     const { onCaptionChange, setFocusToBlock } = this.props;
     return (
@@ -216,8 +211,8 @@ class ImageViewer extends React.Component {
     this.styles = this.styles || mergeStyles({ styles, theme: this.context.theme });
     const { componentData, className, settings } = this.props;
     const { fallbackImageSrc } = this.state;
-    const metadata = this.state.metadata || componentData.metadata || {};
     const data = componentData || DEFAULTS;
+    const { metadata = {} } = componentData;
 
     const hasLink = data.config && data.config.link;
     const hasExpand = this.context.helpers && this.context.helpers.onExpand;
@@ -271,7 +266,7 @@ ImageViewer.propTypes = {
   settings: PropTypes.object,
   defaultCaption: PropTypes.string,
   entityIndex: PropTypes.number,
-  onCaptionChange: PropTypes.func.isRequired,
+  onCaptionChange: PropTypes.func,
   setFocusToBlock: PropTypes.func,
 };
 
