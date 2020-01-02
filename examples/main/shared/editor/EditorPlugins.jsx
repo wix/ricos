@@ -22,9 +22,8 @@ import {
 } from 'wix-rich-content-plugin-headers-markdown';
 import { createMapPlugin, MAP_TYPE } from 'wix-rich-content-plugin-map';
 import { createFileUploadPlugin, FILE_UPLOAD_TYPE } from 'wix-rich-content-plugin-file-upload';
-import { createTextColorPlugin, TEXT_COLOR_TYPE } from 'wix-rich-content-plugin-text-color';
+import { createTextColorPlugin, createTextHighlightPlugin, TEXT_COLOR_TYPE, TEXT_HIGHLIGHT_TYPE } from 'wix-rich-content-plugin-text-color';
 import { createButtonPlugin, BUTTON_TYPE } from 'wix-rich-content-plugin-button';
-import { createTextHighlightPlugin, TEXT_HIGHLIGHT_TYPE } from 'wix-rich-content-plugin-text-color';
 import Highlighter from 'react-highlight-words';
 import casual from 'casual-browserify';
 

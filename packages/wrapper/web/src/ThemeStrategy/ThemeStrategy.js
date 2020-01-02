@@ -6,8 +6,8 @@ export default function themeStrategy({ settings = {}, ...rest }) {
   const customizedTheme = (rest && rest.theme) || {};
   if (typeof theme === 'string') {
     const rceTheme = new RceTheme(theme, palette);
-    const useHashtagStyles = createUseStyles(rceTheme.getStylesObject());
-    const themeObj = useHashtagStyles();
+    const generateTheme = createUseStyles(rceTheme.getStylesObject());
+    const themeObj = generateTheme();
     return { theme: { ...themeObj, ...customizedTheme } };
   }
   return { theme };

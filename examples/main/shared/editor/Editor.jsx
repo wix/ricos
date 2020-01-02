@@ -8,6 +8,7 @@ import * as Plugins from './EditorPlugins';
 import ModalsMap from './ModalsMap';
 import theme from '../theme/theme'; // must import after custom styles
 import RichContentBaseWrapper from '../../../../packages/editor-common/web/src/wrapper/RichContentBaseWrapper';
+import inlineToolbarTheme from '../theme/toolbars/inline-toolbar.theme.scss';
 
 const modalStyleDefaults = {
   content: {
@@ -162,7 +163,7 @@ export default class Editor extends PureComponent {
           </div>
         )}
         <RichContentBaseWrapper
-          settings={{ plugins: { 'wix-draft-plugin-image': {} } }} >
+          settings={{ plugins: { 'wix-draft-plugin-image': {} }, theme: { inlineToolbarTheme } }} >
           <RichContentEditor
             placeholder={'Add some text!'}
             ref={editor => (this.editor = editor)}

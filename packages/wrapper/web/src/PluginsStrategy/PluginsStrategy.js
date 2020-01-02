@@ -1,4 +1,4 @@
-import { editorPluginsParse } from '../../../../../../examples/main/shared/editor/EditorPlugins';
+import { editorPluginsParse } from './defaultPlugins';
 
 export default function pluginsStrategy({ settings = {} }) {
   const { plugins = {} } = settings;
@@ -12,5 +12,5 @@ export default function pluginsStrategy({ settings = {} }) {
       plugins: newPlugins,
     };
   }
-  return { plugins };
+  return {};
 }
