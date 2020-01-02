@@ -216,8 +216,8 @@ class ImageViewer extends React.Component {
     this.styles = this.styles || mergeStyles({ styles, theme: this.context.theme });
     const { componentData, className, settings } = this.props;
     const { fallbackImageSrc } = this.state;
-    const metadata = this.state.metadata || componentData.metadata || {};
     const data = componentData || DEFAULTS;
+    const { metadata = {} } = componentData;
 
     const hasLink = data.config && data.config.link;
     const hasExpand = this.context.helpers && this.context.helpers.onExpand;
