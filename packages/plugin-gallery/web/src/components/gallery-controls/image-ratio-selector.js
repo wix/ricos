@@ -68,7 +68,7 @@ class ImageRatioSelector extends Component {
     const imageRatioLabel = t('GallerySettings_Image_Ratio');
 
     return (
-      <div className={null}>
+      <div>
         <span className={styles.imageRatioSelector_label}>{imageRatioLabel}</span>
         <SelectionList
           theme={theme}
@@ -89,7 +89,6 @@ ImageRatioSelector.propTypes = {
   value: PropTypes.number.isRequired,
   theme: PropTypes.object.isRequired,
   onChange: PropTypes.func.isRequired,
-  options: PropTypes.object,
   t: PropTypes.func,
 };
 

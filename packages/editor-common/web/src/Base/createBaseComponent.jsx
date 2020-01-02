@@ -306,15 +306,13 @@ const createBaseComponent = ({
           ) : (
             component
           )}
-          {
-            <div
-              role="none"
-              data-hook={'componentOverlay'}
-              onClick={this.handleClick}
-              className={overlayClassNames}
-              draggable
-            />
-          }
+          <div
+            role="none"
+            data-hook={'componentOverlay'}
+            onClick={this.handleClick}
+            className={overlayClassNames}
+            draggable
+          />
         </div>
       );
       /* eslint-enable jsx-a11y/anchor-has-content */

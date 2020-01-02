@@ -22,12 +22,6 @@ describe('RichContentEditor', () => {
     expect(wrapper.html()).toEqual(expect.stringContaining('contenteditable="true"'));
   });
 
-  // it('should render read only mode', async () => {
-  //   const RichContentEditor = getRichContentEditor();
-  //   const wrapper = shallow(<RichContentEditor />);
-  //   expect(wrapper.html()).toEqual(expect.stringContaining('contenteditable="false"'));
-  // });
-
   it('should render text only', async () => {
     const RichContentEditor = getRichContentEditor();
     const wrapper = shallow(<RichContentEditor initialState={TestData.onlyText} />);

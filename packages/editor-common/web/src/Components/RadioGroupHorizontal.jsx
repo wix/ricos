@@ -21,7 +21,7 @@ class RadioGroupHorizontal extends Component {
       !inline && styles.radioGroupHorizontal_groupTwoColumns
     );
     return (
-      <div className={''}>
+      <div>
         {label ? (
           <span id={`${this.id}_label`} className={styles.radioGroupHorizontal_title}>
             {label}

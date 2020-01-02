@@ -123,7 +123,6 @@ class LayoutControlsSection extends Component {
       props: {
         onChange: value => this.applyGallerySetting({ cubeRatio: value }),
         value: this.getValueFromComponentStyles('cubeRatio'),
-        options: {},
         t,
       },
     },
@@ -134,7 +133,6 @@ class LayoutControlsSection extends Component {
           this.applyGallerySetting({ isVertical: value === '1' });
         },
         value: this.getValueFromComponentStyles('isVertical') ? '1' : '0',
-        options: {},
         t,
       },
     },

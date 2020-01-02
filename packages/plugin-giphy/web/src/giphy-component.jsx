@@ -47,7 +47,6 @@ class GiphyComponent extends Component {
 
 GiphyComponent.propTypes = {
   componentData: PropTypes.object.isRequired,
-  blockProps: PropTypes.object.isRequired,
   onClick: PropTypes.func.isRequired,
 };
 

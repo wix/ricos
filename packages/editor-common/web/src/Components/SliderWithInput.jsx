@@ -48,7 +48,7 @@ class SliderWithInput extends Component {
 
     /* eslint-disable jsx-a11y/role-has-required-aria-props */
     return (
-      <div className={null}>
+      <div>
         {label ? (
           <span id={`${this.id}_lbl`} className={this.styles.sliderWithInput_label}>
             {label}
