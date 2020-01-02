@@ -18,7 +18,7 @@ class InPluginInput extends Component {
   };
 
   className = classnames(
-    styles[`inPluginInput${!this.props.onChange ? '' : 'Viewer'}`],
+    styles[`inPluginInput${this.props.onChange ? '' : 'Viewer'}`],
     this.props.className
   );
 
