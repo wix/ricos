@@ -8,7 +8,6 @@
     "email": "odeds@wix.com"
   },
   "scripts": {
-    "postinstall": "node ../../scripts/linkExample viewer-ssr",
     "clean": "rm -rf ./node_modules && rm yarn.lock && rm -rf ./target && rm -rf ./dist",
     "rebuild": "npm run clean && npm run bootstrap",
     "start": "yoshi start",
