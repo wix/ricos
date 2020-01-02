@@ -78,7 +78,6 @@ export default class TextLabelButton extends Component {
         showTooltip={showTooltip}
         tooltipText={tooltipText}
         button={textButton}
-        tooltipOffset={{ y: -20 }}
       />
     );
   }
