@@ -163,7 +163,7 @@ export default class Editor extends PureComponent {
           </div>
         )}
         <RichContentBaseWrapper
-          settings={{ plugins: { 'wix-draft-plugin-image': {} }, theme: { inlineToolbarTheme } }} >
+          settings={{ plugins: { 'wix-draft-plugin-image': {} }, theme: inlineToolbarTheme }} >
           <RichContentEditor
             placeholder={'Add some text!'}
             ref={editor => (this.editor = editor)}
