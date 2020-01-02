@@ -1,6 +1,6 @@
 import React, { Children } from 'react';
-import themeStrategy from '../ThemeStrategy';
-import pluginsStrategy from '../PluginsStrategy';
+import { themeStrategy } from './ThemeStrategy';
+import { pluginsStrategy } from './PluginsStrategy';
 
 const defaultStrategies = {
   theme: themeStrategy,
