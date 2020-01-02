@@ -62,7 +62,7 @@
     "react-i18next": "~7.13.0",
     "react-intersection-observer": "~8.24.1",
     "react-measure": "~2.3.0",
-    "react-tooltip": "~3.10.0",
+    "react-tooltip": "~3.11.0",
     "react-window": "~1.5.0"
   },
   "unpkg": true,
