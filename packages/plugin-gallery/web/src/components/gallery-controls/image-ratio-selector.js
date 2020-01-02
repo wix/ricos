@@ -64,14 +64,13 @@ class ImageRatioSelector extends Component {
       },
     ];
     const { styles } = this;
-    const { value, onChange, theme, options, t } = this.props;
+    const { value, onChange, theme, t } = this.props;
     const imageRatioLabel = t('GallerySettings_Image_Ratio');
 
     return (
-      <div className={options.readOnly ? styles.imageRatioSelector_readOnly : null}>
+      <div>
         <span className={styles.imageRatioSelector_label}>{imageRatioLabel}</span>
         <SelectionList
-          readOnly={options.readOnly}
           theme={theme}
           className={styles.imageRatioSelector_grid}
           dataSource={dataSource}
@@ -90,7 +89,6 @@ ImageRatioSelector.propTypes = {
   value: PropTypes.number.isRequired,
   theme: PropTypes.object.isRequired,
   onChange: PropTypes.func.isRequired,
-  options: PropTypes.object,
   t: PropTypes.func,
 };
 

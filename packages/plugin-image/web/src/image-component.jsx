@@ -141,7 +141,6 @@ class ImageComponent extends React.Component {
         isLoading={this.state.isLoading}
         dataUrl={this.state.dataUrl}
         isFocused={blockProps.isFocused}
-        readOnly={blockProps.readOnly}
         settings={settings}
         defaultCaption={this.context.t('ImageViewer_Caption')}
       />
