@@ -13,6 +13,9 @@
     Click to see more.
   </summary>
 
+  ### :rocket: New Feature
+  - `image`
+    - [#563](https://github.com/wix-incubator/rich-content/pull/563) in-plugin editing enabled for caption
   ### :bug: Bug Fix
   - `editor-common`
     - [#550](https://github.com/wix-incubator/rich-content/pull/550) remove dashed border when focused
