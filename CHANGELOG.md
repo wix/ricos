@@ -19,6 +19,8 @@
   ### :house: Internal
   - `general`
     - [#562](https://github.com/wix-incubator/rich-content/pull/562) use `@lerna/project` to get all lerna packages
+  - `e2e`
+    - [#564](https://github.com/wix-incubator/rich-content/pull/564) snapshots renaming for gallery and image plugins tests
       
 </details>
 <hr/>
