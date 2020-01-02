@@ -1,1 +1,2 @@
-export { RichContentBaseWrapper as default } from './RichContentBaseWrapper';
+import RichContentBaseWrapper from './RichContentBaseWrapper';
+export default RichContentBaseWrapper;
