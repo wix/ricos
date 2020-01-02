@@ -226,7 +226,7 @@ exports[`text > allow to apply inline styles and links #0`] =
   "entityMap": {
     "0": {
       "data": {
-        "rel": "nofollow",
+        "rel": "noopener",
         "target": "_blank",
         "url": "https://www.wix.com/"
       },
@@ -235,7 +235,7 @@ exports[`text > allow to apply inline styles and links #0`] =
     },
     "1": {
       "data": {
-        "rel": "nofollow",
+        "rel": "noopener",
         "target": "_blank",
         "url": "https://www.sport5.co.il"
       },
@@ -244,7 +244,7 @@ exports[`text > allow to apply inline styles and links #0`] =
     },
     "2": {
       "data": {
-        "rel": "nofollow",
+        "rel": "noopener",
         "target": "_blank",
         "url": "https://www.wix.com/"
       },
@@ -253,7 +253,7 @@ exports[`text > allow to apply inline styles and links #0`] =
     },
     "3": {
       "data": {
-        "rel": "nofollow",
+        "rel": "noopener",
         "target": "_blank",
         "url": "https://www.sport5.co.il/"
       },
@@ -262,7 +262,7 @@ exports[`text > allow to apply inline styles and links #0`] =
     },
     "4": {
       "data": {
-        "rel": "nofollow",
+        "rel": "noopener",
         "target": "_blank",
         "url": "https://www.one.co.il/"
       },

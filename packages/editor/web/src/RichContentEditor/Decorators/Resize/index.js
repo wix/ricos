@@ -3,13 +3,11 @@ import createDecorator from './createDecorator';
 export default config => {
   const store = {
     getEditorRef: undefined,
-    getReadOnly: undefined,
     getEditorState: undefined,
     setEditorState: undefined,
   };
   return {
-    initialize: ({ getEditorRef, getReadOnly, getEditorState, setEditorState }) => {
-      store.getReadOnly = getReadOnly;
+    initialize: ({ getEditorRef, getEditorState, setEditorState }) => {
       store.getEditorRef = getEditorRef;
       store.getEditorState = getEditorState;
       store.setEditorState = setEditorState;

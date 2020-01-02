@@ -157,15 +157,13 @@ class ImageViewer extends React.Component {
     );
   }
 
-  renderCaption(caption, isFocused, readOnly, styles, defaultCaption) {
+  renderCaption(caption, isFocused, styles, defaultCaption) {
     return caption ? (
       <div className={styles.imageCaption} data-hook="imageViewerCaption">
         {caption}
       </div>
     ) : (
-      !readOnly && isFocused && defaultCaption && (
-        <div className={styles.imageCaption}>{defaultCaption}</div>
-      )
+      isFocused && defaultCaption && <div className={styles.imageCaption}>{defaultCaption}</div>
     );
   }
 
@@ -208,7 +206,7 @@ class ImageViewer extends React.Component {
 
   render() {
     this.styles = this.styles || mergeStyles({ styles, theme: this.context.theme });
-    const { componentData, className, isFocused, readOnly, settings, defaultCaption } = this.props;
+    const { componentData, className, isFocused, settings, defaultCaption } = this.props;
     const { fallbackImageSrc } = this.state;
     const data = componentData || DEFAULTS;
     const { metadata = {} } = componentData;
@@ -248,7 +246,7 @@ class ImageViewer extends React.Component {
         {this.renderTitle(data, this.styles)}
         {this.renderDescription(data, this.styles)}
         {this.shouldRenderCaption() &&
-          this.renderCaption(metadata.caption, isFocused, readOnly, this.styles, defaultCaption)}
+          this.renderCaption(metadata.caption, isFocused, this.styles, defaultCaption)}
       </div>
     );
     /* eslint-enable jsx-a11y/no-static-element-interactions */
@@ -263,7 +261,6 @@ ImageViewer.propTypes = {
   isLoading: PropTypes.bool,
   dataUrl: PropTypes.string,
   isFocused: PropTypes.bool,
-  readOnly: PropTypes.bool,
   settings: PropTypes.object,
   defaultCaption: PropTypes.string,
   entityIndex: PropTypes.number,

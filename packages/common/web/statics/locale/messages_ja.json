@@ -178,6 +178,7 @@
   "VideoUploadModal_Title" : "動画を追加",
   "EmojiPlugin_EmojiGroups_Nature" : "自然",
   "ButtonModal_Border_Section" : "枠線",
+  "ColorPicker_SetToDefault_ButtonLabel" : "Reset to Default",
   "ImageSettings_Alt_Input_Placeholder" : "代替テキストを入力して下さい",
   "ButtonModal_Text_Color" : "テキスト",
   "ButtonModal_Color_Section" : "色",
