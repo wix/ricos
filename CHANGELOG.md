@@ -13,6 +13,9 @@
     Click to see more.
   </summary>
 
+  ### :rocket: New Feature
+  - `image`
+    - [#563](https://github.com/wix-incubator/rich-content/pull/563) in-plugin editing enabled for caption
   ### :bug: Bug Fix
   - `text-color`
      - [#572](https://github.com/wix-incubator/rich-content/pull/572) color Picker- ResetToDefault button sticky to bottom
