@@ -243,15 +243,13 @@ export default ({ config, store }) => WrappedComponent =>
           alignment !== 'left' && size !== 'fullWidth' && !this.context.isMobile,
       });
 
-      const interactionProps = store.getReadOnly()
-        ? {}
-        : {
-            onMouseDown: this.mouseDown,
-            onMouseMove: this.mouseMove,
-            onMouseLeave: this.mouseLeave,
-            width: this.state.width || this.props.minWidth,
-            containerClassName,
-          };
+      const interactionProps = {
+        onMouseDown: this.mouseDown,
+        onMouseMove: this.mouseMove,
+        onMouseLeave: this.mouseLeave,
+        width: this.state.width || this.props.minWidth,
+        containerClassName,
+      };
 
       return (
         <WrappedComponent

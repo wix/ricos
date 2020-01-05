@@ -1,6 +1,13 @@
 import { EditorState, Modifier, RichUtils, SelectionState, AtomicBlockUtils } from 'draft-js';
 import { cloneDeep, flatMap, findIndex, findLastIndex } from 'lodash';
 
+function createSelection({ blockKey, anchorOffset, focusOffset }) {
+  return SelectionState.createEmpty(blockKey).merge({
+    anchorOffset,
+    focusOffset,
+  });
+}
+
 export const insertLinkInPosition = (
   editorState,
   blockKey,
@@ -8,10 +15,7 @@ export const insertLinkInPosition = (
   end,
   { url, targetBlank, nofollow, anchorTarget, relValue }
 ) => {
-  const selection = SelectionState.createEmpty(blockKey).merge({
-    anchorOffset: start,
-    focusOffset: end,
-  });
+  const selection = createSelection({ blockKey, anchorOffset: start, focusOffset: end });
 
   return insertLink(editorState, selection, {
     url,
@@ -48,6 +52,9 @@ export const insertLinkAtCurrentSelection = (
   );
 };
 
+const defaultAnchorTarget = '_self';
+const defaultRelValue = 'noopener';
+
 function insertLink(
   editorState,
   selection,
@@ -61,12 +68,21 @@ function insertLink(
   ).set('selectionAfter', oldSelection);
   const newEditorState = EditorState.push(editorState, newContentState, 'change-inline-style');
 
+  let target = '_blank',
+    rel = 'nofollow';
+  if (!targetBlank) {
+    target = anchorTarget !== '_blank' ? anchorTarget : '_self';
+  }
+  if (!nofollow) {
+    rel = relValue !== 'nofollow' ? relValue : 'noopener';
+  }
+
   return addEntity(newEditorState, selection, {
     type: 'LINK',
     data: {
       url,
-      target: targetBlank ? '_blank' : anchorTarget || '_self',
-      rel: nofollow ? 'nofollow' : relValue || 'noopener',
+      target,
+      rel,
     },
   });
 }
@@ -267,9 +283,7 @@ function getLinkRangesInBlock(block, contentState) {
 }
 
 function removeLink(editorState, blockKey, [start, end]) {
-  let selection = SelectionState.createEmpty(blockKey);
-  selection = selection.set('anchorOffset', start);
-  selection = selection.set('focusOffset', end);
+  const selection = createSelection({ blockKey, anchorOffset: start, focusOffset: end });
   return RichUtils.toggleLink(editorState, selection, null);
 }
 
@@ -293,4 +307,54 @@ function getSelection(editorState) {
   }
 
   return selection;
+}
+
+// a selection of the new content from the last change
+function createLastChangeSelection(editorState) {
+  const content = editorState.getCurrentContent();
+  const selectionBefore = content.getSelectionBefore();
+  return content.getSelectionAfter().merge({
+    anchorKey: selectionBefore.getStartKey(),
+    anchorOffset: selectionBefore.getStartOffset(),
+  });
+}
+
+export function fixPastedLinks(editorState, { anchorTarget, relValue }) {
+  const lastChangeSelection = createLastChangeSelection(editorState);
+  const links = getSelectedLinks(setSelection(editorState, lastChangeSelection));
+  const content = editorState.getCurrentContent();
+  links.forEach(({ key: blockKey, range }) => {
+    const block = content.getBlockForKey(blockKey);
+    const entityKey = block.getEntityAt(range[0]);
+    const data = entityKey && content.getEntity(entityKey).getData();
+    const url = data.url || data.href;
+    if (url) {
+      content.replaceEntityData(entityKey, {
+        url,
+        target: anchorTarget || defaultAnchorTarget,
+        rel: relValue || defaultRelValue,
+      });
+    }
+  });
+  return editorState;
+}
+
+export function getFocusedBlockKey(editorState) {
+  const selection = editorState.getSelection();
+  return selection.isCollapsed() && selection.getAnchorKey();
+}
+
+export function getBlockInfo(editorState, blockKey) {
+  const contentState = editorState.getCurrentContent();
+  const block = contentState.getBlockForKey(blockKey);
+  const entityKey = block.getEntityAt(0);
+  const entity = entityKey && contentState.getEntity(entityKey);
+  const entityData = entity?.data;
+  const type = entity?.type;
+
+  return { type: type || 'text', entityData };
+}
+
+export function setSelection(editorState, selection) {
+  return EditorState.acceptSelection(editorState, selection);
 }

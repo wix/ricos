@@ -61,9 +61,10 @@ Cypress.Commands.add('loadEditorAndViewer', fixtureName => {
 });
 
 Cypress.Commands.add('matchContentSnapshot', () => {
-  cy.window()
-    .its('__CONTENT_SNAPSHOT__')
-    .toMatchSnapshot();
+  if (Cypress.env('MATCH_CONTENT_STATE'))
+    cy.window()
+      .its('__CONTENT_SNAPSHOT__')
+      .toMatchSnapshot();
 });
 
 Cypress.Commands.add('matchSnapshots', options => {
@@ -403,7 +404,7 @@ Cypress.Commands.add('hideTooltip', { prevSubject: 'optional' }, () => {
 });
 
 Cypress.Commands.add('waitForVideoToLoad', { prevSubject: 'optional' }, () => {
-  cy.get('[data-loaded=true]', { timeout: 15000 });
+  cy.get('#rich-content-viewer [data-loaded=true]', { timeout: 15000 });
 });
 
 // disable screenshots in debug mode. So there is no diffrence to ci.

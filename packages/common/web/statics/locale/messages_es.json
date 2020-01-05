@@ -178,6 +178,7 @@
   "VideoUploadModal_Title" : "Agrega un video",
   "EmojiPlugin_EmojiGroups_Nature" : "Naturaleza",
   "ButtonModal_Border_Section" : "Bordes",
+  "ColorPicker_SetToDefault_ButtonLabel" : "Reset to Default",
   "ImageSettings_Alt_Input_Placeholder" : "Describe esta imagen",
   "ButtonModal_Text_Color" : "Texto",
   "ButtonModal_Color_Section" : "Color",

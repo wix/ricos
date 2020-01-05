@@ -129,13 +129,16 @@ describe('Test draftUtils functions', () => {
 
     describe('Test getLinkDataInSelection function', () => {
       const selectionLinkData = getLinkDataInSelection(editorStateWithSelectionOnLink);
-      const linkDataFields = { url: 'url', rel: 'relValue', target: 'anchorTarget' };
-      const selectionLinkDataFields = ['url', 'target', 'rel'];
+      const linkDataFields = { url: 'url', target: 'anchorTarget' };
+      const selectionLinkDataFields = ['url', 'target'];
 
       selectionLinkDataFields.forEach(field => {
         it(`should return the link ${field} data for the link in the selectio`, () => {
           expect(selectionLinkData[field]).toEqual(linkData[linkDataFields[field]]);
         });
+      });
+      it(`should return noopener rel if the link is without nofollow`, () => {
+        expect(selectionLinkData.rel).toEqual('noopener');
       });
 
       it(`should return empty object for selectio without link`, () => {

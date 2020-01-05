@@ -22,31 +22,25 @@ describe('RichContentEditor', () => {
     expect(wrapper.html()).toEqual(expect.stringContaining('contenteditable="true"'));
   });
 
-  it('should render read only mode', async () => {
-    const RichContentEditor = getRichContentEditor();
-    const wrapper = shallow(<RichContentEditor readOnly />);
-    expect(wrapper.html()).toEqual(expect.stringContaining('contenteditable="false"'));
-  });
-
   it('should render text only', async () => {
     const RichContentEditor = getRichContentEditor();
     const wrapper = shallow(<RichContentEditor initialState={TestData.onlyText} />);
     expect(wrapper.html()).toEqual(expect.stringContaining('Hello text only'));
   });
   // it('should render legacy video', () => {
-  //   const wrapper = render(<RichContentEditor initialState={TestData.legacyVideo} readOnly={true} theme={{aaaa: 'aaaa'}} />);
+  //   const wrapper = render(<RichContentEditor initialState={TestData.legacyVideo} theme={{aaaa: 'aaaa'}} />);
   //   expect(wrapper.html()).toEqual(expect.stringContaining('https://www.youtube.com/watch?v=eqZVIiD6wSg'));
   // });
   // it('should render video', () => {
-  //   const wrapper = render(<RichContentEditor initialState={TestData.video} readOnly={true} />);
+  //   const wrapper = render(<RichContentEditor initialState={TestData.video} />);
   //   expect(wrapper.html()).toEqual(expect.stringContaining('https://www.youtube.com/watch?v=eqZVIiD6wSg'));
   // });
   // it('should render html', () => {
-  //   const wrapper = shallow(<RichContentEditor initialState={TestData.html} readOnly />);
+  //   const wrapper = shallow(<RichContentEditor initialState={TestData.html} />);
   //   expect(wrapper.html()).toEqual(expect.stringContaining('youtube'));
   // });
   // it('should render divider', () => {
-  //   const wrapper = mount(<RichContentEditor initialState={TestData.divider} readOnly theme={TestData.theme} />);
+  //   const wrapper = mount(<RichContentEditor initialState={TestData.divider} theme={TestData.theme} />);
   //   /* eslint-disable no-useless-escape */
   //   expect(wrapper.html()).toEqual(
   //     expect.stringContaining('<div data-hook=\"divider\" class=\"draftJsFocusPlugin__focused__3Mksn\" style=\"width: 100%; margin: auto;\"></div>'));

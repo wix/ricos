@@ -36,21 +36,21 @@ describe('plugins', () => {
 
     after(() => cy.eyesClose());
 
-    it('render plugin toolbar and customize in settings', function() {
+    it('render image toolbar and settings', function() {
       cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE)
         .shrinkPlugin()
         .hideTooltip();
-      cy.eyesCheckWindow(this.test.title);
+      cy.eyesCheckWindow(this.test.title + '  - plugin toolbar');
       cy.openImageSettings();
       cy.get(`[data-hook=${IMAGE_SETTINGS.PREVIEW}]:first`);
-      cy.eyesCheckWindow(this.test.title);
+      cy.eyesCheckWindow(this.test.title + ' - settings');
       cy.addImageTitle();
-      cy.eyesCheckWindow(this.test.title);
+      cy.eyesCheckWindow(this.test.title + ' - add image title');
       cy.openImageSettings(false).deleteImageTitle();
-      cy.eyesCheckWindow(this.test.title);
+      cy.eyesCheckWindow(this.test.title + ' - delete image title');
       cy.openImageSettings(false).addImageLink();
       cy.hideTooltip();
-      cy.eyesCheckWindow(this.test.title);
+      cy.eyesCheckWindow(this.test.title + ' - add a link');
     });
   });
 
@@ -97,7 +97,7 @@ describe('plugins', () => {
 
     after(() => cy.eyesClose());
 
-    it('should render gallery plugin toolbar and settings', function() {
+    it('render gallery plugin', function() {
       cy.loadEditorAndViewer('gallery')
         .get(`[data-hook=${'image-item'}]:first`)
         .get(`[data-hook=${'image-item'}]`)
@@ -105,15 +105,15 @@ describe('plugins', () => {
       cy.openPluginToolbar(PLUGIN_COMPONENT.GALLERY)
         .shrinkPlugin()
         .hideTooltip();
-      cy.eyesCheckWindow(this.test.title);
+      cy.eyesCheckWindow(this.test.title + ' toolbar');
       cy.openGalleryAdvancedSettings()
         .get('.__react_component_tooltip.show')
         .should('not.exist');
-      cy.eyesCheckWindow(this.test.title);
+      cy.eyesCheckWindow(this.test.title + ' settings');
     });
 
     context('organize media', () => {
-      it('should allow to manipulate the media items', function() {
+      it('allow to manipulate the media items', function() {
         const firstImage = `[data-hook=${GALLERY_SETTINGS.IMAGE}]:first`;
         const anyImage = `[data-hook=${GALLERY_SETTINGS.IMAGE}]`;
         cy.loadEditorAndViewer('gallery')
@@ -127,27 +127,27 @@ describe('plugins', () => {
           .get(firstImage)
           .get(anyImage)
           .eq(1);
-        cy.eyesCheckWindow(this.test.parent.title + ' - ' + this.test.title);
+        cy.eyesCheckWindow(this.test.parent.title + ' - render settings');
         cy.get(firstImage).click();
         cy.get(`[data-hook=${GALLERY_SETTINGS.DELETE}]`);
-        cy.eyesCheckWindow(this.test.parent.title + ' - ' + this.test.title);
+        cy.eyesCheckWindow(this.test.parent.title + ' - select an item');
         cy.get(`[data-hook=${GALLERY_SETTINGS.SELECT_ALL}]`).click();
-        cy.eyesCheckWindow(this.test.parent.title + ' - ' + this.test.title);
+        cy.eyesCheckWindow(this.test.parent.title + ' - select all items');
         cy.get(`[data-hook=${GALLERY_SETTINGS.DESELECT}]`).click();
         cy.dragAndDrop(firstImage, anyImage, 1);
-        cy.eyesCheckWindow(this.test.parent.title + ' - ' + this.test.title);
+        cy.eyesCheckWindow(this.test.parent.title + ' - deselect items');
         cy.get(firstImage).click();
         cy.get(`[data-hook=${GALLERY_SETTINGS.DELETE}]`).click();
         cy.get(firstImage);
-        cy.eyesCheckWindow(this.test.parent.title + ' - ' + this.test.title);
+        cy.eyesCheckWindow(this.test.parent.title + ' - delete an item');
         cy.get(`[data-hook=${GALLERY_SETTINGS.SELECT_ALL}]`).click();
         cy.get(`[data-hook=${GALLERY_SETTINGS.DELETE}]`).click();
-        cy.eyesCheckWindow(this.test.parent.title + ' - ' + this.test.title);
+        cy.eyesCheckWindow(this.test.parent.title + ' - delete all items');
       });
     });
 
-    context('image settings', () => {
-      it('should allow to update image content', function() {
+    context('media settings', () => {
+      it('allow to update media content', function() {
         cy.loadEditorAndViewer('gallery')
           .openPluginToolbar(PLUGIN_COMPONENT.GALLERY)
           .shrinkPlugin()
@@ -158,13 +158,13 @@ describe('plugins', () => {
           .openGallerySettings()
           .openGalleryImageSettings()
           .get(`[data-hook=${GALLERY_IMAGE_SETTINGS.PREVIEW}]:first`);
-        cy.eyesCheckWindow(this.test.parent.title + ' - ' + this.test.title);
+        cy.eyesCheckWindow(this.test.parent.title + ' - render item settings');
         cy.get(`[data-hook=${GALLERY_IMAGE_SETTINGS.DELETE}]`).click({ force: true });
         cy.get(`[data-hook=${GALLERY_IMAGE_SETTINGS.PREVIEW}]:first`);
-        cy.eyesCheckWindow(this.test.parent.title + ' - ' + this.test.title);
+        cy.eyesCheckWindow(this.test.parent.title + ' - delete a media item');
         cy.get(`[data-hook=${GALLERY_IMAGE_SETTINGS.DELETE}]`).click({ force: true });
         cy.get(`[data-hook=${GALLERY_SETTINGS.UPLOAD}]`);
-        cy.eyesCheckWindow(this.test.parent.title + ' - ' + this.test.title);
+        cy.eyesCheckWindow(this.test.parent.title + ' - delete all items');
       });
       // TODO: title and link image tests
       // // eslint-disable-next-line mocha/no-skipped-tests

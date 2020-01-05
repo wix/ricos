@@ -13,7 +13,7 @@ class RadioGroupHorizontal extends Component {
   }
 
   render() {
-    const { label, readOnly, inline, ...props } = this.props;
+    const { label, inline, ...props } = this.props;
     const { styles } = this;
     const groupClassName = classNames(
       styles.radioGroupHorizontal_group,
@@ -21,18 +21,13 @@ class RadioGroupHorizontal extends Component {
       !inline && styles.radioGroupHorizontal_groupTwoColumns
     );
     return (
-      <div className={readOnly ? styles.radioGroupHorizontal_readOnly : ''}>
+      <div>
         {label ? (
           <span id={`${this.id}_label`} className={styles.radioGroupHorizontal_title}>
             {label}
           </span>
         ) : null}
-        <RadioGroup
-          ariaLabelledBy={`${this.id}_label`}
-          {...props}
-          readOnly={readOnly}
-          className={groupClassName}
-        />
+        <RadioGroup ariaLabelledBy={`${this.id}_label`} {...props} className={groupClassName} />
       </div>
     );
   }
@@ -41,7 +36,6 @@ class RadioGroupHorizontal extends Component {
 RadioGroupHorizontal.propTypes = {
   label: PropTypes.string,
   dataSource: PropTypes.arrayOf(PropTypes.object).isRequired,
-  readOnly: PropTypes.bool,
   disabled: PropTypes.bool,
   theme: PropTypes.object.isRequired,
   onChange: PropTypes.func.isRequired,

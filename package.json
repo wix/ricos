@@ -21,9 +21,11 @@
     "deploy": "node scripts/deployExamples",
     "createVersion": "node scripts/createVersion",
     "e2e": "start-server-and-test e2e:app http://localhost:3002 e2e:run",
-    "e2e:debug": "npm run e2e:app:dev & cypress open",
+    "e2e:debug": "npm run e2e:app:dev & npx cypress open",
+    "e2e:testContent": "start-server-and-test e2e:app http://localhost:3002 e2e:run:testContent",
     "e2e:updateSnapshots": "start-server-and-test e2e:app http://localhost:3002 e2e:run:update",
     "e2e:run": "npx cypress run",
+    "e2e:run:testContent": "APPLITOOLS_IS_DISABLED=true npx cypress run --env MATCH_CONTENT_STATE=true",
     "e2e:run:update": "npm run e2e:run --env CYPRESS_CONFIG=update,updateSnapshots=true",
     "e2e:app": "cd e2e/test-env && npm run build && npm start",
     "e2e:app:run": "cd e2e/test-env && npm start",
@@ -51,13 +53,14 @@
     "@babel/preset-react": "7.0.0",
     "@babel/runtime": "7.2.0",
     "@hot-loader/react-dom": "^16.11.0",
-    "@svgr/rollup": "4.3.2",
+    "@lerna/project": "^3.18.0",
+    "@svgr/rollup": "^4.3.3",
     "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "10.0.3",
     "babel-jest": "^23.6.0",
     "babel-loader": "^8.0.5",
     "chalk": "^2.4.1",
-    "chokidar": "^2.0.4",
+    "chokidar": "^3.3.1",
     "copy-webpack-plugin": "^4.5.1",
     "create-index": "^2.3.0",
     "cross-env": "^5.2.0",
@@ -78,7 +81,6 @@
     "file-loader": "^3.0.1",
     "husky": "^1.0.0-rc.6",
     "lerna": "^3.19.0",
-    "lerna-packages": "^0.0.2",
     "loader-utils": "^1.1.0",
     "lodash": "^4.17.15",
     "mini-css-extract-plugin": "^0.4.0",
@@ -118,6 +120,5 @@
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
-  "dependencies": {
-  }
+  "dependencies": {}
 }

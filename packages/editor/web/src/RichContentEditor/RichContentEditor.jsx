@@ -14,7 +14,12 @@ import blockStyleFn from './blockStyleFn';
 import getBlockRenderMap from './getBlockRenderMap';
 import { combineStyleFns } from './combineStyleFns';
 import { getStaticTextToolbarId } from './Toolbars/toolbar-id';
-import { TooltipHost, TOOLBARS } from 'wix-rich-content-editor-common';
+import {
+  TooltipHost,
+  TOOLBARS,
+  getBlockInfo,
+  getFocusedBlockKey,
+} from 'wix-rich-content-editor-common';
 import {
   Context,
   AccessibilityListener,
@@ -48,6 +53,29 @@ class RichContentEditor extends Component {
   componentDidMount() {
     this.resetInitialIntent();
   }
+
+  componentDidUpdate() {
+    this.handleBlockFocus(this.state.editorState);
+  }
+
+  handleBlockFocus(editorState) {
+    const focusedBlockKey = getFocusedBlockKey(editorState);
+    if (focusedBlockKey !== this.focusedBlockKey) {
+      this.focusedBlockKey = focusedBlockKey;
+      this.onChangedFocusedBlock(focusedBlockKey);
+    }
+  }
+
+  onChangedFocusedBlock = blockKey => {
+    const { onAtomicBlockFocus } = this.props;
+    if (onAtomicBlockFocus) {
+      if (blockKey) {
+        const { type, entityData: data } = getBlockInfo(this.getEditorState(), blockKey);
+        onAtomicBlockFocus({ blockKey, type, data });
+      }
+      onAtomicBlockFocus({});
+    }
+  };
 
   resetInitialIntent = () => {
     if (this.contextualData.initialIntent) {
@@ -94,21 +122,6 @@ class RichContentEditor extends Component {
 
   getEditorBounds = () => this.state.editorBounds;
 
-  onAtomicBlockFocus = blockKey => {
-    const { onAtomicBlockFocus } = this.props;
-    if (onAtomicBlockFocus) {
-      if (blockKey) {
-        const contentState = this.getEditorState().getCurrentContent();
-        const block = contentState.getBlockForKey(blockKey);
-        const entityKey = block.getEntityAt(0);
-        const entity = contentState.getEntity(entityKey);
-        onAtomicBlockFocus(blockKey, entity.type, entity.data);
-      } else {
-        onAtomicBlockFocus(undefined);
-      }
-    }
-  };
-
   initPlugins() {
     const {
       helpers,
@@ -131,7 +144,6 @@ class RichContentEditor extends Component {
       isMobile,
       anchorTarget,
       relValue,
-      onAtomicBlockFocus: this.onAtomicBlockFocus,
       getEditorState: this.getEditorState,
       setEditorState: this.setEditorState,
       getEditorBounds: this.getEditorBounds,
@@ -268,38 +280,34 @@ class RichContentEditor extends Component {
   };
 
   renderToolbars = () => {
-    if (!this.props.readOnly) {
-      const toolbarsToIgnore = [
-        'MobileToolbar',
-        'StaticTextToolbar',
-        this.props.textToolbarType === 'static' ? 'InlineTextToolbar' : '',
-      ];
-      //eslint-disable-next-line array-callback-return
-      const toolbars = this.plugins.map((plugin, index) => {
-        const Toolbar = plugin.Toolbar || plugin.InlineToolbar || plugin.SideToolbar;
-        if (Toolbar) {
-          if (includes(toolbarsToIgnore, plugin.name)) {
-            return null;
-          }
-          return <Toolbar key={`k${index}`} />;
+    const toolbarsToIgnore = [
+      'MobileToolbar',
+      'StaticTextToolbar',
+      this.props.textToolbarType === 'static' ? 'InlineTextToolbar' : '',
+    ];
+    //eslint-disable-next-line array-callback-return
+    const toolbars = this.plugins.map((plugin, index) => {
+      const Toolbar = plugin.Toolbar || plugin.InlineToolbar || plugin.SideToolbar;
+      if (Toolbar) {
+        if (includes(toolbarsToIgnore, plugin.name)) {
+          return null;
         }
-      });
-      return toolbars;
-    }
+        return <Toolbar key={`k${index}`} />;
+      }
+    });
+    return toolbars;
   };
 
   renderInlineModals = () => {
-    if (!this.props.readOnly) {
-      //eslint-disable-next-line array-callback-return
-      const modals = this.plugins.map((plugin, index) => {
-        if (plugin.InlineModals && plugin.InlineModals.length > 0) {
-          return plugin.InlineModals.map((Modal, modalIndex) => {
-            return <Modal key={`k${index}m${modalIndex}`} />;
-          });
-        }
-      });
-      return modals;
-    }
+    //eslint-disable-next-line array-callback-return
+    const modals = this.plugins.map((plugin, index) => {
+      if (plugin.InlineModals && plugin.InlineModals.length > 0) {
+        return plugin.InlineModals.map((Modal, modalIndex) => {
+          return <Modal key={`k${index}m${modalIndex}`} />;
+        });
+      }
+    });
+    return modals;
   };
 
   renderEditor = () => {
@@ -323,7 +331,6 @@ class RichContentEditor extends Component {
       onBlur,
       onFocus,
       textAlignment,
-      readOnly,
       handleBeforeInput,
       handlePastedText,
       handleReturn,
@@ -355,7 +362,6 @@ class RichContentEditor extends Component {
         helpers={helpers}
         tabIndex={tabIndex}
         placeholder={placeholder || ''}
-        readOnly={!!readOnly}
         spellCheck={spellCheck}
         stripPastedStyles={stripPastedStyles}
         autoCapitalize={autoCapitalize}
@@ -451,7 +457,6 @@ RichContentEditor.propTypes = {
   style: PropTypes.object,
   onChange: PropTypes.func,
   tabIndex: PropTypes.number,
-  readOnly: PropTypes.bool,
   placeholder: PropTypes.string,
   spellCheck: PropTypes.bool,
   stripPastedStyles: PropTypes.bool,
