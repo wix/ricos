@@ -1,16 +1,15 @@
-import { editorPluginsParse } from './defaultPlugins';
-
 export default function pluginsStrategy({ settings = {} }) {
-  const { plugins = {} } = settings;
-  if (plugins !== {}) {
-    const config = plugins;
-    const newPlugins = Object.entries(editorPluginsParse)
-      .filter(entry => plugins[entry[0]] !== undefined)
-      .map(val => val[1]);
-    return {
-      config,
-      plugins: newPlugins,
-    };
+  const { plugins = [] } = settings;
+  const emptyRet = { config: {}, plugins: [] };
+  if (Array.isArray(plugins) && plugins !== []) {
+    return plugins.reduce((prev, curr) => {
+      const { createPlugin, type, config } = curr;
+      const pConfig = { [type]: config };
+      return {
+        config: { ...prev.config, pConfig },
+        plugins: prev.plugins.concat(createPlugin),
+      };
+    }, emptyRet);
   }
-  return {};
+  return emptyRet;
 }

@@ -84,29 +84,6 @@ export const editorPlugins = [
   createUndoRedoPlugin,
 ];
 
-export const editorPluginsParse = {
-  [IMAGE_TYPE]: createImagePlugin,
-  [GALLERY_TYPE]: createGalleryPlugin,
-  [VIDEO_TYPE]: createVideoPlugin,
-  [HTML_TYPE]: createHtmlPlugin,
-  [DIVIDER_TYPE]: createDividerPlugin,
-  [LINE_SPACING_TYPE]: createLineSpacingPlugin,
-  [LINK_TYPE]: createLinkPlugin,
-  [HASHTAG_TYPE]: createHashtagPlugin,
-  [EXTERNAL_MENTIONS_TYPE]: createExternalMentionsPlugin,
-  [CODE_BLOCK_TYPE]: createCodeBlockPlugin,
-  [SOUND_CLOUD_TYPE]: createSoundCloudPlugin,
-  [GIPHY_TYPE]: createGiphyPlugin,
-  [HEADERS_MARKDOWN_TYPE]: createHeadersMarkdownPlugin,
-  [MAP_TYPE]: createMapPlugin,
-  [FILE_UPLOAD_TYPE]: createFileUploadPlugin,
-  [BUTTON_TYPE]: createButtonPlugin,
-  [TEXT_COLOR_TYPE]: createTextColorPlugin,
-  [EMOJI_TYPE]: createEmojiPlugin,
-  [TEXT_HIGHLIGHT_TYPE]: createTextHighlightPlugin,
-  [UNDO_REDO_TYPE]: createUndoRedoPlugin,
-};
-
 const themeColors = {
   color1: '#ffffff',
   color2: '#303030',

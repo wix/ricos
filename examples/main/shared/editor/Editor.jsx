@@ -10,6 +10,7 @@ import theme from '../theme/theme'; // must import after custom styles
 import RichContentBaseWrapper from 'wix-rich-content-wrapper';
 import inlineToolbarTheme from '../theme/toolbars/inline-toolbar.theme.scss';
 import { themeStrategy, pluginsStrategy } from 'wix-rich-content-wrapper';
+import pluginButton from 'wix-rich-content-plugin-button';
 
 const modalStyleDefaults = {
   content: {
@@ -165,13 +166,13 @@ export default class Editor extends PureComponent {
         )}
         <RichContentBaseWrapper
           settings={{
-            plugins: { 'wix-draft-plugin-image': {} },
+            plugins: [pluginButton],
             theme: inlineToolbarTheme,
-            strategies: {
-              theme: themeStrategy,
-              plugins: pluginsStrategy,
-            }
-          }} >
+          }}
+          strategies={[
+            themeStrategy,
+            pluginsStrategy,
+          ]} >
           <RichContentEditor
             placeholder={'Add some text!'}
             ref={editor => (this.editor = editor)}
@@ -205,7 +206,7 @@ export default class Editor extends PureComponent {
             {...this.state.modalProps}
           />
         </ReactModal>
-      </div>
+      </div >
     );
   }
 }
