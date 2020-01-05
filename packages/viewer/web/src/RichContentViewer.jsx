@@ -12,6 +12,7 @@ import { convertToReact } from './utils/convertContentState';
 import viewerStyles from '../statics/rich-content-viewer.scss';
 import viewerAlignmentStyles from '../statics/rich-content-viewer-alignment.rtlignore.scss';
 import rtlStyle from '../statics/rich-content-viewer-rtl.rtlignore.scss';
+import FallbackComponent from './FallbackComponent';
 
 class RichContentViewer extends Component {
   constructor(props) {
@@ -69,35 +70,47 @@ class RichContentViewer extends Component {
     };
   }
 
+  static getDerivedStateFromError(error) {
+    return { error };
+  }
+
   render() {
-    const { styles } = this;
-    const { textDirection, typeMappers, decorators, inlineStyleMappers, locale } = this.props;
+    const Fallback = this.props.fallbackComponent;
+    try {
+      if (this.state.error) {
+        return <Fallback error={this.state.error} />;
+      }
+      const { styles } = this;
+      const { textDirection, typeMappers, decorators, inlineStyleMappers, locale } = this.props;
 
-    const wrapperClassName = classNames(styles.wrapper, {
-      [styles.desktop]: !this.props.platform || this.props.platform === 'desktop',
-    });
-    const editorClassName = classNames(styles.editor, {
-      [styles.rtl]: textDirection === 'rtl',
-    });
+      const wrapperClassName = classNames(styles.wrapper, {
+        [styles.desktop]: !this.props.platform || this.props.platform === 'desktop',
+      });
+      const editorClassName = classNames(styles.editor, {
+        [styles.rtl]: textDirection === 'rtl',
+      });
 
-    const output = convertToReact(
-      this.state.raw,
-      styles,
-      textDirection,
-      typeMappers,
-      this.state.contextualData,
-      decorators,
-      inlineStyleMappers
-    );
+      const output = convertToReact(
+        this.state.raw,
+        styles,
+        textDirection,
+        typeMappers,
+        this.state.contextualData,
+        decorators,
+        inlineStyleMappers
+      );
 
-    return (
-      <div className={wrapperClassName} dir={getLangDir(locale)}>
-        <Context.Provider value={this.state.contextualData}>
-          <div className={editorClassName}>{output}</div>
-          <AccessibilityListener />
-        </Context.Provider>
-      </div>
-    );
+      return (
+        <div className={wrapperClassName} dir={getLangDir(locale)}>
+          <Context.Provider value={this.state.contextualData}>
+            <div className={editorClassName}>{output}</div>
+            <AccessibilityListener />
+          </Context.Provider>
+        </div>
+      );
+    } catch (err) {
+      return <Fallback error={err} />;
+    }
   }
 }
 
@@ -131,6 +144,7 @@ RichContentViewer.propTypes = {
   disabled: PropTypes.bool,
   shouldRenderOptimizedImages: PropTypes.bool,
   siteDomain: PropTypes.string,
+  fallbackComponent: PropTypes.node,
 };
 
 RichContentViewer.defaultProps = {
@@ -138,6 +152,7 @@ RichContentViewer.defaultProps = {
   decorators: [],
   typeMappers: [],
   locale: 'en',
+  fallbackComponent: FallbackComponent,
 };
 
 export default RichContentViewer;
