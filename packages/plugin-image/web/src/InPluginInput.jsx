@@ -5,13 +5,13 @@ import classnames from 'classnames';
 import styles from '../statics/styles/in-plugin-input.scss';
 
 class InPluginInput extends Component {
-  handleFocus = () => this.context.enableInPluginEditing(true);
+  handleFocus = () => this.context.setInPluginEditingMode(true);
 
-  handleBlur = () => this.context.enableInPluginEditing(false);
+  handleBlur = () => this.context.setInPluginEditingMode(false);
 
   handleKeyPress = e => {
-    const { setFocusToBlock } = this.props;
-    if (e.key === 'Enter' && setFocusToBlock) {
+    const { setFocusToBlock, value } = this.props;
+    if (e.key === 'Enter' && setFocusToBlock && value !== '') {
       this.handleBlur();
       setFocusToBlock();
     }

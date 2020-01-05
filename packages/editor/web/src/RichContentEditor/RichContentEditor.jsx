@@ -117,7 +117,8 @@ class RichContentEditor extends Component {
       shouldRenderOptimizedImages,
       initialIntent,
       siteDomain,
-      enableInPluginEditing: this.enableInPluginEditing,
+      setInPluginEditingMode: this.setInPluginEditingMode,
+      getInPluginEditingMode: this.getInPluginEditingMode,
     };
   };
 
@@ -280,8 +281,14 @@ class RichContentEditor extends Component {
 
   setEditor = ref => (this.editor = get(ref, 'editor', ref));
 
-  enableInPluginEditing = startInPluginEditing =>
+  inPluginEditingMode = false;
+
+  setInPluginEditingMode = startInPluginEditing => {
     startInPluginEditing ? this.deactivateDraftEventHandling() : this.activateDraftEventHandling();
+    this.inPluginEditingMode = startInPluginEditing;
+  };
+
+  getInPluginEditingMode = () => this.inPluginEditingMode;
 
   updateBounds = editorBounds => {
     this.setState({ editorBounds });
