@@ -185,11 +185,16 @@ class ImageViewer extends React.Component {
   shouldRenderCaption() {
     const { settings, componentData, defaultCaption } = this.props;
     const caption = componentData.metadata?.caption;
+    const { getInPluginEditingMode } = this.context;
 
     if (includes(get(settings, 'toolbar.hidden'), 'settings')) {
       return false;
     }
-    if (!caption || caption === defaultCaption) {
+    if (
+      caption === undefined ||
+      (caption === '' && !getInPluginEditingMode?.()) ||
+      caption === defaultCaption
+    ) {
       return false;
     }
     const data = componentData || DEFAULTS;
