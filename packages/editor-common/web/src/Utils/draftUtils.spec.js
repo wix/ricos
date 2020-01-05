@@ -10,7 +10,6 @@ import {
   hasLinksInSelection,
   getLinkDataInSelection,
   removeLinksInSelection,
-  getTextAlignment,
   setTextAlignment,
   getAnchorBlockData,
   isAtomicBlockFocused,
@@ -20,9 +19,15 @@ import {
 } from './draftUtils';
 import { normalizeInitialState } from 'wix-rich-content-common';
 import { convertFromRaw, createWithContent } from 'wix-rich-content-editor';
+import React from 'react';
+import renderer from 'react-test-renderer';
 
-/* eslint-disable max-len*/
 describe('Test draftUtils functions', () => {
+  const getContentStateAsComp = contentState => (
+    <div>{JSON.stringify(convertToRaw(contentState))}</div>
+  );
+  const getContentStateAsTree = contentState =>
+    renderer.create(getContentStateAsComp(contentState)).toJSON();
   const getStateFromObject = obj => {
     const anchorTarget = '_top';
     const relValue = 'noreferrer';
@@ -74,37 +79,19 @@ describe('Test draftUtils functions', () => {
       editorStateWithLink,
       newSelection
     );
-    describe('Test insertLinkInPosition function', () => {
-      const contentStateObj = convertToRaw(editorStateWithLink.getCurrentContent());
-      const blockWithLink = contentStateObj.blocks[0];
-
-      it('should add entityRanges to the relevant blocks', () => {
-        expect(blockWithLink.key).toEqual('50k2j');
-        expect(blockWithLink.entityRanges.length).toEqual(1);
-      });
-      it('should add inlineStyleRanges to the relevant blocks', () => {
-        expect(blockWithLink.inlineStyleRanges.length).toEqual(1);
-      });
-      it('should add link entity to entity map', () => {
-        expect(contentStateObj.entityMap[0].type).toEqual('LINK');
-      });
+    it('Test insertLinkInPosition function', () => {
+      const tree = getContentStateAsTree(editorStateWithLink.getCurrentContent());
+      expect(tree).toMatchSnapshot();
     });
 
-    describe('Test insertLinkAtCurrentSelection function', () => {
+    it('Test insertLinkAtCurrentSelection function', () => {
       const editorStateWithLink = insertLinkAtCurrentSelection(editorStateWithSelection, linkData);
-      const newContentState = editorStateWithLink.getCurrentContent();
-
-      it('should add entityRanges to the blocks in the selection', () => {
-        expect(convertToRaw(newContentState).blocks[0].entityRanges.length).toEqual(1);
-      });
-      it('should add link entity to entity map', () => {
-        expect(convertToRaw(newContentState).entityMap[0].type).toEqual('LINK');
-      });
+      const tree = getContentStateAsTree(editorStateWithLink.getCurrentContent());
+      expect(tree).toMatchSnapshot();
     });
 
     describe('Test hasLinksInBlock function', () => {
       const contentState = editorStateWithLink.getCurrentContent();
-
       it('should return true on block with link', () => {
         expect(hasLinksInBlock(contentState.getBlockForKey('50k2j'), contentState)).toEqual(true);
       });
@@ -127,141 +114,88 @@ describe('Test draftUtils functions', () => {
       });
     });
 
-    describe('Test getLinkDataInSelection function', () => {
+    it('Test getLinkDataInSelection function', () => {
       const selectionLinkData = getLinkDataInSelection(editorStateWithSelectionOnLink);
-      const linkDataFields = { url: 'url', target: 'anchorTarget' };
-      const selectionLinkDataFields = ['url', 'target'];
-
-      selectionLinkDataFields.forEach(field => {
-        it(`should return the link ${field} data for the link in the selectio`, () => {
-          expect(selectionLinkData[field]).toEqual(linkData[linkDataFields[field]]);
-        });
-      });
-      it(`should return noopener rel if the link is without nofollow`, () => {
-        expect(selectionLinkData.rel).toEqual('noopener');
-      });
-
-      it(`should return empty object for selectio without link`, () => {
-        expect(getLinkDataInSelection(editorState)).toEqual({});
-      });
+      const tree = renderer.create(<div>{JSON.stringify(selectionLinkData)}</div>).toJSON();
+      expect(tree).toMatchSnapshot();
     });
 
     describe('Test removeLinksInSelection function', () => {
       it('should remove link in selection', () => {
-        expect(hasLinksInSelection(removeLinksInSelection(editorStateWithSelectionOnLink))).toEqual(
-          false
-        );
+        const newEditorState = removeLinksInSelection(editorStateWithSelectionOnLink);
+        const tree = getContentStateAsTree(newEditorState.getCurrentContent());
+        expect(tree).toMatchSnapshot();
       });
-      const contentStatewithoutLinkInSelection = removeLinksInSelection(
-        editorStateWithLink
-      ).getCurrentContent();
       it('should not remove links outside the selection', () => {
-        expect(
-          hasLinksInBlock(
-            contentStatewithoutLinkInSelection.getBlockForKey('50k2j'),
-            contentStatewithoutLinkInSelection
-          )
-        ).toEqual(true);
+        const newEditorState = removeLinksInSelection(editorStateWithLink);
+        const tree = getContentStateAsTree(newEditorState.getCurrentContent());
+        expect(tree).toMatchSnapshot();
+      });
+    });
+  });
+
+  describe('Test draftUtils Alignment functions', () => {
+    const { editorState } = getStateFromObject(mockAlignmentEditorState);
+    const editorStateWithSelection = getEditorStateWithSelectionAt(editorState, '50k2j');
+    it('Test getTextAlignment function', () => {
+      const tree = getContentStateAsTree(editorStateWithSelection.getCurrentContent());
+      expect(tree).toMatchSnapshot();
+    });
+    it('Test setTextAlignment function', () => {
+      const newEditorState = setTextAlignment(editorStateWithSelection, 'right');
+      const tree = getContentStateAsTree(newEditorState.getCurrentContent());
+      expect(tree).toMatchSnapshot();
+    });
+    it('Test getAnchorBlockData function', () => {
+      const anchorBlockData = getAnchorBlockData(editorStateWithSelection);
+      const tree = renderer.create(<div>{JSON.stringify(anchorBlockData)}</div>).toJSON();
+      expect(tree).toMatchSnapshot();
+    });
+  });
+
+  describe('Test draftUtils Blocks functions', () => {
+    const { editorState } = getStateFromObject(mockGifEditorState);
+    const editorStateWithSelectionOnAtomic = getEditorStateWithSelectionAt(editorState, '1u5r4');
+    const editorStateWithSelectionOnNotAtomic = getEditorStateWithSelectionAt(editorState, '8s1v3');
+
+    it('Test replaceWithEmptyBlock function', () => {
+      const newEditorState = replaceWithEmptyBlock(editorStateWithSelectionOnAtomic, '1u5r4');
+      const tree = getContentStateAsTree(newEditorState.getCurrentContent());
+      expect(tree).toMatchSnapshot();
+    });
+
+    it('Test deleteBlock function', () => {
+      const newEditorState = deleteBlock(editorState, '1u5r4');
+      const tree = getContentStateAsTree(newEditorState.getCurrentContent());
+      expect(tree).toMatchSnapshot();
+    });
+
+    describe('Test isAtomicBlockFocused function', () => {
+      it('should return false for no focus on atomic block', () => {
+        expect(isAtomicBlockFocused(editorStateWithSelectionOnNotAtomic)).toEqual(false);
+      });
+      it('should return true for focus on atomic block', () => {
+        expect(isAtomicBlockFocused(editorStateWithSelectionOnAtomic)).toEqual(true);
       });
     });
 
-    describe('Test draftUtils Alignment functions', () => {
-      const { editorState } = getStateFromObject(mockAlignmentEditorState);
-      const editorStateWithSelection = getEditorStateWithSelectionAt(editorState, '50k2j');
-      describe('Test getTextAlignment function', () => {
-        const alignmentsMap = ['left', 'right', 'center', 'justify'];
-        const blockKeysAlignmentMap = ['civd5', 'bmg0d', 'ehr1q', 'e2imv'];
-        it('should return left as default for text without alignment', () => {
-          expect(getTextAlignment(getEditorStateWithSelectionAt(editorState, '50k2j'))).toEqual(
-            'left'
-          );
-        });
-        alignmentsMap.forEach((alignment, index) => {
-          it(`should return ${alignment} for text with ${alignment} alignment`, () => {
-            expect(
-              getTextAlignment(
-                getEditorStateWithSelectionAt(editorState, blockKeysAlignmentMap[index])
-              )
-            ).toEqual(alignment);
-          });
-        });
+    describe('Test getSelectedBlocks function', () => {
+      const editorWithSelectedBlocks = setEditorStateSelection(editorState, {
+        anchorKey: '1u5r4',
+        anchorOffset: 0,
+        focusKey: 'bsrvp',
+        focusOffset: 0,
       });
-      describe('Test setTextAlignment function', () => {
-        it('should set the new alignment', () => {
-          expect(getTextAlignment(setTextAlignment(editorStateWithSelection, 'right'))).toEqual(
-            'right'
-          );
-        });
-      });
-      describe('Test getAnchorBlockData function', () => {
-        describe('Test setTextAlignment function', () => {
-          it('should return the data relevant to where the user began the selection', () => {
-            expect(getAnchorBlockData(editorStateWithSelection)).toEqual({ textAlignment: 'left' });
-          });
-        });
-      });
-    });
-    describe('Test draftUtils Blocks functions', () => {
-      const { editorState } = getStateFromObject(mockGifEditorState);
-      const editorStateWithSelectionOnAtomic = getEditorStateWithSelectionAt(editorState, '1u5r4');
-      const editorStateWithSelectionOnNotAtomic = getEditorStateWithSelectionAt(
-        editorState,
-        '8s1v3'
-      );
-      describe('Test isAtomicBlockFocused function', () => {
-        it('should return false for no focus on atomic block', () => {
-          expect(isAtomicBlockFocused(editorStateWithSelectionOnNotAtomic)).toEqual(false);
-        });
-        it('should return true for focus on atomic block', () => {
-          expect(isAtomicBlockFocused(editorStateWithSelectionOnAtomic)).toEqual(true);
-        });
-      });
-      describe('Test replaceWithEmptyBlock function', () => {
-        const editorStateWithoutGif = replaceWithEmptyBlock(
-          editorStateWithSelectionOnAtomic,
-          '1u5r4'
-        );
-        const contentStateWithEmptyBlock = convertToRaw(editorStateWithoutGif.getCurrentContent());
-        const resetBlockFields = [
-          'text',
-          'type',
-          'depth',
-          'inlineStyleRanges',
-          'entityRanges',
-          'data',
-        ];
-        const emptyBlockVal = ['', 'unstyled', 0, [], [], {}];
-        resetBlockFields.map((field, index) => {
-          return it(`should reset ${field} block field`, () => {
-            expect(contentStateWithEmptyBlock.blocks[1][field]).toEqual(emptyBlockVal[index]);
-          });
-        });
-      });
-      describe('Test deleteBlock function', () => {
-        const editorWithDeletedBlock = deleteBlock(editorState, '1u5r4');
-        const contentStateWithDeletedBlock = editorWithDeletedBlock.getCurrentContent();
 
-        it('should remove the specified block', () => {
-          expect(contentStateWithDeletedBlock.getBlockForKey('1u5r4')).toEqual(undefined);
-        });
-        it('should not remove blocks rathe then the specified block', () => {
-          expect(!!contentStateWithDeletedBlock.getBlockForKey('8s1v3')).toEqual(true);
-        });
+      it('should return the first block for editor state without selection', () => {
+        const selectedBlocks = getSelectedBlocks(editorState);
+        const tree = renderer.create(<div>{JSON.stringify(selectedBlocks)}</div>).toJSON();
+        expect(tree).toMatchSnapshot();
       });
-      describe('Test getSelectedBlocks function', () => {
-        const editorWithSelectedBlocks = setEditorStateSelection(editorState, {
-          anchorKey: '1u5r4',
-          anchorOffset: 0,
-          focusKey: 'bsrvp',
-          focusOffset: 0,
-        });
-
-        it('should return the first block for editor state without selection', () => {
-          expect(getSelectedBlocks(editorState)[0].key).toEqual('8s1v3');
-        });
-        it('should return array with the selected blocks', () => {
-          expect(getSelectedBlocks(editorWithSelectedBlocks).length).toEqual(2);
-        });
+      it('should return array with the selected blocks', () => {
+        const selectedBlocks = getSelectedBlocks(editorWithSelectedBlocks);
+        const tree = renderer.create(<div>{JSON.stringify(selectedBlocks)}</div>).toJSON();
+        expect(tree).toMatchSnapshot();
       });
     });
   });
