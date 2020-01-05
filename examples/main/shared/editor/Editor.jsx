@@ -7,7 +7,7 @@ import { testImages, testVideos } from './mock';
 import * as Plugins from './EditorPlugins';
 import ModalsMap from './ModalsMap';
 import theme from '../theme/theme'; // must import after custom styles
-import RichContentBaseWrapper from 'wix-rich-content-wrapper';
+import SimplifiedRCE from 'wix-rich-content-wrapper';
 import inlineToolbarTheme from '../theme/toolbars/inline-toolbar.theme.scss';
 import { themeStrategy, pluginsStrategy } from 'wix-rich-content-wrapper';
 import pluginButton from 'wix-rich-content-plugin-button';
@@ -164,7 +164,7 @@ export default class Editor extends PureComponent {
             <TextToolbar />
           </div>
         )}
-        <RichContentBaseWrapper
+        <SimplifiedRCE
           settings={{
             plugins: [pluginButton],
             theme: inlineToolbarTheme,
@@ -172,14 +172,14 @@ export default class Editor extends PureComponent {
           strategies={[
             themeStrategy,
             pluginsStrategy,
-          ]} >
+          ]}>
           <RichContentEditor
             placeholder={'Add some text!'}
             ref={editor => (this.editor = editor)}
             onChange={this.handleChange}
             helpers={this.helpers}
-            plugins={Plugins.editorPlugins}
-            config={Plugins.config}
+            //plugins={Plugins.editorPlugins}
+            //config={Plugins.config}
             editorState={this.props.editorState}
             initialState={this.props.initialState}
             isMobile={this.props.isMobile}
@@ -192,7 +192,7 @@ export default class Editor extends PureComponent {
             localeResource={this.props.localeResource}
           // siteDomain="https://www.wix.com"
           />
-        </RichContentBaseWrapper>
+        </SimplifiedRCE>
         <ReactModal
           isOpen={this.state.showModal}
           contentLabel="External Modal Example"
@@ -206,7 +206,7 @@ export default class Editor extends PureComponent {
             {...this.state.modalProps}
           />
         </ReactModal>
-      </div >
+      </div>
     );
   }
 }

@@ -1,5 +1,6 @@
 import { createButtonPlugin } from './createButtonPlugin';
 import { BUTTON_TYPE } from './constants';
+import { ModalsMap } from './modals';
 
 const buttonDefaultPalette = ['#FEFDFD', '#D5D4D4', '#ABCAFF', '#81B0FF', '#0261FF', '#0141AA'];
 let userButtonTextColors = [...buttonDefaultPalette];
@@ -39,5 +40,6 @@ const config = {
 export const pluginButton = {
   config,
   type: BUTTON_TYPE,
-  createPlugin: createButtonPlugin,
+  createPlugin: createButtonPlugin, //image gallery divider html
+  ModalsMap,
 };
