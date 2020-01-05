@@ -55,7 +55,7 @@
   "VideoUploadModal_CustomVideoHeader" : "Or, upload a video from your computer",
   "VideoUploadModal_CustomVideoClickText" : "Upload Video",
   "VideoPlugin_InsertButton_Tooltip" : "Add a video",
-  "VideoUploadModal_Header" : "Paste a video URL from YouTube, Vimeo or Facebook",
+  "VideoUploadModal_Header" : "Paste a URL from YouTube, Vimeo or Facebook",
   "VideoUploadModal_Input_Placeholder" : "e.g., https://youtu.be/6sx-xGiFIjk",
   "VideoUploadModal_Input_InvalidUrl" : "Check the URL and try again",
   "VideoComponent_Overlay" : "To play this video, view this post from your live site.",
