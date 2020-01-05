@@ -11,6 +11,10 @@ import SimplifiedRCE from 'wix-rich-content-wrapper';
 import inlineToolbarTheme from '../theme/toolbars/inline-toolbar.theme.scss';
 import { themeStrategy, pluginsStrategy } from 'wix-rich-content-wrapper';
 import pluginButton from 'wix-rich-content-plugin-button';
+import pluginImage from 'wix-rich-content-plugin-image';
+import pluginHtml from 'wix-rich-content-plugin-html';
+import pluginDivider from 'wix-rich-content-plugin-divider';
+import pluginGallery from 'wix-rich-content-plugin-gallery';
 
 const modalStyleDefaults = {
   content: {
@@ -166,7 +170,7 @@ export default class Editor extends PureComponent {
         )}
         <SimplifiedRCE
           settings={{
-            plugins: [pluginButton],
+            plugins: [pluginButton, pluginDivider, pluginGallery, pluginHtml, pluginImage],
             theme: inlineToolbarTheme,
           }}
           strategies={[
