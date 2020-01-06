@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import {
   mergeStyles,
   AccessibilityListener,
+  FallbackComponent,
   normalizeInitialState,
   Context,
   getLangDir,
@@ -12,7 +13,6 @@ import { convertToReact } from './utils/convertContentState';
 import viewerStyles from '../statics/rich-content-viewer.scss';
 import viewerAlignmentStyles from '../statics/rich-content-viewer-alignment.rtlignore.scss';
 import rtlStyle from '../statics/rich-content-viewer-rtl.rtlignore.scss';
-import FallbackComponent from './FallbackComponent';
 
 class RichContentViewer extends Component {
   constructor(props) {
