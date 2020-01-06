@@ -142,7 +142,7 @@ class ImageComponent extends React.Component {
     return { alreadyLoading, isLoading, userSelectedFiles };
   };
 
-  handleCaptionChange = e => this.handleMetadataChange({ caption: e.target.value });
+  handleCaptionChange = caption => this.handleMetadataChange({ caption });
 
   render() {
     const { settings, componentData, onClick, className, blockProps } = this.props;
