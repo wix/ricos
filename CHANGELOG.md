@@ -14,6 +14,8 @@
   </summary>
 
   ### :bug: Bug Fix
+  - `text-color`
+     - [#572](https://github.com/wix-incubator/rich-content/pull/572) color Picker- ResetToDefault button sticky to bottom
   - `editor-common`
     - [#550](https://github.com/wix-incubator/rich-content/pull/550) remove dashed border when focused
   - `link`
