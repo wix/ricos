@@ -176,12 +176,13 @@ export default class Editor extends PureComponent {
           strategies={[
             themeStrategy,
             pluginsStrategy,
-          ]}>
+          ]}
+          helpers={this.helpers}>
           <RichContentEditor
             placeholder={'Add some text!'}
             ref={editor => (this.editor = editor)}
             onChange={this.handleChange}
-            helpers={this.helpers}
+            //helpers={this.helpers}
             //plugins={Plugins.editorPlugins}
             //config={Plugins.config}
             editorState={this.props.editorState}

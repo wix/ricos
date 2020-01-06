@@ -35,12 +35,11 @@ export default class SimplifiedRCE extends React.Component {
       (props, stratFunc) => Object.assign(props, stratFunc(rest)),
       rest
     );
-    const { helpers = {}, theme, locale, ModalsMap, staticToolbar, isMobile } = modifiedProps;
+    const { helpers = {}, theme, locale, ModalsMap } = modifiedProps;
     const { onRequestClose } = this.state.modalProps || {};
     helpers.openModal = data => this.onModalOpen(data) && openModal?.(data);
     helpers.closeModal = () => this.onModalClose() && closeModal?.();
     modifiedProps.helpers = helpers;
-    modifiedProps.textToolbarType = staticToolbar && !isMobile ? 'static' : null;
     return (
       <React.Fragment>
         {Children.only(React.cloneElement(children, modifiedProps))}
