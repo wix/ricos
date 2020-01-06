@@ -4,6 +4,7 @@
 
 .colorPicker {
   position: relative;
+  padding-bottom: 25px;
   margin: 0;
 }
 
@@ -84,6 +85,8 @@
   @extend %button;
   display: inline-block;
   vertical-align: top;
+  margin-left: 5px;
+  top: -3px;
 }
 
 .colorPicker_add_color_label {
@@ -95,7 +98,6 @@
 }
 
 .colorPicker_buttons_container {
-  justify-content: space-between;
   flex-direction: row;
   display: -webkit-flex;
   display: flex;
@@ -120,6 +122,9 @@
   @extend %button;
   display: inline-block;
   vertical-align: top;
+  position: absolute;
+  bottom: 0;
+  margin: 10px;
 }
 
 .colorPicker_reset_color_label {
