@@ -14,6 +14,8 @@
   </summary>
 
   ### :bug: Bug Fix
+  - `general`
+    - [#574](https://github.com/wix-incubator/rich-content/pull/574) improve custom icon API
   - `editor-common`
     - [#550](https://github.com/wix-incubator/rich-content/pull/550) remove dashed border when focused
   - `link`
