@@ -17,9 +17,9 @@ class InPluginInput extends Component {
     }
   };
 
-  className = classnames(styles.inPluginInput, this.props.className);
-
   onChange = e => this.props.onChange?.(e.target.value);
+
+  className = classnames(styles.inPluginInput, this.props.className);
 
   render() {
     const { onChange, value } = this.props;
