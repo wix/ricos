@@ -14,8 +14,10 @@
   </summary>
 
   ### :rocket: New Feature
+  - `editor`
+    - [#570](https://github.com/wix-incubator/rich-content/pull/570) ErrorBoundary with default fallback component added; `fallbackComponent` prop exposed
   - `viewer`
-    - [#570](https://github.com/wix-incubator/rich-content/pull/570) ErrorBoundary with default fallback component added
+    - [#570](https://github.com/wix-incubator/rich-content/pull/570) ErrorBoundary with default fallback component added; `fallbackComponent` prop exposed
   ### :bug: Bug Fix
   - `editor-common`
     - [#550](https://github.com/wix-incubator/rich-content/pull/550) remove dashed border when focused
