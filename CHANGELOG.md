@@ -29,7 +29,7 @@
   - `e2e`
     - [#564](https://github.com/wix-incubator/rich-content/pull/564) snapshots renaming for gallery and image plugins tests
   - `editor`
-    - [#575](https://github.com/wix-incubator/rich-content/pull/575) ltr&rtl css yoshi issues solved
+    - [#575](https://github.com/wix-incubator/rich-content/pull/575) ltr&rtl css yoshi issues solved (requested by forum)
   
       
 </details>
