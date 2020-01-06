@@ -159,7 +159,7 @@ export default class Editor extends PureComponent {
     };
     const { MobileToolbar, TextToolbar } = this.state;
     const textToolbarType = this.props.staticToolbar && !this.props.isMobile ? 'static' : null;
-    const { onRequestClose } = this.state.modalProps || {};
+    //const { onRequestClose } = this.state.modalProps || {};
     return (
       <div className="editor">
         {MobileToolbar && <MobileToolbar />}
@@ -197,7 +197,7 @@ export default class Editor extends PureComponent {
           // siteDomain="https://www.wix.com"
           />
         </SimplifiedRCE>
-        <ReactModal
+        {/* <ReactModal
           isOpen={this.state.showModal}
           contentLabel="External Modal Example"
           style={modalStyles}
@@ -209,7 +209,7 @@ export default class Editor extends PureComponent {
             locale={this.props.locale}
             {...this.state.modalProps}
           />
-        </ReactModal>
+        </ReactModal> */}
       </div>
     );
   }

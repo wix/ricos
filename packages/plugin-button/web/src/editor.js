@@ -1,6 +1,7 @@
 import { createButtonPlugin } from './createButtonPlugin';
 import { BUTTON_TYPE } from './constants';
 import { ModalsMap } from './modals';
+//import 'wix-rich-content-plugin-button/dist/styles.min.css';
 
 const buttonDefaultPalette = ['#FEFDFD', '#D5D4D4', '#ABCAFF', '#81B0FF', '#0261FF', '#0141AA'];
 let userButtonTextColors = [...buttonDefaultPalette];

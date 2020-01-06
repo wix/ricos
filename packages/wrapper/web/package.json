@@ -52,6 +52,8 @@
   },
   "dependencies": {
     "react-jss": "^10.0.3",
+    "react-modal": "~3.1.11",
+    "wix-rich-content-editor": "6.6.3",
     "wix-rich-content-plugin-button": "6.6.3",
     "wix-rich-content-plugin-code-block": "6.6.3",
     "wix-rich-content-plugin-divider": "6.6.3",
