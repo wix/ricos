@@ -275,17 +275,15 @@ class RichContentEditor extends Component {
 
   blur = () => this.editor.blur();
 
-  deactivateDraftEventHandling = () => this.editor.setMode('render');
-
-  activateDraftEventHandling = () => this.editor.setMode('edit');
-
   setEditor = ref => (this.editor = get(ref, 'editor', ref));
 
   inPluginEditingMode = false;
 
-  setInPluginEditingMode = startInPluginEditing => {
-    startInPluginEditing ? this.deactivateDraftEventHandling() : this.activateDraftEventHandling();
-    this.inPluginEditingMode = startInPluginEditing;
+  setInPluginEditingMode = shouldEnable => {
+    // As explained in https://github.com/facebook/draft-js/blob/585af35c3a8c31fefb64bc884d4001faa96544d3/src/component/handlers/DraftEditorModes.js#L14
+    const mode = shouldEnable ? 'render' : 'edit';
+    this.editor.setMode(mode);
+    this.inPluginEditingMode = shouldEnable;
   };
 
   getInPluginEditingMode = () => this.inPluginEditingMode;

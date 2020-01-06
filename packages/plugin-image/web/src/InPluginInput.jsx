@@ -17,10 +17,9 @@ class InPluginInput extends Component {
     }
   };
 
-  className = classnames(
-    styles[`inPluginInput${this.props.onChange ? '' : 'Viewer'}`],
-    this.props.className
-  );
+  className = classnames(styles.inPluginInput, this.props.className);
+
+  onChange = e => this.props.onChange?.(e.target.value);
 
   render() {
     const { onChange, value } = this.props;
@@ -29,10 +28,11 @@ class InPluginInput extends Component {
         className={this.className}
         value={value}
         readOnly={!onChange}
-        onChange={onChange}
+        onChange={this.onChange}
         onFocus={this.handleFocus}
         onBlur={this.handleBlur}
         onKeyPress={this.handleKeyPress}
+        dir="auto"
       />
     );
   }
@@ -43,10 +43,6 @@ InPluginInput.propTypes = {
   value: PropTypes.string,
   onChange: PropTypes.func,
   setFocusToBlock: PropTypes.func,
-};
-
-InPluginInput.defaultProps = {
-  value: ' ',
 };
 
 InPluginInput.contextType = Context.type;
