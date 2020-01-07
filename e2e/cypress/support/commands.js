@@ -263,6 +263,14 @@ Cypress.Commands.add('addImageTitle', () => {
     .click();
 });
 
+Cypress.Commands.add('editImageTitle', () => {
+  cy.get(`[data-hook=${PLUGIN_COMPONENT.IMAGE}]:first`)
+    .find('input')
+    .click()
+    .type(' - In Plugin Editing')
+    .blur();
+});
+
 Cypress.Commands.add('deleteImageTitle', () => {
   cy.get(`[data-hook=${IMAGE_SETTINGS.CAPTION}]`)
     .click()
