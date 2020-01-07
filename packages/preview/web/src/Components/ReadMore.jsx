@@ -3,7 +3,6 @@ import ReactDOMServer from 'react-dom/server';
 import PropTypes from 'prop-types';
 import { Context, mergeStyles } from 'wix-rich-content-common';
 import HTMLEllipsis from 'react-lines-ellipsis/lib/html';
-import { getChildrenText } from '../utils';
 import styles from '../../statics/styles/read-more.scss';
 
 class ReadMore extends PureComponent {
