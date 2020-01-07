@@ -16,6 +16,7 @@
   ### :bug: Bug Fix
   - `text-color`
      - [#572](https://github.com/wix-incubator/rich-content/pull/572) color Picker- ResetToDefault button sticky to bottom
+     - [#576](https://github.com/wix-incubator/rich-content/pull/576) color Picker-new colors are added to the end of the list + 'reset to default' removes from the 'inlineStyleRanges' in the content state
   - `editor-common`
     - [#550](https://github.com/wix-incubator/rich-content/pull/550) remove dashed border when focused
   - `link`
