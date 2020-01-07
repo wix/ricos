@@ -12,7 +12,7 @@
   "LineSpacing_cancel" : "Cancel",
   "LineSpacing_save" : "Update",
   "LinkPanel_Target_Checkbox" : "Open link in a new tab",
-  "LinkPanel_Nofollow_Checkbox" : "Tell Google to ignore this link",
+  "LinkPanel_Nofollow_Checkbox" : "Tell Google to ignore this link (nofollow)",
   "LinkPanel_InputPlaceholder" : "Enter a URL here",
   "LinkPanel_ErrorTooltip" : "Double check this URL.",
   "LinkPanel_Nofollow_Checkbox_Tooltip" : "You can add a nofollow tag to the link. Search engines won’t count this link in their SEO and site rankings.",
