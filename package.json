@@ -21,7 +21,7 @@
     "deploy": "node scripts/deployExamples",
     "createVersion": "node scripts/createVersion",
     "e2e": "start-server-and-test e2e:app http://localhost:3002 e2e:run",
-    "e2e:debug": "npm run e2e:app:dev & npx cypress open",
+    "e2e:debug": "npm run e2e:app:dev & npx cypress open --env MATCH_CONTENT_STATE=true",
     "e2e:testContent": "start-server-and-test e2e:app http://localhost:3002 e2e:run:testContent",
     "e2e:updateSnapshots": "start-server-and-test e2e:app http://localhost:3002 e2e:run:update",
     "e2e:run": "npx cypress run",
