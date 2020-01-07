@@ -20,13 +20,15 @@
     - [#546](https://github.com/wix-incubator/rich-content/pull/546) saves the last data and the initial state of the checkboxes("Open in a new tab", "Add a nofollow tag") is according to the defaults (anchorTarget, relValue)
   - `editor-common`
     - [#566](https://github.com/wix-incubator/rich-content/pull/566) Fix tooltip position in bottom tooltip
+  - `Side-Toolbar`
+    - [#577](https://github.com/wix-incubator/rich-content/pull/577) Remove add plugins button from inline toolbar in mobile and change mobile side toolbar to be fixed position instead
   ### :house: Internal
   - `general`
     - [#561](https://github.com/wix-incubator/rich-content/pull/561) refactor - cleanup readOnly prop from code
     - [#562](https://github.com/wix-incubator/rich-content/pull/562) use `@lerna/project` to get all lerna packages
   - `e2e`
     - [#564](https://github.com/wix-incubator/rich-content/pull/564) snapshots renaming for gallery and image plugins tests
-      
+
 </details>
 <hr/>
 
@@ -47,7 +49,7 @@
   ### :bug: Bug Fix
    - `editor`
       - [#556](https://github.com/wix-incubator/rich-content/pull/556) fix onAtomicBlockFocus to work when alternating focus between different kinds of plugins
-    
+
 ## 6.6.2 (Dec 11, 2019)
  ### :rocket: New Feature
   - `editor-common`
@@ -88,7 +90,7 @@
     - [#534](https://github.com/wix-incubator/rich-content/pull/534) exposes data normalization and data validation utils as separate entries
   - `button`
     - [#517](https://github.com/wix-incubator/rich-content/pull/517) plugin button refactor
-    
+
 ## 6.6.1 (Dec 11, 2019)
 ### :rocket: New Feature
 - `fullscreen`
