@@ -1,7 +1,8 @@
 import React, { PureComponent, Fragment } from 'react';
+import ReactDOMServer from 'react-dom/server';
 import PropTypes from 'prop-types';
 import { Context, mergeStyles } from 'wix-rich-content-common';
-import LinesEllipsis from 'react-lines-ellipsis';
+import HTMLEllipsis from 'react-lines-ellipsis/lib/html';
 import { getChildrenText } from '../utils';
 import styles from '../../statics/styles/read-more.scss';
 
@@ -29,6 +30,11 @@ class ReadMore extends PureComponent {
     onPreviewExpand();
   };
 
+  renderChildren(children) {
+    const html = ReactDOMServer.renderToString(children);
+    return html;
+  }
+
   /* eslint-disable */
   render() {
     this.styles = this.styles || mergeStyles({ styles, theme: this.context.theme });
@@ -39,12 +45,12 @@ class ReadMore extends PureComponent {
       children,
       text,
     } = this.props;
-    const textToCollapse = text || getChildrenText(children);
+    // const textToCollapse = text || getChildrenText(children);
     return (
       <Fragment>
         <div className={this.styles.readMore_wrapper} onClick={this.onClick} />
-        <LinesEllipsis
-          text={textToCollapse}
+        <HTMLEllipsis
+          unsafeHTML={this.renderChildren(children)}
           className={this.styles.readMore}
           maxLine={lines}
           ellipsis={`${ellipsis} ${label}`}
