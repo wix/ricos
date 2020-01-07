@@ -6,6 +6,10 @@ import { DISPLAY_MODE } from 'wix-rich-content-editor-common';
 import DraftOffsetKey from 'draft-js/lib/DraftOffsetKey';
 import Styles from '../../../../statics/styles/side-toolbar-wrapper.scss';
 
+const hideStyle = 'scale(0)';
+const showStyle = 'scale(1)';
+const showStyleTransition = 'transform 0.15s cubic-bezier(.3,1.2,.2,1)';
+
 export default class SideToolbar extends Component {
   static propTypes = {
     pubsub: PropTypes.object.isRequired,
@@ -33,10 +37,13 @@ export default class SideToolbar extends Component {
 
   constructor(props) {
     super(props);
+    const { isMobile } = props;
     this.state = {
       position: {
-        transform: 'scale(0)',
+        position: isMobile && 'fixed',
+        transform: isMobile ? showStyle : hideStyle,
       },
+      isVisible: isMobile,
     };
     this.ToolbarDecoration = props.toolbarDecorationFn();
   }
@@ -60,7 +67,7 @@ export default class SideToolbar extends Component {
         this.setState({
           isVisible: false,
           position: {
-            transform: 'scale(0)',
+            transform: hideStyle,
           },
         });
       }
@@ -86,21 +93,22 @@ export default class SideToolbar extends Component {
           this.setState({
             position: {
               top: top - parentTop + offset.y,
-              ...(isMobile ? { right: offset.x } : { left: offset.x, right: offset.x }),
-              transform: `scale(${isMobile ? 0.76 : 1})`, //mobile plus is smaller
-              transition: 'transform 0.15s cubic-bezier(.3,1.2,.2,1)',
+              left: offset.x,
+              right: offset.x,
+              transform: showStyle,
+              transition: showStyleTransition,
             },
           });
         }
       } else if (displayOptions.displayMode === DISPLAY_MODE.FLOATING) {
         this.setState({
           position: {
-            top: offset.y,
-            left: offset.x,
+            top: !isMobile && offset.y,
+            left: !isMobile && offset.x,
             right: offset.x,
-            transform: `scale(${isMobile ? 0.76 : 1})`, //mobile plus is smaller
-            transition: 'transform 0.15s cubic-bezier(.3,1.2,.2,1)',
-            position: 'absolute',
+            transform: showStyle,
+            transition: showStyleTransition,
+            position: isMobile ? 'fixed' : 'absolute',
           },
         });
       }

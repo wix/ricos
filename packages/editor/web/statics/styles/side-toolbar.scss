@@ -36,3 +36,17 @@
   box-sizing: border-box;
   white-space: nowrap;
 }
+
+@media only screen and (max-width: 800px) {
+  .sideToolbar_floatingContainer {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    padding-bottom: 10px;
+    padding-right: 15px;
+  }
+
+  .sideToolbar_floatingIcon {
+    background-color: white;
+  }
+}
