@@ -142,27 +142,27 @@ class LinkPanel extends Component {
             />
           )}
           {showRelValueCheckbox && (
-            <Checkbox
-              label={t('LinkPanel_Nofollow_Checkbox')}
-              theme={theme}
-              checked={nofollow}
-              dataHook="linkPanelRelCheckbox"
-              onChange={this.handleNofollowChange}
-            />
-          )}
-          {showRelValueCheckbox && (
-            <Tooltip
-              shouldRebuildOnUpdate={() => showRelValueCheckbox}
-              data-hook="linkPanelNoFollowTooltip"
-              content={t('LinkPanel_Nofollow_Checkbox_Tooltip')}
-              theme={theme}
-              moveBy={{ y: 0 }}
-            >
-              <InfoIcon
-                data-hook="linkPanelNoFollow"
-                className={styles.linkPanel_noFollowExplanationIcon}
+            <>
+              <Checkbox
+                label={t('LinkPanel_Nofollow_Checkbox')}
+                theme={theme}
+                checked={nofollow}
+                dataHook="linkPanelRelCheckbox"
+                onChange={this.handleNofollowChange}
               />
-            </Tooltip>
+              <Tooltip
+                shouldRebuildOnUpdate={() => showRelValueCheckbox}
+                data-hook="linkPanelNoFollowTooltip"
+                content={t('LinkPanel_Nofollow_Checkbox_Tooltip')}
+                theme={theme}
+                moveBy={{ y: 0 }}
+              >
+                <InfoIcon
+                  data-hook="linkPanelNoFollow"
+                  className={styles.linkPanel_noFollowExplanationIcon}
+                />
+              </Tooltip>
+            </>
           )}
         </div>
       </div>
