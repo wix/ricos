@@ -13,7 +13,12 @@
     Click to see more.
   </summary>
 
+  ### :rocket: New Feature
+  - `image`
+    - [#563](https://github.com/wix-incubator/rich-content/pull/563) in-plugin editing enabled for caption
   ### :bug: Bug Fix
+  - `text-color`
+     - [#572](https://github.com/wix-incubator/rich-content/pull/572) color Picker- ResetToDefault button sticky to bottom
   - `editor-common`
     - [#550](https://github.com/wix-incubator/rich-content/pull/550) remove dashed border when focused
   - `link`
@@ -26,6 +31,9 @@
     - [#562](https://github.com/wix-incubator/rich-content/pull/562) use `@lerna/project` to get all lerna packages
   - `e2e`
     - [#564](https://github.com/wix-incubator/rich-content/pull/564) snapshots renaming for gallery and image plugins tests
+  - `editor`
+    - [#575](https://github.com/wix-incubator/rich-content/pull/575) ltr&rtl css yoshi issues solved (requested by forum)
+  
       
 </details>
 <hr/>
