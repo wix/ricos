@@ -21,11 +21,42 @@
   - `link`
     - [#551](https://github.com/wix-incubator/rich-content/pull/551) adding a tooltip for nofollow tag explanation
   ### :bug: Bug Fix
-  - `editor`
-    - [#556](https://github.com/wix-incubator/rich-content/pull/556) fix onAtomicBlockFocus to work when alternating focus between different kinds of plugins
+  - `text-color`
+     - [#572](https://github.com/wix-incubator/rich-content/pull/572) color Picker- ResetToDefault button sticky to bottom
+  - `editor-common`
+    - [#550](https://github.com/wix-incubator/rich-content/pull/550) remove dashed border when focused
+  - `link`
+    - [#546](https://github.com/wix-incubator/rich-content/pull/546) saves the last data and the initial state of the checkboxes("Open in a new tab", "Add a nofollow tag") is according to the defaults (anchorTarget, relValue)
+  - `editor-common`
+    - [#566](https://github.com/wix-incubator/rich-content/pull/566) Fix tooltip position in bottom tooltip
+  ### :house: Internal
+  - `general`
+    - [#561](https://github.com/wix-incubator/rich-content/pull/561) refactor - cleanup readOnly prop from code
+    - [#562](https://github.com/wix-incubator/rich-content/pull/562) use `@lerna/project` to get all lerna packages
+  - `e2e`
+    - [#564](https://github.com/wix-incubator/rich-content/pull/564) snapshots renaming for gallery and image plugins tests
+      
 </details>
 <hr/>
 
+## 6.6.5 (Dec 30, 2019)
+### :bug: Bug Fix
+- `editor-common`
+  - [#560](https://github.com/wix-incubator/rich-content/pull/560) getBlockInfo returns entity type rather block type
+
+## 6.6.4 (Dec 30, 2019)
+### :bug: Bug Fix
+- `editor-common`
+  - [#558](https://github.com/wix-incubator/rich-content/pull/558) getBlockInfo util arguments fixed
+
+## 6.6.3 (Dec 29, 2019)
+  ### :rocket: New Feature
+   - `text-color`
+     - [#520](https://github.com/wix-incubator/rich-content/pull/520) color Picker- adding an option to change back to default color
+  ### :bug: Bug Fix
+   - `editor`
+      - [#556](https://github.com/wix-incubator/rich-content/pull/556) fix onAtomicBlockFocus to work when alternating focus between different kinds of plugins
+    
 ## 6.6.2 (Dec 11, 2019)
  ### :rocket: New Feature
   - `editor-common`
@@ -36,12 +67,16 @@
   - `file-upload`
     - [#533](https://github.com/wix-incubator/rich-content/pull/533) add multiple files at once
   ### :bug: Bug Fix
+  - `editor-common`
+    - [#550](https://github.com/wix-incubator/rich-content/pull/550) remove dashed border when focused
   - `editor`
     - [#504](https://github.com/wix-incubator/rich-content/pull/504) pasted links get the configured anchorTarget and relValue
+    - [#521](https://github.com/wix-incubator/rich-content/pull/521) replace p element with div element in lists
+    - [#552](https://github.com/wix-incubator/rich-content/pull/552) fix Plugin toolbar shouldCreate config crush
+  - `editor`
+    - [#554](https://github.com/wix-incubator/rich-content/pull/554) change align shortcuts from cmd to cmd + shift
   - `undo-redo`
     - [#543](https://github.com/wix-incubator/rich-content/pull/543) fix undo-redo icons on mobile
-  - `editor`
-    - [#521](https://github.com/wix-incubator/rich-content/pull/521) replace p element with div element in lists
   - `gallery`
     - [#545](https://github.com/wix-incubator/rich-content/pull/545) fix image ratio change in gallery slider layout
   ### :house: Internal

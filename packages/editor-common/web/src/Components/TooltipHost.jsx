@@ -3,6 +3,8 @@ import ReactTooltip from 'react-tooltip';
 import { mergeStyles, Context } from 'wix-rich-content-common';
 import styles from '../../statics/styles/tooltip.scss';
 
+const PLACE_BUTTON = 'place-bottom';
+
 // TODO: add tooltip configuration ability
 const TooltipHost = () => {
   return (
@@ -17,6 +19,11 @@ const TooltipHost = () => {
             delayShow={300}
             // eslint-disable-next-line react/jsx-boolean-value
             multiline={true}
+            overridePosition={({ left, top: originalTop }, currentEvent, currentTarget, node) => {
+              const isBottomTooltip = node?.className && node.className.indexOf(PLACE_BUTTON) > -1;
+              const top = originalTop - (isBottomTooltip ? 30 : 0);
+              return { top, left };
+            }}
           />
         );
       }}

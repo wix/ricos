@@ -2,7 +2,7 @@ import createToolbar from './toolbar';
 import { mergeStyles } from 'wix-rich-content-common';
 import { createBasePlugin } from 'wix-rich-content-editor-common';
 
-import { BUTTON_TYPE, DEFAULTS } from './constants';
+import { BUTTON_TYPE, getDefaultComponentData } from './constants';
 
 import Styles from '../statics/styles/default-styles.scss';
 import ButtonComponent from './components/button-component';
@@ -21,6 +21,8 @@ const createButtonPlugin = (config = {}) => {
   } = config;
 
   const styles = mergeStyles({ styles: Styles, theme });
+  const rel = relValue === '_nofollow';
+  const target = anchorTarget ? anchorTarget === '_blank' : true;
 
   return createBasePlugin({
     component: ButtonComponent,
@@ -41,7 +43,7 @@ const createButtonPlugin = (config = {}) => {
     }),
     helpers,
     t,
-    defaultPluginData: DEFAULTS,
+    defaultPluginData: getDefaultComponentData(rel, target),
     ...rest,
   });
 };

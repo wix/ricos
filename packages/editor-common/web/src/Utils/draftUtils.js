@@ -68,12 +68,21 @@ function insertLink(
   ).set('selectionAfter', oldSelection);
   const newEditorState = EditorState.push(editorState, newContentState, 'change-inline-style');
 
+  let target = '_blank',
+    rel = 'nofollow';
+  if (!targetBlank) {
+    target = anchorTarget !== '_blank' ? anchorTarget : '_self';
+  }
+  if (!nofollow) {
+    rel = relValue !== 'nofollow' ? relValue : 'noopener';
+  }
+
   return addEntity(newEditorState, selection, {
     type: 'LINK',
     data: {
       url,
-      target: targetBlank ? '_blank' : anchorTarget || defaultAnchorTarget,
-      rel: nofollow ? 'nofollow' : relValue || defaultRelValue,
+      target,
+      rel,
     },
   });
 }
@@ -335,13 +344,15 @@ export function getFocusedBlockKey(editorState) {
   return selection.isCollapsed() && selection.getAnchorKey();
 }
 
-export function getBlockInfo(blockKey) {
-  const contentState = this.getEditorState().getCurrentContent();
+export function getBlockInfo(editorState, blockKey) {
+  const contentState = editorState.getCurrentContent();
   const block = contentState.getBlockForKey(blockKey);
-  const type = block.type;
   const entityKey = block.getEntityAt(0);
-  const entityData = entityKey && contentState.getEntity(entityKey)?.data;
-  return { type, entityData };
+  const entity = entityKey && contentState.getEntity(entityKey);
+  const entityData = entity?.data;
+  const type = entity?.type;
+
+  return { type: type || 'text', entityData };
 }
 
 export function setSelection(editorState, selection) {
