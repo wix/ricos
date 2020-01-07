@@ -1,26 +1,23 @@
 import extractEntityData from './extractEntityData';
 import { METHOD_BLOCK_MAP, METHOD_GROUPED_BLOCK_MAP } from '../const';
 
-const extractTextFromBlocks = (
-  { blocks },
-  blockFilter,
-  textReducer = (text, block) => text + block.text,
-  initValue = ''
-) =>
-  blocks.filter(blockFilter).reduce((text, block, index) => {
-    const newText = textReducer(text, block, index);
-    return newText;
-  }, initValue);
+const extractTextBlocksWithEntities = (blocks, entityMap, blockFilter) =>
+  blocks.filter(blockFilter).reduce((texts, block) => {
+    const { entityRanges } = block;
+    const entities = entityRanges.reduce((map, { key }) => {
+      map[key] = entityMap[key];
+      return map;
+    }, {});
 
-const extractTextAsArray = (raw, blockTypeFilter) =>
-  extractTextFromBlocks(
-    raw,
-    ({ type, text }) => blockTypeFilter(type) && text.length > 0,
-    (text, block) => {
-      text.push(block.text);
-      return text;
-    },
-    []
+    texts.push({ block, entities });
+    return texts;
+  }, []);
+
+const extractTextBlockArray = ({ blocks, entityMap }, blockTypeFilter) =>
+  extractTextBlocksWithEntities(
+    blocks,
+    entityMap,
+    ({ type, text }) => blockTypeFilter(type) && text.length > 0
   );
 
 // extracts an array of same-type sequential block text arrays:
@@ -54,17 +51,22 @@ const extractMedia = ({ entityMap }) =>
   Object.values(entityMap).reduce((media, entity) => [...media, ...extractEntityData(entity)], []);
 
 const getContentStateMetadata = raw => {
-  const metadata = { allText: extractTextAsArray(raw, type => type !== 'atomic') };
+  const metadata = { allText: extractTextBlockArray(raw, type => type !== 'atomic') };
 
   // non-grouped block text API
   Object.entries(METHOD_BLOCK_MAP).forEach(([func, blockType]) => {
-    metadata[func] = extractTextAsArray(raw, type => type === blockType);
+    metadata[func] = extractTextBlockArray(raw, type => type === blockType);
   });
 
   // grouped block text API
   Object.entries(METHOD_GROUPED_BLOCK_MAP).forEach(([func, blockType]) => {
     metadata[func] = extractSequentialBlockArrays(raw, blockType)
-      .map(blockArray => extractTextAsArray({ blocks: blockArray }, type => type === blockType))
+      .map(blockArray =>
+        extractTextBlockArray(
+          { blocks: blockArray, entityMap: raw.entityMap },
+          type => type === blockType
+        )
+      )
       .filter(arr => arr.length > 0);
   });
 
