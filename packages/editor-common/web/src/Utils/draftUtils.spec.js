@@ -16,35 +16,28 @@ import {
   replaceWithEmptyBlock,
   deleteBlock,
   getSelectedBlocks,
+  getTextAlignment,
 } from './draftUtils';
-import { normalizeInitialState } from 'wix-rich-content-common';
+
+const getContentAsObject = editorState => convertToRaw(editorState.getCurrentContent());
+const getEditorStateFromJson = json => EditorState.createWithContent(convertFromRaw(json));
+const setEditorStateSelection = (editorState, selection) => {
+  const newSelection = editorState.getSelection().merge(selection);
+  return EditorState.forceSelection(editorState, newSelection);
+};
+const getEditorStateWithSelectionAt = (editorState, blockKey) => {
+  return setEditorStateSelection(editorState, {
+    anchorKey: blockKey,
+    anchorOffset: 0,
+    focusKey: blockKey,
+    focusOffset: 1,
+  });
+};
 
 describe('Test draftUtils functions', () => {
-  const getContentAsObject = editorState => convertToRaw(editorState.getCurrentContent());
-  const getStateFromObject = obj => {
-    const anchorTarget = '_top';
-    const relValue = 'noreferrer';
-    const normalizedState = normalizeInitialState(obj, {
-      anchorTarget,
-      relValue,
-    });
-    const editorState = EditorState.createWithContent(convertFromRaw(normalizedState));
-    return { editorState, viewerState: normalizedState };
-  };
-  const getEditorStateWithSelectionAt = (editorState, blockKey) => {
-    return setEditorStateSelection(editorState, {
-      anchorKey: blockKey,
-      anchorOffset: 0,
-      focusKey: blockKey,
-      focusOffset: 1,
-    });
-  };
-  const setEditorStateSelection = (editorState, selection) => {
-    const editorSelection = editorState.getSelection();
-    const newSelection = editorSelection.merge(selection);
-    return EditorState.forceSelection(editorState, newSelection);
-  };
   describe('Test draftUtils Links functions', () => {
+    const editorState = getEditorStateFromJson(mockLinkEditorState);
+
     const linkData = {
       url: 'www.google.com',
       targetBlank: true,
@@ -52,38 +45,27 @@ describe('Test draftUtils functions', () => {
       anchorTarget: '_blank',
       relValue: 'nofollow',
     };
-    const { editorState } = getStateFromObject(mockLinkEditorState);
-    const editorStateWithLink = insertLinkInPosition(editorState, '50k2j', 0, 7, linkData);
-    const editorSelection = editorState.getSelection();
-    const newSelection = editorSelection.merge({
-      anchorKey: '50k2j',
-      anchorOffset: 0,
-      focusKey: '50k2j',
-      focusOffset: 7,
-    });
 
-    const editorStateWithSelection = setEditorStateSelection(editorState, {
-      anchorKey: '50k2j',
-      anchorOffset: 0,
-      focusKey: '50k2j',
-      focusOffset: 7,
-    });
-    const editorStateWithSelectionOnLink = setEditorStateSelection(
-      editorStateWithLink,
-      newSelection
-    );
     it('Test insertLinkInPosition function', () => {
+      const editorStateWithLink = insertLinkInPosition(editorState, '50k2j', 0, 7, linkData);
       const contentStateObj = getContentAsObject(editorStateWithLink);
       expect(contentStateObj).toMatchSnapshot();
     });
 
     it('Test insertLinkAtCurrentSelection function', () => {
+      const editorStateWithSelection = setEditorStateSelection(editorState, {
+        anchorKey: '50k2j',
+        anchorOffset: 0,
+        focusKey: '50k2j',
+        focusOffset: 7,
+      });
       const editorStateWithLink = insertLinkAtCurrentSelection(editorStateWithSelection, linkData);
       const contentStateObj = getContentAsObject(editorStateWithLink);
       expect(contentStateObj).toMatchSnapshot();
     });
 
     describe('Test hasLinksInBlock function', () => {
+      const editorStateWithLink = insertLinkInPosition(editorState, '50k2j', 0, 7, linkData);
       const contentState = editorStateWithLink.getCurrentContent();
       it('should return true on block with link', () => {
         expect(hasLinksInBlock(contentState.getBlockForKey('50k2j'), contentState)).toEqual(true);
@@ -93,8 +75,17 @@ describe('Test draftUtils functions', () => {
       });
     });
 
+    const selection = editorState.getSelection().merge({
+      anchorKey: '50k2j',
+      anchorOffset: 0,
+      focusKey: '50k2j',
+      focusOffset: 7,
+    });
+    const editorStateWithLink = insertLinkInPosition(editorState, '50k2j', 0, 7, linkData);
+    const editorStateWithSelectionOnLink = setEditorStateSelection(editorStateWithLink, selection);
+
     describe('Test hasLinksInSelection function', () => {
-      const editorStateWithoutLinks = EditorState.forceSelection(editorState, newSelection);
+      const editorStateWithoutLinks = EditorState.forceSelection(editorState, selection);
 
       it('should return true on editor state with link in selection', () => {
         expect(hasLinksInSelection(editorStateWithSelectionOnLink)).toEqual(true);
@@ -127,11 +118,10 @@ describe('Test draftUtils functions', () => {
   });
 
   describe('Test draftUtils Alignment functions', () => {
-    const { editorState } = getStateFromObject(mockAlignmentEditorState);
+    const editorState = getEditorStateFromJson(mockAlignmentEditorState);
     const editorStateWithSelection = getEditorStateWithSelectionAt(editorState, '50k2j');
     it('Test getTextAlignment function', () => {
-      const contentStateObj = getContentAsObject(editorStateWithSelection);
-      expect(contentStateObj).toMatchSnapshot();
+      expect(getTextAlignment(editorState)).toEqual('left');
     });
     it('Test setTextAlignment function', () => {
       const newEditorState = setTextAlignment(editorStateWithSelection, 'right');
@@ -145,7 +135,7 @@ describe('Test draftUtils functions', () => {
   });
 
   describe('Test draftUtils Blocks functions', () => {
-    const { editorState } = getStateFromObject(mockGifEditorState);
+    const editorState = getEditorStateFromJson(mockGifEditorState);
     const editorStateWithSelectionOnAtomic = getEditorStateWithSelectionAt(editorState, '1u5r4');
     const editorStateWithSelectionOnNotAtomic = getEditorStateWithSelectionAt(editorState, '8s1v3');
 

@@ -64,8 +64,7 @@
     "react-measure": "~2.3.0",
     "react-tooltip": "~3.11.0",
     "react-window": "~1.5.0",
-    "wix-rich-content-common": "6.6.5",
-    "wix-rich-content-editor": "6.6.5"
+    "wix-rich-content-common": "6.6.5"
   },
   "unpkg": true,
   "publishConfig": {

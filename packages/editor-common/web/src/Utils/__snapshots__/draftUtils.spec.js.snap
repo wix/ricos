@@ -6,69 +6,6 @@ Object {
 }
 `;
 
-exports[`Test draftUtils functions Test draftUtils Alignment functions Test getTextAlignment function 1`] = `
-Object {
-  "blocks": Array [
-    Object {
-      "data": Object {
-        "textAlignment": "left",
-      },
-      "depth": 0,
-      "entityRanges": Array [],
-      "inlineStyleRanges": Array [],
-      "key": "50k2j",
-      "text": "I am text without alignment",
-      "type": "unstyled",
-    },
-    Object {
-      "data": Object {
-        "textAlignment": "left",
-      },
-      "depth": 0,
-      "entityRanges": Array [],
-      "inlineStyleRanges": Array [],
-      "key": "civd5",
-      "text": "I am text with left alignment",
-      "type": "unstyled",
-    },
-    Object {
-      "data": Object {
-        "textAlignment": "center",
-      },
-      "depth": 0,
-      "entityRanges": Array [],
-      "inlineStyleRanges": Array [],
-      "key": "ehr1q",
-      "text": "I am text with center alignment",
-      "type": "unstyled",
-    },
-    Object {
-      "data": Object {
-        "textAlignment": "right",
-      },
-      "depth": 0,
-      "entityRanges": Array [],
-      "inlineStyleRanges": Array [],
-      "key": "bmg0d",
-      "text": "I am text with right alignment",
-      "type": "unstyled",
-    },
-    Object {
-      "data": Object {
-        "textAlignment": "justify",
-      },
-      "depth": 0,
-      "entityRanges": Array [],
-      "inlineStyleRanges": Array [],
-      "key": "e2imv",
-      "text": "I am text with justify alignment",
-      "type": "unstyled",
-    },
-  ],
-  "entityMap": Object {},
-}
-`;
-
 exports[`Test draftUtils functions Test draftUtils Alignment functions Test setTextAlignment function 1`] = `
 Object {
   "blocks": Array [
@@ -167,7 +104,7 @@ Array [
     "characterList": Immutable.List [
       Immutable.Record {
         "style": Immutable.OrderedSet [],
-        "entity": "2",
+        "entity": "3",
       },
     ],
     "depth": 0,
