@@ -22,6 +22,9 @@
   &:hover {
     color: $accent-color;
   }
+  @media only screen and (max-width: 800px) {
+    background-color: white;
+  }
 }
 
 .sideToolbar {
@@ -35,17 +38,4 @@
   padding: 9px 19px;
   box-sizing: border-box;
   white-space: nowrap;
-}
-
-@media only screen and (max-width: 800px) {
-  .sideToolbar_floatingContainer {
-    bottom: 0;
-    right: 0;
-    padding-bottom: 15px;
-    padding-right: 20px;
-  }
-
-  .sideToolbar_floatingIcon {
-    background-color: white;
-  }
 }

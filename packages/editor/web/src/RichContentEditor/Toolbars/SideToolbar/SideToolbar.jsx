@@ -39,7 +39,7 @@ export default class SideToolbar extends Component {
     super(props);
     const { isMobile } = props;
     this.state = {
-      position: {
+      style: {
         position: isMobile && 'fixed',
         transform: isMobile ? showStyle : hideStyle,
       },
@@ -66,7 +66,7 @@ export default class SideToolbar extends Component {
       if (wasVisible) {
         this.setState({
           isVisible: false,
-          position: {
+          style: {
             transform: hideStyle,
           },
         });
@@ -91,10 +91,10 @@ export default class SideToolbar extends Component {
           const top = node.getBoundingClientRect().top;
           const parentTop = node.offsetParent.getBoundingClientRect().top;
           this.setState({
-            position: {
+            style: {
               top: top - parentTop + offset.y,
               left: offset.x,
-              right: offset.x,
+              right: !isMobile && offset.x,
               transform: showStyle,
               transition: showStyleTransition,
             },
@@ -102,10 +102,10 @@ export default class SideToolbar extends Component {
         }
       } else if (displayOptions.displayMode === DISPLAY_MODE.FLOATING) {
         this.setState({
-          position: {
+          style: {
             top: !isMobile && offset.y,
             left: !isMobile && offset.x,
-            right: offset.x,
+            right: !isMobile && offset.x,
             transform: showStyle,
             transition: showStyleTransition,
             position: isMobile ? 'fixed' : 'absolute',
@@ -140,7 +140,7 @@ export default class SideToolbar extends Component {
         Styles.sideToolbarWrapper,
         wrapperStyles && wrapperStyles.sideToolbarWrapper
       ),
-      style: this.state.position,
+      style: this.state.style,
     };
 
     if (this.ToolbarDecoration) {
