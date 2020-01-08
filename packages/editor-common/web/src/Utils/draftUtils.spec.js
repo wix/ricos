@@ -2,7 +2,7 @@ import mockLinkEditorState from '../../../../../e2e/tests/fixtures/headers.json'
 import mockAlignmentEditorState from '../../../../../e2e/tests/fixtures/text-alignment.json';
 import mockGifEditorState from '../../../../../e2e/tests/fixtures/gif.json';
 
-import { EditorState, convertToRaw } from 'draft-js';
+import { EditorState, convertToRaw, convertFromRaw } from 'draft-js';
 import {
   insertLinkAtCurrentSelection,
   insertLinkInPosition,
@@ -18,16 +18,9 @@ import {
   getSelectedBlocks,
 } from './draftUtils';
 import { normalizeInitialState } from 'wix-rich-content-common';
-import { convertFromRaw, createWithContent } from 'wix-rich-content-editor';
-import React from 'react';
-import renderer from 'react-test-renderer';
 
 describe('Test draftUtils functions', () => {
-  const getContentStateAsComp = contentState => (
-    <div>{JSON.stringify(convertToRaw(contentState))}</div>
-  );
-  const getContentStateAsTree = contentState =>
-    renderer.create(getContentStateAsComp(contentState)).toJSON();
+  const getContentAsObject = editorState => convertToRaw(editorState.getCurrentContent());
   const getStateFromObject = obj => {
     const anchorTarget = '_top';
     const relValue = 'noreferrer';
@@ -35,7 +28,7 @@ describe('Test draftUtils functions', () => {
       anchorTarget,
       relValue,
     });
-    const editorState = createWithContent(convertFromRaw(normalizedState));
+    const editorState = EditorState.createWithContent(convertFromRaw(normalizedState));
     return { editorState, viewerState: normalizedState };
   };
   const getEditorStateWithSelectionAt = (editorState, blockKey) => {
@@ -80,14 +73,14 @@ describe('Test draftUtils functions', () => {
       newSelection
     );
     it('Test insertLinkInPosition function', () => {
-      const tree = getContentStateAsTree(editorStateWithLink.getCurrentContent());
-      expect(tree).toMatchSnapshot();
+      const contentStateObj = getContentAsObject(editorStateWithLink);
+      expect(contentStateObj).toMatchSnapshot();
     });
 
     it('Test insertLinkAtCurrentSelection function', () => {
       const editorStateWithLink = insertLinkAtCurrentSelection(editorStateWithSelection, linkData);
-      const tree = getContentStateAsTree(editorStateWithLink.getCurrentContent());
-      expect(tree).toMatchSnapshot();
+      const contentStateObj = getContentAsObject(editorStateWithLink);
+      expect(contentStateObj).toMatchSnapshot();
     });
 
     describe('Test hasLinksInBlock function', () => {
@@ -116,20 +109,19 @@ describe('Test draftUtils functions', () => {
 
     it('Test getLinkDataInSelection function', () => {
       const selectionLinkData = getLinkDataInSelection(editorStateWithSelectionOnLink);
-      const tree = renderer.create(<div>{JSON.stringify(selectionLinkData)}</div>).toJSON();
-      expect(tree).toMatchSnapshot();
+      expect(selectionLinkData).toMatchSnapshot();
     });
 
     describe('Test removeLinksInSelection function', () => {
       it('should remove link in selection', () => {
         const newEditorState = removeLinksInSelection(editorStateWithSelectionOnLink);
-        const tree = getContentStateAsTree(newEditorState.getCurrentContent());
-        expect(tree).toMatchSnapshot();
+        const contentStateObj = getContentAsObject(newEditorState);
+        expect(contentStateObj).toMatchSnapshot();
       });
       it('should not remove links outside the selection', () => {
         const newEditorState = removeLinksInSelection(editorStateWithLink);
-        const tree = getContentStateAsTree(newEditorState.getCurrentContent());
-        expect(tree).toMatchSnapshot();
+        const contentStateObj = getContentAsObject(newEditorState);
+        expect(contentStateObj).toMatchSnapshot();
       });
     });
   });
@@ -138,18 +130,17 @@ describe('Test draftUtils functions', () => {
     const { editorState } = getStateFromObject(mockAlignmentEditorState);
     const editorStateWithSelection = getEditorStateWithSelectionAt(editorState, '50k2j');
     it('Test getTextAlignment function', () => {
-      const tree = getContentStateAsTree(editorStateWithSelection.getCurrentContent());
-      expect(tree).toMatchSnapshot();
+      const contentStateObj = getContentAsObject(editorStateWithSelection);
+      expect(contentStateObj).toMatchSnapshot();
     });
     it('Test setTextAlignment function', () => {
       const newEditorState = setTextAlignment(editorStateWithSelection, 'right');
-      const tree = getContentStateAsTree(newEditorState.getCurrentContent());
-      expect(tree).toMatchSnapshot();
+      const contentStateObj = getContentAsObject(newEditorState);
+      expect(contentStateObj).toMatchSnapshot();
     });
     it('Test getAnchorBlockData function', () => {
       const anchorBlockData = getAnchorBlockData(editorStateWithSelection);
-      const tree = renderer.create(<div>{JSON.stringify(anchorBlockData)}</div>).toJSON();
-      expect(tree).toMatchSnapshot();
+      expect(anchorBlockData).toMatchSnapshot();
     });
   });
 
@@ -160,14 +151,14 @@ describe('Test draftUtils functions', () => {
 
     it('Test replaceWithEmptyBlock function', () => {
       const newEditorState = replaceWithEmptyBlock(editorStateWithSelectionOnAtomic, '1u5r4');
-      const tree = getContentStateAsTree(newEditorState.getCurrentContent());
-      expect(tree).toMatchSnapshot();
+      const contentStateObj = getContentAsObject(newEditorState);
+      expect(contentStateObj).toMatchSnapshot();
     });
 
     it('Test deleteBlock function', () => {
       const newEditorState = deleteBlock(editorState, '1u5r4');
-      const tree = getContentStateAsTree(newEditorState.getCurrentContent());
-      expect(tree).toMatchSnapshot();
+      const contentStateObj = getContentAsObject(newEditorState);
+      expect(contentStateObj).toMatchSnapshot();
     });
 
     describe('Test isAtomicBlockFocused function', () => {
@@ -189,13 +180,11 @@ describe('Test draftUtils functions', () => {
 
       it('should return the first block for editor state without selection', () => {
         const selectedBlocks = getSelectedBlocks(editorState);
-        const tree = renderer.create(<div>{JSON.stringify(selectedBlocks)}</div>).toJSON();
-        expect(tree).toMatchSnapshot();
+        expect(selectedBlocks).toMatchSnapshot();
       });
       it('should return array with the selected blocks', () => {
         const selectedBlocks = getSelectedBlocks(editorWithSelectedBlocks);
-        const tree = renderer.create(<div>{JSON.stringify(selectedBlocks)}</div>).toJSON();
-        expect(tree).toMatchSnapshot();
+        expect(selectedBlocks).toMatchSnapshot();
       });
     });
   });

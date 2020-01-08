@@ -1,73 +1,525 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Test draftUtils functions Test draftUtils Alignment functions Test getAnchorBlockData function 1`] = `
-<div>
-  {"textAlignment":"left"}
-</div>
+Object {
+  "textAlignment": "left",
+}
 `;
 
 exports[`Test draftUtils functions Test draftUtils Alignment functions Test getTextAlignment function 1`] = `
-<div>
-  {"blocks":[{"key":"50k2j","text":"I am text without alignment","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{"textAlignment":"left"}},{"key":"civd5","text":"I am text with left alignment","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{"textAlignment":"left"}},{"key":"ehr1q","text":"I am text with center alignment","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{"textAlignment":"center"}},{"key":"bmg0d","text":"I am text with right alignment","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{"textAlignment":"right"}},{"key":"e2imv","text":"I am text with justify alignment","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{"textAlignment":"justify"}}],"entityMap":{}}
-</div>
+Object {
+  "blocks": Array [
+    Object {
+      "data": Object {
+        "textAlignment": "left",
+      },
+      "depth": 0,
+      "entityRanges": Array [],
+      "inlineStyleRanges": Array [],
+      "key": "50k2j",
+      "text": "I am text without alignment",
+      "type": "unstyled",
+    },
+    Object {
+      "data": Object {
+        "textAlignment": "left",
+      },
+      "depth": 0,
+      "entityRanges": Array [],
+      "inlineStyleRanges": Array [],
+      "key": "civd5",
+      "text": "I am text with left alignment",
+      "type": "unstyled",
+    },
+    Object {
+      "data": Object {
+        "textAlignment": "center",
+      },
+      "depth": 0,
+      "entityRanges": Array [],
+      "inlineStyleRanges": Array [],
+      "key": "ehr1q",
+      "text": "I am text with center alignment",
+      "type": "unstyled",
+    },
+    Object {
+      "data": Object {
+        "textAlignment": "right",
+      },
+      "depth": 0,
+      "entityRanges": Array [],
+      "inlineStyleRanges": Array [],
+      "key": "bmg0d",
+      "text": "I am text with right alignment",
+      "type": "unstyled",
+    },
+    Object {
+      "data": Object {
+        "textAlignment": "justify",
+      },
+      "depth": 0,
+      "entityRanges": Array [],
+      "inlineStyleRanges": Array [],
+      "key": "e2imv",
+      "text": "I am text with justify alignment",
+      "type": "unstyled",
+    },
+  ],
+  "entityMap": Object {},
+}
 `;
 
 exports[`Test draftUtils functions Test draftUtils Alignment functions Test setTextAlignment function 1`] = `
-<div>
-  {"blocks":[{"key":"50k2j","text":"I am text without alignment","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{"textAlignment":"right"}},{"key":"civd5","text":"I am text with left alignment","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{"textAlignment":"left"}},{"key":"ehr1q","text":"I am text with center alignment","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{"textAlignment":"center"}},{"key":"bmg0d","text":"I am text with right alignment","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{"textAlignment":"right"}},{"key":"e2imv","text":"I am text with justify alignment","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{"textAlignment":"justify"}}],"entityMap":{}}
-</div>
+Object {
+  "blocks": Array [
+    Object {
+      "data": Object {
+        "textAlignment": "right",
+      },
+      "depth": 0,
+      "entityRanges": Array [],
+      "inlineStyleRanges": Array [],
+      "key": "50k2j",
+      "text": "I am text without alignment",
+      "type": "unstyled",
+    },
+    Object {
+      "data": Object {
+        "textAlignment": "left",
+      },
+      "depth": 0,
+      "entityRanges": Array [],
+      "inlineStyleRanges": Array [],
+      "key": "civd5",
+      "text": "I am text with left alignment",
+      "type": "unstyled",
+    },
+    Object {
+      "data": Object {
+        "textAlignment": "center",
+      },
+      "depth": 0,
+      "entityRanges": Array [],
+      "inlineStyleRanges": Array [],
+      "key": "ehr1q",
+      "text": "I am text with center alignment",
+      "type": "unstyled",
+    },
+    Object {
+      "data": Object {
+        "textAlignment": "right",
+      },
+      "depth": 0,
+      "entityRanges": Array [],
+      "inlineStyleRanges": Array [],
+      "key": "bmg0d",
+      "text": "I am text with right alignment",
+      "type": "unstyled",
+    },
+    Object {
+      "data": Object {
+        "textAlignment": "justify",
+      },
+      "depth": 0,
+      "entityRanges": Array [],
+      "inlineStyleRanges": Array [],
+      "key": "e2imv",
+      "text": "I am text with justify alignment",
+      "type": "unstyled",
+    },
+  ],
+  "entityMap": Object {},
+}
 `;
 
 exports[`Test draftUtils functions Test draftUtils Blocks functions Test deleteBlock function 1`] = `
-<div>
-  {"blocks":[{"key":"8s1v3","text":"","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"bsrvp","text":"","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}}],"entityMap":{}}
-</div>
+Object {
+  "blocks": Array [
+    Object {
+      "data": Object {},
+      "depth": 0,
+      "entityRanges": Array [],
+      "inlineStyleRanges": Array [],
+      "key": "8s1v3",
+      "text": "",
+      "type": "unstyled",
+    },
+    Object {
+      "data": Object {},
+      "depth": 0,
+      "entityRanges": Array [],
+      "inlineStyleRanges": Array [],
+      "key": "bsrvp",
+      "text": "",
+      "type": "unstyled",
+    },
+  ],
+  "entityMap": Object {},
+}
 `;
 
 exports[`Test draftUtils functions Test draftUtils Blocks functions Test getSelectedBlocks function should return array with the selected blocks 1`] = `
-<div>
-  [{"key":"1u5r4","type":"atomic","text":" ","characterList":[{"style":[],"entity":"2"}],"depth":0,"data":{}},{"key":"bsrvp","type":"unstyled","text":"","characterList":[],"depth":0,"data":{}}]
-</div>
+Array [
+  Immutable.Record {
+    "key": "1u5r4",
+    "type": "atomic",
+    "text": " ",
+    "characterList": Immutable.List [
+      Immutable.Record {
+        "style": Immutable.OrderedSet [],
+        "entity": "2",
+      },
+    ],
+    "depth": 0,
+    "data": Immutable.Map {},
+  },
+  Immutable.Record {
+    "key": "bsrvp",
+    "type": "unstyled",
+    "text": "",
+    "characterList": Immutable.List [],
+    "depth": 0,
+    "data": Immutable.Map {},
+  },
+]
 `;
 
 exports[`Test draftUtils functions Test draftUtils Blocks functions Test getSelectedBlocks function should return the first block for editor state without selection 1`] = `
-<div>
-  [{"key":"8s1v3","type":"unstyled","text":"","characterList":[],"depth":0,"data":{}}]
-</div>
+Array [
+  Immutable.Record {
+    "key": "8s1v3",
+    "type": "unstyled",
+    "text": "",
+    "characterList": Immutable.List [],
+    "depth": 0,
+    "data": Immutable.Map {},
+  },
+]
 `;
 
 exports[`Test draftUtils functions Test draftUtils Blocks functions Test replaceWithEmptyBlock function 1`] = `
-<div>
-  {"blocks":[{"key":"8s1v3","text":"","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"1u5r4","text":"","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"bsrvp","text":"","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}}],"entityMap":{}}
-</div>
+Object {
+  "blocks": Array [
+    Object {
+      "data": Object {},
+      "depth": 0,
+      "entityRanges": Array [],
+      "inlineStyleRanges": Array [],
+      "key": "8s1v3",
+      "text": "",
+      "type": "unstyled",
+    },
+    Object {
+      "data": Object {},
+      "depth": 0,
+      "entityRanges": Array [],
+      "inlineStyleRanges": Array [],
+      "key": "1u5r4",
+      "text": "",
+      "type": "unstyled",
+    },
+    Object {
+      "data": Object {},
+      "depth": 0,
+      "entityRanges": Array [],
+      "inlineStyleRanges": Array [],
+      "key": "bsrvp",
+      "text": "",
+      "type": "unstyled",
+    },
+  ],
+  "entityMap": Object {},
+}
 `;
 
 exports[`Test draftUtils functions Test draftUtils Links functions Test getLinkDataInSelection function 1`] = `
-<div>
-  {"url":"www.google.com","target":"_blank","rel":"noopener"}
-</div>
+Object {
+  "rel": "noopener",
+  "target": "_blank",
+  "url": "www.google.com",
+}
 `;
 
 exports[`Test draftUtils functions Test draftUtils Links functions Test insertLinkAtCurrentSelection function 1`] = `
-<div>
-  {"blocks":[{"key":"50k2j","text":"Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition.","type":"unstyled","depth":0,"inlineStyleRanges":[{"offset":0,"length":7,"style":"UNDERLINE"}],"entityRanges":[{"offset":0,"length":7,"key":0}],"data":{}},{"key":"d4hhc","text":"Bring to the table win-win survival strategies to ensure proactive domination.","type":"header-two","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"2s6ta","text":"At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution.","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"87u","text":"Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment.","type":"header-three","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"am5bt","text":"Capitalize on low hanging fruit to identify a ballpark value added activity to beta test.","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}}],"entityMap":{"0":{"type":"LINK","mutability":"MUTABLE","data":{"url":"www.google.com","target":"_blank","rel":"noopener"}}}}
-</div>
+Object {
+  "blocks": Array [
+    Object {
+      "data": Object {},
+      "depth": 0,
+      "entityRanges": Array [
+        Object {
+          "key": 0,
+          "length": 7,
+          "offset": 0,
+        },
+      ],
+      "inlineStyleRanges": Array [
+        Object {
+          "length": 7,
+          "offset": 0,
+          "style": "UNDERLINE",
+        },
+      ],
+      "key": "50k2j",
+      "text": "Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition.",
+      "type": "unstyled",
+    },
+    Object {
+      "data": Object {},
+      "depth": 0,
+      "entityRanges": Array [],
+      "inlineStyleRanges": Array [],
+      "key": "d4hhc",
+      "text": "Bring to the table win-win survival strategies to ensure proactive domination.",
+      "type": "header-two",
+    },
+    Object {
+      "data": Object {},
+      "depth": 0,
+      "entityRanges": Array [],
+      "inlineStyleRanges": Array [],
+      "key": "2s6ta",
+      "text": "At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution.",
+      "type": "unstyled",
+    },
+    Object {
+      "data": Object {},
+      "depth": 0,
+      "entityRanges": Array [],
+      "inlineStyleRanges": Array [],
+      "key": "87u",
+      "text": "Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment.",
+      "type": "header-three",
+    },
+    Object {
+      "data": Object {},
+      "depth": 0,
+      "entityRanges": Array [],
+      "inlineStyleRanges": Array [],
+      "key": "am5bt",
+      "text": "Capitalize on low hanging fruit to identify a ballpark value added activity to beta test.",
+      "type": "unstyled",
+    },
+  ],
+  "entityMap": Object {
+    "0": Object {
+      "data": Object {
+        "rel": "noopener",
+        "target": "_blank",
+        "url": "www.google.com",
+      },
+      "mutability": "MUTABLE",
+      "type": "LINK",
+    },
+  },
+}
 `;
 
 exports[`Test draftUtils functions Test draftUtils Links functions Test insertLinkInPosition function 1`] = `
-<div>
-  {"blocks":[{"key":"50k2j","text":"Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition.","type":"unstyled","depth":0,"inlineStyleRanges":[{"offset":0,"length":7,"style":"UNDERLINE"}],"entityRanges":[{"offset":0,"length":7,"key":0}],"data":{}},{"key":"d4hhc","text":"Bring to the table win-win survival strategies to ensure proactive domination.","type":"header-two","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"2s6ta","text":"At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution.","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"87u","text":"Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment.","type":"header-three","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"am5bt","text":"Capitalize on low hanging fruit to identify a ballpark value added activity to beta test.","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}}],"entityMap":{"0":{"type":"LINK","mutability":"MUTABLE","data":{"url":"www.google.com","target":"_blank","rel":"noopener"}}}}
-</div>
+Object {
+  "blocks": Array [
+    Object {
+      "data": Object {},
+      "depth": 0,
+      "entityRanges": Array [
+        Object {
+          "key": 0,
+          "length": 7,
+          "offset": 0,
+        },
+      ],
+      "inlineStyleRanges": Array [
+        Object {
+          "length": 7,
+          "offset": 0,
+          "style": "UNDERLINE",
+        },
+      ],
+      "key": "50k2j",
+      "text": "Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition.",
+      "type": "unstyled",
+    },
+    Object {
+      "data": Object {},
+      "depth": 0,
+      "entityRanges": Array [],
+      "inlineStyleRanges": Array [],
+      "key": "d4hhc",
+      "text": "Bring to the table win-win survival strategies to ensure proactive domination.",
+      "type": "header-two",
+    },
+    Object {
+      "data": Object {},
+      "depth": 0,
+      "entityRanges": Array [],
+      "inlineStyleRanges": Array [],
+      "key": "2s6ta",
+      "text": "At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution.",
+      "type": "unstyled",
+    },
+    Object {
+      "data": Object {},
+      "depth": 0,
+      "entityRanges": Array [],
+      "inlineStyleRanges": Array [],
+      "key": "87u",
+      "text": "Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment.",
+      "type": "header-three",
+    },
+    Object {
+      "data": Object {},
+      "depth": 0,
+      "entityRanges": Array [],
+      "inlineStyleRanges": Array [],
+      "key": "am5bt",
+      "text": "Capitalize on low hanging fruit to identify a ballpark value added activity to beta test.",
+      "type": "unstyled",
+    },
+  ],
+  "entityMap": Object {
+    "0": Object {
+      "data": Object {
+        "rel": "noopener",
+        "target": "_blank",
+        "url": "www.google.com",
+      },
+      "mutability": "MUTABLE",
+      "type": "LINK",
+    },
+  },
+}
 `;
 
 exports[`Test draftUtils functions Test draftUtils Links functions Test removeLinksInSelection function should not remove links outside the selection 1`] = `
-<div>
-  {"blocks":[{"key":"50k2j","text":"Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition.","type":"unstyled","depth":0,"inlineStyleRanges":[{"offset":0,"length":7,"style":"UNDERLINE"}],"entityRanges":[{"offset":0,"length":7,"key":0}],"data":{}},{"key":"d4hhc","text":"Bring to the table win-win survival strategies to ensure proactive domination.","type":"header-two","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"2s6ta","text":"At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution.","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"87u","text":"Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment.","type":"header-three","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"am5bt","text":"Capitalize on low hanging fruit to identify a ballpark value added activity to beta test.","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}}],"entityMap":{"0":{"type":"LINK","mutability":"MUTABLE","data":{"url":"www.google.com","target":"_blank","rel":"noopener"}}}}
-</div>
+Object {
+  "blocks": Array [
+    Object {
+      "data": Object {},
+      "depth": 0,
+      "entityRanges": Array [
+        Object {
+          "key": 0,
+          "length": 7,
+          "offset": 0,
+        },
+      ],
+      "inlineStyleRanges": Array [
+        Object {
+          "length": 7,
+          "offset": 0,
+          "style": "UNDERLINE",
+        },
+      ],
+      "key": "50k2j",
+      "text": "Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition.",
+      "type": "unstyled",
+    },
+    Object {
+      "data": Object {},
+      "depth": 0,
+      "entityRanges": Array [],
+      "inlineStyleRanges": Array [],
+      "key": "d4hhc",
+      "text": "Bring to the table win-win survival strategies to ensure proactive domination.",
+      "type": "header-two",
+    },
+    Object {
+      "data": Object {},
+      "depth": 0,
+      "entityRanges": Array [],
+      "inlineStyleRanges": Array [],
+      "key": "2s6ta",
+      "text": "At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution.",
+      "type": "unstyled",
+    },
+    Object {
+      "data": Object {},
+      "depth": 0,
+      "entityRanges": Array [],
+      "inlineStyleRanges": Array [],
+      "key": "87u",
+      "text": "Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment.",
+      "type": "header-three",
+    },
+    Object {
+      "data": Object {},
+      "depth": 0,
+      "entityRanges": Array [],
+      "inlineStyleRanges": Array [],
+      "key": "am5bt",
+      "text": "Capitalize on low hanging fruit to identify a ballpark value added activity to beta test.",
+      "type": "unstyled",
+    },
+  ],
+  "entityMap": Object {
+    "0": Object {
+      "data": Object {
+        "rel": "noopener",
+        "target": "_blank",
+        "url": "www.google.com",
+      },
+      "mutability": "MUTABLE",
+      "type": "LINK",
+    },
+  },
+}
 `;
 
 exports[`Test draftUtils functions Test draftUtils Links functions Test removeLinksInSelection function should remove link in selection 1`] = `
-<div>
-  {"blocks":[{"key":"50k2j","text":"Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition.","type":"unstyled","depth":0,"inlineStyleRanges":[{"offset":0,"length":7,"style":"UNDERLINE"}],"entityRanges":[],"data":{}},{"key":"d4hhc","text":"Bring to the table win-win survival strategies to ensure proactive domination.","type":"header-two","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"2s6ta","text":"At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution.","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"87u","text":"Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment.","type":"header-three","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"am5bt","text":"Capitalize on low hanging fruit to identify a ballpark value added activity to beta test.","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}}],"entityMap":{}}
-</div>
+Object {
+  "blocks": Array [
+    Object {
+      "data": Object {},
+      "depth": 0,
+      "entityRanges": Array [],
+      "inlineStyleRanges": Array [
+        Object {
+          "length": 7,
+          "offset": 0,
+          "style": "UNDERLINE",
+        },
+      ],
+      "key": "50k2j",
+      "text": "Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition.",
+      "type": "unstyled",
+    },
+    Object {
+      "data": Object {},
+      "depth": 0,
+      "entityRanges": Array [],
+      "inlineStyleRanges": Array [],
+      "key": "d4hhc",
+      "text": "Bring to the table win-win survival strategies to ensure proactive domination.",
+      "type": "header-two",
+    },
+    Object {
+      "data": Object {},
+      "depth": 0,
+      "entityRanges": Array [],
+      "inlineStyleRanges": Array [],
+      "key": "2s6ta",
+      "text": "At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution.",
+      "type": "unstyled",
+    },
+    Object {
+      "data": Object {},
+      "depth": 0,
+      "entityRanges": Array [],
+      "inlineStyleRanges": Array [],
+      "key": "87u",
+      "text": "Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment.",
+      "type": "header-three",
+    },
+    Object {
+      "data": Object {},
+      "depth": 0,
+      "entityRanges": Array [],
+      "inlineStyleRanges": Array [],
+      "key": "am5bt",
+      "text": "Capitalize on low hanging fruit to identify a ballpark value added activity to beta test.",
+      "type": "unstyled",
+    },
+  ],
+  "entityMap": Object {},
+}
 `;
