@@ -83,7 +83,7 @@ function insertLink(
       url,
       target,
       rel,
-    },
+    }, //
   });
 }
 
