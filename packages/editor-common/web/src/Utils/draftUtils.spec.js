@@ -30,7 +30,7 @@ describe('Test draftUtils functions', () => {
     renderer.create(getContentStateAsComp(contentState)).toJSON();
   const getStateFromObject = obj => {
     const anchorTarget = '_top';
-    const relValue = 'noreferrer'; //
+    const relValue = 'noreferrer';
     const normalizedState = normalizeInitialState(obj, {
       anchorTarget,
       relValue,
