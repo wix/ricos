@@ -15,17 +15,17 @@ const COMMAND_BY_SHORTCUT = [
   },
   {
     command: COMMANDS.ALIGN_LEFT,
-    modifiers: [MODIFIERS.COMMAND],
+    modifiers: [MODIFIERS.COMMAND, MODIFIERS.SHIFT],
     key: 'l',
   },
   {
     command: COMMANDS.ALIGN_RIGHT,
-    modifiers: [MODIFIERS.COMMAND],
+    modifiers: [MODIFIERS.COMMAND, MODIFIERS.SHIFT],
     key: 'r',
   },
   {
     command: COMMANDS.ALIGN_CENTER,
-    modifiers: [MODIFIERS.COMMAND],
+    modifiers: [MODIFIERS.COMMAND, MODIFIERS.SHIFT],
     key: 'e',
   },
   {
@@ -74,7 +74,7 @@ function getCommandByShortcut(shortcut, bindingMap) {
   return commands.length > 0 ? commands[0] : undefined;
 }
 
-export const keyBindingFn = customCommands => {
+export const createKeyBindingFn = customCommands => {
   const bindingMap = [...COMMAND_BY_SHORTCUT, ...customCommands];
   return e => {
     const shortcut = { modifiers: getModifiers(e), key: e.key };

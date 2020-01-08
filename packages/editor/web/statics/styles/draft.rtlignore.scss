@@ -62,6 +62,9 @@
     .public-DraftStyleDefault-block {
       position: relative;
       white-space: pre-wrap;
+      @include phone {
+        margin-right: 10px;
+      }
     }
 
     .public-DraftStyleDefault-ltr {
@@ -75,18 +78,18 @@
       /*!rtl:begin:ignore*/
       direction: rtl;
       text-align: right;
-      /*!rtl:end:ignore*/
     }
 
     .public-DraftStyleDefault-listLTR {
       /*!rtl:begin:ignore*/
       direction: ltr;
-      /*!rtl:end:ignore*/
+      margin-left: 40px;
     }
 
     .public-DraftStyleDefault-listRTL {
       /*!rtl:begin:ignore*/
       direction: rtl;
+      margin-right: 40px;
       /*!rtl:end:ignore*/
     }
 
@@ -94,10 +97,7 @@
     .public-DraftStyleDefault-ul {
       margin: 0;
       padding: 0;
-
-      & > * {
-        margin-inline-start: 40px;
-      }
+      direction: ltr;
     }
   }
 }

@@ -1,9 +1,8 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { isEqual } from 'lodash';
-import { mergeStyles, Context, validate } from 'wix-rich-content-common';
+import { mergeStyles, validate, Context, pluginFileUploadSchema } from 'wix-rich-content-common';
 import { DocumentIcon, LoaderIcon } from './icons';
-import schema from '../statics/data-schema.json';
 import styles from '../statics/styles/file-upload-viewer.scss';
 
 const getNameWithoutType = fileName => {
@@ -23,13 +22,13 @@ class FileUploadViewer extends PureComponent {
   constructor(props) {
     super(props);
     const { componentData } = props;
-    validate(componentData, schema);
+    validate(componentData, pluginFileUploadSchema);
     this.iframeRef = React.createRef();
   }
 
   componentWillReceiveProps(nextProps) {
     if (!isEqual(nextProps.componentData, this.props.componentData)) {
-      validate(nextProps.componentData, schema);
+      validate(nextProps.componentData, pluginFileUploadSchema);
     }
   }
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import GiphyViewer from './giphy-viewer';
-import { GIPHY_TYPE } from './constants';
+import { GIPHY_TYPE, DEFAULTS } from './constants';
 
 class GiphyComponent extends Component {
   static type = {
@@ -10,11 +10,9 @@ class GiphyComponent extends Component {
 
   constructor(props) {
     super(props);
-    const isPlayable = !props.blockProps || props.blockProps.readOnly === true;
     this.state = {
       isLoading: false,
       isLoaded: false,
-      isPlayable,
     };
   }
 
@@ -49,8 +47,7 @@ class GiphyComponent extends Component {
 
 GiphyComponent.propTypes = {
   componentData: PropTypes.object.isRequired,
-  blockProps: PropTypes.object.isRequired,
   onClick: PropTypes.func.isRequired,
 };
 
-export { GiphyComponent as Component };
+export { GiphyComponent as Component, DEFAULTS };

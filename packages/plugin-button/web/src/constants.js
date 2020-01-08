@@ -11,21 +11,7 @@ export const COLOR_PICKER_TYPE = {
   BORDER_COLOR: 'borderColor',
   BACKGROUND_COLOR: 'backgroundColor',
 };
-export const DEFAULTS = {
-  config: {
-    alignment: ALIGN_CENTER,
-    size: 'small',
-    width: 'fit-content',
-  },
-  button: {
-    activeButton: 0,
-    borderRadius: 0,
-    borderWidth: 0,
-    padding: 12,
-    buttonText: 'Click Me',
-    url: '',
-  },
-};
+
 export const COLORS = {
   color1: '#FEFDFD',
   color2: '#D5D4D4',
@@ -38,3 +24,78 @@ export const COLORS = {
   color9: '#0141AA',
   color10: '#012055',
 };
+
+export const getDefaultComponentData = (rel, target) => {
+  return {
+    config: {
+      alignment: ALIGN_CENTER,
+      size: 'small',
+      width: 'fit-content',
+    },
+    button: {
+      settings: {
+        buttonText: 'Click Me',
+        url: '',
+        rel,
+        target,
+      },
+      design: {
+        activeButton: 0,
+        borderRadius: 0,
+        borderWidth: 0,
+        padding: 12,
+        background: COLORS.color8,
+        color: COLORS.color1,
+        borderColor: COLORS.color8,
+      },
+    },
+  };
+};
+
+export const buttonPreviews = colors => [
+  {
+    className: 'button_primary',
+    border: '0px solid #' + colors.color8,
+    borderRadius: '0px',
+    borderWidth: '0px',
+    background: colors.color8,
+    color: colors.color1,
+    borderColor: colors.color8,
+  },
+  {
+    className: 'button_secondary',
+    border: '1px solid ' + colors.color8,
+    borderRadius: '0px',
+    borderWidth: '1px',
+    background: colors.color1,
+    color: colors.color8,
+    borderColor: colors.color8,
+  },
+  {
+    className: 'button_secondary',
+    border: '1px solid ' + colors.color8,
+    borderRadius: '0px',
+    borderWidth: '1px',
+    background: colors.color7,
+    color: colors.color8,
+    borderColor: colors.color8,
+  },
+  {
+    className: 'button_secondary',
+    border: '1px solid ' + colors.color8,
+    borderRadius: '10px',
+    borderWidth: '1px',
+    background: colors.color7,
+    color: colors.color8,
+    borderColor: colors.color8,
+  },
+  {
+    className: 'button_secondary',
+    border: '1px solid ' + colors.color8,
+    borderWidth: '5px',
+    borderRadius: '0px',
+    background: colors.color1,
+    color: colors.color8,
+    borderColor: colors.color8,
+  },
+];

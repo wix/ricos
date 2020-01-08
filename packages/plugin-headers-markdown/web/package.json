@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-plugin-headers-markdown",
-  "version": "6.6.0",
+  "version": "6.6.5",
   "author": {
     "name": "Shaul Goral",
     "email": "shaulg@wix.com"
@@ -26,7 +26,7 @@
     "build": "rollup --environment MODULE_NAME:plugin-headers-markdown -c ../../../rollup.config.js",
     "build:dev": "cross-env NODE_ENV=development npm run build",
     "build:analyze": "npm run build -- --environment MODULE_ANALYZE && open stats.html",
-    "watch": "cross-env NODE_ENV=development MODULE_WATCH=1 npm run build -- --watch",
+    "watch": "cross-env NODE_ENV=development MODULE_WATCH=1 npm run build -- --watch.chokidar",
     "release": "wnpm-release --no-shrinkwrap",
     "lint": "eslint 'src/**/*.{js,jsx}'"
   },
@@ -48,8 +48,8 @@
     "rollup": "1.20.3"
   },
   "dependencies": {
-    "wix-rich-content-common": "6.6.0",
-    "wix-rich-content-editor-common": "6.6.0"
+    "wix-rich-content-common": "6.6.5",
+    "wix-rich-content-editor-common": "6.6.5"
   },
   "unpkg": true,
   "publishConfig": {

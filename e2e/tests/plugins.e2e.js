@@ -1,3 +1,4 @@
+/*global cy*/
 import {
   PLUGIN_COMPONENT,
   PLUGIN_TOOLBAR_BUTTONS,
@@ -31,48 +32,60 @@ describe('plugins', () => {
       eyesOpen(this);
     });
 
-    beforeEach('load editor', () => cy.loadEditor('images'));
+    beforeEach('load editor', () => cy.loadEditorAndViewer('images'));
 
     after(() => cy.eyesClose());
 
-    it('render image plugin toolbar', function() {
-      cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE)
-        .shrinkPlugin()
-        .hideTooltip();
-      cy.eyesCheckWindow(this.test.title);
-    });
-
-    it('render settings', function() {
-      cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE)
-        .shrinkPlugin()
-        .openImageSettings();
+    it('render image toolbar and settings', function() {
+      cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE).shrinkPlugin();
+      cy.eyesCheckWindow(this.test.title + '  - plugin toolbar');
+      cy.openImageSettings();
       cy.get(`[data-hook=${IMAGE_SETTINGS.PREVIEW}]:first`);
-      cy.eyesCheckWindow(this.test.title);
+      cy.eyesCheckWindow(this.test.title + ' - settings');
+      cy.addImageTitle();
+      cy.eyesCheckWindow(this.test.title + ' - add image title');
+      cy.editImageTitle();
+      cy.eyesCheckWindow(this.test.title + ' - in plugin editing');
+      cy.openImageSettings(false).deleteImageTitle();
+      cy.eyesCheckWindow(this.test.title + ' - delete image title');
+      cy.openImageSettings(false).addImageLink();
+      cy.eyesCheckWindow(this.test.title + ' - add a link');
+    });
+  });
+
+  context('full screen', () => {
+    before(function() {
+      eyesOpen(this);
     });
 
-    it('allow to add a title', function() {
-      cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE)
-        .shrinkPlugin()
-        .openImageSettings()
-        .addImageTitle();
-      cy.eyesCheckWindow(this.test.title);
+    after(() => cy.eyesClose());
+
+    context('image full screen', () => {
+      beforeEach('load editor', () => cy.loadEditorAndViewer('images'));
+
+      it('expand image on full screen', function() {
+        cy.get(`[data-hook=${PLUGIN_COMPONENT.IMAGE}]:last`)
+          .parent()
+          .click();
+        cy.eyesCheckWindow(this.test.title);
+      });
     });
 
-    it('allow to add a link', function() {
-      cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE)
-        .shrinkPlugin()
-        .openImageSettings()
-        .addImageLink();
-      cy.eyesCheckWindow(this.test.title);
-    });
+    context('gallery full screen', () => {
+      beforeEach('load editor', () =>
+        cy
+          .loadEditorAndViewer('gallery')
+          .get(`[data-hook=${'image-item'}]:first`)
+          .get(`[data-hook=${'image-item'}]`)
+          .eq(1)
+      );
 
-    it('allow to delete a title', function() {
-      cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE)
-        .shrinkPlugin()
-        .openImageSettings()
-        .addImageTitle();
-      cy.openImageSettings().deleteImageTitle();
-      cy.eyesCheckWindow(this.test.title);
+      it('expand gallery image on full screen', function() {
+        cy.get(`[data-hook=${'image-item'}]:last`)
+          .parent()
+          .click();
+        cy.eyesCheckWindow(this.test.title);
+      });
     });
   });
 
@@ -81,39 +94,24 @@ describe('plugins', () => {
       eyesOpen(this);
     });
 
-    beforeEach('load editor', () =>
-      cy
-        .loadEditorAndViewer('gallery')
-        .get(`[data-hook=${'image-item'}]:first`)
-        .get(`[data-hook=${'image-item'}]`)
-        .eq(1)
-    );
-
     after(() => cy.eyesClose());
 
-    it('render gallery plugin toolbar', function() {
-      cy.openPluginToolbar(PLUGIN_COMPONENT.GALLERY)
-        .shrinkPlugin()
-        .hideTooltip();
-      cy.eyesCheckWindow(this.test.title);
-    });
-
-    it('render advanced gallery settings', function() {
-      cy.openPluginToolbar(PLUGIN_COMPONENT.GALLERY)
-        .shrinkPlugin()
+    it('render gallery plugin', function() {
+      cy.loadEditorAndViewer('gallery')
         .get(`[data-hook=${'image-item'}]:first`)
         .get(`[data-hook=${'image-item'}]`)
-        .eq(1)
-        .openGalleryAdvancedSettings()
-        .get('.__react_component_tooltip.show')
-        .should('not.exist');
-      cy.eyesCheckWindow(this.test.title);
+        .eq(1);
+      cy.openPluginToolbar(PLUGIN_COMPONENT.GALLERY).shrinkPlugin();
+      cy.eyesCheckWindow(this.test.title + ' toolbar');
+      cy.openGalleryAdvancedSettings();
+      cy.eyesCheckWindow(this.test.title + ' settings');
     });
 
     context('organize media', () => {
-      beforeEach('load editor', () =>
-        cy
-          .loadEditorAndViewer('gallery')
+      it('allow to manipulate the media items', function() {
+        const firstImage = `[data-hook=${GALLERY_SETTINGS.IMAGE}]:first`;
+        const anyImage = `[data-hook=${GALLERY_SETTINGS.IMAGE}]`;
+        cy.loadEditorAndViewer('gallery')
           .openPluginToolbar(PLUGIN_COMPONENT.GALLERY)
           .shrinkPlugin()
           .get(`[data-hook=${'image-item'}]:first`)
@@ -121,53 +119,31 @@ describe('plugins', () => {
           .eq(1)
           .openGalleryAdvancedSettings()
           .openGallerySettings()
-          .get(`[data-hook=${GALLERY_SETTINGS.IMAGE}]:first`)
-          .get(`[data-hook=${GALLERY_SETTINGS.IMAGE}]`)
-          .eq(1)
-      );
-
-      it('render gallery settings', function() {
-        cy.get(`[data-hook=${GALLERY_SETTINGS.IMAGE}]:first`);
-        cy.get(`[data-hook=${GALLERY_SETTINGS.IMAGE}]`).eq(1);
-        cy.eyesCheckWindow(this.test.parent.title + ' - ' + this.test.title);
-      });
-
-      it('allow to select an item', function() {
-        cy.get(`[data-hook=${GALLERY_SETTINGS.IMAGE}]:first`).click();
+          .get(firstImage)
+          .get(anyImage)
+          .eq(1);
+        cy.eyesCheckWindow(this.test.parent.title + ' - render settings');
+        cy.get(firstImage).click();
         cy.get(`[data-hook=${GALLERY_SETTINGS.DELETE}]`);
-        cy.eyesCheckWindow(this.test.parent.title + ' - ' + this.test.title);
-      });
-
-      it('allow to select all items', function() {
+        cy.eyesCheckWindow(this.test.parent.title + ' - select an item');
         cy.get(`[data-hook=${GALLERY_SETTINGS.SELECT_ALL}]`).click();
-        cy.eyesCheckWindow(this.test.parent.title + ' - ' + this.test.title);
-      });
-
-      it('allow to delete an item', function() {
-        cy.get(`[data-hook=${GALLERY_SETTINGS.IMAGE}]:first`).click();
+        cy.eyesCheckWindow(this.test.parent.title + ' - select all items');
+        cy.get(`[data-hook=${GALLERY_SETTINGS.DESELECT}]`).click();
+        cy.dragAndDrop(firstImage, anyImage, 1);
+        cy.eyesCheckWindow(this.test.parent.title + ' - deselect items');
+        cy.get(firstImage).click();
         cy.get(`[data-hook=${GALLERY_SETTINGS.DELETE}]`).click();
-        cy.get(`[data-hook=${GALLERY_SETTINGS.IMAGE}]:first`);
-        cy.eyesCheckWindow(this.test.parent.title + ' - ' + this.test.title);
-      });
-
-      it('allow to delete all items', function() {
+        cy.get(firstImage);
+        cy.eyesCheckWindow(this.test.parent.title + ' - delete an item');
         cy.get(`[data-hook=${GALLERY_SETTINGS.SELECT_ALL}]`).click();
         cy.get(`[data-hook=${GALLERY_SETTINGS.DELETE}]`).click();
-        cy.eyesCheckWindow(this.test.parent.title + ' - ' + this.test.title);
-      });
-
-      it('allow to re-organize', function() {
-        const src = `[data-hook=${GALLERY_SETTINGS.IMAGE}]:first`;
-        const dest = `[data-hook=${GALLERY_SETTINGS.IMAGE}]`;
-        cy.dragAndDrop(src, dest, 1);
-        cy.eyesCheckWindow(this.test.parent.title + ' - ' + this.test.title);
+        cy.eyesCheckWindow(this.test.parent.title + ' - delete all items');
       });
     });
 
-    context('image settings', () => {
-      beforeEach('load editor', () =>
-        cy
-          .loadEditorAndViewer('gallery')
+    context('media settings', () => {
+      it('allow to update media content', function() {
+        cy.loadEditorAndViewer('gallery')
           .openPluginToolbar(PLUGIN_COMPONENT.GALLERY)
           .shrinkPlugin()
           .get(`[data-hook=${'image-item'}]:first`)
@@ -176,32 +152,21 @@ describe('plugins', () => {
           .openGalleryAdvancedSettings()
           .openGallerySettings()
           .openGalleryImageSettings()
-          .get(`[data-hook=${GALLERY_IMAGE_SETTINGS.PREVIEW}]:first`)
-      );
-
-      it('render gallery image settings', function() {
-        cy.get(`[data-hook=${GALLERY_IMAGE_SETTINGS.PREVIEW}]:first`);
-        cy.eyesCheckWindow(this.test.parent.title + ' - ' + this.test.title);
-      });
-
-      // eslint-disable-next-line mocha/no-skipped-tests
-      it.skip('allow to add a title', function() {
-        cy.addGalleryImageTitle().checkTitle();
-        cy.eyesCheckWindow(this.test.parent.title + ' - ' + this.test.title);
-      });
-
-      it('allow to delete an image', function() {
+          .get(`[data-hook=${GALLERY_IMAGE_SETTINGS.PREVIEW}]:first`);
+        cy.eyesCheckWindow(this.test.parent.title + ' - render item settings');
         cy.get(`[data-hook=${GALLERY_IMAGE_SETTINGS.DELETE}]`).click({ force: true });
         cy.get(`[data-hook=${GALLERY_IMAGE_SETTINGS.PREVIEW}]:first`);
-        cy.eyesCheckWindow(this.test.parent.title + ' - ' + this.test.title);
-      });
-
-      it('allow to delete all images', function() {
-        cy.get(`[data-hook=${GALLERY_IMAGE_SETTINGS.DELETE}]`).click({ force: true });
+        cy.eyesCheckWindow(this.test.parent.title + ' - delete a media item');
         cy.get(`[data-hook=${GALLERY_IMAGE_SETTINGS.DELETE}]`).click({ force: true });
         cy.get(`[data-hook=${GALLERY_SETTINGS.UPLOAD}]`);
-        cy.eyesCheckWindow(this.test.parent.title + ' - ' + this.test.title);
+        cy.eyesCheckWindow(this.test.parent.title + ' - delete all items');
       });
+      // TODO: title and link image tests
+      // // eslint-disable-next-line mocha/no-skipped-tests
+      // it.skip('allow to add a title', function() {
+      //   cy.addGalleryImageTitle().checkTitle();
+      //   cy.eyesCheckWindow(this.test.parent.title + ' - ' + this.test.title);
+      // });
     });
   });
 
@@ -210,7 +175,7 @@ describe('plugins', () => {
       eyesOpen(this);
     });
 
-    beforeEach('load editor', () => cy.loadEditor('empty'));
+    beforeEach('load editor', () => cy.loadEditorAndViewer('empty'));
 
     after(() => cy.eyesClose());
 
@@ -223,9 +188,11 @@ describe('plugins', () => {
       cy.openVideoUploadModal().addVideoFromURI();
       cy.shrinkPlugin();
       cy.waitForVideoToLoad();
+      cy.focusEditor().enterParagraphs(['Will this fix the flakiness?']);
       cy.eyesCheckWindow(this.test.title);
     });
 
+    // TODO: remove skip once custom mock upload is stablized
     // eslint-disable-next-line mocha/no-skipped-tests
     it.skip('enable to add a custom video', function() {
       cy.openVideoUploadModal().addCustomVideo();
@@ -240,7 +207,7 @@ describe('plugins', () => {
       eyesOpen(this);
     });
 
-    beforeEach('load editor', () => cy.loadEditor('empty'));
+    beforeEach('load editor', () => cy.loadEditorAndViewer('empty'));
 
     after(() => cy.eyesClose());
 
@@ -253,6 +220,7 @@ describe('plugins', () => {
       cy.openSoundCloudModal().addSoundCloud();
       cy.waitForVideoToLoad();
       cy.shrinkPlugin();
+      cy.focusEditor().enterParagraphs(['Will this fix the flakiness?']);
       cy.eyesCheckWindow(this.test.title);
     });
   });
@@ -265,7 +233,7 @@ describe('plugins', () => {
     after(() => cy.eyesClose());
 
     it('render html plugin toolbar', function() {
-      cy.loadEditor('empty').addHtml();
+      cy.loadEditorAndViewer('empty').addHtml();
       cy.get(`[data-hook*=${PLUGIN_TOOLBAR_BUTTONS.EDIT}]`)
         .click({ multiple: true })
         .click();
@@ -273,8 +241,7 @@ describe('plugins', () => {
     });
   });
 
-  // eslint-disable-next-line mocha/no-skipped-tests
-  context.skip('divider', () => {
+  context('divider', () => {
     before(function() {
       eyesOpen(this);
     });
@@ -282,7 +249,7 @@ describe('plugins', () => {
     after(() => cy.eyesClose());
 
     it('render plugin toolbar and change styling', function() {
-      cy.loadEditor('divider')
+      cy.loadEditorAndViewer('divider')
         .openPluginToolbar(PLUGIN_COMPONENT.DIVIDER)
         .openDropdownMenu();
       cy.eyesCheckWindow('render divider plugin toolbar');
@@ -311,7 +278,7 @@ describe('plugins', () => {
   context('gif', () => {
     before('load editor', function() {
       eyesOpen(this);
-      cy.loadEditor('gif');
+      cy.loadEditorAndViewer('gif');
     });
 
     after(() => cy.eyesClose());
@@ -321,7 +288,6 @@ describe('plugins', () => {
         PLUGIN_TOOLBAR_BUTTONS.SMALL_CENTER
       );
       cy.get(`button[data-hook=${PLUGIN_TOOLBAR_BUTTONS.REPLACE}][tabindex=0]`).click();
-      cy.get('.__react_component_tooltip.show').should('not.exist');
       cy.eyesCheckWindow(this.test.title);
     });
   });
@@ -329,7 +295,7 @@ describe('plugins', () => {
   context('map', () => {
     before('load editor', function() {
       eyesOpen(this);
-      cy.loadEditor('map');
+      cy.loadEditorAndViewer('map');
     });
 
     after(() => cy.eyesClose());
@@ -337,7 +303,6 @@ describe('plugins', () => {
     it('render map plugin toolbar and settings', function() {
       cy.openPluginToolbar(PLUGIN_COMPONENT.MAP);
       cy.eyesCheckWindow('render map plugin toolbar');
-
       cy.openMapSettings();
       cy.get('.gm-style-cc');
       cy.eyesCheckWindow('render map settings');
@@ -347,7 +312,7 @@ describe('plugins', () => {
   context('file-upload', () => {
     before('load editor', function() {
       eyesOpen(this);
-      cy.loadEditor('file-upload');
+      cy.loadEditorAndViewer('file-upload');
     });
 
     after(() => cy.eyesClose());
@@ -361,7 +326,7 @@ describe('plugins', () => {
   context('drag and drop', () => {
     before('load editor', function() {
       eyesOpen(this);
-      cy.loadEditor('dragAndDrop');
+      cy.loadEditorAndViewer('dragAndDrop');
     });
 
     after(() => cy.eyesClose());
@@ -385,9 +350,7 @@ describe('plugins', () => {
 
     function testAtomicBlockAlignment(align) {
       it('align atomic block ' + align, function() {
-        cy.loadEditor('images')
-          .alignImage(align)
-          .hideTooltip();
+        cy.loadEditorAndViewer('images').alignImage(align);
         cy.eyesCheckWindow(this.test.title);
       });
     }

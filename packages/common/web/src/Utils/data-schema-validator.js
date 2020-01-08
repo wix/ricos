@@ -1,4 +1,4 @@
-import contentStateSchema from '../../statics/content-state.schema.json';
+import contentStateSchema from '../../statics/schemas/content-state.schema.json';
 
 export const validate = (data, schema) => {
   if (process.env.NODE_ENV !== 'production') {

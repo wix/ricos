@@ -1,3 +1,4 @@
+/*global Cypress, cy*/
 require('cypress-plugin-snapshots/commands');
 import { addMatchImageSnapshotCommand } from 'cypress-image-snapshot/command';
 addMatchImageSnapshotCommand();
@@ -57,16 +58,14 @@ Cypress.Commands.add('switchToEnglish', () => {
 
 Cypress.Commands.add('loadEditorAndViewer', fixtureName => {
   run('rce', fixtureName);
-});
-
-Cypress.Commands.add('loadEditor', fixtureName => {
-  run('rce', fixtureName);
+  cy.hideTooltip();
 });
 
 Cypress.Commands.add('matchContentSnapshot', () => {
-  cy.window()
-    .its('__CONTENT_SNAPSHOT__')
-    .toMatchSnapshot();
+  if (Cypress.env('MATCH_CONTENT_STATE'))
+    cy.window()
+      .its('__CONTENT_SNAPSHOT__')
+      .toMatchSnapshot();
 });
 
 Cypress.Commands.add('matchSnapshots', options => {
@@ -100,7 +99,8 @@ Cypress.Commands.add('focusEditor', () => {
 });
 
 Cypress.on('window:before:load', win => {
-  delete win.IntersectionObserver;
+  // noinspection JSAnnotator
+  delete win.IntersectionObserver; // eslint-disable-line fp/no-delete
   win.IntersectionObserver = class IntersectionObserverMock {
     constructor(cb, options) {
       this.cb = cb;
@@ -190,11 +190,11 @@ Cypress.Commands.add('setAlignment', alignment => {
   cy.setTextStyle(INLINE_TOOLBAR_BUTTONS.ALIGNMENT).setTextStyle(alignment);
 });
 
-function setInlineToolbarMenueItem(item, selection, butttonIndex) {
+function setInlineToolbarMenueItem(item, selection, buttonIndex) {
   cy.setTextStyle(item, selection)
     .get('.ReactModalPortal')
     .find('button')
-    .eq(butttonIndex)
+    .eq(buttonIndex)
     .click();
 }
 
@@ -216,10 +216,8 @@ Cypress.Commands.add('openAddPluginModal', () => {
   cy.get('[aria-label="Add Plugin"]');
 });
 
-Cypress.Commands.add('openImageSettings', () => {
-  cy.get(`[data-hook=${PLUGIN_COMPONENT.IMAGE}]:first`)
-    .parent()
-    .click();
+Cypress.Commands.add('openImageSettings', (shouldOpenToolbar = true) => {
+  shouldOpenToolbar && cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE);
   cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.SETTINGS);
   cy.get('[data-hook="imageSettings"]');
 });
@@ -264,6 +262,14 @@ Cypress.Commands.add('addImageTitle', () => {
     .type('Title')
     .get(`[data-hook=${SETTINGS_PANEL.DONE}]`)
     .click();
+});
+
+Cypress.Commands.add('editImageTitle', () => {
+  cy.get(`[data-hook=${PLUGIN_COMPONENT.IMAGE}]:first`)
+    .find('input')
+    .click()
+    .type(' - In Plugin Editing')
+    .blur();
 });
 
 Cypress.Commands.add('deleteImageTitle', () => {
@@ -364,9 +370,8 @@ Cypress.Commands.add('addVideoFromURI', () => {
 Cypress.Commands.add('addHtml', () => {
   cy.get(`[data-hook*=${HTML_PLUGIN.STATIC_TOOLBAR_BUTTON}][tabindex!=-1]`).click();
   cy.get(`[data-hook*=${PLUGIN_TOOLBAR_BUTTONS.EDIT}]`).click();
-  cy.get(
-    `[data-hook*=${HTML_PLUGIN.INPUT}]`
-  ).type(
+  cy.get(`[data-hook*=${HTML_PLUGIN.INPUT}]`).type(
+    // eslint-disable-next-line max-len
     '<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">The updates, insights and stories of the engineering challenges we encounter, and our way of solving them. Subscribe to our fresh, monthly newsletter and get these goodies right to your e-mail:<a href="https://t.co/0ziRSJJAxK">https://t.co/0ziRSJJAxK</a> <a href="https://t.co/nTHlsG5z2a">pic.twitter.com/nTHlsG5z2a</a></p>&mdash; Wix Engineering (@WixEng) <a href="https://twitter.com/WixEng/status/1076810144774868992?ref_src=twsrc%5Etfw">December 23, 2018</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>',
     { delay: 0 }
   );
@@ -404,11 +409,12 @@ Cypress.Commands.add('dragAndDropPlugin', (src, dest) => {
 });
 
 Cypress.Commands.add('hideTooltip', { prevSubject: 'optional' }, () => {
-  cy.get('.editor').trigger('mouseleave');
+  // cy.get('.editor').trigger('mouseleave');
+  cy.get('[data-id="tooltip"]').invoke('hide'); //uses jquery to set display:none
 });
 
 Cypress.Commands.add('waitForVideoToLoad', { prevSubject: 'optional' }, () => {
-  cy.get('[data-loaded=true]', { timeout: 15000 });
+  cy.get('#rich-content-viewer [data-loaded=true]', { timeout: 15000 });
 });
 
 // disable screenshots in debug mode. So there is no diffrence to ci.

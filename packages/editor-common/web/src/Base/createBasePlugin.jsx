@@ -34,9 +34,12 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
     customStyleFn,
     getEditorBounds,
     onOverlayClick,
-    onAtomicBlockFocus,
     disableRightClick,
+    commonPubsub,
+    defaultPluginData,
+    pluginDefaults,
   } = config;
+  defaultPluginData && (pluginDefaults[config.type] = defaultPluginData);
   const toolbarTheme = { ...getToolbarTheme(config.theme, 'plugin'), ...config.theme };
   const Toolbar =
     config?.toolbar?.InlineButtons &&
@@ -67,9 +70,11 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
         button,
         helpers,
         pubsub,
+        commonPubsub,
         settings,
         t,
         isMobile,
+        pluginDefaults,
       }),
     }));
   const PluginComponent = config.component;
@@ -83,8 +88,8 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
       pluginDecorationProps: config.pluginDecorationProps,
       componentWillReceiveDecorationProps: config.componentWillReceiveDecorationProps,
       onOverlayClick,
-      onAtomicBlockFocus,
       pubsub,
+      commonPubsub,
       settings,
       helpers,
       t,
@@ -102,7 +107,7 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
 
   const TextButtonMapper = config.toolbar && config.toolbar.TextButtonMapper;
 
-  const blockRendererFn = (contentBlock, { getEditorState, setEditorState, getReadOnly }) => {
+  const blockRendererFn = (contentBlock, { getEditorState, setEditorState }) => {
     if (contentBlock.getType() === 'atomic') {
       // TODO subject to change for draft-js next release
       const contentState = getEditorState().getCurrentContent();
@@ -119,7 +124,6 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
               getData: getData(contentBlock, { getEditorState }),
               setData: setData(contentBlock, { getEditorState, setEditorState }),
               deleteBlock: deleteEntity(contentBlock, { getEditorState, setEditorState }),
-              readOnly: getReadOnly(),
             },
           };
         }

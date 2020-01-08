@@ -112,6 +112,7 @@ export default class AddPluginFloatingToolbar extends Component {
         this.popupOffset = {
           left: this.popup.offsetWidth / 2 + 30,
           right: -this.popup.offsetWidth / 2 + 30,
+          top: -this.popup.offsetHeight / 4,
         };
       }
     }
