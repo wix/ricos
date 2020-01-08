@@ -74,6 +74,7 @@ function insertLink(
     target = anchorTarget !== '_blank' ? anchorTarget : '_self';
   }
   if (!nofollow) {
+    //
     rel = relValue !== 'nofollow' ? relValue : 'noopener';
   }
 
