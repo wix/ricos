@@ -26,7 +26,7 @@
   - `editor-common`
     - [#566](https://github.com/wix-incubator/rich-content/pull/566) Fix tooltip position in bottom tooltip
   - `image`
-    - [#581](https://github.com/wix-incubator/rich-content/pull/581) removed low resolution version for gif preloading
+    - [#581](https://github.com/wix-incubator/rich-content/pull/581) removed low resolution preload image for gif
   ### :house: Internal
   - `general`
     - [#561](https://github.com/wix-incubator/rich-content/pull/561) refactor - cleanup readOnly prop from code
