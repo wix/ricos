@@ -94,7 +94,6 @@ class InlineToolbarButton extends Component {
         showTooltip={showTooltip}
         tooltipText={tooltipText}
         button={codeBlockButton}
-        tooltipOffset={{ y: -20 }}
       />
     );
   }

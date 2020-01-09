@@ -24,6 +24,7 @@ class ImageComponent extends React.Component {
       const blockKey = block.getKey();
       store.setBlockHandler('handleFilesSelected', blockKey, this.handleFilesSelected.bind(this));
       store.setBlockHandler('handleFilesAdded', blockKey, this.handleFilesAdded.bind(this));
+      store.setBlockHandler('handleMetadataChange', blockKey, this.handleMetadataChange.bind(this));
     }
   }
 
@@ -124,12 +125,24 @@ class ImageComponent extends React.Component {
     this.resetLoadingState(error);
   };
 
+  handleMetadataChange = newMetadata => {
+    const { componentData } = this.props;
+    const metadata = { ...componentData.metadata, ...newMetadata };
+    this.props.store.update(
+      'componentData',
+      { ...componentData, metadata },
+      this.props.block.getKey()
+    );
+  };
+
   getLoadingParams = componentState => {
     //check if the file upload is coming on the regular state
     const alreadyLoading = this.state && this.state.isLoading;
     const { isLoading, userSelectedFiles } = componentState;
     return { alreadyLoading, isLoading, userSelectedFiles };
   };
+
+  handleCaptionChange = caption => this.handleMetadataChange({ caption });
 
   render() {
     const { settings, componentData, onClick, className, blockProps } = this.props;
@@ -141,9 +154,10 @@ class ImageComponent extends React.Component {
         isLoading={this.state.isLoading}
         dataUrl={this.state.dataUrl}
         isFocused={blockProps.isFocused}
-        readOnly={blockProps.readOnly}
         settings={settings}
         defaultCaption={this.context.t('ImageViewer_Caption')}
+        onCaptionChange={this.handleCaptionChange}
+        setFocusToBlock={blockProps.setFocusToBlock}
       />
     );
   }

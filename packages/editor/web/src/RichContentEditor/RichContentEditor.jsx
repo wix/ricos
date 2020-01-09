@@ -117,6 +117,8 @@ class RichContentEditor extends Component {
       shouldRenderOptimizedImages,
       initialIntent,
       siteDomain,
+      setInPluginEditingMode: this.setInPluginEditingMode,
+      getInPluginEditingMode: this.getInPluginEditingMode,
     };
   };
 
@@ -275,43 +277,50 @@ class RichContentEditor extends Component {
 
   setEditor = ref => (this.editor = get(ref, 'editor', ref));
 
+  inPluginEditingMode = false;
+
+  setInPluginEditingMode = shouldEnable => {
+    // As explained in https://github.com/facebook/draft-js/blob/585af35c3a8c31fefb64bc884d4001faa96544d3/src/component/handlers/DraftEditorModes.js#L14
+    const mode = shouldEnable ? 'render' : 'edit';
+    this.editor.setMode(mode);
+    this.inPluginEditingMode = shouldEnable;
+  };
+
+  getInPluginEditingMode = () => this.inPluginEditingMode;
+
   updateBounds = editorBounds => {
     this.setState({ editorBounds });
   };
 
   renderToolbars = () => {
-    if (!this.props.readOnly) {
-      const toolbarsToIgnore = [
-        'MobileToolbar',
-        'StaticTextToolbar',
-        this.props.textToolbarType === 'static' ? 'InlineTextToolbar' : '',
-      ];
-      //eslint-disable-next-line array-callback-return
-      const toolbars = this.plugins.map((plugin, index) => {
-        const Toolbar = plugin.Toolbar || plugin.InlineToolbar || plugin.SideToolbar;
-        if (Toolbar) {
-          if (includes(toolbarsToIgnore, plugin.name)) {
-            return null;
-          }
-          return <Toolbar key={`k${index}`} />;
+    const toolbarsToIgnore = [
+      'MobileToolbar',
+      'StaticTextToolbar',
+      this.props.textToolbarType === 'static' ? 'InlineTextToolbar' : '',
+    ];
+    //eslint-disable-next-line array-callback-return
+    const toolbars = this.plugins.map((plugin, index) => {
+      const Toolbar = plugin.Toolbar || plugin.InlineToolbar || plugin.SideToolbar;
+      if (Toolbar) {
+        if (includes(toolbarsToIgnore, plugin.name)) {
+          return null;
         }
-      });
-      return toolbars;
-    }
+        return <Toolbar key={`k${index}`} />;
+      }
+    });
+    return toolbars;
   };
 
   renderInlineModals = () => {
-    if (!this.props.readOnly) {
-      //eslint-disable-next-line array-callback-return
-      const modals = this.plugins.map((plugin, index) => {
-        if (plugin.InlineModals && plugin.InlineModals.length > 0) {
-          return plugin.InlineModals.map((Modal, modalIndex) => {
-            return <Modal key={`k${index}m${modalIndex}`} />;
-          });
-        }
-      });
-      return modals;
-    }
+    //eslint-disable-next-line array-callback-return
+    const modals = this.plugins.map((plugin, index) => {
+      if (plugin.InlineModals && plugin.InlineModals.length > 0) {
+        return plugin.InlineModals.map((Modal, modalIndex) => {
+          return <Modal key={`k${index}m${modalIndex}`} />;
+        });
+      }
+    });
+    return modals;
   };
 
   renderEditor = () => {
@@ -335,7 +344,6 @@ class RichContentEditor extends Component {
       onBlur,
       onFocus,
       textAlignment,
-      readOnly,
       handleBeforeInput,
       handlePastedText,
       handleReturn,
@@ -367,7 +375,6 @@ class RichContentEditor extends Component {
         helpers={helpers}
         tabIndex={tabIndex}
         placeholder={placeholder || ''}
-        readOnly={!!readOnly}
         spellCheck={spellCheck}
         stripPastedStyles={stripPastedStyles}
         autoCapitalize={autoCapitalize}
@@ -463,7 +470,6 @@ RichContentEditor.propTypes = {
   style: PropTypes.object,
   onChange: PropTypes.func,
   tabIndex: PropTypes.number,
-  readOnly: PropTypes.bool,
   placeholder: PropTypes.string,
   spellCheck: PropTypes.bool,
   stripPastedStyles: PropTypes.bool,

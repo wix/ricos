@@ -210,7 +210,6 @@ class BaseToolbarButton extends React.Component {
         showTooltip={showTooltip}
         tooltipText={tooltipText}
         button={toggleButton}
-        tooltipOffset={{ y: -20 }}
       />
     );
   };
@@ -249,7 +248,6 @@ class BaseToolbarButton extends React.Component {
         showTooltip={showTooltip}
         tooltipText={tooltipText}
         button={filesButton}
-        tooltipOffset={{ y: -20 }}
       />
     );
   };
