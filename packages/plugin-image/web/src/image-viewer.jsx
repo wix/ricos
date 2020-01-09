@@ -107,24 +107,32 @@ class ImageViewer extends React.Component {
   };
 
   renderImage(imageClassName, imageSrc, alt, props) {
-    return [
-      <img
-        key="preload"
-        ref={ref => (this.preloadImage = ref)}
-        className={classNames(imageClassName, this.styles.imagePreload)}
-        src={imageSrc.preload}
-        alt={alt}
-        onError={this.onImageLoadError}
-      />,
+    const fileType = imageSrc.highres.split('.').pop();
+    const isGif = fileType === 'gif';
+    let images = [
       <img
         {...props}
         key="highres"
         className={classNames(imageClassName, this.styles.imageHighres)}
         src={imageSrc.highres}
         alt={alt}
-        onLoad={e => this.onHighResLoad(e)}
+        onLoad={isGif ? undefined : e => this.onHighResLoad(e)}
       />,
     ];
+    if (!isGif) {
+      images = [
+        <img
+          key="preload"
+          ref={ref => (this.preloadImage = ref)}
+          className={classNames(imageClassName, this.styles.imagePreload)}
+          src={imageSrc.preload}
+          alt={alt}
+          onError={this.onImageLoadError}
+        />,
+        ...images,
+      ];
+    }
+    return images;
   }
 
   renderLoader() {
