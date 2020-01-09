@@ -21,7 +21,10 @@ class ImageViewer extends React.Component {
   constructor(props) {
     super(props);
     validate(props.componentData, pluginImageSchema);
-    this.state = {};
+    this.state = { highresImageLoaded: false };
+    this.waitForHighresImageToLoad = setInterval(() => {
+      this.forceUpdate();
+    }, 200);
   }
 
   componentDidMount() {
@@ -89,6 +92,7 @@ class ImageViewer extends React.Component {
   onHighResLoad = e => {
     e.target.style.opacity = 1;
     this.preloadImage && (this.preloadImage.style.opacity = 0);
+    this.setHighresImageLoaded();
   };
 
   onImageLoadError = () => {
@@ -123,6 +127,7 @@ class ImageViewer extends React.Component {
         src={imageSrc.highres}
         alt={alt}
         onLoad={e => this.onHighResLoad(e)}
+        ref={ref => (this.highresImage = ref)}
       />,
     ];
   }
@@ -212,7 +217,21 @@ class ImageViewer extends React.Component {
 
   handleContextMenu = e => this.context.disableRightClick && e.preventDefault();
 
+  setHighresImageLoaded = () => {
+    this.setState({ highresImageLoaded: true });
+    clearInterval(this.waitForHighresImageToLoad);
+  };
+
+  handleHighResLoading = () => {
+    this.highresImage.style.opacity = 1;
+    this.setHighresImageLoaded();
+  };
+
   render() {
+    const { highresImageLoaded } = this.state;
+    if (this.highresImage?.complete && !highresImageLoaded) {
+      this.handleHighResLoading();
+    }
     this.styles = this.styles || mergeStyles({ styles, theme: this.context.theme });
     const { componentData, className, settings } = this.props;
     const { fallbackImageSrc } = this.state;
