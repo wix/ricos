@@ -18,7 +18,7 @@ export default class Preview extends PureComponent {
       new ContentStateTransformation({
         _if: metadata => metadata.plain.length > 0,
         _then: (metadata, preview) =>
-          preview.plain(metadata.plain[0].join('')).readMore({ lines: 3 }),
+          preview.plain(metadata.plain[0]).readMore({ lines: 3 }),
       }),
       new ContentStateTransformation({
         _if: metadata => metadata.images.length > 0,
@@ -28,7 +28,7 @@ export default class Preview extends PureComponent {
       new ContentStateTransformation({
         _if: metadata => metadata.plain.length > 0,
         _then: (metadata, preview) =>
-          preview.plain(metadata.plain[0].join('')).readMore({ lines: 1 }),
+          preview.plain(metadata.plain[0]).readMore({ lines: 1 }),
       }).rule({
         _if: metadata => metadata.images.length > 3,
         _then: (metadata, preview) =>
