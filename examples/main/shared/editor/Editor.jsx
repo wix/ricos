@@ -145,18 +145,18 @@ export default class Editor extends PureComponent {
   };
 
   render() {
-    const modalStyles = {
-      content: Object.assign(
-        {},
-        (this.state.modalStyles || modalStyleDefaults).content,
-        theme.modalTheme.content
-      ),
-      overlay: Object.assign(
-        {},
-        (this.state.modalStyles || modalStyleDefaults).overlay,
-        theme.modalTheme.overlay
-      ),
-    };
+    // const modalStyles = {
+    //   content: Object.assign(
+    //     {},
+    //     (this.state.modalStyles || modalStyleDefaults).content,
+    //     theme.modalTheme.content
+    //   ),
+    //   overlay: Object.assign(
+    //     {},
+    //     (this.state.modalStyles || modalStyleDefaults).overlay,
+    //     theme.modalTheme.overlay
+    //   ),
+    // };
     const { MobileToolbar, TextToolbar } = this.state;
     const textToolbarType = this.props.staticToolbar && !this.props.isMobile ? 'static' : null;
     //const { onRequestClose } = this.state.modalProps || {};
@@ -171,7 +171,7 @@ export default class Editor extends PureComponent {
         <SimplifiedRCE
           settings={{
             plugins: [pluginButton, pluginDivider, pluginGallery, pluginHtml, pluginImage],
-            theme: inlineToolbarTheme,
+            theme: theme,
           }}
           strategies={[
             pluginsStrategy,
@@ -181,17 +181,12 @@ export default class Editor extends PureComponent {
           onChange={this.handleChange}
           placeholder={'Add some text!'}
           ref={editor => (this.editor = editor)}
-          //helpers={this.helpers}
-          //plugins={Plugins.editorPlugins}
-          //config={Plugins.config}
-          //editorState={this.props.editorState}
-          //initialState={this.props.initialState}
           isMobile={this.props.isMobile}
           textToolbarType={textToolbarType}
-          theme={theme}
           editorKey="random-editorKey-ssr"
           anchorTarget={anchorTarget}
           relValue={relValue}
+          //theme={theme}
           locale={this.props.locale}
           localeResource={this.props.localeResource}>
           {/* <RichContentEditor

@@ -3,7 +3,7 @@ import { createUseStyles } from 'react-jss';
 import { theme as defaultTheme } from '../defaults';
 
 export default function themeStrategy({ settings = {}, ...rest }) {
-  const { theme, palette } = settings;
+  const { theme = {}, palette } = settings;
   const customizedTheme = rest?.theme || {};
   if (typeof theme === 'string') {
     const rceTheme = new RceTheme(theme, palette);
