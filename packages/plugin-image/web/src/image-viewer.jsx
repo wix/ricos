@@ -88,6 +88,7 @@ class ImageViewer extends React.Component {
   onHighResLoad = e => {
     e.target.style.opacity = 1;
     this.preloadImage && (this.preloadImage.style.opacity = 0);
+    this.forceUpdate();
   };
 
   onImageLoadError = () => {
