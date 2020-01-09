@@ -2,7 +2,7 @@ import React from 'react';
 import { createLinkPlugin, LINK_TYPE } from 'wix-rich-content-plugin-link';
 import { createLineSpacingPlugin, LINE_SPACING_TYPE } from 'wix-rich-content-plugin-line-spacing';
 import { createHashtagPlugin, HASHTAG_TYPE } from 'wix-rich-content-plugin-hashtag';
-import { createEmojiPlugin, EMOJI_TYPE } from 'wix-rich-content-plugin-emoji';
+import { createEmojiPlugin } from 'wix-rich-content-plugin-emoji';
 import { createImagePlugin, IMAGE_TYPE } from 'wix-rich-content-plugin-image';
 import { createUndoRedoPlugin, UNDO_REDO_TYPE } from 'wix-rich-content-plugin-undo-redo';
 import { createGalleryPlugin, GALLERY_TYPE } from 'wix-rich-content-plugin-gallery';
@@ -18,7 +18,6 @@ import { createSoundCloudPlugin, SOUND_CLOUD_TYPE } from 'wix-rich-content-plugi
 import { createGiphyPlugin, GIPHY_TYPE } from 'wix-rich-content-plugin-giphy';
 import {
   createHeadersMarkdownPlugin,
-  HEADERS_MARKDOWN_TYPE,
 } from 'wix-rich-content-plugin-headers-markdown';
 import { createMapPlugin, MAP_TYPE } from 'wix-rich-content-plugin-map';
 import { createFileUploadPlugin, FILE_UPLOAD_TYPE } from 'wix-rich-content-plugin-file-upload';

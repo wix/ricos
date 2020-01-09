@@ -174,19 +174,34 @@ export default class Editor extends PureComponent {
             theme: inlineToolbarTheme,
           }}
           strategies={[
-            themeStrategy,
             pluginsStrategy,
+            themeStrategy,
           ]}
-          helpers={this.helpers}>
-          <RichContentEditor
+          helpers={this.helpers}
+          onChange={this.handleChange}
+          placeholder={'Add some text!'}
+          ref={editor => (this.editor = editor)}
+          //helpers={this.helpers}
+          //plugins={Plugins.editorPlugins}
+          //config={Plugins.config}
+          //editorState={this.props.editorState}
+          //initialState={this.props.initialState}
+          isMobile={this.props.isMobile}
+          textToolbarType={textToolbarType}
+          theme={theme}
+          editorKey="random-editorKey-ssr"
+          anchorTarget={anchorTarget}
+          relValue={relValue}
+          locale={this.props.locale}
+          localeResource={this.props.localeResource}>
+          {/* <RichContentEditor
             placeholder={'Add some text!'}
             ref={editor => (this.editor = editor)}
-            onChange={this.handleChange}
             //helpers={this.helpers}
             //plugins={Plugins.editorPlugins}
             //config={Plugins.config}
-            editorState={this.props.editorState}
-            initialState={this.props.initialState}
+            //editorState={this.props.editorState}
+            //initialState={this.props.initialState}
             isMobile={this.props.isMobile}
             textToolbarType={textToolbarType}
             theme={theme}
@@ -196,7 +211,7 @@ export default class Editor extends PureComponent {
             locale={this.props.locale}
             localeResource={this.props.localeResource}
           // siteDomain="https://www.wix.com"
-          />
+          /> */}
         </SimplifiedRCE>
         {/* <ReactModal
           isOpen={this.state.showModal}

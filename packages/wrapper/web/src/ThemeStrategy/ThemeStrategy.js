@@ -11,5 +11,5 @@ export default function themeStrategy({ settings = {}, ...rest }) {
     const themeObj = generateTheme();
     return { theme: { ...themeObj, ...customizedTheme } };
   }
-  return { theme: { ...defaultTheme, theme } };
+  return { theme: { ...defaultTheme, ...theme } };
 }
