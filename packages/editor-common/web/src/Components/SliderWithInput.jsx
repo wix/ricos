@@ -38,20 +38,9 @@ class SliderWithInput extends Component {
   normalizeInputValue = value => Math.min(Math.max(this.getInputMin(), value), this.getInputMax());
 
   render() {
-    const {
-      readOnly,
-      label,
-      value,
-      min,
-      max,
-      onChange,
-      theme,
-      sliderDataHook,
-      inputDataHook,
-    } = this.props;
+    const { label, value, min, max, onChange, theme, sliderDataHook, inputDataHook } = this.props;
     let ariaProps = label ? { 'aria-labelledby': `${this.id}_lbl` } : {};
     ariaProps = Object.assign({}, ariaProps, {
-      'aria-disabled': readOnly,
       'aria-valuemin': min,
       'aria-valuemax': max,
       'aria-valuenow': value,
@@ -59,7 +48,7 @@ class SliderWithInput extends Component {
 
     /* eslint-disable jsx-a11y/role-has-required-aria-props */
     return (
-      <div className={readOnly ? this.styles.sliderWithInput_readOnly : null}>
+      <div>
         {label ? (
           <span id={`${this.id}_lbl`} className={this.styles.sliderWithInput_label}>
             {label}
@@ -71,14 +60,13 @@ class SliderWithInput extends Component {
             value={value}
             dataHook={sliderDataHook}
             onChange={onChange}
-            readOnly={readOnly}
             min={min}
             max={max}
             className={this.styles.sliderWithInput_slider}
             ariaProps={ariaProps}
           />
           <input
-            tabIndex={readOnly ? -1 : 0}
+            tabIndex={0}
             type="number"
             value={this.state.inputValue}
             data-hook={inputDataHook}
@@ -107,7 +95,6 @@ SliderWithInput.propTypes = {
   max: PropTypes.number.isRequired,
   inputMax: PropTypes.number,
   inputMin: PropTypes.number,
-  readOnly: PropTypes.bool,
   theme: PropTypes.object.isRequired,
   onChange: PropTypes.func.isRequired,
   sliderDataHook: PropTypes.string,

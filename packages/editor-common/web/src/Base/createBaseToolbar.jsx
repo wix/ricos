@@ -129,12 +129,12 @@ export default function createToolbar({
     };
 
     onComponentLinkChange = linkData => {
-      const { url, targetBlank, nofollow } = linkData || {};
+      const { url, target, rel } = linkData || {};
       const link = url
         ? {
             url,
-            target: targetBlank ? '_blank' : anchorTarget || '_self',
-            rel: nofollow ? 'nofollow' : relValue || 'noopener',
+            target,
+            rel,
           }
         : null;
 
@@ -146,6 +146,9 @@ export default function createToolbar({
     };
 
     onVisibilityChanged = focusedBlock => {
+      if (!this.shouldCreate) {
+        return;
+      }
       if (focusedBlock) {
         this.showToolbar();
       } else {
