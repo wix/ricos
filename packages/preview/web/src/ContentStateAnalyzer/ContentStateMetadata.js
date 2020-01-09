@@ -4,12 +4,16 @@ import { METHOD_BLOCK_MAP, METHOD_GROUPED_BLOCK_MAP } from '../const';
 const extractTextBlocksWithEntities = (blocks, entityMap, blockFilter) =>
   blocks.filter(blockFilter).reduce((texts, block) => {
     const { entityRanges } = block;
-    const entities = entityRanges.reduce((map, { key }) => {
-      map[key] = entityMap[key];
+    const entities = entityRanges.reduce((map, range) => {
+      const _key = `_${range.key}`;
+      map[_key] = entityMap[range.key];
       return map;
     }, {});
-
-    texts.push({ block, entities });
+    const _block = {
+      ...block,
+      entityRanges: block.entityRanges.map(range => ({ ...range, key: `_${range.key}` })),
+    };
+    texts.push({ block: _block, entities });
     return texts;
   }, []);
 

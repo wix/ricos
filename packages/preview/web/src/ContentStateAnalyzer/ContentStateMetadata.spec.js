@@ -94,13 +94,13 @@ describe('content state text metadata', () => {
             {
               offset: 16,
               length: 4,
-              key: 2,
+              key: '_2',
             },
           ],
           data: {},
         },
         entities: {
-          '2': {
+          _2: {
             type: 'LINK',
             mutability: 'MUTABLE',
             data: {
@@ -340,13 +340,13 @@ describe('content state text metadata', () => {
             {
               offset: 0,
               length: 9,
-              key: 7,
+              key: '_7',
             },
           ],
           data: {},
         },
         entities: {
-          '7': {
+          _7: {
             type: 'mention',
             mutability: 'SEGMENTED',
             data: {
@@ -474,13 +474,13 @@ describe('content state text metadata', () => {
               {
                 offset: 16,
                 length: 4,
-                key: 2,
+                key: '_2',
               },
             ],
             data: {},
           },
           entities: {
-            '2': {
+            _2: {
               type: 'LINK',
               mutability: 'MUTABLE',
               data: {
@@ -555,13 +555,13 @@ describe('content state text metadata', () => {
               {
                 offset: 0,
                 length: 9,
-                key: 7,
+                key: '_7',
               },
             ],
             data: {},
           },
           entities: {
-            '7': {
+            _7: {
               type: 'mention',
               mutability: 'SEGMENTED',
               data: {

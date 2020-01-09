@@ -1,6 +1,6 @@
 import { Version } from 'wix-rich-content-common';
 import { METHOD_BLOCK_MAP, METHOD_GROUPED_BLOCK_MAP, METHOD_PLUGIN_DATA_MAP } from '../const';
-import { toArray, addBlock, addPlugin } from './builder-utils';
+import { toArray, mergeBlockWithEntities, addPlugin } from './builder-utils';
 import { readMore, seeFullPost, imageCounter } from '../Interactions/interaction-utils';
 
 const DEFAULT_STATE = { blocks: [], entityMap: {}, VERSION: Version.currentVersion };
@@ -15,23 +15,20 @@ class ContentStateBuilder {
   }
 }
 
-Object.entries({
+Object.keys({
   ...METHOD_BLOCK_MAP,
   ...METHOD_GROUPED_BLOCK_MAP,
-}).forEach(([method, type]) => {
-  ContentStateBuilder.prototype[method] = function(text, config) {
-    const content = toArray(text);
-
-    this.contentState = content.reduce(
-      (state, blockText) =>
-        addBlock({
-          contentState: state,
-          text: blockText,
-          type,
-          config,
-        }),
-      this.contentState
-    );
+}).forEach(method => {
+  ContentStateBuilder.prototype[method] = function(textContent) {
+    const textContentArray = toArray(textContent);
+    this.contentState = textContentArray.reduce((state, { block, entities }) => {
+      const mergedState = mergeBlockWithEntities({
+        contentState: state,
+        block,
+        entities,
+      });
+      return mergedState;
+    }, this.contentState);
     return this;
   };
 });

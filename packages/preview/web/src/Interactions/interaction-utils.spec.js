@@ -4,7 +4,17 @@ import { butKey } from '../tests/test-utils';
 
 describe('read more interaction', () => {
   it('should merge interaction settings with the last block data', () => {
-    const builder = new ContentStateBuilder().plain('some text');
+    const builder = new ContentStateBuilder().plain({
+      block: {
+        type: 'unstyled',
+        text: 'some text',
+        depth: 0,
+        inlineStyleRanges: [],
+        entityRanges: [],
+        data: {},
+      },
+      entities: [],
+    });
     const interacted = readMore(builder, { lines: 5 });
     const expectedBlock = {
       type: 'unstyled',
@@ -129,8 +139,6 @@ describe('image counter interaction', function() {
   });
 
   it('should ignore non-atomic blocks', () => {
-    const builder = new ContentStateBuilder().plain('some text');
-    const interacted = imageCounter(builder, { counter: 5 });
     const expectedBlock = {
       type: 'unstyled',
       text: 'some text',
@@ -139,6 +147,11 @@ describe('image counter interaction', function() {
       entityRanges: [],
       data: {},
     };
+    const builder = new ContentStateBuilder().plain({
+      block: expectedBlock,
+      entities: [],
+    });
+    const interacted = imageCounter(builder, { counter: 5 });
 
     const actualBlock = interacted.contentState.blocks[0];
     expect(butKey(actualBlock)).toEqual(expectedBlock);
