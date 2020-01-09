@@ -61,6 +61,7 @@
   - `editor-common`
     - [#526](https://github.com/wix-incubator/rich-content/pull/526) `onAtomicBlockFocus` is invoked with `undefined` when an atomic block loses focus
     - [#530](https://github.com/wix-incubator/rich-content/pull/530) `uiSettings.linkPanel.placeholder` determines the link panel's placeholder
+    - [#547](https://github.com/wix-incubator/rich-content/pull/547) accessibility issue fixed: focus on hidden elements when tab-clicking
   - `image`
     - [#533](https://github.com/wix-incubator/rich-content/pull/533) add multiple images at once, enabling `config.createGalleryForMultipleImages` renders them as a gallery
   - `file-upload`
@@ -78,8 +79,6 @@
     - [#543](https://github.com/wix-incubator/rich-content/pull/543) fix undo-redo icons on mobile
   - `gallery`
     - [#545](https://github.com/wix-incubator/rich-content/pull/545) fix image ratio change in gallery slider layout
-  - `accessibility`
-    - [#547](https://github.com/wix-incubator/rich-content/pull/547) accessibility issue fixed: focus on hidden elements when tab-clicking
   ### :house: Internal
   - `gallery-settings`
     - [#535](https://github.com/wix-incubator/rich-content/pull/535) gallery setting's header, tabs and footer position
