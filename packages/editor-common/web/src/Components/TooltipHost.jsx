@@ -17,8 +17,7 @@ const TooltipHost = () => {
             className={mergedStyles.tooltip}
             effect={'solid'}
             delayShow={300}
-            // eslint-disable-next-line react/jsx-boolean-value
-            multiline={true}
+            multiline
             overridePosition={({ left, top: originalTop }, currentEvent, currentTarget, node) => {
               const isBottomTooltip = node?.className && node.className.indexOf(PLACE_BUTTON) > -1;
               const top = originalTop - (isBottomTooltip ? 30 : 0);

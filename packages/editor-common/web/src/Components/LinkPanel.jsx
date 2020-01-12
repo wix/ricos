@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import { mergeStyles, isValidUrl } from 'wix-rich-content-common';
 import Tooltip from './Tooltip';
 import Checkbox from './Checkbox';
-import { ErrorIcon, InfoIcon } from '../Icons';
+import { ErrorIcon } from '../Icons';
 import styles from '../../statics/styles/link-panel.scss';
 import { LinkPanelDropdown } from './LinkPanelDropdown';
 
@@ -121,7 +121,6 @@ class LinkPanel extends Component {
           {this.hasError() && (
             <Tooltip
               shouldRebuildOnUpdate={() => !isValid}
-              data-hook="linkPanelTooltip"
               content={t('LinkPanel_ErrorTooltip')}
               theme={theme}
               moveBy={{ y: 0 }}
@@ -142,27 +141,14 @@ class LinkPanel extends Component {
             />
           )}
           {showRelValueCheckbox && (
-            <>
-              <Checkbox
-                label={t('LinkPanel_Nofollow_Checkbox')}
-                theme={theme}
-                checked={nofollow}
-                dataHook="linkPanelRelCheckbox"
-                onChange={this.handleNofollowChange}
-              />
-              <Tooltip
-                shouldRebuildOnUpdate={() => showRelValueCheckbox}
-                data-hook="linkPanelNoFollowTooltip"
-                content={t('LinkPanel_Nofollow_Checkbox_Tooltip')}
-                theme={theme}
-                moveBy={{ y: 0 }}
-              >
-                <InfoIcon
-                  data-hook="linkPanelNoFollow"
-                  className={styles.linkPanel_noFollowExplanationIcon}
-                />
-              </Tooltip>
-            </>
+            <Checkbox
+              label={t('LinkPanel_Nofollow_Checkbox')}
+              theme={theme}
+              checked={nofollow}
+              dataHook="linkPanelRelCheckbox"
+              onChange={this.handleNofollowChange}
+              contentForInfoIcon={t('LinkPanel_Nofollow_Checkbox_Tooltip')}
+            />
           )}
         </div>
       </div>
