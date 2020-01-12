@@ -63,6 +63,7 @@ function run() {
   }
   if (skip) {
     console.log(chalk.yellow(`${skip} - skipping deploy`));
+    console.log(JSON.stringify(process.env));
     return false;
   }
 
