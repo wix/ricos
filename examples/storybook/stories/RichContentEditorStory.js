@@ -9,15 +9,8 @@ import 'wix-rich-content-plugin-divider/dist/styles.min.css';
 import './App.css';
 
 import { createDividerPlugin } from 'wix-rich-content-plugin-divider';
-import {
-  createHashtagPlugin,
-  HASHTAG_TYPE,
-} from 'wix-rich-content-plugin-hashtag';
-import {
-  RichContentEditor,
-  convertFromRaw,
-  createWithContent,
-} from 'wix-rich-content-editor';
+import { createHashtagPlugin, HASHTAG_TYPE } from 'wix-rich-content-plugin-hashtag';
+import { RichContentEditor, convertFromRaw, createWithContent } from 'wix-rich-content-editor';
 
 import Palette from './Components/Palette';
 import { wixPalettes } from './palettesExample';
@@ -32,8 +25,7 @@ const editorState = createWithContent(convertFromRaw(exapmleState));
 
 const config = {
   [HASHTAG_TYPE]: {
-    createHref: decoratedText =>
-      `/search/posts?query=${encodeURIComponent('#')}${decoratedText}`,
+    createHref: decoratedText => `/search/posts?query=${encodeURIComponent('#')}${decoratedText}`,
     onClick: (event, text) => {
       event.preventDefault();
       console.log(`'${text}' hashtag clicked!`);
@@ -80,11 +72,7 @@ storiesOf('Rich Content Editor', module)
       <div className="root">
         <h2>Default Theme</h2>
         <div className="rce-wrapper">
-          <RichContentEditor
-            config={config}
-            plugins={PLUGINS}
-            editorState={editorState}
-          />
+          <RichContentEditor config={config} plugins={PLUGINS} editorState={editorState} />
         </div>
 
         <h2>Live Site Theme</h2>
@@ -93,11 +81,7 @@ storiesOf('Rich Content Editor', module)
         </h5>
         <div className="rce-wrapper">
           <ThemeWrapper theme={Themes.PALETTE} palette={wixPalettes.site1}>
-            <RichContentEditor
-              config={config}
-              plugins={PLUGINS}
-              editorState={editorState}
-            />
+            <RichContentEditor config={config} plugins={PLUGINS} editorState={editorState} />
           </ThemeWrapper>
         </div>
 
@@ -106,11 +90,7 @@ storiesOf('Rich Content Editor', module)
         </h5>
         <div className="rce-wrapper">
           <ThemeWrapper theme={Themes.PALETTE} palette={wixPalettes.site2}>
-            <RichContentEditor
-              config={config}
-              plugins={PLUGINS}
-              editorState={editorState}
-            />
+            <RichContentEditor config={config} plugins={PLUGINS} editorState={editorState} />
           </ThemeWrapper>
         </div>
 
@@ -119,11 +99,7 @@ storiesOf('Rich Content Editor', module)
         </h5>
         <div className="rce-wrapper">
           <ThemeWrapper theme={Themes.PALETTE} palette={wixPalettes.site3}>
-            <RichContentEditor
-              config={config}
-              plugins={PLUGINS}
-              editorState={editorState}
-            />
+            <RichContentEditor config={config} plugins={PLUGINS} editorState={editorState} />
           </ThemeWrapper>
         </div>
       </div>

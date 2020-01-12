@@ -24,7 +24,7 @@
     "storybook": "start-storybook -p 6006"
   },
   "peerDependencies": {
-    "react": "^16.8.6"
+    "react": "^16.6.3"
   },
   "devDependencies": {
     "@storybook/react": "^5.0.11",
@@ -33,10 +33,10 @@
     "husky": "~0.14.0",
     "jest-yoshi-preset": "^4.24.0",
     "lint-staged": "^7.2.2",
-    "react": "^16.8.6",
-    "wix-rich-content-editor": "^6.6.1",
-    "wix-rich-content-plugin-divider": "^6.6.1",
-    "wix-rich-content-plugin-hashtag": "^6.6.1",
+    "react": "^16.6.3",
+    "wix-rich-content-editor": "^6.6.6",
+    "wix-rich-content-plugin-divider": "^6.6.6",
+    "wix-rich-content-plugin-hashtag": "^6.6.6",
     "yoshi": "^4.0.0",
     "yoshi-style-dependencies": "^4.11.1"
   },
@@ -63,6 +63,6 @@
     "extends": "yoshi-base"
   },
   "dependencies": {
-    "react-jss": "^10.0.0"
+    "aphrodite": "^2.4.0"
   }
 }
