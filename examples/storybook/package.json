@@ -1,5 +1,5 @@
 {
-  "name": "@wix/theme-service",
+  "name": "wix-rich-content-storybook",
   "version": "1.0.0",
   "license": "UNLICENSED",
   "author": {
@@ -12,9 +12,6 @@
   "files": [
     "dist"
   ],
-  "publishConfig": {
-    "registry": "http://npm.dev.wixpress.com/"
-  },
   "scripts": {
     "precommit": "lint-staged",
     "pretest": "yoshi build",
