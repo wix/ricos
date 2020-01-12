@@ -18,13 +18,9 @@ const fqdn = subdomain => `${subdomain}.surge.sh/`;
 const generateSubdomain = exampleName => {
   const { version } = require('../lerna.json');
   let subdomain = exampleName;
-  const { TRAVIS_PULL_REQUEST, CI, TRAVIS_BRANCH } = process.env;
-  if (TRAVIS_PULL_REQUEST && TRAVIS_PULL_REQUEST !== 'false') {
-    subdomain += `-${TRAVIS_PULL_REQUEST}`;
-    console.log('Generated subdomain: ', subdomain);
-  } else if (CI === 'true' && TRAVIS_BRANCH !== 'master') {
+  const { TRAVIS_BRANCH } = process.env;
+  if (!TRAVIS_BRANCH.startsWith('release')) {
     subdomain += `-${TRAVIS_BRANCH}`;
-    console.log('Generated subdomain: ', subdomain);
   } else {
     subdomain += `-${version.replace(/\./g, '-')}`;
   }
@@ -53,10 +49,8 @@ function deploy(name) {
 
 function run() {
   let skip;
-  const { SURGE_LOGIN, TRAVIS_BRANCH, TRAVIS_PULL_REQUEST, CI } = process.env;
-  if (!TRAVIS_BRANCH.startsWith('release') && TRAVIS_PULL_REQUEST === 'false') {
-    if (CI !== 'true' || TRAVIS_BRANCH === 'master') skip = 'Not on a release branch or PR';
-  } else if (!CI) {
+  const { SURGE_LOGIN, CI } = process.env;
+  if (!CI) {
     skip = 'Not in CI';
   } else if (!SURGE_LOGIN) {
     skip = 'PR from fork';
