@@ -22,22 +22,23 @@
     "clean": "rm -rf dist/",
     "build": "yoshi build"
   },
-  "peerDependencies": {
-    "react": "^16.6.3"
-  },
-  "devDependencies": {
+  "dependencies": {
+    "react": "^16.6.3",
     "@storybook/react": "^5.0.11",
     "@testing-library/react": "^9.4.0",
-    "draft-js": "^0.11.3",
-    "husky": "~0.14.0",
-    "jest-yoshi-preset": "^4.24.0",
-    "lint-staged": "^7.2.2",
-    "react": "^16.6.3",
+    "aphrodite": "^2.4.0",
+    "yoshi": "^4.0.0",
+    "yoshi-style-dependencies": "^4.11.1",
     "wix-rich-content-editor": "^6.6.6",
     "wix-rich-content-plugin-divider": "^6.6.6",
     "wix-rich-content-plugin-hashtag": "^6.6.6",
-    "yoshi": "^4.0.0",
-    "yoshi-style-dependencies": "^4.11.1"
+    "jest-yoshi-preset": "^4.24.0"
+  },
+  "peerDependencies": {},
+  "devDependencies": {
+    "draft-js": "^0.11.3",
+    "husky": "~0.14.0",
+    "lint-staged": "^7.2.2"
   },
   "lint-staged": {
     "*.js": "yoshi lint"
@@ -60,8 +61,5 @@
   },
   "eslintConfig": {
     "extends": "yoshi-base"
-  },
-  "dependencies": {
-    "aphrodite": "^2.4.0"
   }
 }
