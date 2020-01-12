@@ -1,0 +1,11 @@
+.root {
+  padding: 10px;
+
+}
+
+.rce-wrapper {
+  border: 1px solid pink;
+  margin-left: 50px;
+}
+
+

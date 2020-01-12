@@ -1,0 +1,68 @@
+{
+  "name": "@wix/theme-service",
+  "version": "1.0.0",
+  "license": "UNLICENSED",
+  "author": {
+    "name": "Oded Soffrin",
+    "email": "odeds@wix.com"
+  },
+  "main": "dist/src/index.js",
+  "module": "dist/es/src/index.js",
+  "sideEffects": false,
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "registry": "http://npm.dev.wixpress.com/"
+  },
+  "scripts": {
+    "precommit": "lint-staged",
+    "pretest": "yoshi build",
+    "test": "yoshi test",
+    "posttest": "yoshi lint",
+    "release": "yoshi release",
+    "storybook": "start-storybook -p 6006"
+  },
+  "peerDependencies": {
+    "react": "^16.8.6"
+  },
+  "devDependencies": {
+    "@storybook/react": "^5.0.11",
+    "@testing-library/react": "^9.4.0",
+    "draft-js": "^0.11.3",
+    "husky": "~0.14.0",
+    "jest-yoshi-preset": "^4.24.0",
+    "lint-staged": "^7.2.2",
+    "react": "^16.8.6",
+    "wix-rich-content-editor": "^6.6.1",
+    "wix-rich-content-plugin-divider": "^6.6.1",
+    "wix-rich-content-plugin-hashtag": "^6.6.1",
+    "yoshi": "^4.0.0",
+    "yoshi-style-dependencies": "^4.11.1"
+  },
+  "lint-staged": {
+    "*.js": "yoshi lint"
+  },
+  "jest": {
+    "preset": "jest-yoshi-preset"
+  },
+  "yoshi": {
+    "hmr": "auto"
+  },
+  "babel": {
+    "presets": [
+      [
+        "yoshi",
+        {
+          "ignoreReact": true
+        }
+      ]
+    ]
+  },
+  "eslintConfig": {
+    "extends": "yoshi-base"
+  },
+  "dependencies": {
+    "react-jss": "^10.0.0"
+  }
+}
