@@ -92,6 +92,7 @@ export default class TextColorPanel extends Component {
         userColors={this.state.userColors.slice(0, 17)}
         onColorAdded={this.onColorAdded}
         onChange={this.setColor}
+        onResetColor={this.setColor}
         onCustomPickerToggle={onCustomPickerToggle}
         onCustomColorPicked={onCustomColorPicked}
         theme={theme}
