@@ -18,7 +18,8 @@
     "test": "yoshi test",
     "posttest": "yoshi lint",
     "release": "yoshi release",
-    "storybook": "start-storybook -p 6006"
+    "storybook": "start-storybook -p 6006",
+    "clean": "rm -rf dist/"
   },
   "peerDependencies": {
     "react": "^16.6.3"
