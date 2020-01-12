@@ -21,6 +21,7 @@
      - [#572](https://github.com/wix-incubator/rich-content/pull/572) color Picker- ResetToDefault button sticky to bottom
   - `editor-common`
     - [#550](https://github.com/wix-incubator/rich-content/pull/550) remove dashed border when focused
+    - [#584](https://github.com/wix-incubator/rich-content/pull/584) fix gallery dropdown css
   - `link`
     - [#546](https://github.com/wix-incubator/rich-content/pull/546) saves the last data and the initial state of the checkboxes("Open in a new tab", "Add a nofollow tag") is according to the defaults (anchorTarget, relValue)
   - `editor-common`
