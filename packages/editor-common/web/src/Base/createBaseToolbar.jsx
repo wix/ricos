@@ -2,7 +2,6 @@
 import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
 import classNames from 'classnames';
-import { get } from 'lodash';
 import Measure from 'react-measure';
 import { TOOLBARS, TOOLBAR_OFFSETS, DISPLAY_MODE } from '../consts';
 import { getConfigByFormFactor } from '../Utils/getConfigByFormFactor';
@@ -97,7 +96,7 @@ export default function createToolbar({
     }
 
     componentDidMount() {
-      pubsub.subscribe('visibleBlock', this.onVisibilityChanged);
+      pubsub.subscribe('focusedBlock', this.onVisibilityChanged);
       pubsub.subscribe('componentState', this.onComponentStateChanged);
       pubsub.subscribe('componentData', this.onComponentDataChanged);
       this.unsubscribeOnBlock = pubsub.subscribeOnBlock({
@@ -107,7 +106,7 @@ export default function createToolbar({
     }
 
     componentWillUnmount() {
-      pubsub.unsubscribe('visibleBlock', this.onVisibilityChanged);
+      pubsub.unsubscribe('focusedBlock', this.onVisibilityChanged);
       pubsub.unsubscribe('componentState', this.onComponentStateChanged);
       pubsub.unsubscribe('componentData', this.onComponentDataChanged);
       this.unsubscribeOnBlock && this.unsubscribeOnBlock();
@@ -126,16 +125,16 @@ export default function createToolbar({
     };
 
     onComponentDataChanged = componentData => {
-      this.setState({ componentData }, () => this.onVisibilityChanged(pubsub.get('visibleBlock')));
+      this.setState({ componentData }, () => this.onVisibilityChanged(pubsub.get('focusedBlock')));
     };
 
     onComponentLinkChange = linkData => {
-      const { url, targetBlank, nofollow } = linkData || {};
+      const { url, target, rel } = linkData || {};
       const link = url
         ? {
             url,
-            target: targetBlank ? '_blank' : anchorTarget || '_self',
-            rel: nofollow ? 'nofollow' : relValue || 'noopener',
+            target,
+            rel,
           }
         : null;
 
@@ -146,18 +145,21 @@ export default function createToolbar({
       pubsub.update('componentData', { config: { alignment, size, textWrap } });
     };
 
-    onVisibilityChanged = visibleBlock => {
-      if (visibleBlock) {
+    onVisibilityChanged = focusedBlock => {
+      if (!this.shouldCreate) {
+        return;
+      }
+      if (focusedBlock) {
         this.showToolbar();
       } else {
         this.hideToolbar();
       }
 
-      if (visibleBlock !== this.visibleBlock) {
+      if (focusedBlock !== this.focusedBlock) {
         this.hidePanels();
       }
 
-      this.visibleBlock = visibleBlock;
+      this.focusedBlock = focusedBlock;
     };
 
     hideToolbar = () => {
@@ -239,7 +241,7 @@ export default function createToolbar({
     /*eslint-disable complexity*/
     renderButton = (button, key, themedStyle, separatorClassNames, tabIndex) => {
       const { alignment, size } = this.state.componentData.config || {};
-      const icons = get(settings, 'toolbar.icons', {});
+      const icons = settings?.toolbar?.icons || {};
       const buttonByKey = BUTTONS_BY_KEY[button.type];
       const Button = (buttonByKey && buttonByKey(icons[button.keyName])) || BaseToolbarButton;
       const buttonProps = {

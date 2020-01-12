@@ -1,4 +1,3 @@
-import { get } from 'lodash';
 import {
   BUTTONS,
   getModalStyles,
@@ -11,7 +10,7 @@ import { MobileFullScreenCustomStyle, DesktopFlyOutModalStyles } from '../consta
 import Arrow from './arrow';
 
 export default ({ t, settings, isMobile }) => {
-  const icon = get(settings, 'toolbar.icons.replace', MediaReplaceIcon);
+  const icon = settings?.toolbar?.icons?.replace || MediaReplaceIcon;
   const modalStyles = isMobile
     ? getModalStyles({ customStyles: MobileFullScreenCustomStyle, fullScreen: true, isMobile })
     : null;

@@ -5,7 +5,7 @@ import { mergeStyles } from 'wix-rich-content-common';
 import classNames from 'classnames';
 import ButtonSample from '../components/button-sample';
 import ColorToggleComponent from './color-toggle-component';
-import { DEFAULT_PALETTE, COLOR_PICKER_TYPE } from '../constants';
+import { DEFAULT_PALETTE, COLOR_PICKER_TYPE, buttonPreviews, COLORS } from '../constants';
 import styles from '../../statics/styles/design-component-styles.scss';
 
 class DesignComponent extends PureComponent {
@@ -16,103 +16,72 @@ class DesignComponent extends PureComponent {
     const {
       settings: { colors, getTextColors, getBorderColors, getBackgroundColors },
     } = this.props;
-    this.presetStyle = [
-      {
-        className: 'button_primary',
-        border: '0px solid #' + colors.color8,
-        borderRadius: '0px',
-        borderWidth: '0px',
-        background: colors.color8,
-        color: colors.color1,
-        borderColor: colors.color8,
-      },
-      {
-        className: 'button_secondary',
-        border: '1px solid ' + colors.color8,
-        borderRadius: '0px',
-        borderWidth: '1px',
-        background: colors.color1,
-        color: colors.color8,
-        borderColor: colors.color8,
-      },
-      {
-        className: 'button_secondary',
-        border: '1px solid ' + colors.color8,
-        borderRadius: '0px',
-        borderWidth: '1px',
-        background: colors.color7,
-        color: colors.color8,
-        borderColor: colors.color8,
-      },
-      {
-        className: 'button_secondary',
-        border: '1px solid ' + colors.color8,
-        borderRadius: '10px',
-        borderWidth: '1px',
-        background: colors.color7,
-        color: colors.color8,
-        borderColor: colors.color8,
-      },
-      {
-        className: 'button_secondary',
-        border: '1px solid ' + colors.color8,
-        borderWidth: '5px',
-        borderRadius: '0px',
-        background: colors.color1,
-        color: colors.color8,
-        borderColor: colors.color8,
-      },
-    ];
+    this.presetStyle = buttonPreviews(colors || COLORS);
     this.state = {
-      borderWidth: designObj.borderWidth,
-      padding: designObj.padding,
-      borderRadius: designObj.borderRadius,
-      activeButton: designObj.activeButton,
-      textColor: designObj.textColor ? designObj.textColor : colors.color1,
-      borderColor: designObj.borderColor ? designObj.borderColor : colors.color8,
-      backgroundColor: designObj.backgroundColor ? designObj.backgroundColor : colors.color8,
-      textCustomcolors: getTextColors() || [],
-      borderCustomcolors: getBorderColors() || [],
-      backgroundCustomcolors: getBackgroundColors() || [],
+      design: {
+        borderWidth: designObj.borderWidth,
+        padding: designObj.padding,
+        borderRadius: designObj.borderRadius,
+        activeButton: designObj.activeButton,
+        color: designObj?.color || colors.color1,
+        borderColor: designObj?.borderColor || colors.color8,
+        background: designObj?.background || colors.color8,
+      },
+      customBackgroundColors: (getBackgroundColors && getBackgroundColors()) || DEFAULT_PALETTE,
+      customTextColors: (getTextColors && getTextColors()) || DEFAULT_PALETTE,
+      customBorderColors: (getBorderColors && getBorderColors()) || DEFAULT_PALETTE,
       pickerType: '',
     };
-
-    this.onBackgroundcolorAdded = this.onBackgroundcolorAdded.bind(this);
-    this.onBordercolorAdded = this.onBordercolorAdded.bind(this);
-    this.onTextcolorAdded = this.onTextcolorAdded.bind(this);
   }
 
   componentDidUpdate = () => {
-    this.props.onDesignChange(this.state);
+    this.props.onDesignChange(this.state.design);
   };
 
-  onBackgroundcolorAdded(color) {
-    this.props.settings.onBackgroundColorAdded(color);
-    this.setState({
-      backgroundCustomcolors: this.props.settings.getBackgroundColors() || [],
-    });
-  }
-
-  onBordercolorAdded = color => {
-    this.props.settings.onBorderColorAdded(color);
-    this.setState({
-      borderCustomcolors: this.props.settings.getBorderColors() || [],
-    });
+  onBackgroundColorAdded = color => {
+    const {
+      settings: { getBackgroundColors, onBackgroundColorAdded },
+    } = this.props;
+    onBackgroundColorAdded && onBackgroundColorAdded(color);
+    const customBackgroundColors = (getBackgroundColors && getBackgroundColors()) || [
+      ...this.state.customBackgroundColors,
+      color,
+    ];
+    this.setState({ customBackgroundColors });
   };
 
-  onTextcolorAdded = color => {
-    this.props.settings.onTextColorAdded(color);
-    this.setState({
-      textCustomcolors: this.props.settings.getTextColors() || [],
-    });
+  onBorderColorAdded = color => {
+    const {
+      settings: { getBorderColors, onBorderColorAdded },
+    } = this.props;
+    onBorderColorAdded && onBorderColorAdded(color);
+    const customBorderColors = (getBorderColors && getBorderColors()) || [
+      ...this.state.customBorderColors,
+      color,
+    ];
+    this.setState({ customBorderColors });
+  };
+
+  onTextColorAdded = color => {
+    const {
+      settings: { getTextColors, onTextColorAdded },
+    } = this.props;
+    onTextColorAdded && onTextColorAdded(color);
+    const customTextColors = (getTextColors && getTextColors()) || [
+      ...this.state.customTextColors,
+      color,
+    ];
+    this.setState({ customTextColors });
   };
 
   onBorderWidthChange = value => {
-    this.setState({ borderWidth: value, padding: 12 - value / 2 });
+    const design = { ...this.state.design, borderWidth: value, padding: 12 - value / 2 };
+    this.setState({ design });
   };
 
   onBorderRadiusChange = value => {
-    this.setState({ borderRadius: value });
+    const design = { ...this.state.design, borderRadius: value };
+    this.setState({ design });
   };
 
   alignButtonSample = i => {
@@ -121,43 +90,47 @@ class DesignComponent extends PureComponent {
 
   onButtonSampleClick = index => {
     this.alignButtonSample(index);
-    this.setState({
+    const design = {
       activeButton: index,
       borderWidth: parseInt(this.presetStyle[index].borderWidth),
       borderRadius: parseInt(this.presetStyle[index].borderRadius),
-      textColor: this.presetStyle[index].color,
-      backgroundColor: this.presetStyle[index].background,
+      color: this.presetStyle[index].color,
+      background: this.presetStyle[index].background,
       borderColor: this.presetStyle[index].borderColor,
-    });
+    };
+    this.setState({ design });
   };
 
   onTextColorChange = color => {
-    this.setState({ textColor: color });
+    const design = { ...this.state.design, color };
+    this.setState({ design });
   };
 
   onBorderColorChange = color => {
-    this.setState({ borderColor: color });
+    const design = { ...this.state.design, borderColor: color };
+    this.setState({ design });
   };
 
   onBackgroundColorChange = color => {
-    this.setState({ backgroundColor: color });
+    const design = { ...this.state.design, background: color };
+    this.setState({ design });
   };
 
   componentDidMount() {
-    this.alignButtonSample(this.state.activeButton);
+    this.alignButtonSample(this.state.design.activeButton);
   }
 
   onToggled = pickerType => {
     this.setState({ pickerType: pickerType !== this.state.pickerType ? pickerType : '' });
   };
 
-  renderColorPicker(stateColor, propColor, userColors, onColorAdded, onChange, pickerType, label) {
+  renderColorPicker(color, userColors, onColorAdded, onChange, pickerType, label) {
     const { t, isMobile, theme, palette } = this.props;
     return (
       <div>
         <ColorToggleComponent
           theme={theme}
-          color={stateColor}
+          color={color}
           pickerType={pickerType}
           isMobile={isMobile}
           isToggle={this.state.pickerType === pickerType}
@@ -167,8 +140,8 @@ class DesignComponent extends PureComponent {
         </ColorToggleComponent>
         {this.state.pickerType === pickerType && (
           <ColorPicker
-            color={propColor}
-            palette={palette.slice(0, 7) || DEFAULT_PALETTE}
+            color={color}
+            palette={palette?.slice(0, 7) || DEFAULT_PALETTE}
             userColors={userColors.slice(0, 100)}
             onColorAdded={onColorAdded}
             theme={this.styles}
@@ -192,9 +165,10 @@ class DesignComponent extends PureComponent {
 
   render() {
     const styles = this.styles;
-    const { theme, t, designObj } = this.props;
+    const { theme, t } = this.props;
+    const { design } = this.state;
     const buttonSampleList = this.presetStyle.map((style, i) => {
-      const active = i === this.state.activeButton;
+      const active = i === design.activeButton;
       return (
         <ButtonSample
           key={i.toString()}
@@ -203,7 +177,7 @@ class DesignComponent extends PureComponent {
           onClick={this.onButtonSampleClick.bind(this)}
           {...this.props}
           style={style}
-          buttonObj={this.state}
+          buttonObj={design}
         />
       );
     });
@@ -234,7 +208,7 @@ class DesignComponent extends PureComponent {
               <div className={styles.button_designComponent_input_container_width}>
                 <div className={styles.button_designComponent_slider_with_input}>
                   <SliderWithInput
-                    value={parseInt(this.state.borderWidth)}
+                    value={parseInt(design.borderWidth)}
                     min={0}
                     max={15}
                     label={t('ButtonModal_Width_Input')}
@@ -246,7 +220,7 @@ class DesignComponent extends PureComponent {
               <div className={styles.button_designComponent_input_container_corner}>
                 <div className={styles.button_designComponent_slider_with_input}>
                   <SliderWithInput
-                    value={parseInt(this.state.borderRadius)}
+                    value={parseInt(design.borderRadius)}
                     min={0}
                     max={15}
                     label={t('ButtonModal_Radius_Input')}
@@ -267,28 +241,25 @@ class DesignComponent extends PureComponent {
               </div>
 
               {this.renderColorPicker(
-                this.state.textColor,
-                designObj.textColor,
-                this.state.textCustomcolors,
-                this.onTextcolorAdded,
+                design.color,
+                this.state.customTextColors,
+                this.onTextColorAdded,
                 this.onTextColorChange,
                 COLOR_PICKER_TYPE.TEXT_COLOR,
                 t('ButtonModal_Text_Color')
               )}
               {this.renderColorPicker(
-                this.state.borderColor,
-                designObj.borderColor,
-                this.state.borderCustomcolors,
-                this.onBordercolorAdded,
+                design.borderColor,
+                this.state.customBorderColors,
+                this.onBorderColorAdded,
                 this.onBorderColorChange,
                 COLOR_PICKER_TYPE.BORDER_COLOR,
                 t('ButtonModal_Border_Color')
               )}
               {this.renderColorPicker(
-                this.state.backgroundColor,
-                designObj.backgroundColor,
-                this.state.backgroundCustomcolors,
-                this.onBackgroundcolorAdded,
+                design.background,
+                this.state.customBackgroundColors,
+                this.onBackgroundColorAdded,
                 this.onBackgroundColorChange,
                 COLOR_PICKER_TYPE.BACKGROUND_COLOR,
                 t('ButtonModal_Background_Color')
@@ -306,7 +277,7 @@ DesignComponent.propTypes = {
   componentData: PropTypes.object,
   t: PropTypes.func,
   designObj: PropTypes.object,
-  settings: PropTypes.object.isRequired,
+  settings: PropTypes.object,
   onDesignChange: PropTypes.func.isRequired,
   getTextColors: PropTypes.func,
   getBorderColors: PropTypes.func,

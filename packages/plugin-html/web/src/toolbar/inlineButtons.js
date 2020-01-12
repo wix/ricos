@@ -1,4 +1,3 @@
-import { get } from 'lodash';
 import { translate } from 'react-i18next';
 import {
   BUTTONS,
@@ -23,7 +22,7 @@ const getAlignmentButtonPropsFn = getEditorBounds => ({ componentData }) => {
   const editorBounds = getEditorBounds();
   const maxAlignmentWidth = editorBounds ? editorBounds.width - 1 : MAX_ALIGNMENT_WIDTH;
   return {
-    disabled: get(componentData, 'config.width', 0) > maxAlignmentWidth,
+    disabled: (componentData?.config?.width || 0) > maxAlignmentWidth,
   };
 };
 
@@ -42,7 +41,7 @@ export default ({ settings = {}, getEditorBounds }) => {
     maxHeight = MAX_HEIGHT,
     minHeight = MIN_HEIGHT,
   } = settings;
-  const icons = get(settings, 'toolbar.icons', {});
+  const icons = settings?.toolbar?.icons || {};
   return [
     {
       type: BUTTONS.INLINE_PANEL,

@@ -55,15 +55,23 @@ class ImageSettings extends Component {
 
   linkPanelToLink = ({ url, targetBlank, nofollow, isValid }) => ({
     url,
-    target: targetBlank ? '_blank' : this.props.anchorTarget || '_self',
-    rel: nofollow ? 'nofollow' : this.props.relValue || 'noopener',
+    target: targetBlank
+      ? '_blank'
+      : this.props.anchorTarget !== '_blank'
+      ? this.props.anchorTarget
+      : '_self',
+    rel: nofollow
+      ? 'nofollow'
+      : this.props.relValue !== 'nofollow'
+      ? this.props.relValue
+      : 'noopener',
     isValid,
   });
 
   linkToLinkPanel = ({ url = '', target, rel, isValid }) => ({
     url,
-    targetBlank: target === '_blank',
-    nofollow: rel === 'nofollow',
+    targetBlank: target ? target === '_blank' : this.props.anchorTarget === '_blank',
+    nofollow: rel ? rel === 'nofollow' : this.props.relValue === 'nofollow',
     isValid,
   });
   render() {
@@ -87,7 +95,8 @@ class ImageSettings extends Component {
     } = this.props;
 
     const { linkPanel } = uiSettings || {};
-    const { blankTargetToggleVisibilityFn, nofollowRelToggleVisibilityFn } = linkPanel || {};
+    const { blankTargetToggleVisibilityFn, nofollowRelToggleVisibilityFn, placeholder } =
+      linkPanel || {};
     const showTargetBlankCheckbox =
       blankTargetToggleVisibilityFn && blankTargetToggleVisibilityFn(anchorTarget);
     const showRelValueCheckbox =
@@ -228,6 +237,7 @@ class ImageSettings extends Component {
                     theme={theme}
                     t={t}
                     ariaProps={{ 'aria-labelledby': 'gallery_image_link_lbl' }}
+                    placeholder={placeholder}
                   />
                 </SettingsSection>
               </div>

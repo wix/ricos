@@ -4,7 +4,7 @@ import TextHighlightIcon from './TextHighlightIcon';
 import { TEXT_HIGHLIGHT_TYPE } from '../types';
 import BaseTextColor from './BaseTextColor';
 import { textBackgroundPredicate } from '../text-decorations-utils';
-import { get } from 'lodash';
+import { DEFAULT_HIGHLIGHT_COLOR } from '../constants';
 
 export default class TextHighlightButton extends Component {
   constructor(props) {
@@ -13,13 +13,14 @@ export default class TextHighlightButton extends Component {
   }
   render() {
     const settings = this.props.config[TEXT_HIGHLIGHT_TYPE];
-    const icon = get(settings, 'toolbar.icons.TextHighlight');
+    const iconTextHighlight = settings?.toolbar?.icons?.TextHighlight || TextHighlightIcon;
     const pluginParams = {
       dataHook: 'TextHighlightButton',
       toolTip: 'TextHighlightButton_Tooltip',
-      icon: icon || TextHighlightIcon,
+      icon: iconTextHighlight,
       type: TEXT_HIGHLIGHT_TYPE,
       predicate: textBackgroundPredicate,
+      defaultColor: DEFAULT_HIGHLIGHT_COLOR,
     };
     return <BaseTextColor buttonRef={this.buttonRef} pluginParams={pluginParams} {...this.props} />;
   }

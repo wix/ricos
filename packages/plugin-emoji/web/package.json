@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-plugin-emoji",
-  "version": "6.6.0",
+  "version": "6.6.6",
   "author": {
     "name": "Bashar Qaddumi",
     "email": "basharq@wix.com"
@@ -26,7 +26,7 @@
     "build": "rollup --environment MODULE_NAME:plugin-emoji -c ../../../rollup.config.js",
     "build:dev": "cross-env NODE_ENV=development npm run build",
     "build:analyze": "npm run build -- --environment MODULE_ANALYZE && open stats.html",
-    "watch": "cross-env NODE_ENV=development MODULE_WATCH=1 npm run build -- --watch",
+    "watch": "cross-env NODE_ENV=development MODULE_WATCH=1 npm run build -- --watch.chokidar",
     "lint": "eslint 'src/**/*.{js,jsx}'"
   },
   "peerDependencies": {
@@ -54,8 +54,8 @@
     "emojione": "~2.2.7",
     "react-custom-scrollbars": "^4.2.1",
     "react-icons": "~3.7.0",
-    "wix-rich-content-common": "6.6.0",
-    "wix-rich-content-editor-common": "6.6.0"
+    "wix-rich-content-common": "6.6.6",
+    "wix-rich-content-editor-common": "6.6.6"
   },
   "unpkg": true,
   "publishConfig": {

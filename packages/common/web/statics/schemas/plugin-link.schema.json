@@ -1,0 +1,38 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://wix-rich-content/link-content-data-schema.json",
+    "type": "object",
+    "definitions": {},
+    "properties": {
+      "href": {
+        "$id": "/properties/href",
+        "type": "string",
+        "title": "href",
+        "default": "",
+        "examples": ["wix.com"]
+      },
+      "rel": {
+        "$id": "/properties/rel",
+        "type": "string",
+        "title": "rel",
+        "default": "noopener",
+        "examples": ["nofollow", "noopener", "noreferrer"]
+      },
+      "target": {
+        "$id": "/properties/target",
+        "type": "string",
+        "title": "target",
+        "default": "_self",
+        "examples": ["_blank", "_top", "_self"]
+      },
+      "url": {
+        "$id": "/properties/url",
+        "type": "string",
+        "title": "URL",
+        "default": "",
+        "examples": ["wix.com"]
+      }
+    },
+    "required": ["url"]
+  }
+  

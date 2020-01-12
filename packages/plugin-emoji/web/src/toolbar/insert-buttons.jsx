@@ -7,7 +7,7 @@ import {
 } from 'wix-rich-content-editor-common';
 import EmojiPreviewModal from './emojiPreviewModal';
 import Arrow from './arrow';
-import { EmojiPluginIcon } from '../icons';
+import EmojiPluginIcon from '../icons/EmojiPluginIcon.svg';
 
 export default ({ helpers, t, settings, getEditorState, setEditorState }) => {
   return [

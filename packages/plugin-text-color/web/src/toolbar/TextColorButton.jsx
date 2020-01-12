@@ -4,8 +4,7 @@ import TextColorIcon from './TextColorIcon';
 import { TEXT_COLOR_TYPE } from '../types';
 import BaseTextColor from './BaseTextColor';
 import { textForegroundPredicate } from '../text-decorations-utils';
-import { get } from 'lodash';
-
+import { DEFAULT_COLOR } from '../constants';
 export default class TextColorButton extends Component {
   constructor(props) {
     super(props);
@@ -14,13 +13,14 @@ export default class TextColorButton extends Component {
 
   render() {
     const settings = this.props.config[TEXT_COLOR_TYPE];
-    const icon = get(settings, 'toolbar.icons.TextColor');
+    const iconTextColor = settings?.toolbar?.icons?.TextColor || TextColorIcon;
     const pluginParams = {
       dataHook: 'TextColorButton',
       toolTip: 'TextColorButton_Tooltip',
-      icon: icon || TextColorIcon,
+      icon: iconTextColor,
       type: TEXT_COLOR_TYPE,
       predicate: textForegroundPredicate,
+      defaultColor: DEFAULT_COLOR,
     };
     return <BaseTextColor buttonRef={this.buttonRef} pluginParams={pluginParams} {...this.props} />;
   }

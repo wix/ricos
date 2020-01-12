@@ -2,6 +2,7 @@ import { composeDecorators } from 'draft-js-plugins-editor';
 import createFocusPlugin from 'draft-js-focus-plugin';
 import createResizeDecoration from './Decorators/Resize';
 import createBlockDndPlugin from 'draft-js-drag-n-drop-plugin';
+import { simplePubsub } from 'wix-rich-content-editor-common';
 
 const createPlugins = ({
   plugins,
@@ -12,7 +13,6 @@ const createPlugins = ({
   isMobile,
   anchorTarget,
   relValue,
-  onAtomicBlockFocus,
   getEditorState,
   setEditorState,
   getEditorBounds,
@@ -31,6 +31,8 @@ const createPlugins = ({
     focusPlugin.decorator
   );
 
+  const pluginDefaults = {};
+
   const wixPluginConfig = {
     decorator: wixPluginsDecorators,
     helpers,
@@ -39,10 +41,11 @@ const createPlugins = ({
     isMobile,
     anchorTarget,
     relValue,
-    onAtomicBlockFocus,
     getEditorState,
     setEditorState,
     getEditorBounds,
+    commonPubsub: simplePubsub(),
+    pluginDefaults,
     ...config,
   };
 
@@ -50,7 +53,6 @@ const createPlugins = ({
 
   let pluginButtons = [];
   let pluginTextButtons = [];
-  let pubsubs = [];
   let pluginStyleFns = [];
   wixPlugins.forEach(wixPlugin => {
     pluginButtons = [...pluginButtons, ...(wixPlugin.InsertPluginButtons || [])];
@@ -60,7 +62,6 @@ const createPlugins = ({
       ...(wixPlugin.TextButtonMapper ? [wixPlugin.TextButtonMapper(wixPlugin.pubsub)] : []),
     ];
     /* eslint-enable new-cap */
-    pubsubs = [...pubsubs, ...(wixPlugin.pubsub ? [wixPlugin.pubsub] : [])];
     pluginStyleFns = [
       ...pluginStyleFns,
       ...(wixPlugin.customStyleFn ? [wixPlugin.customStyleFn] : []),
@@ -73,7 +74,6 @@ const createPlugins = ({
     pluginInstances,
     pluginButtons,
     pluginTextButtons,
-    pubsubs,
     pluginStyleFns,
   };
 };

@@ -6,7 +6,6 @@ import {
 } from 'wix-rich-content-editor-common';
 import VideoSelectionInputModal from './videoSelectionInputModal';
 import { InsertPluginIcon } from '../icons';
-import { get } from 'lodash';
 import {
   SelectionModalCustomStyle,
   ExtendedSelectionModalCustomStyle,
@@ -15,7 +14,7 @@ import {
 export default ({ helpers, t, settings, isMobile }) => {
   //apply the extended input modal styles if handleFileSelection is avilable in plugin config
   //& on mobile if enableCustomUploadOnMobile is set to true, otherwise the normal modal styles is applied
-  const icon = get(settings, 'toolbar.icons.Video', InsertPluginIcon);
+  const icon = settings?.toolbar?.icons?.Video || InsertPluginIcon;
   const customStyles =
     (!isMobile || settings.enableCustomUploadOnMobile) &&
     (settings.handleFileSelection || settings.handleFileUpload)
