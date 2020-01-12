@@ -37,7 +37,6 @@ const createBaseComponent = ({
   componentWillReceiveDecorationProps = () => {},
   getEditorBounds,
   onOverlayClick,
-  onAtomicBlockFocus,
   disableRightClick,
   onComponentMount,
 }) => {
@@ -56,7 +55,6 @@ const createBaseComponent = ({
     }
 
     stateFromProps(props) {
-      const { readOnly } = props.blockProps;
       const initialState = commonPubsub.get('initialState_' + props.block.getKey());
       if (initialState) {
         //reset the initial state
@@ -64,7 +62,6 @@ const createBaseComponent = ({
       }
       return {
         componentData: this.getData(props),
-        readOnly: !!readOnly,
         componentState: initialState || {},
       };
     }
@@ -104,7 +101,7 @@ const createBaseComponent = ({
     componentWillUnmount() {
       this.subscriptions.forEach(subscription => pubsub.unsubscribe(...subscription));
       this.subscriptionsOnBlock.forEach(unsubscribe => unsubscribe());
-      pubsub.set('focusedBlock', null);
+      this.updateUnselectedComponent();
     }
 
     isMe = blockKey => {
@@ -114,6 +111,10 @@ const createBaseComponent = ({
       } else {
         return pubsub.get('focusedBlock') === block.getKey();
       }
+    };
+
+    isMeAndIdle = blockKey => {
+      return this.isMe(blockKey) && !this.duringUpdate;
     };
 
     onComponentDataChange = (componentData, blockKey) => {
@@ -140,13 +141,13 @@ const createBaseComponent = ({
     };
 
     onComponentLinkChange = linkData => {
-      const { url, targetBlank, nofollow } = linkData || {};
+      const { url, target, rel } = linkData || {};
       if (this.isMeAndIdle()) {
         const link = url
           ? {
               url,
-              target: targetBlank === true ? '_blank' : anchorTarget || '_self',
-              rel: nofollow === true ? 'nofollow' : relValue || 'noopener',
+              target,
+              rel,
             }
           : null;
 
@@ -167,10 +168,6 @@ const createBaseComponent = ({
         this.updateUnselectedComponent();
       }
     }
-
-    isMeAndIdle = blockKey => {
-      return this.isMe(blockKey) && !this.duringUpdate;
-    };
 
     handleClick = e => {
       if (onOverlayClick) {
@@ -206,7 +203,6 @@ const createBaseComponent = ({
         batchUpdates.deleteBlock = this.deleteBlock;
         batchUpdates.focusedBlock = focusedBlock;
         pubsub.set(batchUpdates);
-        onAtomicBlockFocus(focusedBlock);
       } else {
         //maybe just the position has changed
         const blockNode = findDOMNode(this);
@@ -216,19 +212,14 @@ const createBaseComponent = ({
     }
 
     updateUnselectedComponent() {
-      const batchUpdates = {};
-      batchUpdates.focusedBlock = null;
-      batchUpdates.componentData = {};
-      batchUpdates.componentState = {};
-      pubsub.set(batchUpdates);
-      onAtomicBlockFocus(undefined);
+      pubsub.set({ focusedBlock: null, componentData: {}, componentState: {} });
     }
 
     handleContextMenu = e => disableRightClick && e.preventDefault();
 
     render = () => {
       const { blockProps, className, selection, onDragStart } = this.props;
-      const { componentData, readOnly } = this.state;
+      const { componentData } = this.state;
       const { containerClassName, ...decorationProps } = pluginDecorationProps(
         this.props,
         componentData
@@ -237,7 +228,7 @@ const createBaseComponent = ({
       const { width: initialWidth, height: initialHeight } = settings || {};
       const isEditorFocused = selection.getHasFocus();
       const { isFocused } = blockProps;
-      const isActive = isFocused && isEditorFocused && !readOnly;
+      const isActive = isFocused && isEditorFocused;
 
       const classNameStrategies = compact([
         PluginComponent.alignmentClassName || alignmentClassName,
@@ -247,12 +238,10 @@ const createBaseComponent = ({
       ]).map(strategy => strategy(this.state.componentData, theme, this.styles, isMobile));
 
       const ContainerClassNames = classNames(
+        this.styles.pluginContainer,
+        theme.pluginContainer,
         {
-          [this.styles.pluginContainer]: !readOnly,
-          [this.styles.pluginContainerReadOnly]: readOnly,
           [this.styles.pluginContainerMobile]: isMobile,
-          [theme.pluginContainer]: !readOnly,
-          [theme.pluginContainerReadOnly]: readOnly,
           [theme.pluginContainerMobile]: isMobile,
           [containerClassName]: !!containerClassName,
         },
@@ -264,10 +253,7 @@ const createBaseComponent = ({
         }
       );
 
-      const overlayClassNames = classNames(this.styles.overlay, theme.overlay, {
-        [this.styles.hidden]: readOnly,
-        [theme.hidden]: readOnly,
-      });
+      const overlayClassNames = classNames(this.styles.overlay, theme.overlay);
 
       const sizeStyles = {
         width: currentWidth || initialWidth,
@@ -324,15 +310,13 @@ const createBaseComponent = ({
           ) : (
             component
           )}
-          {!this.state.readOnly && (
-            <div
-              role="none"
-              data-hook={'componentOverlay'}
-              onClick={this.handleClick}
-              className={overlayClassNames}
-              draggable
-            />
-          )}
+          <div
+            role="none"
+            data-hook={'componentOverlay'}
+            onClick={this.handleClick}
+            className={overlayClassNames}
+            draggable
+          />
         </div>
       );
       /* eslint-enable jsx-a11y/anchor-has-content */

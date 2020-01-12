@@ -11,7 +11,6 @@ class Slider extends Component {
     theme: PropTypes.object.isRequired,
     onChange: PropTypes.func.isRequired,
     dataHook: PropTypes.string,
-    readOnly: PropTypes.bool,
     ariaProps: PropTypes.object,
   };
 
@@ -50,11 +49,11 @@ class Slider extends Component {
   }
 
   render() {
-    const { min, max, onChange, dataHook, readOnly, ariaProps } = this.props;
+    const { min, max, onChange, dataHook, ariaProps } = this.props;
     return (
       <input
         {...ariaProps}
-        tabIndex={readOnly ? -1 : 0}
+        tabIndex={0}
         type={'range'}
         className={this.styles.slider}
         data-hook={dataHook}

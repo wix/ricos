@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-plugin-map",
-  "version": "6.6.1",
+  "version": "6.6.6",
   "author": {
     "name": "Ehab Sharif",
     "email": "ehabs@wix.com"
@@ -26,7 +26,7 @@
     "build": "rollup --environment MODULE_NAME:plugin-map -c ../../../rollup.config.js",
     "build:dev": "cross-env NODE_ENV=development npm run build",
     "build:analyze": "npm run build -- --environment MODULE_ANALYZE && open stats.html",
-    "watch": "cross-env NODE_ENV=development MODULE_WATCH=1 npm run build -- --watch",
+    "watch": "cross-env NODE_ENV=development MODULE_WATCH=1 npm run build -- --watch.chokidar",
     "release": "wnpm-release --no-shrinkwrap",
     "lint": "eslint 'src/**/*.{js,jsx}'"
   },
@@ -59,8 +59,8 @@
     "react-google-maps-loader": "~4.2.5",
     "react-google-places-suggest": "~3.8.0",
     "uuid": "~3.3.2",
-    "wix-rich-content-common": "6.6.1",
-    "wix-rich-content-editor-common": "6.6.1"
+    "wix-rich-content-common": "6.6.6",
+    "wix-rich-content-editor-common": "6.6.6"
   },
   "unpkg": true,
   "publishConfig": {

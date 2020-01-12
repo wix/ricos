@@ -15,6 +15,7 @@ import {
 import { DEFAULTS, SEO_IMAGE_WIDTH } from './consts';
 import styles from '../statics/styles/image-viewer.scss';
 import ExpandIcon from './icons/expand.svg';
+import InPluginInput from './InPluginInput';
 
 class ImageViewer extends React.Component {
   constructor(props) {
@@ -106,24 +107,32 @@ class ImageViewer extends React.Component {
   };
 
   renderImage(imageClassName, imageSrc, alt, props) {
-    return [
-      <img
-        key="preload"
-        ref={ref => (this.preloadImage = ref)}
-        className={classNames(imageClassName, this.styles.imagePreload)}
-        src={imageSrc.preload}
-        alt={alt}
-        onError={this.onImageLoadError}
-      />,
+    const fileType = imageSrc.highres.split('.').pop();
+    const isGif = fileType === 'gif';
+    let images = [
       <img
         {...props}
         key="highres"
         className={classNames(imageClassName, this.styles.imageHighres)}
         src={imageSrc.highres}
         alt={alt}
-        onLoad={e => this.onHighResLoad(e)}
+        onLoad={isGif ? undefined : e => this.onHighResLoad(e)}
       />,
     ];
+    if (!isGif) {
+      images = [
+        <img
+          key="preload"
+          ref={ref => (this.preloadImage = ref)}
+          className={classNames(imageClassName, this.styles.imagePreload)}
+          src={imageSrc.preload}
+          alt={alt}
+          onError={this.onImageLoadError}
+        />,
+        ...images,
+      ];
+    }
+    return images;
   }
 
   renderLoader() {
@@ -157,21 +166,21 @@ class ImageViewer extends React.Component {
     );
   }
 
-  renderCaption(caption, isFocused, readOnly, styles, defaultCaption) {
-    return caption ? (
-      <div className={styles.imageCaption} data-hook="imageViewerCaption">
-        {caption}
-      </div>
-    ) : (
-      !readOnly && isFocused && defaultCaption && (
-        <div className={styles.imageCaption}>{defaultCaption}</div>
-      )
+  renderCaption(caption) {
+    const { onCaptionChange, setFocusToBlock } = this.props;
+    return (
+      <InPluginInput
+        className={this.styles.imageCaption}
+        value={caption}
+        onChange={onCaptionChange}
+        setFocusToBlock={setFocusToBlock}
+      />
     );
   }
 
   onKeyDown = (e, handler) => {
     if (e.key === 'Enter' || e.key === ' ') {
-      handler();
+      handler?.();
     }
   };
 
@@ -183,12 +192,17 @@ class ImageViewer extends React.Component {
 
   shouldRenderCaption() {
     const { settings, componentData, defaultCaption } = this.props;
-    const { metadata } = componentData;
+    const caption = componentData.metadata?.caption;
+    const { getInPluginEditingMode } = this.context;
 
     if (includes(get(settings, 'toolbar.hidden'), 'settings')) {
       return false;
     }
-    if (!metadata || metadata.caption === defaultCaption || metadata.caption === '') {
+    if (
+      caption === undefined ||
+      (caption === '' && !getInPluginEditingMode?.()) ||
+      caption === defaultCaption
+    ) {
       return false;
     }
     const data = componentData || DEFAULTS;
@@ -208,7 +222,7 @@ class ImageViewer extends React.Component {
 
   render() {
     this.styles = this.styles || mergeStyles({ styles, theme: this.context.theme });
-    const { componentData, className, isFocused, readOnly, settings, defaultCaption } = this.props;
+    const { componentData, className, settings } = this.props;
     const { fallbackImageSrc } = this.state;
     const data = componentData || DEFAULTS;
     const { metadata = {} } = componentData;
@@ -247,8 +261,7 @@ class ImageViewer extends React.Component {
         </div>
         {this.renderTitle(data, this.styles)}
         {this.renderDescription(data, this.styles)}
-        {this.shouldRenderCaption() &&
-          this.renderCaption(metadata.caption, isFocused, readOnly, this.styles, defaultCaption)}
+        {this.shouldRenderCaption() && this.renderCaption(metadata.caption)}
       </div>
     );
     /* eslint-enable jsx-a11y/no-static-element-interactions */
@@ -263,10 +276,11 @@ ImageViewer.propTypes = {
   isLoading: PropTypes.bool,
   dataUrl: PropTypes.string,
   isFocused: PropTypes.bool,
-  readOnly: PropTypes.bool,
   settings: PropTypes.object,
   defaultCaption: PropTypes.string,
   entityIndex: PropTypes.number,
+  onCaptionChange: PropTypes.func,
+  setFocusToBlock: PropTypes.func,
 };
 
 export default ImageViewer;

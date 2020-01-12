@@ -1,4 +1,4 @@
-exports[`plugins > image > render plugin toolbar and customize in settings #0`] =
+exports[`plugins > full screen > image full screen > expand image on full screen #0`] =
 {
   "blocks": [
     {
@@ -109,17 +109,9 @@ exports[`plugins > image > render plugin toolbar and customize in settings #0`] 
       "data": {
         "config": {
           "alignment": "center",
-          "link": {
-            "rel": "nofollow",
-            "target": "_blank",
-            "url": "www.wix.com"
-          },
           "showDescription": true,
           "showTitle": true,
           "size": "small"
-        },
-        "metadata": {
-          "caption": ""
         },
         "src": {
           "file_name": "8bb438_131a7e1872bc45ec827bb61e56b840fe.jpg",
@@ -154,7 +146,168 @@ exports[`plugins > image > render plugin toolbar and customize in settings #0`] 
   }
 };
 
-exports[`plugins > gallery > should render gallery plugin toolbar and settings #0`] =
+exports[`plugins > full screen > gallery full screen > expand gallery image on full screen #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 3,
+      "text": "This is a test of the gallery plugin.",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 4,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 1,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 5,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 6,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "layout": "small",
+          "size": "content",
+          "spacing": 0
+        },
+        "items": [
+          {
+            "itemId": "65a6266ba23a8a55da3f469157f15237",
+            "metadata": {
+              "height": 1893,
+              "processedByConsumer": true,
+              "width": 2839
+            },
+            "url": "8bb438_2d651ff17f644d0db766521a18bf888b.jpg"
+          },
+          {
+            "itemId": "ea8ec1609e052b7f196935318316299d",
+            "metadata": {
+              "height": 2829,
+              "processedByConsumer": true,
+              "width": 4200
+            },
+            "url": "8bb438_149b418b9bfb47e0adafc569ca55c5e9.jpg"
+          }
+        ],
+        "styles": {
+          "allowDownload": false,
+          "allowHover": false,
+          "allowSocial": false,
+          "cubeRatio": 1,
+          "cubeType": "fill",
+          "enableInfiniteScroll": true,
+          "fullscreen": false,
+          "galleryLayout": 2,
+          "galleryMargin": 0,
+          "gallerySizePx": 300,
+          "gallerySizeType": "px",
+          "galleryThumbnailsAlignment": "bottom",
+          "gotStyleParams": true,
+          "gridStyle": 1,
+          "imageMargin": 20,
+          "isVertical": false,
+          "itemClick": "link",
+          "loveButton": false,
+          "mobileSwipeAnimation": "NO_EFFECT",
+          "numberOfImagesPerRow": 3,
+          "oneRow": false,
+          "showArrows": false,
+          "thumbnailSize": 120,
+          "thumbnailSpacings": 0,
+          "titlePlacement": "SHOW_ON_HOVER"
+        }
+      },
+      "mutability": "IMMUTABLE",
+      "type": "wix-draft-plugin-gallery"
+    },
+    "1": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "showDescription": true,
+          "showTitle": true,
+          "size": "content"
+        },
+        "src": {
+          "file_name": "8bb438_4a6550d4df364f9890180f52243fb396.jpg",
+          "height": 1081,
+          "id": "d052fe7e6db2fd246708f8e56ddc3684",
+          "original_file_name": "8bb438_4a6550d4df364f9890180f52243fb396.jpg",
+          "width": 1621
+        }
+      },
+      "mutability": "IMMUTABLE",
+      "type": "wix-draft-plugin-image"
+    }
+  }
+};
+
+exports[`plugins > gallery > render gallery plugin #0`] =
 {
   "blocks": [
     {
@@ -315,7 +468,7 @@ exports[`plugins > gallery > should render gallery plugin toolbar and settings #
   }
 };
 
-exports[`plugins > gallery > organize media > should allow to manipulate the media items #0`] =
+exports[`plugins > gallery > organize media > allow to manipulate the media items #0`] =
 {
   "blocks": [
     {
@@ -457,7 +610,7 @@ exports[`plugins > gallery > organize media > should allow to manipulate the med
   }
 };
 
-exports[`plugins > gallery > image settings > should allow to update image content #0`] =
+exports[`plugins > gallery > media settings > allow to update media content #0`] =
 {
   "blocks": [
     {
@@ -818,6 +971,167 @@ exports[`plugins > html > render html plugin toolbar #0`] =
       },
       "mutability": "IMMUTABLE",
       "type": "wix-draft-plugin-html"
+    }
+  }
+};
+
+exports[`plugins > divider > render plugin toolbar and change styling #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 1,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 3,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 4,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 2,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 5,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 6,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 3,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 7,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 8,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "alignment": "left",
+          "size": "small",
+          "textWrap": "nowrap"
+        },
+        "type": "single"
+      },
+      "mutability": "IMMUTABLE",
+      "type": "wix-draft-plugin-divider"
+    },
+    "1": {
+      "data": {
+        "config": {
+          "alignment": "right",
+          "size": "medium",
+          "textWrap": "nowrap"
+        },
+        "type": "double"
+      },
+      "mutability": "IMMUTABLE",
+      "type": "wix-draft-plugin-divider"
+    },
+    "2": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "size": "large",
+          "textWrap": "nowrap"
+        },
+        "type": "double"
+      },
+      "mutability": "IMMUTABLE",
+      "type": "wix-draft-plugin-divider"
+    },
+    "3": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "size": "large",
+          "textWrap": "nowrap"
+        },
+        "type": "dotted"
+      },
+      "mutability": "IMMUTABLE",
+      "type": "wix-draft-plugin-divider"
     }
   }
 };
@@ -1511,168 +1825,7 @@ exports[`plugins > alignment > align atomic block right #0`] =
   }
 };
 
-exports[`plugins > divider > render plugin toolbar and change styling #0`] =
-{
-  "blocks": [
-    {
-      "data": {},
-      "depth": 0,
-      "entityRanges": [],
-      "inlineStyleRanges": [],
-      "key": 0,
-      "text": "",
-      "type": "unstyled"
-    },
-    {
-      "data": {},
-      "depth": 0,
-      "entityRanges": [
-        {
-          "key": 0,
-          "length": 1,
-          "offset": 0
-        }
-      ],
-      "inlineStyleRanges": [],
-      "key": 1,
-      "text": " ",
-      "type": "atomic"
-    },
-    {
-      "data": {},
-      "depth": 0,
-      "entityRanges": [],
-      "inlineStyleRanges": [],
-      "key": 2,
-      "text": "",
-      "type": "unstyled"
-    },
-    {
-      "data": {},
-      "depth": 0,
-      "entityRanges": [
-        {
-          "key": 1,
-          "length": 1,
-          "offset": 0
-        }
-      ],
-      "inlineStyleRanges": [],
-      "key": 3,
-      "text": " ",
-      "type": "atomic"
-    },
-    {
-      "data": {},
-      "depth": 0,
-      "entityRanges": [],
-      "inlineStyleRanges": [],
-      "key": 4,
-      "text": "",
-      "type": "unstyled"
-    },
-    {
-      "data": {},
-      "depth": 0,
-      "entityRanges": [
-        {
-          "key": 2,
-          "length": 1,
-          "offset": 0
-        }
-      ],
-      "inlineStyleRanges": [],
-      "key": 5,
-      "text": " ",
-      "type": "atomic"
-    },
-    {
-      "data": {},
-      "depth": 0,
-      "entityRanges": [],
-      "inlineStyleRanges": [],
-      "key": 6,
-      "text": "",
-      "type": "unstyled"
-    },
-    {
-      "data": {},
-      "depth": 0,
-      "entityRanges": [
-        {
-          "key": 3,
-          "length": 1,
-          "offset": 0
-        }
-      ],
-      "inlineStyleRanges": [],
-      "key": 7,
-      "text": " ",
-      "type": "atomic"
-    },
-    {
-      "data": {},
-      "depth": 0,
-      "entityRanges": [],
-      "inlineStyleRanges": [],
-      "key": 8,
-      "text": "",
-      "type": "unstyled"
-    }
-  ],
-  "entityMap": {
-    "0": {
-      "data": {
-        "config": {
-          "alignment": "left",
-          "size": "small",
-          "textWrap": "nowrap"
-        },
-        "type": "single"
-      },
-      "mutability": "IMMUTABLE",
-      "type": "wix-draft-plugin-divider"
-    },
-    "1": {
-      "data": {
-        "config": {
-          "alignment": "right",
-          "size": "medium",
-          "textWrap": "nowrap"
-        },
-        "type": "double"
-      },
-      "mutability": "IMMUTABLE",
-      "type": "wix-draft-plugin-divider"
-    },
-    "2": {
-      "data": {
-        "config": {
-          "alignment": "center",
-          "size": "large",
-          "textWrap": "nowrap"
-        },
-        "type": "double"
-      },
-      "mutability": "IMMUTABLE",
-      "type": "wix-draft-plugin-divider"
-    },
-    "3": {
-      "data": {
-        "config": {
-          "alignment": "center",
-          "size": "large",
-          "textWrap": "nowrap"
-        },
-        "type": "dotted"
-      },
-      "mutability": "IMMUTABLE",
-      "type": "wix-draft-plugin-divider"
-    }
-  }
-};
-
-exports[`plugins > full screen > expand image on full screen #0`] =
+exports[`plugins > image > render image toolbar and settings #0`] =
 {
   "blocks": [
     {
@@ -1783,318 +1936,17 @@ exports[`plugins > full screen > expand image on full screen #0`] =
       "data": {
         "config": {
           "alignment": "center",
-          "showDescription": true,
-          "showTitle": true,
-          "size": "small"
-        },
-        "src": {
-          "file_name": "8bb438_131a7e1872bc45ec827bb61e56b840fe.jpg",
-          "height": 3354,
-          "id": "036c6bf6cef5e4409848eb4eb6f80de1",
-          "original_file_name": "8bb438_131a7e1872bc45ec827bb61e56b840fe.jpg",
-          "width": 2898
-        }
-      },
-      "mutability": "IMMUTABLE",
-      "type": "wix-draft-plugin-image"
-    },
-    "1": {
-      "data": {
-        "config": {
-          "alignment": "center",
-          "showDescription": true,
-          "showTitle": true,
-          "size": "content"
-        },
-        "src": {
-          "file_name": "8bb438_83e03311e53a47ce9ba8bda910fdad88.jpg",
-          "height": 3526,
-          "id": "b12907da5fbb55a31a760e49fb0bb4e6",
-          "original_file_name": "8bb438_83e03311e53a47ce9ba8bda910fdad88.jpg",
-          "width": 5177
-        }
-      },
-      "mutability": "IMMUTABLE",
-      "type": "wix-draft-plugin-image"
-    }
-  }
-};
-
-exports[`plugins > full screen > gallery full screen > expand gallery image on full screen #0`] =
-{
-  "blocks": [
-    {
-      "data": {},
-      "depth": 0,
-      "entityRanges": [],
-      "inlineStyleRanges": [],
-      "key": 0,
-      "text": "",
-      "type": "unstyled"
-    },
-    {
-      "data": {},
-      "depth": 0,
-      "entityRanges": [
-        {
-          "key": 0,
-          "length": 1,
-          "offset": 0
-        }
-      ],
-      "inlineStyleRanges": [],
-      "key": 1,
-      "text": " ",
-      "type": "atomic"
-    },
-    {
-      "data": {},
-      "depth": 0,
-      "entityRanges": [],
-      "inlineStyleRanges": [],
-      "key": 2,
-      "text": "",
-      "type": "unstyled"
-    },
-    {
-      "data": {},
-      "depth": 0,
-      "entityRanges": [],
-      "inlineStyleRanges": [],
-      "key": 3,
-      "text": "This is a test of the gallery plugin.",
-      "type": "unstyled"
-    },
-    {
-      "data": {},
-      "depth": 0,
-      "entityRanges": [],
-      "inlineStyleRanges": [],
-      "key": 4,
-      "text": "",
-      "type": "unstyled"
-    },
-    {
-      "data": {},
-      "depth": 0,
-      "entityRanges": [
-        {
-          "key": 1,
-          "length": 1,
-          "offset": 0
-        }
-      ],
-      "inlineStyleRanges": [],
-      "key": 5,
-      "text": " ",
-      "type": "atomic"
-    },
-    {
-      "data": {},
-      "depth": 0,
-      "entityRanges": [],
-      "inlineStyleRanges": [],
-      "key": 6,
-      "text": "",
-      "type": "unstyled"
-    }
-  ],
-  "entityMap": {
-    "0": {
-      "data": {
-        "config": {
-          "alignment": "center",
-          "layout": "small",
-          "size": "content",
-          "spacing": 0
-        },
-        "items": [
-          {
-            "itemId": "65a6266ba23a8a55da3f469157f15237",
-            "metadata": {
-              "height": 1893,
-              "processedByConsumer": true,
-              "width": 2839
-            },
-            "url": "8bb438_2d651ff17f644d0db766521a18bf888b.jpg"
+          "link": {
+            "rel": "noopener",
+            "target": "_blank",
+            "url": "www.wix.com"
           },
-          {
-            "itemId": "ea8ec1609e052b7f196935318316299d",
-            "metadata": {
-              "height": 2829,
-              "processedByConsumer": true,
-              "width": 4200
-            },
-            "url": "8bb438_149b418b9bfb47e0adafc569ca55c5e9.jpg"
-          }
-        ],
-        "styles": {
-          "allowDownload": false,
-          "allowHover": false,
-          "allowSocial": false,
-          "cubeRatio": 1,
-          "cubeType": "fill",
-          "enableInfiniteScroll": true,
-          "fullscreen": false,
-          "galleryLayout": 2,
-          "galleryMargin": 0,
-          "gallerySizePx": 300,
-          "gallerySizeType": "px",
-          "galleryThumbnailsAlignment": "bottom",
-          "gotStyleParams": true,
-          "gridStyle": 1,
-          "imageMargin": 20,
-          "isVertical": false,
-          "itemClick": "link",
-          "loveButton": false,
-          "mobileSwipeAnimation": "NO_EFFECT",
-          "numberOfImagesPerRow": 3,
-          "oneRow": false,
-          "showArrows": false,
-          "thumbnailSize": 120,
-          "thumbnailSpacings": 0,
-          "titlePlacement": "SHOW_ON_HOVER"
-        }
-      },
-      "mutability": "IMMUTABLE",
-      "type": "wix-draft-plugin-gallery"
-    },
-    "1": {
-      "data": {
-        "config": {
-          "alignment": "center",
-          "showDescription": true,
-          "showTitle": true,
-          "size": "content"
-        },
-        "src": {
-          "file_name": "8bb438_4a6550d4df364f9890180f52243fb396.jpg",
-          "height": 1081,
-          "id": "d052fe7e6db2fd246708f8e56ddc3684",
-          "original_file_name": "8bb438_4a6550d4df364f9890180f52243fb396.jpg",
-          "width": 1621
-        }
-      },
-      "mutability": "IMMUTABLE",
-      "type": "wix-draft-plugin-image"
-    }
-  }
-};
-
-exports[`plugins > full screen > image full screen > expand image on full screen #0`] =
-{
-  "blocks": [
-    {
-      "data": {},
-      "depth": 0,
-      "entityRanges": [],
-      "inlineStyleRanges": [],
-      "key": 0,
-      "text": "Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition. ",
-      "type": "unstyled"
-    },
-    {
-      "data": {},
-      "depth": 0,
-      "entityRanges": [],
-      "inlineStyleRanges": [],
-      "key": 1,
-      "text": "",
-      "type": "unstyled"
-    },
-    {
-      "data": {},
-      "depth": 0,
-      "entityRanges": [
-        {
-          "key": 0,
-          "length": 1,
-          "offset": 0
-        }
-      ],
-      "inlineStyleRanges": [],
-      "key": 2,
-      "text": " ",
-      "type": "atomic"
-    },
-    {
-      "data": {},
-      "depth": 0,
-      "entityRanges": [],
-      "inlineStyleRanges": [],
-      "key": 3,
-      "text": "",
-      "type": "unstyled"
-    },
-    {
-      "data": {},
-      "depth": 0,
-      "entityRanges": [],
-      "inlineStyleRanges": [],
-      "key": 4,
-      "text": "Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment.",
-      "type": "unstyled"
-    },
-    {
-      "data": {},
-      "depth": 0,
-      "entityRanges": [],
-      "inlineStyleRanges": [],
-      "key": 5,
-      "text": "Bring to the table win-win survival strategies to ensure proactive domination.",
-      "type": "unstyled"
-    },
-    {
-      "data": {},
-      "depth": 0,
-      "entityRanges": [],
-      "inlineStyleRanges": [],
-      "key": 6,
-      "text": "",
-      "type": "unstyled"
-    },
-    {
-      "data": {},
-      "depth": 0,
-      "entityRanges": [
-        {
-          "key": 1,
-          "length": 1,
-          "offset": 0
-        }
-      ],
-      "inlineStyleRanges": [],
-      "key": 7,
-      "text": " ",
-      "type": "atomic"
-    },
-    {
-      "data": {},
-      "depth": 0,
-      "entityRanges": [],
-      "inlineStyleRanges": [],
-      "key": 8,
-      "text": "",
-      "type": "unstyled"
-    },
-    {
-      "data": {},
-      "depth": 0,
-      "entityRanges": [],
-      "inlineStyleRanges": [],
-      "key": 9,
-      "text": "At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution.",
-      "type": "unstyled"
-    }
-  ],
-  "entityMap": {
-    "0": {
-      "data": {
-        "config": {
-          "alignment": "center",
           "showDescription": true,
           "showTitle": true,
           "size": "small"
+        },
+        "metadata": {
+          "caption": ""
         },
         "src": {
           "file_name": "8bb438_131a7e1872bc45ec827bb61e56b840fe.jpg",

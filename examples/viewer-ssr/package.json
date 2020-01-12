@@ -8,7 +8,6 @@
     "email": "odeds@wix.com"
   },
   "scripts": {
-    "postinstall": "node ../../scripts/linkExample viewer-ssr",
     "clean": "rm -rf ./node_modules && rm yarn.lock && rm -rf ./target && rm -rf ./dist",
     "rebuild": "npm run clean && npm run bootstrap",
     "start": "yoshi start",
@@ -43,7 +42,7 @@
     "prop-types": "~15.6.0",
     "react": "16.6.3",
     "react-dom": "16.6.3",
-    "react-i18next": "~4.8.0",
+    "react-i18next": "^7.0.0",
     "react-json-editor-ajrm": "^2.5.3",
     "react-modal": "^3.5.1",
     "regenerator-runtime": "^0.11.0",

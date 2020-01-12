@@ -24,6 +24,10 @@
     outline: 0;
     color: $accent-color;
   }
+  &:disabled {
+    cursor: default;
+    opacity: 0.4;
+  }
 }
 
 .inlineToolbarButton_icon {

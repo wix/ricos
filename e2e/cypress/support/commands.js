@@ -58,12 +58,14 @@ Cypress.Commands.add('switchToEnglish', () => {
 
 Cypress.Commands.add('loadEditorAndViewer', fixtureName => {
   run('rce', fixtureName);
+  cy.hideTooltip();
 });
 
 Cypress.Commands.add('matchContentSnapshot', () => {
-  cy.window()
-    .its('__CONTENT_SNAPSHOT__')
-    .toMatchSnapshot();
+  if (Cypress.env('MATCH_CONTENT_STATE'))
+    cy.window()
+      .its('__CONTENT_SNAPSHOT__')
+      .toMatchSnapshot();
 });
 
 Cypress.Commands.add('matchSnapshots', options => {
@@ -262,6 +264,14 @@ Cypress.Commands.add('addImageTitle', () => {
     .click();
 });
 
+Cypress.Commands.add('editImageTitle', () => {
+  cy.get(`[data-hook=${PLUGIN_COMPONENT.IMAGE}]:first`)
+    .find('input')
+    .click()
+    .type(' - In Plugin Editing')
+    .blur();
+});
+
 Cypress.Commands.add('deleteImageTitle', () => {
   cy.get(`[data-hook=${IMAGE_SETTINGS.CAPTION}]`)
     .click()
@@ -399,11 +409,12 @@ Cypress.Commands.add('dragAndDropPlugin', (src, dest) => {
 });
 
 Cypress.Commands.add('hideTooltip', { prevSubject: 'optional' }, () => {
-  cy.get('.editor').trigger('mouseleave');
+  // cy.get('.editor').trigger('mouseleave');
+  cy.get('[data-id="tooltip"]').invoke('hide'); //uses jquery to set display:none
 });
 
 Cypress.Commands.add('waitForVideoToLoad', { prevSubject: 'optional' }, () => {
-  cy.get('[data-loaded=true]', { timeout: 15000 });
+  cy.get('#rich-content-viewer [data-loaded=true]', { timeout: 15000 });
 });
 
 // disable screenshots in debug mode. So there is no diffrence to ci.

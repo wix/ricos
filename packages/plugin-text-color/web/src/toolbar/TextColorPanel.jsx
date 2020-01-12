@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Modifier, EditorState } from 'draft-js';
 import { ColorPicker, getSelectionStyles } from 'wix-rich-content-editor-common';
-import { DEFAULT_COLOR, DEFAULT_STYLE_SELECTION_PREDICATE } from '../constants';
+import { DEFAULT_STYLE_SELECTION_PREDICATE } from '../constants';
 import { getColor } from '../text-decorations-utils';
 
 import {
@@ -26,7 +26,7 @@ export default class TextColorPanel extends Component {
       currentColor:
         currentColors.length > 0
           ? extractColor(props.settings.colorScheme, getColor(currentColors[0]))
-          : DEFAULT_COLOR,
+          : this.props.defaultColor,
       currentSchemeColor: currentColors[0] && getColor(currentColors[0]),
       userColors: props.settings.getUserColors() || [],
     };
@@ -75,7 +75,7 @@ export default class TextColorPanel extends Component {
   }
 
   render() {
-    const { theme, settings, t, setKeepToolbarOpen, isMobile } = this.props;
+    const { theme, settings, t, setKeepToolbarOpen, isMobile, defaultColor } = this.props;
     const { colorScheme } = settings;
     const palette = extractPalette(colorScheme);
     const schemeAttributes = extractSchemeAttributes(colorScheme);
@@ -85,6 +85,7 @@ export default class TextColorPanel extends Component {
         schemeAttributes={schemeAttributes}
         schemeColor={this.state.currentSchemeColor}
         color={this.state.currentColor}
+        defaultColor={defaultColor}
         palette={palette.slice(0, 6)}
         userColors={this.state.userColors.slice(0, 17)}
         onColorAdded={this.onColorAdded}
@@ -96,12 +97,21 @@ export default class TextColorPanel extends Component {
         setKeepToolbarOpen={setKeepToolbarOpen}
         isMobile={isMobile}
       >
-        {({ renderPalette, renderUserColors, renderAddColorButton, mergedStyles }) => (
+        {({
+          renderPalette,
+          renderUserColors,
+          renderAddColorButton,
+          renderResetColorButton,
+          mergedStyles,
+        }) => (
           <div className={mergedStyles.colorPicker_palette}>
-            <div className={mergedStyles.colorPicker_buttons_container}>{renderPalette()}</div>
+            <div className={mergedStyles.colorPicker_buttons_container}>
+              {renderPalette()}
+              {renderUserColors()}
+            </div>
             <hr className={mergedStyles.colorPicker_separator} />
             <div className={mergedStyles.colorPicker_buttons_container}>
-              {renderUserColors()}
+              {renderResetColorButton()}
               {renderAddColorButton()}
             </div>
           </div>
@@ -130,4 +140,5 @@ TextColorPanel.propTypes = {
   isMobile: PropTypes.bool.isRequired,
   styleMapper: PropTypes.func.isRequired,
   predicate: PropTypes.func,
+  defaultColor: PropTypes.string.isRequired,
 };

@@ -10,11 +10,9 @@ class GiphyComponent extends Component {
 
   constructor(props) {
     super(props);
-    const isPlayable = !props.blockProps || props.blockProps.readOnly === true;
     this.state = {
       isLoading: false,
       isLoaded: false,
-      isPlayable,
     };
   }
 
@@ -49,7 +47,6 @@ class GiphyComponent extends Component {
 
 GiphyComponent.propTypes = {
   componentData: PropTypes.object.isRequired,
-  blockProps: PropTypes.object.isRequired,
   onClick: PropTypes.func.isRequired,
 };
 
