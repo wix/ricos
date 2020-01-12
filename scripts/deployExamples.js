@@ -22,7 +22,7 @@ const generateSubdomain = exampleName => {
   if (!TRAVIS_BRANCH.startsWith('release')) {
     subdomain += `-${TRAVIS_BRANCH}`;
   } else {
-    subdomain += `-${version.replace(/\./g, '-')}`;
+    subdomain += `-${version.replace(/\./g, '-')}`; //
   }
   return subdomain;
 };
