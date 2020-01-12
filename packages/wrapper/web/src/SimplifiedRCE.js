@@ -75,7 +75,7 @@ SimplifiedRCE.propTypes = {
   strategies: PropTypes.array,
   settings: PropTypes.shape({
     plugins: PropTypes.arrayOf(PropTypes.object),
-    theme: PropTypes.object,
+    theme: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   }),
   onRequestModalClose: PropTypes.func,
   openModal: PropTypes.func,

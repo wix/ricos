@@ -41,7 +41,18 @@ export default class RceTheme {
 
   getStylesObject() {
     if (this._theme === Themes.DEFAULT) {
-      return {};
+      return {
+        hashtag: {
+          color: 'red',
+        },
+        editor: {
+          color: 'red',
+        },
+        divider: {
+          strokeWidth: '24px',
+          color: 'red',
+        },
+      };
     } else {
       const actionColor = this.getColorValue(ACTION_COLOR);
       const bgColor = this.getColorValue(BG_COLOR);
