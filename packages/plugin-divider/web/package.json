@@ -21,10 +21,13 @@
   "module": "dist/module.js",
   "style": "dist/styles.min.scss",
   "scripts": {
+    "start": "serve playground",
     "clean": "rm -rf dist/",
     "prebuild": "npm run clean",
     "build": "rollup --environment MODULE_NAME:plugin-divider -c ../../../rollup.config.js",
+    "build:playground": "rollup --environment BABEL_ENV:development --environment MODULE_NAME:plugin-divider -c ./playground/rollup.config.js",
     "build:dev": "cross-env NODE_ENV=development npm run build",
+    "watch:playground": "npm run build -- --environment PLAYGROUND --environment MODULE_WATCH:1 --watch.chokidar",
     "build:analyze": "npm run build -- --environment MODULE_ANALYZE && open stats.html",
     "watch": "cross-env NODE_ENV=development MODULE_WATCH=1 npm run build -- --watch.chokidar",
     "lint": "eslint 'src/**/*.{js,jsx}'"
@@ -40,7 +43,11 @@
   },
   "devDependencies": {
     "@babel/runtime": "7.2.0",
+    "@rollup/plugin-url": "^4.0.1",
+    "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
+    "babel-preset-react-app": "^9.1.0",
     "classnames": "^2.2.6",
+    "concurrently": "^5.0.2",
     "cross-env": "^5.2.0",
     "draft-js": "0.11.2",
     "eslint": "^6.1.0",
@@ -48,7 +55,9 @@
     "prop-types": "^15.6.2",
     "react": "16.6.3",
     "react-dom": "16.6.3",
-    "rollup": "1.20.3"
+    "rollup": "1.20.3",
+    "rollup-plugin-peer-deps-external": "^2.2.0",
+    "serve": "^11.3.0"
   },
   "dependencies": {
     "wix-rich-content-common": "6.6.3",
