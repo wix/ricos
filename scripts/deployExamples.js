@@ -20,10 +20,10 @@ const generateSubdomain = exampleName => {
   let subdomain = exampleName;
   const { TRAVIS_PULL_REQUEST, CI, TRAVIS_BRANCH } = process.env;
   if (TRAVIS_PULL_REQUEST && TRAVIS_PULL_REQUEST !== 'false') {
-    subdomain += `-pr-${TRAVIS_PULL_REQUEST}`;
+    subdomain += `-${TRAVIS_PULL_REQUEST}`;
     console.log('Generated subdomain: ', subdomain);
   } else if (CI === 'true' && TRAVIS_BRANCH !== 'master') {
-    subdomain += `-pr-${TRAVIS_BRANCH}`;
+    subdomain += `-${TRAVIS_BRANCH}`;
     console.log('Generated subdomain: ', subdomain);
   } else {
     subdomain += `-${version.replace(/\./g, '-')}`;
