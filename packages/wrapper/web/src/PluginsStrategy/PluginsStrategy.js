@@ -1,6 +1,6 @@
 export default function pluginsStrategy({ settings = {} }) {
   const { plugins = [] } = settings;
-  const emptyRet = { config: {}, plugins: [] };
+  const emptyRet = { config: {}, plugins: [], ModalsMap: {} };
   if (Array.isArray(plugins) && plugins !== []) {
     return plugins.reduce((prev, curr) => {
       const { createPlugin, type, config, ModalsMap } = curr;
