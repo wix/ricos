@@ -12,7 +12,7 @@ const EXAMPLES_TO_DEPLOY = [
   {
     name: 'rich-content-storybook',
     path: 'examples/storybook',
-    build: 'yarn build-storybook',
+    buildCmd: 'npx build-storybook',
     dist: 'storybook-static',
   },
 ];
@@ -33,10 +33,10 @@ const generateSubdomain = exampleName => {
   return subdomain;
 };
 
-function build(buildCommand = 'npm run build') {
-  console.log(chalk.magenta(`Running: "${buildCommand}"`));
+function build({ buildCmd = 'npm run build' }) {
+  console.log(chalk.magenta(`Running: "${buildCmd}"`));
   exec('npm run clean');
-  exec(buildCommand);
+  exec(buildCmd);
 }
 
 function deploy({ name, dist = 'dist' }) {
@@ -69,7 +69,7 @@ function run() {
     process.chdir(path.resolve(process.cwd(), example.path));
 
     console.log(chalk.blue(`\nDeploying ${example.name} example...`));
-    build(example.build);
+    build(example);
     deploy(example);
 
     process.chdir(path.resolve('../..'));

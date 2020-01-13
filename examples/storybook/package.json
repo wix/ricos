@@ -19,8 +19,8 @@
     "posttest": "yoshi lint",
     "release": "yoshi release",
     "storybook": "start-storybook -p 6006",
-    "clean": "rm -rf dist/",
-    "build": "npx yoshi build"
+    "clean": "rm -rf dist storybook-static",
+    "build": "npx yoshi build && npx build-storybook"
   },
   "dependencies": {
     "react": "^16.6.3",
