@@ -12,6 +12,8 @@ const EXAMPLES_TO_DEPLOY = [
   {
     name: 'rich-content-storybook',
     path: 'examples/storybook',
+    build: 'npx yoshi build',
+    installs: 'yoshi@^4.0.0 yoshi-style-dependencies@^4.11.1',
   },
 ];
 
@@ -31,8 +33,7 @@ const generateSubdomain = exampleName => {
   return subdomain;
 };
 
-function build() {
-  const buildCommand = 'npm run build';
+function build(buildCommand = 'npm run build') {
   console.log(chalk.magenta(`Running: "${buildCommand}"`));
   exec('npm run clean');
   exec(buildCommand);
@@ -61,7 +62,6 @@ function run() {
   }
   if (skip) {
     console.log(chalk.yellow(`${skip} - skipping deploy`));
-    console.log(JSON.stringify(process.env));
     return false;
   }
 
@@ -69,7 +69,7 @@ function run() {
     process.chdir(path.resolve(process.cwd(), example.path));
 
     console.log(chalk.blue(`\nDeploying ${example.name} example...`));
-    build();
+    build(example.build);
     deploy(example.name);
 
     process.chdir(path.resolve('../..'));
