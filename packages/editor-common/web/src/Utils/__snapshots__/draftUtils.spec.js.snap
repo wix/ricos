@@ -121,7 +121,7 @@ Array [
 ]
 `;
 
-exports[`Test draftUtils functions Test draftUtils Blocks functions Test getSelectedBlocks function should return the first block for editor state without selection 1`] = `
+exports[`Test draftUtils functions Test draftUtils Blocks functions Test getSelectedBlocks function should return the block that belongs to the cursor 1`] = `
 Array [
   Immutable.Record {
     "key": "8s1v3",
