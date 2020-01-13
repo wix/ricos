@@ -169,7 +169,7 @@ export default class Editor extends PureComponent {
         )}
         <SimplifiedRCE
           settings={{
-            plugins: [pluginButton, pluginDivider, pluginGallery, pluginHtml, pluginImage],
+            plugins: [pluginButton(), pluginDivider(), pluginGallery(), pluginHtml(), pluginImage()],
             theme: "Default",
           }}
           strategies={[

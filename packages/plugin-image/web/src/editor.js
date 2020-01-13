@@ -2,7 +2,7 @@ import { createImagePlugin } from './createImagePlugin';
 import { IMAGE_TYPE } from './types';
 import { ModalsMap } from './modals';
 
-const config = {
+const defaultConfig = {
   // defaultData: {
   //   config: {
   //     alignment: 'left',
@@ -43,9 +43,11 @@ const config = {
   // },
 };
 
-export const pluginImage = {
-  config,
-  type: IMAGE_TYPE,
-  createPlugin: createImagePlugin,
-  ModalsMap,
+export const pluginImage = (config = {}) => {
+  return {
+    config: { ...defaultConfig, ...config },
+    type: IMAGE_TYPE,
+    createPlugin: createImagePlugin,
+    ModalsMap,
+  };
 };

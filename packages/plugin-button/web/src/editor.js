@@ -7,7 +7,7 @@ const buttonDefaultPalette = ['#FEFDFD', '#D5D4D4', '#ABCAFF', '#81B0FF', '#0261
 let userButtonTextColors = [...buttonDefaultPalette];
 let userButtonBackgroundColors = [...buttonDefaultPalette];
 let userButtonBorderColors = [...buttonDefaultPalette];
-const config = {
+const defaultConfig = {
   //   toolbar: {
   //     icons: {
   //       Button: MyCustomIcon, // insert plugin icon
@@ -38,9 +38,11 @@ const config = {
   getBackgroundColors: () => userButtonBackgroundColors,
 };
 
-export const pluginButton = {
-  config,
-  type: BUTTON_TYPE,
-  createPlugin: createButtonPlugin, //image gallery divider html
-  ModalsMap,
+export const pluginButton = (config = {}) => {
+  return {
+    config: { ...defaultConfig, ...config },
+    type: BUTTON_TYPE,
+    createPlugin: createButtonPlugin, //image gallery divider html
+    ModalsMap,
+  };
 };

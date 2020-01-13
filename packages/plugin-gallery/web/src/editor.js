@@ -2,7 +2,7 @@ import { createGalleryPlugin } from './createGalleryPlugin';
 import { GALLERY_TYPE } from './types';
 import { ModalsMap } from './modals';
 
-const config = {
+const defaultConfig = {
   scrollingElement: () =>
     typeof window !== 'undefined' && document.getElementsByClassName('editor-example')[0],
   // toolbar: {
@@ -12,9 +12,11 @@ const config = {
   // },
 };
 
-export const pluginGallery = {
-  config,
-  type: GALLERY_TYPE,
-  createPlugin: createGalleryPlugin,
-  ModalsMap,
+export const pluginGallery = (config = {}) => {
+  return {
+    config: { ...defaultConfig, ...config },
+    type: GALLERY_TYPE,
+    createPlugin: createGalleryPlugin,
+    ModalsMap,
+  };
 };

@@ -12,7 +12,7 @@ export const getBaseUrl = () => {
   return port ? `${baseUrl}:${port}` : baseUrl;
 };
 
-const config = {
+const defaultConfig = {
   htmlIframeSrc: `${getBaseUrl()}/static/html-plugin-embed.html`,
   minWidth: 35,
   maxWidth: 740,
@@ -21,9 +21,11 @@ const config = {
   maxHeight: 1200,
 };
 
-export const pluginHtml = {
-  config,
-  type: HTML_TYPE,
-  createPlugin: createHtmlPlugin,
-  ModalsMap: {},
+export const pluginHtml = (config = {}) => {
+  return {
+    config: { ...defaultConfig, ...config },
+    type: HTML_TYPE,
+    createPlugin: createHtmlPlugin,
+    ModalsMap: {},
+  };
 };
