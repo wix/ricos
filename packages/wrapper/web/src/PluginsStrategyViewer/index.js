@@ -1,1 +1,1 @@
-export { default as pluginsStrategyViewer } from '../PluginsStrategy/pluginsStrategyViewer';
+export { default as pluginsStrategyViewer } from '../PluginsStrategy/PluginsStrategyViewer';
