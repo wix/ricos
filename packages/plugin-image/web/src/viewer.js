@@ -4,7 +4,7 @@ export { typeMapper as imageTypeMapper, IMAGE_TYPE };
 
 const defaultConfig = {};
 
-export const rcvGallery = (config = {}) => {
+export const rcvImage = (config = {}) => {
   return {
     config: { ...defaultConfig, ...config },
     type: IMAGE_TYPE,

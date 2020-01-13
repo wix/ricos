@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import ReactModal from 'react-modal';
-import { RichContentViewer } from 'wix-rich-content-viewer';
+//import { RichContentViewer } from 'wix-rich-content-viewer';
 import { isSSR } from 'wix-rich-content-common';
 import * as PropTypes from 'prop-types';
 import * as Plugins from './ViewerPlugins';
@@ -8,11 +8,11 @@ import theme from '../theme/theme'; // must import after custom styles
 import getImagesData from 'wix-rich-content-fullscreen/src/lib/getImagesData';
 import Fullscreen from 'wix-rich-content-fullscreen';
 import { SimplifiedRCV } from 'wix-rich-content-wrapper';
-import rcvButton from 'wix-rich-content-plugin-button';
-import rcvImage from 'wix-rich-content-plugin-image';
-import rcvHtml from 'wix-rich-content-plugin-html';
-import rcvDivider from 'wix-rich-content-plugin-divider';
-import rcvGallery from 'wix-rich-content-plugin-gallery';
+import { rcvButton } from 'wix-rich-content-plugin-button';
+import { rcvImage } from 'wix-rich-content-plugin-image';
+import { rcvHtml } from 'wix-rich-content-plugin-html';
+import { rcvDivider } from 'wix-rich-content-plugin-divider';
+import { rcvGallery } from 'wix-rich-content-plugin-gallery';
 
 const anchorTarget = '_top';
 const relValue = 'noreferrer';

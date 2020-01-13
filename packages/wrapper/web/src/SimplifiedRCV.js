@@ -1,5 +1,5 @@
 import React from 'react';
-import { RichContentViewer } from 'wix-rich-content-editor';
+import { RichContentViewer } from 'wix-rich-content-viewer';
 import { createEmpty } from 'wix-rich-content-editor/dist/lib/editorStateConversion';
 import { pluginsStrategyViewer } from './PluginsStrategyViewer';
 import { themeStrategy } from './ThemeStrategy';

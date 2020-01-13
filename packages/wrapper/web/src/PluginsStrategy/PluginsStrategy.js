@@ -6,7 +6,7 @@ export default function pluginsStrategy({ settings = {} }) {
       const { createPlugin, type, config, ModalsMap } = curr;
       const pConfig = { [type]: config };
       return {
-        config: { ...prev.config, pConfig },
+        config: { ...prev.config, ...pConfig },
         plugins: prev.plugins.concat(createPlugin),
         ModalsMap: { ...prev.ModalsMap, ...ModalsMap },
       };

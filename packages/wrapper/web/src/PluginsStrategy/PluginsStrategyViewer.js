@@ -1,3 +1,4 @@
+const isEmpty = obj => Object.entries(obj).length === 0 && obj.constructor === Object;
 export default function pluginsStrategyViewer({ settings = {} }) {
   const { plugins = [] } = settings;
   const emptyRet = { config: {}, type: [], typeMappers: [], decorators: [] };
@@ -6,10 +7,10 @@ export default function pluginsStrategyViewer({ settings = {} }) {
       const { config, type, typeMapper, decorator } = curr;
       const pConfig = { [type]: config };
       return {
-        config: { ...prev.config, pConfig },
+        config: { ...prev.config, ...pConfig },
         type: prev.type.concat(type),
-        typeMappers: prev.typeMappers.concat(typeMapper),
-        decorators: prev.plugins.concat(decorator),
+        typeMappers: (typeMapper && prev.typeMappers.concat([typeMapper])) || prev.typeMappers,
+        decorators: (!isEmpty(decorator) && prev.decorators.concat([decorator])) || prev.decorators,
       };
     }, emptyRet);
   }
