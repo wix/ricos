@@ -36,6 +36,8 @@
     - [#564](https://github.com/wix-incubator/rich-content/pull/564) snapshots renaming for gallery and image plugins tests
   - `editor`
     - [#575](https://github.com/wix-incubator/rich-content/pull/575) ltr&rtl css yoshi issues solved (requested by forum)
+  - `general`
+    - [#585](https://github.com/wix-incubator/rich-content/pull/585) Deploy every branch to surge. Will have the domain http://rich-content-branch_name.surge.sh/
 
 </details>
 <hr/>
