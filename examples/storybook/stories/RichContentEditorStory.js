@@ -15,7 +15,7 @@ import { RichContentEditor, convertFromRaw, createWithContent } from 'wix-rich-c
 import Palette from './Components/Palette';
 import { wixPalettes } from './palettesExample';
 
-import RceTheme, { Themes } from '../src/RceTheme';
+import { Themes } from '../src/RceTheme';
 import ThemeWrapper from '../src/ThemeWrapper';
 import { exapmleState } from '../fixtures/editorStates';
 

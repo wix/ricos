@@ -13,7 +13,6 @@ const EXAMPLES_TO_DEPLOY = [
     name: 'rich-content-storybook',
     path: 'examples/storybook',
     build: 'npx yoshi build',
-    installs: 'yoshi@^4.0.0 yoshi-style-dependencies@^4.11.1',
   },
 ];
 
