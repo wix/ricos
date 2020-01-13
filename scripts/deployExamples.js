@@ -26,7 +26,7 @@ const generateSubdomain = exampleName => {
   let subdomain = exampleName;
   const { TRAVIS_BRANCH } = process.env;
   if (!TRAVIS_BRANCH.startsWith('release')) {
-    subdomain += `-${TRAVIS_BRANCH}`;
+    subdomain += `-${TRAVIS_BRANCH.replace(/(\.)|(\/)/g, '-')}`;
   } else {
     subdomain += `-${version.replace(/\./g, '-')}`;
   }

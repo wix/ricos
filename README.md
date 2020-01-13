@@ -262,7 +262,7 @@ The compiled package also contains a CommonJS bundle, which you can consume if y
 
 [rich-content-editor-example](./examples/main) to see how to consume the Component as:
 - [editor](./examples/main/shared/editor/Editor.jsx)
-- [viewer](./examples/main/shared/viewre/Viewer.jsx)
+- [viewer](./examples/main/shared/viewer/Viewer.jsx)
 
 
 [rich-content-viewer-ssr](./examples/viewer-ssr) to see how to consume the Component as a viewer within a Yoshi-based SSR Application.
