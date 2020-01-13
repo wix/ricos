@@ -24,16 +24,7 @@
   },
   "dependencies": {
     "react": "^16.6.3",
-    "@storybook/react": "^5.0.11",
-    "@testing-library/react": "^9.4.0",
     "aphrodite": "^2.4.0",
-    "yoshi": "^4.0.0",
-    "yoshi-style-dependencies": "^4.11.1",
-    "wix-rich-content-editor": "^6.6.6",
-    "wix-rich-content-viewer": "^6.6.6",
-    "wix-rich-content-plugin-divider": "^6.6.6",
-    "wix-rich-content-plugin-hashtag": "^6.6.6",
-    "jest-yoshi-preset": "^4.24.0"
   },
   "peerDependencies": {},
   "devDependencies": {

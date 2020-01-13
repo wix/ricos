@@ -1,1 +1,1 @@
-require('../stories/RichContentEditorStory');
+require('../stories/');
