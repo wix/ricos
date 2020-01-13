@@ -107,8 +107,7 @@ class ImageViewer extends React.Component {
   };
 
   renderImage(imageClassName, imageSrc, alt, props) {
-    const fileType = imageSrc.highres.split('.').pop();
-    const isGif = fileType === 'gif';
+    const isGif = imageSrc.highres?.endsWith('.gif');
     let images = [
       <img
         {...props}
