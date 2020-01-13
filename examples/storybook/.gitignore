@@ -10,4 +10,5 @@ typings
 .idea
 *.iml
 test/e2e/screenshots
+storybook-static
 .yo-rc.json

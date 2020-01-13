@@ -12,7 +12,8 @@ const EXAMPLES_TO_DEPLOY = [
   {
     name: 'rich-content-storybook',
     path: 'examples/storybook',
-    build: 'npx yoshi build',
+    build: 'yarn build',
+    dist: 'storybook-static',
   },
 ];
 
@@ -38,11 +39,11 @@ function build(buildCommand = 'npm run build') {
   exec(buildCommand);
 }
 
-function deploy(name) {
+function deploy({ name, dist = 'dist' }) {
   console.log(chalk.cyan(`Deploying ${name} example to surge...`));
   const subdomain = generateSubdomain(name);
   const domain = fqdn(subdomain);
-  const deployCommand = `npx surge dist ${domain}`;
+  const deployCommand = `npx surge ${dist} ${domain}`;
   try {
     console.log(chalk.magenta(`Running "${deployCommand}`));
     exec(deployCommand);
@@ -69,7 +70,7 @@ function run() {
 
     console.log(chalk.blue(`\nDeploying ${example.name} example...`));
     build(example.build);
-    deploy(example.name);
+    deploy(example);
 
     process.chdir(path.resolve('../..'));
   }
