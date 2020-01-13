@@ -12,7 +12,7 @@ const EXAMPLES_TO_DEPLOY = [
   {
     name: 'rich-content-storybook',
     path: 'examples/storybook',
-    buildCmd: 'npm i --save-dev @storybook/react && yarn build-storybook',
+    buildCmd: 'npm i && yarn build-storybook',
     dist: 'storybook-static',
   },
 ];
