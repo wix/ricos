@@ -25,6 +25,10 @@
   "dependencies": {
     "react": "^16.6.3",
     "aphrodite": "^2.4.0",
+    "wix-rich-content-editor": "^6.6.6",
+    "wix-rich-content-viewer": "^6.6.6",
+    "wix-rich-content-plugin-divider": "^6.6.6",
+    "wix-rich-content-plugin-hashtag": "^6.6.6"
   },
   "peerDependencies": {},
   "devDependencies": {
@@ -35,9 +39,6 @@
     "lint-staged": "^7.2.2",
     "@storybook/react": "^5.3.1",
     "@testing-library/react": "^9.4.0",
-    "wix-rich-content-editor": "^6.6.6",
-    "wix-rich-content-plugin-divider": "^6.6.6",
-    "wix-rich-content-plugin-hashtag": "^6.6.6",
     "jest-yoshi-preset": "^4.28.3"
   },
   "lint-staged": {
