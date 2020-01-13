@@ -7,6 +7,12 @@ import * as Plugins from './ViewerPlugins';
 import theme from '../theme/theme'; // must import after custom styles
 import getImagesData from 'wix-rich-content-fullscreen/src/lib/getImagesData';
 import Fullscreen from 'wix-rich-content-fullscreen';
+import { SimplifiedRCV } from 'wix-rich-content-wrapper';
+import rcvButton from 'wix-rich-content-plugin-button';
+import rcvImage from 'wix-rich-content-plugin-image';
+import rcvHtml from 'wix-rich-content-plugin-html';
+import rcvDivider from 'wix-rich-content-plugin-divider';
+import rcvGallery from 'wix-rich-content-plugin-gallery';
 
 const anchorTarget = '_top';
 const relValue = 'noreferrer';
@@ -44,7 +50,24 @@ export default class Viewer extends PureComponent {
     const { expendModeIsOpen, expandModeIndex } = this.state;
     return (
       <div id="rich-content-viewer" className="viewer">
-        <RichContentViewer
+        <SimplifiedRCV
+          helpers={this.helpers}
+          settings={{
+            plugins: [rcvButton(), rcvDivider(), rcvGallery(), rcvHtml(), rcvImage()],
+            theme,
+          }}
+          //typeMappers={Plugins.typeMappers}
+          inlineStyleMappers={Plugins.getInlineStyleMappers(this.props.initialState)}
+          //decorators={Plugins.decorators}
+          //config={Plugins.config}
+          initialState={this.props.initialState}
+          //theme={theme}
+          isMobile={this.props.isMobile}
+          anchorTarget={anchorTarget}
+          relValue={relValue}
+          disabled={this.state.disabled}
+          locale={this.props.locale} />
+        {/* <RichContentViewer
           helpers={this.helpers}
           typeMappers={Plugins.typeMappers}
           inlineStyleMappers={Plugins.getInlineStyleMappers(this.props.initialState)}
@@ -58,7 +81,7 @@ export default class Viewer extends PureComponent {
           disabled={this.state.disabled}
           locale={this.props.locale}
         // siteDomain="https://www.wix.com"
-        />
+        /> */}
         {!isSSR() && (
           <Fullscreen
             isOpen={expendModeIsOpen}

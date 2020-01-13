@@ -4,7 +4,10 @@ import { createEmpty } from 'wix-rich-content-editor/dist/lib/editorStateConvers
 import ReactModal from 'react-modal';
 import PropTypes from 'prop-types';
 import { modalStyles } from './defaults';
+import { pluginsStrategy } from './PluginsStrategy';
+import { themeStrategy } from './ThemeStrategy';
 
+const defaultStrategies = [pluginsStrategy, themeStrategy];
 class SimplifiedRCE extends React.Component {
   constructor(props) {
     super(props);
@@ -37,10 +40,9 @@ class SimplifiedRCE extends React.Component {
 
   render() {
     const { strategies = [], openModal, closeModal, forwardRef, ...rest } = this.props;
-    const modifiedProps = strategies.reduce(
-      (props, stratFunc) => Object.assign(props, stratFunc(rest)),
-      rest
-    );
+    const modifiedProps = defaultStrategies
+      .concat(strategies)
+      .reduce((props, stratFunc) => Object.assign(props, stratFunc(rest)), rest);
     const { helpers = {}, theme, locale, ModalsMap, initialState, onChange } = modifiedProps;
     const { onRequestClose } = this.state.modalProps || {};
     const { editorState } = this.state;

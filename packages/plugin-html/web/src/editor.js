@@ -1,16 +1,6 @@
 import { createHtmlPlugin } from './createHtmlPlugin';
 import { HTML_TYPE } from './types';
-
-const isSSR = () => typeof window === 'undefined'; //TODO Code duplication with examples/main utils.js
-export const getBaseUrl = () => {
-  if (isSSR()) {
-    return null;
-  }
-
-  const { hostname, port, protocol } = window.location;
-  const baseUrl = `${protocol}//${hostname}`;
-  return port ? `${baseUrl}:${port}` : baseUrl;
-};
+import { getBaseUrl } from './util';
 
 const defaultConfig = {
   htmlIframeSrc: `${getBaseUrl()}/static/html-plugin-embed.html`,

@@ -3,13 +3,13 @@ export default function pluginsStrategyViewer({ settings = {} }) {
   const emptyRet = { config: {}, type: [], typeMappers: [], decorators: [] };
   if (Array.isArray(plugins) && plugins !== []) {
     return plugins.reduce((prev, curr) => {
-      const { config, type, typeMappers, decorators } = curr;
+      const { config, type, typeMapper, decorator } = curr;
       const pConfig = { [type]: config };
       return {
         config: { ...prev.config, pConfig },
         type: prev.type.concat(type),
-        typeMappers: prev.typeMappers.concat(typeMappers),
-        decorators: prev.plugins.concat(decorators),
+        typeMappers: prev.typeMappers.concat(typeMapper),
+        decorators: prev.plugins.concat(decorator),
       };
     }, emptyRet);
   }

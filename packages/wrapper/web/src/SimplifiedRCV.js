@@ -2,9 +2,10 @@ import React from 'react';
 import { RichContentViewer } from 'wix-rich-content-editor';
 import { createEmpty } from 'wix-rich-content-editor/dist/lib/editorStateConversion';
 import { pluginsStrategyViewer } from './PluginsStrategyViewer';
+import { themeStrategy } from './ThemeStrategy';
 import PropTypes from 'prop-types';
 
-const defaultStrategies = [pluginsStrategyViewer];
+const defaultStrategies = [pluginsStrategyViewer, themeStrategy];
 
 class SimplifiedRCV extends React.Component {
   constructor(props) {
@@ -20,26 +21,16 @@ class SimplifiedRCV extends React.Component {
     const modifiedProps = defaultStrategies
       .concat(strategies)
       .reduce((props, stratFunc) => Object.assign(props, stratFunc(rest)), rest);
-    // const { helpers = {}, theme, locale, ModalsMap, initialState, onChange } = modifiedProps;
-    // const { onRequestClose } = this.state.modalProps || {};
-    // const { editorState } = this.state;
-    // helpers.openModal = data => this.onModalOpen(data) && openModal?.(data);
-    // helpers.closeModal = () => this.onModalClose() && closeModal?.();
-    // modifiedProps.helpers = helpers;
-    // modifiedProps.initialState = initialState || createEmpty();
-    // modifiedProps.onChange = editorState =>
-    //   onChange?.(editorState) && this.handleChange(editorState);
-    // modifiedProps.editorState = editorState;
-    return (
-      <React.Fragment>
-        <RichContentViewer {...modifiedProps} ref={forwardRef} />=
-      </React.Fragment>
-    );
+    return <RichContentViewer {...modifiedProps} ref={forwardRef} />;
   }
 }
 
 SimplifiedRCV.propTypes = {
   forwardRef: PropTypes.any,
   strategies: PropTypes.array,
+  settings: PropTypes.shape({
+    plugins: PropTypes.arrayOf(PropTypes.object),
+    theme: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  }),
 };
 export default React.forwardRef((props, ref) => <SimplifiedRCV {...props} forwardRef={ref} />);
