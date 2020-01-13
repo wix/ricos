@@ -35,9 +35,8 @@ export const insertLinkAtCurrentSelection = (editorState, data) => {
     selection = selection.merge({ focusOffset: selection.getFocusOffset() + url.length });
     newEditorState = EditorState.push(editorState, contentState, 'insert-characters');
   }
-  const isAlreadyBelongsToExistingLink = getSelectedLinks(newEditorState)?.length > 0;
   let editorStateWithLink;
-  if (isAlreadyBelongsToExistingLink) {
+  if (isSelectionBelongsToExsistingLink(newEditorState, selection)) {
     const contentState = newEditorState.getCurrentContent();
     const blockKey = selection.getStartKey();
     const block = contentState.getBlockForKey(blockKey);
@@ -52,6 +51,14 @@ export const insertLinkAtCurrentSelection = (editorState, data) => {
     selection.merge({ anchorOffset: selection.focusOffset })
   );
 };
+
+function isSelectionBelongsToExsistingLink(editorState, selection) {
+  const startOffset = selection.getStartOffset();
+  const endOffset = selection.getEndOffset();
+  return getSelectedLinks(editorState).find(({ range }) => {
+    return range[0] <= startOffset && range[1] >= endOffset;
+  });
+}
 
 const defaultAnchorTarget = '_self';
 const defaultRelValue = 'noopener';
