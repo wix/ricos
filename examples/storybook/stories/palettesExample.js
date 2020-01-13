@@ -230,4 +230,3 @@ const wixPalette = Object.keys(examples).map(palette => {
 
 export { wixPalettes };
 
-//rgba(246,238,172,0)

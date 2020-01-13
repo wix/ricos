@@ -1,1 +1,2 @@
-require('./RichContentEditorStory');
+require('./Components/Editor/');
+require('./Components/Viewer/');
