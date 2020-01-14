@@ -57,13 +57,11 @@ jobs:
   #         node-version: 12
   #     - run: npm install
   #     - run: npm run lint
-  pr-check:
+  pr-lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: deepakputhraya/action-pr-title@master
+      - uses: morrisoncole/pr-lint-action@v1.0.0
         with:
-          regex: '([a-z])+\/([a-z])+' # Regex the title should match.
-          allowed_prefixes: 'feature,stable,fix' # title should start with the given prefix
-          prefix_case_sensitive: false # title prefix are case insensitive
-          min_length: 5 # Min length of the title
-          max_length: 20 # Max length of the title
+          title-regex: '#EX-[0-9]+'
+          on-failed-regex-comment: 'This is just an example. Failed regex: `%regex%`!'
+          repo-token: '${{ secrets.GITHUB_TOKEN }}'
