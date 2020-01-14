@@ -60,7 +60,7 @@
 
 name: action
 on:
-  pull_request:
+  push:
     types:
       # Check title when opened.
       - opened
