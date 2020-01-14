@@ -57,7 +57,8 @@
     "react-dom": "16.6.3",
     "rollup": "1.20.3",
     "rollup-plugin-peer-deps-external": "^2.2.0",
-    "serve": "^11.3.0"
+    "serve": "^11.3.0",
+    "wix-rich-content-viewer": "^6.6.6"
   },
   "dependencies": {
     "wix-rich-content-common": "6.6.3",

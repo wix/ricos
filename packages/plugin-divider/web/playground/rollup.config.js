@@ -5,6 +5,7 @@ import commonjs from 'rollup-plugin-commonjs';
 import postcss from 'rollup-plugin-postcss';
 import resolve from 'rollup-plugin-node-resolve';
 import url from '@rollup/plugin-url';
+import replace from 'rollup-plugin-replace'
 import svgr from '@svgr/rollup';
 import { terser } from 'rollup-plugin-terser';
 import external from 'rollup-plugin-peer-deps-external';
@@ -16,13 +17,12 @@ export default {
       file: 'playground/dist/index.js',
       format: 'iife',
       sourcemap: true,
-    },
-    {
-      file: 'playground/dist/index.module.js',
-      format: 'es',
-      sourcemap: true,
-    },
+      globals: {
+        lodash: 'lodash' 
+      },
+    }
   ],
+  
   plugins: [
     postcss({
       plugins: [],
@@ -35,6 +35,11 @@ export default {
     external({
       includeDependencies: true,
     }),
+    
+    replace({
+      'process.env.NODE_ENV': JSON.stringify( 'production' )
+    }),
+    
     babel({
       presets: ['react-app'],
       plugins: [
@@ -47,7 +52,30 @@ export default {
       exclude: 'node_modules/**',
       runtimeHelpers: true,
     }),
-    commonjs(),
+    commonjs({        
+          namedExports: {
+      'node_modules/lodash/lodash.js': [
+          'unionBy',
+          'union',
+          'reduce',
+          'find',
+          'forEach',
+          'includes',
+          'isEqual',
+          'endsWith',
+          'isFunction',
+          'isArray',
+          'isEmpty'
+      ],
+      'node_modules/react/index.js': [
+        'PureComponent',
+        'Component'
+      ],
+      'node_modules/react-dom/server.js': [
+        'renderToStaticMarkup'
+      ],
+  }}
+  ),
     terser(),
   ],
 };
