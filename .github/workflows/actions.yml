@@ -61,7 +61,7 @@
 #         node-version: 12
 #     - run: npm install
 #     - run: npm run lint
-name: 'Commit Message Check'
+name: action
 on:
   pull_request:
     types:
