@@ -62,17 +62,7 @@
 #     - run: npm install
 #     - run: npm run lint
 name: action
-on:
-  pull_request:
-    types:
-      - opened
-      - edited
-      - reopened
-      - synchronize
-  push:
-    branches:
-      - master
-      - 'releases/*'
+on: pull_request
 
 jobs:
   check-commit-message:
