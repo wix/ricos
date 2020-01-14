@@ -1,71 +1,97 @@
-name: action
-on: push
+# name: action
+# on: push
+
+# jobs:
+# visual-tests:
+#   runs-on: ubuntu-latest
+#   steps:
+#     - name: Checkout
+#       uses: actions/checkout@v2
+
+#     - name: Cypress run
+#       uses: cypress-io/github-action@v1.16.1
+#       with:
+#         build: npm run build:test
+#         start: npm run e2e:app:run
+#         wait-on: 'http://localhost:3002'
+#         config: video=false
+
+#     - name: Update Applitools batch status
+#       if: always()
+#       uses: wei/curl@v1.1.1
+#       with:
+#         args: -d "" -X POST https://wixeyesapi.applitools.com/api/externals/github/servers/github.com/commit/${{ github.sha }}/complete?apiKey=${{ secrets.APPLITOOLS_API_KEY }}
+
+#   env:
+#     APPLITOOLS_API_KEY: ${{ secrets.APPLITOOLS_API_KEY }}
+#     APPLITOOLS_SERVER_URL: ${{ secrets.APPLITOOLS_SERVER_URL }}
+#     APPLITOOLS_BATCH_ID: ${{ github.sha }}
+# content-state-tests:
+#   runs-on: ubuntu-latest
+#   steps:
+#     - name: Checkout
+#       uses: actions/checkout@v2
+
+#     - name: Cypress run
+#       uses: cypress-io/github-action@v1.16.1
+#       with:
+#         build: npm run build:test
+#         start: npm run e2e:app:run
+#         wait-on: 'http://localhost:3002'
+#         config: video=false
+#         env: MATCH_CONTENT_STATE=true
+#   env:
+#     APPLITOOLS_IS_DISABLED: true
+# unit-tests:
+#   runs-on: ubuntu-latest
+#   steps:
+#     - uses: actions/checkout@v2
+#     - uses: actions/setup-node@v1.1.0
+#       with:
+#         node-version: 12
+#     - run: npm install
+#     - run: npm run build
+#     - run: npm run test:unit
+# lint:
+#   runs-on: ubuntu-latest
+#   steps:
+#     - uses: actions/checkout@v2
+#     - uses: actions/setup-node@v1.1.0
+#       with:
+#         node-version: 12
+#     - run: npm install
+#     - run: npm run lint
+name: 'Commit Message Check'
+on:
+  pull_request:
+    types:
+      - opened
+      - edited
+      - reopened
+      - synchronize
+  push:
+    branches:
+      - master
+      - 'releases/*'
 
 jobs:
-  # visual-tests:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v2
-
-  #     - name: Cypress run
-  #       uses: cypress-io/github-action@v1.16.1
-  #       with:
-  #         build: npm run build:test
-  #         start: npm run e2e:app:run
-  #         wait-on: 'http://localhost:3002'
-  #         config: video=false
-
-  #     - name: Update Applitools batch status
-  #       if: always()
-  #       uses: wei/curl@v1.1.1
-  #       with:
-  #         args: -d "" -X POST https://wixeyesapi.applitools.com/api/externals/github/servers/github.com/commit/${{ github.sha }}/complete?apiKey=${{ secrets.APPLITOOLS_API_KEY }}
-
-  #   env:
-  #     APPLITOOLS_API_KEY: ${{ secrets.APPLITOOLS_API_KEY }}
-  #     APPLITOOLS_SERVER_URL: ${{ secrets.APPLITOOLS_SERVER_URL }}
-  #     APPLITOOLS_BATCH_ID: ${{ github.sha }}
-  # content-state-tests:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v2
-
-  #     - name: Cypress run
-  #       uses: cypress-io/github-action@v1.16.1
-  #       with:
-  #         build: npm run build:test
-  #         start: npm run e2e:app:run
-  #         wait-on: 'http://localhost:3002'
-  #         config: video=false
-  #         env: MATCH_CONTENT_STATE=true
-  #   env:
-  #     APPLITOOLS_IS_DISABLED: true
-  # unit-tests:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #     - uses: actions/setup-node@v1.1.0
-  #       with:
-  #         node-version: 12
-  #     - run: npm install
-  #     - run: npm run build
-  #     - run: npm run test:unit
-  # lint:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #     - uses: actions/setup-node@v1.1.0
-  #       with:
-  #         node-version: 12
-  #     - run: npm install
-  #     - run: npm run lint
-  publish:
+  check-commit-message:
+    name: Check Commit Message
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - uses: dylanvann/check-pull-request-title@v1
+      - name: Check Commit Type
+        uses: gsactions/commit-message-checker@v1
         with:
-          # Match pull request titles in the form UI-1234 - Message.
-          pattern: '^UI-\d* - '
+          pattern: '\[[^]]+\] .+$'
+          flags: 'gm'
+          error: 'Your first line has to contain a commit type like "[BUGFIX]".'
+      - name: Check Line Length
+        uses: gsactions/commit-message-checker@v1
+        with:
+          pattern: '^[^#].{74}'
+          error: 'The maximum line length of 74 characters is exceeded.'
+      - name: Check for Resolves / Fixes
+        uses: gsactions/commit-message-checker@v1
+        with:
+          pattern: '^.+(Resolves|Fixes): \#[0-9]+$'
+          error: 'You need at least one "Resolves|Fixes: #<issue number>" line.'
