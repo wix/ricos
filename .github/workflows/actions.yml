@@ -60,14 +60,6 @@ jobs:
           node-version: 12
       - run: npm install
       - run: npm run lint
-      
-name: PR Lint
-
-on:
-  pull_request:
-    types: [opened, edited, reopened]
-
-jobs:
   pr-lint:
     runs-on: ubuntu-latest
     steps:
@@ -76,5 +68,3 @@ jobs:
           title-regex: '\w feat: \w|\w fix: \w|\w house: \w|\w breaking-change: \w'
           on-failed-regex-comment: 'This is just an example. Failed regex: `%regex%`!'
           repo-token: '${{ secrets.GITHUB_TOKEN }}'
-
-          
