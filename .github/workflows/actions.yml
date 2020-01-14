@@ -61,16 +61,11 @@ jobs:
           node-version: 12
       - run: npm install
       - run: npm run lint
-
-name: action
-on: pull_request
-
-  jobs:
-    publish:
-      runs-on: ubuntu-latest
-      steps:
-        - uses: actions/checkout@v1
-        - uses: dylanvann/check-pull-request-title@v1
-          with:
-            # Match pull request titles in the form UI-1234 - Message.
-            pattern: '^UI-\d* - '
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: dylanvann/check-pull-request-title@v1
+        with:
+          # Match pull request titles in the form UI-1234 - Message.
+          pattern: '^UI-\d* - '
