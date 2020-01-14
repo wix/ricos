@@ -6,13 +6,14 @@
 
 .readMore {
   color: #000;
-  a {
-    font-weight: normal;
-    text-decoration: none;
-    color: inherit;
-    &:hover {
-      text-decoration: underline;
-    }
+}
+
+.readMore_label {
+  font-weight: normal;
+  text-decoration: none;
+  color: #000;
+  &:hover {
+    text-decoration: underline;
   }
 }
 

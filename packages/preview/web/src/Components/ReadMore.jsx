@@ -47,12 +47,14 @@ class ReadMore extends PureComponent {
     // const textToCollapse = text || getChildrenText(children);
     return (
       <Fragment>
-        <HTMLEllipsis
-          unsafeHTML={this.renderChildren(children)}
-          className={this.styles.readMore}
-          maxLine={lines}
-          ellipsisHTML={`${ellipsis} <a href="#">${label}</a>`}
-        />
+      <HTMLEllipsis
+        unsafeHTML={this.renderChildren(children)}
+        className={this.styles.readMore}
+        maxLine={lines}
+        ellipsis={ellipsis}
+    >
+      <a className={this.styles.readMore_label} href={'#'} onClick={this.onClick}>{label}</a>
+        </HTMLEllipsis>
       </Fragment>
     );
   }
