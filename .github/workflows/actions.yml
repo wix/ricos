@@ -65,8 +65,10 @@ jobs:
   publish:
     runs-on: ubuntu-18.04
     steps:
-      - uses: actions/checkout@v1
-      - uses: dylanvann/check-pull-request-title@v1
+      - uses: deepakputhraya/action-pr-title@master
         with:
-          # Match pull request titles in the form UI-1234 - Message.
-          pattern: '^UI-\d* - '
+          regex: '([a-z])+\/([a-z])+' # Regex the title should match.
+          allowed_prefixes: 'feature,stable,fix' # title should start with the given prefix
+          prefix_case_sensitive: false # title prefix are case insensitive
+          min_length: 5 # Min length of the title
+          max_length: 20 # Max length of the title
