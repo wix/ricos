@@ -15,19 +15,19 @@ import {
 export default class TextColorPanel extends Component {
   constructor(props) {
     super(props);
-    const styleSelectionPredicate = props.predicate(
+    this.styleSelectionPredicate = props.predicate(
       props.settings.styleSelectionPredicate || DEFAULT_STYLE_SELECTION_PREDICATE
     );
     if (props.settings.colorScheme && !validateColorScheme(props.settings.colorScheme)) {
       console.error('Error: colorScheme is not valid'); // eslint-disable-line no-console
     }
-    const currentColors = getSelectionStyles(styleSelectionPredicate, props.editorState);
+    this.currentColors = getSelectionStyles(this.styleSelectionPredicate, props.editorState);
     this.state = {
       currentColor:
-        currentColors.length > 0
-          ? extractColor(props.settings.colorScheme, getColor(currentColors[0]))
+        this.currentColors.length > 0
+          ? extractColor(props.settings.colorScheme, getColor(this.currentColors[0]))
           : this.props.defaultColor,
-      currentSchemeColor: currentColors[0] && getColor(currentColors[0]),
+      currentSchemeColor: this.currentColors[0] && getColor(this.currentColors[0]),
       userColors: props.settings.getUserColors() || [],
     };
     this.setColor = this.setColor.bind(this);
@@ -38,19 +38,23 @@ export default class TextColorPanel extends Component {
     this.props.setKeepToolbarOpen(false);
   }
 
-  setColor(color, shouldRemoveInlineStyle) {
-    let { editorState } = this.props;
-    if (color !== this.state.currentColor) {
-      editorState = this.getInlineColorState(color, shouldRemoveInlineStyle);
+  setColor(color) {
+    let { editorState, settings, defaultColor } = this.props;
+    const { currentColor } = this.state;
+
+    if (color !== currentColor) {
+      editorState = this.getInlineColorState(color);
       this.setState({
-        currentColor: extractColor(this.props.settings.colorScheme, color),
-        currentSchemeColor: color,
+        currentColor: color ? extractColor(settings.colorScheme, color) : defaultColor,
+        currentSchemeColor: color
+          ? color
+          : this.currentColors[0] && getColor(this.currentColors[0]),
       });
     }
     this.props.closeModal(editorState);
   }
 
-  getInlineColorState(color, shouldRemoveInlineStyle) {
+  getInlineColorState(color) {
     const { editorState, settings, styleMapper, predicate } = this.props;
     const styleSelectionPredicate = predicate(
       (settings && settings.styleSelectionPredicate) || DEFAULT_STYLE_SELECTION_PREDICATE
@@ -63,7 +67,7 @@ export default class TextColorPanel extends Component {
       return EditorState.push(nextEditorState, nextContentState, 'change-inline-style');
     }, editorState);
     let contentState = newEditorState.getCurrentContent();
-    if (!shouldRemoveInlineStyle) {
+    if (color) {
       contentState = Modifier.applyInlineStyle(contentState, selection, styleMapper(color));
     }
     return EditorState.push(newEditorState, contentState, 'change-inline-style');
