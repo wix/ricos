@@ -62,7 +62,7 @@
 #     - run: npm install
 #     - run: npm run lint
 name: action
-on: pull_request
+on: push
 
 jobs:
   check-commit-message:
