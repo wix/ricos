@@ -13,6 +13,9 @@
     Click to see more.
   </summary>
 
+  ### :boom: [Breaking Change]
+  - `Side-Toolbar`
+    - [#577](https://github.com/wix-incubator/rich-content/pull/577) Remove add plugins button from inline toolbar in mobile and change mobile side toolbar to be fixed position instead, for customize Add Plugins button css use css media query (@media only screen and (max-width: 800px))
   ### :rocket: New Feature
   - `link`
     - [#551](https://github.com/wix-incubator/rich-content/pull/551) adding a tooltip for nofollow tag explanation
@@ -21,8 +24,10 @@
   ### :bug: Bug Fix
   - `text-color`
      - [#572](https://github.com/wix-incubator/rich-content/pull/572) color Picker- ResetToDefault button sticky to bottom
+     - [#576](https://github.com/wix-incubator/rich-content/pull/576) color Picker-new colors are added to the end of the list + 'reset to default' removes from the 'inlineStyleRanges' in the content state
   - `editor-common`
     - [#550](https://github.com/wix-incubator/rich-content/pull/550) remove dashed border when focused
+    - [#584](https://github.com/wix-incubator/rich-content/pull/584) fix gallery dropdown css
   - `link`
     - [#546](https://github.com/wix-incubator/rich-content/pull/546) saves the last data and the initial state of the checkboxes("Open in a new tab", "Add a nofollow tag") is according to the defaults (anchorTarget, relValue)
   - `editor-common`
@@ -35,6 +40,9 @@
     - [#564](https://github.com/wix-incubator/rich-content/pull/564) snapshots renaming for gallery and image plugins tests
   - `editor`
     - [#575](https://github.com/wix-incubator/rich-content/pull/575) ltr&rtl css yoshi issues solved (requested by forum)
+  - `general`
+    - [#585](https://github.com/wix-incubator/rich-content/pull/585) Deploy every branch to surge. Will have the domain http://rich-content-branch_name.surge.sh/
+
 </details>
 <hr/>
 
