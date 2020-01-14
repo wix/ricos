@@ -1,5 +1,5 @@
 name: action
-on: [push, pull_request]
+on: [push, pull_request: types: [opened, edited, reopened]]
 
 jobs:
   # visual-tests:
