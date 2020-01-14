@@ -44,7 +44,6 @@ export const ThumbnailSize = props => (
   <SliderWithInput
     min={10}
     max={1000}
-    readOnly={props.options.readOnly}
     label={props.options.label}
     sliderDataHook="thumbnailSizeSlider"
     inputDataHook="thumbnailSizeInput"

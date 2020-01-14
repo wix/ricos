@@ -88,7 +88,6 @@ class HtmlComponent extends Component {
     const { props } = this;
     validate(props.componentData, pluginHtmlSchema);
     const {
-      blockProps,
       componentData: { src, srcType, config: { width: currentWidth, height: currentHeight } = {} },
       settings: { htmlIframeSrc, width, height } = {},
     } = props;
@@ -98,7 +97,6 @@ class HtmlComponent extends Component {
       height: currentHeight || height || INIT_HEIGHT,
       maxHeight: this.state.iframeHeight,
     };
-    const readOnly = blockProps ? blockProps.readOnly : true;
 
     return (
       <ViewportRenderer containerStyle={style}>
@@ -110,7 +108,7 @@ class HtmlComponent extends Component {
           {srcType === SRC_TYPE_HTML && src && (
             <IframeHtml
               key={SRC_TYPE_HTML}
-              tabIndex={readOnly ? -1 : 0}
+              tabIndex={0}
               html={html}
               src={htmlIframeSrc}
               onHeightChange={this.setHeight}
@@ -118,7 +116,7 @@ class HtmlComponent extends Component {
           )}
 
           {srcType === SRC_TYPE_URL && isValidUrl(src) && (
-            <IframeUrl key={SRC_TYPE_URL} tabIndex={readOnly ? -1 : 0} src={normalizeUrl(src)} />
+            <IframeUrl key={SRC_TYPE_URL} tabIndex={0} src={normalizeUrl(src)} />
           )}
 
           {!src && !isValidUrl(src) && <div className={this.styles.htmlComponent_placeholder} />}
