@@ -1,5 +1,5 @@
 name: action
-on: push
+on: [push, pull_request]
 
 jobs:
   # visual-tests:
