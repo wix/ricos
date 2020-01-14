@@ -72,6 +72,6 @@ jobs:
     steps:
       - uses: morrisoncole/pr-lint-action@v1.0.0
         with:
-          title-regex: '#EX-[0-9]+'
+          title-regex: '\w feat: \w|\w fix: \w|\w house: \w|\w breaking-change: \w'
           on-failed-regex-comment: 'This is just an example. Failed regex: `%regex%`!'
           repo-token: '${{ secrets.GITHUB_TOKEN }}'
