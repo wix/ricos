@@ -1,70 +1,59 @@
-name: action
-on: [push, pull_request]
+# name: action
+# on: [push, pull_request]
 
-jobs:
-  # visual-tests:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v2
-
-  #     - name: Cypress run
-  #       uses: cypress-io/github-action@v1.16.1
-  #       with:
-  #         build: npm run build:test
-  #         start: npm run e2e:app:run
-  #         wait-on: 'http://localhost:3002'
-  #         config: video=false
-
-  #     - name: Update Applitools batch status
-  #       if: always()
-  #       uses: wei/curl@v1.1.1
-  #       with:
-  #         args: -d "" -X POST https://wixeyesapi.applitools.com/api/externals/github/servers/github.com/commit/${{ github.sha }}/complete?apiKey=${{ secrets.APPLITOOLS_API_KEY }}
-  #   env:
-  #     APPLITOOLS_API_KEY: ${{ secrets.APPLITOOLS_API_KEY }}
-  #     APPLITOOLS_SERVER_URL: ${{ secrets.APPLITOOLS_SERVER_URL }}
-  #     APPLITOOLS_BATCH_ID: ${{ github.sha }}
-  # content-state-tests:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v2
-
-  #     - name: Cypress run
-  #       uses: cypress-io/github-action@v1.16.1
-  #       with:
-  #         build: npm run build:test
-  #         start: npm run e2e:app:run
-  #         wait-on: 'http://localhost:3002'
-  #         config: video=false
-  #         env: MATCH_CONTENT_STATE=true
-  #   env:
-  #     APPLITOOLS_IS_DISABLED: true
-  # unit-tests:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #     - uses: actions/setup-node@v1.1.0
-  #       with:
-  #         node-version: 12
-  #     - run: npm install
-  #     - run: npm run build
-  #     - run: npm run test:unit
-  # lint:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #     - uses: actions/setup-node@v1.1.0
-  #       with:
-  #         node-version: 12
-  #     - run: npm install
-  #     - run: npm run lint
-  pr-lint:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: morrisoncole/pr-lint-action@v1.0.0
-        with:
-          title-regex: '\w feat: \w|\w fix: \w|\w house: \w|\w breaking-change: \w'
-          on-failed-regex-comment: 'Failed to match regex: `%regex%`!'
-          repo-token: '${{ secrets.GITHUB_TOKEN }}'
+# jobs:
+#   # visual-tests:
+#   #   runs-on: ubuntu-latest
+#   #   steps:
+#   #     - name: Checkout
+#   #       uses: actions/checkout@v2
+#   #     - name: Cypress run
+#   #       uses: cypress-io/github-action@v1.16.1
+#   #       with:
+#   #         build: npm run build:test
+#   #         start: npm run e2e:app:run
+#   #         wait-on: 'http://localhost:3002'
+#   #         config: video=false
+#   #     - name: Update Applitools batch status
+#   #       if: always()
+#   #       uses: wei/curl@v1.1.1
+#   #       with:
+#   #         args: -d "" -X POST https://wixeyesapi.applitools.com/api/externals/github/servers/github.com/commit/${{ github.sha }}/complete?apiKey=${{ secrets.APPLITOOLS_API_KEY }}
+#   #   env:
+#   #     APPLITOOLS_API_KEY: ${{ secrets.APPLITOOLS_API_KEY }}
+#   #     APPLITOOLS_SERVER_URL: ${{ secrets.APPLITOOLS_SERVER_URL }}
+#   #     APPLITOOLS_BATCH_ID: ${{ github.sha }}
+#   # content-state-tests:
+#   #   runs-on: ubuntu-latest
+#   #   steps:
+#   #     - name: Checkout
+#   #       uses: actions/checkout@v2
+#   #     - name: Cypress run
+#   #       uses: cypress-io/github-action@v1.16.1
+#   #       with:
+#   #         build: npm run build:test
+#   #         start: npm run e2e:app:run
+#   #         wait-on: 'http://localhost:3002'
+#   #         config: video=false
+#   #         env: MATCH_CONTENT_STATE=true
+#   #   env:
+#   #     APPLITOOLS_IS_DISABLED: true
+#   # unit-tests:
+#   #   runs-on: ubuntu-latest
+#   #   steps:
+#   #     - uses: actions/checkout@v2
+#   #     - uses: actions/setup-node@v1.1.0
+#   #       with:
+#   #         node-version: 12
+#   #     - run: npm install
+#   #     - run: npm run build
+#   #     - run: npm run test:unit
+#   # lint:
+#   #   runs-on: ubuntu-latest
+#   #   steps:
+#   #     - uses: actions/checkout@v2
+#   #     - uses: actions/setup-node@v1.1.0
+#   #       with:
+#   #         node-version: 12
+#   #     - run: npm install
+#   #     - run: npm run lint
