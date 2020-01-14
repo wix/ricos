@@ -59,21 +59,14 @@
 #     - run: npm run lint
 
 name: action
-on:
-  push:
-    types:
-      # Check title when opened.
-      - opened
-      # Check title when new commits are pushed.
-      # Required to use as a status check.
-      - synchronize
+on: push
 
-jobs:
-  publish:
-    runs-on: ubuntu-18.04
-    steps:
-      - uses: actions/checkout@v1
-      - uses: dylanvann/check-pull-request-title@v1
-        with:
-          # Match pull request titles in the form UI-1234 - Message.
-          pattern: '^UI-\d* - '
+  jobs:
+    publish:
+      runs-on: ubuntu-18.04
+      steps:
+        - uses: actions/checkout@v1
+        - uses: dylanvann/check-pull-request-title@v1
+          with:
+            # Match pull request titles in the form UI-1234 - Message.
+            pattern: '^UI-\d* - '
