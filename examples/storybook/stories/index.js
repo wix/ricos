@@ -1,2 +1,3 @@
-require('./Components/Editor/');
-require('./Components/Viewer/');
+require('./Intro/');
+require('./Editor/');
+require('./Viewer/');
