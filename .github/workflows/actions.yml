@@ -2,61 +2,68 @@ name: action
 on: push
 
 jobs:
-  visual-tests:
+  # visual-tests:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v2
+  #     - name: Cypress run
+  #       uses: cypress-io/github-action@v1.16.1
+  #       with:
+  #         build: npm run build:test
+  #         start: npm run e2e:app:run
+  #         wait-on: 'http://localhost:3002'
+  #         config: video=false
+  #     - name: Update Applitools batch status
+  #       if: always()
+  #       uses: wei/curl@v1.1.1
+  #       with:
+  #         args: -d "" -X POST https://wixeyesapi.applitools.com/api/externals/github/servers/github.com/commit/${{ github.sha }}/complete?apiKey=${{ secrets.APPLITOOLS_API_KEY }}
+  #   env:
+  #     APPLITOOLS_API_KEY: ${{ secrets.APPLITOOLS_API_KEY }}
+  #     APPLITOOLS_SERVER_URL: ${{ secrets.APPLITOOLS_SERVER_URL }}
+  #     APPLITOOLS_BATCH_ID: ${{ github.sha }}
+  # content-state-tests:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v2
+  #     - name: Cypress run
+  #       uses: cypress-io/github-action@v1.16.1
+  #       with:
+  #         build: npm run build:test
+  #         start: npm run e2e:app:run
+  #         wait-on: 'http://localhost:3002'
+  #         config: video=false
+  #         env: MATCH_CONTENT_STATE=true
+  #   env:
+  #     APPLITOOLS_IS_DISABLED: true
+  # unit-tests:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - uses: actions/setup-node@v1.1.0
+  #       with:
+  #         node-version: 12
+  #     - run: npm install
+  #     - run: npm run build
+  #     - run: npm run test:unit
+  # lint:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - uses: actions/setup-node@v1.1.0
+  #       with:
+  #         node-version: 12
+  #     - run: npm install
+  #     - run: npm run lint
+  pr-check:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Cypress run
-        uses: cypress-io/github-action@v1.16.1
-        with:
-          build: npm run build:test
-          start: npm run e2e:app:run
-          wait-on: 'http://localhost:3002'
-          config: video=false
-
-      - name: Update Applitools batch status
-        if: always()
-        uses: wei/curl@v1.1.1
-        with:
-          args: -d "" -X POST https://wixeyesapi.applitools.com/api/externals/github/servers/github.com/commit/${{ github.sha }}/complete?apiKey=${{ secrets.APPLITOOLS_API_KEY }}
-    env:
-      APPLITOOLS_API_KEY: ${{ secrets.APPLITOOLS_API_KEY }}
-      APPLITOOLS_SERVER_URL: ${{ secrets.APPLITOOLS_SERVER_URL }}
-      APPLITOOLS_BATCH_ID: ${{ github.sha }}
-  content-state-tests:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Cypress run
-        uses: cypress-io/github-action@v1.16.1
-        with:
-          build: npm run build:test
-          start: npm run e2e:app:run
-          wait-on: 'http://localhost:3002'
-          config: video=false
-          env: MATCH_CONTENT_STATE=true
-    env:
-      APPLITOOLS_IS_DISABLED: true
-  unit-tests:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1.1.0
-        with:
-          node-version: 12
-      - run: npm install
-      - run: npm run build
-      - run: npm run test:unit
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1.1.0
-        with:
-          node-version: 12
-      - run: npm install
-      - run: npm run lint
+      - uses: deepakputhraya/action-pr-title@master
+      with:
+        regex: '([a-z])+\/([a-z])+' # Regex the title should match.
+        allowed_prefixes: 'feature,stable,fix' # title should start with the given prefix
+        prefix_case_sensitive: false # title prefix are case insensitive
+        min_length: 5 # Min length of the title
+        max_length: 20 # Max length of the title
