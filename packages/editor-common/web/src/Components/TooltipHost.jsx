@@ -14,14 +14,15 @@ const TooltipHost = () => {
         const mergedStyles = mergeStyles({ styles, theme });
         return (
           <ReactTooltip
+            className={mergedStyles.tooltip}
+            effect={'solid'}
+            delayShow={300}
+            multiline
             overridePosition={({ left, top: originalTop }, currentEvent, currentTarget, node) => {
               const isBottomTooltip = node?.className && node.className.indexOf(PLACE_BUTTON) > -1;
               const top = originalTop - (isBottomTooltip ? 30 : 0);
               return { top, left };
             }}
-            className={mergedStyles.tooltip}
-            effect={'solid'}
-            delayShow={300}
           />
         );
       }}

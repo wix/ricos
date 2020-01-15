@@ -1,8 +1,6 @@
 import classNames from 'classnames';
 import { mergeStyles } from 'wix-rich-content-common';
-import { decorateComponentWithProps } from 'wix-rich-content-editor-common';
 import createStaticToolbar from './createStaticToolbar';
-import { AddPluginButton } from '../buttons';
 import { getTextButtonsFromList } from '../buttons/utils';
 import toolbarStyles from '../../../../statics/styles/mobile-toolbar.scss';
 import buttonStyles from '../../../../statics/styles/mobile-toolbar-button.scss';
@@ -11,11 +9,7 @@ import separatorStyles from '../../../../statics/styles/mobile-toolbar-separator
 const createMobileToolbar = ({
   buttons,
   textPluginButtons,
-  pluginButtons,
   helpers,
-  pubsub,
-  getEditorState,
-  setEditorState,
   anchorTarget,
   relValue,
   theme,
@@ -37,11 +31,7 @@ const createMobileToolbar = ({
     structure: getMobileButtons({
       buttons,
       textPluginButtons,
-      pluginButtons,
       helpers,
-      pubsub,
-      getEditorState,
-      setEditorState,
       mobileTheme,
       t,
       uiSettings,
@@ -100,24 +90,7 @@ const getMobileTheme = theme => {
   };
 };
 
-const getMobileButtons = ({
-  buttons,
-  textPluginButtons,
-  pluginButtons,
-  helpers,
-  pubsub,
-  getEditorState,
-  setEditorState,
-  mobileTheme,
-  t,
-  uiSettings,
-  config,
-}) => {
-  const addPluginIndex = buttons.findIndex(b => b === 'AddPlugin');
-  if (addPluginIndex !== -1) {
-    buttons.splice(addPluginIndex, 1);
-  }
-
+const getMobileButtons = ({ buttons, textPluginButtons, mobileTheme, t, uiSettings, config }) => {
   const structure = getTextButtonsFromList({
     buttons,
     textPluginButtons,
@@ -127,26 +100,6 @@ const getMobileButtons = ({
     uiSettings,
     config,
   });
-
-  if (addPluginIndex !== -1) {
-    const addAddPluginButton = pluginButtons && pluginButtons.length;
-    if (addAddPluginButton) {
-      structure.splice(
-        addPluginIndex,
-        0,
-        decorateComponentWithProps(AddPluginButton, {
-          openModal: helpers.openModal,
-          closeModal: helpers.closeModal,
-          pluginButtons,
-          getEditorState,
-          setEditorState,
-          pubsub,
-          t,
-          theme: mobileTheme,
-        })
-      );
-    }
-  }
 
   return structure;
 };
