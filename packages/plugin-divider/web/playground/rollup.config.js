@@ -15,7 +15,7 @@ export default {
   output: [
     {
       file: 'playground/dist/index.js',
-      format: 'iife',
+      format: 'es',
       sourcemap: true,
       globals: {
         lodash: 'lodash' 
