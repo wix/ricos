@@ -65,14 +65,12 @@ class VideoComponent extends React.Component {
 
   renderPlayer = () => {
     const { componentData, settings } = this.props;
-    const { isPlayable } = this.state;
     return (
       <VideoViewer
         ref={this.setPlayer}
         componentData={componentData}
         settings={settings}
         onReady={this.handleReady}
-        isPlayable={isPlayable}
       />
     );
   };
