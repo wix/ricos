@@ -22,6 +22,9 @@
   &:hover {
     color: $accent-color;
   }
+  @media only screen and (max-width: 800px) {
+    background-color: white;
+  }
 }
 
 .sideToolbar {

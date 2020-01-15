@@ -9,6 +9,12 @@ const EXAMPLES_TO_DEPLOY = [
     name: 'rich-content',
     path: 'examples/main',
   },
+  {
+    name: 'rich-content-storybook',
+    path: 'examples/storybook',
+    buildCmd: 'npm i && yarn build-storybook',
+    dist: 'storybook-static',
+  },
 ];
 
 const exec = cmd => execSync(cmd, { stdio: 'inherit' });
@@ -27,18 +33,17 @@ const generateSubdomain = exampleName => {
   return subdomain;
 };
 
-function build() {
-  const buildCommand = 'npm run build';
-  console.log(chalk.magenta(`Running: "${buildCommand}"`));
+function build({ buildCmd = 'npm run build' }) {
+  console.log(chalk.magenta(`Running: "${buildCmd}"`));
   exec('npm run clean');
-  exec(buildCommand);
+  exec(buildCmd);
 }
 
-function deploy(name) {
+function deploy({ name, dist = 'dist' }) {
   console.log(chalk.cyan(`Deploying ${name} example to surge...`));
   const subdomain = generateSubdomain(name);
   const domain = fqdn(subdomain);
-  const deployCommand = `npx surge dist ${domain}`;
+  const deployCommand = `npx surge ${dist} ${domain}`;
   try {
     console.log(chalk.magenta(`Running "${deployCommand}`));
     exec(deployCommand);
@@ -64,8 +69,8 @@ function run() {
     process.chdir(path.resolve(process.cwd(), example.path));
 
     console.log(chalk.blue(`\nDeploying ${example.name} example...`));
-    build();
-    deploy(example.name);
+    build(example);
+    deploy(example);
 
     process.chdir(path.resolve('../..'));
   }
