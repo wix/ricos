@@ -5,12 +5,15 @@ import { FocusManager, EditorModals, getModalStyles } from 'wix-rich-content-edi
 import { PlusIcon, PlusActiveIcon } from '../../Icons';
 import Styles from '../../../../statics/styles/side-toolbar.scss';
 
+const hideStyle = 'translate(-50%) scale(0)';
+const showStyle = 'translate(-50%) scale(1)';
+
 export default class AddPluginFloatingToolbar extends Component {
   state = {
     isActive: false,
     tabIndex: -1,
     style: {
-      transform: 'translate(-50%) scale(0)',
+      transform: hideStyle,
     },
   };
 
@@ -87,7 +90,7 @@ export default class AddPluginFloatingToolbar extends Component {
     this.setState({
       style: {
         ...this.getPopupOffset(),
-        transform: 'translate(-50%) scale(1)',
+        transform: showStyle,
         transition: 'transform 0.15s cubic-bezier(.3,1.2,.2,1)',
         width: this.popup.offsetWidth,
       },
@@ -99,7 +102,7 @@ export default class AddPluginFloatingToolbar extends Component {
   hidePopup = () => {
     this.setState({
       style: {
-        transform: 'translate(-50%) scale(0)',
+        transform: hideStyle,
       },
       isActive: false,
       tabIndex: -1,
