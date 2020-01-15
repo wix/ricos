@@ -1,0 +1,14 @@
+.color-box {
+  height: 20px;
+  font-size: 12px;
+  font-weight: 200;
+  text-align: center;
+  line-height: 20px;
+}
+
+.palette {
+  width: 300px;
+  display: grid;
+  grid-template-columns: repeat(5, auto);
+  grid-column-gap: 0;
+}

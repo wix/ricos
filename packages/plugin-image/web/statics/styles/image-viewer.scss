@@ -88,12 +88,16 @@ $opacityTransition: opacity 0.8s ease;
 }
 
 .imageHighres {
-  z-index: 0;
-  position: absolute;
-  top: 0;
-  left: 0;
-  opacity: 0;
-  transition: $opacityTransition;
+  position: relative;
+  
+  &:not([src$=".gif"]) {
+    z-index: 0;
+    top: 0;
+    left: 0;
+    position: absolute;
+    opacity: 0;
+    transition: $opacityTransition;
+  }
 }
 
 @keyframes image_loading {
