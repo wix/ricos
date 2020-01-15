@@ -33,6 +33,10 @@
     - [#589](https://github.com/wix-incubator/rich-content/pull/589) in order to edit the link settings its enough to select only part of the words that belongs to the link
   - `editor-common`
     - [#566](https://github.com/wix-incubator/rich-content/pull/566) Fix tooltip position in bottom tooltip
+  - `editor`
+    - [#604](https://github.com/wix-incubator/rich-content/pull/604) drag & drop to beginning of first block is disabled
+  - `video`
+    - [#604](https://github.com/wix-incubator/rich-content/pull/604) missing thumbnail for custom uploaded video
   ### :house: Internal
   - `general`
     - [#561](https://github.com/wix-incubator/rich-content/pull/561) refactor - cleanup readOnly prop from code
@@ -43,6 +47,8 @@
     - [#575](https://github.com/wix-incubator/rich-content/pull/575) ltr&rtl css yoshi issues solved (requested by forum)
   - `general`
     - [#585](https://github.com/wix-incubator/rich-content/pull/585) Deploy every branch to surge. Will have the domain http://rich-content-branch_name.surge.sh/
+  - `examples`
+    - [#604](https://github.com/wix-incubator/rich-content/pull/604) changed custom upload mock video to a wix media video
 
 </details>
 <hr/>
