@@ -1,0 +1,15 @@
+.page {
+  padding: 10px;
+
+}
+
+.rce-wrapper {
+  border: 1px solid pink;
+  margin-left: 50px;
+}
+
+.rcv-wrapper {
+  border: 1px solid mediumaquamarine;
+  margin-left: 50px;
+}
+
