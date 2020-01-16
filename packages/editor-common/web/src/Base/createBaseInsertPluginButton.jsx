@@ -46,8 +46,13 @@ export default ({
 
     addBlock = data => {
       const { getEditorState, setEditorState } = this.props;
-      const { newSelection, newEditorState } = this.createBlock(getEditorState(), data, blockType);
+      const { newBlock, newSelection, newEditorState } = this.createBlock(
+        getEditorState(),
+        data,
+        blockType
+      );
       setEditorState(EditorState.forceSelection(newEditorState, newSelection));
+      return { newBlock, newSelection, newEditorState };
     };
 
     addCustomBlock = buttonData => {
