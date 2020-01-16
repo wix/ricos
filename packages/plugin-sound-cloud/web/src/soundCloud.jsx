@@ -90,14 +90,12 @@ class SoundCloud extends Component {
 
   renderPlayer = () => {
     const { componentData } = this.props;
-    const { isPlayable } = this.state;
     return (
       <SoundCloudViewer
         ref={this.setPlayer}
         componentData={componentData}
         onReady={this.handleReady}
         onStart={this.handleStart}
-        isPlayable={isPlayable}
       />
     );
   };

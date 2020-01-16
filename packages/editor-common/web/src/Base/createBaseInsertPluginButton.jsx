@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { EditorState } from 'draft-js';
 import { isEmpty } from 'lodash';
-import { mergeStyles, Context } from 'wix-rich-content-common';
+import { mergeStyles } from 'wix-rich-content-common';
 import { createBlock } from '../Utils/draftUtils.js';
 import classNames from 'classnames';
 import FileInput from '../Components/FileInput';
@@ -20,6 +20,7 @@ export default ({
   commonPubsub,
   settings,
   t,
+  initialIntent,
   isMobile,
   pluginDefaults,
 }) => {
@@ -37,8 +38,7 @@ export default ({
     }
 
     initialIntent = () => {
-      const { initialIntent } = this.context;
-      if (initialIntent && initialIntent === blockType) {
+      if (initialIntent === blockType) {
         const { buttonRef } = this;
         buttonRef && buttonRef.current && buttonRef.current.click();
       }
@@ -272,7 +272,6 @@ export default ({
       );
     }
   }
-  InsertPluginButton.contextType = Context.type;
 
   InsertPluginButton.propTypes = {
     getEditorState: PropTypes.func.isRequired,
