@@ -33,7 +33,7 @@ class SoundCloudViewer extends Component {
 
   render() {
     this.styles = mergeStyles({ styles, theme: this.context.theme });
-    const { componentData, isPlayable, ...rest } = this.props;
+    const { componentData, ...rest } = this.props;
     const { isLoaded } = this.state;
     return (
       <ViewportRenderer>
@@ -44,7 +44,6 @@ class SoundCloudViewer extends Component {
           playing={this.context.disabled ? false : this.state.playing}
           onPlay={() => this.setState({ playing: true })}
           onPause={() => this.setState({ playing: false })}
-          light={!isPlayable}
           onReady={this.handleReady}
           data-loaded={isLoaded}
         />
@@ -62,7 +61,6 @@ SoundCloudViewer.propTypes = {
   controls: PropTypes.bool,
   width: PropTypes.string,
   height: PropTypes.string,
-  isPlayable: PropTypes.bool,
   isLoaded: PropTypes.bool,
 };
 
@@ -70,7 +68,6 @@ SoundCloudViewer.defaultProps = {
   width: '100%',
   height: '100%',
   controls: true,
-  isPlayable: true,
 };
 
 export default SoundCloudViewer;

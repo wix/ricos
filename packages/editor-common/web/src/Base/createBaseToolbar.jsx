@@ -6,7 +6,6 @@ import Measure from 'react-measure';
 import { TOOLBARS, TOOLBAR_OFFSETS, DISPLAY_MODE } from '../consts';
 import { getConfigByFormFactor } from '../Utils/getConfigByFormFactor';
 import { mergeToolbarSettings } from '../Utils/mergeToolbarSettings';
-import { Context } from 'wix-rich-content-common';
 import Separator from '../Components/Separator';
 import BaseToolbarButton from './baseToolbarButton';
 import { getDefaultToolbarSettings } from './default-toolbar-settings';
@@ -39,6 +38,7 @@ export default function createToolbar({
   uiSettings,
   getToolbarSettings = () => [],
   getEditorBounds,
+  languageDir,
 }) {
   class BaseToolbar extends Component {
     constructor(props) {
@@ -191,7 +191,7 @@ export default function createToolbar({
     }
 
     calculateLeftOffset = (left, maxLeft) => {
-      const isLtr = this.context?.languageDir === 'ltr';
+      const isLtr = languageDir === 'ltr';
       const outOfMargins = isLtr ? left < 0 : left > maxLeft;
       if (outOfMargins) {
         return -TOOLBAR_OFFSETS.left * 2;
@@ -602,6 +602,6 @@ export default function createToolbar({
       }
     }
   }
-  BaseToolbar.contextType = Context.type;
+
   return BaseToolbar;
 }

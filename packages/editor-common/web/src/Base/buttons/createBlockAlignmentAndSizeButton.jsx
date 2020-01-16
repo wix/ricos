@@ -72,7 +72,6 @@ export default ({ alignment, size, Icon, tooltipTextKey }) =>
           showTooltip={showTooltip}
           tooltipText={tooltipText}
           button={blockButton}
-          tooltipOffset={{ y: -20 }}
         />
       );
     }
