@@ -10,7 +10,7 @@
     "react-dom": "^16.12.0",
     "react-scripts": "3.3.0",
     "source-map-explorer": "^2.2.2",
-    "wix-rich-content-plugin-divider": "file:../web",
+    "wix-rich-content-plugin-text-color": "file:../web",
     "wix-rich-content-viewer": "^6.6.6"
   },
   "scripts": {
@@ -34,5 +34,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "duplicate-package-checker-webpack-plugin": "^3.0.0"
   }
 }
