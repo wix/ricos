@@ -1,14 +1,11 @@
 import React from 'react';
-// import {
-//   dividerTypeMapper,
-// } from 'wix-rich-content-plugin-divider/dist/module.viewer.cjs';
+import { dividerTypeMapper } from 'wix-rich-content-plugin-divider/dist/module.viewer.cjs';
 
 import 'wix-rich-content-common/dist/styles.min.css';
 import 'wix-rich-content-plugin-divider/dist/styles.min.css';
 import { RichContentViewer } from 'wix-rich-content-viewer';
 
-const typeMappers = [];
-// const typeMappers = [dividerTypeMapper];
+const typeMappers = [dividerTypeMapper];
 function App() {
   const initialState = {
     blocks: [
