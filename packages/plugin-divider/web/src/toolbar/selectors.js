@@ -8,7 +8,6 @@ import {
 } from 'wix-rich-content-editor-common';
 
 import {
-  DEFAULTS,
   SIZE_LARGE,
   SIZE_MEDIUM,
   SIZE_SMALL,
@@ -17,23 +16,9 @@ import {
   ALIGN_RIGHT,
 } from '../constants';
 
-export const getType = (componentData = {}) => componentData.type || DEFAULTS.type;
+import { getConfig } from '../domain';
 
 export const getConfigFromStore = store => getConfig(store.get('componentData'));
-
-export const getConfig = (componentData = {}) => {
-  const config = componentData.config || {};
-  if (!config.size) {
-    config.size = DEFAULTS.config.size;
-  }
-  if (!config.alignment) {
-    config.alignment = DEFAULTS.config.alignment;
-  }
-  if (!config.textWrap) {
-    config.textWrap = DEFAULTS.config.textWrap;
-  }
-  return config;
-};
 
 export const isAlignmentDisabled = (componentData = {}) =>
   getConfig(componentData).size === SIZE_LARGE;

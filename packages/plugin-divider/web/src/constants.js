@@ -25,3 +25,5 @@ export const DEFAULTS = {
     textWrap: NO_WRAP,
   },
 };
+
+export const configurables = ['size', 'alignment', 'textWrap'];

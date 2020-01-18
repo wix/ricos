@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { mergeStyles, validate, Context, pluginDividerSchema } from 'wix-rich-content-common';
 import { isEqual } from 'lodash';
-import { getType, getConfig } from '../toolbar/selectors';
+import { getConfig, getType } from '../domain';
 import DividerLine from './divider-line';
 import { customClassName } from '../classNameStrategies';
 import styles from '../../statics/styles/divider-viewer.rtlignore.scss';
