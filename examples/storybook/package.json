@@ -22,7 +22,7 @@
     "release": "yoshi release",
     "storybook": "start-storybook -p 6006",
     "clean": "rm -rf dist storybook-static",
-    "build": "yarn build-storybook"
+    "build": "build-storybook"
   },
   "dependencies": {
     "yoshi": "^4.28.3",
