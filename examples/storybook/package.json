@@ -25,8 +25,12 @@
     "build": "build-storybook"
   },
   "dependencies": {
-    "yoshi": "^4.28.3",
-    "yoshi-style-dependencies": "^4.23.7",
+    "babel-jest": "^23.6.0",
+    "@babel/core": "7.2.2",
+    "jest": "^23.1.0",
+    "@babel/runtime": "7.2.0",
+    "babel-eslint": "10.0.3",
+    "prop-types": "^15.6.2",
     "draft-js": "^0.11.3",
     "husky": "~0.14.0",
     "lint-staged": "^7.2.2",
@@ -44,7 +48,8 @@
   },
   "peerDependencies": {},
   "devDependencies": {
-
+    "yoshi": "^4.28.3",
+    "yoshi-style-dependencies": "^4.23.7"
   },
   "lint-staged": {
     "*.js": "yoshi lint"

@@ -1,12 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { render } from '@testing-library/react';
 
 import ThemeWrapper from '../src/ThemeWrapper';
-import {
-  RichContentEditor,
-  convertFromRaw,
-  createWithContent,
-} from 'wix-rich-content-editor';
+import { RichContentEditor, convertFromRaw, createWithContent } from 'wix-rich-content-editor';
 
 const stateExample = {
   blocks: [
@@ -24,9 +21,7 @@ const stateExample = {
 };
 const editorState = createWithContent(convertFromRaw(stateExample));
 
-const App = ({ theme }) => (
-  <div data-testid="app-title">{JSON.stringify(theme)}</div>
-);
+const App = ({ theme }) => <div data-testid="app-title">{JSON.stringify(theme)}</div>;
 describe('RceTheme', () => {
   describe('constructor', () => {
     it('should create a new default theme', () => {
@@ -39,3 +34,7 @@ describe('RceTheme', () => {
     });
   });
 });
+
+App.propTypes = {
+  theme: PropTypes.any,
+};
