@@ -12,6 +12,7 @@
   "packages": [
     "e2e/test-env",
     "examples/main",
+    "examples/storybook",
     "packages/**/*"
   ],
   "npmClientArgs": [
