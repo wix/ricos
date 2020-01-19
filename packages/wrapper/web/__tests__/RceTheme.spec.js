@@ -21,7 +21,8 @@ describe('RceTheme', () => {
       try {
         driver.create(Themes.PALETTE);
       } catch (e) {
-        console.log(e.message === 'AAAArgh!');
+        expect(e.message === 'AAAArgh!');
+        //console.log(e.message === 'AAAArgh!');
       }
     });
 
