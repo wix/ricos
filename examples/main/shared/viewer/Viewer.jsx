@@ -7,11 +7,11 @@ import * as Plugins from './ViewerPlugins';
 import theme from '../theme/theme'; // must import after custom styles
 import getImagesData from 'wix-rich-content-fullscreen/src/lib/getImagesData';
 import Fullscreen from 'wix-rich-content-fullscreen';
+import { testImages } from '../editor/mock';
 
 const anchorTarget = '_top';
 const relValue = 'noreferrer';
-const preview_img =
-  'https://image.winudf.com/v2/image/Y29tLmJsYWNrYmFja2dyb3VuZHdhbGxwYXBlcnNpbWFnZXNfc2NyZWVuXzFfMTUwOTI1MjEyOV8wNzU/screen-1.jpg?fakeurl=1&type=.jpg';
+const wixImagesUrl = 'https://static.wixstatic.com/media/';
 
 export default class Viewer extends PureComponent {
   constructor(props) {
@@ -42,10 +42,12 @@ export default class Viewer extends PureComponent {
     },
     onProgressChange: updatePercentage => {
       let percent = 0;
-      updatePercentage(percent, preview_img);
+      const mockImageIndex =
+        this.props.mockImageIndex || Math.floor(Math.random() * testImages.length);
+      const testImageUrl = wixImagesUrl + testImages[mockImageIndex].url;
+      updatePercentage(percent, testImageUrl);
       const interval = setInterval(() => {
-        // updatePercentage(percent);
-        updatePercentage(percent, preview_img);
+        updatePercentage(percent, testImageUrl);
         percent += 10;
         if (percent === 110) clearInterval(interval);
       }, 100);
