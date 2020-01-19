@@ -21,6 +21,7 @@ const modalStyleDefaults = {
 const anchorTarget = '_blank';
 const relValue = 'noopener';
 let shouldMultiSelectImages = false;
+const wixImagesUrl = 'https://static.wixstatic.com/media/';
 
 export default class Editor extends PureComponent {
   state = {};
@@ -78,6 +79,19 @@ export default class Editor extends PureComponent {
           const testVideo = testVideos[mockVideoIndex];
           updateEntity(testVideo);
         }, 500);
+      },
+      onProgressChange: updatePercentage => {
+        let percent = 0;
+        const mockImageIndex =
+          this.props.mockImageIndex || Math.floor(Math.random() * testImages.length);
+        const testImageUrl = wixImagesUrl + testImages[mockImageIndex].url;
+        console.log(testImageUrl);
+        updatePercentage(percent, testImageUrl);
+        const interval = setInterval(() => {
+          updatePercentage(percent, testImageUrl);
+          percent += 10;
+          if (percent === 110) clearInterval(interval);
+        }, 100);
       },
       openModal: data => {
         const { modalStyles, ...modalProps } = data;
@@ -199,6 +213,7 @@ export default class Editor extends PureComponent {
           editorKey="random-editorKey-ssr"
           // siteDomain="https://www.wix.com"
           {...editorProps}
+          // initialIntent={'wix-draft-plugin-giphy'}
         />
         <ReactModal
           isOpen={this.state.showModal}

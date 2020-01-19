@@ -8,8 +8,11 @@ import theme from '../theme/theme'; // must import after custom styles
 import getImagesData from 'wix-rich-content-fullscreen/src/lib/getImagesData';
 import Fullscreen from 'wix-rich-content-fullscreen';
 import { GALLERY_TYPE } from 'wix-rich-content-plugin-gallery';
+import { testImages } from '../editor/mock';
+
 const anchorTarget = '_top';
 const relValue = 'noreferrer';
+const wixImagesUrl = 'https://static.wixstatic.com/media/';
 
 export default class Viewer extends PureComponent {
   constructor(props) {
@@ -41,6 +44,18 @@ export default class Viewer extends PureComponent {
         expendModeIsOpen: true,
         expandModeIndex: this.expandModeData.imageMap[entityIndex] + innerIndex,
       });
+    },
+    onProgressChange: updatePercentage => {
+      let percent = 0;
+      const mockImageIndex =
+        this.props.mockImageIndex || Math.floor(Math.random() * testImages.length);
+      const testImageUrl = wixImagesUrl + testImages[mockImageIndex].url;
+      updatePercentage(percent, testImageUrl);
+      const interval = setInterval(() => {
+        updatePercentage(percent, testImageUrl);
+        percent += 10;
+        if (percent === 110) clearInterval(interval);
+      }, 100);
     },
   };
 
