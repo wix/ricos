@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 const TemplateExample = [
   {
     name: 'color_1',
@@ -224,9 +225,9 @@ const paletteToWixPalette = palette =>
   palette.map((color, i) => ({ ...TemplateExample[i], value: color }));
 
 const wixPalettes = {};
+// eslint-disable-next-line array-callback-return
 const wixPalette = Object.keys(examples).map(palette => {
   wixPalettes[palette] = paletteToWixPalette(examples[palette]);
 });
 
 export { wixPalettes };
-
