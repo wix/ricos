@@ -19,6 +19,8 @@
   ### :rocket: New Feature
   - `link`
     - [#551](https://github.com/wix-incubator/rich-content/pull/551) adding a tooltip for nofollow tag explanation
+  - `common`
+    - [#610](https://github.com/wix-incubator/rich-content/pull/610) progress loader for loading purposes
   - `image`
     - [#563](https://github.com/wix-incubator/rich-content/pull/563) in-plugin editing enabled for caption
   ### :bug: Bug Fix
