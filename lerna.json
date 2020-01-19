@@ -11,9 +11,9 @@
   },
   "packages": [
     "e2e/test-env",
+    "packages/**/*",
     "examples/main",
-    "examples/storybook",
-    "packages/**/*"
+    "examples/storybook"
   ],
   "npmClientArgs": [
     "--no-lockfile"
