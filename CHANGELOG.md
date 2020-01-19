@@ -47,6 +47,11 @@
 </details>
 <hr/>
 
+## 6.6.8 (Jan 16, 2020)
+### :bug: Bug Fix
+- `editor-common`
+  - [#608](https://github.com/wix-incubator/rich-content/pull/608) fileSelectionChanged works for a single image
+
 ## 6.6.7 (Jan 16, 2020)
 ### :bug: Bug Fix
 - `editor`

@@ -46,8 +46,13 @@ export default ({
 
     addBlock = data => {
       const { getEditorState, setEditorState } = this.props;
-      const { newSelection, newEditorState } = this.createBlock(getEditorState(), data, blockType);
+      const { newBlock, newSelection, newEditorState } = this.createBlock(
+        getEditorState(),
+        data,
+        blockType
+      );
       setEditorState(EditorState.forceSelection(newEditorState, newSelection));
+      return { newBlock, newSelection, newEditorState };
     };
 
     addCustomBlock = buttonData => {
@@ -119,7 +124,7 @@ export default ({
 
         const { newBlock } = this.addBlock(button.componentData || {});
         const blockKey = newBlock.getKey();
-        setTimeout(() => pubsub.getBlockHandler('handleFilesAdded', blockKey)(data));
+        setTimeout(() => pubsub.getBlockHandler('handleFilesAdded', blockKey)(blockKey, data));
       }
     };
 

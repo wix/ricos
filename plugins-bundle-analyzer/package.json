@@ -1,0 +1,40 @@
+{
+  "name": "plugins-bundle-analyzer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./analyzePlugins.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10"
+  },
+  "dependencies": {
+    "wix-rich-content-plugin-button": "^6.6.8",
+    "wix-rich-content-plugin-code-block": "^6.6.8",
+    "wix-rich-content-plugin-divider": "^6.6.8",
+    "wix-rich-content-plugin-emoji": "^6.6.8",
+    "wix-rich-content-plugin-file-upload": "^6.6.8",
+    "wix-rich-content-plugin-gallery": "^6.6.8",
+    "wix-rich-content-plugin-giphy": "^6.6.8",
+    "wix-rich-content-plugin-hashtag": "^6.6.8",
+    "wix-rich-content-plugin-headers-markdown": "^6.6.8",
+    "wix-rich-content-plugin-html": "^6.6.8",
+    "wix-rich-content-plugin-image": "^6.6.8",
+    "wix-rich-content-plugin-line-spacing": "^6.6.8",
+    "wix-rich-content-plugin-link": "^6.6.8",
+    "wix-rich-content-plugin-map": "^6.6.8",
+    "wix-rich-content-plugin-mentions": "^6.6.8",
+    "wix-rich-content-plugin-sound-cloud": "^6.6.8",
+    "wix-rich-content-plugin-text-color": "^6.6.8",
+    "wix-rich-content-plugin-undo-redo": "^6.6.8",
+    "wix-rich-content-plugin-video": "^6.6.8",
+    "wix-rich-content-viewer": "^6.6.8"
+  }
+}
