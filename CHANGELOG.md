@@ -14,7 +14,7 @@
   </summary>
 
   ### :boom: [Breaking Change]
-  - `Side-Toolbar`
+  - `editor`
     - [#577](https://github.com/wix-incubator/rich-content/pull/577) Remove add plugins button from inline toolbar in mobile and change mobile side toolbar to be fixed position instead, for customize Add Plugins button css use css media query (@media only screen and (max-width: 800px))
   ### :rocket: New Feature
   - `link`
@@ -30,21 +30,39 @@
     - [#584](https://github.com/wix-incubator/rich-content/pull/584) fix gallery dropdown css
   - `link`
     - [#546](https://github.com/wix-incubator/rich-content/pull/546) saves the last data and the initial state of the checkboxes("Open in a new tab", "Add a nofollow tag") is according to the defaults (anchorTarget, relValue)
-  - `editor-common`
+    - [#589](https://github.com/wix-incubator/rich-content/pull/589) in order to edit the link settings its enough to select only part of the words that belongs to the link
     - [#566](https://github.com/wix-incubator/rich-content/pull/566) Fix tooltip position in bottom tooltip
+  - `gallery`
+    - [#602](https://github.com/wix-incubator/rich-content/pull/602) replace gallery image from settings bug
   ### :house: Internal
   - `general`
     - [#561](https://github.com/wix-incubator/rich-content/pull/561) refactor - cleanup readOnly prop from code
     - [#562](https://github.com/wix-incubator/rich-content/pull/562) use `@lerna/project` to get all lerna packages
+    - [#585](https://github.com/wix-incubator/rich-content/pull/585) Deploy every branch to surge. Will have the domain http://rich-content-branch_name.surge.sh/
   - `e2e`
     - [#564](https://github.com/wix-incubator/rich-content/pull/564) snapshots renaming for gallery and image plugins tests
   - `editor`
     - [#575](https://github.com/wix-incubator/rich-content/pull/575) ltr&rtl css yoshi issues solved (requested by forum)
-  - `general`
-    - [#585](https://github.com/wix-incubator/rich-content/pull/585) Deploy every branch to surge. Will have the domain http://rich-content-branch_name.surge.sh/
 
 </details>
 <hr/>
+
+## 6.6.8 (Jan 16, 2020)
+### :bug: Bug Fix
+- `editor-common`
+  - [#608](https://github.com/wix-incubator/rich-content/pull/608) fileSelectionChanged works for a single image
+
+## 6.6.7 (Jan 16, 2020)
+### :bug: Bug Fix
+- `editor`
+  - [#604](https://github.com/wix-incubator/rich-content/pull/604) drag & drop to beginning of first block is disabled
+- `video`
+  - [#604](https://github.com/wix-incubator/rich-content/pull/604) missing thumbnail for custom uploaded video
+- `editor-common`
+  - [#605](https://github.com/wix-incubator/rich-content/pull/605) base toolbar relies on props rather context
+### :house: Internal
+- `examples`
+  - [#604](https://github.com/wix-incubator/rich-content/pull/604) changed custom upload mock video to a wix media video
 
 ## 6.6.6 (Jan 9, 2020)
 ### :bug: Bug Fix
