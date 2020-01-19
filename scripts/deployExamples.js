@@ -24,7 +24,7 @@ const fqdn = subdomain => `${subdomain}.surge.sh/`;
 const generateSubdomain = exampleName => {
   const { version } = require('../lerna.json');
   const { TRAVIS_BRANCH } = process.env;
-  const postfix = TRAVIS_BRANCH.startsWith('release') ? TRAVIS_BRANCH : version;
+  const postfix = !TRAVIS_BRANCH.startsWith('release') ? TRAVIS_BRANCH : version;
   return exampleName + `-${postfix.replace(/(\.)|(\/)/g, '-')}`;
 };
 
