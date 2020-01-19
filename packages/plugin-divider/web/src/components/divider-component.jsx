@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { mergeStyles, validate, Context, pluginDividerSchema } from 'wix-rich-content-common';
 import { isEqual } from 'lodash';
-import { getConfig, getType } from '../domain';
+import { Divider } from '../domain/divider';
 import DividerLine from './divider-line';
 import { customClassName } from '../classNameStrategies';
 import styles from '../../statics/styles/divider-viewer.rtlignore.scss';
@@ -26,12 +26,9 @@ class DividerComponent extends PureComponent {
   }
 
   stateFromProps = ({ componentData }) => {
-    const config = getConfig(componentData);
-    return {
-      type: getType(componentData),
-      size: config.size,
-      alignment: config.alignment,
-    };
+    const divider = new Divider(componentData);
+    const { type, size, alignment } = divider;
+    return { type, size, alignment };
   };
 
   render() {

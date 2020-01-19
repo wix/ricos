@@ -13,7 +13,7 @@ const lineProps = (width, lineDistance = 1) => ({
 const getLines = (type, width, multilineDistance = 7) => {
   const linePropsArr = [lineProps(width)];
   if (type === LINE_DOUBLE) {
-    linePropsArr.push(lineProps(multilineDistance));
+    linePropsArr.push(lineProps(width, multilineDistance));
   }
   return linePropsArr;
 };

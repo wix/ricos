@@ -16,18 +16,13 @@ import {
   ALIGN_RIGHT,
 } from '../constants';
 
-import { getConfig } from '../domain';
-
-export const getConfigFromStore = store => getConfig(store.get('componentData'));
+import { Divider } from '../domain/divider';
 
 export const isAlignmentDisabled = (componentData = {}) =>
-  getConfig(componentData).size === SIZE_LARGE;
-
-export const getNextValue = (array, currentValue) =>
-  array[(array.indexOf(currentValue) + 1) % array.length];
+  new Divider(componentData).isAlignmentDisabled();
 
 export const getNextSizeIcon = componentData => {
-  const { size } = getConfig(componentData);
+  const { size } = new Divider(componentData);
   return {
     [SIZE_LARGE]: SizeMediumIcon,
     [SIZE_MEDIUM]: SizeSmallIcon,
@@ -36,7 +31,7 @@ export const getNextSizeIcon = componentData => {
 };
 
 export const getNextAlignmentIcon = componentData => {
-  const { alignment } = getConfig(componentData);
+  const { alignment } = new Divider(componentData);
   return {
     [ALIGN_LEFT]: AlignLeftIcon,
     [ALIGN_CENTER]: AlignCenterIcon,

@@ -15,6 +15,8 @@ export const SIZE_SMALL = 'small';
 export const SIZE_MEDIUM = 'medium';
 export const SIZE_LARGE = 'large';
 
+export const SIZES = [SIZE_LARGE, SIZE_MEDIUM, SIZE_SMALL];
+export const ALIGNMENTS = [ALIGN_LEFT, ALIGN_CENTER, ALIGN_RIGHT];
 export const NO_WRAP = 'nowrap';
 
 export const DEFAULTS = {
@@ -25,5 +27,3 @@ export const DEFAULTS = {
     textWrap: NO_WRAP,
   },
 };
-
-export const configurables = ['size', 'alignment', 'textWrap'];
