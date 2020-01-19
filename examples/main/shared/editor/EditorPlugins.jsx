@@ -367,7 +367,7 @@ export const config = {
     getVideoUrl: src => `https://video.wixstatic.com/${src.pathname}`,
   },
   [GIPHY_TYPE]: {
-    giphySdkApiKey: process.env.GIPHY_API_KEY,
+    giphySdkApiKey: process.env.GIPHY_API_KEY || 'HXSsAGVNzjeUjhKfhhD9noF8sIbpYDsV',
     // toolbar: {
     //   icons: {
     //     GIF: MyCustomIcon, // insert plugin icon
