@@ -64,6 +64,9 @@ function hideAllTooltips() {
 
 Cypress.Commands.add('loadEditorAndViewer', fixtureName => {
   run('rce', fixtureName).then(() => {
+    if (fixtureName === 'gallery') {
+      cy.wait(2000);
+    }
     disableTransitions();
     hideAllTooltips();
   });
@@ -241,6 +244,7 @@ Cypress.Commands.add('openMapSettings', () => {
 Cypress.Commands.add('openGalleryAdvancedSettings', () => {
   cy.get(`[data-hook=${PLUGIN_COMPONENT.GALLERY}]:first`)
     .parent()
+    .parent()
     .click();
   cy.get(`[data-hook=${PLUGIN_TOOLBAR_BUTTONS.ADV_SETTINGS}]:first`).click();
 });
@@ -336,10 +340,14 @@ Cypress.Commands.add('alignImage', alignment => {
 });
 
 Cypress.Commands.add('openPluginToolbar', plugin => {
-  cy.get(`[data-hook*=${plugin}]`)
+  const toolbar = cy
+    .get(`[data-hook*=${plugin}][tabindex!=-1]`)
     .first()
-    .parent()
-    .click();
+    .parent();
+  if (plugin === PLUGIN_COMPONENT.GALLERY) {
+    toolbar.parent();
+  }
+  toolbar.parent().click();
   cy.get('[data-hook*="PluginToolbar"]:first');
 });
 
