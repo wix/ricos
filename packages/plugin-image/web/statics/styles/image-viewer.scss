@@ -78,8 +78,7 @@ $opacityTransition: opacity 0.8s ease;
 .imageCaption {
   text-align: center;
   padding: 18px 0;
-  font-size: 14px;
-  line-height: 21px;
+  background: none;
 }
 
 .imagePreload {
@@ -89,12 +88,16 @@ $opacityTransition: opacity 0.8s ease;
 }
 
 .imageHighres {
-  z-index: 0;
-  position: absolute;
-  top: 0;
-  left: 0;
-  opacity: 0;
-  transition: $opacityTransition;
+  position: relative;
+  
+  &:not([src$=".gif"]) {
+    z-index: 0;
+    top: 0;
+    left: 0;
+    position: absolute;
+    opacity: 0;
+    transition: $opacityTransition;
+  }
 }
 
 @keyframes image_loading {

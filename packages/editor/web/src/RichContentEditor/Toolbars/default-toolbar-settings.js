@@ -72,7 +72,15 @@ export const getDefaultToolbarSettings = ({ pluginButtons, textButtons, pluginTe
           android: { x: 0, y: 0 },
         },
       }),
-      getDisplayOptions: () => defaultDisplayOptions,
+      getDisplayOptions: () => {
+        return {
+          desktop: { displayMode: DISPLAY_MODE.NORMAL },
+          mobile: {
+            ios: { displayMode: DISPLAY_MODE.FLOATING },
+            android: { displayMode: DISPLAY_MODE.FLOATING },
+          },
+        };
+      },
       getToolbarDecorationFn: () => defaultToolbarDecorationFn,
       getButtons: () => {
         const buttons = pluginButtons
@@ -90,8 +98,8 @@ export const getDefaultToolbarSettings = ({ pluginButtons, textButtons, pluginTe
       getVisibilityFn: () => ({
         desktop: defaultSideToolbarVisibilityFn,
         mobile: {
-          ios: defaultSideToolbarVisibilityFn,
-          android: defaultSideToolbarVisibilityFn,
+          ios: () => true,
+          android: () => true,
         },
       }),
       getInstance: createSideToolbar,

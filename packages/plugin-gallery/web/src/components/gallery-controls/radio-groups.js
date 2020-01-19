@@ -57,7 +57,6 @@ export const ImageOrientation = props => {
   return (
     <RadioGroupHorizontal
       label={imageOrientationLabel}
-      readOnly={props.options.readOnly}
       dataSource={[
         { value: '1', labelText: verticalLabel, dataHook: 'radioGroupImageOrientationVertical' },
         {

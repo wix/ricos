@@ -61,6 +61,7 @@ Cypress.Commands.add('loadEditorAndViewer', fixtureName => {
   if (fixtureName === 'gallery') {
     cy.wait(2000);
   }
+  cy.hideTooltip();
 });
 
 Cypress.Commands.add('matchContentSnapshot', () => {
@@ -267,6 +268,14 @@ Cypress.Commands.add('addImageTitle', () => {
     .click();
 });
 
+Cypress.Commands.add('editImageTitle', () => {
+  cy.get(`[data-hook=${PLUGIN_COMPONENT.IMAGE}]:first`)
+    .find('input')
+    .click()
+    .type(' - In Plugin Editing')
+    .blur();
+});
+
 Cypress.Commands.add('deleteImageTitle', () => {
   cy.get(`[data-hook=${IMAGE_SETTINGS.CAPTION}]`)
     .click()
@@ -413,7 +422,8 @@ Cypress.Commands.add('dragAndDropPlugin', (src, dest) => {
 });
 
 Cypress.Commands.add('hideTooltip', { prevSubject: 'optional' }, () => {
-  cy.get('.editor').trigger('mouseleave');
+  // cy.get('.editor').trigger('mouseleave');
+  cy.get('[data-id="tooltip"]').invoke('hide'); //uses jquery to set display:none
 });
 
 Cypress.Commands.add('waitForVideoToLoad', { prevSubject: 'optional' }, () => {
