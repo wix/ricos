@@ -20,7 +20,7 @@ class Loader extends React.Component {
 
   updateProgress = (progress, localUrl) => {
     this.setState({ progress, localUrl });
-    if (progress === 100) {
+    if (progress >= 100) {
       this.props.onLoad?.();
     }
   };
