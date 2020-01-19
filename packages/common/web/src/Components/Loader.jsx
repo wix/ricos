@@ -45,13 +45,16 @@ class Loader extends Component {
 
   render() {
     this.initiateStyles();
+    const style = this.state.localUrl
+      ? {
+          backgroundImage: `url(${this.state.localUrl})`,
+        }
+      : {};
     return (
       <div
         className={classNames(this.props.overlayClassName, this.styles.loaderOverlay)}
         data-hook="loader"
-        style={{
-          backgroundImage: this.state.localUrl ? `url(${this.state.localUrl})` : null,
-        }}
+        style={style}
       >
         <div
           className={classNames(this.props.loaderClassName, this.styles.loader, {
