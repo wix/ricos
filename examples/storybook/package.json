@@ -1,7 +1,8 @@
 {
   "name": "wix-rich-content-storybook",
-  "version": "1.0.0",
+  "version": "6.6.8",
   "license": "UNLICENSED",
+  "private": true,
   "author": {
     "name": "Oded Soffrin",
     "email": "odeds@wix.com"
@@ -21,18 +22,9 @@
     "release": "yoshi release",
     "storybook": "start-storybook -p 6006",
     "clean": "rm -rf dist storybook-static",
-    "build": "npx yoshi build && npx build-storybook"
+    "build": "build-storybook"
   },
   "dependencies": {
-    "react": "^16.6.3",
-    "aphrodite": "^2.4.0",
-    "wix-rich-content-editor": "^6.6.6",
-    "wix-rich-content-viewer": "^6.6.6",
-    "wix-rich-content-plugin-divider": "^6.6.6",
-    "wix-rich-content-plugin-hashtag": "^6.6.6"
-  },
-  "peerDependencies": {},
-  "devDependencies": {
     "yoshi": "^4.28.3",
     "yoshi-style-dependencies": "^4.23.7",
     "draft-js": "^0.11.3",
@@ -40,7 +32,19 @@
     "lint-staged": "^7.2.2",
     "@storybook/react": "^5.3.1",
     "@testing-library/react": "^9.4.0",
-    "jest-yoshi-preset": "^4.28.3"
+    "jest-yoshi-preset": "^4.28.3",
+    "react": "^16.6.3",
+    "aphrodite": "^2.4.0",
+    "wix-rich-content-common": "6.6.8",
+    "wix-rich-content-editor": "^6.6.8",
+    "wix-rich-content-editor-common": "6.6.8",
+    "wix-rich-content-viewer": "^6.6.8",
+    "wix-rich-content-plugin-divider": "^6.6.8",
+    "wix-rich-content-plugin-hashtag": "^6.6.8"
+  },
+  "peerDependencies": {},
+  "devDependencies": {
+
   },
   "lint-staged": {
     "*.js": "yoshi lint"

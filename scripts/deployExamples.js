@@ -12,7 +12,7 @@ const EXAMPLES_TO_DEPLOY = [
   {
     name: 'rich-content-storybook',
     path: 'examples/storybook',
-    buildCmd: 'npm i && yarn build-storybook',
+    buildCmd: 'build-storybook -s public',
     dist: 'storybook-static',
   },
 ];
@@ -23,14 +23,9 @@ const fqdn = subdomain => `${subdomain}.surge.sh/`;
 
 const generateSubdomain = exampleName => {
   const { version } = require('../lerna.json');
-  let subdomain = exampleName;
   const { TRAVIS_BRANCH } = process.env;
-  if (!TRAVIS_BRANCH.startsWith('release')) {
-    subdomain += `-${TRAVIS_BRANCH.replace(/(\.)|(\/)/g, '-')}`;
-  } else {
-    subdomain += `-${version.replace(/\./g, '-')}`;
-  }
-  return subdomain;
+  const postfix = !TRAVIS_BRANCH.startsWith('release') ? TRAVIS_BRANCH : version;
+  return exampleName + `-${postfix.replace(/(\.)|(\/)/g, '-')}`;
 };
 
 function build({ buildCmd = 'npm run build' }) {
