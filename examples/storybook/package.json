@@ -21,7 +21,7 @@
     "release": "yoshi release",
     "storybook": "start-storybook -p 6006",
     "clean": "rm -rf dist storybook-static",
-    "build": "yarn build-storybook -s public"
+    "build": "yarn build-storybook"
   },
   "dependencies": {
     "react": "^16.6.3",
