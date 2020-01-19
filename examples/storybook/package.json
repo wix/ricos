@@ -26,10 +26,10 @@
   "dependencies": {
     "react": "^16.6.3",
     "aphrodite": "^2.4.0",
-    "wix-rich-content-editor": "^6.6.6",
-    "wix-rich-content-viewer": "^6.6.6",
-    "wix-rich-content-plugin-divider": "^6.6.6",
-    "wix-rich-content-plugin-hashtag": "^6.6.6"
+    "wix-rich-content-editor": "^6.6.8",
+    "wix-rich-content-viewer": "^6.6.8",
+    "wix-rich-content-plugin-divider": "^6.6.8",
+    "wix-rich-content-plugin-hashtag": "^6.6.8"
   },
   "peerDependencies": {},
   "devDependencies": {
