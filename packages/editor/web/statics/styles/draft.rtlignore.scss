@@ -13,6 +13,7 @@
     .public-DraftEditorPlaceholder-root {
       color: #9197a3;
       position: absolute;
+      direction: ltr;
     }
 
     .public-DraftEditor-content[contenteditable='true'] {
