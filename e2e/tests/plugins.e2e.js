@@ -50,7 +50,6 @@ describe('plugins', () => {
       cy.openImageSettings(false).deleteImageTitle();
       cy.eyesCheckWindow(this.test.title + ' - delete image title');
       cy.openImageSettings(false).addImageLink();
-      cy.setSelection(0, 0);
       cy.eyesCheckWindow(this.test.title + ' - add a link');
     });
   });
