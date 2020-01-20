@@ -79,7 +79,6 @@ export default class Editor extends PureComponent {
         const mockImageIndex =
           this.props.mockImageIndex || Math.floor(Math.random() * testImages.length);
         const testImageUrl = wixImagesUrl + testImages[mockImageIndex].url;
-        console.log(testImageUrl);
         updatePercentage(percent, testImageUrl);
         const interval = setInterval(() => {
           updatePercentage(percent, testImageUrl);
@@ -192,7 +191,6 @@ export default class Editor extends PureComponent {
           locale={this.props.locale}
           localeResource={this.props.localeResource}
           // siteDomain="https://www.wix.com"
-          // initialIntent={'wix-draft-plugin-giphy'}
         />
         <ReactModal
           isOpen={this.state.showModal}
