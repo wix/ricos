@@ -11,8 +11,9 @@
   },
   "packages": [
     "e2e/test-env",
-    "examples/main",
     "packages/**/*",
+    "examples/main",
+    "examples/storybook",
     "plugins-bundle-analyzer"
   ],
   "npmClientArgs": [

@@ -5,7 +5,10 @@ import classnames from 'classnames';
 import styles from '../statics/styles/in-plugin-input.scss';
 
 class InPluginInput extends Component {
-  handleFocus = () => this.context.setInPluginEditingMode(true);
+  handleFocus = () => {
+    this.props.setFocusToBlock();
+    this.context.setInPluginEditingMode(true);
+  };
 
   handleBlur = () => this.context.setInPluginEditingMode(false);
 
