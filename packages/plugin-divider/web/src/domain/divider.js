@@ -11,9 +11,15 @@ export class Divider {
     this.alignment = this.config.alignment;
   }
 
-  getNextAlignment = () => getNextValue(ALIGNMENTS, this.config.alignment);
+  getNextAlignmentConfig = () => {
+    const alignment = getNextValue(ALIGNMENTS, this.config.alignment);
+    return { ...this.config, alignment };
+  };
 
-  getNextSize = () => getNextValue(SIZES, this.config.size);
+  getNextSizeConfig = () => {
+    const size = getNextValue(SIZES, this.config.size);
+    return { ...this.config, size };
+  };
 
   isAlignmentDisabled = () => this.size === SIZE_LARGE;
 }

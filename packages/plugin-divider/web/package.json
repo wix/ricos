@@ -21,7 +21,6 @@
   "module": "dist/module.js",
   "style": "dist/styles.min.scss",
   "scripts": {
-    "start": "serve playground",
     "clean": "rm -rf dist/",
     "prebuild": "npm run clean",
     "build": "rollup --environment MODULE_NAME:plugin-divider -c ../../../rollup.config.js",
@@ -48,7 +47,8 @@
     "lodash": "^4.17.15",
     "prop-types": "^15.6.2",
     "react": "16.6.3",
-    "react-dom": "16.6.3"
+    "react-dom": "16.6.3",
+    "rollup": "1.20.3"	
   },
   "dependencies": {
     "wix-rich-content-common": "6.6.8",

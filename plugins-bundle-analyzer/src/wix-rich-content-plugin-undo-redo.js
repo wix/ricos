@@ -1,3 +1,3 @@
-import createViewerBundle from './wrapper';
+import createViewerBundle from './RichContentViewerWrapper';
 
 export default () => createViewerBundle();
