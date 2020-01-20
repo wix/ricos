@@ -63,11 +63,7 @@ function isSelectionBelongsToExsistingLink(editorState, selection) {
 const defaultAnchorTarget = '_self';
 const defaultRelValue = 'noopener';
 
-function insertLink(
-  editorState,
-  selection,
-  { url, targetBlank, nofollow, anchorTarget, relValue }
-) {
+function insertLink(editorState, selection, data) {
   const oldSelection = editorState.getSelection();
   const newContentState = Modifier.applyInlineStyle(
     editorState.getCurrentContent(),
@@ -76,14 +72,7 @@ function insertLink(
   ).set('selectionAfter', oldSelection);
   const newEditorState = EditorState.push(editorState, newContentState, 'change-inline-style');
 
-  let target = '_blank',
-    rel = 'nofollow';
-  if (!targetBlank) {
-    target = anchorTarget !== '_blank' ? anchorTarget : '_self';
-  }
-  if (!nofollow) {
-    rel = relValue !== 'nofollow' ? relValue : 'noopener';
-  }
+  const { url, target, rel } = createEntityDataForLink(data);
 
   return addEntity(newEditorState, selection, {
     type: 'LINK',
@@ -95,6 +84,18 @@ function insertLink(
   });
 }
 
+function createEntityDataForLink(data) {
+  const { url, targetBlank, nofollow, anchorTarget, relValue } = data;
+  let target = '_blank',
+    rel = 'nofollow';
+  if (!targetBlank) {
+    target = anchorTarget !== '_blank' ? anchorTarget : '_self';
+  }
+  if (!nofollow) {
+    rel = relValue !== 'nofollow' ? relValue : 'noopener';
+  }
+  return { url, target, rel };
+}
 function addEntity(editorState, targetSelection, entityData) {
   const entityKey = createEntity(editorState, entityData);
   const oldSelection = editorState.getSelection();
@@ -164,8 +165,9 @@ export const getAnchorBlockData = editorState => {
 
 export const setEntityData = (editorState, entityKey, data) => {
   if (entityKey) {
+    const newData = createEntityDataForLink(data);
     const contentState = editorState.getCurrentContent();
-    contentState.replaceEntityData(entityKey, cloneDeep(data));
+    contentState.replaceEntityData(entityKey, cloneDeep(newData));
   }
   return editorState;
 };
