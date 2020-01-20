@@ -19,5 +19,5 @@ export const changeAlignmentMobile = ({ store }) => {
 
 export const changeSizeMobile = ({ store }) => {
   const divider = getDividerFromStore(store);
-  updateStoreConfig(store, divider.getNextSize());
+  updateStoreConfig(store, divider.getNextSizeConfig());
 };
