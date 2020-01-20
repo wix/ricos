@@ -15,28 +15,21 @@ class DividerComponent extends PureComponent {
   constructor(props) {
     super(props);
     validate(props.componentData, pluginDividerSchema);
-    this.state = this.stateFromProps(props);
   }
 
   componentWillReceiveProps(nextProps) {
     if (!isEqual(nextProps.componentData, this.props.componentData)) {
       validate(nextProps.componentData, pluginDividerSchema);
     }
-    this.setState(this.stateFromProps(nextProps));
   }
-
-  stateFromProps = ({ componentData }) => {
-    const divider = new Divider(componentData);
-    const { type, size, alignment } = divider;
-    return { type, size, alignment };
-  };
 
   render() {
     this.styles = this.styles || mergeStyles({ styles, theme: this.context.theme });
     // NOTE: editor-only logic in viewer component
     const editorBounds = this.context.getEditorBounds && this.context.getEditorBounds();
     const editorWidth = editorBounds && editorBounds.width ? editorBounds.width : '100%';
-    const { type, size, alignment } = this.state;
+    const divider = new Divider(this.props.componentData);
+    const { type, size, alignment } = divider;
     const className = classNames(
       this.styles['divider-container'],
       this.styles[`divider-container--${type}`],
