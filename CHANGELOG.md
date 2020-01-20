@@ -23,10 +23,10 @@
     - [#563](https://github.com/wix-incubator/rich-content/pull/563) in-plugin editing enabled for caption
   ### :bug: Bug Fix
   - `divider`
-    - alignment classes apply floating on text-wrap elements only
+    - [#615](https://github.com/wix-incubator/rich-content/pull/615) alignment classes apply floating on text-wrap elements only
   - `text-color`
-     - [#572](https://github.com/wix-incubator/rich-content/pull/572) color Picker- ResetToDefault button sticky to bottom
-     - [#576](https://github.com/wix-incubator/rich-content/pull/576) color Picker-new colors are added to the end of the list + 'reset to default' removes from the 'inlineStyleRanges' in the content state
+    - [#572](https://github.com/wix-incubator/rich-content/pull/572) color Picker- ResetToDefault button sticky to bottom
+    - [#576](https://github.com/wix-incubator/rich-content/pull/576) color Picker-new colors are added to the end of the list + 'reset to default' removes from the 'inlineStyleRanges' in the content state
   - `editor-common`
     - [#550](https://github.com/wix-incubator/rich-content/pull/550) remove dashed border when focused
     - [#584](https://github.com/wix-incubator/rich-content/pull/584) fix gallery dropdown css
