@@ -54,7 +54,7 @@ const rules = [
 ];
 
 function analyzePlugin() {
-  console.log(chalk.magenta('Analyzing plugins'));
+  console.log(chalk.magenta('Analyzing plugins...'));
   // console.log('analyzing plugins');
 
   getPackages().then(allPackages => {
@@ -77,10 +77,10 @@ function analyzePlugin() {
               if (err || stats.hasErrors()) {
                 const _err = err || stats.compilation.errors[0];
                 console.error(chalk.red(_err));
-                resolve({ name: pkg.name, error: true });
+                resolve({ name: pkg.name, error: _err });
               } else {
-                console.log(chalk.green(pkg.name, `analyzed`));
-                console.log(stats.toString({ colors: true }));
+                // console.log(chalk.green(pkg.name, `analyzed`));
+                // console.log(stats.toString({ colors: true }));
                 resolve({
                   name: pkg.name,
                   size: Math.ceil(stats.toJson(true).assets[0].size / 1024),
@@ -92,8 +92,19 @@ function analyzePlugin() {
         });
       });
 
-    Promise.all(promiseArr).then(res => {
-      console.log({ res });
+    const warning = chalk.keyword('orange');
+
+    Promise.all(promiseArr).then(results => {
+      results.forEach(result => {
+        const { size, name, error } = result;
+        const prefix = chalk.cyan(`[${name}]`);
+        if (error) {
+          console.log(prefix, chalk.red(`Error! ${error}`));
+        } else {
+          const chlk = size > 500 ? warning : size > 300 ? chalk.yellow : chalk.green;
+          console.log(prefix, chlk(`${size}KB`));
+        }
+      });
     });
   });
 }
