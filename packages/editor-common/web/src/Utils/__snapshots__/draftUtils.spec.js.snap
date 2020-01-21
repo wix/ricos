@@ -171,8 +171,10 @@ Object {
 
 exports[`Test draftUtils functions Test draftUtils Links functions Test getLinkDataInSelection function 1`] = `
 Object {
-  "rel": "noopener",
-  "target": "_blank",
+  "anchorTarget": "_blank",
+  "nofollow": false,
+  "relValue": "nofollow",
+  "targetBlank": true,
   "url": "www.google.com",
 }
 `;
@@ -316,8 +318,10 @@ Object {
   "entityMap": Object {
     "0": Object {
       "data": Object {
-        "rel": "noopener",
-        "target": "_blank",
+        "anchorTarget": "_blank",
+        "nofollow": false,
+        "relValue": "nofollow",
+        "targetBlank": true,
         "url": "www.google.com",
       },
       "mutability": "MUTABLE",
@@ -391,8 +395,10 @@ Object {
   "entityMap": Object {
     "0": Object {
       "data": Object {
-        "rel": "noopener",
-        "target": "_blank",
+        "anchorTarget": "_blank",
+        "nofollow": false,
+        "relValue": "nofollow",
+        "targetBlank": true,
         "url": "www.google.com",
       },
       "mutability": "MUTABLE",

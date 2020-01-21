@@ -35,15 +35,16 @@ export const insertLinkAtCurrentSelection = (editorState, data) => {
     selection = selection.merge({ focusOffset: selection.getFocusOffset() + url.length });
     newEditorState = EditorState.push(editorState, contentState, 'insert-characters');
   }
+  const entityData = createEntityDataForLink(data);
   let editorStateWithLink;
   if (isSelectionBelongsToExsistingLink(newEditorState, selection)) {
     const contentState = newEditorState.getCurrentContent();
     const blockKey = selection.getStartKey();
     const block = contentState.getBlockForKey(blockKey);
     const entityKey = block.getEntityAt(selection.getStartOffset());
-    editorStateWithLink = setEntityData(newEditorState, entityKey, data);
+    editorStateWithLink = setEntityData(newEditorState, entityKey, entityData);
   } else {
-    editorStateWithLink = insertLink(newEditorState, selection, data);
+    editorStateWithLink = insertLink(newEditorState, selection, entityData);
   }
 
   return EditorState.forceSelection(
@@ -72,15 +73,9 @@ function insertLink(editorState, selection, data) {
   ).set('selectionAfter', oldSelection);
   const newEditorState = EditorState.push(editorState, newContentState, 'change-inline-style');
 
-  const { url, target, rel } = createEntityDataForLink(data);
-
   return addEntity(newEditorState, selection, {
     type: 'LINK',
-    data: {
-      url,
-      target,
-      rel,
-    },
+    data,
   });
 }
 
@@ -165,9 +160,8 @@ export const getAnchorBlockData = editorState => {
 
 export const setEntityData = (editorState, entityKey, data) => {
   if (entityKey) {
-    const newData = createEntityDataForLink(data);
     const contentState = editorState.getCurrentContent();
-    contentState.replaceEntityData(entityKey, cloneDeep(newData));
+    contentState.replaceEntityData(entityKey, cloneDeep(data));
   }
   return editorState;
 };
