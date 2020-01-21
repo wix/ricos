@@ -10,7 +10,17 @@ import styles from './fullscreen.rtlignore.scss';
 const { ProGallery } = process.env.SANTA ? {} : require('pro-gallery');
 
 export default function Fullscreen(props) {
-  const { numberOfItems, locale, fullscreenIdx, isOpen, onClose, target } = props;
+  const {
+    numberOfItems,
+    locale,
+    fullscreenIdx,
+    isOpen,
+    onClose,
+    target,
+    backgroundColor,
+    topMargin,
+    foregroundColor,
+  } = props;
 
   const getItems = () => {
     const { items, relValue, anchorTarget } = props;
@@ -20,8 +30,8 @@ export default function Fullscreen(props) {
   const fullscreen = (
     <>
       {isOpen ? (
-        <div className={styles.fullscreen}>
-          <button className={styles.close} onClick={() => onClose()}>
+        <div className={styles.fullscreen} style={{ ...backgroundColor, ...topMargin }}>
+          <button className={styles.close} style={foregroundColor} onClick={() => onClose()}>
             {closeIcon()}
           </button>
           <ProGallery
