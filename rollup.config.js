@@ -46,10 +46,10 @@ const editorEntry = {
   watch,
 };
 
-let libEntries;
+let libEntries = [];
 try {
   fs.readdirSync('./src/lib/').forEach(file => {
-    libEntries = {
+    libEntries.push({
       input: 'src/lib/' + file,
       output: output.map(o => ({
         ...o,
@@ -58,7 +58,7 @@ try {
       plugins,
       external,
       watch,
-    };
+    });
   });
 } catch (_) {}
 
@@ -79,13 +79,13 @@ try {
   };
 } catch (_) {}
 
-const config = [editorEntry];
+let config = [editorEntry];
 
 if (viewerEntry) {
   config.push(viewerEntry);
 }
 if (libEntries) {
-  config.push(libEntries);
+  config = [...config, ...libEntries];
 }
 
 export default config;

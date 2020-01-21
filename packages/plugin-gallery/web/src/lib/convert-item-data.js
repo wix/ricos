@@ -31,7 +31,7 @@ export const convertItemData = ({ items, anchorTarget, relValue }) =>
           target: '_blank',
         },
       };
-      if (item?.metadata?.type === 'video') {
+      if (item.metadata.type === 'video') {
         convertedData.metaData.link = {
           target: '_blank',
           rel: 'noopener',

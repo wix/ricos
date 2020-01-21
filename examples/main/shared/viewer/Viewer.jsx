@@ -5,8 +5,9 @@ import { isSSR } from 'wix-rich-content-common';
 import * as PropTypes from 'prop-types';
 import * as Plugins from './ViewerPlugins';
 import theme from '../theme/theme'; // must import after custom styles
-import getImagesData from 'wix-rich-content-fullscreen/src/lib/getImagesData';
-import Fullscreen from 'wix-rich-content-fullscreen';
+import getImagesData from 'wix-rich-content-fullscreen/dist/lib/getImagesData';
+import { Fullscreen, FULLSCREEN_TYPE } from 'wix-rich-content-fullscreen';
+import 'wix-rich-content-fullscreen/dist/styles.min.css';
 
 const anchorTarget = '_top';
 const relValue = 'noreferrer';
@@ -21,6 +22,7 @@ export default class Viewer extends PureComponent {
     }
     this.state = {
       disabled: false,
+      expandModeIsOpen: false,
     };
   }
 
@@ -34,14 +36,14 @@ export default class Viewer extends PureComponent {
     onExpand: (entityIndex, innerIndex = 0) => {
       //galleries have an innerIndex (i.e. second image will have innerIndex=1)
       this.setState({
-        expendModeIsOpen: true,
+        expandModeIsOpen: true,
         expandModeIndex: this.expandModeData.imageMap[entityIndex] + innerIndex,
       });
     },
   };
 
   render() {
-    const { expendModeIsOpen, expandModeIndex } = this.state;
+    const { expandModeIndex, expandModeIsOpen } = this.state;
     return (
       <div id="rich-content-viewer" className="viewer">
         <RichContentViewer
@@ -61,10 +63,15 @@ export default class Viewer extends PureComponent {
         />
         {!isSSR() && (
           <Fullscreen
-            isOpen={expendModeIsOpen}
-            images={this.expandModeData.images}
-            onClose={() => this.setState({ expendModeIsOpen: false })}
-            index={expandModeIndex}
+            items={this.expandModeData.images}
+            numberOfItems={this.expandModeData.images.length}
+            onClose={() => this.setState({ expandModeIsOpen: false })}
+            isOpen={expandModeIsOpen}
+            fullscreenIdx={expandModeIndex}
+            relValue={relValue}
+            anchorTarget={anchorTarget}
+            locale={this.props.locale}
+            target={Plugins.config[FULLSCREEN_TYPE]?.target}
           />
         )}
       </div>

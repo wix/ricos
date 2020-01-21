@@ -1,0 +1,33 @@
+.fullscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9;
+  background: rgba(0,0,0,1);
+  transition: opacity 2s ease;
+  visibility: visible;
+  opacity: 1;
+}
+
+.close {
+  box-sizing: content-box;
+  z-index: 10;
+  padding: 10px;
+  position: fixed;
+  right: 20px;
+  top: 20px;
+  background: rgba(0,0,0,0.8);
+  border-radius: 4px;
+  width: 25px;
+  height: 25px;
+  fill: black;
+  color: rgba(255,255,255,0.8);
+  opacity: 0.6;
+  border: hidden;
+  cursor: pointer;
+  &:hover {
+    opacity: 1;
+  }
+}

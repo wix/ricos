@@ -15,9 +15,9 @@ import {
   Panorama as PanoramaIconSmall,
   Columns as ColumnsIconSmall,
   Slides as SlidesIconSmall,
-} from '../icons';
+} from './icons';
 
-import layoutData from './layout-data-provider';
+import layoutData from './lib/layout-data-provider';
 
 export const switchLayout = (layout, _componentData, store) => {
   const galleryLayout = layout.value;
