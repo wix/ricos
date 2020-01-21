@@ -6,7 +6,7 @@ import * as PropTypes from 'prop-types';
 import * as Plugins from './ViewerPlugins';
 import theme from '../theme/theme'; // must import after custom styles
 import getImagesData from 'wix-rich-content-fullscreen/dist/lib/getImagesData';
-import { Fullscreen, FULLSCREEN_TYPE } from 'wix-rich-content-fullscreen';
+import { Fullscreen } from 'wix-rich-content-fullscreen';
 import 'wix-rich-content-fullscreen/dist/styles.min.css';
 
 const anchorTarget = '_top';
@@ -71,7 +71,6 @@ export default class Viewer extends PureComponent {
             relValue={relValue}
             anchorTarget={anchorTarget}
             locale={this.props.locale}
-            target={Plugins.config[FULLSCREEN_TYPE]?.target}
           />
         )}
       </div>
