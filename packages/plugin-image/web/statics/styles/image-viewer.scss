@@ -85,13 +85,14 @@ $opacityTransition: opacity 0.8s ease;
   position: relative;
   transition: $opacityTransition;
   filter: blur(8px);
+  z-index: 0;
 }
 
 .imageHighres {
   position: relative;
   
   &:not([src$=".gif"]) {
-    z-index: 0;
+    z-index: 1;
     top: 0;
     left: 0;
     position: absolute;
