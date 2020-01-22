@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 
 import './Palette.css';
@@ -17,7 +18,7 @@ export default ({ palette }) => {
   return (
     <div className="palette">
       {usedPalette.map((color, i) => (
-        <Color {...usedPalette[getPlaceByIdx(i)]}></Color>
+        <Color {...usedPalette[getPlaceByIdx(i)]} key={'color_' + i} />
       ))}
     </div>
   );
