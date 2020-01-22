@@ -124,7 +124,7 @@ export default ({
 
         const { newBlock } = this.addBlock(button.componentData || {});
         const blockKey = newBlock.getKey();
-        setTimeout(() => pubsub.getBlockHandler('handleFilesAdded', blockKey)(blockKey, data));
+        setTimeout(() => pubsub.getBlockHandler('handleFilesAdded', blockKey)(data));
       }
     };
 
