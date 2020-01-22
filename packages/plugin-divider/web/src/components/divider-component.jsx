@@ -5,13 +5,9 @@ import { mergeStyles, validate, Context, pluginDividerSchema } from 'wix-rich-co
 import { isEqual } from 'lodash';
 import { Divider } from '../domain/divider';
 import DividerLine from './divider-line';
-import { customClassName } from '../classNameStrategies';
 import styles from '../../statics/styles/divider-viewer.rtlignore.scss';
 
 class DividerComponent extends PureComponent {
-  static customClassName = (componentData, theme, styles, isMobile) =>
-    customClassName(componentData, theme, styles, isMobile);
-
   constructor(props) {
     super(props);
     validate(props.componentData, pluginDividerSchema);
