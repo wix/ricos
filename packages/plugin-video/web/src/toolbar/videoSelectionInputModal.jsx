@@ -24,12 +24,13 @@ export default class VideoSelectionInputModal extends Component {
 
   afterOpenModal = () => this.input.focus();
 
-  updateComponentData = (src, isCustomVideo) => {
+  updateComponentData = () => {
     const { componentData, helpers, pubsub, onConfirm } = this.props;
+    const src = this.state.url;
     if (onConfirm) {
-      onConfirm({ ...componentData, src, isCustomVideo });
+      onConfirm({ ...componentData, src });
     } else {
-      pubsub.update('componentData', { src, isCustomVideo });
+      pubsub.update('componentData', { src });
     }
 
     if (helpers && helpers.onVideoSelected) {
@@ -37,37 +38,17 @@ export default class VideoSelectionInputModal extends Component {
         pubsub.update('componentData', { metadata: { ...data } })
       );
     }
-  };
-
-  selectedVideoData = (state, isCustomVideo = false) => {
-    const { url, pathname, thumbnail } = state;
-    const src = pathname && pathname.length ? { pathname, thumbnail } : url;
-    if (ReactPlayer.canPlay(url) || isCustomVideo) {
-      this.updateComponentData(src, isCustomVideo);
-      this.closeModal();
-    } else {
-      this.setState({ submitted: true });
-    }
-  };
-
-  handleCustomVideoUpload = ({ data, error }) => {
-    if (error) {
-      this.setState({ errorMsg: error.msg });
-    } else {
-      const state = data.pathname
-        ? {
-            url: '',
-            pathname: data.pathname,
-            thumbnail: data.thumbnail,
-          }
-        : { url: data.url, pathname: '' };
-      this.selectedVideoData(state, true);
-    }
+    this.closeModal();
   };
 
   loadLocalVideoFromFile = file => {
     const src = URL.createObjectURL(file);
-    this.updateComponentData(src, true);
+    const { componentData, pubsub, onConfirm } = this.props;
+    if (onConfirm) {
+      onConfirm({ ...componentData, src, isCustomVideo: true });
+    } else {
+      pubsub.update('componentData', { src, isCustomVideo: true });
+    }
   };
 
   closeModal = () => {
@@ -77,7 +58,8 @@ export default class VideoSelectionInputModal extends Component {
 
   handleKeyPress = e => {
     if (e.charCode === 13) {
-      this.selectedVideoData(this.state);
+      this.updateComponentData();
+      this.closeModal();
     }
   };
 
@@ -96,6 +78,8 @@ export default class VideoSelectionInputModal extends Component {
       enableCustomUploadOnMobile,
       isMobile,
       languageDir,
+      componentData,
+      onVideoUpdate,
     } = this.props;
     const { styles } = this;
     const hasCustomFileUpload = handleFileUpload || handleFileSelection;
@@ -105,14 +89,14 @@ export default class VideoSelectionInputModal extends Component {
         this.loadLocalVideoFromFile(this.inputFile.files[0]);
         this.closeModal();
         handleFileUpload(this.inputFile.files[0], ({ data, error }) =>
-          this.handleCustomVideoUpload({ data, error })
+          onVideoUpdate({ data, error }, componentData, true)
         );
       };
     } else if (handleFileSelection) {
       handleClick = evt => {
         evt.preventDefault();
         return handleFileSelection(
-          ({ data, error }) => this.handleCustomVideoUpload({ data, error }),
+          ({ data, error }) => onVideoUpdate({ data, error }, componentData, true),
           () => this.closeModal()
         );
       };
@@ -192,7 +176,9 @@ export default class VideoSelectionInputModal extends Component {
               className={
                 styles[`video_modal_add_button_${hasCustomFileUpload ? 'inline' : 'inMiddle'}`]
               }
-              onClick={() => this.selectedVideoData(this.state)}
+              onClick={() => {
+                this.updateComponentData();
+              }}
               ariaProps={!this.state.url && { disabled: 'disabled' }}
               dataHook="videoUploadModalAddButton"
               theme={styles}
@@ -209,6 +195,7 @@ export default class VideoSelectionInputModal extends Component {
 
 VideoSelectionInputModal.propTypes = {
   onConfirm: PropTypes.func,
+  onVideoUpdate: PropTypes.func,
   pubsub: PropTypes.object,
   helpers: PropTypes.object.isRequired,
   componentData: PropTypes.object.isRequired,
