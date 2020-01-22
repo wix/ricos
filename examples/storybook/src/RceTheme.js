@@ -12,7 +12,9 @@ export default class RceTheme {
 
   setTheme(theme, palette) {
     if (SUPPORTED_THEMES.indexOf(theme) === -1) {
+      // eslint-disable-next-line no-console
       console.log(theme);
+      // eslint-disable-next-line no-console
       console.error('Unknown theme: ', theme);
       this._theme = Themes.DEFAULT;
     } else {

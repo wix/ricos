@@ -7,7 +7,8 @@ import { createHashtagPlugin, HASHTAG_TYPE } from 'wix-rich-content-plugin-hasht
 const config = {
   [HASHTAG_TYPE]: {
     createHref: decoratedText => `/search/posts?query=${encodeURIComponent('#')}${decoratedText}`,
-    onClick: (event, text) => {
+    //onClick: (event, text) => {
+    onClick: event => {
       event.preventDefault();
     },
   },

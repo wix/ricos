@@ -1,29 +1,23 @@
-import {
-  ALIGN_CENTER,
-  ALIGN_LEFT,
-  ALIGN_RIGHT,
-  SIZE_LARGE,
-  SIZE_MEDIUM,
-  SIZE_SMALL,
-} from '../constants';
-import { getConfigFromStore, getNextValue } from './selectors';
+import { Divider } from '../domain/divider';
+
+const COMPONENT_DATA = 'componentData';
+
+const getDividerFromStore = store => new Divider(store.get(COMPONENT_DATA));
+
+const updateStoreConfig = (store, config) => {
+  store.update(COMPONENT_DATA, { config });
+};
 
 export const changeType = (type, _componentData, store) => {
-  store.update('componentData', { type: type.value });
+  store.update(COMPONENT_DATA, { type: type.value });
 };
 
 export const changeAlignmentMobile = ({ store }) => {
-  const config = getConfigFromStore(store);
-  const alignment = getNextValue([ALIGN_LEFT, ALIGN_CENTER, ALIGN_RIGHT], config.alignment);
-  store.update('componentData', {
-    config: { ...config, alignment },
-  });
+  const divider = getDividerFromStore(store);
+  updateStoreConfig(store, divider.getNextAlignmentConfig());
 };
 
 export const changeSizeMobile = ({ store }) => {
-  const config = getConfigFromStore(store);
-  const size = getNextValue([SIZE_LARGE, SIZE_MEDIUM, SIZE_SMALL], config.size);
-  store.update('componentData', {
-    config: { ...config, size },
-  });
+  const divider = getDividerFromStore(store);
+  updateStoreConfig(store, divider.getNextSizeConfig());
 };

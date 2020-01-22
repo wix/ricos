@@ -4,20 +4,18 @@ import classNames from 'classnames';
 import { Context } from 'wix-rich-content-common';
 import { LINE_DOUBLE } from '../constants';
 
+const lineProps = (width, lineDistance = 1) => ({
+  x2: width,
+  y1: lineDistance,
+  y2: lineDistance,
+});
+
 const getLines = (type, width, multilineDistance = 7) => {
-  switch (type) {
-    case LINE_DOUBLE:
-      return [
-        { x2: width, y1: 1, y2: 1 },
-        {
-          x2: width,
-          y1: multilineDistance,
-          y2: multilineDistance,
-        },
-      ];
-    default:
-      return [{ x2: width, y1: 1, y2: 1 }];
+  const linePropsArr = [lineProps(width)];
+  if (type === LINE_DOUBLE) {
+    linePropsArr.push(lineProps(width, multilineDistance));
   }
+  return linePropsArr;
 };
 
 const DividerLine = ({
@@ -31,7 +29,7 @@ const DividerLine = ({
   contextType,
   fillParent,
 }) => {
-  const lines = getLines(type, width, multilineDistance);
+  const linesPropsArr = getLines(type, width, multilineDistance);
   const { Consumer } = contextType || Context;
   return (
     <Consumer>
@@ -46,8 +44,8 @@ const DividerLine = ({
         );
         return (
           <svg className={lineClassName}>
-            {lines.map((props, i) => (
-              <line key={i} {...props} />
+            {linesPropsArr.map((lineProp, i) => (
+              <line key={i} {...lineProp} />
             ))}
           </svg>
         );
