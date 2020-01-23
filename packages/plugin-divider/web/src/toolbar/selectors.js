@@ -8,7 +8,6 @@ import {
 } from 'wix-rich-content-editor-common';
 
 import {
-  DEFAULTS,
   SIZE_LARGE,
   SIZE_MEDIUM,
   SIZE_SMALL,
@@ -17,32 +16,13 @@ import {
   ALIGN_RIGHT,
 } from '../constants';
 
-export const getType = (componentData = {}) => componentData.type || DEFAULTS.type;
-
-export const getConfigFromStore = store => getConfig(store.get('componentData'));
-
-export const getConfig = (componentData = {}) => {
-  const config = componentData.config || {};
-  if (!config.size) {
-    config.size = DEFAULTS.config.size;
-  }
-  if (!config.alignment) {
-    config.alignment = DEFAULTS.config.alignment;
-  }
-  if (!config.textWrap) {
-    config.textWrap = DEFAULTS.config.textWrap;
-  }
-  return config;
-};
+import { Divider } from '../domain/divider';
 
 export const isAlignmentDisabled = (componentData = {}) =>
-  getConfig(componentData).size === SIZE_LARGE;
-
-export const getNextValue = (array, currentValue) =>
-  array[(array.indexOf(currentValue) + 1) % array.length];
+  new Divider(componentData).isAlignmentDisabled();
 
 export const getNextSizeIcon = componentData => {
-  const { size } = getConfig(componentData);
+  const { size } = new Divider(componentData);
   return {
     [SIZE_LARGE]: SizeMediumIcon,
     [SIZE_MEDIUM]: SizeSmallIcon,
@@ -51,7 +31,7 @@ export const getNextSizeIcon = componentData => {
 };
 
 export const getNextAlignmentIcon = componentData => {
-  const { alignment } = getConfig(componentData);
+  const { alignment } = new Divider(componentData);
   return {
     [ALIGN_LEFT]: AlignLeftIcon,
     [ALIGN_CENTER]: AlignCenterIcon,

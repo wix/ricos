@@ -11,6 +11,10 @@
   cursor: move;
 }
 
+.video_overlay ~ * > * {
+  pointer-events: none;
+}
+
 .video_overlay_message {
   position: absolute;
   top: 38%;

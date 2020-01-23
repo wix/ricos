@@ -35,7 +35,7 @@ class ExampleApp extends PureComponent {
       contentState,
       isEditorShown: true,
       isViewerShown: !isMobile,
-      isPreviewShown: !isMobile,
+      isPreviewShown: false,
       isContentStateShown: false,
       viewerResetKey: 0,
       previewResetKey: 0,

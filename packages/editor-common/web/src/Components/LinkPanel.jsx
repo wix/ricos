@@ -121,7 +121,6 @@ class LinkPanel extends Component {
           {this.hasError() && (
             <Tooltip
               shouldRebuildOnUpdate={() => !isValid}
-              data-hook="linkPanelTooltip"
               content={t('LinkPanel_ErrorTooltip')}
               theme={theme}
               moveBy={{ y: 0 }}
@@ -148,6 +147,7 @@ class LinkPanel extends Component {
               checked={nofollow}
               dataHook="linkPanelRelCheckbox"
               onChange={this.handleNofollowChange}
+              contentForInfoIcon={t('LinkPanel_Nofollow_Checkbox_Tooltip')}
             />
           )}
         </div>

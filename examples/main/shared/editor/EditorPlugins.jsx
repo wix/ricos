@@ -2,7 +2,7 @@ import React from 'react';
 import { createLinkPlugin, LINK_TYPE } from 'wix-rich-content-plugin-link';
 import { createLineSpacingPlugin, LINE_SPACING_TYPE } from 'wix-rich-content-plugin-line-spacing';
 import { createHashtagPlugin, HASHTAG_TYPE } from 'wix-rich-content-plugin-hashtag';
-import { createEmojiPlugin } from 'wix-rich-content-plugin-emoji';
+import { createEmojiPlugin, EMOJI_TYPE } from 'wix-rich-content-plugin-emoji';
 import { createImagePlugin, IMAGE_TYPE } from 'wix-rich-content-plugin-image';
 import { createUndoRedoPlugin, UNDO_REDO_TYPE } from 'wix-rich-content-plugin-undo-redo';
 import { createGalleryPlugin, GALLERY_TYPE } from 'wix-rich-content-plugin-gallery';
@@ -172,10 +172,19 @@ const uiSettings = {
 };
 
 export const config = {
+  [EMOJI_TYPE]: {
+    // toolbar: {
+    //   icons: {
+    //     InsertPluginButtonIcon: MyCustomIcon,
+    //   },
+    // },
+  },
+
   [UNDO_REDO_TYPE]: {
     // toolbar: {
     //   icons: {
-    //     Undo: SizeSmallRightIcon, // insert plugin icon
+    //     Undo: MyCustomIcon, // insert plugin icon
+    //     Redo: MyCustomIcon, // insert plugin icon
     //   },
     // },
   },
@@ -185,7 +194,7 @@ export const config = {
       typeof window !== 'undefined' && document.getElementsByClassName('editor-example')[0],
     // toolbar: {
     //   icons: {
-    //     Gallery: MyCustomIcon, // insert plugin icon
+    //     InsertPluginButtonIcon: MyCustomIcon,
     //   },
     // },
   },
@@ -209,7 +218,7 @@ export const config = {
     // createGalleryForMultipleImages: true,
     // toolbar: {
     //   icons: {
-    //     Image: MyCustomIcon, // insert plugin icon
+    //     InsertPluginButtonIcon: MyCustomIcon,
     //     alignLeft: MyCustomIcon,
     //     link: MyCustomIcon,
     //     sizeOriginal: MyCustomIcon,
@@ -223,6 +232,7 @@ export const config = {
     //     replace: MyCustomIcon,
     //     delete: SizeSmallRightIcon,
     //   },
+    // },
     // },
   },
   [HASHTAG_TYPE]: {
@@ -241,7 +251,7 @@ export const config = {
     maxHeight: 1200,
     // toolbar: {
     //   icons: {
-    //     HTML: MyCustomIcon, // insert plugin icon
+    //     InsertPluginButtonIcon: MyCustomIcon,
     //   },
     // },
   },
@@ -280,7 +290,7 @@ export const config = {
   [LINE_SPACING_TYPE]: {
     // toolbar: {
     //   icons: {
-    //     'line-spacing': MyCustomIcon, // insert plugin icon
+    //     InsertPluginButtonIcon: MyCustomIcon,
     //   },
     // },
     defaultSpacing: {
@@ -293,45 +303,58 @@ export const config = {
   [LINK_TYPE]: {
     // toolbar: {
     //   icons: {
-    //     link: MyCustomIcon, // insert plugin icon
+    //     InsertPluginButtonIcon: MyCustomIcon,
     //   },
     // },
     onClick: (event, url) => console.log('link clicked!', url),
   },
-  [SOUND_CLOUD_TYPE]: {},
-  [CODE_BLOCK_TYPE]: {
+  [SOUND_CLOUD_TYPE]: {
     // toolbar: {
     //   icons: {
-    //     codeBlock: MyCustomIcon, // insert plugin icon
+    //     InsertPluginButtonIcon: MyCustomIcon,
     //   },
     // },
   },
-  [DIVIDER_TYPE]: {},
+  [CODE_BLOCK_TYPE]: {
+    // toolbar: {
+    //   icons: {
+    //     InsertPluginButtonIcon: MyCustomIcon,
+    //   },
+    // },
+  },
+  [DIVIDER_TYPE]: {
+    // toolbar: {
+    //   icons: {
+    //     InsertPluginButtonIcon: MyCustomIcon,
+    //   },
+    // },
+  },
   // [EXTERNAL_EMOJI_TYPE]: {},
   [VIDEO_TYPE]: {
     toolbar: {
       hidden: [],
       // icons: {
-      //   Video: MyCustomIcon, //insert plugin icon
+      //   InsertPluginButtonIcon: MyCustomIcon,
       // },
     },
     //Here you can call your custom video upload functionality (comment function to disable custom upload)
     handleFileSelection: (updateEntity, removeEntity) => {
       console.log('consumer wants to upload custom video');
       const videoWithAbsoluteUrl = {
-        url: 'http://mirrors.standaloneinstaller.com/video-sample/jellyfish-25-mbps-hd-hevc.mp4',
+        url:
+          'https://video.wixstatic.com/video/11062b_a552731f40854d16a91627687fb8d1a6/1080p/mp4/file.mp4',
       };
       const videoWithRelativeUrl = {
-        pathname: 'video/441c23_84f5c058e5e4479ab9e626cd5560a21b/file',
+        pathname: 'video/11062b_a552731f40854d16a91627687fb8d1a6/1080p/mp4/file.mp4',
         thumbnail: {
-          pathname: 'media/441c23_84f5c058e5e4479ab9e626cd5560a21bf000.jpg',
+          pathname: 'media/11062b_a552731f40854d16a91627687fb8d1a6f000.jpg',
           height: 1080,
           width: 1920,
         },
       };
       // You can provide either absolute or relative URL.
       // If relative URL is provided, a function 'getVideoUrl' will be invoked to form a full URL.
-      const videoToUpload = videoWithAbsoluteUrl;
+      const videoToUpload = videoWithRelativeUrl;
       setTimeout(() => {
         updateEntity({ data: videoToUpload });
         //updateEntity({ error: { msg: 'Upload Failed' } });
@@ -366,10 +389,10 @@ export const config = {
     getVideoUrl: src => `https://video.wixstatic.com/${src.pathname}`,
   },
   [GIPHY_TYPE]: {
-    giphySdkApiKey: process.env.GIPHY_API_KEY,
+    giphySdkApiKey: process.env.GIPHY_API_KEY || 'HXSsAGVNzjeUjhKfhhD9noF8sIbpYDsV',
     // toolbar: {
     //   icons: {
-    //     GIF: MyCustomIcon, // insert plugin icon
+    //     InsertPluginButtonIcon: MyCustomIcon,
     //   },
     // },
     sizes: { desktop: 'original', mobile: 'original' }, // original or downsizedSmall are supported
@@ -394,14 +417,14 @@ export const config = {
     },
     // toolbar: {
     //   icons: {
-    //     Map: MyCustomIcon,  // insert plugin icon
+    //     InsertPluginButtonIcon: MyCustomIcon,
     //   },
     // },
   },
   [FILE_UPLOAD_TYPE]: {
     // toolbar: {
     //   icons: {
-    // UploadFile: MyCustomIcon, // insert plugin icon
+    //     InsertPluginButtonIcon: MyCustomIcon,
     //   },
     // },
     accept: '*',
@@ -431,11 +454,11 @@ export const config = {
     // },
   },
   [BUTTON_TYPE]: {
-    //   toolbar: {
-    //     icons: {
-    //       Button: MyCustomIcon, // insert plugin icon
-    //     },
+    // toolbar: {
+    //   icons: {
+    //     InsertPluginButtonIcon: MyCustomIcon,
     //   },
+    // },
     palette: ['#FEFDFD', '#D5D4D4', '#ABCAFF', '#81B0FF', '#0261FF', '#0141AA'],
     selectionBackgroundColor: 'fuchsia',
     selectionBorderColor: '#FFF',
@@ -463,25 +486,25 @@ export const config = {
   [TEXT_HIGHLIGHT_TYPE]: {
     // toolbar: {
     //   icons: {
-    //     TextHighlight: CustomIcon,
+    //     InsertPluginButtonIcon: MyCustomIcon,
     //   },
     // },
     colorScheme,
     styleSelectionPredicate,
     customStyleFn: customBackgroundStyleFn,
-    onColorAdded: color => (userColors = [color, ...userColors]),
+    onColorAdded: color => (userColors = [...userColors, color]),
     getUserColors: () => userColors,
   },
   [TEXT_COLOR_TYPE]: {
     // toolbar: {
     //   icons: {
-    //     TextColor: CustomIcon,
+    //     InsertPluginButtonIcon: MyCustomIcon,
     //   },
     // },
     colorScheme,
     styleSelectionPredicate,
     customStyleFn: customForegroundStyleFn,
-    onColorAdded: color => (userColors = [color, ...userColors]),
+    onColorAdded: color => (userColors = [...userColors, color]),
     getUserColors: () => userColors,
   },
   uiSettings,
