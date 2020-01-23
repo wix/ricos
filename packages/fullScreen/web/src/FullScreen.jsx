@@ -22,8 +22,8 @@ export default function Fullscreen(props) {
   } = props;
 
   const getItems = () => {
-    const { items, relValue, anchorTarget } = props;
-    return convertItemData({ items, relValue, anchorTarget });
+    const { images, relValue, anchorTarget } = props;
+    return convertItemData({ items: images, relValue, anchorTarget });
   };
 
   const fullscreen = (
@@ -60,6 +60,9 @@ Fullscreen.propTypes = {
   images: PropTypes.array.isRequired,
   isOpen: PropTypes.bool,
   index: PropTypes.number,
+  topMargin: PropTypes.object,
+  backgroundColor: PropTypes.object,
+  foregroundColor: PropTypes.object,
   onClose: PropTypes.func,
   locale: PropTypes.string,
   relValue: PropTypes.string,

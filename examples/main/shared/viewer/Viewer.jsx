@@ -6,7 +6,7 @@ import * as PropTypes from 'prop-types';
 import * as Plugins from './ViewerPlugins';
 import theme from '../theme/theme'; // must import after custom styles
 import getImagesData from 'wix-rich-content-fullscreen/dist/lib/getImagesData';
-import { Fullscreen } from 'wix-rich-content-fullscreen';
+import Fullscreen from 'wix-rich-content-fullscreen';
 import 'wix-rich-content-fullscreen/dist/styles.min.css';
 
 const anchorTarget = '_top';
@@ -63,7 +63,7 @@ export default class Viewer extends PureComponent {
         />
         {!isSSR() && (
           <Fullscreen
-            items={this.expandModeData.images}
+            images={this.expandModeData.images}
             onClose={() => this.setState({ expandModeIsOpen: false })}
             isOpen={expandModeIsOpen}
             index={expandModeIndex}

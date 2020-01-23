@@ -1,1 +1,2 @@
-export { default as Fullscreen } from './FullScreen.jsx';
+import Fullscreen from './FullScreen.jsx';
+export default Fullscreen;
