@@ -13,7 +13,7 @@ export default class TextColorButton extends Component {
 
   render() {
     const settings = this.props.config[TEXT_COLOR_TYPE];
-    const iconTextColor = settings?.toolbar?.icons?.TextColor || TextColorIcon;
+    const iconTextColor = settings?.toolbar?.icons?.InsertPluginButtonIcon || TextColorIcon;
     const pluginParams = {
       dataHook: 'TextColorButton',
       toolTip: 'TextColorButton_Tooltip',

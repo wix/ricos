@@ -13,7 +13,7 @@ export default class TextHighlightButton extends Component {
   }
   render() {
     const settings = this.props.config[TEXT_HIGHLIGHT_TYPE];
-    const iconTextHighlight = settings?.toolbar?.icons?.TextHighlight || TextHighlightIcon;
+    const iconTextHighlight = settings?.toolbar?.icons?.InsertPluginButtonIcon || TextHighlightIcon;
     const pluginParams = {
       dataHook: 'TextHighlightButton',
       toolTip: 'TextHighlightButton_Tooltip',
