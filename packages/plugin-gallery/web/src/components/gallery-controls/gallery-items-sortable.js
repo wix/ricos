@@ -442,6 +442,7 @@ export class SortableComponent extends Component {
   propsToState(props) {
     return {
       items: props.items,
+      editedImage: props?.items?.[this.state?.editedImageIndex],
     };
   }
 

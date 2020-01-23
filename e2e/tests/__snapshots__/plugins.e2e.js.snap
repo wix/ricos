@@ -1,4 +1,4 @@
-exports[`plugins > image > render plugin toolbar and customize in settings #0`] =
+exports[`plugins > image > render image toolbar and settings #0`] =
 {
   "blocks": [
     {
@@ -463,7 +463,7 @@ exports[`plugins > full screen > gallery full screen > expand gallery image on f
   }
 };
 
-exports[`plugins > gallery > should render gallery plugin toolbar and settings #0`] =
+exports[`plugins > gallery > render gallery plugin #0`] =
 {
   "blocks": [
     {
@@ -624,7 +624,7 @@ exports[`plugins > gallery > should render gallery plugin toolbar and settings #
   }
 };
 
-exports[`plugins > gallery > organize media > should allow to manipulate the media items #0`] =
+exports[`plugins > gallery > organize media > allow to manipulate the media items #0`] =
 {
   "blocks": [
     {
@@ -766,7 +766,7 @@ exports[`plugins > gallery > organize media > should allow to manipulate the med
   }
 };
 
-exports[`plugins > gallery > image settings > should allow to update image content #0`] =
+exports[`plugins > gallery > media settings > allow to update media content #0`] =
 {
   "blocks": [
     {

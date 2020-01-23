@@ -52,26 +52,21 @@ exports[`text > allow to apply inline styles and links #0`] =
       "entityRanges": [
         {
           "key": 0,
-          "length": 10,
+          "length": 17,
           "offset": 0
         },
         {
           "key": 1,
-          "length": 7,
-          "offset": 10
-        },
-        {
-          "key": 2,
           "length": 10,
           "offset": 18
         },
         {
-          "key": 3,
+          "key": 2,
           "length": 30,
           "offset": 33
         },
         {
-          "key": 4,
+          "key": 3,
           "length": 65,
           "offset": 68
         }
@@ -226,8 +221,10 @@ exports[`text > allow to apply inline styles and links #0`] =
   "entityMap": {
     "0": {
       "data": {
-        "rel": "noopener",
-        "target": "_blank",
+        "anchorTarget": "_blank",
+        "nofollow": false,
+        "relValue": "noopener",
+        "targetBlank": true,
         "url": "https://www.wix.com/"
       },
       "mutability": "MUTABLE",
@@ -237,7 +234,7 @@ exports[`text > allow to apply inline styles and links #0`] =
       "data": {
         "rel": "noopener",
         "target": "_blank",
-        "url": "https://www.sport5.co.il"
+        "url": "https://www.wix.com/"
       },
       "mutability": "MUTABLE",
       "type": "LINK"
@@ -246,21 +243,12 @@ exports[`text > allow to apply inline styles and links #0`] =
       "data": {
         "rel": "noopener",
         "target": "_blank",
-        "url": "https://www.wix.com/"
-      },
-      "mutability": "MUTABLE",
-      "type": "LINK"
-    },
-    "3": {
-      "data": {
-        "rel": "noopener",
-        "target": "_blank",
         "url": "https://www.sport5.co.il/"
       },
       "mutability": "MUTABLE",
       "type": "LINK"
     },
-    "4": {
+    "3": {
       "data": {
         "rel": "noopener",
         "target": "_blank",

@@ -1,8 +1,6 @@
 /* eslint-disable */
 
 import fs from 'fs';
-import path from 'path';
-import pascalCase from 'pascal-case';
 import { cloneDeep } from 'lodash';
 import plugins from './rollup.plugins';
 import { isExternal as external } from './rollup.externals';
@@ -11,10 +9,6 @@ if (!process.env.MODULE_NAME) {
   console.error('Environment variable "MODULE_NAME" is missing!');
   process.exit(1);
 }
-
-const MODULE_NAME = pascalCase(process.env.MODULE_NAME);
-const NAME = `WixRichContent${MODULE_NAME}`;
-const IS_DEV_ENV = process.env.NODE_ENV === 'development';
 
 let output = [
   {
@@ -36,6 +30,12 @@ if (process.env.MODULE_WATCH) {
 const watch = {
   exclude: ['node_modules/**'],
   clearScreen: false,
+};
+
+let addPartToFilename = (fileName, fileNamePart) => {
+  const anchor = fileName.indexOf('.');
+  fileName = `${fileName.slice(0, anchor)}.${fileNamePart}${fileName.slice(anchor)}`;
+  return fileName;
 };
 
 const editorEntry = {
@@ -64,13 +64,14 @@ try {
 
 let viewerEntry;
 try {
-  fs.accessSync('./src/viewer.js');
+  let viewerPath = 'src/viewer.js';
+  fs.accessSync(`./${viewerPath}`);
   viewerEntry = {
-    input: 'src/viewer.js',
+    input: viewerPath,
     output: cloneDeep(output).map(o => {
       console.log(o.file);
       const anchor = o.file.indexOf('.');
-      o.file = `${o.file.slice(0, anchor)}.viewer${o.file.slice(anchor)}`;
+      o.file = addPartToFilename(o.file, 'viewer');
       return o;
     }),
     plugins,
