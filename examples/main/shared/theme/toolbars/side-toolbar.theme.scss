@@ -56,3 +56,32 @@
 
 .sideToolbarButton_label {
 }
+
+@media only screen and (max-width: 800px) {
+  /* Wrapper */
+  .sideToolbarWrapper {
+  }
+
+  /* Toolbar */
+  .sideToolbar_floatingContainer {
+  }
+
+  .sideToolbar_floatingIcon {
+  }
+
+  .sideToolbar {
+  }
+
+  /* Button */
+  .sideToolbarButton_wrapper {
+  }
+
+  .sideToolbarButton {
+  }
+
+  .sideToolbarButton_wrapper:hover .sideToolbarButton_icon {
+  }
+
+  .sideToolbarButton_label {
+  }
+}

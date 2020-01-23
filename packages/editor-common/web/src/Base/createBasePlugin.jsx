@@ -38,6 +38,8 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
     commonPubsub,
     defaultPluginData,
     pluginDefaults,
+    initialIntent,
+    languageDir,
   } = config;
   defaultPluginData && (pluginDefaults[config.type] = defaultPluginData);
   const toolbarTheme = { ...getToolbarTheme(config.theme, 'plugin'), ...config.theme };
@@ -60,6 +62,8 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
       uiSettings: config.uiSettings,
       getToolbarSettings: config.getToolbarSettings,
       getEditorBounds,
+      initialIntent,
+      languageDir,
     });
   const InsertPluginButtons =
     settings.showInsertButtons &&
@@ -75,6 +79,8 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
         t,
         isMobile,
         pluginDefaults,
+        initialIntent,
+        languageDir,
       }),
     }));
   const PluginComponent = config.component;
@@ -98,6 +104,8 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
       isMobile,
       getEditorBounds,
       disableRightClick,
+      initialIntent,
+      languageDir,
     });
 
   const DecoratedCompWithBase =

@@ -117,6 +117,8 @@ class RichContentEditor extends Component {
       shouldRenderOptimizedImages,
       initialIntent,
       siteDomain,
+      setInPluginEditingMode: this.setInPluginEditingMode,
+      getInPluginEditingMode: this.getInPluginEditingMode,
     };
   };
 
@@ -125,6 +127,8 @@ class RichContentEditor extends Component {
   initPlugins() {
     const {
       helpers,
+      locale,
+      initialIntent,
       plugins,
       config,
       isMobile,
@@ -144,6 +148,8 @@ class RichContentEditor extends Component {
       isMobile,
       anchorTarget,
       relValue,
+      initialIntent,
+      languageDir: getLangDir(locale),
       getEditorState: this.getEditorState,
       setEditorState: this.setEditorState,
       getEditorBounds: this.getEditorBounds,
@@ -274,6 +280,17 @@ class RichContentEditor extends Component {
   blur = () => this.editor.blur();
 
   setEditor = ref => (this.editor = get(ref, 'editor', ref));
+
+  inPluginEditingMode = false;
+
+  setInPluginEditingMode = shouldEnable => {
+    // As explained in https://github.com/facebook/draft-js/blob/585af35c3a8c31fefb64bc884d4001faa96544d3/src/component/handlers/DraftEditorModes.js#L14
+    const mode = shouldEnable ? 'render' : 'edit';
+    this.editor.setMode(mode);
+    this.inPluginEditingMode = shouldEnable;
+  };
+
+  getInPluginEditingMode = () => this.inPluginEditingMode;
 
   updateBounds = editorBounds => {
     this.setState({ editorBounds });

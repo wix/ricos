@@ -341,19 +341,20 @@ export const config = {
     handleFileSelection: (updateEntity, removeEntity) => {
       console.log('consumer wants to upload custom video');
       const videoWithAbsoluteUrl = {
-        url: 'http://mirrors.standaloneinstaller.com/video-sample/jellyfish-25-mbps-hd-hevc.mp4',
+        url:
+          'https://video.wixstatic.com/video/11062b_a552731f40854d16a91627687fb8d1a6/1080p/mp4/file.mp4',
       };
       const videoWithRelativeUrl = {
-        pathname: 'video/441c23_84f5c058e5e4479ab9e626cd5560a21b/file',
+        pathname: 'video/11062b_a552731f40854d16a91627687fb8d1a6/1080p/mp4/file.mp4',
         thumbnail: {
-          pathname: 'media/441c23_84f5c058e5e4479ab9e626cd5560a21bf000.jpg',
+          pathname: 'media/11062b_a552731f40854d16a91627687fb8d1a6f000.jpg',
           height: 1080,
           width: 1920,
         },
       };
       // You can provide either absolute or relative URL.
       // If relative URL is provided, a function 'getVideoUrl' will be invoked to form a full URL.
-      const videoToUpload = videoWithAbsoluteUrl;
+      const videoToUpload = videoWithRelativeUrl;
       setTimeout(() => {
         updateEntity({ data: videoToUpload });
         //updateEntity({ error: { msg: 'Upload Failed' } });
@@ -388,7 +389,7 @@ export const config = {
     getVideoUrl: src => `https://video.wixstatic.com/${src.pathname}`,
   },
   [GIPHY_TYPE]: {
-    giphySdkApiKey: process.env.GIPHY_API_KEY,
+    giphySdkApiKey: process.env.GIPHY_API_KEY || 'HXSsAGVNzjeUjhKfhhD9noF8sIbpYDsV',
     // toolbar: {
     //   icons: {
     //     InsertPluginButtonIcon: MyCustomIcon,
@@ -491,7 +492,7 @@ export const config = {
     colorScheme,
     styleSelectionPredicate,
     customStyleFn: customBackgroundStyleFn,
-    onColorAdded: color => (userColors = [color, ...userColors]),
+    onColorAdded: color => (userColors = [...userColors, color]),
     getUserColors: () => userColors,
   },
   [TEXT_COLOR_TYPE]: {
@@ -503,7 +504,7 @@ export const config = {
     colorScheme,
     styleSelectionPredicate,
     customStyleFn: customForegroundStyleFn,
-    onColorAdded: color => (userColors = [color, ...userColors]),
+    onColorAdded: color => (userColors = [...userColors, color]),
     getUserColors: () => userColors,
   },
   uiSettings,

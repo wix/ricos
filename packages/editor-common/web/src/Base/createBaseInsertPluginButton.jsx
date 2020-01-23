@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { EditorState } from 'draft-js';
 import { isEmpty } from 'lodash';
-import { mergeStyles, Context } from 'wix-rich-content-common';
+import { mergeStyles } from 'wix-rich-content-common';
 import { createBlock } from '../Utils/draftUtils.js';
 import classNames from 'classnames';
 import FileInput from '../Components/FileInput';
@@ -20,6 +20,7 @@ export default ({
   commonPubsub,
   settings,
   t,
+  initialIntent,
   isMobile,
   pluginDefaults,
 }) => {
@@ -37,8 +38,7 @@ export default ({
     }
 
     initialIntent = () => {
-      const { initialIntent } = this.context;
-      if (initialIntent && initialIntent === blockType) {
+      if (initialIntent === blockType) {
         const { buttonRef } = this;
         buttonRef && buttonRef.current && buttonRef.current.click();
       }
@@ -46,8 +46,13 @@ export default ({
 
     addBlock = data => {
       const { getEditorState, setEditorState } = this.props;
-      const { newSelection, newEditorState } = this.createBlock(getEditorState(), data, blockType);
+      const { newBlock, newSelection, newEditorState } = this.createBlock(
+        getEditorState(),
+        data,
+        blockType
+      );
       setEditorState(EditorState.forceSelection(newEditorState, newSelection));
+      return { newBlock, newSelection, newEditorState };
     };
 
     addCustomBlock = buttonData => {
@@ -119,7 +124,7 @@ export default ({
 
         const { newBlock } = this.addBlock(button.componentData || {});
         const blockKey = newBlock.getKey();
-        setTimeout(() => pubsub.getBlockHandler('handleFilesAdded', blockKey)(data));
+        setTimeout(() => pubsub.getBlockHandler('handleFilesAdded', blockKey)(blockKey, data));
       }
     };
 
@@ -272,7 +277,6 @@ export default ({
       );
     }
   }
-  InsertPluginButton.contextType = Context.type;
 
   InsertPluginButton.propTypes = {
     getEditorState: PropTypes.func.isRequired,

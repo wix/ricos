@@ -26,31 +26,39 @@ export const insertLinkInPosition = (
   });
 };
 
-export const insertLinkAtCurrentSelection = (
-  editorState,
-  { url, targetBlank, nofollow, anchorTarget, relValue }
-) => {
+export const insertLinkAtCurrentSelection = (editorState, data) => {
   let selection = getSelection(editorState);
   let newEditorState = editorState;
   if (selection.isCollapsed()) {
+    const { url } = data;
     const contentState = Modifier.insertText(editorState.getCurrentContent(), selection, url);
     selection = selection.merge({ focusOffset: selection.getFocusOffset() + url.length });
     newEditorState = EditorState.push(editorState, contentState, 'insert-characters');
   }
-
-  const editorStateWithLink = insertLink(newEditorState, selection, {
-    url,
-    targetBlank,
-    nofollow,
-    anchorTarget,
-    relValue,
-  });
+  let editorStateWithLink;
+  if (isSelectionBelongsToExsistingLink(newEditorState, selection)) {
+    const contentState = newEditorState.getCurrentContent();
+    const blockKey = selection.getStartKey();
+    const block = contentState.getBlockForKey(blockKey);
+    const entityKey = block.getEntityAt(selection.getStartOffset());
+    editorStateWithLink = setEntityData(newEditorState, entityKey, data);
+  } else {
+    editorStateWithLink = insertLink(newEditorState, selection, data);
+  }
 
   return EditorState.forceSelection(
     editorStateWithLink,
     selection.merge({ anchorOffset: selection.focusOffset })
   );
 };
+
+function isSelectionBelongsToExsistingLink(editorState, selection) {
+  const startOffset = selection.getStartOffset();
+  const endOffset = selection.getEndOffset();
+  return getSelectedLinks(editorState).find(({ range }) => {
+    return range[0] <= startOffset && range[1] >= endOffset;
+  });
+}
 
 const defaultAnchorTarget = '_self';
 const defaultRelValue = 'noopener';

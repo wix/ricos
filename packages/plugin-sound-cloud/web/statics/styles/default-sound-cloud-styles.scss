@@ -11,6 +11,10 @@
   cursor: move;
 }
 
+.soundCloud_overlay ~ * > * {
+  pointer-events: none;
+}
+
 .soundCloud_overlay_message {
   position: absolute;
   top: 38%;
