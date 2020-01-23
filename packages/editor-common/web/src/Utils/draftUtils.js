@@ -418,9 +418,9 @@ export function getBlockInfo(editorState, blockKey) {
   const contentState = editorState.getCurrentContent();
   const block = contentState.getBlockForKey(blockKey);
   const entityKey = block.getEntityAt(0);
-  const entity = entityKey && contentState.getEntity(entityKey);
-  const entityData = entity?.data;
-  const type = entity?.type;
+  const entity = (entityKey && contentState.getEntity(entityKey)) || {};
+  const entityData = entity.data;
+  const type = entity.type;
 
   return { type: type || 'text', entityData };
 }
