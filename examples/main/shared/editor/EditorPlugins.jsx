@@ -315,7 +315,7 @@ export const config = {
       //   Video: MyCustomIcon, //insert plugin icon
       // },
     },
-    //Here you can call your custom video upload functionality (comment function to disable custom upload)
+    //media manager - Here you can call your custom video upload functionality (comment function to disable custom upload)
     // handleFileSelection: (updateEntity, removeEntity) => {
     //   console.log('consumer wants to upload custom video');
     //   const videoWithAbsoluteUrl = {
@@ -339,6 +339,7 @@ export const config = {
     //     console.log('consumer uploaded ', videoToUpload);
     //   }, 500);
     // },
+    // this is for native file upload
     handleFileUpload: (file, updateEntity, removeEntity) => {
       console.log('consumer wants to upload custom video', file);
       const videoWithAbsoluteUrl = {

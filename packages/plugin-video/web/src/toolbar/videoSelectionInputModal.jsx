@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { TextInput, CloseIcon, Button } from 'wix-rich-content-editor-common';
 import { mergeStyles } from 'wix-rich-content-common';
-import ReactPlayer from 'react-player';
 import styles from '../../statics/styles/video-selection-input-modal.scss';
 
 export default class VideoSelectionInputModal extends Component {
@@ -19,14 +18,16 @@ export default class VideoSelectionInputModal extends Component {
 
   onUrlChange = e => {
     const url = e.target.value;
-    this.setState({ url });
+    this.setState({ url, showError: false });
   };
 
-  afterOpenModal = () => this.input.focus();
-
-  updateComponentData = () => {
-    const { componentData, helpers, pubsub, onConfirm } = this.props;
-    const src = this.state.url;
+  onUrlVideoSelection = () => {
+    const { componentData, helpers, pubsub, onConfirm, checkUrlValidity } = this.props;
+    const { url: src } = this.state;
+    if (!checkUrlValidity(src)) {
+      this.setState({ showError: true });
+      return;
+    }
     if (onConfirm) {
       onConfirm({ ...componentData, src });
     } else {
@@ -41,6 +42,35 @@ export default class VideoSelectionInputModal extends Component {
     this.closeModal();
   };
 
+  onUrlInputDoubleClick = () => {
+    this.setState({ url: 'https://www.youtube.com/watch?v=vzKryaN44ss' });
+  };
+
+  closeModal = () => {
+    this.setState({ isOpen: false });
+    this.props.helpers.closeModal();
+  };
+
+  handleKeyPress = e => {
+    if (e.charCode === 13) {
+      this.onUrlVideoSelection();
+    }
+  };
+
+  //These two function needed to handle onFocus select for iphone devices
+  componentDidMount() {
+    this.input.focus();
+    this.input.setSelectionRange(0, this.input.value.length);
+  }
+
+  onVideoUpdate = ({ data }, componentData, isCustomVideo = false) => {
+    const { pubsub, helpers } = this.props;
+    const { pathname, thumbnail, url } = data;
+    const src = pathname ? { pathname, thumbnail } : url;
+    pubsub.update('componentData', { src, isCustomVideo });
+    helpers.onVideoSelected(src, data => pubsub.update('componentData', { metadata: { ...data } }));
+  };
+
   loadLocalVideoFromFile = file => {
     const src = URL.createObjectURL(file);
     const { componentData, pubsub, onConfirm } = this.props;
@@ -51,26 +81,18 @@ export default class VideoSelectionInputModal extends Component {
     }
   };
 
-  closeModal = () => {
-    this.setState({ isOpen: false });
-    this.props.helpers.closeModal();
+  handleNativeFileUpload = () => {
+    const { componentData } = this.props;
+    const file = this.inputFile.files[0];
+    this.loadLocalVideoFromFile(file);
+    this.props.handleFileUpload(file, ({ data, error }) =>
+      this.onVideoUpdate({ data, error }, componentData, true)
+    );
+    this.closeModal();
   };
-
-  handleKeyPress = e => {
-    if (e.charCode === 13) {
-      this.updateComponentData();
-      this.closeModal();
-    }
-  };
-
-  //These two function needed to handle onFocus select for iphone devices
-  componentDidMount() {
-    this.input.focus();
-    this.input.setSelectionRange(0, this.input.value.length);
-  }
 
   render() {
-    const { url, submitted, errorMsg } = this.state;
+    const { url, showError, errorMsg } = this.state;
     const {
       t,
       handleFileSelection,
@@ -83,16 +105,8 @@ export default class VideoSelectionInputModal extends Component {
     } = this.props;
     const { styles } = this;
     const hasCustomFileUpload = handleFileUpload || handleFileSelection;
-    let handleClick, handleChange;
-    if (handleFileUpload) {
-      handleChange = () => {
-        this.loadLocalVideoFromFile(this.inputFile.files[0]);
-        this.closeModal();
-        handleFileUpload(this.inputFile.files[0], ({ data, error }) =>
-          onVideoUpdate({ data, error }, componentData, true)
-        );
-      };
-    } else if (handleFileSelection) {
+    let handleClick;
+    if (handleFileSelection) {
       handleClick = evt => {
         evt.preventDefault();
         return handleFileSelection(
@@ -114,7 +128,7 @@ export default class VideoSelectionInputModal extends Component {
             className={styles.fileInput}
             ref={node => (this.inputFile = node)}
             onClick={handleClick}
-            onChange={handleChange}
+            onChange={this.handleNativeFileUpload}
           />
           <label
             htmlFor={this.id}
@@ -161,12 +175,9 @@ export default class VideoSelectionInputModal extends Component {
                 type="url"
                 onKeyPress={this.handleKeyPress}
                 onChange={this.onUrlChange}
+                onDoubleClick={this.onUrlInputDoubleClick}
                 value={url}
-                error={
-                  !ReactPlayer.canPlay(url) && submitted
-                    ? t('VideoUploadModal_Input_InvalidUrl')
-                    : null
-                }
+                error={showError ? t('VideoUploadModal_Input_InvalidUrl') : null}
                 placeholder={t('VideoUploadModal_Input_Placeholder')}
                 theme={styles}
                 data-hook="videoUploadModalInput"
@@ -176,9 +187,7 @@ export default class VideoSelectionInputModal extends Component {
               className={
                 styles[`video_modal_add_button_${hasCustomFileUpload ? 'inline' : 'inMiddle'}`]
               }
-              onClick={() => {
-                this.updateComponentData();
-              }}
+              onClick={this.onUrlVideoSelection}
               ariaProps={!this.state.url && { disabled: 'disabled' }}
               dataHook="videoUploadModalAddButton"
               theme={styles}
@@ -194,6 +203,8 @@ export default class VideoSelectionInputModal extends Component {
 }
 
 VideoSelectionInputModal.propTypes = {
+  onNativeVideoUpload: PropTypes.func.isRequired,
+  checkUrlValidity: PropTypes.func,
   onConfirm: PropTypes.func,
   onVideoUpdate: PropTypes.func,
   pubsub: PropTypes.object,

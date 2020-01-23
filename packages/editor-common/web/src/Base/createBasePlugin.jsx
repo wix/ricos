@@ -24,10 +24,6 @@ const DEFAULT_SETTINGS = {
 
 const createBasePlugin = (config = {}, underlyingPlugin) => {
   const pubsub = simplePubsub();
-  const { pubsubContainer } = config;
-  if (pubsubContainer) {
-    pubsubContainer.pubsub = pubsub;
-  }
   const settings = { ...DEFAULT_SETTINGS, ...config.settings };
   const helpers = config.helpers || {};
   const isMobile = config.isMobile || false;

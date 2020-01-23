@@ -5,53 +5,34 @@ import { createBasePlugin } from 'wix-rich-content-editor-common';
 import ReactPlayer from 'react-player';
 
 const createVideoPlugin = (config = {}) => {
-  const type = VIDEO_TYPE;
-  const { helpers, t, [type]: settings = {}, isMobile, ...rest } = config;
+  const { helpers, t, [VIDEO_TYPE]: settings = {}, isMobile, ...rest } = config;
 
-  const selectedVideoData = (
-    { url, pathname, thumbnail },
-    componentData,
-    isCustomVideo = false
-  ) => {
-    const src = pathname?.length ? { pathname, thumbnail } : url;
-    if (ReactPlayer.canPlay(url) || isCustomVideo) {
-      pubsubContainer.pubsub.update('componentData', { src, isCustomVideo });
-
-      if (helpers && helpers.onVideoSelected) {
-        helpers.onVideoSelected(src, data =>
-          pubsubContainer.pubsub.update('componentData', { metadata: { ...data } })
-        );
-      }
-    } else {
-      //this.setState({ submitted: true });
-    }
+  const onVideoUpdate = ({ data }, componentData, isCustomVideo = false) => {
+    const { pathname, thumbnail, url } = data;
+    const src = pathname ? { pathname, thumbnail } : url;
+    pubsub.update('componentData', { src, isCustomVideo });
+    helpers.onVideoSelected(src, data => pubsub.update('componentData', { metadata: { ...data } }));
   };
 
-  const onVideoUpdate = ({ data, error }, componentData, isCustomVideo = false) => {
-    if (error) {
-      //this.setState({ errorMsg: error.msg });
-    } else {
-      const videoData = data.pathname
-        ? {
-            url: '',
-            pathname: data.pathname,
-            thumbnail: data.thumbnail,
-          }
-        : { url: data.url, pathname: '' };
-      selectedVideoData(videoData, componentData, isCustomVideo);
-    }
+  const onNativeVideoUpload = (file, componentData) => {
+    settings.handleFileUpload(file, ({ data, error }) =>
+      onVideoUpdate({ data, error }, componentData, true)
+    );
   };
 
-  const pubsubContainer = {};
-
-  return createBasePlugin({
+  const basePlugin = createBasePlugin({
     component: Component,
     type: VIDEO_TYPE,
     legacyType: VIDEO_TYPE_LEGACY,
     toolbar: createToolbar({
       helpers,
       t,
-      settings: { ...settings, onVideoUpdate },
+      settings: {
+        ...settings,
+        onVideoUpdate,
+        onNativeVideoUpload,
+        checkUrlValidity: ReactPlayer.canPlay,
+      },
       isMobile,
     }),
     helpers,
@@ -61,8 +42,11 @@ const createVideoPlugin = (config = {}) => {
     disableRightClick: config?.uiSettings?.disableRightClick,
     defaultPluginData: DEFAULTS,
     ...rest,
-    pubsubContainer,
   });
+
+  const { pubsub } = basePlugin;
+
+  return basePlugin;
 };
 
 export { createVideoPlugin };
