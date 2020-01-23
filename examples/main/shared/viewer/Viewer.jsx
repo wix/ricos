@@ -64,10 +64,9 @@ export default class Viewer extends PureComponent {
         {!isSSR() && (
           <Fullscreen
             items={this.expandModeData.images}
-            numberOfItems={this.expandModeData.images.length}
             onClose={() => this.setState({ expandModeIsOpen: false })}
             isOpen={expandModeIsOpen}
-            fullscreenIdx={expandModeIndex}
+            index={expandModeIndex}
             relValue={relValue}
             anchorTarget={anchorTarget}
             locale={this.props.locale}

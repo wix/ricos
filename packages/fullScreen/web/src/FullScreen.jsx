@@ -11,9 +11,8 @@ const { ProGallery } = process.env.SANTA ? {} : require('pro-gallery');
 
 export default function Fullscreen(props) {
   const {
-    numberOfItems,
     locale,
-    fullscreenIdx,
+    index,
     isOpen,
     onClose,
     target,
@@ -36,21 +35,17 @@ export default function Fullscreen(props) {
           </button>
           <ProGallery
             items={getItems()}
-            totalItemsCount={numberOfItems}
             locale={locale}
-            currentIdx={fullscreenIdx}
+            currentIdx={index}
             resizeMediaUrl={resizeMediaUrl}
-            container={{
-              width: window.innerWidth,
-              height: window.innerHeight,
-            }}
+            container={{ width: window.innerWidth, height: window.innerHeight }}
             styles={{
               ...layouts[5],
               galleryLayout: 5,
               slideshowInfoSize: 0,
               cubeType: 'fit',
               scrollSnap: true,
-              videoPlay: 'onClick',
+              videoPlay: 'auto',
             }}
           />
         </div>
@@ -62,12 +57,12 @@ export default function Fullscreen(props) {
 }
 
 Fullscreen.propTypes = {
-  items: PropTypes.array.isRequired,
+  images: PropTypes.array.isRequired,
   isOpen: PropTypes.bool,
-  fullscreenIdx: PropTypes.number,
-  numberOfItems: PropTypes.number,
+  index: PropTypes.number,
   onClose: PropTypes.func,
   locale: PropTypes.string,
   relValue: PropTypes.string,
   anchorTarget: PropTypes.string,
+  container: PropTypes.object,
 };
