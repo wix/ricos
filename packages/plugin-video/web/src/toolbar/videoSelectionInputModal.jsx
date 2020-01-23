@@ -22,23 +22,15 @@ export default class VideoSelectionInputModal extends Component {
   };
 
   onUrlVideoSelection = () => {
-    const { componentData, helpers, pubsub, onConfirm, checkUrlValidity } = this.props;
+    const { componentData, helpers, onConfirm, checkUrlValidity } = this.props;
     const { url: src } = this.state;
     if (!checkUrlValidity(src)) {
       this.setState({ showError: true });
       return;
     }
-    if (onConfirm) {
-      onConfirm({ ...componentData, src });
-    } else {
-      pubsub.update('componentData', { src });
-    }
+    onConfirm({ ...componentData, src });
 
-    if (helpers && helpers.onVideoSelected) {
-      helpers.onVideoSelected(src, data =>
-        pubsub.update('componentData', { metadata: { ...data } })
-      );
-    }
+    helpers?.onVideoSelected?.(src, data => this.updateComponentData({ metadata: { ...data } }));
     this.closeModal();
   };
 
@@ -63,30 +55,35 @@ export default class VideoSelectionInputModal extends Component {
     this.input.setSelectionRange(0, this.input.value.length);
   }
 
-  onVideoUpdate = ({ data }, componentData, isCustomVideo = false) => {
-    const { pubsub, helpers } = this.props;
-    const { pathname, thumbnail, url } = data;
-    const src = pathname ? { pathname, thumbnail } : url;
-    pubsub.update('componentData', { src, isCustomVideo });
-    helpers.onVideoSelected(src, data => pubsub.update('componentData', { metadata: { ...data } }));
+  loadLocalVideo = file => {
+    const src = URL.createObjectURL(file);
+    const { componentData, onConfirm } = this.props;
+    onConfirm({ ...componentData, src, isCustomVideo: true });
   };
 
-  loadLocalVideoFromFile = file => {
-    const src = URL.createObjectURL(file);
-    const { componentData, pubsub, onConfirm } = this.props;
-    if (onConfirm) {
-      onConfirm({ ...componentData, src, isCustomVideo: true });
-    } else {
-      pubsub.update('componentData', { src, isCustomVideo: true });
-    }
+  updateVideoComponent = ({ data }, componentData, isCustomVideo = false) => {
+    const { pathname, thumbnail, url } = data;
+    const src = pathname ? { pathname, thumbnail } : url;
+    this.updateComponentData({ src, isCustomVideo });
+  };
+
+  addVideoComponent = ({ data }, componentData, isCustomVideo = false) => {
+    const { onConfirm } = this.props;
+    const { pathname, thumbnail, url } = data;
+    const src = pathname ? { pathname, thumbnail } : url;
+    onConfirm({ ...componentData, src, isCustomVideo });
+  };
+
+  updateComponentData = data => {
+    this.props.pubsub.update('componentData', data);
   };
 
   handleNativeFileUpload = () => {
-    const { componentData } = this.props;
+    const { componentData, handleFileUpload: consumerHandleFileUpload } = this.props;
     const file = this.inputFile.files[0];
-    this.loadLocalVideoFromFile(file);
-    this.props.handleFileUpload(file, ({ data, error }) =>
-      this.onVideoUpdate({ data, error }, componentData, true)
+    this.loadLocalVideo(file);
+    consumerHandleFileUpload(file, ({ data, error }) =>
+      this.updateVideoComponent({ data, error }, componentData, true)
     );
     this.closeModal();
   };
@@ -101,7 +98,6 @@ export default class VideoSelectionInputModal extends Component {
       isMobile,
       languageDir,
       componentData,
-      onVideoUpdate,
     } = this.props;
     const { styles } = this;
     const hasCustomFileUpload = handleFileUpload || handleFileSelection;
@@ -109,10 +105,10 @@ export default class VideoSelectionInputModal extends Component {
     if (handleFileSelection) {
       handleClick = evt => {
         evt.preventDefault();
-        return handleFileSelection(
-          ({ data, error }) => onVideoUpdate({ data, error }, componentData, true),
-          () => this.closeModal()
-        );
+        return handleFileSelection(({ data, error }) => {
+          this.addVideoComponent({ data, error }, componentData, true);
+          this.closeModal();
+        });
       };
     }
     const uploadVideoSection = (

@@ -31,7 +31,10 @@ export default ({ t, settings, isMobile }) => {
       keyName: 'replace',
       type: BUTTONS.EXTERNAL_MODAL,
       icon,
-      modalElement: decorateComponentWithProps(VideoSelectionInputModal, settings),
+      modalElement: decorateComponentWithProps(VideoSelectionInputModal, {
+        ...settings,
+        onConfirm: data => settings.pubsub.update('componentData', data),
+      }),
       modalStyles: getModalStyles({
         customStyles,
         fullScreen: false,
