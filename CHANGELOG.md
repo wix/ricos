@@ -21,6 +21,8 @@
     - [#551](https://github.com/wix-incubator/rich-content/pull/551) adding a tooltip for nofollow tag explanation
   - `image`
     - [#563](https://github.com/wix-incubator/rich-content/pull/563) in-plugin editing enabled for caption
+  - `gallery`
+    - [#625](https://github.com/wix-incubator/rich-content/pull/625) adding videos support, playing in fullscreen
   ### :bug: Bug Fix
   - `giphy`
     - [#621](https://github.com/wix-incubator/rich-content/pull/621) custom icon selection logic fixed
@@ -47,6 +49,8 @@
     - [#564](https://github.com/wix-incubator/rich-content/pull/564) snapshots renaming for gallery and image plugins tests
   - `editor`
     - [#575](https://github.com/wix-incubator/rich-content/pull/575) ltr&rtl css yoshi issues solved (requested by forum)
+  - `fullscreen`
+    - [#625](https://github.com/wix-incubator/rich-content/pull/625) replaced react images with pro gallery's slideshow as fullscreen
 
 </details>
 <hr/>
