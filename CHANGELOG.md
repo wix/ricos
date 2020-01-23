@@ -34,7 +34,7 @@
     - [#566](https://github.com/wix-incubator/rich-content/pull/566) Fix tooltip position in bottom tooltip
   - `gallery`
     - [#602](https://github.com/wix-incubator/rich-content/pull/602) replace gallery image from settings bug
-  - `image`
+  - `common`
     - [#620](https://github.com/wix-incubator/rich-content/pull/620) backward compatibility for legacy image custom size
     
   ### :house: Internal
