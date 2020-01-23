@@ -51,7 +51,8 @@
   },
   "dependencies": {
     "pro-gallery": "^1.7.3",
-    "wix-rich-content-common": "6.6.5"
+    "wix-rich-content-plugin-gallery": "^6.6.8",
+    "wix-rich-content-common": "^6.6.8"
   },
   "unpkg": true,
   "publishConfig": {
