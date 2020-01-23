@@ -1,5 +1,5 @@
 import { EditorState, Modifier, RichUtils, SelectionState, AtomicBlockUtils } from 'draft-js';
-import { cloneDeep, flatMap, findIndex, findLastIndex } from 'lodash';
+import { cloneDeep, flatMap, findIndex, findLastIndex, countBy } from 'lodash';
 
 function createSelection({ blockKey, anchorOffset, focusOffset }) {
   return SelectionState.createEmpty(blockKey).merge({
@@ -333,14 +333,7 @@ export const getEntities = (editorState, entityType = null) => {
   return entities;
 };
 
-function quantitiesOf(entities) {
-  return entities.reduce((countArray, curr) => {
-    return {
-      ...countArray,
-      [curr.type]: !countArray[curr.type] ? 1 : countArray[curr.type] + 1,
-    };
-  }, {});
-}
+const countByType = obj => countBy(obj, x => x.type);
 
 const getBlockTypePlugins = blocks =>
   blocks.filter(block => block.type !== 'unstyled' && block.type !== 'atomic');
@@ -351,8 +344,8 @@ export function getPostContentSummary(editorState) {
   const entries = getEntities(editorState);
   const blockPlugins = getBlockTypePlugins(blocks);
   return {
-    ...quantitiesOf(blockPlugins),
-    ...quantitiesOf(entries),
+    ...countByType(blockPlugins),
+    ...countByType(entries),
   };
 }
 
@@ -360,12 +353,13 @@ export function getPostContentSummary(editorState) {
 //onChanges - for phase 2?
 //Added Plugins - checked elsewhere via toolbar clicks
 export const calculateDiff = async (prevState, newState, onPluginDelete) => {
-  const prevEntities = quantitiesOf(getEntities(prevState));
-  const currEntities = quantitiesOf(getEntities(newState));
+  const countByType = obj => countBy(obj, x => x.type);
+  const prevEntities = countByType(getEntities(prevState));
+  const currEntities = countByType(getEntities(newState));
   const prevBlocks = prevState.getCurrentContent().getBlocksAsArray();
   const currBlocks = newState.getCurrentContent().getBlocksAsArray();
-  const prevBlockPlugins = quantitiesOf(getBlockTypePlugins(prevBlocks));
-  const currBlockPlugins = quantitiesOf(getBlockTypePlugins(currBlocks));
+  const prevBlockPlugins = countByType(getBlockTypePlugins(prevBlocks));
+  const currBlockPlugins = countByType(getBlockTypePlugins(currBlocks));
 
   const prevPluginsTotal = Object.assign(prevEntities, prevBlockPlugins);
   const currPluginsTotal = Object.assign(currEntities, currBlockPlugins);
