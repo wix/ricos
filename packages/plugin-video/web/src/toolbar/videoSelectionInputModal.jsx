@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { TextInput, CloseIcon, Button } from 'wix-rich-content-editor-common';
 import { mergeStyles } from 'wix-rich-content-common';
 import styles from '../../statics/styles/video-selection-input-modal.scss';
+import ReactPlayer from 'react-player';
 
 export default class VideoSelectionInputModal extends Component {
   constructor(props) {
@@ -24,9 +25,9 @@ export default class VideoSelectionInputModal extends Component {
   };
 
   onUrlVideoSelection = () => {
-    const { componentData, helpers, checkUrlValidity } = this.props;
+    const { componentData, helpers } = this.props;
     const { url: src } = this.state;
-    if (!checkUrlValidity(src)) {
+    if (!ReactPlayer.canPlay(src)) {
       this.setState({ showError: true });
       return;
     }
@@ -200,11 +201,8 @@ export default class VideoSelectionInputModal extends Component {
 }
 
 VideoSelectionInputModal.propTypes = {
-  onNativeVideoUpload: PropTypes.func.isRequired,
-  checkUrlValidity: PropTypes.func,
   onReplace: PropTypes.func,
   onConfirm: PropTypes.func,
-  onVideoUpdate: PropTypes.func,
   pubsub: PropTypes.object,
   helpers: PropTypes.object.isRequired,
   componentData: PropTypes.object.isRequired,
