@@ -4,7 +4,6 @@ import { findDOMNode } from 'react-dom';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { isEmpty } from 'lodash';
-import { Context } from 'wix-rich-content-common';
 import Dropdown from '../Components/Dropdown';
 import FileInput from '../Components/FileInput';
 import ToolbarButton from '../Components/ToolbarButton';
@@ -69,6 +68,11 @@ class BaseToolbarButton extends React.Component {
     }
 
     const {
+      helpers,
+      theme,
+      t,
+      anchorTarget,
+      relValue,
       componentState,
       keyName,
       pubsub,
@@ -79,8 +83,6 @@ class BaseToolbarButton extends React.Component {
       modalStylesFn,
       ...otherProps
     } = this.props;
-
-    const { helpers, theme, t, anchorTarget, relValue } = this.context;
 
     if (this.props.type === BUTTONS.FILES && !this.shouldHandleFileSelection) {
       const updateEntity = pubsub.getBlockHandler('handleFilesAdded');
@@ -210,7 +212,6 @@ class BaseToolbarButton extends React.Component {
         showTooltip={showTooltip}
         tooltipText={tooltipText}
         button={toggleButton}
-        tooltipOffset={{ y: -20 }}
       />
     );
   };
@@ -249,7 +250,6 @@ class BaseToolbarButton extends React.Component {
         showTooltip={showTooltip}
         tooltipText={tooltipText}
         button={filesButton}
-        tooltipOffset={{ y: -20 }}
       />
     );
   };
@@ -342,7 +342,5 @@ BaseToolbarButton.propTypes = {
 BaseToolbarButton.defaultProps = {
   settings: {},
 };
-
-BaseToolbarButton.contextType = Context.type;
 
 export default BaseToolbarButton;

@@ -34,11 +34,12 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
     customStyleFn,
     getEditorBounds,
     onOverlayClick,
-    onAtomicBlockFocus,
     disableRightClick,
     commonPubsub,
     defaultPluginData,
     pluginDefaults,
+    initialIntent,
+    languageDir,
   } = config;
   defaultPluginData && (pluginDefaults[config.type] = defaultPluginData);
   const toolbarTheme = { ...getToolbarTheme(config.theme, 'plugin'), ...config.theme };
@@ -61,6 +62,8 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
       uiSettings: config.uiSettings,
       getToolbarSettings: config.getToolbarSettings,
       getEditorBounds,
+      initialIntent,
+      languageDir,
     });
   const InsertPluginButtons =
     settings.showInsertButtons &&
@@ -76,6 +79,8 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
         t,
         isMobile,
         pluginDefaults,
+        initialIntent,
+        languageDir,
       }),
     }));
   const PluginComponent = config.component;
@@ -89,7 +94,6 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
       pluginDecorationProps: config.pluginDecorationProps,
       componentWillReceiveDecorationProps: config.componentWillReceiveDecorationProps,
       onOverlayClick,
-      onAtomicBlockFocus,
       pubsub,
       commonPubsub,
       settings,
@@ -100,6 +104,8 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
       isMobile,
       getEditorBounds,
       disableRightClick,
+      initialIntent,
+      languageDir,
     });
 
   const DecoratedCompWithBase =
@@ -109,7 +115,7 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
 
   const TextButtonMapper = config.toolbar && config.toolbar.TextButtonMapper;
 
-  const blockRendererFn = (contentBlock, { getEditorState, setEditorState, getReadOnly }) => {
+  const blockRendererFn = (contentBlock, { getEditorState, setEditorState }) => {
     if (contentBlock.getType() === 'atomic') {
       // TODO subject to change for draft-js next release
       const contentState = getEditorState().getCurrentContent();
@@ -126,7 +132,6 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
               getData: getData(contentBlock, { getEditorState }),
               setData: setData(contentBlock, { getEditorState, setEditorState }),
               deleteBlock: deleteEntity(contentBlock, { getEditorState, setEditorState }),
-              readOnly: getReadOnly(),
             },
           };
         }

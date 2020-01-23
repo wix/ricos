@@ -19,7 +19,7 @@ class VideoComponent extends React.Component {
 
   constructor(props) {
     super(props);
-    const isPlayable = !props.blockProps || props.blockProps.readOnly === true;
+    const isPlayable = !props.blockProps;
     this.state = {
       isLoading: false,
       isLoaded: false,
@@ -65,14 +65,12 @@ class VideoComponent extends React.Component {
 
   renderPlayer = () => {
     const { componentData, settings } = this.props;
-    const { isPlayable } = this.state;
     return (
       <VideoViewer
         ref={this.setPlayer}
         componentData={componentData}
         settings={settings}
         onReady={this.handleReady}
-        isPlayable={isPlayable}
       />
     );
   };

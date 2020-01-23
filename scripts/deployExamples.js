@@ -9,6 +9,12 @@ const EXAMPLES_TO_DEPLOY = [
     name: 'rich-content',
     path: 'examples/main',
   },
+  {
+    name: 'rich-content-storybook',
+    path: 'examples/storybook',
+    buildCmd: 'build-storybook -s public',
+    dist: 'storybook-static',
+  },
 ];
 
 const exec = cmd => execSync(cmd, { stdio: 'inherit' });
@@ -17,28 +23,22 @@ const fqdn = subdomain => `${subdomain}.surge.sh/`;
 
 const generateSubdomain = exampleName => {
   const { version } = require('../lerna.json');
-  let subdomain = exampleName;
-  const { TRAVIS_PULL_REQUEST } = process.env;
-  if (TRAVIS_PULL_REQUEST && TRAVIS_PULL_REQUEST !== 'false') {
-    subdomain += `-pr-${TRAVIS_PULL_REQUEST}`;
-  } else {
-    subdomain += `-${version.replace(/\./g, '-')}`;
-  }
-  return subdomain;
+  const { TRAVIS_BRANCH } = process.env;
+  const postfix = !TRAVIS_BRANCH.startsWith('release') ? TRAVIS_BRANCH : version;
+  return exampleName + `-${postfix.replace(/(\.)|(\/)/g, '-')}`;
 };
 
-function build() {
-  const buildCommand = 'npm run build';
-  console.log(chalk.magenta(`Running: "${buildCommand}"`));
+function build({ buildCmd = 'npm run build' }) {
+  console.log(chalk.magenta(`Running: "${buildCmd}"`));
   exec('npm run clean');
-  exec(buildCommand);
+  exec(buildCmd);
 }
 
-function deploy(name) {
+function deploy({ name, dist = 'dist' }) {
   console.log(chalk.cyan(`Deploying ${name} example to surge...`));
   const subdomain = generateSubdomain(name);
   const domain = fqdn(subdomain);
-  const deployCommand = `npx surge dist ${domain}`;
+  const deployCommand = `npx surge ${dist} ${domain}`;
   try {
     console.log(chalk.magenta(`Running "${deployCommand}`));
     exec(deployCommand);
@@ -49,10 +49,8 @@ function deploy(name) {
 
 function run() {
   let skip;
-  const { SURGE_LOGIN, TRAVIS_BRANCH, TRAVIS_PULL_REQUEST, CI } = process.env;
-  if (!TRAVIS_BRANCH.startsWith('release') && TRAVIS_PULL_REQUEST === 'false') {
-    skip = 'Not on a release branch or PR';
-  } else if (!CI) {
+  const { SURGE_LOGIN, CI } = process.env;
+  if (!CI) {
     skip = 'Not in CI';
   } else if (!SURGE_LOGIN) {
     skip = 'PR from fork';
@@ -66,8 +64,8 @@ function run() {
     process.chdir(path.resolve(process.cwd(), example.path));
 
     console.log(chalk.blue(`\nDeploying ${example.name} example...`));
-    build();
-    deploy(example.name);
+    build(example);
+    deploy(example);
 
     process.chdir(path.resolve('../..'));
   }

@@ -20,7 +20,7 @@ const modalStyleDefaults = {
   },
 };
 const anchorTarget = '_blank';
-const relValue = 'nofollow';
+const relValue = 'noopener';
 
 export default class Editor extends PureComponent {
   state = {};

@@ -55,15 +55,23 @@ class ImageSettings extends Component {
 
   linkPanelToLink = ({ url, targetBlank, nofollow, isValid }) => ({
     url,
-    target: targetBlank ? '_blank' : this.props.anchorTarget || '_self',
-    rel: nofollow ? 'nofollow' : this.props.relValue || 'noopener',
+    target: targetBlank
+      ? '_blank'
+      : this.props.anchorTarget !== '_blank'
+      ? this.props.anchorTarget
+      : '_self',
+    rel: nofollow
+      ? 'nofollow'
+      : this.props.relValue !== 'nofollow'
+      ? this.props.relValue
+      : 'noopener',
     isValid,
   });
 
   linkToLinkPanel = ({ url = '', target, rel, isValid }) => ({
     url,
-    targetBlank: target === '_blank',
-    nofollow: rel === 'nofollow',
+    targetBlank: target ? target === '_blank' : this.props.anchorTarget === '_blank',
+    nofollow: rel ? rel === 'nofollow' : this.props.relValue === 'nofollow',
     isValid,
   });
   render() {
@@ -94,7 +102,7 @@ class ImageSettings extends Component {
     const showRelValueCheckbox =
       nofollowRelToggleVisibilityFn && nofollowRelToggleVisibilityFn(relValue);
 
-    const { metadata } = image;
+    const { metadata } = image || {};
 
     /* eslint-disable jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/click-events-have-key-events */
     return (
