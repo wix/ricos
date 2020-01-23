@@ -323,7 +323,8 @@ export const getEntities = (editorState, entityType = null) => {
 
   currentContent.getBlockMap().forEach(block => {
     block.findEntityRanges(character => {
-      const entity = currentContent.getEntity(character.getEntity());
+      const char = character.getEntity();
+      const entity = !!char && currentContent.getEntity(char);
       if (!entityType || entity.getType() === entityType) {
         entities.push(entity);
       }

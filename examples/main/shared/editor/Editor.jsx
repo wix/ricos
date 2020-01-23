@@ -178,7 +178,7 @@ export default class Editor extends PureComponent {
           relValue={relValue}
           locale={this.props.locale}
           localeResource={this.props.localeResource}
-          puginHooks={debugBiLoggers}
+          pluginHooks={debugBiLoggers}
         // siteDomain="https://www.wix.com"
         />
 

@@ -32,7 +32,7 @@ export default ({
       const { toolbarName } = props;
       this.styles = mergeStyles({ styles, theme: buttonStyles });
       this.buttonRef = React.createRef();
-      this.onPluginAdd = () => helpers?.onPluginAdd?.(blockType, toolbarName);
+      this.onPluginAdd = name => helpers?.onPluginAdd?.(blockType, name || toolbarName);
     }
 
     componentDidMount() {
@@ -96,7 +96,7 @@ export default ({
           this.toggleButtonModal(event);
           break;
         case 'custom-block':
-          this.onPluginAdd(blockType, name);
+          this.onPluginAdd(name);
           this.addCustomBlock(button);
           break;
         default:
