@@ -67,5 +67,4 @@ Fullscreen.propTypes = {
   locale: PropTypes.string,
   relValue: PropTypes.string,
   anchorTarget: PropTypes.string,
-  container: PropTypes.object,
 };
