@@ -14,6 +14,8 @@ export default class VideoSelectionInputModal extends Component {
       errorMsg: '',
     };
     this.id = `VideoUploadModal_FileInput_${Math.floor(Math.random() * 9999)}`;
+    const { onConfirm, onReplace } = this.props;
+    this.onConfirm = onConfirm || onReplace;
   }
 
   onUrlChange = e => {
@@ -22,13 +24,13 @@ export default class VideoSelectionInputModal extends Component {
   };
 
   onUrlVideoSelection = () => {
-    const { componentData, helpers, onConfirm, checkUrlValidity } = this.props;
+    const { componentData, helpers, checkUrlValidity } = this.props;
     const { url: src } = this.state;
     if (!checkUrlValidity(src)) {
       this.setState({ showError: true });
       return;
     }
-    onConfirm({ ...componentData, src });
+    this.onConfirm({ ...componentData, src });
 
     helpers?.onVideoSelected?.(src, data => this.updateComponentData({ metadata: { ...data } }));
     this.closeModal();
@@ -57,8 +59,8 @@ export default class VideoSelectionInputModal extends Component {
 
   loadLocalVideo = file => {
     const src = URL.createObjectURL(file);
-    const { componentData, onConfirm } = this.props;
-    onConfirm({ ...componentData, src, isCustomVideo: true });
+    const { componentData } = this.props;
+    this.onConfirm({ ...componentData, src, isCustomVideo: true });
   };
 
   updateVideoComponent = ({ data }, componentData, isCustomVideo = false) => {
@@ -68,10 +70,9 @@ export default class VideoSelectionInputModal extends Component {
   };
 
   addVideoComponent = ({ data }, componentData, isCustomVideo = false) => {
-    const { onConfirm } = this.props;
     const { pathname, thumbnail, url } = data;
     const src = pathname ? { pathname, thumbnail } : url;
-    onConfirm({ ...componentData, src, isCustomVideo });
+    this.onConfirm({ ...componentData, src, isCustomVideo });
   };
 
   updateComponentData = data => {
@@ -201,6 +202,7 @@ export default class VideoSelectionInputModal extends Component {
 VideoSelectionInputModal.propTypes = {
   onNativeVideoUpload: PropTypes.func.isRequired,
   checkUrlValidity: PropTypes.func,
+  onReplace: PropTypes.func,
   onConfirm: PropTypes.func,
   onVideoUpdate: PropTypes.func,
   pubsub: PropTypes.object,

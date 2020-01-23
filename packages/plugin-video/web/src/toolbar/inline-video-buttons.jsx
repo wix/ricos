@@ -33,7 +33,6 @@ export default ({ t, settings, isMobile }) => {
       icon,
       modalElement: decorateComponentWithProps(VideoSelectionInputModal, {
         ...settings,
-        onConfirm: data => settings.pubsub.update('componentData', data),
       }),
       modalStyles: getModalStyles({
         customStyles,
