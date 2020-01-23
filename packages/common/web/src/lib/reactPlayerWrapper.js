@@ -13,15 +13,6 @@ export default class ReactPlayerWrapper extends Component {
       vimeoLoaded: false,
       isPlaying: false,
     };
-    this.overlayStyles = {
-      display: 'block',
-      width: '100%',
-      height: '100%',
-      position: 'absolute',
-      zIndex: 2000,
-      top: 0,
-      left: 0,
-    };
   }
 
   isVimeoAndRequireJS = () =>
@@ -36,34 +27,20 @@ export default class ReactPlayerWrapper extends Component {
     }
   }
 
-  onOverlayClick = event => {
-    event.preventDefault();
-    this.setState({ isPlaying: !this.state.isPlaying });
-  };
-
   render() {
     if (!this.state.vimeoLoaded && this.isVimeoAndRequireJS()) {
       return null;
     }
-    const { isPlayable, styles, disabled, shouldRenderOverlay } = this.props;
+    const { isPlayable, styles, disabled } = this.props;
     return (
-      <div>
-        <ReactPlayer
-          playing={this.state.isPlaying && !disabled}
-          onPlay={() => this.setState({ isPlaying: true })}
-          onPause={() => this.setState({ isPlaying: false })}
-          style={styles}
-          {...this.props}
-          light={!isPlayable}
-        />
-        {shouldRenderOverlay && (
-          <div
-            role="none"
-            style={this.overlayStyles}
-            onClick={event => this.onOverlayClick(event)}
-          />
-        )}
-      </div>
+      <ReactPlayer
+        playing={this.state.isPlaying && !disabled}
+        onPlay={() => this.setState({ isPlaying: true })}
+        onPause={() => this.setState({ isPlaying: false })}
+        style={styles}
+        {...this.props}
+        light={!isPlayable}
+      />
     );
   }
 }
@@ -73,12 +50,10 @@ ReactPlayerWrapper.propTypes = {
   disabled: PropTypes.bool,
   isPlayable: PropTypes.bool,
   styles: PropTypes.object,
-  shouldRenderOverlay: PropTypes.bool,
 };
 
 ReactPlayerWrapper.defaultProps = {
   isPlayable: true,
-  shouldRenderOverlay: false,
 };
 
 function isVimeoUrl(url) {
