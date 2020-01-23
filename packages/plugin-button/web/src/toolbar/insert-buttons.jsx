@@ -3,7 +3,7 @@ import { InsertPluginIcon } from '../icons';
 import { getDefaultComponentData } from '../constants';
 
 export default ({ helpers, t, settings }) => {
-  const Icon = settings?.toolbar?.icons?.Button || InsertPluginIcon;
+  const Icon = settings?.toolbar?.icons?.InsertPluginButtonIcon || InsertPluginIcon;
   const rel = settings?.relValue === '_nofollow';
   const target = settings?.anchorTarget ? settings?.anchorTarget === '_blank' : true;
   return [

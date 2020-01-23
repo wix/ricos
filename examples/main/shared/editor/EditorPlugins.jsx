@@ -2,7 +2,7 @@ import React from 'react';
 import { createLinkPlugin, LINK_TYPE } from 'wix-rich-content-plugin-link';
 import { createLineSpacingPlugin, LINE_SPACING_TYPE } from 'wix-rich-content-plugin-line-spacing';
 import { createHashtagPlugin, HASHTAG_TYPE } from 'wix-rich-content-plugin-hashtag';
-import { createEmojiPlugin } from 'wix-rich-content-plugin-emoji';
+import { createEmojiPlugin, EMOJI_TYPE } from 'wix-rich-content-plugin-emoji';
 import { createImagePlugin, IMAGE_TYPE } from 'wix-rich-content-plugin-image';
 import { createUndoRedoPlugin, UNDO_REDO_TYPE } from 'wix-rich-content-plugin-undo-redo';
 import { createGalleryPlugin, GALLERY_TYPE } from 'wix-rich-content-plugin-gallery';
@@ -170,10 +170,19 @@ const uiSettings = {
 };
 
 export const config = {
+  [EMOJI_TYPE]: {
+    // toolbar: {
+    //   icons: {
+    //     InsertPluginButtonIcon: MyCustomIcon,
+    //   },
+    // },
+  },
+
   [UNDO_REDO_TYPE]: {
     // toolbar: {
     //   icons: {
-    //     Undo: SizeSmallRightIcon, // insert plugin icon
+    //     Undo: MyCustomIcon, // insert plugin icon
+    //     Redo: MyCustomIcon, // insert plugin icon
     //   },
     // },
   },
@@ -183,7 +192,7 @@ export const config = {
       typeof window !== 'undefined' && document.getElementsByClassName('editor-example')[0],
     // toolbar: {
     //   icons: {
-    //     Gallery: MyCustomIcon, // insert plugin icon
+    //     InsertPluginButtonIcon: MyCustomIcon,
     //   },
     // },
   },
@@ -207,7 +216,7 @@ export const config = {
     // createGalleryForMultipleImages: true,
     // toolbar: {
     //   icons: {
-    //     Image: MyCustomIcon, // insert plugin icon
+    //     InsertPluginButtonIcon: MyCustomIcon,
     //     alignLeft: MyCustomIcon,
     //     link: MyCustomIcon,
     //     sizeOriginal: MyCustomIcon,
@@ -221,6 +230,7 @@ export const config = {
     //     replace: MyCustomIcon,
     //     delete: SizeSmallRightIcon,
     //   },
+    // },
     // },
   },
   [HASHTAG_TYPE]: {
@@ -239,7 +249,7 @@ export const config = {
     maxHeight: 1200,
     // toolbar: {
     //   icons: {
-    //     HTML: MyCustomIcon, // insert plugin icon
+    //     InsertPluginButtonIcon: MyCustomIcon,
     //   },
     // },
   },
@@ -278,7 +288,7 @@ export const config = {
   [LINE_SPACING_TYPE]: {
     // toolbar: {
     //   icons: {
-    //     'line-spacing': MyCustomIcon, // insert plugin icon
+    //     InsertPluginButtonIcon: MyCustomIcon,
     //   },
     // },
     defaultSpacing: {
@@ -291,26 +301,38 @@ export const config = {
   [LINK_TYPE]: {
     // toolbar: {
     //   icons: {
-    //     link: MyCustomIcon, // insert plugin icon
+    //     InsertPluginButtonIcon: MyCustomIcon,
     //   },
     // },
     onClick: (event, url) => console.log('link clicked!', url),
   },
-  [SOUND_CLOUD_TYPE]: {},
-  [CODE_BLOCK_TYPE]: {
+  [SOUND_CLOUD_TYPE]: {
     // toolbar: {
     //   icons: {
-    //     codeBlock: MyCustomIcon, // insert plugin icon
+    //     InsertPluginButtonIcon: MyCustomIcon,
     //   },
     // },
   },
-  [DIVIDER_TYPE]: {},
+  [CODE_BLOCK_TYPE]: {
+    // toolbar: {
+    //   icons: {
+    //     InsertPluginButtonIcon: MyCustomIcon,
+    //   },
+    // },
+  },
+  [DIVIDER_TYPE]: {
+    // toolbar: {
+    //   icons: {
+    //     InsertPluginButtonIcon: MyCustomIcon,
+    //   },
+    // },
+  },
   // [EXTERNAL_EMOJI_TYPE]: {},
   [VIDEO_TYPE]: {
     toolbar: {
       hidden: [],
       // icons: {
-      //   Video: MyCustomIcon, //insert plugin icon
+      //   InsertPluginButtonIcon: MyCustomIcon,
       // },
     },
     //Here you can call your custom video upload functionality (comment function to disable custom upload)
@@ -368,7 +390,7 @@ export const config = {
     giphySdkApiKey: process.env.GIPHY_API_KEY || 'HXSsAGVNzjeUjhKfhhD9noF8sIbpYDsV',
     // toolbar: {
     //   icons: {
-    //     GIF: MyCustomIcon, // insert plugin icon
+    //     InsertPluginButtonIcon: MyCustomIcon,
     //   },
     // },
     sizes: { desktop: 'original', mobile: 'original' }, // original or downsizedSmall are supported
@@ -393,14 +415,14 @@ export const config = {
     },
     // toolbar: {
     //   icons: {
-    //     Map: MyCustomIcon,  // insert plugin icon
+    //     InsertPluginButtonIcon: MyCustomIcon,
     //   },
     // },
   },
   [FILE_UPLOAD_TYPE]: {
     // toolbar: {
     //   icons: {
-    // UploadFile: MyCustomIcon, // insert plugin icon
+    //     InsertPluginButtonIcon: MyCustomIcon,
     //   },
     // },
     accept: '*',
@@ -430,11 +452,11 @@ export const config = {
     // },
   },
   [BUTTON_TYPE]: {
-    //   toolbar: {
-    //     icons: {
-    //       Button: MyCustomIcon, // insert plugin icon
-    //     },
+    // toolbar: {
+    //   icons: {
+    //     InsertPluginButtonIcon: MyCustomIcon,
     //   },
+    // },
     palette: ['#FEFDFD', '#D5D4D4', '#ABCAFF', '#81B0FF', '#0261FF', '#0141AA'],
     selectionBackgroundColor: 'fuchsia',
     selectionBorderColor: '#FFF',
@@ -462,7 +484,7 @@ export const config = {
   [TEXT_HIGHLIGHT_TYPE]: {
     // toolbar: {
     //   icons: {
-    //     TextHighlight: CustomIcon,
+    //     InsertPluginButtonIcon: MyCustomIcon,
     //   },
     // },
     colorScheme,
@@ -474,7 +496,7 @@ export const config = {
   [TEXT_COLOR_TYPE]: {
     // toolbar: {
     //   icons: {
-    //     TextColor: CustomIcon,
+    //     InsertPluginButtonIcon: MyCustomIcon,
     //   },
     // },
     colorScheme,

@@ -48,7 +48,7 @@ const createUnderlyingPlugin = (/*{ theme }*/) => ({
 
 const createCodeBlockPlugin = (config = {}) => {
   const type = CODE_BLOCK_TYPE;
-  const icon = config?.['code-block']?.toolbar?.icons?.codeBlock;
+  const icon = config?.['code-block']?.toolbar?.icons?.InsertPluginButtonIcon;
   const {
     helpers,
     theme,
