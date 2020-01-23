@@ -341,11 +341,14 @@ function quantitiesOf(entities) {
   }, {});
 }
 
+const getBlockTypePlugins = blocks =>
+  blocks.filter(block => block.type !== 'unstyled' && block.type !== 'atomic');
+
 export function getPostContentSummary(editorState) {
   if (Object.entries(editorState).length === 0) return;
   const blocks = editorState.getCurrentContent().getBlocksAsArray();
   const entries = getEntities(editorState);
-  const blockPlugins = blocks.filter(block => block.type !== 'unstyled' && block.type !== 'atomic');
+  const blockPlugins = getBlockTypePlugins(blocks);
   return {
     ...quantitiesOf(blockPlugins),
     ...quantitiesOf(entries),
@@ -358,12 +361,10 @@ export function getPostContentSummary(editorState) {
 export const calculateDiff = async (prevState, newState, onPluginDelete) => {
   const prevEntities = quantitiesOf(getEntities(prevState));
   const currEntities = quantitiesOf(getEntities(newState));
-  const getBlockPlugins = blocks =>
-    blocks.filter(block => block.type !== 'unstyled' && block.type !== 'atomic');
   const prevBlocks = prevState.getCurrentContent().getBlocksAsArray();
   const currBlocks = newState.getCurrentContent().getBlocksAsArray();
-  const prevBlockPlugins = quantitiesOf(getBlockPlugins(prevBlocks));
-  const currBlockPlugins = quantitiesOf(getBlockPlugins(currBlocks));
+  const prevBlockPlugins = quantitiesOf(getBlockTypePlugins(prevBlocks));
+  const currBlockPlugins = quantitiesOf(getBlockTypePlugins(currBlocks));
 
   const prevPluginsTotal = Object.assign(prevEntities, prevBlockPlugins);
   const currPluginsTotal = Object.assign(currEntities, currBlockPlugins);

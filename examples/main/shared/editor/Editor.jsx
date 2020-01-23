@@ -153,7 +153,6 @@ export default class Editor extends PureComponent {
     const { MobileToolbar, TextToolbar } = this.state;
     const textToolbarType = this.props.staticToolbar && !this.props.isMobile ? 'static' : null;
     const { onRequestClose } = this.state.modalProps || {};
-    const { onPluginAdd, onPluginChange, onPluginDelete } = debugBiLoggers();
     return (
       <div className="editor">
         {MobileToolbar && <MobileToolbar />}
@@ -179,9 +178,7 @@ export default class Editor extends PureComponent {
           relValue={relValue}
           locale={this.props.locale}
           localeResource={this.props.localeResource}
-          onPluginAdd={onPluginAdd}
-          onPluginChange={onPluginChange}
-          onPluginDelete={onPluginDelete}
+          puginHooks={debugBiLoggers}
         // siteDomain="https://www.wix.com"
         />
 

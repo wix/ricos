@@ -63,7 +63,7 @@ export default ({
     };
 
     createBlock = (editorState, data, type) => {
-      this.onPluginAdd(blockType, this.state.toolbarName);
+      this.onPluginAdd();
       this.props.hidePopup?.();
       return createBlock(editorState, data, type);
     };
