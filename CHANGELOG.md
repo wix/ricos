@@ -33,7 +33,6 @@
     - [#626](https://github.com/wix-incubator/rich-content/pull/626) insertLinkAtCurrentSelection utility fixed
   - `link`
     - [#546](https://github.com/wix-incubator/rich-content/pull/546) saves the last data and the initial state of the checkboxes("Open in a new tab", "Add a nofollow tag") is according to the defaults (anchorTarget, relValue)
-    - [#601](https://github.com/wix-incubator/rich-content/pull/601) in order to edit the link settings its enough to select only part of the words that belongs to the link
     - [#566](https://github.com/wix-incubator/rich-content/pull/566) Fix tooltip position in bottom tooltip
   - `gallery`
     - [#602](https://github.com/wix-incubator/rich-content/pull/602) replace gallery image from settings bug
@@ -54,6 +53,7 @@
 ### :bug: Bug Fix
 - `editor-common`
   - [#608](https://github.com/wix-incubator/rich-content/pull/608) fileSelectionChanged works for a single image
+  - [#601](https://github.com/wix-incubator/rich-content/pull/601) in order to edit the link settings its enough to select only part of the words that belongs to the link
 
 ## 6.6.7 (Jan 16, 2020)
 ### :bug: Bug Fix
