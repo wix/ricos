@@ -29,8 +29,8 @@ export const insertLinkInPosition = (
 export const insertLinkAtCurrentSelection = (editorState, data) => {
   let selection = getSelection(editorState);
   let newEditorState = editorState;
+  const { url, targetBlank, relValue, anchorTarget, nofollow } = data;
   if (selection.isCollapsed()) {
-    const { url } = data;
     const contentState = Modifier.insertText(editorState.getCurrentContent(), selection, url);
     selection = selection.merge({ focusOffset: selection.getFocusOffset() + url.length });
     newEditorState = EditorState.push(editorState, contentState, 'insert-characters');
@@ -41,7 +41,11 @@ export const insertLinkAtCurrentSelection = (editorState, data) => {
     const blockKey = selection.getStartKey();
     const block = contentState.getBlockForKey(blockKey);
     const entityKey = block.getEntityAt(selection.getStartOffset());
-    editorStateWithLink = setEntityData(newEditorState, entityKey, data);
+    editorStateWithLink = setEntityData(newEditorState, entityKey, {
+      url,
+      target: getLinkTarget(targetBlank, anchorTarget),
+      rel: getLinkRel(nofollow, relValue),
+    });
   } else {
     editorStateWithLink = insertLink(newEditorState, selection, data);
   }
@@ -60,8 +64,13 @@ function isSelectionBelongsToExsistingLink(editorState, selection) {
   });
 }
 
-const defaultAnchorTarget = '_self';
-const defaultRelValue = 'noopener';
+function getLinkTarget(targetBlank, anchorTarget) {
+  return targetBlank ? '_blank' : anchorTarget || '_self';
+}
+
+function getLinkRel(nofollow, relValue) {
+  return nofollow ? 'nofollow' : relValue || 'noopener noreferrer';
+}
 
 function insertLink(
   editorState,
@@ -76,21 +85,12 @@ function insertLink(
   ).set('selectionAfter', oldSelection);
   const newEditorState = EditorState.push(editorState, newContentState, 'change-inline-style');
 
-  let target = '_blank',
-    rel = 'nofollow';
-  if (!targetBlank) {
-    target = anchorTarget !== '_blank' ? anchorTarget : '_self';
-  }
-  if (!nofollow) {
-    rel = relValue !== 'nofollow' ? relValue : 'noopener';
-  }
-
   return addEntity(newEditorState, selection, {
     type: 'LINK',
     data: {
       url,
-      target,
-      rel,
+      target: getLinkTarget(targetBlank, anchorTarget),
+      rel: getLinkRel(nofollow, relValue),
     },
   });
 }
@@ -339,8 +339,8 @@ export function fixPastedLinks(editorState, { anchorTarget, relValue }) {
     if (url) {
       content.replaceEntityData(entityKey, {
         url,
-        target: anchorTarget || defaultAnchorTarget,
-        rel: relValue || defaultRelValue,
+        target: anchorTarget || '_self',
+        rel: relValue || 'noopener noreferrer',
       });
     }
   });
