@@ -19,11 +19,18 @@ const createPlugins = ({
   getEditorState,
   setEditorState,
   getEditorBounds,
+  locale,
+  shouldRenderOptimizedImages,
+  siteDomain,
+  setInPluginEditingMode,
+  getInPluginEditingMode,
 }) => {
   const focusPlugin = createFocusPlugin();
   const resizePlugin = createResizeDecoration({
     horizontal: 'absolute',
     minWidth: 350,
+    theme,
+    isMobile,
   });
 
   const dndPlugin = createBlockDndPlugin();
@@ -53,6 +60,11 @@ const createPlugins = ({
     getEditorBounds,
     commonPubsub: simplePubsub(),
     pluginDefaults,
+    locale,
+    shouldRenderOptimizedImages,
+    siteDomain,
+    setInPluginEditingMode,
+    getInPluginEditingMode,
     ...config,
   };
 
