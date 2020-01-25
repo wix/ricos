@@ -82,7 +82,7 @@ class HtmlComponent extends Component {
   render() {
     const { html } = this.state;
     this.styles =
-      this.styles || mergeStyles({ styles: htmlComponentStyles, theme: this.context.theme });
+      this.styles || mergeStyles({ styles: htmlComponentStyles, theme: this.props.theme });
     const { props } = this;
     validate(props.componentData, pluginHtmlSchema);
     const {
@@ -91,13 +91,13 @@ class HtmlComponent extends Component {
     } = props;
 
     const style = {
-      width: this.context.isMobile ? 'auto' : currentWidth || width || INIT_WIDTH,
+      width: this.props.isMobile ? 'auto' : currentWidth || width || INIT_WIDTH,
       height: currentHeight || height || INIT_HEIGHT,
       maxHeight: this.state.iframeHeight,
     };
 
     return (
-      <ViewportRenderer containerStyle={style}>
+      <ViewportRenderer containerStyle={style} theme={this.props.theme}>
         <div
           className={this.styles.htmlComponent}
           ref={ref => (this.element = ref)}
@@ -140,6 +140,8 @@ HtmlComponent.propTypes = {
   store: PropTypes.object,
   block: PropTypes.object,
   siteDomain: PropTypes.string.isRequired,
+  theme: PropTypes.object.isRequired,
+  isMobile: PropTypes.bool.isRequired,
 };
 
 export { HtmlComponent as Component, DEFAULTS };

@@ -64,13 +64,15 @@ class VideoComponent extends React.Component {
   };
 
   renderPlayer = () => {
-    const { componentData, settings } = this.props;
+    const { componentData, disabled, disableRightClick, settings } = this.props;
     return (
       <VideoViewer
         ref={this.setPlayer}
         componentData={componentData}
         settings={settings}
         onReady={this.handleReady}
+        disabled={disabled}
+        disableRightClick={disableRightClick}
       />
     );
   };
@@ -113,6 +115,8 @@ VideoComponent.propTypes = {
   className: PropTypes.string.isRequired,
   theme: PropTypes.object.isRequired,
   t: PropTypes.func.isRequired,
+  disableRightClick: PropTypes.bool.isRequired,
+  disabled: PropTypes.bool.isRequired,
 };
 
 export { VideoComponent as Component, DEFAULTS };

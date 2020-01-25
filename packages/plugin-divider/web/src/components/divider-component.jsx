@@ -40,6 +40,7 @@ class DividerComponent extends PureComponent {
           size={size}
           alignment={alignment}
           styles={this.styles}
+          isMobile={this.props.isMobile}
         />
       </div>
     );
