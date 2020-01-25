@@ -47,6 +47,14 @@ class PluginViewer extends PureComponent {
       anchorTarget,
       relValue,
       config,
+      helpers,
+      t,
+      isMobile,
+      locale,
+      disabled,
+      shouldRenderOptimizedImages,
+      siteDomain,
+      disableRightClick,
     } = this.props;
     const { component: Component, elementType } = pluginComponent;
     const { container } = pluginComponent.classNameStrategies || {};
@@ -56,6 +64,17 @@ class PluginViewer extends PureComponent {
       settings,
       children,
       entityIndex,
+      theme,
+      helpers,
+      anchorTarget,
+      relValue,
+      t,
+      isMobile,
+      locale,
+      disabled,
+      shouldRenderOptimizedImages,
+      siteDomain,
+      disableRightClick,
     };
 
     if (Component) {
@@ -116,6 +135,13 @@ PluginViewer.propTypes = {
   relValue: PropTypes.string.isRequired,
   config: PropTypes.object.isRequired,
   isMobile: PropTypes.bool.isRequired,
+  helpers: PropTypes.object.isRequired,
+  t: PropTypes.func.isRequired,
+  locale: PropTypes.string.isRequired,
+  disabled: PropTypes.bool.isRequired,
+  shouldRenderOptimizedImages: PropTypes.bool.isRequired,
+  siteDomain: PropTypes.string.isRequired,
+  disableRightClick: PropTypes.bool.isRequired,
 };
 
 PluginViewer.defaultProps = {
