@@ -5,7 +5,6 @@ import {
   mergeStyles,
   AccessibilityListener,
   normalizeInitialState,
-  Context,
   getLangDir,
 } from 'wix-rich-content-common';
 import { convertToReact } from './utils/convertContentState';
@@ -92,10 +91,8 @@ class RichContentViewer extends Component {
 
     return (
       <div className={wrapperClassName} dir={getLangDir(locale)}>
-        <Context.Provider value={this.state.contextualData}>
-          <div className={editorClassName}>{output}</div>
-          <AccessibilityListener />
-        </Context.Provider>
+        <div className={editorClassName}>{output}</div>
+        <AccessibilityListener isMobile={this.props.isMobile} />
       </div>
     );
   }

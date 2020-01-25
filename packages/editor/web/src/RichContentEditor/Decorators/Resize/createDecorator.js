@@ -2,9 +2,8 @@
  * Based on draft-js-resizeable-plugin with following changes:
  *  - additional props width, containerClassName are rendered on WrappedComponent
  *  - styles for handles added
- *  - context is available (for theme access)
  *  - onMove: isLeft, isRight calculation considers current size and alignment
- *  - config accepts minHeight, minWidth instead of hard-coded values
+ *  - config accepts isMobile, minHeight, minWidth instead of hard-coded values
  *
  *  TODO: mouse handlers can be optimized (vertical resizing is disabled)
  */
@@ -12,7 +11,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { mergeStyles, Context } from 'wix-rich-content-common';
+import { mergeStyles } from 'wix-rich-content-common';
 import deafultStyles from '../../../../statics/styles/resizeable.rtlignore.scss';
 
 const getDisplayName = WrappedComponent => {
@@ -24,7 +23,6 @@ const round = (x, steps) => Math.ceil(x / steps) * steps;
 
 export default ({ config, store }) => WrappedComponent =>
   class BlockResizeableDecorator extends Component {
-    static contextType = Context.type;
     static displayName = `Resizable(${getDisplayName(WrappedComponent)})`;
     static WrappedComponent = WrappedComponent.WrappedComponent || WrappedComponent;
 
@@ -85,8 +83,8 @@ export default ({ config, store }) => WrappedComponent =>
       const isBottom =
         vertical && vertical !== 'auto' ? y >= b.height - tolerance && y < b.height : false;
 
-      isLeft = isLeft && alignment !== 'left' && size !== 'fullWidth' && !this.context.isMobile;
-      isRight = isRight && alignment !== 'right' && size !== 'fullWidth' && !this.context.isMobile;
+      isLeft = isLeft && alignment !== 'left' && size !== 'fullWidth' && !config.isMobile;
+      isRight = isRight && alignment !== 'right' && size !== 'fullWidth' && !config.isMobile;
 
       const canResize = isTop || isLeft || isRight || isBottom;
 

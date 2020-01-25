@@ -20,12 +20,7 @@ import {
   getBlockInfo,
   getFocusedBlockKey,
 } from 'wix-rich-content-editor-common';
-import {
-  Context,
-  AccessibilityListener,
-  normalizeInitialState,
-  getLangDir,
-} from 'wix-rich-content-common';
+import { AccessibilityListener, normalizeInitialState, getLangDir } from 'wix-rich-content-common';
 import styles from '../../statics/styles/rich-content-editor.scss';
 import draftStyles from '../../statics/styles/draft.rtlignore.scss';
 
@@ -47,11 +42,8 @@ class RichContentEditor extends Component {
       props.config.uiSettings || {}
     );
 
-    this.initContext();
     this.initPlugins();
-  }
-  componentDidMount() {
-    this.resetInitialIntent();
+    this.initContext();
   }
 
   componentDidUpdate() {
@@ -74,12 +66,6 @@ class RichContentEditor extends Component {
         onAtomicBlockFocus({ blockKey, type, data });
       }
       onAtomicBlockFocus({});
-    }
-  };
-
-  resetInitialIntent = () => {
-    if (this.contextualData.initialIntent) {
-      this.contextualData.initialIntent = '';
     }
   };
 
@@ -398,9 +384,9 @@ class RichContentEditor extends Component {
     );
   };
 
-  renderAccessibilityListener = () => <AccessibilityListener />;
+  renderAccessibilityListener = () => <AccessibilityListener isMobile={this.props.isMobile} />;
 
-  renderTooltipHost = () => <TooltipHost />;
+  renderTooltipHost = () => <TooltipHost theme={this.state.theme} />;
 
   styleToClass = ([key, val]) => `rich_content_${key}-${val.toString().replace('.', '_')}`;
 
@@ -433,27 +419,25 @@ class RichContentEditor extends Component {
       [theme.desktop]: !isMobile && theme && theme.desktop,
     });
     return (
-      <Context.Provider value={this.contextualData}>
-        <Measure bounds onResize={this.onResize}>
-          {({ measureRef }) => (
-            <div
-              style={this.props.style}
-              ref={measureRef}
-              className={wrapperClassName}
-              dir={this.contextualData.languageDir}
-            >
-              {this.renderStyleTag()}
-              <div className={classNames(styles.editor, theme.editor)}>
-                {this.renderAccessibilityListener()}
-                {this.renderEditor()}
-                {this.renderToolbars()}
-                {this.renderInlineModals()}
-                {this.renderTooltipHost()}
-              </div>
+      <Measure bounds onResize={this.onResize}>
+        {({ measureRef }) => (
+          <div
+            style={this.props.style}
+            ref={measureRef}
+            className={wrapperClassName}
+            dir={this.contextualData.languageDir}
+          >
+            {this.renderStyleTag()}
+            <div className={classNames(styles.editor, theme.editor)}>
+              {this.renderAccessibilityListener()}
+              {this.renderEditor()}
+              {this.renderToolbars()}
+              {this.renderInlineModals()}
+              {this.renderTooltipHost()}
             </div>
-          )}
-        </Measure>
-      </Context.Provider>
+          </div>
+        )}
+      </Measure>
     );
   }
 }

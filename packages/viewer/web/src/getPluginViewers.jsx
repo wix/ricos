@@ -7,14 +7,12 @@ import {
   alignmentClassName,
   textWrapClassName,
   normalizeUrl,
-  Context,
 } from 'wix-rich-content-common';
 import { getInteractionWrapper, DefaultInteractionWrapper } from './utils/getInteractionWrapper';
 
 class PluginViewer extends PureComponent {
   getContainerClassNames = hasLink => {
-    const { pluginComponent, componentData, styles } = this.props;
-    const { theme, isMobile } = this.context;
+    const { pluginComponent, componentData, styles, theme, isMobile } = this.props;
     const { size, alignment, textWrap, custom } = pluginComponent.classNameStrategies || {};
     return classNames(
       styles.pluginContainerReadOnly,
@@ -38,8 +36,18 @@ class PluginViewer extends PureComponent {
 
   /* eslint-disable complexity */
   render() {
-    const { type, pluginComponent, componentData, children, styles, entityIndex } = this.props;
-    const { theme, anchorTarget, relValue, config } = this.context;
+    const {
+      type,
+      pluginComponent,
+      componentData,
+      children,
+      styles,
+      entityIndex,
+      theme,
+      anchorTarget,
+      relValue,
+      config,
+    } = this.props;
     const { component: Component, elementType } = pluginComponent;
     const { container } = pluginComponent.classNameStrategies || {};
     const settings = (config && config[type]) || {};
@@ -51,7 +59,6 @@ class PluginViewer extends PureComponent {
     };
 
     if (Component) {
-      Component.contextType = Context.type;
       if (elementType !== 'inline') {
         const hasLink = componentData.config && componentData.config.link;
         const ContainerElement = !hasLink ? 'div' : 'a';
@@ -97,8 +104,6 @@ class PluginViewer extends PureComponent {
   /* eslint-enable complexity */
 }
 
-PluginViewer.contextType = Context.type;
-
 PluginViewer.propTypes = {
   type: PropTypes.string.isRequired,
   componentData: PropTypes.object.isRequired,
@@ -106,6 +111,11 @@ PluginViewer.propTypes = {
   entityIndex: PropTypes.number.isRequired,
   children: PropTypes.node,
   styles: PropTypes.object,
+  theme: PropTypes.object.isRequired,
+  anchorTarget: PropTypes.string.isRequired,
+  relValue: PropTypes.string.isRequired,
+  config: PropTypes.object.isRequired,
+  isMobile: PropTypes.bool.isRequired,
 };
 
 PluginViewer.defaultProps = {

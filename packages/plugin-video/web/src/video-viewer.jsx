@@ -6,7 +6,6 @@ import classNames from 'classnames';
 import {
   mergeStyles,
   validate,
-  Context,
   ViewportRenderer,
   pluginVideoSchema,
 } from 'wix-rich-content-common';
@@ -59,16 +58,16 @@ class VideoViewer extends Component {
     }
   };
 
-  handleContextMenu = e => this.context.disableRightClick && e.preventDefault();
+  handleContextMenu = e => this.props.disableRightClick && e.preventDefault();
 
   render() {
-    this.styles = this.styles || mergeStyles({ styles, theme: this.context.theme });
+    this.styles = this.styles || mergeStyles({ styles, theme: this.props.theme });
     const { url, isLoaded } = this.state;
     const props = {
       ...this.props,
       url,
       onReady: this.onReactPlayerReady,
-      disabled: this.context.disabled,
+      disabled: this.props.disabled,
     };
     return (
       <ViewportRenderer>
@@ -90,9 +89,10 @@ VideoViewer.propTypes = {
   width: PropTypes.string,
   height: PropTypes.string,
   settings: PropTypes.object.isRequired,
+  theme: PropTypes.object.isRequired,
+  disabled: PropTypes.bool.isRequired,
+  disableRightClick: PropTypes.func.isRequired,
 };
-
-VideoViewer.contextType = Context.type;
 
 VideoViewer.defaultProps = {
   width: '100%',

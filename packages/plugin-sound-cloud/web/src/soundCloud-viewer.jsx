@@ -5,7 +5,6 @@ import classNames from 'classnames';
 import {
   mergeStyles,
   validate,
-  Context,
   ViewportRenderer,
   pluginSoundCloudSchema,
 } from 'wix-rich-content-common';
@@ -32,7 +31,7 @@ class SoundCloudViewer extends Component {
   };
 
   render() {
-    this.styles = mergeStyles({ styles, theme: this.context.theme });
+    this.styles = mergeStyles({ styles, theme: this.props.theme });
     const { componentData, ...rest } = this.props;
     const { isLoaded } = this.state;
     return (
@@ -41,7 +40,7 @@ class SoundCloudViewer extends Component {
           className={classNames(this.styles.soundCloud_player)}
           url={componentData.src}
           {...rest}
-          playing={this.context.disabled ? false : this.state.playing}
+          playing={this.props.disabled ? false : this.state.playing}
           onPlay={() => this.setState({ playing: true })}
           onPause={() => this.setState({ playing: false })}
           onReady={this.handleReady}
@@ -52,8 +51,6 @@ class SoundCloudViewer extends Component {
   }
 }
 
-SoundCloudViewer.contextType = Context.type;
-
 SoundCloudViewer.propTypes = {
   componentData: PropTypes.object.isRequired,
   onReady: PropTypes.func,
@@ -62,6 +59,8 @@ SoundCloudViewer.propTypes = {
   width: PropTypes.string,
   height: PropTypes.string,
   isLoaded: PropTypes.bool,
+  theme: PropTypes.object.isRequired,
+  disabled: PropTypes.bool.isRequired,
 };
 
 SoundCloudViewer.defaultProps = {

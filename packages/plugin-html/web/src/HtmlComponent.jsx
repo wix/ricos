@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
   mergeStyles,
-  Context,
   normalizeUrl,
   isValidUrl,
   validate,
@@ -34,7 +33,7 @@ class HtmlComponent extends Component {
   };
 
   componentDidMount() {
-    const { componentData, settings } = this.props;
+    const { componentData, settings, siteDomain } = this.props;
     if (!componentData.config.width) {
       if (settings && settings.width) {
         componentData.config.width = settings.width;
@@ -53,7 +52,6 @@ class HtmlComponent extends Component {
         componentData.config.height = INIT_HEIGHT;
       }
     }
-    const { siteDomain } = this.context;
     this.setState({ siteDomain });
   }
 
@@ -126,8 +124,6 @@ class HtmlComponent extends Component {
   }
 }
 
-HtmlComponent.contextType = Context.type;
-
 HtmlComponent.propTypes = {
   componentData: PropTypes.object.isRequired,
   blockProps: PropTypes.object,
@@ -143,6 +139,7 @@ HtmlComponent.propTypes = {
   }).isRequired,
   store: PropTypes.object,
   block: PropTypes.object,
+  siteDomain: PropTypes.string.isRequired,
 };
 
 export { HtmlComponent as Component, DEFAULTS };

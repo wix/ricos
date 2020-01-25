@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Context, mergeStyles } from 'wix-rich-content-common';
+import { mergeStyles } from 'wix-rich-content-common';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import styles from '../../statics/styles/image-counter.scss';
@@ -12,6 +12,7 @@ class ImageCounter extends PureComponent {
     onPreviewExpand: PropTypes.func.isRequired,
     onClick: PropTypes.func,
     imageSelector: PropTypes.func,
+    theme: PropTypes.object.isRequired,
   };
 
   static defaultProps = {
@@ -64,7 +65,7 @@ class ImageCounter extends PureComponent {
   handleContainer = el => (this.container = el);
 
   render() {
-    this.styles = this.styles || mergeStyles({ styles, theme: this.context.theme });
+    this.styles = this.styles || mergeStyles({ styles, theme: this.props.theme });
     /* eslint-disable */
     return (
       <div ref={this.handleWrapper} onClick={this.onClick}>
@@ -75,7 +76,5 @@ class ImageCounter extends PureComponent {
     /* eslint-enable */
   }
 }
-
-ImageCounter.contextType = Context.type;
 
 export default ImageCounter;

@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import ImageViewer from './image-viewer';
 import { DEFAULTS } from './consts';
 import { sizeClassName, alignmentClassName } from './classNameStrategies';
-import { Context } from 'wix-rich-content-common';
 
 const EMPTY_SMALL_PLACEHOLDER =
   'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
@@ -90,7 +89,7 @@ class ImageComponent extends React.Component {
         fileError: null,
       });
     }
-    const { helpers } = this.context;
+    const { helpers } = this.props;
     const hasFileChangeHelper = helpers && helpers.onFilesChange;
     if (hasFileChangeHelper && fileList.length > 0) {
       helpers.onFilesChange(fileList[0], ({ data, error }) =>
@@ -155,15 +154,13 @@ class ImageComponent extends React.Component {
         dataUrl={this.state.dataUrl}
         isFocused={blockProps.isFocused}
         settings={settings}
-        defaultCaption={this.context.t('ImageViewer_Caption')}
+        defaultCaption={this.props.t('ImageViewer_Caption')}
         onCaptionChange={this.handleCaptionChange}
         setFocusToBlock={blockProps.setFocusToBlock}
       />
     );
   }
 }
-
-ImageComponent.contextType = Context.type;
 
 ImageComponent.propTypes = {
   componentData: PropTypes.object.isRequired,
@@ -174,6 +171,8 @@ ImageComponent.propTypes = {
   onClick: PropTypes.func.isRequired,
   className: PropTypes.string.isRequired,
   settings: PropTypes.object,
+  helpers: PropTypes.object.isRequired,
+  t: PropTypes.func.isRequired,
 };
 
 export { ImageComponent as Component, DEFAULTS };
