@@ -156,6 +156,12 @@ class GalleryComponent extends PureComponent {
         onClick={this.props.onClick}
         className={this.props.className}
         settings={this.props.settings}
+        theme={this.props.theme}
+        helpers={this.props.helpers}
+        disableRightClick={this.props.disableRightClick}
+        isMobile={this.props.isMobile}
+        anchorTarget={this.props.anchorTarget}
+        relValue={this.props.relValue}
       />
     );
   }
@@ -171,6 +177,11 @@ GalleryComponent.propTypes = {
   className: PropTypes.string.isRequired,
   settings: PropTypes.object,
   helpers: PropTypes.object.isRequired,
+  disableRightClick: PropTypes.bool.isRequired,
+  theme: PropTypes.object.isRequired,
+  isMobile: PropTypes.bool.isRequired,
+  anchorTarget: PropTypes.string.isRequired,
+  relValue: PropTypes.string.isRequired,
 };
 
 export { GalleryComponent as Component, DEFAULTS };
