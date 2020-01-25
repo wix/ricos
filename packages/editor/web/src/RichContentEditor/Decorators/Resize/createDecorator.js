@@ -3,7 +3,7 @@
  *  - additional props width, containerClassName are rendered on WrappedComponent
  *  - styles for handles added
  *  - onMove: isLeft, isRight calculation considers current size and alignment
- *  - config accepts isMobile, minHeight, minWidth instead of hard-coded values
+ *  - config accepts theme, isMobile, minHeight, minWidth instead of hard-coded values
  *
  *  TODO: mouse handlers can be optimized (vertical resizing is disabled)
  */
@@ -34,6 +34,8 @@ export default ({ config, store }) => WrappedComponent =>
       resizeSteps: PropTypes.number,
       minHeight: PropTypes.number,
       minWidth: PropTypes.number,
+      isMobile: PropTypes.bool.isRequired,
+      theme: PropTypes.object.isRequired,
     };
     static defaultProps = {
       horizontal: 'relative',
@@ -203,7 +205,7 @@ export default ({ config, store }) => WrappedComponent =>
       const styles = { position: 'relative', ...style };
 
       this.mergedStyles =
-        this.mergedStyles || mergeStyles({ styles: deafultStyles, theme: this.context.theme });
+        this.mergedStyles || mergeStyles({ styles: deafultStyles, theme: config.theme });
 
       if (horizontal === 'auto') {
         styles.width = 'auto';
@@ -236,9 +238,9 @@ export default ({ config, store }) => WrappedComponent =>
 
       const containerClassName = classNames({
         [this.mergedStyles.resizeHandleR]:
-          alignment !== 'right' && size !== 'fullWidth' && !this.context.isMobile,
+          alignment !== 'right' && size !== 'fullWidth' && !config.isMobile,
         [this.mergedStyles.resizeHandleL]:
-          alignment !== 'left' && size !== 'fullWidth' && !this.context.isMobile,
+          alignment !== 'left' && size !== 'fullWidth' && !config.isMobile,
       });
 
       const interactionProps = {

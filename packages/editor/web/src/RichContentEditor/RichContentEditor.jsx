@@ -43,7 +43,6 @@ class RichContentEditor extends Component {
     );
 
     this.initPlugins();
-    this.initContext();
   }
 
   componentDidUpdate() {
@@ -73,41 +72,6 @@ class RichContentEditor extends Component {
 
   setEditorState = editorState => this.setState({ editorState });
 
-  initContext = () => {
-    const {
-      theme,
-      t,
-      locale,
-      anchorTarget,
-      relValue,
-      helpers,
-      config,
-      isMobile,
-      shouldRenderOptimizedImages,
-      initialIntent,
-      siteDomain,
-    } = this.props;
-
-    this.contextualData = {
-      theme,
-      t,
-      locale,
-      anchorTarget,
-      relValue,
-      helpers,
-      config,
-      isMobile,
-      setEditorState: this.setEditorState,
-      getEditorBounds: this.getEditorBounds,
-      languageDir: getLangDir(locale),
-      shouldRenderOptimizedImages,
-      initialIntent,
-      siteDomain,
-      setInPluginEditingMode: this.setInPluginEditingMode,
-      getInPluginEditingMode: this.getInPluginEditingMode,
-    };
-  };
-
   getEditorBounds = () => this.state.editorBounds;
 
   initPlugins() {
@@ -122,6 +86,8 @@ class RichContentEditor extends Component {
       relValue,
       t,
       customStyleFn,
+      siteDomain,
+      shouldRenderOptimizedImages,
     } = this.props;
 
     const { theme } = this.state;
@@ -139,6 +105,11 @@ class RichContentEditor extends Component {
       getEditorState: this.getEditorState,
       setEditorState: this.setEditorState,
       getEditorBounds: this.getEditorBounds,
+      locale,
+      shouldRenderOptimizedImages,
+      siteDomain,
+      setInPluginEditingMode: this.setInPluginEditingMode,
+      getInPluginEditingMode: this.getInPluginEditingMode,
     });
     this.initEditorToolbars(pluginButtons, pluginTextButtons);
     this.pluginKeyBindings = initPluginKeyBindings(pluginTextButtons);
@@ -425,7 +396,7 @@ class RichContentEditor extends Component {
             style={this.props.style}
             ref={measureRef}
             className={wrapperClassName}
-            dir={this.contextualData.languageDir}
+            dir={getLangDir(this.props.locale)}
           >
             {this.renderStyleTag()}
             <div className={classNames(styles.editor, theme.editor)}>

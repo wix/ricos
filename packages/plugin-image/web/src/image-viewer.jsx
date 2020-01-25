@@ -139,7 +139,7 @@ class ImageViewer extends React.Component {
     }
     return (
       <div className={this.styles.imageOverlay}>
-        <Loader type={'medium'} />
+        <Loader type={'medium'} theme={this.props.theme} />
       </div>
     );
   }

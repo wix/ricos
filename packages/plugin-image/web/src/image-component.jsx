@@ -144,9 +144,25 @@ class ImageComponent extends React.Component {
   handleCaptionChange = caption => this.handleMetadataChange({ caption });
 
   render() {
-    const { settings, componentData, onClick, className, blockProps } = this.props;
+    const {
+      settings,
+      componentData,
+      onClick,
+      className,
+      blockProps,
+      theme,
+      isMobile,
+      helpers,
+      disableRightClick,
+      getInPluginEditingMode,
+    } = this.props;
     return (
       <ImageViewer
+        theme={theme}
+        isMobile={isMobile}
+        helpers={helpers}
+        disableRightClick={disableRightClick}
+        getInPluginEditingMode={getInPluginEditingMode}
         componentData={componentData}
         onClick={onClick}
         className={className}
@@ -173,6 +189,10 @@ ImageComponent.propTypes = {
   settings: PropTypes.object,
   helpers: PropTypes.object.isRequired,
   t: PropTypes.func.isRequired,
+  theme: PropTypes.object.isRequired,
+  disableRightClick: PropTypes.bool.isRequired,
+  getInPluginEditingMode: PropTypes.func.isRequired,
+  isMobile: PropTypes.bool.isRequired,
 };
 
 export { ImageComponent as Component, DEFAULTS };
