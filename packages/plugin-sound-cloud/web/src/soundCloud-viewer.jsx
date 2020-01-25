@@ -35,7 +35,7 @@ class SoundCloudViewer extends Component {
     const { componentData, ...rest } = this.props;
     const { isLoaded } = this.state;
     return (
-      <ViewportRenderer>
+      <ViewportRenderer theme={this.props.theme}>
         <ReactPlayer
           className={classNames(this.styles.soundCloud_player)}
           url={componentData.src}

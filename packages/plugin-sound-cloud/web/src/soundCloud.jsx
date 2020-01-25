@@ -89,13 +89,15 @@ class SoundCloud extends Component {
   };
 
   renderPlayer = () => {
-    const { componentData } = this.props;
+    const { componentData, theme, disabled } = this.props;
     return (
       <SoundCloudViewer
         ref={this.setPlayer}
         componentData={componentData}
         onReady={this.handleReady}
         onStart={this.handleStart}
+        theme={theme}
+        disabled={disabled}
       />
     );
   };
@@ -137,6 +139,7 @@ SoundCloud.propTypes = {
   className: PropTypes.string.isRequired,
   theme: PropTypes.object.isRequired,
   t: PropTypes.func.isRequired,
+  disabled: PropTypes.bool.isRequired,
 };
 
 export { SoundCloud as Component, DEFAULTS };

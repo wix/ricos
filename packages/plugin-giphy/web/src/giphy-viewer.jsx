@@ -8,7 +8,7 @@ import {
 } from 'wix-rich-content-common';
 import { isEqual } from 'lodash';
 import styles from '../statics/styles/giphy-viewer.scss';
-import { GIPHY_TYPE, DEFAULT_RESOLUTION } from './constants';
+import { DEFAULT_RESOLUTION } from './constants';
 
 class GiphyViewer extends Component {
   constructor(props) {
@@ -24,7 +24,7 @@ class GiphyViewer extends Component {
 
   getSourceUrl = () => {
     const { componentData } = this.props;
-    let { sizes } = this.props.config[GIPHY_TYPE] || {};
+    let { sizes } = this.props.settings || {};
     sizes = { ...DEFAULT_RESOLUTION, ...sizes };
     const size = this.props.isMobile ? sizes.mobile : sizes.desktop;
     switch (size) {
@@ -43,7 +43,7 @@ class GiphyViewer extends Component {
     const { componentData } = this.props;
     /* eslint-disable jsx-a11y/no-redundant-roles */
     return (
-      <ViewportRenderer>
+      <ViewportRenderer theme={this.props.theme}>
         {gifUrl.endsWith('.mp4') ? (
           <video
             // video should be treated as an noninteractive git element
@@ -79,7 +79,7 @@ GiphyViewer.propTypes = {
   controls: PropTypes.bool,
   width: PropTypes.string,
   height: PropTypes.string,
-  config: PropTypes.object.isRequired,
+  settings: PropTypes.object.isRequired,
   isMobile: PropTypes.bool.isRequired,
   theme: PropTypes.object.isRequired,
 };
