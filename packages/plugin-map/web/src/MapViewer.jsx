@@ -80,7 +80,7 @@ export class MapViewer extends Component {
     };
 
     return (
-      <ViewportRenderer>
+      <ViewportRenderer theme={this.props.theme}>
         <div ref={this.setRootElementRef} style={style} data-hook="mapViewer">
           <ReactGoogleMapLoader
             params={{
@@ -125,6 +125,7 @@ export class MapViewer extends Component {
 MapViewer.propTypes = {
   componentData: PropTypes.object.isRequired,
   isMobile: PropTypes.bool.isRequired,
+  theme: PropTypes.object.isRequired,
   settings: PropTypes.shape({
     width: PropTypes.number,
     height: PropTypes.number,
