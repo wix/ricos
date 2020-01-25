@@ -165,9 +165,10 @@ class ImageViewer extends React.Component {
   }
 
   renderCaption(caption) {
-    const { onCaptionChange, setFocusToBlock } = this.props;
+    const { onCaptionChange, setFocusToBlock, setInPluginEditingMode } = this.props;
     return (
       <InPluginInput
+        setInPluginEditingMode={setInPluginEditingMode}
         className={this.styles.imageCaption}
         value={caption}
         onChange={onCaptionChange}
@@ -189,9 +190,8 @@ class ImageViewer extends React.Component {
   };
 
   shouldRenderCaption() {
-    const { settings, componentData, defaultCaption } = this.props;
+    const { getInPluginEditingMode, settings, componentData, defaultCaption } = this.props;
     const caption = componentData.metadata?.caption;
-    const { getInPluginEditingMode } = this.props;
 
     if (includes(get(settings, 'toolbar.hidden'), 'settings')) {
       return false;
@@ -281,6 +281,7 @@ ImageViewer.propTypes = {
   helpers: PropTypes.object.isRequired,
   disableRightClick: PropTypes.bool.isRequired,
   getInPluginEditingMode: PropTypes.func.isRequired,
+  setInPluginEditingMode: PropTypes.func.isRequired,
   isMobile: PropTypes.bool.isRequired,
 };
 

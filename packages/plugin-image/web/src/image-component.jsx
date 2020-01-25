@@ -155,6 +155,7 @@ class ImageComponent extends React.Component {
       helpers,
       disableRightClick,
       getInPluginEditingMode,
+      setInPluginEditingMode,
     } = this.props;
     return (
       <ImageViewer
@@ -163,6 +164,7 @@ class ImageComponent extends React.Component {
         helpers={helpers}
         disableRightClick={disableRightClick}
         getInPluginEditingMode={getInPluginEditingMode}
+        setInPluginEditingMode={setInPluginEditingMode}
         componentData={componentData}
         onClick={onClick}
         className={className}
@@ -192,6 +194,7 @@ ImageComponent.propTypes = {
   theme: PropTypes.object.isRequired,
   disableRightClick: PropTypes.bool.isRequired,
   getInPluginEditingMode: PropTypes.func.isRequired,
+  setInPluginEditingMode: PropTypes.func.isRequired,
   isMobile: PropTypes.bool.isRequired,
 };
 
