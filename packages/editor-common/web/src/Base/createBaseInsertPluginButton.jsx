@@ -205,12 +205,15 @@ export default ({
       const { name, Icon } = button;
       const { accept } = settings || {};
       const { styles } = this;
+      const shouldHandleFileSelection =
+        (settings && settings.handleFileSelection) || (helpers && helpers.handleFileSelection);
 
       return (
         <FileInput
           dataHook={`${button.name}_file_input`}
           className={classNames(styles.button, styles.fileUploadButton)}
           onChange={this.handleFileChange}
+          onClick={shouldHandleFileSelection ? this.onClick : undefined}
           accept={accept}
           multiple={button.multi}
           theme={this.props.theme}
@@ -233,16 +236,13 @@ export default ({
       const { theme, isMobile } = this.props;
       const { tooltipText } = button;
       const showTooltip = !isMobile && !isEmpty(tooltipText);
-      const shouldRenderFileUploadButton =
-        button.type === 'file' &&
-        !((settings && settings.handleFileSelection) || (helpers && helpers.handleFileSelection));
       const buttonWrapperClassNames = classNames(styles.buttonWrapper, {
         [styles.mobile]: isMobile,
       });
 
       const Button = (
         <div className={buttonWrapperClassNames}>
-          {shouldRenderFileUploadButton ? this.renderFileUploadButton() : this.renderButton()}
+          {button.type === 'file' ? this.renderFileUploadButton() : this.renderButton()}
         </div>
       );
 
