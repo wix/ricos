@@ -101,7 +101,6 @@ export default ({
     };
 
     handleFileChange = files => {
-      const { setEditorState } = this.props;
       if (files.length > 0) {
         const galleryType = 'wix-draft-plugin-gallery';
         const galleryData = pluginDefaults[galleryType];
@@ -113,7 +112,7 @@ export default ({
           ? this.createBlocksFromFiles([files], galleryData, galleryType)
           : this.createBlocksFromFiles(files, button.componentData, blockType);
 
-        setEditorState(EditorState.forceSelection(newEditorState, newSelection));
+        this.props.setEditorState(EditorState.forceSelection(newEditorState, newSelection));
       }
     };
 
