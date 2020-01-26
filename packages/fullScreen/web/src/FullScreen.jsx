@@ -6,7 +6,8 @@ import layouts from 'wix-rich-content-plugin-gallery/dist/lib/layout-data-provid
 import resizeMediaUrl from 'wix-rich-content-plugin-gallery/dist/lib/resize-media-url';
 import PropTypes from 'prop-types';
 import styles from './fullscreen.rtlignore.scss';
-import { ProGallery } from 'pro-gallery';
+
+const { ProGallery } = process.env.SANTA ? {} : require('pro-gallery');
 
 export default function Fullscreen(props) {
   const {
