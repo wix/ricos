@@ -64,7 +64,7 @@ class VideoComponent extends React.Component {
   };
 
   renderPlayer = () => {
-    const { componentData, disabled, disableRightClick, settings } = this.props;
+    const { theme, componentData, disabled, disableRightClick, settings } = this.props;
     return (
       <VideoViewer
         ref={this.setPlayer}
@@ -73,6 +73,7 @@ class VideoComponent extends React.Component {
         onReady={this.handleReady}
         disabled={disabled}
         disableRightClick={disableRightClick}
+        theme={theme}
       />
     );
   };

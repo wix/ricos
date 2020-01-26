@@ -70,7 +70,7 @@ class VideoViewer extends Component {
       disabled: this.props.disabled,
     };
     return (
-      <ViewportRenderer>
+      <ViewportRenderer theme={this.props.theme}>
         <ReactPlayerWrapper
           className={classNames(this.styles.video_player)}
           data-loaded={isLoaded}
