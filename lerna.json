@@ -13,7 +13,8 @@
     "e2e/test-env",
     "packages/**/*",
     "examples/main",
-    "examples/storybook"
+    "examples/storybook",
+    "plugins-bundle-analyzer"
   ],
   "npmClientArgs": [
     "--no-lockfile"
