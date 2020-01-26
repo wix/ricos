@@ -395,7 +395,6 @@ exports[`plugins > full screen > gallery full screen > expand gallery image on f
             "itemId": "65a6266ba23a8a55da3f469157f15237",
             "metadata": {
               "height": 1893,
-              "processedByConsumer": true,
               "width": 2839
             },
             "url": "8bb438_2d651ff17f644d0db766521a18bf888b.jpg"
@@ -404,7 +403,6 @@ exports[`plugins > full screen > gallery full screen > expand gallery image on f
             "itemId": "ea8ec1609e052b7f196935318316299d",
             "metadata": {
               "height": 2829,
-              "processedByConsumer": true,
               "width": 4200
             },
             "url": "8bb438_149b418b9bfb47e0adafc569ca55c5e9.jpg"
@@ -556,7 +554,6 @@ exports[`plugins > gallery > render gallery plugin #0`] =
             "itemId": "65a6266ba23a8a55da3f469157f15237",
             "metadata": {
               "height": 1893,
-              "processedByConsumer": true,
               "width": 2839
             },
             "url": "8bb438_2d651ff17f644d0db766521a18bf888b.jpg"
@@ -565,7 +562,6 @@ exports[`plugins > gallery > render gallery plugin #0`] =
             "itemId": "ea8ec1609e052b7f196935318316299d",
             "metadata": {
               "height": 2829,
-              "processedByConsumer": true,
               "width": 4200
             },
             "url": "8bb438_149b418b9bfb47e0adafc569ca55c5e9.jpg"
@@ -968,7 +964,6 @@ exports[`plugins > video > enable to add a video from URI #0`] =
           "alignment": "center",
           "size": "small"
         },
-        "isCustomVideo": false,
         "metadata": {
           "author_name": "Wix.com",
           "author_url": "https://www.youtube.com/user/Wix",

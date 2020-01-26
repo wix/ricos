@@ -27,13 +27,6 @@
                   "default": 0,
                   "examples": [5616]
                 },
-                "processedByConsumer": {
-                  "$id": "/properties/items/items/properties/metadata/properties/processedByConsumer",
-                  "type": "boolean",
-                  "title": "The Processedbyconsumer Schema ",
-                  "default": false,
-                  "examples": [true]
-                },
                 "title": {
                   "$id": "/properties/items/items/properties/metadata/properties/title",
                   "type": "string",
