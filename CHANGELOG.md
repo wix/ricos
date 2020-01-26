@@ -44,9 +44,9 @@
     - [#613](https://github.com/wix-incubator/rich-content/pull/613) Fix native upload video
   - `gallery`
     - [#602](https://github.com/wix-incubator/rich-content/pull/602) replace gallery image from settings bug
-    - [#624](https://github.com/wix-incubator/rich-content/pull/624) non-native replace gallery image
+    - [#624](https://github.com/wix-incubator/rich-content/pull/624) nonnative replace gallery image
   - `image`
-    - [#624](https://github.com/wix-incubator/rich-content/pull/624) non-native replace image
+    - [#624](https://github.com/wix-incubator/rich-content/pull/624) nonnative replace image
   ### :house: Internal
   - `general`
     - [#561](https://github.com/wix-incubator/rich-content/pull/561) refactor - cleanup readOnly prop from code
