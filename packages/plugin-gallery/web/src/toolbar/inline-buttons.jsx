@@ -51,6 +51,7 @@ export default ({ settings, t, anchorTarget, relValue }) => {
       tooltipTextKey: 'ManageMediaButton_Tooltip',
       anchorTarget,
       relValue,
+      accept: settings.accept,
     },
     {
       keyName: 'advanced_settings',

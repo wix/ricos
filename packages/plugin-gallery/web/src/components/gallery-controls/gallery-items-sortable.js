@@ -38,6 +38,7 @@ const SortableItem = sortableElement(props => {
     theme,
     t,
     isMobile,
+    accept,
   } = props;
 
   const styles = mergeStyles({ styles: Styles, theme });
@@ -60,6 +61,7 @@ const SortableItem = sortableElement(props => {
         theme={theme}
         title={uploadMediaLabel}
         style={{ width: imageSize + 'px', height: imageSize + 'px' }}
+        accept={accept}
       >
         <UploadIcon />
       </FileInput>
@@ -135,6 +137,7 @@ const SortableList = sortableContainer(props => {
     theme,
     t,
     isMobile,
+    accept,
   } = props;
 
   const styles = mergeStyles({ styles: Styles, theme });
@@ -157,6 +160,7 @@ const SortableList = sortableContainer(props => {
           theme={theme}
           t={t}
           isMobile={isMobile}
+          accept={accept}
         />
       ))}
       {isMobileSorting ? null : (
@@ -171,6 +175,7 @@ const SortableList = sortableContainer(props => {
           t={t}
           addItemsButton
           disabled
+          accept={accept}
         />
       )}
     </div>
@@ -191,6 +196,7 @@ const ItemActionsMenu = props => {
     theme,
     t,
     isMobile,
+    accept,
   } = props;
 
   const styles = mergeStyles({ styles: Styles, theme });
@@ -214,6 +220,7 @@ const ItemActionsMenu = props => {
       handleFileSelection={handleFileSelection}
       multiple
       theme={theme}
+      accept={accept}
     >
       {isMobile ? <FabIcon className={styles.fab} /> : `+ ${addMediaLabel}`}
     </FileInput>
@@ -330,6 +337,7 @@ ItemActionsMenu.propTypes = {
   theme: PropTypes.object.isRequired,
   t: PropTypes.func,
   isMobile: PropTypes.bool,
+  accept: PropTypes.string,
 };
 
 export class SortableComponent extends Component {
@@ -555,6 +563,7 @@ export class SortableComponent extends Component {
       relValue,
       anchorTarget,
       uiSettings,
+      accept,
     } = this.props;
     return (
       !!this.state.items &&
@@ -572,6 +581,7 @@ export class SortableComponent extends Component {
             theme={theme}
             t={t}
             isMobile={this.props.isMobile}
+            accept={accept}
           />
           <SortableList
             items={this.state.items}
@@ -587,6 +597,7 @@ export class SortableComponent extends Component {
             theme={theme}
             t={t}
             isMobile={this.props.isMobile}
+            accept={accept}
           />
         </div>
       ) : (
@@ -609,6 +620,7 @@ export class SortableComponent extends Component {
             visibleLeftArrow={this.state.editedItemIndex > 0}
             visibleRightArrow={this.state.editedItemIndex < this.state.items.length - 1}
             uiSettings={uiSettings}
+            accept={accept}
           />
         </div>
       ))
@@ -630,4 +642,5 @@ SortableComponent.propTypes = {
   relValue: PropTypes.string,
   anchorTarget: PropTypes.string,
   uiSettings: PropTypes.object,
+  accept: PropTypes.string,
 };

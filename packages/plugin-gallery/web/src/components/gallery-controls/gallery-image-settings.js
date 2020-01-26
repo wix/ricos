@@ -92,6 +92,7 @@ class ImageSettings extends Component {
       visibleLeftArrow,
       visibleRightArrow,
       uiSettings,
+      accept,
     } = this.props;
 
     const { linkPanel } = uiSettings || {};
@@ -187,6 +188,7 @@ class ImageSettings extends Component {
                     onChange={this.replaceItem}
                     theme={theme}
                     title={this.ReplaceLabel}
+                    accept={accept}
                   >
                     <ReplaceIcon className={styles.galleryImageSettings_replace_icon} />
                     <span className={styles.galleryImageSettings_replace_text}>
@@ -283,6 +285,7 @@ ImageSettings.propTypes = {
   visibleLeftArrow: PropTypes.bool,
   visibleRightArrow: PropTypes.bool,
   uiSettings: PropTypes.object,
+  accept: PropTypes.string,
 };
 
 export default ImageSettings;
