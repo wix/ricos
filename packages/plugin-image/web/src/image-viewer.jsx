@@ -101,13 +101,15 @@ class ImageViewer extends React.Component {
     }
   };
 
-  renderImage = (imageClassName, imageSrc, alt, props) => {
+  renderImage = (imageClassName, imageSrc, alt, props, isGif) => {
     return this.getImage(
-      classNames(imageClassName, this.styles.imageHighres),
+      classNames(imageClassName, this.styles.imageHighres, {
+        [this.styles.isGif]: isGif,
+      }),
       imageSrc.highres,
       alt,
       props,
-      true
+      !isGif
     );
   };
 
@@ -261,7 +263,7 @@ class ImageViewer extends React.Component {
           {shouldRenderPreloadImage &&
             this.renderPreloadImage(imageClassName, imageSrc, metadata.alt, imageProps)}
           {shouldRenderImage &&
-            this.renderImage(imageClassName, imageSrc, metadata.alt, imageProps)}
+            this.renderImage(imageClassName, imageSrc, metadata.alt, imageProps, isGif)}
           {this.renderLoader()}
           {hasLink && hasExpand && (
             <ExpandIcon className={this.styles.expandIcon} onClick={this.handleExpand} />
