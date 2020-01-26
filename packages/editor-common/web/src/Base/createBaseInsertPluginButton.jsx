@@ -133,50 +133,30 @@ export default ({
     renderButton = () => {
       const { styles } = this;
       const { showName, tabIndex, setEditorState } = this.props;
-      const { name, Icon, ButtonElement, wrappingComponent } = button;
+      const { name, Icon, wrappingComponent } = button;
       const WrappingComponent = wrappingComponent || 'button';
 
-      if (ButtonElement) {
-        return (
-          <WrappingComponent
-            className={styles.button}
-            data-hook={`${name.replace(' ', '_')}_insert_plugin_button`}
-            onClick={this.onClick}
-            ref={this.buttonRef}
-          >
-            <div className={styles.icon}>
-              <ButtonElement key="0" />
-            </div>
-            {showName && (
-              <span key="1" className={styles.label}>
-                {name}
-              </span>
-            )}
-          </WrappingComponent>
-        );
-      } else {
-        return (
-          <WrappingComponent
-            aria-label={`Add ${name}`}
-            tabIndex={tabIndex}
-            className={styles.button}
-            data-hook={`${name.replace(' ', '_')}_insert_plugin_button`}
-            onClick={this.onClick}
-            ref={this.buttonRef}
-            pubsub={pubsub}
-            setEditorState={setEditorState}
-          >
-            <div className={styles.icon}>
-              <Icon key="0" />
-            </div>
-            {showName && (
-              <span key="1" className={styles.label}>
-                {name}
-              </span>
-            )}
-          </WrappingComponent>
-        );
-      }
+      return (
+        <WrappingComponent
+          aria-label={`Add ${name}`}
+          tabIndex={tabIndex}
+          className={styles.button}
+          data-hook={`${name.replace(' ', '_')}_insert_plugin_button`}
+          onClick={this.onClick}
+          ref={this.buttonRef}
+          pubsub={pubsub}
+          setEditorState={setEditorState}
+        >
+          <div className={styles.icon}>
+            <Icon key="0" />
+          </div>
+          {showName && (
+            <span key="1" className={styles.label}>
+              {name}
+            </span>
+          )}
+        </WrappingComponent>
+      );
     };
 
     toggleButtonModal = event => {
@@ -225,12 +205,15 @@ export default ({
       const { name, Icon } = button;
       const { accept } = settings || {};
       const { styles } = this;
+      const shouldHandleFileSelection =
+        (settings && settings.handleFileSelection) || (helpers && helpers.handleFileSelection);
 
       return (
         <FileInput
           dataHook={`${button.name}_file_input`}
           className={classNames(styles.button, styles.fileUploadButton)}
           onChange={this.handleFileChange}
+          onClick={shouldHandleFileSelection ? this.onClick : undefined}
           accept={accept}
           multiple={button.multi}
           theme={this.props.theme}
@@ -253,16 +236,13 @@ export default ({
       const { theme, isMobile } = this.props;
       const { tooltipText } = button;
       const showTooltip = !isMobile && !isEmpty(tooltipText);
-      const shouldRenderFileUploadButton =
-        button.type === 'file' &&
-        !((settings && settings.handleFileSelection) || (helpers && helpers.handleFileSelection));
       const buttonWrapperClassNames = classNames(styles.buttonWrapper, {
         [styles.mobile]: isMobile,
       });
 
       const Button = (
         <div className={buttonWrapperClassNames}>
-          {shouldRenderFileUploadButton ? this.renderFileUploadButton() : this.renderButton()}
+          {button.type === 'file' ? this.renderFileUploadButton() : this.renderButton()}
         </div>
       );
 
