@@ -4,8 +4,7 @@ import { VIDEO_TYPE, VIDEO_TYPE_LEGACY } from './types';
 import { createBasePlugin } from 'wix-rich-content-editor-common';
 
 const createVideoPlugin = (config = {}) => {
-  const type = VIDEO_TYPE;
-  const { helpers, t, [type]: settings = {}, isMobile, ...rest } = config;
+  const { helpers, t, [VIDEO_TYPE]: settings = {}, isMobile, ...rest } = config;
 
   return createBasePlugin({
     component: Component,
