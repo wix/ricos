@@ -22,6 +22,10 @@
   - `image`
     - [#563](https://github.com/wix-incubator/rich-content/pull/563) in-plugin editing enabled for caption
   ### :bug: Bug Fix
+  - `general`
+    - [#574](https://github.com/wix-incubator/rich-content/pull/574) improve custom icon API
+  - `giphy`
+    - [#621](https://github.com/wix-incubator/rich-content/pull/621) custom icon selection logic fixed
   - `divider`
     - [#615](https://github.com/wix-incubator/rich-content/pull/615) alignment classes apply floating on text-wrap elements only
   - `text-color`

@@ -12,7 +12,7 @@ export default class TextCodeBlockButton extends Component {
 
   render() {
     const { theme, isMobile, t, tabIndex, setEditorState, getEditorState, config } = this.props;
-    const icon = config?.['code-block']?.toolbar?.icons?.codeBlock || CodeBlockIcon;
+    const icon = config?.['code-block']?.toolbar?.icons?.InsertPluginButtonIcon || CodeBlockIcon;
     return (
       <InlineToolbarButton
         onClick={() =>
