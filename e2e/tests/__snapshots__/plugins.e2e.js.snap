@@ -968,7 +968,6 @@ exports[`plugins > video > enable to add a video from URI #0`] =
           "alignment": "center",
           "size": "small"
         },
-        "isCustomVideo": false,
         "metadata": {
           "author_name": "Wix.com",
           "author_url": "https://www.youtube.com/user/Wix",
