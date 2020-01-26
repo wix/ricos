@@ -43,7 +43,7 @@ const examples = [
       config,
       helpers: {
         onFilesChange: (files, updateEntity) =>
-          console.log('on files change', { files, updateEntity }), //eslint-disable-line
+          console.log('on files change', { files, updateEntity }), //eslint-disable-line no-console
       },
     },
   },

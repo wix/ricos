@@ -22,7 +22,8 @@
     "release": "yoshi release",
     "storybook": "start-storybook -p 6006",
     "clean": "rm -rf dist storybook-static",
-    "build": "build-storybook"
+    "build": "build-storybook",
+    "lint": "yoshi lint"
   },
   "dependencies": {
     "babel-jest": "^23.6.0",
@@ -75,6 +76,10 @@
     ]
   },
   "eslintConfig": {
-    "extends": "yoshi-base"
+    "extends": "yoshi-base",
+    "rules": {
+      "import/no-unresolved": "off"
+    }
+
   }
 }
