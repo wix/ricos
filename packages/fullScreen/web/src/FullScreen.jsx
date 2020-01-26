@@ -6,8 +6,7 @@ import layouts from 'wix-rich-content-plugin-gallery/dist/lib/layout-data-provid
 import resizeMediaUrl from 'wix-rich-content-plugin-gallery/dist/lib/resize-media-url';
 import PropTypes from 'prop-types';
 import styles from './fullscreen.rtlignore.scss';
-
-const { ProGallery } = process.env.SANTA ? {} : require('pro-gallery');
+import { ProGallery } from 'pro-gallery';
 
 export default function Fullscreen(props) {
   const {
@@ -28,37 +27,37 @@ export default function Fullscreen(props) {
 
   setTimeout(() => {
     const buttons = document.getElementsByClassName('gallery-item-social');
-    Array.from(buttons).forEach(button => (button.style.opacity = 0));
-  }, 0);
+    Array.from(buttons).forEach(button => (button.style.display = 'None'));
+  }, 10);
 
-  const fullscreen = (
-    <>
-      {isOpen ? (
-        <div className={styles.fullscreen} style={{ ...backgroundColor, ...topMargin }}>
-          <button className={styles.close} style={foregroundColor} onClick={() => onClose()}>
-            {closeIcon()}
-          </button>
-          <ProGallery
-            items={getItems()}
-            locale={locale}
-            currentIdx={index}
-            resizeMediaUrl={resizeMediaUrl}
-            container={{ width: window.innerWidth, height: window.innerHeight }}
-            styles={{
-              ...layouts[5],
-              galleryLayout: 5,
-              slideshowInfoSize: 0,
-              cubeType: 'fit',
-              scrollSnap: true,
-              videoPlay: 'auto',
-            }}
-          />
-        </div>
-      ) : null}
-    </>
+  let fullscreen = (
+    <div className={styles.fullscreen} style={{ ...backgroundColor, ...topMargin }}>
+      <button className={styles.close} style={foregroundColor} onClick={() => onClose()}>
+        {closeIcon()}
+      </button>
+      <ProGallery
+        items={getItems()}
+        locale={locale}
+        currentIdx={index}
+        resizeMediaUrl={resizeMediaUrl}
+        container={{ width: window.innerWidth, height: window.innerHeight }}
+        styles={{
+          ...layouts[5],
+          galleryLayout: 5,
+          slideshowInfoSize: 0,
+          cubeType: 'fit',
+          scrollSnap: true,
+          videoPlay: 'auto',
+        }}
+      />
+    </div>
   );
 
-  return target ? ReactDOM.createPortal(fullscreen, target) : fullscreen;
+  if (target) {
+    fullscreen = ReactDOM.createPortal(fullscreen, target);
+  }
+
+  return isOpen ? fullscreen : null;
 }
 
 Fullscreen.propTypes = {
