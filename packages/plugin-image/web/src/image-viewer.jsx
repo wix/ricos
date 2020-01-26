@@ -131,6 +131,7 @@ class ImageViewer extends React.Component {
         alt={alt}
         onError={this.onImageLoadError}
         onLoad={fadeIn ? e => this.onImageLoad(e) : undefined}
+        loading="lazy"
       />
     );
   }
