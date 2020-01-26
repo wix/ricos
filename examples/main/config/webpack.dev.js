@@ -41,7 +41,8 @@ const devConfig = {
   plugins: [new HotModuleReplacementPlugin()],
   devServer: {
     port: 3000,
-    host: '0.0.0.0',
+    open: true,
+    host: 'localhost',
     hot: true,
     compress: true,
     publicPath: '/',
