@@ -64,10 +64,12 @@ class VideoViewer extends Component {
     this.styles = this.styles || mergeStyles({ styles, theme: this.props.theme });
     const { url, isLoaded } = this.state;
     const props = {
-      ...this.props,
       url,
       onReady: this.onReactPlayerReady,
       disabled: this.props.disabled,
+      width: this.props.width,
+      height: this.props.height,
+      controls: this.props.controls,
     };
     return (
       <ViewportRenderer theme={this.props.theme}>

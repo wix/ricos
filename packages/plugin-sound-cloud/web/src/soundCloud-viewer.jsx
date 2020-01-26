@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ReactPlayer from 'react-player';
+import ReactPlayerWrapper from './reactPlayerWrapper';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import {
@@ -32,19 +32,17 @@ class SoundCloudViewer extends Component {
 
   render() {
     this.styles = mergeStyles({ styles, theme: this.props.theme });
-    const { componentData, ...rest } = this.props;
+    const { componentData, width, height, controls, disabled } = this.props;
     const { isLoaded } = this.state;
+    const props = { width, height, controls, disabled };
     return (
       <ViewportRenderer theme={this.props.theme}>
-        <ReactPlayer
+        <ReactPlayerWrapper
           className={classNames(this.styles.soundCloud_player)}
           url={componentData.src}
-          {...rest}
-          playing={this.props.disabled ? false : this.state.playing}
-          onPlay={() => this.setState({ playing: true })}
-          onPause={() => this.setState({ playing: false })}
           onReady={this.handleReady}
           data-loaded={isLoaded}
+          {...props}
         />
       </ViewportRenderer>
     );
