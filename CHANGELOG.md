@@ -13,9 +13,6 @@
     Click to see more.
   </summary>
 
-  ### :boom: [Breaking Change]
-  - `editor`
-    - [#577](https://github.com/wix-incubator/rich-content/pull/577) Remove add plugins button from inline toolbar in mobile and change mobile side toolbar to be fixed position instead, for customize Add Plugins button css use css media query (@media only screen and (max-width: 800px))
   ### :rocket: New Feature
   - `link`
     - [#551](https://github.com/wix-incubator/rich-content/pull/551) adding a tooltip for nofollow tag explanation
@@ -43,6 +40,7 @@
     - [#564](https://github.com/wix-incubator/rich-content/pull/564) snapshots renaming for gallery and image plugins tests
   - `editor`
     - [#575](https://github.com/wix-incubator/rich-content/pull/575) ltr&rtl css yoshi issues solved (requested by forum)
+
 
 </details>
 <hr/>
