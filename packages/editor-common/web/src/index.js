@@ -74,7 +74,6 @@ export {
   replaceWithEmptyBlock,
   deleteBlock,
   createEntity,
-  // setSelectionToBlock,
   createBlockAndFocus,
   createBlock,
   getBlockInfo,
