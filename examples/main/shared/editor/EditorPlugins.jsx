@@ -434,30 +434,30 @@ export const config = {
     //   },
     // },
     accept: '*',
-    onFileSelected: (file, updateEntity) => {
-      const name = file.name;
-      const filenameParts = name.split('.');
-      const type = filenameParts[filenameParts.length - 1];
-
-      const data = {
-        name,
-        type,
-        url: '',
-      };
-      setTimeout(() => updateEntity({ data }), 1000);
-    },
-    // handleFileSelection: updateEntity => {
-    //   const filenames = ['image.jpg', 'document.pdf', 'music.mp3'];
-    //   const name = filenames[Math.floor(Math.random() * filenames.length)];
+    // onFileSelected: (file, updateEntity) => {
+    //   const name = file.name;
     //   const filenameParts = name.split('.');
     //   const type = filenameParts[filenameParts.length - 1];
+
     //   const data = {
     //     name,
     //     type,
-    //     url: 'http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf',
+    //     url: '',
     //   };
-    //   setTimeout(() => updateEntity({ data }), 500);
+    //   setTimeout(() => updateEntity({ data }), 1000);
     // },
+    handleFileSelection: updateEntity => {
+      const filenames = ['image.jpg', 'document.pdf', 'music.mp3'];
+      const name = filenames[Math.floor(Math.random() * filenames.length)];
+      const filenameParts = name.split('.');
+      const type = filenameParts[filenameParts.length - 1];
+      const data = {
+        name,
+        type,
+        url: 'http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf',
+      };
+      setTimeout(() => updateEntity({ data }), 500);
+    },
   },
   [BUTTON_TYPE]: {
     // toolbar: {
