@@ -38,6 +38,9 @@
     - [#566](https://github.com/wix-incubator/rich-content/pull/566) Fix tooltip position in bottom tooltip
   - `gallery`
     - [#602](https://github.com/wix-incubator/rich-content/pull/602) replace gallery image from settings bug
+    - [#624](https://github.com/wix-incubator/rich-content/pull/624) non-native replace gallery image
+  - `image`
+    - [#624](https://github.com/wix-incubator/rich-content/pull/624) non-native replace image
   ### :house: Internal
   - `general`
     - [#561](https://github.com/wix-incubator/rich-content/pull/561) refactor - cleanup readOnly prop from code
@@ -47,6 +50,8 @@
     - [#564](https://github.com/wix-incubator/rich-content/pull/564) snapshots renaming for gallery and image plugins tests
   - `editor`
     - [#575](https://github.com/wix-incubator/rich-content/pull/575) ltr&rtl css yoshi issues solved (requested by forum)
+  - `example`
+    - [#624](https://github.com/wix-incubator/rich-content/pull/575) video selection is done without native file selector
 
 </details>
 <hr/>
