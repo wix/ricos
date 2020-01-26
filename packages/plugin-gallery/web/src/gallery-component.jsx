@@ -126,7 +126,6 @@ class GalleryComponent extends PureComponent {
         metadata: {
           height: item.height,
           width: item.width,
-          processedByConsumer: true,
         },
         itemId: String(item.id),
         url: item.file_name,

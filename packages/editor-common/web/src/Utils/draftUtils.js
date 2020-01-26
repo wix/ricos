@@ -29,19 +29,18 @@ export const insertLinkInPosition = (
 export const insertLinkAtCurrentSelection = (editorState, data) => {
   let selection = getSelection(editorState);
   let newEditorState = editorState;
+  const { url } = data;
   if (selection.isCollapsed()) {
-    const { url } = data;
     const contentState = Modifier.insertText(editorState.getCurrentContent(), selection, url);
     selection = selection.merge({ focusOffset: selection.getFocusOffset() + url.length });
     newEditorState = EditorState.push(editorState, contentState, 'insert-characters');
   }
   let editorStateWithLink;
   if (isSelectionBelongsToExsistingLink(newEditorState, selection)) {
-    const contentState = newEditorState.getCurrentContent();
     const blockKey = selection.getStartKey();
-    const block = contentState.getBlockForKey(blockKey);
+    const block = newEditorState.getCurrentContent().getBlockForKey(blockKey);
     const entityKey = block.getEntityAt(selection.getStartOffset());
-    editorStateWithLink = setEntityData(newEditorState, entityKey, data);
+    editorStateWithLink = setEntityData(newEditorState, entityKey, createLinkEntityData(data));
   } else {
     editorStateWithLink = insertLink(newEditorState, selection, data);
   }
@@ -60,14 +59,7 @@ function isSelectionBelongsToExsistingLink(editorState, selection) {
   });
 }
 
-const defaultAnchorTarget = '_self';
-const defaultRelValue = 'noopener';
-
-function insertLink(
-  editorState,
-  selection,
-  { url, targetBlank, nofollow, anchorTarget, relValue }
-) {
+function insertLink(editorState, selection, data) {
   const oldSelection = editorState.getSelection();
   const newContentState = Modifier.applyInlineStyle(
     editorState.getCurrentContent(),
@@ -76,23 +68,18 @@ function insertLink(
   ).set('selectionAfter', oldSelection);
   const newEditorState = EditorState.push(editorState, newContentState, 'change-inline-style');
 
-  let target = '_blank',
-    rel = 'nofollow';
-  if (!targetBlank) {
-    target = anchorTarget !== '_blank' ? anchorTarget : '_self';
-  }
-  if (!nofollow) {
-    rel = relValue !== 'nofollow' ? relValue : 'noopener';
-  }
-
   return addEntity(newEditorState, selection, {
     type: 'LINK',
-    data: {
-      url,
-      target,
-      rel,
-    },
+    data: createLinkEntityData(data),
   });
+}
+
+function createLinkEntityData({ url, targetBlank, nofollow, anchorTarget, relValue }) {
+  return {
+    url,
+    target: targetBlank ? '_blank' : anchorTarget || '_self',
+    rel: nofollow ? 'nofollow' : relValue || 'noopener noreferrer',
+  };
 }
 
 function addEntity(editorState, targetSelection, entityData) {
@@ -339,8 +326,8 @@ export function fixPastedLinks(editorState, { anchorTarget, relValue }) {
     if (url) {
       content.replaceEntityData(entityKey, {
         url,
-        target: anchorTarget || defaultAnchorTarget,
-        rel: relValue || defaultRelValue,
+        target: anchorTarget || '_self',
+        rel: relValue || 'noopener noreferrer',
       });
     }
   });

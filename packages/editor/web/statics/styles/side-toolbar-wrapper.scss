@@ -2,8 +2,4 @@
   position: absolute;
   z-index: 3;
   pointer-events: none;
-  @media only screen and (max-width: 800px) {
-    bottom: 20px;
-    right: 20px;
-  }
 }

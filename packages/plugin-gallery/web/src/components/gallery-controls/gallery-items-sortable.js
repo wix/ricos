@@ -26,6 +26,10 @@ const onKeyDown = (e, handler) => {
   }
 };
 
+const isLocalObjectUrl = item => {
+  return item.url.indexOf('data:') !== -1;
+};
+
 const SortableItem = sortableElement(props => {
   const {
     item,
@@ -71,7 +75,7 @@ const SortableItem = sortableElement(props => {
     }
 
     let url;
-    if (item.metadata.processedByConsumer) {
+    if (!isLocalObjectUrl(item)) {
       url = imageClientAPI.getScaleToFillImageURL(
         prefix + item.url,
         item.metadata.width,
