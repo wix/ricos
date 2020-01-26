@@ -71,9 +71,14 @@ class FileInput extends Component {
     };
     return (
       <label className={className} htmlFor={this.id} style={this.props.style} title={title}>
-        <button {...a11yProps} id={this.id} data-hook={dataHook} onClick={onClick}>
-          {children}
-        </button>
+        <button
+          className={styles.visuallyHidden}
+          {...a11yProps}
+          id={this.id}
+          data-hook={dataHook}
+          onClick={onClick}
+        />
+        {children}
       </label>
     );
   }
