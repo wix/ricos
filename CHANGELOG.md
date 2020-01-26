@@ -12,7 +12,7 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
-
+  
   ### :rocket: New Feature
   - `image`
     - [#630](https://github.com/wix-incubator/rich-content/pull/630) add image lazy loading
