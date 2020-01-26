@@ -3,7 +3,7 @@ import { renderToStaticMarkup } from 'react-dom/server';
 import { BLOCK_TYPES } from 'wix-rich-content-common';
 import redraft from 'redraft';
 import classNames from 'classnames';
-import { endsWith, isEmpty, isArray } from 'lodash';
+import { endsWith } from 'lodash';
 import List from '../List';
 import getPluginViewers from '../getPluginViewers';
 import { getTextDirection, kebabToCamelObjectKeys } from './textUtils';
@@ -53,13 +53,16 @@ const getBlocks = (mergedStyles, textDirection, { config }) => {
     return (children, blockProps) =>
       children.map((child, i) => {
         const Type = typeof type === 'string' ? type : type(child);
+
         const { interactions } = blockProps.data[i];
-        const BlockWrapper = isArray(interactions)
+        const BlockWrapper = Array.isArray(interactions)
           ? getInteractionWrapper({ interactions, config, mergedStyles })
           : DefaultInteractionWrapper;
 
-        return (
-          <BlockWrapper key={`${blockProps.keys[i]}_wrap`}>
+        const inner =
+          Type === 'br' ? (
+            <br />
+          ) : (
             <Type
               className={getBlockStyleClasses(
                 blockProps.data[i],
@@ -72,13 +75,14 @@ const getBlocks = (mergedStyles, textDirection, { config }) => {
             >
               {withDiv ? <div>{child}</div> : child}
             </Type>
-          </BlockWrapper>
-        );
+          );
+
+        return <BlockWrapper key={`${blockProps.keys[i]}_wrap`}>{inner}</BlockWrapper>;
       });
   };
 
   return {
-    unstyled: blockFactory(child => (isEmptyBlock(child) ? 'div' : 'p'), 'text'),
+    unstyled: blockFactory(child => (isEmptyBlock(child) ? 'br' : 'p'), 'text'),
     blockquote: blockFactory('blockquote', 'quote', true),
     'header-one': blockFactory('h1', 'headerOne'),
     'header-two': blockFactory('h2', 'headerTwo'),
@@ -109,10 +113,6 @@ const normalizeContentState = contentState => ({
     let text = block.text;
     if (endsWith(text, '\n')) {
       text += '\n';
-    }
-
-    if (block.type === 'unstyled' && isEmpty(text.trim())) {
-      text = '\u00A0'; // non-breaking space
     }
 
     return {
