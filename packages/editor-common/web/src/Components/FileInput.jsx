@@ -24,10 +24,6 @@ class FileInput extends Component {
     this.props.onChange(Array.from(e.target.files));
   };
 
-  handleClick = e => {
-    this.props.onClick ? this.props.onClick(e) : () => this.value === null;
-  };
-
   renderInput() {
     const { accept, multiple, className, title, children, dataHook, tabIndex } = this.props;
     const hasMultiple = multiple ? { multiple } : {};
@@ -51,7 +47,7 @@ class FileInput extends Component {
           type={'file'}
           data-hook={dataHook}
           onChange={this.handleChange}
-          onClick={this.handleClick}
+          onClick={() => this.value === null}
           accept={accept}
           onFocus={() => this.onFocus()}
           onBlur={() => this.onBlur()}
@@ -93,7 +89,6 @@ FileInput.propTypes = {
   accept: PropTypes.string,
   className: PropTypes.string,
   onChange: PropTypes.func,
-  onClick: PropTypes.func,
   handleFileSelection: PropTypes.func,
   children: PropTypes.node,
   multiple: PropTypes.bool,
