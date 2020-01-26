@@ -59,30 +59,28 @@ const getBlocks = (mergedStyles, textDirection, { config }) => {
           ? getInteractionWrapper({ interactions, config, mergedStyles })
           : DefaultInteractionWrapper;
 
-        const inner =
-          Type === 'br' ? (
-            <br />
-          ) : (
-            <Type
-              className={getBlockStyleClasses(
-                blockProps.data[i],
-                mergedStyles,
-                textDirection,
-                mergedStyles[style]
-              )}
-              style={blockDataToStyle(blockProps.data[i])}
-              key={blockProps.keys[i]}
-            >
-              {withDiv ? <div>{child}</div> : child}
-            </Type>
-          );
+        const _child = isEmptyBlock(child) ? <br /> : withDiv ? <div>{child}</div> : child;
+        const inner = (
+          <Type
+            className={getBlockStyleClasses(
+              blockProps.data[i],
+              mergedStyles,
+              textDirection,
+              mergedStyles[style]
+            )}
+            style={blockDataToStyle(blockProps.data[i])}
+            key={blockProps.keys[i]}
+          >
+            {_child}
+          </Type>
+        );
 
         return <BlockWrapper key={`${blockProps.keys[i]}_wrap`}>{inner}</BlockWrapper>;
       });
   };
 
   return {
-    unstyled: blockFactory(child => (isEmptyBlock(child) ? 'br' : 'p'), 'text'),
+    unstyled: blockFactory(child => (isEmptyBlock(child) ? 'div' : 'p'), 'text'),
     blockquote: blockFactory('blockquote', 'quote', true),
     'header-one': blockFactory('h1', 'headerOne'),
     'header-two': blockFactory('h2', 'headerTwo'),
