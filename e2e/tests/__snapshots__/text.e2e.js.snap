@@ -221,11 +221,9 @@ exports[`text > allow to apply inline styles and links #0`] =
   "entityMap": {
     "0": {
       "data": {
-        "anchorTarget": "_blank",
-        "nofollow": false,
-        "relValue": "noopener",
-        "targetBlank": true,
-        "url": "https://www.wix.com/"
+        "target": "_blank",
+        "url": "https://www.wix.com/",
+        "rel": "noopener"
       },
       "mutability": "MUTABLE",
       "type": "LINK"
