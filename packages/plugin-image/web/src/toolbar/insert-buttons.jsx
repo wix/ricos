@@ -3,7 +3,7 @@ import { DEFAULTS } from '../consts';
 import { InsertPluginIcon } from '../icons';
 
 export default ({ helpers, t, settings }) => {
-  const icon = settings?.toolbar?.icons?.Image || InsertPluginIcon;
+  const icon = settings?.toolbar?.icons?.InsertPluginButtonIcon || InsertPluginIcon;
   return [
     {
       type: 'file',

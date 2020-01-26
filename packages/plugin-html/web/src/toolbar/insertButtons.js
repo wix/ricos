@@ -3,7 +3,7 @@ import { DEFAULTS } from '../HtmlComponent';
 import { InsertPluginIcon } from '../icons';
 
 export default ({ helpers, t, settings }) => {
-  const icon = settings?.toolbar?.icons?.HTML || InsertPluginIcon;
+  const icon = settings?.toolbar?.icons?.InsertPluginButtonIcon || InsertPluginIcon;
   return [
     {
       name: 'HTML',
