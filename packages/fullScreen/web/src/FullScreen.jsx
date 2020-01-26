@@ -28,9 +28,7 @@ export default function Fullscreen(props) {
 
   setTimeout(() => {
     const buttons = document.getElementsByClassName('gallery-item-social');
-    if (buttons.length > 0) {
-      Array.from(buttons).forEach(button => (button.style.opacity = 0));
-    }
+    Array.from(buttons).forEach(button => (button.style.opacity = 0));
   }, 0);
 
   const fullscreen = (
