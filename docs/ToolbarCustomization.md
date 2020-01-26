@@ -159,7 +159,7 @@ So, the `getToolbarDecorationFn` comes to rescue. This function is expected to r
 The `getButtons` property, when applied on `TOOLBARS.PLUGIN`, will affect ALL the plugin functionality toolbars. This can be used, for example, to hide size-related buttons for *all* the plugin toolbars.
 
 #### Hiding Buttons
-In order to hide a specific button in a specific plugin toolbar, please use the `config.`*`plugin_type_name`*.`toolbar.hidden` property. For example, to hide the `Replace` button of the `video-plugin` toolbar, the following `config` should be provided to the `RichContentEditor`:
+In order to hide a specific button in a specific plugin toolbar, please use the `config.plugin_type_name.toolbar.hidden` property. For example, to hide the `Replace` button of the `video-plugin` toolbar, the following `config` should be provided to the `RichContentEditor`:
 
 ```javascript
 const config = {
@@ -175,17 +175,22 @@ The `hidden` value is expected to be a string array, where every string is the p
 
 #### Customizing Button Icons
 
-In order to replace a specific button icon in a specific plugin toolbar, please use the `config.`*`plugin_type_name`*.`toolbar.icons` property. This is a map of button names to React Components. For example, to replace the `Delete` button icon of the `video-plugin` toolbar, the following `config` should be provided to the `RichContentEditor`:
+In order to replace a button icon in a specific plugin toolbar or to replace the insert button of a specific plugin, please use the `config.plugin_type_name.toolbar.icons` property. This is a map of button names to React Components. For example, to replace the `Delete` button icon of the `video-plugin` toolbar and the insert button icon of the `video-plugin`, the following `config` should be provided to the `RichContentEditor`:
+(the keyName `InsertPluginButtonIcon` is a generic name for the insert button of each plugin)
 
 ```javascript
 const config = {
   [VIDEO_TYPE]: {
     toolbar: {
-      icons: { delete: MyCustomDeleteIcon }
+      icons: { 
+        delete: MyCustomDeleteIcon
+        InsertPluginButtonIcon: MyCustomPluginIcon
+      }
     }
   }
 };
 ```
+
 
 ## References and examples
 
