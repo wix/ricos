@@ -39,7 +39,7 @@
     - [#589](https://github.com/wix-incubator/rich-content/pull/589) in order to edit the link settings its enough to select only part of the words that belongs to the link
     - [#566](https://github.com/wix-incubator/rich-content/pull/566) Fix tooltip position in bottom tooltip
   - `video`
-    - [#613](https://github.com/wix-incubator/rich-content/pull/613) Fix upload video to upload locally
+    - [#613](https://github.com/wix-incubator/rich-content/pull/613) Fix native upload video
   - `gallery`
     - [#602](https://github.com/wix-incubator/rich-content/pull/602) replace gallery image from settings bug
   ### :house: Internal
