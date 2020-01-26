@@ -29,7 +29,7 @@ export const insertLinkInPosition = (
 export const insertLinkAtCurrentSelection = (editorState, data) => {
   let selection = getSelection(editorState);
   let newEditorState = editorState;
-  const { url, targetBlank, relValue, anchorTarget, nofollow } = data;
+  const { url } = data;
   if (selection.isCollapsed()) {
     const contentState = Modifier.insertText(editorState.getCurrentContent(), selection, url);
     selection = selection.merge({ focusOffset: selection.getFocusOffset() + url.length });
@@ -37,15 +37,10 @@ export const insertLinkAtCurrentSelection = (editorState, data) => {
   }
   let editorStateWithLink;
   if (isSelectionBelongsToExsistingLink(newEditorState, selection)) {
-    const contentState = newEditorState.getCurrentContent();
     const blockKey = selection.getStartKey();
-    const block = contentState.getBlockForKey(blockKey);
+    const block = newEditorState.getCurrentContent().getBlockForKey(blockKey);
     const entityKey = block.getEntityAt(selection.getStartOffset());
-    editorStateWithLink = setEntityData(newEditorState, entityKey, {
-      url,
-      target: getLinkTarget(targetBlank, anchorTarget),
-      rel: getLinkRel(nofollow, relValue),
-    });
+    editorStateWithLink = setEntityData(newEditorState, entityKey, createLinkEntityData(data));
   } else {
     editorStateWithLink = insertLink(newEditorState, selection, data);
   }
@@ -64,19 +59,7 @@ function isSelectionBelongsToExsistingLink(editorState, selection) {
   });
 }
 
-function getLinkTarget(targetBlank, anchorTarget) {
-  return targetBlank ? '_blank' : anchorTarget || '_self';
-}
-
-function getLinkRel(nofollow, relValue) {
-  return nofollow ? 'nofollow' : relValue || 'noopener noreferrer';
-}
-
-function insertLink(
-  editorState,
-  selection,
-  { url, targetBlank, nofollow, anchorTarget, relValue }
-) {
+function insertLink(editorState, selection, data) {
   const oldSelection = editorState.getSelection();
   const newContentState = Modifier.applyInlineStyle(
     editorState.getCurrentContent(),
@@ -87,12 +70,16 @@ function insertLink(
 
   return addEntity(newEditorState, selection, {
     type: 'LINK',
-    data: {
-      url,
-      target: getLinkTarget(targetBlank, anchorTarget),
-      rel: getLinkRel(nofollow, relValue),
-    },
+    data: createLinkEntityData(data),
   });
+}
+
+function createLinkEntityData({ url, targetBlank, nofollow, anchorTarget, relValue }) {
+  return {
+    url,
+    target: targetBlank ? '_blank' : anchorTarget || '_self',
+    rel: nofollow ? 'nofollow' : relValue || 'noopener noreferrer',
+  };
 }
 
 function addEntity(editorState, targetSelection, entityData) {
