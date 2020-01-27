@@ -49,12 +49,14 @@
     "wix-rich-content-plugin-divider": "^6.6.8",
     "wix-rich-content-plugin-hashtag": "^6.6.8",
     "wix-rich-content-plugin-image": "^6.6.8",
-    "wix-rich-content-plugin-link": "^6.6.8"
+    "wix-rich-content-plugin-link": "^6.6.8",
+    "wix-rich-content-plugin-html": "^6.6.8"
   },
   "peerDependencies": {},
   "devDependencies": {
     "yoshi": "^4.28.3",
-    "yoshi-style-dependencies": "^4.23.7"
+    "yoshi-style-dependencies": "^4.23.7",
+    "copy-webpack-plugin": "^4.5.1"
   },
   "lint-staged": {
     "*.js": "yoshi lint"

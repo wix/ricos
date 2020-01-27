@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { storiesOf } from '@storybook/react';
-import '../Global.css';
+
 import { Page, RichContentExamples } from '../Components/StoryParts';
 import { RichContentViewer } from 'wix-rich-content-viewer';
 import { exapmleState } from '../../fixtures/editorStates';

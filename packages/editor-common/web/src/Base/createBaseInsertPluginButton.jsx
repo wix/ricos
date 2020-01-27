@@ -124,7 +124,7 @@ export default ({
 
         const { newBlock } = this.addBlock(button.componentData || {});
         const blockKey = newBlock.getKey();
-        setTimeout(() => pubsub.getBlockHandler('handleFilesAdded', blockKey)(blockKey, data));
+        setTimeout(() => pubsub.getBlockHandler('handleFilesAdded', blockKey)(data));
       }
     };
 
@@ -133,50 +133,30 @@ export default ({
     renderButton = () => {
       const { styles } = this;
       const { showName, tabIndex, setEditorState } = this.props;
-      const { name, Icon, ButtonElement, wrappingComponent } = button;
+      const { name, Icon, wrappingComponent } = button;
       const WrappingComponent = wrappingComponent || 'button';
 
-      if (ButtonElement) {
-        return (
-          <WrappingComponent
-            className={styles.button}
-            data-hook={`${name.replace(' ', '_')}_insert_plugin_button`}
-            onClick={this.onClick}
-            ref={this.buttonRef}
-          >
-            <div className={styles.icon}>
-              <ButtonElement key="0" />
-            </div>
-            {showName && (
-              <span key="1" className={styles.label}>
-                {name}
-              </span>
-            )}
-          </WrappingComponent>
-        );
-      } else {
-        return (
-          <WrappingComponent
-            aria-label={`Add ${name}`}
-            tabIndex={tabIndex}
-            className={styles.button}
-            data-hook={`${name.replace(' ', '_')}_insert_plugin_button`}
-            onClick={this.onClick}
-            ref={this.buttonRef}
-            pubsub={pubsub}
-            setEditorState={setEditorState}
-          >
-            <div className={styles.icon}>
-              <Icon key="0" />
-            </div>
-            {showName && (
-              <span key="1" className={styles.label}>
-                {name}
-              </span>
-            )}
-          </WrappingComponent>
-        );
-      }
+      return (
+        <WrappingComponent
+          aria-label={`Add ${name}`}
+          tabIndex={tabIndex}
+          className={classNames(styles.button, button.type === 'file' && styles.fileUploadButton)}
+          data-hook={`${name.replace(' ', '_')}_insert_plugin_button`}
+          onClick={this.onClick}
+          ref={this.buttonRef}
+          pubsub={pubsub}
+          setEditorState={setEditorState}
+        >
+          <div className={styles.icon}>
+            <Icon key="0" />
+          </div>
+          {showName && (
+            <span key="1" className={styles.label}>
+              {name}
+            </span>
+          )}
+        </WrappingComponent>
+      );
     };
 
     toggleButtonModal = event => {
