@@ -34,6 +34,7 @@
     - [#550](https://github.com/wix-incubator/rich-content/pull/550) remove dashed border when focused
     - [#584](https://github.com/wix-incubator/rich-content/pull/584) fix gallery dropdown css
     - [#626](https://github.com/wix-incubator/rich-content/pull/626) insertLinkAtCurrentSelection utility fixed
+    - [#633](https://github.com/wix-incubator/rich-content/pull/633) fix upload the same file in FileInput
   - `link`
     - [#546](https://github.com/wix-incubator/rich-content/pull/546) saves the last data and the initial state of the checkboxes("Open in a new tab", "Add a nofollow tag") is according to the defaults (anchorTarget, relValue)
     - [#566](https://github.com/wix-incubator/rich-content/pull/566) Fix tooltip position in bottom tooltip
