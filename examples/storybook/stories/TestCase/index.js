@@ -17,8 +17,9 @@ import {
 } from '../Components/StoryParts';
 
 import imageFloatWithSpace from '../../fixtures/imageFloatWithSpace';
-
 import AlignLeftiesState from '../../fixtures/AlignLefties';
+import InstagramEmbedState from '../../fixtures/InstagramEmbedState';
+
 import viewerTheme from './viewer.scss';
 
 const editorState = createWithContent(convertFromRaw(imageFloatWithSpace));
@@ -28,7 +29,6 @@ const PLUGINS = [createImagePlugin];
 const helpers = {
   onFilesChange: (files, updateEntity) => console.log('on file change', { files, updateEntity }), //eslint-disable-line
 };
-const config = {};
 
 const typeMappers = [imageTypeMapper, linkTypeMapper, htmlTypeMapper];
 
@@ -37,6 +37,7 @@ const theme = {
 };
 storiesOf('Test Cases', module)
   .add('Weird Spacing', () => {
+    const config = {};
     return (
       <Page title="Weird Spacing Bug">
         <Section type={Section.Types.COMPARISON}>
@@ -79,8 +80,32 @@ storiesOf('Test Cases', module)
         </Section>
 
         <Section title="Content State">
-          <div>hi!</div>
           <ContentState json={AlignLeftiesState} />
+        </Section>
+      </Page>
+    );
+  })
+  .add('HTML Instagram Height', () => {
+    const config = {
+      [HTML_TYPE]: {
+        htmlIframeSrc: `/static/html-plugin-embed.html`,
+      },
+    };
+    return (
+      <Page title="HTML Height">
+        <Section title={'Height check'}>
+          <RichContentViewerBox preset="blog-preset">
+            <RichContentViewer
+              initialState={InstagramEmbedState}
+              typeMappers={typeMappers}
+              config={config}
+              theme={theme}
+            />
+          </RichContentViewerBox>
+        </Section>
+
+        <Section title="Content State">
+          <ContentState json={InstagramEmbedState} />
         </Section>
       </Page>
     );

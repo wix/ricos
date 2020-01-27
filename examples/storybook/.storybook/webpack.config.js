@@ -3,7 +3,6 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = ({ config }) => {
   const baseConfig = wixStorybookConfig(config);
-  console.log('***', baseConfig.plugins, Object.keys(baseConfig));
   return {
     ...baseConfig,
     plugins: [
