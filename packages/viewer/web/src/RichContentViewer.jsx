@@ -137,6 +137,7 @@ RichContentViewer.defaultProps = {
   theme: {},
   decorators: [],
   typeMappers: [],
+  inlineStyleMappers: [],
   locale: 'en',
 };
 

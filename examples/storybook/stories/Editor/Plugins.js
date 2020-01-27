@@ -4,7 +4,7 @@ import { RichContentEditor } from 'wix-rich-content-editor';
 import { createDividerPlugin } from 'wix-rich-content-plugin-divider';
 import { createHashtagPlugin, HASHTAG_TYPE } from 'wix-rich-content-plugin-hashtag';
 import { createImagePlugin } from 'wix-rich-content-plugin-image';
-import 'wix-rich-content-plugin-image/dist/styles.min.css';
+
 
 const config = {
   [HASHTAG_TYPE]: {

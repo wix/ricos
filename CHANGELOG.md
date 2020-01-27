@@ -22,6 +22,7 @@
   - `image`
     - [#622](https://github.com/wix-incubator/rich-content/pull/622) fix ssr blurry image
   - `general`
+    - [#632](https://github.com/wix-incubator/rich-content/pull/632) ViewportRenderer disabled for all the plugins
     - [#574](https://github.com/wix-incubator/rich-content/pull/574) improve custom icon API
   - `giphy`
     - [#621](https://github.com/wix-incubator/rich-content/pull/621) custom icon selection logic fixed
@@ -42,9 +43,14 @@
     - [#613](https://github.com/wix-incubator/rich-content/pull/613) Fix native upload video
   - `gallery`
     - [#602](https://github.com/wix-incubator/rich-content/pull/602) replace gallery image from settings bug
+    - [#624](https://github.com/wix-incubator/rich-content/pull/624) nonnative replace gallery image
+  - `image`
+    - [#624](https://github.com/wix-incubator/rich-content/pull/624) nonnative replace image
   - `common`
     - [#620](https://github.com/wix-incubator/rich-content/pull/620) backward compatibility for legacy image custom size
     - [#606](https://github.com/wix-incubator/rich-content/pull/606) infinite loader in gallery settings images (in blog, mobile app)
+  - `html`
+    - [#631](https://github.com/wix-incubator/rich-content/pull/631) HTML fix height issue - remove height style from ViewerWrapper
   ### :house: Internal
   - `general`
     - [#561](https://github.com/wix-incubator/rich-content/pull/561) refactor - cleanup readOnly prop from code
@@ -54,6 +60,8 @@
     - [#564](https://github.com/wix-incubator/rich-content/pull/564) snapshots renaming for gallery and image plugins tests
   - `editor`
     - [#575](https://github.com/wix-incubator/rich-content/pull/575) ltr&rtl css yoshi issues solved (requested by forum)
+  - `example`
+    - [#624](https://github.com/wix-incubator/rich-content/pull/575) video selection is done without native file selector
 
 
 </details>

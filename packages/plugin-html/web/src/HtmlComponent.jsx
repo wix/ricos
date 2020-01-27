@@ -6,7 +6,6 @@ import {
   normalizeUrl,
   isValidUrl,
   validate,
-  ViewportRenderer,
   pluginHtmlSchema,
 } from 'wix-rich-content-common';
 
@@ -76,8 +75,7 @@ class HtmlComponent extends Component {
   setHeight = iframeHeight => {
     if (iframeHeight !== this.state.iframeHeight) {
       this.setState({ iframeHeight });
-      const { store, block } = this.props;
-      store && store.setBlockHandler('htmlPluginMaxHeight', block.key, iframeHeight);
+      this.props.store?.update('componentData', { config: { height: iframeHeight } });
     }
   };
 
@@ -88,40 +86,32 @@ class HtmlComponent extends Component {
     const { props } = this;
     validate(props.componentData, pluginHtmlSchema);
     const {
-      componentData: { src, srcType, config: { width: currentWidth, height: currentHeight } = {} },
-      settings: { htmlIframeSrc, width, height } = {},
+      componentData: { src, srcType },
+      settings: { htmlIframeSrc } = {},
     } = props;
 
-    const style = {
-      width: this.context.isMobile ? 'auto' : currentWidth || width || INIT_WIDTH,
-      height: currentHeight || height || INIT_HEIGHT,
-      maxHeight: this.state.iframeHeight,
-    };
-
     return (
-      <ViewportRenderer containerStyle={style}>
-        <div
-          className={this.styles.htmlComponent}
-          ref={ref => (this.element = ref)}
-          data-hook="HtmlComponent"
-        >
-          {srcType === SRC_TYPE_HTML && src && (
-            <IframeHtml
-              key={SRC_TYPE_HTML}
-              tabIndex={0}
-              html={html}
-              src={htmlIframeSrc}
-              onHeightChange={this.setHeight}
-            />
-          )}
+      <div
+        className={this.styles.htmlComponent}
+        ref={ref => (this.element = ref)}
+        data-hook="HtmlComponent"
+      >
+        {srcType === SRC_TYPE_HTML && src && (
+          <IframeHtml
+            key={SRC_TYPE_HTML}
+            tabIndex={0}
+            html={html}
+            src={htmlIframeSrc}
+            onHeightChange={this.setHeight}
+          />
+        )}
 
-          {srcType === SRC_TYPE_URL && isValidUrl(src) && (
-            <IframeUrl key={SRC_TYPE_URL} tabIndex={0} src={normalizeUrl(src)} />
-          )}
+        {srcType === SRC_TYPE_URL && isValidUrl(src) && (
+          <IframeUrl key={SRC_TYPE_URL} tabIndex={0} src={normalizeUrl(src)} />
+        )}
 
-          {!src && !isValidUrl(src) && <div className={this.styles.htmlComponent_placeholder} />}
-        </div>
-      </ViewportRenderer>
+        {!src && !isValidUrl(src) && <div className={this.styles.htmlComponent_placeholder} />}
+      </div>
     );
   }
 }
