@@ -9,6 +9,8 @@ import FileInput from '../Components/FileInput';
 import ToolbarButton from '../Components/ToolbarButton';
 import styles from '../../statics/styles/toolbar-button.scss';
 
+const galleryType = 'wix-draft-plugin-gallery';
+
 /**
  * createBaseInsertPluginButton
  */
@@ -65,7 +67,7 @@ export default ({
       return createBlock(editorState, data, type);
     };
 
-    createBlocksFromFiles = (files, data, type) => {
+    createBlocksFromFiles = (files, data, type, updateEntity) => {
       let editorState = this.props.getEditorState();
       let selection;
       files.forEach(file => {
@@ -76,8 +78,7 @@ export default ({
         );
         editorState = newEditorState;
         selection = selection || newSelection;
-        const state = { userSelectedFiles: { files: Array.isArray(file) ? file : [file] } };
-        commonPubsub.set('initialState_' + newBlock.getKey(), state);
+        updateEntity(newBlock.getKey(), file);
       });
 
       return { newEditorState: editorState, newSelection: selection };
@@ -100,31 +101,35 @@ export default ({
       }
     };
 
-    handleFileChange = files => {
-      if (files.length > 0) {
-        const galleryType = 'wix-draft-plugin-gallery';
-        const galleryData = pluginDefaults[galleryType];
-        const shouldCreateGallery =
-          blockType === galleryType ||
-          (galleryData && settings.createGalleryForMultipleImages && files.length > 1);
+    shouldCreateGallery = files =>
+      blockType === galleryType ||
+      (pluginDefaults[galleryType] && settings.createGalleryForMultipleImages && files.length > 1);
 
-        const { newEditorState, newSelection } = shouldCreateGallery
-          ? this.createBlocksFromFiles([files], galleryData, galleryType)
-          : this.createBlocksFromFiles(files, button.componentData, blockType);
+    handleFileChange = (files, updateEntity) => {
+      if (files.length > 0) {
+        const galleryData = pluginDefaults[galleryType];
+        const { newEditorState, newSelection } = this.shouldCreateGallery(files)
+          ? this.createBlocksFromFiles([files], galleryData, galleryType, updateEntity)
+          : this.createBlocksFromFiles(files, button.componentData, blockType, updateEntity);
 
         this.props.setEditorState(EditorState.forceSelection(newEditorState, newSelection));
       }
     };
 
+    handleNativeFileChange = files =>
+      this.handleFileChange(files, (blockKey, file) => {
+        const state = { userSelectedFiles: { files: Array.isArray(file) ? file : [file] } };
+        commonPubsub.set('initialState_' + blockKey, state);
+      });
+
     handleExternalFileChanged = (data, error) => {
       if (data) {
-        if (error) {
-          data.error = error;
-        }
-
-        const { newBlock } = this.addBlock(button.componentData || {});
-        const blockKey = newBlock.getKey();
-        setTimeout(() => pubsub.getBlockHandler('handleFilesAdded', blockKey)(data));
+        const handleFilesAdded = this.shouldCreateGallery(data.data)
+          ? blockKey => commonPubsub.getBlockHandler('galleryHandleFilesAdded', blockKey)
+          : blockKey => pubsub.getBlockHandler('handleFilesAdded', blockKey);
+        this.handleFileChange(data.data, (blockKey, file) =>
+          setTimeout(() => handleFilesAdded(blockKey)({ data: file, error }))
+        );
       }
     };
 
@@ -186,9 +191,9 @@ export default ({
     };
 
     toggleFileSelection = () => {
-      if (settings && settings.handleFileSelection) {
+      if (settings?.handleFileSelection) {
         settings.handleFileSelection(this.handleExternalFileChanged);
-      } else if (helpers && helpers.handleFileSelection) {
+      } else if (helpers?.handleFileSelection) {
         const multiple = !!button.multi;
         helpers.handleFileSelection(
           undefined,
@@ -210,7 +215,7 @@ export default ({
         <FileInput
           dataHook={`${button.name}_file_input`}
           className={classNames(styles.button, styles.fileUploadButton)}
-          onChange={this.handleFileChange}
+          onChange={this.handleNativeFileChange}
           accept={accept}
           multiple={button.multi}
           theme={this.props.theme}
