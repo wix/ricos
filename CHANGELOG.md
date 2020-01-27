@@ -22,6 +22,7 @@
   - `image`
     - [#622](https://github.com/wix-incubator/rich-content/pull/622) fix ssr blurry image
   - `general`
+    - ViewportRenderer disabled for all the plugins
     - [#574](https://github.com/wix-incubator/rich-content/pull/574) improve custom icon API
   - `giphy`
     - [#621](https://github.com/wix-incubator/rich-content/pull/621) custom icon selection logic fixed
