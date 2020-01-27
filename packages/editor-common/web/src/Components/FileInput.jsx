@@ -20,12 +20,26 @@ class FileInput extends Component {
     this.setState({ focused: false });
   }
 
+  onClick = () => {
+    const { handleFileSelection, multiple } = this.props;
+    handleFileSelection(multiple);
+  };
+
   handleChange = e => {
     this.props.onChange(Array.from(e.target.files));
   };
 
-  renderInput() {
-    const { accept, multiple, className, title, children, dataHook, tabIndex } = this.props;
+  render() {
+    const {
+      accept,
+      multiple,
+      className,
+      title,
+      children,
+      dataHook,
+      tabIndex,
+      handleFileSelection,
+    } = this.props;
     const hasMultiple = multiple ? { multiple } : {};
     const { styles } = this;
     const a11yProps = {
@@ -40,48 +54,33 @@ class FileInput extends Component {
         style={this.props.style}
         title={title}
       >
-        <input
-          {...a11yProps}
-          className={styles.visuallyHidden}
-          id={this.id}
-          type={'file'}
-          data-hook={dataHook}
-          onChange={this.handleChange}
-          onClick={() => this.value === null}
-          accept={accept}
-          onFocus={() => this.onFocus()}
-          onBlur={() => this.onBlur()}
-          tabIndex={tabIndex}
-          {...hasMultiple}
-        />
+        {handleFileSelection ? (
+          <button
+            className={styles.visuallyHidden}
+            {...a11yProps}
+            id={this.id}
+            data-hook={dataHook}
+            onClick={this.onClick}
+          />
+        ) : (
+          <input
+            {...a11yProps}
+            className={styles.visuallyHidden}
+            id={this.id}
+            type={'file'}
+            data-hook={dataHook}
+            onChange={this.handleChange}
+            onClick={() => this.value === null}
+            accept={accept}
+            onFocus={() => this.onFocus()}
+            onBlur={() => this.onBlur()}
+            tabIndex={tabIndex}
+            {...hasMultiple}
+          />
+        )}
         {children}
       </label>
     );
-  }
-
-  renderButton() {
-    const { handleFileSelection, multiple, className, title, children, dataHook } = this.props;
-    const onClick = () => handleFileSelection(multiple);
-    const a11yProps = {
-      'aria-label': title,
-    };
-    return (
-      <label className={className} htmlFor={this.id} style={this.props.style} title={title}>
-        <button
-          className={styles.visuallyHidden}
-          {...a11yProps}
-          id={this.id}
-          data-hook={dataHook}
-          onClick={onClick}
-        />
-        {children}
-      </label>
-    );
-  }
-
-  render() {
-    const { handleFileSelection } = this.props;
-    return handleFileSelection ? this.renderButton() : this.renderInput();
   }
 }
 
