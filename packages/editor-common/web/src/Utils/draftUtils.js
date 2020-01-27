@@ -207,6 +207,7 @@ export const replaceWithEmptyBlock = (editorState, blockKey) => {
 //   );
 // };
 
+// **************************** this function is for oneApp ****************************
 export const createBlockAndFocus = (editorState, data, pluginType) => {
   const { newBlock, newSelection, newEditorState } = createBlock(editorState, data, pluginType);
   window.getSelection().removeAllRanges();
