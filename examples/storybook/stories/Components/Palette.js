@@ -1,11 +1,11 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 
-import './Palette.css';
+import styles from './Palette.scss';
 
 const Color = ({ value, name }) => {
   return (
-    <div style={{ background: value }} className="color-box">
+    <div style={{ background: value }} className={styles.colorBox}>
       {name}
     </div>
   );
@@ -16,7 +16,7 @@ export default ({ palette }) => {
   const getPlaceByIdx = idx => (idx % 5) * 5 + Math.floor(idx / 5);
 
   return (
-    <div className="palette">
+    <div className={styles.palette}>
       {usedPalette.map((color, i) => (
         <Color {...usedPalette[getPlaceByIdx(i)]} key={'color_' + i} />
       ))}

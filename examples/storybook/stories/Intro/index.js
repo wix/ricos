@@ -1,11 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import 'wix-rich-content-common/dist/styles.min.css';
-import 'wix-rich-content-editor-common/dist/styles.min.css';
-import 'wix-rich-content-editor/dist/styles.min.css';
-import 'wix-rich-content-plugin-divider/dist/styles.min.css';
-
 import { RichContentEditor, convertFromRaw, createWithContent } from 'wix-rich-content-editor';
 import { RichContentViewer } from 'wix-rich-content-viewer';
 import { RichContentEditorBox, Section, Page } from '../Components/StoryParts';

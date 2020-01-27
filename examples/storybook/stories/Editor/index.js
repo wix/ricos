@@ -1,13 +1,5 @@
 import { storiesOf } from '@storybook/react';
 
-import 'wix-rich-content-common/dist/styles.min.css';
-import 'wix-rich-content-editor-common/dist/styles.min.css';
-import 'wix-rich-content-editor/dist/styles.min.css';
-import 'wix-rich-content-plugin-divider/dist/styles.min.css';
-// import hashtagTheme from './hashtag.css';
-
-import '../Global.css';
-
 import BasicUage from './BasicUsage';
 import PluginsStory from './Plugins';
 import ThemesStory from './Themes';
