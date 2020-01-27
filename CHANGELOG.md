@@ -61,8 +61,8 @@
   - `editor`
     - [#575](https://github.com/wix-incubator/rich-content/pull/575) ltr&rtl css yoshi issues solved (requested by forum)
   - `example`
-    - [#624](https://github.com/wix-incubator/rich-content/pull/575) video selection is done without native file selector
     - [#634](https://github.com/wix-incubator/rich-content/pull/634) added toggle for mocking image multi-select
+    - [#624](https://github.com/wix-incubator/rich-content/pull/575) video selection is done without native file selector
 
 
 </details>
