@@ -71,7 +71,6 @@ class PluginViewer extends PureComponent {
             containerProps.style = { width: componentData.config.width };
           }
           if (type === 'wix-draft-plugin-html') {
-            // containerProps.style = { width: currentWidth, height: currentHeight };
             const { width: currentWidth } = componentData.config;
             containerProps.style = { width: currentWidth };
           }
