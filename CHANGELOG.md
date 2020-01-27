@@ -44,6 +44,8 @@
   - `common`
     - [#620](https://github.com/wix-incubator/rich-content/pull/620) backward compatibility for legacy image custom size
     - [#606](https://github.com/wix-incubator/rich-content/pull/606) infinite loader in gallery settings images (in blog, mobile app)
+  - `html`
+    - [#631](https://github.com/wix-incubator/rich-content/pull/631) HTML fix height issue - remove height style from ViewerWrapper
   ### :house: Internal
   - `general`
     - [#561](https://github.com/wix-incubator/rich-content/pull/561) refactor - cleanup readOnly prop from code
