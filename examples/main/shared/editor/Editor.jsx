@@ -20,6 +20,7 @@ const modalStyleDefaults = {
 };
 const anchorTarget = '_blank';
 const relValue = 'noopener';
+let shouldMultiSelectImages = false;
 
 export default class Editor extends PureComponent {
   state = {};
@@ -50,8 +51,8 @@ export default class Editor extends PureComponent {
     };
     this.helpers = {
       // onFilesChange: (files, updateEntity) => mockUpload(files, updateEntity),
-      handleFileSelection: (index, multiple, updateEntity, removeEntity) => {
-        const count = multiple ? [1, 2, 3] : [1];
+      handleFileSelection: (index, multiple, updateEntity, removeEntity, componentData) => {
+        const count = componentData.items || shouldMultiSelectImages ? [1, 2, 3] : [1];
         const data = [];
         count.forEach(_ => {
           const testItem = testImages[Math.floor(Math.random() * testImages.length)];
@@ -114,6 +115,9 @@ export default class Editor extends PureComponent {
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (prevProps.staticToolbar !== this.props.staticToolbar) {
       this.setEditorToolbars();
+    }
+    if (prevProps.shouldMultiSelectImages !== this.props.shouldMultiSelectImages) {
+      shouldMultiSelectImages = this.props.shouldMultiSelectImages;
     }
   }
 
