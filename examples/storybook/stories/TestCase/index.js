@@ -7,6 +7,7 @@ import { createImagePlugin } from 'wix-rich-content-plugin-image';
 import { linkTypeMapper } from 'wix-rich-content-plugin-link/dist/module.viewer';
 import { imageTypeMapper } from 'wix-rich-content-plugin-image/dist/module.viewer';
 import { htmlTypeMapper, HTML_TYPE } from 'wix-rich-content-plugin-html/dist/module.viewer';
+
 import {
   RichContentEditorBox,
   RichContentViewerBox,
@@ -16,6 +17,7 @@ import {
 } from '../Components/StoryParts';
 
 import imageFloatWithSpace from '../../fixtures/imageFloatWithSpace';
+
 import AlignLeftiesState from '../../fixtures/AlignLefties';
 import viewerTheme from './viewer.scss';
 

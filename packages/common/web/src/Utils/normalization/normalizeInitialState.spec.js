@@ -552,4 +552,67 @@ describe('normalizeInitialState', () => {
       expect(actual).toEqual(expected);
     });
   });
+
+  describe('image normalizer', () => {
+    it('should move width from entity data to data.config', () => {
+      const commonData = {
+        config: {
+          alignment: 'center',
+          size: 'inline',
+          showTitle: true,
+          showDescription: true,
+        },
+        src: {
+          id: '599ada_e9c9134635b544f0857ccc3ce9e0fa68~mv2.jpg',
+          original_file_name: '599ada_e9c9134635b544f0857ccc3ce9e0fa68~mv2.jpg',
+          file_name: '599ada_e9c9134635b544f0857ccc3ce9e0fa68~mv2.jpg',
+          width: 522,
+          height: 522,
+        },
+      };
+      const badData = {
+        ...commonData,
+        width: 707,
+      };
+
+      const goodData = {
+        ...commonData,
+        config: {
+          ...commonData.config,
+          width: 707,
+        },
+      };
+
+      const initialState = data => ({
+        blocks: [
+          {
+            key: 'bmpfl',
+            text: ' ',
+            type: 'atomic',
+            depth: 0,
+            inlineStyleRanges: [],
+            entityRanges: [
+              {
+                offset: 0,
+                length: 1,
+                key: 0,
+              },
+            ],
+            data: {},
+          },
+        ],
+        entityMap: {
+          '0': {
+            type: 'wix-draft-plugin-image',
+            mutability: 'IMMUTABLE',
+            data,
+          },
+        },
+        VERSION: '6.6.8',
+      });
+
+      const actual = uut(initialState(badData), {});
+      expect(actual).toEqual(initialState(goodData));
+    });
+  });
 });

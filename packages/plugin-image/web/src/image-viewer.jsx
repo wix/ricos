@@ -25,7 +25,7 @@ class ImageViewer extends React.Component {
   }
 
   componentDidMount() {
-    this._isMounted = true;
+    this.setState({ ssrDone: true });
   }
 
   componentWillReceiveProps(nextProps) {
@@ -79,17 +79,12 @@ class ImageViewer extends React.Component {
         imageType: 'highRes',
       });
     }
-    if (this._isMounted && !imageUrl.preload) {
+    if (this.state.ssrDone && !imageUrl.preload) {
       console.error(`image plugin mounted with invalid image source!`, src); //eslint-disable-line no-console
     }
 
     return imageUrl;
   }
-
-  onHighResLoad = e => {
-    e.target.style.opacity = 1;
-    this.preloadImage && (this.preloadImage.style.opacity = 0);
-  };
 
   onImageLoadError = () => {
     const {
@@ -106,33 +101,43 @@ class ImageViewer extends React.Component {
     }
   };
 
-  renderImage(imageClassName, imageSrc, alt, props) {
-    const isGif = imageSrc.highres?.endsWith('.gif');
-    let images = [
+  renderImage = (imageClassName, imageSrc, alt, props, isGif) => {
+    return this.getImage(
+      classNames(imageClassName, this.styles.imageHighres, {
+        [this.styles.isGif]: isGif,
+      }),
+      imageSrc.highres,
+      alt,
+      props,
+      !isGif
+    );
+  };
+
+  renderPreloadImage = (imageClassName, imageSrc, alt, props) => {
+    return this.getImage(
+      classNames(imageClassName, this.styles.imagePreload),
+      imageSrc.preload,
+      alt,
+      props
+    );
+  };
+
+  getImage(imageClassNames, src, alt, props, fadeIn = false) {
+    return (
       <img
         {...props}
-        key="highres"
-        className={classNames(imageClassName, this.styles.imageHighres)}
-        src={imageSrc.highres}
+        className={imageClassNames}
+        src={src}
         alt={alt}
-        onLoad={isGif ? undefined : e => this.onHighResLoad(e)}
-      />,
-    ];
-    if (!isGif) {
-      images = [
-        <img
-          key="preload"
-          ref={ref => (this.preloadImage = ref)}
-          className={classNames(imageClassName, this.styles.imagePreload)}
-          src={imageSrc.preload}
-          alt={alt}
-          onError={this.onImageLoadError}
-        />,
-        ...images,
-      ];
-    }
-    return images;
+        onError={this.onImageLoadError}
+        onLoad={fadeIn ? e => this.onImageLoad(e) : undefined}
+      />
+    );
   }
+
+  onImageLoad = e => {
+    e.target.style.opacity = 1;
+  };
 
   renderLoader() {
     if (!this.props.isLoading) {
@@ -222,7 +227,7 @@ class ImageViewer extends React.Component {
   render() {
     this.styles = this.styles || mergeStyles({ styles, theme: this.context.theme });
     const { componentData, className, settings } = this.props;
-    const { fallbackImageSrc } = this.state;
+    const { fallbackImageSrc, ssrDone } = this.state;
     const data = componentData || DEFAULTS;
     const { metadata = {} } = componentData;
 
@@ -240,6 +245,9 @@ class ImageViewer extends React.Component {
         ? settings.imageProps(data.src)
         : settings.imageProps;
     }
+    const isGif = imageSrc.highres?.endsWith('.gif');
+    const shouldRenderPreloadImage = imageSrc && !isGif;
+    const shouldRenderImage = (imageSrc && ssrDone) || isGif;
 
     /* eslint-disable jsx-a11y/no-static-element-interactions */
     return (
@@ -252,7 +260,10 @@ class ImageViewer extends React.Component {
         onContextMenu={this.handleContextMenu}
       >
         <div className={this.styles.imageWrapper} role="img" aria-label={metadata.alt}>
-          {imageSrc && this.renderImage(imageClassName, imageSrc, metadata.alt, imageProps)}
+          {shouldRenderPreloadImage &&
+            this.renderPreloadImage(imageClassName, imageSrc, metadata.alt, imageProps)}
+          {shouldRenderImage &&
+            this.renderImage(imageClassName, imageSrc, metadata.alt, imageProps, isGif)}
           {this.renderLoader()}
           {hasLink && hasExpand && (
             <ExpandIcon className={this.styles.expandIcon} onClick={this.handleExpand} />
