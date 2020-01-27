@@ -21,6 +21,7 @@
   ### :bug: Bug Fix
   - `image`
     - [#622](https://github.com/wix-incubator/rich-content/pull/622) fix ssr blurry image
+    - [#634](https://github.com/wix-incubator/rich-content/pull/634) nonnative multi-select of images
   - `general`
     - [#632](https://github.com/wix-incubator/rich-content/pull/632) ViewportRenderer disabled for all the plugins
     - [#574](https://github.com/wix-incubator/rich-content/pull/574) improve custom icon API
@@ -61,6 +62,7 @@
   - `editor`
     - [#575](https://github.com/wix-incubator/rich-content/pull/575) ltr&rtl css yoshi issues solved (requested by forum)
   - `example`
+    - [#634](https://github.com/wix-incubator/rich-content/pull/634) added toggle for mocking image multi-select
     - [#624](https://github.com/wix-incubator/rich-content/pull/575) video selection is done without native file selector
 
 

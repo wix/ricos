@@ -263,6 +263,7 @@ const createBaseComponent = ({
           isMobile={isMobile}
           settings={settings}
           store={pubsub.store}
+          commonPubsub={commonPubsub}
           theme={theme}
           componentData={this.state.componentData}
           componentState={this.state.componentState}
