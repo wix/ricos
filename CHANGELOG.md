@@ -17,6 +17,13 @@
   - `image`
     - [#630](https://github.com/wix-incubator/rich-content/pull/630) add image lazy loading
 
+### :bug: Bug Fix
+- `image`
+  - [#635](https://github.com/wix-incubator/rich-content/pull/635) image reloaded when adding/removing link
+### :house: Internal
+- `e2e`
+  - [#635](https://github.com/wix-incubator/rich-content/pull/635) disable css transitions in cypress
+  
 </details>
 <hr/>
 
