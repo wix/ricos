@@ -108,8 +108,7 @@ class ImageViewer extends React.Component {
       }),
       imageSrc.highres,
       alt,
-      props,
-      !isGif
+      props
     );
   };
 
@@ -122,7 +121,7 @@ class ImageViewer extends React.Component {
     );
   };
 
-  getImage(imageClassNames, src, alt, props, fadeIn = false) {
+  getImage(imageClassNames, src, alt, props) {
     return (
       <img
         {...props}
@@ -130,7 +129,7 @@ class ImageViewer extends React.Component {
         src={src}
         alt={alt}
         onError={this.onImageLoadError}
-        onLoad={fadeIn ? e => this.onImageLoad(e) : undefined}
+        onLoad={this.onImageLoad}
         loading="lazy"
       />
     );
