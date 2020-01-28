@@ -39,6 +39,8 @@ const createBaseComponent = ({
   siteDomain,
   setInPluginEditingMode,
   getInPluginEditingMode,
+  anchorTarget,
+  relValue,
 }) => {
   class WrappedComponent extends Component {
     static displayName = createHocName('BaseComponent', PluginComponent);
