@@ -97,8 +97,8 @@ class PluginViewer extends PureComponent {
             containerProps.style = { width: componentData.config.width };
           }
           if (type === 'wix-draft-plugin-html') {
-            const { width: currentWidth, height: currentHeight } = componentData.config;
-            containerProps.style = { width: currentWidth, height: currentHeight };
+            const { width: currentWidth } = componentData.config;
+            containerProps.style = { width: currentWidth };
           }
         }
         return (
@@ -160,6 +160,7 @@ const getPluginViewers = (typeMap, pluginProps, styles) => {
       const ViewerWrapper = isArray(interactions)
         ? getInteractionWrapper({ interactions, config: pluginProps.config, mergedStyles: styles })
         : DefaultInteractionWrapper;
+
       return (
         <ViewerWrapper>
           <PluginViewer

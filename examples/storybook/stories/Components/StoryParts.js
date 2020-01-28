@@ -2,6 +2,7 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import ReactJson from 'react-json-view';
+import styles from './styles.scss';
 
 export const Page = ({ title, children }) => (
   <div className="page">
@@ -17,9 +18,9 @@ Page.propTypes = {
 
 export const Section = ({ type, title, children }) => {
   return (
-    <div className={`section`}>
+    <div className={styles.section}>
       <h2>{title || type}</h2>
-      <div className={type}>{children}</div>
+      <div className={styles[type]}>{children}</div>
     </div>
   );
 };
@@ -34,7 +35,7 @@ Section.propTypes = {
 };
 
 export const RichContentEditorBox = ({ children, preset }) => (
-  <div className={`rce-wrapper ${preset || ''}`}>{children}</div>
+  <div className={`${styles.rceWrapper} ${styles[preset || '']}`}>{children}</div>
 );
 
 RichContentEditorBox.propTypes = {
@@ -42,7 +43,7 @@ RichContentEditorBox.propTypes = {
 };
 
 export const RichContentViewerBox = ({ children, preset }) => (
-  <div className={`rcv-wrapper ${preset || ''}`}>{children}</div>
+  <div className={`${styles.rcvWrapper} ${styles[preset || '']}`}>{children}</div>
 );
 
 RichContentViewerBox.propTypes = {

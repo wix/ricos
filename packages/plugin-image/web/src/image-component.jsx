@@ -93,7 +93,7 @@ class ImageComponent extends React.Component {
     const hasFileChangeHelper = helpers && helpers.onFilesChange;
     if (hasFileChangeHelper && fileList.length > 0) {
       helpers.onFilesChange(fileList[0], ({ data, error }) =>
-        this.handleFilesAdded(this.props.block.getKey(), { data, error })
+        this.handleFilesAdded({ data, error })
       );
     } else {
       this.resetLoadingState({ msg: 'Missing upload function' });
@@ -110,7 +110,7 @@ class ImageComponent extends React.Component {
     return state;
   };
 
-  handleFilesAdded = (blockKey, { data, error }) => {
+  handleFilesAdded = ({ data, error }) => {
     const imageData = data.length ? data[0] : data;
     const config = { ...this.props.componentData.config };
     if (!config.alignment) {
@@ -120,7 +120,7 @@ class ImageComponent extends React.Component {
       config,
       src: imageData,
     };
-    this.props.store.update('componentData', componentData, blockKey);
+    this.props.store.update('componentData', componentData, this.props.block.getKey());
     this.resetLoadingState(error);
   };
 

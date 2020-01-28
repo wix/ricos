@@ -20,6 +20,7 @@ const modalStyleDefaults = {
 };
 const anchorTarget = '_blank';
 const relValue = 'noopener';
+let shouldMultiSelectImages = false;
 
 export default class Editor extends PureComponent {
   state = {};
@@ -49,22 +50,24 @@ export default class Editor extends PureComponent {
       }
     };
     this.helpers = {
-      onFilesChange: (files, updateEntity) => mockUpload(files, updateEntity),
-      // handleFileSelection: (index, multiple, updateEntity, removeEntity) => {
-      //   const count = multiple ? [1,2,3] : [1];
-      //   const data = [];
-      //   count.forEach(_ => {
-      //     const testItem = testImages[Math.floor(Math.random() * testImages.length)];
-      //     data.push({
-      //       id: testItem.photoId,
-      //       original_file_name: testItem.url,
-      //       file_name: testItem.url,
-      //       width: testItem.metadata.width,
-      //       height: testItem.metadata.height,
-      //     });
-      //   })
-      //   setTimeout(() => { updateEntity({ data }) }, 500);
-      // },
+      // onFilesChange: (files, updateEntity) => mockUpload(files, updateEntity),
+      handleFileSelection: (index, multiple, updateEntity, removeEntity, componentData) => {
+        const count = componentData.items || shouldMultiSelectImages ? [1, 2, 3] : [1];
+        const data = [];
+        count.forEach(_ => {
+          const testItem = testImages[Math.floor(Math.random() * testImages.length)];
+          data.push({
+            id: testItem.photoId,
+            original_file_name: testItem.url,
+            file_name: testItem.url,
+            width: testItem.metadata.width,
+            height: testItem.metadata.height,
+          });
+        });
+        setTimeout(() => {
+          updateEntity({ data });
+        }, 500);
+      },
       onVideoSelected: (url, updateEntity) => {
         setTimeout(() => {
           const mockVideoIndex =
@@ -112,6 +115,9 @@ export default class Editor extends PureComponent {
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (prevProps.staticToolbar !== this.props.staticToolbar) {
       this.setEditorToolbars();
+    }
+    if (prevProps.shouldMultiSelectImages !== this.props.shouldMultiSelectImages) {
+      shouldMultiSelectImages = this.props.shouldMultiSelectImages;
     }
   }
 

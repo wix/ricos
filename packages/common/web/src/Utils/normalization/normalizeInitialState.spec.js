@@ -608,11 +608,14 @@ describe('normalizeInitialState', () => {
             data,
           },
         },
-        VERSION: '6.6.8',
       });
 
       const actual = uut(initialState(badData), {});
-      expect(actual).toEqual(initialState(goodData));
+      const goodDataWithVersion = {
+        ...initialState(goodData),
+        VERSION: Version.currentVersion,
+      };
+      expect(actual).toEqual(goodDataWithVersion);
     });
   });
 });

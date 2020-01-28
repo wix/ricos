@@ -2,12 +2,7 @@ import React, { Component } from 'react';
 import ReactPlayerWrapper from './reactPlayerWrapper';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import {
-  mergeStyles,
-  validate,
-  ViewportRenderer,
-  pluginSoundCloudSchema,
-} from 'wix-rich-content-common';
+import { mergeStyles, validate, pluginSoundCloudSchema } from 'wix-rich-content-common';
 import { isEqual } from 'lodash';
 import styles from '../statics/styles/sound-cloud-viewer.scss';
 
@@ -36,15 +31,13 @@ class SoundCloudViewer extends Component {
     const { isLoaded } = this.state;
     const props = { width, height, controls, disabled };
     return (
-      <ViewportRenderer theme={this.props.theme}>
-        <ReactPlayerWrapper
-          className={classNames(this.styles.soundCloud_player)}
-          url={componentData.src}
-          onReady={this.handleReady}
-          data-loaded={isLoaded}
-          {...props}
-        />
-      </ViewportRenderer>
+      <ReactPlayerWrapper
+        className={classNames(this.styles.soundCloud_player)}
+        url={componentData.src}
+        onReady={this.handleReady}
+        data-loaded={isLoaded}
+        {...props}
+      />
     );
   }
 }

@@ -13,12 +13,17 @@ class GalleryComponent extends PureComponent {
     super(props);
     this.state = this.stateFromProps(props);
 
-    const { block, store } = this.props;
+    const { block, store, commonPubsub } = this.props;
+    const blockKey = block.getKey();
     if (store) {
-      const blockKey = block.getKey();
       store.setBlockHandler('handleFilesSelected', blockKey, this.handleFilesSelected.bind(this));
       store.setBlockHandler('handleFilesAdded', blockKey, this.handleFilesAdded.bind(this));
     }
+    commonPubsub?.setBlockHandler(
+      'galleryHandleFilesAdded',
+      blockKey,
+      this.handleFilesAdded.bind(this)
+    );
   }
 
   componentWillReceiveProps(nextProps) {
@@ -170,6 +175,7 @@ GalleryComponent.propTypes = {
   componentData: PropTypes.object.isRequired,
   componentState: PropTypes.object.isRequired,
   store: PropTypes.object.isRequired,
+  commonPubsub: PropTypes.object,
   blockProps: PropTypes.object.isRequired,
   block: PropTypes.object.isRequired,
   onClick: PropTypes.func.isRequired,

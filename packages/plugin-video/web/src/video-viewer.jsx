@@ -3,12 +3,7 @@ import ReactDOM from 'react-dom';
 import ReactPlayerWrapper from './reactPlayerWrapper';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import {
-  mergeStyles,
-  validate,
-  ViewportRenderer,
-  pluginVideoSchema,
-} from 'wix-rich-content-common';
+import { mergeStyles, validate, pluginVideoSchema } from 'wix-rich-content-common';
 import { isEqual } from 'lodash';
 import getVideoSrc from './get-video-source';
 import styles from '../statics/styles/video-viewer.scss';
@@ -72,14 +67,12 @@ class VideoViewer extends Component {
       controls: this.props.controls,
     };
     return (
-      <ViewportRenderer theme={this.props.theme}>
-        <ReactPlayerWrapper
-          className={classNames(this.styles.video_player)}
-          data-loaded={isLoaded}
-          onContextMenu={this.handleContextMenu}
-          {...props}
-        />
-      </ViewportRenderer>
+      <ReactPlayerWrapper
+        className={classNames(this.styles.video_player)}
+        data-loaded={isLoaded}
+        onContextMenu={this.handleContextMenu}
+        {...props}
+      />
     );
   }
 }
