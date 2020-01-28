@@ -3,6 +3,7 @@ import createFocusPlugin from 'draft-js-focus-plugin';
 import createResizeDecoration from './Decorators/Resize';
 import createBlockDndPlugin from 'draft-js-drag-n-drop-plugin';
 import { simplePubsub } from 'wix-rich-content-editor-common';
+import createHandleDrop from './handleDrop';
 
 const createPlugins = ({
   plugins,
@@ -11,6 +12,8 @@ const createPlugins = ({
   theme,
   t,
   isMobile,
+  initialIntent,
+  languageDir,
   anchorTarget,
   relValue,
   getEditorState,
@@ -24,6 +27,8 @@ const createPlugins = ({
   });
 
   const dndPlugin = createBlockDndPlugin();
+  const handleDrop = dndPlugin.handleDrop;
+  dndPlugin.handleDrop = createHandleDrop(handleDrop);
 
   const wixPluginsDecorators = composeDecorators(
     dndPlugin.decorator,
@@ -39,6 +44,8 @@ const createPlugins = ({
     theme,
     t,
     isMobile,
+    initialIntent,
+    languageDir,
     anchorTarget,
     relValue,
     getEditorState,

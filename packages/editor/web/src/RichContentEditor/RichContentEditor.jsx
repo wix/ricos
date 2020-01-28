@@ -127,6 +127,8 @@ class RichContentEditor extends Component {
   initPlugins() {
     const {
       helpers,
+      locale,
+      initialIntent,
       plugins,
       config,
       isMobile,
@@ -146,6 +148,8 @@ class RichContentEditor extends Component {
       isMobile,
       anchorTarget,
       relValue,
+      initialIntent,
+      languageDir: getLangDir(locale),
       getEditorState: this.getEditorState,
       setEditorState: this.setEditorState,
       getEditorBounds: this.getEditorBounds,

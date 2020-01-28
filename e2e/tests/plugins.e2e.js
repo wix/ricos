@@ -331,7 +331,8 @@ describe('plugins', () => {
 
     after(() => cy.eyesClose());
 
-    it('drag and drop plugins', function() {
+    // eslint-disable-next-line mocha/no-skipped-tests
+    it.skip('drag and drop plugins', function() {
       cy.focusEditor();
       const src = `[data-hook=${PLUGIN_COMPONENT.IMAGE}] + [data-hook=componentOverlay]`;
       const dest = `span[data-offset-key="fjkhf-0-0"]`;

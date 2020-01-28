@@ -6,7 +6,6 @@ import {
   normalizeUrl,
   isValidUrl,
   validate,
-  ViewportRenderer,
   pluginHtmlSchema,
 } from 'wix-rich-content-common';
 
@@ -76,8 +75,7 @@ class HtmlComponent extends Component {
   setHeight = iframeHeight => {
     if (iframeHeight !== this.state.iframeHeight) {
       this.setState({ iframeHeight });
-      const { store, block } = this.props;
-      store && store.setBlockHandler('htmlPluginMaxHeight', block.key, iframeHeight);
+      this.props.store?.update('componentData', { config: { height: iframeHeight } });
     }
   };
 
@@ -87,6 +85,7 @@ class HtmlComponent extends Component {
       this.styles || mergeStyles({ styles: htmlComponentStyles, theme: this.context.theme });
     const { props } = this;
     validate(props.componentData, pluginHtmlSchema);
+
     const {
       componentData: { src, srcType, config: { width: currentWidth, height: currentHeight } = {} },
       settings: { htmlIframeSrc, width, height } = {},
@@ -99,7 +98,7 @@ class HtmlComponent extends Component {
     };
 
     return (
-      <ViewportRenderer containerStyle={style}>
+      <div style={style}>
         <div
           className={this.styles.htmlComponent}
           ref={ref => (this.element = ref)}
@@ -121,7 +120,7 @@ class HtmlComponent extends Component {
 
           {!src && !isValidUrl(src) && <div className={this.styles.htmlComponent_placeholder} />}
         </div>
-      </ViewportRenderer>
+      </div>
     );
   }
 }
