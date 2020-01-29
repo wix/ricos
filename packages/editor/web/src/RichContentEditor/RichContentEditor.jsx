@@ -29,7 +29,6 @@ class RichContentEditor extends Component {
     super(props);
     this.state = {
       editorState: this.getInitialEditorState(),
-      theme: props.theme || {},
       editorBounds: {},
     };
     this.refId = Math.floor(Math.random() * 9999);
@@ -291,7 +290,8 @@ class RichContentEditor extends Component {
       handlePastedText,
       handleReturn,
     } = this.props;
-    const { editorState, theme } = this.state;
+    const { editorState } = this.state;
+    const { theme } = this.contextualData;
 
     return (
       <Editor
@@ -341,7 +341,7 @@ class RichContentEditor extends Component {
     <AccessibilityListener isMobile={this.contextualData.isMobile} />
   );
 
-  renderTooltipHost = () => <TooltipHost theme={this.state.theme} />;
+  renderTooltipHost = () => <TooltipHost theme={this.contextualData.theme} />;
 
   styleToClass = ([key, val]) => `rich_content_${key}-${val.toString().replace('.', '_')}`;
 
@@ -367,8 +367,7 @@ class RichContentEditor extends Component {
   onResize = debounce(({ bounds }) => this.updateBounds(bounds), 100);
 
   render() {
-    const { isMobile } = this.props;
-    const { theme } = this.state;
+    const { theme, isMobile } = this.contextualData;
     const wrapperClassName = classNames(draftStyles.wrapper, styles.wrapper, theme.wrapper, {
       [styles.desktop]: !isMobile,
       [theme.desktop]: !isMobile && theme && theme.desktop,
