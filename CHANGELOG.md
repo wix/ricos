@@ -19,6 +19,8 @@
 ### :house: Internal
 - `e2e`
   - [#635](https://github.com/wix-incubator/rich-content/pull/635) disable css transitions in cypress
+- `github-actions`
+  - [#637](https://github.com/wix-incubator/rich-content/pull/637) moved release and deploy from Travis CI to github actions
   
 </details>
 <hr/>
