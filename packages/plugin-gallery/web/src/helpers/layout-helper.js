@@ -19,14 +19,13 @@ import {
 
 import layoutData from './layout-data-provider';
 
-export const switchLayout = (layout, _componentData, store) => {
+export const switchLayout = (layout, componentData, store) => {
   const galleryLayout = layout.value;
-  const layoutStyles = Object.assign({ galleryLayout }, layoutData[galleryLayout]);
-  const componentData = {
-    ..._componentData,
+  const layoutStyles = { ...{ galleryLayout }, ...layoutData[galleryLayout] };
+  store.set('componentData', {
+    ...componentData,
     styles: Object.assign({}, layoutStyles),
-  };
-  store.set('componentData', componentData);
+  });
 };
 
 export const getCurrentLayout = (store, t) => {

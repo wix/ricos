@@ -144,16 +144,14 @@ export default class Editor extends PureComponent {
 
   render() {
     const modalStyles = {
-      content: Object.assign(
-        {},
-        (this.state.modalStyles || modalStyleDefaults).content,
-        theme.modalTheme.content
-      ),
-      overlay: Object.assign(
-        {},
-        (this.state.modalStyles || modalStyleDefaults).overlay,
-        theme.modalTheme.overlay
-      ),
+      content: {
+        ...(this.state.modalStyles || modalStyleDefaults).content,
+        ...theme.modalTheme.content,
+      },
+      overlay: {
+        ...(this.state.modalStyles || modalStyleDefaults).overlay,
+        ...theme.modalTheme.overlay,
+      },
     };
     const { MobileToolbar, TextToolbar } = this.state;
     const textToolbarType = this.props.staticToolbar && !this.props.isMobile ? 'static' : null;

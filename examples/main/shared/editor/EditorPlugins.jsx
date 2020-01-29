@@ -57,7 +57,7 @@ import {
 import { getBaseUrl } from '../../src/utils';
 import { testWixVideos } from './mock';
 // import { MyCustomIcon, SizeSmallRightIcon, TOOLBARS } from 'wix-rich-content-editor-common';
-// import { TOOLBARS, BUTTONS, DISPLAY_MODE } from 'wix-rich-content-editor-common';
+import { TOOLBARS, BUTTONS, DISPLAY_MODE } from 'wix-rich-content-editor-common';
 // import InlineToolbarDecoration from './Components/InlineToolbarDecoration';
 // import StaticToolbarDecoration from './Components/StaticToolbarDecoration';
 // import SideToolbarDecoration from './Components/SideToolbarDecoration';
@@ -640,21 +640,21 @@ export const config = {
     //     }
     //   }),
     // },
-    // {
-    //   name: TOOLBARS.STATIC,
-    //   getVisibilityFn: () => ({
-    //     desktop: () => true,
-    //   }),
-    //   getDisplayOptions: () => ({
-    //     desktop: { displayMode:  DISPLAY_MODE.FLOATING },
-    //   }),
-    //   getPositionOffset: () => ({
-    //     desktop: { x: 0, y: 0 },
-    //   }),
-    //   getToolbarDecorationFn: () => ({
-    //     desktop: () => StaticToolbarDecoration
-    //   })
-    // },
+    {
+      name: TOOLBARS.STATIC,
+      getVisibilityFn: () => ({
+        desktop: () => true,
+      }),
+      getDisplayOptions: () => ({
+        desktop: { displayMode: DISPLAY_MODE.FLOATING },
+      }),
+      getPositionOffset: () => ({
+        desktop: { x: 300, y: 0 },
+      }),
+      // getToolbarDecorationFn: () => ({
+      //   desktop: () => StaticToolbarDecoration,
+      // }),
+    },
     // {
     //   name: TOOLBARS.INLINE,
     //   getToolbarDecorationFn: () => ({
