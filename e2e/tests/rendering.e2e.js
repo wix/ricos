@@ -7,6 +7,7 @@ const testFixture = fixture =>
     cy.loadEditorAndViewer(fixture);
     if (fixture.includes('video')) {
       cy.waitForVideoToLoad();
+      cy.wait(1000);
     }
     cy.eyesCheckWindow(this.test.title);
   });
