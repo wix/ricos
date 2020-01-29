@@ -71,7 +71,7 @@ class VideoViewer extends Component {
     return (
       <ReactPlayerWrapper
         className={classNames(this.styles.video_player)}
-        data-loaded={isLoaded}
+        data-loaded={isLoaded && !!key}
         onContextMenu={this.handleContextMenu}
         key={key}
         {...props}
