@@ -5,7 +5,7 @@ import { DEFAULT_DESKTOP_BROWSERS, DEFAULT_MOBILE_BROWSERS } from '../tests/cons
 const testFixture = fixture =>
   it(`render ${fixture}`, function() {
     cy.loadEditorAndViewer(fixture);
-    if (fixture.contains('video')) {
+    if (fixture.includes('video')) {
       cy.waitForVideoToLoad();
     }
     cy.eyesCheckWindow(this.test.title);
