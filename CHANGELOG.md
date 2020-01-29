@@ -16,6 +16,8 @@
 ### :bug: Bug Fix
 - `image`
   - [#635](https://github.com/wix-incubator/rich-content/pull/635) image reloaded when adding/removing link
+- `video`
+  - [#636](https://github.com/wix-incubator/rich-content/pull/636) facebook video size in SSR
 ### :house: Internal
 - `e2e`
   - [#635](https://github.com/wix-incubator/rich-content/pull/635) disable css transitions in cypress
