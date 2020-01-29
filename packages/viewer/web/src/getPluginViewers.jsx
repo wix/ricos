@@ -12,7 +12,12 @@ import { getInteractionWrapper, DefaultInteractionWrapper } from './utils/getInt
 
 class PluginViewer extends PureComponent {
   getContainerClassNames = hasLink => {
-    const { pluginComponent, componentData, styles, theme, isMobile } = this.props;
+    const {
+      pluginComponent,
+      componentData,
+      styles,
+      context: { theme, isMobile },
+    } = this.props;
     const { size, alignment, textWrap, custom } = pluginComponent.classNameStrategies || {};
     return classNames(
       styles.pluginContainerReadOnly,
@@ -43,38 +48,18 @@ class PluginViewer extends PureComponent {
       children,
       styles,
       entityIndex,
-      theme,
-      anchorTarget,
-      relValue,
-      config,
-      helpers,
-      t,
-      isMobile,
-      locale,
-      disabled,
-      shouldRenderOptimizedImages,
-      siteDomain,
-      disableRightClick,
+      context,
     } = this.props;
     const { component: Component, elementType } = pluginComponent;
     const { container } = pluginComponent.classNameStrategies || {};
     const settings = (config && config[type]) || {};
+    const { anchorTarget, relValue, config, theme } = context;
     const componentProps = {
       componentData,
       settings,
       children,
       entityIndex,
-      theme,
-      helpers,
-      anchorTarget,
-      relValue,
-      t,
-      isMobile,
-      locale,
-      disabled,
-      shouldRenderOptimizedImages,
-      siteDomain,
-      disableRightClick,
+      ...context,
     };
 
     if (Component) {
@@ -88,7 +73,7 @@ class PluginViewer extends PureComponent {
           containerProps = {
             href: normalizeUrl(url),
             target: target || anchorTarget || '_self',
-            rel: rel || relValue || 'noopener',
+            rel: rel || relValue || 'noopener noreferrer',
           };
         }
         if (componentData.config) {
@@ -130,18 +115,20 @@ PluginViewer.propTypes = {
   entityIndex: PropTypes.number.isRequired,
   children: PropTypes.node,
   styles: PropTypes.object,
-  theme: PropTypes.object.isRequired,
-  anchorTarget: PropTypes.string.isRequired,
-  relValue: PropTypes.string.isRequired,
-  config: PropTypes.object.isRequired,
-  isMobile: PropTypes.bool.isRequired,
-  helpers: PropTypes.object.isRequired,
-  t: PropTypes.func.isRequired,
-  locale: PropTypes.string.isRequired,
-  disabled: PropTypes.bool.isRequired,
-  shouldRenderOptimizedImages: PropTypes.bool.isRequired,
-  siteDomain: PropTypes.string.isRequired,
-  disableRightClick: PropTypes.bool.isRequired,
+  context: PropTypes.shape({
+    theme: PropTypes.object.isRequired,
+    anchorTarget: PropTypes.string.isRequired,
+    relValue: PropTypes.string.isRequired,
+    config: PropTypes.object.isRequired,
+    isMobile: PropTypes.bool.isRequired,
+    helpers: PropTypes.object.isRequired,
+    t: PropTypes.func.isRequired,
+    locale: PropTypes.string.isRequired,
+    disabled: PropTypes.bool,
+    shouldRenderOptimizedImages: PropTypes.bool,
+    siteDomain: PropTypes.string,
+    disableRightClick: PropTypes.bool,
+  }).isRequired,
 };
 
 PluginViewer.defaultProps = {
@@ -149,7 +136,7 @@ PluginViewer.defaultProps = {
 };
 
 //return a list of types with a function that wraps the viewer
-const getPluginViewers = (typeMap, pluginProps, styles) => {
+const getPluginViewers = (typeMap, context, styles) => {
   const res = {};
   Object.keys(typeMap).forEach(type => {
     res[type] = (children, entity, { key }) => {
@@ -158,7 +145,7 @@ const getPluginViewers = (typeMap, pluginProps, styles) => {
       const { interactions } = entity;
 
       const ViewerWrapper = isArray(interactions)
-        ? getInteractionWrapper({ interactions, config: pluginProps.config, mergedStyles: styles })
+        ? getInteractionWrapper({ interactions, config: context.config, mergedStyles: styles })
         : DefaultInteractionWrapper;
 
       return (
@@ -169,7 +156,7 @@ const getPluginViewers = (typeMap, pluginProps, styles) => {
             key={key}
             componentData={entity}
             entityIndex={key}
-            {...pluginProps}
+            context={context}
             styles={styles}
           >
             {isInline ? children : null}

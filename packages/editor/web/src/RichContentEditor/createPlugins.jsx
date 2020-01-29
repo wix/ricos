@@ -5,32 +5,13 @@ import createBlockDndPlugin from 'draft-js-drag-n-drop-plugin';
 import { simplePubsub } from 'wix-rich-content-editor-common';
 import createHandleDrop from './handleDrop';
 
-const createPlugins = ({
-  plugins,
-  config,
-  helpers,
-  theme,
-  t,
-  isMobile,
-  initialIntent,
-  languageDir,
-  anchorTarget,
-  relValue,
-  getEditorState,
-  setEditorState,
-  getEditorBounds,
-  locale,
-  shouldRenderOptimizedImages,
-  siteDomain,
-  setInPluginEditingMode,
-  getInPluginEditingMode,
-}) => {
+const createPlugins = ({ plugins, context }) => {
   const focusPlugin = createFocusPlugin();
   const resizePlugin = createResizeDecoration({
     horizontal: 'absolute',
     minWidth: 350,
-    theme,
-    isMobile,
+    theme: context.theme,
+    isMobile: context.isMobile,
   });
 
   const dndPlugin = createBlockDndPlugin();
@@ -47,25 +28,10 @@ const createPlugins = ({
 
   const wixPluginConfig = {
     decorator: wixPluginsDecorators,
-    helpers,
-    theme,
-    t,
-    isMobile,
-    initialIntent,
-    languageDir,
-    anchorTarget,
-    relValue,
-    getEditorState,
-    setEditorState,
-    getEditorBounds,
     commonPubsub: simplePubsub(),
     pluginDefaults,
-    locale,
-    shouldRenderOptimizedImages,
-    siteDomain,
-    setInPluginEditingMode,
-    getInPluginEditingMode,
-    ...config,
+    ...context,
+    ...context.config,
   };
 
   const wixPlugins = (plugins || []).map(createPlugin => createPlugin(wixPluginConfig));

@@ -42,6 +42,7 @@ class RichContentEditor extends Component {
       props.config.uiSettings || {}
     );
 
+    this.initContext();
     this.initPlugins();
   }
 
@@ -72,44 +73,49 @@ class RichContentEditor extends Component {
 
   setEditorState = editorState => this.setState({ editorState });
 
-  getEditorBounds = () => this.state.editorBounds;
-
-  initPlugins() {
+  initContext = () => {
     const {
-      helpers,
-      locale,
-      initialIntent,
-      plugins,
-      config,
-      isMobile,
-      anchorTarget,
-      relValue,
-      t,
-      customStyleFn,
-      siteDomain,
-      shouldRenderOptimizedImages,
-    } = this.props;
-
-    const { theme } = this.state;
-    const { pluginInstances, pluginButtons, pluginTextButtons, pluginStyleFns } = createPlugins({
-      plugins,
-      config,
-      helpers,
       theme,
       t,
-      isMobile,
+      locale,
       anchorTarget,
       relValue,
+      helpers,
+      config,
+      isMobile = false,
+      shouldRenderOptimizedImages,
       initialIntent,
-      languageDir: getLangDir(locale),
-      getEditorState: this.getEditorState,
+      siteDomain,
+    } = this.props;
+
+    this.contextualData = {
+      theme: theme || {},
+      t,
+      locale,
+      anchorTarget,
+      relValue,
+      helpers,
+      config,
+      isMobile,
       setEditorState: this.setEditorState,
       getEditorBounds: this.getEditorBounds,
-      locale,
+      languageDir: getLangDir(locale),
       shouldRenderOptimizedImages,
+      initialIntent,
       siteDomain,
       setInPluginEditingMode: this.setInPluginEditingMode,
       getInPluginEditingMode: this.getInPluginEditingMode,
+    };
+  };
+
+  getEditorBounds = () => this.state.editorBounds;
+
+  initPlugins() {
+    const { plugins, customStyleFn } = this.props;
+
+    const { pluginInstances, pluginButtons, pluginTextButtons, pluginStyleFns } = createPlugins({
+      plugins,
+      context: this.contextualData,
     });
     this.initEditorToolbars(pluginButtons, pluginTextButtons);
     this.pluginKeyBindings = initPluginKeyBindings(pluginTextButtons);
@@ -118,38 +124,14 @@ class RichContentEditor extends Component {
   }
 
   initEditorToolbars(pluginButtons, pluginTextButtons) {
-    const {
-      helpers,
-      anchorTarget,
-      relValue,
-      textToolbarType,
-      isMobile,
-      t,
-      config = {},
-      textAlignment,
-      locale,
-    } = this.props;
-    const { theme } = this.state;
+    const { textAlignment } = this.props;
     const buttons = { pluginButtons, pluginTextButtons };
 
     this.toolbars = createEditorToolbars({
       buttons,
-      helpers,
-      anchorTarget,
-      relValue,
-      isMobile,
-      textToolbarType,
       textAlignment,
-      theme: theme || {},
-      getEditorState: this.getEditorState,
-      setEditorState: this.setEditorState,
-      getEditorBounds: this.getEditorBounds,
-      t,
       refId: this.refId,
-      getToolbarSettings: config.getToolbarSettings,
-      uiSettings: config.uiSettings,
-      config,
-      locale,
+      context: this.contextualData,
     });
   }
 
@@ -355,7 +337,9 @@ class RichContentEditor extends Component {
     );
   };
 
-  renderAccessibilityListener = () => <AccessibilityListener isMobile={this.props.isMobile} />;
+  renderAccessibilityListener = () => (
+    <AccessibilityListener isMobile={this.contextualData.isMobile} />
+  );
 
   renderTooltipHost = () => <TooltipHost theme={this.state.theme} />;
 
