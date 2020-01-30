@@ -2,14 +2,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { findDOMNode } from 'react-dom';
-import { merge, compact, isNil } from 'lodash';
+import { merge, compact } from 'lodash';
 import classNames from 'classnames';
 import {
-  getDisplayName,
   alignmentClassName,
   sizeClassName,
   textWrapClassName,
-  normalizeUrl,
   createHocName,
 } from 'wix-rich-content-common';
 import styles from '../../statics/styles/general.scss';
@@ -29,8 +27,6 @@ const createBaseComponent = ({
   pubsub,
   commonPubsub,
   helpers,
-  anchorTarget,
-  relValue,
   t,
   isMobile,
   pluginDecorationProps = () => ({}),
@@ -220,7 +216,7 @@ const createBaseComponent = ({
         this.props,
         componentData
       );
-      const { link, width: currentWidth, height: currentHeight } = componentData.config || {};
+      const { width: currentWidth, height: currentHeight } = componentData.config || {};
       const { width: initialWidth, height: initialHeight } = settings || {};
       const isEditorFocused = selection.getHasFocus();
       const { isFocused } = blockProps;
@@ -263,6 +259,7 @@ const createBaseComponent = ({
           isMobile={isMobile}
           settings={settings}
           store={pubsub.store}
+          commonPubsub={commonPubsub}
           theme={theme}
           componentData={this.state.componentData}
           componentState={this.state.componentState}
@@ -272,22 +269,6 @@ const createBaseComponent = ({
         />
       );
 
-      let anchorProps = {};
-      if (!isNil(link)) {
-        anchorProps = {
-          href: normalizeUrl(link.url),
-          target: link.target ? link.target : anchorTarget || '_self',
-          rel: link.rel ? link.rel : relValue || 'noopener',
-        };
-      }
-      const anchorClass = classNames(this.styles.absFull, this.styles.anchor, {
-        [this.styles.isImage]:
-          getDisplayName(PluginComponent)
-            .toLowerCase()
-            .indexOf('image') !== -1,
-      });
-
-      /* eslint-disable jsx-a11y/anchor-has-content */
       return (
         <div
           role="none"
@@ -298,14 +279,7 @@ const createBaseComponent = ({
           onContextMenu={this.handleContextMenu}
           {...decorationProps}
         >
-          {!isNil(link) ? (
-            <div>
-              {component}
-              <a className={anchorClass} {...anchorProps} />
-            </div>
-          ) : (
-            component
-          )}
+          {component}
           <div
             role="none"
             data-hook={'componentOverlay'}
