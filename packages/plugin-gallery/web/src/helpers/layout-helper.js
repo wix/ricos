@@ -24,7 +24,7 @@ export const switchLayout = (layout, componentData, store) => {
   const layoutStyles = { ...{ galleryLayout }, ...layoutData[galleryLayout] };
   store.set('componentData', {
     ...componentData,
-    styles: Object.assign({}, layoutStyles),
+    styles: { ...layoutStyles },
   });
 };
 
