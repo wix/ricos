@@ -418,7 +418,7 @@ Cypress.Commands.add('dragAndDropPlugin', (src, dest) => {
 });
 
 Cypress.Commands.add('waitForVideoToLoad', { prevSubject: 'optional' }, () => {
-  cy.get('#rich-content-viewer [data-loaded=true]', { timeout: 15000 }).wait(500);
+  cy.get('#rich-content-viewer [data-loaded=true]', { timeout: 15000 }).wait(5000);
 });
 
 // disable screenshots in debug mode. So there is no diffrence to ci.
