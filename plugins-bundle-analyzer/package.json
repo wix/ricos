@@ -5,7 +5,8 @@
   "main": "index.js",
   "private": true,
   "scripts": {
-    "start": "node ./analyzePlugins.js"
+    "start": "node ./analyzeBundles.js",
+    "analyze": "node ./analyzePlugin.js"
   },
   "keywords": [],
   "author": "",
