@@ -40,11 +40,12 @@ class SliderWithInput extends Component {
   render() {
     const { label, value, min, max, onChange, theme, sliderDataHook, inputDataHook } = this.props;
     let ariaProps = label ? { 'aria-labelledby': `${this.id}_lbl` } : {};
-    ariaProps = Object.assign({}, ariaProps, {
+    ariaProps = {
+      ...ariaProps,
       'aria-valuemin': min,
       'aria-valuemax': max,
       'aria-valuenow': value,
-    });
+    };
 
     /* eslint-disable jsx-a11y/role-has-required-aria-props */
     return (
