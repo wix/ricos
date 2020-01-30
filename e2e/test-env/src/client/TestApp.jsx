@@ -27,12 +27,16 @@ class TestApp extends PureComponent {
 
   render() {
     return (
-      <>
-        Editor
-        {this.renderEditor()}
-        Viewer
-        {this.renderViewer()}
-      </>
+      <div className="testApp">
+        <div>
+          <h2>Editor</h2>
+          <div className="rcWrapper rce">{this.renderEditor()}</div>
+        </div>
+        <div>
+          <h2>Viewer</h2>
+          <div className="rcWrapper rcv">{this.renderViewer()}</div>
+        </div>
+      </div>
     );
   }
 }

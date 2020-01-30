@@ -1,4 +1,14 @@
-#root > div {
+.testApp > div {
+  width: 50%;  
+}
+
+.testApp {
+  display: flex;
+  justify-content: flex-start;
+  
+}
+
+.rcWrapper {
   border: 2px solid #3d8fd1;
-  margin: 20px;
+  padding-left:50px;
 }
