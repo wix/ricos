@@ -640,21 +640,21 @@ export const config = {
     //     }
     //   }),
     // },
-    {
-      name: TOOLBARS.STATIC,
-      getVisibilityFn: () => ({
-        desktop: () => true,
-      }),
-      getDisplayOptions: () => ({
-        desktop: { displayMode: DISPLAY_MODE.FLOATING },
-      }),
-      getPositionOffset: () => ({
-        desktop: { x: 300, y: 0 },
-      }),
-      // getToolbarDecorationFn: () => ({
-      //   desktop: () => StaticToolbarDecoration,
-      // }),
-    },
+    // {
+    //   name: TOOLBARS.STATIC,
+    //   getVisibilityFn: () => ({
+    //     desktop: () => true,
+    //   }),
+    //   getDisplayOptions: () => ({
+    //     desktop: { displayMode: DISPLAY_MODE.FLOATING },
+    //   }),
+    //   getPositionOffset: () => ({
+    //     desktop: { x: 300, y: 0 },
+    //   }),
+    //   // getToolbarDecorationFn: () => ({
+    //   //   desktop: () => StaticToolbarDecoration,
+    //   // }),
+    // },
     // {
     //   name: TOOLBARS.INLINE,
     //   getToolbarDecorationFn: () => ({
