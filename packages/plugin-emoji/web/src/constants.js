@@ -54,7 +54,7 @@ export const getEmojiGroups = t => [
   },
 ];
 
-export const DesktopFlyOutModalStyles = {
+export const DesktopFlyOutModalStyles = Object.freeze({
   overlay: {
     backgroundColor: 'rgba(0, 0, 0, 0)',
     zIndex: 5,
@@ -73,4 +73,4 @@ export const DesktopFlyOutModalStyles = {
     zIndex: 6,
     paddingTop: '20px',
   },
-};
+});
