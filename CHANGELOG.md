@@ -13,6 +13,9 @@
     Click to see more.
   </summary>
 
+  ### :house: Internal
+  - `general`
+    - `babel-plugin-transform-react-remove-prop-type`` added
 
 </details>
 <hr/>
