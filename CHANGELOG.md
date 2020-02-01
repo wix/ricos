@@ -15,7 +15,7 @@
 
   ### :house: Internal
   - `general`
-    - `babel-plugin-transform-react-remove-prop-type`` added
+    - `babel-plugin-transform-react-remove-prop-type` added
 
 </details>
 <hr/>
