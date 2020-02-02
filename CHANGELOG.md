@@ -13,7 +13,11 @@
     Click to see more.
   </summary>
 
-  
+  - `editor`
+    - [#570](https://github.com/wix-incubator/rich-content/pull/570) ErrorBoundary with default fallback component added; `fallbackComponent` prop exposed
+  - `viewer`
+    - [#570](https://github.com/wix-incubator/rich-content/pull/570) ErrorBoundary with default fallback component added; `fallbackComponent` prop exposed
+
 </details>
 <hr/>
 
@@ -25,10 +29,6 @@
   - [#635](https://github.com/wix-incubator/rich-content/pull/635) image reloaded when adding/removing link
 - `video`
   - [#636](https://github.com/wix-incubator/rich-content/pull/636) facebook video ratio in SSR
-- `editor`
-  - [#570](https://github.com/wix-incubator/rich-content/pull/570) ErrorBoundary with default fallback component added; `fallbackComponent` prop exposed
-- `viewer`
-  - [#570](https://github.com/wix-incubator/rich-content/pull/570) ErrorBoundary with default fallback component added; `fallbackComponent` prop exposed
 
 ### :house: Internal
 - `e2e`
