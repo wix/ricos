@@ -66,8 +66,10 @@ jobs:
       - uses: BanzaiMan/travis-ci-action@master
     env:
       TRAVIS_TOKEN: ${{ secrets.TRAVIS_TOKEN }}
+      PAYLOAD: ${{ '"branch":' }}${{ replace(github.ref, 'refs/heads/', '') }}
       SLUG: ${{ github.repository }}
       SITE: ${{ 'org' }}
+    # if: contains(${{ github.ref }}, 'release')
   deploy:
     runs-on: ubuntu-latest
     steps:
