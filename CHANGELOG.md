@@ -29,7 +29,7 @@
 - `e2e`
   - [#635](https://github.com/wix-incubator/rich-content/pull/635) disable css transitions in cypress
 - `github-actions`
-  - [#637](https://github.com/wix-incubator/rich-content/pull/637) moved release and deploy from Travis CI to github actions
+  - [#637](https://github.com/wix-incubator/rich-content/pull/637) moved deployment from Travis CI to Github Actions
   
 ## 6.7.0 (Jan 27, 2020)
 ### :rocket: New Feature
