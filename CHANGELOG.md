@@ -12,8 +12,11 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+    
+### :bug: Bug Fix
+- `map`
+  - [#612](https://github.com/wix-incubator/rich-content/pull/612) warnings issues of google-maps-loader props
 
-  
 </details>
 <hr/>
 
