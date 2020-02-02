@@ -68,6 +68,7 @@ jobs:
         with:
           node-version: 12
       - run: npm install
+      - run: npm run build
       - run: npm run deploy
     env:
       SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
