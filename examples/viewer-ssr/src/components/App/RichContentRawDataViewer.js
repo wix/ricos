@@ -31,11 +31,10 @@ class RichContentRawDataViewer extends Component {
           const htmlSrc = get(entity, 'data.src');
           set(entity, 'data.src', this.escapeHtml(htmlSrc));
         }
-
-        return Object.assign(map, { [`"${key}"`]: entity });
+        return { ...map, [`"${key}"`]: entity };
       }, {});
 
-      return Object.assign({}, content, { entityMap: fixedEntityMap });
+      return { ...content, entityMap: fixedEntityMap };
     }
   }
 

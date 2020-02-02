@@ -3,16 +3,16 @@ export const WAIT_INTERVAL = 300;
 export const SEARCH_TYPE = 'gifs';
 export const GIPHY_TYPE = 'wix-draft-plugin-giphy';
 
-export const DEFAULTS = {
+export const DEFAULTS = Object.freeze({
   config: {
     size: 'content',
     alignment: 'center',
   },
-};
+});
 
-export const DEFAULT_RESOLUTION = { desktop: 'original', mobile: 'original' };
+export const DEFAULT_RESOLUTION = Object.freeze({ desktop: 'original', mobile: 'original' });
 
-export const MobileFullScreenCustomStyle = {
+export const MobileFullScreenCustomStyle = Object.freeze({
   overlay: {
     backgroundColor: 'transparent',
   },
@@ -22,9 +22,9 @@ export const MobileFullScreenCustomStyle = {
     overflow: 'hidden',
     paddingRight: '6px',
   },
-};
+});
 
-export const DesktopFlyOutModalStyles = {
+export const DesktopFlyOutModalStyles = Object.freeze({
   overlay: {
     backgroundColor: 'rgba(0, 0, 0, 0)',
     zIndex: 5,
@@ -43,4 +43,4 @@ export const DesktopFlyOutModalStyles = {
     zIndex: 6,
     paddingTop: '9px',
   },
-};
+});

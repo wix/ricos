@@ -60,7 +60,7 @@ class ImageSettings extends Component {
   revertComponentData() {
     const { componentData, helpers, pubsub } = this.props;
     if (this.initialState) {
-      const initialComponentData = Object.assign({}, componentData, { ...this.initialState });
+      const initialComponentData = { ...componentData, ...this.initialState };
       pubsub.update('componentData', initialComponentData);
       this.setState({ ...this.initialState });
     }
@@ -68,8 +68,7 @@ class ImageSettings extends Component {
   }
 
   metadataUpdated = (metadata, value) => {
-    const updatedMetadata = Object.assign({}, metadata, value);
-    this.setState({ metadata: updatedMetadata });
+    this.setState({ metadata: { ...metadata, ...value } });
   };
 
   addMetadataToBlock = () => {

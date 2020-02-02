@@ -1,6 +1,6 @@
 export const MAP_TYPE = 'wix-draft-plugin-map';
 
-export const DEFAULTS = {
+export const DEFAULTS = Object.freeze({
   size: 'content',
   alignment: 'center',
   width: 400,
@@ -9,4 +9,4 @@ export const DEFAULTS = {
   maxHeight: 1000,
   minWidth: 100,
   maxwidth: 1000,
-};
+});
