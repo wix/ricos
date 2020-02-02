@@ -89,14 +89,13 @@ class AdvancedSettingsSection extends Component {
     const { data, store } = this.props;
     const componentData = {
       ...data,
-      styles: Object.assign({}, setting),
+      styles: setting,
     };
     store.set('componentData', componentData);
   };
 
   switchLayout = layout => {
-    const layoutStyles = Object.assign({}, layout, layoutData[layout.galleryLayout]);
-    this.applyGallerySetting(layoutStyles);
+    this.applyGallerySetting({ ...layout, ...layoutData[layout.galleryLayout] });
   };
 
   getValueFromComponentStyles = name => this.props.data.styles[name];

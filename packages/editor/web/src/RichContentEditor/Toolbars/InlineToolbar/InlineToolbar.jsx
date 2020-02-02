@@ -171,15 +171,16 @@ export default class InlineToolbar extends Component {
   getStyle() {
     const { displayOptions } = this.props;
     const { position } = this.state;
-    const style = { ...position };
     const defaultDispayStyles = {
       visibility: this.isVisible() ? 'visible' : 'hidden',
       transform: this.isVisible() ? 'scale(1)' : 'scale(0)',
     };
 
-    Object.assign(style, defaultDispayStyles, displayOptionStyles[displayOptions.displayMode]);
-
-    return style;
+    return {
+      ...position,
+      ...defaultDispayStyles,
+      ...displayOptionStyles[displayOptions.displayMode],
+    };
   }
 
   handleToolbarRef = node => {

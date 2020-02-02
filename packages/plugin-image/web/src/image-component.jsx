@@ -16,7 +16,7 @@ class ImageComponent extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = Object.assign({ isMounted: false }, this.stateFromProps(props));
+    this.state = { isMounted: false, ...this.stateFromProps(props) };
 
     const { block, store } = this.props;
     if (store) {
@@ -101,13 +101,10 @@ class ImageComponent extends React.Component {
   };
 
   handleFilesSelected = files => {
-    const state = {};
     const reader = new FileReader();
     reader.onload = e => this.fileLoaded(e.target.result, files);
     reader.readAsDataURL(files[0]);
-    Object.assign(state, { isLoading: true, dataUrl: EMPTY_SMALL_PLACEHOLDER });
-
-    return state;
+    return { isLoading: true, dataUrl: EMPTY_SMALL_PLACEHOLDER };
   };
 
   handleFilesAdded = ({ data, error }) => {

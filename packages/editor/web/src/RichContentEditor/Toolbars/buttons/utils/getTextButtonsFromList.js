@@ -16,7 +16,7 @@ import {
 } from '../index';
 import createThemedSeparator from './createThemedSeparator';
 
-export default ({ buttons, theme, t, isMobile, textPluginButtons, uiSettings, config }) => {
+export default ({ buttons, theme, t, isMobile, textPluginButtons = {}, uiSettings, config }) => {
   const themedSeparator = horizontal => createThemedSeparator({ theme, horizontal });
   const customSettings = config
     ?.getToolbarSettings?.({})
@@ -40,10 +40,7 @@ export default ({ buttons, theme, t, isMobile, textPluginButtons, uiSettings, co
     HorizontalSeparator: themedSeparator(true),
   };
 
-  let buttonMap = buttonByName;
-  if (textPluginButtons) {
-    buttonMap = Object.assign(buttonMap, textPluginButtons);
-  }
+  const buttonMap = { ...buttonByName, ...textPluginButtons };
 
   const structure = buttons.map(buttonName => buttonMap[buttonName]).filter(b => b !== undefined);
 

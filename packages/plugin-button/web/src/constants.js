@@ -6,13 +6,13 @@ export const BUTTON_TYPES = ['primary', 'secondary'];
 export const DEFAULT_PALETTE = ['#FEFDFD', '#D5D4D4', '#000000', '#ABCAFF', '#81B0FF', '#0261FF'];
 export const DEFAULT_COLOR = '#000000';
 export const DEFAULT_SELECTION_COLOR = '#000000';
-export const COLOR_PICKER_TYPE = {
+export const COLOR_PICKER_TYPE = Object.freeze({
   TEXT_COLOR: 'textColor',
   BORDER_COLOR: 'borderColor',
   BACKGROUND_COLOR: 'backgroundColor',
-};
+});
 
-export const COLORS = {
+export const COLORS = Object.freeze({
   color1: '#FEFDFD',
   color2: '#D5D4D4',
   color3: '#000000',
@@ -23,7 +23,7 @@ export const COLORS = {
   color8: '#0261FF',
   color9: '#0141AA',
   color10: '#012055',
-};
+});
 
 export const getDefaultComponentData = (rel, target) => {
   return {

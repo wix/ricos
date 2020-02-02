@@ -35,6 +35,10 @@ class VideoViewer extends Component {
     }
   }
 
+  componentDidMount() {
+    this.setState({ key: 'mounted' }); //remounts reactPlayer after ssr. Fixes bug where internal player id changes in client
+  }
+
   normalizeUrl = url => (url.toLowerCase().indexOf('vimeo') === 0 ? 'https://' + url : url); //vimeo player needs urls prefixed with http[s]
 
   getVideoRatio = wrapper => {
@@ -57,7 +61,7 @@ class VideoViewer extends Component {
 
   render() {
     this.styles = this.styles || mergeStyles({ styles, theme: this.props.theme });
-    const { url, isLoaded } = this.state;
+    const { url, isLoaded, key } = this.state;
     const props = {
       url,
       onReady: this.onReactPlayerReady,
@@ -71,6 +75,7 @@ class VideoViewer extends Component {
         className={classNames(this.styles.video_player)}
         data-loaded={isLoaded}
         onContextMenu={this.handleContextMenu}
+        key={key}
         {...props}
       />
     );
