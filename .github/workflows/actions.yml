@@ -67,7 +67,7 @@ jobs:
     env:
       TRAVIS_TOKEN: ${{ secrets.TRAVIS_TOKEN }}
       PAYLOAD: -|
-        "branch":${{ GITHUB_REF##*/ }}
+        "branch":${GITHUB_REF##*/}
       SLUG: ${{ github.repository }}
       SITE: ${{ 'org' }}
     # if: contains(${{ github.ref }}, 'release')
