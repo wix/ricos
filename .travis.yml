@@ -3,13 +3,13 @@ if: tag IS blank
 language: node_js
 node_js:
   - 12
+branches:
+  only:
+    - /^release-.*$/
 cache:
   npm: true
   directories:
     - ~/.cache
-branches:
-  only:
-    - /^release-.*$/
 install: npm install
 script:
   - npm run build || travis_terminate 1;
