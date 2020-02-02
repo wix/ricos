@@ -63,13 +63,11 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1.1.0
-        with:
-          node-version: 12
-      - run: npm install
-      - run: npm run build
-      - run: npm run release
+      - uses: BanzaiMan/travis-ci-action@master
+    env:
+      TRAVIS_TOKEN: ${{ secrets.TRAVIS_TOKEN }}
+      SLUG: ${{ github.repository }}
+      SITE: ${{ 'org' }}
   deploy:
     runs-on: ubuntu-latest
     steps:

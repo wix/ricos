@@ -1,0 +1,13 @@
+# don't build tags, it's redundant
+if: tag IS blank
+language: node_js
+node_js:
+  - 12
+cache:
+  npm: true
+  directories:
+    - ~/.cache
+install: npm install
+script:
+  - npm run build || travis_terminate 1;
+  - npm run release || travis_terminate 1;
