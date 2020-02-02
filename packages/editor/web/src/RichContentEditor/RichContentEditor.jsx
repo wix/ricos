@@ -431,10 +431,11 @@ class RichContentEditor extends Component {
   onResize = debounce(({ bounds }) => this.updateBounds(bounds), 100);
 
   render() {
+    const { t } = this.props;
     const Fallback = this.props.fallbackComponent;
     try {
       if (this.state.error) {
-        return <Fallback error={this.state.error} />;
+        return <Fallback error={this.state.error} t={t} />;
       }
       const { isMobile } = this.props;
       const { theme } = this.state;
@@ -466,7 +467,7 @@ class RichContentEditor extends Component {
         </Context.Provider>
       );
     } catch (err) {
-      return <Fallback error={err} />;
+      return <Fallback error={err} t={t} />;
     }
   }
 }

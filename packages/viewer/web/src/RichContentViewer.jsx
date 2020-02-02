@@ -75,10 +75,11 @@ class RichContentViewer extends Component {
   }
 
   render() {
+    const { t } = this.props;
     const Fallback = this.props.fallbackComponent;
     try {
       if (this.state.error) {
-        return <Fallback error={this.state.error} />;
+        return <Fallback error={this.state.error} t={t} />;
       }
       const { styles } = this;
       const { textDirection, typeMappers, decorators, inlineStyleMappers, locale } = this.props;
@@ -109,7 +110,7 @@ class RichContentViewer extends Component {
         </div>
       );
     } catch (err) {
-      return <Fallback error={err} />;
+      return <Fallback error={err} t={t} />;
     }
   }
 }
