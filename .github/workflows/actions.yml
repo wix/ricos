@@ -60,17 +60,6 @@ jobs:
           node-version: 12
       - run: npm install
       - run: npm run lint
-  release:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: BanzaiMan/travis-ci-action@master
-    env:
-      TRAVIS_TOKEN: ${{ secrets.TRAVIS_TOKEN }}
-      PAYLOAD: -|
-        "branch":${GITHUB_REF##*/}
-      SLUG: ${{ github.repository }}
-      SITE: ${{ 'org' }}
-    # if: contains(${{ github.ref }}, 'release')
   deploy:
     runs-on: ubuntu-latest
     steps:
