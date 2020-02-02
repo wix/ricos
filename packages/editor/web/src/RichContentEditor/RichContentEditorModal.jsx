@@ -13,7 +13,7 @@ const Modals = {
 };
 
 const RichContentEditorModal = ({ modalName, modalElement, modalsMap, ...modalProps }) => {
-  const ModalsMap = Object.assign({}, Modals, modalsMap);
+  const ModalsMap = { ...Modals, ...modalsMap };
   const element = ModalsMap[modalName] || modalElement;
   if (!element) {
     console.error(`Attempted to open unknown external modal '${modalName}'`); //eslint-disable-line no-console

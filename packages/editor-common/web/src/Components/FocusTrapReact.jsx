@@ -43,7 +43,7 @@ export default class FocusTrap extends React.Component {
         prop =>
           Object.prototype.hasOwnProperty.call(this.props, prop) && !checkedProps.includes(prop)
       )
-      .reduce((resultProps, prop) => Object.assign(resultProps, { [prop]: this.props[prop] }), {
+      .reduce((resultProps, prop) => ({ ...resultProps, [prop]: this.props[prop] }), {
         ref: this.setNode,
       });
 
