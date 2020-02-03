@@ -13,6 +13,7 @@
 
 .rcWrapper {
   border: 1px solid #3d8fd1;
+  padding: 0px 18px;
 }
 
 h3 {
@@ -26,8 +27,4 @@ h3 {
 :not(.mobile)>div>.rcWrapper {
   padding-left: 50px;
   padding-right: 50px;
-}
-
-.DraftEditor-root, div[class^='viewer'] {
-  padding: 18px;
 }
