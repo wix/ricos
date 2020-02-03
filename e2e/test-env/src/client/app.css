@@ -1,10 +1,14 @@
-.testApp>div {
+.testApp:not(.mobile)>div {
   width: 50%;
 }
 
 .testApp {
   display: flex;
   justify-content: flex-start;
+}
+
+.mobile {
+  flex-direction: column;
 }
 
 .rcWrapper {
@@ -15,11 +19,11 @@ h3 {
   margin: 10px 0px;
 }
 
-.rcv:not(.mobile) {
+:not(.mobile)>div>.rcv {
   border-left-width: 0px;
 }
 
-.rcWrapper:not(.mobile) {
+:not(.mobile)>div>.rcWrapper {
   padding-left: 50px;
   padding-right: 50px;
 }

@@ -26,15 +26,8 @@ class TestApp extends PureComponent {
 
   render() {
     const { isMobile } = this.props;
-    return isMobile ? (
-      <div>
-        <h3>Editor</h3>
-        <div className="rcWrapper mobile rce">{this.renderEditor()}</div>
-        <h3>Viewer</h3>
-        <div className="rcWrapper mobile rcv">{this.renderViewer()}</div>
-      </div>
-    ) : (
-      <div className="testApp">
+    return (
+      <div className={`testApp ${isMobile ? 'mobile' : ''}`}>
         <div>
           <h3>Editor</h3>
           <div className="rcWrapper rce">{this.renderEditor()}</div>
