@@ -32,7 +32,12 @@ export default class MobileTextLinkModal extends Component {
     const editorState = getEditorState();
     const selection = editorState.getSelection();
     const newEditorState = removeLinksInSelection(editorState);
-    setEditorState(EditorState.acceptSelection(newEditorState, selection));
+    setEditorState(
+      EditorState.forceSelection(
+        newEditorState,
+        selection.merge({ anchorOffset: selection.focusOffset })
+      )
+    );
   };
 
   render() {
