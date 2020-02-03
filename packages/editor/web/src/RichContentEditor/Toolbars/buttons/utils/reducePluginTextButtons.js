@@ -11,11 +11,11 @@ export const reducePluginTextButtons = (pluginTextButtons, filterButtons = () =>
       const buttonSet = Object.keys(buttonData).reduce((singlePluginButtons, key) => {
         if (filterButtons(buttonData[key])) {
           // index appended to avoid cross-plugin name conflicts
-          return Object.assign(singlePluginButtons, { [`${key}_${i}`]: buttonData[key].component });
+          return { ...singlePluginButtons, [`${key}_${i}`]: buttonData[key].component };
         }
         return singlePluginButtons;
       }, {});
-      return Object.assign(buttons, buttonSet);
+      return { ...buttons, ...buttonSet };
     }
     return buttons;
   }, {});

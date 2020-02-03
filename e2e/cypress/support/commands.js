@@ -31,9 +31,7 @@ const getUrl = (componentId, fixtureName = '') =>
 
 // Viewport size commands
 
-const run = (app, fixtureName) => {
-  cy.visit(getUrl(app, fixtureName));
-};
+const run = (app, fixtureName) => cy.visit(getUrl(app, fixtureName));
 
 let isMobile = false;
 let isHebrew = false;
@@ -56,9 +54,19 @@ Cypress.Commands.add('switchToEnglish', () => {
   isHebrew = false;
 });
 
+function disableTransitions() {
+  Cypress.$('head').append('<style> * {transition: none !important;}</style>');
+}
+
+function hideAllTooltips() {
+  cy.get('[data-id="tooltip"]').invoke('hide'); //uses jquery to set display: none
+}
+
 Cypress.Commands.add('loadEditorAndViewer', fixtureName => {
-  run('rce', fixtureName);
-  cy.hideTooltip();
+  run('rce', fixtureName).then(() => {
+    disableTransitions();
+    hideAllTooltips();
+  });
 });
 
 Cypress.Commands.add('matchContentSnapshot', () => {
@@ -303,7 +311,8 @@ Cypress.Commands.add('addImageLink', () => {
     .click()
     .type('www.wix.com')
     .get(`[data-hook=${SETTINGS_PANEL.DONE}]`)
-    .click();
+    .click()
+    .wait(200);
   // .get('href=www.wix.com');
 });
 
@@ -408,13 +417,8 @@ Cypress.Commands.add('dragAndDropPlugin', (src, dest) => {
     .trigger('drop', { dataTransfer });
 });
 
-Cypress.Commands.add('hideTooltip', { prevSubject: 'optional' }, () => {
-  // cy.get('.editor').trigger('mouseleave');
-  cy.get('[data-id="tooltip"]').invoke('hide'); //uses jquery to set display:none
-});
-
 Cypress.Commands.add('waitForVideoToLoad', { prevSubject: 'optional' }, () => {
-  cy.get('#rich-content-viewer [data-loaded=true]', { timeout: 15000 });
+  cy.get('[data-loaded=true]', { timeout: 15000 }).should('have.length', 2);
 });
 
 // disable screenshots in debug mode. So there is no diffrence to ci.

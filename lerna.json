@@ -11,13 +11,13 @@
   },
   "packages": [
     "e2e/test-env",
-    "packages/**/*",
     "examples/main",
     "examples/storybook",
+    "packages/**/*",
     "plugins-bundle-analyzer"
   ],
   "npmClientArgs": [
     "--no-lockfile"
   ],
-  "version": "6.6.8"
+  "version": "6.7.1"
 }

@@ -32,7 +32,7 @@ const createExternalMentionsPlugin = (config = {}) => {
   const type = EXTERNAL_MENTIONS_TYPE;
   const { theme, [type]: mentionSettings = {}, ...rest } = config;
   const styles = mergeStyles({ styles: Styles, theme });
-  const settings = Object.assign({}, DEFAULT_SETTINGS, mentionSettings);
+  const settings = { ...DEFAULT_SETTINGS, ...mentionSettings };
 
   const plugin = createMentionPlugin({
     mentionComponent: decorateComponentWithProps(MentionComponent, { settings }),
