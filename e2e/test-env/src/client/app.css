@@ -1,15 +1,29 @@
-.testApp > div {
-  width: 50%;  
+.testApp>div {
+  width: 50%;
 }
 
 .testApp {
   display: flex;
   justify-content: flex-start;
-  
+}
+
+h3 {
+  margin: 10px 0px;
 }
 
 .rcWrapper {
-  border: 2px solid #3d8fd1;
-  padding-left:50px;
+  border: 1px solid #3d8fd1;
+}
+
+.rcv:not(.mobile) {
+  border-left-width: 0px;
+}
+
+.rcWrapper:not(.mobile) {
+  padding-left: 50px;
   padding-right: 50px;
+}
+
+.DraftEditor-root, div[class^='viewer'] {
+  padding: 18px;
 }
