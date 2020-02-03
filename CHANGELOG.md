@@ -12,8 +12,18 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
-
+    
 ### :bug: Bug Fix
+- `map`
+  - [#612](https://github.com/wix-incubator/rich-content/pull/612) warnings issues of google-maps-loader props
+
+</details>
+<hr/>
+
+## 6.7.1 (Jan 27, 2020)
+### :bug: Bug Fix
+- `gallery`
+  - [#639](https://github.com/wix-incubator/rich-content/pull/639) numberOfImagesPerRow style removed from defaults
 - `image`
   - [#635](https://github.com/wix-incubator/rich-content/pull/635) image reloaded when adding/removing link
 - `video`
@@ -21,10 +31,9 @@
 ### :house: Internal
 - `e2e`
   - [#635](https://github.com/wix-incubator/rich-content/pull/635) disable css transitions in cypress
+- `github-actions`
+  - [#637](https://github.com/wix-incubator/rich-content/pull/637) moved deployment from Travis CI to Github Actions
   
-</details>
-<hr/>
-
 ## 6.7.0 (Jan 27, 2020)
 ### :rocket: New Feature
 - `image`

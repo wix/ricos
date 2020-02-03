@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Measure from 'react-measure';
-import { debounce, identity, pickBy } from 'lodash';
+import { debounce } from 'lodash';
 import { DISPLAY_MODE, TooltipHost } from 'wix-rich-content-editor-common';
 import { Context } from 'wix-rich-content-common';
 import Styles from '../../../../statics/styles/static-toolbar.scss';
@@ -205,8 +205,8 @@ export default class StaticToolbar extends React.PureComponent {
       uiSettings,
     };
 
-    const style = pickBy(offset, identity);
-    Object.assign(style, displayOptionStyles[displayOptions.displayMode]);
+    const { x: left = 0, y: top = 0 } = offset;
+    const style = { left, top, ...displayOptionStyles[displayOptions.displayMode] };
 
     const props = {
       style,
