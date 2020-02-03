@@ -1,5 +1,5 @@
-import React from 'react';
-import { RichContentEditor, RichContentEditorModal } from 'wix-rich-content-editor';
+import React, { Children } from 'react';
+import { RichContentEditorModal } from 'wix-rich-content-editor';
 import { createEmpty } from 'wix-rich-content-editor/dist/lib/editorStateConversion';
 import ReactModal from 'react-modal';
 import PropTypes from 'prop-types';
@@ -39,10 +39,11 @@ class SimplifiedRCE extends React.Component {
   };
 
   render() {
-    const { strategies = [], openModal, closeModal, forwardRef, ...rest } = this.props;
+    const { strategies = [], openModal, closeModal, children, settings, ...rest } = this.props;
+    const combinedProps = { settings, ...rest, ...(children.props || {}) };
     const modifiedProps = defaultStrategies
       .concat(strategies)
-      .reduce((props, stratFunc) => Object.assign(props, stratFunc(rest)), rest);
+      .reduce((props, stratFunc) => Object.assign(props, stratFunc(combinedProps)), combinedProps);
     const { helpers = {}, theme, locale, ModalsMap, initialState, onChange } = modifiedProps;
     const { onRequestClose } = this.state.modalProps || {};
     const { editorState } = this.state;
@@ -55,7 +56,8 @@ class SimplifiedRCE extends React.Component {
     modifiedProps.editorState = editorState;
     return (
       <React.Fragment>
-        <RichContentEditor {...modifiedProps} ref={forwardRef} />
+        {Children.only(React.cloneElement(children, modifiedProps))}
+        {/* <RichContentEditor {...modifiedProps} ref={forwardRef} /> */}
         <ReactModal
           isOpen={this.state.showModal}
           contentLabel="External Modal Example"
@@ -85,4 +87,5 @@ SimplifiedRCE.propTypes = {
   children: PropTypes.object,
   forwardRef: PropTypes.any,
 };
-export default React.forwardRef((props, ref) => <SimplifiedRCE {...props} forwardRef={ref} />);
+export default SimplifiedRCE;
+//export default React.forwardRef((props, ref) => <SimplifiedRCE {...props} forwardRef={ref} />);

@@ -56,9 +56,22 @@ export default class RceTheme {
         },
         divider: {
           strokeWidth: '12px',
-          color: this.getColorValue(28),
+          color: textColor,
         },
       };
+      // action color:
+      // hover on toolbar buttons
+      // + button on the left
+      //
+
+      // bgcolor
+      // rce text formatting toolbar (inline toolbar) - detach from background color (fixed white we want)
+
+      // divider = text color
+      // hashtag: actionColor
+      // quoteblock: actionColor
+
+      //palletes: 1 = background, 5 = text, 8 = actions
     }
   }
 }

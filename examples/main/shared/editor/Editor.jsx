@@ -179,16 +179,15 @@ export default class Editor extends PureComponent {
           helpers={this.helpers}
           onChange={this.handleChange}
           placeholder={'Add some text!'}
-          ref={editor => (this.editor = editor)}
+          //ref={editor => (this.editor = editor)}
           isMobile={this.props.isMobile}
           textToolbarType={textToolbarType}
           editorKey="random-editorKey-ssr"
           anchorTarget={anchorTarget}
           relValue={relValue}
-          //theme={theme}
           locale={this.props.locale}
           localeResource={this.props.localeResource}>
-          {/* <RichContentEditor
+          <RichContentEditor
             placeholder={'Add some text!'}
             ref={editor => (this.editor = editor)}
             //helpers={this.helpers}
@@ -198,14 +197,14 @@ export default class Editor extends PureComponent {
             //initialState={this.props.initialState}
             isMobile={this.props.isMobile}
             textToolbarType={textToolbarType}
-            theme={theme}
+            //theme={theme}
             editorKey="random-editorKey-ssr"
             anchorTarget={anchorTarget}
             relValue={relValue}
             locale={this.props.locale}
             localeResource={this.props.localeResource}
           // siteDomain="https://www.wix.com"
-          /> */}
+          />
         </SimplifiedRCE>
         {/* <ReactModal
           isOpen={this.state.showModal}
