@@ -82,6 +82,7 @@ const createBaseComponent = ({
         { key: 'htmlPluginMaxHeight', callback: this.onHtmlPluginMaxHeightChange },
         { key: 'componentLink', callback: this.onComponentLinkChange },
       ].map(({ key, callback }) => pubsub.subscribeOnBlock({ key, callback, blockKey }));
+      setTimeout(() => this.props.blockProps.setFocusToBlock(), 0);
     }
 
     componentDidUpdate() {

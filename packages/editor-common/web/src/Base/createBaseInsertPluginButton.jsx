@@ -104,15 +104,15 @@ export default ({
     shouldCreateGallery = files =>
       blockType === galleryType ||
       (pluginDefaults[galleryType] && settings.createGalleryForMultipleImages && files.length > 1);
-
     handleFileChange = (files, updateEntity) => {
+      const { setEditorState } = this.props;
       if (files.length > 0) {
         const galleryData = pluginDefaults[galleryType];
         const { newEditorState, newSelection } = this.shouldCreateGallery(files)
           ? this.createBlocksFromFiles([files], galleryData, galleryType, updateEntity)
           : this.createBlocksFromFiles(files, button.componentData, blockType, updateEntity);
 
-        this.props.setEditorState(EditorState.forceSelection(newEditorState, newSelection));
+        setEditorState(EditorState.forceSelection(newEditorState, newSelection));
       }
     };
 
@@ -139,7 +139,16 @@ export default ({
       const { styles } = this;
       const { showName, tabIndex, setEditorState } = this.props;
       const { name, Icon, wrappingComponent } = button;
+
       const WrappingComponent = wrappingComponent || 'button';
+
+      let buttonCompProps = {};
+      if (wrappingComponent) {
+        buttonCompProps = {
+          setEditorState,
+          pubsub,
+        };
+      }
 
       return (
         <WrappingComponent
@@ -149,8 +158,7 @@ export default ({
           data-hook={`${name.replace(' ', '_')}_insert_plugin_button`}
           onClick={this.onClick}
           ref={this.buttonRef}
-          pubsub={pubsub}
-          setEditorState={setEditorState}
+          {...buttonCompProps}
         >
           <div className={styles.icon}>
             <Icon key="0" />
