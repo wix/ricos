@@ -13,7 +13,9 @@
     Click to see more.
   </summary>
 
-  
+### :bug: Bug Fix
+- `editor-common`
+  - [#645](https://github.com/wix-incubator/rich-content/pull/645) When removing link from text the cursor is in the correct position
 </details>
 <hr/>
 
