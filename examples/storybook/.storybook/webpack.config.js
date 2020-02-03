@@ -1,14 +1,18 @@
 const wixStorybookConfig = require('yoshi/config/webpack.config.storybook');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
-
-module.exports = ({config}) => {
-
-
-  // return wixStorybookConfig(config); //what's wrong here?
-  // hashtag works  "stories-hashtag-theme__hashtag__1MaGy"
-  // console.log('config rules', JSON.stringify(config.module.rules))
-
-  return config;
-
-
+module.exports = ({ config }) => {
+  const baseConfig = wixStorybookConfig(config);
+  return {
+    ...baseConfig,
+    plugins: [
+      ...baseConfig.plugins,
+      new CopyWebpackPlugin([
+        {
+          from: 'node_modules/wix-rich-content-plugin-html/dist/statics/',
+          to: 'static/',
+        },
+      ]),
+    ],
+  };
 };

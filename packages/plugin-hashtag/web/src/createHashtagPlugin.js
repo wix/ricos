@@ -11,7 +11,7 @@ const createHashtagPlugin = (config = {}) => {
     hashtag: theme && theme.hashtag,
     hashtag_hover: theme && theme.hashtag_hover, //eslint-disable-line camelcase
   };
-  const hashtagProps = Object.assign({}, settings, { theme: hashtagTheme });
+  const hashtagProps = { ...settings, theme: hashtagTheme };
 
   const HashtagDecorator = createHashtagDecorator(hasLinksInBlock, List);
 
