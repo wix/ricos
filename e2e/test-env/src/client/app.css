@@ -13,7 +13,7 @@
 
 .rcWrapper {
   border: 1px solid #3d8fd1;
-  padding: 0px 18px;
+  padding: 0px 10px;
 }
 
 h3 {
@@ -25,6 +25,5 @@ h3 {
 }
 
 :not(.mobile)>div>.rcWrapper {
-  padding-left: 50px;
-  padding-right: 50px;
+  padding: 10px 50px;
 }
