@@ -7,12 +7,12 @@
   justify-content: flex-start;
 }
 
-h3 {
-  margin: 10px 0px;
-}
-
 .rcWrapper {
   border: 1px solid #3d8fd1;
+}
+
+h3 {
+  margin: 10px 0px;
 }
 
 .rcv:not(.mobile) {
