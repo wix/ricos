@@ -23,6 +23,8 @@
   - [#612](https://github.com/wix-incubator/rich-content/pull/612) warnings issues of google-maps-loader props
 - `editor-common`
   - [#642](https://github.com/wix-incubator/rich-content/pull/642) block selection is removed when losing focus
+- `link`
+  - [#646](https://github.com/wix-incubator/rich-content/pull/646) backslash in link panel breaks editor
 </details>
 <hr/>
 
