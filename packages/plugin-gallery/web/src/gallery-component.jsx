@@ -14,12 +14,17 @@ class GalleryComponent extends PureComponent {
     super(props);
     this.state = this.stateFromProps(props);
 
-    const { block, store } = this.props;
+    const { block, store, commonPubsub } = this.props;
+    const blockKey = block.getKey();
     if (store) {
-      const blockKey = block.getKey();
       store.setBlockHandler('handleFilesSelected', blockKey, this.handleFilesSelected.bind(this));
       store.setBlockHandler('handleFilesAdded', blockKey, this.handleFilesAdded.bind(this));
     }
+    commonPubsub?.setBlockHandler(
+      'galleryHandleFilesAdded',
+      blockKey,
+      this.handleFilesAdded.bind(this)
+    );
   }
 
   componentWillReceiveProps(nextProps) {
@@ -34,7 +39,7 @@ class GalleryComponent extends PureComponent {
 
   stateFromProps = props => {
     const items = props.componentData.items || []; // || DEFAULTS.items;
-    const styles = Object.assign(DEFAULTS.styles, props.componentData.styles || {});
+    const styles = { ...DEFAULTS.styles, ...(props.componentData.styles || {}) };
     const isLoading = (props.componentState && props.componentState.isLoading) || 0;
     const state = {
       items,
@@ -47,7 +52,7 @@ class GalleryComponent extends PureComponent {
       if (isLoading <= 0 && userSelectedFiles) {
         //lets continue the uploading process
         if (userSelectedFiles.files && userSelectedFiles.files.length > 0) {
-          Object.assign(state, { isLoading: userSelectedFiles.files.length });
+          state.isLoading = userSelectedFiles.files.length;
           this.handleFilesSelected(userSelectedFiles.files);
         }
         if (this.props.store) {
@@ -120,7 +125,6 @@ class GalleryComponent extends PureComponent {
           type: item.type || 'image',
           height: item.height,
           width: item.width,
-          processedByConsumer: true,
         },
         itemId: String(item.id),
         url: item.file_name,
@@ -181,6 +185,7 @@ GalleryComponent.propTypes = {
   componentData: PropTypes.object.isRequired,
   componentState: PropTypes.object.isRequired,
   store: PropTypes.object.isRequired,
+  commonPubsub: PropTypes.object,
   blockProps: PropTypes.object.isRequired,
   block: PropTypes.object.isRequired,
   onClick: PropTypes.func.isRequired,
