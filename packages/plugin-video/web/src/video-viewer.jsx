@@ -32,6 +32,9 @@ class VideoViewer extends Component {
           url.then(url => this.setState({ url: this.normalizeUrl(url) }));
         }
       }
+      if (nextProps.componentData.tempData !== this.props.componentData.tempData) {
+        this.onReactPlayerReady();
+      }
     }
   }
 
@@ -52,7 +55,7 @@ class VideoViewer extends Component {
     const ratio = this.getVideoRatio(wrapper);
     wrapper.style['padding-bottom'] = ratio * 100 + '%';
 
-    if (!this.state.isLoaded) {
+    if (!this.state.isLoaded && !this.props.componentData.tempData) {
       this.setState({ isLoaded: true });
     }
   };
@@ -76,7 +79,6 @@ class VideoViewer extends Component {
       disabled: this.props.disabled,
       width: this.props.width,
       height: this.props.height,
-      controls: this.props.controls,
     };
     return (
       <>
