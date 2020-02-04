@@ -83,7 +83,7 @@ export class MapViewer extends Component {
       <div ref={this.setRootElementRef} style={style} data-hook="mapViewer">
         <ReactGoogleMapLoader
           params={{
-            key: googleMapApiKey,
+            key: googleMapApiKey || '',
             libraries: 'geometry,drawing,places',
           }}
           render={googleMaps =>
@@ -125,7 +125,7 @@ MapViewer.propTypes = {
   settings: PropTypes.shape({
     width: PropTypes.number,
     height: PropTypes.number,
-    googleMapApiKey: PropTypes.string.isRequired,
+    googleMapApiKey: PropTypes.string,
     mapSettings: PropTypes.object,
   }).isRequired,
 };

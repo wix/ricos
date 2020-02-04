@@ -23,8 +23,9 @@ const fqdn = subdomain => `${subdomain}.surge.sh/`;
 
 const generateSubdomain = exampleName => {
   const { version } = require('../lerna.json');
-  const { TRAVIS_BRANCH } = process.env;
-  const postfix = !TRAVIS_BRANCH.startsWith('release') ? TRAVIS_BRANCH : version;
+  const { GITHUB_REF } = process.env;
+  const branchName = GITHUB_REF.split('/').pop();
+  const postfix = !branchName.startsWith('release') ? branchName : version;
   return exampleName + `-${postfix.replace(/(\.)|(\/)/g, '-')}`;
 };
 
@@ -49,8 +50,8 @@ function deploy({ name, dist = 'dist' }) {
 
 function run() {
   let skip;
-  const { SURGE_LOGIN, CI } = process.env;
-  if (!CI) {
+  const { SURGE_LOGIN, GITHUB_ACTIONS } = process.env;
+  if (!GITHUB_ACTIONS) {
     skip = 'Not in CI';
   } else if (!SURGE_LOGIN) {
     skip = 'PR from fork';

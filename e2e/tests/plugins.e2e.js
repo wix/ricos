@@ -67,7 +67,7 @@ describe('plugins', () => {
         cy.get(`[data-hook=${PLUGIN_COMPONENT.IMAGE}]:last`)
           .parent()
           .click();
-        cy.eyesCheckWindow({ tag: this.test.title, fully: false }); // viewport only
+        cy.eyesCheckWindow({ tag: this.test.title, target: 'window', fully: false });
       });
     });
 
@@ -84,7 +84,7 @@ describe('plugins', () => {
         cy.get(`[data-hook=${'image-item'}]:last`)
           .parent()
           .click();
-        cy.eyesCheckWindow({ tag: this.test.title, fully: false });
+        cy.eyesCheckWindow({ tag: this.test.title, target: 'window', fully: false });
       });
     });
   });
