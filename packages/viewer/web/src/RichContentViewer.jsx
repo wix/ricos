@@ -104,7 +104,7 @@ class RichContentViewer extends Component {
           <div className={editorClassName}>{output}</div>
           <AccessibilityListener isMobile={this.props.isMobile} />
         </div>
-    );
+      );
     } catch (err) {
       onError(err);
       return null;
