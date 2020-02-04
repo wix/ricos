@@ -378,32 +378,32 @@ class RichContentEditor extends Component {
         return null;
       }
       const { isMobile } = this.props;
-      const { theme } = this.state;
+      const { theme } = this.contextualData;
       const wrapperClassName = classNames(draftStyles.wrapper, styles.wrapper, theme.wrapper, {
         [styles.desktop]: !isMobile,
         [theme.desktop]: !isMobile && theme && theme.desktop,
       });
       return (
-      <Measure bounds onResize={this.onResize}>
-        {({ measureRef }) => (
-          <div
-            style={this.props.style}
-            ref={measureRef}
-            className={wrapperClassName}
-            dir={getLangDir(this.props.locale)}
-          >
-            {this.renderStyleTag()}
-            <div className={classNames(styles.editor, theme.editor)}>
-              {this.renderAccessibilityListener()}
-              {this.renderEditor()}
-              {this.renderToolbars()}
-              {this.renderInlineModals()}
-              {this.renderTooltipHost()}
+        <Measure bounds onResize={this.onResize}>
+          {({ measureRef }) => (
+            <div
+              style={this.props.style}
+              ref={measureRef}
+              className={wrapperClassName}
+              dir={getLangDir(this.props.locale)}
+            >
+              {this.renderStyleTag()}
+              <div className={classNames(styles.editor, theme.editor)}>
+                {this.renderAccessibilityListener()}
+                {this.renderEditor()}
+                {this.renderToolbars()}
+                {this.renderInlineModals()}
+                {this.renderTooltipHost()}
+              </div>
             </div>
-          </div>
-        )}
-      </Measure>
-    );
+          )}
+        </Measure>
+      );
     } catch (err) {
       onError(err);
       return null;
