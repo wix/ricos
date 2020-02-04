@@ -16,5 +16,8 @@
 
 .Comparison {
   display: flex;
-
+  justify-content: center;
+  > div {
+    width: 40%;
+  }
 }

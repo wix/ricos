@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { isEqual } from 'lodash';
-import { Context } from 'wix-rich-content-common';
 import GalleryViewer from './gallery-viewer';
 import { DEFAULTS, imageItem } from './constants';
 
@@ -108,7 +107,7 @@ class GalleryComponent extends PureComponent {
     const img = event.target;
     const item = imageItem(img, String(event.timeStamp));
     const itemIdx = this.setItemInGallery(item, itemPos);
-    const { helpers } = this.context;
+    const { helpers } = this.props;
     const hasFileChangeHelper = helpers && helpers.onFilesChange;
 
     if (hasFileChangeHelper) {
@@ -176,6 +175,12 @@ class GalleryComponent extends PureComponent {
         onClick={this.props.onClick}
         className={this.props.className}
         settings={this.props.settings}
+        theme={this.props.theme}
+        helpers={this.props.helpers}
+        disableRightClick={this.props.disableRightClick}
+        isMobile={this.props.isMobile}
+        anchorTarget={this.props.anchorTarget}
+        relValue={this.props.relValue}
       />
     );
   }
@@ -191,8 +196,12 @@ GalleryComponent.propTypes = {
   onClick: PropTypes.func.isRequired,
   className: PropTypes.string.isRequired,
   settings: PropTypes.object,
+  helpers: PropTypes.object.isRequired,
+  disableRightClick: PropTypes.bool.isRequired,
+  theme: PropTypes.object.isRequired,
+  isMobile: PropTypes.bool.isRequired,
+  anchorTarget: PropTypes.string.isRequired,
+  relValue: PropTypes.string.isRequired,
 };
-
-GalleryComponent.contextType = Context.type;
 
 export { GalleryComponent as Component, DEFAULTS };
