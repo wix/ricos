@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { Context, normalizeUrl } from 'wix-rich-content-common';
+import { normalizeUrl } from 'wix-rich-content-common';
 import { alignmentClassName, sizeClassName } from '../classNameStrategies.js';
 import ButtonViewer from './button-viewer';
 
@@ -15,7 +15,7 @@ class ButtonComponent extends PureComponent {
     const {
       componentData: { button },
     } = this.props;
-    const { theme } = this.context || this.props;
+    const { theme } = this.props;
     const buttonText = button.settings.buttonText;
     const target = button.settings.target ? '_blank' : '_self';
     const rel = button.settings.rel ? 'nofollow' : '';
@@ -44,8 +44,7 @@ ButtonComponent.propTypes = {
   buttonObj: PropTypes.object,
   settings: PropTypes.object.isRequired,
   blockProps: PropTypes.object,
+  theme: PropTypes.object.isRequired,
 };
-
-ButtonComponent.contextType = Context.type;
 
 export default ButtonComponent;

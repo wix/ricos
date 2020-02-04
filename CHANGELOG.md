@@ -12,7 +12,12 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
-    
+
+### :rocket: New Feature
+- `editor`
+  - [#570](https://github.com/wix-incubator/rich-content/pull/570) onError callback prop added
+- `viewer`
+  - [#570](https://github.com/wix-incubator/rich-content/pull/570) onError callback prop added
 ### :bug: Bug Fix
 - `map`
   - [#612](https://github.com/wix-incubator/rich-content/pull/612) warnings issues of google-maps-loader props
@@ -31,6 +36,7 @@
   - [#635](https://github.com/wix-incubator/rich-content/pull/635) image reloaded when adding/removing link
 - `video`
   - [#636](https://github.com/wix-incubator/rich-content/pull/636) facebook video ratio in SSR
+
 ### :house: Internal
 - `e2e`
   - [#635](https://github.com/wix-incubator/rich-content/pull/635) disable css transitions in cypress

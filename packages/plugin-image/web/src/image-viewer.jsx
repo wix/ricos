@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { get, includes, isEqual, isFunction } from 'lodash';
 import {
-  Context,
   mergeStyles,
   validate,
   isSSR,
@@ -41,7 +40,7 @@ class ImageViewer extends React.Component {
   }
 
   getImageUrl(src) {
-    const { helpers, shouldRenderOptimizedImages } = this.context || {};
+    const { helpers, shouldRenderOptimizedImages } = this.props || {};
     if (!src && helpers?.handleFileSelection) {
       return null;
     }
@@ -62,7 +61,7 @@ class ImageViewer extends React.Component {
       } else if (this.state.container) {
         const { width } = this.state.container.getBoundingClientRect();
         requiredWidth = width || src?.width || 1;
-        if (this.context.isMobile) {
+        if (this.props.isMobile) {
           //adjust the image width to viewport scaling and device pixel ratio
           requiredWidth *= (!isSSR() && window.devicePixelRatio) || 1;
           requiredWidth *= (!isSSR() && window.screen.width / document.body.clientWidth) || 1;
@@ -145,7 +144,7 @@ class ImageViewer extends React.Component {
     }
     return (
       <div className={this.styles.imageOverlay}>
-        <Loader type={'medium'} />
+        <Loader type={'medium'} theme={this.props.theme} />
       </div>
     );
   }
@@ -171,9 +170,10 @@ class ImageViewer extends React.Component {
   }
 
   renderCaption(caption) {
-    const { onCaptionChange, setFocusToBlock } = this.props;
+    const { onCaptionChange, setFocusToBlock, setInPluginEditingMode } = this.props;
     return (
       <InPluginInput
+        setInPluginEditingMode={setInPluginEditingMode}
         className={this.styles.imageCaption}
         value={caption}
         onChange={onCaptionChange}
@@ -195,9 +195,8 @@ class ImageViewer extends React.Component {
   };
 
   shouldRenderCaption() {
-    const { settings, componentData, defaultCaption } = this.props;
+    const { getInPluginEditingMode, settings, componentData, defaultCaption } = this.props;
     const caption = componentData.metadata?.caption;
-    const { getInPluginEditingMode } = this.context;
 
     if (includes(get(settings, 'toolbar.hidden'), 'settings')) {
       return false;
@@ -218,21 +217,21 @@ class ImageViewer extends React.Component {
 
   handleExpand = e => {
     e.preventDefault();
-    const { onExpand } = this.context.helpers;
+    const { onExpand } = this.props.helpers;
     onExpand && onExpand(this.props.entityIndex);
   };
 
-  handleContextMenu = e => this.context.disableRightClick && e.preventDefault();
+  handleContextMenu = e => this.props.disableRightClick && e.preventDefault();
 
   render() {
-    this.styles = this.styles || mergeStyles({ styles, theme: this.context.theme });
+    this.styles = this.styles || mergeStyles({ styles, theme: this.props.theme });
     const { componentData, className, settings } = this.props;
     const { fallbackImageSrc, ssrDone } = this.state;
     const data = componentData || DEFAULTS;
     const { metadata = {} } = componentData;
 
     const hasLink = data.config && data.config.link;
-    const hasExpand = this.context.helpers && this.context.helpers.onExpand;
+    const hasExpand = this.props.helpers && this.props.helpers.onExpand;
 
     const itemClassName = classNames(this.styles.imageContainer, className, {
       [this.styles.pointer]: hasExpand,
@@ -278,8 +277,6 @@ class ImageViewer extends React.Component {
   }
 }
 
-ImageViewer.contextType = Context.type;
-
 ImageViewer.propTypes = {
   componentData: PropTypes.object.isRequired,
   className: PropTypes.string,
@@ -291,6 +288,12 @@ ImageViewer.propTypes = {
   entityIndex: PropTypes.number,
   onCaptionChange: PropTypes.func,
   setFocusToBlock: PropTypes.func,
+  theme: PropTypes.object.isRequired,
+  helpers: PropTypes.object.isRequired,
+  disableRightClick: PropTypes.bool.isRequired,
+  getInPluginEditingMode: PropTypes.func.isRequired,
+  setInPluginEditingMode: PropTypes.func.isRequired,
+  isMobile: PropTypes.bool.isRequired,
 };
 
 export default ImageViewer;
