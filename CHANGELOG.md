@@ -15,9 +15,9 @@
 
 ### :rocket: New Feature
 - `editor`
-  - [#570](https://github.com/wix-incubator/rich-content/pull/570) ErrorBoundary and onError callback prop added
+  - [#570](https://github.com/wix-incubator/rich-content/pull/570) onError callback prop added
 - `viewer`
-  - [#570](https://github.com/wix-incubator/rich-content/pull/570) ErrorBoundary and onError callback prop added
+  - [#570](https://github.com/wix-incubator/rich-content/pull/570) onError callback prop added
 ### :bug: Bug Fix
 - `map`
   - [#612](https://github.com/wix-incubator/rich-content/pull/612) warnings issues of google-maps-loader props
