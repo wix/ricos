@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import ReactPlayerWrapper from './reactPlayerWrapper';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { mergeStyles, validate, Context, pluginVideoSchema } from 'wix-rich-content-common';
+import { mergeStyles, validate, pluginVideoSchema } from 'wix-rich-content-common';
 import { isEqual } from 'lodash';
 import getVideoSrc from './get-video-source';
 import styles from '../statics/styles/video-viewer.scss';
@@ -57,16 +57,18 @@ class VideoViewer extends Component {
     }
   };
 
-  handleContextMenu = e => this.context.disableRightClick && e.preventDefault();
+  handleContextMenu = e => this.props.disableRightClick && e.preventDefault();
 
   render() {
-    this.styles = this.styles || mergeStyles({ styles, theme: this.context.theme });
+    this.styles = this.styles || mergeStyles({ styles, theme: this.props.theme });
     const { url, isLoaded, key } = this.state;
     const props = {
-      ...this.props,
       url,
       onReady: this.onReactPlayerReady,
-      disabled: this.context.disabled,
+      disabled: this.props.disabled,
+      width: this.props.width,
+      height: this.props.height,
+      controls: this.props.controls,
     };
     return (
       <ReactPlayerWrapper
@@ -87,9 +89,10 @@ VideoViewer.propTypes = {
   width: PropTypes.string,
   height: PropTypes.string,
   settings: PropTypes.object.isRequired,
+  theme: PropTypes.object.isRequired,
+  disabled: PropTypes.bool.isRequired,
+  disableRightClick: PropTypes.bool.isRequired,
 };
-
-VideoViewer.contextType = Context.type;
 
 VideoViewer.defaultProps = {
   width: '100%',

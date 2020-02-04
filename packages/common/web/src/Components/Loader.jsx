@@ -1,14 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { default as Context } from '../Utils/Context';
 import { mergeStyles } from '../Utils/mergeStyles';
 import styles from '../../statics/styles/loaders.rtlignore.scss';
 
 class Loader extends React.Component {
   get styles() {
     if (!this._styles) {
-      const theme = this.context?.theme || this.props.theme;
+      const { theme } = this.props;
       this._styles = mergeStyles({ styles, theme });
     }
     return this._styles;
@@ -30,13 +29,11 @@ class Loader extends React.Component {
   }
 }
 
-Loader.contextType = Context.type;
-
 Loader.propTypes = {
   type: PropTypes.string,
   overlayClassName: PropTypes.string,
   loaderClassName: PropTypes.string,
-  theme: PropTypes.object,
+  theme: PropTypes.object.isRequired,
 };
 
 Loader.defaultProps = {
