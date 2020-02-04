@@ -22,7 +22,6 @@ import {
 } from 'wix-rich-content-editor-common';
 import {
   Context,
-  FallbackComponent,
   AccessibilityListener,
   normalizeInitialState,
   getLangDir,
@@ -431,11 +430,11 @@ class RichContentEditor extends Component {
   onResize = debounce(({ bounds }) => this.updateBounds(bounds), 100);
 
   render() {
-    const { t } = this.props;
-    const Fallback = this.props.fallbackComponent;
+    const { onError } = this.props;
     try {
       if (this.state.error) {
-        return <Fallback error={this.state.error} t={t} />;
+        onError(this.state.error);
+        return null;
       }
       const { isMobile } = this.props;
       const { theme } = this.state;
@@ -467,7 +466,8 @@ class RichContentEditor extends Component {
         </Context.Provider>
       );
     } catch (err) {
-      return <Fallback error={err} t={t} />;
+      onError(err);
+      return null;
     }
   }
 }
@@ -513,7 +513,7 @@ RichContentEditor.propTypes = {
   onAtomicBlockFocus: PropTypes.func,
   initialIntent: PropTypes.string,
   siteDomain: PropTypes.string,
-  fallbackComponent: PropTypes.node,
+  onError: PropTypes.func,
 };
 
 RichContentEditor.defaultProps = {
@@ -521,7 +521,9 @@ RichContentEditor.defaultProps = {
   spellCheck: true,
   customStyleFn: () => ({}),
   locale: 'en',
-  fallbackComponent: FallbackComponent,
+  onError: err => {
+    throw err;
+  },
 };
 
 export default RichContentEditor;

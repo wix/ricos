@@ -241,6 +241,5 @@
   "GallerySettings_Radios_Scroll_Direction_Tooltip" : "Vertical lets visitors scroll up and down to view images. While horizontal lets visitors scroll left and right.",
   "GallerySettings_Radios_Image_Orientation_Tooltip" : "Use Vertical for portraits and tight shots, and Horizontal for wide angle and landscape shots.",
   "GallerySettings_Spacing_Between_Items_Tooltip" : "Set the spacing between the items in your gallery.",
-  "Common_Units_PX" : "px",
-  "FallbackComponent_Error_Message" : "This page cannot be displayed"
+  "Common_Units_PX" : "px"
 }

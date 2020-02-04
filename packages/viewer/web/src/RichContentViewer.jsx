@@ -4,7 +4,6 @@ import classNames from 'classnames';
 import {
   mergeStyles,
   AccessibilityListener,
-  FallbackComponent,
   normalizeInitialState,
   Context,
   getLangDir,
@@ -75,11 +74,11 @@ class RichContentViewer extends Component {
   }
 
   render() {
-    const { t } = this.props;
-    const Fallback = this.props.fallbackComponent;
+    const { onError } = this.props;
     try {
       if (this.state.error) {
-        return <Fallback error={this.state.error} t={t} />;
+        onError(this.state.error);
+        return null;
       }
       const { styles } = this;
       const { textDirection, typeMappers, decorators, inlineStyleMappers, locale } = this.props;
@@ -110,7 +109,8 @@ class RichContentViewer extends Component {
         </div>
       );
     } catch (err) {
-      return <Fallback error={err} t={t} />;
+      onError(err);
+      return null;
     }
   }
 }
@@ -145,7 +145,7 @@ RichContentViewer.propTypes = {
   disabled: PropTypes.bool,
   shouldRenderOptimizedImages: PropTypes.bool,
   siteDomain: PropTypes.string,
-  fallbackComponent: PropTypes.node,
+  onError: PropTypes.func,
 };
 
 RichContentViewer.defaultProps = {
@@ -154,7 +154,9 @@ RichContentViewer.defaultProps = {
   typeMappers: [],
   inlineStyleMappers: [],
   locale: 'en',
-  fallbackComponent: FallbackComponent,
+  onError: err => {
+    throw err;
+  },
 };
 
 export default RichContentViewer;
