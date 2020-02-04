@@ -63,6 +63,8 @@ export const DEFAULTS = Object.freeze({
     mobileSwipeAnimation: 'NO_EFFECT',
     thumbnailSize: 120,
     gotStyleParams: true,
+    showVideoPlayButton: true,
+    videoPlay: 'onClick',
   },
   config: {
     alignment: 'center',
