@@ -83,6 +83,7 @@ class VideoViewer extends Component {
           onContextMenu={this.handleContextMenu}
           key={key}
           {...props}
+          controls={props.controls || isLoaded}
         />
         {!isLoaded && this.renderLoader()}
       </>
@@ -104,7 +105,6 @@ VideoViewer.contextType = Context.type;
 VideoViewer.defaultProps = {
   width: '100%',
   height: '100%',
-  controls: true,
 };
 
 export default VideoViewer;
