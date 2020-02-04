@@ -12,6 +12,10 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+
+### :rocket: New Feature
+- `gallery`
+  - [#625](https://github.com/wix-incubator/rich-content/pull/625) adding videos support
     
 ### :bug: Bug Fix
 - `map`
@@ -20,6 +24,10 @@
   - [#642](https://github.com/wix-incubator/rich-content/pull/642) block selection is removed when losing focus
 - `link`
   - [#646](https://github.com/wix-incubator/rich-content/pull/646) backslash in link panel breaks editor
+
+### :house: Internal
+- `fullscreen`
+  - [#625](https://github.com/wix-incubator/rich-content/pull/625) replaced react images with pro gallery as fullscreen
 </details>
 <hr/>
 
