@@ -41,23 +41,29 @@ export default class Viewer extends PureComponent {
   };
 
   render() {
-    const { expendModeIsOpen, expandModeIndex } = this.state;
+    const { scrollingElementFn, isMobile, locale, initialState } = this.props;
+    const { expendModeIsOpen, expandModeIndex, disabled } = this.state;
+
+    const viewerProps = {
+      locale,
+      relValue,
+      anchorTarget,
+      isMobile,
+      theme,
+      initialState,
+      disabled,
+    };
+
     return (
       <div id="rich-content-viewer" className="viewer">
         <RichContentViewer
           helpers={this.helpers}
           typeMappers={Plugins.typeMappers}
-          inlineStyleMappers={Plugins.getInlineStyleMappers(this.props.initialState)}
+          inlineStyleMappers={Plugins.getInlineStyleMappers(initialState)}
           decorators={Plugins.decorators}
-          config={Plugins.config}
-          initialState={this.props.initialState}
-          theme={theme}
-          isMobile={this.props.isMobile}
-          anchorTarget={anchorTarget}
-          relValue={relValue}
-          disabled={this.state.disabled}
-          locale={this.props.locale}
+          config={Plugins.getConfig({ scrollingElement: scrollingElementFn })}
           // siteDomain="https://www.wix.com"
+          {...viewerProps}
         />
         {!isSSR() && (
           <Fullscreen

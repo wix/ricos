@@ -153,9 +153,30 @@ export default class Editor extends PureComponent {
         ...theme.modalTheme.overlay,
       },
     };
+    const {
+      scrollingElementFn,
+      staticToolbar,
+      isMobile,
+      editorState,
+      initialState,
+      locale,
+      localeResource,
+    } = this.props;
     const { MobileToolbar, TextToolbar } = this.state;
-    const textToolbarType = this.props.staticToolbar && !this.props.isMobile ? 'static' : null;
+    const textToolbarType = staticToolbar && !isMobile ? 'static' : null;
     const { onRequestClose } = this.state.modalProps || {};
+
+    const editorProps = {
+      anchorTarget,
+      relValue,
+      locale,
+      localeResource,
+      theme,
+      textToolbarType,
+      isMobile,
+      initialState,
+      editorState,
+    };
     return (
       <div className="editor">
         {MobileToolbar && <MobileToolbar />}
@@ -170,18 +191,10 @@ export default class Editor extends PureComponent {
           onChange={this.handleChange}
           helpers={this.helpers}
           plugins={Plugins.editorPlugins}
-          config={Plugins.config}
-          editorState={this.props.editorState}
-          initialState={this.props.initialState}
-          isMobile={this.props.isMobile}
-          textToolbarType={textToolbarType}
-          theme={theme}
+          config={Plugins.getConfig({ scrollingElement: scrollingElementFn })}
           editorKey="random-editorKey-ssr"
-          anchorTarget={anchorTarget}
-          relValue={relValue}
-          locale={this.props.locale}
-          localeResource={this.props.localeResource}
           // siteDomain="https://www.wix.com"
+          {...editorProps}
         />
         <ReactModal
           isOpen={this.state.showModal}
