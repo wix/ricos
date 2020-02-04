@@ -279,13 +279,3 @@ body {
   background: #eff;
   border: 1px solid #eee;
 }
-
-video #spinner {
-  border: 3px solid fuchsia !important;
-  color: fuchsia !important;
-  background: fuchsia !important;
-}
-
-video::-internal-media-controls-loading-panel {
-  display: none !important;
-}
