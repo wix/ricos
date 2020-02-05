@@ -107,10 +107,11 @@ describe('plugins', () => {
       cy.eyesCheckWindow(this.test.title + ' settings');
     });
 
-    it('render gallery out of view', function() {
+    it.only('render gallery out of view', function() {
       cy.loadEditorAndViewer('gallery-out-of-view');
+      cy.eyesCheckWindow(`${this.test.title} - out of view`);
       cy.scrollTo('bottom');
-      cy.eyesCheckWindow(this.test.title);
+      cy.eyesCheckWindow(`${this.test.title} - in view`);
     });
 
     context('organize media', () => {
