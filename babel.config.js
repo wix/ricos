@@ -22,6 +22,16 @@ const commonPlugins = [
   '@babel/plugin-proposal-optional-chaining',
 ];
 
+if (process.env.NODE_ENV !== 'development') {
+  commonPlugins.push([
+    'babel-plugin-transform-react-remove-prop-types',
+    {
+      mode: 'remove',
+      removeImport: true,
+    },
+  ]);
+}
+
 const testPlugins = ['@babel/plugin-transform-modules-commonjs'];
 
 module.exports = {

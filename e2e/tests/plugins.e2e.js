@@ -107,6 +107,13 @@ describe('plugins', () => {
       cy.eyesCheckWindow(this.test.title + ' settings');
     });
 
+    it('render gallery out of view', function() {
+      cy.loadEditorAndViewer('gallery-out-of-view');
+      cy.eyesCheckWindow(`${this.test.title} - out of view`);
+      cy.scrollTo('bottom');
+      cy.eyesCheckWindow(`${this.test.title} - in view`);
+    });
+
     context('organize media', () => {
       it('allow to manipulate the media items', function() {
         const firstImage = `[data-hook=${GALLERY_SETTINGS.IMAGE}]:first`;

@@ -12,14 +12,25 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
-    
-### :bug: Bug Fix
-- `map`
-  - [#612](https://github.com/wix-incubator/rich-content/pull/612) warnings issues of google-maps-loader props
-- `editor-common`
-  - [#642](https://github.com/wix-incubator/rich-content/pull/642) block selection is removed when losing focus
-- `link`
-  - [#646](https://github.com/wix-incubator/rich-content/pull/646) backslash in link panel breaks editor
+
+  ### :rocket: New Feature
+  - `editor`
+    - [#570](https://github.com/wix-incubator/rich-content/pull/570) onError callback prop added
+  - `viewer`
+    - [#570](https://github.com/wix-incubator/rich-content/pull/570) onError callback prop added
+  ### :bug: Bug Fix
+  - `map`
+    - [#612](https://github.com/wix-incubator/rich-content/pull/612) warnings issues of google-maps-loader props
+  - `editor-common`
+    - [#642](https://github.com/wix-incubator/rich-content/pull/642) block selection is removed when losing focus
+  - `link`
+    - [#646](https://github.com/wix-incubator/rich-content/pull/646) backslash in link panel breaks editor
+  ### :house: Internal
+  - `general`
+    - [#627](https://github.com/wix-incubator/rich-content/pull/627) React Context completely removed
+    - [#641](https://github.com/wix-incubator/rich-content/pull/641) `babel-plugin-transform-react-remove-prop-type` added
+    - [#637](https://github.com/wix-incubator/rich-content/pull/637) moved deployment from Travis CI to Github Actions
+
 </details>
 <hr/>
 
@@ -34,9 +45,7 @@
 ### :house: Internal
 - `e2e`
   - [#635](https://github.com/wix-incubator/rich-content/pull/635) disable css transitions in cypress
-- `github-actions`
-  - [#637](https://github.com/wix-incubator/rich-content/pull/637) moved deployment from Travis CI to Github Actions
-  
+
 ## 6.7.0 (Jan 27, 2020)
 ### :rocket: New Feature
 - `image`

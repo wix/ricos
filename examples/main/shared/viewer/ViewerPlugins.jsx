@@ -84,7 +84,7 @@ export const typeMappers = [
 ];
 
 const uiSettings = {
-  // disableRightClick: true,
+  disableRightClick: true,
 };
 
 const config = {
