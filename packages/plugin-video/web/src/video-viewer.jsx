@@ -32,9 +32,6 @@ class VideoViewer extends Component {
           url.then(url => this.setState({ url: this.normalizeUrl(url) }));
         }
       }
-      if (nextProps.componentData.tempData !== this.props.componentData.tempData) {
-        this.onReactPlayerReady();
-      }
     }
   }
 
@@ -55,7 +52,7 @@ class VideoViewer extends Component {
     const ratio = this.getVideoRatio(wrapper);
     wrapper.style['padding-bottom'] = ratio * 100 + '%';
 
-    if (!this.state.isLoaded && !this.props.componentData.tempData) {
+    if (!this.state.isLoaded) {
       this.setState({ isLoaded: true });
     }
   };
@@ -68,7 +65,7 @@ class VideoViewer extends Component {
     );
   };
 
-  handleContextMenu = e => this.context.disableRightClick && e.preventDefault();
+  handleContextMenu = e => this.props.disableRightClick && e.preventDefault();
 
   render() {
     this.styles = this.styles || mergeStyles({ styles, theme: this.props.theme });
@@ -89,7 +86,7 @@ class VideoViewer extends Component {
           {...props}
           controls={props.controls || isLoaded}
         />
-        {!isLoaded && this.renderLoader()}
+        {!isLoaded && this.props.componentData.tempData && this.renderLoader()}
       </>
     );
   }
