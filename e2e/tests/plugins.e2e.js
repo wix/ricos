@@ -107,7 +107,7 @@ describe('plugins', () => {
       cy.eyesCheckWindow(this.test.title + ' settings');
     });
 
-    it.only('render gallery out of view', function() {
+    it('render gallery out of view', function() {
       cy.loadEditorAndViewer('gallery-out-of-view');
       cy.eyesCheckWindow(`${this.test.title} - out of view`);
       cy.scrollTo('bottom');
