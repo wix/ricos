@@ -56,7 +56,7 @@ export default class RceTheme {
         },
         divider: {
           strokeWidth: '12px',
-          color: this.getColorValue(28),
+          color: textColor,
         },
         linkPreview: {
           borderColor: textColor,
