@@ -1,5 +1,4 @@
-import React from 'react';
-import { RichContentViewer } from 'wix-rich-content-viewer';
+import React, { Children } from 'react';
 import { createEmpty } from 'wix-rich-content-editor/dist/lib/editorStateConversion';
 import { pluginsStrategyViewer } from './PluginsStrategyViewer';
 import { themeStrategy } from './ThemeStrategy';
@@ -17,11 +16,13 @@ class SimplifiedRCV extends React.Component {
   }
 
   render() {
-    const { strategies = [], forwardRef, ...rest } = this.props;
+    const { strategies = [], settings, children, ...rest } = this.props;
+    const combinedProps = { settings, ...rest, ...(children.props || {}) };
     const modifiedProps = defaultStrategies
       .concat(strategies)
-      .reduce((props, stratFunc) => Object.assign(props, stratFunc(rest)), rest);
-    return <RichContentViewer {...modifiedProps} ref={forwardRef} />;
+      .reduce((props, stratFunc) => Object.assign(props, stratFunc(combinedProps)), combinedProps);
+    return Children.only(React.cloneElement(children, modifiedProps));
+    //return <RichContentViewer {...modifiedProps} />;
   }
 }
 
@@ -32,5 +33,6 @@ SimplifiedRCV.propTypes = {
     plugins: PropTypes.arrayOf(PropTypes.object),
     theme: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   }),
+  children: PropTypes.any,
 };
-export default React.forwardRef((props, ref) => <SimplifiedRCV {...props} forwardRef={ref} />);
+export default SimplifiedRCV;
