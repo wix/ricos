@@ -16,7 +16,7 @@
 </details>
 <hr/>
 
-## 6.8.1 (Feb 5, 2020)
+## 6.8.1 (Feb 6, 2020)
 ### :bug: Bug Fix
 - `viewer`
   - [#654](https://github.com/wix-incubator/rich-content/pull/654) plugin settings retrieved correctly
