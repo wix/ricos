@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { mergeStyles, validate, Context, pluginDividerSchema } from 'wix-rich-content-common';
+import { mergeStyles, validate, pluginDividerSchema } from 'wix-rich-content-common';
 import { isEqual } from 'lodash';
 import { Divider } from '../domain/divider';
 import DividerLine from './divider-line';
@@ -20,16 +20,16 @@ class DividerComponent extends PureComponent {
   }
 
   render() {
-    this.styles = this.styles || mergeStyles({ styles, theme: this.context.theme });
+    this.styles = this.styles || mergeStyles({ styles, theme: this.props.theme });
     // NOTE: editor-only logic in viewer component
-    const editorBounds = this.context.getEditorBounds && this.context.getEditorBounds();
+    const editorBounds = this.props.getEditorBounds?.();
     const editorWidth = editorBounds && editorBounds.width ? editorBounds.width : '100%';
     const divider = new Divider(this.props.componentData);
     const { type, size, alignment } = divider;
     const className = classNames(
       this.styles['divider-container'],
       this.styles[`divider-container--${type}`],
-      this.context.isMobile && this.styles['divider-container--mobile'],
+      this.props.isMobile && this.styles['divider-container--mobile'],
       this.props.className
     );
     return (
@@ -40,7 +40,7 @@ class DividerComponent extends PureComponent {
           size={size}
           alignment={alignment}
           styles={this.styles}
-          contextType={DividerComponent.contextType || Context.type}
+          isMobile={this.props.isMobile}
         />
       </div>
     );
@@ -53,8 +53,9 @@ DividerComponent.propTypes = {
   store: PropTypes.object,
   blockProps: PropTypes.object,
   className: PropTypes.string,
+  theme: PropTypes.object.isRequired,
+  getEditorBounds: PropTypes.func.isRequired,
+  isMobile: PropTypes.bool.isRequired,
 };
-
-DividerComponent.contextType = Context.type;
 
 export default DividerComponent;

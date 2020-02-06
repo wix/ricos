@@ -123,6 +123,7 @@ const getLinkPanelDropDownConfig = () => {
       searchWords={[searchWords]}
       textToHighlight={textToHighlight}
       highlightTag={({ children }) => <strong className="highlighted-text">{children}</strong>}
+      autoEscape
     />
   );
 

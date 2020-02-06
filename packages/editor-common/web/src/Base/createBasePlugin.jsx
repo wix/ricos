@@ -40,6 +40,11 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
     pluginDefaults,
     initialIntent,
     languageDir,
+    locale,
+    shouldRenderOptimizedImages,
+    siteDomain,
+    setInPluginEditingMode,
+    getInPluginEditingMode,
   } = config;
   defaultPluginData && (pluginDefaults[config.type] = defaultPluginData);
   const toolbarTheme = { ...getToolbarTheme(config.theme, 'plugin'), ...config.theme };
@@ -64,6 +69,11 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
       getEditorBounds,
       initialIntent,
       languageDir,
+      locale,
+      shouldRenderOptimizedImages,
+      siteDomain,
+      setInPluginEditingMode,
+      getInPluginEditingMode,
     });
   const InsertPluginButtons =
     settings.showInsertButtons &&
@@ -81,6 +91,11 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
         pluginDefaults,
         initialIntent,
         languageDir,
+        locale,
+        shouldRenderOptimizedImages,
+        siteDomain,
+        setInPluginEditingMode,
+        getInPluginEditingMode,
       }),
     }));
   const PluginComponent = config.component;
@@ -106,6 +121,11 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
       disableRightClick,
       initialIntent,
       languageDir,
+      locale,
+      shouldRenderOptimizedImages,
+      siteDomain,
+      setInPluginEditingMode,
+      getInPluginEditingMode,
     });
 
   const DecoratedCompWithBase =

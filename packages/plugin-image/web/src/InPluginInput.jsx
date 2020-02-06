@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Context } from 'wix-rich-content-common';
 import classnames from 'classnames';
 import styles from '../statics/styles/in-plugin-input.scss';
 
 class InPluginInput extends Component {
   handleFocus = () => {
     this.props.setFocusToBlock();
-    this.context.setInPluginEditingMode(true);
+    this.props.setInPluginEditingMode(true);
   };
 
-  handleBlur = () => this.context.setInPluginEditingMode(false);
+  handleBlur = () => this.props.setInPluginEditingMode(false);
 
   handleKeyPress = e => {
     const { setFocusToBlock, value } = this.props;
@@ -46,8 +45,7 @@ InPluginInput.propTypes = {
   value: PropTypes.string,
   onChange: PropTypes.func,
   setFocusToBlock: PropTypes.func,
+  setInPluginEditingMode: PropTypes.func.isRequired,
 };
-
-InPluginInput.contextType = Context.type;
 
 export default InPluginInput;
