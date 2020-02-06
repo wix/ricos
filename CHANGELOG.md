@@ -13,6 +13,9 @@
     Click to see more.
   </summary>
 
+  ### :bug: Bug Fix
+  - `viewer`
+    - plugin settings retrieved correctly
 
 </details>
 <hr/>
