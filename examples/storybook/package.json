@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-storybook",
-  "version": "6.8.0",
+  "version": "6.8.1",
   "license": "UNLICENSED",
   "private": true,
   "author": {
@@ -33,7 +33,7 @@
     "aphrodite": "^2.4.0",
     "babel-eslint": "10.0.3",
     "babel-jest": "^23.6.0",
-    "draft-js": "^0.11.3",
+    "draft-js": "0.11.2",
     "husky": "~0.14.0",
     "jest": "^23.1.0",
     "jest-yoshi-preset": "^4.28.3",
@@ -41,15 +41,15 @@
     "prop-types": "^15.6.2",
     "react": "^16.6.3",
     "react-json-view": "^1.19.1",
-    "wix-rich-content-common": "6.8.0",
-    "wix-rich-content-editor": "6.8.0",
-    "wix-rich-content-editor-common": "6.8.0",
-    "wix-rich-content-plugin-divider": "6.8.0",
-    "wix-rich-content-plugin-hashtag": "6.8.0",
-    "wix-rich-content-plugin-html": "6.8.0",
-    "wix-rich-content-plugin-image": "6.8.0",
-    "wix-rich-content-plugin-link": "6.8.0",
-    "wix-rich-content-viewer": "6.8.0"
+    "wix-rich-content-common": "6.8.1",
+    "wix-rich-content-editor": "6.8.1",
+    "wix-rich-content-editor-common": "6.8.1",
+    "wix-rich-content-plugin-divider": "6.8.1",
+    "wix-rich-content-plugin-hashtag": "6.8.1",
+    "wix-rich-content-plugin-html": "6.8.1",
+    "wix-rich-content-plugin-image": "6.8.1",
+    "wix-rich-content-plugin-link": "6.8.1",
+    "wix-rich-content-viewer": "6.8.1"
   },
   "devDependencies": {
     "copy-webpack-plugin": "^4.5.1",
