@@ -53,7 +53,7 @@ class PluginViewer extends PureComponent {
     const { component: Component, elementType } = pluginComponent;
     const { container } = pluginComponent.classNameStrategies || {};
     const { anchorTarget, relValue, config, theme } = context;
-    const settings = (config && config[type]) || {};
+    const settings = config?.[type] || {};
     const componentProps = {
       componentData,
       settings,
