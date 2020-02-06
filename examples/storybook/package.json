@@ -41,6 +41,7 @@
     "prop-types": "^15.6.2",
     "react": "^16.6.3",
     "react-json-view": "^1.19.1",
+    "wix-rich-content-wrapper": "6.8.1",
     "wix-rich-content-common": "6.8.1",
     "wix-rich-content-editor": "6.8.1",
     "wix-rich-content-editor-common": "6.8.1",
