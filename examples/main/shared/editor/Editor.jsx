@@ -165,10 +165,10 @@ export default class Editor extends PureComponent {
           </div>
         )}
         <RichContentEditor
-          helpers={this.helpers}
-          onChange={this.handleChange}
           placeholder={'Add some text!'}
           ref={editor => (this.editor = editor)}
+          onChange={this.handleChange}
+          helpers={this.helpers}
           plugins={Plugins.editorPlugins}
           config={Plugins.config}
           editorState={this.props.editorState}
