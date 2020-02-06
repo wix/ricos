@@ -38,6 +38,8 @@ import addPluginModalTheme from './toolbars/add-plugin-modal.theme.scss';
 import videoUploadTheme from './toolbars/modals/video/video-upload-modal.theme.scss';
 import interactionsTheme from './interactions.scss';
 
+console.log({ footerToolbarTheme })
+
 const modalTheme = {
   content: {},
 };

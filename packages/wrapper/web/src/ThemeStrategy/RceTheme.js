@@ -5,6 +5,39 @@ const BG_COLOR = 11;
 const TEXT_COLOR = 15;
 const ACTION_COLOR = 18;
 
+const defaultStyles = {
+  hashtag: {
+    color: 'purple',
+  },
+  editor: {
+    background: 'red',
+    //color: 'red',
+  },
+  divider: {
+    //strokeWidth: '12px',
+    //color: 'red',
+  },
+  // footerToolbarButton: {
+  //   //footerToolbarButton_icon: {
+  //   ':hover': {
+  //     '&.footerToolbarButton_icon': {
+  //       color: 'red',
+  //     },
+  //   },
+  //   //},
+  // },
+  footerToolbarButton: {
+    ':hover': {
+      '& .footerToolbarButton_icon': {
+        color: 'red',
+      },
+    },
+    // },
+    //'&:hover .footerToolbarButton_icon': {
+    // color: 'red',
+    //},
+  },
+};
 export default class RceTheme {
   constructor(theme, palette) {
     this.setTheme(theme, palette);
@@ -41,7 +74,7 @@ export default class RceTheme {
 
   getStylesObject() {
     if (this._theme === Themes.DEFAULT) {
-      return {};
+      return defaultStyles;
     } else {
       const actionColor = this.getColorValue(ACTION_COLOR);
       const bgColor = this.getColorValue(BG_COLOR);
