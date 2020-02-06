@@ -7,6 +7,13 @@ import { testImages, testVideos } from './mock';
 import * as Plugins from './EditorPlugins';
 import ModalsMap from './ModalsMap';
 import theme from '../theme/theme'; // must import after custom styles
+import { SimplifiedRCE, themeStrategy, pluginsStrategy } from 'wix-rich-content-wrapper';
+import inlineToolbarTheme from '../theme/toolbars/inline-toolbar.theme.scss';
+import pluginButton from 'wix-rich-content-plugin-button';
+import pluginImage from 'wix-rich-content-plugin-image';
+import pluginHtml from 'wix-rich-content-plugin-html';
+import pluginDivider from 'wix-rich-content-plugin-divider';
+import pluginGallery from 'wix-rich-content-plugin-gallery';
 
 const modalStyleDefaults = {
   content: {
@@ -155,7 +162,7 @@ export default class Editor extends PureComponent {
     };
     const { MobileToolbar, TextToolbar } = this.state;
     const textToolbarType = this.props.staticToolbar && !this.props.isMobile ? 'static' : null;
-    const { onRequestClose } = this.state.modalProps || {};
+    //const { onRequestClose } = this.state.modalProps || {};
     return (
       <div className="editor">
         {MobileToolbar && <MobileToolbar />}
@@ -164,26 +171,42 @@ export default class Editor extends PureComponent {
             <TextToolbar />
           </div>
         )}
-        <RichContentEditor
-          placeholder={'Add some text!'}
-          ref={editor => (this.editor = editor)}
-          onChange={this.handleChange}
+        <SimplifiedRCE
+          settings={{
+            plugins: [pluginButton(), pluginDivider(), pluginGallery(), pluginHtml(), pluginImage()],
+            theme: "Default",
+          }}
           helpers={this.helpers}
-          plugins={Plugins.editorPlugins}
-          config={Plugins.config}
-          editorState={this.props.editorState}
-          initialState={this.props.initialState}
+          onChange={this.handleChange}
+          placeholder={'Add some text!'}
+          //ref={editor => (this.editor = editor)}
           isMobile={this.props.isMobile}
           textToolbarType={textToolbarType}
-          theme={theme}
           editorKey="random-editorKey-ssr"
           anchorTarget={anchorTarget}
           relValue={relValue}
           locale={this.props.locale}
-          localeResource={this.props.localeResource}
+          localeResource={this.props.localeResource}>
+          <RichContentEditor
+            placeholder={'Add some text!'}
+            ref={editor => (this.editor = editor)}
+            //helpers={this.helpers}
+            //plugins={Plugins.editorPlugins}
+            //config={Plugins.config}
+            //editorState={this.props.editorState}
+            //initialState={this.props.initialState}
+            isMobile={this.props.isMobile}
+            textToolbarType={textToolbarType}
+            //theme={theme}
+            editorKey="random-editorKey-ssr"
+            anchorTarget={anchorTarget}
+            relValue={relValue}
+            locale={this.props.locale}
+            localeResource={this.props.localeResource}
           // siteDomain="https://www.wix.com"
-        />
-        <ReactModal
+          />
+        </SimplifiedRCE>
+        {/* <ReactModal
           isOpen={this.state.showModal}
           contentLabel="External Modal Example"
           style={modalStyles}
@@ -195,7 +218,7 @@ export default class Editor extends PureComponent {
             locale={this.props.locale}
             {...this.state.modalProps}
           />
-        </ReactModal>
+        </ReactModal> */}
       </div>
     );
   }
