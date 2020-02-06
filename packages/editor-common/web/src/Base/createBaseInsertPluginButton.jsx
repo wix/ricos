@@ -142,13 +142,6 @@ export default ({
 
       const WrappingComponent = wrappingComponent || 'button';
 
-<<<<<<< HEAD
-      const props = {};
-      if (wrappingComponent) {
-        props.pubsub = pubsub;
-        props.setEditorState = setEditorState;
-      }
-=======
       let buttonCompProps = {};
       if (wrappingComponent) {
         buttonCompProps = {
@@ -157,7 +150,6 @@ export default ({
         };
       }
 
->>>>>>> master
       return (
         <WrappingComponent
           aria-label={`Add ${name}`}
@@ -166,11 +158,7 @@ export default ({
           data-hook={`${name.replace(' ', '_')}_insert_plugin_button`}
           onClick={this.onClick}
           ref={this.buttonRef}
-<<<<<<< HEAD
-          {...props}
-=======
           {...buttonCompProps}
->>>>>>> master
         >
           <div className={styles.icon}>
             <Icon key="0" />
