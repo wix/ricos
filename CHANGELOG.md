@@ -15,7 +15,7 @@
 
   ### :bug: Bug Fix
   - `image`
-    - Idefaults for editor-only props in image-viewer
+    - defaults for editor-only props in image-viewer
 
 </details>
 <hr/>
