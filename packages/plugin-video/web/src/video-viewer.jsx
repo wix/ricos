@@ -90,8 +90,8 @@ VideoViewer.propTypes = {
   height: PropTypes.string,
   settings: PropTypes.object.isRequired,
   theme: PropTypes.object.isRequired,
-  disabled: PropTypes.bool.isRequired,
-  disableRightClick: PropTypes.bool.isRequired,
+  disabled: PropTypes.bool,
+  disableRightClick: PropTypes.bool,
 };
 
 VideoViewer.defaultProps = {

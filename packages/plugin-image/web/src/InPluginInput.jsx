@@ -45,7 +45,12 @@ InPluginInput.propTypes = {
   value: PropTypes.string,
   onChange: PropTypes.func,
   setFocusToBlock: PropTypes.func,
-  setInPluginEditingMode: PropTypes.func.isRequired,
+  setInPluginEditingMode: PropTypes.func,
+};
+
+InPluginInput.defaultProps = {
+  setInPluginEditingMode: () => false,
+  setFocusToBlock: () => false,
 };
 
 export default InPluginInput;

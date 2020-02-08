@@ -290,9 +290,9 @@ ImageViewer.propTypes = {
   setFocusToBlock: PropTypes.func,
   theme: PropTypes.object.isRequired,
   helpers: PropTypes.object.isRequired,
-  disableRightClick: PropTypes.bool.isRequired,
-  getInPluginEditingMode: PropTypes.func.isRequired,
-  setInPluginEditingMode: PropTypes.func.isRequired,
+  disableRightClick: PropTypes.bool,
+  getInPluginEditingMode: PropTypes.func,
+  setInPluginEditingMode: PropTypes.func,
   isMobile: PropTypes.bool.isRequired,
 };
 
