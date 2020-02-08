@@ -12,7 +12,11 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
-  
+
+  ### :bug: Bug Fix
+  - `image`
+    - Idefaults for editor-only props in image-viewer
+
 </details>
 <hr/>
 
