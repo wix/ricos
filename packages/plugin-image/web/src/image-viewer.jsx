@@ -171,7 +171,7 @@ class ImageViewer extends React.Component {
 
   renderCaption(caption) {
     const { onCaptionChange, setFocusToBlock, setInPluginEditingMode } = this.props;
-    return (
+    return onCaptionChange ? (
       <InPluginInput
         setInPluginEditingMode={setInPluginEditingMode}
         className={this.styles.imageCaption}
@@ -179,6 +179,8 @@ class ImageViewer extends React.Component {
         onChange={onCaptionChange}
         setFocusToBlock={setFocusToBlock}
       />
+    ) : (
+      <span className={this.styles.imageCaption}>{caption}</span>
     );
   }
 

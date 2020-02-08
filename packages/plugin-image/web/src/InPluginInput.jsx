@@ -24,12 +24,10 @@ class InPluginInput extends Component {
   className = classnames(styles.inPluginInput, this.props.className);
 
   render() {
-    const { onChange, value } = this.props;
     return (
       <input
         className={this.className}
-        value={value}
-        readOnly={!onChange}
+        value={this.props.value}
         onChange={this.onChange}
         onFocus={this.handleFocus}
         onBlur={this.handleBlur}
