@@ -15,7 +15,7 @@
 
   ### :bug: Bug Fix
   - `common`
-    - `types` definitions moved to `src/consts` from `statics`
+    - [#658](https://github.com/wix-incubator/rich-content/pull/658) `types` definitions moved to `src/consts` from `statics`
 
 </details>
 <hr/>
