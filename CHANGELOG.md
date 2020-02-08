@@ -15,7 +15,7 @@
 
   ### :bug: Bug Fix
   - `image`
-    - defaults for editor-only props in image-viewer
+    - [#657](https://github.com/wix-incubator/rich-content/pull/657) defaults for editor-only props in image-viewer
 
 </details>
 <hr/>
