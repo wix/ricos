@@ -6,7 +6,7 @@ import {
   LINK_TYPE,
   VIDEO_TYPE_LEGACY,
   IMAGE_TYPE_LEGACY,
-} from '../../../statics/types';
+} from '../../consts';
 import { linkDataNormalizer, imageDataNormalizer } from './dataNormalizers';
 
 const dataNormalizers = {
