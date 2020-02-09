@@ -183,6 +183,7 @@
   "DividerPlugin_Width_Large_Tooltip" : "Full width",
   "GalleryPlugin_Layout_Select_Tooltip" : "Gallery layout",
   "AnchorPlugin_Settings_Tooltip" : "Edit anchor name",
+  "AnchorPlugin_AddAnchor_Tooltip" : "Add an anchor",  
   "AnchorPlugin_MoveUp_Tooltip" : "Move up",
   "AnchorPlugin_MoveDown_Tooltip" : "Move down",
   "AnchorPlugin_Modal_Placeholder" : "Anchor {{number}}",
