@@ -4,10 +4,10 @@ import { createEmpty } from 'wix-rich-content-editor/dist/lib/editorStateConvers
 import ReactModal from 'react-modal';
 import PropTypes from 'prop-types';
 import { modalStyles } from './defaults';
-import { pluginsStrategy } from './PluginsStrategy';
+//import { pluginsStrategy } from './PluginsStrategy';
 import { themeStrategy } from './ThemeStrategy';
 
-const defaultStrategies = [pluginsStrategy, themeStrategy];
+const defaultStrategies = [themeStrategy];
 class SimplifiedRCE extends React.Component {
   constructor(props) {
     super(props);
