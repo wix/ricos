@@ -58,19 +58,21 @@ class SimplifiedRCE extends React.Component {
       <React.Fragment>
         {Children.only(React.cloneElement(children, modifiedProps))}
         {/* <RichContentEditor {...modifiedProps} ref={forwardRef} /> */}
-        <ReactModal
-          isOpen={this.state.showModal}
-          contentLabel="External Modal Example"
-          style={modalStyles(this.state, theme)}
-          role="dialog"
-          onRequestClose={onRequestClose || helpers.closeModal}
-        >
-          <RichContentEditorModal
-            modalsMap={ModalsMap}
-            locale={locale}
-            {...this.state.modalProps}
-          />
-        </ReactModal>
+        {this.state.modalProps && (
+          <ReactModal
+            isOpen={this.state.showModal}
+            contentLabel="External Modal Example"
+            style={modalStyles(this.state, theme)}
+            role="dialog"
+            onRequestClose={onRequestClose || helpers.closeModal}
+          >
+            <RichContentEditorModal
+              modalsMap={ModalsMap}
+              locale={locale}
+              {...this.state.modalProps}
+            />
+          </ReactModal>
+        )}
       </React.Fragment>
     );
   }
@@ -85,7 +87,7 @@ SimplifiedRCE.propTypes = {
   openModal: PropTypes.func,
   closeModal: PropTypes.func,
   children: PropTypes.object,
-  forwardRef: PropTypes.any,
+  //forwardRef: PropTypes.any,
 };
 export default SimplifiedRCE;
 //export default React.forwardRef((props, ref) => <SimplifiedRCE {...props} forwardRef={ref} />);
