@@ -35,14 +35,17 @@ export default () => {
       <Section title="Live Site Theme 1">
         <Palette palette={wixPalettes.site1} />
         <RichContentEditorBox>
-          <SimplifiedRCE
+          {/* <SimplifiedRCE
             editorState={editorState}
             plugins={PLUGINS}
             config={config}
             settings={{ theme: Themes.PALETTE, palette: wixPalettes.site1 }}
           >
-            <RichContentEditor editorState={editorState} plugins={PLUGINS} config={config} />
-          </SimplifiedRCE>
+            <RichContentEditor />
+          </SimplifiedRCE> */}
+          <ThemeWrapper theme={Themes.PALETTE} palette={wixPalettes.site1}>
+            <RichContentEditor config={config} plugins={PLUGINS} editorState={editorState} />
+          </ThemeWrapper>
         </RichContentEditorBox>
       </Section>
 
