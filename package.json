@@ -36,7 +36,8 @@
     "e2e:app:dev": "cd e2e/test-env && npm run dev",
     "test:unit": "lerna run --parallel --stream test",
     "lint": "lerna run --parallel --stream lint",
-    "build:test": "npm run build && npm run build --prefix e2e/test-env"
+    "build:test": "npm run build && npm run build --prefix e2e/test-env",
+    "generatePlugin": "node scripts/generatePlugin"
   },
   "husky": {
     "hooks": {
