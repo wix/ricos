@@ -210,7 +210,9 @@ describe('plugins', () => {
       cy.openVideoUploadModal().addVideoFromURL();
       cy.shrinkPlugin();
       cy.waitForVideoToLoad();
-      cy.focusEditor().enterParagraphs(['Will this fix the flakiness?']);
+      cy.focusEditor()
+        .click(10, 10)
+        .enterParagraphs(['Will this fix the flakiness?']);
       cy.eyesCheckWindow(this.test.title);
     });
 
@@ -218,7 +220,9 @@ describe('plugins', () => {
       cy.openVideoUploadModal().addCustomVideo();
       cy.shrinkPlugin();
       cy.waitForVideoToLoad();
-      cy.focusEditor().enterParagraphs(['Will this fix the flakiness?']);
+      cy.focusEditor()
+        .click(10, 10)
+        .enterParagraphs(['Will this fix the flakiness?']);
 
       cy.eyesCheckWindow(this.test.title);
     });
