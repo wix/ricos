@@ -2,7 +2,7 @@ import React from 'react';
 import { RichContentEditorBox, Section, Page } from '../Components/StoryParts';
 import { createDividerPlugin } from 'wix-rich-content-plugin-divider';
 import { createHashtagPlugin, HASHTAG_TYPE } from 'wix-rich-content-plugin-hashtag';
-import { exapmleState } from '../../fixtures/editorStates';
+import exapmleState from '../../../../e2e/tests/fixtures/basic-plugins.json';
 import Palette from '../Components/Palette';
 import { wixPalettes } from '../palettesExample';
 import { RichContentEditor, convertFromRaw, createWithContent } from 'wix-rich-content-editor';

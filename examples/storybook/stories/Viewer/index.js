@@ -4,7 +4,7 @@ import { storiesOf } from '@storybook/react';
 
 import { Page, RichContentExamples } from '../Components/StoryParts';
 import { RichContentViewer } from 'wix-rich-content-viewer';
-import { exapmleState } from '../../fixtures/editorStates';
+import exapmleState from '../../../../e2e/tests/fixtures/basic-plugins.json';
 import { dividerTypeMapper } from 'wix-rich-content-plugin-divider/dist/module.viewer';
 
 const BasicUsagePage = () => {

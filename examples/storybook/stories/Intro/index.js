@@ -8,7 +8,7 @@ import { createDividerPlugin } from 'wix-rich-content-plugin-divider';
 import { dividerTypeMapper } from 'wix-rich-content-plugin-divider/dist/module.viewer';
 
 import { createHashtagPlugin, HASHTAG_TYPE } from 'wix-rich-content-plugin-hashtag';
-import { introState } from '../../fixtures/editorStates';
+import introState from './introEditorState';
 
 const editorState = createWithContent(convertFromRaw(introState));
 
