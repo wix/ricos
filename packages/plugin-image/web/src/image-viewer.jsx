@@ -246,7 +246,7 @@ class ImageViewer extends React.Component {
         ? settings.imageProps(data.src)
         : settings.imageProps;
     }
-    const isGif = imageSrc?.highres?.endsWith('.gif');
+    const isGif = imageSrc?.highres?.endsWith?.('.gif');
     const shouldRenderPreloadImage = imageSrc && !isGif;
     const shouldRenderImage = (imageSrc && ssrDone) || isGif;
 
