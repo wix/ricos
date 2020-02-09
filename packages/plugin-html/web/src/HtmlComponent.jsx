@@ -138,7 +138,7 @@ HtmlComponent.propTypes = {
   }).isRequired,
   store: PropTypes.object,
   block: PropTypes.object,
-  siteDomain: PropTypes.string.isRequired,
+  siteDomain: PropTypes.string,
   theme: PropTypes.object.isRequired,
   isMobile: PropTypes.bool.isRequired,
 };
