@@ -4,7 +4,8 @@ import { RichContentViewerBox, ContentState, Section, Page } from '../Components
 import { RichContentViewer } from 'wix-rich-content-viewer';
 import { imageTypeMapper } from 'wix-rich-content-plugin-image/dist/module.viewer';
 import { linkTypeMapper } from 'wix-rich-content-plugin-link/dist/module.viewer';
-import AlignLeftiesState from '../../fixtures/AlignLefties';
+import fixture from '../../../../e2e/tests/fixtures/plugin-left-alignment.json';
+
 import viewerTheme from './viewer.scss';
 
 const typeMappers = [imageTypeMapper, linkTypeMapper, htmlTypeMapper];
@@ -23,7 +24,7 @@ export default () => {
       <Section title={'Height check'}>
         <RichContentViewerBox preset="blog-preset">
           <RichContentViewer
-            initialState={AlignLeftiesState}
+            initialState={fixture}
             typeMappers={typeMappers}
             config={config}
             theme={theme}
@@ -32,7 +33,7 @@ export default () => {
       </Section>
 
       <Section title="Content State">
-        <ContentState json={AlignLeftiesState} />
+        <ContentState json={fixture} />
       </Section>
     </Page>
   );
