@@ -16,6 +16,8 @@
   ### :bug: Bug Fix
   - `image`
     - [#657](https://github.com/wix-incubator/rich-content/pull/657) defaults for editor-only props in image-viewer
+    - [#657](https://github.com/wix-incubator/rich-content/pull/657) in-plugin editing input rendered in edit mode only
+    - [#657](https://github.com/wix-incubator/rich-content/pull/657) highres URL on SSR protection
 
 </details>
 <hr/>
