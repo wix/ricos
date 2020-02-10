@@ -1,6 +1,4 @@
-import SimplifiedRCE from './SimplifiedRCE';
-import SimplifiedRCV from './SimplifiedRCV';
-import { pluginsStrategy } from './PluginsStrategy';
-import { themeStrategy } from './ThemeStrategy';
-export { SimplifiedRCE, SimplifiedRCV };
-export { pluginsStrategy, themeStrategy };
+import OSWrapEditor from './OSWrapEditor';
+import OSWrapViewer from './OSWrapViewer';
+import { wixPalettes } from './palettesExample';
+export { OSWrapEditor, OSWrapViewer, wixPalettes };

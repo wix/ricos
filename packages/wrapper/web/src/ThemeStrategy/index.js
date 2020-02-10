@@ -1,1 +1,2 @@
-export { default as themeStrategy } from './ThemeStrategy';
+import themeStrategyProvider from './ThemeStrategyProvider';
+export default themeStrategyProvider;

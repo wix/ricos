@@ -14,6 +14,7 @@
   "SizeSmallCenterButton_Tooltip" : "pieni",
   "LinkPanelContainer_DoneButton" : "Tallenna",
   "SizeFullWidthButton_Tooltip" : "Täysi leveys",
+  "AnchorPlugin_AddAnchor_Tooltip" : "Add an anchor",
   "HtmlPlugin_EditUrl_Tooltip" : "Edit URL",
   "GalleryPlugin_Layout_Collage" : "Kollaasi",
   "ButtonModal_Settings_Tab" : "Asetukset",

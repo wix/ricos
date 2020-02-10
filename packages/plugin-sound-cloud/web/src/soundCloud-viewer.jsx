@@ -51,7 +51,7 @@ SoundCloudViewer.propTypes = {
   height: PropTypes.string,
   isLoaded: PropTypes.bool,
   theme: PropTypes.object.isRequired,
-  disabled: PropTypes.bool.isRequired,
+  disabled: PropTypes.bool,
 };
 
 SoundCloudViewer.defaultProps = {

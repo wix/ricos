@@ -14,6 +14,7 @@
   "SizeSmallCenterButton_Tooltip" : "小",
   "LinkPanelContainer_DoneButton" : "保存する",
   "SizeFullWidthButton_Tooltip" : "全幅",
+  "AnchorPlugin_AddAnchor_Tooltip" : "Add an anchor",
   "HtmlPlugin_EditUrl_Tooltip" : "変更する",
   "GalleryPlugin_Layout_Collage" : "コラージュ",
   "ButtonModal_Settings_Tab" : "設定",
