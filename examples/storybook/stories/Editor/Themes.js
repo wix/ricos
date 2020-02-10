@@ -6,12 +6,10 @@ import exapmleState from '../../../../e2e/tests/fixtures/basic-plugins.json';
 import Palette from '../Components/Palette';
 import { wixPalettes } from '../palettesExample';
 import { RichContentEditor, convertFromRaw, createWithContent } from 'wix-rich-content-editor';
-import { SimplifiedRCE } from 'wix-rich-content-wrapper';
+import { OSWrapEditor } from 'wix-rich-content-wrapper';
 
 import { Themes } from '../../src/RceTheme';
 import ThemeWrapper from '../../src/ThemeWrapper';
-import { themeStrategy } from '../../../../packages/wrapper/web/src/ThemeStrategy';
-import { pluginsStrategyViewer } from '../../../../packages/wrapper/web/src/PluginsStrategyViewer';
 import { pluginHtmlSchema } from 'wix-rich-content-plugin-divider/node_modules/wix-rich-content-common';
 
 const editorState = createWithContent(convertFromRaw(exapmleState));
@@ -38,9 +36,9 @@ export default () => {
       <Section title="Live Site Theme 1">
         <Palette palette={wixPalettes.site1} />
         <RichContentEditorBox>
-          <SimplifiedRCE settings={{ theme: Themes.PALETTE, palette: wixPalettes.site1 }}>
+          <OSWrapEditor theme={Themes.PALETTE} palette={wixPalettes.site1}>
             <RichContentEditor editorState={editorState} plugins={PLUGINS} config={config} />
-          </SimplifiedRCE>
+          </OSWrapEditor>
         </RichContentEditorBox>
       </Section>
 
