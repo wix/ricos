@@ -7,7 +7,7 @@ import {
   GALLERY_IMAGE_SETTINGS,
   IMAGE_SETTINGS,
 } from '../cypress/dataHooks';
-import { DEFAULT_DESKTOP_BROWSERS } from '../tests/constants';
+import { DEFAULT_DESKTOP_BROWSERS } from './settings';
 
 const eyesOpen = ({
   test: {

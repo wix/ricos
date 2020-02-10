@@ -1,6 +1,6 @@
 /*global cy*/
 import { INLINE_TOOLBAR_BUTTONS } from '../cypress/dataHooks';
-import { DEFAULT_DESKTOP_BROWSERS } from './constants';
+import { DEFAULT_DESKTOP_BROWSERS } from './settings';
 
 describe('text', () => {
   before(function() {
