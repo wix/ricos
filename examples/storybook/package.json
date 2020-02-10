@@ -53,9 +53,8 @@
   },
   "devDependencies": {
     "copy-webpack-plugin": "^4.5.1",
-    "yoshi": "^4.28.3",
-    "husky": "~0.14.0",
-    "yoshi-style-dependencies": "^4.23.7"
+    "yoshi": "4.31.0",
+    "jest-yoshi-preset": "4.31.0"
   },
   "lint-staged": {
     "*.js": "yoshi lint"

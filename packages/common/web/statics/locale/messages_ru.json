@@ -14,6 +14,7 @@
   "SizeSmallCenterButton_Tooltip" : "Уменьшить",
   "LinkPanelContainer_DoneButton" : "ОК",
   "SizeFullWidthButton_Tooltip" : "Ширине браузера",
+  "AnchorPlugin_AddAnchor_Tooltip" : "Add an anchor",
   "HtmlPlugin_EditUrl_Tooltip" : "Изменить URL",
   "GalleryPlugin_Layout_Collage" : "Коллаж",
   "ButtonModal_Settings_Tab" : "Настройка",
