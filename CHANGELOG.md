@@ -13,6 +13,9 @@
     Click to see more.
   </summary>
 
+  ### :house: Internal
+  - `general`
+    - ES5 syntax validation in `dist/statics` on postbuild
 </details>
 <hr/>
 
