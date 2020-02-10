@@ -111,9 +111,10 @@ function addPluginInExampleApp(pluginName) {
       console.log(chalk.red('Fail to read example app package.json', err));
     } else {
       const pckageJsonObj = JSON.parse(data);
+      const newDependency = `wix-rich-content-plugin-${pluginName}`;
       pckageJsonObj.dependencies = {
         ...pckageJsonObj.dependencies,
-        'wix-rich-content-plugin-dana': '6.8.0',
+        [newDependency]: version,
       };
       const packageJson = JSON.stringify(pckageJsonObj);
       fs.writeFile(filePath, packageJson, 'utf8', () => addPluginToExampleAppEditor(pluginName));
@@ -122,12 +123,15 @@ function addPluginInExampleApp(pluginName) {
 }
 
 function addPluginToExampleAppEditor(pluginName) {
+  const upperCasePluginName = pluginName.toUpperCase();
+  const pluginNameStartWithUpperCase = pluginName.charAt(0).toUpperCase() + pluginName.slice(1);
+
   console.log(chalk.magenta(`Adding ${pluginName}-plugin to example app editor`));
   const editorPluginsPath = `${exampleAppMainPath}/shared/editor/EditorPlugins.jsx`;
-  const importPluginBuffer = `import { createDanaPlugin, DANA_TYPE } from 'wix-rich-content-plugin-dana';
-    import 'wix-rich-content-plugin-dana/dist/styles.min.css';`;
-  const createPluginsBuffer = 'createDanaPlugin,';
-  const configBuffer = '[DANA_TYPE]: {},';
+  const importPluginBuffer = `import { create${pluginNameStartWithUpperCase}Plugin, ${upperCasePluginName}_TYPE } from 'wix-rich-content-plugin-${pluginName}';
+    import 'wix-rich-content-plugin-${pluginName}/dist/styles.min.css';`;
+  const createPluginsBuffer = `create${pluginNameStartWithUpperCase}Plugin,`;
+  const configBuffer = `[${upperCasePluginName}_TYPE]: {},`;
 
   let data = fs.readFileSync(editorPluginsPath);
   data = importPluginBuffer + '\n' + data;
