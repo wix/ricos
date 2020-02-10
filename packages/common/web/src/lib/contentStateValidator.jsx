@@ -24,7 +24,7 @@ import {
   MENTION_TYPE,
   SOUND_CLOUD_TYPE,
   VIDEO_TYPE,
-} from '../../statics/types';
+} from '../consts';
 
 export const isValidEditorData = payload => {
   const schema = getContentStateSchema({
