@@ -2,12 +2,12 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import FileUploadViewer from './file-upload-viewer';
 
-const DEFAULTS = {
+const DEFAULTS = Object.freeze({
   config: {
     alignment: 'center',
     size: 'small',
   },
-};
+});
 
 class FileUploadComponent extends PureComponent {
   constructor(props) {
@@ -76,10 +76,17 @@ class FileUploadComponent extends PureComponent {
   };
 
   render() {
-    const { componentData } = this.props;
+    const { componentData, theme } = this.props;
     const { error, isLoading } = this.state;
 
-    return <FileUploadViewer componentData={componentData} isLoading={isLoading} error={error} />;
+    return (
+      <FileUploadViewer
+        componentData={componentData}
+        isLoading={isLoading}
+        error={error}
+        theme={theme}
+      />
+    );
   }
 }
 
@@ -90,6 +97,7 @@ FileUploadComponent.propTypes = {
   store: PropTypes.object.isRequired,
   block: PropTypes.object.isRequired,
   blockProps: PropTypes.object.isRequired,
+  theme: PropTypes.object.isRequired,
 };
 
 FileUploadComponent.defaultProps = {

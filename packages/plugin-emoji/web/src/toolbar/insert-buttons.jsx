@@ -10,12 +10,13 @@ import Arrow from './arrow';
 import EmojiPluginIcon from '../icons/EmojiPluginIcon.svg';
 
 export default ({ helpers, t, settings, getEditorState, setEditorState }) => {
+  const icon = settings?.toolbar?.icons?.InsertPluginButtonIcon || EmojiPluginIcon;
   return [
     {
       type: 'modal',
       name: 'EMOJI',
       tooltipText: t('EmojiPlugin_InsertButton_Tooltip'),
-      Icon: EmojiPluginIcon,
+      Icon: icon,
       componentData: settings.componentDataDefaults || {},
       toolbars: settings.insertToolbars || [TOOLBARS.FOOTER],
       modalElement: decorateComponentWithProps(EmojiPreviewModal, {

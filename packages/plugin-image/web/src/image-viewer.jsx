@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { get, includes, isEqual, isFunction } from 'lodash';
 import {
-  Context,
   mergeStyles,
   validate,
   isSSR,
@@ -15,6 +14,7 @@ import {
 import { DEFAULTS, SEO_IMAGE_WIDTH } from './consts';
 import styles from '../statics/styles/image-viewer.scss';
 import ExpandIcon from './icons/expand.svg';
+import InPluginInput from './InPluginInput';
 
 class ImageViewer extends React.Component {
   constructor(props) {
@@ -24,7 +24,7 @@ class ImageViewer extends React.Component {
   }
 
   componentDidMount() {
-    this._isMounted = true;
+    this.setState({ ssrDone: true });
   }
 
   componentWillReceiveProps(nextProps) {
@@ -40,7 +40,7 @@ class ImageViewer extends React.Component {
   }
 
   getImageUrl(src) {
-    const { helpers, shouldRenderOptimizedImages } = this.context || {};
+    const { helpers, shouldRenderOptimizedImages } = this.props || {};
     if (!src && helpers?.handleFileSelection) {
       return null;
     }
@@ -61,7 +61,7 @@ class ImageViewer extends React.Component {
       } else if (this.state.container) {
         const { width } = this.state.container.getBoundingClientRect();
         requiredWidth = width || src?.width || 1;
-        if (this.context.isMobile) {
+        if (this.props.isMobile) {
           //adjust the image width to viewport scaling and device pixel ratio
           requiredWidth *= (!isSSR() && window.devicePixelRatio) || 1;
           requiredWidth *= (!isSSR() && window.screen.width / document.body.clientWidth) || 1;
@@ -78,17 +78,12 @@ class ImageViewer extends React.Component {
         imageType: 'highRes',
       });
     }
-    if (this._isMounted && !imageUrl.preload) {
+    if (this.state.ssrDone && !imageUrl.preload) {
       console.error(`image plugin mounted with invalid image source!`, src); //eslint-disable-line no-console
     }
 
     return imageUrl;
   }
-
-  onHighResLoad = e => {
-    e.target.style.opacity = 1;
-    this.preloadImage && (this.preloadImage.style.opacity = 0);
-  };
 
   onImageLoadError = () => {
     const {
@@ -105,26 +100,43 @@ class ImageViewer extends React.Component {
     }
   };
 
-  renderImage(imageClassName, imageSrc, alt, props) {
-    return [
-      <img
-        key="preload"
-        ref={ref => (this.preloadImage = ref)}
-        className={classNames(imageClassName, this.styles.imagePreload)}
-        src={imageSrc.preload}
-        alt={alt}
-        onError={this.onImageLoadError}
-      />,
+  renderImage = (imageClassName, imageSrc, alt, props, isGif) => {
+    return this.getImage(
+      classNames(imageClassName, this.styles.imageHighres, {
+        [this.styles.isGif]: isGif,
+      }),
+      imageSrc.highres,
+      alt,
+      props,
+      !isGif
+    );
+  };
+
+  renderPreloadImage = (imageClassName, imageSrc, alt, props) => {
+    return this.getImage(
+      classNames(imageClassName, this.styles.imagePreload),
+      imageSrc.preload,
+      alt,
+      props
+    );
+  };
+
+  getImage(imageClassNames, src, alt, props, fadeIn = false) {
+    return (
       <img
         {...props}
-        key="highres"
-        className={classNames(imageClassName, this.styles.imageHighres)}
-        src={imageSrc.highres}
+        className={imageClassNames}
+        src={src}
         alt={alt}
-        onLoad={e => this.onHighResLoad(e)}
-      />,
-    ];
+        onError={this.onImageLoadError}
+        onLoad={fadeIn ? e => this.onImageLoad(e) : undefined}
+      />
+    );
   }
+
+  onImageLoad = e => {
+    e.target.style.opacity = 1;
+  };
 
   renderLoader() {
     if (!this.props.isLoading) {
@@ -132,7 +144,7 @@ class ImageViewer extends React.Component {
     }
     return (
       <div className={this.styles.imageOverlay}>
-        <Loader type={'medium'} />
+        <Loader type={'medium'} theme={this.props.theme} />
       </div>
     );
   }
@@ -157,19 +169,24 @@ class ImageViewer extends React.Component {
     );
   }
 
-  renderCaption(caption, isFocused, styles, defaultCaption) {
-    return caption ? (
-      <div className={styles.imageCaption} data-hook="imageViewerCaption">
-        {caption}
-      </div>
+  renderCaption(caption) {
+    const { onCaptionChange, setFocusToBlock, setInPluginEditingMode } = this.props;
+    return onCaptionChange ? (
+      <InPluginInput
+        setInPluginEditingMode={setInPluginEditingMode}
+        className={this.styles.imageCaption}
+        value={caption}
+        onChange={onCaptionChange}
+        setFocusToBlock={setFocusToBlock}
+      />
     ) : (
-      isFocused && defaultCaption && <div className={styles.imageCaption}>{defaultCaption}</div>
+      <span className={this.styles.imageCaption}>{caption}</span>
     );
   }
 
   onKeyDown = (e, handler) => {
     if (e.key === 'Enter' || e.key === ' ') {
-      handler();
+      handler?.();
     }
   };
 
@@ -180,13 +197,17 @@ class ImageViewer extends React.Component {
   };
 
   shouldRenderCaption() {
-    const { settings, componentData, defaultCaption } = this.props;
-    const { metadata } = componentData;
+    const { getInPluginEditingMode, settings, componentData, defaultCaption } = this.props;
+    const caption = componentData.metadata?.caption;
 
     if (includes(get(settings, 'toolbar.hidden'), 'settings')) {
       return false;
     }
-    if (!metadata || metadata.caption === defaultCaption || metadata.caption === '') {
+    if (
+      caption === undefined ||
+      (caption === '' && !getInPluginEditingMode?.()) ||
+      caption === defaultCaption
+    ) {
       return false;
     }
     const data = componentData || DEFAULTS;
@@ -198,21 +219,21 @@ class ImageViewer extends React.Component {
 
   handleExpand = e => {
     e.preventDefault();
-    const { onExpand } = this.context.helpers;
+    const { onExpand } = this.props.helpers;
     onExpand && onExpand(this.props.entityIndex);
   };
 
-  handleContextMenu = e => this.context.disableRightClick && e.preventDefault();
+  handleContextMenu = e => this.props.disableRightClick && e.preventDefault();
 
   render() {
-    this.styles = this.styles || mergeStyles({ styles, theme: this.context.theme });
-    const { componentData, className, isFocused, settings, defaultCaption } = this.props;
-    const { fallbackImageSrc } = this.state;
+    this.styles = this.styles || mergeStyles({ styles, theme: this.props.theme });
+    const { componentData, className, settings } = this.props;
+    const { fallbackImageSrc, ssrDone } = this.state;
     const data = componentData || DEFAULTS;
     const { metadata = {} } = componentData;
 
     const hasLink = data.config && data.config.link;
-    const hasExpand = this.context.helpers && this.context.helpers.onExpand;
+    const hasExpand = this.props.helpers && this.props.helpers.onExpand;
 
     const itemClassName = classNames(this.styles.imageContainer, className, {
       [this.styles.pointer]: hasExpand,
@@ -225,6 +246,9 @@ class ImageViewer extends React.Component {
         ? settings.imageProps(data.src)
         : settings.imageProps;
     }
+    const isGif = imageSrc?.highres?.endsWith?.('.gif');
+    const shouldRenderPreloadImage = imageSrc && !isGif;
+    const shouldRenderImage = (imageSrc && ssrDone) || isGif;
 
     /* eslint-disable jsx-a11y/no-static-element-interactions */
     return (
@@ -237,7 +261,10 @@ class ImageViewer extends React.Component {
         onContextMenu={this.handleContextMenu}
       >
         <div className={this.styles.imageWrapper} role="img" aria-label={metadata.alt}>
-          {imageSrc && this.renderImage(imageClassName, imageSrc, metadata.alt, imageProps)}
+          {shouldRenderPreloadImage &&
+            this.renderPreloadImage(imageClassName, imageSrc, metadata.alt, imageProps)}
+          {shouldRenderImage &&
+            this.renderImage(imageClassName, imageSrc, metadata.alt, imageProps, isGif)}
           {this.renderLoader()}
           {hasLink && hasExpand && (
             <ExpandIcon className={this.styles.expandIcon} onClick={this.handleExpand} />
@@ -245,15 +272,12 @@ class ImageViewer extends React.Component {
         </div>
         {this.renderTitle(data, this.styles)}
         {this.renderDescription(data, this.styles)}
-        {this.shouldRenderCaption() &&
-          this.renderCaption(metadata.caption, isFocused, this.styles, defaultCaption)}
+        {this.shouldRenderCaption() && this.renderCaption(metadata.caption)}
       </div>
     );
     /* eslint-enable jsx-a11y/no-static-element-interactions */
   }
 }
-
-ImageViewer.contextType = Context.type;
 
 ImageViewer.propTypes = {
   componentData: PropTypes.object.isRequired,
@@ -264,6 +288,14 @@ ImageViewer.propTypes = {
   settings: PropTypes.object,
   defaultCaption: PropTypes.string,
   entityIndex: PropTypes.number,
+  onCaptionChange: PropTypes.func,
+  setFocusToBlock: PropTypes.func,
+  theme: PropTypes.object.isRequired,
+  helpers: PropTypes.object.isRequired,
+  disableRightClick: PropTypes.bool,
+  getInPluginEditingMode: PropTypes.func,
+  setInPluginEditingMode: PropTypes.func,
+  isMobile: PropTypes.bool.isRequired,
 };
 
 export default ImageViewer;

@@ -1,14 +1,8 @@
 import React, { Component } from 'react';
-import ReactPlayer from 'react-player';
+import ReactPlayerWrapper from './reactPlayerWrapper';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import {
-  mergeStyles,
-  validate,
-  Context,
-  ViewportRenderer,
-  pluginSoundCloudSchema,
-} from 'wix-rich-content-common';
+import { mergeStyles, validate, pluginSoundCloudSchema } from 'wix-rich-content-common';
 import { isEqual } from 'lodash';
 import styles from '../statics/styles/sound-cloud-viewer.scss';
 
@@ -32,28 +26,21 @@ class SoundCloudViewer extends Component {
   };
 
   render() {
-    this.styles = mergeStyles({ styles, theme: this.context.theme });
-    const { componentData, isPlayable, ...rest } = this.props;
+    this.styles = mergeStyles({ styles, theme: this.props.theme });
+    const { componentData, width, height, controls, disabled } = this.props;
     const { isLoaded } = this.state;
+    const props = { width, height, controls, disabled };
     return (
-      <ViewportRenderer>
-        <ReactPlayer
-          className={classNames(this.styles.soundCloud_player)}
-          url={componentData.src}
-          {...rest}
-          playing={this.context.disabled ? false : this.state.playing}
-          onPlay={() => this.setState({ playing: true })}
-          onPause={() => this.setState({ playing: false })}
-          light={!isPlayable}
-          onReady={this.handleReady}
-          data-loaded={isLoaded}
-        />
-      </ViewportRenderer>
+      <ReactPlayerWrapper
+        className={classNames(this.styles.soundCloud_player)}
+        url={componentData.src}
+        onReady={this.handleReady}
+        data-loaded={isLoaded}
+        {...props}
+      />
     );
   }
 }
-
-SoundCloudViewer.contextType = Context.type;
 
 SoundCloudViewer.propTypes = {
   componentData: PropTypes.object.isRequired,
@@ -62,15 +49,15 @@ SoundCloudViewer.propTypes = {
   controls: PropTypes.bool,
   width: PropTypes.string,
   height: PropTypes.string,
-  isPlayable: PropTypes.bool,
   isLoaded: PropTypes.bool,
+  theme: PropTypes.object.isRequired,
+  disabled: PropTypes.bool,
 };
 
 SoundCloudViewer.defaultProps = {
   width: '100%',
   height: '100%',
   controls: true,
-  isPlayable: true,
 };
 
 export default SoundCloudViewer;

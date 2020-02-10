@@ -2,11 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
   mergeStyles,
-  Context,
   normalizeUrl,
   isValidUrl,
   validate,
-  ViewportRenderer,
   pluginHtmlSchema,
 } from 'wix-rich-content-common';
 
@@ -34,7 +32,7 @@ class HtmlComponent extends Component {
   };
 
   componentDidMount() {
-    const { componentData, settings } = this.props;
+    const { componentData, settings, siteDomain } = this.props;
     if (!componentData.config.width) {
       if (settings && settings.width) {
         componentData.config.width = settings.width;
@@ -53,7 +51,6 @@ class HtmlComponent extends Component {
         componentData.config.height = INIT_HEIGHT;
       }
     }
-    const { siteDomain } = this.context;
     this.setState({ siteDomain });
   }
 
@@ -76,30 +73,30 @@ class HtmlComponent extends Component {
   setHeight = iframeHeight => {
     if (iframeHeight !== this.state.iframeHeight) {
       this.setState({ iframeHeight });
-      const { store, block } = this.props;
-      store && store.setBlockHandler('htmlPluginMaxHeight', block.key, iframeHeight);
+      this.props.store?.update('componentData', { config: { height: iframeHeight } });
     }
   };
 
   render() {
     const { html } = this.state;
     this.styles =
-      this.styles || mergeStyles({ styles: htmlComponentStyles, theme: this.context.theme });
+      this.styles || mergeStyles({ styles: htmlComponentStyles, theme: this.props.theme });
     const { props } = this;
     validate(props.componentData, pluginHtmlSchema);
+
     const {
       componentData: { src, srcType, config: { width: currentWidth, height: currentHeight } = {} },
       settings: { htmlIframeSrc, width, height } = {},
     } = props;
 
     const style = {
-      width: this.context.isMobile ? 'auto' : currentWidth || width || INIT_WIDTH,
+      width: this.props.isMobile ? 'auto' : currentWidth || width || INIT_WIDTH,
       height: currentHeight || height || INIT_HEIGHT,
       maxHeight: this.state.iframeHeight,
     };
 
     return (
-      <ViewportRenderer containerStyle={style}>
+      <div style={style}>
         <div
           className={this.styles.htmlComponent}
           ref={ref => (this.element = ref)}
@@ -121,12 +118,10 @@ class HtmlComponent extends Component {
 
           {!src && !isValidUrl(src) && <div className={this.styles.htmlComponent_placeholder} />}
         </div>
-      </ViewportRenderer>
+      </div>
     );
   }
 }
-
-HtmlComponent.contextType = Context.type;
 
 HtmlComponent.propTypes = {
   componentData: PropTypes.object.isRequired,
@@ -143,6 +138,9 @@ HtmlComponent.propTypes = {
   }).isRequired,
   store: PropTypes.object,
   block: PropTypes.object,
+  siteDomain: PropTypes.string,
+  theme: PropTypes.object.isRequired,
+  isMobile: PropTypes.bool.isRequired,
 };
 
 export { HtmlComponent as Component, DEFAULTS };

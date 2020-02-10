@@ -5,14 +5,14 @@
 
 .checkbox {
   cursor: pointer;
-  display: block;
+  display: flex;
   margin-bottom: 12px;
 }
 
-.checkbox:hover .checkbox_icon_unchecked {
+
+.checkbox_inputLabel:hover .checkbox_icon_unchecked{
   background-color: rgba(2, 97, 255, 0.2);
 }
-
 .checkbox_icon {
   width: 16px;
   height: 16px;
@@ -24,6 +24,15 @@
   vertical-align: text-bottom;
   color: #fff;
   box-sizing: border-box;
+}
+
+.checkbox_infoIcon {
+  vertical-align: text-bottom;
+  height: 17px;
+  padding-top: 2px;
+  &:hover {
+    color: #0161FF;
+  }
 }
 
 .checkbox_icon_checked {

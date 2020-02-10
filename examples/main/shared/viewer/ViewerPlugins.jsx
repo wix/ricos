@@ -1,5 +1,5 @@
 import theme from '../theme/theme';
-import { videoTypeMapper } from 'wix-rich-content-plugin-video/dist/module.viewer';
+import { VIDEO_TYPE, videoTypeMapper } from 'wix-rich-content-plugin-video/dist/module.viewer';
 import { dividerTypeMapper } from 'wix-rich-content-plugin-divider/dist/module.viewer';
 import { HTML_TYPE, htmlTypeMapper } from 'wix-rich-content-plugin-html/dist/module.viewer';
 import { soundCloudTypeMapper } from 'wix-rich-content-plugin-sound-cloud/dist/module.viewer';
@@ -84,7 +84,7 @@ export const typeMappers = [
 ];
 
 const uiSettings = {
-  // disableRightClick: true,
+  disableRightClick: true,
 };
 
 export const config = {
@@ -122,6 +122,9 @@ export const config = {
         )
       ),
     downloadTarget: '_blank',
+  },
+  [VIDEO_TYPE]: {
+    getVideoUrl: src => `https://video.wixstatic.com/${src.pathname}`,
   },
   uiSettings,
 };

@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { validate, mergeStyles, Context, pluginGallerySchema } from 'wix-rich-content-common';
+import { validate, mergeStyles, pluginGallerySchema } from 'wix-rich-content-common';
 import { isEqual } from 'lodash';
 import { convertItemData } from './helpers/convert-item-data';
 import { DEFAULTS, isHorizontalLayout, sampleItems } from './constants';
@@ -23,7 +23,7 @@ class GalleryViewer extends React.Component {
   }
 
   componentDidMount() {
-    if (this.context.helpers.onExpand) {
+    if (this.props.helpers.onExpand) {
       const styleParams = this.state.styleParams;
       this.setState({
         styleParams: { ...styleParams, allowHover: true },
@@ -73,7 +73,7 @@ class GalleryViewer extends React.Component {
   stateFromProps = props => {
     const items = props.componentData.items || DEFAULTS.items;
     const styleParams = this.getStyleParams(
-      Object.assign(DEFAULTS.styles, props.componentData.styles || {}),
+      { ...DEFAULTS.styles, ...(props.componentData.styles || {}) },
       items
     );
     return {
@@ -84,7 +84,7 @@ class GalleryViewer extends React.Component {
 
   getItems() {
     const { items } = this.state;
-    const { anchorTarget, relValue } = this.context;
+    const { anchorTarget, relValue } = this.props;
 
     if (items.length > 0) {
       return convertItemData({ items, anchorTarget, relValue });
@@ -113,7 +113,7 @@ class GalleryViewer extends React.Component {
   };
 
   handleExpand = data => {
-    const { onExpand } = this.context.helpers;
+    const { onExpand } = this.props.helpers;
     onExpand && onExpand(this.props.entityIndex, data.idx);
   };
 
@@ -124,7 +124,7 @@ class GalleryViewer extends React.Component {
   };
 
   getStyleParams = (styleParams, items) => {
-    if (this.context && !this.context.isMobile) {
+    if (!this.props.isMobile) {
       return { ...styleParams, allowHover: true };
     }
     return this.hasTitle(items)
@@ -170,10 +170,10 @@ class GalleryViewer extends React.Component {
     </Fragment>
   );
 
-  handleContextMenu = e => this.context.disableRightClick && e.preventDefault();
+  handleContextMenu = e => this.props.disableRightClick && e.preventDefault();
 
   render() {
-    this.styles = this.styles || mergeStyles({ styles, theme: this.context.theme });
+    this.styles = this.styles || mergeStyles({ styles, theme: this.props.theme });
     const { scrollingElement, ...settings } = this.props.settings;
     const { styleParams, size = { width: 300 } } = this.state;
     const items = this.getItems();
@@ -206,8 +206,12 @@ GalleryViewer.propTypes = {
   onClick: PropTypes.func,
   className: PropTypes.string,
   settings: PropTypes.object,
+  disableRightClick: PropTypes.bool,
+  theme: PropTypes.object.isRequired,
+  isMobile: PropTypes.bool.isRequired,
+  helpers: PropTypes.object.isRequired,
+  anchorTarget: PropTypes.string.isRequired,
+  relValue: PropTypes.string.isRequired,
 };
-
-GalleryViewer.contextType = Context.type;
 
 export default GalleryViewer;

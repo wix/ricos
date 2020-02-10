@@ -60,9 +60,7 @@ class ColorPicker extends PureComponent {
   }
 
   resetColor = () => {
-    const { defaultColor } = this.props;
-    this.setState({ color: defaultColor });
-    this.props.onChange(defaultColor);
+    this.props.onResetColor();
   };
 
   renderColorButtons(colors, attributes) {
@@ -172,6 +170,7 @@ ColorPicker.propTypes = {
   color: PropTypes.string.isRequired,
   defaultColor: PropTypes.string.isRequired,
   onChange: PropTypes.func,
+  onResetColor: PropTypes.func,
   palette: PropTypes.arrayOf(PropTypes.string).isRequired,
   schemeAttributes: PropTypes.arrayOf(PropTypes.string),
   schemeColor: PropTypes.string,

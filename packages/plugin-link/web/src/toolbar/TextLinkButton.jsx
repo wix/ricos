@@ -78,7 +78,7 @@ export default class TextLinkButton extends Component {
       icon: theme.inlineToolbarButton_icon,
       active: theme.inlineToolbarButton_active,
     };
-    const icon = config?.LINK?.toolbar?.icons?.link;
+    const icon = config?.LINK?.toolbar?.icons?.InsertPluginButtonIcon;
     return (
       <LinkButton
         onClick={this.showLinkPanel}

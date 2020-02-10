@@ -35,12 +35,13 @@ class ExampleApp extends PureComponent {
       contentState,
       isEditorShown: true,
       isViewerShown: !isMobile,
-      isPreviewShown: !isMobile,
+      isPreviewShown: false,
       isContentStateShown: false,
       viewerResetKey: 0,
       previewResetKey: 0,
       editorResetKey: 0,
       shouldMockUpload: true,
+      shouldMultiSelectImages: false,
       ...localState,
     };
   }
@@ -85,7 +86,13 @@ class ExampleApp extends PureComponent {
 
   renderEditor = () => {
     const { allLocales, editorState, locale, localeResource, isMobile } = this.props;
-    const { isEditorShown, staticToolbar, shouldMockUpload, editorIsMobile } = this.state;
+    const {
+      isEditorShown,
+      staticToolbar,
+      shouldMockUpload,
+      shouldMultiSelectImages,
+      editorIsMobile,
+    } = this.state;
     const settings = [
       {
         name: 'Mobile',
@@ -102,6 +109,14 @@ class ExampleApp extends PureComponent {
         action: () =>
           this.setState(state => ({
             shouldMockUpload: !state.shouldMockUpload,
+          })),
+      },
+      {
+        name: 'Multi-Select Images',
+        active: shouldMultiSelectImages,
+        action: () =>
+          this.setState(state => ({
+            shouldMultiSelectImages: !state.shouldMultiSelectImages,
           })),
       },
     ];
@@ -136,6 +151,7 @@ class ExampleApp extends PureComponent {
                 editorState={editorState}
                 isMobile={this.state.editorIsMobile || isMobile}
                 shouldMockUpload={this.state.shouldMockUpload}
+                shouldMultiSelectImages={this.state.shouldMultiSelectImages}
                 staticToolbar={staticToolbar}
                 locale={locale}
                 localeResource={localeResource}

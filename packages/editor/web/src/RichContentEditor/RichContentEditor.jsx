@@ -20,21 +20,19 @@ import {
   getBlockInfo,
   getFocusedBlockKey,
 } from 'wix-rich-content-editor-common';
-import {
-  Context,
-  AccessibilityListener,
-  normalizeInitialState,
-  getLangDir,
-} from 'wix-rich-content-common';
+import { AccessibilityListener, normalizeInitialState, getLangDir } from 'wix-rich-content-common';
 import styles from '../../statics/styles/rich-content-editor.scss';
 import draftStyles from '../../statics/styles/draft.rtlignore.scss';
 
 class RichContentEditor extends Component {
+  static getDerivedStateFromError(error) {
+    return { error };
+  }
+
   constructor(props) {
     super(props);
     this.state = {
       editorState: this.getInitialEditorState(),
-      theme: props.theme || {},
       editorBounds: {},
     };
     this.refId = Math.floor(Math.random() * 9999);
@@ -49,9 +47,6 @@ class RichContentEditor extends Component {
 
     this.initContext();
     this.initPlugins();
-  }
-  componentDidMount() {
-    this.resetInitialIntent();
   }
 
   componentDidUpdate() {
@@ -77,12 +72,6 @@ class RichContentEditor extends Component {
     }
   };
 
-  resetInitialIntent = () => {
-    if (this.contextualData.initialIntent) {
-      this.contextualData.initialIntent = '';
-    }
-  };
-
   getEditorState = () => this.state.editorState;
 
   setEditorState = editorState => this.setState({ editorState });
@@ -96,14 +85,14 @@ class RichContentEditor extends Component {
       relValue,
       helpers,
       config,
-      isMobile,
+      isMobile = false,
       shouldRenderOptimizedImages,
       initialIntent,
       siteDomain,
     } = this.props;
 
     this.contextualData = {
-      theme,
+      theme: theme || {},
       t,
       locale,
       anchorTarget,
@@ -112,41 +101,25 @@ class RichContentEditor extends Component {
       config,
       isMobile,
       setEditorState: this.setEditorState,
+      getEditorState: this.getEditorState,
       getEditorBounds: this.getEditorBounds,
       languageDir: getLangDir(locale),
       shouldRenderOptimizedImages,
       initialIntent,
       siteDomain,
+      setInPluginEditingMode: this.setInPluginEditingMode,
+      getInPluginEditingMode: this.getInPluginEditingMode,
     };
   };
 
   getEditorBounds = () => this.state.editorBounds;
 
   initPlugins() {
-    const {
-      helpers,
-      plugins,
-      config,
-      isMobile,
-      anchorTarget,
-      relValue,
-      t,
-      customStyleFn,
-    } = this.props;
+    const { plugins, customStyleFn } = this.props;
 
-    const { theme } = this.state;
     const { pluginInstances, pluginButtons, pluginTextButtons, pluginStyleFns } = createPlugins({
       plugins,
-      config,
-      helpers,
-      theme,
-      t,
-      isMobile,
-      anchorTarget,
-      relValue,
-      getEditorState: this.getEditorState,
-      setEditorState: this.setEditorState,
-      getEditorBounds: this.getEditorBounds,
+      context: this.contextualData,
     });
     this.initEditorToolbars(pluginButtons, pluginTextButtons);
     this.pluginKeyBindings = initPluginKeyBindings(pluginTextButtons);
@@ -155,38 +128,14 @@ class RichContentEditor extends Component {
   }
 
   initEditorToolbars(pluginButtons, pluginTextButtons) {
-    const {
-      helpers,
-      anchorTarget,
-      relValue,
-      textToolbarType,
-      isMobile,
-      t,
-      config = {},
-      textAlignment,
-      locale,
-    } = this.props;
-    const { theme } = this.state;
+    const { textAlignment } = this.props;
     const buttons = { pluginButtons, pluginTextButtons };
 
     this.toolbars = createEditorToolbars({
       buttons,
-      helpers,
-      anchorTarget,
-      relValue,
-      isMobile,
-      textToolbarType,
       textAlignment,
-      theme: theme || {},
-      getEditorState: this.getEditorState,
-      setEditorState: this.setEditorState,
-      getEditorBounds: this.getEditorBounds,
-      t,
       refId: this.refId,
-      getToolbarSettings: config.getToolbarSettings,
-      uiSettings: config.uiSettings,
-      config,
-      locale,
+      context: this.contextualData,
     });
   }
 
@@ -275,6 +224,17 @@ class RichContentEditor extends Component {
 
   setEditor = ref => (this.editor = get(ref, 'editor', ref));
 
+  inPluginEditingMode = false;
+
+  setInPluginEditingMode = shouldEnable => {
+    // As explained in https://github.com/facebook/draft-js/blob/585af35c3a8c31fefb64bc884d4001faa96544d3/src/component/handlers/DraftEditorModes.js#L14
+    const mode = shouldEnable ? 'render' : 'edit';
+    this.editor.setMode(mode);
+    this.inPluginEditingMode = shouldEnable;
+  };
+
+  getInPluginEditingMode = () => this.inPluginEditingMode;
+
   updateBounds = editorBounds => {
     this.setState({ editorBounds });
   };
@@ -335,7 +295,8 @@ class RichContentEditor extends Component {
       handlePastedText,
       handleReturn,
     } = this.props;
-    const { editorState, theme } = this.state;
+    const { editorState } = this.state;
+    const { theme } = this.contextualData;
 
     return (
       <Editor
@@ -381,9 +342,11 @@ class RichContentEditor extends Component {
     );
   };
 
-  renderAccessibilityListener = () => <AccessibilityListener />;
+  renderAccessibilityListener = () => (
+    <AccessibilityListener isMobile={this.contextualData.isMobile} />
+  );
 
-  renderTooltipHost = () => <TooltipHost />;
+  renderTooltipHost = () => <TooltipHost theme={this.contextualData.theme} />;
 
   styleToClass = ([key, val]) => `rich_content_${key}-${val.toString().replace('.', '_')}`;
 
@@ -409,21 +372,26 @@ class RichContentEditor extends Component {
   onResize = debounce(({ bounds }) => this.updateBounds(bounds), 100);
 
   render() {
-    const { isMobile } = this.props;
-    const { theme } = this.state;
-    const wrapperClassName = classNames(draftStyles.wrapper, styles.wrapper, theme.wrapper, {
-      [styles.desktop]: !isMobile,
-      [theme.desktop]: !isMobile && theme && theme.desktop,
-    });
-    return (
-      <Context.Provider value={this.contextualData}>
+    const { onError } = this.props;
+    try {
+      if (this.state.error) {
+        onError(this.state.error);
+        return null;
+      }
+      const { isMobile } = this.props;
+      const { theme } = this.contextualData;
+      const wrapperClassName = classNames(draftStyles.wrapper, styles.wrapper, theme.wrapper, {
+        [styles.desktop]: !isMobile,
+        [theme.desktop]: !isMobile && theme && theme.desktop,
+      });
+      return (
         <Measure bounds onResize={this.onResize}>
           {({ measureRef }) => (
             <div
               style={this.props.style}
               ref={measureRef}
               className={wrapperClassName}
-              dir={this.contextualData.languageDir}
+              dir={getLangDir(this.props.locale)}
             >
               {this.renderStyleTag()}
               <div className={classNames(styles.editor, theme.editor)}>
@@ -436,8 +404,11 @@ class RichContentEditor extends Component {
             </div>
           )}
         </Measure>
-      </Context.Provider>
-    );
+      );
+    } catch (err) {
+      onError(err);
+      return null;
+    }
   }
 }
 
@@ -482,6 +453,7 @@ RichContentEditor.propTypes = {
   onAtomicBlockFocus: PropTypes.func,
   initialIntent: PropTypes.string,
   siteDomain: PropTypes.string,
+  onError: PropTypes.func,
 };
 
 RichContentEditor.defaultProps = {
@@ -489,6 +461,9 @@ RichContentEditor.defaultProps = {
   spellCheck: true,
   customStyleFn: () => ({}),
   locale: 'en',
+  onError: err => {
+    throw err;
+  },
 };
 
 export default RichContentEditor;
