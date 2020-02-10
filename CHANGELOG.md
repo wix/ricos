@@ -15,7 +15,7 @@
 
   ### :house: Internal
   - `general`
-    - ES5 syntax validation in `dist/statics` on postbuild
+    - [#666](https://github.com/wix-incubator/rich-content/pull/666) ES5 syntax validation in `dist/statics` on postbuild
 </details>
 <hr/>
 
