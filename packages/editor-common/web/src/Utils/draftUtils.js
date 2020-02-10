@@ -113,6 +113,7 @@ export const getLinkDataInSelection = editorState => {
 };
 
 export const removeLinksInSelection = editorState => {
+  const selection = editorState.getSelection();
   const newEditorState = getSelectedLinks(editorState).reduce(
     (prevState, { key, range }) => removeLink(prevState, key, range),
     editorState
@@ -122,7 +123,10 @@ export const removeLinksInSelection = editorState => {
     newEditorState.getSelection(),
     'UNDERLINE'
   );
-  return EditorState.push(newEditorState, newContentState, 'change-inline-style');
+  return EditorState.forceSelection(
+    EditorState.push(newEditorState, newContentState, 'change-inline-style'),
+    selection.merge({ anchorOffset: selection.focusOffset })
+  );
 };
 
 export const getTextAlignment = (editorState, defaultAlignment = 'left') => {
