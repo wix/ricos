@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import ReactModal from 'react-modal';
-//import { RichContentViewer } from 'wix-rich-content-viewer';
+import { RichContentViewer } from 'wix-rich-content-viewer';
 import { isSSR } from 'wix-rich-content-common';
 import * as PropTypes from 'prop-types';
 import * as Plugins from './ViewerPlugins';
@@ -50,7 +50,7 @@ export default class Viewer extends PureComponent {
     const { expendModeIsOpen, expandModeIndex } = this.state;
     return (
       <div id="rich-content-viewer" className="viewer">
-        <SimplifiedRCV
+        {/* <SimplifiedRCV
           helpers={this.helpers}
           settings={{
             plugins: [rcvButton(), rcvDivider(), rcvGallery(), rcvHtml(), rcvImage()],
@@ -66,8 +66,8 @@ export default class Viewer extends PureComponent {
           anchorTarget={anchorTarget}
           relValue={relValue}
           disabled={this.state.disabled}
-          locale={this.props.locale} />
-        {/* <RichContentViewer
+          locale={this.props.locale} /> */}
+        <RichContentViewer
           helpers={this.helpers}
           typeMappers={Plugins.typeMappers}
           inlineStyleMappers={Plugins.getInlineStyleMappers(this.props.initialState)}
@@ -81,7 +81,7 @@ export default class Viewer extends PureComponent {
           disabled={this.state.disabled}
           locale={this.props.locale}
         // siteDomain="https://www.wix.com"
-        /> */}
+        />
         {!isSSR() && (
           <Fullscreen
             isOpen={expendModeIsOpen}

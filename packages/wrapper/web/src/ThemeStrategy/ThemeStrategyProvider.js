@@ -2,12 +2,14 @@ import RceTheme from './RceTheme';
 import { StyleSheet as Aphrodite } from 'aphrodite';
 import { theme as defaultTheme } from '../defaults';
 
-export default function themeStrategy({ settings = {}, ...rest }) {
-  const { theme = {}, palette } = settings;
-  const customizedTheme = rest?.theme || {};
+const createThemeStrategy = (themeObj = {}) => (innerProps = {}) => {
+  const { theme = {} } = innerProps;
+  return { theme: { ...themeObj, ...theme } };
+};
+
+export default function themeStrategyProvider({ theme = {}, palette = {} }) {
   if (typeof theme === 'string') {
     const rceTheme = new RceTheme(theme, palette);
-
     const { StyleSheet, css } = Aphrodite.extend([
       {
         selectorHandler: (selector, baseSelector, generateSubtreeStyles) => {
@@ -30,7 +32,7 @@ export default function themeStrategy({ settings = {}, ...rest }) {
     ]);
     const styles = StyleSheet.create(rceTheme.getStylesObject());
     // eslint-disable-next-line no-console
-    console.log({ styles });
+    //console.log({ styles });
     // const themeObj = {};
     // Object.keys(styles).forEach(k => {
     //   themeObj[k] = css(styles[k]);
@@ -42,9 +44,8 @@ export default function themeStrategy({ settings = {}, ...rest }) {
       return { ...prev, [curr[0]]: css(curr[1]) };
     }, {});
     // eslint-disable-next-line no-console
-    console.log({ themeObj });
 
-    return { theme: { ...defaultTheme, ...themeObj, ...customizedTheme } };
+    return createThemeStrategy({ ...defaultTheme, ...themeObj });
   }
-  return { theme: { ...defaultTheme, ...theme } };
+  return createThemeStrategy({ ...defaultTheme, ...theme });
 }

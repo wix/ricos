@@ -7,7 +7,7 @@ import { testImages, testVideos } from './mock';
 import * as Plugins from './EditorPlugins';
 import ModalsMap from './ModalsMap';
 import theme from '../theme/theme'; // must import after custom styles
-import { SimplifiedRCE, themeStrategy, pluginsStrategy, wixPalettes } from 'wix-rich-content-wrapper';
+import { OSWrapEditor, wixPalettes } from 'wix-rich-content-wrapper';
 import inlineToolbarTheme from '../theme/toolbars/inline-toolbar.theme.scss';
 import pluginButton from 'wix-rich-content-plugin-button';
 import pluginImage from 'wix-rich-content-plugin-image';
@@ -171,27 +171,17 @@ export default class Editor extends PureComponent {
             <TextToolbar />
           </div>
         )}
-        <SimplifiedRCE
-          settings={{
-            //plugins: [pluginButton(), pluginDivider(), pluginGallery(), pluginHtml(), pluginImage()],
-            theme: "Palette",
-            palette: wixPalettes.site2
-          }}
-          helpers={this.helpers}
-          onChange={this.handleChange}
-          placeholder={'Add some text!'}
-          //ref={editor => (this.editor = editor)}
-          isMobile={this.props.isMobile}
-          textToolbarType={textToolbarType}
-          editorKey="random-editorKey-ssr"
-          anchorTarget={anchorTarget}
-          relValue={relValue}
-          locale={this.props.locale}
-          localeResource={this.props.localeResource}>
+        <OSWrapEditor
+          plugins={[pluginButton(), pluginDivider(), pluginGallery(), pluginHtml(), pluginImage()]}
+          theme={"Palette"}
+          palette={wixPalettes.site1}
+          openModal={this.openModal}
+          closeModal={this.closeModal}
+        >
           <RichContentEditor
             placeholder={'Add some text!'}
             ref={editor => (this.editor = editor)}
-            //helpers={this.helpers}
+            helpers={this.helpers}
             plugins={Plugins.editorPlugins}
             config={Plugins.config}
             editorState={this.props.editorState}
@@ -204,9 +194,10 @@ export default class Editor extends PureComponent {
             relValue={relValue}
             locale={this.props.locale}
             localeResource={this.props.localeResource}
+            onChange={this.handleChange}
           // siteDomain="https://www.wix.com"
           />
-        </SimplifiedRCE>
+        </OSWrapEditor>
         {/* <ReactModal
           isOpen={this.state.showModal}
           contentLabel="External Modal Example"
