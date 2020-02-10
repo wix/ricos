@@ -51,10 +51,9 @@ export default class Viewer extends PureComponent {
     return (
       <div id="rich-content-viewer" className="viewer">
         <OSWrapViewer
-          helpers={this.helpers}
           plugins={[rcvButton(), rcvDivider(), rcvGallery(), rcvHtml(), rcvImage()]}
-          theme={theme}
-        ><RichContentViewer
+          theme={theme}>
+          <RichContentViewer
             helpers={this.helpers}
             //typeMappers={Plugins.typeMappers}
             inlineStyleMappers={Plugins.getInlineStyleMappers(this.props.initialState)}
