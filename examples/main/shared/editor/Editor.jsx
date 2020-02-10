@@ -172,18 +172,16 @@ export default class Editor extends PureComponent {
           </div>
         )}
         <OSWrapEditor
-          //plugins={[pluginButton(), pluginDivider(), pluginGallery(), pluginHtml(), pluginImage()]}
+          plugins={[pluginImage(), pluginDivider(), pluginGallery(), pluginHtml(), pluginButton(),]}
           theme={"Palette"}
           palette={wixPalettes.site1}
-          openModal={this.openModal}
-          closeModal={this.closeModal}
         >
           <RichContentEditor
             placeholder={'Add some text!'}
             ref={editor => (this.editor = editor)}
             helpers={this.helpers}
-            plugins={Plugins.editorPlugins}
-            config={Plugins.config}
+            //plugins={Plugins.editorPlugins}
+            //config={Plugins.config}
             editorState={this.props.editorState}
             initialState={this.props.initialState}
             isMobile={this.props.isMobile}

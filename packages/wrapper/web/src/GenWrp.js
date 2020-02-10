@@ -41,17 +41,16 @@ class GenWrp extends React.Component {
       const result = stratFunc(children.props);
       return { ...props, ...result };
     }, children.props);
-    const { helpers = {}, theme, locale, ModalsMap, onChange, editorState } = modifiedProps;
+    const { helpers = {}, theme, locale, ModalsMap, onChange } = modifiedProps;
     const { onRequestClose } = this.state.modalProps || {};
-    if (openModal) helpers.openModal = data => this.onModalOpen(data) && openModal(data);
-    if (closeModal) helpers.closeModal = () => this.onModalClose() && closeModal();
+    helpers.openModal = data => this.onModalOpen(data) && openModal?.(data);
+    helpers.closeModal = () => this.onModalClose() && closeModal?.();
     if (helpers !== {}) modifiedProps.helpers = helpers;
     if (onChange)
       modifiedProps.onChange = editorState => {
         onChange(editorState);
         this.handleChange(editorState);
       };
-    modifiedProps.editorState = editorState || this.state.editorState;
     return (
       <React.Fragment>
         {Children.only(React.cloneElement(children, modifiedProps))}

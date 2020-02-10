@@ -7,7 +7,7 @@ const createPluginsStrategy = (pack = {}) => (innerProps = {}) => {
   };
 };
 
-export default function pluginsStrategyProvider({ plugins = [] }) {
+export default function pluginsStrategyProvider({ plugins }) {
   const emptyPack = { config: {}, plugins: [], ModalsMap: {} };
   if (Array.isArray(plugins) && plugins !== []) {
     const pack = plugins.reduce((prev, curr) => {
