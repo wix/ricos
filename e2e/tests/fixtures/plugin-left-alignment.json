@@ -1,0 +1,1279 @@
+{
+  "blocks": [
+    {
+      "key": "foo",
+      "text": "1. Image aligned to left",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "av4dl",
+      "text": " ",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 0
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "bpal1",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "es910",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "aht4q",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "4gdqp",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "foase",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "3rqab",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "b379s",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "c10tg",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "cac1b",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "718c4",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "anboi",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "70fpt",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "38ibb",
+      "text": "2. Gallery aligned to left",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "6o3rt",
+      "text": " ",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 1
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "k4ma",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "dv1r2",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "669jm",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "8nosm",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "e7nvp",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "a699c",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "eg1in",
+      "text": "3. HTML aligned to left",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "8b2gn",
+      "text": " ",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 2
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "74mab",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "381bn",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "emrr3",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "c1e0g",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "cl2th",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "c386r",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "7ir10",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "6r2oh",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "9g579",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "57lpd",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "53j8h",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "5pauo",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "14dha",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "63k4j",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "8si4v",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "22lrl",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "f8c30",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "6eta9",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "dt8po",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "d5lvc",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "29t6",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "63tvf",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "cghnv",
+      "text": "4. Youtube video aligned to left",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "99kup",
+      "text": " ",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 3
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "5b3tr",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "cdm36",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "cqhgh",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "8p2h",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "6vsap",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "9gfjl",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "ars3m",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "b9l0p",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "8amq3",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "brjvt",
+      "text": "5. Vimeo video aligned to left",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "a3147",
+      "text": " ",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 4
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "60so6",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "90qea",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "8mieo",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "64qrd",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "9473u",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "4g173",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "3pfdt",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "fcdld",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "93ps8",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "46ugc",
+      "text": "6. Facebook video aligned to left",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "5ucd2",
+      "text": " ",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 5
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "4vpt1",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "tj1b",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "dqfgi",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "aliaq",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "89urr",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "em4h7",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "4lfau",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "1ivpt",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "ck7ki",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "c9ckg",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "ct50f",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "5rrb4",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "1om6r",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "1l58o",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "c2s5f",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "e63e5",
+      "text": "7. Media manager video aligned to left",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "169ek",
+      "text": " ",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 6
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "e54e1",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "62fop",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "6vt7q",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "8aa6a",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "6k6oj",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "7ts29",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "43hbq",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "5klqe",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "dumdn",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "1j8t",
+      "text": "8. All dividers aligned to left",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "cvjlv",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "7pcml",
+      "text": " ",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 7
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "5ft4h",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "2gsl5",
+      "text": " ",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 8
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "995ur",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "1irv9",
+      "text": " ",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 9
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "6momj",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "6hva1",
+      "text": " ",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 10
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "6pjar",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "type": "wix-draft-plugin-image",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "config": {
+          "alignment": "left",
+          "size": "small",
+          "showTitle": true,
+          "showDescription": true
+        },
+        "src": {
+          "id": "11062b_ec89777dda5242dca28d4c438dd78657~mv2_d_3934_3445_s_4_2.jpg",
+          "original_file_name": "11062b_ec89777dda5242dca28d4c438dd78657~mv2_d_3934_3445_s_4_2.jpg",
+          "file_name": "11062b_ec89777dda5242dca28d4c438dd78657~mv2_d_3934_3445_s_4_2.jpg",
+          "width": 3934,
+          "height": 3445
+        }
+      }
+    },
+    "1": {
+      "type": "wix-draft-plugin-gallery",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "items": [
+          {
+            "metadata": {
+              "height": 2366,
+              "width": 3534,
+              "processedByConsumer": true
+            },
+            "itemId": "11062b_f1e7cb1c362d4517a0acb8b2910c2773~mv2_d_3534_2366_s_2.jpg",
+            "url": "11062b_f1e7cb1c362d4517a0acb8b2910c2773~mv2_d_3534_2366_s_2.jpg"
+          },
+          {
+            "metadata": {
+              "height": 2848,
+              "width": 4288,
+              "processedByConsumer": true
+            },
+            "itemId": "11062b_04ac9d5b7c2e46b39645da4bd9d2c80b~mv2_d_4288_2848_s_4_2.jpg",
+            "url": "11062b_04ac9d5b7c2e46b39645da4bd9d2c80b~mv2_d_4288_2848_s_4_2.jpg"
+          },
+          {
+            "metadata": {
+              "height": 3044,
+              "width": 4448,
+              "processedByConsumer": true
+            },
+            "itemId": "9b5eedf020b34ca09167ef932163e6ed.jpg",
+            "url": "9b5eedf020b34ca09167ef932163e6ed.jpg"
+          }
+        ],
+        "styles": {
+          "galleryLayout": 2,
+          "gallerySizeType": "px",
+          "gallerySizePx": 300,
+          "galleryMargin": 0,
+          "oneRow": false,
+          "cubeRatio": 1,
+          "galleryThumbnailsAlignment": "bottom",
+          "isVertical": false,
+          "numberOfImagesPerRow": 3,
+          "imageMargin": 20,
+          "thumbnailSpacings": 0,
+          "cubeType": "fill",
+          "enableInfiniteScroll": 1,
+          "titlePlacement": "SHOW_ON_HOVER",
+          "allowHover": false,
+          "itemClick": "link",
+          "fullscreen": false,
+          "showArrows": false,
+          "gridStyle": 1,
+          "loveButton": false,
+          "allowSocial": false,
+          "allowDownload": false,
+          "thumbnailSize": 120,
+          "gotStyleParams": true
+        },
+        "config": {
+          "alignment": "left",
+          "size": "small",
+          "layout": "small",
+          "spacing": 0
+        }
+      }
+    },
+    "2": {
+      "type": "wix-draft-plugin-html",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "srcType": "html",
+        "src": "<blockquote class='twitter-tweet' data-lang='en'><p lang='en' dir='ltr'>There are some things that only <a href='https://twitter.com/hashtag/designers?src=hash&amp;ref_src=twsrc%5Etfw'>#designers</a> will understand 😉<a href='https://twitter.com/hashtag/WebDesign?src=hash&amp;ref_src=twsrc%5Etfw'>#WebDesign</a> <a href='https://twitter.com/hashtag/WebDesigner?src=hash&amp;ref_src=twsrc%5Etfw'>#WebDesigner</a> <a href='https://t.co/WqXbS822Sq'>pic.twitter.com/WqXbS822Sq</a></p>&mdash; Wix (@Wix) <a href='https://twitter.com/Wix/status/1109883326599446528?ref_src=twsrc%5Etfw'>March 24, 2019</a></blockquote>\n<script async src='https://platform.twitter.com/widgets.js' charset='utf-8'></script>",
+        "config": {
+          "alignment": "left",
+          "width": 364,
+          "height": 743
+        }
+      }
+    },
+    "3": {
+      "type": "wix-draft-plugin-video",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "config": {
+          "size": "small",
+          "alignment": "left"
+        },
+        "src": "https://www.youtube.com/watch?v=7jIA3eFtSOM",
+        "isCustomVideo": false,
+        "metadata": {
+          "oembed": {
+            "html": "<iframe width='480' height='270' src='https://www.youtube.com/embed/7jIA3eFtSOM?feature=oembed' frameborder='0' allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe>",
+            "thumbnail_height": 360,
+            "thumbnail_width": 480,
+            "title": "Wix.com Official Big Game Ad | Kung Fu Panda Discovers the Power of Wix | 2016 #StartStunning",
+            "height": 270,
+            "width": 480,
+            "type": "video",
+            "thumbnail_url": "https://i.ytimg.com/vi/7jIA3eFtSOM/hqdefault.jpg",
+            "author_name": "Wix.com",
+            "provider_url": "https://www.youtube.com/",
+            "version": "1.0",
+            "provider_name": "YouTube",
+            "author_url": "https://www.youtube.com/user/Wix",
+            "video_url": "https://youtu.be/7jIA3eFtSOM"
+          }
+        }
+      }
+    },
+    "4": {
+      "type": "wix-draft-plugin-video",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "config": {
+          "size": "small",
+          "alignment": "left"
+        },
+        "src": "https://vimeo.com/298341839",
+        "isCustomVideo": false,
+        "metadata": {
+          "oembed": {
+            "type": "video",
+            "version": "1.0",
+            "provider_name": "Vimeo",
+            "provider_url": "https://vimeo.com/",
+            "title": "Wix Design Tutorials: Creating a Gallery-Based Site with Strips",
+            "author_name": "High On Design",
+            "author_url": "https://vimeo.com/highondesign",
+            "is_plus": "0",
+            "account_type": "business",
+            "html": "<iframe src='https://player.vimeo.com/video/298341839?app_id=122963' width='640' height='360' frameborder='0' allow='autoplay; fullscreen' allowfullscreen title='Wix Design Tutorials: Creating a Gallery-Based Site with Strips'></iframe>",
+            "width": 640,
+            "height": 360,
+            "duration": 556,
+            "description": "In this tutorial, we’ll show you how to create an entire gallery-based website with strips, animation and scroll effects. This technique is great for any website, but especially a portfolio or visual lifestyle blog. \n\nPlay with this website: https://www.wix.com/website-template/view/html/2317\n\n\nWix.com\nThe Web Is Your Playground\n\nStart Creating >> www.wix.com/designers/playground",
+            "thumbnail_url": "http://i.vimeocdn.com/video/736227943_640.jpg",
+            "thumbnail_width": 640,
+            "thumbnail_height": 360,
+            "thumbnail_url_with_play_button": "http://i.vimeocdn.com/filter/overlay?src0=http%3A%2F%2Fi.vimeocdn.com%2Fvideo%2F736227943_640.jpg&src1=http%3A%2F%2Ff.vimeocdn.com%2Fp%2Fimages%2Fcrawler_play.png",
+            "upload_date": "2018-11-01 04:48:10",
+            "video_id": 298341839,
+            "uri": "/videos/298341839",
+            "video_url": "https://vimeo.com/298341839"
+          }
+        }
+      }
+    },
+    "5": {
+      "type": "wix-draft-plugin-video",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "config": {
+          "size": "small",
+          "alignment": "left"
+        },
+        "src": "https://www.facebook.com/wix/videos/971691596505371/",
+        "isCustomVideo": false,
+        "metadata": {
+          "oembed": null
+        }
+      }
+    },
+    "6": {
+      "type": "wix-draft-plugin-video",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "config": {
+          "size": "small",
+          "alignment": "left"
+        },
+        "src": {
+          "pathname": "video/11062b_7124ff06fc56498d96722413f5f4846f/1080p/mp4/file.mp4",
+          "thumbnail": {
+            "pathname": "media/11062b_7124ff06fc56498d96722413f5f4846ff000.jpg",
+            "width": 1920,
+            "height": 1080
+          }
+        },
+        "isCustomVideo": true,
+        "metadata": {
+          "oembed": null
+        }
+      }
+    },
+    "7": {
+      "type": "wix-draft-plugin-divider",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "type": "single",
+        "config": {
+          "size": "medium",
+          "alignment": "left",
+          "textWrap": "nowrap"
+        }
+      }
+    },
+    "8": {
+      "type": "wix-draft-plugin-divider",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "type": "double",
+        "config": {
+          "size": "medium",
+          "alignment": "left",
+          "textWrap": "nowrap"
+        }
+      }
+    },
+    "9": {
+      "type": "wix-draft-plugin-divider",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "type": "dashed",
+        "config": {
+          "size": "medium",
+          "alignment": "left",
+          "textWrap": "nowrap"
+        }
+      }
+    },
+    "10": {
+      "type": "wix-draft-plugin-divider",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "type": "dotted",
+        "config": {
+          "size": "medium",
+          "alignment": "left",
+          "textWrap": "nowrap"
+        }
+      }
+    }
+  },
+  "VERSION": "6.6.8"
+}

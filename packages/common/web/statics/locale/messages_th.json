@@ -14,6 +14,7 @@
   "SizeSmallCenterButton_Tooltip" : "เล็ก",
   "LinkPanelContainer_DoneButton" : "บันทึก",
   "SizeFullWidthButton_Tooltip" : "ความกว้างเต็มหน้าจอ",
+  "AnchorPlugin_AddAnchor_Tooltip" : "Add an anchor",
   "HtmlPlugin_EditUrl_Tooltip" : "เปลี่ยน URL",
   "GalleryPlugin_Layout_Collage" : "คอลลาจ",
   "ButtonModal_Settings_Tab" : "ตั้งค่า",

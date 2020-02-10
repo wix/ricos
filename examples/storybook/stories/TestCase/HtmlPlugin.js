@@ -1,5 +1,5 @@
 import React from 'react';
-import InstagramEmbedState from '../../fixtures/InstagramEmbedState';
+import InstagramEmbedState from '../../../../e2e/tests/fixtures/embed-plugin.json';
 import { htmlTypeMapper, HTML_TYPE } from 'wix-rich-content-plugin-html/dist/module.viewer';
 import { RichContentViewer } from 'wix-rich-content-viewer';
 

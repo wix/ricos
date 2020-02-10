@@ -76,9 +76,11 @@ $opacityTransition: opacity 0.8s ease;
 }
 
 .imageCaption {
+  display: block;
   text-align: center;
   padding: 18px 0;
   background: none;
+  font-size: 14px;
 }
 
 .imagePreload {
@@ -94,7 +96,7 @@ $opacityTransition: opacity 0.8s ease;
   position: absolute;
   opacity: 0;
   transition: $opacityTransition;
-  
+
   &.isGif {
     position: relative;
   }
