@@ -10,6 +10,9 @@ import { SimplifiedRCE } from 'wix-rich-content-wrapper';
 
 import { Themes } from '../../src/RceTheme';
 import ThemeWrapper from '../../src/ThemeWrapper';
+import { themeStrategy } from '../../../../packages/wrapper/web/src/ThemeStrategy';
+import { pluginsStrategyViewer } from '../../../../packages/wrapper/web/src/PluginsStrategyViewer';
+import { pluginHtmlSchema } from 'wix-rich-content-plugin-divider/node_modules/wix-rich-content-common';
 
 const editorState = createWithContent(convertFromRaw(exapmleState));
 
@@ -35,17 +38,9 @@ export default () => {
       <Section title="Live Site Theme 1">
         <Palette palette={wixPalettes.site1} />
         <RichContentEditorBox>
-          {/* <SimplifiedRCE
-            editorState={editorState}
-            plugins={PLUGINS}
-            config={config}
-            settings={{ theme: Themes.PALETTE, palette: wixPalettes.site1 }}
-          >
-            <RichContentEditor />
-          </SimplifiedRCE> */}
-          <ThemeWrapper theme={Themes.PALETTE} palette={wixPalettes.site1}>
-            <RichContentEditor config={config} plugins={PLUGINS} editorState={editorState} />
-          </ThemeWrapper>
+          <SimplifiedRCE settings={{ theme: Themes.PALETTE, palette: wixPalettes.site1 }}>
+            <RichContentEditor editorState={editorState} plugins={PLUGINS} config={config} />
+          </SimplifiedRCE>
         </RichContentEditorBox>
       </Section>
 
