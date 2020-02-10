@@ -1,4 +1,4 @@
 import OSWrapEditor from './OSWrapEditor';
-import SimplifiedRCV from './SimplifiedRCV';
+import OSWrapViewer from './OSWrapViewer';
 import { wixPalettes } from './palettesExample';
-export { OSWrapEditor, SimplifiedRCV, wixPalettes };
+export { OSWrapEditor, OSWrapViewer, wixPalettes };

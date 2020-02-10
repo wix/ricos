@@ -11,7 +11,7 @@ export default function OSWrapEditor({ strategies = [], theme, palette, plugins,
 }
 OSWrapEditor.propTypes = {
   children: PropTypes.any,
-  theme: PropTypes.string,
+  theme: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   palette: PropTypes.array,
   plugins: PropTypes.arrayOf(PropTypes.object),
   strategies: PropTypes.array, //TODO should be more explicit: array of functions that return function with inner props as param,

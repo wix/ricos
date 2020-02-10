@@ -7,7 +7,7 @@ import * as Plugins from './ViewerPlugins';
 import theme from '../theme/theme'; // must import after custom styles
 import getImagesData from 'wix-rich-content-fullscreen/src/lib/getImagesData';
 import Fullscreen from 'wix-rich-content-fullscreen';
-import { SimplifiedRCV } from 'wix-rich-content-wrapper';
+import { OSWrapViewer } from 'wix-rich-content-wrapper';
 import { rcvButton } from 'wix-rich-content-plugin-button';
 import { rcvImage } from 'wix-rich-content-plugin-image';
 import { rcvHtml } from 'wix-rich-content-plugin-html';
@@ -50,38 +50,26 @@ export default class Viewer extends PureComponent {
     const { expendModeIsOpen, expandModeIndex } = this.state;
     return (
       <div id="rich-content-viewer" className="viewer">
-        {/* <SimplifiedRCV
+        <OSWrapViewer
           helpers={this.helpers}
-          settings={{
-            plugins: [rcvButton(), rcvDivider(), rcvGallery(), rcvHtml(), rcvImage()],
-            theme,
-          }}
-          //typeMappers={Plugins.typeMappers}
-          inlineStyleMappers={Plugins.getInlineStyleMappers(this.props.initialState)}
-          //decorators={Plugins.decorators}
-          //config={Plugins.config}
-          initialState={this.props.initialState}
-          //theme={theme}
-          isMobile={this.props.isMobile}
-          anchorTarget={anchorTarget}
-          relValue={relValue}
-          disabled={this.state.disabled}
-          locale={this.props.locale} /> */}
-        <RichContentViewer
-          helpers={this.helpers}
-          typeMappers={Plugins.typeMappers}
-          inlineStyleMappers={Plugins.getInlineStyleMappers(this.props.initialState)}
-          decorators={Plugins.decorators}
-          config={Plugins.config}
-          initialState={this.props.initialState}
+          plugins={[rcvButton(), rcvDivider(), rcvGallery(), rcvHtml(), rcvImage()]}
           theme={theme}
-          isMobile={this.props.isMobile}
-          anchorTarget={anchorTarget}
-          relValue={relValue}
-          disabled={this.state.disabled}
-          locale={this.props.locale}
-        // siteDomain="https://www.wix.com"
-        />
+        ><RichContentViewer
+            helpers={this.helpers}
+            //typeMappers={Plugins.typeMappers}
+            inlineStyleMappers={Plugins.getInlineStyleMappers(this.props.initialState)}
+            //decorators={Plugins.decorators}
+            //config={Plugins.config}
+            initialState={this.props.initialState}
+            //theme={theme}
+            isMobile={this.props.isMobile}
+            anchorTarget={anchorTarget}
+            relValue={relValue}
+            disabled={this.state.disabled}
+            locale={this.props.locale}
+          // siteDomain="https://www.wix.com"
+          /></OSWrapViewer>
+
         {!isSSR() && (
           <Fullscreen
             isOpen={expendModeIsOpen}
