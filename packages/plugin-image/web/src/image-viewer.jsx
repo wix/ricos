@@ -171,7 +171,7 @@ class ImageViewer extends React.Component {
 
   renderCaption(caption) {
     const { onCaptionChange, setFocusToBlock, setInPluginEditingMode } = this.props;
-    return (
+    return onCaptionChange ? (
       <InPluginInput
         setInPluginEditingMode={setInPluginEditingMode}
         className={this.styles.imageCaption}
@@ -179,6 +179,8 @@ class ImageViewer extends React.Component {
         onChange={onCaptionChange}
         setFocusToBlock={setFocusToBlock}
       />
+    ) : (
+      <span className={this.styles.imageCaption}>{caption}</span>
     );
   }
 
@@ -244,7 +246,7 @@ class ImageViewer extends React.Component {
         ? settings.imageProps(data.src)
         : settings.imageProps;
     }
-    const isGif = imageSrc?.highres?.endsWith('.gif');
+    const isGif = imageSrc?.highres?.endsWith?.('.gif');
     const shouldRenderPreloadImage = imageSrc && !isGif;
     const shouldRenderImage = (imageSrc && ssrDone) || isGif;
 
@@ -290,9 +292,9 @@ ImageViewer.propTypes = {
   setFocusToBlock: PropTypes.func,
   theme: PropTypes.object.isRequired,
   helpers: PropTypes.object.isRequired,
-  disableRightClick: PropTypes.bool.isRequired,
-  getInPluginEditingMode: PropTypes.func.isRequired,
-  setInPluginEditingMode: PropTypes.func.isRequired,
+  disableRightClick: PropTypes.bool,
+  getInPluginEditingMode: PropTypes.func,
+  setInPluginEditingMode: PropTypes.func,
   isMobile: PropTypes.bool.isRequired,
 };
 

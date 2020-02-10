@@ -14,6 +14,7 @@
   "SizeSmallCenterButton_Tooltip" : "Klein",
   "LinkPanelContainer_DoneButton" : "Speichern",
   "SizeFullWidthButton_Tooltip" : "Bildschirmbreite",
+  "AnchorPlugin_AddAnchor_Tooltip" : "Add an anchor",
   "HtmlPlugin_EditUrl_Tooltip" : "URL ändern",
   "GalleryPlugin_Layout_Collage" : "Collage",
   "ButtonModal_Settings_Tab" : "Einstellungen",

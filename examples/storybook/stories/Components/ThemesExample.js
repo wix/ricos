@@ -4,7 +4,7 @@ import Palette from './Palette';
 import { RichContentViewerBox } from './StoryParts';
 import { Themes } from '../../src/RceTheme';
 import { wixPalettes } from '../palettesExample';
-import { SimplifiedRCV } from 'wix-rich-content-wrapper';
+import { OSWrapViewer } from 'wix-rich-content-wrapper';
 
 export default ({ children }) => {
   return Object.keys(wixPalettes).map((paletteKey, i) => {
@@ -14,9 +14,9 @@ export default ({ children }) => {
         <h3>Palette {i + 1}</h3>
         <Palette palette={palette} />
         <RichContentViewerBox preset="blog-preset">
-          <SimplifiedRCV settings={{ theme: Themes.PALETTE, palette }}>
+          <OSWrapViewer theme={Themes.PALETTE} palette={palette}>
             {Children.only(children)}
-          </SimplifiedRCV>
+          </OSWrapViewer>
         </RichContentViewerBox>
       </div>
     );

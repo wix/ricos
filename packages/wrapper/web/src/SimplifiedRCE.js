@@ -4,10 +4,10 @@ import { createEmpty } from 'wix-rich-content-editor/dist/lib/editorStateConvers
 import ReactModal from 'react-modal';
 import PropTypes from 'prop-types';
 import { modalStyles } from './defaults';
-//import { pluginsStrategy } from './PluginsStrategy';
+import { pluginsStrategy } from './PluginsStrategy';
 import { themeStrategy } from './ThemeStrategy';
 
-const defaultStrategies = [themeStrategy];
+const defaultStrategies = [pluginsStrategy, themeStrategy];
 class SimplifiedRCE extends React.Component {
   constructor(props) {
     super(props);
@@ -44,34 +44,33 @@ class SimplifiedRCE extends React.Component {
     const modifiedProps = defaultStrategies
       .concat(strategies)
       .reduce((props, stratFunc) => Object.assign(props, stratFunc(combinedProps)), combinedProps);
-    const { helpers = {}, theme, locale, ModalsMap, onChange, editorState } = modifiedProps;
+    const { helpers = {}, theme, locale, ModalsMap, initialState, onChange } = modifiedProps;
     const { onRequestClose } = this.state.modalProps || {};
-    if (openModal) helpers.openModal = data => this.onModalOpen(data) && openModal(data);
-    if (closeModal) helpers.closeModal = () => this.onModalClose() && closeModal();
-    if (helpers !== {}) modifiedProps.helpers = helpers;
-    if (onChange)
-      modifiedProps.onChange = editorState =>
-        onChange(editorState) && this.handleChange(editorState);
-    modifiedProps.editorState = editorState || this.state.editorState;
+    const { editorState } = this.state;
+    helpers.openModal = data => this.onModalOpen(data) && openModal?.(data);
+    helpers.closeModal = () => this.onModalClose() && closeModal?.();
+    modifiedProps.helpers = helpers;
+    modifiedProps.initialState = initialState || createEmpty();
+    modifiedProps.onChange = editorState =>
+      onChange?.(editorState) && this.handleChange(editorState);
+    modifiedProps.editorState = editorState;
     return (
       <React.Fragment>
         {Children.only(React.cloneElement(children, modifiedProps))}
         {/* <RichContentEditor {...modifiedProps} ref={forwardRef} /> */}
-        {this.state.modalProps && (
-          <ReactModal
-            isOpen={this.state.showModal}
-            contentLabel="External Modal Example"
-            style={modalStyles(this.state, theme)}
-            role="dialog"
-            onRequestClose={onRequestClose || helpers.closeModal}
-          >
-            <RichContentEditorModal
-              modalsMap={ModalsMap}
-              locale={locale}
-              {...this.state.modalProps}
-            />
-          </ReactModal>
-        )}
+        <ReactModal
+          isOpen={this.state.showModal}
+          contentLabel="External Modal Example"
+          style={modalStyles(this.state, theme)}
+          role="dialog"
+          onRequestClose={onRequestClose || helpers.closeModal}
+        >
+          <RichContentEditorModal
+            modalsMap={ModalsMap}
+            locale={locale}
+            {...this.state.modalProps}
+          />
+        </ReactModal>
       </React.Fragment>
     );
   }

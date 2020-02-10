@@ -116,8 +116,8 @@ VideoComponent.propTypes = {
   className: PropTypes.string.isRequired,
   theme: PropTypes.object.isRequired,
   t: PropTypes.func.isRequired,
-  disableRightClick: PropTypes.bool.isRequired,
-  disabled: PropTypes.bool.isRequired,
+  disableRightClick: PropTypes.bool,
+  disabled: PropTypes.bool,
 };
 
 export { VideoComponent as Component, DEFAULTS };
