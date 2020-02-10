@@ -172,7 +172,7 @@ export default class Editor extends PureComponent {
           </div>
         )}
         <OSWrapEditor
-          plugins={[pluginButton(), pluginDivider(), pluginGallery(), pluginHtml(), pluginImage()]}
+          //plugins={[pluginButton(), pluginDivider(), pluginGallery(), pluginHtml(), pluginImage()]}
           theme={"Palette"}
           palette={wixPalettes.site1}
           openModal={this.openModal}
@@ -185,7 +185,7 @@ export default class Editor extends PureComponent {
             plugins={Plugins.editorPlugins}
             config={Plugins.config}
             editorState={this.props.editorState}
-            //initialState={this.props.initialState}
+            initialState={this.props.initialState}
             isMobile={this.props.isMobile}
             textToolbarType={textToolbarType}
             //theme={theme}
