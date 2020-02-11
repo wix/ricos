@@ -23,6 +23,7 @@
   "scripts": {
     "clean": "rm -rf dist/",
     "build": "rollup --environment MODULE_NAME:common -c ../../../rollup.config.js",
+    "postbuild": "node ../../../scripts/esCheck.js",
     "build:dev": "cross-env NODE_ENV=development npm run build",
     "build:analyze": "npm run build -- --environment MODULE_ANALYZE && open stats.html",
     "watch": "cross-env NODE_ENV=development MODULE_WATCH=1 npm run build -- --watch.chokidar",
