@@ -6,6 +6,7 @@ import {
   GALLERY_SETTINGS,
   GALLERY_IMAGE_SETTINGS,
   IMAGE_SETTINGS,
+  GIPHY_PLUGIN,
 } from '../cypress/dataHooks';
 import { DEFAULT_DESKTOP_BROWSERS } from '../tests/constants';
 
@@ -303,6 +304,7 @@ describe('plugins', () => {
         PLUGIN_TOOLBAR_BUTTONS.SMALL_CENTER
       );
       cy.get(`button[data-hook=${PLUGIN_TOOLBAR_BUTTONS.REPLACE}][tabindex=0]`).click();
+      cy.get(`[data-hook=${GIPHY_PLUGIN.UPLOAD_MODAL}] img`);
       cy.eyesCheckWindow(this.test.title);
     });
   });

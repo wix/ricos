@@ -86,6 +86,11 @@ export const HTML_PLUGIN = {
   UPDATE: 'htmlEditPanel_Update',
 };
 
+export const GIPHY_PLUGIN = {
+  UPLOAD_MODAL: 'giphyUploadModal',
+  UPLOAD_MODAL_INPUT: 'giphyUploadModalInput',
+};
+
 export const PLUGIN_COMPONENT = {
   IMAGE: 'imageViewer',
   VIDEO: 'videoPlayer',
