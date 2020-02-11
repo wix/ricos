@@ -664,10 +664,10 @@ const config = {
 };
 
 export const getConfig = (additionalConfig = {}) => {
-  const { scrollingElement } = additionalConfig;
-  if (scrollingElement) {
-    config[GALLERY_TYPE].scrollingElement = scrollingElement;
-  }
+  let _config = { ...config };
+  Object.keys(additionalConfig).forEach(key => {
+    _config[key] = { ...(_config[key] || {}), ...(additionalConfig[key] || {}) };
+  });
 
-  return config;
+  return _config;
 };

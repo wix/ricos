@@ -127,12 +127,15 @@ const config = {
 };
 
 export const getConfig = (additionalConfig = {}) => {
-  const { scrollingElement } = additionalConfig;
-  if (scrollingElement) {
-    config[GALLERY_TYPE].scrollingElement = scrollingElement;
-  }
+  let _config = { ...config };
+  Object.keys(additionalConfig).forEach(key => {
+    if (additionalConfig[key]) {
+      const orgConfig = config[key] || {};
+      _config[key] = { ...orgConfig, ...additionalConfig[key] };
+    }
+  });
 
-  return { ...config };
+  return _config;
 };
 
 export const getInlineStyleMappers = raw => [

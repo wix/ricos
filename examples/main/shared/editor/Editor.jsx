@@ -7,7 +7,7 @@ import { testImages, testVideos } from './mock';
 import * as Plugins from './EditorPlugins';
 import ModalsMap from './ModalsMap';
 import theme from '../theme/theme'; // must import after custom styles
-
+import { GALLERY_TYPE } from 'wix-rich-content-plugin-gallery';
 const modalStyleDefaults = {
   content: {
     top: '50%',
@@ -177,6 +177,8 @@ export default class Editor extends PureComponent {
       initialState,
       editorState,
     };
+
+    const additionalConfig = { [GALLERY_TYPE]: { scrollingElement: scrollingElementFn } };
     return (
       <div className="editor">
         {MobileToolbar && <MobileToolbar />}
@@ -191,7 +193,7 @@ export default class Editor extends PureComponent {
           onChange={this.handleChange}
           helpers={this.helpers}
           plugins={Plugins.editorPlugins}
-          config={Plugins.getConfig({ scrollingElement: scrollingElementFn })}
+          config={Plugins.getConfig(additionalConfig)}
           editorKey="random-editorKey-ssr"
           // siteDomain="https://www.wix.com"
           {...editorProps}
