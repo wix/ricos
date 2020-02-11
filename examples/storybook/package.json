@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-storybook",
-  "version": "6.8.2",
+  "version": "6.8.3",
   "license": "UNLICENSED",
   "private": true,
   "author": {
@@ -41,21 +41,20 @@
     "prop-types": "^15.6.2",
     "react": "^16.6.3",
     "react-json-view": "^1.19.1",
-    "wix-rich-content-common": "6.8.2",
-    "wix-rich-content-editor": "6.8.2",
-    "wix-rich-content-editor-common": "6.8.2",
-    "wix-rich-content-plugin-divider": "6.8.2",
-    "wix-rich-content-plugin-hashtag": "6.8.2",
-    "wix-rich-content-plugin-html": "6.8.2",
-    "wix-rich-content-plugin-image": "6.8.2",
-    "wix-rich-content-plugin-link": "6.8.2",
-    "wix-rich-content-viewer": "6.8.2"
+    "wix-rich-content-common": "6.8.3",
+    "wix-rich-content-editor": "6.8.3",
+    "wix-rich-content-editor-common": "6.8.3",
+    "wix-rich-content-plugin-divider": "6.8.3",
+    "wix-rich-content-plugin-hashtag": "6.8.3",
+    "wix-rich-content-plugin-html": "6.8.3",
+    "wix-rich-content-plugin-image": "6.8.3",
+    "wix-rich-content-plugin-link": "6.8.3",
+    "wix-rich-content-viewer": "6.8.3"
   },
   "devDependencies": {
-    "copy-webpack-plugin": "^4.5.1",    
+    "copy-webpack-plugin": "^4.5.1",
     "yoshi": "4.31.0",
     "yoshi-style-dependencies": "^4.23.7"
-
   },
   "lint-staged": {
     "*.js": "yoshi lint"
