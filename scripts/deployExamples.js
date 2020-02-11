@@ -12,7 +12,7 @@ const EXAMPLES_TO_DEPLOY = [
   {
     name: 'rich-content-storybook',
     path: 'examples/storybook',
-    buildCmd: 'build-storybook -s public',
+    buildCmd: 'npx build-storybook -s public',
     dist: 'storybook-static',
   },
 ];
