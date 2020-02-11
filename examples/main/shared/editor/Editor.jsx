@@ -28,6 +28,9 @@ export default class Editor extends PureComponent {
     super(props);
     // ReactModal.setAppElement('#root');
     this.initEditorProps();
+    const { scrollingElementFn } = props;
+    const additionalConfig = { [GALLERY_TYPE]: { scrollingElement: scrollingElementFn } };
+    this.pluginsConfig = Plugins.getConfig(additionalConfig);
   }
 
   initEditorProps() {
@@ -154,7 +157,6 @@ export default class Editor extends PureComponent {
       },
     };
     const {
-      scrollingElementFn,
       staticToolbar,
       isMobile,
       editorState,
@@ -178,7 +180,6 @@ export default class Editor extends PureComponent {
       editorState,
     };
 
-    const additionalConfig = { [GALLERY_TYPE]: { scrollingElement: scrollingElementFn } };
     return (
       <div className="editor">
         {MobileToolbar && <MobileToolbar />}
@@ -193,7 +194,8 @@ export default class Editor extends PureComponent {
           onChange={this.handleChange}
           helpers={this.helpers}
           plugins={Plugins.editorPlugins}
-          config={Plugins.getConfig(additionalConfig)}
+          // config={Plugins.getConfig(additionalConfig)}
+          config={this.pluginsConfig}
           editorKey="random-editorKey-ssr"
           // siteDomain="https://www.wix.com"
           {...editorProps}

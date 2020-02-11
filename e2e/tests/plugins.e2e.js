@@ -36,7 +36,7 @@ describe('plugins', () => {
 
     after(() => cy.eyesClose());
 
-    it('render image toolbar and settings', function() {
+    it.only('render image toolbar and settings', function() {
       cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE).shrinkPlugin();
       cy.eyesCheckWindow(this.test.title + '  - plugin toolbar');
       cy.openImageSettings();

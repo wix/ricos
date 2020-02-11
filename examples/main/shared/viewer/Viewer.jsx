@@ -22,6 +22,10 @@ export default class Viewer extends PureComponent {
     this.state = {
       disabled: false,
     };
+
+    const { scrollingElementFn } = props;
+    const additionalConfig = { [GALLERY_TYPE]: { scrollingElement: scrollingElementFn } };
+    this.pluginsConfig = Plugins.getConfig(additionalConfig);
   }
 
   componentDidUpdate(prevProps) {
@@ -41,7 +45,7 @@ export default class Viewer extends PureComponent {
   };
 
   render() {
-    const { scrollingElementFn, isMobile, locale, initialState } = this.props;
+    const { isMobile, locale, initialState } = this.props;
     const { expendModeIsOpen, expandModeIndex, disabled } = this.state;
 
     const viewerProps = {
@@ -54,7 +58,6 @@ export default class Viewer extends PureComponent {
       disabled,
     };
 
-    const additionalConfig = { [GALLERY_TYPE]: { scrollingElement: scrollingElementFn } };
     return (
       <div id="rich-content-viewer" className="viewer">
         <RichContentViewer
@@ -62,7 +65,7 @@ export default class Viewer extends PureComponent {
           typeMappers={Plugins.typeMappers}
           inlineStyleMappers={Plugins.getInlineStyleMappers(initialState)}
           decorators={Plugins.decorators}
-          config={Plugins.getConfig(additionalConfig)}
+          config={this.pluginsConfig}
           // siteDomain="https://www.wix.com"
           {...viewerProps}
         />
