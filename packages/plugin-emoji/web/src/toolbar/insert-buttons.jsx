@@ -9,7 +9,7 @@ import EmojiPreviewModal from './emojiPreviewModal';
 import Arrow from './arrow';
 import EmojiPluginIcon from '../icons/EmojiPluginIcon.svg';
 
-export default ({ helpers, t, settings, getEditorState, setEditorState, isMobile }) => {
+export default ({ helpers, t, settings, getEditorState, setEditorState }) => {
   const icon = settings?.toolbar?.icons?.InsertPluginButtonIcon || EmojiPluginIcon;
 
   return [
@@ -19,14 +19,14 @@ export default ({ helpers, t, settings, getEditorState, setEditorState, isMobile
       tooltipText: t('EmojiPlugin_InsertButton_Tooltip'),
       Icon: icon,
       componentData: settings.componentDataDefaults || {},
-      toolbars: settings.insertToolbars || [TOOLBARS.FOOTER],
+      toolbars: [TOOLBARS.FOOTER],
       modalElement: decorateComponentWithProps(EmojiPreviewModal, {
         getEditorState,
         setEditorState,
         ...settings,
       }),
       modalStylesFn: ({ buttonRef }) => {
-        const { modalStyles, contentStyles } = getBottomModalStyles(buttonRef, isMobile, {
+        const { modalStyles, contentStyles } = getBottomModalStyles(buttonRef, {
           customStyles: DesktopFlyOutModalStyles,
           fullScreen: true,
         });

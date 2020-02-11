@@ -145,8 +145,7 @@ export const getModalStyles = ({
 
 export const getBottomModalStyles = (
   buttonRef,
-  isMobile,
-  { customStyles = null, fullScreen = true, inline = false } = {}
+  { customStyles = null, fullScreen = true, inline = false, isMobile = false } = {}
 ) => {
   const modalStyles = getModalStyles({
     customStyles,
@@ -162,16 +161,10 @@ export const getBottomModalStyles = (
     margin: 0,
     position: 'absolute',
   };
-  const mobileModalStyle = {
-    top: 'auto',
-    bottom: 0,
-    width: 'fill-available',
-  };
   if (isRtl) {
     desktopModalStyle.right = window.innerWidth - right - 10;
   } else {
     desktopModalStyle.left = left - 15;
   }
-  const contentStyles = isMobile ? mobileModalStyle : desktopModalStyle;
-  return { modalStyles, contentStyles };
+  return { modalStyles, contentStyles: desktopModalStyle };
 };

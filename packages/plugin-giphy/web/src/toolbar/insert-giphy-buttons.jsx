@@ -28,9 +28,10 @@ export default ({ helpers, t, settings, isMobile }) => {
       modalElement: decorateComponentWithProps(GiphyApiInputModal, settings),
       modalStyles,
       modalStylesFn: ({ buttonRef }) => {
-        const { modalStyles, contentStyles } = getBottomModalStyles(buttonRef, isMobile, {
+        const { modalStyles, contentStyles } = getBottomModalStyles(buttonRef, {
           customStyles: DesktopFlyOutModalStyles,
           fullScreen: true,
+          isMobile,
         });
         return {
           ...modalStyles,
