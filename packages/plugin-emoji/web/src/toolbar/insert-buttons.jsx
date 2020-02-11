@@ -2,7 +2,7 @@ import { DesktopFlyOutModalStyles } from '../constants';
 import {
   TOOLBARS,
   decorateComponentWithProps,
-  getBottomModalStyles,
+  getBottomToolbarModalStyles,
   DECORATION_MODE,
 } from 'wix-rich-content-editor-common';
 import EmojiPreviewModal from './emojiPreviewModal';
@@ -19,25 +19,16 @@ export default ({ helpers, t, settings, getEditorState, setEditorState }) => {
       tooltipText: t('EmojiPlugin_InsertButton_Tooltip'),
       Icon: icon,
       componentData: settings.componentDataDefaults || {},
-      toolbars: [TOOLBARS.FOOTER],
+      toolbars: settings.insertToolbars || [TOOLBARS.FOOTER],
       modalElement: decorateComponentWithProps(EmojiPreviewModal, {
         getEditorState,
         setEditorState,
         ...settings,
       }),
       modalStylesFn: ({ buttonRef }) => {
-        const { modalStyles, contentStyles } = getBottomModalStyles(buttonRef, {
+        return getBottomToolbarModalStyles(buttonRef, {
           customStyles: DesktopFlyOutModalStyles,
-          fullScreen: true,
         });
-
-        return {
-          ...modalStyles,
-          content: {
-            ...modalStyles.content,
-            ...contentStyles,
-          },
-        };
       },
       modalDecorations: [
         {

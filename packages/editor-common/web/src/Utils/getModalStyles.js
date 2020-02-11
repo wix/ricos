@@ -143,7 +143,7 @@ export const getModalStyles = ({
   }
 };
 
-export const getBottomModalStyles = (
+export const getBottomToolbarModalStyles = (
   buttonRef,
   { customStyles = null, fullScreen = true, inline = false, isMobile = false } = {}
 ) => {
@@ -156,15 +156,21 @@ export const getBottomModalStyles = (
   const { top, left, right } = buttonRef.getBoundingClientRect();
   const isAboveButton = top - 293 > 0;
   const isRtl = buttonRef.closest('[dir=rtl]') !== null;
-  const desktopModalStyle = {
+  const contentStyles = {
     top: isAboveButton ? top - 293 : top + 30,
     margin: 0,
     position: 'absolute',
   };
   if (isRtl) {
-    desktopModalStyle.right = window.innerWidth - right - 10;
+    contentStyles.right = window.innerWidth - right - 10;
   } else {
-    desktopModalStyle.left = left - 15;
+    contentStyles.left = left - 15;
   }
-  return { modalStyles, contentStyles: desktopModalStyle };
+  return {
+    ...modalStyles,
+    content: {
+      ...modalStyles.content,
+      ...contentStyles,
+    },
+  };
 };
