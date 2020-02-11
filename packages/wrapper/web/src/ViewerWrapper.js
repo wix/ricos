@@ -4,13 +4,13 @@ import themeStrategyProvider from './ThemeStrategy';
 import pluginsStrategyProviderViewer from './PluginsStrategyViewer';
 import PropTypes from 'prop-types';
 
-export default function WrapperViewer({ strategies = [], plugins, theme, palette, children }) {
+export default function ViewerWrapper({ strategies = [], plugins, theme, palette, children }) {
   strategies.push(themeStrategyProvider({ theme, palette }));
   strategies.push(pluginsStrategyProviderViewer({ plugins }));
   return <EngineWrapper strategies={strategies}>{children}</EngineWrapper>;
 }
 
-WrapperViewer.propTypes = {
+ViewerWrapper.propTypes = {
   children: PropTypes.any,
   strategies: PropTypes.array,
   plugins: PropTypes.arrayOf(PropTypes.object),
