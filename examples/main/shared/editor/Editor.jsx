@@ -181,7 +181,7 @@ export default class Editor extends PureComponent {
           relValue={relValue}
           locale={this.props.locale}
           localeResource={this.props.localeResource}
-          // siteDomain="https://www.wix.com"
+        // siteDomain="https://www.wix.com"
         />
         <ReactModal
           isOpen={this.state.showModal}
