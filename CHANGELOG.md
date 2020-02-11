@@ -13,12 +13,17 @@
     Click to see more.
   </summary>
 
-  ### :house: Internal
-  - `general`
-    - [#666](https://github.com/wix-incubator/rich-content/pull/666) ES5 syntax validation in `dist/statics` on postbuild
 </details>
 <hr/>
 
+## 6.8.3 (Feb 11, 2020)
+### :bug: Bug Fix
+- `image`
+  - [da631441](https://github.com/wix-incubator/rich-content/commit/da631441) gif opacity
+### :house: Internal
+- `general`
+  - [#666](https://github.com/wix-incubator/rich-content/pull/666) ES5 syntax validation in `dist/statics` on postbuild
+  
 ## 6.8.2 (Feb 9, 2020)
 ### :bug: Bug Fix
 - `common`
@@ -27,8 +32,6 @@
   - [#657](https://github.com/wix-incubator/rich-content/pull/657) defaults for editor-only props in image-viewer
   - [#657](https://github.com/wix-incubator/rich-content/pull/657) in-plugin editing input rendered in edit mode only
   - [#657](https://github.com/wix-incubator/rich-content/pull/657) highres URL on SSR protection
-
-
 
 ## 6.8.1 (Feb 6, 2020)
 ### :bug: Bug Fix
