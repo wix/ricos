@@ -1,6 +1,6 @@
 import React from 'react';
 import { htmlTypeMapper, HTML_TYPE } from 'wix-rich-content-plugin-html/dist/module.viewer';
-import { OSWrapViewer } from 'wix-rich-content-wrapper';
+import { WrapperViewer } from 'wix-rich-content-wrapper';
 import { rcvButton } from 'wix-rich-content-plugin-button';
 import { rcvImage } from 'wix-rich-content-plugin-image';
 import { rcvHtml } from 'wix-rich-content-plugin-html';
@@ -20,11 +20,11 @@ export default () => {
   };
 
   return (
-    <OSWrapViewer
+    <WrapperViewer
       plugins={[rcvButton(), rcvDivider(), rcvGallery(), rcvHtml(), rcvImage()]}
       theme={'Default'}
     >
       <RichContentViewer typeMappers={typeMappers} config={config} />
-    </OSWrapViewer>
+    </WrapperViewer>
   );
 };

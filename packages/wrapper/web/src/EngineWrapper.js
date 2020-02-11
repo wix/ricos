@@ -5,7 +5,7 @@ import ReactModal from 'react-modal';
 import PropTypes from 'prop-types';
 import { modalStyles } from './defaults';
 
-class GenWrp extends React.Component {
+class EngineWrapper extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -72,7 +72,7 @@ class GenWrp extends React.Component {
     );
   }
 }
-GenWrp.propTypes = {
+EngineWrapper.propTypes = {
   strategies: PropTypes.array,
   plugins: PropTypes.arrayOf(PropTypes.object),
   theme: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
@@ -82,5 +82,5 @@ GenWrp.propTypes = {
   children: PropTypes.object,
   forwardRef: PropTypes.any,
 };
-export default GenWrp;
-//export default React.forwardRef((props, ref) => <GenWrp {...props} forwardRef={ref} />);
+export default EngineWrapper;
+//export default React.forwardRef((props, ref) => <EngineWrapper {...props} forwardRef={ref} />);

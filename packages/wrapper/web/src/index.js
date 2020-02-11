@@ -1,4 +1,4 @@
-import OSWrapEditor from './OSWrapEditor';
-import OSWrapViewer from './OSWrapViewer';
+import WrapperEditor from './WrapperEditor';
+import WrapperViewer from './WrapperViewer';
 import { wixPalettes } from './palettesExample';
-export { OSWrapEditor, OSWrapViewer, wixPalettes };
+export { WrapperEditor, WrapperViewer, wixPalettes };

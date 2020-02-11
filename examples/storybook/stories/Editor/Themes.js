@@ -6,7 +6,7 @@ import exapmleState from '../../../../e2e/tests/fixtures/basic-plugins.json';
 import Palette from '../Components/Palette';
 import { wixPalettes } from '../palettesExample';
 import { RichContentEditor, convertFromRaw, createWithContent } from 'wix-rich-content-editor';
-import { OSWrapEditor } from 'wix-rich-content-wrapper';
+import { WrapperEditor } from 'wix-rich-content-wrapper';
 
 import { Themes } from '../../src/RceTheme';
 import ThemeWrapper from '../../src/ThemeWrapper';
@@ -36,9 +36,9 @@ export default () => {
       <Section title="Live Site Theme 1">
         <Palette palette={wixPalettes.site1} />
         <RichContentEditorBox>
-          <OSWrapEditor theme={Themes.PALETTE} palette={wixPalettes.site1}>
+          <WrapperEditor theme={Themes.PALETTE} palette={wixPalettes.site1}>
             <RichContentEditor editorState={editorState} plugins={PLUGINS} config={config} />
-          </OSWrapEditor>
+          </WrapperEditor>
         </RichContentEditorBox>
       </Section>
 

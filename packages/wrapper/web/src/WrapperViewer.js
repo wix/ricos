@@ -1,16 +1,16 @@
 import React from 'react';
-import GenWrp from './GenWrp';
+import EngineWrapper from './EngineWrapper';
 import themeStrategyProvider from './ThemeStrategy';
 import pluginsStrategyProviderViewer from './PluginsStrategyViewer';
 import PropTypes from 'prop-types';
 
-export default function OSWrapViewer({ strategies = [], plugins, theme, palette, children }) {
+export default function WrapperViewer({ strategies = [], plugins, theme, palette, children }) {
   strategies.push(themeStrategyProvider({ theme, palette }));
   strategies.push(pluginsStrategyProviderViewer({ plugins }));
-  return <GenWrp strategies={strategies}>{children}</GenWrp>;
+  return <EngineWrapper strategies={strategies}>{children}</EngineWrapper>;
 }
 
-OSWrapViewer.propTypes = {
+WrapperViewer.propTypes = {
   children: PropTypes.any,
   strategies: PropTypes.array,
   plugins: PropTypes.arrayOf(PropTypes.object),
