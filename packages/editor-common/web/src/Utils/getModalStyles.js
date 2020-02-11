@@ -142,3 +142,36 @@ export const getModalStyles = ({
     return merge({}, desktopSideBarStyles, ...overrideStyles);
   }
 };
+
+export const initializeModalStyles = (
+  buttonRef,
+  isMobile,
+  { customStyles = null, fullScreen = true, inline = false } = {}
+) => {
+  const modalStyles = getModalStyles({
+    customStyles,
+    fullScreen,
+    inline,
+    isMobile,
+  });
+  const { top, left, right } = buttonRef.getBoundingClientRect();
+  const isAboveButton = top - 293 > 0;
+  const isRtl = buttonRef.closest('[dir=rtl]') !== null;
+  const desktopModalStyle = {
+    top: isAboveButton ? top - 293 : top + 30,
+    margin: 0,
+    position: 'absolute',
+  };
+  const mobileModalStyle = {
+    top: 'auto',
+    bottom: 0,
+    width: '-webkit-fill-available',
+  };
+  if (isRtl) {
+    desktopModalStyle.right = window.innerWidth - right - 10;
+  } else {
+    desktopModalStyle.left = left - 15;
+  }
+  const contentStyles = isMobile ? mobileModalStyle : desktopModalStyle;
+  return { modalStyles, contentStyles };
+};
