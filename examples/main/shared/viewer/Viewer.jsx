@@ -70,13 +70,13 @@ export default class Viewer extends PureComponent {
           theme={theme}>
           <RichContentViewer
             helpers={this.helpers}
-            //typeMappers={Plugins.typeMappers}
             inlineStyleMappers={Plugins.getInlineStyleMappers(initialState)}
-            //decorators={Plugins.decorators}
-            //config={Plugins.config}
-            //theme={theme}
-            // siteDomain="https://www.wix.com"
-            {...viewerProps} //
+            {...viewerProps}
+          //typeMappers={Plugins.typeMappers}
+          //decorators={Plugins.decorators}
+          //config={Plugins.config}
+          //theme={theme}
+          // siteDomain="https://www.wix.com"
           />
         </OSWrapViewer>
 
