@@ -1,16 +1,16 @@
 import React from 'react';
-import { ViewerWrapper } from 'wix-rich-content-wrapper/dist/module.viewer';
+import { ViewerWrapper } from 'wix-rich-content-wrapper/dist/module.js';
 import {
   rcvHtml,
   htmlTypeMapper,
   HTML_TYPE,
-} from 'wix-rich-content-plugin-html/dist/module.viewer';
-import { rcvButton } from 'wix-rich-content-plugin-button/dist/module.viewer';
-import { rcvImage, imageTypeMapper } from 'wix-rich-content-plugin-image/dist/module.viewer';
-import { rcvDivider } from 'wix-rich-content-plugin-divider/dist/module.viewer';
-import { rcvGallery } from 'wix-rich-content-plugin-gallery/dist/module.viewer';
+} from 'wix-rich-content-plugin-html/dist/module.viewer.js';
+import { rcvButton } from 'wix-rich-content-plugin-button/dist/module.viewer.js';
+import { rcvImage, imageTypeMapper } from 'wix-rich-content-plugin-image/dist/module.viewer.js';
+import { rcvDivider } from 'wix-rich-content-plugin-divider/dist/module.viewer.js';
+import { rcvGallery } from 'wix-rich-content-plugin-gallery/dist/module.viewer.js';
 import { RichContentViewer } from 'wix-rich-content-viewer';
-import { linkTypeMapper } from 'wix-rich-content-plugin-link/dist/module.viewer';
+import { linkTypeMapper } from 'wix-rich-content-plugin-link/dist/module.viewer.js';
 
 const typeMappers = [imageTypeMapper, linkTypeMapper, htmlTypeMapper];
 

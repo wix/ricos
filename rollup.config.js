@@ -61,7 +61,7 @@ try {
       watch,
     };
   });
-} catch (_) {}
+} catch (_) { }
 
 let viewerEntry;
 try {
@@ -78,7 +78,7 @@ try {
     external,
     watch,
   };
-} catch (_) {}
+} catch (_) { }
 
 let config = [editorEntry];
 

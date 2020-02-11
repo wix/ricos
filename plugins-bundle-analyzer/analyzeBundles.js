@@ -21,7 +21,7 @@ function run() {
       .filter(pkg => pkg.name.indexOf('wix-rich-content-plugin') === 0)
       .map(pkg => pkg.name);
 
-    const promiseArr = [...pkgNames, ...additionalPackages].map(pkgName => {
+    const promiseArr = pkgNames.concat(additionalPackages).map(pkgName => {
       return new Promise(resolve => {
         webpack(getWebpackConfig(pkgName), (err, stats) => {
           // Stats Object

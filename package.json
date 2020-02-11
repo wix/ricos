@@ -23,6 +23,7 @@
     "storybook": "npm run start --prefix examples/storybook",
     "exampleApp": "npm run start --prefix examples/main",
     "analyzeBundles": "npm run build && npm run start --prefix plugins-bundle-analyzer",
+    "analyzeBundles:nobuild": "npm run start --prefix plugins-bundle-analyzer",
     "analyzePlugin": "npm run build && npm run analyze --prefix plugins-bundle-analyzer",
     "e2e": "start-server-and-test e2e:app http://localhost:3002 e2e:run",
     "e2e:debug": "npm run e2e:app:dev & npx cypress open --env MATCH_CONTENT_STATE=true",
