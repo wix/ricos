@@ -54,7 +54,6 @@ class EngineWrapper extends React.Component {
     return (
       <React.Fragment>
         {Children.only(React.cloneElement(children, modifiedProps))}
-        {/* <RichContentEditor {...modifiedProps} ref={forwardRef} /> */}
         <ReactModal
           isOpen={this.state.showModal}
           contentLabel="External Modal Example"
@@ -83,4 +82,3 @@ EngineWrapper.propTypes = {
   forwardRef: PropTypes.any,
 };
 export default EngineWrapper;
-//export default React.forwardRef((props, ref) => <EngineWrapper {...props} forwardRef={ref} />);
