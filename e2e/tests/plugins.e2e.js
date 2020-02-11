@@ -290,7 +290,7 @@ describe('plugins', () => {
     });
   });
 
-  context('gify', () => {
+  context('giphy', () => {
     before('load editor', function() {
       eyesOpen(this);
     });
@@ -298,7 +298,7 @@ describe('plugins', () => {
     after(() => cy.eyesClose());
 
     it('render giphy plugin toolbar', function() {
-      cy.loadEditorAndViewer('gify');
+      cy.loadEditorAndViewer('giphy');
       cy.openPluginToolbar(PLUGIN_COMPONENT.GIF).clickToolbarButton(
         PLUGIN_TOOLBAR_BUTTONS.SMALL_CENTER
       );
