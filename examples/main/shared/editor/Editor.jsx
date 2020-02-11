@@ -7,7 +7,7 @@ import { testImages, testVideos } from './mock';
 import * as Plugins from './EditorPlugins';
 import ModalsMap from './ModalsMap';
 import theme from '../theme/theme'; // must import after custom styles
-
+import { GALLERY_TYPE } from 'wix-rich-content-plugin-gallery';
 const modalStyleDefaults = {
   content: {
     top: '50%',
@@ -28,6 +28,9 @@ export default class Editor extends PureComponent {
     super(props);
     // ReactModal.setAppElement('#root');
     this.initEditorProps();
+    const { scrollingElementFn } = props;
+    const additionalConfig = { [GALLERY_TYPE]: { scrollingElement: scrollingElementFn } };
+    this.pluginsConfig = Plugins.getConfig(additionalConfig);
   }
 
   initEditorProps() {
@@ -153,9 +156,30 @@ export default class Editor extends PureComponent {
         ...theme.modalTheme.overlay,
       },
     };
+    const {
+      staticToolbar,
+      isMobile,
+      editorState,
+      initialState,
+      locale,
+      localeResource,
+    } = this.props;
     const { MobileToolbar, TextToolbar } = this.state;
-    const textToolbarType = this.props.staticToolbar && !this.props.isMobile ? 'static' : null;
+    const textToolbarType = staticToolbar && !isMobile ? 'static' : null;
     const { onRequestClose } = this.state.modalProps || {};
+
+    const editorProps = {
+      anchorTarget,
+      relValue,
+      locale,
+      localeResource,
+      theme,
+      textToolbarType,
+      isMobile,
+      initialState,
+      editorState,
+    };
+
     return (
       <div className="editor">
         {MobileToolbar && <MobileToolbar />}
@@ -170,18 +194,11 @@ export default class Editor extends PureComponent {
           onChange={this.handleChange}
           helpers={this.helpers}
           plugins={Plugins.editorPlugins}
-          config={Plugins.config}
-          editorState={this.props.editorState}
-          initialState={this.props.initialState}
-          isMobile={this.props.isMobile}
-          textToolbarType={textToolbarType}
-          theme={theme}
+          // config={Plugins.getConfig(additionalConfig)}
+          config={this.pluginsConfig}
           editorKey="random-editorKey-ssr"
-          anchorTarget={anchorTarget}
-          relValue={relValue}
-          locale={this.props.locale}
-          localeResource={this.props.localeResource}
-        // siteDomain="https://www.wix.com"
+          // siteDomain="https://www.wix.com"
+          {...editorProps}
         />
         <ReactModal
           isOpen={this.state.showModal}
