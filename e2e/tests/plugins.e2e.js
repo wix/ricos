@@ -299,7 +299,7 @@ describe('plugins', () => {
 
     it('render giphy plugin toolbar', function() {
       cy.loadEditorAndViewer('giphy');
-      cy.openPluginToolbar(PLUGIN_COMPONENT.GIF).clickToolbarButton(
+      cy.openPluginToolbar(PLUGIN_COMPONENT.GIPHY).clickToolbarButton(
         PLUGIN_TOOLBAR_BUTTONS.SMALL_CENTER
       );
       cy.get(`button[data-hook=${PLUGIN_TOOLBAR_BUTTONS.REPLACE}][tabindex=0]`).click();

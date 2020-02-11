@@ -92,7 +92,7 @@ export const PLUGIN_COMPONENT = {
   GALLERY: 'galleryViewer',
   HTML: 'HtmlComponent',
   DIVIDER: 'divider',
-  GIF: 'giphyPlayer',
+  GIPHY: 'giphyPlayer',
   SOUND_CLOUD: 'soundCloudPlayer',
   MAP: 'mapViewer',
   FILE_UPLOAD: 'fileUploadViewer',
