@@ -4,7 +4,7 @@ export { typeMapper as buttonTypeMapper, BUTTON_TYPE };
 
 const defaultConfig = {};
 
-export const rcvButton = (config = {}) => {
+export const pluginButton = (config = {}) => {
   return {
     config: { ...defaultConfig, ...config },
     type: BUTTON_TYPE,

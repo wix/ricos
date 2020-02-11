@@ -1,16 +1,24 @@
-const createPluginsStrategy = (pack = {}) => (innerProps = {}) => {
-  const { config = {}, plugins = [], ModalsMap = {} } = pack;
+// TODO: move to common
+function assert(predicate, error) {
+  if (!predicate) {
+    throw error;
+  }
+}
+
+const createPluginsStrategy = ({ config = {}, plugins = [], ModalsMap = {} } = {}) => (
+  innerProps = {}
+) => {
   return {
     config: { ...config, ...(innerProps.config || {}) },
-    plugins: plugins.concat(innerProps.plugins || []),
+    plugins: [...plugins, ...(innerProps.plugins || [])],
     ModalsMap: { ...ModalsMap, ...(innerProps.ModalsMap || {}) },
   };
 };
 
-export default function pluginsStrategyProvider({ plugins }) {
-  const emptyPack = { config: {}, plugins: [], ModalsMap: {} };
-  if (Array.isArray(plugins) && plugins !== []) {
-    const pack = plugins.reduce((prev, curr) => {
+export default function pluginsStrategyProvider({ plugins = [] }) {
+  assert(Array.isArray(plugins), 'plugins is expected to be an object array');
+  const pack = plugins.reduce(
+    (prev, curr) => {
       const { createPlugin, type, config, ModalsMap } = curr;
       const pConfig = { [type]: config };
       return {
@@ -18,8 +26,9 @@ export default function pluginsStrategyProvider({ plugins }) {
         plugins: prev.plugins.concat(createPlugin),
         ModalsMap: { ...prev.ModalsMap, ...ModalsMap },
       };
-    }, emptyPack);
-    return createPluginsStrategy(pack);
-  }
-  return createPluginsStrategy(emptyPack);
+    },
+    { config: {}, plugins: [], ModalsMap: {} }
+  );
+
+  return createPluginsStrategy(pack);
 }

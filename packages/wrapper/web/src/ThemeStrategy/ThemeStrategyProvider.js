@@ -7,9 +7,10 @@ const createThemeStrategy = (themeObj = {}) => (innerProps = {}) => {
   return { theme: { ...themeObj, ...theme } };
 };
 
-export default function themeStrategyProvider({ theme = {}, palette = {} }) {
+// Note: themeGenerators should include the editor/viewer generators, common generator, ..
+export default function themeStrategyProvider({ theme = {}, palette = {}, themeGenerators = [] }) {
   if (typeof theme === 'string') {
-    const rceTheme = new RceTheme(theme, palette);
+    const rceTheme = new RceTheme(theme, palette, themeGenerators);
     const { StyleSheet, css } = Aphrodite.extend([
       {
         selectorHandler: (selector, baseSelector, generateSubtreeStyles) => {

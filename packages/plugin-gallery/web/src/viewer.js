@@ -7,7 +7,7 @@ const defaultConfig = {
     typeof window !== 'undefined' && document.getElementsByClassName('viewer-example')[0],
 };
 
-export const rcvGallery = (config = {}) => {
+export const pluginGallery = (config = {}) => {
   return {
     config: { ...defaultConfig, ...config },
     type: GALLERY_TYPE,

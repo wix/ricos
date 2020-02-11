@@ -4,8 +4,9 @@ import themeStrategyProvider from './ThemeStrategy';
 import pluginsStrategyProvider from './PluginsStrategy';
 import PropTypes from 'prop-types';
 
-export default function EditorWrapper({ strategies = [], theme, palette, plugins, children }) {
-  strategies.push(themeStrategyProvider({ theme, palette }));
+export default function EditorWrapper({ strategies = [], theme, palette, plugins = [], children }) {
+  const themeGenerators = plugins.map(plug => plug.themeGenerator);
+  strategies.push(themeStrategyProvider({ theme, palette, themeGenerators }));
   strategies.push(pluginsStrategyProvider({ plugins }));
   return <EngineWrapper strategies={strategies}>{children}</EngineWrapper>;
 }
