@@ -206,7 +206,7 @@ GalleryViewer.propTypes = {
   onClick: PropTypes.func,
   className: PropTypes.string,
   settings: PropTypes.object,
-  disableRightClick: PropTypes.bool.isRequired,
+  disableRightClick: PropTypes.bool,
   theme: PropTypes.object.isRequired,
   isMobile: PropTypes.bool.isRequired,
   helpers: PropTypes.object.isRequired,

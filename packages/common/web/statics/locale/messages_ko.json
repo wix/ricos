@@ -14,6 +14,7 @@
   "SizeSmallCenterButton_Tooltip" : "작게",
   "LinkPanelContainer_DoneButton" : "저장",
   "SizeFullWidthButton_Tooltip" : "전체 두께",
+  "AnchorPlugin_AddAnchor_Tooltip" : "Add an anchor",
   "HtmlPlugin_EditUrl_Tooltip" : "변경",
   "GalleryPlugin_Layout_Collage" : "콜라주",
   "ButtonModal_Settings_Tab" : "설정",

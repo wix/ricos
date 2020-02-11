@@ -139,7 +139,7 @@ SoundCloud.propTypes = {
   className: PropTypes.string.isRequired,
   theme: PropTypes.object.isRequired,
   t: PropTypes.func.isRequired,
-  disabled: PropTypes.bool.isRequired,
+  disabled: PropTypes.bool,
 };
 
 export { SoundCloud as Component, DEFAULTS };
