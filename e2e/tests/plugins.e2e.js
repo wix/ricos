@@ -161,6 +161,14 @@ describe('plugins', () => {
           .openGalleryImageSettings()
           .get(`[data-hook=${GALLERY_IMAGE_SETTINGS.PREVIEW}]:first`);
         cy.eyesCheckWindow(this.test.parent.title + ' - render item settings');
+        cy.get(`[data-hook=${GALLERY_IMAGE_SETTINGS.TITLE}]`).type('Amazing Title');
+        cy.get(`[data-hook=${GALLERY_IMAGE_SETTINGS.LINK}]`).type('Stunning.com');
+        cy.get(`[data-hook=${GALLERY_IMAGE_SETTINGS.LINK_TARGET}]`).click();
+        cy.get(`[data-hook=${GALLERY_IMAGE_SETTINGS.LINK_NOFOLLOW}]`).click();
+        cy.eyesCheckWindow(this.test.parent.title + ' - enter image settings');
+        cy.get(`[data-hook=${GALLERY_IMAGE_SETTINGS.DONE}]:first`).click();
+        cy.openGalleryImageSettings();
+        cy.eyesCheckWindow(this.test.parent.title + ' - settings saved & title shows on image ');
         cy.get(`[data-hook=${GALLERY_IMAGE_SETTINGS.DELETE}]`).click({ force: true });
         cy.get(`[data-hook=${GALLERY_IMAGE_SETTINGS.PREVIEW}]:first`);
         cy.eyesCheckWindow(this.test.parent.title + ' - delete a media item');

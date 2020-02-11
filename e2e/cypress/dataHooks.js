@@ -67,6 +67,11 @@ export const GALLERY_SETTINGS = {
 export const GALLERY_IMAGE_SETTINGS = {
   PREVIEW: 'galleryImageSettingsPreview',
   DELETE: 'galleryImageSettingsDeleteImage',
+  TITLE: 'galleryImageTitleInput',
+  LINK: 'linkPanelInput',
+  LINK_TARGET: 'linkPanelBlankCheckbox',
+  LINK_NOFOLLOW: 'linkPanelRelCheckbox',
+  DONE: 'settingPanelFooterDone',
 };
 
 export const VIDEO_PLUGIN = {
