@@ -52,9 +52,10 @@
     "wix-rich-content-viewer": "6.8.2"
   },
   "devDependencies": {
-    "copy-webpack-plugin": "^4.5.1",
+    "copy-webpack-plugin": "^4.5.1",    
     "yoshi": "4.31.0",
-    "jest-yoshi-preset": "4.31.0"
+    "yoshi-style-dependencies": "^4.23.7"
+
   },
   "lint-staged": {
     "*.js": "yoshi lint"
