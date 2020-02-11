@@ -226,7 +226,7 @@ const videoHandlers = {
   },
 };
 
-export const config = {
+const config = {
   [EMOJI_TYPE]: {
     // toolbar: {
     //   icons: {
@@ -245,8 +245,6 @@ export const config = {
   },
 
   [GALLERY_TYPE]: {
-    scrollingElement: () =>
-      typeof window !== 'undefined' && document.getElementsByClassName('editor-example')[0],
     // toolbar: {
     //   icons: {
     //     InsertPluginButtonIcon: MyCustomIcon,
@@ -661,4 +659,13 @@ export const config = {
     //   })
     // }
   ],
+};
+
+export const getConfig = (additionalConfig = {}) => {
+  let _config = { ...config };
+  Object.keys(additionalConfig).forEach(key => {
+    _config[key] = { ...(_config[key] || {}), ...(additionalConfig[key] || {}) };
+  });
+
+  return _config;
 };

@@ -49,7 +49,8 @@
     "wix-rich-content-plugin-html": "6.8.3",
     "wix-rich-content-plugin-image": "6.8.3",
     "wix-rich-content-plugin-link": "6.8.3",
-    "wix-rich-content-viewer": "6.8.3"
+    "wix-rich-content-viewer": "6.8.3",
+    "wix-rich-content-wrapper": "6.8.3"
   },
   "devDependencies": {
     "copy-webpack-plugin": "^4.5.1",

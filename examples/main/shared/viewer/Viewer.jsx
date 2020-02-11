@@ -12,8 +12,7 @@ import { rcvButton } from 'wix-rich-content-plugin-button';
 import { rcvImage } from 'wix-rich-content-plugin-image';
 import { rcvHtml } from 'wix-rich-content-plugin-html';
 import { rcvDivider } from 'wix-rich-content-plugin-divider';
-import { rcvGallery } from 'wix-rich-content-plugin-gallery';
-
+import { rcvGallery, GALLERY_TYPE } from 'wix-rich-content-plugin-gallery';
 const anchorTarget = '_top';
 const relValue = 'noreferrer';
 
@@ -28,6 +27,10 @@ export default class Viewer extends PureComponent {
     this.state = {
       disabled: false,
     };
+
+    const { scrollingElementFn } = props;
+    const additionalConfig = { [GALLERY_TYPE]: { scrollingElement: scrollingElementFn } };
+    this.pluginsConfig = Plugins.getConfig(additionalConfig);
   }
 
   componentDidUpdate(prevProps) {
@@ -47,7 +50,19 @@ export default class Viewer extends PureComponent {
   };
 
   render() {
-    const { expendModeIsOpen, expandModeIndex } = this.state;
+    const { isMobile, locale, initialState } = this.props;
+    const { expendModeIsOpen, expandModeIndex, disabled } = this.state;
+
+    const viewerProps = {
+      locale,
+      relValue,
+      anchorTarget,
+      isMobile,
+      theme,
+      initialState,
+      disabled,
+    };
+
     return (
       <div id="rich-content-viewer" className="viewer">
         <OSWrapViewer
@@ -56,27 +71,25 @@ export default class Viewer extends PureComponent {
           <RichContentViewer
             helpers={this.helpers}
             //typeMappers={Plugins.typeMappers}
-            inlineStyleMappers={Plugins.getInlineStyleMappers(this.props.initialState)}
+            inlineStyleMappers={Plugins.getInlineStyleMappers(initialState)}
             //decorators={Plugins.decorators}
             //config={Plugins.config}
-            initialState={this.props.initialState}
             //theme={theme}
-            isMobile={this.props.isMobile}
-            anchorTarget={anchorTarget}
-            relValue={relValue}
-            disabled={this.state.disabled}
-            locale={this.props.locale}
-          // siteDomain="https://www.wix.com"
-          /></OSWrapViewer>
-
-        {!isSSR() && (
-          <Fullscreen
-            isOpen={expendModeIsOpen}
-            images={this.expandModeData.images}
-            onClose={() => this.setState({ expendModeIsOpen: false })}
-            index={expandModeIndex}
+            // siteDomain="https://www.wix.com"
+            {...viewerProps}
           />
-        )}
+        </OSWrapViewer>
+
+        {
+          !isSSR() && (
+            <Fullscreen
+              isOpen={expendModeIsOpen}
+              images={this.expandModeData.images}
+              onClose={() => this.setState({ expendModeIsOpen: false })}
+              index={expandModeIndex}
+            />
+          )
+        }
       </div>
     );
   }

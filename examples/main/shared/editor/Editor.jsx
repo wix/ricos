@@ -13,8 +13,7 @@ import { pluginButton } from 'wix-rich-content-plugin-button';
 import { pluginImage } from 'wix-rich-content-plugin-image';
 import { pluginHtml } from 'wix-rich-content-plugin-html';
 import { pluginDivider } from 'wix-rich-content-plugin-divider';
-import { pluginGallery } from 'wix-rich-content-plugin-gallery';
-
+import { pluginGallery, GALLERY_TYPE } from 'wix-rich-content-plugin-gallery';
 const modalStyleDefaults = {
   content: {
     top: '50%',
@@ -35,6 +34,9 @@ export default class Editor extends PureComponent {
     super(props);
     // ReactModal.setAppElement('#root');
     this.initEditorProps();
+    const { scrollingElementFn } = props;
+    const additionalConfig = { [GALLERY_TYPE]: { scrollingElement: scrollingElementFn } };
+    this.pluginsConfig = Plugins.getConfig(additionalConfig);
   }
 
   initEditorProps() {
@@ -160,9 +162,30 @@ export default class Editor extends PureComponent {
         ...theme.modalTheme.overlay,
       },
     };
+    const {
+      staticToolbar,
+      isMobile,
+      editorState,
+      initialState,
+      locale,
+      localeResource,
+    } = this.props;
     const { MobileToolbar, TextToolbar } = this.state;
-    const textToolbarType = this.props.staticToolbar && !this.props.isMobile ? 'static' : null;
-    //const { onRequestClose } = this.state.modalProps || {};
+    const textToolbarType = staticToolbar && !isMobile ? 'static' : null;
+    const { onRequestClose } = this.state.modalProps || {};
+
+    const editorProps = {
+      anchorTarget,
+      relValue,
+      locale,
+      localeResource,
+      theme,
+      textToolbarType,
+      isMobile,
+      initialState,
+      editorState,
+    };
+
     return (
       <div className="editor">
         {MobileToolbar && <MobileToolbar />}
@@ -172,7 +195,7 @@ export default class Editor extends PureComponent {
           </div>
         )}
         <OSWrapEditor
-          plugins={[pluginImage(), pluginDivider(), pluginGallery(), pluginHtml(), pluginButton(),]}
+          plugins={[pluginImage(), pluginDivider(), pluginGallery(), pluginHtml(), pluginButton()]}
           theme={"Palette"}
           palette={wixPalettes.site1}
         >
@@ -182,17 +205,10 @@ export default class Editor extends PureComponent {
             helpers={this.helpers}
             //plugins={Plugins.editorPlugins}
             //config={Plugins.config}
-            editorState={this.props.editorState}
-            initialState={this.props.initialState}
-            isMobile={this.props.isMobile}
-            textToolbarType={textToolbarType}
             //theme={theme}
             editorKey="random-editorKey-ssr"
-            anchorTarget={anchorTarget}
-            relValue={relValue}
-            locale={this.props.locale}
-            localeResource={this.props.localeResource}
             onChange={this.handleChange}
+            {...editorProps}
           // siteDomain="https://www.wix.com"
           />
         </OSWrapEditor>
