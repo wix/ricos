@@ -76,7 +76,7 @@ export default class Viewer extends PureComponent {
             //config={Plugins.config}
             //theme={theme}
             // siteDomain="https://www.wix.com"
-            {...viewerProps}
+            {...viewerProps} //
           />
         </OSWrapViewer>
 
