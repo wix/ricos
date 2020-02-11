@@ -2,7 +2,7 @@ import { DesktopFlyOutModalStyles } from '../constants';
 import {
   TOOLBARS,
   decorateComponentWithProps,
-  initializeModalStyles,
+  getBottomModalStyles,
   DECORATION_MODE,
 } from 'wix-rich-content-editor-common';
 import EmojiPreviewModal from './emojiPreviewModal';
@@ -26,7 +26,7 @@ export default ({ helpers, t, settings, getEditorState, setEditorState, isMobile
         ...settings,
       }),
       modalStylesFn: ({ buttonRef }) => {
-        const { modalStyles, contentStyles } = initializeModalStyles(buttonRef, isMobile, {
+        const { modalStyles, contentStyles } = getBottomModalStyles(buttonRef, isMobile, {
           customStyles: DesktopFlyOutModalStyles,
           fullScreen: true,
         });

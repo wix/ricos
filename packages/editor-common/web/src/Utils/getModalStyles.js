@@ -143,7 +143,7 @@ export const getModalStyles = ({
   }
 };
 
-export const initializeModalStyles = (
+export const getBottomModalStyles = (
   buttonRef,
   isMobile,
   { customStyles = null, fullScreen = true, inline = false } = {}
@@ -165,7 +165,7 @@ export const initializeModalStyles = (
   const mobileModalStyle = {
     top: 'auto',
     bottom: 0,
-    width: '-webkit-fill-available',
+    width: 'fill-available',
   };
   if (isRtl) {
     desktopModalStyle.right = window.innerWidth - right - 10;

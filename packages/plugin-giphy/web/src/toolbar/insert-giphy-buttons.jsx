@@ -4,7 +4,7 @@ import {
   TOOLBARS,
   DECORATION_MODE,
   decorateComponentWithProps,
-  initializeModalStyles,
+  getBottomModalStyles,
 } from 'wix-rich-content-editor-common';
 import GiphyApiInputModal from './giphyApiInputModal';
 import { InsertPluginIcon, InsertPluginMobileIcon } from '../icons';
@@ -28,7 +28,7 @@ export default ({ helpers, t, settings, isMobile }) => {
       modalElement: decorateComponentWithProps(GiphyApiInputModal, settings),
       modalStyles,
       modalStylesFn: ({ buttonRef }) => {
-        const { modalStyles, contentStyles } = initializeModalStyles(buttonRef, isMobile, {
+        const { modalStyles, contentStyles } = getBottomModalStyles(buttonRef, isMobile, {
           customStyles: DesktopFlyOutModalStyles,
           fullScreen: true,
         });
