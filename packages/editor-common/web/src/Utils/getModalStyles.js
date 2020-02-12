@@ -153,11 +153,12 @@ export const getBottomToolbarModalStyles = (
     inline,
     isMobile,
   });
+  const height = customStyles.content.height.slice(0, 3);
   const { top, left, right } = buttonRef.getBoundingClientRect();
-  const isAboveButton = top - 293 > 0;
+  const isAboveButton = top - height - 11 > 0;
   const isRtl = buttonRef.closest('[dir=rtl]') !== null;
   const contentStyles = {
-    top: isAboveButton ? top - 293 : top + 30,
+    top: isAboveButton ? top - height - 11 : top + 30,
     margin: 0,
     position: 'absolute',
   };
