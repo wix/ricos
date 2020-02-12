@@ -34,6 +34,13 @@ const createBaseComponent = ({
   getEditorBounds,
   onOverlayClick,
   disableRightClick,
+  locale,
+  shouldRenderOptimizedImages,
+  siteDomain,
+  setInPluginEditingMode,
+  getInPluginEditingMode,
+  anchorTarget,
+  relValue,
 }) => {
   class WrappedComponent extends Component {
     static displayName = createHocName('BaseComponent', PluginComponent);
@@ -266,6 +273,14 @@ const createBaseComponent = ({
           helpers={helpers}
           t={t}
           editorBounds={getEditorBounds()}
+          disableRightClick={disableRightClick}
+          anchorTarget={anchorTarget}
+          relValue={relValue}
+          locale={locale}
+          shouldRenderOptimizedImages={shouldRenderOptimizedImages}
+          siteDomain={siteDomain}
+          setInPluginEditingMode={setInPluginEditingMode}
+          getInPluginEditingMode={getInPluginEditingMode}
         />
       );
 

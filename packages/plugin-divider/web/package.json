@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-plugin-divider",
-  "version": "6.7.1",
+  "version": "6.8.3",
   "author": {
     "name": "Jonathan Bachman",
     "email": "jonathanb@wix.com"
@@ -26,6 +26,7 @@
     "build": "rollup --environment MODULE_NAME:plugin-divider -c ../../../rollup.config.js",
     "build:dev": "cross-env NODE_ENV=development npm run build",
     "build:analyze": "npm run build -- --environment MODULE_ANALYZE && open stats.html",
+    "postbuild": "node ../../../scripts/esCheck.js",
     "watch": "cross-env NODE_ENV=development MODULE_WATCH=1 npm run build -- --watch.chokidar",
     "lint": "eslint 'src/**/*.{js,jsx}'"
   },
@@ -40,7 +41,7 @@
   },
   "devDependencies": {
     "@babel/runtime": "7.2.0",
-    "classnames": "^2.2.6",
+    "classnames": "^2.0.0",
     "cross-env": "^5.2.0",
     "draft-js": "0.11.2",
     "eslint": "^6.1.0",
@@ -51,8 +52,8 @@
     "rollup": "1.20.3"
   },
   "dependencies": {
-    "wix-rich-content-common": "6.7.1",
-    "wix-rich-content-editor-common": "6.7.1"
+    "wix-rich-content-common": "6.8.3",
+    "wix-rich-content-editor-common": "6.8.3"
   },
   "unpkg": true,
   "publishConfig": {

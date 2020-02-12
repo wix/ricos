@@ -133,6 +133,9 @@ class ExampleApp extends PureComponent {
         items: allLocales,
       });
     }
+
+    const scrollingElementFn = () =>
+      typeof window !== 'undefined' && document.getElementsByClassName('editor-example')[0];
     return (
       isEditorShown && (
         <ReflexElement
@@ -155,6 +158,7 @@ class ExampleApp extends PureComponent {
                 staticToolbar={staticToolbar}
                 locale={locale}
                 localeResource={localeResource}
+                scrollingElementFn={scrollingElementFn}
               />
             </ErrorBoundary>
           </SectionContent>
@@ -215,6 +219,9 @@ class ExampleApp extends PureComponent {
           })),
       },
     ];
+    const scrollingElementFn = () =>
+      typeof window !== 'undefined' && document.getElementsByClassName('viewer-example')[0];
+
     return (
       isViewerShown && (
         <ReflexElement
@@ -233,6 +240,7 @@ class ExampleApp extends PureComponent {
                 isMobile={this.state.viewerIsMobile || isMobile}
                 locale={locale}
                 localeResource={localeResource}
+                scrollingElementFn={scrollingElementFn}
               />
             </ErrorBoundary>
           </SectionContent>

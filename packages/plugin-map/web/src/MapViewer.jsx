@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { withGoogleMap, GoogleMap, Marker, InfoWindow } from 'react-google-maps';
 import ReactGoogleMapLoader from 'react-google-maps-loader';
 import { isEqual } from 'lodash';
-import { validate, Context, pluginMapSchema } from 'wix-rich-content-common';
+import { validate, pluginMapSchema } from 'wix-rich-content-common';
 
 const GoogleMapWrapper = withGoogleMap(props => (
   <GoogleMap
@@ -74,7 +74,7 @@ export class MapViewer extends Component {
     } = this.props;
 
     const style = {
-      width: this.context.isMobile ? 'auto' : width,
+      width: this.props.isMobile ? 'auto' : width,
       height,
       whiteSpace: 'initial',
     };
@@ -83,7 +83,7 @@ export class MapViewer extends Component {
       <div ref={this.setRootElementRef} style={style} data-hook="mapViewer">
         <ReactGoogleMapLoader
           params={{
-            key: googleMapApiKey,
+            key: googleMapApiKey || '',
             libraries: 'geometry,drawing,places',
           }}
           render={googleMaps =>
@@ -118,14 +118,14 @@ export class MapViewer extends Component {
   }
 }
 
-MapViewer.contextType = Context.type;
-
 MapViewer.propTypes = {
   componentData: PropTypes.object.isRequired,
+  isMobile: PropTypes.bool.isRequired,
+  theme: PropTypes.object.isRequired,
   settings: PropTypes.shape({
     width: PropTypes.number,
     height: PropTypes.number,
-    googleMapApiKey: PropTypes.string.isRequired,
+    googleMapApiKey: PropTypes.string,
     mapSettings: PropTypes.object,
   }).isRequired,
 };

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
   mergeStyles,
-  Context,
   normalizeUrl,
   isValidUrl,
   validate,
@@ -33,7 +32,7 @@ class HtmlComponent extends Component {
   };
 
   componentDidMount() {
-    const { componentData, settings } = this.props;
+    const { componentData, settings, siteDomain } = this.props;
     if (!componentData.config.width) {
       if (settings && settings.width) {
         componentData.config.width = settings.width;
@@ -52,7 +51,6 @@ class HtmlComponent extends Component {
         componentData.config.height = INIT_HEIGHT;
       }
     }
-    const { siteDomain } = this.context;
     this.setState({ siteDomain });
   }
 
@@ -82,7 +80,7 @@ class HtmlComponent extends Component {
   render() {
     const { html } = this.state;
     this.styles =
-      this.styles || mergeStyles({ styles: htmlComponentStyles, theme: this.context.theme });
+      this.styles || mergeStyles({ styles: htmlComponentStyles, theme: this.props.theme });
     const { props } = this;
     validate(props.componentData, pluginHtmlSchema);
 
@@ -92,7 +90,7 @@ class HtmlComponent extends Component {
     } = props;
 
     const style = {
-      width: this.context.isMobile ? 'auto' : currentWidth || width || INIT_WIDTH,
+      width: this.props.isMobile ? 'auto' : currentWidth || width || INIT_WIDTH,
       height: currentHeight || height || INIT_HEIGHT,
       maxHeight: this.state.iframeHeight,
     };
@@ -125,8 +123,6 @@ class HtmlComponent extends Component {
   }
 }
 
-HtmlComponent.contextType = Context.type;
-
 HtmlComponent.propTypes = {
   componentData: PropTypes.object.isRequired,
   blockProps: PropTypes.object,
@@ -142,6 +138,9 @@ HtmlComponent.propTypes = {
   }).isRequired,
   store: PropTypes.object,
   block: PropTypes.object,
+  siteDomain: PropTypes.string,
+  theme: PropTypes.object.isRequired,
+  isMobile: PropTypes.bool.isRequired,
 };
 
 export { HtmlComponent as Component, DEFAULTS };

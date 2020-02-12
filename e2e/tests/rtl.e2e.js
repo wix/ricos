@@ -80,7 +80,7 @@ describe('rtl', () => {
         .openImageSettings()
         .get('[aria-label="Cancel"]')
         .blur();
-      cy.eyesCheckWindow(this.test.title);
+      cy.eyesCheckWindow({ tag: this.test.title, target: 'window', fully: false });
     });
   });
 });

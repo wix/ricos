@@ -1,12 +1,15 @@
+.page {
+  padding: 20px;
+  padding-left: 40px; 
+}
 
 .rce-wrapper {
   border: 1px solid pink;
-  margin-left: 50px;
+
 }
 
 .rcv-wrapper {
-  border: 1px solid mediumaquamarine;
-  margin-left: 50px;
+  border: 1px solid mediumaquamarine; 
 }
 
 
@@ -16,5 +19,25 @@
 
 .Comparison {
   display: flex;
+  justify-content: space-evenly;
+  > div {
+    width: 40%;
+  }
+}
 
+@media only screen and (max-width: 640px) {
+  .rce-wrapper {
+    margin-left: 0px;
+  }
+
+  .rcv-wrapper { 
+    margin-left: 0px;
+  }
+  .Comparison {
+    flex-direction: column;
+    > div {
+      margin-left: 0px;
+      width: 100%;
+    }
+  }
 }

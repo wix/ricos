@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-preview",
-  "version": "6.7.1",
+  "version": "6.8.3",
   "author": {
     "name": "Alex Greenstein",
     "email": "alexgr@wix.com"
@@ -17,6 +17,7 @@
     "build": "rollup --environment MODULE_NAME:preview -c ../../../rollup.config.js",
     "build:dev": "cross-env NODE_ENV=development npm run build",
     "build:analyze": "npm run build -- --environment MODULE_ANALYZE && open stats.html",
+    "postbuild": "node ../../../scripts/esCheck.js",
     "watch": "cross-env NODE_ENV=development MODULE_WATCH=1 npm run build -- --watch.chokidar",
     "lint": "eslint 'src/**/*.{js,jsx}'",
     "test": "jest --verbose"
@@ -36,9 +37,9 @@
   "dependencies": {
     "react-lines-ellipsis": "0.14.1",
     "react-measure": "~2.3.0",
-    "wix-rich-content-common": "6.7.1",
-    "wix-rich-content-editor-common": "6.7.1",
-    "wix-rich-content-viewer": "6.7.1"
+    "wix-rich-content-common": "6.8.3",
+    "wix-rich-content-editor-common": "6.8.3",
+    "wix-rich-content-viewer": "6.8.3"
   },
   "peerDependencies": {
     "@babel/runtime": "7.2.0",
@@ -52,7 +53,7 @@
   "devDependencies": {
     "@babel/runtime": "7.2.0",
     "babel-jest": "^23.6.0",
-    "classnames": "^2.2.6",
+    "classnames": "^2.0.0",
     "cross-env": "^5.2.0",
     "deep-freeze": "0.0.1",
     "draft-js": "0.11.2",
