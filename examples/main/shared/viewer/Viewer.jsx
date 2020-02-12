@@ -7,7 +7,7 @@ import * as Plugins from './ViewerPlugins';
 import theme from '../theme/theme'; // must import after custom styles
 import getImagesData from 'wix-rich-content-fullscreen/src/lib/getImagesData';
 import Fullscreen from 'wix-rich-content-fullscreen';
-import { ViewerWrapper } from 'wix-rich-content-wrapper';
+import { RichContentWrapper } from 'wix-rich-content-wrapper';
 import { pluginButton } from 'wix-rich-content-plugin-button/dist/module.viewer';
 import { pluginImage } from 'wix-rich-content-plugin-image/dist/module.viewer';
 import { pluginHtml } from 'wix-rich-content-plugin-html/dist/module.viewer';
@@ -65,7 +65,7 @@ export default class Viewer extends PureComponent {
 
     return (
       <div id="rich-content-viewer" className="viewer">
-        <ViewerWrapper
+        <RichContentWrapper
           plugins={[pluginButton(), pluginDivider(), pluginGallery(), pluginHtml(), pluginImage()]}
           theme={theme}>
           <RichContentViewer
@@ -78,7 +78,7 @@ export default class Viewer extends PureComponent {
           //theme={theme}
           // siteDomain="https://www.wix.com"
           />
-        </ViewerWrapper>
+        </RichContentWrapper>
 
         {
           !isSSR() && (

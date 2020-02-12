@@ -1,5 +1,5 @@
 import React from 'react';
-import { ViewerWrapper } from 'wix-rich-content-wrapper/dist/module.js';
+import { RichContentWrapper } from 'wix-rich-content-wrapper';
 import {
   pluginHtml,
   htmlTypeMapper,
@@ -22,11 +22,11 @@ export default () => {
   };
 
   return (
-    <ViewerWrapper
+    <RichContentWrapper
       plugins={[pluginButton(), pluginDivider(), pluginGallery(), pluginHtml(), pluginImage()]}
       theme={'Default'}
     >
       <RichContentViewer typeMappers={typeMappers} config={config} />
-    </ViewerWrapper>
+    </RichContentWrapper>
   );
 };
