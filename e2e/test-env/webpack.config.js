@@ -49,7 +49,7 @@ const scssRule = {
   ],
 };
 
-const scssServerRule = { ...scssRule };
+const scssServerRule = { ...scssRule, use: [...scssRule.use] };
 scssServerRule.use.shift();
 
 const urlRule = {
