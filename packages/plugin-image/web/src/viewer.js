@@ -4,7 +4,7 @@ export { typeMapper as imageTypeMapper, IMAGE_TYPE };
 
 const defaultConfig = {};
 
-export const rcvImage = (config = {}) => {
+export const pluginImage = (config = {}) => {
   return {
     config: { ...defaultConfig, ...config },
     type: IMAGE_TYPE,

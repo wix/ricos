@@ -5,7 +5,8 @@ import pluginsStrategyProviderViewer from './PluginsStrategyViewer';
 import PropTypes from 'prop-types';
 
 export default function ViewerWrapper({ strategies = [], plugins, theme, palette, children }) {
-  strategies.push(themeStrategyProvider({ theme, palette }));
+  const themeGenerators = plugins.map(plug => plug.themeGenerator);
+  strategies.push(themeStrategyProvider({ theme, palette, themeGenerators }));
   strategies.push(pluginsStrategyProviderViewer({ plugins }));
   return <EngineWrapper strategies={strategies}>{children}</EngineWrapper>;
 }

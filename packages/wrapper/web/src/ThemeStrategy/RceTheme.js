@@ -40,8 +40,9 @@ const defaultStyles = {
   },
 };
 export default class RceTheme {
-  constructor(theme, palette) {
+  constructor(theme, palette, themeGenerators) {
     this.setTheme(theme, palette);
+    this.themeGenerators = themeGenerators;
   }
 
   setTheme(theme, palette) {
@@ -74,6 +75,10 @@ export default class RceTheme {
   }
 
   getStylesObject() {
+    // const pluginThemes = this.themeGenerators.reduce(
+    //   (acc, themeGenerator) => ({ ...acc, ...themeGenerator(theme, palette) }),
+    //   {}
+    // );
     if (this._theme === Themes.DEFAULT) {
       return defaultStyles;
     } else {

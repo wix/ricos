@@ -16,6 +16,13 @@
 </details>
 <hr/>
 
+## 6.8.4 (Feb 12, 2020)
+### :bug: Bug Fix
+- `editor-common`
+  - [#645](https://github.com/wix-incubator/rich-content/pull/645) When removing link from text the cursor is in the correct position
+- `gallery`
+  - [#672](https://github.com/wix-incubator/rich-content/pull/672) gallery images settings frozen
+  
 ## 6.8.3 (Feb 11, 2020)
 ### :bug: Bug Fix
 - `image`

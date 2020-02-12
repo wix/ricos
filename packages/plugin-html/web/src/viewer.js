@@ -7,7 +7,7 @@ const defaultConfig = {
   htmlIframeSrc: `${getBaseUrl()}/static/html-plugin-embed.html`,
 };
 
-export const rcvHtml = (config = {}) => {
+export const pluginHtml = (config = {}) => {
   return {
     config: { ...defaultConfig, ...config },
     type: HTML_TYPE,

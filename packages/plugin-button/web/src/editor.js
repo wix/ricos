@@ -44,5 +44,8 @@ export const pluginButton = (config = {}) => {
     type: BUTTON_TYPE,
     createPlugin: createButtonPlugin, //image gallery divider html
     ModalsMap,
+    // palleteColors: palette => ({
+    //   buttonColor: palette.actionColor,
+    // }),
   };
 };
