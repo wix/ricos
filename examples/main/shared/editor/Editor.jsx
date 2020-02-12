@@ -197,7 +197,7 @@ export default class Editor extends PureComponent {
         <RichContentWrapper
           plugins={[pluginImage(), pluginDivider(), pluginGallery(), pluginHtml(), pluginButton()]}
           theme={"Palette"}
-          palette={wixPalettes.site1}
+          palette={wixPalettes.site2}
         >
           <RichContentEditor
             placeholder={'Add some text!'}

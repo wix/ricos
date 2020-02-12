@@ -1,3 +1,2 @@
-import pluginsStrategyProviderEditor from './PluginsStrategyProviderEditor';
-import pluginsStrategyProviderViewer from './PluginsStrategyProviderViewer';
-export { pluginsStrategyProviderEditor, pluginsStrategyProviderViewer };
+import pluginsStrategyProvider from './PluginsStrategyProvider';
+export default pluginsStrategyProvider;

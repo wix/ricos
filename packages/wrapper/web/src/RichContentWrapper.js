@@ -1,7 +1,7 @@
 import React from 'react';
 import EngineWrapper from './EngineWrapper';
 import themeStrategyProvider from './ThemeStrategy';
-import { pluginsStrategyProviderEditor, pluginsStrategyProviderViewer } from './PluginsStrategy';
+import pluginsStrategyProvider from './PluginsStrategy';
 import PropTypes from 'prop-types';
 
 export default function RichContentWrapper({
@@ -13,11 +13,8 @@ export default function RichContentWrapper({
 }) {
   const themeGenerators = plugins.map(plug => plug.themeGenerator);
   const isEditor = children.type?.displayName === 'RichContentEditor';
-  const pluginsStrategyProvider = isEditor
-    ? pluginsStrategyProviderEditor
-    : pluginsStrategyProviderViewer;
   strategies.push(themeStrategyProvider({ theme, palette, themeGenerators }));
-  strategies.push(pluginsStrategyProvider({ plugins }));
+  strategies.push(pluginsStrategyProvider(isEditor, { plugins }));
   return <EngineWrapper strategies={strategies}>{children}</EngineWrapper>;
 }
 RichContentWrapper.propTypes = {
