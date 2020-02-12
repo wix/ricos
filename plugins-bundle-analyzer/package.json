@@ -36,6 +36,7 @@
     "wix-rich-content-plugin-text-color": "6.8.3",
     "wix-rich-content-plugin-undo-redo": "6.8.3",
     "wix-rich-content-plugin-video": "6.8.3",
-    "wix-rich-content-viewer": "6.8.3"
+    "wix-rich-content-viewer": "6.8.3",
+    "wix-rich-content-wrapper": "6.8.3"
   }
 }
