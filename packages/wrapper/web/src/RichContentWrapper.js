@@ -11,9 +11,9 @@ export default function RichContentWrapper({
   plugins = [],
   children,
 }) {
-  const themeGenerators = plugins.map(plug => plug.themeGenerator);
+  const themeGenerators = plugins.filter(plug => !!plug.theme).map(plug => plug.theme);
   const isEditor = children.type?.displayName === 'RichContentEditor';
-  strategies.push(themeStrategyProvider({ theme, palette, themeGenerators }));
+  strategies.push(themeStrategyProvider(isEditor, { theme, palette, themeGenerators }));
   strategies.push(pluginsStrategyProvider(isEditor, { plugins }));
   return <EngineWrapper strategies={strategies}>{children}</EngineWrapper>;
 }

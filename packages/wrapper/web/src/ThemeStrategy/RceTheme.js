@@ -1,4 +1,8 @@
-import * as Themes from './themes';
+const Themes = {
+  DEFAULT: 'Default',
+  BACK_OFFICE: 'BackOffice',
+  PALETTE: 'Palette',
+};
 
 const SUPPORTED_THEMES = [Themes.DEFAULT, Themes.PALETTE, Themes.BACK_OFFICE];
 const BG_COLOR = 11;
@@ -6,41 +10,41 @@ const SECONDARY_COLOR = 13;
 const TEXT_COLOR = 15;
 const ACTION_COLOR = 18;
 
-const defaultStyles = {
-  hashtag: {
-    color: 'purple',
-  },
-  editor: {
-    background: 'red',
-    //color: 'red',
-  },
-  divider: {
-    //strokeWidth: '12px',
-    //color: 'red',
-  },
-  // footerToolbarButton: {
-  //   //footerToolbarButton_icon: {
-  //   ':hover': {
-  //     '&.footerToolbarButton_icon': {
-  //       color: 'red',
-  //     },
-  //   },
-  //   //},
-  // },
-  footerToolbarButton: {
-    ':hover': {
-      '& .footerToolbarButton_icon': {
-        color: 'red',
-      },
-    },
-    // },
-    //'&:hover .footerToolbarButton_icon': {
-    // color: 'red',
-    //},
-  },
-};
+// const defaultStyles = {
+//   hashtag: {
+//     color: 'purple',
+//   },
+//   editor: {
+//     background: 'red',
+//     //color: 'red',
+//   },
+//   divider: {
+//     //strokeWidth: '12px',
+//     //color: 'red',
+//   },
+//   // footerToolbarButton: {
+//   //   //footerToolbarButton_icon: {
+//   //   ':hover': {
+//   //     '&.footerToolbarButton_icon': {
+//   //       color: 'red',
+//   //     },
+//   //   },
+//   //   //},
+//   // },
+//   footerToolbarButton: {
+//     ':hover': {
+//       '& .footerToolbarButton_icon': {
+//         color: 'red',
+//       },
+//     },
+//     // },
+//     //'&:hover .footerToolbarButton_icon': {
+//     // color: 'red',
+//     //},
+//   },
+// };
 export default class RceTheme {
-  constructor(theme, palette, themeGenerators) {
+  constructor({ theme, palette, themeGenerators }) {
     this.setTheme(theme, palette);
     this.themeGenerators = themeGenerators;
   }
@@ -80,42 +84,51 @@ export default class RceTheme {
     //   {}
     // );
     if (this._theme === Themes.DEFAULT) {
-      return defaultStyles;
+      return {};
     } else {
       const actionColor = this.getColorValue(ACTION_COLOR);
       const bgColor = this.getColorValue(BG_COLOR);
       const textColor = this.getColorValue(TEXT_COLOR);
       const secondaryColor = this.getColorValue(SECONDARY_COLOR);
 
-      return {
-        hashtag: {
-          color: actionColor,
+      const pluginThemes = this.themeGenerators.reduce(
+        (acc, curr) => ({
+          ...acc,
+          ...curr(this.palette),
+        }),
+        {}
+      );
+
+      const combinedTheme = Object.assign(
+        {
+          hashtag: {
+            color: actionColor,
+          },
+          editor: {
+            background: bgColor,
+            color: textColor,
+          },
+          linkPreview: {
+            borderColor: textColor,
+            backgroundColor: bgColor,
+          },
+          linkPreview_title: {
+            color: textColor,
+          },
+          linkPreview_image: {
+            borderColor: textColor,
+          },
+          linkPreview_description: {
+            color: textColor,
+          },
+          linkPreview_url: {
+            color: secondaryColor,
+          },
         },
-        editor: {
-          background: bgColor,
-          color: textColor,
-        },
-        divider: {
-          strokeWidth: '12px',
-          color: textColor,
-        },
-        linkPreview: {
-          borderColor: textColor,
-          backgroundColor: bgColor,
-        },
-        linkPreview_title: {
-          color: textColor,
-        },
-        linkPreview_image: {
-          borderColor: textColor,
-        },
-        linkPreview_description: {
-          color: textColor,
-        },
-        linkPreview_url: {
-          color: secondaryColor,
-        },
-      };
+        pluginThemes
+      );
+
+      return combinedTheme;
       // action color:
       // hover on toolbar buttons
       // + button on the left

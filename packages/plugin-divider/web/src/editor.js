@@ -7,5 +7,10 @@ export const pluginDivider = (config = {}) => {
     type: DIVIDER_TYPE,
     createPlugin: createDividerPlugin,
     ModalsMap: {},
+    theme: palette => ({
+      divider: {
+        color: palette.textColor,
+      },
+    }),
   };
 };
