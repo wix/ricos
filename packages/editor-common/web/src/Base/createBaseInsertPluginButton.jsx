@@ -31,8 +31,10 @@ export default ({
       super(props);
       this.state = {};
       const { buttonStyles } = props.theme || {};
+      const { toolbarName } = props;
       this.styles = mergeStyles({ styles, theme: buttonStyles });
       this.buttonRef = React.createRef();
+      this.onPluginAdd = name => helpers?.onPluginAdd?.(blockType, name || toolbarName);
     }
 
     componentDidMount() {
@@ -63,6 +65,7 @@ export default ({
     };
 
     createBlock = (editorState, data, type) => {
+      this.onPluginAdd();
       this.props.hidePopup?.();
       return createBlock(editorState, data, type);
     };
@@ -94,10 +97,12 @@ export default ({
           this.toggleButtonModal(event);
           break;
         case 'custom-block':
+          this.onPluginAdd(name);
           this.addCustomBlock(button);
           break;
         default:
           this.addBlock(button.componentData || {});
+          break;
       }
     };
 
@@ -280,6 +285,7 @@ export default ({
     isMobile: PropTypes.bool,
     t: PropTypes.func,
     tabIndex: PropTypes.number,
+    toolbarName: PropTypes.string,
   };
 
   return InsertPluginButton;

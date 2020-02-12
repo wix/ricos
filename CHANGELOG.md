@@ -236,6 +236,8 @@
   - [#507](https://github.com/wix-incubator/rich-content/pull/507) support all video platform urls supported by `react-player`
 - `soundcloud`
   - [#507](https://github.com/wix-incubator/rich-content/pull/507) support all audio platform urls supported by `react-player`
+- `bi-events`
+  - [#514](https://github.com/wix-incubator/rich-content/pull/514) supports `onPluginAdd` (toolbar only) and `onPluginDelete` callbacks via props
 ### :bug: Bug Fix
 - `examples/viewer-ssr`
   - [#499](https://github.com/wix-incubator/rich-content/pull/499) highlight plugin configuration fixed

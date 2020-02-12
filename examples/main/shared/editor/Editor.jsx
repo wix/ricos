@@ -7,7 +7,9 @@ import { testImages, testVideos } from './mock';
 import * as Plugins from './EditorPlugins';
 import ModalsMap from './ModalsMap';
 import theme from '../theme/theme'; // must import after custom styles
+import { debugBiLoggers } from '../../config/biService';
 import { GALLERY_TYPE } from 'wix-rich-content-plugin-gallery';
+
 const modalStyleDefaults = {
   content: {
     top: '50%',
@@ -198,8 +200,10 @@ export default class Editor extends PureComponent {
           config={this.pluginsConfig}
           editorKey="random-editorKey-ssr"
           // siteDomain="https://www.wix.com"
+          pluginHooks={debugBiLoggers}
           {...editorProps}
         />
+
         <ReactModal
           isOpen={this.state.showModal}
           contentLabel="External Modal Example"

@@ -20,7 +20,16 @@ import {
   getBlockInfo,
   getFocusedBlockKey,
 } from 'wix-rich-content-editor-common';
-import { AccessibilityListener, normalizeInitialState, getLangDir } from 'wix-rich-content-common';
+import {
+  calculateDiff,
+  getPostContentSummary,
+} from 'wix-rich-content-editor-common/src/Utils/draftUtils';
+import {
+  AccessibilityListener,
+  normalizeInitialState,
+  getLangDir,
+  Version,
+} from 'wix-rich-content-common';
 import styles from '../../statics/styles/rich-content-editor.scss';
 import draftStyles from '../../statics/styles/draft.rtlignore.scss';
 
@@ -97,7 +106,11 @@ class RichContentEditor extends Component {
       locale,
       anchorTarget,
       relValue,
-      helpers,
+      helpers: {
+        ...helpers,
+        onPluginAdd: (...args) =>
+          this.props.pluginHooks?.onPluginAdd?.(...args, Version.currentVersion),
+      },
       config,
       isMobile,
       setEditorState: this.setEditorState,
@@ -190,6 +203,9 @@ class RichContentEditor extends Component {
   }
 
   updateEditorState = editorState => {
+    calculateDiff(this.state.editorState, editorState, (...args) =>
+      this.props.pluginHooks?.onPluginDelete?.(...args, Version.currentVersion)
+    );
     this.setEditorState(editorState);
     this.props.onChange && this.props.onChange(editorState);
   };
@@ -412,6 +428,11 @@ class RichContentEditor extends Component {
   }
 }
 
+RichContentEditor.publish = async (postId, editorState = {}, callBack = () => true) => {
+  const postContent = getPostContentSummary(editorState);
+  callBack({ postId, postContent });
+};
+
 RichContentEditor.propTypes = {
   editorKey: PropTypes.string,
   editorState: PropTypes.object,
@@ -453,6 +474,11 @@ RichContentEditor.propTypes = {
   onAtomicBlockFocus: PropTypes.func,
   initialIntent: PropTypes.string,
   siteDomain: PropTypes.string,
+  pluginHooks: PropTypes.shape({
+    onPluginAdd: PropTypes.func,
+    onPluginChange: PropTypes.func,
+    onPluginDelete: PropTypes.func,
+  }),
   onError: PropTypes.func,
 };
 
