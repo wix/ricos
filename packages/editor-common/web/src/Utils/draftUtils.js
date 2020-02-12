@@ -62,16 +62,15 @@ function isSelectionBelongsToExsistingLink(editorState, selection) {
 function insertLink(editorState, selection, data) {
   const oldSelection = editorState.getSelection();
   const newContentState = Modifier.applyInlineStyle(
-    editorState.getCurrentContent(),
+    addEntity(editorState, selection, {
+      type: 'LINK',
+      data: createLinkEntityData(data),
+    }).getCurrentContent(),
     selection,
     'UNDERLINE'
   ).set('selectionAfter', oldSelection);
-  const newEditorState = EditorState.push(editorState, newContentState, 'change-inline-style');
 
-  return addEntity(newEditorState, selection, {
-    type: 'LINK',
-    data: createLinkEntityData(data),
-  });
+  return EditorState.push(editorState, newContentState, 'change-inline-style');
 }
 
 function createLinkEntityData({ url, targetBlank, nofollow, anchorTarget, relValue }) {
@@ -118,13 +117,9 @@ export const removeLinksInSelection = editorState => {
     (prevState, { key, range }) => removeLink(prevState, key, range),
     editorState
   );
-  const newContentState = Modifier.removeInlineStyle(
-    newEditorState.getCurrentContent(),
-    newEditorState.getSelection(),
-    'UNDERLINE'
-  );
+
   return EditorState.forceSelection(
-    EditorState.push(newEditorState, newContentState, 'change-inline-style'),
+    newEditorState,
     selection.merge({ anchorOffset: selection.focusOffset })
   );
 };
@@ -326,7 +321,13 @@ function getLinkRangesInBlock(block, contentState) {
 
 function removeLink(editorState, blockKey, [start, end]) {
   const selection = createSelection({ blockKey, anchorOffset: start, focusOffset: end });
-  return RichUtils.toggleLink(editorState, selection, null);
+  const newContentState = Modifier.removeInlineStyle(
+    RichUtils.toggleLink(editorState, selection, null).getCurrentContent(),
+    selection,
+    'UNDERLINE'
+  );
+
+  return EditorState.push(editorState, newContentState, 'change-inline-style');
 }
 
 export function createEntity(editorState, { type, mutability = 'MUTABLE', data }) {
