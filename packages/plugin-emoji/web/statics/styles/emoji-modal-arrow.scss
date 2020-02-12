@@ -17,12 +17,12 @@
   @extend %emoji_modal_arrow;
   transform: rotate(45deg);
   bottom: -7px;
-  right: 20px;
+  left: 15px;
 }
 
 .emoji_modal_arrow_up {
   @extend %emoji_modal_arrow;
   transform: rotate(-135deg);
   bottom: 274px;
-  right: 19px;
+  left: 15px;
 }
