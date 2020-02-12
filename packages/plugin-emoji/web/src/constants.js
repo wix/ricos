@@ -14,42 +14,42 @@ export const EMOJI_TYPE = 'wix-draft-plugin-emoji';
 export const getEmojiGroups = t => [
   {
     title: t('EmojiPlugin_EmojiGroups_People'),
-    icon: <FaSmile style={{ width: '16px', height: '16px' }} />,
+    icon: <FaSmile />,
     category: 'people',
   },
   {
     title: t('EmojiPlugin_EmojiGroups_Nature'),
-    icon: <FaPaw style={{ width: '16px', height: '16px' }} />,
+    icon: <FaPaw />,
     category: 'nature',
   },
   {
     title: t('EmojiPlugin_EmojiGroups_Food'),
-    icon: <FaUtensils style={{ width: '16px', height: '16px' }} />,
+    icon: <FaUtensils />,
     category: 'food',
   },
   {
     title: t('EmojiPlugin_EmojiGroups_Activity'),
-    icon: <FaRegFutbol style={{ width: '16px', height: '16px' }} />,
+    icon: <FaRegFutbol />,
     category: 'activity',
   },
   {
     title: t('EmojiPlugin_EmojiGroups_Travel'),
-    icon: <FaPlane style={{ width: '16px', height: '16px' }} />,
+    icon: <FaPlane />,
     category: 'travel',
   },
   {
     title: t('EmojiPlugin_EmojiGroups_Objects'),
-    icon: <FaBell style={{ width: '16px', height: '16px' }} />,
+    icon: <FaBell />,
     category: 'objects',
   },
   {
     title: t('EmojiPlugin_EmojiGroups_Symbols'),
-    icon: <FaHeart style={{ width: '16px', height: '16px' }} />,
+    icon: <FaHeart />,
     category: 'symbols',
   },
   {
     title: t('EmojiPlugin_EmojiGroups_Flags'),
-    icon: <FaFlag style={{ width: '16px', height: '16px' }} />,
+    icon: <FaFlag />,
     category: 'flags',
   },
 ];
