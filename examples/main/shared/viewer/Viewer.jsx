@@ -7,12 +7,12 @@ import * as Plugins from './ViewerPlugins';
 import theme from '../theme/theme'; // must import after custom styles
 import getImagesData from 'wix-rich-content-fullscreen/src/lib/getImagesData';
 import Fullscreen from 'wix-rich-content-fullscreen';
-import { OSWrapViewer } from 'wix-rich-content-wrapper';
-import { rcvButton } from 'wix-rich-content-plugin-button';
-import { rcvImage } from 'wix-rich-content-plugin-image';
-import { rcvHtml } from 'wix-rich-content-plugin-html';
-import { rcvDivider } from 'wix-rich-content-plugin-divider';
-import { rcvGallery, GALLERY_TYPE } from 'wix-rich-content-plugin-gallery';
+import { ViewerWrapper } from 'wix-rich-content-wrapper';
+import { pluginButton } from 'wix-rich-content-plugin-button/dist/module.viewer';
+import { pluginImage } from 'wix-rich-content-plugin-image/dist/module.viewer';
+import { pluginHtml } from 'wix-rich-content-plugin-html/dist/module.viewer';
+import { pluginDivider } from 'wix-rich-content-plugin-divider/dist/module.viewer';
+import { pluginGallery, GALLERY_TYPE } from 'wix-rich-content-plugin-gallery/dist/module.viewer';
 const anchorTarget = '_top';
 const relValue = 'noreferrer';
 
@@ -65,8 +65,8 @@ export default class Viewer extends PureComponent {
 
     return (
       <div id="rich-content-viewer" className="viewer">
-        <OSWrapViewer
-          plugins={[rcvButton(), rcvDivider(), rcvGallery(), rcvHtml(), rcvImage()]}
+        <ViewerWrapper
+          plugins={[pluginButton(), pluginDivider(), pluginGallery(), pluginHtml(), pluginImage()]}
           theme={theme}>
           <RichContentViewer
             helpers={this.helpers}
@@ -78,7 +78,7 @@ export default class Viewer extends PureComponent {
           //theme={theme}
           // siteDomain="https://www.wix.com"
           />
-        </OSWrapViewer>
+        </ViewerWrapper>
 
         {
           !isSSR() && (

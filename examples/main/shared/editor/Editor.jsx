@@ -7,7 +7,7 @@ import { testImages, testVideos } from './mock';
 import * as Plugins from './EditorPlugins';
 import ModalsMap from './ModalsMap';
 import theme from '../theme/theme'; // must import after custom styles
-import { OSWrapEditor, wixPalettes } from 'wix-rich-content-wrapper';
+import { EditorWrapper, wixPalettes } from 'wix-rich-content-wrapper';
 import inlineToolbarTheme from '../theme/toolbars/inline-toolbar.theme.scss';
 import { pluginButton } from 'wix-rich-content-plugin-button';
 import { pluginImage } from 'wix-rich-content-plugin-image';
@@ -194,7 +194,7 @@ export default class Editor extends PureComponent {
             <TextToolbar />
           </div>
         )}
-        <OSWrapEditor
+        <EditorWrapper
           plugins={[pluginImage(), pluginDivider(), pluginGallery(), pluginHtml(), pluginButton()]}
           theme={"Palette"}
           palette={wixPalettes.site1}
@@ -211,7 +211,7 @@ export default class Editor extends PureComponent {
             {...editorProps}
           // siteDomain="https://www.wix.com"
           />
-        </OSWrapEditor>
+        </EditorWrapper>
         {/* <ReactModal
           isOpen={this.state.showModal}
           contentLabel="External Modal Example"
