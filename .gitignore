@@ -11,7 +11,6 @@ maven
 stats.html
 .env
 applitools.private.config.js
-package-lock.json
 
 #Webstorm
 **/.idea/*
