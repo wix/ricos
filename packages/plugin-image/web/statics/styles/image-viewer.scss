@@ -99,6 +99,7 @@ $opacityTransition: opacity 0.8s ease;
 
   &.isGif {
     position: relative;
+    opacity: 1;
   }
 }
 

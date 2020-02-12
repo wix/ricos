@@ -5,7 +5,7 @@ import ReactJson from 'react-json-view';
 import styles from './styles.scss';
 
 export const Page = ({ title, children }) => (
-  <div className="page">
+  <div className={styles.page}>
     <h1>{title}</h1>
     {children}
   </div>
@@ -17,10 +17,14 @@ Page.propTypes = {
 };
 
 export const Section = ({ type, title, children }) => {
+  let _children = children;
+  if (type === Section.Types.COMPARISON) {
+    _children = React.Children.map(children, child => React.cloneElement(child, { title: true }));
+  }
   return (
     <div className={styles.section}>
-      <h2>{title || type}</h2>
-      <div className={styles[type]}>{children}</div>
+      <h2>{title}</h2>
+      <div className={styles[type]}>{_children}</div>
     </div>
   );
 };
@@ -34,16 +38,24 @@ Section.propTypes = {
   children: PropTypes.node,
 };
 
-export const RichContentEditorBox = ({ children, preset }) => (
-  <div className={`${styles.rceWrapper} ${styles[preset || '']}`}>{children}</div>
-);
+export const RichContentEditorBox = ({ children, preset, title }) => {
+  return (
+    <div className={`${styles[preset || '']}`}>
+      {title && <h2>Editor!</h2>}
+      <div className={styles.rceWrapper}>{children}</div>
+    </div>
+  );
+};
 
 RichContentEditorBox.propTypes = {
   children: PropTypes.node,
 };
 
-export const RichContentViewerBox = ({ children, preset }) => (
-  <div className={`${styles.rcvWrapper} ${styles[preset || '']}`}>{children}</div>
+export const RichContentViewerBox = ({ children, preset, title }) => (
+  <div className={`${styles[preset || '']}`}>
+    {title && <h2>Viewer</h2>}
+    <div className={styles.rcvWrapper}>{children}</div>
+  </div>
 );
 
 RichContentViewerBox.propTypes = {

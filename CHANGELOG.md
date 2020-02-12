@@ -16,6 +16,21 @@
 </details>
 <hr/>
 
+## 6.8.4 (Feb 12, 2020)
+### :bug: Bug Fix
+- `editor-common`
+  - [#645](https://github.com/wix-incubator/rich-content/pull/645) When removing link from text the cursor is in the correct position
+- `gallery`
+  - [#672](https://github.com/wix-incubator/rich-content/pull/672) gallery images settings frozen
+  
+## 6.8.3 (Feb 11, 2020)
+### :bug: Bug Fix
+- `image`
+  - [da631441](https://github.com/wix-incubator/rich-content/commit/da631441) gif opacity
+### :house: Internal
+- `general`
+  - [#666](https://github.com/wix-incubator/rich-content/pull/666) ES5 syntax validation in `dist/statics` on postbuild
+  
 ## 6.8.2 (Feb 9, 2020)
 ### :bug: Bug Fix
 - `emoji`
@@ -26,8 +41,6 @@
   - [#657](https://github.com/wix-incubator/rich-content/pull/657) defaults for editor-only props in image-viewer
   - [#657](https://github.com/wix-incubator/rich-content/pull/657) in-plugin editing input rendered in edit mode only
   - [#657](https://github.com/wix-incubator/rich-content/pull/657) highres URL on SSR protection
-
-
 
 ## 6.8.1 (Feb 6, 2020)
 ### :bug: Bug Fix

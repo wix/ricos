@@ -1287,63 +1287,6 @@ exports[`plugins > divider > render plugin toolbar and change styling #0`] =
   }
 };
 
-exports[`plugins > gif > render giphy plugin toolbar #0`] =
-{
-  "blocks": [
-    {
-      "data": {},
-      "depth": 0,
-      "entityRanges": [],
-      "inlineStyleRanges": [],
-      "key": 0,
-      "text": "",
-      "type": "unstyled"
-    },
-    {
-      "data": {},
-      "depth": 0,
-      "entityRanges": [
-        {
-          "key": 0,
-          "length": 1,
-          "offset": 0
-        }
-      ],
-      "inlineStyleRanges": [],
-      "key": 1,
-      "text": " ",
-      "type": "atomic"
-    },
-    {
-      "data": {},
-      "depth": 0,
-      "entityRanges": [],
-      "inlineStyleRanges": [],
-      "key": 2,
-      "text": "",
-      "type": "unstyled"
-    }
-  ],
-  "entityMap": {
-    "0": {
-      "data": {
-        "config": {
-          "alignment": "center",
-          "size": "small"
-        },
-        "gif": {
-          "height": 400,
-          "originalUrl": "https://media1.giphy.com/media/hrk8ehR4lCZ27FtjPA/giphy_s.gif",
-          "stillUrl": "https://media1.giphy.com/media/hrk8ehR4lCZ27FtjPA/giphy_s.gif",
-          "width": 480
-        }
-      },
-      "mutability": "IMMUTABLE",
-      "type": "wix-draft-plugin-giphy"
-    }
-  }
-};
-
 exports[`plugins > map > render map plugin toolbar and settings #0`] =
 {
   "blocks": [
@@ -2747,6 +2690,63 @@ exports[`plugins > gallery > render gallery out of view #0`] =
       },
       "mutability": "IMMUTABLE",
       "type": "wix-draft-plugin-image"
+    }
+  }
+};
+
+exports[`plugins > giphy > render giphy plugin toolbar #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "size": "small"
+        },
+        "gif": {
+          "height": 400,
+          "originalUrl": "https://media1.giphy.com/media/hrk8ehR4lCZ27FtjPA/giphy_s.gif",
+          "stillUrl": "https://media1.giphy.com/media/hrk8ehR4lCZ27FtjPA/giphy_s.gif",
+          "width": 480
+        }
+      },
+      "mutability": "IMMUTABLE",
+      "type": "wix-draft-plugin-giphy"
     }
   }
 };
