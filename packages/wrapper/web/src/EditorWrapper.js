@@ -16,7 +16,7 @@ EditorWrapper.propTypes = {
   palette: PropTypes.array,
   plugins: PropTypes.arrayOf(PropTypes.object),
   strategies: PropTypes.array,
-  //TODO should be more explicit: array of functions that return function with inner props as param,
+  //TODO: strategies should be more explicit: array of functions that return function with inner props as param,
   //and deliver the result of strategy implementation
 };
 //export default React.forwardRef((props, ref) => <EditorWrapper {...props} forwardRef={ref} />);
