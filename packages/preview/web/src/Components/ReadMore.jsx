@@ -1,6 +1,6 @@
 import React, { PureComponent, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { Context, mergeStyles } from 'wix-rich-content-common';
+import { mergeStyles } from 'wix-rich-content-common';
 import LinesEllipsis from 'react-lines-ellipsis';
 import { getChildrenText } from '../utils';
 import styles from '../../statics/styles/read-more.scss';
@@ -14,6 +14,8 @@ class ReadMore extends PureComponent {
     onPreviewExpand: PropTypes.func.isRequired,
     onClick: PropTypes.func,
     text: PropTypes.string,
+    theme: PropTypes.object.isRequired,
+    t: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
@@ -31,10 +33,10 @@ class ReadMore extends PureComponent {
 
   /* eslint-disable */
   render() {
-    this.styles = this.styles || mergeStyles({ styles, theme: this.context.theme });
+    this.styles = this.styles || mergeStyles({ styles, theme: this.props.theme });
     const {
       lines,
-      label = this.context.t('Preview_ReadMore_Label'),
+      label = this.props.t('Preview_ReadMore_Label'),
       ellipsis,
       children,
       text,
@@ -54,7 +56,5 @@ class ReadMore extends PureComponent {
   }
   /* eslint-enable */
 }
-
-ReadMore.contextType = Context.type;
 
 export default ReadMore;

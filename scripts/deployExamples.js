@@ -45,6 +45,7 @@ function deploy({ name, dist = 'dist' }) {
     exec(deployCommand);
   } catch (e) {
     console.error(chalk.bold.red(e));
+    throw e;
   }
 }
 

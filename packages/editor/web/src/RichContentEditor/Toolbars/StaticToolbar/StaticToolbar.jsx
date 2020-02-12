@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Measure from 'react-measure';
 import { debounce } from 'lodash';
 import { DISPLAY_MODE, TOOLBARS, TooltipHost } from 'wix-rich-content-editor-common';
-import { Context } from 'wix-rich-content-common';
 import Styles from '../../../../statics/styles/static-toolbar.scss';
 
 const displayOptionStyles = {
@@ -46,7 +45,6 @@ export default class StaticToolbar extends React.PureComponent {
       displayMode: DISPLAY_MODE.NORMAL,
     },
     toolbarDecorationFn: () => null,
-    createContext: false,
   };
 
   constructor(props) {
@@ -234,17 +232,17 @@ export default class StaticToolbar extends React.PureComponent {
         setEditorState,
       };
       return (
-        <Context.Provider value={context}>
-          <ToolbarDecoration {...props}>
-            {this.renderToolbarContent(childrenProps)}
+        <Fragment>
+          <ToolbarDecoration {...props} {...context}>
+            {this.renderToolbarContent({ ...childrenProps, ...context })}
             {ExtendContent && (
               <div className={extendClassNames}>
-                <ExtendContent {...childrenProps} />
+                <ExtendContent {...childrenProps} {...context} />
               </div>
             )}
           </ToolbarDecoration>
           <TooltipHost />
-        </Context.Provider>
+        </Fragment>
       );
     }
 

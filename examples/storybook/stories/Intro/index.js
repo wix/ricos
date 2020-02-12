@@ -3,12 +3,17 @@ import { storiesOf } from '@storybook/react';
 
 import { RichContentEditor, convertFromRaw, createWithContent } from 'wix-rich-content-editor';
 import { RichContentViewer } from 'wix-rich-content-viewer';
-import { RichContentEditorBox, Section, Page } from '../Components/StoryParts';
+import {
+  RichContentEditorBox,
+  RichContentViewerBox,
+  Section,
+  Page,
+} from '../Components/StoryParts';
 import { createDividerPlugin } from 'wix-rich-content-plugin-divider';
 import { dividerTypeMapper } from 'wix-rich-content-plugin-divider/dist/module.viewer';
 
 import { createHashtagPlugin, HASHTAG_TYPE } from 'wix-rich-content-plugin-hashtag';
-import { introState } from '../../fixtures/editorStates';
+import introState from './introEditorState';
 
 const editorState = createWithContent(convertFromRaw(introState));
 
@@ -26,15 +31,13 @@ const config = {
 storiesOf('Intro', module).add('Hello!', () => {
   return (
     <Page title="Wix Rich Content">
-      <Section title="Editor">
+      <Section type={Section.Types.COMPARISON}>
         <RichContentEditorBox>
           <RichContentEditor config={config} plugins={PLUGINS} editorState={editorState} />
         </RichContentEditorBox>
-      </Section>
-      <Section title="Viewer">
-        <RichContentEditorBox>
+        <RichContentViewerBox>
           <RichContentViewer initialState={introState} typeMappers={[dividerTypeMapper]} />
-        </RichContentEditorBox>
+        </RichContentViewerBox>
       </Section>
     </Page>
   );

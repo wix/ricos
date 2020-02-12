@@ -520,7 +520,8 @@ export class SortableComponent extends Component {
 
   onUpdateImage = metadata => {
     const { editedImage } = this.state;
-    this.setState({ editedImage, metadata: { ...editedImage.metadata, ...metadata } });
+    editedImage.metadata = { ...editedImage.metadata, ...metadata };
+    this.setState({ editedImage });
   };
 
   onDeleteImage = () => {
