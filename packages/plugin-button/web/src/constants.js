@@ -25,13 +25,15 @@ export const COLORS = Object.freeze({
   color10: '#012055',
 });
 
+export const DEFAULT_CONFIG = {
+  alignment: ALIGN_CENTER,
+  size: 'small',
+  width: 'fit-content',
+};
+
 export const getDefaultComponentData = (rel, target) => {
   return {
-    config: {
-      alignment: ALIGN_CENTER,
-      size: 'small',
-      width: 'fit-content',
-    },
+    config: DEFAULT_CONFIG,
     button: {
       settings: {
         buttonText: 'Click Me',

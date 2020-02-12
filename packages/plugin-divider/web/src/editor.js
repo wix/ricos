@@ -1,11 +1,9 @@
 import { createDividerPlugin } from './createDividerPlugin';
-import { DIVIDER_TYPE } from './constants';
-
-const defaultConfig = {};
+import { DIVIDER_TYPE, DEFAULTS } from './constants';
 
 export const pluginDivider = (config = {}) => {
   return {
-    config: { ...defaultConfig, ...config },
+    config: { ...DEFAULTS.config, ...config },
     type: DIVIDER_TYPE,
     createPlugin: createDividerPlugin,
     ModalsMap: {},
