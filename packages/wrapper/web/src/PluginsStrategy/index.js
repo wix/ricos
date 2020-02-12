@@ -1,2 +1,2 @@
 import pluginsStrategyProvider from './PluginsStrategyProvider';
-export default pluginsStrategyProvider; //
+export default pluginsStrategyProvider;
