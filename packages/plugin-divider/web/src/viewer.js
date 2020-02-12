@@ -1,11 +1,10 @@
 import { typeMapper } from './typeMapper';
-import { DIVIDER_TYPE } from './constants';
+import { DIVIDER_TYPE, DEFAULTS } from './constants';
 export { typeMapper as dividerTypeMapper, DIVIDER_TYPE };
 
-const defaultConfig = {};
 export const pluginDivider = (config = {}) => {
   return {
-    config: { ...defaultConfig, ...config },
+    config: { ...DEFAULTS.config, ...config },
     type: DIVIDER_TYPE,
     typeMapper,
     decorator: {},

@@ -1,4 +1,3 @@
-import EditorWrapper from './EditorWrapper';
-import ViewerWrapper from './ViewerWrapper';
+import RichContentWrapper from './RichContentWrapper';
 import { wixPalettes } from './palettesExample';
-export { EditorWrapper, ViewerWrapper, wixPalettes };
+export { RichContentWrapper, wixPalettes };
