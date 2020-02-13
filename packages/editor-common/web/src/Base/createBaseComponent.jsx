@@ -220,11 +220,7 @@ const createBaseComponent = ({
 
     onDragStart = event => {
       this.props.onDragStart(event);
-      if (this.url) {
-        event.dataTransfer.setData('url', this.url);
-      } else {
-        event.dataTransfer.setData('text/uri-list', window?.location.href);
-      }
+      event.dataTransfer.setData('url', this.url || window?.location?.href);
     };
 
     render = () => {
