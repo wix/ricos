@@ -13,30 +13,34 @@ function run() {
   console.log(chalk.magenta('Analyzing plugins...'));
   // console.log('analyzing plugins');
 
+  const additionalPackages = ['viewer-without-wrapper', 'viewer-with-wrapper'];
+
   getPackages().then(allPackages => {
-    const promiseArr = allPackages
+    const pkgNames = allPackages
       .filter(pkg => !pkg.private)
       .filter(pkg => pkg.name.indexOf('wix-rich-content-plugin') === 0)
-      .map(pkg => {
-        return new Promise(resolve => {
-          webpack(getWebpackConfig(pkg.name), (err, stats) => {
-            // Stats Object
-            if (err || stats.hasErrors()) {
-              const _err = err || stats.compilation.errors[0];
-              console.error(chalk.red(_err));
-              resolve({ name: pkg.name, error: _err });
-            } else {
-              // console.log(chalk.green(pkg.name, `analyzed`));
-              // console.log(stats.toString({ colors: true }));
-              resolve({
-                name: pkg.name,
-                size: Math.ceil(stats.toJson(true).assets[0].size / 1024),
-              });
-            }
-          });
-          // console.log(chalk.yellow(`Pkg`, JSON.stringify(getPackageDetails(pkg))));
+      .map(pkg => pkg.name);
+
+    const promiseArr = pkgNames.concat(additionalPackages).map(pkgName => {
+      return new Promise(resolve => {
+        webpack(getWebpackConfig(pkgName), (err, stats) => {
+          // Stats Object
+          if (err || stats.hasErrors()) {
+            const _err = err || stats.compilation.errors[0];
+            console.error(chalk.red(_err));
+            resolve({ name: pkgName, error: _err });
+          } else {
+            // console.log(chalk.green(pkg.name, `analyzed`));
+            // console.log(stats.toString({ colors: true }));
+            resolve({
+              name: pkgName,
+              size: Math.ceil(stats.toJson(true).assets[0].size / 1024),
+            });
+          }
         });
+        // console.log(chalk.yellow(`Pkg`, JSON.stringify(getPackageDetails(pkg))));
       });
+    });
 
     const warning = chalk.keyword('orange');
 

@@ -30,12 +30,6 @@ const devConfig = {
           },
         },
       },
-      {
-        test: /\.js$/,
-        use: ['source-map-loader'],
-        enforce: 'pre',
-        exclude: [/node_modules.*node_modules/, /node_modules\/monaco-editor/],
-      },
     ],
   },
   plugins: [new HotModuleReplacementPlugin()],
