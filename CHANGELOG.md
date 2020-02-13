@@ -13,6 +13,11 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+- `editor-common`
+  - [#680](https://github.com/wix-incubator/rich-content/pull/680) dragging plugins from editor to address bar pastes media url
+
+
 </details>
 <hr/>
 
