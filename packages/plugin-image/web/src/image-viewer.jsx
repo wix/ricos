@@ -227,7 +227,7 @@ class ImageViewer extends React.Component {
 
   render() {
     this.styles = this.styles || mergeStyles({ styles, theme: this.props.theme });
-    const { componentData, className, settings } = this.props;
+    const { componentData, className, settings, setComponentUrl } = this.props;
     const { fallbackImageSrc, ssrDone } = this.state;
     const data = componentData || DEFAULTS;
     const { metadata = {} } = componentData;
@@ -247,6 +247,7 @@ class ImageViewer extends React.Component {
         : settings.imageProps;
     }
     const isGif = imageSrc?.highres?.endsWith?.('.gif');
+    setComponentUrl?.(imageSrc?.highres);
     const shouldRenderPreloadImage = imageSrc && !isGif;
     const shouldRenderImage = (imageSrc && ssrDone) || isGif;
 
@@ -296,6 +297,7 @@ ImageViewer.propTypes = {
   getInPluginEditingMode: PropTypes.func,
   setInPluginEditingMode: PropTypes.func,
   isMobile: PropTypes.bool.isRequired,
+  setComponentUrl: PropTypes.func,
 };
 
 export default ImageViewer;
