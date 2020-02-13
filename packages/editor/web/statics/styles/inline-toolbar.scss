@@ -35,6 +35,7 @@ $borderRadius: 6px;
   cursor: pointer;
   border: none;
   border-left: 1px solid $toolbar-border-color;
+  border-right: none;
 
   > i {
     display: inline-block;

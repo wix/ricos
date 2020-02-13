@@ -6,7 +6,7 @@ import Measure from 'react-measure';
 import ClickOutside from 'react-click-outside';
 import { debounce } from 'lodash';
 import { DISPLAY_MODE } from 'wix-rich-content-editor-common';
-import Styles from '../../../../statics/styles/inline-toolbar.rtlignore.scss';
+import Styles from '../../../../statics/styles/inline-toolbar.scss';
 import { getLangDir } from 'wix-rich-content-common';
 
 const TOOLBAR_OFFSET = 5;
@@ -164,6 +164,7 @@ export default class InlineToolbar extends Component {
 
     // TODO: Test readonly mode and possibly set isVisible to false if the editor is readonly
     return isVisible || overrideContent || extendContent || keepOpen;
+    // return true;
   };
 
   isVisible = () => this.state.isVisible;
