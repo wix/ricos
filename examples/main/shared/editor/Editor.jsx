@@ -8,6 +8,7 @@ import * as Plugins from './EditorPlugins';
 import ModalsMap from './ModalsMap';
 import theme from '../theme/theme'; // must import after custom styles
 import { GALLERY_TYPE } from 'wix-rich-content-plugin-gallery';
+
 const modalStyleDefaults = {
   content: {
     top: '50%',
