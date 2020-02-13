@@ -4,7 +4,6 @@ import exapmleState from '../../../../e2e/tests/fixtures/basic-plugins.json';
 import Palette from '../Components/Palette';
 import { wixPalettes } from '../palettesExample';
 import { RichContentEditor, convertFromRaw, createWithContent } from 'wix-rich-content-editor';
-import { RichContentViewer } from 'wix-rich-content-viewer';
 import { RichContentWrapper } from 'wix-rich-content-wrapper';
 import { pluginDivider } from 'wix-rich-content-plugin-divider';
 import { pluginHtml } from 'wix-rich-content-plugin-html';
@@ -28,7 +27,7 @@ const plugins = [
 
 export default () => {
   return (
-    <Page title="Themes">
+    <Page title="Palettes">
       <ThemeSelector />
     </Page>
   );
@@ -41,12 +40,6 @@ class ThemeSelector extends React.Component {
     this.state = {
       selected: this.palettes[0],
     };
-    this.setPalette = this.setPalette.bind(this);
-  }
-
-  //Workaround to refresh RichContentEditor's createConfig
-  setPalette(palette) {
-    this.setState({ selected: palette });
   }
   render() {
     const { selected = this.palettes[0] } = this.state;
@@ -55,12 +48,12 @@ class ThemeSelector extends React.Component {
         <Palette palette={wixPalettes[selected]} />
         <div style={{ height: '30px' }} />
         <Layout cols={1}>
-          <FormField label="Choose Palette">
+          <FormField label="Choose a Palette:">
             <SegmentedToggle
               defaultSelected={this.palettes[0]}
-              onClick={(evt, value) => this.setPalette(value)}
+              onClick={(evt, palette) => this.setState({ selected: palette })}
             >
-              {Object.keys(wixPalettes).map((palette, idx) => (
+              {this.palettes.map((palette, idx) => (
                 <SegmentedToggle.Button
                   value={palette}
                   key={`p${idx}`}
