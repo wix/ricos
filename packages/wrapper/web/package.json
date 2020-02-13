@@ -1,0 +1,64 @@
+{
+  "name": "wix-rich-content-wrapper",
+  "version": "6.8.4",
+  "author": {
+    "name": "Alex Greenstein",
+    "email": "alexgr@wix.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wix-incubator/rich-content.git"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wix-incubator/rich-content/issues"
+  },
+  "homepage": "https://github.com/wix-incubator/rich-content/tree/master/rich-content-wrapper",
+  "files": [
+    "dist"
+  ],
+  "main": "dist/module.cjs.js",
+  "module": "dist/module.js",
+  "style": "dist/styles.min.scss",
+  "scripts": {
+    "clean": "rm -rf dist/",
+    "prebuild": "npm run clean",
+    "build": "rollup --environment MODULE_NAME:wrapper -c ../../../rollup.config.js",
+    "build:dev": "cross-env NODE_ENV=development npm run build",
+    "build:analyze": "npm run build -- --environment MODULE_ANALYZE && open stats.html",
+    "watch": "cross-env NODE_ENV=development MODULE_WATCH=1 npm run build -- --watch.chokidar",
+    "lint": "eslint 'src/**/*.{js,jsx}'"
+  },
+  "peerDependencies": {
+    "@babel/runtime": "7.2.0",
+    "classnames": "^2.0.0",
+    "draft-js": "0.11.2",
+    "lodash": "^4.0.0",
+    "prop-types": "^15.0.0",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3"
+  },
+  "devDependencies": {
+    "@babel/runtime": "7.2.0",
+    "classnames": "^2.2.6",
+    "cross-env": "^5.2.0",
+    "draft-js": "0.11.2",
+    "eslint": "^6.1.0",
+    "lodash": "^4.17.15",
+    "prop-types": "^15.6.2",
+    "react": "16.6.3",
+    "react-dom": "16.6.3",
+    "rollup": "1.20.3"
+  },
+  "dependencies": {
+    "react-modal": "~3.1.11",
+    "wix-rich-content-common": "6.8.4",
+    "wix-rich-content-editor": "6.8.4",
+    "wix-rich-content-editor-common": "6.8.4",
+    "wix-rich-content-viewer": "6.8.4"
+  },
+  "unpkg": true,
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  }
+}

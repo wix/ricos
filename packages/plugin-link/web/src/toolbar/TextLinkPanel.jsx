@@ -1,6 +1,5 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
-import { EditorState } from 'draft-js';
 import { isEmpty } from 'lodash';
 import {
   insertLinkAtCurrentSelection,
@@ -59,9 +58,8 @@ export default class TextLinkPanel extends Component {
   deleteLink = () => {
     const { getEditorState, setEditorState } = this.props;
     const editorState = getEditorState();
-    const selection = editorState.getSelection();
-    const newEditorState = removeLinksInSelection(editorState);
-    setEditorState(EditorState.acceptSelection(newEditorState, selection));
+    const newEditorState = removeLinksInSelection(editorState, setEditorState);
+    setEditorState(newEditorState);
   };
 
   hideLinkPanel = () => {

@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-viewer",
-  "version": "6.8.3",
+  "version": "6.8.4",
   "author": {
     "name": "Jonathan Bachman",
     "email": "jonathanb@wix.com"
@@ -30,7 +30,7 @@
     "classnames": "^2.0.0",
     "direction": "~1.0.3",
     "redraft": "~0.9.1",
-    "wix-rich-content-common": "6.8.3"
+    "wix-rich-content-common": "6.8.4"
   },
   "peerDependencies": {
     "@babel/runtime": "7.2.0",

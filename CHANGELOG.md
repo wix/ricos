@@ -13,13 +13,16 @@
     Click to see more.
   </summary>
 
-### :bug: Bug Fix
-- `gallery`
-  - [#672](https://github.com/wix-incubator/rich-content/pull/672) gallery images settings frozen
-  
 </details>
 <hr/>
 
+## 6.8.4 (Feb 12, 2020)
+### :bug: Bug Fix
+- `editor-common`
+  - [#645](https://github.com/wix-incubator/rich-content/pull/645) When removing link from text the cursor is in the correct position
+- `gallery`
+  - [#672](https://github.com/wix-incubator/rich-content/pull/672) gallery images settings frozen
+  
 ## 6.8.3 (Feb 11, 2020)
 ### :bug: Bug Fix
 - `image`
@@ -30,6 +33,8 @@
   
 ## 6.8.2 (Feb 9, 2020)
 ### :bug: Bug Fix
+- `emoji`
+  - [#669](https://github.com/wix-incubator/rich-content/pull/669) mouse cursor is shown as pointer on the actual icons + fix the emoji plugin in RTL+ position the modal at the bottom in mobile+ refactoring the emoji modal and giphy modal to be more consistent
 - `common`
   - [#658](https://github.com/wix-incubator/rich-content/pull/658) `types` definitions moved to `src/consts` from `statics`
 - `image`

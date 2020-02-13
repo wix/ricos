@@ -1,7 +1,7 @@
 {
   "private": false,
   "name": "wix-rich-content-editor",
-  "version": "6.8.3",
+  "version": "6.8.4",
   "author": {
     "name": "Jonathan Bachman",
     "email": "jonathanb@wix.com"
@@ -41,8 +41,8 @@
     "draft-js-plugins-editor": "~3.0.0",
     "react-click-outside": "github:tj/react-click-outside",
     "react-measure": "~2.3.0",
-    "wix-rich-content-common": "6.8.3",
-    "wix-rich-content-editor-common": "6.8.3"
+    "wix-rich-content-common": "6.8.4",
+    "wix-rich-content-editor-common": "6.8.4"
   },
   "peerDependencies": {
     "@babel/runtime": "7.2.0",
