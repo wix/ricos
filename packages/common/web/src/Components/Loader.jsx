@@ -13,7 +13,7 @@ class Loader extends React.Component {
 
   initiateStyles() {
     if (!this.styles) {
-      const theme = this.context?.theme || this.props.theme;
+      const theme = this.props.theme;
       this.styles = mergeStyles({ styles, theme });
     }
   }
@@ -49,6 +49,7 @@ class Loader extends React.Component {
           backgroundImage: `url(${this.state.localUrl})`,
         }
       : {};
+    // const style = {};
     return (
       <div
         className={classNames(this.props.overlayClassName, this.styles.loaderOverlay)}

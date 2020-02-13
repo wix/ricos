@@ -173,7 +173,7 @@ class GalleryViewer extends React.Component {
   renderLoader = () => {
     return (
       <div className={this.styles.imageOverlay}>
-        <Loader type={'medium'} onLoad={this.onLoad} />
+        <Loader type={'medium'} onLoad={this.onLoad} helpers={this.props.helpers} />
       </div>
     );
   };
@@ -182,7 +182,7 @@ class GalleryViewer extends React.Component {
     this.setState({ isLoaded: true });
   };
 
-  isLoadingProgress = () => !this.state.isLoaded && this.context?.helpers?.onProgressChange;
+  isLoadingProgress = () => !this.state.isLoaded && this.props?.helpers?.onProgressChange;
 
   handleContextMenu = e => this.context.disableRightClick && e.preventDefault();
 
