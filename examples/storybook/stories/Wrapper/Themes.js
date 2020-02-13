@@ -13,7 +13,7 @@ import { pluginButton } from 'wix-rich-content-plugin-button';
 import { pluginHashtag } from 'wix-rich-content-plugin-hashtag';
 import SegmentedToggle from 'wix-style-react/SegmentedToggle';
 import FormField from 'wix-style-react/FormField';
-import { Layout } from 'wix-style-react/Layout';
+import { Layout } from 'wix-style-react/Layout'; //
 
 const editorState = createWithContent(convertFromRaw(exapmleState));
 const plugins = [
