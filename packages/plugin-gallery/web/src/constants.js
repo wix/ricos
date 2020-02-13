@@ -74,3 +74,14 @@ export const DEFAULTS = Object.freeze({
 
 export const isHorizontalLayout = ({ galleryLayout }) =>
   HORIZONTAL_LAYOUTS.indexOf(galleryLayout) > -1;
+
+export const BASE_MOBILE_STYLES = {
+  allowTitle: true,
+  galleryTextAlign: 'center',
+  textsHorizontalPadding: 0,
+  imageInfoType: 'NO_BACKGROUND',
+  hoveringBehaviour: 'APPEARS',
+  textsVerticalPadding: 0,
+  titlePlacement: 'SHOW_BELOW',
+  calculateTextBoxHeightMode: 'AUTOMATIC',
+};

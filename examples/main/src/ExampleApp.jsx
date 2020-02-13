@@ -12,6 +12,8 @@ import {
   SectionContent,
 } from './Components';
 import { generateKey, getStateFromObject, loadStateFromStorage, saveStateToStorage } from './utils';
+import { GALLERY_TYPE } from 'wix-rich-content-plugin-gallery';
+
 const Editor = React.lazy(() => import('../shared/editor/Editor'));
 const Viewer = React.lazy(() => import('../shared/viewer/Viewer'));
 const Preview = React.lazy(() => import('../shared/preview/Preview'));
@@ -136,6 +138,12 @@ class ExampleApp extends PureComponent {
 
     const scrollingElementFn = () =>
       typeof window !== 'undefined' && document.getElementsByClassName('editor-example')[0];
+
+    const additionalConfig = {
+      [GALLERY_TYPE]: {
+        scrollingElement: scrollingElementFn,
+      },
+    };
     return (
       isEditorShown && (
         <ReflexElement
@@ -158,7 +166,7 @@ class ExampleApp extends PureComponent {
                 staticToolbar={staticToolbar}
                 locale={locale}
                 localeResource={localeResource}
-                scrollingElementFn={scrollingElementFn}
+                additionalConfig={additionalConfig}
               />
             </ErrorBoundary>
           </SectionContent>
@@ -222,6 +230,11 @@ class ExampleApp extends PureComponent {
     const scrollingElementFn = () =>
       typeof window !== 'undefined' && document.getElementsByClassName('viewer-example')[0];
 
+    const additionalConfig = {
+      [GALLERY_TYPE]: {
+        scrollingElement: scrollingElementFn,
+      },
+    };
     return (
       isViewerShown && (
         <ReflexElement
@@ -240,7 +253,7 @@ class ExampleApp extends PureComponent {
                 isMobile={this.state.viewerIsMobile || isMobile}
                 locale={locale}
                 localeResource={localeResource}
-                scrollingElementFn={scrollingElementFn}
+                additionalConfig={additionalConfig}
               />
             </ErrorBoundary>
           </SectionContent>

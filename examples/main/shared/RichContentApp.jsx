@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { debounce } from 'lodash';
 import { convertToRaw, createEmpty } from 'wix-rich-content-editor/dist/lib/editorStateConversion';
 import { isSSR } from 'wix-rich-content-common';
+import { GALLERY_TYPE } from 'wix-rich-content-plugin-gallery';
 import ExampleApp from '../src/ExampleApp';
 import TestApp from '../../../e2e/test-env/src/client/TestApp';
 import { getRequestedLocale, isMobile } from '../src/utils';
@@ -47,6 +48,11 @@ class RichContentApp extends PureComponent {
     const { editorState, viewerState, localeResource, locale } = this.state;
     const { allLocales, initialState, mode } = this.props;
     const App = mode === 'demo' ? ExampleApp : TestApp;
+    const additionalConfig = {
+      [GALLERY_TYPE]: {
+        disableHover: true,
+      },
+    };
     return (
       <App
         allLocales={allLocales}
@@ -59,6 +65,7 @@ class RichContentApp extends PureComponent {
         localeResource={localeResource}
         onEditorChange={this.onEditorChange}
         setLocale={this.setLocaleResource}
+        additionalConfig={additionalConfig}
       />
     );
   }

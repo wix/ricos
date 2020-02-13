@@ -7,7 +7,6 @@ import * as Plugins from './ViewerPlugins';
 import theme from '../theme/theme'; // must import after custom styles
 import getImagesData from 'wix-rich-content-fullscreen/src/lib/getImagesData';
 import Fullscreen from 'wix-rich-content-fullscreen';
-import { GALLERY_TYPE } from 'wix-rich-content-plugin-gallery';
 const anchorTarget = '_top';
 const relValue = 'noreferrer';
 
@@ -23,8 +22,7 @@ export default class Viewer extends PureComponent {
       disabled: false,
     };
 
-    const { scrollingElementFn } = props;
-    const additionalConfig = { [GALLERY_TYPE]: { scrollingElement: scrollingElementFn } };
+    const { additionalConfig } = props;
     this.pluginsConfig = Plugins.getConfig(additionalConfig);
   }
 

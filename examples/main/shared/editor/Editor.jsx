@@ -7,7 +7,7 @@ import { testImages, testVideos } from './mock';
 import * as Plugins from './EditorPlugins';
 import ModalsMap from './ModalsMap';
 import theme from '../theme/theme'; // must import after custom styles
-import { GALLERY_TYPE } from 'wix-rich-content-plugin-gallery';
+
 const modalStyleDefaults = {
   content: {
     top: '50%',
@@ -28,8 +28,7 @@ export default class Editor extends PureComponent {
     super(props);
     // ReactModal.setAppElement('#root');
     this.initEditorProps();
-    const { scrollingElementFn } = props;
-    const additionalConfig = { [GALLERY_TYPE]: { scrollingElement: scrollingElementFn } };
+    const { additionalConfig } = props;
     this.pluginsConfig = Plugins.getConfig(additionalConfig);
   }
 
@@ -194,7 +193,6 @@ export default class Editor extends PureComponent {
           onChange={this.handleChange}
           helpers={this.helpers}
           plugins={Plugins.editorPlugins}
-          // config={Plugins.getConfig(additionalConfig)}
           config={this.pluginsConfig}
           editorKey="random-editorKey-ssr"
           // siteDomain="https://www.wix.com"

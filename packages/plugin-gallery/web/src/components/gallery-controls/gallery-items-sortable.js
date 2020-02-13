@@ -16,10 +16,6 @@ import { FileInput } from 'wix-rich-content-editor-common';
 
 import { FabIcon, UploadIcon, SelectedIcon, NotSelectedIcon } from '../../icons';
 
-//eslint-disable-next-line no-unused-vars
-const EMPTY_SMALL_PLACEHOLDER =
-  'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
-
 const onKeyDown = (e, handler) => {
   if (e.key === 'Enter' || e.key === ' ') {
     handler();

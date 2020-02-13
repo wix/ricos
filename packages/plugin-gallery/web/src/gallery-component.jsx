@@ -4,10 +4,6 @@ import { isEqual } from 'lodash';
 import GalleryViewer from './gallery-viewer';
 import { DEFAULTS } from './constants';
 
-//eslint-disable-next-line no-unused-vars
-const EMPTY_SMALL_PLACEHOLDER =
-  'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
-
 class GalleryComponent extends PureComponent {
   constructor(props) {
     super(props);
