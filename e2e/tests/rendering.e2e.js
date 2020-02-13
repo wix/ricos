@@ -13,7 +13,7 @@ const testFixture = fixture =>
 
 describe('editor rendering', () => {
   before(function() {
-    if (Cypress.env('MATCH_CONTENT_STATE')) this.skip();
+    if (Cypress.env('MATCH_CONTENT_STATE') && !Cypress.env('debug')) this.skip();
   });
 
   context('desktop', () => {
