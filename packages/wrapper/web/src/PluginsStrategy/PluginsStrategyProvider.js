@@ -36,7 +36,7 @@ export default function pluginsStrategyProvider(isEditor, { plugins = [] }) {
 
   assert(Array.isArray(plugins), 'plugins is expected to be an object array');
   const pack = plugins.reduce((prev, curr) => {
-    const { createPlugin, type, config, ModalsMap, typeMapper, decorator } = curr;
+    const { createPlugin, type, config, ModalsMap, typeMapper, decorator = {} } = curr;
     const pConfig = { [type]: config };
     if (isEditor)
       return {

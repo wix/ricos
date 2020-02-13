@@ -6,10 +6,7 @@ export const pluginButton = (config = {}) => {
   return {
     config: { ...DEFAULT_CONFIG, ...config },
     type: BUTTON_TYPE,
-    createPlugin: createButtonPlugin, //image gallery divider html
+    createPlugin: createButtonPlugin,
     ModalsMap,
-    // palleteColors: palette => ({
-    //   buttonColor: palette.actionColor,
-    // }),
   };
 };

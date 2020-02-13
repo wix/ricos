@@ -216,8 +216,15 @@ const createBaseComponent = ({
 
     handleContextMenu = e => disableRightClick && e.preventDefault();
 
+    setComponentUrl = url => (this.url = url);
+
+    onDragStart = event => {
+      this.props.onDragStart(event);
+      event.dataTransfer.setData('url', this.url || window?.location?.href);
+    };
+
     render = () => {
-      const { blockProps, className, selection, onDragStart } = this.props;
+      const { blockProps, className, selection } = this.props;
       const { componentData } = this.state;
       const { containerClassName, ...decorationProps } = pluginDecorationProps(
         this.props,
@@ -281,6 +288,7 @@ const createBaseComponent = ({
           siteDomain={siteDomain}
           setInPluginEditingMode={setInPluginEditingMode}
           getInPluginEditingMode={getInPluginEditingMode}
+          setComponentUrl={this.setComponentUrl}
         />
       );
 
@@ -290,7 +298,7 @@ const createBaseComponent = ({
           style={sizeStyles}
           className={ContainerClassNames}
           data-focus={isActive}
-          onDragStart={onDragStart}
+          onDragStart={this.onDragStart}
           onContextMenu={this.handleContextMenu}
           {...decorationProps}
         >
