@@ -14,6 +14,9 @@ import { pluginImage } from 'wix-rich-content-plugin-image';
 import { pluginHtml } from 'wix-rich-content-plugin-html';
 import { pluginDivider } from 'wix-rich-content-plugin-divider';
 import { pluginGallery, GALLERY_TYPE } from 'wix-rich-content-plugin-gallery';
+import { pluginHashtag } from 'wix-rich-content-plugin-hashtag';
+import { pluginCodeBlock } from 'wix-rich-content-plugin-code-block';
+
 const modalStyleDefaults = {
   content: {
     top: '50%',
@@ -186,6 +189,9 @@ export default class Editor extends PureComponent {
       editorState,
     };
 
+    const plugins = [pluginImage(), pluginDivider(), pluginGallery(), pluginHtml(),
+    pluginButton(), pluginHashtag(), pluginCodeBlock()];
+
     return (
       <div className="editor">
         {MobileToolbar && <MobileToolbar />}
@@ -195,7 +201,7 @@ export default class Editor extends PureComponent {
           </div>
         )}
         <RichContentWrapper
-          plugins={[pluginImage(), pluginDivider(), pluginGallery(), pluginHtml(), pluginButton()]}
+          plugins={plugins}
           theme={"Palette"}
           palette={wixPalettes.site2}
         >

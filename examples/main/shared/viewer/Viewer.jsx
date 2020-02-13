@@ -13,6 +13,8 @@ import { pluginImage } from 'wix-rich-content-plugin-image/dist/module.viewer';
 import { pluginHtml } from 'wix-rich-content-plugin-html/dist/module.viewer';
 import { pluginDivider } from 'wix-rich-content-plugin-divider/dist/module.viewer';
 import { pluginGallery, GALLERY_TYPE } from 'wix-rich-content-plugin-gallery/dist/module.viewer';
+import { pluginHashtag } from 'wix-rich-content-plugin-hashtag/dist/module.viewer';
+import { pluginCodeBlock } from 'wix-rich-content-plugin-code-block/dist/module.viewer';
 const anchorTarget = '_top';
 const relValue = 'noreferrer';
 
@@ -66,7 +68,7 @@ export default class Viewer extends PureComponent {
     return (
       <div id="rich-content-viewer" className="viewer">
         <RichContentWrapper
-          plugins={[pluginButton(), pluginDivider(), pluginGallery(), pluginHtml(), pluginImage()]}
+          plugins={[pluginButton(), pluginDivider(), pluginGallery(), pluginHtml(), pluginImage(), pluginHashtag(), pluginCodeBlock()]}
           theme={theme}>
           <RichContentViewer
             helpers={this.helpers}
