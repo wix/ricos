@@ -116,36 +116,39 @@ function addPluginInExampleApp(pluginName) {
         ...pckageJsonObj.dependencies,
         [newDependency]: version,
       };
-      const packageJson = JSON.stringify(pckageJsonObj);
-      fs.writeFile(filePath, packageJson, 'utf8', () => addPluginToExampleAppEditor(pluginName));
+      const packageJson = JSON.stringify(pckageJsonObj, null, 2);
+      fs.writeFile(filePath, packageJson, 'utf8', () => {
+        console.log(chalk.bold.green(`${pluginName}-plugin added successfully 🎉🎊🎉🎊`));
+        exec(`npm i && npm run build && cd ${exampleAppMainPath} && npm run start`);
+      });
     }
   });
 }
 
-function addPluginToExampleAppEditor(pluginName) {
-  const upperCasePluginName = pluginName.toUpperCase();
-  const pluginNameStartWithUpperCase = pluginName.charAt(0).toUpperCase() + pluginName.slice(1);
+// function addPluginToExampleAppEditor(pluginName) {
+//   const upperCasePluginName = pluginName.toUpperCase();
+//   const pluginNameStartWithUpperCase = pluginName.charAt(0).toUpperCase() + pluginName.slice(1);
 
-  console.log(chalk.magenta(`Adding ${pluginName}-plugin to example app editor`));
-  const editorPluginsPath = `${exampleAppMainPath}/shared/editor/EditorPlugins.jsx`;
-  const importPluginBuffer = `import { create${pluginNameStartWithUpperCase}Plugin, ${upperCasePluginName}_TYPE } from 'wix-rich-content-plugin-${pluginName}';
-    import 'wix-rich-content-plugin-${pluginName}/dist/styles.min.css';`;
-  const createPluginsBuffer = `create${pluginNameStartWithUpperCase}Plugin,`;
-  const configBuffer = `[${upperCasePluginName}_TYPE]: {},`;
+//   console.log(chalk.magenta(`Adding ${pluginName}-plugin to example app editor`));
+//   const editorPluginsPath = `${exampleAppMainPath}/shared/editor/EditorPlugins.jsx`;
+//   const importPluginBuffer = `import { create${pluginNameStartWithUpperCase}Plugin, ${upperCasePluginName}_TYPE } from 'wix-rich-content-plugin-${pluginName}';
+//     import 'wix-rich-content-plugin-${pluginName}/dist/styles.min.css';`;
+//   const createPluginsBuffer = `create${pluginNameStartWithUpperCase}Plugin,`;
+//   const configBuffer = `[${upperCasePluginName}_TYPE]: {},`;
 
-  let data = fs.readFileSync(editorPluginsPath);
-  data = importPluginBuffer + '\n' + data;
-  const editorPluginsPos = data.indexOf('export const editorPlugins = [');
-  data =
-    data.substring(0, editorPluginsPos + 30) +
-    '\n' +
-    createPluginsBuffer +
-    '\n' +
-    data.substring(editorPluginsPos + 30);
-  const configPos = data.indexOf('export const config = {');
-  data =
-    data.substring(0, configPos + 23) + '\n' + configBuffer + '\n' + data.substring(configPos + 23);
-  fs.writeFileSync(editorPluginsPath, data, 'utf8');
-  console.log(chalk.bold.green(`${pluginName}-plugin added successfully 🎉🎊🎉🎊`));
-  exec(`npm i && npm run build && cd ${exampleAppMainPath} && npm run start`);
-}
+//   let data = fs.readFileSync(editorPluginsPath);
+//   data = importPluginBuffer + '\n' + data;
+//   const editorPluginsPos = data.indexOf('export const editorPlugins = [');
+//   data =
+//     data.substring(0, editorPluginsPos + 30) +
+//     '\n' +
+//     createPluginsBuffer +
+//     '\n' +
+//     data.substring(editorPluginsPos + 30);
+//   const configPos = data.indexOf('const config = {');
+//   data =
+//     data.substring(0, configPos + 23) + '\n' + configBuffer + '\n' + data.substring(configPos + 23);
+//   fs.writeFileSync(editorPluginsPath, data, 'utf8');
+//   console.log(chalk.bold.green(`${pluginName}-plugin added successfully 🎉🎊🎉🎊`));
+//   exec(`npm i && npm run build && cd ${exampleAppMainPath} && npm run start`);
+// }
