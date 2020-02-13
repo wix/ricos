@@ -144,7 +144,7 @@ class ImageViewer extends React.Component {
     }
     return (
       <div className={this.styles.imageOverlay}>
-        <Loader type={'medium'} theme={this.props.theme} />
+        <Loader type={'medium'} helpers={this.props.helpers} theme={this.props.theme} />
       </div>
     );
   }

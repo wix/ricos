@@ -8,7 +8,7 @@ class Loader extends React.Component {
   state = {};
 
   componentDidMount() {
-    this.context?.helpers?.onProgressChange?.(this.updateProgress);
+    this.props?.helpers?.onProgressChange?.(this.updateProgress);
   }
 
   initiateStyles() {
