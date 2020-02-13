@@ -429,8 +429,8 @@ class RichContentEditor extends Component {
 }
 
 RichContentEditor.publish = async (postId, editorState = {}, callBack = () => true) => {
-  const postContent = getPostContentSummary(editorState);
-  callBack({ postId, postContent });
+  const postSummary = getPostContentSummary(editorState);
+  callBack({ postId, ...postSummary });
 };
 
 RichContentEditor.propTypes = {

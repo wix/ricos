@@ -10,7 +10,6 @@ import { RichContentWrapper } from 'wix-rich-content-wrapper';
 
 import { Themes } from '../../src/RceTheme';
 import ThemeWrapper from '../../src/ThemeWrapper';
-import { pluginHtmlSchema } from 'wix-rich-content-plugin-divider/node_modules/wix-rich-content-common';
 
 const editorState = createWithContent(convertFromRaw(exapmleState));
 

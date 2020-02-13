@@ -379,8 +379,10 @@ export function getPostContentSummary(editorState) {
   const entries = getEntities(editorState);
   const blockPlugins = getBlockTypePlugins(blocks);
   return {
-    ...countByType(blockPlugins),
-    ...countByType(entries),
+    postContent: {
+      ...countByType(blockPlugins),
+      ...countByType(entries),
+    },
   };
 }
 
