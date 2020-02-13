@@ -30,13 +30,6 @@ const devConfig = {
           },
         },
       },
-      {
-        test: /\.js$/,
-        use: ['source-map-loader'],
-        enforce: 'pre',
-        exclude: [/node_modules.*node_modules/, /node_modules\/monaco-editor/,
-          /node_modules\/@wix\/web-bi-logger/, /node_modules\/@wix\/bi-logger-rich-editor/],
-      },
     ],
   },
   plugins: [new HotModuleReplacementPlugin()],
