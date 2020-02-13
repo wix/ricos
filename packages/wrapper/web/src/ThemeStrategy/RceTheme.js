@@ -91,19 +91,23 @@ export default class RceTheme {
       const textColor = this.getColorValue(TEXT_COLOR);
       const secondaryColor = this.getColorValue(SECONDARY_COLOR);
 
+      const colors = {
+        actionColor,
+        bgColor,
+        textColor,
+        secondaryColor,
+      };
+
       const pluginThemes = this.themeGenerators.reduce(
         (acc, curr) => ({
           ...acc,
-          ...curr(this.palette),
+          ...curr(colors),
         }),
         {}
       );
 
       const combinedTheme = Object.assign(
         {
-          hashtag: {
-            color: actionColor,
-          },
           editor: {
             background: bgColor,
             color: textColor,
