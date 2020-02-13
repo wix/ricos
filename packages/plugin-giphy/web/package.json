@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-plugin-giphy",
-  "version": "6.8.3",
+  "version": "6.8.4",
   "author": {
     "name": "Nabeel Zanabeet",
     "email": "nabeelz@wix.com"
@@ -56,8 +56,8 @@
     "react-custom-scrollbars": "^4.2.1",
     "react-infinite-scroller": "~1.2.4",
     "react-md-spinner": "~1.0.0",
-    "wix-rich-content-common": "6.8.3",
-    "wix-rich-content-editor-common": "6.8.3"
+    "wix-rich-content-common": "6.8.4",
+    "wix-rich-content-editor-common": "6.8.4"
   },
   "unpkg": true,
   "publishConfig": {

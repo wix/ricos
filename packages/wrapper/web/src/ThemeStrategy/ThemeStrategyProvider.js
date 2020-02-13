@@ -7,30 +7,34 @@ const createThemeStrategy = (themeObj = {}) => (innerProps = {}) => {
   return { theme: { ...themeObj, ...theme } };
 };
 
-// Note: themeGenerators should include the editor/viewer generators, common generator, ..
-export default function themeStrategyProvider({ theme = {}, palette = {}, themeGenerators = [] }) {
-  if (typeof theme === 'string') {
-    const rceTheme = new RceTheme(theme, palette, themeGenerators);
-    const { StyleSheet, css } = Aphrodite.extend([
-      {
-        selectorHandler: (selector, baseSelector, generateSubtreeStyles) => {
-          const nestedTags = [];
-          const selectors = selector.split(',');
-          selectors.forEach((subselector, key) => {
-            if (selector[0] === '&') {
-              const tag = key === 0 ? subselector.slice(1) : subselector;
-              const nestedTag = generateSubtreeStyles(
-                `${baseSelector} ${tag}`.replace(/ +(?= )/g, '')
-              );
-              nestedTags.push(nestedTag);
-            }
-          });
-          // eslint-disable-next-line no-console
-          console.log(nestedTags.length && nestedTags.flat());
-          return nestedTags.length ? nestedTags.flat() : null;
-        },
+const withNestedCssSupport = () =>
+  Aphrodite.extend([
+    {
+      selectorHandler: (selector, baseSelector, generateSubtreeStyles) => {
+        const nestedTags = [];
+        const selectors = selector.split(',');
+        selectors.forEach((subselector, key) => {
+          if (selector[0] === '&') {
+            const tag = key === 0 ? subselector.slice(1) : subselector;
+            const nestedTag = generateSubtreeStyles(
+              `${baseSelector} ${tag}`.replace(/ +(?= )/g, '')
+            );
+            nestedTags.push(nestedTag);
+          }
+        });
+        // eslint-disable-next-line no-console
+        console.log(nestedTags.length && nestedTags.flat());
+        return nestedTags.length ? nestedTags.flat() : null;
       },
-    ]);
+    },
+  ]);
+
+// Note: themeGenerators should include the editor/viewer generators, common generator, ..
+export default function themeStrategyProvider(isEditor, themeProperties) {
+  const { theme } = themeProperties;
+  if (typeof theme === 'string') {
+    const rceTheme = new RceTheme(themeProperties);
+    const { StyleSheet, css } = withNestedCssSupport();
     const styles = StyleSheet.create(rceTheme.getStylesObject());
     // eslint-disable-next-line no-console
     //console.log({ styles });
