@@ -23,7 +23,7 @@ class GiphyComponent extends Component {
   };
 
   renderPlayer = () => {
-    const { componentData, theme, settings, isMobile } = this.props;
+    const { componentData, theme, settings, isMobile, setComponentUrl } = this.props;
     return (
       <GiphyViewer
         ref={this.setPlayer}
@@ -31,6 +31,7 @@ class GiphyComponent extends Component {
         theme={theme}
         settings={settings}
         isMobile={isMobile}
+        setComponentUrl={setComponentUrl}
       />
     );
   };
@@ -59,6 +60,7 @@ GiphyComponent.propTypes = {
   settings: PropTypes.object.isRequired,
   isMobile: PropTypes.bool.isRequired,
   theme: PropTypes.object.isRequired,
+  setComponentUrl: PropTypes.func,
 };
 
 export { GiphyComponent as Component, DEFAULTS };
