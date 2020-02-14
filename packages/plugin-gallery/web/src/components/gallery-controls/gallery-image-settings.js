@@ -19,15 +19,20 @@ import GallerySettingsMobileHeader from './gallery-settings-mobile-header';
 class ImageSettings extends Component {
   constructor(props) {
     super(props);
-    this.styles = mergeStyles({ styles, theme: props.theme });
+    const {
+      theme,
+      image: { disableHover },
+    } = props;
+    this.styles = mergeStyles({ styles, theme });
     const { t } = props;
-    this.updateLabel = t('GalleryImageSettings_Update');
-    this.headerLabel = t('GalleryImageSettings_Header');
-    this.ReplaceLabel = t('GalleryImageSettings_Replace_Label');
-    this.deleteLabel = t('GalleryImageSettings_Delete_Label');
-    this.titleLabel = t('GalleryImageSettings_Title_Label');
-    this.titleInputPlaceholder = t('GalleryImageSettings_Title_Input_Placeholder');
-    this.linkLabel = t('GalleryImageSettings_Link_Label');
+    const prefix = 'GalleryImageSettings';
+    this.updateLabel = t(`${prefix}_Update`);
+    this.headerLabel = t(`${prefix}_Header`);
+    this.ReplaceLabel = t(`${prefix}_Replace_Label`);
+    this.deleteLabel = t(`${prefix}_Delete_Label`);
+    this.titleLabel = t(`${disableHover ? 'ImageSettings_Alt_Label' : `${prefix}_Title_Label`}`);
+    this.titleInputPlaceholder = t(`${prefix}_Title_Input_Placeholder`);
+    this.linkLabel = t(`${prefix}_Link_Label`);
   }
 
   deleteImage() {
@@ -264,6 +269,7 @@ ImageSettings.propTypes = {
   image: PropTypes.shape({
     url: PropTypes.string.isRequired,
     metadata: PropTypes.object.isRequired,
+    disableHover: PropTypes.bool,
   }).isRequired,
   onCancel: PropTypes.func.isRequired,
   onSave: PropTypes.func.isRequired,

@@ -6,6 +6,7 @@ import {
   LINK_TYPE,
   VIDEO_TYPE_LEGACY,
   IMAGE_TYPE_LEGACY,
+  GALLERY_TYPE,
 } from '../../consts';
 import { linkDataNormalizer, imageDataNormalizer } from './dataNormalizers';
 
@@ -20,42 +21,55 @@ const normalizeComponentData = (type, componentData, config) =>
 /* eslint-disable */
 
 // TODO: create configNormalizers map and separate the IMAGE and VIDEO normalizers
-const normalizeComponentConfig = componentData => {
-  if (componentData.config) {
-    return componentData;
-  }
-
-  const config = {};
-  const { alignment, size, src, oembed } = componentData;
-  if (alignment) {
-    delete componentData.alignment;
-    config.alignment = alignment;
-    config.size = 'small';
+const normalizeComponentConfig = (entityType, componentData, config) => {
+  if (entityType === GALLERY_TYPE && config?.config?.[entityType]?.disableHoverDefault === true) {
+    console.log('componentData', { componentData });
+    const { items } = componentData;
+    return {
+      ...componentData,
+      items: items.map(item => ({ disableHover: true, ...item })),
+      config: {
+        ...componentData.config,
+        disableHover: true,
+      },
+    };
   } else {
-    if (size) {
-      delete componentData.size;
-      if (size === 'smallCenter') {
-        config.size = 'small';
-        config.alignment = 'center';
-      } else if (size === 'fullWidth') {
-        config.size = 'fullWidth';
+    if (componentData.config) {
+      return componentData;
+    }
+
+    const configPatch = {};
+    const { alignment, size, src, oembed } = componentData;
+    if (alignment) {
+      delete componentData.alignment;
+      configPatch.alignment = alignment;
+      configPatch.size = 'small';
+    } else {
+      if (size) {
+        delete componentData.size;
+        if (size === 'smallCenter') {
+          configPatch.size = 'small';
+          configPatch.alignment = 'center';
+        } else if (size === 'fullWidth') {
+          configPatch.size = 'fullWidth';
+          configPatch.alignment = 'center';
+        }
+      } else {
+        config.size = src && src.width && src.width <= 740 ? 'original' : 'content';
         config.alignment = 'center';
       }
-    } else {
-      config.size = src && src.width && src.width <= 740 ? 'original' : 'content';
-      config.alignment = 'center';
     }
-  }
-  const patch = { config };
+    const patch = { config: configPatch };
 
-  if (oembed) {
-    delete componentData.url;
-    delete componentData.oembed;
-    patch.src = oembed.video_url;
-    patch.metadata = { oembed };
-  }
+    if (oembed) {
+      delete componentData.url;
+      delete componentData.oembed;
+      patch.src = oembed.video_url;
+      patch.metadata = { oembed };
+    }
 
-  return { ...componentData, patch };
+    return { ...componentData, patch };
+  }
 };
 /* eslint-enable */
 
@@ -63,6 +77,7 @@ const entityTypeMap = {
   configNormalization: {
     [IMAGE_TYPE_LEGACY]: IMAGE_TYPE,
     [VIDEO_TYPE_LEGACY]: VIDEO_TYPE,
+    [GALLERY_TYPE]: GALLERY_TYPE,
   },
   dataNormalization: {
     [LINK_TYPE]: LINK_TYPE,
@@ -88,7 +103,7 @@ const normalizeEntityMap = (entityMap, config) => {
       newEntity = {
         ...entity,
         type: normalizeType(entity.type, entityTypeMap.configNormalization),
-        data: normalizeComponentConfig(cloneDeep(entity.data), config),
+        data: normalizeComponentConfig(entity.type, cloneDeep(entity.data), config),
       };
     } else if (shouldNormalizeEntityData(entity)) {
       newEntity = {

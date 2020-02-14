@@ -47,25 +47,30 @@ class ManageMediaSection extends Component {
       isMobile,
       uiSettings,
       languageDir,
+      theme,
+      data,
     } = this.props;
     const { handleFileSelection } = helpers;
 
+    const { items } = data;
+
+    const sortableComponentProps = {
+      theme,
+      items,
+      t,
+      relValue,
+      anchorTarget,
+      isMobile,
+      uiSettings,
+      onItemsChange: this.applyItems,
+      handleFileChange: this.handleFileChange,
+      handleFileSelection: handleFileSelection && this.handleFileSelection,
+      handleFilesAdded: store.getBlockHandler('handleFilesAdded'),
+      deleteBlock: store.get('deleteBlock'),
+    };
     return (
       <div dir={languageDir}>
-        <SortableComponent
-          theme={this.props.theme}
-          items={this.props.data.items}
-          onItemsChange={this.applyItems}
-          handleFileChange={this.handleFileChange}
-          handleFileSelection={handleFileSelection && this.handleFileSelection}
-          handleFilesAdded={store.getBlockHandler('handleFilesAdded')}
-          deleteBlock={store.get('deleteBlock')}
-          t={t}
-          relValue={relValue}
-          anchorTarget={anchorTarget}
-          isMobile={isMobile}
-          uiSettings={uiSettings}
-        />
+        <SortableComponent {...sortableComponentProps} />
       </div>
     );
   }

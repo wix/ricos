@@ -50,7 +50,7 @@ class RichContentApp extends PureComponent {
     const App = mode === 'demo' ? ExampleApp : TestApp;
     const additionalConfig = {
       [GALLERY_TYPE]: {
-        disableHover: true,
+        disableHoverDefault: true,
       },
     };
     return (
