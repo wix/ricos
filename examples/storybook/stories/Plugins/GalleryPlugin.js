@@ -21,20 +21,22 @@ import {
 const helpers = {
   onExpand: (entityIndex, innerIndex = 0) => {
     //galleries have an innerIndex (i.e. second image will have innerIndex=1)
-    console.log('on exapnd', entityIndex, innerIndex);
+    console.log('on exapnd', entityIndex, innerIndex); //eslint-disable-line
   },
 };
 const typeMappers = [galleryTypeMapper];
 const editorState = createWithContent(convertFromRaw(fixtrue));
-const disableHoverConfig = {
+const displayTitleConfig = {
   [GALLERY_TYPE]: {
-    disableHoverDefault: true,
+    displayTitleDefault: false,
   },
 };
 export default () => {
   const editorPlugins = [pluginGalleryEditor()];
   return (
     <Page title="Gallery Plugin">
+      <h3>Default Behvaior</h3>
+
       <Section type={Section.Types.COMPARISON}>
         <RichContentEditorBox preset="blog-preset">
           <RichContentWrapper plugins={editorPlugins}>
@@ -47,11 +49,11 @@ export default () => {
         </RichContentViewerBox>
       </Section>
 
-      <h3>With Disable Hover (Blog V5.x.x fix)</h3>
+      <h3>With displayTitle:false config (Blog V5.x.x fix)</h3>
       <Section type={Section.Types.COMPARISON}>
         <RichContentEditorBox preset="blog-preset">
           <RichContentWrapper plugins={editorPlugins}>
-            <RichContentEditor editorState={editorState} config={disableHoverConfig} />
+            <RichContentEditor editorState={editorState} config={displayTitleConfig} />
           </RichContentWrapper>
         </RichContentEditorBox>
         <RichContentViewerBox preset="blog-preset">
@@ -60,7 +62,7 @@ export default () => {
             initialState={fixtrue}
             helpers={helpers}
             typeMappers={typeMappers}
-            config={disableHoverConfig}
+            config={displayTitleConfig}
           />
         </RichContentViewerBox>
       </Section>

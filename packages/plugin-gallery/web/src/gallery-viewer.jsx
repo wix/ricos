@@ -76,11 +76,11 @@ class GalleryViewer extends React.Component {
       isMobile,
       anchorTarget,
       relValue,
-      settings: { disableHoverDefault = false },
+      settings: { displayTitleDefault = false },
     } = props;
 
     const galleryDomain = new Gallery(componentData, {
-      disableHoverDefault,
+      displayTitleDefault,
       isMobile,
       anchorTarget,
       relValue,
@@ -139,10 +139,10 @@ class GalleryViewer extends React.Component {
 
   hoverElement = itemProps => {
     const {
-      settings: { disableHoverDefault = false },
+      settings: { displayTitleDefault = true },
     } = this.props;
     return (
-      !disableHoverDefault && (
+      displayTitleDefault && (
         <Fragment>
           {this.renderExpandIcon(itemProps)}
           {this.renderTitle(itemProps.alt)}

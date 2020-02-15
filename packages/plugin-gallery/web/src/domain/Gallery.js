@@ -2,11 +2,11 @@ import { DEFAULTS, BASE_MOBILE_STYLES, sampleItems } from '../constants';
 import { convertItemData } from '../helpers/convert-item-data';
 
 export default class Gallery {
-  constructor(componentData, { isMobile, anchorTarget, relValue, disableHoverDefault } = {}) {
+  constructor(componentData, { isMobile, anchorTarget, relValue, displayTitleDefault } = {}) {
     const { items, styles } = componentData;
     this.items = this.getItems(items || DEFAULTS.items, anchorTarget, relValue);
     this.isMobile = isMobile;
-    this.disableHoverDefault = disableHoverDefault;
+    this.displayTitleDefault = displayTitleDefault;
     this.styleParams = this.getStyleParams({ ...DEFAULTS.styles, ...(styles || {}) });
   }
 
@@ -28,7 +28,7 @@ export default class Gallery {
     if (!this.isMobile) {
       return { ...styles, allowHover: true };
     }
-    if (this.disableHoverDefault || !this.hasTitle) {
+    if (!this.displayTitleDefault || !this.hasTitle) {
       return styles;
     }
 

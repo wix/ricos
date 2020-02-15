@@ -22,15 +22,18 @@ const normalizeComponentData = (type, componentData, config) =>
 
 // TODO: create configNormalizers map and separate the IMAGE and VIDEO normalizers
 const normalizeComponentConfig = (entityType, componentData, config) => {
-  if (entityType === GALLERY_TYPE && config?.config?.[entityType]?.disableHoverDefault === true) {
-    console.log('componentData', { componentData });
+  if (
+    entityType === GALLERY_TYPE &&
+    config?.config?.[entityType]?.displayTitleDefault !== undefined
+  ) {
     const { items } = componentData;
+    const displayTitleDefault = config?.config?.[entityType]?.displayTitleDefault;
     return {
       ...componentData,
-      items: items.map(item => ({ disableHover: true, ...item })),
+      items: items.map(item => ({ displayTitle: displayTitleDefault, ...item })),
       config: {
         ...componentData.config,
-        disableHover: true,
+        displayTitle: displayTitleDefault,
       },
     };
   } else {

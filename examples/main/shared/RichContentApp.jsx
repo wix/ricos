@@ -48,11 +48,7 @@ class RichContentApp extends PureComponent {
     const { editorState, viewerState, localeResource, locale } = this.state;
     const { allLocales, initialState, mode } = this.props;
     const App = mode === 'demo' ? ExampleApp : TestApp;
-    const additionalConfig = {
-      [GALLERY_TYPE]: {
-        disableHoverDefault: true,
-      },
-    };
+    const additionalConfig = {};
     return (
       <App
         allLocales={allLocales}

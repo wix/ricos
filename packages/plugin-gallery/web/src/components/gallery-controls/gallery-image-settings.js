@@ -21,7 +21,7 @@ class ImageSettings extends Component {
     super(props);
     const {
       theme,
-      image: { disableHover },
+      image: { displayTitle },
     } = props;
     this.styles = mergeStyles({ styles, theme });
     const { t } = props;
@@ -30,7 +30,7 @@ class ImageSettings extends Component {
     this.headerLabel = t(`${prefix}_Header`);
     this.ReplaceLabel = t(`${prefix}_Replace_Label`);
     this.deleteLabel = t(`${prefix}_Delete_Label`);
-    this.titleLabel = t(`${disableHover ? 'ImageSettings_Alt_Label' : `${prefix}_Title_Label`}`);
+    this.titleLabel = t(`${displayTitle ? `${prefix}_Title_Label` : 'ImageSettings_Alt_Label'}`);
     this.titleInputPlaceholder = t(`${prefix}_Title_Input_Placeholder`);
     this.linkLabel = t(`${prefix}_Link_Label`);
   }
@@ -269,7 +269,7 @@ ImageSettings.propTypes = {
   image: PropTypes.shape({
     url: PropTypes.string.isRequired,
     metadata: PropTypes.object.isRequired,
-    disableHover: PropTypes.bool,
+    displayTitle: PropTypes.bool,
   }).isRequired,
   onCancel: PropTypes.func.isRequired,
   onSave: PropTypes.func.isRequired,
