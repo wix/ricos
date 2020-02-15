@@ -14,6 +14,7 @@ jobs:
           build: npm run build:test
           start: npm run e2e:app:run
           wait-on: 'http://localhost:3002'
+          wait-on-timeout: 120
           config: video=false
 
       - name: Update Applitools batch status
