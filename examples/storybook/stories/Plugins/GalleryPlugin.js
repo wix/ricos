@@ -26,9 +26,9 @@ const helpers = {
 };
 const typeMappers = [galleryTypeMapper];
 const editorState = createWithContent(convertFromRaw(fixtrue));
-const displayTitleConfig = {
+const showTitleConfig = {
   [GALLERY_TYPE]: {
-    displayTitleDefault: false,
+    showTitleDefault: false,
   },
 };
 export default () => {
@@ -49,11 +49,11 @@ export default () => {
         </RichContentViewerBox>
       </Section>
 
-      <h3>With displayTitle:false config (Blog V5.x.x fix)</h3>
+      <h3>With showTitle:false config (Blog V5.x.x fix)</h3>
       <Section type={Section.Types.COMPARISON}>
         <RichContentEditorBox preset="blog-preset">
           <RichContentWrapper plugins={editorPlugins}>
-            <RichContentEditor editorState={editorState} config={displayTitleConfig} />
+            <RichContentEditor editorState={editorState} config={showTitleConfig} />
           </RichContentWrapper>
         </RichContentEditorBox>
         <RichContentViewerBox preset="blog-preset">
@@ -62,7 +62,7 @@ export default () => {
             initialState={fixtrue}
             helpers={helpers}
             typeMappers={typeMappers}
-            config={displayTitleConfig}
+            config={showTitleConfig}
           />
         </RichContentViewerBox>
       </Section>

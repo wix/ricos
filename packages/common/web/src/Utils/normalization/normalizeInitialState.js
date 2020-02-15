@@ -22,18 +22,15 @@ const normalizeComponentData = (type, componentData, config) =>
 
 // TODO: create configNormalizers map and separate the IMAGE and VIDEO normalizers
 const normalizeComponentConfig = (entityType, componentData, config) => {
-  if (
-    entityType === GALLERY_TYPE &&
-    config?.config?.[entityType]?.displayTitleDefault !== undefined
-  ) {
+  if (entityType === GALLERY_TYPE && config?.config?.[entityType]?.showTitleDefault !== undefined) {
     const { items } = componentData;
-    const displayTitleDefault = config?.config?.[entityType]?.displayTitleDefault;
+    const showTitleDefault = config?.config?.[entityType]?.showTitleDefault;
     return {
       ...componentData,
-      items: items.map(item => ({ displayTitle: displayTitleDefault, ...item })),
+      items: items.map(item => ({ showTitle: showTitleDefault, ...item })),
       config: {
         ...componentData.config,
-        displayTitle: displayTitleDefault,
+        showTitle: showTitleDefault,
       },
     };
   } else {
