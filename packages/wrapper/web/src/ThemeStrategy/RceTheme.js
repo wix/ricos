@@ -100,10 +100,13 @@ export default class RceTheme {
 
       const pluginThemes = this.themeGenerators.reduce(
         (acc, curr) => ({
-          ...acc,
-          ...curr(colors),
+          theme: {
+            ...acc.theme,
+            ...curr.theme(colors),
+          },
+          defaultClasses: { ...acc.defaultClasses, ...curr.defaultClasses },
         }),
-        {}
+        { theme: {}, defaultClasses: {} }
       );
 
       const combinedTheme = Object.assign(
@@ -129,10 +132,10 @@ export default class RceTheme {
             color: secondaryColor,
           },
         },
-        pluginThemes
+        pluginThemes.theme
       );
 
-      return combinedTheme;
+      return { combinedTheme, defaultClasses: pluginThemes.defaultClasses };
       // action color:
       // hover on toolbar buttons
       // + button on the left

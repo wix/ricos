@@ -35,7 +35,8 @@ export default function themeStrategyProvider(isEditor, themeProperties) {
   if (typeof theme === 'string') {
     const rceTheme = new RceTheme(themeProperties);
     const { StyleSheet, css } = withNestedCssSupport();
-    const styles = StyleSheet.create(rceTheme.getStylesObject());
+    const { combinedTheme, defaultClasses } = rceTheme.getStylesObject();
+    const styles = StyleSheet.create(combinedTheme);
     // eslint-disable-next-line no-console
     //console.log({ styles });
     // const themeObj = {};
@@ -50,7 +51,7 @@ export default function themeStrategyProvider(isEditor, themeProperties) {
     }, {});
     // eslint-disable-next-line no-console
 
-    return createThemeStrategy({ ...defaultTheme, ...themeObj });
+    return createThemeStrategy({ ...defaultTheme, ...defaultClasses, ...themeObj });
   }
   return createThemeStrategy({ ...defaultTheme, ...theme });
 }
