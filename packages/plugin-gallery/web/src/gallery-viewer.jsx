@@ -170,6 +170,7 @@ class GalleryViewer extends React.Component {
     </Fragment>
   );
 
+
   handleContextMenu = e => this.props.disableRightClick && e.preventDefault();
 
   render() {
