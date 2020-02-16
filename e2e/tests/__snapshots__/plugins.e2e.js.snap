@@ -1335,10 +1335,10 @@ exports[`plugins > map > render map plugin toolbar and settings #0`] =
         },
         "mapSettings": {
           "address": "Wix HQ, Nemal Tel Aviv Street, Tel Aviv-Yafo, Israel",
-          "isDraggingAllowed": true,
+          "isDraggingAllowed": false,
           "isMarkerShown": true,
-          "isStreetViewControlShown": true,
-          "isZoomControlShown": true,
+          "isStreetViewControlShown": false,
+          "isZoomControlShown": false,
           "lat": 32.097235,
           "lng": 34.77427,
           "locationDisplayName": "Wix HQ, Nemal Tel Aviv Street, Tel Aviv-Yafo, Israel",
