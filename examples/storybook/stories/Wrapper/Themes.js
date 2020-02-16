@@ -11,6 +11,7 @@ import { pluginImage } from 'wix-rich-content-plugin-image';
 import { pluginGallery } from 'wix-rich-content-plugin-gallery';
 import { pluginButton } from 'wix-rich-content-plugin-button';
 import { pluginHashtag } from 'wix-rich-content-plugin-hashtag';
+import { pluginCodeBlock } from 'wix-rich-content-plugin-code-block';
 import SegmentedToggle from 'wix-style-react/SegmentedToggle';
 import FormField from 'wix-style-react/FormField';
 import { Layout } from 'wix-style-react/Layout';
@@ -23,6 +24,7 @@ const plugins = [
   pluginGallery(),
   pluginButton(),
   pluginHashtag(),
+  pluginCodeBlock(),
 ];
 
 export default () => {
@@ -71,6 +73,7 @@ class ThemeSelector extends React.Component {
             plugins={plugins}
             theme={'Palette'}
             palette={wixPalettes[selected]}
+            modalSupport
           >
             <RichContentEditor editorState={editorState} />
           </RichContentWrapper>
