@@ -12,6 +12,7 @@ import { pluginGallery } from 'wix-rich-content-plugin-gallery';
 import { pluginButton } from 'wix-rich-content-plugin-button';
 import { pluginHashtag } from 'wix-rich-content-plugin-hashtag';
 import { pluginCodeBlock } from 'wix-rich-content-plugin-code-block';
+import { pluginEmoji } from 'wix-rich-content-plugin-emoji';
 import SegmentedToggle from 'wix-style-react/SegmentedToggle';
 import FormField from 'wix-style-react/FormField';
 import { Layout } from 'wix-style-react/Layout';
@@ -25,6 +26,7 @@ const plugins = [
   pluginButton(),
   pluginHashtag(),
   pluginCodeBlock(),
+  pluginEmoji(),
 ];
 
 export default () => {
