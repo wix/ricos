@@ -16,8 +16,9 @@
 ### :bug: Bug Fix
 - `editor-common`
   - [#680](https://github.com/wix-incubator/rich-content/pull/680) dragging plugins from editor to address bar pastes media url
-
-
+- `gallery`
+  - [#690](https://github.com/wix-incubator/rich-content/pull/690) fix title and altText
+  
 </details>
 <hr/>
 
