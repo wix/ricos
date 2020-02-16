@@ -105,7 +105,7 @@ class ImageSettings extends Component {
     const showRelValueCheckbox =
       nofollowRelToggleVisibilityFn && nofollowRelToggleVisibilityFn(relValue);
 
-    const { metadata } = image || {};
+    const { metadata = {} } = image || {};
 
     const altText = typeof metadata.altText === 'string' ? metadata.altText : metadata.title;
     /* eslint-disable jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/click-events-have-key-events */
