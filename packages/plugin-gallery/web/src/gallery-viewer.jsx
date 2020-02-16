@@ -170,11 +170,11 @@ class GalleryViewer extends React.Component {
     </Fragment>
   );
 
-
   handleContextMenu = e => this.props.disableRightClick && e.preventDefault();
 
   render() {
     this.styles = this.styles || mergeStyles({ styles, theme: this.props.theme });
+
     const { scrollingElement, ...settings } = this.props.settings;
     const { styleParams, size = { width: 300 } } = this.state;
     const items = this.getItems();
