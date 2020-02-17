@@ -1,5 +1,5 @@
 export const configs = {
-  configFileUpload: {
+  fileUpload: {
     accept: '*',
     handleFileSelection: updateEntity => {
       const filenames = ['image.jpg', 'document.pdf', 'music.mp3'];
@@ -19,7 +19,7 @@ export const configs = {
       setTimeout(() => updateEntity({ data }), 500);
     },
   },
-  configGiphy: {
+  giphy: {
     giphySdkApiKey: process.env.GIPHY_API_KEY || 'HXSsAGVNzjeUjhKfhhD9noF8sIbpYDsV',
     sizes: { desktop: 'original', mobile: 'original' }, // original or downsizedSmall are supported
   },
