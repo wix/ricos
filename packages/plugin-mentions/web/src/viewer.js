@@ -1,7 +1,7 @@
 import typeMapper from './typeMapper';
-import { EXTERNAL_MENTIONS_TYPE } from './types';
+import { MENTION_TYPE } from './types';
 import { DEFAULTS } from './defaultSettings';
-export { EXTERNAL_MENTIONS_TYPE, typeMapper as mentionsTypeMapper };
+export { MENTION_TYPE, typeMapper as mentionsTypeMapper };
 
 /*
 Interface Mention {
@@ -25,7 +25,7 @@ Interface Settings {
 export const pluginMentions = (config = {}) => {
   return {
     config: { ...DEFAULTS.config, ...config },
-    type: EXTERNAL_MENTIONS_TYPE,
+    type: MENTION_TYPE,
     decorator: {},
     typeMapper,
   };
