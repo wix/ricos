@@ -1,2 +1,13 @@
-export { typeMapper as giphyTypeMapper } from './typeMapper';
-export { GIPHY_TYPE } from './constants';
+import { typeMapper } from './typeMapper';
+export { typeMapper as giphyTypeMapper };
+import { DEFAULTS, GIPHY_TYPE } from './constants';
+export { typeMapper as galleryTypeMapper, GIPHY_TYPE };
+
+export const pluginGiphy = (config = {}) => {
+  return {
+    config: { ...DEFAULTS.config, ...config },
+    type: GIPHY_TYPE,
+    typeMapper,
+    decorator: {},
+  };
+};
