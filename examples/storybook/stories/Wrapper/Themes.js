@@ -19,6 +19,7 @@ import SegmentedToggle from 'wix-style-react/SegmentedToggle';
 import FormField from 'wix-style-react/FormField';
 import { configs } from './pluginConfigs';
 import { Layout } from 'wix-style-react/Layout';
+import '../styles.global.scss';
 
 const editorState = createWithContent(convertFromRaw(exapmleState));
 const plugins = [
