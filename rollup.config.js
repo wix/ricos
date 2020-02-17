@@ -2,7 +2,7 @@
 
 import fs from 'fs';
 import { cloneDeep } from 'lodash';
-import plugins from './rollup.plugins';
+import plugins, { pluginsWrapper } from './rollup.plugins';
 import { isExternal as external } from './rollup.externals';
 
 if (!process.env.MODULE_NAME) {
@@ -80,10 +80,30 @@ try {
   };
 } catch (_) { }
 
+let wrapperEntry;
+try {
+  let wrapperPath = 'src/wrapper.js';
+  fs.accessSync(`./${wrapperPath}`);
+  wrapperEntry = {
+    input: wrapperPath,
+    output: cloneDeep(output).map(o => {
+      const anchor = o.file.indexOf('.');
+      o.file = addPartToFilename(o.file, 'wrapper');
+      return o;
+    }),
+    pluginsWrapper,
+    external,
+    watch,
+  };
+} catch (_) { }
+
 let config = [editorEntry];
 
 if (viewerEntry) {
   config.push(viewerEntry);
+}
+if (wrapperEntry) {
+  config.push(wrapperEntry);
 }
 if (libEntries) {
   config.push(libEntries);

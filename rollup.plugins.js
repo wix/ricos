@@ -90,6 +90,32 @@ const postcss = () => {
   });
 };
 
+const postcssWrapper = () => {
+  const postcss = require('rollup-plugin-postcss');
+  const postcssExclude = require('postcss-exclude-files').default;
+  const postcssURL = require('postcss-url');
+  const postcssRTL = require('postcss-rtl');
+  return postcss({
+    minimize: {
+      reduceIdents: false,
+      safe: true,
+    },
+    modules: {
+      generateScopedName: IS_DEV_ENV ? '[name]__[local]___[hash:base64:5]' : '[hash:base64:5]',
+    },
+    extract: false,
+    plugins: [
+      postcssExclude({
+        filter: '**/*.rtlignore.scss',
+        plugins: [postcssRTL()],
+      }),
+      postcssURL({
+        url: asset => asset.url.replace('../', '/statics/'),
+      }),
+    ],
+  });
+};
+
 const replace = () => {
   const replacePlugin = require('rollup-plugin-replace');
   return replacePlugin({
@@ -116,13 +142,17 @@ const visualizer = () => {
 };
 
 let plugins = [svgr(), resolve(), copy(), babel(), commonjs(), json(), postcss()];
+let pluginsWrapper = [svgr(), resolve(), copy(), babel(), commonjs(), json(), postcssWrapper()];
 
 if (!IS_DEV_ENV) {
   plugins = [...plugins, replace(), uglify()];
+  pluginsWrapper = [...pluginsWrapper, replace(), uglify()];
 }
 
 if (process.env.MODULE_ANALYZE) {
   plugins = [...plugins, visualizer()];
+  pluginsWrapper = [...pluginsWrapper, visualizer()];
 }
 
 export default plugins;
+export { pluginsWrapper };
