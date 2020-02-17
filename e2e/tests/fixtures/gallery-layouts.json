@@ -3,7 +3,7 @@
       {
         "key": "foo",
         "text": "Grid",
-        "type": "unstyled",
+        "type": "header-three",
         "depth": 0,
         "inlineStyleRanges": [
           {
@@ -33,7 +33,7 @@
       {
         "key": "5i40q",
         "text": "Masonry",
-        "type": "unstyled",
+        "type": "header-three",
         "depth": 0,
         "inlineStyleRanges": [
           {
@@ -63,7 +63,7 @@
       {
         "key": "arj4t",
         "text": "Collage",
-        "type": "unstyled",
+        "type": "header-three",
         "depth": 0,
         "inlineStyleRanges": [
           {
@@ -93,7 +93,7 @@
       {
         "key": "c4fe0",
         "text": "Thumbnails",
-        "type": "unstyled",
+        "type": "header-three",
         "depth": 0,
         "inlineStyleRanges": [
           {
@@ -123,7 +123,7 @@
       {
         "key": "f9ikb",
         "text": "Slideshow",
-        "type": "unstyled",
+        "type": "header-three",
         "depth": 0,
         "inlineStyleRanges": [
           {
@@ -153,7 +153,7 @@
       {
         "key": "agvb6",
         "text": "Panorama",
-        "type": "unstyled",
+        "type": "header-three",
         "depth": 0,
         "inlineStyleRanges": [
           {
@@ -183,7 +183,7 @@
       {
         "key": "bpth4",
         "text": "Columns",
-        "type": "unstyled",
+        "type": "header-three",
         "depth": 0,
         "inlineStyleRanges": [
           {
@@ -213,7 +213,7 @@
       {
         "key": "1bkd",
         "text": "Slider",
-        "type": "unstyled",
+        "type": "header-three",
         "depth": 0,
         "inlineStyleRanges": [
           {
