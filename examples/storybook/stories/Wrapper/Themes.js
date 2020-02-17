@@ -17,6 +17,7 @@ import { pluginHeadersMarkdown } from 'wix-rich-content-plugin-headers-markdown'
 import { pluginHtml } from 'wix-rich-content-plugin-html';
 import { pluginImage } from 'wix-rich-content-plugin-image';
 import { pluginLineSpacing } from 'wix-rich-content-plugin-line-spacing';
+import { pluginLink } from 'wix-rich-content-plugin-link';
 import SegmentedToggle from 'wix-style-react/SegmentedToggle';
 import FormField from 'wix-style-react/FormField';
 import { configs } from './pluginConfigs';
@@ -37,6 +38,7 @@ const plugins = [
   pluginImage(),
   pluginHeadersMarkdown(),
   pluginLineSpacing(),
+  pluginLink(),
 ];
 
 export default () => {
