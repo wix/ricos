@@ -200,20 +200,20 @@ describe('plugins', () => {
       cy.eyesCheckWindow(this.test.title);
     });
 
-    it('enable to add a video from URI', function() {
-      cy.openVideoUploadModal().addVideoFromURI();
+    it('add a video from URL', function() {
+      cy.openVideoUploadModal().addVideoFromURL();
       cy.shrinkPlugin();
       cy.waitForVideoToLoad();
       cy.focusEditor().enterParagraphs(['Will this fix the flakiness?']);
       cy.eyesCheckWindow(this.test.title);
     });
 
-    // TODO: remove skip once custom mock upload is stablized
-    // eslint-disable-next-line mocha/no-skipped-tests
-    it.skip('enable to add a custom video', function() {
+    it('add a custom video', function() {
       cy.openVideoUploadModal().addCustomVideo();
-      cy.waitForVideoToLoad();
       cy.shrinkPlugin();
+      cy.waitForVideoToLoad();
+      cy.focusEditor().enterParagraphs(['Will this fix the flakiness?']);
+
       cy.eyesCheckWindow(this.test.title);
     });
   });
@@ -232,7 +232,7 @@ describe('plugins', () => {
       cy.eyesCheckWindow(this.test.title);
     });
 
-    it('enable to add a soundcloud URI', function() {
+    it('add a soundcloud URL', function() {
       cy.openSoundCloudModal().addSoundCloud();
       cy.waitForVideoToLoad();
       cy.shrinkPlugin();
