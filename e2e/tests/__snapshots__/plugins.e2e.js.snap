@@ -2760,7 +2760,7 @@ exports[`plugins > video > add a custom video #0`] =
       "entityRanges": [],
       "inlineStyleRanges": [],
       "key": 0,
-      "text": "",
+      "text": "Will this fix the flakiness?",
       "type": "unstyled"
     },
     {
@@ -2797,10 +2797,10 @@ exports[`plugins > video > add a custom video #0`] =
         },
         "isCustomVideo": true,
         "src": {
-          "pathname": "video/0d72ac_7c7a5b89485a4062ba36ed97b6ac9615/1080p/mp4/file.mp4",
+          "pathname": "video/11062b_a552731f40854d16a91627687fb8d1a6/1080p/mp4/file.mp4",
           "thumbnail": {
             "height": 1080,
-            "pathname": "media/0d72ac_7c7a5b89485a4062ba36ed97b6ac9615f000.jpg",
+            "pathname": "media/11062b_a552731f40854d16a91627687fb8d1a6f000.jpg",
             "width": 1920
           }
         }
