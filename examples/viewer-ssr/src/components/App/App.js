@@ -38,7 +38,7 @@ class App extends Component {
     this.md = null;
     try {
       this.md = new MobileDetect(window.navigator.userAgent);
-    } catch (e) {}
+    } catch (e) { }
     this.initViewerProps();
     this.styles = mergeStyles({ styles, theme });
     this.state = {
@@ -147,15 +147,15 @@ class App extends Component {
               </div>
             </div>
           ) : (
-            <select
-              id="testData"
-              name="testData"
-              onChange={() => this.handleContentChange(this)}
-              value={this.state.testDataKey}
-            >
-              {contentOptions}
-            </select>
-          )}
+              <select
+                id="testData"
+                name="testData"
+                onChange={() => this.handleContentChange(this)}
+                value={this.state.testDataKey}
+              >
+                {contentOptions}
+              </select>
+            )}
           <div className={styles.content}>
             <RichContentViewer
               helpers={this.helpers}
