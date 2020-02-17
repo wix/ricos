@@ -5,8 +5,8 @@ try {
   privateConfig = require('./applitools.private.config.js');
 } catch (e) {}
 
-function getHeadHash() {
-  return execSync('git rev-parse --verify HEAD')
+function getBranchName() {
+  return execSync('git rev-parse --abbrev-ref HEAD')
     .toString()
     .trim();
 }
@@ -14,6 +14,8 @@ function getHeadHash() {
 module.exports = {
   ...privateConfig,
   concurrency: 200,
-  batchId: getHeadHash(),
   dontCloseBatches: true,
+  batchName: `LOCAL - ${getBranchName()}`,
+  parentBranchName: 'wix-incubator/rich-content/master',
+  branchName: `wix-incubator/rich-content/${getBranchName()}`,
 };

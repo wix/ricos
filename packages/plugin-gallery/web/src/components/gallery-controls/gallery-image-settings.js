@@ -25,8 +25,10 @@ class ImageSettings extends Component {
     this.headerLabel = t('GalleryImageSettings_Header');
     this.ReplaceLabel = t('GalleryImageSettings_Replace_Label');
     this.deleteLabel = t('GalleryImageSettings_Delete_Label');
-    this.titleLabel = t('GalleryImageSettings_Title_Label');
-    this.titleInputPlaceholder = t('GalleryImageSettings_Title_Input_Placeholder');
+    this.titleLabel = t('ImageSettings_Caption_Label');
+    this.titleInputPlaceholder = t('ImageSettings_Caption_Input_Placeholder');
+    this.altTextLabel = t('ImageSettings_Alt_Label');
+    this.altTextPlaceholder = t('ImageSettings_Alt_Input_Placeholder');
     this.linkLabel = t('GalleryImageSettings_Link_Label');
   }
 
@@ -47,7 +49,8 @@ class ImageSettings extends Component {
       240
     );
 
-  onInputWithLabelChange = event => this.props.onUpdateImage({ title: event.target.value });
+  onTitleChange = event => this.props.onUpdateImage({ title: event.target.value });
+  onAltTextChange = event => this.props.onUpdateImage({ altText: event.target.value });
 
   onLinkPanelChange = linkPanelValues => {
     this.props.onUpdateImage({ link: this.linkPanelToLink(linkPanelValues) });
@@ -102,8 +105,9 @@ class ImageSettings extends Component {
     const showRelValueCheckbox =
       nofollowRelToggleVisibilityFn && nofollowRelToggleVisibilityFn(relValue);
 
-    const { metadata } = image || {};
+    const { metadata = {} } = image || {};
 
+    const altText = typeof metadata.altText === 'string' ? metadata.altText : metadata.title;
     /* eslint-disable jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/click-events-have-key-events */
     return (
       <FocusManager className={styles.galleryImageSettings}>
@@ -212,13 +216,20 @@ class ImageSettings extends Component {
                 >
                   <InputWithLabel
                     theme={theme}
-                    id="galleryImageTitleInput"
                     label={this.titleLabel}
                     placeholder={this.titleInputPlaceholder}
                     value={metadata.title || ''}
                     maxLength={30}
                     dataHook="galleryImageTitleInput"
-                    onChange={this.onInputWithLabelChange}
+                    onChange={this.onTitleChange}
+                  />
+                  <InputWithLabel
+                    theme={theme}
+                    label={this.altTextLabel}
+                    placeholder={this.altTextPlaceholder}
+                    value={altText}
+                    dataHook="galleryImageAltTextInput"
+                    onChange={this.onAltTextChange}
                   />
                 </SettingsSection>
                 <SettingsSection
