@@ -13,13 +13,16 @@
     Click to see more.
   </summary>
 
+</details>
+<hr/>
+
+## 6.8.5 (Feb 17, 2020)
 ### :bug: Bug Fix
 - `editor-common`
   - [#680](https://github.com/wix-incubator/rich-content/pull/680) dragging plugins from editor to address bar pastes media url
-
-
-</details>
-<hr/>
+- `gallery`
+  - [#690](https://github.com/wix-incubator/rich-content/pull/690) fix title and altText
+  
 
 ## 6.8.4 (Feb 12, 2020)
 ### :bug: Bug Fix

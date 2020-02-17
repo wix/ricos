@@ -9,7 +9,8 @@ import { normalizeUrl } from 'wix-rich-content-common';
  */
 export const convertItemData = ({ items, anchorTarget, relValue }) =>
   items.map(item => {
-    if (item.metaData) {
+    const { metadata, metaData } = item;
+    if (metaData) {
       return item;
     }
 
@@ -23,14 +24,16 @@ export const convertItemData = ({ items, anchorTarget, relValue }) =>
       directLink: {},
     };
 
-    if (item.metadata) {
+    if (metadata) {
       convertedData.metaData = {
-        ...item.metadata,
+        ...metadata,
         link: {
           type: 'none',
           target: '_blank',
         },
       };
+      convertedData.metaData.title = metadata.altText; //*** HACK *** title over takes description for altText. So save altText in title, but render the description in the tile
+      convertedData.metaData.description = metadata.title;
       if (item.metadata.link) {
         convertedData.metaData.link = {
           type: 'wix',
