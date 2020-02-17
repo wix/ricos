@@ -20,6 +20,7 @@ import { pluginLineSpacing } from 'wix-rich-content-plugin-line-spacing';
 import { pluginLink } from 'wix-rich-content-plugin-link';
 import { pluginMap } from 'wix-rich-content-plugin-map';
 import { pluginMentions } from 'wix-rich-content-plugin-mentions';
+import { pluginSoundCloud } from 'wix-rich-content-plugin-sound-cloud';
 import SegmentedToggle from 'wix-style-react/SegmentedToggle';
 import FormField from 'wix-style-react/FormField';
 import { configs } from './pluginConfigs';
@@ -43,6 +44,7 @@ const plugins = [
   pluginLink(),
   pluginMap({ googleMapApiKey: process.env.GOOGLE_MAPS_API_KEY }),
   pluginMentions(),
+  pluginSoundCloud(),
 ];
 
 export default () => {
