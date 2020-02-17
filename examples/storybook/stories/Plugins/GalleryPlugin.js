@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { RichContentEditor, convertFromRaw, createWithContent } from 'wix-rich-content-editor';
 import { RichContentViewer } from 'wix-rich-content-viewer';
 
@@ -15,54 +15,85 @@ import {
   Section,
   Page,
 } from '../Components/StoryParts';
+import Fullscreen from 'wix-rich-content-fullscreen';
+import getImagesData from 'wix-rich-content-fullscreen/src/lib/getImagesData';
 
-const helpers = {
-  onExpand: (entityIndex, innerIndex = 0) => {
-    //galleries have an innerIndex (i.e. second image will have innerIndex=1)
-    console.log('on exapnd', entityIndex, innerIndex); //eslint-disable-line
-  },
-};
 const typeMappers = [galleryTypeMapper];
 const editorStateV5 = createWithContent(convertFromRaw(fixtrueV5));
 const editorStateV6 = createWithContent(convertFromRaw(fixtrueV6));
+const expandModeData = getImagesData(fixtrueV5);
+const editorPlugins = [pluginGalleryEditor()];
+
 export default () => {
-  const editorPlugins = [pluginGalleryEditor()];
-  return (
-    <Page title="Gallery Plugin">
-      <h3>With v6 contentState</h3>
+  class GalleryPlugin extends Component {
+    constructor(props) {
+      super(props);
+      this.state = {};
+    }
 
-      <Section type={Section.Types.COMPARISON}>
-        <RichContentEditorBox preset="blog-preset">
-          <RichContentWrapper plugins={editorPlugins}>
-            <RichContentEditor editorState={editorStateV6} />
-          </RichContentWrapper>
-        </RichContentEditorBox>
-        <RichContentViewerBox preset="blog-preset">
-          {/* <RichContentWrapper plugins={[pluginGalleryViewer()]}> */}
-          <RichContentViewer initialState={fixtrueV6} helpers={helpers} typeMappers={typeMappers} />
-        </RichContentViewerBox>
-      </Section>
+    render() {
+      const { expendModeIsOpen, expandModeIndex } = this.state;
+      const helpers = {
+        onExpand: (entityIndex, innerIndex = 0) => {
+          //galleries have an innerIndex (i.e. second image will have innerIndex=1)
+          this.setState({
+            expendModeIsOpen: true,
+            expandModeIndex: expandModeData.imageMap[entityIndex] + innerIndex,
+          });
+        },
+      };
+      return (
+        <Page title="Gallery Plugin">
+          <h3>With v6 contentState</h3>
 
-      <Section title="Content State">
-        <ContentState json={fixtrueV6} />
-      </Section>
+          <Section type={Section.Types.COMPARISON}>
+            <RichContentEditorBox preset="blog-preset">
+              <RichContentWrapper plugins={editorPlugins}>
+                <RichContentEditor editorState={editorStateV6} />
+              </RichContentWrapper>
+            </RichContentEditorBox>
+            <RichContentViewerBox preset="blog-preset">
+              {/* <RichContentWrapper plugins={[pluginGalleryViewer()]}> */}
+              <RichContentViewer
+                initialState={fixtrueV6}
+                helpers={helpers}
+                typeMappers={typeMappers}
+              />
+            </RichContentViewerBox>
+          </Section>
 
-      <h3>With v5 contentState:</h3>
-      <Section type={Section.Types.COMPARISON}>
-        <RichContentEditorBox preset="blog-preset">
-          <RichContentWrapper plugins={editorPlugins}>
-            <RichContentEditor editorState={editorStateV5} />
-          </RichContentWrapper>
-        </RichContentEditorBox>
-        <RichContentViewerBox preset="blog-preset">
-          {/* <RichContentWrapper plugins={[pluginGalleryViewer()]}> */}
-          <RichContentViewer initialState={fixtrueV5} helpers={helpers} typeMappers={typeMappers} />
-        </RichContentViewerBox>
-      </Section>
+          <Section title="Content State">
+            <ContentState json={fixtrueV6} />
+          </Section>
 
-      <Section title="Content State">
-        <ContentState json={fixtrueV5} />
-      </Section>
-    </Page>
-  );
+          <h3>With v5 contentState:</h3>
+          <Section type={Section.Types.COMPARISON}>
+            <RichContentEditorBox preset="blog-preset">
+              <RichContentWrapper plugins={editorPlugins}>
+                <RichContentEditor editorState={editorStateV5} />
+              </RichContentWrapper>
+            </RichContentEditorBox>
+            <RichContentViewerBox preset="blog-preset">
+              {/* <RichContentWrapper plugins={[pluginGalleryViewer()]}> */}
+              <RichContentViewer
+                initialState={fixtrueV5}
+                helpers={helpers}
+                typeMappers={typeMappers}
+              />
+            </RichContentViewerBox>
+          </Section>
+          <Fullscreen
+            isOpen={expendModeIsOpen}
+            images={expandModeData.images}
+            onClose={() => this.setState({ expendModeIsOpen: false })}
+            index={expandModeIndex}
+          />
+          <Section title="Content State">
+            <ContentState json={fixtrueV5} />
+          </Section>
+        </Page>
+      );
+    }
+  }
+  return <GalleryPlugin />;
 };
