@@ -138,7 +138,9 @@ class ImageViewer extends React.Component {
 
   onImageLoad = e => {
     e.target.style.opacity = 1;
-    this.preloadRef.current.style.opacity = 0;
+    if (this.preloadRef.current) {
+      this.preloadRef.current.style.opacity = 0;
+    }
   };
 
   renderLoader() {
