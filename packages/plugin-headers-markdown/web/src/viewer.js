@@ -3,7 +3,7 @@ import { HEADERS_MARKDOWN_TYPE } from './types';
 import { DEFAULTS } from './defaults';
 
 export const pluginHeadersMarkdown = (config = {}) => {
-  const finalConfig = { ...DEFAULTS.config, ...config };
+  const finalConfig = { ...DEFAULTS.configViewer, ...config };
   return {
     config: finalConfig,
     type: HEADERS_MARKDOWN_TYPE,

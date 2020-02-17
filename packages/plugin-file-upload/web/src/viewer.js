@@ -5,7 +5,7 @@ import { DEFAULTS } from './consts';
 
 export const pluginFileUpload = (config = {}) => {
   return {
-    config: { ...DEFAULTS.config, ...config },
+    config: { ...DEFAULTS.configViewer, ...config },
     type: FILE_UPLOAD_TYPE,
     typeMapper,
     decorator: {},

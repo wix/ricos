@@ -5,7 +5,7 @@ export { typeMapper as galleryTypeMapper, GIPHY_TYPE };
 
 export const pluginGiphy = (config = {}) => {
   return {
-    config: { ...DEFAULTS.config, ...config },
+    config: { ...DEFAULTS.configViewer, ...config },
     type: GIPHY_TYPE,
     typeMapper,
     decorator: {},

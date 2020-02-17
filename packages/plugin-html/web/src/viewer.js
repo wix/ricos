@@ -5,7 +5,7 @@ export { typeMapper as htmlTypeMapper, HTML_TYPE };
 
 export const pluginHtml = (config = {}) => {
   return {
-    config: { ...DEFAULTS.config, ...config },
+    config: { ...DEFAULTS.configViewer, ...config },
     type: HTML_TYPE,
     typeMapper,
     decorator: {},
