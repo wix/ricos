@@ -41,7 +41,7 @@ Section.propTypes = {
 export const RichContentEditorBox = ({ children, preset, title }) => {
   return (
     <div className={`${styles[preset || '']}`}>
-      {title && <h2>Editor!</h2>}
+      {title && <h2>Editor</h2>}
       <div className={styles.rceWrapper}>{children}</div>
     </div>
   );
