@@ -21,6 +21,7 @@ class ImageViewer extends React.Component {
     super(props);
     validate(props.componentData, pluginImageSchema);
     this.state = {};
+    this.preloadRef = React.createRef();
   }
 
   componentDidMount() {
@@ -130,12 +131,14 @@ class ImageViewer extends React.Component {
         alt={alt}
         onError={this.onImageLoadError}
         onLoad={fadeIn ? e => this.onImageLoad(e) : undefined}
+        ref={fadeIn ? undefined : this.preloadRef}
       />
     );
   }
 
   onImageLoad = e => {
     e.target.style.opacity = 1;
+    this.preloadRef.current.style.opacity = 0;
   };
 
   renderLoader() {
