@@ -5,16 +5,17 @@ import Palette from '../Components/Palette';
 import { wixPalettes } from '../palettesExample';
 import { RichContentEditor, convertFromRaw, createWithContent } from 'wix-rich-content-editor';
 import { RichContentWrapper } from 'wix-rich-content-wrapper';
-import { pluginDivider } from 'wix-rich-content-plugin-divider';
-import { pluginHtml } from 'wix-rich-content-plugin-html';
-import { pluginImage } from 'wix-rich-content-plugin-image';
-import { pluginGallery } from 'wix-rich-content-plugin-gallery';
 import { pluginButton } from 'wix-rich-content-plugin-button';
-import { pluginHashtag } from 'wix-rich-content-plugin-hashtag';
 import { pluginCodeBlock } from 'wix-rich-content-plugin-code-block';
+import { pluginDivider } from 'wix-rich-content-plugin-divider';
 import { pluginEmoji } from 'wix-rich-content-plugin-emoji';
 import { pluginFileUpload } from 'wix-rich-content-plugin-file-upload';
+import { pluginGallery } from 'wix-rich-content-plugin-gallery';
 import { pluginGiphy } from 'wix-rich-content-plugin-giphy';
+import { pluginHashtag } from 'wix-rich-content-plugin-hashtag';
+import { pluginHtml } from 'wix-rich-content-plugin-html';
+import { pluginImage } from 'wix-rich-content-plugin-image';
+import { pluginHeadersMarkdown } from 'wix-rich-content-plugin-headers-markdown';
 import SegmentedToggle from 'wix-style-react/SegmentedToggle';
 import FormField from 'wix-style-react/FormField';
 import { configs } from './pluginConfigs';
@@ -23,16 +24,17 @@ import '../styles.global.scss';
 
 const editorState = createWithContent(convertFromRaw(exapmleState));
 const plugins = [
-  pluginDivider(),
-  pluginHtml(),
-  pluginImage(),
-  pluginGallery(),
   pluginButton(),
-  pluginHashtag(),
   pluginCodeBlock(),
+  pluginDivider(),
   pluginEmoji(),
   pluginFileUpload(configs.configFileUpload),
+  pluginGallery(),
   pluginGiphy(configs.configGiphy),
+  pluginHashtag(),
+  pluginHtml(),
+  pluginImage(),
+  pluginHeadersMarkdown(),
 ];
 
 export default () => {
