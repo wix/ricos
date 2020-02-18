@@ -23,10 +23,10 @@ describe('ThemeStrategyProvider', () => {
     expect(getType(emptyResult.theme.modalTheme)).toBe('object');
   });
 
-  it('should enable inner props to override theme', () => {
-    const defaultOverrider = {
+  it('should set inner props to override the default theme', () => {
+    const overrider = {
       theme: { modalTheme: 1 },
     };
-    expect(driver.runStrategy()(defaultOverrider).theme.modalTheme).toBe(1);
+    expect(driver.runStrategy()(overrider).theme.modalTheme).toBe(1);
   });
 });
