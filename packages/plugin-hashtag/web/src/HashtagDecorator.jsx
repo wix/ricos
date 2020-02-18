@@ -8,7 +8,7 @@ export default (hasLinksInBlock, immutableList) =>
       this.componentProps = componentProps;
     }
 
-    getDecorations(block, contentState) {
+    getDecorations(block /*, contentState*/) {
       const key = block.getKey();
       const text = block.getText();
       const type = block.getType();
@@ -17,7 +17,7 @@ export default (hasLinksInBlock, immutableList) =>
       if (
         type !== 'code-block' &&
         text &&
-        !hasLinksInBlock(block, contentState) &&
+        //!hasLinksInBlock(block, contentState) &&
         text.match(hashtagRegexes.hashSigns)
       ) {
         text.replace(
