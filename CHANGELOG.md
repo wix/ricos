@@ -14,13 +14,18 @@
   </summary>
 
 ### :bug: Bug Fix
+- `image`
+  - [#696](https://github.com/wix-incubator/rich-content/pull/696) fix images with transparency show shadow outline
+</details>
+<hr/>
+
+## 6.8.5 (Feb 17, 2020)
+### :bug: Bug Fix
 - `editor-common`
   - [#680](https://github.com/wix-incubator/rich-content/pull/680) dragging plugins from editor to address bar pastes media url
 - `gallery`
   - [#690](https://github.com/wix-incubator/rich-content/pull/690) fix title and altText
   
-</details>
-<hr/>
 
 ## 6.8.4 (Feb 12, 2020)
 ### :bug: Bug Fix
