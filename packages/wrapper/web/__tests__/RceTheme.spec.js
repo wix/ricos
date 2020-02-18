@@ -4,9 +4,9 @@ import { wixPalettes } from '../src/palettesExample';
 import { pluginHashtag } from '../../../plugin-hashtag/web/src/editor';
 
 describe('RceTheme', () => {
-  //it('should be green at the moment', () => expect(true).toBe(true));
   const driver = {
-    create: (themeType, palette) => new RceTheme({ theme: themeType, palette }),
+    create: (themeType, palette, themeGenerators) =>
+      new RceTheme({ theme: themeType, palette, themeGenerators }),
   };
 
   describe('constructor', () => {
@@ -41,7 +41,7 @@ describe('RceTheme', () => {
       const rceTheme = driver.create(Themes.PALETTE, wixPalettes.site1, [pluginHashtag().theme]);
       const styleObj = rceTheme.getStylesObject();
 
-      //expect(styleObj.hashtag.color).toBe('#FA6400');
+      expect(styleObj.hashtag.color).toBe('#FA6400');
       expect(styleObj.editor.color).toBe('#414141');
       expect(styleObj.editor.background).toBe('#FFFFFF');
     });
