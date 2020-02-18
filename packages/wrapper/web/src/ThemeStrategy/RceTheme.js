@@ -45,17 +45,14 @@ const ACTION_COLOR = 18;
 //   },
 // };
 export default class RceTheme {
-  constructor({ theme = 'Default', palette, themeGenerators = [] }) {
+  constructor({ theme = 'Default', palette, themeGenerators = [] }, isEditor = false) {
     this.setTheme(theme, palette);
     this.themeGenerators = themeGenerators;
+    this.isEditor = isEditor;
   }
 
   setTheme(theme, palette) {
     if (SUPPORTED_THEMES.indexOf(theme) === -1) {
-      // eslint-disable-next-line no-console
-      console.log(theme);
-      // eslint-disable-next-line no-console
-      console.error('Unknown theme: ', theme);
       this._theme = Themes.DEFAULT;
     } else {
       this._theme = theme;

@@ -1,4 +1,3 @@
-//import React from 'react';
 import RceTheme, { Themes } from '../src/ThemeStrategy/RceTheme.js';
 import { wixPalettes } from '../src/palettesExample';
 import { pluginHashtag } from '../../../plugin-hashtag/web/src/editor';

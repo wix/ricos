@@ -33,7 +33,7 @@ const withNestedCssSupport = () =>
 export default function themeStrategyProvider(isEditor, themeProperties) {
   const { theme } = themeProperties;
   if (typeof theme === 'string') {
-    const rceTheme = new RceTheme(themeProperties);
+    const rceTheme = new RceTheme(themeProperties, isEditor);
     const { StyleSheet, css } = withNestedCssSupport();
     const styles = StyleSheet.create(rceTheme.getStylesObject());
     // eslint-disable-next-line no-console
