@@ -6,8 +6,8 @@ import { galleryTypeMapper } from 'wix-rich-content-plugin-gallery/dist/module.v
 import { pluginGallery as pluginGalleryEditor } from 'wix-rich-content-plugin-gallery';
 import { RichContentWrapper } from 'wix-rich-content-wrapper';
 
-import fixtrueV5 from '../../../../e2e/tests/fixtures/blog-v5-gallery.json';
-import fixtrueV6 from '../../../../e2e/tests/fixtures/blog-v6-gallery.json';
+import fixtrue from '../../../../e2e/tests/fixtures/gallery-with-title-and-link.json';
+
 import {
   RichContentEditorBox,
   RichContentViewerBox,
@@ -17,6 +17,9 @@ import {
 } from '../Components/StoryParts';
 import Fullscreen from 'wix-rich-content-fullscreen';
 import getImagesData from 'wix-rich-content-fullscreen/src/lib/getImagesData';
+
+const fixtrueV5 = { ...fixtrue, VERSION: '5.9.9' };
+const fixtrueV6 = { ...fixtrue, VERSION: '6.0.1' };
 
 const typeMappers = [galleryTypeMapper];
 const editorStateV5 = createWithContent(convertFromRaw(fixtrueV5));
