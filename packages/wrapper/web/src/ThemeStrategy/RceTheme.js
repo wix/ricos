@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 const Themes = {
   DEFAULT: 'Default',
   BACK_OFFICE: 'BackOffice',
@@ -44,7 +45,7 @@ const ACTION_COLOR = 18;
 //   },
 // };
 export default class RceTheme {
-  constructor({ theme, palette, themeGenerators }) {
+  constructor({ theme = 'Default', palette, themeGenerators = [] }) {
     this.setTheme(theme, palette);
     this.themeGenerators = themeGenerators;
   }
@@ -79,10 +80,6 @@ export default class RceTheme {
   }
 
   getStylesObject() {
-    // const pluginThemes = this.themeGenerators.reduce(
-    //   (acc, themeGenerator) => ({ ...acc, ...themeGenerator(theme, palette) }),
-    //   {}
-    // );
     if (this._theme === Themes.DEFAULT) {
       return {};
     } else {

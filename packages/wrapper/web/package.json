@@ -42,16 +42,28 @@
   "devDependencies": {
     "@babel/runtime": "7.2.0",
     "babel-jest": "^25.1.0",
+    "jest": "^25.1.0",
     "classnames": "^2.0.0",
     "cross-env": "^5.2.0",
     "draft-js": "0.11.2",
     "eslint": "^6.1.0",
-    "jest": "^25.1.0",
     "lodash": "^4.17.15",
     "prop-types": "^15.6.2",
     "react": "16.6.3",
     "react-dom": "16.6.3",
     "rollup": "1.31.1"
+  },
+  "jest": {
+    "globals": {
+      "NODE_ENV": "test"
+    },
+    "transform": {
+      "^.+\\.jsx?$": "<rootDir>/../../../babel.jest.monorepo.js"
+    },
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|svg)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(css|scss)$": "<rootDir>/__mocks__/styleMock.js"
+    }
   },
   "dependencies": {
     "react-modal": "~3.1.11",
