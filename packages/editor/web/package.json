@@ -54,7 +54,7 @@
   },
   "devDependencies": {
     "@babel/runtime": "7.2.0",
-    "babel-jest": "^23.6.0",
+    "babel-jest": "^25.1.0",
     "classnames": "^2.0.0",
     "cross-env": "^5.2.0",
     "draft-js": "0.11.2",
@@ -67,7 +67,7 @@
     "react": "16.6.3",
     "react-dom": "16.6.3",
     "react-test-renderer": "16.6.3",
-    "rollup": "1.20.3"
+    "rollup": "1.31.1"
   },
   "unpkg": true,
   "publishConfig": {
