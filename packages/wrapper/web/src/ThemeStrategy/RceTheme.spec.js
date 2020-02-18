@@ -22,7 +22,6 @@ describe('RceTheme', () => {
         driver.create(Themes.PALETTE);
       } catch (e) {
         expect(e.message === 'AAAArgh!');
-        //console.log(e.message === 'AAAArgh!');
       }
     });
 
@@ -37,7 +36,6 @@ describe('RceTheme', () => {
     it('should create theme object', () => {
       const rceTheme = driver.create(Themes.PALETTE, wixPalettes.site1);
       const styleObj = rceTheme.getStylesObject();
-      expect(styleObj.hashtag.color).toBe('#FA6400');
       expect(styleObj.editor.color).toBe('#414141');
       expect(styleObj.editor.background).toBe('#FFFFFF');
     });

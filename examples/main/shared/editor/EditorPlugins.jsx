@@ -104,7 +104,7 @@ let userButtonBorderColors = [...buttonDefaultPalette];
 
 const getLinkPanelDropDownConfig = () => {
   const getItems = () => {
-    casual.define('item', function() {
+    casual.define('item', function () {
       return {
         value: casual.url,
         label: casual.catch_phrase,
@@ -177,16 +177,14 @@ const videoHandlers = {
   //media manager - Here you can call your custom video upload functionality (comment function to disable custom upload)
   handleFileSelection: (updateEntity, removeEntity) => {
     console.log('consumer wants to upload custom video');
-    const mockVideoIndex = Math.floor(Math.random() * testWixVideos.length);
-    const testVideo = testWixVideos[mockVideoIndex];
     const videoWithAbsoluteUrl = {
       url:
         'https://video.wixstatic.com/video/11062b_a552731f40854d16a91627687fb8d1a6/1080p/mp4/file.mp4',
     };
     const videoWithRelativeUrl = {
-      pathname: `video/${testVideo.url}/1080p/mp4/file.mp4`,
+      pathname: `video/11062b_a552731f40854d16a91627687fb8d1a6/1080p/mp4/file.mp4`,
       thumbnail: {
-        pathname: `media/${testVideo.metadata.posters[0].url}`,
+        pathname: `media/11062b_a552731f40854d16a91627687fb8d1a6f000.jpg`,
         height: 1080,
         width: 1920,
       },

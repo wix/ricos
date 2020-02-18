@@ -74,3 +74,5 @@ export const DesktopFlyOutModalStyles = Object.freeze({
     paddingTop: '20px',
   },
 });
+
+export const DEFAULT_CONFIG = {};

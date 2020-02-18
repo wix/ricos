@@ -20,7 +20,7 @@
   },
   "devDependencies": {
     "chai": "~4.1.0",
-    "husky": "~0.14.0",
+    "husky": "^1.0.0-rc.6",
     "jsdom": "~11.2.0",
     "jsdom-global": "~3.0.0",
     "lint-staged": "^7.2.2",
@@ -46,7 +46,7 @@
     "react-json-editor-ajrm": "^2.5.3",
     "react-modal": "^3.5.1",
     "regenerator-runtime": "^0.11.0",
-    "serialize-javascript": "~2.1.1",
+    "serialize-javascript": "~2.1.2",
     "wix-axios-config": "latest",
     "wix-bootstrap-ng": "latest",
     "wix-express-csrf": "latest",

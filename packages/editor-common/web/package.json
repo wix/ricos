@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-editor-common",
-  "version": "6.8.4",
+  "version": "6.8.5",
   "author": {
     "name": "Matan Harsat",
     "email": "matanha@wix.com"
@@ -41,18 +41,18 @@
   },
   "devDependencies": {
     "@babel/runtime": "7.2.0",
-    "babel-jest": "^23.6.0",
+    "babel-jest": "^25.1.0",
     "classnames": "^2.0.0",
     "cross-env": "^5.2.0",
     "deep-freeze": "0.0.1",
     "draft-js": "0.11.2",
     "eslint": "^6.1.0",
-    "jest": "^23.1.0",
+    "jest": "^25.1.0",
     "lodash": "^4.17.15",
     "prop-types": "^15.6.2",
     "react": "16.6.3",
     "react-dom": "16.6.3",
-    "rollup": "1.20.3"
+    "rollup": "1.31.1"
   },
   "dependencies": {
     "downshift": "3.1.12",
@@ -65,7 +65,7 @@
     "react-measure": "~2.3.0",
     "react-tooltip": "~3.11.0",
     "react-window": "~1.5.0",
-    "wix-rich-content-common": "6.8.4"
+    "wix-rich-content-common": "6.8.5"
   },
   "unpkg": true,
   "publishConfig": {

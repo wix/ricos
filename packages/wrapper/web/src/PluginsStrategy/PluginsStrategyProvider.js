@@ -11,6 +11,7 @@ const createPluginsStrategy = ({
   ModalsMap = {},
   typeMappers = [],
   decorators = [],
+  inlineStyleMappers = [],
 } = {}) => (innerProps = {}) => {
   const isEditor = true;
   if (isEditor)
@@ -19,12 +20,19 @@ const createPluginsStrategy = ({
       plugins: [...plugins, ...(innerProps.plugins || [])],
       ModalsMap: { ...ModalsMap, ...(innerProps.ModalsMap || {}) },
     };
-  else
+  else {
+    const newConfig = { ...config, ...(innerProps.config || {}) };
+    const styleMappers = raw =>
+      inlineStyleMappers
+        .concat(innerProps.inlineStyleMappers || [])
+        .forEach(mapper => mapper(newConfig, raw));
     return {
-      config: { ...config, ...(innerProps.config || {}) },
+      config: newConfig,
       typeMappers: typeMappers.concat(innerProps.typeMappers || []),
       decorators: decorators.concat(innerProps.decorators || []),
+      inlineStyleMappers: styleMappers,
     };
+  }
 };
 
 const isEmpty = obj => Object.entries(obj).length === 0 && obj.constructor === Object;
@@ -32,11 +40,19 @@ const isEmpty = obj => Object.entries(obj).length === 0 && obj.constructor === O
 export default function pluginsStrategyProvider(isEditor, { plugins = [] }) {
   const emptyAccumulator = isEditor
     ? { config: {}, plugins: [], ModalsMap: {} }
-    : { config: {}, typeMappers: [], decorators: [] };
+    : { config: {}, typeMappers: [], decorators: [], inlineStyleMappers: [] };
 
   assert(Array.isArray(plugins), 'plugins is expected to be an object array');
   const pack = plugins.reduce((prev, curr) => {
-    const { createPlugin, type, config, ModalsMap, typeMapper, decorator } = curr;
+    const {
+      createPlugin,
+      type,
+      config,
+      ModalsMap,
+      typeMapper,
+      decorator = {},
+      inlineStyleMappers = [],
+    } = curr;
     const pConfig = { [type]: config };
     if (isEditor)
       return {
@@ -48,6 +64,9 @@ export default function pluginsStrategyProvider(isEditor, { plugins = [] }) {
       config: { ...prev.config, ...pConfig },
       typeMappers: (typeMapper && prev.typeMappers.concat([typeMapper])) || prev.typeMappers,
       decorators: (!isEmpty(decorator) && prev.decorators.concat([decorator])) || prev.decorators,
+      inlineStyleMappers:
+        (!isEmpty(inlineStyleMappers) && prev.inlineStyleMappers.concat([inlineStyleMappers])) ||
+        prev.inlineStyleMappers,
     };
   }, emptyAccumulator);
 
