@@ -66,7 +66,8 @@
     "wix-rich-content-plugin-video": "6.8.5",
     "wix-rich-content-preview": "6.8.5",
     "wix-rich-content-viewer": "6.8.5",
-    "wix-rich-content-wrapper": "6.8.5"
+    "wix-rich-content-wrapper": "6.8.5",
+    "wix-rich-content-fullscreen": "6.8.5"
   },
   "devDependencies": {
     "copy-webpack-plugin": "^4.5.1",
