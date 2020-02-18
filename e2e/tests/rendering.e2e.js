@@ -59,11 +59,14 @@ describe('editor rendering', () => {
       cy.eyesOpen({
         appName: 'Rendering',
         testName: this.test.parent.title,
-        browser: DEFAULT_MOBILE_BROWSERS,
+        browser: DEFAULT_DESKTOP_BROWSERS,
       });
     });
 
-    beforeEach(() => cy.switchToDesktop());
+    beforeEach(() => {
+      cy.switchToDesktop();
+      cy.switchToSeoMode();
+    });
 
     after(() => cy.eyesClose());
 
@@ -75,7 +78,7 @@ describe('editor rendering', () => {
       cy.eyesOpen({
         appName: 'Rendering',
         testName: this.test.parent.title,
-        browser: DEFAULT_MOBILE_BROWSERS,
+        browser: DEFAULT_DESKTOP_BROWSERS,
       });
     });
 
