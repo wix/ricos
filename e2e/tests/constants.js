@@ -8,6 +8,7 @@ export const fixtures = [
   'facebook-video',
   'gif',
   'giphy',
+  'gallery-layouts',
 ];
 
 export const DEFAULT_DESKTOP_BROWSERS = [

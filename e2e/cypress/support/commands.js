@@ -368,7 +368,7 @@ Cypress.Commands.add('addSoundCloud', () => {
     .click();
 });
 
-Cypress.Commands.add('addVideoFromURI', () => {
+Cypress.Commands.add('addVideoFromURL', () => {
   cy.get(`[data-hook*=${VIDEO_PLUGIN.INPUT}]`).type('https://youtu.be/BBu5codsO6Y');
   cy.get(`[data-hook*=${VIDEO_PLUGIN.ADD}]`).click();
   cy.get(`[data-hook=${PLUGIN_COMPONENT.VIDEO}]:first`)
