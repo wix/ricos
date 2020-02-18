@@ -1,5 +1,5 @@
 import ThemeGenerator from './ThemeGenerator';
-import { StyleSheet as Aphrodite } from './node_modules/aphrodite';
+import { StyleSheet as Aphrodite } from 'aphrodite';
 import { defaultTheme } from './defaults';
 
 const createThemeStrategy = (themeObj = {}) => (innerProps = {}) => {
