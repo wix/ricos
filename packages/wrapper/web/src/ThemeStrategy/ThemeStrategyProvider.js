@@ -40,5 +40,5 @@ export default function themeStrategyProvider(isEditor, themeProperties) {
 
     return createThemeStrategy({ ...defaultTheme, ...themeObj });
   }
-  return createThemeStrategy({ ...defaultTheme, ...theme }); //
+  return createThemeStrategy({ ...defaultTheme, ...theme });
 }
