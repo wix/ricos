@@ -101,10 +101,10 @@ class ImageViewer extends React.Component {
     }
   };
 
-  renderImage = (imageClassName, imageSrc, alt, props, isGif) => {
+  renderImage = (imageClassName, imageSrc, alt, props, isGif, isSeoMode) => {
     return this.getImage(
       classNames(imageClassName, this.styles.imageHighres, {
-        [this.styles.isGif]: isGif,
+        [this.styles.showHighRes]: isGif || isSeoMode,
       }),
       imageSrc.highres,
       alt,
@@ -254,8 +254,7 @@ class ImageViewer extends React.Component {
     const isGif = imageSrc?.highres?.endsWith?.('.gif');
     setComponentUrl?.(imageSrc?.highres);
     const shouldRenderPreloadImage = !seoMode && imageSrc && !isGif;
-    const shouldRenderImage = seoMode || (imageSrc && ssrDone) || isGif;
-
+    const shouldRenderImage = (imageSrc && (seoMode || ssrDone)) || isGif;
     /* eslint-disable jsx-a11y/no-static-element-interactions */
     return (
       <div
@@ -270,7 +269,7 @@ class ImageViewer extends React.Component {
           {shouldRenderPreloadImage &&
             this.renderPreloadImage(imageClassName, imageSrc, metadata.alt, imageProps)}
           {shouldRenderImage &&
-            this.renderImage(imageClassName, imageSrc, metadata.alt, imageProps, isGif)}
+            this.renderImage(imageClassName, imageSrc, metadata.alt, imageProps, isGif, seoMode)}
           {this.renderLoader()}
           {hasLink && hasExpand && (
             <ExpandIcon className={this.styles.expandIcon} onClick={this.handleExpand} />

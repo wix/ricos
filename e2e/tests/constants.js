@@ -11,6 +11,8 @@ export const fixtures = [
   'gallery-layouts',
 ];
 
+export const fixturesToTestOnSsr = ['images'];
+
 export const DEFAULT_DESKTOP_BROWSERS = [
   { width: 1440, height: 900, name: 'chrome' },
   { width: 1440, height: 900, name: 'firefox' },

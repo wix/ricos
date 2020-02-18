@@ -56,7 +56,7 @@ export default class Viewer extends PureComponent {
       theme,
       initialState,
       disabled,
-      seoMode
+      seoMode,
     };
 
     return (

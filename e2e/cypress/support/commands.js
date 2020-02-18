@@ -69,6 +69,12 @@ Cypress.Commands.add('loadEditorAndViewer', fixtureName => {
   });
 });
 
+Cypress.Commands.add('loadEditorAndViewerOnSsr', fixtureName => {
+  cy.request(getUrl('rce', fixtureName)).then(html => {
+    cy.state('document').write(html.body);
+  });
+});
+
 Cypress.Commands.add('matchContentSnapshot', () => {
   if (Cypress.env('MATCH_CONTENT_STATE'))
     cy.window()
