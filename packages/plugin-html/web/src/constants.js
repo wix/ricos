@@ -18,5 +18,6 @@ export const DEFAULTS = Object.freeze({
   config: {
     alignment: 'center',
   },
-  configViewer: {},
 });
+
+export const DEFAULTS_VIEWER = {};
