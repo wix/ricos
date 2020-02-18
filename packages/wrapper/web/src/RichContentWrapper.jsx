@@ -1,6 +1,6 @@
 import React from 'react';
 import EngineWrapper from './EngineWrapper';
-import themeStrategyProvider from './themeStrategy/hemeStrategyProvider';
+import themeStrategyProvider from './themeStrategy/themeStrategyProvider';
 import pluginsStrategyProvider from './pluginsStrategy/pluginsStrategyProvider';
 import PropTypes from 'prop-types';
 
