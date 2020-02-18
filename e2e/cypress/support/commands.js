@@ -27,6 +27,7 @@ const getUrl = (componentId, fixtureName = '') =>
   `/${componentId}${fixtureName ? '/' + fixtureName : ''}${buildQuery({
     mobile: isMobile,
     hebrew: isHebrew,
+    seoMode: isSeoMode,
   })}`;
 
 // Viewport size commands
@@ -35,6 +36,7 @@ const run = (app, fixtureName) => cy.visit(getUrl(app, fixtureName));
 
 let isMobile = false;
 let isHebrew = false;
+let isSeoMode = false;
 
 Cypress.Commands.add('switchToMobile', () => {
   isMobile = true;
@@ -44,6 +46,10 @@ Cypress.Commands.add('switchToMobile', () => {
 Cypress.Commands.add('switchToDesktop', () => {
   isMobile = false;
   resizeForDesktop();
+});
+
+Cypress.Commands.add('switchToSeoMode', () => {
+  isSeoMode = true;
 });
 
 Cypress.Commands.add('switchToHebrew', () => {

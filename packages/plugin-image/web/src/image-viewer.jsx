@@ -101,10 +101,10 @@ class ImageViewer extends React.Component {
     }
   };
 
-  renderImage = (imageClassName, imageSrc, alt, props, isGif, isSeoMode) => {
+  renderImage = (imageClassName, imageSrc, alt, props, isGif, seoMode) => {
     return this.getImage(
       classNames(imageClassName, this.styles.imageHighres, {
-        [this.styles.showHighRes]: isGif || isSeoMode,
+        [this.styles.onlyHighRes]: isGif || seoMode,
       }),
       imageSrc.highres,
       alt,

@@ -69,4 +69,23 @@ describe('editor rendering', () => {
 
     fixturesToTestOnSsr.forEach(testFixtureOnSsr);
   });
+
+  context('seo', () => {
+    before(function() {
+      cy.eyesOpen({
+        appName: 'Rendering',
+        testName: this.test.parent.title,
+        browser: DEFAULT_MOBILE_BROWSERS,
+      });
+    });
+
+    beforeEach(() => {
+      cy.switchToDesktop();
+      cy.switchToSeoMode();
+    });
+
+    after(() => cy.eyesClose());
+
+    fixturesToTestOnSsr.forEach(testFixtureOnSsr);
+  });
 });
