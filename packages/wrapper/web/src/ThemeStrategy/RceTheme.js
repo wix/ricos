@@ -10,41 +10,8 @@ const SECONDARY_COLOR = 13;
 const TEXT_COLOR = 15;
 const ACTION_COLOR = 18;
 
-// const defaultStyles = {
-//   hashtag: {
-//     color: 'purple',
-//   },
-//   editor: {
-//     background: 'red',
-//     //color: 'red',
-//   },
-//   divider: {
-//     //strokeWidth: '12px',
-//     //color: 'red',
-//   },
-//   // footerToolbarButton: {
-//   //   //footerToolbarButton_icon: {
-//   //   ':hover': {
-//   //     '&.footerToolbarButton_icon': {
-//   //       color: 'red',
-//   //     },
-//   //   },
-//   //   //},
-//   // },
-//   footerToolbarButton: {
-//     ':hover': {
-//       '& .footerToolbarButton_icon': {
-//         color: 'red',
-//       },
-//     },
-//     // },
-//     //'&:hover .footerToolbarButton_icon': {
-//     // color: 'red',
-//     //},
-//   },
-// };
 export default class RceTheme {
-  constructor({ theme, palette, themeGenerators }) {
+  constructor({ theme, palette, themeGenerators = [] }) {
     this.setTheme(theme, palette);
     this.themeGenerators = themeGenerators;
   }
@@ -79,10 +46,6 @@ export default class RceTheme {
   }
 
   getStylesObject() {
-    // const pluginThemes = this.themeGenerators.reduce(
-    //   (acc, themeGenerator) => ({ ...acc, ...themeGenerator(theme, palette) }),
-    //   {}
-    // );
     if (this._theme === Themes.DEFAULT) {
       return {};
     } else {
@@ -99,49 +62,32 @@ export default class RceTheme {
         {}
       );
 
-      const combinedTheme = Object.assign(
-        {
-          hashtag: {
-            color: actionColor,
-          },
-          editor: {
-            background: bgColor,
-            color: textColor,
-          },
-          linkPreview: {
-            borderColor: textColor,
-            backgroundColor: bgColor,
-          },
-          linkPreview_title: {
-            color: textColor,
-          },
-          linkPreview_image: {
-            borderColor: textColor,
-          },
-          linkPreview_description: {
-            color: textColor,
-          },
-          linkPreview_url: {
-            color: secondaryColor,
-          },
+      return {
+        hashtag: {
+          color: actionColor,
         },
-        pluginThemes
-      );
-
-      return combinedTheme;
-      // action color:
-      // hover on toolbar buttons
-      // + button on the left
-      //
-
-      // bgcolor
-      // rce text formatting toolbar (inline toolbar) - detach from background color (fixed white we want)
-
-      // divider = text color
-      // hashtag: actionColor
-      // quoteblock: actionColor
-
-      //palletes: 1 = background, 5 = text, 8 = actions
+        editor: {
+          background: bgColor,
+          color: textColor,
+        },
+        linkPreview: {
+          borderColor: textColor,
+          backgroundColor: bgColor,
+        },
+        linkPreview_title: {
+          color: textColor,
+        },
+        linkPreview_image: {
+          borderColor: textColor,
+        },
+        linkPreview_description: {
+          color: textColor,
+        },
+        linkPreview_url: {
+          color: secondaryColor,
+        },
+        ...pluginThemes,
+      };
     }
   }
 }

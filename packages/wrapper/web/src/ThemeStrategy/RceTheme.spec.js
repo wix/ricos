@@ -1,9 +1,9 @@
-import RceTheme, { Themes } from '../src/RceTheme';
-import { wixPalettes } from '../stories/palettesExample';
+import RceTheme, { Themes } from './RceTheme';
+import { wixPalettes } from '../../test/palettesExample';
 
 describe('RceTheme', () => {
   const driver = {
-    create: (themeType, palette) => new RceTheme(themeType, palette),
+    create: (theme, palette) => new RceTheme({ theme, palette }),
   };
 
   describe('constructor', () => {
@@ -37,7 +37,6 @@ describe('RceTheme', () => {
     it('should create theme object', () => {
       const rceTheme = driver.create(Themes.PALETTE, wixPalettes.site1);
       const styleObj = rceTheme.getStylesObject();
-
       expect(styleObj.hashtag.color).toBe('#FA6400');
       expect(styleObj.editor.color).toBe('#414141');
       expect(styleObj.editor.background).toBe('#FFFFFF');
