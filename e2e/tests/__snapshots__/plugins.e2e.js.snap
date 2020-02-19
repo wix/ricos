@@ -920,7 +920,7 @@ exports[`plugins > video > render upload modal #0`] =
   "entityMap": {}
 };
 
-exports[`plugins > video > enable to add a video from URI #0`] =
+exports[`plugins > video > add a video from URL #0`] =
 {
   "blocks": [
     {
@@ -1004,7 +1004,7 @@ exports[`plugins > soundcloud > render upload modal #0`] =
   "entityMap": {}
 };
 
-exports[`plugins > soundcloud > enable to add a soundcloud URI #0`] =
+exports[`plugins > soundcloud > add a soundcloud URL #0`] =
 {
   "blocks": [
     {
@@ -2747,6 +2747,66 @@ exports[`plugins > giphy > render giphy plugin toolbar #0`] =
       },
       "mutability": "IMMUTABLE",
       "type": "wix-draft-plugin-giphy"
+    }
+  }
+};
+
+exports[`plugins > video > add a custom video #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "Will this fix the flakiness?",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "size": "small"
+        },
+        "isCustomVideo": true,
+        "src": {
+          "pathname": "video/11062b_a552731f40854d16a91627687fb8d1a6/1080p/mp4/file.mp4",
+          "thumbnail": {
+            "height": 1080,
+            "pathname": "media/11062b_a552731f40854d16a91627687fb8d1a6f000.jpg",
+            "width": 1920
+          }
+        }
+      },
+      "mutability": "IMMUTABLE",
+      "type": "wix-draft-plugin-video"
     }
   }
 };
