@@ -19,7 +19,6 @@ import { pluginLink } from 'wix-rich-content-plugin-link/dist/module.viewer';
 import { pluginMap } from 'wix-rich-content-plugin-map/dist/module.viewer';
 import { pluginMentions } from 'wix-rich-content-plugin-mentions/dist/module.viewer';
 import { pluginSoundCloud } from 'wix-rich-content-plugin-sound-cloud/dist/module.viewer';
-import { pluginUndoRedo } from 'wix-rich-content-plugin-undo-redo/dist/module.viewer';
 import { pluginVideo } from 'wix-rich-content-plugin-video/dist/module.viewer';
 
 const configs = {
@@ -66,7 +65,6 @@ const plugins = [
   pluginMap({ googleMapApiKey: process.env.GOOGLE_MAPS_API_KEY }),
   pluginMentions(),
   pluginSoundCloud(),
-  pluginUndoRedo(),
   pluginVideo(),
 ];
 const ViewerWrapper = ({ contentState, palette }) => {
