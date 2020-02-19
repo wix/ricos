@@ -1,5 +1,5 @@
 /*global cy Cypress*/
-import { fixtures, fixturesToTestOnSsr } from './constants';
+import { fixtures, fixturesToTestOnSeo } from './constants';
 import { DEFAULT_DESKTOP_BROWSERS, DEFAULT_MOBILE_BROWSERS } from '../tests/constants';
 
 const testFixture = fixture =>
@@ -54,25 +54,6 @@ describe('editor rendering', () => {
     fixtures.forEach(testFixture);
   });
 
-  context('ssr', () => {
-    before(function() {
-      cy.eyesOpen({
-        appName: 'Rendering',
-        testName: this.test.parent.title,
-        browser: DEFAULT_DESKTOP_BROWSERS,
-      });
-    });
-
-    beforeEach(() => {
-      cy.switchToDesktop();
-      cy.switchToSeoMode();
-    });
-
-    after(() => cy.eyesClose());
-
-    fixturesToTestOnSsr.forEach(testFixtureOnSsr);
-  });
-
   context('seo', () => {
     before(function() {
       cy.eyesOpen({
@@ -89,6 +70,7 @@ describe('editor rendering', () => {
 
     after(() => cy.eyesClose());
 
-    fixturesToTestOnSsr.forEach(testFixtureOnSsr);
+    fixturesToTestOnSeo.forEach(testFixtureOnSsr);
+    fixturesToTestOnSeo.forEach(testFixture);
   });
 });
