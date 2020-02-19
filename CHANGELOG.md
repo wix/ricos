@@ -16,6 +16,7 @@
 ### :bug: Bug Fix
 - `image`
   - [#696](https://github.com/wix-incubator/rich-content/pull/696) fix images with transparency show shadow outline
+  - [#706](https://github.com/wix-incubator/rich-content/pull/706) old image client data support
 </details>
 <hr/>
 
