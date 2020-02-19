@@ -21,6 +21,7 @@ import { pluginMentions } from 'wix-rich-content-plugin-mentions';
 import { pluginSoundCloud } from 'wix-rich-content-plugin-sound-cloud';
 import { pluginUndoRedo } from 'wix-rich-content-plugin-undo-redo';
 import { pluginVideo } from 'wix-rich-content-plugin-video';
+import '../styles.global.scss';
 
 const configs = {
   fileUpload: {
@@ -52,22 +53,22 @@ const configs = {
 const plugins = [
   pluginButton(),
   pluginCodeBlock(),
-  pluginDivider(),
-  pluginEmoji(),
-  pluginFileUpload(configs.fileUpload),
-  pluginGallery(),
-  pluginGiphy(configs.giphy),
-  pluginHashtag(),
-  pluginHtml(),
-  pluginImage(),
-  pluginHeadersMarkdown(),
-  pluginLineSpacing(),
-  pluginLink(),
-  pluginMap({ googleMapApiKey: process.env.GOOGLE_MAPS_API_KEY }),
-  pluginMentions(),
-  pluginSoundCloud(),
-  pluginUndoRedo(),
-  pluginVideo(),
+  // pluginDivider(),
+  // pluginEmoji(),
+  // pluginFileUpload(configs.fileUpload),
+  // pluginGallery(),
+  // pluginGiphy(configs.giphy),
+  // pluginHashtag(),
+  // pluginHtml(),
+  // pluginImage(),
+  // pluginHeadersMarkdown(),
+  // pluginLineSpacing(),
+  // pluginLink(),
+  // pluginMap({ googleMapApiKey: process.env.GOOGLE_MAPS_API_KEY }),
+  // pluginMentions(),
+  // pluginSoundCloud(),
+  // pluginUndoRedo(),
+  // pluginVideo(),
 ];
 const EditorWrapper = ({ contentState, palette }) => {
   const editorState = createWithContent(convertFromRaw(contentState));
@@ -80,7 +81,7 @@ const EditorWrapper = ({ contentState, palette }) => {
 
 EditorWrapper.propTypes = {
   contentState: PropTypes.object,
-  palette: PropTypes.arrayOf(PropTypes.string),
+  palette: PropTypes.arrayOf(PropTypes.object),
 };
 
 export default EditorWrapper;

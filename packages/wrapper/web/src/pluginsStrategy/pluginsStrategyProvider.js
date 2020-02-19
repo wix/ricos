@@ -32,7 +32,7 @@ const createPluginsStrategy = (
       config: newConfig,
       typeMappers: typeMappers.concat(innerProps.typeMappers || []),
       decorators: decorators.concat(innerProps.decorators || []),
-      inlineStyleMappers: styleMappers,
+      inlineStyleMappers: [] || styleMappers(innerProps.initialState),
     };
   }
 };
