@@ -3,7 +3,7 @@ import { RichContentEditorModal } from 'wix-rich-content-editor';
 import { createEmpty } from 'wix-rich-content-editor/dist/lib/editorStateConversion';
 import ReactModal from 'react-modal';
 import PropTypes from 'prop-types';
-import { modalStyles } from './themeStrategyy/defaults';
+import { modalStyles } from './themeStrategy/defaults';
 
 class EngineWrapper extends React.Component {
   constructor(props) {
