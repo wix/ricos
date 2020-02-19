@@ -57,7 +57,7 @@ const normalizeComponentConfig = componentData => {
     patch.metadata = { oembed };
   }
 
-  return { ...componentData, patch };
+  return { ...componentData, ...patch };
 };
 /* eslint-enable */
 

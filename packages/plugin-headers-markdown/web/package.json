@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-plugin-headers-markdown",
-  "version": "6.8.5",
+  "version": "6.8.6",
   "author": {
     "name": "Shaul Goral",
     "email": "shaulg@wix.com"
@@ -49,8 +49,8 @@
     "rollup": "1.31.1"
   },
   "dependencies": {
-    "wix-rich-content-common": "6.8.5",
-    "wix-rich-content-editor-common": "6.8.5"
+    "wix-rich-content-common": "6.8.6",
+    "wix-rich-content-editor-common": "6.8.6"
   },
   "unpkg": true,
   "publishConfig": {
