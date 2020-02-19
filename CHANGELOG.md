@@ -15,7 +15,7 @@
 
 ### :bug: Bug Fix
 - `image`
-  - old image client data support #2
+  - [#712](https://github.com/wix-incubator/rich-content/pull/712) old image client data support #2
 </details>
 <hr/>
 
