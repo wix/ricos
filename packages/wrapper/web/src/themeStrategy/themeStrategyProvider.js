@@ -30,7 +30,7 @@ const withNestedCssSupport = () =>
 export default function themeStrategyProvider(isEditor, themeProperties) {
   const { theme } = themeProperties;
   if (typeof theme === 'string') {
-    const themeGenerator = new ThemeGenerator(themeProperties, isEditor);
+    const themeGenerator = new ThemeGenerator(isEditor, themeProperties);
     const { StyleSheet, css } = withNestedCssSupport();
     const styles = StyleSheet.create(themeGenerator.getStylesObject());
 
