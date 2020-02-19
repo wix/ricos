@@ -50,6 +50,7 @@ const configs = {
 };
 
 const plugins = [
+  //dummy
   pluginButton(),
   pluginCodeBlock(),
   pluginDivider(),
