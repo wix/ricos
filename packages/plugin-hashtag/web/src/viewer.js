@@ -8,11 +8,10 @@ import { DEFAULTS } from './defaults';
 
 export const pluginHashtag = (config = {}) => {
   const pluginConfig = { ...DEFAULTS.config, ...config };
-  const decorator = new HashtagDecorator(pluginConfig);
   return {
     config: pluginConfig,
     type: HASHTAG_TYPE,
-    decorator,
+    decorator: theme => new HashtagDecorator({ ...pluginConfig, ...theme }),
     theme: colors => ({
       hashtag: {
         color: colors.actionColor,

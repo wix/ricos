@@ -7,6 +7,6 @@ export const pluginHeadersMarkdown = (config = {}) => {
   return {
     config: finalConfig,
     type: HEADERS_MARKDOWN_TYPE,
-    decorator: createHeadersMarkdownDecorator(finalConfig),
+    decorator: () => createHeadersMarkdownDecorator(finalConfig),
   };
 };

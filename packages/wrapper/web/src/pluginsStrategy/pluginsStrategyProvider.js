@@ -16,6 +16,7 @@ const createPluginsStrategy = (
     inlineStyleMappers = [],
   } = {}
 ) => (innerProps = {}) => {
+  const { theme = {} } = innerProps;
   if (isEditor)
     return {
       config: { ...config, ...(innerProps.config || {}) },
@@ -28,10 +29,13 @@ const createPluginsStrategy = (
       inlineStyleMappers
         .concat(innerProps.inlineStyleMappers || [])
         .map(mapper => mapper(newConfig, raw));
+    const finalDecorators = decorators
+      .concat(innerProps.decorators || [])
+      .map(decor => decor(theme));
     return {
       config: newConfig,
       typeMappers: typeMappers.concat(innerProps.typeMappers || []),
-      decorators: decorators.concat(innerProps.decorators || []),
+      decorators: finalDecorators,
       inlineStyleMappers: styleMappers(innerProps.initialState),
     };
   }
