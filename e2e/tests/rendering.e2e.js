@@ -11,12 +11,6 @@ const testFixture = fixture =>
     cy.eyesCheckWindow(this.test.title);
   });
 
-const testFixtureOnSsr = fixture =>
-  it(`render ${fixture} in ssr`, function() {
-    cy.loadEditorAndViewerOnSsr(fixture);
-    cy.eyesCheckWindow(this.test.title);
-  });
-
 describe('editor rendering', () => {
   before(function() {
     if (Cypress.env('MATCH_CONTENT_STATE') && !Cypress.env('debug')) this.skip();
@@ -49,7 +43,9 @@ describe('editor rendering', () => {
 
     beforeEach(() => cy.switchToMobile());
 
-    after(() => cy.eyesClose());
+    after(() => {
+      cy.eyesClose();
+    });
 
     fixtures.forEach(testFixture);
   });
@@ -70,7 +66,6 @@ describe('editor rendering', () => {
 
     after(() => cy.eyesClose());
 
-    fixturesToTestOnSeo.forEach(testFixtureOnSsr);
     fixturesToTestOnSeo.forEach(testFixture);
   });
 });
