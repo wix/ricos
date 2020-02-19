@@ -9,6 +9,7 @@ export const fixtures = [
   'gif',
   'giphy',
   'gallery-layouts',
+  'old-image-format',
 ];
 
 export const fixturesToTestOnSeo = ['images'];

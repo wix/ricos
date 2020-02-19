@@ -5,15 +5,17 @@ function assert(predicate, error) {
   }
 }
 
-const createPluginsStrategy = ({
-  config = {},
-  plugins = [],
-  ModalsMap = {},
-  typeMappers = [],
-  decorators = [],
-  inlineStyleMappers = [],
-} = {}) => (innerProps = {}) => {
-  const isEditor = true;
+const createPluginsStrategy = (
+  isEditor,
+  {
+    config = {},
+    plugins = [],
+    ModalsMap = {},
+    typeMappers = [],
+    decorators = [],
+    inlineStyleMappers = [],
+  } = {}
+) => (innerProps = {}) => {
   if (isEditor)
     return {
       config: { ...config, ...(innerProps.config || {}) },
@@ -70,5 +72,5 @@ export default function pluginsStrategyProvider(isEditor, { plugins = [] }) {
     };
   }, emptyAccumulator);
 
-  return createPluginsStrategy(pack);
+  return createPluginsStrategy(isEditor, pack);
 }

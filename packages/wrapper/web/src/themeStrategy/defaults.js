@@ -28,6 +28,6 @@ const modalTheme = {
   content: {},
 };
 
-export const theme = {
+export const defaultTheme = {
   modalTheme,
 };
