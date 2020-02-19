@@ -5,6 +5,5 @@ export const pluginEmoji = (config = {}) => {
     config: { ...DEFAULT_CONFIG, ...config },
     type: EMOJI_TYPE,
     typeMapper: {},
-    decorator: {},
   };
 };
