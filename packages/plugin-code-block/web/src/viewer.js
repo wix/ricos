@@ -8,6 +8,6 @@ export const pluginCodeBlock = (config = {}) => {
     config: { ...DEFAULTS.config, ...config },
     type: CODE_BLOCK_TYPE,
     typeMapper: {},
-    decorator: CodeBlockDecorator,
+    decorator: new CodeBlockDecorator({}),
   };
 };

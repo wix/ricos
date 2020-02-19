@@ -7,10 +7,12 @@ import { HASHTAG_TYPE } from './types';
 import { DEFAULTS } from './defaults';
 
 export const pluginHashtag = (config = {}) => {
+  const pluginConfig = { ...DEFAULTS.config, ...config };
+  const decorator = new HashtagDecorator(pluginConfig);
   return {
-    config: { ...DEFAULTS.config, ...config },
+    config: pluginConfig,
     type: HASHTAG_TYPE,
-    decorator: HashtagDecorator,
+    decorator,
     theme: colors => ({
       hashtag: {
         color: colors.actionColor,

@@ -27,12 +27,12 @@ const createPluginsStrategy = (
     const styleMappers = raw =>
       inlineStyleMappers
         .concat(innerProps.inlineStyleMappers || [])
-        .forEach(mapper => mapper(newConfig, raw));
+        .map(mapper => mapper(newConfig, raw));
     return {
       config: newConfig,
       typeMappers: typeMappers.concat(innerProps.typeMappers || []),
       decorators: decorators.concat(innerProps.decorators || []),
-      inlineStyleMappers: [] || styleMappers(innerProps.initialState),
+      inlineStyleMappers: styleMappers(innerProps.initialState),
     };
   }
 };
@@ -53,7 +53,7 @@ export default function pluginsStrategyProvider(isEditor, { plugins = [] }) {
       ModalsMap,
       typeMapper,
       decorator = {},
-      inlineStyleMappers = [],
+      inlineStyleMappers,
     } = curr;
     const pConfig = { [type]: config };
     if (isEditor)
@@ -67,7 +67,7 @@ export default function pluginsStrategyProvider(isEditor, { plugins = [] }) {
       typeMappers: (typeMapper && prev.typeMappers.concat([typeMapper])) || prev.typeMappers,
       decorators: (!isEmpty(decorator) && prev.decorators.concat([decorator])) || prev.decorators,
       inlineStyleMappers:
-        (!isEmpty(inlineStyleMappers) && prev.inlineStyleMappers.concat([inlineStyleMappers])) ||
+        (inlineStyleMappers && prev.inlineStyleMappers.concat([inlineStyleMappers])) ||
         prev.inlineStyleMappers,
     };
   }, emptyAccumulator);
