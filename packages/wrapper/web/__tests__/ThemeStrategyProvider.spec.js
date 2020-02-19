@@ -1,4 +1,4 @@
-import themeStrategyProvider from '../src/ThemeStrategy';
+import themeStrategyProvider from '../src/themeStrategy/themeStrategyProvider';
 
 const getType = require('jest-get-type');
 

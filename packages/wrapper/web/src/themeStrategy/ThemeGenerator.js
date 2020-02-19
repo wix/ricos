@@ -1,51 +1,18 @@
 /* eslint-disable camelcase */
-const Themes = {
+const THEMES = {
   DEFAULT: 'Default',
   BACK_OFFICE: 'BackOffice',
   PALETTE: 'Palette',
 };
 
-const SUPPORTED_THEMES = [Themes.DEFAULT, Themes.PALETTE, Themes.BACK_OFFICE];
+const SUPPORTED_THEMES = [THEMES.DEFAULT, THEMES.PALETTE, THEMES.BACK_OFFICE];
 const BG_COLOR = 11;
 const SECONDARY_COLOR = 13;
 const TEXT_COLOR = 15;
 const ACTION_COLOR = 18;
 
-// const defaultStyles = {
-//   hashtag: {
-//     color: 'purple',
-//   },
-//   editor: {
-//     background: 'red',
-//     //color: 'red',
-//   },
-//   divider: {
-//     //strokeWidth: '12px',
-//     //color: 'red',
-//   },
-//   // footerToolbarButton: {
-//   //   //footerToolbarButton_icon: {
-//   //   ':hover': {
-//   //     '&.footerToolbarButton_icon': {
-//   //       color: 'red',
-//   //     },
-//   //   },
-//   //   //},
-//   // },
-//   footerToolbarButton: {
-//     ':hover': {
-//       '& .footerToolbarButton_icon': {
-//         color: 'red',
-//       },
-//     },
-//     // },
-//     //'&:hover .footerToolbarButton_icon': {
-//     // color: 'red',
-//     //},
-//   },
-// };
-export default class RceTheme {
-  constructor({ theme = 'Default', palette, themeGenerators = [] }, isEditor = false) {
+export default class ThemeGenerator {
+  constructor(isEditor, { theme = THEMES.DEFAULT, palette, themeGenerators = [] }) {
     this.setTheme(theme, palette);
     this.themeGenerators = themeGenerators;
     this.isEditor = isEditor;
@@ -53,14 +20,14 @@ export default class RceTheme {
 
   setTheme(theme, palette) {
     if (SUPPORTED_THEMES.indexOf(theme) === -1) {
-      this._theme = Themes.DEFAULT;
+      this._theme = THEMES.DEFAULT;
     } else {
       this._theme = theme;
     }
 
-    if (theme === Themes.PALETTE || theme === Themes.BACK_OFFICE) {
+    if (theme === THEMES.PALETTE || theme === THEMES.BACK_OFFICE) {
       if (!palette) {
-        throw Error('AAAArgh!');
+        throw Error('Invalid palette');
       } else {
         this.palette = palette;
       }
@@ -77,7 +44,7 @@ export default class RceTheme {
   }
 
   getStylesObject() {
-    if (this._theme === Themes.DEFAULT) {
+    if (this._theme === THEMES.DEFAULT) {
       return {};
     } else {
       const actionColor = this.getColorValue(ACTION_COLOR);
@@ -127,21 +94,8 @@ export default class RceTheme {
       );
 
       return combinedTheme;
-      // action color:
-      // hover on toolbar buttons
-      // + button on the left
-      //
-
-      // bgcolor
-      // rce text formatting toolbar (inline toolbar) - detach from background color (fixed white we want)
-
-      // divider = text color
-      // hashtag: actionColor
-      // quoteblock: actionColor
-
-      //palletes: 1 = background, 5 = text, 8 = actions
     }
   }
 }
 
-export { Themes };
+export { THEMES };

@@ -53,6 +53,13 @@
     "react-dom": "16.6.3",
     "rollup": "1.31.1"
   },
+  "dependencies": {
+    "react-modal": "~3.1.11",
+    "wix-rich-content-common": "6.8.5",
+    "wix-rich-content-editor": "6.8.5",
+    "wix-rich-content-editor-common": "6.8.5",
+    "wix-rich-content-viewer": "6.8.5"
+  },
   "jest": {
     "globals": {
       "NODE_ENV": "test"
@@ -64,13 +71,6 @@
       "\\.(jpg|jpeg|png|gif|svg)$": "<rootDir>/__mocks__/fileMock.js",
       "\\.(css|scss)$": "<rootDir>/__mocks__/styleMock.js"
     }
-  },
-  "dependencies": {
-    "react-modal": "~3.1.11",
-    "wix-rich-content-common": "6.8.5",
-    "wix-rich-content-editor": "6.8.5",
-    "wix-rich-content-editor-common": "6.8.5",
-    "wix-rich-content-viewer": "6.8.5"
   },
   "unpkg": true,
   "publishConfig": {
