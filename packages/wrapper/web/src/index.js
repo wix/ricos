@@ -1,3 +1,1 @@
-import RichContentWrapper from './RichContentWrapper';
-import { wixPalettes } from './palettesExample';
-export { RichContentWrapper, wixPalettes };
+export { default as RichContentWrapper } from './RichContentWrapper';
