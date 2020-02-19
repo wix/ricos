@@ -13,7 +13,9 @@
     Click to see more.
   </summary>
 
-
+### :bug: Bug Fix
+- `image`
+  - old image client data support #2
 </details>
 <hr/>
 
