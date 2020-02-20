@@ -5,6 +5,5 @@ export const pluginLineSpacing = (config = {}) => {
   return {
     config: { ...DEFAULTS.config, ...config },
     type: LINE_SPACING_TYPE,
-    decorator: {},
   };
 };

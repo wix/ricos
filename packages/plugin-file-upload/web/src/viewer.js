@@ -8,6 +8,5 @@ export const pluginFileUpload = (config = {}) => {
     config: { ...DEFAULTS.configViewer, ...config },
     type: FILE_UPLOAD_TYPE,
     typeMapper,
-    decorator: {},
   };
 };

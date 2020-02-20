@@ -26,7 +26,6 @@ export const pluginMentions = (config = {}) => {
   return {
     config: { ...DEFAULTS.config, ...config },
     type: MENTION_TYPE,
-    decorator: {},
     typeMapper,
   };
 };
