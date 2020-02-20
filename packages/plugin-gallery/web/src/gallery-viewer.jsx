@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { validate, mergeStyles, pluginGallerySchema } from 'wix-rich-content-common';
+import { Loader, validate, mergeStyles, pluginGallerySchema } from 'wix-rich-content-common';
 import { isEqual } from 'lodash';
 import { convertItemData } from './helpers/convert-item-data';
 import { DEFAULTS, isHorizontalLayout, sampleItems } from './constants';
@@ -170,6 +170,20 @@ class GalleryViewer extends React.Component {
     </Fragment>
   );
 
+  renderLoader = () => {
+    return (
+      <div className={this.styles.imageOverlay}>
+        <Loader type={'medium'} helpers={this.props.helpers} onLoad={this.onLoad} />
+      </div>
+    );
+  };
+
+  onLoad = () => {
+    this.setState({ isLoaded: true });
+  };
+
+  isLoadingProgress = () => !this.state.isLoaded && this.props?.helpers?.onProgressChange;
+
   handleContextMenu = e => this.props.disableRightClick && e.preventDefault();
 
   render() {
@@ -177,7 +191,7 @@ class GalleryViewer extends React.Component {
     const { scrollingElement, ...settings } = this.props.settings;
     const { styleParams, size = { width: 300 } } = this.state;
     const items = this.getItems();
-    return (
+    const gallery = (
       <div
         ref={elem => (this.container = elem)}
         className={this.styles.gallery_container}
@@ -195,6 +209,15 @@ class GalleryViewer extends React.Component {
           resizeMediaUrl={resizeMediaUrl}
           customHoverRenderer={this.hoverElement}
         />
+      </div>
+    );
+    if (!this.isLoadingProgress()) {
+      return <div>{gallery}</div>;
+    }
+    return (
+      <div>
+        {gallery}
+        {this.renderLoader()}
       </div>
     );
   }
