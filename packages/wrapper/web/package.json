@@ -51,9 +51,7 @@
     "prop-types": "^15.6.2",
     "react": "16.6.3",
     "react-dom": "16.6.3",
-    "rollup": "1.31.1",
-    "jest": "^23.1.0",
-    "babel-jest": "^23.6.0"
+    "rollup": "1.31.1"
   },
   "dependencies": {
     "react-modal": "~3.1.11",
@@ -77,17 +75,5 @@
   "unpkg": true,
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
-  },
-  "jest": {
-    "globals": {
-      "NODE_ENV": "test"
-    },
-    "transform": {
-      "^.+\\.jsx?$": "<rootDir>/../../../babel.jest.monorepo.js"
-    },
-    "moduleNameMapper": {
-      "\\.(jpg|jpeg|png|gif|svg)$": "<rootDir>/__mocks__/fileMock.js",
-      "\\.(css|scss)$": "<rootDir>/__mocks__/styleMock.js"
-    }
   }
 }
