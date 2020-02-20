@@ -4,24 +4,38 @@ const chalk = require('chalk');
 const { getPackages } = require('@lerna/project');
 const webpack = require('webpack');
 const { getWebpackConfig } = require('./common');
+const argv = require('yargs').argv;
 
 process.on('unhandledRejection', error => {
   throw error;
 });
 
-function run() {
-  console.log(chalk.magenta('Analyzing plugins...'));
-  // console.log('analyzing plugins');
+const warning = chalk.keyword('orange');
 
-  const additionalPackages = ['viewer-without-wrapper', 'viewer-with-wrapper'];
-
-  getPackages().then(allPackages => {
-    const pkgNames = allPackages
+const getAllPluginsNames = ({ skipPlugins = false }) => {
+  if (skipPlugins) {
+    return Promise.resolve([]);
+  }
+  return getPackages().then(allPackages => {
+    return allPackages
       .filter(pkg => !pkg.private)
       .filter(pkg => pkg.name.indexOf('wix-rich-content-plugin') === 0)
       .map(pkg => pkg.name);
+  });
+};
 
-    const promiseArr = pkgNames.concat(additionalPackages).map(pkgName => {
+const viewerPakages = ['viewer-without-wrapper', 'viewer-with-wrapper'];
+
+const options = {};
+const option = argv._[0];
+if (option === 'skipPlugins') {
+  options.skipPlugins = true;
+}
+console.log(JSON.stringify(options));
+function run() {
+  console.log(chalk.magenta('Analyzing plugins...'));
+  getAllPluginsNames(options).then(pkgNames => {
+    const bundleResultsPromise = pkgNames.concat(viewerPakages).map(pkgName => {
       return new Promise(resolve => {
         webpack(getWebpackConfig(pkgName), (err, stats) => {
           // Stats Object
@@ -30,21 +44,16 @@ function run() {
             console.error(chalk.red(_err));
             resolve({ name: pkgName, error: _err });
           } else {
-            // console.log(chalk.green(pkg.name, `analyzed`));
-            // console.log(stats.toString({ colors: true }));
             resolve({
               name: pkgName,
               size: Math.ceil(stats.toJson(true).assets[0].size / 1024),
             });
           }
         });
-        // console.log(chalk.yellow(`Pkg`, JSON.stringify(getPackageDetails(pkg))));
       });
     });
 
-    const warning = chalk.keyword('orange');
-
-    Promise.all(promiseArr).then(results => {
+    Promise.all(bundleResultsPromise).then(results => {
       results.forEach(result => {
         const { size, name, error } = result;
         const prefix = chalk.cyan(`[${name}]`);

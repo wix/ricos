@@ -14,5 +14,21 @@ module.exports = ({ config }) => {
         },
       ]),
     ],
+    module: {
+      ...baseConfig.module,
+      rules: [
+        {
+          test: /\.m?js$/,
+          exclude: /(node_modules|bower_components)/,
+          use: {
+            loader: 'babel-loader',
+            options: {
+              plugins: ['babel-plugin-preval'],
+            },
+          },
+        },
+        ...baseConfig.module.rules,
+      ],
+    },
   };
 };
