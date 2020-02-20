@@ -188,12 +188,6 @@ class GalleryViewer extends React.Component {
     );
   };
 
-  onLoad = isLoading => {
-    this.setState({ isLoading });
-  };
-
-  isLoadingProgress = () => this.state.isLoading && this.props?.helpers?.onProgressChange;
-
   handleContextMenu = e => this.props.disableRightClick && e.preventDefault();
 
   render() {
@@ -201,7 +195,7 @@ class GalleryViewer extends React.Component {
     const { scrollingElement, ...settings } = this.props.settings;
     const { styleParams, size = { width: 300 } } = this.state;
     const items = this.getItems();
-    const gallery = (
+    return (
       <div
         ref={elem => (this.container = elem)}
         className={this.styles.gallery_container}
@@ -220,12 +214,6 @@ class GalleryViewer extends React.Component {
           resizeMediaUrl={resizeMediaUrl}
           customHoverRenderer={this.hoverElement}
         />
-      </div>
-    );
-    return (
-      <div>
-        {gallery}
-        {this.isLoadingProgress() && this.renderLoader()}
       </div>
     );
   }
