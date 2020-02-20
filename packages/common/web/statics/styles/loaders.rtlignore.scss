@@ -30,6 +30,34 @@
   font-size: 20px;
 }
 
+.progress{
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  color: $primary-color-light;
+  height: 1.5em;
+  width: 3em;
+  border-radius: 50%;
+  margin: auto;
+  font-size: 60px;
+  text-align: center;
+}
+
+.progress.medium{
+  font-size: 16px;
+}
+
+.progress.small{
+  font-size: 10px;
+}
+
+.preview_img{
+  width: 100%;
+  height: 100%;
+}
+
 @keyframes spinner {
   from {
     transform: rotate(0deg);

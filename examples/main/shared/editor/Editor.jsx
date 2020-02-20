@@ -23,6 +23,7 @@ const modalStyleDefaults = {
 const anchorTarget = '_blank';
 const relValue = 'noopener';
 let shouldMultiSelectImages = false;
+const wixImagesUrl = 'https://static.wixstatic.com/media/';
 
 export default class Editor extends PureComponent {
   state = {};
@@ -73,6 +74,19 @@ export default class Editor extends PureComponent {
         setTimeout(() => {
           updateEntity({ data });
         }, 500);
+      },
+      onProgressChange: updatePercentage => {
+        let percent = 0;
+        const mockImageIndex =
+          this.props.mockImageIndex || Math.floor(Math.random() * testImages.length);
+        const testImageUrl = wixImagesUrl + testImages[mockImageIndex].url;
+        console.log(testImageUrl);
+        updatePercentage(percent, testImageUrl);
+        const interval = setInterval(() => {
+          updatePercentage(percent, testImageUrl);
+          percent += 10;
+          if (percent === 110) clearInterval(interval);
+        }, 100);
       },
       onVideoSelected: (url, updateEntity) => {
         setTimeout(() => {
