@@ -356,10 +356,14 @@ Cypress.Commands.add('alignImage', alignment => {
 });
 
 Cypress.Commands.add('openPluginToolbar', plugin => {
-  cy.get(`[data-hook*=${plugin}]`)
+  const pluginToolbar = cy
+    .get(`[data-hook*=${plugin}]`)
     .first()
-    .parent()
-    .click();
+    .parent();
+  if (plugin === 'galleryViewer') {
+    pluginToolbar.parent();
+  }
+  pluginToolbar.click();
   cy.get('[data-hook*="PluginToolbar"]:first');
 });
 
