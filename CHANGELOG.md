@@ -15,7 +15,7 @@
 
   ### :rocket: New Feature
   - `wrapper`
-  - locale strategy added
+    - [#714](https://github.com/wix-incubator/rich-content/pull/714) locale strategy added
   ### :bug: Bug Fix
   - `image`
     - [#712](https://github.com/wix-incubator/rich-content/pull/712) old image client data support #2
