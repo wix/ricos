@@ -67,42 +67,38 @@ export default class ThemeGenerator {
         {}
       );
 
-      const combinedTheme = Object.assign(
-        {
-          editor: {
-            background: bgColor,
-            color: textColor,
-          },
-          quote: {
-            borderLeftColor: actionColor,
-            borderRightColor: actionColor,
-          },
-          sideToolbar_floatingIcon: {
-            ':hover': {
-              fill: actionColor,
-            },
-          },
-          linkPreview: {
-            borderColor: textColor,
-            backgroundColor: bgColor,
-          },
-          linkPreview_title: {
-            color: textColor,
-          },
-          linkPreview_image: {
-            borderColor: textColor,
-          },
-          linkPreview_description: {
-            color: textColor,
-          },
-          linkPreview_url: {
-            color: secondaryColor,
+      return {
+        editor: {
+          background: bgColor,
+          color: textColor,
+        },
+        quote: {
+          borderLeftColor: actionColor,
+          borderRightColor: actionColor,
+        },
+        sideToolbar_floatingIcon: {
+          ':hover': {
+            fill: actionColor,
           },
         },
-        pluginThemes
-      );
-
-      return combinedTheme;
+        linkPreview: {
+          borderColor: textColor,
+          backgroundColor: bgColor,
+        },
+        linkPreview_title: {
+          color: textColor,
+        },
+        linkPreview_image: {
+          borderColor: textColor,
+        },
+        linkPreview_description: {
+          color: textColor,
+        },
+        linkPreview_url: {
+          color: secondaryColor,
+        },
+        ...pluginThemes,
+      };
     }
   }
 }
