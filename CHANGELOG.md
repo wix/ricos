@@ -13,9 +13,13 @@
     Click to see more.
   </summary>
 
-### :bug: Bug Fix
-- `image`
-  - [#712](https://github.com/wix-incubator/rich-content/pull/712) old image client data support #2
+  ### :rocket: New Feature
+  - `wrapper`
+  - locale strategy added
+  ### :bug: Bug Fix
+  - `image`
+    - [#712](https://github.com/wix-incubator/rich-content/pull/712) old image client data support #2
+
 </details>
 <hr/>
 
@@ -31,7 +35,7 @@
   - [#680](https://github.com/wix-incubator/rich-content/pull/680) dragging plugins from editor to address bar pastes media url
 - `gallery`
   - [#690](https://github.com/wix-incubator/rich-content/pull/690) fix title and altText
-  
+
 
 ## 6.8.4 (Feb 12, 2020)
 ### :bug: Bug Fix
@@ -39,7 +43,7 @@
   - [#645](https://github.com/wix-incubator/rich-content/pull/645) When removing link from text the cursor is in the correct position
 - `gallery`
   - [#672](https://github.com/wix-incubator/rich-content/pull/672) gallery images settings frozen
-  
+
 ## 6.8.3 (Feb 11, 2020)
 ### :bug: Bug Fix
 - `image`
@@ -47,7 +51,7 @@
 ### :house: Internal
 - `general`
   - [#666](https://github.com/wix-incubator/rich-content/pull/666) ES5 syntax validation in `dist/statics` on postbuild
-  
+
 ## 6.8.2 (Feb 9, 2020)
 ### :bug: Bug Fix
 - `emoji`
@@ -145,7 +149,7 @@
 - `example`
   - [#634](https://github.com/wix-incubator/rich-content/pull/634) toggle for mocking image multi-select
   - [#624](https://github.com/wix-incubator/rich-content/pull/575) video and image selection is uses external selection logic
-    
+
 ## 6.6.8 (Jan 16, 2020)
 ### :bug: Bug Fix
 - `editor-common`
