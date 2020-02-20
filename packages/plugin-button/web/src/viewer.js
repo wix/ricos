@@ -6,6 +6,5 @@ export const pluginButton = (config = {}) => {
     config: { ...DEFAULT_CONFIG, ...config },
     type: BUTTON_TYPE,
     typeMapper,
-    decorator: {},
   };
 };

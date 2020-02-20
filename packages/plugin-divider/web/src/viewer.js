@@ -7,6 +7,5 @@ export const pluginDivider = (config = {}) => {
     config: { ...DEFAULTS.config, ...config },
     type: DIVIDER_TYPE,
     typeMapper,
-    decorator: {},
   };
 };

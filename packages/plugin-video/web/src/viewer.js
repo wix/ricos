@@ -7,7 +7,6 @@ export const pluginVideo = (config = {}) => {
   return {
     config: { ...DEFAULTS.configViewer, ...config },
     type: VIDEO_TYPE,
-    decorator: {},
     typeMapper,
   };
 };

@@ -8,5 +8,11 @@ export const pluginLink = (config = {}) => {
     type: LINK_TYPE,
     createPlugin: createLinkPlugin,
     ModalsMap: {},
+    theme: colors => ({
+      link: {
+        color: colors.actionColor,
+        textDecoration: 'none',
+      },
+    }),
   };
 };

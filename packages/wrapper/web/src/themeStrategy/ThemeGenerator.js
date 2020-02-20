@@ -67,33 +67,29 @@ export default class ThemeGenerator {
         {}
       );
 
-      const combinedTheme = Object.assign(
-        {
-          editor: {
-            background: bgColor,
-            color: textColor,
-          },
-          linkPreview: {
-            borderColor: textColor,
-            backgroundColor: bgColor,
-          },
-          linkPreview_title: {
-            color: textColor,
-          },
-          linkPreview_image: {
-            borderColor: textColor,
-          },
-          linkPreview_description: {
-            color: textColor,
-          },
-          linkPreview_url: {
-            color: secondaryColor,
-          },
+      return {
+        editor: {
+          background: bgColor,
+          color: textColor,
         },
-        pluginThemes
-      );
-
-      return combinedTheme;
+        linkPreview: {
+          borderColor: textColor,
+          backgroundColor: bgColor,
+        },
+        linkPreview_title: {
+          color: textColor,
+        },
+        linkPreview_image: {
+          borderColor: textColor,
+        },
+        linkPreview_description: {
+          color: textColor,
+        },
+        linkPreview_url: {
+          color: secondaryColor,
+        },
+        ...pluginThemes,
+      };
     }
   }
 }

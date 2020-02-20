@@ -8,7 +8,6 @@ export const pluginLink = (config = {}) => {
   return {
     config: { ...DEFAULTS.config, ...config },
     type: LINK_TYPE,
-    decorator: {},
     typeMapper,
   };
 };
