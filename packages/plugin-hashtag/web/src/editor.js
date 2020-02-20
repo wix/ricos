@@ -1,6 +1,6 @@
 import { createHashtagPlugin } from './createHashtagPlugin';
 import { HASHTAG_TYPE } from './types';
-import { DEFAULTS } from './defaults';
+import { DEFAULTS, THEME as theme } from './defaults';
 
 export const pluginHashtag = (config = {}) => {
   return {
@@ -8,10 +8,6 @@ export const pluginHashtag = (config = {}) => {
     type: HASHTAG_TYPE,
     createPlugin: createHashtagPlugin,
     ModalsMap: {},
-    theme: colors => ({
-      hashtag: {
-        color: colors.actionColor,
-      },
-    }),
+    theme,
   };
 };

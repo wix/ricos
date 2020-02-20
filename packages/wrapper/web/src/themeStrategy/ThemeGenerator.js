@@ -73,6 +73,15 @@ export default class ThemeGenerator {
             background: bgColor,
             color: textColor,
           },
+          quote: {
+            borderLeftColor: actionColor,
+            borderRightColor: actionColor,
+          },
+          sideToolbar_floatingIcon: {
+            ':hover': {
+              fill: actionColor,
+            },
+          },
           linkPreview: {
             borderColor: textColor,
             backgroundColor: bgColor,

@@ -1,5 +1,5 @@
 import { createDividerPlugin } from './createDividerPlugin';
-import { DIVIDER_TYPE, DEFAULTS } from './constants';
+import { DIVIDER_TYPE, DEFAULTS, THEME as theme } from './constants';
 
 export const pluginDivider = (config = {}) => {
   return {
@@ -7,10 +7,6 @@ export const pluginDivider = (config = {}) => {
     type: DIVIDER_TYPE,
     createPlugin: createDividerPlugin,
     ModalsMap: {},
-    theme: colors => ({
-      divider: {
-        color: colors.textColor,
-      },
-    }),
+    theme,
   };
 };

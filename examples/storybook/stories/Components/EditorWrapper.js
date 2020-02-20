@@ -67,8 +67,8 @@ const plugins = [
   pluginMap({ googleMapApiKey: process.env.GOOGLE_MAPS_API_KEY }),
   pluginMentions(),
   pluginSoundCloud(),
-  pluginUndoRedo(),
   pluginVideo(),
+  pluginUndoRedo(),
 ];
 const EditorWrapper = ({ contentState, palette }) => {
   const editorState = createWithContent(convertFromRaw(contentState));

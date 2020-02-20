@@ -27,3 +27,9 @@ export const DEFAULTS = Object.freeze({
     textWrap: NO_WRAP,
   },
 });
+
+export const THEME = colors => ({
+  divider: {
+    color: colors.textColor,
+  },
+});
