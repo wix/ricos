@@ -8,6 +8,5 @@ export const pluginImage = (config = {}) => {
     config: { ...DEFAULTS.config, ...config },
     type: IMAGE_TYPE,
     typeMapper,
-    decorator: {},
   };
 };

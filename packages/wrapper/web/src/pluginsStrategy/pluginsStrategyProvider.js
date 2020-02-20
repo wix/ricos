@@ -5,15 +5,18 @@ function assert(predicate, error) {
   }
 }
 
-const createPluginsStrategy = ({
-  config = {},
-  plugins = [],
-  ModalsMap = {},
-  typeMappers = [],
-  decorators = [],
-  inlineStyleMappers = [],
-} = {}) => (innerProps = {}) => {
-  const isEditor = true;
+const createPluginsStrategy = (
+  isEditor,
+  {
+    config = {},
+    plugins = [],
+    ModalsMap = {},
+    typeMappers = [],
+    decorators = [],
+    inlineStyleMappers = [],
+  } = {}
+) => (innerProps = {}) => {
+  const { theme = {} } = innerProps;
   if (isEditor)
     return {
       config: { ...config, ...(innerProps.config || {}) },
@@ -25,12 +28,15 @@ const createPluginsStrategy = ({
     const styleMappers = raw =>
       inlineStyleMappers
         .concat(innerProps.inlineStyleMappers || [])
-        .forEach(mapper => mapper(newConfig, raw));
+        .map(mapper => mapper(newConfig, raw));
+    const finalDecorators = decorators
+      .concat(innerProps.decorators || [])
+      .map(decor => decor(theme, newConfig));
     return {
       config: newConfig,
       typeMappers: typeMappers.concat(innerProps.typeMappers || []),
-      decorators: decorators.concat(innerProps.decorators || []),
-      inlineStyleMappers: styleMappers,
+      decorators: finalDecorators,
+      inlineStyleMappers: styleMappers(innerProps.initialState),
     };
   }
 };
@@ -51,7 +57,7 @@ export default function pluginsStrategyProvider(isEditor, { plugins = [] }) {
       ModalsMap,
       typeMapper,
       decorator = {},
-      inlineStyleMappers = [],
+      inlineStyleMappers,
     } = curr;
     const pConfig = { [type]: config };
     if (isEditor)
@@ -65,10 +71,10 @@ export default function pluginsStrategyProvider(isEditor, { plugins = [] }) {
       typeMappers: (typeMapper && prev.typeMappers.concat([typeMapper])) || prev.typeMappers,
       decorators: (!isEmpty(decorator) && prev.decorators.concat([decorator])) || prev.decorators,
       inlineStyleMappers:
-        (!isEmpty(inlineStyleMappers) && prev.inlineStyleMappers.concat([inlineStyleMappers])) ||
+        (inlineStyleMappers && prev.inlineStyleMappers.concat([inlineStyleMappers])) ||
         prev.inlineStyleMappers,
     };
   }, emptyAccumulator);
 
-  return createPluginsStrategy(pack);
+  return createPluginsStrategy(isEditor, pack);
 }

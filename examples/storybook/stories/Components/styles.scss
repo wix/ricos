@@ -1,6 +1,19 @@
+@font-face {
+  font-family: 'proxima-n-w01-reg';
+  src: url('https://static.parastorage.com/services/third-party/fonts/user-site-fonts/fonts/64017d81-9430-4cba-8219-8f5cc28b923e.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+}
+
+
+
 .page {
+  
   padding: 20px;
   padding-left: 40px; 
+  line-height: 1.5;
+  font-size: 18px;
+  font-family: "proxima-n-w01-reg", sans-serif;
 }
 
 .rce-wrapper {

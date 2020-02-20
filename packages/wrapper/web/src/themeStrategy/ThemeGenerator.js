@@ -1,35 +1,33 @@
-const Themes = {
+/* eslint-disable camelcase */
+const THEMES = {
   DEFAULT: 'Default',
   BACK_OFFICE: 'BackOffice',
   PALETTE: 'Palette',
 };
 
-const SUPPORTED_THEMES = [Themes.DEFAULT, Themes.PALETTE, Themes.BACK_OFFICE];
+const SUPPORTED_THEMES = [THEMES.DEFAULT, THEMES.PALETTE, THEMES.BACK_OFFICE];
 const BG_COLOR = 11;
 const SECONDARY_COLOR = 13;
 const TEXT_COLOR = 15;
 const ACTION_COLOR = 18;
 
-export default class RceTheme {
-  constructor({ theme, palette, themeGenerators = [] }) {
+export default class ThemeGenerator {
+  constructor(isEditor, { theme = THEMES.DEFAULT, palette, themeGenerators = [] }) {
     this.setTheme(theme, palette);
     this.themeGenerators = themeGenerators;
+    this.isEditor = isEditor;
   }
 
   setTheme(theme, palette) {
     if (SUPPORTED_THEMES.indexOf(theme) === -1) {
-      // eslint-disable-next-line no-console
-      console.log(theme);
-      // eslint-disable-next-line no-console
-      console.error('Unknown theme: ', theme);
-      this._theme = Themes.DEFAULT;
+      this._theme = THEMES.DEFAULT;
     } else {
       this._theme = theme;
     }
 
-    if (theme === Themes.PALETTE || theme === Themes.BACK_OFFICE) {
+    if (theme === THEMES.PALETTE || theme === THEMES.BACK_OFFICE) {
       if (!palette) {
-        throw Error('AAAArgh!');
+        throw Error('Invalid palette');
       } else {
         this.palette = palette;
       }
@@ -46,7 +44,7 @@ export default class RceTheme {
   }
 
   getStylesObject() {
-    if (this._theme === Themes.DEFAULT) {
+    if (this._theme === THEMES.DEFAULT) {
       return {};
     } else {
       const actionColor = this.getColorValue(ACTION_COLOR);
@@ -74,26 +72,10 @@ export default class RceTheme {
           background: bgColor,
           color: textColor,
         },
-        linkPreview: {
-          borderColor: textColor,
-          backgroundColor: bgColor,
-        },
-        linkPreview_title: {
-          color: textColor,
-        },
-        linkPreview_image: {
-          borderColor: textColor,
-        },
-        linkPreview_description: {
-          color: textColor,
-        },
-        linkPreview_url: {
-          color: secondaryColor,
-        },
         ...pluginThemes,
       };
     }
   }
 }
 
-export { Themes };
+export { THEMES };

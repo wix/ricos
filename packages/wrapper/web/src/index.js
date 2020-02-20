@@ -1,2 +1,1 @@
-import RichContentWrapper from './RichContentWrapper';
-export { RichContentWrapper };
+export { default as RichContentWrapper } from './RichContentWrapper';

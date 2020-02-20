@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-wrapper",
-  "version": "6.8.5",
+  "version": "6.8.6",
   "author": {
     "name": "Alex Greenstein",
     "email": "alexgr@wix.com"
@@ -41,10 +41,12 @@
   },
   "devDependencies": {
     "@babel/runtime": "7.2.0",
+    "babel-jest": "^25.1.0",
     "classnames": "^2.0.0",
     "cross-env": "^5.2.0",
     "draft-js": "0.11.2",
     "eslint": "^6.1.0",
+    "jest": "^25.1.0",
     "lodash": "^4.17.15",
     "prop-types": "^15.6.2",
     "react": "16.6.3",
@@ -55,10 +57,22 @@
   },
   "dependencies": {
     "react-modal": "~3.1.11",
-    "wix-rich-content-common": "6.8.5",
-    "wix-rich-content-editor": "6.8.5",
-    "wix-rich-content-editor-common": "6.8.5",
-    "wix-rich-content-viewer": "6.8.5"
+    "wix-rich-content-common": "6.8.6",
+    "wix-rich-content-editor": "6.8.6",
+    "wix-rich-content-editor-common": "6.8.6",
+    "wix-rich-content-viewer": "6.8.6"
+  },
+  "jest": {
+    "globals": {
+      "NODE_ENV": "test"
+    },
+    "transform": {
+      "^.+\\.jsx?$": "<rootDir>/../../../babel.jest.monorepo.js"
+    },
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|svg)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(css|scss)$": "<rootDir>/__mocks__/styleMock.js"
+    }
   },
   "unpkg": true,
   "publishConfig": {

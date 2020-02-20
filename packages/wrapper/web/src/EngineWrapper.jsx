@@ -3,7 +3,7 @@ import { RichContentEditorModal } from 'wix-rich-content-editor';
 import { createEmpty } from 'wix-rich-content-editor/dist/lib/editorStateConversion';
 import ReactModal from 'react-modal';
 import PropTypes from 'prop-types';
-import { modalStyles } from './defaults';
+import { modalStyles } from './themeStrategy/defaults';
 
 class EngineWrapper extends React.Component {
   constructor(props) {
@@ -38,10 +38,10 @@ class EngineWrapper extends React.Component {
   render() {
     const { strategies = [], modalSupport = true, children = {} } = this.props;
     const modifiedProps = strategies.reduce((props, strategyFunction) => {
-      const result = strategyFunction(children.props);
+      const result = strategyFunction(props);
       return { ...props, ...result };
     }, children.props);
-    const { helpers = {}, theme, locale, ModalsMap, onChange } = modifiedProps;
+    const { helpers = {}, theme, locale = 'en', ModalsMap, onChange } = modifiedProps;
     const { onRequestClose } = this.state.modalProps || {};
     if (modalSupport) {
       helpers.openModal = this.onModalOpen;
