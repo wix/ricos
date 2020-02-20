@@ -1,12 +1,12 @@
 import { createHeadersMarkdownDecorator } from './createHeadersMarkdownPlugin';
-import { HEADERS_MARKDOWN_TYPE } from './types';
+import { HEADERS_MARKDOWN_TYPE as type } from './types';
 import { DEFAULTS } from './defaults';
 
 export const pluginHeadersMarkdown = (config = {}) => {
   const finalConfig = { ...DEFAULTS.configViewer, ...config };
   return {
     config: finalConfig,
-    type: HEADERS_MARKDOWN_TYPE,
-    decorator: () => createHeadersMarkdownDecorator(finalConfig),
+    type,
+    decorator: (theme, config) => createHeadersMarkdownDecorator(config),
   };
 };

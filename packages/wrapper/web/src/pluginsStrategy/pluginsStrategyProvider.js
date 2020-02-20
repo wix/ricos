@@ -31,7 +31,7 @@ const createPluginsStrategy = (
         .map(mapper => mapper(newConfig, raw));
     const finalDecorators = decorators
       .concat(innerProps.decorators || [])
-      .map(decor => decor(theme));
+      .map(decor => decor(theme, newConfig));
     return {
       config: newConfig,
       typeMappers: typeMappers.concat(innerProps.typeMappers || []),
