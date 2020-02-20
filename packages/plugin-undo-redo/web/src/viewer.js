@@ -5,6 +5,5 @@ export const pluginUndoRedo = (config = {}) => {
   return {
     config: { ...DEFAULTS.config, ...config },
     type: UNDO_REDO_TYPE,
-    typeMapper: {},
   };
 };

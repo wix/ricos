@@ -7,7 +7,6 @@ export const pluginCodeBlock = (config = {}) => {
   return {
     config: { ...DEFAULTS.config, ...config },
     type: CODE_BLOCK_TYPE,
-    typeMapper: {},
     decorator: theme => new CodeBlockDecorator(theme),
   };
 };
