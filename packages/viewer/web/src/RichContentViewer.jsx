@@ -17,7 +17,6 @@ class RichContentViewer extends Component {
     super(props);
     this.state = {
       raw: RichContentViewer.getInitialState(props.initialState),
-      contextualData: this.initContext(),
     };
     const styles = { ...viewerStyles, ...viewerAlignmentStyles, ...rtlStyle };
     this.styles = mergeStyles({ styles, theme: props.theme });
@@ -31,40 +30,36 @@ class RichContentViewer extends Component {
         })
       : {};
 
-  initContext = () => {
-    const {
-      t,
-      theme,
-      isMobile,
-      anchorTarget,
-      relValue,
-      config,
-      helpers,
-      locale,
-      disabled,
-      shouldRenderOptimizedImages,
-      siteDomain,
-    } = this.props;
-    return {
-      t,
-      theme,
-      isMobile,
-      anchorTarget,
-      relValue,
-      config,
-      helpers,
-      locale,
-      disabled,
-      shouldRenderOptimizedImages,
-      siteDomain,
-      disableRightClick: config?.uiSettings?.disableRightClick,
-    };
-  };
+  getContextualData = ({
+    t,
+    theme,
+    isMobile,
+    anchorTarget,
+    relValue,
+    config,
+    helpers,
+    locale,
+    disabled,
+    seoMode,
+    siteDomain,
+  }) => ({
+    t,
+    theme,
+    isMobile,
+    anchorTarget,
+    relValue,
+    config,
+    helpers,
+    locale,
+    disabled,
+    seoMode,
+    siteDomain,
+    disableRightClick: config?.uiSettings?.disableRightClick,
+  });
 
-  static getDerivedStateFromProps(props, state) {
+  static getDerivedStateFromProps(props) {
     return {
       raw: RichContentViewer.getInitialState(props),
-      contextualData: { ...state.contextualData, disabled: props.disabled },
     };
   }
 
@@ -89,12 +84,14 @@ class RichContentViewer extends Component {
         [styles.rtl]: textDirection === 'rtl',
       });
 
+      const contextualData = this.getContextualData(this.props);
+
       const output = convertToReact(
         this.state.raw,
         styles,
         textDirection,
         typeMappers,
-        this.state.contextualData,
+        contextualData,
         decorators,
         inlineStyleMappers
       );
@@ -140,7 +137,7 @@ RichContentViewer.propTypes = {
   config: PropTypes.object,
   textDirection: PropTypes.oneOf(['rtl', 'ltr']),
   disabled: PropTypes.bool,
-  shouldRenderOptimizedImages: PropTypes.bool,
+  seoMode: PropTypes.bool,
   siteDomain: PropTypes.string,
   onError: PropTypes.func,
 };

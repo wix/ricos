@@ -45,7 +45,7 @@ class RichContentApp extends PureComponent {
 
   render() {
     const { editorState, viewerState, localeResource, locale } = this.state;
-    const { allLocales, initialState, mode } = this.props;
+    const { allLocales, initialState, mode, seoMode } = this.props;
     const App = mode === 'demo' ? ExampleApp : TestApp;
     return (
       <App
@@ -59,6 +59,7 @@ class RichContentApp extends PureComponent {
         localeResource={localeResource}
         onEditorChange={this.onEditorChange}
         setLocale={this.setLocaleResource}
+        seoMode={seoMode}
       />
     );
   }

@@ -15,10 +15,12 @@ import dividerContentState from '../../../../e2e/tests/fixtures/divider.json';
 import DividerEditor from './DividerEditor';
 
 // eslint-disable-next-line no-undef
-const sourcecode = preval`
-  const fs = require('fs')  
-  module.exports = fs.readFileSync(__dirname + '/DividerEditor.js', 'utf8')
-  `;
+// const sourcecode = preval`
+//   const fs = require('fs')
+//   module.exports = fs.readFileSync(__dirname + '/DividerEditor.js', 'utf8')
+//   `;
+
+const sourcecode = '<p>demo source code</p>';
 
 const editorState = createWithContent(convertFromRaw(dividerContentState));
 export default () => {
