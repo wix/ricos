@@ -11,7 +11,8 @@ export default function renderer() {
 
     const isMobile = req.query.mobile === '';
     const locale = req.query.hebrew === '' ? 'he' : 'en';
-    const props = { isMobile, locale };
+    const seoMode = req.query.seoMode === '';
+    const props = { isMobile, locale, seoMode };
 
     try {
       props.initialState = require(`../../../tests/fixtures/${fixtureName}.json`);

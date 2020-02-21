@@ -12,6 +12,8 @@ export const fixtures = [
   'old-image-format',
 ];
 
+export const fixturesToTestOnSeo = ['images'];
+
 export const DEFAULT_DESKTOP_BROWSERS = [
   { width: 1440, height: 900, name: 'chrome' },
   { width: 1440, height: 900, name: 'firefox' },
