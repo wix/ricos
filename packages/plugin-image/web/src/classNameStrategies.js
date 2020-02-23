@@ -22,7 +22,7 @@ export const sizeClassName = (componentData, theme, styles, isMobile) => {
     return '';
   }
   return isMobile
-    ? classNames(styles.sizeFullWidth, theme.sizeFullWidth)
+    ? classNames(styles.sizeContent, theme.sizeContent)
     : classNames(
         styles[`size${upperFirst(camelCase(size))}`],
         theme[`size${upperFirst(camelCase(size))}`]
