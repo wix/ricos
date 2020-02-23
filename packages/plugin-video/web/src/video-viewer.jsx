@@ -89,6 +89,7 @@ class VideoViewer extends Component {
           className={classNames(this.styles.video_player)}
           onContextMenu={this.handleContextMenu}
           key={key}
+          data-loaded={isLoaded}
           {...props}
           controls={props.controls || isLoaded}
         />
