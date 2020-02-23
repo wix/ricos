@@ -62,6 +62,7 @@ class VideoViewer extends Component {
   render() {
     this.styles = this.styles || mergeStyles({ styles, theme: this.props.theme });
     const { url, isLoaded, key } = this.state;
+    this.props.setComponentUrl?.(url);
     const props = {
       url,
       onReady: this.onReactPlayerReady,
@@ -90,8 +91,9 @@ VideoViewer.propTypes = {
   height: PropTypes.string,
   settings: PropTypes.object.isRequired,
   theme: PropTypes.object.isRequired,
-  disabled: PropTypes.bool.isRequired,
-  disableRightClick: PropTypes.bool.isRequired,
+  disabled: PropTypes.bool,
+  disableRightClick: PropTypes.bool,
+  setComponentUrl: PropTypes.func,
 };
 
 VideoViewer.defaultProps = {

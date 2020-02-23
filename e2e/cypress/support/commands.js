@@ -27,6 +27,7 @@ const getUrl = (componentId, fixtureName = '') =>
   `/${componentId}${fixtureName ? '/' + fixtureName : ''}${buildQuery({
     mobile: isMobile,
     hebrew: isHebrew,
+    seoMode: isSeoMode,
   })}`;
 
 // Viewport size commands
@@ -35,6 +36,7 @@ const run = (app, fixtureName) => cy.visit(getUrl(app, fixtureName));
 
 let isMobile = false;
 let isHebrew = false;
+let isSeoMode = false;
 
 Cypress.Commands.add('switchToMobile', () => {
   isMobile = true;
@@ -44,6 +46,10 @@ Cypress.Commands.add('switchToMobile', () => {
 Cypress.Commands.add('switchToDesktop', () => {
   isMobile = false;
   resizeForDesktop();
+});
+
+Cypress.Commands.add('switchToSeoMode', () => {
+  isSeoMode = true;
 });
 
 Cypress.Commands.add('switchToHebrew', () => {
@@ -66,6 +72,12 @@ Cypress.Commands.add('loadEditorAndViewer', fixtureName => {
   run('rce', fixtureName).then(() => {
     disableTransitions();
     hideAllTooltips();
+  });
+});
+
+Cypress.Commands.add('loadEditorAndViewerOnSsr', fixtureName => {
+  cy.request(getUrl('rce', fixtureName)).then(html => {
+    cy.state('document').write(html.body);
   });
 });
 
@@ -368,7 +380,7 @@ Cypress.Commands.add('addSoundCloud', () => {
     .click();
 });
 
-Cypress.Commands.add('addVideoFromURI', () => {
+Cypress.Commands.add('addVideoFromURL', () => {
   cy.get(`[data-hook*=${VIDEO_PLUGIN.INPUT}]`).type('https://youtu.be/BBu5codsO6Y');
   cy.get(`[data-hook*=${VIDEO_PLUGIN.ADD}]`).click();
   cy.get(`[data-hook=${PLUGIN_COMPONENT.VIDEO}]:first`)

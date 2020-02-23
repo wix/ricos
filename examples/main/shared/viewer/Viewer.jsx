@@ -9,6 +9,7 @@ import getImagesData from 'wix-rich-content-fullscreen/dist/lib/getImagesData';
 import Fullscreen from 'wix-rich-content-fullscreen';
 import 'wix-rich-content-fullscreen/dist/styles.min.css';
 
+import { GALLERY_TYPE } from 'wix-rich-content-plugin-gallery';
 const anchorTarget = '_top';
 const relValue = 'noreferrer';
 
@@ -24,6 +25,10 @@ export default class Viewer extends PureComponent {
       disabled: false,
       expandModeIsOpen: false,
     };
+
+    const { scrollingElementFn } = props;
+    const additionalConfig = { [GALLERY_TYPE]: { scrollingElement: scrollingElementFn } };
+    this.pluginsConfig = Plugins.getConfig(additionalConfig);
   }
 
   componentDidUpdate(prevProps) {
@@ -43,23 +48,30 @@ export default class Viewer extends PureComponent {
   };
 
   render() {
-    const { expandModeIndex, expandModeIsOpen } = this.state;
+    const { isMobile, locale, initialState, seoMode } = this.props;
+    const { expandModeIsOpen, expandModeIndex, disabled } = this.state;
+
+    const viewerProps = {
+      locale,
+      relValue,
+      anchorTarget,
+      isMobile,
+      theme,
+      initialState,
+      disabled,
+      seoMode,
+    };
+
     return (
       <div id="rich-content-viewer" className="viewer">
         <RichContentViewer
           helpers={this.helpers}
           typeMappers={Plugins.typeMappers}
-          inlineStyleMappers={Plugins.getInlineStyleMappers(this.props.initialState)}
+          inlineStyleMappers={Plugins.getInlineStyleMappers(initialState)}
           decorators={Plugins.decorators}
-          config={Plugins.config}
-          initialState={this.props.initialState}
-          theme={theme}
-          isMobile={this.props.isMobile}
-          anchorTarget={anchorTarget}
-          relValue={relValue}
-          disabled={this.state.disabled}
-          locale={this.props.locale}
+          config={this.pluginsConfig}
           // siteDomain="https://www.wix.com"
+          {...viewerProps}
         />
         {!isSSR() && (
           <Fullscreen
@@ -69,7 +81,7 @@ export default class Viewer extends PureComponent {
             index={expandModeIndex}
             relValue={relValue}
             anchorTarget={anchorTarget}
-            locale={this.props.locale}
+            locale={locale}
           />
         )}
       </div>

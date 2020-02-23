@@ -41,3 +41,8 @@ export const DEFAULT_BACKGROUND_STYLE_FN_DRAFT = styles =>
   styles
     .toArray()
     .reduce((cssStyle, style) => ({ ...cssStyle, ...DEFAULT_BACKGROUND_STYLE_FN(style) }), {}); // eslint-disable-line new-cap
+
+export const DEFAULTS = {
+  configTextColor: {},
+  configTextHighlight: {},
+};

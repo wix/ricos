@@ -197,7 +197,7 @@ GalleryComponent.propTypes = {
   className: PropTypes.string.isRequired,
   settings: PropTypes.object,
   helpers: PropTypes.object.isRequired,
-  disableRightClick: PropTypes.bool.isRequired,
+  disableRightClick: PropTypes.bool,
   theme: PropTypes.object.isRequired,
   isMobile: PropTypes.bool.isRequired,
   anchorTarget: PropTypes.string.isRequired,

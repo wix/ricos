@@ -1,5 +1,18 @@
 // eslint-disable-next-line prettier/prettier
-export const fixtures = ['headers', 'images', 'inline-styles', 'lists', 'quote', 'facebook-video'];
+export const fixtures = [
+  'headers',
+  'images',
+  'inline-styles',
+  'lists',
+  'quote',
+  'facebook-video',
+  'gif',
+  'giphy',
+  'gallery-layouts',
+  'old-image-format',
+];
+
+export const fixturesToTestOnSeo = ['images'];
 
 export const DEFAULT_DESKTOP_BROWSERS = [
   { width: 1440, height: 900, name: 'chrome' },

@@ -34,8 +34,9 @@ class GiphyViewer extends Component {
 
   render() {
     this.styles = this.styles || mergeStyles({ styles, theme: this.props.theme });
+    const { componentData, setComponentUrl } = this.props;
     const gifUrl = this.getSourceUrl();
-    const { componentData } = this.props;
+    setComponentUrl?.(gifUrl);
     // video should be treated as an noninteractive git element
     /* eslint-disable jsx-a11y/no-redundant-roles, jsx-a11y/no-interactive-element-to-noninteractive-role*/
     return gifUrl.endsWith('.mp4') ? (
@@ -47,7 +48,7 @@ class GiphyViewer extends Component {
         playsInline // required for autoplay in iOS
         aria-label="gif"
         className={this.styles.giphy_player}
-        src={this.getSourceUrl()}
+        src={gifUrl}
       />
     ) : (
       <img
@@ -72,6 +73,7 @@ GiphyViewer.propTypes = {
   settings: PropTypes.object.isRequired,
   isMobile: PropTypes.bool.isRequired,
   theme: PropTypes.object.isRequired,
+  setComponentUrl: PropTypes.func,
 };
 
 GiphyViewer.defaultProps = {
