@@ -32,9 +32,6 @@ class VideoViewer extends Component {
           url.then(url => this.setState({ url: this.normalizeUrl(url) }));
         }
       }
-      if (nextProps.componentData.tempData !== this.props.componentData.tempData) {
-        this.onReactPlayerReady();
-      }
     }
   }
 
