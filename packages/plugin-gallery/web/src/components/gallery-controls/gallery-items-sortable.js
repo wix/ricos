@@ -526,7 +526,7 @@ export class SortableComponent extends Component {
     }
   };
 
-  onUpdateImage = metadata => {
+  onUpdateItem = metadata => {
     const { editedItem } = this.state;
     editedItem.metadata = { ...editedItem.metadata, ...metadata };
     this.setState({ editedItem });
