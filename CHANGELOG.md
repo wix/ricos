@@ -28,6 +28,9 @@
 ### :house: Internal
 - `fullscreen`
   - [#625](https://github.com/wix-incubator/rich-content/pull/625) replaced react-images with Pro-Gallery
+- `html`
+  - [#681](https://github.com/wix-incubator/rich-content/pull/681) removed htmlIframeSrc from config. Loads iframe html from bundle instead of the static file served by the consumer
+
 </details>
 <hr/>
 

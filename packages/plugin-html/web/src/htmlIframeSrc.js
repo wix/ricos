@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html>
+/* eslint-disable */
+export default `
   <head>
     <style type="text/css">
       iframe[class|='instagram'],
@@ -201,4 +201,4 @@
   </head>
 
   <body></body>
-</html>
+`;

@@ -1,5 +1,4 @@
 const wixStorybookConfig = require('yoshi/config/webpack.config.storybook');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = ({ config }) => {
   const baseConfig = wixStorybookConfig(config);
