@@ -40,14 +40,6 @@ class GalleryViewer extends React.Component {
     this.handleChangeOfItems(nextProps);
   }
 
-  handleChangeOfItems(nextProps) {
-    if (
-      this.props?.helpers?.onProgressChange &&
-      this.state.numOfItems !== nextProps.componentData.items?.length
-    )
-      this.setState({ isLoading: true, numOfItems: nextProps.componentData.items?.length });
-  }
-
   componentDidUpdate(prevProps) {
     if (this.shouldUpdateDimensions(prevProps.componentData)) {
       this.updateDimensions();
@@ -179,14 +171,6 @@ class GalleryViewer extends React.Component {
       {this.renderTitle(itemProps.description)}
     </Fragment>
   );
-
-  renderLoader = () => {
-    return (
-      <div className={this.styles.imageOverlay}>
-        <Loader type={'medium'} helpers={this.props.helpers} onLoad={this.onLoad} />
-      </div>
-    );
-  };
 
   handleContextMenu = e => this.props.disableRightClick && e.preventDefault();
 
