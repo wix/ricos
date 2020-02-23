@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactPlayer from 'react-player';
-import { isSSR } from '../Utils/ssrUtils';
+import { isSSR } from 'wix-rich-content-common/src/Utils/ssrUtils';
 
 const VIMEO_SDK_URL = 'https://player.vimeo.com/api/player.js';
 const VIMEO_GLOBAL = 'Vimeo';
