@@ -38,6 +38,14 @@ class GalleryViewer extends React.Component {
   componentWillReceiveProps(nextProps) {
     this.setState({ ...this.stateFromProps(nextProps) });
     this.handleChangeOfItems(nextProps);
+<<<<<<< HEAD
+=======
+  }
+
+  handleChangeOfItems(nextProps) {
+    if (this.state.numOfItems !== nextProps.componentData.items?.length)
+      this.setState({ isLoading: true, numOfItems: nextProps.componentData.items?.length });
+>>>>>>> refactor
   }
 
   componentDidUpdate(prevProps) {
