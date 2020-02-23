@@ -20,14 +20,13 @@ class Loader extends React.Component {
   updateProgress = (progress, localUrl) => {
     this.setState({ progress, localUrl });
     if (progress >= 100) {
-      this.props.onLoad?.();
+      this.props?.onLoad?.(false);
+    } else {
+      this.props?.onLoad?.(true);
     }
   };
 
   renderProgress() {
-    if (!this.state.progress) {
-      return null;
-    }
     return (
       <div>
         <div
@@ -35,7 +34,7 @@ class Loader extends React.Component {
             [this.styles[this.props.type]]: this.props.type,
           })}
         >
-          {this.state.progress + '%'}
+          {`${this.state.progress}%`}
         </div>
       </div>
     );
@@ -59,7 +58,7 @@ class Loader extends React.Component {
             [this.styles[this.props.type]]: this.props.type,
           })}
         />
-        {this.renderProgress()}
+        {typeof this.state.progress === 'number' && this.renderProgress()}
       </div>
     );
   }
