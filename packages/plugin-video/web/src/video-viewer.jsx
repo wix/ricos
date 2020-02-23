@@ -4,7 +4,7 @@ import ReactPlayerWrapper from './reactPlayerWrapper';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { mergeStyles, validate, pluginVideoSchema, Loader } from 'wix-rich-content-common';
-import { isEqual, debounce } from 'lodash';
+import { isEqual } from 'lodash';
 import getVideoSrc from './get-video-source';
 import styles from '../statics/styles/video-viewer.scss';
 
@@ -46,16 +46,16 @@ class VideoViewer extends Component {
     return element.clientHeight / element.clientWidth;
   };
 
-  onReactPlayerReady = debounce(() => {
+  onReactPlayerReady = () => {
     // eslint-disable-next-line react/no-find-dom-node
     const wrapper = ReactDOM.findDOMNode(this).parentNode;
     const ratio = this.getVideoRatio(wrapper);
     wrapper.style['padding-bottom'] = ratio * 100 + '%';
 
-    if (!this.state.isLoaded && !this.props.componentData.tempData) {
+    if (!this.state.isLoaded) {
       this.setState({ isLoaded: true });
     }
-  }, 1000);
+  };
 
   renderLoader = () => {
     return (
