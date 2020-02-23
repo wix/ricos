@@ -19,6 +19,8 @@ class GalleryViewer extends React.Component {
     this.state = {
       size: {},
       ...this.stateFromProps(props),
+      isLoading: true,
+      numOfItems: props.componentData?.items?.length,
     };
   }
 
@@ -35,6 +37,12 @@ class GalleryViewer extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     this.setState({ ...this.stateFromProps(nextProps) });
+    this.handleChangeOfItems(nextProps);
+  }
+
+  handleChangeOfItems(nextProps) {
+    if (this.state.numOfItems !== nextProps.componentData.items?.length)
+      this.setState({ isLoading: true, numOfItems: nextProps.componentData.items?.length });
   }
 
   componentDidUpdate(prevProps) {
@@ -177,11 +185,11 @@ class GalleryViewer extends React.Component {
     );
   };
 
-  onLoad = () => {
-    this.setState({ isLoaded: true });
+  onLoad = isLoading => {
+    this.setState({ isLoading });
   };
 
-  isLoadingProgress = () => !this.state.isLoaded && this.props?.helpers?.onProgressChange;
+  isLoadingProgress = () => this.state.isLoading && this.props?.helpers?.onProgressChange;
 
   handleContextMenu = e => this.props.disableRightClick && e.preventDefault();
 
@@ -211,13 +219,10 @@ class GalleryViewer extends React.Component {
         />
       </div>
     );
-    if (!this.isLoadingProgress()) {
-      return <div>{gallery}</div>;
-    }
     return (
       <div>
         {gallery}
-        {this.renderLoader()}
+        {this.isLoadingProgress() && this.renderLoader()}
       </div>
     );
   }
