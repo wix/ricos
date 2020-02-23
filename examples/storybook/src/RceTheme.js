@@ -58,6 +58,22 @@ export default class RceTheme {
           strokeWidth: '12px',
           color: this.getColorValue(28),
         },
+        linkPreview: {
+          borderColor: textColor,
+          backgroundColor: bgColor,
+        },
+        linkPreview_title: {
+          color: textColor,
+        },
+        linkPreview_image: {
+          borderColor: textColor,
+        },
+        linkPreview_description: {
+          color: textColor,
+        },
+        linkPreview_url: {
+          color: actionColor,
+        },
       };
     }
   }

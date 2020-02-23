@@ -1,0 +1,59 @@
+{
+    "blocks": [
+      {
+        "key": "13iji",
+        "text": "Test",
+        "type": "unstyled",
+        "depth": 0,
+        "inlineStyleRanges": [],
+        "entityRanges": [],
+        "data": {}
+      },
+      {
+        "key": "a8q8p",
+        "text": "a",
+        "type": "atomic",
+        "depth": 0,
+        "inlineStyleRanges": [],
+        "entityRanges": [
+          {
+            "offset": 0,
+            "length": 1,
+            "key": 0
+          }
+        ],
+        "data": {}
+      }
+    ],
+    "entityMap": {
+      "0": {
+        "type": "IMAGE",
+        "mutability": "MUTABLE",
+        "data": {
+          "src": {
+            "id": "212af3_8337022e2b2f4e1c8b1e602ad9016dac~mv2.jpg",
+            "width": 1080,
+            "height": 708,
+            "file_name": "212af3_8337022e2b2f4e1c8b1e602ad9016dac~mv2.jpg",
+            "original_file_name": "212af3_8337022e2b2f4e1c8b1e602ad9016dac~mv2.jpg"
+          },
+          "width": 1080,
+          "height": 708
+        }
+      },
+      "14": {
+        "type": "wix-draft-plugin-image",
+        "mutability": "IMMUTABLE",
+        "data": {
+          "src": "//static.wixstatic.com/media/9916f5_f3a135d986354da09522bd288f51d4a6~mv2.jpg/v1/fill/w_626,h_417/9916f5_f3a135d986354da09522bd288f51d4a6~mv2.jpg",
+          "linkId": "",
+          "type": "IMG",
+          "alt": "",
+          "height": 417,
+          "width": 626,
+          "className": "",
+          "key": "87i39"
+        }
+      }
+    }
+  }

@@ -153,6 +153,7 @@ class ImageComponent extends React.Component {
       disableRightClick,
       getInPluginEditingMode,
       setInPluginEditingMode,
+      setComponentUrl,
     } = this.props;
     return (
       <ImageViewer
@@ -172,6 +173,7 @@ class ImageComponent extends React.Component {
         defaultCaption={this.props.t('ImageViewer_Caption')}
         onCaptionChange={this.handleCaptionChange}
         setFocusToBlock={blockProps.setFocusToBlock}
+        setComponentUrl={setComponentUrl}
       />
     );
   }
@@ -189,10 +191,11 @@ ImageComponent.propTypes = {
   helpers: PropTypes.object.isRequired,
   t: PropTypes.func.isRequired,
   theme: PropTypes.object.isRequired,
-  disableRightClick: PropTypes.bool.isRequired,
-  getInPluginEditingMode: PropTypes.func.isRequired,
-  setInPluginEditingMode: PropTypes.func.isRequired,
+  disableRightClick: PropTypes.bool,
+  getInPluginEditingMode: PropTypes.func,
+  setInPluginEditingMode: PropTypes.func,
   isMobile: PropTypes.bool.isRequired,
+  setComponentUrl: PropTypes.func,
 };
 
 export { ImageComponent as Component, DEFAULTS };

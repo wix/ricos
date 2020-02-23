@@ -13,26 +13,81 @@
     Click to see more.
   </summary>
 
-  ### :rocket: New Feature
-  - `editor`
-    - [#570](https://github.com/wix-incubator/rich-content/pull/570) onError callback prop added
-  - `viewer`
-    - [#570](https://github.com/wix-incubator/rich-content/pull/570) onError callback prop added
-  ### :bug: Bug Fix
-  - `map`
-    - [#612](https://github.com/wix-incubator/rich-content/pull/612) warnings issues of google-maps-loader props
-  - `editor-common`
-    - [#642](https://github.com/wix-incubator/rich-content/pull/642) block selection is removed when losing focus
-  - `link`
-    - [#646](https://github.com/wix-incubator/rich-content/pull/646) backslash in link panel breaks editor
-  ### :house: Internal
-  - `general`
-    - [#627](https://github.com/wix-incubator/rich-content/pull/627) React Context completely removed
-    - [#641](https://github.com/wix-incubator/rich-content/pull/641) `babel-plugin-transform-react-remove-prop-type` added
-    - [#637](https://github.com/wix-incubator/rich-content/pull/637) moved deployment from Travis CI to Github Actions
+### :rocket: New Feature
+- `viewer`
+  - [#702](https://github.com/wix-incubator/rich-content/pull/702) seo mode prop for viewer render images in high resolution
+- `wrapper`
+  - [#714](https://github.com/wix-incubator/rich-content/pull/714) locale strategy added
+### :bug: Bug Fix
+- `wrapper`
+  - [#719](https://github.com/wix-incubator/rich-content/pull/719) locale strategy fixes
+- `image`
+  - [#712](https://github.com/wix-incubator/rich-content/pull/712) old image client data support #2
 
 </details>
 <hr/>
+
+## 6.8.6 (Feb 19, 2020)
+### :bug: Bug Fix
+- `image`
+  - [#696](https://github.com/wix-incubator/rich-content/pull/696) fix images with transparency show shadow outline
+  - [#706](https://github.com/wix-incubator/rich-content/pull/706) old image client data support
+
+## 6.8.5 (Feb 17, 2020)
+### :bug: Bug Fix
+- `editor-common`
+  - [#680](https://github.com/wix-incubator/rich-content/pull/680) dragging plugins from editor to address bar pastes media url
+- `gallery`
+  - [#690](https://github.com/wix-incubator/rich-content/pull/690) fix title and altText
+
+
+## 6.8.4 (Feb 12, 2020)
+### :bug: Bug Fix
+- `editor-common`
+  - [#645](https://github.com/wix-incubator/rich-content/pull/645) When removing link from text the cursor is in the correct position
+- `gallery`
+  - [#672](https://github.com/wix-incubator/rich-content/pull/672) gallery images settings frozen
+
+## 6.8.3 (Feb 11, 2020)
+### :bug: Bug Fix
+- `image`
+  - [da631441](https://github.com/wix-incubator/rich-content/commit/da631441) gif opacity
+### :house: Internal
+- `general`
+  - [#666](https://github.com/wix-incubator/rich-content/pull/666) ES5 syntax validation in `dist/statics` on postbuild
+
+## 6.8.2 (Feb 9, 2020)
+### :bug: Bug Fix
+- `emoji`
+  - [#669](https://github.com/wix-incubator/rich-content/pull/669) mouse cursor is shown as pointer on the actual icons + fix the emoji plugin in RTL+ position the modal at the bottom in mobile+ refactoring the emoji modal and giphy modal to be more consistent
+- `common`
+  - [#658](https://github.com/wix-incubator/rich-content/pull/658) `types` definitions moved to `src/consts` from `statics`
+- `image`
+  - [#657](https://github.com/wix-incubator/rich-content/pull/657) defaults for editor-only props in image-viewer
+  - [#657](https://github.com/wix-incubator/rich-content/pull/657) in-plugin editing input rendered in edit mode only
+  - [#657](https://github.com/wix-incubator/rich-content/pull/657) highres URL on SSR protection
+
+## 6.8.1 (Feb 6, 2020)
+### :bug: Bug Fix
+- `viewer`
+  - [#654](https://github.com/wix-incubator/rich-content/pull/654) plugin settings retrieved correctly
+
+## 6.8.0 (Feb 5, 2020)
+### :rocket: New Feature
+- `editor`
+  - [#570](https://github.com/wix-incubator/rich-content/pull/570) onError callback prop added
+- `viewer`
+  - [#570](https://github.com/wix-incubator/rich-content/pull/570) onError callback prop added
+### :bug: Bug Fix
+- `map`
+  - [#612](https://github.com/wix-incubator/rich-content/pull/612) warnings issues of google-maps-loader props
+- `link`
+  - [#646](https://github.com/wix-incubator/rich-content/pull/646) backslash in link panel breaks editor
+### :house: Internal
+- `general`
+  - [#627](https://github.com/wix-incubator/rich-content/pull/627) React Context completely removed
+  - [#641](https://github.com/wix-incubator/rich-content/pull/641) `babel-plugin-transform-react-remove-prop-type` added
+  - [#637](https://github.com/wix-incubator/rich-content/pull/637) moved deployment from Travis CI to Github Actions
 
 ## 6.7.1 (Jan 27, 2020)
 ### :bug: Bug Fix
@@ -98,7 +153,7 @@
 - `example`
   - [#634](https://github.com/wix-incubator/rich-content/pull/634) toggle for mocking image multi-select
   - [#624](https://github.com/wix-incubator/rich-content/pull/575) video and image selection is uses external selection logic
-    
+
 ## 6.6.8 (Jan 16, 2020)
 ### :bug: Bug Fix
 - `editor-common`

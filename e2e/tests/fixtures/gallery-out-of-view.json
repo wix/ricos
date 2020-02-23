@@ -46,6 +46,114 @@
       "data": {}
     },
     {
+      "key": "67s1",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "10gmm",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "64a46",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "6nm5u",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "a6jef",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "5d449",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "fh476",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "8t914",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "amv93",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "73hno",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "bvtga",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "eotsg",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
       "key": "9pelj",
       "text": "",
       "type": "unstyled",
@@ -425,24 +533,21 @@
     },
     {
       "key": "1kf00",
-      "text": "",
-      "type": "unstyled",
+      "text": " ",
+      "type": "atomic",
       "depth": 0,
       "inlineStyleRanges": [],
-      "entityRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 0
+        }
+      ],
       "data": {}
     },
     {
-      "key": "5qjpg",
-      "text": "",
-      "type": "unstyled",
-      "depth": 0,
-      "inlineStyleRanges": [],
-      "entityRanges": [],
-      "data": {}
-    },
-    {
-      "key": "79rla",
+      "key": "7l980",
       "text": "",
       "type": "unstyled",
       "depth": 0,
@@ -460,7 +565,7 @@
         {
           "offset": 0,
           "length": 1,
-          "key": 0
+          "key": 1
         }
       ],
       "data": {}
@@ -502,7 +607,7 @@
         {
           "offset": 0,
           "length": 1,
-          "key": 1
+          "key": 2
         }
       ],
       "data": {}
@@ -515,10 +620,80 @@
       "inlineStyleRanges": [],
       "entityRanges": [],
       "data": {}
+    },
+    {
+      "key": "benr6",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
     }
   ],
   "entityMap": {
     "0": {
+      "type": "wix-draft-plugin-gallery",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "items": [
+          {
+            "metadata": {
+              "height": 3840,
+              "width": 5494
+            },
+            "itemId": "a466b258c6b5e2096fa546c86aae8fa2",
+            "url": "8bb438_eeef61d83253480ab7bbdb07692b4c90.jpg"
+          },
+          {
+            "metadata": {
+              "height": 3737,
+              "width": 5600
+            },
+            "itemId": "860df034014674abd7a2e73abe0b851b",
+            "url": "8bb438_ff062a651e174cf5926fe5c088be1099.jpg"
+          },
+          {
+            "metadata": {
+              "height": 2124,
+              "width": 3192
+            },
+            "itemId": "a78c2fa4a7c95115ca0c6674d07ec937",
+            "url": "8bb438_67a68c0652d740bab508f68662acc882.jpg"
+          }
+        ],
+        "styles": {
+          "galleryLayout": 7,
+          "showArrows": true,
+          "cubeImages": true,
+          "smartCrop": false,
+          "cubeType": "fill",
+          "cubeRatio": 0.35,
+          "isVertical": false,
+          "galleryType": "Strips",
+          "groupSize": 1,
+          "groupTypes": "1",
+          "fixedColumns": 0,
+          "hasThumbnails": false,
+          "galleryThumbnailsAlignment": "none",
+          "oneRow": true,
+          "enableScroll": true,
+          "isGrid": false,
+          "isColumns": true,
+          "isSlider": false,
+          "isSlideshow": false,
+          "cropOnlyFill": false,
+          "imageMargin": 20
+        },
+        "config": {
+          "alignment": "center",
+          "size": "content",
+          "layout": "small",
+          "spacing": 0
+        }
+      }
+    },
+    "1": {
       "type": "wix-draft-plugin-gallery",
       "mutability": "IMMUTABLE",
       "data": {
@@ -575,7 +750,7 @@
         }
       }
     },
-    "1": {
+    "2": {
       "type": "wix-draft-plugin-image",
       "mutability": "IMMUTABLE",
       "data": {
@@ -595,5 +770,5 @@
       }
     }
   },
-  "VERSION": "6.7.0"
+  "VERSION": "6.7.1"
 }

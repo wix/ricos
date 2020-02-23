@@ -52,8 +52,8 @@ class PluginViewer extends PureComponent {
     } = this.props;
     const { component: Component, elementType } = pluginComponent;
     const { container } = pluginComponent.classNameStrategies || {};
-    const settings = (config && config[type]) || {};
     const { anchorTarget, relValue, config, theme } = context;
+    const settings = config?.[type] || {};
     const componentProps = {
       componentData,
       settings,
@@ -125,7 +125,7 @@ PluginViewer.propTypes = {
     t: PropTypes.func.isRequired,
     locale: PropTypes.string.isRequired,
     disabled: PropTypes.bool,
-    shouldRenderOptimizedImages: PropTypes.bool,
+    seoMode: PropTypes.bool,
     siteDomain: PropTypes.string,
     disableRightClick: PropTypes.bool,
   }).isRequired,

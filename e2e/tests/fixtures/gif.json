@@ -1,7 +1,7 @@
 {
   "blocks": [
     {
-      "key": "8s1v3",
+      "key": "1ebsm",
       "text": "",
       "type": "unstyled",
       "depth": 0,
@@ -10,7 +10,7 @@
       "data": {}
     },
     {
-      "key": "1u5r4",
+      "key": "8e2kc",
       "text": " ",
       "type": "atomic",
       "depth": 0,
@@ -25,7 +25,7 @@
       "data": {}
     },
     {
-      "key": "bsrvp",
+      "key": "28c1k",
       "text": "",
       "type": "unstyled",
       "depth": 0,
@@ -36,21 +36,24 @@
   ],
   "entityMap": {
     "0": {
-      "type": "wix-draft-plugin-giphy",
+      "type": "wix-draft-plugin-image",
       "mutability": "IMMUTABLE",
       "data": {
         "config": {
+          "alignment": "center",
           "size": "content",
-          "alignment": "center"
+          "showTitle": true,
+          "showDescription": true
         },
-        "gif": {
-          "originalUrl": "https://media1.giphy.com/media/hrk8ehR4lCZ27FtjPA/giphy_s.gif",
-          "stillUrl": "https://media1.giphy.com/media/hrk8ehR4lCZ27FtjPA/giphy_s.gif",
-          "height": 400,
-          "width": 480
+        "src": {
+          "id": "7a41ac_2129d1406ef54c92a9219a7c0609ce7a~mv2.gif",
+          "original_file_name": "7a41ac_2129d1406ef54c92a9219a7c0609ce7a~mv2.gif",
+          "file_name": "7a41ac_2129d1406ef54c92a9219a7c0609ce7a~mv2.gif",
+          "width": 700,
+          "height": 394
         }
       }
     }
   },
-  "VERSION": "5.1.1"
+  "VERSION": "6.8.2"
 }

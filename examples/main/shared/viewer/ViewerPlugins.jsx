@@ -87,11 +87,8 @@ const uiSettings = {
   disableRightClick: true,
 };
 
-export const config = {
-  [GALLERY_TYPE]: {
-    scrollingElement: () =>
-      typeof window !== 'undefined' && document.getElementsByClassName('viewer-example')[0],
-  },
+const config = {
+  [GALLERY_TYPE]: {},
   [HEADERS_MARKDOWN_TYPE]: {
     hideMarkdown: true,
   },
@@ -127,6 +124,18 @@ export const config = {
     getVideoUrl: src => `https://video.wixstatic.com/${src.pathname}`,
   },
   uiSettings,
+};
+
+export const getConfig = (additionalConfig = {}) => {
+  let _config = { ...config };
+  Object.keys(additionalConfig).forEach(key => {
+    if (additionalConfig[key]) {
+      const orgConfig = config[key] || {};
+      _config[key] = { ...orgConfig, ...additionalConfig[key] };
+    }
+  });
+
+  return _config;
 };
 
 export const getInlineStyleMappers = raw => [

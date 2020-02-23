@@ -89,7 +89,7 @@ class SoundCloud extends Component {
   };
 
   renderPlayer = () => {
-    const { componentData, theme, disabled } = this.props;
+    const { componentData, theme, disabled, setComponentUrl } = this.props;
     return (
       <SoundCloudViewer
         ref={this.setPlayer}
@@ -98,6 +98,7 @@ class SoundCloud extends Component {
         onStart={this.handleStart}
         theme={theme}
         disabled={disabled}
+        setComponentUrl={setComponentUrl}
       />
     );
   };
@@ -139,7 +140,8 @@ SoundCloud.propTypes = {
   className: PropTypes.string.isRequired,
   theme: PropTypes.object.isRequired,
   t: PropTypes.func.isRequired,
-  disabled: PropTypes.bool.isRequired,
+  disabled: PropTypes.bool,
+  setComponentUrl: PropTypes.func,
 };
 
 export { SoundCloud as Component, DEFAULTS };

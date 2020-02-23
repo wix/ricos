@@ -155,10 +155,10 @@ class GalleryViewer extends React.Component {
     ) : null;
   };
 
-  renderTitle = alt => {
-    return alt ? (
+  renderTitle = title => {
+    return title ? (
       <div className={this.styles.imageTitleContainer}>
-        <div className={this.styles.imageTitle}>{alt}</div>
+        <div className={this.styles.imageTitle}>{title}</div>
       </div>
     ) : null;
   };
@@ -166,7 +166,7 @@ class GalleryViewer extends React.Component {
   hoverElement = itemProps => (
     <Fragment>
       {this.renderExpandIcon(itemProps)}
-      {this.renderTitle(itemProps.alt)}
+      {this.renderTitle(itemProps.description)}
     </Fragment>
   );
 
@@ -206,7 +206,7 @@ GalleryViewer.propTypes = {
   onClick: PropTypes.func,
   className: PropTypes.string,
   settings: PropTypes.object,
-  disableRightClick: PropTypes.bool.isRequired,
+  disableRightClick: PropTypes.bool,
   theme: PropTypes.object.isRequired,
   isMobile: PropTypes.bool.isRequired,
   helpers: PropTypes.object.isRequired,

@@ -35,12 +35,20 @@ module.exports = env => ({
   module: {
     rules: [
       {
+        test: /\.js$/,
+        use: ['source-map-loader'],
+        enforce: 'pre',
+        include: [
+          /\*wix-rich-content-*/
+        ],
+      },
+      {
         test: /\.css$/,
         use: [
           {
             loader: 'style-loader',
             options: {
-              insertAt: 'top',
+              insert: 'head',
             },
           },
           'css-loader',
