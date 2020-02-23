@@ -18,12 +18,16 @@
   - [#702](https://github.com/wix-incubator/rich-content/pull/702) seo mode prop for viewer render images in high resolution
 - `wrapper`
   - [#714](https://github.com/wix-incubator/rich-content/pull/714) locale strategy added
+- `gallery`
+  - [#625](https://github.com/wix-incubator/rich-content/pull/625) gallery supports adding videos
 ### :bug: Bug Fix
 - `wrapper`
   - [#719](https://github.com/wix-incubator/rich-content/pull/719) locale strategy fixes
 - `image`
   - [#712](https://github.com/wix-incubator/rich-content/pull/712) old image client data support #2
-
+### :house: Internal
+- `fullscreen`
+  - [#625](https://github.com/wix-incubator/rich-content/pull/625) replaced react-images with Pro-Gallery
 </details>
 <hr/>
 
