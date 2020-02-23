@@ -182,13 +182,12 @@ export default class Editor extends PureComponent {
       initialState,
       editorState,
     };
-
+    const TopToolbar = MobileToolbar || TextToolbar;
     return (
-      <div className="editor" style={{ minHeight: isMobile ? '0%' : '100%' }}>
-        {MobileToolbar && <MobileToolbar />}
-        {TextToolbar && (
+      <div className="editor">
+        {TopToolbar && (
           <div className="toolbar-wrapper">
-            <TextToolbar />
+            <TopToolbar />
           </div>
         )}
         <RichContentEditor
