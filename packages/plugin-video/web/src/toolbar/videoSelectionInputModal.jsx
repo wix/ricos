@@ -67,7 +67,7 @@ export default class VideoSelectionInputModal extends Component {
   updateVideoComponent = ({ data }, componentData, isCustomVideo = false) => {
     const { pathname, thumbnail, url } = data;
     const src = pathname ? { pathname, thumbnail } : url;
-    this.updateComponentData({ src, isCustomVideo, tempData: undefined });
+    this.onConfirm({ ...componentData, src, isCustomVideo, tempData: undefined });
   };
 
   addVideoComponent = ({ data }, componentData, isCustomVideo = false) => {

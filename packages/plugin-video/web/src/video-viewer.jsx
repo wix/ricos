@@ -4,7 +4,7 @@ import ReactPlayerWrapper from './reactPlayerWrapper';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { mergeStyles, validate, pluginVideoSchema, Loader } from 'wix-rich-content-common';
-import { isEqual } from 'lodash';
+import { isEqual, debounce } from 'lodash';
 import getVideoSrc from './get-video-source';
 import styles from '../statics/styles/video-viewer.scss';
 
@@ -46,7 +46,7 @@ class VideoViewer extends Component {
     return element.clientHeight / element.clientWidth;
   };
 
-  onReactPlayerReady = () => {
+  onReactPlayerReady = debounce(() => {
     // eslint-disable-next-line react/no-find-dom-node
     const wrapper = ReactDOM.findDOMNode(this).parentNode;
     const ratio = this.getVideoRatio(wrapper);
@@ -55,7 +55,7 @@ class VideoViewer extends Component {
     if (!this.state.isLoaded && !this.props.componentData.tempData) {
       this.setState({ isLoaded: true });
     }
-  };
+  }, 1000);
 
   renderLoader = () => {
     return (
@@ -65,19 +65,24 @@ class VideoViewer extends Component {
     );
   };
 
+  isLoaded = () => this.state.isLoaded && !this.props.componentData.tempData;
+
   handleContextMenu = e => this.props.disableRightClick && e.preventDefault();
 
   render() {
     this.styles = this.styles || mergeStyles({ styles, theme: this.props.theme });
-    const { url, isLoaded, key } = this.state;
+    const { url, key } = this.state;
     this.props.setComponentUrl?.(url);
     const props = {
       url,
       onReady: this.onReactPlayerReady,
+      onBuffer: () => this.setState({ isLoaded: false }),
+      onBufferEnd: () => this.setState({ isLoaded: true }),
       disabled: this.props.disabled,
       width: this.props.width,
       height: this.props.height,
     };
+    const isLoaded = this.isLoaded();
     return (
       <>
         <ReactPlayerWrapper
@@ -87,7 +92,7 @@ class VideoViewer extends Component {
           {...props}
           controls={props.controls || isLoaded}
         />
-        {!isLoaded && this.props.componentData.tempData && this.renderLoader()}
+        {!isLoaded && this.renderLoader()}
       </>
     );
   }
