@@ -67,6 +67,9 @@ class VideoViewer extends Component {
 
   isLoaded = () => this.state.isLoaded && !this.props.componentData.tempData;
 
+  shouldRenderControls = isLoaded =>
+    (!this.props.componentData.isCustomVideo && this.props.controls) || isLoaded;
+
   handleContextMenu = e => this.props.disableRightClick && e.preventDefault();
 
   render() {
@@ -82,7 +85,7 @@ class VideoViewer extends Component {
       disabled: this.props.disabled,
       width: this.props.width,
       height: this.props.height,
-      controls: (!this.props.componentData.isCustomVideo && this.props.controls) || isLoaded,
+      controls: this.shouldRenderControls(isLoaded),
     };
     return (
       <>
