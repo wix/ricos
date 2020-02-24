@@ -237,6 +237,8 @@
   "NormalTextButton_tooltip" : "Normal text",
   "TextCodeBlockButton_Tooltip" : "Code snippet",
   "TextCodeBlock_InsertButton_Tooltip" : "Add a code snippet",
+  "UndoButton_Tooltip" : "Undo",
+  "RedoButton_Tooltip" : "Redo",
   "Preview_ReadMore_Label": "read more",
   "Preview_SeeFullPost_Label": "See Full Post",
   "ColorPicker_SetToDefault_ButtonLabel": "Reset to default",
