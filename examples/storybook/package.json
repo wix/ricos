@@ -67,12 +67,14 @@
     "wix-rich-content-preview": "6.8.6",
     "wix-rich-content-viewer": "6.8.6",
     "wix-rich-content-wrapper": "6.8.6",
-    "wix-style-react": "^6.58.0"
+    "wix-style-react": "^6.58.0",
+    "react-syntax-highlighter": "12.2.1",
+    "classnames": "^2.0.0"
   },
   "devDependencies": {
-    "copy-webpack-plugin": "^5.1.1",
     "yoshi": "4.31.0",
-    "yoshi-style-dependencies": "^4.23.7"
+    "yoshi-style-dependencies": "^4.23.7",
+    "babel-plugin-preval": "^3.0.1"
   },
   "lint-staged": {
     "*.js": "yoshi lint"

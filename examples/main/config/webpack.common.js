@@ -1,6 +1,5 @@
 const path = require('path');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 const DotenvWebpackPlugin = require('dotenv-webpack');
 const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 
@@ -38,9 +37,7 @@ module.exports = env => ({
         test: /\.js$/,
         use: ['source-map-loader'],
         enforce: 'pre',
-        include: [
-          /\*wix-rich-content-*/
-        ],
+        include: [/\*wix-rich-content-*/],
       },
       {
         test: /\.css$/,
@@ -133,12 +130,6 @@ module.exports = env => ({
         viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no',
       },
     }),
-    new CopyWebpackPlugin([
-      {
-        from: 'node_modules/wix-rich-content-plugin-html/dist/statics/',
-        to: 'static/',
-      },
-    ]),
     new DotenvWebpackPlugin({
       path: path.resolve(PATHS.monorepo_root, '.env'),
     }),

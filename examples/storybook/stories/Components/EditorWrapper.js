@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { RichContentEditor, convertFromRaw, createWithContent } from 'wix-rich-content-editor';
 import { RichContentWrapper } from 'wix-rich-content-wrapper';
-
 import { pluginButton } from 'wix-rich-content-plugin-button';
 import { pluginCodeBlock } from 'wix-rich-content-plugin-code-block';
 import { pluginDivider } from 'wix-rich-content-plugin-divider';
@@ -21,6 +20,7 @@ import { pluginMentions } from 'wix-rich-content-plugin-mentions';
 import { pluginSoundCloud } from 'wix-rich-content-plugin-sound-cloud';
 import { pluginUndoRedo } from 'wix-rich-content-plugin-undo-redo';
 import { pluginVideo } from 'wix-rich-content-plugin-video';
+import '../styles.global.scss';
 
 const configs = {
   fileUpload: {
@@ -66,8 +66,8 @@ const plugins = [
   pluginMap({ googleMapApiKey: process.env.GOOGLE_MAPS_API_KEY }),
   pluginMentions(),
   pluginSoundCloud(),
-  pluginUndoRedo(),
   pluginVideo(),
+  pluginUndoRedo(),
 ];
 const EditorWrapper = ({ contentState, palette }) => {
   const editorState = createWithContent(convertFromRaw(contentState));
@@ -80,7 +80,7 @@ const EditorWrapper = ({ contentState, palette }) => {
 
 EditorWrapper.propTypes = {
   contentState: PropTypes.object,
-  palette: PropTypes.arrayOf(PropTypes.string),
+  palette: PropTypes.arrayOf(PropTypes.object),
 };
 
 export default EditorWrapper;

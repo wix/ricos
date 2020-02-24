@@ -8,6 +8,5 @@ export const pluginHtml = (config = {}) => {
     config: { ...DEFAULTS_VIEWER, ...config },
     type: HTML_TYPE,
     typeMapper,
-    decorator: {},
   };
 };

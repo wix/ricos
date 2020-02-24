@@ -13,13 +13,13 @@ import IframeHtml from './IframeHtml';
 import IframeUrl from './IframeUrl';
 import htmlComponentStyles from '../statics/styles/HtmlComponent.scss';
 
-const getPageURL = (htmlIframeSrc, siteDomain) => {
+const getPageURL = siteDomain => {
   if (!siteDomain) {
     return;
   }
 
   const regex = /http.+com/gm;
-  const res = regex.exec(siteDomain) || (htmlIframeSrc && regex.exec && regex.exec(htmlIframeSrc));
+  const res = regex.exec(siteDomain);
   if (res) {
     return res[0];
   }
@@ -55,11 +55,10 @@ class HtmlComponent extends Component {
   }
 
   static getDerivedStateFromProps(props, state) {
-    const { componentData, settings } = props;
+    const { componentData } = props;
     if (componentData.srcType === 'html') {
       let html = componentData && componentData.src;
-      const { htmlIframeSrc } = settings;
-      const pageURL = getPageURL(htmlIframeSrc, state.siteDomain);
+      const pageURL = getPageURL(state.siteDomain);
       if (pageURL && html && html.includes && html.includes('adsbygoogle')) {
         const updatedAd = `<ins class="adsbygoogle"\n\tdata-page-url="${pageURL}"`;
         html = html.replace(new RegExp('<ins class="adsbygoogle"', 'g'), updatedAd);
@@ -86,7 +85,7 @@ class HtmlComponent extends Component {
 
     const {
       componentData: { src, srcType, config: { width: currentWidth, height: currentHeight } = {} },
-      settings: { htmlIframeSrc, width, height } = {},
+      settings: { width, height } = {},
     } = props;
 
     const style = {
@@ -107,7 +106,6 @@ class HtmlComponent extends Component {
               key={SRC_TYPE_HTML}
               tabIndex={0}
               html={html}
-              src={htmlIframeSrc}
               onHeightChange={this.setHeight}
             />
           )}
@@ -128,7 +126,6 @@ HtmlComponent.propTypes = {
   blockProps: PropTypes.object,
   className: PropTypes.string,
   settings: PropTypes.shape({
-    htmlIframeSrc: PropTypes.string.isRequired,
     width: PropTypes.number,
     minWidth: PropTypes.number,
     maxWidth: PropTypes.number,

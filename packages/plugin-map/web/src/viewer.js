@@ -6,7 +6,6 @@ export const pluginMap = (config = {}) => {
   return {
     config: { ...DEFAULTS.config, ...config },
     type: MAP_TYPE,
-    decorator: {},
     typeMapper,
   };
 };

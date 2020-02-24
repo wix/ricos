@@ -12,7 +12,7 @@
     <div id="root"><%- html %></div>
 
     <script>
-      window.__CONTENT_STATE__ = <%- JSON.stringify(initialState) %>;
+      window.__CONTENT_STATE__ = <%- serialize(initialState) %>;
       window.isMobile = <%- isMobile %>;
       window.locale = <%- '"' + locale + '"' %>;
     </script>
