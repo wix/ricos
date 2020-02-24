@@ -24,7 +24,12 @@ const getAllPluginsNames = ({ skipPlugins = false }) => {
   });
 };
 
-const viewerPakages = ['viewer-without-wrapper', 'viewer-with-wrapper'];
+const viewerPakages = [
+  'viewer-without-wrapper',
+  'viewer-with-wrapper',
+  'editor-with-emoji',
+  'editor-without-plugins',
+];
 
 const options = {};
 const option = argv._[0];
