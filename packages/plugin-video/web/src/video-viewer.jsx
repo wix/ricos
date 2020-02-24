@@ -65,10 +65,14 @@ class VideoViewer extends Component {
     );
   };
 
+  isUrlToFile = url => /blob|\.(mp4|og[gv]|webm|mov|m4v)($\?)/i.test(url);
+
   isLoaded = () => this.state.isLoaded && !this.props.componentData.tempData;
 
-  shouldRenderControls = isLoaded =>
-    (!this.props.componentData.isCustomVideo && this.props.controls) || isLoaded;
+  shouldRenderControls = (url, isLoaded) => {
+    const { controls } = this.props;
+    return this.isUrlToFile(url) ? isLoaded && controls : controls;
+  };
 
   handleContextMenu = e => this.props.disableRightClick && e.preventDefault();
 
@@ -80,12 +84,10 @@ class VideoViewer extends Component {
     const props = {
       url,
       onReady: this.onReactPlayerReady,
-      onBuffer: () => this.setState({ isLoaded: false }),
-      onBufferEnd: () => this.setState({ isLoaded: true }),
       disabled: this.props.disabled,
       width: this.props.width,
       height: this.props.height,
-      controls: this.shouldRenderControls(isLoaded),
+      controls: this.shouldRenderControls(url, isLoaded),
     };
     return (
       <>
