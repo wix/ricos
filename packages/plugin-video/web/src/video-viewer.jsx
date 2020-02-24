@@ -73,6 +73,7 @@ class VideoViewer extends Component {
     this.styles = this.styles || mergeStyles({ styles, theme: this.props.theme });
     const { url, key } = this.state;
     this.props.setComponentUrl?.(url);
+    const isLoaded = this.isLoaded();
     const props = {
       url,
       onReady: this.onReactPlayerReady,
@@ -81,8 +82,8 @@ class VideoViewer extends Component {
       disabled: this.props.disabled,
       width: this.props.width,
       height: this.props.height,
+      controls: (!this.props.componentData.isCustomVideo && this.props.controls) || isLoaded,
     };
-    const isLoaded = this.isLoaded();
     return (
       <>
         <ReactPlayerWrapper
@@ -91,7 +92,6 @@ class VideoViewer extends Component {
           key={key}
           data-loaded={isLoaded}
           {...props}
-          controls={props.controls || isLoaded}
         />
         {!isLoaded && this.renderLoader()}
       </>
@@ -115,6 +115,7 @@ VideoViewer.propTypes = {
 VideoViewer.defaultProps = {
   width: '100%',
   height: '100%',
+  controls: true,
 };
 
 export default VideoViewer;
