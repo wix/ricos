@@ -4,18 +4,20 @@ import {
   IMAGE_TYPE,
   VIDEO_TYPE,
   LINK_TYPE,
+  GALLERY_TYPE,
   VIDEO_TYPE_LEGACY,
   IMAGE_TYPE_LEGACY,
 } from '../../consts';
-import { linkDataNormalizer, imageDataNormalizer } from './dataNormalizers';
+import { linkDataNormalizer, imageDataNormalizer, galleryDataNormalizer } from './dataNormalizers';
 
 const dataNormalizers = {
   [LINK_TYPE]: linkDataNormalizer,
   [IMAGE_TYPE]: imageDataNormalizer,
+  [GALLERY_TYPE]: galleryDataNormalizer,
 };
 
-const normalizeComponentData = (type, componentData, config) =>
-  dataNormalizers[type](componentData, config);
+const normalizeComponentData = (type, componentData, config, version) =>
+  dataNormalizers[type](componentData, config, version);
 
 /* eslint-disable */
 
@@ -55,7 +57,7 @@ const normalizeComponentConfig = componentData => {
     patch.metadata = { oembed };
   }
 
-  return { ...componentData, patch };
+  return { ...componentData, ...patch };
 };
 /* eslint-enable */
 
@@ -67,6 +69,7 @@ const entityTypeMap = {
   dataNormalization: {
     [LINK_TYPE]: LINK_TYPE,
     [IMAGE_TYPE]: IMAGE_TYPE,
+    [GALLERY_TYPE]: GALLERY_TYPE,
   },
 };
 
@@ -79,7 +82,7 @@ const shouldNormalizeEntityConfig = entity =>
 const shouldNormalizeEntityData = entity =>
   shouldNormalizeEntity(entity, entityTypeMap.dataNormalization);
 
-const normalizeEntityMap = (entityMap, config) => {
+const normalizeEntityMap = (entityMap, config, stateVersion) => {
   const normalizeType = (key, obj) => obj[key] || key;
 
   return mapValues(entityMap, entity => {
@@ -94,7 +97,7 @@ const normalizeEntityMap = (entityMap, config) => {
       newEntity = {
         ...entity,
         type: normalizeType(entity.type, entityTypeMap.dataNormalization),
-        data: normalizeComponentData(entity.type, cloneDeep(entity.data), config),
+        data: normalizeComponentData(entity.type, cloneDeep(entity.data), config, stateVersion),
       };
     }
     return newEntity;
@@ -104,7 +107,7 @@ export default (initialState, config = {}) => {
   const { blocks, entityMap, VERSION } = processContentState(initialState, config);
   return {
     blocks,
-    entityMap: normalizeEntityMap(entityMap, config),
+    entityMap: normalizeEntityMap(entityMap, config, initialState.VERSION || '0.0.0'),
     VERSION,
   };
 };

@@ -1,0 +1,370 @@
+{
+  "blocks": [
+    {
+      "key": "foo",
+      "text": "Hi! 😃",
+      "type": "header-three",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 4,
+          "length": 1,
+          "key": 0
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "8207r",
+      "text": "",
+      "type": "header-three",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "7cqs0",
+      "text": "Welcome to Wix Rich Content - An Open Source, React based, super charged rich content editor with an extensible plugin system ⚡️",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [
+        {
+          "offset": 11,
+          "length": 16,
+          "style": "BOLD"
+        },
+        {
+          "offset": 11,
+          "length": 16,
+          "style": "ITALIC"
+        },
+        {
+          "offset": 11,
+          "length": 16,
+          "style": "UNDERLINE"
+        }
+      ],
+      "entityRanges": [
+        {
+          "offset": 11,
+          "length": 16,
+          "key": 1
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "4ni77",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "9uurj",
+      "text": " ",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 2
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "nujv",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "cg20j",
+      "text": "Checkout the Example App",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [
+        {
+          "offset": 13,
+          "length": 11,
+          "style": "UNDERLINE"
+        }
+      ],
+      "entityRanges": [
+        {
+          "offset": 13,
+          "length": 11,
+          "key": 3
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "6na39",
+      "text": " ",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 4
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "3b4ah",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "8ptbs",
+      "text": "A wise man once said:",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "bu4jj",
+      "text": "The Wix Rich Content Editor is the best tool in the world!",
+      "type": "blockquote",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "8hmrf",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "c4i62",
+      "text": "Our plugins include images, gifs, videos, embeds and Wix components such as Pro Gallery and embedding vertical components.",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "7bn5j",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "bmqc9",
+      "text": "Code example:",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "ejfuu",
+      "text": "import { RichContentEditor } from 'wix-rich-content-editor';\n\nconst myApp = () => <RichContentEditor />",
+      "type": "code-block",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "45pcl",
+      "text": "Pro Gallery Collage:",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "dl5nc",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "46hkp",
+      "text": " ",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 5
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "1qn5s",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "5vr9d",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "type": "EMOJI_TYPE",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "emojiUnicode": "😃"
+      }
+    },
+    "1": {
+      "type": "LINK",
+      "mutability": "MUTABLE",
+      "data": {
+        "url": "https://github.com/wix-incubator/rich-content",
+        "target": "_blank",
+        "rel": "noopener"
+      }
+    },
+    "2": {
+      "type": "wix-draft-plugin-giphy",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "config": {
+          "size": "small",
+          "alignment": "center"
+        },
+        "gif": {
+          "originalUrl": "https://media1.giphy.com/media/dzaUX7CAG0Ihi/giphy.gif?cid=558f2fbe514494bf97aafab84bd3c2fa772b7f3ec8ade20b&rid=giphy.gif",
+          "originalMp4": "https://media1.giphy.com/media/dzaUX7CAG0Ihi/giphy.mp4?cid=558f2fbe514494bf97aafab84bd3c2fa772b7f3ec8ade20b&rid=giphy.mp4",
+          "stillUrl": "https://media1.giphy.com/media/dzaUX7CAG0Ihi/giphy_s.gif?cid=558f2fbe514494bf97aafab84bd3c2fa772b7f3ec8ade20b&rid=giphy_s.gif",
+          "downsizedUrl": "https://media1.giphy.com/media/dzaUX7CAG0Ihi/giphy.gif?cid=558f2fbe514494bf97aafab84bd3c2fa772b7f3ec8ade20b&rid=giphy.gif",
+          "downsizedStillUrl": "https://media1.giphy.com/media/dzaUX7CAG0Ihi/giphy_s.gif?cid=558f2fbe514494bf97aafab84bd3c2fa772b7f3ec8ade20b&rid=giphy_s.gif",
+          "downsizedSmallMp4": "https://media1.giphy.com/media/dzaUX7CAG0Ihi/giphy-downsized-small.mp4?cid=558f2fbe514494bf97aafab84bd3c2fa772b7f3ec8ade20b&rid=giphy-downsized-small.mp4",
+          "height": 220,
+          "width": 410
+        }
+      }
+    },
+    "3": {
+      "type": "LINK",
+      "mutability": "MUTABLE",
+      "data": {
+        "url": "https://github.com/wix-incubator/rich-content",
+        "target": "_blank",
+        "rel": "noopener"
+      }
+    },
+    "4": {
+      "type": "wix-draft-plugin-divider",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "type": "dashed",
+        "config": {
+          "size": "medium",
+          "alignment": "center",
+          "textWrap": "nowrap"
+        }
+      }
+    },
+    "5": {
+      "type": "wix-draft-plugin-gallery",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "items": [
+          {
+            "metadata": {
+              "height": 3727,
+              "width": 5600
+            },
+            "itemId": "fdda4e9e700d4208640b78d5c035d88a",
+            "url": "8bb438_d849ef374eb64dd287e53d27797a764f.jpg"
+          },
+          {
+            "metadata": {
+              "height": 3710,
+              "width": 3180
+            },
+            "itemId": "9e6bb2d0c554dcd559a32ab89c9092f0",
+            "url": "8bb438_cbe02f139b8e479387eb7f5f9e8424c9.jpg"
+          },
+          {
+            "metadata": {
+              "height": 3413,
+              "width": 5120
+            },
+            "itemId": "bcb5bc2f8a914694b8dc0c9ff2575f79",
+            "url": "8bb438_53cc82c7bc8a4b41baf4db640e8b5641.jpg"
+          }
+        ],
+        "styles": {
+          "galleryLayout": 0,
+          "showArrows": false,
+          "cubeImages": false,
+          "groupSize": 3,
+          "groupTypes": "1,2h,2v,3t,3b,3l,3r",
+          "fixedColumns": 0,
+          "hasThumbnails": false,
+          "galleryThumbnailsAlignment": "none",
+          "enableScroll": true,
+          "isGrid": false,
+          "isSlider": false,
+          "isColumns": false,
+          "isSlideshow": false,
+          "isVertical": true,
+          "cropOnlyFill": false,
+          "oneRow": false,
+          "galleryType": "Columns",
+          "imageMargin": 20,
+          "gallerySizePx": "300"
+        },
+        "config": {
+          "alignment": "center",
+          "size": "content",
+          "layout": "small",
+          "spacing": 0
+        }
+      }
+    }
+  },
+  "VERSION": "6.8.6"
+}

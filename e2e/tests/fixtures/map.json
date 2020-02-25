@@ -53,9 +53,9 @@
           "zoom": 18,
           "mode": "roadmap",
           "isMarkerShown": true,
-          "isZoomControlShown": true,
-          "isStreetViewControlShown": true,
-          "isDraggingAllowed": true
+          "isZoomControlShown": false,
+          "isStreetViewControlShown": false,
+          "isDraggingAllowed": false
         }
       }
     }

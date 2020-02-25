@@ -70,7 +70,6 @@ export default class EmojiPreviewModal extends Component {
 
   render() {
     const { activeGroup } = this.state;
-
     return (
       <div className={this.styles.emojiPreviewModal_container}>
         <div className={this.styles.emojiPreviewModal_headerTitle}>

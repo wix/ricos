@@ -1,0 +1,123 @@
+{
+    "blocks": [
+        {
+            "key": "foo",
+            "text": "wqeqweqweqw",
+            "type": "unstyled",
+            "depth": 0,
+            "inlineStyleRanges": [],
+            "entityRanges": [],
+            "data": {}
+        },
+        {
+            "key": "1f1u1",
+            "text": "",
+            "type": "unstyled",
+            "depth": 0,
+            "inlineStyleRanges": [],
+            "entityRanges": [],
+            "data": {}
+        },
+        {
+            "key": "6acre",
+            "text": " ",
+            "type": "atomic",
+            "depth": 0,
+            "inlineStyleRanges": [],
+            "entityRanges": [
+            {
+                "offset": 0,
+                "length": 1,
+                "key": 0
+            }
+            ],
+            "data": {}
+        },
+        {
+            "key": "4kdjj",
+            "text": "",
+            "type": "unstyled",
+            "depth": 0,
+            "inlineStyleRanges": [],
+            "entityRanges": [],
+            "data": {}
+        }
+    ],
+    "entityMap": {
+    "0": {
+        "type": "wix-draft-plugin-gallery",
+        "mutability": "IMMUTABLE",
+        "data": {
+        "items": [
+            {
+            "metadata": {
+                "height": 1060,
+                "width": 2560,
+                "link": {
+                "url": "www.wix.com",
+                "target": "_top"
+                },
+                "title": "this is title"
+            },
+            "itemId": "a27d24_346eb94e9ceb4512b6fe8fdd629ee442~mv2.jpg",
+            "url": "a27d24_346eb94e9ceb4512b6fe8fdd629ee442~mv2.jpg",
+            "selected": false
+            },
+            {
+            "metadata": {
+                "height": 400,
+                "width": 870,
+                "link": null,
+                "title": "title it is"
+            },
+            "itemId": "a27d24_9fc76dfecb75438e939c43077c8ab6ba~mv2.jpg",
+            "url": "a27d24_9fc76dfecb75438e939c43077c8ab6ba~mv2.jpg",
+            "selected": true
+            },
+            {
+            "metadata": {
+                "height": 320,
+                "width": 760
+            },
+            "itemId": "a27d24_2d3bb3c3a75e48c3bac3f82dbc02d4c1~mv2.jpg",
+            "url": "a27d24_2d3bb3c3a75e48c3bac3f82dbc02d4c1~mv2.jpg",
+            "selected": false
+            }
+        ],
+        "styles": {
+            "galleryLayout": 2,
+            "gallerySizeType": "px",
+            "gallerySizePx": 300,
+            "galleryMargin": 0,
+            "oneRow": false,
+            "cubeRatio": 1,
+            "galleryThumbnailsAlignment": "bottom",
+            "isVertical": false,
+            "imageMargin": 20,
+            "thumbnailSpacings": 0,
+            "cubeType": "fill",
+            "enableInfiniteScroll": true,
+            "titlePlacement": "SHOW_ON_HOVER",
+            "allowHover": false,
+            "itemClick": "link",
+            "fullscreen": false,
+            "showArrows": false,
+            "gridStyle": 1,
+            "loveButton": false,
+            "allowSocial": false,
+            "allowDownload": false,
+            "mobileSwipeAnimation": "NO_EFFECT",
+            "thumbnailSize": 120,
+            "gotStyleParams": true
+        },
+        "config": {
+            "alignment": "center",
+            "size": "content",
+            "layout": "small",
+            "spacing": 0
+        }
+    }
+}
+    },
+    "VERSION": "5.9.9"
+}

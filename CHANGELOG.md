@@ -13,8 +13,40 @@
     Click to see more.
   </summary>
 
+
 </details>
 <hr/>
+
+## 6.9.0 (Feb 25, 2020)
+### :rocket: New Feature
+- `viewer`
+  - [#702](https://github.com/wix-incubator/rich-content/pull/702) seo mode prop for viewer render images in high resolution
+- `wrapper`
+  - [#714](https://github.com/wix-incubator/rich-content/pull/714) locale strategy added
+### :bug: Bug Fix
+- `wrapper`
+  - [#719](https://github.com/wix-incubator/rich-content/pull/719) locale strategy fixes
+- `image`
+  - [#712](https://github.com/wix-incubator/rich-content/pull/712) old image client data support #2
+- `video`
+  - [#648](https://github.com/wix-incubator/rich-content/pull/648) loader disappears before video is fully loaded
+### :house: Internal
+- `html`
+  - [#681](https://github.com/wix-incubator/rich-content/pull/681) removed htmlIframeSrc from config. Loads iframe html from bundle instead of the static file served by the consumer
+
+## 6.8.6 (Feb 19, 2020)
+### :bug: Bug Fix
+- `image`
+  - [#696](https://github.com/wix-incubator/rich-content/pull/696) fix images with transparency show shadow outline
+  - [#706](https://github.com/wix-incubator/rich-content/pull/706) old image client data support
+
+## 6.8.5 (Feb 17, 2020)
+### :bug: Bug Fix
+- `editor-common`
+  - [#680](https://github.com/wix-incubator/rich-content/pull/680) dragging plugins from editor to address bar pastes media url
+- `gallery`
+  - [#690](https://github.com/wix-incubator/rich-content/pull/690) fix title and altText
+
 
 ## 6.8.4 (Feb 12, 2020)
 ### :bug: Bug Fix
@@ -22,7 +54,7 @@
   - [#645](https://github.com/wix-incubator/rich-content/pull/645) When removing link from text the cursor is in the correct position
 - `gallery`
   - [#672](https://github.com/wix-incubator/rich-content/pull/672) gallery images settings frozen
-  
+
 ## 6.8.3 (Feb 11, 2020)
 ### :bug: Bug Fix
 - `image`
@@ -30,7 +62,7 @@
 ### :house: Internal
 - `general`
   - [#666](https://github.com/wix-incubator/rich-content/pull/666) ES5 syntax validation in `dist/statics` on postbuild
-  
+
 ## 6.8.2 (Feb 9, 2020)
 ### :bug: Bug Fix
 - `emoji`
@@ -128,7 +160,7 @@
 - `example`
   - [#634](https://github.com/wix-incubator/rich-content/pull/634) toggle for mocking image multi-select
   - [#624](https://github.com/wix-incubator/rich-content/pull/575) video and image selection is uses external selection logic
-    
+
 ## 6.6.8 (Jan 16, 2020)
 ### :bug: Bug Fix
 - `editor-common`

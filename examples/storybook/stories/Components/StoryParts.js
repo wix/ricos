@@ -2,6 +2,8 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import ReactJson from 'react-json-view';
+
+import SourceCode from './SourceCode';
 import styles from './styles.scss';
 
 export const Page = ({ title, children }) => (
@@ -38,11 +40,12 @@ Section.propTypes = {
   children: PropTypes.node,
 };
 
-export const RichContentEditorBox = ({ children, preset, title }) => {
+export const RichContentEditorBox = ({ children, preset, title, sourcecode }) => {
   return (
     <div className={`${styles[preset || '']}`}>
-      {title && <h2>Editor!</h2>}
+      {title && <h2>Editor</h2>}
       <div className={styles.rceWrapper}>{children}</div>
+      {sourcecode && <SourceCode code={sourcecode} />}
     </div>
   );
 };

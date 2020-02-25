@@ -47,8 +47,6 @@ import 'wix-rich-content-plugin-map/dist/styles.min.css';
 import 'wix-rich-content-plugin-file-upload/dist/styles.min.css';
 import 'wix-rich-content-plugin-giphy/dist/styles.min.css';
 
-import { getBaseUrl } from '../../src/utils';
-
 const linkPluginSettings = {
   onClick: (event, url) => console.log('link clicked!', url),
 };
@@ -79,9 +77,7 @@ export const config = {
   [GIPHY_TYPE]: {
     giphySdkApiKey: process.env.GIPHY_API_KEY,
   },
-  [HTML_TYPE]: {
-    htmlIframeSrc: `${getBaseUrl()}/static/html-plugin-embed.html`,
-  },
+  // [HTML_TYPE]: {},
   [LINK_TYPE]: linkPluginSettings,
   [MENTION_TYPE]: mentionsPluginSettings,
   [TEXT_COLOR_TYPE]: {
