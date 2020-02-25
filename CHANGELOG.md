@@ -20,7 +20,9 @@
 ### :house: Internal
 - `gallery`
   - [#724](https://github.com/wix-incubator/rich-content/pull/724) bump pro-gallery version to 1.7.22
-
+- `image`
+  - [#729](https://github.com/wix-incubator/rich-content/pull/729) image with no config
+  
 </details>
 <hr/>
 
