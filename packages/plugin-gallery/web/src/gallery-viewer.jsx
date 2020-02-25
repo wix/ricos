@@ -84,7 +84,6 @@ class GalleryViewer extends React.Component {
   getItems() {
     const { items } = this.state;
     const { anchorTarget, relValue } = this.props;
-
     if (items.length > 0) {
       return convertItemData({ items, anchorTarget, relValue });
     } else {
