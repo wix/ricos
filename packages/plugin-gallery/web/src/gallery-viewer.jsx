@@ -15,7 +15,6 @@ class GalleryViewer extends React.Component {
   constructor(props) {
     validate(props.componentData, pluginGallerySchema);
     super(props);
-
     this.state = {
       size: {},
       ...this.stateFromProps(props),
@@ -186,6 +185,7 @@ class GalleryViewer extends React.Component {
         onContextMenu={this.handleContextMenu}
       >
         <ProGallery
+          domId={this.props.blockKey || this.props.entityIndex}
           items={items}
           styles={styleParams}
           container={size}
@@ -202,6 +202,7 @@ class GalleryViewer extends React.Component {
 
 GalleryViewer.propTypes = {
   componentData: PropTypes.object.isRequired,
+  blockKey: PropTypes.string,
   entityIndex: PropTypes.number,
   onClick: PropTypes.func,
   className: PropTypes.string,

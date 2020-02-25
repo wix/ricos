@@ -166,6 +166,7 @@ class GalleryComponent extends PureComponent {
         isMobile={this.props.isMobile}
         anchorTarget={this.props.anchorTarget}
         relValue={this.props.relValue}
+        blockKey={this.props.block.getKey()}
       />
     );
   }
