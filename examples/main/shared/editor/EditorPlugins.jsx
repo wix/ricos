@@ -104,7 +104,7 @@ let userButtonBorderColors = [...buttonDefaultPalette];
 
 const getLinkPanelDropDownConfig = () => {
   const getItems = () => {
-    casual.define('item', function() {
+    casual.define('item', function () {
       return {
         value: casual.url,
         label: casual.catch_phrase,
@@ -222,7 +222,7 @@ const videoHandlers = {
       updateEntity({ data: videoToUpload });
       //updateEntity({ error: { msg: 'Upload Failed' } });
       console.log('consumer uploaded ', videoToUpload);
-    }, 3000);
+    }, 500);
   },
 };
 
@@ -391,9 +391,9 @@ const config = {
       // },
     },
     //media manager - Here you can call your custom video upload functionality (comment function to disable custom upload)
-    // handleFileSelection: videoHandlers.handleFileSelection,
+    handleFileSelection: videoHandlers.handleFileSelection,
     // this is for native file upload
-    handleFileUpload: videoHandlers.handleFileUpload,
+    // handleFileUpload: videoHandlers.handleFileUpload,
     enableCustomUploadOnMobile: true,
     // Function is invoked when rendering video which has relative URL.
     // You should take the pathname and form a full URL.
