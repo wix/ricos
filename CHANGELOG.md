@@ -13,7 +13,10 @@
     Click to see more.
   </summary>
 
-
+### :bug: Bug Fix
+- `image`
+  - [#729](https://github.com/wix-incubator/rich-content/pull/729) image with no config
+  
 </details>
 <hr/>
 
