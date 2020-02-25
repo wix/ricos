@@ -176,16 +176,18 @@ class GalleryViewer extends React.Component {
     const { scrollingElement, ...settings } = this.props.settings;
     const { styleParams, size = { width: 300 } } = this.state;
     const items = this.getItems();
+    const dataHook = 'galleryViewer';
+    const domId = this.props.blockKey || dataHook + ': ' + this.props.entityIndex;
     return (
       <div
         ref={elem => (this.container = elem)}
         className={this.styles.gallery_container}
-        data-hook="galleryViewer"
+        data-hook={dataHook}
         role="none"
         onContextMenu={this.handleContextMenu}
       >
         <ProGallery
-          domId={this.props.blockKey || this.props.entityIndex}
+          domId={domId}
           items={items}
           styles={styleParams}
           container={size}
