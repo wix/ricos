@@ -27,14 +27,20 @@ class VideoViewer extends Component {
       if (nextProps.componentData.src !== this.props.componentData.src) {
         const url = getVideoSrc(nextProps.componentData.src, nextProps.settings);
         if (typeof url === 'string') {
-          this.setState({ url: this.normalizeUrl(url) });
+          this.setUrl(url);
         } else if (url && typeof url.then === 'function') {
-          url.then(url => this.setState({ url: this.normalizeUrl(url) }));
+          url.then(url => this.setUrl(url));
         }
       }
     }
   }
 
+  setUrl = newUrl => {
+    const url = this.normalizeUrl(newUrl);
+    if (url !== this.state.url) {
+      this.setState({ url, isLoaded: false });
+    }
+  };
   componentDidMount() {
     this.setState({ key: 'mounted' }); //remounts reactPlayer after ssr. Fixes bug where internal player id changes in client
   }
@@ -52,7 +58,7 @@ class VideoViewer extends Component {
     const ratio = this.getVideoRatio(wrapper);
     wrapper.style['padding-bottom'] = ratio * 100 + '%';
 
-    if (!this.state.isLoaded) {
+    if (!this.state.isLoaded && !this.props.componentData.tempData) {
       this.setState({ isLoaded: true });
     }
   };
@@ -65,9 +71,7 @@ class VideoViewer extends Component {
     );
   };
 
-  isUrlToFile = url => /blob|\.(mp4|og[gv]|webm|mov|m4v)($\?)/i.test(url);
-
-  isLoaded = () => this.state.isLoaded && !this.props.componentData.tempData;
+  isUrlToFile = url => /blob|\.(mp4|og[gv]|webm|mov|m4v$)/i.test(url);
 
   shouldRenderControls = (url, isLoaded) => {
     const { controls } = this.props;
@@ -78,16 +82,15 @@ class VideoViewer extends Component {
 
   render() {
     this.styles = this.styles || mergeStyles({ styles, theme: this.props.theme });
-    const { url, key } = this.state;
+    const { url, key, isLoaded } = this.state;
     this.props.setComponentUrl?.(url);
-    const isLoaded = this.isLoaded();
     const props = {
       url,
       onReady: this.onReactPlayerReady,
       disabled: this.props.disabled,
       width: this.props.width,
       height: this.props.height,
-      controls: this.shouldRenderControls(url, isLoaded),
+      controls: this.shouldRenderControls(url, !!isLoaded),
     };
     return (
       <>
