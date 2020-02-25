@@ -16,11 +16,14 @@
 ### :bug: Bug Fix
 - `video`
   - [#727](https://github.com/wix-incubator/rich-content/pull/727) loader is consistent throughout inital file upload
-- `image`
-  - [#729](https://github.com/wix-incubator/rich-content/pull/729) image with no config
   
 </details>
 <hr/>
+
+## 6.9.1 (Feb 25, 2020)
+### :bug: Bug Fix
+- `image`
+  - [#729](https://github.com/wix-incubator/rich-content/pull/729) image with no config
 
 ## 6.9.0 (Feb 25, 2020)
 ### :rocket: New Feature
