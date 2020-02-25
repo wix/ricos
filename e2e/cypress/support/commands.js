@@ -76,9 +76,13 @@ Cypress.Commands.add('loadEditorAndViewer', fixtureName => {
 });
 
 Cypress.Commands.add('loadEditorAndViewerOnSsr', fixtureName => {
-  cy.request(getUrl('rce', fixtureName)).then(html => {
-    cy.state('document').write(html.body);
-  });
+  cy.request(getUrl('rce', fixtureName))
+    .its('body')
+    .then(html => {
+      // remove the application code bundle
+      const _html = html.replace('<script src="/index.bundle.js"></script>', '');
+      cy.state('document').write(_html);
+    });
 });
 
 Cypress.Commands.add('matchContentSnapshot', () => {
@@ -431,6 +435,16 @@ Cypress.Commands.add('dragAndDropPlugin', (src, dest) => {
 
 Cypress.Commands.add('waitForVideoToLoad', { prevSubject: 'optional' }, () => {
   cy.get('[data-loaded=true]', { timeout: 15000 }).should('have.length', 2);
+});
+
+Cypress.Commands.add('waitForHtmlToLoad', () => {
+  cy.get('iframe', { timeout: 15000 })
+    .each($el => {
+      cy.wrap($el)
+        .its('0.contentDocument.body')
+        .should('not.be.undefined');
+    })
+    .wait(1000);
 });
 
 // disable screenshots in debug mode. So there is no diffrence to ci.

@@ -8,6 +8,7 @@ export const fixtures = [
   'facebook-video',
   'gif',
   'giphy',
+  'html',
   'gallery-layouts',
   'old-image-format',
 ];
