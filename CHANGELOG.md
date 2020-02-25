@@ -23,6 +23,8 @@
   - [#719](https://github.com/wix-incubator/rich-content/pull/719) locale strategy fixes
 - `image`
   - [#712](https://github.com/wix-incubator/rich-content/pull/712) old image client data support #2
+- `video`
+  - [#648](https://github.com/wix-incubator/rich-content/pull/648) loader disappears before video is fully loaded
 ### :house: Internal
 - `html`
   - [#681](https://github.com/wix-incubator/rich-content/pull/681) removed htmlIframeSrc from config. Loads iframe html from bundle instead of the static file served by the consumer
