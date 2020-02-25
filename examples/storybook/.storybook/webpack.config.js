@@ -4,15 +4,6 @@ module.exports = ({ config }) => {
   const baseConfig = wixStorybookConfig(config);
   return {
     ...baseConfig,
-    plugins: [
-      ...baseConfig.plugins,
-      new CopyWebpackPlugin([
-        {
-          from: 'node_modules/wix-rich-content-plugin-html/dist/statics/',
-          to: 'static/',
-        },
-      ]),
-    ],
     module: {
       ...baseConfig.module,
       rules: [
