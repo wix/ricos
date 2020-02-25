@@ -16,7 +16,9 @@
 ### :bug: Bug Fix
 - `video`
   - [#727](https://github.com/wix-incubator/rich-content/pull/727) loader is consistent throughout inital file upload
-
+- `image`
+  - [#729](https://github.com/wix-incubator/rich-content/pull/729) image with no config
+  
 </details>
 <hr/>
 
