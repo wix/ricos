@@ -13,6 +13,9 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+- `video`
+  - [#727](https://github.com/wix-incubator/rich-content/pull/727) loader is consistent throughout inital file upload
 
 </details>
 <hr/>
