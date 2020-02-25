@@ -13,6 +13,18 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+- `gallery`
+  - [#724](https://github.com/wix-incubator/rich-content/pull/724) assign unique dom id to each gallery
+  
+### :house: Internal
+- `gallery`
+  - [#724](https://github.com/wix-incubator/rich-content/pull/724) bump pro-gallery version to 1.7.22
+
+</details>
+<hr/>
+
+## 6.9.0 (Feb 25, 2020)
 ### :rocket: New Feature
 - `viewer`
   - [#702](https://github.com/wix-incubator/rich-content/pull/702) seo mode prop for viewer render images in high resolution
@@ -23,16 +35,12 @@
   - [#719](https://github.com/wix-incubator/rich-content/pull/719) locale strategy fixes
 - `image`
   - [#712](https://github.com/wix-incubator/rich-content/pull/712) old image client data support #2
-- `gallery`
-  - [#724](https://github.com/wix-incubator/rich-content/pull/724) assign unique dom id to each gallery
+- `video`
+  - [#648](https://github.com/wix-incubator/rich-content/pull/648) loader disappears before video is fully loaded
+
 ### :house: Internal
 - `html`
   - [#681](https://github.com/wix-incubator/rich-content/pull/681) removed htmlIframeSrc from config. Loads iframe html from bundle instead of the static file served by the consumer
-- `gallery`
-  - [#724](https://github.com/wix-incubator/rich-content/pull/724) bump pro-gallery version to 1.7.22
-
-</details>
-<hr/>
 
 ## 6.8.6 (Feb 19, 2020)
 ### :bug: Bug Fix
