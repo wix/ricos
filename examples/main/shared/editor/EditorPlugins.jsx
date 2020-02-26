@@ -103,7 +103,7 @@ let userButtonBorderColors = [...buttonDefaultPalette];
 
 const getLinkPanelDropDownConfig = () => {
   const getItems = () => {
-    casual.define('item', function () {
+    casual.define('item', function() {
       return {
         value: casual.url,
         label: casual.catch_phrase,
@@ -221,7 +221,7 @@ const videoHandlers = {
       updateEntity({ data: videoToUpload });
       //updateEntity({ error: { msg: 'Upload Failed' } });
       console.log('consumer uploaded ', videoToUpload);
-    }, 500);
+    }, 1500);
   },
 };
 

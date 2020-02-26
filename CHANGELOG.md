@@ -14,8 +14,8 @@
   </summary>
 
 ### :bug: Bug Fix
-- `gallery`
-  - [#724](https://github.com/wix-incubator/rich-content/pull/724) assign unique dom id to each gallery
+- `video`
+  - [#727](https://github.com/wix-incubator/rich-content/pull/727) loader is consistent throughout inital file upload
 ### :house: Internal
 - `gallery`
   - [#724](https://github.com/wix-incubator/rich-content/pull/724) bump pro-gallery version to 1.7.23
