@@ -15,6 +15,7 @@ class GalleryViewer extends React.Component {
   constructor(props) {
     validate(props.componentData, pluginGallerySchema);
     super(props);
+    this.domId = this.props.blockKey || 'v-' + this.props.entityIndex;
     this.state = {
       size: {},
       ...this.stateFromProps(props),
@@ -175,7 +176,6 @@ class GalleryViewer extends React.Component {
     const { scrollingElement, ...settings } = this.props.settings;
     const { styleParams, size = { width: 300 } } = this.state;
     const items = this.getItems();
-    const domId = this.props.blockKey || 'v-' + this.props.entityIndex;
     return (
       <div
         ref={elem => (this.container = elem)}
@@ -185,7 +185,7 @@ class GalleryViewer extends React.Component {
         onContextMenu={this.handleContextMenu}
       >
         <ProGallery
-          domId={domId}
+          domId={this.domId}
           items={items}
           styles={styleParams}
           container={size}
