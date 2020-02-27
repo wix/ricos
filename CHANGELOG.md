@@ -16,6 +16,8 @@
 ### :bug: Bug Fix
 - `video`
   - [#727](https://github.com/wix-incubator/rich-content/pull/727) loader is consistent throughout inital file upload
+- `editor`
+  - [#731](https://github.com/wix-incubator/rich-content/pull/731) tooltips disappear after click
 ### :house: Internal
 - `gallery`
   - [#724](https://github.com/wix-incubator/rich-content/pull/724) bump pro-gallery version to 1.7.23
