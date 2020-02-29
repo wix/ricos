@@ -1,8 +1,9 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { TWITTER } from './toolbarOptions';
-import { TWEET_ON_TWITTER_URL } from '../../../common/web/src/consts';
 import styles from '../statics/styles/viewer-inline-toolbar.scss';
+
+const TWEET_ON_TWITTER_URL = 'https://twitter.com/intent/tweet?text=';
 
 function handleTweetClick(selectedText) {
   window.open(TWEET_ON_TWITTER_URL + encodeURI(selectedText));
