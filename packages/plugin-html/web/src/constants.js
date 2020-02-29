@@ -12,10 +12,12 @@ export const INIT_HEIGHT = 550;
 export const MAX_HEIGHT = 1200;
 export const MAX_HEIGHT_INPUT = 9999;
 
-export const DEFAULTS = {
+export const DEFAULTS = Object.freeze({
   srcType: SRC_TYPE_HTML,
   src: '',
   config: {
     alignment: 'center',
   },
-};
+});
+
+export const DEFAULTS_VIEWER = {};

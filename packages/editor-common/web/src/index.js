@@ -55,7 +55,7 @@ export { default as RichContentModal } from './Modals/RichContentModal';
 export { default as decorateComponentWithProps } from './Utils/decorateComponentWithProps';
 export { getToolbarTheme } from './Utils/getToolbarTheme';
 export { simplePubsub } from './Utils/simplePubsub';
-export { getModalStyles } from './Utils/getModalStyles';
+export { getModalStyles, getBottomToolbarModalStyles } from './Utils/getModalStyles';
 
 export {
   insertLinkAtCurrentSelection,
@@ -74,6 +74,7 @@ export {
   replaceWithEmptyBlock,
   deleteBlock,
   createEntity,
+  createBlockAndFocus,
   createBlock,
   getBlockInfo,
   getFocusedBlockKey,

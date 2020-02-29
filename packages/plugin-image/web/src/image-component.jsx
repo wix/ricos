@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import ImageViewer from './image-viewer';
 import { DEFAULTS } from './consts';
 import { sizeClassName, alignmentClassName } from './classNameStrategies';
-import { Context } from 'wix-rich-content-common';
 
 const EMPTY_SMALL_PLACEHOLDER =
   'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
@@ -17,7 +16,7 @@ class ImageComponent extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = Object.assign({ isMounted: false }, this.stateFromProps(props));
+    this.state = { isMounted: false, ...this.stateFromProps(props) };
 
     const { block, store } = this.props;
     if (store) {
@@ -90,11 +89,11 @@ class ImageComponent extends React.Component {
         fileError: null,
       });
     }
-    const { helpers } = this.context;
+    const { helpers } = this.props;
     const hasFileChangeHelper = helpers && helpers.onFilesChange;
     if (hasFileChangeHelper && fileList.length > 0) {
       helpers.onFilesChange(fileList[0], ({ data, error }) =>
-        this.handleFilesAdded(this.props.block.getKey(), { data, error })
+        this.handleFilesAdded({ data, error })
       );
     } else {
       this.resetLoadingState({ msg: 'Missing upload function' });
@@ -102,16 +101,13 @@ class ImageComponent extends React.Component {
   };
 
   handleFilesSelected = files => {
-    const state = {};
     const reader = new FileReader();
     reader.onload = e => this.fileLoaded(e.target.result, files);
     reader.readAsDataURL(files[0]);
-    Object.assign(state, { isLoading: true, dataUrl: EMPTY_SMALL_PLACEHOLDER });
-
-    return state;
+    return { isLoading: true, dataUrl: EMPTY_SMALL_PLACEHOLDER };
   };
 
-  handleFilesAdded = (blockKey, { data, error }) => {
+  handleFilesAdded = ({ data, error }) => {
     const imageData = data.length ? data[0] : data;
     const config = { ...this.props.componentData.config };
     if (!config.alignment) {
@@ -121,7 +117,7 @@ class ImageComponent extends React.Component {
       config,
       src: imageData,
     };
-    this.props.store.update('componentData', componentData, blockKey);
+    this.props.store.update('componentData', componentData, this.props.block.getKey());
     this.resetLoadingState(error);
   };
 
@@ -145,9 +141,28 @@ class ImageComponent extends React.Component {
   handleCaptionChange = caption => this.handleMetadataChange({ caption });
 
   render() {
-    const { settings, componentData, onClick, className, blockProps } = this.props;
+    const {
+      settings,
+      componentData,
+      onClick,
+      className,
+      blockProps,
+      theme,
+      isMobile,
+      helpers,
+      disableRightClick,
+      getInPluginEditingMode,
+      setInPluginEditingMode,
+      setComponentUrl,
+    } = this.props;
     return (
       <ImageViewer
+        theme={theme}
+        isMobile={isMobile}
+        helpers={helpers}
+        disableRightClick={disableRightClick}
+        getInPluginEditingMode={getInPluginEditingMode}
+        setInPluginEditingMode={setInPluginEditingMode}
         componentData={componentData}
         onClick={onClick}
         className={className}
@@ -155,15 +170,14 @@ class ImageComponent extends React.Component {
         dataUrl={this.state.dataUrl}
         isFocused={blockProps.isFocused}
         settings={settings}
-        defaultCaption={this.context.t('ImageViewer_Caption')}
+        defaultCaption={this.props.t('ImageViewer_Caption')}
         onCaptionChange={this.handleCaptionChange}
         setFocusToBlock={blockProps.setFocusToBlock}
+        setComponentUrl={setComponentUrl}
       />
     );
   }
 }
-
-ImageComponent.contextType = Context.type;
 
 ImageComponent.propTypes = {
   componentData: PropTypes.object.isRequired,
@@ -174,6 +188,14 @@ ImageComponent.propTypes = {
   onClick: PropTypes.func.isRequired,
   className: PropTypes.string.isRequired,
   settings: PropTypes.object,
+  helpers: PropTypes.object.isRequired,
+  t: PropTypes.func.isRequired,
+  theme: PropTypes.object.isRequired,
+  disableRightClick: PropTypes.bool,
+  getInPluginEditingMode: PropTypes.func,
+  setInPluginEditingMode: PropTypes.func,
+  isMobile: PropTypes.bool.isRequired,
+  setComponentUrl: PropTypes.func,
 };
 
 export { ImageComponent as Component, DEFAULTS };

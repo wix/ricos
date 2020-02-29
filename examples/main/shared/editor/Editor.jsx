@@ -7,7 +7,7 @@ import { testImages, testVideos } from './mock';
 import * as Plugins from './EditorPlugins';
 import ModalsMap from './ModalsMap';
 import theme from '../theme/theme'; // must import after custom styles
-
+import { GALLERY_TYPE } from 'wix-rich-content-plugin-gallery';
 const modalStyleDefaults = {
   content: {
     top: '50%',
@@ -20,6 +20,7 @@ const modalStyleDefaults = {
 };
 const anchorTarget = '_blank';
 const relValue = 'noopener';
+let shouldMultiSelectImages = false;
 
 export default class Editor extends PureComponent {
   state = {};
@@ -27,6 +28,9 @@ export default class Editor extends PureComponent {
     super(props);
     // ReactModal.setAppElement('#root');
     this.initEditorProps();
+    const { scrollingElementFn } = props;
+    const additionalConfig = { [GALLERY_TYPE]: { scrollingElement: scrollingElementFn } };
+    this.pluginsConfig = Plugins.getConfig(additionalConfig);
   }
 
   initEditorProps() {
@@ -49,22 +53,24 @@ export default class Editor extends PureComponent {
       }
     };
     this.helpers = {
-      onFilesChange: (files, updateEntity) => mockUpload(files, updateEntity),
-      // handleFileSelection: (index, multiple, updateEntity, removeEntity) => {
-      //   const count = multiple ? [1,2,3] : [1];
-      //   const data = [];
-      //   count.forEach(_ => {
-      //     const testItem = testImages[Math.floor(Math.random() * testImages.length)];
-      //     data.push({
-      //       id: testItem.photoId,
-      //       original_file_name: testItem.url,
-      //       file_name: testItem.url,
-      //       width: testItem.metadata.width,
-      //       height: testItem.metadata.height,
-      //     });
-      //   })
-      //   setTimeout(() => { updateEntity({ data }) }, 500);
-      // },
+      // onFilesChange: (files, updateEntity) => mockUpload(files, updateEntity),
+      handleFileSelection: (index, multiple, updateEntity, removeEntity, componentData) => {
+        const count = componentData.items || shouldMultiSelectImages ? [1, 2, 3] : [1];
+        const data = [];
+        count.forEach(_ => {
+          const testItem = testImages[Math.floor(Math.random() * testImages.length)];
+          data.push({
+            id: testItem.photoId,
+            original_file_name: testItem.url,
+            file_name: testItem.url,
+            width: testItem.metadata.width,
+            height: testItem.metadata.height,
+          });
+        });
+        setTimeout(() => {
+          updateEntity({ data });
+        }, 500);
+      },
       onVideoSelected: (url, updateEntity) => {
         setTimeout(() => {
           const mockVideoIndex =
@@ -113,6 +119,9 @@ export default class Editor extends PureComponent {
     if (prevProps.staticToolbar !== this.props.staticToolbar) {
       this.setEditorToolbars();
     }
+    if (prevProps.shouldMultiSelectImages !== this.props.shouldMultiSelectImages) {
+      shouldMultiSelectImages = this.props.shouldMultiSelectImages;
+    }
   }
 
   setEditorToolbars = () => {
@@ -138,20 +147,39 @@ export default class Editor extends PureComponent {
 
   render() {
     const modalStyles = {
-      content: Object.assign(
-        {},
-        (this.state.modalStyles || modalStyleDefaults).content,
-        theme.modalTheme.content
-      ),
-      overlay: Object.assign(
-        {},
-        (this.state.modalStyles || modalStyleDefaults).overlay,
-        theme.modalTheme.overlay
-      ),
+      content: {
+        ...(this.state.modalStyles || modalStyleDefaults).content,
+        ...theme.modalTheme.content,
+      },
+      overlay: {
+        ...(this.state.modalStyles || modalStyleDefaults).overlay,
+        ...theme.modalTheme.overlay,
+      },
     };
+    const {
+      staticToolbar,
+      isMobile,
+      editorState,
+      initialState,
+      locale,
+      localeResource,
+    } = this.props;
     const { MobileToolbar, TextToolbar } = this.state;
-    const textToolbarType = this.props.staticToolbar && !this.props.isMobile ? 'static' : null;
+    const textToolbarType = staticToolbar && !isMobile ? 'static' : null;
     const { onRequestClose } = this.state.modalProps || {};
+
+    const editorProps = {
+      anchorTarget,
+      relValue,
+      locale,
+      localeResource,
+      theme,
+      textToolbarType,
+      isMobile,
+      initialState,
+      editorState,
+    };
+
     return (
       <div className="editor">
         {MobileToolbar && <MobileToolbar />}
@@ -166,18 +194,11 @@ export default class Editor extends PureComponent {
           onChange={this.handleChange}
           helpers={this.helpers}
           plugins={Plugins.editorPlugins}
-          config={Plugins.config}
-          editorState={this.props.editorState}
-          initialState={this.props.initialState}
-          isMobile={this.props.isMobile}
-          textToolbarType={textToolbarType}
-          theme={theme}
+          // config={Plugins.getConfig(additionalConfig)}
+          config={this.pluginsConfig}
           editorKey="random-editorKey-ssr"
-          anchorTarget={anchorTarget}
-          relValue={relValue}
-          locale={this.props.locale}
-          localeResource={this.props.localeResource}
           // siteDomain="https://www.wix.com"
+          {...editorProps}
         />
         <ReactModal
           isOpen={this.state.showModal}

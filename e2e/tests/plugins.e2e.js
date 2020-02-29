@@ -6,6 +6,7 @@ import {
   GALLERY_SETTINGS,
   GALLERY_IMAGE_SETTINGS,
   IMAGE_SETTINGS,
+  GIPHY_PLUGIN,
 } from '../cypress/dataHooks';
 import { DEFAULT_DESKTOP_BROWSERS } from '../tests/constants';
 
@@ -67,7 +68,7 @@ describe('plugins', () => {
         cy.get(`[data-hook=${PLUGIN_COMPONENT.IMAGE}]:last`)
           .parent()
           .click();
-        cy.eyesCheckWindow(this.test.title);
+        cy.eyesCheckWindow({ tag: this.test.title, target: 'window', fully: false });
       });
     });
 
@@ -84,7 +85,7 @@ describe('plugins', () => {
         cy.get(`[data-hook=${'image-item'}]:last`)
           .parent()
           .click();
-        cy.eyesCheckWindow(this.test.title);
+        cy.eyesCheckWindow({ tag: this.test.title, target: 'window', fully: false });
       });
     });
   });
@@ -105,6 +106,13 @@ describe('plugins', () => {
       cy.eyesCheckWindow(this.test.title + ' toolbar');
       cy.openGalleryAdvancedSettings();
       cy.eyesCheckWindow(this.test.title + ' settings');
+    });
+
+    it('render gallery out of view', function() {
+      cy.loadEditorAndViewer('gallery-out-of-view');
+      cy.eyesCheckWindow(`${this.test.title} - out of view`);
+      cy.scrollTo('bottom');
+      cy.eyesCheckWindow(`${this.test.title} - in view`);
     });
 
     context('organize media', () => {
@@ -154,6 +162,14 @@ describe('plugins', () => {
           .openGalleryImageSettings()
           .get(`[data-hook=${GALLERY_IMAGE_SETTINGS.PREVIEW}]:first`);
         cy.eyesCheckWindow(this.test.parent.title + ' - render item settings');
+        cy.get(`[data-hook=${GALLERY_IMAGE_SETTINGS.TITLE}]`).type('Amazing Title');
+        cy.get(`[data-hook=${GALLERY_IMAGE_SETTINGS.LINK}]`).type('Stunning.com');
+        cy.get(`[data-hook=${GALLERY_IMAGE_SETTINGS.LINK_TARGET}]`).click();
+        cy.get(`[data-hook=${GALLERY_IMAGE_SETTINGS.LINK_NOFOLLOW}]`).click();
+        cy.eyesCheckWindow(this.test.parent.title + ' - enter image settings');
+        cy.get(`[data-hook=${GALLERY_IMAGE_SETTINGS.DONE}]:first`).click();
+        cy.openGalleryImageSettings();
+        cy.eyesCheckWindow(this.test.parent.title + ' - settings saved & title shows on image ');
         cy.get(`[data-hook=${GALLERY_IMAGE_SETTINGS.DELETE}]`).click({ force: true });
         cy.get(`[data-hook=${GALLERY_IMAGE_SETTINGS.PREVIEW}]:first`);
         cy.eyesCheckWindow(this.test.parent.title + ' - delete a media item');
@@ -184,20 +200,20 @@ describe('plugins', () => {
       cy.eyesCheckWindow(this.test.title);
     });
 
-    it('enable to add a video from URI', function() {
-      cy.openVideoUploadModal().addVideoFromURI();
+    it('add a video from URL', function() {
+      cy.openVideoUploadModal().addVideoFromURL();
       cy.shrinkPlugin();
       cy.waitForVideoToLoad();
       cy.focusEditor().enterParagraphs(['Will this fix the flakiness?']);
       cy.eyesCheckWindow(this.test.title);
     });
 
-    // TODO: remove skip once custom mock upload is stablized
-    // eslint-disable-next-line mocha/no-skipped-tests
-    it.skip('enable to add a custom video', function() {
+    it('add a custom video', function() {
       cy.openVideoUploadModal().addCustomVideo();
-      cy.waitForVideoToLoad();
       cy.shrinkPlugin();
+      cy.waitForVideoToLoad();
+      cy.focusEditor().enterParagraphs(['Will this fix the flakiness?']);
+
       cy.eyesCheckWindow(this.test.title);
     });
   });
@@ -216,7 +232,7 @@ describe('plugins', () => {
       cy.eyesCheckWindow(this.test.title);
     });
 
-    it('enable to add a soundcloud URI', function() {
+    it('add a soundcloud URL', function() {
       cy.openSoundCloudModal().addSoundCloud();
       cy.waitForVideoToLoad();
       cy.shrinkPlugin();
@@ -275,19 +291,20 @@ describe('plugins', () => {
     });
   });
 
-  context('gif', () => {
+  context('giphy', () => {
     before('load editor', function() {
       eyesOpen(this);
-      cy.loadEditorAndViewer('gif');
     });
 
     after(() => cy.eyesClose());
 
     it('render giphy plugin toolbar', function() {
-      cy.openPluginToolbar(PLUGIN_COMPONENT.GIF).clickToolbarButton(
+      cy.loadEditorAndViewer('giphy');
+      cy.openPluginToolbar(PLUGIN_COMPONENT.GIPHY).clickToolbarButton(
         PLUGIN_TOOLBAR_BUTTONS.SMALL_CENTER
       );
       cy.get(`button[data-hook=${PLUGIN_TOOLBAR_BUTTONS.REPLACE}][tabindex=0]`).click();
+      cy.get(`[data-hook=${GIPHY_PLUGIN.UPLOAD_MODAL}] img`);
       cy.eyesCheckWindow(this.test.title);
     });
   });
@@ -331,7 +348,8 @@ describe('plugins', () => {
 
     after(() => cy.eyesClose());
 
-    it('drag and drop plugins', function() {
+    // eslint-disable-next-line mocha/no-skipped-tests
+    it.skip('drag and drop plugins', function() {
       cy.focusEditor();
       const src = `[data-hook=${PLUGIN_COMPONENT.IMAGE}] + [data-hook=componentOverlay]`;
       const dest = `span[data-offset-key="fjkhf-0-0"]`;

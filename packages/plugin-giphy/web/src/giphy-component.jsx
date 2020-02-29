@@ -23,8 +23,17 @@ class GiphyComponent extends Component {
   };
 
   renderPlayer = () => {
-    const { componentData } = this.props;
-    return <GiphyViewer ref={this.setPlayer} componentData={componentData} />;
+    const { componentData, theme, settings, isMobile, setComponentUrl } = this.props;
+    return (
+      <GiphyViewer
+        ref={this.setPlayer}
+        componentData={componentData}
+        theme={theme}
+        settings={settings}
+        isMobile={isMobile}
+        setComponentUrl={setComponentUrl}
+      />
+    );
   };
 
   onKeyDown = (e, handler) => {
@@ -48,6 +57,10 @@ class GiphyComponent extends Component {
 GiphyComponent.propTypes = {
   componentData: PropTypes.object.isRequired,
   onClick: PropTypes.func.isRequired,
+  settings: PropTypes.object.isRequired,
+  isMobile: PropTypes.bool.isRequired,
+  theme: PropTypes.object.isRequired,
+  setComponentUrl: PropTypes.func,
 };
 
 export { GiphyComponent as Component, DEFAULTS };

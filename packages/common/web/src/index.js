@@ -14,7 +14,6 @@ export {
   startsWithHttps,
   hasProtocol,
 } from './Utils/urlValidators';
-export { default as Context } from './Utils/Context';
 export { mergeStyles } from './Utils/mergeStyles';
 export { default as normalizeInitialState } from './Utils/normalization/normalizeInitialState';
 export { default as getDisplayName } from './Utils/getDisplayName';

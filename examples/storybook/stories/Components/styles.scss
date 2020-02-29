@@ -1,0 +1,56 @@
+@font-face {
+  font-family: 'proxima-n-w01-reg';
+  src: url('https://static.parastorage.com/services/third-party/fonts/user-site-fonts/fonts/64017d81-9430-4cba-8219-8f5cc28b923e.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+}
+
+
+
+.page {
+  
+  padding: 20px;
+  padding-left: 40px; 
+  line-height: 1.5;
+  font-size: 18px;
+  font-family: "proxima-n-w01-reg", sans-serif;
+}
+
+.rce-wrapper {
+  border: 1px solid pink;
+
+}
+
+.rcv-wrapper {
+  border: 1px solid mediumaquamarine; 
+}
+
+
+.blog-preset {
+  width: 740px;
+}
+
+.Comparison {
+  display: flex;
+  justify-content: space-evenly;
+  > div {
+    width: 40%;
+  }
+}
+
+@media only screen and (max-width: 640px) {
+  .rce-wrapper {
+    margin-left: 0px;
+  }
+
+  .rcv-wrapper { 
+    margin-left: 0px;
+  }
+  .Comparison {
+    flex-direction: column;
+    > div {
+      margin-left: 0px;
+      width: 100%;
+    }
+  }
+}

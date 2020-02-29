@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { isEqual } from 'lodash';
-import { Context } from 'wix-rich-content-common';
 import GalleryViewer from './gallery-viewer';
 import { DEFAULTS } from './constants';
 
@@ -14,12 +13,21 @@ class GalleryComponent extends PureComponent {
     super(props);
     this.state = this.stateFromProps(props);
 
-    const { block, store } = this.props;
+    const { block, store, commonPubsub } = this.props;
+    this.blockKey = block.getKey();
     if (store) {
-      const blockKey = block.getKey();
-      store.setBlockHandler('handleFilesSelected', blockKey, this.handleFilesSelected.bind(this));
-      store.setBlockHandler('handleFilesAdded', blockKey, this.handleFilesAdded.bind(this));
+      store.setBlockHandler(
+        'handleFilesSelected',
+        this.blockKey,
+        this.handleFilesSelected.bind(this)
+      );
+      store.setBlockHandler('handleFilesAdded', this.blockKey, this.handleFilesAdded.bind(this));
     }
+    commonPubsub?.setBlockHandler(
+      'galleryHandleFilesAdded',
+      this.blockKey,
+      this.handleFilesAdded.bind(this)
+    );
   }
 
   componentWillReceiveProps(nextProps) {
@@ -34,7 +42,7 @@ class GalleryComponent extends PureComponent {
 
   stateFromProps = props => {
     const items = props.componentData.items || []; // || DEFAULTS.items;
-    const styles = Object.assign(DEFAULTS.styles, props.componentData.styles || {});
+    const styles = { ...DEFAULTS.styles, ...(props.componentData.styles || {}) };
     const isLoading = (props.componentState && props.componentState.isLoading) || 0;
     const state = {
       items,
@@ -47,7 +55,7 @@ class GalleryComponent extends PureComponent {
       if (isLoading <= 0 && userSelectedFiles) {
         //lets continue the uploading process
         if (userSelectedFiles.files && userSelectedFiles.files.length > 0) {
-          Object.assign(state, { isLoading: userSelectedFiles.files.length });
+          state.isLoading = userSelectedFiles.files.length;
           this.handleFilesSelected(userSelectedFiles.files);
         }
         if (this.props.store) {
@@ -111,7 +119,7 @@ class GalleryComponent extends PureComponent {
     };
 
     const itemIdx = this.setItemInGallery(item, itemPos);
-    const { helpers } = this.context;
+    const { helpers } = this.props;
     const hasFileChangeHelper = helpers && helpers.onFilesChange;
 
     if (hasFileChangeHelper) {
@@ -127,7 +135,6 @@ class GalleryComponent extends PureComponent {
         metadata: {
           height: item.height,
           width: item.width,
-          processedByConsumer: true,
         },
         itemId: String(item.id),
         url: item.file_name,
@@ -157,6 +164,13 @@ class GalleryComponent extends PureComponent {
         onClick={this.props.onClick}
         className={this.props.className}
         settings={this.props.settings}
+        theme={this.props.theme}
+        helpers={this.props.helpers}
+        disableRightClick={this.props.disableRightClick}
+        isMobile={this.props.isMobile}
+        anchorTarget={this.props.anchorTarget}
+        relValue={this.props.relValue}
+        blockKey={this.blockKey}
       />
     );
   }
@@ -166,13 +180,18 @@ GalleryComponent.propTypes = {
   componentData: PropTypes.object.isRequired,
   componentState: PropTypes.object.isRequired,
   store: PropTypes.object.isRequired,
+  commonPubsub: PropTypes.object,
   blockProps: PropTypes.object.isRequired,
   block: PropTypes.object.isRequired,
   onClick: PropTypes.func.isRequired,
   className: PropTypes.string.isRequired,
   settings: PropTypes.object,
+  helpers: PropTypes.object.isRequired,
+  disableRightClick: PropTypes.bool,
+  theme: PropTypes.object.isRequired,
+  isMobile: PropTypes.bool.isRequired,
+  anchorTarget: PropTypes.string.isRequired,
+  relValue: PropTypes.string.isRequired,
 };
-
-GalleryComponent.contextType = Context.type;
 
 export { GalleryComponent as Component, DEFAULTS };

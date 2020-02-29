@@ -7,14 +7,17 @@ import {
   alignmentClassName,
   textWrapClassName,
   normalizeUrl,
-  Context,
 } from 'wix-rich-content-common';
 import { getInteractionWrapper, DefaultInteractionWrapper } from './utils/getInteractionWrapper';
 
 class PluginViewer extends PureComponent {
   getContainerClassNames = hasLink => {
-    const { pluginComponent, componentData, styles } = this.props;
-    const { theme, isMobile } = this.context;
+    const {
+      pluginComponent,
+      componentData,
+      styles,
+      context: { theme, isMobile },
+    } = this.props;
     const { size, alignment, textWrap, custom } = pluginComponent.classNameStrategies || {};
     return classNames(
       styles.pluginContainerReadOnly,
@@ -38,20 +41,28 @@ class PluginViewer extends PureComponent {
 
   /* eslint-disable complexity */
   render() {
-    const { type, pluginComponent, componentData, children, styles, entityIndex } = this.props;
-    const { theme, anchorTarget, relValue, config } = this.context;
+    const {
+      type,
+      pluginComponent,
+      componentData,
+      children,
+      styles,
+      entityIndex,
+      context,
+    } = this.props;
     const { component: Component, elementType } = pluginComponent;
     const { container } = pluginComponent.classNameStrategies || {};
-    const settings = (config && config[type]) || {};
+    const { anchorTarget, relValue, config, theme } = context;
+    const settings = config?.[type] || {};
     const componentProps = {
       componentData,
       settings,
       children,
       entityIndex,
+      ...context,
     };
 
     if (Component) {
-      Component.contextType = Context.type;
       if (elementType !== 'inline') {
         const hasLink = componentData.config && componentData.config.link;
         const ContainerElement = !hasLink ? 'div' : 'a';
@@ -62,7 +73,7 @@ class PluginViewer extends PureComponent {
           containerProps = {
             href: normalizeUrl(url),
             target: target || anchorTarget || '_self',
-            rel: rel || relValue || 'noopener',
+            rel: rel || relValue || 'noopener noreferrer',
           };
         }
         if (componentData.config) {
@@ -71,8 +82,8 @@ class PluginViewer extends PureComponent {
             containerProps.style = { width: componentData.config.width };
           }
           if (type === 'wix-draft-plugin-html') {
-            const { width: currentWidth, height: currentHeight } = componentData.config;
-            containerProps.style = { width: currentWidth, height: currentHeight };
+            const { width: currentWidth } = componentData.config;
+            containerProps.style = { width: currentWidth };
           }
         }
         return (
@@ -97,8 +108,6 @@ class PluginViewer extends PureComponent {
   /* eslint-enable complexity */
 }
 
-PluginViewer.contextType = Context.type;
-
 PluginViewer.propTypes = {
   type: PropTypes.string.isRequired,
   componentData: PropTypes.object.isRequired,
@@ -106,6 +115,20 @@ PluginViewer.propTypes = {
   entityIndex: PropTypes.number.isRequired,
   children: PropTypes.node,
   styles: PropTypes.object,
+  context: PropTypes.shape({
+    theme: PropTypes.object.isRequired,
+    anchorTarget: PropTypes.string.isRequired,
+    relValue: PropTypes.string.isRequired,
+    config: PropTypes.object.isRequired,
+    isMobile: PropTypes.bool.isRequired,
+    helpers: PropTypes.object.isRequired,
+    t: PropTypes.func.isRequired,
+    locale: PropTypes.string.isRequired,
+    disabled: PropTypes.bool,
+    seoMode: PropTypes.bool,
+    siteDomain: PropTypes.string,
+    disableRightClick: PropTypes.bool,
+  }).isRequired,
 };
 
 PluginViewer.defaultProps = {
@@ -113,7 +136,7 @@ PluginViewer.defaultProps = {
 };
 
 //return a list of types with a function that wraps the viewer
-const getPluginViewers = (typeMap, pluginProps, styles) => {
+const getPluginViewers = (typeMap, context, styles) => {
   const res = {};
   Object.keys(typeMap).forEach(type => {
     res[type] = (children, entity, { key }) => {
@@ -122,8 +145,9 @@ const getPluginViewers = (typeMap, pluginProps, styles) => {
       const { interactions } = entity;
 
       const ViewerWrapper = isArray(interactions)
-        ? getInteractionWrapper({ interactions, config: pluginProps.config, mergedStyles: styles })
+        ? getInteractionWrapper({ interactions, config: context.config, mergedStyles: styles })
         : DefaultInteractionWrapper;
+
       return (
         <ViewerWrapper>
           <PluginViewer
@@ -132,7 +156,7 @@ const getPluginViewers = (typeMap, pluginProps, styles) => {
             key={key}
             componentData={entity}
             entityIndex={key}
-            {...pluginProps}
+            context={context}
             styles={styles}
           >
             {isInline ? children : null}
