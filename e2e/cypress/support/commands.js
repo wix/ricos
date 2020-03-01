@@ -70,9 +70,9 @@ function hideAllTooltips() {
 
 Cypress.Commands.add('loadEditorAndViewer', fixtureName => {
   run('rce', fixtureName).then(() => {
-    if (fixtureName === 'gallery') cy.wait(1000);
     disableTransitions();
     hideAllTooltips();
+    if (fixtureName === 'gallery') cy.wait(1000);
   });
   if (fixtureName.includes('gallery')) {
     cy.wait(2000);
