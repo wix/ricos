@@ -2,8 +2,9 @@
 import { fixtures, fixturesToTestOnSeo } from './constants';
 import { DEFAULT_DESKTOP_BROWSERS, DEFAULT_MOBILE_BROWSERS } from '../tests/constants';
 
-const testFixture = fixture =>
+const testFixture = (fixture, isMobile) =>
   it(`render ${fixture}`, function() {
+    isMobile && cy.switchToMobile();
     cy.loadEditorAndViewer(fixture);
     if (fixture.includes('video')) {
       cy.waitForVideoToLoad();
@@ -31,7 +32,7 @@ describe('editor rendering', () => {
 
     after(() => cy.eyesClose());
 
-    fixtures.forEach(testFixture);
+    fixtures.forEach(fixture => testFixture(fixture));
   });
 
   context('mobile', () => {
@@ -43,13 +44,12 @@ describe('editor rendering', () => {
       });
     });
 
-    beforeEach(() => cy.switchToMobile());
-
     after(() => {
       cy.eyesClose();
     });
 
-    fixtures.forEach(testFixture);
+    const isMobile = true;
+    fixtures.forEach(fixture => testFixture(fixture, isMobile));
   });
 
   context('seo', () => {
@@ -68,6 +68,6 @@ describe('editor rendering', () => {
 
     after(() => cy.eyesClose());
 
-    fixturesToTestOnSeo.forEach(testFixture);
+    fixturesToTestOnSeo.forEach(fixture => testFixture(fixture));
   });
 });
