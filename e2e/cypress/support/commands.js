@@ -369,7 +369,7 @@ Cypress.Commands.add('openPluginToolbar', plugin => {
     .parent();
   if (plugin === 'galleryViewer') {
     pluginToolbar.parent();
-    cy.wait(1000);
+    pluginToolbar.wait(1000);
   }
   pluginToolbar.click();
   cy.get('[data-hook*="PluginToolbar"]:first');
