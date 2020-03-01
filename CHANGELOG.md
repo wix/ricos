@@ -13,10 +13,12 @@
     Click to see more.
   </summary>
   
-  ### :boom: New Feature
-  - `text-selection-toolbar`
-    - [#523](https://github.com/wix-incubator/rich-content/pull/523) create viewer toolbar with tweet option
-  
+### :boom: New Feature
+- `text-selection-toolbar`
+  - [#523](https://github.com/wix-incubator/rich-content/pull/523) create viewer toolbar with tweet option
+### :bug: Bug Fix
+- `e2e`
+  - [#737](https://github.com/wix-incubator/rich-content/pull/737) fix rendering and plugins tests
 </details>
 <hr/>
 
