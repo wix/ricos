@@ -66,8 +66,7 @@ describe('plugins', () => {
       it('expand image on full screen', function() {
         cy.get(`[data-hook=${PLUGIN_COMPONENT.IMAGE}]:last`)
           .parent()
-          .click()
-          .wait(1000);
+          .click();
         cy.eyesCheckWindow({ tag: this.test.title, target: 'window', fully: false });
       });
     });
@@ -106,18 +105,16 @@ describe('plugins', () => {
         .get(`[data-hook=${'image-item'}]:first`)
         .get(`[data-hook=${'image-item'}]`)
         .eq(1);
-      cy.openPluginToolbar(PLUGIN_COMPONENT.GALLERY)
-        .shrinkPlugin()
-        .wait(1000);
+      cy.openPluginToolbar(PLUGIN_COMPONENT.GALLERY).shrinkPlugin();
       cy.eyesCheckWindow(this.test.title + ' toolbar');
-      cy.openGalleryAdvancedSettings().wait(1000);
+      cy.openGalleryAdvancedSettings();
       cy.eyesCheckWindow(this.test.title + ' settings');
     });
 
     it('render gallery out of view', function() {
-      cy.loadEditorAndViewer('gallery-out-of-view').wait(1000);
+      cy.loadEditorAndViewer('gallery-out-of-view');
       cy.eyesCheckWindow(`${this.test.title} - out of view`);
-      cy.scrollTo('bottom').wait(1000);
+      cy.scrollTo('bottom');
       cy.eyesCheckWindow(`${this.test.title} - in view`);
     });
 
