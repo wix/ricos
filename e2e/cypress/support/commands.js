@@ -72,7 +72,6 @@ Cypress.Commands.add('loadEditorAndViewer', fixtureName => {
   run('rce', fixtureName).then(() => {
     disableTransitions();
     hideAllTooltips();
-    if (fixtureName === 'gallery') cy.wait(3000);
   });
 });
 
@@ -360,6 +359,7 @@ Cypress.Commands.add('openPluginToolbar', plugin => {
     .parent();
   if (plugin === 'galleryViewer') {
     pluginToolbar.parent();
+    cy.wait(1000);
   }
   pluginToolbar.click();
   cy.get('[data-hook*="PluginToolbar"]:first');
