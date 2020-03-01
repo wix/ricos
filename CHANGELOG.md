@@ -13,6 +13,10 @@
     Click to see more.
   </summary>
   
+  ### :boom: New Feature
+  - `text-selection-toolbar`
+    - [#523](https://github.com/wix-incubator/rich-content/pull/523) create viewer toolbar with tweet option
+  
 </details>
 <hr/>
 
