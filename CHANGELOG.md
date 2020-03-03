@@ -21,7 +21,10 @@
   - [#732](https://github.com/wix-incubator/rich-content/pull/732) fix html width in viewer
 - `editor`
   - [#735](https://github.com/wix-incubator/rich-content/pull/735) disable paste inline images and atomic blocks.
-
+### :house: Internal
+- `e2e`
+  - [#737](https://github.com/wix-incubator/rich-content/pull/737) fix rendering and plugins tests
+    
 </details>
 <hr/>
 
