@@ -361,14 +361,10 @@ Cypress.Commands.add('openPluginToolbar', plugin => {
     .first()
     .parent();
   if (plugin === 'galleryViewer') {
-    pluginToolbar
-      .parent()
-      .wait(1000)
-      .then(() => {
-        pluginToolbar.click();
-        cy.get('[data-hook*="PluginToolbar"]:first');
-      });
+    pluginToolbar.parent();
   }
+  pluginToolbar.click();
+  cy.get('[data-hook*="PluginToolbar"]:first');
 });
 
 Cypress.Commands.add('openDropdownMenu', (selector = '') => {
