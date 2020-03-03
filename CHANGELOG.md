@@ -12,16 +12,26 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+  
+### :boom: New Feature
+- `text-selection-toolbar`
+  - [#523](https://github.com/wix-incubator/rich-content/pull/523) create viewer toolbar with tweet option  
+### :bug: Bug Fix
+- `html`
+  - [#732](https://github.com/wix-incubator/rich-content/pull/732) fix html width in viewer
+    
+</details>
+<hr/>
 
+## 6.9.2 (Feb 27, 2020)
 ### :bug: Bug Fix
 - `video`
   - [#727](https://github.com/wix-incubator/rich-content/pull/727) loader is consistent throughout inital file upload
+- `editor`
+  - [#731](https://github.com/wix-incubator/rich-content/pull/731) tooltips disappear after click
 ### :house: Internal
 - `gallery`
   - [#724](https://github.com/wix-incubator/rich-content/pull/724) bump pro-gallery version to 1.7.23
-  
-</details>
-<hr/>
 
 ## 6.9.1 (Feb 25, 2020)
 ### :bug: Bug Fix
