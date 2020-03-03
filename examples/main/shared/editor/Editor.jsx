@@ -182,10 +182,9 @@ export default class Editor extends PureComponent {
       initialState,
       editorState,
     };
-    const style = isMobile ? { minHeight: '0%' } : { minHeight: '100%' };
 
     return (
-      <div className="editor" style={style}>
+      <div className="editor" style={{ minHeight: isMobile ? '0%' : '100%' }}>
         {MobileToolbar && <MobileToolbar />}
         {TextToolbar && (
           <div className="toolbar-wrapper">
