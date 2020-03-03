@@ -16,9 +16,10 @@
 ### :boom: New Feature
 - `text-selection-toolbar`
   - [#523](https://github.com/wix-incubator/rich-content/pull/523) create viewer toolbar with tweet option
-### :bug: Bug Fix
+### :house: Internal
 - `e2e`
   - [#737](https://github.com/wix-incubator/rich-content/pull/737) fix rendering and plugins tests
+### :bug: Bug Fix
 - `html`
   - [#732](https://github.com/wix-incubator/rich-content/pull/732) fix html width in viewer
     
