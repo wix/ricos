@@ -1,22 +1,5 @@
 import { OrderedSet } from 'immutable';
-
-const rgbToHex = rgbString => {
-  const sep = rgbString.indexOf(',') > -1 ? ',' : ' ';
-  const rgb = rgbString
-    .substr(4)
-    .split(')')[0]
-    .split(sep);
-
-  let r = Number(rgb[0]).toString(16),
-    g = Number(rgb[1]).toString(16),
-    b = Number(rgb[2]).toString(16);
-
-  if (r.length === 1) r = '0' + r;
-  if (g.length === 1) g = '0' + g;
-  if (b.length === 1) b = '0' + b;
-
-  return '#' + r + g + b;
-};
+import rgbToHex from './rgbToHex';
 
 export default {
   htmlToStyle: (nodeName, node, currentStyle) => {
@@ -39,32 +22,20 @@ export default {
         rel: 'noopener',
       });
     }
-    // if (nodeName === 'img') {
-    //   return createEntity('wix-draft-plugin-image', 'IMMUTABLE', {
-    //     src: node.src,
-    //   });
+    // if (nodeName === 'figure') {
+    //   const atomicType = node.firstElementChild.firstElementChild.dataset.hook;
+    //   if (atomicType?.includes('divider-')) {
+    //     return createEntity('wix-draft-plugin-divider', 'IMMUTABLE', {
+    //       type: atomicType.substring(8),
+    //     });
+    //   }
     // }
-    if (nodeName === 'figure') {
-      const atomicType = node.firstElementChild.firstElementChild.dataset.hook;
-      if (atomicType?.includes('divider-')) {
-        return createEntity('wix-draft-plugin-divider', 'IMMUTABLE', {
-          type: atomicType.substring(8),
-        });
-      }
-      // if (atomicType.includes('imageViewer')) {
-      //   console.log({ node });
-      //   return createEntity('wix-draft-plugin-image', 'IMMUTABLE', {
-      //     src: node.src,
-      //   });
-      // }
-    }
     return null;
   },
-  htmlToBlock: nodeName => {
-    if (nodeName === 'figure') {
-      return 'atomic';
-    }
-
-    return null;
-  },
+  // htmlToBlock: nodeName => {
+  //   if (nodeName === 'figure') {
+  //     return 'atomic';
+  //   }
+  //   return null;
+  // },
 };

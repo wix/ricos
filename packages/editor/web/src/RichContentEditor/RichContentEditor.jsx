@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { EditorState, convertFromRaw, /*convertFromHTML,*/ Modifier } from 'draft-js';
+import { EditorState, convertFromRaw, Modifier } from 'draft-js';
 import Editor from 'draft-js-plugins-editor';
 import { get, includes, merge, debounce } from 'lodash';
 import Measure from 'react-measure';
@@ -23,7 +23,6 @@ import {
 import { AccessibilityListener, normalizeInitialState, getLangDir } from 'wix-rich-content-common';
 import styles from '../../statics/styles/rich-content-editor.scss';
 import draftStyles from '../../statics/styles/draft.rtlignore.scss';
-//import filterInlineImages from './utils/filterInlineImagesUtil';
 import { convertFromHTML as draftConvertFromHtml } from 'draft-convert';
 import pastedContentConfig from './utils/pastedContentConfig';
 
@@ -203,8 +202,6 @@ class RichContentEditor extends Component {
       return handlePastedText(text, html, editorState);
     }
     const contentState = draftConvertFromHtml(pastedContentConfig)(html);
-
-    // const fragment = filterInlineImages(htmlFragment.contentBlocks, editorState);
 
     const updatedContentState = Modifier.replaceWithFragment(
       editorState.getCurrentContent(),
