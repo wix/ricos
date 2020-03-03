@@ -75,18 +75,18 @@ export default class Editor extends PureComponent {
           updateEntity({ data });
         }, 500);
       },
-      // onProgressChange: updatePercentage => {
-      //   let percent = 0;
-      //   const mockImageIndex = this.props.mockImageIndex || 0;
-      //   const testImageUrl = wixImagesUrl + testImages[mockImageIndex].url;
-      //   console.log(testImageUrl);
-      //   updatePercentage(percent, testImageUrl);
-      //   const interval = setInterval(() => {
-      //     updatePercentage(percent, testImageUrl);
-      //     percent += 10;
-      //     if (percent === 110) clearInterval(interval);
-      //   }, 100);
-      // },
+      onProgressChange: updatePercentage => {
+        let percent = 0;
+        const mockImageIndex = this.props.mockImageIndex || 0;
+        const testImageUrl = wixImagesUrl + testImages[mockImageIndex].url;
+        console.log(testImageUrl);
+        updatePercentage(percent, testImageUrl);
+        const interval = setInterval(() => {
+          updatePercentage(percent, testImageUrl);
+          percent += 10;
+          if (percent === 110) clearInterval(interval);
+        }, 100);
+      },
       onVideoSelected: (url, updateEntity) => {
         setTimeout(() => {
           const mockVideoIndex =
