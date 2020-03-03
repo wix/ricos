@@ -97,7 +97,7 @@ $opacityTransition: opacity 0.8s ease;
   opacity: 0;
   transition: $opacityTransition;
 
-  &.isGif {
+  &.onlyHighRes {
     position: relative;
     opacity: 1;
   }

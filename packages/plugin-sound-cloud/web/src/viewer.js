@@ -7,7 +7,6 @@ export const pluginSoundCloud = (config = {}) => {
   return {
     config: { ...DEFAULTS.config, ...config },
     type: SOUND_CLOUD_TYPE,
-    decorator: {},
     typeMapper,
   };
 };

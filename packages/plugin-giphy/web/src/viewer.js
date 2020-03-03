@@ -7,6 +7,5 @@ export const pluginGiphy = (config = {}) => {
     config: { ...DEFAULTS.configViewer, ...config },
     type: GIPHY_TYPE,
     typeMapper,
-    decorator: {},
   };
 };

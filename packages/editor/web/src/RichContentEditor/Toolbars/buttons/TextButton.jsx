@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { isEmpty } from 'lodash';
+import ReactTooltip from 'react-tooltip';
 
 import { mergeStyles } from 'wix-rich-content-common';
 import { ToolbarButton } from 'wix-rich-content-editor-common';
@@ -37,6 +38,7 @@ export default class TextButton extends Component {
 
   handleClick = event => {
     const { onClick } = this.props;
+    ReactTooltip.hide();
     onClick && onClick(event);
   };
 

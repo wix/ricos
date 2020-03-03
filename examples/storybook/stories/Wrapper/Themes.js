@@ -25,7 +25,7 @@ class ThemeSelector extends React.Component {
     };
   }
   render() {
-    const { selected = this.palettes[0] } = this.state;
+    const { selected } = this.state;
     return (
       <React.Fragment>
         <Layout cols={1}>

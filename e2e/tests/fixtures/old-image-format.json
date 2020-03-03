@@ -23,6 +23,21 @@
           }
         ],
         "data": {}
+      },
+      {
+        "key": "1khfq",
+        "text": " ",
+        "type": "atomic",
+        "depth": 0,
+        "inlineStyleRanges": [],
+        "entityRanges": [
+          {
+            "offset": 0,
+            "length": 1,
+            "key": 2
+          }
+        ],
+        "data": {}
       }
     ],
     "entityMap": {
@@ -39,6 +54,20 @@
           },
           "width": 1080,
           "height": 708
+        }
+      },
+      "2": {
+        "type": "wix-draft-plugin-image",
+        "mutability": "IMMUTABLE",
+        "data": {
+          "src": "//static.wixstatic.com/media/9916f5_f3a135d986354da09522bd288f51d4a6~mv2.jpg/v1/fill/w_626,h_417/9916f5_f3a135d986354da09522bd288f51d4a6~mv2.jpg",
+          "linkId": "",
+          "type": "IMG",
+          "alt": "",
+          "height": 417,
+          "width": 626,
+          "className": "",
+          "key": "87i39"
         }
       }
     }

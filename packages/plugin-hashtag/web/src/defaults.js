@@ -6,3 +6,8 @@ export const DEFAULTS = {
     },
   },
 };
+export const THEME = colors => ({
+  hashtag: {
+    color: colors.actionColor,
+  },
+});

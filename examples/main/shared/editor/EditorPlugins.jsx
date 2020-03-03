@@ -54,7 +54,6 @@ import {
   colorScheme,
   customBackgroundStyleFn,
 } from '../../src/text-color-style-fn';
-import { getBaseUrl } from '../../src/utils';
 import { testWixVideos } from './mock';
 // import { MyCustomIcon, SizeSmallRightIcon, TOOLBARS } from 'wix-rich-content-editor-common';
 import { TOOLBARS, BUTTONS, DISPLAY_MODE } from 'wix-rich-content-editor-common';
@@ -104,7 +103,7 @@ let userButtonBorderColors = [...buttonDefaultPalette];
 
 const getLinkPanelDropDownConfig = () => {
   const getItems = () => {
-    casual.define('item', function () {
+    casual.define('item', function() {
       return {
         value: casual.url,
         label: casual.catch_phrase,
@@ -222,7 +221,7 @@ const videoHandlers = {
       updateEntity({ data: videoToUpload });
       //updateEntity({ error: { msg: 'Upload Failed' } });
       console.log('consumer uploaded ', videoToUpload);
-    }, 500);
+    }, 1500);
   },
 };
 
@@ -296,7 +295,6 @@ const config = {
     },
   },
   [HTML_TYPE]: {
-    htmlIframeSrc: `${getBaseUrl()}/static/html-plugin-embed.html`,
     minWidth: 35,
     maxWidth: 740,
     width: 350,
