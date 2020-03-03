@@ -12,14 +12,16 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
-  
+
 ### :boom: New Feature
 - `text-selection-toolbar`
-  - [#523](https://github.com/wix-incubator/rich-content/pull/523) create viewer toolbar with tweet option  
+  - [#523](https://github.com/wix-incubator/rich-content/pull/523) create viewer toolbar with tweet option
 ### :bug: Bug Fix
 - `html`
   - [#732](https://github.com/wix-incubator/rich-content/pull/732) fix html width in viewer
-    
+- `editor`
+  - [#735](https://github.com/wix-incubator/rich-content/pull/735) disable paste inline images and atomic blocks.
+
 </details>
 <hr/>
 
