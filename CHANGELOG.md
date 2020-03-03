@@ -19,6 +19,9 @@
 ### :bug: Bug Fix
 - `e2e`
   - [#737](https://github.com/wix-incubator/rich-content/pull/737) fix rendering and plugins tests
+- `html`
+  - [#732](https://github.com/wix-incubator/rich-content/pull/732) fix html width in viewer
+    
 </details>
 <hr/>
 

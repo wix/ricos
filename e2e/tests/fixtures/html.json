@@ -25,6 +25,30 @@
       "data": {}
     },
     {
+      "key": "xxx",
+      "text": "Wide embed. In mobile full width. In desktop 740px ",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "3877q",
+      "text": " ",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 1
+        }
+      ],
+      "data": {}
+    },
+    {
       "key": "brcve",
       "text": "",
       "type": "unstyled",
@@ -47,7 +71,20 @@
           "height": 445
         }
       }
-    }
-  },
-  "VERSION": "6.8.2"
+    },
+    "1": {
+      "type": "wix-draft-plugin-html",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "srcType": "html",
+        "src": "<div class=\"iframely-embed\"><div class=\"iframely-responsive\" style=\"padding-bottom: 52.356%; padding-top: 120px;\"><a href=\"https://www.worldofbuzz.com/9-yummy-snacks-from-south-korea-that-make-great-souvenirs-for-everyone/\" data-iframely-url=\"//cdn.iframe.ly/05UevKO\"></a></div></div><script async src=\"//cdn.iframe.ly/embed.js\" charset=\"utf-8\"></script>",
+        "config": {
+          "alignment": "center",
+          "width": 740,
+          "height": 544
+        }
+      }
+    },
+    "VERSION": "6.8.2"
+  }
 }

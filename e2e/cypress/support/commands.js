@@ -444,7 +444,7 @@ Cypress.Commands.add('waitForHtmlToLoad', () => {
         .its('0.contentDocument.body')
         .should('not.be.undefined');
     })
-    .wait(1000);
+    .wait(4000);
 });
 
 // disable screenshots in debug mode. So there is no diffrence to ci.
