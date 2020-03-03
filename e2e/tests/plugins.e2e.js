@@ -81,7 +81,7 @@ describe('plugins', () => {
           .eq(1)
       );
 
-      it.only('expand gallery image on full screen', function() {
+      it('expand gallery image on full screen', function() {
         cy.get(`[data-hook=${'image-item'}]:last`)
           .parent()
           .click();

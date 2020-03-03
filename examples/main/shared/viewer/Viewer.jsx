@@ -12,8 +12,11 @@ import {
   ViewerInlineToolBar,
 } from 'wix-rich-content-text-selection-toolbar';
 import { GALLERY_TYPE } from 'wix-rich-content-plugin-gallery';
+import { testImages } from '../editor/mock';
+
 const anchorTarget = '_top';
 const relValue = 'noreferrer';
+const wixImagesUrl = 'https://static.wixstatic.com/media/';
 
 export default class Viewer extends PureComponent {
   constructor(props) {
@@ -46,6 +49,18 @@ export default class Viewer extends PureComponent {
         expandModeIndex: this.expandModeData.imageMap[entityIndex] + innerIndex,
       });
     },
+    // onProgressChange: updatePercentage => {
+    //   let percent = 0;
+    //   const mockImageIndex = this.props.mockImageIndex || 0;
+    //   const testImageUrl = wixImagesUrl + testImages[mockImageIndex].url;
+    //   console.log(testImageUrl);
+    //   updatePercentage(percent, testImageUrl);
+    //   const interval = setInterval(() => {
+    //     updatePercentage(percent, testImageUrl);
+    //     percent += 10;
+    //     if (percent === 110) clearInterval(interval);
+    //   }, 100);
+    // },
   };
 
   render() {
