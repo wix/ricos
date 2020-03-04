@@ -249,6 +249,7 @@
   "GallerySettings_Spacing_Between_Items_Tooltip" : "Set the spacing between the items in your gallery.",
   "Common_Units_PX" : "px",
   "Side_toolbar_basic_section": "Basic",
+  "Side_toolbar_empty_state": "No blocks found.\n Try another search term.",
   "Side_toolbar_search_place_holder": "Search for a block",
   "Image_plugin_name": "Image",
   "Gallery_plugin_name": "Gallery",

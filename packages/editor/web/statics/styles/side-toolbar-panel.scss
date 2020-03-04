@@ -5,16 +5,28 @@
   overflow: auto;
   grid-template-rows: max-content auto;
 
+  .pluginsSectionEmptyState,
   .pluginsSection {
     margin-top: 64px;
+    color: #000000;
+  }
+
+  .pluginsSection {
     height: 28px;
     background-color: #efeff4;
     align-items: center;
     display: flex;
     justify-content: center;
     font-size: 14px;
-    color: #000000;
     line-height: 20px;
+  }
+
+  .pluginsSectionEmptyState {
+    line-height: 16px;
+    font-size: 12px;
+    text-align: center;
+    white-space: pre;
+    letter-spacing: 1px;
   }
 
   .buttonsWrapper {
