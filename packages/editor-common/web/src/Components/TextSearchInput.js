@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import TextInput from './TextInput';
 import PropTypes from 'prop-types';
 import { SearchIcon, ClearIcon } from '../Icons';
+import { mergeStyles } from 'wix-rich-content-common';
+import textInputStyles from '../../statics/styles/text-search-input.scss';
 
-export default class PluginSearch extends Component {
+export default class TextSearchInput extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -33,30 +34,34 @@ export default class PluginSearch extends Component {
   };
 
   render() {
-    const { placeHolder, id, theme } = this.props;
-    const suffixIcon = this.state.searchTag && { Icon: ClearIcon, onClick: this.handleClearText };
+    const { placeHolder, theme } = this.props;
+    const { searchTag } = this.state;
+    const styles = mergeStyles({ styles: textInputStyles, theme });
+
     return (
-      <TextInput
-        inputRef={ref => {
-          this.input = ref;
-        }}
-        onKeyPress={this.handleKeyPress}
-        onChange={this.onChange}
-        value={this.state.searchTag}
-        placeholder={placeHolder}
-        theme={theme}
-        data-hook={id}
-        suffixIcon={suffixIcon}
-        prefixIcon={{ Icon: SearchIcon }}
-      />
+      <div className={styles.textInput}>
+        <SearchIcon className={styles.textInput_prefixIcon} />
+        <input
+          ref={ref => {
+            this.input = ref;
+          }}
+          className={styles.textInput_input}
+          placeholder={placeHolder}
+          onKeyPress={this.handleKeyPress}
+          onChange={this.onChange}
+          value={this.state.searchTag}
+        />
+        {searchTag && (
+          <ClearIcon className={styles.textInput_suffixIcon} onClick={this.handleClearText} />
+        )}
+      </div>
     );
   }
 }
 
-PluginSearch.propTypes = {
+TextSearchInput.propTypes = {
   placeHolder: PropTypes.string,
   onClose: PropTypes.func,
   theme: PropTypes.object.isRequired,
-  id: PropTypes.string,
   setSearchTag: PropTypes.func.isRequired,
 };
