@@ -45,12 +45,10 @@ class GalleryComponent extends PureComponent {
     const items = props.componentData.items || []; // || DEFAULTS.items;
     const styles = { ...DEFAULTS.styles, ...(props.componentData.styles || {}) };
     const lengthLeft = (props.componentState && props.componentState.isLoading) || 0;
-    const isLoading = items?.length !== this.props.componentData?.items?.length;
     const state = {
       items,
       styles,
       lengthLeft,
-      isLoading,
     };
 
     if (props.componentState) {
