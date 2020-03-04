@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { mergeStyles, getImageSrc, Loader } from 'wix-rich-content-common';
+import { mergeStyles, getImageSrc } from 'wix-rich-content-common';
 import {
   Image,
   InputWithLabel,
   LinkPanel,
   SettingsPanelFooter,
   SettingsSection,
+  Loader,
 } from 'wix-rich-content-editor-common';
 import ImageSettingsMobileHeader from './image-settings-mobile-header';
 import styles from '../../statics/styles/image-settings.scss';
@@ -171,8 +172,8 @@ class ImageSettings extends Component {
                 theme={theme}
               />
             ) : (
-              <div className={this.styles.imageSettingsImage}>
-                <Loader type={'medium'} helpers={this.props.helpers} />
+              <div className={this.styles.imageSettingsImage} style={{ position: 'relative' }}>
+                <Loader type={'medium'} helpers={helpers} theme={theme} />
               </div>
             )}
           </SettingsSection>
