@@ -14,7 +14,7 @@
   </summary>
 
 - `bi-events`
-  - [#514](https://github.com/wix-incubator/rich-content/pull/514) supports `onPluginAdd` (toolbar only) and `onPluginDelete` callbacks via props
+  - [#675](https://github.com/wix-incubator/rich-content/pull/514) supports `onPluginAdd` (toolbar only) and `onPluginDelete` callbacks via props
   
 ### :boom: New Feature
 - `text-selection-toolbar`
