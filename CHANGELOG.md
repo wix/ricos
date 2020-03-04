@@ -12,12 +12,13 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+
+- `bi-events`
+  - [#514](https://github.com/wix-incubator/rich-content/pull/514) supports `onPluginAdd` (toolbar only) and `onPluginDelete` callbacks via props
   
 ### :boom: New Feature
 - `text-selection-toolbar`
   - [#523](https://github.com/wix-incubator/rich-content/pull/523) create viewer toolbar with tweet option
-- `bi-events`
-  - [#514](https://github.com/wix-incubator/rich-content/pull/514) supports `onPluginAdd` (toolbar only) and `onPluginDelete` callbacks via props
 ### :bug: Bug Fix
 - `html`
   - [#732](https://github.com/wix-incubator/rich-content/pull/732) fix html width in viewer
