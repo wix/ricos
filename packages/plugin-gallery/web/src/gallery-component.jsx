@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import { Loader } from 'wix-rich-content-common';
 import { isEqual } from 'lodash';
 import GalleryViewer from './gallery-viewer';
 import { DEFAULTS } from './constants';
@@ -43,19 +44,21 @@ class GalleryComponent extends PureComponent {
   stateFromProps = props => {
     const items = props.componentData.items || []; // || DEFAULTS.items;
     const styles = { ...DEFAULTS.styles, ...(props.componentData.styles || {}) };
-    const isLoading = (props.componentState && props.componentState.isLoading) || 0;
+    const lengthLeft = (props.componentState && props.componentState.isLoading) || 0;
+    const isLoading = items?.length !== this.props.componentData?.items?.length;
     const state = {
       items,
       styles,
+      lengthLeft,
       isLoading,
     };
 
     if (props.componentState) {
       const { userSelectedFiles } = props.componentState;
-      if (isLoading <= 0 && userSelectedFiles) {
+      if (lengthLeft <= 0 && userSelectedFiles) {
         //lets continue the uploading process
         if (userSelectedFiles.files && userSelectedFiles.files.length > 0) {
-          state.isLoading = userSelectedFiles.files.length;
+          state.lengthLeft = userSelectedFiles.files.length;
           this.handleFilesSelected(userSelectedFiles.files);
         }
         if (this.props.store) {
@@ -91,7 +94,7 @@ class GalleryComponent extends PureComponent {
     const { setData } = this.props.blockProps;
     setData(this.props.componentData);
 
-    this.setState({ items });
+    this.setState({ items, isLoading: true });
     if (this.props.store) {
       this.props.store.update('componentData', { items, styles, config: {} });
     }
@@ -157,21 +160,34 @@ class GalleryComponent extends PureComponent {
     img.src = event.target.result;
   };
 
+  renderLoader = () => {
+    return <Loader type={'medium'} helpers={this.props.helpers} onLoad={this.onLoad} />;
+  };
+
+  onLoad = isLoading => {
+    this.setState({ isLoading });
+  };
+
+  isLoadingProgress = () => this.state.isLoading && this.props.helpers?.onProgressChange;
+
   render() {
     return (
-      <GalleryViewer
-        componentData={this.props.componentData}
-        onClick={this.props.onClick}
-        className={this.props.className}
-        settings={this.props.settings}
-        theme={this.props.theme}
-        helpers={this.props.helpers}
-        disableRightClick={this.props.disableRightClick}
-        isMobile={this.props.isMobile}
-        anchorTarget={this.props.anchorTarget}
-        relValue={this.props.relValue}
-        blockKey={this.blockKey}
-      />
+      <div>
+        <GalleryViewer
+          componentData={this.props.componentData}
+          onClick={this.props.onClick}
+          className={this.props.className}
+          settings={this.props.settings}
+          theme={this.props.theme}
+          helpers={this.props.helpers}
+          disableRightClick={this.props.disableRightClick}
+          isMobile={this.props.isMobile}
+          anchorTarget={this.props.anchorTarget}
+          relValue={this.props.relValue}
+          blockKey={this.blockKey}
+        />
+        {this.isLoadingProgress() && this.renderLoader()}
+      </div>
     );
   }
 }

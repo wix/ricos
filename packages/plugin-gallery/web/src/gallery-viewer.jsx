@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { Loader, validate, mergeStyles, pluginGallerySchema } from 'wix-rich-content-common';
+import { validate, mergeStyles, pluginGallerySchema } from 'wix-rich-content-common';
 import { isEqual } from 'lodash';
 import { convertItemData } from './helpers/convert-item-data';
 import { DEFAULTS, isHorizontalLayout, sampleItems } from './constants';
@@ -19,8 +19,6 @@ class GalleryViewer extends React.Component {
     this.state = {
       size: {},
       ...this.stateFromProps(props),
-      isLoading: true,
-      numOfItems: props.componentData?.items?.length,
     };
   }
 
@@ -37,18 +35,6 @@ class GalleryViewer extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     this.setState({ ...this.stateFromProps(nextProps) });
-    this.handleChangeOfItems(nextProps);
-<<<<<<< HEAD
-=======
-  }
-
-  handleChangeOfItems(nextProps) {
-    if (
-      this.props?.helpers?.onProgressChange &&
-      this.state.numOfItems !== nextProps.componentData.items?.length
-    )
-      this.setState({ isLoading: true, numOfItems: nextProps.componentData.items?.length });
->>>>>>> refactor
   }
 
   componentDidUpdate(prevProps) {
