@@ -207,9 +207,9 @@ class RichContentEditor extends Component {
       calculateDiff(this.state.editorState, editorState, (...args) =>
         onPluginDelete(...args, Version.currentVersion)
       );
-      this.setEditorState(editorState);
-      this.props.onChange && this.props.onChange(editorState);
     }
+    this.setEditorState(editorState);
+    this.props.onChange && this.props.onChange(editorState);
   };
 
   getCustomCommandHandlers = () => ({
