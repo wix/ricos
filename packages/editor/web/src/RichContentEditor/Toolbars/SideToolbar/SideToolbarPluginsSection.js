@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Styles from '../../../../statics/styles/side-toolbar-panel.scss';
 import { getPluginsForTag } from '../../pluginsSearchTags';
+import classNames from 'classnames';
 
 const SideToolbarPluginsSection = ({
   theme,
@@ -16,6 +17,7 @@ const SideToolbarPluginsSection = ({
     ? structure
     : structure.filter(({ name }) => pluginsForTag.includes(name));
 
+  const shouldShowSections = false; // need to decide in which cases split to sections
   if (plugins.length === 0) {
     return (
       <div className={Styles.pluginsSectionEmptyState}>
@@ -25,10 +27,17 @@ const SideToolbarPluginsSection = ({
   }
 
   return [
-    <div key="basicSection" className={Styles.pluginsSection}>
-      Basic
-    </div>,
-    <div key="pluginsButtons" className={Styles.buttonsWrapper}>
+    shouldShowSections && (
+      <div key="basicSection" className={Styles.pluginsSection}>
+        Basic
+      </div>
+    ),
+    <div
+      key="pluginsButtons"
+      className={classNames(Styles.buttonsWrapper, {
+        [Styles.withoutSections]: !shouldShowSections,
+      })}
+    >
       {plugins.map(({ component: Component, name }, index) => (
         <div key={index} className={Styles.buttonWrapper}>
           <Component

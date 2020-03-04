@@ -5,9 +5,10 @@
   overflow: auto;
   grid-template-rows: max-content auto;
 
+  .withoutSections,
   .pluginsSectionEmptyState,
   .pluginsSection {
-    margin-top: 64px;
+    margin-top: 54px;
     color: #000000;
   }
 
