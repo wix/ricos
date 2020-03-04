@@ -1,5 +1,5 @@
 import React, { Children } from 'react';
-import { RichContentEditorModal } from 'wix-rich-content-editor';
+import { RichContentEditorModal, publish } from 'wix-rich-content-editor';
 import { createEmpty } from 'wix-rich-content-editor/dist/lib/editorStateConversion';
 import ReactModal from 'react-modal';
 import PropTypes from 'prop-types';
@@ -86,3 +86,4 @@ EngineWrapper.propTypes = {
   modalSupport: PropTypes.bool,
 };
 export default EngineWrapper;
+export { publish };
