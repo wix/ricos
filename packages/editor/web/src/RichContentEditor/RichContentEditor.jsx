@@ -108,8 +108,7 @@ class RichContentEditor extends Component {
       relValue,
       helpers: {
         ...helpers,
-        onPluginAdd: (...args) =>
-          this.props.pluginHooks?.onPluginAdd?.(...args, Version.currentVersion),
+        onPluginAdd: (...args) => helpers.onPluginAdd?.(...args, Version.currentVersion),
       },
       config,
       isMobile,
@@ -204,7 +203,7 @@ class RichContentEditor extends Component {
 
   updateEditorState = editorState => {
     calculateDiff(this.state.editorState, editorState, (...args) =>
-      this.props.pluginHooks?.onPluginDelete?.(...args, Version.currentVersion)
+      this.props.helpers?.onPluginDelete?.(...args, Version.currentVersion)
     );
     this.setEditorState(editorState);
     this.props.onChange && this.props.onChange(editorState);
@@ -474,11 +473,6 @@ RichContentEditor.propTypes = {
   onAtomicBlockFocus: PropTypes.func,
   initialIntent: PropTypes.string,
   siteDomain: PropTypes.string,
-  pluginHooks: PropTypes.shape({
-    onPluginAdd: PropTypes.func,
-    onPluginChange: PropTypes.func,
-    onPluginDelete: PropTypes.func,
-  }),
   onError: PropTypes.func,
 };
 

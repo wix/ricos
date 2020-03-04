@@ -55,6 +55,7 @@ export default class Editor extends PureComponent {
       }
     };
     this.helpers = {
+      ...debugBiLoggers,
       // onFilesChange: (files, updateEntity) => mockUpload(files, updateEntity),
       handleFileSelection: (index, multiple, updateEntity, removeEntity, componentData) => {
         const count = componentData.items || shouldMultiSelectImages ? [1, 2, 3] : [1];
@@ -200,7 +201,6 @@ export default class Editor extends PureComponent {
           config={this.pluginsConfig}
           editorKey="random-editorKey-ssr"
           // siteDomain="https://www.wix.com"
-          pluginHooks={debugBiLoggers}
           {...editorProps}
         />
 
