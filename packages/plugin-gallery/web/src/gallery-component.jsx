@@ -12,7 +12,7 @@ const EMPTY_SMALL_PLACEHOLDER =
 class GalleryComponent extends PureComponent {
   constructor(props) {
     super(props);
-    this.state = this.stateFromProps(props);
+    this.state = { ...this.stateFromProps(props), isLoading: true };
 
     const { block, store, commonPubsub } = this.props;
     this.blockKey = block.getKey();
@@ -92,7 +92,7 @@ class GalleryComponent extends PureComponent {
     const { setData } = this.props.blockProps;
     setData(this.props.componentData);
 
-    this.setState({ items, isLoading: true });
+    this.setState({ items });
     if (this.props.store) {
       this.props.store.update('componentData', { items, styles, config: {} });
     }
@@ -106,6 +106,9 @@ class GalleryComponent extends PureComponent {
       reader.onload = e => this.fileLoaded(e, file, itemPos);
       reader.readAsDataURL(file);
     });
+    if (!this.state?.isLoading) {
+      this.setState({ isLoading: true });
+    }
   };
 
   imageLoaded = (event, file, itemPos) => {

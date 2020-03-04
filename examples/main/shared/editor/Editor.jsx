@@ -52,7 +52,7 @@ export default class Editor extends PureComponent {
         setTimeout(() => {
           updateEntity({ data, files });
           console.log('consumer uploaded', data);
-        }, 10000);
+        }, 500);
       }
     };
     this.helpers = {
@@ -86,7 +86,7 @@ export default class Editor extends PureComponent {
           updatePercentage(percent);
           percent += 10;
           if (percent === 110) clearInterval(interval);
-        }, 1000);
+        }, 50);
       },
       onVideoSelected: (url, updateEntity) => {
         setTimeout(() => {
@@ -94,7 +94,7 @@ export default class Editor extends PureComponent {
             this.props.mockImageIndex || Math.floor(Math.random() * testVideos.length);
           const testVideo = testVideos[mockVideoIndex];
           updateEntity(testVideo);
-        }, 500);
+        }, 5000);
       },
       openModal: data => {
         const { modalStyles, ...modalProps } = data;

@@ -151,8 +151,6 @@ class ImageComponent extends React.Component {
     }
   };
 
-  isLoadingProgress = () => this.state.isLoading && this.props.helpers?.onProgressChange;
-
   render() {
     const {
       settings,
@@ -189,7 +187,7 @@ class ImageComponent extends React.Component {
           setFocusToBlock={blockProps.setFocusToBlock}
           setComponentUrl={setComponentUrl}
         />
-        {this.isLoadingProgress() && this.renderLoader()}
+        {this.state.isLoading && this.renderLoader()}
       </div>
     );
   }
