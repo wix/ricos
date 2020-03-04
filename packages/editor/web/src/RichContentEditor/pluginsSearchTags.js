@@ -7,7 +7,7 @@ const pluginTags = [
       'video movie clip music audio mtv youtube camera song visual digital film upload animated viral', // eslint-disable-line
   },
   { plugin: 'HTML', tags: 'html code program develop lib web format embed online article content' },
-  { plugin: 'Divider', tags: 'divider seperator paragraph split phase draw' },
+  { plugin: 'Divider', tags: 'divider separator paragraph split phase draw' },
   { plugin: 'code-block', tags: 'code block program embed develop automate codify format' },
   { plugin: 'SoundCloud', tags: 'sound cloud song music echo sonic stereo audio volume listen' },
   { plugin: 'Map', tags: 'map road place location access graph photo vector explore geograph' },

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import TextInput from './TextInput';
 import PropTypes from 'prop-types';
+import { SearchIcon, ClearIcon } from '../Icons';
 
 export default class PluginSearch extends Component {
   constructor(props) {
@@ -28,10 +29,12 @@ export default class PluginSearch extends Component {
 
   handleClearText = () => {
     this.setState({ searchTag: '' });
+    this.props.setSearchTag('');
   };
 
   render() {
     const { placeHolder, id, theme } = this.props;
+    const suffixIcon = this.state.searchTag && { Icon: ClearIcon, onClick: this.handleClearText };
     return (
       <TextInput
         inputRef={ref => {
@@ -43,6 +46,8 @@ export default class PluginSearch extends Component {
         placeholder={placeHolder}
         theme={theme}
         data-hook={id}
+        suffixIcon={suffixIcon}
+        prefixIcon={{ Icon: SearchIcon }}
       />
     );
   }
