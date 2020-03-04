@@ -9,11 +9,14 @@
   list-style: none;
   float: left;
   box-sizing: border-box;
-  width: calc(100% / 3);
   height: 100px;
   text-align: center;
   vertical-align: middle;
   border-right: 1px solid rgba($secondary-text-color, 0.2);
+
+  @media only screen and (max-width: 640px) {
+    width: calc(100% / 3);
+  }
 
   &:nth-child(n + 4) {
     border-top: 1px solid rgba($secondary-text-color, 0.2);

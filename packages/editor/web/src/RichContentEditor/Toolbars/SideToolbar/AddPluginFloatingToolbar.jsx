@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import { FocusManager, EditorModals, getModalStyles } from 'wix-rich-content-editor-common';
 import { PlusIcon, PlusActiveIcon } from '../../Icons';
 import Styles from '../../../../statics/styles/side-toolbar.scss';
+import SideToolbarPanelContent from './SideToolbarPanelContent';
 
 export default class AddPluginFloatingToolbar extends Component {
   state = {
@@ -44,7 +45,7 @@ export default class AddPluginFloatingToolbar extends Component {
     helpers.openModal({
       modalName: EditorModals.MOBILE_ADD_PLUGIN,
       modalStyles: getModalStyles({ fullScreen: false, isMobile }),
-      structure: structure.map(Button => ({ component: Button })),
+      structure: structure.map(Component => ({ component: Component })),
       theme,
       hidePopup: helpers.closeModal,
       getEditorState,
@@ -112,7 +113,6 @@ export default class AddPluginFloatingToolbar extends Component {
         this.popupOffset = {
           left: this.popup.offsetWidth / 2 + 30,
           right: -this.popup.offsetWidth / 2 + 30,
-          top: -this.popup.offsetHeight / 4,
         };
       }
     }
@@ -120,7 +120,7 @@ export default class AddPluginFloatingToolbar extends Component {
   };
 
   render() {
-    const { theme, getEditorState, setEditorState } = this.props;
+    const { theme, getEditorState, setEditorState, structure, t } = this.props;
     const { toolbarStyles } = theme || {};
     const floatingContainerClassNames = classNames(
       Styles.sideToolbar_floatingContainer,
@@ -142,7 +142,6 @@ export default class AddPluginFloatingToolbar extends Component {
         focusTrapOptions={{
           escapeDeactivates: false,
           clickOutsideDeactivates: true,
-          initialFocus: this.getFirstFocusableChildSelector(this.id),
         }}
         className={floatingContainerClassNames}
         onKeyDown={e => this.onKeyDown(e)}
@@ -163,24 +162,20 @@ export default class AddPluginFloatingToolbar extends Component {
           className={popoupClassNames}
           style={this.state.style}
           ref={el => (this.popup = el)}
+          onClick={e => e.stopPropagation()}
+          role="none"
         >
-          {this.props.structure.map((Component, index) => (
-            <Component
-              tabIndex={this.state.tabIndex}
-              key={index}
-              getEditorState={getEditorState}
-              setEditorState={setEditorState}
-              theme={theme}
-              hidePopup={this.hidePopup}
-            />
-          ))}
+          <SideToolbarPanelContent
+            t={t}
+            theme={theme}
+            getEditorState={getEditorState}
+            setEditorState={setEditorState}
+            structure={structure}
+            hidePopup={this.hidePopup}
+          />
         </div>
       </FocusManager>
     );
-  }
-
-  getFirstFocusableChildSelector(id) {
-    return `#${id} *[tabindex="0"]`;
   }
 }
 

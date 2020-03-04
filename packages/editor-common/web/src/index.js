@@ -41,6 +41,7 @@ export { default as Slider } from './Components/Slider';
 export { default as SliderWithInput } from './Components/SliderWithInput';
 export { Tab, Tabs } from './Components/Tabs';
 export { default as TextInput } from './Components/TextInput';
+export { default as TextSearchInput } from './Components/TextSearchInput';
 export { default as ToolbarButton } from './Components/ToolbarButton';
 export { default as Tooltip } from './Components/Tooltip';
 export { default as TooltipHost } from './Components/TooltipHost';

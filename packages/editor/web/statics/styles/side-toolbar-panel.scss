@@ -1,0 +1,51 @@
+.sideToolbarPanelWrapper {
+  display: grid;
+  grid-row-gap: 12px;
+  padding: 12px;
+  overflow: auto;
+  grid-template-rows: max-content auto;
+
+  .pluginsSection {
+    margin-top: 64px;
+    height: 28px;
+    background-color: #efeff4;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    font-size: 14px;
+    color: #000000;
+    line-height: 20px;
+  }
+
+  .buttonsWrapper {
+    display: grid;
+    justify-items: center;
+    grid-template-columns: auto auto auto;
+    grid-row-gap: 12px;
+    grid-auto-rows: 72px;
+    grid-template-columns: 98px 98px 98px;
+
+    .buttonWrapper {
+      display: grid;
+      width: 100%;
+      justify-content: center;
+      text-align: center;
+
+      .pluginName {
+        font-size: 12px;
+        line-height: 16px;
+        color: #000000;
+      }
+
+      &:hover {
+        background-color: #efeff4;
+      }
+    }
+  }
+}
+
+.searchWrapper {
+  position: fixed;
+  width: 296px;
+  padding: 12px;
+}
