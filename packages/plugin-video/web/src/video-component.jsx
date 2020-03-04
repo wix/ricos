@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { findDOMNode } from 'react-dom';
 import { mergeStyles } from 'wix-rich-content-common';
+import { Loader } from 'wix-rich-content-editor-common';
 import VideoViewer from './video-viewer';
 import styles from '../statics/styles/default-video-styles.scss';
 import { VIDEO_TYPE_LEGACY, VIDEO_TYPE } from './types';
@@ -63,6 +64,14 @@ class VideoComponent extends React.Component {
     );
   };
 
+  renderLoader = () => {
+    return (
+      <div className={this.styles.videoOverlay}>
+        <Loader type={'medium'} helpers={this.props.helpers} />
+      </div>
+    );
+  };
+
   renderPlayer = () => {
     const {
       theme,
@@ -99,15 +108,18 @@ class VideoComponent extends React.Component {
     const containerClassNames = classNames(this.styles.video_container, className || '');
     /* eslint-disable jsx-a11y/no-static-element-interactions */
     return (
-      <div
-        data-hook="videoPlayer"
-        onClick={onClick}
-        className={containerClassNames}
-        onKeyDown={e => this.onKeyDown(e, onClick)}
-        draggable
-      >
-        {!isPlayable && this.renderOverlay(this.styles, this.props.t)}
-        {this.renderPlayer()}
+      <div>
+        <div
+          data-hook="videoPlayer"
+          onClick={onClick}
+          className={containerClassNames}
+          onKeyDown={e => this.onKeyDown(e, onClick)}
+          draggable
+        >
+          {!isPlayable && this.renderOverlay(this.styles, this.props.t)}
+          {this.renderPlayer()}
+        </div>
+        {!this.state.isLoaded && this.renderLoader()}
       </div>
     );
     /* eslint-enable jsx-a11y/no-static-element-interactions */
@@ -127,6 +139,7 @@ VideoComponent.propTypes = {
   disableRightClick: PropTypes.bool,
   disabled: PropTypes.bool,
   setComponentUrl: PropTypes.func,
+  helpers: PropTypes.object.isRequired,
 };
 
 export { VideoComponent as Component, DEFAULTS };
