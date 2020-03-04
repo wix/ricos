@@ -31,11 +31,12 @@ export default ({
       super(props);
       this.state = {};
       const { buttonStyles } = props.theme || {};
-      const { toolbarName } = props;
       this.styles = mergeStyles({ styles, theme: buttonStyles });
       this.buttonRef = React.createRef();
-      this.onPluginAdd = name => helpers?.onPluginAdd?.(blockType, name || toolbarName);
+      this.toolbarName = props.toolbarName;
     }
+
+    onPluginAdd = name => helpers?.onPluginAdd?.(blockType, name || this.toolbarName);
 
     componentDidMount() {
       this.initialIntent();
