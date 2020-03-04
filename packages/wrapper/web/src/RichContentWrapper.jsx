@@ -1,5 +1,5 @@
 import React from 'react';
-import EngineWrapper, { publish } from './EngineWrapper';
+import EngineWrapper from './EngineWrapper';
 import themeStrategyProvider from './themeStrategy/themeStrategyProvider';
 import pluginsStrategyProvider from './pluginsStrategy/pluginsStrategyProvider';
 import localeStrategyProvider from './localeStrategy/localeStrategyProvider';
@@ -32,5 +32,3 @@ RichContentWrapper.propTypes = {
 RichContentWrapper.defaultProps = {
   locale: 'en',
 };
-
-export { publish };
