@@ -1,4 +1,4 @@
-import RichContentEditor from './RichContentEditor';
+import RichContentEditor, { publish } from './RichContentEditor';
 import RichContentEditorModal from './RichContentEditor/RichContentEditorModal';
 
 export {
@@ -9,4 +9,4 @@ export {
   convertFromRaw,
 } from './lib/editorStateConversion';
 
-export { RichContentEditorModal, RichContentEditor };
+export { RichContentEditorModal, RichContentEditor, publish };
