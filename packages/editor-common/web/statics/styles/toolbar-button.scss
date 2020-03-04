@@ -5,7 +5,6 @@
 .buttonWrapper {
   position: relative;
   display: inline-block;
-  margin-right: 5px;
 
   &:last-child {
     margin-right: 0;
@@ -19,7 +18,7 @@
   vertical-align: bottom;
   height: 100%;
   pointer-events: initial;
-  
+
   &:hover:not([disabled]),
   &:focus:not([disabled]) {
     .icon {
@@ -30,7 +29,7 @@
   }
 
   &:disabled {
-    &>*{
+    & > * {
       opacity: 0.4;
       cursor: default;
     }
