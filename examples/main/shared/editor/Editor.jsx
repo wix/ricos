@@ -94,7 +94,7 @@ export default class Editor extends PureComponent {
             this.props.mockImageIndex || Math.floor(Math.random() * testVideos.length);
           const testVideo = testVideos[mockVideoIndex];
           updateEntity(testVideo);
-        }, 5000);
+        }, 500);
       },
       openModal: data => {
         const { modalStyles, ...modalProps } = data;

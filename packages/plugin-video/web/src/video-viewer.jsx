@@ -60,6 +60,7 @@ class VideoViewer extends Component {
 
     if (!this.state.isLoaded && !this.props.componentData.tempData) {
       this.setState({ isLoaded: true });
+      this.props.onReady?.();
     }
   };
 
