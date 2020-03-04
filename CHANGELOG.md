@@ -16,13 +16,14 @@
 ### :boom: New Feature
 - `text-selection-toolbar`
   - [#523](https://github.com/wix-incubator/rich-content/pull/523) create viewer toolbar with tweet option
+- `bi-events`
+  - [#514](https://github.com/wix-incubator/rich-content/pull/514) supports `onPluginAdd` (toolbar only) and `onPluginDelete` callbacks via props
 ### :bug: Bug Fix
 - `html`
   - [#732](https://github.com/wix-incubator/rich-content/pull/732) fix html width in viewer
 ### :house: Internal
 - `e2e`
   - [#737](https://github.com/wix-incubator/rich-content/pull/737) fix rendering and plugins tests
-    
 </details>
 <hr/>
 
@@ -295,8 +296,6 @@
   - [#507](https://github.com/wix-incubator/rich-content/pull/507) support all video platform urls supported by `react-player`
 - `soundcloud`
   - [#507](https://github.com/wix-incubator/rich-content/pull/507) support all audio platform urls supported by `react-player`
-- `bi-events`
-  - [#514](https://github.com/wix-incubator/rich-content/pull/514) supports `onPluginAdd` (toolbar only) and `onPluginDelete` callbacks via props
 ### :bug: Bug Fix
 - `examples/viewer-ssr`
   - [#499](https://github.com/wix-incubator/rich-content/pull/499) highlight plugin configuration fixed
