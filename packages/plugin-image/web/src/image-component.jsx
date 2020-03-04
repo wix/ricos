@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Loader } from 'wix-rich-content-editor-common';
 import ImageViewer from './image-viewer';
 import { DEFAULTS } from './consts';
 import { sizeClassName, alignmentClassName } from './classNameStrategies';
@@ -140,6 +141,18 @@ class ImageComponent extends React.Component {
 
   handleCaptionChange = caption => this.handleMetadataChange({ caption });
 
+  renderLoader = () => {
+    return <Loader type={'medium'} helpers={this.props.helpers} onLoad={this.onLoad} />;
+  };
+
+  onLoad = isLoading => {
+    if (!isLoading) {
+      this.setState({ isLoading });
+    }
+  };
+
+  isLoadingProgress = () => this.state.isLoading && this.props.helpers?.onProgressChange;
+
   render() {
     const {
       settings,
@@ -156,25 +169,28 @@ class ImageComponent extends React.Component {
       setComponentUrl,
     } = this.props;
     return (
-      <ImageViewer
-        theme={theme}
-        isMobile={isMobile}
-        helpers={helpers}
-        disableRightClick={disableRightClick}
-        getInPluginEditingMode={getInPluginEditingMode}
-        setInPluginEditingMode={setInPluginEditingMode}
-        componentData={componentData}
-        onClick={onClick}
-        className={className}
-        isLoading={this.state.isLoading}
-        dataUrl={this.state.dataUrl}
-        isFocused={blockProps.isFocused}
-        settings={settings}
-        defaultCaption={this.props.t('ImageViewer_Caption')}
-        onCaptionChange={this.handleCaptionChange}
-        setFocusToBlock={blockProps.setFocusToBlock}
-        setComponentUrl={setComponentUrl}
-      />
+      <div>
+        <ImageViewer
+          theme={theme}
+          isMobile={isMobile}
+          helpers={helpers}
+          disableRightClick={disableRightClick}
+          getInPluginEditingMode={getInPluginEditingMode}
+          setInPluginEditingMode={setInPluginEditingMode}
+          componentData={componentData}
+          onClick={onClick}
+          className={className}
+          isLoading={this.state.isLoading}
+          dataUrl={this.state.dataUrl}
+          isFocused={blockProps.isFocused}
+          settings={settings}
+          defaultCaption={this.props.t('ImageViewer_Caption')}
+          onCaptionChange={this.handleCaptionChange}
+          setFocusToBlock={blockProps.setFocusToBlock}
+          setComponentUrl={setComponentUrl}
+        />
+        {this.isLoadingProgress() && this.renderLoader()}
+      </div>
     );
   }
 }

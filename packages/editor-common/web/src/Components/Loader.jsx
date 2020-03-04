@@ -1,15 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { mergeStyles } from '../Utils/mergeStyles';
+import { mergeStyles } from 'wix-rich-content-common';
 import styles from '../../statics/styles/loaders.rtlignore.scss';
 const styleLoader = {
-  display: 'flex',
   position: 'absolute',
-  left: '0',
-  right: '0',
   top: '0',
-  bottom: '0',
 };
 
 class Loader extends React.Component {
