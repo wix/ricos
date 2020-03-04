@@ -108,17 +108,15 @@ class VideoComponent extends React.Component {
     const containerClassNames = classNames(this.styles.video_container, className || '');
     /* eslint-disable jsx-a11y/no-static-element-interactions */
     return (
-      <div>
-        <div
-          data-hook="videoPlayer"
-          onClick={onClick}
-          className={containerClassNames}
-          onKeyDown={e => this.onKeyDown(e, onClick)}
-          draggable
-        >
-          {!isPlayable && this.renderOverlay(this.styles, this.props.t)}
-          {this.renderPlayer()}
-        </div>
+      <div
+        data-hook="videoPlayer"
+        onClick={onClick}
+        className={containerClassNames}
+        onKeyDown={e => this.onKeyDown(e, onClick)}
+        draggable
+      >
+        {!isPlayable && this.renderOverlay(this.styles, this.props.t)}
+        {this.renderPlayer()}
         {!this.state.isLoaded && this.renderLoader()}
       </div>
     );
