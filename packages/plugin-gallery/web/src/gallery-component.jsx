@@ -92,7 +92,7 @@ class GalleryComponent extends PureComponent {
     const { setData } = this.props.blockProps;
     setData(this.props.componentData);
 
-    this.setState({ items, isLoading: true });
+    this.setState({ items });
     if (this.props.store) {
       this.props.store.update('componentData', { items, styles, config: {} });
     }
