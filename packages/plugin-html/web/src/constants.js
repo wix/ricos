@@ -19,3 +19,5 @@ export const DEFAULTS = Object.freeze({
     alignment: 'center',
   },
 });
+
+export const DEFAULTS_VIEWER = {};

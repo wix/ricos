@@ -14,14 +14,18 @@ class GalleryComponent extends PureComponent {
     this.state = this.stateFromProps(props);
 
     const { block, store, commonPubsub } = this.props;
-    const blockKey = block.getKey();
+    this.blockKey = block.getKey();
     if (store) {
-      store.setBlockHandler('handleFilesSelected', blockKey, this.handleFilesSelected.bind(this));
-      store.setBlockHandler('handleFilesAdded', blockKey, this.handleFilesAdded.bind(this));
+      store.setBlockHandler(
+        'handleFilesSelected',
+        this.blockKey,
+        this.handleFilesSelected.bind(this)
+      );
+      store.setBlockHandler('handleFilesAdded', this.blockKey, this.handleFilesAdded.bind(this));
     }
     commonPubsub?.setBlockHandler(
       'galleryHandleFilesAdded',
-      blockKey,
+      this.blockKey,
       this.handleFilesAdded.bind(this)
     );
   }
@@ -166,6 +170,7 @@ class GalleryComponent extends PureComponent {
         isMobile={this.props.isMobile}
         anchorTarget={this.props.anchorTarget}
         relValue={this.props.relValue}
+        blockKey={this.blockKey}
       />
     );
   }

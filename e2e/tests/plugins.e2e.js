@@ -22,10 +22,6 @@ const eyesOpen = ({
   });
 
 describe('plugins', () => {
-  beforeEach(function() {
-    cy.switchToDesktop();
-  });
-
   afterEach(() => cy.matchContentSnapshot());
 
   context('image', () => {
@@ -33,7 +29,10 @@ describe('plugins', () => {
       eyesOpen(this);
     });
 
-    beforeEach('load editor', () => cy.loadEditorAndViewer('images'));
+    beforeEach('load editor', () => {
+      cy.switchToDesktop();
+      cy.loadEditorAndViewer('images');
+    });
 
     after(() => cy.eyesClose());
 
@@ -58,7 +57,7 @@ describe('plugins', () => {
     before(function() {
       eyesOpen(this);
     });
-
+    beforeEach('load editor', () => cy.switchToDesktop());
     after(() => cy.eyesClose());
 
     context('image full screen', () => {
@@ -93,6 +92,10 @@ describe('plugins', () => {
   context('gallery', () => {
     before(function() {
       eyesOpen(this);
+    });
+
+    beforeEach('load editor', () => {
+      cy.switchToDesktop();
     });
 
     after(() => cy.eyesClose());
@@ -191,7 +194,10 @@ describe('plugins', () => {
       eyesOpen(this);
     });
 
-    beforeEach('load editor', () => cy.loadEditorAndViewer('empty'));
+    beforeEach('load editor', () => {
+      cy.switchToDesktop();
+      cy.loadEditorAndViewer('empty');
+    });
 
     after(() => cy.eyesClose());
 
@@ -200,20 +206,20 @@ describe('plugins', () => {
       cy.eyesCheckWindow(this.test.title);
     });
 
-    it('enable to add a video from URI', function() {
-      cy.openVideoUploadModal().addVideoFromURI();
+    it('add a video from URL', function() {
+      cy.openVideoUploadModal().addVideoFromURL();
       cy.shrinkPlugin();
       cy.waitForVideoToLoad();
       cy.focusEditor().enterParagraphs(['Will this fix the flakiness?']);
       cy.eyesCheckWindow(this.test.title);
     });
 
-    // TODO: remove skip once custom mock upload is stablized
-    // eslint-disable-next-line mocha/no-skipped-tests
-    it.skip('enable to add a custom video', function() {
+    it('add a custom video', function() {
       cy.openVideoUploadModal().addCustomVideo();
-      cy.waitForVideoToLoad();
       cy.shrinkPlugin();
+      cy.waitForVideoToLoad();
+      cy.focusEditor().enterParagraphs(['Will this fix the flakiness?']);
+
       cy.eyesCheckWindow(this.test.title);
     });
   });
@@ -223,7 +229,10 @@ describe('plugins', () => {
       eyesOpen(this);
     });
 
-    beforeEach('load editor', () => cy.loadEditorAndViewer('empty'));
+    beforeEach('load editor', () => {
+      cy.switchToDesktop();
+      cy.loadEditorAndViewer('empty');
+    });
 
     after(() => cy.eyesClose());
 
@@ -232,7 +241,7 @@ describe('plugins', () => {
       cy.eyesCheckWindow(this.test.title);
     });
 
-    it('enable to add a soundcloud URI', function() {
+    it('add a soundcloud URL', function() {
       cy.openSoundCloudModal().addSoundCloud();
       cy.waitForVideoToLoad();
       cy.shrinkPlugin();
@@ -244,6 +253,10 @@ describe('plugins', () => {
   context('html', () => {
     before(function() {
       eyesOpen(this);
+    });
+
+    beforeEach('load editor', () => {
+      cy.switchToDesktop();
     });
 
     after(() => cy.eyesClose());
@@ -260,6 +273,10 @@ describe('plugins', () => {
   context('divider', () => {
     before(function() {
       eyesOpen(this);
+    });
+
+    beforeEach('load editor', () => {
+      cy.switchToDesktop();
     });
 
     after(() => cy.eyesClose());
@@ -296,6 +313,10 @@ describe('plugins', () => {
       eyesOpen(this);
     });
 
+    beforeEach('load editor', () => {
+      cy.switchToDesktop();
+    });
+
     after(() => cy.eyesClose());
 
     it('render giphy plugin toolbar', function() {
@@ -312,6 +333,7 @@ describe('plugins', () => {
   context('map', () => {
     before('load editor', function() {
       eyesOpen(this);
+      cy.switchToDesktop();
       cy.loadEditorAndViewer('map');
     });
 
@@ -329,6 +351,7 @@ describe('plugins', () => {
   context('file-upload', () => {
     before('load editor', function() {
       eyesOpen(this);
+      cy.switchToDesktop();
       cy.loadEditorAndViewer('file-upload');
     });
 
@@ -343,6 +366,7 @@ describe('plugins', () => {
   context('drag and drop', () => {
     before('load editor', function() {
       eyesOpen(this);
+      cy.switchToDesktop();
       cy.loadEditorAndViewer('dragAndDrop');
     });
 
@@ -362,6 +386,10 @@ describe('plugins', () => {
   context('alignment', () => {
     before(function() {
       eyesOpen(this);
+    });
+
+    beforeEach('load editor', () => {
+      cy.switchToDesktop();
     });
 
     after(() => cy.eyesClose());

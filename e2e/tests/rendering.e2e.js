@@ -1,5 +1,5 @@
 /*global cy Cypress*/
-import { fixtures } from './constants';
+import { fixtures, fixturesToTestOnSeo } from './constants';
 import { DEFAULT_DESKTOP_BROWSERS, DEFAULT_MOBILE_BROWSERS } from '../tests/constants';
 
 const testFixture = fixture =>
@@ -7,13 +7,15 @@ const testFixture = fixture =>
     cy.loadEditorAndViewer(fixture);
     if (fixture.includes('video')) {
       cy.waitForVideoToLoad();
+    } else if (fixture.includes('html')) {
+      cy.waitForHtmlToLoad();
     }
     cy.eyesCheckWindow(this.test.title);
   });
 
 describe('editor rendering', () => {
   before(function() {
-    if (Cypress.env('MATCH_CONTENT_STATE')) this.skip();
+    if (Cypress.env('MATCH_CONTENT_STATE') && !Cypress.env('debug')) this.skip();
   });
 
   context('desktop', () => {
@@ -43,8 +45,29 @@ describe('editor rendering', () => {
 
     beforeEach(() => cy.switchToMobile());
 
-    after(() => cy.eyesClose());
+    after(() => {
+      cy.eyesClose();
+    });
 
     fixtures.forEach(testFixture);
+  });
+
+  context('seo', () => {
+    before(function() {
+      cy.eyesOpen({
+        appName: 'Rendering',
+        testName: this.test.parent.title,
+        browser: DEFAULT_DESKTOP_BROWSERS,
+      });
+    });
+
+    beforeEach(() => {
+      cy.switchToDesktop();
+      cy.switchToSeoMode();
+    });
+
+    after(() => cy.eyesClose());
+
+    fixturesToTestOnSeo.forEach(testFixture);
   });
 });

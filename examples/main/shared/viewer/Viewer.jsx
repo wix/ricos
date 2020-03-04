@@ -7,6 +7,10 @@ import * as Plugins from './ViewerPlugins';
 import theme from '../theme/theme'; // must import after custom styles
 import getImagesData from 'wix-rich-content-fullscreen/src/lib/getImagesData';
 import Fullscreen from 'wix-rich-content-fullscreen';
+import {
+  TextSelectionListener,
+  ViewerInlineToolBar,
+} from 'wix-rich-content-text-selection-toolbar';
 import { GALLERY_TYPE } from 'wix-rich-content-plugin-gallery';
 const anchorTarget = '_top';
 const relValue = 'noreferrer';
@@ -45,7 +49,7 @@ export default class Viewer extends PureComponent {
   };
 
   render() {
-    const { isMobile, locale, initialState } = this.props;
+    const { isMobile, locale, initialState, seoMode } = this.props;
     const { expendModeIsOpen, expandModeIndex, disabled } = this.state;
 
     const viewerProps = {
@@ -56,9 +60,10 @@ export default class Viewer extends PureComponent {
       theme,
       initialState,
       disabled,
+      seoMode,
     };
 
-    return (
+    return [
       <div id="rich-content-viewer" className="viewer">
         <RichContentViewer
           helpers={this.helpers}
@@ -77,8 +82,11 @@ export default class Viewer extends PureComponent {
             index={expandModeIndex}
           />
         )}
-      </div>
-    );
+      </div>,
+      !isSSR() && (
+        <TextSelectionListener targetId={'rich-content-viewer'} ToolBar={ViewerInlineToolBar} />
+      ),
+    ];
   }
 }
 

@@ -15,7 +15,7 @@ const rules = [
       {
         loader: 'style-loader',
         options: {
-          insertAt: 'top',
+          insert: 'top',
         },
       },
       'css-loader',

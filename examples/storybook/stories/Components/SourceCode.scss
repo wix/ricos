@@ -1,0 +1,14 @@
+
+.sourcecode {
+  margin-top: 20px;
+    white-space: pre-wrap;
+  transition: max-height 1s linear;
+  font-size: 12px;
+  overflow: hidden;
+  max-height: 0;
+
+  &.open {
+    transition: max-height 1s linear;
+    max-height: 1000px;
+  }
+};

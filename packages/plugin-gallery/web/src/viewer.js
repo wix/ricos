@@ -8,6 +8,5 @@ export const pluginGallery = (config = {}) => {
     config: { ...DEFAULTS.config, ...config },
     type: GALLERY_TYPE,
     typeMapper,
-    decorator: {},
   };
 };
