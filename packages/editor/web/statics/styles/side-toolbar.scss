@@ -3,6 +3,7 @@
 
 .sideToolbar_floatingContainer {
   position: relative;
+  pointer-events: none;
 }
 
 .sideToolbar_floatingIcon {
@@ -37,4 +38,5 @@
   height: 400px;
   display: grid;
   box-shadow: 0 4px 8px 0 rgba(123, 99, 99, 0.1), 0 0 4px 0 rgba(0, 0, 0, 0.1);
+  pointer-events: auto;
 }
