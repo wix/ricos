@@ -19,6 +19,9 @@
 ### :rocket: New Feature
 - `bi-events`
   - [#675](https://github.com/wix-incubator/rich-content/pull/514) supports `onPluginAdd` (toolbar only) and `onPluginDelete` callbacks via props
+### :house: Internal
+- `gallery`
+  - [#742](https://github.com/wix-incubator/rich-content/pull/742) bump pro-gallery version to 1.7.25
 
 </details>
 <hr/>
