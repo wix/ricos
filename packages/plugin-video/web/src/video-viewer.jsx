@@ -4,7 +4,6 @@ import ReactPlayerWrapper from './reactPlayerWrapper';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { mergeStyles, validate, pluginVideoSchema } from 'wix-rich-content-common';
-import { Loader } from 'wix-rich-content-editor-common';
 import { isEqual } from 'lodash';
 import getVideoSrc from './get-video-source';
 import styles from '../statics/styles/video-viewer.scss';
@@ -64,14 +63,6 @@ class VideoViewer extends Component {
     }
   };
 
-  renderLoader = () => {
-    return (
-      <div className={this.styles.videoOverlay}>
-        <Loader type={'medium'} />
-      </div>
-    );
-  };
-
   handleContextMenu = e => this.props.disableRightClick && e.preventDefault();
 
   render() {
@@ -96,7 +87,6 @@ class VideoViewer extends Component {
           data-loaded={isLoaded}
           {...props}
         />
-        {!isLoaded && this.renderLoader()}
       </>
     );
   }
@@ -113,6 +103,7 @@ VideoViewer.propTypes = {
   disabled: PropTypes.bool,
   disableRightClick: PropTypes.bool,
   setComponentUrl: PropTypes.func,
+  onReady: PropTypes.func,
 };
 
 VideoViewer.defaultProps = {

@@ -50,28 +50,28 @@ export default class Editor extends PureComponent {
         setTimeout(() => {
           updateEntity({ data, files });
           console.log('consumer uploaded', data);
-        }, 10000);
+        }, 500);
       }
     };
     this.helpers = {
-      // onFilesChange: (files, updateEntity) => mockUpload(files, updateEntity),
-      handleFileSelection: (index, multiple, updateEntity, removeEntity, componentData) => {
-        const count = componentData.items || shouldMultiSelectImages ? [1, 2, 3] : [1];
-        const data = [];
-        count.forEach(_ => {
-          const testItem = testImages[Math.floor(Math.random() * testImages.length)];
-          data.push({
-            id: testItem.photoId,
-            original_file_name: testItem.url,
-            file_name: testItem.url,
-            width: testItem.metadata.width,
-            height: testItem.metadata.height,
-          });
-        });
-        setTimeout(() => {
-          updateEntity({ data });
-        }, 500);
-      },
+      onFilesChange: (files, updateEntity) => mockUpload(files, updateEntity),
+      // handleFileSelection: (index, multiple, updateEntity, removeEntity, componentData) => {
+      //   const count = componentData.items || shouldMultiSelectImages ? [1, 2, 3] : [1];
+      //   const data = [];
+      //   count.forEach(_ => {
+      //     const testItem = testImages[Math.floor(Math.random() * testImages.length)];
+      //     data.push({
+      //       id: testItem.photoId,
+      //       original_file_name: testItem.url,
+      //       file_name: testItem.url,
+      //       width: testItem.metadata.width,
+      //       height: testItem.metadata.height,
+      //     });
+      //   });
+      //   setTimeout(() => {
+      //     updateEntity({ data });
+      //   }, 500);
+      // },
       onProgressChange: updatePercentage => {
         let percent = 0;
         const mockImageIndex = this.props.mockImageIndex || 0;
@@ -83,7 +83,7 @@ export default class Editor extends PureComponent {
           updatePercentage(percent);
           percent += 10;
           if (percent === 110) clearInterval(interval);
-        }, 1000);
+        }, 50);
       },
       onVideoSelected: (url, updateEntity) => {
         setTimeout(() => {
@@ -91,7 +91,7 @@ export default class Editor extends PureComponent {
             this.props.mockImageIndex || Math.floor(Math.random() * testVideos.length);
           const testVideo = testVideos[mockVideoIndex];
           updateEntity(testVideo);
-        }, 500);
+        }, 5000);
       },
       openModal: data => {
         const { modalStyles, ...modalProps } = data;
