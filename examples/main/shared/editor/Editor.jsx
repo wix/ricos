@@ -52,7 +52,7 @@ export default class Editor extends PureComponent {
         setTimeout(() => {
           updateEntity({ data, files });
           console.log('consumer uploaded', data);
-        }, 500);
+        }, 10000);
       }
     };
     this.helpers = {
@@ -86,7 +86,7 @@ export default class Editor extends PureComponent {
           updatePercentage(percent);
           percent += 10;
           if (percent === 110) clearInterval(interval);
-        }, 100);
+        }, 1000);
       },
       onVideoSelected: (url, updateEntity) => {
         setTimeout(() => {
