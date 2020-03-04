@@ -12,11 +12,15 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
- 
+
+### :bug: Bug Fix
+- `html`
+  - [#732](https://github.com/wix-incubator/rich-content/pull/732) reload issue in ios
+
 </details>
 <hr/>
 
-## 6.9.3 (Feb 27, 2020)
+## 6.9.3 (Mar 4, 2020)
 ### :bug: Bug Fix
 - `html`
   - [#732](https://github.com/wix-incubator/rich-content/pull/732) fix html width in viewer
