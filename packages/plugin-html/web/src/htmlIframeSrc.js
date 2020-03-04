@@ -116,17 +116,13 @@ export default `
 
         function handleIframeAdded(iframe) {
           if (isIOS) {
-            var src = iframe.src;
             iframe.onload = function() {
+              var src = iframe.src;
               console.log('reload iframe');
               if (src.indexOf('reloadMe') > -1) {
                 return;
               }
-              if (src.indexOf('&') > -1) {
-                iframe.src = src.replace('?', '?reloadMe=1&');
-              } else {
-                iframe.src += '?reloadMe';
-              }
+              iframe.src = src.replace('?', '?reloadMe=1&');
             };
           }
         }
