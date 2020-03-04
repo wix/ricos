@@ -84,12 +84,13 @@ describe('plugins', () => {
         cy.get(`[data-hook=${'image-item'}]:last`)
           .parent()
           .click();
-        cy.eyesCheckWindow(1000, { tag: this.test.title, target: 'window', fully: false });
+        cy.wait(1000);
+        cy.eyesCheckWindow({ tag: this.test.title, target: 'window', fully: false });
       });
     });
   });
 
-  context('gallery', () => {
+  context.only('gallery', () => {
     before(function() {
       eyesOpen(this);
     });
