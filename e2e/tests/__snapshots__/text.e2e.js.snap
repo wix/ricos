@@ -353,6 +353,11 @@ exports[`text > allow to enter hashtag with link #0`] =
           "key": 1,
           "length": 15,
           "offset": 37
+        },
+        {
+          "key": 2,
+          "length": 22,
+          "offset": 53
         }
       ],
       "inlineStyleRanges": [
@@ -365,10 +370,15 @@ exports[`text > allow to enter hashtag with link #0`] =
           "length": 15,
           "offset": 37,
           "style": "UNDERLINE"
+        },
+        {
+          "length": 22,
+          "offset": 53,
+          "style": "UNDERLINE"
         }
       ],
       "key": 0,
-      "text": "#wix.com wix.com #this_is_not_a_link #will_be_a_link ",
+      "text": "#wix.com wix.com #this_is_not_a_link #will_be_a_link thisislink#youknow.com ",
       "type": "unstyled"
     }
   ],
@@ -387,6 +397,15 @@ exports[`text > allow to enter hashtag with link #0`] =
         "rel": "noopener",
         "target": "_blank",
         "url": "https://www.wix.com/"
+      },
+      "mutability": "MUTABLE",
+      "type": "LINK"
+    },
+    "2": {
+      "data": {
+        "rel": "noopener",
+        "target": "_blank",
+        "url": "thisislink#youknow.com"
       },
       "mutability": "MUTABLE",
       "type": "LINK"

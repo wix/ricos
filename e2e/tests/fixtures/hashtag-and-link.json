@@ -41,6 +41,36 @@
         }
       ],
       "data": {}
+    },
+    {
+      "key": "1bdcf",
+      "text": "thisislink#youknow.com",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [
+        {
+          "offset": 0,
+          "length": 22,
+          "style": "UNDERLINE"
+        }
+      ],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 22,
+          "key": 2
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "8i1rg",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
     }
   ],
   "entityMap": {
@@ -58,6 +88,15 @@
       "mutability": "MUTABLE",
       "data": {
         "url": "wix.com",
+        "target": "_blank",
+        "rel": "noopener"
+      }
+    },
+    "2": {
+      "type": "LINK",
+      "mutability": "MUTABLE",
+      "data": {
+        "url": "thisislink#youknow.com",
         "target": "_blank",
         "rel": "noopener"
       }
