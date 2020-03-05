@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Measure from 'react-measure';
 import { debounce } from 'lodash';
-import { DISPLAY_MODE, TooltipHost } from 'wix-rich-content-editor-common';
+import { DISPLAY_MODE, TOOLBARS, TooltipHost } from 'wix-rich-content-editor-common';
 import Styles from '../../../../statics/styles/static-toolbar.scss';
 
 const displayOptionStyles = {
@@ -122,6 +122,8 @@ export default class StaticToolbar extends React.PureComponent {
         [Styles.mobile]: isMobile,
       }
     );
+
+    childrenProps.toolbarName = TOOLBARS.FOOTER;
 
     return (
       <div className={buttonClassNames}>
