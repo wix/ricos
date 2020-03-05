@@ -71,4 +71,12 @@ describe('text', () => {
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.UNORDERED_LIST, [550, 1]);
     cy.eyesCheckWindow(this.test.title);
   });
+
+  it('allow to enter hashtag with link', function() {
+    cy.loadEditorAndViewer()
+      .enterParagraphs(['#wix.com', 'wix.com', '#this_is_not_a_link'])
+      .setSelection(0, 0)
+      .blurEditor();
+    cy.eyesCheckWindow(this.test.title);
+  });
 });
