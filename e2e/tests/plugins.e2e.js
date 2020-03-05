@@ -84,7 +84,6 @@ describe('plugins', () => {
         cy.get(`[data-hook=${'image-item'}]:last`)
           .parent()
           .click();
-        cy.wait(1000);
         cy.eyesCheckWindow({ tag: this.test.title, target: 'window', fully: false });
       });
     });
