@@ -12,13 +12,18 @@ export default function RichContentWrapper({
   palette,
   plugins = [],
   children,
+  ...rest
 }) {
   const themeGenerators = plugins.filter(plug => !!plug.theme).map(plug => plug.theme);
   const isEditor = children.type?.displayName === 'RichContentEditor';
   strategies.push(themeStrategyProvider(isEditor, { theme, palette, themeGenerators }));
   strategies.push(pluginsStrategyProvider(isEditor, { plugins }));
   strategies.push(localeStrategyProvider({ locale }));
-  return <EngineWrapper strategies={strategies}>{children}</EngineWrapper>;
+  return (
+    <EngineWrapper strategies={strategies} {...rest}>
+      {children}
+    </EngineWrapper>
+  );
 }
 RichContentWrapper.propTypes = {
   children: PropTypes.any,

@@ -1,75 +1,35 @@
 import React, { Children } from 'react';
-import { RichContentEditorModal } from 'wix-rich-content-editor';
-import { createEmpty } from 'wix-rich-content-editor/dist/lib/editorStateConversion';
-import ReactModal from 'react-modal';
 import PropTypes from 'prop-types';
 import { modalStyles } from './themeStrategy/defaults';
 
 class EngineWrapper extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      showModal: false,
-      editorState: createEmpty(),
-    };
-  }
-
-  onModalOpen = data => {
-    const { modalStyles, ...modalProps } = data;
-    this.setState({
-      showModal: true,
-      modalProps,
-      modalStyles,
-    });
-  };
-
-  onModalClose = () =>
-    this.setState({
-      showModal: false,
-      modalProps: null,
-      modalStyles: null,
-      modalContent: null,
-    });
-
-  handleChange = editorState => {
-    this.setState({ editorState });
-  };
-
   render() {
-    const { strategies = [], modalSupport = true, children = {} } = this.props;
+    const { strategies = [], Modal, modalState, children = {} } = this.props;
     const modifiedProps = strategies.reduce((props, strategyFunction) => {
       const result = strategyFunction(props);
       return { ...props, ...result };
     }, children.props);
-    const { helpers = {}, theme, locale = 'en', ModalsMap, onChange } = modifiedProps;
+    const { helpers = {}, theme, locale = 'en', ModalsMap } = modifiedProps;
     const { onRequestClose } = this.state.modalProps || {};
-    if (modalSupport) {
+    if (Modal) {
       helpers.openModal = this.onModalOpen;
       helpers.closeModal = this.onModalClose;
       modifiedProps.helpers = helpers;
     }
-    if (onChange)
-      modifiedProps.onChange = editorState => {
-        onChange(editorState);
-        this.handleChange(editorState);
-      };
     return (
       <React.Fragment>
         {Children.only(React.cloneElement(children, modifiedProps))}
-        {modalSupport && (
-          <ReactModal
-            isOpen={this.state.showModal}
+        {Modal && (
+          <Modal
+            isOpen={modalState.showModal}
             contentLabel="External Modal Example"
-            style={modalStyles(this.state, theme)}
+            style={modalStyles(modalState, theme)}
             role="dialog"
             onRequestClose={onRequestClose || helpers.closeModal}
-          >
-            <RichContentEditorModal
-              modalsMap={ModalsMap}
-              locale={locale}
-              {...this.state.modalProps}
-            />
-          </ReactModal>
+            modalsMap={ModalsMap}
+            locale={locale}
+            {...modalState.modalProps}
+          />
         )}
       </React.Fragment>
     );
@@ -83,6 +43,10 @@ EngineWrapper.propTypes = {
   openModal: PropTypes.func,
   closeModal: PropTypes.func,
   children: PropTypes.object,
-  modalSupport: PropTypes.bool,
+  Modal: PropTypes.object,
+  modalState: PropTypes.shape({
+    modalProps: PropTypes.object,
+    showModal: PropTypes.bool,
+  }),
 };
 export default EngineWrapper;
