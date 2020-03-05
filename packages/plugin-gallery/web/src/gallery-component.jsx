@@ -172,24 +172,31 @@ class GalleryComponent extends PureComponent {
   isLoadingProgress = () => this.state.isLoading && this.props.helpers?.onProgressChange;
 
   render() {
-    return (
-      <div>
-        <GalleryViewer
-          componentData={this.props.componentData}
-          onClick={this.props.onClick}
-          className={this.props.className}
-          settings={this.props.settings}
-          theme={this.props.theme}
-          helpers={this.props.helpers}
-          disableRightClick={this.props.disableRightClick}
-          isMobile={this.props.isMobile}
-          anchorTarget={this.props.anchorTarget}
-          relValue={this.props.relValue}
-          blockKey={this.blockKey}
-        />
-        {this.isLoadingProgress() && this.renderLoader()}
-      </div>
+    const gallery = (
+      <GalleryViewer
+        componentData={this.props.componentData}
+        onClick={this.props.onClick}
+        className={this.props.className}
+        settings={this.props.settings}
+        theme={this.props.theme}
+        helpers={this.props.helpers}
+        disableRightClick={this.props.disableRightClick}
+        isMobile={this.props.isMobile}
+        anchorTarget={this.props.anchorTarget}
+        relValue={this.props.relValue}
+        blockKey={this.blockKey}
+      />
     );
+    if (this.isLoadingProgress()) {
+      return (
+        <div>
+          {gallery}
+          {this.renderLoader()}
+        </div>
+      );
+    } else {
+      return gallery;
+    }
   }
 }
 

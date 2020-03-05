@@ -90,7 +90,7 @@ describe('plugins', () => {
     });
   });
 
-  context.only('gallery', () => {
+  context('gallery', () => {
     before(function() {
       eyesOpen(this);
     });
