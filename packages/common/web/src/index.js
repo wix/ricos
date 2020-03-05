@@ -18,7 +18,7 @@ export { mergeStyles } from './Utils/mergeStyles';
 export { default as normalizeInitialState } from './Utils/normalization/normalizeInitialState';
 export { default as getDisplayName } from './Utils/getDisplayName';
 export { default as Version } from './Utils/versioningUtils';
-export { hasLinksInBlock } from './Utils/draftUtils';
+export { hasLinksInBlock, linksInBlock } from './Utils/draftUtils';
 export { validate, getContentStateSchema } from './Utils/data-schema-validator';
 export { isSSR } from './Utils/ssrUtils';
 

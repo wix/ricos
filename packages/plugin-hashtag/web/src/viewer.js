@@ -1,8 +1,8 @@
-import { hasLinksInBlock } from 'wix-rich-content-common';
+import { linksInBlock } from 'wix-rich-content-common';
 import { default as createHashtagDecorator } from './HashtagDecorator';
 import { HASHTAG_TYPE } from './types';
 import { DEFAULTS, THEME as theme } from './defaults';
-const HashtagDecorator = createHashtagDecorator(hasLinksInBlock);
+const HashtagDecorator = createHashtagDecorator(linksInBlock);
 export { HashtagDecorator };
 
 export const pluginHashtag = (config = {}) => {

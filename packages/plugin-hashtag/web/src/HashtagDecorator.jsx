@@ -2,24 +2,19 @@ import { range } from 'lodash';
 import Hashtag from './HashtagComponent';
 import hashtagRegexes from './hashtagRegexes';
 
-export default (hasLinksInBlock, immutableList) =>
+export default (linksInBlock, immutableList) =>
   class HashtagDecorator {
     constructor(componentProps) {
       this.componentProps = componentProps;
     }
 
-    getDecorations(block /*, contentState*/) {
+    getDecorations(block, contentState) {
       const key = block.getKey();
       const text = block.getText();
       const type = block.getType();
       const decorations = Array(text.length).fill(null);
 
-      if (
-        type !== 'code-block' &&
-        text &&
-        //!hasLinksInBlock(block, contentState) &&
-        text.match(hashtagRegexes.hashSigns)
-      ) {
+      if (type !== 'code-block' && text && text.match(hashtagRegexes.hashSigns)) {
         text.replace(
           hashtagRegexes.validHashtag,
           (match, before, hash, hashText, offset, chunk) => {
@@ -29,9 +24,18 @@ export default (hasLinksInBlock, immutableList) =>
             }
             const start = offset + before.length;
             const end = start + hashText.length + 1;
-            const htagId = `htag${start}${end}`;
-            const tagRange = range(start, end, 1);
-            tagRange.forEach(i => (decorations[i] = `${key}-${htagId}`));
+            let overlap = false;
+            const linkRanges = linksInBlock(block, contentState);
+            if (linkRanges) {
+              linkRanges.forEach(range => {
+                if (start <= range[0] && end >= range[0] && !overlap) overlap = true;
+              });
+            }
+            if (!overlap) {
+              const htagId = `htag${start}${end}`;
+              const tagRange = range(start, end, 1);
+              tagRange.forEach(i => (decorations[i] = `${key}-${htagId}`));
+            }
           }
         );
       }

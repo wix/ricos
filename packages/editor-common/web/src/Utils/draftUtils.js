@@ -97,6 +97,10 @@ export const hasLinksInBlock = (block, contentState) => {
   return !!getLinkRangesInBlock(block, contentState).length;
 };
 
+export const linksInBlock = (block, contentState) => {
+  return getLinkRangesInBlock(block, contentState);
+};
+
 export const hasLinksInSelection = editorState => {
   return !!getSelectedLinks(editorState).length;
 };
