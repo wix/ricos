@@ -84,7 +84,7 @@ class VideoViewer extends Component {
       disabled,
       width,
       height,
-      controls: controls && isLoaded,
+      controls,
     };
     return (
       <>

@@ -12,17 +12,21 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
-  
+
   ### :bug: Bug Fix
   - `editor`
     - [#747](https://github.com/wix-incubator/rich-content/pull/747) unable to build - draftUtils Bi consumption
+  - `video`
+    - [#746](https://github.com/wix-incubator/rich-content/pull/746) controls not showing  
+
 </details>
 <hr/>
 
 ## 6.9.5 (Mar 4, 2020)
 ### :bug: Bug Fix
 - `editor`
-  - [#745](https://github.com/wix-incubator/rich-content/pull/745) hotfix - editorState trigger  
+  - [#745](https://github.com/wix-incubator/rich-content/pull/745) editorState trigger
+
 ## 6.9.4 (Mar 4, 2020)
 ### :bug: Bug Fix
 - `html`
