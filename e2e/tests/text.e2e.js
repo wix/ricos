@@ -65,18 +65,17 @@ describe('text', () => {
     cy.eyesCheckWindow(this.test.title);
   });
 
+  it('allow to enter hashtag with link', function() {
+    cy.loadEditorAndViewer()
+      .enterParagraphs(['#wix.com wix.com #this_is_not_a_link #will_be_a_link '])
+      .setLink([37, 15], 'https://www.wix.com/');
+    cy.eyesCheckWindow(this.test.title);
+  });
+
   it('allow to create lists', function() {
     cy.loadEditorAndViewer('plain')
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.ORDERED_LIST, [300, 100])
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.UNORDERED_LIST, [550, 1]);
-    cy.eyesCheckWindow(this.test.title);
-  });
-
-  it('allow to enter hashtag with link', function() {
-    cy.loadEditorAndViewer()
-      .enterParagraphs(['#wix.com', 'wix.com', '#this_is_not_a_link'])
-      .setSelection(0, 0)
-      .blurEditor();
     cy.eyesCheckWindow(this.test.title);
   });
 });
