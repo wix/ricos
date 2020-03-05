@@ -73,7 +73,9 @@ Cypress.Commands.add('loadEditorAndViewer', fixtureName => {
     disableTransitions();
     hideAllTooltips();
   });
-  cy.wait(3000);
+  if (fixtureName.includes('gallery')) {
+    cy.wait(2000);
+  }
 });
 
 Cypress.Commands.add('loadEditorAndViewerOnSsr', fixtureName => {
