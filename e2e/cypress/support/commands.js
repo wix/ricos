@@ -352,8 +352,13 @@ Cypress.Commands.add('alignImage', alignment => {
 });
 
 Cypress.Commands.add('openPluginToolbar', plugin => {
-  if (plugin === PLUGIN_COMPONENT.GALLERY) {
-    cy.wait(1000);
+  //Wait for loader to finish loading
+  if (
+    plugin === PLUGIN_COMPONENT.GALLERY ||
+    plugin === PLUGIN_COMPONENT.IMAGE ||
+    plugin === PLUGIN_COMPONENT.VIDEO
+  ) {
+    cy.wait(3000);
   }
   cy.get(`[data-hook*=${plugin}]`)
     .first()
