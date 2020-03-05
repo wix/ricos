@@ -97,10 +97,6 @@ export const hasLinksInBlock = (block, contentState) => {
   return !!getLinkRangesInBlock(block, contentState).length;
 };
 
-export const linksInBlock = (block, contentState) => {
-  return getLinkRangesInBlock(block, contentState);
-};
-
 export const hasLinksInSelection = editorState => {
   return !!getSelectedLinks(editorState).length;
 };
@@ -310,7 +306,7 @@ function getSelectedLinksInBlock(block, editorState) {
     }));
 }
 
-function getLinkRangesInBlock(block, contentState) {
+export const getLinkRangesInBlock = (block, contentState) => {
   const ranges = [];
   block.findEntityRanges(
     value => {
@@ -321,7 +317,7 @@ function getLinkRangesInBlock(block, contentState) {
   );
 
   return ranges;
-}
+};
 
 function removeLink(editorState, blockKey, [start, end]) {
   const selection = createSelection({ blockKey, anchorOffset: start, focusOffset: end });

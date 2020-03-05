@@ -2,11 +2,15 @@ import { range } from 'lodash';
 import Hashtag from './HashtagComponent';
 import hashtagRegexes from './hashtagRegexes';
 
-export default (linksInBlock, immutableList) =>
+export default (getLinkRangesInBlock, immutableList) =>
   class HashtagDecorator {
     constructor(componentProps) {
       this.componentProps = componentProps;
     }
+
+    checkOverlap = (range, start, end) => {
+      return (start <= range[0] && end >= range[0]) || (range[0] <= start && range[1] >= start);
+    };
 
     getDecorations(block, contentState) {
       const key = block.getKey();
@@ -24,13 +28,8 @@ export default (linksInBlock, immutableList) =>
             }
             const start = offset + before.length;
             const end = start + hashText.length + 1;
-            let overlap = false;
-            const linkRanges = linksInBlock(block, contentState);
-            if (linkRanges) {
-              linkRanges.forEach(range => {
-                if (start <= range[0] && end >= range[0] && !overlap) overlap = true;
-              });
-            }
+            const linkRanges = getLinkRangesInBlock(block, contentState);
+            const overlap = linkRanges.some(range => this.checkOverlap(range, start, end));
             if (!overlap) {
               const htagId = `htag${start}${end}`;
               const tagRange = range(start, end, 1);

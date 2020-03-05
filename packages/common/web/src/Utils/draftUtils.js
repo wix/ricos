@@ -1,8 +1,8 @@
 export const hasLinksInBlock = (block, contentState) => {
-  return !!linksInBlock(block, contentState);
+  return !!getLinkRangesInBlock(block, contentState);
 };
 
-export const linksInBlock = (block, contentState) => {
+export const getLinkRangesInBlock = (block, contentState) => {
   const ranges = [];
   block.entityRanges.forEach(entityRange => {
     const entityType = contentState.entityMap[entityRange.key]?.type;
