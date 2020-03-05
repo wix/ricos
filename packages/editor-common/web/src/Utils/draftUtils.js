@@ -306,7 +306,7 @@ function getSelectedLinksInBlock(block, editorState) {
     }));
 }
 
-export const getLinkRangesInBlock = (block, contentState) => {
+export function getLinkRangesInBlock(block, contentState) {
   const ranges = [];
   block.findEntityRanges(
     value => {
@@ -317,7 +317,7 @@ export const getLinkRangesInBlock = (block, contentState) => {
   );
 
   return ranges;
-};
+}
 
 function removeLink(editorState, blockKey, [start, end]) {
   const selection = createSelection({ blockKey, anchorOffset: start, focusOffset: end });

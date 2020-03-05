@@ -1,5 +1,5 @@
 export const hasLinksInBlock = (block, contentState) => {
-  return !!getLinkRangesInBlock(block, contentState);
+  return getLinkRangesInBlock(block, contentState).length > 0;
 };
 
 export const getLinkRangesInBlock = (block, contentState) => {

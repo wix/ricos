@@ -1,4 +1,3 @@
-import { range } from 'lodash';
 import Hashtag from './HashtagComponent';
 import hashtagRegexes from './hashtagRegexes';
 
@@ -8,7 +7,7 @@ export default (getLinkRangesInBlock, immutableList) =>
       this.componentProps = componentProps;
     }
 
-    checkOverlap = (range, start, end) => {
+    isOverlapping = (range, start, end) => {
       return (start <= range[0] && end >= range[0]) || (range[0] <= start && range[1] >= start);
     };
 
@@ -29,11 +28,13 @@ export default (getLinkRangesInBlock, immutableList) =>
             const start = offset + before.length;
             const end = start + hashText.length + 1;
             const linkRanges = getLinkRangesInBlock(block, contentState);
-            const overlap = linkRanges.some(range => this.checkOverlap(range, start, end));
+            const overlap = linkRanges.some(range => this.isOverlapping(range, start, end));
             if (!overlap) {
-              const htagId = `htag${start}${end}`;
-              const tagRange = range(start, end, 1);
-              tagRange.forEach(i => (decorations[i] = `${key}-${htagId}`));
+              const htagId = `htag-${key}-${start}${end}`;
+              // eslint-disable-next-line fp/no-loops
+              for (let i = start; i < end; i++) {
+                decorations[i] = htagId;
+              }
             }
           }
         );
