@@ -4,7 +4,7 @@ import { modalStyles } from './themeStrategy/defaults';
 
 class EngineWrapper extends React.Component {
   render() {
-    const { strategies = [], ModalComp, modalState = {}, children = {} } = this.props;
+    const { strategies = [], children = {}, ModalComp, modalState = {} } = this.props;
     const modifiedProps = strategies.reduce((props, strategyFunction) => {
       const result = strategyFunction(props);
       return { ...props, ...result };

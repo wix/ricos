@@ -19,15 +19,18 @@ export default class RichContentEditorWrapper extends React.Component {
       modalProps,
       modalStyles,
     });
+    this.props.onModalOpen?.(data);
   };
 
-  onModalClose = () =>
+  onModalClose = () => {
     this.setState({
       showModal: false,
       modalProps: null,
       modalStyles: null,
       modalContent: null,
     });
+    this.props.onModalClose?.();
+  };
 
   handleChange = editorState => {
     this.setState({ editorState });
@@ -35,14 +38,18 @@ export default class RichContentEditorWrapper extends React.Component {
 
   render() {
     const { children, ...rest } = this.props;
-    const onChange =
-      this.props.onChange &&
-      (editorState => {
-        this.props.onChange(editorState);
-        this.handleChange(editorState);
-      });
+    const onChange = editorState => {
+      this.props?.onChange?.(editorState);
+      this.handleChange(editorState);
+    };
     return (
-      <RichContentWrapper modalState={this.state} {...rest} onChange={onChange}>
+      <RichContentWrapper
+        modalState={this.state}
+        {...rest}
+        onModalOpen={this.onModalOpen}
+        onModalClose={this.onModalClose}
+        onChange={onChange}
+      >
         {children}
       </RichContentWrapper>
     );
@@ -56,4 +63,6 @@ RichContentEditorWrapper.propTypes = {
   plugins: PropTypes.arrayOf(PropTypes.object),
   strategies: PropTypes.arrayOf(PropTypes.func),
   onChange: PropTypes.func,
+  onModalOpen: PropTypes.func,
+  onModalClose: PropTypes.func,
 };
