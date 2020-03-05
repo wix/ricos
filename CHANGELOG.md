@@ -13,15 +13,31 @@
     Click to see more.
   </summary>
 
+</details>
+<hr/>
+
+## 6.9.6 (Mar 5, 2020)
+### :bug: Bug Fix
+- `editor`
+  - [#747](https://github.com/wix-incubator/rich-content/pull/747) unable to build - draftUtils Bi consumption
+- `video`
+  - [#746](https://github.com/wix-incubator/rich-content/pull/746) controls not showing
+
+## 6.9.5 (Mar 4, 2020)
+### :bug: Bug Fix
+- `editor`
+  - [#745](https://github.com/wix-incubator/rich-content/pull/745) editorState trigger
+
+## 6.9.4 (Mar 4, 2020)
 ### :bug: Bug Fix
 - `html`
   - [#732](https://github.com/wix-incubator/rich-content/pull/732) reload issue in ios
 ### :rocket: New Feature
 - `bi-events`
   - [#675](https://github.com/wix-incubator/rich-content/pull/514) supports `onPluginAdd` (toolbar only) and `onPluginDelete` callbacks via props
-
-</details>
-<hr/>
+### :house: Internal
+- `gallery`
+  - [#742](https://github.com/wix-incubator/rich-content/pull/742) bump pro-gallery version to 1.7.25
 
 ## 6.9.3 (Mar 4, 2020)
 ### :bug: Bug Fix
