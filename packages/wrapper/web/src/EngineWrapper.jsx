@@ -4,14 +4,14 @@ import { modalStyles } from './themeStrategy/defaults';
 
 class EngineWrapper extends React.Component {
   render() {
-    const { strategies = [], Modal, modalState, children = {} } = this.props;
+    const { strategies = [], ModalComp, modalState = {}, children = {} } = this.props;
     const modifiedProps = strategies.reduce((props, strategyFunction) => {
       const result = strategyFunction(props);
       return { ...props, ...result };
     }, children.props);
     const { helpers = {}, theme, locale = 'en', ModalsMap } = modifiedProps;
-    const { onRequestClose } = this.state.modalProps || {};
-    if (Modal) {
+    const { onRequestClose } = modalState.modalProps || {};
+    if (ModalComp) {
       helpers.openModal = this.onModalOpen;
       helpers.closeModal = this.onModalClose;
       modifiedProps.helpers = helpers;
@@ -19,8 +19,8 @@ class EngineWrapper extends React.Component {
     return (
       <React.Fragment>
         {Children.only(React.cloneElement(children, modifiedProps))}
-        {Modal && (
-          <Modal
+        {ModalComp && (
+          <ModalComp
             isOpen={modalState.showModal}
             contentLabel="External Modal Example"
             style={modalStyles(modalState, theme)}
@@ -43,7 +43,7 @@ EngineWrapper.propTypes = {
   openModal: PropTypes.func,
   closeModal: PropTypes.func,
   children: PropTypes.object,
-  Modal: PropTypes.object,
+  ModalComp: PropTypes.object,
   modalState: PropTypes.shape({
     modalProps: PropTypes.object,
     showModal: PropTypes.bool,

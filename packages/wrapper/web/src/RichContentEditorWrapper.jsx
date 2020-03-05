@@ -1,5 +1,5 @@
 import React from 'react';
-import RichContentWrapper from './RichContentWrapper';
+import RichContentWrapper from './lib/RichContentWrapper';
 import { createEmpty } from 'wix-rich-content-editor/dist/lib/editorStateConversion';
 import PropTypes from 'prop-types';
 

@@ -1,8 +1,8 @@
 import React from 'react';
-import EngineWrapper from './EngineWrapper';
-import themeStrategyProvider from './themeStrategy/themeStrategyProvider';
-import pluginsStrategyProvider from './pluginsStrategy/pluginsStrategyProvider';
-import localeStrategyProvider from './localeStrategy/localeStrategyProvider';
+import EngineWrapper from '../EngineWrapper';
+import themeStrategyProvider from '../themeStrategy/themeStrategyProvider';
+import pluginsStrategyProvider from '../pluginsStrategy/pluginsStrategyProvider';
+import localeStrategyProvider from '../localeStrategy/localeStrategyProvider';
 import PropTypes from 'prop-types';
 
 export default function RichContentWrapper({
