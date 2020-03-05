@@ -5,7 +5,7 @@ import pluginsStrategyProvider from '../pluginsStrategy/pluginsStrategyProvider'
 import localeStrategyProvider from '../localeStrategy/localeStrategyProvider';
 import PropTypes from 'prop-types';
 
-export default function RichContentWrapper({
+export function RichContentWrapper({
   strategies = [],
   theme,
   locale,

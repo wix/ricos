@@ -2,7 +2,7 @@ import React, { Children } from 'react';
 import { RichContentEditorModal } from 'wix-rich-content-editor';
 import ReactModal from 'react-modal';
 
-export default function withModal(editorComp) {
+export function withModal(editorComp) {
   const Modal = ({ isOpen, contentLabel, style, role, onRequestClose, ModalsMap, locale }) => {
     <ReactModal
       isOpen={isOpen}
