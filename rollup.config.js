@@ -88,5 +88,6 @@ if (viewerEntry) {
 if (libEntries) {
   config.push(libEntries);
 }
+config.forEach(c => c.inlineDynamicImports = true)
 
 export default config;

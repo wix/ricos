@@ -1,10 +1,19 @@
-import React, { Children } from 'react';
+import React, { Children, Suspense } from 'react';
 import PropTypes from 'prop-types';
 import { modalStyles } from './themeStrategy/defaults';
 
 class EngineWrapper extends React.Component {
+  fullScreenOnExpand = (entityIndex, innerIndex = 0) => {
+    //galleries have an innerIndex (i.e. second image will have innerIndex=1)
+    this.setState({
+      expendModeIsOpen: true,
+      expandModeIndex: this.expandModeData.imageMap[entityIndex] + innerIndex,
+    });
+  };
+
   render() {
-    const { strategies = [], children = {}, ModalComp, modalState = {} } = this.props;
+    const isSSR = () => typeof window === 'undefined';
+    const { strategies = [], children = {}, ModalComp, modalState = {}, isEditor } = this.props;
     const modifiedProps = strategies.reduce((props, strategyFunction) => {
       const result = strategyFunction(props);
       return { ...props, ...result };
@@ -15,6 +24,12 @@ class EngineWrapper extends React.Component {
       helpers.openModal = this.onModalOpen;
       helpers.closeModal = this.onModalClose;
       modifiedProps.helpers = helpers;
+    }
+    //viewer needs onExpand helper + Fullscreen
+    let Fullscreen = () => '';
+    if (!isEditor) {
+      helpers.onExpand = this.fullScreenOnExpand;
+      Fullscreen = React.lazy(() => import('wix-rich-content-fullscreen'));
     }
     return (
       <React.Fragment>
@@ -31,6 +46,11 @@ class EngineWrapper extends React.Component {
             {...modalState.modalProps}
           />
         )}
+        {!isEditor && !isSSR() && (
+          <Suspense>
+            <Fullscreen />
+          </Suspense>
+        )}
       </React.Fragment>
     );
   }
@@ -44,6 +64,7 @@ EngineWrapper.propTypes = {
   closeModal: PropTypes.func,
   children: PropTypes.object,
   ModalComp: PropTypes.object,
+  isEditor: PropTypes.bool,
   modalState: PropTypes.shape({
     modalProps: PropTypes.object,
     showModal: PropTypes.bool,

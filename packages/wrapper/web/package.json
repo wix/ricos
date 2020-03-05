@@ -58,7 +58,8 @@
     "wix-rich-content-common": "6.9.6",
     "wix-rich-content-editor": "6.9.6",
     "wix-rich-content-editor-common": "6.9.6",
-    "wix-rich-content-viewer": "6.9.6"
+    "wix-rich-content-viewer": "6.9.6",
+    "wix-rich-content-fullscreen": "6.9.6"
   },
   "jest": {
     "globals": {

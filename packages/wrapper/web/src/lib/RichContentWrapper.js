@@ -12,15 +12,15 @@ export function RichContentWrapper({
   palette,
   plugins = [],
   children,
+  isEditor = false,
   ...rest
 }) {
   const themeGenerators = plugins.filter(plug => !!plug.theme).map(plug => plug.theme);
-  const isEditor = children.type?.displayName === 'RichContentEditor';
   strategies.push(themeStrategyProvider(isEditor, { theme, palette, themeGenerators }));
   strategies.push(pluginsStrategyProvider(isEditor, { plugins }));
   strategies.push(localeStrategyProvider({ locale }));
   return (
-    <EngineWrapper strategies={strategies} {...rest}>
+    <EngineWrapper strategies={strategies} {...rest} isEditor={isEditor}>
       {children}
     </EngineWrapper>
   );
@@ -32,6 +32,7 @@ RichContentWrapper.propTypes = {
   palette: PropTypes.array,
   plugins: PropTypes.arrayOf(PropTypes.object),
   strategies: PropTypes.arrayOf(PropTypes.func),
+  isEditor: PropTypes.bool,
 };
 
 RichContentWrapper.defaultProps = {

@@ -49,6 +49,7 @@ export default class RichContentEditorWrapper extends React.Component {
         onModalOpen={this.onModalOpen}
         onModalClose={this.onModalClose}
         onChange={onChange}
+        isEditor
       >
         {children}
       </RichContentWrapper>
