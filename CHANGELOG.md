@@ -13,6 +13,9 @@
     Click to see more.
   </summary>
 
+### :house: Internal
+- `general`
+  - [#720](https://github.com/wix-incubator/rich-content/pull/720) mobile example app styles issues
 </details>
 <hr/>
 
