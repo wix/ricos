@@ -13,6 +13,9 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+- `editor`
+  - [#713](https://github.com/wix-incubator/rich-content/pull/713) toolbars trl issued fixed
 </details>
 <hr/>
 
