@@ -19,11 +19,10 @@ import {
   TOOLBARS,
   getBlockInfo,
   getFocusedBlockKey,
-} from 'wix-rich-content-editor-common';
-import {
   calculateDiff,
   getPostContentSummary,
-} from 'wix-rich-content-editor-common/src/Utils/draftUtils';
+} from 'wix-rich-content-editor-common';
+
 import {
   AccessibilityListener,
   normalizeInitialState,
