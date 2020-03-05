@@ -3,7 +3,7 @@ import RichContentWrapper from './RichContentWrapper';
 import { createEmpty } from 'wix-rich-content-editor/dist/lib/editorStateConversion';
 import PropTypes from 'prop-types';
 
-export default class RichContentWrapperEditor extends React.Component {
+export default class RichContentEditorWrapper extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -48,7 +48,7 @@ export default class RichContentWrapperEditor extends React.Component {
     );
   }
 }
-RichContentWrapperEditor.propTypes = {
+RichContentEditorWrapper.propTypes = {
   children: PropTypes.any,
   theme: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   locale: PropTypes.string,
