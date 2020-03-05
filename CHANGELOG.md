@@ -15,6 +15,11 @@
 </details>
 <hr/>
 
+## 6.9.5 (Mar 4, 2020)
+### :bug: Bug Fix
+- `editor`
+  - [#745](https://github.com/wix-incubator/rich-content/pull/745) hotfix - editorState trigger
+  - 
 ## 6.9.4 (Mar 4, 2020)
 ### :bug: Bug Fix
 - `html`
