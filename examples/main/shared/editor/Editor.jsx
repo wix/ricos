@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import { RichContentEditor, RichContentEditorModal } from 'wix-rich-content-editor';
+import { getFakeLoadingPercent } from 'wix-rich-content-editor-common';
 import { convertToRaw } from 'draft-js';
 import * as PropTypes from 'prop-types';
 import ReactModal from 'react-modal';
@@ -75,6 +76,7 @@ export default class Editor extends PureComponent {
           updateEntity({ data });
         }, 500);
       },
+      // onProgressChange: getFakeLoadingPercent,
       onProgressChange: updatePercentage => {
         let percent = 0;
         const mockImageIndex = this.props.mockImageIndex || 0;
