@@ -18,7 +18,7 @@ var regexes = new Object();
 regexes.hashSigns = /[#＃]/;
 regexes.hashtagAlpha = new RegExp('[' + unicodeLettersAndMarks + ']');
 regexes.hashtagAlphaNumeric = new RegExp(
-  '[' + unicodeLettersAndMarks + unicodeNumbers + hashtagSpecialChars + ']'
+  '[' + unicodeLettersAndMarks + unicodeNumbers + hashtagSpecialChars + '\\.' + ']'
 );
 regexes.endHashtagMatch = regexSupplant(/^(?:#{hashSigns}|:\/\/)/);
 regexes.hashtagBoundary = new RegExp(

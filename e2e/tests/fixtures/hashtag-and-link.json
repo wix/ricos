@@ -1,0 +1,79 @@
+{
+  "blocks": [
+    {
+      "key": "foo",
+      "text": "#hfjfj www.com @Test One.1 ",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [
+        {
+          "offset": 7,
+          "length": 7,
+          "style": "UNDERLINE"
+        }
+      ],
+      "entityRanges": [
+        {
+          "offset": 7,
+          "length": 7,
+          "key": 0
+        },
+        {
+          "offset": 15,
+          "length": 11,
+          "key": 1
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "buold",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "fuf95",
+      "text": "#assad #asd #wix.com ",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "ddodr",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "type": "LINK",
+      "mutability": "MUTABLE",
+      "data": {
+        "url": "www.com",
+        "target": "_blank",
+        "rel": "noopener"
+      }
+    },
+    "1": {
+      "type": "mention",
+      "mutability": "SEGMENTED",
+      "data": {
+        "mention": {
+          "name": "Test One.1",
+          "slug": "testone1"
+        }
+      }
+    }
+  },
+  "VERSION": "6.9.2"
+}
