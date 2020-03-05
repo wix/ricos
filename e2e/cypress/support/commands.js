@@ -255,7 +255,9 @@ Cypress.Commands.add('openMapSettings', () => {
 });
 
 Cypress.Commands.add('openGalleryAdvancedSettings', () => {
-  cy.get(`[data-hook=${PLUGIN_COMPONENT.GALLERY}]:first`).click();
+  cy.get(`[data-hook=${PLUGIN_COMPONENT.GALLERY}]:first`)
+    .parent()
+    .click();
   cy.get(`[data-hook=${PLUGIN_TOOLBAR_BUTTONS.ADV_SETTINGS}]:first`).click();
 });
 
@@ -350,6 +352,9 @@ Cypress.Commands.add('alignImage', alignment => {
 });
 
 Cypress.Commands.add('openPluginToolbar', plugin => {
+  if (plugin === PLUGIN_COMPONENT.GALLERY) {
+    cy.wait(1000);
+  }
   cy.get(`[data-hook*=${plugin}]`)
     .first()
     .parent()

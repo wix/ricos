@@ -166,30 +166,37 @@ class ImageComponent extends React.Component {
       setInPluginEditingMode,
       setComponentUrl,
     } = this.props;
-    return (
-      <div>
-        <ImageViewer
-          theme={theme}
-          isMobile={isMobile}
-          helpers={helpers}
-          disableRightClick={disableRightClick}
-          getInPluginEditingMode={getInPluginEditingMode}
-          setInPluginEditingMode={setInPluginEditingMode}
-          componentData={componentData}
-          onClick={onClick}
-          className={className}
-          isLoading={this.state.isLoading}
-          dataUrl={this.state.dataUrl}
-          isFocused={blockProps.isFocused}
-          settings={settings}
-          defaultCaption={this.props.t('ImageViewer_Caption')}
-          onCaptionChange={this.handleCaptionChange}
-          setFocusToBlock={blockProps.setFocusToBlock}
-          setComponentUrl={setComponentUrl}
-        />
-        {this.state.isLoading && this.renderLoader()}
-      </div>
+    const image = (
+      <ImageViewer
+        theme={theme}
+        isMobile={isMobile}
+        helpers={helpers}
+        disableRightClick={disableRightClick}
+        getInPluginEditingMode={getInPluginEditingMode}
+        setInPluginEditingMode={setInPluginEditingMode}
+        componentData={componentData}
+        onClick={onClick}
+        className={className}
+        isLoading={this.state.isLoading}
+        dataUrl={this.state.dataUrl}
+        isFocused={blockProps.isFocused}
+        settings={settings}
+        defaultCaption={this.props.t('ImageViewer_Caption')}
+        onCaptionChange={this.handleCaptionChange}
+        setFocusToBlock={blockProps.setFocusToBlock}
+        setComponentUrl={setComponentUrl}
+      />
     );
+    if (this.state.isLoading) {
+      return (
+        <div>
+          {image}
+          {this.renderLoader()}
+        </div>
+      );
+    } else {
+      return image;
+    }
   }
 }
 
