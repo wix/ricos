@@ -14,7 +14,7 @@
 
   .pluginsSection {
     height: 28px;
-    background-color: #efeff4;
+    background-color: rgba(0, 0, 0, 0.06);
     align-items: center;
     display: flex;
     justify-content: center;
@@ -51,7 +51,7 @@
       }
 
       &:hover {
-        background-color: #efeff4;
+        background-color: rgba(0, 0, 0, 0.06);
       }
     }
   }

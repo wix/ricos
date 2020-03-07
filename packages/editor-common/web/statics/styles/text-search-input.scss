@@ -2,22 +2,26 @@
 
 .textInput {
   position: relative;
+  &:hover {
+    color: black;
+  }
 }
 
 .textInput_input {
   font-weight: 300;
   font-size: 12px;
   line-height: 16px;
-  color: $modal-input-color;
+  color: black;
   width: 100%;
   height: 40px;
-  border: 1px solid rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(0, 0, 0, 0.6);
   box-sizing: border-box;
   padding-left: 37px;
 
   &::placeholder {
-    opacity: 0.4;
+    color: rgba(0, 0, 0, 0.4);
   }
+  &:focus,
   &:hover {
     border-color: black;
   }
@@ -30,8 +34,6 @@
   top: 0;
   margin: auto;
   width: 24px;
-  opacity: 0.6;
-  color: #000000;
 }
 
 .textInput_prefixIcon {
