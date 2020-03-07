@@ -164,9 +164,9 @@ export default ({
             <Icon key="0" />
           </div>
           {showName && (
-            <span key="1" className={styles.label}>
+            <div key="1" className={styles.label}>
               {name}
-            </span>
+            </div>
           )}
         </WrappingComponent>
       );

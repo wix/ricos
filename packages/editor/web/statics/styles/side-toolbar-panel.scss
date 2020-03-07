@@ -33,16 +33,16 @@
   .buttonsWrapper {
     display: grid;
     justify-items: center;
-    grid-template-columns: auto auto auto;
     grid-row-gap: 12px;
     grid-auto-rows: 72px;
     grid-template-columns: 98px 98px 98px;
 
     .buttonWrapper {
-      display: grid;
+      display: flex;
       width: 100%;
       justify-content: center;
       text-align: center;
+      cursor: pointer;
 
       .pluginName {
         font-size: 12px;

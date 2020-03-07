@@ -38,14 +38,14 @@ const SideToolbarPluginsSection = ({
         [Styles.withoutSections]: !shouldShowSections,
       })}
     >
-      {plugins.map(({ component: Component, name }, index) => (
+      {plugins.map((Component, index) => (
         <div key={index} className={Styles.buttonWrapper}>
           <Component
             getEditorState={getEditorState}
             setEditorState={setEditorState}
             theme={theme}
+            showName
           />
-          <div className={Styles.pluginName}>{name}</div>
         </div>
       ))}
     </div>,

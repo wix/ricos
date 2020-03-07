@@ -5,6 +5,7 @@
 .buttonWrapper {
   position: relative;
   display: inline-block;
+  width: 100%;
 
   &:last-child {
     margin-right: 0;
@@ -17,9 +18,10 @@
   border: 0;
   vertical-align: bottom;
   height: 100%;
+  width: 100%;
   pointer-events: initial;
+  cursor: pointer;
 
-  &:hover:not([disabled]),
   &:focus:not([disabled]) {
     .icon {
       cursor: pointer;
@@ -62,8 +64,11 @@
 
 .label {
   font-size: 12px;
-  margin-left: 8px;
   vertical-align: middle;
+  display: block;
+  font-size: 12px;
+  margin: 8px 0 0 0;
+  line-height: 1.33;
 }
 
 .mobile {
