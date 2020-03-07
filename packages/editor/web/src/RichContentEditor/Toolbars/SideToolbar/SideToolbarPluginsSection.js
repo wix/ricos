@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Styles from '../../../../statics/styles/side-toolbar-panel.scss';
 import { getPluginsForTag } from '../../pluginsSearchTags';
 import classNames from 'classnames';
+import { TOOLBARS } from 'wix-rich-content-editor-common';
 
 const SideToolbarPluginsSection = ({
   theme,
@@ -45,6 +46,7 @@ const SideToolbarPluginsSection = ({
             setEditorState={setEditorState}
             theme={theme}
             showName
+            toolbarName={TOOLBARS.SIDE}
           />
         </div>
       ))}

@@ -23,5 +23,4 @@ export const DEFAULT_DESKTOP_BROWSERS = [
 export const DEFAULT_MOBILE_BROWSERS = [
   { deviceName: 'iPhone X' },
   { deviceName: 'iPad' },
-  { deviceName: 'Pixel 2' },
 ];
