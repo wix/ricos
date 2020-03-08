@@ -97,7 +97,6 @@ class VideoComponent extends React.Component {
         theme={theme}
         setComponentUrl={setComponentUrl}
         reLoad={this.reLoad}
-        isLoaded={this.state.isLoaded}
       />
     );
   };
