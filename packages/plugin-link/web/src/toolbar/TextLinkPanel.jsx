@@ -2,7 +2,6 @@ import { Component } from 'react';
 import PropTypes from 'prop-types';
 import { isEmpty } from 'lodash';
 import {
-  insertLinkAtCurrentSelection,
   getLinkDataInSelection,
   removeLinksInSelection,
   LinkPanelContainer,
@@ -40,10 +39,10 @@ export default class TextLinkPanel extends Component {
   }
 
   createLinkEntity = ({ url, targetBlank, nofollow }) => {
-    const { anchorTarget, relValue } = this.props;
+    const { anchorTarget, relValue, insertLinkFn } = this.props;
     if (!isEmpty(url)) {
       const { getEditorState, setEditorState } = this.props;
-      const newEditorState = insertLinkAtCurrentSelection(getEditorState(), {
+      const newEditorState = insertLinkFn(getEditorState(), {
         url,
         targetBlank,
         nofollow,
@@ -56,14 +55,15 @@ export default class TextLinkPanel extends Component {
   };
 
   deleteLink = () => {
-    const { getEditorState, setEditorState } = this.props;
+    const { getEditorState, setEditorState, commonPubsub } = this.props;
     const editorState = getEditorState();
     const newEditorState = removeLinksInSelection(editorState, setEditorState);
     setEditorState(newEditorState);
+    commonPubsub && commonPubsub.set('cursorOnInlinePlugin', null);
   };
 
   hideLinkPanel = () => {
-    this.props.onExtendContent(undefined);
+    this.props.onExtendContent?.(undefined);
     this.props.onOverrideContent(undefined);
   };
 
@@ -75,11 +75,13 @@ export default class TextLinkPanel extends Component {
 TextLinkPanel.propTypes = {
   getEditorState: PropTypes.func.isRequired,
   setEditorState: PropTypes.func.isRequired,
-  onExtendContent: PropTypes.func.isRequired,
+  onExtendContent: PropTypes.func,
   onOverrideContent: PropTypes.func.isRequired,
   theme: PropTypes.object.isRequired,
   anchorTarget: PropTypes.string,
   relValue: PropTypes.string,
   t: PropTypes.func,
   uiSettings: PropTypes.object,
+  insertLinkFn: PropTypes.func,
+  commonPubsub: PropTypes.object,
 };

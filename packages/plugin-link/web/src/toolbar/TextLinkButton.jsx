@@ -25,6 +25,8 @@ export default class TextLinkButton extends Component {
       relValue,
       t,
       uiSettings,
+      insertLinkFn,
+      commonPubsub,
     } = this.props;
     const modalStyles = getModalStyles({ fullScreen: false, isMobile });
     if (isMobile || linkModal) {
@@ -42,6 +44,8 @@ export default class TextLinkButton extends Component {
           modalName: EditorModals.MOBILE_TEXT_LINK_MODAL,
           hidePopup: helpers.closeModal,
           uiSettings,
+          insertLinkFn,
+          commonPubsub,
         };
         helpers.openModal(modalProps);
       } else {
@@ -59,6 +63,10 @@ export default class TextLinkButton extends Component {
         theme,
         t,
         uiSettings,
+        getEditorState,
+        setEditorState,
+        insertLinkFn,
+        commonPubsub,
       };
       const TextLinkPanelWithProps = decorateComponentWithProps(TextLinkPanel, linkPanelProps);
       onOverrideContent(TextLinkPanelWithProps);
@@ -70,7 +78,7 @@ export default class TextLinkButton extends Component {
   }
 
   render() {
-    const { theme, isMobile, t, tabIndex, config } = this.props;
+    const { theme, isMobile, t, tabIndex, config, isActive, icon: _icon } = this.props;
     const linkButtonTooltip = t('TextLinkButton_Tooltip');
     const buttonStyles = {
       button: theme.inlineToolbarButton,
@@ -78,11 +86,11 @@ export default class TextLinkButton extends Component {
       icon: theme.inlineToolbarButton_icon,
       active: theme.inlineToolbarButton_active,
     };
-    const icon = config?.LINK?.toolbar?.icons?.InsertPluginButtonIcon;
+    const icon = config?.LINK?.toolbar?.icons?.InsertPluginButtonIcon || _icon;
     return (
       <LinkButton
         onClick={this.showLinkPanel}
-        isActive={this.isActive}
+        isActive={isActive}
         theme={{ ...theme, ...buttonStyles }}
         isMobile={isMobile}
         tooltipText={linkButtonTooltip}
@@ -109,4 +117,8 @@ TextLinkButton.propTypes = {
   tabIndex: PropTypes.number,
   uiSettings: PropTypes.object,
   config: PropTypes.object,
+  isActive: PropTypes.bool,
+  insertLinkFn: PropTypes.func,
+  icon: PropTypes.func,
+  commonPubsub: PropTypes.object,
 };

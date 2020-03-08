@@ -2,11 +2,13 @@ import {
   createBasePlugin,
   insertLinkInPosition,
   fixPastedLinks,
+  hasLinksInSelection,
 } from 'wix-rich-content-editor-common';
 import {
   isValidUrl,
   // getUrlMatches,
 } from 'wix-rich-content-common';
+import { getVisibleSelectionRect } from 'draft-js';
 import { LINK_TYPE } from './types';
 import { Component } from './LinkComponent';
 import { linkEntityStrategy } from './strategy';
@@ -14,7 +16,7 @@ import createLinkToolbar from './toolbar/createLinkToolbar';
 
 const createLinkPlugin = (config = {}) => {
   const type = LINK_TYPE;
-  const { theme, anchorTarget, relValue, [type]: settings = {}, ...rest } = config;
+  const { theme, anchorTarget, relValue, [type]: settings = {}, commonPubsub, ...rest } = config;
   settings.minLinkifyLength = settings.minLinkifyLength || 6;
   const toolbar = createLinkToolbar(config);
 
@@ -40,6 +42,13 @@ const createLinkPlugin = (config = {}) => {
   };
 
   const onChange = editorState => {
+    const selection = editorState.getSelection();
+    if (hasLinksInSelection(editorState) && selection.isCollapsed()) {
+      const boundingRect = getVisibleSelectionRect(window);
+      commonPubsub.set('cursorOnInlinePlugin', { type, editorState, boundingRect });
+    } else {
+      commonPubsub.set('cursorOnInlinePlugin', null);
+    }
     if (isPasteChange(editorState)) {
       return fixPastedLinks(editorState, { anchorTarget, relValue });
     } else if (linkifyData) {
@@ -97,6 +106,7 @@ const createLinkPlugin = (config = {}) => {
       anchorTarget,
       relValue,
       settings,
+      commonPubsub,
       ...rest,
     },
     { decorators, handleBeforeInput, handleReturn, onChange }

@@ -4,3 +4,15 @@
   color: $accent-color;
   text-decoration: none;
 }
+
+.toolbarUrlContainer {
+  display: flex;
+}
+
+.toolbarUrl {
+  color: $accent-color;
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

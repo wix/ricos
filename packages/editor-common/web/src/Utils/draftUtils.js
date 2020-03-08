@@ -26,6 +26,15 @@ export const insertLinkInPosition = (
   });
 };
 
+export const updateLinkAtCurrentSelection = (editorState, data) => {
+  const selection = getSelection(editorState);
+  const editorStateWithLink = updateLink(selection, editorState, data);
+  return EditorState.forceSelection(
+    editorStateWithLink,
+    selection.merge({ anchorOffset: selection.focusOffset })
+  );
+};
+
 export const insertLinkAtCurrentSelection = (editorState, data) => {
   let selection = getSelection(editorState);
   let newEditorState = editorState;
@@ -37,10 +46,7 @@ export const insertLinkAtCurrentSelection = (editorState, data) => {
   }
   let editorStateWithLink;
   if (isSelectionBelongsToExsistingLink(newEditorState, selection)) {
-    const blockKey = selection.getStartKey();
-    const block = newEditorState.getCurrentContent().getBlockForKey(blockKey);
-    const entityKey = block.getEntityAt(selection.getStartOffset());
-    editorStateWithLink = setEntityData(newEditorState, entityKey, createLinkEntityData(data));
+    editorStateWithLink = updateLink(selection, newEditorState, data);
   } else {
     editorStateWithLink = insertLink(newEditorState, selection, data);
   }
@@ -57,6 +63,13 @@ function isSelectionBelongsToExsistingLink(editorState, selection) {
   return getSelectedLinks(editorState).find(({ range }) => {
     return range[0] <= startOffset && range[1] >= endOffset;
   });
+}
+
+function updateLink(selection, editorState, data) {
+  const blockKey = selection.getStartKey();
+  const block = editorState.getCurrentContent().getBlockForKey(blockKey);
+  const entityKey = block.getEntityAt(selection.getStartOffset());
+  return setEntityData(editorState, entityKey, createLinkEntityData(data));
 }
 
 function insertLink(editorState, selection, data) {

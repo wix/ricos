@@ -58,6 +58,7 @@ export { simplePubsub } from './Utils/simplePubsub';
 export { getModalStyles, getBottomToolbarModalStyles } from './Utils/getModalStyles';
 
 export {
+  updateLinkAtCurrentSelection,
   insertLinkAtCurrentSelection,
   insertLinkInPosition,
   hasLinksInBlock,

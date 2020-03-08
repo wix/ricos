@@ -247,7 +247,8 @@ class RichContentEditor extends Component {
     ];
     //eslint-disable-next-line array-callback-return
     const toolbars = this.plugins.map((plugin, index) => {
-      const Toolbar = plugin.Toolbar || plugin.InlineToolbar || plugin.SideToolbar;
+      const Toolbar =
+        plugin.Toolbar || plugin.InlinePluginToolbar || plugin.InlineToolbar || plugin.SideToolbar;
       if (Toolbar) {
         if (includes(toolbarsToIgnore, plugin.name)) {
           return null;

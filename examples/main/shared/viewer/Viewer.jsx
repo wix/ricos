@@ -63,7 +63,7 @@ export default class Viewer extends PureComponent {
       seoMode,
     };
 
-    return (
+    return [
       <div id="rich-content-viewer" className="viewer">
         <RichContentViewer
           helpers={this.helpers}

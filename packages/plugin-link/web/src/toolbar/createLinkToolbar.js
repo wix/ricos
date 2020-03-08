@@ -1,10 +1,13 @@
+import React from 'react';
 import {
   MODIFIERS,
   hasLinksInSelection,
   removeLinksInSelection,
   EditorModals,
   getModalStyles,
+  insertLinkAtCurrentSelection,
 } from 'wix-rich-content-editor-common';
+import createInlineButtons from './inline-buttons';
 import TextLinkButton from './TextLinkButton';
 
 const openLinkModal = ({
@@ -46,7 +49,14 @@ const openLinkModal = ({
 export default config => ({
   TextButtonMapper: () => ({
     Link: {
-      component: TextLinkButton,
+      component: props => (
+        <TextLinkButton
+          insertLinkFn={insertLinkAtCurrentSelection}
+          isActive={hasLinksInSelection(config.getEditorState())}
+          commonPubsub={config.commonPubsub}
+          {...props}
+        />
+      ),
       isMobile: true,
       position: { mobile: 5 },
       keyBindings: [
@@ -67,4 +77,6 @@ export default config => ({
       ],
     },
   }),
+  InlinePluginToolbarButtons: createInlineButtons(config),
+  name: 'link',
 });

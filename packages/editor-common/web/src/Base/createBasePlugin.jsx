@@ -1,6 +1,7 @@
 import { includes } from 'lodash';
 import createBaseComponent from './createBaseComponent';
 import createToolbar from './createBaseToolbar';
+import createInlinePluginToolbar from './createInlinePluginToolbar';
 import createInsertPluginButton from './createBaseInsertPluginButton';
 import { deleteBlock, setEntityData } from '../Utils/draftUtils';
 import { simplePubsub } from '../Utils/simplePubsub';
@@ -50,6 +51,36 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
   } = config;
   defaultPluginData && (pluginDefaults[config.type] = defaultPluginData);
   const toolbarTheme = { ...getToolbarTheme(config.theme, 'plugin'), ...config.theme };
+  const InlinePluginToolbar =
+    config?.toolbar?.InlinePluginToolbarButtons &&
+    createInlinePluginToolbar({
+      buttons: {
+        all: config.toolbar.InlinePluginToolbarButtons,
+        hidden: settings?.toolbar?.hidden || [],
+      },
+      theme: { ...toolbarTheme, ...config.theme },
+      commonPubsub,
+      pubsub,
+      helpers,
+      settings,
+      isMobile,
+      anchorTarget,
+      relValue,
+      t,
+      name: config?.toolbar?.name,
+      uiSettings: config.uiSettings,
+      getToolbarSettings: config.getToolbarSettings,
+      getEditorBounds,
+      initialIntent,
+      languageDir,
+      locale,
+      shouldRenderOptimizedImages,
+      siteDomain,
+      setInPluginEditingMode,
+      getInPluginEditingMode,
+      getEditorState,
+      setEditorState,
+    });
   const Toolbar =
     config?.toolbar?.InlineButtons &&
     createToolbar({
@@ -169,6 +200,7 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
   };
 
   const commonProps = {
+    InlinePluginToolbar,
     Toolbar,
     InsertPluginButtons,
     InlineModals,
