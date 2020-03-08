@@ -46,11 +46,11 @@ const editorEntry = {
   watch,
 };
 
-let libEntries;
+const libEntries = [];
 try {
   let libEntriesPath = 'src/lib/';
   fs.readdirSync(`./${libEntriesPath}`).forEach(file => {
-    libEntries = {
+    libEntries.push({
       input: libEntriesPath + file,
       output: cloneDeep(output).map(o => ({
         ...o,
@@ -59,7 +59,7 @@ try {
       plugins,
       external,
       watch,
-    };
+    });
   });
 } catch (_) { }
 
@@ -80,13 +80,10 @@ try {
   };
 } catch (_) { }
 
-let config = [editorEntry];
+let config = [editorEntry, ...libEntries];
 
 if (viewerEntry) {
   config.push(viewerEntry);
-}
-if (libEntries) {
-  config.push(libEntries);
 }
 config.forEach(c => c.inlineDynamicImports = true)
 
