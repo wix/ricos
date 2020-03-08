@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { SearchIcon, ClearIcon } from '../Icons';
+import { SearchIcon, ClearIcon } from 'wix-rich-content-editor-common/src/Icons';
 import { mergeStyles } from 'wix-rich-content-common';
-import textInputStyles from '../../statics/styles/text-search-input.scss';
+import textInputStyles from '../../../../editor-common/web/statics/styles/text-search-input.scss';
+import { TEXT_SEARCH_INPUT_ID } from './consts';
 
 export default class TextSearchInput extends Component {
   constructor(props) {
@@ -50,6 +51,7 @@ export default class TextSearchInput extends Component {
           onKeyPress={this.handleKeyPress}
           onChange={this.onChange}
           value={this.state.searchTag}
+          id={TEXT_SEARCH_INPUT_ID}
         />
         {searchTag && (
           <ClearIcon className={styles.textInput_suffixIcon} onClick={this.handleClearText} />

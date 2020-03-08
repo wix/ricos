@@ -6,6 +6,7 @@ import { PlusIcon, PlusActiveIcon } from '../../Icons';
 import Styles from '../../../../statics/styles/side-toolbar.scss';
 import SideToolbarPanelContent from './SideToolbarPanelContent';
 import PopupOffsetnHoc from './PopupOffsetnHoc';
+import { TEXT_SEARCH_INPUT_ID } from '../../consts';
 
 export default class AddPluginFloatingToolbar extends Component {
   state = {
@@ -87,16 +88,19 @@ export default class AddPluginFloatingToolbar extends Component {
   };
 
   showPopup = () => {
-    this.setState({
-      style: {
-        ...this.getPopupOffset(),
-        transform: 'translate(-50%) scale(1)',
-        transition: 'transform 0.15s cubic-bezier(.3,1.2,.2,1)',
-        width: this.popup.offsetWidth,
+    this.setState(
+      {
+        style: {
+          ...this.getPopupOffset(),
+          transform: 'translate(-50%) scale(1)',
+          transition: 'transform 0.15s cubic-bezier(.3,1.2,.2,1)',
+          width: this.popup.offsetWidth,
+        },
+        isActive: true,
+        tabIndex: 0,
       },
-      isActive: true,
-      tabIndex: 0,
-    });
+      () => setTimeout(() => document.getElementById(TEXT_SEARCH_INPUT_ID).focus(), 100)
+    );
   };
 
   hidePopup = () => {
