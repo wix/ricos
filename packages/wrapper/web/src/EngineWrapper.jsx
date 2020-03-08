@@ -35,7 +35,7 @@ class EngineWrapper extends React.Component {
       const result = strategyFunction(props);
       return { ...props, ...result };
     }, children.props);
-    const { helpers = {}, theme, locale = 'en', ModalsMap, editorState } = modifiedProps;
+    const { helpers = {}, theme, locale = 'en', ModalsMap } = modifiedProps;
     const { onRequestClose } = modalState.modalProps || {};
     if (ModalComp) {
       helpers.openModal = onModalOpen;
@@ -48,7 +48,7 @@ class EngineWrapper extends React.Component {
       Fullscreen = React.lazy(() => import('wix-rich-content-fullscreen'));
       if (!this.expandModeData) {
         import('wix-rich-content-fullscreen/src/lib/getImagesData').then(getImagesData => {
-          this.expandModeData = getImagesData.default(editorState);
+          this.expandModeData = getImagesData.default(children.props.initialState);
         });
       }
     }
@@ -74,7 +74,7 @@ class EngineWrapper extends React.Component {
           <Suspense fallback={<div />}>
             <Fullscreen
               isOpen={expendModeIsOpen}
-              images={this.expandModeData?.expandModeData.images || []}
+              images={this.expandModeData?.images || []}
               onClose={() => this.setState({ expendModeIsOpen: false })}
               index={expandModeIndex}
             />
