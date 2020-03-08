@@ -22,7 +22,6 @@ class VideoComponent extends React.Component {
     super(props);
     const isPlayable = !props.blockProps;
     this.state = {
-      isLoading: false,
       isLoaded: false,
       isPlayable,
     };
@@ -72,6 +71,12 @@ class VideoComponent extends React.Component {
     );
   };
 
+  reLoad = () => {
+    if (this.state.isLoaded) {
+      this.setState({ isLoaded: false });
+    }
+  };
+
   renderPlayer = () => {
     const {
       theme,
@@ -91,6 +96,8 @@ class VideoComponent extends React.Component {
         disableRightClick={disableRightClick}
         theme={theme}
         setComponentUrl={setComponentUrl}
+        reLoad={this.reLoad}
+        isLoaded={this.state.isLoaded}
       />
     );
   };
