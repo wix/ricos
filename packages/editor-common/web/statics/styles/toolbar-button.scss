@@ -22,7 +22,8 @@
   pointer-events: initial;
   cursor: pointer;
 
-  &:focus:not([disabled]) {
+  &.buttonHover:hover:not([disabled]),
+  &.buttonHover:focus:not([disabled]) {
     .icon {
       cursor: pointer;
       color: $accent-color;
@@ -81,6 +82,13 @@
     height: 100%;
     box-sizing: border-box;
     padding: 22px 0;
+    &:focus:not([disabled]) {
+      .icon {
+        cursor: pointer;
+        color: $accent-color;
+        @include svg-fill;
+      }
+    }
   }
 
   .icon {

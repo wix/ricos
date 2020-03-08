@@ -160,7 +160,11 @@ export default ({
         <WrappingComponent
           aria-label={`Add ${name}`}
           tabIndex={tabIndex}
-          className={classNames(styles.button, button.type === 'file' && styles.fileUploadButton)}
+          className={classNames(
+            styles.button,
+            button.type === 'file' && styles.fileUploadButton,
+            !showName && styles.buttonHover
+          )}
           data-hook={`${name.replace(' ', '_')}_insert_plugin_button`}
           onClick={this.onClick}
           ref={this.buttonRef}
@@ -170,9 +174,9 @@ export default ({
             <Icon key="0" />
           </div>
           {showName && (
-            <div key="1" className={styles.label}>
+            <span key="1" className={styles.label}>
               {name}
-            </div>
+            </span>
           )}
         </WrappingComponent>
       );

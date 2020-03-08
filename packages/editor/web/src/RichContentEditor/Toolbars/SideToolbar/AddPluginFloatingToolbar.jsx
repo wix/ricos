@@ -5,6 +5,7 @@ import { FocusManager, EditorModals, getModalStyles } from 'wix-rich-content-edi
 import { PlusIcon, PlusActiveIcon } from '../../Icons';
 import Styles from '../../../../statics/styles/side-toolbar.scss';
 import SideToolbarPanelContent from './SideToolbarPanelContent';
+import PopupOffsetnHoc from './PopupOffsetnHoc';
 
 export default class AddPluginFloatingToolbar extends Component {
   state = {
@@ -16,6 +17,7 @@ export default class AddPluginFloatingToolbar extends Component {
   };
 
   id = 'side_bar';
+  addButtonId = 'addPluginFloatingToolbar';
 
   componentDidMount() {
     window.addEventListener('click', this.onWindowClick);
@@ -45,7 +47,7 @@ export default class AddPluginFloatingToolbar extends Component {
     helpers.openModal({
       modalName: EditorModals.MOBILE_ADD_PLUGIN,
       modalStyles: getModalStyles({ fullScreen: false, isMobile }),
-      structure: structure.map(Component => ({ component: Component })),
+      structure: structure.map(Button => ({ component: Button })),
       theme,
       hidePopup: helpers.closeModal,
       getEditorState,
@@ -134,6 +136,29 @@ export default class AddPluginFloatingToolbar extends Component {
       Styles.sideToolbar,
       toolbarStyles && toolbarStyles.sideToolbar
     );
+
+    const SideToolbarPanel = ({ top }) => {
+      return (
+        <div
+          id={this.id}
+          className={popoupClassNames}
+          style={{ ...this.state.style, top }}
+          ref={el => (this.popup = el)}
+          onClick={e => e.stopPropagation()}
+          role="none"
+        >
+          <SideToolbarPanelContent
+            t={t}
+            theme={theme}
+            getEditorState={getEditorState}
+            setEditorState={setEditorState}
+            structure={structure}
+            hidePopup={this.hidePopup}
+          />
+        </div>
+      );
+    };
+
     return (
       <FocusManager
         role="toolbar"
@@ -151,29 +176,21 @@ export default class AddPluginFloatingToolbar extends Component {
           aria-pressed={this.state.isActive}
           tabIndex="0"
           className={floatingIconClassNames}
-          data-hook="addPluginFloatingToolbar"
+          data-hook={this.addButtonId}
           onClick={this.onClick}
           ref={el => (this.selectButton = el)}
+          id={this.addButtonId}
         >
           {!this.state.isActive ? <PlusIcon /> : <PlusActiveIcon />}
         </button>
-        <div
-          id={this.id}
-          className={popoupClassNames}
-          style={this.state.style}
-          ref={el => (this.popup = el)}
-          onClick={e => e.stopPropagation()}
-          role="none"
+        <PopupOffsetnHoc
+          elementHeight={400}
+          elementMarginTop={-20}
+          elementMarginBottom={45}
+          elementId={this.addButtonId}
         >
-          <SideToolbarPanelContent
-            t={t}
-            theme={theme}
-            getEditorState={getEditorState}
-            setEditorState={setEditorState}
-            structure={structure}
-            hidePopup={this.hidePopup}
-          />
-        </div>
+          <SideToolbarPanel />
+        </PopupOffsetnHoc>
       </FocusManager>
     );
   }

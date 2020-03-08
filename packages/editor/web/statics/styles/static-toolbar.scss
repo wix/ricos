@@ -35,7 +35,7 @@
 
 .staticToolbar_buttons {
   display: flex;
-  width: auto;
+  width: max-content;
   height: 50px;
   max-width: 100%;
   align-items: center;
@@ -72,8 +72,8 @@
   outline: none;
 }
 
-.staticToolbarWrapper{
-  position: sticky; 
+.staticToolbarWrapper {
+  position: sticky;
   top: 0;
-  z-Index: 2; 
+  z-index: 2;
 }
