@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
 import { RichContentEditor, RichContentEditorModal } from 'wix-rich-content-editor';
-import { getFakeLoadingPercent } from 'wix-rich-content-editor-common';
 import { convertToRaw } from 'draft-js';
 import * as PropTypes from 'prop-types';
 import ReactModal from 'react-modal';
@@ -24,8 +23,6 @@ const modalStyleDefaults = {
 const anchorTarget = '_blank';
 const relValue = 'noopener';
 let shouldMultiSelectImages = false;
-const wixImagesUrl = 'https://static.wixstatic.com/media/';
-
 export default class Editor extends PureComponent {
   state = {};
   constructor(props) {
@@ -58,38 +55,24 @@ export default class Editor extends PureComponent {
     };
     this.helpers = {
       ...debugBiLoggers,
-      // onFilesChange: (files, updateEntity) => mockUpload(files, updateEntity),
-      handleFileSelection: (index, multiple, updateEntity, removeEntity, componentData) => {
-        const count = componentData.items || shouldMultiSelectImages ? [1, 2, 3] : [1];
-        const data = [];
-        count.forEach(_ => {
-          const testItem = testImages[Math.floor(Math.random() * testImages.length)];
-          data.push({
-            id: testItem.photoId,
-            original_file_name: testItem.url,
-            file_name: testItem.url,
-            width: testItem.metadata.width,
-            height: testItem.metadata.height,
-          });
-        });
-        setTimeout(() => {
-          updateEntity({ data });
-        }, 500);
-      },
-      // onProgressChange: getFakeLoadingPercent,
-      onProgressChange: updatePercentage => {
-        let percent = 0;
-        const mockImageIndex = this.props.mockImageIndex || 0;
-        const testImageUrl = wixImagesUrl + testImages[mockImageIndex].url;
-        // updatePercentage(percent, testImageUrl);
-        updatePercentage(percent);
-        const interval = setInterval(() => {
-          // updatePercentage(percent, testImageUrl);
-          updatePercentage(percent);
-          percent += 10;
-          if (percent === 110) clearInterval(interval);
-        }, 50);
-      },
+      onFilesChange: (files, updateEntity) => mockUpload(files, updateEntity),
+      // handleFileSelection: (index, multiple, updateEntity, removeEntity, componentData) => {
+      //   const count = componentData.items || shouldMultiSelectImages ? [1, 2, 3] : [1];
+      //   const data = [];
+      //   count.forEach(_ => {
+      //     const testItem = testImages[Math.floor(Math.random() * testImages.length)];
+      //     data.push({
+      //       id: testItem.photoId,
+      //       original_file_name: testItem.url,
+      //       file_name: testItem.url,
+      //       width: testItem.metadata.width,
+      //       height: testItem.metadata.height,
+      //     });
+      //   });
+      //   setTimeout(() => {
+      //     updateEntity({ data });
+      //   }, 500);
+      // },
       onVideoSelected: (url, updateEntity) => {
         setTimeout(() => {
           const mockVideoIndex =

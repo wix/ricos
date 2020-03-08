@@ -73,9 +73,6 @@ Cypress.Commands.add('loadEditorAndViewer', fixtureName => {
     disableTransitions();
     hideAllTooltips();
   });
-  if (fixtureName?.includes?.('gallery')) {
-    cy.wait(2000);
-  }
 });
 
 Cypress.Commands.add('loadEditorAndViewerOnSsr', fixtureName => {
@@ -355,14 +352,6 @@ Cypress.Commands.add('alignImage', alignment => {
 });
 
 Cypress.Commands.add('openPluginToolbar', plugin => {
-  //Wait for loader to finish loading
-  if (
-    plugin === PLUGIN_COMPONENT.GALLERY ||
-    plugin === PLUGIN_COMPONENT.IMAGE ||
-    plugin === PLUGIN_COMPONENT.VIDEO
-  ) {
-    cy.wait(3000);
-  }
   cy.get(`[data-hook*=${plugin}]`)
     .first()
     .parent()
