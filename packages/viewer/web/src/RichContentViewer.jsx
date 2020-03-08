@@ -25,9 +25,9 @@ class RichContentViewer extends Component {
   static getInitialState = props =>
     props.initialState
       ? normalizeInitialState(props.initialState, {
-        anchorTarget: props.anchorTarget,
-        relValue: props.relValue,
-      })
+          anchorTarget: props.anchorTarget,
+          relValue: props.relValue,
+        })
       : {};
 
   getContextualData = ({
