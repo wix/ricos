@@ -19,11 +19,10 @@ import {
   TOOLBARS,
   getBlockInfo,
   getFocusedBlockKey,
-} from 'wix-rich-content-editor-common';
-import {
   calculateDiff,
   getPostContentSummary,
-} from 'wix-rich-content-editor-common/src/Utils/draftUtils';
+} from 'wix-rich-content-editor-common';
+
 import {
   AccessibilityListener,
   normalizeInitialState,
@@ -207,9 +206,9 @@ class RichContentEditor extends Component {
       calculateDiff(this.state.editorState, editorState, (...args) =>
         onPluginDelete(...args, Version.currentVersion)
       );
-      this.setEditorState(editorState);
-      this.props.onChange && this.props.onChange(editorState);
     }
+    this.setEditorState(editorState);
+    this.props.onChange && this.props.onChange(editorState);
   };
 
   getCustomCommandHandlers = () => ({
