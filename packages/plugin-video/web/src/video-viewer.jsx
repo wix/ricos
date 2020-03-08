@@ -12,7 +12,7 @@ class VideoViewer extends Component {
   constructor(props) {
     super(props);
     validate(props.componentData, pluginVideoSchema);
-    this.state = { url: undefined };
+    this.state = { url: undefined, isLoaded: false };
     const url = getVideoSrc(props.componentData.src, props.settings);
     if (typeof url === 'string') {
       this.state = { url: this.normalizeUrl(url) };
@@ -38,8 +38,7 @@ class VideoViewer extends Component {
   setUrl = newUrl => {
     const url = this.normalizeUrl(newUrl);
     if (url !== this.state.url) {
-      this.setState({ url });
-      this.props.reLoad?.();
+      this.setState({ url, isLoaded: true });
     }
   };
   componentDidMount() {
@@ -59,7 +58,8 @@ class VideoViewer extends Component {
     const ratio = this.getVideoRatio(wrapper);
     wrapper.style['padding-bottom'] = ratio * 100 + '%';
 
-    if (!this.props.isLoaded && !this.props.componentData.tempData) {
+    if (!this.state.isLoaded && !this.props.componentData.tempData) {
+      this.setState({ isLoaded: true });
       this.props.onReady?.();
     }
   };
@@ -69,7 +69,7 @@ class VideoViewer extends Component {
   render() {
     const { theme, controls, width, height, disabled, setComponentUrl } = this.props;
     this.styles = this.styles || mergeStyles({ styles, theme });
-    const { url, key } = this.state;
+    const { url, key, isLoaded } = this.state;
     setComponentUrl?.(url);
     const props = {
       url,
@@ -85,7 +85,7 @@ class VideoViewer extends Component {
           className={classNames(this.styles.video_player)}
           onContextMenu={this.handleContextMenu}
           key={key}
-          data-loaded={this.props.isLoaded}
+          data-loaded={isLoaded}
           {...props}
         />
       </>
@@ -105,8 +105,6 @@ VideoViewer.propTypes = {
   disableRightClick: PropTypes.bool,
   setComponentUrl: PropTypes.func,
   onReady: PropTypes.func,
-  reLoad: PropTypes.func,
-  isLoaded: PropTypes.bool,
 };
 
 VideoViewer.defaultProps = {
