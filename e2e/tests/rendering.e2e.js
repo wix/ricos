@@ -9,8 +9,6 @@ const testFixture = fixture =>
       cy.waitForVideoToLoad();
     } else if (fixture.includes('html')) {
       cy.waitForHtmlToLoad();
-    } else if (fixture.includes('gallery')) {
-      cy.wait(3000);
     }
     cy.eyesCheckWindow(this.test.title);
   });
