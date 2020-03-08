@@ -10,9 +10,8 @@ const styleLoader = {
 
 class Loader extends React.Component {
   state = {};
-
   componentDidMount() {
-    this.props?.helpers?.onProgressChange?.(this.updateProgress);
+    this.getInfiniteLoadingPercent(this.updatePercentage);
   }
 
   initiateStyles() {
@@ -21,13 +20,26 @@ class Loader extends React.Component {
       this.styles = mergeStyles({ styles, theme });
     }
   }
-  updateProgress = (progress, localUrl) => {
+
+  updatePercentage = (progress, localUrl) => {
     this.setState({ progress, localUrl });
     if (progress >= 100) {
       this.props?.onLoad?.(false);
-    } else {
-      this.props?.onLoad?.(true);
     }
+  };
+
+  getInfiniteLoadingPercent = updatePercentage => {
+    let percent = 1;
+    updatePercentage(percent);
+    const interval = setInterval(() => {
+      updatePercentage(percent);
+      percent += 1;
+      if (percent === 100) clearInterval(interval);
+    }, 30);
+  };
+
+  setLocalUrl = localUrl => {
+    this.setState({ localUrl });
   };
 
   renderProgress() {
@@ -60,7 +72,7 @@ class Loader extends React.Component {
             [this.styles[this.props.type]]: this.props.type,
           })}
         />
-        {typeof this.state.progress === 'number' && this.renderProgress()}
+        {this.renderProgress()}
       </div>
     );
   }

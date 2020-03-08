@@ -58,9 +58,6 @@ export { getToolbarTheme } from './Utils/getToolbarTheme';
 export { simplePubsub } from './Utils/simplePubsub';
 export { getModalStyles, getBottomToolbarModalStyles } from './Utils/getModalStyles';
 
-//lib
-export { getFakeLoadingPercent } from './lib/loaderUtils';
-
 export {
   insertLinkAtCurrentSelection,
   insertLinkInPosition,

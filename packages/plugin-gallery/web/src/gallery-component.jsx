@@ -12,7 +12,7 @@ const EMPTY_SMALL_PLACEHOLDER =
 class GalleryComponent extends PureComponent {
   constructor(props) {
     super(props);
-    this.state = { ...this.stateFromProps(props), isLoading: true };
+    this.state = this.stateFromProps(props);
 
     const { block, store, commonPubsub } = this.props;
     this.blockKey = block.getKey();
@@ -38,26 +38,26 @@ class GalleryComponent extends PureComponent {
       !isEqual(componentState, nextProps.componentState)
     ) {
       this.setState(this.stateFromProps(nextProps));
-    }
+    } else if (componentData.items?.length > 0) this.onLoad(false);
   }
 
   stateFromProps = props => {
     const items = props.componentData.items || []; // || DEFAULTS.items;
     const styles = { ...DEFAULTS.styles, ...(props.componentData.styles || {}) };
-    const lengthLeft = (props.componentState && props.componentState.isLoading) || 0;
+    const itemsLeftToUpload = props.componentState?.isLoading || 0;
     const state = {
       items,
       styles,
-      lengthLeft,
+      itemsLeftToUpload,
     };
 
     if (props.componentState) {
       const { userSelectedFiles } = props.componentState;
-      if (lengthLeft <= 0 && userSelectedFiles) {
+      if (itemsLeftToUpload <= 0 && userSelectedFiles) {
         //lets continue the uploading process
         if (userSelectedFiles.files && userSelectedFiles.files.length > 0) {
-          state.lengthLeft = userSelectedFiles.files.length;
-          this.handleFilesSelected(userSelectedFiles.files);
+          state.itemsLeftToUpload = userSelectedFiles.files.length;
+          state.isLoading = this.handleFilesSelected(userSelectedFiles.files);
         }
         if (this.props.store) {
           setTimeout(() => {
@@ -106,9 +106,10 @@ class GalleryComponent extends PureComponent {
       reader.onload = e => this.fileLoaded(e, file, itemPos);
       reader.readAsDataURL(file);
     });
-    if (!this.state?.isLoading) {
-      this.setState({ isLoading: true });
+    if (this.state) {
+      this.onLoad(true);
     }
+    return { isLoading: true };
   };
 
   imageLoaded = (event, file, itemPos) => {
@@ -166,10 +167,12 @@ class GalleryComponent extends PureComponent {
   };
 
   onLoad = isLoading => {
-    this.setState({ isLoading });
+    if ((!this?.state?.isLoading && isLoading) || (this?.state?.isLoading && !isLoading)) {
+      this.setState({ isLoading });
+    }
   };
 
-  isLoadingProgress = () => this.state.isLoading && this.props.helpers?.onProgressChange;
+  isLoadingProgress = () => this.state.isLoading;
 
   render() {
     const gallery = (
