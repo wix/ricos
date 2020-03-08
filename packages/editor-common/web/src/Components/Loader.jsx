@@ -35,7 +35,7 @@ class Loader extends React.Component {
       updatePercentage(percent);
       percent += 1;
       if (percent === 100) clearInterval(interval);
-    }, 30);
+    }, 3500);
   };
 
   setLocalUrl = localUrl => {
