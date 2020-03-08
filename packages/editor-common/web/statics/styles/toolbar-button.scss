@@ -4,7 +4,6 @@
 
 .buttonWrapper {
   position: relative;
-  display: inline-block;
   width: 100%;
 
   &:last-child {
@@ -21,6 +20,12 @@
   width: 100%;
   pointer-events: initial;
   cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 
   &.buttonHover:hover:not([disabled]),
   &.buttonHover:focus:not([disabled]) {
@@ -41,7 +46,6 @@
 
 .fileUploadButton {
   padding: 0 7px;
-  display: inline-block;
   font-family: Helvetica;
   font-weight: normal;
   line-height: inherit;
