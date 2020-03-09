@@ -129,6 +129,6 @@ EngineWrapper.propTypes = {
   onModalClose: PropTypes.func,
   children: PropTypes.object,
   editor: PropTypes.bool,
-  withModal: PropTypes.bool,
+  withModal: PropTypes.oneOf([PropTypes.bool, PropTypes.object]),
 };
 export default EngineWrapper;

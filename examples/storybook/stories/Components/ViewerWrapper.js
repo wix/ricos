@@ -71,7 +71,7 @@ const plugins = [
 ];
 const ViewerWrapper = ({ contentState, palette }) => {
   return (
-    <RichContentWrapper plugins={plugins} theme={'Palette'} palette={palette} withModal>
+    <RichContentWrapper plugins={plugins} theme={'Palette'} palette={palette}>
       <RichContentViewer initialState={contentState} />
     </RichContentWrapper>
   );

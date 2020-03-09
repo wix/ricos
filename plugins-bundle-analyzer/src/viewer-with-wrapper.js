@@ -1,5 +1,5 @@
 import React from 'react';
-import { RichContentWrapper } from 'wix-rich-content-wrapper/dist/lib/RichContentWrapper';
+import { RichContentWrapper } from 'wix-rich-content-wrapper';
 import { htmlTypeMapper } from 'wix-rich-content-plugin-html/dist/module.viewer.js';
 //import { pluginButton } from 'wix-rich-content-plugin-button/dist/module.viewer.js';
 import { imageTypeMapper } from 'wix-rich-content-plugin-image/dist/module.viewer.js';
