@@ -39,7 +39,7 @@ export default class RemoveLinkButton extends Component {
 RemoveLinkButton.propTypes = {
   getEditorState: PropTypes.func.isRequired,
   setEditorState: PropTypes.func.isRequired,
-  onExtendContent: PropTypes.func.isRequired,
+  onExtendContent: PropTypes.func,
   onOverrideContent: PropTypes.func.isRequired,
   theme: PropTypes.object.isRequired,
   isMobile: PropTypes.bool,

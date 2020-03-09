@@ -104,7 +104,8 @@ export default function createInlinePluginToolbar({
     cursorIsOnInlinePlugin = () => {
       if (
         commonPubsub.get('cursorOnInlinePlugin') &&
-        commonPubsub.get('cursorOnInlinePlugin').boundingRect
+        commonPubsub.get('cursorOnInlinePlugin').boundingRect &&
+        name.toUpperCase() === commonPubsub.get('cursorOnInlinePlugin').type
       ) {
         this.showToolbar();
       } else if (!commonPubsub.get('cursorOnInlinePlugin')) {
@@ -164,10 +165,7 @@ export default function createInlinePluginToolbar({
     };
 
     showToolbar = () => {
-      if (
-        !this.visibilityFn() ||
-        name.toUpperCase() !== commonPubsub.get('cursorOnInlinePlugin').type
-      ) {
+      if (!this.visibilityFn()) {
         return;
       }
 
@@ -213,17 +211,9 @@ export default function createInlinePluginToolbar({
         settings: button.settings,
         pubsub,
       };
-      const preventDefault = event => event.preventDefault();
       if (button.component) {
         const Button = button.component;
-        return (
-          <Button
-            onMouseDown={preventDefault}
-            t={t}
-            theme={themedStyle}
-            onOverrideContent={this.onOverrideContent}
-          />
-        );
+        return <Button t={t} theme={themedStyle} onOverrideContent={this.onOverrideContent} />;
       }
       switch (button.type) {
         case BUTTONS.SEPARATOR:

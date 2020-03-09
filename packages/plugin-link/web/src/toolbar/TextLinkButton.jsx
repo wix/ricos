@@ -104,7 +104,7 @@ export default class TextLinkButton extends Component {
 TextLinkButton.propTypes = {
   getEditorState: PropTypes.func.isRequired,
   setEditorState: PropTypes.func.isRequired,
-  onExtendContent: PropTypes.func.isRequired,
+  onExtendContent: PropTypes.func,
   onOverrideContent: PropTypes.func.isRequired,
   theme: PropTypes.object.isRequired,
   isMobile: PropTypes.bool,
