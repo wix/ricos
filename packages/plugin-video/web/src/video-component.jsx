@@ -48,7 +48,7 @@ class VideoComponent extends React.Component {
   }
 
   handleReady = () => {
-    if (!this.state.isLoaded) {
+    if (!this.state.isLoaded && !this.props.componentData.tempData) {
       this.setState({ isLoaded: true });
     }
   };
@@ -97,6 +97,7 @@ class VideoComponent extends React.Component {
         theme={theme}
         setComponentUrl={setComponentUrl}
         reLoad={this.reLoad}
+        isLoaded={this.state.isLoaded}
       />
     );
   };

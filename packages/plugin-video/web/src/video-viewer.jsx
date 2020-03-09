@@ -38,7 +38,8 @@ class VideoViewer extends Component {
   setUrl = newUrl => {
     const url = this.normalizeUrl(newUrl);
     if (url !== this.state.url) {
-      this.setState({ url, isLoaded: true });
+      this.setState({ url });
+      this.props.reLoad?.();
     }
   };
   componentDidMount() {
@@ -57,10 +58,8 @@ class VideoViewer extends Component {
     const wrapper = ReactDOM.findDOMNode(this).parentNode;
     const ratio = this.getVideoRatio(wrapper);
     wrapper.style['padding-bottom'] = ratio * 100 + '%';
-
-    if (!this.state.isLoaded && !this.props.componentData.tempData) {
-      this.setState({ isLoaded: true });
-      this.props.onReady?.();
+    if (!this.props.isLoaded) {
+      this.props.onReady?.() || this.setState({ isLoaded: true });
     }
   };
 
@@ -69,7 +68,8 @@ class VideoViewer extends Component {
   render() {
     const { theme, controls, width, height, disabled, setComponentUrl } = this.props;
     this.styles = this.styles || mergeStyles({ styles, theme });
-    const { url, key, isLoaded } = this.state;
+    const { url, key } = this.state;
+
     setComponentUrl?.(url);
     const props = {
       url,
@@ -79,6 +79,8 @@ class VideoViewer extends Component {
       height,
       controls,
     };
+
+    const isLoaded = this.props.isLoaded ? this.props.isLoaded : this.state.isLoaded;
     return (
       <>
         <ReactPlayerWrapper
@@ -105,6 +107,8 @@ VideoViewer.propTypes = {
   disableRightClick: PropTypes.bool,
   setComponentUrl: PropTypes.func,
   onReady: PropTypes.func,
+  isLoaded: PropTypes.bool,
+  reLoad: PropTypes.func,
 };
 
 VideoViewer.defaultProps = {

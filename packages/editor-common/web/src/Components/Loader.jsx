@@ -10,10 +10,16 @@ const styleLoader = {
 
 class Loader extends React.Component {
   state = {};
+  _isMounted = false;
+
   componentDidMount() {
+    this._isMounted = true;
     this.getInfiniteLoadingPercent(this.updatePercentage);
   }
 
+  componentWillUnmount() {
+    this._isMounted = false;
+  }
   initiateStyles() {
     if (!this.styles) {
       const theme = this.props.theme;
@@ -22,9 +28,11 @@ class Loader extends React.Component {
   }
 
   updatePercentage = (progress, localUrl) => {
-    this.setState({ progress, localUrl });
-    if (progress >= 100) {
-      this.props?.onLoad?.(false);
+    if (this._isMounted) {
+      this.setState({ progress, localUrl });
+      if (progress >= 100) {
+        this.props?.onLoad?.(false);
+      }
     }
   };
 
@@ -39,7 +47,9 @@ class Loader extends React.Component {
   };
 
   setLocalUrl = localUrl => {
-    this.setState({ localUrl });
+    if (this._isMounted) {
+      this.setState({ localUrl });
+    }
   };
 
   renderProgress() {
