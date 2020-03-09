@@ -63,11 +63,11 @@ try {
   });
 } catch (_) { }
 
-let viewerEntry;
+let viewerEntry = [];
 try {
   let viewerPath = 'src/viewer.js';
   fs.accessSync(`./${viewerPath}`);
-  viewerEntry = {
+  viewerEntry.push({
     input: viewerPath,
     output: cloneDeep(output).map(o => {
       const anchor = o.file.indexOf('.');
@@ -77,7 +77,7 @@ try {
     plugins,
     external,
     watch,
-  };
+  });
 } catch (_) { }
 
-export default [editorEntry, viewerEntry, ...libEntries].filter(x => x);
+export default [editorEntry].concat(viewerEntry).concat(libEntries);
