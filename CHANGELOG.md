@@ -13,6 +13,10 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+- `hashtag`
+  - [#707](https://github.com/wix-incubator/rich-content/pull/707) allow hashtag and link in the same block
+  
 </details>
 <hr/>
 
