@@ -83,7 +83,7 @@ class EngineWrapper extends React.Component {
       shouldRenderFullscreen ? import(`wix-rich-content-fullscreen${dummy}`) : ''
     );
     if (shouldRenderFullscreen && !this.expandModeData) {
-      import('wix-rich-content-fullscreen/src/lib/getImagesData').then(getImagesData => {
+      import(`wix-rich-content-fullscreen/src/lib/getImagesData${dummy}`).then(getImagesData => {
         this.expandModeData = getImagesData.default(children.props.initialState);
       });
     }

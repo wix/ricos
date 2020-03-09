@@ -61,7 +61,6 @@ export default () => {
               </RichContentWrapper>
             </RichContentEditorBox>
             <RichContentViewerBox preset="blog-preset">
-              {/* <RichContentWrapper plugins={[pluginGalleryViewer()]}> */}
               <RichContentWrapper>
                 <RichContentViewer initialState={fixtrueV5} typeMappers={typeMappers} />
               </RichContentWrapper>
