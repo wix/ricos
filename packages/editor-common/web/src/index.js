@@ -76,7 +76,6 @@ export {
   deleteBlock,
   getCurrentBlock,
   getSelectedBlocks,
-  getLinkRangesInBlock,
   createEntity,
   createBlockAndFocus,
   createBlock,
