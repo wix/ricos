@@ -4,8 +4,7 @@ import { RichContentViewer } from 'wix-rich-content-viewer';
 
 import { galleryTypeMapper } from 'wix-rich-content-plugin-gallery/dist/module.viewer';
 import { pluginGallery as pluginGalleryEditor } from 'wix-rich-content-plugin-gallery';
-import { RichContentWrapper } from 'wix-rich-content-wrapper/dist/lib/RichContentWrapper';
-import { RichContentEditorWrapper } from 'wix-rich-content-wrapper';
+import { RichContentWrapper } from 'wix-rich-content-wrapper';
 
 import fixtrue from '../../../../e2e/tests/fixtures/gallery-with-title-and-link.json';
 
@@ -39,9 +38,9 @@ export default () => {
 
           <Section type={Section.Types.COMPARISON}>
             <RichContentEditorBox preset="blog-preset">
-              <RichContentEditorWrapper plugins={editorPlugins}>
+              <RichContentWrapper plugins={editorPlugins} editor>
                 <RichContentEditor editorState={editorStateV6} />
-              </RichContentEditorWrapper>
+              </RichContentWrapper>
             </RichContentEditorBox>
             <RichContentViewerBox preset="blog-preset">
               <RichContentWrapper>
@@ -57,9 +56,9 @@ export default () => {
           <h3>With v5 contentState:</h3>
           <Section type={Section.Types.COMPARISON}>
             <RichContentEditorBox preset="blog-preset">
-              <RichContentEditorWrapper plugins={editorPlugins}>
+              <RichContentWrapper plugins={editorPlugins} editor>
                 <RichContentEditor editorState={editorStateV5} />
-              </RichContentEditorWrapper>
+              </RichContentWrapper>
             </RichContentEditorBox>
             <RichContentViewerBox preset="blog-preset">
               {/* <RichContentWrapper plugins={[pluginGalleryViewer()]}> */}

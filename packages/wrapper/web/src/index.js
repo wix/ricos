@@ -1,1 +1,1 @@
-export { default as RichContentEditorWrapper } from './RichContentEditorWrapper';
+export { default as RichContentWrapper } from './RichContentWrapper';

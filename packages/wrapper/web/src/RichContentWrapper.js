@@ -1,8 +1,8 @@
 import React from 'react';
 import EngineWrapper from './EngineWrapper';
-import themeStrategyProvider from '../themeStrategy/themeStrategyProvider';
-import pluginsStrategyProvider from '../pluginsStrategy/pluginsStrategyProvider';
-import localeStrategyProvider from '../localeStrategy/localeStrategyProvider';
+import themeStrategyProvider from './themeStrategy/themeStrategyProvider';
+import pluginsStrategyProvider from './pluginsStrategy/pluginsStrategyProvider';
+import localeStrategyProvider from './localeStrategy/localeStrategyProvider';
 import PropTypes from 'prop-types';
 
 export function RichContentWrapper({
@@ -12,15 +12,15 @@ export function RichContentWrapper({
   palette,
   plugins = [],
   children,
-  isEditor = false,
+  editor = false,
   ...rest
 }) {
   const themeGenerators = plugins.filter(plug => !!plug.theme).map(plug => plug.theme);
-  strategies.push(themeStrategyProvider(isEditor, { theme, palette, themeGenerators }));
-  strategies.push(pluginsStrategyProvider(isEditor, { plugins }));
+  strategies.push(themeStrategyProvider(editor, { theme, palette, themeGenerators }));
+  strategies.push(pluginsStrategyProvider(editor, { plugins }));
   strategies.push(localeStrategyProvider({ locale }));
   return (
-    <EngineWrapper strategies={strategies} {...rest} isEditor={isEditor}>
+    <EngineWrapper strategies={strategies} {...rest} editor={editor}>
       {children}
     </EngineWrapper>
   );
@@ -32,7 +32,7 @@ RichContentWrapper.propTypes = {
   palette: PropTypes.array,
   plugins: PropTypes.arrayOf(PropTypes.object),
   strategies: PropTypes.arrayOf(PropTypes.func),
-  isEditor: PropTypes.bool,
+  editor: PropTypes.bool,
 };
 
 RichContentWrapper.defaultProps = {
