@@ -1,6 +1,6 @@
 import React, { Children, Suspense } from 'react';
 import PropTypes from 'prop-types';
-import { modalStyles } from './themeStrategy/defaults';
+import { modalStyles } from '../themeStrategy/defaults';
 
 const isSSR = () => typeof window === 'undefined';
 class EngineWrapper extends React.Component {
@@ -42,15 +42,16 @@ class EngineWrapper extends React.Component {
       helpers.closeModal = onModalClose;
     }
     //viewer needs onExpand helper + Fullscreen
-    let Fullscreen = () => '';
+    const shouldRenderFullscreen = !isEditor && !isSSR() && withFullscreen;
     helpers.onExpand = this.fullScreenOnExpand;
-    if (!isEditor && !isSSR() && withFullscreen) {
-      Fullscreen = React.lazy(() => import('wix-rich-content-fullscreen'));
-      if (!this.expandModeData) {
-        import('wix-rich-content-fullscreen/src/lib/getImagesData').then(getImagesData => {
-          this.expandModeData = getImagesData.default(children.props.initialState);
-        });
-      }
+    const Fullscreen = React.lazy(() => {
+      const dummy = '';
+      return shouldRenderFullscreen ? import(`wix-rich-content-fullscreen${dummy}`) : '';
+    });
+    if (shouldRenderFullscreen && !this.expandModeData) {
+      import('wix-rich-content-fullscreen/src/lib/getImagesData').then(getImagesData => {
+        this.expandModeData = getImagesData.default(children.props.initialState);
+      });
     }
     modifiedProps.helpers = helpers;
 
@@ -70,7 +71,7 @@ class EngineWrapper extends React.Component {
             {...modalState.modalProps}
           />
         )}
-        {!isEditor && !isSSR() && withFullscreen && (
+        {shouldRenderFullscreen && (
           <Suspense fallback={<div />}>
             <Fullscreen
               isOpen={expendModeIsOpen}

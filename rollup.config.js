@@ -80,7 +80,7 @@ try {
   };
 } catch (_) { }
 
-let config = [editorEntry, ...libEntries];
+let config = [editorEntry].concat(libEntries);
 
 if (viewerEntry) {
   config.push(viewerEntry);
