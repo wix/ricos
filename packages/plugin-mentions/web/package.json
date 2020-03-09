@@ -31,14 +31,14 @@
     "lint": "eslint 'src/**/*.{js,jsx}'"
   },
   "peerDependencies": {
-    "@babel/runtime": "7.2.0",
+    "@babel/runtime": "7.8.7",
     "draft-js": "0.11.2",
     "prop-types": "^15.0.0",
     "react": "^16.6.3",
     "react-dom": "^16.6.3"
   },
   "devDependencies": {
-    "@babel/runtime": "7.2.0",
+    "@babel/runtime": "7.8.7",
     "classnames": "^2.0.0",
     "cross-env": "^5.2.0",
     "draft-js": "0.11.2",

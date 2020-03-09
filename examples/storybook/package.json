@@ -26,8 +26,8 @@
     "lint": "yoshi lint"
   },
   "dependencies": {
-    "@babel/core": "7.2.2",
-    "@babel/runtime": "7.2.0",
+    "@babel/core": "7.8.7",
+    "@babel/runtime": "7.8.7",
     "@storybook/react": "^5.3.1",
     "@testing-library/react": "^9.4.0",
     "aphrodite": "^2.4.0",

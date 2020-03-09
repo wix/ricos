@@ -69,7 +69,7 @@ class EngineWrapper extends React.Component {
     if (shouldRenderEditorModal) {
       helpers.openModal = onModalOpen;
       helpers.closeModal = onModalClose;
-      EditorModal = React.lazy(() => (withModal === true ? import('./EditorModal') : withModal));
+      EditorModal = React.lazy(() => (withModal === true ? import(`./EditorModal`) : withModal));
     }
     //viewer needs onExpand helper + Fullscreen
     helpers.onExpand = this.fullScreenOnExpand;
