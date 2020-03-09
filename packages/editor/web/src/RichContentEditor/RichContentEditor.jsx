@@ -19,8 +19,16 @@ import {
   TOOLBARS,
   getBlockInfo,
   getFocusedBlockKey,
+  calculateDiff,
+  getPostContentSummary,
 } from 'wix-rich-content-editor-common';
-import { AccessibilityListener, normalizeInitialState, getLangDir } from 'wix-rich-content-common';
+
+import {
+  AccessibilityListener,
+  normalizeInitialState,
+  getLangDir,
+  Version,
+} from 'wix-rich-content-common';
 import styles from '../../statics/styles/rich-content-editor.scss';
 import draftStyles from '../../statics/styles/draft.rtlignore.scss';
 import { convertFromHTML as draftConvertFromHtml } from 'draft-convert';
@@ -99,7 +107,10 @@ class RichContentEditor extends Component {
       locale,
       anchorTarget,
       relValue,
-      helpers,
+      helpers: {
+        ...helpers,
+        onPluginAdd: (...args) => helpers.onPluginAdd?.(...args, Version.currentVersion),
+      },
       config,
       isMobile,
       setEditorState: this.setEditorState,
@@ -192,6 +203,12 @@ class RichContentEditor extends Component {
   }
 
   updateEditorState = editorState => {
+    const onPluginDelete = this.props.helpers?.onPluginDelete;
+    if (onPluginDelete) {
+      calculateDiff(this.state.editorState, editorState, (...args) =>
+        onPluginDelete(...args, Version.currentVersion)
+      );
+    }
     this.setEditorState(editorState);
     this.props.onChange && this.props.onChange(editorState);
   };
@@ -435,6 +452,11 @@ class RichContentEditor extends Component {
     }
   }
 }
+
+RichContentEditor.publish = async (postId, editorState = {}, callBack = () => true) => {
+  const postSummary = getPostContentSummary(editorState);
+  callBack({ postId, ...postSummary });
+};
 
 RichContentEditor.propTypes = {
   editorKey: PropTypes.string,
