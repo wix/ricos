@@ -80,4 +80,7 @@ try {
   });
 } catch (_) { }
 
-export default [editorEntry].concat(viewerEntry).concat(libEntries);
+const config = [editorEntry].concat(viewerEntry).concat(libEntries);
+config.forEach(c => c.inlineDynamicImports = true);
+
+export default config;
