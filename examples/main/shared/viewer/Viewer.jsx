@@ -63,30 +63,32 @@ export default class Viewer extends PureComponent {
       seoMode,
     };
 
-    return [
-      <div id="rich-content-viewer" className="viewer">
-        <RichContentViewer
-          helpers={this.helpers}
-          typeMappers={Plugins.typeMappers}
-          inlineStyleMappers={Plugins.getInlineStyleMappers(initialState)}
-          decorators={Plugins.decorators}
-          config={this.pluginsConfig}
-          // siteDomain="https://www.wix.com"
-          {...viewerProps}
-        />
-        {!isSSR() && (
-          <Fullscreen
-            isOpen={expendModeIsOpen}
-            images={this.expandModeData.images}
-            onClose={() => this.setState({ expendModeIsOpen: false })}
-            index={expandModeIndex}
+    return (
+      <>
+        <div id="rich-content-viewer" className="viewer">
+          <RichContentViewer
+            helpers={this.helpers}
+            typeMappers={Plugins.typeMappers}
+            inlineStyleMappers={Plugins.getInlineStyleMappers(initialState)}
+            decorators={Plugins.decorators}
+            config={this.pluginsConfig}
+            // siteDomain="https://www.wix.com"
+            {...viewerProps}
           />
+          {!isSSR() && (
+            <Fullscreen
+              isOpen={expendModeIsOpen}
+              images={this.expandModeData.images}
+              onClose={() => this.setState({ expendModeIsOpen: false })}
+              index={expandModeIndex}
+            />
+          )}
+        </div>
+        {!isSSR() && (
+          <TextSelectionListener targetId={'rich-content-viewer'} ToolBar={ViewerInlineToolBar} />
         )}
-      </div>,
-      !isSSR() && (
-        <TextSelectionListener targetId={'rich-content-viewer'} ToolBar={ViewerInlineToolBar} />
-      ),
-    ];
+      </>
+    );
   }
 }
 
