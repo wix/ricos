@@ -11,6 +11,16 @@
   }
 }
 
+.sideToolbarButton {
+  color: #333333;
+  .sideToolbarIcon {
+    color: #333333;
+  }
+  .label {
+    color: #333333;
+  }
+}
+
 .button {
   background: transparent;
   color: $secondary-text-color;
