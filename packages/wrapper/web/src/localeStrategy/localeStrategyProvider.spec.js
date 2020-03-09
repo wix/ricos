@@ -8,10 +8,10 @@ describe('locale strategy', () => {
       { expected: {}, config: {} },
       { expected: {}, config: { locale: 'en' } },
     ];
-    testCases.forEach(async testCase => {
+    testCases.forEach(testCase => {
       const strategy = uut(testCase.config);
       const actual = strategy({});
-      expect(await actual).toEqual(testCase.expected);
+      Promise.resolve(actual).then(result => expect(result).toEqual(testCase.expected));
     });
   });
 
