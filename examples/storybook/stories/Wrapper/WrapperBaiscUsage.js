@@ -1,11 +1,11 @@
 import React from 'react';
-import { RichContentWrapper } from 'wix-rich-content-wrapper/dist/lib/RichContentWrapper';
+import { RichContentWrapper } from 'wix-rich-content-wrapper';
 import { RichContentEditor } from 'wix-rich-content-editor';
 import { pluginDivider } from 'wix-rich-content-plugin-divider';
 import PropTypes from 'prop-types';
 
 const DividerEditor = ({ editorState }) => (
-  <RichContentWrapper plugins={[pluginDivider()]}>
+  <RichContentWrapper plugins={[pluginDivider()]} editor>
     <RichContentEditor editorState={editorState} />
   </RichContentWrapper>
 );
