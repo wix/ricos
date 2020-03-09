@@ -1,9 +1,9 @@
 import React, { Children, Suspense } from 'react';
 import PropTypes from 'prop-types';
 import { modalStyles } from './themeStrategy/defaults';
-import { RichContentEditorModal } from 'wix-rich-content-editor';
+//import { RichContentEditorModal } from 'wix-rich-content-editor';
 import { createEmpty } from 'wix-rich-content-editor/dist/lib/editorStateConversion';
-import ReactModal from 'react-modal';
+//import ReactModal from 'react-modal';
 
 const isSSR = () => typeof window === 'undefined';
 const dummy = '';
@@ -55,7 +55,6 @@ class EngineWrapper extends React.Component {
       strategies = [],
       children = {},
       ModalComp,
-      modalState = {},
       withModal = true,
       editor,
       onModalOpen,
@@ -66,7 +65,7 @@ class EngineWrapper extends React.Component {
       return { ...props, ...result };
     }, children.props);
     const { helpers = {}, theme, locale = 'en', ModalsMap, onChange } = modifiedProps;
-    const { onRequestClose } = modalState.modalProps || {};
+    const { onRequestClose } = this.state.modalProps || {};
     if (ModalComp) {
       helpers.openModal = onModalOpen;
       helpers.closeModal = onModalClose;
@@ -95,16 +94,16 @@ class EngineWrapper extends React.Component {
     return (
       <React.Fragment>
         {Children.only(React.cloneElement(children, { ...modifiedProps, disabled }))}
-        {ModalComp && (
+        {shouldRenderEditorModal && (
           <ModalComp
-            isOpen={modalState.showModal}
+            isOpen={this.state.showModal}
             contentLabel="External Modal Example"
-            style={modalStyles(modalState, theme)}
+            style={modalStyles(this.state, theme)}
             role="dialog"
             onRequestClose={onRequestClose || helpers.closeModal}
             modalsMap={ModalsMap}
             locale={locale}
-            {...modalState.modalProps}
+            {...this.state.modalProps}
           />
         )}
         {shouldRenderFullscreen && (
@@ -116,21 +115,6 @@ class EngineWrapper extends React.Component {
               index={expandModeIndex}
             />
           </Suspense>
-        )}
-        {shouldRenderEditorModal && (
-          <ReactModal
-            isOpen={this.state.showModal}
-            contentLabel="External Modal Example"
-            style={modalStyles(this.state, theme)}
-            role="dialog"
-            onRequestClose={onRequestClose || helpers.closeModal}
-          >
-            <RichContentEditorModal
-              modalsMap={ModalsMap}
-              locale={locale}
-              {...this.state.modalProps}
-            />
-          </ReactModal>
         )}
       </React.Fragment>
     );
@@ -147,9 +131,5 @@ EngineWrapper.propTypes = {
   ModalComp: PropTypes.func,
   editor: PropTypes.bool,
   withModal: PropTypes.bool,
-  modalState: PropTypes.shape({
-    modalProps: PropTypes.object,
-    showModal: PropTypes.bool,
-  }),
 };
 export default EngineWrapper;
