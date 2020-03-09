@@ -62,6 +62,7 @@ export {
   insertLinkAtCurrentSelection,
   insertLinkInPosition,
   hasLinksInBlock,
+  getLinkRangesInBlock,
   fixPastedLinks,
   hasLinksInSelection,
   getLinkDataInSelection,
@@ -79,6 +80,8 @@ export {
   createBlock,
   getBlockInfo,
   getFocusedBlockKey,
+  calculateDiff,
+  getPostContentSummary,
 } from './Utils/draftUtils';
 export { isiOS } from './Utils/isiOS';
 export { getSelectionStyles } from './Utils/inlineStyleUtils';

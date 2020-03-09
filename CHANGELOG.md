@@ -12,13 +12,44 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
-  
-  ### :boom: New Feature
-  - `text-selection-toolbar`
-    - [#523](https://github.com/wix-incubator/rich-content/pull/523) create viewer toolbar with tweet option
+
+### :bug: Bug Fix
+- `hashtag`
+  - [#707](https://github.com/wix-incubator/rich-content/pull/707) allow hashtag and link in the same block
   
 </details>
 <hr/>
+
+## 6.9.6 (Mar 5, 2020)
+### :bug: Bug Fix
+- `editor`
+  - [#747](https://github.com/wix-incubator/rich-content/pull/747) unable to build - draftUtils Bi consumption
+- `video`
+  - [#746](https://github.com/wix-incubator/rich-content/pull/746) controls not showing
+
+## 6.9.5 (Mar 4, 2020)
+### :bug: Bug Fix
+- `editor`
+  - [#745](https://github.com/wix-incubator/rich-content/pull/745) editorState trigger
+
+## 6.9.4 (Mar 4, 2020)
+### :bug: Bug Fix
+- `html`
+  - [#732](https://github.com/wix-incubator/rich-content/pull/732) reload issue in ios
+### :rocket: New Feature
+- `bi-events`
+  - [#675](https://github.com/wix-incubator/rich-content/pull/514) supports `onPluginAdd` (toolbar only) and `onPluginDelete` callbacks via props
+### :house: Internal
+- `gallery`
+  - [#742](https://github.com/wix-incubator/rich-content/pull/742) bump pro-gallery version to 1.7.25
+
+## 6.9.3 (Mar 4, 2020)
+### :bug: Bug Fix
+- `html`
+  - [#732](https://github.com/wix-incubator/rich-content/pull/732) fix html width in viewer
+### :house: Internal
+- `e2e`
+  - [#737](https://github.com/wix-incubator/rich-content/pull/737) fix rendering and plugins tests
 
 ## 6.9.2 (Feb 27, 2020)
 ### :bug: Bug Fix
