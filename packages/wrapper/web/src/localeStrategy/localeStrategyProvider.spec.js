@@ -11,27 +11,26 @@ describe('locale strategy', () => {
     testCases.forEach(testCase => {
       const strategy = uut(testCase.config);
       const actual = strategy({});
-      Promise.resolve(actual).then(result => expect(result).toEqual(testCase.expected));
+      expect(actual).resolves.toEqual(testCase.expected);
     });
   });
 
   it('should throw if invalid locale is provided', () => {
     const testCases = [{ config: { locale: 'zz' } }, { config: { locale: 'xx' } }];
-    testCases.forEach(async testCase => {
+    testCases.forEach(testCase => {
       const strategy = uut(testCase.config);
-      const actual = () => strategy({});
-      expect(await actual).toThrow();
+      expect(strategy({})).rejects.toThrow();
     });
   });
 
   it('should be correctly overridden by inner props', () => {
     const testCases = [
-      { expected: { locale: 'he', localeResource: hebResources }, config: { locale: 'ru' } },
+      { expected: { locale: 'en', localeResource: hebResources }, config: { locale: 'en' } },
     ];
-    testCases.forEach(async testCase => {
+    testCases.forEach(testCase => {
       const strategy = uut(testCase.config);
       const actual = strategy({ locale: 'he' });
-      expect(await actual).toEqual(testCase.expected);
+      expect(actual).resolves.toEqual(testCase.expected);
     });
   });
 
@@ -40,10 +39,10 @@ describe('locale strategy', () => {
       { expected: { locale: 'he', localeResource: hebResources }, config: { locale: 'he' } },
       { expected: { locale: 'ru', localeResource: rusResources }, config: { locale: 'ru' } },
     ];
-    testCases.forEach(async testCase => {
+    testCases.forEach(testCase => {
       const strategy = uut(testCase.config);
       const actual = strategy({});
-      expect(await actual).toEqual(testCase.expected);
+      expect(actual).resolves.toEqual(testCase.expected);
     });
   });
 });
