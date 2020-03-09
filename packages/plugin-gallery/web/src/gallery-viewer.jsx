@@ -126,20 +126,20 @@ class GalleryViewer extends React.Component {
     if (!this.props.isMobile) {
       return { ...styleParams, allowHover: true };
     }
-    return this.hasTitle(items)
-      ? {
-          ...styleParams,
-          isVertical: styleParams.galleryLayout === 1,
-          allowTitle: true,
-          galleryTextAlign: 'center',
-          textsHorizontalPadding: 0,
-          imageInfoType: 'NO_BACKGROUND',
-          hoveringBehaviour: 'APPEARS',
-          textsVerticalPadding: 0,
-          titlePlacement: 'SHOW_BELOW',
-          calculateTextBoxHeightMode: 'AUTOMATIC',
-        }
-      : styleParams;
+    if (this.hasTitle(items))
+      return {
+        ...styleParams,
+        isVertical: styleParams.galleryLayout === 1,
+        allowTitle: true,
+        galleryTextAlign: 'center',
+        textsHorizontalPadding: 0,
+        imageInfoType: 'NO_BACKGROUND',
+        hoveringBehaviour: 'APPEARS',
+        textsVerticalPadding: 0,
+        titlePlacement: 'SHOW_BELOW',
+        calculateTextBoxHeightMode: 'AUTOMATIC',
+      };
+    return styleParams;
   };
 
   renderExpandIcon = itemProps => {

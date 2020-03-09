@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { RichContentEditor, convertFromRaw, createWithContent } from 'wix-rich-content-editor';
-import { RichContentWrapper } from 'wix-rich-content-wrapper';
+import { RichContentEditorWrapper } from 'wix-rich-content-wrapper';
+import { withModal } from 'wix-rich-content-wrapper/dist/lib/withModal';
 import { pluginButton } from 'wix-rich-content-plugin-button';
 import { pluginCodeBlock } from 'wix-rich-content-plugin-code-block';
 import { pluginDivider } from 'wix-rich-content-plugin-divider';
@@ -71,10 +72,10 @@ const plugins = [
 ];
 const EditorWrapper = ({ contentState, palette }) => {
   const editorState = createWithContent(convertFromRaw(contentState));
-  return (
-    <RichContentWrapper plugins={plugins} theme={'Palette'} palette={palette} modalSupport>
+  return withModal(
+    <RichContentEditorWrapper plugins={plugins} theme={'Palette'} palette={palette}>
       <RichContentEditor editorState={editorState} />
-    </RichContentWrapper>
+    </RichContentEditorWrapper>,
   );
 };
 

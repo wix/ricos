@@ -61,7 +61,7 @@ try {
       watch,
     });
   });
-} catch (_) {}
+} catch (_) { }
 
 let viewerEntry;
 try {
@@ -78,6 +78,6 @@ try {
     external,
     watch,
   };
-} catch (_) {}
+} catch (_) { }
 
 export default [editorEntry, viewerEntry, ...libEntries].filter(x => x);
