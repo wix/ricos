@@ -4,7 +4,7 @@ import { modalStyles } from '../themeStrategy/defaults';
 import { createEmpty } from 'wix-rich-content-editor/dist/lib/editorStateConversion';
 
 const isSSR = () => typeof window === 'undefined';
-const dummy = ''; //crucial for dynamic import at it's current version
+//const dummy = ''; //crucial for dynamic import at it's current version
 class EngineWrapper extends React.Component {
   constructor(props) {
     super(props);
@@ -69,18 +69,16 @@ class EngineWrapper extends React.Component {
     if (shouldRenderEditorModal) {
       helpers.openModal = onModalOpen;
       helpers.closeModal = onModalClose;
-      EditorModal = React.lazy(() =>
-        withModal === true ? import(`./EditorModal${dummy}`) : withModal
-      );
+      EditorModal = React.lazy(() => (withModal === true ? import('./EditorModal') : withModal));
     }
     //viewer needs onExpand helper + Fullscreen
     helpers.onExpand = this.fullScreenOnExpand;
     const shouldRenderFullscreen = !editor && !isSSR() && withModal;
     const Fullscreen = React.lazy(() =>
-      shouldRenderFullscreen ? import(`wix-rich-content-fullscreen${dummy}`) : ''
+      shouldRenderFullscreen ? import(`wix-rich-content-fullscreen`) : ''
     );
     if (shouldRenderFullscreen && !this.expandModeData) {
-      import(`wix-rich-content-fullscreen/src/lib/getImagesData${dummy}`).then(getImagesData => {
+      import(`wix-rich-content-fullscreen/src/lib/getImagesData`).then(getImagesData => {
         this.expandModeData = getImagesData.default(children.props.initialState);
       });
     }

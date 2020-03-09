@@ -72,7 +72,7 @@ const plugins = [
 const EditorWrapper = ({ contentState, palette }) => {
   const editorState = createWithContent(convertFromRaw(contentState));
   return (
-    <RichContentWrapper plugins={plugins} theme={'Palette'} palette={palette} editor>
+    <RichContentWrapper plugins={plugins} theme={'Palette'} palette={palette} editor withModal>
       <RichContentEditor editorState={editorState} />
     </RichContentWrapper>
   );
