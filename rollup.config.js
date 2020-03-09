@@ -80,11 +80,4 @@ try {
   };
 } catch (_) { }
 
-let config = [editorEntry].concat(libEntries);
-
-if (viewerEntry) {
-  config.push(viewerEntry);
-}
-config.forEach(c => c.inlineDynamicImports = true)
-
-export default config;
+export default [editorEntry, viewerEntry, ...libEntries].filter(x => x);
