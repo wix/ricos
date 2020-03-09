@@ -11,7 +11,7 @@ describe('locale strategy', () => {
     testCases.forEach(async testCase => {
       const strategy = uut(testCase.config);
       const actual = strategy({});
-      expect(await actual).toEqual(testCase.expected);
+      return await actual.then(result => expect(result).toEqual(testCase.expected));
     });
   });
 
@@ -20,7 +20,7 @@ describe('locale strategy', () => {
     testCases.forEach(async testCase => {
       const strategy = uut(testCase.config);
       const actual = () => strategy({});
-      expect(await actual).toThrow();
+      return await actual.then(result => expect(result).toThrow());
     });
   });
 
@@ -31,7 +31,7 @@ describe('locale strategy', () => {
     testCases.forEach(async testCase => {
       const strategy = uut(testCase.config);
       const actual = strategy({ locale: 'he' });
-      expect(await actual).toEqual(testCase.expected);
+      return await actual.then(result => expect(result.toEqual(testCase.expected)));
     });
   });
 
@@ -43,7 +43,7 @@ describe('locale strategy', () => {
     testCases.forEach(async testCase => {
       const strategy = uut(testCase.config);
       const actual = strategy({});
-      expect(await actual).toEqual(testCase.expected);
+      return await actual.then(result => expect(result).toEqual(testCase.expected));
     });
   });
 });
