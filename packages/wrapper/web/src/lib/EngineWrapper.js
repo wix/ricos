@@ -1,6 +1,6 @@
 import React, { Children, Suspense } from 'react';
 import PropTypes from 'prop-types';
-import { modalStyles } from './themeStrategy/defaults';
+import { modalStyles } from '../themeStrategy/defaults';
 import { createEmpty } from 'wix-rich-content-editor/dist/lib/editorStateConversion';
 
 const isSSR = () => typeof window === 'undefined';
@@ -69,13 +69,15 @@ class EngineWrapper extends React.Component {
     if (shouldRenderEditorModal) {
       helpers.openModal = onModalOpen;
       helpers.closeModal = onModalClose;
-      EditorModal = React.lazy(() => (withModal === true ? import(`./EditorModal`) : withModal));
+      EditorModal = React.lazy(() =>
+        withModal === true ? import(`./EditorModal${dummy}`) : withModal
+      );
     }
     //viewer needs onExpand helper + Fullscreen
     helpers.onExpand = this.fullScreenOnExpand;
     const shouldRenderFullscreen = !editor && !isSSR() && withModal;
     const Fullscreen = React.lazy(() =>
-      shouldRenderFullscreen ? import('wix-rich-content-fullscreen') : ''
+      shouldRenderFullscreen ? import(`wix-rich-content-fullscreen${dummy}`) : ''
     );
     if (shouldRenderFullscreen && !this.expandModeData) {
       import(`wix-rich-content-fullscreen/src/lib/getImagesData${dummy}`).then(getImagesData => {

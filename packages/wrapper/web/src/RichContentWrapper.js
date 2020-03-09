@@ -1,5 +1,5 @@
 import React from 'react';
-import EngineWrapper from './EngineWrapper';
+import EngineWrapper from './lib/EditorModal';
 import themeStrategyProvider from './themeStrategy/themeStrategyProvider';
 import pluginsStrategyProvider from './pluginsStrategy/pluginsStrategyProvider';
 import localeStrategyProvider from './localeStrategy/localeStrategyProvider';
