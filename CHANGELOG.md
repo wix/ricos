@@ -16,6 +16,8 @@
 ### :rocket: New Feature
 - `gallery`
   - [#625](https://github.com/wix-incubator/rich-content/pull/625) gallery supports adding videos
+- `fullscreen`
+  - [#625](https://github.com/wix-incubator/rich-content/pull/625) supports target prop to render fullscreen at the target element
   
 ### :bug: Bug Fix
 - `hashtag`
