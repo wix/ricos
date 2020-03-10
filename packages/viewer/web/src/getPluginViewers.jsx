@@ -138,6 +138,9 @@ PluginViewer.defaultProps = {
 //return a list of types with a function that wraps the viewer
 const getPluginViewers = (typeMap, context, styles) => {
   const res = {};
+  res.EMOJI_TYPE = emojiUnicode => {
+    return <span style={{ fontFamily: 'cursive' }}>{emojiUnicode}</span>;
+  };
   Object.keys(typeMap).forEach(type => {
     res[type] = (children, entity, { key }) => {
       const pluginComponent = typeMap[type];
