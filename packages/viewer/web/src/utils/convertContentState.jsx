@@ -92,7 +92,13 @@ const getBlocks = (mergedStyles, textDirection, { config }) => {
 };
 
 const getEntities = (typeMap, pluginProps, styles) => {
-  return getPluginViewers(typeMap, pluginProps, styles);
+  const emojiViewerFn = emojiUnicode => {
+    return <span style={{ fontFamily: 'cursive' }}>{emojiUnicode}</span>;
+  };
+  return {
+    EMOJI_TYPE: emojiViewerFn,
+    ...getPluginViewers(typeMap, pluginProps, styles),
+  };
 };
 
 const normalizeContentState = contentState => ({

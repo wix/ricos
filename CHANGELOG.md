@@ -19,6 +19,8 @@
 ### :bug: Bug Fix
 - `hashtag`
   - [#707](https://github.com/wix-incubator/rich-content/pull/707) allow hashtag and link in the same block
+- `emoji`
+  - [#758](https://github.com/wix-incubator/rich-content/pull/758) all emojies aren't shown as unicode icons
 - `editor`
   - [#735](https://github.com/wix-incubator/rich-content/pull/735) disable paste inline images and atomic blocks
   - [#735](https://github.com/wix-incubator/rich-content/pull/735) copy paste inline styles from html
