@@ -70,7 +70,6 @@ try {
   viewerEntry = {
     input: viewerPath,
     output: cloneDeep(output).map(o => {
-      console.log(o.file);
       const anchor = o.file.indexOf('.');
       o.file = addPartToFilename(o.file, 'viewer');
       return o;
