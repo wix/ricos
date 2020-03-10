@@ -27,7 +27,8 @@ export default class TextLinkPanel extends Component {
       t,
       isActive: !isEmpty(linkData),
       onDone: this.createLinkEntity,
-      onCancel: this.hideLinkPanel,
+      onCancel: this.cancelLink,
+      onHide: this.hideLinkPanel,
       onDelete: this.deleteLink,
       onOverrideContent: this.props.onOverrideContent,
       uiSettings,
@@ -53,8 +54,7 @@ export default class TextLinkPanel extends Component {
       });
       setEditorState(newEditorState);
     }
-    this.props.onExtendContent(undefined);
-    this.props.onOverrideContent(undefined);
+    this.hideLinkPanel();
   };
 
   deleteLink = () => {
@@ -64,7 +64,7 @@ export default class TextLinkPanel extends Component {
     setEditorState(newEditorState);
   };
 
-  hideLinkPanel = () => {
+  cancelLink = () => {
     const { getEditorState, setEditorState } = this.props;
     const editorState = getEditorState();
     const selection = editorState.getSelection();
@@ -73,6 +73,10 @@ export default class TextLinkPanel extends Component {
       selection.merge({ anchorOffset: selection.focusOffset })
     );
     setEditorState(newEditorState);
+    this.hideLinkPanel();
+  };
+
+  hideLinkPanel = () => {
     this.props.onExtendContent(undefined);
     this.props.onOverrideContent(undefined);
   };
