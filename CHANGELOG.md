@@ -13,6 +13,9 @@
     Click to see more.
   </summary>
 
+### :house: Internal
+- `e2e`
+  - [#759](https://github.com/wix-incubator/rich-content/pull/759) adding tests for emoji plugin (in rtl and plugins tests)
 ### :bug: Bug Fix
 - `hashtag`
   - [#707](https://github.com/wix-incubator/rich-content/pull/707) allow hashtag and link in the same block
