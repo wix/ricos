@@ -141,7 +141,7 @@ const getPluginViewers = (typeMap, context, styles) => {
   res.EMOJI_TYPE = emojiUnicode => {
     return <span style={{ fontFamily: 'cursive' }}>{emojiUnicode}</span>;
   };
-  Object.keys(typeMap).forEach(type => {
+  Object.keys(typeMap).forEach((type, i) => {
     res[type] = (children, entity, { key }) => {
       const pluginComponent = typeMap[type];
       const isInline = pluginComponent.elementType === 'inline';
@@ -152,11 +152,10 @@ const getPluginViewers = (typeMap, context, styles) => {
         : DefaultInteractionWrapper;
 
       return (
-        <ViewerWrapper>
+        <ViewerWrapper key={`${i}_${key}`}>
           <PluginViewer
             type={type}
             pluginComponent={pluginComponent}
-            key={key}
             componentData={entity}
             entityIndex={key}
             context={context}

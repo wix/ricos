@@ -7,7 +7,9 @@ import { testImages, testVideos } from './mock';
 import * as Plugins from './EditorPlugins';
 import ModalsMap from './ModalsMap';
 import theme from '../theme/theme'; // must import after custom styles
+import { debugBiLoggers } from '../../config/biService';
 import { GALLERY_TYPE } from 'wix-rich-content-plugin-gallery';
+
 const modalStyleDefaults = {
   content: {
     top: '50%',
@@ -53,6 +55,7 @@ export default class Editor extends PureComponent {
       }
     };
     this.helpers = {
+      ...debugBiLoggers,
       // onFilesChange: (files, updateEntity) => mockUpload(files, updateEntity),
       handleFileSelection: (index, multiple, updateEntity, removeEntity, componentData) => {
         const count = componentData.items || shouldMultiSelectImages ? [1, 2, 3] : [1];
@@ -200,6 +203,7 @@ export default class Editor extends PureComponent {
           // siteDomain="https://www.wix.com"
           {...editorProps}
         />
+
         <ReactModal
           isOpen={this.state.showModal}
           contentLabel="External Modal Example"
