@@ -5,7 +5,7 @@
   width: 100vw;
   height: 100vh;
   z-index: 1000;
-  background: rgb(0,0,0);
+  background: black;
 }
 
 .close {
@@ -13,14 +13,13 @@
   z-index: 1001;
   padding: 10px;
   position: fixed;
-  left: 20px;
+  right: 20px;
   top: 20px;
-  background: rgb(0,0,0);
+  background: black;
   border-radius: 4px;
   width: 25px;
   height: 25px;
-  fill: black;
-  color: rgb(255,255,255);
+  color: white;
   opacity: 0.6;
   border: hidden;
   cursor: pointer;
