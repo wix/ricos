@@ -6,25 +6,15 @@ import layouts from 'wix-rich-content-plugin-gallery/dist/lib/layout-data-provid
 import resizeMediaUrl from 'wix-rich-content-plugin-gallery/dist/lib/resize-media-url';
 import PropTypes from 'prop-types';
 import styles from './fullscreen.rtlignore.scss';
-// import { ProGallery } from 'pro-gallery';
 
 const { ProGallery } = process.env.SANTA ? {} : require('pro-gallery');
 
 export default function Fullscreen(props) {
-  const {
-    locale,
-    index,
-    isOpen,
-    onClose,
-    target,
-    backgroundColor,
-    topMargin,
-    foregroundColor,
-  } = props;
+  const { index, isOpen, onClose, target, backgroundColor, topMargin, foregroundColor } = props;
 
   const getItems = () => {
-    const { images, relValue, anchorTarget } = props;
-    return convertItemData({ items: images, relValue, anchorTarget });
+    const { images } = props;
+    return convertItemData({ items: images });
   };
 
   let fullscreen = (
@@ -34,7 +24,6 @@ export default function Fullscreen(props) {
       </button>
       <ProGallery
         items={getItems()}
-        locale={locale}
         currentIdx={index}
         resizeMediaUrl={resizeMediaUrl}
         container={{ width: window.innerWidth, height: window.innerHeight }}
@@ -66,7 +55,4 @@ Fullscreen.propTypes = {
   backgroundColor: PropTypes.object,
   foregroundColor: PropTypes.object,
   onClose: PropTypes.func,
-  locale: PropTypes.string,
-  relValue: PropTypes.string,
-  anchorTarget: PropTypes.string,
 };

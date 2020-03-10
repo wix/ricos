@@ -184,7 +184,7 @@ export default class Editor extends PureComponent {
     };
 
     return (
-      <div id="rich-content-editor" className="editor">
+      <div className="editor">
         {MobileToolbar && <MobileToolbar />}
         {TextToolbar && (
           <div className="toolbar-wrapper">

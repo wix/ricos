@@ -51,13 +51,10 @@ export default class Viewer extends PureComponent {
   };
 
   render() {
-    const { isMobile, locale, initialState, seoMode } = this.props;
+    const { isMobile, initialState, seoMode } = this.props;
     const { expandModeIsOpen, expandModeIndex, disabled } = this.state;
 
     const viewerProps = {
-      locale,
-      relValue,
-      anchorTarget,
       isMobile,
       theme,
       initialState,
@@ -83,10 +80,6 @@ export default class Viewer extends PureComponent {
               onClose={() => this.setState({ expandModeIsOpen: false })}
               isOpen={expandModeIsOpen}
               index={expandModeIndex}
-              relValue={relValue}
-              anchorTarget={anchorTarget}
-              locale={locale}
-              // target={document.getElementById('rich-content-editor')}
             />
           )}
         </div>

@@ -8,7 +8,6 @@ import resizeMediaUrl from './lib/resize-media-url';
 import styles from '../statics/styles/viewer.scss';
 import 'pro-gallery/dist/statics/main.min.css';
 import ExpandIcon from './icons/expand.svg';
-// import { ProGallery } from 'pro-gallery';
 
 const { ProGallery } = process.env.SANTA ? {} : require('pro-gallery');
 
