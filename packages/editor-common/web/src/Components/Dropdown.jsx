@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import classNames from 'classnames';
-import { mergeStyles } from 'wix-rich-content-common';
+import { mergeStyles, isSSR } from 'wix-rich-content-common';
 import styles from '../../statics/styles/dropdown.scss';
 import { DropdownArrowIcon } from '../Icons';
 
@@ -212,7 +212,7 @@ class Dropdown extends Component {
       <div className={dropdownClass}>
         <button
           role="combobox"
-          aria-controls={`${this.id}_menu`}
+          aria-controls={isSSR ? undefined : `${this.id}_menu`}
           aria-expanded={this.state.isOpen}
           className={classNames(
             styles['Dropdown-control'],

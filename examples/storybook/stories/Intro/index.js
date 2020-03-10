@@ -16,10 +16,12 @@ import { wixPalettes } from '../palettesExample';
 storiesOf('Intro', module).add('Hello!', () => {
   return (
     <Page title="Wix Rich Content">
-      <Section type={Section.Types.COMPARISON}>
+      <Section>
         <RichContentEditorBox>
           <EditorWrapper contentState={introState} palette={wixPalettes.site1} />
         </RichContentEditorBox>
+      </Section>
+      <Section title="Wix Rich Content Viewer">
         <RichContentViewerBox>
           <ViewerWrapper contentState={introState} palette={wixPalettes.site1} />
         </RichContentViewerBox>
