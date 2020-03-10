@@ -53,7 +53,8 @@ export default class TextLinkPanel extends Component {
       });
       setEditorState(newEditorState);
     }
-    this.hideLinkPanel();
+    this.props.onExtendContent(undefined);
+    this.props.onOverrideContent(undefined);
   };
 
   deleteLink = () => {
