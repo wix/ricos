@@ -1,0 +1,29 @@
+@import "~wix-rich-content-common/dist/statics/styles/palette";
+@import "~wix-rich-content-common/dist/statics/styles/mixins";
+
+.inlineToolbar_responsiveArrow {
+    flex: 0 0 40px;
+    height: 100%;
+    background: transparent;
+    cursor: pointer;
+    border: none;
+    border-left: 1px solid $toolbar-border-color;
+  
+    > i {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border: 1px solid $toolbar-font-color;
+      border-width: 0 0 1px 1px;
+    }
+  }
+  
+  .inlineToolbar_responsiveArrowStart_icon {
+    margin-right: -3px;
+    transform: rotate(45deg);
+  }
+  
+  .inlineToolbar_responsiveArrowEnd_icon {
+    margin-right: 3px;
+    transform: rotate(225deg);
+  }

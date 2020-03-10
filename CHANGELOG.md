@@ -16,7 +16,11 @@
 ### :bug: Bug Fix
 - `hashtag`
   - [#707](https://github.com/wix-incubator/rich-content/pull/707) allow hashtag and link in the same block
-  
+- `editor`
+  - [#735](https://github.com/wix-incubator/rich-content/pull/735) disable paste inline images and atomic blocks
+  - [#735](https://github.com/wix-incubator/rich-content/pull/735) copy paste inline styles from html
+  - [#713](https://github.com/wix-incubator/rich-content/pull/713) toolbars rtl issued fixed
+  - [#757](https://github.com/wix-incubator/rich-content/pull/757) prevent underline link inline style to affects on new line
 </details>
 <hr/>
 
