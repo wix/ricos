@@ -3,23 +3,23 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
 const { version } = require('../lerna.json');
-const execSync = require('child_process').execSync;
 const CURR_DIR = process.cwd();
 const exampleAppMainPath = `${CURR_DIR}/examples/main`;
 const chalk = require('chalk');
 
-const exec = cmd => execSync(cmd, { stdio: 'inherit' });
+// const execSync = require('child_process').execSync;
+// const exec = cmd => execSync(cmd, { stdio: 'inherit' });
 const CHOICES = fs.readdirSync(`${__dirname}/templates`);
 
 const QUESTIONS = [
   {
-    name: 'plugin-choice',
+    name: 'pluginChoice',
     type: 'list',
     message: 'What plugin template would you like to generate?',
     choices: CHOICES,
   },
   {
-    name: 'plugin-name',
+    name: 'pluginName',
     type: 'input',
     message: 'Enter Plugin name:',
     validate(input) {
@@ -28,7 +28,7 @@ const QUESTIONS = [
     },
   },
   {
-    name: 'plugin-author',
+    name: 'pluginAuthorName',
     type: 'input',
     message: 'Enter Plugin author:',
     validate(input) {
@@ -37,7 +37,7 @@ const QUESTIONS = [
     },
   },
   {
-    name: 'author-mail',
+    name: 'pluginAuthorMailAddress',
     type: 'input',
     message: 'Enter author mail:',
     validate(input) {
@@ -48,13 +48,9 @@ const QUESTIONS = [
 ];
 
 inquirer.prompt(QUESTIONS).then(answers => {
-  console.log(
-    chalk.yellow(`Generating ${answers['plugin-name']} ${answers['plugin-choice']} 🤸‍♂`)
-  );
-  const pluginChoice = answers['plugin-choice'];
-  const pluginName = answers['plugin-name'];
-  const pluginAuthorName = answers['plugin-author'];
-  const pluginAuthorMailAddress = answers['author-mail'];
+  const { pluginChoice, pluginName, pluginAuthorName, pluginAuthorMailAddress } = answers;
+  console.log(chalk.yellow(`Generating ${pluginName} ${pluginChoice} 🤸‍♂`));
+
   const templatePath = `${__dirname}/templates/${pluginChoice}`;
   const pluginPackagePath = `packages/plugin-${pluginName}`;
 
@@ -65,11 +61,11 @@ inquirer.prompt(QUESTIONS).then(answers => {
     pluginAuthorName,
     pluginAuthorMailAddress,
   });
-  addPluginInExampleApp(pluginName);
+  addPluginToProject(exampleAppMainPath, pluginName);
 });
 
 function createDirectoryContents(templatePath, newProjectPath, pluginData) {
-  const { pluginName, pluginAuthorName, pluginAuthorMailAddress } = pluginData;
+  const { pluginName, pluginAuthor, pluginAuthorMailAddress } = pluginData;
   const filesToCreate = fs.readdirSync(templatePath);
   filesToCreate.forEach(file => {
     const origFilePath = `${templatePath}/${file}`;
@@ -80,7 +76,7 @@ function createDirectoryContents(templatePath, newProjectPath, pluginData) {
       YOUR_PLUGIN_NAME: pluginName.toUpperCase(),
       YourPluginName: pluginName.charAt(0).toUpperCase() + pluginName.slice(1),
       yourPluginVersion: version,
-      pluginAuthorName,
+      pluginAuthor,
       pluginAuthorMailAddress,
     };
     const fileName = file.replace(/yourPluginName|YourPluginName/g, name => pluginNameMap[name]);
@@ -94,7 +90,7 @@ function createDirectoryContents(templatePath, newProjectPath, pluginData) {
       const writePath = `${CURR_DIR}/${newProjectPath}/${fileName}`;
       fs.writeFileSync(writePath, result, 'utf8');
     } else if (stats.isDirectory()) {
-      console.log(chalk.blue(`Creating ${fileName} directory`));
+      console.log(chalk.cyan(`Creating ${fileName} directory`));
       fs.mkdirSync(`${CURR_DIR}/${newProjectPath}/${fileName}`);
 
       // recursive call
@@ -103,12 +99,13 @@ function createDirectoryContents(templatePath, newProjectPath, pluginData) {
   });
 }
 
-function addPluginInExampleApp(pluginName) {
-  console.log(`Installing ${pluginName}-plugin on the example app`);
-  const filePath = `${exampleAppMainPath}/package.json`;
-  fs.readFile(filePath, 'utf8', function readFileCallback(err, data) {
+function addPluginToProject(projectPath, pluginName) {
+  console.log(chalk.yellow(`Adding ${pluginName} to ${projectPath}`));
+  const filePath = `${projectPath}/package.json`;
+
+  fs.readFile(filePath, 'utf8', (err, data) => {
     if (err) {
-      console.log(chalk.red('Fail to read example app package.json', err));
+      console.log(chalk.red('Fail to read package.json', projectPath, err));
     } else {
       const pckageJsonObj = JSON.parse(data);
       const newDependency = `wix-rich-content-plugin-${pluginName}`;
@@ -119,7 +116,7 @@ function addPluginInExampleApp(pluginName) {
       const packageJson = JSON.stringify(pckageJsonObj, null, 2);
       fs.writeFile(filePath, packageJson, 'utf8', () => {
         console.log(chalk.bold.green(`${pluginName}-plugin added successfully 🎉🎊🎉🎊`));
-        exec(`npm i && npm run build && cd ${exampleAppMainPath} && npm run start`);
+        // exec(`npm i && npm run build && cd ${projectPath} && npm run start`);
       });
     }
   });
