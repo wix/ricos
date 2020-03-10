@@ -1,6 +1,6 @@
 import { includes } from 'lodash';
 import createBaseComponent from './createBaseComponent';
-import createToolbar from './createBaseToolbar';
+import createAtomicPluginToolbar from './createAtomicPluginToolbar';
 import createInlinePluginToolbar from './createInlinePluginToolbar';
 import createInsertPluginButton from './createBaseInsertPluginButton';
 import { deleteBlock, setEntityData } from '../Utils/draftUtils';
@@ -83,7 +83,7 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
     });
   const Toolbar =
     config?.toolbar?.InlineButtons &&
-    createToolbar({
+    createAtomicPluginToolbar({
       buttons: {
         all: config.toolbar.InlineButtons,
         hidden: settings?.toolbar?.hidden || [],
