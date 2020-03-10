@@ -1,8 +1,7 @@
 import { createBasePlugin } from 'wix-rich-content-editor-common';
 import createToolbar from './toolbar';
 import { EMOJI_TYPE } from './constants';
-import { emojiEntityStrategy } from './emojiStrategy';
-import { emojiComponent } from './emojiComponent';
+import { createEmojiDecorator } from './createEmojiDecorator';
 
 const createEmojiPlugin = (config = {}) => {
   const type = EMOJI_TYPE;
@@ -27,7 +26,6 @@ const createEmojiPlugin = (config = {}) => {
     t,
   });
 
-  const decorators = [{ strategy: emojiEntityStrategy, component: emojiComponent }];
   return createBasePlugin(
     {
       settings,
@@ -38,7 +36,7 @@ const createEmojiPlugin = (config = {}) => {
       t,
       ...rest,
     },
-    { decorators }
+    { decorators: createEmojiDecorator() }
   );
 };
 
