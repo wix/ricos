@@ -3,13 +3,14 @@ import PropTypes from 'prop-types';
 import { modalStyles } from '../themeStrategy/defaults';
 
 const dummy = ''; //crucial for dynamic import at it's current version
-const isSSR = () => typeof window === 'undefined';
 class EngineWrapper extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       disabled: false,
       showModal: false,
+      EditorModal: undefined,
+      Fullscreen: undefined,
     };
     if (props.editor) {
       import(`wix-rich-content-editor/dist/lib/editorStateConversion${dummy}`).then(module =>
@@ -51,6 +52,27 @@ class EngineWrapper extends React.Component {
     });
   };
 
+  componentDidMount() {
+    const { editor, withModal = true, children } = this.props;
+    const shouldRenderEditorModal = editor && withModal;
+    const shouldRenderFullscreen = !editor && withModal;
+    let EditorModal, Fullscreen;
+    if (shouldRenderEditorModal)
+      EditorModal =
+        withModal === true ? React.lazy(() => import(`./lib/EditorModal${dummy}`)) : withModal;
+    if (shouldRenderFullscreen) {
+      Fullscreen = React.lazy(() => {
+        return shouldRenderFullscreen ? import(`wix-rich-content-fullscreen${dummy}`) : '';
+      });
+      if (!this.expandModeData) {
+        import(`wix-rich-content-fullscreen/dist/lib/getImagesData${dummy}`).then(getImagesData => {
+          this.expandModeData = getImagesData.default(children.props.initialState);
+        });
+      }
+    }
+    this.setState({ EditorModal, Fullscreen });
+  }
+
   render() {
     const { strategies = [], children = {}, withModal = true, editor } = this.props;
     const modifiedProps = strategies.reduce((props, strategyFunction) => {
@@ -59,40 +81,29 @@ class EngineWrapper extends React.Component {
     }, children.props);
     const { helpers = {}, theme, locale = 'en', ModalsMap, onChange } = modifiedProps;
     const { onRequestClose } = this.state.modalProps || {};
-    //Editor Modal
-    let EditorModal = '';
-    const shouldRenderEditorModal = editor && withModal;
-    if (shouldRenderEditorModal) {
-      helpers.openModal = this.onModalOpen;
-      helpers.closeModal = this.onModalClose;
-      EditorModal = React.lazy(() =>
-        withModal === true ? import(`./lib/EditorModal${dummy}`) : withModal
-      );
-    }
+
     //viewer needs onExpand helper + Fullscreen
     helpers.onExpand = this.fullScreenOnExpand;
-    const shouldRenderFullscreen = !editor && !isSSR() && withModal;
-    const Fullscreen = React.lazy(() => {
-      return shouldRenderFullscreen ? import(`wix-rich-content-fullscreen${dummy}`) : '';
-    });
-    if (shouldRenderFullscreen && !this.expandModeData) {
-      import(`wix-rich-content-fullscreen/dist/lib/getImagesData${dummy}`).then(getImagesData => {
-        this.expandModeData = getImagesData.default(children.props.initialState);
-      });
+
+    //Editor Modal
+    if (editor && withModal) {
+      helpers.openModal = this.onModalOpen;
+      helpers.closeModal = this.onModalClose;
     }
     if (onChange)
       modifiedProps.onChange = editorState => {
         onChange(editorState);
         this.handleChange(editorState);
       };
+
     modifiedProps.helpers = helpers;
     modifiedProps.onChange = this.onChange;
 
-    const { expandModeIndex, expendModeIsOpen, disabled } = this.state;
+    const { expandModeIndex, expendModeIsOpen, disabled, EditorModal, Fullscreen } = this.state;
     return (
       <React.Fragment>
         {Children.only(React.cloneElement(children, { ...modifiedProps, disabled }))}
-        {shouldRenderEditorModal && (
+        {EditorModal && (
           <Suspense fallback={<div />}>
             <EditorModal
               isOpen={this.state.showModal}
@@ -106,7 +117,7 @@ class EngineWrapper extends React.Component {
             />
           </Suspense>
         )}
-        {shouldRenderFullscreen && (
+        {Fullscreen && (
           <Suspense fallback={<div />}>
             <Fullscreen
               isOpen={expendModeIsOpen}
