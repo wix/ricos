@@ -20,6 +20,10 @@
   - [#735](https://github.com/wix-incubator/rich-content/pull/735) disable paste inline images and atomic blocks
   - [#735](https://github.com/wix-incubator/rich-content/pull/735) copy paste inline styles from html
   - [#713](https://github.com/wix-incubator/rich-content/pull/713) toolbars rtl issued fixed
+
+### :house: Internal
+- `gallery`
+  - [#755](https://github.com/wix-incubator/rich-content/pull/755) bump pro-gallery version to 1.8.2
 </details>
 <hr/>
 
