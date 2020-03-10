@@ -24,6 +24,8 @@
   - [#735](https://github.com/wix-incubator/rich-content/pull/735) copy paste inline styles from html
   - [#713](https://github.com/wix-incubator/rich-content/pull/713) toolbars rtl issued fixed
   - [#757](https://github.com/wix-incubator/rich-content/pull/757) prevent underline link inline style to affects on new line
+- `link`
+  - [#756](https://github.com/wix-incubator/rich-content/pull/756) selection keeps in place when canceling link panel
 </details>
 <hr/>
 
