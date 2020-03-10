@@ -9,7 +9,7 @@ const styleLoader = {
 };
 
 class Loader extends React.Component {
-  state = { percent: 0 };
+  state = { percent: 1 };
 
   componentDidMount() {
     this.updateProgress();
@@ -28,7 +28,7 @@ class Loader extends React.Component {
   timeoutStep = 3;
   updateProgress = () => {
     this.timerId = setTimeout(() => {
-      this.timeoutStep += (this.timeoutStep * this.timeoutStep) / 100;
+      this.timeoutStep += (this.timeoutStep * this.timeoutStep) / 200;
       this.setState({ percent: this.state.percent + 1 });
       this.updateProgress();
     }, Math.floor(this.timeoutStep * 1000));

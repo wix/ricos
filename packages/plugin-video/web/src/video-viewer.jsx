@@ -66,7 +66,7 @@ class VideoViewer extends Component {
   handleContextMenu = e => this.props.disableRightClick && e.preventDefault();
 
   render() {
-    const { theme, controls, width, height, disabled, setComponentUrl } = this.props;
+    const { theme, width, height, disabled, setComponentUrl } = this.props;
     this.styles = this.styles || mergeStyles({ styles, theme });
     const { url, key } = this.state;
 
@@ -77,7 +77,7 @@ class VideoViewer extends Component {
       disabled,
       width,
       height,
-      controls,
+      key,
     };
 
     const isLoaded = this.props.isLoaded || this.state.isLoaded;
@@ -86,8 +86,8 @@ class VideoViewer extends Component {
         <ReactPlayerWrapper
           className={classNames(this.styles.video_player)}
           onContextMenu={this.handleContextMenu}
-          key={key}
           data-loaded={isLoaded}
+          controls={this.props.isLoaded !== false}
           {...props}
         />
       </>
@@ -98,7 +98,6 @@ class VideoViewer extends Component {
 VideoViewer.propTypes = {
   componentData: PropTypes.object.isRequired,
   onStart: PropTypes.func,
-  controls: PropTypes.bool,
   width: PropTypes.string,
   height: PropTypes.string,
   settings: PropTypes.object.isRequired,
@@ -114,7 +113,6 @@ VideoViewer.propTypes = {
 VideoViewer.defaultProps = {
   width: '100%',
   height: '100%',
-  controls: true,
 };
 
 export default VideoViewer;
