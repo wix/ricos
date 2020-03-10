@@ -5,10 +5,7 @@
   width: 100vw;
   height: 100vh;
   z-index: 1000;
-  background: rgba(0,0,0,1);
-  transition: opacity 2s ease;
-  visibility: visible;
-  opacity: 1;
+  background: rgb(0,0,0);
 }
 
 .close {
@@ -18,12 +15,12 @@
   position: fixed;
   left: 20px;
   top: 20px;
-  background: rgba(0,0,0,0.8);
+  background: rgb(0,0,0);
   border-radius: 4px;
   width: 25px;
   height: 25px;
   fill: black;
-  color: rgba(255,255,255,0.8);
+  color: rgb(255,255,255);
   opacity: 0.6;
   border: hidden;
   cursor: pointer;

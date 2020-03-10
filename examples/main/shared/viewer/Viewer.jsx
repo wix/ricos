@@ -27,7 +27,6 @@ export default class Viewer extends PureComponent {
     }
     this.state = {
       disabled: false,
-      expandModeIsOpen: false,
     };
 
     const { scrollingElementFn } = props;

@@ -6,6 +6,7 @@ import layouts from 'wix-rich-content-plugin-gallery/dist/lib/layout-data-provid
 import resizeMediaUrl from 'wix-rich-content-plugin-gallery/dist/lib/resize-media-url';
 import PropTypes from 'prop-types';
 import styles from './fullscreen.rtlignore.scss';
+// import { ProGallery } from 'pro-gallery';
 
 const { ProGallery } = process.env.SANTA ? {} : require('pro-gallery');
 
@@ -26,11 +27,6 @@ export default function Fullscreen(props) {
     return convertItemData({ items: images, relValue, anchorTarget });
   };
 
-  setTimeout(() => {
-    const buttons = document.getElementsByClassName('gallery-item-social');
-    Array.from(buttons).forEach(button => (button.style.display = 'None'));
-  }, 10);
-
   let fullscreen = (
     <div className={styles.fullscreen} style={{ ...backgroundColor, ...topMargin }}>
       <button className={styles.close} style={foregroundColor} onClick={() => onClose()}>
@@ -49,6 +45,7 @@ export default function Fullscreen(props) {
           cubeType: 'fit',
           scrollSnap: true,
           videoPlay: 'auto',
+          allowSocial: false,
         }}
       />
     </div>
