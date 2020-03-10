@@ -9,6 +9,10 @@ import getImagesData from 'wix-rich-content-fullscreen/dist/lib/getImagesData';
 import Fullscreen from 'wix-rich-content-fullscreen';
 import 'wix-rich-content-fullscreen/dist/styles.min.css';
 
+import {
+  TextSelectionListener,
+  ViewerInlineToolBar,
+} from 'wix-rich-content-text-selection-toolbar';
 import { GALLERY_TYPE } from 'wix-rich-content-plugin-gallery';
 const anchorTarget = '_top';
 const relValue = 'noreferrer';
@@ -63,28 +67,33 @@ export default class Viewer extends PureComponent {
     };
 
     return (
-      <div id="rich-content-viewer" className="viewer">
-        <RichContentViewer
-          helpers={this.helpers}
-          typeMappers={Plugins.typeMappers}
-          inlineStyleMappers={Plugins.getInlineStyleMappers(initialState)}
-          decorators={Plugins.decorators}
-          config={this.pluginsConfig}
-          // siteDomain="https://www.wix.com"
-          {...viewerProps}
-        />
-        {!isSSR() && (
-          <Fullscreen
-            images={this.expandModeData.images}
-            onClose={() => this.setState({ expandModeIsOpen: false })}
-            isOpen={expandModeIsOpen}
-            index={expandModeIndex}
-            relValue={relValue}
-            anchorTarget={anchorTarget}
-            locale={locale}
+      <>
+        <div id="rich-content-viewer" className="viewer">
+          <RichContentViewer
+            helpers={this.helpers}
+            typeMappers={Plugins.typeMappers}
+            inlineStyleMappers={Plugins.getInlineStyleMappers(initialState)}
+            decorators={Plugins.decorators}
+            config={this.pluginsConfig}
+            // siteDomain="https://www.wix.com"
+            {...viewerProps}
           />
+          {!isSSR() && (
+            <Fullscreen
+              images={this.expandModeData.images}
+              onClose={() => this.setState({ expandModeIsOpen: false })}
+              isOpen={expandModeIsOpen}
+              index={expandModeIndex}
+              relValue={relValue}
+              anchorTarget={anchorTarget}
+              locale={locale}
+            />
+          )}
+        </div>
+        {!isSSR() && (
+          <TextSelectionListener targetId={'rich-content-viewer'} ToolBar={ViewerInlineToolBar} />
         )}
-      </div>
+      </>
     );
   }
 }

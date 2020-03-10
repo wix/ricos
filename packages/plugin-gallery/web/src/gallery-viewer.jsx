@@ -15,7 +15,7 @@ class GalleryViewer extends React.Component {
   constructor(props) {
     validate(props.componentData, pluginGallerySchema);
     super(props);
-
+    this.domId = this.props.blockKey || 'v-' + this.props.entityIndex;
     this.state = {
       size: {},
       ...this.stateFromProps(props),
@@ -85,7 +85,6 @@ class GalleryViewer extends React.Component {
   getItems() {
     const { items } = this.state;
     const { anchorTarget, relValue } = this.props;
-
     if (items.length > 0) {
       return convertItemData({ items, anchorTarget, relValue });
     } else {
@@ -181,11 +180,12 @@ class GalleryViewer extends React.Component {
       <div
         ref={elem => (this.container = elem)}
         className={this.styles.gallery_container}
-        data-hook="galleryViewer"
+        data-hook={'galleryViewer'}
         role="none"
         onContextMenu={this.handleContextMenu}
       >
         <ProGallery
+          domId={this.domId}
           items={items}
           styles={styleParams}
           container={size}
@@ -202,6 +202,7 @@ class GalleryViewer extends React.Component {
 
 GalleryViewer.propTypes = {
   componentData: PropTypes.object.isRequired,
+  blockKey: PropTypes.string,
   entityIndex: PropTypes.number,
   onClick: PropTypes.func,
   className: PropTypes.string,

@@ -65,6 +65,15 @@ describe('text', () => {
     cy.eyesCheckWindow(this.test.title);
   });
 
+  it('allow to enter hashtag with link', function() {
+    cy.loadEditorAndViewer()
+      .enterParagraphs([
+        '#wix.com wix.com #this_is_not_a_link #will_be_a_link thisislink#youknow.com ',
+      ])
+      .setLink([37, 15], 'https://www.wix.com/');
+    cy.eyesCheckWindow(this.test.title);
+  });
+
   it('allow to create lists', function() {
     cy.loadEditorAndViewer('plain')
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.ORDERED_LIST, [300, 100])

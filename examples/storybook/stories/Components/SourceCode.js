@@ -22,22 +22,24 @@ class SourceCode extends React.Component {
     const { code } = this.props;
     const { open } = this.state;
 
+    const toggleButton = (
+      <div
+        onClick={() =>
+          this.setState(_state => ({
+            open: !_state.open,
+          }))
+        }
+      >
+        {'</>'} {open ? 'Hide' : 'show'} Code
+      </div>
+    );
     return (
       <div>
+        {toggleButton}
         <div className={cx(styles.sourcecode, { [styles.open]: open })}>
           <SyntaxHighlighter language="javascript" style={atomDark}>
             {code}
           </SyntaxHighlighter>
-        </div>
-
-        <div
-          onClick={() =>
-            this.setState(_state => ({
-              open: !_state.open,
-            }))
-          }
-        >
-          {'</>'} {open ? 'Hide' : 'show'} Code
         </div>
       </div>
     );
