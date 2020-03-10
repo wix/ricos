@@ -19,7 +19,12 @@ export default function Fullscreen(props) {
 
   let fullscreen = (
     <div className={styles.fullscreen} style={{ ...backgroundColor, ...topMargin }}>
-      <button className={styles.close} style={foregroundColor} onClick={() => onClose()}>
+      <button
+        className={styles.close}
+        style={foregroundColor}
+        onClick={() => onClose()}
+        data-hook={'fullscreen-close-button'}
+      >
         {closeIcon()}
       </button>
       <ProGallery

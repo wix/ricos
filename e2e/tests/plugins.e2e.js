@@ -85,6 +85,12 @@ describe('plugins', () => {
           .parent()
           .click();
         cy.eyesCheckWindow({ tag: this.test.title, target: 'window', fully: false });
+        cy.get(`[data-hook=${'nav-arrow-next'}]`).click({ multiple: true });
+        cy.eyesCheckWindow({ tag: 'next fullscreen item', target: 'window', fully: false });
+        cy.get(`[data-hook=${'nav-arrow-back'}]`).click();
+        cy.eyesCheckWindow({ tag: 'previous fullscreen item', target: 'window', fully: false });
+        cy.get(`[data-hook=${'fullscreen-close-button'}]`).click();
+        cy.eyesCheckWindow({ tag: 'closed fullscreen', target: 'window', fully: false });
       });
     });
   });
