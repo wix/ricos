@@ -330,6 +330,29 @@ describe('plugins', () => {
     });
   });
 
+  context('emoji', () => {
+    before('load editor', function() {
+      eyesOpen(this);
+    });
+
+    beforeEach('load editor', () => {
+      cy.switchToDesktop();
+    });
+
+    after(() => cy.eyesClose());
+
+    it('render some emojies', function() {
+      cy.loadEditorAndViewer('empty');
+      cy.get(`button[data-hook=${PLUGIN_COMPONENT.EMOJI}]`).click();
+      cy.eyesCheckWindow('render emoji modal');
+      cy.get(`[data-hook=emoji-5]`).click();
+      cy.get(`[data-hook=emoji-group-5]`).click();
+      cy.get(`[data-hook=emoji-95]`).click();
+      cy.get(`[data-hook=emoji-121]`).click();
+      cy.eyesCheckWindow(this.test.title);
+    });
+  });
+
   context('map', () => {
     before('load editor', function() {
       eyesOpen(this);

@@ -101,6 +101,7 @@ export const PLUGIN_COMPONENT = {
   SOUND_CLOUD: 'soundCloudPlayer',
   MAP: 'mapViewer',
   FILE_UPLOAD: 'fileUploadViewer',
+  EMOJI: 'EMOJI_insert_plugin_button',
 };
 
 export const DIVIDER_DROPDOWN_OPTIONS = {

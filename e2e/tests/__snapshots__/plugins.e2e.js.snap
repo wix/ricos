@@ -2810,3 +2810,89 @@ exports[`plugins > video > add a custom video #0`] =
     }
   }
 };
+
+exports[`plugins > emoji > render emoji modal #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        },
+        {
+          "key": 1,
+          "length": 1,
+          "offset": 1
+        },
+        {
+          "key": 2,
+          "length": 1,
+          "offset": 2
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "😄💰📝",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "emojiUnicode": "😄"
+      },
+      "mutability": "IMMUTABLE",
+      "type": "EMOJI_TYPE"
+    },
+    "1": {
+      "data": {
+        "emojiUnicode": "💰"
+      },
+      "mutability": "IMMUTABLE",
+      "type": "EMOJI_TYPE"
+    },
+    "2": {
+      "data": {
+        "emojiUnicode": "📝"
+      },
+      "mutability": "IMMUTABLE",
+      "type": "EMOJI_TYPE"
+    }
+  }
+};
+
+exports[`plugins > emoji > render emojies #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {}
+};
+
+exports[`plugins > emoji > render some emojies #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {}
+};
