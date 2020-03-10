@@ -20,8 +20,10 @@ class TestApp extends PureComponent {
   };
 
   renderViewer = () => {
-    const { isMobile, viewerState, locale } = this.props;
-    return <Viewer initialState={viewerState} isMobile={isMobile} locale={locale} />;
+    const { isMobile, viewerState, locale, seoMode } = this.props;
+    return (
+      <Viewer initialState={viewerState} isMobile={isMobile} locale={locale} seoMode={seoMode} />
+    );
   };
 
   render() {
@@ -48,6 +50,7 @@ TestApp.propTypes = {
   initialState: PropTypes.object,
   localeResource: PropTypes.object,
   onEditorChange: PropTypes.func,
+  seoMode: PropTypes.bool,
 };
 
 export default TestApp;

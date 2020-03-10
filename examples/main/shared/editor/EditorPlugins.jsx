@@ -54,7 +54,6 @@ import {
   colorScheme,
   customBackgroundStyleFn,
 } from '../../src/text-color-style-fn';
-import { getBaseUrl } from '../../src/utils';
 import { testWixVideos } from './mock';
 // import { MyCustomIcon, SizeSmallRightIcon, TOOLBARS } from 'wix-rich-content-editor-common';
 import { TOOLBARS, BUTTONS, DISPLAY_MODE } from 'wix-rich-content-editor-common';
@@ -104,7 +103,7 @@ let userButtonBorderColors = [...buttonDefaultPalette];
 
 const getLinkPanelDropDownConfig = () => {
   const getItems = () => {
-    casual.define('item', function() {
+    casual.define('item', function () {
       return {
         value: casual.url,
         label: casual.catch_phrase,
@@ -177,16 +176,14 @@ const videoHandlers = {
   //media manager - Here you can call your custom video upload functionality (comment function to disable custom upload)
   handleFileSelection: (updateEntity, removeEntity) => {
     console.log('consumer wants to upload custom video');
-    const mockVideoIndex = Math.floor(Math.random() * testWixVideos.length);
-    const testVideo = testWixVideos[mockVideoIndex];
     const videoWithAbsoluteUrl = {
       url:
         'https://video.wixstatic.com/video/11062b_a552731f40854d16a91627687fb8d1a6/1080p/mp4/file.mp4',
     };
     const videoWithRelativeUrl = {
-      pathname: `video/${testVideo.url}/1080p/mp4/file.mp4`,
+      pathname: `video/11062b_a552731f40854d16a91627687fb8d1a6/1080p/mp4/file.mp4`,
       thumbnail: {
-        pathname: `media/${testVideo.metadata.posters[0].url}`,
+        pathname: `media/11062b_a552731f40854d16a91627687fb8d1a6f000.jpg`,
         height: 1080,
         width: 1920,
       },
@@ -224,7 +221,7 @@ const videoHandlers = {
       updateEntity({ data: videoToUpload });
       //updateEntity({ error: { msg: 'Upload Failed' } });
       console.log('consumer uploaded ', videoToUpload);
-    }, 500);
+    }, 1500);
   },
 };
 
@@ -298,7 +295,6 @@ const config = {
     },
   },
   [HTML_TYPE]: {
-    htmlIframeSrc: `${getBaseUrl()}/static/html-plugin-embed.html`,
     minWidth: 35,
     maxWidth: 740,
     width: 350,

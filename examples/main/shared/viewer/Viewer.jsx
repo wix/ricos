@@ -7,6 +7,10 @@ import * as Plugins from './ViewerPlugins';
 import theme from '../theme/theme'; // must import after custom styles
 import getImagesData from 'wix-rich-content-fullscreen/src/lib/getImagesData';
 import Fullscreen from 'wix-rich-content-fullscreen';
+import {
+  TextSelectionListener,
+  ViewerInlineToolBar,
+} from 'wix-rich-content-text-selection-toolbar';
 import { GALLERY_TYPE } from 'wix-rich-content-plugin-gallery';
 const anchorTarget = '_top';
 const relValue = 'noreferrer';
@@ -45,7 +49,7 @@ export default class Viewer extends PureComponent {
   };
 
   render() {
-    const { isMobile, locale, initialState } = this.props;
+    const { isMobile, locale, initialState, seoMode } = this.props;
     const { expendModeIsOpen, expandModeIndex, disabled } = this.state;
 
     const viewerProps = {
@@ -56,28 +60,34 @@ export default class Viewer extends PureComponent {
       theme,
       initialState,
       disabled,
+      seoMode,
     };
 
     return (
-      <div id="rich-content-viewer" className="viewer">
-        <RichContentViewer
-          helpers={this.helpers}
-          typeMappers={Plugins.typeMappers}
-          inlineStyleMappers={Plugins.getInlineStyleMappers(initialState)}
-          decorators={Plugins.decorators}
-          config={this.pluginsConfig}
-          // siteDomain="https://www.wix.com"
-          {...viewerProps}
-        />
-        {!isSSR() && (
-          <Fullscreen
-            isOpen={expendModeIsOpen}
-            images={this.expandModeData.images}
-            onClose={() => this.setState({ expendModeIsOpen: false })}
-            index={expandModeIndex}
+      <>
+        <div id="rich-content-viewer" className="viewer">
+          <RichContentViewer
+            helpers={this.helpers}
+            typeMappers={Plugins.typeMappers}
+            inlineStyleMappers={Plugins.getInlineStyleMappers(initialState)}
+            decorators={Plugins.decorators}
+            config={this.pluginsConfig}
+            // siteDomain="https://www.wix.com"
+            {...viewerProps}
           />
+          {!isSSR() && (
+            <Fullscreen
+              isOpen={expendModeIsOpen}
+              images={this.expandModeData.images}
+              onClose={() => this.setState({ expendModeIsOpen: false })}
+              index={expandModeIndex}
+            />
+          )}
+        </div>
+        {!isSSR() && (
+          <TextSelectionListener targetId={'rich-content-viewer'} ToolBar={ViewerInlineToolBar} />
         )}
-      </div>
+      </>
     );
   }
 }

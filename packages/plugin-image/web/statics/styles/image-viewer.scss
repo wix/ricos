@@ -39,21 +39,7 @@ $opacityTransition: opacity 0.8s ease;
 }
 
 .imageWrapper {
-  overflow: hidden; // &:before {
-  //   content: " ";
-  //   position: absolute;
-  //   z-index: 0;
-  //   top: 0;
-  //   left: 0;
-  //   width: 100%;
-  //   height: 3px;
-  //   background: #333;
-  //   animation-name: image_loading;
-  //   animation-duration: 2s;
-  //   animation-iteration-count: infinite;
-  //   animation-delay: 0s;
-  //   animation-timing-function: linear;
-  // }
+  overflow: hidden;
 }
 
 .image {
@@ -97,7 +83,7 @@ $opacityTransition: opacity 0.8s ease;
   opacity: 0;
   transition: $opacityTransition;
 
-  &.isGif {
+  &.onlyHighRes {
     position: relative;
     opacity: 1;
   }
