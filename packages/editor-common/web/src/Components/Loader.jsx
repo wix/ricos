@@ -10,15 +10,13 @@ const styleLoader = {
 
 class Loader extends React.Component {
   state = {};
-  _isMounted = false;
 
   componentDidMount() {
-    this._isMounted = true;
     this.getInfiniteLoadingPercent(this.updatePercentage);
   }
 
   componentWillUnmount() {
-    this._isMounted = false;
+    clearInterval(this.interval);
   }
   initiateStyles() {
     if (!this.styles) {
@@ -28,28 +26,21 @@ class Loader extends React.Component {
   }
 
   updatePercentage = (progress, localUrl) => {
-    if (this._isMounted) {
-      this.setState({ progress, localUrl });
-      if (progress >= 100) {
-        this.props?.onLoad?.(false);
-      }
-    }
+    this.setState({ progress, localUrl });
   };
 
   getInfiniteLoadingPercent = updatePercentage => {
     let percent = 1;
     updatePercentage(percent);
-    const interval = setInterval(() => {
+    this.interval = setInterval(() => {
       updatePercentage(percent);
       percent += 1;
-      if (percent === 100) clearInterval(interval);
+      if (percent === 100) clearInterval(this.interval);
     }, 3500);
   };
 
   setLocalUrl = localUrl => {
-    if (this._isMounted) {
-      this.setState({ localUrl });
-    }
+    this.setState({ localUrl });
   };
 
   renderProgress() {
@@ -93,7 +84,6 @@ Loader.propTypes = {
   overlayClassName: PropTypes.string,
   loaderClassName: PropTypes.string,
   theme: PropTypes.object.isRequired,
-  onLoad: PropTypes.func,
 };
 
 Loader.defaultProps = {

@@ -172,8 +172,8 @@ class ImageSettings extends Component {
                 theme={theme}
               />
             ) : (
-              <div className={this.styles.imageSettingsImage} style={{ position: 'relative' }}>
-                <Loader type={'medium'} helpers={helpers} theme={theme} />
+              <div className={this.styles.imageSettingsImage}>
+                <Loader type={'medium'} theme={theme} />
               </div>
             )}
           </SettingsSection>

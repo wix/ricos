@@ -38,7 +38,9 @@ class GalleryComponent extends PureComponent {
       !isEqual(componentState, nextProps.componentState)
     ) {
       this.setState(this.stateFromProps(nextProps));
-    } else if (componentData.items?.length > 0) this.onLoad(false);
+    } else if (componentData.items?.length > 0) {
+      this.onLoad(false);
+    }
   }
 
   stateFromProps = props => {
@@ -57,7 +59,8 @@ class GalleryComponent extends PureComponent {
         //lets continue the uploading process
         if (userSelectedFiles.files && userSelectedFiles.files.length > 0) {
           state.itemsLeftToUpload = userSelectedFiles.files.length;
-          state.isLoading = this.handleFilesSelected(userSelectedFiles.files);
+          this.handleFilesSelected(userSelectedFiles.files);
+          state.isLoading = true;
         }
         if (this.props.store) {
           setTimeout(() => {
@@ -106,10 +109,7 @@ class GalleryComponent extends PureComponent {
       reader.onload = e => this.fileLoaded(e, file, itemPos);
       reader.readAsDataURL(file);
     });
-    if (this.state) {
-      this.onLoad(true);
-    }
-    return { isLoading: true };
+    this.state && this.onLoad(true);
   };
 
   imageLoaded = (event, file, itemPos) => {
@@ -163,43 +163,32 @@ class GalleryComponent extends PureComponent {
   };
 
   renderLoader = () => {
-    return <Loader type={'medium'} helpers={this.props.helpers} onLoad={this.onLoad} />;
+    return <Loader type={'medium'} />;
   };
 
   onLoad = isLoading => {
-    if ((!this?.state?.isLoading && isLoading) || (this?.state?.isLoading && !isLoading)) {
-      this.setState({ isLoading });
-    }
+    this.setState({ isLoading });
   };
 
-  isLoadingProgress = () => this.state.isLoading;
-
   render() {
-    const gallery = (
-      <GalleryViewer
-        componentData={this.props.componentData}
-        onClick={this.props.onClick}
-        className={this.props.className}
-        settings={this.props.settings}
-        theme={this.props.theme}
-        helpers={this.props.helpers}
-        disableRightClick={this.props.disableRightClick}
-        isMobile={this.props.isMobile}
-        anchorTarget={this.props.anchorTarget}
-        relValue={this.props.relValue}
-        blockKey={this.blockKey}
-      />
+    return (
+      <>
+        <GalleryViewer
+          componentData={this.props.componentData}
+          onClick={this.props.onClick}
+          className={this.props.className}
+          settings={this.props.settings}
+          theme={this.props.theme}
+          helpers={this.props.helpers}
+          disableRightClick={this.props.disableRightClick}
+          isMobile={this.props.isMobile}
+          anchorTarget={this.props.anchorTarget}
+          relValue={this.props.relValue}
+          blockKey={this.blockKey}
+        />
+        {this.state.isLoading && this.renderLoader()}
+      </>
     );
-    if (this.isLoadingProgress()) {
-      return (
-        <div>
-          {gallery}
-          {this.renderLoader()}
-        </div>
-      );
-    } else {
-      return gallery;
-    }
   }
 }
 

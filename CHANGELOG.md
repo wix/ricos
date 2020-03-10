@@ -15,7 +15,7 @@
 
 ### :rocket: New Feature
 - `editor-common`
-  - [#716](https://github.com/wix-incubator/rich-content/pull/716) progress loader & loading percentage generator
+  - [#716](https://github.com/wix-incubator/rich-content/pull/716) progress loader
 </details>
 <hr/>
 
