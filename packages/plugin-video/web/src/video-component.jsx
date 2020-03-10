@@ -66,15 +66,13 @@ class VideoComponent extends React.Component {
   renderLoader = () => {
     return (
       <div className={this.styles.videoOverlay}>
-        <Loader type={'medium'} helpers={this.props.helpers} />
+        <Loader type={'medium'} />
       </div>
     );
   };
 
-  reLoad = () => {
-    if (this.state.isLoaded) {
-      this.setState({ isLoaded: false });
-    }
+  onReload = () => {
+    this.setState({ isLoaded: false });
   };
 
   renderPlayer = () => {
@@ -96,7 +94,7 @@ class VideoComponent extends React.Component {
         disableRightClick={disableRightClick}
         theme={theme}
         setComponentUrl={setComponentUrl}
-        reLoad={this.reLoad}
+        onReload={this.onReload}
         isLoaded={this.state.isLoaded}
       />
     );
@@ -144,7 +142,6 @@ VideoComponent.propTypes = {
   disableRightClick: PropTypes.bool,
   disabled: PropTypes.bool,
   setComponentUrl: PropTypes.func,
-  helpers: PropTypes.object.isRequired,
 };
 
 export { VideoComponent as Component, DEFAULTS };

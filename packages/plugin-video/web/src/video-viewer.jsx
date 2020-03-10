@@ -39,7 +39,7 @@ class VideoViewer extends Component {
     const url = this.normalizeUrl(newUrl);
     if (url !== this.state.url) {
       this.setState({ url });
-      this.props.reLoad?.();
+      this.props.onReload?.();
     }
   };
   componentDidMount() {
@@ -80,7 +80,7 @@ class VideoViewer extends Component {
       controls,
     };
 
-    const isLoaded = this.props.isLoaded ? this.props.isLoaded : this.state.isLoaded;
+    const isLoaded = this.props.isLoaded || this.state.isLoaded;
     return (
       <>
         <ReactPlayerWrapper
@@ -108,7 +108,7 @@ VideoViewer.propTypes = {
   setComponentUrl: PropTypes.func,
   onReady: PropTypes.func,
   isLoaded: PropTypes.bool,
-  reLoad: PropTypes.func,
+  onReload: PropTypes.func,
 };
 
 VideoViewer.defaultProps = {
