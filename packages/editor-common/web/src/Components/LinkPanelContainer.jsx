@@ -91,7 +91,7 @@ class LinkPanelContainer extends PureComponent {
         <div className={styles.linkPanel_content}>
           <LinkPanel
             onEnter={this.onDone}
-            onEscape={this.hidePanel}
+            onEscape={this.onCancel}
             linkValues={this.state.linkPanelValues}
             onChange={linkPanelValues => this.setState({ linkPanelValues })}
             theme={theme}
