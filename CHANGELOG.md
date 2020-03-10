@@ -13,6 +13,9 @@
     Click to see more.
   </summary>
 
+### :rocket: New Feature
+- `editor-common`
+  - [#716](https://github.com/wix-incubator/rich-content/pull/716) progress loader
 ### :bug: Bug Fix
 - `hashtag`
   - [#707](https://github.com/wix-incubator/rich-content/pull/707) allow hashtag and link in the same block
@@ -20,9 +23,7 @@
   - [#735](https://github.com/wix-incubator/rich-content/pull/735) disable paste inline images and atomic blocks
   - [#735](https://github.com/wix-incubator/rich-content/pull/735) copy paste inline styles from html
   - [#713](https://github.com/wix-incubator/rich-content/pull/713) toolbars rtl issued fixed
-### :rocket: New Feature
-- `editor-common`
-  - [#716](https://github.com/wix-incubator/rich-content/pull/716) progress loader
+
 </details>
 <hr/>
 
