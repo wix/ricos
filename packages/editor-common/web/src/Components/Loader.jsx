@@ -9,14 +9,14 @@ const styleLoader = {
 };
 
 class Loader extends React.Component {
-  state = {};
+  state = { percent: 0 };
 
   componentDidMount() {
-    this.getInfiniteLoadingPercent(this.updatePercentage);
+    this.updateProgress();
   }
 
   componentWillUnmount() {
-    clearInterval(this.interval);
+    clearInterval(this.timerId);
   }
   initiateStyles() {
     if (!this.styles) {
@@ -25,29 +25,24 @@ class Loader extends React.Component {
     }
   }
 
-  updatePercentage = (progress, localUrl) => {
-    this.setState({ progress, localUrl });
-  };
-
-  getInfiniteLoadingPercent = updatePercentage => {
-    let percent = 1;
-    updatePercentage(percent);
-    this.interval = setInterval(() => {
-      updatePercentage(percent);
-      percent += 1;
-      if (percent === 100) clearInterval(this.interval);
-    }, 3500);
+  timeoutStep = 3;
+  updateProgress = () => {
+    this.timerId = setTimeout(() => {
+      this.timeoutStep += (this.timeoutStep * this.timeoutStep) / 100;
+      this.setState({ percent: this.state.percent + 1 });
+      this.updateProgress();
+    }, Math.floor(this.timeoutStep * 1000));
   };
 
   renderProgress() {
     return (
       <div>
         <div
-          className={classNames(this.props.loaderClassName, this.styles.progress, {
+          className={classNames(this.styles.progress, {
             [this.styles[this.props.type]]: this.props.type,
           })}
         >
-          {`${this.state.progress}%`}
+          {`${this.state.percent}%`}
         </div>
       </div>
     );
@@ -59,13 +54,9 @@ class Loader extends React.Component {
       ? { ...styleLoader, backgroundImage: `url(${this.state.localUrl})` }
       : styleLoader;
     return (
-      <div
-        className={classNames(this.props.overlayClassName, this.styles.loaderOverlay)}
-        data-hook="loader"
-        style={style}
-      >
+      <div className={classNames(this.styles.loaderOverlay)} data-hook="loader" style={style}>
         <div
-          className={classNames(this.props.loaderClassName, this.styles.loader, {
+          className={classNames(this.styles.loader, {
             [this.styles[this.props.type]]: this.props.type,
           })}
         />
@@ -77,15 +68,11 @@ class Loader extends React.Component {
 
 Loader.propTypes = {
   type: PropTypes.string,
-  overlayClassName: PropTypes.string,
-  loaderClassName: PropTypes.string,
   theme: PropTypes.object.isRequired,
 };
 
 Loader.defaultProps = {
   type: 'mini',
-  overlayClassName: '',
-  loaderClassName: '',
 };
 
 export default Loader;
