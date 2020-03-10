@@ -27,8 +27,8 @@ export default class TextLinkPanel extends Component {
       t,
       isActive: !isEmpty(linkData),
       onDone: this.createLinkEntity,
-      onCancel: this.cancelLink,
-      onHide: this.hideLinkPanel,
+      onCancel: this.onCancel,
+      hidePanel: this.hideLinkPanel,
       onDelete: this.deleteLink,
       onOverrideContent: this.props.onOverrideContent,
       uiSettings,
@@ -64,7 +64,7 @@ export default class TextLinkPanel extends Component {
     setEditorState(newEditorState);
   };
 
-  cancelLink = () => {
+  onCancel = () => {
     const { getEditorState, setEditorState } = this.props;
     const editorState = getEditorState();
     const selection = editorState.getSelection();

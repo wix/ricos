@@ -42,7 +42,7 @@ class LinkPanelContainer extends PureComponent {
 
   onDelete = () => {
     this.props.onDelete();
-    this.props.onHide();
+    this.props.hidePanel();
   };
 
   onCancel = () => this.props.onCancel();
@@ -91,7 +91,7 @@ class LinkPanelContainer extends PureComponent {
         <div className={styles.linkPanel_content}>
           <LinkPanel
             onEnter={this.onDone}
-            onEscape={this.onHide}
+            onEscape={this.hidePanel}
             linkValues={this.state.linkPanelValues}
             onChange={linkPanelValues => this.setState({ linkPanelValues })}
             theme={theme}
@@ -148,7 +148,7 @@ LinkPanelContainer.propTypes = {
   onDone: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
   onDelete: PropTypes.func.isRequired,
-  onHide: PropTypes.func.isRequired,
+  hidePanel: PropTypes.func.isRequired,
   url: PropTypes.string,
   targetBlank: PropTypes.bool,
   anchorTarget: PropTypes.string,
