@@ -39,10 +39,6 @@ class Loader extends React.Component {
     }, 3500);
   };
 
-  setLocalUrl = localUrl => {
-    this.setState({ localUrl });
-  };
-
   renderProgress() {
     return (
       <div>

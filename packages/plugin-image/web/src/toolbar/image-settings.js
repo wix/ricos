@@ -173,7 +173,7 @@ class ImageSettings extends Component {
               />
             ) : (
               <div className={this.styles.imageSettingsImage}>
-                <Loader type={'medium'} theme={theme} />
+                <Loader type={'medium'} />
               </div>
             )}
           </SettingsSection>
