@@ -25,7 +25,7 @@ describe('locale strategy', () => {
 
   it('should be correctly overridden by inner props', () => {
     const testCases = [
-      { expected: { locale: 'en', localeResource: hebResources }, config: { locale: 'en' } },
+      { expected: { locale: 'he', localeResource: hebResources }, config: { locale: 'he' } },
     ];
     testCases.forEach(testCase => {
       const strategy = uut(testCase.config);
