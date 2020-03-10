@@ -86,6 +86,7 @@ export default class Viewer extends PureComponent {
               relValue={relValue}
               anchorTarget={anchorTarget}
               locale={locale}
+              // target={document.getElementById('rich-content-editor')}
             />
           )}
         </div>
