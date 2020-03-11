@@ -1,6 +1,8 @@
 /* eslint-disable no-console */
 
 const inquirer = require('inquirer');
+const getGitConfig = require('parse-git-config');
+
 const fs = require('fs');
 const { version } = require('../lerna.json');
 const CURR_DIR = process.cwd();
@@ -10,6 +12,11 @@ const chalk = require('chalk');
 // const execSync = require('child_process').execSync;
 // const exec = cmd => execSync(cmd, { stdio: 'inherit' });
 const CHOICES = fs.readdirSync(`${__dirname}/templates`);
+
+const gitConfig = getGitConfig.sync({ include: true, type: 'global' });
+
+const { user = {} } = gitConfig;
+const { name: gitName, email: gitEmail } = user;
 
 const QUESTIONS = [
   {
@@ -35,6 +42,7 @@ const QUESTIONS = [
       if (/^[a-zA-Z]+[\-'\s]?[a-zA-Z ]+$/.test(input)) return true;
       else return 'Plugin author name may only include lower letters.';
     },
+    default: gitName,
   },
   {
     name: 'pluginAuthorMailAddress',
@@ -44,6 +52,7 @@ const QUESTIONS = [
       if (/^\S+@\S+$/.test(input)) return true;
       else return 'Illegal mail address.';
     },
+    default: gitEmail,
   },
 ];
 
