@@ -247,8 +247,8 @@ describe('plugins', () => {
 
     it('add a soundcloud URL', function() {
       cy.openSoundCloudModal().addSoundCloud();
-      cy.waitForVideoToLoad();
       cy.shrinkPlugin();
+      cy.waitForVideoToLoad();
       cy.getEditor()
         .type('{uparrow}')
         .type('Will this fix the flakiness?');
