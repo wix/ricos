@@ -1,7 +1,6 @@
 // Components
 export { default as AccessibilityListener } from './Components/AccessibilityListener';
 export { default as ViewportRenderer } from './Components/ViewportRenderer';
-export { default as Loader } from './Components/Loader';
 
 // Utils
 export { default as withI18n } from './Utils/withI18n';

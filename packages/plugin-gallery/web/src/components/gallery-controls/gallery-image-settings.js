@@ -218,7 +218,7 @@ class ImageSettings extends Component {
                     theme={theme}
                     label={this.titleLabel}
                     placeholder={this.titleInputPlaceholder}
-                    value={metadata.title || ''}
+                    value={metadata.title}
                     maxLength={30}
                     dataHook="galleryImageTitleInput"
                     onChange={this.onTitleChange}

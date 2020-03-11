@@ -38,7 +38,8 @@
     "e2e:app:dev": "cd e2e/test-env && npm run dev",
     "test:unit": "lerna run --parallel --stream test",
     "lint": "lerna run --parallel --stream lint",
-    "build:test": "npm run build && npm run build --prefix e2e/test-env"
+    "build:test": "npm run build && npm run build --prefix e2e/test-env",
+    "generatePlugin": "node scripts/generatePlugin"
   },
   "husky": {
     "hooks": {
@@ -120,7 +121,8 @@
     "webpack": "^4.38.0",
     "webpack-bundle-analyzer": "^3.3.2",
     "webpack-dev-server": "^3.7.2",
-    "webpack-merge": "^4.2.1"
+    "webpack-merge": "^4.2.1",
+    "parse-git-config": "^2.0.2"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
