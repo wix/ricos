@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { default as Context } from '../Utils/Context';
+import PropTypes from 'prop-types';
 import noOutlineStyle from '../../statics/styles/no-outline.scss';
 
 export default class AccessibilityListener extends Component {
@@ -18,14 +18,14 @@ export default class AccessibilityListener extends Component {
   componentDidMount() {
     document.body.classList.add(noOutlineStyle.noOutline);
 
-    if (!this.context.isMobile) {
+    if (!this.props.isMobile) {
       document.addEventListener('keyup', this.handleTabKeyUp);
       document.addEventListener('click', this.handleClick);
     }
   }
 
   componentWillUnmount() {
-    if (!this.context.isMobile) {
+    if (!this.props.isMobile) {
       document.removeEventListener('keyup', this.handleTabKeyUp);
       document.removeEventListener('click', this.handleClick);
     }
@@ -34,4 +34,6 @@ export default class AccessibilityListener extends Component {
   render = () => null;
 }
 
-AccessibilityListener.contextType = Context.type;
+AccessibilityListener.propTypes = {
+  isMobile: PropTypes.bool.isRequired,
+};

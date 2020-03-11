@@ -1,0 +1,410 @@
+{
+  "blocks": [
+    {
+      "key": "foo",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "fksqt",
+      "text": "Theming is done by https://github.com/wix-incubator/rich-content/tree/master/packages/wrapper/web ",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 19,
+          "length": 78,
+          "key": 0
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "3biuv",
+      "text": "This is a quote example - look at the color!",
+      "type": "blockquote",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {
+        "dynamicStyles": {
+          "line-height": "1.5",
+          "padding-top": "2px",
+          "padding-bottom": "3px"
+        }
+      }
+    },
+    {
+      "key": "5n8nc",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "f56i",
+      "text": "No #documentation yet though 😲",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 29,
+          "length": 1,
+          "key": 1
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "5c7va",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "fjspc",
+      "text": " ",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 2
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "3notl",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {
+        "dynamicStyles": {
+          "line-height": "1.5",
+          "padding-top": "2px",
+          "padding-bottom": "3px"
+        }
+      }
+    },
+    {
+      "key": "4ac0i",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {
+        "dynamicStyles": {
+          "line-height": "1.5",
+          "padding-top": "2px",
+          "padding-bottom": "3px"
+        }
+      }
+    },
+    {
+      "key": "9v55p",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {
+        "dynamicStyles": {
+          "line-height": "1.5",
+          "padding-top": "2px",
+          "padding-bottom": "3px"
+        }
+      }
+    },
+    {
+      "key": "9h21o",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {
+        "dynamicStyles": {
+          "line-height": "1.5",
+          "padding-top": "2px",
+          "padding-bottom": "3px"
+        }
+      }
+    },
+    {
+      "key": "2hh7q",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {
+        "dynamicStyles": {
+          "line-height": "1.5",
+          "padding-top": "2px",
+          "padding-bottom": "3px"
+        }
+      }
+    },
+    {
+      "key": "acjju",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {
+        "dynamicStyles": {
+          "line-height": "1.5",
+          "padding-top": "2px",
+          "padding-bottom": "3px"
+        }
+      }
+    },
+    {
+      "key": "145in",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {
+        "dynamicStyles": {
+          "line-height": "1.5",
+          "padding-top": "2px",
+          "padding-bottom": "3px"
+        }
+      }
+    },
+    {
+      "key": "9foc6",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {
+        "dynamicStyles": {
+          "line-height": "1.5",
+          "padding-top": "2px",
+          "padding-bottom": "3px"
+        }
+      }
+    },
+    {
+      "key": "915fa",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {
+        "dynamicStyles": {
+          "line-height": "1.5",
+          "padding-top": "2px",
+          "padding-bottom": "3px"
+        }
+      }
+    },
+    {
+      "key": "cpn08",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {
+        "dynamicStyles": {
+          "line-height": "1.5",
+          "padding-top": "2px",
+          "padding-bottom": "3px"
+        }
+      }
+    },
+    {
+      "key": "15gmi",
+      "text": " ",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 3
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "9a6ri",
+      "text": "@Cool @Mention @Tags ",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 5,
+          "key": 4
+        },
+        {
+          "offset": 6,
+          "length": 8,
+          "key": 5
+        },
+        {
+          "offset": 15,
+          "length": 5,
+          "key": 6
+        }
+      ],
+      "data": {
+        "dynamicStyles": {
+          "line-height": "1.5",
+          "padding-top": "2px",
+          "padding-bottom": "3px"
+        }
+      }
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "type": "LINK",
+      "mutability": "MUTABLE",
+      "data": {
+        "url": "https://github.com/wix-incubator/rich-content/tree/master/packages/wrapper/web",
+        "target": "_blank",
+        "rel": "noopener"
+      }
+    },
+    "1": {
+      "type": "EMOJI_TYPE",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "emojiUnicode": "😲"
+      }
+    },
+    "2": {
+      "type": "wix-draft-plugin-gallery",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "items": [
+          {
+            "metadata": {
+              "height": 3733,
+              "width": 5600
+            },
+            "itemId": "c28d48f6383e8b3a71b218ad25bd4bb9",
+            "url": "8bb438_603549efcb714170bb71fe0757f37561.jpg"
+          },
+          {
+            "metadata": {
+              "height": 1280,
+              "width": 1920
+            },
+            "itemId": "91ff5a615e0235157dc1a7e5f66607bf",
+            "url": "8bb438_35ed730d87524b1a88179adc18ed9cd4.jpg"
+          },
+          {
+            "metadata": {
+              "height": 3733,
+              "width": 5600
+            },
+            "itemId": "2c2698b83ba64574db5e28ed54064081",
+            "url": "8bb438_0ab44689f626435c94b9a5b996524aba.jpg"
+          }
+        ],
+        "styles": {
+          "galleryLayout": 3,
+          "showArrows": true,
+          "cubeImages": true,
+          "smartCrop": false,
+          "cubeType": "fill",
+          "cubeRatio": 1,
+          "isVertical": false,
+          "galleryType": "Strips",
+          "groupSize": 1,
+          "groupTypes": "1",
+          "oneRow": true,
+          "hasThumbnails": true,
+          "galleryThumbnailsAlignment": "bottom",
+          "enableScroll": false,
+          "isGrid": false,
+          "isSlider": false,
+          "isColumns": false,
+          "isSlideshow": false,
+          "cropOnlyFill": false,
+          "floatingImages": 0,
+          "thumbnailSpacings": 0,
+          "galleryMargin": 0
+        },
+        "config": {
+          "alignment": "left",
+          "size": "small",
+          "layout": "small",
+          "spacing": 0
+        }
+      }
+    },
+    "3": {
+      "type": "wix-draft-plugin-divider",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "type": "single",
+        "config": {
+          "size": "large",
+          "alignment": "center",
+          "textWrap": "nowrap"
+        }
+      }
+    },
+    "4": {
+      "type": "mention",
+      "mutability": "SEGMENTED",
+      "data": {
+        "mention": {
+          "name": "Cool",
+          "slug": "Cool"
+        }
+      }
+    },
+    "5": {
+      "type": "mention",
+      "mutability": "SEGMENTED",
+      "data": {
+        "mention": {
+          "name": "Mention",
+          "slug": "Mention"
+        }
+      }
+    },
+    "6": {
+      "type": "mention",
+      "mutability": "SEGMENTED",
+      "data": {
+        "mention": {
+          "name": "Tags",
+          "slug": "Tags"
+        }
+      }
+    }
+  },
+  "VERSION": "6.8.6"
+}

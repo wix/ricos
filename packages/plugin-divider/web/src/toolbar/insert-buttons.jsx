@@ -3,7 +3,7 @@ import { InsertPluginIcon } from '../icons';
 import { DEFAULTS } from '../constants';
 
 export default ({ helpers, t, settings }) => {
-  const icon = settings?.toolbar?.icons?.Divider || InsertPluginIcon;
+  const icon = settings?.toolbar?.icons?.InsertPluginButtonIcon || InsertPluginIcon;
   return [
     {
       name: 'Divider',

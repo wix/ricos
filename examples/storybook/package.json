@@ -1,0 +1,103 @@
+{
+  "name": "wix-rich-content-storybook",
+  "version": "6.10.0",
+  "license": "UNLICENSED",
+  "private": true,
+  "author": {
+    "name": "Oded Soffrin",
+    "email": "odeds@wix.com"
+  },
+  "main": "dist/src/index.js",
+  "module": "dist/es/src/index.js",
+  "sideEffects": false,
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "start": "npm run storybook",
+    "precommit": "lint-staged",
+    "pretest": "yoshi build",
+    "test": "echo 'There are no tests configured for this project!' && exit 0",
+    "posttest": "yoshi lint",
+    "release": "yoshi release",
+    "storybook": "start-storybook -p 6006",
+    "clean": "rm -rf dist storybook-static",
+    "build": "build-storybook",
+    "lint": "yoshi lint"
+  },
+  "dependencies": {
+    "@babel/core": "7.2.2",
+    "@babel/runtime": "7.2.0",
+    "@storybook/react": "^5.3.1",
+    "@testing-library/react": "^9.4.0",
+    "aphrodite": "^2.4.0",
+    "babel-eslint": "10.0.3",
+    "babel-jest": "^25.1.0",
+    "classnames": "^2.0.0",
+    "draft-js": "0.11.2",
+    "husky": "^1.0.0-rc.6",
+    "jest": "^25.1.0",
+    "jest-yoshi-preset": "4.31.0",
+    "lint-staged": "^7.2.2",
+    "prop-types": "^15.6.2",
+    "react": "16.6.3",
+    "react-json-view": "^1.19.1",
+    "react-syntax-highlighter": "12.2.1",
+    "wix-rich-content-common": "6.10.0",
+    "wix-rich-content-editor": "6.10.0",
+    "wix-rich-content-editor-common": "6.10.0",
+    "wix-rich-content-fullscreen": "6.10.0",
+    "wix-rich-content-plugin-button": "6.10.0",
+    "wix-rich-content-plugin-code-block": "6.10.0",
+    "wix-rich-content-plugin-divider": "6.10.0",
+    "wix-rich-content-plugin-emoji": "6.10.0",
+    "wix-rich-content-plugin-file-upload": "6.10.0",
+    "wix-rich-content-plugin-gallery": "6.10.0",
+    "wix-rich-content-plugin-giphy": "6.10.0",
+    "wix-rich-content-plugin-hashtag": "6.10.0",
+    "wix-rich-content-plugin-headers-markdown": "6.10.0",
+    "wix-rich-content-plugin-html": "6.10.0",
+    "wix-rich-content-plugin-image": "6.10.0",
+    "wix-rich-content-plugin-line-spacing": "6.10.0",
+    "wix-rich-content-plugin-link": "6.10.0",
+    "wix-rich-content-plugin-map": "6.10.0",
+    "wix-rich-content-plugin-mentions": "6.10.0",
+    "wix-rich-content-plugin-sound-cloud": "6.10.0",
+    "wix-rich-content-plugin-text-color": "6.10.0",
+    "wix-rich-content-plugin-undo-redo": "6.10.0",
+    "wix-rich-content-plugin-video": "6.10.0",
+    "wix-rich-content-preview": "6.10.0",
+    "wix-rich-content-viewer": "6.10.0",
+    "wix-rich-content-wrapper": "6.10.0",
+    "wix-style-react": "^6.58.0"
+  },
+  "devDependencies": {
+    "yoshi": "4.31.0",
+    "yoshi-style-dependencies": "^4.23.7"
+  },
+  "lint-staged": {
+    "*.js": "yoshi lint"
+  },
+  "jest": {
+    "preset": "jest-yoshi-preset"
+  },
+  "yoshi": {
+    "hmr": "auto"
+  },
+  "babel": {
+    "presets": [
+      [
+        "yoshi",
+        {
+          "ignoreReact": true
+        }
+      ]
+    ]
+  },
+  "eslintConfig": {
+    "extends": "yoshi-base",
+    "rules": {
+      "import/no-unresolved": "off"
+    }
+  }
+}

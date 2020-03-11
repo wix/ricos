@@ -2,12 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { EditorState } from 'draft-js';
 import { isEmpty } from 'lodash';
-import { mergeStyles, Context } from 'wix-rich-content-common';
+import { mergeStyles } from 'wix-rich-content-common';
 import { createBlock } from '../Utils/draftUtils.js';
 import classNames from 'classnames';
 import FileInput from '../Components/FileInput';
 import ToolbarButton from '../Components/ToolbarButton';
 import styles from '../../statics/styles/toolbar-button.scss';
+
+const galleryType = 'wix-draft-plugin-gallery';
 
 /**
  * createBaseInsertPluginButton
@@ -20,6 +22,7 @@ export default ({
   commonPubsub,
   settings,
   t,
+  initialIntent,
   isMobile,
   pluginDefaults,
 }) => {
@@ -30,15 +33,17 @@ export default ({
       const { buttonStyles } = props.theme || {};
       this.styles = mergeStyles({ styles, theme: buttonStyles });
       this.buttonRef = React.createRef();
+      this.toolbarName = props.toolbarName;
     }
+
+    onPluginAdd = name => helpers?.onPluginAdd?.(blockType, name || this.toolbarName);
 
     componentDidMount() {
       this.initialIntent();
     }
 
     initialIntent = () => {
-      const { initialIntent } = this.context;
-      if (initialIntent && initialIntent === blockType) {
+      if (initialIntent === blockType) {
         const { buttonRef } = this;
         buttonRef && buttonRef.current && buttonRef.current.click();
       }
@@ -46,8 +51,13 @@ export default ({
 
     addBlock = data => {
       const { getEditorState, setEditorState } = this.props;
-      const { newSelection, newEditorState } = this.createBlock(getEditorState(), data, blockType);
+      const { newBlock, newSelection, newEditorState } = this.createBlock(
+        getEditorState(),
+        data,
+        blockType
+      );
       setEditorState(EditorState.forceSelection(newEditorState, newSelection));
+      return { newBlock, newSelection, newEditorState };
     };
 
     addCustomBlock = buttonData => {
@@ -56,11 +66,12 @@ export default ({
     };
 
     createBlock = (editorState, data, type) => {
+      this.onPluginAdd();
       this.props.hidePopup?.();
       return createBlock(editorState, data, type);
     };
 
-    createBlocksFromFiles = (files, data, type) => {
+    createBlocksFromFiles = (files, data, type, updateEntity) => {
       let editorState = this.props.getEditorState();
       let selection;
       files.forEach(file => {
@@ -71,8 +82,7 @@ export default ({
         );
         editorState = newEditorState;
         selection = selection || newSelection;
-        const state = { userSelectedFiles: { files: Array.isArray(file) ? file : [file] } };
-        commonPubsub.set('initialState_' + newBlock.getKey(), state);
+        updateEntity(newBlock.getKey(), file);
       });
 
       return { newEditorState: editorState, newSelection: selection };
@@ -88,38 +98,44 @@ export default ({
           this.toggleButtonModal(event);
           break;
         case 'custom-block':
+          this.onPluginAdd(name);
           this.addCustomBlock(button);
           break;
         default:
           this.addBlock(button.componentData || {});
+          break;
       }
     };
 
-    handleFileChange = files => {
-      if (files.length > 0) {
-        const galleryType = 'wix-draft-plugin-gallery';
-        const galleryData = pluginDefaults[galleryType];
-        const shouldCreateGallery =
-          blockType === galleryType ||
-          (galleryData && settings.createGalleryForMultipleImages && files.length > 1);
+    shouldCreateGallery = files =>
+      blockType === galleryType ||
+      (pluginDefaults[galleryType] && settings.createGalleryForMultipleImages && files.length > 1);
 
-        const { newEditorState, newSelection } = shouldCreateGallery
-          ? this.createBlocksFromFiles([files], galleryData, galleryType)
-          : this.createBlocksFromFiles(files, button.componentData, blockType);
+    handleFileChange = (files, updateEntity) => {
+      if (files.length > 0) {
+        const galleryData = pluginDefaults[galleryType];
+        const { newEditorState, newSelection } = this.shouldCreateGallery(files)
+          ? this.createBlocksFromFiles([files], galleryData, galleryType, updateEntity)
+          : this.createBlocksFromFiles(files, button.componentData, blockType, updateEntity);
 
         this.props.setEditorState(EditorState.forceSelection(newEditorState, newSelection));
       }
     };
 
+    handleNativeFileChange = files =>
+      this.handleFileChange(files, (blockKey, file) => {
+        const state = { userSelectedFiles: { files: Array.isArray(file) ? file : [file] } };
+        commonPubsub.set('initialState_' + blockKey, state);
+      });
+
     handleExternalFileChanged = (data, error) => {
       if (data) {
-        if (error) {
-          data.error = error;
-        }
-
-        const { newBlock } = this.addBlock(button.componentData || {});
-        const blockKey = newBlock.getKey();
-        setTimeout(() => pubsub.getBlockHandler('handleFilesAdded', blockKey)(data));
+        const handleFilesAdded = this.shouldCreateGallery(data.data)
+          ? blockKey => commonPubsub.getBlockHandler('galleryHandleFilesAdded', blockKey)
+          : blockKey => pubsub.getBlockHandler('handleFilesAdded', blockKey);
+        this.handleFileChange(data.data, (blockKey, file) =>
+          setTimeout(() => handleFilesAdded(blockKey)({ data: file, error }))
+        );
       }
     };
 
@@ -128,50 +144,38 @@ export default ({
     renderButton = () => {
       const { styles } = this;
       const { showName, tabIndex, setEditorState } = this.props;
-      const { name, Icon, ButtonElement, wrappingComponent } = button;
+      const { name, Icon, wrappingComponent } = button;
+
       const WrappingComponent = wrappingComponent || 'button';
 
-      if (ButtonElement) {
-        return (
-          <WrappingComponent
-            className={styles.button}
-            data-hook={`${name.replace(' ', '_')}_insert_plugin_button`}
-            onClick={this.onClick}
-            ref={this.buttonRef}
-          >
-            <div className={styles.icon}>
-              <ButtonElement key="0" />
-            </div>
-            {showName && (
-              <span key="1" className={styles.label}>
-                {name}
-              </span>
-            )}
-          </WrappingComponent>
-        );
-      } else {
-        return (
-          <WrappingComponent
-            aria-label={`Add ${name}`}
-            tabIndex={tabIndex}
-            className={styles.button}
-            data-hook={`${name.replace(' ', '_')}_insert_plugin_button`}
-            onClick={this.onClick}
-            ref={this.buttonRef}
-            pubsub={pubsub}
-            setEditorState={setEditorState}
-          >
-            <div className={styles.icon}>
-              <Icon key="0" />
-            </div>
-            {showName && (
-              <span key="1" className={styles.label}>
-                {name}
-              </span>
-            )}
-          </WrappingComponent>
-        );
+      let buttonCompProps = {};
+      if (wrappingComponent) {
+        buttonCompProps = {
+          setEditorState,
+          pubsub,
+        };
       }
+
+      return (
+        <WrappingComponent
+          aria-label={`Add ${name}`}
+          tabIndex={tabIndex}
+          className={classNames(styles.button, button.type === 'file' && styles.fileUploadButton)}
+          data-hook={`${name.replace(' ', '_')}_insert_plugin_button`}
+          onClick={this.onClick}
+          ref={this.buttonRef}
+          {...buttonCompProps}
+        >
+          <div className={styles.icon}>
+            <Icon key="0" />
+          </div>
+          {showName && (
+            <span key="1" className={styles.label}>
+              {name}
+            </span>
+          )}
+        </WrappingComponent>
+      );
     };
 
     toggleButtonModal = event => {
@@ -201,9 +205,9 @@ export default ({
     };
 
     toggleFileSelection = () => {
-      if (settings && settings.handleFileSelection) {
+      if (settings?.handleFileSelection) {
         settings.handleFileSelection(this.handleExternalFileChanged);
-      } else if (helpers && helpers.handleFileSelection) {
+      } else if (helpers?.handleFileSelection) {
         const multiple = !!button.multi;
         helpers.handleFileSelection(
           undefined,
@@ -225,7 +229,7 @@ export default ({
         <FileInput
           dataHook={`${button.name}_file_input`}
           className={classNames(styles.button, styles.fileUploadButton)}
-          onChange={this.handleFileChange}
+          onChange={this.handleNativeFileChange}
           accept={accept}
           multiple={button.multi}
           theme={this.props.theme}
@@ -272,7 +276,6 @@ export default ({
       );
     }
   }
-  InsertPluginButton.contextType = Context.type;
 
   InsertPluginButton.propTypes = {
     getEditorState: PropTypes.func.isRequired,
@@ -283,6 +286,7 @@ export default ({
     isMobile: PropTypes.bool,
     t: PropTypes.func,
     tabIndex: PropTypes.number,
+    toolbarName: PropTypes.string,
   };
 
   return InsertPluginButton;

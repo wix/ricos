@@ -6,9 +6,10 @@ import Measure from 'react-measure';
 import ClickOutside from 'react-click-outside';
 import { debounce } from 'lodash';
 import { DISPLAY_MODE } from 'wix-rich-content-editor-common';
-import Styles from '../../../../statics/styles/inline-toolbar.rtlignore.scss';
+import stylesRtlIgnore from '../../../../statics/styles/inline-toolbar.rtlignore.scss';
+import styles from '../../../../statics/styles/inline-toolbar.scss';
 import { getLangDir } from 'wix-rich-content-common';
-
+const Styles = { ...stylesRtlIgnore, ...styles };
 const TOOLBAR_OFFSET = 5;
 
 const getRelativeParent = element => {
@@ -171,15 +172,16 @@ export default class InlineToolbar extends Component {
   getStyle() {
     const { displayOptions } = this.props;
     const { position } = this.state;
-    const style = { ...position };
     const defaultDispayStyles = {
       visibility: this.isVisible() ? 'visible' : 'hidden',
       transform: this.isVisible() ? 'scale(1)' : 'scale(0)',
     };
 
-    Object.assign(style, defaultDispayStyles, displayOptionStyles[displayOptions.displayMode]);
-
-    return style;
+    return {
+      ...position,
+      ...defaultDispayStyles,
+      ...displayOptionStyles[displayOptions.displayMode],
+    };
   }
 
   handleToolbarRef = node => {

@@ -1,7 +1,14 @@
 import { isTextHighlight, isTextColor, getColor } from './text-decorations-utils';
 import { isHexColor } from 'wix-rich-content-common';
 
-export const DEFAULT_PALETTE = ['#303030', '#303030', '#3a54b4', '#bfad80', '#bf695c', '#f7f7f7'];
+export const DEFAULT_PALETTE = Object.freeze([
+  '#303030',
+  '#303030',
+  '#3a54b4',
+  '#bfad80',
+  '#bf695c',
+  '#f7f7f7',
+]);
 export const DEFAULT_COLOR = '#000000';
 export const DEFAULT_HIGHLIGHT_COLOR = '#ffffff00';
 export const PANEL_WIDTH = 216;
@@ -34,3 +41,8 @@ export const DEFAULT_BACKGROUND_STYLE_FN_DRAFT = styles =>
   styles
     .toArray()
     .reduce((cssStyle, style) => ({ ...cssStyle, ...DEFAULT_BACKGROUND_STYLE_FN(style) }), {}); // eslint-disable-line new-cap
+
+export const DEFAULTS = {
+  configTextColor: {},
+  configTextHighlight: {},
+};

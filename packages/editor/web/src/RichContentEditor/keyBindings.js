@@ -100,9 +100,8 @@ export const initPluginKeyBindings = pluginTextButtons =>
               // handlers per button
               const buttonCommandHandlers = {};
               buttonData[key].keyBindings.forEach(binding => {
-                Object.assign(buttonCommandHandlers, {
-                  [`${binding.keyCommand.command}_${i}`]: binding.commandHandler,
-                });
+                buttonCommandHandlers[`${binding.keyCommand.command}_${i}`] =
+                  binding.commandHandler;
               });
               // merge all button commands and handlers
               return {

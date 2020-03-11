@@ -1,5 +1,5 @@
 import theme from '../theme/theme';
-import { videoTypeMapper } from 'wix-rich-content-plugin-video/dist/module.viewer';
+import { VIDEO_TYPE, videoTypeMapper } from 'wix-rich-content-plugin-video/dist/module.viewer';
 import { dividerTypeMapper } from 'wix-rich-content-plugin-divider/dist/module.viewer';
 import { HTML_TYPE, htmlTypeMapper } from 'wix-rich-content-plugin-html/dist/module.viewer';
 import { soundCloudTypeMapper } from 'wix-rich-content-plugin-sound-cloud/dist/module.viewer';
@@ -57,6 +57,7 @@ import 'wix-rich-content-plugin-sound-cloud/dist/styles.min.css';
 import 'wix-rich-content-plugin-map/dist/styles.min.css';
 import 'wix-rich-content-plugin-file-upload/dist/styles.min.css';
 import 'wix-rich-content-plugin-giphy/dist/styles.min.css';
+import 'wix-rich-content-text-selection-toolbar/dist/styles.min.css';
 
 import { getBaseUrl } from '../../src/utils';
 
@@ -84,14 +85,11 @@ export const typeMappers = [
 ];
 
 const uiSettings = {
-  // disableRightClick: true,
+  disableRightClick: true,
 };
 
-export const config = {
-  [GALLERY_TYPE]: {
-    scrollingElement: () =>
-      typeof window !== 'undefined' && document.getElementsByClassName('viewer-example')[0],
-  },
+const config = {
+  [GALLERY_TYPE]: {},
   [HEADERS_MARKDOWN_TYPE]: {
     hideMarkdown: true,
   },
@@ -99,9 +97,7 @@ export const config = {
     giphySdkApiKey: process.env.GIPHY_API_KEY,
     sizes: { desktop: 'original', mobile: 'original' }, // original or downsizedSmall are supported
   },
-  [HTML_TYPE]: {
-    htmlIframeSrc: `${getBaseUrl()}/static/html-plugin-embed.html`,
-  },
+  // [HTML_TYPE]: {},
   [LINK_TYPE]: linkPluginSettings,
   [MENTION_TYPE]: mentionsPluginSettings,
   [TEXT_HIGHLIGHT_TYPE]: {
@@ -123,7 +119,22 @@ export const config = {
       ),
     downloadTarget: '_blank',
   },
+  [VIDEO_TYPE]: {
+    getVideoUrl: src => `https://video.wixstatic.com/${src.pathname}`,
+  },
   uiSettings,
+};
+
+export const getConfig = (additionalConfig = {}) => {
+  let _config = { ...config };
+  Object.keys(additionalConfig).forEach(key => {
+    if (additionalConfig[key]) {
+      const orgConfig = config[key] || {};
+      _config[key] = { ...orgConfig, ...additionalConfig[key] };
+    }
+  });
+
+  return _config;
 };
 
 export const getInlineStyleMappers = raw => [

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { InView } from 'react-intersection-observer';
 import classnames from 'classnames';
-import { default as Context } from '../Utils/Context';
 import { mergeStyles } from '../Utils/mergeStyles';
 import { isSSR } from '../Utils/ssrUtils';
 import styles from '../../statics/styles/placeholder.scss';
@@ -15,6 +14,7 @@ class ViewportRenderer extends Component {
     containerStyle: PropTypes.object,
     containerClass: PropTypes.string,
     alwaysRenderChildren: PropTypes.bool,
+    theme: PropTypes.object.isRequired,
   };
 
   static defaultProps = {
@@ -33,7 +33,7 @@ class ViewportRenderer extends Component {
       containerStyle,
       containerClass,
     } = this.props;
-    const { theme } = this.context;
+    const { theme } = this.props;
     this.styles = this.styles || mergeStyles({ styles, theme });
 
     if (isSSR() || typeof window.IntersectionObserver === 'undefined') {
@@ -59,7 +59,5 @@ class ViewportRenderer extends Component {
     );
   }
 }
-
-ViewportRenderer.contextType = Context.type;
 
 export default ViewportRenderer;

@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
@@ -26,13 +27,18 @@ function defaultRenderItem({ option, selected }) {
         value={option.value}
         theme={{}}
         data-hook={option.value}
-        onChange={() => {}}
+        onChange={() => true}
       >
         {option.value}
       </SelectionListOption>
     )
   );
 }
+
+defaultRenderItem.propTypes = {
+  option: PropTypes.any,
+  selected: PropTypes.bool,
+};
 
 class SelectionList extends Component {
   constructor(props) {

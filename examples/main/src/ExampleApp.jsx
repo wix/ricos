@@ -41,6 +41,7 @@ class ExampleApp extends PureComponent {
       previewResetKey: 0,
       editorResetKey: 0,
       shouldMockUpload: true,
+      shouldMultiSelectImages: false,
       ...localState,
     };
   }
@@ -85,7 +86,13 @@ class ExampleApp extends PureComponent {
 
   renderEditor = () => {
     const { allLocales, editorState, locale, localeResource, isMobile } = this.props;
-    const { isEditorShown, staticToolbar, shouldMockUpload, editorIsMobile } = this.state;
+    const {
+      isEditorShown,
+      staticToolbar,
+      shouldMockUpload,
+      shouldMultiSelectImages,
+      editorIsMobile,
+    } = this.state;
     const settings = [
       {
         name: 'Mobile',
@@ -104,6 +111,14 @@ class ExampleApp extends PureComponent {
             shouldMockUpload: !state.shouldMockUpload,
           })),
       },
+      {
+        name: 'Multi-Select Images',
+        active: shouldMultiSelectImages,
+        action: () =>
+          this.setState(state => ({
+            shouldMultiSelectImages: !state.shouldMultiSelectImages,
+          })),
+      },
     ];
     if (!isMobile) {
       settings.push({
@@ -118,6 +133,9 @@ class ExampleApp extends PureComponent {
         items: allLocales,
       });
     }
+
+    const scrollingElementFn = () =>
+      typeof window !== 'undefined' && document.getElementsByClassName('editor-example')[0];
     return (
       isEditorShown && (
         <ReflexElement
@@ -136,9 +154,11 @@ class ExampleApp extends PureComponent {
                 editorState={editorState}
                 isMobile={this.state.editorIsMobile || isMobile}
                 shouldMockUpload={this.state.shouldMockUpload}
+                shouldMultiSelectImages={this.state.shouldMultiSelectImages}
                 staticToolbar={staticToolbar}
                 locale={locale}
                 localeResource={localeResource}
+                scrollingElementFn={scrollingElementFn}
               />
             </ErrorBoundary>
           </SectionContent>
@@ -199,6 +219,9 @@ class ExampleApp extends PureComponent {
           })),
       },
     ];
+    const scrollingElementFn = () =>
+      typeof window !== 'undefined' && document.getElementsByClassName('viewer-example')[0];
+
     return (
       isViewerShown && (
         <ReflexElement
@@ -217,6 +240,7 @@ class ExampleApp extends PureComponent {
                 isMobile={this.state.viewerIsMobile || isMobile}
                 locale={locale}
                 localeResource={localeResource}
+                scrollingElementFn={scrollingElementFn}
               />
             </ErrorBoundary>
           </SectionContent>

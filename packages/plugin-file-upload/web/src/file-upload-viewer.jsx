@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { isEqual } from 'lodash';
-import { mergeStyles, validate, Context, pluginFileUploadSchema } from 'wix-rich-content-common';
+import { mergeStyles, validate, pluginFileUploadSchema } from 'wix-rich-content-common';
 import { DocumentIcon, LoaderIcon } from './icons';
 import styles from '../statics/styles/file-upload-viewer.scss';
 
@@ -135,11 +135,11 @@ class FileUploadViewer extends PureComponent {
   }
 
   render() {
-    const { componentData } = this.props;
-    const { theme } = this.context;
+    const { componentData, theme, setComponentUrl } = this.props;
     this.styles = this.styles || mergeStyles({ styles, theme });
 
     const fileUrl = componentData.url || this.state.resolveFileUrl;
+    setComponentUrl?.(fileUrl);
 
     return (
       <div className={this.styles.file_upload_container} data-hook="fileUploadViewer">
@@ -156,13 +156,13 @@ FileUploadViewer.propTypes = {
   componentData: PropTypes.object.isRequired,
   error: PropTypes.string,
   settings: PropTypes.object,
+  theme: PropTypes.object.isRequired,
+  setComponentUrl: PropTypes.func,
 };
 
 FileUploadViewer.defaultProps = {
   isLoading: false,
   settings: {},
 };
-
-FileUploadViewer.contextType = Context.type;
 
 export default FileUploadViewer;

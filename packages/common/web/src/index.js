@@ -1,7 +1,6 @@
 // Components
 export { default as AccessibilityListener } from './Components/AccessibilityListener';
 export { default as ViewportRenderer } from './Components/ViewportRenderer';
-export { default as Loader } from './Components/Loader';
 
 // Utils
 export { default as withI18n } from './Utils/withI18n';
@@ -14,12 +13,11 @@ export {
   startsWithHttps,
   hasProtocol,
 } from './Utils/urlValidators';
-export { default as Context } from './Utils/Context';
 export { mergeStyles } from './Utils/mergeStyles';
 export { default as normalizeInitialState } from './Utils/normalization/normalizeInitialState';
 export { default as getDisplayName } from './Utils/getDisplayName';
 export { default as Version } from './Utils/versioningUtils';
-export { hasLinksInBlock } from './Utils/draftUtils';
+export { hasLinksInBlock, getLinkRangesInBlock } from './Utils/draftUtils';
 export { validate, getContentStateSchema } from './Utils/data-schema-validator';
 export { isSSR } from './Utils/ssrUtils';
 

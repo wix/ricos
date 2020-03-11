@@ -1,9 +1,9 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import { Loader } from 'wix-rich-content-editor-common';
 import { isEqual } from 'lodash';
-import { Context } from 'wix-rich-content-common';
 import GalleryViewer from './gallery-viewer';
-import { DEFAULTS } from './constants';
+import { DEFAULTS, imageItem } from './constants';
 
 //eslint-disable-next-line no-unused-vars
 const EMPTY_SMALL_PLACEHOLDER =
@@ -14,12 +14,21 @@ class GalleryComponent extends PureComponent {
     super(props);
     this.state = this.stateFromProps(props);
 
-    const { block, store } = this.props;
+    const { block, store, commonPubsub } = this.props;
+    this.blockKey = block.getKey();
     if (store) {
-      const blockKey = block.getKey();
-      store.setBlockHandler('handleFilesSelected', blockKey, this.handleFilesSelected.bind(this));
-      store.setBlockHandler('handleFilesAdded', blockKey, this.handleFilesAdded.bind(this));
+      store.setBlockHandler(
+        'handleFilesSelected',
+        this.blockKey,
+        this.handleFilesSelected.bind(this)
+      );
+      store.setBlockHandler('handleFilesAdded', this.blockKey, this.handleFilesAdded.bind(this));
     }
+    commonPubsub?.setBlockHandler(
+      'galleryHandleFilesAdded',
+      this.blockKey,
+      this.handleFilesAdded.bind(this)
+    );
   }
 
   componentWillReceiveProps(nextProps) {
@@ -29,26 +38,29 @@ class GalleryComponent extends PureComponent {
       !isEqual(componentState, nextProps.componentState)
     ) {
       this.setState(this.stateFromProps(nextProps));
+    } else if (componentData.items?.length > 0) {
+      this.onLoad(false);
     }
   }
 
   stateFromProps = props => {
     const items = props.componentData.items || []; // || DEFAULTS.items;
-    const styles = Object.assign(DEFAULTS.styles, props.componentData.styles || {});
-    const isLoading = (props.componentState && props.componentState.isLoading) || 0;
+    const styles = { ...DEFAULTS.styles, ...(props.componentData.styles || {}) };
+    const itemsLeftToUpload = props.componentState?.isLoading || 0;
     const state = {
       items,
       styles,
-      isLoading,
+      itemsLeftToUpload,
     };
 
     if (props.componentState) {
       const { userSelectedFiles } = props.componentState;
-      if (isLoading <= 0 && userSelectedFiles) {
+      if (itemsLeftToUpload <= 0 && userSelectedFiles) {
         //lets continue the uploading process
         if (userSelectedFiles.files && userSelectedFiles.files.length > 0) {
-          Object.assign(state, { isLoading: userSelectedFiles.files.length });
+          state.itemsLeftToUpload = userSelectedFiles.files.length;
           this.handleFilesSelected(userSelectedFiles.files);
+          state.isLoading = true;
         }
         if (this.props.store) {
           setTimeout(() => {
@@ -97,21 +109,14 @@ class GalleryComponent extends PureComponent {
       reader.onload = e => this.fileLoaded(e, file, itemPos);
       reader.readAsDataURL(file);
     });
+    this.state && this.onLoad(true);
   };
 
   imageLoaded = (event, file, itemPos) => {
     const img = event.target;
-    const item = {
-      metadata: {
-        height: img.height,
-        width: img.width,
-      },
-      itemId: String(event.timeStamp),
-      url: img.src,
-    };
-
+    const item = imageItem(img, String(event.timeStamp));
     const itemIdx = this.setItemInGallery(item, itemPos);
-    const { helpers } = this.context;
+    const { helpers } = this.props;
     const hasFileChangeHelper = helpers && helpers.onFilesChange;
 
     if (hasFileChangeHelper) {
@@ -125,13 +130,16 @@ class GalleryComponent extends PureComponent {
     const handleFileAdded = (item, idx) => {
       const galleryItem = {
         metadata: {
+          type: item.type || 'image',
           height: item.height,
           width: item.width,
-          processedByConsumer: true,
         },
         itemId: String(item.id),
         url: item.file_name,
       };
+      if (item.type === 'video') {
+        galleryItem.metadata.poster = item.poster || item.thumbnail_url;
+      }
       this.setItemInGallery(galleryItem, idx);
     };
 
@@ -144,20 +152,57 @@ class GalleryComponent extends PureComponent {
     }
   };
 
+  videoLoaded = (event, file, itemPos) => {
+    const { helpers } = this.context;
+    const hasFileChangeHelper = helpers && helpers.onVideoSelected;
+
+    if (hasFileChangeHelper) {
+      helpers.onVideoSelected(file, video => {
+        // eslint-disable-next-line camelcase
+        const data = { ...video, id: String(event.timeStamp), file_name: video.video_url };
+        this.handleFilesAdded({ data, itemPos });
+      });
+    } else {
+      console.warn('Missing upload function'); //eslint-disable-line no-console
+    }
+  };
+
   fileLoaded = (event, file, itemPos) => {
-    const img = new Image();
-    img.onload = e => this.imageLoaded(e, file, itemPos);
-    img.src = event.target.result;
+    if (file.type.match('image/*')) {
+      const img = new Image();
+      img.onload = e => this.imageLoaded(e, file, itemPos);
+      img.src = event.target.result;
+    } else if (file.type.match('video/*')) {
+      this.videoLoaded(event, file, itemPos);
+    }
+  };
+
+  renderLoader = () => {
+    return <Loader type={'medium'} />;
+  };
+
+  onLoad = isLoading => {
+    this.setState({ isLoading });
   };
 
   render() {
     return (
-      <GalleryViewer
-        componentData={this.props.componentData}
-        onClick={this.props.onClick}
-        className={this.props.className}
-        settings={this.props.settings}
-      />
+      <>
+        <GalleryViewer
+          componentData={this.props.componentData}
+          onClick={this.props.onClick}
+          className={this.props.className}
+          settings={this.props.settings}
+          theme={this.props.theme}
+          helpers={this.props.helpers}
+          disableRightClick={this.props.disableRightClick}
+          isMobile={this.props.isMobile}
+          anchorTarget={this.props.anchorTarget}
+          relValue={this.props.relValue}
+          blockKey={this.blockKey}
+        />
+        {this.state.isLoading && this.renderLoader()}
+      </>
     );
   }
 }
@@ -166,13 +211,18 @@ GalleryComponent.propTypes = {
   componentData: PropTypes.object.isRequired,
   componentState: PropTypes.object.isRequired,
   store: PropTypes.object.isRequired,
+  commonPubsub: PropTypes.object,
   blockProps: PropTypes.object.isRequired,
   block: PropTypes.object.isRequired,
   onClick: PropTypes.func.isRequired,
   className: PropTypes.string.isRequired,
   settings: PropTypes.object,
+  helpers: PropTypes.object.isRequired,
+  disableRightClick: PropTypes.bool,
+  theme: PropTypes.object.isRequired,
+  isMobile: PropTypes.bool.isRequired,
+  anchorTarget: PropTypes.string.isRequired,
+  relValue: PropTypes.string.isRequired,
 };
-
-GalleryComponent.contextType = Context.type;
 
 export { GalleryComponent as Component, DEFAULTS };
