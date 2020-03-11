@@ -84,10 +84,13 @@ describe('plugins', () => {
         cy.get(`[data-hook=${'image-item'}]:last`)
           .parent()
           .click();
+        cy.get(`[data-hook=${'gallery-item-image-canvas'}]`);
         cy.eyesCheckWindow({ tag: this.test.title, target: 'window', fully: false });
-        cy.get(`[data-hook=${'nav-arrow-next'}]`).click({ multiple: true });
+        cy.get(`[data-hook=${'nav-arrow-next'}]`).click();
+        cy.get(`[data-hook=${'gallery-item-image-canvas'}]`);
         cy.eyesCheckWindow({ tag: 'next fullscreen item', target: 'window', fully: false });
         cy.get(`[data-hook=${'nav-arrow-back'}]`).click();
+        cy.get(`[data-hook=${'gallery-item-image-canvas'}]`);
         cy.eyesCheckWindow({ tag: 'previous fullscreen item', target: 'window', fully: false });
         cy.get(`[data-hook=${'fullscreen-close-button'}]`).click();
         cy.eyesCheckWindow({ tag: 'closed fullscreen', target: 'window', fully: false });
