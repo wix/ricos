@@ -81,15 +81,13 @@ describe('plugins', () => {
       );
 
       it('expand gallery image on full screen', function() {
-        cy.get(`[data-hook=${'image-item'}]:last`)
-          .parent()
-          .click();
-        cy.get(`[data-hook=${'gallery-item-image-canvas'}]`);
+        cy.get(`[data-hook=${'imageViewer'}]:last`).click();
+        cy.get(`[data-hook=${'gallery-item-image-canvas'}]:last`);
         cy.eyesCheckWindow({ tag: this.test.title, target: 'window', fully: false });
-        cy.get(`[data-hook=${'nav-arrow-next'}]`).click();
+        cy.get('.prev > svg').click();
         cy.get(`[data-hook=${'gallery-item-image-canvas'}]`);
         cy.eyesCheckWindow({ tag: 'next fullscreen item', target: 'window', fully: false });
-        cy.get(`[data-hook=${'nav-arrow-back'}]`).click();
+        cy.get('.prev > svg').click();
         cy.get(`[data-hook=${'gallery-item-image-canvas'}]`);
         cy.eyesCheckWindow({ tag: 'previous fullscreen item', target: 'window', fully: false });
         cy.get(`[data-hook=${'fullscreen-close-button'}]`).click();
