@@ -13,7 +13,7 @@ class EngineWrapper extends React.Component {
       Fullscreen: undefined,
     };
     if (props.editor) {
-      import(`wix-rich-content-editor/dist/lib/editorStateConversion${dummy}`).then(module =>
+      import(`wix-rich-content-editor/dist/lib/editorStateConversion${dummy}.js`).then(module =>
         this.setState({ editorState: module.createEmpty() })
       );
     }
@@ -59,15 +59,17 @@ class EngineWrapper extends React.Component {
     let EditorModal, Fullscreen;
     if (shouldRenderEditorModal)
       EditorModal =
-        withModal === true ? React.lazy(() => import(`./lib/EditorModal${dummy}`)) : withModal;
+        withModal === true ? React.lazy(() => import(`./lib/EditorModal${dummy}.js`)) : withModal;
     if (shouldRenderFullscreen) {
       Fullscreen = React.lazy(() => {
         return shouldRenderFullscreen ? import(`wix-rich-content-fullscreen${dummy}`) : '';
       });
       if (!this.expandModeData) {
-        import(`wix-rich-content-fullscreen/dist/lib/getImagesData${dummy}`).then(getImagesData => {
-          this.expandModeData = getImagesData.default(children.props.initialState);
-        });
+        import(`wix-rich-content-fullscreen/dist/lib/getImagesData${dummy}.js`).then(
+          getImagesData => {
+            this.expandModeData = getImagesData.default(children.props.initialState);
+          }
+        );
       }
     }
     this.setState({ EditorModal, Fullscreen });
@@ -75,10 +77,13 @@ class EngineWrapper extends React.Component {
 
   render() {
     const { strategies = [], children = {}, withModal = true, editor } = this.props;
-    const modifiedProps = strategies.reduce((props, strategyFunction) => {
-      const result = strategyFunction(props);
-      return { ...props, ...result };
-    }, children.props);
+    const modifiedProps = strategies.reduce(
+      (props, strategyFunction) => {
+        const result = strategyFunction(props);
+        return { ...props, ...result };
+      },
+      { ...children.props }
+    );
     const { helpers = {}, theme, locale = 'en', ModalsMap, onChange } = modifiedProps;
     const { onRequestClose } = this.state.modalProps || {};
 

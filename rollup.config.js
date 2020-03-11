@@ -61,13 +61,13 @@ try {
       watch,
     });
   });
-} catch (_) { }
+} catch (_) {}
 
-let viewerEntry = [];
+let viewerEntry;
 try {
   let viewerPath = 'src/viewer.js';
   fs.accessSync(`./${viewerPath}`);
-  viewerEntry.push({
+  viewerEntry = {
     input: viewerPath,
     output: cloneDeep(output).map(o => {
       const anchor = o.file.indexOf('.');
@@ -77,10 +77,7 @@ try {
     plugins,
     external,
     watch,
-  });
-} catch (_) { }
+  };
+} catch (_) {}
 
-const config = [editorEntry].concat(viewerEntry).concat(libEntries);
-config.forEach(c => c.inlineDynamicImports = true);
-
-export default config;
+export default [editorEntry, viewerEntry, ...libEntries].filter(x => x);
