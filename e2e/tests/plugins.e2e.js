@@ -211,7 +211,7 @@ describe('plugins', () => {
       cy.shrinkPlugin();
       cy.waitForVideoToLoad();
       cy.focusEditor()
-        .click(10, 10)
+        .click(20, 20)
         .enterParagraphs(['Will this fix the flakiness?']);
       cy.eyesCheckWindow(this.test.title);
     });
@@ -221,7 +221,7 @@ describe('plugins', () => {
       cy.shrinkPlugin();
       cy.waitForVideoToLoad();
       cy.focusEditor()
-        .click(10, 10)
+        .click(20, 20)
         .enterParagraphs(['Will this fix the flakiness?']);
 
       cy.eyesCheckWindow(this.test.title);
@@ -249,7 +249,9 @@ describe('plugins', () => {
       cy.openSoundCloudModal().addSoundCloud();
       cy.waitForVideoToLoad();
       cy.shrinkPlugin();
-      cy.focusEditor().enterParagraphs(['Will this fix the flakiness?']);
+      cy.focusEditor()
+        .click(20, 20)
+        .enterParagraphs(['Will this fix the flakiness?']);
       cy.eyesCheckWindow(this.test.title);
     });
   });
