@@ -212,7 +212,7 @@ describe('plugins', () => {
       cy.waitForVideoToLoad();
       cy.focusEditor()
         .click(20, 20)
-        .enterParagraphs(['Will this fix the flakiness?']);
+        .type('Will this fix the flakiness?');
       cy.eyesCheckWindow(this.test.title);
     });
 
@@ -222,7 +222,7 @@ describe('plugins', () => {
       cy.waitForVideoToLoad();
       cy.focusEditor()
         .click(20, 20)
-        .enterParagraphs(['Will this fix the flakiness?']);
+        .type('Will this fix the flakiness?');
 
       cy.eyesCheckWindow(this.test.title);
     });
@@ -251,7 +251,7 @@ describe('plugins', () => {
       cy.shrinkPlugin();
       cy.focusEditor()
         .click(20, 20)
-        .enterParagraphs(['Will this fix the flakiness?']);
+        .type('Will this fix the flakiness?');
       cy.eyesCheckWindow(this.test.title);
     });
   });
