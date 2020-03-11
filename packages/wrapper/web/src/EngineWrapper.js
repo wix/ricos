@@ -1,8 +1,7 @@
 import React, { Children, Suspense } from 'react';
 import PropTypes from 'prop-types';
-import { modalStyles } from '../themeStrategy/defaults';
+import { modalStyles } from './themeStrategy/defaults';
 
-const dummy = ''; //crucial for dynamic import at it's current version
 class EngineWrapper extends React.Component {
   constructor(props) {
     super(props);
@@ -13,9 +12,10 @@ class EngineWrapper extends React.Component {
       Fullscreen: undefined,
     };
     if (props.editor) {
-      import(`wix-rich-content-editor/dist/lib/editorStateConversion${dummy}.js`).then(module =>
-        this.setState({ editorState: module.createEmpty() })
-      );
+      import(
+        // eslint-disable-next-line max-len
+        /* webpackChunkName: "rce-editorStateConversion"  */ `wix-rich-content-editor/dist/lib/editorStateConversion.js`
+      ).then(module => this.setState({ editorState: module.createEmpty() }));
     }
   }
 
@@ -59,17 +59,20 @@ class EngineWrapper extends React.Component {
     let EditorModal, Fullscreen;
     if (shouldRenderEditorModal)
       EditorModal =
-        withModal === true ? React.lazy(() => import(`./lib/EditorModal${dummy}.js`)) : withModal;
+        withModal === true
+          ? React.lazy(() => import(/* webpackChunkName: "rce-EditorModal"  */ `./EditorModal.js`))
+          : withModal;
     if (shouldRenderFullscreen) {
-      Fullscreen = React.lazy(() => {
-        return shouldRenderFullscreen ? import(`wix-rich-content-fullscreen${dummy}`) : '';
-      });
+      Fullscreen = React.lazy(() =>
+        import(/* webpackChunkName: "rce-fullscreen"  */ 'wix-rich-content-fullscreen')
+      );
       if (!this.expandModeData) {
-        import(`wix-rich-content-fullscreen/dist/lib/getImagesData${dummy}.js`).then(
-          getImagesData => {
-            this.expandModeData = getImagesData.default(children.props.initialState);
-          }
-        );
+        import(
+          // eslint-disable-next-line max-len
+          /* webpackChunkName: "rce-getImagesData"  */ 'wix-rich-content-fullscreen/dist/lib/getImagesData.js'
+        ).then(getImagesData => {
+          this.expandModeData = getImagesData.default(children.props.initialState);
+        });
       }
     }
     this.setState({ EditorModal, Fullscreen });

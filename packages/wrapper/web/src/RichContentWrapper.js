@@ -1,5 +1,5 @@
 import React from 'react';
-import EngineWrapper from './lib/EngineWrapper';
+import EngineWrapper from './EngineWrapper';
 import themeStrategyProvider from './themeStrategy/themeStrategyProvider';
 import pluginsStrategyProvider from './pluginsStrategy/pluginsStrategyProvider';
 import localeStrategyProvider from './localeStrategy/localeStrategyProvider';

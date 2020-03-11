@@ -17,13 +17,13 @@
   "files": [
     "dist"
   ],
-  "main": "dist/module.cjs.js",
-  "module": "dist/module.js",
+  "main": "dist/cjs/index.js",
+  "module": "dist/es/index.js",
   "style": "dist/styles.min.scss",
   "scripts": {
     "clean": "rm -rf dist/",
     "prebuild": "npm run clean",
-    "build": "rollup --environment MODULE_NAME:wrapper -c ../../../rollup.config.js",
+    "build": "rollup --environment MODULE_NAME:wrapper -c ../../../rollup.config.wrapper.js",
     "build:dev": "cross-env NODE_ENV=development npm run build",
     "build:analyze": "npm run build -- --environment MODULE_ANALYZE && open stats.html",
     "watch": "cross-env NODE_ENV=development MODULE_WATCH=1 npm run build -- --watch.chokidar",
