@@ -85,12 +85,22 @@ describe('plugins', () => {
           .eq(2)
           .parent()
           .click();
-        cy.eyesCheckWindow({ tag: this.test.title, target: 'window', fully: false });
-        cy.get('.next > svg').click();
+        // cy.eyesCheckWindow({ tag: this.test.title, target: 'window', fully: false });
+        cy.eyesCheckWindow({
+          tag: this.test.title,
+          target: 'region',
+          selector: { type: 'css', selector: '#pgi65a6266ba23a8a55da3f469157f15237_0' },
+        });
+        cy.get(`[data-hook=${'nav-arrow-next'}]`).click({ force: true });
+        // cy.eyesCheckWindow({
+        //   tag: 'gallery fullscreen next image',
+        //   target: 'window',
+        //   fully: false,
+        // });
         cy.eyesCheckWindow({
           tag: 'gallery fullscreen next image',
-          target: 'window',
-          fully: false,
+          target: 'region',
+          selector: { type: 'css', selector: '#pgiea8ec1609e052b7f196935318316299d_1' },
         });
         cy.get(`[data-hook=${'fullscreen-close-button'}]`).click();
         cy.eyesCheckWindow({ tag: 'closed fullscreen', target: 'window', fully: false });

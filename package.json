@@ -126,5 +126,7 @@
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
-  "dependencies": {}
+  "dependencies": {
+    "cypress": "^4.1.0"
+  }
 }
