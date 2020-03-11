@@ -11,6 +11,7 @@ export default class ReactPlayerWrapper extends Component {
     super(props);
     this.state = {
       vimeoLoaded: false,
+      isPlaying: false,
     };
   }
 
@@ -26,23 +27,19 @@ export default class ReactPlayerWrapper extends Component {
     }
   }
 
-  static getDerivedStateFromProps(props) {
-    if (props.disabled) {
-      return { playing: false };
-    }
-    return null;
-  }
-
   render() {
     if (!this.state.vimeoLoaded && this.isVimeoAndRequireJS()) {
       return null;
     }
+    const { isPlayable, styles, disabled } = this.props;
     return (
       <ReactPlayer
-        playing={this.state.playing}
-        onPlay={() => this.setState({ playing: true })}
-        onPause={() => this.setState({ playing: false })}
+        playing={this.state.isPlaying && !disabled}
+        onPlay={() => this.setState({ isPlaying: true })}
+        onPause={() => this.setState({ isPlaying: false })}
+        style={styles}
         {...this.props}
+        light={!isPlayable}
       />
     );
   }
@@ -51,9 +48,13 @@ export default class ReactPlayerWrapper extends Component {
 ReactPlayerWrapper.propTypes = {
   url: PropTypes.string.isRequired,
   disabled: PropTypes.bool,
+  isPlayable: PropTypes.bool,
+  styles: PropTypes.object,
 };
 
-ReactPlayerWrapper.defaultProps = {};
+ReactPlayerWrapper.defaultProps = {
+  isPlayable: true,
+};
 
 function isVimeoUrl(url) {
   //this is for react player, regex taken from there https://github.com/CookPete/react-player/blob/ad5d6df62635497137a184cf93a9c43ba6b08fbb/src/players/Vimeo.js#L8

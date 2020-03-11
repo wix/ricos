@@ -32,6 +32,13 @@ export const convertItemData = ({ items, anchorTarget, relValue }) =>
           target: '_blank',
         },
       };
+      if (item.metadata.type === 'video') {
+        convertedData.metaData.link = {
+          target: '_blank',
+          rel: 'noopener',
+          url: normalizeUrl(item.url || ''),
+        };
+      }
       convertedData.metaData.title = metadata.altText; //*** HACK *** title over takes description for altText. So save altText in title, but render the description in the tile
       convertedData.metaData.description = metadata.title;
       if (item.metadata.link) {
