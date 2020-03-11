@@ -21,6 +21,7 @@
 ### :rocket: New Feature
 - `gallery`
   - [#625](https://github.com/wix-incubator/rich-content/pull/625) gallery supports adding videos
+  - [#762](https://github.com/wix-incubator/rich-content/pull/762) bump pro gallery to version 1.8.2
 - `fullscreen`
   - [#625](https://github.com/wix-incubator/rich-content/pull/625) supports target prop to render fullscreen at the target element
 - `editor-common`
