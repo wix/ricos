@@ -13,7 +13,14 @@
     Click to see more.
   </summary>
 
-
+  ### :boom: Breaking Change
+  - `htmi`
+    - [#536](https://github.com/wix-incubator/rich-content/pull/536) Removed minWidth, maxWidth, minHeight, maxHeight from HTML plugin config
+  ### :rocket: New Feature
+  - `video`
+    - [#536](https://github.com/wix-incubator/rich-content/pull/536) Resize for Video plugin
+  - `html`
+    - [#536](https://github.com/wix-incubator/rich-content/pull/536) Resize for HTML plugin
 </details>
 <hr/>
 

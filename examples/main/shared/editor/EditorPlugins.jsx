@@ -103,7 +103,7 @@ let userButtonBorderColors = [...buttonDefaultPalette];
 
 const getLinkPanelDropDownConfig = () => {
   const getItems = () => {
-    casual.define('item', function () {
+    casual.define('item', function() {
       return {
         value: casual.url,
         label: casual.catch_phrase,
@@ -298,8 +298,6 @@ const config = {
     minWidth: 35,
     maxWidth: 740,
     width: 350,
-    minHeight: 50,
-    maxHeight: 1200,
     // toolbar: {
     //   icons: {
     //     InsertPluginButtonIcon: MyCustomIcon,

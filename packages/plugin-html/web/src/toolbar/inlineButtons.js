@@ -6,16 +6,7 @@ import {
   SizeSmallRightIcon,
 } from 'wix-rich-content-editor-common';
 import { EditIcon } from '../icons';
-import {
-  MAX_ALIGNMENT_WIDTH,
-  MIN_WIDTH,
-  MAX_WIDTH,
-  MIN_HEIGHT,
-  MAX_HEIGHT,
-  MAX_HEIGHT_INPUT,
-  SRC_TYPE_HTML,
-  SRC_TYPE_URL,
-} from '../constants';
+import { MAX_ALIGNMENT_WIDTH, SRC_TYPE_HTML, SRC_TYPE_URL } from '../constants';
 import EditPanel from './HtmlEditPanel';
 
 const getAlignmentButtonPropsFn = getEditorBounds => ({ componentData }) => {
@@ -35,12 +26,6 @@ const TOOLTIP_TEXT_BY_SRC_TYPE = {
  * createInlineButtons
  */
 export default ({ settings = {}, getEditorBounds }) => {
-  const {
-    maxWidth,
-    minWidth = MIN_WIDTH,
-    maxHeight = MAX_HEIGHT,
-    minHeight = MIN_HEIGHT,
-  } = settings;
   const icons = settings?.toolbar?.icons || {};
   return [
     {
@@ -53,28 +38,6 @@ export default ({ settings = {}, getEditorBounds }) => {
       }),
     },
     { type: BUTTONS.SEPARATOR, keyName: 'separator1' },
-    {
-      type: BUTTONS.WIDTH,
-      getEditorBounds,
-      keyName: 'width',
-      min: minWidth,
-      mapStoreDataToPanelProps: () => {
-        const bounds = getEditorBounds();
-        if (bounds && bounds.width) {
-          return { max: maxWidth ? Math.min(maxWidth, bounds.width) : bounds.width };
-        } else {
-          return { max: maxWidth || MAX_WIDTH };
-        }
-      },
-    },
-    {
-      type: BUTTONS.HEIGHT,
-      keyName: 'height',
-      min: minHeight,
-      max: maxHeight,
-      inputMax: MAX_HEIGHT_INPUT,
-    },
-    { type: BUTTONS.SEPARATOR, keyName: 'separator2' },
     {
       type: BUTTONS.TEXT_ALIGN_LEFT,
       keyName: 'alignLeft',
