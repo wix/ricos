@@ -37,12 +37,13 @@
     }
   },
   "dependencies": {
-    "draft-js-focus-plugin": "~3.0.1",
+    "draft-js-focus-plugin": "github:shaulgo/draft-js-plugins#focusPlugin",
     "draft-js-plugins-editor": "~3.0.0",
     "react-click-outside": "github:tj/react-click-outside",
     "react-measure": "~2.3.0",
     "wix-rich-content-common": "6.9.6",
-    "wix-rich-content-editor-common": "6.9.6"
+    "wix-rich-content-editor-common": "6.9.6",
+    "draft-convert": "2.1.8"
   },
   "peerDependencies": {
     "@babel/runtime": "7.2.0",

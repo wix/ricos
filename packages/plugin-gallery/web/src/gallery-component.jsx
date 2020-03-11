@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import { Loader } from 'wix-rich-content-editor-common';
 import { isEqual } from 'lodash';
 import GalleryViewer from './gallery-viewer';
 import { DEFAULTS } from './constants';
@@ -37,26 +38,29 @@ class GalleryComponent extends PureComponent {
       !isEqual(componentState, nextProps.componentState)
     ) {
       this.setState(this.stateFromProps(nextProps));
+    } else if (componentData.items?.length > 0) {
+      this.onLoad(false);
     }
   }
 
   stateFromProps = props => {
     const items = props.componentData.items || []; // || DEFAULTS.items;
     const styles = { ...DEFAULTS.styles, ...(props.componentData.styles || {}) };
-    const isLoading = (props.componentState && props.componentState.isLoading) || 0;
+    const itemsLeftToUpload = props.componentState?.isLoading || 0;
     const state = {
       items,
       styles,
-      isLoading,
+      itemsLeftToUpload,
     };
 
     if (props.componentState) {
       const { userSelectedFiles } = props.componentState;
-      if (isLoading <= 0 && userSelectedFiles) {
+      if (itemsLeftToUpload <= 0 && userSelectedFiles) {
         //lets continue the uploading process
         if (userSelectedFiles.files && userSelectedFiles.files.length > 0) {
-          state.isLoading = userSelectedFiles.files.length;
+          state.itemsLeftToUpload = userSelectedFiles.files.length;
           this.handleFilesSelected(userSelectedFiles.files);
+          state.isLoading = true;
         }
         if (this.props.store) {
           setTimeout(() => {
@@ -105,6 +109,7 @@ class GalleryComponent extends PureComponent {
       reader.onload = e => this.fileLoaded(e, file, itemPos);
       reader.readAsDataURL(file);
     });
+    this.state && this.onLoad(true);
   };
 
   imageLoaded = (event, file, itemPos) => {
@@ -157,21 +162,32 @@ class GalleryComponent extends PureComponent {
     img.src = event.target.result;
   };
 
+  renderLoader = () => {
+    return <Loader type={'medium'} />;
+  };
+
+  onLoad = isLoading => {
+    this.setState({ isLoading });
+  };
+
   render() {
     return (
-      <GalleryViewer
-        componentData={this.props.componentData}
-        onClick={this.props.onClick}
-        className={this.props.className}
-        settings={this.props.settings}
-        theme={this.props.theme}
-        helpers={this.props.helpers}
-        disableRightClick={this.props.disableRightClick}
-        isMobile={this.props.isMobile}
-        anchorTarget={this.props.anchorTarget}
-        relValue={this.props.relValue}
-        blockKey={this.blockKey}
-      />
+      <>
+        <GalleryViewer
+          componentData={this.props.componentData}
+          onClick={this.props.onClick}
+          className={this.props.className}
+          settings={this.props.settings}
+          theme={this.props.theme}
+          helpers={this.props.helpers}
+          disableRightClick={this.props.disableRightClick}
+          isMobile={this.props.isMobile}
+          anchorTarget={this.props.anchorTarget}
+          relValue={this.props.relValue}
+          blockKey={this.blockKey}
+        />
+        {this.state.isLoading && this.renderLoader()}
+      </>
     );
   }
 }

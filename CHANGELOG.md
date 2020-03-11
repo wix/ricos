@@ -13,10 +13,24 @@
     Click to see more.
   </summary>
 
+### :rocket: New Feature
+- `editor-common`
+  - [#716](https://github.com/wix-incubator/rich-content/pull/716) progress loader
 ### :bug: Bug Fix
 - `hashtag`
   - [#707](https://github.com/wix-incubator/rich-content/pull/707) allow hashtag and link in the same block
-  
+- `emoji`
+  - [#758](https://github.com/wix-incubator/rich-content/pull/758) all emojies aren't shown as unicode icons
+- `editor`
+  - [#735](https://github.com/wix-incubator/rich-content/pull/735) disable paste inline images and atomic blocks
+  - [#735](https://github.com/wix-incubator/rich-content/pull/735) copy paste inline styles from html
+  - [#713](https://github.com/wix-incubator/rich-content/pull/713) toolbars rtl issued fixed
+  - [#757](https://github.com/wix-incubator/rich-content/pull/757) prevent underline link inline style to affects on new line
+- `link`
+  - [#756](https://github.com/wix-incubator/rich-content/pull/756) selection keeps in place when canceling link panel
+- `gallery`
+  - [#697](https://github.com/wix-incubator/rich-content/pull/697) altText keeping value when changing to next image 
+
 </details>
 <hr/>
 

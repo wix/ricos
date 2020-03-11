@@ -40,7 +40,7 @@ const commonjs = () => {
   const commonjs = require('rollup-plugin-commonjs');
   const named = {
     imageClientAPI: ['getScaleToFillImageURL', 'getScaleToFitImageURL'],
-    immutable: ['List'],
+    immutable: ['List', 'OrderedSet', 'Map'],
   };
   return commonjs({
     namedExports: {
