@@ -71,7 +71,7 @@ describe('plugins', () => {
       });
     });
 
-    context.only('gallery full screen', () => {
+    context('gallery full screen', () => {
       beforeEach('load editor', () =>
         cy
           .loadEditorAndViewer('gallery')
@@ -88,11 +88,7 @@ describe('plugins', () => {
         cy.get(
           '#pgi65a6266ba23a8a55da3f469157f15237_0 > div > div > div > a > div > canvas'
         ).should('be.visible');
-        cy.eyesCheckWindow({
-          tag: this.test.title,
-          target: 'window',
-          fully: false,
-        });
+        cy.eyesCheckWindow({ tag: this.test.title, target: 'window', fully: false });
         cy.get(`[data-hook=${'nav-arrow-next'}]`).click({ force: true });
         cy.get(
           '#pgiea8ec1609e052b7f196935318316299d_1 > div > div > div > a > div > canvas'
