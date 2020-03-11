@@ -25,6 +25,7 @@
     "analyzeBundles": "npm run build && npm run analyzeBundles:nobuild",
     "analyzeBundles:nobuild": "npm run start --prefix plugins-bundle-analyzer",
     "analyzePlugin": "npm run build && npm run analyze --prefix plugins-bundle-analyzer",
+    "analyzeWrapper": "lerna run build --stream --scope wix-rich-content-wrapper && npm run analyze --prefix plugins-bundle-analyzer viewer-with-wrapper",
     "e2e": "start-server-and-test e2e:app http://localhost:3002 e2e:run",
     "e2e:debug": "npm run e2e:app:dev & npx cypress open --env MATCH_CONTENT_STATE=true,debug=true",
     "e2e:testContent": "start-server-and-test e2e:app http://localhost:3002 e2e:run:testContent",
@@ -126,5 +127,7 @@
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
-  "dependencies": {}
+  "dependencies": {
+    "cypress": "^4.1.0"
+  }
 }

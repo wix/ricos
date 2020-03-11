@@ -13,7 +13,16 @@
     Click to see more.
   </summary>
 
+
+</details>
+<hr/>
+
+## 6.10.0 (Mar 11, 2020)
 ### :rocket: New Feature
+- `gallery`
+  - [#625](https://github.com/wix-incubator/rich-content/pull/625) gallery supports adding videos
+- `fullscreen`
+  - [#625](https://github.com/wix-incubator/rich-content/pull/625) supports target prop to render fullscreen at the target element
 - `editor-common`
   - [#716](https://github.com/wix-incubator/rich-content/pull/716) progress loader
 ### :bug: Bug Fix
@@ -29,10 +38,10 @@
 - `link`
   - [#756](https://github.com/wix-incubator/rich-content/pull/756) selection keeps in place when canceling link panel
 - `gallery`
-  - [#697](https://github.com/wix-incubator/rich-content/pull/697) altText keeping value when changing to next image 
-
-</details>
-<hr/>
+  - [#697](https://github.com/wix-incubator/rich-content/pull/697) altText keeping value when changing to next image
+### :house: Internal
+- `fullscreen`
+  - [#625](https://github.com/wix-incubator/rich-content/pull/625) replaced react-images with Pro-Gallery
 
 ## 6.9.6 (Mar 5, 2020)
 ### :bug: Bug Fix
