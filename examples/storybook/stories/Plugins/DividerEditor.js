@@ -5,7 +5,7 @@ import { pluginDivider } from 'wix-rich-content-plugin-divider';
 import PropTypes from 'prop-types';
 
 const DividerEditor = ({ editorState }) => (
-  <RichContentWrapper plugins={[pluginDivider()]}>
+  <RichContentWrapper plugins={[pluginDivider()]} editor>
     <RichContentEditor editorState={editorState} />
   </RichContentWrapper>
 );

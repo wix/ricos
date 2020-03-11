@@ -37,7 +37,7 @@
     }
   },
   "dependencies": {
-    "draft-js-focus-plugin": "~3.0.1",
+    "draft-js-focus-plugin": "github:shaulgo/draft-js-plugins#focusPlugin",
     "draft-js-plugins-editor": "~3.0.0",
     "react-click-outside": "github:tj/react-click-outside",
     "react-measure": "~2.3.0",

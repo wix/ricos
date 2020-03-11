@@ -121,7 +121,7 @@
   "GalleryImageSettings_Title_Input_Placeholder" : "Describe this image",
   "GalleryImageSettings_Link_Label" : "Link",
   "GallerySettings_Sliders_Items_Per_Row" : "Images per row",
-  "GallerySettings_Spacing_Between_Items" : "Spacing",
+  "GallerySettings_Spacing_Between_Items" : "Spacing (px)",
   "GallerySettings_Radios_Thumbnail_Resize" : "Thumbnail resize",
   "GallerySettings_Radios_Crop" : "Crop",
   "GallerySettings_Radios_Fit" : "Fit",

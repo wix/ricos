@@ -210,7 +210,9 @@ describe('plugins', () => {
       cy.openVideoUploadModal().addVideoFromURL();
       cy.shrinkPlugin();
       cy.waitForVideoToLoad();
-      cy.focusEditor().enterParagraphs(['Will this fix the flakiness?']);
+      cy.getEditor()
+        .type('{uparrow}')
+        .type('Will this fix the flakiness?');
       cy.eyesCheckWindow(this.test.title);
     });
 
@@ -218,7 +220,9 @@ describe('plugins', () => {
       cy.openVideoUploadModal().addCustomVideo();
       cy.shrinkPlugin();
       cy.waitForVideoToLoad();
-      cy.focusEditor().enterParagraphs(['Will this fix the flakiness?']);
+      cy.getEditor()
+        .type('{uparrow}')
+        .type('Will this fix the flakiness?');
 
       cy.eyesCheckWindow(this.test.title);
     });
@@ -243,9 +247,11 @@ describe('plugins', () => {
 
     it('add a soundcloud URL', function() {
       cy.openSoundCloudModal().addSoundCloud();
-      cy.waitForVideoToLoad();
       cy.shrinkPlugin();
-      cy.focusEditor().enterParagraphs(['Will this fix the flakiness?']);
+      cy.waitForVideoToLoad();
+      cy.getEditor()
+        .type('{uparrow}')
+        .type('Will this fix the flakiness?');
       cy.eyesCheckWindow(this.test.title);
     });
   });
