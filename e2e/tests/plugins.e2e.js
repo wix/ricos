@@ -249,7 +249,7 @@ describe('plugins', () => {
       cy.openSoundCloudModal().addSoundCloud();
       cy.waitForVideoToLoad();
       cy.shrinkPlugin();
-      cy.focusEditor()
+      cy.getEditor()
         .click(20, 20)
         .type('Will this fix the flakiness?');
       cy.eyesCheckWindow(this.test.title);

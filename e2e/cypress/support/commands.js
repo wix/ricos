@@ -97,10 +97,9 @@ Cypress.Commands.add('matchSnapshots', options => {
 });
 
 // Editor commands
-const getEditor = () => cy.get('[contenteditable="true"]');
 
 Cypress.Commands.add('enterText', text => {
-  getEditor().type(text);
+  cy.getEditor().type(text);
 });
 
 Cypress.Commands.add('enterParagraphs', paragraphs => {
@@ -112,14 +111,18 @@ Cypress.Commands.add('newLine', () => {
 });
 
 Cypress.Commands.add('blurEditor', () => {
-  getEditor()
+  cy.getEditor()
     .blur()
     .get('[data-hook=inlineToolbar]')
     .should('not.visible');
 });
 
+Cypress.Commands.add('getEditor', () => {
+  cy.get('[contenteditable="true"]');
+});
+
 Cypress.Commands.add('focusEditor', () => {
-  getEditor().focus();
+  cy.getEditor().focus();
 });
 
 Cypress.on('window:before:load', win => {
