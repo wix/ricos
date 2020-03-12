@@ -23,6 +23,9 @@
 <hr/>
 
 ## 6.10.0 (Mar 11, 2020)
+### :boom: Breaking Change
+- `fullscreen`
+  - fullscreen usage need to import styles `import 'wix-rich-content-fullscreen/dist/styles.min.css';`
 ### :rocket: New Feature
 - `gallery`
   - [#625](https://github.com/wix-incubator/rich-content/pull/625) gallery supports adding videos
