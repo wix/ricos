@@ -1,6 +1,6 @@
 /*global cy*/
 import { DEFAULT_DESKTOP_BROWSERS, DEFAULT_MOBILE_BROWSERS } from '../tests/constants';
-import { PLUGIN_COMPONENT } from '../cypress/dataHooks';
+
 describe('rtl', () => {
   beforeEach(() => cy.switchToHebrew());
 
@@ -46,20 +46,6 @@ describe('rtl', () => {
         .openImageSettings()
         .get('[data-hook="imageSettingsCaptionInput"]')
         .blur();
-      cy.eyesCheckWindow(this.test.title);
-    });
-
-    it('render some emojies in rtl', function() {
-      cy.loadEditorAndViewer('empty')
-        .enterParagraphs(['טקסט בעברית לטסטים זה מאסט'])
-        .setSelection(0, 0)
-        .blurEditor();
-      cy.get(`button[data-hook=${PLUGIN_COMPONENT.EMOJI}]`).click();
-      cy.eyesCheckWindow('render emoji modal in rtl');
-      cy.get(`[data-hook=emoji-4]`).click();
-      cy.get(`[data-hook=emoji-group-4]`).click();
-      cy.get(`[data-hook=emoji-12]`).click();
-      cy.get(`[data-hook=emoji-4]`).click();
       cy.eyesCheckWindow(this.test.title);
     });
   });
