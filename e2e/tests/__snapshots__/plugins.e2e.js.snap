@@ -2887,12 +2887,50 @@ exports[`plugins > emoji > render some emojies #0`] =
     {
       "data": {},
       "depth": 0,
-      "entityRanges": [],
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        },
+        {
+          "key": 1,
+          "length": 1,
+          "offset": 1
+        },
+        {
+          "key": 2,
+          "length": 1,
+          "offset": 2
+        }
+      ],
       "inlineStyleRanges": [],
       "key": 0,
-      "text": "",
+      "text": "😄💰📝",
       "type": "unstyled"
     }
   ],
-  "entityMap": {}
+  "entityMap": {
+    "0": {
+      "data": {
+        "emojiUnicode": "😄"
+      },
+      "mutability": "IMMUTABLE",
+      "type": "EMOJI_TYPE"
+    },
+    "1": {
+      "data": {
+        "emojiUnicode": "💰"
+      },
+      "mutability": "IMMUTABLE",
+      "type": "EMOJI_TYPE"
+    },
+    "2": {
+      "data": {
+        "emojiUnicode": "📝"
+      },
+      "mutability": "IMMUTABLE",
+      "type": "EMOJI_TYPE"
+    }
+  }
 };
