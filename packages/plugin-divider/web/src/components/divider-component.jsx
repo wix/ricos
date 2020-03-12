@@ -15,7 +15,7 @@ class DividerComponent extends PureComponent {
 
   componentWillReceiveProps(nextProps) {
     if (!isEqual(nextProps.componentData, this.props.componentData)) {
-      validate(nextProps.componentData, pluginDividerSchema); //
+      validate(nextProps.componentData, pluginDividerSchema);
     }
   }
 
