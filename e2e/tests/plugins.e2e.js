@@ -205,6 +205,7 @@ describe('plugins', () => {
     });
 
     beforeEach('load editor', () => {
+      //
       cy.switchToDesktop();
       cy.loadEditorAndViewer('empty');
     });
