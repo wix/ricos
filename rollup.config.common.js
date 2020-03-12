@@ -2,7 +2,7 @@
 
 import fs from 'fs';
 import { cloneDeep } from 'lodash';
-import plugins from './rollup.plugins';
+import { plugins as createPlugins } from './rollup.plugins';
 import { isExternal as external } from './rollup.externals';
 
 if (!process.env.MODULE_NAME) {
@@ -10,7 +10,8 @@ if (!process.env.MODULE_NAME) {
   process.exit(1);
 }
 
-export default output => {
+export default (output, shouldExtractCss) => {
+  const plugins = createPlugins(shouldExtractCss);
   output = output.map(o => ({ ...o, sourcemap: true }));
   if (process.env.MODULE_WATCH) {
     output = output.filter(o => o.format === 'es');

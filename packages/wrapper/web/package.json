@@ -19,7 +19,7 @@
   ],
   "main": "dist/cjs/index.js",
   "module": "dist/es/index.js",
-  "style": "dist/styles.min.scss",
+  "style": "dist/styles.min.css",
   "scripts": {
     "clean": "rm -rf dist/",
     "prebuild": "npm run clean",
