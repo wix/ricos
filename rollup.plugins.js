@@ -77,7 +77,7 @@ const postcss = shouldExtract => {
     modules: {
       generateScopedName: IS_DEV_ENV ? '[name]__[local]___[hash:base64:5]' : '[hash:base64:5]',
     },
-    extract: !shouldExtract && 'dist/styles.min.css',
+    extract: shouldExtract && 'dist/styles.min.css',
     plugins: [
       postcssExclude({
         filter: '**/*.rtlignore.scss',
