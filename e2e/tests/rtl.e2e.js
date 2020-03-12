@@ -56,10 +56,10 @@ describe('rtl', () => {
         .blurEditor();
       cy.get(`button[data-hook=${PLUGIN_COMPONENT.EMOJI}]`).click();
       cy.eyesCheckWindow('render emoji modal in rtl');
-      cy.get(`[data-hook=emoji-0]`).click();
-      cy.get(`[data-hook=emoji-group-2]`).click();
-      cy.get(`[data-hook=emoji-0]`).click();
-      cy.get(`[data-hook=emoji-9]`).click();
+      cy.get(`[data-hook=emoji-4]`).click();
+      cy.get(`[data-hook=emoji-group-4]`).click();
+      cy.get(`[data-hook=emoji-12]`).click();
+      cy.get(`[data-hook=emoji-4]`).click();
       cy.eyesCheckWindow(this.test.title);
     });
   });

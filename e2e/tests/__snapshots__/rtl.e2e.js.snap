@@ -473,60 +473,6 @@ exports[`rtl > mobile > render external modal in rtl #0`] =
   }
 };
 
-exports[`rtl > desktop > render some emojies #0`] =
-{
-  "blocks": [
-    {
-      "data": {},
-      "depth": 0,
-      "entityRanges": [
-        {
-          "key": 0,
-          "length": 1,
-          "offset": 26
-        },
-        {
-          "key": 1,
-          "length": 1,
-          "offset": 27
-        },
-        {
-          "key": 2,
-          "length": 1,
-          "offset": 28
-        }
-      ],
-      "inlineStyleRanges": [],
-      "key": 0,
-      "text": "טקסט בעברית לטסטים זה מאסט😀🍇🍐",
-      "type": "unstyled"
-    }
-  ],
-  "entityMap": {
-    "0": {
-      "data": {
-        "emojiUnicode": "😀"
-      },
-      "mutability": "IMMUTABLE",
-      "type": "EMOJI_TYPE"
-    },
-    "1": {
-      "data": {
-        "emojiUnicode": "🍇"
-      },
-      "mutability": "IMMUTABLE",
-      "type": "EMOJI_TYPE"
-    },
-    "2": {
-      "data": {
-        "emojiUnicode": "🍐"
-      },
-      "mutability": "IMMUTABLE",
-      "type": "EMOJI_TYPE"
-    }
-  }
-};
-
 exports[`rtl > desktop > render some emojies in rtl #0`] =
 {
   "blocks": [
@@ -541,39 +487,39 @@ exports[`rtl > desktop > render some emojies in rtl #0`] =
         },
         {
           "key": 1,
-          "length": 1,
+          "length": 2,
           "offset": 27
         },
         {
           "key": 2,
-          "length": 1,
-          "offset": 28
+          "length": 2,
+          "offset": 29
         }
       ],
       "inlineStyleRanges": [],
       "key": 0,
-      "text": "טקסט בעברית לטסטים זה מאסט😀🍇🍐",
+      "text": "טקסט בעברית לטסטים זה מאסט😃🏟️⛰️",
       "type": "unstyled"
     }
   ],
   "entityMap": {
     "0": {
       "data": {
-        "emojiUnicode": "😀"
+        "emojiUnicode": "😃"
       },
       "mutability": "IMMUTABLE",
       "type": "EMOJI_TYPE"
     },
     "1": {
       "data": {
-        "emojiUnicode": "🍇"
+        "emojiUnicode": "🏟️"
       },
       "mutability": "IMMUTABLE",
       "type": "EMOJI_TYPE"
     },
     "2": {
       "data": {
-        "emojiUnicode": "🍐"
+        "emojiUnicode": "⛰️"
       },
       "mutability": "IMMUTABLE",
       "type": "EMOJI_TYPE"
