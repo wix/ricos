@@ -87,8 +87,8 @@ export default class ThemeGenerator {
           },
         },
         //block focus
-        hasFocus: { ...blockActionColorSettings },
-        pluginContainer: { ':hover': { ...blockActionColorSettings } },
+        hasFocus: blockActionColorSettings,
+        pluginContainer: { ':hover': blockActionColorSettings },
         linkPreview: {
           borderColor: textColor,
           backgroundColor: bgColor,
