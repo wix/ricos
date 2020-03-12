@@ -93,7 +93,7 @@ class RichContentEditor extends Component {
       locale,
       anchorTarget,
       relValue,
-      helpers,
+      helpers = {},
       config,
       isMobile = false,
       shouldRenderOptimizedImages,

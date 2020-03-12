@@ -7,7 +7,6 @@ import {
   validate,
   isSSR,
   getImageSrc,
-  Loader,
   WIX_MEDIA_DEFAULT,
   pluginImageSchema,
 } from 'wix-rich-content-common';
@@ -143,17 +142,6 @@ class ImageViewer extends React.Component {
     }
   };
 
-  renderLoader() {
-    if (!this.props.isLoading) {
-      return null;
-    }
-    return (
-      <div className={this.styles.imageOverlay}>
-        <Loader type={'medium'} theme={this.props.theme} />
-      </div>
-    );
-  }
-
   renderTitle(data, styles) {
     const config = data.config || {};
     return (
@@ -270,7 +258,6 @@ class ImageViewer extends React.Component {
             this.renderPreloadImage(imageClassName, imageSrc, metadata.alt, imageProps)}
           {shouldRenderImage &&
             this.renderImage(imageClassName, imageSrc, metadata.alt, imageProps, isGif, seoMode)}
-          {this.renderLoader()}
           {hasLink && hasExpand && (
             <ExpandIcon className={this.styles.expandIcon} onClick={this.handleExpand} />
           )}

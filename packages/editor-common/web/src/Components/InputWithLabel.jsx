@@ -60,4 +60,8 @@ InputWithLabel.propTypes = {
   maxLength: PropTypes.number,
 };
 
+InputWithLabel.defaultProps = {
+  value: '',
+};
+
 export default InputWithLabel;
