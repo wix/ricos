@@ -90,7 +90,7 @@ export default class ThemeGenerator {
         },
         linkPreview_image: {
           borderColor: textColor,
-        }, //
+        },
         linkPreview_description: {
           color: textColor,
         },
