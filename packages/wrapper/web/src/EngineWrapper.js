@@ -17,6 +17,7 @@ class EngineWrapper extends React.Component {
         /* webpackChunkName: "rce-editorStateConversion"  */ `wix-rich-content-editor/dist/lib/editorStateConversion.js`
       ).then(module => this.setState({ editorState: module.createEmpty() }));
     }
+    this.emptyInitialState = { entityMap: {} };
   }
 
   onModalOpen = data => {
@@ -133,7 +134,7 @@ class EngineWrapper extends React.Component {
         {Fullscreen && (
           <Suspense fallback={<div />}>
             <Fullscreen
-              initialState={children.props.initialState}
+              initialState={children.props.initialState || this.emptyInitialState}
               isOpen={expandModeIsOpen}
               images={expandModeData?.images || []}
               onClose={() => this.setState({ expandModeIsOpen: false })}
