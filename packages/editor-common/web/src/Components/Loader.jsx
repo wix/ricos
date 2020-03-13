@@ -63,7 +63,7 @@ class Loader extends React.Component {
   }
 
   componentWillUnmount() {
-    // this.this.resetFakeLoader();
+    this.this.resetFakeLoader();
   }
   initiateStyles() {
     if (!this.styles) {
