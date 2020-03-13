@@ -142,7 +142,7 @@ class ImageComponent extends React.Component {
   handleCaptionChange = caption => this.handleMetadataChange({ caption });
 
   renderLoader = () => {
-    return <Loader type={'medium'} />;
+    return <Loader type={'medium'} isFastFakeLoader />;
   };
 
   render() {
