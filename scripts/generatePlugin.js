@@ -75,16 +75,19 @@ inquirer.prompt(QUESTIONS).then(answers => {
 
 function createDirectoryContents(templatePath, newProjectPath, pluginData) {
   const { pluginName, pluginAuthor, pluginAuthorMailAddress } = pluginData;
+  const nameWords = pluginName.split('-');
   const filesToCreate = fs.readdirSync(templatePath);
   filesToCreate.forEach(file => {
     const origFilePath = `${templatePath}/${file}`;
 
     const stats = fs.statSync(origFilePath);
     const pluginNameMap = {
-      yourpluginname: pluginName.toLowerCase(),
-      yourPluginName: pluginName,
-      YOUR_PLUGIN_NAME: pluginName.toUpperCase(),
-      YourPluginName: pluginName.charAt(0).toUpperCase() + pluginName.slice(1),
+      'your-plugin-name': pluginName,
+      yourPluginName: nameWords.join(''),
+      YOUR_PLUGIN_NAME: nameWords.join('_').toUpperCase(),
+      YourPluginName: nameWords
+        .map(part => part.charAt(0).toUpperCase() + pluginName.slice(1))
+        .join(''),
       yourPluginVersion: version,
       pluginAuthor,
       pluginAuthorMailAddress,
