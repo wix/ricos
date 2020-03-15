@@ -13,7 +13,7 @@ if (!process.env.MODULE_NAME) {
 export default (output, shouldExtractCss) => {
   const plugins = createPlugins(shouldExtractCss);
   output = output.map(o => ({ ...o, sourcemap: true }));
-  if (process.env.MODULE_WATCH) {
+  if (process.env.MODULE_WATCH && !process.env.BUILD_CJS) {
     output = output.filter(o => o.format === 'es' || process.env.BUILD_CJS);
   }
   const watch = {
