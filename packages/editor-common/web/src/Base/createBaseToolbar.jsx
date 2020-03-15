@@ -13,6 +13,7 @@ import { BUTTONS, BUTTONS_BY_KEY, BlockLinkButton, deleteButton } from './button
 import Panel from '../Components/Panel';
 import toolbarStyles from '../../statics/styles/plugin-toolbar.scss';
 import buttonStyles from '../../statics/styles/plugin-toolbar-button.scss';
+import { PluginSettingsIcon } from '../Icons';
 
 const getInitialState = () => ({
   position: { transform: 'scale(0)' },
@@ -326,7 +327,14 @@ export default function createToolbar({
         case BUTTONS.LINK:
           return <BlockLinkButton {...baseLinkProps} />;
         case BUTTONS.LINK_PREVIEW: {
-          return <BlockLinkButton {...baseLinkProps} unchangedUrl />;
+          return (
+            <BlockLinkButton
+              {...baseLinkProps}
+              unchangedUrl
+              tooltipText={t('LinkPreview_Settings_Tooltip')}
+              icons={PluginSettingsIcon}
+            />
+          );
         }
         case BUTTONS.DELETE: {
           const DeleteButtonComponent = deleteButton(icons.delete);

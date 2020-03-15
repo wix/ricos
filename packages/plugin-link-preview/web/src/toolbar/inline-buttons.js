@@ -1,10 +1,16 @@
-import { BUTTONS } from 'wix-rich-content-editor-common';
+import { BUTTONS, PluginSettingsIcon } from 'wix-rich-content-editor-common';
 import { convertLinkPreviewToLink } from '../lib/utils';
 import { ConvertToLinkIcon } from '../icons';
 
 export default (setEditorState, getEditorState) => {
   return [
-    { keyName: 'link', type: BUTTONS.LINK_PREVIEW, mobile: false },
+    {
+      keyName: 'link',
+      type: BUTTONS.LINK_PREVIEW,
+      mobile: false,
+      icon: PluginSettingsIcon,
+      tooltipTextKey: 'LinkPreview_Settings_Tooltip',
+    },
     {
       keyName: 'replaceToLink',
       type: 'custom',
@@ -15,6 +21,7 @@ export default (setEditorState, getEditorState) => {
       },
       mobile: true,
       desktop: true,
+      tooltipTextKey: 'LinkPreview_RemovePreview_Tooltip',
     },
     { keyName: 'delete', type: BUTTONS.DELETE, mobile: true },
   ];
