@@ -3,10 +3,10 @@
   Uncomment if you need it.
 */
 
-// import YourPluginNameModal from './components/yourpluginname-modal';
+// import YourPluginNameModal from './components/yourDpluginDname-modal';
 
 // const Modals = {
-//   YOUR_PLUGIN_NAME_SETTINGS: 'yourpluginname',
+//   YOUR_PLUGIN_NAME_SETTINGS: 'yourDpluginDname',
 // };
 
 // const ModalsMap = {
