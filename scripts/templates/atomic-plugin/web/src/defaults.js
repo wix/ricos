@@ -12,7 +12,7 @@ export const DEFAULTS = Object.freeze({
   config: {},
 });
 
-//colors is defined in 'ThemeGenerator.js'
+//@colors is defined in 'ThemeGenerator.js'
 export const THEME = colors => {
   console.warn(
     `YourPluginName needs to provide css definitions for RichContentWrapper.

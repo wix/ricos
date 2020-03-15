@@ -39,7 +39,7 @@ const QUESTIONS = [
     type: 'input',
     message: 'Enter Plugin author:',
     validate(input) {
-      if (/^[a-zA-Z]+[\-'\s]?[a-zA-Z ]+$/.test(input)) return true;
+      if (/^[a-zA-Z]+[-'\s]?[a-zA-Z ]+$/.test(input)) return true;
       else return 'Plugin author name may only include lower letters.';
     },
     default: gitName,
@@ -81,6 +81,7 @@ function createDirectoryContents(templatePath, newProjectPath, pluginData) {
 
     const stats = fs.statSync(origFilePath);
     const pluginNameMap = {
+      yourpluginname: pluginName.toLowerCase(),
       yourPluginName: pluginName,
       YOUR_PLUGIN_NAME: pluginName.toUpperCase(),
       YourPluginName: pluginName.charAt(0).toUpperCase() + pluginName.slice(1),
@@ -93,7 +94,8 @@ function createDirectoryContents(templatePath, newProjectPath, pluginData) {
       console.log(chalk.cyan(`Creating ${fileName} file`));
       const contents = fs.readFileSync(origFilePath, 'utf8');
       const result = contents.replace(
-        /yourPluginName|YOUR_PLUGIN_NAME|YourPluginName|yourPluginVersion|pluginAuthorName|pluginAuthorMailAddress/g,
+        // eslint-disable-next-line max-len
+        /yourpluginname|yourPluginName|YOUR_PLUGIN_NAME|YourPluginName|yourPluginVersion|pluginAuthorName|pluginAuthorMailAddress/g,
         name => pluginNameMap[name]
       );
       const writePath = `${CURR_DIR}/${newProjectPath}/${fileName}`;
