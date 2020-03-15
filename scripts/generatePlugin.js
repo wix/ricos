@@ -32,9 +32,10 @@ const QUESTIONS = [
     validate(input) {
       //hashtag, hash-tag, hash1-tag, hash-1-tag, hash-tag-1, hash-tag1
       if (/^[a-z]+[\d]*([-]{1}[a-z\d]+)*$/.test(input)) return true;
-      else
-        return `Plugin name may only include lower letters, dashes in-between (-)
-                and numbers. first character cannot be a number.`;
+      else {
+        // eslint-disable-next-line max-len
+        return `Plugin name may only include lower letters, dashes in-between (-) and numbers. first letter cannot be a number.`;
+      }
     },
   },
   {
