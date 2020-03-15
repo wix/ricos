@@ -64,7 +64,7 @@ const json = () => {
   });
 };
 
-const postcss = () => {
+const postcss = shouldExtract => {
   const postcss = require('rollup-plugin-postcss');
   const postcssExclude = require('postcss-exclude-files').default;
   const postcssURL = require('postcss-url');
@@ -77,7 +77,7 @@ const postcss = () => {
     modules: {
       generateScopedName: IS_DEV_ENV ? '[name]__[local]___[hash:base64:5]' : '[hash:base64:5]',
     },
-    extract: 'dist/styles.min.css',
+    extract: shouldExtract && 'dist/styles.min.css',
     plugins: [
       postcssExclude({
         filter: '**/*.rtlignore.scss',
@@ -115,14 +115,17 @@ const visualizer = () => {
   });
 };
 
-let plugins = [svgr(), resolve(), copy(), babel(), commonjs(), json(), postcss()];
+let _plugins = [svgr(), resolve(), copy(), babel(), commonjs(), json()];
 
 if (!IS_DEV_ENV) {
-  plugins = [...plugins, replace(), uglify()];
+  _plugins = [..._plugins, replace(), uglify()];
 }
 
 if (process.env.MODULE_ANALYZE) {
-  plugins = [...plugins, visualizer()];
+  _plugins = [..._plugins, visualizer()];
 }
-
-export default plugins;
+const plugins = shouldExtractCss => {
+  _plugins.push(postcss(shouldExtractCss));
+  return _plugins;
+};
+export { plugins };

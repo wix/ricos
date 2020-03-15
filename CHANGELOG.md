@@ -12,8 +12,28 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+</details>
+<hr/>
 
+## 6.10.2 (Mar 15, 2020)
+### :house: Internal
+- `wrapper`
+  - use cjs version of fullscreen lib, fix onChange call
+
+## 6.10.1 (Mar 12, 2020)
 ### :rocket: New Feature
+- `gallery`
+  - [#762](https://github.com/wix-incubator/rich-content/pull/762) bump pro gallery to version 1.8.2
+
+## 6.10.0 (Mar 11, 2020)
+### :boom: Breaking Change
+- `fullscreen`
+  - fullscreen usage need to import styles `import 'wix-rich-content-fullscreen/dist/styles.min.css';`
+### :rocket: New Feature
+- `gallery`
+  - [#625](https://github.com/wix-incubator/rich-content/pull/625) gallery supports adding videos
+- `fullscreen`
+  - [#625](https://github.com/wix-incubator/rich-content/pull/625) supports target prop to render fullscreen at the target element
 - `editor-common`
   - [#716](https://github.com/wix-incubator/rich-content/pull/716) progress loader
 ### :bug: Bug Fix
@@ -29,10 +49,10 @@
 - `link`
   - [#756](https://github.com/wix-incubator/rich-content/pull/756) selection keeps in place when canceling link panel
 - `gallery`
-  - [#697](https://github.com/wix-incubator/rich-content/pull/697) altText keeping value when changing to next image 
-
-</details>
-<hr/>
+  - [#697](https://github.com/wix-incubator/rich-content/pull/697) altText keeping value when changing to next image
+### :house: Internal
+- `fullscreen`
+  - [#625](https://github.com/wix-incubator/rich-content/pull/625) replaced react-images with Pro-Gallery
 
 ## 6.9.6 (Mar 5, 2020)
 ### :bug: Bug Fix

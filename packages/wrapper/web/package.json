@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-wrapper",
-  "version": "6.9.6",
+  "version": "6.10.2",
   "author": {
     "name": "Alex Greenstein",
     "email": "alexgr@wix.com"
@@ -17,13 +17,13 @@
   "files": [
     "dist"
   ],
-  "main": "dist/module.cjs.js",
-  "module": "dist/module.js",
-  "style": "dist/styles.min.scss",
+  "main": "dist/cjs/index.js",
+  "module": "dist/es/index.js",
+  "style": "dist/styles.min.css",
   "scripts": {
     "clean": "rm -rf dist/",
     "prebuild": "npm run clean",
-    "build": "rollup --environment MODULE_NAME:wrapper -c ../../../rollup.config.js",
+    "build": "rollup --environment MODULE_NAME:wrapper -c ../../../rollup.config.wrapper.js",
     "build:dev": "cross-env NODE_ENV=development npm run build",
     "build:analyze": "npm run build -- --environment MODULE_ANALYZE && open stats.html",
     "watch": "cross-env NODE_ENV=development MODULE_WATCH=1 npm run build -- --watch.chokidar",
@@ -55,11 +55,11 @@
   },
   "dependencies": {
     "react-modal": "~3.1.11",
-    "wix-rich-content-common": "6.9.6",
-    "wix-rich-content-editor": "6.9.6",
-    "wix-rich-content-editor-common": "6.9.6",
-    "wix-rich-content-viewer": "6.9.6",
-    "wix-rich-content-fullscreen": "6.9.6"
+    "wix-rich-content-common": "6.10.2",
+    "wix-rich-content-editor": "6.10.2",
+    "wix-rich-content-editor-common": "6.10.2",
+    "wix-rich-content-fullscreen": "6.10.2",
+    "wix-rich-content-viewer": "6.10.2"
   },
   "jest": {
     "globals": {

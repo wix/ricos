@@ -63,6 +63,8 @@ export const DEFAULTS = Object.freeze({
     mobileSwipeAnimation: 'NO_EFFECT',
     thumbnailSize: 120,
     gotStyleParams: true,
+    showVideoPlayButton: true,
+    videoPlay: 'onClick',
   },
   config: {
     alignment: 'center',
@@ -71,6 +73,18 @@ export const DEFAULTS = Object.freeze({
     spacing: 0,
   },
 });
+
+export const imageItem = (img, itemId) => {
+  return {
+    metadata: {
+      type: 'image',
+      height: img.height,
+      width: img.width,
+    },
+    itemId,
+    url: img.src,
+  };
+};
 
 export const isHorizontalLayout = ({ galleryLayout }) =>
   HORIZONTAL_LAYOUTS.indexOf(galleryLayout) > -1;

@@ -41,3 +41,21 @@ export const DEFAULT_SETTINGS = {
 export const DEFAULTS = {
   config: { ...DEFAULT_SETTINGS },
 };
+
+export const THEME = colors => {
+  const themeHoverFocus = {
+    color: colors.actionColor,
+    background: 'transparent',
+    outline: 0 /* reset for :focus */,
+    textDecoration: 'underline',
+  };
+  return {
+    mention: {
+      color: colors.actionColor,
+      background: 'transparent',
+      ':hover': themeHoverFocus,
+      ':focus': themeHoverFocus,
+      ':active': { color: colors.actionColor, background: 'transparent' },
+    },
+  };
+};

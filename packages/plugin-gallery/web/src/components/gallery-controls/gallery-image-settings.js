@@ -32,28 +32,28 @@ class ImageSettings extends Component {
     this.linkLabel = t('GalleryImageSettings_Link_Label');
   }
 
-  deleteImage() {
-    this.props.onDeleteImage();
+  deleteItem() {
+    this.props.onDeleteItem();
   }
 
   replaceItem = files => {
     this.props.handleFileChange(files);
   };
 
-  getImageUrl = image =>
+  getMediaUrl = item =>
     imageClientAPI.getScaleToFillImageURL(
-      'media/' + image.url,
-      image.metadata.width,
-      image.metadata.height,
+      'media/' + (item.metadata.type !== 'video' ? item.url : item.metadata.poster),
+      item.metadata.width,
+      item.metadata.height,
       420,
       240
     );
 
-  onTitleChange = event => this.props.onUpdateImage({ title: event.target.value });
-  onAltTextChange = event => this.props.onUpdateImage({ altText: event.target.value });
+  onTitleChange = event => this.props.onUpdateItem({ title: event.target.value });
+  onAltTextChange = event => this.props.onUpdateItem({ altText: event.target.value });
 
   onLinkPanelChange = linkPanelValues => {
-    this.props.onUpdateImage({ link: this.linkPanelToLink(linkPanelValues) });
+    this.props.onUpdateItem({ link: this.linkPanelToLink(linkPanelValues) });
   };
 
   linkPanelToLink = ({ url, targetBlank, nofollow, isValid }) => ({
@@ -89,12 +89,13 @@ class ImageSettings extends Component {
       t,
       anchorTarget,
       relValue,
-      onNextImage,
-      onPreviousImage,
-      onDeleteImage,
+      onNextItem,
+      onPreviousItem,
+      onDeleteItem,
       visibleLeftArrow,
       visibleRightArrow,
       uiSettings,
+      accept,
     } = this.props;
 
     const { linkPanel } = uiSettings || {};
@@ -152,7 +153,7 @@ class ImageSettings extends Component {
                     alt={metadata.title || 'gallery image preview'}
                     resizeMode={'contain'}
                     className={styles.galleryImageSettings_image}
-                    src={this.getImageUrl(image)}
+                    src={this.getMediaUrl(image)}
                     theme={theme}
                   />
                   <div
@@ -167,7 +168,7 @@ class ImageSettings extends Component {
                       })}
                       aria-label="previous image"
                       data-hook="galleryImageSettingsPrevious"
-                      onClick={onPreviousImage}
+                      onClick={onPreviousItem}
                     >
                       <PreviousIcon />
                     </button>
@@ -177,7 +178,7 @@ class ImageSettings extends Component {
                       })}
                       aria-label="next image"
                       data-hook="galleryImageSettingsNext"
-                      onClick={onNextImage}
+                      onClick={onNextItem}
                     >
                       <NextIcon />
                     </button>
@@ -191,6 +192,7 @@ class ImageSettings extends Component {
                     onChange={this.replaceItem}
                     theme={theme}
                     title={this.ReplaceLabel}
+                    accept={accept}
                   >
                     <ReplaceIcon className={styles.galleryImageSettings_replace_icon} />
                     <span className={styles.galleryImageSettings_replace_text}>
@@ -201,7 +203,7 @@ class ImageSettings extends Component {
                     className={styles.galleryImageSettings_delete}
                     aria-label="delete image"
                     data-hook="galleryImageSettingsDeleteImage"
-                    onClick={onDeleteImage}
+                    onClick={onDeleteItem}
                   >
                     <DeleteIcon className={styles.galleryImageSettings_delete_icon} />
                     <span className={styles.galleryImageSettings_delete_text}>
@@ -232,25 +234,27 @@ class ImageSettings extends Component {
                     onChange={this.onAltTextChange}
                   />
                 </SettingsSection>
-                <SettingsSection
-                  ariaProps={{ 'aria-label': 'image link', role: 'region' }}
-                  theme={theme}
-                  className={this.styles.galleryImageSettings_section}
-                >
-                  <span id="gallery_image_link_lbl" className={this.styles.inputWithLabel_label}>
-                    {this.linkLabel}
-                  </span>
-                  <LinkPanel
-                    linkValues={this.linkToLinkPanel(metadata.link || {})}
-                    onChange={this.onLinkPanelChange}
-                    showTargetBlankCheckbox={showTargetBlankCheckbox}
-                    showRelValueCheckbox={showRelValueCheckbox}
+                {metadata.type !== 'video' && (
+                  <SettingsSection
+                    ariaProps={{ 'aria-label': 'image link', role: 'region' }}
                     theme={theme}
-                    t={t}
-                    ariaProps={{ 'aria-labelledby': 'gallery_image_link_lbl' }}
-                    placeholder={placeholder}
-                  />
-                </SettingsSection>
+                    className={this.styles.galleryImageSettings_section}
+                  >
+                    <span id="gallery_image_link_lbl" className={this.styles.inputWithLabel_label}>
+                      {this.linkLabel}
+                    </span>
+                    <LinkPanel
+                      linkValues={this.linkToLinkPanel(metadata.link || {})}
+                      onChange={this.onLinkPanelChange}
+                      showTargetBlankCheckbox={showTargetBlankCheckbox}
+                      showRelValueCheckbox={showRelValueCheckbox}
+                      theme={theme}
+                      t={t}
+                      ariaProps={{ 'aria-labelledby': 'gallery_image_link_lbl' }}
+                      placeholder={placeholder}
+                    />
+                  </SettingsSection>
+                )}
               </div>
             )}
           </div>
@@ -278,10 +282,10 @@ ImageSettings.propTypes = {
   }).isRequired,
   onCancel: PropTypes.func.isRequired,
   onSave: PropTypes.func.isRequired,
-  onDeleteImage: PropTypes.func.isRequired,
-  onUpdateImage: PropTypes.func.isRequired,
-  onNextImage: PropTypes.func.isRequired,
-  onPreviousImage: PropTypes.func.isRequired,
+  onDeleteItem: PropTypes.func.isRequired,
+  onUpdateItem: PropTypes.func.isRequired,
+  onNextItem: PropTypes.func.isRequired,
+  onPreviousItem: PropTypes.func.isRequired,
   theme: PropTypes.object.isRequired,
   handleFileSelection: PropTypes.func,
   handleFileChange: PropTypes.func,
@@ -292,6 +296,7 @@ ImageSettings.propTypes = {
   visibleLeftArrow: PropTypes.bool,
   visibleRightArrow: PropTypes.bool,
   uiSettings: PropTypes.object,
+  accept: PropTypes.string,
 };
 
 export default ImageSettings;
