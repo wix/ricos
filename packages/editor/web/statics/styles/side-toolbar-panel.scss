@@ -1,30 +1,21 @@
 .sideToolbarPanelWrapper {
-  display: grid;
-  grid-row-gap: 12px;
+  display: flex;
   padding: 12px;
   overflow: auto;
-  grid-template-rows: max-content auto;
+  justify-items: center;
+  align-items: center;
+
+  &.sideToolbarPanelWithSearch {
+    grid-template-areas: 'search' 'plugins';
+    grid-row-gap: 12px;
+    display: grid;
+  }
 
   .withoutSections,
   .pluginsSectionEmptyState,
   .pluginsSection {
-    margin-top: 54px;
+    // margin-top: 54px;
     color: #000000;
-  }
-
-  .pluginsSectionEmptyState {
-    margin-top: 64px;
-    color: #000000;
-  }
-
-  .pluginsSection {
-    height: 28px;
-    background-color: rgba(0, 0, 0, 0.06);
-    align-items: center;
-    display: flex;
-    justify-content: center;
-    font-size: 14px;
-    line-height: 20px;
   }
 
   .pluginsSectionEmptyState {
@@ -35,12 +26,30 @@
     letter-spacing: 1px;
   }
 
+  .pluginsSection {
+    grid-area: 'plugins';
+    height: 28px;
+    background-color: rgba(0, 0, 0, 0.06);
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    font-size: 14px;
+    line-height: 20px;
+  }
+
   .buttonsWrapper {
     display: grid;
     justify-items: center;
     grid-row-gap: 12px;
     grid-auto-rows: 72px;
     grid-template-columns: 98px 98px 98px;
+    grid-area: plugins;
+    @media only screen and (max-width: 640px) {
+      grid-row-gap: 8px;
+      width: 100%;
+      grid-template-columns: repeat(3, 1fr);
+      margin-top: 0;
+    }
 
     .buttonWrapper {
       display: flex;
@@ -66,4 +75,8 @@
   position: fixed;
   width: 296px;
   padding: 12px;
+  grid-area: search;
+  @media only screen and (max-width: 640px) {
+    padding: 0;
+  }
 }

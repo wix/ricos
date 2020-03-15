@@ -12,6 +12,7 @@ const SideToolbarPluginsSection = ({
   structure,
   searchTag,
   t,
+  hidePopup,
 }) => {
   const pluginsForTag = searchTag && getPluginsForTag(searchTag, t);
   const plugins = !searchTag
@@ -47,6 +48,7 @@ const SideToolbarPluginsSection = ({
             theme={theme}
             showName
             toolbarName={TOOLBARS.SIDE}
+            hidePopup={hidePopup}
           />
         </div>
       ))}
@@ -61,6 +63,7 @@ SideToolbarPluginsSection.propTypes = {
   theme: PropTypes.object.isRequired,
   t: PropTypes.func,
   searchTag: PropTypes.string,
+  hidePopup: PropTypes.func,
 };
 
 export default SideToolbarPluginsSection;

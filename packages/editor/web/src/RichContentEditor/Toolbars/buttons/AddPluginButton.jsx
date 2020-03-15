@@ -8,10 +8,18 @@ export default class AddPluginButton extends Component {
   handleClick = () => this.openAddPluginModal();
 
   openAddPluginModal = () => {
-    const { getEditorState, setEditorState, pluginButtons, pubsub, theme, t } = this.props;
+    const {
+      getEditorState,
+      setEditorState,
+      pluginButtons,
+      pubsub,
+      theme,
+      t,
+      isMobile,
+    } = this.props;
     this.props.openModal({
       modalName: EditorModals.MOBILE_ADD_PLUGIN,
-      modalStyles: getModalStyles({ fullScreen: false, isMobile: true }),
+      modalStyles: getModalStyles({ fullScreen: false, isMobile: true, stickyButtom: true }),
       structure: pluginButtons,
       theme,
       hidePopup: this.props.closeModal,
@@ -19,6 +27,7 @@ export default class AddPluginButton extends Component {
       setEditorState,
       pubsub,
       t,
+      isMobile,
     });
   };
 
@@ -44,4 +53,5 @@ AddPluginButton.propTypes = {
   pluginButtons: PropTypes.array,
   theme: PropTypes.object.isRequired,
   t: PropTypes.func,
+  isMobile: PropTypes.bool,
 };

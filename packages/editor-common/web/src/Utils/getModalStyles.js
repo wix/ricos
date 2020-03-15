@@ -32,6 +32,19 @@ const mobileModalStyles = {
   },
 };
 
+const stickyButtomStyles = {
+  overlay: mobileModalStyles.overlay,
+  content: {
+    width: '100%',
+    bottom: 0,
+    height: 'max-content',
+    padding: 0,
+    right: 0,
+    left: 0,
+    top: 'unset',
+  },
+};
+
 const mobileFullScreenOverrideStyles = {
   overlay: {
     top: 0,
@@ -119,6 +132,7 @@ export const getModalStyles = ({
   fullScreen = true,
   inline = false,
   isMobile = false,
+  stickyButtom = false,
 } = {}) => {
   const overrideStyles = [];
   if (isMobile) {
@@ -127,6 +141,9 @@ export const getModalStyles = ({
     }
     if (customStyles) {
       overrideStyles.push(customStyles);
+    }
+    if (stickyButtom) {
+      return stickyButtomStyles;
     }
     return merge({}, mobileModalStyles, ...overrideStyles);
   } else {
