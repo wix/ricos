@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import YourPluginNameViewer from './yourPluginName-viewer';
+import YourPluginNameViewer from './yourDpluginDname-viewer';
 import { YOUR_PLUGIN_NAME_TYPE } from './types';
 
 const DEFAULTS = Object.freeze({

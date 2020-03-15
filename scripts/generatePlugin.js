@@ -79,30 +79,31 @@ inquirer.prompt(QUESTIONS).then(answers => {
 
 function createDirectoryContents(templatePath, newProjectPath, pluginData) {
   const { pluginName, pluginAuthor, pluginAuthorMailAddress } = pluginData;
-  const nameWords = pluginName.split('-');
   const filesToCreate = fs.readdirSync(templatePath);
+  const nameWords = pluginName.split('-');
   filesToCreate.forEach(file => {
     const origFilePath = `${templatePath}/${file}`;
 
     const stats = fs.statSync(origFilePath);
     const pluginNameMap = {
-      'your-plugin-name': pluginName,
+      yourDpluginDname: pluginName, //your-plugin-name
       yourPluginName: nameWords.join(''),
       YOUR_PLUGIN_NAME: nameWords.join('_').toUpperCase(),
-      YourPluginName: nameWords
-        .map(part => part.charAt(0).toUpperCase() + pluginName.slice(1))
-        .join(''),
+      YourPluginName: nameWords.map(part => part.charAt(0).toUpperCase() + part.slice(1)).join(''),
       yourPluginVersion: version,
       pluginAuthor,
       pluginAuthorMailAddress,
     };
-    const fileName = file.replace(/yourPluginName|YourPluginName/g, name => pluginNameMap[name]);
+    const fileName = file.replace(
+      /yourDpluginDname|yourPluginName|YourPluginName/g,
+      name => pluginNameMap[name]
+    );
     if (stats.isFile()) {
       console.log(chalk.cyan(`Creating ${fileName} file`));
       const contents = fs.readFileSync(origFilePath, 'utf8');
       const result = contents.replace(
         // eslint-disable-next-line max-len
-        /yourpluginname|yourPluginName|YOUR_PLUGIN_NAME|YourPluginName|yourPluginVersion|pluginAuthorName|pluginAuthorMailAddress/g,
+        /yourDpluginDname|yourPluginName|YOUR_PLUGIN_NAME|YourPluginName|yourPluginVersion|pluginAuthorName|pluginAuthorMailAddress/g,
         name => pluginNameMap[name]
       );
       const writePath = `${CURR_DIR}/${newProjectPath}/${fileName}`;
