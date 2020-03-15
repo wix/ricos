@@ -1,15 +1,18 @@
 /*
   This module contains default params for your plugin.
-  DEFAULTS - should at least contain an empty object of config (or else the wrapper won't work)
+  You can add whatever you like here.
+
   THEME - receives 'colors' object (palette) and returns a css object which is the exact css style of the plugin,
           but with a transformation of colors based on the palette.
           Please find examples of usage in other plugins.
-*/
+  DEFAULTS - should contain at least an empty 'config' (or else the wrapper won't work)
+  
+  */
 export const DEFAULTS = Object.freeze({
   config: {},
 });
 
-// colors["actionColor", "bgColor", "textColor", "secondaryColor"]
+//colors is defined in 'ThemeGenerator.js'
 export const THEME = colors => {
   console.warn(
     `YourPluginName needs to provide css definitions for RichContentWrapper.
