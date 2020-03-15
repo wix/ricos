@@ -30,8 +30,11 @@ const QUESTIONS = [
     type: 'input',
     message: 'Enter Plugin name:',
     validate(input) {
-      if (/^([a-z\-\d])+$/.test(input)) return true;
-      else return 'Plugin name may only include lower letters and numbers.';
+      //hashtag, hash-tag, hash1-tag, hash-1-tag, hash-tag-1, hash-tag1
+      if (/^[a-z]+[\d]*([-]{1}[a-z\d]+)*$/.test(input)) return true;
+      else
+        return `Plugin name may only include lower letters, dashes in-between (-)
+                and numbers. first character cannot be a number.`;
     },
   },
   {
