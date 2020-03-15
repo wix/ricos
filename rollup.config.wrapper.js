@@ -4,11 +4,11 @@ import commonConfig from './rollup.config.common';
 
 let output = [
   {
-    file: 'dist/module.js',
+    dir: 'dist/es',
     format: 'es',
   },
   {
-    file: 'dist/module.cjs.js',
+    dir: 'dist/cjs',
     format: 'cjs',
   },
 ];

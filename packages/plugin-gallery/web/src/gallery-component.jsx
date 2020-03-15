@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Loader } from 'wix-rich-content-editor-common';
 import { isEqual } from 'lodash';
 import GalleryViewer from './gallery-viewer';
-import { DEFAULTS } from './constants';
+import { DEFAULTS, imageItem } from './constants';
 
 //eslint-disable-next-line no-unused-vars
 const EMPTY_SMALL_PLACEHOLDER =
@@ -114,15 +114,7 @@ class GalleryComponent extends PureComponent {
 
   imageLoaded = (event, file, itemPos) => {
     const img = event.target;
-    const item = {
-      metadata: {
-        height: img.height,
-        width: img.width,
-      },
-      itemId: String(event.timeStamp),
-      url: img.src,
-    };
-
+    const item = imageItem(img, String(event.timeStamp));
     const itemIdx = this.setItemInGallery(item, itemPos);
     const { helpers } = this.props;
     const hasFileChangeHelper = helpers && helpers.onFilesChange;
@@ -138,12 +130,16 @@ class GalleryComponent extends PureComponent {
     const handleFileAdded = (item, idx) => {
       const galleryItem = {
         metadata: {
+          type: item.type || 'image',
           height: item.height,
           width: item.width,
         },
         itemId: String(item.id),
         url: item.file_name,
       };
+      if (item.type === 'video') {
+        galleryItem.metadata.poster = item.poster || item.thumbnail_url;
+      }
       this.setItemInGallery(galleryItem, idx);
     };
 
@@ -156,10 +152,29 @@ class GalleryComponent extends PureComponent {
     }
   };
 
+  videoLoaded = (event, file, itemPos) => {
+    const { helpers } = this.context;
+    const hasFileChangeHelper = helpers && helpers.onVideoSelected;
+
+    if (hasFileChangeHelper) {
+      helpers.onVideoSelected(file, video => {
+        // eslint-disable-next-line camelcase
+        const data = { ...video, id: String(event.timeStamp), file_name: video.video_url };
+        this.handleFilesAdded({ data, itemPos });
+      });
+    } else {
+      console.warn('Missing upload function'); //eslint-disable-line no-console
+    }
+  };
+
   fileLoaded = (event, file, itemPos) => {
-    const img = new Image();
-    img.onload = e => this.imageLoaded(e, file, itemPos);
-    img.src = event.target.result;
+    if (file.type.match('image/*')) {
+      const img = new Image();
+      img.onload = e => this.imageLoaded(e, file, itemPos);
+      img.src = event.target.result;
+    } else if (file.type.match('video/*')) {
+      this.videoLoaded(event, file, itemPos);
+    }
   };
 
   renderLoader = () => {

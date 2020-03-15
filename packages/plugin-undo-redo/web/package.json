@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-plugin-undo-redo",
-  "version": "6.9.6",
+  "version": "6.10.2",
   "author": {
     "name": "Bar Boaron",
     "email": "barb@wix.com"
@@ -50,7 +50,7 @@
     "rollup": "1.31.1"
   },
   "dependencies": {
-    "wix-rich-content-editor-common": "6.9.6"
+    "wix-rich-content-editor-common": "6.10.2"
   },
   "unpkg": true,
   "publishConfig": {
