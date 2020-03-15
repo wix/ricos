@@ -21,7 +21,6 @@ export default class Viewer extends PureComponent {
   constructor(props) {
     super(props);
 
-    //TESTING
     if (!isSSR()) {
       ReactModal.setAppElement('#root');
       this.expandModeData = getImagesData(this.props.initialState);
