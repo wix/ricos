@@ -14,7 +14,7 @@ export default (output, shouldExtractCss) => {
   const plugins = createPlugins(shouldExtractCss);
   output = output.map(o => ({ ...o, sourcemap: true }));
   if (process.env.MODULE_WATCH && !process.env.BUILD_CJS) {
-    output = output.filter(o => o.format === 'es' || process.env.BUILD_CJS);
+    output = output.filter(o => o.format === 'es');
   }
   const watch = {
     exclude: ['node_modules/**'],
