@@ -9,7 +9,11 @@
   
   */
 export const DEFAULTS = Object.freeze({
-  config: {},
+  type: 'yourPluginName',
+  config: {
+    size: 'content',
+    alignment: 'center',
+  },
 });
 
 //@colors is defined in 'ThemeGenerator.js'

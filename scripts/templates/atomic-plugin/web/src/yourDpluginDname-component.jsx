@@ -2,14 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import YourPluginNameViewer from './yourDpluginDname-viewer';
 import { YOUR_PLUGIN_NAME_TYPE } from './types';
-
-const DEFAULTS = Object.freeze({
-  type: 'yourPluginName',
-  config: {
-    size: 'content',
-    alignment: 'center',
-  },
-});
+import { DEFAULTS } from './defaults';
 
 class YourPluginNameComponent extends React.Component {
   static type = { YOUR_PLUGIN_NAME_TYPE };
