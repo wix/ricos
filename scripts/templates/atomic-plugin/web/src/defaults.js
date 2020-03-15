@@ -6,10 +6,11 @@
           but with a transformation of colors based on the palette.
           Please find examples of usage in other plugins.
   DEFAULTS - should contain at least an empty 'config' (or else the wrapper won't work)
-  
-  */
+*/
+
+import { YOUR_PLUGIN_NAME_TYPE as type } from './types';
 export const DEFAULTS = Object.freeze({
-  type: 'YOUR_PLUGIN_NAME',
+  type,
   config: {
     size: 'content',
     alignment: 'center',
