@@ -5,7 +5,9 @@ import { modalStyles } from './themeStrategy/defaults';
 class EngineWrapper extends React.Component {
   constructor(props) {
     super(props);
+    this.modifiedProps = {};
     this.state = {
+      isAsyncStrategiesDone: false,
       disabled: false,
       showModal: false,
       EditorModal: undefined,
@@ -57,8 +59,25 @@ class EngineWrapper extends React.Component {
     this.setState({ expandModeData });
   };
 
+  updateModifiedProps = strategies =>
+    (this.modifiedProps = {
+      ...this.modifiedProps,
+      ...this.runStrategies(strategies),
+    });
+
+  runStrategies = strategies =>
+    strategies.reduce(
+      (props, strategyFunction) => {
+        const result = strategyFunction(props);
+        return { ...props, ...result };
+      },
+      {
+        ...this.props.children.props,
+      }
+    );
+
   componentDidMount() {
-    const { editor, withModal = true } = this.props;
+    const { editor, withModal = true, asyncStrategies } = this.props;
     const shouldRenderEditorModal = editor && withModal;
     const shouldRenderFullscreen = !editor && withModal;
     let EditorModal, Fullscreen;
@@ -73,19 +92,18 @@ class EngineWrapper extends React.Component {
           ? React.lazy(() => import(/* webpackChunkName: "rce-ViewerModal"  */ './ViewerModal'))
           : withModal;
     }
+    Promise.all(asyncStrategies).then(strategies => {
+      this.updateModifiedProps(strategies);
+      this.setState({ isAsyncStrategiesDone: true });
+    });
     this.setState({ EditorModal, Fullscreen });
   }
 
   render() {
     const { strategies = [], children = {}, withModal = true, editor } = this.props;
-    const modifiedProps = strategies.reduce(
-      (props, strategyFunction) => {
-        const result = strategyFunction(props);
-        return { ...props, ...result };
-      },
-      { ...children.props }
-    );
-    const { helpers = {}, theme, locale = 'en', ModalsMap, onChange } = modifiedProps;
+    this.updateModifiedProps(strategies);
+
+    const { helpers = {}, theme, locale = 'en', ModalsMap, onChange } = this.modifiedProps;
     const { onRequestClose } = this.state.modalProps || {};
 
     //viewer needs onExpand helper + Fullscreen
@@ -96,12 +114,12 @@ class EngineWrapper extends React.Component {
       helpers.openModal = this.onModalOpen;
       helpers.closeModal = this.onModalClose;
     }
-    modifiedProps.onChange = editorState => {
+    this.modifiedProps.onChange = editorState => {
       onChange?.(editorState);
       this.handleChange(editorState);
     };
 
-    modifiedProps.helpers = helpers;
+    this.modifiedProps.helpers = helpers;
 
     const {
       expandModeData,
@@ -110,11 +128,13 @@ class EngineWrapper extends React.Component {
       disabled,
       EditorModal,
       Fullscreen,
+      isAsyncStrategiesDone,
     } = this.state;
+    if (!isAsyncStrategiesDone) return <div />;
     return (
       <React.Fragment>
         <div id="#wrapper_viewer_modal" />
-        {Children.only(React.cloneElement(children, { ...modifiedProps, disabled }))}
+        {Children.only(React.cloneElement(children, { ...this.modifiedProps, disabled }))}
         {EditorModal && (
           <Suspense fallback={<div />}>
             <EditorModal
@@ -146,7 +166,8 @@ class EngineWrapper extends React.Component {
   }
 }
 EngineWrapper.propTypes = {
-  strategies: PropTypes.array,
+  strategies: PropTypes.arrayOf(PropTypes.func),
+  asyncStrategies: PropTypes.array,
   plugins: PropTypes.arrayOf(PropTypes.object),
   theme: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   onRequestModalClose: PropTypes.func,

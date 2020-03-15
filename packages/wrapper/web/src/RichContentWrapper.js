@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 
 export default function RichContentWrapper({
   strategies = [],
+  asyncStrategies = [],
   theme,
   locale,
   palette,
@@ -18,9 +19,14 @@ export default function RichContentWrapper({
   const themeGenerators = plugins.filter(plug => !!plug.theme).map(plug => plug.theme);
   strategies.push(themeStrategyProvider(editor, { theme, palette, themeGenerators }));
   strategies.push(pluginsStrategyProvider(editor, { plugins }));
-  strategies.push(localeStrategyProvider({ locale }));
+  asyncStrategies.push(localeStrategyProvider({ locale }));
   return (
-    <EngineWrapper strategies={strategies} {...rest} editor={editor}>
+    <EngineWrapper
+      strategies={strategies}
+      asyncStrategies={asyncStrategies}
+      editor={editor}
+      {...rest}
+    >
       {children}
     </EngineWrapper>
   );
@@ -32,6 +38,7 @@ RichContentWrapper.propTypes = {
   palette: PropTypes.array,
   plugins: PropTypes.arrayOf(PropTypes.object),
   strategies: PropTypes.arrayOf(PropTypes.func),
+  asyncStrategies: PropTypes.array,
   editor: PropTypes.bool,
 };
 
