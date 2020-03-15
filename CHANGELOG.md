@@ -12,6 +12,10 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+
+### :bug: Bug Fix
+- `plugins`
+  - [#778](https://github.com/wix-incubator/rich-content/pull/778) fix sizeFullWidth
 </details>
 <hr/>
 
