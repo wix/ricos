@@ -9,7 +9,7 @@
   
   */
 export const DEFAULTS = Object.freeze({
-  type: 'yourPluginName',
+  type: 'YOUR_PLUGIN_NAME',
   config: {
     size: 'content',
     alignment: 'center',
