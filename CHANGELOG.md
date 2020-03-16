@@ -12,6 +12,15 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+
+### :rocket: New Feature
+- `fullscreen`
+  - [#776](https://github.com/wix-incubator/rich-content/pull/776) fullscreen closes on Esc key press
+
+### :bug: Bug Fix
+- `gallery`
+  - [#775](https://github.com/wix-incubator/rich-content/pull/775) adding videos to gallery
+
 </details>
 <hr/>
 

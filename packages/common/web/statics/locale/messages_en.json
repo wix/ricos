@@ -356,5 +356,6 @@
   "UploadFile_plugin_search_tags": "upload file storage auto post format store download share viral content media digital picture video image",
   "Button_plugin_search_tags": "button click press switch",
   "Undo_plugin_search_tags": "undo revert delete paste",
-  "Redo_plugin_search_tags": "redo revert update"
+  "Redo_plugin_search_tags": "redo revert update",
+  "Poll_Viewer_ShowAllOptions_CTA": "See All Options"
 }

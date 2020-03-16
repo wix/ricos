@@ -29,6 +29,7 @@ const viewerPakages = [
   'viewer-with-wrapper',
   'editor-with-emoji',
   'editor-without-plugins',
+  'editor-with-basic-plugins',
 ];
 
 const options = {};
