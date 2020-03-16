@@ -13,11 +13,22 @@
     Click to see more.
   </summary>
 
+### :rocket: New Feature
+- `fullscreen`
+  - [#776](https://github.com/wix-incubator/rich-content/pull/776) fullscreen closes on Esc key press
+
 ### :bug: Bug Fix
+- `gallery`
+  - [#775](https://github.com/wix-incubator/rich-content/pull/775) adding videos to gallery
 - `plugins`
   - [#778](https://github.com/wix-incubator/rich-content/pull/778) fix sizeFullWidth
 </details>
 <hr/>
+
+## 6.10.2 (Mar 15, 2020)
+### :house: Internal
+- `wrapper`
+  - use cjs version of fullscreen lib, fix onChange call
 
 ## 6.10.1 (Mar 12, 2020)
 ### :rocket: New Feature

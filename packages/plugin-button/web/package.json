@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-plugin-button",
-  "version": "6.10.1",
+  "version": "6.10.2",
   "author": {
     "name": "Bashar Qaddumi",
     "email": "bqaddumi@asaltech.com"
@@ -55,8 +55,8 @@
   },
   "dependencies": {
     "react-custom-scrollbars": "^4.2.1",
-    "wix-rich-content-common": "6.10.1",
-    "wix-rich-content-editor-common": "6.10.1"
+    "wix-rich-content-common": "6.10.2",
+    "wix-rich-content-editor-common": "6.10.2"
   },
   "unpkg": true,
   "publishConfig": {

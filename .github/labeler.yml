@@ -1,0 +1,2 @@
+# Add 'breakingWarning' to any file changes within 'shared' folder or any subfolders
+breakingWarning: examples/main/shared/**/*

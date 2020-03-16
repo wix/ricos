@@ -96,14 +96,12 @@ class EngineWrapper extends React.Component {
       helpers.openModal = this.onModalOpen;
       helpers.closeModal = this.onModalClose;
     }
-    if (onChange)
-      modifiedProps.onChange = editorState => {
-        onChange(editorState);
-        this.handleChange(editorState);
-      };
+    modifiedProps.onChange = editorState => {
+      onChange?.(editorState);
+      this.handleChange(editorState);
+    };
 
     modifiedProps.helpers = helpers;
-    modifiedProps.onChange = this.onChange;
 
     const {
       expandModeData,
