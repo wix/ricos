@@ -188,6 +188,8 @@
   "ButtonPlugin_Navbar_Update_button": "Save",
   "TextAlignmentButton_Tooltip": "Alignment",
   "TextLinkButton_Tooltip": "Link",
+  "FormattingToolbar_TextStyle_Heading" : "Heading{{ number}}",
+  "FormattingToolbar_TextStyle_Paragraph" : "Paragraph",  
   "BoldButton_Tooltip": "Bold",
   "ItalicButton_Tooltip": "Italic",
   "UnderlineButton_Tooltip": "Underline",
