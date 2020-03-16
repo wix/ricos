@@ -329,5 +329,6 @@
   "Poll_PollSettings_Tab_Settings_VoterVisibility_Tooltip": "By default, people will be able to see who voted for each option.",
   "Poll_PollSettings_Tab_Settings_Multiselect": "Let people vote for multiple options",
   "Poll_Viewer_VoteCount": "{{number}} votes",
+  "Poll_Viewer_ShowAllOptions_CTA": "See All Options",
   "Poll_Viewer_ShowAllResults_CTA": "See All Results"
 }
