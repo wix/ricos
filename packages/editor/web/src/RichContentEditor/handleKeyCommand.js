@@ -1,5 +1,4 @@
-import { RichUtils } from 'draft-js';
-import { COMMANDS, mergeBlockData } from 'wix-rich-content-editor-common';
+import { COMMANDS, mergeBlockData, RichUtils } from 'wix-rich-content-editor-common';
 import handleBackspaceCommand from './handleBackspaceCommand';
 import handleDeleteCommand from './handleDeleteCommand';
 

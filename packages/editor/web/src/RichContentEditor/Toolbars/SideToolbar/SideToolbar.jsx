@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { debounce } from 'lodash';
-import { DISPLAY_MODE } from 'wix-rich-content-editor-common';
-import DraftOffsetKey from 'draft-js/lib/DraftOffsetKey';
+import { DISPLAY_MODE, DraftOffsetKey } from 'wix-rich-content-editor-common';
 import Styles from '../../../../statics/styles/side-toolbar-wrapper.scss';
 
 export default class SideToolbar extends Component {
