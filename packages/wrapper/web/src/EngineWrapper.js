@@ -103,7 +103,14 @@ class EngineWrapper extends React.Component {
     const { strategies = [], children = {}, withModal = true, editor } = this.props;
     this.updateModifiedProps(strategies);
 
-    const { helpers = {}, theme, locale = 'en', ModalsMap, onChange } = this.modifiedProps;
+    const {
+      helpers = {},
+      theme,
+      locale = 'en',
+      localeResources,
+      ModalsMap,
+      onChange,
+    } = this.modifiedProps;
     const { onRequestClose } = this.state.modalProps || {};
 
     //viewer needs onExpand helper + Fullscreen
@@ -128,9 +135,7 @@ class EngineWrapper extends React.Component {
       disabled,
       EditorModal,
       Fullscreen,
-      isAsyncStrategiesDone,
     } = this.state;
-    if (!isAsyncStrategiesDone) return <div />;
     return (
       <React.Fragment>
         <div id="#wrapper_viewer_modal" />
@@ -145,6 +150,7 @@ class EngineWrapper extends React.Component {
               onRequestClose={onRequestClose || helpers.closeModal}
               modalsMap={ModalsMap}
               locale={locale}
+              localeResources={localeResources}
               {...this.state.modalProps}
             />
           </Suspense>
