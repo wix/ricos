@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import { findDOMNode } from 'react-dom';
 import { mergeStyles } from 'wix-rich-content-common';
 import { Loader } from 'wix-rich-content-editor-common';
+import { get } from 'lodash';
 import VideoViewer from './video-viewer';
 import styles from '../statics/styles/default-video-styles.scss';
 import { VIDEO_TYPE_LEGACY, VIDEO_TYPE } from './types';
@@ -64,9 +65,10 @@ class VideoComponent extends React.Component {
   };
 
   renderLoader = () => {
+    const isCustomVideo = get(this.props, 'componentData.isCustomVideo');
     return (
       <div className={this.styles.videoOverlay}>
-        <Loader type={'medium'} />
+        <Loader type={'medium'} isVerySlowFakeLoader={isCustomVideo} />
       </div>
     );
   };

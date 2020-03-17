@@ -1,5 +1,5 @@
 import createToolbar from './toolbar';
-import { Component, DEFAULTS } from './yourPluginName-component';
+import { Component, DEFAULTS } from './yourDpluginDname-component';
 import { YOUR_PLUGIN_NAME_TYPE } from './types';
 import { createBasePlugin } from 'wix-rich-content-editor-common';
 

@@ -8,15 +8,62 @@ const styleLoader = {
   top: '0',
 };
 
+function createFakeProgressStepper(onProgress, approximateExpectedDuration = 5000) {
+  let lastTimeoutId;
+  let progress = 0;
+  const startDate = Date.now();
+
+  const getTimeoutDelay = () => {
+    const linearStep = approximateExpectedDuration / 100;
+    if (progress <= 25) {
+      return linearStep / 4;
+    } else if (progress <= 50) {
+      return linearStep / 3;
+    } else if (progress <= 90) {
+      return linearStep / 1.5;
+    } else {
+      const timeRemaining = approximateExpectedDuration - (Date.now() - startDate);
+      return timeRemaining / (100 - progress);
+    }
+  };
+
+  const run = () => {
+    progress += 1;
+
+    if (progress >= 100) {
+      return;
+    }
+
+    lastTimeoutId = setTimeout(run, getTimeoutDelay());
+    onProgress(progress);
+  };
+
+  run();
+  return () => {
+    clearTimeout(lastTimeoutId);
+  };
+}
+
 class Loader extends React.Component {
   state = { percent: 1 };
 
   componentDidMount() {
-    this.updateProgress();
+    let approximateExpectedDuration;
+    if (this.props.isFastFakeLoader) {
+      approximateExpectedDuration = 5000;
+    }
+
+    if (this.props.isVerySlowFakeLoader) {
+      approximateExpectedDuration = 30000;
+    }
+    this.resetFakeLoader = createFakeProgressStepper(
+      percent => this.setState({ percent }),
+      approximateExpectedDuration
+    );
   }
 
   componentWillUnmount() {
-    clearInterval(this.timerId);
+    this.resetFakeLoader();
   }
   initiateStyles() {
     if (!this.styles) {
@@ -24,15 +71,6 @@ class Loader extends React.Component {
       this.styles = mergeStyles({ styles, theme });
     }
   }
-
-  timeoutStep = 3;
-  updateProgress = () => {
-    this.timerId = setTimeout(() => {
-      this.timeoutStep += (this.timeoutStep * this.timeoutStep) / 200;
-      this.setState({ percent: this.state.percent + 1 });
-      this.updateProgress();
-    }, Math.floor(this.timeoutStep * 1000));
-  };
 
   renderProgress() {
     return (
@@ -69,10 +107,13 @@ class Loader extends React.Component {
 Loader.propTypes = {
   type: PropTypes.string,
   theme: PropTypes.object.isRequired,
+  isFastFakeLoader: PropTypes.bool,
+  isVerySlowFakeLoader: PropTypes.bool,
 };
 
 Loader.defaultProps = {
   type: 'mini',
+  isFastFakeLoader: true,
 };
 
 export default Loader;

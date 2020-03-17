@@ -30,8 +30,12 @@ const QUESTIONS = [
     type: 'input',
     message: 'Enter Plugin name:',
     validate(input) {
-      if (/^([a-z\-\d])+$/.test(input)) return true;
-      else return 'Plugin name may only include lower letters and numbers.';
+      //hashtag, hash-tag, hash1-tag, hash-1-tag, hash-tag-1, hash-tag1
+      if (/^[a-z]+[\d]*([-]{1}[a-z\d]+)*$/.test(input)) return true;
+      else {
+        // eslint-disable-next-line max-len
+        return `Plugin name may only include lower letters, dashes in-between (-) and numbers. first letter cannot be a number.`;
+      }
     },
   },
   {
@@ -39,7 +43,7 @@ const QUESTIONS = [
     type: 'input',
     message: 'Enter Plugin author:',
     validate(input) {
-      if (/^[a-zA-Z]+[\-'\s]?[a-zA-Z ]+$/.test(input)) return true;
+      if (/^[a-zA-Z]+[-'\s]?[a-zA-Z ]+$/.test(input)) return true;
       else return 'Plugin author name may only include lower letters.';
     },
     default: gitName,
@@ -76,24 +80,30 @@ inquirer.prompt(QUESTIONS).then(answers => {
 function createDirectoryContents(templatePath, newProjectPath, pluginData) {
   const { pluginName, pluginAuthor, pluginAuthorMailAddress } = pluginData;
   const filesToCreate = fs.readdirSync(templatePath);
+  const nameWords = pluginName.split('-');
   filesToCreate.forEach(file => {
     const origFilePath = `${templatePath}/${file}`;
 
     const stats = fs.statSync(origFilePath);
     const pluginNameMap = {
-      yourPluginName: pluginName,
-      YOUR_PLUGIN_NAME: pluginName.toUpperCase(),
-      YourPluginName: pluginName.charAt(0).toUpperCase() + pluginName.slice(1),
+      yourDpluginDname: pluginName, //your-plugin-name
+      yourPluginName: nameWords.join(''),
+      YOUR_PLUGIN_NAME: nameWords.join('_').toUpperCase(),
+      YourPluginName: nameWords.map(part => part.charAt(0).toUpperCase() + part.slice(1)).join(''),
       yourPluginVersion: version,
       pluginAuthor,
       pluginAuthorMailAddress,
     };
-    const fileName = file.replace(/yourPluginName|YourPluginName/g, name => pluginNameMap[name]);
+    const fileName = file.replace(
+      /yourDpluginDname|yourPluginName|YourPluginName/g,
+      name => pluginNameMap[name]
+    );
     if (stats.isFile()) {
       console.log(chalk.cyan(`Creating ${fileName} file`));
       const contents = fs.readFileSync(origFilePath, 'utf8');
       const result = contents.replace(
-        /yourPluginName|YOUR_PLUGIN_NAME|YourPluginName|yourPluginVersion|pluginAuthorName|pluginAuthorMailAddress/g,
+        // eslint-disable-next-line max-len
+        /yourDpluginDname|yourPluginName|YOUR_PLUGIN_NAME|YourPluginName|yourPluginVersion|pluginAuthorName|pluginAuthorMailAddress/g,
         name => pluginNameMap[name]
       );
       const writePath = `${CURR_DIR}/${newProjectPath}/${fileName}`;
