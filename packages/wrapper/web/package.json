@@ -28,7 +28,8 @@
     "build:analyze": "npm run build -- --environment MODULE_ANALYZE && open stats.html",
     "watch": "cross-env NODE_ENV=development MODULE_WATCH=1 npm run build -- --watch.chokidar",
     "lint": "eslint 'src/**/*.{js,jsx}'",
-    "test": "jest --verbose"
+    "test": "jest --verbose",
+    "test:watchAll": "jest --verbose --watchAll"
   },
   "peerDependencies": {
     "@babel/runtime": "7.2.0",
@@ -41,6 +42,9 @@
   },
   "devDependencies": {
     "@babel/runtime": "7.2.0",
+    "@testing-library/dom": "^7.0.4",
+    "@testing-library/jest-dom": "^5.1.1",
+    "@testing-library/react": "^10.0.1",
     "babel-jest": "^25.1.0",
     "classnames": "^2.0.0",
     "cross-env": "^5.2.0",
