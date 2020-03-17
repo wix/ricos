@@ -10,7 +10,6 @@ jobs:
 
       - name: Cypress run
         uses: cypress-io/github-action@v1.16.1
-      - run: npm install
         with:
           build: npm run build:test:installDev
           start: npm run e2e:app:run
@@ -26,6 +25,7 @@ jobs:
         with:
           name: cypress-videos
           path: e2e/cypress/videos
+      - run: npm install
 
       - name: Update Applitools batch status
         if: always()
