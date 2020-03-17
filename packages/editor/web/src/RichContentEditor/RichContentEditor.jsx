@@ -287,11 +287,11 @@ class RichContentEditor extends Component {
     this.updateBounds = () => '';
   }
 
-  componentWillMount() {
-    this.updateBounds = editorBounds => {
-      this.setState({ editorBounds });
-    };
-  }
+  // componentWillMount() {
+  //   this.updateBounds = editorBounds => {
+  //     this.setState({ editorBounds });
+  //   };
+  // }
 
   renderToolbars = () => {
     const toolbarsToIgnore = [
