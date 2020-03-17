@@ -2,6 +2,7 @@ import React from 'react';
 import RichContentWrapper from './RichContentWrapper';
 import { RichContentEditor } from 'wix-rich-content-editor';
 import { RichContentViewer } from 'wix-rich-content-viewer';
+//import { pluginHashtag } from '../../../plugin-hashtag/web/src/editor';
 import introState from '../../../../e2e/tests/fixtures/intro.json';
 
 import { render, cleanup } from '@testing-library/react';
@@ -16,12 +17,15 @@ const driver = {
   }),
 };
 
+//const plugins = [pluginHashtag()];
+
 describe('Wrapper', () => {
   afterEach(cleanup);
 
   it('should render editor', () => {
     const { container } = driver.wrapper({ editor: true }).editor();
     expect(container).toBeTruthy();
+    expect(container.innerHTML).toContain('#engine_wrapper');
   });
 
   it('should render editor with locale', () => {
@@ -38,4 +42,11 @@ describe('Wrapper', () => {
     const tryRender = () => driver.nonWorkingEditor({});
     expect(tryRender).toThrow();
   });
+
+  // describe('Editor', () => {
+  //   it('should render themeStrategy', () => {
+  //     const { container } = driver.wrapper({ editor: true, plugins }).editor();
+  //     expect(container.innerHTML).toContain('WrapperEditorModal');
+  //   });
+  // });
 });

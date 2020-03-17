@@ -113,11 +113,12 @@ class EngineWrapper extends React.Component {
     } = this.state;
     return (
       <React.Fragment>
-        <div id="#wrapper_viewer_modal" />
+        <div id="#engine_wrapper" />
         {Children.only(React.cloneElement(children, { ...modifiedProps, disabled }))}
         {EditorModal && (
           <Suspense fallback={<div />}>
             <EditorModal
+              dataHook={'WrapperEditorModal'}
               isOpen={this.state.showModal}
               contentLabel="External Modal Example"
               style={modalStyles(this.state, theme)}
@@ -132,6 +133,7 @@ class EngineWrapper extends React.Component {
         {Fullscreen && (
           <Suspense fallback={<div />}>
             <Fullscreen
+              data-hook={'WrapperFullScreen'}
               initialState={children.props.initialState || this.emptyInitialState}
               isOpen={expandModeIsOpen}
               images={expandModeData?.images || []}
