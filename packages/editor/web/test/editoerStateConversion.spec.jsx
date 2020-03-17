@@ -1,7 +1,14 @@
-import { convertFromRaw, convertToRaw } from '../src/lib/editorStateConversion';
+import { convertToRaw } from '../src/lib/editorStateConversion';
+import { convertFromRaw, EditorState } from 'draft-js';
+import { mergeBlockData } from 'wix-rich-content-editor-common';
 
 describe('ContentState conversion', () => {
   it('should convert correctly', () => {
+    const dynamicStyles = {
+      'line-height': '2.5',
+      'padding-top': '0',
+      'padding-bottom': '0',
+    };
     const raw = {
       blocks: [
         {
@@ -33,8 +40,9 @@ describe('ContentState conversion', () => {
       VERSION: '6.8.0',
     };
 
-    const editorState = convertFromRaw(raw);
-    const newRaw = convertToRaw(editorState);
+    const editorState = EditorState.createWithContent(convertFromRaw(raw));
+    const newState = mergeBlockData(editorState, { dynamicStyles });
+    const newRaw = convertToRaw(newState.getCurrentContent());
     expect(newRaw.blocks[0]).toEqual(raw.blocks[0]);
     expect(newRaw.blocks[1]).toEqual(raw.blocks[1]);
   });
