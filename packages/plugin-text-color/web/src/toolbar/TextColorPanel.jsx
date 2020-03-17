@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Modifier, EditorState } from 'draft-js';
-import { ColorPicker, getSelectionStyles } from 'wix-rich-content-editor-common';
+import {
+  ColorPicker,
+  getSelectionStyles,
+  Modifier,
+  EditorState,
+} from 'wix-rich-content-editor-common';
 import { DEFAULT_STYLE_SELECTION_PREDICATE } from '../constants';
 import { getColor } from '../text-decorations-utils';
 
