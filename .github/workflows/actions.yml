@@ -10,7 +10,7 @@ jobs:
 
       - name: Cypress run
         uses: cypress-io/github-action@v1.16.1
-        - run: npm install
+      - run: npm install
         with:
           build: npm run build:test:installDev
           start: npm run e2e:app:run
