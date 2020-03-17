@@ -28,6 +28,12 @@
 ### :bug: Bug Fix
 - `gallery`
   - [#775](https://github.com/wix-incubator/rich-content/pull/775) adding videos to gallery
+- `editor`
+  - [#790](https://github.com/wix-incubator/rich-content/pull/790) nested objects converts to raw proper
+
+### :house: Internal
+- `editor`
+  - [#790](https://github.com/wix-incubator/rich-content/pull/790) nested objects converts to raw properly
 
 ## 6.10.2 (Mar 15, 2020)
 ### :house: Internal
