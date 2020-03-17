@@ -13,6 +13,10 @@
     Click to see more.
   </summary>
 
+### :house: Internal
+- `editor`
+  - [#790](https://github.com/wix-incubator/rich-content/pull/790) convertToRaw - block.data converted correctly, Fixes line spacing
+
 </details>
 <hr/>
 
@@ -28,10 +32,6 @@
 ### :bug: Bug Fix
 - `gallery`
   - [#775](https://github.com/wix-incubator/rich-content/pull/775) adding videos to gallery
-
-### :house: Internal
-- `editor`
-  - [#790](https://github.com/wix-incubator/rich-content/pull/790) convertToRaw - block.data converted correctly, Fixes line spacing
 
 ## 6.10.2 (Mar 15, 2020)
 ### :house: Internal
