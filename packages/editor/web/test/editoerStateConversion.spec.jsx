@@ -1,6 +1,5 @@
 import { convertToRaw } from '../src/lib/editorStateConversion';
-import { convertFromRaw, EditorState } from 'draft-js';
-import { mergeBlockData } from 'wix-rich-content-editor-common';
+import { mergeBlockData, convertFromRaw, EditorState } from 'wix-rich-content-editor-common';
 
 describe('ContentState conversion', () => {
   it('should convert correctly', () => {
