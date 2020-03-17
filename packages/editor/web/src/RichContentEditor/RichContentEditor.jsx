@@ -279,6 +279,10 @@ class RichContentEditor extends Component {
 
   getInPluginEditingMode = () => this.inPluginEditingMode;
 
+  updateBounds = editorBounds => {
+    this.setState({ editorBounds });
+  };
+
   componentWillUnmount() {
     this.updateBounds = () => '';
   }
