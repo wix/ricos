@@ -29,7 +29,7 @@
     "@babel/core": "7.2.2",
     "@babel/runtime": "7.2.0",
     "@storybook/react": "^5.3.1",
-    "aphrodite": "^2.4.0",
+    "@testing-library/react": "^9.4.0",
     "babel-eslint": "10.0.3",
     "babel-jest": "^25.1.0",
     "classnames": "^2.0.0",
@@ -71,8 +71,7 @@
   },
   "devDependencies": {
     "yoshi": "4.31.0",
-    "yoshi-style-dependencies": "^4.23.7",
-    "@testing-library/react": "^9.4.0"
+    "yoshi-style-dependencies": "^4.23.7"
   },
   "lint-staged": {
     "*.js": "yoshi lint"
