@@ -23,7 +23,7 @@
 
 ### :house: Internal
 - `editor`
-  - [#790](https://github.com/wix-incubator/rich-content/pull/790) nested objects converts to raw properly
+  - [#790](https://github.com/wix-incubator/rich-content/pull/790) convertToRaw - block.data converted correctly, Fixes line spacing
 
 </details>
 <hr/>
