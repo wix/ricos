@@ -13,6 +13,10 @@
     Click to see more.
   </summary>
 
+### :house: Internal
+- `editor`
+  - [#793](https://github.com/wix-incubator/rich-content/pull/793) convertToRaw - block.data converted correctly, Fixes line spacing
+
 </details>
 <hr/>
 
