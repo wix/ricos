@@ -10,25 +10,32 @@ import '@testing-library/jest-dom/extend-expect';
 const customRender = (ui, options) => render(ui, { wrapper: RichContentWrapper, ...options });
 
 const driver = {
-  editor: ({ ...props }) => customRender(<RichContentEditor {...props} />, { editor: true }),
-  viewer: ({ ...props }) => customRender(<RichContentViewer {...props} />, {}),
+  wrapper: wrapperProps => ({
+    editor: editorProps => customRender(<RichContentEditor {...editorProps} />, wrapperProps || {}),
+    viewer: viewerProps => customRender(<RichContentViewer {...viewerProps} />, wrapperProps || {}),
+  }),
 };
 
 describe('Wrapper', () => {
   afterEach(cleanup);
 
   it('should render editor', () => {
-    const { container } = driver.editor({});
+    const { container } = driver.wrapper({ editor: true }).editor();
     expect(container).toBeTruthy();
   });
 
   it('should render editor with locale', () => {
-    const { container } = driver.editor({ locale: 'he' });
+    const { container } = driver.wrapper({ editor: true, locale: 'he' }).editor();
     expect(container).toBeTruthy();
   });
 
   it('should render viewer', () => {
-    const { container } = driver.viewer({ initialState: introState });
+    const { container } = driver.wrapper().viewer({ initialState: introState });
     expect(container).toBeTruthy();
+  });
+
+  it('should fail to render editor with invalid initialState', () => {
+    const tryRender = () => driver.nonWorkingEditor({});
+    expect(tryRender).toThrow();
   });
 });
