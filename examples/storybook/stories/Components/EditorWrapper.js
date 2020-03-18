@@ -21,7 +21,7 @@ import { pluginSoundCloud } from 'wix-rich-content-plugin-sound-cloud';
 import { pluginUndoRedo } from 'wix-rich-content-plugin-undo-redo';
 import { pluginVideo } from 'wix-rich-content-plugin-video';
 import { pluginLinkPreview } from 'wix-rich-content-plugin-link-preview';
-import { linkPreviewUtil } from '../Utils/linkPreviewUtil';
+import { mockFetchUrlPreviewData } from '../Utils/linkPreviewUtil';
 import '../styles.global.scss';
 
 const configs = {
@@ -50,7 +50,7 @@ const configs = {
     sizes: { desktop: 'original', mobile: 'original' }, // original or downsizedSmall are supported
   },
   linkPreview: {
-    fetchMetadata: linkPreviewUtil(),
+    fetchData: mockFetchUrlPreviewData(),
   },
 };
 

@@ -21,9 +21,6 @@ import {
 
 const typeMappers = [linkPreviewTypeMapper, linkTypeMapper];
 export default () => {
-  const config = {
-    [LINK_PREVIEW_TYPE]: {},
-  };
   const plugins = [pluginLink(), pluginLinkPreview()];
 
   return (
@@ -31,10 +28,7 @@ export default () => {
       <Section type={Section.Types.COMPARISON}>
         <RichContentEditorBox preset="blog-preset">
           <RichContentWrapper plugins={plugins}>
-            <RichContentEditor
-              editorState={createWithContent(convertFromRaw(LinkPreview))}
-              config={config}
-            />
+            <RichContentEditor editorState={createWithContent(convertFromRaw(LinkPreview))} />
           </RichContentWrapper>
         </RichContentEditorBox>
         <RichContentViewerBox preset="blog-preset">

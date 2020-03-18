@@ -19,11 +19,10 @@ const createLinkPlugin = (config = {}) => {
 
   const decorators = [{ strategy: linkEntityStrategy, component: Component }];
   let linkifyData;
-  const { preview } = settings;
 
   const handleReturn = (event, editorState) => {
     linkifyData = getLinkifyData(editorState);
-    if (linkifyData && preview?.enable) {
+    if (shouldConvertToLinkPreview(settings, linkifyData)) {
       const url = getBlockLinkUrl(linkifyData);
       const blockKey = linkifyData.block.key;
       const blocBeforeUrl =
@@ -34,6 +33,9 @@ const createLinkPlugin = (config = {}) => {
       }
     }
   };
+
+  const shouldConvertToLinkPreview = (settings, linkifyData) =>
+    linkifyData && settings.preview?.enable;
 
   const getBlockLinkUrl = linkifyData => {
     const { string, block } = linkifyData;

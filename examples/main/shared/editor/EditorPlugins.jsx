@@ -235,7 +235,7 @@ const videoHandlers = {
 const config = {
   [LINK_PREVIEW_TYPE]: {
     disableEmbed: false,
-    fetchMetadata: linkPreviewUtil(authorization),
+    fetchData: linkPreviewUtil(authorization),
   },
   [EMOJI_TYPE]: {
     // toolbar: {

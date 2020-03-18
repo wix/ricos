@@ -1,11 +1,7 @@
-export const linkPreviewUtil = authorization => {
+export const mockFetchUrlPreviewData = authorization => {
   let index = 0;
   return async () => {
-    console.log('inlink preview util');
-
     return new Promise(resolve => {
-      console.log('inlink promise resolve');
-
       setTimeout(() => resolve(mockOembedResults[index++ % mockOembedResults.length]), 1);
     });
   };

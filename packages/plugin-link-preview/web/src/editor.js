@@ -4,10 +4,10 @@ import { DEFAULTS } from './defaults';
 import { linkPreviewUtil } from './lib/linkPreviewUtil';
 
 export const pluginLinkPreview = (config = {}) => {
-  const fetchMetadata = linkPreviewUtil(config.authorization);
+  const fetchData = linkPreviewUtil(config.authorization);
 
   return {
-    config: { ...DEFAULTS.config, fetchMetadata, ...config },
+    config: { ...DEFAULTS.config, fetchData, ...config },
     type: LINK_PREVIEW_TYPE,
     createPlugin: createLinkPreviewPlugin,
     ModalsMap: {},

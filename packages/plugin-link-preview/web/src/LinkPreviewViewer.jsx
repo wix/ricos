@@ -7,9 +7,6 @@ import styles from '../statics/styles/link-preview.scss';
 class LinkPreviewViewer extends Component {
   static propTypes = {
     componentData: PropTypes.object.isRequired,
-    settings: PropTypes.shape({
-      disableEmbed: PropTypes.bool,
-    }).isRequired,
     theme: PropTypes.object,
     isMobile: PropTypes.bool.isRequired,
   };

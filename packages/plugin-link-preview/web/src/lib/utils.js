@@ -12,9 +12,9 @@ import { isValidImgSrc } from 'wix-rich-content-common';
 
 export const addLinkPreview = (editorState, config, blockKey, url) => {
   const settings = config[LINK_PREVIEW_TYPE];
-  const { fetchMetadata } = settings;
+  const { fetchData } = settings;
   const { setEditorState } = config;
-  return fetchMetadata(url).then(linkPreviewData => {
+  return fetchData(url).then(linkPreviewData => {
     shouldAddLinkPreview(linkPreviewData).then(shouldAddLinkPreview => {
       if (shouldAddLinkPreview /*|| html*/) {
         const withoutLinkBlock = deleteBlock(editorState, blockKey);
