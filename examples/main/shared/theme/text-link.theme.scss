@@ -1,3 +1,6 @@
+@import "~wix-rich-content-common/dist/statics/styles/palette";
+
 .link {
-  color: orange;
+  color: $accent-color;
+  text-decoration: none;
 }

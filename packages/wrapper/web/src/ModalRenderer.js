@@ -59,6 +59,7 @@ export default class ModalRenderer extends Component {
         {Children.only(React.cloneElement(children, this.childProps))}
         <Suspense fallback={<div />}>
           <EditorModal
+            dataHook={'WrapperEditorModal'}
             isOpen={showModal}
             style={modalStyles(this.state, theme)}
             role="dialog"

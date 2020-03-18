@@ -46,6 +46,7 @@ export default class FullscreenRenderer extends Component {
         {Children.only(React.cloneElement(children, this.childProps))}
         <Suspense fallback={<div />}>
           <Fullscreen
+            dataHook={'WrapperFullScreen'}
             initialState={children.props.initialState || { entityMap: {} }}
             isOpen={isExpanded}
             images={data?.images || []}
