@@ -128,6 +128,6 @@
     "registry": "https://registry.npmjs.org/"
   },
   "dependencies": {
-    "cypress": "^4.1.0"
+    "cypress": "4.1.0"
   }
 }
