@@ -479,6 +479,12 @@ export function getBlockInfo(editorState, blockKey) {
   return { type: type || 'text', entityData };
 }
 
+export function getBlockDepth(editorState, blockKey) {
+  const contentState = editorState.getCurrentContent();
+  const block = contentState.getBlockForKey(blockKey);
+  return block.depth;
+}
+
 export function setSelection(editorState, selection) {
   return EditorState.acceptSelection(editorState, selection);
 }
