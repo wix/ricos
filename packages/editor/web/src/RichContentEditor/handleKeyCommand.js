@@ -41,6 +41,7 @@ export default (updateEditorState, customHandlers, blockType) => (command, edito
         break;
     }
   }
+  // }
 
   if (newState) {
     updateEditorState(newState);
