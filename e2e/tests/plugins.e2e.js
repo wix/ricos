@@ -221,6 +221,7 @@ describe('plugins', () => {
       cy.shrinkPlugin();
       cy.waitForVideoToLoad();
       cy.focusEditor()
+        .type('{uparrow}') //try to fix bug where sometimes it doesn't type
         .type('{uparrow}')
         .type('Will this fix the flakiness?');
       cy.eyesCheckWindow(this.test.title);
@@ -261,6 +262,7 @@ describe('plugins', () => {
       cy.shrinkPlugin();
       cy.waitForVideoToLoad();
       cy.focusEditor()
+        .type('{uparrow}') //try to fix bug where sometimes it doesn't type
         .type('{uparrow}')
         .type('Will this fix the flakiness?');
       cy.eyesCheckWindow(this.test.title);
