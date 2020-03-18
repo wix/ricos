@@ -133,7 +133,7 @@ class EngineWrapper extends React.Component {
         {Fullscreen && (
           <Suspense fallback={<div />}>
             <Fullscreen
-              data-hook={'WrapperFullScreen'}
+              dataHook={'WrapperFullScreen'}
               initialState={children.props.initialState || this.emptyInitialState}
               isOpen={expandModeIsOpen}
               images={expandModeData?.images || []}
