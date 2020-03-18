@@ -13,6 +13,10 @@
     Click to see more.
   </summary>
 
+### :house: Internal
+- `e2e`
+  - [#795](https://github.com/wix-incubator/rich-content/pull/795) new images fixture
+
 ### :rocket: New Feature
 - `fullscreen`
   - [#776](https://github.com/wix-incubator/rich-content/pull/776) fullscreen closes on Esc key press
