@@ -71,14 +71,13 @@ const createLinkPlugin = (config = {}) => {
 
   const getLinkifyData = editorState => {
     const strData = findLastStringWithNoSpaces(editorState);
-    return shouldLinkify(strData, editorState) && strData;
+    return shouldLinkify(strData) && strData;
   };
 
-  const shouldLinkify = (consecutiveString, editorState) =>
+  const shouldLinkify = consecutiveString =>
     consecutiveString.string.length >= settings.minLinkifyLength &&
     isValidUrl(consecutiveString.string) &&
-    (!rangeContainsEntity(consecutiveString) ||
-      rangeContainsPreviewEntityAtEnd(editorState, consecutiveString));
+    !rangeContainsEntity(consecutiveString);
 
   const findLastStringWithNoSpaces = editorState => {
     const selection = editorState.getSelection();
@@ -97,14 +96,6 @@ const createLinkPlugin = (config = {}) => {
       if (block.getEntityAt(i) !== null) {
         return true;
       }
-    }
-    return false;
-  };
-
-  const rangeContainsPreviewEntityAtEnd = (editorState, { block, endIndex }) => {
-    const key = block.getEntityAt(endIndex - 1);
-    if (key && editorState.getCurrentContent().getEntity(key).type === 'LINK') {
-      return true;
     }
     return false;
   };
