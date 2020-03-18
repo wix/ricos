@@ -1,6 +1,5 @@
-import { KeyBindingUtil } from 'draft-js';
 import { isEqual } from 'lodash';
-import { COMMANDS, MODIFIERS } from 'wix-rich-content-editor-common';
+import { COMMANDS, MODIFIERS, KeyBindingUtil } from 'wix-rich-content-editor-common';
 
 const COMMAND_BY_SHORTCUT = [
   {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import closeIcon from './icons/close.svg';
 import { convertItemData } from 'wix-rich-content-plugin-gallery/dist/lib/convert-item-data';
@@ -9,47 +9,70 @@ import styles from './fullscreen.rtlignore.scss';
 
 const { ProGallery } = process.env.SANTA ? {} : require('pro-gallery');
 
-export default function Fullscreen(props) {
-  const { index, isOpen, onClose, target, backgroundColor, topMargin, foregroundColor } = props;
+export default class Fullscreen extends Component {
+  componentDidMount() {
+    document.addEventListener('keydown', this.onEsc);
+  }
 
-  const getItems = () => {
-    const { images } = props;
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.onEsc);
+  }
+
+  onEsc = event => {
+    if (event.key === 'Escape') {
+      this.props.onClose();
+    }
+  };
+
+  getItems = () => {
+    const { images } = this.props;
     return convertItemData({ items: images });
   };
 
-  let fullscreen = (
-    <div className={styles.fullscreen} style={{ ...backgroundColor, ...topMargin }}>
-      <button
-        className={styles.close}
-        style={foregroundColor}
-        onClick={() => onClose()}
-        data-hook={'fullscreen-close-button'}
-      >
-        {closeIcon()}
-      </button>
-      <ProGallery
-        items={getItems()}
-        currentIdx={index}
-        resizeMediaUrl={resizeMediaUrl}
-        container={{ width: window.innerWidth, height: window.innerHeight }}
-        styles={{
-          ...layouts[5],
-          galleryLayout: 5,
-          slideshowInfoSize: 0,
-          cubeType: 'fit',
-          scrollSnap: true,
-          videoPlay: 'auto',
-          allowSocial: false,
-        }}
-      />
-    </div>
-  );
+  render() {
+    const {
+      index,
+      isOpen,
+      onClose,
+      target,
+      backgroundColor,
+      topMargin,
+      foregroundColor,
+    } = this.props;
+    let fullscreen = (
+      <div className={styles.fullscreen} style={{ ...backgroundColor, ...topMargin }}>
+        <button
+          className={styles.close}
+          style={foregroundColor}
+          onClick={() => onClose()}
+          data-hook={'fullscreen-close-button'}
+        >
+          {closeIcon()}
+        </button>
+        <ProGallery
+          items={this.getItems()}
+          currentIdx={index}
+          resizeMediaUrl={resizeMediaUrl}
+          container={{ width: window.innerWidth, height: window.innerHeight }}
+          styles={{
+            ...layouts[5],
+            galleryLayout: 5,
+            slideshowInfoSize: 0,
+            cubeType: 'fit',
+            scrollSnap: true,
+            videoPlay: 'auto',
+            allowSocial: false,
+          }}
+        />
+      </div>
+    );
 
-  if (target) {
-    fullscreen = ReactDOM.createPortal(fullscreen, target);
+    if (target) {
+      fullscreen = ReactDOM.createPortal(fullscreen, target);
+    }
+
+    return isOpen ? fullscreen : null;
   }
-
-  return isOpen ? fullscreen : null;
 }
 
 Fullscreen.propTypes = {
@@ -60,4 +83,5 @@ Fullscreen.propTypes = {
   backgroundColor: PropTypes.object,
   foregroundColor: PropTypes.object,
   onClose: PropTypes.func,
+  target: PropTypes.instanceOf(Element),
 };

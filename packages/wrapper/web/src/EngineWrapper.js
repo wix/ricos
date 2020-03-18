@@ -1,8 +1,7 @@
 import React, { Children, Suspense } from 'react';
 import PropTypes from 'prop-types';
-import { modalStyles } from '../themeStrategy/defaults';
+import { modalStyles } from './themeStrategy/defaults';
 
-const dummy = ''; //crucial for dynamic import at it's current version
 class EngineWrapper extends React.Component {
   constructor(props) {
     super(props);
@@ -13,10 +12,12 @@ class EngineWrapper extends React.Component {
       Fullscreen: undefined,
     };
     if (props.editor) {
-      import(`wix-rich-content-editor/dist/lib/editorStateConversion${dummy}.js`).then(module =>
-        this.setState({ editorState: module.createEmpty() })
-      );
+      import(
+        // eslint-disable-next-line max-len
+        /* webpackChunkName: "rce-editorStateConversion"  */ `wix-rich-content-editor/dist/lib/editorStateConversion.js`
+      ).then(module => this.setState({ editorState: module.createEmpty() }));
     }
+    this.emptyInitialState = { entityMap: {} };
   }
 
   onModalOpen = data => {
@@ -43,34 +44,34 @@ class EngineWrapper extends React.Component {
     this.setState({ editorState });
   };
 
-  fullScreenOnExpand = (entityIndex, innerIndex = 0) => {
+  onExpand = (entityIndex, innerIndex = 0) => {
     //galleries have an innerIndex (i.e. second image will have innerIndex=1)
     this.setState({
       //Viewer state
-      expendModeIsOpen: true,
-      expandModeIndex: this.expandModeData?.imageMap[entityIndex] + innerIndex,
+      expandModeIsOpen: true,
+      expandModeIndex: this.state.expandModeData?.imageMap[entityIndex] + innerIndex,
     });
   };
 
+  setExpandModeData = expandModeData => {
+    this.setState({ expandModeData });
+  };
+
   componentDidMount() {
-    const { editor, withModal = true, children } = this.props;
+    const { editor, withModal = true } = this.props;
     const shouldRenderEditorModal = editor && withModal;
     const shouldRenderFullscreen = !editor && withModal;
     let EditorModal, Fullscreen;
     if (shouldRenderEditorModal)
       EditorModal =
-        withModal === true ? React.lazy(() => import(`./lib/EditorModal${dummy}.js`)) : withModal;
+        withModal === true
+          ? React.lazy(() => import(/* webpackChunkName: "rce-EditorModal"  */ `./EditorModal.js`))
+          : withModal;
     if (shouldRenderFullscreen) {
-      Fullscreen = React.lazy(() => {
-        return shouldRenderFullscreen ? import(`wix-rich-content-fullscreen${dummy}`) : '';
-      });
-      if (!this.expandModeData) {
-        import(`wix-rich-content-fullscreen/dist/lib/getImagesData${dummy}.js`).then(
-          getImagesData => {
-            this.expandModeData = getImagesData.default(children.props.initialState);
-          }
-        );
-      }
+      Fullscreen =
+        withModal === true
+          ? React.lazy(() => import(/* webpackChunkName: "rce-ViewerModal"  */ './ViewerModal'))
+          : withModal;
     }
     this.setState({ EditorModal, Fullscreen });
   }
@@ -88,29 +89,36 @@ class EngineWrapper extends React.Component {
     const { onRequestClose } = this.state.modalProps || {};
 
     //viewer needs onExpand helper + Fullscreen
-    helpers.onExpand = this.fullScreenOnExpand;
+    helpers.onExpand = this.onExpand;
 
     //Editor Modal
     if (editor && withModal) {
       helpers.openModal = this.onModalOpen;
       helpers.closeModal = this.onModalClose;
     }
-    if (onChange)
-      modifiedProps.onChange = editorState => {
-        onChange(editorState);
-        this.handleChange(editorState);
-      };
+    modifiedProps.onChange = editorState => {
+      onChange?.(editorState);
+      this.handleChange(editorState);
+    };
 
     modifiedProps.helpers = helpers;
-    modifiedProps.onChange = this.onChange;
 
-    const { expandModeIndex, expendModeIsOpen, disabled, EditorModal, Fullscreen } = this.state;
+    const {
+      expandModeData,
+      expandModeIndex,
+      expandModeIsOpen,
+      disabled,
+      EditorModal,
+      Fullscreen,
+    } = this.state;
     return (
       <React.Fragment>
+        <div id="#engine_wrapper" />
         {Children.only(React.cloneElement(children, { ...modifiedProps, disabled }))}
         {EditorModal && (
           <Suspense fallback={<div />}>
             <EditorModal
+              dataHook={'WrapperEditorModal'}
               isOpen={this.state.showModal}
               contentLabel="External Modal Example"
               style={modalStyles(this.state, theme)}
@@ -125,10 +133,13 @@ class EngineWrapper extends React.Component {
         {Fullscreen && (
           <Suspense fallback={<div />}>
             <Fullscreen
-              isOpen={expendModeIsOpen}
-              images={this.expandModeData?.images || []}
-              onClose={() => this.setState({ expendModeIsOpen: false })}
+              dataHook={'WrapperFullScreen'}
+              initialState={children.props.initialState || this.emptyInitialState}
+              isOpen={expandModeIsOpen}
+              images={expandModeData?.images || []}
+              onClose={() => this.setState({ expandModeIsOpen: false })}
               index={expandModeIndex}
+              setExpandModeData={this.setExpandModeData}
             />
           </Suspense>
         )}

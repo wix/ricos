@@ -220,7 +220,8 @@ describe('plugins', () => {
       cy.openVideoUploadModal().addVideoFromURL();
       cy.shrinkPlugin();
       cy.waitForVideoToLoad();
-      cy.getEditor()
+      cy.focusEditor()
+        .type('{uparrow}') //try to fix bug where sometimes it doesn't type
         .type('{uparrow}')
         .type('Will this fix the flakiness?');
       cy.eyesCheckWindow(this.test.title);
@@ -230,7 +231,8 @@ describe('plugins', () => {
       cy.openVideoUploadModal().addCustomVideo();
       cy.shrinkPlugin();
       cy.waitForVideoToLoad();
-      cy.getEditor()
+      cy.focusEditor()
+        .type('{uparrow}') //try to fix bug where sometimes it doesn't type
         .type('{uparrow}')
         .type('Will this fix the flakiness?');
 
@@ -259,7 +261,8 @@ describe('plugins', () => {
       cy.openSoundCloudModal().addSoundCloud();
       cy.shrinkPlugin();
       cy.waitForVideoToLoad();
-      cy.getEditor()
+      cy.focusEditor()
+        .type('{uparrow}') //try to fix bug where sometimes it doesn't type
         .type('{uparrow}')
         .type('Will this fix the flakiness?');
       cy.eyesCheckWindow(this.test.title);

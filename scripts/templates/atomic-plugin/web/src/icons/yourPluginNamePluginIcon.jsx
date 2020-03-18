@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 import React from 'react';
 
-const yourPluginNamePluginIcon = props => (
+const YourPluginNamePluginIcon = props => (
   <svg xmlnsXlink="http://www.w3.org/1999/xlink" viewBox="0 0 19 19" {...props}>
     <defs>
       <path
@@ -18,4 +18,4 @@ const yourPluginNamePluginIcon = props => (
   </svg>
 );
 
-export default yourPluginNamePluginIcon;
+export default YourPluginNamePluginIcon;
