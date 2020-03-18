@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { EditorState, convertFromRaw } from 'draft-js';
 import Editor from 'draft-js-plugins-editor';
 import { get, includes, merge, debounce } from 'lodash';
 import Measure from 'react-measure';
@@ -15,14 +14,27 @@ import getBlockRenderMap from './getBlockRenderMap';
 import { combineStyleFns } from './combineStyleFns';
 import { getStaticTextToolbarId } from './Toolbars/toolbar-id';
 import {
+  EditorState,
+  convertFromRaw,
   TooltipHost,
   TOOLBARS,
   getBlockInfo,
   getFocusedBlockKey,
+  calculateDiff,
+  getPostContentSummary,
+  Modifier,
 } from 'wix-rich-content-editor-common';
-import { AccessibilityListener, normalizeInitialState, getLangDir } from 'wix-rich-content-common';
+
+import {
+  AccessibilityListener,
+  normalizeInitialState,
+  getLangDir,
+  Version,
+} from 'wix-rich-content-common';
 import styles from '../../statics/styles/rich-content-editor.scss';
 import draftStyles from '../../statics/styles/draft.rtlignore.scss';
+import { convertFromHTML as draftConvertFromHtml } from 'draft-convert';
+import pastedContentConfig from './utils/pastedContentConfig';
 
 class RichContentEditor extends Component {
   static getDerivedStateFromError(error) {
@@ -83,7 +95,7 @@ class RichContentEditor extends Component {
       locale,
       anchorTarget,
       relValue,
-      helpers,
+      helpers = {},
       config,
       isMobile = false,
       shouldRenderOptimizedImages,
@@ -97,7 +109,10 @@ class RichContentEditor extends Component {
       locale,
       anchorTarget,
       relValue,
-      helpers,
+      helpers: {
+        ...helpers,
+        onPluginAdd: (...args) => helpers.onPluginAdd?.(...args, Version.currentVersion),
+      },
       config,
       isMobile,
       setEditorState: this.setEditorState,
@@ -190,8 +205,37 @@ class RichContentEditor extends Component {
   }
 
   updateEditorState = editorState => {
+    const onPluginDelete = this.props.helpers?.onPluginDelete;
+    if (onPluginDelete) {
+      calculateDiff(this.state.editorState, editorState, (...args) =>
+        onPluginDelete(...args, Version.currentVersion)
+      );
+    }
     this.setEditorState(editorState);
-    this.props.onChange && this.props.onChange(editorState);
+    this.props.onChange?.(editorState);
+  };
+
+  handlePastedText = (text, html, editorState) => {
+    const { handlePastedText } = this.props;
+    if (handlePastedText) {
+      return handlePastedText(text, html, editorState);
+    }
+    const contentState = draftConvertFromHtml(pastedContentConfig)(html);
+
+    const updatedContentState = Modifier.replaceWithFragment(
+      editorState.getCurrentContent(),
+      editorState.getSelection(),
+      contentState.getBlockMap()
+    );
+
+    const newEditorState = EditorState.push(editorState, updatedContentState, 'insert-fragment');
+    const resultEditorState = EditorState.set(newEditorState, {
+      currentContent: updatedContentState,
+      selection: newEditorState.getSelection(),
+    });
+
+    this.updateEditorState(resultEditorState);
+    return 'handled';
   };
 
   getCustomCommandHandlers = () => ({
@@ -235,9 +279,15 @@ class RichContentEditor extends Component {
 
   getInPluginEditingMode = () => this.inPluginEditingMode;
 
-  updateBounds = editorBounds => {
-    this.setState({ editorBounds });
-  };
+  componentWillUnmount() {
+    this.updateBounds = () => '';
+  }
+
+  componentWillMount() {
+    this.updateBounds = editorBounds => {
+      this.setState({ editorBounds });
+    };
+  }
 
   renderToolbars = () => {
     const toolbarsToIgnore = [
@@ -292,7 +342,6 @@ class RichContentEditor extends Component {
       onFocus,
       textAlignment,
       handleBeforeInput,
-      handlePastedText,
       handleReturn,
     } = this.props;
     const { editorState } = this.state;
@@ -309,7 +358,7 @@ class RichContentEditor extends Component {
         editorState={editorState}
         onChange={this.updateEditorState}
         handleBeforeInput={handleBeforeInput}
-        handlePastedText={handlePastedText}
+        handlePastedText={this.handlePastedText}
         plugins={this.plugins}
         blockStyleFn={blockStyleFn(theme, this.styleToClass)}
         blockRenderMap={getBlockRenderMap(theme)}
@@ -411,6 +460,11 @@ class RichContentEditor extends Component {
     }
   }
 }
+
+RichContentEditor.publish = async (postId, editorState = {}, callBack = () => true) => {
+  const postSummary = getPostContentSummary(editorState);
+  callBack({ postId, ...postSummary });
+};
 
 RichContentEditor.propTypes = {
   editorKey: PropTypes.string,

@@ -13,7 +13,7 @@ describe('editor rendering', () => {
     if (Cypress.env('MATCH_CONTENT_STATE') && !Cypress.env('debug')) this.skip();
   });
 
-  context('seo', () => {
+  context('seoSSR', () => {
     before(function() {
       cy.eyesOpen({
         appName: 'Rendering',

@@ -12,30 +12,47 @@ process.on('unhandledRejection', error => {
 
 const warning = chalk.keyword('orange');
 
-const getAllPluginsNames = ({ skipPlugins = false }) => {
+const getAllPluginsNames = ({ skipPlugins = false, bundleOnly }) => {
+  const viewerPakages = [
+    'viewer-without-wrapper',
+    'viewer-with-wrapper',
+    'editor-with-emoji',
+    'editor-without-plugins',
+    'editor-with-basic-plugins',
+  ];
+
   if (skipPlugins) {
-    return Promise.resolve([]);
+    return Promise.resolve(viewerPakages);
   }
+  if (bundleOnly) {
+    return Promise.resolve([bundleOnly]);
+  }
+
   return getPackages().then(allPackages => {
     return allPackages
       .filter(pkg => !pkg.private)
       .filter(pkg => pkg.name.indexOf('wix-rich-content-plugin') === 0)
-      .map(pkg => pkg.name);
+      .map(pkg => pkg.name)
+      .concat(viewerPakages);
   });
 };
 
-const viewerPakages = ['viewer-without-wrapper', 'viewer-with-wrapper'];
-
 const options = {};
-const option = argv._[0];
-if (option === 'skipPlugins') {
-  options.skipPlugins = true;
+const firstArg = argv._[0];
+if (firstArg) {
+  if (firstArg === 'skipPlugins') {
+    console.log('skipping plugins');
+    options.skipPlugins = true;
+  } else {
+    console.log('bundling only', firstArg);
+    options.bundleOnly = firstArg;
+  }
 }
-console.log(JSON.stringify(options));
+
 function run() {
   console.log(chalk.magenta('Analyzing plugins...'));
   getAllPluginsNames(options).then(pkgNames => {
-    const bundleResultsPromise = pkgNames.concat(viewerPakages).map(pkgName => {
+    const bundleResultsPromise = pkgNames.map(pkgName => {
       return new Promise(resolve => {
         webpack(getWebpackConfig(pkgName), (err, stats) => {
           // Stats Object

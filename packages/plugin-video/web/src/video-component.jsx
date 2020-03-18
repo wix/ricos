@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { findDOMNode } from 'react-dom';
 import { mergeStyles } from 'wix-rich-content-common';
+import { Loader } from 'wix-rich-content-editor-common';
+import { get } from 'lodash';
 import VideoViewer from './video-viewer';
 import styles from '../statics/styles/default-video-styles.scss';
 import { VIDEO_TYPE_LEGACY, VIDEO_TYPE } from './types';
@@ -21,7 +23,6 @@ class VideoComponent extends React.Component {
     super(props);
     const isPlayable = !props.blockProps;
     this.state = {
-      isLoading: false,
       isLoaded: false,
       isPlayable,
     };
@@ -48,7 +49,7 @@ class VideoComponent extends React.Component {
   }
 
   handleReady = () => {
-    if (!this.state.isLoaded) {
+    if (!this.state.isLoaded && !this.props.componentData.tempData) {
       this.setState({ isLoaded: true });
     }
   };
@@ -61,6 +62,19 @@ class VideoComponent extends React.Component {
         {isLoaded && <span className={styles.video_overlay_message}>{overlayText}</span>}
       </div>
     );
+  };
+
+  renderLoader = () => {
+    const isCustomVideo = get(this.props, 'componentData.isCustomVideo');
+    return (
+      <div className={this.styles.videoOverlay}>
+        <Loader type={'medium'} isVerySlowFakeLoader={isCustomVideo} />
+      </div>
+    );
+  };
+
+  onReload = () => {
+    this.setState({ isLoaded: false });
   };
 
   renderPlayer = () => {
@@ -82,6 +96,8 @@ class VideoComponent extends React.Component {
         disableRightClick={disableRightClick}
         theme={theme}
         setComponentUrl={setComponentUrl}
+        onReload={this.onReload}
+        isLoaded={this.state.isLoaded}
       />
     );
   };
@@ -108,6 +124,7 @@ class VideoComponent extends React.Component {
       >
         {!isPlayable && this.renderOverlay(this.styles, this.props.t)}
         {this.renderPlayer()}
+        {!this.state.isLoaded && this.renderLoader()}
       </div>
     );
     /* eslint-enable jsx-a11y/no-static-element-interactions */

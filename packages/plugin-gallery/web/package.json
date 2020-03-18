@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-plugin-gallery",
-  "version": "6.8.6",
+  "version": "7.0.1",
   "author": {
     "name": "Jonathan Bachman",
     "email": "jonathanb@wix.com"
@@ -33,7 +33,6 @@
   "peerDependencies": {
     "@babel/runtime": "7.2.0",
     "classnames": "^2.0.0",
-    "draft-js": "0.11.2",
     "lodash": "^4.0.0",
     "prop-types": "^15.0.0",
     "react": "^16.4.2",
@@ -44,7 +43,6 @@
     "@babel/runtime": "7.2.0",
     "classnames": "^2.0.0",
     "cross-env": "^5.2.0",
-    "draft-js": "0.11.2",
     "eslint": "^6.1.0",
     "lodash": "^4.17.15",
     "prop-types": "^15.6.2",
@@ -54,10 +52,10 @@
   },
   "dependencies": {
     "image-client-api": "1.2218.0",
-    "pro-gallery": "1.5.33",
+    "pro-gallery": "1.8.2",
     "react-sortable-hoc": "^0.6.8",
-    "wix-rich-content-common": "6.8.6",
-    "wix-rich-content-editor-common": "6.8.6"
+    "wix-rich-content-common": "7.0.1",
+    "wix-rich-content-editor-common": "7.0.1"
   },
   "unpkg": true,
   "publishConfig": {

@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { RichContentEditor, RichContentEditorModal } from 'wix-rich-content-editor';
-import { convertToRaw } from 'draft-js';
+import { convertToRaw } from 'wix-rich-content-editor-common';
 import * as PropTypes from 'prop-types';
 import ReactModal from 'react-modal';
 import { testImages, testVideos } from './mock';
@@ -8,6 +8,7 @@ import * as Plugins from './EditorPlugins';
 import ModalsMap from './ModalsMap';
 import theme from '../theme/theme'; // must import after custom styles
 import { GALLERY_TYPE } from 'wix-rich-content-plugin-gallery';
+
 const modalStyleDefaults = {
   content: {
     top: '50%',
@@ -53,6 +54,12 @@ export default class Editor extends PureComponent {
       }
     };
     this.helpers = {
+      //these are for testing purposes only
+      onPluginAdd: async (plugin_id, entry_point, version) => console.log('biPluginAdd', plugin_id, entry_point, version),
+      onPluginDelete: async (plugin_id, version) => console.log('biPluginDelete', plugin_id, version),
+      onPluginChange: async (plugin_id, changeObj, version) => console.log('biPluginChange', plugin_id, changeObj, version),
+      onPublish: async (postid, callback, version) => console.log('biOnPublish', ({ data }) => data, version),
+      //
       // onFilesChange: (files, updateEntity) => mockUpload(files, updateEntity),
       handleFileSelection: (index, multiple, updateEntity, removeEntity, componentData) => {
         const count = componentData.items || shouldMultiSelectImages ? [1, 2, 3] : [1];
@@ -200,6 +207,7 @@ export default class Editor extends PureComponent {
           // siteDomain="https://www.wix.com"
           {...editorProps}
         />
+
         <ReactModal
           isOpen={this.state.showModal}
           contentLabel="External Modal Example"

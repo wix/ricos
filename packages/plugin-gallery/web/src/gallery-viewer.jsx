@@ -2,9 +2,9 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { validate, mergeStyles, pluginGallerySchema } from 'wix-rich-content-common';
 import { isEqual } from 'lodash';
-import { convertItemData } from './helpers/convert-item-data';
+import { convertItemData } from './lib/convert-item-data';
 import { DEFAULTS, isHorizontalLayout, sampleItems } from './constants';
-import resizeMediaUrl from './helpers/resize-media-url';
+import resizeMediaUrl from './lib/resize-media-url';
 import styles from '../statics/styles/viewer.scss';
 import 'pro-gallery/dist/statics/main.min.css';
 import ExpandIcon from './icons/expand.svg';
@@ -15,7 +15,7 @@ class GalleryViewer extends React.Component {
   constructor(props) {
     validate(props.componentData, pluginGallerySchema);
     super(props);
-
+    this.domId = this.props.blockKey || 'v-' + this.props.entityIndex;
     this.state = {
       size: {},
       ...this.stateFromProps(props),
@@ -85,7 +85,6 @@ class GalleryViewer extends React.Component {
   getItems() {
     const { items } = this.state;
     const { anchorTarget, relValue } = this.props;
-
     if (items.length > 0) {
       return convertItemData({ items, anchorTarget, relValue });
     } else {
@@ -127,24 +126,24 @@ class GalleryViewer extends React.Component {
     if (!this.props.isMobile) {
       return { ...styleParams, allowHover: true };
     }
-    return this.hasTitle(items)
-      ? {
-          ...styleParams,
-          isVertical: styleParams.galleryLayout === 1,
-          allowTitle: true,
-          galleryTextAlign: 'center',
-          textsHorizontalPadding: 0,
-          imageInfoType: 'NO_BACKGROUND',
-          hoveringBehaviour: 'APPEARS',
-          textsVerticalPadding: 0,
-          titlePlacement: 'SHOW_BELOW',
-          calculateTextBoxHeightMode: 'AUTOMATIC',
-        }
-      : styleParams;
+    if (this.hasTitle(items))
+      return {
+        ...styleParams,
+        isVertical: styleParams.galleryLayout === 1,
+        allowTitle: true,
+        galleryTextAlign: 'center',
+        textsHorizontalPadding: 0,
+        imageInfoType: 'NO_BACKGROUND',
+        hoveringBehaviour: 'APPEARS',
+        textsVerticalPadding: 0,
+        titlePlacement: 'SHOW_BELOW',
+        calculateTextBoxHeightMode: 'AUTOMATIC',
+      };
+    return styleParams;
   };
 
   renderExpandIcon = itemProps => {
-    return itemProps.linkData.url ? (
+    return itemProps.linkData.url && itemProps.type !== 'video' ? (
       <ExpandIcon
         className={this.styles.expandIcon}
         onClick={e => {
@@ -181,11 +180,12 @@ class GalleryViewer extends React.Component {
       <div
         ref={elem => (this.container = elem)}
         className={this.styles.gallery_container}
-        data-hook="galleryViewer"
+        data-hook={'galleryViewer'}
         role="none"
         onContextMenu={this.handleContextMenu}
       >
         <ProGallery
+          domId={this.domId}
           items={items}
           styles={styleParams}
           container={size}
@@ -202,6 +202,7 @@ class GalleryViewer extends React.Component {
 
 GalleryViewer.propTypes = {
   componentData: PropTypes.object.isRequired,
+  blockKey: PropTypes.string,
   entityIndex: PropTypes.number,
   onClick: PropTypes.func,
   className: PropTypes.string,

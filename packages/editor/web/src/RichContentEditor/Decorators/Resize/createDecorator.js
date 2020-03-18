@@ -64,12 +64,13 @@ export default ({ config, store }) => WrappedComponent =>
       }
     };
 
+    getDataConfig = () => this.props.blockProps.getData()?.componentData?.config || {};
+
     // used to save the hoverPosition so it can be leveraged to determine if a
     // drag should happen on mousedown
     mouseMove = evt => {
-      const { vertical, horizontal, blockProps } = this.props;
-      const componentData = blockProps.getData();
-      const { size, alignment } = componentData.config;
+      const { vertical, horizontal } = this.props;
+      const { size, alignment } = this.getDataConfig();
       const hoverPosition = this.state.hoverPosition;
       const tolerance = 6;
       // TODO figure out if and how to achieve this without fetching the DOM node
@@ -192,12 +193,11 @@ export default ({ config, store }) => WrappedComponent =>
         resizeSteps, // eslint-disable-line no-unused-vars
         ...elementProps
       } = this.props;
-      const componentData = blockProps.getData();
-      const { size, alignment } = componentData.config;
+      const { size, alignment } = this.getDataConfig();
 
       const {
-        width = componentData.config.width,
-        height = componentData.config.height,
+        width = this.getDataConfig().width,
+        height = this.getDataConfig().height,
         hoverPosition,
       } = this.state;
       const { isTop, isLeft, isRight, isBottom } = hoverPosition;

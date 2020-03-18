@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { RichContentViewer } from 'wix-rich-content-viewer';
 import { RichContentWrapper } from 'wix-rich-content-wrapper';
-
+import { RichContentViewer } from 'wix-rich-content-viewer';
 import { pluginButton } from 'wix-rich-content-plugin-button/dist/module.viewer';
 import { pluginCodeBlock } from 'wix-rich-content-plugin-code-block/dist/module.viewer';
 import { pluginDivider } from 'wix-rich-content-plugin-divider/dist/module.viewer';
@@ -70,7 +69,7 @@ const plugins = [
 ];
 const ViewerWrapper = ({ contentState, palette }) => {
   return (
-    <RichContentWrapper plugins={plugins} theme={'Palette'} palette={palette} modalSupport>
+    <RichContentWrapper plugins={plugins} theme={'Palette'} palette={palette}>
       <RichContentViewer initialState={contentState} />
     </RichContentWrapper>
   );

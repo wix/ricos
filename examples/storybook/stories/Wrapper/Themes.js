@@ -7,6 +7,7 @@ import SegmentedToggle from 'wix-style-react/SegmentedToggle';
 import FormField from 'wix-style-react/FormField';
 import { Layout } from 'wix-style-react/Layout';
 import EditorWrapper from '../Components/EditorWrapper';
+import sourcecode from '!!raw-loader!../Components/EditorWrapper';
 
 export default () => {
   return (
@@ -49,7 +50,7 @@ class ThemeSelector extends React.Component {
 
         <Palette palette={wixPalettes[selected]} />
 
-        <RichContentEditorBox>
+        <RichContentEditorBox sourcecode={sourcecode}>
           <EditorWrapper
             key={selected}
             contentState={exapmleState}

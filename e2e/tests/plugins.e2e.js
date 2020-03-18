@@ -22,10 +22,6 @@ const eyesOpen = ({
   });
 
 describe('plugins', () => {
-  beforeEach(function() {
-    cy.switchToDesktop();
-  });
-
   afterEach(() => cy.matchContentSnapshot());
 
   context('image', () => {
@@ -33,7 +29,10 @@ describe('plugins', () => {
       eyesOpen(this);
     });
 
-    beforeEach('load editor', () => cy.loadEditorAndViewer('images'));
+    beforeEach('load editor', () => {
+      cy.switchToDesktop();
+      cy.loadEditorAndViewer('images');
+    });
 
     after(() => cy.eyesClose());
 
@@ -58,7 +57,7 @@ describe('plugins', () => {
     before(function() {
       eyesOpen(this);
     });
-
+    beforeEach('load editor', () => cy.switchToDesktop());
     after(() => cy.eyesClose());
 
     context('image full screen', () => {
@@ -82,10 +81,20 @@ describe('plugins', () => {
       );
 
       it('expand gallery image on full screen', function() {
-        cy.get(`[data-hook=${'image-item'}]:last`)
+        cy.get(`[data-hook=${'image-item'}]`)
+          .eq(2)
           .parent()
           .click();
+        cy.get(
+          '#pgi65a6266ba23a8a55da3f469157f15237_0 > div > div > div > a > div > canvas'
+        ).should('be.visible');
         cy.eyesCheckWindow({ tag: this.test.title, target: 'window', fully: false });
+        cy.get(`[data-hook=${'nav-arrow-next'}]`).click({ force: true });
+        cy.get(
+          '#pgiea8ec1609e052b7f196935318316299d_1 > div > div > div > a > div > canvas'
+        ).should('be.visible');
+        cy.get(`[data-hook=${'fullscreen-close-button'}]`).click();
+        cy.eyesCheckWindow({ tag: 'closed fullscreen', target: 'window', fully: false });
       });
     });
   });
@@ -93,6 +102,10 @@ describe('plugins', () => {
   context('gallery', () => {
     before(function() {
       eyesOpen(this);
+    });
+
+    beforeEach('load editor', () => {
+      cy.switchToDesktop();
     });
 
     after(() => cy.eyesClose());
@@ -191,7 +204,10 @@ describe('plugins', () => {
       eyesOpen(this);
     });
 
-    beforeEach('load editor', () => cy.loadEditorAndViewer('empty'));
+    beforeEach('load editor', () => {
+      cy.switchToDesktop();
+      cy.loadEditorAndViewer('empty');
+    });
 
     after(() => cy.eyesClose());
 
@@ -204,7 +220,10 @@ describe('plugins', () => {
       cy.openVideoUploadModal().addVideoFromURL();
       cy.shrinkPlugin();
       cy.waitForVideoToLoad();
-      cy.focusEditor().enterParagraphs(['Will this fix the flakiness?']);
+      cy.focusEditor()
+        .type('{uparrow}') //try to fix bug where sometimes it doesn't type
+        .type('{uparrow}')
+        .type('Will this fix the flakiness?');
       cy.eyesCheckWindow(this.test.title);
     });
 
@@ -212,7 +231,10 @@ describe('plugins', () => {
       cy.openVideoUploadModal().addCustomVideo();
       cy.shrinkPlugin();
       cy.waitForVideoToLoad();
-      cy.focusEditor().enterParagraphs(['Will this fix the flakiness?']);
+      cy.focusEditor()
+        .type('{uparrow}') //try to fix bug where sometimes it doesn't type
+        .type('{uparrow}')
+        .type('Will this fix the flakiness?');
 
       cy.eyesCheckWindow(this.test.title);
     });
@@ -223,7 +245,10 @@ describe('plugins', () => {
       eyesOpen(this);
     });
 
-    beforeEach('load editor', () => cy.loadEditorAndViewer('empty'));
+    beforeEach('load editor', () => {
+      cy.switchToDesktop();
+      cy.loadEditorAndViewer('empty');
+    });
 
     after(() => cy.eyesClose());
 
@@ -234,9 +259,12 @@ describe('plugins', () => {
 
     it('add a soundcloud URL', function() {
       cy.openSoundCloudModal().addSoundCloud();
-      cy.waitForVideoToLoad();
       cy.shrinkPlugin();
-      cy.focusEditor().enterParagraphs(['Will this fix the flakiness?']);
+      cy.waitForVideoToLoad();
+      cy.focusEditor()
+        .type('{uparrow}') //try to fix bug where sometimes it doesn't type
+        .type('{uparrow}')
+        .type('Will this fix the flakiness?');
       cy.eyesCheckWindow(this.test.title);
     });
   });
@@ -244,6 +272,10 @@ describe('plugins', () => {
   context('html', () => {
     before(function() {
       eyesOpen(this);
+    });
+
+    beforeEach('load editor', () => {
+      cy.switchToDesktop();
     });
 
     after(() => cy.eyesClose());
@@ -260,6 +292,10 @@ describe('plugins', () => {
   context('divider', () => {
     before(function() {
       eyesOpen(this);
+    });
+
+    beforeEach('load editor', () => {
+      cy.switchToDesktop();
     });
 
     after(() => cy.eyesClose());
@@ -296,6 +332,10 @@ describe('plugins', () => {
       eyesOpen(this);
     });
 
+    beforeEach('load editor', () => {
+      cy.switchToDesktop();
+    });
+
     after(() => cy.eyesClose());
 
     it('render giphy plugin toolbar', function() {
@@ -312,6 +352,7 @@ describe('plugins', () => {
   context('map', () => {
     before('load editor', function() {
       eyesOpen(this);
+      cy.switchToDesktop();
       cy.loadEditorAndViewer('map');
     });
 
@@ -329,6 +370,7 @@ describe('plugins', () => {
   context('file-upload', () => {
     before('load editor', function() {
       eyesOpen(this);
+      cy.switchToDesktop();
       cy.loadEditorAndViewer('file-upload');
     });
 
@@ -343,6 +385,7 @@ describe('plugins', () => {
   context('drag and drop', () => {
     before('load editor', function() {
       eyesOpen(this);
+      cy.switchToDesktop();
       cy.loadEditorAndViewer('dragAndDrop');
     });
 
@@ -362,6 +405,10 @@ describe('plugins', () => {
   context('alignment', () => {
     before(function() {
       eyesOpen(this);
+    });
+
+    beforeEach('load editor', () => {
+      cy.switchToDesktop();
     });
 
     after(() => cy.eyesClose());
