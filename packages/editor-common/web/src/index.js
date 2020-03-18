@@ -79,6 +79,7 @@ export {
   createBlockAndFocus,
   createBlock,
   getBlockInfo,
+  getBlockDepth,
   getFocusedBlockKey,
   calculateDiff,
   getPostContentSummary,
