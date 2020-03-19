@@ -5,6 +5,7 @@ import {
 } from 'wix-rich-content-editor-common';
 import { addLinkPreview } from 'wix-rich-content-plugin-link-preview/dist/lib/utils';
 import { isValidUrl } from 'wix-rich-content-common';
+import React from 'react';
 import { LINK_TYPE } from './types';
 import { Component } from './LinkComponent';
 import { linkEntityStrategy } from './strategy';
@@ -17,7 +18,9 @@ const createLinkPlugin = (config = {}) => {
   const toolbar = createLinkToolbar(config);
   let alreadyDisplayedAsLinkPreview = {};
 
-  const decorators = [{ strategy: linkEntityStrategy, component: Component }];
+  const decorators = [
+    { strategy: linkEntityStrategy, component: props => <Component {...props} theme={theme} /> },
+  ];
   let linkifyData;
 
   const handleReturn = (event, editorState) => {
