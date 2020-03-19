@@ -1,31 +1,18 @@
 import CodeUtils from 'draft-js-code';
-import { createBasePlugin } from 'wix-rich-content-editor-common';
+import { createBasePlugin, COMMANDS } from 'wix-rich-content-editor-common';
 import { CODE_BLOCK_TYPE } from './types';
 // import PrismDecorator from './PrismDecorator';
 import createCodeBlockToolbar from './toolbar/createCodeBlockToolbar';
 
 const createUnderlyingPlugin = (/*{ theme }*/) => ({
-  keyBindingFn: (event, { getEditorState }) => {
-    const editorState = getEditorState();
-    if (CodeUtils.hasSelectionInBlock(editorState)) {
-      if (event.key === 'Tab' && event.shiftKey) {
-        // since backspace removes tabs in CodeUtils
-        // https://github.com/SamyPesse/draft-js-code/blob/9783c0f6bbedda6b7089712f9c657a72fdae636d/lib/handleKeyCommand.js#L11
-        return 'backspace';
-      } else {
-        return CodeUtils.getKeyBinding(event);
-      }
-    }
-  },
-
   handleKeyCommand: (command, editorState, timestamp, { setEditorState }) => {
     if (CodeUtils.hasSelectionInBlock(editorState)) {
       let newState;
-      if (command === 'tab') {
+      if (command === COMMANDS.TAB) {
         const mockEvent = { preventDefault: () => {} };
         newState = CodeUtils.onTab(mockEvent, editorState);
-      } else {
-        newState = CodeUtils.handleKeyCommand(editorState, command);
+      } else if (command === COMMANDS.SHIFT_TAB) {
+        newState = CodeUtils.handleKeyCommand(editorState, 'backspace');
       }
       if (newState) {
         setEditorState(newState);
