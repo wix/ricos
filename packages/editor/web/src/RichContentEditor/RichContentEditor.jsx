@@ -6,7 +6,6 @@ import { get, includes, merge, debounce } from 'lodash';
 import Measure from 'react-measure';
 import createEditorToolbars from './Toolbars';
 import createPlugins from './createPlugins';
-// eslint-disable-next-line no-unused-vars
 import { createKeyBindingFn, initPluginKeyBindings } from './keyBindings';
 import handleKeyCommand from './handleKeyCommand';
 import handleReturnCommand from './handleReturnCommand';
@@ -23,6 +22,9 @@ import {
   calculateDiff,
   getPostContentSummary,
   Modifier,
+  getBlockType,
+  COMMANDS,
+  MODIFIERS,
 } from 'wix-rich-content-editor-common';
 
 import {
@@ -246,27 +248,35 @@ class RichContentEditor extends Component {
     return 'handled';
   };
 
+  handleTabCommand = () => {
+    if (this.getToolbars().TextToolbar) {
+      const staticToolbarButton = this.findFocusableChildForElement(
+        `${getStaticTextToolbarId(this.refId)}`
+      );
+      staticToolbarButton && staticToolbarButton.focus();
+    } else {
+      this.editor.blur();
+    }
+  };
+
   getCustomCommandHandlers = () => ({
     commands: [
       ...this.pluginKeyBindings.commands,
       {
-        command: 'tab',
+        command: COMMANDS.TAB,
         modifiers: [],
+        key: 'Tab',
+      },
+      {
+        command: COMMANDS.SHIFT_TAB,
+        modifiers: [MODIFIERS.SHIFT],
         key: 'Tab',
       },
     ],
     commandHanders: {
       ...this.pluginKeyBindings.commandHandlers,
-      tab: () => {
-        if (this.getToolbars().TextToolbar) {
-          const staticToolbarButton = this.findFocusableChildForElement(
-            `${getStaticTextToolbarId(this.refId)}`
-          );
-          staticToolbarButton && staticToolbarButton.focus();
-        } else {
-          this.editor.blur();
-        }
-      },
+      tab: this.handleTabCommand,
+      shiftTab: this.handleTabCommand,
     },
   });
 
@@ -371,10 +381,11 @@ class RichContentEditor extends Component {
         blockStyleFn={blockStyleFn(theme, this.styleToClass)}
         handleKeyCommand={handleKeyCommand(
           this.updateEditorState,
-          this.getCustomCommandHandlers().commandHanders
+          this.getCustomCommandHandlers().commandHanders,
+          getBlockType(editorState)
         )}
         editorKey={editorKey}
-        // keyBindingFn={createKeyBindingFn(this.getCustomCommandHandlers().commands || [])}
+        keyBindingFn={createKeyBindingFn(this.getCustomCommandHandlers().commands || [])}
         customStyleFn={this.customStyleFn}
         helpers={helpers}
         tabIndex={tabIndex}

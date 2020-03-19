@@ -86,6 +86,7 @@ export {
   calculateDiff,
   getPostContentSummary,
   createSelection,
+  getBlockType,
 } from './Utils/draftUtils';
 export { isiOS } from './Utils/isiOS';
 export { getSelectionStyles } from './Utils/inlineStyleUtils';
@@ -112,6 +113,7 @@ export {
   Modifier,
   RichUtils,
   KeyBindingUtil,
+  getDefaultKeyBinding,
   genKey,
   ContentBlock,
   BlockMapBuilder,
