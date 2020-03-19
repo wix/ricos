@@ -9,7 +9,7 @@ import {
 } from 'wix-rich-content-common/dist/lib/text-color-style-fn';
 
 export const DEFAULT_PALETTE = Object.freeze([
-  '#303030',
+  '#ffffff',
   '#303030',
   '#3a54b4',
   '#bfad80',
@@ -49,12 +49,16 @@ export const DEFAULT_BACKGROUND_STYLE_FN_DRAFT = styles =>
     .toArray()
     .reduce((cssStyle, style) => ({ ...cssStyle, ...DEFAULT_BACKGROUND_STYLE_FN(style) }), {}); // eslint-disable-line new-cap
 
-const colorScheme = DEFAULT_PALETTE.map((color, index) => ({
-  [`color${index + 1}`]: {
-    color,
-    index,
-  },
-}));
+const colorScheme = DEFAULT_PALETTE.reduce(
+  (prev, color, index) => ({
+    ...prev,
+    [`color${index + 1}`]: {
+      color,
+      index,
+    },
+  }),
+  {}
+);
 let userColors = [];
 export const DEFAULTS = {
   configTextColor: {
