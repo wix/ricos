@@ -13,6 +13,10 @@
     Click to see more.
   </summary>
 
+  ### :house: Internal
+  - `wrapper`
+    - [##804](https://github.com/wix-incubator/rich-content/pull/#804) engine-wrapper refactored
+
 </details>
 <hr/>
 
@@ -24,8 +28,8 @@
 ## 7.0.0 (Mar 17, 2020)
 ### :boom: Breaking Change
 - `editor`
-  - [#752](https://github.com/wix-incubator/rich-content/pull/752) Move draft-js to dependency from peerDependency [Migration Detials](https://github.com/wix-incubator/rich-content/wiki/RCE-V.7-Migration-Guide) 
-  
+  - [#752](https://github.com/wix-incubator/rich-content/pull/752) Move draft-js to dependency from peerDependency [Migration Detials](https://github.com/wix-incubator/rich-content/wiki/RCE-V.7-Migration-Guide)
+
 ### :rocket: New Feature
 - `fullscreen`
   - [#776](https://github.com/wix-incubator/rich-content/pull/776) fullscreen closes on Esc key press
