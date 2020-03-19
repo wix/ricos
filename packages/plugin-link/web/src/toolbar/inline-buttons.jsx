@@ -18,6 +18,7 @@ export default config => {
         <TextLinkButton
           insertLinkFn={updateLinkAtCurrentSelection}
           icon={EditIcon}
+          tooltipText={config.t('LinkTo_Edit_Tooltip')}
           {...config}
           {...props}
         />

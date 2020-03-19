@@ -54,6 +54,7 @@ export default config => ({
           insertLinkFn={insertLinkAtCurrentSelection}
           isActive={hasLinksInSelection(config.getEditorState())}
           commonPubsub={config.commonPubsub}
+          tooltipText={config.t('TextLinkButton_Tooltip')}
           {...props}
         />
       ),

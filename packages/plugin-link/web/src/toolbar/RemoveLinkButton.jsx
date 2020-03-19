@@ -14,7 +14,7 @@ export default class RemoveLinkButton extends Component {
 
   render() {
     const { theme, isMobile, t, tabIndex, config } = this.props;
-    const linkButtonTooltip = t('TextLinkButton_Tooltip');
+    const linkButtonTooltip = t('LinkPanelContainer_RemoveButton');
     const buttonStyles = {
       button: theme.inlineToolbarButton,
       buttonWrapper: theme.inlineToolbarButton_wrapper,
