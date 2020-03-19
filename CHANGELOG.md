@@ -16,6 +16,11 @@
 </details>
 <hr/>
 
+## 7.0.1 (Mar 18, 2020)
+### :house: [Internal]
+- `editor`
+  - [#801](https://github.com/wix-incubator/rich-content/pull/801) `editorStateConversion.js` consume `draft-js` directly to prevent bundle bloat of lib
+
 ## 7.0.0 (Mar 17, 2020)
 ### :boom: Breaking Change
 - `editor`
