@@ -41,10 +41,7 @@ class EngineWrapper extends React.Component {
       children.props
     );
 
-    assert(
-      childProps.locale && childProps.theme && childProps.config,
-      '[EngineWrapper] invalid strategy reduce'
-    );
+    assert(childProps.theme && childProps.config, '[EngineWrapper] invalid strategy reduce');
 
     // BARAK: why do we need this?
     if (editor) {

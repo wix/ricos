@@ -75,7 +75,6 @@ describe('Wrapper', () => {
       const renderResult = instance.render();
       const editorProps = renderResult.props.children.props;
       expect(editorProps).toHaveProperty('locale');
-      expect(editorProps).toHaveProperty('localeResource');
     });
   });
 

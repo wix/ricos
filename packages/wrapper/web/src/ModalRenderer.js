@@ -7,7 +7,7 @@ export default class ModalRenderer extends Component {
     children: PropTypes.node.isRequired,
     ModalsMap: PropTypes.object.isRequired,
     theme: PropTypes.object.isRequired,
-    locale: PropTypes.string.isRequired,
+    locale: PropTypes.string,
   };
   constructor(props) {
     super(props);
