@@ -19,6 +19,10 @@ import { pluginMap } from 'wix-rich-content-plugin-map/dist/module.viewer';
 import { pluginMentions } from 'wix-rich-content-plugin-mentions/dist/module.viewer';
 import { pluginSoundCloud } from 'wix-rich-content-plugin-sound-cloud/dist/module.viewer';
 import { pluginVideo } from 'wix-rich-content-plugin-video/dist/module.viewer';
+import {
+  pluginTextColor,
+  pluginTextHighlight,
+} from 'wix-rich-content-plugin-text-color/dist/module.viewer';
 
 const configs = {
   fileUpload: {
@@ -66,6 +70,8 @@ const plugins = [
   pluginMentions(),
   pluginSoundCloud(),
   pluginVideo(),
+  pluginTextColor(),
+  pluginTextHighlight(),
 ];
 const ViewerWrapper = ({ contentState, palette }) => {
   return (
