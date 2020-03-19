@@ -8,9 +8,8 @@ import PropTypes from 'prop-types';
 export default class RichContentWrapper extends React.Component {
   constructor(props) {
     super(props);
-    const { locale } = props;
     this.state = {
-      localeStrategy: () => ({ locale }),
+      localeStrategy: () => ({}),
     };
   }
 
