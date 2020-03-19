@@ -17,14 +17,14 @@ const createPluginsStrategy = (
   } = {}
 ) => (innerProps = {}) => {
   const { theme = {} } = innerProps;
+  const newConfig = { ...config, ...(innerProps.config || {}) };
   if (isEditor)
     return {
-      config: { ...config, ...(innerProps.config || {}) },
+      config: newConfig,
       plugins: [...plugins, ...(innerProps.plugins || [])],
       ModalsMap: { ...ModalsMap, ...(innerProps.ModalsMap || {}) },
     };
   else {
-    const newConfig = { ...config, ...(innerProps.config || {}) };
     const styleMappers = raw =>
       inlineStyleMappers
         .concat(innerProps.inlineStyleMappers || [])

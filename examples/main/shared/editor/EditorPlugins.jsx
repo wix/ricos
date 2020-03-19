@@ -53,7 +53,7 @@ import {
   styleSelectionPredicate,
   colorScheme,
   customBackgroundStyleFn,
-} from '../../src/text-color-style-fn';
+} from 'wix-rich-content-common/dist/lib/text-color-style-fn';
 import { testWixVideos } from './mock';
 // import { MyCustomIcon, SizeSmallRightIcon, TOOLBARS } from 'wix-rich-content-editor-common';
 import { TOOLBARS, BUTTONS, DISPLAY_MODE } from 'wix-rich-content-editor-common';
@@ -103,7 +103,7 @@ let userButtonBorderColors = [...buttonDefaultPalette];
 
 const getLinkPanelDropDownConfig = () => {
   const getItems = () => {
-    casual.define('item', function () {
+    casual.define('item', function() {
       return {
         value: casual.url,
         label: casual.catch_phrase,

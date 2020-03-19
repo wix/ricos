@@ -38,7 +38,7 @@ import {
   viewerCustomForegroundStyleFn,
   styleSelectionPredicate,
   viewerCustomBackgroundStyleFn,
-} from '../../src/text-color-style-fn';
+} from 'wix-rich-content-common/dist/lib/text-color-style-fn';
 
 import 'wix-rich-content-editor-common/dist/styles.min.css';
 import 'wix-rich-content-common/dist/styles.min.css';
