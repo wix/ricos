@@ -21,7 +21,6 @@ export const linkPreviewUtil = authStr => {
       oEmbedRes = await _axios.get(`${path}${getAbsoluteUrl(url)}`).then(res => res.data);
       state = oEmbedRes;
     } catch (e) {
-      console.error('caught', e); //eslint-disable-line no-console
       return new Promise(resolve => {
         setTimeout(() => resolve({}), 1);
       });

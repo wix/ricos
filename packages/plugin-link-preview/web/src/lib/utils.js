@@ -8,7 +8,6 @@ import {
   createBlock,
   deleteBlock,
 } from 'wix-rich-content-editor-common';
-import { isValidImgSrc } from 'wix-rich-content-common';
 
 export const addLinkPreview = (editorState, config, blockKey, url) => {
   const settings = config[LINK_PREVIEW_TYPE];
@@ -16,7 +15,7 @@ export const addLinkPreview = (editorState, config, blockKey, url) => {
   const { setEditorState } = config;
   return fetchData(url).then(linkPreviewData => {
     shouldAddLinkPreview(linkPreviewData).then(shouldAddLinkPreview => {
-      if (shouldAddLinkPreview /*|| html*/) {
+      if (shouldAddLinkPreview) {
         const withoutLinkBlock = deleteBlock(editorState, blockKey);
         const { size, alignment } = { ...DEFAULTS, ...(settings || {}) };
         const { thumbnail_url, title, description, html, provider_url } = linkPreviewData;
@@ -35,8 +34,21 @@ export const addLinkPreview = (editorState, config, blockKey, url) => {
   });
 };
 
+const isValidImgSrc = url => {
+  return new Promise(resolve => {
+    const image = document.createElement('img');
+    image.src = url;
+    image.onload = () => {
+      resolve(true);
+    };
+    image.onerror = () => {
+      resolve(false);
+    };
+  });
+};
+
 const shouldAddLinkPreview = linkPreviewData => {
-  const { title, thumbnail_url /*,html*/ } = linkPreviewData;
+  const { title, thumbnail_url } = linkPreviewData;
   if (thumbnail_url && title) {
     return isValidImgSrc(thumbnail_url);
   }
@@ -45,39 +57,58 @@ const shouldAddLinkPreview = linkPreviewData => {
 
 export const convertLinkPreviewToLink = editorState => {
   // preserve url
-  let currentBlock = getCurrentBlock(editorState);
+  const currentBlock = getCurrentBlock(editorState);
   const blockKey = currentBlock.key;
-  const entityKey = currentBlock.getEntityAt(0);
-  const entityData = editorState
-    .getCurrentContent()
-    .getEntity(entityKey)
-    ?.getData();
-  const url = entityData?.config?.link?.url;
+  const url = getLinkPreviewUrl(editorState, currentBlock);
 
   // replace preview block with text block containing url
-  let newState = replaceWithEmptyBlock(editorState, currentBlock.key);
-  let contentState = Modifier.insertText(
+  const newState = replaceWithEmptyBlock(editorState, blockKey);
+  const contentState = Modifier.insertText(
     newState.getCurrentContent(),
     newState.getSelection(),
     url
   );
-  // reread block after insertText
-  currentBlock = contentState.getBlockForKey(currentBlock.key);
-  const nextBlock = contentState.getBlockAfter(currentBlock.key);
-  // delte empty block after preview
+
+  const editorStateWithLink = changePlainTextUrlToLinkUrl(contentState, blockKey, url);
+
+  EditorState.push(
+    editorStateWithLink,
+    editorStateWithLink.getCurrentContent(),
+    'change-block-type'
+  );
+  return EditorState.forceSelection(editorStateWithLink, editorStateWithLink.getSelection());
+};
+
+const getLinkPreviewUrl = (editorState, block) => {
+  const entityKey = block.getEntityAt(0);
+  const entityData = editorState
+    .getCurrentContent()
+    .getEntity(entityKey)
+    ?.getData();
+  return entityData?.config?.link?.url;
+};
+
+const deleteEmptyBlockAfterPreview = (contentState, blockKey) => {
+  const block = contentState.getBlockForKey(blockKey);
+  const nextBlock = contentState.getBlockAfter(blockKey);
+
   const selectionRange = new SelectionState({
-    anchorKey: currentBlock.key,
-    anchorOffset: currentBlock.text.length,
+    anchorKey: blockKey,
+    anchorOffset: block.text.length,
     focusKey: nextBlock.key,
     focusOffset: 1,
   });
+  let newState = contentState;
   if (nextBlock && nextBlock.text.length === 0) {
-    contentState = Modifier.removeRange(contentState, selectionRange, 'forward');
+    newState = Modifier.removeRange(contentState, selectionRange, 'forward');
   }
-  newState = EditorState.push(newState, contentState, 'change-block-type');
-  // change the url from plain text to a link
-  const editorStateWithLink = insertLinkInPosition(
-    EditorState.push(newState, newState.getCurrentContent(), 'change-block-type'),
+  return EditorState.push(newState, newState, 'change-block-type');
+};
+
+const changePlainTextUrlToLinkUrl = (contentState, url, blockKey) => {
+  const editorState = deleteEmptyBlockAfterPreview(contentState, blockKey);
+  return insertLinkInPosition(
+    EditorState.push(editorState, editorState.getCurrentContent(), 'change-block-type'),
     blockKey,
     0,
     url.length,
@@ -85,10 +116,4 @@ export const convertLinkPreviewToLink = editorState => {
       url,
     }
   );
-  EditorState.push(
-    editorStateWithLink,
-    editorStateWithLink.getCurrentContent(),
-    'change-block-type'
-  );
-  return EditorState.forceSelection(editorStateWithLink, editorStateWithLink.getSelection());
 };
