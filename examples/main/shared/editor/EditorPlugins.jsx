@@ -53,7 +53,7 @@ import {
   styleSelectionPredicate,
   colorScheme,
   customBackgroundStyleFn,
-} from 'wix-rich-content-common/dist/lib/text-color-style-fn';
+} from '../../src/text-color-style-fn';
 import { testWixVideos } from './mock';
 // import { MyCustomIcon, SizeSmallRightIcon, TOOLBARS } from 'wix-rich-content-editor-common';
 import { TOOLBARS, BUTTONS, DISPLAY_MODE } from 'wix-rich-content-editor-common';
