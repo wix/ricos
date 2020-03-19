@@ -13,6 +13,11 @@
     Click to see more.
   </summary>
 
+
+### :bug: Bug Fix
+- `text-color`
+  - [#805](https://github.com/wix-incubator/rich-content/pull/805) adding a text color/highlight works on mobile
+
 </details>
 <hr/>
 
