@@ -1,4 +1,4 @@
-import { isHexColor } from 'wix-rich-content-common';
+import { isHexColor } from '../Utils/colorUtils';
 
 export const colorScheme = {
   color1: {

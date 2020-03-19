@@ -20,6 +20,7 @@ import { pluginMentions } from 'wix-rich-content-plugin-mentions';
 import { pluginSoundCloud } from 'wix-rich-content-plugin-sound-cloud';
 import { pluginUndoRedo } from 'wix-rich-content-plugin-undo-redo';
 import { pluginVideo } from 'wix-rich-content-plugin-video';
+import { pluginTextColor, pluginTextHighlight } from 'wix-rich-content-plugin-text-color';
 import '../styles.global.scss';
 
 const configs = {
@@ -68,6 +69,8 @@ const plugins = [
   pluginSoundCloud(),
   pluginVideo(),
   pluginUndoRedo(),
+  pluginTextColor(),
+  pluginTextHighlight(),
 ];
 const EditorWrapper = ({ contentState, palette }) => {
   const editorState = createWithContent(convertFromRaw(contentState));
