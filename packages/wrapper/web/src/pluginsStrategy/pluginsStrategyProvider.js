@@ -57,7 +57,7 @@ export default function pluginsStrategyProvider(isEditor, { plugins = [] }) {
       ModalsMap,
       typeMapper,
       decorator = {},
-      inlineStyleMappers,
+      inlineStyleMapper,
     } = curr;
     const pConfig = { [type]: config };
     if (isEditor)
@@ -71,7 +71,7 @@ export default function pluginsStrategyProvider(isEditor, { plugins = [] }) {
       typeMappers: (typeMapper && prev.typeMappers.concat([typeMapper])) || prev.typeMappers,
       decorators: (!isEmpty(decorator) && prev.decorators.concat([decorator])) || prev.decorators,
       inlineStyleMappers:
-        (inlineStyleMappers && prev.inlineStyleMappers.concat([inlineStyleMappers])) ||
+        (inlineStyleMapper && prev.inlineStyleMappers.concat([inlineStyleMapper])) ||
         prev.inlineStyleMappers,
     };
   }, emptyAccumulator);

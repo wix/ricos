@@ -1,5 +1,12 @@
 import { isTextHighlight, isTextColor, getColor } from './text-decorations-utils';
 import { isHexColor } from 'wix-rich-content-common';
+import {
+  customForegroundStyleFn,
+  styleSelectionPredicate,
+  customBackgroundStyleFn,
+  viewerCustomBackgroundStyleFn,
+  viewerCustomForegroundStyleFn,
+} from 'wix-rich-content-common/dist/lib/text-color-style-fn';
 
 export const DEFAULT_PALETTE = Object.freeze([
   '#303030',
@@ -42,7 +49,38 @@ export const DEFAULT_BACKGROUND_STYLE_FN_DRAFT = styles =>
     .toArray()
     .reduce((cssStyle, style) => ({ ...cssStyle, ...DEFAULT_BACKGROUND_STYLE_FN(style) }), {}); // eslint-disable-line new-cap
 
+const colorScheme = DEFAULT_PALETTE.map((color, index) => ({
+  [`color${index + 1}`]: {
+    color,
+    index,
+  },
+}));
+let userColors = [];
 export const DEFAULTS = {
-  configTextColor: {},
-  configTextHighlight: {},
+  configTextColor: {
+    editor: {
+      colorScheme,
+      styleSelectionPredicate,
+      customStyleFn: customForegroundStyleFn,
+      onColorAdded: color => (userColors = [...userColors, color]),
+      getUserColors: () => userColors,
+    },
+    viewer: {
+      styleSelectionPredicate,
+      customStyleFn: viewerCustomForegroundStyleFn,
+    },
+  },
+  configTextHighlight: {
+    editor: {
+      colorScheme,
+      styleSelectionPredicate,
+      customStyleFn: customBackgroundStyleFn,
+      onColorAdded: color => (userColors = [...userColors, color]),
+      getUserColors: () => userColors,
+    },
+    viewer: {
+      styleSelectionPredicate,
+      customStyleFn: viewerCustomBackgroundStyleFn,
+    },
+  },
 };

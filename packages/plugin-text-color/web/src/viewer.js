@@ -11,20 +11,20 @@ export {
 
 export const pluginTextColor = (config = {}) => {
   return {
-    config: { ...DEFAULTS.configTextColor, ...config },
+    config: { ...DEFAULTS.configTextColor.viewer, ...config },
     type: TEXT_COLOR_TYPE,
     decorator: {},
     typeMapper: {},
-    inlineStyleMappers: textColorInlineStyleMapper,
+    inlineStyleMapper: textColorInlineStyleMapper,
   };
 };
 
 export const pluginTextHighlight = (config = {}) => {
   return {
-    config: { ...DEFAULTS.configTextHighlight, ...config },
+    config: { ...DEFAULTS.configTextHighlight.viewer, ...config },
     type: TEXT_HIGHLIGHT_TYPE,
     decorator: {},
     typeMapper: {},
-    inlineStyleMappers: textHighlightInlineStyleMapper,
+    inlineStyleMapper: textHighlightInlineStyleMapper,
   };
 };
