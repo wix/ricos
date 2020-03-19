@@ -2,9 +2,9 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { validate, mergeStyles, pluginGallerySchema } from 'wix-rich-content-common';
 import { isEqual } from 'lodash';
-import { convertItemData } from './helpers/convert-item-data';
+import { convertItemData } from './lib/convert-item-data';
 import { DEFAULTS, isHorizontalLayout, sampleItems } from './constants';
-import resizeMediaUrl from './helpers/resize-media-url';
+import resizeMediaUrl from './lib/resize-media-url';
 import styles from '../statics/styles/viewer.scss';
 import 'pro-gallery/dist/statics/main.min.css';
 import ExpandIcon from './icons/expand.svg';
@@ -126,24 +126,24 @@ class GalleryViewer extends React.Component {
     if (!this.props.isMobile) {
       return { ...styleParams, allowHover: true };
     }
-    return this.hasTitle(items)
-      ? {
-          ...styleParams,
-          isVertical: styleParams.galleryLayout === 1,
-          allowTitle: true,
-          galleryTextAlign: 'center',
-          textsHorizontalPadding: 0,
-          imageInfoType: 'NO_BACKGROUND',
-          hoveringBehaviour: 'APPEARS',
-          textsVerticalPadding: 0,
-          titlePlacement: 'SHOW_BELOW',
-          calculateTextBoxHeightMode: 'AUTOMATIC',
-        }
-      : styleParams;
+    if (this.hasTitle(items))
+      return {
+        ...styleParams,
+        isVertical: styleParams.galleryLayout === 1,
+        allowTitle: true,
+        galleryTextAlign: 'center',
+        textsHorizontalPadding: 0,
+        imageInfoType: 'NO_BACKGROUND',
+        hoveringBehaviour: 'APPEARS',
+        textsVerticalPadding: 0,
+        titlePlacement: 'SHOW_BELOW',
+        calculateTextBoxHeightMode: 'AUTOMATIC',
+      };
+    return styleParams;
   };
 
   renderExpandIcon = itemProps => {
-    return itemProps.linkData.url ? (
+    return itemProps.linkData.url && itemProps.type !== 'video' ? (
       <ExpandIcon
         className={this.styles.expandIcon}
         onClick={e => {

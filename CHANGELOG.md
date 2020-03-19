@@ -13,6 +13,48 @@
     Click to see more.
   </summary>
 
+</details>
+<hr/>
+
+## 7.0.1 (Mar 18, 2020)
+### :house: [Internal]
+- `editor`
+  - [#801](https://github.com/wix-incubator/rich-content/pull/801) `editorStateConversion.js` consume `draft-js` directly to prevent bundle bloat of lib
+
+## 7.0.0 (Mar 17, 2020)
+### :boom: Breaking Change
+- `editor`
+  - [#752](https://github.com/wix-incubator/rich-content/pull/752) Move draft-js to dependency from peerDependency [Migration Detials](https://github.com/wix-incubator/rich-content/wiki/RCE-V.7-Migration-Guide) 
+  
+### :rocket: New Feature
+- `fullscreen`
+  - [#776](https://github.com/wix-incubator/rich-content/pull/776) fullscreen closes on Esc key press
+
+### :bug: Bug Fix
+- `gallery`
+  - [#775](https://github.com/wix-incubator/rich-content/pull/775) adding videos to gallery
+
+## 6.10.2 (Mar 15, 2020)
+### :house: Internal
+- `wrapper`
+  - use cjs version of fullscreen lib, fix onChange call
+
+## 6.10.1 (Mar 12, 2020)
+### :rocket: New Feature
+- `gallery`
+  - [#762](https://github.com/wix-incubator/rich-content/pull/762) bump pro gallery to version 1.8.2
+
+## 6.10.0 (Mar 11, 2020)
+### :boom: Breaking Change
+- `fullscreen`
+  - fullscreen usage need to import styles `import 'wix-rich-content-fullscreen/dist/styles.min.css';`
+### :rocket: New Feature
+- `gallery`
+  - [#625](https://github.com/wix-incubator/rich-content/pull/625) gallery supports adding videos
+- `fullscreen`
+  - [#625](https://github.com/wix-incubator/rich-content/pull/625) supports target prop to render fullscreen at the target element
+- `editor-common`
+  - [#716](https://github.com/wix-incubator/rich-content/pull/716) progress loader
 ### :bug: Bug Fix
 - `hashtag`
   - [#707](https://github.com/wix-incubator/rich-content/pull/707) allow hashtag and link in the same block
@@ -25,8 +67,11 @@
   - [#757](https://github.com/wix-incubator/rich-content/pull/757) prevent underline link inline style to affects on new line
 - `link`
   - [#756](https://github.com/wix-incubator/rich-content/pull/756) selection keeps in place when canceling link panel
-</details>
-<hr/>
+- `gallery`
+  - [#697](https://github.com/wix-incubator/rich-content/pull/697) altText keeping value when changing to next image
+### :house: Internal
+- `fullscreen`
+  - [#625](https://github.com/wix-incubator/rich-content/pull/625) replaced react-images with Pro-Gallery
 
 ## 6.9.6 (Mar 5, 2020)
 ### :bug: Bug Fix
