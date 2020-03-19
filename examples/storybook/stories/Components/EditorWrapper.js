@@ -72,7 +72,6 @@ const plugins = [
   pluginTextColor(),
   pluginTextHighlight(),
 ];
-debugger;
 const EditorWrapper = ({ contentState, palette }) => {
   const editorState = createWithContent(convertFromRaw(contentState));
   return (
