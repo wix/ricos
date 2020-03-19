@@ -6,8 +6,7 @@ import { pluginHashtag } from '../../../plugin-hashtag/web/src/editor';
 import introState from '../../../../e2e/tests/fixtures/intro.json';
 import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import EditorModal from './EditorModal';
-import ViewerModal from './ViewerModal';
+import localeStrategyProvider from './localeStrategy/localeStrategyProvider';
 
 Enzyme.configure({ adapter: new Adapter() });
 const { shallow, mount } = Enzyme;
@@ -59,7 +58,7 @@ describe('Wrapper', () => {
       const element = shallow(wrapper({ editor: true, plugins }).withEditor());
       const instance = element.dive().instance();
       const renderResult = instance.render();
-      const editorProps = renderResult.props.children[1].props;
+      const editorProps = renderResult.props.children.props;
       expect(editorProps).toHaveProperty('config');
       expect(editorProps.config).toHaveProperty('wix-draft-plugin-hashtag');
     });
@@ -67,47 +66,27 @@ describe('Wrapper', () => {
       const element = shallow(wrapper({ editor: true, theme: 'Default' }).withEditor());
       const instance = element.dive().instance();
       const renderResult = instance.render();
-      const editorProps = renderResult.props.children[1].props;
+      const editorProps = renderResult.props.children.props;
       expect(editorProps).toHaveProperty('theme');
       expect(editorProps.theme).toHaveProperty('modalTheme');
     });
-    // it('should render with localeStrategy output', () => {
-    //   const element = shallow(wrapper({ editor: true, locale: 'he' }).withEditor());
-    //   const instance = element.dive().instance();
-    //   const renderResult = instance.render();
-    //   const editorProps = renderResult.props.children[1].props;
-    //   expect(editorProps).toHaveProperty('locale');
-    //   expect(editorProps).toHaveProperty('localeResources');
-    // });
-    it('should render EditorModal if supplied', () => {
-      const element = shallow(wrapper({ editor: true }).withEditor());
-      const instance = element.dive().instance();
+    it('should call updateLocale on componentDidMount', () => {
+      const element = shallow(wrapper({ editor: true, locale: 'en' }).withEditor());
+      const instance = element.instance();
+      const spyUpdate = spyOn(instance, 'updateLocale');
       instance.componentDidMount();
-      instance.setState({ EditorModal });
-      const renderResult = instance.render();
-      const modalSuspenseProps = renderResult.props.children[2].props;
-      expect(modalSuspenseProps).toBeTruthy();
-      expect(modalSuspenseProps.children).toMatchObject(<EditorModal />);
-      const editorModalProps = modalSuspenseProps.children.props;
-      expect(editorModalProps).toHaveProperty('dataHook');
-      expect(editorModalProps.dataHook).toBe('WrapperEditorModal');
+      expect(spyUpdate.calls.count()).toEqual(1);
     });
-    it('should not render EditorModal if asked', () => {
-      const element = shallow(wrapper({ editor: true, modalSupport: false }).withEditor());
-      const instance = element.dive().instance();
-      instance.componentDidMount();
+    it('should render localeStrategy in strategies', async () => {
+      const element = shallow(wrapper({ editor: true, locale: 'he' }).withEditor());
+      const instance = element.instance();
       const renderResult = instance.render();
-      const modalSuspenseProps = renderResult.props.children[2].props;
-      expect(modalSuspenseProps).toBeTruthy();
-      expect(modalSuspenseProps.children).not.toMatchObject(<EditorModal />);
-    });
-    it('should not render fullscreen', () => {
-      const element = shallow(wrapper({ editor: true, modalSupport: false }).withEditor());
-      const instance = element.dive().instance();
-      instance.componentDidMount();
-      const renderResult = instance.render();
-      const fullscreenModalSuspense = renderResult.props.children[3];
-      expect(fullscreenModalSuspense).toBeUndefined();
+      await instance.updateLocale();
+      const engineProps = renderResult.props;
+      expect(engineProps).toHaveProperty('strategies');
+      expect(instance.state.localeStrategy()).toEqual(
+        await localeStrategyProvider({ locale: 'he' })()
+      );
     });
   });
 
@@ -125,7 +104,7 @@ describe('Wrapper', () => {
       const element = shallow(wrapper({ plugins }).withViewer());
       const instance = element.dive().instance();
       const renderResult = instance.render();
-      const viewerProps = renderResult.props.children[1].props;
+      const viewerProps = renderResult.props.children.props;
       expect(viewerProps).toHaveProperty('config');
       expect(viewerProps.config).toHaveProperty('wix-draft-plugin-hashtag');
     });
@@ -133,40 +112,10 @@ describe('Wrapper', () => {
       const element = shallow(wrapper({ theme: 'Default' }).withViewer());
       const instance = element.dive().instance();
       const renderResult = instance.render();
-      const viewerProps = renderResult.props.children[1].props;
+      const viewerProps = renderResult.props.children.props;
       expect(viewerProps).toHaveProperty('theme');
       expect(viewerProps).toHaveProperty('decorators');
       expect(viewerProps.theme).toHaveProperty('modalTheme');
-    });
-    it('should render Fullscreen if supplied', () => {
-      const element = shallow(wrapper().withViewer());
-      const instance = element.dive().instance();
-      instance.componentDidMount();
-      instance.setState({ Fullscreen: ViewerModal });
-      const renderResult = instance.render();
-      const modalSuspenseProps = renderResult.props.children[3].props;
-      expect(modalSuspenseProps).toBeTruthy();
-      expect(modalSuspenseProps.children).toMatchObject(<ViewerModal />);
-      const viewerModalProps = modalSuspenseProps.children.props;
-      expect(viewerModalProps).toHaveProperty('dataHook');
-      expect(viewerModalProps.dataHook).toBe('WrapperFullScreen');
-    });
-    it('should not render Fullscreen if asked', () => {
-      const element = shallow(wrapper({ modalSupport: false }).withViewer());
-      const instance = element.dive().instance();
-      instance.componentDidMount();
-      const renderResult = instance.render();
-      const modalSuspenseProps = renderResult.props.children[3].props;
-      expect(modalSuspenseProps).toBeTruthy();
-      expect(modalSuspenseProps.children).not.toMatchObject(<ViewerModal />);
-    });
-    it('should not render EditorModal', () => {
-      const element = shallow(wrapper().withViewer());
-      const instance = element.dive().instance();
-      instance.componentDidMount();
-      const renderResult = instance.render();
-      const fullscreenModalSuspense = renderResult.props.children[2];
-      expect(fullscreenModalSuspense).toBeUndefined();
     });
   });
 });
