@@ -6,7 +6,6 @@ import { get, includes, merge, debounce } from 'lodash';
 import Measure from 'react-measure';
 import createEditorToolbars from './Toolbars';
 import createPlugins from './createPlugins';
-// eslint-disable-next-line no-unused-vars
 import { createKeyBindingFn, initPluginKeyBindings } from './keyBindings';
 import handleKeyCommand from './handleKeyCommand';
 import handleReturnCommand from './handleReturnCommand';
@@ -386,7 +385,7 @@ class RichContentEditor extends Component {
           getBlockType(editorState)
         )}
         editorKey={editorKey}
-        // keyBindingFn={createKeyBindingFn(this.getCustomCommandHandlers().commands || [])}
+        keyBindingFn={createKeyBindingFn(this.getCustomCommandHandlers().commands || [])}
         customStyleFn={this.customStyleFn}
         helpers={helpers}
         tabIndex={tabIndex}
