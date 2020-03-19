@@ -4,6 +4,7 @@ import themeStrategyProvider from './themeStrategy/themeStrategyProvider';
 import pluginsStrategyProvider from './pluginsStrategy/pluginsStrategyProvider';
 import localeStrategyProvider from './localeStrategy/localeStrategyProvider';
 import PropTypes from 'prop-types';
+import './styles.global.css';
 
 export default class RichContentWrapper extends React.Component {
   constructor(props) {
