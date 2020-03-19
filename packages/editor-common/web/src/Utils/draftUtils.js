@@ -485,6 +485,13 @@ export function getBlockDepth(editorState, blockKey) {
   return block.depth;
 }
 
+export function getBlockType(editorState) {
+  const contentState = editorState.getCurrentContent();
+  const blockKey = editorState.getSelection().getAnchorKey();
+  const block = contentState.getBlockForKey(blockKey);
+  return block.type;
+}
+
 export function setSelection(editorState, selection) {
   return EditorState.acceptSelection(editorState, selection);
 }
