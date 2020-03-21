@@ -86,6 +86,14 @@ export default class ThemeGenerator {
             fill: actionColor,
           },
         },
+        footerToolbar: {
+          background: bgColor,
+        },
+        footerToolbarButton_icon: {
+          ':hover': {
+            color: actionColor,
+          },
+        },
         //block focus
         hasFocus: blockActionColorSettings,
         pluginContainer: { ':hover': blockActionColorSettings },

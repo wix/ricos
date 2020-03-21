@@ -6,7 +6,7 @@ import { ModalsMap } from './modals';
 
 export const pluginTextColor = (config = {}) => {
   return {
-    config: { ...DEFAULTS.configTextColor, ...config },
+    config: { ...DEFAULTS.configTextColor.editor, ...config },
     type: TEXT_COLOR_TYPE,
     createPlugin: createTextColorPlugin,
     ModalsMap,
@@ -15,7 +15,7 @@ export const pluginTextColor = (config = {}) => {
 
 export const pluginTextHighlight = (config = {}) => {
   return {
-    config: { ...DEFAULTS.configTextHighlight, ...config },
+    config: { ...DEFAULTS.configTextHighlight.editor, ...config },
     type: TEXT_HIGHLIGHT_TYPE,
     createPlugin: createTextHighlightPlugin,
     ModalsMap: {},
