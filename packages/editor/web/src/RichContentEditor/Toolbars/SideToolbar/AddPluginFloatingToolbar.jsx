@@ -29,8 +29,12 @@ export default class AddPluginFloatingToolbar extends Component {
     window.removeEventListener('click', this.onWindowClick);
   }
 
+  shouldKeepOpen = keepOpen => {
+    this.setState({ keepOpen });
+  };
+
   onWindowClick = () => {
-    if (this.state.isActive) {
+    if (this.state.isActive && !this.state.keepOpen) {
       this.hidePopup();
     }
   };
@@ -176,7 +180,7 @@ export default class AddPluginFloatingToolbar extends Component {
               getEditorState={getEditorState}
               setEditorState={setEditorState}
               theme={theme}
-              hidePopup={this.hidePopup}
+              shouldKeepOpen={this.shouldKeepOpen}
               toolbarName={TOOLBARS.SIDE}
             />
           ))}

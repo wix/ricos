@@ -37,8 +37,10 @@ export default class LineSpacingButton extends Component {
     const spacing = LineSpacingButton.getBlockSpacing(this.oldEditorState);
     this.oldSpacing = spacing;
     const { bottom, left } = this.buttonRef.getBoundingClientRect();
+    const isAboveButton = bottom - 110 > 0;
+    const top = isAboveButton ? bottom - 310 : bottom;
     this.props.setKeepOpen(true);
-    this.setState({ isPanelOpen: true, panelLeft: left, panelTop: bottom, spacing });
+    this.setState({ isPanelOpen: true, panelLeft: left, panelTop: top, spacing });
   };
 
   closePanel = () => {

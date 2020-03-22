@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import ClickOutside from 'react-click-outside';
 import Scrollbars from 'react-custom-scrollbars';
 import { mergeStyles } from 'wix-rich-content-common';
 import addEmoji from '../modifiers/addEmoji';
@@ -25,6 +26,10 @@ export default class EmojiPreviewModal extends Component {
     this.setState({ activeGroup: group });
     this.setState({ emojis: getGroupEmojis(group.category) });
     this.scrollbarRef.scrollToTop();
+  };
+
+  onClickOutside = () => {
+    this.props.onClose();
   };
 
   renderNavIcons = activeGroup => {
@@ -71,32 +76,34 @@ export default class EmojiPreviewModal extends Component {
   render() {
     const { activeGroup } = this.state;
     return (
-      <div className={this.styles.emojiPreviewModal_container}>
-        <div className={this.styles.emojiPreviewModal_headerTitle}>
-          <div>{activeGroup.title}</div>
-          <div className={this.styles.emojiPreviewModal_JoyPixelsIcon}>
-            <JoyPixelsIcon />
+      <ClickOutside onClickOutside={this.onClickOutside}>
+        <div className={this.styles.emojiPreviewModal_container}>
+          <div className={this.styles.emojiPreviewModal_headerTitle}>
+            <div>{activeGroup.title}</div>
+            <div className={this.styles.emojiPreviewModal_JoyPixelsIcon}>
+              <JoyPixelsIcon />
+            </div>
+          </div>
+          <div className={this.styles.emojiPreviewModal_emojis_groups_container}>
+            <Scrollbars
+              ref={ref => {
+                this.scrollbarRef = ref;
+              }}
+              style={{
+                height: '192px',
+              }}
+              renderThumbVertical={() => (
+                <div className={this.styles.emojiPreviewModal_scrollbar_thumb} />
+              )}
+            >
+              {this.renderEmojis()}
+            </Scrollbars>
+          </div>
+          <div className={this.styles.emojiPreviewModal_emoji_icons_container}>
+            {this.renderNavIcons(activeGroup)}
           </div>
         </div>
-        <div className={this.styles.emojiPreviewModal_emojis_groups_container}>
-          <Scrollbars
-            ref={ref => {
-              this.scrollbarRef = ref;
-            }}
-            style={{
-              height: '192px',
-            }}
-            renderThumbVertical={() => (
-              <div className={this.styles.emojiPreviewModal_scrollbar_thumb} />
-            )}
-          >
-            {this.renderEmojis()}
-          </Scrollbars>
-        </div>
-        <div className={this.styles.emojiPreviewModal_emoji_icons_container}>
-          {this.renderNavIcons(activeGroup)}
-        </div>
-      </div>
+      </ClickOutside>
     );
   }
 }
@@ -107,6 +114,7 @@ EmojiPreviewModal.propTypes = {
   t: PropTypes.func,
   pubsub: PropTypes.object,
   onConfirm: PropTypes.func,
+  onClose: PropTypes.func.isRequired,
   onCloseRequested: PropTypes.func,
   helpers: PropTypes.object,
   isMobile: PropTypes.bool,

@@ -19,6 +19,7 @@ export default ({ helpers, t, settings, isMobile }) => {
     : null;
   return [
     {
+      shouldKeepSideToolbar: true,
       type: 'modal',
       name: 'GIF',
       tooltipText: t('GiphyPlugin_InsertButton_Tooltip'),
