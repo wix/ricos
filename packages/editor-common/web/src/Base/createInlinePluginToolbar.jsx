@@ -49,7 +49,7 @@ export default function createInlinePluginToolbar({
     }
 
     mySetState = stateToSet => {
-      this.setState(stateToSet);
+      this.setState(stateToSet, this.forceUpdate());
     };
 
     componentDidMount() {

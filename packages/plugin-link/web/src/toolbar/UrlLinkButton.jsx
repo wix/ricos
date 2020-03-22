@@ -18,14 +18,14 @@ export default class UrlLinkButton extends Component {
   preventDefault = event => event.preventDefault();
 
   render() {
-    const { getEditorState, anchorTarget, relValue } = this.props;
+    const { getEditorState } = this.props;
     const linkData = getLinkDataInSelection(getEditorState());
-    const { url = '' } = linkData || {};
+    const { url = '', target, rel } = linkData || {};
     const href = normalizeUrl(url);
     const anchorProps = {
       href,
-      target: anchorTarget || '_self',
-      rel: relValue || 'noopener',
+      target: target || '_self',
+      rel: rel || 'noopener',
       className: this.state.styles.toolbarUrl,
       onMouseDown: this.preventDefault,
     };
