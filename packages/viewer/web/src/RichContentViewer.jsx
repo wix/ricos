@@ -76,7 +76,6 @@ class RichContentViewer extends Component {
       }
       const { styles } = this;
       const { textDirection, typeMappers, decorators, inlineStyleMappers, locale } = this.props;
-      // const textDirection = getLangDir(locale);
       const wrapperClassName = classNames(styles.wrapper, {
         [styles.desktop]: !this.props.platform || this.props.platform === 'desktop',
       });
@@ -93,8 +92,7 @@ class RichContentViewer extends Component {
         typeMappers,
         contextualData,
         decorators,
-        inlineStyleMappers,
-        locale
+        inlineStyleMappers
       );
 
       return (

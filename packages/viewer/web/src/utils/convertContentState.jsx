@@ -1,6 +1,6 @@
 import React from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
-import { BLOCK_TYPES, getLangDir } from 'wix-rich-content-common';
+import { BLOCK_TYPES } from 'wix-rich-content-common';
 import redraft from 'redraft';
 import classNames from 'classnames';
 import { endsWith } from 'lodash';
@@ -95,13 +95,7 @@ const getBlocks = (mergedStyles, textDirection, { config }) => {
 };
 
 const getEntities = (typeMap, pluginProps, styles) => {
-  // debugger;
   const emojiViewerFn = emojiUnicode => {
-    // return (
-    //   <span style={{ fontFamily: 'cursive' }} dir={direction}>
-    //     {emojiUnicode}
-    //   </span>
-    // );
     return <span style={{ fontFamily: 'cursive' }}>{emojiUnicode}</span>;
   };
   return {
@@ -163,20 +157,17 @@ const convertToReact = (
   entityProps,
   decorators,
   inlineStyleMappers,
-  locale,
   options = {}
 ) => {
   if (isEmptyContentState(contentState)) {
     return null;
   }
-  // debugger;
-  const direction = getLangDir(locale);
   return redraft(
     normalizeContentState(contentState),
     {
       inline: getInline(inlineStyleMappers, mergedStyles),
       blocks: getBlocks(mergedStyles, textDirection, entityProps),
-      entities: getEntities(combineMappers(typeMap), entityProps, mergedStyles, direction),
+      entities: getEntities(combineMappers(typeMap), entityProps, mergedStyles),
       decorators,
     },
     { ...redraftOptions, ...options }
@@ -190,13 +181,11 @@ const convertToHTML = (
   typeMap,
   entityProps,
   decorators,
-  locale,
   options = {}
 ) => {
   if (isEmptyContentState(contentState)) {
     return null;
   }
-  // debugger;
 
   const reactOutput = convertToReact(
     contentState,
@@ -205,7 +194,6 @@ const convertToHTML = (
     typeMap,
     entityProps,
     decorators,
-    locale,
     options
   );
 

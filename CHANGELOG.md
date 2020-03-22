@@ -13,6 +13,10 @@
     Click to see more.
   </summary>
 
+### :house: [Internal]
+- `common`
+  - [#814](https://github.com/wix-incubator/rich-content/pull/814) fix: adding support for H4, H5, H6 
+
 </details>
 <hr/>
 
