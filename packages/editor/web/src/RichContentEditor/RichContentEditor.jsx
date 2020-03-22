@@ -10,7 +10,6 @@ import { createKeyBindingFn, initPluginKeyBindings } from './keyBindings';
 import handleKeyCommand from './handleKeyCommand';
 import handleReturnCommand from './handleReturnCommand';
 import blockStyleFn from './blockStyleFn';
-// import getBlockRenderMap from './getBlockRenderMap';
 import { combineStyleFns } from './combineStyleFns';
 import { getStaticTextToolbarId } from './Toolbars/toolbar-id';
 import {
@@ -27,7 +26,6 @@ import {
   COMMANDS,
   MODIFIERS,
 } from 'wix-rich-content-editor-common';
-import 'wix-rich-content-editor-common/statics/styles/draft.global.scss';
 import {
   AccessibilityListener,
   normalizeInitialState,
@@ -372,7 +370,6 @@ class RichContentEditor extends Component {
         handlePastedText={this.handlePastedText}
         plugins={this.plugins}
         blockStyleFn={blockStyleFn(theme, this.styleToClass)}
-        // blockRenderMap={getBlockRenderMap(theme, editorState)}
         handleKeyCommand={handleKeyCommand(
           this.updateEditorState,
           this.getCustomCommandHandlers().commandHanders,
