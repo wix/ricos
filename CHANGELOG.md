@@ -16,8 +16,6 @@
 ### :bug: Bug Fix
 - `text-color`
   - [#805](https://github.com/wix-incubator/rich-content/pull/805) adding a text color/highlight works on mobile
-- `wrapper`
-  - [#817](https://github.com/wix-incubator/rich-content/pull/805) removed override of props
 ### :house: Internal
 - `general`
   - [#720](https://github.com/wix-incubator/rich-content/pull/720) mobile example app styles issues
@@ -25,6 +23,9 @@
   - [#790](https://github.com/wix-incubator/rich-content/pull/790) convertToRaw - block.data converted correctly, Fixes line spacing
 - `common`
   - [#814](https://github.com/wix-incubator/rich-content/pull/814) fix: adding support for H4, H5, H6
+- `wrapper`
+  - [#817](https://github.com/wix-incubator/rich-content/pull/817) bugfix: removed override of props
+  - [#810](https://github.com/wix-incubator/rich-content/pull/810) added palettes & fixed toolbarButton color
 
 </details>
 <hr/>
@@ -36,7 +37,6 @@
   - [#806](https://github.com/wix-incubator/rich-content/pull/806) locale dynamic import
   - [#807](https://github.com/wix-incubator/rich-content/pull/807) include common styles in styles.min.css
   - [#709](https://github.com/wix-incubator/rich-content/pull/709) support inlineStyleMappers
-  - [#810](https://github.com/wix-incubator/rich-content/pull/810) added palettes & fixed toolbarButton color
 
 - `editor-common`
   - `convertFromHTML` exposed for Forum usage
