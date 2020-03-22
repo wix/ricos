@@ -26,7 +26,7 @@ import {
   COMMANDS,
   MODIFIERS,
 } from 'wix-rich-content-editor-common';
-
+import 'wix-rich-content-editor-common/statics/styles/draft.global.scss';
 import {
   AccessibilityListener,
   normalizeInitialState,

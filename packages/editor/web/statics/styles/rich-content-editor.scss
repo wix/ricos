@@ -66,7 +66,7 @@
 }
 
 .elementSpacing {
-  margin: 0;
+  // margin: 0;
 
   @include phone {
     margin: 0;
@@ -128,18 +128,18 @@
   line-height: $headerThreeHeight;
 }
 
-.indent {
-  composes: elementSpacing;
-  text-indent: 5%;
-}
+// .indent {
+//   composes: elementSpacing;
+//   text-indent: 5%;
+// }
 
-.orderedList {
-  composes: elementSpacing;
-}
+// .orderedList {
+//   composes: elementSpacing;
+// }
 
-.unorderedList {
-  composes: elementSpacing;
-}
+// .unorderedList {
+//   composes: elementSpacing;
+// }
 
 .code,
 .codeBlock {
