@@ -12,13 +12,32 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
-
-### :house: [Internal]
+  
+### :bug: Bug Fix
+- `text-color`
+  - [#805](https://github.com/wix-incubator/rich-content/pull/805) adding a text color/highlight works on mobile
+### :house: Internal
+- `general`
+  - [#720](https://github.com/wix-incubator/rich-content/pull/720) mobile example app styles issues
+- `editor`
+  - [#790](https://github.com/wix-incubator/rich-content/pull/790) convertToRaw - block.data converted correctly, Fixes line spacing
 - `common`
   - [#814](https://github.com/wix-incubator/rich-content/pull/814) fix: adding support for H4, H5, H6 
 
 </details>
 <hr/>
+
+## 7.0.2 (Mar 20, 2020)
+### :house: Internal
+- `wrapper`
+  - [#804](https://github.com/wix-incubator/rich-content/pull/804) engine-wrapper refactored
+  - [#806](https://github.com/wix-incubator/rich-content/pull/806) locale dynamic import
+  - [#807](https://github.com/wix-incubator/rich-content/pull/807) include common styles in styles.min.css
+  - [#709](https://github.com/wix-incubator/rich-content/pull/709) support inlineStyleMappers
+  - [#810](https://github.com/wix-incubator/rich-content/pull/810) added palettes & fixed toolbarButton color
+
+- `editor-common`
+  - `convertFromHTML` exposed for Forum usage
 
 ## 7.0.1 (Mar 18, 2020)
 ### :house: [Internal]
@@ -28,8 +47,8 @@
 ## 7.0.0 (Mar 17, 2020)
 ### :boom: Breaking Change
 - `editor`
-  - [#752](https://github.com/wix-incubator/rich-content/pull/752) Move draft-js to dependency from peerDependency [Migration Detials](https://github.com/wix-incubator/rich-content/wiki/RCE-V.7-Migration-Guide) 
-  
+  - [#752](https://github.com/wix-incubator/rich-content/pull/752) Move draft-js to dependency from peerDependency [Migration Detials](https://github.com/wix-incubator/rich-content/wiki/RCE-V.7-Migration-Guide)
+
 ### :rocket: New Feature
 - `fullscreen`
   - [#776](https://github.com/wix-incubator/rich-content/pull/776) fullscreen closes on Esc key press
