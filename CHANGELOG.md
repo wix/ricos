@@ -12,15 +12,60 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
-  
+
+### :bug: Bug Fix
+- `text-color`
+  - [#805](https://github.com/wix-incubator/rich-content/pull/805) adding a text color/highlight works on mobile
 ### :house: Internal
+- `general`
+  - [#720](https://github.com/wix-incubator/rich-content/pull/720) mobile example app styles issues
+- `editor`
+  - [#790](https://github.com/wix-incubator/rich-content/pull/790) convertToRaw - block.data converted correctly, Fixes line spacing
 - `e2e`
   - [#759](https://github.com/wix-incubator/rich-content/pull/759) adding tests for emoji plugin (in rtl and plugins tests)
-- `gallery`
-  - [#762](https://github.com/wix-incubator/rich-content/pull/762) bump pro gallery to version 1.8.2
 
 </details>
 <hr/>
+
+## 7.0.2 (Mar 20, 2020)
+### :house: Internal
+- `wrapper`
+  - [#804](https://github.com/wix-incubator/rich-content/pull/804) engine-wrapper refactored
+  - [#806](https://github.com/wix-incubator/rich-content/pull/806) locale dynamic import
+  - [#807](https://github.com/wix-incubator/rich-content/pull/807) include common styles in styles.min.css
+  - [#709](https://github.com/wix-incubator/rich-content/pull/709) support inlineStyleMappers
+  - [#810](https://github.com/wix-incubator/rich-content/pull/810) added palettes & fixed toolbarButton color
+
+- `editor-common`
+  - `convertFromHTML` exposed for Forum usage
+
+## 7.0.1 (Mar 18, 2020)
+### :house: [Internal]
+- `editor`
+  - [#801](https://github.com/wix-incubator/rich-content/pull/801) `editorStateConversion.js` consume `draft-js` directly to prevent bundle bloat of lib
+
+## 7.0.0 (Mar 17, 2020)
+### :boom: Breaking Change
+- `editor`
+  - [#752](https://github.com/wix-incubator/rich-content/pull/752) Move draft-js to dependency from peerDependency [Migration Detials](https://github.com/wix-incubator/rich-content/wiki/RCE-V.7-Migration-Guide)
+
+### :rocket: New Feature
+- `fullscreen`
+  - [#776](https://github.com/wix-incubator/rich-content/pull/776) fullscreen closes on Esc key press
+
+### :bug: Bug Fix
+- `gallery`
+  - [#775](https://github.com/wix-incubator/rich-content/pull/775) adding videos to gallery
+
+## 6.10.2 (Mar 15, 2020)
+### :house: Internal
+- `wrapper`
+  - use cjs version of fullscreen lib, fix onChange call
+
+## 6.10.1 (Mar 12, 2020)
+### :rocket: New Feature
+- `gallery`
+  - [#762](https://github.com/wix-incubator/rich-content/pull/762) bump pro gallery to version 1.8.2
 
 ## 6.10.0 (Mar 11, 2020)
 ### :boom: Breaking Change

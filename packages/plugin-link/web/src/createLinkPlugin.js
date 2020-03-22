@@ -7,6 +7,7 @@ import {
   isValidUrl,
   // getUrlMatches,
 } from 'wix-rich-content-common';
+import React from 'react';
 import { LINK_TYPE } from './types';
 import { Component } from './LinkComponent';
 import { linkEntityStrategy } from './strategy';
@@ -18,7 +19,9 @@ const createLinkPlugin = (config = {}) => {
   settings.minLinkifyLength = settings.minLinkifyLength || 6;
   const toolbar = createLinkToolbar(config);
 
-  const decorators = [{ strategy: linkEntityStrategy, component: Component }];
+  const decorators = [
+    { strategy: linkEntityStrategy, component: props => <Component {...props} theme={theme} /> },
+  ];
   let linkifyData;
 
   const handleReturn = (event, editorState) => {

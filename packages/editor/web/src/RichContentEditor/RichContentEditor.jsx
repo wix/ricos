@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { EditorState, convertFromRaw, Modifier } from 'draft-js';
 import Editor from 'draft-js-plugins-editor';
 import { get, includes, merge, debounce } from 'lodash';
 import Measure from 'react-measure';
@@ -15,12 +14,15 @@ import getBlockRenderMap from './getBlockRenderMap';
 import { combineStyleFns } from './combineStyleFns';
 import { getStaticTextToolbarId } from './Toolbars/toolbar-id';
 import {
+  EditorState,
+  convertFromRaw,
   TooltipHost,
   TOOLBARS,
   getBlockInfo,
   getFocusedBlockKey,
   calculateDiff,
   getPostContentSummary,
+  Modifier,
 } from 'wix-rich-content-editor-common';
 
 import {
@@ -210,7 +212,7 @@ class RichContentEditor extends Component {
       );
     }
     this.setEditorState(editorState);
-    this.props.onChange && this.props.onChange(editorState);
+    this.props.onChange?.(editorState);
   };
 
   handlePastedText = (text, html, editorState) => {
@@ -277,9 +279,15 @@ class RichContentEditor extends Component {
 
   getInPluginEditingMode = () => this.inPluginEditingMode;
 
-  updateBounds = editorBounds => {
-    this.setState({ editorBounds });
-  };
+  componentWillUnmount() {
+    this.updateBounds = () => '';
+  }
+
+  componentWillMount() {
+    this.updateBounds = editorBounds => {
+      this.setState({ editorBounds });
+    };
+  }
 
   renderToolbars = () => {
     const toolbarsToIgnore = [

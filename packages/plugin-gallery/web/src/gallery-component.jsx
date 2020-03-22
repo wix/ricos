@@ -153,7 +153,7 @@ class GalleryComponent extends PureComponent {
   };
 
   videoLoaded = (event, file, itemPos) => {
-    const { helpers } = this.context;
+    const { helpers } = this.props;
     const hasFileChangeHelper = helpers && helpers.onVideoSelected;
 
     if (hasFileChangeHelper) {

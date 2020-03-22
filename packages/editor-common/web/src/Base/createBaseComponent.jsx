@@ -34,6 +34,7 @@ const createBaseComponent = ({
   getEditorBounds,
   onOverlayClick,
   disableRightClick,
+  onComponentMount,
   locale,
   shouldRenderOptimizedImages,
   siteDomain,
@@ -89,6 +90,9 @@ const createBaseComponent = ({
         { key: 'htmlPluginMaxHeight', callback: this.onHtmlPluginMaxHeightChange },
         { key: 'componentLink', callback: this.onComponentLinkChange },
       ].map(({ key, callback }) => pubsub.subscribeOnBlock({ key, callback, blockKey }));
+      const { componentData } = this.state;
+      const e = { preventDefault: () => {} };
+      onComponentMount && onComponentMount({ e, pubsub, componentData });
     }
 
     componentDidUpdate() {

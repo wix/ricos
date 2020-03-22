@@ -67,6 +67,11 @@ export default class ThemeGenerator {
         {}
       );
 
+      const blockActionColorSettings = {
+        cursor: 'default',
+        boxShadow: '0 0 0 3px ' + actionColor,
+      };
+
       return {
         editor: {
           background: bgColor,
@@ -81,6 +86,18 @@ export default class ThemeGenerator {
             fill: actionColor,
           },
         },
+        footerToolbar: {
+          background: bgColor,
+        },
+        footerToolbarButton_icon: {
+          color: textColor,
+          ':hover': {
+            color: actionColor,
+          },
+        },
+        //block focus
+        hasFocus: blockActionColorSettings,
+        pluginContainer: { ':hover': blockActionColorSettings },
         linkPreview: {
           borderColor: textColor,
           backgroundColor: bgColor,

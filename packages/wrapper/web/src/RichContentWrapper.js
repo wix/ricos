@@ -1,29 +1,64 @@
 import React from 'react';
-import EngineWrapper from './lib/EngineWrapper';
+import EngineWrapper from './EngineWrapper';
 import themeStrategyProvider from './themeStrategy/themeStrategyProvider';
 import pluginsStrategyProvider from './pluginsStrategy/pluginsStrategyProvider';
 import localeStrategyProvider from './localeStrategy/localeStrategyProvider';
 import PropTypes from 'prop-types';
+import './styles.global.css';
 
-export default function RichContentWrapper({
-  strategies = [],
-  theme,
-  locale,
-  palette,
-  plugins = [],
-  children,
-  editor = false,
-  ...rest
-}) {
-  const themeGenerators = plugins.filter(plug => !!plug.theme).map(plug => plug.theme);
-  strategies.push(themeStrategyProvider(editor, { theme, palette, themeGenerators }));
-  strategies.push(pluginsStrategyProvider(editor, { plugins }));
-  strategies.push(localeStrategyProvider({ locale }));
-  return (
-    <EngineWrapper strategies={strategies} {...rest} editor={editor}>
-      {children}
-    </EngineWrapper>
-  );
+export default class RichContentWrapper extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      localeStrategy: () => ({}),
+    };
+  }
+
+  updateLocale = async () => {
+    const { locale, children } = this.props;
+    await localeStrategyProvider({ locale })(children.props).then(localeData => {
+      this.setState({ localeStrategy: () => localeData });
+    });
+  };
+
+  componentDidMount() {
+    this.updateLocale();
+  }
+
+  componentWillReceiveProps(newProps) {
+    if (newProps.locale !== this.props.locale) this.updateLocale();
+  }
+
+  render() {
+    const {
+      strategies = [],
+      theme,
+      palette,
+      plugins = [],
+      children,
+      editor = false,
+      ...rest
+    } = this.props;
+    const { localeStrategy } = this.state;
+    const themeGenerators = plugins.filter(plugin => !!plugin.theme).map(plugin => plugin.theme);
+    const mergedStrategies = [
+      themeStrategyProvider(editor, { theme, palette, themeGenerators }),
+      pluginsStrategyProvider(editor, { plugins }),
+      localeStrategy,
+      ...strategies,
+    ];
+
+    return (
+      <EngineWrapper
+        strategies={mergedStrategies}
+        {...rest}
+        editor={editor}
+        key={editor ? 'editor' : 'viewer'}
+      >
+        {children}
+      </EngineWrapper>
+    );
+  }
 }
 RichContentWrapper.propTypes = {
   children: PropTypes.any,

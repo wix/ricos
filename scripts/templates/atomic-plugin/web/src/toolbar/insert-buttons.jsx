@@ -1,4 +1,4 @@
-import { DEFAULTS } from '../yourPluginName-component';
+import { DEFAULTS } from '../yourDpluginDname-component';
 import { TOOLBARS } from 'wix-rich-content-editor-common';
 import { InsertPluginIcon } from '../icons';
 

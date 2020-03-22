@@ -1,20 +1,29 @@
-import { RichUtils, Modifier, EditorState, KeyBindingUtil } from 'draft-js';
-import { getAnchorBlockData } from 'wix-rich-content-editor-common';
+import {
+  getAnchorBlockData,
+  RichUtils,
+  Modifier,
+  EditorState,
+  KeyBindingUtil,
+} from 'wix-rich-content-editor-common';
+
+const HANDLED = 'handled';
+const NOT_HANDLED = 'not-handled';
+const SPLIT_BLOCK = 'split-block';
 
 export default updateEditorState => (command, editorState) => {
   if (KeyBindingUtil.isSoftNewlineEvent(command)) {
     const newState = RichUtils.insertSoftNewline(editorState);
     updateEditorState(newState);
-    return 'handled';
+    return HANDLED;
   }
 
   const { dynamicStyles } = getAnchorBlockData(editorState);
   if (dynamicStyles) {
     const newState = splitState(editorState, dynamicStyles);
     updateEditorState(newState);
-    return 'handled';
+    return HANDLED;
   }
-  return 'not-handled';
+  return NOT_HANDLED;
 };
 
 const splitState = (editorState, styles) => {
@@ -27,5 +36,5 @@ const splitState = (editorState, styles) => {
     splitContentState.getSelectionAfter(),
     { dynamicStyles: styles }
   );
-  return EditorState.push(editorState, contentStateWithStyles, 'split-block');
+  return EditorState.push(editorState, contentStateWithStyles, SPLIT_BLOCK);
 };

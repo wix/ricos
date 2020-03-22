@@ -56,8 +56,8 @@ export default class Viewer extends PureComponent {
 
     const viewerProps = {
       locale,
-      anchorTarget,
       relValue,
+      anchorTarget,
       isMobile,
       theme,
       initialState,
