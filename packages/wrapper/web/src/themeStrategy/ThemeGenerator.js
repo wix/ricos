@@ -69,7 +69,7 @@ export default class ThemeGenerator {
 
       const blockActionColorSettings = {
         cursor: 'default',
-        boxShadow: '0 0 0 3px ' + actionColor,
+        boxShadow: `0 0 0 3px ${actionColor} !important`,
       };
 
       return {
@@ -78,26 +78,27 @@ export default class ThemeGenerator {
           color: textColor,
         },
         quote: {
-          borderLeftColor: actionColor,
-          borderRightColor: actionColor,
+          'border-left-color': actionColor,
+          'border-right-color': actionColor,
         },
         sideToolbar_floatingIcon: {
-          ':hover': {
+          '&:hover': {
             fill: actionColor,
           },
         },
         footerToolbar: {
-          background: bgColor,
+          background: `${bgColor} !important`,
         },
         footerToolbarButton_icon: {
-          color: textColor,
-          ':hover': {
-            color: actionColor,
+          color: `${textColor} !important`,
+          '&:hover&:not([disabled])': {
+            color: `${actionColor} !important`,
           },
         },
+
         //block focus
         hasFocus: blockActionColorSettings,
-        pluginContainer: { ':hover': blockActionColorSettings },
+        pluginContainer: { '&:hover': blockActionColorSettings },
         linkPreview: {
           borderColor: textColor,
           backgroundColor: bgColor,
