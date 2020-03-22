@@ -49,7 +49,12 @@ export default class RichContentWrapper extends React.Component {
     ];
 
     return (
-      <EngineWrapper strategies={mergedStrategies} {...rest} editor={editor}>
+      <EngineWrapper
+        strategies={mergedStrategies}
+        {...rest}
+        editor={editor}
+        key={editor ? 'editor' : 'viewer'}
+      >
         {children}
       </EngineWrapper>
     );
