@@ -110,11 +110,57 @@
       "data": {}
     },
     {
+      "key": "bhslk",
+      "text": "Here's a text with a background",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [
+        {
+          "offset": 0,
+          "length": 31,
+          "style": "{\"BG\":\"color4\"}"
+        }
+      ],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "ckj27",
+      "text": "Heres a text with color",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [
+        {
+          "offset": 0,
+          "length": 23,
+          "style": "{\"FG\":\"#830063\"}"
+        },
+        {
+          "offset": 0,
+          "length": 23,
+          "style": "BOLD"
+        }
+      ],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
       "key": "6na39",
       "text": " ",
       "type": "atomic",
       "depth": 0,
-      "inlineStyleRanges": [],
+      "inlineStyleRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "style": "{\"FG\":\"#830063\"}"
+        },
+        {
+          "offset": 0,
+          "length": 1,
+          "style": "BOLD"
+        }
+      ],
       "entityRanges": [
         {
           "offset": 0,
@@ -366,5 +412,5 @@
       }
     }
   },
-  "VERSION": "6.8.6"
+  "VERSION": "7.0.2"
 }
