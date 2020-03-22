@@ -97,10 +97,9 @@ Cypress.Commands.add('matchSnapshots', options => {
 });
 
 // Editor commands
-const getEditor = () => cy.get('[contenteditable="true"]');
 
 Cypress.Commands.add('enterText', text => {
-  getEditor().type(text);
+  cy.getEditor().type(text);
 });
 
 Cypress.Commands.add('enterParagraphs', paragraphs => {
@@ -112,14 +111,18 @@ Cypress.Commands.add('newLine', () => {
 });
 
 Cypress.Commands.add('blurEditor', () => {
-  getEditor()
+  cy.getEditor()
     .blur()
     .get('[data-hook=inlineToolbar]')
     .should('not.visible');
 });
 
+Cypress.Commands.add('getEditor', () => {
+  cy.get('[contenteditable="true"]');
+});
+
 Cypress.Commands.add('focusEditor', () => {
-  getEditor().focus();
+  cy.getEditor().focus();
 });
 
 Cypress.on('window:before:load', win => {
@@ -394,7 +397,7 @@ Cypress.Commands.add('addVideoFromURL', () => {
 
 Cypress.Commands.add('addHtml', () => {
   cy.get(`[data-hook*=${HTML_PLUGIN.STATIC_TOOLBAR_BUTTON}][tabindex!=-1]`).click();
-  cy.get(`[data-hook*=${PLUGIN_TOOLBAR_BUTTONS.EDIT}]`).click();
+  cy.get(`[data-hook*=${PLUGIN_TOOLBAR_BUTTONS.EDIT}]`);
   cy.get(`[data-hook*=${HTML_PLUGIN.INPUT}]`).type(
     // eslint-disable-next-line max-len
     '<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">The updates, insights and stories of the engineering challenges we encounter, and our way of solving them. Subscribe to our fresh, monthly newsletter and get these goodies right to your e-mail:<a href="https://t.co/0ziRSJJAxK">https://t.co/0ziRSJJAxK</a> <a href="https://t.co/nTHlsG5z2a">pic.twitter.com/nTHlsG5z2a</a></p>&mdash; Wix Engineering (@WixEng) <a href="https://twitter.com/WixEng/status/1076810144774868992?ref_src=twsrc%5Etfw">December 23, 2018</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>',

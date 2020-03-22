@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { RichContentViewer } from 'wix-rich-content-viewer';
 import { RichContentWrapper } from 'wix-rich-content-wrapper';
-
+import { RichContentViewer } from 'wix-rich-content-viewer';
 import { pluginButton } from 'wix-rich-content-plugin-button/dist/module.viewer';
 import { pluginCodeBlock } from 'wix-rich-content-plugin-code-block/dist/module.viewer';
 import { pluginDivider } from 'wix-rich-content-plugin-divider/dist/module.viewer';
@@ -19,8 +18,11 @@ import { pluginLink } from 'wix-rich-content-plugin-link/dist/module.viewer';
 import { pluginMap } from 'wix-rich-content-plugin-map/dist/module.viewer';
 import { pluginMentions } from 'wix-rich-content-plugin-mentions/dist/module.viewer';
 import { pluginSoundCloud } from 'wix-rich-content-plugin-sound-cloud/dist/module.viewer';
-import { pluginUndoRedo } from 'wix-rich-content-plugin-undo-redo/dist/module.viewer';
 import { pluginVideo } from 'wix-rich-content-plugin-video/dist/module.viewer';
+import {
+  pluginTextColor,
+  pluginTextHighlight,
+} from 'wix-rich-content-plugin-text-color/dist/module.viewer';
 
 const configs = {
   fileUpload: {
@@ -67,12 +69,13 @@ const plugins = [
   pluginMap({ googleMapApiKey: process.env.GOOGLE_MAPS_API_KEY }),
   pluginMentions(),
   pluginSoundCloud(),
-  pluginUndoRedo(),
   pluginVideo(),
+  pluginTextColor(),
+  pluginTextHighlight(),
 ];
 const ViewerWrapper = ({ contentState, palette }) => {
   return (
-    <RichContentWrapper plugins={plugins} theme={'Palette'} palette={palette} modalSupport>
+    <RichContentWrapper plugins={plugins} theme={'Palette'} palette={palette}>
       <RichContentViewer initialState={contentState} />
     </RichContentWrapper>
   );

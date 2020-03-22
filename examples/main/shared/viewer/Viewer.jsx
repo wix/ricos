@@ -5,8 +5,10 @@ import { isSSR } from 'wix-rich-content-common';
 import * as PropTypes from 'prop-types';
 import * as Plugins from './ViewerPlugins';
 import theme from '../theme/theme'; // must import after custom styles
-import getImagesData from 'wix-rich-content-fullscreen/src/lib/getImagesData';
+import getImagesData from 'wix-rich-content-fullscreen/dist/lib/getImagesData';
 import Fullscreen from 'wix-rich-content-fullscreen';
+import 'wix-rich-content-fullscreen/dist/styles.min.css';
+
 import {
   TextSelectionListener,
   ViewerInlineToolBar,
@@ -42,15 +44,15 @@ export default class Viewer extends PureComponent {
     onExpand: (entityIndex, innerIndex = 0) => {
       //galleries have an innerIndex (i.e. second image will have innerIndex=1)
       this.setState({
-        expendModeIsOpen: true,
+        expandModeIsOpen: true,
         expandModeIndex: this.expandModeData.imageMap[entityIndex] + innerIndex,
       });
     },
   };
 
   render() {
-    const { isMobile, locale, initialState, seoMode } = this.props;
-    const { expendModeIsOpen, expandModeIndex, disabled } = this.state;
+    const { isMobile, initialState, locale, seoMode } = this.props;
+    const { expandModeIsOpen, expandModeIndex, disabled } = this.state;
 
     const viewerProps = {
       locale,
@@ -63,30 +65,32 @@ export default class Viewer extends PureComponent {
       seoMode,
     };
 
-    return [
-      <div id="rich-content-viewer" className="viewer">
-        <RichContentViewer
-          helpers={this.helpers}
-          typeMappers={Plugins.typeMappers}
-          inlineStyleMappers={Plugins.getInlineStyleMappers(initialState)}
-          decorators={Plugins.decorators}
-          config={this.pluginsConfig}
-          // siteDomain="https://www.wix.com"
-          {...viewerProps}
-        />
-        {!isSSR() && (
-          <Fullscreen
-            isOpen={expendModeIsOpen}
-            images={this.expandModeData.images}
-            onClose={() => this.setState({ expendModeIsOpen: false })}
-            index={expandModeIndex}
+    return (
+      <>
+        <div id="rich-content-viewer" className="viewer">
+          <RichContentViewer
+            helpers={this.helpers}
+            typeMappers={Plugins.typeMappers}
+            inlineStyleMappers={Plugins.getInlineStyleMappers(initialState)}
+            decorators={Plugins.decorators}
+            config={this.pluginsConfig}
+            // siteDomain="https://www.wix.com"
+            {...viewerProps}
           />
+          {!isSSR() && (
+            <Fullscreen
+              images={this.expandModeData.images}
+              onClose={() => this.setState({ expandModeIsOpen: false })}
+              isOpen={expandModeIsOpen}
+              index={expandModeIndex}
+            />
+          )}
+        </div>
+        {!isSSR() && (
+          <TextSelectionListener targetId={'rich-content-viewer'} ToolBar={ViewerInlineToolBar} />
         )}
-      </div>,
-      !isSSR() && (
-        <TextSelectionListener targetId={'rich-content-viewer'} ToolBar={ViewerInlineToolBar} />
-      ),
-    ];
+      </>
+    );
   }
 }
 

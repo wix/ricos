@@ -59,18 +59,35 @@ function isSelectionBelongsToExsistingLink(editorState, selection) {
   });
 }
 
+function preventLinkInlineStyleForNewLine(editorState, { anchorKey, focusOffset }) {
+  const selectionForSpace = createSelection({
+    blockKey: anchorKey,
+    anchorOffset: focusOffset,
+    focusOffset,
+  });
+  //insert dummy space after link for preventing underline inline style to the new line
+  return Modifier.insertText(editorState.getCurrentContent(), selectionForSpace, ' ');
+}
+
 function insertLink(editorState, selection, data) {
   const oldSelection = editorState.getSelection();
-  const newContentState = Modifier.applyInlineStyle(
-    addEntity(editorState, selection, {
-      type: 'LINK',
-      data: createLinkEntityData(data),
-    }).getCurrentContent(),
-    selection,
-    'UNDERLINE'
-  ).set('selectionAfter', oldSelection);
+  const editorWithLink = addEntity(editorState, selection, {
+    type: 'LINK',
+    data: createLinkEntityData(data),
+  });
+  const isNewLine = selection.anchorKey !== oldSelection.anchorKey; //check weather press enter or space after link
+  const contentState = isNewLine
+    ? preventLinkInlineStyleForNewLine(editorWithLink, selection)
+    : editorWithLink.getCurrentContent();
 
-  return EditorState.push(editorState, newContentState, 'change-inline-style');
+  return EditorState.push(
+    editorState,
+    Modifier.applyInlineStyle(contentState, selection, 'UNDERLINE').set(
+      'selectionAfter',
+      oldSelection
+    ),
+    'change-inline-style'
+  );
 }
 
 function createLinkEntityData({ url, targetBlank, nofollow, anchorTarget, relValue }) {
@@ -306,7 +323,7 @@ function getSelectedLinksInBlock(block, editorState) {
     }));
 }
 
-function getLinkRangesInBlock(block, contentState) {
+export function getLinkRangesInBlock(block, contentState) {
   const ranges = [];
   block.findEntityRanges(
     value => {

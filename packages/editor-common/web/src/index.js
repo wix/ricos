@@ -46,6 +46,7 @@ export { default as Tooltip } from './Components/Tooltip';
 export { default as TooltipHost } from './Components/TooltipHost';
 export { default as ColorPicker } from './Components/ColorPicker/ColorPicker';
 export { default as CustomColorPicker } from './Components/ColorPicker/CustomColorPicker';
+export { default as Loader } from './Components/Loader';
 
 //Modals
 export { default as EditorModals } from './Modals/EditorModals';
@@ -61,6 +62,7 @@ export {
   insertLinkAtCurrentSelection,
   insertLinkInPosition,
   hasLinksInBlock,
+  getLinkRangesInBlock,
   fixPastedLinks,
   hasLinksInSelection,
   getLinkDataInSelection,
@@ -95,3 +97,26 @@ export {
   PLUGIN_DECORATION_PROPS,
   PLUGIN_DECORATIONS,
 } from './consts';
+
+export {
+  convertToRaw,
+  getVisibleSelectionRect,
+  convertFromRaw,
+  EditorState,
+  SelectionState,
+  DefaultDraftBlockRenderMap,
+  Modifier,
+  RichUtils,
+  KeyBindingUtil,
+  genKey,
+  ContentBlock,
+  BlockMapBuilder,
+  AtomicBlockUtils,
+  ContentState,
+  RawDraftContentState,
+  EditorChangeType,
+  convertFromHTML,
+} from 'draft-js';
+
+import DraftOffsetKey from 'draft-js/lib/DraftOffsetKey';
+export { DraftOffsetKey };

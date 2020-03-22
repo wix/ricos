@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import ReactPlayerWrapper from './reactPlayerWrapper';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { mergeStyles, validate, pluginVideoSchema, Loader } from 'wix-rich-content-common';
+import { mergeStyles, validate, pluginVideoSchema } from 'wix-rich-content-common';
 import { isEqual } from 'lodash';
 import getVideoSrc from './get-video-source';
 import styles from '../statics/styles/video-viewer.scss';
@@ -38,7 +38,8 @@ class VideoViewer extends Component {
   setUrl = newUrl => {
     const url = this.normalizeUrl(newUrl);
     if (url !== this.state.url) {
-      this.setState({ url, isLoaded: false });
+      this.setState({ url });
+      this.props.onReload?.();
     }
   };
   componentDidMount() {
@@ -57,26 +58,18 @@ class VideoViewer extends Component {
     const wrapper = ReactDOM.findDOMNode(this).parentNode;
     const ratio = this.getVideoRatio(wrapper);
     wrapper.style['padding-bottom'] = ratio * 100 + '%';
-
-    if (!this.state.isLoaded && !this.props.componentData.tempData) {
-      this.setState({ isLoaded: true });
+    if (!this.props.isLoaded) {
+      this.props.onReady?.() || this.setState({ isLoaded: true });
     }
-  };
-
-  renderLoader = () => {
-    return (
-      <div className={this.styles.videoOverlay}>
-        <Loader type={'medium'} />
-      </div>
-    );
   };
 
   handleContextMenu = e => this.props.disableRightClick && e.preventDefault();
 
   render() {
-    const { theme, controls, width, height, disabled, setComponentUrl } = this.props;
+    const { theme, width, height, disabled, setComponentUrl } = this.props;
     this.styles = this.styles || mergeStyles({ styles, theme });
-    const { url, key, isLoaded } = this.state;
+    const { url, key } = this.state;
+
     setComponentUrl?.(url);
     const props = {
       url,
@@ -84,18 +77,19 @@ class VideoViewer extends Component {
       disabled,
       width,
       height,
-      controls,
+      key,
     };
+
+    const isLoaded = this.props.isLoaded || this.state.isLoaded;
     return (
       <>
         <ReactPlayerWrapper
           className={classNames(this.styles.video_player)}
           onContextMenu={this.handleContextMenu}
-          key={key}
           data-loaded={isLoaded}
+          controls={this.props.isLoaded !== false}
           {...props}
         />
-        {!isLoaded && this.renderLoader()}
       </>
     );
   }
@@ -104,7 +98,6 @@ class VideoViewer extends Component {
 VideoViewer.propTypes = {
   componentData: PropTypes.object.isRequired,
   onStart: PropTypes.func,
-  controls: PropTypes.bool,
   width: PropTypes.string,
   height: PropTypes.string,
   settings: PropTypes.object.isRequired,
@@ -112,12 +105,14 @@ VideoViewer.propTypes = {
   disabled: PropTypes.bool,
   disableRightClick: PropTypes.bool,
   setComponentUrl: PropTypes.func,
+  onReady: PropTypes.func,
+  isLoaded: PropTypes.bool,
+  onReload: PropTypes.func,
 };
 
 VideoViewer.defaultProps = {
   width: '100%',
   height: '100%',
-  controls: true,
 };
 
 export default VideoViewer;

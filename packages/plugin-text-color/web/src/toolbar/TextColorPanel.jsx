@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Modifier, EditorState } from 'draft-js';
-import { ColorPicker, getSelectionStyles } from 'wix-rich-content-editor-common';
+import {
+  ColorPicker,
+  getSelectionStyles,
+  Modifier,
+  EditorState,
+} from 'wix-rich-content-editor-common';
 import { DEFAULT_STYLE_SELECTION_PREDICATE } from '../constants';
 import { getColor } from '../text-decorations-utils';
 
@@ -38,19 +42,17 @@ export default class TextColorPanel extends Component {
     this.props.setKeepToolbarOpen(false);
   }
 
-  setColor(color) {
+  setColor(colorName) {
     let { editorState, settings, defaultColor } = this.props;
     const { currentColor } = this.state;
 
-    if (color !== currentColor) {
-      editorState = this.getInlineColorState(color);
-      this.setState({
-        currentColor: color ? extractColor(settings.colorScheme, color) : defaultColor,
-        currentSchemeColor: color
-          ? color
-          : this.currentColors[0] && getColor(this.currentColors[0]),
-      });
-    }
+    const newColorHex = colorName && extractColor(settings.colorScheme, colorName);
+    if (!newColorHex || newColorHex !== currentColor)
+      editorState = this.getInlineColorState(colorName);
+    this.setState({
+      currentColor: newColorHex || defaultColor,
+      currentSchemeColor: this.currentColors[0] && getColor(this.currentColors[0]),
+    });
     this.props.closeModal(editorState);
   }
 
