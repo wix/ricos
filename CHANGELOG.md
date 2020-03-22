@@ -23,6 +23,7 @@
   - [#806](https://github.com/wix-incubator/rich-content/pull/806) locale dynamic import
   - [#807](https://github.com/wix-incubator/rich-content/pull/807) include common styles in styles.min.css
   - [#709](https://github.com/wix-incubator/rich-content/pull/709) support inlineStyleMappers
+  - [#810](https://github.com/wix-incubator/rich-content/pull/810) added palettes & fixed toolbarButton color
 
 - `editor-common`
   - `convertFromHTML` exposed for Forum usage
