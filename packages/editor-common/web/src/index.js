@@ -120,5 +120,7 @@ export {
   EditorChangeType,
 } from 'draft-js';
 
+import '../statics/styles/draft.global.scss';
+
 import DraftOffsetKey from 'draft-js/lib/DraftOffsetKey';
 export { DraftOffsetKey };
