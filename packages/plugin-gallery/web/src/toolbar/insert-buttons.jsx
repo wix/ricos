@@ -8,7 +8,7 @@ export default ({ helpers, t, settings }) => {
     {
       type: 'file',
       multi: true,
-      name: 'Gallery',
+      name: t('Mobile_GalleryPlugin_InsertButton'),
       tooltipText: t('GalleryPlugin_InsertButton_Tooltip'),
       Icon: icon,
       componentData: DEFAULTS,

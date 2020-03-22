@@ -8,7 +8,7 @@ export default ({ helpers, settings, t }) => {
     {
       type: 'file',
       multi: true,
-      name: 'UploadFile',
+      name: t('Mobile_UploadFilePlugin_InsertButton'),
       tooltipText: t('FileUploadInsertButton_tooltip'),
       Icon: icon,
       componentData: DEFAULTS,

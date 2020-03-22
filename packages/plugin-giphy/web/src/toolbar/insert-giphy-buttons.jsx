@@ -20,7 +20,7 @@ export default ({ helpers, t, settings, isMobile }) => {
   return [
     {
       type: 'modal',
-      name: 'GIF',
+      name: t('Mobile_GIFPlugin_InsertButton'),
       tooltipText: t('GiphyPlugin_InsertButton_Tooltip'),
       Icon,
       componentData: settings.componentDataDefaults || DEFAULTS,
