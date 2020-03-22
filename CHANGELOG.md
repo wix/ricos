@@ -13,10 +13,13 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+- `text-color`
+  - [#805](https://github.com/wix-incubator/rich-content/pull/805) adding a text color/highlight works on mobile
 ### :house: Internal
 - `editor`
   - [#790](https://github.com/wix-incubator/rich-content/pull/790) convertToRaw - block.data converted correctly, Fixes line spacing
-  
+
 </details>
 <hr/>
 
