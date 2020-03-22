@@ -3,6 +3,7 @@
 
 [dir].wrapper {
   :global {
+    @import "~draft-js/dist/Draft.css";  
     .DraftEditor-editorContainer,
     .DraftEditor-root,
     .public-DraftEditor-content {
@@ -79,21 +80,20 @@
       /*!rtl:begin:ignore*/
       direction: rtl;
       text-align: right;
+      /*!rtl:end:ignore*/
     }
 
     .public-DraftStyleDefault-listLTR {
       /*!rtl:begin:ignore*/
       direction: ltr;
-      // margin-left: 40px;
+      /*!rtl:end:ignore*/
     }
 
     .public-DraftStyleDefault-listRTL {
       /*!rtl:begin:ignore*/
       direction: rtl;
-      // margin-right: 40px;
       /*!rtl:end:ignore*/
     }
-
 
     .public-DraftStyleDefault-ol,
     .public-DraftStyleDefault-ul {

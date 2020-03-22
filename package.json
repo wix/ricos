@@ -129,5 +129,9 @@
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
+  },
+  "dependencies": {
+    "cypress": "4.1.0",
+    "draft-js-list-plugin": "^1.0.2"
   }
 }
