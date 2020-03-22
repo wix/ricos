@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactTooltip from 'react-tooltip';
 import PropTypes from 'prop-types';
 import {
   hasLinksInSelection,
@@ -11,6 +12,7 @@ import TextLinkPanel from './TextLinkPanel';
 
 export default class TextLinkButton extends Component {
   showLinkPanel = () => {
+    ReactTooltip.hide();
     const {
       onExtendContent,
       onOverrideContent,

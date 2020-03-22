@@ -80,4 +80,11 @@ describe('text', () => {
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.UNORDERED_LIST, [550, 1]);
     cy.eyesCheckWindow(this.test.title);
   });
+
+  it('allow to create link and open link toolbar (InlinePluginToolbar)', function() {
+    cy.loadEditorAndViewer('plain')
+      .setLink([0, 10], 'https://www.wix.com/')
+      .setSelection(5, 0);
+    cy.eyesCheckWindow(this.test.title);
+  });
 });
