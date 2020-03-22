@@ -84,97 +84,16 @@
     .public-DraftStyleDefault-listLTR {
       /*!rtl:begin:ignore*/
       direction: ltr;
-      margin-left: 40px;
+      // margin-left: 40px;
     }
 
     .public-DraftStyleDefault-listRTL {
       /*!rtl:begin:ignore*/
       direction: rtl;
-      margin-right: 40px;
+      // margin-right: 40px;
       /*!rtl:end:ignore*/
     }
 
-    .public-DraftStyleDefault-listLTR-depth0.public-DraftStyleDefault-orderedListItem {
-      margin-left: 1.5em;
-    }
-
-    .public-DraftStyleDefault-listRTL-depth0.public-DraftStyleDefault-orderedListItem {
-      margin-right: 1.5em;
-    }
-
-    .public-DraftStyleDefault-listLTR-depth1.public-DraftStyleDefault-orderedListItem {
-      list-style-type: lower-latin;
-      margin-left: 3em;
-    }
-
-    .public-DraftStyleDefault-listRTL-depth1.public-DraftStyleDefault-orderedListItem {
-      list-style-type: lower-latin;
-      margin-right: 3em;
-    }
-
-    .public-DraftStyleDefault-listLTR-depth2.public-DraftStyleDefault-orderedListItem {
-      list-style-type: lower-roman;
-      margin-left: 4.5em;
-    }
-
-    .public-DraftStyleDefault-listRTL-depth2.public-DraftStyleDefault-orderedListItem {
-      list-style-type: lower-roman;
-      margin-right: 4.5em;
-    }
-
-    .public-DraftStyleDefault-listLTR-depth3.public-DraftStyleDefault-orderedListItem {
-      list-style-type: decimal;
-      margin-left: 6em;
-    }
-
-    .public-DraftStyleDefault-listRTL-depth3.public-DraftStyleDefault-orderedListItem {
-      list-style-type: decimal;
-      margin-right: 6em;
-    }
-
-    .public-DraftStyleDefault-listLTR-depth0.public-DraftStyleDefault-unorderedListItem {
-      list-style-type: disc;
-      margin-left: 1.5em;
-    }
-
-    .public-DraftStyleDefault-listRTL-depth0.public-DraftStyleDefault-unorderedListItem {
-      list-style-type: disc;
-      margin-right: 1.5em;
-    }
-
-    .public-DraftStyleDefault-listLTR-depth1.public-DraftStyleDefault-unorderedListItem {
-      list-style-type: circle;
-      margin-left: 3em;
-    }
-
-    .public-DraftStyleDefault-listRTL-depth1.public-DraftStyleDefault-unorderedListItem {
-      list-style-type: circle;
-      margin-right: 3em;
-    }
-
-    .public-DraftStyleDefault-listLTR-depth2.public-DraftStyleDefault-unorderedListItem {
-      margin-left: 4.5em;
-    }
-
-    .public-DraftStyleDefault-listRTL-depth2.public-DraftStyleDefault-unorderedListItem {
-      margin-right: 4.5em;
-    }
-
-    .public-DraftStyleDefault-listLTR-depth3.public-DraftStyleDefault-unorderedListItem {
-      margin-left: 6em;
-    }
-
-    .public-DraftStyleDefault-listRTL-depth3.public-DraftStyleDefault-unorderedListItem {
-      margin-right: 6em;
-    }
-
-    .public-DraftStyleDefault-orderedListItem {
-      list-style-type: decimal;
-    }
-
-    .public-DraftStyleDefault-unorderedListItem {
-      list-style-type: square;
-    }
 
     .public-DraftStyleDefault-ol,
     .public-DraftStyleDefault-ul {
