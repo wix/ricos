@@ -1,6 +1,6 @@
 import React from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
-import { BLOCK_TYPES } from 'wix-rich-content-common';
+import { BLOCK_TYPES, getLangDir } from 'wix-rich-content-common';
 import redraft from 'redraft';
 import classNames from 'classnames';
 import { endsWith } from 'lodash';
@@ -85,6 +85,9 @@ const getBlocks = (mergedStyles, textDirection, { config }) => {
     'header-one': blockFactory('h1', 'headerOne'),
     'header-two': blockFactory('h2', 'headerTwo'),
     'header-three': blockFactory('h3', 'headerThree'),
+    'header-four': blockFactory('h4', 'headerFour'),
+    'header-five': blockFactory('h5', 'headerFive'),
+    'header-six': blockFactory('h6', 'headerSix'),
     'code-block': blockFactory('pre', 'codeBlock'),
     'unordered-list-item': getList(false),
     'ordered-list-item': getList(true),
@@ -92,7 +95,13 @@ const getBlocks = (mergedStyles, textDirection, { config }) => {
 };
 
 const getEntities = (typeMap, pluginProps, styles) => {
+  // debugger;
   const emojiViewerFn = emojiUnicode => {
+    // return (
+    //   <span style={{ fontFamily: 'cursive' }} dir={direction}>
+    //     {emojiUnicode}
+    //   </span>
+    // );
     return <span style={{ fontFamily: 'cursive' }}>{emojiUnicode}</span>;
   };
   return {
@@ -138,6 +147,9 @@ const redraftOptions = {
       'header-one',
       'header-two',
       'header-three',
+      'header-four',
+      'header-five',
+      'header-six',
     ],
   },
   convertFromRaw: contentState => contentState,
@@ -151,18 +163,20 @@ const convertToReact = (
   entityProps,
   decorators,
   inlineStyleMappers,
+  locale,
   options = {}
 ) => {
   if (isEmptyContentState(contentState)) {
     return null;
   }
-
+  // debugger;
+  const direction = getLangDir(locale);
   return redraft(
     normalizeContentState(contentState),
     {
       inline: getInline(inlineStyleMappers, mergedStyles),
       blocks: getBlocks(mergedStyles, textDirection, entityProps),
-      entities: getEntities(combineMappers(typeMap), entityProps, mergedStyles),
+      entities: getEntities(combineMappers(typeMap), entityProps, mergedStyles, direction),
       decorators,
     },
     { ...redraftOptions, ...options }
@@ -176,11 +190,13 @@ const convertToHTML = (
   typeMap,
   entityProps,
   decorators,
+  locale,
   options = {}
 ) => {
   if (isEmptyContentState(contentState)) {
     return null;
   }
+  // debugger;
 
   const reactOutput = convertToReact(
     contentState,
@@ -189,6 +205,7 @@ const convertToHTML = (
     typeMap,
     entityProps,
     decorators,
+    locale,
     options
   );
 
