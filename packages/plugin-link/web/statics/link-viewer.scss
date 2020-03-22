@@ -7,11 +7,12 @@
 
 .toolbarUrlContainer {
   display: flex;
+  margin-right: 5px;
 }
 
 .toolbarUrl {
   color: $accent-color;
-  max-width: 200px;
+  max-width: 270px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -19,6 +20,6 @@
 
 @media only screen and (max-width: 640px) {
   .toolbarUrl {
-    color: red;
+    max-width: 160px;
   }
 }

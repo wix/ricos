@@ -15,20 +15,26 @@ export default config => {
     {
       keyName: 'edit',
       component: props => (
-        <TextLinkButton
-          insertLinkFn={updateLinkAtCurrentSelection}
-          icon={EditIcon}
-          tooltipText={config.t('LinkTo_Edit_Tooltip')}
-          {...config}
-          {...props}
-        />
+        <div style={{ margin: '0 2px 0 -7px' }}>
+          <TextLinkButton
+            insertLinkFn={updateLinkAtCurrentSelection}
+            icon={EditIcon}
+            tooltipText={config.t('LinkTo_Edit_Tooltip')}
+            {...config}
+            {...props}
+          />
+        </div>
       ),
       mobile: true,
     },
     { keyName: 'separator2', type: BUTTONS.SEPARATOR, mobile: true },
     {
       keyName: 'remove',
-      component: props => <RemoveLinkButton {...config} {...props} />,
+      component: props => (
+        <div style={{ margin: '0 -6px 0 -6px' }}>
+          <RemoveLinkButton {...config} {...props} />
+        </div>
+      ),
       mobile: true,
     },
   ];
