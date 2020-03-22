@@ -16,6 +16,13 @@
 ### :bug: Bug Fix
 - `text-color`
   - [#805](https://github.com/wix-incubator/rich-content/pull/805) adding a text color/highlight works on mobile
+  - [#813](https://github.com/wix-incubator/rich-content/pull/813) modal popups position fixed
+- `line-spacing`
+  - [#813](https://github.com/wix-incubator/rich-content/pull/813) modal popups position fixed
+- `giphy`
+  - [#813](https://github.com/wix-incubator/rich-content/pull/813) modal popups position fixed
+- `emoji`
+  - [#813](https://github.com/wix-incubator/rich-content/pull/813) modal popups position fixed
 ### :house: Internal
 - `general`
   - [#720](https://github.com/wix-incubator/rich-content/pull/720) mobile example app styles issues
