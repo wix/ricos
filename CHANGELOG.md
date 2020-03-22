@@ -22,7 +22,11 @@
 - `editor`
   - [#790](https://github.com/wix-incubator/rich-content/pull/790) convertToRaw - block.data converted correctly, Fixes line spacing
 - `common`
-  - [#814](https://github.com/wix-incubator/rich-content/pull/814) fix: adding support for H4, H5, H6 
+  - [#814](https://github.com/wix-incubator/rich-content/pull/814) fix: adding support for H4, H5, H6
+- `wrapper`
+  - [#817](https://github.com/wix-incubator/rich-content/pull/817) bugfix: removed override of props
+  - [#810](https://github.com/wix-incubator/rich-content/pull/810) added palettes & fixed toolbarButton color
+  - [#818](https://github.com/wix-incubator/rich-content/pull/818) bugfix: inlineStyleMappers - removed empty typeMappers + improved storybook example
 
 </details>
 <hr/>
@@ -34,7 +38,6 @@
   - [#806](https://github.com/wix-incubator/rich-content/pull/806) locale dynamic import
   - [#807](https://github.com/wix-incubator/rich-content/pull/807) include common styles in styles.min.css
   - [#709](https://github.com/wix-incubator/rich-content/pull/709) support inlineStyleMappers
-  - [#810](https://github.com/wix-incubator/rich-content/pull/810) added palettes & fixed toolbarButton color
 
 - `editor-common`
   - `convertFromHTML` exposed for Forum usage
