@@ -26,6 +26,7 @@
 - `wrapper`
   - [#817](https://github.com/wix-incubator/rich-content/pull/817) bugfix: removed override of props
   - [#810](https://github.com/wix-incubator/rich-content/pull/810) added palettes & fixed toolbarButton color
+  - [#818](https://github.com/wix-incubator/rich-content/pull/818) bugfix: inlineStyleMappers - removed empty typeMappers + improved storybook example
 
 </details>
 <hr/>
