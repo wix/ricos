@@ -4,6 +4,7 @@ import createResizeDecoration from './Decorators/Resize';
 import createBlockDndPlugin from 'draft-js-drag-n-drop-plugin';
 import { simplePubsub } from 'wix-rich-content-editor-common';
 import createHandleDrop from './handleDrop';
+// import createListPlugin from 'draft-js-list-plugin';
 
 const createPlugins = ({ plugins, context }) => {
   const focusPlugin = createFocusPlugin();
@@ -13,6 +14,8 @@ const createPlugins = ({ plugins, context }) => {
     theme: context.theme,
     isMobile: context.isMobile,
   });
+
+  // const listPlugin = createListPlugin();
 
   const dndPlugin = createBlockDndPlugin();
   const handleDrop = dndPlugin.handleDrop;
@@ -53,7 +56,7 @@ const createPlugins = ({ plugins, context }) => {
     ];
   });
 
-  const pluginInstances = [resizePlugin, focusPlugin, dndPlugin, ...wixPlugins];
+  const pluginInstances = [resizePlugin, focusPlugin, dndPlugin, /*listPlugin,*/ ...wixPlugins];
 
   return {
     pluginInstances,
