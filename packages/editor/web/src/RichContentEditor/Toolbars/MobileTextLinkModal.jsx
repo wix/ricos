@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { isEmpty } from 'lodash';
-import {
-  insertLinkAtCurrentSelection,
-  getLinkDataInSelection,
-  removeLinksInSelection,
-} from 'wix-rich-content-editor-common';
+import { getLinkDataInSelection, removeLinksInSelection } from 'wix-rich-content-editor-common';
 import MobileLinkModal from './MobileLinkModal';
 
 export default class MobileTextLinkModal extends Component {
@@ -13,8 +9,8 @@ export default class MobileTextLinkModal extends Component {
 
   createLinkEntity = ({ url, targetBlank, nofollow }) => {
     if (!isEmpty(url)) {
-      const { getEditorState, setEditorState, anchorTarget, relValue } = this.props;
-      const newEditorState = insertLinkAtCurrentSelection(getEditorState(), {
+      const { getEditorState, setEditorState, anchorTarget, relValue, insertLinkFn } = this.props;
+      const newEditorState = insertLinkFn(getEditorState(), {
         url,
         targetBlank,
         nofollow,
@@ -72,4 +68,5 @@ MobileTextLinkModal.propTypes = {
   relValue: PropTypes.string,
   t: PropTypes.func,
   uiSettings: PropTypes.object,
+  insertLinkFn: PropTypes.func,
 };

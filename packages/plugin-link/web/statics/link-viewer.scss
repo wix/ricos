@@ -16,3 +16,9 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+@media only screen and (max-width: 640px) {
+  .toolbarUrl {
+    color: red;
+  }
+}
