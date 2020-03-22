@@ -26,7 +26,7 @@ RichContentEditorModal.propTypes = {
   modalName: PropTypes.string,
   modalElement: PropTypes.func,
   modalsMap: PropTypes.object,
-  locale: PropTypes.string.isRequired,
+  locale: PropTypes.string,
   modalProps: PropTypes.object,
 };
 
