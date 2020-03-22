@@ -1,3 +1,4 @@
+import { gallerySettingsTheme } from './utils';
 /* eslint-disable camelcase */
 const THEMES = {
   DEFAULT: 'Default',
@@ -73,6 +74,7 @@ export default class ThemeGenerator {
       };
 
       return {
+        ...gallerySettingsTheme(colors),
         editor: {
           background: bgColor,
           color: textColor,
