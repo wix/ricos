@@ -19,9 +19,11 @@ export const getForegroundColor = actionColor => {
 
 export const gallerySettingsTheme = colors => {
   const actionColor = getForegroundColor(colors.actionColor);
+  const sliderTrack = { background: `${actionColor} !important` };
+  const thumb = { ...sliderTrack, border: `4px solid ${actionColor}` };
   return {
     itemContainerSelected: {
-      boxShadow: `0 0 0 3px ${actionColor}`,
+      boxShadow: `0 0 0 3px ${actionColor} !important`,
     },
     layoutsSelector_icon_selected: {
       color: getForegroundColor(actionColor),
@@ -34,6 +36,36 @@ export const gallerySettingsTheme = colors => {
     },
     selectionListOption_selected: {
       color: actionColor,
+    },
+    tabs_headers_option_selected: {
+      borderBottom: `solid 3px ${actionColor} !important`,
+    },
+    button_primary: {
+      background: `${actionColor} !important`,
+    },
+    button_secondary: {
+      color: actionColor,
+      borderColor: `${actionColor} !important`,
+      '&:hover': {
+        color: actionColor,
+      },
+    },
+
+    slider: {
+      '&::-webkit-slider-runnable-track': sliderTrack,
+      '&::-webkit-slider-thumb': thumb,
+    },
+
+    radioGroup_button: {
+      border: `1px solid ${actionColor} !important`,
+    },
+
+    radioGroup_input: {
+      '&:checked + $radioGroup_button': {
+        '&::after': {
+          backgroundColor: `${actionColor} !important`,
+        },
+      },
     },
   };
 };
