@@ -84,7 +84,8 @@ describe('text', () => {
   it('allow to create link and open link toolbar (InlinePluginToolbar)', function() {
     cy.loadEditorAndViewer('plain')
       .setLink([0, 10], 'https://www.wix.com/')
-      .setSelection(5, 0);
+      .setSelection(5, 0)
+      .wait(200);
     cy.eyesCheckWindow(this.test.title);
   });
 });
