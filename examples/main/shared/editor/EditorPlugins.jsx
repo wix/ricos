@@ -28,7 +28,7 @@ import { createButtonPlugin, BUTTON_TYPE } from 'wix-rich-content-plugin-button'
 import { createTextHighlightPlugin, TEXT_HIGHLIGHT_TYPE } from 'wix-rich-content-plugin-text-color';
 import Highlighter from 'react-highlight-words';
 import casual from 'casual-browserify';
-import { linkPreviewUtil } from 'wix-rich-content-plugin-link-preview/dist/lib/linkPreviewUtil';
+import { createFetchLinkPreviewData } from 'wix-rich-content-plugin-link-preview/dist/lib/fetchLinkPreviewData';
 
 import 'wix-rich-content-editor-common/dist/styles.min.css';
 import 'wix-rich-content-common/dist/styles.min.css';
@@ -235,7 +235,7 @@ const videoHandlers = {
 const config = {
   [LINK_PREVIEW_TYPE]: {
     disableEmbed: false,
-    fetchData: linkPreviewUtil(linkPreviewAuthorizationToken),
+    fetchData: createFetchLinkPreviewData(linkPreviewAuthorizationToken),
   },
   [EMOJI_TYPE]: {
     // toolbar: {

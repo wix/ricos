@@ -13,7 +13,6 @@ import { BUTTONS, BUTTONS_BY_KEY, BlockLinkButton, deleteButton } from './button
 import Panel from '../Components/Panel';
 import toolbarStyles from '../../statics/styles/plugin-toolbar.scss';
 import buttonStyles from '../../statics/styles/plugin-toolbar-button.scss';
-import { PluginSettingsIcon } from '../Icons';
 
 const getInitialState = () => ({
   position: { transform: 'scale(0)' },
@@ -325,14 +324,14 @@ export default function createToolbar({
         case BUTTONS.HORIZONTAL_SEPARATOR:
           return <Separator className={separatorClassNames} horizontal key={key} />;
         case BUTTONS.LINK:
-          return <BlockLinkButton {...baseLinkProps} />;
+          return <BlockLinkButton {...baseLinkProps} tooltipText={t('TextLinkButton_Tooltip')} />;
         case BUTTONS.LINK_PREVIEW: {
           return (
             <BlockLinkButton
               {...baseLinkProps}
               unchangedUrl
               tooltipText={t('LinkPreview_Settings_Tooltip')}
-              icons={PluginSettingsIcon}
+              icons={button.icons}
             />
           );
         }

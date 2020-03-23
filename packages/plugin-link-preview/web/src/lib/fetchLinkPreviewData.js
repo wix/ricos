@@ -1,12 +1,8 @@
-export const linkPreviewUtil = authStr => {
+export const createFetchLinkPreviewData = authStr => {
   const state = {};
-  const getAbsoluteUrl = url =>
-    url.substring(0, 7) === 'http://' || url.substring(0, 8) === 'https://' ? url : 'http://' + url;
+  const getAbsoluteUrl = url => (url.substring(0, 4) === 'http' ? url : 'http://' + url);
 
-  const domainArray = window.location.href.split('/')[2].split('.');
-  const isOnSurge = domainArray[1] === 'surge' && domainArray[2] === 'sh';
-  const relativePath = '/rich-content/oembed?url=';
-  const path = isOnSurge ? `https://www.wixsite.com${relativePath}` : relativePath;
+  const path = '/rich-content/oembed?url=';
 
   return async url => {
     const { title, url: oldUrl } = state;

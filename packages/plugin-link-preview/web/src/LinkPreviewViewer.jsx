@@ -13,9 +13,10 @@ class LinkPreviewViewer extends Component {
 
   constructor(props) {
     super(props);
-    const { componentData } = props;
+    const { componentData, theme } = props;
     validate(componentData, pluginLinkPreviewSchema);
     this.state = {};
+    this.styles = this.styles || mergeStyles({ styles, theme });
   }
 
   componentWillReceiveProps(nextProps) {
@@ -24,27 +25,15 @@ class LinkPreviewViewer extends Component {
     }
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     validate(pluginLinkPreviewSchema, this.props.componentData);
+    this.setState({ imageHeight: this.image.offsetHeight });
   }
 
-  handleIframeLoad = () => {
-    this.iframe.style.height = this.iframe.contentWindow.document.body.scrollHeight + 'px';
-    this.iframe.style.width = this.iframe.contentWindow.document.body.scrollWidth + 'px';
-  };
-
-  getUrlForDisplay = url => {
-    let numOfCharsToRemove = 0;
-    if (url.substring(0, 7) === 'http://') {
-      numOfCharsToRemove = 7;
-    } else if (url.substring(0, 8) === 'https://') {
-      numOfCharsToRemove = 8;
-    }
-    return url.substring(numOfCharsToRemove);
-  };
+  getUrlForDisplay = url => url.replace(/^https?:\/\//, '');
 
   render() {
-    const { componentData, theme, isMobile } = this.props;
+    const { componentData, isMobile } = this.props;
     const {
       title,
       description,
@@ -55,7 +44,6 @@ class LinkPreviewViewer extends Component {
       },
     } = componentData;
 
-    this.styles = this.styles || mergeStyles({ styles, theme });
     const {
       linkPreview,
       linkPreview_info,
@@ -65,29 +53,22 @@ class LinkPreviewViewer extends Component {
       linkPreview_url,
     } = this.styles;
 
-    const { imageRatio } = this.state;
-    if (!imageRatio) {
-      try {
-        const imageRatio = document.getElementById('linkPreviewSection')?.offsetHeight;
-        this.setState({ imageRatio }, () => this.forceUpdate());
-      } catch (e) {}
-    }
+    const { imageHeight } = this.state;
 
     return (
-      <figure className={linkPreview} id="linkPreviewSection" data-hook="linkPreviewViewer">
+      <figure className={linkPreview} data-hook="linkPreviewViewer">
         <div
           style={{
-            width: isMobile ? 110 : imageRatio || 0,
+            width: isMobile ? 110 : imageHeight,
             backgroundImage: `url(${thumbnail_url})`,
           }}
           className={linkPreview_image}
           alt={title}
+          ref={ref => (this.image = ref)}
         />
         <section className={linkPreview_info}>
           <div className={linkPreview_url}>{this.getUrlForDisplay(provider_url || url)}</div>
-          <figcaption className={linkPreview_title} id="link-preview-title">
-            {title}
-          </figcaption>
+          <figcaption className={linkPreview_title}>{title}</figcaption>
           {description && <div className={linkPreview_description}>{description}</div>}
         </section>
       </figure>

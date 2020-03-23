@@ -12,7 +12,10 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
-  
+
+### :rocket: [New Feature]
+- `link-preview`
+  - [#653](https://github.com/wix-incubator/rich-content/pull/653) add link preview
 ### :bug: Bug Fix
 - `text-color`
   - [#805](https://github.com/wix-incubator/rich-content/pull/805) adding a text color/highlight works on mobile

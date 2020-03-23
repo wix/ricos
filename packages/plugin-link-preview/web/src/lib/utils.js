@@ -2,7 +2,7 @@ import { DEFAULTS } from '../consts';
 import { LINK_PREVIEW_TYPE } from '../types';
 import { SelectionState, EditorState, Modifier, RichUtils } from 'draft-js';
 import {
-  getCurrentBlock,
+  getBlockAtStartOfSelection,
   replaceWithEmptyBlock,
   insertLinkInPosition,
   createBlock,
@@ -54,7 +54,7 @@ const shouldAddLinkPreview = linkPreviewData => {
 
 export const convertLinkPreviewToLink = editorState => {
   // preserve url
-  const currentBlock = getCurrentBlock(editorState);
+  const currentBlock = getBlockAtStartOfSelection(editorState);
   const blockKey = currentBlock.key;
   const url = getLinkPreviewUrl(editorState, currentBlock);
 

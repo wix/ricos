@@ -1,4 +1,4 @@
-import { createBasePlugin, getCurrentBlock } from 'wix-rich-content-editor-common';
+import { createBasePlugin, getBlockAtStartOfSelection } from 'wix-rich-content-editor-common';
 import { LINK_PREVIEW_TYPE } from './types';
 import LinkPreviewComponent from './LinkPreviewComponent';
 import createLinkPreviewToolbar from './toolbar/createLinkPreviewToolbar';
@@ -15,7 +15,7 @@ const createLinkPreviewPlugin = (config = {}) => {
 
   const keyBindingFn = (event, { getEditorState }) => {
     const editorState = getEditorState();
-    const currentBlock = getCurrentBlock(editorState);
+    const currentBlock = getBlockAtStartOfSelection(editorState);
     const entityKey = currentBlock.getEntityAt(0);
     const entityType = entityKey && editorState.getCurrentContent().getEntity(entityKey).type;
     if (entityType === LINK_PREVIEW_TYPE) {

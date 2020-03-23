@@ -17,7 +17,6 @@ class PluginViewer extends PureComponent {
       componentData,
       styles,
       context: { theme, isMobile },
-      type,
     } = this.props;
     const { size, alignment, textWrap, custom } = pluginComponent.classNameStrategies || {};
     return classNames(
@@ -26,7 +25,6 @@ class PluginViewer extends PureComponent {
         [styles.pluginContainerMobile]: isMobile,
         [styles.anchor]: hasLink,
         [theme.anchor]: hasLink && theme.anchor,
-        [styles.linkPreview]: type === 'LINK_PREVIEW' && hasLink,
       },
       isFunction(alignment)
         ? alignment(componentData, theme, styles, isMobile)

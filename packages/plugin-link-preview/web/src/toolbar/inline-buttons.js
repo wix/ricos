@@ -8,7 +8,7 @@ export default (setEditorState, getEditorState) => {
       keyName: 'link',
       type: BUTTONS.LINK_PREVIEW,
       mobile: false,
-      icon: PluginSettingsIcon,
+      icons: PluginSettingsIcon,
       tooltipTextKey: 'LinkPreview_Settings_Tooltip',
     },
     {
