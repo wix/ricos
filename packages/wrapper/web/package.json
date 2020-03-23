@@ -55,7 +55,10 @@
     "rollup": "1.31.1"
   },
   "dependencies": {
-    "aphrodite": "^2.4.0",
+    "jss": "^10.1.1",
+    "jss-plugin-camel-case": "^10.1.1",
+    "jss-plugin-nested": "^10.1.1",
+    "jss-preset-default": "^10.1.1",
     "react-modal": "~3.1.11",
     "wix-rich-content-common": "7.0.2",
     "wix-rich-content-editor": "7.0.2",
