@@ -1,3 +1,4 @@
+import gallerySettings from './themes/gallerySettings';
 /* eslint-disable camelcase */
 const THEMES = {
   DEFAULT: 'Default',
@@ -73,6 +74,7 @@ export default class ThemeGenerator {
       };
 
       return {
+        ...gallerySettings(colors),
         editor: {
           background: bgColor,
           color: textColor,
@@ -89,10 +91,10 @@ export default class ThemeGenerator {
         footerToolbar: {
           background: `${bgColor} !important`,
         },
-        footerToolbarButton_icon: {
-          color: `${textColor} !important`,
-          '&:hover&:not([disabled])': {
-            color: `${actionColor} !important`,
+        footerToolbarButton_icon: {},
+        footerToolbarButton: {
+          '&:hover:not([disabled]) $footerToolbarButton_icon': {
+            color: actionColor,
           },
         },
 
