@@ -13,10 +13,6 @@
     Click to see more.
   </summary>
 
-### :house: Internal
-- `e2e`
-  - [#795](https://github.com/wix-incubator/rich-content/pull/795) new images fixture
-
 ### :rocket: New Feature
 - `code-block`
   - [#827](https://github.com/wix-incubator/rich-content/pull/827) selection starts in the block
@@ -41,6 +37,8 @@
   - [#819](https://github.com/wix-incubator/rich-content/pull/819) improve: replaced "aphrodite" with "jss" 
   - [#822](https://github.com/wix-incubator/rich-content/pull/822) ssr fix - render suspense only after component is imported
   - [#816](https://github.com/wix-incubator/rich-content/pull/816) wrapper theme: gallery settings modal
+- `e2e`
+  - [#795](https://github.com/wix-incubator/rich-content/pull/795) new images-sizes fixture
 
 </details>
 <hr/>
