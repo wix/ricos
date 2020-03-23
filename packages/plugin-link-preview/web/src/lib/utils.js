@@ -9,29 +9,26 @@ import {
   deleteBlock,
 } from 'wix-rich-content-editor-common';
 
-export const addLinkPreview = (editorState, config, blockKey, url) => {
+export const addLinkPreview = async (editorState, config, blockKey, url) => {
   const settings = config[LINK_PREVIEW_TYPE];
   const { fetchData } = settings;
   const { setEditorState } = config;
-  return fetchData(url).then(linkPreviewData => {
-    shouldAddLinkPreview(linkPreviewData).then(shouldAddLinkPreview => {
-      if (shouldAddLinkPreview) {
-        const withoutLinkBlock = deleteBlock(editorState, blockKey);
-        const { size, alignment } = { ...DEFAULTS, ...(settings || {}) };
-        const { thumbnail_url, title, description, html, provider_url } = linkPreviewData;
-        const data = {
-          config: { size, alignment, link: { url } },
-          thumbnail_url,
-          title,
-          description,
-          html,
-          provider_url,
-        };
-        const { newEditorState } = createBlock(withoutLinkBlock, data, LINK_PREVIEW_TYPE);
-        setEditorState(RichUtils.insertSoftNewline(newEditorState));
-      }
-    });
-  });
+  const linkPreviewData = await fetchData(url);
+  if (shouldAddLinkPreview(linkPreviewData)) {
+    const withoutLinkBlock = deleteBlock(editorState, blockKey);
+    const { size, alignment } = { ...DEFAULTS, ...(settings || {}) };
+    const { thumbnail_url, title, description, html, provider_url } = linkPreviewData;
+    const data = {
+      config: { size, alignment, link: { url } },
+      thumbnail_url,
+      title,
+      description,
+      html,
+      provider_url,
+    };
+    const { newEditorState } = createBlock(withoutLinkBlock, data, LINK_PREVIEW_TYPE);
+    setEditorState(RichUtils.insertSoftNewline(newEditorState));
+  }
 };
 
 const isValidImgSrc = url => {
