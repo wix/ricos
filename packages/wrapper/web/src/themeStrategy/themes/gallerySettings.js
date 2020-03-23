@@ -11,13 +11,13 @@ const getBrightness = hexCode => {
   return (r * 299 + g * 587 + b * 114) / 1000;
 };
 
-export const getForegroundColor = actionColor => {
+const getForegroundColor = actionColor => {
   // if action color is dark enough, choose it. else - white.
   //return getBrightness(actionColor) < 255 / 2 ? actionColor : '#000000';
   return getBrightness(actionColor) < 140 ? actionColor : '#0261ff';
 };
 
-export const gallerySettingsTheme = colors => {
+export default function gallerySettings(colors) {
   const actionColor = getForegroundColor(colors.actionColor);
   const sliderTrack = { background: `${actionColor} !important` };
   const thumb = { ...sliderTrack, border: `4px solid ${actionColor}` };
@@ -29,7 +29,7 @@ export const gallerySettingsTheme = colors => {
       color: getForegroundColor(actionColor),
     },
     imageRatioSelector_ratioButton_selected: {
-      backgroundColor: actionColor,
+      backgroundColor: `${actionColor} !important`,
     },
     thumbnailPlacementSelector_icon_selected: {
       color: actionColor,
@@ -51,11 +51,13 @@ export const gallerySettingsTheme = colors => {
       },
     },
 
+    //slider.scss
     slider: {
       '&::-webkit-slider-runnable-track': sliderTrack,
       '&::-webkit-slider-thumb': thumb,
     },
 
+    //radio-group.scss
     radioGroup_button: {
       border: `1px solid ${actionColor} !important`,
     },
@@ -68,4 +70,4 @@ export const gallerySettingsTheme = colors => {
       },
     },
   };
-};
+}
