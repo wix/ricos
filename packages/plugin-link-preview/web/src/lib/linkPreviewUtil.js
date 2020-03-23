@@ -1,8 +1,5 @@
-const axios = require('axios');
-
 export const linkPreviewUtil = authStr => {
-  const _axios = axios.create({ headers: { Authorization: authStr } });
-  let state = {};
+  const state = {};
   const getAbsoluteUrl = url =>
     url.substring(0, 7) === 'http://' || url.substring(0, 8) === 'https://' ? url : 'http://' + url;
 
@@ -16,16 +13,20 @@ export const linkPreviewUtil = authStr => {
     if (oldUrl === url && title) {
       return state;
     }
-    let oEmbedRes;
     try {
-      oEmbedRes = await _axios.get(`${path}${getAbsoluteUrl(url)}`).then(res => res.data);
-      state = oEmbedRes;
+      return fetch(`${path}${getAbsoluteUrl(url)}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: authStr,
+        },
+      }).then(res => {
+        return res.json();
+      });
     } catch (e) {
       return new Promise(resolve => {
         setTimeout(() => resolve({}), 1);
       });
     }
-
-    return oEmbedRes;
   };
 };
