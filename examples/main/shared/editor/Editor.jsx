@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { RichContentEditor, RichContentEditorModal } from 'wix-rich-content-editor';
-import { convertToRaw } from 'draft-js';
+import { convertToRaw } from 'wix-rich-content-editor-common';
 import * as PropTypes from 'prop-types';
 import ReactModal from 'react-modal';
 import { testImages, testVideos } from './mock';
@@ -55,10 +55,14 @@ export default class Editor extends PureComponent {
     };
     this.helpers = {
       //these are for testing purposes only
-      onPluginAdd: async (plugin_id, entry_point, version) => console.log('biPluginAdd', plugin_id, entry_point, version),
-      onPluginDelete: async (plugin_id, version) => console.log('biPluginDelete', plugin_id, version),
-      onPluginChange: async (plugin_id, changeObj, version) => console.log('biPluginChange', plugin_id, changeObj, version),
-      onPublish: async (postid, callback, version) => console.log('biOnPublish', ({ data }) => data, version),
+      onPluginAdd: async (plugin_id, entry_point, version) =>
+        console.log('biPluginAdd', plugin_id, entry_point, version),
+      onPluginDelete: async (plugin_id, version) =>
+        console.log('biPluginDelete', plugin_id, version),
+      onPluginChange: async (plugin_id, changeObj, version) =>
+        console.log('biPluginChange', plugin_id, changeObj, version),
+      onPublish: async (postid, callback, version) =>
+        console.log('biOnPublish', ({ data }) => data, version),
       //
       // onFilesChange: (files, updateEntity) => mockUpload(files, updateEntity),
       handleFileSelection: (index, multiple, updateEntity, removeEntity, componentData) => {
@@ -186,13 +190,12 @@ export default class Editor extends PureComponent {
       initialState,
       editorState,
     };
-
+    const TopToolbar = MobileToolbar || TextToolbar;
     return (
       <div className="editor">
-        {MobileToolbar && <MobileToolbar />}
-        {TextToolbar && (
+        {TopToolbar && (
           <div className="toolbar-wrapper">
-            <TextToolbar />
+            <TopToolbar />
           </div>
         )}
         <RichContentEditor
