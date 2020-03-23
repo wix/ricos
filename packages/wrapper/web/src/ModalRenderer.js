@@ -13,7 +13,7 @@ export default class ModalRenderer extends Component {
     super(props);
     this.state = {
       showModal: false,
-      EditorModal: () => null,
+      EditorModal: () => undefined,
       isReady: false,
     };
     this.childProps = {
