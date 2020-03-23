@@ -1,5 +1,5 @@
-@import './consts';
-@import './mixins';
+@import "./consts";
+@import "./mixins";
 
 .alignLeft {
   /* rtl:ignore */
@@ -40,7 +40,7 @@
 .alignCenter {
   display: block;
 
-  &:not(.textWrapNowrap) {
+  &:not(.textWrapNowrap):not(.sizeFullWidth) {
     margin-left: auto;
     margin-right: auto;
   }

@@ -8,7 +8,6 @@ class EngineWrapper extends React.Component {
   constructor(props) {
     super(props);
     this.state = this.stateFromProps(props);
-    // BARAK: why dynamic?
     if (props.editor) {
       import(
         // eslint-disable-next-line max-len
@@ -26,7 +25,7 @@ class EngineWrapper extends React.Component {
     } else if (!editor && !onExpand) {
       ModalityProvider = FullscreenRenderer;
     }
-    return { ModalityProvider, disabled: false }; // BARAK: what this "disabled" state for?
+    return { ModalityProvider, disabled: false };
   }
 
   handleChange = editorState => {

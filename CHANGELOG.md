@@ -19,6 +19,8 @@
 ### :bug: Bug Fix
 - `text-color`
   - [#805](https://github.com/wix-incubator/rich-content/pull/805) adding a text color/highlight works on mobile
+- `plugins`
+  - [#778](https://github.com/wix-incubator/rich-content/pull/778) fix sizeFullWidth
 ### :house: Internal
 - `general`
   - [#720](https://github.com/wix-incubator/rich-content/pull/720) mobile example app styles issues
@@ -30,6 +32,9 @@
   - [#817](https://github.com/wix-incubator/rich-content/pull/817) bugfix: removed override of props
   - [#810](https://github.com/wix-incubator/rich-content/pull/810) added palettes & fixed toolbarButton color
   - [#818](https://github.com/wix-incubator/rich-content/pull/818) bugfix: inlineStyleMappers - removed empty typeMappers + improved storybook example
+  - [#819](https://github.com/wix-incubator/rich-content/pull/819) improve: replaced "aphrodite" with "jss"
+  - [#822](https://github.com/wix-incubator/rich-content/pull/822) ssr fix - render suspense only after component is imported
+  - [#816](https://github.com/wix-incubator/rich-content/pull/816) wrapper theme: gallery settings modal
 
 </details>
 <hr/>
