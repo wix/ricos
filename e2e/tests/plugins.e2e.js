@@ -289,7 +289,6 @@ describe('plugins', () => {
     });
   });
 
-  // eslint-disable-next-line mocha/no-skipped-tests
   context('divider', () => {
     before(function() {
       eyesOpen(this);
