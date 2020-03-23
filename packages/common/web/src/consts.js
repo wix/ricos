@@ -2,6 +2,9 @@ export const HEADER_BLOCK = Object.freeze({
   ONE: 'header-one',
   TWO: 'header-two',
   THREE: 'header-three',
+  FOUR: 'header-four',
+  FIVE: 'header-five',
+  SIX: 'header-six',
 });
 
 export const BLOCK_TYPES = Object.freeze([

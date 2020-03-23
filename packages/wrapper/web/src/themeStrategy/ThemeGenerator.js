@@ -90,6 +90,7 @@ export default class ThemeGenerator {
           background: bgColor,
         },
         footerToolbarButton_icon: {
+          color: textColor,
           ':hover': {
             color: actionColor,
           },

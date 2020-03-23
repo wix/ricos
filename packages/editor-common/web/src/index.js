@@ -117,6 +117,7 @@ export {
   ContentState,
   RawDraftContentState,
   EditorChangeType,
+  convertFromHTML,
 } from 'draft-js';
 
 import DraftOffsetKey from 'draft-js/lib/DraftOffsetKey';

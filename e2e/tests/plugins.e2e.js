@@ -94,7 +94,7 @@ describe('plugins', () => {
           '#pgiea8ec1609e052b7f196935318316299d_1 > div > div > div > a > div > canvas'
         ).should('be.visible');
         cy.get(`[data-hook=${'fullscreen-close-button'}]`).click();
-        cy.eyesCheckWindow({ tag: 'closed fullscreen', target: 'window', fully: false });
+        // cy.eyesCheckWindow({ tag: 'closed fullscreen', target: 'window', fully: false });
       });
     });
   });
