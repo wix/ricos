@@ -52,10 +52,10 @@ export const THEME = colors => {
   return {
     mention: {
       color: colors.actionColor,
-      background: 'transparent',
-      ':hover': themeHoverFocus,
-      ':focus': themeHoverFocus,
-      ':active': { color: colors.actionColor, background: 'transparent' },
+      background: 'transparent !important',
+      '&:hover': themeHoverFocus,
+      '&:focus': themeHoverFocus,
+      '&:active': { color: colors.actionColor, background: 'transparent' },
     },
   };
 };

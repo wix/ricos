@@ -276,6 +276,18 @@ Cypress.Commands.add('shrinkPlugin', () => {
   cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.SMALL_CENTER);
 });
 
+Cypress.Commands.add('pluginSizeBestFit', () => {
+  cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.BEST_FIT);
+});
+
+Cypress.Commands.add('pluginSizeFullWidth', () => {
+  cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.FULL_WIDTH);
+});
+
+Cypress.Commands.add('pluginSizeOriginal', () => {
+  cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.ORIGINAL);
+});
+
 Cypress.Commands.add('clickToolbarButton', buttonName => {
   cy.get(`button[data-hook=${buttonName}][tabindex=0]`).click({
     force: true, //fixes element getting detached from dom and not clicking (maybe because of click scroll strategy)
