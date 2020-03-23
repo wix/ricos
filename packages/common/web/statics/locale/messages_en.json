@@ -28,6 +28,8 @@
   "LinkTo_Modal_Website_Title" : "What's the web address (URL)?",
   "LinkTo_Modal_Website_Placeholder" : "Paste the URL here",
   "LinkTo_Modal_Section_Title" : "Select a section to link to",
+  "LinkTo_Modal_Section_EmptyState_Title" : "Link to a Section",
+  "LinkTo_Modal_Section_EmptyState_Text" : "Once you add more content, you’ll be able to link to it here.",
   "LinkTo_Modal_Section_Item_Gallery" : "Gallery",
   "LinkTo_Modal_Section_Item_Heading" : "Heading",
   "LinkTo_Modal_Section_Item_Text" : "Text",
