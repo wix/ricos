@@ -2,7 +2,7 @@ import { isTextHighlight, isTextColor, getColor } from './text-decorations-utils
 import { isHexColor } from 'wix-rich-content-common';
 
 export const DEFAULT_PALETTE = Object.freeze([
-  '#303030',
+  '#ffffff',
   '#303030',
   '#3a54b4',
   '#bfad80',
@@ -42,7 +42,20 @@ export const DEFAULT_BACKGROUND_STYLE_FN_DRAFT = styles =>
     .toArray()
     .reduce((cssStyle, style) => ({ ...cssStyle, ...DEFAULT_BACKGROUND_STYLE_FN(style) }), {}); // eslint-disable-line new-cap
 
+let userColors = [];
 export const DEFAULTS = {
-  configTextColor: {},
-  configTextHighlight: {},
+  configTextColor: {
+    editor: {
+      onColorAdded: color => (userColors = [...userColors, color]),
+      getUserColors: () => userColors,
+    },
+    viewer: {},
+  },
+  configTextHighlight: {
+    editor: {
+      onColorAdded: color => (userColors = [...userColors, color]),
+      getUserColors: () => userColors,
+    },
+    viewer: {},
+  },
 };

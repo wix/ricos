@@ -18,15 +18,61 @@
   - [#795](https://github.com/wix-incubator/rich-content/pull/795) new images fixture
 
 ### :rocket: New Feature
+- `code-block`
+  - [#827](https://github.com/wix-incubator/rich-content/pull/827) selection starts in the block
+### :bug: Bug Fix
+- `text-color`
+  - [#805](https://github.com/wix-incubator/rich-content/pull/805) adding a text color/highlight works on mobile
+- `plugins`
+  - [#778](https://github.com/wix-incubator/rich-content/pull/778) fix sizeFullWidth
+- `common`
+  - [#814](https://github.com/wix-incubator/rich-content/pull/814) fix: adding support for H4, H5, H6
+- `editor`
+  - [#790](https://github.com/wix-incubator/rich-content/pull/790) convertToRaw - block.data converted correctly, Fixes line spacing
+  - [#820](https://github.com/wix-incubator/rich-content/pull/820) remove custom getBlockRenderMap.js (mobile fix)
+
+### :house: Internal
+- `general`
+  - [#720](https://github.com/wix-incubator/rich-content/pull/720) mobile example app styles issues
+- `wrapper`
+  - [#817](https://github.com/wix-incubator/rich-content/pull/817) bugfix: removed override of props
+  - [#810](https://github.com/wix-incubator/rich-content/pull/810) added palettes & fixed toolbarButton color
+  - [#818](https://github.com/wix-incubator/rich-content/pull/818) bugfix: inlineStyleMappers - removed empty typeMappers + improved storybook example
+  - [#819](https://github.com/wix-incubator/rich-content/pull/819) improve: replaced "aphrodite" with "jss" 
+  - [#822](https://github.com/wix-incubator/rich-content/pull/822) ssr fix - render suspense only after component is imported
+  - [#816](https://github.com/wix-incubator/rich-content/pull/816) wrapper theme: gallery settings modal
+
+</details>
+<hr/>
+
+## 7.0.2 (Mar 20, 2020)
+### :house: Internal
+- `wrapper`
+  - [#804](https://github.com/wix-incubator/rich-content/pull/804) engine-wrapper refactored
+  - [#806](https://github.com/wix-incubator/rich-content/pull/806) locale dynamic import
+  - [#807](https://github.com/wix-incubator/rich-content/pull/807) include common styles in styles.min.css
+  - [#709](https://github.com/wix-incubator/rich-content/pull/709) support inlineStyleMappers
+
+- `editor-common`
+  - `convertFromHTML` exposed for Forum usage
+
+## 7.0.1 (Mar 18, 2020)
+### :house: [Internal]
+- `editor`
+  - [#801](https://github.com/wix-incubator/rich-content/pull/801) `editorStateConversion.js` consume `draft-js` directly to prevent bundle bloat of lib
+
+## 7.0.0 (Mar 17, 2020)
+### :boom: Breaking Change
+- `editor`
+  - [#752](https://github.com/wix-incubator/rich-content/pull/752) Move draft-js to dependency from peerDependency [Migration Detials](https://github.com/wix-incubator/rich-content/wiki/RCE-V.7-Migration-Guide)
+
+### :rocket: New Feature
 - `fullscreen`
   - [#776](https://github.com/wix-incubator/rich-content/pull/776) fullscreen closes on Esc key press
 
 ### :bug: Bug Fix
 - `gallery`
   - [#775](https://github.com/wix-incubator/rich-content/pull/775) adding videos to gallery
-
-</details>
-<hr/>
 
 ## 6.10.2 (Mar 15, 2020)
 ### :house: Internal

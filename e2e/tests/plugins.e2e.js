@@ -37,8 +37,6 @@ describe('plugins', () => {
     after(() => cy.eyesClose());
 
     it('render image toolbar and settings', function() {
-      cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE).shrinkPlugin();
-      cy.eyesCheckWindow(this.test.title + '  - plugin toolbar');
       cy.openImageSettings();
       cy.get(`[data-hook=${IMAGE_SETTINGS.PREVIEW}]:first`);
       cy.eyesCheckWindow(this.test.title + ' - settings');
@@ -50,6 +48,14 @@ describe('plugins', () => {
       cy.eyesCheckWindow(this.test.title + ' - delete image title');
       cy.openImageSettings(false).addImageLink();
       cy.eyesCheckWindow(this.test.title + ' - add a link');
+      cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE).pluginSizeOriginal();
+      cy.eyesCheckWindow(this.test.title + '  - plugin original size');
+      cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE).shrinkPlugin();
+      cy.eyesCheckWindow(this.test.title + '  - plugin toolbar');
+      cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE).pluginSizeBestFit();
+      cy.eyesCheckWindow(this.test.title + '  - plugin content size');
+      cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE).pluginSizeFullWidth();
+      cy.eyesCheckWindow(this.test.title + '  - plugin full width size');
     });
   });
 
@@ -94,7 +100,7 @@ describe('plugins', () => {
           '#pgiea8ec1609e052b7f196935318316299d_1 > div > div > div > a > div > canvas'
         ).should('be.visible');
         cy.get(`[data-hook=${'fullscreen-close-button'}]`).click();
-        cy.eyesCheckWindow({ tag: 'closed fullscreen', target: 'window', fully: false });
+        // cy.eyesCheckWindow({ tag: 'closed fullscreen', target: 'window', fully: false });
       });
     });
   });
@@ -221,6 +227,7 @@ describe('plugins', () => {
       cy.shrinkPlugin();
       cy.waitForVideoToLoad();
       cy.focusEditor()
+        .type('{uparrow}') //try to fix bug where sometimes it doesn't type
         .type('{uparrow}')
         .type('Will this fix the flakiness?');
       cy.eyesCheckWindow(this.test.title);
@@ -261,6 +268,7 @@ describe('plugins', () => {
       cy.shrinkPlugin();
       cy.waitForVideoToLoad();
       cy.focusEditor()
+        .type('{uparrow}') //try to fix bug where sometimes it doesn't type
         .type('{uparrow}')
         .type('Will this fix the flakiness?');
       cy.eyesCheckWindow(this.test.title);
