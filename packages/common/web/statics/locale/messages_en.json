@@ -73,6 +73,7 @@
   "HtmlEditPanel_UrlError": "Check the URL and try again",
   "HtmlEditPanel_HtmlInput_Placeholder": "Paste your code here (HTTPS only)",
   "HtmlEditPanel_UrlInput_Placeholder": "HTTPS only",
+  "HtmlEditPanel_HtmlInput_DefaultText": "<p> Hello World! </p>",
   "ImagePlugin_InsertButton_Tooltip": "Add an image",
   "ImageSettings_MobileHeader_Cancel": "Cancel",
   "ImageSettings_MobileHeader_Save": "Save",
