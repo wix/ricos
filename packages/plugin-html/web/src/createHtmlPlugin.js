@@ -6,10 +6,11 @@ import { HTML_TYPE } from './types';
 const createHtmlPlugin = (config = {}) => {
   const type = HTML_TYPE;
   const { helpers, isMobile, t, [type]: settings = {}, getEditorBounds, ...rest } = config;
+  const simulateEditClick = ({ e, pubsub, componentData }) =>
+    !componentData.src ? pubsub.set('onClickTrigger', { event: e, key: 'edit' }) : null;
 
   return createBasePlugin({
-    onOverlayClick: ({ e, pubsub, componentData }) =>
-      !componentData.src ? pubsub.set('onClickTrigger', { event: e, key: 'edit' }) : null,
+    onOverlayClick: simulateEditClick,
     component: Component,
     settings,
     type: HTML_TYPE,
@@ -25,6 +26,7 @@ const createHtmlPlugin = (config = {}) => {
     t,
     getEditorBounds,
     defaultPluginData: defaults(t),
+    onComponentMount: simulateEditClick,
     ...rest,
   });
 };

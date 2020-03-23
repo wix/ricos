@@ -68,6 +68,7 @@ const commonjs = () => {
         'Entity',
         'RawDraftContentState',
         'EditorChangeType',
+        'convertFromHTML',
       ],
     },
   ];
