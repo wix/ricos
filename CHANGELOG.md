@@ -23,6 +23,8 @@
   - [#778](https://github.com/wix-incubator/rich-content/pull/778) fix sizeFullWidth
 - `common`
   - [#814](https://github.com/wix-incubator/rich-content/pull/814) fix: adding support for H4, H5, H6
+- `viewer`
+  - [#832](https://github.com/wix-incubator/rich-content/pull/832) fix emoji in rtl
 - `editor`
   - [#790](https://github.com/wix-incubator/rich-content/pull/790) convertToRaw - block.data converted correctly, Fixes line spacing
   - [#820](https://github.com/wix-incubator/rich-content/pull/820) remove custom getBlockRenderMap.js (mobile fix)
