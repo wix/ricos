@@ -5,18 +5,18 @@
 
 @supports (display: grid) {
   .layoutsSelector_grid {
-    grid-template-columns: 25% 25% 25% 25%;
-    grid-template-rows: 92px 73px;
+    grid-template-rows: 85px 85px;
+    grid-template-columns: auto auto auto auto;
+    row-gap: 12px;
+    column-gap: 4px;
   }
 }
 
 .layoutsSelector_tile {
   margin: 0 auto 0 auto;
-  display: inline-block;
 }
 
 .layoutsSelector_tile_label {
-  margin-top: 6px;
   line-height: 1.5;
   display: block;
 }

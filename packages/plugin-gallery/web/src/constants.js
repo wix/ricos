@@ -102,32 +102,11 @@ export const THEME = (colors, utils) => {
     itemContainerSelected: {},
 
     //image-ratio-selector.scss
-    imageRatioSelector_grid: {
-      'grid-template-columns': 'auto auto auto auto auto',
-      'grid-template-rows': '72px',
-      'row-gap': '12px',
-      'column-gap': '4px',
-    },
     imageRatioSelector_ratioButton_selected: {
       backgroundColor: `${actionColor} !important`,
     },
-    imageRatioSelector_tile: {
-      margin: '0 !important',
-    },
 
     //layout-selector.scss
-    layoutsSelector_grid: {
-      'grid-template-rows': '85px 85px',
-      'grid-template-columns': '90px 90px 90px 90px',
-      'row-gap': '12px',
-      'column-gap': '4px',
-    },
-    layoutsSelector_tile: {
-      display: null,
-    },
-    layoutsSelector_tile_label: {
-      marginTop: '2px',
-    },
     layoutsSelector_icon_selected: {
       color: actionColor,
     },
@@ -135,11 +114,6 @@ export const THEME = (colors, utils) => {
     //thumbnail-placement-selector.rtlignore.scss
     thumbnailPlacementSelector_icon_selected: {
       color: actionColor,
-    },
-    thumbnailPlacementSelector_grid: {
-      'row-gap': '12px',
-      'column-gap': '4px',
-      'grid-template-columns': '90px 90px 90px 90px',
     },
   };
 };
