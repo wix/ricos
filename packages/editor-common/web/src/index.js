@@ -75,6 +75,8 @@ export {
   setEntityData,
   replaceWithEmptyBlock,
   deleteBlock,
+  getBlockAtStartOfSelection,
+  getSelectedBlocks,
   createEntity,
   createBlockAndFocus,
   createBlock,

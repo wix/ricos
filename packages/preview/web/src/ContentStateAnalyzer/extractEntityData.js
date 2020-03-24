@@ -89,6 +89,13 @@ const mapConverter = entity => [
   },
 ];
 
+const linkConverter = entity => [
+  {
+    type: 'link',
+    url: entity.data.url,
+  },
+];
+
 const converters = {
   'wix-draft-plugin-image': imageConverter,
   'wix-draft-plugin-gallery': galleryConverter,
@@ -101,10 +108,12 @@ const converters = {
   mention: defaultEntityConverter,
   'wix-draft-plugin-headers-markdown': defaultEntityConverter,
   'wix-draft-plugin-button': defaultEntityConverter,
-  LINK: defaultEntityConverter,
+  LINK: linkConverter,
+  LINK_PREVIEW: linkConverter,
   'wix-draft-plugin-html': defaultEntityConverter,
 };
 
-const extractEntityData = entity => converters[entity.type](entity);
+const extractEntityData = entity =>
+  converters[entity.type] ? converters[entity.type](entity) : defaultEntityConverter(entity);
 
 export default extractEntityData;

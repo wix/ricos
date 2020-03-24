@@ -234,7 +234,7 @@ The `mediaInfo` param is expected to be a file data object returned by [ContentS
 The `ContentStateBuilder.map` method appends an `atomic` block to the `blocks` and a `wix-draft-plugin-map` entity to the `entityMap`. The optional params `config` and `overrides` are merged with the `entity.data.config` and `entity.data`, respectively.
 The `mediaInfo` parameter is expected to be a map data object returned by [ContentStateMetadata.maps](./rich-content-preview.md#contentstatemetadatamaps) method.
 
-### ContentStateTransformation
+## ContentStateTransformation
 
 The `ContentStateTransformation` represents a rule to be applied on content state in order to achieve the desired preview state:
 
