@@ -7,13 +7,17 @@ export default function gallerySettings(colors) {
   const thumb = { ...sliderTrack, border: `4px solid ${actionColor}` };
   return {
     //gallery-items-sortable.scss
-    itemContainerSelected: {
-      boxShadow: `0 0 0 3px ${actionColor} !important`,
+    itemContainer: {
+      '&.itemContainerSelected': {
+        boxShadow: `0 0 0 3px ${actionColor}`,
+      },
     },
+    itemContainerSelected: {},
 
     //image-ratio-selector.scss
     imageRatioSelector_grid: {
       'grid-template-columns': 'auto auto auto auto auto',
+      'grid-template-rows': '72px',
       'row-gap': '12px',
       'column-gap': '4px',
     },
@@ -21,12 +25,12 @@ export default function gallerySettings(colors) {
       backgroundColor: `${actionColor} !important`,
     },
     imageRatioSelector_tile: {
-      margin: '0',
+      margin: '0 !important',
     },
 
     //layout-selector.scss
     layoutsSelector_grid: {
-      'grid-template-rows': 'auto auto',
+      'grid-template-rows': '85px 85px',
       'grid-template-columns': '90px 90px 90px 90px',
       'row-gap': '12px',
       'column-gap': '4px',
