@@ -26,6 +26,7 @@
 - `common`
   - [#814](https://github.com/wix-incubator/rich-content/pull/814) fix: adding support for H4, H5, H6
 - `editor`
+  - [d486af87](https://github.com/wix-incubator/rich-content/commit/d486af87) fix plain text paste
   - [#790](https://github.com/wix-incubator/rich-content/pull/790) convertToRaw - block.data converted correctly, Fixes line spacing
   - [#820](https://github.com/wix-incubator/rich-content/pull/820) remove custom getBlockRenderMap.js (mobile fix)
 - `fullscreen`
@@ -75,6 +76,15 @@
 ### :bug: Bug Fix
 - `gallery`
   - [#775](https://github.com/wix-incubator/rich-content/pull/775) adding videos to gallery
+
+#### xxxxxxxxxxxx   v6 hotfixes below   xxxxxxxxxxxx
+
+## 6.10.4 (Mar 24, 2020)
+### :bug: Bug Fix
+- `editor`
+  - [d486af87](https://github.com/wix-incubator/rich-content/commit/d486af87) fix plain text paste
+
+#### xxxxxxxxxxxx   v6 hotfixes above   xxxxxxxxxxxx
 
 ## 6.10.2 (Mar 15, 2020)
 ### :house: Internal
