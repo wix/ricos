@@ -16,6 +16,11 @@
 ### :rocket: New Feature
 - `code-block`
   - [#827](https://github.com/wix-incubator/rich-content/pull/827) selection starts in the block
+- `gallery`
+  - [#833](https://github.com/wix-incubator/rich-content/pull/833) elipsis for too long image titles
+- `fullscreen`
+  - [#833](https://github.com/wix-incubator/rich-content/pull/833) item titles appear on fullscreen
+
 ### :bug: Bug Fix
 - `text-color`
   - [#805](https://github.com/wix-incubator/rich-content/pull/805) adding a text color/highlight works on mobile
@@ -26,6 +31,8 @@
 - `editor`
   - [#790](https://github.com/wix-incubator/rich-content/pull/790) convertToRaw - block.data converted correctly, Fixes line spacing
   - [#820](https://github.com/wix-incubator/rich-content/pull/820) remove custom getBlockRenderMap.js (mobile fix)
+- `gallery`
+  - [#833](https://github.com/wix-incubator/rich-content/pull/833) image titles appear on mobile
 
 ### :house: Internal
 - `general`
