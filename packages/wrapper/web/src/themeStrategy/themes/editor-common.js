@@ -16,27 +16,39 @@ export default function editorCommon(colors) {
 
     //selection-list.scss
     selectionListOption: {
-      width: '100%',
-      height: '85px',
-      margin: '0 ',
-      textAlign: 'center',
-      display: 'inline-flex',
-      flexDirection: 'column',
-      justifyContent: 'center',
-      alignItems: 'center',
       '&:hover': {
-        backgroundColor: hexToRgbA(actionColor, 0.05),
+        backgroundColor: `${hexToRgbA(actionColor, 0.05)} !important`,
       },
     },
     selectionListOption_selected: {
       color: actionColor,
-      '&$selectionListOption': {
-        backgroundColor: hexToRgbA(actionColor, 0.08),
-      },
+      backgroundColor: `${hexToRgbA(actionColor, 0.1)} !important`,
       '&$selectionListOption:hover': {
-        backgroundColor: hexToRgbA(actionColor, 0.08),
+        backgroundColor: hexToRgbA(actionColor, 0.1),
       },
     },
+
+    //checkbox.scss
+    checkbox_icon: {
+      border: `solid 1px ${actionColor} !important`,
+      '&:hover': {
+        color: `${hexToRgbA(actionColor, 0.1)} !important`,
+      },
+    },
+    checkbox_infoIcon: {
+      '&:hover': {
+        color: `${actionColor} !important`,
+      },
+    },
+    checkbox_icon_checked: {
+      backgroundColor: `${actionColor} !important`,
+    },
+    checkbox_inputLabel: {
+      '&:hover $checkbox_icon_unchecked': {
+        backgroundColor: `${hexToRgbA(actionColor, 0.1)} !important`,
+      },
+    },
+    checkbox_icon_unchecked: {},
 
     //tabs.scss
     tabs_panel: {
