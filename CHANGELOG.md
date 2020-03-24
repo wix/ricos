@@ -37,6 +37,7 @@
 ### :house: Internal
 - `general`
   - [#720](https://github.com/wix-incubator/rich-content/pull/720) mobile example app styles issues
+  - [#835](https://github.com/wix-incubator/rich-content/pull/835) 'fullwidth' fixed in example on ipad
 - `wrapper`
   - [#817](https://github.com/wix-incubator/rich-content/pull/817) bugfix: removed override of props
   - [#810](https://github.com/wix-incubator/rich-content/pull/810) added palettes & fixed toolbarButton color
