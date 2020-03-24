@@ -25,6 +25,8 @@
   - [#778](https://github.com/wix-incubator/rich-content/pull/778) fix sizeFullWidth
 - `common`
   - [#814](https://github.com/wix-incubator/rich-content/pull/814) fix: adding support for H4, H5, H6
+- `viewer`
+  - [#832](https://github.com/wix-incubator/rich-content/pull/832) fix emoji in rtl
 - `editor`
   - [d486af87](https://github.com/wix-incubator/rich-content/commit/d486af87) fix plain text paste
   - [#790](https://github.com/wix-incubator/rich-content/pull/790) convertToRaw - block.data converted correctly, Fixes line spacing
