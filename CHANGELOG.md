@@ -30,6 +30,7 @@
 ### :house: Internal
 - `general`
   - [#720](https://github.com/wix-incubator/rich-content/pull/720) mobile example app styles issues
+  - [#835](https://github.com/wix-incubator/rich-content/pull/835) all images with size 'fullwidth' are positioned correctly in ipad and ipad-pro
 - `wrapper`
   - [#817](https://github.com/wix-incubator/rich-content/pull/817) bugfix: removed override of props
   - [#810](https://github.com/wix-incubator/rich-content/pull/810) added palettes & fixed toolbarButton color
