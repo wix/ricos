@@ -28,7 +28,6 @@
   },
   "dependencies": {
     "classnames": "^2.0.0",
-    "direction": "~1.0.3",
     "redraft": "~0.9.1",
     "wix-rich-content-common": "7.0.2"
   },
