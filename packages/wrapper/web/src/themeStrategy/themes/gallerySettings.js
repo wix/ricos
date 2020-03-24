@@ -12,13 +12,22 @@ export default function gallerySettings(colors) {
     },
 
     //image-ratio-selector.scss
+    imageRatioSelector_grid: {
+      'grid-template-columns': 'auto auto auto auto auto',
+      'row-gap': '12px',
+      'column-gap': '4px',
+    },
     imageRatioSelector_ratioButton_selected: {
       backgroundColor: `${actionColor} !important`,
+    },
+    imageRatioSelector_tile: {
+      margin: '0',
     },
 
     //layout-selector.scss
     layoutsSelector_grid: {
       'grid-template-rows': 'auto auto',
+      'grid-template-columns': '90px 90px 90px 90px',
       'row-gap': '12px',
       'column-gap': '4px',
     },
@@ -39,13 +48,14 @@ export default function gallerySettings(colors) {
     thumbnailPlacementSelector_grid: {
       'row-gap': '12px',
       'column-gap': '4px',
+      'grid-template-columns': '90px 90px 90px 90px',
     },
 
     //selection-list.scss
     selectionListOption: {
-      width: '90px',
+      width: '100%',
       height: '85px',
-      margin: '0',
+      margin: '0 ',
       textAlign: 'center',
       display: 'inline-flex',
       flexDirection: 'column',
@@ -67,7 +77,7 @@ export default function gallerySettings(colors) {
 
     //tabs.scss
     tabs_panel: {
-      padding: '24px 24px 30px',
+      padding: '24px 24px 30px !important',
     },
     tabs_headers_option_selected: {
       borderBottom: `solid 3px ${actionColor} !important`,
