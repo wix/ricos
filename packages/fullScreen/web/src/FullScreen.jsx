@@ -7,7 +7,7 @@ import resizeMediaUrl from 'wix-rich-content-plugin-gallery/dist/lib/resize-medi
 import PropTypes from 'prop-types';
 import styles from './fullscreen.rtlignore.scss';
 
-const { ProGallery } = process.env.SANTA ? {} : require('pro-gallery');
+const { ProGallery } = require('pro-gallery');
 
 export default class Fullscreen extends Component {
   componentDidMount() {
@@ -63,9 +63,7 @@ export default class Fullscreen extends Component {
             videoPlay: 'auto',
             allowSocial: false,
             loveButton: false,
-            videoSpeed: '1',
-            videoLoop: true,
-            slideshowInfoSize: 100,
+            slideshowInfoSize: 200,
             allowDescription: true,
             allowTitle: false,
           }}
