@@ -12,6 +12,7 @@ export const fixtures = [
   'gallery-layouts',
   'old-image-format',
   'hashtag-and-link',
+  'images-sizes',
 ];
 
 export const fixturesToTestOnSeo = ['images'];
