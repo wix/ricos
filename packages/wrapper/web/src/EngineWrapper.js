@@ -25,7 +25,7 @@ class EngineWrapper extends React.Component {
     } else if (!editor && !onExpand) {
       ModalityProvider = FullscreenRenderer;
     }
-    return { ModalityProvider, disabled: false };
+    return { ModalityProvider };
   }
 
   handleChange = editorState => {
@@ -51,11 +51,11 @@ class EngineWrapper extends React.Component {
       };
     }
 
-    const { disabled, ModalityProvider } = this.state;
+    const { ModalityProvider } = this.state;
 
     return (
       <ModalityProvider {...childProps}>
-        {Children.only(React.cloneElement(children, { ...childProps, disabled }))}
+        {Children.only(React.cloneElement(children, { ...childProps }))}
       </ModalityProvider>
     );
   }

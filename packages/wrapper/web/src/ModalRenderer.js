@@ -14,7 +14,7 @@ export default class ModalRenderer extends Component {
     this.state = {
       showModal: false,
       EditorModal: () => undefined,
-      isReady: false,
+      isMounted: false,
     };
     this.childProps = {
       ...props.children.props,
@@ -30,7 +30,7 @@ export default class ModalRenderer extends Component {
     const EditorModal = React.lazy(() =>
       import(/* webpackChunkName: "rce-EditorModal"  */ `./EditorModal.js`)
     );
-    this.setState({ EditorModal, isReady: true });
+    this.setState({ EditorModal, isMounted: true });
   }
 
   openModal = data => {
@@ -52,13 +52,13 @@ export default class ModalRenderer extends Component {
   };
 
   render() {
-    const { EditorModal, showModal, modalProps, isReady } = this.state;
+    const { EditorModal, showModal, modalProps, isMounted } = this.state;
     const { children, ModalsMap, locale, theme } = this.props;
 
     return (
       <Fragment>
         {Children.only(React.cloneElement(children, this.childProps))}
-        {isReady && (
+        {isMounted && (
           <Suspense fallback={<div />}>
             <EditorModal
               dataHook={'WrapperEditorModal'}
