@@ -16,6 +16,8 @@
 ### :rocket: New Feature
 - `code-block`
   - [#827](https://github.com/wix-incubator/rich-content/pull/827) selection starts in the block
+- `link-preview`
+  - [#653](https://github.com/wix-incubator/rich-content/pull/653) add link preview
 ### :bug: Bug Fix
 - `text-color`
   - [#805](https://github.com/wix-incubator/rich-content/pull/805) adding a text color/highlight works on mobile
@@ -39,6 +41,8 @@
   - [#819](https://github.com/wix-incubator/rich-content/pull/819) improve: replaced "aphrodite" with "jss" 
   - [#822](https://github.com/wix-incubator/rich-content/pull/822) ssr fix - render suspense only after component is imported
   - [#816](https://github.com/wix-incubator/rich-content/pull/816) wrapper theme: gallery settings modal
+- `e2e`
+  - [#795](https://github.com/wix-incubator/rich-content/pull/795) new images-sizes fixture
 
 </details>
 <hr/>
