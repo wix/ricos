@@ -343,7 +343,7 @@
   "Poll_PollSettings_Tab_Settings_ResultsPermission_Owner": "Only Me",
   "Poll_PollSettings_Tab_Settings_ResultsPermission_Voters": "Voters",
   "Poll_PollSettings_Tab_Settings_ResultsPermission_All": "Everyone",
-  "Poll_PollSettings_Tab_Settings_VoterVisibility": "Don’t show who voted",
+  "Poll_PollSettings_Tab_Settings_VoterVisibility": "Show who voted",
   "Poll_PollSettings_Tab_Settings_VoterVisibility_Tooltip": "By default, people will be able to see who voted for each option.",
   "Poll_PollSettings_Tab_Settings_Multiselect": "Allow voting for multiple options",
   "Poll_Viewer_VoteCount": "{{number}} votes",
