@@ -258,7 +258,7 @@ class ImageViewer extends React.Component {
             this.renderPreloadImage(imageClassName, imageSrc, metadata.alt, imageProps)}
           {shouldRenderImage &&
             this.renderImage(imageClassName, imageSrc, metadata.alt, imageProps, isGif, seoMode)}
-          {hasExpand && (
+          {hasLink && hasExpand && (
             <ExpandIcon className={this.styles.expandIcon} onClick={this.handleExpand} />
           )}
         </div>
