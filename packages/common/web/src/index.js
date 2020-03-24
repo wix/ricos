@@ -31,6 +31,7 @@ export { default as pluginGiphySchema } from '../statics/schemas/plugin-giphy.sc
 export { default as pluginHtmlSchema } from '../statics/schemas/plugin-html.schema.json';
 export { default as pluginImageSchema } from '../statics/schemas/plugin-image.schema.json';
 export { default as pluginLinkSchema } from '../statics/schemas/plugin-link.schema.json';
+export { default as pluginLinkPreviewSchema } from '../statics/schemas/plugin-link-preview.schema.json';
 export { default as pluginMapSchema } from '../statics/schemas/plugin-map.schema.json';
 export { default as pluginMentionsSchema } from '../statics/schemas/plugin-mentions.schema.json';
 export { default as pluginSoundCloudSchema } from '../statics/schemas/plugin-sound-cloud.schema.json';

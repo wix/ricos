@@ -51,7 +51,8 @@
   },
   "dependencies": {
     "wix-rich-content-common": "7.0.2",
-    "wix-rich-content-editor-common": "7.0.2"
+    "wix-rich-content-editor-common": "7.0.2",
+    "wix-rich-content-plugin-link-preview": "7.0.2"
   },
   "unpkg": true,
   "publishConfig": {

@@ -1,0 +1,59 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://wix-rich-content/link-preview-content-data-schema.json",
+    "type": "object",
+    "definitions": {},
+    "properties": {
+      "config": {
+        "$id": "/properties/config",
+        "type": "object",
+        "title": "configuration",
+        "required": ["link"],
+        "properties": {
+          "link": {
+            "$id": "/properties/config/properties/link",
+            "type": ["object", "null"],
+            "required": ["url"],
+            "properties": {
+              "url": {
+                "$id": "/properties/config/properties/link/properties/url",
+                "type": "string",
+                "title": "URL",
+                "examples": ["wix.com"]
+              }
+            }
+          }
+        }
+      },
+      "title": {
+        "$id": "/properties/title",
+        "type": "string",
+        "title": "title",
+        "default": "",
+        "examples": ["Free Website Builder | Create a Free Website"]
+      },
+      "description": {
+        "$id": "/properties/description",
+        "type": "string",
+        "title": "description",
+        "default": "",
+        "examples": ["Create a free website with Wix.com. Choose a stunning template and customize anything with the Wix website builder—no coding skills needed. Create yours today!"]
+      },
+      "thumbnail_url": {
+        "$id": "/properties/thumbnail_url",
+        "type": "string",
+        "title": "thumbnail_url",
+        "default": "",
+        "examples": ["https://static.wixstatic.com/media/5305c5_5f112df56dcd40a29e855baae08f19ce~mv2.jpg/v1/fill/w_600,h_315,al_c/5305c5_5f112df56dcd40a29e855baae08f19ce~mv2.jpg"]
+      },
+      "html": {
+        "$id": "/properties/html",
+        "type": "string",
+        "title": "html",
+        "default": "",
+        "examples": ["<div>Hello world!</div>"]
+      }
+    },
+    "required": ["config", "title", "thumbnail_url"]
+  }
+
