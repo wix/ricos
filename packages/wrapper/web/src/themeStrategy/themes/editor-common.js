@@ -1,59 +1,18 @@
 /* eslint-disable camelcase */
-import { adaptForeground, hexToRgbA } from './themeUtils';
+import { adaptForeground, hexToRgbA } from './utils';
 
-export default function gallerySettings(colors) {
+export default function editorCommon(colors) {
   const actionColor = adaptForeground(colors.actionColor);
+  const blockActionColorSettings = {
+    cursor: 'default',
+    boxShadow: `0 0 0 3px ${actionColor} !important`,
+  };
   const sliderTrack = { background: `${actionColor} !important` };
   const thumb = { ...sliderTrack, border: `4px solid ${actionColor}` };
   return {
-    //gallery-items-sortable.scss
-    itemContainer: {
-      '&.itemContainerSelected': {
-        boxShadow: `0 0 0 3px ${actionColor}`,
-      },
-    },
-    itemContainerSelected: {},
-
-    //image-ratio-selector.scss
-    imageRatioSelector_grid: {
-      'grid-template-columns': 'auto auto auto auto auto',
-      'grid-template-rows': '72px',
-      'row-gap': '12px',
-      'column-gap': '4px',
-    },
-    imageRatioSelector_ratioButton_selected: {
-      backgroundColor: `${actionColor} !important`,
-    },
-    imageRatioSelector_tile: {
-      margin: '0 !important',
-    },
-
-    //layout-selector.scss
-    layoutsSelector_grid: {
-      'grid-template-rows': '85px 85px',
-      'grid-template-columns': '90px 90px 90px 90px',
-      'row-gap': '12px',
-      'column-gap': '4px',
-    },
-    layoutsSelector_tile: {
-      display: null,
-    },
-    layoutsSelector_tile_label: {
-      marginTop: '2px',
-    },
-    layoutsSelector_icon_selected: {
-      color: adaptForeground(actionColor),
-    },
-
-    //thumbnail-placement-selector.rtlignore.scss
-    thumbnailPlacementSelector_icon_selected: {
-      color: actionColor,
-    },
-    thumbnailPlacementSelector_grid: {
-      'row-gap': '12px',
-      'column-gap': '4px',
-      'grid-template-columns': '90px 90px 90px 90px',
-    },
+    //block focus
+    hasFocus: blockActionColorSettings,
+    pluginContainer: { '&:hover': blockActionColorSettings },
 
     //selection-list.scss
     selectionListOption: {

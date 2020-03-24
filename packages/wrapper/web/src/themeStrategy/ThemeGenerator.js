@@ -1,4 +1,8 @@
-import gallerySettings from './themes/gallerySettings';
+import * as utils from './themes/utils';
+import editorCommon from './themes/editor-common';
+import editor from './themes/editor';
+import viewer from './themes/viewer';
+
 /* eslint-disable camelcase */
 const THEMES = {
   DEFAULT: 'Default',
@@ -63,44 +67,20 @@ export default class ThemeGenerator {
       const pluginThemes = this.themeGenerators.reduce(
         (acc, curr) => ({
           ...acc,
-          ...curr(colors),
+          ...curr(colors, utils),
         }),
         {}
       );
 
-      const blockActionColorSettings = {
-        cursor: 'default',
-        boxShadow: `0 0 0 3px ${actionColor} !important`,
+      const appStyles = (this.isEditor && {
+        ...editorCommon(colors),
+        ...editor(colors),
+      }) || {
+        ...viewer(colors),
       };
 
       return {
-        ...gallerySettings(colors),
-        editor: {
-          background: bgColor,
-          color: textColor,
-        },
-        quote: {
-          'border-left-color': actionColor,
-          'border-right-color': actionColor,
-        },
-        sideToolbar_floatingIcon: {
-          '&:hover': {
-            fill: actionColor,
-          },
-        },
-        footerToolbar: {
-          background: `${bgColor} !important`,
-        },
-        footerToolbarButton_icon: {},
-        footerToolbarButton: {
-          '&:hover:not([disabled]) $footerToolbarButton_icon': {
-            color: actionColor,
-          },
-        },
-
-        //block focus
-        hasFocus: blockActionColorSettings,
-        pluginContainer: { '&:hover': blockActionColorSettings },
+        ...appStyles,
         linkPreview: {
           borderColor: textColor,
           backgroundColor: bgColor,
