@@ -95,8 +95,8 @@ export const THEME = (colors, utils) => {
   return {
     //gallery-items-sortable.scss
     itemContainer: {
-      '&.itemContainerSelected': {
-        boxShadow: `0 0 0 3px ${actionColor}`,
+      '&$itemContainerSelected': {
+        boxShadow: `0 0 0 3px ${actionColor} !important`,
       },
     },
     itemContainerSelected: {},
