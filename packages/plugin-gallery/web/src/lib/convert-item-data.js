@@ -39,8 +39,10 @@ export const convertItemData = ({ items, anchorTarget, relValue }) =>
           url: normalizeUrl(item.url || ''),
         };
       }
+
       convertedData.metaData.title = metadata.altText; //*** HACK *** title over takes description for altText. So save altText in title, but render the description in the tile
       convertedData.metaData.description = metadata.title;
+
       if (item.metadata.link) {
         convertedData.metaData.link = {
           type: 'wix',
