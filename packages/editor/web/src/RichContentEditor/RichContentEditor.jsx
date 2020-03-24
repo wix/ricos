@@ -219,17 +219,25 @@ class RichContentEditor extends Component {
     if (handlePastedText) {
       return handlePastedText(text, html, editorState);
     }
-    const contentState = draftConvertFromHtml(pastedContentConfig)(html);
+    let contentState;
+    if (html) {
+      const htmlContentState = draftConvertFromHtml(pastedContentConfig)(html);
+      contentState = Modifier.replaceWithFragment(
+        editorState.getCurrentContent(),
+        editorState.getSelection(),
+        htmlContentState.getBlockMap()
+      );
+    } else {
+      contentState = Modifier.replaceText(
+        editorState.getCurrentContent(),
+        editorState.getSelection(),
+        text
+      );
+    }
 
-    const updatedContentState = Modifier.replaceWithFragment(
-      editorState.getCurrentContent(),
-      editorState.getSelection(),
-      contentState.getBlockMap()
-    );
-
-    const newEditorState = EditorState.push(editorState, updatedContentState, 'insert-fragment');
+    const newEditorState = EditorState.push(editorState, contentState, 'insert-fragment');
     const resultEditorState = EditorState.set(newEditorState, {
-      currentContent: updatedContentState,
+      currentContent: contentState,
       selection: newEditorState.getSelection(),
     });
 

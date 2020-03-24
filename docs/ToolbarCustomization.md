@@ -182,7 +182,7 @@ In order to replace a button icon in a specific plugin toolbar or to replace the
 const config = {
   [VIDEO_TYPE]: {
     toolbar: {
-      icons: { 
+      icons: {
         delete: MyCustomDeleteIcon
         InsertPluginButtonIcon: MyCustomPluginIcon
       }

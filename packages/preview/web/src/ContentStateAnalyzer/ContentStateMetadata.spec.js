@@ -31,6 +31,8 @@ describe('content state text metadata', () => {
       'block that contains a #hashtag',
       '@Test One mention',
       'block with line spacing 3',
+      'block with link.com',
+      'block with more links',
     ]);
   });
 
@@ -42,7 +44,13 @@ describe('content state text metadata', () => {
       [
         'Long text block: Rick and Morty is a fascinating show. Boiled down to its most fundamental roots, it’s simply a well-plotted, zany, sci-fi comedy. Still, its impact on viewers can’t be overstated, both for fans who see it as a philosophical reference point (and for those who use it as an excuse monstrous behavior). What about this seemingly innocent Adult Swim cartoon drives people so wild? Brilliant writing and content are a big part of it. Even the most innocuous moment can mean the world on Rick and Morty, giving the series a wildcard edge that sets it apart from the rest modern television. No one has partnered fart jokes with careful looks into the human soul like Dan Harmon and Justin Roiland and their toxic love letter to the human heart. Lost? Watch Rick and Morty. But if you’re curious about the best moments from the cartoon that launched a million catchphrases, you are in luck. Here are the best Rick and Morty quotes. For longtime fans, consider it a chance to revisit the best moments from the series (and a good reminder of just how much Rick garbles his lines). For new fans, it’s a taste of what you’ve been missing. As for folks who have tried but never found a connection with the show, we hear The Good Place is on Netflix and is worth your time. Let’s get started.',
       ],
-      ['block that contains a #hashtag', '@Test One mention', 'block with line spacing 3'],
+      [
+        'block that contains a #hashtag',
+        '@Test One mention',
+        'block with line spacing 3',
+        'block with link.com',
+        'block with more links',
+      ],
     ]);
   });
 
@@ -133,6 +141,22 @@ describe('content state media metadata', () => {
       url: 'https://media3.giphy.com/media/uL0lBBzFn98eQ/giphy.gif',
       width: 360,
     },
+    {
+      type: 'link',
+      url: 'reddit.com',
+    },
+    {
+      type: 'link',
+      url: 'link.com',
+    },
+    {
+      type: 'link',
+      url: 'more.com',
+    },
+    {
+      type: 'link',
+      url: 'links.com',
+    },
   ];
 
   it('should return all the image data', () => {
@@ -149,5 +173,9 @@ describe('content state media metadata', () => {
 
   it('should return all the maps data', () => {
     expect(metadata.maps).toEqual(mediaData.filter(({ type }) => type === 'map'));
+  });
+
+  it('should return all the links data', () => {
+    expect(metadata.links).toEqual(mediaData.filter(({ type }) => type === 'link'));
   });
 });

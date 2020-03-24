@@ -1,5 +1,9 @@
 export const DEFAULTS = {
-  config: {},
+  config: {
+    preview: {
+      enable: true,
+    },
+  },
 };
 export const THEME = colors => ({
   link: {

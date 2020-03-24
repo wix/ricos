@@ -1,7 +1,7 @@
-@import "~wix-rich-content-common/dist/statics/styles/palette";
-@import "~wix-rich-content-common/dist/statics/styles/consts";
-@import "~wix-rich-content-common/dist/statics/styles/mixins";
-@import "~wix-rich-content-common/dist/statics/styles/fonts";
+@import '~wix-rich-content-common/dist/statics/styles/palette';
+@import '~wix-rich-content-common/dist/statics/styles/consts';
+@import '~wix-rich-content-common/dist/statics/styles/mixins';
+@import '~wix-rich-content-common/dist/statics/styles/fonts';
 
 .pluginContainerMobile {
   max-width: 100%;
@@ -25,7 +25,7 @@
         box-sizing: border-box;
 
         &::after {
-          content: "";
+          content: '';
           display: table;
           clear: both;
         }
@@ -47,13 +47,13 @@
   height: 100%;
   line-height: 1.5;
   font-size: 16px;
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
   color: $primary-text-color;
   white-space: pre-wrap !important;
   overflow-wrap: break-word;
 
   &::after {
-    content: "";
+    content: '';
     display: table;
     clear: both;
   }
@@ -76,7 +76,7 @@
 }
 
 .block {
-  &+& {
+  & + & {
     margin-top: 20px;
   }
 }
@@ -110,7 +110,7 @@
   white-space: pre-line !important;
   text-align: justify !important;
 
-  &>* {
+  & > * {
     white-space: pre-line !important;
     text-align: justify !important;
   }
@@ -165,7 +165,7 @@
   padding: 0;
   margin: 0;
 
-  [dir] &>* {
+  [dir] & > * {
     margin-inline-start: 40px;
   }
 }
@@ -179,7 +179,7 @@
   padding: 0;
   margin: 0;
 
-  [dir] &>* {
+  [dir] & > * {
     margin-inline-start: 40px;
   }
 }
@@ -188,7 +188,7 @@
 .codeBlock {
   composes: blockStyleSpacing;
   background-color: rgba(0, 0, 0, 0.05);
-  font-family: "Inconsolata", "Menlo", "Consolas", monospace;
+  font-family: 'Inconsolata', 'Menlo', 'Consolas', monospace;
   font-size: 16px;
   line-height: 26px;
   padding: 2px 25px;
@@ -203,4 +203,8 @@
   margin: 0;
   padding: 0;
   display: contents;
+}
+
+.anchor {
+  text-decoration: none;
 }

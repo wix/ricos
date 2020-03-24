@@ -189,7 +189,7 @@ describe('content state media builder', () => {
         },
       })
       .get();
-    expect(contentState.entityMap[0]).toEqual(expected.entityMap[8]);
+    expect(contentState.entityMap[0]).toEqual(expected.entityMap[11]);
   });
 
   it('should add a file to the content', () => {
@@ -224,6 +224,23 @@ describe('content state media builder', () => {
       })
       .get();
     expect(contentState.entityMap[0]).toEqual(expected.entityMap[5]);
+  });
+
+  it('should add a link preview to the content', () => {
+    const contentState = new UUT().linkPreview({ mediaInfo: { url: 'wix.com' } }).get();
+    expect(contentState.entityMap[0]).toEqual({
+      type: 'LINK_PREVIEW',
+      mutability: 'IMMUTABLE',
+      data: {
+        config: {
+          alignment: 'center',
+          link: {
+            url: 'wix.com',
+          },
+          size: 'content',
+        },
+      },
+    });
   });
 });
 
