@@ -26,6 +26,8 @@
 - `editor`
   - [#790](https://github.com/wix-incubator/rich-content/pull/790) convertToRaw - block.data converted correctly, Fixes line spacing
   - [#820](https://github.com/wix-incubator/rich-content/pull/820) remove custom getBlockRenderMap.js (mobile fix)
+- `fullscreen`
+  - [#830](https://github.com/wix-incubator/rich-content/pull/830) expand button always appears on hover
 
 ### :house: Internal
 - `general`
