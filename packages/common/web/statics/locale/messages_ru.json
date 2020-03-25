@@ -183,6 +183,7 @@
   "LinkTo_Modal_Section_Title": "Select a block to link to",
   "Poll_PollSettings_Tab_Layout_ChooseLayout_List": "List",
   "MapPlugin_InsertButton_Tooltip": "Добавить карту",
+  "HtmlEditPanel_HtmlInput_DefaultText": "<p> Hello World! </p>",
   "VideoPlugin_InsertButton_Tooltip": "Добавление видео",
   "ColorPickerButtonLabel_Cancel": "Не отключать",
   "AnchorPlugin_MoveUp_Tooltip": "Move Up",
