@@ -2,7 +2,7 @@ import mockLinkEditorState from '../../../../../e2e/tests/fixtures/headers.json'
 import mockAlignmentEditorState from '../../../../../e2e/tests/fixtures/text-alignment.json';
 import mockGiphyEditorState from '../../../../../e2e/tests/fixtures/giphy.json';
 
-import { EditorState, convertToRaw, convertFromRaw } from 'draft-js';
+import { EditorState, convertToRaw, convertFromRaw } from '@wix/draft-js';
 import {
   insertLinkAtCurrentSelection,
   insertLinkInPosition,

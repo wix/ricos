@@ -1,6 +1,6 @@
 import React from 'react';
 import EngineWrapper from './EngineWrapper';
-import themeStrategyProvider from './themeStrategy/themeStrategyProvider';
+// import themeStrategyProvider from './themeStrategy/themeStrategyProvider';
 import pluginsStrategyProvider from './pluginsStrategy/pluginsStrategyProvider';
 import localeStrategyProvider from './localeStrategy/localeStrategyProvider';
 import PropTypes from 'prop-types';
@@ -32,17 +32,17 @@ export default class RichContentWrapper extends React.Component {
   render() {
     const {
       strategies = [],
-      theme,
-      palette,
+      // theme,
+      // palette,
       plugins = [],
       children,
       editor = false,
       ...rest
     } = this.props;
     const { localeStrategy } = this.state;
-    const themeGenerators = plugins.filter(plugin => !!plugin.theme).map(plugin => plugin.theme);
+    // const themeGenerators = plugins.filter(plugin => !!plugin.theme).map(plugin => plugin.theme);
     const mergedStrategies = [
-      themeStrategyProvider(editor, { theme, palette, themeGenerators }),
+      // themeStrategyProvider(editor, { theme, palette, themeGenerators }),
       pluginsStrategyProvider(editor, { plugins }),
       localeStrategy,
       ...strategies,
