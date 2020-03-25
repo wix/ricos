@@ -130,7 +130,6 @@ class GalleryViewer extends React.Component {
       return {
         ...styleParams,
         isVertical: styleParams.galleryLayout === 1,
-        // allowDescription: true,
         allowTitle: true,
         galleryTextAlign: 'center',
         textsHorizontalPadding: 0,
