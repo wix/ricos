@@ -11,6 +11,7 @@ import { convertToReact } from './utils/convertContentState';
 import viewerStyles from '../statics/rich-content-viewer.scss';
 import viewerAlignmentStyles from '../statics/rich-content-viewer-alignment.rtlignore.scss';
 import rtlStyle from '../statics/rich-content-viewer-rtl.rtlignore.scss';
+import draftStyles from '../statics/draft.rtlignore.scss';
 
 class RichContentViewer extends Component {
   constructor(props) {
@@ -18,7 +19,7 @@ class RichContentViewer extends Component {
     this.state = {
       raw: RichContentViewer.getInitialState(props.initialState),
     };
-    const styles = { ...viewerStyles, ...viewerAlignmentStyles, ...rtlStyle };
+    const styles = { ...draftStyles, ...viewerStyles, ...viewerAlignmentStyles, ...rtlStyle };
     this.styles = mergeStyles({ styles, theme: props.theme });
   }
 

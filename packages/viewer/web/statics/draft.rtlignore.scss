@@ -1,0 +1,15 @@
+:global {
+    @import "~draft-js/dist/Draft.css";  
+    .public-DraftStyleDefault-listLTR {
+      /*!rtl:begin:ignore*/
+      direction: ltr;
+      /*!rtl:end:ignore*/
+    }
+  
+    .public-DraftStyleDefault-listRTL {
+      /*!rtl:begin:ignore*/
+      direction: rtl;
+      text-align: right;
+      /*!rtl:end:ignore*/
+    } 
+  }
