@@ -68,9 +68,8 @@ export default class SoundCloudURLInputModal extends Component {
 
   render() {
     const { url, submitted } = this.state;
-    const { doneLabel, cancelLabel, t, isMobile, languageDir } = this.props;
+    const { doneLabel, cancelLabel, t, isMobile, languageDir, theme } = this.props;
     const { styles } = this;
-
     return (
       <div className={styles.container} data-hook="soundCloudUploadModal" dir={languageDir}>
         {!isMobile && (
@@ -116,7 +115,7 @@ export default class SoundCloudURLInputModal extends Component {
           cancel={() => this.onCloseRequested()}
           saveLabel={doneLabel}
           cancelLabel={cancelLabel}
-          theme={styles}
+          theme={{ ...styles, ...theme }}
           t={t}
         />
       </div>
