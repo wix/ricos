@@ -443,10 +443,20 @@ describe('plugins', () => {
     it('change link preview settings', function() {
       cy.openPluginToolbar(PLUGIN_COMPONENT.LINK_PREVIEW);
       cy.setLinkSettings();
+      cy.focusEditor();
     });
     it('convert link preview to regular link', function() {
       cy.openPluginToolbar(PLUGIN_COMPONENT.LINK_PREVIEW);
       cy.get(`[data-hook=baseToolbarButton_replaceToLink][tabindex!=-1]`).click();
+      cy.focusEditor();
+    });
+    it('backspace key should convert link preview to regular link', function() {
+      cy.moveCursorToEnd().type('{backspace}');
+      cy.focusEditor();
+    });
+    it('delete link preview', function() {
+      cy.openPluginToolbar(PLUGIN_COMPONENT.LINK_PREVIEW);
+      cy.get(`[data-hook=blockButton_delete][tabindex!=-1]`).click();
     });
   });
 });
