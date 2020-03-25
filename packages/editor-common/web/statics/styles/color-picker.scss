@@ -33,7 +33,6 @@
   cursor: pointer;
   outline: 0;
   padding: 0;
-  margin-left: 12px;
 
   @include phone {
     margin-top: 22px;
@@ -86,7 +85,6 @@
   vertical-align: top;
   left: 65%;
   top: -2px;
-  margin-top: 5px;
 }
 
 .colorPicker_add_color_label {
