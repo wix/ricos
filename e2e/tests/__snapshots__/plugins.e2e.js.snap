@@ -2883,22 +2883,19 @@ exports[`plugins > link preview > convert link preview to regular link #0`] =
       "entityRanges": [
         {
           "key": 0,
-          "length": 1,
+          "length": 7,
           "offset": 0
         }
       ],
-      "inlineStyleRanges": [],
+      "inlineStyleRanges": [
+        {
+          "length": 7,
+          "offset": 0,
+          "style": "UNDERLINE"
+        }
+      ],
       "key": 1,
-      "text": " ",
-      "type": "atomic"
-    },
-    {
-      "data": {},
-      "depth": 0,
-      "entityRanges": [],
-      "inlineStyleRanges": [],
-      "key": 2,
-      "text": "",
+      "text": "wix.com",
       "type": "unstyled"
     },
     {
@@ -2912,7 +2909,7 @@ exports[`plugins > link preview > convert link preview to regular link #0`] =
         }
       ],
       "inlineStyleRanges": [],
-      "key": 3,
+      "key": 2,
       "text": " ",
       "type": "atomic"
     },
@@ -2921,7 +2918,7 @@ exports[`plugins > link preview > convert link preview to regular link #0`] =
       "depth": 0,
       "entityRanges": [],
       "inlineStyleRanges": [],
-      "key": 4,
+      "key": 3,
       "text": "",
       "type": "unstyled"
     },
@@ -2936,7 +2933,7 @@ exports[`plugins > link preview > convert link preview to regular link #0`] =
         }
       ],
       "inlineStyleRanges": [],
-      "key": 5,
+      "key": 4,
       "text": " ",
       "type": "atomic"
     },
@@ -2945,7 +2942,7 @@ exports[`plugins > link preview > convert link preview to regular link #0`] =
       "depth": 0,
       "entityRanges": [],
       "inlineStyleRanges": [],
-      "key": 6,
+      "key": 5,
       "text": "",
       "type": "unstyled"
     },
@@ -2966,7 +2963,7 @@ exports[`plugins > link preview > convert link preview to regular link #0`] =
           "style": "UNDERLINE"
         }
       ],
-      "key": 7,
+      "key": 6,
       "text": "wix.com ",
       "type": "unstyled"
     }
@@ -2974,20 +2971,12 @@ exports[`plugins > link preview > convert link preview to regular link #0`] =
   "entityMap": {
     "0": {
       "data": {
-        "config": {
-          "alignment": "center",
-          "link": {
-            "url": "wix.com"
-          },
-          "size": "content"
-        },
-        "description": "\tCreate a free website with Wix.com. Choose a stunning template and customize anything with the Wix website builder—no coding skills needed. Create yours today!",
-        "provider_url": "www.wix.com",
-        "thumbnail_url": "https://static.wixstatic.com/media/5305c5_5f112df56dcd40a29e855baae08f19ce~mv2.jpg/v1/fill/w_600,h_315,al_c/5305c5_5f112df56dcd40a29e855baae08f19ce~mv2.jpg",
-        "title": "Free Website Builder | Create a Free Website | Wix.com"
+        "rel": "noopener noreferrer",
+        "target": "_self",
+        "url": "wix.com"
       },
-      "mutability": "IMMUTABLE",
-      "type": "LINK_PREVIEW"
+      "mutability": "MUTABLE",
+      "type": "LINK"
     },
     "1": {
       "data": {
@@ -3147,6 +3136,301 @@ exports[`plugins > video > add a custom video #0`] =
       },
       "mutability": "IMMUTABLE",
       "type": "wix-draft-plugin-video"
+    }
+  }
+};
+
+exports[`plugins > link preview > backspace key should convert link preview to regular link #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 7,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [
+        {
+          "length": 7,
+          "offset": 0,
+          "style": "UNDERLINE"
+        }
+      ],
+      "key": 1,
+      "text": "wix.com",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 1,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 3,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 2,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 4,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 5,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 3,
+          "length": 7,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [
+        {
+          "length": 7,
+          "offset": 0,
+          "style": "UNDERLINE"
+        }
+      ],
+      "key": 6,
+      "text": "wix.com ",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "rel": "noopener noreferrer",
+        "target": "_self",
+        "url": "wix.com"
+      },
+      "mutability": "MUTABLE",
+      "type": "LINK"
+    },
+    "1": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "link": {
+            "url": "wix.com"
+          },
+          "size": "content"
+        },
+        "description": "\tIts the holiday season now and many people are either on vacation already or prepping for their next trip during this time. One of the popular destinations that Malaysians love to visit would be Seoul,",
+        "provider_url": "https://www.worldofbuzz.com/",
+        "thumbnail_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Good_Food_Display_-_NCI_Visuals_Online.jpg/220px-Good_Food_Display_-_NCI_Visuals_Online.jpg",
+        "title": "9 Yummy Snacks From South Korea That Make Great Souvenirs for Everyone"
+      },
+      "mutability": "IMMUTABLE",
+      "type": "LINK_PREVIEW"
+    },
+    "2": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "link": {
+            "url": "wix.com"
+          },
+          "size": "content"
+        },
+        "provider_url": "https://www.youtube.com",
+        "thumbnail_url": "https://i.ytimg.com/vi/W9aEdHf6cA0/maxresdefault.jpg",
+        "title": "Fiesta Latina 2019 - Maluma, Luis Fonsi, Ozuna, J Balvin, CNCO, J Balvin - Latin Hits Mix 2019"
+      },
+      "mutability": "IMMUTABLE",
+      "type": "LINK_PREVIEW"
+    },
+    "3": {
+      "data": {
+        "rel": "noopener",
+        "target": "_blank",
+        "url": "wix.com"
+      },
+      "mutability": "MUTABLE",
+      "type": "LINK"
+    }
+  }
+};
+
+exports[`plugins > link preview > delete link preview #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 3,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 1,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 4,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 5,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 2,
+          "length": 7,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [
+        {
+          "length": 7,
+          "offset": 0,
+          "style": "UNDERLINE"
+        }
+      ],
+      "key": 6,
+      "text": "wix.com ",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "link": {
+            "url": "wix.com"
+          },
+          "size": "content"
+        },
+        "description": "\tIts the holiday season now and many people are either on vacation already or prepping for their next trip during this time. One of the popular destinations that Malaysians love to visit would be Seoul,",
+        "provider_url": "https://www.worldofbuzz.com/",
+        "thumbnail_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Good_Food_Display_-_NCI_Visuals_Online.jpg/220px-Good_Food_Display_-_NCI_Visuals_Online.jpg",
+        "title": "9 Yummy Snacks From South Korea That Make Great Souvenirs for Everyone"
+      },
+      "mutability": "IMMUTABLE",
+      "type": "LINK_PREVIEW"
+    },
+    "1": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "link": {
+            "url": "wix.com"
+          },
+          "size": "content"
+        },
+        "provider_url": "https://www.youtube.com",
+        "thumbnail_url": "https://i.ytimg.com/vi/W9aEdHf6cA0/maxresdefault.jpg",
+        "title": "Fiesta Latina 2019 - Maluma, Luis Fonsi, Ozuna, J Balvin, CNCO, J Balvin - Latin Hits Mix 2019"
+      },
+      "mutability": "IMMUTABLE",
+      "type": "LINK_PREVIEW"
+    },
+    "2": {
+      "data": {
+        "rel": "noopener",
+        "target": "_blank",
+        "url": "wix.com"
+      },
+      "mutability": "MUTABLE",
+      "type": "LINK"
     }
   }
 };

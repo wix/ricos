@@ -54,26 +54,35 @@ const shouldAddLinkPreview = linkPreviewData => {
 
 export const convertLinkPreviewToLink = editorState => {
   // preserve url
-  const currentBlock = getBlockAtStartOfSelection(editorState);
+  let currentBlock = getBlockAtStartOfSelection(editorState);
   const blockKey = currentBlock.key;
   const url = getLinkPreviewUrl(editorState, currentBlock);
 
   // replace preview block with text block containing url
-  const newState = replaceWithEmptyBlock(editorState, blockKey);
-  const contentState = Modifier.insertText(
+  let newState = replaceWithEmptyBlock(editorState, currentBlock.key);
+  let contentState = Modifier.insertText(
     newState.getCurrentContent(),
     newState.getSelection(),
     url
   );
+  // reread block after insertText
+  currentBlock = contentState.getBlockForKey(currentBlock.key);
+  const nextBlock = contentState.getBlockAfter(currentBlock.key);
+  // delte empty block after preview
+  const selectionRange = new SelectionState({
+    anchorKey: currentBlock.key,
+    anchorOffset: currentBlock.text.length,
+    focusKey: nextBlock.key,
+    focusOffset: 1,
+  });
+  if (nextBlock && nextBlock.text.length === 0) {
+    contentState = Modifier.removeRange(contentState, selectionRange, 'forward');
+  }
+  newState = EditorState.push(newState, contentState, 'change-block-type');
 
-  const editorStateWithLink = changePlainTextUrlToLinkUrl(contentState, blockKey, url);
+  const editorStateWithLink = changePlainTextUrlToLinkUrl(newState, blockKey, url);
 
-  EditorState.push(
-    editorStateWithLink,
-    editorStateWithLink.getCurrentContent(),
-    'change-block-type'
-  );
-  return EditorState.forceSelection(editorStateWithLink, editorStateWithLink.getSelection());
+  return EditorState.forceSelection(editorStateWithLink, selectionRange);
 };
 
 const getLinkPreviewUrl = (editorState, block) => {
@@ -85,25 +94,7 @@ const getLinkPreviewUrl = (editorState, block) => {
   return entityData?.config?.link?.url;
 };
 
-const deleteEmptyBlockAfterPreview = (contentState, blockKey) => {
-  const block = contentState.getBlockForKey(blockKey);
-  const nextBlock = contentState.getBlockAfter(blockKey);
-
-  const selectionRange = new SelectionState({
-    anchorKey: blockKey,
-    anchorOffset: block.text.length,
-    focusKey: nextBlock.key,
-    focusOffset: 1,
-  });
-  let newState = contentState;
-  if (nextBlock && nextBlock.text.length === 0) {
-    newState = Modifier.removeRange(contentState, selectionRange, 'forward');
-  }
-  return EditorState.push(newState, newState, 'change-block-type');
-};
-
-const changePlainTextUrlToLinkUrl = (contentState, url, blockKey) => {
-  const editorState = deleteEmptyBlockAfterPreview(contentState, blockKey);
+const changePlainTextUrlToLinkUrl = (editorState, blockKey, url) => {
   return insertLinkInPosition(
     EditorState.push(editorState, editorState.getCurrentContent(), 'change-block-type'),
     blockKey,
