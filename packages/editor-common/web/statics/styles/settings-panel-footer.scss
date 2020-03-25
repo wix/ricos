@@ -15,10 +15,15 @@
   position: fixed;
   bottom: 0;
   z-index: 5;
+  display: inline-flex;
+  align-items: center;
+  flex-direction: row;
 }
 
 %panel_button {
   padding: 8.5px 24px;
+  width: 109px;
+  height: 36px;
   border-style: none;
 }
 
@@ -33,9 +38,9 @@
 .settingsPanel_cancel {
   @extend %panel_button;
   border-style: solid;
-}
 
-.settingsPanel_cancel:hover {
-  background: #fff;
-  color: #4990e2;
+  &:hover {
+    background: #fff;
+    color: #4990e2;
+  }
 }

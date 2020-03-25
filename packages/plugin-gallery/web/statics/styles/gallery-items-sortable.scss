@@ -109,6 +109,9 @@
   &:active {
     cursor: -webkit-grabbing;
   }
+  &:hover {
+    opacity: 0.7;
+  }
 }
 .topBar {
   height: 40px;

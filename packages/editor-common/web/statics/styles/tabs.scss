@@ -21,6 +21,9 @@
   background-color: transparent;
   font-size: 16px;
   font-weight: 300;
+  &:hover:not(.tabs_headers_option_selected) .tabs_headers_option_label {
+    color: #00000066;
+  }
 }
 
 .tabs_headers_option_selected {
