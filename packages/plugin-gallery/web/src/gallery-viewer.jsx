@@ -144,7 +144,7 @@ class GalleryViewer extends React.Component {
   };
 
   renderExpandIcon = itemProps => {
-    return itemProps.linkData.url && itemProps.type !== 'video' ? (
+    return itemProps.type !== 'video' ? (
       <ExpandIcon
         className={this.styles.expandIcon}
         onClick={e => {
