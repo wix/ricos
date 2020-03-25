@@ -95,5 +95,10 @@ export default function editorCommon(colors) {
         },
       },
     },
+
+    //color-picker.scss
+    colorPicker_add_color_label: {
+      color: `${actionColor} !important`,
+    },
   };
 }

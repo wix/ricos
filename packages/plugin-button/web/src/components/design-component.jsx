@@ -149,9 +149,9 @@ class DesignComponent extends PureComponent {
             onChange={onChange.bind(this)}
             t={t}
           >
-            {({ renderUserColors, renderAddColorButton, mergedStyles }) => (
-              <div className={mergedStyles.colorPicker_palette}>
-                <div className={mergedStyles.colorPicker_buttons_container}>
+            {({ renderUserColors, renderAddColorButton }) => (
+              <div className={styles.colorPicker_palette}>
+                <div className={styles.colorPicker_buttons_container}>
                   {renderAddColorButton()}
                   {renderUserColors()}
                 </div>

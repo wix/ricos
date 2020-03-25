@@ -55,13 +55,19 @@ export const getDefaultComponentData = (rel, target) => {
   };
 };
 
-export const THEME = colors => {
+export const THEME = (colors, utils) => {
   const { textColor, bgColor, actionColor, color7 } = colors;
   COLORS.color1 = bgColor;
   COLORS.color5 = textColor;
   COLORS.color7 = color7;
   COLORS.color8 = actionColor;
-  return {};
+  return {
+    checkbox: {
+      '&:hover $checkbox_icon_unchecked': {
+        backgroundColor: `${utils.hexToRgbA(actionColor, 0.1)} !important`,
+      },
+    },
+  };
 };
 
 export const buttonPreviews = colors => [
