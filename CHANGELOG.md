@@ -16,25 +16,39 @@
 ### :rocket: New Feature
 - `html`
   - [#826](https://github.com/wix-incubator/rich-content/pull/826) initial state for html plugin
+- `code-block`
+  - [#827](https://github.com/wix-incubator/rich-content/pull/827) selection starts in the block
+- `link-preview`
+  - [#653](https://github.com/wix-incubator/rich-content/pull/653) add link preview
 ### :bug: Bug Fix
 - `text-color`
   - [#805](https://github.com/wix-incubator/rich-content/pull/805) adding a text color/highlight works on mobile
 - `plugins`
   - [#778](https://github.com/wix-incubator/rich-content/pull/778) fix sizeFullWidth
+- `common`
+  - [#814](https://github.com/wix-incubator/rich-content/pull/814) fix: adding support for H4, H5, H6
+- `viewer`
+  - [#832](https://github.com/wix-incubator/rich-content/pull/832) fix emoji in rtl
+- `editor`
+  - [d486af87](https://github.com/wix-incubator/rich-content/commit/d486af87) fix plain text paste
+  - [#790](https://github.com/wix-incubator/rich-content/pull/790) convertToRaw - block.data converted correctly, Fixes line spacing
+  - [#820](https://github.com/wix-incubator/rich-content/pull/820) remove custom getBlockRenderMap.js (mobile fix)
+- `fullscreen`
+  - [#830](https://github.com/wix-incubator/rich-content/pull/830) expand button always appears on hover
+
 ### :house: Internal
 - `general`
   - [#720](https://github.com/wix-incubator/rich-content/pull/720) mobile example app styles issues
-- `editor`
-  - [#790](https://github.com/wix-incubator/rich-content/pull/790) convertToRaw - block.data converted correctly, Fixes line spacing
-- `common`
-  - [#814](https://github.com/wix-incubator/rich-content/pull/814) fix: adding support for H4, H5, H6
+  - [#835](https://github.com/wix-incubator/rich-content/pull/835) 'fullwidth' fixed in example on ipad
 - `wrapper`
   - [#817](https://github.com/wix-incubator/rich-content/pull/817) bugfix: removed override of props
   - [#810](https://github.com/wix-incubator/rich-content/pull/810) added palettes & fixed toolbarButton color
   - [#818](https://github.com/wix-incubator/rich-content/pull/818) bugfix: inlineStyleMappers - removed empty typeMappers + improved storybook example
-  - [#819](https://github.com/wix-incubator/rich-content/pull/819) improve: replaced "aphrodite" with "jss"
+  - [#819](https://github.com/wix-incubator/rich-content/pull/819) improve: replaced "aphrodite" with "jss" 
   - [#822](https://github.com/wix-incubator/rich-content/pull/822) ssr fix - render suspense only after component is imported
   - [#816](https://github.com/wix-incubator/rich-content/pull/816) wrapper theme: gallery settings modal
+- `e2e`
+  - [#795](https://github.com/wix-incubator/rich-content/pull/795) new images-sizes fixture
 
 </details>
 <hr/>
@@ -67,6 +81,15 @@
 ### :bug: Bug Fix
 - `gallery`
   - [#775](https://github.com/wix-incubator/rich-content/pull/775) adding videos to gallery
+
+#### xxxxxxxxxxxx   v6 hotfixes below   xxxxxxxxxxxx
+
+## 6.10.4 (Mar 24, 2020)
+### :bug: Bug Fix
+- `editor`
+  - [d486af87](https://github.com/wix-incubator/rich-content/commit/d486af87) fix plain text paste
+
+#### xxxxxxxxxxxx   v6 hotfixes above   xxxxxxxxxxxx
 
 ## 6.10.2 (Mar 15, 2020)
 ### :house: Internal
