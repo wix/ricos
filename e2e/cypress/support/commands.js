@@ -213,6 +213,14 @@ Cypress.Commands.add('setLink', (selection, link) => {
     .click();
 });
 
+Cypress.Commands.add('setLinkSettings', () => {
+  cy.clickToolbarButton(INLINE_TOOLBAR_BUTTONS.LINK)
+    .get(`[data-hook=linkPanelContainer] [data-hook=linkPanelRelCheckbox]`)
+    .click()
+    .get(`[data-hook=linkPanelContainerDone]`)
+    .click();
+});
+
 Cypress.Commands.add('setAlignment', alignment => {
   cy.setTextStyle(INLINE_TOOLBAR_BUTTONS.ALIGNMENT).setTextStyle(alignment);
 });

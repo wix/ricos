@@ -282,6 +282,30 @@
           "padding-bottom": "3px"
         }
       }
+    },
+    {
+      "key": "6t969",
+      "text": " ",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "35km7",
+      "text": " ",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 7
+        }
+      ],
+      "data": {}
     }
   ],
   "entityMap": {
@@ -403,6 +427,24 @@
           "name": "Tags",
           "slug": "Tags"
         }
+      }
+    },
+    "7": {
+      "type": "LINK_PREVIEW",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "config": {
+          "size": "content",
+          "alignment": "center",
+          "link": {
+            "url": "wix.com"
+          }
+        },
+        "thumbnail_url": "https://static.wixstatic.com/media/5305c5_5f112df56dcd40a29e855baae08f19ce~mv2.jpg/v1/fill/w_600,h_315,al_c/5305c5_5f112df56dcd40a29e855baae08f19ce~mv2.jpg",
+        "title": "Free Website Builder | Create a Free Website | Wix.com",
+        "description": "Create a free website with Wix.com. Choose a stunning template and customize anything with the Wix website builder—no coding skills needed. Create yours today!",
+        "html": "<div>{\"url\":\"https://www.wix.com\",\"title\":\"Free Website Builder | Create a Free Website | Wix.com\",\"description\":\"Create a free website with Wix.com. Choose a stunning template and customize anything with the Wix website builder\\u2014no coding skills needed. Create yours today!\",\"image\":\"https://static.wixstatic.com/media/5305c5_5f112df56dcd40a29e855baae08f19ce~mv2.jpg/v1/fill/w_600,h_315,al_c/5305c5_5f112df56dcd40a29e855baae08f19ce~mv2.jpg\"}</div>",
+        "provider_url": "http://wix.com"
       }
     }
   },
