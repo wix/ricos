@@ -16,6 +16,12 @@
 ### :rocket: New Feature
 - `html`
   - [#826](https://github.com/wix-incubator/rich-content/pull/826) initial state for html plugin
+- `gallery`
+  - [#833](https://github.com/wix-incubator/rich-content/pull/833) elipsis for too long image titles
+
+### :house: Internal
+- `gallery`
+  - [#833](https://github.com/wix-incubator/rich-content/pull/833) using alt property instead of title for altText fixes mobile titles
 
 </details>
 <hr/>
