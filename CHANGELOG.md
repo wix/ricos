@@ -13,22 +13,24 @@
     Click to see more.
   </summary>
 
+
+</details>
+<hr/>
+
+## 7.1.2 (Mar 25, 2020)
 ### :rocket: New Feature
 - `html`
   - [#826](https://github.com/wix-incubator/rich-content/pull/826) initial state for html plugin
 - `gallery`
   - [#833](https://github.com/wix-incubator/rich-content/pull/833) elipsis for too long image titles
-
 ### :house: Internal
 - `gallery`
   - [#833](https://github.com/wix-incubator/rich-content/pull/833) using alt property instead of title for altText fixes mobile titles
-
 ### :bug: [Bug Fix]
 - `link-preview`
   - [#841](https://github.com/wix-incubator/rich-content/pull/841) link preview fixes
-
-</details>
-<hr/>
+- `fullscreen`
+  - [#842](https://github.com/wix-incubator/rich-content/pull/842) itemId for legacy image type
 
 ## 7.1.1 (Mar 25, 2020)
 ### :house: Internal
