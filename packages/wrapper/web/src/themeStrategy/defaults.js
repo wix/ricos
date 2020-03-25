@@ -9,17 +9,17 @@ export const modalStyleDefaults = {
   },
 };
 
-export const modalStyles = (state /* theme */) => {
+export const modalStyles = (state, theme) => {
   return {
     content: Object.assign(
       {},
-      (state.modalStyles || modalStyleDefaults).content
-      // theme.modalTheme.content
+      (state.modalStyles || modalStyleDefaults).content,
+      theme.modalTheme.content
     ),
     overlay: Object.assign(
       {},
-      (state.modalStyles || modalStyleDefaults).overlay
-      // theme.modalTheme.overlay
+      (state.modalStyles || modalStyleDefaults).overlay,
+      theme.modalTheme.overlay
     ),
   };
 };
