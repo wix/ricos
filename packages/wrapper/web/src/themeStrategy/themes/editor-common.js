@@ -60,13 +60,17 @@ export default function editorCommon(colors) {
 
     //button.scss
     button_primary: {
-      background: `${actionColor} !important`,
+      backgroundColor: `${actionColor} !important`,
+      '&:hover': {
+        backgroundColor: `${hexToRgbA(actionColor, 0.8)} !important`,
+      },
     },
     button_secondary: {
       color: actionColor,
       borderColor: `${actionColor} !important`,
       '&:hover': {
-        color: actionColor,
+        color: hexToRgbA(actionColor, 0.6),
+        borderColor: `${hexToRgbA(actionColor, 0.6)} !important`,
       },
     },
 

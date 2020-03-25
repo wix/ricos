@@ -1,24 +1,24 @@
 %button {
   font-size: 14px;
+  cursor: pointer;
 }
 
 .button_primary {
   @extend %button;
   color: #fff;
   background-color: #0261ff;
+
+  &:hover {
+    background-color: rgba(2, 97, 255, 0.8);
+  }
 }
 
 .button_secondary {
   @extend %button;
-  border: 1px solid #4990e2;
+  border: 1px solid #0261ff;
   background: #fff;
-  color: #4990e2;
-  &:hover {
-    color: #fff;
-    background: #5cb4ff;
-  }
-  &:active {
-    background: #4990e2;
-    color: #fff;
+  color: #0261ff;
+  &:hover, &:active {
+    border-color: rgba(2, 97, 255, 0.6);
   }
 }
