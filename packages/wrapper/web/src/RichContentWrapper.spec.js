@@ -62,14 +62,14 @@ describe('Wrapper', () => {
       expect(editorProps).toHaveProperty('config');
       expect(editorProps.config).toHaveProperty('wix-draft-plugin-hashtag');
     });
-    it('should render with themeStrategy output', () => {
-      const element = shallow(wrapper({ editor: true, theme: 'Default' }).withEditor());
-      const instance = element.dive().instance();
-      const renderResult = instance.render();
-      const editorProps = renderResult.props.children.props;
-      expect(editorProps).toHaveProperty('theme');
-      expect(editorProps.theme).toHaveProperty('modalTheme');
-    });
+    // it('should render with themeStrategy output', () => {
+    //   const element = shallow(wrapper({ editor: true, theme: 'Default' }).withEditor());
+    //   const instance = element.dive().instance();
+    //   const renderResult = instance.render();
+    //   const editorProps = renderResult.props.children.props;
+    //   expect(editorProps).toHaveProperty('theme');
+    //   expect(editorProps.theme).toHaveProperty('modalTheme');
+    // });
     it('should call updateLocale on componentDidMount', () => {
       const element = shallow(wrapper({ editor: true, locale: 'en' }).withEditor());
       const instance = element.instance();
@@ -108,14 +108,14 @@ describe('Wrapper', () => {
       expect(viewerProps).toHaveProperty('config');
       expect(viewerProps.config).toHaveProperty('wix-draft-plugin-hashtag');
     });
-    it('should render with themeStrategy output', () => {
-      const element = shallow(wrapper({ theme: 'Default' }).withViewer());
-      const instance = element.dive().instance();
-      const renderResult = instance.render();
-      const viewerProps = renderResult.props.children.props;
-      expect(viewerProps).toHaveProperty('theme');
-      expect(viewerProps).toHaveProperty('decorators');
-      expect(viewerProps.theme).toHaveProperty('modalTheme');
-    });
+    // it('should render with themeStrategy output', () => {
+    //   const element = shallow(wrapper({ theme: 'Default' }).withViewer());
+    //   const instance = element.dive().instance();
+    //   const renderResult = instance.render();
+    //   const viewerProps = renderResult.props.children.props;
+    //   expect(viewerProps).toHaveProperty('theme');
+    //   expect(viewerProps).toHaveProperty('decorators');
+    //   expect(viewerProps.theme).toHaveProperty('modalTheme');
+    // });
   });
 });

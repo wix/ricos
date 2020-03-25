@@ -8,7 +8,7 @@ const externals = [
   'wix-rich-content-editor-common',
   'wix-rich-content-common',
   'react-i18next',
-  /^draft-js$/,
+  /^@wix\/draft-js$/,
 ];
 
 const excludedExternalsRegexArr = [

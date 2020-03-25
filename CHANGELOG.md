@@ -33,7 +33,8 @@
   - [#820](https://github.com/wix-incubator/rich-content/pull/820) remove custom getBlockRenderMap.js (mobile fix)
 - `fullscreen`
   - [#830](https://github.com/wix-incubator/rich-content/pull/830) expand button always appears on hover
-
+- `editor-common`
+  - [#829](https://github.com/wix-incubator/rich-content/pull/829) replace draft-js w/ @wix/draft-js
 ### :house: Internal
 - `general`
   - [#720](https://github.com/wix-incubator/rich-content/pull/720) mobile example app styles issues
@@ -47,6 +48,7 @@
   - [#816](https://github.com/wix-incubator/rich-content/pull/816) wrapper theme: gallery settings modal
 - `e2e`
   - [#795](https://github.com/wix-incubator/rich-content/pull/795) new images-sizes fixture
+
 
 </details>
 <hr/>
