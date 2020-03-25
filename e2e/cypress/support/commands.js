@@ -417,7 +417,6 @@ Cypress.Commands.add('addVideoFromURL', () => {
 
 Cypress.Commands.add('addHtml', () => {
   cy.get(`[data-hook*=${HTML_PLUGIN.STATIC_TOOLBAR_BUTTON}][tabindex!=-1]`).click();
-  //cy.get(`[data-hook*=${PLUGIN_TOOLBAR_BUTTONS.EDIT}]`);
   cy.get(`[data-hook*=${HTML_PLUGIN.INPUT}]`)
     .click()
     .clear();
