@@ -20,6 +20,11 @@
 </details>
 <hr/>
 
+## 7.1.1 (Mar 25, 2020)
+### :house: Internal
+- `wrapper`
+  - jss dependencies as external to resolve cjs issue
+
 ## 7.1.0 (Mar 25, 2020)
 ### :rocket: New Feature
 - `code-block`

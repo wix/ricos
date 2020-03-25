@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-plugin-link-preview",
-  "version": "7.1.0",
+  "version": "7.1.1",
   "author": {
     "name": "Alex Greenstein",
     "email": "alexgr@wix.com"
@@ -49,8 +49,8 @@
     "rollup": "1.31.1"
   },
   "dependencies": {
-    "wix-rich-content-common": "7.1.0",
-    "wix-rich-content-editor-common": "7.1.0"
+    "wix-rich-content-common": "7.1.1",
+    "wix-rich-content-editor-common": "7.1.1"
   },
   "unpkg": true,
   "publishConfig": {
