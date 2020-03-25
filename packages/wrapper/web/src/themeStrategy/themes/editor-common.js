@@ -61,8 +61,11 @@ export default function editorCommon(colors) {
     //button.scss
     button_primary: {
       backgroundColor: `${actionColor} !important`,
-      '&:hover': {
+      '&:hover:not([disabled])': {
         backgroundColor: `${hexToRgbA(actionColor, 0.8)} !important`,
+      },
+      '&:disabled': {
+        backgroundColor: 'rgba(0, 0, 0, 0.4) !important',
       },
     },
     button_secondary: {
@@ -71,6 +74,9 @@ export default function editorCommon(colors) {
       '&:hover': {
         color: hexToRgbA(actionColor, 0.6),
         borderColor: `${hexToRgbA(actionColor, 0.6)} !important`,
+      },
+      '&:disabled': {
+        backgroundColor: 'rgba(0, 0, 0, 0.4) !important',
       },
     },
 

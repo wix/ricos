@@ -104,6 +104,7 @@ export default class VideoSelectionInputModal extends Component {
       isMobile,
       languageDir,
       componentData,
+      theme,
     } = this.props;
     const { styles } = this;
     const hasCustomFileUpload = handleFileUpload || handleFileSelection;
@@ -192,7 +193,7 @@ export default class VideoSelectionInputModal extends Component {
               onClick={this.onUrlVideoSelection}
               ariaProps={!this.state.url && { disabled: 'disabled' }}
               dataHook="videoUploadModalAddButton"
-              theme={styles}
+              theme={{ ...styles, ...theme }}
             >
               {t('VideoUploadModal_AddButtonText')}
             </Button>

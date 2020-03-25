@@ -8,8 +8,13 @@
   color: #fff;
   background-color: #0261ff;
 
-  &:hover {
+  &:hover:not([disabled]) {
     background-color: rgba(2, 97, 255, 0.8);
+  }
+
+  &:disabled {
+    color: rgba(255, 255, 255, 0.6);
+    background-color: rgba(0, 0, 0, 0.4);
   }
 }
 
@@ -20,5 +25,10 @@
   color: #0261ff;
   &:hover, &:active {
     border-color: rgba(2, 97, 255, 0.6);
+  }
+
+  &:disabled {
+    color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 0.4);
   }
 }
