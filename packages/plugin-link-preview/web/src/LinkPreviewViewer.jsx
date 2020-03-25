@@ -33,7 +33,7 @@ class LinkPreviewViewer extends Component {
   getUrlForDisplay = url => url.replace(/^https?:\/\//, '');
 
   render() {
-    const { componentData, isMobile } = this.props;
+    const { componentData } = this.props;
     const {
       title,
       description,
@@ -54,13 +54,12 @@ class LinkPreviewViewer extends Component {
     } = this.styles;
 
     const { imageHeight } = this.state;
-    const imgSize = isMobile ? 110 : imageHeight;
     return (
       <figure className={linkPreview} data-hook="linkPreviewViewer">
         <div
           style={{
-            width: imgSize,
-            height: imgSize,
+            width: imageHeight,
+            height: imageHeight,
             backgroundImage: `url(${thumbnail_url})`,
           }}
           className={linkPreview_image}
