@@ -183,6 +183,7 @@
   "LinkTo_Modal_Section_Title": "Select a block to link to",
   "Poll_PollSettings_Tab_Layout_ChooseLayout_List": "List",
   "MapPlugin_InsertButton_Tooltip": "मैप जोड़ें",
+  "HtmlEditPanel_HtmlInput_DefaultText": "<p> Hello World! </p>",
   "VideoPlugin_InsertButton_Tooltip": "एक वीडियो जोड़ें",
   "ColorPickerButtonLabel_Cancel": "रद करें",
   "AnchorPlugin_MoveUp_Tooltip": "Move Up",

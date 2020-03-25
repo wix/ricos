@@ -14,6 +14,19 @@
   </summary>
 
 ### :rocket: New Feature
+- `html`
+  - [#826](https://github.com/wix-incubator/rich-content/pull/826) initial state for html plugin
+
+</details>
+<hr/>
+
+## 7.1.1 (Mar 25, 2020)
+### :house: Internal
+- `wrapper`
+  - jss dependencies as external to resolve cjs issue
+
+## 7.1.0 (Mar 25, 2020)
+### :rocket: New Feature
 - `code-block`
   - [#827](https://github.com/wix-incubator/rich-content/pull/827) selection starts in the block
 - `link-preview`
@@ -33,7 +46,8 @@
   - [#820](https://github.com/wix-incubator/rich-content/pull/820) remove custom getBlockRenderMap.js (mobile fix)
 - `fullscreen`
   - [#830](https://github.com/wix-incubator/rich-content/pull/830) expand button always appears on hover
-
+- `editor-common`
+  - [#829](https://github.com/wix-incubator/rich-content/pull/829) replace draft-js w/ @wix/draft-js
 ### :house: Internal
 - `general`
   - [#720](https://github.com/wix-incubator/rich-content/pull/720) mobile example app styles issues
@@ -47,9 +61,6 @@
   - [#816](https://github.com/wix-incubator/rich-content/pull/816) wrapper theme: gallery settings modal
 - `e2e`
   - [#795](https://github.com/wix-incubator/rich-content/pull/795) new images-sizes fixture
-
-</details>
-<hr/>
 
 ## 7.0.2 (Mar 20, 2020)
 ### :house: Internal

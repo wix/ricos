@@ -183,6 +183,7 @@
   "LinkTo_Modal_Section_Title": "Select a block to link to",
   "Poll_PollSettings_Tab_Layout_ChooseLayout_List": "List",
   "MapPlugin_InsertButton_Tooltip": "Add a Map",
+  "HtmlEditPanel_HtmlInput_DefaultText": "<p> Hello World! </p>",
   "VideoPlugin_InsertButton_Tooltip": "Magdagdag ng Video",
   "ColorPickerButtonLabel_Cancel": "Cancel",
   "AnchorPlugin_MoveUp_Tooltip": "Move Up",
