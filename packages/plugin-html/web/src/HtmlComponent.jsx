@@ -8,7 +8,7 @@ import {
   pluginHtmlSchema,
 } from 'wix-rich-content-common';
 
-import { SRC_TYPE_HTML, SRC_TYPE_URL, DEFAULTS, INIT_HEIGHT, INIT_WIDTH } from './constants';
+import { SRC_TYPE_HTML, SRC_TYPE_URL, INIT_HEIGHT, INIT_WIDTH, defaults } from './constants';
 import IframeHtml from './IframeHtml';
 import IframeUrl from './IframeUrl';
 import htmlComponentStyles from '../statics/styles/HtmlComponent.scss';
@@ -140,4 +140,4 @@ HtmlComponent.propTypes = {
   isMobile: PropTypes.bool.isRequired,
 };
 
-export { HtmlComponent as Component, DEFAULTS };
+export { HtmlComponent as Component, defaults };

@@ -18,6 +18,8 @@
 
 ## 7.1.0 (Mar 25, 2020)
 ### :rocket: New Feature
+- `html`
+  - [#826](https://github.com/wix-incubator/rich-content/pull/826) initial state for html plugin
 - `code-block`
   - [#827](https://github.com/wix-incubator/rich-content/pull/827) selection starts in the block
 - `link-preview`

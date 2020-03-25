@@ -1,5 +1,5 @@
 import { TOOLBARS } from 'wix-rich-content-editor-common';
-import { DEFAULTS } from '../HtmlComponent';
+import { defaults } from '../HtmlComponent';
 import { InsertPluginIcon } from '../icons';
 
 export default ({ helpers, t, settings }) => {
@@ -9,7 +9,7 @@ export default ({ helpers, t, settings }) => {
       name: 'HTML',
       tooltipText: t('HtmlPlugin_InsertButton_Tooltip'),
       Icon: icon,
-      componentData: DEFAULTS,
+      componentData: defaults(t),
       helpers,
       toolbars: [TOOLBARS.FOOTER, TOOLBARS.SIDE],
     },
