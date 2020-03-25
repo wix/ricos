@@ -42,10 +42,10 @@ export default class RichContentWrapper extends React.Component {
     const { localeStrategy } = this.state;
     const themeGenerators = plugins.filter(plugin => !!plugin.theme).map(plugin => plugin.theme);
     const mergedStrategies = [
+      ...strategies,
+      localeStrategy,
       themeStrategyProvider(editor, { theme, palette, themeGenerators }),
       pluginsStrategyProvider(editor, { plugins }),
-      localeStrategy,
-      ...strategies,
     ];
 
     return (
