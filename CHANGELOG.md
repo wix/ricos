@@ -26,6 +26,8 @@
 ### :bug: [Bug Fix]
 - `link-preview`
   - [#841](https://github.com/wix-incubator/rich-content/pull/841) link preview fixes
+- `fullscreen`
+  - [#842](https://github.com/wix-incubator/rich-content/pull/842) itemId for legacy image type
 
 </details>
 <hr/>
