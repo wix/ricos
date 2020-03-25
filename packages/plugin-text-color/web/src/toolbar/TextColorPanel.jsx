@@ -51,7 +51,7 @@ export default class TextColorPanel extends Component {
       editorState = this.getInlineColorState(colorName);
     this.setState({
       currentColor: newColorHex || defaultColor,
-      currentSchemeColor: this.currentColors[0] && getColor(this.currentColors[0]),
+      currentSchemeColor: newColorHex || (this.currentColors[0] && getColor(this.currentColors[0])),
     });
     this.props.closeModal(editorState);
   }

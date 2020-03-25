@@ -24,18 +24,12 @@ export default class ThemeGenerator {
   }
 
   setTheme(theme, palette) {
-    if (SUPPORTED_THEMES.indexOf(theme) === -1) {
-      this._theme = THEMES.DEFAULT;
-    } else {
-      this._theme = theme;
-    }
+    if (SUPPORTED_THEMES.indexOf(theme) === -1) this._theme = THEMES.DEFAULT;
+    else this._theme = theme;
 
     if (theme === THEMES.PALETTE || theme === THEMES.BACK_OFFICE) {
-      if (!palette) {
-        throw Error('Invalid palette');
-      } else {
-        this.palette = palette;
-      }
+      if (!palette) throw Error('Invalid palette');
+      else this.palette = palette;
     }
   }
 
@@ -52,16 +46,11 @@ export default class ThemeGenerator {
     if (this._theme === THEMES.DEFAULT) {
       return {};
     } else {
-      const actionColor = this.getColorValue(ACTION_COLOR);
-      const bgColor = this.getColorValue(BG_COLOR);
-      const textColor = this.getColorValue(TEXT_COLOR);
-      const secondaryColor = this.getColorValue(SECONDARY_COLOR);
-
       const colors = {
-        actionColor,
-        bgColor,
-        textColor,
-        secondaryColor,
+        actionColor: this.getColorValue(ACTION_COLOR),
+        bgColor: this.getColorValue(BG_COLOR),
+        textColor: this.getColorValue(TEXT_COLOR),
+        secondaryColor: this.getColorValue(SECONDARY_COLOR),
       };
 
       const pluginThemes = this.themeGenerators.reduce(
@@ -81,22 +70,6 @@ export default class ThemeGenerator {
 
       return {
         ...appStyles,
-        linkPreview: {
-          borderColor: textColor,
-          backgroundColor: bgColor,
-        },
-        linkPreview_title: {
-          color: textColor,
-        },
-        linkPreview_image: {
-          borderColor: textColor,
-        },
-        linkPreview_description: {
-          color: textColor,
-        },
-        linkPreview_url: {
-          color: secondaryColor,
-        },
         ...pluginThemes,
       };
     }
