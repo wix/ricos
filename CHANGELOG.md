@@ -18,8 +18,6 @@
   - [#827](https://github.com/wix-incubator/rich-content/pull/827) selection starts in the block
 - `gallery`
   - [#833](https://github.com/wix-incubator/rich-content/pull/833) elipsis for too long image titles
-- `fullscreen`
-  - [#833](https://github.com/wix-incubator/rich-content/pull/833) item titles appear on fullscreen
 - `link-preview`
   - [#653](https://github.com/wix-incubator/rich-content/pull/653) add link preview
 ### :bug: Bug Fix
@@ -47,6 +45,8 @@
   - [#816](https://github.com/wix-incubator/rich-content/pull/816) wrapper theme: gallery settings modal
 - `e2e`
   - [#795](https://github.com/wix-incubator/rich-content/pull/795) new images-sizes fixture
+- `gallery`
+  - [#833](https://github.com/wix-incubator/rich-content/pull/833) using alt property instead of title for altText
 
 </details>
 <hr/>

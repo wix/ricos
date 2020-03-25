@@ -63,9 +63,7 @@ export default class Fullscreen extends Component {
             videoPlay: 'auto',
             allowSocial: false,
             loveButton: false,
-            slideshowInfoSize: 200,
-            allowDescription: true,
-            allowTitle: false,
+            slideshowInfoSize: 0,
           }}
         />
       </div>

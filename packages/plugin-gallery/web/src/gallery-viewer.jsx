@@ -130,8 +130,8 @@ class GalleryViewer extends React.Component {
       return {
         ...styleParams,
         isVertical: styleParams.galleryLayout === 1,
-        allowDescription: true,
-        allowTitle: false,
+        // allowDescription: true,
+        allowTitle: true,
         galleryTextAlign: 'center',
         textsHorizontalPadding: 0,
         imageInfoType: 'NO_BACKGROUND',
@@ -166,7 +166,7 @@ class GalleryViewer extends React.Component {
   hoverElement = itemProps => (
     <Fragment>
       {this.renderExpandIcon(itemProps)}
-      {this.renderTitle(itemProps.description)}
+      {this.renderTitle(itemProps.title)}
     </Fragment>
   );
 
