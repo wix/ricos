@@ -3,9 +3,8 @@ import PropTypes from 'prop-types';
 import { debounce } from 'lodash';
 import { convertToRaw, createEmpty } from 'wix-rich-content-editor/dist/lib/editorStateConversion';
 import { isSSR } from 'wix-rich-content-common';
-import ExampleApp from '../src/ExampleApp';
-import TestApp from '../../../e2e/test-env/src/client/TestApp';
-import { getRequestedLocale, isMobile } from '../src/utils';
+
+import { getRequestedLocale } from '../src/utils';
 
 const generateViewerState = editorState =>
   JSON.parse(JSON.stringify(convertToRaw(editorState.getCurrentContent())));
@@ -14,8 +13,8 @@ class RichContentApp extends PureComponent {
   constructor(props) {
     super(props);
     this.state = this.getInitialState(props);
-    if (this.props.mode === 'demo') {
-      this.onEditorChange = debounce(this.onEditorChange, 100);
+    if (props.debounce) {
+      this.onEditorChange = debounce(this.onEditorChange, props.debounce);
     }
   }
 
@@ -45,8 +44,8 @@ class RichContentApp extends PureComponent {
 
   render() {
     const { editorState, viewerState, localeResource, locale } = this.state;
-    const { allLocales, initialState, mode, seoMode } = this.props;
-    const App = mode === 'demo' ? ExampleApp : TestApp;
+
+    const { allLocales, initialState, seoMode, isMobile, app: App } = this.props;
     return (
       <App
         allLocales={allLocales}
@@ -55,7 +54,7 @@ class RichContentApp extends PureComponent {
         viewerState={viewerState}
         previewState={viewerState}
         locale={locale}
-        isMobile={mode === 'demo' ? isMobile() : this.props.isMobile}
+        isMobile={isMobile}
         localeResource={localeResource}
         onEditorChange={this.onEditorChange}
         setLocale={this.setLocaleResource}

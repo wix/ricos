@@ -65,6 +65,29 @@ describe('text', () => {
     cy.eyesCheckWindow(this.test.title);
   });
 
+  it('allow to apply inline styles and links - isolated', function() {
+    cy.loadIsolatedEditorAndViewer('plain')
+      .setTextStyle(INLINE_TOOLBAR_BUTTONS.BOLD, [40, 10])
+      .setTextStyle(INLINE_TOOLBAR_BUTTONS.UNDERLINE, [10, 5])
+      .setTextStyle(INLINE_TOOLBAR_BUTTONS.ITALIC, [20, 5])
+      .setTextStyle(INLINE_TOOLBAR_BUTTONS.BOLD, [30, 5])
+      .setTextStyle(INLINE_TOOLBAR_BUTTONS.UNDERLINE)
+      .setTextStyle(INLINE_TOOLBAR_BUTTONS.ITALIC)
+      .setAlignment(INLINE_TOOLBAR_BUTTONS.TEXT_ALIGN_CENTER)
+      .setAlignment(INLINE_TOOLBAR_BUTTONS.TEXT_ALIGN_RIGHT)
+      .setAlignment(INLINE_TOOLBAR_BUTTONS.TEXT_ALIGN_LEFT)
+      .setTextStyle(INLINE_TOOLBAR_BUTTONS.QUOTE, [30, 170])
+      .setTextStyle(INLINE_TOOLBAR_BUTTONS.TITLE, [250, 260])
+      .setTextStyle(INLINE_TOOLBAR_BUTTONS.QUOTE, [250, 260])
+      .setTextStyle(INLINE_TOOLBAR_BUTTONS.ORDERED_LIST)
+      .setTextStyle(INLINE_TOOLBAR_BUTTONS.UNORDERED_LIST)
+      .setSelection(0, 0)
+      .enterParagraphs(['#LIVING THE DREAM\n'])
+      .setSelection(0, 0)
+      .blurEditor();
+    cy.eyesCheckWindow(this.test.title);
+  });
+
   it('allow to enter hashtag with link', function() {
     cy.loadEditorAndViewer()
       .enterParagraphs([
