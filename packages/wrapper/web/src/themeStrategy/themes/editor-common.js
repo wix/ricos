@@ -77,10 +77,7 @@ export default function editorCommon(colors) {
     },
 
     //radio-group.scss
-    radioGroup_button: {
-      border: `1px solid ${actionColor} !important`,
-    },
-
+    radioGroup_button: {},
     radioGroup_input: {
       '&:checked + $radioGroup_button': {
         '&::after': {
