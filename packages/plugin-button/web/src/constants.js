@@ -61,11 +61,7 @@ export const THEME = colors => {
   COLORS.color5 = textColor;
   COLORS.color7 = color7;
   COLORS.color8 = actionColor;
-  return {
-    button_container: {
-      //backgroundColor: `${colors.actionColor} !important`,
-    },
-  };
+  return {};
 };
 
 export const buttonPreviews = colors => [

@@ -1,4 +1,5 @@
 export const fallbackColor = '#000000';
+export const fallbackColorBright = '#ffffff';
 
 function getBrightness(hexCode) {
   // return between 0-255
@@ -10,6 +11,10 @@ function getBrightness(hexCode) {
   const b = parseInt(_hexCode.substr(4, 2), 16);
 
   return (r * 299 + g * 587 + b * 114) / 1000;
+}
+
+export function isBright(hexColor) {
+  return getBrightness(hexColor) > 140;
 }
 
 export function adaptForeground(actionColor) {
