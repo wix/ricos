@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 export const BUTTON_TYPE = 'wix-draft-plugin-button';
 export const ALIGN_CENTER = 'center';
 export const settingsTabValue = 'settings';
@@ -12,7 +13,7 @@ export const COLOR_PICKER_TYPE = Object.freeze({
   BACKGROUND_COLOR: 'backgroundColor',
 });
 
-export const COLORS = Object.freeze({
+export const COLORS = {
   color1: '#FEFDFD',
   color2: '#D5D4D4',
   color3: '#000000',
@@ -23,7 +24,7 @@ export const COLORS = Object.freeze({
   color8: '#0261FF',
   color9: '#0141AA',
   color10: '#012055',
-});
+};
 
 export const DEFAULT_CONFIG = {
   alignment: ALIGN_CENTER,
@@ -50,6 +51,19 @@ export const getDefaultComponentData = (rel, target) => {
         color: COLORS.color1,
         borderColor: COLORS.color8,
       },
+    },
+  };
+};
+
+export const THEME = colors => {
+  const { textColor, bgColor, actionColor, color7 } = colors;
+  COLORS.color1 = bgColor;
+  COLORS.color5 = textColor;
+  COLORS.color7 = color7;
+  COLORS.color8 = actionColor;
+  return {
+    button_container: {
+      //backgroundColor: `${colors.actionColor} !important`,
     },
   };
 };

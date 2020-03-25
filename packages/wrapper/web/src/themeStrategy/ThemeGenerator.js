@@ -15,6 +15,7 @@ const BG_COLOR = 11;
 const SECONDARY_COLOR = 13;
 const TEXT_COLOR = 15;
 const ACTION_COLOR = 18;
+const COLOR7 = 17;
 
 export default class ThemeGenerator {
   constructor(isEditor, { theme = THEMES.DEFAULT, palette, themeGenerators = [] }) {
@@ -51,6 +52,7 @@ export default class ThemeGenerator {
         bgColor: this.getColorValue(BG_COLOR),
         textColor: this.getColorValue(TEXT_COLOR),
         secondaryColor: this.getColorValue(SECONDARY_COLOR),
+        color7: utils.hexToRgbA(this.getColorValue(COLOR7), 0.7),
       };
 
       const pluginThemes = this.themeGenerators.reduce(

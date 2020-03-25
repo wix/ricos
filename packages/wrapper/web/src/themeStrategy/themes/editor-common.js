@@ -5,7 +5,7 @@ export default function editorCommon(colors) {
   const actionColor = adaptForeground(colors.actionColor);
   const blockActionColorSettings = {
     cursor: 'default',
-    boxShadow: `0 0 0 3px ${actionColor} !important`,
+    boxShadow: `0 0 0 3px ${colors.actionColor} !important`,
   };
   const sliderTrack = { background: `${actionColor} !important` };
   const thumb = { ...sliderTrack, border: `4px solid ${actionColor}` };

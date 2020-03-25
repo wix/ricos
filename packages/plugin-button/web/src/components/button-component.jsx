@@ -21,7 +21,6 @@ class ButtonComponent extends PureComponent {
     const rel = button.settings.rel ? 'nofollow' : '';
     const style = {
       border: '0px solid blue',
-      ...this.props.style,
       ...button.design,
     };
     const url = button.settings.url;
