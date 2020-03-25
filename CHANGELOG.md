@@ -13,6 +13,10 @@
     Click to see more.
   </summary>
 
+</details>
+<hr/>
+
+## 7.1.0 (Mar 25, 2020)
 ### :rocket: New Feature
 - `code-block`
   - [#827](https://github.com/wix-incubator/rich-content/pull/827) selection starts in the block
@@ -48,10 +52,6 @@
   - [#816](https://github.com/wix-incubator/rich-content/pull/816) wrapper theme: gallery settings modal
 - `e2e`
   - [#795](https://github.com/wix-incubator/rich-content/pull/795) new images-sizes fixture
-
-
-</details>
-<hr/>
 
 ## 7.0.2 (Mar 20, 2020)
 ### :house: Internal
