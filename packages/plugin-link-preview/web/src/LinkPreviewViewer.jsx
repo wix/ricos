@@ -54,12 +54,13 @@ class LinkPreviewViewer extends Component {
     } = this.styles;
 
     const { imageHeight } = this.state;
-
+    const imgSize = isMobile ? 110 : imageHeight;
     return (
       <figure className={linkPreview} data-hook="linkPreviewViewer">
         <div
           style={{
-            width: isMobile ? 110 : imageHeight,
+            width: imgSize,
+            height: imgSize,
             backgroundImage: `url(${thumbnail_url})`,
           }}
           className={linkPreview_image}
