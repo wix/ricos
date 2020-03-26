@@ -13,7 +13,7 @@ export const COLOR_PICKER_TYPE = Object.freeze({
   BACKGROUND_COLOR: 'backgroundColor',
 });
 
-export const COLORS = {
+export const COLORS = Object.freeze({
   color1: '#FEFDFD',
   color2: '#D5D4D4',
   color3: '#000000',
@@ -24,7 +24,7 @@ export const COLORS = {
   color8: '#0261FF',
   color9: '#0141AA',
   color10: '#012055',
-};
+});
 
 export const DEFAULT_CONFIG = {
   alignment: ALIGN_CENTER,
@@ -47,20 +47,22 @@ export const getDefaultComponentData = (rel, target) => {
         borderRadius: 0,
         borderWidth: 0,
         padding: 12,
-        background: COLORS.color8,
-        color: COLORS.color1,
-        borderColor: COLORS.color8,
+        background: getColors().color8,
+        color: getColors().color1,
+        borderColor: getColors().color8,
       },
     },
   };
 };
 
+const WRAPPER_PALETTE = {};
+export const getColors = () => ({ ...COLORS, ...WRAPPER_PALETTE });
 export const THEME = (colors, utils) => {
   const { textColor, bgColor, actionColor, color7 } = colors;
-  COLORS.color1 = bgColor;
-  COLORS.color5 = textColor;
-  COLORS.color7 = color7;
-  COLORS.color8 = actionColor;
+  WRAPPER_PALETTE.color1 = bgColor;
+  WRAPPER_PALETTE.color5 = textColor;
+  WRAPPER_PALETTE.color7 = color7;
+  WRAPPER_PALETTE.color8 = actionColor;
   return {
     checkbox: {
       '&:hover $checkbox_icon_unchecked': {
