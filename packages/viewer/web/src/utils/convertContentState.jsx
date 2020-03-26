@@ -122,6 +122,7 @@ const normalizeContentState = contentState => ({
 
     return {
       ...block,
+      depth: 0,
       data,
       text,
     };
