@@ -104,7 +104,7 @@ class GalleryViewer extends React.Component {
         }
         break;
       case 'ITEM_ACTION_TRIGGERED':
-        this.handleExpand(data);
+        !data.linkData.url && this.handleExpand(data);
         break;
       default:
         break;
@@ -143,7 +143,7 @@ class GalleryViewer extends React.Component {
   };
 
   renderExpandIcon = itemProps => {
-    return itemProps.linkData.url && itemProps.type !== 'video' ? (
+    return itemProps.type !== 'video' ? (
       <ExpandIcon
         className={this.styles.expandIcon}
         onClick={e => {
@@ -165,7 +165,7 @@ class GalleryViewer extends React.Component {
   hoverElement = itemProps => (
     <Fragment>
       {this.renderExpandIcon(itemProps)}
-      {this.renderTitle(itemProps.description)}
+      {this.renderTitle(itemProps.title)}
     </Fragment>
   );
 

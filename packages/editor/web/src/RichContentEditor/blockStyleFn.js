@@ -14,6 +14,8 @@ const types = {
   indent: 'indent',
   atomic: 'atomic',
   'code-block': 'codeBlock',
+  'ordered-list-item': 'orderedList',
+  'unordered-list-item': 'unorderedList',
 };
 
 export default (theme, styleToClass) => {

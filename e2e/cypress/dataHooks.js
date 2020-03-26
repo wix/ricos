@@ -102,6 +102,7 @@ export const PLUGIN_COMPONENT = {
   MAP: 'mapViewer',
   FILE_UPLOAD: 'fileUploadViewer',
   EMOJI: 'EMOJI_insert_plugin_button',
+  LINK_PREVIEW: 'linkPreviewViewer',
 };
 
 export const DIVIDER_DROPDOWN_OPTIONS = {

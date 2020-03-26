@@ -26,4 +26,5 @@ export default {
   HEIGHT: 'height',
   LINK: 'link',
   DELETE: 'delete',
+  LINK_PREVIEW: 'link-preview',
 };
