@@ -127,7 +127,7 @@ class DesignComponent extends PureComponent {
   renderColorPicker(color, userColors, onColorAdded, onChange, pickerType, label) {
     const { t, isMobile, theme, palette } = this.props;
     return (
-      <div>
+      <div className={this.styles.designComponentStyles}>
         <ColorToggleComponent
           theme={theme}
           color={color}
@@ -149,11 +149,15 @@ class DesignComponent extends PureComponent {
             onChange={onChange.bind(this)}
             t={t}
           >
-            {({ renderUserColors, renderAddColorButton }) => (
-              <div className={styles.colorPicker_palette}>
-                <div className={styles.colorPicker_buttons_container}>
-                  {renderAddColorButton()}
-                  {renderUserColors()}
+            {({ renderUserColors, renderAddColorButton, mergedStyles }) => (
+              <div className={mergedStyles.colorPicker_palette}>
+                <div className={mergedStyles.colorPicker_buttons_container}>
+                  <div className={mergedStyles.colorPicker_buttons_colors}>
+                    {renderUserColors()}
+                  </div>
+                  <div className={mergedStyles.colorPicker_buttons_colorAddContainer}>
+                    {renderAddColorButton()}
+                  </div>
                 </div>
               </div>
             )}

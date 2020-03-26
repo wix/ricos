@@ -103,19 +103,28 @@
       }
     },
     {
-      "key": "4ac0i",
+      "key": "9bpdm",
+      "text": " ",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 3
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "egkj6",
       "text": "",
       "type": "unstyled",
       "depth": 0,
       "inlineStyleRanges": [],
       "entityRanges": [],
-      "data": {
-        "dynamicStyles": {
-          "line-height": "1.5",
-          "padding-top": "2px",
-          "padding-bottom": "3px"
-        }
-      }
+      "data": {}
     },
     {
       "key": "9v55p",
@@ -133,7 +142,7 @@
       }
     },
     {
-      "key": "9h21o",
+      "key": "nm7d",
       "text": "",
       "type": "unstyled",
       "depth": 0,
@@ -148,7 +157,7 @@
       }
     },
     {
-      "key": "2hh7q",
+      "key": "120as",
       "text": "",
       "type": "unstyled",
       "depth": 0,
@@ -163,7 +172,7 @@
       }
     },
     {
-      "key": "acjju",
+      "key": "5iu5q",
       "text": "",
       "type": "unstyled",
       "depth": 0,
@@ -247,7 +256,7 @@
         {
           "offset": 0,
           "length": 1,
-          "key": 3
+          "key": 4
         }
       ],
       "data": {}
@@ -262,17 +271,17 @@
         {
           "offset": 0,
           "length": 5,
-          "key": 4
+          "key": 5
         },
         {
           "offset": 6,
           "length": 8,
-          "key": 5
+          "key": 6
         },
         {
           "offset": 15,
           "length": 5,
-          "key": 6
+          "key": 7
         }
       ],
       "data": {
@@ -302,7 +311,7 @@
         {
           "offset": 0,
           "length": 1,
-          "key": 7
+          "key": 8
         }
       ],
       "data": {}
@@ -388,6 +397,34 @@
       }
     },
     "3": {
+      "type": "wix-draft-plugin-button",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "config": {
+          "alignment": "left",
+          "size": "small",
+          "width": "fit-content"
+        },
+        "button": {
+          "settings": {
+            "buttonText": "Click Me",
+            "url": "",
+            "rel": false,
+            "target": true
+          },
+          "design": {
+            "activeButton": 0,
+            "borderRadius": 0,
+            "borderWidth": 0,
+            "padding": 12,
+            "background": "#FA6400",
+            "color": "#FEFDFD",
+            "borderColor": "#FA6400"
+          }
+        }
+      }
+    },
+    "4": {
       "type": "wix-draft-plugin-divider",
       "mutability": "IMMUTABLE",
       "data": {
@@ -399,7 +436,7 @@
         }
       }
     },
-    "4": {
+    "5": {
       "type": "mention",
       "mutability": "SEGMENTED",
       "data": {
@@ -409,7 +446,7 @@
         }
       }
     },
-    "5": {
+    "6": {
       "type": "mention",
       "mutability": "SEGMENTED",
       "data": {
@@ -419,7 +456,7 @@
         }
       }
     },
-    "6": {
+    "7": {
       "type": "mention",
       "mutability": "SEGMENTED",
       "data": {
@@ -429,7 +466,7 @@
         }
       }
     },
-    "7": {
+    "8": {
       "type": "LINK_PREVIEW",
       "mutability": "IMMUTABLE",
       "data": {
@@ -448,5 +485,5 @@
       }
     }
   },
-  "VERSION": "6.8.6"
+  "VERSION": "7.1.1"
 }
