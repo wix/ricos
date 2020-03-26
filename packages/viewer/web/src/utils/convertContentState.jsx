@@ -33,7 +33,7 @@ const blockDataToStyle = ({ dynamicStyles }) => kebabToCamelObjectKeys(dynamicSt
 const getInline = (inlineStyleMappers, mergedStyles) =>
   combineMappers([...inlineStyleMappers, staticInlineStyleMapper], mergedStyles);
 
-const getBlocks = (mergedStyles, textDirection, { config }) => {
+const getBlocks = (contentState, mergedStyles, textDirection, { config }) => {
   const getList = ordered => (items, blockProps) => {
     const fixedItems = items.map(item => (item.length ? item : [' ']));
 
@@ -46,6 +46,7 @@ const getBlocks = (mergedStyles, textDirection, { config }) => {
       blockProps,
       getBlockStyleClasses,
       blockDataToStyle,
+      contentState,
     };
     return <List {...props} />;
   };
@@ -167,7 +168,7 @@ const convertToReact = (
     normalizeContentState(contentState),
     {
       inline: getInline(inlineStyleMappers, mergedStyles),
-      blocks: getBlocks(mergedStyles, textDirection, entityProps),
+      blocks: getBlocks(contentState, mergedStyles, textDirection, entityProps),
       entities: getEntities(combineMappers(typeMap), entityProps, mergedStyles),
       decorators,
     },

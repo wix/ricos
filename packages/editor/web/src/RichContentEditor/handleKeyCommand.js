@@ -11,7 +11,7 @@ export default (updateEditorState, customHandlers, blockType) => (command, edito
 
   if (customHandlers[command] && isList(blockType)) {
     // eslint-disable-next-line no-restricted-globals
-    newState = RichUtils.onTab(event, editorState, 3);
+    newState = RichUtils.onTab(event, editorState, 2);
   } else if (customHandlers[command] && !isCodeBlock(blockType)) {
     newState = customHandlers[command](editorState);
   } else {

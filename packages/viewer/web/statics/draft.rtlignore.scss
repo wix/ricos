@@ -11,5 +11,30 @@
       direction: rtl;
       text-align: right;
       /*!rtl:end:ignore*/
-    } 
-  }
+    }
+}
+
+.public-DraftStyleDefault-ol,
+.public-DraftStyleDefault-ul {
+  margin: 0;
+  padding: 0;
+  direction: ltr;
+}
+.public-DraftStyleDefault-depth0-LTR {
+  margin-left: 1.5em !important
+}
+.public-DraftStyleDefault-depth0-RTL {
+  margin-left: 1.5em !important
+}
+.public-DraftStyleDefault-depth1-LTR {
+  margin-left: 1.5em !important
+}
+.public-DraftStyleDefault-depth1-RTL {
+  margin-right: 1.5em !important
+}
+.public-DraftStyleDefault-depth2-LTR {
+  margin-left: 1.5em !important
+ }
+.public-DraftStyleDefault-depth2-RTL {
+  margin-right: 1.5em !important
+}
