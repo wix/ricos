@@ -104,10 +104,10 @@
 }
 
 .itemImage {
-  cursor: -webkit-grab;
+  cursor: grab;
 
   &:active {
-    cursor: -webkit-grabbing;
+    cursor: grabbing;
   }
   &:hover {
     opacity: 0.7;
