@@ -18,7 +18,7 @@
   - [#843](https://github.com/wix-incubator/rich-content/pull/843) fix: mouse up event on overlay triggered the closing the modals
 ### :house: Internal
 - `viewer`
-  - [#846](https://github.com/wix-incubator/rich-content/pull/846) switch to forked draft (`wix-draft`)
+  - [#846](https://github.com/wix-incubator/rich-content/pull/846) switch to forked redraft (`wix-redraft`)
 
 </details>
 <hr/>
