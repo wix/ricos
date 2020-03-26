@@ -12,7 +12,10 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
-
+  
+### :bug: [Bug Fix]
+- `general`
+  - [#843](https://github.com/wix-incubator/rich-content/pull/843) fix: mouse up event on overlay triggered the closing the modals
 
 </details>
 <hr/>
@@ -73,6 +76,7 @@
   - [#816](https://github.com/wix-incubator/rich-content/pull/816) wrapper theme: gallery settings modal
 - `e2e`
   - [#795](https://github.com/wix-incubator/rich-content/pull/795) new images-sizes fixture
+  - [#759](https://github.com/wix-incubator/rich-content/pull/759) adding tests for emoji plugin (in rtl and plugins tests)
 
 ## 7.0.2 (Mar 20, 2020)
 ### :house: Internal
