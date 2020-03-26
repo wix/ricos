@@ -458,10 +458,9 @@ describe('plugins', () => {
     before(function() {
       eyesOpen(this);
     });
+    after(() => cy.eyesClose());
 
     beforeEach('load editor', () => cy.loadEditorAndViewer('linkPreview'));
-
-    after(() => cy.eyesClose());
 
     it('change link preview settings', function() {
       cy.openPluginToolbar(PLUGIN_COMPONENT.LINK_PREVIEW);
@@ -480,6 +479,36 @@ describe('plugins', () => {
     it('delete link preview', function() {
       cy.openPluginToolbar(PLUGIN_COMPONENT.LINK_PREVIEW);
       cy.get(`[data-hook=blockButton_delete][tabindex!=-1]`).click();
+    });
+  });
+
+  context('convert link to link preview', () => {
+    before(function() {
+      eyesOpen(this);
+      cy.server();
+      Cypress.config().baseUrl;
+      cy.route({
+        method: 'GET',
+        url: '**/oembed/*',
+        response: [
+          {
+            title: 'a mock title',
+            description: 'a mock description',
+            thumbnail_url:
+              'https://static.wixstatic.com/media/5305c5_5f112df56dcd40a29e855baae08f19ce~mv2.jpg/v1/fill/w_600,h_315,al_c/5305c5_5f112df56dcd40a29e855baae08f19ce~mv2.jpg',
+          },
+        ],
+      });
+    });
+    after(() => cy.eyesClose());
+    beforeEach('load editor', () => cy.loadEditorAndViewer('empty'));
+
+    it('should create link preview from link after enter key', function() {
+      cy.focusEditor();
+      cy.moveCursorToEnd()
+        .type('www.wix.com')
+        .type('{enter}')
+        .wait(300);
     });
   });
 });
