@@ -1,7 +1,7 @@
 import * as utils from './themes/utils';
-import editorCommon from './themes/editor-common';
-import editor from './themes/editor';
-import viewer from './themes/viewer';
+import getEditorCommonTheme from './themes/editor-common';
+import getEditorTheme from './themes/editor';
+import getViewerTheme from './themes/viewer';
 
 /* eslint-disable camelcase */
 const THEMES = {
@@ -64,10 +64,10 @@ export default class ThemeGenerator {
       );
 
       const appStyles = (this.isEditor && {
-        ...editorCommon(colors),
-        ...editor(colors),
+        ...getEditorCommonTheme(colors),
+        ...getEditorTheme(colors),
       }) || {
-        ...viewer(colors),
+        ...getViewerTheme(colors),
       };
 
       return {

@@ -118,7 +118,7 @@
         {
           "offset": 0,
           "length": 31,
-          "style": "{\"BG\":\"color4\"}"
+          "style": "{\"BG\":\"color3\"}"
         }
       ],
       "entityRanges": [],
@@ -412,5 +412,5 @@
       }
     }
   },
-  "VERSION": "7.0.2"
+  "VERSION": "7.1.2"
 }
