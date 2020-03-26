@@ -9,7 +9,7 @@
 
 @supports (display: grid) {
   .thumbnailPlacementSelector_grid {
-    grid-template-columns: 90px 90px 90px 90px;
+    grid-template-columns: auto auto auto auto;
     row-gap: 12px;
     column-gap: 4px;
   }
