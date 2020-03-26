@@ -14,17 +14,17 @@ const getBlockClassName = (
   dataEntry,
   textDirection,
   listType,
-  mergedStyles
+  prevDepth
 ) => {
   const rtl = textDirection === 'rtl' || dataEntry.textDirection === 'rtl';
   const direction = rtl ? 'RTL' : 'LTR';
   const depth = getBlockDepth(contentState, blockProps.keys[i]);
+
   let className = blockClassName(listType, depth, direction);
-  if (i === 0) {
+  if (i === 0 || depth > prevDepth[0]) {
     className += ` ${draftPublic}-reset`;
   }
-  const depthInlineStyle = mergedStyles[`${draftPublic}-depth${depth}-${direction}`];
-  className += ` ${depthInlineStyle}`;
+  prevDepth[0] = depth;
   return className;
 };
 
@@ -44,6 +44,7 @@ const List = ({
   const Component = ordered ? 'ol' : 'ul';
   const listType = ordered ? 'ordered' : 'unordered';
   const containerClassName = mergedStyles[`${draftPublic}-${Component}`];
+  const prevDepth = [0];
   return (
     <Component className={containerClassName}>
       {items.map((children, i) => {
@@ -87,7 +88,7 @@ const List = ({
                 dataEntry,
                 textDirection,
                 listType,
-                mergedStyles
+                prevDepth
               ))
             }
             key={blockProps.keys[i]}
