@@ -2,10 +2,34 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const draftPublic = 'public-DraftStyleDefault';
-const getBlockClassName = (listType, depth, textDirection) =>
+const blockClassName = (listType, depth, textDirection) =>
   `${draftPublic}-${listType}ListItem
    ${draftPublic}-depth${depth}
    ${draftPublic}-list${textDirection}`;
+
+const getBlockClassName = (
+  contentState,
+  blockProps,
+  i,
+  dataEntry,
+  textDirection,
+  listType,
+  mergedStyles
+) => {
+  const rtl = textDirection === 'rtl' || dataEntry.textDirection === 'rtl';
+  const direction = rtl ? 'RTL' : 'LTR';
+  const depth = getBlockDepth(contentState, blockProps.keys[i]);
+  let className = blockClassName(listType, depth, direction);
+  if (i === 0) {
+    className += ` ${draftPublic}-reset`;
+  }
+  const depthInlineStyle = mergedStyles[`${draftPublic}-depth${depth}-${direction}`];
+  className += ` ${depthInlineStyle}`;
+  return className;
+};
+
+const getBlockDepth = (contentState, key) =>
+  contentState.blocks.filter(block => block.key === key)[0].depth;
 
 const List = ({
   ordered,
@@ -15,26 +39,18 @@ const List = ({
   blockProps,
   getBlockStyleClasses,
   blockDataToStyle,
+  contentState,
 }) => {
   const Component = ordered ? 'ol' : 'ul';
   const listType = ordered ? 'ordered' : 'unordered';
-  const containerClassName = mergedStyles[`${listType}ListContainer`];
-  let isFirst = true;
+  const containerClassName = mergedStyles[`${draftPublic}-${Component}`];
   return (
     <Component className={containerClassName}>
       {items.map((children, i) => {
         // NOTE: list block data is an array of data entries per list item
         const dataEntry = blockProps.data.length > i ? blockProps.data[i] : {};
-
-        const rtl = textDirection === 'rtl' || dataEntry.textDirection === 'rtl';
-        const direction = rtl ? 'RTL' : 'LTR';
         let paragraphGroup = [];
         const result = [];
-        let blockClassName = getBlockClassName(listType, blockProps.depth, direction);
-        if (isFirst) {
-          blockClassName += ` ${draftPublic}-reset`;
-          isFirst = !isFirst;
-        }
         const elementProps = key => ({ className: mergedStyles.elementSpacing, key });
         React.Children.forEach(children, (child, i) => {
           if (child && typeof child.type === 'string') {
@@ -64,7 +80,15 @@ const List = ({
                 textDirection,
                 mergedStyles[`${listType}List`]
               ),
-              blockClassName)
+              getBlockClassName(
+                contentState,
+                blockProps,
+                i,
+                dataEntry,
+                textDirection,
+                listType,
+                mergedStyles
+              ))
             }
             key={blockProps.keys[i]}
             style={blockDataToStyle(blockProps.data[i])}
@@ -85,6 +109,7 @@ List.propTypes = {
   mergedStyles: PropTypes.object,
   ordered: PropTypes.bool,
   textDirection: PropTypes.oneOf(['rtl', 'ltr']),
+  contentState: PropTypes.object,
 };
 
 export default List;
