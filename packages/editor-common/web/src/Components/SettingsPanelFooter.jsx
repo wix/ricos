@@ -27,7 +27,7 @@ class SettingsPanelFooter extends Component {
           ariaProps={{ 'aria-label': cancelText }}
           dataHook="settingPanelFooterCancel"
           onClick={() => cancel()}
-          className={classNames(this.styles.settingsPanel_cancel, theme.button_secondary)}
+          className={this.styles.settingsPanel_cancel}
           type={'secondary'}
         >
           {cancelText}
@@ -35,7 +35,7 @@ class SettingsPanelFooter extends Component {
         <Button
           ariaProps={{ 'aria-label': saveText }}
           theme={theme}
-          className={classNames(this.styles.settingsPanel_save, theme.button_primary)}
+          className={this.styles.settingsPanel_save}
           dataHook="settingPanelFooterDone"
           onClick={() => save()}
         >
