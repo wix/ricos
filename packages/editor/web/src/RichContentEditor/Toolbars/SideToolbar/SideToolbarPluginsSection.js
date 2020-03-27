@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Styles from '../../../../statics/styles/side-toolbar-panel.scss';
 import { getPluginsForTag } from '../../pluginsSearchTags';
-import classNames from 'classnames';
 import { TOOLBARS } from 'wix-rich-content-editor-common';
 
 const SideToolbarPluginsSection = ({
@@ -34,12 +33,7 @@ const SideToolbarPluginsSection = ({
         Basic
       </div>
     ),
-    <div
-      key="pluginsButtons"
-      className={classNames(Styles.buttonsWrapper, {
-        [Styles.withoutSections]: !shouldShowSections,
-      })}
-    >
+    <div key="pluginsButtons" className={Styles.buttonsWrapper}>
       {plugins.map(({ component: Component }, index) => (
         <div key={index} className={Styles.buttonWrapper}>
           <Component

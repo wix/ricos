@@ -20,10 +20,9 @@ export default class SideToolbarPanelContent extends Component {
 
     return (
       <div
-        className={classNames(
-          Styles.sideToolbarPanelWrapper,
-          showSearch && Styles.sideToolbarPanelWithSearch
-        )}
+        className={classNames(Styles.sideToolbarPanelWrapper, {
+          [Styles.panelWithSearch]: showSearch,
+        })}
       >
         {showSearch && (
           <div className={Styles.searchWrapper}>
@@ -35,15 +34,18 @@ export default class SideToolbarPanelContent extends Component {
             />
           </div>
         )}
-        <SideToolbarPluginsSection
-          theme={theme}
-          getEditorState={getEditorState}
-          setEditorState={setEditorState}
-          structure={structure}
-          searchTag={this.state?.searchTag}
-          t={t}
-          hidePopup={hidePopup}
-        />
+
+        <div className={classNames({ [Styles.withSearch]: showSearch })}>
+          <SideToolbarPluginsSection
+            theme={theme}
+            getEditorState={getEditorState}
+            setEditorState={setEditorState}
+            structure={structure}
+            searchTag={this.state?.searchTag}
+            t={t}
+            hidePopup={hidePopup}
+          />
+        </div>
       </div>
     );
   }
