@@ -1,3 +1,4 @@
+import gallerySettings from './themes/gallerySettings';
 /* eslint-disable camelcase */
 const THEMES = {
   DEFAULT: 'Default',
@@ -69,34 +70,37 @@ export default class ThemeGenerator {
 
       const blockActionColorSettings = {
         cursor: 'default',
-        boxShadow: '0 0 0 3px ' + actionColor,
+        boxShadow: `0 0 0 3px ${actionColor} !important`,
       };
 
       return {
+        ...gallerySettings(colors),
         editor: {
           background: bgColor,
           color: textColor,
         },
         quote: {
-          borderLeftColor: actionColor,
-          borderRightColor: actionColor,
+          'border-left-color': actionColor,
+          'border-right-color': actionColor,
         },
         sideToolbar_floatingIcon: {
-          ':hover': {
+          '&:hover': {
             fill: actionColor,
           },
         },
         footerToolbar: {
-          background: bgColor,
+          background: `${bgColor} !important`,
         },
-        footerToolbarButton_icon: {
-          ':hover': {
+        footerToolbarButton_icon: {},
+        footerToolbarButton: {
+          '&:hover:not([disabled]) $footerToolbarButton_icon': {
             color: actionColor,
           },
         },
+
         //block focus
         hasFocus: blockActionColorSettings,
-        pluginContainer: { ':hover': blockActionColorSettings },
+        pluginContainer: { '&:hover': blockActionColorSettings },
         linkPreview: {
           borderColor: textColor,
           backgroundColor: bgColor,

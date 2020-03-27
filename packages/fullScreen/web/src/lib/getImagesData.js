@@ -2,22 +2,23 @@ const imageType = 'wix-draft-plugin-image';
 const imageTypeLegacy = 'IMAGE';
 const galleryType = 'wix-draft-plugin-gallery';
 
-function imageEntryToGallery(data) {
+function imageEntryToGallery(data, index) {
+  const url = data.file_name;
   return {
     metadata: {
       height: data.height,
       width: data.width,
     },
-    itemId: data.id,
-    url: data.file_name,
+    itemId: data.id || url + index,
+    url,
   };
 }
 
-function convertEntryToGalleryItems(entry) {
+function convertEntryToGalleryItems(entry, index) {
   switch (entry.type) {
     case imageType:
     case imageTypeLegacy:
-      return entry.data.src ? [imageEntryToGallery(entry.data.src)] : [];
+      return entry.data.src ? [imageEntryToGallery(entry.data.src, index)] : [];
     case galleryType:
       return entry.data.items;
     default:

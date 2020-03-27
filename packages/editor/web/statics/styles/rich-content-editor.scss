@@ -60,7 +60,7 @@
 }
 
 .block {
-  &+& {
+  & + & {
     margin-top: 20px;
   }
 }
@@ -90,7 +90,7 @@
 }
 
 .justify {
-  &>* {
+  & > * {
     white-space: pre-line !important;
     text-align: justify !important;
   }

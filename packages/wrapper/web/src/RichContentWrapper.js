@@ -26,7 +26,9 @@ export default class RichContentWrapper extends React.Component {
   }
 
   componentWillReceiveProps(newProps) {
-    if (newProps.locale !== this.props.locale) this.updateLocale();
+    if (newProps.locale !== this.props.locale) {
+      this.updateLocale();
+    }
   }
 
   render() {
@@ -49,7 +51,12 @@ export default class RichContentWrapper extends React.Component {
     ];
 
     return (
-      <EngineWrapper strategies={mergedStrategies} {...rest} editor={editor}>
+      <EngineWrapper
+        strategies={mergedStrategies}
+        {...rest}
+        editor={editor}
+        key={editor ? 'editor' : 'viewer'}
+      >
         {children}
       </EngineWrapper>
     );

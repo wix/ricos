@@ -13,8 +13,70 @@
     Click to see more.
   </summary>
   
+### :bug: [Bug Fix]
+- `general`
+  - [#843](https://github.com/wix-incubator/rich-content/pull/843) fix: mouse up event on overlay triggered the closing the modals
+
 </details>
 <hr/>
+
+## 7.1.2 (Mar 25, 2020)
+### :rocket: New Feature
+- `html`
+  - [#826](https://github.com/wix-incubator/rich-content/pull/826) initial state for html plugin
+- `gallery`
+  - [#833](https://github.com/wix-incubator/rich-content/pull/833) elipsis for too long image titles
+### :house: Internal
+- `gallery`
+  - [#833](https://github.com/wix-incubator/rich-content/pull/833) using alt property instead of title for altText fixes mobile titles
+### :bug: [Bug Fix]
+- `link-preview`
+  - [#841](https://github.com/wix-incubator/rich-content/pull/841) link preview fixes
+- `fullscreen`
+  - [#842](https://github.com/wix-incubator/rich-content/pull/842) itemId for legacy image type
+
+## 7.1.1 (Mar 25, 2020)
+### :house: Internal
+- `wrapper`
+  - jss dependencies as external to resolve cjs issue
+
+## 7.1.0 (Mar 25, 2020)
+### :rocket: New Feature
+- `code-block`
+  - [#827](https://github.com/wix-incubator/rich-content/pull/827) selection starts in the block
+- `link-preview`
+  - [#653](https://github.com/wix-incubator/rich-content/pull/653) add link preview
+### :bug: Bug Fix
+- `text-color`
+  - [#805](https://github.com/wix-incubator/rich-content/pull/805) adding a text color/highlight works on mobile
+- `plugins`
+  - [#778](https://github.com/wix-incubator/rich-content/pull/778) fix sizeFullWidth
+- `common`
+  - [#814](https://github.com/wix-incubator/rich-content/pull/814) fix: adding support for H4, H5, H6
+- `viewer`
+  - [#832](https://github.com/wix-incubator/rich-content/pull/832) fix emoji in rtl
+- `editor`
+  - [d486af87](https://github.com/wix-incubator/rich-content/commit/d486af87) fix plain text paste
+  - [#790](https://github.com/wix-incubator/rich-content/pull/790) convertToRaw - block.data converted correctly, Fixes line spacing
+  - [#820](https://github.com/wix-incubator/rich-content/pull/820) remove custom getBlockRenderMap.js (mobile fix)
+- `fullscreen`
+  - [#830](https://github.com/wix-incubator/rich-content/pull/830) expand button always appears on hover
+- `editor-common`
+  - [#829](https://github.com/wix-incubator/rich-content/pull/829) replace draft-js w/ @wix/draft-js
+### :house: Internal
+- `general`
+  - [#720](https://github.com/wix-incubator/rich-content/pull/720) mobile example app styles issues
+  - [#835](https://github.com/wix-incubator/rich-content/pull/835) 'fullwidth' fixed in example on ipad
+- `wrapper`
+  - [#817](https://github.com/wix-incubator/rich-content/pull/817) bugfix: removed override of props
+  - [#810](https://github.com/wix-incubator/rich-content/pull/810) added palettes & fixed toolbarButton color
+  - [#818](https://github.com/wix-incubator/rich-content/pull/818) bugfix: inlineStyleMappers - removed empty typeMappers + improved storybook example
+  - [#819](https://github.com/wix-incubator/rich-content/pull/819) improve: replaced "aphrodite" with "jss"
+  - [#822](https://github.com/wix-incubator/rich-content/pull/822) ssr fix - render suspense only after component is imported
+  - [#816](https://github.com/wix-incubator/rich-content/pull/816) wrapper theme: gallery settings modal
+- `e2e`
+  - [#795](https://github.com/wix-incubator/rich-content/pull/795) new images-sizes fixture
+  - [#759](https://github.com/wix-incubator/rich-content/pull/759) adding tests for emoji plugin (in rtl and plugins tests)
 
 ## 7.0.2 (Mar 20, 2020)
 ### :house: Internal
@@ -44,6 +106,15 @@
 ### :bug: Bug Fix
 - `gallery`
   - [#775](https://github.com/wix-incubator/rich-content/pull/775) adding videos to gallery
+
+#### xxxxxxxxxxxx   v6 hotfixes below   xxxxxxxxxxxx
+
+## 6.10.4 (Mar 24, 2020)
+### :bug: Bug Fix
+- `editor`
+  - [d486af87](https://github.com/wix-incubator/rich-content/commit/d486af87) fix plain text paste
+
+#### xxxxxxxxxxxx   v6 hotfixes above   xxxxxxxxxxxx
 
 ## 6.10.2 (Mar 15, 2020)
 ### :house: Internal
