@@ -386,9 +386,9 @@ export const getEntities = (editorState, entityType = null) => {
     block.findEntityRanges(character => {
       const char = character.getEntity();
       const entity = !!char && currentContent.getEntity(char);
-      if (!entityType || entity.getType() === entityType) {
-        entities.push(entity);
-      }
+      // regular text block
+      if (entity === false) entities.push({ type: 'text' });
+      else if (!entityType || entity.getType() === entityType) entities.push(entity);
     });
   });
   return entities;
@@ -404,11 +404,15 @@ export function getPostContentSummary(editorState) {
   const blocks = editorState.getCurrentContent().getBlocksAsArray();
   const entries = getEntities(editorState);
   const blockPlugins = getBlockTypePlugins(blocks);
+  const pluginsDetails = entries
+    .filter(entry => entry.type !== 'text')
+    .map(entry => ({ type: entry.type, data: entry.data }));
   return {
-    postContent: {
+    pluginsCount: {
       ...countByType(blockPlugins),
       ...countByType(entries),
     },
+    pluginsDetails,
   };
 }
 

@@ -14,6 +14,8 @@ export default class I18nRichContentEditor extends Component {
 
   blur = () => this.editor.blur();
 
+  publish = (postId, callback) => this.editor.publish(postId, callback);
+
   render() {
     return <WrappedEditor {...this.props} ref={this.setEditorRef} />;
   }

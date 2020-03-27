@@ -273,6 +273,18 @@ class RichContentEditor extends Component {
 
   blur = () => this.editor.blur();
 
+  publish = (postId, callBack) => {
+    if (!this.props.helpers?.onPublish) return;
+    const { pluginsCount, pluginsDetails } = getPostContentSummary(this.state.editorState);
+    this.props.helpers.onPublish(
+      postId,
+      pluginsCount,
+      pluginsDetails,
+      callBack,
+      Version.currentVersion
+    );
+  };
+
   setEditor = ref => (this.editor = get(ref, 'editor', ref));
 
   inPluginEditingMode = false;
@@ -466,11 +478,6 @@ class RichContentEditor extends Component {
     }
   }
 }
-
-RichContentEditor.publish = async (postId, editorState = {}, callBack = () => true) => {
-  const postSummary = getPostContentSummary(editorState);
-  callBack({ postId, ...postSummary });
-};
 
 RichContentEditor.propTypes = {
   editorKey: PropTypes.string,

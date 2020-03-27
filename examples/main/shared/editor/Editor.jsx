@@ -61,8 +61,8 @@ export default class Editor extends PureComponent {
         console.log('biPluginDelete', plugin_id, version),
       onPluginChange: async (plugin_id, changeObj, version) =>
         console.log('biPluginChange', plugin_id, changeObj, version),
-      onPublish: async (postid, callback, version) =>
-        console.log('biOnPublish', ({ data }) => data, version),
+      onPublish: async (postId, pluginsCount, pluginsDetails, callBack, version) =>
+        console.log('biOnPublish', postId, pluginsCount, pluginsDetails, callBack, version),
       //
       // onFilesChange: (files, updateEntity) => mockUpload(files, updateEntity),
       handleFileSelection: (index, multiple, updateEntity, removeEntity, componentData) => {
