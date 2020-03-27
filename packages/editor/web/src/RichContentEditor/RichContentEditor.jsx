@@ -273,16 +273,10 @@ class RichContentEditor extends Component {
 
   blur = () => this.editor.blur();
 
-  publish = (postId, callBack) => {
+  publish = postId => {
     if (!this.props.helpers?.onPublish) return;
     const { pluginsCount, pluginsDetails } = getPostContentSummary(this.state.editorState);
-    this.props.helpers.onPublish(
-      postId,
-      pluginsCount,
-      pluginsDetails,
-      callBack,
-      Version.currentVersion
-    );
+    this.props.helpers.onPublish(postId, pluginsCount, pluginsDetails, Version.currentVersion);
   };
 
   setEditor = ref => (this.editor = get(ref, 'editor', ref));
