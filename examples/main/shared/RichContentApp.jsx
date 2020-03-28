@@ -16,13 +16,19 @@ class RichContentApp extends PureComponent {
   constructor(props) {
     super(props);
     this.state = this.getInitialState(props);
+    if (props.mode === 'demo') {
+      this.updateContentState = debounce(this.updateContentState, 60);
+      this.updateEditorState = debounce(this.updateEditorState, 60);
+    }
   }
 
   getInitialState = ({ initialState, locale = getRequestedLocale(), mode }) => {
     if (!isSSR() && mode === 'demo' && locale !== 'en') {
       this.setLocaleResource(locale);
     }
-    const editorState = initialState ? createWithContent(convertFromRaw(initialState)) : createEmpty();
+    const editorState = initialState
+      ? createWithContent(convertFromRaw(initialState))
+      : createEmpty();
     return {
       editorState,
       contentState: initialState || convertToRaw(editorState.getCurrentContent()),
@@ -52,14 +58,13 @@ class RichContentApp extends PureComponent {
     this.updateEditorState(contentState);
   };
 
-  updateContentState = debounce(editorState => {
+  updateContentState = editorState => {
     this.setState({ contentState: convertToRaw(editorState.getCurrentContent()) });
-  }, 60);
+  };
 
-  updateEditorState = debounce(contentState => {
+  updateEditorState = contentState => {
     this.setState({ editorState: createWithContent(convertFromRaw(normalize(contentState))) });
-  }, 60);
-
+  };
 
   render() {
     const { editorState, contentState, localeResource, locale } = this.state;
