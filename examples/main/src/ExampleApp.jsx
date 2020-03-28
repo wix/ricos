@@ -2,13 +2,9 @@
 import { hot } from 'react-hot-loader/root';
 import React, { PureComponent } from 'react';
 import { ReflexContainer, ReflexElement, ReflexSplitter } from 'react-reflex';
-import { compact, flatMap } from 'lodash';
-import {
-  ErrorBoundary,
-  Fab,
-  SectionHeader,
-  SectionContent,
-} from './Components';
+import { compact, flatMap, debounce } from 'lodash';
+import local from 'local-storage';
+import { ErrorBoundary, Fab, SectionHeader, SectionContent } from './Components';
 import {
   generateKey,
   loadStateFromStorage,
@@ -53,11 +49,26 @@ class ExampleApp extends PureComponent {
     this.viewerScrollingElementFn = () =>
       typeof window !== 'undefined' && document.getElementsByClassName('viewer-example')[0];
     window && window.addEventListener('resize', this.onContentStateEditorResize);
+    const contentState = this.loadContentStateFromLocalStorage();
+    if (contentState) {
+      this.props.onContentStateChange(contentState);
+    }
   }
 
   componentWillUnmount() {
     window && window.removeEventListener('resize', this.onContentStateEditorResize);
   }
+
+  componentDidUpdate(prevProps) {
+    this.saveContentStateToLocalStorage(this.props.contentState);
+  }
+
+  saveContentStateToLocalStorage = debounce(
+    contentState => local.set('contentState', contentState),
+    500
+  );
+
+  loadContentStateFromLocalStorage = () => local.get('contentState');
 
   setContentStateEditor = ref => (this.contentStateEditor = ref);
 
