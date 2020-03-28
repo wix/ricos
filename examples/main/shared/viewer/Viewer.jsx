@@ -6,6 +6,7 @@ import * as PropTypes from 'prop-types';
 import * as Plugins from './ViewerPlugins';
 import theme from '../theme/theme'; // must import after custom styles
 import getImagesData from 'wix-rich-content-fullscreen/dist/lib/getImagesData';
+import Fullscreen from 'wix-rich-content-fullscreen';
 import 'wix-rich-content-fullscreen/dist/styles.min.css';
 
 import {
@@ -34,9 +35,7 @@ export default class Viewer extends PureComponent {
   }
 
   componentDidMount() {
-    import('wix-rich-content-fullscreen').then(
-      Fullscreen => (this.Fullscreen = Fullscreen.default)
-    );
+    this.shouldRenderFullscreen = true;
   }
 
   componentDidUpdate(prevProps) {
@@ -82,8 +81,8 @@ export default class Viewer extends PureComponent {
             // siteDomain="https://www.wix.com"
             {...viewerProps}
           />
-          {this.Fullscreen && (
-            <this.Fullscreen
+          {this.shouldRenderFullscreen && (
+            <Fullscreen
               images={this.expandModeData.images}
               onClose={() => this.setState({ expandModeIsOpen: false })}
               isOpen={expandModeIsOpen}
