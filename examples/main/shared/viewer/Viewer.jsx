@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react';
-import ReactModal from 'react-modal';
 import { RichContentViewer } from 'wix-rich-content-viewer';
 import { isSSR } from 'wix-rich-content-common';
 import * as PropTypes from 'prop-types';
@@ -20,9 +19,7 @@ const relValue = 'noreferrer';
 export default class Viewer extends PureComponent {
   constructor(props) {
     super(props);
-
     if (!isSSR()) {
-      ReactModal.setAppElement('#root');
       this.expandModeData = getImagesData(this.props.initialState);
     }
     this.state = {
