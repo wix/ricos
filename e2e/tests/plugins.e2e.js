@@ -483,22 +483,31 @@ describe('plugins', () => {
     });
   });
 
-  context.only('convert link to link preview', () => {
+  context('convert link to link preview', () => {
+    let polyfill;
+
     before(function() {
+      const polyfillUrl = 'https://unpkg.com/unfetch/dist/unfetch.umd.js';
+      cy.request(polyfillUrl).then(response => {
+        const commandIndex = response.body.indexOf('//#');
+        polyfill = response.body.substring(0, commandIndex);
+      });
+
       eyesOpen(this);
     });
-
     after(() => cy.eyesClose());
     beforeEach('load editor', () => {
-      cy.visit('/rce/empty', {
-        onBeforeLoad: win => {
-          win.fetch = null;
-        },
-      });
       cy.server();
       cy.route({
         method: 'GET',
         url: '/oembed',
+      });
+      cy.visit('/rce/empty', {
+        onBeforeLoad: win => {
+          win.fetch = null;
+          win.eval(polyfill);
+          win.fetch = win.unfetch;
+        },
       });
     });
 
