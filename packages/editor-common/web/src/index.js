@@ -113,7 +113,6 @@ export {
   Modifier,
   RichUtils,
   KeyBindingUtil,
-  getDefaultKeyBinding,
   genKey,
   ContentBlock,
   BlockMapBuilder,

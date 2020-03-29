@@ -66,7 +66,7 @@
 }
 
 .elementSpacing {
-    margin: 0;
+  margin: 0;
 
   @include phone {
     margin: 0;
@@ -126,6 +126,11 @@
 .headerThree {
   font-size: 22px;
   line-height: $headerThreeHeight;
+}
+
+.indent {
+  composes: elementSpacing;
+  text-indent: 5%;
 }
 
 .code,

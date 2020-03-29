@@ -47,6 +47,7 @@ const List = ({
       {items.map((children, i) => {
         // NOTE: list block data is an array of data entries per list item
         const dataEntry = blockProps.data.length > i ? blockProps.data[i] : {};
+
         let paragraphGroup = [];
         const result = [];
         const elementProps = key => ({ className: mergedStyles.elementSpacing, key });

@@ -26,6 +26,7 @@ import {
   COMMANDS,
   MODIFIERS,
 } from 'wix-rich-content-editor-common';
+
 import {
   AccessibilityListener,
   normalizeInitialState,
