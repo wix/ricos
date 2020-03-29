@@ -5,11 +5,11 @@ import PropTypes from 'prop-types';
 
 class TestApp extends PureComponent {
   renderEditor = () => {
-    const { initialState, onEditorChange, locale, localeResource, isMobile } = this.props;
+    const { editorState, onEditorChange, locale, localeResource, isMobile } = this.props;
     return (
       <Editor
         onChange={onEditorChange}
-        initialState={initialState}
+        editorState={editorState}
         isMobile={isMobile}
         shouldMockUpload
         locale={locale}
@@ -19,10 +19,30 @@ class TestApp extends PureComponent {
     );
   };
 
+  componentDidUpdate(prevProps) {
+    const { contentState } = this.props;
+    if (prevProps.contentState !== contentState) {
+      this.putContentStateStateOnWindowForTests(contentState);
+    }
+  }
+
+  putContentStateStateOnWindowForTests = contentState => {
+    if (typeof window !== 'undefined') {
+      window.__CONTENT_STATE__ = contentState;
+      window.__CONTENT_SNAPSHOT__ = {
+        ...contentState,
+        // blocks keys are random so for snapshot diffing they are changed to indexes
+        blocks: contentState.blocks.map((block, index) => ({ ...block, key: index })),
+      };
+      // eslint-disable-next-line fp/no-delete
+      delete window.__CONTENT_SNAPSHOT__.VERSION;
+    }
+  };
+
   renderViewer = () => {
-    const { isMobile, viewerState, locale, seoMode } = this.props;
+    const { isMobile, contentState, locale, seoMode } = this.props;
     return (
-      <Viewer initialState={viewerState} isMobile={isMobile} locale={locale} seoMode={seoMode} />
+      <Viewer initialState={contentState} isMobile={isMobile} locale={locale} seoMode={seoMode} />
     );
   };
 
@@ -46,8 +66,8 @@ class TestApp extends PureComponent {
 TestApp.propTypes = {
   isMobile: PropTypes.bool.isRequired,
   locale: PropTypes.string,
-  viewerState: PropTypes.object,
-  initialState: PropTypes.object,
+  contentState: PropTypes.object,
+  editorState: PropTypes.object,
   localeResource: PropTypes.object,
   onEditorChange: PropTypes.func,
   seoMode: PropTypes.bool,
