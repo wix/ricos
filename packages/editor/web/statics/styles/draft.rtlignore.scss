@@ -3,7 +3,7 @@
 
 [dir].wrapper {
   :global {
-    @import "~draft-js/dist/Draft.css";  
+    @import "~@wix/draft-js/dist/Draft.css";  
     .DraftEditor-editorContainer,
     .DraftEditor-root,
     .public-DraftEditor-content {

@@ -4,6 +4,7 @@ export const fixtures = [
   'images',
   'inline-styles',
   'lists',
+  'nested-lists',
   'quote',
   'facebook-video',
   'gif',
