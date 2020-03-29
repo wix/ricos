@@ -20,6 +20,8 @@
 - `examples`
   - [#850](https://github.com/wix-incubator/rich-content/pull/850) fix performance
   - [#850](https://github.com/wix-incubator/rich-content/pull/850) save content to local storage
+- `plugin-emoji`
+  - [#854](https://github.com/wix-incubator/rich-content/pull/854) reduce bundle size of plugin emoji
 
 </details>
 <hr/>
