@@ -491,7 +491,7 @@ describe('plugins', () => {
     beforeEach('load editor', () => cy.loadEditorAndViewer());
 
     after(() => cy.eyesClose());
-    it.only('create nested lists using tab & shift-tab', function() {
+    it('create nested lists using tab & shift-tab', function() {
       cy.loadEditorAndViewer()
         .enterParagraphs(['1. Hey I am an ordered list in depth 1.'])
         .tab()

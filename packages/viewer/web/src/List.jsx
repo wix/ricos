@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const draftPublic = 'public-DraftStyleDefault';
-const blockClassName = (listType, depth, textDirection) =>
+const draftClassNames = (listType, depth, textDirection) =>
   `${draftPublic}-${listType}ListItem
    ${draftPublic}-depth${depth}
    ${draftPublic}-list${textDirection}`;
@@ -14,17 +14,15 @@ const getBlockClassName = (
   dataEntry,
   textDirection,
   listType,
-  prevDepth
+  prevDepth,
+  depth
 ) => {
   const rtl = textDirection === 'rtl' || dataEntry.textDirection === 'rtl';
   const direction = rtl ? 'RTL' : 'LTR';
-  const depth = getBlockDepth(contentState, blockProps.keys[i]);
-
-  let className = blockClassName(listType, depth, direction);
-  if (i === 0 || depth > prevDepth[0]) {
+  let className = draftClassNames(listType, depth, direction);
+  if (i === 0 || depth > prevDepth) {
     className += ` ${draftPublic}-reset`;
   }
-  prevDepth[0] = depth;
   return className;
 };
 
@@ -43,7 +41,7 @@ const List = ({
   const Component = ordered ? 'ol' : 'ul';
   const listType = ordered ? 'ordered' : 'unordered';
   const containerClassName = mergedStyles[`${draftPublic}-${Component}`];
-  const prevDepth = [0];
+  let prevDepth = 0;
   return (
     <Component className={containerClassName}>
       {items.map((children, i) => {
@@ -71,17 +69,22 @@ const List = ({
           result.push(<p {...elementProps('just_some_key')}>{paragraphGroup}</p>);
         }
 
+        const depth = getBlockDepth(contentState, blockProps.keys[i]);
+        const className = getBlockClassName(
+          contentState,
+          blockProps,
+          i,
+          dataEntry,
+          textDirection,
+          listType,
+          prevDepth,
+          depth
+        );
+        prevDepth = depth;
+
         return (
           <li
-            className={getBlockClassName(
-              contentState,
-              blockProps,
-              i,
-              dataEntry,
-              textDirection,
-              listType,
-              prevDepth
-            )}
+            className={className}
             key={blockProps.keys[i]}
             style={blockDataToStyle(blockProps.data[i])}
           >
