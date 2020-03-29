@@ -85,7 +85,7 @@ describe('Wrapper', () => {
       const renderResult = instance.render();
       await instance.updateLocale();
       const engineProps = renderResult.props;
-      expect(engineProps).toHaveProperty('config'); //wrapper config. not to be confused with rce "config".
+      expect(engineProps).toHaveProperty('rcProps');
       expect(instance.state.localeStrategy).toEqual({ locale: 'he', localeResource: hebResource });
     });
   });
