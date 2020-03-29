@@ -66,6 +66,8 @@
 }
 
 .elementSpacing {
+    margin: 0;
+
   @include phone {
     margin: 0;
   }
