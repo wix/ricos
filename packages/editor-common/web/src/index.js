@@ -75,6 +75,8 @@ export {
   setEntityData,
   replaceWithEmptyBlock,
   deleteBlock,
+  getBlockAtStartOfSelection,
+  getSelectedBlocks,
   createEntity,
   createBlockAndFocus,
   createBlock,
@@ -117,7 +119,7 @@ export {
   RawDraftContentState,
   EditorChangeType,
   convertFromHTML,
-} from 'draft-js';
+} from '@wix/draft-js';
 
-import DraftOffsetKey from 'draft-js/lib/DraftOffsetKey';
+import DraftOffsetKey from '@wix/draft-js/lib/DraftOffsetKey';
 export { DraftOffsetKey };

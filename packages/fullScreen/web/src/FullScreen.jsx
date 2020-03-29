@@ -7,7 +7,7 @@ import resizeMediaUrl from 'wix-rich-content-plugin-gallery/dist/lib/resize-medi
 import PropTypes from 'prop-types';
 import styles from './fullscreen.rtlignore.scss';
 
-const { ProGallery } = process.env.SANTA ? {} : require('pro-gallery');
+const { ProGallery } = require('pro-gallery');
 
 export default class Fullscreen extends Component {
   componentDidMount() {
@@ -39,6 +39,7 @@ export default class Fullscreen extends Component {
       topMargin,
       foregroundColor,
     } = this.props;
+    const items = this.getItems();
     let fullscreen = (
       <div className={styles.fullscreen} style={{ ...backgroundColor, ...topMargin }}>
         <button
@@ -50,18 +51,19 @@ export default class Fullscreen extends Component {
           {closeIcon()}
         </button>
         <ProGallery
-          items={this.getItems()}
+          items={items}
           currentIdx={index}
           resizeMediaUrl={resizeMediaUrl}
           container={{ width: window.innerWidth, height: window.innerHeight }}
           styles={{
             ...layouts[5],
             galleryLayout: 5,
-            slideshowInfoSize: 0,
             cubeType: 'fit',
             scrollSnap: true,
             videoPlay: 'auto',
             allowSocial: false,
+            loveButton: false,
+            slideshowInfoSize: 0,
           }}
         />
       </div>

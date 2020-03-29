@@ -94,7 +94,8 @@
             "wix-draft-plugin-emoji",
             "wix-draft-plugin-giphy",
             "wix-draft-plugin-map",
-            "wix-draft-plugin-file-upload"
+            "wix-draft-plugin-file-upload",
+            "LINK_PREVIEW"
           ],
           "title": "entity type",
           "examples": ["wix-draft-plugin-image"]

@@ -35,6 +35,7 @@ export default class EmojiPreviewModal extends Component {
         <div
           key={index}
           role="button"
+          data-hook={'emoji-group-' + index}
           onKeyPress={null}
           tabIndex={0}
           className={this.styles.emojiPreviewModal_nav_icon}
@@ -57,6 +58,7 @@ export default class EmojiPreviewModal extends Component {
       return (
         <div
           role="button"
+          data-hook={'emoji-' + index}
           onKeyPress={null}
           tabIndex={0}
           className={this.styles.emojiPreviewModal_emoji}

@@ -26,7 +26,9 @@ export default class RichContentWrapper extends React.Component {
   }
 
   componentWillReceiveProps(newProps) {
-    if (newProps.locale !== this.props.locale) this.updateLocale();
+    if (newProps.locale !== this.props.locale) {
+      this.updateLocale();
+    }
   }
 
   render() {
