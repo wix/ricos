@@ -33,20 +33,20 @@ export default class RichContentWrapper extends React.Component {
   }
 
   render() {
-    const { theme, palette, plugins = [], children, editor = false, config, ...rest } = this.props;
+    const { theme, palette, plugins = [], children, editor = false, rcProps, ...rest } = this.props;
     const { localeStrategy } = this.state;
     const themeGenerators = plugins.filter(plugin => !!plugin.theme).map(plugin => plugin.theme);
 
-    const mergedConfig = merge(
+    const mergedRCProps = merge(
       pluginsStrategy(editor, plugins, children.props),
       themeStrategy(editor, { theme, palette, themeGenerators }),
       localeStrategy,
-      config
+      rcProps
     );
 
     return (
       <EngineWrapper
-        config={mergedConfig}
+        rcProps={mergedRCProps}
         editor={editor}
         key={editor ? 'editor' : 'viewer'}
         {...rest}
@@ -64,7 +64,7 @@ RichContentWrapper.propTypes = {
   plugins: PropTypes.arrayOf(PropTypes.object),
   strategies: PropTypes.arrayOf(PropTypes.func),
   editor: PropTypes.bool,
-  config: PropTypes.object,
+  rcProps: PropTypes.object,
 };
 
 RichContentWrapper.defaultProps = {

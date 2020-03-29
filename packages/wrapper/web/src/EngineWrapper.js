@@ -33,14 +33,14 @@ class EngineWrapper extends React.Component {
   };
 
   render() {
-    const { config, children, editor } = this.props;
+    const { rcProps, children, editor } = this.props;
 
-    const childProps = merge(config, children.props);
+    const mergedRCProps = merge(rcProps, children.props);
 
     // BARAK: why do we need this?
     if (editor) {
-      const { onChange } = childProps;
-      childProps.onChange = editorState => {
+      const { onChange } = mergedRCProps;
+      mergedRCProps.onChange = editorState => {
         onChange?.(editorState);
         this.handleChange(editorState);
       };
@@ -49,14 +49,14 @@ class EngineWrapper extends React.Component {
     const { ModalityProvider } = this.state;
 
     return (
-      <ModalityProvider {...childProps}>
-        {Children.only(React.cloneElement(children, { ...childProps }))}
+      <ModalityProvider {...mergedRCProps}>
+        {Children.only(React.cloneElement(children, { ...mergedRCProps }))}
       </ModalityProvider>
     );
   }
 }
 EngineWrapper.propTypes = {
-  config: PropTypes.object,
+  rcProps: PropTypes.object,
   plugins: PropTypes.arrayOf(PropTypes.object),
   theme: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   children: PropTypes.object,
