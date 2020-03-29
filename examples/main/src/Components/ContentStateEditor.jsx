@@ -36,7 +36,7 @@ const stringifyJSON = obj => JSON.stringify(obj, null, 2);
 
 class ContentStateEditor extends PureComponent {
   state = {
-    contentState: stringifyJSON(this.props.contentState),
+    value: stringifyJSON(this.props.contentState),
   };
 
   editorOptions = {
