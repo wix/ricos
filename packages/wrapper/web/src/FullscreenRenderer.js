@@ -11,7 +11,7 @@ export default class FullscreenRenderer extends Component {
     this.state = {
       isExpanded: false,
       Fullscreen: () => undefined,
-      isReady: false,
+      isMounted: false,
     };
     this.childProps = {
       ...props.children.props,
@@ -26,7 +26,7 @@ export default class FullscreenRenderer extends Component {
     const Fullscreen = React.lazy(() =>
       import(/* webpackChunkName: "rce-ViewerModal"  */ './ViewerModal')
     );
-    this.setState({ Fullscreen, isReady: true });
+    this.setState({ Fullscreen, isMounted: true });
   }
 
   onExpand = (entityIndex, innerIndex = 0) =>
@@ -40,12 +40,12 @@ export default class FullscreenRenderer extends Component {
   setData = data => this.setState({ data });
 
   render() {
-    const { isExpanded, index, data, Fullscreen, isReady } = this.state;
+    const { isExpanded, index, data, Fullscreen, isMounted } = this.state;
     const { children } = this.props;
     return (
       <Fragment>
         {Children.only(React.cloneElement(children, this.childProps))}
-        {isReady && (
+        {isMounted && (
           <Suspense fallback={<div />}>
             <Fullscreen
               dataHook={'WrapperFullScreen'}

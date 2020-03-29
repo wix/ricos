@@ -140,22 +140,6 @@ export default class Editor extends PureComponent {
     this.setState({ MobileToolbar, TextToolbar });
   };
 
-  handleChange = editorState => {
-    this.setState({ editorState });
-    if (typeof window !== 'undefined') {
-      // ensures that tests fail when entity map is mutated
-      const raw = convertToRaw(editorState.getCurrentContent());
-      // const raw = deepFreeze(rr);
-      window.__CONTENT_STATE__ = raw;
-      window.__CONTENT_SNAPSHOT__ = {
-        ...raw,
-        // blocks keys are random so for snapshot diffing they are changed to indexes
-        blocks: raw.blocks.map((block, index) => ({ ...block, key: index })),
-      };
-    }
-    this.props.onChange && this.props.onChange(editorState);
-  };
-
   render() {
     const modalStyles = {
       content: {
@@ -174,6 +158,7 @@ export default class Editor extends PureComponent {
       initialState,
       locale,
       localeResource,
+      onChange,
     } = this.props;
     const { MobileToolbar, TextToolbar } = this.state;
     const textToolbarType = staticToolbar && !isMobile ? 'static' : null;
@@ -201,7 +186,7 @@ export default class Editor extends PureComponent {
         <RichContentEditor
           placeholder={'Add some text!'}
           ref={editor => (this.editor = editor)}
-          onChange={this.handleChange}
+          onChange={onChange}
           helpers={this.helpers}
           plugins={Plugins.editorPlugins}
           // config={Plugins.getConfig(additionalConfig)}

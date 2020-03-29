@@ -91,14 +91,14 @@ describe('plugins', () => {
           .eq(2)
           .parent()
           .click();
-        cy.get(
-          '#pgi65a6266ba23a8a55da3f469157f15237_0 > div > div > div > a > div > canvas'
-        ).should('be.visible');
+        cy.get('#pgi65a6266ba23a8a55da3f469157f15237_0 > div > div > div > a > div > canvas', {
+          timeout: 10000,
+        }).should('be.visible');
         cy.eyesCheckWindow({ tag: this.test.title, target: 'window', fully: false });
         cy.get(`[data-hook=${'nav-arrow-next'}]`).click({ force: true });
-        cy.get(
-          '#pgiea8ec1609e052b7f196935318316299d_1 > div > div > div > a > div > canvas'
-        ).should('be.visible');
+        cy.get('#pgiea8ec1609e052b7f196935318316299d_1 > div > div > div > a > div > canvas', {
+          timeout: 10000,
+        }).should('be.visible');
         cy.get(`[data-hook=${'fullscreen-close-button'}]`).click();
         // cy.eyesCheckWindow({ tag: 'closed fullscreen', target: 'window', fully: false });
       });
@@ -351,6 +351,29 @@ describe('plugins', () => {
       );
       cy.get(`button[data-hook=${PLUGIN_TOOLBAR_BUTTONS.REPLACE}][tabindex=0]`).click();
       cy.get(`[data-hook=${GIPHY_PLUGIN.UPLOAD_MODAL}] img`);
+      cy.eyesCheckWindow(this.test.title);
+    });
+  });
+
+  context('emoji', () => {
+    before('load editor', function() {
+      eyesOpen(this);
+    });
+
+    beforeEach('load editor', () => {
+      cy.switchToDesktop();
+    });
+
+    after(() => cy.eyesClose());
+
+    it('render some emojies', function() {
+      cy.loadEditorAndViewer('empty');
+      cy.get(`button[data-hook=${PLUGIN_COMPONENT.EMOJI}]`).click();
+      cy.eyesCheckWindow('render emoji modal');
+      cy.get(`[data-hook=emoji-5]`).click();
+      cy.get(`[data-hook=emoji-group-5]`).click();
+      cy.get(`[data-hook=emoji-95]`).click();
+      cy.get(`[data-hook=emoji-121]`).click();
       cy.eyesCheckWindow(this.test.title);
     });
   });

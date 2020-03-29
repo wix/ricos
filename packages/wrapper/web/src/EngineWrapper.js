@@ -2,7 +2,7 @@ import React, { Children, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import FullscreenRenderer from './FullscreenRenderer';
 import ModalRenderer from './ModalRenderer';
-import { assert } from './utils';
+import { merge } from 'lodash';
 
 class EngineWrapper extends React.Component {
   constructor(props) {
@@ -25,7 +25,7 @@ class EngineWrapper extends React.Component {
     } else if (!editor && !onExpand) {
       ModalityProvider = FullscreenRenderer;
     }
-    return { ModalityProvider, disabled: false };
+    return { ModalityProvider };
   }
 
   handleChange = editorState => {
@@ -33,35 +33,30 @@ class EngineWrapper extends React.Component {
   };
 
   render() {
-    const { strategies = [], children, editor } = this.props;
+    const { rcProps, children, editor } = this.props;
 
-    const childProps = strategies.reduce(
-      (props, strategy) => ({ ...props, ...strategy(props) }),
-      children.props
-    );
-
-    assert(childProps.theme && childProps.config, '[EngineWrapper] invalid strategy reduce');
+    const mergedRCProps = merge(rcProps, children.props);
 
     // BARAK: why do we need this?
     if (editor) {
-      const { onChange } = childProps;
-      childProps.onChange = editorState => {
+      const { onChange } = mergedRCProps;
+      mergedRCProps.onChange = editorState => {
         onChange?.(editorState);
         this.handleChange(editorState);
       };
     }
 
-    const { disabled, ModalityProvider } = this.state;
+    const { ModalityProvider } = this.state;
 
     return (
-      <ModalityProvider {...childProps}>
-        {Children.only(React.cloneElement(children, { ...childProps, disabled }))}
+      <ModalityProvider {...mergedRCProps}>
+        {Children.only(React.cloneElement(children, { ...mergedRCProps }))}
       </ModalityProvider>
     );
   }
 }
 EngineWrapper.propTypes = {
-  strategies: PropTypes.array,
+  rcProps: PropTypes.object,
   plugins: PropTypes.arrayOf(PropTypes.object),
   theme: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   children: PropTypes.object,
