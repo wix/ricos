@@ -2,7 +2,7 @@ import React, { Children, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import FullscreenRenderer from './FullscreenRenderer';
 import ModalRenderer from './ModalRenderer';
-import { assert } from './utils';
+import { merge } from 'lodash';
 
 class EngineWrapper extends React.Component {
   constructor(props) {
@@ -33,14 +33,9 @@ class EngineWrapper extends React.Component {
   };
 
   render() {
-    const { strategies = [], children, editor } = this.props;
+    const { config, children, editor } = this.props;
 
-    const childProps = strategies.reduce(
-      (props, strategy) => ({ ...props, ...strategy(props) }),
-      children.props
-    );
-
-    assert(childProps.theme && childProps.config, '[EngineWrapper] invalid strategy reduce');
+    const childProps = merge(config, children.props);
 
     // BARAK: why do we need this?
     if (editor) {
@@ -61,7 +56,7 @@ class EngineWrapper extends React.Component {
   }
 }
 EngineWrapper.propTypes = {
-  strategies: PropTypes.array,
+  config: PropTypes.object,
   plugins: PropTypes.arrayOf(PropTypes.object),
   theme: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   children: PropTypes.object,
