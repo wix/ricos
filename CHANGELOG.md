@@ -16,6 +16,8 @@
 ### :bug: [Bug Fix]
 - `general`
   - [#843](https://github.com/wix-incubator/rich-content/pull/843) fix: mouse up event on overlay triggered the closing the modals
+- `editor-common`
+  - [#857](https://github.com/wix-incubator/rich-content/pull/857) fix gallery sliders css in mozilla firefox
 ### :house: Internal
 - `examples`
   - [#850](https://github.com/wix-incubator/rich-content/pull/850) fix performance
