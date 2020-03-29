@@ -68,7 +68,7 @@ export default function pluginsStrategy(isEditor, plugins = [], childProps) {
     };
   }, emptyAccumulator);
 
-  const childPlguinProps = getPluginProps(isEditor, childProps);
+  const childPluginProps = getPluginProps(isEditor, childProps);
 
-  return merge(pack, childPlguinProps);
+  return merge(pack, childPluginProps);
 }

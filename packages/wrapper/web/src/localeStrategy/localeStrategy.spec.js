@@ -3,47 +3,42 @@ import hebResources from 'wix-rich-content-common/dist/statics/locale/messages_h
 import rusResources from 'wix-rich-content-common/dist/statics/locale/messages_ru.json';
 
 // eslint-disable-next-line mocha/no-skipped-tests
-describe.skip('locale strategy', () => {
+describe('locale strategy', () => {
   it('should not merge the default locale', () => {
     const testCases = [
-      { expected: {}, config: {} },
-      { expected: {}, config: { locale: 'en' } },
+      { expected: { locale: 'en' }, locale: undefined },
+      { expected: { locale: 'en' }, locale: 'en' },
     ];
     testCases.forEach(testCase => {
-      const strategy = uut(testCase.config);
-      const actual = strategy({});
-      expect(actual).resolves.toEqual(testCase.expected);
+      const strategy = uut(testCase.locale);
+      expect(strategy).resolves.toEqual(testCase.expected);
     });
   });
 
   it('should throw if invalid locale is provided', () => {
-    const testCases = [{ config: { locale: 'zz' } }, { config: { locale: 'xx' } }];
+    const testCases = [{ locale: 'zz' }, { locale: 'xx' }];
     testCases.forEach(testCase => {
-      const strategy = uut(testCase.config);
-      expect(strategy({})).rejects.toThrow();
+      const strategy = uut(testCase.locale);
+      expect(strategy).rejects.toThrow();
     });
   });
 
   it('should be correctly overridden by inner props', () => {
-    const testCases = [
-      { expected: { locale: 'he', localeResource: hebResources }, config: { locale: 'he' } },
-    ];
+    const testCases = [{ expected: { locale: 'he', localeResource: hebResources }, locale: 'he' }];
     testCases.forEach(testCase => {
-      const strategy = uut(testCase.config);
-      const actual = strategy({ locale: 'he' });
-      expect(actual).resolves.toEqual(testCase.expected);
+      const strategy = uut(testCase.locale);
+      expect(strategy).resolves.toEqual(testCase.expected);
     });
   });
 
   it('should return correct resource accordingly to locale', () => {
     const testCases = [
-      { expected: { locale: 'he', localeResource: hebResources }, config: { locale: 'he' } },
-      { expected: { locale: 'ru', localeResource: rusResources }, config: { locale: 'ru' } },
+      { expected: { locale: 'he', localeResource: hebResources }, locale: 'he' },
+      { expected: { locale: 'ru', localeResource: rusResources }, locale: 'ru' },
     ];
     testCases.forEach(testCase => {
-      const strategy = uut(testCase.config);
-      const actual = strategy({});
-      expect(actual).resolves.toEqual(testCase.expected);
+      const strategy = uut(testCase.locale);
+      expect(strategy).resolves.toEqual(testCase.expected);
     });
   });
 });
