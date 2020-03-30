@@ -9,6 +9,7 @@ import {
   GIPHY_PLUGIN,
 } from '../cypress/dataHooks';
 import { DEFAULT_DESKTOP_BROWSERS } from '../tests/constants';
+import linkPreviewMockRes from './linkPreviewMockRes.json';
 
 const eyesOpen = ({
   test: {
@@ -91,14 +92,14 @@ describe('plugins', () => {
           .eq(2)
           .parent()
           .click();
-        cy.get(
-          '#pgi65a6266ba23a8a55da3f469157f15237_0 > div > div > div > a > div > canvas'
-        ).should('be.visible');
+        cy.get('#pgi65a6266ba23a8a55da3f469157f15237_0 > div > div > div > a > div > canvas', {
+          timeout: 10000,
+        }).should('be.visible');
         cy.eyesCheckWindow({ tag: this.test.title, target: 'window', fully: false });
         cy.get(`[data-hook=${'nav-arrow-next'}]`).click({ force: true });
-        cy.get(
-          '#pgiea8ec1609e052b7f196935318316299d_1 > div > div > div > a > div > canvas'
-        ).should('be.visible');
+        cy.get('#pgiea8ec1609e052b7f196935318316299d_1 > div > div > div > a > div > canvas', {
+          timeout: 10000,
+        }).should('be.visible');
         cy.get(`[data-hook=${'fullscreen-close-button'}]`).click();
         // cy.eyesCheckWindow({ tag: 'closed fullscreen', target: 'window', fully: false });
       });
@@ -225,23 +226,22 @@ describe('plugins', () => {
     it('add a video from URL', function() {
       cy.openVideoUploadModal().addVideoFromURL();
       cy.shrinkPlugin();
-      cy.waitForVideoToLoad();
       cy.focusEditor()
         .type('{uparrow}') //try to fix bug where sometimes it doesn't type
         .type('{uparrow}')
         .type('Will this fix the flakiness?');
+      cy.waitForVideoToLoad();
       cy.eyesCheckWindow(this.test.title);
     });
 
     it('add a custom video', function() {
       cy.openVideoUploadModal().addCustomVideo();
       cy.shrinkPlugin();
-      cy.waitForVideoToLoad();
       cy.focusEditor()
         .type('{uparrow}') //try to fix bug where sometimes it doesn't type
         .type('{uparrow}')
         .type('Will this fix the flakiness?');
-
+      cy.waitForVideoToLoad();
       cy.eyesCheckWindow(this.test.title);
     });
   });
@@ -266,11 +266,11 @@ describe('plugins', () => {
     it('add a soundcloud URL', function() {
       cy.openSoundCloudModal().addSoundCloud();
       cy.shrinkPlugin();
-      cy.waitForVideoToLoad();
       cy.focusEditor()
         .type('{uparrow}') //try to fix bug where sometimes it doesn't type
         .type('{uparrow}')
         .type('Will this fix the flakiness?');
+      cy.waitForVideoToLoad();
       cy.eyesCheckWindow(this.test.title);
     });
   });
@@ -458,10 +458,9 @@ describe('plugins', () => {
     before(function() {
       eyesOpen(this);
     });
+    after(() => cy.eyesClose());
 
     beforeEach('load editor', () => cy.loadEditorAndViewer('linkPreview'));
-
-    after(() => cy.eyesClose());
 
     it('change link preview settings', function() {
       cy.openPluginToolbar(PLUGIN_COMPONENT.LINK_PREVIEW);
@@ -480,6 +479,24 @@ describe('plugins', () => {
     it('delete link preview', function() {
       cy.openPluginToolbar(PLUGIN_COMPONENT.LINK_PREVIEW);
       cy.get(`[data-hook=blockButton_delete][tabindex!=-1]`).click();
+      cy.moveCursorToEnd();
+    });
+  });
+
+  context('convert link to link preview', () => {
+    before(function() {
+      eyesOpen(this);
+    });
+    after(() => cy.eyesClose());
+    beforeEach('load editor', () => cy.loadEditorAndViewer('empty'));
+
+    it('should create link preview from link after enter key', function() {
+      cy.focusEditor();
+      cy.moveCursorToEnd()
+        .type('www.wix.com')
+        .type('{enter}')
+        .wait(100);
+      cy.moveCursorToEnd();
     });
   });
 });
