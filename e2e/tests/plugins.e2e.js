@@ -9,6 +9,7 @@ import {
   GIPHY_PLUGIN,
 } from '../cypress/dataHooks';
 import { DEFAULT_DESKTOP_BROWSERS } from '../tests/constants';
+import linkPreviewMockRes from './linkPreviewMockRes.json';
 
 const eyesOpen = ({
   test: {
@@ -457,10 +458,9 @@ describe('plugins', () => {
     before(function() {
       eyesOpen(this);
     });
+    after(() => cy.eyesClose());
 
     beforeEach('load editor', () => cy.loadEditorAndViewer('linkPreview'));
-
-    after(() => cy.eyesClose());
 
     it('change link preview settings', function() {
       cy.openPluginToolbar(PLUGIN_COMPONENT.LINK_PREVIEW);
@@ -479,6 +479,24 @@ describe('plugins', () => {
     it('delete link preview', function() {
       cy.openPluginToolbar(PLUGIN_COMPONENT.LINK_PREVIEW);
       cy.get(`[data-hook=blockButton_delete][tabindex!=-1]`).click();
+      cy.moveCursorToEnd();
+    });
+  });
+
+  context('convert link to link preview', () => {
+    before(function() {
+      eyesOpen(this);
+    });
+    after(() => cy.eyesClose());
+    beforeEach('load editor', () => cy.loadEditorAndViewer('empty'));
+
+    it('should create link preview from link after enter key', function() {
+      cy.focusEditor();
+      cy.moveCursorToEnd()
+        .type('www.wix.com')
+        .type('{enter}')
+        .wait(100);
+      cy.moveCursorToEnd();
     });
   });
 });
