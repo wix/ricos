@@ -58,8 +58,6 @@
   "DividerPlugin_InsertButton_Tooltip": "Add a divider",
   "DividerPlugin_SelectType_Tooltip": "Line style",
   "FacebookPlugin_InsertButton_Tooltip" : "Add a Facebook post",
-  "Facebook_Embed_Modal_Title" : "Add a Facebook post",
-  "Facebook_Embed_Modal_Subtitle" : "Paste the URL of a public post. <1>Learn how</1>",  
   "InstagramPlugin_InsertButton_Tooltip" : "Add an Instagram post",
   "TwitterPlugin_InsertButton_Tooltip" : "Add a Twitter post",
   "TikTokPlugin_InsertButton_Tooltip" : "Add a TikTok video",
