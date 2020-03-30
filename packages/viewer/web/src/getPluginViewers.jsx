@@ -64,28 +64,36 @@ class PluginViewer extends PureComponent {
 
     if (Component) {
       if (elementType !== 'inline') {
-        const hasLink = componentData.config && componentData.config.link;
+        const { config = {} } = componentData;
+        const hasLink = config.link;
         const ContainerElement = !hasLink ? 'div' : 'a';
         const containerClassNames = this.getContainerClassNames(hasLink);
         let containerProps = {};
         if (hasLink) {
-          const { url, target, rel } = componentData.config.link;
+          const { url, target, rel } = config.link;
           containerProps = {
             href: normalizeUrl(url),
             target: target || anchorTarget || '_self',
             rel: rel || relValue || 'noopener noreferrer',
           };
         }
-        if (componentData.config) {
-          // TODO: more generic logic?
-          if (componentData.config.size === 'inline') {
-            containerProps.style = { width: componentData.config.width };
-          }
-          if (type === 'wix-draft-plugin-html') {
-            const { width: currentWidth } = componentData.config;
-            containerProps.style = { width: currentWidth };
+
+        // TODO: more generic logic?
+        let customStyles;
+        if (config.size === 'inline' || type === 'wix-draft-plugin-html') {
+          customStyles = { width: config.width };
+        }
+        if (type === 'wix-draft-plugin-image') {
+          const { src = {} } = componentData;
+          const { size } = config;
+          if (size === 'original' && src.width) {
+            customStyles = { width: src.width, maxWidth: '100%' };
           }
         }
+        if (customStyles) {
+          containerProps.style = customStyles;
+        }
+
         return (
           <div className={styles.atomic}>
             <ContainerElement className={containerClassNames} {...containerProps}>
