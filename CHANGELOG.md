@@ -16,7 +16,7 @@
     Click to see more.
   </summary>
 
-  ### :bug: Bug Fix
+  ### :bug: [Bug Fix]
   - `general`
     - [#843](https://github.com/wix-incubator/rich-content/pull/843) fix: mouse up event on overlay triggered the closing the modals
   - `image`
@@ -28,7 +28,7 @@
   - `wrapper`
     - [#852](https://github.com/wix-incubator/rich-content/pull/852) strategies create configs & not functions
   - `viewer`
-    - [##861](https://github.com/wix-incubator/rich-content/pull/#861) text direction util improved; tests added
+    - [#861](https://github.com/wix-incubator/rich-content/pull/#861) text direction util improved; tests added
     - [#846](https://github.com/wix-incubator/rich-content/pull/846) switch to forked redraft (`wix-redraft`)
 
 </details>
