@@ -35,7 +35,7 @@ export default class SideToolbarPanelContent extends Component {
           </div>
         )}
 
-        <div className={classNames({ [Styles.withSearch]: showSearch })}>
+        <div className={classNames(Styles.pluginsWrapper, { [Styles.withSearch]: showSearch })}>
           <SideToolbarPluginsSection
             theme={theme}
             getEditorState={getEditorState}

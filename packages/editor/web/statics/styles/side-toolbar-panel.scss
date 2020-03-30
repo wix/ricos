@@ -4,8 +4,12 @@
   overflow: auto;
   justify-items: center;
   align-items: center;
+  justify-content: center;
   .panelWithSearch {
     min-height: 400px;
+  }
+  .pluginsWrapper {
+    width: 100%;
   }
 
   .searchWrapper {
