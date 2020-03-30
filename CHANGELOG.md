@@ -19,6 +19,8 @@
   ### :bug: [Bug Fix]
   - `general`
     - [#843](https://github.com/wix-incubator/rich-content/pull/843) fix: mouse up event on overlay triggered the closing the modals
+  - `editor`
+    - [#862](https://github.com/wix-incubator/rich-content/pull/862) fix inline resize reset on reload of editor
   - `image`
     - [#853](https://github.com/wix-incubator/rich-content/pull/853) Image Original Size for images of width 350px and above
   ### :house: Internal
