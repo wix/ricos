@@ -3166,13 +3166,13 @@ exports[`plugins > emoji > render emoji modal #0`] =
       "inlineStyleRanges": [],
       "key": 0,
       "text": "😄💰📝",
-            "type": "unstyled"
+      "type": "unstyled"
     }
   ],
   "entityMap": {
     "0": {
       "data": {
-         "emojiUnicode": "😄"
+        "emojiUnicode": "😄"
       },
       "mutability": "IMMUTABLE",
       "type": "EMOJI_TYPE"
@@ -3190,9 +3190,9 @@ exports[`plugins > emoji > render emoji modal #0`] =
       },
       "mutability": "IMMUTABLE",
       "type": "EMOJI_TYPE"
-     }
-   }
- };
+    }
+  }
+};
 
 exports[`plugins > link preview > backspace key should convert link preview to regular link #0`] =
 {
@@ -3400,7 +3400,7 @@ exports[`plugins > emoji > render some emojies #0`] =
   "entityMap": {
     "0": {
       "data": {
-              "emojiUnicode": "😄"
+        "emojiUnicode": "😄"
       },
       "mutability": "IMMUTABLE",
       "type": "EMOJI_TYPE"
@@ -3555,6 +3555,64 @@ exports[`plugins > link preview > delete link preview #0`] =
       },
       "mutability": "MUTABLE",
       "type": "LINK"
+    }
+  }
+};
+
+exports[`plugins > convert link to link preview > should create link preview from link after enter key #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "\n",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "link": {
+            "url": "www.wix.com"
+          },
+          "size": "content"
+        },
+        "description": "A mock description",
+        "provider_url": "www.mockUrl.com",
+        "thumbnail_url": "https://image.insider.com/5de5784979d757159d0b6838?width=1100&format=jpeg&auto=webp",
+        "title": "A mock title"
+      },
+      "mutability": "IMMUTABLE",
+      "type": "LINK_PREVIEW"
     }
   }
 };

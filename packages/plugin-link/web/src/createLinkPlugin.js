@@ -80,7 +80,7 @@ const createLinkPlugin = (config = {}) => {
   const shouldLinkify = consecutiveString =>
     consecutiveString.string.length >= settings.minLinkifyLength &&
     isValidUrl(consecutiveString.string) &&
-    !rangeContainsEntity(consecutiveString);
+    !(rangeContainsEntity(consecutiveString) && blockContainsPlainText(consecutiveString));
 
   const findLastStringWithNoSpaces = editorState => {
     const selection = editorState.getSelection();
@@ -102,6 +102,8 @@ const createLinkPlugin = (config = {}) => {
     }
     return false;
   };
+
+  const blockContainsPlainText = ({ block, string }) => block.text.length > string.length;
 
   const addLinkAt = ({ string, index, endIndex, blockKey }, editorState) => {
     return insertLinkInPosition(editorState, blockKey, index, endIndex, {
