@@ -22,6 +22,8 @@
 - `examples`
   - [#850](https://github.com/wix-incubator/rich-content/pull/850) fix performance
   - [#850](https://github.com/wix-incubator/rich-content/pull/850) save content to local storage
+- `e2e`
+  - [#860](https://github.com/wix-incubator/rich-content/pull/860) Images original size test
 
 </details>
 <hr/>
