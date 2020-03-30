@@ -14,6 +14,7 @@ import {
   SETTINGS_PANEL,
 } from '../dataHooks';
 
+// Viewport size commands
 const resizeForDesktop = () => cy.viewport('macbook-15');
 const resizeForMobile = () => cy.viewport('iphone-6');
 
@@ -30,9 +31,14 @@ const getUrl = (componentId, fixtureName = '') =>
     seoMode: isSeoMode,
   })}`;
 
-// Viewport size commands
-
-const run = (app, fixtureName) => cy.visit(getUrl(app, fixtureName));
+const run = (app, fixtureName) => {
+  cy.visit(
+    getUrl(app, fixtureName).then(() => {
+      disableTransitions();
+      hideAllTooltips();
+    })
+  );
+};
 
 let isMobile = false;
 let isHebrew = false;
@@ -68,15 +74,13 @@ function hideAllTooltips() {
   cy.get('[data-id="tooltip"]').invoke('hide'); //uses jquery to set display: none
 }
 
-Cypress.Commands.add('loadEditorAndViewer', fixtureName => {
-  run('rce', fixtureName).then(() => {
-    disableTransitions();
-    hideAllTooltips();
-  });
-});
+Cypress.Commands.add('loadEditorAndViewer', fixtureName => run('rce', fixtureName));
+Cypress.Commands.add('loadIsolatedEditorAndViewer', fixtureName =>
+  run('rce-isolated', fixtureName)
+);
 
-Cypress.Commands.add('loadEditorAndViewerOnSsr', fixtureName => {
-  cy.request(getUrl('rce', fixtureName))
+Cypress.Commands.add('loadEditorAndViewerOnSsr', (fixtureName, compName) => {
+  cy.request(getUrl(compName, fixtureName))
     .its('body')
     .then(html => {
       // remove the application code bundle
