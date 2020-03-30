@@ -25,7 +25,7 @@
   - `wrapper`
     - [#852](https://github.com/wix-incubator/rich-content/pull/852) strategies create configs & not functions
   - `viewer`
-    - text direction util improved; tests added
+    - [##861](https://github.com/wix-incubator/rich-content/pull/#861) text direction util improved; tests added
 
 </details>
 <hr/>
