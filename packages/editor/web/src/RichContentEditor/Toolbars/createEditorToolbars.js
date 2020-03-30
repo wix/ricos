@@ -28,7 +28,7 @@ const appendSeparator = ({ mergedList, sourceList, buttonData, formFactor }) => 
 };
 
 const createEditorToolbars = ({ buttons, textAlignment, refId, context }) => {
-  const { uiSettings, getToolbarSettings = () => [] } = context.config;
+  const { pluginsConfig = {}, getToolbarSettings = () => [] } = context.config;
   const { pluginButtons, pluginTextButtons } = buttons;
 
   const { isMobile, theme = {} } = context;
@@ -83,6 +83,7 @@ const createEditorToolbars = ({ buttons, textAlignment, refId, context }) => {
         getInstance,
         getDisplayOptions,
         getToolbarDecorationFn,
+        options,
       }) => {
         toolbars[name] = getInstance({
           ...context,
@@ -115,9 +116,10 @@ const createEditorToolbars = ({ buttons, textAlignment, refId, context }) => {
           theme: { ...getToolbarTheme(theme, name.toLowerCase()), ...theme },
           defaultTextAlignment: textAlignment,
           pluginButtons,
-          uiSettings,
+          uiSettings: pluginsConfig.uiSettings,
           pubsub,
           refId,
+          options,
         });
       }
     );

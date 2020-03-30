@@ -31,7 +31,14 @@ export default class Editor extends PureComponent {
     this.initEditorProps();
     const { scrollingElementFn } = props;
     const additionalConfig = { [GALLERY_TYPE]: { scrollingElement: scrollingElementFn } };
-    this.pluginsConfig = Plugins.getConfig(additionalConfig);
+    const pluginsConfig = Plugins.getConfig(additionalConfig);
+    const toolbarsConfig = {
+      floatingPluginMenuConfig: {
+        showSearch: true,
+        splitToSections: true,
+      },
+    };
+    this.config = { pluginsConfig, toolbarsConfig };
   }
 
   initEditorProps() {
@@ -190,7 +197,7 @@ export default class Editor extends PureComponent {
           helpers={this.helpers}
           plugins={Plugins.editorPlugins}
           // config={Plugins.getConfig(additionalConfig)}
-          config={this.pluginsConfig}
+          config={this.config}
           editorKey="random-editorKey-ssr"
           // siteDomain="https://www.wix.com"
           {...editorProps}

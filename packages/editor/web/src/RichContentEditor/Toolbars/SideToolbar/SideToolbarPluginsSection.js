@@ -12,13 +12,13 @@ const SideToolbarPluginsSection = ({
   searchTag,
   t,
   hidePopup,
+  splitToSections,
 }) => {
   const pluginsForTag = searchTag && getPluginsForTag(searchTag, t);
   const plugins = !searchTag
     ? structure
     : structure.filter(({ name }) => pluginsForTag.includes(name));
 
-  const shouldShowSections = false; // need to decide in which cases split to sections
   if (plugins.length === 0) {
     return (
       <div className={Styles.pluginsSectionEmptyState}>
@@ -28,7 +28,7 @@ const SideToolbarPluginsSection = ({
   }
 
   return [
-    shouldShowSections && (
+    splitToSections && (
       <div key="basicSection" className={Styles.pluginsSection}>
         Basic
       </div>
@@ -58,6 +58,7 @@ SideToolbarPluginsSection.propTypes = {
   t: PropTypes.func,
   searchTag: PropTypes.string,
   hidePopup: PropTypes.func,
+  splitToSections: PropTypes.bool,
 };
 
 export default SideToolbarPluginsSection;

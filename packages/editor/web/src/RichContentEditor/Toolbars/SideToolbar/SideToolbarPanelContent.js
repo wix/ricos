@@ -14,10 +14,10 @@ export default class SideToolbarPanelContent extends Component {
       structure,
       hidePopup,
       t,
-      showSearch,
+      options = {},
     } = this.props;
     const setSearchTag = searchTag => this.setState({ searchTag });
-
+    const { showSearch, splitToSections } = options;
     return (
       <div
         className={classNames(Styles.sideToolbarPanelWrapper, {
@@ -44,6 +44,7 @@ export default class SideToolbarPanelContent extends Component {
             searchTag={this.state?.searchTag}
             t={t}
             hidePopup={hidePopup}
+            splitToSections={splitToSections}
           />
         </div>
       </div>
@@ -58,5 +59,5 @@ SideToolbarPanelContent.propTypes = {
   theme: PropTypes.object.isRequired,
   t: PropTypes.func,
   hidePopup: PropTypes.func,
-  showSearch: PropTypes.bool,
+  options: PropTypes.object,
 };

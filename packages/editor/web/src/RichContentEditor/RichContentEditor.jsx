@@ -47,13 +47,15 @@ class RichContentEditor extends Component {
       editorBounds: {},
     };
     this.refId = Math.floor(Math.random() * 9999);
-
-    props.config.uiSettings = merge(
+    const {
+      config: { pluginsConfig = {} },
+    } = props;
+    pluginsConfig.uiSettings = merge(
       {
         blankTargetToggleVisibilityFn: anchorTarget => anchorTarget !== '_blank',
         nofollowRelToggleVisibilityFn: relValue => relValue !== 'nofollow',
       },
-      props.config.uiSettings || {}
+      pluginsConfig.uiSettings || {}
     );
 
     this.initContext();
@@ -95,12 +97,16 @@ class RichContentEditor extends Component {
       anchorTarget,
       relValue,
       helpers = {},
-      config,
+      config: { pluginsConfig, toolbarsConfig = {} },
       isMobile = false,
       shouldRenderOptimizedImages,
       initialIntent,
       siteDomain,
     } = this.props;
+
+    const getToolbarSettings = () => [
+      { name: 'SIDE', options: { ...toolbarsConfig.floatingPluginMenuConfig } },
+    ];
 
     this.contextualData = {
       theme: theme || {},
@@ -112,7 +118,7 @@ class RichContentEditor extends Component {
         ...helpers,
         onPluginAdd: (...args) => helpers.onPluginAdd?.(...args, Version.currentVersion),
       },
-      config,
+      config: { pluginsConfig, getToolbarSettings },
       isMobile,
       setEditorState: this.setEditorState,
       getEditorState: this.getEditorState,

@@ -127,7 +127,7 @@ export default class AddPluginFloatingToolbar extends Component {
   };
 
   render() {
-    const { theme, getEditorState, setEditorState, structure, t } = this.props;
+    const { theme, getEditorState, setEditorState, structure, t, options } = this.props;
     const { toolbarStyles } = theme || {};
     const floatingContainerClassNames = classNames(
       Styles.sideToolbar_floatingContainer,
@@ -159,6 +159,7 @@ export default class AddPluginFloatingToolbar extends Component {
             setEditorState={setEditorState}
             structure={structure}
             hidePopup={this.hidePopup}
+            options={options}
           />
         </div>
       );
@@ -210,4 +211,5 @@ AddPluginFloatingToolbar.propTypes = {
   isMobile: PropTypes.bool,
   helpers: PropTypes.object,
   t: PropTypes.func,
+  options: PropTypes.bool,
 };
