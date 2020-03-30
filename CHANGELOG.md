@@ -12,14 +12,20 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
-  
-### :bug: [Bug Fix]
-- `general`
-  - [#843](https://github.com/wix-incubator/rich-content/pull/843) fix: mouse up event on overlay triggered the closing the modals
-### :house: Internal
-- `examples`
-  - [#850](https://github.com/wix-incubator/rich-content/pull/850) fix performance
-  - [#850](https://github.com/wix-incubator/rich-content/pull/850) save content to local storage
+
+  ### :bug: [Bug Fix]
+  - `general`
+    - [#843](https://github.com/wix-incubator/rich-content/pull/843) fix: mouse up event on overlay triggered the closing the modals
+  - `image`
+    - [#853](https://github.com/wix-incubator/rich-content/pull/853) Image Original Size for images of width 350px and above
+  ### :house: Internal
+  - `examples`
+    - [#850](https://github.com/wix-incubator/rich-content/pull/850) fix performance
+    - [#850](https://github.com/wix-incubator/rich-content/pull/850) save content to local storage
+  - `wrapper`
+    - [#852](https://github.com/wix-incubator/rich-content/pull/852) strategies create configs & not functions
+  - `viewer`
+    - [##861](https://github.com/wix-incubator/rich-content/pull/#861) text direction util improved; tests added
 
 </details>
 <hr/>
@@ -112,6 +118,11 @@
   - [#775](https://github.com/wix-incubator/rich-content/pull/775) adding videos to gallery
 
 #### xxxxxxxxxxxx   v6 hotfixes below   xxxxxxxxxxxx
+
+## 6.10.5 (Mar 29, 2020)
+### :bug: Bug Fix
+- `image`
+  - [#853](https://github.com/wix-incubator/rich-content/pull/853) Image Original Size for images of width 350px and above
 
 ## 6.10.4 (Mar 24, 2020)
 ### :bug: Bug Fix
