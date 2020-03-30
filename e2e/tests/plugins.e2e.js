@@ -9,6 +9,7 @@ import {
   GIPHY_PLUGIN,
 } from '../cypress/dataHooks';
 import { DEFAULT_DESKTOP_BROWSERS } from '../tests/constants';
+import linkPreviewMockRes from './linkPreviewMockRes.json';
 
 const eyesOpen = ({
   test: {
@@ -483,14 +484,13 @@ describe('plugins', () => {
     });
   });
 
-  context('convert link to link preview', () => {
+  context.only('convert link to link preview', () => {
     let polyfill;
 
     before(function() {
       const polyfillUrl = 'https://unpkg.com/unfetch/dist/unfetch.umd.js';
       cy.request(polyfillUrl).then(response => {
-        const commandIndex = response.body.indexOf('//#');
-        polyfill = response.body.substring(0, commandIndex);
+        polyfill = response.body;
       });
 
       eyesOpen(this);
@@ -500,7 +500,8 @@ describe('plugins', () => {
       cy.server();
       cy.route({
         method: 'GET',
-        url: '/oembed',
+        url: /.*\/oembed.*/,
+        response: linkPreviewMockRes,
       });
       cy.visit('/rce/empty', {
         onBeforeLoad: win => {
