@@ -28,7 +28,7 @@ import { createButtonPlugin, BUTTON_TYPE } from 'wix-rich-content-plugin-button'
 import { createTextHighlightPlugin, TEXT_HIGHLIGHT_TYPE } from 'wix-rich-content-plugin-text-color';
 import Highlighter from 'react-highlight-words';
 import casual from 'casual-browserify';
-import { mockFetchUrlPreviewData } from '../../../storybook/stories/Utils/linkPreviewUtil';
+import { mockFetchUrlPreviewData } from '../utils/linkPreviewUtil';
 
 import 'wix-rich-content-editor-common/dist/styles.min.css';
 import 'wix-rich-content-common/dist/styles.min.css';

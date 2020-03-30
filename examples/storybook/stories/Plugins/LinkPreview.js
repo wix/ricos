@@ -7,7 +7,7 @@ import { pluginLinkPreview } from 'wix-rich-content-plugin-link-preview';
 import { pluginLink } from 'wix-rich-content-plugin-link';
 import fixtrue from '../../../../e2e/tests/fixtures/linkPreview.json';
 import { RichContentWrapper } from 'wix-rich-content-wrapper';
-import { mockFetchUrlPreviewData } from '../Utils/linkPreviewUtil';
+import { mockFetchUrlPreviewData } from '../../../main/shared/utils/linkPreviewUtil';
 
 import {
   RichContentEditorBox,
