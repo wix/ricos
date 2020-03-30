@@ -225,23 +225,22 @@ describe('plugins', () => {
     it('add a video from URL', function() {
       cy.openVideoUploadModal().addVideoFromURL();
       cy.shrinkPlugin();
-      cy.waitForVideoToLoad();
       cy.focusEditor()
         .type('{uparrow}') //try to fix bug where sometimes it doesn't type
         .type('{uparrow}')
         .type('Will this fix the flakiness?');
+      cy.waitForVideoToLoad();
       cy.eyesCheckWindow(this.test.title);
     });
 
     it('add a custom video', function() {
       cy.openVideoUploadModal().addCustomVideo();
       cy.shrinkPlugin();
-      cy.waitForVideoToLoad();
       cy.focusEditor()
         .type('{uparrow}') //try to fix bug where sometimes it doesn't type
         .type('{uparrow}')
         .type('Will this fix the flakiness?');
-
+      cy.waitForVideoToLoad();
       cy.eyesCheckWindow(this.test.title);
     });
   });
@@ -266,11 +265,11 @@ describe('plugins', () => {
     it('add a soundcloud URL', function() {
       cy.openSoundCloudModal().addSoundCloud();
       cy.shrinkPlugin();
-      cy.waitForVideoToLoad();
       cy.focusEditor()
         .type('{uparrow}') //try to fix bug where sometimes it doesn't type
         .type('{uparrow}')
         .type('Will this fix the flakiness?');
+      cy.waitForVideoToLoad();
       cy.eyesCheckWindow(this.test.title);
     });
   });

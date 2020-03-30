@@ -12,18 +12,20 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
-  
-### :bug: [Bug Fix]
-- `general`
-  - [#843](https://github.com/wix-incubator/rich-content/pull/843) fix: mouse up event on overlay triggered the closing the modals
-- `image`
-  - [#853](https://github.com/wix-incubator/rich-content/pull/853) Image Original Size for images of width 350px and above
-### :house: Internal
-- `examples`
-  - [#850](https://github.com/wix-incubator/rich-content/pull/850) fix performance
-  - [#850](https://github.com/wix-incubator/rich-content/pull/850) save content to local storage
-- `wrapper`
-  - [#852](https://github.com/wix-incubator/rich-content/pull/852) strategies create configs & not functions
+
+  ### :bug: [Bug Fix]
+  - `general`
+    - [#843](https://github.com/wix-incubator/rich-content/pull/843) fix: mouse up event on overlay triggered the closing the modals
+  - `image`
+    - [#853](https://github.com/wix-incubator/rich-content/pull/853) Image Original Size for images of width 350px and above
+  ### :house: Internal
+  - `examples`
+    - [#850](https://github.com/wix-incubator/rich-content/pull/850) fix performance
+    - [#850](https://github.com/wix-incubator/rich-content/pull/850) save content to local storage
+  - `wrapper`
+    - [#852](https://github.com/wix-incubator/rich-content/pull/852) strategies create configs & not functions
+  - `viewer`
+    - [##861](https://github.com/wix-incubator/rich-content/pull/#861) text direction util improved; tests added
 
 </details>
 <hr/>
