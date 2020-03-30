@@ -222,7 +222,7 @@ describe('plugins', () => {
       cy.eyesCheckWindow(this.test.title);
     });
 
-    it('add a video from URL', function() {
+    it.only('add a video from URL', function() {
       cy.openVideoUploadModal().addVideoFromURL();
       cy.shrinkPlugin();
       cy.focusEditor()

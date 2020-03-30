@@ -460,12 +460,6 @@ Cypress.Commands.add('dragAndDropPlugin', (src, dest) => {
 
 Cypress.Commands.add('waitForVideoToLoad', { prevSubject: 'optional' }, () => {
   cy.get('[data-loaded=true]', { timeout: 15000 }).should('have.length', 2);
-  cy.window()
-    .its('__CONTENT_STATE__')
-    .its('entityMap.0.data', { timeout: 15000 })
-    .then(data => cy.log(data));
-  // .its('entityMap.0.data.metadata', { timeout: 15000 })
-  // .should('exist');
 });
 
 Cypress.Commands.add('waitForHtmlToLoad', () => {
