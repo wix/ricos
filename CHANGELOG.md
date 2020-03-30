@@ -16,7 +16,7 @@
     Click to see more.
   </summary>
 
-  ### :bug: [Bug Fix]
+  ### :bug: Bug Fix
   - `general`
     - [#843](https://github.com/wix-incubator/rich-content/pull/843) fix: mouse up event on overlay triggered the closing the modals
   - `image`
