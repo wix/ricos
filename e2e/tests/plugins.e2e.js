@@ -483,33 +483,12 @@ describe('plugins', () => {
     });
   });
 
-  context.only('convert link to link preview', () => {
-    let polyfill;
-
+  context('convert link to link preview', () => {
     before(function() {
-      const polyfillUrl = 'https://unpkg.com/unfetch/dist/unfetch.umd.js';
-      cy.request(polyfillUrl).then(response => {
-        polyfill = response.body;
-      });
-
       eyesOpen(this);
     });
     after(() => cy.eyesClose());
-    beforeEach('load editor', () => {
-      cy.server();
-      cy.route({
-        method: 'GET',
-        url: /.*\/oembed.*/,
-        response: linkPreviewMockRes,
-      });
-      cy.visit('/rce/empty', {
-        onBeforeLoad: win => {
-          win.fetch = null;
-          win.eval(polyfill);
-          win.fetch = win.unfetch;
-        },
-      });
-    });
+    beforeEach('load editor', () => cy.loadEditorAndViewer('empty'));
 
     it('should create link preview from link after enter key', function() {
       cy.focusEditor();
