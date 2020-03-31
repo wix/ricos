@@ -15,6 +15,10 @@
     Click to see more.
   </summary>
 
+### :rocket: New Feature
+- `html`
+  - [#868](https://github.com/wix-incubator/rich-content/pull/868) save on click outside in html plugin
+  
   ### :bug: Bug Fix
   - `viewer`
     - contextual props are passed to interactions
