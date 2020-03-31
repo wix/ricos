@@ -32,12 +32,10 @@ const getUrl = (componentId, fixtureName = '') =>
   })}`;
 
 const run = (app, fixtureName) => {
-  cy.visit(
-    getUrl(app, fixtureName).then(() => {
-      disableTransitions();
-      hideAllTooltips();
-    })
-  );
+  cy.visit(getUrl(app, fixtureName)).then(() => {
+    disableTransitions();
+    hideAllTooltips();
+  });
 };
 
 let isMobile = false;
