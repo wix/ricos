@@ -18,9 +18,12 @@
 ### :house: Internal
 - `emoji`
   - [#870](https://github.com/wix-incubator/rich-content/pull/870) reduce the bundle size of plugin emoji
-  ### :bug: Bug Fix
-  - `viewer`
-    - contextual props are passed to interactions
+### :rocket: New Feature
+- `html`
+  - [#868](https://github.com/wix-incubator/rich-content/pull/868) save on click outside in html plugin
+### :bug: Bug Fix
+- `viewer`
+  - contextual props are passed to interactions
 
 </details>
 <hr/>
