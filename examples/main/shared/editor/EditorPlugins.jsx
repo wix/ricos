@@ -232,7 +232,7 @@ const videoHandlers = {
 
 const config = {
   [LINK_PREVIEW_TYPE]: {
-    disableEmbed: false,
+    enableEmbed: true,
     fetchData: mockFetchUrlPreviewData(),
   },
   [EMOJI_TYPE]: {

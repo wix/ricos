@@ -4,7 +4,7 @@ import { DEFAULT_DESKTOP_BROWSERS } from '../tests/constants';
 
 const testFixtureOnSsr = fixture =>
   it(`render ${fixture} in ssr`, function() {
-    cy.loadEditorAndViewerOnSsr(fixture);
+    cy.loadEditorAndViewerOnSsr(fixture, 'rce');
     cy.eyesCheckWindow(this.test.title);
   });
 
