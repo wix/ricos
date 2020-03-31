@@ -75,7 +75,7 @@ class Dropdown extends Component {
     }
   }
 
-  handleMouseDown(event) {
+  handleMouseDown = event => {
     if (this.props.onFocus && typeof this.props.onFocus === 'function') {
       this.props.onFocus(this.state.isOpen);
     }
@@ -90,7 +90,7 @@ class Dropdown extends Component {
         isOpen: !this.state.isOpen,
       });
     }
-  }
+  };
 
   setValue(value, label, component) {
     const newState = {
@@ -221,8 +221,8 @@ class Dropdown extends Component {
               disabledClass
             )}
             data-hook={dataHook}
-            onClick={this.handleMouseDown.bind(this)}
-            onTouchEnd={this.handleMouseDown.bind(this)}
+            onClick={this.handleMouseDown}
+            onTouchEnd={this.handleMouseDown}
           >
             {value}
             <span
