@@ -15,6 +15,10 @@
     Click to see more.
   </summary>
 
+  ### :bug: Bug Fix
+  - `viewer`
+    - contextual props are passed to interactions
+
 </details>
 <hr/>
 
