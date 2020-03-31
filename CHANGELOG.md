@@ -15,6 +15,9 @@
     Click to see more.
   </summary>
 
+### :house: Internal
+- `emoji`
+  - [#870](https://github.com/wix-incubator/rich-content/pull/870) reduce the bundle size of plugin emoji
 </details>
 <hr/>
 
