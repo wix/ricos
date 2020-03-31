@@ -30,6 +30,7 @@ class Dropdown extends Component {
     disabled: PropTypes.bool,
     dataHook: PropTypes.string,
     controlClassName: PropTypes.string,
+    tabIndex: PropTypes.number,
   };
 
   constructor(props) {
@@ -207,9 +208,8 @@ class Dropdown extends Component {
       [styles['Dropdown-root-isOpen']]: this.state.isOpen,
     });
     const { dataHook } = this.props;
-
     return (
-      this.state.isOpen && (
+      this.props.tabIndex > -1 && (
         <div className={dropdownClass}>
           <button
             role="combobox"
