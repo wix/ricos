@@ -1,12 +1,13 @@
 import React, { PureComponent } from 'react';
 import { RichContentEditor, RichContentEditorModal } from 'wix-rich-content-editor';
-import { convertToRaw } from 'draft-js';
+import { convertToRaw } from 'wix-rich-content-editor-common';
 import * as PropTypes from 'prop-types';
 import ReactModal from 'react-modal';
 import { testImages, testVideos } from './mock';
 import * as Plugins from './EditorPlugins';
 import ModalsMap from './ModalsMap';
 import theme from '../theme/theme'; // must import after custom styles
+import { GALLERY_TYPE } from 'wix-rich-content-plugin-gallery';
 
 const modalStyleDefaults = {
   content: {
@@ -28,6 +29,9 @@ export default class Editor extends PureComponent {
     super(props);
     // ReactModal.setAppElement('#root');
     this.initEditorProps();
+    const { scrollingElementFn } = props;
+    const additionalConfig = { [GALLERY_TYPE]: { scrollingElement: scrollingElementFn } };
+    this.pluginsConfig = Plugins.getConfig(additionalConfig);
   }
 
   initEditorProps() {
@@ -50,6 +54,16 @@ export default class Editor extends PureComponent {
       }
     };
     this.helpers = {
+      //these are for testing purposes only
+      onPluginAdd: async (plugin_id, entry_point, version) =>
+        console.log('biPluginAdd', plugin_id, entry_point, version),
+      onPluginDelete: async (plugin_id, version) =>
+        console.log('biPluginDelete', plugin_id, version),
+      onPluginChange: async (plugin_id, changeObj, version) =>
+        console.log('biPluginChange', plugin_id, changeObj, version),
+      onPublish: async (postid, callback, version) =>
+        console.log('biOnPublish', ({ data }) => data, version),
+      //
       // onFilesChange: (files, updateEntity) => mockUpload(files, updateEntity),
       handleFileSelection: (index, multiple, updateEntity, removeEntity, componentData) => {
         const count = componentData.items || shouldMultiSelectImages ? [1, 2, 3] : [1];
@@ -74,7 +88,7 @@ export default class Editor extends PureComponent {
             this.props.mockImageIndex || Math.floor(Math.random() * testVideos.length);
           const testVideo = testVideos[mockVideoIndex];
           updateEntity(testVideo);
-        }, 500);
+        }, this.props.mockImageIndex || 500);
       },
       openModal: data => {
         const { modalStyles, ...modalProps } = data;
@@ -126,65 +140,62 @@ export default class Editor extends PureComponent {
     this.setState({ MobileToolbar, TextToolbar });
   };
 
-  handleChange = editorState => {
-    this.setState({ editorState });
-    if (typeof window !== 'undefined') {
-      // ensures that tests fail when entity map is mutated
-      const raw = convertToRaw(editorState.getCurrentContent());
-      // const raw = deepFreeze(rr);
-      window.__CONTENT_STATE__ = raw;
-      window.__CONTENT_SNAPSHOT__ = {
-        ...raw,
-        // blocks keys are random so for snapshot diffing they are changed to indexes
-        blocks: raw.blocks.map((block, index) => ({ ...block, key: index })),
-      };
-    }
-    this.props.onChange && this.props.onChange(editorState);
-  };
-
   render() {
     const modalStyles = {
-      content: Object.assign(
-        {},
-        (this.state.modalStyles || modalStyleDefaults).content,
-        theme.modalTheme.content
-      ),
-      overlay: Object.assign(
-        {},
-        (this.state.modalStyles || modalStyleDefaults).overlay,
-        theme.modalTheme.overlay
-      ),
+      content: {
+        ...(this.state.modalStyles || modalStyleDefaults).content,
+        ...theme.modalTheme.content,
+      },
+      overlay: {
+        ...(this.state.modalStyles || modalStyleDefaults).overlay,
+        ...theme.modalTheme.overlay,
+      },
     };
+    const {
+      staticToolbar,
+      isMobile,
+      editorState,
+      initialState,
+      locale,
+      localeResource,
+      onChange,
+    } = this.props;
     const { MobileToolbar, TextToolbar } = this.state;
-    const textToolbarType = this.props.staticToolbar && !this.props.isMobile ? 'static' : null;
+    const textToolbarType = staticToolbar && !isMobile ? 'static' : null;
     const { onRequestClose } = this.state.modalProps || {};
+
+    const editorProps = {
+      anchorTarget,
+      relValue,
+      locale,
+      localeResource,
+      theme,
+      textToolbarType,
+      isMobile,
+      initialState,
+      editorState,
+    };
+    const TopToolbar = MobileToolbar || TextToolbar;
     return (
       <div className="editor">
-        {MobileToolbar && <MobileToolbar />}
-        {TextToolbar && (
+        {TopToolbar && (
           <div className="toolbar-wrapper">
-            <TextToolbar />
+            <TopToolbar />
           </div>
         )}
         <RichContentEditor
           placeholder={'Add some text!'}
           ref={editor => (this.editor = editor)}
-          onChange={this.handleChange}
+          onChange={onChange}
           helpers={this.helpers}
           plugins={Plugins.editorPlugins}
-          config={Plugins.config}
-          editorState={this.props.editorState}
-          initialState={this.props.initialState}
-          isMobile={this.props.isMobile}
-          textToolbarType={textToolbarType}
-          theme={theme}
+          // config={Plugins.getConfig(additionalConfig)}
+          config={this.pluginsConfig}
           editorKey="random-editorKey-ssr"
-          anchorTarget={anchorTarget}
-          relValue={relValue}
-          locale={this.props.locale}
-          localeResource={this.props.localeResource}
           // siteDomain="https://www.wix.com"
+          {...editorProps}
         />
+
         <ReactModal
           isOpen={this.state.showModal}
           contentLabel="External Modal Example"

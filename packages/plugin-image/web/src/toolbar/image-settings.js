@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { mergeStyles, getImageSrc, Loader } from 'wix-rich-content-common';
+import { mergeStyles, getImageSrc } from 'wix-rich-content-common';
 import {
   Image,
   InputWithLabel,
   LinkPanel,
   SettingsPanelFooter,
   SettingsSection,
+  Loader,
 } from 'wix-rich-content-editor-common';
 import ImageSettingsMobileHeader from './image-settings-mobile-header';
 import styles from '../../statics/styles/image-settings.scss';
@@ -60,7 +61,7 @@ class ImageSettings extends Component {
   revertComponentData() {
     const { componentData, helpers, pubsub } = this.props;
     if (this.initialState) {
-      const initialComponentData = Object.assign({}, componentData, { ...this.initialState });
+      const initialComponentData = { ...componentData, ...this.initialState };
       pubsub.update('componentData', initialComponentData);
       this.setState({ ...this.initialState });
     }
@@ -68,8 +69,7 @@ class ImageSettings extends Component {
   }
 
   metadataUpdated = (metadata, value) => {
-    const updatedMetadata = Object.assign({}, metadata, value);
-    this.setState({ metadata: updatedMetadata });
+    this.setState({ metadata: { ...metadata, ...value } });
   };
 
   addMetadataToBlock = () => {

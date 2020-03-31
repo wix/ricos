@@ -2,17 +2,17 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { findDOMNode } from 'react-dom';
-import { mergeStyles, Context } from 'wix-rich-content-common';
+import { mergeStyles } from 'wix-rich-content-common';
 import SoundCloudViewer from './soundCloud-viewer';
 import styles from '../statics/styles/default-sound-cloud-styles.scss';
 import { SOUND_CLOUD_TYPE } from './types';
 
-const DEFAULTS = {
+const DEFAULTS = Object.freeze({
   config: {
     size: 'content',
     alignment: 'center',
   },
-};
+});
 
 const MAX_WAIT_TIME = 5000;
 
@@ -89,13 +89,16 @@ class SoundCloud extends Component {
   };
 
   renderPlayer = () => {
-    const { componentData } = this.props;
+    const { componentData, theme, disabled, setComponentUrl } = this.props;
     return (
       <SoundCloudViewer
         ref={this.setPlayer}
         componentData={componentData}
         onReady={this.handleReady}
         onStart={this.handleStart}
+        theme={theme}
+        disabled={disabled}
+        setComponentUrl={setComponentUrl}
       />
     );
   };
@@ -107,7 +110,7 @@ class SoundCloud extends Component {
   };
 
   render() {
-    this.styles = this.styles || mergeStyles({ styles, theme: this.context.theme });
+    this.styles = this.styles || mergeStyles({ styles, theme: this.props.theme });
     const { className, onClick } = this.props;
     const { isPlayable } = this.state;
     const containerClassNames = classNames(this.styles.soundCloud_container, className || '');
@@ -120,15 +123,13 @@ class SoundCloud extends Component {
         onKeyDown={e => this.onKeyDown(e, onClick)}
         draggable
       >
-        {!isPlayable && this.renderOverlay(this.styles, this.context.t)}
+        {!isPlayable && this.renderOverlay(this.styles, this.props.t)}
         {this.renderPlayer()}
       </div>
     );
     /* eslint-enable jsx-a11y/no-static-element-interactions */
   }
 }
-
-SoundCloud.contextType = Context.type;
 
 SoundCloud.propTypes = {
   componentData: PropTypes.object.isRequired,
@@ -137,6 +138,10 @@ SoundCloud.propTypes = {
   blockProps: PropTypes.object.isRequired,
   onClick: PropTypes.func.isRequired,
   className: PropTypes.string.isRequired,
+  theme: PropTypes.object.isRequired,
+  t: PropTypes.func.isRequired,
+  disabled: PropTypes.bool,
+  setComponentUrl: PropTypes.func,
 };
 
 export { SoundCloud as Component, DEFAULTS };

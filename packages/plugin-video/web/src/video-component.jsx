@@ -2,17 +2,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { findDOMNode } from 'react-dom';
-import { mergeStyles, Context } from 'wix-rich-content-common';
+import { mergeStyles } from 'wix-rich-content-common';
+import { Loader } from 'wix-rich-content-editor-common';
+import { get } from 'lodash';
 import VideoViewer from './video-viewer';
 import styles from '../statics/styles/default-video-styles.scss';
 import { VIDEO_TYPE_LEGACY, VIDEO_TYPE } from './types';
 
-const DEFAULTS = {
+const DEFAULTS = Object.freeze({
   config: {
     size: 'content',
     alignment: 'center',
   },
-};
+});
 
 class VideoComponent extends React.Component {
   static type = { VIDEO_TYPE_LEGACY, VIDEO_TYPE };
@@ -21,7 +23,6 @@ class VideoComponent extends React.Component {
     super(props);
     const isPlayable = !props.blockProps;
     this.state = {
-      isLoading: false,
       isLoaded: false,
       isPlayable,
     };
@@ -48,7 +49,7 @@ class VideoComponent extends React.Component {
   }
 
   handleReady = () => {
-    if (!this.state.isLoaded) {
+    if (!this.state.isLoaded && !this.props.componentData.tempData) {
       this.setState({ isLoaded: true });
     }
   };
@@ -63,14 +64,40 @@ class VideoComponent extends React.Component {
     );
   };
 
+  renderLoader = () => {
+    const isCustomVideo = get(this.props, 'componentData.isCustomVideo');
+    return (
+      <div className={this.styles.videoOverlay}>
+        <Loader type={'medium'} isVerySlowFakeLoader={isCustomVideo} />
+      </div>
+    );
+  };
+
+  onReload = () => {
+    this.setState({ isLoaded: false });
+  };
+
   renderPlayer = () => {
-    const { componentData, settings } = this.props;
+    const {
+      theme,
+      componentData,
+      disabled,
+      disableRightClick,
+      settings,
+      setComponentUrl,
+    } = this.props;
     return (
       <VideoViewer
         ref={this.setPlayer}
         componentData={componentData}
         settings={settings}
         onReady={this.handleReady}
+        disabled={disabled}
+        disableRightClick={disableRightClick}
+        theme={theme}
+        setComponentUrl={setComponentUrl}
+        onReload={this.onReload}
+        isLoaded={this.state.isLoaded}
       />
     );
   };
@@ -82,7 +109,7 @@ class VideoComponent extends React.Component {
   };
 
   render() {
-    this.styles = this.styles || mergeStyles({ styles, theme: this.context.theme });
+    this.styles = this.styles || mergeStyles({ styles, theme: this.props.theme });
     const { className, onClick } = this.props;
     const { isPlayable } = this.state;
     const containerClassNames = classNames(this.styles.video_container, className || '');
@@ -95,8 +122,9 @@ class VideoComponent extends React.Component {
         onKeyDown={e => this.onKeyDown(e, onClick)}
         draggable
       >
-        {!isPlayable && this.renderOverlay(this.styles, this.context.t)}
+        {!isPlayable && this.renderOverlay(this.styles, this.props.t)}
         {this.renderPlayer()}
+        {!this.state.isLoaded && this.renderLoader()}
       </div>
     );
     /* eslint-enable jsx-a11y/no-static-element-interactions */
@@ -111,8 +139,11 @@ VideoComponent.propTypes = {
   blockProps: PropTypes.object.isRequired,
   onClick: PropTypes.func.isRequired,
   className: PropTypes.string.isRequired,
+  theme: PropTypes.object.isRequired,
+  t: PropTypes.func.isRequired,
+  disableRightClick: PropTypes.bool,
+  disabled: PropTypes.bool,
+  setComponentUrl: PropTypes.func,
 };
-
-VideoComponent.contextType = Context.type;
 
 export { VideoComponent as Component, DEFAULTS };

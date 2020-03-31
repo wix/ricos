@@ -46,6 +46,7 @@ export { default as Tooltip } from './Components/Tooltip';
 export { default as TooltipHost } from './Components/TooltipHost';
 export { default as ColorPicker } from './Components/ColorPicker/ColorPicker';
 export { default as CustomColorPicker } from './Components/ColorPicker/CustomColorPicker';
+export { default as Loader } from './Components/Loader';
 
 //Modals
 export { default as EditorModals } from './Modals/EditorModals';
@@ -55,12 +56,13 @@ export { default as RichContentModal } from './Modals/RichContentModal';
 export { default as decorateComponentWithProps } from './Utils/decorateComponentWithProps';
 export { getToolbarTheme } from './Utils/getToolbarTheme';
 export { simplePubsub } from './Utils/simplePubsub';
-export { getModalStyles } from './Utils/getModalStyles';
+export { getModalStyles, getBottomToolbarModalStyles } from './Utils/getModalStyles';
 
 export {
   insertLinkAtCurrentSelection,
   insertLinkInPosition,
   hasLinksInBlock,
+  getLinkRangesInBlock,
   fixPastedLinks,
   hasLinksInSelection,
   getLinkDataInSelection,
@@ -73,11 +75,16 @@ export {
   setEntityData,
   replaceWithEmptyBlock,
   deleteBlock,
+  getBlockAtStartOfSelection,
+  getSelectedBlocks,
   createEntity,
   createBlockAndFocus,
   createBlock,
   getBlockInfo,
   getFocusedBlockKey,
+  calculateDiff,
+  getPostContentSummary,
+  createSelection,
 } from './Utils/draftUtils';
 export { isiOS } from './Utils/isiOS';
 export { getSelectionStyles } from './Utils/inlineStyleUtils';
@@ -93,3 +100,26 @@ export {
   PLUGIN_DECORATION_PROPS,
   PLUGIN_DECORATIONS,
 } from './consts';
+
+export {
+  convertToRaw,
+  getVisibleSelectionRect,
+  convertFromRaw,
+  EditorState,
+  SelectionState,
+  DefaultDraftBlockRenderMap,
+  Modifier,
+  RichUtils,
+  KeyBindingUtil,
+  genKey,
+  ContentBlock,
+  BlockMapBuilder,
+  AtomicBlockUtils,
+  ContentState,
+  RawDraftContentState,
+  EditorChangeType,
+  convertFromHTML,
+} from '@wix/draft-js';
+
+import DraftOffsetKey from '@wix/draft-js/lib/DraftOffsetKey';
+export { DraftOffsetKey };

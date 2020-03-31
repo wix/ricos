@@ -3,12 +3,10 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { get, includes, isEqual, isFunction } from 'lodash';
 import {
-  Context,
   mergeStyles,
   validate,
   isSSR,
   getImageSrc,
-  Loader,
   WIX_MEDIA_DEFAULT,
   pluginImageSchema,
 } from 'wix-rich-content-common';
@@ -22,6 +20,7 @@ class ImageViewer extends React.Component {
     super(props);
     validate(props.componentData, pluginImageSchema);
     this.state = {};
+    this.preloadRef = React.createRef();
   }
 
   componentDidMount() {
@@ -41,7 +40,7 @@ class ImageViewer extends React.Component {
   }
 
   getImageUrl(src) {
-    const { helpers, shouldRenderOptimizedImages } = this.context || {};
+    const { helpers, seoMode } = this.props || {};
     if (!src && helpers?.handleFileSelection) {
       return null;
     }
@@ -56,13 +55,13 @@ class ImageViewer extends React.Component {
     } else {
       let requiredWidth, requiredHeight;
       imageUrl.preload = getImageSrc(src, helpers);
-      if (shouldRenderOptimizedImages) {
-        requiredWidth = src && src.width && Math.min(src.width, SEO_IMAGE_WIDTH);
+      if (seoMode) {
+        requiredWidth = src?.width && Math.min(src.width, SEO_IMAGE_WIDTH);
         requiredHeight = this.calculateHeight(SEO_IMAGE_WIDTH, src);
       } else if (this.state.container) {
         const { width } = this.state.container.getBoundingClientRect();
         requiredWidth = width || src?.width || 1;
-        if (this.context.isMobile) {
+        if (this.props.isMobile) {
           //adjust the image width to viewport scaling and device pixel ratio
           requiredWidth *= (!isSSR() && window.devicePixelRatio) || 1;
           requiredWidth *= (!isSSR() && window.screen.width / document.body.clientWidth) || 1;
@@ -101,10 +100,10 @@ class ImageViewer extends React.Component {
     }
   };
 
-  renderImage = (imageClassName, imageSrc, alt, props, isGif) => {
+  renderImage = (imageClassName, imageSrc, alt, props, isGif, seoMode) => {
     return this.getImage(
       classNames(imageClassName, this.styles.imageHighres, {
-        [this.styles.isGif]: isGif,
+        [this.styles.onlyHighRes]: isGif || seoMode,
       }),
       imageSrc.highres,
       alt,
@@ -131,24 +130,17 @@ class ImageViewer extends React.Component {
         alt={alt}
         onError={this.onImageLoadError}
         onLoad={fadeIn ? e => this.onImageLoad(e) : undefined}
+        ref={fadeIn ? undefined : this.preloadRef}
       />
     );
   }
 
   onImageLoad = e => {
     e.target.style.opacity = 1;
-  };
-
-  renderLoader() {
-    if (!this.props.isLoading) {
-      return null;
+    if (this.preloadRef.current) {
+      this.preloadRef.current.style.opacity = 0;
     }
-    return (
-      <div className={this.styles.imageOverlay}>
-        <Loader type={'medium'} />
-      </div>
-    );
-  }
+  };
 
   renderTitle(data, styles) {
     const config = data.config || {};
@@ -171,14 +163,17 @@ class ImageViewer extends React.Component {
   }
 
   renderCaption(caption) {
-    const { onCaptionChange, setFocusToBlock } = this.props;
-    return (
+    const { onCaptionChange, setFocusToBlock, setInPluginEditingMode } = this.props;
+    return onCaptionChange ? (
       <InPluginInput
+        setInPluginEditingMode={setInPluginEditingMode}
         className={this.styles.imageCaption}
         value={caption}
         onChange={onCaptionChange}
         setFocusToBlock={setFocusToBlock}
       />
+    ) : (
+      <span className={this.styles.imageCaption}>{caption}</span>
     );
   }
 
@@ -195,9 +190,8 @@ class ImageViewer extends React.Component {
   };
 
   shouldRenderCaption() {
-    const { settings, componentData, defaultCaption } = this.props;
+    const { getInPluginEditingMode, settings, componentData, defaultCaption } = this.props;
     const caption = componentData.metadata?.caption;
-    const { getInPluginEditingMode } = this.context;
 
     if (includes(get(settings, 'toolbar.hidden'), 'settings')) {
       return false;
@@ -218,21 +212,21 @@ class ImageViewer extends React.Component {
 
   handleExpand = e => {
     e.preventDefault();
-    const { onExpand } = this.context.helpers;
+    const { onExpand } = this.props.helpers;
     onExpand && onExpand(this.props.entityIndex);
   };
 
-  handleContextMenu = e => this.context.disableRightClick && e.preventDefault();
+  handleContextMenu = e => this.props.disableRightClick && e.preventDefault();
 
   render() {
-    this.styles = this.styles || mergeStyles({ styles, theme: this.context.theme });
-    const { componentData, className, settings } = this.props;
+    this.styles = this.styles || mergeStyles({ styles, theme: this.props.theme });
+    const { componentData, className, settings, setComponentUrl, seoMode } = this.props;
     const { fallbackImageSrc, ssrDone } = this.state;
     const data = componentData || DEFAULTS;
     const { metadata = {} } = componentData;
 
     const hasLink = data.config && data.config.link;
-    const hasExpand = this.context.helpers && this.context.helpers.onExpand;
+    const hasExpand = this.props.helpers && this.props.helpers.onExpand;
 
     const itemClassName = classNames(this.styles.imageContainer, className, {
       [this.styles.pointer]: hasExpand,
@@ -245,10 +239,10 @@ class ImageViewer extends React.Component {
         ? settings.imageProps(data.src)
         : settings.imageProps;
     }
-    const isGif = imageSrc?.highres?.endsWith('.gif');
-    const shouldRenderPreloadImage = imageSrc && !isGif;
-    const shouldRenderImage = (imageSrc && ssrDone) || isGif;
-
+    const isGif = imageSrc?.highres?.endsWith?.('.gif');
+    setComponentUrl?.(imageSrc?.highres);
+    const shouldRenderPreloadImage = !seoMode && imageSrc && !isGif;
+    const shouldRenderImage = (imageSrc && (seoMode || ssrDone)) || isGif;
     /* eslint-disable jsx-a11y/no-static-element-interactions */
     return (
       <div
@@ -263,9 +257,8 @@ class ImageViewer extends React.Component {
           {shouldRenderPreloadImage &&
             this.renderPreloadImage(imageClassName, imageSrc, metadata.alt, imageProps)}
           {shouldRenderImage &&
-            this.renderImage(imageClassName, imageSrc, metadata.alt, imageProps, isGif)}
-          {this.renderLoader()}
-          {hasLink && hasExpand && (
+            this.renderImage(imageClassName, imageSrc, metadata.alt, imageProps, isGif, seoMode)}
+          {hasExpand && (
             <ExpandIcon className={this.styles.expandIcon} onClick={this.handleExpand} />
           )}
         </div>
@@ -278,8 +271,6 @@ class ImageViewer extends React.Component {
   }
 }
 
-ImageViewer.contextType = Context.type;
-
 ImageViewer.propTypes = {
   componentData: PropTypes.object.isRequired,
   className: PropTypes.string,
@@ -291,6 +282,14 @@ ImageViewer.propTypes = {
   entityIndex: PropTypes.number,
   onCaptionChange: PropTypes.func,
   setFocusToBlock: PropTypes.func,
+  theme: PropTypes.object.isRequired,
+  helpers: PropTypes.object.isRequired,
+  disableRightClick: PropTypes.bool,
+  getInPluginEditingMode: PropTypes.func,
+  setInPluginEditingMode: PropTypes.func,
+  isMobile: PropTypes.bool.isRequired,
+  setComponentUrl: PropTypes.func,
+  seoMode: PropTypes.bool,
 };
 
 export default ImageViewer;

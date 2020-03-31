@@ -4,6 +4,10 @@ import { dividerTypeMapper } from 'wix-rich-content-plugin-divider/dist/module.v
 import { HTML_TYPE, htmlTypeMapper } from 'wix-rich-content-plugin-html/dist/module.viewer';
 import { soundCloudTypeMapper } from 'wix-rich-content-plugin-sound-cloud/dist/module.viewer';
 import { LINK_TYPE, linkTypeMapper } from 'wix-rich-content-plugin-link/dist/module.viewer';
+import {
+  LINK_PREVIEW_TYPE,
+  linkPreviewTypeMapper,
+} from 'wix-rich-content-plugin-link-preview/dist/module.viewer';
 import { imageTypeMapper } from 'wix-rich-content-plugin-image/dist/module.viewer';
 import {
   galleryTypeMapper,
@@ -51,12 +55,14 @@ import 'wix-rich-content-plugin-html/dist/styles.min.css';
 import 'wix-rich-content-plugin-image/dist/styles.min.css';
 import 'wix-rich-content-plugin-gallery/dist/styles.min.css';
 import 'wix-rich-content-plugin-link/dist/styles.min.css';
+import 'wix-rich-content-plugin-link-preview/dist/styles.min.css';
 import 'wix-rich-content-plugin-mentions/dist/styles.min.css';
 import 'wix-rich-content-plugin-video/dist/styles.min.css';
 import 'wix-rich-content-plugin-sound-cloud/dist/styles.min.css';
 import 'wix-rich-content-plugin-map/dist/styles.min.css';
 import 'wix-rich-content-plugin-file-upload/dist/styles.min.css';
 import 'wix-rich-content-plugin-giphy/dist/styles.min.css';
+import 'wix-rich-content-text-selection-toolbar/dist/styles.min.css';
 
 import { getBaseUrl } from '../../src/utils';
 
@@ -74,6 +80,7 @@ export const typeMappers = [
   dividerTypeMapper,
   htmlTypeMapper,
   linkTypeMapper,
+  linkPreviewTypeMapper,
   soundCloudTypeMapper,
   mentionsTypeMapper,
   imageTypeMapper,
@@ -84,14 +91,11 @@ export const typeMappers = [
 ];
 
 const uiSettings = {
-  // disableRightClick: true,
+  disableRightClick: true,
 };
 
-export const config = {
-  [GALLERY_TYPE]: {
-    scrollingElement: () =>
-      typeof window !== 'undefined' && document.getElementsByClassName('viewer-example')[0],
-  },
+const config = {
+  [GALLERY_TYPE]: {},
   [HEADERS_MARKDOWN_TYPE]: {
     hideMarkdown: true,
   },
@@ -99,10 +103,11 @@ export const config = {
     giphySdkApiKey: process.env.GIPHY_API_KEY,
     sizes: { desktop: 'original', mobile: 'original' }, // original or downsizedSmall are supported
   },
-  [HTML_TYPE]: {
-    htmlIframeSrc: `${getBaseUrl()}/static/html-plugin-embed.html`,
-  },
+  // [HTML_TYPE]: {},
   [LINK_TYPE]: linkPluginSettings,
+  [LINK_PREVIEW_TYPE]: {
+    enableEmbed: true,
+  },
   [MENTION_TYPE]: mentionsPluginSettings,
   [TEXT_HIGHLIGHT_TYPE]: {
     styleSelectionPredicate,
@@ -127,6 +132,18 @@ export const config = {
     getVideoUrl: src => `https://video.wixstatic.com/${src.pathname}`,
   },
   uiSettings,
+};
+
+export const getConfig = (additionalConfig = {}) => {
+  let _config = { ...config };
+  Object.keys(additionalConfig).forEach(key => {
+    if (additionalConfig[key]) {
+      const orgConfig = config[key] || {};
+      _config[key] = { ...orgConfig, ...additionalConfig[key] };
+    }
+  });
+
+  return _config;
 };
 
 export const getInlineStyleMappers = raw => [

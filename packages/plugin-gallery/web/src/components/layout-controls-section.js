@@ -59,7 +59,7 @@ class LayoutControlsSection extends Component {
     if (cubeRatio && data.styles.galleryLayout === 4) {
       setting.gallerySliderImageRatio = cubeRatio;
     }
-    const componentData = { ...data, styles: Object.assign({}, data.styles, setting) };
+    const componentData = { ...data, styles: { ...data.styles, ...setting } };
     store.set('componentData', componentData);
   };
 

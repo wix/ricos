@@ -2,6 +2,7 @@ import * as Themes from './themes';
 
 const SUPPORTED_THEMES = [Themes.DEFAULT, Themes.PALETTE, Themes.BACK_OFFICE];
 const BG_COLOR = 11;
+const SECONDARY_COLOR = 13;
 const TEXT_COLOR = 15;
 const ACTION_COLOR = 18;
 
@@ -46,6 +47,7 @@ export default class RceTheme {
       const actionColor = this.getColorValue(ACTION_COLOR);
       const bgColor = this.getColorValue(BG_COLOR);
       const textColor = this.getColorValue(TEXT_COLOR);
+      const secondaryColor = this.getColorValue(SECONDARY_COLOR);
       return {
         hashtag: {
           color: actionColor,
@@ -57,6 +59,22 @@ export default class RceTheme {
         divider: {
           strokeWidth: '12px',
           color: this.getColorValue(28),
+        },
+        linkPreview: {
+          borderColor: textColor,
+          backgroundColor: bgColor,
+        },
+        linkPreview_title: {
+          color: textColor,
+        },
+        linkPreview_image: {
+          borderColor: textColor,
+        },
+        linkPreview_description: {
+          color: textColor,
+        },
+        linkPreview_url: {
+          color: secondaryColor,
         },
       };
     }

@@ -1,5 +1,6 @@
 import React from 'react';
 import { createLinkPlugin, LINK_TYPE } from 'wix-rich-content-plugin-link';
+import { createLinkPreviewPlugin, LINK_PREVIEW_TYPE } from 'wix-rich-content-plugin-link-preview';
 import { createLineSpacingPlugin, LINE_SPACING_TYPE } from 'wix-rich-content-plugin-line-spacing';
 import { createHashtagPlugin, HASHTAG_TYPE } from 'wix-rich-content-plugin-hashtag';
 import { createEmojiPlugin, EMOJI_TYPE } from 'wix-rich-content-plugin-emoji';
@@ -27,6 +28,7 @@ import { createButtonPlugin, BUTTON_TYPE } from 'wix-rich-content-plugin-button'
 import { createTextHighlightPlugin, TEXT_HIGHLIGHT_TYPE } from 'wix-rich-content-plugin-text-color';
 import Highlighter from 'react-highlight-words';
 import casual from 'casual-browserify';
+import { mockFetchUrlPreviewData } from '../utils/linkPreviewUtil';
 
 import 'wix-rich-content-editor-common/dist/styles.min.css';
 import 'wix-rich-content-common/dist/styles.min.css';
@@ -39,6 +41,7 @@ import 'wix-rich-content-plugin-html/dist/styles.min.css';
 import 'wix-rich-content-plugin-hashtag/dist/styles.min.css';
 import 'wix-rich-content-plugin-line-spacing/dist/styles.min.css';
 import 'wix-rich-content-plugin-link/dist/styles.min.css';
+import 'wix-rich-content-plugin-link-preview/dist/styles.min.css';
 import 'wix-rich-content-plugin-mentions/dist/styles.min.css';
 import 'wix-rich-content-plugin-image/dist/styles.min.css';
 import 'wix-rich-content-plugin-gallery/dist/styles.min.css';
@@ -54,10 +57,10 @@ import {
   colorScheme,
   customBackgroundStyleFn,
 } from '../../src/text-color-style-fn';
-import { getBaseUrl } from '../../src/utils';
+
 import { testWixVideos } from './mock';
 // import { MyCustomIcon, SizeSmallRightIcon, TOOLBARS } from 'wix-rich-content-editor-common';
-// import { TOOLBARS, BUTTONS, DISPLAY_MODE } from 'wix-rich-content-editor-common';
+import { TOOLBARS, BUTTONS, DISPLAY_MODE } from 'wix-rich-content-editor-common';
 // import InlineToolbarDecoration from './Components/InlineToolbarDecoration';
 // import StaticToolbarDecoration from './Components/StaticToolbarDecoration';
 // import SideToolbarDecoration from './Components/SideToolbarDecoration';
@@ -71,6 +74,7 @@ export const editorPlugins = [
   createDividerPlugin,
   createLineSpacingPlugin,
   createLinkPlugin,
+  createLinkPreviewPlugin,
   createHashtagPlugin,
   createExternalMentionsPlugin,
   createCodeBlockPlugin,
@@ -125,6 +129,7 @@ const getLinkPanelDropDownConfig = () => {
       searchWords={[searchWords]}
       textToHighlight={textToHighlight}
       highlightTag={({ children }) => <strong className="highlighted-text">{children}</strong>}
+      autoEscape
     />
   );
 
@@ -176,16 +181,14 @@ const videoHandlers = {
   //media manager - Here you can call your custom video upload functionality (comment function to disable custom upload)
   handleFileSelection: (updateEntity, removeEntity) => {
     console.log('consumer wants to upload custom video');
-    const mockVideoIndex = Math.floor(Math.random() * testWixVideos.length);
-    const testVideo = testWixVideos[mockVideoIndex];
     const videoWithAbsoluteUrl = {
       url:
         'https://video.wixstatic.com/video/11062b_a552731f40854d16a91627687fb8d1a6/1080p/mp4/file.mp4',
     };
     const videoWithRelativeUrl = {
-      pathname: `video/${testVideo.url}/1080p/mp4/file.mp4`,
+      pathname: `video/11062b_a552731f40854d16a91627687fb8d1a6/1080p/mp4/file.mp4`,
       thumbnail: {
-        pathname: `media/${testVideo.metadata.posters[0].url}`,
+        pathname: `media/11062b_a552731f40854d16a91627687fb8d1a6f000.jpg`,
         height: 1080,
         width: 1920,
       },
@@ -223,11 +226,15 @@ const videoHandlers = {
       updateEntity({ data: videoToUpload });
       //updateEntity({ error: { msg: 'Upload Failed' } });
       console.log('consumer uploaded ', videoToUpload);
-    }, 500);
+    }, 1200000);
   },
 };
 
-export const config = {
+const config = {
+  [LINK_PREVIEW_TYPE]: {
+    enableEmbed: true,
+    fetchData: mockFetchUrlPreviewData(),
+  },
   [EMOJI_TYPE]: {
     // toolbar: {
     //   icons: {
@@ -235,7 +242,6 @@ export const config = {
     //   },
     // },
   },
-
   [UNDO_REDO_TYPE]: {
     // toolbar: {
     //   icons: {
@@ -244,10 +250,7 @@ export const config = {
     //   },
     // },
   },
-
   [GALLERY_TYPE]: {
-    scrollingElement: () =>
-      typeof window !== 'undefined' && document.getElementsByClassName('editor-example')[0],
     // toolbar: {
     //   icons: {
     //     InsertPluginButtonIcon: MyCustomIcon,
@@ -299,7 +302,6 @@ export const config = {
     },
   },
   [HTML_TYPE]: {
-    htmlIframeSrc: `${getBaseUrl()}/static/html-plugin-embed.html`,
     minWidth: 35,
     maxWidth: 740,
     width: 350,
@@ -357,6 +359,9 @@ export const config = {
     onUpdate: spacing => console.log(LINE_SPACING_TYPE, spacing),
   },
   [LINK_TYPE]: {
+    preview: {
+      enable: true,
+    },
     // toolbar: {
     //   icons: {
     //     InsertPluginButtonIcon: MyCustomIcon,
@@ -646,14 +651,14 @@ export const config = {
     //     desktop: () => true,
     //   }),
     //   getDisplayOptions: () => ({
-    //     desktop: { displayMode:  DISPLAY_MODE.FLOATING },
+    //     desktop: { displayMode: DISPLAY_MODE.FLOATING },
     //   }),
     //   getPositionOffset: () => ({
-    //     desktop: { x: 0, y: 0 },
+    //     desktop: { x: 300, y: 0 },
     //   }),
-    //   getToolbarDecorationFn: () => ({
-    //     desktop: () => StaticToolbarDecoration
-    //   })
+    //   // getToolbarDecorationFn: () => ({
+    //   //   desktop: () => StaticToolbarDecoration,
+    //   // }),
     // },
     // {
     //   name: TOOLBARS.INLINE,
@@ -662,4 +667,13 @@ export const config = {
     //   })
     // }
   ],
+};
+
+export const getConfig = (additionalConfig = {}) => {
+  let _config = { ...config };
+  Object.keys(additionalConfig).forEach(key => {
+    _config[key] = { ...(_config[key] || {}), ...(additionalConfig[key] || {}) };
+  });
+
+  return _config;
 };

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { EditorState } from 'draft-js';
+import { EditorState } from '@wix/draft-js';
 import { isEmpty } from 'lodash';
 import { mergeStyles } from 'wix-rich-content-common';
 import { createBlock } from '../Utils/draftUtils.js';
@@ -33,7 +33,10 @@ export default ({
       const { buttonStyles } = props.theme || {};
       this.styles = mergeStyles({ styles, theme: buttonStyles });
       this.buttonRef = React.createRef();
+      this.toolbarName = props.toolbarName;
     }
+
+    onPluginAdd = name => helpers?.onPluginAdd?.(blockType, name || this.toolbarName);
 
     componentDidMount() {
       this.initialIntent();
@@ -63,6 +66,7 @@ export default ({
     };
 
     createBlock = (editorState, data, type) => {
+      this.onPluginAdd();
       this.props.hidePopup?.();
       return createBlock(editorState, data, type);
     };
@@ -94,10 +98,12 @@ export default ({
           this.toggleButtonModal(event);
           break;
         case 'custom-block':
+          this.onPluginAdd(name);
           this.addCustomBlock(button);
           break;
         default:
           this.addBlock(button.componentData || {});
+          break;
       }
     };
 
@@ -139,7 +145,16 @@ export default ({
       const { styles } = this;
       const { showName, tabIndex, setEditorState } = this.props;
       const { name, Icon, wrappingComponent } = button;
+
       const WrappingComponent = wrappingComponent || 'button';
+
+      let buttonCompProps = {};
+      if (wrappingComponent) {
+        buttonCompProps = {
+          setEditorState,
+          pubsub,
+        };
+      }
 
       return (
         <WrappingComponent
@@ -149,8 +164,7 @@ export default ({
           data-hook={`${name.replace(' ', '_')}_insert_plugin_button`}
           onClick={this.onClick}
           ref={this.buttonRef}
-          pubsub={pubsub}
-          setEditorState={setEditorState}
+          {...buttonCompProps}
         >
           <div className={styles.icon}>
             <Icon key="0" />
@@ -272,6 +286,7 @@ export default ({
     isMobile: PropTypes.bool,
     t: PropTypes.func,
     tabIndex: PropTypes.number,
+    toolbarName: PropTypes.string,
   };
 
   return InsertPluginButton;

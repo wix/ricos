@@ -1,6 +1,6 @@
 import React, { PureComponent, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { Context, mergeStyles } from 'wix-rich-content-common';
+import { mergeStyles } from 'wix-rich-content-common';
 import styles from '../../statics/styles/see-full-post.scss';
 
 class SeeFullPost extends PureComponent {
@@ -11,6 +11,8 @@ class SeeFullPost extends PureComponent {
     labelStyles: PropTypes.object,
     onPreviewExpand: PropTypes.func.isRequired,
     onClick: PropTypes.func,
+    theme: PropTypes.object.isRequired,
+    t: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
@@ -25,9 +27,9 @@ class SeeFullPost extends PureComponent {
   };
 
   render() {
-    this.styles = this.styles || mergeStyles({ styles, theme: this.context.theme });
+    this.styles = this.styles || mergeStyles({ styles, theme: this.props.theme });
     const {
-      label = this.context.t('Preview_SeeFullPost_Label'),
+      label = this.props.t('Preview_SeeFullPost_Label'),
       children,
       overlayStyles,
       labelStyles,
@@ -49,7 +51,5 @@ class SeeFullPost extends PureComponent {
     );
   }
 }
-
-SeeFullPost.contextType = Context.type;
 
 export default SeeFullPost;

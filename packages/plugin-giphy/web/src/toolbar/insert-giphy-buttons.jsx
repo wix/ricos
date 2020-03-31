@@ -4,6 +4,7 @@ import {
   TOOLBARS,
   DECORATION_MODE,
   decorateComponentWithProps,
+  getBottomToolbarModalStyles,
 } from 'wix-rich-content-editor-common';
 import GiphyApiInputModal from './giphyApiInputModal';
 import { InsertPluginIcon, InsertPluginMobileIcon } from '../icons';
@@ -27,32 +28,10 @@ export default ({ helpers, t, settings, isMobile }) => {
       modalElement: decorateComponentWithProps(GiphyApiInputModal, settings),
       modalStyles,
       modalStylesFn: ({ buttonRef }) => {
-        const modalStyles = getModalStyles({
+        return getBottomToolbarModalStyles(buttonRef, {
           customStyles: DesktopFlyOutModalStyles,
-          fullScreen: true,
           isMobile,
         });
-        const { top, left, right } = buttonRef.getBoundingClientRect();
-        const isRtl = buttonRef.closest('[dir=rtl]') !== null;
-        let modalLeft, modalRight;
-        if (isRtl) {
-          modalRight = window.innerWidth - right - 8;
-        } else {
-          modalLeft = left - 15;
-        }
-        const isAboveButton = top - 365 > 0;
-        const modalTop = isAboveButton ? top - 365 : top + 30;
-        return {
-          ...modalStyles,
-          content: {
-            ...modalStyles.content,
-            top: modalTop,
-            left: modalLeft,
-            right: modalRight,
-            margin: 0,
-            position: 'absolute',
-          },
-        };
       },
       modalDecorations: [
         {

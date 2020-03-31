@@ -1,4 +1,4 @@
-const GALLERY_LAYOUTS = {
+const GALLERY_LAYOUTS = Object.freeze({
   EMPTY: -1,
   COLLAGE: 0,
   MASONRY: 1,
@@ -13,15 +13,15 @@ const GALLERY_LAYOUTS = {
   BRICKS: 10,
   MIX: 11,
   ALTERNATE: 12,
-};
+});
 
-const HORIZONTAL_LAYOUTS = [
+const HORIZONTAL_LAYOUTS = Object.freeze([
   GALLERY_LAYOUTS.THUMBNAIL,
   GALLERY_LAYOUTS.SLIDER,
   GALLERY_LAYOUTS.SLIDESHOW,
   GALLERY_LAYOUTS.COLUMN,
   GALLERY_LAYOUTS.FULLSIZE,
-];
+]);
 
 export const sampleItems = [1, 2, 3].map(i => {
   return {
@@ -36,13 +36,12 @@ export const sampleItems = [1, 2, 3].map(i => {
   };
 });
 
-export const DEFAULTS = {
+export const DEFAULTS = Object.freeze({
   items: [],
   styles: {
     galleryLayout: 2,
     gallerySizeType: 'px',
     gallerySizePx: 300,
-    numberOfImagesPerRow: 3,
     galleryMargin: 0,
     oneRow: false,
     cubeRatio: 1,
@@ -64,6 +63,8 @@ export const DEFAULTS = {
     mobileSwipeAnimation: 'NO_EFFECT',
     thumbnailSize: 120,
     gotStyleParams: true,
+    showVideoPlayButton: true,
+    videoPlay: 'onClick',
   },
   config: {
     alignment: 'center',
@@ -71,6 +72,18 @@ export const DEFAULTS = {
     layout: 'small',
     spacing: 0,
   },
+});
+
+export const imageItem = (img, itemId) => {
+  return {
+    metadata: {
+      type: 'image',
+      height: img.height,
+      width: img.width,
+    },
+    itemId,
+    url: img.src,
+  };
 };
 
 export const isHorizontalLayout = ({ galleryLayout }) =>

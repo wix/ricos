@@ -2,25 +2,24 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
   mergeStyles,
-  Context,
   normalizeUrl,
   isValidUrl,
   validate,
   pluginHtmlSchema,
 } from 'wix-rich-content-common';
 
-import { SRC_TYPE_HTML, SRC_TYPE_URL, DEFAULTS, INIT_HEIGHT, INIT_WIDTH } from './constants';
+import { SRC_TYPE_HTML, SRC_TYPE_URL, INIT_HEIGHT, INIT_WIDTH, defaults } from './constants';
 import IframeHtml from './IframeHtml';
 import IframeUrl from './IframeUrl';
 import htmlComponentStyles from '../statics/styles/HtmlComponent.scss';
 
-const getPageURL = (htmlIframeSrc, siteDomain) => {
+const getPageURL = siteDomain => {
   if (!siteDomain) {
     return;
   }
 
   const regex = /http.+com/gm;
-  const res = regex.exec(siteDomain) || (htmlIframeSrc && regex.exec && regex.exec(htmlIframeSrc));
+  const res = regex.exec(siteDomain);
   if (res) {
     return res[0];
   }
@@ -33,7 +32,7 @@ class HtmlComponent extends Component {
   };
 
   componentDidMount() {
-    const { componentData, settings } = this.props;
+    const { componentData, settings, siteDomain } = this.props;
     if (!componentData.config.width) {
       if (settings && settings.width) {
         componentData.config.width = settings.width;
@@ -52,16 +51,14 @@ class HtmlComponent extends Component {
         componentData.config.height = INIT_HEIGHT;
       }
     }
-    const { siteDomain } = this.context;
     this.setState({ siteDomain });
   }
 
   static getDerivedStateFromProps(props, state) {
-    const { componentData, settings } = props;
+    const { componentData } = props;
     if (componentData.srcType === 'html') {
       let html = componentData && componentData.src;
-      const { htmlIframeSrc } = settings;
-      const pageURL = getPageURL(htmlIframeSrc, state.siteDomain);
+      const pageURL = getPageURL(state.siteDomain);
       if (pageURL && html && html.includes && html.includes('adsbygoogle')) {
         const updatedAd = `<ins class="adsbygoogle"\n\tdata-page-url="${pageURL}"`;
         html = html.replace(new RegExp('<ins class="adsbygoogle"', 'g'), updatedAd);
@@ -82,17 +79,17 @@ class HtmlComponent extends Component {
   render() {
     const { html } = this.state;
     this.styles =
-      this.styles || mergeStyles({ styles: htmlComponentStyles, theme: this.context.theme });
+      this.styles || mergeStyles({ styles: htmlComponentStyles, theme: this.props.theme });
     const { props } = this;
     validate(props.componentData, pluginHtmlSchema);
 
     const {
       componentData: { src, srcType, config: { width: currentWidth, height: currentHeight } = {} },
-      settings: { htmlIframeSrc, width, height } = {},
+      settings: { width, height } = {},
     } = props;
 
     const style = {
-      width: this.context.isMobile ? 'auto' : currentWidth || width || INIT_WIDTH,
+      width: this.props.isMobile ? 'auto' : currentWidth || width || INIT_WIDTH,
       height: currentHeight || height || INIT_HEIGHT,
       maxHeight: this.state.iframeHeight,
     };
@@ -109,7 +106,6 @@ class HtmlComponent extends Component {
               key={SRC_TYPE_HTML}
               tabIndex={0}
               html={html}
-              src={htmlIframeSrc}
               onHeightChange={this.setHeight}
             />
           )}
@@ -125,14 +121,11 @@ class HtmlComponent extends Component {
   }
 }
 
-HtmlComponent.contextType = Context.type;
-
 HtmlComponent.propTypes = {
   componentData: PropTypes.object.isRequired,
   blockProps: PropTypes.object,
   className: PropTypes.string,
   settings: PropTypes.shape({
-    htmlIframeSrc: PropTypes.string.isRequired,
     width: PropTypes.number,
     minWidth: PropTypes.number,
     maxWidth: PropTypes.number,
@@ -142,6 +135,9 @@ HtmlComponent.propTypes = {
   }).isRequired,
   store: PropTypes.object,
   block: PropTypes.object,
+  siteDomain: PropTypes.string,
+  theme: PropTypes.object.isRequired,
+  isMobile: PropTypes.bool.isRequired,
 };
 
-export { HtmlComponent as Component, DEFAULTS };
+export { HtmlComponent as Component, defaults };

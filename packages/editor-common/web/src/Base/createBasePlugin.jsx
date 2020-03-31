@@ -38,8 +38,16 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
     commonPubsub,
     defaultPluginData,
     pluginDefaults,
+    onComponentMount,
     initialIntent,
     languageDir,
+    locale,
+    shouldRenderOptimizedImages,
+    siteDomain,
+    setInPluginEditingMode,
+    getInPluginEditingMode,
+    getEditorState,
+    setEditorState,
   } = config;
   defaultPluginData && (pluginDefaults[config.type] = defaultPluginData);
   const toolbarTheme = { ...getToolbarTheme(config.theme, 'plugin'), ...config.theme };
@@ -64,6 +72,13 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
       getEditorBounds,
       initialIntent,
       languageDir,
+      locale,
+      shouldRenderOptimizedImages,
+      siteDomain,
+      setInPluginEditingMode,
+      getInPluginEditingMode,
+      getEditorState,
+      setEditorState,
     });
   const InsertPluginButtons =
     settings.showInsertButtons &&
@@ -81,6 +96,13 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
         pluginDefaults,
         initialIntent,
         languageDir,
+        locale,
+        shouldRenderOptimizedImages,
+        siteDomain,
+        setInPluginEditingMode,
+        getInPluginEditingMode,
+        getEditorState,
+        setEditorState,
       }),
     }));
   const PluginComponent = config.component;
@@ -104,8 +126,16 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
       isMobile,
       getEditorBounds,
       disableRightClick,
+      onComponentMount,
       initialIntent,
       languageDir,
+      locale,
+      shouldRenderOptimizedImages,
+      siteDomain,
+      setInPluginEditingMode,
+      getInPluginEditingMode,
+      getEditorState,
+      setEditorState,
     });
 
   const DecoratedCompWithBase =
@@ -149,17 +179,11 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
     customStyleFn,
   };
 
-  if (underlyingPlugin) {
-    return {
-      ...commonProps,
-      ...underlyingPlugin,
-    };
-  } else {
-    return {
-      ...commonProps,
-      blockRendererFn,
-    };
-  }
+  return {
+    ...commonProps,
+    blockRendererFn,
+    ...(underlyingPlugin || {}),
+  };
 };
 
 export default createBasePlugin;

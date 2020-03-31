@@ -1,21 +1,22 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { debounce } from 'lodash';
-import { convertToRaw, createEmpty } from 'wix-rich-content-editor/dist/lib/editorStateConversion';
+import {
+  convertToRaw,
+  convertFromRaw,
+  createEmpty,
+  createWithContent,
+} from 'wix-rich-content-editor/dist/lib/editorStateConversion';
 import { isSSR } from 'wix-rich-content-common';
-import ExampleApp from '../src/ExampleApp';
-import TestApp from '../../../e2e/test-env/src/client/TestApp';
-import { getRequestedLocale, isMobile } from '../src/utils';
-
-const generateViewerState = editorState =>
-  JSON.parse(JSON.stringify(convertToRaw(editorState.getCurrentContent())));
+import { getRequestedLocale, normalize } from '../src/utils';
 
 class RichContentApp extends PureComponent {
   constructor(props) {
     super(props);
     this.state = this.getInitialState(props);
-    if (this.props.mode === 'demo') {
-      this.onEditorChange = debounce(this.onEditorChange, 100);
+    if (props.debounce) {
+      this.updateContentState = debounce(this.updateContentState, 60);
+      this.updateEditorState = debounce(this.updateEditorState, 60);
     }
   }
 
@@ -23,8 +24,12 @@ class RichContentApp extends PureComponent {
     if (!isSSR() && mode === 'demo' && locale !== 'en') {
       this.setLocaleResource(locale);
     }
+    const editorState = initialState
+      ? createWithContent(convertFromRaw(initialState))
+      : createEmpty();
     return {
-      viewerState: initialState || generateViewerState(createEmpty()),
+      editorState,
+      contentState: initialState || convertToRaw(editorState.getCurrentContent()),
       locale,
     };
   };
@@ -38,27 +43,42 @@ class RichContentApp extends PureComponent {
   onEditorChange = editorState => {
     this.setState({
       editorState,
-      viewerState: generateViewerState(editorState),
     });
-    this.props.onEditorChange && this.props.onEditorChange(editorState);
+
+    this.updateContentState(editorState);
+  };
+
+  onContentStateChange = contentState => {
+    this.setState({
+      contentState,
+    });
+
+    this.updateEditorState(contentState);
+  };
+
+  updateContentState = editorState => {
+    this.setState({ contentState: convertToRaw(editorState.getCurrentContent()) });
+  };
+
+  updateEditorState = contentState => {
+    this.setState({ editorState: createWithContent(convertFromRaw(normalize(contentState))) });
   };
 
   render() {
-    const { editorState, viewerState, localeResource, locale } = this.state;
-    const { allLocales, initialState, mode } = this.props;
-    const App = mode === 'demo' ? ExampleApp : TestApp;
+    const { editorState, contentState, localeResource, locale } = this.state;
+    const { allLocales, seoMode, isMobile, app: App } = this.props;
     return (
       <App
         allLocales={allLocales}
-        initialState={initialState}
         editorState={editorState}
-        viewerState={viewerState}
-        previewState={viewerState}
+        contentState={contentState}
         locale={locale}
-        isMobile={mode === 'demo' ? isMobile() : this.props.isMobile}
+        isMobile={isMobile}
         localeResource={localeResource}
         onEditorChange={this.onEditorChange}
+        onContentStateChange={this.onContentStateChange}
         setLocale={this.setLocaleResource}
+        seoMode={seoMode}
       />
     );
   }

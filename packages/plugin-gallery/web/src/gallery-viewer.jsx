@@ -1,10 +1,10 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { validate, mergeStyles, Context, pluginGallerySchema } from 'wix-rich-content-common';
+import { validate, mergeStyles, pluginGallerySchema } from 'wix-rich-content-common';
 import { isEqual } from 'lodash';
-import { convertItemData } from './helpers/convert-item-data';
+import { convertItemData } from './lib/convert-item-data';
 import { DEFAULTS, isHorizontalLayout, sampleItems } from './constants';
-import resizeMediaUrl from './helpers/resize-media-url';
+import resizeMediaUrl from './lib/resize-media-url';
 import styles from '../statics/styles/viewer.scss';
 import 'pro-gallery/dist/statics/main.min.css';
 import ExpandIcon from './icons/expand.svg';
@@ -15,7 +15,7 @@ class GalleryViewer extends React.Component {
   constructor(props) {
     validate(props.componentData, pluginGallerySchema);
     super(props);
-
+    this.domId = this.props.blockKey || 'v-' + this.props.entityIndex;
     this.state = {
       size: {},
       ...this.stateFromProps(props),
@@ -23,7 +23,7 @@ class GalleryViewer extends React.Component {
   }
 
   componentDidMount() {
-    if (this.context.helpers.onExpand) {
+    if (this.props.helpers.onExpand) {
       const styleParams = this.state.styleParams;
       this.setState({
         styleParams: { ...styleParams, allowHover: true },
@@ -73,7 +73,7 @@ class GalleryViewer extends React.Component {
   stateFromProps = props => {
     const items = props.componentData.items || DEFAULTS.items;
     const styleParams = this.getStyleParams(
-      Object.assign(DEFAULTS.styles, props.componentData.styles || {}),
+      { ...DEFAULTS.styles, ...(props.componentData.styles || {}) },
       items
     );
     return {
@@ -84,8 +84,7 @@ class GalleryViewer extends React.Component {
 
   getItems() {
     const { items } = this.state;
-    const { anchorTarget, relValue } = this.context;
-
+    const { anchorTarget, relValue } = this.props;
     if (items.length > 0) {
       return convertItemData({ items, anchorTarget, relValue });
     } else {
@@ -105,7 +104,7 @@ class GalleryViewer extends React.Component {
         }
         break;
       case 'ITEM_ACTION_TRIGGERED':
-        this.handleExpand(data);
+        !data.linkData.url && this.handleExpand(data);
         break;
       default:
         break;
@@ -113,7 +112,7 @@ class GalleryViewer extends React.Component {
   };
 
   handleExpand = data => {
-    const { onExpand } = this.context.helpers;
+    const { onExpand } = this.props.helpers;
     onExpand && onExpand(this.props.entityIndex, data.idx);
   };
 
@@ -124,27 +123,27 @@ class GalleryViewer extends React.Component {
   };
 
   getStyleParams = (styleParams, items) => {
-    if (this.context && !this.context.isMobile) {
+    if (!this.props.isMobile) {
       return { ...styleParams, allowHover: true };
     }
-    return this.hasTitle(items)
-      ? {
-          ...styleParams,
-          isVertical: styleParams.galleryLayout === 1,
-          allowTitle: true,
-          galleryTextAlign: 'center',
-          textsHorizontalPadding: 0,
-          imageInfoType: 'NO_BACKGROUND',
-          hoveringBehaviour: 'APPEARS',
-          textsVerticalPadding: 0,
-          titlePlacement: 'SHOW_BELOW',
-          calculateTextBoxHeightMode: 'AUTOMATIC',
-        }
-      : styleParams;
+    if (this.hasTitle(items))
+      return {
+        ...styleParams,
+        isVertical: styleParams.galleryLayout === 1,
+        allowTitle: true,
+        galleryTextAlign: 'center',
+        textsHorizontalPadding: 0,
+        imageInfoType: 'NO_BACKGROUND',
+        hoveringBehaviour: 'APPEARS',
+        textsVerticalPadding: 0,
+        titlePlacement: 'SHOW_BELOW',
+        calculateTextBoxHeightMode: 'AUTOMATIC',
+      };
+    return styleParams;
   };
 
   renderExpandIcon = itemProps => {
-    return itemProps.linkData.url ? (
+    return itemProps.type !== 'video' ? (
       <ExpandIcon
         className={this.styles.expandIcon}
         onClick={e => {
@@ -155,10 +154,10 @@ class GalleryViewer extends React.Component {
     ) : null;
   };
 
-  renderTitle = alt => {
-    return alt ? (
+  renderTitle = title => {
+    return title ? (
       <div className={this.styles.imageTitleContainer}>
-        <div className={this.styles.imageTitle}>{alt}</div>
+        <div className={this.styles.imageTitle}>{title}</div>
       </div>
     ) : null;
   };
@@ -166,14 +165,14 @@ class GalleryViewer extends React.Component {
   hoverElement = itemProps => (
     <Fragment>
       {this.renderExpandIcon(itemProps)}
-      {this.renderTitle(itemProps.alt)}
+      {this.renderTitle(itemProps.title)}
     </Fragment>
   );
 
-  handleContextMenu = e => this.context.disableRightClick && e.preventDefault();
+  handleContextMenu = e => this.props.disableRightClick && e.preventDefault();
 
   render() {
-    this.styles = this.styles || mergeStyles({ styles, theme: this.context.theme });
+    this.styles = this.styles || mergeStyles({ styles, theme: this.props.theme });
     const { scrollingElement, ...settings } = this.props.settings;
     const { styleParams, size = { width: 300 } } = this.state;
     const items = this.getItems();
@@ -181,11 +180,12 @@ class GalleryViewer extends React.Component {
       <div
         ref={elem => (this.container = elem)}
         className={this.styles.gallery_container}
-        data-hook="galleryViewer"
+        data-hook={'galleryViewer'}
         role="none"
         onContextMenu={this.handleContextMenu}
       >
         <ProGallery
+          domId={this.domId}
           items={items}
           styles={styleParams}
           container={size}
@@ -202,12 +202,17 @@ class GalleryViewer extends React.Component {
 
 GalleryViewer.propTypes = {
   componentData: PropTypes.object.isRequired,
+  blockKey: PropTypes.string,
   entityIndex: PropTypes.number,
   onClick: PropTypes.func,
   className: PropTypes.string,
   settings: PropTypes.object,
+  disableRightClick: PropTypes.bool,
+  theme: PropTypes.object.isRequired,
+  isMobile: PropTypes.bool.isRequired,
+  helpers: PropTypes.object.isRequired,
+  anchorTarget: PropTypes.string.isRequired,
+  relValue: PropTypes.string.isRequired,
 };
-
-GalleryViewer.contextType = Context.type;
 
 export default GalleryViewer;

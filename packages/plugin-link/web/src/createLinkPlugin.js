@@ -3,10 +3,9 @@ import {
   insertLinkInPosition,
   fixPastedLinks,
 } from 'wix-rich-content-editor-common';
-import {
-  isValidUrl,
-  // getUrlMatches,
-} from 'wix-rich-content-common';
+import { addLinkPreview } from 'wix-rich-content-plugin-link-preview/dist/lib/utils';
+import { isValidUrl } from 'wix-rich-content-common';
+import React from 'react';
 import { LINK_TYPE } from './types';
 import { Component } from './LinkComponent';
 import { linkEntityStrategy } from './strategy';
@@ -17,12 +16,35 @@ const createLinkPlugin = (config = {}) => {
   const { theme, anchorTarget, relValue, [type]: settings = {}, ...rest } = config;
   settings.minLinkifyLength = settings.minLinkifyLength || 6;
   const toolbar = createLinkToolbar(config);
+  let alreadyDisplayedAsLinkPreview = {};
 
-  const decorators = [{ strategy: linkEntityStrategy, component: Component }];
+  const decorators = [
+    { strategy: linkEntityStrategy, component: props => <Component {...props} theme={theme} /> },
+  ];
   let linkifyData;
 
   const handleReturn = (event, editorState) => {
     linkifyData = getLinkifyData(editorState);
+    if (shouldConvertToLinkPreview(settings, linkifyData)) {
+      const url = getBlockLinkUrl(linkifyData);
+      const blockKey = linkifyData.block.key;
+      const blocBeforeUrl =
+        editorState.getCurrentContent().getBlockBefore(blockKey)?.key || blockKey; // if there is not block before this is the first block
+      if (url && alreadyDisplayedAsLinkPreview[url] !== blocBeforeUrl) {
+        alreadyDisplayedAsLinkPreview = { ...alreadyDisplayedAsLinkPreview, [url]: blocBeforeUrl };
+        addLinkPreview(editorState, config, blockKey, url);
+      }
+    }
+  };
+
+  const shouldConvertToLinkPreview = (settings, linkifyData) =>
+    linkifyData && settings.preview?.enable;
+
+  const getBlockLinkUrl = linkifyData => {
+    const { string, block } = linkifyData;
+    if (block.getText() === string) {
+      return string;
+    }
   };
 
   const handleBeforeInput = (chars, editorState) => {
@@ -40,25 +62,25 @@ const createLinkPlugin = (config = {}) => {
   };
 
   const onChange = editorState => {
+    let newEditorState = editorState;
     if (isPasteChange(editorState)) {
-      return fixPastedLinks(editorState, { anchorTarget, relValue });
+      newEditorState = fixPastedLinks(editorState, { anchorTarget, relValue });
     } else if (linkifyData) {
-      const newEditorState = addLinkAt(linkifyData, editorState);
-      linkifyData = false;
-      return newEditorState;
+      newEditorState = addLinkAt(linkifyData, editorState);
     }
-    return editorState;
+    linkifyData = false;
+    return newEditorState;
   };
 
   const getLinkifyData = editorState => {
-    const str = findLastStringWithNoSpaces(editorState);
-    return shouldLinkify(str) && str;
+    const strData = findLastStringWithNoSpaces(editorState);
+    return shouldLinkify(strData) && strData;
   };
 
   const shouldLinkify = consecutiveString =>
     consecutiveString.string.length >= settings.minLinkifyLength &&
     isValidUrl(consecutiveString.string) &&
-    !rangeContainsEntity(consecutiveString);
+    !(rangeContainsEntity(consecutiveString) && blockContainsPlainText(consecutiveString));
 
   const findLastStringWithNoSpaces = editorState => {
     const selection = editorState.getSelection();
@@ -80,6 +102,8 @@ const createLinkPlugin = (config = {}) => {
     }
     return false;
   };
+
+  const blockContainsPlainText = ({ block, string }) => block.text.length > string.length;
 
   const addLinkAt = ({ string, index, endIndex, blockKey }, editorState) => {
     return insertLinkInPosition(editorState, blockKey, index, endIndex, {

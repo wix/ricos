@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Measure from 'react-measure';
-import { debounce, identity, pickBy } from 'lodash';
-import { DISPLAY_MODE, TooltipHost } from 'wix-rich-content-editor-common';
-import { Context } from 'wix-rich-content-common';
+import { debounce } from 'lodash';
+import { DISPLAY_MODE, TOOLBARS, TooltipHost } from 'wix-rich-content-editor-common';
 import Styles from '../../../../statics/styles/static-toolbar.scss';
 
 const displayOptionStyles = {
@@ -46,7 +45,6 @@ export default class StaticToolbar extends React.PureComponent {
       displayMode: DISPLAY_MODE.NORMAL,
     },
     toolbarDecorationFn: () => null,
-    createContext: false,
   };
 
   constructor(props) {
@@ -124,6 +122,8 @@ export default class StaticToolbar extends React.PureComponent {
         [Styles.mobile]: isMobile,
       }
     );
+
+    childrenProps.toolbarName = TOOLBARS.FOOTER;
 
     return (
       <div className={buttonClassNames}>
@@ -205,8 +205,8 @@ export default class StaticToolbar extends React.PureComponent {
       uiSettings,
     };
 
-    const style = pickBy(offset, identity);
-    Object.assign(style, displayOptionStyles[displayOptions.displayMode]);
+    const { x: left = 0, y: top = 0 } = offset;
+    const style = { left, top, ...displayOptionStyles[displayOptions.displayMode] };
 
     const props = {
       style,
@@ -232,17 +232,17 @@ export default class StaticToolbar extends React.PureComponent {
         setEditorState,
       };
       return (
-        <Context.Provider value={context}>
-          <ToolbarDecoration {...props}>
-            {this.renderToolbarContent(childrenProps)}
+        <Fragment>
+          <ToolbarDecoration {...props} {...context}>
+            {this.renderToolbarContent({ ...childrenProps, ...context })}
             {ExtendContent && (
               <div className={extendClassNames}>
-                <ExtendContent {...childrenProps} />
+                <ExtendContent {...childrenProps} {...context} />
               </div>
             )}
           </ToolbarDecoration>
           <TooltipHost />
-        </Context.Provider>
+        </Fragment>
       );
     }
 

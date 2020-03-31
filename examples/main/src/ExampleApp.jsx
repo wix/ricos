@@ -2,26 +2,25 @@
 import { hot } from 'react-hot-loader/root';
 import React, { PureComponent } from 'react';
 import { ReflexContainer, ReflexElement, ReflexSplitter } from 'react-reflex';
-import { compact, flatMap } from 'lodash';
-import { createEmpty, convertToRaw } from 'wix-rich-content-editor/dist/lib/editorStateConversion';
+import { compact, flatMap, debounce } from 'lodash';
+import local from 'local-storage';
+import { ErrorBoundary, Fab, SectionHeader, SectionContent } from './Components';
 import {
-  ContentStateEditor,
-  ErrorBoundary,
-  Fab,
-  SectionHeader,
-  SectionContent,
-} from './Components';
-import { generateKey, getStateFromObject, loadStateFromStorage, saveStateToStorage } from './utils';
+  generateKey,
+  loadStateFromStorage,
+  saveStateToStorage,
+  disableBrowserBackButton,
+} from './utils';
+const ContentStateEditor = React.lazy(() => import('./Components/ContentStateEditor'));
 const Editor = React.lazy(() => import('../shared/editor/Editor'));
 const Viewer = React.lazy(() => import('../shared/viewer/Viewer'));
 const Preview = React.lazy(() => import('../shared/preview/Preview'));
-
-const getContentStateFromEditorState = editorState => convertToRaw(editorState.getCurrentContent());
 
 class ExampleApp extends PureComponent {
   constructor(props) {
     super(props);
     this.state = this.getInitialState();
+    this.initSectionsSettings();
     disableBrowserBackButton();
   }
 
@@ -29,10 +28,8 @@ class ExampleApp extends PureComponent {
     const { isMobile } = this.props;
     const containerKey = generateKey('container');
     const localState = loadStateFromStorage();
-    const contentState = getContentStateFromEditorState(createEmpty());
     return {
       containerKey,
-      contentState,
       isEditorShown: true,
       isViewerShown: !isMobile,
       isPreviewShown: false,
@@ -47,26 +44,33 @@ class ExampleApp extends PureComponent {
   }
 
   componentDidMount() {
+    this.editorScrollingElementFn = () =>
+      typeof window !== 'undefined' && document.getElementsByClassName('editor-example')[0];
+    this.viewerScrollingElementFn = () =>
+      typeof window !== 'undefined' && document.getElementsByClassName('viewer-example')[0];
     window && window.addEventListener('resize', this.onContentStateEditorResize);
+    const contentState = this.loadContentStateFromLocalStorage();
+    if (contentState) {
+      this.props.onContentStateChange(contentState);
+    }
   }
 
   componentWillUnmount() {
     window && window.removeEventListener('resize', this.onContentStateEditorResize);
   }
 
-  onEditorChange = editorState => {
-    this.setState({ contentState: getContentStateFromEditorState(editorState) });
-    this.props.onEditorChange && this.props.onEditorChange(editorState);
-  };
+  componentDidUpdate(prevProps) {
+    this.saveContentStateToLocalStorage(this.props.contentState);
+  }
+
+  saveContentStateToLocalStorage = debounce(
+    contentState => local.set('contentState', contentState),
+    500
+  );
+
+  loadContentStateFromLocalStorage = () => local.get('contentState');
 
   setContentStateEditor = ref => (this.contentStateEditor = ref);
-
-  onContentStateEditorChange = obj => {
-    if (this.props.onEditorChange) {
-      const { editorState } = getStateFromObject(obj);
-      this.props.onEditorChange(editorState);
-    }
-  };
 
   onContentStateEditorResize = () =>
     this.contentStateEditor && this.contentStateEditor.refreshLayout();
@@ -84,22 +88,15 @@ class ExampleApp extends PureComponent {
     this.props.setLocale && this.props.setLocale(locale);
   };
 
-  renderEditor = () => {
-    const { allLocales, editorState, locale, localeResource, isMobile } = this.props;
-    const {
-      isEditorShown,
-      staticToolbar,
-      shouldMockUpload,
-      shouldMultiSelectImages,
-      editorIsMobile,
-    } = this.state;
-    const settings = [
+  initSectionsSettings = () => {
+    const { editorIsMobile, shouldMockUpload, shouldMultiSelectImages, staticToolbar } = this.state;
+    this.editorSettings = [
       {
         name: 'Mobile',
         active: editorIsMobile,
         action: () =>
           this.setState(state => ({
-            editorIsMobile: !editorIsMobile,
+            editorIsMobile: !state.editorIsMobile,
             editorResetKey: state.editorResetKey + 1,
           })),
       },
@@ -119,20 +116,48 @@ class ExampleApp extends PureComponent {
             shouldMultiSelectImages: !state.shouldMultiSelectImages,
           })),
       },
-    ];
-    if (!isMobile) {
-      settings.push({
+      {
         name: 'Static Toolbar',
         active: staticToolbar,
         action: () => this.setState(state => ({ staticToolbar: !state.staticToolbar })),
-      });
-      settings.push({
+      },
+      {
         name: 'Locale',
-        active: locale,
+        active: this.props.locale,
         action: selectedLocale => this.onSetLocale(selectedLocale),
-        items: allLocales,
-      });
-    }
+        items: this.props.allLocales,
+      },
+    ];
+
+    this.viewerSettings = [
+      {
+        name: 'Mobile',
+        action: () =>
+          this.setState(state => ({
+            viewerIsMobile: !state.viewerIsMobile,
+            viewerResetKey: state.viewerResetKey + 1,
+          })),
+      },
+    ];
+  };
+
+  renderEditor = () => {
+    const {
+      allLocales,
+      editorState,
+      onEditorChange,
+      locale,
+      localeResource,
+      isMobile,
+    } = this.props;
+    const {
+      isEditorShown,
+      staticToolbar,
+      shouldMockUpload,
+      shouldMultiSelectImages,
+      editorIsMobile,
+    } = this.state;
+
     return (
       isEditorShown && (
         <ReflexElement
@@ -141,13 +166,13 @@ class ExampleApp extends PureComponent {
         >
           <SectionHeader
             title="Editor"
-            settings={settings}
+            settings={this.editorSettings}
             onHide={this.onSectionVisibilityChange}
           />
           <SectionContent>
             <ErrorBoundary>
               <Editor
-                onChange={this.onEditorChange}
+                onChange={onEditorChange}
                 editorState={editorState}
                 isMobile={this.state.editorIsMobile || isMobile}
                 shouldMockUpload={this.state.shouldMockUpload}
@@ -155,6 +180,7 @@ class ExampleApp extends PureComponent {
                 staticToolbar={staticToolbar}
                 locale={locale}
                 localeResource={localeResource}
+                scrollingElementFn={this.editorScrollingElementFn}
               />
             </ErrorBoundary>
           </SectionContent>
@@ -164,7 +190,7 @@ class ExampleApp extends PureComponent {
   };
 
   renderPreview = () => {
-    const { previewState, isMobile, locale, localeResource } = this.props;
+    const { contentState, isMobile, locale, localeResource } = this.props;
     const { isPreviewShown } = this.state;
     const settings = [
       {
@@ -190,7 +216,7 @@ class ExampleApp extends PureComponent {
           <SectionContent>
             <ErrorBoundary>
               <Preview
-                initialState={previewState}
+                initialState={contentState}
                 isMobile={this.state.previewIsMobile || isMobile}
                 locale={locale}
                 localeResource={localeResource}
@@ -203,18 +229,9 @@ class ExampleApp extends PureComponent {
   };
 
   renderViewer = () => {
-    const { viewerState, isMobile, locale, localeResource } = this.props;
+    const { contentState, isMobile, locale, localeResource } = this.props;
     const { isViewerShown } = this.state;
-    const settings = [
-      {
-        name: 'Mobile',
-        action: () =>
-          this.setState(state => ({
-            viewerIsMobile: !state.viewerIsMobile,
-            viewerResetKey: state.viewerResetKey + 1,
-          })),
-      },
-    ];
+
     return (
       isViewerShown && (
         <ReflexElement
@@ -223,16 +240,17 @@ class ExampleApp extends PureComponent {
         >
           <SectionHeader
             title="Viewer"
-            settings={settings}
+            settings={this.viewerSettings}
             onHide={this.onSectionVisibilityChange}
           />
           <SectionContent>
             <ErrorBoundary>
               <Viewer
-                initialState={viewerState}
+                initialState={contentState}
                 isMobile={this.state.viewerIsMobile || isMobile}
                 locale={locale}
                 localeResource={localeResource}
+                scrollingElementFn={this.viewerScrollingElementFn}
               />
             </ErrorBoundary>
           </SectionContent>
@@ -242,7 +260,8 @@ class ExampleApp extends PureComponent {
   };
 
   renderContentState = () => {
-    const { contentState, isContentStateShown } = this.state;
+    const { contentState, onContentStateChange } = this.props;
+    const { isContentStateShown } = this.state;
     return (
       isContentStateShown && (
         <ReflexElement
@@ -251,10 +270,10 @@ class ExampleApp extends PureComponent {
           onStopResize={this.onContentStateEditorResize}
         >
           <SectionHeader title="Content State" onHide={this.onSectionVisibilityChange} />
-          <SectionContent isLoadedLazily={false}>
+          <SectionContent>
             <ContentStateEditor
               ref={this.setContentStateEditor}
-              onChange={this.onContentStateEditorChange}
+              onChange={onContentStateChange}
               contentState={contentState}
             />
           </SectionContent>
@@ -307,34 +326,6 @@ class ExampleApp extends PureComponent {
       </div>
     );
   }
-}
-
-function disableBrowserBackButton() {
-  (function(global) {
-    if (typeof global === 'undefined') {
-      throw new Error('window is undefined');
-    }
-
-    var _hash = '!';
-    var noBackPlease = function() {
-      global.location.href += '#';
-
-      // making sure we have the fruit available for juice (^__^)
-      global.setTimeout(function() {
-        global.location.href += '!';
-      }, 50);
-    };
-
-    global.onhashchange = function() {
-      if (global.location.hash !== _hash) {
-        global.location.hash = _hash;
-      }
-    };
-
-    global.onload = function() {
-      noBackPlease();
-    };
-  })(window);
 }
 
 export default hot(ExampleApp);
