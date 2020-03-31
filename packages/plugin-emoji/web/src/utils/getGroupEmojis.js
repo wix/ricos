@@ -1,13 +1,12 @@
-import { toArray } from 'lodash';
 import convertShortNameToUnicode from './convertShortNameToUnicode';
 import emojiList from './emojiList';
 
 const getGroupEmojis = category => {
   const emojis = emojiList[category];
   const emojisDisplay = [];
-  toArray(emojis).map(unicode => {
+  emojis.map(shortName => {
     try {
-      emojisDisplay.push(convertShortNameToUnicode(unicode));
+      emojisDisplay.push(convertShortNameToUnicode(shortName));
     } catch (e) {
       return 0;
     }
