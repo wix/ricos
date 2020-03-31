@@ -153,7 +153,7 @@ const getPluginViewers = (typeMap, context, styles) => {
       const { interactions } = entity;
 
       const ViewerWrapper = isArray(interactions)
-        ? getInteractionWrapper({ interactions, config: context.config, mergedStyles: styles })
+        ? getInteractionWrapper({ interactions, context })
         : DefaultInteractionWrapper;
 
       return (
