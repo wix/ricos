@@ -1,7 +1,7 @@
 import React from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { BLOCK_TYPES } from 'wix-rich-content-common';
-import redraft from 'redraft';
+import redraft from 'wix-redraft';
 import classNames from 'classnames';
 import { endsWith } from 'lodash';
 import List from '../List';
@@ -33,7 +33,7 @@ const blockDataToStyle = ({ dynamicStyles }) => kebabToCamelObjectKeys(dynamicSt
 const getInline = (inlineStyleMappers, mergedStyles) =>
   combineMappers([...inlineStyleMappers, staticInlineStyleMapper], mergedStyles);
 
-const getBlocks = (mergedStyles, textDirection, { config }) => {
+const getBlocks = (mergedStyles, textDirection, context) => {
   const getList = ordered => (items, blockProps) => {
     const fixedItems = items.map(item => (item.length ? item : [' ']));
 
@@ -57,7 +57,7 @@ const getBlocks = (mergedStyles, textDirection, { config }) => {
 
         const { interactions } = blockProps.data[i];
         const BlockWrapper = Array.isArray(interactions)
-          ? getInteractionWrapper({ interactions, config, mergedStyles })
+          ? getInteractionWrapper({ interactions, context })
           : DefaultInteractionWrapper;
 
         const _child = isEmptyBlock(child) ? <br /> : withDiv ? <div>{child}</div> : child;
