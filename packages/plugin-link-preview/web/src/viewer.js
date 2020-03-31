@@ -11,7 +11,6 @@ export const pluginLinkPreview = (config = {}) => {
     config: { ...DEFAULTS.config, ...config },
     type: LINK_PREVIEW_TYPE,
     typeMapper,
-    decorator: {},
     theme,
   };
 };
