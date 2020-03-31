@@ -14,6 +14,10 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+  
+### :bug: Bug Fix
+- `editor-common`
+  - [#547](https://github.com/wix-incubator/rich-content/pull/547) accessibility issue fixed: focus on hidden elements when tab-clicking
 
 ### :house: Internal
 - `emoji`

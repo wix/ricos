@@ -30,6 +30,7 @@ class Dropdown extends Component {
     disabled: PropTypes.bool,
     dataHook: PropTypes.string,
     controlClassName: PropTypes.string,
+    tabIndex: PropTypes.number,
   };
 
   constructor(props) {
@@ -75,7 +76,7 @@ class Dropdown extends Component {
     }
   }
 
-  handleMouseDown(event) {
+  handleMouseDown = event => {
     if (this.props.onFocus && typeof this.props.onFocus === 'function') {
       this.props.onFocus(this.state.isOpen);
     }
@@ -90,7 +91,7 @@ class Dropdown extends Component {
         isOpen: !this.state.isOpen,
       });
     }
-  }
+  };
 
   setValue(value, label, component) {
     const newState = {
@@ -162,7 +163,7 @@ class Dropdown extends Component {
   handleDocumentClick = event => {
     if (this.mounted) {
       //eslint-disable-next-line
-      if (!ReactDOM.findDOMNode(this).contains(event.target)) {
+      if (!ReactDOM.findDOMNode(this)?.contains(event.target)) {
         if (this.state.isOpen) {
           this.setState({ isOpen: false });
         }
@@ -207,33 +208,34 @@ class Dropdown extends Component {
       [styles['Dropdown-root-isOpen']]: this.state.isOpen,
     });
     const { dataHook } = this.props;
-
     return (
-      <div className={dropdownClass}>
-        <button
-          role="combobox"
-          aria-controls={isSSR ? undefined : `${this.id}_menu`}
-          aria-expanded={this.state.isOpen}
-          className={classNames(
-            styles['Dropdown-control'],
-            this.props.controlClassName,
-            disabledClass
-          )}
-          data-hook={dataHook}
-          onClick={this.handleMouseDown.bind(this)}
-          onTouchEnd={this.handleMouseDown.bind(this)}
-        >
-          {value}
-          <span
-            className={classNames(styles['Dropdown-arrow'], {
-              [styles['Dropdown-arrow-isOpen']]: this.state.isOpen,
-            })}
+      this.props.tabIndex > -1 && (
+        <div className={dropdownClass}>
+          <button
+            role="combobox"
+            aria-controls={isSSR ? undefined : `${this.id}_menu`}
+            aria-expanded={this.state.isOpen}
+            className={classNames(
+              styles['Dropdown-control'],
+              this.props.controlClassName,
+              disabledClass
+            )}
+            data-hook={dataHook}
+            onClick={this.handleMouseDown}
+            onTouchEnd={this.handleMouseDown}
           >
-            <DropdownArrowIcon />
-          </span>
-        </button>
-        {menu}
-      </div>
+            {value}
+            <span
+              className={classNames(styles['Dropdown-arrow'], {
+                [styles['Dropdown-arrow-isOpen']]: this.state.isOpen,
+              })}
+            >
+              <DropdownArrowIcon />
+            </span>
+          </button>
+          {menu}
+        </div>
+      )
     );
   }
 }

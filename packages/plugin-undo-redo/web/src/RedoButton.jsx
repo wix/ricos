@@ -41,31 +41,36 @@ class RedoButton extends Component {
     const { isMobile, theme = {}, children, className, config, tabIndex, t } = this.props;
     const combinedClassName = classNames(theme.redo, className);
     const icon = config?.toolbar?.icons?.Redo || redoIcon();
+    const disabled = editorState?.getRedoStack()?.isEmpty() || !editorState;
 
-    return isMobile ? (
-      <InlineToolbarButton
-        disabled={editorState ? editorState.getRedoStack().isEmpty() : true}
-        onClick={this.onClick}
-        isActive={false}
-        theme={theme}
-        isMobile={isMobile}
-        tooltipText={t('undoButton_Tooltip')}
-        dataHook={'undoButton'}
-        tabIndex={tabIndex}
-        icon={redoIcon}
-      >
-        {children}
-      </InlineToolbarButton>
-    ) : (
-      <button
-        disabled={editorState ? editorState.getRedoStack().isEmpty() : true}
-        onClick={this.onClick}
-        className={combinedClassName}
-      >
-        {isMobile && icon}
-        {children}
-      </button>
-    );
+    if (isMobile) {
+      return (
+        <InlineToolbarButton
+          disabled={disabled}
+          onClick={this.onClick}
+          isActive={false}
+          theme={theme}
+          isMobile={isMobile}
+          tooltipText={t('redoButton_Tooltip')}
+          dataHook={'redoButton'}
+          tabindex={tabIndex}
+          icon={redoIcon}
+        >
+          {children}
+        </InlineToolbarButton>
+      );
+    } else
+      return (
+        <button
+          tabIndex={tabIndex}
+          disabled={disabled}
+          onClick={this.onClick}
+          className={combinedClassName}
+        >
+          {isMobile && icon}
+          {children}
+        </button>
+      );
   }
 }
 export default RedoButton;
