@@ -2,101 +2,108 @@ name: action
 on: push
 
 jobs:
-  visual-tests:
+  # visual-tests:
+  #   runs-on: ubuntu-18.04
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v2
+
+  #     - name: Cypress run
+  #       uses: cypress-io/github-action@v1.16.1
+  #       with:
+  #         build: npm run build:test
+  #         start: npm run e2e:app:run
+  #         wait-on: 'http://localhost:3002'
+  #         config: video=true
+  #     - uses: actions/upload-artifact@v1
+  #       if: failure()
+  #       with:
+  #         name: cypress-screenshots
+  #         path: e2e/cypress/screenshots
+  #     - uses: actions/upload-artifact@v1
+  #       if: always()
+  #       with:
+  #         name: cypress-videos
+  #         path: e2e/cypress/videos
+
+  #     - name: Update Applitools batch status
+  #       if: always()
+  #       uses: wei/curl@v1.1.1
+  #       with:
+  #         args: -d "" -X POST https://wixeyesapi.applitools.com/api/externals/github/servers/github.com/commit/${{ github.sha }}/complete?apiKey=${{ secrets.APPLITOOLS_API_KEY }}
+  #   env:
+  #     APPLITOOLS_API_KEY: ${{ secrets.APPLITOOLS_API_KEY }}
+  #     APPLITOOLS_SERVER_URL: ${{ secrets.APPLITOOLS_SERVER_URL }}
+  #     APPLITOOLS_BATCH_ID: ${{ github.sha }}
+
+  # content-state-tests:
+  #   runs-on: ubuntu-18.04
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v2
+
+  #     - name: Cypress run
+  #       uses: cypress-io/github-action@v1.16.1
+  #       with:
+  #         build: npm run build:test
+  #         start: npm run e2e:app:run
+  #         wait-on: 'http://localhost:3002'
+  #         config: video=true
+  #         env: MATCH_CONTENT_STATE=true
+
+  #     - uses: actions/upload-artifact@v1
+  #       if: failure()
+  #       with:
+  #         name: cypress-screenshots
+  #         path: e2e/cypress/screenshots
+  #     - uses: actions/upload-artifact@v1
+  #       if: always()
+  #       with:
+  #         name: cypress-videos
+  #         path: e2e/cypress/videos
+  #   env:
+  #     APPLITOOLS_IS_DISABLED: true
+
+  # unit-tests:
+  #   runs-on: ubuntu-18.04
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - uses: actions/setup-node@v1.1.0
+  #       with:
+  #         node-version: 12
+  #     - run: npm install
+  #     - run: npm run build
+  #     - run: npm run test:unit
+
+  # lint:
+  #   runs-on: ubuntu-18.04
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - uses: actions/setup-node@v1.1.0
+  #       with:
+  #         node-version: 12
+  #     - run: npm install
+  #     - run: npm run lint
+
+  # deploy-examples:
+  #   runs-on: ubuntu-18.04
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - uses: actions/setup-node@v1.1.0
+  #       with:
+  #         node-version: 12
+  #     - run: npm install
+  #     - run: npm run build
+  #     - run: npm run deploy
+  #   env:
+  #     SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
+  #     SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
+
+  update_pr_domain:
     runs-on: ubuntu-18.04
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Cypress run
-        uses: cypress-io/github-action@v1.16.1
+      - uses: tzkhan/pr-update-action@v1
         with:
-          build: npm run build:test
-          start: npm run e2e:app:run
-          wait-on: 'http://localhost:3002'
-          config: video=true
-      - uses: actions/upload-artifact@v1
-        if: failure()
-        with:
-          name: cypress-screenshots
-          path: e2e/cypress/screenshots
-      - uses: actions/upload-artifact@v1
-        if: always()
-        with:
-          name: cypress-videos
-          path: e2e/cypress/videos
-
-      - name: Update Applitools batch status
-        if: always()
-        uses: wei/curl@v1.1.1
-        with:
-          args: -d "" -X POST https://wixeyesapi.applitools.com/api/externals/github/servers/github.com/commit/${{ github.sha }}/complete?apiKey=${{ secrets.APPLITOOLS_API_KEY }}
-    env:
-      APPLITOOLS_API_KEY: ${{ secrets.APPLITOOLS_API_KEY }}
-      APPLITOOLS_SERVER_URL: ${{ secrets.APPLITOOLS_SERVER_URL }}
-      APPLITOOLS_BATCH_ID: ${{ github.sha }}
-
-  content-state-tests:
-    runs-on: ubuntu-18.04
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Cypress run
-        uses: cypress-io/github-action@v1.16.1
-        with:
-          build: npm run build:test
-          start: npm run e2e:app:run
-          wait-on: 'http://localhost:3002'
-          config: video=true
-          env: MATCH_CONTENT_STATE=true
-
-      - uses: actions/upload-artifact@v1
-        if: failure()
-        with:
-          name: cypress-screenshots
-          path: e2e/cypress/screenshots
-      - uses: actions/upload-artifact@v1
-        if: always()
-        with:
-          name: cypress-videos
-          path: e2e/cypress/videos
-    env:
-      APPLITOOLS_IS_DISABLED: true
-
-  unit-tests:
-    runs-on: ubuntu-18.04
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1.1.0
-        with:
-          node-version: 12
-      - run: npm install
-      - run: npm run build
-      - run: npm run test:unit
-
-  lint:
-    runs-on: ubuntu-18.04
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1.1.0
-        with:
-          node-version: 12
-      - run: npm install
-      - run: npm run lint
-
-  deploy-examples:
-    runs-on: ubuntu-18.04
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1.1.0
-        with:
-          node-version: 12
-      - run: npm install
-      - run: npm run build
-      - run: npm run deploy
-      - run: echo $DOMAIN
-    env:
-      SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
-      SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
-      DOMAIN: 'hey'
+          repo-token: '${{ secrets.GITHUB_TOKEN }}' # required - allows the action to make calls to GitHub's rest API
+          branch-regex: '' # required - regex to match text from the head branch name
+          body-template: '%branch%.surge.sh/' # optional - text template to prefix body
