@@ -8,7 +8,7 @@ export default ({ helpers, t, settings, UndoButton, RedoButton }) => {
   return [
     {
       type: 'undo-redo',
-      name: t('Mobile_UndoPlugin_InsertButton'),
+      name: t('UndoPlugin_InsertButton'),
       tooltipText: t('Undo Button'),
       toolbars: [TOOLBARS.FOOTER],
       Icon: undoIcon,

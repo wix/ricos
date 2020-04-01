@@ -4,7 +4,7 @@ import { CodeBlockIcon } from '../icons';
 export default ({ helpers, t, addBlockHandler, icon }) => {
   return [
     {
-      name: t('Mobile_CodeblockPlugin_InsertButton'),
+      name: t('CodeblockPlugin_InsertButton'),
       type: 'custom-block',
       addBlockHandler,
       tooltipText: t('TextCodeBlock_InsertButton_Tooltip'),

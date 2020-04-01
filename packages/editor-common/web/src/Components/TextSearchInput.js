@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { SearchIcon, ClearIcon } from 'wix-rich-content-editor-common/src/Icons';
 import { mergeStyles } from 'wix-rich-content-common';
-import textInputStyles from '../../../../editor-common/web/statics/styles/text-search-input.scss';
-import { TEXT_SEARCH_INPUT_ID } from './consts';
+import textInputStyles from '../../statics/styles/text-search-input.scss';
+import { TEXT_SEARCH_INPUT_ID } from '../../../../editor/web/src/RichContentEditor/consts';
 
 export default class TextSearchInput extends Component {
   constructor(props) {

@@ -23,7 +23,7 @@ export default ({ helpers, t, settings, isMobile }) => {
   return [
     {
       type: 'modal',
-      name: t('Mobile_VideoPlugin_InsertButton'),
+      name: t('VideoPlugin_InsertButton'),
       tooltipText: t('VideoPlugin_InsertButton_Tooltip'),
       Icon: icon,
       componentData: DEFAULTS,

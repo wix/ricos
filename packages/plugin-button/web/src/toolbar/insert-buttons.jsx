@@ -8,7 +8,7 @@ export default ({ helpers, t, settings }) => {
   const target = settings?.anchorTarget ? settings?.anchorTarget === '_blank' : true;
   return [
     {
-      name: t('Mobile_ButtonPlugin_InsertButton'),
+      name: t('ButtonPlugin_InsertButton'),
       tooltipText: t('ButtonPlugin_InsertButton_Tooltip'),
       toolbars: [TOOLBARS.FOOTER, TOOLBARS.SIDE],
       Icon,

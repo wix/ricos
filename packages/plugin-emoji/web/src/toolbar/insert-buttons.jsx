@@ -15,7 +15,7 @@ export default ({ helpers, t, settings, getEditorState, setEditorState }) => {
   return [
     {
       type: 'modal',
-      name: 'EMOJI',
+      name: t('EmojiPlugin_InsertButton'),
       tooltipText: t('EmojiPlugin_InsertButton_Tooltip'),
       Icon: icon,
       componentData: settings.componentDataDefaults || {},
