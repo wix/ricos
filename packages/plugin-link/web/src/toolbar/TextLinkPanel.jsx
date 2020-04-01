@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
-import { EditorState } from 'draft-js';
+import { EditorState } from '@wix/draft-js';
 import { isEmpty } from 'lodash';
 import {
   getLinkDataInSelection,

@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-viewer",
-  "version": "7.0.2",
+  "version": "7.1.4",
   "author": {
     "name": "Jonathan Bachman",
     "email": "jonathanb@wix.com"
@@ -18,9 +18,16 @@
     "build:dev": "cross-env NODE_ENV=development npm run build",
     "build:analyze": "npm run build -- --environment MODULE_ANALYZE && open stats.html",
     "watch": "cross-env NODE_ENV=development MODULE_WATCH=1 npm run build -- --watch.chokidar",
-    "lint": "eslint 'src/**/*.{js,jsx}'"
+    "lint": "eslint 'src/**/*.{js,jsx}'",
+    "test": "jest --verbose"
   },
   "jest": {
+    "globals": {
+      "NODE_ENV": "test"
+    },
+    "transform": {
+      "^.+\\.jsx?$": "<rootDir>/../../../babel.jest.monorepo.js"
+    },
     "moduleNameMapper": {
       "\\.(jpg|jpeg|png|gif|svg)$": "<rootDir>/__mocks__/fileMock.js",
       "\\.(css|scss)$": "<rootDir>/__mocks__/styleMock.js"
@@ -28,9 +35,8 @@
   },
   "dependencies": {
     "classnames": "^2.0.0",
-    "direction": "~1.0.3",
-    "redraft": "~0.9.1",
-    "wix-rich-content-common": "7.0.2"
+    "wix-redraft": "^1.1.0",
+    "wix-rich-content-common": "7.1.4"
   },
   "peerDependencies": {
     "@babel/runtime": "7.2.0",

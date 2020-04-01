@@ -37,6 +37,7 @@ export const IMAGE_TYPE_LEGACY = 'IMAGE';
 export const LINE_SPACING_TYPE = 'line-spacing';
 export const EXTERNAL_LINK_TYPE = 'wix-draft-plugin-external-link';
 export const LINK_TYPE = 'LINK';
+export const LINK_PREVIEW_TYPE = 'LINK_PREVIEW';
 export const MAP_TYPE = 'wix-draft-plugin-map';
 export const EXTERNAL_MENTIONS_TYPE = 'wix-draft-plugin-external-mentions';
 export const MENTION_TYPE = 'mention';

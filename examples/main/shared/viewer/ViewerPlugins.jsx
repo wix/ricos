@@ -4,6 +4,10 @@ import { dividerTypeMapper } from 'wix-rich-content-plugin-divider/dist/module.v
 import { HTML_TYPE, htmlTypeMapper } from 'wix-rich-content-plugin-html/dist/module.viewer';
 import { soundCloudTypeMapper } from 'wix-rich-content-plugin-sound-cloud/dist/module.viewer';
 import { LINK_TYPE, linkTypeMapper } from 'wix-rich-content-plugin-link/dist/module.viewer';
+import {
+  LINK_PREVIEW_TYPE,
+  linkPreviewTypeMapper,
+} from 'wix-rich-content-plugin-link-preview/dist/module.viewer';
 import { imageTypeMapper } from 'wix-rich-content-plugin-image/dist/module.viewer';
 import {
   galleryTypeMapper,
@@ -51,6 +55,7 @@ import 'wix-rich-content-plugin-html/dist/styles.min.css';
 import 'wix-rich-content-plugin-image/dist/styles.min.css';
 import 'wix-rich-content-plugin-gallery/dist/styles.min.css';
 import 'wix-rich-content-plugin-link/dist/styles.min.css';
+import 'wix-rich-content-plugin-link-preview/dist/styles.min.css';
 import 'wix-rich-content-plugin-mentions/dist/styles.min.css';
 import 'wix-rich-content-plugin-video/dist/styles.min.css';
 import 'wix-rich-content-plugin-sound-cloud/dist/styles.min.css';
@@ -75,6 +80,7 @@ export const typeMappers = [
   dividerTypeMapper,
   htmlTypeMapper,
   linkTypeMapper,
+  linkPreviewTypeMapper,
   soundCloudTypeMapper,
   mentionsTypeMapper,
   imageTypeMapper,
@@ -99,6 +105,9 @@ const config = {
   },
   // [HTML_TYPE]: {},
   [LINK_TYPE]: linkPluginSettings,
+  [LINK_PREVIEW_TYPE]: {
+    enableEmbed: true,
+  },
   [MENTION_TYPE]: mentionsPluginSettings,
   [TEXT_HIGHLIGHT_TYPE]: {
     styleSelectionPredicate,

@@ -14,6 +14,7 @@ import {
   SETTINGS_PANEL,
 } from '../dataHooks';
 
+// Viewport size commands
 const resizeForDesktop = () => cy.viewport('macbook-15');
 const resizeForMobile = () => cy.viewport('iphone-6');
 
@@ -30,9 +31,12 @@ const getUrl = (componentId, fixtureName = '') =>
     seoMode: isSeoMode,
   })}`;
 
-// Viewport size commands
-
-const run = (app, fixtureName) => cy.visit(getUrl(app, fixtureName));
+const run = (app, fixtureName) => {
+  cy.visit(getUrl(app, fixtureName)).then(() => {
+    disableTransitions();
+    hideAllTooltips();
+  });
+};
 
 let isMobile = false;
 let isHebrew = false;
@@ -68,15 +72,13 @@ function hideAllTooltips() {
   cy.get('[data-id="tooltip"]').invoke('hide'); //uses jquery to set display: none
 }
 
-Cypress.Commands.add('loadEditorAndViewer', fixtureName => {
-  run('rce', fixtureName).then(() => {
-    disableTransitions();
-    hideAllTooltips();
-  });
-});
+Cypress.Commands.add('loadEditorAndViewer', fixtureName => run('rce', fixtureName));
+Cypress.Commands.add('loadIsolatedEditorAndViewer', fixtureName =>
+  run('rce-isolated', fixtureName)
+);
 
-Cypress.Commands.add('loadEditorAndViewerOnSsr', fixtureName => {
-  cy.request(getUrl('rce', fixtureName))
+Cypress.Commands.add('loadEditorAndViewerOnSsr', (fixtureName, compName) => {
+  cy.request(getUrl(compName, fixtureName))
     .its('body')
     .then(html => {
       // remove the application code bundle
@@ -213,6 +215,14 @@ Cypress.Commands.add('setLink', (selection, link) => {
     .click();
 });
 
+Cypress.Commands.add('setLinkSettings', () => {
+  cy.clickToolbarButton(INLINE_TOOLBAR_BUTTONS.LINK)
+    .get(`[data-hook=linkPanelContainer] [data-hook=linkPanelRelCheckbox]`)
+    .click()
+    .get(`[data-hook=linkPanelContainerDone]`)
+    .click();
+});
+
 Cypress.Commands.add('setAlignment', alignment => {
   cy.setTextStyle(INLINE_TOOLBAR_BUTTONS.ALIGNMENT).setTextStyle(alignment);
 });
@@ -266,6 +276,18 @@ Cypress.Commands.add('openGalleryAdvancedSettings', () => {
 
 Cypress.Commands.add('shrinkPlugin', () => {
   cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.SMALL_CENTER);
+});
+
+Cypress.Commands.add('pluginSizeBestFit', () => {
+  cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.BEST_FIT);
+});
+
+Cypress.Commands.add('pluginSizeFullWidth', () => {
+  cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.FULL_WIDTH);
+});
+
+Cypress.Commands.add('pluginSizeOriginal', () => {
+  cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.ORIGINAL);
 });
 
 Cypress.Commands.add('clickToolbarButton', buttonName => {
@@ -397,7 +419,9 @@ Cypress.Commands.add('addVideoFromURL', () => {
 
 Cypress.Commands.add('addHtml', () => {
   cy.get(`[data-hook*=${HTML_PLUGIN.STATIC_TOOLBAR_BUTTON}][tabindex!=-1]`).click();
-  cy.get(`[data-hook*=${PLUGIN_TOOLBAR_BUTTONS.EDIT}]`);
+  cy.get(`[data-hook*=${HTML_PLUGIN.INPUT}]`)
+    .click()
+    .clear();
   cy.get(`[data-hook*=${HTML_PLUGIN.INPUT}]`).type(
     // eslint-disable-next-line max-len
     '<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">The updates, insights and stories of the engineering challenges we encounter, and our way of solving them. Subscribe to our fresh, monthly newsletter and get these goodies right to your e-mail:<a href="https://t.co/0ziRSJJAxK">https://t.co/0ziRSJJAxK</a> <a href="https://t.co/nTHlsG5z2a">pic.twitter.com/nTHlsG5z2a</a></p>&mdash; Wix Engineering (@WixEng) <a href="https://twitter.com/WixEng/status/1076810144774868992?ref_src=twsrc%5Etfw">December 23, 2018</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>',
@@ -448,6 +472,15 @@ Cypress.Commands.add('waitForHtmlToLoad', () => {
         .should('not.be.undefined');
     })
     .wait(4000);
+});
+
+Cypress.Commands.add('insertLinkAndEnter', url => {
+  cy.focusEditor();
+  cy.moveCursorToEnd()
+    .type(url)
+    .type('{enter}')
+    .wait(100);
+  cy.moveCursorToEnd();
 });
 
 // disable screenshots in debug mode. So there is no diffrence to ci.

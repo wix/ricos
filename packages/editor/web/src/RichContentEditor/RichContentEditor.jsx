@@ -10,7 +10,6 @@ import { createKeyBindingFn, initPluginKeyBindings } from './keyBindings';
 import handleKeyCommand from './handleKeyCommand';
 import handleReturnCommand from './handleReturnCommand';
 import blockStyleFn from './blockStyleFn';
-import getBlockRenderMap from './getBlockRenderMap';
 import { combineStyleFns } from './combineStyleFns';
 import { getStaticTextToolbarId } from './Toolbars/toolbar-id';
 import {
@@ -220,17 +219,25 @@ class RichContentEditor extends Component {
     if (handlePastedText) {
       return handlePastedText(text, html, editorState);
     }
-    const contentState = draftConvertFromHtml(pastedContentConfig)(html);
+    let contentState;
+    if (html) {
+      const htmlContentState = draftConvertFromHtml(pastedContentConfig)(html);
+      contentState = Modifier.replaceWithFragment(
+        editorState.getCurrentContent(),
+        editorState.getSelection(),
+        htmlContentState.getBlockMap()
+      );
+    } else {
+      contentState = Modifier.replaceText(
+        editorState.getCurrentContent(),
+        editorState.getSelection(),
+        text
+      );
+    }
 
-    const updatedContentState = Modifier.replaceWithFragment(
-      editorState.getCurrentContent(),
-      editorState.getSelection(),
-      contentState.getBlockMap()
-    );
-
-    const newEditorState = EditorState.push(editorState, updatedContentState, 'insert-fragment');
+    const newEditorState = EditorState.push(editorState, contentState, 'insert-fragment');
     const resultEditorState = EditorState.set(newEditorState, {
-      currentContent: updatedContentState,
+      currentContent: contentState,
       selection: newEditorState.getSelection(),
     });
 
@@ -362,7 +369,6 @@ class RichContentEditor extends Component {
         handlePastedText={this.handlePastedText}
         plugins={this.plugins}
         blockStyleFn={blockStyleFn(theme, this.styleToClass)}
-        blockRenderMap={getBlockRenderMap(theme)}
         handleKeyCommand={handleKeyCommand(
           this.updateEditorState,
           this.getCustomCommandHandlers().commandHanders

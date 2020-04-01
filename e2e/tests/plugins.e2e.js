@@ -9,6 +9,7 @@ import {
   GIPHY_PLUGIN,
 } from '../cypress/dataHooks';
 import { DEFAULT_DESKTOP_BROWSERS } from '../tests/constants';
+import linkPreviewMockRes from './linkPreviewMockRes.json';
 
 const eyesOpen = ({
   test: {
@@ -37,8 +38,6 @@ describe('plugins', () => {
     after(() => cy.eyesClose());
 
     it('render image toolbar and settings', function() {
-      cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE).shrinkPlugin();
-      cy.eyesCheckWindow(this.test.title + '  - plugin toolbar');
       cy.openImageSettings();
       cy.get(`[data-hook=${IMAGE_SETTINGS.PREVIEW}]:first`);
       cy.eyesCheckWindow(this.test.title + ' - settings');
@@ -50,6 +49,14 @@ describe('plugins', () => {
       cy.eyesCheckWindow(this.test.title + ' - delete image title');
       cy.openImageSettings(false).addImageLink();
       cy.eyesCheckWindow(this.test.title + ' - add a link');
+      cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE).pluginSizeOriginal();
+      cy.eyesCheckWindow(this.test.title + '  - plugin original size');
+      cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE).shrinkPlugin();
+      cy.eyesCheckWindow(this.test.title + '  - plugin toolbar');
+      cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE).pluginSizeBestFit();
+      cy.eyesCheckWindow(this.test.title + '  - plugin content size');
+      cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE).pluginSizeFullWidth();
+      cy.eyesCheckWindow(this.test.title + '  - plugin full width size');
     });
   });
 
@@ -85,14 +92,14 @@ describe('plugins', () => {
           .eq(2)
           .parent()
           .click();
-        cy.get(
-          '#pgi65a6266ba23a8a55da3f469157f15237_0 > div > div > div > a > div > canvas'
-        ).should('be.visible');
+        cy.get('#pgi65a6266ba23a8a55da3f469157f15237_0 > div > div > div > a > div > canvas', {
+          timeout: 10000,
+        }).should('be.visible');
         cy.eyesCheckWindow({ tag: this.test.title, target: 'window', fully: false });
         cy.get(`[data-hook=${'nav-arrow-next'}]`).click({ force: true });
-        cy.get(
-          '#pgiea8ec1609e052b7f196935318316299d_1 > div > div > div > a > div > canvas'
-        ).should('be.visible');
+        cy.get('#pgiea8ec1609e052b7f196935318316299d_1 > div > div > div > a > div > canvas', {
+          timeout: 10000,
+        }).should('be.visible');
         cy.get(`[data-hook=${'fullscreen-close-button'}]`).click();
         // cy.eyesCheckWindow({ tag: 'closed fullscreen', target: 'window', fully: false });
       });
@@ -219,23 +226,22 @@ describe('plugins', () => {
     it('add a video from URL', function() {
       cy.openVideoUploadModal().addVideoFromURL();
       cy.shrinkPlugin();
-      cy.waitForVideoToLoad();
       cy.focusEditor()
         .type('{uparrow}') //try to fix bug where sometimes it doesn't type
         .type('{uparrow}')
         .type('Will this fix the flakiness?');
+      cy.waitForVideoToLoad();
       cy.eyesCheckWindow(this.test.title);
     });
 
     it('add a custom video', function() {
       cy.openVideoUploadModal().addCustomVideo();
       cy.shrinkPlugin();
-      cy.waitForVideoToLoad();
       cy.focusEditor()
         .type('{uparrow}') //try to fix bug where sometimes it doesn't type
         .type('{uparrow}')
         .type('Will this fix the flakiness?');
-
+      cy.waitForVideoToLoad();
       cy.eyesCheckWindow(this.test.title);
     });
   });
@@ -260,11 +266,11 @@ describe('plugins', () => {
     it('add a soundcloud URL', function() {
       cy.openSoundCloudModal().addSoundCloud();
       cy.shrinkPlugin();
-      cy.waitForVideoToLoad();
       cy.focusEditor()
         .type('{uparrow}') //try to fix bug where sometimes it doesn't type
         .type('{uparrow}')
         .type('Will this fix the flakiness?');
+      cy.waitForVideoToLoad();
       cy.eyesCheckWindow(this.test.title);
     });
   });
@@ -349,6 +355,29 @@ describe('plugins', () => {
     });
   });
 
+  context('emoji', () => {
+    before('load editor', function() {
+      eyesOpen(this);
+    });
+
+    beforeEach('load editor', () => {
+      cy.switchToDesktop();
+    });
+
+    after(() => cy.eyesClose());
+
+    it('render some emojies', function() {
+      cy.loadEditorAndViewer('empty');
+      cy.get(`button[data-hook=${PLUGIN_COMPONENT.EMOJI}]`).click();
+      cy.eyesCheckWindow('render emoji modal');
+      cy.get(`[data-hook=emoji-5]`).click();
+      cy.get(`[data-hook=emoji-group-5]`).click();
+      cy.get(`[data-hook=emoji-95]`).click();
+      cy.get(`[data-hook=emoji-121]`).click();
+      cy.eyesCheckWindow(this.test.title);
+    });
+  });
+
   context('map', () => {
     before('load editor', function() {
       eyesOpen(this);
@@ -423,5 +452,52 @@ describe('plugins', () => {
     testAtomicBlockAlignment('left');
     testAtomicBlockAlignment('center');
     testAtomicBlockAlignment('right');
+  });
+
+  context('link preview', () => {
+    before(function() {
+      eyesOpen(this);
+    });
+    after(() => cy.eyesClose());
+
+    beforeEach('load editor', () => cy.loadEditorAndViewer('linkPreview'));
+
+    it('change link preview settings', function() {
+      cy.openPluginToolbar(PLUGIN_COMPONENT.LINK_PREVIEW);
+      cy.setLinkSettings();
+      cy.focusEditor();
+    });
+    it('convert link preview to regular link', function() {
+      cy.openPluginToolbar(PLUGIN_COMPONENT.LINK_PREVIEW);
+      cy.get(`[data-hook=baseToolbarButton_replaceToLink][tabindex!=-1]`).click();
+      cy.moveCursorToEnd();
+      cy.focusEditor();
+    });
+    it('backspace key should convert link preview to regular link', function() {
+      cy.moveCursorToEnd().type('{backspace}');
+      cy.focusEditor();
+    });
+    it('delete link preview', function() {
+      cy.moveCursorToStart();
+      cy.openPluginToolbar(PLUGIN_COMPONENT.LINK_PREVIEW);
+      cy.get(`[data-hook=blockButton_delete][tabindex!=-1]`).click();
+      cy.moveCursorToEnd();
+    });
+  });
+
+  context('convert link to preview', () => {
+    before(function() {
+      eyesOpen(this);
+    });
+    after(() => cy.eyesClose());
+    beforeEach('load editor', () => cy.loadEditorAndViewer('empty'));
+
+    it('should create link preview from link after enter key', function() {
+      cy.insertLinkAndEnter('www.wix.com');
+    });
+
+    it('should embed link that supports embed', function() {
+      cy.insertLinkAndEnter('www.instagram.com');
+    });
   });
 });

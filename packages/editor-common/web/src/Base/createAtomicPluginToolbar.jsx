@@ -174,6 +174,22 @@ export default function createAtomicPluginToolbar({
         settings: button.settings,
         pubsub,
       };
+      const baseLinkProps = {
+        tabIndex,
+        pubsub,
+        onOverrideContent: this.onOverrideContent,
+        theme: themedStyle,
+        key,
+        helpers,
+        isMobile,
+        componentState: this.state.componentState,
+        closeModal: helpers.closeModal,
+        anchorTarget,
+        relValue,
+        t,
+        uiSettings,
+        icons: icons.link,
+      };
       switch (button.type) {
         case BUTTONS.TEXT_ALIGN_LEFT:
         case BUTTONS.TEXT_ALIGN_CENTER:
@@ -232,24 +248,17 @@ export default function createAtomicPluginToolbar({
         case BUTTONS.HORIZONTAL_SEPARATOR:
           return <Separator className={separatorClassNames} horizontal key={key} />;
         case BUTTONS.LINK:
+          return <BlockLinkButton {...baseLinkProps} tooltipText={t('TextLinkButton_Tooltip')} />;
+        case BUTTONS.LINK_PREVIEW: {
           return (
             <BlockLinkButton
-              tabIndex={tabIndex}
-              pubsub={pubsub}
-              onOverrideContent={this.onOverrideContent}
-              theme={themedStyle}
-              key={key}
-              helpers={helpers}
-              isMobile={isMobile}
-              componentState={this.state.componentState}
-              closeModal={helpers.closeModal}
-              anchorTarget={anchorTarget}
-              relValue={relValue}
-              t={t}
-              uiSettings={uiSettings}
-              icons={icons.link}
+              {...baseLinkProps}
+              unchangedUrl
+              tooltipText={t('LinkPreview_Settings_Tooltip')}
+              icons={button.icons}
             />
           );
+        }
         case BUTTONS.DELETE: {
           const DeleteButtonComponent = deleteButton(icons.delete);
           return (

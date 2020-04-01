@@ -15,6 +15,7 @@ import linkSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-link
 import mentionSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-mentions.schema.json';
 import gallerySchema from 'wix-rich-content-common/dist/statics/schemas/plugin-gallery.schema.json';
 import buttonSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-button.schema.json';
+import linkPreviewSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-link-preview.schema.json';
 
 import { DIVIDER_TYPE } from 'wix-rich-content-plugin-divider';
 import { VIDEO_TYPE } from 'wix-rich-content-plugin-video';
@@ -28,34 +29,29 @@ import { LINK_TYPE } from 'wix-rich-content-plugin-link';
 import { MENTION_TYPE } from 'wix-rich-content-plugin-mentions';
 import { GALLERY_TYPE } from 'wix-rich-content-plugin-gallery';
 import { BUTTON_TYPE } from 'wix-rich-content-plugin-button';
+import { LINK_PREVIEW_TYPE } from 'wix-rich-content-plugin-link-preview';
+import MonacoEditor from 'react-monaco-editor';
 
 const stringifyJSON = obj => JSON.stringify(obj, null, 2);
 
 class ContentStateEditor extends PureComponent {
-  constructor(props) {
-    super(props);
+  state = {
+    value: stringifyJSON(this.props.contentState),
+  };
 
-    const MonacoEditor = !isSSR() && require('react-monaco-editor').default;
-    this.state = {
-      contentState: stringifyJSON(this.props.contentState),
-      MonacoEditor,
-    };
-
-    this.editorOptions = {
-      codeLens: false,
-      formatOnType: true,
-      formatOnPaste: true,
-      scrollBeyondLastLine: false,
-      minimap: {
-        enabled: false,
-      },
-    };
-  }
+  editorOptions = {
+    codeLens: false,
+    formatOnType: true,
+    formatOnPaste: true,
+    scrollBeyondLastLine: false,
+    minimap: {
+      enabled: false,
+    },
+  };
 
   componentWillReceiveProps(nextProps) {
-    const contentState = stringifyJSON(nextProps.contentState);
-    if (contentState !== this.state.contentState) {
-      this.setState({ contentState });
+    if (!this.monaco?.editor.hasTextFocus()) {
+      this.setState({ value: stringifyJSON(nextProps.contentState) });
     }
   }
 
@@ -79,38 +75,40 @@ class ContentStateEditor extends PureComponent {
             [MENTION_TYPE]: mentionSchema,
             [GALLERY_TYPE]: gallerySchema,
             [BUTTON_TYPE]: buttonSchema,
+            [LINK_PREVIEW_TYPE]: linkPreviewSchema,
           }),
         },
       ],
     });
   };
 
-  onEditorChange = debounce(content => {
-    if (content !== '') {
+  onChange = value => {
+    this.setState({ value });
+    this.updateContentState(value);
+  };
+
+  updateContentState = debounce(value => {
+    if (value !== '') {
       try {
-        const contentJsObj = JSON.parse(content);
-        this.props.onChange(contentJsObj);
+        this.props.onChange(JSON.parse(value));
       } catch (e) {
         console.error(`Error parsing JSON: ${e.message}`);
       }
     }
-  }, 500);
+  }, 70);
 
-  refreshLayout = () => this.refs.monaco && this.refs.monaco.editor.layout();
+  refreshLayout = () => this.monaco?.editor.layout();
 
   render = () => {
-    const { contentState, MonacoEditor } = this.state;
-    if (!MonacoEditor) {
-      return null;
-    }
+    const { value } = this.state;
 
     return (
       <MonacoEditor
-        ref="monaco"
+        ref={ref => (this.monaco = ref)}
         language="json"
-        value={contentState}
+        value={value}
         options={this.editorOptions}
-        onChange={this.onEditorChange}
+        onChange={this.onChange}
         editorWillMount={this.editorWillMount}
       />
     );

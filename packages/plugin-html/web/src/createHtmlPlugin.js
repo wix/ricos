@@ -1,13 +1,14 @@
 import createToolbar from './toolbar';
 import { createBasePlugin } from 'wix-rich-content-editor-common';
-import { Component, DEFAULTS } from './HtmlComponent';
+import { Component, defaults } from './HtmlComponent';
 import { HTML_TYPE } from './types';
 
 const createHtmlPlugin = (config = {}) => {
   const type = HTML_TYPE;
   const { helpers, isMobile, t, [type]: settings = {}, getEditorBounds, ...rest } = config;
-  const simulateEditClick = ({ e, pubsub, componentData }) =>
-    !componentData.src ? pubsub.set('onClickTrigger', { event: e, key: 'edit' }) : null;
+
+  const simulateEditClick = ({ e, pubsub }) =>
+    pubsub.set('onClickTrigger', { event: e, key: 'edit' });
 
   return createBasePlugin({
     onOverlayClick: simulateEditClick,
@@ -25,7 +26,7 @@ const createHtmlPlugin = (config = {}) => {
     isMobile,
     t,
     getEditorBounds,
-    defaultPluginData: DEFAULTS,
+    defaultPluginData: defaults(t),
     onComponentMount: simulateEditClick,
     ...rest,
   });

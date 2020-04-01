@@ -492,7 +492,70 @@ export const contentState = deepFreeze({
       }
     },
     {
-
+      "key": "5r3j6",
+      "text": "block with link.com",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [
+        {
+          "offset": 11,
+          "length": 8,
+          "style": "UNDERLINE"
+        }
+      ],
+      "entityRanges": [
+        {
+          "offset": 11,
+          "length": 8,
+          "key": 8
+        }
+      ],
+      "data": {
+        "dynamicStyles": {
+          "line-height": "3",
+          "padding-top": "2px",
+          "padding-bottom": "3px"
+        }
+      }
+    },
+    {
+      "key": "b1md3",
+      "text": "block with more links",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [
+        {
+          "offset": 11,
+          "length": 4,
+          "style": "UNDERLINE"
+        },
+        {
+          "offset": 16,
+          "length": 5,
+          "style": "UNDERLINE"
+        }
+      ],
+      "entityRanges": [
+        {
+          "offset": 11,
+          "length": 4,
+          "key": 9
+        },
+        {
+          "offset": 16,
+          "length": 5,
+          "key": 10
+        }
+      ],
+      "data": {
+        "dynamicStyles": {
+          "line-height": "3",
+          "padding-top": "2px",
+          "padding-bottom": "3px"
+        }
+      }
+    },
+    {
       "key": "bra1e",
       "text": " ",
       "type": "atomic",
@@ -502,7 +565,7 @@ export const contentState = deepFreeze({
         {
           "offset": 0,
           "length": 1,
-          "key": 8
+          "key": 11
         }
       ],
       "data": {}
@@ -545,21 +608,21 @@ export const contentState = deepFreeze({
           {
             "metadata": {
               "height": 2800,
-              "width": 4200,
+              "width": 4200
             },
             "url": "8bb438_e78b371c75ce42de8719dccfc97298a4.jpg"
           },
           {
             "metadata": {
               "height": 1280,
-              "width": 1920,
+              "width": 1920
             },
             "url": "8bb438_281af3d3281f4584a5a864c6c60f3a00.jpg"
           },
           {
             "metadata": {
               "height": 1081,
-              "width": 1621,
+              "width": 1621
             },
             "url": "8bb438_0795e40ac4db438a8a723ea98dbeda10.jpg"
           }
@@ -711,6 +774,33 @@ export const contentState = deepFreeze({
       }
     },
     "8": {
+      "type": "LINK",
+      "mutability": "MUTABLE",
+      "data": {
+        "url": "link.com",
+        "target": "_self",
+        "rel": "noopener"
+      }
+    },
+    "9": {
+      "type": "LINK",
+      "mutability": "MUTABLE",
+      "data": {
+        "url": "more.com",
+        "target": "_blank",
+        "rel": "noopener"
+      }
+    },
+    "10": {
+      "type": "LINK",
+      "mutability": "MUTABLE",
+      "data": {
+        "url": "links.com",
+        "target": "_blank",
+        "rel": "noopener"
+      }
+    },
+    "11": {
       "type": "wix-draft-plugin-giphy",
       "mutability": "IMMUTABLE",
       "data": {
@@ -727,5 +817,5 @@ export const contentState = deepFreeze({
       }
     }
   },
-  "VERSION": "5.1.0"
+  "VERSION": "6.6.5"
 });
