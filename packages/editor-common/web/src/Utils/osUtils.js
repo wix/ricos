@@ -5,3 +5,7 @@ export function isiOS() {
     !window.MSStream
   );
 }
+
+export function isWin() {
+  return typeof navigator !== 'undefined' && /Win/.test(navigator.userAgent);
+}

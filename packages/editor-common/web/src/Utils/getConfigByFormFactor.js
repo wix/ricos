@@ -1,5 +1,5 @@
 import { get } from 'lodash';
-import { isiOS } from './isiOS';
+import { isiOS } from './osUtils';
 
 export const getConfigByFormFactor = ({ config, isMobile, defaultValue }) => {
   const offsetPath = !isMobile ? 'desktop' : isiOS() ? 'mobile.ios' : 'mobile.android';
