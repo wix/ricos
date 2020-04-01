@@ -106,7 +106,7 @@ const config = {
   // [HTML_TYPE]: {},
   [LINK_TYPE]: linkPluginSettings,
   [LINK_PREVIEW_TYPE]: {
-    disableEmbed: false,
+    enableEmbed: true,
   },
   [MENTION_TYPE]: mentionsPluginSettings,
   [TEXT_HIGHLIGHT_TYPE]: {

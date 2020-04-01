@@ -1,5 +1,5 @@
 export const DEFAULTS = {
   config: {
-    disableEmbed: false,
+    enableEmbed: false,
   },
 };

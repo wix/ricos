@@ -85,5 +85,5 @@ Fullscreen.propTypes = {
   backgroundColor: PropTypes.object,
   foregroundColor: PropTypes.object,
   onClose: PropTypes.func,
-  target: PropTypes.instanceOf(Element),
+  target: PropTypes.elementType,
 };
