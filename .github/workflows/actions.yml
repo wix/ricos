@@ -108,6 +108,5 @@ jobs:
           branch-regex: '.*' # required - regex to match text from the head branch name
           title-template: ' ' # optional - text template to prefix title
           lowercase-branch: true
-          body-template: 'Click below to open app:\n' # optional - text template to prefix body
-          body: 'https://rich-content-%branch%.surge.sh/'
+          body-template: 'Click below to open app: https://rich-content-%branch%.surge.sh/' # optional - text template to prefix body
           uppercase-body: false
