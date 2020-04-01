@@ -44,6 +44,13 @@ const babel = () => {
   });
 };
 
+const typescript = () => {
+  const typescript = require('rollup-plugin-typescript2');
+  return typescript({
+    include: ['*.ts+(|x)', '**/*.ts+(|x), *.js+(|x)', '**/*.js+(|x)'],
+  });
+};
+
 const commonjs = () => {
   const commonjs = require('rollup-plugin-commonjs');
   const named = [
@@ -163,6 +170,11 @@ if (!IS_DEV_ENV) {
 if (process.env.MODULE_ANALYZE) {
   _plugins = [..._plugins, visualizer()];
 }
+
+if (process.env.MODULE_NAME === 'wrapper') {
+  _plugins = [..._plugins, typescript()];
+}
+
 const plugins = shouldExtractCss => {
   _plugins.push(postcss(shouldExtractCss));
   return _plugins;

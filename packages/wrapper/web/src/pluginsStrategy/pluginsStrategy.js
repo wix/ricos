@@ -28,10 +28,11 @@ const getPluginProps = (
         config,
         typeMapper,
         decorators: decorators.map(decorator => decorator(theme, config)),
-        inlineStyleMappers: inlineStyleMappers.map(mapper => mapper(config, initialState)),
+        inlineStyleMappers:
+          initialState && inlineStyleMappers.map(mapper => mapper(config, initialState)),
       };
 
-export default function pluginsStrategy(isEditor, plugins = [], childProps) {
+export default function pluginsStrategy(isEditor, plugins = [], childProps = {}) {
   const emptyAccumulator = isEditor
     ? { config: {}, plugins: [], ModalsMap: {} }
     : { config: {}, typeMappers: [], decorators: [], inlineStyleMappers: [] };
@@ -63,6 +64,7 @@ export default function pluginsStrategy(isEditor, plugins = [], childProps) {
         prev.decorators,
       inlineStyleMappers:
         (inlineStyleMapper &&
+          initialState &&
           prev.inlineStyleMappers.concat([inlineStyleMapper(config, initialState)])) ||
         prev.inlineStyleMappers,
     };

@@ -37,10 +37,14 @@
     "lodash": "^4.0.0",
     "prop-types": "^15.0.0",
     "react": "^16.6.3",
-    "react-dom": "^16.6.3"
+    "react-dom": "^16.6.3",
+    "@types/react": "^16.9.29"
   },
   "devDependencies": {
     "@babel/runtime": "7.2.0",
+    "@types/draft-js": "^0.10.38",
+    "@types/lodash": "^4.14.149",
+    "@types/prop-types": "^15.7.3",
     "babel-jest": "^25.1.0",
     "classnames": "^2.0.0",
     "cross-env": "^5.2.0",
