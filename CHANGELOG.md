@@ -23,7 +23,7 @@
 ### :bug: Bug Fix
 - `editor-common`
   - [#547](https://github.com/wix-incubator/rich-content/pull/547) accessibility issue fixed: focus on hidden elements when tab-clicking
-  - [#873](https://github.com/wix-incubator/rich-content/pull/873) fix: link modal opens with ctrl+k command in windows
+  - [#873](https://github.com/wix-incubator/rich-content/pull/873) fix: ctrl/command support in win/osx
 - `viewer`
     - contextual props are passed to interactions
   
