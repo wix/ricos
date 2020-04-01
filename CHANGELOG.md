@@ -23,6 +23,7 @@
 ### :bug: Bug Fix
 - `editor-common`
   - [#547](https://github.com/wix-incubator/rich-content/pull/547) accessibility issue fixed: focus on hidden elements when tab-clicking
+  - [#872](https://github.com/wix-incubator/rich-content/pull/872) fix: gallery sliders css in mozilla firefox
 - `viewer`
     - contextual props are passed to interactions
   
