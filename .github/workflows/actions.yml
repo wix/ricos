@@ -90,11 +90,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1.1.0
-      - uses: github-actions-up-and-running/pr-comment@v1.0.0
         with:
           node-version: 12
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          message: ${{ env.DOMAIN }}
       - run: npm install
       - run: npm run build
       - run: npm run deploy
