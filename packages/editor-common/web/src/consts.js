@@ -1,4 +1,5 @@
-import { usesMacOSHeuristics } from '@wix/draft-js/lib/KeyBindingUtil';
+import { KeyBindingUtil } from './index';
+const { usesMacOSHeuristics } = KeyBindingUtil;
 
 export const COMMANDS = Object.freeze({
   TITLE: 'header-two',
