@@ -99,7 +99,7 @@ jobs:
   #     SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
   #     SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
 
-  update_pr_domain:
+  comment-domain:
     runs-on: ubuntu-18.04
     steps:
       - uses: tzkhan/pr-update-action@v1
@@ -108,5 +108,5 @@ jobs:
           branch-regex: '.*' # required - regex to match text from the head branch name
           title-template: ' ' # optional - text template to prefix title
           lowercase-branch: true
-          body-template: 'https://rich-content-%branch%.surge.sh/' # optional - text template to prefix body
+          body: 'Click below to open app:\nhttps://rich-content-%branch%.surge.sh/' # optional - text template to prefix body
           uppercase-body: false
