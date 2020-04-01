@@ -105,7 +105,7 @@ jobs:
       - uses: tzkhan/pr-update-action@v1
         with:
           repo-token: '${{ secrets.GITHUB_TOKEN }}' # required - allows the action to make calls to GitHub's rest API
-          branch-regex: \/.* # required - regex to match text from the head branch name
+          branch-regex: '\/.*' # required - regex to match text from the head branch name
           title-template: ' ' # optional - text template to prefix title
           lowercase-branch: true
           body-template: 'Click to open app: https://rich-content-%branch%.surge.sh/' # optional - text template to prefix body
