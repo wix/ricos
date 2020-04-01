@@ -275,6 +275,7 @@ export const deleteBlock = (editorState, blockKey) => {
     anchorOffset,
     focusKey: blockKey,
     focusOffset: block.text.length,
+    hasFocus: true,
   });
   const newContentState = Modifier.removeRange(contentState, selectionRange, 'forward');
   return EditorState.push(editorState, newContentState, 'remove-range');
