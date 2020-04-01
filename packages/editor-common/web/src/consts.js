@@ -1,6 +1,3 @@
-import { KeyBindingUtil } from './index';
-const { usesMacOSHeuristics } = KeyBindingUtil;
-
 export const COMMANDS = Object.freeze({
   TITLE: 'header-two',
   SUBTITLE: 'header-three',
@@ -17,7 +14,7 @@ export const COMMANDS = Object.freeze({
 });
 
 export const MODIFIERS = Object.freeze({
-  COMMAND: usesMacOSHeuristics ? 'command' : 'ctrl',
+  COMMAND: 'command',
   OPTION: 'option',
   SHIFT: 'shift',
 });
