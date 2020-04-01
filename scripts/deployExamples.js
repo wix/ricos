@@ -43,6 +43,7 @@ function deploy({ name, dist = 'dist' }) {
   try {
     console.log(chalk.magenta(`Running "${deployCommand}`));
     exec(deployCommand);
+    return domain;
   } catch (e) {
     console.error(chalk.bold.red(e));
     throw e;
@@ -67,7 +68,9 @@ function run() {
 
     console.log(chalk.blue(`\nDeploying ${example.name} example...`));
     build(example);
-    deploy(example);
+    if (!process.env.DOMAIN) {
+      process.env.DOMAIN = deploy(example);
+    }
 
     process.chdir(path.resolve('../..'));
   }
