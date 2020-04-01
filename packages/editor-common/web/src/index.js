@@ -86,7 +86,7 @@ export {
   getPostContentSummary,
   createSelection,
 } from './Utils/draftUtils';
-export { isiOS, isWin } from './Utils/osUtils';
+export { isiOS } from './Utils/osUtils';
 export { getSelectionStyles } from './Utils/inlineStyleUtils';
 export { getConfigByFormFactor } from './Utils/getConfigByFormFactor';
 export { mergeToolbarSettings } from './Utils/mergeToolbarSettings';

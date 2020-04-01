@@ -4,7 +4,6 @@ import {
   removeLinksInSelection,
   EditorModals,
   getModalStyles,
-  isWin,
 } from 'wix-rich-content-editor-common';
 import TextLinkButton from './TextLinkButton';
 
@@ -54,7 +53,7 @@ export default config => ({
         {
           keyCommand: {
             command: 'link',
-            modifiers: [isWin() ? MODIFIERS.CTRL : MODIFIERS.COMMAND],
+            modifiers: [MODIFIERS.COMMAND],
             key: 'k',
           },
           commandHandler: editorState => {

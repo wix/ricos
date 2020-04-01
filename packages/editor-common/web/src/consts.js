@@ -1,3 +1,5 @@
+import { usesMacOSHeuristics } from '@wix/draft-js/lib/KeyBindingUtil';
+
 export const COMMANDS = Object.freeze({
   TITLE: 'header-two',
   SUBTITLE: 'header-three',
@@ -14,8 +16,7 @@ export const COMMANDS = Object.freeze({
 });
 
 export const MODIFIERS = Object.freeze({
-  COMMAND: 'command',
-  CTRL: 'ctrl',
+  COMMAND: usesMacOSHeuristics ? 'command' : 'ctrl',
   OPTION: 'option',
   SHIFT: 'shift',
 });
