@@ -68,7 +68,7 @@ function run() {
 
     console.log(chalk.blue(`\nDeploying ${example.name} example...`));
     build(example);
-    if (!process.env.DOMAIN) {
+    if (process.env.DOMAIN === 'hey') {
       process.env.DOMAIN = deploy(example);
     }
 
