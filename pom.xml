@@ -16,10 +16,17 @@
 
     <developers>
         <developer>
-            <name>Jonathan Bachman</name>
-            <email>jonathanb@wix.com</email>
+            <name>Shaul Goral</name>
+            <email>shulgo@wix.com</email>
             <roles>
                 <role>owner</role>
+            </roles>
+        </developer>
+        <developer>
+            <name>Oded Soffrin</name>
+            <email>odeds@wix.com</email>
+            <roles>
+                <role>dev</role>
             </roles>
         </developer>
         <developer>
