@@ -348,8 +348,8 @@
   "Poll_PollSettings_Tab_Layout_Section_Answers_Layout_List": "List",
   "Poll_PollSettings_Tab_Layout_Section_Answers_Layout_Grid": "Grid",
   "Poll_PollSettings_Tab_Layout_Section_Answers_Image": "Add an image to each answer",
-  "Poll_PollSettings_Tab_Layout_Section_TextDirection_Header": "Text Direction",
-  "Poll_PollSettings_Tab_Layout_Section_TextDirection_Answers": "Display answers from:",
+  "Poll_PollSettings_Tab_Layout_Section_TextDirection_Header": "Poll Direction",
+  "Poll_PollSettings_Tab_Layout_Section_TextDirection_Header_Tooltip": "For websites in languages that read from right to left, show the poll from right to left.",
   "Poll_PollSettings_Tab_Layout_Section_TextDirection_LTR": "Left to right",
   "Poll_PollSettings_Tab_Layout_Section_TextDirection_RTL": "Right to left",
   "Poll_PollSettings_Tab_Design_Section_Background_Header": "Background",
@@ -379,6 +379,9 @@
   "Poll_PollSettings_Tab_Settings_Section_Results_VoteVisibility": "Show the vote count",
   "Poll_PollSettings_Tab_Settings_Section_Results_VoterAnonymous": "Show what each person voted for",
   "Poll_Viewer_VoteCount": "{{number}} votes",
+  "Poll_Viewer_VoteCount_Modal_Voters_Header" : "{{number}} people voted for this answer",
+  "Poll_Viewer_VoteCount_Modal_Voters_Anonymous" : "+{{anonNumber}} anonymous",  
+  "Poll_Viewer_VoteCount_Modal_Voters_CTA_Follow" : "Follow",
   "Poll_Viewer_ShowAllOptions_CTA": "See All Options",
   "Poll_Viewer_ShowAllResults_CTA": "See All Results"
 }
