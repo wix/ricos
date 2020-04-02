@@ -25,9 +25,7 @@ const generateSubdomain = exampleName => {
 };
 
 async function run() {
-  const inputs = {
-    token: core.getInput('repo-token', { required: true }),
-  };
+  const { REPO_TOKEN } = process.env;
   const request = {
     owner: github.context.repo.owner,
     repo: github.context.repo.repo,
@@ -39,7 +37,7 @@ async function run() {
     console.log(domain);
     return (request.body = bodyPrefix.concat('\n', domain));
   });
-  const client = new github.GitHub(inputs.token);
+  const client = new github.GitHub(REPO_TOKEN);
   const response = await client.pulls.update(request);
 
   core.info(`response: ${response.status}`);
