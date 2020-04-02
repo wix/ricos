@@ -35,7 +35,7 @@
   },
   "dependencies": {
     "classnames": "^2.0.0",
-    "wix-redraft": "^1.1.0",
+    "wix-redraft": "1.1.1",
     "wix-rich-content-common": "7.1.4"
   },
   "peerDependencies": {

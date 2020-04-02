@@ -29,8 +29,9 @@ class GalleryViewer extends React.Component {
         styleParams: { ...styleParams, allowHover: true },
       });
     }
-    this.updateDimensions();
     window.addEventListener('resize', this.updateDimensions);
+    setTimeout(this.updateDimensions, 0);
+    setTimeout(this.updateDimensions, 3000);
   }
 
   componentWillReceiveProps(nextProps) {
