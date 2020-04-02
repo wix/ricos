@@ -2,7 +2,7 @@
 const path = require('path');
 const chalk = require('chalk');
 const execSync = require('child_process').execSync;
-const gitComment = require('gitComment');
+const gitComment = require('./gitComment');
 
 const EXAMPLES_TO_DEPLOY = [
   {

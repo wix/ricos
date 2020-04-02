@@ -1,6 +1,6 @@
 const github = require('@actions/github');
 
-async function gitComment(message) {
+module.exports = async function(message) {
   const { REPO_TOKEN } = process.env;
   const request = {
     owner: github.context.repo.owner,
@@ -10,6 +10,4 @@ async function gitComment(message) {
   request.body = message;
   const client = new github.GitHub(REPO_TOKEN);
   await client.pulls.update(request);
-}
-
-exports.gitComment = gitComment;
+};
