@@ -33,6 +33,7 @@ const galleryMerger = (items, entity) => ({
         height: item.height,
       },
       url: item.url,
+      itemId: item.id || item.url,
     })),
   },
 });

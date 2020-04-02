@@ -38,10 +38,11 @@ const imageConverter = entity => [
 ];
 
 const galleryConverter = entity =>
-  entity.data.items.map(({ metadata, url }) => ({
+  entity.data.items.map(({ metadata, url, itemId }) => ({
     url,
     height: metadata.height,
     width: metadata.width,
+    id: itemId,
     type: 'image',
   }));
 
