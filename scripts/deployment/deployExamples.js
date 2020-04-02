@@ -1,4 +1,5 @@
 /* eslint-disable no-console, fp/no-loops */
+
 const path = require('path');
 const chalk = require('chalk');
 const execSync = require('child_process').execSync;
@@ -46,7 +47,7 @@ function run() {
     build(example);
     deploy(example);
 
-    process.chdir(path.resolve('../../..'));
+    process.chdir(path.resolve('../..'));
   }
 }
 
