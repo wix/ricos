@@ -1,26 +1,14 @@
 const github = require('@actions/github');
 
-const EXAMPLES_TO_DEPLOY = [
-  {
-    name: 'rich-content',
-    path: 'examples/main',
-  },
-  {
-    name: 'rich-content-storybook',
-    path: 'examples/storybook',
-    buildCmd: 'build-storybook -s public',
-    dist: 'storybook-static',
-  },
-];
-
 const fqdn = subdomain => `${subdomain}.surge.sh/`;
 
-const generateSubdomain = exampleName => {
+const generateSubdomain = () => {
   const { version } = require('../lerna.json');
   const { GITHUB_REF } = process.env;
   const branchName = GITHUB_REF.split('/').pop();
+  console.log('branchName:', branchName);
   const postfix = !branchName.startsWith('release') ? branchName : version;
-  return exampleName + `-${postfix.replace(/(\.)|(\/)/g, '-')}`;
+  return `https://rich-content-${postfix.replace(/(\.)|(\/)/g, '-')}`;
 };
 
 async function run() {
@@ -31,11 +19,10 @@ async function run() {
     pull_number: github.context.payload.pull_request.number,
   };
   const bodyPrefix = 'Click below to open app:';
-  EXAMPLES_TO_DEPLOY.map(example => {
-    const domain = fqdn(generateSubdomain(example.name));
-    console.log(domain);
-    return (request.body = bodyPrefix.concat('\n', domain));
-  });
+  const domain = fqdn(generateSubdomain());
+  console.log('Domain:', domain);
+  request.body = bodyPrefix.concat('\n', domain);
+
   const client = new github.GitHub(REPO_TOKEN);
   await client.pulls.update(request);
 }
