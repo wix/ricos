@@ -30,8 +30,6 @@ class GalleryViewer extends React.Component {
       });
     }
     window.addEventListener('resize', this.updateDimensions);
-    setTimeout(this.updateDimensions, 0);
-    setTimeout(this.updateDimensions, 3000);
   }
 
   componentWillReceiveProps(nextProps) {
