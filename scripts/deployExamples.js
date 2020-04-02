@@ -1,4 +1,5 @@
 /* eslint-disable no-console, fp/no-loops */
+
 const path = require('path');
 const chalk = require('chalk');
 const execSync = require('child_process').execSync;
@@ -50,7 +51,7 @@ function deploy({ name, dist = 'dist' }) {
   }
 }
 
-async function run() {
+function run() {
   let skip;
   const { SURGE_LOGIN, GITHUB_ACTIONS } = process.env;
   let message = 'Click below to open app:';
