@@ -71,6 +71,7 @@ function run() {
     console.log(chalk.blue(`\nDeploying ${example.name} example...`));
     build(example);
     deploy(example);
+
     process.chdir(path.resolve('../..'));
   }
 }

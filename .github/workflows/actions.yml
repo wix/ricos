@@ -84,6 +84,7 @@ jobs:
           node-version: 12
       - run: npm install
       - run: npm run lint
+
   deploy-examples:
     runs-on: ubuntu-18.04
     steps:
