@@ -6,7 +6,7 @@ const execSync = require('child_process').execSync;
 const github = require('@actions/github');
 const gitPRComment = require('./gitPRComment');
 
-const isPullRequest = !!github.context.eventName === 'pull_request';
+const isPullRequest = github.context.eventName === 'pull_request';
 
 const EXAMPLES_TO_DEPLOY = [
   {
