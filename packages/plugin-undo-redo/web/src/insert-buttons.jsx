@@ -19,7 +19,7 @@ export default ({ helpers, t, settings, UndoButton, RedoButton }) => {
     },
     {
       type: 'undo-redo',
-      name: t('Mobile_RedoPlugin_InsertButton'),
+      name: t('RedoPlugin_InsertButton'),
       tooltipText: t('Redo Button'),
       toolbars: [TOOLBARS.FOOTER],
       Icon: redoIcon,

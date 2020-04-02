@@ -5,6 +5,9 @@
   justify-items: center;
   align-items: center;
   justify-content: center;
+  height: max-content;
+  max-height: 400px;
+
   .panelWithSearch {
     min-height: 400px;
   }
@@ -34,7 +37,7 @@
     letter-spacing: 1px;
   }
   .withSearch {
-    padding-top: 52px;
+    padding-top: 64px;
   }
 
   .pluginsSection {
