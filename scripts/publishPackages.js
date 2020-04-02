@@ -109,8 +109,10 @@ function publishPackages() {
 
 function run() {
   let skip;
-  const { IS_BUILD_AGENT } = process.env;
-  if (!IS_BUILD_AGENT) {
+  const { FORCE_PUBLISH, TRAVIS_BRANCH, CI } = process.env;
+  if (!TRAVIS_BRANCH.startsWith('release') && !FORCE_PUBLISH) {
+    skip = 'Not on a release branch';
+  } else if (!CI) {
     skip = 'Not in CI';
   }
   if (skip) {
@@ -118,7 +120,7 @@ function run() {
     return false;
   }
 
-  // createNpmRc();
+  createNpmRc();
   publishPackages();
 }
 
