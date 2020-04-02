@@ -19,6 +19,14 @@ const EXAMPLES_TO_DEPLOY = [
   },
 ];
 
+const generateMessage = domains => {
+  let message = 'Click below to open examples:\n';
+  domains.map(({ name, domain }) => {
+    return (message = message.concat(`${name}: https://`, domain));
+  });
+  return message;
+};
+
 const exec = cmd => execSync(cmd, { stdio: 'inherit' });
 
 const fqdn = subdomain => `${subdomain}.surge.sh/`;
@@ -54,7 +62,7 @@ function deploy({ name, dist = 'dist' }) {
 
 function run() {
   let skip;
-  let message = 'Click below to open examples:';
+  const domains = [];
   const { SURGE_LOGIN, GITHUB_ACTIONS } = process.env;
   if (!GITHUB_ACTIONS) {
     skip = 'Not in CI';
@@ -71,11 +79,10 @@ function run() {
 
     console.log(chalk.blue(`\nDeploying ${example.name} example...`));
     build(example);
-    const domain = deploy(example);
-    message = message.concat(`\n${example.name}: https://`, domain);
-
+    domains.push({ name: example.name, domain: deploy(example) });
     process.chdir(path.resolve('../..'));
   }
+  const message = generateMessage(domains);
   gitPRComment(message);
 }
 
