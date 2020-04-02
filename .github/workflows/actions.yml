@@ -102,7 +102,7 @@ jobs:
   comment-domain:
     runs-on: ubuntu-18.04
     steps:
-      - uses: actions/checkout@v2
+      - uses: tzkhan/pr-update-action@v1
         with:
-          repo-token: '${{ secrets.GITHUB_TOKEN }}'
-    - run: npm run deployDomain
+          repo-token: '${{ secrets.GITHUB_TOKEN }}' # required - allows the action to make calls to GitHub's rest API
+      - run: npm run deployDomain
