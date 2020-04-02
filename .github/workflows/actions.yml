@@ -1,89 +1,89 @@
 name: action
-# on: push
+on: push
 
-# jobs:
-#   visual-tests:
-#     runs-on: ubuntu-18.04
-#     steps:
-#       - name: Checkout
-#         uses: actions/checkout@v2
+jobs:
+  visual-tests:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
 
-#       - name: Cypress run
-#         uses: cypress-io/github-action@v1.16.1
-#         with:
-#           build: npm run build:test
-#           start: npm run e2e:app:run
-#           wait-on: 'http://localhost:3002'
-#           config: video=true
-#       - uses: actions/upload-artifact@v1
-#         if: failure()
-#         with:
-#           name: cypress-screenshots
-#           path: e2e/cypress/screenshots
-#       - uses: actions/upload-artifact@v1
-#         if: always()
-#         with:
-#           name: cypress-videos
-#           path: e2e/cypress/videos
+      - name: Cypress run
+        uses: cypress-io/github-action@v1.16.1
+        with:
+          build: npm run build:test
+          start: npm run e2e:app:run
+          wait-on: 'http://localhost:3002'
+          config: video=true
+      - uses: actions/upload-artifact@v1
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: e2e/cypress/screenshots
+      - uses: actions/upload-artifact@v1
+        if: always()
+        with:
+          name: cypress-videos
+          path: e2e/cypress/videos
 
-#       - name: Update Applitools batch status
-#         if: always()
-#         uses: wei/curl@v1.1.1
-#         with:
-#           args: -d "" -X POST https://wixeyesapi.applitools.com/api/externals/github/servers/github.com/commit/${{ github.sha }}/complete?apiKey=${{ secrets.APPLITOOLS_API_KEY }}
-#     env:
-#       APPLITOOLS_API_KEY: ${{ secrets.APPLITOOLS_API_KEY }}
-#       APPLITOOLS_SERVER_URL: ${{ secrets.APPLITOOLS_SERVER_URL }}
-#       APPLITOOLS_BATCH_ID: ${{ github.sha }}
+      - name: Update Applitools batch status
+        if: always()
+        uses: wei/curl@v1.1.1
+        with:
+          args: -d "" -X POST https://wixeyesapi.applitools.com/api/externals/github/servers/github.com/commit/${{ github.sha }}/complete?apiKey=${{ secrets.APPLITOOLS_API_KEY }}
+    env:
+      APPLITOOLS_API_KEY: ${{ secrets.APPLITOOLS_API_KEY }}
+      APPLITOOLS_SERVER_URL: ${{ secrets.APPLITOOLS_SERVER_URL }}
+      APPLITOOLS_BATCH_ID: ${{ github.sha }}
 
-#   content-state-tests:
-#     runs-on: ubuntu-18.04
-#     steps:
-#       - name: Checkout
-#         uses: actions/checkout@v2
+  content-state-tests:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
 
-#       - name: Cypress run
-#         uses: cypress-io/github-action@v1.16.1
-#         with:
-#           build: npm run build:test
-#           start: npm run e2e:app:run
-#           wait-on: 'http://localhost:3002'
-#           config: video=true
-#           env: MATCH_CONTENT_STATE=true
+      - name: Cypress run
+        uses: cypress-io/github-action@v1.16.1
+        with:
+          build: npm run build:test
+          start: npm run e2e:app:run
+          wait-on: 'http://localhost:3002'
+          config: video=true
+          env: MATCH_CONTENT_STATE=true
 
-#       - uses: actions/upload-artifact@v1
-#         if: failure()
-#         with:
-#           name: cypress-screenshots
-#           path: e2e/cypress/screenshots
-#       - uses: actions/upload-artifact@v1
-#         if: always()
-#         with:
-#           name: cypress-videos
-#           path: e2e/cypress/videos
-#     env:
-#       APPLITOOLS_IS_DISABLED: true
+      - uses: actions/upload-artifact@v1
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: e2e/cypress/screenshots
+      - uses: actions/upload-artifact@v1
+        if: always()
+        with:
+          name: cypress-videos
+          path: e2e/cypress/videos
+    env:
+      APPLITOOLS_IS_DISABLED: true
 
-#   unit-tests:
-#     runs-on: ubuntu-18.04
-#     steps:
-#       - uses: actions/checkout@v2
-#       - uses: actions/setup-node@v1.1.0
-#         with:
-#           node-version: 12
-#       - run: npm install
-#       - run: npm run build
-#       - run: npm run test:unit
+  unit-tests:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1.1.0
+        with:
+          node-version: 12
+      - run: npm install
+      - run: npm run build
+      - run: npm run test:unit
 
-#   lint:
-#     runs-on: ubuntu-18.04
-#     steps:
-#       - uses: actions/checkout@v2
-#       - uses: actions/setup-node@v1.1.0
-#         with:
-#           node-version: 12
-#       - run: npm install
-#       - run: npm run lint
+  lint:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1.1.0
+        with:
+          node-version: 12
+      - run: npm install
+      - run: npm run lint
 
 on: pull_request
 jobs:
