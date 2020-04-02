@@ -85,7 +85,7 @@ name: action
 #       - run: npm install
 #       - run: npm run lint
 
-on: push
+on: pull_request
 jobs:
   deploy-examples:
     runs-on: ubuntu-18.04
