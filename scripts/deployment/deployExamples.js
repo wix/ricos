@@ -46,7 +46,7 @@ function run() {
     build(example);
     deploy(example);
 
-    process.chdir(path.resolve('../..'));
+    process.chdir(path.resolve('../../..'));
   }
 }
 
