@@ -19,6 +19,10 @@
 - `gallery`
   - [#877](https://github.com/wix-incubator/rich-content/pull/877) fix gallery plugin blurry pictures
 
+### :house: Internal
+- `general`
+  - [#878](https://github.com/wix-incubator/rich-content/pull/878) added git comment to pr's containing surge-examples url's
+
 </details>
 <hr/>
 
