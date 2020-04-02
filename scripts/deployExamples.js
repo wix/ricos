@@ -1,5 +1,5 @@
 /* eslint-disable no-console, fp/no-loops */
-
+const github = require('@actions/github');
 const path = require('path');
 const chalk = require('chalk');
 const execSync = require('child_process').execSync;
@@ -50,9 +50,15 @@ function deploy({ name, dist = 'dist' }) {
   }
 }
 
-function run() {
+async function run() {
   let skip;
-  const { SURGE_LOGIN, GITHUB_ACTIONS } = process.env;
+  const { SURGE_LOGIN, GITHUB_ACTIONS, REPO_TOKEN } = process.env;
+  const bodyPrefix = 'Click below to open app:';
+  const request = {
+    owner: github.context.repo.owner,
+    repo: github.context.repo.repo,
+    pull_number: github.context.payload.pull_request.number,
+  };
   if (!GITHUB_ACTIONS) {
     skip = 'Not in CI';
   } else if (!SURGE_LOGIN) {
@@ -68,12 +74,15 @@ function run() {
 
     console.log(chalk.blue(`\nDeploying ${example.name} example...`));
     build(example);
-    if (process.env.DOMAIN === 'hey') {
-      process.env.DOMAIN = deploy(example);
-    }
+    const domain = deploy(example);
+    console.log(domain);
+    request.body = bodyPrefix.concat('\n', domain);
 
     process.chdir(path.resolve('../..'));
   }
+
+  const client = new github.GitHub(REPO_TOKEN);
+  await client.pulls.update(request);
 }
 
 run();
