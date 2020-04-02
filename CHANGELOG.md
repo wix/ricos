@@ -17,6 +17,7 @@
   
 ### :bug: Bug Fix
 - `gallery`
+  - [#879](https://github.com/wix-incubator/rich-content/pull/879) blurry pictures & not rendering
   - [#877](https://github.com/wix-incubator/rich-content/pull/877) fix gallery plugin blurry pictures
 
 </details>
