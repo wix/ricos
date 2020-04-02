@@ -334,6 +334,7 @@
   "Poll_Presets_Popup_Option_TextList" : "Text in a list",
   "Poll_Presets_Popup_Option_TextListAndMainImage" : "Text & main image",
   "Poll_Presets_Popup_Option_ImagesGrid" : "Images in a grid",
+  "Poll_Presets_Popup_CTA" : "Select",
   "Poll_PollSettings_Common_Header": "Customize Poll",
   "Poll_PollSettings_Tab_Layout_TabName": "Layout",
   "Poll_PollSettings_Tab_Design_TabName": "Design",
