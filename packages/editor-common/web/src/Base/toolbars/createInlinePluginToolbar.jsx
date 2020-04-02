@@ -2,18 +2,19 @@
 import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
 import classNames from 'classnames';
-import Separator from '../Components/Separator';
-import { BUTTONS } from './buttons';
-import toolbarStyles from '../../statics/styles/plugin-toolbar.scss';
-import RenderToolbarContent, {
+import Separator from '../../Components/Separator';
+import { BUTTONS } from '../buttons';
+import toolbarStyles from '../../../statics/styles/plugin-toolbar.scss';
+import RenderToolbarContent from './ToolbarContent';
+import {
   getInitialState,
-  constructor,
+  setVariables,
   shouldComponentUpdate,
   onOverrideContent,
   hideToolbar,
   getRelativePositionStyle,
   showToolbar,
-} from './createBaseToolbar';
+} from './toolbarUtils';
 
 export default function createInlinePluginToolbar({
   buttons,
@@ -37,7 +38,7 @@ export default function createInlinePluginToolbar({
         visibilityFn,
         displayOptions,
         ToolbarDecoration,
-      } = constructor({ buttons, getToolbarSettings, isMobile });
+      } = setVariables({ buttons, getToolbarSettings, isMobile });
       this.structure = structure;
       this.offset = offset;
       this.shouldCreate = shouldCreate;

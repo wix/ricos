@@ -65,12 +65,14 @@ const createLinkPlugin = (config = {}) => {
 
   const onChange = editorState => {
     const selection = editorState.getSelection();
+    let commonPubsubData;
     if (hasLinksInSelection(editorState) && selection.isCollapsed()) {
       const boundingRect = getVisibleSelectionRect(window);
-      commonPubsub.set('cursorOnInlinePlugin', { type, editorState, boundingRect });
+      commonPubsubData = { type, editorState, boundingRect };
     } else {
-      commonPubsub.set('cursorOnInlinePlugin', null);
+      commonPubsubData = null;
     }
+    commonPubsub.set('cursorOnInlinePlugin', commonPubsubData);
     let newEditorState = editorState;
     if (isPasteChange(editorState)) {
       newEditorState = fixPastedLinks(editorState, { anchorTarget, relValue });

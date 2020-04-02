@@ -1,7 +1,7 @@
 import { includes } from 'lodash';
 import createBaseComponent from './createBaseComponent';
-import createAtomicPluginToolbar from './createAtomicPluginToolbar';
-import createInlinePluginToolbar from './createInlinePluginToolbar';
+import createAtomicPluginToolbar from './toolbars/createAtomicPluginToolbar';
+import createInlinePluginToolbar from './toolbars/createInlinePluginToolbar';
 import createInsertPluginButton from './createBaseInsertPluginButton';
 import { deleteBlock, setEntityData } from '../Utils/draftUtils';
 import { simplePubsub } from '../Utils/simplePubsub';

@@ -2,20 +2,21 @@
 import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
 import classNames from 'classnames';
-import Separator from '../Components/Separator';
-import BaseToolbarButton from './baseToolbarButton';
-import { BUTTONS, BUTTONS_BY_KEY, BlockLinkButton, deleteButton } from './buttons';
-import Panel from '../Components/Panel';
-import toolbarStyles from '../../statics/styles/plugin-toolbar.scss';
-import RenderToolbarContent, {
+import Separator from '../../Components/Separator';
+import BaseToolbarButton from '../baseToolbarButton';
+import { BUTTONS, BUTTONS_BY_KEY, BlockLinkButton, deleteButton } from '../buttons';
+import Panel from '../../Components/Panel';
+import toolbarStyles from '../../../statics/styles/plugin-toolbar.scss';
+import RenderToolbarContent from './ToolbarContent';
+import {
   getInitialState,
-  constructor,
+  setVariables,
   shouldComponentUpdate,
   onOverrideContent,
   hideToolbar,
   getRelativePositionStyle,
   showToolbar,
-} from './createBaseToolbar';
+} from './toolbarUtils';
 
 export default function createAtomicPluginToolbar({
   buttons,
@@ -44,7 +45,7 @@ export default function createAtomicPluginToolbar({
         visibilityFn,
         displayOptions,
         ToolbarDecoration,
-      } = constructor({ buttons, getToolbarSettings, isMobile });
+      } = setVariables({ buttons, getToolbarSettings, isMobile });
       this.structure = structure;
       this.offset = offset;
       this.shouldCreate = shouldCreate;

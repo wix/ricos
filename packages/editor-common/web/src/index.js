@@ -15,7 +15,6 @@ export { default as BUTTONS } from './Base/buttons/keys';
 export { default as createBasePlugin } from './Base/createBasePlugin';
 export { default as createBaseComponent } from './Base/createBaseComponent';
 export { default as createBaseInsertPluginButton } from './Base/createBaseInsertPluginButton';
-export { default as createBaseToolbar } from './Base/createBaseToolbar';
 export { default as baseToolbarButton } from './Base/baseToolbarButton';
 
 // Components
