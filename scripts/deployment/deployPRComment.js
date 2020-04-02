@@ -1,5 +1,5 @@
-const { EXAMPLES_TO_DEPLOY, fqdn, generateSubdomain } = require('./deployExamples');
-const { gitPRComment } = require('./gitPRComment');
+const { gitPRComment } = require('../gitPRComment');
+const { EXAMPLES_TO_DEPLOY, fqdn, generateSubdomain } = require('./deployUtils');
 
 const generateMessage = () => {
   let message = 'Click below to open examples:';

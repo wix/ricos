@@ -1,36 +1,10 @@
 /* eslint-disable no-console, fp/no-loops */
-
 const path = require('path');
 const chalk = require('chalk');
 const execSync = require('child_process').execSync;
-const github = require('@actions/github');
-
-exports.EXAMPLES_TO_DEPLOY = [
-  {
-    name: 'rich-content',
-    path: 'examples/main',
-  },
-  {
-    name: 'rich-content-storybook',
-    path: 'examples/storybook',
-    buildCmd: 'build-storybook -s public',
-    dist: 'storybook-static',
-  },
-];
+const { EXAMPLES_TO_DEPLOY, fqdn, generateSubdomain } = require('./deployUtils');
 
 const exec = cmd => execSync(cmd, { stdio: 'inherit' });
-
-exports.fqdn = subdomain => `${subdomain}.surge.sh/`;
-
-exports.generateSubdomain = (exampleName, isPullRequest) => {
-  const { version } = require('../lerna.json');
-  const GITHUB_REF = isPullRequest
-    ? github.context.payload.pull_request.head.ref
-    : process.env.GITHUB_REF;
-  const branchName = GITHUB_REF.split('/').pop();
-  const postfix = !branchName.startsWith('release') ? branchName : version;
-  return exampleName + `-${postfix.replace(/(\.)|(\/)/g, '-')}`;
-};
 
 function build({ buildCmd = 'npm run build' }) {
   console.log(chalk.magenta(`Running: "${buildCmd}"`));
@@ -40,8 +14,8 @@ function build({ buildCmd = 'npm run build' }) {
 
 function deploy({ name, dist = 'dist' }) {
   console.log(chalk.cyan(`Deploying ${name} example to surge...`));
-  const subdomain = exports.generateSubdomain(name);
-  const domain = exports.fqdn(subdomain);
+  const subdomain = generateSubdomain(name);
+  const domain = fqdn(subdomain);
   const deployCommand = `npx surge ${dist} ${domain}`;
   try {
     console.log(chalk.magenta(`Running "${deployCommand}`));
@@ -65,7 +39,7 @@ function run() {
     return false;
   }
 
-  for (const example of exports.EXAMPLES_TO_DEPLOY) {
+  for (const example of EXAMPLES_TO_DEPLOY) {
     process.chdir(path.resolve(process.cwd(), example.path));
 
     console.log(chalk.blue(`\nDeploying ${example.name} example...`));
