@@ -20,6 +20,7 @@
     "watch:core": "LERNA_IGNORE='wix-rich-content-@(plugin-*|fullscreen)' npm run watch",
     "release": "node scripts/publishPackages",
     "deploy": "node scripts/deployExamples",
+    "deployPRComment": "node scripts/deployPRComment",
     "createVersion": "node scripts/createVersion",
     "storybook": "npm run start --prefix examples/storybook",
     "exampleApp": "npm run start --prefix examples/main",
