@@ -20,9 +20,9 @@ const EXAMPLES_TO_DEPLOY = [
 ];
 
 const generateMessage = domains => {
-  let message = 'Click below to open examples:\n';
+  let message = 'Click below to open examples:';
   domains.map(({ name, domain }) => {
-    return (message = message.concat(`${name}: https://`, domain));
+    return (message = message.concat(`\n${name}: https://`, domain));
   });
   return message;
 };

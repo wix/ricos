@@ -1,5 +1,11 @@
 name: action
-on: push
+on:
+  push:
+    env:
+      isPullRequest: false
+  pull_request:
+    env:
+      isPullRequest: true
 
 jobs:
   visual-tests:
@@ -98,3 +104,4 @@ jobs:
       SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
       SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
       REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      isPullRequest: $isPullRequest
