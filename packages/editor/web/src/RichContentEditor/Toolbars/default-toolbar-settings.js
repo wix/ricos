@@ -77,8 +77,8 @@ export const getDefaultToolbarSettings = ({ pluginButtons, textButtons, pluginTe
       getButtons: () => {
         const buttons = pluginButtons
           .filter(({ buttonSettings }) => buttonSettings.toolbars.includes(TOOLBARS.SIDE))
-          .map(({ component, buttonSettings: { name } }) => {
-            return { component, name };
+          .map(({ component, buttonSettings: { name, section } }) => {
+            return { component, name, section: section || 'Basic' };
           });
         return {
           desktop: buttons,

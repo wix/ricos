@@ -15,16 +15,17 @@ export default class SideToolbarPanelContent extends Component {
       hidePopup,
       t,
       options = {},
+      isMobile,
     } = this.props;
     const setSearchTag = searchTag => this.setState({ searchTag });
-    const { showSearch, splitToSections } = options;
+    const { showSearch = structure.length > 8, splitToSections } = options;
     return (
       <div
         className={classNames(Styles.sideToolbarPanelWrapper, {
           [Styles.panelWithSearch]: showSearch,
         })}
       >
-        {showSearch && (
+        {showSearch && !isMobile && (
           <div className={Styles.searchWrapper}>
             <TextSearchInput
               onClose={hidePopup}
@@ -35,7 +36,11 @@ export default class SideToolbarPanelContent extends Component {
           </div>
         )}
 
-        <div className={classNames(Styles.pluginsWrapper, { [Styles.withSearch]: showSearch })}>
+        <div
+          className={classNames(Styles.pluginsWrapper, {
+            [Styles.withSearch]: showSearch && !isMobile,
+          })}
+        >
           <SideToolbarPluginsSection
             theme={theme}
             getEditorState={getEditorState}
@@ -44,7 +49,7 @@ export default class SideToolbarPanelContent extends Component {
             searchTag={this.state?.searchTag}
             t={t}
             hidePopup={hidePopup}
-            splitToSections={splitToSections}
+            splitToSections={!this.state?.searchTag && splitToSections}
           />
         </div>
       </div>
@@ -60,4 +65,5 @@ SideToolbarPanelContent.propTypes = {
   t: PropTypes.func,
   hidePopup: PropTypes.func,
   options: PropTypes.object,
+  isMobile: PropTypes.bool,
 };

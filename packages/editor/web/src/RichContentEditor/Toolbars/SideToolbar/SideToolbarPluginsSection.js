@@ -4,6 +4,10 @@ import Styles from '../../../../statics/styles/side-toolbar-panel.scss';
 import { getPluginsForTag } from '../../pluginsSearchTags';
 import { TOOLBARS } from 'wix-rich-content-editor-common';
 
+const shouldSplitByDefault = structure => {
+  const numberOfBasicPlugins = structure.filter(({ section }) => section === 'Basic').length;
+  return numberOfBasicPlugins > 1 && structure.length - numberOfBasicPlugins > 1;
+};
 const SideToolbarPluginsSection = ({
   theme,
   getEditorState,
@@ -12,7 +16,7 @@ const SideToolbarPluginsSection = ({
   searchTag,
   t,
   hidePopup,
-  splitToSections,
+  splitToSections = shouldSplitByDefault(structure),
 }) => {
   const pluginsForTag = searchTag && getPluginsForTag(searchTag, t);
   const plugins = !searchTag
@@ -27,27 +31,42 @@ const SideToolbarPluginsSection = ({
     );
   }
 
-  return [
-    splitToSections && (
-      <div key="basicSection" className={Styles.pluginsSection}>
-        Basic
-      </div>
-    ),
-    <div key="pluginsButtons" className={Styles.buttonsWrapper}>
-      {plugins.map(({ component: Component }, index) => (
-        <div key={index} className={Styles.buttonWrapper}>
-          <Component
-            getEditorState={getEditorState}
-            setEditorState={setEditorState}
-            theme={theme}
-            showName
-            toolbarName={TOOLBARS.SIDE}
-            hidePopup={hidePopup}
-          />
+  const pluginSectionRenderer = section => {
+    const pluginsToRender = section
+      ? plugins.filter(({ section: pluginSection }) => pluginSection === section)
+      : plugins;
+    return [
+      section && (
+        <div key={section} className={Styles.pluginsSection}>
+          {section}
         </div>
-      ))}
-    </div>,
-  ];
+      ),
+      <div key="pluginsButtons" className={Styles.buttonsWrapper}>
+        {pluginsToRender.map(({ component: Component }, index) => (
+          <div key={index} className={Styles.buttonWrapper}>
+            <Component
+              getEditorState={getEditorState}
+              setEditorState={setEditorState}
+              theme={theme}
+              showName
+              toolbarName={TOOLBARS.SIDE}
+              hidePopup={hidePopup}
+            />
+          </div>
+        ))}
+      </div>,
+    ];
+  };
+
+  const sections = [];
+  splitToSections &&
+    structure.forEach(({ section }) => !sections.includes(section) && sections.push(section));
+
+  if (sections.length > 0) {
+    return sections.map(section => pluginSectionRenderer(section));
+  } else {
+    return pluginSectionRenderer();
+  }
 };
 
 SideToolbarPluginsSection.propTypes = {
