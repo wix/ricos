@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { RichContentViewer } from 'wix-rich-content-viewer';
-import { debounce } from 'lodash';
-import Measure from 'react-measure';
 import { mergeStyles } from 'wix-rich-content-common';
 import { interactionMap } from '../Interactions/interactionMap';
 import { defaultTransformation } from './default-transformation';
@@ -28,12 +26,6 @@ class RichContentPreview extends Component {
     this.setState({ isPreviewExpanded: true });
   };
 
-  onResize = debounce(({ bounds }) => this.updateBounds(bounds), 100);
-
-  updateBounds = editorBounds => {
-    this.setState({ editorBounds });
-  };
-
   render() {
     const { transformation, initialState, config, ...rest } = this.props;
     const previewState = this.state.isPreviewExpanded
@@ -48,13 +40,9 @@ class RichContentPreview extends Component {
       },
     };
     return (
-      <Measure onResize={this.onResize}>
-        {({ measureRef }) => (
-          <div className={styles.preview_container} ref={measureRef}>
-            <RichContentViewer initialState={previewState} config={previewConfig} {...rest} />
-          </div>
-        )}
-      </Measure>
+      <div className={styles.preview_container}>
+        <RichContentViewer initialState={previewState} config={previewConfig} {...rest} />
+      </div>
     );
   }
 }
