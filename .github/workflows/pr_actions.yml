@@ -1,4 +1,4 @@
-name: action
+name: Deployer
 on: pull_request
 jobs:
   deploy-examples:
