@@ -3,7 +3,7 @@
 const path = require('path');
 const chalk = require('chalk');
 const execSync = require('child_process').execSync;
-const gitComment = require('./gitComment');
+// const gitComment = require('./gitComment');
 
 const EXAMPLES_TO_DEPLOY = [
   {
@@ -75,7 +75,8 @@ function run() {
 
     process.chdir(path.resolve('../..'));
   }
-  gitComment(message);
+  console.log(message);
+  // gitComment(message);
 }
 
 run();
