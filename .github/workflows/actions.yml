@@ -99,15 +99,3 @@ jobs:
       SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
       SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
       REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  # comment-domain:
-  #   runs-on: ubuntu-18.04
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #     - uses: actions/setup-node@v1.1.0
-  #       with:
-  #         node-version: 12
-  #     - run: npm install
-  #     - run: npm run build
-  #     - run: npm run deployDomain
-  #   env:
-  #     REPO_TOKEN: '${{ secrets.GITHUB_TOKEN }}'

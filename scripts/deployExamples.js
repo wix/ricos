@@ -1,8 +1,8 @@
 /* eslint-disable no-console, fp/no-loops */
-const github = require('@actions/github');
 const path = require('path');
 const chalk = require('chalk');
 const execSync = require('child_process').execSync;
+const gitComment = require('gitComment');
 
 const EXAMPLES_TO_DEPLOY = [
   {
@@ -52,13 +52,8 @@ function deploy({ name, dist = 'dist' }) {
 
 async function run() {
   let skip;
-  const { SURGE_LOGIN, GITHUB_ACTIONS, REPO_TOKEN } = process.env;
+  const { SURGE_LOGIN, GITHUB_ACTIONS } = process.env;
   let message = 'Click below to open app:';
-  const request = {
-    owner: github.context.repo.owner,
-    repo: github.context.repo.repo,
-    pull_number: github.context.payload.pull_request.number,
-  };
   if (!GITHUB_ACTIONS) {
     skip = 'Not in CI';
   } else if (!SURGE_LOGIN) {
@@ -75,14 +70,11 @@ async function run() {
     console.log(chalk.blue(`\nDeploying ${example.name} example...`));
     build(example);
     const domain = deploy(example);
-    console.log('Domain:', domain);
-    message = message.concat('\n', domain);
+    message = message.concat(`\n${example.name}: https://`, domain);
 
     process.chdir(path.resolve('../..'));
   }
-  request.body = message;
-  const client = new github.GitHub(REPO_TOKEN);
-  await client.pulls.update(request);
+  gitComment(message);
 }
 
 run();
