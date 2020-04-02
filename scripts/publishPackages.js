@@ -118,7 +118,7 @@ function run() {
     return false;
   }
 
-  // createNpmRc();
+  //createNpmRc();
   publishPackages();
 }
 

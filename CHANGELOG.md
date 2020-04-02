@@ -15,23 +15,25 @@
     Click to see more.
   </summary>
   
+### :bug: Bug Fix
+- `gallery`
+  - [#877](https://github.com/wix-incubator/rich-content/pull/877) fix gallery plugin blurry pictures
 
 </details>
 <hr/>
 
-## 7.1.4 (Apr 1, 2020)
-### :bug: Bug Fix
-- `editor-common`
-  - [#547](https://github.com/wix-incubator/rich-content/pull/547) accessibility issue fixed: focus on hidden elements when tab-clicking
-  - [#873](https://github.com/wix-incubator/rich-content/pull/873) fix: ctrl/command support in win/osx
-- `viewer`
-    - contextual props are passed to interactions
-  
+## 7.1.4 (Apr 2, 2020)
 ### :rocket: New Feature
 - `html`
   - [#868](https://github.com/wix-incubator/rich-content/pull/868) save on click outside in html plugin
 - `embed`
   - [#689](https://github.com/wix-incubator/rich-content/pull/689) embed for supported links
+### :bug: Bug Fix
+- `editor-common`
+  - [#547](https://github.com/wix-incubator/rich-content/pull/547) accessibility issue fixed: focus on hidden elements when tab-clicking
+  - [#873](https://github.com/wix-incubator/rich-content/pull/873) fix: ctrl/command support in win/osx
+- `viewer`
+  - [#867](https://github.com/wix-incubator/rich-content/pull/867) contextual props are passed to interactions
 
 ### :house: Internal
 - `emoji`
