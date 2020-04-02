@@ -6,6 +6,8 @@ const execSync = require('child_process').execSync;
 const github = require('@actions/github');
 const gitPRComment = require('./gitPRComment');
 
+const isPullRequest = !!github.context.payload.pull_request.head.ref;
+
 const EXAMPLES_TO_DEPLOY = [
   {
     name: 'rich-content',
@@ -33,7 +35,6 @@ const fqdn = subdomain => `${subdomain}.surge.sh/`;
 
 const generateSubdomain = exampleName => {
   const { version } = require('../lerna.json');
-  const { isPullRequest } = process.env;
   const GITHUB_REF = isPullRequest
     ? github.context.payload.pull_request.head.ref
     : process.env.GITHUB_REF;
@@ -66,7 +67,7 @@ function deploy({ name, dist = 'dist' }) {
 function run() {
   let skip;
   const domains = [];
-  const { SURGE_LOGIN, GITHUB_ACTIONS, isPullRequest } = process.env;
+  const { SURGE_LOGIN, GITHUB_ACTIONS } = process.env;
   if (!GITHUB_ACTIONS) {
     skip = 'Not in CI';
   } else if (!SURGE_LOGIN) {
