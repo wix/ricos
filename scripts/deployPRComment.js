@@ -5,7 +5,6 @@ const generateMessage = () => {
   let message = 'Click below to open examples:';
   EXAMPLES_TO_DEPLOY.map(example => {
     const domain = fqdn(generateSubdomain(example.name, true));
-    console.log(domain);
     return (message = message.concat(`\n${example.name}: https://${domain}`));
   });
   return message;
