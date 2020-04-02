@@ -1,5 +1,6 @@
 name: action
 on: pull_request
+jobs:
   deploy-pr-comment:
     runs-on: ubuntu-18.04
     steps:
