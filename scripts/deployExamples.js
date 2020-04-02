@@ -3,7 +3,8 @@
 const path = require('path');
 const chalk = require('chalk');
 const execSync = require('child_process').execSync;
-// const gitComment = require('./gitComment');
+const github = require('@actions/github');
+const gitComment = require('./gitComment');
 
 const EXAMPLES_TO_DEPLOY = [
   {
@@ -24,7 +25,7 @@ const fqdn = subdomain => `${subdomain}.surge.sh/`;
 
 const generateSubdomain = exampleName => {
   const { version } = require('../lerna.json');
-  const { GITHUB_REF } = process.env;
+  const GITHUB_REF = github.context.payload.pull_request.head.ref;
   const branchName = GITHUB_REF.split('/').pop();
   const postfix = !branchName.startsWith('release') ? branchName : version;
   return exampleName + `-${postfix.replace(/(\.)|(\/)/g, '-')}`;
@@ -75,8 +76,7 @@ function run() {
 
     process.chdir(path.resolve('../..'));
   }
-  console.log(message);
-  // gitComment(message);
+  gitComment(message);
 }
 
 run();
