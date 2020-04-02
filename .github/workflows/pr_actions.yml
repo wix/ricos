@@ -15,3 +15,4 @@ jobs:
       SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
       SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
       REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      isPullRequest: true
