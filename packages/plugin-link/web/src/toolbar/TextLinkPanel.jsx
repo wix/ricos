@@ -57,11 +57,11 @@ export default class TextLinkPanel extends Component {
   };
 
   deleteLink = () => {
-    const { getEditorState, setEditorState, commonPubsub } = this.props;
+    const { getEditorState, setEditorState, closeInlinePluginToolbar } = this.props;
     const editorState = getEditorState();
     const newEditorState = removeLinksInSelection(editorState, setEditorState);
     setEditorState(newEditorState);
-    commonPubsub && commonPubsub.set('cursorOnInlinePlugin', null);
+    closeInlinePluginToolbar && closeInlinePluginToolbar();
   };
 
   onCancel = () => {
@@ -97,5 +97,5 @@ TextLinkPanel.propTypes = {
   t: PropTypes.func,
   uiSettings: PropTypes.object,
   insertLinkFn: PropTypes.func,
-  commonPubsub: PropTypes.object,
+  closeInlinePluginToolbar: PropTypes.func,
 };

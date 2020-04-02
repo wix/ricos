@@ -4,7 +4,7 @@ import TextLinkButton from './TextLinkButton';
 import RemoveLinkButton from './RemoveLinkButton';
 import UrlLinkButton from './UrlLinkButton';
 
-export default config => {
+export default (config, closeInlinePluginToolbar) => {
   return [
     {
       keyName: 'url',
@@ -20,6 +20,7 @@ export default config => {
             insertLinkFn={updateLinkAtCurrentSelection}
             icon={EditIcon}
             tooltipText={config.t('LinkTo_Edit_Tooltip')}
+            closeInlinePluginToolbar={closeInlinePluginToolbar}
             {...config}
             {...props}
           />

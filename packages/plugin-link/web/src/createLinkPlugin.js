@@ -17,7 +17,7 @@ const createLinkPlugin = (config = {}) => {
   const type = LINK_TYPE;
   const { theme, anchorTarget, relValue, [type]: settings = {}, commonPubsub, ...rest } = config;
   settings.minLinkifyLength = settings.minLinkifyLength || 6;
-  const toolbar = createLinkToolbar(config);
+  const toolbar = createLinkToolbar(config, closeInlinePluginToolbar);
   let alreadyDisplayedAsLinkPreview = {};
 
   const decorators = [
@@ -63,16 +63,21 @@ const createLinkPlugin = (config = {}) => {
     return contentChanged && editorState.getLastChangeType() === 'insert-fragment';
   };
 
+  function openInlinePluginToolbar(commonPubsubData) {
+    commonPubsub.set('cursorOnInlinePlugin', commonPubsubData);
+  }
+  function closeInlinePluginToolbar() {
+    commonPubsub.set('cursorOnInlinePlugin', null);
+  }
+
   const onChange = editorState => {
     const selection = editorState.getSelection();
-    let commonPubsubData;
     if (hasLinksInSelection(editorState) && selection.isCollapsed()) {
       const boundingRect = getVisibleSelectionRect(window);
-      commonPubsubData = { type, editorState, boundingRect };
+      openInlinePluginToolbar({ type, editorState, boundingRect });
     } else {
-      commonPubsubData = null;
+      closeInlinePluginToolbar();
     }
-    commonPubsub.set('cursorOnInlinePlugin', commonPubsubData);
     let newEditorState = editorState;
     if (isPasteChange(editorState)) {
       newEditorState = fixPastedLinks(editorState, { anchorTarget, relValue });

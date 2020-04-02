@@ -28,7 +28,7 @@ export default class TextLinkButton extends Component {
       t,
       uiSettings,
       insertLinkFn,
-      commonPubsub,
+      closeInlinePluginToolbar,
     } = this.props;
     const modalStyles = getModalStyles({ fullScreen: false, isMobile });
     if (isMobile || linkModal) {
@@ -47,7 +47,7 @@ export default class TextLinkButton extends Component {
           hidePopup: helpers.closeModal,
           uiSettings,
           insertLinkFn,
-          commonPubsub,
+          closeInlinePluginToolbar,
         };
         helpers.openModal(modalProps);
       } else {
@@ -68,7 +68,7 @@ export default class TextLinkButton extends Component {
         getEditorState,
         setEditorState,
         insertLinkFn,
-        commonPubsub,
+        closeInlinePluginToolbar,
       };
       const TextLinkPanelWithProps = decorateComponentWithProps(TextLinkPanel, linkPanelProps);
       onOverrideContent(TextLinkPanelWithProps);
@@ -121,6 +121,6 @@ TextLinkButton.propTypes = {
   isActive: PropTypes.bool,
   insertLinkFn: PropTypes.func,
   icon: PropTypes.func,
-  commonPubsub: PropTypes.object,
+  closeInlinePluginToolbar: PropTypes.func,
   tooltipText: PropTypes.string,
 };

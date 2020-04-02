@@ -5,7 +5,11 @@ import { getLinkDataInSelection, removeLinksInSelection } from 'wix-rich-content
 import MobileLinkModal from './MobileLinkModal';
 
 export default class MobileTextLinkModal extends Component {
-  hidePopup = () => this.props.hidePopup();
+  hidePopup = () => {
+    const { hidePopup, closeInlinePluginToolbar } = this.props;
+    hidePopup();
+    closeInlinePluginToolbar();
+  };
 
   createLinkEntity = ({ url, targetBlank, nofollow }) => {
     if (!isEmpty(url)) {
@@ -69,4 +73,5 @@ MobileTextLinkModal.propTypes = {
   t: PropTypes.func,
   uiSettings: PropTypes.object,
   insertLinkFn: PropTypes.func,
+  closeInlinePluginToolbar: PropTypes.func,
 };
