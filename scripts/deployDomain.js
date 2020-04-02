@@ -1,4 +1,3 @@
-const core = require('@actions/core');
 const github = require('@actions/github');
 
 const EXAMPLES_TO_DEPLOY = [
@@ -38,12 +37,7 @@ async function run() {
     return (request.body = bodyPrefix.concat('\n', domain));
   });
   const client = new github.GitHub(REPO_TOKEN);
-  const response = await client.pulls.update(request);
-
-  core.info(`response: ${response.status}`);
-  if (response.status !== 200) {
-    core.error('Updating the pull request has failed');
-  }
+  await client.pulls.update(request);
 }
 
 run();

@@ -130,5 +130,8 @@
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
+  },
+  "dependencies": {
+    "@actions/github": "^2.1.1"
   }
 }
