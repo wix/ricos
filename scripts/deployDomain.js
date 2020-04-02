@@ -32,7 +32,7 @@ async function run() {
   };
   const bodyPrefix = 'Click below to open app:';
   EXAMPLES_TO_DEPLOY.map(example => {
-    const domain = fqdn(generateSubdomain(example));
+    const domain = fqdn(generateSubdomain(example.name));
     console.log(domain);
     return (request.body = bodyPrefix.concat('\n', domain));
   });
