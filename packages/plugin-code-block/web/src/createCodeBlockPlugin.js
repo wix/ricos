@@ -4,6 +4,12 @@ import { CODE_BLOCK_TYPE } from './types';
 // import PrismDecorator from './PrismDecorator';
 import createCodeBlockToolbar from './toolbar/createCodeBlockToolbar';
 
+const handleShiftTab = editorState => {
+  // since backspace removes tabs in CodeUtils
+  // https://github.com/SamyPesse/draft-js-code/blob/9783c0f6bbedda6b7089712f9c657a72fdae636d/lib/handleKeyCommand.js#L11
+  return CodeUtils.handleKeyCommand(editorState, 'backspace');
+};
+
 const createUnderlyingPlugin = (/*{ theme }*/) => ({
   handleKeyCommand: (command, editorState, timestamp, { setEditorState }) => {
     if (CodeUtils.hasSelectionInBlock(editorState)) {
@@ -12,7 +18,7 @@ const createUnderlyingPlugin = (/*{ theme }*/) => ({
         const mockEvent = { preventDefault: () => {} };
         newState = CodeUtils.onTab(mockEvent, editorState);
       } else if (command === COMMANDS.SHIFT_TAB) {
-        newState = CodeUtils.handleKeyCommand(editorState, 'backspace');
+        newState = handleShiftTab(editorState);
       }
       if (newState) {
         setEditorState(newState);

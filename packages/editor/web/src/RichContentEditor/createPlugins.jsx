@@ -15,7 +15,7 @@ const createPlugins = ({ plugins, context }) => {
     isMobile: context.isMobile,
   });
 
-  const listPlugin = createListPlugin();
+  const listPlugin = createListPlugin({ olRegex: /1\./ });
 
   const dndPlugin = createBlockDndPlugin();
   const handleDrop = dndPlugin.handleDrop;

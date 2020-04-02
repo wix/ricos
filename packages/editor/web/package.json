@@ -42,6 +42,7 @@
     "draft-js-drag-n-drop-plugin": "~2.0.4",
     "draft-js-focus-plugin": "github:shaulgo/draft-js-plugins#focusPlugin",
     "draft-js-plugins-editor": "~3.0.0",
+    "draft-js-list-plugin": "^1.0.2",
     "react-click-outside": "github:tj/react-click-outside",
     "react-measure": "~2.3.0",
     "wix-rich-content-common": "7.1.2",
