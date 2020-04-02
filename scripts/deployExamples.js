@@ -25,7 +25,7 @@ const fqdn = subdomain => `${subdomain}.surge.sh/`;
 
 const generateSubdomain = exampleName => {
   const { version } = require('../lerna.json');
-  const GITHUB_REF = github.context.payload.pull_request.head.ref;
+  const GITHUB_REF = github.head_ref;
   const branchName = GITHUB_REF.split('/').pop();
   const postfix = !branchName.startsWith('release') ? branchName : version;
   return exampleName + `-${postfix.replace(/(\.)|(\/)/g, '-')}`;
