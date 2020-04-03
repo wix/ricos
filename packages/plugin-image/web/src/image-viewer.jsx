@@ -39,8 +39,30 @@ class ImageViewer extends React.Component {
       : WIX_MEDIA_DEFAULT.SIZE;
   }
 
+  getRequiredDimensions = src => {
+    const { seoMode } = this.props || {};
+
+    let w, h;
+    if (seoMode) {
+      w = src?.width && Math.min(src.width, SEO_IMAGE_WIDTH);
+      h = this.calculateHeight(SEO_IMAGE_WIDTH, src);
+    } else if (this.state.container) {
+      const { width } = this.state.container.getBoundingClientRect();
+      w = width || src?.width || 1;
+      if (this.props.isMobile) {
+        //adjust the image width to viewport scaling and device pixel ratio
+        w *= (!isSSR() && window.devicePixelRatio) || 1;
+        w *= (!isSSR() && window.screen.width / document.body.clientWidth) || 1;
+      }
+      //keep the image's original ratio
+      h = this.calculateHeight(w, src);
+      w = Math.ceil(w);
+      h = Math.ceil(h);
+    }
+    return { width: w, height: h };
+  };
   getImageUrl(src) {
-    const { helpers, seoMode } = this.props || {};
+    const { helpers } = this.props || {};
     if (!src && helpers?.handleFileSelection) {
       return null;
     }
@@ -53,27 +75,11 @@ class ImageViewer extends React.Component {
     if (this.props.dataUrl) {
       imageUrl.preload = imageUrl.highres = this.props.dataUrl;
     } else {
-      let requiredWidth, requiredHeight;
       imageUrl.preload = getImageSrc(src, helpers);
-      if (seoMode) {
-        requiredWidth = src?.width && Math.min(src.width, SEO_IMAGE_WIDTH);
-        requiredHeight = this.calculateHeight(SEO_IMAGE_WIDTH, src);
-      } else if (this.state.container) {
-        const { width } = this.state.container.getBoundingClientRect();
-        requiredWidth = width || src?.width || 1;
-        if (this.props.isMobile) {
-          //adjust the image width to viewport scaling and device pixel ratio
-          requiredWidth *= (!isSSR() && window.devicePixelRatio) || 1;
-          requiredWidth *= (!isSSR() && window.screen.width / document.body.clientWidth) || 1;
-        }
-        //keep the image's original ratio
-        requiredHeight = this.calculateHeight(requiredWidth, src);
-        requiredWidth = Math.ceil(requiredWidth);
-        requiredHeight = Math.ceil(requiredHeight);
-      }
+      const { width, height } = this.getRequiredDimensions(src);
       imageUrl.highres = getImageSrc(src, helpers, {
-        requiredWidth,
-        requiredHeight,
+        requiredWidth: width,
+        requiredHeight: height,
         requiredQuality: 90,
         imageType: 'highRes',
       });
@@ -243,7 +249,9 @@ class ImageViewer extends React.Component {
     setComponentUrl?.(imageSrc?.highres);
     const shouldRenderPreloadImage = !seoMode && imageSrc && !isGif;
     const shouldRenderImage = (imageSrc && (seoMode || ssrDone)) || isGif;
+
     /* eslint-disable jsx-a11y/no-static-element-interactions */
+
     return (
       <div
         data-hook="imageViewer"
@@ -255,7 +263,10 @@ class ImageViewer extends React.Component {
       >
         <div className={this.styles.imageWrapper} role="img" aria-label={metadata.alt}>
           {shouldRenderPreloadImage &&
-            this.renderPreloadImage(imageClassName, imageSrc, metadata.alt, imageProps)}
+            this.renderPreloadImage(imageClassName, imageSrc, metadata.alt, {
+              ...imageProps,
+              ...this.getRequiredDimensions(data.src),
+            })}
           {shouldRenderImage &&
             this.renderImage(imageClassName, imageSrc, metadata.alt, imageProps, isGif, seoMode)}
           {hasExpand && (
