@@ -1,5 +1,7 @@
-name: action
-on: pull_request
+name: prComment
+on:
+  pull_request:
+    types: opened
 jobs:
   deploy-pr-comment:
     runs-on: ubuntu-18.04
