@@ -17,7 +17,14 @@
   
 ### :bug: Bug Fix
 - `gallery`
+  - [#879](https://github.com/wix-incubator/rich-content/pull/879) blurry pictures & not rendering
   - [#877](https://github.com/wix-incubator/rich-content/pull/877) fix gallery plugin blurry pictures
+- `link-preview`
+  - [#871](https://github.com/wix-incubator/rich-content/pull/871) embed link width 
+
+### :house: Internal
+- `general`
+  - [#878](https://github.com/wix-incubator/rich-content/pull/878) added git comment to pr's containing surge-examples url's
 
 </details>
 <hr/>
