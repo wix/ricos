@@ -1,21 +1,12 @@
 {
   "parser": "babel-eslint",
-  "extends": [
-    "wix/react",
-    "plugin:jsx-a11y/strict",
-    "prettier"
-  ],
+  "extends": ["wix/react", "plugin:jsx-a11y/strict", "prettier"],
   "env": {
     "browser": true,
     "node": true,
     "jest": true
   },
-  "plugins": [
-    "lodash",
-    "fp",
-    "jsx-a11y",
-    "prettier"
-  ],
+  "plugins": ["lodash", "fp", "jsx-a11y", "prettier"],
   "settings": {
     "react": {
       "version": "16.6.3"
@@ -31,10 +22,7 @@
       }
     ],
     "react/jsx-closing-tag-location": "error",
-    "react/jsx-closing-bracket-location": [
-      1,
-      "line-aligned"
-    ],
+    "react/jsx-closing-bracket-location": [1, "line-aligned"],
     "react/jsx-space-before-closing": "off",
     "react/jsx-tag-spacing": "warn",
     "react/style-prop-object": "off",
@@ -45,10 +33,7 @@
     "no-use-before-define": "off",
     "no-mixed-operators": "off",
     "space-before-function-paren": "off",
-    "object-curly-spacing": [
-      "error",
-      "always"
-    ],
+    "object-curly-spacing": ["error", "always"],
     "max-len": [
       "error",
       {
@@ -67,6 +52,6 @@
     "jsx-a11y/label-has-for": "off",
     "jsx-a11y/aria-proptypes": "off",
     "prettier/prettier": "error",
-    "lodash/import-scope": [2, "member"],
+    "lodash/import-scope": [2, "member"]
   }
 }
