@@ -124,4 +124,7 @@ function run() {
   publishPackages();
 }
 
-run();
+// run();
+createNpmRc();
+
+execSync('npm access grant read-write wix:rich-content-publishers wix-rich-content-editor-common')

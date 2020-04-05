@@ -7,9 +7,9 @@ cache:
   npm: true
   directories:
     - ~/.cache
-branches:
-  only:
-    - /^release-.*$/
+before_install:
+  - npm i -g npm@latest
+  - npm --version
 install: npm install
 script:
   - npm run build || travis_terminate 1;
