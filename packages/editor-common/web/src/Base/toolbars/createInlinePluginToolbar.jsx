@@ -53,11 +53,8 @@ export default function createInlinePluginToolbar({
     }
 
     cursorIsOnInlinePlugin = () => {
-      if (
-        commonPubsub.get('cursorOnInlinePlugin') &&
-        commonPubsub.get('cursorOnInlinePlugin').boundingRect &&
-        name.toUpperCase() === commonPubsub.get('cursorOnInlinePlugin').type
-      ) {
+      const { boundingRect, type } = commonPubsub.get('cursorOnInlinePlugin') || {};
+      if (commonPubsub.get('cursorOnInlinePlugin') && boundingRect && name.toUpperCase() === type) {
         this.showToolbar();
       } else if (!commonPubsub.get('cursorOnInlinePlugin')) {
         this.hideToolbar();
@@ -133,9 +130,9 @@ export default function createInlinePluginToolbar({
     };
 
     render() {
-      const { overrideContent: OverrideContent, tabIndex } = this.state;
+      const { overrideContent, tabIndex } = this.state;
       const toolbarContentProps = {
-        overrideContent: OverrideContent,
+        overrideContent,
         tabIndex,
         theme,
         PluginToolbarButton: this.PluginToolbarButton,
@@ -148,7 +145,6 @@ export default function createInlinePluginToolbar({
 
       const { toolbarStyles: toolbarTheme } = theme || {};
 
-      // TODO: visibilityFn params?
       if (this.visibilityFn()) {
         const props = {
           style: this.state.position,
@@ -159,19 +155,12 @@ export default function createInlinePluginToolbar({
           'data-hook': name ? `${name}PluginToolbar` : null,
         };
 
-        if (this.ToolbarDecoration) {
-          const { ToolbarDecoration } = this;
-          return (
-            <ToolbarDecoration {...props}>
-              <ToolbarContent {...toolbarContentProps} />
-            </ToolbarDecoration>
-          );
-        }
+        const ToolbarWrapper = this.ToolbarDecoration || 'div';
 
         return (
-          <div {...props}>
+          <ToolbarWrapper {...props}>
             <ToolbarContent {...toolbarContentProps} />
-          </div>
+          </ToolbarWrapper>
         );
       } else {
         return null;

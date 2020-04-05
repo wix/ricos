@@ -379,9 +379,9 @@ export default function createAtomicPluginToolbar({
     }
 
     render() {
-      const { overrideContent: OverrideContent, tabIndex } = this.state;
+      const { overrideContent, tabIndex } = this.state;
       const toolbarContentProps = {
-        overrideContent: OverrideContent,
+        overrideContent,
         tabIndex,
         theme,
         PluginToolbarButton: this.PluginToolbarButton,
@@ -394,7 +394,6 @@ export default function createAtomicPluginToolbar({
 
       const { toolbarStyles: toolbarTheme } = theme || {};
 
-      // TODO: visibilityFn params?
       if (this.visibilityFn()) {
         const props = {
           style: this.state.position,
@@ -405,23 +404,14 @@ export default function createAtomicPluginToolbar({
           'data-hook': name ? `${name}PluginToolbar` : null,
         };
 
-        if (this.ToolbarDecoration) {
-          const { ToolbarDecoration } = this;
-          return (
-            <ToolbarDecoration {...props}>
-              <ToolbarContent {...toolbarContentProps} />
-              {this.renderInlinePanel()}
-              {this.renderPanel()}
-            </ToolbarDecoration>
-          );
-        }
+        const ToolbarWrapper = this.ToolbarDecoration || 'div';
 
         return (
-          <div {...props}>
+          <ToolbarWrapper {...props}>
             <ToolbarContent {...toolbarContentProps} />
             {this.renderInlinePanel()}
             {this.renderPanel()}
-          </div>
+          </ToolbarWrapper>
         );
       } else {
         return null;

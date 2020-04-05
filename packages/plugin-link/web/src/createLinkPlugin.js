@@ -74,7 +74,7 @@ const createLinkPlugin = (config = {}) => {
     const selection = editorState.getSelection();
     if (hasLinksInSelection(editorState) && selection.isCollapsed()) {
       const boundingRect = getVisibleSelectionRect(window);
-      openInlinePluginToolbar({ type, editorState, boundingRect });
+      openInlinePluginToolbar({ type, boundingRect });
     } else {
       closeInlinePluginToolbar();
     }

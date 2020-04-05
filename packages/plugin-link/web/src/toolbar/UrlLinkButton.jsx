@@ -7,17 +7,14 @@ import { normalizeUrl, mergeStyles } from 'wix-rich-content-common';
 export default class UrlLinkButton extends Component {
   constructor(props) {
     super(props);
-    this.state = { styles };
-  }
-
-  componentDidMount() {
-    const theme = this.props.theme;
-    this.setState({ styles: mergeStyles({ styles, theme }) });
+    const { theme } = this.props;
+    this.styles = mergeStyles({ styles, theme });
   }
 
   preventDefault = event => event.preventDefault();
 
   render() {
+    const { styles } = this;
     const { getEditorState } = this.props;
     const linkData = getLinkDataInSelection(getEditorState());
     const { url = '', target, rel } = linkData || {};
@@ -26,11 +23,11 @@ export default class UrlLinkButton extends Component {
       href,
       target: target || '_self',
       rel: rel || 'noopener',
-      className: this.state.styles.toolbarUrl,
+      className: styles.toolbarUrl,
       onMouseDown: this.preventDefault,
     };
     return (
-      <div className={this.state.styles.toolbarUrlContainer}>
+      <div className={styles.toolbarUrlContainer}>
         <a {...anchorProps}>{href}</a>
       </div>
     );
@@ -39,18 +36,5 @@ export default class UrlLinkButton extends Component {
 
 UrlLinkButton.propTypes = {
   getEditorState: PropTypes.func.isRequired,
-  setEditorState: PropTypes.func.isRequired,
-  onExtendContent: PropTypes.func,
-  onOverrideContent: PropTypes.func.isRequired,
   theme: PropTypes.object.isRequired,
-  isMobile: PropTypes.bool,
-  linkModal: PropTypes.bool,
-  helpers: PropTypes.object,
-  keyName: PropTypes.string,
-  anchorTarget: PropTypes.string,
-  relValue: PropTypes.string,
-  t: PropTypes.func,
-  tabIndex: PropTypes.number,
-  uiSettings: PropTypes.object,
-  config: PropTypes.object,
 };

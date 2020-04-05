@@ -33,7 +33,11 @@ export default (config, closeInlinePluginToolbar) => {
       keyName: 'remove',
       component: props => (
         <div style={{ margin: '0 -6px 0 -6px' }}>
-          <RemoveLinkButton {...config} {...props} />
+          <RemoveLinkButton
+            closeInlinePluginToolbar={closeInlinePluginToolbar}
+            {...config}
+            {...props}
+          />
         </div>
       ),
       mobile: true,

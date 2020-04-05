@@ -31,23 +31,26 @@ export default class TextLinkButton extends Component {
       closeInlinePluginToolbar,
     } = this.props;
     const modalStyles = getModalStyles({ fullScreen: false, isMobile });
+    const commonPanelProps = {
+      anchorTarget,
+      relValue,
+      theme,
+      t,
+      uiSettings,
+      getEditorState,
+      setEditorState,
+      insertLinkFn,
+      closeInlinePluginToolbar,
+    };
     if (isMobile || linkModal) {
       if (helpers && helpers.openModal) {
         const modalProps = {
           helpers,
           modalStyles,
           isMobile,
-          getEditorState,
-          setEditorState,
-          t,
-          theme,
-          anchorTarget,
-          relValue,
           modalName: EditorModals.MOBILE_TEXT_LINK_MODAL,
           hidePopup: helpers.closeModal,
-          uiSettings,
-          insertLinkFn,
-          closeInlinePluginToolbar,
+          ...commonPanelProps,
         };
         helpers.openModal(modalProps);
       } else {
@@ -60,15 +63,7 @@ export default class TextLinkButton extends Component {
       const linkPanelProps = {
         onExtendContent,
         onOverrideContent,
-        anchorTarget,
-        relValue,
-        theme,
-        t,
-        uiSettings,
-        getEditorState,
-        setEditorState,
-        insertLinkFn,
-        closeInlinePluginToolbar,
+        ...commonPanelProps,
       };
       const TextLinkPanelWithProps = decorateComponentWithProps(TextLinkPanel, linkPanelProps);
       onOverrideContent(TextLinkPanelWithProps);
@@ -80,14 +75,14 @@ export default class TextLinkButton extends Component {
   }
 
   render() {
-    const { theme, isMobile, tabIndex, config, isActive, icon: _icon, tooltipText } = this.props;
+    const { theme, isMobile, tabIndex, config, isActive, icon, tooltipText } = this.props;
     const buttonStyles = {
       button: theme.inlineToolbarButton,
       buttonWrapper: theme.inlineToolbarButton_wrapper,
       icon: theme.inlineToolbarButton_icon,
       active: theme.inlineToolbarButton_active,
     };
-    const icon = config?.LINK?.toolbar?.icons?.InsertPluginButtonIcon || _icon;
+    const insertLinkIcon = config?.LINK?.toolbar?.icons?.InsertPluginButtonIcon || icon;
     return (
       <LinkButton
         onClick={this.showLinkPanel}
@@ -96,7 +91,7 @@ export default class TextLinkButton extends Component {
         isMobile={isMobile}
         tooltipText={tooltipText}
         tabIndex={tabIndex}
-        icon={icon}
+        icon={insertLinkIcon}
       />
     );
   }

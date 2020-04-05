@@ -6,9 +6,8 @@ import MobileLinkModal from './MobileLinkModal';
 
 export default class MobileTextLinkModal extends Component {
   hidePopup = () => {
-    const { hidePopup, closeInlinePluginToolbar } = this.props;
+    const { hidePopup } = this.props;
     hidePopup();
-    closeInlinePluginToolbar();
   };
 
   createLinkEntity = ({ url, targetBlank, nofollow }) => {
@@ -27,10 +26,11 @@ export default class MobileTextLinkModal extends Component {
   };
 
   deleteLink = () => {
-    const { getEditorState, setEditorState } = this.props;
+    const { getEditorState, setEditorState, closeInlinePluginToolbar } = this.props;
     const editorState = getEditorState();
     const newEditorState = removeLinksInSelection(editorState, setEditorState);
     setEditorState(newEditorState);
+    closeInlinePluginToolbar();
   };
 
   render() {

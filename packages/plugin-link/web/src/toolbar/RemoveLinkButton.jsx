@@ -5,15 +5,14 @@ import RemoveLinkIcon from '../icons/RemoveLinkIcon.svg';
 
 export default class RemoveLinkButton extends Component {
   deleteLink = () => {
-    const { getEditorState, setEditorState } = this.props;
-    const editorState = getEditorState();
-    const newEditorState = removeLinksInSelection(editorState, setEditorState);
+    const { getEditorState, setEditorState, closeInlinePluginToolbar } = this.props;
+    const newEditorState = removeLinksInSelection(getEditorState(), setEditorState);
     setEditorState(newEditorState);
-    this.props.commonPubsub.set('cursorOnInlinePlugin', null);
+    closeInlinePluginToolbar();
   };
 
   render() {
-    const { theme, isMobile, t, tabIndex, config } = this.props;
+    const { theme, isMobile, t, tabIndex } = this.props;
     const linkButtonTooltip = t('LinkPanelContainer_RemoveButton');
     const buttonStyles = {
       button: theme.inlineToolbarButton,
@@ -21,7 +20,6 @@ export default class RemoveLinkButton extends Component {
       icon: theme.inlineToolbarButton_icon,
       active: theme.inlineToolbarButton_active,
     };
-    const icon = config?.LINK?.toolbar?.icons?.InsertPluginButtonIcon || RemoveLinkIcon;
     return (
       <InlineToolbarButton
         onClick={this.deleteLink}
@@ -29,7 +27,7 @@ export default class RemoveLinkButton extends Component {
         isMobile={isMobile}
         tooltipText={linkButtonTooltip}
         tabIndex={tabIndex}
-        icon={icon}
+        icon={RemoveLinkIcon}
         dataHook={'RemoveLinkButton'}
       />
     );
@@ -39,18 +37,9 @@ export default class RemoveLinkButton extends Component {
 RemoveLinkButton.propTypes = {
   getEditorState: PropTypes.func.isRequired,
   setEditorState: PropTypes.func.isRequired,
-  onExtendContent: PropTypes.func,
-  onOverrideContent: PropTypes.func.isRequired,
   theme: PropTypes.object.isRequired,
   isMobile: PropTypes.bool,
-  linkModal: PropTypes.bool,
-  helpers: PropTypes.object,
-  keyName: PropTypes.string,
-  anchorTarget: PropTypes.string,
-  relValue: PropTypes.string,
   t: PropTypes.func,
   tabIndex: PropTypes.number,
-  uiSettings: PropTypes.object,
-  config: PropTypes.object,
-  commonPubsub: PropTypes.object,
+  closeInlinePluginToolbar: PropTypes.func,
 };
