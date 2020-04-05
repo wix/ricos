@@ -5,6 +5,11 @@ import { DEFAULT_DESKTOP_BROWSERS, DEFAULT_MOBILE_BROWSERS } from '../tests/cons
 const testFixture = fixture =>
   it(`render ${fixture}`, function() {
     cy.loadEditorAndViewer(fixture);
+    if (fixture.includes('gallery')) {
+      cy.scrollTo(0, 100);
+      cy.waitForDocumentMutations();
+      cy.scrollTo(0, 0);
+    }
     if (fixture.includes('video')) {
       cy.waitForVideoToLoad();
     } else if (fixture.includes('html')) {

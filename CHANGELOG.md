@@ -19,6 +19,10 @@
 - `storybook`
   - [#891](https://github.com/wix-incubator/rich-content/pull/891) fixed textHighlightPlugin color (intro.js)
   
+### :bug: Bug Fix
+- `gallery`
+  - [#879](https://github.com/wix-incubator/rich-content/pull/879) gallery size - regression from #879
+
 </details>
 <hr/>
 
