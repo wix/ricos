@@ -22,6 +22,7 @@
 ### :bug: Bug Fix
 - `gallery`
   - [#879](https://github.com/wix-incubator/rich-content/pull/879) gallery size - regression from #879
+  - [#872](https://github.com/wix-incubator/rich-content/pull/872) fix: gallery sliders css in mozilla firefox
 
 </details>
 <hr/>
