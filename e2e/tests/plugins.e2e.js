@@ -131,6 +131,7 @@ describe('plugins', () => {
       cy.loadEditorAndViewer('gallery-out-of-view');
       cy.eyesCheckWindow(`${this.test.title} - out of view`);
       cy.scrollTo('bottom');
+      cy.waitForDocumentMutations();
       cy.eyesCheckWindow(`${this.test.title} - in view`);
     });
 

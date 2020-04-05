@@ -494,7 +494,7 @@ Cypress.Commands.add('waitForDocumentMutations', () => {
   });
 });
 
-function waitForMutations(container, { interval = 200 } = {}) {
+function waitForMutations(container, { interval = 300 } = {}) {
   return new Promise(resolve => {
     let timeoutId = setTimeout(onDone, interval);
 
