@@ -24,7 +24,9 @@
   - [#879](https://github.com/wix-incubator/rich-content/pull/879) blurry pictures & not rendering
   - [#877](https://github.com/wix-incubator/rich-content/pull/877) fix gallery plugin blurry pictures
 - `link-preview`
-  - [#871](https://github.com/wix-incubator/rich-content/pull/871) embed link width 
+  - [#871](https://github.com/wix-incubator/rich-content/pull/871) embed link width
+- `general`
+  - [#889](https://github.com/wix-incubator/rich-content/pull/889) fix all plugins max-width on resize
 
 ### :house: Internal
 - `general`
