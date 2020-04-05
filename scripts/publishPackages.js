@@ -127,4 +127,14 @@ function run() {
 // run();
 createNpmRc();
 
-execSync('npm access grant read-write wix:publishers wix-rich-content-editor-common')
+const packages = `wix-rich-content-editor-common
+wix-rich-content-fullscreen
+wix-rich-content-plugin-link-preview
+wix-rich-content-plugin-undo-redo
+wix-rich-content-preview
+wix-rich-content-wrapper
+wix-rich-content-text-selection-toolbar`.split('\n')
+
+for (const package of packages) {
+  execSync(`npm access grant read-write wix:publishers ${package}`)
+}
