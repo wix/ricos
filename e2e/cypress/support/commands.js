@@ -483,6 +483,40 @@ Cypress.Commands.add('insertLinkAndEnter', url => {
   cy.moveCursorToEnd();
 });
 
+Cypress.Commands.add('triggerLinkPreviewViewerUpdate', () => {
+  cy.moveCursorToEnd();
+  cy.focusEditor();
+});
+
+Cypress.Commands.add('waitForDocumentMutations', () => {
+  cy.document().then(async doc => {
+    await waitForMutations(doc.body);
+  });
+});
+
+function waitForMutations(container, { timeToWaitForMutation = 300 } = {}) {
+  return new Promise(resolve => {
+    let timeoutId = setTimeout(onDone, timeToWaitForMutation);
+
+    const observer = new MutationObserver(() => {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(onDone, timeToWaitForMutation);
+    });
+    observer.observe(container, {
+      subtree: true,
+      childList: true,
+      attributes: true,
+      characterData: true,
+    });
+
+    function onDone() {
+      clearTimeout(timeoutId);
+      observer.disconnect();
+      resolve();
+    }
+  });
+}
+
 // disable screenshots in debug mode. So there is no diffrence to ci.
 if (Cypress.browser.isHeaded) {
   const noop = () => {};
