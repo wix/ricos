@@ -14,7 +14,7 @@ export const fixtures = [
   'hashtag-and-link',
   'images-sizes',
   'images-original-size',
-  'linkPreview',
+  'link-preview',
 ];
 
 export const fixturesToTestOnSeo = ['images'];

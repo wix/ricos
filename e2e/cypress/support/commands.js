@@ -483,6 +483,11 @@ Cypress.Commands.add('insertLinkAndEnter', url => {
   cy.moveCursorToEnd();
 });
 
+Cypress.Commands.add('triggerLinkPreviewViewerUpdate', () => {
+  cy.moveCursorToEnd();
+  cy.focusEditor();
+});
+
 // disable screenshots in debug mode. So there is no diffrence to ci.
 if (Cypress.browser.isHeaded) {
   const noop = () => {};
