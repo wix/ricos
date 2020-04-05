@@ -17,7 +17,7 @@
 
 ### :house: Internal
 - `storybook`
-  - [#891](https://github.com/wix-incubator/rich-content/pull/891) storybook fixed textHighlightPlugin color (intro.js)
+  - [#891](https://github.com/wix-incubator/rich-content/pull/891) fixed textHighlightPlugin color (intro.js)
   
 </details>
 <hr/>
