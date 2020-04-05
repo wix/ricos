@@ -26,7 +26,7 @@
 - `link-preview`
   - [#871](https://github.com/wix-incubator/rich-content/pull/871) maxwidth
 - `general`
-  - [#889](https://github.com/wix-incubator/rich-content/pull/889) fix all plugins max-width on resize
+  - [#889](https://github.com/wix-incubator/rich-content/pull/889) fix all plugins max-width for inline size
 
 ### :house: Internal
 - `general`
