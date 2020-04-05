@@ -3,16 +3,6 @@ import { getConfigByFormFactor } from '../../Utils/getConfigByFormFactor';
 import { mergeToolbarSettings } from '../../Utils/mergeToolbarSettings';
 import { getDefaultToolbarSettings } from '../default-toolbar-settings';
 
-export const getInitialState = () => ({
-  position: { transform: 'scale(0)' },
-  showLeftArrow: false,
-  showRightArrow: false,
-  componentData: {},
-  componentState: {},
-  overrideContent: undefined,
-  tabIndex: -1,
-});
-
 export const setVariables = ({ buttons, getToolbarSettings, isMobile }) => {
   const { all, hidden } = buttons;
   const visibleButtons = all.filter(({ keyName }) => !hidden.includes(keyName));
@@ -64,18 +54,6 @@ export const setVariables = ({ buttons, getToolbarSettings, isMobile }) => {
   return { structure, offset, shouldCreate, visibilityFn, displayOptions, ToolbarDecoration };
 };
 
-export const shouldComponentUpdate = state => {
-  return !!state.isVisible;
-};
-
-export const onOverrideContent = (setState, overrideContent) => {
-  setState({ overrideContent });
-};
-
-export const hideToolbar = setState => {
-  setState({ ...getInitialState(), isVisible: false });
-};
-
 export const getRelativePositionStyle = ({
   boundingRect,
   offset,
@@ -117,14 +95,12 @@ const calculateLeftOffset = (left, maxLeft, languageDir) => {
   return left < 0 ? maxLeft : left;
 };
 
-export const showToolbar = (
-  setState,
-  { boundingRect, visibilityFn, displayOptions, getRelativePositionStyle, offset, pubsub }
-) => {
-  if (!visibilityFn()) {
-    return;
-  }
-
+export const getToolbarPosition = ({
+  boundingRect,
+  displayOptions,
+  getRelativePositionStyle,
+  offset,
+}) => {
   let position;
   if (displayOptions.displayMode === DISPLAY_MODE.NORMAL) {
     position = getRelativePositionStyle(boundingRect);
@@ -137,13 +113,5 @@ export const showToolbar = (
     };
   }
 
-  const componentData = pubsub.get('componentData') || {};
-  const componentState = pubsub.get('componentState') || {};
-  setState({
-    isVisible: true,
-    position,
-    componentData,
-    componentState,
-    tabIndex: 0,
-  });
+  return position;
 };

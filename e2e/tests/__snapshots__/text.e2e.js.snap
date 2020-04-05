@@ -705,7 +705,7 @@ exports[`text > allow to apply inline styles and links - isolated #0`] =
   "entityMap": {}
 };
 
-exports[`text > allow to create link and open link toolbar (InlinePluginToolbar) #0`] =
+exports[`text > open link toolbar (InlinePluginToolbar) #0`] =
 {
   "blocks": [
     {

@@ -7,16 +7,8 @@ import BaseToolbarButton from '../baseToolbarButton';
 import { BUTTONS, BUTTONS_BY_KEY, BlockLinkButton, deleteButton } from '../buttons';
 import Panel from '../../Components/Panel';
 import toolbarStyles from '../../../statics/styles/plugin-toolbar.scss';
-import RenderToolbarContent from './ToolbarContent';
-import {
-  getInitialState,
-  setVariables,
-  shouldComponentUpdate,
-  onOverrideContent,
-  hideToolbar,
-  getRelativePositionStyle,
-  showToolbar,
-} from './toolbarUtils';
+import ToolbarContent from './ToolbarContent';
+import { setVariables, getRelativePositionStyle, getToolbarPosition } from './toolbarUtils';
 
 export default function createAtomicPluginToolbar({
   buttons,
@@ -53,12 +45,14 @@ export default function createAtomicPluginToolbar({
       this.displayOptions = displayOptions;
       this.ToolbarDecoration = ToolbarDecoration;
 
-      this.state = getInitialState();
+      this.state = {
+        position: { transform: 'scale(0)' },
+        componentData: {},
+        componentState: {},
+        overrideContent: undefined,
+        tabIndex: -1,
+      };
     }
-
-    mySetState = stateToSet => {
-      this.setState(stateToSet);
-    };
 
     componentDidMount() {
       pubsub.subscribe('focusedBlock', this.onVisibilityChanged);
@@ -78,11 +72,11 @@ export default function createAtomicPluginToolbar({
     }
 
     shouldComponentUpdate() {
-      return shouldComponentUpdate(this.state);
+      return !!this.state.isVisible;
     }
 
     onOverrideContent = overrideContent => {
-      onOverrideContent(this.mySetState, overrideContent);
+      this.setState({ overrideContent });
     };
 
     onComponentStateChanged = contentState => {
@@ -115,8 +109,7 @@ export default function createAtomicPluginToolbar({
         return;
       }
       if (focusedBlock) {
-        const boundingRect = pubsub.get('boundingRect');
-        this.showToolbar(boundingRect);
+        this.showToolbar();
       } else {
         this.hideToolbar();
       }
@@ -129,7 +122,14 @@ export default function createAtomicPluginToolbar({
     };
 
     hideToolbar = () => {
-      hideToolbar(this.mySetState);
+      this.setState({
+        position: { transform: 'scale(0)' },
+        componentData: {},
+        componentState: {},
+        overrideContent: undefined,
+        tabIndex: -1,
+        isVisible: false,
+      });
     };
 
     getRelativePositionStyle = boundingRect => {
@@ -144,15 +144,19 @@ export default function createAtomicPluginToolbar({
       return position;
     };
 
-    showToolbar = boundingRect => {
-      showToolbar(this.mySetState, {
-        boundingRect,
-        visibilityFn: this.visibilityFn,
-        displayOptions: this.displayOptions,
-        getRelativePositionStyle: this.getRelativePositionStyle,
-        offset: this.offset,
-        pubsub,
-      });
+    showToolbar = () => {
+      const boundingRect = pubsub.get('boundingRect');
+      if (this.visibilityFn()) {
+        const componentData = pubsub.get('componentData') || {};
+        const componentState = pubsub.get('componentState') || {};
+        const position = getToolbarPosition({
+          boundingRect,
+          displayOptions: this.displayOptions,
+          getRelativePositionStyle: this.getRelativePositionStyle,
+          offset: this.offset,
+        });
+        this.setState({ isVisible: true, tabIndex: 0, componentData, componentState, position });
+      }
     };
 
     scrollToolbar(event, leftDirection) {
@@ -164,7 +168,7 @@ export default function createAtomicPluginToolbar({
     }
 
     /*eslint-disable complexity*/
-    renderButton = (button, key, themedStyle, separatorClassNames, tabIndex) => {
+    PluginToolbarButton = ({ button, key, themedStyle, separatorClassNames, tabIndex }) => {
       const { alignment, size } = this.state.componentData.config || {};
       const icons = settings?.toolbar?.icons || {};
       const buttonByKey = BUTTONS_BY_KEY[button.type];
@@ -376,11 +380,11 @@ export default function createAtomicPluginToolbar({
 
     render() {
       const { overrideContent: OverrideContent, tabIndex } = this.state;
-      const renderToolbarContentProps = {
+      const toolbarContentProps = {
         overrideContent: OverrideContent,
         tabIndex,
         theme,
-        renderButton: this.renderButton,
+        PluginToolbarButton: this.PluginToolbarButton,
         structure: this.structure,
       };
 
@@ -405,7 +409,7 @@ export default function createAtomicPluginToolbar({
           const { ToolbarDecoration } = this;
           return (
             <ToolbarDecoration {...props}>
-              <RenderToolbarContent {...renderToolbarContentProps} />
+              <ToolbarContent {...toolbarContentProps} />
               {this.renderInlinePanel()}
               {this.renderPanel()}
             </ToolbarDecoration>
@@ -414,7 +418,7 @@ export default function createAtomicPluginToolbar({
 
         return (
           <div {...props}>
-            <RenderToolbarContent {...renderToolbarContentProps} />
+            <ToolbarContent {...toolbarContentProps} />
             {this.renderInlinePanel()}
             {this.renderPanel()}
           </div>

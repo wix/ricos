@@ -5,21 +5,12 @@ import classNames from 'classnames';
 import Separator from '../../Components/Separator';
 import { BUTTONS } from '../buttons';
 import toolbarStyles from '../../../statics/styles/plugin-toolbar.scss';
-import RenderToolbarContent from './ToolbarContent';
-import {
-  getInitialState,
-  setVariables,
-  shouldComponentUpdate,
-  onOverrideContent,
-  hideToolbar,
-  getRelativePositionStyle,
-  showToolbar,
-} from './toolbarUtils';
+import ToolbarContent from './ToolbarContent';
+import { setVariables, getRelativePositionStyle, getToolbarPosition } from './toolbarUtils';
 
 export default function createInlinePluginToolbar({
   buttons,
   theme,
-  pubsub,
   commonPubsub,
   isMobile,
   t,
@@ -46,12 +37,12 @@ export default function createInlinePluginToolbar({
       this.displayOptions = displayOptions;
       this.ToolbarDecoration = ToolbarDecoration;
 
-      this.state = getInitialState();
+      this.state = {
+        position: { transform: 'scale(0)' },
+        overrideContent: undefined,
+        tabIndex: -1,
+      };
     }
-
-    mySetState = stateToSet => {
-      this.setState(stateToSet, this.forceUpdate());
-    };
 
     componentDidMount() {
       commonPubsub.subscribe('cursorOnInlinePlugin', this.cursorIsOnInlinePlugin);
@@ -67,23 +58,27 @@ export default function createInlinePluginToolbar({
         commonPubsub.get('cursorOnInlinePlugin').boundingRect &&
         name.toUpperCase() === commonPubsub.get('cursorOnInlinePlugin').type
       ) {
-        const boundingRect = commonPubsub.get('cursorOnInlinePlugin').boundingRect;
-        this.showToolbar(boundingRect);
+        this.showToolbar();
       } else if (!commonPubsub.get('cursorOnInlinePlugin')) {
         this.hideToolbar();
       }
     };
 
     shouldComponentUpdate() {
-      return shouldComponentUpdate(this.state);
+      return !!this.state.isVisible;
     }
 
     onOverrideContent = overrideContent => {
-      onOverrideContent(this.mySetState, overrideContent);
+      this.setState({ overrideContent });
     };
 
     hideToolbar = () => {
-      hideToolbar(this.mySetState);
+      this.setState({
+        position: { transform: 'scale(0)' },
+        overrideContent: undefined,
+        tabIndex: -1,
+        isVisible: false,
+      });
     };
 
     getRelativePositionStyle = boundingRect => {
@@ -102,15 +97,17 @@ export default function createInlinePluginToolbar({
       return position;
     };
 
-    showToolbar = boundingRect => {
-      showToolbar(this.mySetState, {
-        boundingRect,
-        visibilityFn: this.visibilityFn,
-        displayOptions: this.displayOptions,
-        getRelativePositionStyle: this.getRelativePositionStyle,
-        offset: this.offset,
-        pubsub,
-      });
+    showToolbar = () => {
+      const boundingRect = commonPubsub.get('cursorOnInlinePlugin').boundingRect;
+      if (this.visibilityFn()) {
+        const position = getToolbarPosition({
+          boundingRect,
+          displayOptions: this.displayOptions,
+          getRelativePositionStyle: this.getRelativePositionStyle,
+          offset: this.offset,
+        });
+        this.setState({ isVisible: true, tabIndex: 0, position }, this.forceUpdate());
+      }
     };
 
     scrollToolbar(event, leftDirection) {
@@ -122,7 +119,7 @@ export default function createInlinePluginToolbar({
     }
 
     /*eslint-disable complexity*/
-    renderButton = (button, key, themedStyle, separatorClassNames) => {
+    PluginToolbarButton = ({ button, key, themedStyle, separatorClassNames }) => {
       if (button.component) {
         const Button = button.component;
         return <Button t={t} theme={themedStyle} onOverrideContent={this.onOverrideContent} />;
@@ -137,11 +134,11 @@ export default function createInlinePluginToolbar({
 
     render() {
       const { overrideContent: OverrideContent, tabIndex } = this.state;
-      const renderToolbarContentProps = {
+      const toolbarContentProps = {
         overrideContent: OverrideContent,
         tabIndex,
         theme,
-        renderButton: this.renderButton,
+        PluginToolbarButton: this.PluginToolbarButton,
         structure: this.structure,
       };
 
@@ -166,14 +163,14 @@ export default function createInlinePluginToolbar({
           const { ToolbarDecoration } = this;
           return (
             <ToolbarDecoration {...props}>
-              <RenderToolbarContent {...renderToolbarContentProps} />
+              <ToolbarContent {...toolbarContentProps} />
             </ToolbarDecoration>
           );
         }
 
         return (
           <div {...props}>
-            <RenderToolbarContent {...renderToolbarContentProps} />
+            <ToolbarContent {...toolbarContentProps} />
           </div>
         );
       } else {

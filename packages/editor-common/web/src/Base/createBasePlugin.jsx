@@ -53,7 +53,7 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
   defaultPluginData && (pluginDefaults[config.type] = defaultPluginData);
   const toolbarTheme = { ...getToolbarTheme(config.theme, 'plugin'), ...config.theme };
   const InlinePluginToolbar =
-    config?.toolbar?.InlinePluginToolbarButtons &&
+    config.toolbar?.InlinePluginToolbarButtons &&
     createInlinePluginToolbar({
       buttons: {
         all: config.toolbar.InlinePluginToolbarButtons,
@@ -61,10 +61,9 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
       },
       theme: { ...toolbarTheme, ...config.theme },
       commonPubsub,
-      pubsub,
       isMobile,
       t,
-      name: config?.toolbar?.name,
+      name: config.toolbar.name,
       getToolbarSettings: config.getToolbarSettings,
       languageDir,
     });

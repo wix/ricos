@@ -5,20 +5,20 @@ import classNames from 'classnames';
 import Measure from 'react-measure';
 import toolbarStyles from '../../../statics/styles/plugin-toolbar.scss';
 import buttonStyles from '../../../statics/styles/plugin-toolbar-button.scss';
-import { getInitialState, onOverrideContent } from './toolbarUtils';
 
-export default class RenderToolbarContent extends Component {
+export default class ToolbarContent extends Component {
   static propTypes = {
     overrideContent: PropTypes.any,
     tabIndex: PropTypes.number,
     theme: PropTypes.object,
-    renderButton: PropTypes.func,
+    PluginToolbarButton: PropTypes.elementType,
     structure: PropTypes.object,
+    onOverrideContent: PropTypes.func,
   };
 
   constructor(props) {
     super(props);
-    this.state = getInitialState();
+    this.state = { showLeftArrow: false, showRightArrow: false };
   }
   scrollToolbar(event, leftDirection) {
     event.preventDefault();
@@ -44,8 +44,9 @@ export default class RenderToolbarContent extends Component {
       overrideContent: OverrideContent,
       tabIndex,
       theme,
-      renderButton,
+      PluginToolbarButton,
       structure,
+      onOverrideContent,
     } = this.props;
     const hasArrow = showLeftArrow || showRightArrow;
     const { toolbarStyles: toolbarTheme } = theme || {};
@@ -119,9 +120,15 @@ export default class RenderToolbarContent extends Component {
               {OverrideContent ? (
                 <OverrideContent {...overrideProps} />
               ) : (
-                structure.map((button, index) =>
-                  renderButton(button, index, themedButtonStyle, separatorClassNames, tabIndex)
-                )
+                structure.map((button, index) => (
+                  <PluginToolbarButton
+                    button={button}
+                    key={index}
+                    themedStyle={themedButtonStyle}
+                    separatorClassNames={separatorClassNames}
+                    tabIndex={tabIndex}
+                  />
+                ))
               )}
             </div>
           )}
