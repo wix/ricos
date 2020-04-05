@@ -2,9 +2,14 @@ export const mockFetchUrlPreviewData = () => {
   let index = 0;
   return async url => {
     const supportEmbed = embedTypes.filter(type => url.includes(type))[0];
-    const res = supportEmbed
-      ? mockOembedResults[supportEmbed]
-      : mockLinkPreviewResults[index++ % mockLinkPreviewResults.length];
+    let res;
+    if (url.includes('mockUrl')) {
+      res = mockHtml;
+    } else if (supportEmbed) {
+      res = mockOembedResults[supportEmbed];
+    } else {
+      res = mockLinkPreviewResults[index++ % mockLinkPreviewResults.length];
+    }
     return new Promise(resolve => {
       setTimeout(() => resolve(res), 1);
     });
@@ -66,4 +71,10 @@ const mockOembedResults = {
     html:
       '<iframe width="480" height="270" src="//www.youtube.com/embed/W9aEdHf6cA0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>',
   },
+};
+
+const mockHtml = {
+  title: 'I am a mock html',
+  html:
+    '<div style="background-color: black; border: 10px solid pink; height: 400px; text-align: center; color: white;">This is a mock embed</div>',
 };
