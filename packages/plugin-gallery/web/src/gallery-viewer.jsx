@@ -12,8 +12,8 @@ import ExpandIcon from './icons/expand.svg';
 const { ProGallery } = process.env.SANTA ? {} : require('pro-gallery');
 
 function getClosestParanet(elem, selector) {
+  if (elem || elem === document) return null;
   if (selector.some(selector => elem.matches(selector))) return elem;
-  if (elem === document) return null;
   return getClosestParanet(elem.parentNode, selector);
 }
 
@@ -41,13 +41,18 @@ class GalleryViewer extends React.Component {
 
   initUpdateDimensionsForDomChanges() {
     const contentElement = getClosestParanet(this.container, ['.DraftEditor-root', '.viewer']);
-    this.observer = new MutationObserver(() => {
-      if (contentElement.clientHeight !== this.oldContentElementHeight) {
-        this.oldContentElementHeight = contentElement.clientHeight;
-        this.updateDimensions();
-      }
-    });
-    this.observer.observe(contentElement, { attributes: true, childList: true, subtree: true });
+    if (contentElement) {
+      this.observer = new MutationObserver(() => {
+        if (contentElement.clientHeight !== this.oldContentElementHeight) {
+          this.oldContentElementHeight = contentElement.clientHeight;
+          this.updateDimensions();
+        }
+      });
+      this.observer.observe(contentElement, { attributes: true, childList: true, subtree: true });
+    } else {
+      // eslint-disable-next-line no-console
+      console.warn(`can't find content container to listen for changes to update gallery`);
+    }
   }
 
   componentWillReceiveProps(nextProps) {

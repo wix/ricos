@@ -27,6 +27,9 @@
 - `gallery`
   - [#879](https://github.com/wix-incubator/rich-content/pull/879) gallery size - regression from #879
   - [#872](https://github.com/wix-incubator/rich-content/pull/872) fix: gallery sliders css in mozilla firefox
+- `plugins`
+  - [#778](https://github.com/wix-incubator/rich-content/pull/880) fix focus on plugins insert buttons click
+
 
 </details>
 <hr/>
