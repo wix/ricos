@@ -15,6 +15,10 @@
     Click to see more.
   </summary>
 
+### :rocket: New Feature
+- `link`
+  - [#750](https://github.com/wix-incubator/rich-content/pull/750) link toolbar
+  
 ### :house: Internal
 - `storybook`
   - [#891](https://github.com/wix-incubator/rich-content/pull/891) fixed textHighlightPlugin color (intro.js)
