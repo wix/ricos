@@ -15,6 +15,19 @@ export const COMMANDS = Object.freeze({
   SHIFT_TAB: 'shiftTab',
 });
 
+export const TEXT_TYPES = Object.freeze([
+  'unstyled',
+  'blockquote',
+  'header-one',
+  'header-two',
+  'header-three',
+  'header-four',
+  'header-five',
+  'header-six',
+  'ordered-list-item',
+  'unordered-list-item',
+]);
+
 export const MODIFIERS = Object.freeze({
   COMMAND: 'command',
   CTRL: 'ctrl',
