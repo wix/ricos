@@ -488,12 +488,6 @@ export function getBlockInfo(editorState, blockKey) {
   return { type: type || 'text', entityData };
 }
 
-export function getBlockDepth(editorState, blockKey) {
-  const contentState = editorState.getCurrentContent();
-  const block = contentState.getBlockForKey(blockKey);
-  return block.depth;
-}
-
 export function getBlockType(editorState) {
   const contentState = editorState.getCurrentContent();
   const blockKey = editorState.getSelection().getAnchorKey();

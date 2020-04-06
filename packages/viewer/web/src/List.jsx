@@ -7,16 +7,7 @@ const draftClassNames = (listType, depth, textDirection) =>
    ${draftPublic}-depth${depth}
    ${draftPublic}-list${textDirection}`;
 
-const getBlockClassName = (
-  contentState,
-  blockProps,
-  i,
-  dataEntry,
-  textDirection,
-  listType,
-  prevDepth,
-  depth
-) => {
+const getBlockClassName = (i, dataEntry, textDirection, listType, prevDepth, depth) => {
   const rtl = textDirection === 'rtl' || dataEntry.textDirection === 'rtl';
   const direction = rtl ? 'RTL' : 'LTR';
   let className = draftClassNames(listType, depth, direction);
@@ -72,8 +63,6 @@ const List = ({
 
         const depth = getBlockDepth(contentState, blockProps.keys[i]);
         const className = getBlockClassName(
-          contentState,
-          blockProps,
           i,
           dataEntry,
           textDirection,
