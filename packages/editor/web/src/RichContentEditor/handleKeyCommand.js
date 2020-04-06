@@ -14,6 +14,8 @@ const isText = blockType => {
   return TEXT_TYPES.some(type => type === blockType);
 };
 
+const isCodeBlock = blockType => blockType === 'code-block';
+
 export default (updateEditorState, customHandlers, blockType) => (command, editorState) => {
   let newState;
 
@@ -21,7 +23,7 @@ export default (updateEditorState, customHandlers, blockType) => (command, edito
     const maxDepth = isList(blockType) ? 2 : 4;
     // eslint-disable-next-line no-restricted-globals
     newState = onTab(event, editorState, maxDepth);
-  } else if (customHandlers[command]) {
+  } else if (customHandlers[command] && !isCodeBlock(blockType)) {
     newState = customHandlers[command](editorState);
   } else {
     switch (command) {
