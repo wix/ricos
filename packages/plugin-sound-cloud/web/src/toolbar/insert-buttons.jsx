@@ -3,17 +3,19 @@ import { getModalStyles, TOOLBARS } from 'wix-rich-content-editor-common';
 import SoundCloudURLInputModal from './soundCloudURLInputModal';
 import { InsertPluginIcon } from '../icons';
 
-const customStyles = {
-  content: {
-    maxWidth: '460px',
-    minHeight: '262px',
-  },
-};
+let content = { maxWidth: '580px', minHeight: '348px' };
 
 export default ({ helpers, t, isMobile, settings }) => {
   if (isMobile) {
-    customStyles.content.minHeight = '202px';
+    content = {
+      ...content,
+      minHeight: '100%',
+      minWidth: '100%',
+      margin: 0,
+      alignContent: 'center',
+    };
   }
+  const customStyles = { content };
   const icon = settings?.toolbar?.icons?.InsertPluginButtonIcon || InsertPluginIcon;
   return [
     {
