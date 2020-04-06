@@ -43,18 +43,20 @@ const List = ({
         const result = [];
         const elementProps = key => ({ className: mergedStyles.elementSpacing, key });
         React.Children.forEach(children, (child, i) => {
-          if (child && typeof child.type === 'string') {
-            if (/h\d/.exec(child.type)) {
-              if (paragraphGroup.length) {
-                result.push(<p {...elementProps(i)}>{paragraphGroup}</p>);
-                paragraphGroup = [];
+          if (child) {
+            if (typeof child.type === 'string') {
+              if (/h\d/.exec(child.type)) {
+                if (paragraphGroup.length) {
+                  result.push(<p {...elementProps(i)}>{paragraphGroup}</p>);
+                  paragraphGroup = [];
+                }
+                result.push(React.cloneElement(child, elementProps(i)));
+              } else {
+                paragraphGroup.push(child);
               }
-              result.push(React.cloneElement(child, elementProps(i)));
             } else {
-              paragraphGroup.push(child);
+              result.push(child);
             }
-          } else if (child) {
-            result.push(child);
           }
         });
         if (paragraphGroup.length) {
