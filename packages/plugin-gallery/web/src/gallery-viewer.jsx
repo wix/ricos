@@ -12,7 +12,7 @@ import ExpandIcon from './icons/expand.svg';
 const { ProGallery } = process.env.SANTA ? {} : require('pro-gallery');
 
 function getClosestParanet(elem, selector) {
-  if (elem || elem === document) return null;
+  if (!elem || elem === document) return null;
   if (selector.some(selector => elem.matches(selector))) return elem;
   return getClosestParanet(elem.parentNode, selector);
 }
