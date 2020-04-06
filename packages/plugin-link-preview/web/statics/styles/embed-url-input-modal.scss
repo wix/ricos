@@ -1,15 +1,14 @@
 @import '~wix-rich-content-common/dist/statics/styles/mixins';
 @import '~wix-rich-content-common/dist/statics/styles/palette';
 
-// TODO: add soundCloud_urlInput_ prefix to all the classes
-.container {
+.socialEmbed_urlInput_container {
   padding: 80px 120px;
   @include phone {
     padding: 160px 33px;
   }
 }
 
-.closeIcon {
+.socialEmbed_urlInput_closeIcon {
   position: absolute;
   right: 20px;
   top: 20px;
@@ -17,32 +16,20 @@
   color: black;
 }
 
-.cameraIcon {
-  width: 18px;
-}
-
-.errorIcon {
-  width: 13px;
-}
-
-.header {
+.socialEmbed_urlInput_header {
   display: flex;
   align-items: center;
-  justify-content: center;
   color: #333333;
 }
 
-.header_text {
+.socialEmbed_urlInput_header_text {
   height: 28px;
   font-size: 20px;
+  width: 100%;
   text-align: center;
 }
 
-.header_icon {
-  margin-right: 12px;
-}
-
-.soundCloudUrlInputModal_textInput {
+.socialEmbedUrlInputModal_textInput {
   margin-top: 36px;
   margin-bottom: 42px;
   @include phone {
@@ -51,7 +38,7 @@
   }
 }
 
-.modal_footer {
+.socialEmbed_urlInput_modal_footer {
   justify-content: center;
   border: none !important;
   padding: 0 !important;
@@ -62,17 +49,6 @@
     grid-row-gap: 9px;
     grid-auto-columns: 100%;
   }
-}
-
-.textInput_input {
-  padding: 9px 21px 10px 12px;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-}
-
-.textInput_input_invalid {
-  padding-right: 39px;
 }
 
 .settingsPanel_save,
@@ -104,5 +80,27 @@
   @include phone {
     grid-area: cancel;
     border: none;
+  }
+}
+
+.textInput_input {
+  font-size: 12px;
+  line-height: 16px;
+  border: 1px solid rgba(0, 0, 0, 0.6);
+
+  &::placeholder {
+    color: rgba(0, 0, 0, 0.4);
+  }
+  &:focus,
+  &:hover {
+    border-color: black;
+  }
+}
+
+.textInput_input_invalid {
+  border-color: #ee5951;
+  &:focus,
+  &:hover {
+    border-color: #ee5951;
   }
 }

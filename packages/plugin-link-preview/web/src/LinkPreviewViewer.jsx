@@ -37,6 +37,11 @@ class LinkPreviewViewer extends Component {
 
   getUrlForDisplay = url => url.replace(/^https?:\/\//, '');
 
+  handleIframeLoad = () => {
+    this.iframe.style.height = this.iframe.contentWindow.document.body.scrollHeight + 'px';
+    this.iframe.style.width = this.iframe.contentWindow.document.body.scrollWidth + 'px';
+  };
+
   render() {
     const { componentData, theme, isMobile, settings } = this.props;
     const { imageHeight } = this.state;
