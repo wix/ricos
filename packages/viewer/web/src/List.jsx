@@ -18,7 +18,7 @@ const getBlockClassName = (i, dataEntry, textDirection, listType, prevDepth, dep
 };
 
 const getBlockDepth = (contentState, key) =>
-  contentState.blocks.filter(block => block.key === key)[0].depth;
+  contentState.blocks.find(block => block.key === key).depth;
 
 const List = ({
   ordered,
