@@ -139,7 +139,7 @@ export default ({
       }
     };
 
-    preventBubblingUp = event => event.preventDefault();
+    preventButtonGettingFocus = event => event.preventDefault();
 
     renderButton = () => {
       const { styles } = this;
@@ -163,7 +163,7 @@ export default ({
           className={classNames(styles.button, button.type === 'file' && styles.fileUploadButton)}
           data-hook={`${name.replace(' ', '_')}_insert_plugin_button`}
           onClick={this.onClick}
-          onMouseDown={event => event.preventDefault()}
+          onMouseDown={this.preventButtonGettingFocus}
           ref={this.buttonRef}
           {...buttonCompProps}
         >
