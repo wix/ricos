@@ -14,7 +14,20 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+
+### :rocket: New Feature
+- `link`
+  - [#750](https://github.com/wix-incubator/rich-content/pull/750) link toolbar
   
+### :house: Internal
+- `storybook`
+  - [#891](https://github.com/wix-incubator/rich-content/pull/891) fixed textHighlightPlugin color (intro.js)
+  
+### :bug: Bug Fix
+- `gallery`
+  - [#879](https://github.com/wix-incubator/rich-content/pull/879) gallery size - regression from #879
+  - [#872](https://github.com/wix-incubator/rich-content/pull/872) fix: gallery sliders css in mozilla firefox
+
 </details>
 <hr/>
 
@@ -24,7 +37,9 @@
   - [#879](https://github.com/wix-incubator/rich-content/pull/879) blurry pictures & not rendering
   - [#877](https://github.com/wix-incubator/rich-content/pull/877) fix gallery plugin blurry pictures
 - `link-preview`
-  - [#871](https://github.com/wix-incubator/rich-content/pull/871) embed link width 
+  - [#871](https://github.com/wix-incubator/rich-content/pull/871) maxwidth
+- `general`
+  - [#889](https://github.com/wix-incubator/rich-content/pull/889) fix all plugins max-width for inline size
 
 ### :house: Internal
 - `general`

@@ -44,6 +44,7 @@ export default class MobileLinkModal extends Component {
           isMobile={isMobile}
           onDone={onDone}
           onCancel={onCancel}
+          hidePanel={onCancel}
           onDelete={onDelete}
           t={t}
           ariaProps={{ 'aria-labelledby': 'mob_link_modal_hdr' }}

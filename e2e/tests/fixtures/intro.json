@@ -118,7 +118,7 @@
         {
           "offset": 0,
           "length": 31,
-          "style": "{\"BG\":\"color3\"}"
+          "style": "{\"BG\":\"#DDDDDD\"}"
         }
       ],
       "entityRanges": [],
