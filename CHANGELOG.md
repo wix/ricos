@@ -15,9 +15,31 @@
     Click to see more.
   </summary>
 
+### :house: Internal
+- `storybook`
+  - [#891](https://github.com/wix-incubator/rich-content/pull/891) fixed textHighlightPlugin color (intro.js)
+  
+### :bug: Bug Fix
+- `gallery`
+  - [#879](https://github.com/wix-incubator/rich-content/pull/879) gallery size - regression from #879
+  - [#872](https://github.com/wix-incubator/rich-content/pull/872) fix: gallery sliders css in mozilla firefox
 
 </details>
 <hr/>
+
+## 7.1.5 (Apr 4, 2020)
+### :bug: Bug Fix
+- `gallery`
+  - [#879](https://github.com/wix-incubator/rich-content/pull/879) blurry pictures & not rendering
+  - [#877](https://github.com/wix-incubator/rich-content/pull/877) fix gallery plugin blurry pictures
+- `link-preview`
+  - [#871](https://github.com/wix-incubator/rich-content/pull/871) maxwidth
+- `general`
+  - [#889](https://github.com/wix-incubator/rich-content/pull/889) fix all plugins max-width for inline size
+
+### :house: Internal
+- `general`
+  - [#878](https://github.com/wix-incubator/rich-content/pull/878) added git comment to pr's containing surge-examples url's
 
 ## 7.1.4 (Apr 2, 2020)
 ### :rocket: New Feature

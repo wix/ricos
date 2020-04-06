@@ -11,7 +11,7 @@ import {
 import { getInteractionWrapper, DefaultInteractionWrapper } from './utils/getInteractionWrapper';
 
 class PluginViewer extends PureComponent {
-  getContainerClassNames = hasLink => {
+  getContainerClassNames = () => {
     const {
       pluginComponent,
       componentData,
@@ -19,12 +19,15 @@ class PluginViewer extends PureComponent {
       context: { theme, isMobile },
     } = this.props;
     const { size, alignment, textWrap, custom } = pluginComponent.classNameStrategies || {};
+    const hasLink = this.componentHasLink();
+    const { html } = componentData;
     return classNames(
       styles.pluginContainerReadOnly,
       {
         [styles.pluginContainerMobile]: isMobile,
         [styles.anchor]: hasLink,
         [theme.anchor]: hasLink && theme.anchor,
+        [styles.embed]: hasLink && html,
       },
       isFunction(alignment)
         ? alignment(componentData, theme, styles, isMobile)
@@ -37,6 +40,10 @@ class PluginViewer extends PureComponent {
         : textWrapClassName(componentData, theme, styles, isMobile),
       isFunction(custom) ? custom(componentData, theme, styles, isMobile) : null
     );
+  };
+
+  componentHasLink = () => {
+    return this.props?.componentData?.config?.link;
   };
 
   /* eslint-disable complexity */
@@ -65,9 +72,8 @@ class PluginViewer extends PureComponent {
     if (Component) {
       if (elementType !== 'inline') {
         const { config = {} } = componentData;
-        const hasLink = config.link;
-        const ContainerElement = !hasLink ? 'div' : 'a';
-        const containerClassNames = this.getContainerClassNames(hasLink);
+        const hasLink = this.componentHasLink();
+        const ContainerElement = hasLink ? 'a' : 'div';
         let containerProps = {};
         if (hasLink) {
           const { url, target, rel } = config.link;
@@ -96,7 +102,7 @@ class PluginViewer extends PureComponent {
 
         return (
           <div className={styles.atomic}>
-            <ContainerElement className={containerClassNames} {...containerProps}>
+            <ContainerElement className={this.getContainerClassNames()} {...containerProps}>
               {isFunction(container) ? (
                 <div className={container(theme)}>
                   <Component {...componentProps} />
