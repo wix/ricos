@@ -17,20 +17,27 @@ const types = {
   'ordered-list-item': 'orderedList',
   'unordered-list-item': 'unorderedList',
 };
+const isList = type => {
+  return type === 'ordered-list-item' || type === 'unordered-list-item';
+};
 
 export default (theme, styleToClass) => {
   return contentBlock => {
     const {
       type,
+      depth,
       data: { textAlignment, dynamicStyles = {} },
     } = contentBlock.toJS();
-
+    let depthClassName;
     const key = types[type] || 'text';
 
+    if (!isList(type)) {
+      depthClassName = `public-DraftStyleDefault-block-depth${depth}`;
+    }
     const classList = [styles[key], theme[key]];
 
     if (type !== 'atomic') {
-      classList.push(styles[textAlignment], theme[textAlignment]);
+      classList.push(styles[textAlignment], theme[textAlignment], depthClassName);
     }
 
     const dynamicClasses = Object.entries(dynamicStyles).map(styleToClass);

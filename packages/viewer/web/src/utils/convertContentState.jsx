@@ -50,24 +50,32 @@ const getBlocks = (contentState, mergedStyles, textDirection, { config }) => {
     return <List {...props} />;
   };
 
+  const getBlockDepth = (contentState, key) =>
+    contentState.blocks.filter(block => block.key === key)[0].depth;
+
   const blockFactory = (type, style, withDiv) => {
     return (children, blockProps) =>
       children.map((child, i) => {
         const Type = typeof type === 'string' ? type : type(child);
-
+        const depth = getBlockDepth(contentState, blockProps.keys[i]);
+        const depthClassName = `public-DraftStyleDefault-block-depth${depth}`;
+        const directionClassName = `public-DraftStyleDefault-ltr`;
         const { interactions } = blockProps.data[i];
         const BlockWrapper = Array.isArray(interactions)
           ? getInteractionWrapper({ interactions, config, mergedStyles })
           : DefaultInteractionWrapper;
-
         const _child = isEmptyBlock(child) ? <br /> : withDiv ? <div>{child}</div> : child;
         const inner = (
           <Type
-            className={getBlockStyleClasses(
-              blockProps.data[i],
-              mergedStyles,
-              textDirection,
-              mergedStyles[style]
+            className={classNames(
+              getBlockStyleClasses(
+                blockProps.data[i],
+                mergedStyles,
+                textDirection,
+                mergedStyles[style]
+              ),
+              mergedStyles[depthClassName],
+              mergedStyles[directionClassName]
             )}
             style={blockDataToStyle(blockProps.data[i])}
             key={blockProps.keys[i]}
