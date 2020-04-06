@@ -1,23 +1,29 @@
+import React from 'react';
 import {
   MODIFIERS,
   hasLinksInSelection,
   removeLinksInSelection,
   EditorModals,
   getModalStyles,
+  insertLinkAtCurrentSelection,
 } from 'wix-rich-content-editor-common';
+import createInlineButtons from './inline-buttons';
 import TextLinkButton from './TextLinkButton';
 
-const openLinkModal = ({
-  helpers,
-  isMobile,
-  anchorTarget,
-  relValue,
-  t,
-  theme,
-  getEditorState,
-  setEditorState,
-  uiSettings,
-}) => {
+const openLinkModal = (
+  {
+    helpers,
+    isMobile,
+    anchorTarget,
+    relValue,
+    t,
+    theme,
+    getEditorState,
+    setEditorState,
+    uiSettings,
+  },
+  closeInlinePluginToolbar
+) => {
   const modalStyles = getModalStyles({ fullScreen: false, isMobile });
   if (helpers && helpers.openModal) {
     const modalProps = {
@@ -33,6 +39,8 @@ const openLinkModal = ({
       modalName: EditorModals.MOBILE_TEXT_LINK_MODAL,
       hidePopup: helpers.closeModal,
       uiSettings,
+      insertLinkFn: insertLinkAtCurrentSelection,
+      closeInlinePluginToolbar,
     };
     helpers.openModal(modalProps);
   } else {
@@ -43,10 +51,18 @@ const openLinkModal = ({
   }
 };
 
-export default config => ({
+export default (config, closeInlinePluginToolbar) => ({
   TextButtonMapper: () => ({
     Link: {
-      component: TextLinkButton,
+      component: props => (
+        <TextLinkButton
+          insertLinkFn={insertLinkAtCurrentSelection}
+          isActive={hasLinksInSelection(config.getEditorState())}
+          closeInlinePluginToolbar={closeInlinePluginToolbar}
+          tooltipText={config.t('TextLinkButton_Tooltip')}
+          {...props}
+        />
+      ),
       isMobile: true,
       position: { mobile: 5 },
       keyBindings: [
@@ -58,13 +74,16 @@ export default config => ({
           },
           commandHandler: editorState => {
             if (hasLinksInSelection(editorState)) {
+              closeInlinePluginToolbar();
               return removeLinksInSelection(editorState);
             } else {
-              openLinkModal(config);
+              openLinkModal(config, closeInlinePluginToolbar);
             }
           },
         },
       ],
     },
   }),
+  InlinePluginToolbarButtons: createInlineButtons(config, closeInlinePluginToolbar),
+  name: 'link',
 });
