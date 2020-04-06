@@ -6,12 +6,12 @@ import classNames from 'classnames';
 import ButtonSample from '../components/button-sample';
 import ColorToggleComponent from './color-toggle-component';
 import { DEFAULT_PALETTE, COLOR_PICKER_TYPE, buttonPreviews, getColors } from '../constants';
-import styles from '../../statics/styles/design-component-styles.scss';
+import dcStyle from '../../statics/styles/design-component-styles.scss';
 
 class DesignComponent extends PureComponent {
   constructor(props) {
     super(props);
-    this.styles = mergeStyles({ styles, theme: props.theme });
+    this.styles = mergeStyles({ styles: dcStyle, theme: props.theme });
     const { designObj } = this.props;
     const {
       settings: { colors, getTextColors, getBorderColors, getBackgroundColors },
@@ -127,7 +127,7 @@ class DesignComponent extends PureComponent {
   renderColorPicker(color, userColors, onColorAdded, onChange, pickerType, label) {
     const { t, isMobile, theme, palette } = this.props;
     return (
-      <div className={this.styles.designComponentStyles}>
+      <div>
         <ColorToggleComponent
           theme={theme}
           color={color}
@@ -149,9 +149,9 @@ class DesignComponent extends PureComponent {
             onChange={onChange.bind(this)}
             t={t}
           >
-            {({ renderUserColors, renderAddColorButton, mergedStyles }) => (
-              <div className={mergedStyles.colorPicker_palette}>
-                <div className={mergedStyles.colorPicker_buttons_container}>
+            {({ renderUserColors, renderAddColorButton }) => (
+              <div className={dcStyle.colorPicker_palette}>
+                <div className={dcStyle.colorPicker_buttons_container}>
                   <div>{renderUserColors()}</div>
                   <div>{renderAddColorButton()}</div>
                 </div>
