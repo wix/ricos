@@ -16,6 +16,7 @@
   height: 100%;
   padding: 0 18px;
   box-sizing: border-box;
+  text-decoration: none;
 }
 
 .file_upload_name_container {
@@ -48,7 +49,6 @@
 .file_upload_type {
   text-transform: uppercase;
   letter-spacing: 0;
-  background: #fff;
   font-size: 14px;
   color: rgb(51, 51, 51);
   opacity: 0.5;

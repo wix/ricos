@@ -13,6 +13,7 @@ const THEMES = {
 const SUPPORTED_THEMES = [THEMES.DEFAULT, THEMES.PALETTE, THEMES.BACK_OFFICE];
 const BG_COLOR = 11;
 const SECONDARY_COLOR = 13;
+const COLOR4 = 14;
 const TEXT_COLOR = 15;
 const ACTION_COLOR = 18;
 const COLOR7 = 17;
@@ -53,6 +54,7 @@ export default class ThemeGenerator {
         textColor: this.getColorValue(TEXT_COLOR),
         secondaryColor: this.getColorValue(SECONDARY_COLOR),
         color7: utils.hexToRgbA(this.getColorValue(COLOR7), 0.7),
+        color4: this.getColorValue(COLOR4),
       };
 
       const pluginThemes = this.themeGenerators.reduce(
