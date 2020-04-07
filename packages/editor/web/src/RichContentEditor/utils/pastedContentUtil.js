@@ -1,7 +1,9 @@
 import { OrderedSet } from 'immutable';
 import rgbToHex from './rgbToHex';
+import { Modifier, SelectionState } from 'wix-rich-content-editor-common';
+import { reduce } from 'lodash';
 
-export default {
+export const pastedContentConfig = {
   htmlToStyle: (nodeName, node, currentStyle) => {
     if (nodeName === 'span') {
       const styles = [];
@@ -38,4 +40,31 @@ export default {
   //   }
   //   return null;
   // },
+};
+
+export const clearUnnecessaryInlineStyles = contentState => {
+  const selection = selectAllContent(contentState);
+
+  return reduce(
+    unnecessaryInlineStyles,
+    (newContentState, style) => Modifier.removeInlineStyle(newContentState, selection, style),
+    contentState
+  );
+};
+
+const unnecessaryInlineStyles = ['CODE'];
+
+const selectAllContent = contentState => {
+  const firstBlock = contentState.getBlockMap().first();
+  const lastBlock = contentState.getBlockMap().last();
+  const firstBlockKey = firstBlock.getKey();
+  const lastBlockKey = lastBlock.getKey();
+  const lengthOfLastBlock = lastBlock.getLength();
+
+  return new SelectionState({
+    anchorKey: firstBlockKey,
+    anchorOffset: 0,
+    focusKey: lastBlockKey,
+    focusOffset: lengthOfLastBlock,
+  });
 };

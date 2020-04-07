@@ -1,18 +1,20 @@
-import themeStrategyProvider from './themeStrategyProvider';
+import themeStrategy from './themeStrategy';
 
 const getType = require('jest-get-type');
 
-describe('ThemeStrategyProvider', () => {
+// eslint-disable-next-line mocha/no-skipped-tests
+describe('ThemeStrategy', () => {
   const driver = {
     runStrategy: (theme, palette, themeGenerators) =>
-      themeStrategyProvider(false, { theme, palette, themeGenerators }),
+      themeStrategy(false, { theme, palette, themeGenerators }),
   };
 
-  it('should create a function', () => {
-    expect(getType(driver.runStrategy())).toBe('function');
+  it('should create a theme object', () => {
+    expect(getType(driver.runStrategy())).toBe('object');
+    expect(driver.runStrategy()).toHaveProperty('theme');
   });
 
-  const emptyResult = driver.runStrategy()();
+  const emptyResult = driver.runStrategy();
   it('should succeed without arguments', () => {
     expect(emptyResult).toBeTruthy();
     expect(emptyResult.theme).toBeTruthy();
@@ -24,9 +26,7 @@ describe('ThemeStrategyProvider', () => {
   });
 
   it('should set inner props to override the default theme', () => {
-    const overrider = {
-      theme: { modalTheme: 1 },
-    };
-    expect(driver.runStrategy()(overrider).theme.modalTheme).toBe(1);
+    const theme = { modalTheme: 1 };
+    expect(driver.runStrategy(theme).theme.modalTheme).toBe(1);
   });
 });

@@ -25,12 +25,30 @@ const createImagePlugin = (config = {}) => {
     type: IMAGE_TYPE,
     legacyType: IMAGE_TYPE_LEGACY,
     pluginDecorationProps: (props, componentData) => {
-      const resizeableProps = PLUGIN_DECORATION_PROPS[PLUGIN_DECORATIONS.RESIZEABLE](props);
       const size = componentData.config?.size;
-      const isInlineSize = size === 'inline';
-      const { width, ...rest } = resizeableProps.style; // eslint-disable-line no-unused-vars
-      const style = isInlineSize ? resizeableProps.style : { ...rest };
-      return { ...resizeableProps, style };
+      let calulatedProps = props;
+      if (size === 'original' && componentData.src?.width) {
+        calulatedProps = {
+          ...props,
+          width: componentData.src.width,
+          style: {
+            ...(componentData.src.style || {}),
+            width: componentData.src.width,
+          },
+        };
+      }
+      const resizeableProps = PLUGIN_DECORATION_PROPS[PLUGIN_DECORATIONS.RESIZEABLE](
+        calulatedProps
+      );
+
+      if (size === 'inline') {
+        return resizeableProps;
+      } else if (size === 'original') {
+        return { ...resizeableProps, style: { ...resizeableProps.style, maxWidth: '100%' } };
+      } else {
+        const { width, ...allButWidth } = resizeableProps.style; // eslint-disable-line no-unused-vars
+        return { ...resizeableProps, style: { ...allButWidth } };
+      }
     },
     componentWillReceiveDecorationProps: (props, nextProps, onPropsChange) => {
       const { width } = PLUGIN_DECORATION_PROPS[PLUGIN_DECORATIONS.RESIZEABLE](props);

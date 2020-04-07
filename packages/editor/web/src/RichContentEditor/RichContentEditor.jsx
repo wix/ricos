@@ -36,7 +36,7 @@ import {
 import styles from '../../statics/styles/rich-content-editor.scss';
 import draftStyles from '../../statics/styles/draft.rtlignore.scss';
 import { convertFromHTML as draftConvertFromHtml } from 'draft-convert';
-import pastedContentConfig from './utils/pastedContentConfig';
+import { pastedContentConfig, clearUnnecessaryInlineStyles } from './utils/pastedContentUtil';
 
 class RichContentEditor extends Component {
   static getDerivedStateFromError(error) {
@@ -222,30 +222,25 @@ class RichContentEditor extends Component {
     if (handlePastedText) {
       return handlePastedText(text, html, editorState);
     }
-    let contentState;
     if (html) {
       const htmlContentState = draftConvertFromHtml(pastedContentConfig)(html);
-      contentState = Modifier.replaceWithFragment(
+      const contentState = Modifier.replaceWithFragment(
         editorState.getCurrentContent(),
         editorState.getSelection(),
         htmlContentState.getBlockMap()
       );
+      const newEditorState = EditorState.push(editorState, contentState, 'insert-fragment');
+      const newContentState = clearUnnecessaryInlineStyles(contentState);
+      const resultEditorState = EditorState.set(newEditorState, {
+        currentContent: newContentState,
+        selection: newEditorState.getSelection(),
+      });
+
+      this.updateEditorState(resultEditorState);
+      return 'handled';
     } else {
-      contentState = Modifier.replaceText(
-        editorState.getCurrentContent(),
-        editorState.getSelection(),
-        text
-      );
+      return false;
     }
-
-    const newEditorState = EditorState.push(editorState, contentState, 'insert-fragment');
-    const resultEditorState = EditorState.set(newEditorState, {
-      currentContent: contentState,
-      selection: newEditorState.getSelection(),
-    });
-
-    this.updateEditorState(resultEditorState);
-    return 'handled';
   };
 
   handleTabCommand = () => {
@@ -315,7 +310,8 @@ class RichContentEditor extends Component {
     ];
     //eslint-disable-next-line array-callback-return
     const toolbars = this.plugins.map((plugin, index) => {
-      const Toolbar = plugin.Toolbar || plugin.InlineToolbar || plugin.SideToolbar;
+      const Toolbar =
+        plugin.Toolbar || plugin.InlinePluginToolbar || plugin.InlineToolbar || plugin.SideToolbar;
       if (Toolbar) {
         if (includes(toolbarsToIgnore, plugin.name)) {
           return null;

@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { validate, mergeStyles, pluginGallerySchema } from 'wix-rich-content-common';
-import { isEqual } from 'lodash';
+import { isEqual, debounce } from 'lodash';
 import { convertItemData } from './lib/convert-item-data';
 import { DEFAULTS, isHorizontalLayout, sampleItems } from './constants';
 import resizeMediaUrl from './lib/resize-media-url';
@@ -10,6 +10,12 @@ import 'pro-gallery/dist/statics/main.min.css';
 import ExpandIcon from './icons/expand.svg';
 
 const { ProGallery } = process.env.SANTA ? {} : require('pro-gallery');
+
+function getClosestParanet(elem, selector) {
+  if (!elem || elem === document) return null;
+  if (selector.some(selector => elem.matches(selector))) return elem;
+  return getClosestParanet(elem.parentNode, selector);
+}
 
 class GalleryViewer extends React.Component {
   constructor(props) {
@@ -29,8 +35,24 @@ class GalleryViewer extends React.Component {
         styleParams: { ...styleParams, allowHover: true },
       });
     }
-    this.updateDimensions();
     window.addEventListener('resize', this.updateDimensions);
+    this.initUpdateDimensionsForDomChanges();
+  }
+
+  initUpdateDimensionsForDomChanges() {
+    const contentElement = getClosestParanet(this.container, ['.DraftEditor-root', '.viewer']);
+    if (contentElement) {
+      this.observer = new MutationObserver(() => {
+        if (contentElement.clientHeight !== this.oldContentElementHeight) {
+          this.oldContentElementHeight = contentElement.clientHeight;
+          this.updateDimensions();
+        }
+      });
+      this.observer.observe(contentElement, { attributes: true, childList: true, subtree: true });
+    } else {
+      // eslint-disable-next-line no-console
+      console.warn(`can't find content container to listen for changes to update gallery`);
+    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -44,6 +66,7 @@ class GalleryViewer extends React.Component {
   }
 
   componentWillUnmount() {
+    this.observer.disconnect();
     window.removeEventListener('resize', this.updateDimensions);
   }
 
@@ -59,7 +82,7 @@ class GalleryViewer extends React.Component {
     }
   };
 
-  updateDimensions = () => {
+  updateDimensions = debounce(() => {
     if (this.container && this.container.getBoundingClientRect) {
       const width = Math.floor(this.container.getBoundingClientRect().width);
       let height;
@@ -68,7 +91,7 @@ class GalleryViewer extends React.Component {
       }
       this.setState({ size: { width, height } });
     }
-  };
+  }, 100);
 
   stateFromProps = props => {
     const items = props.componentData.items || DEFAULTS.items;

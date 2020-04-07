@@ -3,31 +3,9 @@
 const path = require('path');
 const chalk = require('chalk');
 const execSync = require('child_process').execSync;
-
-const EXAMPLES_TO_DEPLOY = [
-  {
-    name: 'rich-content',
-    path: 'examples/main',
-  },
-  {
-    name: 'rich-content-storybook',
-    path: 'examples/storybook',
-    buildCmd: 'build-storybook -s public',
-    dist: 'storybook-static',
-  },
-];
+const { EXAMPLES_TO_DEPLOY, fqdn, generateSubdomain } = require('./deployUtils');
 
 const exec = cmd => execSync(cmd, { stdio: 'inherit' });
-
-const fqdn = subdomain => `${subdomain}.surge.sh/`;
-
-const generateSubdomain = exampleName => {
-  const { version } = require('../lerna.json');
-  const { GITHUB_REF } = process.env;
-  const branchName = GITHUB_REF.split('/').pop();
-  const postfix = !branchName.startsWith('release') ? branchName : version;
-  return exampleName + `-${postfix.replace(/(\.)|(\/)/g, '-')}`;
-};
 
 function build({ buildCmd = 'npm run build' }) {
   console.log(chalk.magenta(`Running: "${buildCmd}"`));

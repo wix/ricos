@@ -15,6 +15,7 @@
       window.__CONTENT_STATE__ = <%- serialize(initialState) %>;
       window.isMobile = <%- isMobile %>;
       window.locale = <%- '"' + locale + '"' %>;
+      window.compId = <%- '"' + compId + '"' %>;
     </script>
     <script src="/<%- bundleName %>.bundle.js"></script>
   </body>

@@ -87,6 +87,9 @@
   left: 65%;
   top: -2px;
   margin-top: 5px;
+  @include phone {
+    left: 75%;
+  }
 }
 
 .colorPicker_add_color_label {
