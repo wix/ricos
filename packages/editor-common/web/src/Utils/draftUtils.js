@@ -514,3 +514,7 @@ export function getBlockType(editorState) {
 export function setSelection(editorState, selection) {
   return EditorState.acceptSelection(editorState, selection);
 }
+
+export function setForceSelection(editorState, selection) {
+  return EditorState.forceSelection(editorState, selection);
+}

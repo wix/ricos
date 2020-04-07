@@ -32,6 +32,8 @@
   - [#872](https://github.com/wix-incubator/rich-content/pull/872) fix: gallery sliders css in mozilla firefox
 - `plugins`
   - [#778](https://github.com/wix-incubator/rich-content/pull/880) fix focus on plugins insert buttons click
+- `link`
+  - [#902](https://github.com/wix-incubator/rich-content/pull/902) mobile - cancel in link panel changed the cursor
 
 
 </details>
