@@ -504,6 +504,17 @@ export function getBlockInfo(editorState, blockKey) {
   return { type: type || 'text', entityData };
 }
 
+export function getBlockType(editorState) {
+  const contentState = editorState.getCurrentContent();
+  const blockKey = editorState.getSelection().getAnchorKey();
+  const block = contentState.getBlockForKey(blockKey);
+  return block.type;
+}
+
 export function setSelection(editorState, selection) {
   return EditorState.acceptSelection(editorState, selection);
+}
+
+export function setForceSelection(editorState, selection) {
+  return EditorState.forceSelection(editorState, selection);
 }

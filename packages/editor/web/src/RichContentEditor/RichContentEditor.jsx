@@ -22,6 +22,9 @@ import {
   calculateDiff,
   getPostContentSummary,
   Modifier,
+  getBlockType,
+  COMMANDS,
+  MODIFIERS,
 } from 'wix-rich-content-editor-common';
 
 import {
@@ -32,6 +35,7 @@ import {
 } from 'wix-rich-content-common';
 import styles from '../../statics/styles/rich-content-editor.scss';
 import draftStyles from '../../statics/styles/draft.rtlignore.scss';
+import 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss';
 import { convertFromHTML as draftConvertFromHtml } from 'draft-convert';
 import { pastedContentConfig, clearUnnecessaryInlineStyles } from './utils/pastedContentUtil';
 
@@ -240,27 +244,35 @@ class RichContentEditor extends Component {
     }
   };
 
+  handleTabCommand = () => {
+    if (this.getToolbars().TextToolbar) {
+      const staticToolbarButton = this.findFocusableChildForElement(
+        `${getStaticTextToolbarId(this.refId)}`
+      );
+      staticToolbarButton && staticToolbarButton.focus();
+    } else {
+      this.editor.blur();
+    }
+  };
+
   getCustomCommandHandlers = () => ({
     commands: [
       ...this.pluginKeyBindings.commands,
       {
-        command: 'tab',
+        command: COMMANDS.TAB,
         modifiers: [],
+        key: 'Tab',
+      },
+      {
+        command: COMMANDS.SHIFT_TAB,
+        modifiers: [MODIFIERS.SHIFT],
         key: 'Tab',
       },
     ],
     commandHanders: {
       ...this.pluginKeyBindings.commandHandlers,
-      tab: () => {
-        if (this.getToolbars().TextToolbar) {
-          const staticToolbarButton = this.findFocusableChildForElement(
-            `${getStaticTextToolbarId(this.refId)}`
-          );
-          staticToolbarButton && staticToolbarButton.focus();
-        } else {
-          this.editor.blur();
-        }
-      },
+      tab: this.handleTabCommand,
+      shiftTab: this.handleTabCommand,
     },
   });
 
@@ -366,7 +378,8 @@ class RichContentEditor extends Component {
         blockStyleFn={blockStyleFn(theme, this.styleToClass)}
         handleKeyCommand={handleKeyCommand(
           this.updateEditorState,
-          this.getCustomCommandHandlers().commandHanders
+          this.getCustomCommandHandlers().commandHanders,
+          getBlockType(editorState)
         )}
         editorKey={editorKey}
         keyBindingFn={createKeyBindingFn(this.getCustomCommandHandlers().commands || [])}

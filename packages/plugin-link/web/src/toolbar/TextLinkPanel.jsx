@@ -1,12 +1,12 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
-import { EditorState } from '@wix/draft-js';
 import { isEmpty } from 'lodash';
 import {
   getLinkDataInSelection,
   removeLinksInSelection,
   LinkPanelContainer,
   decorateComponentWithProps,
+  setForceSelection,
 } from 'wix-rich-content-editor-common';
 
 export default class TextLinkPanel extends Component {
@@ -67,12 +67,7 @@ export default class TextLinkPanel extends Component {
   onCancel = () => {
     const { getEditorState, setEditorState } = this.props;
     const editorState = getEditorState();
-    const selection = editorState.getSelection();
-    const newEditorState = EditorState.forceSelection(
-      editorState,
-      selection.merge({ anchorOffset: selection.focusOffset })
-    );
-    setEditorState(newEditorState);
+    setEditorState(setForceSelection(editorState, editorState.getSelection()));
     this.hideLinkPanel();
   };
 
