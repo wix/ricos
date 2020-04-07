@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { isEmpty } from 'lodash';
-import { EditorState } from '@wix/draft-js';
-import { getLinkDataInSelection, removeLinksInSelection } from 'wix-rich-content-editor-common';
+import {
+  getLinkDataInSelection,
+  removeLinksInSelection,
+  setForceSelection,
+} from 'wix-rich-content-editor-common';
 import MobileLinkModal from './MobileLinkModal';
 
 export default class MobileTextLinkModal extends Component {
@@ -14,12 +17,7 @@ export default class MobileTextLinkModal extends Component {
   onCancel = () => {
     const { getEditorState, setEditorState } = this.props;
     const editorState = getEditorState();
-    const selection = editorState.getSelection();
-    const newEditorState = EditorState.forceSelection(
-      editorState,
-      selection.merge({ anchorOffset: selection.focusOffset })
-    );
-    setEditorState(newEditorState);
+    setEditorState(setForceSelection(editorState, editorState.getSelection()));
     this.hidePopup();
   };
 

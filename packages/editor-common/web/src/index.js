@@ -85,6 +85,7 @@ export {
   calculateDiff,
   getPostContentSummary,
   createSelection,
+  setForceSelection,
 } from './Utils/draftUtils';
 export { isiOS } from './Utils/isiOS';
 export { getSelectionStyles } from './Utils/inlineStyleUtils';
