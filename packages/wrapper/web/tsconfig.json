@@ -2,8 +2,8 @@
   "compilerOptions": {
     "declaration": true,
     "declarationMap": true,
-    "allowSyntheticDefaultImports": true,
     "outDir": "./dist",
+    "allowSyntheticDefaultImports": true,
     "sourceMap": true,
     "noImplicitAny": false,
     "module": "ESNext",
