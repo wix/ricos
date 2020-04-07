@@ -482,7 +482,6 @@ describe('plugins', () => {
       cy.eyesCheckWindow(this.test.title);
     });
     it('delete link preview', function() {
-      cy.moveCursorToStart();
       cy.openPluginToolbar(PLUGIN_COMPONENT.LINK_PREVIEW).wait(100);
       cy.clickToolbarButton('blockButton_delete');
       cy.triggerLinkPreviewViewerUpdate();

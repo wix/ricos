@@ -22,26 +22,6 @@ To install this package as viewer, use the following command:
 npm install --save wix-rich-content-viewer
 ```
 
-To use the editor with `<script>` tag, consume the following JS file: `dist/EditorCommon.js` and `dist/Editor.js` from the bundle, and load the matching CSS files:
-
-```html
-<html>
-  <head>
-    <script src="https://unpkg.com/wix-rich-content-editor-common/dist/EditorCommon.js"></script>
-    <script src="https://unpkg.com/wix-rich-content-editor/dist/Editor.js"></script>
-    <link rel="stylesheet" href="https://unpkg.com/wix-rich-content-editor-common/dist/styles.min.css" />
-    <link rel="stylesheet" href="https://unpkg.com/wix-rich-content-editor/dist/styles.min.css" />
-  </head>
-  <body>
-    <script>
-      const { RichContentEditor, EditorState } = window.WixRichContentEditor;
-    </script>
-
-    <!-- ...rest of your app code... -->
-  </body>
-</html>
-```
-
 ## Getting Started
 
 ### 1. Basic Editor
