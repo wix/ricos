@@ -9,7 +9,7 @@ export const THEME = colors => {
   const { textColor, bgColor, secondaryColor } = colors;
   return {
     linkPreview: {
-      borderColor: textColor,
+      borderColor: `${secondaryColor} !important`,
       backgroundColor: bgColor,
     },
     linkPreview_title: {

@@ -27,7 +27,7 @@ export const THEME = colors => {
       color: textColor,
     },
     file_upload_container: {
-      borderColor: secondaryColor,
+      borderColor: `${secondaryColor} !important`,
     },
   };
 };
