@@ -1,7 +1,8 @@
 import { TOOLBARS, TOOLBAR_OFFSETS, DISPLAY_MODE } from '../../consts';
-import { getConfigByFormFactor } from '../../Utils/getConfigByFormFactor';
 import { mergeToolbarSettings } from '../../Utils/mergeToolbarSettings';
 import { getDefaultToolbarSettings } from '../default-toolbar-settings';
+import { isiOS } from '../../Utils/isiOS';
+import { get } from 'lodash';
 
 export const setVariables = ({ buttons, getToolbarSettings, isMobile }) => {
   const { all, hidden } = buttons;
@@ -24,32 +25,14 @@ export const setVariables = ({ buttons, getToolbarSettings, isMobile }) => {
     getToolbarDecorationFn,
   } = toolbarSettings;
 
-  const structure = getConfigByFormFactor({ config: getButtons(), isMobile, defaultValue: [] });
-  const offset = getConfigByFormFactor({
-    config: getPositionOffset(),
-    isMobile,
-    defaultValue: { x: 0, y: 0 },
-  });
-  const shouldCreate = getConfigByFormFactor({
-    config: _shouldCreate(),
-    isMobile,
-    defaultValue: true,
-  });
-  const visibilityFn = getConfigByFormFactor({
-    config: getVisibilityFn(),
-    isMobile,
-    defaultValue: () => true,
-  });
-  const displayOptions = getConfigByFormFactor({
-    config: getDisplayOptions(),
-    isMobile,
-    defaultValue: { displayMode: DISPLAY_MODE.NORMAL },
-  });
-  const toolbarDecorationFn = getConfigByFormFactor({
-    config: getToolbarDecorationFn(),
-    isMobile,
-    defaultValue: () => null,
-  });
+  const deviceName = !isMobile ? 'desktop' : isiOS() ? 'mobile.ios' : 'mobile.android';
+
+  const structure = get(getButtons(), deviceName, []);
+  const offset = get(getPositionOffset(), deviceName, { x: 0, y: 0 });
+  const shouldCreate = get(_shouldCreate(), deviceName, true);
+  const visibilityFn = get(getVisibilityFn(), deviceName, () => true);
+  const displayOptions = get(getDisplayOptions(), deviceName, { displayMode: DISPLAY_MODE.NORMAL });
+  const toolbarDecorationFn = get(getToolbarDecorationFn(), deviceName, () => null);
   const ToolbarDecoration = toolbarDecorationFn();
   return { structure, offset, shouldCreate, visibilityFn, displayOptions, ToolbarDecoration };
 };
