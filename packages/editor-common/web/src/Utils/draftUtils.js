@@ -518,3 +518,18 @@ export function setSelection(editorState, selection) {
 export function setForceSelection(editorState, selection) {
   return EditorState.forceSelection(editorState, selection);
 }
+
+export function insertCharacter(event, editorState, character) {
+  event.preventDefault();
+  const contentState = editorState.getCurrentContent();
+  const selection = editorState.getSelection();
+
+  let newContentState;
+  if (selection.isCollapsed()) {
+    newContentState = Modifier.insertText(contentState, selection, character);
+  } else {
+    newContentState = Modifier.replaceText(contentState, selection, character);
+  }
+
+  return EditorState.push(editorState, newContentState, 'insert-characters');
+}
