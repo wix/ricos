@@ -122,6 +122,7 @@ describe('plugins', () => {
         .get(`[data-hook=${'image-item'}]`)
         .eq(1);
       cy.openPluginToolbar(PLUGIN_COMPONENT.GALLERY).shrinkPlugin();
+      cy.waitForDocumentMutations();
       cy.eyesCheckWindow(this.test.title + ' toolbar');
       cy.openGalleryAdvancedSettings();
       cy.eyesCheckWindow(this.test.title + ' settings');
