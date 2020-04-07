@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { isEmpty } from 'lodash';
+import { EditorState } from '@wix/draft-js';
 import { getLinkDataInSelection, removeLinksInSelection } from 'wix-rich-content-editor-common';
 import MobileLinkModal from './MobileLinkModal';
 
@@ -8,6 +9,18 @@ export default class MobileTextLinkModal extends Component {
   hidePopup = () => {
     const { hidePopup } = this.props;
     hidePopup();
+  };
+
+  onCancel = () => {
+    const { getEditorState, setEditorState } = this.props;
+    const editorState = getEditorState();
+    const selection = editorState.getSelection();
+    const newEditorState = EditorState.forceSelection(
+      editorState,
+      selection.merge({ anchorOffset: selection.focusOffset })
+    );
+    setEditorState(newEditorState);
+    this.hidePopup();
   };
 
   createLinkEntity = ({ url, targetBlank, nofollow }) => {
@@ -50,7 +63,7 @@ export default class MobileTextLinkModal extends Component {
         anchorTarget={anchorTarget}
         relValue={relValue}
         onDone={this.createLinkEntity}
-        onCancel={this.hidePopup}
+        onCancel={this.onCancel}
         onDelete={this.deleteLink}
         uiSettings={uiSettings}
         t={t}
