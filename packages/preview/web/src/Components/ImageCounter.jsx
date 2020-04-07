@@ -60,7 +60,7 @@ class ImageCounter extends PureComponent {
     this.decorateImages();
   }
 
-  onResize = debounce(this.decorateImages, 500);
+  onResize = debounce(this.decorateImages, 200);
 
   handleWrapper = el => (this.wrapper = el);
 
