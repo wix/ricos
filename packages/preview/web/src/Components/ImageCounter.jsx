@@ -47,17 +47,17 @@ class ImageCounter extends PureComponent {
     );
   };
 
-  decorateImages() {
+  decorateImages = () => {
     if (this.wrapper) {
       const images = this.wrapper.querySelectorAll('[role=img]');
       const imagesToDecorate = this.props.imageSelector(images);
       const decorations = imagesToDecorate.map(img => this.renderDecoration(img));
       ReactDOM.render(decorations, this.container);
     }
-  }
+  };
 
   componentDidMount() {
-    setTimeout(this.decorateImages, 500);
+    this.decorateImages();
   }
 
   onResize = debounce(this.decorateImages, 500);
@@ -72,9 +72,11 @@ class ImageCounter extends PureComponent {
     return (
       <Measure onResize={this.onResize}>
         {({ measureRef }) => (
-          <div ref={this.handleWrapper} onClick={this.onClick} ref={measureRef}>
-            <div ref={this.handleContainer} className={this.styles.imageCounter_overlay} />
-            {this.props.children}
+          <div ref={measureRef}>
+            <div ref={this.handleWrapper} onClick={this.onClick}>
+              <div ref={this.handleContainer} className={this.styles.imageCounter_overlay} />
+              {this.props.children}
+            </div>
           </div>
         )}
       </Measure>
