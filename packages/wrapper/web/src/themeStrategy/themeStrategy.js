@@ -7,7 +7,7 @@ import { defaultTheme } from './defaults';
 export default function themeStrategy(isEditor, themeProperties) {
   const { theme } = themeProperties;
   if (typeof theme === 'string') {
-    jss.setup({ plugins: [...preset().plugins, pluginNested] });
+    jss.setup({ plugins: [...preset().plugins, pluginNested()] });
     const themeGenerator = new ThemeGenerator(isEditor, themeProperties);
     const styles = jss.createStyleSheet(themeGenerator.getStylesObject());
     const themeObj = styles.attach();

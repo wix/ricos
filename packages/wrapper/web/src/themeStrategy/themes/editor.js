@@ -24,5 +24,15 @@ export default function editor(colors) {
         color: actionColor,
       },
     },
+    //inline-toolbar-dropdown-button.scss
+    inlineToolbarButton_active: {
+      backgroundColor: 'blue !important',
+      fill: `blue !important`,
+    },
+    inlineToolbarDropdownButton: {
+      '&:hover svg': {
+        fill: `${actionColor} !important`,
+      },
+    },
   };
 }

@@ -100,5 +100,60 @@ export default function editorCommon(colors) {
     colorPicker_add_color_label: {
       color: `${actionColor} !important`,
     },
+
+    //side-toolbar.scss + toolbar-button.scss
+    //editor + editor-common
+    sideToolbar: {
+      '&$button:hover svg': {
+        color: `${actionColor} !important`,
+        fill: `${actionColor} !important`,
+      },
+    },
+
+    //inline-toolbar-button.scss
+    inlineToolbarButton_active: {},
+    inlineToolbarButton_icon: {
+      '&:hover': {
+        color: `${actionColor} !important`,
+        '& svg': {
+          fill: `${actionColor} !important`,
+        },
+      },
+    },
+
+    //plugin-toolbar-button.scss
+    pluginToolbarButton_disabled: {},
+    pluginToolbarButton_active: {
+      color: `${actionColor} !important`,
+      fill: `${actionColor} !important`,
+    },
+    pluginToolbarButton: {
+      '&:not($pluginToolbarButton_disabled):hover >:not($Dropdown-root) svg': {
+        color: `${actionColor} !important`,
+        fill: `${actionColor} !important`,
+      },
+      '&:not($pluginToolbarButton_disabled):focus svg': {
+        color: `${actionColor} !important`,
+        fill: `${actionColor} !important`,
+      },
+      '&:not($pluginToolbarButton_disabled)$pluginToolbarButton_active svg': {
+        color: `${actionColor} !important`,
+        fill: `${actionColor} !important`,
+      },
+      '&:not($pluginToolbarButton_disabled):hover': {},
+    },
+
+    //dropdown.scss
+    'Dropdown-control': {
+      '&:hover': {
+        color: `${actionColor} !important`,
+      },
+    },
+    'Dropdown-option': {
+      '&:hover': {
+        color: `${actionColor} !important`,
+      },
+    },
+    'Dropdown-root': {},
   };
 }
