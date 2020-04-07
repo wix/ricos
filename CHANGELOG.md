@@ -18,6 +18,7 @@
 ### :rocket: New Feature
 - `link`
   - [#750](https://github.com/wix-incubator/rich-content/pull/750) link toolbar
+  - [#904](https://github.com/wix-incubator/rich-content/pull/904) fix saving data of "target" and "rel" link(the checkboxes in Link Panel)
   
 ### :house: Internal
 - `storybook`
