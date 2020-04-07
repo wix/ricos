@@ -5,35 +5,8 @@ import pluginsStrategy from './pluginsStrategy/pluginsStrategy';
 import localeStrategy from './localeStrategy/localeStrategy';
 import './styles.global.css';
 import { merge } from 'lodash';
-import { EditorState } from 'draft-js';
 import PropTypes from 'prop-types';
-
-interface RichContentProps {
-  locale?: string;
-  localeResource?: object;
-  placeholder?: string;
-  editorKey?: string;
-  onChange?(editorState: EditorState): void;
-  initialState?: { blocks: object[]; entityMap: { [index: number]: object } };
-  theme?: object;
-  config?: object;
-  plugins?: (config?: string) => { config: object; type: string; [propName: string]: any }[];
-  ModalsMap?: { [propName: string]: Component };
-  helpers?: { [propName: string]: (...args: any[]) => any };
-}
-
-interface RichContentWrapperProps {
-  children: ReactElement;
-  theme: string | object;
-  locale: string;
-  palette: object[];
-  plugins: ({ config: object; type: string; theme?: (color: object) => object } & (
-    | { createPlugin: (config?: object) => any; ModalsMap: object }
-    | { typeMapper: () => object }
-  ))[];
-  editor: boolean;
-  rcProps: RichContentProps;
-}
+import { isDefined } from 'ts-is-present';
 
 export default class RichContentWrapper extends Component<
   RichContentWrapperProps,
@@ -46,7 +19,7 @@ export default class RichContentWrapper extends Component<
     };
   }
 
-  static propTypes = { children: PropTypes.element.isRequired, good: PropTypes.string.isRequired };
+  static propTypes = { children: PropTypes.element.isRequired };
 
   static defaultProps = { locale: 'en' };
 
@@ -71,7 +44,9 @@ export default class RichContentWrapper extends Component<
     const { theme, palette, plugins = [], children, editor = false, rcProps, ...rest } = this.props;
     const { localeStrategy } = this.state;
 
-    const themeGenerators = plugins.filter(plugin => !!plugin.theme).map(plugin => plugin.theme);
+    const themeGenerators: ThemeGeneratorFunction[] = plugins
+      .map(plugin => plugin.theme)
+      .filter(isDefined);
 
     const mergedRCProps = merge(
       pluginsStrategy(editor, plugins, children?.props),

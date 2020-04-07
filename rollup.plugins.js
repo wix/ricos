@@ -46,9 +46,7 @@ const babel = () => {
 
 const typescript = () => {
   const typescript = require('rollup-plugin-typescript2');
-  return typescript({
-    include: ['*.ts+(|x)', '**/*.ts+(|x), *.js+(|x)', '**/*.js+(|x)'],
-  });
+  return typescript({});
 };
 
 const commonjs = () => {

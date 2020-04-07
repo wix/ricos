@@ -1,4 +1,5 @@
 import gallerySettings from './themes/gallerySettings';
+
 /* eslint-disable camelcase */
 const THEMES = {
   DEFAULT: 'Default',
@@ -13,13 +14,21 @@ const TEXT_COLOR = 15;
 const ACTION_COLOR = 18;
 
 export default class ThemeGenerator {
-  constructor(isEditor, { theme = THEMES.DEFAULT, palette, themeGenerators = [] }) {
+  isEditor: boolean;
+  themeGenerators: ThemeGeneratorFunction[];
+  _theme: string;
+  palette: Palette;
+
+  constructor(
+    isEditor: boolean,
+    { theme = THEMES.DEFAULT, palette, themeGenerators = [] }: ThemeProperties
+  ) {
     this.setTheme(theme, palette);
     this.themeGenerators = themeGenerators;
     this.isEditor = isEditor;
   }
 
-  setTheme(theme, palette) {
+  setTheme(theme: string, palette?: Palette) {
     if (SUPPORTED_THEMES.indexOf(theme) === -1) {
       this._theme = THEMES.DEFAULT;
     } else {
@@ -35,13 +44,13 @@ export default class ThemeGenerator {
     }
   }
 
-  getColorByName(num) {
-    const idx = num <= 5 ? num - 1 : num - 6;
+  getColorByCode(code: number): Color {
+    const idx = code <= 5 ? code - 1 : code - 6;
     return this.palette[idx];
   }
 
-  getColorValue(name) {
-    return this.getColorByName(name).value;
+  getColorValue(code: number): string {
+    return this.getColorByCode(code).value;
   }
 
   getStylesObject() {

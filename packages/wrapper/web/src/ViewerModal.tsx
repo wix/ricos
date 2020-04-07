@@ -1,9 +1,18 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import getImagesData from 'wix-rich-content-fullscreen/dist/lib/getImagesData.cjs.js';
 import Fullscreen from 'wix-rich-content-fullscreen';
 
-export default class ViewerModal extends React.Component {
+interface Props {
+  initialState: InitialState;
+  setExpandModeData: (data: any) => any;
+
+  isOpen: boolean;
+  index: number;
+  images: object[];
+  onClose: () => void;
+}
+
+export default class ViewerModal extends React.Component<Props> {
   constructor(props) {
     super(props);
     this.props.setExpandModeData(getImagesData(this.props.initialState));
@@ -23,12 +32,3 @@ export default class ViewerModal extends React.Component {
     return <Fullscreen isOpen={isOpen} images={images} onClose={onClose} index={index} />;
   }
 }
-
-ViewerModal.propTypes = {
-  initialState: PropTypes.any,
-  setExpandModeData: PropTypes.any.isRequired,
-  isOpen: PropTypes.bool,
-  index: PropTypes.number,
-  images: PropTypes.array,
-  onClose: PropTypes.func,
-};

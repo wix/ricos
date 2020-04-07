@@ -1,17 +1,30 @@
-import React, { Children, Fragment } from 'react';
-import PropTypes from 'prop-types';
+import React, { Children, Fragment, ReactElement } from 'react';
 import FullscreenRenderer from './FullscreenRenderer';
 import ModalRenderer from './ModalRenderer';
 import { merge } from 'lodash';
+import { EditorState } from 'draft-js';
 
-class EngineWrapper extends React.Component {
+interface Props {
+  rcProps?: RichContentProps;
+  plugins?: PluginConfig[];
+  theme?: string | object;
+  children: ReactElement;
+  editor?: boolean;
+}
+
+interface State {
+  ModalityProvider: typeof Fragment | typeof ModalRenderer | typeof FullscreenRenderer;
+  editorState?: EditorState;
+}
+
+class EngineWrapper extends React.Component<Props, State> {
   constructor(props) {
     super(props);
     this.state = this.stateFromProps(props);
     if (props.editor) {
       import(
         // eslint-disable-next-line max-len
-        /* webpackChunkName: "rce-editorStateConversion"  */ `wix-rich-content-editor/dist/lib/editorStateConversion.js`
+        /* webpackChunkName: "rce-editorStateConversion"  */ `wix-rich-content-editor/dist/lib/editorStateConversion`
       ).then(module => this.setState({ editorState: module.createEmpty() }));
     }
   }
@@ -19,13 +32,12 @@ class EngineWrapper extends React.Component {
   stateFromProps(props) {
     const { editor, children } = props;
     const { closeModal, openModal, onExpand } = children.props?.helpers || {};
-    let ModalityProvider = Fragment;
     if (editor && !closeModal && !openModal) {
-      ModalityProvider = ModalRenderer;
+      return { ModalityProvider: ModalRenderer };
     } else if (!editor && !onExpand) {
-      ModalityProvider = FullscreenRenderer;
+      return { ModalityProvider: FullscreenRenderer };
     }
-    return { ModalityProvider };
+    return { ModalityProvider: Fragment };
   }
 
   handleChange = editorState => {
@@ -55,11 +67,4 @@ class EngineWrapper extends React.Component {
     );
   }
 }
-EngineWrapper.propTypes = {
-  rcProps: PropTypes.object,
-  plugins: PropTypes.arrayOf(PropTypes.object),
-  theme: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-  children: PropTypes.object,
-  editor: PropTypes.bool,
-};
 export default EngineWrapper;

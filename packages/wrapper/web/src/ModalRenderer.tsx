@@ -1,19 +1,29 @@
-import React, { Suspense, Children, Component, Fragment } from 'react';
-import PropTypes from 'prop-types';
+import React, { Suspense, Children, Component, Fragment, ReactElement } from 'react';
 import { modalStyles } from './themeStrategy/defaults';
 
-export default class ModalRenderer extends Component {
-  static propTypes = {
-    children: PropTypes.node.isRequired,
-    ModalsMap: PropTypes.object.isRequired,
-    theme: PropTypes.object.isRequired,
-    locale: PropTypes.string,
-  };
+interface Props {
+  children: ReactElement;
+  ModalsMap: ModalsMap;
+  theme: object;
+  locale: string;
+}
+
+interface State {
+  EditorModal?: any;
+  showModal: boolean;
+  isMounted: boolean;
+  modalProps?: any;
+  modalStyles?: any;
+  modalContent?: any;
+}
+
+export default class ModalRenderer extends Component<Props, State> {
+  childProps: RichContentProps;
+
   constructor(props) {
     super(props);
     this.state = {
       showModal: false,
-      EditorModal: () => undefined,
       isMounted: false,
     };
     this.childProps = {
@@ -28,7 +38,7 @@ export default class ModalRenderer extends Component {
 
   componentDidMount() {
     const EditorModal = React.lazy(() =>
-      import(/* webpackChunkName: "rce-EditorModal"  */ `./EditorModal.js`)
+      import(/* webpackChunkName: "rce-EditorModal"  */ `./EditorModal`)
     );
     this.setState({ EditorModal, isMounted: true });
   }
@@ -60,16 +70,18 @@ export default class ModalRenderer extends Component {
         {Children.only(React.cloneElement(children, this.childProps))}
         {isMounted && (
           <Suspense fallback={<div />}>
-            <EditorModal
-              dataHook={'WrapperEditorModal'}
-              isOpen={showModal}
-              style={modalStyles(this.state, theme)}
-              role="dialog"
-              onRequestClose={modalProps?.onRequestClose || this.closeModal}
-              modalsMap={ModalsMap}
-              locale={locale}
-              {...modalProps}
-            />
+            {EditorModal && (
+              <EditorModal
+                dataHook={'WrapperEditorModal'}
+                isOpen={showModal}
+                style={modalStyles(this.state, theme)}
+                role="dialog"
+                onRequestClose={modalProps?.onRequestClose || this.closeModal}
+                modalsMap={ModalsMap}
+                locale={locale}
+                {...modalProps}
+              />
+            )}
           </Suspense>
         )}
       </Fragment>
