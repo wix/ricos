@@ -19,6 +19,8 @@
 - `link`
   - [#750](https://github.com/wix-incubator/rich-content/pull/750) link toolbar
   - [#904](https://github.com/wix-incubator/rich-content/pull/904) fix saving data of "target" and "rel" link(the checkboxes in Link Panel)
+- `editor-common`
+  - [#906](https://github.com/wix-incubator/rich-content/pull/906) click tab in text blocks to enter tab ('\t') character
   
 ### :house: Internal
 - `storybook`
