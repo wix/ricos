@@ -15,15 +15,16 @@ export const addLinkPreview = async (editorState, config, blockKey, url) => {
   const { setEditorState } = config;
   const linkPreviewData = await fetchData(url);
   const { thumbnail_url, title, description, html, provider_url } = linkPreviewData;
-  if (shouldAddLinkPreview(title, thumbnail_url, html)) {
+  const embedLink = isValidHtml(html) && html;
+  if (embedLink || shouldAddLinkPreview(title, thumbnail_url)) {
     const withoutLinkBlock = deleteBlock(editorState, blockKey);
     const { size, alignment } = { ...DEFAULTS, ...(settings || {}) };
     const data = {
-      config: { size, alignment, link: { url } },
+      config: { size, alignment, link: { url }, width: embedLink && 350 },
       thumbnail_url,
       title,
       description,
-      html: isValidHtml(html) && html,
+      html: embedLink,
       provider_url,
     };
     const { newEditorState } = createBlock(withoutLinkBlock, data, LINK_PREVIEW_TYPE);
@@ -46,10 +47,8 @@ const isValidImgSrc = url => {
 
 const isValidHtml = html => html && html.substring(0, 12) !== '<div>{"url":';
 
-const shouldAddLinkPreview = (title, thumbnail_url, html) => {
-  if (isValidHtml(html)) {
-    return true;
-  } else if (title && thumbnail_url) {
+const shouldAddLinkPreview = (title, thumbnail_url) => {
+  if (title && thumbnail_url) {
     return isValidImgSrc(thumbnail_url);
   }
   return false;
