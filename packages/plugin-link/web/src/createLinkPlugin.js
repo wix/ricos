@@ -16,6 +16,8 @@ import createLinkToolbar from './toolbar/createLinkToolbar';
 const createLinkPlugin = (config = {}) => {
   const type = LINK_TYPE;
   const { theme, anchorTarget, relValue, [type]: settings = {}, commonPubsub, ...rest } = config;
+  const targetBlank = anchorTarget === '_blank';
+  const nofollow = relValue === 'nofollow';
   settings.minLinkifyLength = settings.minLinkifyLength || 6;
   const toolbar = createLinkToolbar(config, closeInlinePluginToolbar);
   let alreadyDisplayedAsLinkPreview = {};
@@ -126,6 +128,8 @@ const createLinkPlugin = (config = {}) => {
       url: string,
       anchorTarget,
       relValue,
+      targetBlank,
+      nofollow,
     });
   };
 

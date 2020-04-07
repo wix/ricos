@@ -112,10 +112,12 @@ function insertLink(editorState, selection, data) {
 }
 
 function createLinkEntityData({ url, targetBlank, nofollow, anchorTarget, relValue }) {
+  const target = targetBlank ? '_blank' : anchorTarget !== '_blank' ? anchorTarget : '_self';
+  const rel = nofollow ? 'nofollow' : relValue !== 'nofollow' ? relValue : 'noopener';
   return {
     url,
-    target: targetBlank ? '_blank' : anchorTarget || '_self',
-    rel: nofollow ? 'nofollow' : relValue || 'noopener noreferrer',
+    target,
+    rel,
   };
 }
 
