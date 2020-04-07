@@ -18,7 +18,9 @@ export default function editor(colors) {
     footerToolbar: {
       background: `${bgColor} !important`,
     },
-    footerToolbarButton_icon: {},
+    footerToolbarButton_icon: {
+      color: textColor,
+    },
     footerToolbarButton: {
       '&:hover:not([disabled]) $footerToolbarButton_icon': {
         color: actionColor,
