@@ -104,7 +104,11 @@ export default function editorCommon(colors) {
     //side-toolbar.scss + toolbar-button.scss
     //editor + editor-common
     sideToolbar: {
-      '&$button:hover svg': {
+      '& button:hover:not([disabled]) svg, button:focus:not([disabled]) svg': {
+        color: `${actionColor} !important`,
+        fill: `${actionColor} !important`,
+      },
+      '& label:hover:not([disabled]) svg, label:focus:not([disabled]) svg': {
         color: `${actionColor} !important`,
         fill: `${actionColor} !important`,
       },
