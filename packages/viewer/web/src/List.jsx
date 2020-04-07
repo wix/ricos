@@ -31,7 +31,7 @@ const List = ({
 }) => {
   const Component = ordered ? 'ol' : 'ul';
   const listType = ordered ? 'ordered' : 'unordered';
-  const containerClassName = mergedStyles[`${draftPublic}-${Component}`];
+  const containerClassName = `${draftPublic}-${Component}`;
   let prevDepth = 0;
   return (
     <Component className={containerClassName}>
