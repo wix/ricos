@@ -5,7 +5,8 @@ import { mergeStyles } from 'wix-rich-content-common';
 import classNames from 'classnames';
 import ButtonSample from '../components/button-sample';
 import ColorToggleComponent from './color-toggle-component';
-import { DEFAULT_PALETTE, COLOR_PICKER_TYPE, buttonPreviews, getColors } from '../constants';
+import { COLOR_PICKER_TYPE, buttonPreviews } from '../constants';
+import { DEFAULT_PALETTE, getColors } from '../defaults';
 import dcStyle from '../../statics/styles/design-component-styles.scss';
 
 class DesignComponent extends PureComponent {
