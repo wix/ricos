@@ -67,7 +67,7 @@ export default class ThemeGenerator {
 
       const appStyles = (this.isEditor && {
         ...getEditorCommonTheme(colors),
-        ...getEditorTheme(colors),
+        ...getEditorTheme(colors, utils),
       }) || {
         ...getViewerTheme(colors),
       };

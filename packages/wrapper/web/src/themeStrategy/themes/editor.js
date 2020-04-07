@@ -1,5 +1,6 @@
 /* eslint-disable camelcase */
-export default function editor(colors) {
+export default function editor(colors, utils) {
+  const adaptedActionColor = utils.adaptForeground(colors.actionColor);
   const { bgColor, actionColor, textColor } = colors;
   return {
     editor: {
@@ -23,17 +24,17 @@ export default function editor(colors) {
     },
     footerToolbarButton: {
       '&:hover:not([disabled]) $footerToolbarButton_icon': {
-        color: actionColor,
+        color: adaptedActionColor,
       },
     },
     //inline-toolbar-dropdown-button.scss
     inlineToolbarButton_active: {
-      backgroundColor: 'blue !important',
-      fill: `blue !important`,
+      backgroundColor: `${adaptedActionColor} !important`,
+      fill: `${adaptedActionColor} !important`,
     },
     inlineToolbarDropdownButton: {
       '&:hover svg': {
-        fill: `${actionColor} !important`,
+        fill: `${adaptedActionColor} !important`,
       },
     },
   };
