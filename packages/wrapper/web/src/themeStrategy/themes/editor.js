@@ -24,7 +24,7 @@ export default function editor(colors, utils) {
     },
     footerToolbarButton: {
       '&:hover:not([disabled]) $footerToolbarButton_icon': {
-        color: adaptedActionColor,
+        color: actionColor,
       },
     },
     //inline-toolbar-dropdown-button.scss
