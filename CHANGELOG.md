@@ -18,10 +18,13 @@
 ### :rocket: New Feature
 - `link`
   - [#750](https://github.com/wix-incubator/rich-content/pull/750) link toolbar
+  - [#904](https://github.com/wix-incubator/rich-content/pull/904) fix saving data of "target" and "rel" link(the checkboxes in Link Panel)
   
 ### :house: Internal
 - `storybook`
   - [#891](https://github.com/wix-incubator/rich-content/pull/891) fixed textHighlightPlugin color (intro.js)
+- `general`
+  - [#905](https://github.com/wix-incubator/rich-content/pull/905) refactor - remove getConfigByFormFactor.js
   
 ### :bug: Bug Fix
 - `gallery`
