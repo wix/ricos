@@ -11,12 +11,6 @@ import ExpandIcon from './icons/expand.svg';
 
 const { ProGallery } = process.env.SANTA ? {} : require('pro-gallery');
 
-function getClosestParanet(elem, selector) {
-  if (!elem || elem === document) return null;
-  if (selector.some(selector => elem.matches(selector))) return elem;
-  return getClosestParanet(elem.parentNode, selector);
-}
-
 class GalleryViewer extends React.Component {
   constructor(props) {
     validate(props.componentData, pluginGallerySchema);
@@ -40,7 +34,9 @@ class GalleryViewer extends React.Component {
   }
 
   initUpdateDimensionsForDomChanges() {
-    const contentElement = getClosestParanet(this.container, ['.DraftEditor-root', '.viewer']);
+    const { scrollingElement } = this.props?.settings;
+    const contentElement =
+      typeof scrollingElement === 'function' ? scrollingElement() : scrollingElement;
     if (contentElement) {
       this.observer = new MutationObserver(() => {
         if (contentElement.clientHeight !== this.oldContentElementHeight) {
