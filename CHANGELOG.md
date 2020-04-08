@@ -18,6 +18,10 @@
 ### :rocket: New Feature
 - `list`
   - [#815](https://github.com/wix-incubator/rich-content/pull/815) nested lists
+### :bug: Bug Fix
+- `preview`
+  - [#903](https://github.com/wix-incubator/rich-content/pull/903) gallery fixed; resize flapping fixed
+
 </details>
 <hr/>
 
