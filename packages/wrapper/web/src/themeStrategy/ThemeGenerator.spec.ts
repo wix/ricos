@@ -3,7 +3,7 @@ import { wixPalettes } from '../../tests/palettesExample';
 import { pluginHashtag } from '../../../../plugin-hashtag/web/src/editor';
 
 describe('ThemeGenerator', () => {
-  const createTheme = (isEditor, { theme, palette, themeGenerators }: ThemeProperties) =>
+  const createTheme = (isEditor, { theme, palette, themeGenerators }: StringThemeProperties) =>
     new ThemeGenerator(isEditor, { theme, palette, themeGenerators });
 
   describe('constructor', () => {

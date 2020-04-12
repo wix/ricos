@@ -5,7 +5,7 @@ const getType = require('jest-get-type');
 // eslint-disable-next-line mocha/no-skipped-tests
 describe('ThemeStrategy', () => {
   const driver = {
-    runStrategy: ({ theme, palette, themeGenerators }: ObjectThemeProperties = {}) =>
+    runStrategy: ({ theme, palette, themeGenerators }: ThemeProperties = {}) =>
       themeStrategy(false, { theme, palette, themeGenerators }),
   };
 

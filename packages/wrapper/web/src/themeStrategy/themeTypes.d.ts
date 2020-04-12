@@ -3,13 +3,13 @@ interface ThemeGeneratorFunction {
 }
 
 interface ThemeProperties {
-  theme?: string;
+  theme?: string | object;
   palette?: Palette;
   themeGenerators?: ThemeGeneratorFunction[];
 }
 
-interface ObjectThemeProperties {
-  theme?: object | string;
+interface StringThemeProperties extends ThemeProperties {
+  theme?: string;
 }
 
 interface Color {

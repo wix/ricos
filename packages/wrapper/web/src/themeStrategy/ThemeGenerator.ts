@@ -26,7 +26,7 @@ export default class ThemeGenerator {
 
   constructor(
     isEditor: boolean,
-    { theme = THEMES.DEFAULT, palette, themeGenerators = [] }: ThemeProperties
+    { theme = THEMES.DEFAULT, palette, themeGenerators = [] }: StringThemeProperties
   ) {
     this.setTheme(theme, palette);
     this.themeGenerators = themeGenerators;
