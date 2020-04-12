@@ -7,6 +7,7 @@ import './styles.global.css';
 import { merge } from 'lodash';
 import PropTypes from 'prop-types';
 import { isDefined } from 'ts-is-present';
+import { RichContentProps, RichContentWrapperProps } from './RichContentWrapperTypes';
 
 export default class RichContentWrapper extends Component<
   RichContentWrapperProps,

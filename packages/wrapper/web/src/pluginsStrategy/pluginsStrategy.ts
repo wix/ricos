@@ -1,4 +1,5 @@
 import { merge } from 'lodash';
+import { RichContentProps, InitialState } from '../RichContentWrapperTypes';
 
 const getPluginProps = (
   isEditor: boolean,

@@ -8,11 +8,12 @@ import introState from '../../../../e2e/tests/fixtures/intro.json';
 import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { default as hebResource } from 'wix-rich-content-common/dist/statics/locale/messages_he.json';
+import { RichContentProps } from './RichContentWrapperTypes';
 
 Enzyme.configure({ adapter: new Adapter() });
 const { shallow, mount } = Enzyme;
 
-const wrapper = (wrapperProps?: RichContentWrapperProps) => ({
+const wrapper = (wrapperProps?: any) => ({
   withEditor: (editorProps?: RichContentProps) => (
     <RichContentWrapper {...(wrapperProps || {})} editor>
       <RichContentEditor {...(editorProps || {})} />

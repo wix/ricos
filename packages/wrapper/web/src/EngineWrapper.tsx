@@ -3,6 +3,7 @@ import FullscreenRenderer from './FullscreenRenderer';
 import ModalRenderer from './ModalRenderer';
 import { merge } from 'lodash';
 import { EditorState } from 'draft-js';
+import { RichContentProps } from './RichContentWrapperTypes';
 
 interface Props {
   rcProps?: RichContentProps;

@@ -1,6 +1,7 @@
 import React from 'react';
 import getImagesData from 'wix-rich-content-fullscreen/dist/lib/getImagesData.cjs.js';
 import Fullscreen from 'wix-rich-content-fullscreen';
+import { InitialState } from './RichContentWrapperTypes';
 
 interface Props {
   initialState: InitialState;

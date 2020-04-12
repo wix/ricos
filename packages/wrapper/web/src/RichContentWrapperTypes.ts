@@ -1,4 +1,4 @@
-interface RichContentProps {
+export interface RichContentProps {
   locale?: string;
   localeResource?: object;
   placeholder?: string;
@@ -12,7 +12,7 @@ interface RichContentProps {
   helpers?: { [propName: string]: (...args: any[]) => any };
 }
 
-interface RichContentWrapperProps {
+export interface RichContentWrapperProps {
   children: import('react').ReactElement;
   theme?: string | object;
   locale?: string;
@@ -22,4 +22,4 @@ interface RichContentWrapperProps {
   rcProps?: RichContentProps;
 }
 
-type InitialState = { blocks: object[]; entityMap: { [index: number]: object } };
+export type InitialState = { blocks: object[]; entityMap: { [index: number]: object } };
