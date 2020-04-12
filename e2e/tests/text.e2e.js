@@ -111,4 +111,12 @@ describe('text', () => {
       .wait(200);
     cy.eyesCheckWindow(this.test.title);
   });
+
+  it('allow to enter tab character', function() {
+    cy.loadEditorAndViewer()
+      .focusEditor()
+      .tab()
+      .enterParagraphs(['How to eat healthy is a good question.']);
+    cy.eyesCheckWindow(this.test.title);
+  });
 });
