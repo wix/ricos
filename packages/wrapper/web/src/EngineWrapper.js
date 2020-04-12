@@ -38,13 +38,7 @@ class EngineWrapper extends React.Component {
     const mergedRCProps = merge(rcProps, children.props);
 
     // BARAK: why do we need this?
-    if (editor) {
-      const { onChange } = mergedRCProps;
-      mergedRCProps.onChange = editorState => {
-        onChange?.(editorState);
-        this.handleChange(editorState);
-      };
-    }
+    if (editor) mergedRCProps.onChange = this.handleChange;
 
     const { ModalityProvider } = this.state;
 
