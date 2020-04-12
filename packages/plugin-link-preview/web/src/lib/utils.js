@@ -1,4 +1,4 @@
-import { DEFAULTS } from '../consts';
+import { DEFAULTS, AUTO_GENERATED_LINK_PREVIEW_PROVIDER } from '../consts';
 import { LINK_PREVIEW_TYPE } from '../types';
 import { SelectionState, EditorState, Modifier, RichUtils } from 'draft-js';
 import {
@@ -14,13 +14,13 @@ export const addLinkPreview = async (editorState, config, blockKey, url) => {
   const { fetchData } = settings;
   const { setEditorState } = config;
   const linkPreviewData = await fetchData(url);
-  const { thumbnail_url, title, description, html, provider_url } = linkPreviewData;
-  const embedLink = isValidHtml(html) && html;
+  const { thumbnail_url, title, description, html, provider_url, provider_name } = linkPreviewData;
+  const embedLink = provider_name !== AUTO_GENERATED_LINK_PREVIEW_PROVIDER && html;
   if (embedLink || shouldAddLinkPreview(title, thumbnail_url)) {
     const withoutLinkBlock = deleteBlock(editorState, blockKey);
     const { size, alignment } = { ...DEFAULTS, ...(settings || {}) };
     const data = {
-      config: { size, alignment, link: { url }, width: embedLink && 350 },
+      config: { size, alignment, link: { url, ...DEFAULTS.link }, width: embedLink && 350 },
       thumbnail_url,
       title,
       description,
@@ -45,8 +45,6 @@ const isValidImgSrc = url => {
   });
 };
 
-const isValidHtml = html => html && html.substring(0, 12) !== '<div>{"url":';
-
 const shouldAddLinkPreview = (title, thumbnail_url) => {
   if (title && thumbnail_url) {
     return isValidImgSrc(thumbnail_url);
@@ -62,7 +60,7 @@ export const convertLinkPreviewToLink = editorState => {
 
   // replace preview block with text block containing url
   let newState = replaceWithEmptyBlock(editorState, currentBlock.key);
-  let contentState = Modifier.insertText(
+  const contentState = Modifier.insertText(
     newState.getCurrentContent(),
     newState.getSelection(),
     url
@@ -70,21 +68,17 @@ export const convertLinkPreviewToLink = editorState => {
   // reread block after insertText
   currentBlock = contentState.getBlockForKey(currentBlock.key);
   const nextBlock = contentState.getBlockAfter(currentBlock.key);
-  // delte empty block after preview
-  const selectionRange = new SelectionState({
-    anchorKey: currentBlock.key,
-    anchorOffset: currentBlock.text.length,
-    focusKey: nextBlock.key,
-    focusOffset: 1,
-  });
-  if (nextBlock && nextBlock.text.length === 0) {
-    contentState = Modifier.removeRange(contentState, selectionRange, 'forward');
-  }
   newState = EditorState.push(newState, contentState, 'change-block-type');
 
   const editorStateWithLink = changePlainTextUrlToLinkUrl(newState, blockKey, url);
+  const newLineSelection = new SelectionState({
+    anchorKey: nextBlock.key,
+    anchorOffset: 0,
+    focusKey: nextBlock.key,
+    focusOffset: 0,
+  });
 
-  return EditorState.forceSelection(editorStateWithLink, selectionRange);
+  return EditorState.forceSelection(editorStateWithLink, newLineSelection);
 };
 
 const getLinkPreviewUrl = (editorState, block) => {

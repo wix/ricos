@@ -85,10 +85,12 @@ export {
   calculateDiff,
   getPostContentSummary,
   createSelection,
+  getBlockType,
+  setForceSelection,
+  insertString,
 } from './Utils/draftUtils';
 export { isiOS } from './Utils/isiOS';
 export { getSelectionStyles } from './Utils/inlineStyleUtils';
-export { getConfigByFormFactor } from './Utils/getConfigByFormFactor';
 export { mergeToolbarSettings } from './Utils/mergeToolbarSettings';
 export {
   COMMANDS,
@@ -99,6 +101,8 @@ export {
   DECORATION_MODE,
   PLUGIN_DECORATION_PROPS,
   PLUGIN_DECORATIONS,
+  TEXT_TYPES,
+  CHARACTERS,
 } from './consts';
 
 export {

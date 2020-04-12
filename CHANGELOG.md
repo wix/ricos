@@ -16,23 +16,41 @@
   </summary>
 
 ### :rocket: New Feature
+- `list`
+  - [#815](https://github.com/wix-incubator/rich-content/pull/815) nested lists
+- `editor`
+  - [#906](https://github.com/wix-incubator/rich-content/pull/906) editor supports entering tab character ('\t') by clicking on tab
+- `theme + wrapper: gallery, plugins & modals`
+  - [#828](https://github.com/wix-incubator/rich-content/pull/828) style update related to a lot of components + wrapper compatibility.
+### :bug: Bug Fix
+- `preview`
+  - [#903](https://github.com/wix-incubator/rich-content/pull/903) gallery fixed; resize flapping fixed
+- `gallery`
+  - [#903](https://github.com/wix-incubator/rich-content/pull/903) gallery size
+
+</details>
+<hr/>
+
+## 7.2.0 (Apr 8, 2020)
+### :rocket: New Feature
 - `link`
   - [#750](https://github.com/wix-incubator/rich-content/pull/750) link toolbar
-  
-### :house: Internal
-- `storybook`
-  - [#891](https://github.com/wix-incubator/rich-content/pull/891) fixed textHighlightPlugin color (intro.js)
-  
 ### :bug: Bug Fix
 - `gallery`
   - [#879](https://github.com/wix-incubator/rich-content/pull/879) gallery size - regression from #879
   - [#872](https://github.com/wix-incubator/rich-content/pull/872) fix: gallery sliders css in mozilla firefox
 - `plugins`
   - [#778](https://github.com/wix-incubator/rich-content/pull/880) fix focus on plugins insert buttons click
-
-
-</details>
-<hr/>
+- `link`
+  - [#904](https://github.com/wix-incubator/rich-content/pull/904) fix saving data of "target" and "rel" link(the checkboxes in Link Panel)
+  - [#902](https://github.com/wix-incubator/rich-content/pull/902) mobile - cancel in link panel changed the cursor
+- 'editor'
+  - [#894](https://github.com/wix-incubator/rich-content/pull/894) text position after enter & disable paste text with style CODE
+### :house: Internal
+- `storybook`
+  - [#891](https://github.com/wix-incubator/rich-content/pull/891) fixed textHighlightPlugin color (intro.js)
+- `general`
+  - [#905](https://github.com/wix-incubator/rich-content/pull/905) refactor - remove getConfigByFormFactor.js
 
 ## 7.1.5 (Apr 4, 2020)
 ### :bug: Bug Fix

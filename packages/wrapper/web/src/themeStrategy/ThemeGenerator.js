@@ -1,4 +1,8 @@
-import gallerySettings from './themes/gallerySettings';
+import * as utils from './themes/utils';
+import getEditorCommonTheme from './themes/editor-common';
+import getEditorTheme from './themes/editor';
+import getViewerTheme from './themes/viewer';
+
 /* eslint-disable camelcase */
 const THEMES = {
   DEFAULT: 'Default',
@@ -9,8 +13,10 @@ const THEMES = {
 const SUPPORTED_THEMES = [THEMES.DEFAULT, THEMES.PALETTE, THEMES.BACK_OFFICE];
 const BG_COLOR = 11;
 const SECONDARY_COLOR = 13;
+const COLOR4 = 14;
 const TEXT_COLOR = 15;
 const ACTION_COLOR = 18;
+const COLOR7 = 17;
 
 export default class ThemeGenerator {
   constructor(isEditor, { theme = THEMES.DEFAULT, palette, themeGenerators = [] }) {
@@ -20,18 +26,12 @@ export default class ThemeGenerator {
   }
 
   setTheme(theme, palette) {
-    if (SUPPORTED_THEMES.indexOf(theme) === -1) {
-      this._theme = THEMES.DEFAULT;
-    } else {
-      this._theme = theme;
-    }
+    if (SUPPORTED_THEMES.indexOf(theme) === -1) this._theme = THEMES.DEFAULT;
+    else this._theme = theme;
 
     if (theme === THEMES.PALETTE || theme === THEMES.BACK_OFFICE) {
-      if (!palette) {
-        throw Error('Invalid palette');
-      } else {
-        this.palette = palette;
-      }
+      if (!palette) throw Error('Invalid palette');
+      else this.palette = palette;
     }
   }
 
@@ -48,75 +48,32 @@ export default class ThemeGenerator {
     if (this._theme === THEMES.DEFAULT) {
       return {};
     } else {
-      const actionColor = this.getColorValue(ACTION_COLOR);
-      const bgColor = this.getColorValue(BG_COLOR);
-      const textColor = this.getColorValue(TEXT_COLOR);
-      const secondaryColor = this.getColorValue(SECONDARY_COLOR);
-
       const colors = {
-        actionColor,
-        bgColor,
-        textColor,
-        secondaryColor,
+        actionColor: this.getColorValue(ACTION_COLOR),
+        bgColor: this.getColorValue(BG_COLOR),
+        textColor: this.getColorValue(TEXT_COLOR),
+        secondaryColor: this.getColorValue(SECONDARY_COLOR),
+        color7: utils.hexToRgbA(this.getColorValue(COLOR7), 0.7),
+        color4: this.getColorValue(COLOR4),
       };
 
       const pluginThemes = this.themeGenerators.reduce(
         (acc, curr) => ({
           ...acc,
-          ...curr(colors),
+          ...curr(colors, utils),
         }),
         {}
       );
 
-      const blockActionColorSettings = {
-        cursor: 'default',
-        boxShadow: `0 0 0 3px ${actionColor} !important`,
+      const appStyles = (this.isEditor && {
+        ...getEditorCommonTheme(colors),
+        ...getEditorTheme(colors, utils),
+      }) || {
+        ...getViewerTheme(colors),
       };
 
       return {
-        ...gallerySettings(colors),
-        editor: {
-          background: bgColor,
-          color: textColor,
-        },
-        quote: {
-          'border-left-color': actionColor,
-          'border-right-color': actionColor,
-        },
-        sideToolbar_floatingIcon: {
-          '&:hover': {
-            fill: actionColor,
-          },
-        },
-        footerToolbar: {
-          background: `${bgColor} !important`,
-        },
-        footerToolbarButton_icon: {},
-        footerToolbarButton: {
-          '&:hover:not([disabled]) $footerToolbarButton_icon': {
-            color: actionColor,
-          },
-        },
-
-        //block focus
-        hasFocus: blockActionColorSettings,
-        pluginContainer: { '&:hover': blockActionColorSettings },
-        linkPreview: {
-          borderColor: textColor,
-          backgroundColor: bgColor,
-        },
-        linkPreview_title: {
-          color: textColor,
-        },
-        linkPreview_image: {
-          borderColor: textColor,
-        },
-        linkPreview_description: {
-          color: textColor,
-        },
-        linkPreview_url: {
-          color: secondaryColor,
-        },
+        ...appStyles,
         ...pluginThemes,
       };
     }

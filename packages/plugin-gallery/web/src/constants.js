@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 const GALLERY_LAYOUTS = Object.freeze({
   EMPTY: -1,
   COLLAGE: 0,
@@ -88,3 +89,31 @@ export const imageItem = (img, itemId) => {
 
 export const isHorizontalLayout = ({ galleryLayout }) =>
   HORIZONTAL_LAYOUTS.indexOf(galleryLayout) > -1;
+
+export const THEME = (colors, utils) => {
+  const actionColor = utils.adaptForeground(colors.actionColor);
+  return {
+    //gallery-items-sortable.scss
+    itemContainer: {
+      '&$itemContainerSelected': {
+        boxShadow: `0 0 0 3px ${actionColor} !important`,
+      },
+    },
+    itemContainerSelected: {},
+
+    //image-ratio-selector.scss
+    imageRatioSelector_ratioButton_selected: {
+      backgroundColor: `${actionColor} !important`,
+    },
+
+    //layout-selector.scss
+    layoutsSelector_icon_selected: {
+      color: actionColor,
+    },
+
+    //thumbnail-placement-selector.rtlignore.scss
+    thumbnailPlacementSelector_icon_selected: {
+      color: actionColor,
+    },
+  };
+};
