@@ -549,8 +549,9 @@ export function onTab(event, editorState, maxDepth) {
 
   const content = editorState.getCurrentContent();
   const block = content.getBlockForKey(key);
-  event.preventDefault();
   const depth = block.getDepth();
+
+  event.preventDefault();
 
   if (!event.shiftKey && depth === maxDepth) {
     return editorState;
@@ -560,6 +561,31 @@ export function onTab(event, editorState, maxDepth) {
     content,
     selection,
     event.shiftKey ? -1 : 1,
+    maxDepth
+  );
+  return EditorState.push(editorState, withAdjustment, 'adjust-depth');
+}
+
+export function onIndent(isDirectionNext, editorState, maxDepth) {
+  const selection = editorState.getSelection();
+  const key = selection.getAnchorKey();
+
+  if (key !== selection.getFocusKey()) {
+    return editorState;
+  }
+
+  const content = editorState.getCurrentContent();
+  const block = content.getBlockForKey(key);
+  const depth = block.getDepth();
+
+  if (isDirectionNext && depth === maxDepth) {
+    return editorState;
+  }
+
+  const withAdjustment = adjustBlockDepthForContentState(
+    content,
+    selection,
+    isDirectionNext ? 1 : -1,
     maxDepth
   );
   return EditorState.push(editorState, withAdjustment, 'adjust-depth');

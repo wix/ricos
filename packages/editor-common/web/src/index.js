@@ -87,6 +87,7 @@ export {
   createSelection,
   getBlockType,
   onTab,
+  onIndent,
   setForceSelection,
   insertString,
 } from './Utils/draftUtils';

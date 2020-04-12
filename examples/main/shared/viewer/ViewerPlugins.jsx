@@ -63,6 +63,7 @@ import 'wix-rich-content-plugin-map/dist/styles.min.css';
 import 'wix-rich-content-plugin-file-upload/dist/styles.min.css';
 import 'wix-rich-content-plugin-giphy/dist/styles.min.css';
 import 'wix-rich-content-text-selection-toolbar/dist/styles.min.css';
+import 'wix-rich-content-plugin-indent/dist/styles.min.css';
 
 import { getBaseUrl } from '../../src/utils';
 

@@ -7,6 +7,8 @@ export const INLINE_TOOLBAR_BUTTONS = {
   QUOTE: 'textBlockStyleButton_Quote',
   ORDERED_LIST: 'textBlockStyleButton_Numbering',
   UNORDERED_LIST: 'textBlockStyleButton_Bullets',
+  PREV_INDENT: 'PrevIndentButton',
+  NEXT_INDENT: 'NextIndentButton',
   ALIGNMENT: 'textDropDownButton_Alignment',
   TEXT_ALIGN_CENTER: 'textAlignmentButton_center',
   TEXT_ALIGN_LEFT: 'textAlignmentButton_left',

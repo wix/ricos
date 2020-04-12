@@ -288,6 +288,8 @@
   "HeadingThreeButton_tooltip": "Heading 3",
   "NormalTextButton_tooltip": "Normal text",
   "TextCodeBlockButton_Tooltip": "Code snippet",
+  "PrevIndentButton_Tooltip": "Previous indent",
+  "NextIndentButton_Tooltip": "Next indent",
   "TextCodeBlock_InsertButton_Tooltip": "Add a code snippet",
   "UndoButton_Tooltip": "Undo",
   "RedoButton_Tooltip": "Redo",

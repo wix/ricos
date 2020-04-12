@@ -29,6 +29,7 @@ import { createTextHighlightPlugin, TEXT_HIGHLIGHT_TYPE } from 'wix-rich-content
 import Highlighter from 'react-highlight-words';
 import casual from 'casual-browserify';
 import { mockFetchUrlPreviewData } from '../utils/linkPreviewUtil';
+import { createIndentPlugin, INDENT_TYPE } from 'wix-rich-content-plugin-indent';
 
 import 'wix-rich-content-editor-common/dist/styles.min.css';
 import 'wix-rich-content-common/dist/styles.min.css';
@@ -51,6 +52,8 @@ import 'wix-rich-content-plugin-giphy/dist/styles.min.css';
 import 'wix-rich-content-plugin-map/dist/styles.min.css';
 import 'wix-rich-content-plugin-file-upload/dist/styles.min.css';
 import 'wix-rich-content-plugin-text-color/dist/styles.min.css';
+import 'wix-rich-content-plugin-indent/dist/styles.min.css';
+
 import {
   customForegroundStyleFn,
   styleSelectionPredicate,
@@ -88,6 +91,7 @@ export const editorPlugins = [
   createEmojiPlugin,
   createTextHighlightPlugin,
   createUndoRedoPlugin,
+  createIndentPlugin,
 ];
 
 const themeColors = {
@@ -377,6 +381,13 @@ const config = {
     // },
   },
   [CODE_BLOCK_TYPE]: {
+    // toolbar: {
+    //   icons: {
+    //     InsertPluginButtonIcon: MyCustomIcon,
+    //   },
+    // },
+  },
+  [INDENT_TYPE]: {
     // toolbar: {
     //   icons: {
     //     InsertPluginButtonIcon: MyCustomIcon,
