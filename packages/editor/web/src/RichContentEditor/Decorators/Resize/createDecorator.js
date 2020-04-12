@@ -64,7 +64,7 @@ export default ({ config, store }) => WrappedComponent =>
       }
     };
 
-    getDataConfig = () => this.props.blockProps.getData()?.componentData?.config || {};
+    getDataConfig = () => this.props.blockProps.getData()?.config || {};
 
     // used to save the hoverPosition so it can be leveraged to determine if a
     // drag should happen on mousedown

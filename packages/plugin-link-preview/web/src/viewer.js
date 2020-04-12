@@ -1,8 +1,7 @@
 import { LINK_PREVIEW_TYPE } from './types';
 import { typeMapper } from './typeMapper';
-import { DEFAULTS } from './defaults';
+import { DEFAULTS, THEME as theme } from './defaults';
 
-export { addLinkPreview } from './lib/utils';
 export { default as LinkPreviewViewer } from './LinkPreviewViewer';
 export { typeMapper as linkPreviewTypeMapper, LINK_PREVIEW_TYPE };
 
@@ -11,6 +10,6 @@ export const pluginLinkPreview = (config = {}) => {
     config: { ...DEFAULTS.config, ...config },
     type: LINK_PREVIEW_TYPE,
     typeMapper,
-    decorator: {},
+    theme,
   };
 };

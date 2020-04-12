@@ -1,23 +1,24 @@
 import React from 'react';
 import EngineWrapper from './EngineWrapper';
-import themeStrategyProvider from './themeStrategy/themeStrategyProvider';
-import pluginsStrategyProvider from './pluginsStrategy/pluginsStrategyProvider';
-import localeStrategyProvider from './localeStrategy/localeStrategyProvider';
+import themeStrategy from './themeStrategy/themeStrategy';
+import pluginsStrategy from './pluginsStrategy/pluginsStrategy';
+import localeStrategy from './localeStrategy/localeStrategy';
 import PropTypes from 'prop-types';
 import './styles.global.css';
+import { merge } from 'lodash';
 
 export default class RichContentWrapper extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      localeStrategy: () => ({}),
+      localeStrategy: {},
     };
   }
 
   updateLocale = async () => {
     const { locale, children } = this.props;
-    await localeStrategyProvider({ locale })(children.props).then(localeData => {
-      this.setState({ localeStrategy: () => localeData });
+    await localeStrategy(children.props.locale || locale).then(localeData => {
+      this.setState({ localeStrategy: localeData });
     });
   };
 
@@ -32,30 +33,23 @@ export default class RichContentWrapper extends React.Component {
   }
 
   render() {
-    const {
-      strategies = [],
-      theme,
-      palette,
-      plugins = [],
-      children,
-      editor = false,
-      ...rest
-    } = this.props;
+    const { theme, palette, plugins = [], children, editor = false, rcProps, ...rest } = this.props;
     const { localeStrategy } = this.state;
     const themeGenerators = plugins.filter(plugin => !!plugin.theme).map(plugin => plugin.theme);
-    const mergedStrategies = [
-      themeStrategyProvider(editor, { theme, palette, themeGenerators }),
-      pluginsStrategyProvider(editor, { plugins }),
+
+    const mergedRCProps = merge(
+      pluginsStrategy(editor, plugins, children.props),
+      themeStrategy(editor, { theme, palette, themeGenerators }),
       localeStrategy,
-      ...strategies,
-    ];
+      rcProps
+    );
 
     return (
       <EngineWrapper
-        strategies={mergedStrategies}
-        {...rest}
+        rcProps={mergedRCProps}
         editor={editor}
         key={editor ? 'editor' : 'viewer'}
+        {...rest}
       >
         {children}
       </EngineWrapper>
@@ -70,6 +64,7 @@ RichContentWrapper.propTypes = {
   plugins: PropTypes.arrayOf(PropTypes.object),
   strategies: PropTypes.arrayOf(PropTypes.func),
   editor: PropTypes.bool,
+  rcProps: PropTypes.object,
 };
 
 RichContentWrapper.defaultProps = {

@@ -3,21 +3,26 @@ const LTR =
   'A-Za-z\u00C0-\u00D6\u00D8-\u00F6' +
   '\u00F8-\u02B8\u0300-\u0590\u0800-\u1FFF\u200E\u2C00-\uFB1C' +
   '\uFE00-\uFE6F\uFEFD-\uFFFF';
-const EMOJI =
-  '\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff]';
+
+const isRtlRegex = new RegExp('^[^' + LTR + ']*[' + RTL + ']');
+const isLtrRegex = new RegExp('^[^' + RTL + ']*[' + LTR + ']');
+// eslint-disable-next-line max-len
+const emojiRegex = /\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff]/g;
 
 export const getTextDirection = text => {
-  const rtl = new RegExp('^[^' + LTR + ']*[' + RTL + ']');
-  const ltr = new RegExp('^[^' + RTL + ']*[' + LTR + ']');
-  text = String(text || '') && text.replace(new RegExp(EMOJI, 'g'), '');
+  let result = 'neutral';
 
-  if (rtl.test(text)) {
-    return 'rtl';
+  if (!text) {
+    return result;
   }
 
-  if (ltr.test(text)) {
-    return 'ltr';
+  const plainText = text.replace(emojiRegex, '');
+
+  if (isRtlRegex.test(plainText)) {
+    result = 'rtl';
+  } else if (isLtrRegex.test(plainText)) {
+    result = 'ltr';
   }
 
-  return 'neutral';
+  return result;
 };

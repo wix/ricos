@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import React from 'react';
 import RichContentWrapper from './RichContentWrapper';
 import { RichContentEditor } from 'wix-rich-content-editor';
@@ -6,7 +7,7 @@ import { pluginHashtag } from '../../../plugin-hashtag/web/src/editor';
 import introState from '../../../../e2e/tests/fixtures/intro.json';
 import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import localeStrategyProvider from './localeStrategy/localeStrategyProvider';
+import { default as hebResource } from 'wix-rich-content-common/dist/statics/locale/messages_he.json';
 
 Enzyme.configure({ adapter: new Adapter() });
 const { shallow, mount } = Enzyme;
@@ -27,6 +28,7 @@ const wrapper = wrapperProps => ({
 // eslint-disable-next-line no-unused-vars
 const plugins = [pluginHashtag()];
 
+// eslint-disable-next-line mocha/no-skipped-tests
 describe('Wrapper', () => {
   it('should render editor', () => {
     const element = shallow(wrapper({ editor: true }).withEditor());
@@ -83,10 +85,8 @@ describe('Wrapper', () => {
       const renderResult = instance.render();
       await instance.updateLocale();
       const engineProps = renderResult.props;
-      expect(engineProps).toHaveProperty('strategies');
-      expect(instance.state.localeStrategy()).toEqual(
-        await localeStrategyProvider({ locale: 'he' })()
-      );
+      expect(engineProps).toHaveProperty('rcProps');
+      expect(instance.state.localeStrategy).toEqual({ locale: 'he', localeResource: hebResource });
     });
   });
 

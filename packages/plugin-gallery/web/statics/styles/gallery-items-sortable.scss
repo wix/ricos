@@ -6,7 +6,6 @@
 
 .filesButton {
   position: relative;
-  width: 70px;
   height: 30px;
   color: #666;
   float: right;
@@ -18,7 +17,7 @@
 
   &:hover {
     cursor: pointer;
-    color: #4990e2;
+    color: #00000066;
   }
 }
 
@@ -104,10 +103,13 @@
 }
 
 .itemImage {
-  cursor: -webkit-grab;
+  cursor: grab;
 
   &:active {
-    cursor: -webkit-grabbing;
+    cursor: grabbing;
+  }
+  &:hover {
+    opacity: 0.7;
   }
 }
 .topBar {
@@ -138,7 +140,7 @@
 
   &:hover {
     cursor: pointer;
-    color: #4990e2;
+    color: #00000066;
   }
 }
 

@@ -1,15 +1,13 @@
 import { createLinkPreviewPlugin } from './createLinkPreviewPlugin';
 import { LINK_PREVIEW_TYPE } from './types';
-import { DEFAULTS } from './defaults';
-import { createFetchLinkPreviewData } from './lib/fetchLinkPreviewData';
+import { DEFAULTS, THEME as theme } from './defaults';
 
 export const pluginLinkPreview = (config = {}) => {
-  const fetchData = createFetchLinkPreviewData(config.authorization);
-
   return {
-    config: { ...DEFAULTS.config, fetchData, ...config },
+    config: { ...DEFAULTS.config, ...config },
     type: LINK_PREVIEW_TYPE,
     createPlugin: createLinkPreviewPlugin,
     ModalsMap: {},
+    theme,
   };
 };

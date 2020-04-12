@@ -3,12 +3,12 @@ import { wixPalettes } from '../../tests/palettesExample';
 import { pluginHashtag } from '../../../../plugin-hashtag/web/src/editor';
 
 describe('ThemeGenerator', () => {
-  const createTheme = (theme, palette, themeGenerators) =>
-    new ThemeGenerator(false, { theme, palette, themeGenerators });
+  const createTheme = (isEditor, theme, palette, themeGenerators) =>
+    new ThemeGenerator(isEditor, { theme, palette, themeGenerators });
 
   describe('constructor', () => {
     it('should create a new default theme', () => {
-      const themeGenerator = createTheme(THEMES.DEFAULT);
+      const themeGenerator = createTheme(false, THEMES.DEFAULT);
       expect(themeGenerator._theme).toBe(THEMES.DEFAULT);
     });
 
@@ -18,23 +18,31 @@ describe('ThemeGenerator', () => {
     });
 
     it('should expect site colors if theme is site', () => {
-      const func = () => createTheme(THEMES.PALETTE);
+      const func = () => createTheme(false, THEMES.PALETTE);
       expect(func).toThrow();
     });
 
     it('should expect site colors if theme is back office', () => {
-      const func = () => createTheme(THEMES.BACK_OFFICE);
+      const func = () => createTheme(false, THEMES.BACK_OFFICE);
       expect(func).toThrow();
     });
 
     it('should create theme object', () => {
-      const themeGenerator = createTheme(THEMES.PALETTE, wixPalettes.site1, [
+      const themeGenerator = createTheme(true, THEMES.PALETTE, wixPalettes.site1, [
         pluginHashtag().theme,
       ]);
       const styleObj = themeGenerator.getStylesObject();
 
+      //expect(styleObj).toBe('#414141');
       expect(styleObj.editor.color).toBe('#414141');
       expect(styleObj.editor.background).toBe('#FFFFFF');
+    });
+    it('should not render editor styles if isEditor=false', () => {
+      const themeGenerator = createTheme(false, THEMES.PALETTE, wixPalettes.site1, [
+        pluginHashtag().theme,
+      ]);
+      const styleObj = themeGenerator.getStylesObject();
+      expect(styleObj.editor).toBeUndefined();
     });
   });
 });

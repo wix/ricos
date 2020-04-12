@@ -1,11 +1,13 @@
 .settingsPanel_footer {
-  display: flex;
+  display: inline-flex;
+  align-items: center;
+  flex-direction: row;
   justify-content: flex-end;
-  padding: 30px 42px 30px;
+  padding: 24px 24px;
   border-top: solid 1px #ededed;
   width: 100%;
   max-width: 419px;
-  height: 100px;
+  height: 88px;
   box-sizing: border-box;
   background: #fff;
   font-size: 14px;
@@ -15,10 +17,20 @@
   position: fixed;
   bottom: 0;
   z-index: 5;
+  display: inline-flex;
+  align-items: center;
+  flex-direction: row;
 }
 
 %panel_button {
   padding: 8.5px 24px;
+  min-width: 109px;
+  max-width: 115px;
+  height: 36px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   border-style: none;
 }
 
@@ -33,9 +45,9 @@
 .settingsPanel_cancel {
   @extend %panel_button;
   border-style: solid;
-}
 
-.settingsPanel_cancel:hover {
-  background: #fff;
-  color: #4990e2;
+  &:hover {
+    background: #fff;
+    color: #4990e2;
+  }
 }

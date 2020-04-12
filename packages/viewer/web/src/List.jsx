@@ -7,18 +7,18 @@ const draftClassNames = (listType, depth, textDirection) =>
    ${draftPublic}-depth${depth}
    ${draftPublic}-list${textDirection}`;
 
-const getBlockClassName = (i, dataEntry, textDirection, listType, prevDepth, depth) => {
+const getBlockClassName = (isNewList, dataEntry, textDirection, listType, depth) => {
   const rtl = textDirection === 'rtl' || dataEntry.textDirection === 'rtl';
   const direction = rtl ? 'RTL' : 'LTR';
   let className = draftClassNames(listType, depth, direction);
-  if (i === 0 || depth > prevDepth) {
+  if (isNewList) {
     className += ` ${draftPublic}-reset`;
   }
   return className;
 };
 
 const getBlockDepth = (contentState, key) =>
-  contentState.blocks.filter(block => block.key === key)[0].depth;
+  contentState.blocks.find(block => block.key === key).depth;
 
 const List = ({
   ordered,
@@ -31,27 +31,31 @@ const List = ({
 }) => {
   const Component = ordered ? 'ol' : 'ul';
   const listType = ordered ? 'ordered' : 'unordered';
-  const containerClassName = mergedStyles[`${draftPublic}-${Component}`];
+  const containerClassName = `${draftPublic}-${Component}`;
   let prevDepth = 0;
   return (
     <Component className={containerClassName}>
-      {items.map((children, i) => {
+      {items.map((children, childIndex) => {
         // NOTE: list block data is an array of data entries per list item
-        const dataEntry = blockProps.data.length > i ? blockProps.data[i] : {};
+        const dataEntry = blockProps.data.length > childIndex ? blockProps.data[childIndex] : {};
 
         let paragraphGroup = [];
         const result = [];
         const elementProps = key => ({ className: mergedStyles.elementSpacing, key });
         React.Children.forEach(children, (child, i) => {
-          if (child && typeof child.type === 'string') {
-            if (/h\d/.exec(child.type)) {
-              if (paragraphGroup.length) {
-                result.push(<p {...elementProps(i)}>{paragraphGroup}</p>);
-                paragraphGroup = [];
+          if (child) {
+            if (typeof child.type === 'string') {
+              if (/h\d/.exec(child.type)) {
+                if (paragraphGroup.length) {
+                  result.push(<p {...elementProps(i)}>{paragraphGroup}</p>);
+                  paragraphGroup = [];
+                }
+                result.push(React.cloneElement(child, elementProps(i)));
+              } else {
+                paragraphGroup.push(child);
               }
-              result.push(React.cloneElement(child, elementProps(i)));
             } else {
-              paragraphGroup.push(child);
+              result.push(child);
             }
           } else if (child) {
             result.push(child);
@@ -61,22 +65,16 @@ const List = ({
           result.push(<p {...elementProps('just_some_key')}>{paragraphGroup}</p>);
         }
 
-        const depth = getBlockDepth(contentState, blockProps.keys[i]);
-        const className = getBlockClassName(
-          i,
-          dataEntry,
-          textDirection,
-          listType,
-          prevDepth,
-          depth
-        );
+        const depth = getBlockDepth(contentState, blockProps.keys[childIndex]);
+        const isNewList = childIndex === 0 || depth > prevDepth;
+        const className = getBlockClassName(isNewList, dataEntry, textDirection, listType, depth);
         prevDepth = depth;
 
         return (
           <li
             className={className}
-            key={blockProps.keys[i]}
-            style={blockDataToStyle(blockProps.data[i])}
+            key={blockProps.keys[childIndex]}
+            style={blockDataToStyle(blockProps.data[childIndex])}
           >
             {result}
           </li>

@@ -30,7 +30,6 @@ export const TEXT_TYPES = Object.freeze([
 
 export const MODIFIERS = Object.freeze({
   COMMAND: 'command',
-  CTRL: 'ctrl',
   OPTION: 'option',
   SHIFT: 'shift',
 });

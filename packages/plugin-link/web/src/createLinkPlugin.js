@@ -2,6 +2,8 @@ import {
   createBasePlugin,
   insertLinkInPosition,
   fixPastedLinks,
+  hasLinksInSelection,
+  getVisibleSelectionRect,
 } from 'wix-rich-content-editor-common';
 import { addLinkPreview } from 'wix-rich-content-plugin-link-preview/dist/lib/utils';
 import { isValidUrl } from 'wix-rich-content-common';
@@ -13,10 +15,11 @@ import createLinkToolbar from './toolbar/createLinkToolbar';
 
 const createLinkPlugin = (config = {}) => {
   const type = LINK_TYPE;
-  const { theme, anchorTarget, relValue, [type]: settings = {}, ...rest } = config;
+  const { theme, anchorTarget, relValue, [type]: settings = {}, commonPubsub, ...rest } = config;
+  const targetBlank = anchorTarget === '_blank';
+  const nofollow = relValue === 'nofollow';
   settings.minLinkifyLength = settings.minLinkifyLength || 6;
-  const toolbar = createLinkToolbar(config);
-  let alreadyDisplayedAsLinkPreview = {};
+  const toolbar = createLinkToolbar(config, closeInlinePluginToolbar);
 
   const decorators = [
     { strategy: linkEntityStrategy, component: props => <Component {...props} theme={theme} /> },
@@ -28,10 +31,7 @@ const createLinkPlugin = (config = {}) => {
     if (shouldConvertToLinkPreview(settings, linkifyData)) {
       const url = getBlockLinkUrl(linkifyData);
       const blockKey = linkifyData.block.key;
-      const blocBeforeUrl =
-        editorState.getCurrentContent().getBlockBefore(blockKey)?.key || blockKey; // if there is not block before this is the first block
-      if (url && alreadyDisplayedAsLinkPreview[url] !== blocBeforeUrl) {
-        alreadyDisplayedAsLinkPreview = { ...alreadyDisplayedAsLinkPreview, [url]: blocBeforeUrl };
+      if (url) {
         addLinkPreview(editorState, config, blockKey, url);
       }
     }
@@ -61,7 +61,21 @@ const createLinkPlugin = (config = {}) => {
     return contentChanged && editorState.getLastChangeType() === 'insert-fragment';
   };
 
+  function openInlinePluginToolbar(commonPubsubData) {
+    commonPubsub.set('cursorOnInlinePlugin', commonPubsubData);
+  }
+  function closeInlinePluginToolbar() {
+    commonPubsub.set('cursorOnInlinePlugin', null);
+  }
+
   const onChange = editorState => {
+    const selection = editorState.getSelection();
+    if (hasLinksInSelection(editorState) && selection.isCollapsed()) {
+      const boundingRect = getVisibleSelectionRect(window);
+      openInlinePluginToolbar({ type, boundingRect });
+    } else {
+      closeInlinePluginToolbar();
+    }
     let newEditorState = editorState;
     if (isPasteChange(editorState)) {
       newEditorState = fixPastedLinks(editorState, { anchorTarget, relValue });
@@ -80,7 +94,7 @@ const createLinkPlugin = (config = {}) => {
   const shouldLinkify = consecutiveString =>
     consecutiveString.string.length >= settings.minLinkifyLength &&
     isValidUrl(consecutiveString.string) &&
-    !rangeContainsEntity(consecutiveString);
+    !(rangeContainsEntity(consecutiveString) && blockContainsPlainText(consecutiveString));
 
   const findLastStringWithNoSpaces = editorState => {
     const selection = editorState.getSelection();
@@ -103,11 +117,15 @@ const createLinkPlugin = (config = {}) => {
     return false;
   };
 
+  const blockContainsPlainText = ({ block, string }) => block.text.length > string.length;
+
   const addLinkAt = ({ string, index, endIndex, blockKey }, editorState) => {
     return insertLinkInPosition(editorState, blockKey, index, endIndex, {
       url: string,
       anchorTarget,
       relValue,
+      targetBlank,
+      nofollow,
     });
   };
 
@@ -119,6 +137,7 @@ const createLinkPlugin = (config = {}) => {
       anchorTarget,
       relValue,
       settings,
+      commonPubsub,
       ...rest,
     },
     { decorators, handleBeforeInput, handleReturn, onChange }

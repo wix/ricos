@@ -4,11 +4,19 @@ import registerServiceWorker from './registerServiceWorker';
 import RichContentApp from '../shared/RichContentApp';
 import 'react-reflex/styles.css';
 import './styles.global.scss';
+import ExampleApp from './ExampleApp.jsx';
+import { isMobile } from '../src/utils';
 
 const allLocales = preval`module.exports = require('./getAllLocales')`;
 
 ReactDOM.render(
-  <RichContentApp allLocales={allLocales} mode="demo" />,
+  <RichContentApp
+    app={ExampleApp}
+    allLocales={allLocales}
+    mode="demo"
+    debounce={1000}
+    isMobile={isMobile()}
+  />,
   document.getElementById('root')
 );
 registerServiceWorker();

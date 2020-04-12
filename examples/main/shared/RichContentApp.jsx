@@ -8,15 +8,13 @@ import {
   createWithContent,
 } from 'wix-rich-content-editor/dist/lib/editorStateConversion';
 import { isSSR } from 'wix-rich-content-common';
-import ExampleApp from '../src/ExampleApp';
-import TestApp from '../../../e2e/test-env/src/client/TestApp';
-import { getRequestedLocale, isMobile, normalize } from '../src/utils';
+import { getRequestedLocale, normalize } from '../src/utils';
 
 class RichContentApp extends PureComponent {
   constructor(props) {
     super(props);
     this.state = this.getInitialState(props);
-    if (props.mode === 'demo') {
+    if (props.debounce) {
       this.updateContentState = debounce(this.updateContentState, 60);
       this.updateEditorState = debounce(this.updateEditorState, 60);
     }
@@ -68,15 +66,14 @@ class RichContentApp extends PureComponent {
 
   render() {
     const { editorState, contentState, localeResource, locale } = this.state;
-    const { allLocales, mode, seoMode } = this.props;
-    const App = mode === 'demo' ? ExampleApp : TestApp;
+    const { allLocales, seoMode, isMobile, app: App } = this.props;
     return (
       <App
         allLocales={allLocales}
         editorState={editorState}
         contentState={contentState}
         locale={locale}
-        isMobile={mode === 'demo' ? isMobile() : this.props.isMobile}
+        isMobile={isMobile}
         localeResource={localeResource}
         onEditorChange={this.onEditorChange}
         onContentStateChange={this.onContentStateChange}

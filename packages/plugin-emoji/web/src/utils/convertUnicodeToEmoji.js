@@ -1,7 +1,7 @@
 /* eslint-disable */
 
 // Original can be found here: https://github.com/Ranks/emojione
-const convertShortNameToUnicode = function(unicode) {
+const convertUnicodeToEmoji = function(unicode) {
   if (unicode.indexOf('-') > -1) {
     const parts = [];
     const s = unicode.split('-');
@@ -31,4 +31,4 @@ const convertShortNameToUnicode = function(unicode) {
   }
 };
 
-export default convertShortNameToUnicode;
+export default convertUnicodeToEmoji;
