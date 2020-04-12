@@ -296,6 +296,20 @@ export const deleteBlock = (editorState, blockKey) => {
   return EditorState.push(editorState, newContentState, 'remove-range');
 };
 
+export const deleteBlockText = (editorState, blockKey) => {
+  const contentState = editorState.getCurrentContent();
+  const block = contentState.getBlockForKey(blockKey);
+  const selectionRange = new SelectionState({
+    anchorKey: blockKey,
+    anchorOffset: 0,
+    focusKey: blockKey,
+    focusOffset: block.text.length,
+    hasFocus: true,
+  });
+  const newContentState = Modifier.replaceText(contentState, selectionRange, '');
+  return EditorState.push(editorState, newContentState, 'remove-range');
+};
+
 export const getSelectedBlocks = editorState => {
   const blocks = editorState.getCurrentContent().getBlocksAsArray();
   const selection = getSelection(editorState);
