@@ -27,6 +27,8 @@
   - [#903](https://github.com/wix-incubator/rich-content/pull/903) gallery fixed; resize flapping fixed
 - `gallery`
   - [#903](https://github.com/wix-incubator/rich-content/pull/903) gallery size
+- `editor-common`
+  - [#913](https://github.com/wix-incubator/rich-content/pull/913) onChange - calculateDiff is debounced, for better performance
 
 </details>
 <hr/>
