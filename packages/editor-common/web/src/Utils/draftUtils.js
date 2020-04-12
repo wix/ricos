@@ -403,8 +403,11 @@ export const getEntities = (editorState, entityType = null) => {
       const char = character.getEntity();
       const entity = !!char && currentContent.getEntity(char);
       // regular text block
-      if (entity === false) entities.push({ type: 'text' });
-      else if (!entityType || entity.getType() === entityType) entities.push(entity);
+      if (entity === false) {
+        entities.push({ type: 'text' });
+      } else if (!entityType || entity.getType() === entityType) {
+        entities.push(entity);
+      }
     });
   });
   return entities;
