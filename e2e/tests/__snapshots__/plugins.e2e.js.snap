@@ -2918,15 +2918,6 @@ exports[`plugins > link preview > convert link preview to regular link #0`] =
     {
       "data": {},
       "depth": 0,
-      "entityRanges": [],
-      "inlineStyleRanges": [],
-      "key": 3,
-      "text": "",
-      "type": "unstyled"
-    },
-    {
-      "data": {},
-      "depth": 0,
       "entityRanges": [
         {
           "key": 1,
@@ -2935,7 +2926,7 @@ exports[`plugins > link preview > convert link preview to regular link #0`] =
         }
       ],
       "inlineStyleRanges": [],
-      "key": 4,
+      "key": 3,
       "text": " ",
       "type": "atomic"
     },
@@ -2944,7 +2935,7 @@ exports[`plugins > link preview > convert link preview to regular link #0`] =
       "depth": 0,
       "entityRanges": [],
       "inlineStyleRanges": [],
-      "key": 5,
+      "key": 4,
       "text": "",
       "type": "unstyled"
     },
@@ -2959,7 +2950,7 @@ exports[`plugins > link preview > convert link preview to regular link #0`] =
         }
       ],
       "inlineStyleRanges": [],
-      "key": 6,
+      "key": 5,
       "text": " ",
       "type": "atomic"
     },
@@ -2968,7 +2959,7 @@ exports[`plugins > link preview > convert link preview to regular link #0`] =
       "depth": 0,
       "entityRanges": [],
       "inlineStyleRanges": [],
-      "key": 7,
+      "key": 6,
       "text": "",
       "type": "unstyled"
     },
@@ -2989,7 +2980,7 @@ exports[`plugins > link preview > convert link preview to regular link #0`] =
           "style": "UNDERLINE"
         }
       ],
-      "key": 8,
+      "key": 7,
       "text": "wix.com ",
       "type": "unstyled"
     }
@@ -3264,15 +3255,6 @@ exports[`plugins > link preview > backspace key should convert link preview to r
     {
       "data": {},
       "depth": 0,
-      "entityRanges": [],
-      "inlineStyleRanges": [],
-      "key": 3,
-      "text": "",
-      "type": "unstyled"
-    },
-    {
-      "data": {},
-      "depth": 0,
       "entityRanges": [
         {
           "key": 1,
@@ -3281,7 +3263,7 @@ exports[`plugins > link preview > backspace key should convert link preview to r
         }
       ],
       "inlineStyleRanges": [],
-      "key": 4,
+      "key": 3,
       "text": " ",
       "type": "atomic"
     },
@@ -3290,7 +3272,7 @@ exports[`plugins > link preview > backspace key should convert link preview to r
       "depth": 0,
       "entityRanges": [],
       "inlineStyleRanges": [],
-      "key": 5,
+      "key": 4,
       "text": "",
       "type": "unstyled"
     },
@@ -3305,7 +3287,7 @@ exports[`plugins > link preview > backspace key should convert link preview to r
         }
       ],
       "inlineStyleRanges": [],
-      "key": 6,
+      "key": 5,
       "text": " ",
       "type": "atomic"
     },
@@ -3314,7 +3296,7 @@ exports[`plugins > link preview > backspace key should convert link preview to r
       "depth": 0,
       "entityRanges": [],
       "inlineStyleRanges": [],
-      "key": 7,
+      "key": 6,
       "text": "",
       "type": "unstyled"
     },
@@ -3335,7 +3317,7 @@ exports[`plugins > link preview > backspace key should convert link preview to r
           "style": "UNDERLINE"
         }
       ],
-      "key": 8,
+      "key": 7,
       "text": "wix.com ",
       "type": "unstyled"
     }
