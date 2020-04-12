@@ -3,7 +3,10 @@ import jss from 'jss';
 import preset from 'jss-preset-default';
 import { defaultTheme } from './defaults';
 
-export default function themeStrategy(isEditor: boolean, themeProperties: ObjectThemeProperties) {
+export default function themeStrategy(
+  isEditor: boolean,
+  themeProperties: ObjectThemeProperties | ThemeProperties
+) {
   const { theme } = themeProperties;
   if (typeof theme === 'object') {
     return { theme: { ...defaultTheme, ...theme } };
