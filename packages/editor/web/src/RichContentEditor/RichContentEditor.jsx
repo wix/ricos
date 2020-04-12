@@ -255,17 +255,6 @@ class RichContentEditor extends Component {
     }
   };
 
-  handleTabCommand = () => {
-    if (this.getToolbars().TextToolbar) {
-      const staticToolbarButton = this.findFocusableChildForElement(
-        `${getStaticTextToolbarId(this.refId)}`
-      );
-      staticToolbarButton && staticToolbarButton.focus();
-    } else {
-      this.editor.blur();
-    }
-  };
-
   getCustomCommandHandlers = () => ({
     commands: [
       ...this.pluginKeyBindings.commands,
