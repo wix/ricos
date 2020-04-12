@@ -1,6 +1,5 @@
 import themeStrategy from './themeStrategy';
-
-const getType = require('jest-get-type');
+import getType from 'jest-get-type';
 
 // eslint-disable-next-line mocha/no-skipped-tests
 describe('ThemeStrategy', () => {

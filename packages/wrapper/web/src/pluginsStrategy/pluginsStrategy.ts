@@ -53,7 +53,7 @@ function viewerStrategy(
 }
 
 export default function pluginsStrategy(
-  isEditor: boolean = false,
+  isEditor = false,
   plugins: PluginConfig[] = [],
   childProps: RichContentProps = {}
 ): PluginsStrategy {
