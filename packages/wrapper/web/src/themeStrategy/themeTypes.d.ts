@@ -1,15 +1,15 @@
 interface ThemeGeneratorFunction {
-  (colors: object, utils: object): object;
+  (colors: any, utils: any): any;
 }
 
 interface ThemeProperties {
-  theme: string;
+  theme?: string;
   palette?: Palette;
   themeGenerators?: ThemeGeneratorFunction[];
 }
 
 interface ObjectThemeProperties {
-  theme: object;
+  theme?: object | string;
 }
 
 interface Color {
