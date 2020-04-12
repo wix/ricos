@@ -19,6 +19,7 @@ import { pluginMap } from 'wix-rich-content-plugin-map/dist/module.viewer';
 import { pluginMentions } from 'wix-rich-content-plugin-mentions/dist/module.viewer';
 import { pluginSoundCloud } from 'wix-rich-content-plugin-sound-cloud/dist/module.viewer';
 import { pluginVideo } from 'wix-rich-content-plugin-video/dist/module.viewer';
+import { pluginLinkPreview } from 'wix-rich-content-plugin-link-preview/dist/module.viewer';
 import {
   pluginTextColor,
   pluginTextHighlight,
@@ -72,6 +73,7 @@ const plugins = [
   pluginVideo(),
   pluginTextColor(),
   pluginTextHighlight(),
+  pluginLinkPreview(),
 ];
 const ViewerWrapper = ({ contentState, palette }) => {
   return (

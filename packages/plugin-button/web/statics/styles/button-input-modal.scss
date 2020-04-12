@@ -94,7 +94,7 @@
 .button_inputModal_errorIcon {
   position: absolute;
   top: 2px;
-  left: 130px;
+  left: 150px;
   color: #f97972;
 }
 .tabs_headers_option + .tabs_headers_option {
@@ -124,6 +124,8 @@
 
 .button_inputModal_tabLabel {
   margin-top: 15px;
+  display: block;
+
 }
 
 .button_inputModal_scrollbar_thumb {
