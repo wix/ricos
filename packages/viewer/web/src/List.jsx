@@ -57,8 +57,6 @@ const List = ({
             } else {
               result.push(child);
             }
-          } else if (child) {
-            result.push(child);
           }
         });
         if (paragraphGroup.length) {
