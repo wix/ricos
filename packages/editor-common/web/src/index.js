@@ -87,7 +87,7 @@ export {
   createSelection,
   getBlockType,
   setForceSelection,
-  insertCharacter,
+  insertString,
 } from './Utils/draftUtils';
 export { isiOS } from './Utils/isiOS';
 export { getSelectionStyles } from './Utils/inlineStyleUtils';

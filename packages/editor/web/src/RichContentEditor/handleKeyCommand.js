@@ -2,7 +2,7 @@ import {
   COMMANDS,
   mergeBlockData,
   RichUtils,
-  insertCharacter,
+  insertString,
   TEXT_TYPES,
   CHARACTERS,
 } from 'wix-rich-content-editor-common';
@@ -25,8 +25,7 @@ export default (updateEditorState, customHandlers, blockType) => (command, edito
       // eslint-disable-next-line no-restricted-globals
       newState = RichUtils.onTab(event, editorState, 2);
     } else if (isText(blockType)) {
-      // eslint-disable-next-line no-restricted-globals
-      newState = insertCharacter(event, editorState, CHARACTERS.TAB);
+      newState = insertString(editorState, CHARACTERS.TAB);
     } else if (!isCodeBlock(blockType)) {
       newState = customHandlers[command](editorState);
     }

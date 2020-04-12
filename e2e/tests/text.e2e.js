@@ -112,16 +112,11 @@ describe('text', () => {
     cy.eyesCheckWindow(this.test.title);
   });
 
-  it.only('allow to enter tab character', function() {
+  it('allow to enter tab character', function() {
     cy.loadEditorAndViewer()
       .focusEditor()
       .tab()
-      .enterParagraphs([
-        'How to eat healthy is a good question.' +
-          'There’s so much information available about how to eat properly and it can be overwhelming!' +
-          ' While you may have heard all kinds of things about what foods to eat and what ones to avoid, ' +
-          'there are some simple rules that can help you to make the right food choices.',
-      ]);
+      .enterParagraphs(['How to eat healthy is a good question.']);
     cy.eyesCheckWindow(this.test.title);
   });
 });
