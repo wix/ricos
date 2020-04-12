@@ -49,7 +49,7 @@ export default class RichContentWrapper extends Component<
       .filter(isDefined);
 
     const mergedRCProps = merge(
-      pluginsStrategy(editor, plugins, children?.props),
+      pluginsStrategy(editor, plugins, children.props),
       themeStrategy(editor, { theme, palette, themeGenerators }),
       localeStrategy,
       rcProps

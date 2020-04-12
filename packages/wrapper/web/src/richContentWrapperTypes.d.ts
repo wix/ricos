@@ -3,7 +3,7 @@ interface RichContentProps {
   localeResource?: object;
   placeholder?: string;
   editorKey?: string;
-  onChange?(editorState: EditorState): void;
+  onChange?(editorState: import('draft-js').EditorState): void;
   initialState?: InitialState;
   theme?: object;
   config?: object;
@@ -13,7 +13,7 @@ interface RichContentProps {
 }
 
 interface RichContentWrapperProps {
-  children?: ReactElement;
+  children: import('react').ReactElement;
   theme?: string | object;
   locale?: string;
   palette?: Palette;
