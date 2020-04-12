@@ -34,7 +34,15 @@ class GalleryViewer extends React.Component {
   }
 
   initUpdateDimensionsForDomChanges() {
-    const { scrollingElement } = this.props?.settings;
+    let { scrollingElement } = this.props?.settings;
+    if (!scrollingElement) {
+      // eslint-disable-next-line no-console
+      console.error(
+        `Please fix the gallery config of Rich Content Editor. 
+        A scrollingElement needs to be provided. Without it the gallery will not work correctly`
+      );
+      scrollingElement = document.body;
+    }
     const contentElement =
       typeof scrollingElement === 'function' ? scrollingElement() : scrollingElement;
     if (contentElement) {
