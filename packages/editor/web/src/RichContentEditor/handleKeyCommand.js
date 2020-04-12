@@ -4,27 +4,34 @@ import {
   mergeBlockData,
   RichUtils,
   onTab,
+  insertString,
+  CHARACTERS,
 } from 'wix-rich-content-editor-common';
 import handleBackspaceCommand from './handleBackspaceCommand';
 import handleDeleteCommand from './handleDeleteCommand';
+
 const isList = blockType =>
   blockType === 'ordered-list-item' || blockType === 'unordered-list-item';
-
 const isText = blockType => {
   return TEXT_TYPES.some(type => type === blockType);
 };
-
+const isTab = command => command === COMMANDS.TAB || command === COMMANDS.SHIFT_TAB;
 const isCodeBlock = blockType => blockType === 'code-block';
+const getMaxDepth = blockType => (isList(blockType) ? 2 : 4);
 
 export default (updateEditorState, customHandlers, blockType) => (command, editorState) => {
   let newState;
 
-  if (customHandlers[command] && isText(blockType)) {
-    const maxDepth = isList(blockType) ? 2 : 4;
-    // eslint-disable-next-line no-restricted-globals
-    newState = onTab(event, editorState, maxDepth);
-  } else if (customHandlers[command] && !isCodeBlock(blockType)) {
-    newState = customHandlers[command](editorState);
+  if (customHandlers[command]) {
+    if (isTab(command) && isList(blockType)) {
+      const maxDepth = getMaxDepth(blockType);
+      // eslint-disable-next-line no-restricted-globals
+      newState = onTab(event, editorState, maxDepth);
+    } else if (isText(blockType)) {
+      newState = insertString(editorState, CHARACTERS.TAB);
+    } else if (!isCodeBlock(blockType)) {
+      newState = customHandlers[command](editorState);
+    }
   } else {
     switch (command) {
       case COMMANDS.ALIGN_RIGHT:

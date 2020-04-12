@@ -10,10 +10,10 @@ You can try it here: [https://wix-rich-content.herokuapp.com/](https://wix-rich-
 
 ## Installation
 
-To install this package as editor, use the following command ([draft-js version](https://github.com/wix-incubator/rich-content/blob/master/packages/editor/web/package.json#L49)):
+To install this package as editor, use the following command
 
 ```bash
-npm install --save wix-rich-content-editor draft-js
+npm install --save wix-rich-content-editor 
 ```
 
 To install this package as viewer, use the following command:

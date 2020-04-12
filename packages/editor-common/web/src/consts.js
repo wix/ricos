@@ -28,6 +28,10 @@ export const TEXT_TYPES = Object.freeze([
   'unordered-list-item',
 ]);
 
+export const CHARACTERS = Object.freeze({
+  TAB: '\t',
+});
+
 export const MODIFIERS = Object.freeze({
   COMMAND: 'command',
   OPTION: 'option',

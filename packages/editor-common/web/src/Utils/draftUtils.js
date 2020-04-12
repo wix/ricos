@@ -568,3 +568,10 @@ export function onTab(event, editorState, maxDepth) {
 export function setForceSelection(editorState, selection) {
   return EditorState.forceSelection(editorState, selection);
 }
+
+export function insertString(editorState, string) {
+  const contentState = editorState.getCurrentContent();
+  const selection = editorState.getSelection();
+  const newContentState = Modifier.replaceText(contentState, selection, string);
+  return EditorState.push(editorState, newContentState, 'insert-string');
+}
