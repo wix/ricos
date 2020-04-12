@@ -1,5 +1,5 @@
 import { EditorState, Modifier, RichUtils, SelectionState, AtomicBlockUtils } from '@wix/draft-js';
-import { cloneDeep, flatMap, findIndex, findLastIndex, countBy } from 'lodash';
+import { cloneDeep, flatMap, findIndex, findLastIndex, countBy, debounce, times } from 'lodash';
 
 export function createSelection({ blockKey, anchorOffset, focusOffset }) {
   return SelectionState.createEmpty(blockKey).merge({
@@ -431,7 +431,8 @@ export function getPostContentSummary(editorState) {
 //ATM, looks for deleted plugins.
 //onChanges - for phase 2?
 //Added Plugins - checked elsewhere via toolbar clicks
-export const calculateDiff = async (prevState, newState, onPluginDelete) => {
+let prevState = null;
+const calculateDifference = debounce((newState, onPluginDelete) => {
   const countByType = obj => countBy(obj, x => x.type);
   const prevEntities = countByType(getEntities(prevState));
   const currEntities = countByType(getEntities(newState));
@@ -444,11 +445,11 @@ export const calculateDiff = async (prevState, newState, onPluginDelete) => {
   const currPluginsTotal = Object.assign(currEntities, currBlockPlugins);
 
   Object.keys(prevPluginsTotal).forEach(type => {
-    if (!currPluginsTotal[type] || prevPluginsTotal[type] > currPluginsTotal[type]) {
-      onPluginDelete(type);
-    }
+    const timesDeleted = prevPluginsTotal[type] - (currPluginsTotal[type] || 0);
+    times(timesDeleted, () => onPluginDelete(type));
   });
 
+  prevState = null;
   // onPluginChange -> for Phase 2
   //else {
   // const before = beforePlugins[key];
@@ -456,6 +457,11 @@ export const calculateDiff = async (prevState, newState, onPluginDelete) => {
   // if (JSON.stringify(before) !== JSON.stringify(after))
   //   onPluginChange(type, { from: before, to: after });
   //}
+}, 300);
+
+export const calculateDiff = (previousState, newState, onPluginDelete) => {
+  prevState = prevState || previousState;
+  calculateDifference(newState, onPluginDelete);
 };
 
 // a selection of the new content from the last change
