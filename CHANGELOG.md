@@ -27,9 +27,12 @@
   - [#903](https://github.com/wix-incubator/rich-content/pull/903) gallery fixed; resize flapping fixed
 - `gallery`
   - [#903](https://github.com/wix-incubator/rich-content/pull/903) gallery size
+- `editor`
+  - [#914](https://github.com/wix-incubator/rich-content/pull/914) updating tooltips keys
 ### :house: Internal
 - `wrapper`
   - [#907](https://github.com/wix-incubator/rich-content/pull/907) converted `wix-rich-content-wrapper` to typescript
+
 
 </details>
 <hr/>
