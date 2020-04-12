@@ -17,6 +17,9 @@ const isEmptyContentState = raw =>
 
 const isEmptyBlock = ([_, data]) => data && data.length === 0; //eslint-disable-line no-unused-vars
 
+const getBlockDepth = (contentState, key) =>
+  contentState.blocks.find(block => block.key === key).depth || 0;
+
 const getBlockStyleClasses = (data, mergedStyles, textDirection, classes) => {
   const rtl = textDirection === 'rtl' || data.textDirection === 'rtl';
   const defaultTextAlignment = rtl ? 'right' : 'left';
@@ -46,6 +49,7 @@ const getBlocks = (contentState, mergedStyles, textDirection, context) => {
       blockProps,
       blockDataToStyle,
       contentState,
+      getBlockDepth,
     };
     return <List {...props} />;
   };
@@ -54,6 +58,9 @@ const getBlocks = (contentState, mergedStyles, textDirection, context) => {
     return (children, blockProps) =>
       children.map((child, i) => {
         const Type = typeof type === 'string' ? type : type(child);
+        const depth = getBlockDepth(contentState, blockProps.keys[i]);
+        const depthClassName = `public-DraftStyleDefault-block-depth${depth}`;
+        const directionClassName = `public-DraftStyleDefault-ltr`;
 
         const { interactions } = blockProps.data[i];
         const BlockWrapper = Array.isArray(interactions)
@@ -63,11 +70,15 @@ const getBlocks = (contentState, mergedStyles, textDirection, context) => {
         const _child = isEmptyBlock(child) ? <br /> : withDiv ? <div>{child}</div> : child;
         const inner = (
           <Type
-            className={getBlockStyleClasses(
-              blockProps.data[i],
-              mergedStyles,
-              textDirection,
-              mergedStyles[style]
+            className={classNames(
+              getBlockStyleClasses(
+                blockProps.data[i],
+                mergedStyles,
+                textDirection,
+                mergedStyles[style]
+              ),
+              depthClassName,
+              directionClassName
             )}
             style={blockDataToStyle(blockProps.data[i])}
             key={blockProps.keys[i]}
