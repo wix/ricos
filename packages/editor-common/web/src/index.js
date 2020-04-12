@@ -88,6 +88,7 @@ export {
   getBlockType,
   setForceSelection,
   deleteBlockText,
+  insertString,
 } from './Utils/draftUtils';
 export { isiOS } from './Utils/isiOS';
 export { getSelectionStyles } from './Utils/inlineStyleUtils';
@@ -101,6 +102,8 @@ export {
   DECORATION_MODE,
   PLUGIN_DECORATION_PROPS,
   PLUGIN_DECORATIONS,
+  TEXT_TYPES,
+  CHARACTERS,
 } from './consts';
 
 export {
