@@ -805,6 +805,7 @@ exports[`text > open link toolbar (InlinePluginToolbar) #0`] =
     }
   }
 };
+
 exports[`text > allow to enter tab character #0`] =
 {
   "blocks": [
