@@ -53,7 +53,6 @@ const configs = {
 };
 
 const plugins = [
-  //dummy
   pluginButton(),
   pluginCodeBlock(),
   pluginDivider(),
@@ -76,8 +75,9 @@ const plugins = [
   pluginLinkPreview(),
 ];
 const ViewerWrapper = ({ contentState, palette }) => {
+  const theme = palette ? { theme: 'Palette', palette } : { theme: 'Default' };
   return (
-    <RichContentWrapper plugins={plugins} theme={'Palette'} palette={palette}>
+    <RichContentWrapper plugins={plugins} {...theme}>
       <RichContentViewer initialState={contentState} />
     </RichContentWrapper>
   );

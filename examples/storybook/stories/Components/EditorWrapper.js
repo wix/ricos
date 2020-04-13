@@ -78,11 +78,12 @@ const plugins = [
   pluginTextColor(),
   pluginTextHighlight(),
 ];
-const EditorWrapper = ({ contentState, palette }) => {
+const EditorWrapper = ({ contentState, palette, onChange }) => {
   const editorState = createWithContent(convertFromRaw(contentState));
+  const theme = palette ? { theme: 'Palette', palette } : { theme: 'Default' };
   return (
-    <RichContentWrapper plugins={plugins} theme={'Palette'} palette={palette} editor>
-      <RichContentEditor editorState={editorState} />
+    <RichContentWrapper plugins={plugins} {...theme} editor>
+      <RichContentEditor editorState={editorState} onChange={onChange} />
     </RichContentWrapper>
   );
 };
@@ -90,6 +91,7 @@ const EditorWrapper = ({ contentState, palette }) => {
 EditorWrapper.propTypes = {
   contentState: PropTypes.object,
   palette: PropTypes.arrayOf(PropTypes.object),
+  onChange: PropTypes.func,
 };
 
 export default EditorWrapper;
