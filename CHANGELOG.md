@@ -15,6 +15,9 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+- `editor-common`
+  - [#913](https://github.com/wix-incubator/rich-content/pull/913) onChange - calculateDiff is debounced, for better performance
 
 </details>
 <hr/>
