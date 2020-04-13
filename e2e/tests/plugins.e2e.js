@@ -31,7 +31,7 @@ describe('plugins', () => {
 
     beforeEach('load editor', () => {
       cy.switchToDesktop();
-      cy.loadEditorAndViewer('images');
+      // cy.loadEditorAndViewer('images');
     });
 
     after(() => cy.eyesClose());
@@ -307,7 +307,7 @@ describe('plugins', () => {
 
     after(() => cy.eyesClose());
 
-    it('render plugin toolbar and change styling', function() {
+    it('render plugin toolbar and change styling', () => {
       cy.loadEditorAndViewer('divider')
         .openPluginToolbar(PLUGIN_COMPONENT.DIVIDER)
         .openDropdownMenu();
@@ -388,7 +388,7 @@ describe('plugins', () => {
 
     after(() => cy.eyesClose());
 
-    it('render map plugin toolbar and settings', function() {
+    it('render map plugin toolbar and settings', () => {
       cy.openPluginToolbar(PLUGIN_COMPONENT.MAP);
       cy.eyesCheckWindow('render map plugin toolbar');
       cy.openMapSettings();
