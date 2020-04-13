@@ -1,23 +1,32 @@
-import React from 'react';
+import React, { Component } from 'react';
 import EngineWrapper from './EngineWrapper';
 import themeStrategy from './themeStrategy/themeStrategy';
 import pluginsStrategy from './pluginsStrategy/pluginsStrategy';
 import localeStrategy from './localeStrategy/localeStrategy';
-import PropTypes from 'prop-types';
 import './styles.global.css';
 import { merge } from 'lodash';
+import PropTypes from 'prop-types';
+import { isDefined } from 'ts-is-present';
+import { RichContentProps, RichContentWrapperProps } from './RichContentWrapperTypes';
 
-export default class RichContentWrapper extends React.Component {
-  constructor(props) {
+export default class RichContentWrapper extends Component<
+  RichContentWrapperProps,
+  { localeStrategy: RichContentProps }
+> {
+  constructor(props: RichContentWrapperProps) {
     super(props);
     this.state = {
       localeStrategy: {},
     };
   }
 
+  static propTypes = { children: PropTypes.element.isRequired };
+
+  static defaultProps = { locale: 'en' };
+
   updateLocale = async () => {
     const { locale, children } = this.props;
-    await localeStrategy(children.props.locale || locale).then(localeData => {
+    await localeStrategy(children?.props.locale || locale).then(localeData => {
       this.setState({ localeStrategy: localeData });
     });
   };
@@ -35,7 +44,10 @@ export default class RichContentWrapper extends React.Component {
   render() {
     const { theme, palette, plugins = [], children, editor = false, rcProps, ...rest } = this.props;
     const { localeStrategy } = this.state;
-    const themeGenerators = plugins.filter(plugin => !!plugin.theme).map(plugin => plugin.theme);
+
+    const themeGenerators: ThemeGeneratorFunction[] = plugins
+      .map(plugin => plugin.theme)
+      .filter(isDefined);
 
     const mergedRCProps = merge(
       pluginsStrategy(editor, plugins, children.props),
@@ -56,17 +68,3 @@ export default class RichContentWrapper extends React.Component {
     );
   }
 }
-RichContentWrapper.propTypes = {
-  children: PropTypes.any,
-  theme: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-  locale: PropTypes.string,
-  palette: PropTypes.array,
-  plugins: PropTypes.arrayOf(PropTypes.object),
-  strategies: PropTypes.arrayOf(PropTypes.func),
-  editor: PropTypes.bool,
-  rcProps: PropTypes.object,
-};
-
-RichContentWrapper.defaultProps = {
-  locale: 'en',
-};

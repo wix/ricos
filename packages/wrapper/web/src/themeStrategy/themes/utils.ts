@@ -1,7 +1,7 @@
 export const fallbackColor = '#000000';
 export const fallbackColorBright = '#ffffff';
 
-function getBrightness(hexCode) {
+function getBrightness(hexCode: string): number {
   // return between 0-255
   // strip off any leading #
   const _hexCode = hexCode.replace('#', '');
@@ -13,16 +13,16 @@ function getBrightness(hexCode) {
   return (r * 299 + g * 587 + b * 114) / 1000;
 }
 
-export function isBright(hexColor) {
+export function isBright(hexColor: string) {
   return getBrightness(hexColor) > 140;
 }
 
-export function adaptForeground(actionColor) {
+export function adaptForeground(actionColor: string): string {
   return getBrightness(actionColor) < 140 ? actionColor : fallbackColor;
   //return getBrightness(actionColor) < 255 / 2 ? actionColor : '#000000';
 }
 
-export function hexToRgbA(hex, opacity) {
+export function hexToRgbA(hex: string, opacity: number): string {
   let c;
   if (/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)) {
     c = hex.substring(1).split('');

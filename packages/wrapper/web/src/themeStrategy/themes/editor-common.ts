@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 import { adaptForeground, hexToRgbA } from './utils';
 
-export default function editorCommon(colors) {
+export default function editorCommon(colors: any) {
   const actionColor = adaptForeground(colors.actionColor);
   const blockActionColorSettings = {
     cursor: 'default',

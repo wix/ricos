@@ -87,6 +87,7 @@ export {
   createSelection,
   getBlockType,
   setForceSelection,
+  deleteBlockText,
   insertString,
 } from './Utils/draftUtils';
 export { isiOS } from './Utils/isiOS';
