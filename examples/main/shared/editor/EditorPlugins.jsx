@@ -52,7 +52,6 @@ import 'wix-rich-content-plugin-giphy/dist/styles.min.css';
 import 'wix-rich-content-plugin-map/dist/styles.min.css';
 import 'wix-rich-content-plugin-file-upload/dist/styles.min.css';
 import 'wix-rich-content-plugin-text-color/dist/styles.min.css';
-import 'wix-rich-content-plugin-indent/dist/styles.min.css';
 
 import {
   customForegroundStyleFn,
