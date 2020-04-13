@@ -56,7 +56,6 @@
     "eslint": "^6.1.0",
     "jest": "^25.1.0",
     "lodash": "^4.17.15",
-    "prop-types": "^15.6.2",
     "react": "16.6.3",
     "react-dom": "16.6.3",
     "rollup": "1.31.1",
@@ -64,6 +63,7 @@
     "ts-jest": "^25.3.1"
   },
   "dependencies": {
+    "prop-types": "^15.6.2",
     "jss": "^10.1.1",
     "jss-plugin-camel-case": "^10.1.1",
     "jss-preset-default": "^10.1.1",
