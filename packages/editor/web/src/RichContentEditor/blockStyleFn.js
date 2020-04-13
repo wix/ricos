@@ -29,6 +29,7 @@ export default (theme, styleToClass) => {
       depth,
       data: { textAlignment, dynamicStyles = {} },
     } = contentBlock.toJS();
+
     const key = types[type] || 'text';
 
     const classList = [styles[key], theme[key]];
