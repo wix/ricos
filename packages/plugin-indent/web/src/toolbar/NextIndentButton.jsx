@@ -19,7 +19,6 @@ export default class NextIndentButton extends Component {
             setEditorState(newState);
           }
         }}
-        // isActive={true}
         theme={theme}
         isMobile={isMobile}
         tooltipText={t('NextIndentButton_Tooltip')}

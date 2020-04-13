@@ -14,12 +14,11 @@ export default class PrevIndentButton extends Component {
         onClick={() => {
           // eslint-disable-next-line no-restricted-globals
           const editorState = getEditorState();
-          const newState = onIndent(false, editorState, 4);
+          const newState = onIndent(false, editorState);
           if (newState !== editorState) {
             setEditorState(newState);
           }
         }}
-        // isActive={this.isActive}
         theme={theme}
         isMobile={isMobile}
         tooltipText={t('PrevIndentButton_Tooltip')}
