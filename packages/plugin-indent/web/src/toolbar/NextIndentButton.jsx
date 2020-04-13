@@ -14,7 +14,7 @@ export default class NextIndentButton extends Component {
         onClick={() => {
           // eslint-disable-next-line no-restricted-globals
           const editorState = getEditorState();
-          const newState = onIndent(true, editorState, 4);
+          const newState = onIndent(true, editorState);
           if (newState !== editorState) {
             setEditorState(newState);
           }

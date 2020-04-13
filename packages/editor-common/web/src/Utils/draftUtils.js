@@ -539,34 +539,14 @@ function adjustBlockDepthForContentState(contentState, selectionState, adjustmen
   });
 }
 
-export function onTab(event, editorState, maxDepth) {
-  const selection = editorState.getSelection();
-  const key = selection.getAnchorKey();
-
-  if (key !== selection.getFocusKey()) {
-    return editorState;
-  }
-
-  const content = editorState.getCurrentContent();
-  const block = content.getBlockForKey(key);
-  const depth = block.getDepth();
-
+export function onTab(event, editorState) {
   event.preventDefault();
-
-  if (!event.shiftKey && depth === maxDepth) {
-    return editorState;
-  }
-
-  const withAdjustment = adjustBlockDepthForContentState(
-    content,
-    selection,
-    event.shiftKey ? -1 : 1,
-    maxDepth
-  );
-  return EditorState.push(editorState, withAdjustment, 'adjust-depth');
+  const isDirectionNext = !event.shiftKey;
+  return onIndent(isDirectionNext, editorState);
 }
 
-export function onIndent(isDirectionNext, editorState, maxDepth) {
+export function onIndent(isDirectionNext, editorState) {
+  const maxDepth = 2;
   const selection = editorState.getSelection();
   const key = selection.getAnchorKey();
 
