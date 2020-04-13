@@ -18,7 +18,9 @@
 ### :bug: Bug Fix
 - `editor-common`
   - [#913](https://github.com/wix-incubator/rich-content/pull/913) onChange - calculateDiff is debounced, for better performance
-
+### :house: Internal
+- `wrapper`
+  - [#919](https://github.com/wix-incubator/rich-content/pull/919) added internal mobile support
 </details>
 <hr/>
 
