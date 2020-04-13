@@ -91,16 +91,16 @@ jobs:
 
   notify-on-slack:
     runs-on: ubuntu-18.04
-    # needs: [visual-tests, content-state-tests, unit-tests, lint]
+    needs: [visual-tests, content-state-tests, unit-tests, lint]
     if: always()
     steps:
       - name: Workflow Conclusion Action
         uses: technote-space/workflow-conclusion-action@v1.1.1
       - name: Notify on Slack
         uses: voxmedia/github-action-slack-notify-build@v1.1.1
-        if: github.ref == 'refs/heads/notify-build-failed-on-slack'
+        if: env.WORKFLOW_CONCLUSION == 'fail' && github.ref == 'refs/heads/notify-build-failed-on-slack'
         with:
-          channel_id: G011R1YVCRG
+          channel_id: GFT1VFDJ6 #rich-content-core
           status: FAILED
           color: danger
     env:
