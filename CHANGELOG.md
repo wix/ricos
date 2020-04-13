@@ -22,6 +22,8 @@
 ### :house: Internal
 - `wrapper`
   - [#920](https://github.com/wix-incubator/rich-content/pull/920) refactor: `FullscreenRenderer.tsx`, `ModalRenderer.tsx`
+- `wrapper + storybook`
+  - [#918](https://github.com/wix-incubator/rich-content/pull/918) fixed re-render for new initialState (viewer) & created live example app in storybook
 
 </details>
 <hr/>
