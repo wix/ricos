@@ -15,7 +15,7 @@ const { shallow, mount } = Enzyme;
 
 const wrapper = (wrapperProps?: any) => ({
   withEditor: (editorProps?: RichContentProps) => (
-    <RichContentWrapper {...(wrapperProps || {})} editor>
+    <RichContentWrapper {...(wrapperProps || {})} isEditor>
       <RichContentEditor {...(editorProps || {})} />
     </RichContentWrapper>
   ),
@@ -32,13 +32,13 @@ const plugins = [pluginHashtag()];
 // eslint-disable-next-line mocha/no-skipped-tests
 describe('Wrapper', () => {
   it('should render editor', () => {
-    const element = shallow(wrapper({ editor: true }).withEditor());
+    const element = shallow(wrapper({ isEditor: true }).withEditor());
     expect(element).toBeTruthy();
     expect(element.find('#engine_wrapper')).toBeTruthy();
   });
 
   it('should render editor with locale', () => {
-    const element = shallow(wrapper({ editor: true, locale: 'he' }).withEditor());
+    const element = shallow(wrapper({ isEditor: true, locale: 'he' }).withEditor());
     expect(element).toBeTruthy();
   });
 
@@ -49,16 +49,16 @@ describe('Wrapper', () => {
 
   describe('Editor', () => {
     it('should render locale="en" if unspecified', () => {
-      const element = mount(wrapper({ editor: true }).withEditor());
+      const element = mount(wrapper({ isEditor: true }).withEditor());
       expect(element.props()).toHaveProperty('locale');
       expect(element.props().locale).toEqual('en');
     });
     it('should render editor child if provided', () => {
-      const element = mount(wrapper({ editor: true }).withEditor());
+      const element = mount(wrapper({ isEditor: true }).withEditor());
       expect(element.props()).toHaveProperty('children');
     });
     it('should render with pluginsStrategy output', () => {
-      const element = shallow(wrapper({ editor: true, plugins }).withEditor());
+      const element = shallow(wrapper({ isEditor: true, plugins }).withEditor());
       const instance = element.dive().instance();
       const renderResult = instance.render();
       const editorProps = renderResult.props.children.props;
@@ -66,7 +66,7 @@ describe('Wrapper', () => {
       expect(editorProps.config).toHaveProperty('wix-draft-plugin-hashtag');
     });
     it('should render with themeStrategy output', () => {
-      const element = shallow(wrapper({ editor: true, theme: 'Default' }).withEditor());
+      const element = shallow(wrapper({ isEditor: true, theme: 'Default' }).withEditor());
       const instance = element.dive().instance();
       const renderResult = instance.render();
       const editorProps = renderResult.props.children.props;
@@ -74,14 +74,14 @@ describe('Wrapper', () => {
       expect(editorProps.theme).toHaveProperty('modalTheme');
     });
     it('should call updateLocale on componentDidMount', () => {
-      const element = shallow(wrapper({ editor: true, locale: 'en' }).withEditor());
+      const element = shallow(wrapper({ isEditor: true, locale: 'en' }).withEditor());
       const instance = element.instance();
       const spyUpdate = spyOn(instance, 'updateLocale');
       instance.componentDidMount();
       expect(spyUpdate.calls.count()).toEqual(1);
     });
     it('should render localeStrategy in strategies', async () => {
-      const element = shallow(wrapper({ editor: true, locale: 'he' }).withEditor());
+      const element = shallow(wrapper({ isEditor: true, locale: 'he' }).withEditor());
       const instance = element.instance();
       const renderResult = instance.render();
       await instance.updateLocale();
