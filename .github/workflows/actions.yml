@@ -93,7 +93,7 @@ jobs:
   notify-on-slack:
     runs-on: ubuntu-18.04
     # needs: [visual-tests, content-state-tests, unit-tests, lint]
-    needs: [lint]
+    # needs: [lint]
     if: always()
     steps:
       - name: Workflow Conclusion Action
