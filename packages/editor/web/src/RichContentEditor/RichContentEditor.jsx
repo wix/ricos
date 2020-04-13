@@ -210,7 +210,9 @@ class RichContentEditor extends Component {
 
   updateEditorState = editorState => {
     const onPluginDelete = this.props.helpers?.onPluginDelete;
-    this.calculateDiff(editorState, (...args) => onPluginDelete?.(...args, Version.currentVersion));
+    if (onPluginDelete) {
+      this.calculateDiff(editorState, (...args) => onPluginDelete(...args, Version.currentVersion));
+    }
     this.setEditorState(editorState);
     this.props.onChange?.(editorState);
   };

@@ -446,7 +446,6 @@ export function getPostContentSummary(editorState) {
 export const createCalcContentDiff = state => {
   let prevState = state;
   return debounce((newState, onPluginDelete) => {
-    if (!onPluginDelete) return;
     const countByType = obj => countBy(obj, x => x.type);
     const prevEntities = countByType(getEntities(prevState));
     const currEntities = countByType(getEntities(newState));
