@@ -1,6 +1,4 @@
 import React from 'react';
-
-import { RichContentViewer } from 'wix-rich-content-viewer';
 import {
   RichContentEditorBox,
   RichContentViewerBox,
@@ -8,8 +6,7 @@ import {
   Page,
 } from '../Components/StoryParts';
 
-import { dividerTypeMapper } from 'wix-rich-content-plugin-divider/dist/module.viewer';
-import { convertFromRaw, convertToRaw, createWithContent } from 'wix-rich-content-editor';
+import { convertToRaw } from 'wix-rich-content-editor';
 
 import dividerContentState from '../../../../e2e/tests/fixtures/divider.json';
 import EditorWrapper from '../Components/EditorWrapper';
