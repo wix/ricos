@@ -82,7 +82,7 @@ export {
   createBlock,
   getBlockInfo,
   getFocusedBlockKey,
-  calculateDiff,
+  createCalcContentDiff,
   getPostContentSummary,
   createSelection,
   getBlockType,

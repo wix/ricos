@@ -443,37 +443,35 @@ export function getPostContentSummary(editorState) {
 //ATM, looks for deleted plugins.
 //onChanges - for phase 2?
 //Added Plugins - checked elsewhere via toolbar clicks
-let prevState = null;
-const calculateDifference = debounce((newState, onPluginDelete) => {
-  const countByType = obj => countBy(obj, x => x.type);
-  const prevEntities = countByType(getEntities(prevState));
-  const currEntities = countByType(getEntities(newState));
-  const prevBlocks = prevState.getCurrentContent().getBlocksAsArray();
-  const currBlocks = newState.getCurrentContent().getBlocksAsArray();
-  const prevBlockPlugins = countByType(getBlockTypePlugins(prevBlocks));
-  const currBlockPlugins = countByType(getBlockTypePlugins(currBlocks));
+export const createCalcContentDiff = state => {
+  let prevState = state;
+  return debounce((newState, onPluginDelete) => {
+    if (!onPluginDelete) return;
+    const countByType = obj => countBy(obj, x => x.type);
+    const prevEntities = countByType(getEntities(prevState));
+    const currEntities = countByType(getEntities(newState));
+    const prevBlocks = prevState.getCurrentContent().getBlocksAsArray();
+    const currBlocks = newState.getCurrentContent().getBlocksAsArray();
+    const prevBlockPlugins = countByType(getBlockTypePlugins(prevBlocks));
+    const currBlockPlugins = countByType(getBlockTypePlugins(currBlocks));
 
-  const prevPluginsTotal = Object.assign(prevEntities, prevBlockPlugins);
-  const currPluginsTotal = Object.assign(currEntities, currBlockPlugins);
+    const prevPluginsTotal = Object.assign(prevEntities, prevBlockPlugins);
+    const currPluginsTotal = Object.assign(currEntities, currBlockPlugins);
 
-  Object.keys(prevPluginsTotal).forEach(type => {
-    const timesDeleted = prevPluginsTotal[type] - (currPluginsTotal[type] || 0);
-    times(timesDeleted, () => onPluginDelete(type));
-  });
+    Object.keys(prevPluginsTotal).forEach(type => {
+      const timesDeleted = prevPluginsTotal[type] - (currPluginsTotal[type] || 0);
+      times(timesDeleted, () => onPluginDelete(type));
+    });
 
-  prevState = null;
-  // onPluginChange -> for Phase 2
-  //else {
-  // const before = beforePlugins[key];
-  // const after = afterPlugins[key];
-  // if (JSON.stringify(before) !== JSON.stringify(after))
-  //   onPluginChange(type, { from: before, to: after });
-  //}
-}, 300);
-
-export const calculateDiff = (previousState, newState, onPluginDelete) => {
-  prevState = prevState || previousState;
-  calculateDifference(newState, onPluginDelete);
+    // onPluginChange -> for Phase 2
+    //else {
+    // const before = beforePlugins[key];
+    // const after = afterPlugins[key];
+    // if (JSON.stringify(before) !== JSON.stringify(after))
+    //   onPluginChange(type, { from: before, to: after });
+    //}
+    prevState = newState;
+  }, 300);
 };
 
 // a selection of the new content from the last change

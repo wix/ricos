@@ -19,7 +19,7 @@ import {
   TOOLBARS,
   getBlockInfo,
   getFocusedBlockKey,
-  calculateDiff,
+  createCalcContentDiff,
   getPostContentSummary,
   Modifier,
   getBlockType,
@@ -60,6 +60,7 @@ class RichContentEditor extends Component {
       props.config.uiSettings || {}
     );
 
+    this.calculateDiff = createCalcContentDiff(this.state.editorState);
     this.initContext();
     this.initPlugins();
   }
@@ -209,11 +210,7 @@ class RichContentEditor extends Component {
 
   updateEditorState = editorState => {
     const onPluginDelete = this.props.helpers?.onPluginDelete;
-    if (onPluginDelete) {
-      calculateDiff(this.state.editorState, editorState, (...args) =>
-        onPluginDelete(...args, Version.currentVersion)
-      );
-    }
+    this.calculateDiff(editorState, (...args) => onPluginDelete?.(...args, Version.currentVersion));
     this.setEditorState(editorState);
     this.props.onChange?.(editorState);
   };
