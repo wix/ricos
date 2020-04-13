@@ -4,6 +4,7 @@ import { RichContentProps } from './RichContentWrapperTypes';
 interface Props {
   children: ReactElement;
   helpers: object;
+  initialState: object;
 }
 
 interface State {
@@ -44,7 +45,7 @@ export default class FullscreenRenderer extends Component<Props, State> {
 
   render() {
     const { isExpanded, index, data, Fullscreen, isMounted } = this.state;
-    const { children, helpers: viewerHelpers = {} } = this.props;
+    const { children, helpers: viewerHelpers = {}, initialState } = this.props;
     const helpers = this.createHelpers(viewerHelpers);
     return (
       <Fragment>
@@ -54,7 +55,7 @@ export default class FullscreenRenderer extends Component<Props, State> {
             {Fullscreen && (
               <Fullscreen
                 dataHook={'WrapperFullScreen'}
-                initialState={children.props.initialState || { entityMap: {} }}
+                initialState={initialState || { entityMap: {} }}
                 isOpen={isExpanded}
                 images={data?.images || []}
                 onClose={this.onClose}

@@ -8,11 +8,9 @@ import {
 
 import { convertToRaw } from 'wix-rich-content-editor';
 
-import dividerContentState from '../../../../e2e/tests/fixtures/divider.json';
+import dividerContentState from '../../../../e2e/tests/fixtures/storybook-example-app.json';
 import EditorWrapper from '../Components/EditorWrapper';
 import ViewerWrapper from '../Components/ViewerWrapper';
-// import DividerEditor from './WrapperBasicUsage';
-// import sourcecode from '!!raw-loader!./WrapperBasicUsage.js';
 
 export default () => {
   return (
