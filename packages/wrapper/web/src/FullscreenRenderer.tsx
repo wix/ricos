@@ -1,9 +1,8 @@
 import React, { Component, Fragment, Suspense, Children, ReactElement } from 'react';
-import { RichContentProps } from './RichContentWrapperTypes';
 
 interface Props {
   children: ReactElement;
-  helpers: object;
+  helpers?: object;
   initialState: object;
 }
 
