@@ -64,16 +64,16 @@ export default class RceTheme {
           borderColor: textColor,
           backgroundColor: bgColor,
         },
-        linkPreview_title: {
+        linkPreviewTitle: {
           color: textColor,
         },
-        linkPreview_image: {
+        linkPreviewImage: {
           borderColor: textColor,
         },
-        linkPreview_description: {
+        linkPreviewDescription: {
           color: textColor,
         },
-        linkPreview_url: {
+        linkPreviewUrl: {
           color: secondaryColor,
         },
       };

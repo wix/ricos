@@ -65,7 +65,7 @@
     },
     {
       "key": "8i1rg",
-      "text": "",
+      "text": "The End",
       "type": "unstyled",
       "depth": 0,
       "inlineStyleRanges": [],
@@ -102,5 +102,5 @@
       }
     }
   },
-  "VERSION": "6.9.6"
+  "VERSION": "7.2.0"
 }

@@ -20,7 +20,6 @@ export { default as Version } from './Utils/versioningUtils';
 export { hasLinksInBlock, getLinkRangesInBlock } from './Utils/draftUtils';
 export { validate, getContentStateSchema } from './Utils/data-schema-validator';
 export { isSSR } from './Utils/ssrUtils';
-export { truncateContentState } from './lib/contentStateServices';
 
 //Schemas
 /* eslint-disable max-len */

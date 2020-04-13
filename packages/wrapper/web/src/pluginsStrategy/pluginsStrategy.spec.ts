@@ -1,11 +1,11 @@
 import pluginsStrategy from './pluginsStrategy';
-
-const getType = require('jest-get-type');
+import getType from 'jest-get-type';
 
 // eslint-disable-next-line mocha/no-skipped-tests
 describe('PluginsStrategy', () => {
   const driver = {
-    runStrategy: (isEditor, plugins = []) => pluginsStrategy(isEditor, plugins, {}),
+    runStrategy: (isEditor?: boolean, plugins: PluginConfig[] = []) =>
+      pluginsStrategy(isEditor, plugins, {}),
   };
 
   it('should create an object', () => {

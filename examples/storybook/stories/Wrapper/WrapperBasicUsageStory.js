@@ -12,8 +12,8 @@ import { dividerTypeMapper } from 'wix-rich-content-plugin-divider/dist/module.v
 import { convertFromRaw, createWithContent } from 'wix-rich-content-editor';
 
 import dividerContentState from '../../../../e2e/tests/fixtures/divider.json';
-import DividerEditor from './WrapperBaiscUsage';
-import sourcecode from '!!raw-loader!./WrapperBaiscUsage.js';
+import DividerEditor from './WrapperBasicUsage';
+import sourcecode from '!!raw-loader!./WrapperBasicUsage.js';
 
 const editorState = createWithContent(convertFromRaw(dividerContentState));
 export default () => {

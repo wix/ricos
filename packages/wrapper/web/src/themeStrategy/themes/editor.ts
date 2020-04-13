@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-export default function editor(colors, utils) {
+export default function editor(colors: any, utils: any) {
   const adaptedActionColor = utils.adaptForeground(colors.actionColor);
   const { bgColor, actionColor, textColor } = colors;
   return {

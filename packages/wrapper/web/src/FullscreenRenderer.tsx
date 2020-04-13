@@ -1,16 +1,25 @@
-import React, { Component, Fragment, Suspense, Children } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component, Fragment, Suspense, Children, ReactElement } from 'react';
+import { RichContentProps } from './RichContentWrapperTypes';
 
-export default class FullscreenRenderer extends Component {
-  static propTypes = {
-    children: PropTypes.node.isRequired,
-  };
+interface Props {
+  children: ReactElement;
+}
+
+interface State {
+  isExpanded: boolean;
+  index?: number;
+  data?: any;
+  Fullscreen?: any;
+  isMounted: boolean;
+}
+
+export default class FullscreenRenderer extends Component<Props, State> {
+  childProps: RichContentProps;
 
   constructor(props) {
     super(props);
     this.state = {
       isExpanded: false,
-      Fullscreen: () => undefined,
       isMounted: false,
     };
     this.childProps = {
@@ -47,15 +56,17 @@ export default class FullscreenRenderer extends Component {
         {Children.only(React.cloneElement(children, this.childProps))}
         {isMounted && (
           <Suspense fallback={<div />}>
-            <Fullscreen
-              dataHook={'WrapperFullScreen'}
-              initialState={children.props.initialState || { entityMap: {} }}
-              isOpen={isExpanded}
-              images={data?.images || []}
-              onClose={this.onClose}
-              index={index}
-              setExpandModeData={this.setData}
-            />
+            {Fullscreen && (
+              <Fullscreen
+                dataHook={'WrapperFullScreen'}
+                initialState={children.props.initialState || { entityMap: {} }}
+                isOpen={isExpanded}
+                images={data?.images || []}
+                onClose={this.onClose}
+                index={index}
+                setExpandModeData={this.setData}
+              />
+            )}
           </Suspense>
         )}
       </Fragment>

@@ -32,21 +32,21 @@ export const sizeSmallButton = icon =>
   createBlockSizeButton({
     size: 'small',
     Icon: icon || SizeSmallIcon,
-    tooltipTextKey: 'SizeSmallButton_Tooltip',
+    tooltipTextKey: 'DividerPlugin_Width_Small_Tooltip',
   });
 
 export const sizeMediumButton = icon =>
   createBlockSizeButton({
     size: 'medium',
     Icon: icon || SizeMediumIcon,
-    tooltipTextKey: 'SizeMediumButton_Tooltip',
+    tooltipTextKey: 'DividerPlugin_Width_Medium_Tooltip',
   });
 
 export const sizeLargeButton = icon =>
   createBlockSizeButton({
     size: 'large',
     Icon: icon || SizeLargeIcon,
-    tooltipTextKey: 'SizeLargeButton_Tooltip',
+    tooltipTextKey: 'DividerPlugin_Width_Large_Tooltip',
   });
 
 export const alignmentLeftButton = icon =>
@@ -83,7 +83,7 @@ export const sizeContentCenterButton = icon =>
     size: 'content',
     alignment: 'center',
     Icon: icon || AlignCenterIcon,
-    tooltipTextKey: 'AlignCenterButton_Tooltip',
+    tooltipTextKey: 'AlignObject_Center_Tooltip',
   });
 
 export const sizeSmallCenterButton = icon =>
@@ -99,7 +99,7 @@ export const sizeSmallLeftButton = icon =>
     alignment: 'left',
     size: 'small',
     Icon: icon || SizeSmallLeftIcon,
-    tooltipTextKey: 'SizeSmallLeftButton_Tooltip',
+    tooltipTextKey: 'AlignObject_Left_Tooltip',
   });
 
 export const sizeSmallRightButton = icon =>
@@ -107,7 +107,7 @@ export const sizeSmallRightButton = icon =>
     size: 'small',
     alignment: 'right',
     Icon: icon || SizeSmallRightIcon,
-    tooltipTextKey: 'SizeSmallRightButton_Tooltip',
+    tooltipTextKey: 'AlignObject_Right_Tooltip',
   });
 
 export const alignLeftButton = icon =>
@@ -156,7 +156,7 @@ export const deleteButton = icon =>
 export const widthButton = icon =>
   createSliderPanelButton({
     Icon: icon || WidthIcon,
-    tooltipTextKey: 'WidthButton_Tooltip',
+    tooltipTextKey: 'ChangeDimensions_Width_Tooltip',
     getValue: ({ componentData }) => componentData.config.width,
     onChange: ({ getEditorBounds, store }) => width => {
       const bounds = getEditorBounds();
@@ -172,7 +172,7 @@ export const widthButton = icon =>
 export const heightButton = icon =>
   createSliderPanelButton({
     Icon: icon || HeightIcon,
-    tooltipTextKey: 'HeightButton_Tooltip',
+    tooltipTextKey: 'ChangeDimensions_Height_Tooltip',
     getValue: ({ componentData }) => componentData.config.height,
     onChange: ({ store }) => height => store.update('componentData', { config: { height } }),
   });

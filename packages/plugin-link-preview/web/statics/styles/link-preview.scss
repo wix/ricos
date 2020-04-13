@@ -8,7 +8,7 @@
   max-height: 170px;
 }
 
-.linkPreview_image {
+.linkPreviewImage {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
@@ -16,7 +16,7 @@
   flex: 0 0 auto;
 }
 
-.linkPreview_info {
+.linkPreviewInfo {
   padding: 20px 28px;
   width: 100%;
   display: flex;
@@ -26,7 +26,7 @@
   color: black;
 }
 
-.linkPreview_title {
+.linkPreviewTitle {
   font-weight: bold;
   align-self: flex-start;
   font-size: 20px;
@@ -41,25 +41,25 @@
   align-self: flex-end;
 }
 
-.linkPreview_title,
-.linkPreview_description,
-.linkPreview_url {
+.linkPreviewTitle,
+.linkPreviewDescription,
+.linkPreviewUrl {
   text-overflow: ellipsis;
   overflow: hidden;
 }
 
-.linkPreview_description,
-.linkPreview_url {
+.linkPreviewDescription,
+.linkPreviewUrl {
   font-size: 16px;
   line-height: 24px;
   white-space: nowrap;
 }
 
-.linkPreview_url {
+.linkPreviewUrl {
   color: #969696;
 }
 
-.linkPreview_description {
+.linkPreviewDescription {
   padding-top: 8px;
 }
 
@@ -68,15 +68,15 @@
     max-height: 144px;
   }
 
-  .linkPreview_image {
+  .linkPreviewImage {
     width: 110px;
   }
 
-  .linkPreview_info {
+  .linkPreviewInfo {
     padding: 12px;
   }
 
-  .linkPreview_title {
+  .linkPreviewTitle {
     font-size: 14px;
     line-height: 20px;
     padding-top: 8px;
@@ -88,12 +88,12 @@
     padding-right: 12px;
   }
 
-  .linkPreview_url {
+  .linkPreviewUrl {
     font-size: 12px;
     line-height: 16px;
   }
 
-  .linkPreview_description {
+  .linkPreviewDescription {
     font-size: 12px;
     line-height: 18px;
     max-height: 32px;
