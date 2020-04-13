@@ -62,12 +62,6 @@ export default class ModalRenderer extends Component<Props, State> {
     });
   };
 
-  createHelpers = (helpers: object) => ({
-    ...helpers,
-    openModal: this.openModal,
-    closeModal: this.closeModal,
-  });
-
   render() {
     const { EditorModal, showModal, modalProps, isMounted } = this.state;
     const { children, ModalsMap, locale, theme } = this.props;
