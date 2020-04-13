@@ -6,7 +6,7 @@ import {
   replaceWithEmptyBlock,
   insertLinkInPosition,
   createBlock,
-  deleteBlock,
+  deleteBlockText,
 } from 'wix-rich-content-editor-common';
 
 export const addLinkPreview = async (editorState, config, blockKey, url) => {
@@ -17,7 +17,7 @@ export const addLinkPreview = async (editorState, config, blockKey, url) => {
   const { thumbnail_url, title, description, html, provider_url, provider_name } = linkPreviewData;
   const embedLink = provider_name !== AUTO_GENERATED_LINK_PREVIEW_PROVIDER && html;
   if (embedLink || shouldAddLinkPreview(title, thumbnail_url)) {
-    const withoutLinkBlock = deleteBlock(editorState, blockKey);
+    const withoutLinkBlock = deleteBlockText(editorState, blockKey);
     const { size, alignment } = { ...DEFAULTS, ...(settings || {}) };
     const data = {
       config: { size, alignment, link: { url, ...DEFAULTS.link }, width: embedLink && 350 },

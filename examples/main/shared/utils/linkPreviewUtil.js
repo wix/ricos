@@ -45,7 +45,8 @@ const mockLinkPreviewResults = [
   {
     title:
       'Fiesta Latina 2019 - Maluma, Luis Fonsi, Ozuna, J Balvin, CNCO, J Balvin - Latin Hits Mix 2019', //eslint-disable-line
-    thumbnail_url: 'https://i.ytimg.com/vi/W9aEdHf6cA0/maxresdefault.jpg', //eslint-disable-line
+    thumbnail_url:
+      'https://static.wixstatic.com/media/8bb438_603549efcb714170bb71fe0757f37561.jpg/v1/fill/w_125,h_51,fp_0.50_0.50,q_10/8bb438_603549efcb714170bb71fe0757f37561.webp', //eslint-disable-line
     provider_url: 'https://www.youtube.com',
   },
 ];
@@ -65,11 +66,11 @@ const mockOembedResults = {
   },
   youtube: {
     title:
-      'Fiesta Latina 2019 - Maluma, Luis Fonsi, Ozuna, J Balvin, CNCO, J Balvin - Latin Hits Mix 2019',
-    thumbnail_url: 'https://i.ytimg.com/vi/W9aEdHf6cA0/maxresdefault.jpg',
+      'עידן רייכל - ואם תבואי אליי - (Idan Raichel - VeEem Tavoee Elay (And If You Will Come To Me',
+    thumbnail_url: 'https://i.ytimg.com/vi/nI8n20UpaBY/hqdefault.jpg',
     provider_url: 'https://www.youtube.com/',
     html:
-      '<iframe width="480" height="270" src="//www.youtube.com/embed/W9aEdHf6cA0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>',
+      '<iframe width="480" height="270" src="//www.youtube.com/embed/nI8n20UpaBY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>',
   },
 };
 

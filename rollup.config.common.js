@@ -35,6 +35,10 @@ export default (output, shouldExtractCss) => {
     watch,
   };
 
+  if (process.env.MODULE_NAME === 'wrapper') {
+    editorEntry.input = 'src/index.ts';
+  }
+
   const libEntries = [];
   try {
     let libEntriesPath = 'src/lib/';

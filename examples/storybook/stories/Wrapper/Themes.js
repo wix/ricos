@@ -1,5 +1,5 @@
 import React from 'react';
-import { RichContentEditorBox, Page } from '../Components/StoryParts';
+import { RichContentEditorBox, Page, Section, ContentState } from '../Components/StoryParts';
 import exapmleState from '../../../../e2e/tests/fixtures/themeing-info.json';
 import Palette from '../Components/Palette';
 import { wixPalettes } from '../palettesExample';
@@ -13,6 +13,9 @@ export default () => {
   return (
     <Page title="Theme Palette">
       <ThemeSelector />
+      <Section title="Content State">
+        <ContentState json={exapmleState} />
+      </Section>
     </Page>
   );
 };

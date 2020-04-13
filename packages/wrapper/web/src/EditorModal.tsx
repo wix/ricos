@@ -1,7 +1,17 @@
 import React from 'react';
 import { RichContentEditorModal } from 'wix-rich-content-editor';
-import PropTypes from 'prop-types';
 import ReactModal from 'react-modal';
+
+interface Props {
+  isOpen: boolean;
+  contentLabel?: string;
+  locale: string;
+  style?: object;
+  role?: string;
+  onRequestClose?: ReactModal.Props['onRequestClose'];
+  ModalsMap?: ModalsMap;
+  [propName: string]: any;
+}
 
 export default function EditorModal({
   isOpen,
@@ -12,7 +22,7 @@ export default function EditorModal({
   ModalsMap,
   locale,
   ...modalProps
-}) {
+}: Props) {
   return (
     <ReactModal
       isOpen={isOpen}
@@ -25,13 +35,3 @@ export default function EditorModal({
     </ReactModal>
   );
 }
-
-EditorModal.propTypes = {
-  isOpen: PropTypes.bool,
-  contentLabel: PropTypes.string,
-  locale: PropTypes.string.isRequired,
-  style: PropTypes.object,
-  role: PropTypes.string,
-  onRequestClose: PropTypes.func,
-  ModalsMap: PropTypes.object,
-};

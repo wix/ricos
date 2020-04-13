@@ -15,6 +15,14 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+- `editor-common`
+  - [#913](https://github.com/wix-incubator/rich-content/pull/913) onChange - calculateDiff is debounced, for better performance
+
+</details>
+<hr/>
+
+## 7.3.0 (Apr 13, 2020)
 ### :rocket: New Feature
 - `list`
   - [#815](https://github.com/wix-incubator/rich-content/pull/815) nested lists
@@ -26,12 +34,12 @@
 - `preview`
   - [#903](https://github.com/wix-incubator/rich-content/pull/903) gallery fixed; resize flapping fixed
 - `gallery`
-  - [#903](https://github.com/wix-incubator/rich-content/pull/903) gallery size
-- `editor-common`
-  - [#913](https://github.com/wix-incubator/rich-content/pull/913) onChange - calculateDiff is debounced, for better performance
-
-</details>
-<hr/>
+  - [#909](https://github.com/wix-incubator/rich-content/pull/909) gallery size
+- `editor`
+  - [#914](https://github.com/wix-incubator/rich-content/pull/914) updating tooltips keys
+### :house: Internal
+- `wrapper`
+  - [#907](https://github.com/wix-incubator/rich-content/pull/907) converted `wix-rich-content-wrapper` to typescript
 
 ## 7.2.0 (Apr 8, 2020)
 ### :rocket: New Feature

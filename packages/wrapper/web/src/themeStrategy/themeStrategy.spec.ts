@@ -1,11 +1,10 @@
 import themeStrategy from './themeStrategy';
-
-const getType = require('jest-get-type');
+import getType from 'jest-get-type';
 
 // eslint-disable-next-line mocha/no-skipped-tests
 describe('ThemeStrategy', () => {
   const driver = {
-    runStrategy: (theme, palette, themeGenerators) =>
+    runStrategy: ({ theme, palette, themeGenerators }: ThemeProperties = {}) =>
       themeStrategy(false, { theme, palette, themeGenerators }),
   };
 
@@ -27,6 +26,6 @@ describe('ThemeStrategy', () => {
 
   it('should set inner props to override the default theme', () => {
     const theme = { modalTheme: 1 };
-    expect(driver.runStrategy(theme).theme.modalTheme).toBe(1);
+    expect(driver.runStrategy({ theme }).theme.modalTheme).toBe(1);
   });
 });
