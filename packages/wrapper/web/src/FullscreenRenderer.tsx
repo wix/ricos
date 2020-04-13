@@ -44,11 +44,12 @@ export default class FullscreenRenderer extends Component<Props, State> {
 
   render() {
     const { isExpanded, index, data, Fullscreen, isMounted } = this.state;
-    const { children, helpers: viewerHelpers = {}, initialState } = this.props;
+    const { children } = this.props;
+    const { helpers: viewerHelpers = {}, initialState } = children.props;
     const helpers = this.createHelpers(viewerHelpers);
     return (
       <Fragment>
-        {Children.only(React.cloneElement(children, { ...this.props, helpers }))}
+        {Children.only(React.cloneElement(children, { helpers }))}
         {isMounted && (
           <Suspense fallback={<div />}>
             {Fullscreen && (

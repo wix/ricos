@@ -50,7 +50,6 @@ class EngineWrapper extends React.Component<Props, State> {
 
     const mergedRCProps = merge(rcProps, children.props);
 
-    // BARAK: why do we need this?
     if (editor) {
       const { onChange } = mergedRCProps;
       mergedRCProps.onChange = editorState => {
@@ -63,7 +62,7 @@ class EngineWrapper extends React.Component<Props, State> {
 
     return (
       <ModalityProvider {...mergedRCProps}>
-        {Children.only(React.cloneElement(children, { ...mergedRCProps }))}
+        {Children.only(React.cloneElement(children, mergedRCProps))}
       </ModalityProvider>
     );
   }
