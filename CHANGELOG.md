@@ -15,6 +15,11 @@
     Click to see more.
   </summary>
 
+
+</details>
+<hr/>
+
+## 7.3.0 (Apr 13, 2020)
 ### :rocket: New Feature
 - `list`
   - [#815](https://github.com/wix-incubator/rich-content/pull/815) nested lists
@@ -32,10 +37,6 @@
 ### :house: Internal
 - `wrapper`
   - [#907](https://github.com/wix-incubator/rich-content/pull/907) converted `wix-rich-content-wrapper` to typescript
-
-
-</details>
-<hr/>
 
 ## 7.2.0 (Apr 8, 2020)
 ### :rocket: New Feature
