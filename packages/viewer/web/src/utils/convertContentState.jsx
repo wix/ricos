@@ -1,6 +1,6 @@
 import React from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
-import { BLOCK_TYPES } from 'wix-rich-content-common';
+import { BLOCK_TYPES, depthClassName } from 'wix-rich-content-common';
 import redraft from 'wix-redraft';
 import classNames from 'classnames';
 import { endsWith } from 'lodash';
@@ -59,8 +59,8 @@ const getBlocks = (contentState, mergedStyles, textDirection, context) => {
       children.map((child, i) => {
         const Type = typeof type === 'string' ? type : type(child);
         const depth = getBlockDepth(contentState, blockProps.keys[i]);
-        const depthClassName = `public-DraftStyleDefault-block-depth${depth}`;
-        const directionClassName = `public-DraftStyleDefault-ltr`;
+        const direction = blockProps.data[0]?.textDirection || 'ltr';
+        const directionClassName = `public-DraftStyleDefault-${direction}`;
 
         const { interactions } = blockProps.data[i];
         const BlockWrapper = Array.isArray(interactions)
@@ -77,7 +77,7 @@ const getBlocks = (contentState, mergedStyles, textDirection, context) => {
                 textDirection,
                 mergedStyles[style]
               ),
-              depthClassName,
+              depthClassName(depth),
               directionClassName
             )}
             style={blockDataToStyle(blockProps.data[i])}

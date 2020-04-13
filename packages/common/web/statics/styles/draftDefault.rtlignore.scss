@@ -1,4 +1,5 @@
 :global {
+  //Start Text block class Names
   .public-DraftStyleDefault-ltr {
     /*!rtl:begin:ignore*/
     direction: ltr;
@@ -11,6 +12,59 @@
     text-align: right;
     /*!rtl:end:ignore*/
   }
+  .public-DraftStyleDefault-block-depth0 .public-DraftStyleDefault-ltr,
+  .public-DraftStyleDefault-block-depth0.public-DraftStyleDefault-ltr{
+    margin-left: 0em !important;
+  }
+  
+  .public-DraftStyleDefault-block-depth1 .public-DraftStyleDefault-ltr,
+  .public-DraftStyleDefault-block-depth1.public-DraftStyleDefault-ltr{
+    margin-left: 1.5em !important;
+  }
+  
+  .public-DraftStyleDefault-block-depth2 .public-DraftStyleDefault-ltr,
+  .public-DraftStyleDefault-block-depth2.public-DraftStyleDefault-ltr{
+    margin-left: 3em !important;
+  }
+  
+  .public-DraftStyleDefault-block-depth3 .public-DraftStyleDefault-ltr,
+  .public-DraftStyleDefault-block-depth3.public-DraftStyleDefault-ltr{
+    margin-left: 4.5em !important;
+  }
+  
+  .public-DraftStyleDefault-block-depth4 .public-DraftStyleDefault-ltr,
+  .public-DraftStyleDefault-block-depth4.public-DraftStyleDefault-ltr{
+    margin-left: 6em !important;
+  }
+  //not supported yet
+  .public-DraftStyleDefault-block-depth0 .public-DraftStyleDefault-rtl,
+  .public-DraftStyleDefault-block-depth0.public-DraftStyleDefault-rtl{
+    margin-right: 0em !important;
+  }
+  
+  .public-DraftStyleDefault-block-depth1 .public-DraftStyleDefault-rtl,
+  .public-DraftStyleDefault-block-depth1.public-DraftStyleDefault-rtl{
+    margin-right: 1.5em !important;
+  }
+  
+  .public-DraftStyleDefault-block-depth2 .public-DraftStyleDefault-rtl,
+  .public-DraftStyleDefault-block-depth2.public-DraftStyleDefault-rtl{
+    margin-right: 3em !important;
+  }
+  
+  .public-DraftStyleDefault-block-depth3 .public-DraftStyleDefault-rtl,
+  .public-DraftStyleDefault-block-depth3.public-DraftStyleDefault-rtl{
+    margin-right: 4.5em !important;
+  }
+  
+  .public-DraftStyleDefault-block-depth4 .public-DraftStyleDefault-rtl,
+  .public-DraftStyleDefault-block-depth4.public-DraftStyleDefault-rtl{
+    margin-right: 6em !important;
+  }
+  //End Text block class Names
+
+
+  //Start Lists class Names
   .public-DraftStyleDefault-listLTR {
     /*!rtl:begin:ignore*/
     direction: ltr;
@@ -171,57 +225,7 @@
     padding: 0;
     /*!rtl:end:ignore*/
   }
-
-  .public-DraftStyleDefault-block-depth0 .public-DraftStyleDefault-ltr,
-  .public-DraftStyleDefault-block-depth0.public-DraftStyleDefault-ltr{
-    margin-left: 0em !important;
-  }
-  
-  .public-DraftStyleDefault-block-depth1 .public-DraftStyleDefault-ltr,
-  .public-DraftStyleDefault-block-depth1.public-DraftStyleDefault-ltr{
-    margin-left: 1.5em !important;
-  }
-  
-  .public-DraftStyleDefault-block-depth2 .public-DraftStyleDefault-ltr,
-  .public-DraftStyleDefault-block-depth2.public-DraftStyleDefault-ltr{
-    margin-left: 3em !important;
-  }
-  
-  .public-DraftStyleDefault-block-depth3 .public-DraftStyleDefault-ltr,
-  .public-DraftStyleDefault-block-depth3.public-DraftStyleDefault-ltr{
-    margin-left: 4.5em !important;
-  }
-  
-  .public-DraftStyleDefault-block-depth4 .public-DraftStyleDefault-ltr,
-  .public-DraftStyleDefault-block-depth4.public-DraftStyleDefault-ltr{
-    margin-left: 6em !important;
-  }
-  //not supported yet
-  // .public-DraftStyleDefault-block-depth0 .public-DraftStyleDefault-rtl,
-  // .public-DraftStyleDefault-block-depth0.public-DraftStyleDefault-rtl{
-  //   margin-right: 0em !important;
-  // }
-  
-  // .public-DraftStyleDefault-block-depth1 .public-DraftStyleDefault-rtl,
-  // .public-DraftStyleDefault-block-depth1.public-DraftStyleDefault-rtl{
-  //   margin-right: 1.5em !important;
-  // }
-  
-  // .public-DraftStyleDefault-block-depth2 .public-DraftStyleDefault-rtl,
-  // .public-DraftStyleDefault-block-depth2.public-DraftStyleDefault-rtl{
-  //   margin-right: 3em !important;
-  // }
-  
-  // .public-DraftStyleDefault-block-depth3 .public-DraftStyleDefault-rtl,
-  // .public-DraftStyleDefault-block-depth3.public-DraftStyleDefault-rtl{
-  //   margin-right: 4.5em !important;
-  // }
-  
-  // .public-DraftStyleDefault-block-depth4 .public-DraftStyleDefault-rtl,
-  // .public-DraftStyleDefault-block-depth4.public-DraftStyleDefault-rtl{
-  //   margin-right: 6em !important;
-  // }
-
+  //End Lists class Names
 }
 
 

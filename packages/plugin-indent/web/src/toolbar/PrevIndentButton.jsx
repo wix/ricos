@@ -12,7 +12,6 @@ export default class PrevIndentButton extends Component {
     return (
       <InlineToolbarButton
         onClick={() => {
-          // eslint-disable-next-line no-restricted-globals
           const editorState = getEditorState();
           const newState = onIndent(false, editorState);
           if (newState !== editorState) {

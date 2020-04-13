@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import editorStyles from '../../statics/styles/rich-content-editor.scss';
 import alignmentStyles from '../../statics/styles/rich-content-editor-alignment.rtlignore.scss';
+import { depthClassName } from 'wix-rich-content-common';
 
 const styles = { ...editorStyles, ...alignmentStyles };
 const types = {
@@ -28,16 +29,16 @@ export default (theme, styleToClass) => {
       depth,
       data: { textAlignment, dynamicStyles = {} },
     } = contentBlock.toJS();
-    let depthClassName;
     const key = types[type] || 'text';
 
-    if (!isList(type)) {
-      depthClassName = `public-DraftStyleDefault-block-depth${depth}`;
-    }
     const classList = [styles[key], theme[key]];
 
     if (type !== 'atomic') {
-      classList.push(styles[textAlignment], theme[textAlignment], depthClassName);
+      classList.push(
+        styles[textAlignment],
+        theme[textAlignment],
+        !isList(type) && depthClassName(depth)
+      );
     }
 
     const dynamicClasses = Object.entries(dynamicStyles).map(styleToClass);
