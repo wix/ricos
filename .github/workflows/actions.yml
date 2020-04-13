@@ -95,11 +95,11 @@ jobs:
     # needs: [lint]
     if: always()
     steps:
+      - run: echo github.ref
       - name: Workflow Conclusion Action
         uses: technote-space/workflow-conclusion-action@v1.1.1
       - name: Notify on Slack
         uses: voxmedia/github-action-slack-notify-build@v1.1.1
-        run: echo github.ref
         # if: github.ref == 'notify-build-failed-on-slack'
         with:
           channel_id: G011R1YVCRG
