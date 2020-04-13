@@ -95,7 +95,7 @@ jobs:
     # needs: [lint]
     if: always()
     steps:
-      - run: echo github.ref
+      - run: echo ${{ github.ref }}
       - name: Workflow Conclusion Action
         uses: technote-space/workflow-conclusion-action@v1.1.1
       - name: Notify on Slack
