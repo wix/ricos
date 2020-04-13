@@ -91,12 +91,11 @@ jobs:
       SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
 
   notify-on-slack:
-    - name: Notify slack fail
-      if: failure()
-      env:
-        SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
-      uses: voxmedia/github-action-slack-notify-build@v1.1.1
-      with:
-        channel: DJMQBF7R6
-        status: FAILED
-        color: danger
+    if: failure()
+    env:
+      SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+    uses: voxmedia/github-action-slack-notify-build@v1.1.1
+    with:
+      channel: DJMQBF7R6
+      status: FAILED
+      color: danger
