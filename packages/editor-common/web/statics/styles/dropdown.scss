@@ -1,3 +1,4 @@
+@import "~wix-rich-content-common/dist/statics/styles/palette.scss";
 $dropdown-color: #333;
 $dropdown-highlight: #1234;
 $dropdown-border-color: #ededed;
@@ -38,7 +39,7 @@ $dropdown-font-size: 14px;
 }
 
 .Dropdown-control:hover {
-  color: $dropdown-highlight;
+  color: $accent-color;
 }
 
 .Dropdown-arrow {
