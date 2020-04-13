@@ -3,7 +3,7 @@ on:
   pull_request:
     types: opened
 jobs:
-  deploy-pr-comment:
+  examples-pr-comment:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
