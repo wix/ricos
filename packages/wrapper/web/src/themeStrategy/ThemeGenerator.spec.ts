@@ -46,7 +46,7 @@ describe('ThemeGenerator', () => {
         themeGenerators: [pluginHashtag().theme],
       });
       const styleObj = themeGenerator.getStylesObject();
-      expect(styleObj.editor).toBeUndefined();
+      expect(styleObj.footerToolbar).toBeUndefined();
     });
   });
 });

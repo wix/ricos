@@ -42,16 +42,29 @@ export default class RichContentWrapper extends Component<
   }
 
   render() {
-    const { theme, palette, plugins = [], children, editor = false, rcProps, ...rest } = this.props;
+    const {
+      theme: childTheme,
+      palette,
+      plugins = [],
+      children,
+      editor = false,
+      rcProps,
+      ...rest
+    } = this.props;
     const { localeStrategy } = this.state;
 
     const themeGenerators: ThemeGeneratorFunction[] = plugins
       .map(plugin => plugin.theme)
       .filter(isDefined);
 
+    const { theme } = themeStrategy(editor, {
+      theme: childTheme,
+      palette,
+      themeGenerators,
+    });
     const mergedRCProps = merge(
-      pluginsStrategy(editor, plugins, children.props),
-      themeStrategy(editor, { theme, palette, themeGenerators }),
+      { theme },
+      pluginsStrategy(editor, plugins, { ...children.props, theme }),
       localeStrategy,
       rcProps
     );

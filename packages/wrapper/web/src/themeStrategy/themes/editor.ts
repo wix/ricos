@@ -1,12 +1,8 @@
-/* eslint-disable camelcase */
+/* eslint-disable @typescript-eslint/camelcase */
 export default function editor(colors: any, utils: any) {
   const adaptedActionColor = utils.adaptForeground(colors.actionColor);
   const { bgColor, actionColor, textColor } = colors;
   return {
-    editor: {
-      background: bgColor,
-      color: textColor,
-    },
     quote: {
       'border-left-color': actionColor,
       'border-right-color': actionColor,

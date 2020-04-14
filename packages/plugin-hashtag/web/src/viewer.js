@@ -10,7 +10,7 @@ export const pluginHashtag = (config = {}) => {
   return {
     config: pluginConfig,
     type: HASHTAG_TYPE,
-    decorator: theme => new HashtagDecorator({ ...pluginConfig, ...theme }),
+    decorator: theme => new HashtagDecorator({ theme, pluginConfig }),
     theme,
   };
 };

@@ -1,4 +1,4 @@
-/* eslint-disable camelcase */
+/* eslint-disable @typescript-eslint/camelcase */
 import { adaptForeground, hexToRgbA } from './utils';
 
 export default function editorCommon(colors: any) {

@@ -1,48 +1,12 @@
 import React from 'react';
-import {
-  RichContentEditorBox,
-  RichContentViewerBox,
-  Section,
-  Page,
-} from '../Components/StoryParts';
-
-import { convertToRaw } from 'wix-rich-content-editor';
-
-import dividerContentState from '../../../../e2e/tests/fixtures/storybook-example-app.json';
-import EditorWrapper from '../Components/EditorWrapper';
-import ViewerWrapper from '../Components/ViewerWrapper';
+import { Section, Page } from '../Components/StoryParts';
+import ExampleApplication from '../Components/ExampleApplication';
+import exampleAppContent from '../../../../e2e/tests/fixtures/storybook-example-app.json';
 
 export default () => {
   return (
     <Page title="Example App">
-      <Section type={Section.Types.COMPARISON}>
-        <ExampleAppStory />
-      </Section>
+      <ExampleApplication initialState={exampleAppContent} />
     </Page>
   );
 };
-
-class ExampleAppStory extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      contentState: dividerContentState,
-    };
-  }
-
-  onChange = editorState =>
-    this.setState({ contentState: convertToRaw(editorState.getCurrentContent()) });
-  render() {
-    const { contentState } = this.state;
-    return (
-      <React.Fragment>
-        <RichContentEditorBox>
-          <EditorWrapper contentState={dividerContentState} onChange={this.onChange} />
-        </RichContentEditorBox>
-        <RichContentViewerBox>
-          <ViewerWrapper contentState={contentState} />
-        </RichContentViewerBox>
-      </React.Fragment>
-    );
-  }
-}
