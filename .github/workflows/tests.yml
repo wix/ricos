@@ -146,6 +146,7 @@ jobs:
       - name: lerna link
         if: steps.cache.outputs.cache-hit == 'true'
         run: npm run link
+
       - run: npm run lint
       - run: npm run build
       - run: npm run test:unit
