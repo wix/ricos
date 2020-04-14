@@ -5,5 +5,5 @@ import ThemesStory from './Themes';
 
 storiesOf('Rich Content Wrapper', module)
   .add('Basic Usage', BasicUsageStory)
-  .add('Palettes', ThemesStory)
-  .add('Example App', ExampleApp);
+  .add('Example App', ExampleApp)
+  .add('Palettes', ThemesStory);
