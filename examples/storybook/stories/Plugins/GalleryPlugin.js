@@ -38,7 +38,7 @@ export default () => {
 
           <Section type={Section.Types.COMPARISON}>
             <RichContentEditorBox preset="blog-preset">
-              <RichContentWrapper plugins={editorPlugins} editor>
+              <RichContentWrapper plugins={editorPlugins} isEditor>
                 <RichContentEditor editorState={editorStateV6} />
               </RichContentWrapper>
             </RichContentEditorBox>
@@ -56,7 +56,7 @@ export default () => {
           <h3>With v5 contentState:</h3>
           <Section type={Section.Types.COMPARISON}>
             <RichContentEditorBox preset="blog-preset">
-              <RichContentWrapper plugins={editorPlugins} editor>
+              <RichContentWrapper plugins={editorPlugins} isEditor>
                 <RichContentEditor editorState={editorStateV5} />
               </RichContentWrapper>
             </RichContentEditorBox>

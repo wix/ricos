@@ -82,7 +82,7 @@ const EditorWrapper = ({ contentState, palette, onChange }) => {
   const editorState = createWithContent(convertFromRaw(contentState));
   const theme = palette ? { theme: 'Palette', palette } : { theme: 'Default' };
   return (
-    <RichContentWrapper plugins={plugins} {...theme} editor>
+    <RichContentWrapper plugins={plugins} {...theme} isEditor>
       <RichContentEditor editorState={editorState} onChange={onChange} />
     </RichContentWrapper>
   );
