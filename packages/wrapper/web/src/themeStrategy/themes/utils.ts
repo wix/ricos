@@ -13,7 +13,7 @@ function getBrightness(hexCode: string): number {
   return (r * 299 + g * 587 + b * 114) / 1000;
 }
 
-export function isBright(hexColor: string) {
+export function isBright(hexColor: string): boolean {
   return getBrightness(hexColor) > 140;
 }
 
@@ -22,10 +22,10 @@ export function adaptForeground(actionColor: string): string {
   //return getBrightness(actionColor) < 255 / 2 ? actionColor : '#000000';
 }
 
-export function hexToRgbA(hex: string, opacity: number): string {
+export function hexToRgbA(hexColor: string, opacity: number): string {
   let c;
-  if (/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)) {
-    c = hex.substring(1).split('');
+  if (/^#([A-Fa-f0-9]{3}){1,2}$/.test(hexColor)) {
+    c = hexColor.substring(1).split('');
     if (c.length === 3) {
       c = [c[0], c[0], c[1], c[1], c[2], c[2]];
     }

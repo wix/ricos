@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/camelcase */
-export default function editor(colors: any, utils: any) {
+export default function editor(colors: PaletteColors, utils: ThemeUtils) {
   const adaptedActionColor = utils.adaptForeground(colors.actionColor);
   const { bgColor, actionColor, textColor } = colors;
   return {
