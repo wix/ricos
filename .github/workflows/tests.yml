@@ -1,14 +1,20 @@
 name: tests
-on: pull_request
+on: push
 env:
   captureVideos: 'true'
   captureImages: 'true'
-  APPLITOOLS_API_KEY: ${{ secrets.APPLITOOLS_API_KEY }}
-  APPLITOOLS_SERVER_URL: ${{ secrets.APPLITOOLS_SERVER_URL }}
   APPLITOOLS_BATCH_ID: ${{ github.sha }}
 
 jobs:
-  e2e-visaul:
+  cleanup-runs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: rokroskar/workflow-run-cleanup-action@v0.2.2
+        if: "!startsWith(github.ref, 'refs/tags/') && github.ref != 'refs/heads/master'"
+        env:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+
+  e2e-visual:
     runs-on: ubuntu-18.04
     strategy:
       fail-fast: false
@@ -18,8 +24,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - name: cache
-        id: cache
+      - id: cache
         uses: actions/cache@master
         with:
           path: |
@@ -46,6 +51,8 @@ jobs:
           KNAPSACK_PRO_CI_NODE_TOTAL: ${{ matrix.ci_node_total }}
           KNAPSACK_PRO_CI_NODE_INDEX: ${{ matrix.ci_node_index }}
           KNAPSACK_PRO_TEST_FILE_PATTERN: 'e2e/tests/*.e2e.js'
+          APPLITOOLS_API_KEY: ${{ secrets.APPLITOOLS_API_KEY }}
+          APPLITOOLS_SERVER_URL: ${{ secrets.APPLITOOLS_SERVER_URL }}
         run: |
           $(npm bin)/knapsack-pro-cypress
       - uses: actions/upload-artifact@v1
@@ -56,20 +63,18 @@ jobs:
       - uses: actions/upload-artifact@v1
         if: failure()
         with:
-          name: cypress-videos-visaul-${{ job.status }}-${{ matrix.ci_node_index }}
+          name: cypress-videos-visual-${{ job.status }}-${{ matrix.ci_node_index }}
           path: e2e/cypress/videos
 
-  e2e-visaul-applitoolsSendComplition:
-    needs: e2e-visaul
+  e2e-visual-applitoolsSendComplition:
+    needs: e2e-visual
     if: always()
     runs-on: ubuntu-18.04
     steps:
       - name: Update Applitools batch status
         uses: wei/curl@v1.1.1
         with:
-          args: -d "" -X POST https://wixeyesapi.applitools.com/api/externals/github/servers/github.com/commit/${{ github.sha }}/complete?apiKey=${{ secrets.APPLITOOLS_API_KEY }}
-    env:
-      APPLITOOLS_API_KEY: ${{ secrets.APPLITOOLS_API_KEY }}
+          args: -d "" -X POST https://wixeyesapi.applitools.com/api/externals/github/servers/github.com/commit/${{ env.APPLITOOLS_BATCH_ID }}/complete?apiKey=${{ secrets.APPLITOOLS_API_KEY }}
 
   content-state-tests:
     runs-on: ubuntu-18.04
@@ -108,6 +113,7 @@ jobs:
           KNAPSACK_PRO_CI_NODE_TOTAL: ${{ matrix.ci_node_total }}
           KNAPSACK_PRO_CI_NODE_INDEX: ${{ matrix.ci_node_index }}
           KNAPSACK_PRO_TEST_FILE_PATTERN: 'e2e/tests/*.e2e.js'
+          APPLITOOLS_IS_DISABLED: true
         run: |
           $(npm bin)/knapsack-pro-cypress --env MATCH_CONTENT_STATE=true
       - uses: actions/upload-artifact@v1
@@ -140,6 +146,7 @@ jobs:
       - name: lerna link
         if: steps.cache.outputs.cache-hit == 'true'
         run: npm run link
+
       - run: npm run lint
       - run: npm run build
       - run: npm run test:unit
