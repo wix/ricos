@@ -1,6 +1,6 @@
 /*global cy Cypress*/
-import { fixtures, fixturesToTestOnSeo } from './constants';
-import { DEFAULT_DESKTOP_BROWSERS } from '../tests/constants';
+import { fixtures } from './constants';
+import { DEFAULT_MOBILE_BROWSERS } from '../tests/constants';
 
 const testFixture = fixture =>
   it(`render ${fixture}`, function() {
@@ -23,38 +23,21 @@ describe('editor rendering', () => {
     if (Cypress.env('MATCH_CONTENT_STATE') && !Cypress.env('debug')) this.skip();
   });
 
-  context('desktop', () => {
+  context('mobile', () => {
     before(function() {
       cy.eyesOpen({
         appName: 'Rendering',
         testName: this.test.parent.title,
-        browser: DEFAULT_DESKTOP_BROWSERS,
+        browser: DEFAULT_MOBILE_BROWSERS,
       });
     });
 
-    beforeEach(() => cy.switchToDesktop());
+    beforeEach(() => cy.switchToMobile());
 
-    after(() => cy.eyesClose());
+    after(() => {
+      cy.eyesClose();
+    });
 
     fixtures.forEach(testFixture);
-  });
-
-  context('seo', () => {
-    before(function() {
-      cy.eyesOpen({
-        appName: 'Rendering',
-        testName: this.test.parent.title,
-        browser: DEFAULT_DESKTOP_BROWSERS,
-      });
-    });
-
-    beforeEach(() => {
-      cy.switchToDesktop();
-      cy.switchToSeoMode();
-    });
-
-    after(() => cy.eyesClose());
-
-    fixturesToTestOnSeo.forEach(testFixture);
   });
 });

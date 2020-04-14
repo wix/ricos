@@ -22,7 +22,7 @@ export default class RichContentWrapper extends Component<
 
   static propTypes = { children: PropTypes.element.isRequired };
 
-  static defaultProps = { locale: 'en' };
+  static defaultProps = { locale: 'en', isMobile: false };
 
   updateLocale = async () => {
     const { locale, children } = this.props;
@@ -47,7 +47,7 @@ export default class RichContentWrapper extends Component<
       palette,
       plugins = [],
       children,
-      editor = false,
+      isEditor = false,
       rcProps,
       ...rest
     } = this.props;
@@ -57,14 +57,14 @@ export default class RichContentWrapper extends Component<
       .map(plugin => plugin.theme)
       .filter(isDefined);
 
-    const { theme } = themeStrategy(editor, {
+    const { theme } = themeStrategy(isEditor, {
       theme: childTheme,
       palette,
       themeGenerators,
     });
     const mergedRCProps = merge(
       { theme },
-      pluginsStrategy(editor, plugins, { ...children.props, theme }),
+      pluginsStrategy(isEditor, plugins, { ...children.props, theme }),
       localeStrategy,
       rcProps
     );
@@ -72,8 +72,8 @@ export default class RichContentWrapper extends Component<
     return (
       <EngineWrapper
         rcProps={mergedRCProps}
-        editor={editor}
-        key={editor ? 'editor' : 'viewer'}
+        isEditor={isEditor}
+        key={isEditor ? 'editor' : 'viewer'}
         {...rest}
       >
         {children}

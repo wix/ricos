@@ -18,9 +18,9 @@
 ### :bug: Bug Fix
 - `editor-common`
   - [#913](https://github.com/wix-incubator/rich-content/pull/913) onChange - calculateDiff is debounced, for better performance
-
 ### :house: Internal
 - `wrapper`
+  - [#919](https://github.com/wix-incubator/rich-content/pull/919) added internal mobile support
   - [#920](https://github.com/wix-incubator/rich-content/pull/920) refactor: `FullscreenRenderer.tsx`, `ModalRenderer.tsx`
 - `wrapper + storybook`
   - [#918](https://github.com/wix-incubator/rich-content/pull/918) fixed re-render for new initialState (viewer) & created live example app in storybook
