@@ -9,7 +9,13 @@ async function gitPRComment(message) {
   };
   request.body = message;
   const client = new github.GitHub(REPO_TOKEN);
+  // await updateMessage(client, request, callback);
   return await client.pulls.update(request);
 }
+
+// async function updateMessage(client, request, callback) {
+//   client.pulls.update(request);
+//   callback && (await callback());
+// }
 
 module.exports.gitPRComment = gitPRComment;
