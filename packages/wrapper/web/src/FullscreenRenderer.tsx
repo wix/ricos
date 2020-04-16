@@ -1,9 +1,10 @@
 import React, { Component, Fragment, Suspense, Children, ReactElement } from 'react';
+import { InitialState, RichContentProps } from './RichContentWrapperTypes';
 
 interface Props {
   children: ReactElement;
-  helpers?: object;
-  initialState: object;
+  helpers?: RichContentProps['helpers'];
+  initialState: InitialState;
 }
 
 interface State {
@@ -38,12 +39,12 @@ export default class FullscreenRenderer extends Component<Props, State> {
 
   setData = data => this.setState({ data });
 
-  createHelpers = (helpers: object) => ({ ...helpers, onExpand: this.onExpand });
+  addExpandHelpers = (helpers: object) => ({ ...helpers, onExpand: this.onExpand });
 
   render() {
     const { isExpanded, index, data, Fullscreen } = this.state;
     const { children, helpers: viewerHelpers = {}, initialState } = this.props;
-    const helpers = this.createHelpers(viewerHelpers);
+    const helpers = this.addExpandHelpers(viewerHelpers);
     return (
       <Fragment>
         {Children.only(React.cloneElement(children, { helpers }))}
