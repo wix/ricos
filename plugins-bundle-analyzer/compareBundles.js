@@ -28,15 +28,15 @@ function compareBundles() {
     if (newSize !== oldSize) {
       if (parseInt(newSize) - parseInt(oldSize) > 10) {
         message = message.concat(
-          `${key} (old bundlesize: ${oldSize}, current bundlesize: ${newSize})\n`
+          `${key}: old bundlesize: ${oldSize}, current bundlesize: ${newSize}\n`
         );
       }
     }
   });
-  if (message === '') {
-    const e = new Error(generateMessage(message));
+  if (message !== '') {
+    const e = new Error(message);
     console.error(chalk.bold.red(e));
-    gitPRComment(e);
+    gitPRComment(generateMessage(message));
     throw e;
   }
   console.log('comparison ended successfully');
