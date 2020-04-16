@@ -54,7 +54,8 @@
     "wix-rich-content-plugin-sound-cloud": "7.3.2",
     "wix-rich-content-plugin-text-color": "7.3.2",
     "wix-rich-content-plugin-video": "7.3.2",
-    "wix-rich-content-viewer": "7.3.2"
+    "wix-rich-content-viewer": "7.3.2",
+    "wix-rich-content-wrapper": "7.3.2"
   },
   "private": true
 }
