@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-export default function global(colors: PaletteColors) {
+export default function commonStyles(colors: PaletteColors) {
   const { bgColor, textColor } = colors;
   return {
     editor: {
