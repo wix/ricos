@@ -123,7 +123,7 @@ class RichContentEditor extends Component {
         ...helpers,
         onPluginAdd: (...args) => helpers.onPluginAdd?.(...args, Version.currentVersion),
       },
-      config: { pluginsConfig, getToolbarSettings },
+      config: { ...pluginsConfig, getToolbarSettings },
       isMobile,
       setEditorState: this.setEditorState,
       getEditorState: this.getEditorState,

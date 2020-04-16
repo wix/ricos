@@ -45,6 +45,7 @@ export default ({ helpers, settings, isMobile }) => {
       helpers,
       modalElement: EmbedURLInputModal,
       modalStyles: getModalStyles({ customStyles, fullScreen: false, isMobile }),
+      section: 'Embed from Socials',
     };
   });
 };

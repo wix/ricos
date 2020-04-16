@@ -1,6 +1,6 @@
 .sideToolbarPanelWrapper {
   display: flex;
-  padding: 12px;
+  padding: 0px 12px 12px;
   overflow: auto;
   justify-items: center;
   justify-content: center;
@@ -21,6 +21,9 @@
     position: fixed;
     width: 296px;
     align-self: start;
+    background-color: white;
+    z-index: 3;
+    padding-top: 12px;
     @media only screen and (max-width: 640px) {
       padding: 0;
     }

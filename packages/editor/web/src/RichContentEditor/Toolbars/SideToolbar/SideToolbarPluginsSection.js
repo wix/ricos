@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Styles from '../../../../statics/styles/side-toolbar-panel.scss';
 import { getPluginsForTag } from '../../pluginsSearchTags';
 import { TOOLBARS } from 'wix-rich-content-editor-common';
+import { getSortedSections } from './utils';
 
 const shouldSplitByDefault = structure => {
   const numberOfBasicPlugins = structure.filter(({ section }) => section === 'Basic').length;
@@ -63,7 +64,7 @@ const SideToolbarPluginsSection = ({
     structure.forEach(({ section }) => !sections.includes(section) && sections.push(section));
 
   if (sections.length > 0) {
-    return sections.map(section => pluginSectionRenderer(section));
+    return getSortedSections(sections).map(section => pluginSectionRenderer(section));
   } else {
     return pluginSectionRenderer();
   }
