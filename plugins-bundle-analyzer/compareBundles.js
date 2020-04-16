@@ -45,4 +45,5 @@ try {
   compareBundles();
 } catch (err) {
   gitPRComment(generateMessage(err));
+  throw err;
 }
