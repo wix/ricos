@@ -33,9 +33,8 @@ function compareBundles() {
     }
   });
   if (message !== '') {
-    const err = new Error(message);
-    console.error(chalk.bold.red(err));
-    throw err;
+    console.error(chalk.bold.red(message));
+    throw message;
   } else {
     gitPRComment('');
     console.log('comparison ended successfully');
