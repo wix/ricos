@@ -38,9 +38,11 @@ function compareBundles() {
     console.error(chalk.bold.red(err));
     gitPRComment(generateMessage(message))
       .then(() => {
+        console.log('err');
         throw err;
       })
       .catch(e => {
+        console.log('err');
         throw err;
       });
   } else {
