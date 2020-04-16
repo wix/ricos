@@ -29,12 +29,14 @@
 - `wrapper`
   - [#919](https://github.com/wix-incubator/rich-content/pull/919) added internal mobile support
   - [#920](https://github.com/wix-incubator/rich-content/pull/920) refactor: `FullscreenRenderer.tsx`, `ModalRenderer.tsx`
-- `wrapper + storybook`
+- `wrapper`
   - [#918](https://github.com/wix-incubator/rich-content/pull/918)
-    - wrapper: viewer is now re-rendered for new initialState prop (fix)
-    - storybook: hotfix (`editor` prop replaced with `isEditor`)
-    - storybook: live example app (viewer + editor side by side)
-    - storybook: live example app in palettes page
+    - viewer is now re-rendered for new initialState prop (fix)
+- `storybook`
+  - [#918](https://github.com/wix-incubator/rich-content/pull/918)
+    - hotfix (`editor` prop replaced with `isEditor`)
+    - live example app (viewer + editor side by side)
+    - live example app in palettes page
 
 ## 7.3.0 (Apr 13, 2020)
 ### :rocket: New Feature
