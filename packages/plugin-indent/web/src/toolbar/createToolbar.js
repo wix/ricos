@@ -1,8 +1,7 @@
 import PrevIndentButton from './PrevIndentButton';
 import NextIndentButton from './NextIndentButton';
 
-// eslint-disable-next-line no-unused-vars
-export default function createToolbar({ helpers, t, settings, isMobile }) {
+export default function createToolbar({ isMobile }) {
   return {
     TextButtonMapper: () => ({
       PrevIndent: {
