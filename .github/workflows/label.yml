@@ -16,3 +16,12 @@ jobs:
       - uses: actions/labeler@v2
         with:
           repo-token: '${{ secrets.GITHUB_TOKEN }}'
+
+  analyze-bundles:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - run: npm install
+      - run: npm run analyzeBundles
+    env:
+      REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
