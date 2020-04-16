@@ -159,7 +159,7 @@ jobs:
     steps:
       - name: Notify on Slack
         uses: voxmedia/github-action-slack-notify-build@v1.1.1
-        if: github.ref == 'refs/heads/notify-build-failed-on-slack' && (needs.e2e-visual.result == 'failure' || needs.content-state-tests.result == 'failure' || needs.lint-and-unit-tests.result == 'failure')
+        if: github.ref == 'refs/heads/master' && (needs.e2e-visual.result == 'failure' || needs.content-state-tests.result == 'failure' || needs.lint-and-unit-tests.result == 'failure')
         with:
           channel_id: G011R1YVCRG
           status: FAILED
