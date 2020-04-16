@@ -51,7 +51,6 @@ export default class Preview extends PureComponent {
   render() {
     return (
       <div id="rich-content-preview" className="viewer">
-        <h2>{'Default Rule'}</h2>
         <div className="content-preview">
           <RichContentPreview
             locale={this.props.locale}
