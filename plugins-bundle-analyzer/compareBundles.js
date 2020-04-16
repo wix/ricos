@@ -8,11 +8,10 @@ const generateMessage = message => {
   return titleForPRComment.concat(message);
 };
 
+let message = '';
 function compareBundles() {
   let savingBundles = {},
-    currentBundles = {},
-    message = '';
-
+    currentBundles = {};
   try {
     const jsonString = fs.readFileSync('./savingBundlesSizes.json');
     savingBundles = JSON.parse(jsonString);
@@ -36,19 +35,15 @@ function compareBundles() {
   if (message !== '') {
     const err = new Error(message);
     console.error(chalk.bold.red(err));
-    gitPRComment(generateMessage(message))
-      .then(() => {
-        console.log('err');
-        throw err;
-      })
-      .catch(e => {
-        console.log('err');
-        throw err;
-      });
+    throw err;
   } else {
     gitPRComment('');
     console.log('comparison ended successfully');
   }
 }
 
-compareBundles();
+try {
+  compareBundles();
+} catch (err) {
+  gitPRComment(generateMessage(message));
+}
