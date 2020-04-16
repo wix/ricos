@@ -30,7 +30,7 @@ class EngineWrapper extends React.Component<Props, State> {
     if (props.isEditor) {
       import(
         // eslint-disable-next-line max-len
-        /* webpackChunkName: "rce-editorStateConversion"  */ `wix-rich-content-editor/dist/lib/editorStateConversion`
+        /* webpackChunkName: "rce-editorStateConversion"  */ `wix-rich-content-editor/dist/lib/editorStateConversion.cjs`
       ).then(module => this.setState({ editorState: module.createEmpty() }));
     }
   }
