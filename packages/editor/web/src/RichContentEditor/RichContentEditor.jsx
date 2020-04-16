@@ -153,7 +153,7 @@ class RichContentEditor extends Component {
   }
 
   initEditorToolbars(pluginButtons, pluginTextButtons) {
-    const { textAlignment } = this.props;
+    const { textAlignment, t } = this.props;
     const buttons = { pluginButtons, pluginTextButtons };
 
     this.toolbars = createEditorToolbars({
@@ -161,6 +161,7 @@ class RichContentEditor extends Component {
       textAlignment,
       refId: this.refId,
       context: this.contextualData,
+      t,
     });
   }
 
