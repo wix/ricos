@@ -160,7 +160,7 @@ jobs:
         uses: voxmedia/github-action-slack-notify-build@v1.1.1
         if: github.ref == 'refs/heads/master' && (needs.e2e-visual.result == 'failure' || needs.content-state-tests.result == 'failure' || needs.lint-and-unit-tests.result == 'failure')
         with:
-          channel_id: G011R1YVCRG
+          channel_id: C0124DH7HHS #rich-content-ci
           status: FAILED
           color: danger
     env:
