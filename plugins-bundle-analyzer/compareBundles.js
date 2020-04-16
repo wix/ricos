@@ -38,8 +38,10 @@ function compareBundles() {
     console.error(chalk.bold.red(e));
     gitPRComment(generateMessage(message));
     throw e;
+  } else {
+    gitPRComment('');
+    console.log('comparison ended successfully');
   }
-  console.log('comparison ended successfully');
 }
 
 compareBundles();
