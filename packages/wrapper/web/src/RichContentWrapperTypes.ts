@@ -24,3 +24,4 @@ export interface RichContentWrapperProps {
 }
 
 export type InitialState = { blocks: object[]; entityMap: { [index: number]: object } };
+export type FinalTheme = { theme: { modalTheme: { content: any }; [propName: string]: any } };

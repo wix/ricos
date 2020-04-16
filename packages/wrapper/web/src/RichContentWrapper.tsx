@@ -64,7 +64,7 @@ export default class RichContentWrapper extends Component<
     });
     const mergedRCProps = merge(
       { theme },
-      pluginsStrategy(isEditor, plugins, { ...children.props, theme }),
+      pluginsStrategy(isEditor, plugins, children.props, theme),
       localeStrategy,
       rcProps
     );
