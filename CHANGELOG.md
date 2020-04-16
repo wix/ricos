@@ -15,10 +15,13 @@
     Click to see more.
   </summary>
 
-- `link-preview`
-  - [#924](https://github.com/wix-incubator/rich-content/pull/924) disable link preview/embed when entered inside a list
 </details>
 <hr/>
+
+## 7.3.2 (Apr 16, 2020)
+### :bug: Bug Fix
+- `link-preview`
+  - [#924](https://github.com/wix-incubator/rich-content/pull/924) disable link preview/embed when entered inside a list
 
 ## 7.3.1 (Apr 15, 2020)
 ### :bug: Bug Fix
