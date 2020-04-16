@@ -4,8 +4,8 @@ import windowContentStateHoc from '../WindowContentStateHoc';
 import { RichContentEditor } from 'wix-rich-content-editor';
 import { RichContentViewer } from 'wix-rich-content-viewer';
 import { RichContentWrapper } from 'wix-rich-content-wrapper';
-import { plugins as editorPlugins } from './editorPlugins';
-import { plugins as viewerPlugins } from './viewerPlugins';
+import { default as editorPlugins } from './editorPlugins';
+import { default as viewerPlugins } from './viewerPlugins';
 
 class WrapperTestApp extends PureComponent {
   renderEditor = () => {
