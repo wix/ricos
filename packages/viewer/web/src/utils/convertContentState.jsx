@@ -13,7 +13,9 @@ import { combineMappers } from './combineMappers';
 import { getInteractionWrapper, DefaultInteractionWrapper } from './getInteractionWrapper';
 
 const isEmptyContentState = raw =>
-  !raw || !raw.blocks || (raw.blocks.length === 1 && raw.blocks[0].text === '');
+  !raw ||
+  !raw.blocks ||
+  (raw.blocks.length === 1 && raw.blocks[0].text === '' && raw.blocks[0].type === 'unstyled');
 
 const isEmptyBlock = ([_, data]) => data && data.length === 0; //eslint-disable-line no-unused-vars
 
@@ -44,6 +46,7 @@ const getBlocks = (contentState, mergedStyles, textDirection, context) => {
       mergedStyles,
       textDirection,
       blockProps,
+      getBlockStyleClasses,
       blockDataToStyle,
       contentState,
     };

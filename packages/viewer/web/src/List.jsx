@@ -7,6 +7,8 @@ const draftClassNames = (listType, depth, textDirection) =>
    ${draftPublic}-depth${depth}
    ${draftPublic}-list${textDirection}`;
 
+const emptyListItem = '\0';
+
 const getBlockClassName = (isNewList, dataEntry, textDirection, listType, depth) => {
   const rtl = textDirection === 'rtl' || dataEntry.textDirection === 'rtl';
   const direction = rtl ? 'RTL' : 'LTR';
@@ -26,6 +28,7 @@ const List = ({
   mergedStyles,
   textDirection,
   blockProps,
+  getBlockStyleClasses,
   blockDataToStyle,
   contentState,
 }) => {
@@ -66,11 +69,11 @@ const List = ({
 
         return (
           <li
-            className={className}
+            className={getBlockStyleClasses(dataEntry, mergedStyles, textDirection, className)}
             key={blockProps.keys[childIndex]}
             style={blockDataToStyle(blockProps.data[childIndex])}
           >
-            {result}
+            {result.length === 0 ? emptyListItem : result}
           </li>
         );
       })}
