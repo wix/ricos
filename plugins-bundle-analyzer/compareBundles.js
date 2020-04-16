@@ -34,14 +34,14 @@ function compareBundles() {
     }
   });
   if (message !== '') {
-    const e = new Error(message);
-    console.error(chalk.bold.red(e));
+    const err = new Error(message);
+    console.error(chalk.bold.red(err));
     gitPRComment(generateMessage(message))
       .then(() => {
-        throw e;
+        throw err;
       })
       .catch(e => {
-        throw e;
+        throw err;
       });
     // gitPRComment(generateMessage(message), () => {
     //   throw e;
