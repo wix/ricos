@@ -5,7 +5,14 @@ import PropTypes from 'prop-types';
 import windowContentStateHoc from './WindowContentStateHoc';
 class TestApp extends PureComponent {
   renderEditor = () => {
-    const { editorState, onEditorChange, locale, localeResource, isMobile } = this.props;
+    const {
+      editorState,
+      onEditorChange,
+      locale,
+      localeResource,
+      isMobile,
+      testAppPlugins,
+    } = this.props;
     return (
       <Editor
         onChange={onEditorChange}
@@ -15,6 +22,7 @@ class TestApp extends PureComponent {
         locale={locale}
         localeResource={localeResource}
         mockImageIndex={1}
+        testAppPlugins={testAppPlugins.split(',')}
       />
     );
   };
@@ -51,6 +59,7 @@ TestApp.propTypes = {
   localeResource: PropTypes.object,
   onEditorChange: PropTypes.func,
   seoMode: PropTypes.bool,
+  testAppPlugins: PropTypes.string,
 };
 
 export default windowContentStateHoc(TestApp);

@@ -18,7 +18,8 @@ export interface RichContentWrapperProps {
   locale?: string;
   palette?: Palette;
   plugins?: PluginConfig[];
-  editor?: boolean;
+  isEditor?: boolean;
+  isMobile?: boolean;
   rcProps?: RichContentProps;
 }
 

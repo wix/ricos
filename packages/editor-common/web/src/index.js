@@ -82,7 +82,7 @@ export {
   createBlock,
   getBlockInfo,
   getFocusedBlockKey,
-  calculateDiff,
+  createCalcContentDiff,
   getPostContentSummary,
   createSelection,
   getBlockType,
@@ -104,6 +104,7 @@ export {
   DECORATION_MODE,
   PLUGIN_DECORATION_PROPS,
   PLUGIN_DECORATIONS,
+  KEYS_CHARCODE,
   TEXT_TYPES,
   CHARACTERS,
 } from './consts';

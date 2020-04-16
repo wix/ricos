@@ -78,3 +78,8 @@ export const TOOLBAR_OFFSETS = Object.freeze({
   top: 12,
   left: 15,
 });
+
+export const KEYS_CHARCODE = {
+  ENTER: 13,
+  ESCAPE: 27,
+};
