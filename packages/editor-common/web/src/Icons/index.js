@@ -26,5 +26,5 @@ export { default as WidthIcon } from './WidthIcon';
 export { default as CloseIcon } from './CloseIcon';
 export { default as SearchIcon } from './SearchIcon';
 export { default as ClearIcon } from './ClearIcon';
-
+export { default as EditIcon } from './EditIcon.svg';
 // export { default as InfoIcon } from './InfoIcon';

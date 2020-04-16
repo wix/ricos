@@ -1,21 +1,17 @@
 {
-  "parser": "babel-eslint",
+  "parser": "@typescript-eslint/parser",
   "extends": [
     "wix/react",
     "plugin:jsx-a11y/strict",
-    "prettier"
+    "prettier/@typescript-eslint",
+    "plugin:@typescript-eslint/recommended"
   ],
   "env": {
     "browser": true,
     "node": true,
     "jest": true
   },
-  "plugins": [
-    "lodash",
-    "fp",
-    "jsx-a11y",
-    "prettier"
-  ],
+  "plugins": ["lodash", "fp", "jsx-a11y", "prettier"],
   "settings": {
     "react": {
       "version": "16.6.3"
@@ -30,25 +26,21 @@
         "allowTemplateLiterals": true
       }
     ],
+    "quote-props": "off",
     "react/jsx-closing-tag-location": "error",
-    "react/jsx-closing-bracket-location": [
-      1,
-      "line-aligned"
-    ],
+    "react/jsx-closing-bracket-location": [1, "line-aligned"],
     "react/jsx-space-before-closing": "off",
     "react/jsx-tag-spacing": "warn",
     "react/style-prop-object": "off",
     "react/jsx-handler-names": "off",
-    "camelcase": "warn",
+    "camelcase": "off",
+    "@typescript-eslint/camelcase": ["warn", { "properties": "always" }],
     "max-params": "off",
     "no-console": "error",
     "no-use-before-define": "off",
     "no-mixed-operators": "off",
     "space-before-function-paren": "off",
-    "object-curly-spacing": [
-      "error",
-      "always"
-    ],
+    "object-curly-spacing": ["error", "always"],
     "max-len": [
       "error",
       {
@@ -68,5 +60,13 @@
     "jsx-a11y/aria-proptypes": "off",
     "prettier/prettier": "error",
     "lodash/import-scope": [2, "member"],
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/no-explicit-any": "warn",
+    "@typescript-eslint/no-var-requires": "off",
+    "@typescript-eslint/no-use-before-define": "off",
+    "@typescript-eslint/no-empty-function": "off",
+    "operator-linebreak": "off",
+    "indent": "off",
+    "curly": "off"
   }
 }

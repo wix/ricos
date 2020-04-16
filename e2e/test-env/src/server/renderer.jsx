@@ -16,7 +16,8 @@ export default function renderer() {
     const isMobile = req.query.mobile === '';
     const locale = req.query.hebrew === '' ? 'he' : 'en';
     const seoMode = req.query.seoMode === '';
-    const props = { isMobile, locale, seoMode };
+    const testAppPlugins = req.query.testAppPlugins;
+    const props = { isMobile, locale, seoMode, testAppPlugins };
 
     try {
       props.initialState = require(`../../../tests/fixtures/${fixtureName}.json`);
@@ -33,6 +34,7 @@ export default function renderer() {
       bundleName: 'index',
       isMobile,
       locale,
+      testAppPlugins,
       serialize,
     });
   };

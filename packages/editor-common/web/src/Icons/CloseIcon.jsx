@@ -2,10 +2,10 @@
 import React from 'react';
 
 const CloseIcon = props => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" {...props}>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" {...props}>
     <path
-      fill="currentColor"
-      d="M11.88 1.09L10.8 0 6 4.848 1.2 0 .12 1.09l4.8 4.85L0 10.91 1.08 12 6 7.03 10.92 12 12 10.91 7.08 5.94z"
+      fillRule="evenodd"
+      d="M18.77 4L20 5.23 13.23 12 20 18.77 18.77 20 12 13.23 5.23 20 4 18.77 10.769 12 4 5.23 5.23 4 12 10.769 18.77 4z"
     />
   </svg>
 );

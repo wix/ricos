@@ -1,10 +1,10 @@
 import {
   simplePubsub,
   getToolbarTheme,
-  getConfigByFormFactor,
   TOOLBARS,
   DISPLAY_MODE,
   mergeToolbarSettings,
+  isiOS,
 } from 'wix-rich-content-editor-common';
 import { getDefaultToolbarSettings } from './default-toolbar-settings';
 import { MobileTextButtonList, DesktopTextButtonList } from './buttons';
@@ -13,6 +13,7 @@ import {
   mergeButtonLists,
   reducePluginTextButtons,
 } from './buttons/utils';
+import { get } from 'lodash';
 
 const appendSeparator = ({ mergedList, sourceList, buttonData, formFactor }) => {
   if (
@@ -67,12 +68,11 @@ const createEditorToolbars = ({ buttons, textAlignment, refId, context }) => {
   });
   const toolbarSettings = mergeToolbarSettings({ defaultSettings, customSettings });
   const toolbars = {};
+  const deviceName = !isMobile ? 'desktop' : isiOS() ? 'mobile.ios' : 'mobile.android';
 
   toolbarSettings
     .filter(({ name }) => name !== TOOLBARS.PLUGIN)
-    .filter(({ shouldCreate }) =>
-      getConfigByFormFactor({ config: shouldCreate(), isMobile, defaultValue: true })
-    )
+    .filter(({ shouldCreate }) => get(shouldCreate(), deviceName, true))
     .forEach(
       ({
         name,
@@ -87,32 +87,14 @@ const createEditorToolbars = ({ buttons, textAlignment, refId, context }) => {
       }) => {
         toolbars[name] = getInstance({
           ...context,
-          displayOptions: getConfigByFormFactor({
-            config: getDisplayOptions(),
-            isMobile,
-            defaultValue: { displayMode: DISPLAY_MODE.NORMAL },
+          displayOptions: get(getDisplayOptions(), deviceName, {
+            displayMode: DISPLAY_MODE.NORMAL,
           }),
-          toolbarDecorationFn: getConfigByFormFactor({
-            config: getToolbarDecorationFn(),
-            isMobile,
-            defaultValue: () => null,
-          }),
-          textPluginButtons: getConfigByFormFactor({
-            config: getTextPluginButtons(),
-            isMobile,
-            defaultValue: [],
-          }),
-          offset: getConfigByFormFactor({
-            config: getPositionOffset(),
-            isMobile,
-            defaultValue: { x: 0, y: 0 },
-          }),
-          visibilityFn: getConfigByFormFactor({
-            config: getVisibilityFn(),
-            isMobile,
-            defaultValue: () => true,
-          }),
-          buttons: getConfigByFormFactor({ config: getButtons(), isMobile, defaultValue: [] }),
+          toolbarDecorationFn: get(getToolbarDecorationFn(), deviceName, () => null),
+          textPluginButtons: get(getTextPluginButtons(), deviceName, []),
+          offset: get(getPositionOffset(), deviceName, { x: 0, y: 0 }),
+          visibilityFn: get(getVisibilityFn(), deviceName, () => true),
+          buttons: get(getButtons(), deviceName, []),
           theme: { ...getToolbarTheme(theme, name.toLowerCase()), ...theme },
           defaultTextAlignment: textAlignment,
           pluginButtons,

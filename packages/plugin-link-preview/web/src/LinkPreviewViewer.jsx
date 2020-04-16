@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { isEqual } from 'lodash';
@@ -53,11 +54,11 @@ class LinkPreviewViewer extends Component {
 
     const {
       linkPreview,
-      linkPreview_info,
-      linkPreview_title,
-      linkPreview_image,
-      linkPreview_description,
-      linkPreview_url,
+      linkPreviewInfo,
+      linkPreviewTitle,
+      linkPreviewImage,
+      linkPreviewDescription,
+      linkPreviewUrl,
     } = this.styles;
 
     if (settings.enableEmbed && html) {
@@ -83,14 +84,14 @@ class LinkPreviewViewer extends Component {
               height: imageHeight,
               backgroundImage: `url(${thumbnail_url})`,
             }}
-            className={linkPreview_image}
+            className={linkPreviewImage}
             alt={title}
             ref={ref => (this.image = ref)}
           />
-          <section className={linkPreview_info}>
-            <div className={linkPreview_url}>{this.getUrlForDisplay(provider_url || url)}</div>
-            <figcaption className={linkPreview_title}>{title}</figcaption>
-            {description && <div className={linkPreview_description}>{description}</div>}
+          <section className={linkPreviewInfo}>
+            <div className={linkPreviewUrl}>{this.getUrlForDisplay(provider_url || url)}</div>
+            <figcaption className={linkPreviewTitle}>{title}</figcaption>
+            {description && <div className={linkPreviewDescription}>{description}</div>}
           </section>
         </figure>
       );

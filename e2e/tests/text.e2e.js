@@ -1,6 +1,6 @@
 /*global cy*/
 import { INLINE_TOOLBAR_BUTTONS } from '../cypress/dataHooks';
-import { DEFAULT_DESKTOP_BROWSERS } from './constants';
+import { DEFAULT_DESKTOP_BROWSERS } from './settings';
 
 describe('text', () => {
   before(function() {
@@ -101,6 +101,22 @@ describe('text', () => {
     cy.loadEditorAndViewer('plain')
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.ORDERED_LIST, [300, 100])
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.UNORDERED_LIST, [550, 1]);
+    cy.eyesCheckWindow(this.test.title);
+  });
+
+  it('allow to create link and open link toolbar (InlinePluginToolbar)', function() {
+    cy.loadEditorAndViewer('plain')
+      .setLink([0, 10], 'https://www.wix.com/')
+      .setSelection(5, 0)
+      .wait(200);
+    cy.eyesCheckWindow(this.test.title);
+  });
+
+  it('allow to enter tab character', function() {
+    cy.loadEditorAndViewer()
+      .focusEditor()
+      .tab()
+      .enterParagraphs(['How to eat healthy is a good question.']);
     cy.eyesCheckWindow(this.test.title);
   });
 });

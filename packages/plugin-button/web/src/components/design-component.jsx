@@ -5,18 +5,19 @@ import { mergeStyles } from 'wix-rich-content-common';
 import classNames from 'classnames';
 import ButtonSample from '../components/button-sample';
 import ColorToggleComponent from './color-toggle-component';
-import { DEFAULT_PALETTE, COLOR_PICKER_TYPE, buttonPreviews, COLORS } from '../constants';
-import styles from '../../statics/styles/design-component-styles.scss';
+import { COLOR_PICKER_TYPE, buttonPreviews } from '../constants';
+import { DEFAULT_PALETTE, getColors } from '../defaults';
+import dcStyle from '../../statics/styles/design-component-styles.scss';
 
 class DesignComponent extends PureComponent {
   constructor(props) {
     super(props);
-    this.styles = mergeStyles({ styles, theme: props.theme });
+    this.styles = mergeStyles({ styles: dcStyle, theme: props.theme });
     const { designObj } = this.props;
     const {
       settings: { colors, getTextColors, getBorderColors, getBackgroundColors },
     } = this.props;
-    this.presetStyle = buttonPreviews(colors || COLORS);
+    this.presetStyle = buttonPreviews(colors || getColors());
     this.state = {
       design: {
         borderWidth: designObj.borderWidth,
@@ -149,11 +150,11 @@ class DesignComponent extends PureComponent {
             onChange={onChange.bind(this)}
             t={t}
           >
-            {({ renderUserColors, renderAddColorButton, mergedStyles }) => (
-              <div className={mergedStyles.colorPicker_palette}>
-                <div className={mergedStyles.colorPicker_buttons_container}>
-                  {renderAddColorButton()}
-                  {renderUserColors()}
+            {({ renderUserColors, renderAddColorButton }) => (
+              <div className={dcStyle.colorPicker_palette}>
+                <div className={dcStyle.colorPicker_buttons_container}>
+                  <div>{renderUserColors()}</div>
+                  <div>{renderAddColorButton()}</div>
                 </div>
               </div>
             )}

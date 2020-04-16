@@ -1,6 +1,5 @@
 /*global cy Cypress*/
-import { fixturesToTestOnSeo } from './constants';
-import { DEFAULT_DESKTOP_BROWSERS } from '../tests/constants';
+import { fixturesToTestOnSeo, DEFAULT_DESKTOP_BROWSERS } from './settings';
 
 const testFixtureOnSsr = fixture =>
   it(`render ${fixture} in ssr`, function() {

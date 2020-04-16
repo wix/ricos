@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { validate, mergeStyles, pluginGallerySchema } from 'wix-rich-content-common';
-import { isEqual } from 'lodash';
+import { isEqual, debounce } from 'lodash';
 import { convertItemData } from './lib/convert-item-data';
 import { DEFAULTS, isHorizontalLayout, sampleItems } from './constants';
 import resizeMediaUrl from './lib/resize-media-url';
@@ -30,8 +30,33 @@ class GalleryViewer extends React.Component {
       });
     }
     window.addEventListener('resize', this.updateDimensions);
-    setTimeout(this.updateDimensions, 0);
-    setTimeout(this.updateDimensions, 3000);
+    this.initUpdateDimensionsForDomChanges();
+  }
+
+  initUpdateDimensionsForDomChanges() {
+    let { scrollingElement } = this.props?.settings;
+    if (!scrollingElement) {
+      // eslint-disable-next-line no-console
+      console.error(
+        `Please fix the gallery config of Rich Content Editor. 
+        A scrollingElement needs to be provided. Without it the gallery will not work correctly`
+      );
+      scrollingElement = document.body;
+    }
+    const contentElement =
+      typeof scrollingElement === 'function' ? scrollingElement() : scrollingElement;
+    if (contentElement) {
+      this.observer = new MutationObserver(() => {
+        if (contentElement.clientHeight !== this.oldContentElementHeight) {
+          this.oldContentElementHeight = contentElement.clientHeight;
+          this.updateDimensions();
+        }
+      });
+      this.observer.observe(contentElement, { attributes: true, childList: true, subtree: true });
+    } else {
+      // eslint-disable-next-line no-console
+      console.warn(`can't find content container to listen for changes to update gallery`);
+    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -45,6 +70,7 @@ class GalleryViewer extends React.Component {
   }
 
   componentWillUnmount() {
+    this.observer.disconnect();
     window.removeEventListener('resize', this.updateDimensions);
   }
 
@@ -60,7 +86,7 @@ class GalleryViewer extends React.Component {
     }
   };
 
-  updateDimensions = () => {
+  updateDimensions = debounce(() => {
     if (this.container && this.container.getBoundingClientRect) {
       const width = Math.floor(this.container.getBoundingClientRect().width);
       let height;
@@ -69,7 +95,7 @@ class GalleryViewer extends React.Component {
       }
       this.setState({ size: { width, height } });
     }
-  };
+  }, 100);
 
   stateFromProps = props => {
     const items = props.componentData.items || DEFAULTS.items;

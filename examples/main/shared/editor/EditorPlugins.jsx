@@ -1,6 +1,10 @@
 import React from 'react';
 import { createLinkPlugin, LINK_TYPE } from 'wix-rich-content-plugin-link';
-import { createLinkPreviewPlugin, LINK_PREVIEW_TYPE } from 'wix-rich-content-plugin-link-preview';
+import {
+  createLinkPreviewPlugin,
+  LINK_PREVIEW_TYPE,
+  LinkPreviewProviders,
+} from 'wix-rich-content-plugin-link-preview';
 import { createLineSpacingPlugin, LINE_SPACING_TYPE } from 'wix-rich-content-plugin-line-spacing';
 import { createHashtagPlugin, HASHTAG_TYPE } from 'wix-rich-content-plugin-hashtag';
 import { createEmojiPlugin, EMOJI_TYPE } from 'wix-rich-content-plugin-emoji';
@@ -66,7 +70,7 @@ import { TOOLBARS, BUTTONS, DISPLAY_MODE } from 'wix-rich-content-editor-common'
 // import SideToolbarDecoration from './Components/SideToolbarDecoration';
 // import PluginToolbarDecoration from './Components/PluginToolbarDecoration';
 
-export const editorPlugins = [
+export const editorPluginsPartialPreset = [
   createImagePlugin,
   createGalleryPlugin,
   createVideoPlugin,
@@ -74,7 +78,6 @@ export const editorPlugins = [
   createDividerPlugin,
   createLineSpacingPlugin,
   createLinkPlugin,
-  createLinkPreviewPlugin,
   createHashtagPlugin,
   createExternalMentionsPlugin,
   createCodeBlockPlugin,
@@ -89,6 +92,34 @@ export const editorPlugins = [
   createTextHighlightPlugin,
   createUndoRedoPlugin,
 ];
+
+export const editorPlugins = [createLinkPreviewPlugin, ...editorPluginsPartialPreset];
+
+export const editorPluginsMap = {
+  image: createImagePlugin,
+  gallery: createGalleryPlugin,
+  video: createVideoPlugin,
+  html: createHtmlPlugin,
+  divider: createDividerPlugin,
+  spacing: createLineSpacingPlugin,
+  link: createLinkPlugin,
+  linkPreview: createLinkPreviewPlugin,
+  hashtag: createHashtagPlugin,
+  mentions: createExternalMentionsPlugin,
+  codeBlock: createCodeBlockPlugin,
+  soundCloud: createSoundCloudPlugin,
+  giphy: createGiphyPlugin,
+  headers: createHeadersMarkdownPlugin,
+  map: createMapPlugin,
+  fileUpload: createFileUploadPlugin,
+  button: createButtonPlugin,
+  textColor: createTextColorPlugin,
+  emoji: createEmojiPlugin,
+  highlight: createTextHighlightPlugin,
+  undoRedo: createUndoRedoPlugin,
+  partialPreset: editorPluginsPartialPreset,
+  all: editorPlugins,
+};
 
 const themeColors = {
   color1: '#ffffff',
@@ -230,10 +261,12 @@ const videoHandlers = {
   },
 };
 
+const { Instagram, Twitter, YouTube, TikTok } = LinkPreviewProviders;
 const config = {
   [LINK_PREVIEW_TYPE]: {
     enableEmbed: true,
     fetchData: mockFetchUrlPreviewData(),
+    exposeEmbedButtons: [Instagram, Twitter, YouTube, TikTok],
   },
   [EMOJI_TYPE]: {
     // toolbar: {

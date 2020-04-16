@@ -31,19 +31,118 @@
       "data": {}
     },
     {
+      "key": "bpvdq",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
       "key": "e0sg3",
-      "text": "Enter a link and then {enter} to see link preview ",
+      "text": "Link Prview: ",
       "type": "unstyled",
       "depth": 0,
       "inlineStyleRanges": [
         {
           "offset": 0,
-          "length": 50,
+          "length": 13,
           "style": "{\"FG\":\"#24292e\"}"
         },
         {
           "offset": 0,
-          "length": 50,
+          "length": 13,
+          "style": "{\"BG\":\"#ffffff\"}"
+        },
+        {
+          "offset": 0,
+          "length": 11,
+          "style": "BOLD"
+        }
+      ],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "deots",
+      "text": "install \"wix-rich-content-plugin-link-preview\" and import this plugin's style.",
+      "type": "ordered-list-item",
+      "depth": 0,
+      "inlineStyleRanges": [
+        {
+          "offset": 0,
+          "length": 78,
+          "style": "{\"FG\":\"#24292e\"}"
+        },
+        {
+          "offset": 0,
+          "length": 78,
+          "style": "{\"BG\":\"#ffffff\"}"
+        }
+      ],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "bvg08",
+      "text": "usage- enter a link and then {enter} to see link preview.",
+      "type": "ordered-list-item",
+      "depth": 0,
+      "inlineStyleRanges": [
+        {
+          "offset": 0,
+          "length": 57,
+          "style": "{\"FG\":\"#24292e\"}"
+        },
+        {
+          "offset": 0,
+          "length": 57,
+          "style": "{\"BG\":\"#ffffff\"}"
+        }
+      ],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "e40md",
+      "text": "Link Preview with inline-embed:",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [
+        {
+          "offset": 0,
+          "length": 31,
+          "style": "{\"FG\":\"#24292e\"}"
+        },
+        {
+          "offset": 0,
+          "length": 31,
+          "style": "{\"BG\":\"#ffffff\"}"
+        },
+        {
+          "offset": 0,
+          "length": 31,
+          "style": "BOLD"
+        }
+      ],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "afkbr",
+      "text": "install \"wix-rich-content-plugin-link-preview\", \"wix-rich-content-plugin-html\" and import this plugins styles",
+      "type": "ordered-list-item",
+      "depth": 0,
+      "inlineStyleRanges": [
+        {
+          "offset": 0,
+          "length": 110,
+          "style": "{\"FG\":\"#24292e\"}"
+        },
+        {
+          "offset": 0,
+          "length": 110,
           "style": "{\"BG\":\"#ffffff\"}"
         }
       ],
@@ -52,18 +151,18 @@
     },
     {
       "key": "6nauo",
-      "text": "Enter instagram/twitter/youtube link to see embed",
-      "type": "unstyled",
+      "text": "usage- enter instagram/twitter/youtube link to see embed",
+      "type": "ordered-list-item",
       "depth": 0,
       "inlineStyleRanges": [
         {
           "offset": 0,
-          "length": 49,
+          "length": 56,
           "style": "{\"FG\":\"#24292e\"}"
         },
         {
           "offset": 0,
-          "length": 49,
+          "length": 56,
           "style": "{\"BG\":\"#ffffff\"}"
         }
       ],
@@ -294,7 +393,7 @@
             "url": "wix.com"
           }
         },
-        "thumbnail_url": "https://i.ytimg.com/vi/W9aEdHf6cA0/maxresdefault.jpg",
+        "thumbnail_url": "https://static.wixstatic.com/media/8bb438_603549efcb714170bb71fe0757f37561.jpg/v1/fill/w_125,h_51,fp_0.50_0.50,q_10/8bb438_603549efcb714170bb71fe0757f37561.webp",
         "title": "Fiesta Latina 2019 - Maluma, Luis Fonsi, Ozuna, J Balvin, CNCO, J Balvin - Latin Hits Mix 2019",
         "provider_url": "https://www.youtube.com"
       }
@@ -340,5 +439,5 @@
       }
     }
   },
-  "VERSION": "7.1.3"
+  "VERSION": "7.1.5"
 }

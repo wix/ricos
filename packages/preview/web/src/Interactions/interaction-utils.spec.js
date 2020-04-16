@@ -91,7 +91,7 @@ describe('seeFullPost interaction', () => {
   });
 });
 
-describe('image counter interaction', function() {
+describe('image counter interaction', () => {
   it('should be appied on atomic block entity data', () => {
     const builder = new ContentStateBuilder().image({
       mediaInfo: {

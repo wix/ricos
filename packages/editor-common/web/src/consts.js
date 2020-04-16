@@ -11,6 +11,23 @@ export const COMMANDS = Object.freeze({
   BLOCKQUOTE: 'blockquote',
   BACKSPACE: 'backspace',
   DELETE: 'delete',
+  TAB: 'tab',
+  SHIFT_TAB: 'shiftTab',
+});
+
+export const TEXT_TYPES = Object.freeze([
+  'unstyled',
+  'blockquote',
+  'header-one',
+  'header-two',
+  'header-three',
+  'header-four',
+  'header-five',
+  'header-six',
+]);
+
+export const CHARACTERS = Object.freeze({
+  TAB: '\t',
 });
 
 export const MODIFIERS = Object.freeze({
@@ -59,3 +76,8 @@ export const TOOLBAR_OFFSETS = Object.freeze({
   top: 12,
   left: 15,
 });
+
+export const KEYS_CHARCODE = {
+  ENTER: 13,
+  ESCAPE: 27,
+};

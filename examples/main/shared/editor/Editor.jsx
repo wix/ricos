@@ -29,16 +29,19 @@ export default class Editor extends PureComponent {
     super(props);
     // ReactModal.setAppElement('#root');
     this.initEditorProps();
-    const { scrollingElementFn } = props;
+    const { scrollingElementFn, testAppPlugins } = props;
     const additionalConfig = { [GALLERY_TYPE]: { scrollingElement: scrollingElementFn } };
-    const pluginsConfig = Plugins.getConfig(additionalConfig);
     const toolbarsConfig = {
       floatingPluginMenuConfig: {
         showSearch: true,
         splitToSections: true,
       },
     };
-    this.config = { pluginsConfig, toolbarsConfig };
+    this.pluginsConfig = Plugins.getConfig(additionalConfig);
+    this.plugins = testAppPlugins
+      ? testAppPlugins.map(plugin => Plugins.editorPluginsMap[plugin]).flat()
+      : Plugins.editorPlugins;
+    this.config = { pluginsConfig: this.pluginsConfig, toolbarsConfig };
   }
 
   initEditorProps() {
@@ -195,7 +198,7 @@ export default class Editor extends PureComponent {
           ref={editor => (this.editor = editor)}
           onChange={onChange}
           helpers={this.helpers}
-          plugins={Plugins.editorPlugins}
+          plugins={this.plugins}
           // config={Plugins.getConfig(additionalConfig)}
           config={this.config}
           editorKey="random-editorKey-ssr"

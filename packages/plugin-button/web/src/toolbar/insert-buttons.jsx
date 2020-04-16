@@ -1,6 +1,6 @@
 import { TOOLBARS } from 'wix-rich-content-editor-common';
 import { InsertPluginIcon } from '../icons';
-import { getDefaultComponentData } from '../constants';
+import { getDefaultComponentData } from '../defaults';
 
 export default ({ helpers, t, settings }) => {
   const Icon = settings?.toolbar?.icons?.InsertPluginButtonIcon || InsertPluginIcon;

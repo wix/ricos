@@ -14,13 +14,87 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
-  
-### :bug: Bug Fix
-- `gallery`
-  - [#877](https://github.com/wix-incubator/rich-content/pull/877) fix gallery plugin blurry pictures
 
 </details>
 <hr/>
+
+## 7.3.2 (Apr 16, 2020)
+### :bug: Bug Fix
+- `link-preview`
+  - [#924](https://github.com/wix-incubator/rich-content/pull/924) disable link preview/embed when entered inside a list
+
+## 7.3.1 (Apr 15, 2020)
+### :bug: Bug Fix
+- `editor-common`
+  - [#913](https://github.com/wix-incubator/rich-content/pull/913) onChange - calculateDiff is debounced, for better performance
+- `viewer`
+  - [#923](https://github.com/wix-incubator/rich-content/pull/923) fix: inline styles in lists breaking viewer
+### :house: Internal
+- `wrapper`
+  - [#919](https://github.com/wix-incubator/rich-content/pull/919) added internal mobile support
+  - [#920](https://github.com/wix-incubator/rich-content/pull/920) refactor: `FullscreenRenderer.tsx`, `ModalRenderer.tsx`
+- `wrapper`
+  - [#918](https://github.com/wix-incubator/rich-content/pull/918)
+    - viewer is now re-rendered for new initialState prop (fix)
+- `storybook`
+  - [#918](https://github.com/wix-incubator/rich-content/pull/918)
+    - hotfix (`editor` prop replaced with `isEditor`)
+    - live example app (viewer + editor side by side)
+    - live example app in palettes page
+
+## 7.3.0 (Apr 13, 2020)
+### :rocket: New Feature
+- `list`
+  - [#815](https://github.com/wix-incubator/rich-content/pull/815) nested lists
+- `editor`
+  - [#906](https://github.com/wix-incubator/rich-content/pull/906) editor supports entering tab character ('\t') by clicking on tab
+- `theme + wrapper: gallery, plugins & modals`
+  - [#828](https://github.com/wix-incubator/rich-content/pull/828) style update related to a lot of components + wrapper compatibility.
+### :bug: Bug Fix
+- `preview`
+  - [#903](https://github.com/wix-incubator/rich-content/pull/903) gallery fixed; resize flapping fixed
+- `gallery`
+  - [#909](https://github.com/wix-incubator/rich-content/pull/909) gallery size
+- `editor`
+  - [#914](https://github.com/wix-incubator/rich-content/pull/914) updating tooltips keys
+### :house: Internal
+- `wrapper`
+  - [#907](https://github.com/wix-incubator/rich-content/pull/907) converted `wix-rich-content-wrapper` to typescript
+
+## 7.2.0 (Apr 8, 2020)
+### :rocket: New Feature
+- `link`
+  - [#750](https://github.com/wix-incubator/rich-content/pull/750) link toolbar
+### :bug: Bug Fix
+- `gallery`
+  - [#879](https://github.com/wix-incubator/rich-content/pull/879) gallery size - regression from #879
+  - [#872](https://github.com/wix-incubator/rich-content/pull/872) fix: gallery sliders css in mozilla firefox
+- `plugins`
+  - [#778](https://github.com/wix-incubator/rich-content/pull/880) fix focus on plugins insert buttons click
+- `link`
+  - [#904](https://github.com/wix-incubator/rich-content/pull/904) fix saving data of "target" and "rel" link(the checkboxes in Link Panel)
+  - [#902](https://github.com/wix-incubator/rich-content/pull/902) mobile - cancel in link panel changed the cursor
+- 'editor'
+  - [#894](https://github.com/wix-incubator/rich-content/pull/894) text position after enter & disable paste text with style CODE
+### :house: Internal
+- `storybook`
+  - [#891](https://github.com/wix-incubator/rich-content/pull/891) fixed textHighlightPlugin color (intro.js)
+- `general`
+  - [#905](https://github.com/wix-incubator/rich-content/pull/905) refactor - remove getConfigByFormFactor.js
+
+## 7.1.5 (Apr 4, 2020)
+### :bug: Bug Fix
+- `gallery`
+  - [#879](https://github.com/wix-incubator/rich-content/pull/879) blurry pictures & not rendering
+  - [#877](https://github.com/wix-incubator/rich-content/pull/877) fix gallery plugin blurry pictures
+- `link-preview`
+  - [#871](https://github.com/wix-incubator/rich-content/pull/871) maxwidth
+- `general`
+  - [#889](https://github.com/wix-incubator/rich-content/pull/889) fix all plugins max-width for inline size
+
+### :house: Internal
+- `general`
+  - [#878](https://github.com/wix-incubator/rich-content/pull/878) added git comment to pr's containing surge-examples url's
 
 ## 7.1.4 (Apr 2, 2020)
 ### :rocket: New Feature

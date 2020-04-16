@@ -1,11 +1,34 @@
-import { COMMANDS, mergeBlockData, RichUtils } from 'wix-rich-content-editor-common';
+import {
+  COMMANDS,
+  mergeBlockData,
+  RichUtils,
+  insertString,
+  TEXT_TYPES,
+  CHARACTERS,
+} from 'wix-rich-content-editor-common';
 import handleBackspaceCommand from './handleBackspaceCommand';
 import handleDeleteCommand from './handleDeleteCommand';
 
-export default (updateEditorState, customHandlers) => (command, editorState) => {
+const isList = blockType =>
+  blockType === 'ordered-list-item' || blockType === 'unordered-list-item';
+const isTab = command => command === COMMANDS.TAB || command === COMMANDS.SHIFT_TAB;
+const isCodeBlock = blockType => blockType === 'code-block';
+const isText = blockType => {
+  return TEXT_TYPES.some(type => type === blockType);
+};
+
+export default (updateEditorState, customHandlers, blockType) => (command, editorState) => {
   let newState;
+
   if (customHandlers[command]) {
-    newState = customHandlers[command](editorState);
+    if (isTab(command) && isList(blockType)) {
+      // eslint-disable-next-line no-restricted-globals
+      newState = RichUtils.onTab(event, editorState, 2);
+    } else if (isText(blockType)) {
+      newState = insertString(editorState, CHARACTERS.TAB);
+    } else if (!isCodeBlock(blockType)) {
+      newState = customHandlers[command](editorState);
+    }
   } else {
     switch (command) {
       case COMMANDS.ALIGN_RIGHT:

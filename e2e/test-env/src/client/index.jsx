@@ -12,6 +12,7 @@ const props = {
   initialState: window.__CONTENT_STATE__,
   isMobile: window.isMobile,
   locale: window.locale,
+  testAppPlugins: window.testAppPlugins,
 };
 
 hydrate(
