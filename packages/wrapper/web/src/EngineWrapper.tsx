@@ -1,9 +1,11 @@
-import React, { Children, Fragment, ReactElement } from 'react';
+/* eslint-disable react/prop-types */
+import React, { Children, Fragment, ReactElement, ElementType, FunctionComponent } from 'react';
+import ReactDOM from 'react-dom';
 import FullscreenRenderer from './FullscreenRenderer';
 import ModalRenderer from './ModalRenderer';
 import { merge } from 'lodash';
 import { EditorState } from 'draft-js';
-import { RichContentProps } from './RichContentWrapperTypes';
+import { RichContentProps } from './RichContentProps';
 import { RichContentEditor } from 'wix-rich-content-editor';
 
 interface Props {
@@ -13,12 +15,15 @@ interface Props {
   children: ReactElement;
   isEditor?: boolean;
   isMobile?: boolean;
+  textToolbarType?: TextToolbarType;
+  textToolbarContainer?: HTMLElement;
 }
 
 interface State {
   ModalityProvider: typeof Fragment | typeof ModalRenderer | typeof FullscreenRenderer;
   editorState?: EditorState;
-  MobileToolbar?: React.ElementType;
+  MobileToolbar?: ElementType;
+  TextToolbar?: ElementType;
 }
 
 class EngineWrapper extends React.Component<Props, State> {
@@ -46,11 +51,12 @@ class EngineWrapper extends React.Component<Props, State> {
     return { ModalityProvider: Fragment };
   }
 
+  editorRef = { ref: editor => (this.editor = editor) };
+
   componentDidMount() {
-    const { isMobile, isEditor } = this.props;
-    if (isMobile && isEditor) {
-      const { MobileToolbar } = this.editor.getToolbars();
-      this.setState({ MobileToolbar });
+    if (this.editor) {
+      const { MobileToolbar, TextToolbar } = this.editor.getToolbars();
+      this.setState({ MobileToolbar, TextToolbar });
     }
   }
 
@@ -59,10 +65,23 @@ class EngineWrapper extends React.Component<Props, State> {
   };
 
   render() {
-    const { rcProps, children, isEditor, isMobile } = this.props;
-    const { ModalityProvider, MobileToolbar } = this.state;
+    const {
+      rcProps,
+      children,
+      isEditor,
+      isMobile,
+      textToolbarType,
+      textToolbarContainer,
+    } = this.props;
+    const { ModalityProvider, MobileToolbar, TextToolbar } = this.state;
+    let editorRef = {};
 
-    const mergedRCProps = merge(rcProps, { isMobile }, children.props);
+    const wrapperProps: { isMobile?: boolean; textToolbarType?: TextToolbarType } = {
+      isMobile,
+      textToolbarType: isMobile ? 'inline' : textToolbarType,
+    };
+
+    const mergedRCProps = merge(rcProps, wrapperProps, children.props);
 
     if (isEditor) {
       const { onChange } = mergedRCProps;
@@ -70,18 +89,35 @@ class EngineWrapper extends React.Component<Props, State> {
         onChange?.(editorState);
         this.handleChange(editorState);
       };
+      editorRef = this.editorRef;
     }
+
+    const StaticToolbar = MobileToolbar || TextToolbar;
 
     return (
       <Fragment>
-        {MobileToolbar && <MobileToolbar />}
+        <StaticToolbarPortal
+          StaticToolbar={StaticToolbar}
+          textToolbarContainer={textToolbarContainer}
+        />
         <ModalityProvider {...mergedRCProps}>
-          {Children.only(
-            React.cloneElement(children, { ...mergedRCProps, ref: ref => (this.editor = ref) })
-          )}
+          {Children.only(React.cloneElement(children, { ...mergedRCProps, ...editorRef }))}
         </ModalityProvider>
       </Fragment>
     );
   }
 }
+
+const StaticToolbarPortal: FunctionComponent<{
+  StaticToolbar?: ElementType;
+  textToolbarContainer?: HTMLElement;
+}> = ({ StaticToolbar, textToolbarContainer }) => {
+  if (!StaticToolbar) return null;
+
+  if (textToolbarContainer) {
+    return ReactDOM.createPortal(<StaticToolbar />, textToolbarContainer);
+  }
+  return <StaticToolbar />;
+};
+
 export default EngineWrapper;

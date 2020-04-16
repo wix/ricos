@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import { isDefined } from 'ts-is-present';
 import { RichContentProps } from './RichContentProps';
 
-interface RichContentWrapperProps {
+export interface RichContentWrapperProps {
   children: ReactElement;
   theme?: string | object;
   locale?: string;
@@ -19,9 +19,10 @@ interface RichContentWrapperProps {
   isMobile?: boolean;
   rcProps?: RichContentProps;
   textToolbarType?: TextToolbarType;
+  textToolbarContainer?: HTMLElement;
 }
 
-export default class RichContentWrapper extends Component<
+export class RichContentWrapper extends Component<
   RichContentWrapperProps,
   { localeStrategy: RichContentProps }
 > {
@@ -38,7 +39,7 @@ export default class RichContentWrapper extends Component<
 
   updateLocale = async () => {
     const { locale, children } = this.props;
-    await localeStrategy(children?.props.locale || locale).then(localeData => {
+    await localeStrategy(children.props.locale || locale).then(localeData => {
       this.setState({ localeStrategy: localeData });
     });
   };
