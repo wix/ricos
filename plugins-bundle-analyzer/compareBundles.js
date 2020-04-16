@@ -45,5 +45,5 @@ function compareBundles() {
 try {
   compareBundles();
 } catch (err) {
-  gitPRComment(generateMessage(message));
+  gitPRComment(generateMessage(err));
 }
