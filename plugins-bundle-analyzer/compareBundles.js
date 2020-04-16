@@ -14,7 +14,7 @@ function compareBundles() {
     console.log(err);
     return;
   }
-  console.log(chalk.magenta('compare bundle sizes...'));
+  console.log(chalk.magenta('compares bundle sizes to baseline...'));
   Object.keys(currentBundles).forEach(key => {
     const oldSize = savingBundles[key];
     const newSize = currentBundles[key];
@@ -28,6 +28,7 @@ function compareBundles() {
       }
     }
   });
+  console.log('comparison ended successfully');
 }
 
 compareBundles();

@@ -12,7 +12,6 @@ interface Props {
 interface State {
   EditorModal?: any;
   showModal: boolean;
-  isMounted: boolean;
   modalProps?: any;
   modalStyles?: any;
   modalContent?: any;
@@ -25,7 +24,6 @@ export default class ModalRenderer extends Component<Props, State> {
     super(props);
     this.state = {
       showModal: false,
-      isMounted: false,
     };
     this.childProps = {
       ...props.children.props,
@@ -41,7 +39,7 @@ export default class ModalRenderer extends Component<Props, State> {
     const EditorModal = React.lazy(() =>
       import(/* webpackChunkName: "rce-EditorModal"  */ `./EditorModal`)
     );
-    this.setState({ EditorModal, isMounted: true });
+    this.setState({ EditorModal });
   }
 
   openModal = data => {
@@ -63,26 +61,24 @@ export default class ModalRenderer extends Component<Props, State> {
   };
 
   render() {
-    const { EditorModal, showModal, modalProps, isMounted } = this.state;
+    const { EditorModal, showModal, modalProps } = this.state;
     const { children, ModalsMap, locale, theme } = this.props;
 
     return (
       <Fragment>
         {Children.only(React.cloneElement(children, this.childProps))}
-        {isMounted && (
+        {EditorModal && (
           <Suspense fallback={<div />}>
-            {EditorModal && (
-              <EditorModal
-                dataHook={'WrapperEditorModal'}
-                isOpen={showModal}
-                style={modalStyles(this.state, theme)}
-                role="dialog"
-                onRequestClose={modalProps?.onRequestClose || this.closeModal}
-                modalsMap={ModalsMap}
-                locale={locale}
-                {...modalProps}
-              />
-            )}
+            <EditorModal
+              dataHook={'WrapperEditorModal'}
+              isOpen={showModal}
+              style={modalStyles(this.state, theme)}
+              role="dialog"
+              onRequestClose={modalProps?.onRequestClose || this.closeModal}
+              modalsMap={ModalsMap}
+              locale={locale}
+              {...modalProps}
+            />
           </Suspense>
         )}
       </Fragment>

@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { TextInput, CloseIcon, Button } from 'wix-rich-content-editor-common';
+import { TextInput, CloseIcon, Button, KEYS_CHARCODE } from 'wix-rich-content-editor-common';
 import { mergeStyles } from 'wix-rich-content-common';
 import styles from '../../statics/styles/video-selection-input-modal.scss';
 import ReactPlayer from 'react-player';
@@ -47,7 +47,7 @@ export default class VideoSelectionInputModal extends Component {
   };
 
   handleKeyPress = e => {
-    if (e.charCode === 13) {
+    if (e.charCode === KEYS_CHARCODE.ENTER) {
       this.onUrlVideoSelection();
     }
   };
