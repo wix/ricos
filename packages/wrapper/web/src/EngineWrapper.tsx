@@ -64,7 +64,6 @@ class EngineWrapper extends React.Component<Props, State> {
 
     const mergedRCProps = merge(rcProps, { isMobile }, children.props);
 
-    // BARAK: why do we need this?
     if (isEditor) {
       const { onChange } = mergedRCProps;
       mergedRCProps.onChange = editorState => {
