@@ -1,3 +1,4 @@
+import { FinalTheme } from './../RichContentWrapperTypes';
 export const modalStyleDefaults = {
   content: {
     top: '50%',

@@ -15,9 +15,32 @@
     Click to see more.
   </summary>
 
-
 </details>
 <hr/>
+
+## 7.3.2 (Apr 16, 2020)
+### :bug: Bug Fix
+- `link-preview`
+  - [#924](https://github.com/wix-incubator/rich-content/pull/924) disable link preview/embed when entered inside a list
+
+## 7.3.1 (Apr 15, 2020)
+### :bug: Bug Fix
+- `editor-common`
+  - [#913](https://github.com/wix-incubator/rich-content/pull/913) onChange - calculateDiff is debounced, for better performance
+- `viewer`
+  - [#923](https://github.com/wix-incubator/rich-content/pull/923) fix: inline styles in lists breaking viewer
+### :house: Internal
+- `wrapper`
+  - [#919](https://github.com/wix-incubator/rich-content/pull/919) added internal mobile support
+  - [#920](https://github.com/wix-incubator/rich-content/pull/920) refactor: `FullscreenRenderer.tsx`, `ModalRenderer.tsx`
+- `wrapper`
+  - [#918](https://github.com/wix-incubator/rich-content/pull/918)
+    - viewer is now re-rendered for new initialState prop (fix)
+- `storybook`
+  - [#918](https://github.com/wix-incubator/rich-content/pull/918)
+    - hotfix (`editor` prop replaced with `isEditor`)
+    - live example app (viewer + editor side by side)
+    - live example app in palettes page
 
 ## 7.3.0 (Apr 13, 2020)
 ### :rocket: New Feature

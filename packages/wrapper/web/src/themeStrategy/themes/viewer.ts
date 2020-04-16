@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-export default function viewer(colors: any) {
+export default function viewer(colors: PaletteColors) {
   const { actionColor } = colors;
   return {
     quote: {
