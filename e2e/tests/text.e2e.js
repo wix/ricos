@@ -120,7 +120,7 @@ describe('text', () => {
     cy.eyesCheckWindow(this.test.title);
   });
 
-  it.only('allow to apply indent', function() {
+  it('allow to apply indent', function() {
     cy.loadEditorAndViewer('plain', 'all')
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.BOLD, [40, 10])
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.UNDERLINE, [10, 5])
