@@ -25,20 +25,3 @@ jobs:
       - run: npm run deploy
     env:
       SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
-
-  notify-on-slack:
-    runs-on: ubuntu-18.04
-    needs: [visual-tests, content-state-tests, unit-tests, lint]
-    if: always()
-    steps:
-      - name: Workflow Conclusion Action
-        uses: technote-space/workflow-conclusion-action@v1.1.1
-      - name: Notify on Slack
-        uses: voxmedia/github-action-slack-notify-build@v1.1.1
-        if: env.WORKFLOW_CONCLUSION == 'fail' && github.ref == 'refs/heads/notify-build-failed-on-slack'
-        with:
-          channel_id: GFT1VFDJ6 #rich-content-core
-          status: FAILED
-          color: danger
-    env:
-      SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
