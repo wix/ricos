@@ -6,9 +6,6 @@
   justify-content: center;
   height: max-content;
   max-height: 400px;
-  @media only screen and (max-width: 640px) {
-    align-items: center;
-  }
 
   .panelWithSearch {
     min-height: 400px;
