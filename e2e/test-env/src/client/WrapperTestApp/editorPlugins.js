@@ -19,7 +19,6 @@ import { pluginVideo } from 'wix-rich-content-plugin-video';
 import { pluginLinkPreview } from 'wix-rich-content-plugin-link-preview';
 import { mockFetchUrlPreviewData } from '../../../main/shared/utils/linkPreviewUtil';
 import { pluginTextColor, pluginTextHighlight } from 'wix-rich-content-plugin-text-color';
-import '../styles.global.scss';
 
 const configs = {
   fileUpload: {
