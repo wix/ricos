@@ -1,4 +1,4 @@
-import { DEFAULTS, AUTO_GENERATED_LINK_PREVIEW_PROVIDER } from '../consts';
+import { DEFAULTS } from '../consts';
 import { LINK_PREVIEW_TYPE } from '../types';
 import { SelectionState, EditorState, Modifier, RichUtils } from 'draft-js';
 import {
@@ -14,17 +14,16 @@ export const addLinkPreview = async (editorState, config, blockKey, url) => {
   const { fetchData } = settings;
   const { setEditorState } = config;
   const linkPreviewData = await fetchData(url);
-  const { thumbnail_url, title, description, html, provider_url, provider_name } = linkPreviewData;
-  const embedLink = provider_name !== AUTO_GENERATED_LINK_PREVIEW_PROVIDER && html;
-  if (embedLink || shouldAddLinkPreview(title, thumbnail_url)) {
+  const { thumbnail_url, title, description, html, provider_url } = linkPreviewData;
+  if (html || shouldAddLinkPreview(title, thumbnail_url)) {
     const withoutLinkBlock = deleteBlockText(editorState, blockKey);
     const { size, alignment } = { ...DEFAULTS, ...(settings || {}) };
     const data = {
-      config: { size, alignment, link: { url, ...DEFAULTS.link }, width: embedLink && 350 },
+      config: { size, alignment, link: { url, ...DEFAULTS.link }, width: html && 350 },
       thumbnail_url,
       title,
       description,
-      html: embedLink,
+      html,
       provider_url,
     };
     const { newEditorState } = createBlock(withoutLinkBlock, data, LINK_PREVIEW_TYPE);
