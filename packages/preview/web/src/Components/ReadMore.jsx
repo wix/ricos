@@ -24,6 +24,11 @@ class ReadMore extends PureComponent {
     onClick: () => {},
   };
 
+  constructor(props) {
+    super(props);
+    this.state = { clamped: false };
+  }
+
   onClick = e => {
     const { onClick, onPreviewExpand } = this.props;
     e.preventDefault();
@@ -36,8 +41,13 @@ class ReadMore extends PureComponent {
     return html;
   }
 
+  onReflow = ({ clamped }) => {
+    this.setState({ clamped });
+  };
+
   /* eslint-disable */
   render() {
+    const { clamped } = this.state;
     this.styles = this.styles || mergeStyles({ styles, theme: this.props.theme });
     const {
       lines,
@@ -54,11 +64,9 @@ class ReadMore extends PureComponent {
           className={this.styles.readMore}
           maxLine={lines}
           ellipsis={ellipsis}
-        >
-          <a className={this.styles.readMore_label} href={'#'} onClick={this.onClick}>
-            {label}
-          </a>
-        </HTMLEllipsis>
+          onReflow={this.onReflow}
+        />
+        {clamped && <a href="#" onClick={this.onClick} className={this.styles.readMore_label}>{label}</a>}
       </Fragment>
     );
   }

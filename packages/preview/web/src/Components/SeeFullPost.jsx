@@ -36,7 +36,7 @@ class SeeFullPost extends PureComponent {
     } = this.props;
     /* eslint-disable */
     return (
-      <Fragment>
+      <div className={this.styles.seeFullPost_container}>
         {children}
         <div
           className={this.styles.seeFullPost_overlay}
@@ -47,7 +47,7 @@ class SeeFullPost extends PureComponent {
             {label}
           </span>
         </div>
-      </Fragment>
+      </div>
     );
   }
 }
