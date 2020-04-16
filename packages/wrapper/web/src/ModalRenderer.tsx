@@ -1,6 +1,6 @@
 import React, { Suspense, Children, Component, Fragment, ReactElement } from 'react';
 import { modalStyles } from './themeStrategy/defaults';
-import { RichContentProps } from './RichContentWrapperTypes';
+import { RichContentProps } from './RichContentProps';
 
 interface Props {
   children: ReactElement;

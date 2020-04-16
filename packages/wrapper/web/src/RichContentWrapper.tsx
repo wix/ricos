@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, ReactElement } from 'react';
 import EngineWrapper from './EngineWrapper';
 import themeStrategy from './themeStrategy/themeStrategy';
 import pluginsStrategy from './pluginsStrategy/pluginsStrategy';
@@ -7,7 +7,19 @@ import './styles.global.css';
 import { merge } from 'lodash';
 import PropTypes from 'prop-types';
 import { isDefined } from 'ts-is-present';
-import { RichContentProps, RichContentWrapperProps } from './RichContentWrapperTypes';
+import { RichContentProps } from './RichContentProps';
+
+interface RichContentWrapperProps {
+  children: ReactElement;
+  theme?: string | object;
+  locale?: string;
+  palette?: Palette;
+  plugins?: PluginConfig[];
+  isEditor?: boolean;
+  isMobile?: boolean;
+  rcProps?: RichContentProps;
+  textToolbarType?: TextToolbarType;
+}
 
 export default class RichContentWrapper extends Component<
   RichContentWrapperProps,
