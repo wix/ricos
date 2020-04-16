@@ -38,13 +38,14 @@ async function compareBundles() {
     console.error(chalk.bold.red(err));
     const action = await gitPRComment(generateMessage(message));
     console.log(action);
-    action
-      .then(() => {
-        throw err;
-      })
-      .catch(e => {
-        throw err;
-      });
+    throw err;
+    // action
+    //   .then(() => {
+    //     throw err;
+    //   })
+    //   .catch(e => {
+    //     throw err;
+    //   });
   } else {
     gitPRComment('');
     console.log('comparison ended successfully');
