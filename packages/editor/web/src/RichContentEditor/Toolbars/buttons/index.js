@@ -8,7 +8,6 @@ export const DesktopTextButtonList = [
   'Alignment',
   'OrderedList',
   'UnorderedList',
-  // 'Indent',
 ];
 
 export const MobileTextButtonList = [
@@ -32,7 +31,6 @@ export {
   boldButton,
   italicButton,
   underlineButton,
-  indentButton,
   titleButton,
   blockquoteButton,
   alignTextLeftButton,

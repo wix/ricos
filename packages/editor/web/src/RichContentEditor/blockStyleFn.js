@@ -12,7 +12,6 @@ const types = {
   'header-four': 'headerFour',
   'header-five': 'headerFive',
   'header-six': 'headerSix',
-  indent: 'indent',
   atomic: 'atomic',
   'code-block': 'codeBlock',
   'ordered-list-item': 'orderedList',

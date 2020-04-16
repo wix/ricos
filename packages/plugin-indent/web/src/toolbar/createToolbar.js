@@ -8,14 +8,14 @@ export default function createToolbar({ isMobile }) {
         component: PrevIndentButton,
         isMobile,
         position: {
-          desktop: 11,
+          desktop: 10,
         },
       },
       NextIndent: {
         component: NextIndentButton,
         isMobile,
         position: {
-          desktop: 12,
+          desktop: 11,
         },
       },
     }),
