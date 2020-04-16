@@ -156,6 +156,11 @@ jobs:
     needs: [e2e-visual-applitoolsSendComplition, content-state-tests, lint-and-unit-tests]
     if: always()
     steps:
+      - run: echo ${{ github }}
+      - run: echo ${{ env }}
+      - run: echo ${{ runner }}
+      - run: echo ${{ strategy }}
+      - run: echo ${{ needs }}
       - name: Workflow Conclusion Action
         uses: technote-space/workflow-conclusion-action@v1.1.1
       - name: Notify on Slack
