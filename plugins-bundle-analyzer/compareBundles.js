@@ -36,8 +36,9 @@ function compareBundles() {
   if (message !== '') {
     const e = new Error(message);
     console.error(chalk.bold.red(e));
-    gitPRComment(generateMessage(message));
-    throw e;
+    gitPRComment(generateMessage(message)).then(() => {
+      throw e;
+    });
   } else {
     gitPRComment('');
     console.log('comparison ended successfully');
