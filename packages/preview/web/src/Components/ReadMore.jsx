@@ -11,9 +11,6 @@ class ReadMore extends PureComponent {
     label: PropTypes.string,
     lines: PropTypes.number,
     children: PropTypes.node.isRequired,
-    onPreviewExpand: PropTypes.func.isRequired,
-    onClick: PropTypes.func,
-    text: PropTypes.string,
     theme: PropTypes.object.isRequired,
     t: PropTypes.func.isRequired,
   };
@@ -21,19 +18,16 @@ class ReadMore extends PureComponent {
   static defaultProps = {
     ellipsis: '…',
     lines: 3,
-    onClick: () => {},
   };
 
   constructor(props) {
     super(props);
-    this.state = { clamped: false };
+    this.state = { clamped: false, expanded: false };
   }
 
   onClick = e => {
-    const { onClick, onPreviewExpand } = this.props;
     e.preventDefault();
-    onClick();
-    onPreviewExpand();
+    this.setState({ expanded: true });
   };
 
   renderChildren(children) {
@@ -45,18 +39,19 @@ class ReadMore extends PureComponent {
     this.setState({ clamped });
   };
 
-  /* eslint-disable */
   render() {
-    const { clamped } = this.state;
+    const { clamped, expanded } = this.state;
+    if (expanded) {
+      return this.props.children;
+    }
     this.styles = this.styles || mergeStyles({ styles, theme: this.props.theme });
     const {
       lines,
       label = this.props.t('Preview_ReadMore_Label'),
       ellipsis,
       children,
-      text,
     } = this.props;
-    // const textToCollapse = text || getChildrenText(children);
+    /* eslint-disable jsx-a11y/anchor-is-valid */
     return (
       <Fragment>
         <HTMLEllipsis
@@ -66,11 +61,14 @@ class ReadMore extends PureComponent {
           ellipsis={ellipsis}
           onReflow={this.onReflow}
         />
-        {clamped && <a href="#" onClick={this.onClick} className={this.styles.readMore_label}>{label}</a>}
+        {clamped && (
+          <a href="#" role="button" onClick={this.onClick} className={this.styles.readMore_label}>
+            {label}
+          </a>
+        )}
       </Fragment>
     );
   }
-  /* eslint-enable */
 }
 
 export default ReadMore;
