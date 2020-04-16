@@ -25,3 +25,4 @@ jobs:
       - run: npm run deploy
     env:
       SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
+      SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
