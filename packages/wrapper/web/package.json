@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-wrapper",
-  "version": "7.3.0",
+  "version": "7.3.1",
   "author": {
     "name": "Alex Greenstein",
     "email": "alexgr@wix.com"
@@ -63,16 +63,16 @@
     "ts-jest": "^25.3.1"
   },
   "dependencies": {
-    "prop-types": "^15.6.2",
     "jss": "^10.1.1",
     "jss-plugin-camel-case": "^10.1.1",
     "jss-preset-default": "^10.1.1",
+    "prop-types": "^15.6.2",
     "react-modal": "~3.4.1",
-    "wix-rich-content-common": "7.3.0",
-    "wix-rich-content-editor": "7.3.0",
-    "wix-rich-content-editor-common": "7.3.0",
-    "wix-rich-content-fullscreen": "7.3.0",
-    "wix-rich-content-viewer": "7.3.0"
+    "wix-rich-content-common": "7.3.1",
+    "wix-rich-content-editor": "7.3.1",
+    "wix-rich-content-editor-common": "7.3.1",
+    "wix-rich-content-fullscreen": "7.3.1",
+    "wix-rich-content-viewer": "7.3.1"
   },
   "jest": {
     "globals": {

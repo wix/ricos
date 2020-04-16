@@ -3,8 +3,9 @@ import {
   PLUGIN_COMPONENT,
   PLUGIN_TOOLBAR_BUTTONS,
   DIVIDER_DROPDOWN_OPTIONS,
+  STATIC_TOOLBAR_BUTTONS,
 } from '../cypress/dataHooks';
-import { DEFAULT_DESKTOP_BROWSERS } from '../tests/constants';
+import { DEFAULT_DESKTOP_BROWSERS } from './settings';
 
 const eyesOpen = ({
   test: {
@@ -32,7 +33,9 @@ describe('plugins', () => {
     after(() => cy.eyesClose());
 
     it('render html plugin toolbar', function() {
-      cy.loadEditorAndViewer('empty').addHtml();
+      cy.loadEditorAndViewer('empty')
+        .addHtml()
+        .waitForHtmlToLoad();
       cy.get(`[data-hook*=${PLUGIN_TOOLBAR_BUTTONS.EDIT}]`)
         .click({ multiple: true })
         .click();
@@ -161,7 +164,7 @@ describe('plugins', () => {
     });
     after(() => cy.eyesClose());
 
-    beforeEach('load editor', () => cy.loadEditorAndViewer('link-preview'));
+    beforeEach('load editor', () => cy.loadEditorAndViewer('link-preview', 'all'));
 
     it('change link preview settings', function() {
       cy.openPluginToolbar(PLUGIN_COMPONENT.LINK_PREVIEW);
@@ -195,7 +198,7 @@ describe('plugins', () => {
       eyesOpen(this);
     });
     after(() => cy.eyesClose());
-    beforeEach('load editor', () => cy.loadEditorAndViewer('empty'));
+    beforeEach('load editor', () => cy.loadEditorAndViewer('empty', 'all'));
 
     it('should create link preview from link after enter key', function() {
       cy.insertLinkAndEnter('www.wix.com');
@@ -205,6 +208,28 @@ describe('plugins', () => {
     it('should embed link that supports embed', function() {
       cy.insertLinkAndEnter('www.mockUrl.com');
       cy.eyesCheckWindow(this.test.title);
+    });
+  });
+
+  context('social embed', () => {
+    before(function() {
+      eyesOpen(this);
+    });
+
+    beforeEach('load editor', () => {
+      cy.switchToDesktop();
+      cy.loadEditorAndViewer('empty', 'linkPreview');
+    });
+
+    after(() => cy.eyesClose());
+    const embedTypes = ['TWITTER', 'INSTAGRAM', 'YOUTUBE'];
+    it('render upload modals', function() {
+      embedTypes.forEach(embedType => {
+        cy.openSocialEmbedModal(STATIC_TOOLBAR_BUTTONS[embedType]);
+        cy.eyesCheckWindow(this.test.title);
+        cy.addSocialEmbed('www.mockUrl.com');
+        cy.eyesCheckWindow(this.test.title);
+      });
     });
   });
 

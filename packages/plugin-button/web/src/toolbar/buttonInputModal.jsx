@@ -8,6 +8,7 @@ import {
   FocusManager,
   ErrorIcon,
   SettingsPanelFooter,
+  KEYS_CHARCODE,
 } from 'wix-rich-content-editor-common';
 import { mergeStyles, isValidUrl } from 'wix-rich-content-common';
 import DesignComponent from './../components/design-component';
@@ -84,10 +85,10 @@ export default class ButtonInputModal extends Component {
   };
 
   handleKeyPress = e => {
-    if (e.charCode === 13) {
+    if (e.charCode === KEYS_CHARCODE.ENTER) {
       this.onConfirm();
     }
-    if (e.charCode === 27) {
+    if (e.charCode === KEYS_CHARCODE.ESCAPE) {
       this.onCloseRequested();
     }
   };

@@ -15,9 +15,16 @@
     Click to see more.
   </summary>
 
+
+</details>
+<hr/>
+
+## 7.3.1 (Apr 15, 2020)
 ### :bug: Bug Fix
 - `editor-common`
   - [#913](https://github.com/wix-incubator/rich-content/pull/913) onChange - calculateDiff is debounced, for better performance
+- `viewer`
+  - [#923](https://github.com/wix-incubator/rich-content/pull/923) fix: inline styles in lists breaking viewer
 ### :house: Internal
 - `wrapper`
   - [#919](https://github.com/wix-incubator/rich-content/pull/919) added internal mobile support
@@ -28,9 +35,6 @@
     - storybook: hotfix (`editor` prop replaced with `isEditor`)
     - storybook: live example app (viewer + editor side by side)
     - storybook: live example app in palettes page
-
-</details>
-<hr/>
 
 ## 7.3.0 (Apr 13, 2020)
 ### :rocket: New Feature
