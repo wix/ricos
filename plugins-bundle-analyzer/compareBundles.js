@@ -36,12 +36,13 @@ function compareBundles() {
   if (message !== '') {
     const err = new Error(message);
     console.error(chalk.bold.red(err));
-    const promise = new Promise(() => {
-      gitPRComment(generateMessage(message));
-    });
-    promise.finally(() => {
-      throw err;
-    });
+    gitPRComment(generateMessage(message))
+      .then(() => {
+        throw err;
+      })
+      .catch(e => {
+        throw err;
+      });
   } else {
     gitPRComment('');
     console.log('comparison ended successfully');
