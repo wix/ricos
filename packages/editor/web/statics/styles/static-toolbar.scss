@@ -43,12 +43,13 @@
 
 .staticToolbar_responsiveArrow {
   flex: 0 0 40px;
-  margin-right: -9px;
+  margin: auto;
   height: 100%;
   background: transparent;
   cursor: pointer;
   border: none;
   border-left: 1px solid $toolbar-border-color;
+  border-right: none;
   > i {
     display: inline-block;
     width: 6px;

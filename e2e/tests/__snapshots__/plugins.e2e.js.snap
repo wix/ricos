@@ -116,7 +116,7 @@ exports[`plugins > image > render image toolbar and settings #0`] =
           },
           "showDescription": true,
           "showTitle": true,
-          "size": "small"
+          "size": "fullWidth"
         },
         "metadata": {
           "caption": ""
@@ -920,7 +920,7 @@ exports[`plugins > video > render upload modal #0`] =
   "entityMap": {}
 };
 
-exports[`plugins > video > enable to add a video from URI #0`] =
+exports[`plugins > video > add a video from URL #0`] =
 {
   "blocks": [
     {
@@ -1004,7 +1004,7 @@ exports[`plugins > soundcloud > render upload modal #0`] =
   "entityMap": {}
 };
 
-exports[`plugins > soundcloud > enable to add a soundcloud URI #0`] =
+exports[`plugins > soundcloud > add a soundcloud URL #0`] =
 {
   "blocks": [
     {
@@ -1114,7 +1114,7 @@ exports[`plugins > html > render html plugin toolbar #0`] =
       "data": {
         "config": {
           "alignment": "center",
-          "height": 550,
+          "height": 445,
           "width": 350
         },
         "src": "<blockquote class=\"twitter-tweet\" data-lang=\"en\"><p lang=\"en\" dir=\"ltr\">The updates, insights and stories of the engineering challenges we encounter, and our way of solving them. Subscribe to our fresh, monthly newsletter and get these goodies right to your e-mail:<a href=\"https://t.co/0ziRSJJAxK\">https://t.co/0ziRSJJAxK</a> <a href=\"https://t.co/nTHlsG5z2a\">pic.twitter.com/nTHlsG5z2a</a></p>&mdash; Wix Engineering (@WixEng) <a href=\"https://twitter.com/WixEng/status/1076810144774868992?ref_src=twsrc%5Etfw\">December 23, 2018</a></blockquote> <script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script>",
@@ -1287,63 +1287,6 @@ exports[`plugins > divider > render plugin toolbar and change styling #0`] =
   }
 };
 
-exports[`plugins > gif > render giphy plugin toolbar #0`] =
-{
-  "blocks": [
-    {
-      "data": {},
-      "depth": 0,
-      "entityRanges": [],
-      "inlineStyleRanges": [],
-      "key": 0,
-      "text": "",
-      "type": "unstyled"
-    },
-    {
-      "data": {},
-      "depth": 0,
-      "entityRanges": [
-        {
-          "key": 0,
-          "length": 1,
-          "offset": 0
-        }
-      ],
-      "inlineStyleRanges": [],
-      "key": 1,
-      "text": " ",
-      "type": "atomic"
-    },
-    {
-      "data": {},
-      "depth": 0,
-      "entityRanges": [],
-      "inlineStyleRanges": [],
-      "key": 2,
-      "text": "",
-      "type": "unstyled"
-    }
-  ],
-  "entityMap": {
-    "0": {
-      "data": {
-        "config": {
-          "alignment": "center",
-          "size": "small"
-        },
-        "gif": {
-          "height": 400,
-          "originalUrl": "https://media1.giphy.com/media/hrk8ehR4lCZ27FtjPA/giphy_s.gif",
-          "stillUrl": "https://media1.giphy.com/media/hrk8ehR4lCZ27FtjPA/giphy_s.gif",
-          "width": 480
-        }
-      },
-      "mutability": "IMMUTABLE",
-      "type": "wix-draft-plugin-giphy"
-    }
-  }
-};
-
 exports[`plugins > map > render map plugin toolbar and settings #0`] =
 {
   "blocks": [
@@ -1392,10 +1335,10 @@ exports[`plugins > map > render map plugin toolbar and settings #0`] =
         },
         "mapSettings": {
           "address": "Wix HQ, Nemal Tel Aviv Street, Tel Aviv-Yafo, Israel",
-          "isDraggingAllowed": true,
+          "isDraggingAllowed": false,
           "isMarkerShown": true,
-          "isStreetViewControlShown": true,
-          "isZoomControlShown": true,
+          "isStreetViewControlShown": false,
+          "isZoomControlShown": false,
           "lat": 32.097235,
           "lng": 34.77427,
           "locationDisplayName": "Wix HQ, Nemal Tel Aviv Street, Tel Aviv-Yafo, Israel",
@@ -2747,6 +2690,1396 @@ exports[`plugins > gallery > render gallery out of view #0`] =
       },
       "mutability": "IMMUTABLE",
       "type": "wix-draft-plugin-image"
+    }
+  }
+};
+
+exports[`plugins > link preview > change link preview settings #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 3,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 1,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 4,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 5,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 2,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 6,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 7,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 3,
+          "length": 7,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [
+        {
+          "length": 7,
+          "offset": 0,
+          "style": "UNDERLINE"
+        }
+      ],
+      "key": 8,
+      "text": "wix.com ",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "link": {
+            "rel": "nofollow",
+            "target": "_blank",
+            "url": "wix.com"
+          },
+          "size": "content"
+        },
+        "description": "\tCreate a free website with Wix.com. Choose a stunning template and customize anything with the Wix website builder—no coding skills needed. Create yours today!",
+        "provider_url": "www.wix.com",
+        "thumbnail_url": "https://static.wixstatic.com/media/5305c5_5f112df56dcd40a29e855baae08f19ce~mv2.jpg/v1/fill/w_600,h_315,al_c/5305c5_5f112df56dcd40a29e855baae08f19ce~mv2.jpg",
+        "title": "Free Website Builder | Create a Free Website | Wix.com"
+      },
+      "mutability": "IMMUTABLE",
+      "type": "LINK_PREVIEW"
+    },
+    "1": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "link": {
+            "url": "wix.com"
+          },
+          "size": "content"
+        },
+        "provider_url": "https://www.youtube.com",
+        "thumbnail_url": "https://static.wixstatic.com/media/8bb438_603549efcb714170bb71fe0757f37561.jpg/v1/fill/w_125,h_51,fp_0.50_0.50,q_10/8bb438_603549efcb714170bb71fe0757f37561.webp",
+        "title": "Fiesta Latina 2019 - Maluma, Luis Fonsi, Ozuna, J Balvin, CNCO, J Balvin - Latin Hits Mix 2019"
+      },
+      "mutability": "IMMUTABLE",
+      "type": "LINK_PREVIEW"
+    },
+    "2": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "link": {
+            "url": "mockUrl.com"
+          },
+          "size": "content",
+          "width": 350
+        },
+        "html": "<div style=\"background-color: black; border: 10px solid pink; height: 400px; text-align: center; color: white;\">This is a mock embed</div>",
+        "title": "I am a mock html"
+      },
+      "mutability": "IMMUTABLE",
+      "type": "LINK_PREVIEW"
+    },
+    "3": {
+      "data": {
+        "rel": "noopener",
+        "target": "_blank",
+        "url": "wix.com"
+      },
+      "mutability": "MUTABLE",
+      "type": "LINK"
+    }
+  }
+};
+
+exports[`plugins > link preview > convert link preview to regular link #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 7,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [
+        {
+          "length": 7,
+          "offset": 0,
+          "style": "UNDERLINE"
+        }
+      ],
+      "key": 2,
+      "text": "wix.com",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 3,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 1,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 4,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 5,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 2,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 6,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 7,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 3,
+          "length": 7,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [
+        {
+          "length": 7,
+          "offset": 0,
+          "style": "UNDERLINE"
+        }
+      ],
+      "key": 8,
+      "text": "wix.com ",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "url": "wix.com"
+      },
+      "mutability": "MUTABLE",
+      "type": "LINK"
+    },
+    "1": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "link": {
+            "url": "wix.com"
+          },
+          "size": "content"
+        },
+        "provider_url": "https://www.youtube.com",
+        "thumbnail_url": "https://static.wixstatic.com/media/8bb438_603549efcb714170bb71fe0757f37561.jpg/v1/fill/w_125,h_51,fp_0.50_0.50,q_10/8bb438_603549efcb714170bb71fe0757f37561.webp",
+        "title": "Fiesta Latina 2019 - Maluma, Luis Fonsi, Ozuna, J Balvin, CNCO, J Balvin - Latin Hits Mix 2019"
+      },
+      "mutability": "IMMUTABLE",
+      "type": "LINK_PREVIEW"
+    },
+    "2": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "link": {
+            "url": "mockUrl.com"
+          },
+          "size": "content",
+          "width": 350
+        },
+        "html": "<div style=\"background-color: black; border: 10px solid pink; height: 400px; text-align: center; color: white;\">This is a mock embed</div>",
+        "title": "I am a mock html"
+      },
+      "mutability": "IMMUTABLE",
+      "type": "LINK_PREVIEW"
+    },
+    "3": {
+      "data": {
+        "rel": "noopener",
+        "target": "_blank",
+        "url": "wix.com"
+      },
+      "mutability": "MUTABLE",
+      "type": "LINK"
+    }
+  }
+};
+
+exports[`plugins > giphy > render giphy plugin toolbar #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "size": "small"
+        },
+        "gif": {
+          "height": 400,
+          "originalUrl": "https://media1.giphy.com/media/hrk8ehR4lCZ27FtjPA/giphy_s.gif",
+          "stillUrl": "https://media1.giphy.com/media/hrk8ehR4lCZ27FtjPA/giphy_s.gif",
+          "width": 480
+        }
+      },
+      "mutability": "IMMUTABLE",
+      "type": "wix-draft-plugin-giphy"
+    }
+  }
+};
+
+exports[`plugins > video > add a custom video #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "Will this fix the flakiness?",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "size": "small"
+        },
+        "isCustomVideo": true,
+        "src": {
+          "pathname": "video/11062b_a552731f40854d16a91627687fb8d1a6/1080p/mp4/file.mp4",
+          "thumbnail": {
+            "height": 1080,
+            "pathname": "media/11062b_a552731f40854d16a91627687fb8d1a6f000.jpg",
+            "width": 1920
+          }
+        }
+      },
+      "mutability": "IMMUTABLE",
+      "type": "wix-draft-plugin-video"
+    }
+  }
+};
+
+exports[`plugins > emoji > render emoji modal #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        },
+        {
+          "key": 1,
+          "length": 1,
+          "offset": 1
+        },
+        {
+          "key": 2,
+          "length": 1,
+          "offset": 2
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "😄💰📝",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "emojiUnicode": "😄"
+      },
+      "mutability": "IMMUTABLE",
+      "type": "EMOJI_TYPE"
+    },
+    "1": {
+      "data": {
+        "emojiUnicode": "💰"
+      },
+      "mutability": "IMMUTABLE",
+      "type": "EMOJI_TYPE"
+    },
+    "2": {
+      "data": {
+        "emojiUnicode": "📝"
+      },
+      "mutability": "IMMUTABLE",
+      "type": "EMOJI_TYPE"
+    }
+  }
+};
+
+exports[`plugins > link preview > backspace key should convert link preview to regular link #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 7,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [
+        {
+          "length": 7,
+          "offset": 0,
+          "style": "UNDERLINE"
+        }
+      ],
+      "key": 2,
+      "text": "wix.com",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 3,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 1,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 4,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 5,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 2,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 6,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 7,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 3,
+          "length": 7,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [
+        {
+          "length": 7,
+          "offset": 0,
+          "style": "UNDERLINE"
+        }
+      ],
+      "key": 8,
+      "text": "wix.com ",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "url": "wix.com"
+      },
+      "mutability": "MUTABLE",
+      "type": "LINK"
+    },
+    "1": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "link": {
+            "url": "wix.com"
+          },
+          "size": "content"
+        },
+        "provider_url": "https://www.youtube.com",
+        "thumbnail_url": "https://static.wixstatic.com/media/8bb438_603549efcb714170bb71fe0757f37561.jpg/v1/fill/w_125,h_51,fp_0.50_0.50,q_10/8bb438_603549efcb714170bb71fe0757f37561.webp",
+        "title": "Fiesta Latina 2019 - Maluma, Luis Fonsi, Ozuna, J Balvin, CNCO, J Balvin - Latin Hits Mix 2019"
+      },
+      "mutability": "IMMUTABLE",
+      "type": "LINK_PREVIEW"
+    },
+    "2": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "link": {
+            "url": "mockUrl.com"
+          },
+          "size": "content",
+          "width": 350
+        },
+        "html": "<div style=\"background-color: black; border: 10px solid pink; height: 400px; text-align: center; color: white;\">This is a mock embed</div>",
+        "title": "I am a mock html"
+      },
+      "mutability": "IMMUTABLE",
+      "type": "LINK_PREVIEW"
+    },
+    "3": {
+      "data": {
+        "rel": "noopener",
+        "target": "_blank",
+        "url": "wix.com"
+      },
+      "mutability": "MUTABLE",
+      "type": "LINK"
+    }
+  }
+};
+
+exports[`plugins > emoji > render emojies #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {}
+};
+
+exports[`plugins > emoji > render some emojies #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        },
+        {
+          "key": 1,
+          "length": 1,
+          "offset": 1
+        },
+        {
+          "key": 2,
+          "length": 1,
+          "offset": 2
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "😄💰📝",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "emojiUnicode": "😄"
+      },
+      "mutability": "IMMUTABLE",
+      "type": "EMOJI_TYPE"
+    },
+    "1": {
+      "data": {
+        "emojiUnicode": "💰"
+      },
+      "mutability": "IMMUTABLE",
+      "type": "EMOJI_TYPE"
+    },
+    "2": {
+      "data": {
+        "emojiUnicode": "📝"
+      },
+      "mutability": "IMMUTABLE",
+      "type": "EMOJI_TYPE"
+    }
+  }
+};
+
+exports[`plugins > link preview > delete link preview #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 3,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 4,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 1,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 5,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 6,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 2,
+          "length": 7,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [
+        {
+          "length": 7,
+          "offset": 0,
+          "style": "UNDERLINE"
+        }
+      ],
+      "key": 7,
+      "text": "wix.com ",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "link": {
+            "url": "wix.com"
+          },
+          "size": "content"
+        },
+        "provider_url": "https://www.youtube.com",
+        "thumbnail_url": "https://static.wixstatic.com/media/8bb438_603549efcb714170bb71fe0757f37561.jpg/v1/fill/w_125,h_51,fp_0.50_0.50,q_10/8bb438_603549efcb714170bb71fe0757f37561.webp",
+        "title": "Fiesta Latina 2019 - Maluma, Luis Fonsi, Ozuna, J Balvin, CNCO, J Balvin - Latin Hits Mix 2019"
+      },
+      "mutability": "IMMUTABLE",
+      "type": "LINK_PREVIEW"
+    },
+    "1": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "link": {
+            "url": "mockUrl.com"
+          },
+          "size": "content",
+          "width": 350
+        },
+        "html": "<div style=\"background-color: black; border: 10px solid pink; height: 400px; text-align: center; color: white;\">This is a mock embed</div>",
+        "title": "I am a mock html"
+      },
+      "mutability": "IMMUTABLE",
+      "type": "LINK_PREVIEW"
+    },
+    "2": {
+      "data": {
+        "rel": "noopener",
+        "target": "_blank",
+        "url": "wix.com"
+      },
+      "mutability": "MUTABLE",
+      "type": "LINK"
+    }
+  }
+};
+
+exports[`plugins > convert link to link preview > should create link preview from link after enter key #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "\n",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "link": {
+            "url": "www.wix.com"
+          },
+          "size": "content"
+        },
+        "description": "A mock description",
+        "provider_url": "www.mockUrl.com",
+        "thumbnail_url": "https://image.insider.com/5de5784979d757159d0b6838?width=1100&format=jpeg&auto=webp",
+        "title": "A mock title"
+      },
+      "mutability": "IMMUTABLE",
+      "type": "LINK_PREVIEW"
+    }
+  }
+};
+
+exports[`plugins > convert link to preview > should create link preview from link after enter key #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "\n",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "link": {
+            "rel": "noopener",
+            "target": "_blank",
+            "url": "www.wix.com"
+          },
+          "size": "content"
+        },
+        "description": "A mock description",
+        "provider_url": "www.mockUrl.com",
+        "thumbnail_url": "https://image.insider.com/5de5784979d757159d0b6838?width=1100&format=jpeg&auto=webp",
+        "title": "A mock title"
+      },
+      "mutability": "IMMUTABLE",
+      "type": "LINK_PREVIEW"
+    }
+  }
+};
+
+exports[`plugins > convert link to preview > should embed link that supports embed #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "\n",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "link": {
+            "rel": "noopener",
+            "target": "_blank",
+            "url": "www.mockUrl.com"
+          },
+          "size": "content",
+          "width": 350
+        },
+        "html": "<div style=\"background-color: black; border: 10px solid pink; height: 400px; text-align: center; color: white;\">This is a mock embed</div>",
+        "title": "I am a mock html"
+      },
+      "mutability": "IMMUTABLE",
+      "type": "LINK_PREVIEW"
+    }
+  }
+};
+
+exports[`plugins > html > should set suitable html height #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 1,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 3,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 4,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 2,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 5,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 6,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "height": 120,
+          "width": 350
+        },
+        "src": "<div style=\"background-color: black; border: 10px solid pink; height: 100px; text-align: center; color: white;\">This is a small mock embed</div>",
+        "srcType": "html"
+      },
+      "mutability": "IMMUTABLE",
+      "type": "wix-draft-plugin-html"
+    },
+    "1": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "height": 220,
+          "width": 350
+        },
+        "src": "<div style=\"background-color: black; border: 10px solid pink; height: 200px; text-align: center; color: white;\">This is a medium mock embed</div>\n",
+        "srcType": "html"
+      },
+      "mutability": "IMMUTABLE",
+      "type": "wix-draft-plugin-html"
+    },
+    "2": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "height": 420,
+          "width": 350
+        },
+        "src": "<div style=\"background-color: black; border: 10px solid pink; height: 400px; text-align: center; color: white;\">This is a large mock embed</div>",
+        "srcType": "html"
+      },
+      "mutability": "IMMUTABLE",
+      "type": "wix-draft-plugin-html"
+    }
+  }
+};
+
+exports[`plugins > list > create nested lists using tab & shift-tab #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 1,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "Hey I am an ordered list in depth 1.",
+      "type": "ordered-list-item"
+    },
+    {
+      "data": {},
+      "depth": 2,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": " Hey I am an ordered list in depth 2.",
+      "type": "ordered-list-item"
+    },
+    {
+      "data": {},
+      "depth": 1,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": " Hey I am an ordered list in depth 1.",
+      "type": "ordered-list-item"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 3,
+      "text": "Hey I am an ordered list in depth 0.",
+      "type": "ordered-list-item"
+    },
+    {
+      "data": {},
+      "depth": 1,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 4,
+      "text": "Hey I am an unordered list in depth 1.",
+      "type": "unordered-list-item"
+    },
+    {
+      "data": {},
+      "depth": 2,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 5,
+      "text": " Hey I am an unordered list in depth 2.",
+      "type": "unordered-list-item"
+    },
+    {
+      "data": {},
+      "depth": 1,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 6,
+      "text": " Hey I am an unordered list in depth 1.",
+      "type": "unordered-list-item"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 7,
+      "text": "Hey I am an unordered list in depth 0.",
+      "type": "unordered-list-item"
+    }
+  ],
+  "entityMap": {}
+};
+
+exports[`plugins > social embed > render upload modals #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": "",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 3,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 4,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 5,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 6,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "link": {
+            "rel": "noopener",
+            "target": "_blank",
+            "url": "www.mockUrl.com"
+          },
+          "size": "content",
+          "width": 350
+        },
+        "html": "<div style=\"background-color: black; border: 10px solid pink; height: 400px; text-align: center; color: white;\">This is a mock embed</div>",
+        "socialType": "YouTube"
+      },
+      "mutability": "IMMUTABLE",
+      "type": "LINK_PREVIEW"
     }
   }
 };

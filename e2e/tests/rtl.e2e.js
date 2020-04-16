@@ -1,5 +1,5 @@
 /*global cy*/
-import { DEFAULT_DESKTOP_BROWSERS, DEFAULT_MOBILE_BROWSERS } from '../tests/constants';
+import { DEFAULT_DESKTOP_BROWSERS, DEFAULT_MOBILE_BROWSERS } from './settings';
 
 describe('rtl', () => {
   beforeEach(() => cy.switchToHebrew());

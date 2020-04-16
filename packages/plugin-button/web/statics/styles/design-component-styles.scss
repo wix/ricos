@@ -1,5 +1,8 @@
 @import '~wix-rich-content-common/dist/statics/styles/mixins';
 @import '~wix-rich-content-common/dist/statics/styles/palette';
+@import '~wix-rich-content-editor-common/dist/statics/styles/color-picker';
+@import '~wix-rich-content-editor-common/dist/statics/styles/custom-color-picker';
+@import '~wix-rich-content-editor-common/dist/statics/styles/custom-color-picker-dialog';
 
 .button_designComponent_row {
   height: auto;
@@ -16,6 +19,7 @@
 }
 
 .colorPicker_button {
+  @extend .colorPicker_button;
   width: 20px;
   height: 20px;
   margin-right: 8px;
@@ -41,7 +45,9 @@
 }
 
 .colorPickerDialog_buttons {
-  padding-left: calc(100% - 126px);
+  @extend .colorPickerDialog_buttons;
+  //padding-left: calc(100% - 126px);
+  width: 100%;
   margin-top: 12px;
   padding-bottom: 13px;
   border-bottom: 1px solid #cccccc;
@@ -49,10 +55,17 @@
 }
 
 .colorPickerDialog_button {
+  @extend .colorPickerDialog_button;
   margin-right: 19px;
   font-size: 16px;
 }
 .colorPicker_palette {
+  @extend .colorPicker_palette;
+  width: auto;
+  margin: 12px;
+  @include phone {
+    margin: 0 18px 24px;
+  }
   margin: 0px;
 }
 
@@ -65,16 +78,28 @@
 }
 
 .colorPicker_buttons_container {
-  width: calc(100% - 25px);
+  @extend .colorPicker_buttons_container;
+  width: 100%;
   padding-bottom: 34px;
+  margin-top: 22px;
+  margin-left: 6px;
   margin-bottom: 22px;
-  margin-left: 2px;
   border-bottom: 1px solid #ccc;
+  display: grid;
+  grid-template-columns: 70% 30%;
+
+  :nth-child(2) {
+    margin-right: 8px;
+    margin-top: 6px;
+  }
+
   @include phone {
     width: 100%;
   }
 }
+
 .colorPicker_add_color_button {
+  @extend .colorPicker_add_color_button;
   margin-left: 0px;
   margin-right: 10px;
   margin-top: 8px;
@@ -83,41 +108,45 @@
     margin-bottom: 13px;
     margin-right: 13px;
   }
-}
-.customColorPicker_container {
-  height: 100%;
-}
-.customColorPicker_saturation {
-  height: 112px;
-}
 
-.colorPickerDialog_separator {
-  display: none;
-}
-
-.button_designComponent_colorPicker_container {
-  height: auto;
-  width: 100%;
-  padding-bottom: 10px;
-  padding-top: 14px;
-  @include phone {
-    padding-top: 32px;
-    margin-left: -1px;
+  .customColorPicker_container {
+    @extend .customColorPicker_container;
+    height: 100%;
+  }
+  .customColorPicker_saturation {
+    @extend .customColorPicker_saturation;
+    height: 112px;
+  }
+  
+  .colorPickerDialog_separator {
+    display: none;
+  }
+  
+  .button_designComponent_colorPicker_container {
+    height: auto;
+    width: 100%;
+    padding-bottom: 10px;
+    padding-top: 14px;
+    @include phone {
+      padding-top: 32px;
+      margin-left: -1px;
+    }
+  }
+  
+  .customColorPicker_hue {
+    @include phone {
+      height: 24px;
+      margin-top: 12px;
+    }
+  }
+  
+  .customColorPicker_editable_input_container {
+    @include phone {
+      padding-top: 7px;
+    }
   }
 }
 
-.customColorPicker_hue {
-  @include phone {
-    height: 24px;
-    margin-top: 12px;
-  }
-}
-
-.customColorPicker_editable_input_container {
-  @include phone {
-    padding-top: 7px;
-  }
-}
 
 .huePointer_vertical_line {
   @include phone {
@@ -168,6 +197,9 @@
   padding-top: 27px;
   padding-bottom: 8px;
   margin-right: 30px;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-template-rows: auto auto;
   @include phone {
     width: 100%;
     height: auto;
@@ -179,7 +211,6 @@
     overflow-x: scroll;
     overflow-y: hidden;
     -webkit-overflow-scrolling: touch;
-    position: relative;
   }
 }
 

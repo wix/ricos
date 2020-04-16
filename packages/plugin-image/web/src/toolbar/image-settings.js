@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { mergeStyles, getImageSrc, Loader } from 'wix-rich-content-common';
+import { mergeStyles, getImageSrc } from 'wix-rich-content-common';
 import {
   Image,
   InputWithLabel,
   LinkPanel,
   SettingsPanelFooter,
   SettingsSection,
+  Loader,
 } from 'wix-rich-content-editor-common';
 import ImageSettingsMobileHeader from './image-settings-mobile-header';
 import styles from '../../statics/styles/image-settings.scss';

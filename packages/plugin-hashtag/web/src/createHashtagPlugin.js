@@ -1,4 +1,4 @@
-import { createBasePlugin, hasLinksInBlock } from 'wix-rich-content-editor-common';
+import { createBasePlugin, getLinkRangesInBlock } from 'wix-rich-content-editor-common';
 import { HASHTAG_TYPE } from './types';
 import createHashtagDecorator from './HashtagDecorator';
 import { List } from 'immutable';
@@ -13,7 +13,7 @@ const createHashtagPlugin = (config = {}) => {
   };
   const hashtagProps = { ...settings, theme: hashtagTheme };
 
-  const HashtagDecorator = createHashtagDecorator(hasLinksInBlock, List);
+  const HashtagDecorator = createHashtagDecorator(getLinkRangesInBlock, List);
 
   const decorators = [new HashtagDecorator(hashtagProps)];
 

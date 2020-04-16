@@ -8,12 +8,7 @@ function RichContentViewerWrapper({ pluginTypeMapper }) {
   const initialState = contentState;
 
   const typeMappers = Array.isArray(pluginTypeMapper) ? pluginTypeMapper : [pluginTypeMapper];
-  return (
-    <div>
-      <h1>viewer {`playground`}</h1>
-      <RichContentViewer typeMappers={typeMappers} initialState={initialState} />
-    </div>
-  );
+  return <RichContentViewer typeMappers={typeMappers} initialState={initialState} />;
 }
 
 RichContentViewerWrapper.propTypes = {

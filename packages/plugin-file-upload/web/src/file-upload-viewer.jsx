@@ -135,10 +135,11 @@ class FileUploadViewer extends PureComponent {
   }
 
   render() {
-    const { componentData, theme } = this.props;
+    const { componentData, theme, setComponentUrl } = this.props;
     this.styles = this.styles || mergeStyles({ styles, theme });
 
     const fileUrl = componentData.url || this.state.resolveFileUrl;
+    setComponentUrl?.(fileUrl);
 
     return (
       <div className={this.styles.file_upload_container} data-hook="fileUploadViewer">
@@ -156,6 +157,7 @@ FileUploadViewer.propTypes = {
   error: PropTypes.string,
   settings: PropTypes.object,
   theme: PropTypes.object.isRequired,
+  setComponentUrl: PropTypes.func,
 };
 
 FileUploadViewer.defaultProps = {

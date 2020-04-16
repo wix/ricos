@@ -55,7 +55,7 @@ DividerLine.propTypes = {
   width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
   multilineDistance: PropTypes.number,
   fillParent: PropTypes.bool,
-  isMobile: PropTypes.bool.isRequired,
+  isMobile: PropTypes.bool,
 };
 
 export default DividerLine;

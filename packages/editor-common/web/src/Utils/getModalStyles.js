@@ -142,3 +142,36 @@ export const getModalStyles = ({
     return merge({}, desktopSideBarStyles, ...overrideStyles);
   }
 };
+
+export const getBottomToolbarModalStyles = (
+  buttonRef,
+  { customStyles = null, fullScreen = true, inline = false, isMobile = false } = {}
+) => {
+  const modalStyles = getModalStyles({
+    customStyles,
+    fullScreen,
+    inline,
+    isMobile,
+  });
+  const height = customStyles.content.height.slice(0, 3);
+  const { top, left, right } = buttonRef.getBoundingClientRect();
+  const isAboveButton = top - height - 11 > 0;
+  const isRtl = buttonRef.closest('[dir=rtl]') !== null;
+  const contentStyles = {
+    top: isAboveButton ? top - height - 11 : top + 30,
+    margin: 0,
+    position: 'absolute',
+  };
+  if (isRtl) {
+    contentStyles.right = window.innerWidth - right - 10;
+  } else {
+    contentStyles.left = left - 15;
+  }
+  return {
+    ...modalStyles,
+    content: {
+      ...modalStyles.content,
+      ...contentStyles,
+    },
+  };
+};

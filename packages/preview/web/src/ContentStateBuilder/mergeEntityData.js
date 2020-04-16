@@ -33,6 +33,7 @@ const galleryMerger = (items, entity) => ({
         height: item.height,
       },
       url: item.url,
+      itemId: item.id || item.url,
     })),
   },
 });
@@ -77,6 +78,20 @@ const mapMerger = (mapSettings, entity) => ({
   },
 });
 
+const linkPreviewMerger = ({ url }, entity) => ({
+  ...entity,
+  data: {
+    ...entity.data,
+    config: {
+      ...entity.data.config,
+      link: {
+        ...entity.data.config.link,
+        url,
+      },
+    },
+  },
+});
+
 const mergers = {
   'wix-draft-plugin-image': imageMerger,
   'wix-draft-plugin-gallery': galleryMerger,
@@ -88,6 +103,7 @@ const mergers = {
   'wix-draft-plugin-divider': defaultMerger,
   mention: defaultMerger,
   LINK: defaultMerger,
+  LINK_PREVIEW: linkPreviewMerger,
   'wix-draft-plugin-headers-markdown': defaultMerger,
   'wix-draft-plugin-button': defaultMerger,
   'wix-draft-plugin-html': defaultMerger,

@@ -1,5 +1,5 @@
 const imageDataNormalizer = componentData => {
-  const { width, config, ...rest } = componentData;
+  const { width, config = {}, ...rest } = componentData;
   if (config.size === 'inline' && width && !config.width) {
     return {
       ...rest,

@@ -146,6 +146,21 @@ export const METHOD_PLUGIN_DATA_MAP = Object.freeze({
       },
     },
   },
+  link: {
+    type: 'LINK',
+    mutability: 'IMMUTABLE',
+    data: {},
+  },
+  linkPreview: {
+    type: 'LINK_PREVIEW',
+    mutability: 'IMMUTABLE',
+    data: {
+      config: {
+        size: 'content',
+        alignment: 'center',
+      },
+    },
+  },
 });
 
 export const INTERACTIONS = Object.freeze({

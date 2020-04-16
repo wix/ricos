@@ -1,6 +1,5 @@
-import { KeyBindingUtil } from 'draft-js';
 import { isEqual } from 'lodash';
-import { COMMANDS, MODIFIERS } from 'wix-rich-content-editor-common';
+import { COMMANDS, MODIFIERS, KeyBindingUtil } from 'wix-rich-content-editor-common';
 
 const COMMAND_BY_SHORTCUT = [
   {
@@ -55,12 +54,11 @@ const COMMAND_BY_SHORTCUT = [
   },
 ];
 
-const { hasCommandModifier, isCtrlKeyCommand, isOptionKeyCommand } = KeyBindingUtil;
+const { hasCommandModifier, isOptionKeyCommand } = KeyBindingUtil;
 
 function getModifiers(e) {
   return [
     ...(hasCommandModifier(e) ? [MODIFIERS.COMMAND] : []),
-    ...(isCtrlKeyCommand(e) ? [MODIFIERS.CTRL] : []),
     ...(isOptionKeyCommand(e) ? [MODIFIERS.OPTION] : []),
     ...(e.shiftKey ? [MODIFIERS.SHIFT] : []),
   ];

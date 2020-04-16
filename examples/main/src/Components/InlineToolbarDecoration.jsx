@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { getVisibleSelectionRect } from 'draft-js';
+import { getVisibleSelectionRect } from 'wix-rich-content-editor-common';
 
 import styles from './InlineToolbarDecoration.scss';
 

@@ -1,12 +1,13 @@
 import React from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { BLOCK_TYPES } from 'wix-rich-content-common';
-import redraft from 'redraft';
+import redraft from 'wix-redraft';
 import classNames from 'classnames';
 import { endsWith } from 'lodash';
 import List from '../List';
 import getPluginViewers from '../getPluginViewers';
-import { getTextDirection, kebabToCamelObjectKeys } from './textUtils';
+import { kebabToCamelObjectKeys } from './textUtils';
+import { getTextDirection } from './textDirection';
 import { staticInlineStyleMapper } from '../staticInlineStyleMapper';
 import { combineMappers } from './combineMappers';
 import { getInteractionWrapper, DefaultInteractionWrapper } from './getInteractionWrapper';
@@ -32,7 +33,7 @@ const blockDataToStyle = ({ dynamicStyles }) => kebabToCamelObjectKeys(dynamicSt
 const getInline = (inlineStyleMappers, mergedStyles) =>
   combineMappers([...inlineStyleMappers, staticInlineStyleMapper], mergedStyles);
 
-const getBlocks = (mergedStyles, textDirection, { config }) => {
+const getBlocks = (contentState, mergedStyles, textDirection, context) => {
   const getList = ordered => (items, blockProps) => {
     const fixedItems = items.map(item => (item.length ? item : [' ']));
 
@@ -43,8 +44,8 @@ const getBlocks = (mergedStyles, textDirection, { config }) => {
       mergedStyles,
       textDirection,
       blockProps,
-      getBlockStyleClasses,
       blockDataToStyle,
+      contentState,
     };
     return <List {...props} />;
   };
@@ -56,7 +57,7 @@ const getBlocks = (mergedStyles, textDirection, { config }) => {
 
         const { interactions } = blockProps.data[i];
         const BlockWrapper = Array.isArray(interactions)
-          ? getInteractionWrapper({ interactions, config, mergedStyles })
+          ? getInteractionWrapper({ interactions, context })
           : DefaultInteractionWrapper;
 
         const _child = isEmptyBlock(child) ? <br /> : withDiv ? <div>{child}</div> : child;
@@ -85,6 +86,9 @@ const getBlocks = (mergedStyles, textDirection, { config }) => {
     'header-one': blockFactory('h1', 'headerOne'),
     'header-two': blockFactory('h2', 'headerTwo'),
     'header-three': blockFactory('h3', 'headerThree'),
+    'header-four': blockFactory('h4', 'headerFour'),
+    'header-five': blockFactory('h5', 'headerFive'),
+    'header-six': blockFactory('h6', 'headerSix'),
     'code-block': blockFactory('pre', 'codeBlock'),
     'unordered-list-item': getList(false),
     'ordered-list-item': getList(true),
@@ -92,7 +96,13 @@ const getBlocks = (mergedStyles, textDirection, { config }) => {
 };
 
 const getEntities = (typeMap, pluginProps, styles) => {
-  return getPluginViewers(typeMap, pluginProps, styles);
+  const emojiViewerFn = emojiUnicode => {
+    return <span style={{ fontFamily: 'cursive' }}>{emojiUnicode}</span>;
+  };
+  return {
+    EMOJI_TYPE: emojiViewerFn,
+    ...getPluginViewers(typeMap, pluginProps, styles),
+  };
 };
 
 const normalizeContentState = contentState => ({
@@ -115,6 +125,7 @@ const normalizeContentState = contentState => ({
 
     return {
       ...block,
+      depth: 0,
       data,
       text,
     };
@@ -132,6 +143,9 @@ const redraftOptions = {
       'header-one',
       'header-two',
       'header-three',
+      'header-four',
+      'header-five',
+      'header-six',
     ],
   },
   convertFromRaw: contentState => contentState,
@@ -150,12 +164,11 @@ const convertToReact = (
   if (isEmptyContentState(contentState)) {
     return null;
   }
-
   return redraft(
     normalizeContentState(contentState),
     {
       inline: getInline(inlineStyleMappers, mergedStyles),
-      blocks: getBlocks(mergedStyles, textDirection, entityProps),
+      blocks: getBlocks(contentState, mergedStyles, textDirection, entityProps),
       entities: getEntities(combineMappers(typeMap), entityProps, mergedStyles),
       decorators,
     },

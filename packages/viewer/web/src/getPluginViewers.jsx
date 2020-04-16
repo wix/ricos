@@ -11,7 +11,7 @@ import {
 import { getInteractionWrapper, DefaultInteractionWrapper } from './utils/getInteractionWrapper';
 
 class PluginViewer extends PureComponent {
-  getContainerClassNames = hasLink => {
+  getContainerClassNames = () => {
     const {
       pluginComponent,
       componentData,
@@ -19,12 +19,15 @@ class PluginViewer extends PureComponent {
       context: { theme, isMobile },
     } = this.props;
     const { size, alignment, textWrap, custom } = pluginComponent.classNameStrategies || {};
+    const hasLink = this.componentHasLink();
+    const { html } = componentData;
     return classNames(
       styles.pluginContainerReadOnly,
       {
         [styles.pluginContainerMobile]: isMobile,
         [styles.anchor]: hasLink,
         [theme.anchor]: hasLink && theme.anchor,
+        [styles.embed]: hasLink && html,
       },
       isFunction(alignment)
         ? alignment(componentData, theme, styles, isMobile)
@@ -37,6 +40,10 @@ class PluginViewer extends PureComponent {
         : textWrapClassName(componentData, theme, styles, isMobile),
       isFunction(custom) ? custom(componentData, theme, styles, isMobile) : null
     );
+  };
+
+  componentHasLink = () => {
+    return this.props?.componentData?.config?.link;
   };
 
   /* eslint-disable complexity */
@@ -64,31 +71,38 @@ class PluginViewer extends PureComponent {
 
     if (Component) {
       if (elementType !== 'inline') {
-        const hasLink = componentData.config && componentData.config.link;
-        const ContainerElement = !hasLink ? 'div' : 'a';
-        const containerClassNames = this.getContainerClassNames(hasLink);
+        const { config = {} } = componentData;
+        const hasLink = this.componentHasLink();
+        const ContainerElement = hasLink ? 'a' : 'div';
         let containerProps = {};
         if (hasLink) {
-          const { url, target, rel } = componentData.config.link;
+          const { url, target, rel } = config.link;
           containerProps = {
             href: normalizeUrl(url),
             target: target || anchorTarget || '_self',
             rel: rel || relValue || 'noopener noreferrer',
           };
         }
-        if (componentData.config) {
-          // TODO: more generic logic?
-          if (componentData.config.size === 'inline') {
-            containerProps.style = { width: componentData.config.width };
-          }
-          if (type === 'wix-draft-plugin-html') {
-            const { width: currentWidth } = componentData.config;
-            containerProps.style = { width: currentWidth };
+
+        // TODO: more generic logic?
+        let customStyles;
+        if (config.size === 'inline' || type === 'wix-draft-plugin-html') {
+          customStyles = { width: config.width };
+        }
+        if (type === 'wix-draft-plugin-image') {
+          const { src = {} } = componentData;
+          const { size } = config;
+          if (size === 'original' && src.width) {
+            customStyles = { width: src.width, maxWidth: '100%' };
           }
         }
+        if (customStyles) {
+          containerProps.style = customStyles;
+        }
+
         return (
           <div className={styles.atomic}>
-            <ContainerElement className={containerClassNames} {...containerProps}>
+            <ContainerElement className={this.getContainerClassNames()} {...containerProps}>
               {isFunction(container) ? (
                 <div className={container(theme)}>
                   <Component {...componentProps} />
@@ -125,7 +139,7 @@ PluginViewer.propTypes = {
     t: PropTypes.func.isRequired,
     locale: PropTypes.string.isRequired,
     disabled: PropTypes.bool,
-    shouldRenderOptimizedImages: PropTypes.bool,
+    seoMode: PropTypes.bool,
     siteDomain: PropTypes.string,
     disableRightClick: PropTypes.bool,
   }).isRequired,
@@ -138,22 +152,21 @@ PluginViewer.defaultProps = {
 //return a list of types with a function that wraps the viewer
 const getPluginViewers = (typeMap, context, styles) => {
   const res = {};
-  Object.keys(typeMap).forEach(type => {
+  Object.keys(typeMap).forEach((type, i) => {
     res[type] = (children, entity, { key }) => {
       const pluginComponent = typeMap[type];
       const isInline = pluginComponent.elementType === 'inline';
       const { interactions } = entity;
 
       const ViewerWrapper = isArray(interactions)
-        ? getInteractionWrapper({ interactions, config: context.config, mergedStyles: styles })
+        ? getInteractionWrapper({ interactions, context })
         : DefaultInteractionWrapper;
 
       return (
-        <ViewerWrapper>
+        <ViewerWrapper key={`${i}_${key}`}>
           <PluginViewer
             type={type}
             pluginComponent={pluginComponent}
-            key={key}
             componentData={entity}
             entityIndex={key}
             context={context}

@@ -620,4 +620,67 @@ describe('normalizeInitialState', () => {
       expect(actual).toEqual(goodDataWithVersion);
     });
   });
+
+  describe('gallery normalizer', () => {
+    const commonData = titleString => ({
+      items: [
+        {
+          metadata: {
+            [titleString]: 'My Titleeeeeeeeee',
+          },
+        },
+        {
+          metadata: {},
+        },
+        {
+          metadata: {
+            [titleString]: 'My Titleeeeeeeeee',
+          },
+        },
+      ],
+      styles: {},
+      config: {},
+    });
+
+    const initialState = (VERSION, titleString) => ({
+      blocks: [
+        {
+          key: 'bmpfl',
+          text: ' ',
+          type: 'atomic',
+          inlineStyleRanges: [],
+          entityRanges: [
+            {
+              offset: 0,
+              length: 1,
+              key: 0,
+            },
+          ],
+          data: {},
+        },
+      ],
+      entityMap: {
+        '0': {
+          type: 'wix-draft-plugin-gallery',
+          mutability: 'IMMUTABLE',
+          data: commonData(titleString),
+        },
+      },
+      VERSION,
+    });
+
+    it('should change title to altText when version < 6', () => {
+      const oldContentState = initialState('5.9999.9', 'title');
+      const newContentState = initialState(Version.currentVersion, 'altText');
+      const normalizedState = uut(oldContentState);
+
+      expect(normalizedState).toEqual(newContentState);
+    });
+    it('should not change title to altText when version >= 6', () => {
+      const contentState = initialState('6.0.0', 'title');
+      const newContentState = initialState(Version.currentVersion, 'title');
+
+      expect(uut(contentState)).toEqual(newContentState);
+    });
+  });
 });

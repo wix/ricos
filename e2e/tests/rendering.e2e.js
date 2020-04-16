@@ -1,50 +1,44 @@
 /*global cy Cypress*/
-import { fixtures } from './constants';
-import { DEFAULT_DESKTOP_BROWSERS, DEFAULT_MOBILE_BROWSERS } from '../tests/constants';
+import { DEFAULT_DESKTOP_BROWSERS } from './settings';
+import { testSeoFixtures, testFixtures } from './testFixtures';
 
-const testFixture = fixture =>
-  it(`render ${fixture}`, function() {
-    cy.loadEditorAndViewer(fixture);
-    if (fixture.includes('video')) {
-      cy.waitForVideoToLoad();
-    }
-    cy.eyesCheckWindow(this.test.title);
+const eyesOpener = testName => {
+  cy.eyesOpen({
+    appName: 'Rendering',
+    testName,
+    browser: DEFAULT_DESKTOP_BROWSERS,
   });
+};
 
 describe('editor rendering', () => {
   before(function() {
-    if (Cypress.env('MATCH_CONTENT_STATE')) this.skip();
+    if (Cypress.env('MATCH_CONTENT_STATE') && !Cypress.env('debug')) this.skip();
   });
 
   context('desktop', () => {
     before(function() {
-      cy.eyesOpen({
-        appName: 'Rendering',
-        testName: this.test.parent.title,
-        browser: DEFAULT_DESKTOP_BROWSERS,
-      });
+      eyesOpener(this.test.parent.title);
     });
 
     beforeEach(() => cy.switchToDesktop());
 
     after(() => cy.eyesClose());
 
-    fixtures.forEach(testFixture);
+    testFixtures();
   });
 
-  context('mobile', () => {
+  context('seo', () => {
     before(function() {
-      cy.eyesOpen({
-        appName: 'Rendering',
-        testName: this.test.parent.title,
-        browser: DEFAULT_MOBILE_BROWSERS,
-      });
+      eyesOpener(this.test.parent.title);
     });
 
-    beforeEach(() => cy.switchToMobile());
+    beforeEach(() => {
+      cy.switchToDesktop();
+      cy.switchToSeoMode();
+    });
 
     after(() => cy.eyesClose());
 
-    fixtures.forEach(testFixture);
+    testSeoFixtures();
   });
 });

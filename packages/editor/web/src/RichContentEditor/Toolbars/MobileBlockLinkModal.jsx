@@ -29,7 +29,16 @@ export default class MobileBlockLinkModal extends Component {
   };
 
   render() {
-    const { pubsub, theme, isMobile, anchorTarget, relValue, t, uiSettings } = this.props;
+    const {
+      pubsub,
+      theme,
+      isMobile,
+      anchorTarget,
+      relValue,
+      t,
+      uiSettings,
+      unchangedUrl,
+    } = this.props;
     const componentLink = pubsub.getBlockData({ key: 'componentLink' });
     const { url, target, rel } = componentLink || {};
     const targetBlank = target ? target === '_blank' : anchorTarget === '_blank';
@@ -49,6 +58,7 @@ export default class MobileBlockLinkModal extends Component {
         onDelete={this.deleteLink}
         uiSettings={uiSettings}
         t={t}
+        unchangedUrl={unchangedUrl}
       />
     );
   }
@@ -66,4 +76,5 @@ MobileBlockLinkModal.propTypes = {
   relValue: PropTypes.string,
   t: PropTypes.func,
   uiSettings: PropTypes.object,
+  unchangedUrl: PropTypes.bool,
 };

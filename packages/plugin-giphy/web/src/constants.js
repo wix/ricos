@@ -8,6 +8,9 @@ export const DEFAULTS = Object.freeze({
     size: 'content',
     alignment: 'center',
   },
+  configViewer: {
+    sizes: { desktop: 'original', mobile: 'original' }, // original or downsizedSmall are supported
+  },
 });
 
 export const DEFAULT_RESOLUTION = Object.freeze({ desktop: 'original', mobile: 'original' });

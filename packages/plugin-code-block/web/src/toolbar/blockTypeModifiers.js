@@ -6,7 +6,8 @@ import {
   ContentBlock,
   BlockMapBuilder,
   SelectionState,
-} from 'draft-js';
+  createSelection,
+} from 'wix-rich-content-editor-common';
 import { List } from 'immutable';
 
 export const hasBlockType = (blockType, editorState) => {
@@ -37,7 +38,12 @@ export const toggleBlockTypeAndEnsureSpaces = (blockType, editorState) => {
   const newContentState = setBlockTypeAndMerge(blockType, selectedBlocks, initialContentState);
 
   const newEditorState = EditorState.push(editorState, newContentState, 'change-block-type');
-  return EditorState.forceSelection(newEditorState, editorState.getSelection());
+  const selection = createSelection({
+    blockKey: newContentState.getBlockAfter(anchorKey).key,
+    anchorOffset: 0,
+    focusOffset: 0,
+  });
+  return EditorState.forceSelection(newEditorState, selection);
 };
 
 function getBlockRange(firstKey, lastKey, blocks) {

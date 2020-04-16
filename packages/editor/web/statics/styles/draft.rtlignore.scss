@@ -13,6 +13,7 @@
     .public-DraftEditorPlaceholder-root {
       color: #9197a3;
       position: absolute;
+      direction: ltr;
     }
 
     .public-DraftEditor-content[contenteditable='true'] {
@@ -65,39 +66,6 @@
       @include phone {
         margin-right: 10px;
       }
-    }
-
-    .public-DraftStyleDefault-ltr {
-      /*!rtl:begin:ignore*/
-      direction: ltr;
-      text-align: left;
-      /*!rtl:end:ignore*/
-    }
-
-    .public-DraftStyleDefault-rtl {
-      /*!rtl:begin:ignore*/
-      direction: rtl;
-      text-align: right;
-    }
-
-    .public-DraftStyleDefault-listLTR {
-      /*!rtl:begin:ignore*/
-      direction: ltr;
-      margin-left: 40px;
-    }
-
-    .public-DraftStyleDefault-listRTL {
-      /*!rtl:begin:ignore*/
-      direction: rtl;
-      margin-right: 40px;
-      /*!rtl:end:ignore*/
-    }
-
-    .public-DraftStyleDefault-ol,
-    .public-DraftStyleDefault-ul {
-      margin: 0;
-      padding: 0;
-      direction: ltr;
     }
   }
 }

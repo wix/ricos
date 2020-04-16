@@ -5,12 +5,18 @@ const INLINE_HEADER = {
   ONE: 'inline-header-one',
   TWO: 'inline-header-two',
   THREE: 'inline-header-three',
+  FOUR: 'inline-header-four',
+  FIVE: 'inline-header-five',
+  SIX: 'inline-header-six',
 };
 const INLINE_HEADERS = [INLINE_HEADER.THREE, INLINE_HEADER.TWO, INLINE_HEADER.ONE];
 const INLINE_HEADER_TO_BLOCK = {
   [INLINE_HEADER.ONE]: HEADER_BLOCK.ONE,
   [INLINE_HEADER.TWO]: HEADER_BLOCK.TWO,
   [INLINE_HEADER.THREE]: HEADER_BLOCK.THREE,
+  [INLINE_HEADER.FOUR]: HEADER_BLOCK.FOUR,
+  [INLINE_HEADER.FIVE]: HEADER_BLOCK.FIVE,
+  [INLINE_HEADER.SIX]: HEADER_BLOCK.SIX,
 };
 
 /**

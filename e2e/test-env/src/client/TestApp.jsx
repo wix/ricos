@@ -2,26 +2,36 @@ import React, { PureComponent } from 'react';
 import Editor from '../../../../examples/main/shared/editor/Editor';
 import Viewer from '../../../../examples/main/shared/viewer/Viewer';
 import PropTypes from 'prop-types';
-
+import windowContentStateHoc from './WindowContentStateHoc';
 class TestApp extends PureComponent {
   renderEditor = () => {
-    const { initialState, onEditorChange, locale, localeResource, isMobile } = this.props;
+    const {
+      editorState,
+      onEditorChange,
+      locale,
+      localeResource,
+      isMobile,
+      testAppPlugins,
+    } = this.props;
     return (
       <Editor
         onChange={onEditorChange}
-        initialState={initialState}
+        editorState={editorState}
         isMobile={isMobile}
         shouldMockUpload
         locale={locale}
         localeResource={localeResource}
         mockImageIndex={1}
+        testAppPlugins={testAppPlugins.split(',')}
       />
     );
   };
 
   renderViewer = () => {
-    const { isMobile, viewerState, locale } = this.props;
-    return <Viewer initialState={viewerState} isMobile={isMobile} locale={locale} />;
+    const { isMobile, contentState, locale, seoMode } = this.props;
+    return (
+      <Viewer initialState={contentState} isMobile={isMobile} locale={locale} seoMode={seoMode} />
+    );
   };
 
   render() {
@@ -44,10 +54,12 @@ class TestApp extends PureComponent {
 TestApp.propTypes = {
   isMobile: PropTypes.bool.isRequired,
   locale: PropTypes.string,
-  viewerState: PropTypes.object,
-  initialState: PropTypes.object,
+  contentState: PropTypes.object,
+  editorState: PropTypes.object,
   localeResource: PropTypes.object,
   onEditorChange: PropTypes.func,
+  seoMode: PropTypes.bool,
+  testAppPlugins: PropTypes.string,
 };
 
-export default TestApp;
+export default windowContentStateHoc(TestApp);

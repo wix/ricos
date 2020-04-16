@@ -1,6 +1,7 @@
 import { includes } from 'lodash';
 import createBaseComponent from './createBaseComponent';
-import createToolbar from './createBaseToolbar';
+import createAtomicPluginToolbar from './toolbars/createAtomicPluginToolbar';
+import createInlinePluginToolbar from './toolbars/createInlinePluginToolbar';
 import createInsertPluginButton from './createBaseInsertPluginButton';
 import { deleteBlock, setEntityData } from '../Utils/draftUtils';
 import { simplePubsub } from '../Utils/simplePubsub';
@@ -38,6 +39,7 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
     commonPubsub,
     defaultPluginData,
     pluginDefaults,
+    onComponentMount,
     initialIntent,
     languageDir,
     locale,
@@ -50,9 +52,24 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
   } = config;
   defaultPluginData && (pluginDefaults[config.type] = defaultPluginData);
   const toolbarTheme = { ...getToolbarTheme(config.theme, 'plugin'), ...config.theme };
+  const InlinePluginToolbar =
+    config.toolbar?.InlinePluginToolbarButtons &&
+    createInlinePluginToolbar({
+      buttons: {
+        all: config.toolbar.InlinePluginToolbarButtons,
+        hidden: settings?.toolbar?.hidden || [],
+      },
+      theme: { ...toolbarTheme, ...config.theme },
+      commonPubsub,
+      isMobile,
+      t,
+      name: config.toolbar.name,
+      getToolbarSettings: config.getToolbarSettings,
+      languageDir,
+    });
   const Toolbar =
     config?.toolbar?.InlineButtons &&
-    createToolbar({
+    createAtomicPluginToolbar({
       buttons: {
         all: config.toolbar.InlineButtons,
         hidden: settings?.toolbar?.hidden || [],
@@ -125,6 +142,7 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
       isMobile,
       getEditorBounds,
       disableRightClick,
+      onComponentMount,
       initialIntent,
       languageDir,
       locale,
@@ -169,6 +187,7 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
   };
 
   const commonProps = {
+    InlinePluginToolbar,
     Toolbar,
     InsertPluginButtons,
     InlineModals,
@@ -177,17 +196,11 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
     customStyleFn,
   };
 
-  if (underlyingPlugin) {
-    return {
-      ...commonProps,
-      ...underlyingPlugin,
-    };
-  } else {
-    return {
-      ...commonProps,
-      blockRendererFn,
-    };
-  }
+  return {
+    ...commonProps,
+    blockRendererFn,
+    ...(underlyingPlugin || {}),
+  };
 };
 
 export default createBasePlugin;

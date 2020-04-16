@@ -27,14 +27,12 @@ export const saveStateToStorage = debounce(state => {
   local.set(getStorageKey(), stateToStore);
 }, 1000);
 
-export const getStateFromObject = obj => {
+export const normalize = json => {
   const { anchorTarget, relValue } = CONSTS;
-  const normalizedState = normalizeInitialState(obj, {
+  return normalizeInitialState(json, {
     anchorTarget,
     relValue,
   });
-  const editorState = createWithContent(convertFromRaw(normalizedState));
-  return { editorState, viewerState: normalizedState };
 };
 
 export const getBaseUrl = () => {
@@ -57,4 +55,32 @@ function getUrlParameter(name) {
   var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
   var results = regex.exec(window.location.search);
   return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+}
+
+export function disableBrowserBackButton() {
+  (function(global) {
+    if (typeof global === 'undefined') {
+      throw new Error('window is undefined');
+    }
+
+    var _hash = '!';
+    var noBackPlease = function() {
+      global.location.href += '#';
+
+      // making sure we have the fruit available for juice (^__^)
+      global.setTimeout(function() {
+        global.location.href += '!';
+      }, 50);
+    };
+
+    global.onhashchange = function() {
+      if (global.location.hash !== _hash) {
+        global.location.hash = _hash;
+      }
+    };
+
+    global.onload = function() {
+      noBackPlease();
+    };
+  })(window);
 }

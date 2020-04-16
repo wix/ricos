@@ -409,13 +409,7 @@ Object {
       "data": Object {},
       "depth": 0,
       "entityRanges": Array [],
-      "inlineStyleRanges": Array [
-        Object {
-          "length": 7,
-          "offset": 0,
-          "style": "UNDERLINE",
-        },
-      ],
+      "inlineStyleRanges": Array [],
       "key": "50k2j",
       "text": "Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition.",
       "type": "unstyled",

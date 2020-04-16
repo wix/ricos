@@ -33,7 +33,7 @@ class LinkPanelContainer extends PureComponent {
 
   onDone = () => {
     const { linkPanelValues } = this.state;
-    if (linkPanelValues.isValid && linkPanelValues.url) {
+    if ((linkPanelValues.isValid && linkPanelValues.url) || this.props.unchangedUrl) {
       this.props.onDone(linkPanelValues);
     } else if (linkPanelValues.url === '') {
       this.onDelete();
@@ -42,7 +42,7 @@ class LinkPanelContainer extends PureComponent {
 
   onDelete = () => {
     this.props.onDelete();
-    this.onCancel();
+    this.props.hidePanel();
   };
 
   onCancel = () => this.props.onCancel();
@@ -59,6 +59,7 @@ class LinkPanelContainer extends PureComponent {
       ariaProps,
       tabIndex,
       uiSettings,
+      unchangedUrl,
     } = this.props;
     const doneButtonText = t('LinkPanelContainer_DoneButton');
     const cancelButtonText = t('LinkPanelContainer_CancelButton');
@@ -99,6 +100,7 @@ class LinkPanelContainer extends PureComponent {
             showRelValueCheckbox={showRelValueCheckbox}
             t={t}
             ariaProps={linkPanelAriaProps}
+            unchangedUrl={unchangedUrl}
             {...uiSettings.linkPanel}
           />
           <div className={styles.linkPanel_actionsDivider} role="separator" />
@@ -148,6 +150,7 @@ LinkPanelContainer.propTypes = {
   onDone: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
   onDelete: PropTypes.func.isRequired,
+  hidePanel: PropTypes.func.isRequired,
   url: PropTypes.string,
   targetBlank: PropTypes.bool,
   anchorTarget: PropTypes.string,
@@ -161,6 +164,7 @@ LinkPanelContainer.propTypes = {
   ariaProps: PropTypes.object,
   tabIndex: PropTypes.number,
   uiSettings: PropTypes.object,
+  unchangedUrl: PropTypes.bool,
 };
 
 export default LinkPanelContainer;

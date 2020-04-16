@@ -20,7 +20,7 @@ class Tooltip extends React.Component {
   rebuildTooltips = debounce(ReactTooltip.rebuild, 50);
 
   componentDidMount() {
-    this.props.shouldRebuildOnUpdate() && this.rebuildTooltips();
+    this.rebuildTooltips();
   }
 
   componentDidUpdate() {

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { RichUtils } from 'draft-js';
+import { RichUtils } from 'wix-rich-content-editor-common';
 import TextButton from '../TextButton';
 
 export default ({ blockTypes, Icons, InactiveIcon = null, tooltipTextKey }) =>

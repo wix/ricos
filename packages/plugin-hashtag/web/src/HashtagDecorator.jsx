@@ -1,12 +1,15 @@
-import { range } from 'lodash';
 import Hashtag from './HashtagComponent';
 import hashtagRegexes from './hashtagRegexes';
 
-export default (hasLinksInBlock, immutableList) =>
+export default (getLinkRangesInBlock, immutableList) =>
   class HashtagDecorator {
     constructor(componentProps) {
       this.componentProps = componentProps;
     }
+
+    isOverlapping = (range, start, end) => {
+      return (start <= range[0] && end >= range[0]) || (range[0] <= start && range[1] >= start);
+    };
 
     getDecorations(block, contentState) {
       const key = block.getKey();
@@ -14,12 +17,7 @@ export default (hasLinksInBlock, immutableList) =>
       const type = block.getType();
       const decorations = Array(text.length).fill(null);
 
-      if (
-        type !== 'code-block' &&
-        text &&
-        !hasLinksInBlock(block, contentState) &&
-        text.match(hashtagRegexes.hashSigns)
-      ) {
+      if (type !== 'code-block' && text && text.match(hashtagRegexes.hashSigns)) {
         text.replace(
           hashtagRegexes.validHashtag,
           (match, before, hash, hashText, offset, chunk) => {
@@ -29,9 +27,15 @@ export default (hasLinksInBlock, immutableList) =>
             }
             const start = offset + before.length;
             const end = start + hashText.length + 1;
-            const htagId = `htag${start}${end}`;
-            const tagRange = range(start, end, 1);
-            tagRange.forEach(i => (decorations[i] = `${key}-${htagId}`));
+            const linkRanges = getLinkRangesInBlock(block, contentState);
+            const overlap = linkRanges.some(range => this.isOverlapping(range, start, end));
+            if (!overlap) {
+              const htagId = `htag-${key}-${start}${end}`;
+              // eslint-disable-next-line fp/no-loops
+              for (let i = start; i < end; i++) {
+                decorations[i] = htagId;
+              }
+            }
           }
         );
       }

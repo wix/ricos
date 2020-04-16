@@ -5,3 +5,4 @@ export { Modals, ModalsMap } from './modals';
 export { getColor, isTextColor, isTextHighlight } from './text-decorations-utils';
 export { default as textColorInlineStyleMapper } from './textColorInlineStyleMapper';
 export { default as textHighlightInlineStyleMapper } from './textHighlightInlineStyleMapper';
+export { pluginTextColor, pluginTextHighlight } from './editor';

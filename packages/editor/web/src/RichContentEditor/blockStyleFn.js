@@ -8,9 +8,14 @@ const types = {
   'header-one': 'headerOne',
   'header-two': 'headerTwo',
   'header-three': 'headerThree',
+  'header-four': 'headerFour',
+  'header-five': 'headerFive',
+  'header-six': 'headerSix',
   indent: 'indent',
   atomic: 'atomic',
   'code-block': 'codeBlock',
+  'ordered-list-item': 'orderedList',
+  'unordered-list-item': 'unorderedList',
 };
 
 export default (theme, styleToClass) => {

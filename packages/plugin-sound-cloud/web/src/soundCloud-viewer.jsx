@@ -27,7 +27,8 @@ class SoundCloudViewer extends Component {
 
   render() {
     this.styles = mergeStyles({ styles, theme: this.props.theme });
-    const { componentData, width, height, controls, disabled } = this.props;
+    const { componentData, width, height, controls, disabled, setComponentUrl } = this.props;
+    setComponentUrl?.(componentData.src);
     const { isLoaded } = this.state;
     const props = { width, height, controls, disabled };
     return (
@@ -52,6 +53,7 @@ SoundCloudViewer.propTypes = {
   isLoaded: PropTypes.bool,
   theme: PropTypes.object.isRequired,
   disabled: PropTypes.bool,
+  setComponentUrl: PropTypes.func,
 };
 
 SoundCloudViewer.defaultProps = {

@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { TextInput, CloseIcon, Button } from 'wix-rich-content-editor-common';
+import { TextInput, CloseIcon, Button, KEYS_CHARCODE } from 'wix-rich-content-editor-common';
 import { mergeStyles } from 'wix-rich-content-common';
 import styles from '../../statics/styles/video-selection-input-modal.scss';
 import ReactPlayer from 'react-player';
@@ -47,7 +47,7 @@ export default class VideoSelectionInputModal extends Component {
   };
 
   handleKeyPress = e => {
-    if (e.charCode === 13) {
+    if (e.charCode === KEYS_CHARCODE.ENTER) {
       this.onUrlVideoSelection();
     }
   };
@@ -61,19 +61,23 @@ export default class VideoSelectionInputModal extends Component {
   loadLocalVideo = file => {
     const src = URL.createObjectURL(file);
     const { componentData } = this.props;
-    this.onConfirm({ ...componentData, src, isCustomVideo: true });
+    this.onConfirm({ ...componentData, src, isCustomVideo: true, tempData: true });
   };
 
   updateVideoComponent = ({ data }, componentData, isCustomVideo = false) => {
     const { pathname, thumbnail, url } = data;
     const src = pathname ? { pathname, thumbnail } : url;
-    this.updateComponentData({ src, isCustomVideo });
+    this.setComponentData({ ...componentData, src, isCustomVideo, tempData: undefined });
   };
 
   addVideoComponent = ({ data }, componentData, isCustomVideo = false) => {
     const { pathname, thumbnail, url } = data;
     const src = pathname ? { pathname, thumbnail } : url;
     this.onConfirm({ ...componentData, src, isCustomVideo });
+  };
+
+  setComponentData = data => {
+    this.props.pubsub.set('componentData', data);
   };
 
   updateComponentData = data => {
@@ -100,6 +104,7 @@ export default class VideoSelectionInputModal extends Component {
       isMobile,
       languageDir,
       componentData,
+      theme,
     } = this.props;
     const { styles } = this;
     const hasCustomFileUpload = handleFileUpload || handleFileSelection;
@@ -188,7 +193,7 @@ export default class VideoSelectionInputModal extends Component {
               onClick={this.onUrlVideoSelection}
               ariaProps={!this.state.url && { disabled: 'disabled' }}
               dataHook="videoUploadModalAddButton"
-              theme={styles}
+              theme={{ ...styles, ...theme }}
             >
               {t('VideoUploadModal_AddButtonText')}
             </Button>

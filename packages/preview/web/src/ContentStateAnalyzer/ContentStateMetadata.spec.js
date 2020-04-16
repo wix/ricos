@@ -376,6 +376,105 @@ describe('content state text metadata', () => {
         },
         entities: {},
       },
+      {
+        block: {
+          key: '5r3j6',
+          text: 'block with link.com',
+          type: 'unstyled',
+          depth: 0,
+          inlineStyleRanges: [
+            {
+              offset: 11,
+              length: 8,
+              style: 'UNDERLINE',
+            },
+          ],
+          entityRanges: [
+            {
+              offset: 11,
+              length: 8,
+              key: '_8',
+            },
+          ],
+          data: {
+            dynamicStyles: {
+              'line-height': '3',
+              'padding-top': '2px',
+              'padding-bottom': '3px',
+            },
+          },
+        },
+        entities: {
+          _8: {
+            type: 'LINK',
+            mutability: 'MUTABLE',
+            data: {
+              url: 'link.com',
+              target: '_self',
+              rel: 'noopener',
+            },
+          },
+        },
+      },
+      {
+        block: {
+          key: 'b1md3',
+          text: 'block with more links',
+          type: 'unstyled',
+          depth: 0,
+          inlineStyleRanges: [
+            {
+              offset: 11,
+              length: 4,
+              style: 'UNDERLINE',
+            },
+            {
+              offset: 16,
+              length: 5,
+              style: 'UNDERLINE',
+            },
+          ],
+          entityRanges: [
+            {
+              offset: 11,
+              length: 4,
+              key: '_9',
+            },
+            {
+              offset: 16,
+              length: 5,
+              key: '_10',
+            },
+          ],
+          data: {
+            dynamicStyles: {
+              'line-height': '3',
+              'padding-top': '2px',
+              'padding-bottom': '3px',
+            },
+          },
+        },
+        entities: {
+          _9: {
+            type: 'LINK',
+            mutability: 'MUTABLE',
+            data: {
+              url: 'more.com',
+              target: '_blank',
+              rel: 'noopener',
+            },
+          },
+          _10: {
+            type: 'LINK',
+            mutability: 'MUTABLE',
+            data: {
+              url: 'links.com',
+              target: '_blank',
+              rel: 'noopener',
+            },
+          },
+        },
+      },
     ]);
   });
 
@@ -590,6 +689,105 @@ describe('content state text metadata', () => {
             },
           },
           entities: {},
+        },
+        {
+          block: {
+            key: '5r3j6',
+            text: 'block with link.com',
+            type: 'unstyled',
+            depth: 0,
+            inlineStyleRanges: [
+              {
+                offset: 11,
+                length: 8,
+                style: 'UNDERLINE',
+              },
+            ],
+            entityRanges: [
+              {
+                offset: 11,
+                length: 8,
+                key: '_8',
+              },
+            ],
+            data: {
+              dynamicStyles: {
+                'line-height': '3',
+                'padding-top': '2px',
+                'padding-bottom': '3px',
+              },
+            },
+          },
+          entities: {
+            _8: {
+              type: 'LINK',
+              mutability: 'MUTABLE',
+              data: {
+                url: 'link.com',
+                target: '_self',
+                rel: 'noopener',
+              },
+            },
+          },
+        },
+        {
+          block: {
+            key: 'b1md3',
+            text: 'block with more links',
+            type: 'unstyled',
+            depth: 0,
+            inlineStyleRanges: [
+              {
+                offset: 11,
+                length: 4,
+                style: 'UNDERLINE',
+              },
+              {
+                offset: 16,
+                length: 5,
+                style: 'UNDERLINE',
+              },
+            ],
+            entityRanges: [
+              {
+                offset: 11,
+                length: 4,
+                key: '_9',
+              },
+              {
+                offset: 16,
+                length: 5,
+                key: '_10',
+              },
+            ],
+            data: {
+              dynamicStyles: {
+                'line-height': '3',
+                'padding-top': '2px',
+                'padding-bottom': '3px',
+              },
+            },
+          },
+          entities: {
+            _9: {
+              type: 'LINK',
+              mutability: 'MUTABLE',
+              data: {
+                url: 'more.com',
+                target: '_blank',
+                rel: 'noopener',
+              },
+            },
+            _10: {
+              type: 'LINK',
+              mutability: 'MUTABLE',
+              data: {
+                url: 'links.com',
+                target: '_blank',
+                rel: 'noopener',
+              },
+            },
+          },
         },
       ],
     ]);
@@ -806,18 +1004,21 @@ describe('content state media metadata', () => {
       height: 2800,
       type: 'image',
       url: '8bb438_e78b371c75ce42de8719dccfc97298a4.jpg',
+      id: '8bb438_e78b371c75ce42de8719dccfc97298a4.jpg',
       width: 4200,
     },
     {
       height: 1280,
       type: 'image',
       url: '8bb438_281af3d3281f4584a5a864c6c60f3a00.jpg',
+      id: '8bb438_281af3d3281f4584a5a864c6c60f3a00.jpg',
       width: 1920,
     },
     {
       height: 1081,
       type: 'image',
       url: '8bb438_0795e40ac4db438a8a723ea98dbeda10.jpg',
+      id: '8bb438_0795e40ac4db438a8a723ea98dbeda10.jpg',
       width: 1621,
     },
     {
@@ -848,6 +1049,22 @@ describe('content state media metadata', () => {
       url: 'https://media3.giphy.com/media/uL0lBBzFn98eQ/giphy.gif',
       width: 360,
     },
+    {
+      type: 'link',
+      url: 'reddit.com',
+    },
+    {
+      type: 'link',
+      url: 'link.com',
+    },
+    {
+      type: 'link',
+      url: 'more.com',
+    },
+    {
+      type: 'link',
+      url: 'links.com',
+    },
   ];
 
   it('should return all the image data', () => {
@@ -864,5 +1081,9 @@ describe('content state media metadata', () => {
 
   it('should return all the maps data', () => {
     expect(metadata.maps).toEqual(mediaData.filter(({ type }) => type === 'map'));
+  });
+
+  it('should return all the links data', () => {
+    expect(metadata.links).toEqual(mediaData.filter(({ type }) => type === 'link'));
   });
 });

@@ -3,11 +3,9 @@ import {
   PLUGIN_COMPONENT,
   PLUGIN_TOOLBAR_BUTTONS,
   DIVIDER_DROPDOWN_OPTIONS,
-  GALLERY_SETTINGS,
-  GALLERY_IMAGE_SETTINGS,
-  IMAGE_SETTINGS,
+  STATIC_TOOLBAR_BUTTONS,
 } from '../cypress/dataHooks';
-import { DEFAULT_DESKTOP_BROWSERS } from '../tests/constants';
+import { DEFAULT_DESKTOP_BROWSERS } from './settings';
 
 const eyesOpen = ({
   test: {
@@ -21,226 +19,23 @@ const eyesOpen = ({
   });
 
 describe('plugins', () => {
-  beforeEach(function() {
-    cy.switchToDesktop();
-  });
-
   afterEach(() => cy.matchContentSnapshot());
-
-  context('image', () => {
-    before(function() {
-      eyesOpen(this);
-    });
-
-    beforeEach('load editor', () => cy.loadEditorAndViewer('images'));
-
-    after(() => cy.eyesClose());
-
-    it('render image toolbar and settings', function() {
-      cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE).shrinkPlugin();
-      cy.eyesCheckWindow(this.test.title + '  - plugin toolbar');
-      cy.openImageSettings();
-      cy.get(`[data-hook=${IMAGE_SETTINGS.PREVIEW}]:first`);
-      cy.eyesCheckWindow(this.test.title + ' - settings');
-      cy.addImageTitle();
-      cy.eyesCheckWindow(this.test.title + ' - add image title');
-      cy.editImageTitle();
-      cy.eyesCheckWindow(this.test.title + ' - in plugin editing');
-      cy.openImageSettings(false).deleteImageTitle();
-      cy.eyesCheckWindow(this.test.title + ' - delete image title');
-      cy.openImageSettings(false).addImageLink();
-      cy.eyesCheckWindow(this.test.title + ' - add a link');
-    });
-  });
-
-  context('full screen', () => {
-    before(function() {
-      eyesOpen(this);
-    });
-
-    after(() => cy.eyesClose());
-
-    context('image full screen', () => {
-      beforeEach('load editor', () => cy.loadEditorAndViewer('images'));
-
-      it('expand image on full screen', function() {
-        cy.get(`[data-hook=${PLUGIN_COMPONENT.IMAGE}]:last`)
-          .parent()
-          .click();
-        cy.eyesCheckWindow({ tag: this.test.title, target: 'window', fully: false });
-      });
-    });
-
-    context('gallery full screen', () => {
-      beforeEach('load editor', () =>
-        cy
-          .loadEditorAndViewer('gallery')
-          .get(`[data-hook=${'image-item'}]:first`)
-          .get(`[data-hook=${'image-item'}]`)
-          .eq(1)
-      );
-
-      it('expand gallery image on full screen', function() {
-        cy.get(`[data-hook=${'image-item'}]:last`)
-          .parent()
-          .click();
-        cy.eyesCheckWindow({ tag: this.test.title, target: 'window', fully: false });
-      });
-    });
-  });
-
-  context('gallery', () => {
-    before(function() {
-      eyesOpen(this);
-    });
-
-    after(() => cy.eyesClose());
-
-    it('render gallery plugin', function() {
-      cy.loadEditorAndViewer('gallery')
-        .get(`[data-hook=${'image-item'}]:first`)
-        .get(`[data-hook=${'image-item'}]`)
-        .eq(1);
-      cy.openPluginToolbar(PLUGIN_COMPONENT.GALLERY).shrinkPlugin();
-      cy.eyesCheckWindow(this.test.title + ' toolbar');
-      cy.openGalleryAdvancedSettings();
-      cy.eyesCheckWindow(this.test.title + ' settings');
-    });
-
-    it('render gallery out of view', function() {
-      cy.loadEditorAndViewer('gallery-out-of-view');
-      cy.eyesCheckWindow(`${this.test.title} - out of view`);
-      cy.scrollTo('bottom');
-      cy.eyesCheckWindow(`${this.test.title} - in view`);
-    });
-
-    context('organize media', () => {
-      it('allow to manipulate the media items', function() {
-        const firstImage = `[data-hook=${GALLERY_SETTINGS.IMAGE}]:first`;
-        const anyImage = `[data-hook=${GALLERY_SETTINGS.IMAGE}]`;
-        cy.loadEditorAndViewer('gallery')
-          .openPluginToolbar(PLUGIN_COMPONENT.GALLERY)
-          .shrinkPlugin()
-          .get(`[data-hook=${'image-item'}]:first`)
-          .get(`[data-hook=${'image-item'}]`)
-          .eq(1)
-          .openGalleryAdvancedSettings()
-          .openGallerySettings()
-          .get(firstImage)
-          .get(anyImage)
-          .eq(1);
-        cy.eyesCheckWindow(this.test.parent.title + ' - render settings');
-        cy.get(firstImage).click();
-        cy.get(`[data-hook=${GALLERY_SETTINGS.DELETE}]`);
-        cy.eyesCheckWindow(this.test.parent.title + ' - select an item');
-        cy.get(`[data-hook=${GALLERY_SETTINGS.SELECT_ALL}]`).click();
-        cy.eyesCheckWindow(this.test.parent.title + ' - select all items');
-        cy.get(`[data-hook=${GALLERY_SETTINGS.DESELECT}]`).click();
-        cy.dragAndDrop(firstImage, anyImage, 1);
-        cy.eyesCheckWindow(this.test.parent.title + ' - deselect items');
-        cy.get(firstImage).click();
-        cy.get(`[data-hook=${GALLERY_SETTINGS.DELETE}]`).click();
-        cy.get(firstImage);
-        cy.eyesCheckWindow(this.test.parent.title + ' - delete an item');
-        cy.get(`[data-hook=${GALLERY_SETTINGS.SELECT_ALL}]`).click();
-        cy.get(`[data-hook=${GALLERY_SETTINGS.DELETE}]`).click();
-        cy.eyesCheckWindow(this.test.parent.title + ' - delete all items');
-      });
-    });
-
-    context('media settings', () => {
-      it('allow to update media content', function() {
-        cy.loadEditorAndViewer('gallery')
-          .openPluginToolbar(PLUGIN_COMPONENT.GALLERY)
-          .shrinkPlugin()
-          .get(`[data-hook=${'image-item'}]:first`)
-          .get(`[data-hook=${'image-item'}]`)
-          .eq(1)
-          .openGalleryAdvancedSettings()
-          .openGallerySettings()
-          .openGalleryImageSettings()
-          .get(`[data-hook=${GALLERY_IMAGE_SETTINGS.PREVIEW}]:first`);
-        cy.eyesCheckWindow(this.test.parent.title + ' - render item settings');
-        cy.get(`[data-hook=${GALLERY_IMAGE_SETTINGS.DELETE}]`).click({ force: true });
-        cy.get(`[data-hook=${GALLERY_IMAGE_SETTINGS.PREVIEW}]:first`);
-        cy.eyesCheckWindow(this.test.parent.title + ' - delete a media item');
-        cy.get(`[data-hook=${GALLERY_IMAGE_SETTINGS.DELETE}]`).click({ force: true });
-        cy.get(`[data-hook=${GALLERY_SETTINGS.UPLOAD}]`);
-        cy.eyesCheckWindow(this.test.parent.title + ' - delete all items');
-      });
-      // TODO: title and link image tests
-      // // eslint-disable-next-line mocha/no-skipped-tests
-      // it.skip('allow to add a title', function() {
-      //   cy.addGalleryImageTitle().checkTitle();
-      //   cy.eyesCheckWindow(this.test.parent.title + ' - ' + this.test.title);
-      // });
-    });
-  });
-
-  context('video', () => {
-    before(function() {
-      eyesOpen(this);
-    });
-
-    beforeEach('load editor', () => cy.loadEditorAndViewer('empty'));
-
-    after(() => cy.eyesClose());
-
-    it('render upload modal', function() {
-      cy.openVideoUploadModal();
-      cy.eyesCheckWindow(this.test.title);
-    });
-
-    it('enable to add a video from URI', function() {
-      cy.openVideoUploadModal().addVideoFromURI();
-      cy.shrinkPlugin();
-      cy.waitForVideoToLoad();
-      cy.focusEditor().enterParagraphs(['Will this fix the flakiness?']);
-      cy.eyesCheckWindow(this.test.title);
-    });
-
-    // TODO: remove skip once custom mock upload is stablized
-    // eslint-disable-next-line mocha/no-skipped-tests
-    it.skip('enable to add a custom video', function() {
-      cy.openVideoUploadModal().addCustomVideo();
-      cy.waitForVideoToLoad();
-      cy.shrinkPlugin();
-      cy.eyesCheckWindow(this.test.title);
-    });
-  });
-
-  context('soundcloud', () => {
-    before(function() {
-      eyesOpen(this);
-    });
-
-    beforeEach('load editor', () => cy.loadEditorAndViewer('empty'));
-
-    after(() => cy.eyesClose());
-
-    it('render upload modal', function() {
-      cy.openSoundCloudModal();
-      cy.eyesCheckWindow(this.test.title);
-    });
-
-    it('enable to add a soundcloud URI', function() {
-      cy.openSoundCloudModal().addSoundCloud();
-      cy.waitForVideoToLoad();
-      cy.shrinkPlugin();
-      cy.focusEditor().enterParagraphs(['Will this fix the flakiness?']);
-      cy.eyesCheckWindow(this.test.title);
-    });
-  });
 
   context('html', () => {
     before(function() {
       eyesOpen(this);
     });
 
+    beforeEach('load editor', () => {
+      cy.switchToDesktop();
+    });
+
     after(() => cy.eyesClose());
 
     it('render html plugin toolbar', function() {
-      cy.loadEditorAndViewer('empty').addHtml();
+      cy.loadEditorAndViewer('empty')
+        .addHtml()
+        .waitForHtmlToLoad();
       cy.get(`[data-hook*=${PLUGIN_TOOLBAR_BUTTONS.EDIT}]`)
         .click({ multiple: true })
         .click();
@@ -253,9 +48,13 @@ describe('plugins', () => {
       eyesOpen(this);
     });
 
+    beforeEach('load editor', () => {
+      cy.switchToDesktop();
+    });
+
     after(() => cy.eyesClose());
 
-    it('render plugin toolbar and change styling', function() {
+    it('render plugin toolbar and change styling', () => {
       cy.loadEditorAndViewer('divider')
         .openPluginToolbar(PLUGIN_COMPONENT.DIVIDER)
         .openDropdownMenu();
@@ -282,32 +81,17 @@ describe('plugins', () => {
     });
   });
 
-  context('gif', () => {
-    before('load editor', function() {
-      eyesOpen(this);
-      cy.loadEditorAndViewer('gif');
-    });
-
-    after(() => cy.eyesClose());
-
-    it('render giphy plugin toolbar', function() {
-      cy.openPluginToolbar(PLUGIN_COMPONENT.GIF).clickToolbarButton(
-        PLUGIN_TOOLBAR_BUTTONS.SMALL_CENTER
-      );
-      cy.get(`button[data-hook=${PLUGIN_TOOLBAR_BUTTONS.REPLACE}][tabindex=0]`).click();
-      cy.eyesCheckWindow(this.test.title);
-    });
-  });
-
   context('map', () => {
     before('load editor', function() {
       eyesOpen(this);
+      cy.switchToDesktop();
       cy.loadEditorAndViewer('map');
+      cy.get('.dismissButton').eq(1);
     });
 
     after(() => cy.eyesClose());
 
-    it('render map plugin toolbar and settings', function() {
+    it('render map plugin toolbar and settings', () => {
       cy.openPluginToolbar(PLUGIN_COMPONENT.MAP);
       cy.eyesCheckWindow('render map plugin toolbar');
       cy.openMapSettings();
@@ -319,6 +103,7 @@ describe('plugins', () => {
   context('file-upload', () => {
     before('load editor', function() {
       eyesOpen(this);
+      cy.switchToDesktop();
       cy.loadEditorAndViewer('file-upload');
     });
 
@@ -333,6 +118,7 @@ describe('plugins', () => {
   context('drag and drop', () => {
     before('load editor', function() {
       eyesOpen(this);
+      cy.switchToDesktop();
       cy.loadEditorAndViewer('dragAndDrop');
     });
 
@@ -354,6 +140,10 @@ describe('plugins', () => {
       eyesOpen(this);
     });
 
+    beforeEach('load editor', () => {
+      cy.switchToDesktop();
+    });
+
     after(() => cy.eyesClose());
 
     function testAtomicBlockAlignment(align) {
@@ -366,5 +156,108 @@ describe('plugins', () => {
     testAtomicBlockAlignment('left');
     testAtomicBlockAlignment('center');
     testAtomicBlockAlignment('right');
+  });
+
+  context('link preview', () => {
+    before(function() {
+      eyesOpen(this);
+    });
+    after(() => cy.eyesClose());
+
+    beforeEach('load editor', () => cy.loadEditorAndViewer('link-preview', 'all'));
+
+    it('change link preview settings', function() {
+      cy.openPluginToolbar(PLUGIN_COMPONENT.LINK_PREVIEW);
+      cy.setLinkSettings();
+      cy.triggerLinkPreviewViewerUpdate();
+      cy.eyesCheckWindow(this.test.title);
+    });
+    it('convert link preview to regular link', function() {
+      cy.openPluginToolbar(PLUGIN_COMPONENT.LINK_PREVIEW);
+      cy.clickToolbarButton('baseToolbarButton_replaceToLink');
+      cy.triggerLinkPreviewViewerUpdate();
+      cy.eyesCheckWindow(this.test.title);
+    });
+    it('backspace key should convert link preview to regular link', function() {
+      cy.focusEditor()
+        .type('{downarrow}{downarrow}')
+        .type('{backspace}');
+      cy.triggerLinkPreviewViewerUpdate();
+      cy.eyesCheckWindow(this.test.title);
+    });
+    it('delete link preview', function() {
+      cy.openPluginToolbar(PLUGIN_COMPONENT.LINK_PREVIEW).wait(100);
+      cy.clickToolbarButton('blockButton_delete');
+      cy.triggerLinkPreviewViewerUpdate();
+      cy.eyesCheckWindow(this.test.title);
+    });
+  });
+
+  context('convert link to preview', () => {
+    before(function() {
+      eyesOpen(this);
+    });
+    after(() => cy.eyesClose());
+    beforeEach('load editor', () => cy.loadEditorAndViewer('empty', 'all'));
+
+    it('should create link preview from link after enter key', function() {
+      cy.insertLinkAndEnter('www.wix.com');
+      cy.eyesCheckWindow(this.test.title);
+    });
+
+    it('should embed link that supports embed', function() {
+      cy.insertLinkAndEnter('www.mockUrl.com');
+      cy.eyesCheckWindow(this.test.title);
+    });
+  });
+
+  context('social embed', () => {
+    before(function() {
+      eyesOpen(this);
+    });
+
+    beforeEach('load editor', () => {
+      cy.switchToDesktop();
+      cy.loadEditorAndViewer('empty', 'linkPreview');
+    });
+
+    after(() => cy.eyesClose());
+    const embedTypes = ['TWITTER', 'INSTAGRAM', 'YOUTUBE'];
+    it('render upload modals', function() {
+      embedTypes.forEach(embedType => {
+        cy.openSocialEmbedModal(STATIC_TOOLBAR_BUTTONS[embedType]);
+        cy.eyesCheckWindow(this.test.title);
+        cy.addSocialEmbed('www.mockUrl.com');
+        cy.eyesCheckWindow(this.test.title);
+      });
+    });
+  });
+
+  context('list', () => {
+    before(function() {
+      eyesOpen(this);
+    });
+
+    beforeEach('load editor', () => cy.loadEditorAndViewer());
+
+    after(() => cy.eyesClose());
+    it('create nested lists using tab & shift-tab', function() {
+      cy.loadEditorAndViewer()
+        .enterParagraphs(['1. Hey I am an ordered list in depth 1.'])
+        .tab()
+        .enterParagraphs(['\n Hey I am an ordered list in depth 2.'])
+        .tab()
+        .enterParagraphs(['\n Hey I am an ordered list in depth 1.'])
+        .tab({ shift: true })
+        .enterParagraphs(['\n\n1. Hey I am an ordered list in depth 0.'])
+        .enterParagraphs(['\n\n- Hey I am an unordered list in depth 1.'])
+        .tab()
+        .enterParagraphs(['\n Hey I am an unordered list in depth 2.'])
+        .tab()
+        .enterParagraphs(['\n Hey I am an unordered list in depth 1.'])
+        .tab({ shift: true })
+        .enterParagraphs(['\n\n- Hey I am an unordered list in depth 0.']);
+      cy.eyesCheckWindow(this.test.title);
+    });
   });
 });

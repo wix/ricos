@@ -1,7 +1,0 @@
-{
-  "clientTopology": {
-    "staticsDomain": "static.parastorage.com",
-    "staticsBaseUrl": "http://localhost:3200/"
-  },
-  "petriScopes": []
-}

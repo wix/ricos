@@ -78,6 +78,21 @@ The `defaultData` setting enables consumers to set the default data for a plugin
 | setting key | description                 | default value | is required? | editor/viewer config |
 | ----------- | --------------------------- | ------------- | ------------ | -------------------- |
 | `onClick`   | optional Link click handler | none          | No           | both                 |
+| `preview` | Link Preview settings | none | No | both |
+
+The Link Preview Plugin is implemented within the Link Plugin, and is activated once the Link Plugin Settings object contains `preview` field. The `preview` object structure as follows:
+
+```js
+
+  {
+    getMetadataUrl: (query: string) => string,
+    token: string,
+    format: string,
+  }
+
+```
+
+The `getMetadataUrl` should provide a Website metadata service endpoint URL for a given query URL. The `token` is a security token appended  to request headers (`Authorization` header). The `format`  is the expected response format. Currently the only supported format is 'oembed'.
 
 ### Mentions Plugin Settings
 

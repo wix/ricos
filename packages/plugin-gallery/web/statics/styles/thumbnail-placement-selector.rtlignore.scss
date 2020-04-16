@@ -4,13 +4,14 @@
 
 .thumbnailPlacementSelector_label {
   display: block;
-  margin-bottom: 13px;
+  margin-bottom: 16px;
 }
 
 @supports (display: grid) {
   .thumbnailPlacementSelector_grid {
-    grid-template-columns: 25% 25% 25% 25%;
-    grid-template-rows: 100%;
+    grid-template-columns: auto auto auto auto;
+    row-gap: 12px;
+    column-gap: 4px;
   }
 }
 

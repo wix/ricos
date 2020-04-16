@@ -15,7 +15,6 @@ export { default as BUTTONS } from './Base/buttons/keys';
 export { default as createBasePlugin } from './Base/createBasePlugin';
 export { default as createBaseComponent } from './Base/createBaseComponent';
 export { default as createBaseInsertPluginButton } from './Base/createBaseInsertPluginButton';
-export { default as createBaseToolbar } from './Base/createBaseToolbar';
 export { default as baseToolbarButton } from './Base/baseToolbarButton';
 
 // Components
@@ -46,6 +45,7 @@ export { default as Tooltip } from './Components/Tooltip';
 export { default as TooltipHost } from './Components/TooltipHost';
 export { default as ColorPicker } from './Components/ColorPicker/ColorPicker';
 export { default as CustomColorPicker } from './Components/ColorPicker/CustomColorPicker';
+export { default as Loader } from './Components/Loader';
 
 //Modals
 export { default as EditorModals } from './Modals/EditorModals';
@@ -55,12 +55,14 @@ export { default as RichContentModal } from './Modals/RichContentModal';
 export { default as decorateComponentWithProps } from './Utils/decorateComponentWithProps';
 export { getToolbarTheme } from './Utils/getToolbarTheme';
 export { simplePubsub } from './Utils/simplePubsub';
-export { getModalStyles } from './Utils/getModalStyles';
+export { getModalStyles, getBottomToolbarModalStyles } from './Utils/getModalStyles';
 
 export {
+  updateLinkAtCurrentSelection,
   insertLinkAtCurrentSelection,
   insertLinkInPosition,
   hasLinksInBlock,
+  getLinkRangesInBlock,
   fixPastedLinks,
   hasLinksInSelection,
   getLinkDataInSelection,
@@ -73,15 +75,23 @@ export {
   setEntityData,
   replaceWithEmptyBlock,
   deleteBlock,
+  getBlockAtStartOfSelection,
+  getSelectedBlocks,
   createEntity,
   createBlockAndFocus,
   createBlock,
   getBlockInfo,
   getFocusedBlockKey,
+  createCalcContentDiff,
+  getPostContentSummary,
+  createSelection,
+  getBlockType,
+  setForceSelection,
+  deleteBlockText,
+  insertString,
 } from './Utils/draftUtils';
 export { isiOS } from './Utils/isiOS';
 export { getSelectionStyles } from './Utils/inlineStyleUtils';
-export { getConfigByFormFactor } from './Utils/getConfigByFormFactor';
 export { mergeToolbarSettings } from './Utils/mergeToolbarSettings';
 export {
   COMMANDS,
@@ -92,4 +102,30 @@ export {
   DECORATION_MODE,
   PLUGIN_DECORATION_PROPS,
   PLUGIN_DECORATIONS,
+  KEYS_CHARCODE,
+  TEXT_TYPES,
+  CHARACTERS,
 } from './consts';
+
+export {
+  convertToRaw,
+  getVisibleSelectionRect,
+  convertFromRaw,
+  EditorState,
+  SelectionState,
+  DefaultDraftBlockRenderMap,
+  Modifier,
+  RichUtils,
+  KeyBindingUtil,
+  genKey,
+  ContentBlock,
+  BlockMapBuilder,
+  AtomicBlockUtils,
+  ContentState,
+  RawDraftContentState,
+  EditorChangeType,
+  convertFromHTML,
+} from '@wix/draft-js';
+
+import DraftOffsetKey from '@wix/draft-js/lib/DraftOffsetKey';
+export { DraftOffsetKey };

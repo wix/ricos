@@ -5,7 +5,7 @@ node_modules
 lerna-debug.log
 yarn-error.log
 yarn.lock
-packages/**/package-lock.json
+*/**/package-lock.json
 target
 maven
 stats.html

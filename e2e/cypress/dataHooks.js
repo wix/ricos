@@ -19,6 +19,12 @@ export const INLINE_TOOLBAR_BUTTONS = {
 export const STATIC_TOOLBAR_BUTTONS = {
   VIDEO: 'Video_insert_plugin_button',
   SOUND_CLOUD: 'SoundCloud_insert_plugin_button',
+  TWITTER: 'Twitter_insert_plugin_button',
+  FACEBOOK: 'Facebook_insert_plugin_button',
+  TIKTOK: 'TikTok_insert_plugin_button',
+  PINTEREST: 'Pinterest_insert_plugin_button',
+  YOUTUBE: 'YouTube_insert_plugin_button',
+  INSTAGRAM: 'Instagram_insert_plugin_button',
 };
 
 export const SETTINGS_PANEL = {
@@ -67,6 +73,11 @@ export const GALLERY_SETTINGS = {
 export const GALLERY_IMAGE_SETTINGS = {
   PREVIEW: 'galleryImageSettingsPreview',
   DELETE: 'galleryImageSettingsDeleteImage',
+  TITLE: 'galleryImageTitleInput',
+  LINK: 'linkPanelInput',
+  LINK_TARGET: 'linkPanelBlankCheckbox',
+  LINK_NOFOLLOW: 'linkPanelRelCheckbox',
+  DONE: 'settingPanelFooterDone',
 };
 
 export const VIDEO_PLUGIN = {
@@ -81,16 +92,23 @@ export const HTML_PLUGIN = {
   UPDATE: 'htmlEditPanel_Update',
 };
 
+export const GIPHY_PLUGIN = {
+  UPLOAD_MODAL: 'giphyUploadModal',
+  UPLOAD_MODAL_INPUT: 'giphyUploadModalInput',
+};
+
 export const PLUGIN_COMPONENT = {
   IMAGE: 'imageViewer',
   VIDEO: 'videoPlayer',
   GALLERY: 'galleryViewer',
   HTML: 'HtmlComponent',
   DIVIDER: 'divider',
-  GIF: 'giphyPlayer',
+  GIPHY: 'giphyPlayer',
   SOUND_CLOUD: 'soundCloudPlayer',
   MAP: 'mapViewer',
   FILE_UPLOAD: 'fileUploadViewer',
+  EMOJI: 'EMOJI_insert_plugin_button',
+  LINK_PREVIEW: 'linkPreviewViewer',
 };
 
 export const DIVIDER_DROPDOWN_OPTIONS = {

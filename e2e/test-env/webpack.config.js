@@ -4,6 +4,8 @@ const path = require('path');
 const output = {
   path: path.resolve(__dirname, 'dist/'),
   filename: '[name].bundle.js',
+  chunkFilename: '[name].bundle.js',
+  publicPath: '/',
 };
 
 const common = {
@@ -49,7 +51,7 @@ const scssRule = {
   ],
 };
 
-const scssServerRule = { ...scssRule };
+const scssServerRule = { ...scssRule, use: [...scssRule.use] };
 scssServerRule.use.shift();
 
 const urlRule = {

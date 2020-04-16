@@ -1,7 +1,7 @@
 import { BUTTONS, PluginSettingsIcon, getModalStyles } from 'wix-rich-content-editor-common';
 import { Modals } from '../modals';
 import { ManageMediaIcon, UploadIcon } from '../icons';
-import { galleryLayoutsDropdown, switchLayout, getCurrentLayout } from '../helpers';
+import { galleryLayoutsDropdown, switchLayout, getCurrentLayout } from '../layout-helper';
 
 const modalStyles = getModalStyles();
 
@@ -20,6 +20,7 @@ export default ({ settings, t, anchorTarget, relValue }) => {
       mobile: false,
       multiple: true,
       tooltipTextKey: 'UploadMediaButton_Tooltip',
+      settings,
     },
     { type: BUTTONS.SEPARATOR, mobile: false },
     {
@@ -50,6 +51,7 @@ export default ({ settings, t, anchorTarget, relValue }) => {
       tooltipTextKey: 'ManageMediaButton_Tooltip',
       anchorTarget,
       relValue,
+      accept: settings.accept,
     },
     {
       keyName: 'advanced_settings',
