@@ -15,6 +15,10 @@
     Click to see more.
   </summary>
 
+### :rocket: New Feature
+- `indent`
+  - [#898](https://github.com/wix-incubator/rich-content/pull/898) text indentation
+
 </details>
 <hr/>
 
