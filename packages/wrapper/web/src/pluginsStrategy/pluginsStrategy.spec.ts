@@ -5,7 +5,7 @@ import getType from 'jest-get-type';
 describe('PluginsStrategy', () => {
   const driver = {
     runStrategy: (isEditor?: boolean, plugins: PluginConfig[] = []) =>
-      pluginsStrategy(isEditor, plugins, {}),
+      pluginsStrategy(isEditor, plugins, {}, { modalTheme: { content: {} } }),
   };
 
   it('should create an object', () => {
