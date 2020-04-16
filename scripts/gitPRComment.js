@@ -1,6 +1,6 @@
 const github = require('@actions/github');
 
-async function gitPRComment(message) {
+async function gitPRComment(message, callback) {
   const { REPO_TOKEN } = process.env;
   const request = {
     owner: github.context.repo.owner,
@@ -9,7 +9,11 @@ async function gitPRComment(message) {
   };
   request.body = message;
   const client = new github.GitHub(REPO_TOKEN);
-  return await client.pulls.update(request);
+  await updateComment(client, request, callback);
+}
+function updateComment(client, request, callback) {
+  client.pulls.update(request);
+  callback?.();
 }
 
 module.exports.gitPRComment = gitPRComment;

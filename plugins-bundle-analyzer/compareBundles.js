@@ -8,7 +8,7 @@ const generateMessage = message => {
   return titleForPRComment.concat(message);
 };
 
-function compareBundles() {
+async function compareBundles() {
   let savingBundles = {},
     currentBundles = {},
     message = '';
@@ -36,7 +36,7 @@ function compareBundles() {
   if (message !== '') {
     const e = new Error(message);
     console.error(chalk.bold.red(e));
-    gitPRComment(generateMessage(message)).then(() => {
+    gitPRComment(generateMessage(message), () => {
       throw e;
     });
   } else {
