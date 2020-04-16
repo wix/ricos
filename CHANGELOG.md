@@ -15,7 +15,8 @@
     Click to see more.
   </summary>
 
-
+- `link-preview`
+  - [#924](https://github.com/wix-incubator/rich-content/pull/924) disable link preview/embed when entered inside a list
 </details>
 <hr/>
 
