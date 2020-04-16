@@ -157,11 +157,22 @@ jobs:
       [e2e-visual, e2e-visual-applitoolsSendComplition, content-state-tests, lint-and-unit-tests]
     if: always()
     steps:
-      - run: echo toJSON(github)
-      - run: echo toJSON(env)
-      - run: echo toJSON(runner)
-      - run: echo toJSON(strategy)
-      - run: echo toJSON(needs)
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+      - name: Dump env context
+        env:
+          ENV_CONTEXT: ${{ toJson(env) }}
+        run: echo "$ENV_CONTEXT"
+      - name: Dump strategy context
+        env:
+          STRATEGY_CONTEXT: ${{ toJson(strategy) }}
+        run: echo "$STRATEGY_CONTEXT"
+      - name: Dump needs context
+        env:
+          NEEDS_CONTEXT: ${{ toJson(needs) }}
+        run: echo "$NEEDS_CONTEXT"
       - name: Workflow Conclusion Action
         uses: technote-space/workflow-conclusion-action@v1.1.1
       - name: Notify on Slack
