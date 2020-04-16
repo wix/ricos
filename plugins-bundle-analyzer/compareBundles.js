@@ -8,10 +8,10 @@ const generateMessage = message => {
   return titleForPRComment.concat(message);
 };
 
-let message = '';
 function compareBundles() {
   let savingBundles = {},
-    currentBundles = {};
+    currentBundles = {},
+    message = '';
   try {
     const jsonString = fs.readFileSync('./savingBundlesSizes.json');
     savingBundles = JSON.parse(jsonString);
