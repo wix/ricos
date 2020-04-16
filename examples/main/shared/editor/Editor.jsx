@@ -37,11 +37,11 @@ export default class Editor extends PureComponent {
         splitToSections: true,
       },
     };
-    this.pluginsConfig = Plugins.getConfig(additionalConfig);
+    const pluginsConfig = Plugins.getConfig(additionalConfig);
     this.plugins = testAppPlugins
       ? testAppPlugins.map(plugin => Plugins.editorPluginsMap[plugin]).flat()
       : Plugins.editorPlugins;
-    this.config = { pluginsConfig: this.pluginsConfig, toolbarsConfig };
+    this.config = { pluginsConfig: pluginsConfig, toolbarsConfig };
   }
 
   initEditorProps() {
