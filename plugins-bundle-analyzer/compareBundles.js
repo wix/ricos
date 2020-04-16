@@ -8,7 +8,7 @@ const generateMessage = message => {
   return titleForPRComment.concat(message);
 };
 
-async function compareBundles() {
+function compareBundles() {
   let savingBundles = {},
     currentBundles = {},
     message = '';
@@ -36,16 +36,12 @@ async function compareBundles() {
   if (message !== '') {
     const err = new Error(message);
     console.error(chalk.bold.red(err));
-    const action = await gitPRComment(generateMessage(message));
-    console.log(action);
-    throw err;
-    // action
-    //   .then(() => {
-    //     throw err;
-    //   })
-    //   .catch(e => {
-    //     throw err;
-    //   });
+    const promise = new Promise(() => {
+      gitPRComment(generateMessage(message));
+    });
+    promise.finally(() => {
+      throw err;
+    });
   } else {
     gitPRComment('');
     console.log('comparison ended successfully');
