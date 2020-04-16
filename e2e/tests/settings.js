@@ -6,16 +6,36 @@ export const fixtures = [
   'lists',
   'nested-lists',
   'quote',
-  'facebook-video',
+  {
+    fixture: 'facebook-video',
+    additionalCommands: cy => {
+      cy.waitForVideoToLoad();
+    },
+  },
   'gif',
   'giphy',
-  'html',
-  'gallery-layouts',
+  {
+    fixture: 'html',
+    additionalCommands: cy => {
+      cy.waitForHtmlToLoad();
+    },
+  },
+  {
+    fixture: 'gallery-layouts',
+    additionalCommands: cy => {
+      cy.scrollTo(0, 100);
+      cy.waitForDocumentMutations();
+      cy.scrollTo(0, 0);
+    },
+  },
   'old-image-format',
   'hashtag-and-link',
   'images-sizes',
   'images-original-size',
-  'link-preview',
+  {
+    fixture: 'link-preview',
+    plugins: 'all',
+  },
 ];
 
 export const fixturesToTestOnSeo = ['images'];

@@ -10,7 +10,6 @@ interface State {
   index?: number;
   data?: any;
   Fullscreen?: any;
-  isMounted: boolean;
 }
 
 export default class FullscreenRenderer extends Component<Props, State> {
@@ -20,7 +19,6 @@ export default class FullscreenRenderer extends Component<Props, State> {
     super(props);
     this.state = {
       isExpanded: false,
-      isMounted: false,
     };
     this.childProps = {
       ...props.children.props,
@@ -35,7 +33,7 @@ export default class FullscreenRenderer extends Component<Props, State> {
     const Fullscreen = React.lazy(() =>
       import(/* webpackChunkName: "rce-ViewerModal"  */ './ViewerModal')
     );
-    this.setState({ Fullscreen, isMounted: true });
+    this.setState({ Fullscreen });
   }
 
   onExpand = (entityIndex, innerIndex = 0) =>
@@ -49,24 +47,22 @@ export default class FullscreenRenderer extends Component<Props, State> {
   setData = data => this.setState({ data });
 
   render() {
-    const { isExpanded, index, data, Fullscreen, isMounted } = this.state;
+    const { isExpanded, index, data, Fullscreen } = this.state;
     const { children } = this.props;
     return (
       <Fragment>
         {Children.only(React.cloneElement(children, this.childProps))}
-        {isMounted && (
+        {Fullscreen && (
           <Suspense fallback={<div />}>
-            {Fullscreen && (
-              <Fullscreen
-                dataHook={'WrapperFullScreen'}
-                initialState={children.props.initialState || { entityMap: {} }}
-                isOpen={isExpanded}
-                images={data?.images || []}
-                onClose={this.onClose}
-                index={index}
-                setExpandModeData={this.setData}
-              />
-            )}
+            <Fullscreen
+              dataHook={'WrapperFullScreen'}
+              initialState={children.props.initialState || { entityMap: {} }}
+              isOpen={isExpanded}
+              images={data?.images || []}
+              onClose={this.onClose}
+              index={index}
+              setExpandModeData={this.setData}
+            />
           </Suspense>
         )}
       </Fragment>

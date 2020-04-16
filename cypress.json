@@ -13,6 +13,7 @@
   "supportFile": "e2e/cypress/support/index.js",
   "video": true,
   "videoUploadOnPasses": false,
+  "videoCompression": false,
   "videosFolder": "e2e/cypress/videos",
   "env": {},
   "projectId": "6yj6sr"
