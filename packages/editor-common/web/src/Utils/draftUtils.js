@@ -561,7 +561,7 @@ export function onTab(event, editorState) {
 }
 
 export function onIndent(isDirectionNext, editorState) {
-  const maxDepth = 2;
+  const maxDepth = 3;
   const selection = editorState.getSelection();
   const key = selection.getAnchorKey();
 

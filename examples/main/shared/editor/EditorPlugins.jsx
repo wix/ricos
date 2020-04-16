@@ -92,10 +92,13 @@ export const editorPluginsPartialPreset = [
   createEmojiPlugin,
   createTextHighlightPlugin,
   createUndoRedoPlugin,
-  createIndentPlugin,
 ];
 
-export const editorPlugins = [createLinkPreviewPlugin, ...editorPluginsPartialPreset];
+export const editorPlugins = [
+  createLinkPreviewPlugin,
+  createIndentPlugin,
+  ...editorPluginsPartialPreset,
+];
 
 export const editorPluginsMap = {
   image: createImagePlugin,
@@ -106,6 +109,7 @@ export const editorPluginsMap = {
   spacing: createLineSpacingPlugin,
   link: createLinkPlugin,
   linkPreview: createLinkPreviewPlugin,
+  indent: createIndentPlugin,
   hashtag: createHashtagPlugin,
   mentions: createExternalMentionsPlugin,
   codeBlock: createCodeBlockPlugin,
