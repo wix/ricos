@@ -15,6 +15,9 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+- `viewer`
+  - [#929](https://github.com/wix-incubator/rich-content/pull/929) fix: empty lists viewer issues
 </details>
 <hr/>
 
@@ -22,8 +25,6 @@
 ### :bug: Bug Fix
 - `link-preview`
   - [#924](https://github.com/wix-incubator/rich-content/pull/924) disable link preview/embed when entered inside a list
-- `viewer`
-  - [#929](https://github.com/wix-incubator/rich-content/pull/929) fix: empty lists viewer issues
 
 ## 7.3.1 (Apr 15, 2020)
 ### :bug: Bug Fix
