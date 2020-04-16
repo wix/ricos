@@ -39,12 +39,12 @@ export default class FullscreenRenderer extends Component<Props, State> {
 
   setData = data => this.setState({ data });
 
-  addExpandHelpers = (helpers: object) => ({ ...helpers, onExpand: this.onExpand });
+  addExpandHelper = (helpers: object) => ({ ...helpers, onExpand: this.onExpand });
 
   render() {
     const { isExpanded, index, data, Fullscreen } = this.state;
     const { children, helpers: viewerHelpers = {}, initialState } = this.props;
-    const helpers = this.addExpandHelpers(viewerHelpers);
+    const helpers = this.addExpandHelper(viewerHelpers);
     return (
       <Fragment>
         {Children.only(React.cloneElement(children, { helpers }))}
