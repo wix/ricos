@@ -1,4 +1,4 @@
-name: tests
+name: bundleTests
 on: [pull_request]
 
 jobs:
