@@ -2,6 +2,7 @@ import * as utils from './themes/utils';
 import getEditorCommonTheme from './themes/editor-common';
 import getEditorTheme from './themes/editor';
 import getViewerTheme from './themes/viewer';
+import getCommonStyles from './themes/common';
 
 /* eslint-disable camelcase */
 const THEMES = {
@@ -81,6 +82,7 @@ export default class ThemeGenerator {
       };
 
       return {
+        ...getCommonStyles(colors),
         ...appStyles,
         ...pluginThemes,
       };

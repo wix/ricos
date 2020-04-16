@@ -1,8 +1,10 @@
 import React, { Component, Fragment, Suspense, Children, ReactElement } from 'react';
-import { RichContentProps } from './RichContentWrapperTypes';
+import { InitialState, RichContentProps } from './RichContentWrapperTypes';
 
 interface Props {
   children: ReactElement;
+  helpers?: RichContentProps['helpers'];
+  initialState: InitialState;
 }
 
 interface State {
@@ -13,19 +15,10 @@ interface State {
 }
 
 export default class FullscreenRenderer extends Component<Props, State> {
-  childProps: RichContentProps;
-
   constructor(props) {
     super(props);
     this.state = {
       isExpanded: false,
-    };
-    this.childProps = {
-      ...props.children.props,
-      helpers: {
-        ...props.children.props.helpers,
-        onExpand: this.onExpand,
-      },
     };
   }
 
@@ -46,17 +39,20 @@ export default class FullscreenRenderer extends Component<Props, State> {
 
   setData = data => this.setState({ data });
 
+  addExpand = (helpers: object) => ({ ...helpers, onExpand: this.onExpand });
+
   render() {
     const { isExpanded, index, data, Fullscreen } = this.state;
-    const { children } = this.props;
+    const { children, helpers: viewerHelpers = {}, initialState } = this.props;
+    const helpers = this.addExpand(viewerHelpers);
     return (
       <Fragment>
-        {Children.only(React.cloneElement(children, this.childProps))}
+        {Children.only(React.cloneElement(children, { helpers }))}
         {Fullscreen && (
           <Suspense fallback={<div />}>
             <Fullscreen
               dataHook={'WrapperFullScreen'}
-              initialState={children.props.initialState || { entityMap: {} }}
+              initialState={initialState || { entityMap: {} }}
               isOpen={isExpanded}
               images={data?.images || []}
               onClose={this.onClose}
