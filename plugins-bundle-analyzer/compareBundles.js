@@ -1,11 +1,18 @@
 /* eslint-disable no-console */
-const github = require('@actions/github');
+const { gitPRComment } = require('../scripts/gitPRComment');
 const chalk = require('chalk');
 const fs = require('fs');
 
+const generateMessage = message => {
+  const titleForPRComment = `bundle sizes that increased by more than 10KB:\n`;
+  return titleForPRComment.concat(message);
+};
+
 function compareBundles() {
   let savingBundles = {},
-    currentBundles = {};
+    currentBundles = {},
+    message = '';
+
   try {
     const jsonString = fs.readFileSync('./savingBundlesSizes.json');
     savingBundles = JSON.parse(jsonString);
@@ -20,14 +27,18 @@ function compareBundles() {
     const newSize = currentBundles[key];
     if (newSize !== oldSize) {
       if (parseInt(newSize) - parseInt(oldSize) > 10) {
-        const e = new Error(
-          `${key} increased by more than 10KB(old bundlesize: ${oldSize}, current bundlesize: ${newSize})`
+        message = message.concat(
+          `${key} (old bundlesize: ${oldSize}, current bundlesize: ${newSize})\n`
         );
-        console.error(chalk.bold.red(e));
-        throw e;
       }
     }
   });
+  if (message === '') {
+    const e = new Error(generateMessage(message));
+    console.error(chalk.bold.red(e));
+    gitPRComment(e);
+    throw e;
+  }
   console.log('comparison ended successfully');
 }
 
