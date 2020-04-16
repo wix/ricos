@@ -85,6 +85,7 @@ Cypress.Commands.add('loadEditorAndViewer', (fixtureName, plugins) =>
 Cypress.Commands.add('loadIsolatedEditorAndViewer', fixtureName =>
   run('rce-isolated', fixtureName)
 );
+Cypress.Commands.add('loadWrapperEditorAndViewer', fixtureName => run('wrapper', fixtureName));
 
 Cypress.Commands.add('loadEditorAndViewerOnSsr', (fixtureName, compName) => {
   cy.request(getUrl(compName, fixtureName))
