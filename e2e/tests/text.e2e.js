@@ -128,12 +128,10 @@ describe('text', () => {
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.BOLD, [30, 5])
       .setNextIndent([40, 10])
       .setNextIndent([40, 10])
-      .setNextIndent([40, 5])
       .setNextIndent([40, 10])
-      .setPrevIndent([40, 5])
+      .setNextIndent([40, 10])
       .setNextIndent([200, 10])
       .setNextIndent([200, 10])
-      .setPrevIndent([200, 10])
       .setPrevIndent([200, 10])
       .setPrevIndent([200, 10])
       .blurEditor();

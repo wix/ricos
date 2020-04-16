@@ -827,7 +827,7 @@ exports[`text > allow to apply indent #0`] =
   "blocks": [
     {
       "data": {},
-      "depth": 2,
+      "depth": 4,
       "entityRanges": [],
       "inlineStyleRanges": [
         {
