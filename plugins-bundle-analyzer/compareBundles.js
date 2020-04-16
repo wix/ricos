@@ -36,7 +36,9 @@ async function compareBundles() {
   if (message !== '') {
     const e = new Error(message);
     console.error(chalk.bold.red(e));
-    gitPRComment(generateMessage(message), () => {
+    const action = await gitPRComment(generateMessage(message));
+    console.log(action);
+    action.then(() => {
       throw e;
     });
   } else {
