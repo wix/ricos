@@ -15,6 +15,10 @@
     Click to see more.
   </summary>
 
+  ### :house: Internal
+  - `vertical-embed`
+    -  [#728](https://github.com/wix-incubator/rich-content/pull/728) Vertical Embed Plugin - alpha verison
+
 </details>
 <hr/>
 

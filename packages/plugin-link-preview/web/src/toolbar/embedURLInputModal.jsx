@@ -58,7 +58,7 @@ export default class EmbedURLInputModal extends Component {
       <UrlInputModal
         onConfirm={this.onConfirm}
         helpers={helpers}
-        url={url}
+        input={url}
         t={t}
         languageDir={languageDir}
         title={t(`EmbedURL_Social_${socialType}_Title`)}
@@ -66,7 +66,7 @@ export default class EmbedURLInputModal extends Component {
         dataHook={'socialEmbedUploadModal'}
         saveLabel={t('EmbedURL_Common_CTA_Primary')}
         cancelLabel={t('EmbedURL_Common_CTA_Secondary')}
-        setUrl={url => this.setState({ url })}
+        onInputChange={url => this.setState({ url })}
         errorMessage={t('SoundCloudUploadModal_Input_InvalidUrl')}
         placeholder={t(`EmbedURL_Social_${socialType}_Placeholder`)}
         onCloseRequested={helpers.closeModal}
