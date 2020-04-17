@@ -46,6 +46,7 @@ const getBlocks = (contentState, mergedStyles, textDirection, context) => {
       blockProps,
       blockDataToStyle,
       contentState,
+      context,
     };
     return <List {...props} />;
   };
