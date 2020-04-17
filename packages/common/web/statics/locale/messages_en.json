@@ -367,6 +367,7 @@
   "Poll_Viewer_VoteCount": "{{number}} votes",
   "Side_toolbar_basic_section": "Basic",
   "Side_toolbar_embed_from_social_section": "Embed from Socials",
+  "Side_toolbar_embed_from_wix_section": "Embed from Wix",
   "Side_toolbar_empty_state": "No blocks found.\n Try another search term.",
   "Side_toolbar_search_place_holder": "Search for a block",
   "Image_plugin_search_tags": "image photo picture pixel camera visual scan",

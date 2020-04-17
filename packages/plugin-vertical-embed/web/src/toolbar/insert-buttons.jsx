@@ -14,13 +14,14 @@ export default ({ helpers, t, settings, isMobile }) => {
   const buttonCreator = (type, tooltipText) => {
     return {
       type: 'modal',
-      name: `VerticalEmbed-${type}`,
+      name: type,
       tooltipText,
       toolbars: [TOOLBARS.FOOTER, TOOLBARS.SIDE],
       Icon: icon,
       componentData: { ...DEFAULTS, type },
       helpers,
       t,
+      section: t('Side_toolbar_embed_from_wix_section'),
       modalElement: decorateComponentWithProps(PostSelectionInputModal, settings),
       modalStyles: getModalStyles({
         customStyles: getModalCustomStyles(isMobile),
