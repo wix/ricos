@@ -26,6 +26,7 @@ const List = ({
   mergedStyles,
   textDirection,
   blockProps,
+  getBlockStyleClasses,
   blockDataToStyle,
   contentState,
 }) => {
@@ -66,11 +67,11 @@ const List = ({
 
         return (
           <li
-            className={className}
+            className={getBlockStyleClasses(dataEntry, mergedStyles, textDirection, className)}
             key={blockProps.keys[childIndex]}
             style={blockDataToStyle(blockProps.data[childIndex])}
           >
-            {result}
+            {result.length === 0 ? ' ' : result}
           </li>
         );
       })}
