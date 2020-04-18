@@ -10,7 +10,9 @@ const testFixture = fixtureObj => {
     if (additionalCommands) {
       additionalCommands(cy);
     }
-    cy.blurEditor();
+    try {
+      cy.blurEditor();
+    } catch (_) {}
     cy.eyesCheckWindow(this.test.title);
   });
 };
