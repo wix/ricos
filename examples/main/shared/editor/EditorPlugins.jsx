@@ -15,6 +15,11 @@ import { createVideoPlugin, VIDEO_TYPE } from 'wix-rich-content-plugin-video';
 import { createHtmlPlugin, HTML_TYPE } from 'wix-rich-content-plugin-html';
 import { createDividerPlugin, DIVIDER_TYPE } from 'wix-rich-content-plugin-divider';
 import {
+  createVerticalEmbedPlugin,
+  VERTICAL_EMBED_TYPE,
+  verticalEmbedProviders,
+} from 'wix-rich-content-plugin-vertical-embed';
+import {
   createExternalMentionsPlugin,
   EXTERNAL_MENTIONS_TYPE,
 } from 'wix-rich-content-plugin-mentions';
@@ -69,6 +74,7 @@ import { TOOLBARS, BUTTONS, DISPLAY_MODE } from 'wix-rich-content-editor-common'
 // import StaticToolbarDecoration from './Components/StaticToolbarDecoration';
 // import SideToolbarDecoration from './Components/SideToolbarDecoration';
 // import PluginToolbarDecoration from './Components/PluginToolbarDecoration';
+import { mockFetchVerticalEmbedFunc } from './Utils/verticalEmbedUtil';
 
 export const editorPluginsPartialPreset = [
   createImagePlugin,
@@ -93,7 +99,17 @@ export const editorPluginsPartialPreset = [
   createUndoRedoPlugin,
 ];
 
-export const editorPlugins = [createLinkPreviewPlugin, ...editorPluginsPartialPreset];
+export const editorPluginsEmbedsPreset = [
+  createLinkPlugin,
+  createLinkPreviewPlugin,
+  createVerticalEmbedPlugin,
+];
+
+export const editorPlugins = [
+  createLinkPreviewPlugin,
+  createVerticalEmbedPlugin,
+  ...editorPluginsPartialPreset,
+];
 
 export const editorPluginsMap = {
   image: createImagePlugin,
@@ -117,7 +133,9 @@ export const editorPluginsMap = {
   emoji: createEmojiPlugin,
   highlight: createTextHighlightPlugin,
   undoRedo: createUndoRedoPlugin,
+  verticalEmbed: createVerticalEmbedPlugin,
   partialPreset: editorPluginsPartialPreset,
+  embedsPreset: editorPluginsEmbedsPreset,
   all: editorPlugins,
 };
 
@@ -139,7 +157,7 @@ let userButtonBorderColors = [...buttonDefaultPalette];
 
 const getLinkPanelDropDownConfig = () => {
   const getItems = () => {
-    casual.define('item', function() {
+    casual.define('item', function () {
       return {
         value: casual.url,
         label: casual.catch_phrase,
@@ -260,6 +278,8 @@ const videoHandlers = {
     }, 1200000);
   },
 };
+
+const { event, booking, product } = verticalEmbedProviders;
 
 const { Instagram, Twitter, YouTube, TikTok } = LinkPreviewProviders;
 const config = {
@@ -422,6 +442,15 @@ const config = {
     //     InsertPluginButtonIcon: MyCustomIcon,
     //   },
     // },
+  },
+  [VERTICAL_EMBED_TYPE]: {
+    fetchFunctions: {
+      [product]: mockFetchVerticalEmbedFunc(product),
+      [event]: mockFetchVerticalEmbedFunc(event),
+      [booking]: mockFetchVerticalEmbedFunc(booking),
+    },
+    // exposeEmbedButtons: [product, event, booking],
+    exposeEmbedButtons: [product],
   },
   // [EXTERNAL_EMOJI_TYPE]: {},
   [VIDEO_TYPE]: {
