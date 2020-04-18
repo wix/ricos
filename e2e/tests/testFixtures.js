@@ -10,10 +10,12 @@ const testFixture = fixtureObj => {
     if (additionalCommands) {
       additionalCommands(cy);
     }
-    const focusEle = cy.focused({ log: false, timeout: 1000 });
-    if (focusEle) {
-      focusEle.blur();
-    }
+    try {
+      const focusEle = cy.focused({ log: false, timeout: 1000 });
+      if (focusEle) {
+        focusEle.blur();
+      }
+    } catch (_) {}
 
     cy.eyesCheckWindow(this.test.title);
   });
