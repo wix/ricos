@@ -3,8 +3,12 @@
 
 .urlInput_container {
   padding: 80px 120px;
+  &.withSubtitle {
+    padding: 60px 120px !important;
+    position: relative;
+  }
   @include phone {
-    padding: 160px 33px;
+    padding: 160px 33px !important;
   }
 }
 
@@ -17,21 +21,32 @@
 }
 
 .urlInput_header {
-  display: flex;
+  display: grid;
   align-items: center;
   color: #333333;
 }
 
 .urlInput_header_text {
-  height: 28px;
+  line-height: 28px;
   font-size: 20px;
   width: 100%;
   text-align: center;
 }
 
-.socialEmbedUrlInputModal_textInput {
+.urlInput_header_subtitle {
+  font-size: 16px;
+  line-height: 24px;
+  color: rgba(0, 0, 0, 0.6);
+  padding-top: 32px;
+}
+
+.urlInputModal_textInput {
   margin-top: 36px;
   margin-bottom: 42px;
+  &.withSubtitle {
+    margin-top: 12px;
+    margin-bottom: 50px;
+  }
   @include phone {
     margin-top: 32px;
     margin-bottom: 33px;

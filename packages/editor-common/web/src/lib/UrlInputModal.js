@@ -6,6 +6,7 @@ import SettingsPanelFooter from '../Components/SettingsPanelFooter';
 import TextInput from '../Components/TextInput';
 import { KEYS_CHARCODE } from '../consts';
 import styles from '../../statics/styles/url-input-modal.scss';
+import ItemsDropdown from '../Components/ItemsDropdown';
 
 export default class UrlInputModal extends Component {
   constructor(props) {
@@ -15,7 +16,7 @@ export default class UrlInputModal extends Component {
 
   onUrlChange = event => {
     const url = event.target.value;
-    this.props.setUrl(url);
+    this.props.onInputChange(url);
   };
 
   handleKeyPress = event => {
@@ -28,8 +29,19 @@ export default class UrlInputModal extends Component {
   };
 
   componentDidMount() {
+    const { dropdownItems } = this.props;
     this.input.focus();
     this.input.setSelectionRange(0, this.input.value.length);
+    dropdownItems &&
+      document.addEventListener(
+        'click',
+        event => {
+          if (event.target !== document.getElementById('dropdown-text-input')) {
+            this.setState({ isDropdownOpen: false });
+          }
+        },
+        false
+      );
   }
 
   render() {
@@ -37,36 +49,56 @@ export default class UrlInputModal extends Component {
       t,
       languageDir,
       onConfirm,
-      url = '',
+      input = '',
       submittedInvalidUrl = false,
       dataHook,
       title,
+      subtitle,
       errorMessage,
       placeholder,
       saveLabel,
       cancelLabel,
       onCloseRequested,
+      dropdownItems,
+      isMobile,
     } = this.props;
+    const { isDropdownOpen } = this.state;
     return (
-      <div className={styles.urlInput_container} data-hook={dataHook} dir={languageDir}>
+      <div
+        className={classNames(styles.urlInput_container, {
+          [styles.withSubtitle]: subtitle && !isMobile,
+        })}
+        data-hook={dataHook}
+        dir={languageDir}
+      >
         <CloseIcon className={classNames(styles.urlInput_closeIcon)} onClick={onCloseRequested} />
         <div className={classNames(styles.urlInput_header)}>
           <div className={styles.urlInput_header_text}>{title}</div>
+          {subtitle && <div className={styles.urlInput_header_subtitle}>{subtitle}</div>}
         </div>
-        <div className={styles.socialEmbedUrlInputModal_textInput}>
+        <div
+          className={classNames(styles.urlInputModal_textInput, {
+            [styles.withSubtitle]: subtitle,
+          })}
+        >
           <TextInput
+            onClick={() => this.setState({ isDropdownOpen: true })}
             inputRef={ref => {
               this.input = ref;
             }}
             type="url"
+            id="dropdown-text-input"
             onKeyPress={this.handleKeyPress}
             onChange={this.onUrlChange}
-            value={url}
+            value={input}
             error={submittedInvalidUrl && errorMessage}
             placeholder={placeholder}
             theme={styles}
             data-hook={`${dataHook}Input`}
           />
+          {dropdownItems && isDropdownOpen && (
+            <ItemsDropdown items={dropdownItems} onItemClick={item => onConfirm(item)} />
+          )}
         </div>
         <SettingsPanelFooter
           className={styles.urlInput_modal_footer}
@@ -84,7 +116,7 @@ export default class UrlInputModal extends Component {
 
 UrlInputModal.propTypes = {
   onConfirm: PropTypes.func,
-  url: PropTypes.string,
+  input: PropTypes.string,
   t: PropTypes.func,
   languageDir: PropTypes.string,
   submittedInvalidUrl: PropTypes.bool,
@@ -94,6 +126,9 @@ UrlInputModal.propTypes = {
   placeholder: PropTypes.string.isRequired,
   saveLabel: PropTypes.string.isRequired,
   cancelLabel: PropTypes.string.isRequired,
-  setUrl: PropTypes.func.isRequired,
+  onInputChange: PropTypes.func.isRequired,
   onCloseRequested: PropTypes.func.isRequired,
+  subtitle: PropTypes.string,
+  dropdownItems: PropTypes.array,
+  isMobile: PropTypes.bool,
 };
