@@ -20,10 +20,10 @@ export default class PostSelectionInputModal extends Component {
     const abortController = new AbortController();
     const promise = fetchFunctions[type](query, abortController.signal)
       .then(res => {
-        if (res.ok) return res;
+        if (res.ok || res.mockData) return res;
         else throw res.statusText;
       })
-      .then(res => res.json());
+      .then(res => (res.mockData ? res.mockData : res.json()));
     return {
       abortController,
       promise,
