@@ -59,6 +59,7 @@
     "wix-rich-content-plugin-video": "7.3.2",
     "wix-rich-content-preview": "7.3.2",
     "wix-rich-content-text-selection-toolbar": "7.3.2",
+    "wix-rich-content-plugin-vertical-embed": "7.3.2",
     "wix-rich-content-viewer": "7.3.2"
   },
   "scripts": {
