@@ -3,34 +3,49 @@
  * @param {string[]} sourceList built-in button list
  * @param {Array} positionedList plugin button data { name, position } array
  * @param {string} formFactor determines position type desktop/mobile
- * @param {Function} onInsert [optional] callback called before name merged to list
  * @returns {Array} merged button list
  */
+const isPositionInBounds = (position, mergedList, group) =>
+  position > 0 && position < mergedList[group]?.length;
+
+const isNewGroup = (mergedList, group) => group && !mergedList[group];
+
+const addSeparators = mergedList => {
+  mergedList.forEach((list, i) => {
+    if (i !== mergedList.length - 1) {
+      list.push('Separator');
+    }
+  });
+};
+
 export const mergeButtonLists = (
   sourceList,
   positionedList,
   formFactor = 'desktop',
-  onInsert = ({ mergedList }) => mergedList
+  isIncludeSeparators
 ) => {
-  return positionedList.reduce(
+  const merged = positionedList.reduce(
     (mergedList, buttonData) => {
       if (buttonData.name) {
-        if (
-          buttonData.position &&
-          buttonData.position[formFactor] &&
-          buttonData.position[formFactor] > 0 &&
-          buttonData.position[formFactor] < mergedList.length
-        ) {
-          const transformedList = onInsert({ mergedList, sourceList, formFactor, buttonData });
-          transformedList.splice(buttonData.position[formFactor], 0, buttonData.name);
-          return transformedList;
+        const group =
+          buttonData.group?.[formFactor] !== undefined
+            ? buttonData.group?.[formFactor]
+            : sourceList.length;
+        const position = buttonData.position?.[formFactor];
+        if (isPositionInBounds(position, mergedList, group)) {
+          mergedList[group].splice(position, 0, buttonData.name);
+          return mergedList;
         }
-        const transformedList = onInsert({ mergedList, sourceList, formFactor, buttonData });
-        const merged = [...transformedList, buttonData.name];
-        return merged;
+        if (isNewGroup(mergedList, group)) {
+          mergedList.push([]);
+        }
+        mergedList[group].push(buttonData.name);
+        return mergedList;
       }
       return mergedList;
     },
     [...sourceList]
   );
+  isIncludeSeparators && addSeparators(merged);
+  return merged.flat();
 };
