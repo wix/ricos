@@ -20,11 +20,11 @@
   - [#929](https://github.com/wix-incubator/rich-content/pull/929) fix: empty lists viewer issues
 ### :house: Internal
 - `vertical-embed`
-  -  [#728](https://github.com/wix-incubator/rich-content/pull/728) Vertical Embed Plugin - alpha verison
-- 'viewer'
+  - [#728](https://github.com/wix-incubator/rich-content/pull/728) Vertical Embed Plugin - alpha verison
+- `viewer`
   - [#908](https://github.com/wix-incubator/rich-content/pull/908) Support Viewer predefined anchors
-
-  
+- `wrapper`
+  - [#935](https://github.com/wix-incubator/rich-content/pull/935) back-office theme will appear as default theme for now  
 
 </details>
 <hr/>
