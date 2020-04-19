@@ -153,16 +153,16 @@ jobs:
 
   notify-on-slack:
     runs-on: ubuntu-18.04
-    needs: [e2e-visual, content-state-tests, lint-and-unit-tests]
+    # needs: [e2e-visual, content-state-tests, lint-and-unit-tests]
     if: always()
     steps:
-      - name: Notify fail on Slack
-        uses: voxmedia/github-action-slack-notify-build@v1.1.1
-        if: github.ref == 'refs/heads/notify-recovery-on-slack' && (needs.e2e-visual.result == 'failure' || needs.content-state-tests.result == 'failure' || needs.lint-and-unit-tests.result == 'failure')
-        with:
-          channel_id: G011R1YVCRG #rich-content-ci
-          status: FAILED
-          color: danger
+      # - name: Notify fail on Slack
+      #   uses: voxmedia/github-action-slack-notify-build@v1.1.1
+      #   if: github.ref == 'refs/heads/notify-recovery-on-slack' && (needs.e2e-visual.result == 'failure' || needs.content-state-tests.result == 'failure' || needs.lint-and-unit-tests.result == 'failure')
+      #   with:
+      #     channel_id: G011R1YVCRG #rich-content-ci
+      #     status: FAILED
+      #     color: danger
 
       - name: Get previous commit SHA
         id: parent
@@ -194,7 +194,7 @@ jobs:
 
       - name: Notify recovery on Slack
         uses: voxmedia/github-action-slack-notify-build@v1.1.1
-        if: github.ref == 'refs/heads/notify-recovery-on-slack' && steps.previous-status.outputs.state == 'success' && (needs.e2e-visual.result == 'success' && needs.content-state-tests.result == 'success' && needs.lint-and-unit-tests.result == 'success')
+        # if: github.ref == 'refs/heads/notify-recovery-on-slack' && steps.previous-status.outputs.state == 'success' && (needs.e2e-visual.result == 'success' && needs.content-state-tests.result == 'success' && needs.lint-and-unit-tests.result == 'success')
         with:
           channel_id: G011R1YVCRG #rich-content-ci
           status: RECOVERED
