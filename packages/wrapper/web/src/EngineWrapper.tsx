@@ -61,10 +61,11 @@ class EngineWrapper extends React.Component<Props, State> {
   render() {
     const { rcProps, children, isEditor, isMobile } = this.props;
     const { ModalityProvider, MobileToolbar } = this.state;
+    const { onChange } = children.props;
 
     const mergedRCProps = merge(rcProps, { isMobile }, children.props);
 
-    if (isEditor) mergedRCProps.onChange = this.handleChange;
+    if (isEditor) mergedRCProps.onChange = onChange || this.handleChange;
 
     return (
       <Fragment>
