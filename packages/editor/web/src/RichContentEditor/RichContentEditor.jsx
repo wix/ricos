@@ -227,7 +227,7 @@ class RichContentEditor extends Component {
     if (onPluginDelete) {
       this.calculateDiff(editorState, (...args) => onPluginDelete(...args, Version.currentVersion));
     }
-    this.dataInstance?.refresh(editorState); //debounce call
+    this.dataInstance.refresh(editorState); //debounce call
     this.setEditorState(editorState);
     this.props.onChange?.(editorState);
   };
