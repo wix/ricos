@@ -421,7 +421,7 @@ Cypress.Commands.add('openSoundCloudModal', () => {
   cy.get(`[data-hook*=${STATIC_TOOLBAR_BUTTONS.SOUND_CLOUD}][tabindex!=-1]`).click();
 });
 
-Cypress.Commands.add('openSocialEmbedModal', modalType => {
+Cypress.Commands.add('openEmbedModal', modalType => {
   cy.get(`[data-hook*=${modalType}][tabindex!=-1]`).click();
 });
 
