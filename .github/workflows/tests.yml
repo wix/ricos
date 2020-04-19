@@ -164,7 +164,7 @@ jobs:
       #     status: FAILED
       #     color: danger
 
-      - run: echo "##[set-output name=CURL;]$(curl https://api.github.com/repos/wix-incubator/rich-content/commits/heads/notify-recovery-on-slack)"
+      - run: echo "::set-output name=curl_out::${{curl https://api.github.com/repos/wix-incubator/rich-content/commits/heads/notify-recovery-on-slack}}"
         id: curl_id
 
       - run: echo "$CURL"
