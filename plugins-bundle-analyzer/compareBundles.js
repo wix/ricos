@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable no-console */
 const chalk = require('chalk');
 const fs = require('fs');
@@ -26,11 +27,14 @@ function compareBundles() {
   Object.keys(currentBundles).forEach(key => {
     const oldSize = savingBundles[key];
     const newSize = currentBundles[key];
-    if (newSize !== oldSize) {
-      if (parseInt(newSize) - parseInt(oldSize) > 10) {
-        const diff = `${key}: old bundlesize: ${oldSize}, current bundlesize: ${newSize}\n`;
+    if (oldSize) {
+      if (newSize !== oldSize && parseInt(newSize) - parseInt(oldSize) > 10) {
+        const diff = `${key}: old bundlesize: ${oldSize}KB, current bundlesize: ${newSize}KB\n`;
         message = message.concat(diff);
       }
+    } else {
+      const warning = `${key} is missing in 'savingBundlesSizes.json' (Please add it to this file), current bundlesize: ${newSize}\n`;
+      message = warning.concat(message);
     }
   });
 
