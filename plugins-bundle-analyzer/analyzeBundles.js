@@ -49,6 +49,7 @@ if (firstArg) {
     options.bundleOnly = firstArg;
   }
 }
+
 function save(fileName, data = []) {
   fs.writeFile(`${fileName}.json`, data, err => {
     if (err) throw err;

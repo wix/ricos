@@ -1,5 +1,4 @@
 /* eslint-disable no-console */
-const { gitPRComment } = require('../scripts/gitPRComment');
 const chalk = require('chalk');
 const fs = require('fs');
 
@@ -8,13 +7,18 @@ const generateMessage = message => {
   return titleForPRComment.concat(message);
 };
 
+function saveDiff(data = []) {
+  fs.writeFile('diffBundles.json', data, err => {
+    if (err) throw err;
+  });
+}
+
 function compareBundles() {
   let savingBundles = {},
     currentBundles = {},
     message = '';
   try {
-    const jsonString = fs.readFileSync('./savingBundlesSizes.json');
-    savingBundles = JSON.parse(jsonString);
+    savingBundles = JSON.parse(fs.readFileSync('./savingBundlesSizes.json'));
     currentBundles = JSON.parse(fs.readFileSync('./bundleSizes.json'));
   } catch (err) {
     console.log(err);
@@ -34,16 +38,12 @@ function compareBundles() {
   });
   if (message !== '') {
     console.error(chalk.bold.red(message));
+    saveDiff(generateMessage(message));
     throw message;
   } else {
-    gitPRComment('');
+    saveDiff('');
     console.log('comparison ended successfully');
   }
 }
 
-try {
-  compareBundles();
-} catch (err) {
-  gitPRComment(generateMessage(err));
-  throw err;
-}
+compareBundles();

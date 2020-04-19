@@ -6,7 +6,11 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
+      - id: compareBundles
       - run: npm install
       - run: npm run analyzeBundles
+      - name: updatePRComment
+        if: always()
+        run: npm run npm run updatePRComment --prefix plugins-bundle-analyzer
     env:
       REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
