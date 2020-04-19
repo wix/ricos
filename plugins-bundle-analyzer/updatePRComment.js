@@ -3,7 +3,7 @@ const { gitPRComment } = require('../scripts/gitPRComment');
 const fs = require('fs');
 
 const generateMessage = message => {
-  const titleForPRComment = `bundle sizes that increased by more than 10KB:\n`;
+  const titleForPRComment = `Significant differences between the bundle sizes:\n`;
   return titleForPRComment.concat(message);
 };
 
