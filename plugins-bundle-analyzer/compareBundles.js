@@ -2,11 +2,6 @@
 const chalk = require('chalk');
 const fs = require('fs');
 
-// const generateMessage = message => {
-//   const titleForPRComment = `bundle sizes that increased by more than 10KB:\n`;
-//   return titleForPRComment.concat(message);
-// };
-
 function saveDiff(
   data,
   callback = err => {
