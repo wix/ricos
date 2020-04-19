@@ -4,9 +4,12 @@ import Styles from '../../../../statics/styles/side-toolbar-panel.scss';
 import { getPluginsForTag } from '../../pluginsSearchTags';
 import { TOOLBARS } from 'wix-rich-content-editor-common';
 import { getSortedSections } from './utils';
+import classNames from 'classnames';
 
-const shouldSplitByDefault = structure => {
-  const numberOfBasicPlugins = structure.filter(({ section }) => section === 'Basic').length;
+const shouldSplitByDefault = (structure, t) => {
+  const numberOfBasicPlugins = structure.filter(
+    ({ section }) => section === t('BlockToolbar_Section_Basic')
+  ).length;
   return numberOfBasicPlugins > 1 && structure.length - numberOfBasicPlugins > 1;
 };
 const SideToolbarPluginsSection = ({
@@ -17,7 +20,7 @@ const SideToolbarPluginsSection = ({
   searchTag,
   t,
   hidePopup,
-  splitToSections = shouldSplitByDefault(structure),
+  splitToSections = shouldSplitByDefault(structure, t),
 }) => {
   const pluginsForTag = searchTag && getPluginsForTag(searchTag, t);
   const plugins = !searchTag
@@ -44,7 +47,10 @@ const SideToolbarPluginsSection = ({
       ),
       <div key="pluginsButtons" className={Styles.buttonsWrapper}>
         {pluginsToRender.map(({ component: Component }, index) => (
-          <div key={index} className={Styles.buttonWrapper}>
+          <div
+            key={index}
+            className={classNames(Styles.buttonWrapper, splitToSections && Styles.withSections)}
+          >
             <Component
               getEditorState={getEditorState}
               setEditorState={setEditorState}

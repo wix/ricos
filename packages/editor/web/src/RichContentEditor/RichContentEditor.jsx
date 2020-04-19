@@ -54,13 +54,11 @@ class RichContentEditor extends Component {
     const {
       config: { pluginsConfig = {} },
     } = props;
-    pluginsConfig.uiSettings = merge(
-      {
-        blankTargetToggleVisibilityFn: anchorTarget => anchorTarget !== '_blank',
-        nofollowRelToggleVisibilityFn: relValue => relValue !== 'nofollow',
-      },
-      pluginsConfig.uiSettings || {}
-    );
+    const { uiSettings = {} } = pluginsConfig;
+    uiSettings.blankTargetToggleVisibilityFn =
+      uiSettings.blankTargetToggleVisibilityFn || (anchorTarget => anchorTarget !== '_blank');
+    uiSettings.nofollowRelToggleVisibilityFn =
+      uiSettings.nofollowRelToggleVisibilityFn || (relValue => relValue !== 'nofollow');
 
     this.calculateDiff = createCalcContentDiff(this.state.editorState);
     this.initContext();
@@ -110,7 +108,7 @@ class RichContentEditor extends Component {
     } = this.props;
 
     const getToolbarSettings = () => [
-      { name: 'SIDE', options: { ...toolbarsConfig.floatingPluginMenuConfig } },
+      { name: 'SIDE', options: { ...toolbarsConfig.addPluginMenuConfig } },
     ];
 
     this.contextualData = {

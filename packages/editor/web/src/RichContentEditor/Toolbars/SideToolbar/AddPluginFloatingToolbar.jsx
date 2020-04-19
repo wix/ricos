@@ -4,9 +4,8 @@ import classNames from 'classnames';
 import { FocusManager, EditorModals, getModalStyles } from 'wix-rich-content-editor-common';
 import { PlusIcon, PlusActiveIcon } from '../../Icons';
 import Styles from '../../../../statics/styles/side-toolbar.scss';
-import SideToolbarPanelContent from './SideToolbarPanelContent';
+import AddPluginMenu from './AddPluginMenu';
 import PopupOffsetnHoc from './PopupOffsetnHoc';
-import { TEXT_SEARCH_INPUT_ID } from '../../consts';
 
 export default class AddPluginFloatingToolbar extends Component {
   state = {
@@ -16,9 +15,6 @@ export default class AddPluginFloatingToolbar extends Component {
       transform: 'translate(-50%) scale(0)',
     },
   };
-
-  id = 'side_bar';
-  addButtonId = 'addPluginFloatingToolbar';
 
   componentDidMount() {
     window.addEventListener('click', this.onWindowClick);
@@ -47,7 +43,7 @@ export default class AddPluginFloatingToolbar extends Component {
     } = this.props;
     helpers.openModal({
       modalName: EditorModals.MOBILE_ADD_PLUGIN,
-      modalStyles: getModalStyles({ fullScreen: false, isMobile, stickyButtom: true }),
+      modalStyles: getModalStyles({ fullScreen: false, isMobile, stickyButtomMobile: true }),
       structure,
       theme,
       hidePopup: helpers.closeModal,
@@ -89,19 +85,16 @@ export default class AddPluginFloatingToolbar extends Component {
   };
 
   showPopup = () => {
-    this.setState(
-      {
-        style: {
-          ...this.getPopupOffset(),
-          transform: 'translate(-50%) scale(1)',
-          transition: 'transform 0.15s cubic-bezier(.3,1.2,.2,1)',
-          width: this.popup.offsetWidth,
-        },
-        isActive: true,
-        tabIndex: 0,
+    this.setState({
+      style: {
+        ...this.getPopupOffset(),
+        transform: 'translate(-50%) scale(1)',
+        transition: 'transform 0.15s cubic-bezier(.3,1.2,.2,1)',
+        width: this.popup.offsetWidth,
       },
-      () => setTimeout(() => document.getElementById(TEXT_SEARCH_INPUT_ID).focus(), 100)
-    );
+      isActive: true,
+      tabIndex: 0,
+    });
   };
 
   hidePopup = () => {
@@ -127,7 +120,8 @@ export default class AddPluginFloatingToolbar extends Component {
   };
 
   render() {
-    const { theme, getEditorState, setEditorState, structure, t, options } = this.props;
+    const { theme, getEditorState, setEditorState, structure, t, options, isMobile } = this.props;
+    const { isActive } = this.state;
     const { toolbarStyles } = theme || {};
     const floatingContainerClassNames = classNames(
       Styles.sideToolbar_floatingContainer,
@@ -143,24 +137,27 @@ export default class AddPluginFloatingToolbar extends Component {
     );
 
     const SideToolbarPanel = ({ top }) => {
+      const { isActive } = this.state;
       return (
         <div
-          id={this.id}
           className={popoupClassNames}
           style={{ ...this.state.style, top }}
           ref={el => (this.popup = el)}
           onClick={e => e.stopPropagation()}
           role="none"
         >
-          <SideToolbarPanelContent
-            t={t}
-            theme={theme}
-            getEditorState={getEditorState}
-            setEditorState={setEditorState}
-            structure={structure}
-            hidePopup={this.hidePopup}
-            options={options}
-          />
+          {isActive && (
+            <AddPluginMenu
+              t={t}
+              theme={theme}
+              getEditorState={getEditorState}
+              setEditorState={setEditorState}
+              structure={structure}
+              hidePopup={this.hidePopup}
+              options={options}
+              isMobile={isMobile}
+            />
+          )}
         </div>
       );
     };
@@ -168,7 +165,7 @@ export default class AddPluginFloatingToolbar extends Component {
     return (
       <FocusManager
         role="toolbar"
-        active={this.state.isActive}
+        active={isActive}
         aria-orientation="horizontal"
         focusTrapOptions={{
           escapeDeactivates: false,
@@ -179,21 +176,20 @@ export default class AddPluginFloatingToolbar extends Component {
       >
         <button
           aria-label={'Plugin Toolbar'}
-          aria-pressed={this.state.isActive}
+          aria-pressed={isActive}
           tabIndex="0"
           className={floatingIconClassNames}
           data-hook={this.addButtonId}
           onClick={this.onClick}
           ref={el => (this.selectButton = el)}
-          id={this.addButtonId}
         >
-          {!this.state.isActive ? <PlusIcon /> : <PlusActiveIcon />}
+          {!isActive ? <PlusIcon /> : <PlusActiveIcon />}
         </button>
         <PopupOffsetnHoc
           elementHeight={400}
           elementMarginTop={-20}
           elementMarginBottom={45}
-          elementId={this.addButtonId}
+          targetElement={this.selectButton}
         >
           <SideToolbarPanel />
         </PopupOffsetnHoc>
@@ -211,5 +207,5 @@ AddPluginFloatingToolbar.propTypes = {
   isMobile: PropTypes.bool,
   helpers: PropTypes.object,
   t: PropTypes.func,
-  options: PropTypes.bool,
+  options: PropTypes.object,
 };

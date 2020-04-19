@@ -163,8 +163,7 @@ export default ({
           className={classNames(
             styles.button,
             button.type === 'file' && styles.fileUploadButton,
-            !showName && styles.buttonHover,
-            showName && styles.sideToolbarButton
+            showName ? styles.sideToolbarButton : styles.buttonHover
           )}
           data-hook={`${name.replace(' ', '_')}_insert_plugin_button`}
           onClick={this.onClick}
@@ -172,7 +171,7 @@ export default ({
           ref={this.buttonRef}
           {...buttonCompProps}
         >
-          <div className={classNames(styles.icon, showName && styles.sideToolbarIcon)}>
+          <div className={classNames(styles.icon, !showName && styles.withoutName)}>
             <Icon key="0" />
           </div>
           {showName && (

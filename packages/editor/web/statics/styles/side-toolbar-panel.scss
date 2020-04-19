@@ -60,7 +60,7 @@
     grid-auto-rows: 72px;
     grid-template-columns: 98px 98px 98px;
     .withSections {
-      padding-top: 12px;
+      margin-bottom: 12px;
     }
     @media only screen and (max-width: 640px) {
       grid-row-gap: 8px;

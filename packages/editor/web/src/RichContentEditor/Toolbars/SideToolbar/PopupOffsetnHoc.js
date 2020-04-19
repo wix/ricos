@@ -6,10 +6,10 @@ const PopupOffsetnHoc = ({
   elementHeight,
   elementMarginTop,
   elementMarginBottom,
-  elementId,
+  targetElement,
 }) => {
   const bodyRect = document.body.getBoundingClientRect();
-  const elemRect = document.getElementById(elementId)?.getBoundingClientRect();
+  const elemRect = targetElement?.getBoundingClientRect();
   const offset = bodyRect.height - elemRect?.top - elementMarginTop;
   return React.cloneElement(children, {
     top: offset < elementHeight ? elementMarginBottom - elementHeight : elementMarginTop,
@@ -21,7 +21,7 @@ PopupOffsetnHoc.propTypes = {
   elementHeight: PropTypes.number.isRequired,
   elementMarginTop: PropTypes.number.isRequired,
   elementMarginBottom: PropTypes.number.isRequired,
-  elementId: PropTypes.string.isRequired,
+  targetElement: PropTypes.any.isRequired,
 };
 
 export default PopupOffsetnHoc;

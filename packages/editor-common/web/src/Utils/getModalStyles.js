@@ -32,7 +32,7 @@ const mobileModalStyles = {
   },
 };
 
-const stickyButtomStyles = {
+const stickyButtomMobileStyles = {
   overlay: mobileModalStyles.overlay,
   content: {
     width: '100%',
@@ -132,7 +132,7 @@ export const getModalStyles = ({
   fullScreen = true,
   inline = false,
   isMobile = false,
-  stickyButtom = false,
+  stickyButtomMobile = false,
 } = {}) => {
   const overrideStyles = [];
   if (isMobile) {
@@ -142,8 +142,8 @@ export const getModalStyles = ({
     if (customStyles) {
       overrideStyles.push(customStyles);
     }
-    if (stickyButtom) {
-      return stickyButtomStyles;
+    if (stickyButtomMobile) {
+      return stickyButtomMobileStyles;
     }
     return merge({}, mobileModalStyles, ...overrideStyles);
   } else {

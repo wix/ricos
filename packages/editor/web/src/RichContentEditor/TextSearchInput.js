@@ -3,23 +3,15 @@ import PropTypes from 'prop-types';
 import { SearchIcon, ClearIcon } from 'wix-rich-content-editor-common/src/Icons';
 import { mergeStyles } from 'wix-rich-content-common';
 import textInputStyles from '../../statics/styles/text-search-input.scss';
-import { TEXT_SEARCH_INPUT_ID } from './consts';
 
 export default class TextSearchInput extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      searchTag: '',
-    };
+  componentDidMount() {
+    this.input.focus();
+    this.input.setSelectionRange(0, this.input.value.length);
   }
-
-  onChange = e => {
-    this.setState({ searchTag: e.target.value });
-    this.props.setSearchTag(e.target.value);
-  };
+  onChange = e => this.props.setSearchTag(e.target.value);
 
   onCloseRequested = () => {
-    this.setState({ isOpen: false });
     this.props.onClose();
   };
 
@@ -29,14 +21,10 @@ export default class TextSearchInput extends Component {
     }
   };
 
-  handleClearText = () => {
-    this.setState({ searchTag: '' });
-    this.props.setSearchTag('');
-  };
+  handleClearText = () => this.props.setSearchTag('');
 
   render() {
-    const { placeHolder, theme } = this.props;
-    const { searchTag } = this.state;
+    const { placeHolder, theme, searchTag } = this.props;
     const styles = mergeStyles({ styles: textInputStyles, theme });
 
     return (
@@ -50,8 +38,7 @@ export default class TextSearchInput extends Component {
           placeholder={placeHolder}
           onKeyPress={this.handleKeyPress}
           onChange={this.onChange}
-          value={this.state.searchTag}
-          id={TEXT_SEARCH_INPUT_ID}
+          value={searchTag}
         />
         {searchTag && (
           <ClearIcon className={styles.textInput_suffixIcon} onClick={this.handleClearText} />
@@ -66,4 +53,5 @@ TextSearchInput.propTypes = {
   onClose: PropTypes.func,
   theme: PropTypes.object.isRequired,
   setSearchTag: PropTypes.func.isRequired,
+  searchTag: PropTypes.string.isRequired,
 };

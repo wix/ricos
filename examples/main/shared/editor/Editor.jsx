@@ -32,7 +32,7 @@ export default class Editor extends PureComponent {
     const { scrollingElementFn, testAppPlugins } = props;
     const additionalConfig = { [GALLERY_TYPE]: { scrollingElement: scrollingElementFn } };
     const toolbarsConfig = {
-      floatingPluginMenuConfig: {
+      addPluginMenuConfig: {
         showSearch: true,
         splitToSections: true,
       },

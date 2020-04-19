@@ -1,7 +1,6 @@
-const SORTED_SECTIONS = ['Basic', 'Embed from Wix', 'Embed from Social', 'Tools'];
-
 export const getSortedSections = sectionsArr => {
-  return sectionsArr.sort(
-    (section1, section2) => SORTED_SECTIONS.indexOf(section2) - SORTED_SECTIONS.indexOf(section1)
-  );
+  const sortedSections = ['Basic', 'Embed from Wix', 'Embed from Socials', 'Tools'];
+  return sortedSections
+    .map(section => (sectionsArr.includes(section) ? section : false))
+    .filter(section => section);
 };

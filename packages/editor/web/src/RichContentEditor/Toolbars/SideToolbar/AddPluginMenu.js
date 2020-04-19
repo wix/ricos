@@ -5,7 +5,13 @@ import TextSearchInput from '../../TextSearchInput';
 import SideToolbarPluginsSection from './SideToolbarPluginsSection';
 import classNames from 'classnames';
 
-export default class SideToolbarPanelContent extends Component {
+export default class AddPluginMenu extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      searchTag: '',
+    };
+  }
   render() {
     const {
       theme,
@@ -19,6 +25,7 @@ export default class SideToolbarPanelContent extends Component {
     } = this.props;
     const setSearchTag = searchTag => this.setState({ searchTag });
     const { showSearch = structure.length > 8, splitToSections } = options;
+    const { searchTag } = this.state;
     return (
       <div
         className={classNames(Styles.sideToolbarPanelWrapper, {
@@ -29,9 +36,10 @@ export default class SideToolbarPanelContent extends Component {
           <div className={Styles.searchWrapper}>
             <TextSearchInput
               onClose={hidePopup}
-              placeHolder={'Search for a block'}
+              placeHolder={t('Side_toolbar_basic_search_placeholder')}
               theme={theme}
               setSearchTag={setSearchTag}
+              searchTag={searchTag}
             />
           </div>
         )}
@@ -46,10 +54,10 @@ export default class SideToolbarPanelContent extends Component {
             getEditorState={getEditorState}
             setEditorState={setEditorState}
             structure={structure}
-            searchTag={this.state?.searchTag}
+            searchTag={searchTag}
             t={t}
             hidePopup={hidePopup}
-            splitToSections={!this.state?.searchTag && splitToSections}
+            splitToSections={!searchTag && !isMobile && splitToSections}
           />
         </div>
       </div>
@@ -57,7 +65,7 @@ export default class SideToolbarPanelContent extends Component {
   }
 }
 
-SideToolbarPanelContent.propTypes = {
+AddPluginMenu.propTypes = {
   getEditorState: PropTypes.func.isRequired,
   setEditorState: PropTypes.func.isRequired,
   structure: PropTypes.array.isRequired,

@@ -13,17 +13,10 @@
 
 .sideToolbarButton {
   color: #333333;
-  .sideToolbarIcon {
-    color: #333333;
-  }
-  .label {
-    color: #333333;
-  }
 }
 
 .button {
   background: transparent;
-  color: $secondary-text-color;
   border: 0;
   vertical-align: bottom;
   height: 100%;
@@ -36,6 +29,9 @@
   align-items: center;
   justify-content: center;
   text-align: center;
+  &.buttonHover {
+    color: $secondary-text-color;
+  }
 
   &.buttonHover:hover:not([disabled]),
   &.buttonHover:focus:not([disabled]) {
@@ -67,8 +63,9 @@
   width: $icon-width;
   height: $icon-width;
   vertical-align: middle;
-  color: $secondary-text-color;
-
+  &.withoutName {
+    color: $secondary-text-color;
+  }
   svg {
     width: 100%;
     height: 100%;
