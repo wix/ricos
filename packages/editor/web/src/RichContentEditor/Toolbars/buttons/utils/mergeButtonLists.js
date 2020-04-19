@@ -1,9 +1,5 @@
 import { cloneDeep } from 'lodash';
-
-const isPositionInBounds = (position, mergedList, group) =>
-  position > 0 && position < mergedList[group]?.length;
-
-const isNewGroup = (mergedList, group) => group && !mergedList[group];
+const shouldCreateNewGroup = (mergedList, groupIndex) => !mergedList[groupIndex];
 
 const addSeparators = mergedList => {
   mergedList.forEach((list, i) => {
@@ -18,31 +14,23 @@ const addSeparators = mergedList => {
  * @param {string} formFactor determines position & group type desktop/mobile
  * @returns {Array} merged button list
  */
-export const mergeButtonLists = (
-  sourceList,
-  positionedList,
-  formFactor = 'desktop',
-  isIncludeSeparators
-) => {
-  const merged = positionedList.reduce((mergedList, buttonData) => {
-    if (buttonData.name) {
-      const group =
-        buttonData.group?.[formFactor] !== undefined
-          ? buttonData.group?.[formFactor]
-          : sourceList.length;
-      const position = buttonData.position?.[formFactor];
-      if (isPositionInBounds(position, mergedList, group)) {
-        mergedList[group].splice(position, 0, buttonData.name);
-        return mergedList;
-      }
-      if (isNewGroup(mergedList, group)) {
+export const mergeButtonLists = (sourceList, positionedList, formFactor = 'desktop') => {
+  const mergedList = cloneDeep(sourceList);
+  positionedList.forEach(buttonData => {
+    const groupIndex =
+      buttonData.group?.[formFactor] !== undefined
+        ? buttonData.group?.[formFactor]
+        : sourceList.length;
+    const position = buttonData.position?.[formFactor];
+    if (position < mergedList[groupIndex]?.length) {
+      mergedList[groupIndex].splice(position, 0, buttonData.name);
+    } else {
+      if (shouldCreateNewGroup(mergedList, groupIndex)) {
         mergedList.push([]);
       }
-      mergedList[group].push(buttonData.name);
-      return mergedList;
+      mergedList[groupIndex].push(buttonData.name);
     }
-    return mergedList;
-  }, cloneDeep(sourceList));
-  isIncludeSeparators && addSeparators(merged);
-  return merged.flat();
+  });
+  formFactor === 'desktop' && addSeparators(mergedList);
+  return mergedList.flat();
 };

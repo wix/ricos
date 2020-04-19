@@ -32,8 +32,7 @@ const createEditorToolbars = ({ buttons, textAlignment, refId, context }) => {
     desktop: mergeButtonLists(
       DesktopTextButtonList,
       reducePluginTextButtonNames(pluginTextButtons),
-      'desktop',
-      true
+      'desktop'
     ),
   };
 
