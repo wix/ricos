@@ -164,32 +164,37 @@ jobs:
           status: FAILED
           color: danger
 
-      - run: echo ${{ toJSON(github) }}
-
-      - run: echo ${{ github.event.before }}
-
-      - name: Get previous commit status
+      - name: Get previous commit SHA
         id: parent
         uses: wei/curl@v1.1.1
         with:
           args: https://api.github.com/repos/wix-incubator/rich-content/commits/heads/notify-recovery-on-slack
 
+      - run: echo "$OUTPUTS"
+        env:
+          OUTPUTS: ${{ toJson(steps.parent.outputs) }}
+
+      - run: echo "$SHA"
+        env:
+          SHA: ${{ toJson(steps.parent.outputs.parents[0].sha) }}
+
       - name: Get previous commit status
         id: previous-status
         uses: wei/curl@v1.1.1
         with:
-          args: https://api.github.com/repos/wix-incubator/rich-content/commits/${{ github.event.before }}/status
+          args: https://api.github.com/repos/wix-incubator/rich-content/commits/${{ steps.parent.outputs.parents[0].sha }}/status
 
-      - run: echo ${{ toJSON(steps.previous-status.outputs) }}
+      - run: echo "$PREOUTPUTS"
+        env:
+          PREOUTPUTS: ${{ toJson(steps.previous-status.outputs) }}
 
-      - run: echo ${{ steps.previous-status.outputs.state }}
-
-      - run: echo ${{ toJSON(steps.parent.outputs) }}
-      - run: echo ${{ steps.parent.outputs.parents[0].sha }}
+      - run: echo "$STATE"
+        env:
+          STATE: ${{ toJson(steps.previous-status.outputs.state) }}
 
       - name: Notify recovery on Slack
         uses: voxmedia/github-action-slack-notify-build@v1.1.1
-        if: github.ref == 'refs/heads/notify-recovery-on-slack' && (needs.e2e-visual.result == 'success' && needs.content-state-tests.result == 'success' && needs.lint-and-unit-tests.result == 'success')
+        if: github.ref == 'refs/heads/notify-recovery-on-slack' && steps.previous-status.outputs.state == 'success' && (needs.e2e-visual.result == 'success' && needs.content-state-tests.result == 'success' && needs.lint-and-unit-tests.result == 'success')
         with:
           channel_id: G011R1YVCRG #rich-content-ci
           status: RECOVERED
