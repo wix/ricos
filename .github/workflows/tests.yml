@@ -175,7 +175,7 @@ jobs:
 
       - run: echo "$STATE"
         env:
-          STATE: ${{ toJson(steps.previous-status.outputs.state) }}
+          STATE: ${{ steps.previous-status.outputs.status }}
 
       - name: Notify recovery on Slack
         uses: voxmedia/github-action-slack-notify-build@v1.1.1
