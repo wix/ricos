@@ -164,32 +164,11 @@ jobs:
       #     status: FAILED
       #     color: danger
 
-      - run: echo "::set-output name=curl_out::${curl https://api.github.com/repos/wix-incubator/rich-content/commits/heads/notify-recovery-on-slack}"
-        id: curl_id
-
-      - run: echo "$CURL"
-        env:
-          CURL: ${{ toJson(steps.curl_id) }}
-
-      - name: Get previous commit SHA
-        id: parent
-        uses: wei/curl@v1.1.1
-        with:
-          args: https://api.github.com/repos/wix-incubator/rich-content/commits/heads/notify-recovery-on-slack
-
-      - run: echo "$OUTPUTS"
-        env:
-          OUTPUTS: ${{ toJson(steps) }}
-
-      - run: echo "$SHA"
-        env:
-          SHA: ${{ toJson(steps.parent.outputs.parents[0].sha) }}
-
       - name: Get previous commit status
         id: previous-status
         uses: wei/curl@v1.1.1
         with:
-          args: https://api.github.com/repos/wix-incubator/rich-content/commits/${{ steps.parent.outputs.parents[0].sha }}/status
+          args: https://api.github.com/repos/wix-incubator/rich-content/commits/${{ github.event.before }}/status
 
       - run: echo "$PREOUTPUTS"
         env:
