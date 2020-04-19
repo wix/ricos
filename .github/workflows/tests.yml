@@ -175,6 +175,6 @@ jobs:
         with:
           channel_id: C0124DH7HHS #rich-content-ci
           status: RECOVERED
-          color: good
+          color: '#28a745'
     env:
       SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
