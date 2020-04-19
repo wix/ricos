@@ -2,15 +2,18 @@
 const chalk = require('chalk');
 const fs = require('fs');
 
-const generateMessage = message => {
-  const titleForPRComment = `bundle sizes that increased by more than 10KB:\n`;
-  return titleForPRComment.concat(message);
-};
+// const generateMessage = message => {
+//   const titleForPRComment = `bundle sizes that increased by more than 10KB:\n`;
+//   return titleForPRComment.concat(message);
+// };
 
-function saveDiff(data = []) {
-  fs.writeFile('diffBundles.json', data, err => {
+function saveDiff(
+  data,
+  callback = err => {
     if (err) throw err;
-  });
+  }
+) {
+  fs.writeFile('diffBundles.txt', data, callback);
 }
 
 function compareBundles() {
@@ -30,18 +33,19 @@ function compareBundles() {
     const newSize = currentBundles[key];
     if (newSize !== oldSize) {
       if (parseInt(newSize) - parseInt(oldSize) > 10) {
-        message = message.concat(
-          `${key}: old bundlesize: ${oldSize}, current bundlesize: ${newSize}\n`
-        );
+        const diff = `${key}: old bundlesize: ${oldSize}, current bundlesize: ${newSize}\n`;
+        message = message.concat(diff);
       }
     }
   });
+
   if (message !== '') {
     console.error(chalk.bold.red(message));
-    saveDiff(generateMessage(message));
-    throw message;
+    saveDiff(message, () => {
+      throw message;
+    });
   } else {
-    saveDiff('');
+    saveDiff(message);
     console.log('comparison ended successfully');
   }
 }
