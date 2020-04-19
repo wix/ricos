@@ -164,7 +164,15 @@ jobs:
           status: FAILED
           color: danger
 
+      - run: echo ${{ toJSON(github) }}
+
       - run: echo ${{ github.event.before }}
+
+      - name: Get previous commit status
+        id: parent
+        uses: wei/curl@v1.1.1
+        with:
+          args: https://api.github.com/repos/wix-incubator/rich-content/commits/heads/notify-recovery-on-slack
 
       - name: Get previous commit status
         id: previous-status
@@ -172,9 +180,12 @@ jobs:
         with:
           args: https://api.github.com/repos/wix-incubator/rich-content/commits/${{ github.event.before }}/status
 
-      - run: echo ${{ steps.previous-status.outputs }}
+      - run: echo ${{ toJSON(steps.previous-status.outputs) }}
 
       - run: echo ${{ steps.previous-status.outputs.state }}
+
+      - run: echo ${{ toJSON(steps.parent.outputs) }}
+      - run: echo ${{ steps.parent.outputs.parents[0].sha }}
 
       - name: Notify recovery on Slack
         uses: voxmedia/github-action-slack-notify-build@v1.1.1
