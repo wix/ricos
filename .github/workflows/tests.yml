@@ -166,9 +166,8 @@ jobs:
 
       - name: Get previous commit status
         id: previous-status
-        uses: wei/curl@v1.1.1
-        with:
-          args: https://api.github.com/repos/wix-incubator/rich-content/commits/${{ github.event.before }}/status
+        run: |
+          echo "::set-output name=status::$(curl -s https://api.github.com/repos/wix-incubator/rich-content/commits/${{ github.event.before }}/status | jq '.state' | sed 's/\"//g')"
 
       - run: echo "$PREOUTPUTS"
         env:
