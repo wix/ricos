@@ -9,8 +9,7 @@ jobs:
       - name: compareBundles
         run: npm install
         run: npm run analyzeBundles
-      - uses: actions/checkout@v2
-        name: updatePRComment
+      - name: updatePRComment
         if: always()
         run: npm run updatePRComment --prefix plugins-bundle-analyzer
     env:
