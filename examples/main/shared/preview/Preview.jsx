@@ -2,8 +2,13 @@ import React, { PureComponent } from 'react';
 import { ContentStateTransformation, RichContentPreview } from 'wix-rich-content-preview';
 import * as PropTypes from 'prop-types';
 import * as Plugins from './PreviewPlugins';
+import { isSSR } from 'wix-rich-content-common';
 import theme from '../theme/theme'; // must import after custom styles
 import 'wix-rich-content-preview/dist/styles.min.css';
+import getImagesData from 'wix-rich-content-fullscreen/dist/lib/getImagesData';
+import Fullscreen from 'wix-rich-content-fullscreen';
+
+import 'wix-rich-content-fullscreen/dist/styles.min.css';
 
 const anchorTarget = '_top';
 const relValue = 'noreferrer';
@@ -11,6 +16,9 @@ const relValue = 'noreferrer';
 export default class Preview extends PureComponent {
   constructor(props) {
     super(props);
+    if (!isSSR()) {
+      this.expandModeData = getImagesData(this.props.initialState);
+    }
     this.state = {
       disabled: false,
     };
@@ -39,6 +47,17 @@ export default class Preview extends PureComponent {
     ];
   }
 
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.initialState !== this.props.initialState) {
+      this.expandModeData = getImagesData(this.props.initialState);
+    }
+  }
+
+  componentDidMount() {
+    this.shouldRenderFullscreen = true;
+  }
+
   closeModal = () => {
     this.setState({
       showModal: false,
@@ -46,9 +65,18 @@ export default class Preview extends PureComponent {
     });
   };
 
-  helpers = {};
+  helpers = {
+    onExpand: (entityIndex, innerIndex = 0) => {
+      //galleries have an innerIndex (i.e. second image will have innerIndex=1)
+      this.setState({
+        expandModeIsOpen: true,
+        expandModeIndex: this.expandModeData.imageMap[entityIndex] + innerIndex,
+      });
+    }
+  };
 
   render() {
+    const { expandModeIsOpen, expandModeIndex } = this.state;
     return (
       <div id="rich-content-preview" className="viewer">
         <div className="content-preview">
@@ -66,6 +94,14 @@ export default class Preview extends PureComponent {
             relValue={relValue}
             disabled={this.state.disabled}
           />
+          {this.shouldRenderFullscreen && (
+            <Fullscreen
+              images={this.expandModeData.images}
+              onClose={() => this.setState({ expandModeIsOpen: false })}
+              isOpen={expandModeIsOpen}
+              index={expandModeIndex}
+            />
+          )}
         </div>
       </div>
     );
