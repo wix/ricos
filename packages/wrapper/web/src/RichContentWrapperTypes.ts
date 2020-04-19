@@ -21,6 +21,7 @@ export interface RichContentWrapperProps {
   isEditor?: boolean;
   isMobile?: boolean;
   rcProps?: RichContentProps;
+  forwardedRef?: any;
 }
 
 export type InitialState = { blocks: object[]; entityMap: { [index: number]: object } };

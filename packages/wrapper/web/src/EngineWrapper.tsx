@@ -2,7 +2,6 @@ import React, { Children, Fragment, ReactElement } from 'react';
 import FullscreenRenderer from './FullscreenRenderer';
 import ModalRenderer from './ModalRenderer';
 import { merge } from 'lodash';
-import { EditorState } from 'draft-js';
 import { RichContentProps } from './RichContentWrapperTypes';
 import { RichContentEditor } from 'wix-rich-content-editor';
 
@@ -17,25 +16,18 @@ interface Props {
 
 interface State {
   ModalityProvider: typeof Fragment | typeof ModalRenderer | typeof FullscreenRenderer;
-  editorState?: EditorState;
   MobileToolbar?: React.ElementType;
 }
 
 class EngineWrapper extends React.Component<Props, State> {
   editor: typeof RichContentEditor;
 
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
     this.state = this.stateFromProps(props);
-    if (props.isEditor) {
-      import(
-        // eslint-disable-next-line max-len
-        /* webpackChunkName: "rce-editorStateConversion"  */ `wix-rich-content-editor/dist/lib/editorStateConversion`
-      ).then(module => this.setState({ editorState: module.createEmpty() }));
-    }
   }
 
-  stateFromProps(props) {
+  stateFromProps(props: Props) {
     const { isEditor, children } = props;
     const { closeModal, openModal, onExpand } = children.props?.helpers || {};
     if (isEditor && !closeModal && !openModal) {
@@ -54,20 +46,16 @@ class EngineWrapper extends React.Component<Props, State> {
     }
   }
 
-  handleChange = (editorState: EditorState) => {
-    this.setState({ editorState });
-  };
+  getToolbars = () => this.editor.getToolbars();
+  focus = () => this.editor.focus();
+  blur = () => this.editor.blur();
+  getData = (postId: string) => this.editor.getData(postId);
 
   render() {
-    const { rcProps, children, isEditor, isMobile } = this.props;
+    const { rcProps, children, isMobile } = this.props;
     const { ModalityProvider, MobileToolbar } = this.state;
-    const { onChange } = children.props;
 
     const mergedRCProps = merge(rcProps, { isMobile }, children.props);
-
-    if (isEditor && !onChange) {
-      mergedRCProps.onChange = this.handleChange;
-    }
 
     return (
       <Fragment>

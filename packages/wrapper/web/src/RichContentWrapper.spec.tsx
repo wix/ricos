@@ -49,17 +49,20 @@ describe('Wrapper', () => {
 
   describe('Editor', () => {
     it('should render locale="en" if unspecified', () => {
-      const element = mount(wrapper({ isEditor: true }).withEditor());
+      const element = shallow(wrapper({ isEditor: true }).withEditor()).dive();
       expect(element.props()).toHaveProperty('locale');
       expect(element.props().locale).toEqual('en');
     });
     it('should render editor child if provided', () => {
-      const element = mount(wrapper({ isEditor: true }).withEditor());
+      const element = shallow(wrapper({ isEditor: true }).withEditor());
       expect(element.props()).toHaveProperty('children');
     });
     it('should render with pluginsStrategy output', () => {
       const element = shallow(wrapper({ isEditor: true, plugins }).withEditor());
-      const instance = element.dive().instance();
+      const instance = element
+        .dive()
+        .dive()
+        .instance();
       const renderResult = instance.render();
       const editorProps = renderResult.props.children[1].props;
       expect(editorProps).toHaveProperty('config');
@@ -67,7 +70,10 @@ describe('Wrapper', () => {
     });
     it('should render with themeStrategy output', () => {
       const element = shallow(wrapper({ isEditor: true, theme: 'Default' }).withEditor());
-      const instance = element.dive().instance();
+      const instance = element
+        .dive()
+        .dive()
+        .instance();
       const renderResult = instance.render();
       const editorProps = renderResult.props.children[1].props;
       expect(editorProps).toHaveProperty('theme');
@@ -75,14 +81,14 @@ describe('Wrapper', () => {
     });
     it('should call updateLocale on componentDidMount', () => {
       const element = shallow(wrapper({ isEditor: true, locale: 'en' }).withEditor());
-      const instance = element.instance();
+      const instance = element.dive().instance();
       const spyUpdate = spyOn(instance, 'updateLocale');
       instance.componentDidMount();
       expect(spyUpdate.calls.count()).toEqual(1);
     });
     it('should render localeStrategy in strategies', async () => {
       const element = shallow(wrapper({ isEditor: true, locale: 'he' }).withEditor());
-      const instance = element.instance();
+      const instance = element.dive().instance();
       const renderResult = instance.render();
       await instance.updateLocale();
       const engineProps = renderResult.props;
@@ -93,7 +99,7 @@ describe('Wrapper', () => {
 
   describe('Viewer', () => {
     it('should render locale="en" if unspecified', () => {
-      const element = mount(wrapper().withViewer());
+      const element = shallow(wrapper().withViewer()).dive();
       expect(element.props()).toHaveProperty('locale');
       expect(element.props().locale).toEqual('en');
     });
@@ -103,7 +109,10 @@ describe('Wrapper', () => {
     });
     it('should render with pluginsStrategy output', () => {
       const element = shallow(wrapper({ plugins }).withViewer());
-      const instance = element.dive().instance();
+      const instance = element
+        .dive()
+        .dive()
+        .instance();
       const renderResult = instance.render();
       const viewerProps = renderResult.props.children[1].props;
       expect(viewerProps).toHaveProperty('config');
@@ -111,7 +120,10 @@ describe('Wrapper', () => {
     });
     it('should render with themeStrategy output', () => {
       const element = shallow(wrapper({ theme: 'Default' }).withViewer());
-      const instance = element.dive().instance();
+      const instance = element
+        .dive()
+        .dive()
+        .instance();
       const renderResult = instance.render();
       const viewerProps = renderResult.props.children[1].props;
       expect(viewerProps).toHaveProperty('theme');

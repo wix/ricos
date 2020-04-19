@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, forwardRef } from 'react';
 import EngineWrapper from './EngineWrapper';
 import themeStrategy from './themeStrategy/themeStrategy';
 import pluginsStrategy from './pluginsStrategy/pluginsStrategy';
@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import { isDefined } from 'ts-is-present';
 import { RichContentProps, RichContentWrapperProps } from './RichContentWrapperTypes';
 
-export default class RichContentWrapper extends Component<
+class RichContentWrapper extends Component<
   RichContentWrapperProps,
   { localeStrategy: RichContentProps }
 > {
@@ -49,6 +49,7 @@ export default class RichContentWrapper extends Component<
       children,
       isEditor = false,
       rcProps,
+      forwardedRef,
       ...rest
     } = this.props;
     const { localeStrategy } = this.state;
@@ -74,6 +75,7 @@ export default class RichContentWrapper extends Component<
         rcProps={mergedRCProps}
         isEditor={isEditor}
         key={isEditor ? 'editor' : 'viewer'}
+        ref={forwardedRef}
         {...rest}
       >
         {children}
@@ -81,3 +83,7 @@ export default class RichContentWrapper extends Component<
     );
   }
 }
+
+export default forwardRef((props: RichContentWrapperProps, ref) => (
+  <RichContentWrapper {...props} forwardedRef={ref} />
+));
