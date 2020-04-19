@@ -27,7 +27,7 @@ class ReadMore extends PureComponent {
 
   onClick = e => {
     e.preventDefault();
-    this.setState({ expanded: true });
+    this.setState(prevState => ({ expanded: !prevState.expanded }));
   };
 
   renderChildren(children) {
@@ -39,10 +39,20 @@ class ReadMore extends PureComponent {
     this.setState({ clamped });
   };
 
+  /* eslint-disable jsx-a11y/anchor-is-valid */
   render() {
     const { clamped, expanded } = this.state;
     if (expanded) {
-      return this.props.children;
+      return (
+        <>
+          {this.props.children}
+          {clamped && (
+            <a href="#" role="button" onClick={this.onClick} className={this.styles.readMore_label}>
+              {'See less'}
+            </a>
+          )}
+        </>
+      );
     }
     this.styles = this.styles || mergeStyles({ styles, theme: this.props.theme });
     const {
@@ -51,7 +61,6 @@ class ReadMore extends PureComponent {
       ellipsis,
       children,
     } = this.props;
-    /* eslint-disable jsx-a11y/anchor-is-valid */
     return (
       <Fragment>
         <HTMLEllipsis

@@ -1,6 +1,11 @@
 :global {
   .LinesEllipsis-ellipsis {
-    font-weight: bold;
+  }
+  .LinesEllipsis--clamped wbr {
+    display: none;
+  }
+  .LinesEllipsis--clamped .LinesEllipsis-unit {
+    display: none;
   }
 }
 
