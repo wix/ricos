@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import ReactPlayer from 'react-player';
-import UrlInputModal from 'wix-rich-content-editor-common/dist/lib/UrlInputModal';
+import UrlInputModal from 'wix-rich-content-editor-common/dist/lib/UrlInputModal.cjs.js';
 
 export default class SoundCloudURLInputModal extends Component {
   constructor(props) {
@@ -43,7 +43,7 @@ export default class SoundCloudURLInputModal extends Component {
       <UrlInputModal
         onConfirm={this.onConfirm}
         helpers={helpers}
-        url={url}
+        input={url}
         t={t}
         languageDir={languageDir}
         title={
@@ -53,7 +53,7 @@ export default class SoundCloudURLInputModal extends Component {
         dataHook={'soundCloudUploadModal'}
         saveLabel={doneLabel}
         cancelLabel={cancelLabel}
-        setUrl={url => this.setState({ url })}
+        onInputChange={url => this.setState({ url })}
         errorMessage={t('SoundCloudUploadModal_Input_InvalidUrl')}
         placeholder={t('SoundCloudUploadModal_Input_Placeholder')}
         onCloseRequested={helpers.closeModal}

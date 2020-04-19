@@ -32,13 +32,14 @@
     "@testing-library/react": "^9.4.0",
     "babel-jest": "^25.1.0",
     "classnames": "^2.0.0",
-    "husky": "^4.2.5",
     "jest": "^25.1.0",
     "jest-yoshi-preset": "4.31.0",
     "lint-staged": "^7.2.2",
     "lodash": "^4.17.15",
     "prop-types": "^15.6.2",
-    "react": "16.6.3",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3",
+
     "react-json-view": "^1.19.1",
     "react-syntax-highlighter": "12.2.1",
     "wix-rich-content-common": "7.3.2",
@@ -68,7 +69,7 @@
     "wix-rich-content-preview": "7.3.2",
     "wix-rich-content-viewer": "7.3.2",
     "wix-rich-content-wrapper": "7.3.2",
-    "wix-style-react": "^6.58.0"
+    "wix-style-react": "^8.0.0"
   },
   "devDependencies": {
     "yoshi": "4.31.0",
