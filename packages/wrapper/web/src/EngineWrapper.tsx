@@ -54,7 +54,7 @@ class EngineWrapper extends React.Component<Props, State> {
     }
   }
 
-  handleChange = editorState => {
+  handleChange = (editorState: EditorState) => {
     this.setState({ editorState });
   };
 

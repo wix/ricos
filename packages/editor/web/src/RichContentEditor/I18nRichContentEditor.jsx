@@ -17,7 +17,7 @@ export default class I18nRichContentEditor extends Component {
   getData = postId => {
     this.editor.publish(postId); //async
     return {
-      editorState: this.editor.getEditorState(),
+      getContent: this.editor.dataInstance.getContentState(),
     };
   };
 

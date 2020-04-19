@@ -450,8 +450,8 @@ export function getPostContentSummary(editorState) {
 //ATM, looks for deleted plugins.
 //onChanges - for phase 2?
 //Added Plugins - checked elsewhere via toolbar clicks
-export const createCalcContentDiff = state => {
-  let prevState = state;
+export const createCalcContentDiff = editorState => {
+  let prevState = editorState;
   return debounce((newState, onPluginDelete) => {
     const countByType = obj => countBy(obj, x => x.type);
     const prevEntities = countByType(getEntities(prevState));
