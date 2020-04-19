@@ -6,9 +6,8 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
-      - name: compareBundles
-        run: npm install
-        run: npm run analyzeBundles
+      - run: npm install
+      - run: npm run analyzeBundles
       - name: updatePRComment
         if: always()
         run: npm run updatePRComment --prefix plugins-bundle-analyzer
