@@ -15,6 +15,10 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+- `code-block`
+  - [#943](https://github.com/wix-incubator/rich-content/pull/943) fix: selecting code block backward
+
 </details>
 <hr/>
 
