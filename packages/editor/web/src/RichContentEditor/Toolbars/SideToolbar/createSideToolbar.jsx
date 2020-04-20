@@ -55,7 +55,8 @@ export default ({
   displayOptions,
   toolbarDecorationFn,
   config,
-  options,
+  showSearch,
+  splitToSections,
 }) => {
   const { buttonStyles, ...rest } = theme;
   const toolbarButtonTheme = {
@@ -88,7 +89,8 @@ export default ({
           isMobile={isMobile}
           helpers={helpers}
           t={t}
-          options={options}
+          showSearch={showSearch}
+          splitToSections={splitToSections}
         />
       ),
     ],

@@ -1,13 +1,13 @@
 @import '~wix-rich-content-common/dist/statics/styles/palette';
 
-.textInput {
+.container {
   position: relative;
   &:hover {
     color: #333333;
   }
 }
 
-.textInput_input {
+.input {
   font-weight: 300;
   font-size: 12px;
   line-height: 16px;
@@ -27,8 +27,8 @@
   }
 }
 
-.textInput_prefixIcon,
-.textInput_suffixIcon {
+.prefixIcon,
+.suffixIcon {
   position: absolute;
   bottom: 0;
   top: 0;
@@ -36,10 +36,10 @@
   width: 24px;
 }
 
-.textInput_prefixIcon {
+.prefixIcon {
   left: 7px;
 }
 
-.textInput_suffixIcon {
+.suffixIcon {
   right: 11px;
 }

@@ -90,7 +90,7 @@ export default class AddPluginFloatingToolbar extends Component {
         ...this.getPopupOffset(),
         transform: 'translate(-50%) scale(1)',
         transition: 'transform 0.15s cubic-bezier(.3,1.2,.2,1)',
-        width: this.popup.offsetWidth,
+        width: this.popupRef.offsetWidth,
       },
       isActive: true,
       tabIndex: 0,
@@ -109,10 +109,10 @@ export default class AddPluginFloatingToolbar extends Component {
 
   getPopupOffset = () => {
     if (!this.popupOffset) {
-      if (this.popup) {
+      if (this.popupRef) {
         this.popupOffset = {
-          left: this.popup.offsetWidth / 2 + 30,
-          right: -this.popup.offsetWidth / 2 + 30,
+          left: this.popupRef.offsetWidth / 2 + 30,
+          right: -this.popupRef.offsetWidth / 2 + 30,
         };
       }
     }
@@ -120,7 +120,16 @@ export default class AddPluginFloatingToolbar extends Component {
   };
 
   render() {
-    const { theme, getEditorState, setEditorState, structure, t, options, isMobile } = this.props;
+    const {
+      theme,
+      getEditorState,
+      setEditorState,
+      structure,
+      t,
+      showSearch,
+      splitToSections,
+      isMobile,
+    } = this.props;
     const { isActive } = this.state;
     const { toolbarStyles } = theme || {};
     const floatingContainerClassNames = classNames(
@@ -142,7 +151,7 @@ export default class AddPluginFloatingToolbar extends Component {
         <div
           className={popoupClassNames}
           style={{ ...this.state.style, top }}
-          ref={el => (this.popup = el)}
+          ref={el => (this.popupRef = el)}
           onClick={e => e.stopPropagation()}
           role="none"
         >
@@ -154,7 +163,8 @@ export default class AddPluginFloatingToolbar extends Component {
               setEditorState={setEditorState}
               structure={structure}
               hidePopup={this.hidePopup}
-              options={options}
+              showSearch={showSearch}
+              splitToSections={splitToSections}
               isMobile={isMobile}
             />
           )}
@@ -179,7 +189,7 @@ export default class AddPluginFloatingToolbar extends Component {
           aria-pressed={isActive}
           tabIndex="0"
           className={floatingIconClassNames}
-          data-hook={this.addButtonId}
+          data-hook={'addPluginFloatingToolbar'}
           onClick={this.onClick}
           ref={el => (this.selectButton = el)}
         >
@@ -207,5 +217,6 @@ AddPluginFloatingToolbar.propTypes = {
   isMobile: PropTypes.bool,
   helpers: PropTypes.object,
   t: PropTypes.func,
-  options: PropTypes.object,
+  showSearch: PropTypes.bool,
+  splitToSections: PropTypes.bool,
 };

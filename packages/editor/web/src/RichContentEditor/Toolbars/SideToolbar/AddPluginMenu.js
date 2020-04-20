@@ -9,9 +9,18 @@ export default class AddPluginMenu extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      searchTag: '',
+      value: '',
     };
+    const { structure, showSearch = structure.length > 8, isMobile } = props;
+    this.showSearch = showSearch && !isMobile;
+    this.wrapperClassName = classNames(Styles.sideToolbarPanelWrapper, {
+      [Styles.panelWithSearch]: this.showSearch,
+    });
+    this.pluginsClassName = classNames(Styles.pluginsWrapper, {
+      [Styles.withSearch]: showSearch && !isMobile,
+    });
   }
+  onChange = value => this.setState({ value });
   render() {
     const {
       theme,
@@ -20,44 +29,35 @@ export default class AddPluginMenu extends Component {
       structure,
       hidePopup,
       t,
-      options = {},
+      splitToSections,
       isMobile,
     } = this.props;
-    const setSearchTag = searchTag => this.setState({ searchTag });
-    const { showSearch = structure.length > 8, splitToSections } = options;
-    const { searchTag } = this.state;
+    const { showSearch, wrapperClassName, pluginsClassName } = this;
+    const { value } = this.state;
     return (
-      <div
-        className={classNames(Styles.sideToolbarPanelWrapper, {
-          [Styles.panelWithSearch]: showSearch,
-        })}
-      >
+      <div className={wrapperClassName}>
         {showSearch && !isMobile && (
           <div className={Styles.searchWrapper}>
             <TextSearchInput
               onClose={hidePopup}
               placeHolder={t('Side_toolbar_basic_search_placeholder')}
               theme={theme}
-              setSearchTag={setSearchTag}
-              searchTag={searchTag}
+              onChange={this.onChange}
+              value={value}
             />
           </div>
         )}
 
-        <div
-          className={classNames(Styles.pluginsWrapper, {
-            [Styles.withSearch]: showSearch && !isMobile,
-          })}
-        >
+        <div className={pluginsClassName}>
           <SideToolbarPluginsSection
             theme={theme}
             getEditorState={getEditorState}
             setEditorState={setEditorState}
             structure={structure}
-            searchTag={searchTag}
+            searchTag={value}
             t={t}
             hidePopup={hidePopup}
-            splitToSections={!searchTag && !isMobile && splitToSections}
+            splitToSections={!value && splitToSections}
           />
         </div>
       </div>
@@ -72,6 +72,7 @@ AddPluginMenu.propTypes = {
   theme: PropTypes.object.isRequired,
   t: PropTypes.func,
   hidePopup: PropTypes.func,
-  options: PropTypes.object,
+  splitToSections: PropTypes.bool,
   isMobile: PropTypes.bool,
+  showSearch: PropTypes.bool,
 };

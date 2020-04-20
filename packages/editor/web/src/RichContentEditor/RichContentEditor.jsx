@@ -108,7 +108,8 @@ class RichContentEditor extends Component {
     } = this.props;
 
     const getToolbarSettings = () => [
-      { name: 'SIDE', options: { ...toolbarsConfig.addPluginMenuConfig } },
+      { name: 'SIDE', ...toolbarsConfig.addPluginMenuConfig },
+      { name: 'MOBILE', ...toolbarsConfig.addPluginMenuConfig },
     ];
 
     this.contextualData = {

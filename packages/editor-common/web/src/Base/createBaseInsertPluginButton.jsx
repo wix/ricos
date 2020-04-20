@@ -162,8 +162,7 @@ export default ({
           tabIndex={tabIndex}
           className={classNames(
             styles.button,
-            button.type === 'file' && styles.fileUploadButton,
-            showName ? styles.sideToolbarButton : styles.buttonHover
+            showName ? styles.sideToolbarButton : styles.footerToolbarButton
           )}
           data-hook={`${name.replace(' ', '_')}_insert_plugin_button`}
           onClick={this.onClick}
@@ -171,7 +170,7 @@ export default ({
           ref={this.buttonRef}
           {...buttonCompProps}
         >
-          <div className={classNames(styles.icon, !showName && styles.withoutName)}>
+          <div className={styles.icon}>
             <Icon key="0" />
           </div>
           {showName && (
@@ -233,7 +232,7 @@ export default ({
       return (
         <FileInput
           dataHook={`${button.name}_file_input`}
-          className={classNames(styles.button, styles.fileUploadButton)}
+          className={classNames(styles.button)}
           onChange={this.handleNativeFileChange}
           accept={accept}
           multiple={button.multi}

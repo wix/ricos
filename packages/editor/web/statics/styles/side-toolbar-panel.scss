@@ -1,14 +1,14 @@
 .sideToolbarPanelWrapper {
   display: flex;
-  padding: 0px 12px 12px;
+  padding: 12px 12px;
   overflow: auto;
   justify-items: center;
   justify-content: center;
   height: max-content;
   max-height: 400px;
 
-  .panelWithSearch {
-    min-height: 400px;
+  &.panelWithSearch {
+    padding: 0px 12px 12px;
   }
   .pluginsWrapper {
     width: 100%;

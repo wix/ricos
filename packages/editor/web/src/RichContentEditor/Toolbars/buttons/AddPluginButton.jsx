@@ -11,16 +11,22 @@ export default class AddPluginButton extends Component {
     const {
       getEditorState,
       setEditorState,
-      pluginButtons,
+      structure,
       pubsub,
       theme,
       t,
       isMobile,
+      showSearch,
+      splitToSections,
     } = this.props;
     this.props.openModal({
       modalName: EditorModals.MOBILE_ADD_PLUGIN,
       modalStyles: getModalStyles({ fullScreen: false, isMobile: true, stickyButtomMobile: true }),
-      structure: pluginButtons,
+      structure: structure.map(({ component, buttonSettings: { name, section } }) => ({
+        component,
+        name,
+        section: section || t('BlockToolbar_Section_Basic'),
+      })),
       theme,
       hidePopup: this.props.closeModal,
       getEditorState,
@@ -28,6 +34,8 @@ export default class AddPluginButton extends Component {
       pubsub,
       t,
       isMobile,
+      showSearch,
+      splitToSections,
     });
   };
 
@@ -50,8 +58,10 @@ AddPluginButton.propTypes = {
   closeModal: PropTypes.func.isRequired,
   getEditorState: PropTypes.func.isRequired,
   setEditorState: PropTypes.func.isRequired,
-  pluginButtons: PropTypes.array,
+  structure: PropTypes.array,
   theme: PropTypes.object.isRequired,
   t: PropTypes.func,
   isMobile: PropTypes.bool,
+  showSearch: PropTypes.bool,
+  splitToSections: PropTypes.bool,
 };

@@ -27,6 +27,8 @@ const createMobileToolbar = ({
   toolbarDecorationFn,
   config,
   locale,
+  showSearch,
+  splitToSections,
 }) => {
   const mobileTheme = getMobileTheme(theme);
   return createStaticToolbar({
@@ -46,6 +48,8 @@ const createMobileToolbar = ({
       t,
       uiSettings,
       config,
+      showSearch,
+      splitToSections,
     }),
     anchorTarget,
     relValue,
@@ -112,6 +116,8 @@ const getMobileButtons = ({
   t,
   uiSettings,
   config,
+  showSearch,
+  splitToSections,
 }) => {
   const addPluginIndex = buttons.findIndex(b => b === 'AddPlugin');
   if (addPluginIndex !== -1) {
@@ -137,12 +143,16 @@ const getMobileButtons = ({
         decorateComponentWithProps(AddPluginButton, {
           openModal: helpers.openModal,
           closeModal: helpers.closeModal,
-          pluginButtons,
+          structure: pluginButtons.filter(
+            ({ buttonSettings }) => buttonSettings.name !== 'Undo' && buttonSettings.name !== 'Redo'
+          ),
           getEditorState,
           setEditorState,
           pubsub,
           t,
           theme: mobileTheme,
+          showSearch,
+          splitToSections,
         })
       );
     }

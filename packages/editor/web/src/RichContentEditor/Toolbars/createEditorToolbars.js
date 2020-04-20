@@ -84,7 +84,8 @@ const createEditorToolbars = ({ buttons, textAlignment, refId, context, t }) => 
         getInstance,
         getDisplayOptions,
         getToolbarDecorationFn,
-        options,
+        showSearch,
+        splitToSections,
       }) => {
         toolbars[name] = getInstance({
           ...context,
@@ -102,7 +103,8 @@ const createEditorToolbars = ({ buttons, textAlignment, refId, context, t }) => 
           uiSettings: pluginsConfig.uiSettings,
           pubsub,
           refId,
-          options,
+          showSearch,
+          splitToSections,
         });
       }
     );
