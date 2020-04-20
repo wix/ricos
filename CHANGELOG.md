@@ -15,6 +15,10 @@
     Click to see more.
   </summary>
 
+</details>
+<hr/>
+
+## 7.3.3 (Apr 20, 2020)
 ### :bug: Bug Fix
 - `viewer`
   - [#929](https://github.com/wix-incubator/rich-content/pull/929) fix: empty lists viewer issues
@@ -28,9 +32,6 @@
   - [#728](https://github.com/wix-incubator/rich-content/pull/728) Vertical Embed Plugin - alpha verison
 - `wrapper`
   - [#935](https://github.com/wix-incubator/rich-content/pull/935) back-office theme will appear as default theme for now  
-
-</details>
-<hr/>
 
 ## 7.3.2 (Apr 16, 2020)
 ### :bug: Bug Fix
