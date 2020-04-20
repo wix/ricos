@@ -7,7 +7,7 @@ import './styles.global.css';
 import { merge } from 'lodash';
 import PropTypes from 'prop-types';
 import { isDefined } from 'ts-is-present';
-import { RichContentProps, RichContentWrapperProps } from './RichContentWrapperTypes';
+import { RichContentProps, RichContentWrapperProps, ForwardedRef } from './RichContentWrapperTypes';
 
 class RichContentWrapper extends Component<
   RichContentWrapperProps,
@@ -84,6 +84,6 @@ class RichContentWrapper extends Component<
   }
 }
 
-export default forwardRef((props: RichContentWrapperProps, ref) => (
+export default forwardRef((props: RichContentWrapperProps, ref: ForwardedRef) => (
   <RichContentWrapper {...props} forwardedRef={ref} />
 ));

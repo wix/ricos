@@ -1,8 +1,8 @@
-import React, { Children, Fragment, ReactElement } from 'react';
+import React, { Children, Fragment, ReactElement, forwardRef } from 'react';
 import ViewerRenderer from './ViewerRenderer';
 import EditorRenderer from './EditorRenderer';
 import { merge } from 'lodash';
-import { RichContentProps } from './RichContentWrapperTypes';
+import { RichContentProps, ForwardedRef } from './RichContentWrapperTypes';
 
 interface Props {
   rcProps?: RichContentProps;
@@ -11,6 +11,7 @@ interface Props {
   children: ReactElement;
   isEditor?: boolean;
   isMobile?: boolean;
+  forwardedRef?: ForwardedRef;
 }
 
 interface State {
@@ -35,16 +36,21 @@ class EngineWrapper extends React.Component<Props, State> {
   }
 
   render() {
-    const { rcProps, children, isMobile } = this.props;
+    const { rcProps, children, isMobile, forwardedRef } = this.props;
     const { ModalityProvider } = this.state;
 
     const mergedRCProps = merge(rcProps, { isMobile }, children.props);
 
     return (
-      <ModalityProvider {...mergedRCProps}>
+      <ModalityProvider {...mergedRCProps} ref={forwardedRef}>
         {Children.only(React.cloneElement(children, { ...mergedRCProps }))}
       </ModalityProvider>
     );
   }
 }
-export default EngineWrapper;
+
+export default forwardRef((props: Props, ref: ForwardedRef) => (
+  <EngineWrapper {...props} forwardedRef={ref}>
+    {props.children}
+  </EngineWrapper>
+));

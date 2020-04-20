@@ -1,6 +1,7 @@
 export type InitialState = { blocks: object[]; entityMap: { [index: number]: object } };
 export type FinalTheme = { theme: { modalTheme: { content: any }; [propName: string]: any } };
 export type EditorState = import('draft-js').EditorState;
+export type ForwardedRef = any;
 export interface RichContentProps {
   locale?: string;
   localeResource?: object;
@@ -24,7 +25,7 @@ export interface RichContentWrapperProps {
   isEditor?: boolean;
   isMobile?: boolean;
   rcProps?: RichContentProps;
-  forwardedRef?: any;
+  forwardedRef?: ForwardedRef;
 }
 
 export interface EditorDataInstance {

@@ -62,6 +62,7 @@ describe('Wrapper', () => {
       const instance = element
         .dive()
         .dive()
+        .dive()
         .instance();
       const renderResult = instance.render();
       const editorProps = renderResult.props.children.props;
@@ -71,6 +72,7 @@ describe('Wrapper', () => {
     it('should render with themeStrategy output', () => {
       const element = shallow(wrapper({ isEditor: true, theme: 'Default' }).withEditor());
       const instance = element
+        .dive()
         .dive()
         .dive()
         .instance();
@@ -112,6 +114,7 @@ describe('Wrapper', () => {
       const instance = element
         .dive()
         .dive()
+        .dive()
         .instance();
       const renderResult = instance.render();
       const viewerProps = renderResult.props.children.props;
@@ -121,6 +124,7 @@ describe('Wrapper', () => {
     it('should render with themeStrategy output', () => {
       const element = shallow(wrapper({ theme: 'Default' }).withViewer());
       const instance = element
+        .dive()
         .dive()
         .dive()
         .instance();
