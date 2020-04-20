@@ -15,7 +15,7 @@ interface State {
   Fullscreen?: any;
 }
 
-export default class FullscreenRenderer extends Component<Props, State> {
+export default class ViewerRenderer extends Component<Props, State> {
   constructor(props) {
     super(props);
     this.state = {

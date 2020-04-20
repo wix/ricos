@@ -29,7 +29,7 @@ interface State {
   MobileToolbar?: React.ElementType;
 }
 
-export default class ModalRenderer extends Component<Props, State> {
+export default class EditorRenderer extends Component<Props, State> {
   childProps: RichContentProps;
   editor: typeof RichContentEditor;
   dataInstance: EditorDataInstance;
