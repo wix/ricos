@@ -34,17 +34,3 @@ $inputWidth: 50px;
   font-size: 14px;
   max-width: 55px;
 }
-
-.infoIcon {
-  vertical-align: text-bottom;
-  padding-top: 2px;
-  height: 17px;
-  &:hover {
-    color: #0161ff;
-  }
-}
-
-.infoContainer {
-  cursor: pointer;
-  display: flex;
-}

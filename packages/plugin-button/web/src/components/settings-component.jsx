@@ -121,7 +121,7 @@ class SettingsComponent extends PureComponent {
             checked={this.state.rel}
             dataHook="linkPanelRelCheckbox"
             onChange={this.handleRelChange}
-            contentForInfoIcon={t('LinkPanel_Nofollow_Checkbox_Tooltip')}
+            tooltipTextKey={'LinkPanel_Nofollow_Checkbox_Tooltip'}
           />
         </div>
       </div>

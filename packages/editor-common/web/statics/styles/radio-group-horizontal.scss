@@ -33,17 +33,3 @@
   opacity: 0.5;
   pointer-events: none;
 }
-
-.infoIcon {
-  vertical-align: text-bottom;
-  padding-top: 2px;
-  height: 17px;
-  &:hover {
-    color: #0161ff;
-  }
-}
-
-.infoContainer {
-  cursor: pointer;
-  display: flex;
-}

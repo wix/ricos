@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { debounce, isNumber } from 'lodash';
-import Tooltip from './Tooltip';
-import InfoIcon from '../Icons/InfoIcon.svg';
+import InfoIcon from './InfoIcon';
 import { mergeStyles } from 'wix-rich-content-common';
 import Slider from './Slider';
 import styles from '../../statics/styles/slider-with-input.scss';
+import generalstyles from '../../statics/styles/general.scss';
 
 class SliderWithInput extends Component {
   styles = mergeStyles({ styles, theme: this.props.theme });
@@ -48,7 +48,7 @@ class SliderWithInput extends Component {
       theme,
       sliderDataHook,
       inputDataHook,
-      contentForInfoIcon,
+      tooltipTextKey,
     } = this.props;
     let ariaProps = label ? { 'aria-labelledby': `${this.id}_lbl` } : {};
     ariaProps = {
@@ -61,17 +61,13 @@ class SliderWithInput extends Component {
     /* eslint-disable jsx-a11y/role-has-required-aria-props */
     return (
       <div>
-        <div className={styles.infoContainer}>
+        <div className={generalstyles.infoContainer}>
           {label ? (
             <span id={`${this.id}_lbl`} className={this.styles.sliderWithInput_label}>
               {label}
             </span>
           ) : null}
-          {contentForInfoIcon && (
-            <Tooltip shouldRebuildOnUpdate={() => true} content={contentForInfoIcon}>
-              <InfoIcon className={styles.infoIcon} />
-            </Tooltip>
-          )}
+          <InfoIcon tooltipTextKey={tooltipTextKey} />
         </div>
         <div className={this.styles.sliderWithInput_content}>
           <Slider
@@ -118,7 +114,7 @@ SliderWithInput.propTypes = {
   onChange: PropTypes.func.isRequired,
   sliderDataHook: PropTypes.string,
   inputDataHook: PropTypes.string,
-  contentForInfoIcon: PropTypes.string,
+  tooltipTextKey: PropTypes.string,
 };
 
 SliderWithInput.defaultProps = {

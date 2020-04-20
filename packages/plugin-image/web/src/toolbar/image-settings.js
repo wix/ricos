@@ -26,7 +26,7 @@ class ImageSettings extends Component {
     this.captionLabel = t('ImageSettings_Caption_Label');
     this.captionInputPlaceholder = t('ImageSettings_Caption_Input_Placeholder');
     this.altLabel = t('ImageSettings_Alt_Label');
-    this.altTooltip = t('ImageSettings_Alt_Label_Tooltip');
+    this.altTooltip = 'ImageSettings_Alt_Label_Tooltip';
     this.altInputPlaceholder = t('ImageSettings_Alt_Input_Placeholder');
     this.linkLabel = t('ImageSettings_Link_Label');
   }
@@ -203,7 +203,7 @@ class ImageSettings extends Component {
               id="imageSettingsAltInput"
               label={this.altLabel}
               placeholder={this.altInputPlaceholder}
-              contentForInfoIcon={this.altTooltip}
+              tooltipTextKey={this.altTooltip}
               value={metadata.alt || ''}
               onChange={event => this.metadataUpdated(metadata, { alt: event.target.value })}
               dataHook="imageSettingsAltInput"
