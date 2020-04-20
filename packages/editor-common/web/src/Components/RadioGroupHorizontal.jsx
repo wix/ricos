@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import RadioGroup from './RadioGroup';
+import Tooltip from './Tooltip';
+import InfoIcon from '../Icons/InfoIcon.svg';
 import { mergeStyles } from 'wix-rich-content-common';
 import styles from '../../statics/styles/radio-group-horizontal.scss';
 
@@ -13,7 +15,7 @@ class RadioGroupHorizontal extends Component {
   }
 
   render() {
-    const { label, inline, ...props } = this.props;
+    const { label, inline, contentForInfoIcon, ...props } = this.props;
     const { styles } = this;
     const groupClassName = classNames(
       styles.radioGroupHorizontal_group,
@@ -22,11 +24,18 @@ class RadioGroupHorizontal extends Component {
     );
     return (
       <div>
-        {label ? (
-          <span id={`${this.id}_label`} className={styles.radioGroupHorizontal_title}>
-            {label}
-          </span>
-        ) : null}
+        <div className={styles.infoContainer}>
+          {label ? (
+            <span id={`${this.id}_label`} className={styles.radioGroupHorizontal_title}>
+              {label}
+            </span>
+          ) : null}
+          {contentForInfoIcon && (
+            <Tooltip shouldRebuildOnUpdate={() => true} content={contentForInfoIcon}>
+              <InfoIcon className={styles.infoIcon} />
+            </Tooltip>
+          )}
+        </div>
         <RadioGroup ariaLabelledBy={`${this.id}_label`} {...props} className={groupClassName} />
       </div>
     );
@@ -41,6 +50,7 @@ RadioGroupHorizontal.propTypes = {
   onChange: PropTypes.func.isRequired,
   value: PropTypes.string.isRequired,
   inline: PropTypes.bool,
+  contentForInfoIcon: PropTypes.string,
 };
 
 export default RadioGroupHorizontal;
