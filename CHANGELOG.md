@@ -17,7 +17,7 @@
 
 ### :bug: Bug Fix
 - `map`
-  - Map Settings: themeColors protected
+  - [#939](https://github.com/wix-incubator/rich-content/pull/939) Map Settings: themeColors protected
 
 </details>
 <hr/>
