@@ -32,11 +32,8 @@ export const toggleBlockTypeAndEnsureSpaces = (blockType, editorState) => {
 
   const allBlocks = initialContentState.getBlockMap();
 
-  const anchorKey = initialSelection.getAnchorKey();
-  const focusKey = initialSelection.getFocusKey();
-  const isBackward = initialSelection.getIsBackward();
-
-  const [firstKey, lastKey] = isBackward ? [focusKey, anchorKey] : [anchorKey, focusKey];
+  const firstKey = initialSelection.getStartKey();
+  const lastKey = initialSelection.getEndKey();
 
   const selectedBlocks = getBlockRange(firstKey, lastKey, allBlocks);
   const newContentState = setBlockTypeAndMerge(blockType, selectedBlocks, initialContentState);
