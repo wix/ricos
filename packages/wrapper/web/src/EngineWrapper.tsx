@@ -1,8 +1,8 @@
 import React, { Children, Fragment, ReactElement, forwardRef } from 'react';
+import { RichContentProps, ForwardedRef } from './RichContentWrapperTypes';
 import ViewerRenderer from './ViewerRenderer';
 import EditorRenderer from './EditorRenderer';
 import { merge } from 'lodash';
-import { RichContentProps, ForwardedRef } from './RichContentWrapperTypes';
 
 interface Props {
   rcProps?: RichContentProps;
