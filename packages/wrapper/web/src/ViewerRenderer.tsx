@@ -1,11 +1,12 @@
 import React, { Component, Fragment, Suspense, Children, ReactElement } from 'react';
-import { InitialState, RichContentProps } from './RichContentWrapperTypes';
+import { RichContentProps } from './RichContentWrapperTypes';
 import { emptyState } from './utils';
+import { RawDraftContentState } from 'draft-js';
 
 interface Props {
   children: ReactElement;
   helpers?: RichContentProps['helpers'];
-  initialState: InitialState;
+  initialState: RawDraftContentState;
 }
 
 interface State {

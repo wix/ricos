@@ -1,15 +1,9 @@
 import React, { Suspense, Children, Component, Fragment, ReactElement } from 'react';
 import { modalStyles } from './themeStrategy/defaults';
-import {
-  RichContentProps,
-  InitialState,
-  EditorState,
-  EditorDataInstance,
-} from './RichContentWrapperTypes';
+import { RichContentProps, EditorDataInstance } from './RichContentWrapperTypes';
 import { RichContentEditor } from 'wix-rich-content-editor';
-import { convertToRaw } from 'wix-rich-content-editor-common';
-import { debounce } from 'lodash';
-import { emptyState } from './utils';
+import { createDataConverter } from './utils';
+import { EditorState } from 'draft-js';
 
 interface Props {
   children: ReactElement;
@@ -47,18 +41,8 @@ export default class EditorRenderer extends Component<Props, State> {
         closeModal: this.closeModal,
       },
     };
-    this.dataInstance = this.createDataConverter(emptyState);
+    this.dataInstance = createDataConverter();
   }
-
-  createDataConverter = (initialState: InitialState): EditorDataInstance => {
-    let currState = initialState;
-    return {
-      getContentState: () => currState,
-      refresh: debounce(editorState => {
-        currState = convertToRaw(editorState.getCurrentContent());
-      }, 200),
-    };
-  };
 
   componentDidMount() {
     const EditorModal = React.lazy(() =>
@@ -100,9 +84,12 @@ export default class EditorRenderer extends Component<Props, State> {
   focus = () => this.editor.focus();
   blur = () => this.editor.blur();
   getData = (postId: string) => {
-    this.editor.publish(postId); //async
+    const { getContentState } = this.dataInstance;
+    if (postId) {
+      this.editor.publish(postId); //async
+    }
     return {
-      getContent: this.dataInstance.getContentState(),
+      getContentState,
     };
   };
 

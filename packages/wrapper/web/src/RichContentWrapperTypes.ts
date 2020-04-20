@@ -1,6 +1,5 @@
-export type InitialState = { blocks: object[]; entityMap: { [index: number]: object } };
+import { RawDraftContentState, EditorState } from 'draft-js';
 export type FinalTheme = { theme: { modalTheme: { content: any }; [propName: string]: any } };
-export type EditorState = import('draft-js').EditorState;
 export type ForwardedRef = any;
 export interface RichContentProps {
   locale?: string;
@@ -8,7 +7,7 @@ export interface RichContentProps {
   placeholder?: string;
   editorKey?: string;
   onChange?(editorState: EditorState): void;
-  initialState?: InitialState;
+  initialState?: RawDraftContentState;
   theme?: object;
   config?: object;
   plugins?: PluginConfig[];
@@ -29,6 +28,6 @@ export interface RichContentWrapperProps {
 }
 
 export interface EditorDataInstance {
-  getContentState: () => InitialState;
+  getContentState: () => RawDraftContentState;
   refresh: (editorState: EditorState) => void;
 }
