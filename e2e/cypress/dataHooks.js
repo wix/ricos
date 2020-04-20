@@ -28,6 +28,7 @@ export const STATIC_TOOLBAR_BUTTONS = {
   EVENT: 'VerticalEmbed-event_insert_plugin_button',
   PRODUCT: 'VerticalEmbed-product_insert_plugin_button',
   BOOKING: 'VerticalEmbed-booking_insert_plugin_button',
+  GIPHY: 'GIF_insert_plugin_button',
 };
 
 export const SETTINGS_PANEL = {
