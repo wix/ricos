@@ -127,7 +127,7 @@ jobs:
           name: cypress-videos-contentState-${{ job.status }}-${{ matrix.ci_node_index }}
           path: e2e/cypress/videos
 
-  lint-and-unit-tests:
+  lint_unitTests_esCheck:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
@@ -149,11 +149,12 @@ jobs:
 
       - run: npm run lint
       - run: npm run build
+      - run: npx es-check es5 packages/**/dist/**/*.cjs.js
       - run: npm run test:unit
 
   notify-on-slack:
     runs-on: ubuntu-18.04
-    needs: [e2e-visual, content-state-tests, lint-and-unit-tests]
+    needs: [e2e-visual, content-state-tests, lint_unitTests_esCheck]
     if: always()
     steps:
       - name: Notify fail in Slack
