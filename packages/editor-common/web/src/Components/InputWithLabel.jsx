@@ -4,6 +4,8 @@ import { omit } from 'lodash';
 import classNames from 'classnames';
 import { mergeStyles } from 'wix-rich-content-common';
 import styles from '../../statics/styles/input-with-label.scss';
+import Tooltip from './Tooltip';
+import InfoIcon from '../Icons/InfoIcon.svg';
 
 class InputWithLabel extends Component {
   constructor(props) {
@@ -34,14 +36,25 @@ class InputWithLabel extends Component {
 
   render() {
     const { styles } = this;
-    const { id, label, maxLength } = this.props;
+    const { id, label, maxLength, contentForInfoIcon } = this.props;
     if (label) {
       return (
-        <label htmlFor={id}>
-          <span className={styles.inputWithLabel_label}>{label}</span>
+        <div>
+          <label htmlFor={id} className={styles.infoContainer}>
+            <span className={styles.inputWithLabel_label}>{label}</span>
+            {contentForInfoIcon && (
+              <Tooltip
+                shouldRebuildOnUpdate={() => true}
+                content={contentForInfoIcon}
+                theme={styles.theme}
+              >
+                <InfoIcon className={styles.infoIcon} />
+              </Tooltip>
+            )}
+          </label>
           {this.renderInput()}
           {maxLength && this.renderCharacterCapacity()}
-        </label>
+        </div>
       );
     } else {
       return this.renderInput();
@@ -58,6 +71,7 @@ InputWithLabel.propTypes = {
   dataHook: PropTypes.string,
   value: PropTypes.string,
   maxLength: PropTypes.number,
+  contentForInfoIcon: PropTypes.string,
 };
 
 InputWithLabel.defaultProps = {
