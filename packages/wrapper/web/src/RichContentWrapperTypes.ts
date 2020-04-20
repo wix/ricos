@@ -18,8 +18,10 @@ export interface RichContentWrapperProps {
   locale?: string;
   palette?: Palette;
   plugins?: PluginConfig[];
-  editor?: boolean;
+  isEditor?: boolean;
+  isMobile?: boolean;
   rcProps?: RichContentProps;
 }
 
 export type InitialState = { blocks: object[]; entityMap: { [index: number]: object } };
+export type FinalTheme = { theme: { modalTheme: { content: any }; [propName: string]: any } };

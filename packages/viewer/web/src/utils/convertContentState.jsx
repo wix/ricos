@@ -13,7 +13,9 @@ import { combineMappers } from './combineMappers';
 import { getInteractionWrapper, DefaultInteractionWrapper } from './getInteractionWrapper';
 
 const isEmptyContentState = raw =>
-  !raw || !raw.blocks || (raw.blocks.length === 1 && raw.blocks[0].text === '');
+  !raw ||
+  !raw.blocks ||
+  (raw.blocks.length === 1 && raw.blocks[0].text === '' && raw.blocks[0].type === 'unstyled');
 
 const isEmptyBlock = ([_, data]) => data && data.length === 0; //eslint-disable-line no-unused-vars
 
@@ -28,12 +30,14 @@ const getBlockStyleClasses = (data, mergedStyles, textDirection, classes) => {
   );
 };
 
+let blockCount = 0;
+
 const blockDataToStyle = ({ dynamicStyles }) => kebabToCamelObjectKeys(dynamicStyles);
 
 const getInline = (inlineStyleMappers, mergedStyles) =>
   combineMappers([...inlineStyleMappers, staticInlineStyleMapper], mergedStyles);
 
-const getBlocks = (contentState, mergedStyles, textDirection, context) => {
+const getBlocks = (contentState, mergedStyles, textDirection, context, addAnchors) => {
   const getList = ordered => (items, blockProps) => {
     const fixedItems = items.map(item => (item.length ? item : [' ']));
 
@@ -44,6 +48,7 @@ const getBlocks = (contentState, mergedStyles, textDirection, context) => {
       mergedStyles,
       textDirection,
       blockProps,
+      getBlockStyleClasses,
       blockDataToStyle,
       contentState,
     };
@@ -53,7 +58,7 @@ const getBlocks = (contentState, mergedStyles, textDirection, context) => {
   const blockFactory = (type, style, withDiv) => {
     return (children, blockProps) =>
       children.map((child, i) => {
-        const Type = typeof type === 'string' ? type : type(child);
+        const ChildTag = typeof type === 'string' ? type : type(child);
 
         const { interactions } = blockProps.data[i];
         const BlockWrapper = Array.isArray(interactions)
@@ -62,7 +67,7 @@ const getBlocks = (contentState, mergedStyles, textDirection, context) => {
 
         const _child = isEmptyBlock(child) ? <br /> : withDiv ? <div>{child}</div> : child;
         const inner = (
-          <Type
+          <ChildTag
             className={getBlockStyleClasses(
               blockProps.data[i],
               mergedStyles,
@@ -73,10 +78,28 @@ const getBlocks = (contentState, mergedStyles, textDirection, context) => {
             key={blockProps.keys[i]}
           >
             {_child}
-          </Type>
+          </ChildTag>
         );
 
-        return <BlockWrapper key={`${blockProps.keys[i]}_wrap`}>{inner}</BlockWrapper>;
+        const blockWrapper = (
+          <BlockWrapper key={`${blockProps.keys[i]}_wrap`}>{inner}</BlockWrapper>
+        );
+
+        const shouldAddAnchors = addAnchors && !isEmptyBlock(child);
+        let resultBlock = blockWrapper;
+
+        if (shouldAddAnchors) {
+          blockCount++;
+          const anchorKey = `${addAnchors}${blockCount}`;
+          resultBlock = (
+            <>
+              {blockWrapper}
+              {<div key={anchorKey} data-hook={anchorKey} />}
+            </>
+          );
+        }
+
+        return resultBlock;
       });
   };
 
@@ -96,8 +119,12 @@ const getBlocks = (contentState, mergedStyles, textDirection, context) => {
 };
 
 const getEntities = (typeMap, pluginProps, styles) => {
-  const emojiViewerFn = emojiUnicode => {
-    return <span style={{ fontFamily: 'cursive' }}>{emojiUnicode}</span>;
+  const emojiViewerFn = (emojiUnicode, data, { key }) => {
+    return (
+      <span key={key} style={{ fontFamily: 'cursive' }}>
+        {emojiUnicode}
+      </span>
+    );
   };
   return {
     EMOJI_TYPE: emojiViewerFn,
@@ -164,15 +191,20 @@ const convertToReact = (
   if (isEmptyContentState(contentState)) {
     return null;
   }
+
+  const { addAnchors, ...restOptions } = options;
+
+  const parsedAddAnchors = addAnchors && (addAnchors === true ? 'rcv-block' : addAnchors);
+  blockCount = 0;
   return redraft(
     normalizeContentState(contentState),
     {
       inline: getInline(inlineStyleMappers, mergedStyles),
-      blocks: getBlocks(contentState, mergedStyles, textDirection, entityProps),
+      blocks: getBlocks(contentState, mergedStyles, textDirection, entityProps, parsedAddAnchors),
       entities: getEntities(combineMappers(typeMap), entityProps, mergedStyles),
       decorators,
     },
-    { ...redraftOptions, ...options }
+    { ...redraftOptions, ...restOptions }
   );
 };
 
@@ -189,6 +221,7 @@ const convertToHTML = (
     return null;
   }
 
+  blockCount = 0;
   const reactOutput = convertToReact(
     contentState,
     mergedStyles,

@@ -14,7 +14,7 @@ const plugins = [
 ];
 
 const DividerEditor = ({ editorState }) => (
-  <RichContentWrapper plugins={plugins} editor>
+  <RichContentWrapper plugins={plugins} isEditor>
     <RichContentEditor editorState={editorState} />
   </RichContentWrapper>
 );

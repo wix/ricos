@@ -26,6 +26,7 @@ const List = ({
   mergedStyles,
   textDirection,
   blockProps,
+  getBlockStyleClasses,
   blockDataToStyle,
   contentState,
 }) => {
@@ -44,18 +45,14 @@ const List = ({
         const elementProps = key => ({ className: mergedStyles.elementSpacing, key });
         React.Children.forEach(children, (child, i) => {
           if (child) {
-            if (typeof child.type === 'string') {
-              if (/h\d/.exec(child.type)) {
-                if (paragraphGroup.length) {
-                  result.push(<p {...elementProps(i)}>{paragraphGroup}</p>);
-                  paragraphGroup = [];
-                }
-                result.push(React.cloneElement(child, elementProps(i)));
-              } else {
-                paragraphGroup.push(child);
+            if (/h\d/.exec(child.type)) {
+              if (paragraphGroup.length) {
+                result.push(<p {...elementProps(i)}>{paragraphGroup}</p>);
+                paragraphGroup = [];
               }
+              result.push(React.cloneElement(child, elementProps(i)));
             } else {
-              result.push(child);
+              paragraphGroup.push(child);
             }
           }
         });
@@ -70,11 +67,11 @@ const List = ({
 
         return (
           <li
-            className={className}
+            className={getBlockStyleClasses(dataEntry, mergedStyles, textDirection, className)}
             key={blockProps.keys[childIndex]}
             style={blockDataToStyle(blockProps.data[childIndex])}
           >
-            {result}
+            {result.length === 0 ? ' ' : result}
           </li>
         );
       })}

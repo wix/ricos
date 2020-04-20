@@ -25,6 +25,21 @@ import { mockFetchUrlPreviewData } from '../../../main/shared/utils/linkPreviewU
 import { pluginTextColor, pluginTextHighlight } from 'wix-rich-content-plugin-text-color';
 import '../styles.global.scss';
 
+const mockData = {
+  id: '8b72558253b2502b401bb46e5599f22a',
+  original_file_name: '8bb438_1b73a6b067b24175bd087e86613bd00c.jpg', //eslint-disable-line
+  file_name: '8bb438_1b73a6b067b24175bd087e86613bd00c.jpg', //eslint-disable-line
+  width: 1920,
+  height: 1000,
+};
+const onFilesChange = (files, updateEntity) => {
+  setTimeout(() => {
+    updateEntity({
+      data: mockData,
+      files,
+    });
+  }, 500);
+};
 const configs = {
   fileUpload: {
     accept: '*',
@@ -78,11 +93,17 @@ const plugins = [
   pluginTextColor(),
   pluginTextHighlight(),
 ];
-const EditorWrapper = ({ contentState, palette }) => {
+
+const EditorWrapper = ({ contentState, palette, onChange }) => {
   const editorState = createWithContent(convertFromRaw(contentState));
+  const theme = palette ? { theme: 'Palette', palette } : { theme: 'Default' };
   return (
-    <RichContentWrapper plugins={plugins} theme={'Palette'} palette={palette} editor>
-      <RichContentEditor editorState={editorState} />
+    <RichContentWrapper plugins={plugins} {...theme} isEditor>
+      <RichContentEditor
+        editorState={editorState}
+        onChange={onChange}
+        helpers={{ onFilesChange }}
+      />
     </RichContentWrapper>
   );
 };
@@ -90,6 +111,7 @@ const EditorWrapper = ({ contentState, palette }) => {
 EditorWrapper.propTypes = {
   contentState: PropTypes.object,
   palette: PropTypes.arrayOf(PropTypes.object),
+  onChange: PropTypes.func,
 };
 
 export default EditorWrapper;
