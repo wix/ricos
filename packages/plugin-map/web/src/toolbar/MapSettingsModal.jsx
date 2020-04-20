@@ -122,6 +122,10 @@ export class MapSettingsModal extends Component {
   renderInjectedStyles = () => {
     const { themeColors } = this.props.uiSettings;
 
+    if (!themeColors) {
+      return null;
+    }
+
     const uniqueClassesId = this.uniqueClassesId;
 
     const buttonPrimaryClassName = `map_settings_modal_button_primary_${uniqueClassesId}`;
@@ -130,7 +134,7 @@ export class MapSettingsModal extends Component {
     const navBarClassName = `map_settings_modal_mobile_navbar_dynamic_${uniqueClassesId}`;
     const dividerClassName = `map_settings_modal_divider_dynamic_${uniqueClassesId}`;
 
-    /* eslint-disable camelcase, max-len */
+    /* eslint-disable camelcase, max-len, @typescript-eslint/camelcase */
     this.styles.button_primary = `${buttonPrimaryClassName} ${this.styles.button_primary}`;
     this.styles.button_secondary = `${buttonSecondaryClassName} ${this.styles.button_secondary}`;
     this.styles.textInput_input = `${textInputClassName} ${this.styles.textInput_input}`;
