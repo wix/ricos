@@ -77,11 +77,12 @@ export default class PostSelectionInputModal extends Component {
         onConfirm={this.onConfirm}
         helpers={helpers}
         t={t}
-        title={`Select embed ${type}`}
+        title={`Embed_Vertical_${type}_Title`}
         subtitle={`Choose a ${type} from your ${type} list`}
         dataHook={`verticalEmbedModal`}
         saveLabel={t('EmbedURL_Common_CTA_Primary')}
         cancelLabel={t('EmbedURL_Common_CTA_Secondary')}
+        placeholder={t(`Embed_Vertical_${type}_Placeholder`)}
         setSelection={selectedProduct => this.setState({ selectedProduct })}
         onCloseRequested={helpers.closeModal}
         dropdownItems={products}
