@@ -15,6 +15,10 @@
     Click to see more.
   </summary>
 
+### :rocket: New Feature
+- `editor`
+  - [#941](https://github.com/wix-incubator/rich-content/pull/941) add tooltips for gallery settings panel
+
 </details>
 <hr/>
 
