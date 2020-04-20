@@ -15,7 +15,6 @@ import { getStaticTextToolbarId } from './Toolbars/toolbar-id';
 import {
   EditorState,
   convertFromRaw,
-  convertToRaw,
   TooltipHost,
   TOOLBARS,
   getBlockInfo,
@@ -62,9 +61,6 @@ class RichContentEditor extends Component {
     );
 
     this.calculateDiff = createCalcContentDiff(this.state.editorState);
-    this.dataInstance = this.createDataConverter(
-      convertToRaw(this.state.editorState.getCurrentContent())
-    );
     this.initContext();
     this.initPlugins();
   }
@@ -168,16 +164,6 @@ class RichContentEditor extends Component {
       this.props.textToolbarType === 'static' ? this.toolbars[TOOLBARS.STATIC].Toolbar : null,
   });
 
-  createDataConverter = initialState => {
-    let currState = initialState;
-    return {
-      getContentState: () => currState,
-      refresh: debounce(editorState => {
-        currState = convertToRaw(editorState.getCurrentContent());
-      }, 200),
-    };
-  };
-
   getInitialEditorState() {
     const { editorState, initialState, anchorTarget, relValue } = this.props;
     if (editorState) {
@@ -227,7 +213,6 @@ class RichContentEditor extends Component {
     if (onPluginDelete) {
       this.calculateDiff(editorState, (...args) => onPluginDelete(...args, Version.currentVersion));
     }
-    this.dataInstance.refresh(editorState); //debounce call
     this.setEditorState(editorState);
     this.props.onChange?.(editorState);
   };

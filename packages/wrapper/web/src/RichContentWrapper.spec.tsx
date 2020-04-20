@@ -64,7 +64,7 @@ describe('Wrapper', () => {
         .dive()
         .instance();
       const renderResult = instance.render();
-      const editorProps = renderResult.props.children[1].props;
+      const editorProps = renderResult.props.children.props;
       expect(editorProps).toHaveProperty('config');
       expect(editorProps.config).toHaveProperty('wix-draft-plugin-hashtag');
     });
@@ -75,7 +75,7 @@ describe('Wrapper', () => {
         .dive()
         .instance();
       const renderResult = instance.render();
-      const editorProps = renderResult.props.children[1].props;
+      const editorProps = renderResult.props.children.props;
       expect(editorProps).toHaveProperty('theme');
       expect(editorProps.theme).toHaveProperty('modalTheme');
     });
@@ -114,7 +114,7 @@ describe('Wrapper', () => {
         .dive()
         .instance();
       const renderResult = instance.render();
-      const viewerProps = renderResult.props.children[1].props;
+      const viewerProps = renderResult.props.children.props;
       expect(viewerProps).toHaveProperty('config');
       expect(viewerProps.config).toHaveProperty('wix-draft-plugin-hashtag');
     });
@@ -125,7 +125,7 @@ describe('Wrapper', () => {
         .dive()
         .instance();
       const renderResult = instance.render();
-      const viewerProps = renderResult.props.children[1].props;
+      const viewerProps = renderResult.props.children.props;
       expect(viewerProps).toHaveProperty('theme');
       expect(viewerProps).toHaveProperty('decorators');
       expect(viewerProps.theme).toHaveProperty('modalTheme');

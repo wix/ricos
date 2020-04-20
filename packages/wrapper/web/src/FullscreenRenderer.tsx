@@ -1,5 +1,6 @@
 import React, { Component, Fragment, Suspense, Children, ReactElement } from 'react';
 import { InitialState, RichContentProps } from './RichContentWrapperTypes';
+import { emptyState } from './utils';
 
 interface Props {
   children: ReactElement;
@@ -52,7 +53,7 @@ export default class FullscreenRenderer extends Component<Props, State> {
           <Suspense fallback={<div />}>
             <Fullscreen
               dataHook={'WrapperFullScreen'}
-              initialState={initialState || { entityMap: {} }}
+              initialState={initialState || emptyState}
               isOpen={isExpanded}
               images={data?.images || []}
               onClose={this.onClose}

@@ -14,12 +14,7 @@ export default class I18nRichContentEditor extends Component {
 
   blur = () => this.editor.blur();
 
-  getData = postId => {
-    this.editor.publish(postId); //async
-    return {
-      getContent: this.editor.dataInstance.getContentState(),
-    };
-  };
+  publish = postId => this.editor.publish(postId); //async
 
   render() {
     return <WrappedEditor {...this.props} ref={this.setEditorRef} />;
