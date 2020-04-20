@@ -15,6 +15,10 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+- `map`
+  - Map Settings: themeColors protected
+
 </details>
 <hr/>
 
