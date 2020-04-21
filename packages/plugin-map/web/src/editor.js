@@ -1,5 +1,5 @@
 import { createMapPlugin } from './createMapPlugin';
-import { MAP_TYPE, DEFAULTS } from './constants';
+import { MAP_TYPE, DEFAULTS, THEME as theme } from './constants';
 
 export const pluginMap = (config = {}) => {
   return {
@@ -7,5 +7,6 @@ export const pluginMap = (config = {}) => {
     type: MAP_TYPE,
     createPlugin: createMapPlugin,
     ModalsMap: {},
+    theme,
   };
 };

@@ -20,6 +20,7 @@ const commonPlugins = [
   '@babel/plugin-transform-runtime',
   '@babel/plugin-syntax-dynamic-import',
   '@babel/plugin-proposal-optional-chaining',
+  ['@babel/plugin-proposal-nullish-coalescing-operator', { loose: true }],
 ];
 
 if (process.env.NODE_ENV !== 'development') {
