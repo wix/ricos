@@ -113,10 +113,11 @@ export default class ModalDialogProvider extends Component<Props, State> {
     } = this.props;
 
     const StaticToolbar = MobileToolbar || TextToolbar;
+    const StaticToolbarPortal = this.StaticToolbarPortal;
 
     return (
       <Fragment>
-        <this.StaticToolbarPortal
+        <StaticToolbarPortal
           StaticToolbar={StaticToolbar}
           textToolbarContainer={textToolbarContainer}
         />
