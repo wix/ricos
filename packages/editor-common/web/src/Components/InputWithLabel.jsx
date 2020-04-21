@@ -42,7 +42,7 @@ class InputWithLabel extends Component {
         <div>
           <label htmlFor={id} className={generalstyles.infoContainer}>
             <span className={styles.inputWithLabel_label}>{label}</span>
-            <InfoIcon tooltipTextKey={tooltipTextKey} />
+            <InfoIcon iconStyles={styles.infoIcon} tooltipTextKey={tooltipTextKey} />
           </label>
           {this.renderInput()}
           {maxLength && this.renderCharacterCapacity()}
