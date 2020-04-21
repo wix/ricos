@@ -46,8 +46,8 @@ export const DEFAULT_DESKTOP_BROWSERS = [
 ];
 
 export const apps = [
-  { name: 'rce', func: 'loadEditorAndViewer' },
-  { name: 'wrapper', func: 'loadWrapperEditorAndViewer' },
+  { name: 'rce', loadApp: 'loadEditorAndViewer' },
+  { name: 'wrapper', loadApp: 'loadWrapperEditorAndViewer' },
 ];
 
 export const DEFAULT_MOBILE_BROWSERS = [{ deviceName: 'iPhone X' }, { deviceName: 'iPad' }];

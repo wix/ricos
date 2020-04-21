@@ -33,8 +33,8 @@ describe('plugins', () => {
     after(() => cy.eyesClose());
 
     apps.forEach(app => {
-      it(`render html plugin toolbar - [${app.name}]`, function() {
-        cy[app.func]('empty')
+      it(`render html plugin toolbar [${app.name}]`, function() {
+        cy[app.loadApp]('empty')
           .addHtml()
           .waitForHtmlToLoad();
         cy.get(`[data-hook*=${PLUGIN_TOOLBAR_BUTTONS.EDIT}]`)
@@ -54,8 +54,8 @@ describe('plugins', () => {
     afterEach(() => cy.eyesClose());
 
     apps.forEach(app => {
-      it(`render plugin toolbar and change styling - [${app.name}]`, () => {
-        cy[app.func]('divider')
+      it(`render plugin toolbar and change styling [${app.name}]`, () => {
+        cy[app.loadApp]('divider')
           .openPluginToolbar(PLUGIN_COMPONENT.DIVIDER)
           .openDropdownMenu();
         cy.eyesCheckWindow('render divider plugin toolbar');
@@ -91,8 +91,8 @@ describe('plugins', () => {
     after(() => cy.eyesClose());
 
     apps.forEach(app => {
-      it(`render map plugin toolbar and settings - [${app.name}]`, () => {
-        cy[app.func]('map');
+      it(`render map plugin toolbar and settings [${app.name}]`, () => {
+        cy[app.loadApp]('map');
         cy.get('.dismissButton').eq(1);
         cy.openPluginToolbar(PLUGIN_COMPONENT.MAP);
         cy.eyesCheckWindow('render map plugin toolbar');
@@ -112,8 +112,8 @@ describe('plugins', () => {
     after(() => cy.eyesClose());
 
     apps.forEach(app => {
-      it(`render file-upload plugin toolbar - [${app.name}]`, function() {
-        cy[app.func]('file-upload');
+      it(`render file-upload plugin toolbar [${app.name}]`, function() {
+        cy[app.loadApp]('file-upload');
         cy.openPluginToolbar(PLUGIN_COMPONENT.FILE_UPLOAD);
         cy.eyesCheckWindow(this.test.title);
       });
@@ -153,8 +153,8 @@ describe('plugins', () => {
 
     function testAtomicBlockAlignment(align) {
       apps.forEach(app => {
-        it(`align atomic block ${align} - [${app.name}]`, function() {
-          cy[app.func]('images').alignImage(align);
+        it(`align atomic block ${align} [${app.name}]`, function() {
+          cy[app.loadApp]('images').alignImage(align);
           cy.eyesCheckWindow(this.test.title);
         });
       });
@@ -172,30 +172,30 @@ describe('plugins', () => {
     afterEach(() => cy.eyesClose());
 
     apps.forEach(app => {
-      it(`change link preview settings - [${app.name}]`, function() {
-        cy[app.func]('link-preview', 'embedsPreset');
+      it(`change link preview settings [${app.name}]`, function() {
+        cy[app.loadApp]('link-preview', 'embedsPreset');
         cy.openPluginToolbar(PLUGIN_COMPONENT.LINK_PREVIEW);
         cy.setLinkSettings();
         cy.triggerLinkPreviewViewerUpdate();
         cy.eyesCheckWindow(this.test.title);
       });
-      it(`convert link preview to regular link - [${app.name}]`, function() {
-        cy[app.func]('link-preview', 'embedsPreset');
+      it(`convert link preview to regular link [${app.name}]`, function() {
+        cy[app.loadApp]('link-preview', 'embedsPreset');
         cy.openPluginToolbar(PLUGIN_COMPONENT.LINK_PREVIEW);
         cy.clickToolbarButton('baseToolbarButton_replaceToLink');
         cy.triggerLinkPreviewViewerUpdate();
         cy.eyesCheckWindow(this.test.title);
       });
-      it(`backspace key should convert link preview to regular link - [${app.name}]`, function() {
-        cy[app.func]('link-preview', 'embedsPreset');
+      it(`backspace key should convert link preview to regular link [${app.name}]`, function() {
+        cy[app.loadApp]('link-preview', 'embedsPreset');
         cy.focusEditor()
           .type('{downarrow}{downarrow}')
           .type('{backspace}');
         cy.triggerLinkPreviewViewerUpdate();
         cy.eyesCheckWindow(this.test.title);
       });
-      it(`delete link preview - [${app.name}]`, function() {
-        cy[app.func]('link-preview', 'embedsPreset');
+      it(`delete link preview [${app.name}]`, function() {
+        cy[app.loadApp]('link-preview', 'embedsPreset');
         cy.openPluginToolbar(PLUGIN_COMPONENT.LINK_PREVIEW).wait(100);
         cy.clickToolbarButton('blockButton_delete');
         cy.triggerLinkPreviewViewerUpdate();
