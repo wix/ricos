@@ -7,9 +7,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: npm install
-      - run: npm run analyzeBundlesAndCompare --silent
-      - name: updatePRComment
-        if: always()
-        run: npm run updatePRComment --prefix plugins-bundle-analyzer
+      - run: npm run analyzeBundles --silent
+      # - name: updatePRComment
+      #   if: always()
+      #   run: npm run updatePRComment --prefix plugins-bundle-analyzer
     env:
       REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -92,7 +92,7 @@ function run() {
         }
       });
 
-      save(fileName, JSON.stringify(sizesObject));
+      save(fileName, JSON.stringify(sizesObject, null, 2));
     });
   });
 }

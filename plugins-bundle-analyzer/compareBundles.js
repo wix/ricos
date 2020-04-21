@@ -2,22 +2,34 @@
 /* eslint-disable no-console */
 const chalk = require('chalk');
 const fs = require('fs');
+const { gitPRComment } = require('../scripts/gitPRComment');
 
-function saveDiff(
-  data,
-  callback = err => {
-    if (err) throw err;
-  }
-) {
-  fs.writeFile('diffBundles.txt', data, callback);
-}
+const generateMessage = message => {
+  const titleForPRComment = `Significant differences between the bundle sizes:\n`;
+  return titleForPRComment.concat(message);
+};
+
+// const updatePRComment = () => {
+//   try {
+//     const diff = fs.readFileSync('diffBundles.txt', 'utf8');
+//     const message = diff ? generateMessage(diff) : '';
+//     gitPRComment(message);
+//   } catch (err) {
+//     console.log(err);
+//     return;
+//   }
+// };
+
+// function saveDiff(data) {
+//   fs.writeFileSync('diffBundles.txt', data);
+// }
 
 function compareBundles() {
   let savingBundles = {},
     currentBundles = {},
     message = '';
   try {
-    savingBundles = JSON.parse(fs.readFileSync('./savingBundlesSizes.json'));
+    savingBundles = JSON.parse(fs.readFileSync('./bundlesSizesBaseline.json'));
     currentBundles = JSON.parse(fs.readFileSync('./bundleSizes.json'));
   } catch (err) {
     console.log(err);
@@ -33,14 +45,15 @@ function compareBundles() {
         message = message.concat(diff);
       }
     } else {
-      const warning = `${key} is missing in 'savingBundlesSizes.json' (Please add it to this file), current bundlesize: ${newSize}\n`;
+      const warning = `${key} is missing in 'bundlesSizesBaseline.json' (Please add it to this file), current bundlesize: ${newSize}\n`;
       message = warning.concat(message);
     }
   });
 
   if (message !== '') {
     console.error(chalk.bold.red(message));
-    saveDiff(message, () => {
+    // saveDiff(message);
+    gitPRComment(generateMessage(message), () => {
       console.error(
         chalk.red(
           `\nError: There are Significant differences between some bundle sizes:\n${message}`
@@ -49,7 +62,8 @@ function compareBundles() {
       process.exit(1);
     });
   } else {
-    saveDiff(message);
+    // saveDiff(message);
+    gitPRComment(message);
     console.log('comparison ended successfully');
   }
 }
