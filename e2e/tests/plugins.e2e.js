@@ -152,9 +152,11 @@ describe('plugins', () => {
     after(() => cy.eyesClose());
 
     function testAtomicBlockAlignment(align) {
-      it('align atomic block ' + align, function() {
-        cy.loadEditorAndViewer('images').alignImage(align);
-        cy.eyesCheckWindow(this.test.title);
+      apps.forEach(app => {
+        it(`align atomic block ${align} - [${app.name}]`, function() {
+          cy[app.func]('images').alignImage(align);
+          cy.eyesCheckWindow(this.test.title);
+        });
       });
     }
 
