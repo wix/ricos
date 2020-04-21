@@ -1,10 +1,10 @@
 import React from 'react';
 import getImagesData from 'wix-rich-content-fullscreen/dist/lib/getImagesData.cjs.js';
 import Fullscreen from 'wix-rich-content-fullscreen';
-import { InitialState } from './RichContentWrapperTypes';
+import { RawDraftContentState } from 'draft-js';
 
 interface Props {
-  initialState: InitialState;
+  initialState: RawDraftContentState;
   setExpandModeData: (data: any) => any;
 
   isOpen: boolean;
