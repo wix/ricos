@@ -21,7 +21,7 @@
 
 ### :bug: Bug Fix
 - `map`
-  - [#939](https://github.com/wix-incubator/rich-content/pull/939) Map Settings: themeColors protected
+  - [#939](https://github.com/wix-incubator/rich-content/pull/939) Map Settings: dynamic style replaced with theme
 
 </details>
 <hr/>
