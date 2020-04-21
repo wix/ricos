@@ -26,9 +26,11 @@
 ### :bug: Bug Fix
 - `code-block`
   - [#943](https://github.com/wix-incubator/rich-content/pull/943) Adding code block with backward direction of selection
-
 - 'giphy'
   - [#945](https://github.com/wix-incubator/rich-content/pull/945) Restore auto-focus after add giphy
+### :house: Internal
+- `wrapper`
+  - [#931](https://github.com/wix-incubator/rich-content/pull/931) added internal static toolbar support
 
 </details>
 <hr/>
@@ -63,7 +65,6 @@
 - `wrapper`
   - [#919](https://github.com/wix-incubator/rich-content/pull/919) added internal mobile support
   - [#920](https://github.com/wix-incubator/rich-content/pull/920) refactor: `FullscreenRenderer.tsx`, `ModalRenderer.tsx`
-- `wrapper`
   - [#918](https://github.com/wix-incubator/rich-content/pull/918)
     - viewer is now re-rendered for new initialState prop (fix)
 - `storybook`

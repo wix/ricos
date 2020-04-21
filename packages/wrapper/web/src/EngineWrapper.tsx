@@ -1,5 +1,5 @@
 import React, { Children, Fragment, ReactElement, forwardRef } from 'react';
-import { RichContentProps, ForwardedRef } from './RichContentWrapperTypes';
+import { RichContentProps, ForwardedRef } from './RichContentProps';
 import ViewerRenderer from './ViewerRenderer';
 import EditorRenderer from './EditorRenderer';
 import { merge } from 'lodash';
@@ -12,6 +12,8 @@ interface Props {
   isEditor?: boolean;
   isMobile?: boolean;
   forwardedRef?: ForwardedRef;
+  textToolbarType?: TextToolbarType;
+  textToolbarContainer?: HTMLElement;
 }
 
 interface State {
@@ -36,10 +38,10 @@ class EngineWrapper extends React.Component<Props, State> {
   }
 
   render() {
-    const { rcProps, children, isMobile, forwardedRef } = this.props;
+    const { rcProps, children, forwardedRef } = this.props;
     const { ModalityProvider } = this.state;
 
-    const mergedRCProps = merge(rcProps, { isMobile }, children.props);
+    const mergedRCProps = merge(rcProps, children.props);
 
     return (
       <ModalityProvider {...mergedRCProps} ref={forwardedRef}>

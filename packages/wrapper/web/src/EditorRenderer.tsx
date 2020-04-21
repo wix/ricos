@@ -1,9 +1,18 @@
-import React, { Suspense, Children, Component, Fragment, ReactElement } from 'react';
+import React, {
+  Suspense,
+  Children,
+  Component,
+  Fragment,
+  ReactElement,
+  ElementType,
+  FunctionComponent,
+} from 'react';
 import { modalStyles } from './themeStrategy/defaults';
-import { RichContentProps, EditorDataInstance } from './RichContentWrapperTypes';
+import { RichContentProps, EditorDataInstance } from './RichContentProps';
 import { RichContentEditor } from 'wix-rich-content-editor';
 import { createDataConverter } from './utils';
 import { EditorState } from 'draft-js';
+import ReactDOM from 'react-dom';
 
 interface Props {
   children: ReactElement;
@@ -12,6 +21,8 @@ interface Props {
   locale: string;
   isMobile?: boolean;
   onChange?: RichContentProps['onChange'];
+  textToolbarType?: TextToolbarType;
+  textToolbarContainer?: HTMLElement;
 }
 
 interface State {
@@ -21,6 +32,7 @@ interface State {
   modalStyles?: any;
   modalContent?: any;
   MobileToolbar?: React.ElementType;
+  TextToolbar?: React.ElementType;
 }
 
 export default class EditorRenderer extends Component<Props, State> {
@@ -48,12 +60,8 @@ export default class EditorRenderer extends Component<Props, State> {
     const EditorModal = React.lazy(() =>
       import(/* webpackChunkName: "rce-EditorModal"  */ `./EditorModal`)
     );
-    const { isMobile } = this.props;
-    if (isMobile) {
-      const { MobileToolbar } = this.editor.getToolbars();
-      this.setState({ MobileToolbar });
-    }
-    this.setState({ EditorModal });
+    const { MobileToolbar, TextToolbar } = this.editor.getToolbars();
+    this.setState({ MobileToolbar, TextToolbar, EditorModal });
   }
 
   openModal = data => {
@@ -93,16 +101,30 @@ export default class EditorRenderer extends Component<Props, State> {
   };
 
   render() {
-    const { EditorModal, showModal, modalProps, MobileToolbar } = this.state;
-    const { children, ModalsMap, locale, theme } = this.props;
+    const { EditorModal, showModal, modalProps, MobileToolbar, TextToolbar } = this.state;
+    const {
+      children,
+      ModalsMap,
+      locale,
+      theme,
+      isMobile,
+      textToolbarType,
+      textToolbarContainer,
+    } = this.props;
+
+    const StaticToolbar = MobileToolbar || TextToolbar;
 
     return (
       <Fragment>
-        {MobileToolbar && <MobileToolbar />}
+        <this.StaticToolbarPortal
+          StaticToolbar={StaticToolbar}
+          textToolbarContainer={textToolbarContainer}
+        />
         {Children.only(
           React.cloneElement(children, {
             ...this.childProps,
             onChange: this.onChange,
+            textToolbarType: isMobile ? 'inline' : textToolbarType,
             ref: ref => (this.editor = ref),
           })
         )}
@@ -123,4 +145,16 @@ export default class EditorRenderer extends Component<Props, State> {
       </Fragment>
     );
   }
+
+  StaticToolbarPortal: FunctionComponent<{
+    StaticToolbar?: ElementType;
+    textToolbarContainer?: HTMLElement;
+  }> = ({ StaticToolbar, textToolbarContainer }) => {
+    if (!StaticToolbar) return null;
+
+    if (textToolbarContainer) {
+      return ReactDOM.createPortal(<StaticToolbar />, textToolbarContainer);
+    }
+    return <StaticToolbar />;
+  };
 }

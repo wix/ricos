@@ -1,4 +1,4 @@
-import React, { Component, forwardRef } from 'react';
+import React, { Component, ReactElement, forwardRef } from 'react';
 import EngineWrapper from './EngineWrapper';
 import themeStrategy from './themeStrategy/themeStrategy';
 import pluginsStrategy from './pluginsStrategy/pluginsStrategy';
@@ -7,9 +7,23 @@ import './styles.global.css';
 import { merge } from 'lodash';
 import PropTypes from 'prop-types';
 import { isDefined } from 'ts-is-present';
-import { RichContentProps, RichContentWrapperProps, ForwardedRef } from './RichContentWrapperTypes';
+import { RichContentProps, ForwardedRef } from './RichContentProps';
 
-class RichContentWrapper extends Component<
+export interface RichContentWrapperProps {
+  children: ReactElement;
+  theme?: string | object;
+  locale?: string;
+  palette?: Palette;
+  plugins?: PluginConfig[];
+  isEditor?: boolean;
+  isMobile?: boolean;
+  rcProps?: RichContentProps;
+  textToolbarType?: TextToolbarType;
+  textToolbarContainer?: HTMLElement;
+  forwardedRef?: ForwardedRef;
+}
+
+export class RichContentWrapper extends Component<
   RichContentWrapperProps,
   { localeStrategy: RichContentProps }
 > {
@@ -26,7 +40,7 @@ class RichContentWrapper extends Component<
 
   updateLocale = async () => {
     const { locale, children } = this.props;
-    await localeStrategy(children?.props.locale || locale).then(localeData => {
+    await localeStrategy(children.props.locale || locale).then(localeData => {
       this.setState({ localeStrategy: localeData });
     });
   };

@@ -1,11 +1,10 @@
 import React, { Component, Fragment, Suspense, Children, ReactElement } from 'react';
-import { RichContentProps } from './RichContentWrapperTypes';
 import { emptyState } from './utils';
 import { RawDraftContentState } from 'draft-js';
 
 interface Props {
   children: ReactElement;
-  helpers?: RichContentProps['helpers'];
+  helpers?: Helpers;
   initialState: RawDraftContentState;
 }
 
@@ -41,7 +40,7 @@ export default class ViewerRenderer extends Component<Props, State> {
 
   setData = data => this.setState({ data });
 
-  addExpand = (helpers: object) => ({ ...helpers, onExpand: this.onExpand });
+  addExpand = (helpers: Helpers) => ({ ...helpers, onExpand: this.onExpand });
 
   render() {
     const { isExpanded, index, data, Fullscreen } = this.state;

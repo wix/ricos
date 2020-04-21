@@ -8,7 +8,7 @@ import introState from '../../../../e2e/tests/fixtures/intro.json';
 import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { default as hebResource } from 'wix-rich-content-common/dist/statics/locale/messages_he.json';
-import { RichContentProps } from './RichContentWrapperTypes';
+import { RichContentProps } from './RichContentProps';
 
 Enzyme.configure({ adapter: new Adapter() });
 const { shallow, mount } = Enzyme;
@@ -32,13 +32,13 @@ const plugins = [pluginHashtag()];
 // eslint-disable-next-line mocha/no-skipped-tests
 describe('Wrapper', () => {
   it('should render editor', () => {
-    const element = shallow(wrapper({ isEditor: true }).withEditor());
+    const element = shallow(wrapper().withEditor());
     expect(element).toBeTruthy();
     expect(element.find('#engine_wrapper')).toBeTruthy();
   });
 
   it('should render editor with locale', () => {
-    const element = shallow(wrapper({ isEditor: true, locale: 'he' }).withEditor());
+    const element = shallow(wrapper({ locale: 'he' }).withEditor());
     expect(element).toBeTruthy();
   });
 
