@@ -33,7 +33,11 @@ if (process.env.NODE_ENV !== 'development') {
   ]);
 }
 
-const testPlugins = ['@babel/plugin-transform-modules-commonjs', 'dynamic-import-node'];
+const testPlugins = [
+  '@babel/plugin-transform-modules-commonjs',
+  'dynamic-import-node',
+  '@babel/plugin-syntax-dynamic-import',
+];
 
 module.exports = {
   babelrcRoots: ['.', 'packages/**/*', 'examples/*'],

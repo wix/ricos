@@ -28,7 +28,7 @@ class WrapperTestApp extends PureComponent {
     const { isMobile, contentState, locale, seoMode } = this.props;
 
     return (
-      <RichContentWrapper plugin={viewerPlugins}>
+      <RichContentWrapper plugins={viewerPlugins}>
         <RichContentViewer
           initialState={contentState}
           isMobile={isMobile}
