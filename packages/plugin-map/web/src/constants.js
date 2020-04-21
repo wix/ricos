@@ -35,19 +35,19 @@ export const DEFAULTS = Object.freeze({
 // ../statics/styles/map-settings-modal.scss
 export const THEME = colors => ({
   map_settings_modal_mobile_navbar: {
-    backgroundColor: colors.actionColor,
-    color: colors.bgColor,
+    backgroundColor: `${colors.actionColor} !important`,
+    color: `${colors.bgColor} !important`,
   },
   map_settings_modal_divider: {
-    backgroundColor: colors.textColor,
+    backgroundColor: `${colors.textColor} !important`,
   },
   labeled_toggle_track: {
-    backgroundColor: colors.textColor,
+    backgroundColor: `${colors.textColor} !important`,
   },
   labeled_toggle_track_checked: {
-    backgroundColor: colors.actionColor,
+    backgroundColor: `${colors.actionColor} !important`,
   },
   labeled_toggle_slider: {
-    backgroundColor: colors.bgColor,
+    backgroundColor: `${colors.bgColor} !important`,
   },
 });
