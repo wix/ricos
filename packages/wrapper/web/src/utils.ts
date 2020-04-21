@@ -2,7 +2,7 @@ import { convertToRaw } from 'wix-rich-content-editor-common';
 import { debounce } from 'lodash';
 import { RawDraftContentState, EditorState } from 'draft-js';
 import { createEmpty } from 'wix-rich-content-editor/dist/lib/editorStateConversion';
-import { EditorDataInstance } from './RichContentWrapperTypes';
+import { EditorDataInstance } from './RichContentProps';
 
 /* eslint-disable no-console */
 export const assert = (predicate, message) => console.assert(predicate, message);
