@@ -31,8 +31,8 @@ interface State {
   modalProps?: any;
   modalStyles?: any;
   modalContent?: any;
-  MobileToolbar?: React.ElementType;
-  TextToolbar?: React.ElementType;
+  MobileToolbar?: ElementType;
+  TextToolbar?: ElementType;
 }
 
 export default class ModalDialogProvider extends Component<Props, State> {
