@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 import React from 'react';
-import RichContentWrapper from './RichContentWrapper';
+import { RichContentWrapper } from './RichContentWrapper';
 import { RichContentEditor } from 'wix-rich-content-editor';
 import { RichContentViewer } from 'wix-rich-content-viewer';
 import { pluginHashtag } from '../../../plugin-hashtag/web/src/editor';

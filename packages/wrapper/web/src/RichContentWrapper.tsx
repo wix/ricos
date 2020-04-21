@@ -23,7 +23,7 @@ export interface RichContentWrapperProps {
   forwardedRef?: ForwardedRef;
 }
 
-export class RichContentWrapper extends Component<
+class RichContentWrapper extends Component<
   RichContentWrapperProps,
   { localeStrategy: RichContentProps }
 > {
@@ -98,6 +98,8 @@ export class RichContentWrapper extends Component<
   }
 }
 
-export default forwardRef((props: RichContentWrapperProps, ref: ForwardedRef) => (
+const exportedComp = forwardRef((props: RichContentWrapperProps, ref: ForwardedRef) => (
   <RichContentWrapper {...props} forwardedRef={ref} />
 ));
+
+export { exportedComp as RichContentWrapper };
