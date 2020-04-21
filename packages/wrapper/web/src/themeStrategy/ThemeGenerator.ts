@@ -11,7 +11,7 @@ const THEMES = {
   PALETTE: 'Palette',
 };
 
-const SUPPORTED_THEMES = [THEMES.DEFAULT, THEMES.PALETTE, THEMES.BACK_OFFICE];
+const SUPPORTED_THEMES = [THEMES.DEFAULT, THEMES.PALETTE];
 const BG_COLOR = 11;
 const SECONDARY_COLOR = 13;
 const COLOR4 = 14;
@@ -38,7 +38,7 @@ export default class ThemeGenerator {
     if (SUPPORTED_THEMES.indexOf(theme) === -1) this._theme = THEMES.DEFAULT;
     else this._theme = theme;
 
-    if (theme === THEMES.PALETTE || theme === THEMES.BACK_OFFICE) {
+    if (theme === THEMES.PALETTE) {
       if (!palette) throw Error('Invalid palette');
       else this.palette = palette;
     }

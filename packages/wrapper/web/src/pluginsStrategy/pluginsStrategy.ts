@@ -1,6 +1,5 @@
-import { FinalTheme } from './../RichContentWrapperTypes';
 import { merge } from 'lodash';
-import { RichContentProps, InitialState } from '../RichContentWrapperTypes';
+import { RichContentProps } from '../RichContentProps';
 
 const getPluginProps = (
   isEditor: boolean,
@@ -58,7 +57,7 @@ export default function pluginsStrategy(
   isEditor = false,
   plugins: PluginConfig[] = [],
   childProps: RichContentProps = {},
-  theme: FinalTheme['theme']
+  theme: Theme
 ): PluginsStrategy {
   // TODO: Should consider initialState to be explicitly required in child props
   const { initialState } = childProps;

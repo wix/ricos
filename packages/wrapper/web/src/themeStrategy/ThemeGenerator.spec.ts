@@ -22,9 +22,9 @@ describe('ThemeGenerator', () => {
       expect(func).toThrow();
     });
 
-    it('should expect site colors if theme is back office', () => {
+    it('should expect default behavior if theme is back office', () => {
       const func = () => createTheme(false, { theme: THEMES.BACK_OFFICE });
-      expect(func).toThrow();
+      expect(func).not.toThrow();
     });
 
     it('should create theme object', () => {
