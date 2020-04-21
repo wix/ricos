@@ -1,7 +1,3 @@
-type InitialState = {
-  blocks: object[];
-  entityMap: { [index: number]: object };
-};
 type Theme = {
   modalTheme: { content: any };
   [propName: string]: any;

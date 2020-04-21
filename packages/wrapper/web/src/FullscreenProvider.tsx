@@ -1,9 +1,11 @@
 import React, { Component, Fragment, Suspense, Children, ReactElement } from 'react';
+import { emptyState } from './utils';
+import { RawDraftContentState } from 'draft-js';
 
 interface Props {
   children: ReactElement;
   helpers?: Helpers;
-  initialState: InitialState;
+  initialState: RawDraftContentState;
 }
 
 interface State {
@@ -13,7 +15,7 @@ interface State {
   Fullscreen?: any;
 }
 
-export default class FullscreenRenderer extends Component<Props, State> {
+export default class FullscreenProvider extends Component<Props, State> {
   constructor(props) {
     super(props);
     this.state = {
@@ -51,7 +53,7 @@ export default class FullscreenRenderer extends Component<Props, State> {
           <Suspense fallback={<div />}>
             <Fullscreen
               dataHook={'WrapperFullScreen'}
-              initialState={initialState || { entityMap: {} }}
+              initialState={initialState || emptyState}
               isOpen={isExpanded}
               images={data?.images || []}
               onClose={this.onClose}

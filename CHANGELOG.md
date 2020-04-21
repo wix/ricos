@@ -15,6 +15,14 @@
     Click to see more.
   </summary>
 
+### :house: Internal
+- `editor`
+  - [#912](https://github.com/wix-incubator/rich-content/pull/912) publish api
+- `wrapper`
+  - [#912](https://github.com/wix-incubator/rich-content/pull/912) onChange handle inside wrapper
+- `editor-common`
+  - [#912](https://github.com/wix-incubator/rich-content/pull/912) getPostContentSummary updated
+
 ### :bug: Bug Fix
 - `code-block`
   - [#943](https://github.com/wix-incubator/rich-content/pull/943) Adding code block with backward direction of selection
