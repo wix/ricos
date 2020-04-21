@@ -35,8 +35,8 @@ if (process.env.NODE_ENV !== 'development') {
 
 const testPlugins = [
   '@babel/plugin-transform-modules-commonjs',
-  'dynamic-import-node',
   '@babel/plugin-syntax-dynamic-import',
+  'dynamic-import-node',
 ];
 
 module.exports = {

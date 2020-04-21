@@ -18,6 +18,11 @@ const eyesOpen = ({
     browser: DEFAULT_DESKTOP_BROWSERS,
   });
 
+const apps = [
+  { name: 'rce', func: 'loadEditorAndViewer' },
+  { name: 'wrapper', func: 'loadWrapperEditorAndViewer' },
+];
+
 describe('plugins', () => {
   afterEach(() => cy.matchContentSnapshot());
 
@@ -32,14 +37,16 @@ describe('plugins', () => {
 
     after(() => cy.eyesClose());
 
-    it('render html plugin toolbar', function() {
-      cy.loadEditorAndViewer('empty')
-        .addHtml()
-        .waitForHtmlToLoad();
-      cy.get(`[data-hook*=${PLUGIN_TOOLBAR_BUTTONS.EDIT}]`)
-        .click({ multiple: true })
-        .click();
-      cy.eyesCheckWindow(this.test.title);
+    apps.forEach(app => {
+      it(`render html plugin toolbar - [${app.name}]`, function() {
+        cy[app.func]('empty')
+          .addHtml()
+          .waitForHtmlToLoad();
+        cy.get(`[data-hook*=${PLUGIN_TOOLBAR_BUTTONS.EDIT}]`)
+          .click({ multiple: true })
+          .click();
+        cy.eyesCheckWindow(this.test.title);
+      });
     });
   });
 
