@@ -41,7 +41,10 @@ function compareBundles() {
   if (message !== '') {
     console.error(chalk.bold.red(message));
     saveDiff(message, () => {
-      throw message;
+      console.error(
+        chalk.red(`\nThere are Significant differences between some bundle sizes:\n${message}`)
+      );
+      process.exit(1);
     });
   } else {
     saveDiff(message);
