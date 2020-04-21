@@ -30,3 +30,24 @@ export const DEFAULTS = Object.freeze({
     },
   },
 });
+
+/* eslint-disable camelcase, @typescript-eslint/camelcase */
+// ../statics/styles/map-settings-modal.scss
+export const THEME = colors => ({
+  map_settings_modal_mobile_navbar: {
+    backgroundColor: colors.actionColor,
+    color: colors.bgColor,
+  },
+  map_settings_modal_divider: {
+    backgroundColor: colors.textColor,
+  },
+  labeled_toggle_track: {
+    backgroundColor: colors.textColor,
+  },
+  labeled_toggle_track_checked: {
+    backgroundColor: colors.actionColor,
+  },
+  labeled_toggle_slider: {
+    backgroundColor: colors.bgColor,
+  },
+});

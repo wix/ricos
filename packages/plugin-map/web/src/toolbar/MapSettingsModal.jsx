@@ -71,28 +71,17 @@ export class MapSettingsModal extends Component {
       pubsub.update('componentData', { ...newComponentData });
     }
 
-    if (helpers) {
-      helpers.openModal(data => pubsub.update('componentData', { metadata: { ...data } }));
-    }
-
-    this.closeModal();
+    helpers.openModal(data => pubsub.update('componentData', { metadata: { ...data } }));
+    helpers.closeModal();
   };
-
-  closeModal = () => this.props.helpers.closeModal();
-
-  labeledToggleDefaultProps = () => ({
-    sliderColor: this.props.uiSettings.themeColors.color1,
-    toggleIsOnTrackColor: this.props.uiSettings.themeColors.color8,
-    toggleIsOffTrackColor: this.props.uiSettings.themeColors.color5,
-  });
 
   renderMobileNavBar() {
     const mobileCancelButton = (
       <div
-        onClick={this.closeModal}
+        onClick={this.props.helpers.closeModal}
         role="button"
         tabIndex={0}
-        onKeyPress={e => e.key === 'Enter' && this.closeModal()}
+        onKeyPress={e => e.key === 'Enter' && this.props.helpers.closeModal()}
         className={this.styles.map_settings_modal_mobile_navbar_cancel_button}
       >
         <p>Cancel</p>
@@ -119,62 +108,43 @@ export class MapSettingsModal extends Component {
     );
   }
 
-  renderInjectedStyles = () => {
-    const { themeColors } = this.props.uiSettings;
-
-    if (!themeColors) {
-      return null;
-    }
-
-    const uniqueClassesId = this.uniqueClassesId;
-
-    const buttonPrimaryClassName = `map_settings_modal_button_primary_${uniqueClassesId}`;
-    const buttonSecondaryClassName = `map_settings_modal_button_secondary_${uniqueClassesId}`;
-    const textInputClassName = `map_settings_modal_text_input_${uniqueClassesId}`;
-    const navBarClassName = `map_settings_modal_mobile_navbar_dynamic_${uniqueClassesId}`;
-    const dividerClassName = `map_settings_modal_divider_dynamic_${uniqueClassesId}`;
-
-    /* eslint-disable camelcase, max-len, @typescript-eslint/camelcase */
-    this.styles.button_primary = `${buttonPrimaryClassName} ${this.styles.button_primary}`;
-    this.styles.button_secondary = `${buttonSecondaryClassName} ${this.styles.button_secondary}`;
-    this.styles.textInput_input = `${textInputClassName} ${this.styles.textInput_input}`;
-    this.styles.map_settings_modal_mobile_navbar = `${navBarClassName} ${this.styles.map_settings_modal_mobile_navbar}`;
-    this.styles.map_settings_modal_divider = `${dividerClassName} ${this.styles.map_settings_modal_divider}`;
-    /*eslint-enable camelcase, max-len */
-
-    const style = `
-      .${buttonPrimaryClassName} {
-        background: ${themeColors.color8};
-      }
-
-      .${buttonPrimaryClassName}:hover {
-        color: ${themeColors.color1};
-      }
-
-      .${buttonSecondaryClassName} {
-        border: 1px solid ${themeColors.color8};
-        color: ${themeColors.color8};
-      }
-
-      .${buttonSecondaryClassName}:hover {
-        color: ${themeColors.color8};
-      }
-
-      .${textInputClassName} {
-        border-color: ${themeColors.color5};
-      }
-      .${navBarClassName} {
-        background-color: ${themeColors.color8};
-        color: ${themeColors.color1};
-      }
-
-       .${dividerClassName} {
-        background-color: ${themeColors.color5};
-      }
-    `;
-
-    return <style>{style}</style>;
+  toggleState = key => () => {
+    this.setState(prevState => ({
+      [key]: !prevState[key],
+    }));
   };
+
+  renderToggle = ({ toggleKey, labelKey }) => (
+    <LabeledToggle
+      theme={this.props.theme}
+      checked={this.state[toggleKey]}
+      label={this.props.t(labelKey)}
+      onChange={this.toggleState(toggleKey)}
+    />
+  );
+
+  toggleData = [
+    {
+      toggleKey: 'isViewControlShown',
+      labelKey: 'MapSettings_MapOption_Show_View_Control_Label',
+    },
+    {
+      toggleKey: 'isMarkerShown',
+      labelKey: 'MapSettings_MapOption_Show_Marker_Label',
+    },
+    {
+      toggleKey: 'isZoomControlShown',
+      labelKey: 'MapSettings_MapOption_Show_Zoom_Label',
+    },
+    {
+      toggleKey: 'isStreetViewControlShown',
+      labelKey: 'MapSettings_MapOption_Show_Street_View_Label',
+    },
+    {
+      toggleKey: 'isDraggingAllowed',
+      labelKey: 'MapSettings_MapOption_Allow_Dragging_Label',
+    },
+  ];
 
   renderSettingsSections() {
     const { theme, t, isMobile } = this.props;
@@ -282,48 +252,7 @@ export class MapSettingsModal extends Component {
             <p className={this.styles.map_settings_modal_map_options_sub_header}>
               {t('MapSettings_MapOption_SubHeader')}
             </p>
-
-            <LabeledToggle
-              label={t('MapSettings_MapOption_Show_View_Control_Label')}
-              checked={this.state.isViewControlShown}
-              onChange={() => this.setState({ isViewControlShown: !this.state.isViewControlShown })}
-              {...this.labeledToggleDefaultProps()}
-              theme={theme}
-            />
-
-            <LabeledToggle
-              label={t('MapSettings_MapOption_Show_Marker_Label')}
-              checked={this.state.isMarkerShown}
-              onChange={() => this.setState({ isMarkerShown: !this.state.isMarkerShown })}
-              {...this.labeledToggleDefaultProps()}
-              theme={theme}
-            />
-
-            <LabeledToggle
-              label={t('MapSettings_MapOption_Show_Zoom_Label')}
-              checked={this.state.isZoomControlShown}
-              onChange={() => this.setState({ isZoomControlShown: !this.state.isZoomControlShown })}
-              {...this.labeledToggleDefaultProps()}
-              theme={theme}
-            />
-
-            <LabeledToggle
-              label={t('MapSettings_MapOption_Show_Street_View_Label')}
-              checked={this.state.isStreetViewControlShown}
-              onChange={() =>
-                this.setState({ isStreetViewControlShown: !this.state.isStreetViewControlShown })
-              }
-              {...this.labeledToggleDefaultProps()}
-              theme={theme}
-            />
-
-            <LabeledToggle
-              label={t('MapSettings_MapOption_Allow_Dragging_Label')}
-              checked={this.state.isDraggingAllowed}
-              onChange={() => this.setState({ isDraggingAllowed: !this.state.isDraggingAllowed })}
-              {...this.labeledToggleDefaultProps()}
-              theme={theme}
-            />
+            {this.toggleData.map(toggle => this.renderToggle(toggle))}
           </div>
         </SettingsSection>
       </div>
@@ -346,7 +275,6 @@ export class MapSettingsModal extends Component {
 
     return (
       <div dir={languageDir}>
-        {this.renderInjectedStyles()}
         {isMobile && this.renderMobileNavBar()}
 
         <div className={this.styles.map_settings_modal_settings_container} data-hook="mapSettings">
@@ -372,7 +300,7 @@ export class MapSettingsModal extends Component {
             >
               <Button
                 type="secondary"
-                onClick={this.closeModal}
+                onClick={this.props.helpers.closeModal}
                 theme={this.styles}
                 className={this.styles.map_settings_modal_footer_cancel_button}
               >
@@ -401,7 +329,6 @@ MapSettingsModal.propTypes = {
   settings: PropTypes.object.isRequired,
   onConfirm: PropTypes.func,
   theme: PropTypes.object.isRequired,
-  uiSettings: PropTypes.object.isRequired,
   t: PropTypes.func,
   isMobile: PropTypes.bool,
   languageDir: PropTypes.string,
