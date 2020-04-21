@@ -166,37 +166,41 @@ describe('plugins', () => {
   });
 
   context('link preview', () => {
-    before(function() {
+    beforeEach(function() {
       eyesOpen(this);
     });
-    after(() => cy.eyesClose());
+    afterEach(() => cy.eyesClose());
 
-    beforeEach('load editor', () => cy.loadEditorAndViewer('link-preview', 'embedsPreset'));
-
-    it('change link preview settings', function() {
-      cy.openPluginToolbar(PLUGIN_COMPONENT.LINK_PREVIEW);
-      cy.setLinkSettings();
-      cy.triggerLinkPreviewViewerUpdate();
-      cy.eyesCheckWindow(this.test.title);
-    });
-    it('convert link preview to regular link', function() {
-      cy.openPluginToolbar(PLUGIN_COMPONENT.LINK_PREVIEW);
-      cy.clickToolbarButton('baseToolbarButton_replaceToLink');
-      cy.triggerLinkPreviewViewerUpdate();
-      cy.eyesCheckWindow(this.test.title);
-    });
-    it('backspace key should convert link preview to regular link', function() {
-      cy.focusEditor()
-        .type('{downarrow}{downarrow}')
-        .type('{backspace}');
-      cy.triggerLinkPreviewViewerUpdate();
-      cy.eyesCheckWindow(this.test.title);
-    });
-    it('delete link preview', function() {
-      cy.openPluginToolbar(PLUGIN_COMPONENT.LINK_PREVIEW).wait(100);
-      cy.clickToolbarButton('blockButton_delete');
-      cy.triggerLinkPreviewViewerUpdate();
-      cy.eyesCheckWindow(this.test.title);
+    apps.forEach(app => {
+      it(`change link preview settings - [${app.name}]`, function() {
+        cy[app.func]('link-preview', 'embedsPreset');
+        cy.openPluginToolbar(PLUGIN_COMPONENT.LINK_PREVIEW);
+        cy.setLinkSettings();
+        cy.triggerLinkPreviewViewerUpdate();
+        cy.eyesCheckWindow(this.test.title);
+      });
+      it(`convert link preview to regular link - [${app.name}]`, function() {
+        cy[app.func]('link-preview', 'embedsPreset');
+        cy.openPluginToolbar(PLUGIN_COMPONENT.LINK_PREVIEW);
+        cy.clickToolbarButton('baseToolbarButton_replaceToLink');
+        cy.triggerLinkPreviewViewerUpdate();
+        cy.eyesCheckWindow(this.test.title);
+      });
+      it(`backspace key should convert link preview to regular link - [${app.name}]`, function() {
+        cy[app.func]('link-preview', 'embedsPreset');
+        cy.focusEditor()
+          .type('{downarrow}{downarrow}')
+          .type('{backspace}');
+        cy.triggerLinkPreviewViewerUpdate();
+        cy.eyesCheckWindow(this.test.title);
+      });
+      it(`delete link preview - [${app.name}]`, function() {
+        cy[app.func]('link-preview', 'embedsPreset');
+        cy.openPluginToolbar(PLUGIN_COMPONENT.LINK_PREVIEW).wait(100);
+        cy.clickToolbarButton('blockButton_delete');
+        cy.triggerLinkPreviewViewerUpdate();
+        cy.eyesCheckWindow(this.test.title);
+      });
     });
   });
 
