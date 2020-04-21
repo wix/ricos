@@ -7,7 +7,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: npm install
-      - run: npm run analyzeBundles
+      - run: npm run analyzeBundlesAndCompare --silent
       - name: updatePRComment
         if: always()
         run: npm run updatePRComment --prefix plugins-bundle-analyzer
