@@ -46,40 +46,39 @@ describe('plugins', () => {
   });
 
   context('divider', () => {
-    before(function() {
+    beforeEach(function() {
       eyesOpen(this);
-    });
-
-    beforeEach('load editor', () => {
       cy.switchToDesktop();
     });
 
-    after(() => cy.eyesClose());
+    afterEach(() => cy.eyesClose());
 
-    it(`render plugin toolbar and change styling`, () => {
-      cy.loadEditorAndViewer('divider')
-        .openPluginToolbar(PLUGIN_COMPONENT.DIVIDER)
-        .openDropdownMenu();
-      cy.eyesCheckWindow('render divider plugin toolbar');
+    apps.forEach(app => {
+      it.only(`render plugin toolbar and change styling - [${app.name}]`, () => {
+        cy[app.func]('divider')
+          .openPluginToolbar(PLUGIN_COMPONENT.DIVIDER)
+          .openDropdownMenu();
+        cy.eyesCheckWindow('render divider plugin toolbar');
 
-      cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.SMALL);
-      cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.ALIGN_LEFT);
+        cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.SMALL);
+        cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.ALIGN_LEFT);
 
-      cy.get('[data-hook*="divider-double"]:first')
-        .parent()
-        .click();
-      cy.get('[data-hook*="PluginToolbar"]:first');
+        cy.get('[data-hook*="divider-double"]:first')
+          .parent()
+          .click();
+        cy.get('[data-hook*="PluginToolbar"]:first');
 
-      cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.MEDIUM);
-      cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.ALIGN_RIGHT);
+        cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.MEDIUM);
+        cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.ALIGN_RIGHT);
 
-      cy.get('[data-hook*="divider-dashed"]:first')
-        .parent()
-        .click();
-      cy.get('[data-hook*="PluginToolbar"]:first').openDropdownMenu(
-        `[data-hook=${DIVIDER_DROPDOWN_OPTIONS.DOUBLE}]`
-      );
-      cy.eyesCheckWindow('change divider styling');
+        cy.get('[data-hook*="divider-dashed"]:first')
+          .parent()
+          .click();
+        cy.get('[data-hook*="PluginToolbar"]:first').openDropdownMenu(
+          `[data-hook=${DIVIDER_DROPDOWN_OPTIONS.DOUBLE}]`
+        );
+        cy.eyesCheckWindow('change divider styling');
+      });
     });
   });
 
