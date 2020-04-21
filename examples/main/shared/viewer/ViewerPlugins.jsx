@@ -17,7 +17,7 @@ import { mapTypeMapper } from 'wix-rich-content-plugin-map/dist/module.viewer';
 import { giphyTypeMapper, GIPHY_TYPE } from 'wix-rich-content-plugin-giphy/dist/module.viewer';
 import { buttonTypeMapper } from 'wix-rich-content-plugin-button/dist/module.viewer';
 import { HashtagDecorator } from 'wix-rich-content-plugin-hashtag/dist/module.viewer';
-
+import { verticalEmbedTypeMapper } from 'wix-rich-content-plugin-vertical-embed/dist/module.viewer';
 import {
   createHeadersMarkdownDecorator,
   HEADERS_MARKDOWN_TYPE,
@@ -88,6 +88,7 @@ export const typeMappers = [
   mapTypeMapper,
   fileUploadTypeMapper,
   giphyTypeMapper,
+  verticalEmbedTypeMapper,
 ];
 
 const uiSettings = {
@@ -106,7 +107,7 @@ const config = {
   // [HTML_TYPE]: {},
   [LINK_TYPE]: linkPluginSettings,
   [LINK_PREVIEW_TYPE]: {
-    disableEmbed: false,
+    enableEmbed: true,
   },
   [MENTION_TYPE]: mentionsPluginSettings,
   [TEXT_HIGHLIGHT_TYPE]: {

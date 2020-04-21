@@ -51,7 +51,7 @@ export const THEME = colors => {
   };
   return {
     mention: {
-      color: colors.actionColor,
+      color: `${colors.actionColor} !important`,
       background: 'transparent !important',
       '&:hover': themeHoverFocus,
       '&:focus': themeHoverFocus,

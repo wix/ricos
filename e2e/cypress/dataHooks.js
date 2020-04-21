@@ -19,6 +19,16 @@ export const INLINE_TOOLBAR_BUTTONS = {
 export const STATIC_TOOLBAR_BUTTONS = {
   VIDEO: 'Video_insert_plugin_button',
   SOUND_CLOUD: 'SoundCloud_insert_plugin_button',
+  TWITTER: 'Twitter_insert_plugin_button',
+  FACEBOOK: 'Facebook_insert_plugin_button',
+  TIKTOK: 'TikTok_insert_plugin_button',
+  PINTEREST: 'Pinterest_insert_plugin_button',
+  YOUTUBE: 'YouTube_insert_plugin_button',
+  INSTAGRAM: 'Instagram_insert_plugin_button',
+  EVENT: 'VerticalEmbed-event_insert_plugin_button',
+  PRODUCT: 'VerticalEmbed-product_insert_plugin_button',
+  BOOKING: 'VerticalEmbed-booking_insert_plugin_button',
+  GIPHY: 'GIF_insert_plugin_button',
 };
 
 export const SETTINGS_PANEL = {

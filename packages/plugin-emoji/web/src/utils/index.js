@@ -1,6 +1,5 @@
-import convertShortNameToUnicode from './convertShortNameToUnicode';
-import createEmojisFromStrategy from './createEmojisFromStrategy';
+import convertUnicodeToEmoji from './convertUnicodeToEmoji';
 import emojiList from './emojiList';
 import getGroupEmojis from './getGroupEmojis';
 
-export { convertShortNameToUnicode, createEmojisFromStrategy, emojiList, getGroupEmojis };
+export { convertUnicodeToEmoji, emojiList, getGroupEmojis };

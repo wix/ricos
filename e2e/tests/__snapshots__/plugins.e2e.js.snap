@@ -1114,7 +1114,7 @@ exports[`plugins > html > render html plugin toolbar #0`] =
       "data": {
         "config": {
           "alignment": "center",
-          "height": 210,
+          "height": 445,
           "width": 350
         },
         "src": "<blockquote class=\"twitter-tweet\" data-lang=\"en\"><p lang=\"en\" dir=\"ltr\">The updates, insights and stories of the engineering challenges we encounter, and our way of solving them. Subscribe to our fresh, monthly newsletter and get these goodies right to your e-mail:<a href=\"https://t.co/0ziRSJJAxK\">https://t.co/0ziRSJJAxK</a> <a href=\"https://t.co/nTHlsG5z2a\">pic.twitter.com/nTHlsG5z2a</a></p>&mdash; Wix Engineering (@WixEng) <a href=\"https://twitter.com/WixEng/status/1076810144774868992?ref_src=twsrc%5Etfw\">December 23, 2018</a></blockquote> <script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script>",
@@ -2709,6 +2709,15 @@ exports[`plugins > link preview > change link preview settings #0`] =
     {
       "data": {},
       "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
       "entityRanges": [
         {
           "key": 0,
@@ -2717,7 +2726,7 @@ exports[`plugins > link preview > change link preview settings #0`] =
         }
       ],
       "inlineStyleRanges": [],
-      "key": 1,
+      "key": 2,
       "text": " ",
       "type": "atomic"
     },
@@ -2726,7 +2735,7 @@ exports[`plugins > link preview > change link preview settings #0`] =
       "depth": 0,
       "entityRanges": [],
       "inlineStyleRanges": [],
-      "key": 2,
+      "key": 3,
       "text": "",
       "type": "unstyled"
     },
@@ -2741,7 +2750,7 @@ exports[`plugins > link preview > change link preview settings #0`] =
         }
       ],
       "inlineStyleRanges": [],
-      "key": 3,
+      "key": 4,
       "text": " ",
       "type": "atomic"
     },
@@ -2750,7 +2759,7 @@ exports[`plugins > link preview > change link preview settings #0`] =
       "depth": 0,
       "entityRanges": [],
       "inlineStyleRanges": [],
-      "key": 4,
+      "key": 5,
       "text": "",
       "type": "unstyled"
     },
@@ -2765,7 +2774,7 @@ exports[`plugins > link preview > change link preview settings #0`] =
         }
       ],
       "inlineStyleRanges": [],
-      "key": 5,
+      "key": 6,
       "text": " ",
       "type": "atomic"
     },
@@ -2774,7 +2783,7 @@ exports[`plugins > link preview > change link preview settings #0`] =
       "depth": 0,
       "entityRanges": [],
       "inlineStyleRanges": [],
-      "key": 6,
+      "key": 7,
       "text": "",
       "type": "unstyled"
     },
@@ -2795,7 +2804,7 @@ exports[`plugins > link preview > change link preview settings #0`] =
           "style": "UNDERLINE"
         }
       ],
-      "key": 7,
+      "key": 8,
       "text": "wix.com ",
       "type": "unstyled"
     }
@@ -2829,10 +2838,9 @@ exports[`plugins > link preview > change link preview settings #0`] =
           },
           "size": "content"
         },
-        "description": "\tIts the holiday season now and many people are either on vacation already or prepping for their next trip during this time. One of the popular destinations that Malaysians love to visit would be Seoul,",
-        "provider_url": "https://www.worldofbuzz.com/",
-        "thumbnail_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Good_Food_Display_-_NCI_Visuals_Online.jpg/220px-Good_Food_Display_-_NCI_Visuals_Online.jpg",
-        "title": "9 Yummy Snacks From South Korea That Make Great Souvenirs for Everyone"
+        "provider_url": "https://www.youtube.com",
+        "thumbnail_url": "https://static.wixstatic.com/media/8bb438_603549efcb714170bb71fe0757f37561.jpg/v1/fill/w_125,h_51,fp_0.50_0.50,q_10/8bb438_603549efcb714170bb71fe0757f37561.webp",
+        "title": "Fiesta Latina 2019 - Maluma, Luis Fonsi, Ozuna, J Balvin, CNCO, J Balvin - Latin Hits Mix 2019"
       },
       "mutability": "IMMUTABLE",
       "type": "LINK_PREVIEW"
@@ -2842,13 +2850,13 @@ exports[`plugins > link preview > change link preview settings #0`] =
         "config": {
           "alignment": "center",
           "link": {
-            "url": "wix.com"
+            "url": "mockUrl.com"
           },
-          "size": "content"
+          "size": "content",
+          "width": 350
         },
-        "provider_url": "https://www.youtube.com",
-        "thumbnail_url": "https://i.ytimg.com/vi/W9aEdHf6cA0/maxresdefault.jpg",
-        "title": "Fiesta Latina 2019 - Maluma, Luis Fonsi, Ozuna, J Balvin, CNCO, J Balvin - Latin Hits Mix 2019"
+        "html": "<div style=\"background-color: black; border: 10px solid pink; height: 400px; text-align: center; color: white;\">This is a mock embed</div>",
+        "title": "I am a mock html"
       },
       "mutability": "IMMUTABLE",
       "type": "LINK_PREVIEW"
@@ -2880,6 +2888,15 @@ exports[`plugins > link preview > convert link preview to regular link #0`] =
     {
       "data": {},
       "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
       "entityRanges": [
         {
           "key": 0,
@@ -2894,24 +2911,9 @@ exports[`plugins > link preview > convert link preview to regular link #0`] =
           "style": "UNDERLINE"
         }
       ],
-      "key": 1,
+      "key": 2,
       "text": "wix.com",
       "type": "unstyled"
-    },
-    {
-      "data": {},
-      "depth": 0,
-      "entityRanges": [
-        {
-          "key": 1,
-          "length": 1,
-          "offset": 0
-        }
-      ],
-      "inlineStyleRanges": [],
-      "key": 2,
-      "text": " ",
-      "type": "atomic"
     },
     {
       "data": {},
@@ -2927,7 +2929,7 @@ exports[`plugins > link preview > convert link preview to regular link #0`] =
       "depth": 0,
       "entityRanges": [
         {
-          "key": 2,
+          "key": 1,
           "length": 1,
           "offset": 0
         }
@@ -2951,6 +2953,30 @@ exports[`plugins > link preview > convert link preview to regular link #0`] =
       "depth": 0,
       "entityRanges": [
         {
+          "key": 2,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 6,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 7,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
           "key": 3,
           "length": 7,
           "offset": 0
@@ -2963,7 +2989,7 @@ exports[`plugins > link preview > convert link preview to regular link #0`] =
           "style": "UNDERLINE"
         }
       ],
-      "key": 6,
+      "key": 8,
       "text": "wix.com ",
       "type": "unstyled"
     }
@@ -2971,8 +2997,6 @@ exports[`plugins > link preview > convert link preview to regular link #0`] =
   "entityMap": {
     "0": {
       "data": {
-        "rel": "noopener noreferrer",
-        "target": "_self",
         "url": "wix.com"
       },
       "mutability": "MUTABLE",
@@ -2987,10 +3011,9 @@ exports[`plugins > link preview > convert link preview to regular link #0`] =
           },
           "size": "content"
         },
-        "description": "\tIts the holiday season now and many people are either on vacation already or prepping for their next trip during this time. One of the popular destinations that Malaysians love to visit would be Seoul,",
-        "provider_url": "https://www.worldofbuzz.com/",
-        "thumbnail_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Good_Food_Display_-_NCI_Visuals_Online.jpg/220px-Good_Food_Display_-_NCI_Visuals_Online.jpg",
-        "title": "9 Yummy Snacks From South Korea That Make Great Souvenirs for Everyone"
+        "provider_url": "https://www.youtube.com",
+        "thumbnail_url": "https://static.wixstatic.com/media/8bb438_603549efcb714170bb71fe0757f37561.jpg/v1/fill/w_125,h_51,fp_0.50_0.50,q_10/8bb438_603549efcb714170bb71fe0757f37561.webp",
+        "title": "Fiesta Latina 2019 - Maluma, Luis Fonsi, Ozuna, J Balvin, CNCO, J Balvin - Latin Hits Mix 2019"
       },
       "mutability": "IMMUTABLE",
       "type": "LINK_PREVIEW"
@@ -3000,13 +3023,13 @@ exports[`plugins > link preview > convert link preview to regular link #0`] =
         "config": {
           "alignment": "center",
           "link": {
-            "url": "wix.com"
+            "url": "mockUrl.com"
           },
-          "size": "content"
+          "size": "content",
+          "width": 350
         },
-        "provider_url": "https://www.youtube.com",
-        "thumbnail_url": "https://i.ytimg.com/vi/W9aEdHf6cA0/maxresdefault.jpg",
-        "title": "Fiesta Latina 2019 - Maluma, Luis Fonsi, Ozuna, J Balvin, CNCO, J Balvin - Latin Hits Mix 2019"
+        "html": "<div style=\"background-color: black; border: 10px solid pink; height: 400px; text-align: center; color: white;\">This is a mock embed</div>",
+        "title": "I am a mock html"
       },
       "mutability": "IMMUTABLE",
       "type": "LINK_PREVIEW"
@@ -3209,6 +3232,15 @@ exports[`plugins > link preview > backspace key should convert link preview to r
     {
       "data": {},
       "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
       "entityRanges": [
         {
           "key": 0,
@@ -3223,24 +3255,9 @@ exports[`plugins > link preview > backspace key should convert link preview to r
           "style": "UNDERLINE"
         }
       ],
-      "key": 1,
+      "key": 2,
       "text": "wix.com",
       "type": "unstyled"
-    },
-    {
-      "data": {},
-      "depth": 0,
-      "entityRanges": [
-        {
-          "key": 1,
-          "length": 1,
-          "offset": 0
-        }
-      ],
-      "inlineStyleRanges": [],
-      "key": 2,
-      "text": " ",
-      "type": "atomic"
     },
     {
       "data": {},
@@ -3256,7 +3273,7 @@ exports[`plugins > link preview > backspace key should convert link preview to r
       "depth": 0,
       "entityRanges": [
         {
-          "key": 2,
+          "key": 1,
           "length": 1,
           "offset": 0
         }
@@ -3280,6 +3297,30 @@ exports[`plugins > link preview > backspace key should convert link preview to r
       "depth": 0,
       "entityRanges": [
         {
+          "key": 2,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 6,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 7,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
           "key": 3,
           "length": 7,
           "offset": 0
@@ -3292,7 +3333,7 @@ exports[`plugins > link preview > backspace key should convert link preview to r
           "style": "UNDERLINE"
         }
       ],
-      "key": 6,
+      "key": 8,
       "text": "wix.com ",
       "type": "unstyled"
     }
@@ -3300,8 +3341,6 @@ exports[`plugins > link preview > backspace key should convert link preview to r
   "entityMap": {
     "0": {
       "data": {
-        "rel": "noopener noreferrer",
-        "target": "_self",
         "url": "wix.com"
       },
       "mutability": "MUTABLE",
@@ -3316,10 +3355,9 @@ exports[`plugins > link preview > backspace key should convert link preview to r
           },
           "size": "content"
         },
-        "description": "\tIts the holiday season now and many people are either on vacation already or prepping for their next trip during this time. One of the popular destinations that Malaysians love to visit would be Seoul,",
-        "provider_url": "https://www.worldofbuzz.com/",
-        "thumbnail_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Good_Food_Display_-_NCI_Visuals_Online.jpg/220px-Good_Food_Display_-_NCI_Visuals_Online.jpg",
-        "title": "9 Yummy Snacks From South Korea That Make Great Souvenirs for Everyone"
+        "provider_url": "https://www.youtube.com",
+        "thumbnail_url": "https://static.wixstatic.com/media/8bb438_603549efcb714170bb71fe0757f37561.jpg/v1/fill/w_125,h_51,fp_0.50_0.50,q_10/8bb438_603549efcb714170bb71fe0757f37561.webp",
+        "title": "Fiesta Latina 2019 - Maluma, Luis Fonsi, Ozuna, J Balvin, CNCO, J Balvin - Latin Hits Mix 2019"
       },
       "mutability": "IMMUTABLE",
       "type": "LINK_PREVIEW"
@@ -3329,13 +3367,13 @@ exports[`plugins > link preview > backspace key should convert link preview to r
         "config": {
           "alignment": "center",
           "link": {
-            "url": "wix.com"
+            "url": "mockUrl.com"
           },
-          "size": "content"
+          "size": "content",
+          "width": 350
         },
-        "provider_url": "https://www.youtube.com",
-        "thumbnail_url": "https://i.ytimg.com/vi/W9aEdHf6cA0/maxresdefault.jpg",
-        "title": "Fiesta Latina 2019 - Maluma, Luis Fonsi, Ozuna, J Balvin, CNCO, J Balvin - Latin Hits Mix 2019"
+        "html": "<div style=\"background-color: black; border: 10px solid pink; height: 400px; text-align: center; color: white;\">This is a mock embed</div>",
+        "title": "I am a mock html"
       },
       "mutability": "IMMUTABLE",
       "type": "LINK_PREVIEW"
@@ -3446,6 +3484,15 @@ exports[`plugins > link preview > delete link preview #0`] =
     {
       "data": {},
       "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
       "entityRanges": [
         {
           "key": 0,
@@ -3454,7 +3501,7 @@ exports[`plugins > link preview > delete link preview #0`] =
         }
       ],
       "inlineStyleRanges": [],
-      "key": 2,
+      "key": 3,
       "text": " ",
       "type": "atomic"
     },
@@ -3463,7 +3510,7 @@ exports[`plugins > link preview > delete link preview #0`] =
       "depth": 0,
       "entityRanges": [],
       "inlineStyleRanges": [],
-      "key": 3,
+      "key": 4,
       "text": "",
       "type": "unstyled"
     },
@@ -3478,7 +3525,7 @@ exports[`plugins > link preview > delete link preview #0`] =
         }
       ],
       "inlineStyleRanges": [],
-      "key": 4,
+      "key": 5,
       "text": " ",
       "type": "atomic"
     },
@@ -3487,7 +3534,7 @@ exports[`plugins > link preview > delete link preview #0`] =
       "depth": 0,
       "entityRanges": [],
       "inlineStyleRanges": [],
-      "key": 5,
+      "key": 6,
       "text": "",
       "type": "unstyled"
     },
@@ -3508,7 +3555,7 @@ exports[`plugins > link preview > delete link preview #0`] =
           "style": "UNDERLINE"
         }
       ],
-      "key": 6,
+      "key": 7,
       "text": "wix.com ",
       "type": "unstyled"
     }
@@ -3523,10 +3570,9 @@ exports[`plugins > link preview > delete link preview #0`] =
           },
           "size": "content"
         },
-        "description": "\tIts the holiday season now and many people are either on vacation already or prepping for their next trip during this time. One of the popular destinations that Malaysians love to visit would be Seoul,",
-        "provider_url": "https://www.worldofbuzz.com/",
-        "thumbnail_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Good_Food_Display_-_NCI_Visuals_Online.jpg/220px-Good_Food_Display_-_NCI_Visuals_Online.jpg",
-        "title": "9 Yummy Snacks From South Korea That Make Great Souvenirs for Everyone"
+        "provider_url": "https://www.youtube.com",
+        "thumbnail_url": "https://static.wixstatic.com/media/8bb438_603549efcb714170bb71fe0757f37561.jpg/v1/fill/w_125,h_51,fp_0.50_0.50,q_10/8bb438_603549efcb714170bb71fe0757f37561.webp",
+        "title": "Fiesta Latina 2019 - Maluma, Luis Fonsi, Ozuna, J Balvin, CNCO, J Balvin - Latin Hits Mix 2019"
       },
       "mutability": "IMMUTABLE",
       "type": "LINK_PREVIEW"
@@ -3536,13 +3582,13 @@ exports[`plugins > link preview > delete link preview #0`] =
         "config": {
           "alignment": "center",
           "link": {
-            "url": "wix.com"
+            "url": "mockUrl.com"
           },
-          "size": "content"
+          "size": "content",
+          "width": 350
         },
-        "provider_url": "https://www.youtube.com",
-        "thumbnail_url": "https://i.ytimg.com/vi/W9aEdHf6cA0/maxresdefault.jpg",
-        "title": "Fiesta Latina 2019 - Maluma, Luis Fonsi, Ozuna, J Balvin, CNCO, J Balvin - Latin Hits Mix 2019"
+        "html": "<div style=\"background-color: black; border: 10px solid pink; height: 400px; text-align: center; color: white;\">This is a mock embed</div>",
+        "title": "I am a mock html"
       },
       "mutability": "IMMUTABLE",
       "type": "LINK_PREVIEW"
@@ -3615,4 +3661,441 @@ exports[`plugins > convert link to link preview > should create link preview fro
       "type": "LINK_PREVIEW"
     }
   }
+};
+
+exports[`plugins > convert link to preview > should create link preview from link after enter key #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "\n",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "link": {
+            "rel": "noopener",
+            "target": "_blank",
+            "url": "www.wix.com"
+          },
+          "size": "content"
+        },
+        "description": "A mock description",
+        "provider_url": "www.mockUrl.com",
+        "thumbnail_url": "https://image.insider.com/5de5784979d757159d0b6838?width=1100&format=jpeg&auto=webp",
+        "title": "A mock title"
+      },
+      "mutability": "IMMUTABLE",
+      "type": "LINK_PREVIEW"
+    }
+  }
+};
+
+exports[`plugins > convert link to preview > should embed link that supports embed #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "\n",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "link": {
+            "rel": "noopener",
+            "target": "_blank",
+            "url": "www.mockUrl.com"
+          },
+          "size": "content",
+          "width": 350
+        },
+        "html": "<div style=\"background-color: black; border: 10px solid pink; height: 400px; text-align: center; color: white;\">This is a mock embed</div>",
+        "title": "I am a mock html"
+      },
+      "mutability": "IMMUTABLE",
+      "type": "LINK_PREVIEW"
+    }
+  }
+};
+
+exports[`plugins > html > should set suitable html height #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 1,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 3,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 4,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 2,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 5,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 6,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "height": 120,
+          "width": 350
+        },
+        "src": "<div style=\"background-color: black; border: 10px solid pink; height: 100px; text-align: center; color: white;\">This is a small mock embed</div>",
+        "srcType": "html"
+      },
+      "mutability": "IMMUTABLE",
+      "type": "wix-draft-plugin-html"
+    },
+    "1": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "height": 220,
+          "width": 350
+        },
+        "src": "<div style=\"background-color: black; border: 10px solid pink; height: 200px; text-align: center; color: white;\">This is a medium mock embed</div>\n",
+        "srcType": "html"
+      },
+      "mutability": "IMMUTABLE",
+      "type": "wix-draft-plugin-html"
+    },
+    "2": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "height": 420,
+          "width": 350
+        },
+        "src": "<div style=\"background-color: black; border: 10px solid pink; height: 400px; text-align: center; color: white;\">This is a large mock embed</div>",
+        "srcType": "html"
+      },
+      "mutability": "IMMUTABLE",
+      "type": "wix-draft-plugin-html"
+    }
+  }
+};
+
+exports[`plugins > list > create nested lists using tab & shift-tab #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 1,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "Hey I am an ordered list in depth 1.",
+      "type": "ordered-list-item"
+    },
+    {
+      "data": {},
+      "depth": 2,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": " Hey I am an ordered list in depth 2.",
+      "type": "ordered-list-item"
+    },
+    {
+      "data": {},
+      "depth": 1,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": " Hey I am an ordered list in depth 1.",
+      "type": "ordered-list-item"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 3,
+      "text": "Hey I am an ordered list in depth 0.",
+      "type": "ordered-list-item"
+    },
+    {
+      "data": {},
+      "depth": 1,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 4,
+      "text": "Hey I am an unordered list in depth 1.",
+      "type": "unordered-list-item"
+    },
+    {
+      "data": {},
+      "depth": 2,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 5,
+      "text": " Hey I am an unordered list in depth 2.",
+      "type": "unordered-list-item"
+    },
+    {
+      "data": {},
+      "depth": 1,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 6,
+      "text": " Hey I am an unordered list in depth 1.",
+      "type": "unordered-list-item"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 7,
+      "text": "Hey I am an unordered list in depth 0.",
+      "type": "unordered-list-item"
+    }
+  ],
+  "entityMap": {}
+};
+
+exports[`plugins > social embed > render upload modals #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": "",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 3,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 4,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 5,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 6,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "link": {
+            "rel": "noopener",
+            "target": "_blank",
+            "url": "www.mockUrl.com"
+          },
+          "size": "content",
+          "width": 350
+        },
+        "html": "<div style=\"background-color: black; border: 10px solid pink; height: 400px; text-align: center; color: white;\">This is a mock embed</div>",
+        "socialType": "YouTube"
+      },
+      "mutability": "IMMUTABLE",
+      "type": "LINK_PREVIEW"
+    }
+  }
+};
+
+exports[`plugins > verticals embed > render upload modals #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {}
 };

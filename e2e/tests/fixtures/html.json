@@ -56,6 +56,66 @@
       "inlineStyleRanges": [],
       "entityRanges": [],
       "data": {}
+    },
+    {
+      "key": "fhfpf",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "es99d",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "da06r",
+      "text": " ",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 2
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "6ldkl",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "103hn",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "ct0p1",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
     }
   ],
   "entityMap": {
@@ -81,10 +141,23 @@
         "config": {
           "alignment": "center",
           "width": 740,
-          "height": 544
+          "height": 339
         }
       }
     },
-    "VERSION": "6.8.2"
-  }
+    "2": {
+      "type": "wix-draft-plugin-html",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "srcType": "html",
+        "src": "<div style=\"background-color: black; border: 10px solid pink; height: 400px; text-align: center; color: white;\">This is a mock embed</div>",
+        "config": {
+          "alignment": "center",
+          "width": 350,
+          "height": 154
+        }
+      }
+    }
+  },
+  "VERSION": "7.1.5"
 }

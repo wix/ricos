@@ -1,12 +1,17 @@
+/* eslint-disable camelcase */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { isEqual } from 'lodash';
 import { mergeStyles, validate, pluginLinkPreviewSchema } from 'wix-rich-content-common';
 import styles from '../statics/styles/link-preview.scss';
+import HtmlComponent from 'wix-rich-content-plugin-html/dist/lib/HtmlComponent';
 
 class LinkPreviewViewer extends Component {
   static propTypes = {
     componentData: PropTypes.object.isRequired,
+    settings: PropTypes.shape({
+      enableEmbed: PropTypes.bool,
+    }),
     theme: PropTypes.object,
     isMobile: PropTypes.bool.isRequired,
   };
@@ -27,17 +32,20 @@ class LinkPreviewViewer extends Component {
 
   componentDidMount() {
     validate(pluginLinkPreviewSchema, this.props.componentData);
-    this.setState({ imageHeight: this.image.offsetHeight });
+    this.setState({ imageHeight: this.image?.offsetHeight });
   }
 
   getUrlForDisplay = url => url.replace(/^https?:\/\//, '');
 
   render() {
-    const { componentData } = this.props;
+    const { componentData, theme, isMobile, settings } = this.props;
+    const { imageHeight } = this.state;
+
     const {
       title,
       description,
       thumbnail_url,
+      html,
       provider_url,
       config: {
         link: { url },
@@ -46,33 +54,48 @@ class LinkPreviewViewer extends Component {
 
     const {
       linkPreview,
-      linkPreview_info,
-      linkPreview_title,
-      linkPreview_image,
-      linkPreview_description,
-      linkPreview_url,
+      linkPreviewInfo,
+      linkPreviewTitle,
+      linkPreviewImage,
+      linkPreviewDescription,
+      linkPreviewUrl,
     } = this.styles;
 
-    const { imageHeight } = this.state;
-    return (
-      <figure className={linkPreview} data-hook="linkPreviewViewer">
-        <div
-          style={{
-            width: imageHeight,
-            height: imageHeight,
-            backgroundImage: `url(${thumbnail_url})`,
-          }}
-          className={linkPreview_image}
-          alt={title}
-          ref={ref => (this.image = ref)}
-        />
-        <section className={linkPreview_info}>
-          <div className={linkPreview_url}>{this.getUrlForDisplay(provider_url || url)}</div>
-          <figcaption className={linkPreview_title}>{title}</figcaption>
-          {description && <div className={linkPreview_description}>{description}</div>}
-        </section>
-      </figure>
-    );
+    if (settings.enableEmbed && html) {
+      const htmlCompProps = {
+        componentData: {
+          ...componentData,
+          srcType: 'html',
+          src: unescape(html),
+          config: {},
+        },
+        settings,
+        theme,
+        isMobile,
+      };
+
+      return <HtmlComponent {...htmlCompProps} />;
+    } else {
+      return (
+        <figure className={linkPreview} data-hook="linkPreviewViewer">
+          <div
+            style={{
+              width: imageHeight,
+              height: imageHeight,
+              backgroundImage: `url(${thumbnail_url})`,
+            }}
+            className={linkPreviewImage}
+            alt={title}
+            ref={ref => (this.image = ref)}
+          />
+          <section className={linkPreviewInfo}>
+            <div className={linkPreviewUrl}>{this.getUrlForDisplay(provider_url || url)}</div>
+            <figcaption className={linkPreviewTitle}>{title}</figcaption>
+            {description && <div className={linkPreviewDescription}>{description}</div>}
+          </section>
+        </figure>
+      );
+    }
   }
 }
 

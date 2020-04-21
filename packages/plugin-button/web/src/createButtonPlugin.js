@@ -2,7 +2,8 @@ import createToolbar from './toolbar';
 import { mergeStyles } from 'wix-rich-content-common';
 import { createBasePlugin } from 'wix-rich-content-editor-common';
 
-import { BUTTON_TYPE, getDefaultComponentData } from './constants';
+import { BUTTON_TYPE } from './constants';
+import { getDefaultComponentData } from './defaults';
 
 import Styles from '../statics/styles/default-styles.scss';
 import ButtonComponent from './components/button-component';

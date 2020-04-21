@@ -1,6 +1,6 @@
 /*global cy*/
 import { INLINE_TOOLBAR_BUTTONS } from '../cypress/dataHooks';
-import { DEFAULT_DESKTOP_BROWSERS } from './constants';
+import { DEFAULT_DESKTOP_BROWSERS } from './settings';
 
 describe('text', () => {
   before(function() {
@@ -65,6 +65,29 @@ describe('text', () => {
     cy.eyesCheckWindow(this.test.title);
   });
 
+  it('allow to apply inline styles and links - isolated', function() {
+    cy.loadIsolatedEditorAndViewer('plain')
+      .setTextStyle(INLINE_TOOLBAR_BUTTONS.BOLD, [40, 10])
+      .setTextStyle(INLINE_TOOLBAR_BUTTONS.UNDERLINE, [10, 5])
+      .setTextStyle(INLINE_TOOLBAR_BUTTONS.ITALIC, [20, 5])
+      .setTextStyle(INLINE_TOOLBAR_BUTTONS.BOLD, [30, 5])
+      .setTextStyle(INLINE_TOOLBAR_BUTTONS.UNDERLINE)
+      .setTextStyle(INLINE_TOOLBAR_BUTTONS.ITALIC)
+      .setAlignment(INLINE_TOOLBAR_BUTTONS.TEXT_ALIGN_CENTER)
+      .setAlignment(INLINE_TOOLBAR_BUTTONS.TEXT_ALIGN_RIGHT)
+      .setAlignment(INLINE_TOOLBAR_BUTTONS.TEXT_ALIGN_LEFT)
+      .setTextStyle(INLINE_TOOLBAR_BUTTONS.QUOTE, [30, 170])
+      .setTextStyle(INLINE_TOOLBAR_BUTTONS.TITLE, [250, 260])
+      .setTextStyle(INLINE_TOOLBAR_BUTTONS.QUOTE, [250, 260])
+      .setTextStyle(INLINE_TOOLBAR_BUTTONS.ORDERED_LIST)
+      .setTextStyle(INLINE_TOOLBAR_BUTTONS.UNORDERED_LIST)
+      .setSelection(0, 0)
+      .enterParagraphs(['#LIVING THE DREAM\n'])
+      .setSelection(0, 0)
+      .blurEditor();
+    cy.eyesCheckWindow(this.test.title);
+  });
+
   it('allow to enter hashtag with link', function() {
     cy.loadEditorAndViewer()
       .enterParagraphs([
@@ -77,7 +100,26 @@ describe('text', () => {
   it('allow to create lists', function() {
     cy.loadEditorAndViewer('plain')
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.ORDERED_LIST, [300, 100])
-      .setTextStyle(INLINE_TOOLBAR_BUTTONS.UNORDERED_LIST, [550, 1]);
+      .setTextStyle(INLINE_TOOLBAR_BUTTONS.UNORDERED_LIST, [550, 1])
+      .blurEditor();
+    cy.eyesCheckWindow(this.test.title);
+  });
+
+  it('allow to create link and open link toolbar (InlinePluginToolbar)', function() {
+    cy.loadEditorAndViewer('plain')
+      .setLink([0, 10], 'https://www.wix.com/')
+      .setSelection(5, 0)
+      .wait(200)
+      .blurEditor();
+    cy.eyesCheckWindow(this.test.title);
+  });
+
+  it('allow to enter tab character', function() {
+    cy.loadEditorAndViewer()
+      .focusEditor()
+      .tab()
+      .enterParagraphs(['How to eat healthy is a good question.'])
+      .blurEditor();
     cy.eyesCheckWindow(this.test.title);
   });
 });

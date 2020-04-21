@@ -10,8 +10,10 @@
 
 @supports (display: grid) {
   .imageRatioSelector_grid {
-    grid-template-columns: 56px 56px 56px 56px 56px;
-    grid-template-rows: 56px;
+    grid-template-columns: auto auto auto auto auto;
+    grid-template-rows: 72px;
+    row-gap: 12px;
+    column-gap: 4px;
   }
 }
 
@@ -24,7 +26,7 @@
 }
 
 .imageRatioSelector_tile {
-  margin-right: 24px;
+  margin: 0px;
 }
 
 .imageRatioSelector_ratioButton {

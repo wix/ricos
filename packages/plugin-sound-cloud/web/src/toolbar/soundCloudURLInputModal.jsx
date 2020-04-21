@@ -1,28 +1,17 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { SoundCloudIcon } from '../icons';
-import classNames from 'classnames';
-import { SettingsPanelFooter, TextInput, CloseIcon } from 'wix-rich-content-editor-common';
-import { mergeStyles } from 'wix-rich-content-common';
 import ReactPlayer from 'react-player';
-import styles from '../../statics/styles/sound-cloud-url-input-modal.scss';
+import UrlInputModal from 'wix-rich-content-editor-common/dist/lib/UrlInputModal.cjs.js';
 
 export default class SoundCloudURLInputModal extends Component {
   constructor(props) {
     super(props);
-    this.styles = mergeStyles({ styles, theme: props.theme });
     const { componentData } = this.props;
     this.state = {
       url: componentData.src || '',
+      submittedInvalidUrl: false,
     };
   }
-
-  onUrlChange = e => {
-    const url = e.target.value;
-    this.setState({ url });
-  };
-
-  afterOpenModal = () => this.input.focus();
 
   onConfirm = () => {
     const { url } = this.state;
@@ -40,86 +29,35 @@ export default class SoundCloudURLInputModal extends Component {
         );
       }
 
-      this.onCloseRequested();
+      helpers.closeModal();
     } else {
-      this.setState({ submitted: true });
+      this.setState({ submittedInvalidUrl: true });
     }
   };
-
-  onCloseRequested = () => {
-    this.setState({ isOpen: false });
-    this.props.helpers.closeModal();
-  };
-
-  handleKeyPress = e => {
-    if (e.charCode === 13) {
-      this.onConfirm();
-    }
-    if (e.charCode === 27) {
-      this.onCloseRequested();
-    }
-  };
-
-  //This function needed to handle onFocus select for iphone devices
-  componentDidMount() {
-    this.input.focus();
-    this.input.setSelectionRange(0, this.input.value.length);
-  }
 
   render() {
-    const { url, submitted } = this.state;
-    const { doneLabel, cancelLabel, t, isMobile, languageDir } = this.props;
-    const { styles } = this;
+    const { url, submittedInvalidUrl } = this.state;
+    const { doneLabel, cancelLabel, t, isMobile, languageDir, helpers } = this.props;
 
     return (
-      <div className={styles.container} data-hook="soundCloudUploadModal" dir={languageDir}>
-        {!isMobile && (
-          <CloseIcon
-            className={classNames(styles.closeIcon)}
-            onClick={() => this.onCloseRequested()}
-          />
-        )}
-        <div
-          role="heading"
-          aria-labelledby="sound_cloud_modal_hdr"
-          className={classNames(styles.header)}
-        >
-          <SoundCloudIcon className={classNames(styles.header_icon)} />
-          <h3 id="sound_cloud_modal_hdr" className={styles.header_text}>
-            {!isMobile
-              ? t('SoundCloudUploadModal_Header')
-              : t('SoundCloudUploadModal_Header_Mobile')}
-          </h3>
-        </div>
-        <div className={styles.soundCloudUrlInputModal_textInput}>
-          <TextInput
-            inputRef={ref => {
-              this.input = ref;
-            }}
-            type="url"
-            onKeyPress={this.handleKeyPress}
-            onChange={this.onUrlChange}
-            value={url}
-            error={
-              !ReactPlayer.canPlay(url) && submitted
-                ? t('SoundCloudUploadModal_Input_InvalidUrl')
-                : null
-            }
-            placeholder={t('SoundCloudUploadModal_Input_Placeholder')}
-            theme={styles}
-            data-hook="soundCloudUploadModalInput"
-          />
-        </div>
-        <SettingsPanelFooter
-          className={styles.modal_footer}
-          save={() => this.onConfirm()}
-          cancel={() => this.onCloseRequested()}
-          saveLabel={doneLabel}
-          cancelLabel={cancelLabel}
-          theme={styles}
-          t={t}
-        />
-      </div>
+      <UrlInputModal
+        onConfirm={this.onConfirm}
+        helpers={helpers}
+        input={url}
+        t={t}
+        languageDir={languageDir}
+        title={
+          !isMobile ? t('SoundCloudUploadModal_Header') : t('SoundCloudUploadModal_Header_Mobile')
+        }
+        submittedInvalidUrl={submittedInvalidUrl}
+        dataHook={'soundCloudUploadModal'}
+        saveLabel={doneLabel}
+        cancelLabel={cancelLabel}
+        onInputChange={url => this.setState({ url })}
+        errorMessage={t('SoundCloudUploadModal_Input_InvalidUrl')}
+        placeholder={t('SoundCloudUploadModal_Input_Placeholder')}
+        onCloseRequested={helpers.closeModal}
+      />
     );
   }
 }
@@ -129,8 +67,6 @@ SoundCloudURLInputModal.propTypes = {
   pubsub: PropTypes.object,
   helpers: PropTypes.object.isRequired,
   componentData: PropTypes.object.isRequired,
-  url: PropTypes.string,
-  theme: PropTypes.object.isRequired,
   doneLabel: PropTypes.string,
   cancelLabel: PropTypes.string,
   t: PropTypes.func,

@@ -1,17 +1,14 @@
 /*global cy Cypress*/
-import { fixtures, fixturesToTestOnSeo } from './constants';
-import { DEFAULT_DESKTOP_BROWSERS, DEFAULT_MOBILE_BROWSERS } from '../tests/constants';
+import { DEFAULT_DESKTOP_BROWSERS } from './settings';
+import { testSeoFixtures, testFixtures } from './testFixtures';
 
-const testFixture = fixture =>
-  it(`render ${fixture}`, function() {
-    cy.loadEditorAndViewer(fixture);
-    if (fixture.includes('video')) {
-      cy.waitForVideoToLoad();
-    } else if (fixture.includes('html')) {
-      cy.waitForHtmlToLoad();
-    }
-    cy.eyesCheckWindow(this.test.title);
+const eyesOpener = testName => {
+  cy.eyesOpen({
+    appName: 'Rendering',
+    testName,
+    browser: DEFAULT_DESKTOP_BROWSERS,
   });
+};
 
 describe('editor rendering', () => {
   before(function() {
@@ -20,45 +17,19 @@ describe('editor rendering', () => {
 
   context('desktop', () => {
     before(function() {
-      cy.eyesOpen({
-        appName: 'Rendering',
-        testName: this.test.parent.title,
-        browser: DEFAULT_DESKTOP_BROWSERS,
-      });
+      eyesOpener(this.test.parent.title);
     });
 
     beforeEach(() => cy.switchToDesktop());
 
     after(() => cy.eyesClose());
 
-    fixtures.forEach(testFixture);
-  });
-
-  context('mobile', () => {
-    before(function() {
-      cy.eyesOpen({
-        appName: 'Rendering',
-        testName: this.test.parent.title,
-        browser: DEFAULT_MOBILE_BROWSERS,
-      });
-    });
-
-    beforeEach(() => cy.switchToMobile());
-
-    after(() => {
-      cy.eyesClose();
-    });
-
-    fixtures.forEach(testFixture);
+    testFixtures();
   });
 
   context('seo', () => {
     before(function() {
-      cy.eyesOpen({
-        appName: 'Rendering',
-        testName: this.test.parent.title,
-        browser: DEFAULT_DESKTOP_BROWSERS,
-      });
+      eyesOpener(this.test.parent.title);
     });
 
     beforeEach(() => {
@@ -68,6 +39,6 @@ describe('editor rendering', () => {
 
     after(() => cy.eyesClose());
 
-    fixturesToTestOnSeo.forEach(testFixture);
+    testSeoFixtures();
   });
 });

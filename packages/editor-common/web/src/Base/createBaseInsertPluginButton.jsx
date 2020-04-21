@@ -139,13 +139,16 @@ export default ({
       }
     };
 
-    preventBubblingUp = event => event.preventDefault();
+    preventButtonGettingFocus = event => {
+      if (button.name !== 'GIF') {
+        event.preventDefault();
+      }
+    };
 
     renderButton = () => {
       const { styles } = this;
       const { showName, tabIndex, setEditorState } = this.props;
       const { name, Icon, wrappingComponent } = button;
-
       const WrappingComponent = wrappingComponent || 'button';
 
       let buttonCompProps = {};
@@ -163,6 +166,7 @@ export default ({
           className={classNames(styles.button, button.type === 'file' && styles.fileUploadButton)}
           data-hook={`${name.replace(' ', '_')}_insert_plugin_button`}
           onClick={this.onClick}
+          onMouseDown={this.preventButtonGettingFocus}
           ref={this.buttonRef}
           {...buttonCompProps}
         >
