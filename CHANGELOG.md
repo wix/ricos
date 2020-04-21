@@ -18,18 +18,30 @@
 ### :house: Internal
 - `general`
   - [#927](https://github.com/wix-incubator/rich-content/pull/927) Adding GitHub action that compares and fails if one of the current bundle sizes grows more then 10KB
+### :bug: Bug Fix
+- `plugin-emoji`
+  - [#948](https://github.com/wix-incubator/rich-content/pull/948) manually extract the icons we use from 'react-icons' in plugin emoji. react-icon has **const** in the node module.
+
+</details>
+<hr/>
+
+## 7.3.4 (Apr 21, 2020)
+### :house: Internal
+- `editor`
+  - [#912](https://github.com/wix-incubator/rich-content/pull/912) publish api
+- `wrapper`
+  - [#912](https://github.com/wix-incubator/rich-content/pull/912) onChange handle inside wrapper
+- `editor-common`
+  - [#912](https://github.com/wix-incubator/rich-content/pull/912) getPostContentSummary updated
 
 ### :bug: Bug Fix
 - `code-block`
   - [#943](https://github.com/wix-incubator/rich-content/pull/943) Adding code block with backward direction of selection
-- 'giphy'
+- `giphy`
   - [#945](https://github.com/wix-incubator/rich-content/pull/945) Restore auto-focus after add giphy
 ### :house: Internal
 - `wrapper`
   - [#931](https://github.com/wix-incubator/rich-content/pull/931) added internal static toolbar support
-
-</details>
-<hr/>
 
 ## 7.3.3 (Apr 20, 2020)
 ### :bug: Bug Fix
