@@ -54,7 +54,7 @@ describe('plugins', () => {
     afterEach(() => cy.eyesClose());
 
     apps.forEach(app => {
-      it.only(`render plugin toolbar and change styling - [${app.name}]`, () => {
+      it(`render plugin toolbar and change styling - [${app.name}]`, () => {
         cy[app.func]('divider')
           .openPluginToolbar(PLUGIN_COMPONENT.DIVIDER)
           .openDropdownMenu();
@@ -107,14 +107,16 @@ describe('plugins', () => {
     before('load editor', function() {
       eyesOpen(this);
       cy.switchToDesktop();
-      cy.loadEditorAndViewer('file-upload');
     });
 
     after(() => cy.eyesClose());
 
-    it('render file-upload plugin toolbar', function() {
-      cy.openPluginToolbar(PLUGIN_COMPONENT.FILE_UPLOAD);
-      cy.eyesCheckWindow(this.test.title);
+    apps.forEach(app => {
+      it(`render file-upload plugin toolbar - [${app.name}]`, function() {
+        cy[app.func]('file-upload');
+        cy.openPluginToolbar(PLUGIN_COMPONENT.FILE_UPLOAD);
+        cy.eyesCheckWindow(this.test.title);
+      });
     });
   });
 
