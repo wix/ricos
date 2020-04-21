@@ -1,4 +1,4 @@
-import React, { Component, ReactElement } from 'react';
+import React, { Component, ReactElement, forwardRef } from 'react';
 import EngineWrapper from './EngineWrapper';
 import themeStrategy from './themeStrategy/themeStrategy';
 import pluginsStrategy from './pluginsStrategy/pluginsStrategy';
@@ -7,7 +7,7 @@ import './styles.global.css';
 import { merge } from 'lodash';
 import PropTypes from 'prop-types';
 import { isDefined } from 'ts-is-present';
-import { RichContentProps } from './RichContentProps';
+import { RichContentProps, ForwardedRef } from './RichContentProps';
 
 export interface RichContentWrapperProps {
   children: ReactElement;
@@ -20,9 +20,10 @@ export interface RichContentWrapperProps {
   rcProps?: RichContentProps;
   textToolbarType?: TextToolbarType;
   textToolbarContainer?: HTMLElement;
+  forwardedRef?: ForwardedRef;
 }
 
-export class RichContentWrapper extends Component<
+class RichContentWrapper extends Component<
   RichContentWrapperProps,
   { localeStrategy: RichContentProps }
 > {
@@ -48,7 +49,7 @@ export class RichContentWrapper extends Component<
     this.updateLocale();
   }
 
-  componentWillReceiveProps(newProps) {
+  componentWillReceiveProps(newProps: RichContentWrapperProps) {
     if (newProps.locale !== this.props.locale) {
       this.updateLocale();
     }
@@ -56,12 +57,13 @@ export class RichContentWrapper extends Component<
 
   render() {
     const {
-      theme: childTheme,
+      theme,
       palette,
       plugins = [],
       children,
       isEditor = false,
       rcProps,
+      forwardedRef,
       ...rest
     } = this.props;
     const { localeStrategy } = this.state;
@@ -70,14 +72,14 @@ export class RichContentWrapper extends Component<
       .map(plugin => plugin.theme)
       .filter(isDefined);
 
-    const { theme } = themeStrategy(isEditor, {
-      theme: childTheme,
+    const { theme: finalTheme } = themeStrategy(isEditor, {
+      theme,
       palette,
       themeGenerators,
     });
     const mergedRCProps = merge(
-      { theme },
-      pluginsStrategy(isEditor, plugins, children.props, theme),
+      { theme: finalTheme },
+      pluginsStrategy(isEditor, plugins, children.props, finalTheme),
       localeStrategy,
       rcProps
     );
@@ -87,6 +89,7 @@ export class RichContentWrapper extends Component<
         rcProps={mergedRCProps}
         isEditor={isEditor}
         key={isEditor ? 'editor' : 'viewer'}
+        ref={forwardedRef}
         {...rest}
       >
         {children}
@@ -94,3 +97,9 @@ export class RichContentWrapper extends Component<
     );
   }
 }
+
+const exportedComp = forwardRef((props: RichContentWrapperProps, ref: ForwardedRef) => (
+  <RichContentWrapper {...props} forwardedRef={ref} />
+));
+
+export { exportedComp as RichContentWrapper };
