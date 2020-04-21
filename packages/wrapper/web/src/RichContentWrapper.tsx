@@ -35,7 +35,7 @@ class RichContentWrapper extends Component<
     this.updateLocale();
   }
 
-  componentWillReceiveProps(newProps) {
+  componentWillReceiveProps(newProps: RichContentWrapperProps) {
     if (newProps.locale !== this.props.locale) {
       this.updateLocale();
     }
@@ -43,7 +43,7 @@ class RichContentWrapper extends Component<
 
   render() {
     const {
-      theme: childTheme,
+      theme,
       palette,
       plugins = [],
       children,
@@ -58,14 +58,14 @@ class RichContentWrapper extends Component<
       .map(plugin => plugin.theme)
       .filter(isDefined);
 
-    const { theme } = themeStrategy(isEditor, {
-      theme: childTheme,
+    const { theme: finalTheme } = themeStrategy(isEditor, {
+      theme,
       palette,
       themeGenerators,
     });
     const mergedRCProps = merge(
-      { theme },
-      pluginsStrategy(isEditor, plugins, children.props, theme),
+      { theme: finalTheme },
+      pluginsStrategy(isEditor, plugins, children.props, finalTheme),
       localeStrategy,
       rcProps
     );

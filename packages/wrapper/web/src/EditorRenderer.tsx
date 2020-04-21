@@ -75,9 +75,8 @@ export default class EditorRenderer extends Component<Props, State> {
   };
 
   onChange = (editorState: EditorState) => {
-    const { onChange } = this.props;
     this.dataInstance.refresh(editorState);
-    onChange?.(editorState);
+    this.props.onChange?.(editorState);
   };
 
   getToolbars = () => this.editor.getToolbars();
@@ -96,7 +95,6 @@ export default class EditorRenderer extends Component<Props, State> {
   render() {
     const { EditorModal, showModal, modalProps, MobileToolbar } = this.state;
     const { children, ModalsMap, locale, theme } = this.props;
-    const onChange = this.onChange;
 
     return (
       <Fragment>
@@ -104,7 +102,7 @@ export default class EditorRenderer extends Component<Props, State> {
         {Children.only(
           React.cloneElement(children, {
             ...this.childProps,
-            onChange,
+            onChange: this.onChange,
             ref: ref => (this.editor = ref),
           })
         )}
