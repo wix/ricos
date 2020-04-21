@@ -15,19 +15,40 @@
     Click to see more.
   </summary>
 
-### :bug: Bug Fix
-- `viewer`
-  - [#929](https://github.com/wix-incubator/rich-content/pull/929) fix: empty lists viewer issues
 ### :house: Internal
-- `vertical-embed`
-  -  [#728](https://github.com/wix-incubator/rich-content/pull/728) Vertical Embed Plugin - alpha verison
-- 'viewer'
-  - [#908](https://github.com/wix-incubator/rich-content/pull/908) Support Viewer predefined anchors
+- `editor`
+  - [#912](https://github.com/wix-incubator/rich-content/pull/912) publish api
+- `wrapper`
+  - [#912](https://github.com/wix-incubator/rich-content/pull/912) onChange handle inside wrapper
+- `editor-common`
+  - [#912](https://github.com/wix-incubator/rich-content/pull/912) getPostContentSummary updated
 
-  
+### :bug: Bug Fix
+- `code-block`
+  - [#943](https://github.com/wix-incubator/rich-content/pull/943) Adding code block with backward direction of selection
+- 'giphy'
+  - [#945](https://github.com/wix-incubator/rich-content/pull/945) Restore auto-focus after add giphy
+### :house: Internal
+- `wrapper`
+  - [#931](https://github.com/wix-incubator/rich-content/pull/931) added internal static toolbar support
 
 </details>
 <hr/>
+
+## 7.3.3 (Apr 20, 2020)
+### :bug: Bug Fix
+- `viewer`
+  - [#929](https://github.com/wix-incubator/rich-content/pull/929) fix: empty lists viewer issues
+
+### :rocket: New Feature
+- `viewer`
+  - [#908](https://github.com/wix-incubator/rich-content/pull/908) Support Viewer predefined anchors
+
+### :house: Internal
+- `vertical-embed`
+  - [#728](https://github.com/wix-incubator/rich-content/pull/728) Vertical Embed Plugin - alpha verison
+- `wrapper`
+  - [#935](https://github.com/wix-incubator/rich-content/pull/935) back-office theme will appear as default theme for now  
 
 ## 7.3.2 (Apr 16, 2020)
 ### :bug: Bug Fix
@@ -44,7 +65,6 @@
 - `wrapper`
   - [#919](https://github.com/wix-incubator/rich-content/pull/919) added internal mobile support
   - [#920](https://github.com/wix-incubator/rich-content/pull/920) refactor: `FullscreenRenderer.tsx`, `ModalRenderer.tsx`
-- `wrapper`
   - [#918](https://github.com/wix-incubator/rich-content/pull/918)
     - viewer is now re-rendered for new initialState prop (fix)
 - `storybook`

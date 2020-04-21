@@ -123,7 +123,8 @@ describe('text', () => {
   it('allow to create lists', function() {
     cy.loadEditorAndViewer('plain')
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.ORDERED_LIST, [300, 100])
-      .setTextStyle(INLINE_TOOLBAR_BUTTONS.UNORDERED_LIST, [550, 1]);
+      .setTextStyle(INLINE_TOOLBAR_BUTTONS.UNORDERED_LIST, [550, 1])
+      .blurEditor();
     cy.eyesCheckWindow(this.test.title);
   });
 
@@ -131,7 +132,8 @@ describe('text', () => {
     cy.loadEditorAndViewer('plain')
       .setLink([0, 10], 'https://www.wix.com/')
       .setSelection(5, 0)
-      .wait(200);
+      .wait(200)
+      .blurEditor();
     cy.eyesCheckWindow(this.test.title);
   });
 
@@ -139,7 +141,8 @@ describe('text', () => {
     cy.loadEditorAndViewer()
       .focusEditor()
       .tab()
-      .enterParagraphs(['How to eat healthy is a good question.']);
+      .enterParagraphs(['How to eat healthy is a good question.'])
+      .blurEditor();
     cy.eyesCheckWindow(this.test.title);
   });
 });
