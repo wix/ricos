@@ -9,21 +9,6 @@ const generateMessage = message => {
   return titleForPRComment.concat(message);
 };
 
-// const updatePRComment = () => {
-//   try {
-//     const diff = fs.readFileSync('diffBundles.txt', 'utf8');
-//     const message = diff ? generateMessage(diff) : '';
-//     gitPRComment(message);
-//   } catch (err) {
-//     console.log(err);
-//     return;
-//   }
-// };
-
-// function saveDiff(data) {
-//   fs.writeFileSync('diffBundles.txt', data);
-// }
-
 async function compareBundles() {
   let savingBundles = {},
     currentBundles = {},
@@ -49,17 +34,14 @@ async function compareBundles() {
       message = warning.concat(message);
     }
   });
-
   if (message !== '') {
     console.error(chalk.bold.red(message));
-    // saveDiff(message);
     await gitPRComment(generateMessage(message));
     console.error(
       chalk.red(`\nError: There are Significant differences between some bundle sizes:\n${message}`)
     );
     process.exit(1);
   } else {
-    // saveDiff(message);
     await gitPRComment(message);
     console.log('comparison ended successfully');
   }
