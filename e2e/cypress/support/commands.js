@@ -413,15 +413,19 @@ Cypress.Commands.add('openDropdownMenu', (selector = '') => {
 });
 
 Cypress.Commands.add('openVideoUploadModal', () => {
-  cy.get(`[data-hook*=${STATIC_TOOLBAR_BUTTONS.VIDEO}][tabindex!=-1]`).click();
+  cy.clickOnStaticButton(STATIC_TOOLBAR_BUTTONS.VIDEO);
 });
 
-Cypress.Commands.add('openSoundCloudModal', () => {
-  cy.get(`[data-hook*=${STATIC_TOOLBAR_BUTTONS.SOUND_CLOUD}][tabindex!=-1]`).click();
-});
+Cypress.Commands.add('openSoundCloudModal', () =>
+  cy.clickOnStaticButton(STATIC_TOOLBAR_BUTTONS.SOUND_CLOUD)
+);
+Cypress.Commands.add('openEmbedModal', modalType => cy.clickOnStaticButton(modalType));
 
-Cypress.Commands.add('openEmbedModal', modalType => {
-  cy.get(`[data-hook*=${modalType}][tabindex!=-1]`).click();
+Cypress.Commands.add('addGif', () => {
+  cy.clickOnStaticButton(STATIC_TOOLBAR_BUTTONS.GIPHY);
+  cy.get('[data-hook=giphyUploadModal] [role=button]')
+    .first()
+    .click();
 });
 
 Cypress.Commands.add('addSoundCloud', () => {
@@ -447,8 +451,12 @@ Cypress.Commands.add('addVideoFromURL', () => {
     .click();
 });
 
+Cypress.Commands.add('clickOnStaticButton', dataHook =>
+  cy.get(`[data-hook*=${dataHook}][tabindex!=-1]`).click()
+);
+
 Cypress.Commands.add('addHtml', () => {
-  cy.get(`[data-hook*=${HTML_PLUGIN.STATIC_TOOLBAR_BUTTON}][tabindex!=-1]`).click();
+  cy.clickOnStaticButton(HTML_PLUGIN.STATIC_TOOLBAR_BUTTON);
   cy.get(`[data-hook*=${HTML_PLUGIN.INPUT}]`)
     .click()
     .clear();

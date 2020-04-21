@@ -1,9 +1,8 @@
 import React, { Component, Fragment, Suspense, Children, ReactElement } from 'react';
-import { InitialState, RichContentProps } from './RichContentWrapperTypes';
 
 interface Props {
   children: ReactElement;
-  helpers?: RichContentProps['helpers'];
+  helpers?: Helpers;
   initialState: InitialState;
 }
 
@@ -39,7 +38,7 @@ export default class FullscreenRenderer extends Component<Props, State> {
 
   setData = data => this.setState({ data });
 
-  addExpand = (helpers: object) => ({ ...helpers, onExpand: this.onExpand });
+  addExpand = (helpers: Helpers) => ({ ...helpers, onExpand: this.onExpand });
 
   render() {
     const { isExpanded, index, data, Fullscreen } = this.state;
