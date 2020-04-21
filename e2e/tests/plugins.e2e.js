@@ -5,7 +5,7 @@ import {
   DIVIDER_DROPDOWN_OPTIONS,
   STATIC_TOOLBAR_BUTTONS,
 } from '../cypress/dataHooks';
-import { DEFAULT_DESKTOP_BROWSERS } from './settings';
+import { DEFAULT_DESKTOP_BROWSERS, apps } from './settings';
 
 const eyesOpen = ({
   test: {
@@ -17,11 +17,6 @@ const eyesOpen = ({
     testName: title,
     browser: DEFAULT_DESKTOP_BROWSERS,
   });
-
-const apps = [
-  { name: 'rce', func: 'loadEditorAndViewer' },
-  { name: 'wrapper', func: 'loadWrapperEditorAndViewer' },
-];
 
 describe('plugins', () => {
   afterEach(() => cy.matchContentSnapshot());
@@ -61,7 +56,7 @@ describe('plugins', () => {
 
     after(() => cy.eyesClose());
 
-    it('render plugin toolbar and change styling', () => {
+    it(`render plugin toolbar and change styling`, () => {
       cy.loadEditorAndViewer('divider')
         .openPluginToolbar(PLUGIN_COMPONENT.DIVIDER)
         .openDropdownMenu();
@@ -70,7 +65,7 @@ describe('plugins', () => {
       cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.SMALL);
       cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.ALIGN_LEFT);
 
-      cy.get('.editor [data-hook=divider-double]')
+      cy.get('[data-hook*="divider-double"]:first')
         .parent()
         .click();
       cy.get('[data-hook*="PluginToolbar"]:first');
@@ -78,7 +73,7 @@ describe('plugins', () => {
       cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.MEDIUM);
       cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.ALIGN_RIGHT);
 
-      cy.get('.editor [data-hook=divider-dashed]')
+      cy.get('[data-hook*="divider-dashed"]:first')
         .parent()
         .click();
       cy.get('[data-hook*="PluginToolbar"]:first').openDropdownMenu(
@@ -92,18 +87,20 @@ describe('plugins', () => {
     before('load editor', function() {
       eyesOpen(this);
       cy.switchToDesktop();
-      cy.loadEditorAndViewer('map');
-      cy.get('.dismissButton').eq(1);
     });
 
     after(() => cy.eyesClose());
 
-    it('render map plugin toolbar and settings', () => {
-      cy.openPluginToolbar(PLUGIN_COMPONENT.MAP);
-      cy.eyesCheckWindow('render map plugin toolbar');
-      cy.openMapSettings();
-      cy.get('.gm-style-cc');
-      cy.eyesCheckWindow('render map settings');
+    apps.forEach(app => {
+      it(`render map plugin toolbar and settings - [${app.name}]`, () => {
+        cy[app.func]('map');
+        cy.get('.dismissButton').eq(1);
+        cy.openPluginToolbar(PLUGIN_COMPONENT.MAP);
+        cy.eyesCheckWindow('render map plugin toolbar');
+        cy.openMapSettings();
+        cy.get('.gm-style-cc');
+        cy.eyesCheckWindow('render map settings');
+      });
     });
   });
 
