@@ -18,7 +18,7 @@
   "LinkPanel_ErrorTooltip": "Double check the URL and try again",
   "LinkPanelContainer_DoneButton": "Save",
   "LinkPanelContainer_CancelButton": "Cancel",
-  "LinkPanelContainer_RemoveButton": "Remove link",
+  "LinkPanelContainer_RemoveButton": "Remove Link",
   "LinkPanel_Anchor_Title": "Anchor",
   "LinkPanel_Anchor_Placeholder": "Select an anchor to link to",
   "LinkPanel_Anchor_Placeholder_Tooltip": "When people click your link, they'll go to this anchor.",
