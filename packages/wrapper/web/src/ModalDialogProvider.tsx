@@ -35,7 +35,7 @@ interface State {
   TextToolbar?: React.ElementType;
 }
 
-export default class EditorRenderer extends Component<Props, State> {
+export default class ModalDialogProvider extends Component<Props, State> {
   childProps: RichContentProps;
   editor: typeof RichContentEditor;
   dataInstance: EditorDataInstance;

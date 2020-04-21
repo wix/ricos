@@ -1,7 +1,7 @@
 import React, { Children, Fragment, ReactElement, forwardRef } from 'react';
 import { RichContentProps, ForwardedRef } from './RichContentProps';
-import ViewerRenderer from './ViewerRenderer';
-import EditorRenderer from './EditorRenderer';
+import FullscreenProvider from './FullscreenProvider';
+import ModalDialogProvider from './ModalDialogProvider';
 import { merge } from 'lodash';
 
 interface Props {
@@ -17,7 +17,7 @@ interface Props {
 }
 
 interface State {
-  ModalityProvider: typeof Fragment | typeof EditorRenderer | typeof ViewerRenderer;
+  ModalityProvider: typeof Fragment | typeof ModalDialogProvider | typeof FullscreenProvider;
 }
 
 class EngineWrapper extends React.Component<Props, State> {
@@ -30,9 +30,9 @@ class EngineWrapper extends React.Component<Props, State> {
     const { isEditor, children } = props;
     const { closeModal, openModal, onExpand } = children.props?.helpers || {};
     if (isEditor && !closeModal && !openModal) {
-      return { ModalityProvider: EditorRenderer };
+      return { ModalityProvider: ModalDialogProvider };
     } else if (!isEditor && !onExpand) {
-      return { ModalityProvider: ViewerRenderer };
+      return { ModalityProvider: FullscreenProvider };
     }
     return { ModalityProvider: Fragment };
   }
