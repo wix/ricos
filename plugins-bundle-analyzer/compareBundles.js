@@ -25,7 +25,7 @@ async function compareBundles() {
     const oldSize = savingBundles[key];
     const newSize = currentBundles[key];
     if (oldSize) {
-      if (newSize !== oldSize && parseInt(newSize) - parseInt(oldSize) > 10) {
+      if (newSize !== oldSize && parseInt(newSize) - parseInt(oldSize) > 5) {
         const diff = `${key}: old bundlesize: ${oldSize}KB, current bundlesize: ${newSize}KB\n`;
         message = message.concat(diff);
       }
