@@ -295,6 +295,15 @@ describe('plugins', () => {
       cy.get(`[data-hook=${GIPHY_PLUGIN.UPLOAD_MODAL}] img`);
       cy.eyesCheckWindow(this.test.title);
     });
+
+    it('should auto focus on add gif', function() {
+      cy.loadEditorAndViewer('empty');
+      cy.addGif().get('[data-hook=giphyPluginToolbar]');
+      cy.window().then(win => {
+        win.__CONTENT_SNAPSHOT__ = { mock: true };
+      });
+      cy.eyesCheckWindow(this.test.title);
+    });
   });
 
   context('emoji', () => {
