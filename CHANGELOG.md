@@ -17,7 +17,7 @@
   
 ### :house: Internal
 - `general`
-  - [#927](https://github.com/wix-incubator/rich-content/pull/927) Adding GitHub action that compares and fails if one of the current bundle sizes grows more then 10KB
+  - [#927](https://github.com/wix-incubator/rich-content/pull/927) Adding GitHub action that compares and fails if one of the current bundle sizes grows more then 5KB
 ### :bug: Bug Fix
 - `plugin-emoji`
   - [#948](https://github.com/wix-incubator/rich-content/pull/948) manually extract the icons we use from 'react-icons' in plugin emoji. react-icon has **const** in the node module.
