@@ -3,7 +3,7 @@ import { changeType, changeAlignmentMobile, changeSizeMobile } from './actions';
 import { isAlignmentDisabled, getNextSizeIcon, getNextAlignmentIcon } from './selectors';
 import { getDropdownOptions, createDropdownValueGetter } from './dropdown-options';
 
-export default ({ styles, settings }) => {
+export default ({ styles, t, settings }) => {
   const dropdownOptions = getDropdownOptions(styles);
   const icons = settings?.toolbar?.icons || {};
   return [
@@ -15,6 +15,7 @@ export default ({ styles, settings }) => {
       getValue: createDropdownValueGetter(dropdownOptions),
       controlClassName: styles['divider-dropdown__control'],
       tooltipTextKey: 'DividerPlugin_SelectType_Tooltip',
+      t,
       mobile: true,
     },
     { keyName: 'separator1', type: BUTTONS.SEPARATOR, mobile: true },

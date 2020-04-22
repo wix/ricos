@@ -111,7 +111,7 @@ function insertLink(editorState, selection, data) {
   );
 }
 
-function createLinkEntityData({ url, targetBlank, nofollow, anchorTarget, relValue }) {
+export function createLinkEntityData({ url, targetBlank, nofollow, anchorTarget, relValue }) {
   const target = targetBlank ? '_blank' : anchorTarget !== '_blank' ? anchorTarget : '_self';
   const rel = nofollow ? 'nofollow' : relValue !== 'nofollow' ? relValue : 'noopener';
   return {
@@ -414,7 +414,10 @@ export const getEntities = (editorState, entityType = null) => {
     block.findEntityRanges(character => {
       const char = character.getEntity();
       const entity = !!char && currentContent.getEntity(char);
-      if (!entityType || entity.getType() === entityType) {
+      // regular text block
+      if (entity === false) {
+        entities.push({ type: 'text' });
+      } else if (!entityType || entity.getType() === entityType) {
         entities.push(entity);
       }
     });
@@ -432,19 +435,23 @@ export function getPostContentSummary(editorState) {
   const blocks = editorState.getCurrentContent().getBlocksAsArray();
   const entries = getEntities(editorState);
   const blockPlugins = getBlockTypePlugins(blocks);
+  const pluginsDetails = entries
+    .filter(entry => entry.type !== 'text')
+    .map(entry => ({ type: entry.type, data: entry.data }));
   return {
-    postContent: {
+    pluginsCount: {
       ...countByType(blockPlugins),
       ...countByType(entries),
     },
+    pluginsDetails,
   };
 }
 
 //ATM, looks for deleted plugins.
 //onChanges - for phase 2?
 //Added Plugins - checked elsewhere via toolbar clicks
-export const createCalcContentDiff = state => {
-  let prevState = state;
+export const createCalcContentDiff = editorState => {
+  let prevState = editorState;
   return debounce((newState, onPluginDelete) => {
     const countByType = obj => countBy(obj, x => x.type);
     const prevEntities = countByType(getEntities(prevState));

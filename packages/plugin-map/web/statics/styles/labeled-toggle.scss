@@ -1,28 +1,23 @@
+@import '~wix-rich-content-common/dist/statics/styles/mixins';
+
 .labeled_toggle_input_container {
   position: relative;
   display: inline-block;
   width: 45px;
   height: 23px;
+  opacity: 0.6;
 }
 
 .labeled_toggle_input_container:hover {
- opacity: 0.6;
-
-  @include phone {
-   opacity: 1;
- }
-}
-
-.labeled_toggle_input_container_off {
- opacity: 0.6;
-}
-
-.labeled_toggle_input_container_off:hover {
   opacity: 1;
+}
 
-  @include phone {
-    opacity: 0.6;
-  }
+.labeled_toggle_input_container_checked {
+  opacity: 1;
+}
+
+.labeled_toggle_input_container_checked:hover {
+  opacity: 0.6;
 }
 
 .labeled_toggle_input_root {
@@ -47,7 +42,7 @@
 
 .labeled_toggle_root {
   padding-top: 30px;
-   @include phone {
+  @include phone {
     padding-top: 0px;
   }
 }
@@ -61,7 +56,7 @@
 .labeled_toggle_checkbox_input {
   width: 100%;
   height: 100%;
-  margin: 0
+  margin: 0;
 }
 
 .labeled_toggle_switch {
@@ -72,7 +67,7 @@
   align-items: center;
   width: 100%;
   height: 100%;
-  pointer-events: none
+  pointer-events: none;
 }
 
 .labeled_toggle_label_wrapper {
@@ -89,36 +84,24 @@
   flex: 1;
   height: 100%;
   border-radius: 12px;
-}
-
-@mixin slider($checked) {
-  #{".labeled_toggle_slider" + $checked} {
-    position: absolute;
-    width: 22px;
-    height: 21px;
-    border-radius: 50%;
-    transition: transform 0.3s;
+  background-color: #aaa;
+  &_checked {
+    background-color: #0261ff;
   }
 }
 
 .labeled_toggle_slider {
-
-  
+  background-color: #fff;
+  position: absolute;
+  width: 22px;
+  height: 21px;
+  border-radius: 50%;
+  transition: transform 0.3s;
   &_checked {
     transform: translateX(22px);
-    position: absolute;
-    width: 22px;
-    height: 21px;
-    border-radius: 50%;
-    transition: transform 0.3s;
   }
 
   &_unchecked {
     transform: translateX(1px);
-    position: absolute;
-    width: 22px;
-    height: 21px;
-    border-radius: 50%;
-    transition: transform 0.3s;
   }
 }

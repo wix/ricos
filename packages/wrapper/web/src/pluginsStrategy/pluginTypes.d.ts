@@ -1,4 +1,4 @@
-type ModalsMap = { [propName: string]: Component };
+type ModalsMap = { [propName: string]: import('react').Component };
 
 type TypeMapper = () => object;
 
