@@ -144,7 +144,9 @@ const getMobileButtons = ({
           openModal: helpers.openModal,
           closeModal: helpers.closeModal,
           structure: pluginButtons.filter(
-            ({ buttonSettings }) => buttonSettings.name !== 'Undo' && buttonSettings.name !== 'Redo'
+            ({ buttonSettings }) =>
+              buttonSettings.name !== 'UndoPlugin_InsertButton' &&
+              buttonSettings.name !== 'RedoPlugin_InsertButton'
           ),
           getEditorState,
           setEditorState,

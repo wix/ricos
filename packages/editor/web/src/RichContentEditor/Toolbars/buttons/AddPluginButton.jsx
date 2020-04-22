@@ -25,7 +25,7 @@ export default class AddPluginButton extends Component {
       structure: structure.map(({ component, buttonSettings: { name, section } }) => ({
         component,
         name,
-        section: section || t('BlockToolbar_Section_Basic'),
+        section: section || 'BlockToolbar_Section_Basic',
       })),
       theme,
       hidePopup: this.props.closeModal,

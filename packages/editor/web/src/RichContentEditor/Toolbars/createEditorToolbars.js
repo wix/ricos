@@ -28,7 +28,7 @@ const appendSeparator = ({ mergedList, sourceList, buttonData, formFactor }) => 
   return mergedList;
 };
 
-const createEditorToolbars = ({ buttons, textAlignment, refId, context, t }) => {
+const createEditorToolbars = ({ buttons, textAlignment, refId, context }) => {
   const { pluginsConfig = {}, getToolbarSettings = () => [] } = context.config;
   const { pluginButtons, pluginTextButtons } = buttons;
 
@@ -60,7 +60,6 @@ const createEditorToolbars = ({ buttons, textAlignment, refId, context, t }) => 
     pluginButtons,
     textButtons,
     pluginTextButtons: pluginTextButtonsByFormFactor,
-    t,
   });
   const customSettings = getToolbarSettings({
     pluginButtons,

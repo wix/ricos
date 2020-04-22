@@ -48,7 +48,7 @@ const defaultTextPluginButtons = {
   },
 };
 
-export const getDefaultToolbarSettings = ({ pluginButtons, textButtons, pluginTextButtons, t }) => {
+export const getDefaultToolbarSettings = ({ pluginButtons, textButtons, pluginTextButtons }) => {
   return [
     {
       name: TOOLBARS.SIDE,
@@ -78,7 +78,7 @@ export const getDefaultToolbarSettings = ({ pluginButtons, textButtons, pluginTe
         const buttons = pluginButtons
           .filter(({ buttonSettings }) => buttonSettings.toolbars.includes(TOOLBARS.SIDE))
           .map(({ component, buttonSettings: { name, section } }) => {
-            return { component, name, section: section || t('BlockToolbar_Section_Basic') };
+            return { component, name, section: section || 'BlockToolbar_Section_Basic' };
           });
         return {
           desktop: buttons,

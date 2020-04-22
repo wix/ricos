@@ -22,7 +22,7 @@ export default ({ helpers, t, isMobile, settings }) => {
   return [
     {
       type: 'modal',
-      name: t('SoundcloudPlugin_InsertButton'),
+      name: 'SoundcloudPlugin_InsertButton',
       tooltipText: t('SoundCloudPlugin_InsertButton_Tooltip'),
       Icon: icon,
       componentData: DEFAULTS,

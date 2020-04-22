@@ -178,7 +178,7 @@ export default ({
           </div>
           {showName && (
             <span key="1" className={styles.label}>
-              {name}
+              {t(name)}
             </span>
           )}
         </WrappingComponent>
@@ -247,7 +247,7 @@ export default ({
           </div>
           {showName && (
             <span key="1" className={styles.label}>
-              {name}
+              {t(name)}
             </span>
           )}
         </FileInput>

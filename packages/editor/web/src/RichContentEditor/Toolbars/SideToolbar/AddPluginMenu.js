@@ -30,13 +30,12 @@ export default class AddPluginMenu extends Component {
       hidePopup,
       t,
       splitToSections,
-      isMobile,
     } = this.props;
     const { showSearch, wrapperClassName, pluginsClassName } = this;
     const { value } = this.state;
     return (
       <div className={wrapperClassName}>
-        {showSearch && !isMobile && (
+        {showSearch && (
           <div className={Styles.searchWrapper}>
             <TextSearchInput
               onClose={hidePopup}

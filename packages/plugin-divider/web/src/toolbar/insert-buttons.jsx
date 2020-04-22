@@ -6,7 +6,7 @@ export default ({ helpers, t, settings }) => {
   const icon = settings?.toolbar?.icons?.InsertPluginButtonIcon || InsertPluginIcon;
   return [
     {
-      name: t('DividerPlugin_InsertButton'),
+      name: 'DividerPlugin_InsertButton',
       tooltipText: t('DividerPlugin_InsertButton_Tooltip'),
       toolbars: [TOOLBARS.FOOTER, TOOLBARS.SIDE],
       Icon: icon,

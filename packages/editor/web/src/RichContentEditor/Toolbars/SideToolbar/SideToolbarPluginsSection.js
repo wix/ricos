@@ -6,9 +6,9 @@ import { TOOLBARS } from 'wix-rich-content-editor-common';
 import { getSortedSections } from './utils';
 import classNames from 'classnames';
 
-const shouldSplitByDefault = (structure, t) => {
+const shouldSplitByDefault = structure => {
   const numberOfBasicPlugins = structure.filter(
-    ({ section }) => section === t('BlockToolbar_Section_Basic')
+    ({ section }) => section === 'BlockToolbar_Section_Basic'
   ).length;
   return numberOfBasicPlugins > 1 && structure.length - numberOfBasicPlugins > 1;
 };
@@ -20,7 +20,7 @@ const SideToolbarPluginsSection = ({
   searchTag,
   t,
   hidePopup,
-  splitToSections = shouldSplitByDefault(structure, t),
+  splitToSections = shouldSplitByDefault(structure),
 }) => {
   const pluginsForTag = searchTag && getPluginsForTag(searchTag, t);
   const plugins = !searchTag
@@ -28,11 +28,7 @@ const SideToolbarPluginsSection = ({
     : structure.filter(({ name }) => pluginsForTag.includes(name));
 
   if (plugins.length === 0) {
-    return (
-      <div className={Styles.pluginsSectionEmptyState}>
-        {`No blocks found.\n Try another search term.`}
-      </div>
-    );
+    return <div className={Styles.pluginsSectionEmptyState}>{t('Side_toolbar_empty_state')}</div>;
   }
 
   const pluginSectionRenderer = section => {
@@ -42,7 +38,7 @@ const SideToolbarPluginsSection = ({
     return [
       section && (
         <div key={section} className={Styles.pluginsSection}>
-          {section}
+          {t(section)}
         </div>
       ),
       <div key="pluginsButtons" className={Styles.buttonsWrapper}>

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Editor from 'draft-js-plugins-editor';
-import { get, includes, merge, debounce } from 'lodash';
+import { get, includes, debounce } from 'lodash';
 import Measure from 'react-measure';
 import createEditorToolbars from './Toolbars';
 import createPlugins from './createPlugins';
@@ -152,7 +152,7 @@ class RichContentEditor extends Component {
   }
 
   initEditorToolbars(pluginButtons, pluginTextButtons) {
-    const { textAlignment, t } = this.props;
+    const { textAlignment } = this.props;
     const buttons = { pluginButtons, pluginTextButtons };
 
     this.toolbars = createEditorToolbars({
@@ -160,7 +160,6 @@ class RichContentEditor extends Component {
       textAlignment,
       refId: this.refId,
       context: this.contextualData,
-      t,
     });
   }
 

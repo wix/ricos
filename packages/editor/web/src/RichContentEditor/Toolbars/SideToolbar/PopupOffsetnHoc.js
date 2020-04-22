@@ -21,7 +21,7 @@ PopupOffsetnHoc.propTypes = {
   elementHeight: PropTypes.number.isRequired,
   elementMarginTop: PropTypes.number.isRequired,
   elementMarginBottom: PropTypes.number.isRequired,
-  targetElement: PropTypes.any.isRequired,
+  targetElement: PropTypes.any,
 };
 
 export default PopupOffsetnHoc;

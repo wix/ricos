@@ -11,17 +11,17 @@ import getModalCustomStyles from './ModalCustomStyles';
 export default ({ helpers, t, settings, isMobile }) => {
   const icon = InsertPluginIcon;
 
-  const buttonCreator = (type, tooltipText) => {
+  const buttonCreator = type => {
     return {
       type: 'modal',
-      name: type,
-      tooltipText,
+      name: `${type}_InsertButton`,
+      tooltipText: t(`${type}Plugin_InsertButton_Tooltip`),
       toolbars: [TOOLBARS.FOOTER, TOOLBARS.SIDE],
       Icon: icon,
       componentData: { ...DEFAULTS, type },
       helpers,
       t,
-      section: t('Side_toolbar_embed_from_wix_section'),
+      section: 'Side_toolbar_embed_from_wix_section',
       modalElement: decorateComponentWithProps(PostSelectionInputModal, settings),
       modalStyles: getModalStyles({
         customStyles: getModalCustomStyles(isMobile),
@@ -31,9 +31,13 @@ export default ({ helpers, t, settings, isMobile }) => {
     };
   };
 
+  const verticalsTypeMap = {
+    event: 'Events',
+    booking: 'Bookings',
+    product: 'Stores',
+  };
+
   const { exposeEmbedButtons = [] } = settings;
 
-  return exposeEmbedButtons.map(verticalType =>
-    buttonCreator(verticalType, `Add a ${verticalType}`)
-  );
+  return exposeEmbedButtons.map(type => buttonCreator(verticalsTypeMap[type]));
 };

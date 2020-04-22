@@ -34,10 +34,11 @@ export default ({ helpers, settings, isMobile, t }) => {
     Pinterest: PinterestIcon,
     YouTube: YoutubeIcon,
   };
+
   return exposeEmbedButtons.map(socialType => {
     return {
       type: 'modal',
-      name: socialType,
+      name: `${socialType}_InsertButton`,
       tooltipText: t(`EmbedURL_Social_${socialType}_Title`),
       Icon: socialIconsMap[socialType],
       componentData: { ...DEFAULTS, socialType, fetchData: settings.fetchData },
@@ -45,7 +46,7 @@ export default ({ helpers, settings, isMobile, t }) => {
       helpers,
       modalElement: EmbedURLInputModal,
       modalStyles: getModalStyles({ customStyles, fullScreen: false, isMobile }),
-      section: t('Side_toolbar_embed_from_social_section'),
+      section: 'Side_toolbar_embed_from_social_section',
     };
   });
 };
