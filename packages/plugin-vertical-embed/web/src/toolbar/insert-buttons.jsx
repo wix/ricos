@@ -5,17 +5,17 @@ import {
 } from 'wix-rich-content-editor-common';
 import { InsertPluginIcon } from '../icons';
 import PostSelectionInputModal from './postSelectionInputModal';
-import { DEFAULTS } from '../constants';
+import { DEFAULTS, verticalEmbedProviders } from '../constants';
 import getModalCustomStyles from './ModalCustomStyles';
 
 export default ({ helpers, t, settings, isMobile }) => {
   const icon = InsertPluginIcon;
 
-  const buttonCreator = (type, tooltipText) => {
+  const buttonCreator = type => {
     return {
       type: 'modal',
-      name: `VerticalEmbed-${type}`,
-      tooltipText,
+      name: t(`${type}_InsertButton`),
+      tooltipText: t(`${type}Plugin_InsertButton_Tooltip`),
       toolbars: [TOOLBARS.FOOTER, TOOLBARS.SIDE],
       Icon: icon,
       componentData: { ...DEFAULTS, type },
@@ -29,10 +29,15 @@ export default ({ helpers, t, settings, isMobile }) => {
       }),
     };
   };
+  const { event, booking, product } = verticalEmbedProviders;
+
+  const verticalsTypeMap = {
+    [event]: 'Events',
+    [booking]: 'Bookings',
+    [product]: 'Stores',
+  };
 
   const { exposeEmbedButtons = [] } = settings;
 
-  return exposeEmbedButtons.map(verticalType =>
-    buttonCreator(verticalType, `Add a ${verticalType}`)
-  );
+  return exposeEmbedButtons.map(verticalType => buttonCreator(verticalsTypeMap[verticalType]));
 };
