@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 import { BUTTONS, updateLinkAtCurrentSelection, EditIcon } from 'wix-rich-content-editor-common';
 import TextLinkButton from './TextLinkButton';
@@ -10,6 +11,7 @@ const createInlineButtons /*: CreateInlineButtons */ = config => {
       keyName: 'url',
       component: props => <UrlLinkButton {...config} {...props} />,
       mobile: true,
+      type: BUTTONS.CUSTOM,
     },
     { keyName: 'separator1', type: BUTTONS.SEPARATOR, mobile: true },
     {
@@ -26,6 +28,7 @@ const createInlineButtons /*: CreateInlineButtons */ = config => {
         </div>
       ),
       mobile: true,
+      type: BUTTONS.CUSTOM,
     },
     { keyName: 'separator2', type: BUTTONS.SEPARATOR, mobile: true },
     {
@@ -36,6 +39,7 @@ const createInlineButtons /*: CreateInlineButtons */ = config => {
         </div>
       ),
       mobile: true,
+      type: BUTTONS.CUSTOM,
     },
   ];
 };

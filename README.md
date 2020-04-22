@@ -13,7 +13,7 @@ You can try it here: [https://wix-rich-content.herokuapp.com/](https://wix-rich-
 To install this package as editor, use the following command
 
 ```bash
-npm install --save wix-rich-content-editor
+npm install --save wix-rich-content-editor 
 ```
 
 To install this package as viewer, use the following command:

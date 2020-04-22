@@ -19,6 +19,7 @@ declare type InlineButton = {
   relValue?: string,
   disabled?: boolean,
   desktop?: boolean,
+  getEditorBounds?: () => any,
 };
 
 declare type CreateInlineButtons = ({
@@ -30,5 +31,6 @@ declare type CreateInlineButtons = ({
  uiSettings: any,
  settings: any,
  closeInlinePluginToolbar: () => void,
+ getEditorBounds?: () => any,
 }) => Array<InlineButton>;
 */

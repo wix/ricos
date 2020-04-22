@@ -1,5 +1,5 @@
 import { DEFAULTS } from '../video-component';
-// flow
+// @flow
 import {
   getModalStyles,
   TOOLBARS,

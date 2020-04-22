@@ -1,3 +1,4 @@
+import { Component } from '../packages/plugin-file-upload/web/src/file-upload-component';
 /*::
 declare type MODIFIER_KEYS = 'command' | 'shift' | 'ctrl' | 'option';
 
@@ -33,7 +34,10 @@ declare type TextButtonMappingParams = {
   setEditorState: (editorState: any) => void,
   settings: any,
   uiSettings: any,
-  closeInlinePluginToolbar: () => void
+  closeInlinePluginToolbar: () => void,
+  getEditorBounds?: () => any,
+  styles?: any,
+  icon?: Component,
  };
 
  declare type TextButtonMapper = (params: TextButtonMappingParams) => {
