@@ -28,7 +28,7 @@ describe('text', () => {
     cy.eyesCheckWindow(this.test.title);
   });
 
-  it.only('allow to apply inline styles and links', function() {
+  it('allow to apply inline styles and links', function() {
     cy.loadEditorAndViewer('plain')
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.BOLD, [40, 10])
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.UNDERLINE, [10, 5])
@@ -65,7 +65,7 @@ describe('text', () => {
     cy.eyesCheckWindow(this.test.title);
   });
 
-  it.only('allow to apply inline styles and links - isolated', function() {
+  it('allow to apply inline styles and links - isolated', function() {
     cy.loadIsolatedEditorAndViewer('plain')
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.BOLD, [40, 10])
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.UNDERLINE, [10, 5])
@@ -88,7 +88,7 @@ describe('text', () => {
     cy.eyesCheckWindow(this.test.title);
   });
 
-  it.only('allow to apply inline styles and links - wrapper', function() {
+  it('allow to apply inline styles and links - wrapper', function() {
     cy.loadWrapperEditorAndViewer('plain')
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.BOLD, [40, 10])
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.UNDERLINE, [10, 5])
