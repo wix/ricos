@@ -209,16 +209,19 @@ describe('plugins', () => {
       eyesOpen(this);
     });
     after(() => cy.eyesClose());
-    beforeEach('load editor', () => cy.loadEditorAndViewer('empty', 'embedsPreset'));
 
-    it('should create link preview from link after enter key', function() {
-      cy.insertLinkAndEnter('www.wix.com');
-      cy.eyesCheckWindow(this.test.title);
-    });
+    apps.forEach(app => {
+      it(`should create link preview from link after enter key [${app.name}]`, function() {
+        cy[app.loadApp]('empty', 'embedsPreset');
+        cy.insertLinkAndEnter('www.wix.com');
+        cy.eyesCheckWindow(this.test.title);
+      });
 
-    it('should embed link that supports embed', function() {
-      cy.insertLinkAndEnter('www.mockUrl.com');
-      cy.eyesCheckWindow(this.test.title);
+      it(`should embed link that supports embed [${app.name}]`, function() {
+        cy[app.loadApp]('empty', 'embedsPreset');
+        cy.insertLinkAndEnter('www.mockUrl.com');
+        cy.eyesCheckWindow(this.test.title);
+      });
     });
   });
 
