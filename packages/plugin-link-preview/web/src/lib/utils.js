@@ -23,7 +23,7 @@ export const addLinkPreview = async (editorState, config, blockKey, url) => {
     const withoutLinkBlock = deleteBlockText(editorState, blockKey);
     const { size, alignment } = { ...DEFAULTS, ...(settings || {}) };
     const data = {
-      config: { size, alignment, link: { fixedUrl, ...DEFAULTS.link }, width: html && 350 },
+      config: { size, alignment, link: { url: fixedUrl, ...DEFAULTS.link }, width: html && 350 },
       thumbnail_url,
       title,
       description,
