@@ -1,26 +1,28 @@
-name: action
+name: deploySurge
 on: push
-
 jobs:
-  lint:
-    runs-on: ubuntu-latest
+  deploy-examples:
+    runs-on: ubuntu-18.04
     steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@v2
+      - name: cache
+        id: cache
+        uses: actions/cache@master
         with:
-          node-version: 12
-      - run: npm install
-      - run: npm run lint
+          path: |
+            node_modules
+            */*/node_modules
+            ~/.cache
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+      - name: npm install + bootstrap
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: npm ci
+      - name: lerna link
+        if: steps.cache.outputs.cache-hit == 'true'
+        run: npm run link
 
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 12
-      - run: npm install
       - run: npm run build
-      - run: npm run test
-      - if: failure()
-        run: npm run uploadSnapshots
+      - run: npm run deploy
+    env:
+      SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
+      SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}

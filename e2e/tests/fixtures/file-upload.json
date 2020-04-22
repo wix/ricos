@@ -1,0 +1,52 @@
+{
+  "blocks": [
+    {
+      "key": "2s2ri",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "202hj",
+      "text": " ",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 0
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "d1r7u",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "type": "wix-draft-plugin-file-upload",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "config": {
+          "alignment": "center",
+          "size": "small"
+        },
+        "name": "receipt.pdf",
+        "type": "pdf",
+        "url": ""
+      }
+    }
+  }
+}

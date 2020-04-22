@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { mergeStyles, TextInput, Checkbox, isValidUrl } from 'wix-rich-content-common';
+import { TextInput, Checkbox } from 'wix-rich-content-editor-common';
+import { isValidUrl, mergeStyles } from 'wix-rich-content-common';
 import styles from '../../statics/styles/settings-component-styles.scss';
 
 class SettingsComponent extends PureComponent {
@@ -13,8 +14,6 @@ class SettingsComponent extends PureComponent {
       buttonText: settingsObj.buttonText,
       target: settingsObj.target || false,
       rel: settingsObj.rel || false,
-      validUrl: settingsObj.validUrl || true,
-      submitted: settingsObj.submitted || true,
     };
   }
 
@@ -33,51 +32,32 @@ class SettingsComponent extends PureComponent {
 
   onLinkChanged = e => {
     const url = e.target.value;
-    this.setState({ url });
-    if (isValidUrl(url) || !url) {
-      this.setState({ validUrl: true });
-      this.props.isValidUrl(true);
-    }
+    const validUrl = isValidUrl(url) || !url;
+    this.setState({ url }, () => this.props.isValidUrl(validUrl));
   };
 
   handleTargetChange = event => {
-    const { url } = this.state;
     this.setState({ target: event.target.checked });
-    if (isValidUrl(url)) {
-      this.setState({ validUrl: true });
-    } else {
-      this.setState({ validUrl: false });
-    }
   };
 
   handleRelChange = event => {
-    const { url } = this.state;
     this.setState({ rel: event.target.checked });
-    if (isValidUrl(url)) {
-      this.setState({ validUrl: true });
-    } else {
-      this.setState({ validUrl: false });
-    }
   };
 
   onBlur = event => {
-    const { url } = this.state;
     this.setState({ target: event.target.checked });
-    if (isValidUrl(url)) {
-      this.setState({ validUrl: true });
-    } else {
-      this.setState({ validUrl: false });
-    }
   };
 
   render() {
     const { t, linkInputRef, isMobile } = this.props;
-    const { buttonText, url, validUrl } = this.state;
-    const errorTooltip = !validUrl || !this.props.validUrl ? t('ButtonModal_Invalid_Link') : null;
+    const { buttonText, url } = this.state;
+    const errorTooltip = !this.props.validUrl ? t('ButtonModal_Invalid_Link') : null;
     return (
-      <div className={this.styles.section_content}>
-        <div className={this.styles.button_name_feild}>
-          <div className={this.styles.header_ButtonText}>{t('ButtonModal_Button_Text')}</div>
+      <div className={this.styles.button_settingsComponent_section_content}>
+        <div className={this.styles.button_settingsComponent_name_feild}>
+          <div className={this.styles.button_settingsComponent_header_ButtonText}>
+            {t('ButtonModal_Button_Text')}
+          </div>
           <div>
             <TextInput
               inputRef={ref => {
@@ -93,7 +73,7 @@ class SettingsComponent extends PureComponent {
             />
           </div>
         </div>
-        <div className={this.styles.header_ButtonLink} ref={linkInputRef}>
+        <div className={this.styles.button_settingsComponent_header_ButtonLink} ref={linkInputRef}>
           {t('ButtonModal_Button_Link')}
         </div>
         <TextInput
@@ -111,21 +91,22 @@ class SettingsComponent extends PureComponent {
           showTooltip={false}
           data-hook="ButtonInputModal"
         />
-        {!this.state.validUrl || !this.props.validUrl ? (
-          <div className={this.styles.errorMessage}>{t('ButtonModal_InputLink_ErrorMessage')}</div>
+        {!this.props.validUrl ? (
+          <div className={this.styles.button_settingsComponent_errorMessage}>
+            {t('ButtonModal_InputLink_ErrorMessage')}
+          </div>
         ) : null}
         <div
           style={{
-            paddingTop:
-              !this.state.validUrl || !this.props.validUrl
-                ? isMobile
-                  ? '21px'
-                  : '25px'
-                : isMobile
-                ? '24px'
-                : '34px',
+            paddingTop: !this.props.validUrl
+              ? isMobile
+                ? '21px'
+                : '25px'
+              : isMobile
+              ? '33px'
+              : '34px',
           }}
-          className={this.styles.checkBoxes}
+          className={this.styles.button_settingsComponent_checkBoxes}
         >
           <Checkbox
             label={t('LinkPanel_Target_Checkbox')}

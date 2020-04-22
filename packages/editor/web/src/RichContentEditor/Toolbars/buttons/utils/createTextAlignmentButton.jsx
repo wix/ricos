@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { setTextAlignment } from 'wix-rich-content-common';
+import { setTextAlignment } from 'wix-rich-content-editor-common';
 
 import TextButton from '../TextButton';
 
@@ -15,6 +15,7 @@ export default ({ alignment, Icon, tooltipTextKey }) =>
       isMobile: PropTypes.bool,
       t: PropTypes.func,
       tabIndex: PropTypes.number,
+      shouldRefreshTooltips: PropTypes.func,
     };
 
     isActive = () => this.props.alignment === alignment;
@@ -30,10 +31,9 @@ export default ({ alignment, Icon, tooltipTextKey }) =>
     };
 
     render() {
-      const { theme, isMobile, t, tabIndex } = this.props;
+      const { theme, isMobile, t, tabIndex, shouldRefreshTooltips } = this.props;
       const tooltipText = t(tooltipTextKey);
-      const textForHooks = tooltipText.replace(/\s+/, '');
-      const dataHookText = `textAlignmentButton_${textForHooks}`;
+      const dataHookText = `textAlignmentButton_${alignment}`;
 
       return (
         <TextButton
@@ -45,6 +45,7 @@ export default ({ alignment, Icon, tooltipTextKey }) =>
           tooltipText={tooltipText}
           dataHook={dataHookText}
           tabIndex={tabIndex}
+          shouldRefreshTooltips={shouldRefreshTooltips}
         />
       );
     }

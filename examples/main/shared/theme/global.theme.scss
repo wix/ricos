@@ -1,0 +1,68 @@
+@import './fonts.theme.scss';
+.focused,
+*:focus {
+}
+
+.hasFocus {
+}
+
+.overlay {
+}
+
+.pluginContainerReadOnly {
+  @extend .fontElementMap !optional;
+}
+
+.pluginContainer {
+  @extend .fontElementMap !optional;
+}
+
+.panelContainer {
+  @extend .fontElementMap !optional;
+}
+
+:global {
+  .ReactModalPortal {
+    @extend .glob_fontElementMap !optional;
+  }
+  .ReactModal__Body--open {
+  }
+  .ReactModal__Content {
+  }
+}
+
+.flex {
+}
+
+.hidden {
+}
+
+.alignLeft {
+}
+
+.alignCenter {
+}
+
+.alignRight {
+}
+
+.sizeFullWidth {
+}
+
+.sizeContent {
+}
+
+.sizeSmall {
+}
+
+.sizeSmallCenter {
+}
+
+@media only screen and (min-width: 1025px) {
+  .sizeFullWidth {
+    &:not(.textWrapNowrap) {
+      width: auto;
+      margin: 0 -49px;
+    }
+  }
+}

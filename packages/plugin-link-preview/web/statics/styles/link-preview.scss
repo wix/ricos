@@ -1,0 +1,103 @@
+.linkPreview {
+  margin: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  cursor: pointer;
+  border: 1px solid #ededed;
+  max-height: 170px;
+}
+
+.linkPreviewImage {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  border-right: solid 1px #ededed;
+  flex: 0 0 auto;
+}
+
+.linkPreviewInfo {
+  padding: 20px 28px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  vertical-align: middle;
+  overflow: hidden;
+  color: black;
+}
+
+.linkPreviewTitle {
+  font-weight: bold;
+  align-self: flex-start;
+  font-size: 20px;
+  line-height: 28px;
+  padding-top: 12px;
+  max-height: 56px;
+  min-height: 26px;
+  display: flex;
+}
+
+.ellipsis {
+  align-self: flex-end;
+}
+
+.linkPreviewTitle,
+.linkPreviewDescription,
+.linkPreviewUrl {
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.linkPreviewDescription,
+.linkPreviewUrl {
+  font-size: 16px;
+  line-height: 24px;
+  white-space: nowrap;
+}
+
+.linkPreviewUrl {
+  color: #969696;
+}
+
+.linkPreviewDescription {
+  padding-top: 8px;
+}
+
+@media only screen and (max-width: 800px) {
+  .linkPreview {
+    max-height: 144px;
+  }
+
+  .linkPreviewImage {
+    width: 110px;
+  }
+
+  .linkPreviewInfo {
+    padding: 12px;
+  }
+
+  .linkPreviewTitle {
+    font-size: 14px;
+    line-height: 20px;
+    padding-top: 8px;
+    max-height: 40px;
+  }
+
+  .ellipsis {
+    align-self: flex-end;
+    padding-right: 12px;
+  }
+
+  .linkPreviewUrl {
+    font-size: 12px;
+    line-height: 16px;
+  }
+
+  .linkPreviewDescription {
+    font-size: 12px;
+    line-height: 18px;
+    max-height: 32px;
+    white-space: normal;
+    display: flex;
+  }
+}

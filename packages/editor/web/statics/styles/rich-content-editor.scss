@@ -1,6 +1,6 @@
 @import '~wix-rich-content-common/dist/statics/styles/palette';
 @import '~wix-rich-content-common/dist/statics/styles/consts';
-@import '~wix-rich-content-common/dist/statics/styles/general';
+@import '~wix-rich-content-editor-common/dist/statics/styles/general';
 @import '~wix-rich-content-common/dist/statics/styles/fonts';
 
 .wrapper {
@@ -60,7 +60,7 @@
 }
 
 .block {
-  &+& {
+  & + & {
     margin-top: 20px;
   }
 }
@@ -90,7 +90,7 @@
 }
 
 .justify {
-  &>* {
+  & > * {
     white-space: pre-line !important;
     text-align: justify !important;
   }
@@ -131,14 +131,6 @@
 .indent {
   composes: elementSpacing;
   text-indent: 5%;
-}
-
-.orderedList {
-  composes: elementSpacing;
-}
-
-.unorderedList {
-  composes: elementSpacing;
 }
 
 .code,

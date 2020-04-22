@@ -2,7 +2,7 @@
 
 [![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lernajs.io/) [![Build Status](https://travis-ci.org/wix-incubator/rich-content.svg?branch=master)](https://travis-ci.org/wix-incubator/rich-content)
 
-## A super charged rich text editor with an extensible plugin system
+## A React based, super charged rich text editor with an extensible plugin system
 
 ![Demo](https://media.giphy.com/media/2rAwp4zLCrtGn2Tlbq/giphy.gif)
 
@@ -10,36 +10,16 @@ You can try it here: [https://wix-rich-content.herokuapp.com/](https://wix-rich-
 
 ## Installation
 
-To install this package as editor, use the following command:
+To install this package as editor, use the following command
 
 ```bash
-npm install --save wix-rich-content-editor
+npm install --save wix-rich-content-editor 
 ```
 
 To install this package as viewer, use the following command:
 
 ```bash
 npm install --save wix-rich-content-viewer
-```
-
-To use the editor with `<script>` tag, consume the following JS file: `dist/Common.js` and `dist/Editor.js` from the bundle, and load the matching CSS files:
-
-```html
-<html>
-  <head>
-    <script src="https://unpkg.com/wix-rich-content-common/dist/Common.js"></script>
-    <script src="https://unpkg.com/wix-rich-content-editor/dist/Editor.js"></script>
-    <link rel="stylesheet" href="https://unpkg.com/wix-rich-content-common/dist/styles.min.css" />
-    <link rel="stylesheet" href="https://unpkg.com/wix-rich-content-editor/dist/styles.min.css" />
-  </head>
-  <body>
-    <script>
-      const { RichContentEditor, EditorState } = window.WixRichContentEditor;
-    </script>
-
-    <!-- ...rest of your app code... -->
-  </body>
-</html>
 ```
 
 ## Getting Started
@@ -94,7 +74,7 @@ Now, to make sure you are getting the most of the rich-content editor, include t
 `app.js`
 
 ```jsx
-import 'wix-rich-content-common/dist/styles.min.css';
+import 'wix-rich-content-editor-common/dist/styles.min.css';
 import 'wix-rich-content-editor/dist/styles.min.css';
 import 'wix-rich-content-plugin-...'/dist/styles.min.css';
 ```
@@ -211,37 +191,33 @@ You can find a full list of classes you can override in [here](./examples/main/s
 
 #### Plugins
 
-[wix-rich-content-plugin-divider](./pacakges/plugin-divider) add dividers to your content
+[wix-rich-content-plugin-divider](./packages/plugin-divider) add dividers to your content
 
-[wix-rich-content-plugin-emoji](./pacakges/plugin-emoji) add emojis to your content
+[wix-rich-content-plugin-emoji](./packages/plugin-emoji) add emojis to your content
 
-[wix-rich-content-plugin-hashtag](./pacakges/plugin-hashtag) convert plain text #hastags into dynamic elements
+[wix-rich-content-plugin-hashtag](./packages/plugin-hashtag) convert plain text #hastags into dynamic elements
 
-[wix-rich-content-plugin-html](./pacakges/plugin-html) embed html code or sites in your content
+[wix-rich-content-plugin-html](./packages/plugin-html) embed html code or sites in your content
 
-[wix-rich-content-plugin-link](./pacakges/plugin-link) convert plain text URLs into `<a>` tags
+[wix-rich-content-plugin-link](./packages/plugin-link) convert plain text URLs into `<a>` tags
 
-[wix-rich-content-plugin-mentions](./pacakges/plugin-video) add videos to your content
+[wix-rich-content-plugin-video](./packages/plugin-video) add videos to your content
 
-[wix-rich-content-plugin-video](./pacakges/plugin-mentions) mention users in your content
+[wix-rich-content-plugin-mentions](./packages/plugin-mentions) mention users in your content
 
-[wix-rich-content-plugin-code-block](./pacakges/plugin-code-block) displays code block
+[wix-rich-content-plugin-code-block](./packages/plugin-code-block) displays code block
 
 [wix-rich-content-plugin-image](./packages/plugin-image) embed images in your content
 
-##### Private Wix Plugins
-
-[wix-rich-content-plugin-gallery](https://github.com/wix-incubator/rich-content-plugins-wix/tree/master/packages/plugin-gallery) embed Wix `pro-gallery` component in your content
-
-Note: these plugins are found in a [separate repository](https://github.com/wix-incubator/rich-content-plugins-wix) since they are dependent on private Wix code
+[wix-rich-content-plugin-gallery](./packages/plugin-gallery) embed Wix `pro-gallery` component in your content
 
 ### Usage with [Yoshi](https://github.com/wix/yoshi)
 
-To use the editor with Yoshi, you should do the same bootstrapping process, but make sure to include the package's `.css` files from a `.scss` file, or add `.global` to the import:
+To use the editor with Yoshi, you should do the same bootstrapping process, but make sure to include the package's `.css` files from a `.global.scss` file.  For example, create a file named `rich-content.global.scss` with the following content (make sure to import styles from any plugins you are using as well):
 
-```es6
-import 'wix-rich-content-common/dist/styles.min.global.css';
-import 'wix-rich-content-editor/dist/styles.min.global.css';
+```scss
+@import '~wix-rich-content-editor-common/dist/styles.min.css';
+@import '~wix-rich-content-editor/dist/styles.min.css';
 ```
 
 > This workaround is required because Yoshi re-compiles CSS files, and applies css-modules again.
@@ -264,13 +240,12 @@ The compiled package also contains a CommonJS bundle, which you can consume if y
 
 #### Examples
 
-[rich-content-editor-example](./examples/editor) to see how to consume the Component as an editor.
+[rich-content-editor-example](./examples/main) to see how to consume the Component as:
+- [editor](./examples/main/shared/editor/Editor.jsx)
+- [viewer](./examples/main/shared/viewer/Viewer.jsx)
 
-[rich-content-viewer-example](./examples/viewer) to see how to consume the Component as a viewer.
 
 [rich-content-viewer-ssr](./examples/viewer-ssr) to see how to consume the Component as a viewer within a Yoshi-based SSR Application.
-
-[rich-content-editor-tpa](./examples/editor-tpa) to see how to consume the Component as an editor within a Wix Third Party Application.
 
 ### Modules
 
@@ -278,4 +253,4 @@ The compiled package also contains a CommonJS bundle, which you can consume if y
 
 [wix-rich-content-viewer](./packages/viewer) is the rich content viewer React Component.
 
-[wix-rich-content-common](./packages/common) is a shared library utilized by the rest of the modules.
+[wix-rich-content-editor-common](./packages/editor-common) is a shared library utilized by the rest of the modules.

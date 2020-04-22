@@ -1,9 +1,13 @@
 import {
   createBasePlugin,
-  // getUrlMatches,
   insertLinkInPosition,
-  isValidUrl,
-} from 'wix-rich-content-common';
+  fixPastedLinks,
+  hasLinksInSelection,
+  getVisibleSelectionRect,
+} from 'wix-rich-content-editor-common';
+import { addLinkPreview } from 'wix-rich-content-plugin-link-preview/dist/lib/utils';
+import { isValidUrl } from 'wix-rich-content-common';
+import React from 'react';
 import { LINK_TYPE } from './types';
 import { Component } from './LinkComponent';
 import { linkEntityStrategy } from './strategy';
@@ -11,15 +15,36 @@ import createLinkToolbar from './toolbar/createLinkToolbar';
 
 const createLinkPlugin = (config = {}) => {
   const type = LINK_TYPE;
-  const { theme, anchorTarget, relValue, [type]: settings = {}, ...rest } = config;
+  const { theme, anchorTarget, relValue, [type]: settings = {}, commonPubsub, ...rest } = config;
+  const targetBlank = anchorTarget === '_blank';
+  const nofollow = relValue === 'nofollow';
   settings.minLinkifyLength = settings.minLinkifyLength || 6;
-  const toolbar = createLinkToolbar(config);
+  const toolbar = createLinkToolbar(config, closeInlinePluginToolbar);
 
-  const decorators = [{ strategy: linkEntityStrategy, component: Component }];
+  const decorators = [
+    { strategy: linkEntityStrategy, component: props => <Component {...props} theme={theme} /> },
+  ];
   let linkifyData;
 
   const handleReturn = (event, editorState) => {
     linkifyData = getLinkifyData(editorState);
+    if (shouldConvertToLinkPreview(settings, linkifyData)) {
+      const url = getBlockLinkUrl(linkifyData);
+      const blockKey = linkifyData.block.key;
+      if (url) {
+        addLinkPreview(editorState, config, blockKey, url);
+      }
+    }
+  };
+
+  const shouldConvertToLinkPreview = (settings, linkifyData) =>
+    linkifyData && linkifyData.block?.type === 'unstyled' && settings.preview?.enable;
+
+  const getBlockLinkUrl = linkifyData => {
+    const { string, block } = linkifyData;
+    if (block.getText() === string) {
+      return string;
+    }
   };
 
   const handleBeforeInput = (chars, editorState) => {
@@ -28,55 +53,48 @@ const createLinkPlugin = (config = {}) => {
     }
   };
 
-  const onChange = editorState => {
-    if (linkifyData) {
-      const newEditorState = addLinkAt(linkifyData, editorState);
-      linkifyData = false;
-      return newEditorState;
-    }
-    return editorState;
+  let prevContentState;
+  const isPasteChange = editorState => {
+    const contentState = editorState.getCurrentContent();
+    const contentChanged = contentState !== prevContentState;
+    prevContentState = contentState;
+    return contentChanged && editorState.getLastChangeType() === 'insert-fragment';
   };
-  // linkify pasted text
-  // onChange = editorState => {
-  //   let newEditorState = editorState;
-  //   if (editorState.getLastChangeType() === 'insert-fragment') {
-  //     const content = editorState.getCurrentContent();
-  //     const startKey = content.getSelectionBefore().getStartKey();
-  //     const endKey = content.getSelectionAfter().getEndKey();
-  //     const blockMap = content.getBlockMap();
-  //     const blockKeys = blockMap.keySeq();
-  //     const startIndex = blockKeys.indexOf(startKey);
-  //     const endIndex = blockKeys.indexOf(endKey) + 1;
-  //
-  //     blockMap.slice(startIndex, endIndex).forEach(block => {
-  //       const text = block.getText();
-  //       getUrlMatches(text)
-  //         .filter(({ text: url, index: start, lastIndex: end }) => {
-  //           const entityKey = block.getEntityAt(start);
-  //           const entityType = entityKey !== null && content.getEntity(entityKey).getType();
-  //           const longEnough = url.length >= minLinkifyLength;
-  //           return entityType !== 'LINK' && entityType !== 'WAS_LINK' && longEnough;
-  //         })
-  //         .forEach(({ text: url, index: start, lastIndex: end }) => {
-  //           newEditorState = addLinkAt(
-  //             { string: url, index: start, endIndex: end, blockKey: block.getKey() },
-  //             newEditorState
-  //           );
-  //         });
-  //     });
-  //   }
-  //   return newEditorState;
-  // };
+
+  function openInlinePluginToolbar(commonPubsubData) {
+    commonPubsub.set('cursorOnInlinePlugin', commonPubsubData);
+  }
+  function closeInlinePluginToolbar() {
+    commonPubsub.set('cursorOnInlinePlugin', null);
+  }
+
+  const onChange = editorState => {
+    const selection = editorState.getSelection();
+    if (hasLinksInSelection(editorState) && selection.isCollapsed()) {
+      const boundingRect = getVisibleSelectionRect(window);
+      openInlinePluginToolbar({ type, boundingRect });
+    } else {
+      closeInlinePluginToolbar();
+    }
+    let newEditorState = editorState;
+    if (isPasteChange(editorState)) {
+      newEditorState = fixPastedLinks(editorState, { anchorTarget, relValue });
+    } else if (linkifyData) {
+      newEditorState = addLinkAt(linkifyData, editorState);
+    }
+    linkifyData = false;
+    return newEditorState;
+  };
 
   const getLinkifyData = editorState => {
-    const str = findLastStringWithNoSpaces(editorState);
-    return shouldLinkify(str) && str;
+    const strData = findLastStringWithNoSpaces(editorState);
+    return shouldLinkify(strData) && strData;
   };
 
   const shouldLinkify = consecutiveString =>
     consecutiveString.string.length >= settings.minLinkifyLength &&
     isValidUrl(consecutiveString.string) &&
-    !rangeContainsEntity(consecutiveString);
+    !(rangeContainsEntity(consecutiveString) && blockContainsPlainText(consecutiveString));
 
   const findLastStringWithNoSpaces = editorState => {
     const selection = editorState.getSelection();
@@ -99,11 +117,15 @@ const createLinkPlugin = (config = {}) => {
     return false;
   };
 
+  const blockContainsPlainText = ({ block, string }) => block.text.length > string.length;
+
   const addLinkAt = ({ string, index, endIndex, blockKey }, editorState) => {
     return insertLinkInPosition(editorState, blockKey, index, endIndex, {
       url: string,
       anchorTarget,
       relValue,
+      targetBlank,
+      nofollow,
     });
   };
 
@@ -115,6 +137,7 @@ const createLinkPlugin = (config = {}) => {
       anchorTarget,
       relValue,
       settings,
+      commonPubsub,
       ...rest,
     },
     { decorators, handleBeforeInput, handleReturn, onChange }

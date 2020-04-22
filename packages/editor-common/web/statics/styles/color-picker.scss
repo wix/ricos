@@ -1,0 +1,142 @@
+@import '~wix-rich-content-common/dist/statics/styles/consts';
+@import "~wix-rich-content-common/dist/statics/styles/mixins";
+@import '~wix-rich-content-common/dist/statics/styles/palette';
+
+.colorPicker {
+  position: relative;
+  margin: 0;
+}
+
+.colorPicker_button.colorPicker_button_selected::after {
+  border-color: #000;
+}
+
+.colorPicker_separator {
+  border: none;
+  height: 1px;
+  background: rgba(51, 51, 51, 0.1);
+  width: auto;
+  margin: 0px 12px 10px 12px;
+  @include phone {
+    margin: 0;
+    margin-top: 22px;
+  }
+}
+
+%button {
+  position: relative;
+  margin-top: 12px;
+  -webkit-flex: none;
+  flex: none;
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  outline: 0;
+  padding: 0;
+  margin-left: 12px;
+
+  @include phone {
+    margin-top: 22px;
+    margin-left: calc((100% - 6 * 18px) / 5);
+    &:nth-child(6n + 1) {
+      margin-left: 0;
+    }
+  }
+}
+
+.colorPicker_button {
+  @extend %button;
+  border-radius: 50%;
+  border: solid 1px #ccc;
+  &::after {
+    content: " ";
+    border-radius: 50%;
+    width: 22px;
+    height: 22px;
+    display: block;
+    background: transparent;
+    border: 1px solid;
+    border-color: transparent;
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    outline: 0;
+  }
+  &:hover,
+  &:focus,
+  &:active {
+    outline: 0;
+  }
+  &:not(.colorPicker_button_selected):focus::after {
+    border-color: #ccc;
+  }
+}
+
+.colorPicker_palette {
+  width: auto;
+  margin: 12px;
+  @include phone {
+    margin: 0 18px 24px;
+  }
+}
+
+.colorPicker_add_color_button {
+  @extend %button;
+  display: inline-block;
+  vertical-align: top;
+  left: 65%;
+  top: -2px;
+  margin-top: 5px;
+  @include phone {
+    left: 75%;
+  }
+}
+
+.colorPicker_add_color_label {
+  width: 18px;
+  height: 18px;
+  color: $accent-color;
+  cursor: pointer;
+  position: relative;
+}
+
+.colorPicker_buttons_container {
+  margin-bottom: 18px;
+  flex-direction: row;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  width: 180px;
+  @include phone {
+    width: 100%;
+  }
+}
+
+.colorPicker_color_button_hidden {
+  position: absolute;
+  opacity: 0;
+  width: 0.1px;
+  height: 0.1px;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.colorPicker_reset_color_button {
+  @extend %button;
+  display: inline-block;
+  vertical-align: top;
+  margin-top: 5px;
+}
+
+.colorPicker_reset_color_label {
+  font-size: 14px;
+  font-stretch: normal;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: $accent-color;
+  cursor: pointer;
+  position: fixed;
+}

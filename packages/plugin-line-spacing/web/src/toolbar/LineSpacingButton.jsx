@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { pick } from 'lodash';
+import { mergeStyles } from 'wix-rich-content-common';
 import {
   getAnchorBlockData,
   InlineToolbarButton,
   mergeBlockData,
-  mergeStyles,
-} from 'wix-rich-content-common';
-import { EditorState } from '@wix/draft-js';
+  EditorState,
+} from 'wix-rich-content-editor-common';
 
 import { LineSpacingIcon } from '../icons';
 import Modal from 'react-modal';
@@ -81,10 +81,10 @@ export default class LineSpacingButton extends Component {
   }
 
   render() {
-    const { theme, isMobile, t, tabIndex, defaultSpacing } = this.props;
+    const { theme, isMobile, t, tabIndex, defaultSpacing, toolbar } = this.props;
     const { isPanelOpen, spacing, panelTop, panelLeft } = this.state;
     const { styles } = this;
-
+    const icon = toolbar?.icons?.InsertPluginButtonIcon || LineSpacingIcon;
     const modalStyle = isMobile
       ? { left: 0, bottom: 0, right: 0 }
       : {
@@ -101,7 +101,7 @@ export default class LineSpacingButton extends Component {
         tooltipText={t('LineSpacingButton_Tooltip')}
         dataHook={'LineSpacingButton'}
         tabIndex={tabIndex}
-        icon={LineSpacingIcon}
+        icon={icon}
         ref={ref => (this.buttonRef = ref)}
       >
         <Modal
@@ -150,6 +150,7 @@ LineSpacingButton.propTypes = {
   defaultSpacing: PropTypes.object,
   settings: PropTypes.object,
   keyName: PropTypes.string,
+  toolbar: PropTypes.object,
 };
 
 LineSpacingButton.defaultProps = {

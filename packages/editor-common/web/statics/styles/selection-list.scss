@@ -1,0 +1,33 @@
+@supports (display: grid) {
+  .selectionList {
+    display: grid;
+  }
+}
+
+.selectionList {
+  width: 100%;
+}
+
+.selectionListOption {
+  font-size: 14px;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  height: 85px;
+  margin: 0;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  &:hover {
+    background-color: rgba(2, 97, 255, 0.05);
+  }
+}
+
+.selectionListOption_selected {
+  color: rgb(2, 97, 255);
+  background-color: rgba(2, 97, 255, 0.1);
+  &.selectionListOption {
+    background-color: rgba(2, 97, 255, 0.1);
+  }
+}

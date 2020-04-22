@@ -10,17 +10,17 @@ class Navbar extends PureComponent {
   }
   render() {
     return (
-      <div className={this.styles.navbar_constainer}>
-        <div className={this.styles.navbar_settingOptions}>
+      <div className={this.styles.button_navbar_constainer}>
+        <div className={this.styles.button_navbar_settingOptions}>
           <button
-            className={this.styles.navbar_button}
+            className={this.styles.button_navbar_button}
             onClick={this.props.onCancel}
             style={{ textAlign: 'left' }}
           >
             {this.props.t('ButtonPlugin_Navbar_Cancel_button')}
           </button>
           <button
-            className={this.styles.navbar_button}
+            className={this.styles.button_navbar_button}
             onClick={this.props.onConfirm}
             style={{ textAlign: 'right' }}
           >

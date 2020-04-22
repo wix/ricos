@@ -1,7 +1,7 @@
 {
   "private": false,
   "name": "wix-rich-content-editor",
-  "version": "5.0.1",
+  "version": "7.3.3",
   "author": {
     "name": "Jonathan Bachman",
     "email": "jonathanb@wix.com"
@@ -18,8 +18,8 @@
     "build": "rollup --environment MODULE_NAME:editor -c ../../../rollup.config.js",
     "build:dev": "cross-env NODE_ENV=development npm run build",
     "build:analyze": "npm run build -- --environment MODULE_ANALYZE && open stats.html",
-    "postbuild": "css-modules-flow-types statics/styles --extension scss && css-modules-flow-types src --extension scss",
-    "watch": "cross-env NODE_ENV=development MODULE_WATCH=1 npm run build -- --watch",
+    "postbuild": "node ../../../scripts/esCheck.js && css-modules-flow-types statics/styles --extension scss && css-modules-flow-types src --extension scss",
+    "watch": "cross-env NODE_ENV=development MODULE_WATCH=1 npm run build -- --watch.chokidar",
     "lint": "eslint 'src/**/*.{js,jsx}'",
     "lint:fix": "npm run lint -- --fix",
     "test": "jest --verbose"
@@ -33,22 +33,20 @@
     },
     "moduleNameMapper": {
       "\\.(jpg|jpeg|png|gif|svg)$": "<rootDir>/__mocks__/fileMock.js",
-      "\\.(css|scss)$": "<rootDir>/__mocks__/styleMock.js",
-      "^draft-js$": "<rootDir>/../../../node_modules/@wix/draft-js/dist/Draft.min.js",
-      "^draft-js/.*$": "<rootDir>/../../../node_modules/@wix/draft-js/dist/Draft.min.js",
-      "^@wix/draft-js$": "<rootDir>/../../../node_modules/@wix/draft-js/dist/Draft.min.js"
+      "\\.(css|scss)$": "<rootDir>/__mocks__/styleMock.js"
     }
   },
   "dependencies": {
-    "draft-js-drag-n-drop-plugin": "~2.0.2",
-    "draft-js-focus-plugin": "~2.2.0",
-    "draft-js-plugins-editor": "~2.1.1",
-    "i18next": "~10.6.0",
+    "@wix/draft-js": "0.0.7",
+    "draft-convert": "2.1.8",
+    "draft-js-drag-n-drop-plugin": "~2.0.4",
+    "draft-js-focus-plugin": "github:shaulgo/draft-js-plugins#focusPlugin",
+    "draft-js-list-plugin": "^1.0.2",
+    "draft-js-plugins-editor": "~3.0.0",
     "react-click-outside": "github:tj/react-click-outside",
-    "react-i18next": "~7.13.0",
     "react-measure": "~2.3.0",
-    "rtl-detect": "^1.0.2",
-    "wix-rich-content-common": "5.0.1"
+    "wix-rich-content-common": "7.3.3",
+    "wix-rich-content-editor-common": "7.3.3"
   },
   "peerDependencies": {
     "@babel/runtime": "7.2.0",
@@ -59,20 +57,19 @@
   },
   "devDependencies": {
     "@babel/runtime": "7.2.0",
-    "@wix/draft-js": "0.10.272",
-    "babel-jest": "^23.6.0",
-    "classnames": "^2.2.6",
+    "babel-jest": "^25.1.0",
+    "classnames": "^2.0.0",
     "cross-env": "^5.2.0",
     "enzyme": "^3.8.0",
     "enzyme-adapter-react-16": "^1.9.1",
     "eslint": "^6.1.0",
-    "jest": "^23.1.0",
-    "lodash": "^4.17.10",
+    "jest": "^25.1.0",
+    "lodash": "^4.17.15",
     "prop-types": "^15.6.2",
     "react": "16.6.3",
     "react-dom": "16.6.3",
     "react-test-renderer": "16.6.3",
-    "rollup": "1.20.3"
+    "rollup": "1.31.1"
   },
   "unpkg": true,
   "publishConfig": {

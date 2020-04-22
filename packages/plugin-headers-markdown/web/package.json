@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-plugin-headers-markdown",
-  "version": "5.0.1",
+  "version": "7.3.3",
   "author": {
     "name": "Shaul Goral",
     "email": "shaulg@wix.com"
@@ -26,30 +26,29 @@
     "build": "rollup --environment MODULE_NAME:plugin-headers-markdown -c ../../../rollup.config.js",
     "build:dev": "cross-env NODE_ENV=development npm run build",
     "build:analyze": "npm run build -- --environment MODULE_ANALYZE && open stats.html",
-    "postbuild": "css-modules-flow-types statics/styles --extension scss && css-modules-flow-types src --extension scss",
-    "watch": "cross-env NODE_ENV=development MODULE_WATCH=1 npm run build -- --watch",
+    "postbuild": "node ../../../scripts/esCheck.js && css-modules-flow-types statics/styles --extension scss && css-modules-flow-types src --extension scss",
+    "watch": "cross-env NODE_ENV=development MODULE_WATCH=1 npm run build -- --watch.chokidar",
     "release": "wnpm-release --no-shrinkwrap",
     "lint": "eslint 'src/**/*.{js,jsx}'"
   },
   "peerDependencies": {
     "@babel/runtime": "7.2.0",
-    "@wix/draft-js": "0.10.272",
     "prop-types": "^15.0.0",
     "react": "^16.6.3",
     "react-dom": "^16.6.3"
   },
   "devDependencies": {
     "@babel/runtime": "7.2.0",
-    "@wix/draft-js": "0.10.272",
     "cross-env": "^5.2.0",
     "eslint": "^6.1.0",
     "prop-types": "^15.6.2",
     "react": "16.6.3",
     "react-dom": "16.6.3",
-    "rollup": "1.20.3"
+    "rollup": "1.31.1"
   },
   "dependencies": {
-    "wix-rich-content-common": "5.0.1"
+    "wix-rich-content-common": "7.3.3",
+    "wix-rich-content-editor-common": "7.3.3"
   },
   "unpkg": true,
   "publishConfig": {

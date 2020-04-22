@@ -2,7 +2,13 @@
 import React from 'react';
 
 const InsertPluginIcon = props => (
-  <svg xmlnsXlink="http://www.w3.org/1999/xlink" viewBox="0 0 19 19" {...props}>
+  <svg
+    xmlnsXlink="http://www.w3.org/1999/xlink"
+    viewBox="0 0 19 19"
+    width="19"
+    height="19"
+    {...props}
+  >
     <defs>
       <path
         id="gallery-plugin-insert-path"

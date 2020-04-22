@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { RadioGroupHorizontal } from 'wix-rich-content-common';
+import { RadioGroupHorizontal } from 'wix-rich-content-editor-common';
 
 const propTypes = {
   onChange: PropTypes.func.isRequired,
@@ -57,7 +57,6 @@ export const ImageOrientation = props => {
   return (
     <RadioGroupHorizontal
       label={imageOrientationLabel}
-      readOnly={props.options.readOnly}
       dataSource={[
         { value: '1', labelText: verticalLabel, dataHook: 'radioGroupImageOrientationVertical' },
         {

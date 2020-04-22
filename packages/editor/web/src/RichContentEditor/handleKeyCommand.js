@@ -1,24 +1,41 @@
-import { EditorState, RichUtils, Modifier } from '@wix/draft-js';
-import { COMMANDS } from 'wix-rich-content-common';
+import {
+  COMMANDS,
+  mergeBlockData,
+  RichUtils,
+  insertString,
+  TEXT_TYPES,
+  CHARACTERS,
+} from 'wix-rich-content-editor-common';
 import handleBackspaceCommand from './handleBackspaceCommand';
 import handleDeleteCommand from './handleDeleteCommand';
 
-export default (updateEditorState, customHandlers) => (command, editorState) => {
-  let newState, contentState;
+const isList = blockType =>
+  blockType === 'ordered-list-item' || blockType === 'unordered-list-item';
+const isTab = command => command === COMMANDS.TAB || command === COMMANDS.SHIFT_TAB;
+const isCodeBlock = blockType => blockType === 'code-block';
+const isText = blockType => {
+  return TEXT_TYPES.some(type => type === blockType);
+};
+
+export default (updateEditorState, customHandlers, blockType) => (command, editorState) => {
+  let newState;
+
   if (customHandlers[command]) {
-    newState = customHandlers[command](editorState);
+    if (isTab(command) && isList(blockType)) {
+      // eslint-disable-next-line no-restricted-globals
+      newState = RichUtils.onTab(event, editorState, 2);
+    } else if (isText(blockType)) {
+      newState = insertString(editorState, CHARACTERS.TAB);
+    } else if (!isCodeBlock(blockType)) {
+      newState = customHandlers[command](editorState);
+    }
   } else {
     switch (command) {
       case COMMANDS.ALIGN_RIGHT:
       case COMMANDS.ALIGN_LEFT:
       case COMMANDS.ALIGN_CENTER:
       case COMMANDS.JUSTIFY:
-        contentState = Modifier.mergeBlockData(
-          editorState.getCurrentContent(),
-          editorState.getSelection(),
-          { textAlignment: command }
-        );
-        newState = EditorState.push(editorState, contentState, 'change-block-data');
+        newState = mergeBlockData(editorState, { textAlignment: command });
         break;
       case COMMANDS.TITLE:
       case COMMANDS.SUBTITLE:

@@ -1,15 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import {
-  RadioGroupHorizontal,
-  TextInput,
-  InputWithLabel,
-  isValidUrl,
-  startsWithHttps,
-  hasProtocol,
-  mergeStyles,
-} from 'wix-rich-content-common';
+import { RadioGroupHorizontal, TextInput, InputWithLabel } from 'wix-rich-content-editor-common';
+import { mergeStyles, isValidUrl, startsWithHttps, hasProtocol } from 'wix-rich-content-common';
 import { identity, trimStart } from 'lodash';
 import { SRC_TYPE_HTML, SRC_TYPE_URL } from '../constants';
 import styles from '../../statics/styles/HtmlEditPanel.scss';
@@ -45,14 +38,6 @@ class HtmlEditPanel extends Component {
     submitted: false,
   };
 
-  shouldSaveOnUnmount = true;
-
-  componentWillUnmount() {
-    if (this.shouldSaveOnUnmount && this.isValid()) {
-      this.updateComponentData();
-    }
-  }
-
   handleSrcTypeChange = srcType => {
     this.setState({ srcType });
   };
@@ -60,6 +45,7 @@ class HtmlEditPanel extends Component {
   handleSrcChange = event => {
     const { name, value } = event.target;
     this.setState({ [name]: value });
+    this.updateComponentData(name, value);
   };
 
   handleCancelClick = () => {
@@ -67,26 +53,16 @@ class HtmlEditPanel extends Component {
     this.props.close();
   };
 
-  handleUpdateClick = () => {
+  updateComponentData = (name, value) => {
+    const srcType = name;
     if (this.isValid()) {
-      this.updateComponentData();
-      this.close();
+      this.props.store.update('componentData', {
+        srcType,
+        src: NORMALIZERS[srcType](value) || '',
+      });
     }
 
     this.setState({ submitted: true });
-  };
-
-  close = () => {
-    this.shouldSaveOnUnmount = false;
-    this.props.close();
-  };
-
-  updateComponentData = () => {
-    const { srcType } = this.state;
-    this.props.store.update('componentData', {
-      srcType,
-      src: NORMALIZERS[srcType](this.state[srcType]) || '',
-    });
   };
 
   getError = () => {
@@ -166,7 +142,7 @@ class HtmlEditPanel extends Component {
           </button>
           <button
             className={classNames(styles.htmlEditPanel_button, styles.htmlEditPanel_primaryButton)}
-            onClick={this.handleUpdateClick}
+            onClick={this.props.close}
             data-hook="htmlEditPanel_Update"
           >
             {t('HtmlEditPanel_Update')}

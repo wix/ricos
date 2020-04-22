@@ -1,19 +1,25 @@
 import CodeUtils from 'draft-js-code';
-import { createBasePlugin } from 'wix-rich-content-common';
+import { createBasePlugin, COMMANDS } from 'wix-rich-content-editor-common';
 import { CODE_BLOCK_TYPE } from './types';
 // import PrismDecorator from './PrismDecorator';
 import createCodeBlockToolbar from './toolbar/createCodeBlockToolbar';
 
-const createUnderlyingPlugin = (/*{ theme }*/) => ({
-  keyBindingFn: (event, { getEditorState }) => {
-    if (CodeUtils.hasSelectionInBlock(getEditorState())) {
-      return CodeUtils.getKeyBinding(event);
-    }
-  },
+const handleShiftTab = editorState => {
+  // since backspace removes tabs in CodeUtils
+  // https://github.com/SamyPesse/draft-js-code/blob/9783c0f6bbedda6b7089712f9c657a72fdae636d/lib/handleKeyCommand.js#L11
+  return CodeUtils.handleKeyCommand(editorState, 'backspace');
+};
 
-  handleKeyCommand: (command, editorState, { setEditorState }) => {
+const createUnderlyingPlugin = (/*{ theme }*/) => ({
+  handleKeyCommand: (command, editorState, timestamp, { setEditorState }) => {
     if (CodeUtils.hasSelectionInBlock(editorState)) {
-      const newState = CodeUtils.handleKeyCommand(editorState, command);
+      let newState;
+      if (command === COMMANDS.TAB) {
+        const mockEvent = { preventDefault: () => {} };
+        newState = CodeUtils.onTab(mockEvent, editorState);
+      } else if (command === COMMANDS.SHIFT_TAB) {
+        newState = handleShiftTab(editorState);
+      }
       if (newState) {
         setEditorState(newState);
         return 'handled';
@@ -30,31 +36,12 @@ const createUnderlyingPlugin = (/*{ theme }*/) => ({
     return 'not-handled';
   },
 
-  onTab: (event, { getEditorState, setEditorState }) => {
-    const editorState = getEditorState();
-    if (CodeUtils.hasSelectionInBlock(editorState)) {
-      let newState;
-      if (event.shiftKey) {
-        // since backspace removes tabs in CodeUtils
-        // https://github.com/SamyPesse/draft-js-code/blob/9783c0f6bbedda6b7089712f9c657a72fdae636d/lib/handleKeyCommand.js#L11
-        event.preventDefault();
-        newState = CodeUtils.handleKeyCommand(editorState, 'backspace');
-      } else {
-        newState = CodeUtils.onTab(event, editorState);
-      }
-      if (newState) {
-        setEditorState(newState);
-        return 'handled';
-      }
-    }
-    return 'not-handled';
-  },
-
   // decorators: [new PrismDecorator(theme)],
 });
 
 const createCodeBlockPlugin = (config = {}) => {
   const type = CODE_BLOCK_TYPE;
+  const icon = config?.['code-block']?.toolbar?.icons?.InsertPluginButtonIcon;
   const {
     helpers,
     theme,
@@ -78,6 +65,7 @@ const createCodeBlockPlugin = (config = {}) => {
     relValue,
     getEditorState,
     setEditorState,
+    icon,
   });
 
   return createBasePlugin(

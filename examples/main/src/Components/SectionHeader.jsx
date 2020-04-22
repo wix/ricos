@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { MdClose, MdSettings } from 'react-icons/md';
 
-export default class SectionHeader extends Component {
+export default class SectionHeader extends PureComponent {
   onHideClick = () => {
     this.props.onHide(this.props.title.replace(' ', ''), false);
   };

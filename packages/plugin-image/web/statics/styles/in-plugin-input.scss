@@ -1,0 +1,13 @@
+.inPluginInput {
+    border: none;
+    line-height: 21px;
+    width: 100%;
+    position: inherit;
+    z-index: 1;
+    font: inherit;
+    font-size: 14px;
+
+    &[readonly] {
+        cursor: pointer;
+    }
+}

@@ -26,7 +26,33 @@ The `width` and `height` are expected to be integers. They serve as **initial** 
 
 #### `toolbar`
 
-The `toolbar` setting refers to plugin functionality toolbar. Currently, it exposes a single field `hidden` which is expected to be an array of toolbar button `keynames` to be removed from toolbar.
+The `toolbar` setting refers to the plugin functionality toolbar, it is an object which may consist of the following keys: 
+
+| setting key | description                                                                                 | default value | is required? | editor/viewer config |
+| ----------- | ------------------------------------------------------------------------------------------- | ------------- | ------------ | -------------------- |
+| `hidden`    | an array of toolbar button `keynames` to be removed from toolbar                            | none          | No           | editor               |
+| `icons`     | an object of toolbar button `keynames` to custom icons map: `{ delete: MyCustomTrashIcon }` | none          | No           | editor               |
+
+Currently, it exposes a field `hidden` which is expected to be an array of toolbar button `keynames` to be removed from toolbar and a field `icons` which is expected to be an object of button icons to replace the existing icons.
+
+#### `defaultData`
+
+The `defaultData` setting enables consumers to set the default data for a plugin when it is inserted into the editor.  It is an object with the same fields as the plugins entity data.
+
+### Button Plugin Settings
+
+| setting key       | description                                                   | default value | is required? | editor/viewer config |
+| ----------------- | ------------------------------------------------------------- | ------------- | ------------ | -------------------- |
+| `activeButton`    | The index of the chosen preset button design                  | 0             | No           | both                 |
+| `borderRadius`    | The border radius in pixels                                   | 0             | No           | both                 |
+| `borderWidth`     | The border width in pixels                                    | 0             | No           | both                 |
+| `buttonText`      | The button label                                              | `Click Me`    | No           | both                 |
+| `url`             | The URL that should be redirected when clicking on the button | none          | Yes          | both                 |
+| `rel`             | The relationship between the current URL and the linked URL   | `nofollow`    | Yes          | both                 |
+| `target`          | Specifies where to open URL in new tab or in current tab      | `_blank`      | Yes          | both                 |
+| `textColor`       | The color of button text in Hex.                              | `#FEFDFD`     | No           | both                 |
+| `borderColor`     | The color of button border in Hex.                            | `#0161FF`     | No           | both                 |
+| `backgroundColor` | The color of button background in Hex.                        | `#0161FF`     | No           | both                 |
 
 ### HTML Plugin Settings
 
@@ -52,13 +78,30 @@ The `toolbar` setting refers to plugin functionality toolbar. Currently, it expo
 | setting key | description                 | default value | is required? | editor/viewer config |
 | ----------- | --------------------------- | ------------- | ------------ | -------------------- |
 | `onClick`   | optional Link click handler | none          | No           | both                 |
+| `preview` | Link Preview settings | none | No | both |
+
+The Link Preview Plugin is implemented within the Link Plugin, and is activated once the Link Plugin Settings object contains `preview` field. The `preview` object structure as follows:
+
+```js
+
+  {
+    getMetadataUrl: (query: string) => string,
+    token: string,
+    format: string,
+  }
+
+```
+
+The `getMetadataUrl` should provide a Website metadata service endpoint URL for a given query URL. The `token` is a security token appended  to request headers (`Authorization` header). The `format`  is the expected response format. Currently the only supported format is 'oembed'.
 
 ### Mentions Plugin Settings
 
-| setting key      | description                                                                                | default value | is required? | editor/viewer config |
-| ---------------- | ------------------------------------------------------------------------------------------ | ------------- | ------------ | -------------------- |
-| `getMentions`    | function that retrieves a list of suggestions according to provided search query parameter | none          | Yes          | both                 |
-| `onMentionClick` | optional Mention click handler                                                             | none          | No           | both                 |
+| setting key                  | description                                                                                | default value | is required? | editor/viewer config |
+| ---------------------------- | ------------------------------------------------------------------------------------------ | ------------- | ------------ | -------------------- |
+| `getMentions`                | function that retrieves a list of suggestions according to provided search query parameter | none          | Yes          | both                 |
+| `onMentionClick`             | optional Mention click handler                                                             | none          | No           | both                 |
+| `getMentionLink`             | given the mention return link for it                                                       | none          | Yes          | both                 |
+| `visibleItemsBeforeOverflow` | boolean how many items should be visible before overflowing                                | none          | No           | editor               |
 
 ### Giphy Plugin Settings
 
@@ -108,4 +151,4 @@ Specifically, the `textColorInlineStyleMapper` API accepts two parameters -- `co
 
 ## References and Examples
 
-Both [editor-example](../examples/editor/src/PluginsConfig.js) and [viewer-example](../examples/viewer/src/App.jsx) apps demonstrate the plugin customization capabilities.
+Both [editor-example](../examples/main/shared/editor/EditorPlugins.jsx) and [viewer-example](../examples/main/shared/viewer/ViewerPlugins.jsx) apps demonstrate the plugin customization capabilities.

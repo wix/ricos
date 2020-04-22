@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { FocusManager, EditorModals, getModalStyles } from 'wix-rich-content-common';
+import {
+  FocusManager,
+  EditorModals,
+  getModalStyles,
+  TOOLBARS,
+} from 'wix-rich-content-editor-common';
 import { PlusIcon, PlusActiveIcon } from '../../Icons';
 import Styles from '../../../../statics/styles/side-toolbar.scss';
 
@@ -86,9 +91,10 @@ export default class AddPluginFloatingToolbar extends Component {
   showPopup = () => {
     this.setState({
       style: {
-        left: this.getPopupOffset(),
+        ...this.getPopupOffset(),
         transform: 'translate(-50%) scale(1)',
         transition: 'transform 0.15s cubic-bezier(.3,1.2,.2,1)',
+        width: this.popup.offsetWidth,
       },
       isActive: true,
       tabIndex: 0,
@@ -108,7 +114,11 @@ export default class AddPluginFloatingToolbar extends Component {
   getPopupOffset = () => {
     if (!this.popupOffset) {
       if (this.popup) {
-        this.popupOffset = this.popup.offsetWidth / 2 + 30;
+        this.popupOffset = {
+          left: this.popup.offsetWidth / 2 + 30,
+          right: -this.popup.offsetWidth / 2 + 30,
+          top: -this.popup.offsetHeight / 4,
+        };
       }
     }
     return this.popupOffset;
@@ -167,6 +177,7 @@ export default class AddPluginFloatingToolbar extends Component {
               setEditorState={setEditorState}
               theme={theme}
               hidePopup={this.hidePopup}
+              toolbarName={TOOLBARS.SIDE}
             />
           ))}
         </div>

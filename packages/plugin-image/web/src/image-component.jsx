@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Loader } from 'wix-rich-content-editor-common';
 import ImageViewer from './image-viewer';
-import { getDefault } from './consts';
+import { DEFAULTS } from './consts';
 import { sizeClassName, alignmentClassName } from './classNameStrategies';
-import { Context } from 'wix-rich-content-common';
 
 const EMPTY_SMALL_PLACEHOLDER =
   'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
@@ -17,13 +17,14 @@ class ImageComponent extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = Object.assign({ isMounted: false }, this.stateFromProps(props));
+    this.state = { isMounted: false, ...this.stateFromProps(props) };
 
     const { block, store } = this.props;
     if (store) {
       const blockKey = block.getKey();
       store.setBlockHandler('handleFilesSelected', blockKey, this.handleFilesSelected.bind(this));
       store.setBlockHandler('handleFilesAdded', blockKey, this.handleFilesAdded.bind(this));
+      store.setBlockHandler('handleMetadataChange', blockKey, this.handleMetadataChange.bind(this));
     }
   }
 
@@ -77,8 +78,7 @@ class ImageComponent extends React.Component {
     this.props.store.update('componentState', { isLoading: false, userSelectedFiles: null });
   };
 
-  fileLoaded = (event, fileList) => {
-    const fileDataUrl = event.target.result;
+  fileLoaded = (fileDataUrl, fileList) => {
     if (this.state.isMounted) {
       this.setState({ isLoading: true, dataUrl: fileDataUrl });
     } else {
@@ -90,7 +90,7 @@ class ImageComponent extends React.Component {
         fileError: null,
       });
     }
-    const { helpers } = this.context;
+    const { helpers } = this.props;
     const hasFileChangeHelper = helpers && helpers.onFilesChange;
     if (hasFileChangeHelper && fileList.length > 0) {
       helpers.onFilesChange(fileList[0], ({ data, error }) =>
@@ -102,26 +102,34 @@ class ImageComponent extends React.Component {
   };
 
   handleFilesSelected = files => {
-    const state = {};
     const reader = new FileReader();
-    reader.onload = e => this.fileLoaded(e, files);
+    reader.onload = e => this.fileLoaded(e.target.result, files);
     reader.readAsDataURL(files[0]);
-    Object.assign(state, { isLoading: true, dataUrl: EMPTY_SMALL_PLACEHOLDER });
-
-    return state;
+    return { isLoading: true, dataUrl: EMPTY_SMALL_PLACEHOLDER };
   };
 
   handleFilesAdded = ({ data, error }) => {
-    //when updating componentData on an async method like this one,
-    // we need to use a sync method to change the EditorState.
-    // The broadcast is good if the toolbar is displaying some status or image
     const imageData = data.length ? data[0] : data;
-    this.props.componentData.src = imageData;
-    const { setData } = this.props.blockProps;
-    setData(this.props.componentData);
-
-    this.props.store.update('componentData', { src: imageData });
+    const config = { ...this.props.componentData.config };
+    if (!config.alignment) {
+      config.alignment = imageData.width >= 740 ? 'center' : 'left';
+    }
+    const componentData = {
+      config,
+      src: imageData,
+    };
+    this.props.store.update('componentData', componentData, this.props.block.getKey());
     this.resetLoadingState(error);
+  };
+
+  handleMetadataChange = newMetadata => {
+    const { componentData } = this.props;
+    const metadata = { ...componentData.metadata, ...newMetadata };
+    this.props.store.update(
+      'componentData',
+      { ...componentData, metadata },
+      this.props.block.getKey()
+    );
   };
 
   getLoadingParams = componentState => {
@@ -131,25 +139,55 @@ class ImageComponent extends React.Component {
     return { alreadyLoading, isLoading, userSelectedFiles };
   };
 
+  handleCaptionChange = caption => this.handleMetadataChange({ caption });
+
+  renderLoader = () => {
+    return <Loader type={'medium'} isFastFakeLoader />;
+  };
+
   render() {
-    const { settings, componentData, onClick, className, blockProps } = this.props;
+    const {
+      settings,
+      componentData,
+      onClick,
+      className,
+      blockProps,
+      theme,
+      isMobile,
+      helpers,
+      disableRightClick,
+      getInPluginEditingMode,
+      setInPluginEditingMode,
+      setComponentUrl,
+    } = this.props;
+
     return (
-      <ImageViewer
-        componentData={componentData}
-        onClick={onClick}
-        className={className}
-        isLoading={this.state.isLoading}
-        dataUrl={this.state.dataUrl}
-        isFocused={blockProps.isFocused}
-        readOnly={blockProps.readOnly}
-        settings={settings}
-        defaultCaption={this.context.t('ImageViewer_Caption')}
-      />
+      <>
+        <ImageViewer
+          theme={theme}
+          isMobile={isMobile}
+          helpers={helpers}
+          disableRightClick={disableRightClick}
+          getInPluginEditingMode={getInPluginEditingMode}
+          setInPluginEditingMode={setInPluginEditingMode}
+          componentData={componentData}
+          onClick={onClick}
+          className={className}
+          isLoading={this.state.isLoading}
+          dataUrl={this.state.dataUrl}
+          isFocused={blockProps.isFocused}
+          settings={settings}
+          defaultCaption={this.props.t('ImageViewer_Caption')}
+          onCaptionChange={this.handleCaptionChange}
+          setFocusToBlock={blockProps.setFocusToBlock}
+          setComponentUrl={setComponentUrl}
+        />
+
+        {this.state.isLoading && this.renderLoader()}
+      </>
     );
   }
 }
-
-ImageComponent.contextType = Context.type;
 
 ImageComponent.propTypes = {
   componentData: PropTypes.object.isRequired,
@@ -160,6 +198,14 @@ ImageComponent.propTypes = {
   onClick: PropTypes.func.isRequired,
   className: PropTypes.string.isRequired,
   settings: PropTypes.object,
+  helpers: PropTypes.object.isRequired,
+  t: PropTypes.func.isRequired,
+  theme: PropTypes.object.isRequired,
+  disableRightClick: PropTypes.bool,
+  getInPluginEditingMode: PropTypes.func,
+  setInPluginEditingMode: PropTypes.func,
+  isMobile: PropTypes.bool.isRequired,
+  setComponentUrl: PropTypes.func,
 };
 
-export { ImageComponent as Component, getDefault };
+export { ImageComponent as Component, DEFAULTS };

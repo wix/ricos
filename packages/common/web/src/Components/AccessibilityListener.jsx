@@ -1,31 +1,31 @@
 import { Component } from 'react';
-import Context from '../Utils/Context';
-import styles from '../../statics/styles/general.scss';
+import PropTypes from 'prop-types';
+import noOutlineStyle from '../../statics/styles/no-outline.scss';
 
 export default class AccessibilityListener extends Component {
   handleTabKeyUp = e => {
-    if (e.which === 9 && document.body.classList.contains(styles.noOutline)) {
-      document.body.classList.remove(styles.noOutline);
+    if (e.which === 9 && document.body.classList.contains(noOutlineStyle.noOutline)) {
+      document.body.classList.remove(noOutlineStyle.noOutline);
     }
   };
 
   handleClick = () => {
-    if (!document.body.classList.contains(styles.noOutline)) {
-      document.body.classList.add(styles.noOutline);
+    if (!document.body.classList.contains(noOutlineStyle.noOutline)) {
+      document.body.classList.add(noOutlineStyle.noOutline);
     }
   };
 
   componentDidMount() {
-    document.body.classList.add(styles.noOutline);
+    document.body.classList.add(noOutlineStyle.noOutline);
 
-    if (!this.context.isMobile) {
+    if (!this.props.isMobile) {
       document.addEventListener('keyup', this.handleTabKeyUp);
       document.addEventListener('click', this.handleClick);
     }
   }
 
   componentWillUnmount() {
-    if (!this.context.isMobile) {
+    if (!this.props.isMobile) {
       document.removeEventListener('keyup', this.handleTabKeyUp);
       document.removeEventListener('click', this.handleClick);
     }
@@ -34,4 +34,6 @@ export default class AccessibilityListener extends Component {
   render = () => null;
 }
 
-AccessibilityListener.contextType = Context.type;
+AccessibilityListener.propTypes = {
+  isMobile: PropTypes.bool.isRequired,
+};

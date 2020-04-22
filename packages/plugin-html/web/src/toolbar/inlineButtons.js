@@ -1,12 +1,11 @@
 // flow
-import { get } from 'lodash';
 import { translate } from 'react-i18next';
 import {
   BUTTONS,
   SizeSmallLeftIcon,
   SizeSmallCenterIcon,
   SizeSmallRightIcon,
-} from 'wix-rich-content-common';
+} from 'wix-rich-content-editor-common';
 import { EditIcon } from '../icons';
 import {
   MAX_ALIGNMENT_WIDTH,
@@ -24,7 +23,7 @@ const getAlignmentButtonPropsFn = getEditorBounds => ({ componentData }) => {
   const editorBounds = getEditorBounds();
   const maxAlignmentWidth = editorBounds ? editorBounds.width - 1 : MAX_ALIGNMENT_WIDTH;
   return {
-    disabled: get(componentData, 'config.width', 0) > maxAlignmentWidth,
+    disabled: (componentData?.config?.width || 0) > maxAlignmentWidth,
   };
 };
 
@@ -40,12 +39,13 @@ const createInlineButtons /*: CreateInlineButtons*/ = ({ settings = {}, getEdito
     maxHeight = MAX_HEIGHT,
     minHeight = MIN_HEIGHT,
   } = settings;
+  const icons = settings?.toolbar?.icons || {};
   return [
     {
       type: BUTTONS.INLINE_PANEL,
       keyName: 'edit',
       panelContent: translate(null)(EditPanel),
-      icon: EditIcon,
+      icon: icons.edit || EditIcon,
       mapComponentDataToButtonProps: ({ src, srcType }) => ({
         tooltipTextKey: src ? TOOLTIP_TEXT_BY_SRC_TYPE[srcType] : 'HtmlPlugin_EditEmpty_Tooltip',
       }),
@@ -74,20 +74,20 @@ const createInlineButtons /*: CreateInlineButtons*/ = ({ settings = {}, getEdito
     },
     { type: BUTTONS.SEPARATOR, keyName: 'separator2' },
     {
-      type: BUTTONS.ALIGNMENT_LEFT,
+      type: BUTTONS.TEXT_ALIGN_LEFT,
       keyName: 'alignLeft',
-      icon: SizeSmallLeftIcon,
+      icon: icons.alignLeft || SizeSmallLeftIcon,
       mapStoreDataToButtonProps: getAlignmentButtonPropsFn(getEditorBounds),
     },
     {
-      type: BUTTONS.ALIGNMENT_CENTER,
+      type: BUTTONS.TEXT_ALIGN_CENTER,
       keyName: 'alignCenter',
-      icon: SizeSmallCenterIcon,
+      icon: icons.alignCenter || SizeSmallCenterIcon,
     },
     {
-      type: BUTTONS.ALIGNMENT_RIGHT,
+      type: BUTTONS.TEXT_ALIGN_RIGHT,
       keyName: 'alignRight',
-      icon: SizeSmallRightIcon,
+      icon: icons.alignRight || SizeSmallRightIcon,
       mapStoreDataToButtonProps: getAlignmentButtonPropsFn(getEditorBounds),
     },
     { type: BUTTONS.SEPARATOR, keyName: 'separator3' },

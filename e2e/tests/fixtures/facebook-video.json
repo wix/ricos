@@ -1,0 +1,64 @@
+{
+  "blocks": [
+    {
+      "key": "foo",
+      "text": "qweqweqweqeqe",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "70tav",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "dgvqn",
+      "text": " ",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 0
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "luu6",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "type": "wix-draft-plugin-video",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "config": {
+          "size": "content",
+          "alignment": "center"
+        },
+        "src": "https://www.facebook.com/wix/videos/971691596505371/",
+        "isCustomVideo": false,
+        "metadata": {
+          "oembed": null
+        }
+      }
+    }
+  },
+  "VERSION": "6.7.0"
+}

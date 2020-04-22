@@ -1,4 +1,5 @@
 {
+  "chromeWebSecurity": false,
   "baseUrl": "http://localhost:3002",
   "testFiles": "**/*.e2e.js",
   "ignoreTestFiles": [
@@ -10,7 +11,9 @@
   "pluginsFile": "e2e/cypress/plugins/index.js",
   "screenshotsFolder": "e2e/cypress/screenshots",
   "supportFile": "e2e/cypress/support/index.js",
-  "video": false,
+  "video": true,
+  "videoUploadOnPasses": false,
+  "videoCompression": false,
   "videosFolder": "e2e/cypress/videos",
   "env": {},
   "projectId": "6yj6sr"

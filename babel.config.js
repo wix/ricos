@@ -19,9 +19,20 @@ const commonPlugins = [
   ['@babel/plugin-proposal-class-properties', { loose: true }],
   '@babel/plugin-transform-runtime',
   '@babel/plugin-syntax-dynamic-import',
+  '@babel/plugin-proposal-optional-chaining',
 ];
 
-const testPlugins = ['@babel/plugin-transform-modules-commonjs'];
+if (process.env.NODE_ENV !== 'development') {
+  commonPlugins.push([
+    'babel-plugin-transform-react-remove-prop-types',
+    {
+      mode: 'remove',
+      removeImport: true,
+    },
+  ]);
+}
+
+const testPlugins = ['@babel/plugin-transform-modules-commonjs', 'dynamic-import-node'];
 
 module.exports = {
   babelrcRoots: ['.', 'packages/**/*', 'examples/*'],

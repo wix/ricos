@@ -1,5 +1,5 @@
 //@flow
-import { TOOLBARS, DISPLAY_MODE } from 'wix-rich-content-common';
+import { TOOLBARS, DISPLAY_MODE } from 'wix-rich-content-editor-common';
 import { createSideToolbar } from './SideToolbar';
 import { createMobileToolbar, createFooterToolbar, createStaticTextToolbar } from './StaticToolbar';
 import { createInlineTextToolbar } from './InlineToolbar';
@@ -215,7 +215,7 @@ export const getDefaultToolbarSettings /*: GetToolbarSettings*/ = ({
       shouldCreate: () => ({
         desktop: true,
         mobile: {
-          ios: true,
+          ios: false,
           android: false,
         },
       }),

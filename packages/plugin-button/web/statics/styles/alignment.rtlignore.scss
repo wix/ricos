@@ -1,0 +1,14 @@
+.button_align_left {
+  display: flex;
+  justify-content: left;
+}
+
+.button_align_right {
+  display: flex;
+  justify-content: right;
+}
+
+.button_align_center {
+  display: flex !important;
+  justify-content: center;
+}

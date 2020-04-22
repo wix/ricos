@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Iframe from './Iframe';
+import htmlIframeSrc from './htmlIframeSrc';
+import styles from '../statics/styles/Iframe.scss';
 
 const isSSR = typeof window === 'undefined';
 
@@ -15,6 +16,16 @@ class IframeHtml extends Component {
     !isSSR && window.addEventListener('message', this.handleIframeMessage);
   }
 
+  writeToIframe = iframeElement => {
+    this.iframe = iframeElement;
+    const iframeDocument = iframeElement?.contentWindow?.document;
+    if (iframeDocument) {
+      iframeDocument.open('text/html', 'replace');
+      iframeDocument.write(htmlIframeSrc);
+      iframeDocument.close();
+    }
+  };
+
   componentWillUnmount() {
     !isSSR && window.removeEventListener('message', this.handleIframeMessage);
   }
@@ -27,7 +38,7 @@ class IframeHtml extends Component {
 
   updateIframeContent = content => {
     this.shouldIgnoreLoad = true;
-    this.iframe.contentWindow.postMessage(
+    this.iframe?.contentWindow.postMessage(
       { type: 'htmlPlugin:updateContent', id: this.id, content },
       '*'
     );
@@ -50,14 +61,19 @@ class IframeHtml extends Component {
 
   render() {
     return this.state.shouldRender ? (
-      <Iframe src={this.props.src} iframeRef={this.setIframe} onLoad={this.handleIframeLoad} />
+      <iframe
+        className={styles.iframe}
+        ref={this.writeToIframe}
+        title="remote content"
+        style={{ backgroundColor: 'transparent' }}
+        onLoad={this.handleIframeLoad}
+      />
     ) : null;
   }
 }
 
 IframeHtml.propTypes = {
   html: PropTypes.string.isRequired,
-  src: PropTypes.string.isRequired,
   onHeightChange: PropTypes.any,
 };
 

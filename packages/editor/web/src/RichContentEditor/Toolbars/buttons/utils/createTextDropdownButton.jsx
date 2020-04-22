@@ -2,7 +2,8 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import TextButton from '../TextButton';
-import { mergeStyles, Tooltip } from 'wix-rich-content-common';
+import { mergeStyles } from 'wix-rich-content-common';
+import { Tooltip } from 'wix-rich-content-editor-common';
 import styles from '../../../../../statics/styles/inline-toolbar-dropdown-button.scss';
 import ClickOutside from 'react-click-outside';
 
@@ -46,6 +47,11 @@ export default ({ buttons, activeItem, onChange, tooltipTextKey }) =>
             styles.inlineToolbarDropdownButton_icon,
             theme && theme.inlineToolbarDropdownButton_icon
           ),
+          //eslint-disable-next-line camelcase
+          inlineToolbarButton_active: classNames(
+            styles.inlineToolbarButton_active,
+            theme && theme.inlineToolbarDropdownButton_active
+          ),
         },
       };
       this.styles = mergeStyles({ styles, theme: this.theme });
@@ -61,7 +67,7 @@ export default ({ buttons, activeItem, onChange, tooltipTextKey }) =>
 
     renderOptions = () => {
       const { getEditorState, setEditorState } = this.props;
-      const { selected } = this.state;
+      const { selected, isOpen } = this.state;
       const onClick = value => {
         onChange(getEditorState, setEditorState, value);
         this.setState({ selected: activeItem({ value }), isOpen: false });
@@ -73,6 +79,7 @@ export default ({ buttons, activeItem, onChange, tooltipTextKey }) =>
         onClick,
         ...this.props,
         theme: this.theme,
+        shouldRefreshTooltips: () => isOpen,
       };
       return (
         <ClickOutside

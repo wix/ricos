@@ -1,4 +1,4 @@
-import { isHexColor, validate } from 'wix-rich-content-common';
+import { validate, isHexColor } from 'wix-rich-content-common';
 import { isObject } from 'lodash';
 import { DEFAULT_PALETTE } from './constants';
 import schema from '../statics/color-scheme.json';

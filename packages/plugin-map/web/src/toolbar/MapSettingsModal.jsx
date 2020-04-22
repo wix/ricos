@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { mergeStyles, SettingsSection, TextInput, Button } from 'wix-rich-content-common';
+import { mergeStyles } from 'wix-rich-content-common';
+import { SettingsSection, TextInput, Button } from 'wix-rich-content-editor-common';
 import ReactGoogleMapLoader from 'react-google-maps-loader';
 import ReactGooglePlacesSuggest from 'react-google-places-suggest';
 import styles from '../../statics/styles/map-settings-modal.scss';
@@ -344,7 +345,7 @@ export class MapSettingsModal extends Component {
         {this.renderInjectedStyles()}
         {isMobile && this.renderMobileNavBar()}
 
-        <div className={this.styles.map_settings_modal_settings_container}>
+        <div className={this.styles.map_settings_modal_settings_container} data-hook="mapSettings">
           <div
             className={classNames(
               this.styles.map_settings_modal_title_container,

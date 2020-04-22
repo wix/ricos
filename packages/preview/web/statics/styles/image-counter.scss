@@ -1,0 +1,27 @@
+.imageCounter_overlay {
+  position: absolute;
+  display: flex;
+  align-items: end;
+  justify-content: center;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.imageCounter_container {
+  position: absolute;
+  display: flex;
+  font-weight: bold;
+  cursor: pointer;
+  color: #fff;
+  z-index: 1;
+  align-items: center;
+  justify-content: center;
+}
+
+.imageCounter_label {
+  font-size: 2em;
+  text-shadow: 1px 1px 2px black;
+  font-weight: bold;
+}

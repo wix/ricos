@@ -15,6 +15,7 @@ export const positionSuggestions = ({
   entryHeight,
   additionalHeight,
   reposition = false,
+  visibleItemsBeforeOverflow,
 } = {}) => ({ decoratorRect, popover, state, props }) => {
   const relativeParent = getRelativeParent(popover.parentElement);
   const relativeRect = {};
@@ -37,7 +38,10 @@ export const positionSuggestions = ({
   const left = relativeRect.left + relativeRect.scrollLeft;
   let top = relativeRect.top + relativeRect.scrollTop;
 
-  const popoverHeight = props.suggestions.length * entryHeight + additionalHeight;
+  const popoverHeight =
+    Math.min(props.suggestions.length, visibleItemsBeforeOverflow || props.suggestions.length) *
+      entryHeight +
+    additionalHeight;
   const isBelow = decoratorRect.bottom + popoverHeight > window.innerHeight;
 
   if (isBelow && reposition) {
@@ -56,11 +60,18 @@ export const positionSuggestions = ({
     }
   }
 
-  return {
+  const styles = {
     left: `${left}px`,
     top: `${top}px`,
     transform,
     transformOrigin: '1em 0%',
     transition,
   };
+
+  if (visibleItemsBeforeOverflow) {
+    styles.overflow = 'auto';
+    styles.height = `${popoverHeight}px`;
+  }
+
+  return styles;
 };

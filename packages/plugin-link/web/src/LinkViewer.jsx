@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { normalizeUrl, mergeStyles, validate, Context } from 'wix-rich-content-common';
+import { normalizeUrl, mergeStyles, validate, pluginLinkSchema } from 'wix-rich-content-common';
 import { invoke, isEqual } from 'lodash';
-import schema from '../statics/data-schema.json';
 import styles from '../statics/link-viewer.scss';
 
 class LinkViewer extends Component {
   static propTypes = {
     componentData: PropTypes.object.isRequired,
-    theme: PropTypes.object,
+    theme: PropTypes.object.isRequired,
     children: PropTypes.node,
     anchorTarget: PropTypes.string,
     relValue: PropTypes.string,
@@ -17,18 +16,18 @@ class LinkViewer extends Component {
 
   constructor(props) {
     super(props);
-    validate(props.componentData, schema);
+    validate(props.componentData, pluginLinkSchema);
     this.state = { styles };
   }
 
   componentWillReceiveProps(nextProps) {
     if (!isEqual(nextProps.componentData, this.props.componentData)) {
-      validate(nextProps.componentData, schema);
+      validate(nextProps.componentData, pluginLinkSchema);
     }
   }
 
   componentDidMount() {
-    const theme = this.context && this.context.theme;
+    const theme = this.props.theme;
     this.setState({ styles: mergeStyles({ styles, theme }) });
   }
 
@@ -53,7 +52,5 @@ class LinkViewer extends Component {
     return <a {...anchorProps}>{children}</a>;
   }
 }
-
-LinkViewer.contextType = Context.type;
 
 export default LinkViewer;

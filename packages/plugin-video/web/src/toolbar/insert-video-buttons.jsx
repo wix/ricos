@@ -1,6 +1,10 @@
 import { DEFAULTS } from '../video-component';
 // flow
-import { getModalStyles, TOOLBARS, decorateComponentWithProps } from 'wix-rich-content-common';
+import {
+  getModalStyles,
+  TOOLBARS,
+  decorateComponentWithProps,
+} from 'wix-rich-content-editor-common';
 import VideoSelectionInputModal from './videoSelectionInputModal';
 import { InsertPluginIcon } from '../icons';
 import {
@@ -11,8 +15,10 @@ import {
 const createInsertButtons /*: CreateInsertButtons */ = ({ helpers, t, settings, isMobile }) => {
   //apply the extended input modal styles if handleFileSelection is avilable in plugin config
   //& on mobile if enableCustomUploadOnMobile is set to true, otherwise the normal modal styles is applied
+  const icon = settings?.toolbar?.icons?.InsertPluginButtonIcon || InsertPluginIcon;
   const customStyles =
-    (!isMobile || settings.enableCustomUploadOnMobile) && settings.handleFileSelection
+    (!isMobile || settings.enableCustomUploadOnMobile) &&
+    (settings.handleFileSelection || settings.handleFileUpload)
       ? ExtendedSelectionModalCustomStyle
       : SelectionModalCustomStyle;
   return [
@@ -20,7 +26,7 @@ const createInsertButtons /*: CreateInsertButtons */ = ({ helpers, t, settings, 
       type: 'modal',
       name: 'Video',
       tooltipText: t('VideoPlugin_InsertButton_Tooltip'),
-      Icon: InsertPluginIcon,
+      Icon: icon,
       componentData: DEFAULTS,
       toolbars: [TOOLBARS.FOOTER, TOOLBARS.SIDE],
       modalElement: decorateComponentWithProps(VideoSelectionInputModal, settings),

@@ -1,0 +1,35 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://wix-rich-content/vertical-embed-content-data-schema.json",
+    "type": "object",
+    "properties": {
+      "config": {
+        "type": "object",
+        "title": "configuration",
+        "properties": {}
+      },
+      "selectedProduct": {
+        "$id": "/properties/selectedProduct",
+        "type": "object",
+        "title": "selectedProduct",
+        "properties": {
+          "selectedProduct": {
+            "$id": "/properties/selectedProduct",
+            "type": "string",
+            "title": "selectedProduct"
+          },
+          "html": {
+            "$id": "/properties/html",
+            "type": "string",
+            "title": "html"
+          },
+          "name": {
+            "$id": "/properties/name",
+            "type": "string",
+            "title": "name"
+          }
+        }
+      }
+    },
+    "required": ["selectedProduct"]
+}

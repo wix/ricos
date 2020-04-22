@@ -16,6 +16,7 @@
   height: 100%;
   padding: 0 18px;
   box-sizing: border-box;
+  text-decoration: none;
 }
 
 .file_upload_name_container {
@@ -35,7 +36,7 @@
   margin-right: 12px;
   color: #231f20;
 }
-
+/* rtl:ignore */
 .file_loader_icon {
   margin-right: 12px;
   animation-name: spin;
@@ -48,7 +49,6 @@
 .file_upload_type {
   text-transform: uppercase;
   letter-spacing: 0;
-  background: #fff;
   font-size: 14px;
   color: rgb(51, 51, 51);
   opacity: 0.5;
@@ -75,7 +75,7 @@
   line-height: 1.6;
   text-align: center;
 }
-
+/* rtl:ignore */
 @keyframes spin {
   from {
     transform: rotate(0deg);

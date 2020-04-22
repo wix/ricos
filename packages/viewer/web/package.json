@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-viewer",
-  "version": "5.0.1",
+  "version": "7.3.3",
   "author": {
     "name": "Jonathan Bachman",
     "email": "jonathanb@wix.com"
@@ -18,22 +18,26 @@
     "build:dev": "cross-env NODE_ENV=development npm run build",
     "build:analyze": "npm run build -- --environment MODULE_ANALYZE && open stats.html",
     "postbuild": "css-modules-flow-types statics/styles --extension scss && css-modules-flow-types src --extension scss",
-    "watch": "cross-env NODE_ENV=development MODULE_WATCH=1 npm run build -- --watch",
-    "lint": "eslint 'src/**/*.{js,jsx}'"
+    "watch": "cross-env NODE_ENV=development MODULE_WATCH=1 npm run build -- --watch.chokidar",
+    "lint": "eslint 'src/**/*.{js,jsx}'",
+    "test": "jest --verbose"
   },
   "jest": {
+    "globals": {
+      "NODE_ENV": "test"
+    },
+    "transform": {
+      "^.+\\.jsx?$": "<rootDir>/../../../babel.jest.monorepo.js"
+    },
     "moduleNameMapper": {
       "\\.(jpg|jpeg|png|gif|svg)$": "<rootDir>/__mocks__/fileMock.js",
-      "\\.(css|scss)$": "<rootDir>/__mocks__/styleMock.js",
-      "^draft-js$": "<rootDir>/node_modules/@wix/draft-js/dist/Draft.min.js",
-      "^draft-js/.*$": "<rootDir>/node_modules/@wix/draft-js/dist/Draft.min.js",
-      "^@wix/draft-js$": "<rootDir>/node_modules/@wix/draft-js/dist/Draft.min.js"
+      "\\.(css|scss)$": "<rootDir>/__mocks__/styleMock.js"
     }
   },
   "dependencies": {
-    "direction": "~1.0.3",
-    "redraft": "~0.9.1",
-    "wix-rich-content-common": "5.0.1"
+    "classnames": "^2.0.0",
+    "wix-redraft": "1.1.1",
+    "wix-rich-content-common": "7.3.3"
   },
   "peerDependencies": {
     "@babel/runtime": "7.2.0",
@@ -43,16 +47,15 @@
   },
   "devDependencies": {
     "@babel/runtime": "7.2.0",
-    "classnames": "^2.2.6",
     "cross-env": "^5.2.0",
     "eslint": "^6.1.0",
-    "jest": "^23.1.0",
-    "lodash": "^4.17.10",
+    "jest": "^25.1.0",
+    "lodash": "^4.17.15",
     "prop-types": "^15.6.2",
     "react": "16.6.3",
     "react-dom": "16.6.3",
     "react-test-renderer": "16.6.3",
-    "rollup": "1.20.3"
+    "rollup": "1.31.1"
   },
   "unpkg": true,
   "publishConfig": {

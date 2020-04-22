@@ -5,6 +5,39 @@ $opacityTransition: opacity 0.8s ease;
   overflow: hidden;
 }
 
+.expandIcon {
+  height: 40px;
+  width: 40px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 10;
+  color: white;
+  background-image: radial-gradient(
+    circle,
+    rgba(0, 0, 0, 0.3),
+    rgba(0, 0, 0, 0.1),
+    rgba(0, 0, 0, 0.01),
+    transparent
+  );
+
+  path {
+    opacity: 0.8;
+  }
+  &:hover path {
+    opacity: 1;
+  }
+
+  display: none;
+  .imageContainer:hover & {
+    display: block;
+  }
+}
+
+.pointer {
+  cursor: pointer;
+}
+
 .imageWrapper {
   overflow: hidden;
 }
@@ -29,10 +62,11 @@ $opacityTransition: opacity 0.8s ease;
 }
 
 .imageCaption {
+  display: block;
   text-align: center;
   padding: 18px 0;
+  background: none;
   font-size: 14px;
-  line-height: 21px;
 }
 
 .imagePreload {
@@ -42,12 +76,17 @@ $opacityTransition: opacity 0.8s ease;
 }
 
 .imageHighres {
-  z-index: 0;
-  position: absolute;
+  position: relative;
   top: 0;
   left: 0;
+  position: absolute;
   opacity: 0;
   transition: $opacityTransition;
+
+  &.onlyHighRes {
+    position: relative;
+    opacity: 1;
+  }
 }
 
 @keyframes image_loading {

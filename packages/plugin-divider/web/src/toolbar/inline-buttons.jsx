@@ -1,11 +1,12 @@
 // @flow
-import { BUTTONS, AlignCenterIcon, SizeLargeIcon } from 'wix-rich-content-common';
+import { BUTTONS, AlignCenterIcon, SizeLargeIcon } from 'wix-rich-content-editor-common';
 import { changeType, changeAlignmentMobile, changeSizeMobile } from './actions';
 import { isAlignmentDisabled, getNextSizeIcon, getNextAlignmentIcon } from './selectors';
 import { getDropdownOptions, createDropdownValueGetter } from './dropdown-options';
 
-export const createInlineButtons /*: CreateInlineButtons*/ = ({ styles }) => {
+export const createInlineButtons /*: CreateInlineButtons*/ = ({ styles, settings }) => {
   const dropdownOptions = getDropdownOptions(styles);
+  const icons = settings?.toolbar?.icons || {};
   return [
     {
       keyName: 'type',
@@ -23,8 +24,8 @@ export const createInlineButtons /*: CreateInlineButtons*/ = ({ styles }) => {
     { keyName: 'sizeLarge', type: BUTTONS.SIZE_LARGE },
     {
       keyName: 'sizeMobile',
-      type: BUTTONS.TOGGLE,
-      icon: SizeLargeIcon,
+      type: 'custom',
+      icon: icons.sizeMobile || SizeLargeIcon,
       onClick: changeSizeMobile,
       mobile: true,
       desktop: false,
@@ -35,23 +36,23 @@ export const createInlineButtons /*: CreateInlineButtons*/ = ({ styles }) => {
     { keyName: 'separator2', type: BUTTONS.SEPARATOR, mobile: true },
     {
       keyName: 'alignLeft',
-      type: BUTTONS.ALIGNMENT_LEFT,
+      type: BUTTONS.TEXT_ALIGN_LEFT,
       mapComponentDataToButtonProps: componentData => ({
         disabled: isAlignmentDisabled(componentData),
       }),
     },
-    { keyName: 'alignCenter', type: BUTTONS.ALIGNMENT_CENTER },
+    { keyName: 'alignCenter', type: BUTTONS.TEXT_ALIGN_CENTER },
     {
       keyName: 'alignRight',
-      type: BUTTONS.ALIGNMENT_RIGHT,
+      type: BUTTONS.TEXT_ALIGN_RIGHT,
       mapComponentDataToButtonProps: componentData => ({
         disabled: isAlignmentDisabled(componentData),
       }),
     },
     {
       keyName: 'alignMobile',
-      type: BUTTONS.TOGGLE,
-      icon: AlignCenterIcon,
+      type: 'custom',
+      icon: icons.alignMobile || AlignCenterIcon,
       onClick: changeAlignmentMobile,
       mobile: true,
       desktop: false,

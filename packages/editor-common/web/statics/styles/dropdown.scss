@@ -1,0 +1,111 @@
+$dropdown-color: #333;
+$dropdown-highlight: #1234;
+$dropdown-border-color: #ededed;
+$dropdown-font-size: 14px;
+
+.Dropdown-option-icon {
+  display: inline-block;
+  width: 19px;
+  height: 19px;
+  vertical-align: middle;
+  margin: -4px 12px 0 0;
+  color: inherit;
+}
+
+.Dropdown-option-label {
+  display: inline-block;
+  color: inherit;
+  font-size: 14px;
+}
+
+.Dropdown-root {
+  position: relative;
+  font-size: $dropdown-font-size;
+  color: $dropdown-color;
+}
+
+.Dropdown-control {
+  border: none;
+  position: relative;
+  overflow: hidden;
+  background-color: white;
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: all 200ms ease;
+  padding: 10px 62px 10px 0;
+  white-space: nowrap;
+  color: $dropdown-color;
+}
+
+.Dropdown-control:hover {
+  color: $dropdown-highlight;
+}
+
+.Dropdown-arrow {
+  display: block;
+  position: absolute;
+  right: 6px;
+  top: 10px;
+  width: 19px;
+  height: 19px;
+}
+
+.Dropdown-arrow-isOpen {
+  transform: rotate(180deg);
+}
+
+.Dropdown-menu {
+  background-color: white;
+  box-sizing: border-box;
+  max-height: 250px;
+  overflow-y: auto;
+  position: fixed;
+  top: 100%;
+  width: auto;
+  z-index: 1000;
+  -webkit-overflow-scrolling: touch;
+  margin-left: -10px;
+  margin-top: -2px;
+  border: 1px solid $dropdown-border-color;
+  border-radius: 8px;
+  padding: 8px 0px;
+}
+
+.Dropdown-title {
+  padding: 8px 10px;
+  color: rgba(51, 51, 51, 1);
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+.Dropdown-option {
+  border: none;
+  background-color: transparent;
+  box-sizing: border-box;
+  color: $dropdown-color;
+  cursor: pointer;
+  display: block;
+  padding: 0 12px;
+  white-space: nowrap;
+}
+
+.Dropdown-option:last-child {
+  border-bottom-right-radius: 2px;
+  border-bottom-left-radius: 2px;
+}
+
+.Dropdown-option:hover {
+  color: $dropdown-highlight;
+}
+
+.Dropdown-option-selected {
+  color: $dropdown-highlight;
+}
+
+.Dropdown-noresults {
+  box-sizing: border-box;
+  color: $dropdown-color;
+  cursor: default;
+  display: block;
+  padding: 8px 10px;
+}

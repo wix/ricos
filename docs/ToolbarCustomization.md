@@ -102,7 +102,24 @@ The following toolbar types are available:
   - Footer toolbar
 - Plugin functionality toolbars
 
-All the toolbar types are exposed by the `TOOLBARS` const found in [consts.js](https://github.com/wix-incubator/rich-content/blob/master/packages/common/web/src/consts.js).
+All the toolbar types are exposed by the `TOOLBARS` const found in [consts.js](https://github.com/wix-incubator/rich-content/blob/master/packages/editor-common/web/src/consts.js).
+
+### Customizing Text Toolbar Button Icons
+
+In order to use custom button icons in the text toolbars, you can use the `TOOLBARS.TEXT` type (this will affect all text toolbars) along with a `getIcons` function that returns a map of button names to React Components, such as:
+
+```javascript
+getToolbarSettings: ({ pluginButtons, textButtons }) => [
+    {
+      name: TOOLBARS.TEXT,
+      getIcons: () => ({
+        Bold: MyCustomIcon,
+      }),
+    }
+];
+```
+
+All available button names are listed in the [EditorPlugins](https://github.com/wix-incubator/rich-content/blob/master/examples/main/shared/editor/EditorPlugins.jsx) file under the `getToolbarSettings` section.
 
 ### `Settings` properties
 
@@ -120,7 +137,7 @@ All the toolbar types are exposed by the `TOOLBARS` const found in [consts.js](h
 
 #### Display Options
 
-At the moment, the `getDisplayOptions` API consists of a single property `displayMode`. This property accepts two values (defined in [consts.js](https://github.com/wix-incubator/rich-content/blob/master/packages/common/web/src/consts.js)):
+At the moment, the `getDisplayOptions` API consists of a single property `displayMode`. This property accepts two values (defined in [consts.js](https://github.com/wix-incubator/rich-content/blob/master/packages/editor-common/web/src/consts.js)):
 
 - `DISPLAY_MODE.NORMAL` is the default; the toolbars are normally-positioned
 - `DISPLAY_MODE.FLOATING` the toolbars are in fixed position. This, combined with `getVisibilityFn` and `getPositionOffset` properties, causes toolbars to "float".
@@ -141,7 +158,8 @@ So, the `getToolbarDecorationFn` comes to rescue. This function is expected to r
 
 The `getButtons` property, when applied on `TOOLBARS.PLUGIN`, will affect ALL the plugin functionality toolbars. This can be used, for example, to hide size-related buttons for *all* the plugin toolbars.
 
-In order to hide a specific button in a specific plugin toolbar, please use the `config.`*`plugin_type_name`*.`toolbar.hidden` property. For example, to hide the `Replace` button of the `video-plugin` toobar, the following `config` should be provided to the `RichContentEditor`:
+#### Hiding Buttons
+In order to hide a specific button in a specific plugin toolbar, please use the `config.plugin_type_name.toolbar.hidden` property. For example, to hide the `Replace` button of the `video-plugin` toolbar, the following `config` should be provided to the `RichContentEditor`:
 
 ```javascript
 const config = {
@@ -154,6 +172,25 @@ const config = {
 ```
 
 The `hidden` value is expected to be a string array, where every string is the plugin toolbar button `keyName`.
+
+#### Customizing Button Icons
+
+In order to replace a button icon in a specific plugin toolbar or to replace the insert button of a specific plugin, please use the `config.plugin_type_name.toolbar.icons` property. This is a map of button names to React Components. For example, to replace the `Delete` button icon of the `video-plugin` toolbar and the insert button icon of the `video-plugin`, the following `config` should be provided to the `RichContentEditor`:
+(the keyName `InsertPluginButtonIcon` is a generic name for the insert button of each plugin)
+
+```javascript
+const config = {
+  [VIDEO_TYPE]: {
+    toolbar: {
+      icons: {
+        delete: MyCustomDeleteIcon
+        InsertPluginButtonIcon: MyCustomPluginIcon
+      }
+    }
+  }
+};
+```
+
 
 ## References and examples
 

@@ -1,9 +1,8 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { isEqual } from 'lodash';
-import { mergeStyles, validate, Context } from 'wix-rich-content-common';
+import { mergeStyles, validate, pluginFileUploadSchema } from 'wix-rich-content-common';
 import { DocumentIcon, LoaderIcon } from './icons';
-import schema from '../statics/data-schema.json';
 import styles from '../statics/styles/file-upload-viewer.scss';
 
 const getNameWithoutType = fileName => {
@@ -23,13 +22,13 @@ class FileUploadViewer extends PureComponent {
   constructor(props) {
     super(props);
     const { componentData } = props;
-    validate(componentData, schema);
+    validate(componentData, pluginFileUploadSchema);
     this.iframeRef = React.createRef();
   }
 
   componentWillReceiveProps(nextProps) {
     if (!isEqual(nextProps.componentData, this.props.componentData)) {
-      validate(nextProps.componentData, schema);
+      validate(nextProps.componentData, pluginFileUploadSchema);
     }
   }
 
@@ -69,13 +68,14 @@ class FileUploadViewer extends PureComponent {
       error,
       componentData: { name, type },
     } = this.props;
+    const { downloadTarget } = this.props.settings;
 
     if (error) {
       return null;
     }
 
     return (
-      <a href={fileUrl} className={this.styles.file_upload_link}>
+      <a href={fileUrl} target={downloadTarget} className={this.styles.file_upload_link}>
         {this.renderViewerBody({ name, type })}
       </a>
     );
@@ -135,14 +135,14 @@ class FileUploadViewer extends PureComponent {
   }
 
   render() {
-    const { componentData } = this.props;
-    const { theme } = this.context;
+    const { componentData, theme, setComponentUrl } = this.props;
     this.styles = this.styles || mergeStyles({ styles, theme });
 
     const fileUrl = componentData.url || this.state.resolveFileUrl;
+    setComponentUrl?.(fileUrl);
 
     return (
-      <div className={this.styles.file_upload_container}>
+      <div className={this.styles.file_upload_container} data-hook="fileUploadViewer">
         {fileUrl ? this.renderViewer(fileUrl) : this.renderFileUrlResolver()}
         {this.renderError()}
         {this.renderAutoDownloadIframe()}
@@ -156,13 +156,13 @@ FileUploadViewer.propTypes = {
   componentData: PropTypes.object.isRequired,
   error: PropTypes.string,
   settings: PropTypes.object,
+  theme: PropTypes.object.isRequired,
+  setComponentUrl: PropTypes.func,
 };
 
 FileUploadViewer.defaultProps = {
   isLoading: false,
   settings: {},
 };
-
-FileUploadViewer.contextType = Context.type;
 
 export default FileUploadViewer;

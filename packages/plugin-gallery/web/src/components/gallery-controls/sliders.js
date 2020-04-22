@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { SliderWithInput } from 'wix-rich-content-common';
+import { SliderWithInput } from 'wix-rich-content-editor-common';
 
 const propTypes = {
-  value: PropTypes.number.isRequired,
+  value: PropTypes.number,
   theme: PropTypes.object.isRequired,
   onChange: PropTypes.func.isRequired,
   options: PropTypes.object,
@@ -25,6 +25,9 @@ export const ItemsPerRow = props => {
   );
 };
 ItemsPerRow.propTypes = propTypes;
+ItemsPerRow.defaultProps = {
+  value: 3,
+};
 
 export const Spacing = props => {
   const { t } = props;
@@ -39,12 +42,14 @@ export const Spacing = props => {
   );
 };
 Spacing.propTypes = propTypes;
+Spacing.defaultProps = {
+  value: 20,
+};
 
 export const ThumbnailSize = props => (
   <SliderWithInput
     min={10}
     max={1000}
-    readOnly={props.options.readOnly}
     label={props.options.label}
     sliderDataHook="thumbnailSizeSlider"
     inputDataHook="thumbnailSizeInput"
@@ -52,3 +57,6 @@ export const ThumbnailSize = props => (
   />
 );
 ThumbnailSize.propTypes = propTypes;
+ThumbnailSize.defaultProps = {
+  value: 120,
+};

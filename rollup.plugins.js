@@ -1,5 +1,5 @@
 import path from 'path';
-
+const svgr = require('@svgr/rollup').default;
 const IS_DEV_ENV = process.env.NODE_ENV === 'development';
 
 const resolve = () => {
@@ -10,9 +10,13 @@ const resolve = () => {
   });
 };
 
-const builtins = () => {
-  const builtins = require('rollup-plugin-node-builtins');
-  return builtins();
+const resolveAlias = () => {
+  const alias = require('@rollup/plugin-alias');
+  return alias({
+    entries: {
+      'draft-js': '@wix/draft-js',
+    },
+  });
 };
 
 const copy = () => {
@@ -40,20 +44,56 @@ const babel = () => {
   });
 };
 
+const typescript = () => {
+  const typescript = require('rollup-plugin-typescript2');
+  return typescript({ useTsconfigDeclarationDir: true });
+};
+
 const commonjs = () => {
   const commonjs = require('rollup-plugin-commonjs');
-  const named = {
-    imageClientAPI: ['getScaleToFillImageURL', 'getScaleToFitImageURL'],
-    immutable: ['List'],
-  };
-  return commonjs({
-    namedExports: {
-      '../../../node_modules/image-client-api/dist/imageClientSDK.js': [...named.imageClientAPI],
-      'node_modules/image-client-api/dist/imageClientSDK.js': [...named.imageClientAPI],
-      '../../../node_modules/immutable/dist/immutable.js': [...named.immutable],
-      'node_modules/immutable/dist/immutable.js': [...named.immutable],
+  const named = [
+    {
+      path: 'node_modules/image-client-api/dist/imageClientSDK.js',
+      exportList: ['getScaleToFillImageURL', 'getScaleToFitImageURL'],
     },
+    {
+      path: 'node_modules/immutable/dist/immutable.js',
+      exportList: ['List', 'OrderedSet', 'Map'],
+    },
+    {
+      path: 'node_modules/draft-js/lib/Draft.js',
+      exportList: [
+        'SelectionState',
+        'Modifier',
+        'EditorState',
+        'AtomicBlockUtils',
+        'RichUtils',
+        'convertToRaw',
+        'convertFromRaw',
+        'getVisibleSelectionRect',
+        'DefaultDraftBlockRenderMap',
+        'KeyBindingUtil',
+        'genKey',
+        'ContentBlock',
+        'BlockMapBuilder',
+        'CharacterMetadata',
+        'ContentState',
+        'Entity',
+        'RawDraftContentState',
+        'EditorChangeType',
+        'convertFromHTML',
+      ],
+    },
+  ];
+
+  const relativePath = '../../../';
+
+  const namedExports = {};
+  named.forEach(({ path, exportList }) => {
+    namedExports[path] = exportList;
+    namedExports[relativePath + path] = exportList;
   });
+  return commonjs({ namedExports });
 };
 
 const json = () => {
@@ -68,7 +108,7 @@ const json = () => {
   });
 };
 
-const postcss = () => {
+const postcss = shouldExtract => {
   const postcss = require('rollup-plugin-postcss');
   const postcssExclude = require('postcss-exclude-files').default;
   const postcssURL = require('postcss-url');
@@ -81,7 +121,7 @@ const postcss = () => {
     modules: {
       generateScopedName: IS_DEV_ENV ? '[name]__[local]___[hash:base64:5]' : '[hash:base64:5]',
     },
-    extract: 'dist/styles.min.css',
+    extract: shouldExtract && 'dist/styles.min.css',
     plugins: [
       postcssExclude({
         filter: '**/*.rtlignore.scss',
@@ -92,11 +132,6 @@ const postcss = () => {
       }),
     ],
   });
-};
-
-const nodeGlobalsPolyfill = () => {
-  const nodeGlobalsPolyfill = require('rollup-plugin-node-globals');
-  return nodeGlobalsPolyfill();
 };
 
 const replace = () => {
@@ -124,23 +159,22 @@ const visualizer = () => {
   });
 };
 
-let plugins = [
-  resolve(),
-  builtins(),
-  copy(),
-  babel(),
-  commonjs(),
-  json(),
-  postcss(),
-  nodeGlobalsPolyfill(),
-];
+let _plugins = [svgr(), resolveAlias(), resolve(), copy(), babel(), commonjs(), json()];
 
 if (!IS_DEV_ENV) {
-  plugins = [...plugins, replace(), uglify()];
+  _plugins = [..._plugins, replace(), uglify()];
 }
 
 if (process.env.MODULE_ANALYZE) {
-  plugins = [...plugins, visualizer()];
+  _plugins = [..._plugins, visualizer()];
 }
 
-export default plugins;
+if (process.env.MODULE_NAME === 'wrapper') {
+  _plugins = [..._plugins, typescript()];
+}
+
+const plugins = shouldExtractCss => {
+  _plugins.push(postcss(shouldExtractCss));
+  return _plugins;
+};
+export { plugins };

@@ -30,6 +30,11 @@ body {
   #root {
     height: 100%;
 
+    .rtf--mb__c {
+      //fix the fab button so it doesn't conflict with the imageEditor save button'
+      padding-left: 0;
+    }
+
     .wrapper {
       height: 100%;
 
@@ -202,10 +207,6 @@ body {
                   display: flex;
                   flex-direction: column;
                   flex: 1;
-
-                  > div {
-                    flex: 1;
-                  }
                 }
 
                 @include mobile {
@@ -272,4 +273,9 @@ body {
       }
     }
   }
+}
+
+.content-preview {
+  background: #eff;
+  border: 1px solid #eee;
 }

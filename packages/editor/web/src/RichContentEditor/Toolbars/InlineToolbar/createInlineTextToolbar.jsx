@@ -19,6 +19,7 @@ export default data => {
     uiSettings,
     toolbarDecorationFn,
     config,
+    locale,
   } = data;
 
   const structure = getTextButtonsFromList({
@@ -48,5 +49,6 @@ export default data => {
     displayOptions,
     uiSettings,
     toolbarDecorationFn,
+    locale,
   });
 };

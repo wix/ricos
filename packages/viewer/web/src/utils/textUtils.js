@@ -1,7 +1,3 @@
-import direction from 'direction';
-
-export const getTextDirection = text => direction(text);
-
 const kebabToCamel = s => s.replace(/-([a-z])/, (_, p1) => p1.toUpperCase());
 
 export const kebabToCamelObjectKeys = (obj = {}) =>

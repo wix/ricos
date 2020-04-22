@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 // import { translate } from 'react-i18next';
-
-import { mergeStyles, decorateComponentWithProps, SettingsSection } from 'wix-rich-content-common';
+import { mergeStyles } from 'wix-rich-content-common';
+import { decorateComponentWithProps, SettingsSection } from 'wix-rich-content-editor-common';
 import styles from '../../statics/styles/gallery-settings-modal.scss';
 import { Spacing, ItemsPerRow, ThumbnailSize } from './gallery-controls/sliders';
 import {
@@ -54,7 +54,12 @@ class LayoutControlsSection extends Component {
 
   applyGallerySetting = setting => {
     const { data, store } = this.props;
-    const componentData = { ...data, styles: Object.assign({}, data.styles, setting) };
+    const { cubeRatio } = setting;
+    // hotfix- till pro gallery will support cubeRatio field in slider layout
+    if (cubeRatio && data.styles.galleryLayout === 4) {
+      setting.gallerySliderImageRatio = cubeRatio;
+    }
+    const componentData = { ...data, styles: { ...data.styles, ...setting } };
     store.set('componentData', componentData);
   };
 
@@ -78,7 +83,6 @@ class LayoutControlsSection extends Component {
           label: this.getValueFromComponentStyles('isVertical')
             ? t('GallerySettings_LayoutControlSection_Column')
             : t('GallerySettings_LayoutControlSection_Row'),
-          readOnly: this.getValueFromComponentStyles('oneRow'),
         },
       },
     },
@@ -119,20 +123,16 @@ class LayoutControlsSection extends Component {
       props: {
         onChange: value => this.applyGallerySetting({ cubeRatio: value }),
         value: this.getValueFromComponentStyles('cubeRatio'),
-        options: {
-          readOnly: this.getValueFromComponentStyles('cubeType') === 'fit',
-        },
         t,
       },
     },
     imageOrientation: {
       component: ImageOrientation,
       props: {
-        onChange: value => this.applyGallerySetting({ isVertical: value === '1' }),
-        value: this.getValueFromComponentStyles('isVertical') ? '1' : '0',
-        options: {
-          readOnly: this.getValueFromComponentStyles('oneRow'),
+        onChange: value => {
+          this.applyGallerySetting({ isVertical: value === '1' });
         },
+        value: this.getValueFromComponentStyles('isVertical') ? '1' : '0',
         t,
       },
     },

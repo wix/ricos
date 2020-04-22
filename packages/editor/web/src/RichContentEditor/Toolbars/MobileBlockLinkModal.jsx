@@ -7,9 +7,17 @@ export default class MobileBlockLinkModal extends Component {
   hidePopup = () => this.props.hidePopup();
 
   wrapBlockInLink = ({ url, targetBlank, nofollow }) => {
-    const { pubsub } = this.props;
+    const { pubsub, anchorTarget, relValue } = this.props;
+    let target = '_blank',
+      rel = 'nofollow';
+    if (!targetBlank) {
+      target = anchorTarget !== '_blank' ? anchorTarget : '_self';
+    }
+    if (!nofollow) {
+      rel = relValue !== 'nofollow' ? relValue : 'noopener';
+    }
     if (!isEmpty(url)) {
-      pubsub.setBlockData({ key: 'componentLink', item: { url, targetBlank, nofollow } });
+      pubsub.setBlockData({ key: 'componentLink', item: { url, target, rel } });
     } else {
       pubsub.setBlockData({ key: 'componentLink', item: null });
     }
@@ -21,11 +29,20 @@ export default class MobileBlockLinkModal extends Component {
   };
 
   render() {
-    const { pubsub, theme, isMobile, anchorTarget, relValue, t, uiSettings } = this.props;
+    const {
+      pubsub,
+      theme,
+      isMobile,
+      anchorTarget,
+      relValue,
+      t,
+      uiSettings,
+      unchangedUrl,
+    } = this.props;
     const componentLink = pubsub.getBlockData({ key: 'componentLink' });
     const { url, target, rel } = componentLink || {};
-    const targetBlank = target === '_blank';
-    const nofollow = rel === 'nofollow';
+    const targetBlank = target ? target === '_blank' : anchorTarget === '_blank';
+    const nofollow = rel ? rel === 'nofollow' : relValue === 'nofollow';
     return (
       <MobileLinkModal
         url={url}
@@ -41,6 +58,7 @@ export default class MobileBlockLinkModal extends Component {
         onDelete={this.deleteLink}
         uiSettings={uiSettings}
         t={t}
+        unchangedUrl={unchangedUrl}
       />
     );
   }
@@ -58,4 +76,5 @@ MobileBlockLinkModal.propTypes = {
   relValue: PropTypes.string,
   t: PropTypes.func,
   uiSettings: PropTypes.object,
+  unchangedUrl: PropTypes.bool,
 };

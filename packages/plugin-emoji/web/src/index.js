@@ -1,2 +1,3 @@
-export { createExternalEmojiPlugin } from './createEmojiPlugin';
-export { EXTERNAL_EMOJI_TYPE } from './types';
+export { createEmojiPlugin } from './createEmojiPlugin';
+export { EMOJI_TYPE } from './constants';
+export { pluginEmoji } from './editor';

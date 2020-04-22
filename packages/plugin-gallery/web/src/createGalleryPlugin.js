@@ -1,12 +1,14 @@
 import createToolbar from './toolbar';
-import { createBasePlugin } from 'wix-rich-content-common';
-import { Component } from './gallery-component';
+import { createBasePlugin } from 'wix-rich-content-editor-common';
+import { Component, DEFAULTS } from './gallery-component';
 import { GALLERY_TYPE } from './types';
+
+const fileInputAccept = 'image/* || video/*';
 
 const createGalleryPlugin = (config = {}) => {
   const type = GALLERY_TYPE;
   const { helpers, theme, t, anchorTarget, relValue, [type]: settings = {}, ...rest } = config;
-
+  settings.accept = settings.accept || fileInputAccept;
   return createBasePlugin({
     component: Component,
     settings,
@@ -14,6 +16,7 @@ const createGalleryPlugin = (config = {}) => {
     t,
     type,
     toolbar: createToolbar({
+      settings,
       helpers,
       t,
       anchorTarget,
@@ -22,6 +25,8 @@ const createGalleryPlugin = (config = {}) => {
     helpers,
     anchorTarget,
     relValue,
+    disableRightClick: config?.uiSettings?.disableRightClick,
+    defaultPluginData: DEFAULTS,
     ...rest,
   });
 };

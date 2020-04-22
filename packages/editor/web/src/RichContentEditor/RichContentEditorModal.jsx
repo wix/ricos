@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { EditorModals, RichContentModal } from 'wix-rich-content-common';
+import { EditorModals, RichContentModal } from 'wix-rich-content-editor-common';
 import MobileAddPluginModal from './Toolbars/AddPluginModal';
 import MobileBlockLinkModal from './Toolbars/MobileBlockLinkModal';
 import MobileTextLinkModal from './Toolbars/MobileTextLinkModal';
@@ -13,7 +13,7 @@ const Modals = {
 };
 
 const RichContentEditorModal = ({ modalName, modalElement, modalsMap, ...modalProps }) => {
-  const ModalsMap = Object.assign({}, Modals, modalsMap);
+  const ModalsMap = { ...Modals, ...modalsMap };
   const element = ModalsMap[modalName] || modalElement;
   if (!element) {
     console.error(`Attempted to open unknown external modal '${modalName}'`); //eslint-disable-line no-console
@@ -26,7 +26,7 @@ RichContentEditorModal.propTypes = {
   modalName: PropTypes.string,
   modalElement: PropTypes.func,
   modalsMap: PropTypes.object,
-  locale: PropTypes.string.isRequired,
+  locale: PropTypes.string,
   modalProps: PropTypes.object,
 };
 

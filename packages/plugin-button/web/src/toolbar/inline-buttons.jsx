@@ -3,7 +3,7 @@ import {
   getModalStyles,
   PluginSettingsIcon,
   decorateComponentWithProps,
-} from 'wix-rich-content-common';
+} from 'wix-rich-content-editor-common';
 import { Modals } from '../modals';
 import ButtonInputModal from './buttonInputModal';
 
@@ -21,15 +21,16 @@ const MobileFullScreenCustomStyle = {
 
 export default ({ settings, isMobile }) => {
   const customStyles = isMobile ? MobileFullScreenCustomStyle : DesktopCustomModalStyles;
+  const icon = settings?.toolbar?.icons?.['advanced_settings'] || PluginSettingsIcon;
   return [
-    { keyName: 'sizeSmallLeft', type: BUTTONS.SIZE_SMALL_LEFT, mobile: false },
-    { keyName: 'sizeSmallCenter', type: BUTTONS.SIZE_SMALL_CENTER, mobile: false },
-    { keyName: 'sizeSimallRight', type: BUTTONS.SIZE_SMALL_RIGHT, mobile: false },
+    { keyName: 'alignLeft', type: BUTTONS.SIZE_SMALL_LEFT, mobile: false },
+    { keyName: 'alignCenter', type: BUTTONS.SIZE_CONTENT_CENTER, mobile: false },
+    { keyName: 'alignRight', type: BUTTONS.SIZE_SMALL_RIGHT, mobile: false },
     { keyName: 'separator1', type: BUTTONS.SEPARATOR, mobile: false },
     {
       keyName: 'advanced_settings',
       type: BUTTONS.EXTERNAL_MODAL,
-      icon: PluginSettingsIcon,
+      icon,
       modalName: Modals.BUTTON_INPUT,
       activeTab: 'advanced_settings',
       modalElement: decorateComponentWithProps(ButtonInputModal, settings),

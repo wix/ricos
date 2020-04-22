@@ -1,17 +1,18 @@
 // @flow
-import { TOOLBARS } from 'wix-rich-content-common';
-import { getDefault } from './../gallery-component';
+import { TOOLBARS } from 'wix-rich-content-editor-common';
+import { DEFAULTS } from '../gallery-component';
 import { InsertPluginIcon } from '../icons';
 
-const createInsertButtons /*: CreateInsertButtons */ = ({ helpers, t }) => {
+const createInsertButtons /*: CreateInsertButtons */ = ({ helpers, t, settings }) => {
+  const icon = settings?.toolbar?.icons?.InsertPluginButtonIcon || InsertPluginIcon;
   return [
     {
       type: 'file',
       multi: true,
       name: 'Gallery',
       tooltipText: t('GalleryPlugin_InsertButton_Tooltip'),
-      Icon: InsertPluginIcon,
-      componentData: getDefault(),
+      Icon: icon,
+      componentData: DEFAULTS,
       helpers,
       toolbars: [TOOLBARS.FOOTER, TOOLBARS.SIDE],
     },

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import GiphyViewer from './giphy-viewer';
-import { GIPHY_TYPE } from './constants';
+import { GIPHY_TYPE, DEFAULTS } from './constants';
 
 class GiphyComponent extends Component {
   static type = {
@@ -10,11 +10,9 @@ class GiphyComponent extends Component {
 
   constructor(props) {
     super(props);
-    const isPlayable = !props.blockProps || props.blockProps.readOnly === true;
     this.state = {
       isLoading: false,
       isLoaded: false,
-      isPlayable,
     };
   }
 
@@ -25,8 +23,17 @@ class GiphyComponent extends Component {
   };
 
   renderPlayer = () => {
-    const { componentData } = this.props;
-    return <GiphyViewer ref={this.setPlayer} componentData={componentData} />;
+    const { componentData, theme, settings, isMobile, setComponentUrl } = this.props;
+    return (
+      <GiphyViewer
+        ref={this.setPlayer}
+        componentData={componentData}
+        theme={theme}
+        settings={settings}
+        isMobile={isMobile}
+        setComponentUrl={setComponentUrl}
+      />
+    );
   };
 
   onKeyDown = (e, handler) => {
@@ -49,8 +56,11 @@ class GiphyComponent extends Component {
 
 GiphyComponent.propTypes = {
   componentData: PropTypes.object.isRequired,
-  blockProps: PropTypes.object.isRequired,
   onClick: PropTypes.func.isRequired,
+  settings: PropTypes.object.isRequired,
+  isMobile: PropTypes.bool.isRequired,
+  theme: PropTypes.object.isRequired,
+  setComponentUrl: PropTypes.func,
 };
 
-export { GiphyComponent as Component };
+export { GiphyComponent as Component, DEFAULTS };

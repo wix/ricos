@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { LinkPanelContainer } from 'wix-rich-content-common';
+import { LinkPanelContainer } from 'wix-rich-content-editor-common';
 import { LinkIcon } from '../Icons';
 import styles from '../../../statics/styles/mobile-link-modal.scss';
 
@@ -20,6 +20,7 @@ export default class MobileLinkModal extends Component {
       onDelete,
       t,
       uiSettings,
+      unchangedUrl,
     } = this.props;
     const mobileLinkModalTitle = t('MobileLinkModal_Title');
     return (
@@ -43,10 +44,12 @@ export default class MobileLinkModal extends Component {
           isMobile={isMobile}
           onDone={onDone}
           onCancel={onCancel}
+          hidePanel={onCancel}
           onDelete={onDelete}
           t={t}
           ariaProps={{ 'aria-labelledby': 'mob_link_modal_hdr' }}
           uiSettings={uiSettings}
+          unchangedUrl={unchangedUrl}
         />
       </div>
     );
@@ -67,4 +70,5 @@ MobileLinkModal.propTypes = {
   nofollow: PropTypes.bool,
   t: PropTypes.func,
   uiSettings: PropTypes.object,
+  unchangedUrl: PropTypes.bool,
 };

@@ -1,4 +1,5 @@
-import { createBasePlugin, mergeStyles, decorateComponentWithProps } from 'wix-rich-content-common';
+import { mergeStyles } from 'wix-rich-content-common';
+import { createBasePlugin, decorateComponentWithProps } from 'wix-rich-content-editor-common';
 import createMentionPlugin from 'draft-js-mention-plugin';
 import { DEFAULT_SETTINGS } from './defaultSettings';
 import { EXTERNAL_MENTIONS_TYPE } from './types';
@@ -18,6 +19,7 @@ Interface Settings {
   mentionPrefix?: string;
   mentionTrigger?: string;
   getMentionLink?: (mention: Mention) => string;
+  visibleItemsBeforeOverflow?: number, // how many items should be visible before overflowing
   getMentions: (search: string) => Promise<Mention[]>
   onMentionClick: (mention: Mention) => void;
   repositionSuggestions: boolean, // when you are in iframe and want suggestions to be repositioned if they go out of iframe
@@ -30,7 +32,7 @@ const createExternalMentionsPlugin = (config = {}) => {
   const type = EXTERNAL_MENTIONS_TYPE;
   const { theme, [type]: mentionSettings = {}, ...rest } = config;
   const styles = mergeStyles({ styles: Styles, theme });
-  const settings = Object.assign({}, DEFAULT_SETTINGS, mentionSettings);
+  const settings = { ...DEFAULT_SETTINGS, ...mentionSettings };
 
   const plugin = createMentionPlugin({
     mentionComponent: decorateComponentWithProps(MentionComponent, { settings }),
@@ -41,6 +43,7 @@ const createExternalMentionsPlugin = (config = {}) => {
       entryHeight: settings.entryHeight,
       additionalHeight: settings.additionalHeight,
       reposition: settings.repositionSuggestions,
+      visibleItemsBeforeOverflow: settings.visibleItemsBeforeOverflow,
     }),
   });
 

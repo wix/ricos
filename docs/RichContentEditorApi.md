@@ -24,3 +24,7 @@ The return value is a function that is used as the `draft-js` [handleReturn canc
 ## `config`
 
 The `config` prop allow to customize various aspects of the `RichContentEditor`, such as [toolbars](./ToolbarCustomization.md), [common UI settings](./UiSettings.md), and [plugins](./PluginCustomization.md).
+
+## `shouldRenderOptimizedImages`
+
+When true, images will be rendered in high resolution. Useful for forcing high resolution rendering for crawlers relevant to SEO.

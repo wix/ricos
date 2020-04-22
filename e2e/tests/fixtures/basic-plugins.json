@@ -1,0 +1,120 @@
+{
+    "blocks": [
+      {
+        "key": "foo",
+        "text": "Bold, Underline and italic",
+        "type": "unstyled",
+        "depth": 0,
+        "inlineStyleRanges": [
+          {
+            "offset": 0,
+            "length": 4,
+            "style": "BOLD"
+          },
+          {
+            "offset": 6,
+            "length": 10,
+            "style": "UNDERLINE"
+          },
+          {
+            "offset": 20,
+            "length": 6,
+            "style": "ITALIC"
+          }
+        ],
+        "entityRanges": [],
+        "data": {}
+      },
+      {
+        "key": "8d3p5",
+        "text": "This is a #hashtag",
+        "type": "unstyled",
+        "depth": 0,
+        "inlineStyleRanges": [],
+        "entityRanges": [],
+        "data": {}
+      },
+      {
+        "key": "fcm70",
+        "text": "Mentions too @Test One ",
+        "type": "unstyled",
+        "depth": 0,
+        "inlineStyleRanges": [],
+        "entityRanges": [
+          {
+            "offset": 13,
+            "length": 9,
+            "key": 0
+          }
+        ],
+        "data": {}
+      },
+      {
+        "key": "fold4",
+        "text": "",
+        "type": "unstyled",
+        "depth": 0,
+        "inlineStyleRanges": [],
+        "entityRanges": [],
+        "data": {}
+      },
+      {
+        "key": "1nuuu",
+        "text": "And here's a divider:",
+        "type": "unstyled",
+        "depth": 0,
+        "inlineStyleRanges": [],
+        "entityRanges": [],
+        "data": {}
+      },
+      {
+        "key": "af9n",
+        "text": " ",
+        "type": "atomic",
+        "depth": 0,
+        "inlineStyleRanges": [],
+        "entityRanges": [
+          {
+            "offset": 0,
+            "length": 1,
+            "key": 1
+          }
+        ],
+        "data": {}
+      },
+      {
+        "key": "5h7av",
+        "text": "",
+        "type": "unstyled",
+        "depth": 0,
+        "inlineStyleRanges": [],
+        "entityRanges": [],
+        "data": {}
+      }
+    ],
+    "entityMap": {
+      "0": {
+        "type": "mention",
+        "mutability": "SEGMENTED",
+        "data": {
+          "mention": {
+            "name": "Test One",
+            "slug": "testone"
+          }
+        }
+      },
+      "1": {
+        "type": "wix-draft-plugin-divider",
+        "mutability": "IMMUTABLE",
+        "data": {
+          "type": "single",
+          "config": {
+            "size": "large",
+            "alignment": "center",
+            "textWrap": "nowrap"
+          }
+        }
+      }
+    },
+    "VERSION": "6.8.1"
+  }

@@ -1,6 +1,5 @@
 const path = require('path');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 const DotenvWebpackPlugin = require('dotenv-webpack');
 const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 
@@ -23,25 +22,22 @@ module.exports = env => ({
     extensions: ['.js', '.jsx', '.json'],
     symlinks: false,
     alias: {
-      'draft-js': path.resolve(PATHS.monorepo_root, 'node_modules', '@wix', 'draft-js'),
-      'react-hot-loader': path.resolve(PATHS.monorepo_root, 'node_modules', 'react-hot-loader'),
-      '@wix/draft-js': path.resolve(PATHS.monorepo_root, 'node_modules', '@wix', 'draft-js'),
       'wix-rich-content-common': path.resolve(PATHS.monorepo_root, 'packages', 'common', 'web'),
+      'wix-rich-content-editor-common': path.resolve(
+        PATHS.monorepo_root,
+        'packages',
+        'editor-common',
+        'web'
+      ),
     },
   },
   module: {
     rules: [
       {
-        test: /\.js(x)?$/,
-        exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            compact: true,
-            rootMode: 'upward',
-            plugins: ['react-hot-loader/babel'],
-          },
-        },
+        test: /\.js$/,
+        use: ['source-map-loader'],
+        enforce: 'pre',
+        include: [/\*wix-rich-content-*/],
       },
       {
         test: /\.css$/,
@@ -49,7 +45,7 @@ module.exports = env => ({
           {
             loader: 'style-loader',
             options: {
-              insertAt: 'top',
+              insert: 'head',
             },
           },
           'css-loader',
@@ -134,14 +130,8 @@ module.exports = env => ({
         viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no',
       },
     }),
-    new CopyWebpackPlugin([
-      {
-        from: 'node_modules/wix-rich-content-plugin-html/dist/statics/',
-        to: 'static/',
-      },
-    ]),
     new DotenvWebpackPlugin({
-      path: path.resolve(PATHS.root, '..', '..', '.env'),
+      path: path.resolve(PATHS.monorepo_root, '.env'),
     }),
     new MonacoWebpackPlugin({
       languages: ['json'],

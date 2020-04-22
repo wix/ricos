@@ -1,16 +1,21 @@
 import React from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { BLOCK_TYPES } from 'wix-rich-content-common';
-import redraft from 'redraft';
+import redraft from 'wix-redraft';
 import classNames from 'classnames';
 import { endsWith } from 'lodash';
 import List from '../List';
 import getPluginViewers from '../getPluginViewers';
-import { getTextDirection, kebabToCamelObjectKeys } from './textUtils';
+import { kebabToCamelObjectKeys } from './textUtils';
+import { getTextDirection } from './textDirection';
 import { staticInlineStyleMapper } from '../staticInlineStyleMapper';
+import { combineMappers } from './combineMappers';
+import { getInteractionWrapper, DefaultInteractionWrapper } from './getInteractionWrapper';
 
 const isEmptyContentState = raw =>
-  !raw || !raw.blocks || (raw.blocks.length === 1 && raw.blocks[0].text === '');
+  !raw ||
+  !raw.blocks ||
+  (raw.blocks.length === 1 && raw.blocks[0].text === '' && raw.blocks[0].type === 'unstyled');
 
 const isEmptyBlock = ([_, data]) => data && data.length === 0; //eslint-disable-line no-unused-vars
 
@@ -18,15 +23,21 @@ const getBlockStyleClasses = (data, mergedStyles, textDirection, classes) => {
   const rtl = textDirection === 'rtl' || data.textDirection === 'rtl';
   const defaultTextAlignment = rtl ? 'right' : 'left';
   const alignmentClass = data.textAlignment || defaultTextAlignment;
-  return classNames(classes, { [mergedStyles.rtl]: rtl }, mergedStyles[alignmentClass]);
+  return classNames(
+    classes,
+    { [mergedStyles.rtl]: rtl, [mergedStyles.ltr]: !rtl },
+    mergedStyles[alignmentClass]
+  );
 };
+
+let blockCount = 0;
 
 const blockDataToStyle = ({ dynamicStyles }) => kebabToCamelObjectKeys(dynamicStyles);
 
 const getInline = (inlineStyleMappers, mergedStyles) =>
   combineMappers([...inlineStyleMappers, staticInlineStyleMapper], mergedStyles);
 
-const getBlocks = (mergedStyles, textDirection) => {
+const getBlocks = (contentState, mergedStyles, textDirection, context, addAnchors) => {
   const getList = ordered => (items, blockProps) => {
     const fixedItems = items.map(item => (item.length ? item : [' ']));
 
@@ -39,6 +50,7 @@ const getBlocks = (mergedStyles, textDirection) => {
       blockProps,
       getBlockStyleClasses,
       blockDataToStyle,
+      contentState,
     };
     return <List {...props} />;
   };
@@ -46,9 +58,16 @@ const getBlocks = (mergedStyles, textDirection) => {
   const blockFactory = (type, style, withDiv) => {
     return (children, blockProps) =>
       children.map((child, i) => {
-        const Type = typeof type === 'string' ? type : type(child);
-        return (
-          <Type
+        const ChildTag = typeof type === 'string' ? type : type(child);
+
+        const { interactions } = blockProps.data[i];
+        const BlockWrapper = Array.isArray(interactions)
+          ? getInteractionWrapper({ interactions, context })
+          : DefaultInteractionWrapper;
+
+        const _child = isEmptyBlock(child) ? <br /> : withDiv ? <div>{child}</div> : child;
+        const inner = (
+          <ChildTag
             className={getBlockStyleClasses(
               blockProps.data[i],
               mergedStyles,
@@ -58,9 +77,29 @@ const getBlocks = (mergedStyles, textDirection) => {
             style={blockDataToStyle(blockProps.data[i])}
             key={blockProps.keys[i]}
           >
-            {withDiv ? <div>{child}</div> : child}
-          </Type>
+            {_child}
+          </ChildTag>
         );
+
+        const blockWrapper = (
+          <BlockWrapper key={`${blockProps.keys[i]}_wrap`}>{inner}</BlockWrapper>
+        );
+
+        const shouldAddAnchors = addAnchors && !isEmptyBlock(child);
+        let resultBlock = blockWrapper;
+
+        if (shouldAddAnchors) {
+          blockCount++;
+          const anchorKey = `${addAnchors}${blockCount}`;
+          resultBlock = (
+            <>
+              {blockWrapper}
+              {<div key={anchorKey} data-hook={anchorKey} />}
+            </>
+          );
+        }
+
+        return resultBlock;
       });
   };
 
@@ -70,6 +109,9 @@ const getBlocks = (mergedStyles, textDirection) => {
     'header-one': blockFactory('h1', 'headerOne'),
     'header-two': blockFactory('h2', 'headerTwo'),
     'header-three': blockFactory('h3', 'headerThree'),
+    'header-four': blockFactory('h4', 'headerFour'),
+    'header-five': blockFactory('h5', 'headerFive'),
+    'header-six': blockFactory('h6', 'headerSix'),
     'code-block': blockFactory('pre', 'codeBlock'),
     'unordered-list-item': getList(false),
     'ordered-list-item': getList(true),
@@ -77,7 +119,17 @@ const getBlocks = (mergedStyles, textDirection) => {
 };
 
 const getEntities = (typeMap, pluginProps, styles) => {
-  return getPluginViewers(typeMap, pluginProps, styles);
+  const emojiViewerFn = (emojiUnicode, data, { key }) => {
+    return (
+      <span key={key} style={{ fontFamily: 'cursive' }}>
+        {emojiUnicode}
+      </span>
+    );
+  };
+  return {
+    EMOJI_TYPE: emojiViewerFn,
+    ...getPluginViewers(typeMap, pluginProps, styles),
+  };
 };
 
 const normalizeContentState = contentState => ({
@@ -100,19 +152,12 @@ const normalizeContentState = contentState => ({
 
     return {
       ...block,
+      depth: 0,
       data,
       text,
     };
   }),
 });
-
-const combineMappers = (mappers, ...args) => {
-  if (!mappers || !mappers.length || mappers.some(resolver => typeof resolver !== 'function')) {
-    console.warn(`${mappers} is expected to be a function array`); // eslint-disable-line no-console
-    return {};
-  }
-  return mappers.reduce((map, mapper) => Object.assign(map, mapper(...args)), {});
-};
 
 const redraftOptions = {
   cleanup: {
@@ -125,8 +170,12 @@ const redraftOptions = {
       'header-one',
       'header-two',
       'header-three',
+      'header-four',
+      'header-five',
+      'header-six',
     ],
   },
+  convertFromRaw: contentState => contentState,
 };
 
 const convertToReact = (
@@ -143,15 +192,19 @@ const convertToReact = (
     return null;
   }
 
+  const { addAnchors, ...restOptions } = options;
+
+  const parsedAddAnchors = addAnchors && (addAnchors === true ? 'rcv-block' : addAnchors);
+  blockCount = 0;
   return redraft(
     normalizeContentState(contentState),
     {
       inline: getInline(inlineStyleMappers, mergedStyles),
-      blocks: getBlocks(mergedStyles, textDirection),
+      blocks: getBlocks(contentState, mergedStyles, textDirection, entityProps, parsedAddAnchors),
       entities: getEntities(combineMappers(typeMap), entityProps, mergedStyles),
       decorators,
     },
-    { ...redraftOptions, ...options }
+    { ...redraftOptions, ...restOptions }
   );
 };
 
@@ -168,6 +221,7 @@ const convertToHTML = (
     return null;
   }
 
+  blockCount = 0;
   const reactOutput = convertToReact(
     contentState,
     mergedStyles,

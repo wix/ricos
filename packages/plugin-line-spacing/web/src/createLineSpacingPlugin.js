@@ -1,4 +1,4 @@
-import { createBasePlugin } from 'wix-rich-content-common';
+import { createBasePlugin } from 'wix-rich-content-editor-common';
 import { LINE_SPACING_TYPE } from './types';
 import createLineSpacingToolbar from './toolbar/createLineSpacingToolbar';
 

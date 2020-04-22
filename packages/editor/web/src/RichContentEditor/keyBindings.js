@@ -1,6 +1,5 @@
-import { KeyBindingUtil, getDefaultKeyBinding } from '@wix/draft-js';
 import { isEqual } from 'lodash';
-import { COMMANDS, MODIFIERS } from 'wix-rich-content-common';
+import { COMMANDS, MODIFIERS, KeyBindingUtil } from 'wix-rich-content-editor-common';
 
 const COMMAND_BY_SHORTCUT = [
   {
@@ -15,17 +14,17 @@ const COMMAND_BY_SHORTCUT = [
   },
   {
     command: COMMANDS.ALIGN_LEFT,
-    modifiers: [MODIFIERS.COMMAND],
+    modifiers: [MODIFIERS.COMMAND, MODIFIERS.SHIFT],
     key: 'l',
   },
   {
     command: COMMANDS.ALIGN_RIGHT,
-    modifiers: [MODIFIERS.COMMAND],
+    modifiers: [MODIFIERS.COMMAND, MODIFIERS.SHIFT],
     key: 'r',
   },
   {
     command: COMMANDS.ALIGN_CENTER,
-    modifiers: [MODIFIERS.COMMAND],
+    modifiers: [MODIFIERS.COMMAND, MODIFIERS.SHIFT],
     key: 'e',
   },
   {
@@ -55,34 +54,29 @@ const COMMAND_BY_SHORTCUT = [
   },
 ];
 
-const { hasCommandModifier, isCtrlKeyCommand, isOptionKeyCommand } = KeyBindingUtil;
+const { hasCommandModifier, isOptionKeyCommand } = KeyBindingUtil;
 
 function getModifiers(e) {
   return [
     ...(hasCommandModifier(e) ? [MODIFIERS.COMMAND] : []),
-    ...(isCtrlKeyCommand(e) ? [MODIFIERS.CTRL] : []),
     ...(isOptionKeyCommand(e) ? [MODIFIERS.OPTION] : []),
     ...(e.shiftKey ? [MODIFIERS.SHIFT] : []),
   ];
 }
 
 function getCommandByShortcut(shortcut, bindingMap) {
-  if (!shortcut) {
-    return null;
-  }
-
   const commands = bindingMap
     .filter(mapped => mapped.key === shortcut.key && isEqual(mapped.modifiers, shortcut.modifiers))
     .map(mapped => mapped.command);
 
-  return commands.length > 0 ? commands[0] : null;
+  return commands.length > 0 ? commands[0] : undefined;
 }
 
-export const keyBindingFn = customCommands => {
+export const createKeyBindingFn = customCommands => {
   const bindingMap = [...COMMAND_BY_SHORTCUT, ...customCommands];
   return e => {
     const shortcut = { modifiers: getModifiers(e), key: e.key };
-    return getCommandByShortcut(shortcut, bindingMap) || getDefaultKeyBinding(e);
+    return getCommandByShortcut(shortcut, bindingMap);
   };
 };
 
@@ -104,9 +98,8 @@ export const initPluginKeyBindings = pluginTextButtons =>
               // handlers per button
               const buttonCommandHandlers = {};
               buttonData[key].keyBindings.forEach(binding => {
-                Object.assign(buttonCommandHandlers, {
-                  [`${binding.keyCommand.command}_${i}`]: binding.commandHandler,
-                });
+                buttonCommandHandlers[`${binding.keyCommand.command}_${i}`] =
+                  binding.commandHandler;
               });
               // merge all button commands and handlers
               return {

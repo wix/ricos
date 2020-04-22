@@ -71,7 +71,11 @@ class GiphySelector extends Component {
   onClick = gif => {
     const gifObj = {
       originalUrl: gif.images.original.url,
+      originalMp4: gif.images.original.mp4,
       stillUrl: gif.images.original_still.url,
+      downsizedUrl: gif.images.downsized.url,
+      downsizedStillUrl: gif.images.downsized_still.url,
+      downsizedSmallMp4: gif.images.downsized_small.mp4,
       height: parseInt(gif.images.original.height),
       width: parseInt(gif.images.original.width),
     };

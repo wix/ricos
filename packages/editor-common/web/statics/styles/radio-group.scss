@@ -1,0 +1,43 @@
+.radioGroup {
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1.5;
+
+  &:hover .radioGroup_button {
+    border-color: #000000;
+  }
+}
+
+.radioGroup_button {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  box-sizing: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.6);
+  background: #fff;
+  margin-right: 12px;
+  display: inline-block;
+
+  &::after {
+    content: '';
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    position: relative;
+    top: 2px;
+    left: 2px;
+    display: block;
+  }
+}
+
+.radioGroup_input {
+  display: none;
+}
+
+.radioGroup_input:checked + .radioGroup_button {
+  border-color: rgba(0, 0, 0, 0.6);
+
+  &::after {
+    background-color: #0261ff;
+  }
+}

@@ -3,7 +3,7 @@ const execSync = require('child_process').execSync;
 const chalk = require('chalk');
 const semver = require('semver');
 const { get, memoize } = require('lodash');
-const lernaPackages = require('lerna-packages');
+const { getPackages } = require('@lerna/project');
 
 const LATEST_TAG = 'latest';
 const NEXT_TAG = 'next';
@@ -93,16 +93,25 @@ function createNpmRc() {
 }
 
 function publishPackages() {
-  lernaPackages()
-    .filter(p => !p.private)
-    .forEach(p => release(p));
+  getPackages().then(allPackages => {
+    allPackages
+      .filter(pkg => !pkg.private)
+      .forEach(pkg =>
+        release({
+          name: pkg.name,
+          version: pkg.version,
+          registry: pkg.get('publishConfig').registry,
+          path: pkg.location,
+        })
+      );
+  });
 }
 
 function run() {
   let skip;
   const { FORCE_PUBLISH, TRAVIS_BRANCH, CI } = process.env;
-  if (TRAVIS_BRANCH !== 'master' && !FORCE_PUBLISH) {
-    skip = 'Not on master branch';
+  if (!TRAVIS_BRANCH.startsWith('release') && !FORCE_PUBLISH) {
+    skip = 'Not on a release branch';
   } else if (!CI) {
     skip = 'Not in CI';
   }

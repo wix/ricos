@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { mergeStyles, getImageSrc } from 'wix-rich-content-common';
 import {
-  mergeStyles,
-  getImageSrc,
   Image,
-  Loader,
   InputWithLabel,
   LinkPanel,
   SettingsPanelFooter,
   SettingsSection,
-} from 'wix-rich-content-common';
+  Loader,
+} from 'wix-rich-content-editor-common';
 import ImageSettingsMobileHeader from './image-settings-mobile-header';
 import styles from '../../statics/styles/image-settings.scss';
 
@@ -41,8 +40,8 @@ class ImageSettings extends Component {
       metadata,
       linkPanelValues: {
         url,
-        targetBlank: target === '_blank',
-        nofollow: rel === 'nofollow',
+        targetBlank: target ? target === '_blank' : this.props.anchorTarget === '_blank',
+        nofollow: rel ? rel === 'nofollow' : this.props.relValue === 'nofollow',
       },
     };
   }
@@ -55,12 +54,14 @@ class ImageSettings extends Component {
     this.props.pubsub.unsubscribe('componentData', this.onComponentUpdate);
   }
 
-  onComponentUpdate = () => this.forceUpdate();
+  onComponentUpdate = () => {
+    this.setState({ src: this.props.pubsub.get('componentData').src });
+  };
 
   revertComponentData() {
     const { componentData, helpers, pubsub } = this.props;
     if (this.initialState) {
-      const initialComponentData = Object.assign({}, componentData, { ...this.initialState });
+      const initialComponentData = { ...componentData, ...this.initialState };
       pubsub.update('componentData', initialComponentData);
       this.setState({ ...this.initialState });
     }
@@ -68,8 +69,7 @@ class ImageSettings extends Component {
   }
 
   metadataUpdated = (metadata, value) => {
-    const updatedMetadata = Object.assign({}, metadata, value);
-    this.setState({ metadata: updatedMetadata });
+    this.setState({ metadata: { ...metadata, ...value } });
   };
 
   addMetadataToBlock = () => {
@@ -89,10 +89,20 @@ class ImageSettings extends Component {
 
   saveLink = () => {
     const { linkPanelValues } = this.state;
-    if (linkPanelValues.url === '') {
+    const { anchorTarget, relValue } = this.props;
+    const { url, targetBlank, nofollow, isValid } = linkPanelValues;
+    let target = '_blank',
+      rel = 'nofollow';
+    if (!targetBlank) {
+      target = anchorTarget !== '_blank' ? anchorTarget : '_self';
+    }
+    if (!nofollow) {
+      rel = relValue !== 'nofollow' ? relValue : 'noopener';
+    }
+    if (url === '') {
       this.setBlockLink(null);
-    } else if (linkPanelValues.isValid) {
-      this.setBlockLink(linkPanelValues);
+    } else if (isValid) {
+      this.setBlockLink({ url, target, rel });
     }
   };
 
@@ -116,15 +126,12 @@ class ImageSettings extends Component {
     const { src, metadata = {} } = this.state;
 
     const { linkPanel } = uiSettings || {};
-    const { blankTargetToggleVisibilityFn, nofollowRelToggleVisibilityFn } = linkPanel || {};
+    const { blankTargetToggleVisibilityFn, nofollowRelToggleVisibilityFn, placeholder } =
+      linkPanel || {};
     const showTargetBlankCheckbox =
       blankTargetToggleVisibilityFn && blankTargetToggleVisibilityFn(anchorTarget);
     const showRelValueCheckbox =
       nofollowRelToggleVisibilityFn && nofollowRelToggleVisibilityFn(relValue);
-
-    if (!src) {
-      return <Loader type={'medium'} />; //do not render until the src is passed
-    }
 
     return (
       <div className={this.styles.imageSettings} data-hook="imageSettings" dir={languageDir}>
@@ -146,19 +153,29 @@ class ImageSettings extends Component {
         >
           <SettingsSection
             theme={theme}
-            ariaProps={{ 'aria-label': 'image preview', role: 'region' }}
+            ariaProps={{
+              'aria-label': 'image preview',
+              role: 'region',
+              'data-hook': 'imagePreview',
+            }}
           >
-            <Image
-              alt={metadata.alt || 'image preview'}
-              resizeMode={'contain'}
-              className={this.styles.imageSettingsImage}
-              src={getImageSrc(src, helpers, {
-                requiredWidth: 1000,
-                requiredHeight: 250,
-                requiredQuality: 80,
-              })}
-              theme={theme}
-            />
+            {src ? (
+              <Image
+                alt={metadata.alt || 'image preview'}
+                resizeMode={'contain'}
+                className={this.styles.imageSettingsImage}
+                src={getImageSrc(src, helpers, {
+                  requiredWidth: 1000,
+                  requiredHeight: 250,
+                  requiredQuality: 80,
+                })}
+                theme={theme}
+              />
+            ) : (
+              <div className={this.styles.imageSettingsImage}>
+                <Loader type={'medium'} />
+              </div>
+            )}
           </SettingsSection>
           <SettingsSection
             theme={theme}
@@ -207,6 +224,7 @@ class ImageSettings extends Component {
               t={t}
               ariaProps={{ 'aria-labelledby': 'image_settings_link_lbl' }}
               languageDir={languageDir}
+              placeholder={placeholder}
             />
           </SettingsSection>
         </div>

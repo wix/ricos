@@ -1,5 +1,5 @@
 import InlineToolbar from './InlineToolbar';
-import { simplePubsub, decorateComponentWithProps } from 'wix-rich-content-common';
+import { simplePubsub, decorateComponentWithProps } from 'wix-rich-content-editor-common';
 
 const createInlineToolbar = (config = {}) => {
   const {
@@ -17,6 +17,7 @@ const createInlineToolbar = (config = {}) => {
     visibilityFn,
     displayOptions,
     toolbarDecorationFn,
+    locale,
   } = config;
 
   const toolbarProps = {
@@ -33,6 +34,7 @@ const createInlineToolbar = (config = {}) => {
     visibilityFn,
     displayOptions,
     toolbarDecorationFn,
+    locale,
   };
 
   return {

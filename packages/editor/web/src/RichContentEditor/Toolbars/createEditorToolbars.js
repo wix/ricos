@@ -1,11 +1,11 @@
 import {
   simplePubsub,
   getToolbarTheme,
-  getConfigByFormFactor,
   TOOLBARS,
   DISPLAY_MODE,
   mergeToolbarSettings,
-} from 'wix-rich-content-common';
+  isiOS,
+} from 'wix-rich-content-editor-common';
 import { getDefaultToolbarSettings } from './default-toolbar-settings';
 import { MobileTextButtonList, DesktopTextButtonList } from './buttons';
 import {
@@ -13,6 +13,7 @@ import {
   mergeButtonLists,
   reducePluginTextButtons,
 } from './buttons/utils';
+import { get } from 'lodash';
 
 const appendSeparator = ({ mergedList, sourceList, buttonData, formFactor }) => {
   if (
@@ -27,25 +28,11 @@ const appendSeparator = ({ mergedList, sourceList, buttonData, formFactor }) => 
   return mergedList;
 };
 
-const createEditorToolbars = ({
-  buttons,
-  anchorTarget,
-  relValue,
-  textAlignment,
-  helpers,
-  isMobile,
-  theme,
-  getEditorState,
-  setEditorState,
-  getEditorBounds,
-  t,
-  refId,
-  getToolbarSettings = () => [],
-  uiSettings,
-  config,
-  locale,
-}) => {
+const createEditorToolbars = ({ buttons, textAlignment, refId, context }) => {
+  const { uiSettings, getToolbarSettings = () => [] } = context.config;
   const { pluginButtons, pluginTextButtons } = buttons;
+
+  const { isMobile, theme = {} } = context;
 
   const pubsub = simplePubsub();
 
@@ -81,12 +68,11 @@ const createEditorToolbars = ({
   });
   const toolbarSettings = mergeToolbarSettings({ defaultSettings, customSettings });
   const toolbars = {};
+  const deviceName = !isMobile ? 'desktop' : isiOS() ? 'mobile.ios' : 'mobile.android';
 
   toolbarSettings
     .filter(({ name }) => name !== TOOLBARS.PLUGIN)
-    .filter(({ shouldCreate }) =>
-      getConfigByFormFactor({ config: shouldCreate(), isMobile, defaultValue: true })
-    )
+    .filter(({ shouldCreate }) => get(shouldCreate(), deviceName, true))
     .forEach(
       ({
         name,
@@ -99,48 +85,21 @@ const createEditorToolbars = ({
         getToolbarDecorationFn,
       }) => {
         toolbars[name] = getInstance({
-          displayOptions: getConfigByFormFactor({
-            config: getDisplayOptions(),
-            isMobile,
-            defaultValue: { displayMode: DISPLAY_MODE.NORMAL },
+          ...context,
+          displayOptions: get(getDisplayOptions(), deviceName, {
+            displayMode: DISPLAY_MODE.NORMAL,
           }),
-          toolbarDecorationFn: getConfigByFormFactor({
-            config: getToolbarDecorationFn(),
-            isMobile,
-            defaultValue: () => null,
-          }),
-          textPluginButtons: getConfigByFormFactor({
-            config: getTextPluginButtons(),
-            isMobile,
-            defaultValue: [],
-          }),
-          offset: getConfigByFormFactor({
-            config: getPositionOffset(),
-            isMobile,
-            defaultValue: { x: 0, y: 0 },
-          }),
-          visibilityFn: getConfigByFormFactor({
-            config: getVisibilityFn(),
-            isMobile,
-            defaultValue: () => true,
-          }),
-          buttons: getConfigByFormFactor({ config: getButtons(), isMobile, defaultValue: [] }),
+          toolbarDecorationFn: get(getToolbarDecorationFn(), deviceName, () => null),
+          textPluginButtons: get(getTextPluginButtons(), deviceName, []),
+          offset: get(getPositionOffset(), deviceName, { x: 0, y: 0 }),
+          visibilityFn: get(getVisibilityFn(), deviceName, () => true),
+          buttons: get(getButtons(), deviceName, []),
           theme: { ...getToolbarTheme(theme, name.toLowerCase()), ...theme },
           defaultTextAlignment: textAlignment,
-          getEditorBounds,
-          getEditorState,
-          setEditorState,
           pluginButtons,
-          anchorTarget,
           uiSettings,
-          relValue,
-          isMobile,
-          helpers,
-          config,
           pubsub,
-          locale,
           refId,
-          t,
         });
       }
     );

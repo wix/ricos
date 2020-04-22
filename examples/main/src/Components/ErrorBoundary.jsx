@@ -19,7 +19,7 @@ export default class ErrorBoundary extends PureComponent {
     if (error) {
       return (
         <div style={{ whiteSpace: 'pre-wrap', marginLeft: '5px' }}>
-          <h1> oh oh :(</h1>
+          <h1> Oh no 😿</h1>
           <button style={{ fontSize: '20px', background: 'aliceblue' }} onClick={this.retry}>
             Retry
           </button>

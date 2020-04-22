@@ -27,7 +27,7 @@ export const colorScheme = {
   },
 };
 
-export const viewerCustomStyleFn = style => {
+export const viewerCustomForegroundStyleFn = style => {
   let colorRule = {};
   if (colorScheme[style] && isHexColor(colorScheme[style].color)) {
     colorRule = { color: colorScheme[style].color };
@@ -37,13 +37,32 @@ export const viewerCustomStyleFn = style => {
   return colorRule;
 };
 
-export const customStyleFn = styles =>
+export const customForegroundStyleFn = styles =>
   styles.toArray().reduce((cssStyle, style) => {
     return {
       ...cssStyle,
-      ...viewerCustomStyleFn(style),
+      ...viewerCustomForegroundStyleFn(style),
     };
   }, {});
 
-export const styleSelectionPredicate = style =>
-  (colorScheme[style] && isHexColor(colorScheme[style].color)) || isHexColor(style);
+export const viewerCustomBackgroundStyleFn = style => {
+  let colorRule = {};
+  if (colorScheme[style] && isHexColor(colorScheme[style].color)) {
+    colorRule = { backgroundColor: colorScheme[style].color };
+  } else if (isHexColor(style)) {
+    colorRule = { backgroundColor: style };
+  }
+  return colorRule;
+};
+
+export const customBackgroundStyleFn = styles =>
+  styles.toArray().reduce((cssStyle, style) => {
+    return {
+      ...cssStyle,
+      ...viewerCustomBackgroundStyleFn(style),
+    };
+  }, {});
+
+export const styleSelectionPredicate = style => {
+  return (colorScheme[style] && isHexColor(colorScheme[style].color)) || isHexColor(style);
+};

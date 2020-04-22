@@ -1,0 +1,35 @@
+%button {
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.button_primary {
+  @extend %button;
+  color: #fff;
+  background-color: #0261ff;
+
+  &:hover:not([disabled]) {
+    background-color: rgba(2, 97, 255, 0.8);
+  }
+
+  &:disabled {
+    cursor: auto;
+    color: rgba(255, 255, 255, 0.6);
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+}
+
+.button_secondary {
+  @extend %button;
+  border: 1px solid #0261ff;
+  background: #fff;
+  color: #0261ff;
+  &:hover, &:active {
+    border-color: rgba(2, 97, 255, 0.6);
+  }
+
+  &:disabled {
+    color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+}

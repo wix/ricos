@@ -1,0 +1,17 @@
+@import '~wix-rich-content-common/dist/statics/styles/palette.scss';
+@import '~wix-rich-content-common/dist/statics/styles/mixins.scss';
+
+.separator {
+  flex: 0 0 1px;
+  background: $toolbar-border-color;
+  margin: 0px 19px 0 9px;
+  height: 100%;
+}
+
+.horizontalSeparator {
+  display: block;
+  width: auto;
+  background: $toolbar-border-color;
+  height: 1px;
+  margin: 0 -10px 0 -19px;
+}

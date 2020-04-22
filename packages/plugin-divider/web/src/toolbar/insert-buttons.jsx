@@ -1,15 +1,16 @@
 // @flow
-import { TOOLBARS } from 'wix-rich-content-common';
 import { InsertPluginIcon } from '../icons';
 import { DEFAULTS } from '../constants';
+import { TOOLBARS } from 'wix-rich-content-editor-common';
 
-export const createInsertButtons /*: CreateInsertButtons */ = ({ helpers, t }) => {
+export const createInsertButtons /*: CreateInsertButtons */ = ({ helpers, t, settings }) => {
+  const icon = settings?.toolbar?.icons?.InsertPluginButtonIcon || InsertPluginIcon;
   return [
     {
       name: 'Divider',
       tooltipText: t('DividerPlugin_InsertButton_Tooltip'),
       toolbars: [TOOLBARS.FOOTER, TOOLBARS.SIDE],
-      Icon: InsertPluginIcon,
+      Icon: icon,
       componentData: DEFAULTS,
       helpers,
       t,

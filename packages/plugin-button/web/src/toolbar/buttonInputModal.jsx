@@ -3,14 +3,14 @@ import React, { Component } from 'react';
 import { isEqual } from 'lodash';
 import { Scrollbars } from 'react-custom-scrollbars';
 import {
-  mergeStyles,
   Tabs,
   Tab,
   FocusManager,
   ErrorIcon,
   SettingsPanelFooter,
-  isValidUrl,
-} from 'wix-rich-content-common';
+  KEYS_CHARCODE,
+} from 'wix-rich-content-editor-common';
+import { mergeStyles, isValidUrl } from 'wix-rich-content-common';
 import DesignComponent from './../components/design-component';
 import SettingsComponent from './../components/settings-component';
 import Navbar from './../components/navbar';
@@ -22,39 +22,14 @@ export default class ButtonInputModal extends Component {
     super(props);
     this.styles = mergeStyles({ styles, theme: props.theme });
     const {
-      settings: { colors },
-      componentData,
-      relValue,
-      anchorTarget,
+      componentData: { button },
     } = this.props;
-    const initialButtonColors = {
-      textColor: colors.color1,
-      borderColor: colors.color8,
-      backgroundColor: colors.color8,
-    };
-
-    let buttonObj = {};
-    if (componentData.button) {
-      buttonObj = {
-        ...componentData.button,
-      };
-    }
-    if (!('rel' in buttonObj) && relValue === 'nofollow') {
-      buttonObj.rel = true;
-    }
-    if (!('target' in buttonObj) && anchorTarget === '_blank') {
-      buttonObj.target = true;
-    }
-
-    if (!buttonObj.textColor) {
-      buttonObj = { ...buttonObj, ...initialButtonColors };
-    }
 
     this.state = {
-      isValidUrl: true,
-      data: { ...buttonObj },
-      design: { ...buttonObj },
-      initialComponentData: {},
+      validUrl: isValidUrl(button.settings.url),
+      settings: { ...button.settings },
+      design: { ...button.design },
+      initialComponentData: { ...button },
       isHover: false,
       activeTab: settingsTabValue,
     };
@@ -64,88 +39,56 @@ export default class ButtonInputModal extends Component {
     };
   }
 
-  componentDidMount = () => {
-    const {
-      settings: { colors },
-      componentData: { button },
-    } = this.props;
-    const initialButtonColors = {
-      textColor: colors.color1,
-      borderColor: colors.color8,
-      backgroundColor: colors.color8,
-    };
-    if (!button.textColor) {
-      this.setState({ initialComponentData: { ...button, ...initialButtonColors } });
-    } else {
-      this.setState({ initialComponentData: button });
-    }
+  onValidUrl = validUrl => {
+    this.setState({ validUrl });
   };
 
-  onValidUrl = isValidUrl => {
-    this.setState({ isValidUrl });
-  };
-
-  onSettingsChanged = data => {
-    const buttonObj = {
-      ...this.state.data,
-      ...data,
-    };
-    if (!isEqual(data, this.state.data)) {
-      const { pubsub } = this.props;
-      pubsub.update('componentData', { button: buttonObj });
-      this.setState({ data });
+  onSettingsChanged = settings => {
+    const { design } = this.state;
+    if (!isEqual(settings, this.state.settings)) {
+      const {
+        pubsub,
+        componentData: { button },
+      } = this.props;
+      pubsub.update('componentData', { button: { ...button, settings, design } });
+      this.setState({ settings });
     }
   };
 
   onDesignChanged = design => {
+    const { settings } = this.state;
     if (this.state.activeTab !== designTabValue) {
       this.setState({ activeTab: designTabValue });
     }
-    const buttonObj = {
-      ...this.state.data,
-      ...design,
-    };
     if (!isEqual(design, this.state.design)) {
-      const { pubsub } = this.props;
-      pubsub.update('componentData', { button: buttonObj });
+      const {
+        pubsub,
+        componentData: { button },
+      } = this.props;
+      pubsub.update('componentData', { button: { ...button, design, settings } });
       this.setState({ design });
     }
   };
 
   onConfirm = () => {
-    const { url } = this.state.data;
+    const { validUrl } = this.state;
     const {
-      componentData,
-      pubsub,
-      onConfirm,
       helpers: { closeModal },
     } = this.props;
-    const buttonObj = {
-      data: { ...this.state.data },
-      design: { ...this.state.design },
-    };
-    if (isValidUrl(url)) {
-      this.setState({ isValidUrl: true });
-      if (onConfirm) {
-        onConfirm({ ...componentData, button: buttonObj });
-      } else {
-        pubsub.update('componentData', { button: buttonObj });
-      }
-
-      this.setState({ isOpen: false });
+    if (validUrl) {
+      this.setState({ submitted: true, isOpen: false });
       closeModal();
-      this.setState({ submitted: true });
     } else {
-      this.setState({ isValidUrl: false, activeTab: settingsTabValue });
+      this.setState({ activeTab: settingsTabValue });
       this.linkInput.scrollIntoView(false);
     }
   };
 
   handleKeyPress = e => {
-    if (e.charCode === 13) {
+    if (e.charCode === KEYS_CHARCODE.ENTER) {
       this.onConfirm();
     }
-    if (e.charCode === 27) {
+    if (e.charCode === KEYS_CHARCODE.ESCAPE) {
       this.onCloseRequested();
     }
   };
@@ -180,26 +123,22 @@ export default class ButtonInputModal extends Component {
     this.setState({ activeTab: settingsTabValue });
   };
 
-  onTabSelected = tabValue => {
-    const { url } = this.state.data;
-    if (!isValidUrl(url) && tabValue === designTabValue) {
-      this.setState({ isValidUrl: false });
-    }
-  };
   render() {
     const { theme, t, uiSettings, doneLabel, cancelLabel, isMobile } = this.props;
     const { styles } = this;
     const settingTabLabel = (
-      <div className={styles.settingTab}>
-        <div className={styles.tabTitle}>
-          <p className={styles.tabLabel}>{t('ButtonModal_Settings_Tab')}</p>
+      <div className={styles.button_inputModal_settingTab}>
+        <div className={styles.button_inputModal_tabTitle}>
+          <p className={styles.button_inputModal_tabLabel}>{t('ButtonModal_Settings_Tab')}</p>
         </div>
-        <div className={styles.errorIcon}>
-          {!this.state.isValidUrl ? <ErrorIcon width="18" height="18" /> : null}
+        <div className={styles.button_inputModal_errorIcon}>
+          {!this.state.validUrl ? <ErrorIcon width="18" height="18" /> : null}
         </div>
       </div>
     );
-    const designTabLabel = <p className={styles.tabLabel}>{t('ButtonModal_Design_Tab')}</p>;
+    const designTabLabel = (
+      <p className={styles.button_inputModal_tabLabel}>{t('ButtonModal_Design_Tab')}</p>
+    );
     const settingsComponent = (
       <SettingsComponent
         t={t}
@@ -208,8 +147,8 @@ export default class ButtonInputModal extends Component {
         {...this.props}
         isValidUrl={this.onValidUrl.bind(this)}
         onSettingsChange={this.onSettingsChanged.bind(this)}
-        validUrl={this.state.isValidUrl}
-        settingsObj={this.state.data}
+        validUrl={this.state.validUrl}
+        settingsObj={this.state.settings}
         onKeyPress={this.handleKeyPress}
         linkInputRef={ref => {
           this.linkInput = ref;
@@ -233,14 +172,21 @@ export default class ButtonInputModal extends Component {
         <div>
           <Navbar onConfirm={this.onConfirm} onCancel={this.onCloseRequested} {...this.props} />
           <PreviewComponent buttonObj={this.state} {...this.props} />
-          <div className={styles.scroll} ref={this.setScrollbarRef}>
-            <div className={styles.container} data-hook="ButtonInputModal">
-              <div className={styles.header_text}>{t('ButtonModal_Settings_Tab')}</div>
+          <div className={styles.button_inputModal_scroll} ref={this.setScrollbarRef}>
+            <div className={styles.button_inputModal_container} data-hook="ButtonInputModal">
+              <div className={styles.button_inputModal_header_text}>
+                {t('ButtonModal_Settings_Tab')}
+              </div>
               {settingsComponent}
             </div>
-            <div className={styles.separator} />
-            <div className={styles.design_component_container} data-hook="ButtonInputModal">
-              <div className={styles.design_header_text}>{t('ButtonModal_Design_Tab')}</div>
+            <div className={styles.button_inputModal_separator} />
+            <div
+              className={styles.button_inputModal_design_component_container}
+              data-hook="ButtonInputModal"
+            >
+              <div className={styles.button_inputModal_design_header_text}>
+                {t('ButtonModal_Design_Tab')}
+              </div>
               {designComponent}
             </div>
           </div>
@@ -252,18 +198,20 @@ export default class ButtonInputModal extends Component {
         {isMobile ? (
           mobileView
         ) : (
-          <div className={styles.container} data-hook="ButtonInputModal">
+          <div className={styles.button_inputModal_container} data-hook="ButtonInputModal">
             <div>
-              <div role="heading" aria-labelledby="button_modal_hdr" className={styles.header}>
-                <div className={styles.header_text}>{t('ButtonModal_Header')}</div>
+              <div
+                role="heading"
+                aria-labelledby="button_modal_hdr"
+                className={styles.button_inputModal_header}
+              >
+                <div className={styles.button_inputModal_header_text}>
+                  {t('ButtonModal_Header')}
+                </div>
               </div>
               <FocusManager>
-                <div className={styles.focus_mhanager}>
-                  <Tabs
-                    value={this.state.activeTab}
-                    theme={this.styles}
-                    onTabSelected={this.onTabSelected.bind(this)}
-                  >
+                <div className={styles.button_inputModal_focus_manager}>
+                  <Tabs value={this.state.activeTab} theme={this.styles}>
                     <Tab label={settingTabLabel} value={settingsTabValue} theme={this.styles}>
                       <div
                         role="button"
@@ -277,9 +225,13 @@ export default class ButtonInputModal extends Component {
                       <Scrollbars
                         ref={this.setScrollbarRef}
                         renderThumbVertical={() =>
-                          this.state.isHover ? <div className={styles.scrollbar_thumb} /> : <div />
+                          this.state.isHover ? (
+                            <div className={styles.button_inputModal_scrollbar_thumb} />
+                          ) : (
+                            <div />
+                          )
                         }
-                        className={styles.customize_scrollbar_container}
+                        className={styles.button_inputModal_customize_scrollbar_container}
                         onMouseEnter={this.handleOnMouseEnterDesign}
                         onMouseLeave={this.handleOnMouseLeaveDesign}
                       >
@@ -291,7 +243,7 @@ export default class ButtonInputModal extends Component {
               </FocusManager>
             </div>
             <SettingsPanelFooter
-              className={styles.modal_footer}
+              className={styles.button_inputModal_modal_footer}
               save={() => this.onConfirm()}
               cancel={() => this.onCloseRequested()}
               saveLabel={doneLabel}

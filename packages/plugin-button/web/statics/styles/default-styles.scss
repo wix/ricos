@@ -11,6 +11,8 @@
   border-style: none;
   border-width: 0px;
   text-decoration: none;
+  color: white;
+  background-color: #0261ff;
 }
 
 .button_text {
@@ -29,4 +31,8 @@
   @include phone {
     max-width: calc(100vw - 89px);
   }
+}
+
+.button_size_content {
+  width: auto;
 }

@@ -5,21 +5,21 @@ import {
   mergeStyles,
   AccessibilityListener,
   normalizeInitialState,
-  Context,
+  getLangDir,
 } from 'wix-rich-content-common';
+import 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss';
 import { convertToReact } from './utils/convertContentState';
 import viewerStyles from '../statics/rich-content-viewer.scss';
 import viewerAlignmentStyles from '../statics/rich-content-viewer-alignment.rtlignore.scss';
-import { getLangDir } from 'rtl-detect';
+import rtlStyle from '../statics/rich-content-viewer-rtl.rtlignore.scss';
 
-export default class RichContentViewer extends Component {
+class RichContentViewer extends Component {
   constructor(props) {
     super(props);
     this.state = {
       raw: RichContentViewer.getInitialState(props.initialState),
-      contextualData: this.initContext(),
     };
-    const styles = { ...viewerStyles, ...viewerAlignmentStyles };
+    const styles = { ...viewerStyles, ...viewerAlignmentStyles, ...rtlStyle };
     this.styles = mergeStyles({ styles, theme: props.theme });
   }
 
@@ -31,65 +31,88 @@ export default class RichContentViewer extends Component {
         })
       : {};
 
-  initContext = () => {
-    const {
-      theme,
-      isMobile,
-      anchorTarget,
-      relValue,
-      config,
-      helpers,
-      locale,
-      disabled,
-    } = this.props;
-    return {
-      theme,
-      isMobile,
-      anchorTarget,
-      relValue,
-      config,
-      helpers,
-      locale,
-      disabled,
-    };
-  };
+  getContextualData = ({
+    t,
+    theme,
+    isMobile,
+    anchorTarget,
+    relValue,
+    config,
+    helpers,
+    locale,
+    disabled,
+    seoMode,
+    siteDomain,
+  }) => ({
+    t,
+    theme,
+    isMobile,
+    anchorTarget,
+    relValue,
+    config,
+    helpers,
+    locale,
+    disabled,
+    seoMode,
+    siteDomain,
+    disableRightClick: config?.uiSettings?.disableRightClick,
+  });
 
-  static getDerivedStateFromProps(props, state) {
+  static getDerivedStateFromProps(props) {
     return {
       raw: RichContentViewer.getInitialState(props),
-      contextualData: { ...state.contextualData, disabled: props.disabled },
     };
   }
 
+  static getDerivedStateFromError(error) {
+    return { error };
+  }
+
   render() {
-    const { styles } = this;
-    const { textDirection, typeMappers, decorators, inlineStyleMappers, locale } = this.props;
+    const { onError } = this.props;
+    try {
+      if (this.state.error) {
+        onError(this.state.error);
+        return null;
+      }
+      const { styles } = this;
+      const {
+        textDirection,
+        typeMappers,
+        decorators,
+        inlineStyleMappers,
+        locale,
+        addAnchors,
+      } = this.props;
+      const wrapperClassName = classNames(styles.wrapper, {
+        [styles.desktop]: !this.props.platform || this.props.platform === 'desktop',
+      });
+      const editorClassName = classNames(styles.editor, {
+        [styles.rtl]: textDirection === 'rtl',
+      });
 
-    const wrapperClassName = classNames(styles.wrapper, {
-      [styles.desktop]: !this.props.platform || this.props.platform === 'desktop',
-    });
-    const editorClassName = classNames(styles.editor, {
-      [styles.rtl]: textDirection === 'rtl',
-    });
+      const contextualData = this.getContextualData(this.props);
 
-    const output = convertToReact(
-      this.state.raw,
-      styles,
-      textDirection,
-      typeMappers,
-      this.state.contextualData,
-      decorators,
-      inlineStyleMappers
-    );
-
-    return (
-      <div className={wrapperClassName} dir={getLangDir(locale)}>
-        <Context.Provider value={this.state.contextualData}>
+      const output = convertToReact(
+        this.state.raw,
+        styles,
+        textDirection,
+        typeMappers,
+        contextualData,
+        decorators,
+        inlineStyleMappers,
+        { addAnchors }
+      );
+      return (
+        <div className={wrapperClassName} dir={getLangDir(locale)}>
           <div className={editorClassName}>{output}</div>
-          <AccessibilityListener />
-        </Context.Provider>
-      </div>
-    );
+          <AccessibilityListener isMobile={this.props.isMobile} />
+        </div>
+      );
+    } catch (err) {
+      onError(err);
+      return null;
+    }
   }
 }
 
@@ -98,7 +121,7 @@ RichContentViewer.propTypes = {
   isMobile: PropTypes.bool,
   helpers: PropTypes.object,
   platform: PropTypes.string,
-  locale: PropTypes.string,
+  locale: PropTypes.string.isRequired,
   typeMappers: PropTypes.arrayOf(PropTypes.func),
   inlineStyleMappers: PropTypes.arrayOf(PropTypes.func),
   decorators: PropTypes.arrayOf(
@@ -114,17 +137,28 @@ RichContentViewer.propTypes = {
       }),
     ])
   ),
+  t: PropTypes.func,
   theme: PropTypes.object,
   anchorTarget: PropTypes.string,
   relValue: PropTypes.string,
   config: PropTypes.object,
   textDirection: PropTypes.oneOf(['rtl', 'ltr']),
   disabled: PropTypes.bool,
+  seoMode: PropTypes.bool,
+  siteDomain: PropTypes.string,
+  onError: PropTypes.func,
+  addAnchors: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
 };
 
 RichContentViewer.defaultProps = {
   theme: {},
   decorators: [],
   typeMappers: [],
+  inlineStyleMappers: [],
   locale: 'en',
+  onError: err => {
+    throw err;
+  },
 };
+
+export default RichContentViewer;

@@ -1,21 +1,53 @@
+/*global Cypress, cy*/
 require('cypress-plugin-snapshots/commands');
 import { addMatchImageSnapshotCommand } from 'cypress-image-snapshot/command';
 addMatchImageSnapshotCommand();
-import { INLINE_TOOLBAR_BUTTONS } from '../dataHooks';
-
-const resizeForDesktop = () => cy.viewport('macbook-15');
-const resizeForMobile = () => cy.viewport('iphone-5');
-
-const getUrl = (componentId, fixtureName = '') =>
-  `/${componentId}/${fixtureName}${isMobile ? '?mobile' : ''}`;
+import {
+  INLINE_TOOLBAR_BUTTONS,
+  PLUGIN_TOOLBAR_BUTTONS,
+  IMAGE_SETTINGS,
+  GALLERY_SETTINGS,
+  VIDEO_PLUGIN,
+  HTML_PLUGIN,
+  PLUGIN_COMPONENT,
+  STATIC_TOOLBAR_BUTTONS,
+  SETTINGS_PANEL,
+} from '../dataHooks';
 
 // Viewport size commands
+const resizeForDesktop = () => cy.viewport('macbook-15');
+const resizeForMobile = () => cy.viewport('iphone-6');
 
-const run = (app, fixtureName) => {
-  cy.visit(getUrl(app, fixtureName));
+const buildQuery = params => {
+  const parameters = [];
+  Object.entries(params).forEach(([key, value]) => {
+    if (value) {
+      const res = value === true ? key : `${key}=${value}`;
+      parameters.push(res);
+    }
+  });
+  if (parameters.length === 0) return '';
+  return '?' + parameters.join('&');
+};
+
+const getUrl = (componentId, fixtureName = '', plugins = 'partialPreset') =>
+  `/${componentId}${fixtureName ? '/' + fixtureName : ''}${buildQuery({
+    mobile: isMobile,
+    hebrew: isHebrew,
+    seoMode: isSeoMode,
+    testAppPlugins: plugins,
+  })}`;
+
+const run = (app, fixtureName, plugins) => {
+  cy.visit(getUrl(app, fixtureName, plugins)).then(() => {
+    disableTransitions();
+    hideAllTooltips();
+  });
 };
 
 let isMobile = false;
+let isHebrew = false;
+let isSeoMode = false;
 
 Cypress.Commands.add('switchToMobile', () => {
   isMobile = true;
@@ -27,29 +59,58 @@ Cypress.Commands.add('switchToDesktop', () => {
   resizeForDesktop();
 });
 
-Cypress.Commands.add('loadEditorAndViewer', fixtureName => {
-  run('combined', fixtureName);
+Cypress.Commands.add('switchToSeoMode', () => {
+  isSeoMode = true;
 });
 
-Cypress.Commands.add('loadEditor', fixtureName => {
-  run('rce', fixtureName);
+Cypress.Commands.add('switchToHebrew', () => {
+  isHebrew = true;
+});
+
+Cypress.Commands.add('switchToEnglish', () => {
+  isHebrew = false;
+});
+
+function disableTransitions() {
+  Cypress.$('head').append('<style> * {transition: none !important;}</style>');
+}
+
+function hideAllTooltips() {
+  cy.get('[data-id="tooltip"]').invoke('hide'); //uses jquery to set display: none
+}
+
+Cypress.Commands.add('loadEditorAndViewer', (fixtureName, plugins) =>
+  run('rce', fixtureName, plugins)
+);
+Cypress.Commands.add('loadIsolatedEditorAndViewer', fixtureName =>
+  run('rce-isolated', fixtureName)
+);
+
+Cypress.Commands.add('loadEditorAndViewerOnSsr', (fixtureName, compName) => {
+  cy.request(getUrl(compName, fixtureName))
+    .its('body')
+    .then(html => {
+      // remove the application code bundle
+      const _html = html.replace('<script src="/index.bundle.js"></script>', '');
+      cy.state('document').write(_html);
+    });
 });
 
 Cypress.Commands.add('matchContentSnapshot', () => {
-  cy.window()
-    .its('__CONTENT_SNAPSHOT__')
-    .toMatchSnapshot();
+  if (Cypress.env('MATCH_CONTENT_STATE'))
+    cy.window()
+      .its('__CONTENT_SNAPSHOT__')
+      .toMatchSnapshot();
 });
 
-Cypress.Commands.add('matchSnapshots', () => {
-  cy.matchImageSnapshot().matchContentSnapshot();
+Cypress.Commands.add('matchSnapshots', options => {
+  cy.matchImageSnapshot(options).matchContentSnapshot();
 });
 
 // Editor commands
-const getEditor = () => cy.get('[contenteditable="true"]');
 
 Cypress.Commands.add('enterText', text => {
-  getEditor().type(text);
+  cy.getEditor().type(text);
 });
 
 Cypress.Commands.add('enterParagraphs', paragraphs => {
@@ -61,15 +122,35 @@ Cypress.Commands.add('newLine', () => {
 });
 
 Cypress.Commands.add('blurEditor', () => {
-  getEditor().blur();
+  cy.getEditor()
+    .blur()
+    .get('[data-hook=inlineToolbar]')
+    .should('not.visible');
+});
+
+Cypress.Commands.add('getEditor', () => {
+  cy.get('[contenteditable="true"]');
 });
 
 Cypress.Commands.add('focusEditor', () => {
-  getEditor().focus();
+  cy.getEditor().focus();
 });
 
+Cypress.Commands.add(
+  'typeAllAtOnce',
+  {
+    prevSubject: 'element',
+  },
+  ($subject, value) => {
+    const el = $subject[0];
+    el.value = value;
+    return cy.wrap($subject).type('t{backspace}');
+  }
+);
+
 Cypress.on('window:before:load', win => {
-  delete win.IntersectionObserver;
+  // noinspection JSAnnotator
+  delete win.IntersectionObserver; // eslint-disable-line fp/no-delete
   win.IntersectionObserver = class IntersectionObserverMock {
     constructor(cb, options) {
       this.cb = cb;
@@ -121,7 +202,7 @@ function getTextElments(rootElement) {
 Cypress.Commands.add('setSelection', (start, offset) => {
   cy.focusEditor().then(args => {
     const getTextElmentAndLocalOffset = getTextElments(args[0]);
-    const document = args.context;
+    const document = args[0].ownerDocument;
     const range = document.createRange();
     const startObj = getTextElmentAndLocalOffset(start);
     range.setStart(startObj.element, startObj.offset);
@@ -144,14 +225,34 @@ Cypress.Commands.add('setTextStyle', (buttonSelector, selection) => {
   if (selection) {
     cy.setSelection(selection[0], selection[1]);
   }
-  cy.get(`[data-hook=${buttonSelector}]`).click();
+  cy.get(`[data-hook=inlineToolbar] [data-hook=${buttonSelector}]`).click();
 });
 
-function setInlineToolbarMenueItem(item, selection, butttonIndex) {
+Cypress.Commands.add('setLink', (selection, link) => {
+  cy.setTextStyle(INLINE_TOOLBAR_BUTTONS.LINK, selection)
+    .get(`[data-hook=linkPanelContainer] [data-hook=linkPanelInput]`)
+    .type(link)
+    .get(`[data-hook=linkPanelContainerDone]`)
+    .click();
+});
+
+Cypress.Commands.add('setLinkSettings', () => {
+  cy.clickToolbarButton(INLINE_TOOLBAR_BUTTONS.LINK)
+    .get(`[data-hook=linkPanelContainer] [data-hook=linkPanelRelCheckbox]`)
+    .click()
+    .get(`[data-hook=linkPanelContainerDone]`)
+    .click();
+});
+
+Cypress.Commands.add('setAlignment', alignment => {
+  cy.setTextStyle(INLINE_TOOLBAR_BUTTONS.ALIGNMENT).setTextStyle(alignment);
+});
+
+function setInlineToolbarMenueItem(item, selection, buttonIndex) {
   cy.setTextStyle(item, selection)
     .get('.ReactModalPortal')
     .find('button')
-    .eq(butttonIndex)
+    .eq(buttonIndex)
     .click();
 }
 
@@ -163,7 +264,289 @@ Cypress.Commands.add('setLineSpacing', (buttonIndex = 3, selection) => {
   setInlineToolbarMenueItem(INLINE_TOOLBAR_BUTTONS.LINE_SPACING, selection, buttonIndex);
 });
 
-// disable screenshots in debug mode. So there is no difference to ci.
+Cypress.Commands.add('openSideToolbar', () => {
+  cy.get('[aria-label="Plugin Toolbar"]').click();
+  cy.get('#side_bar');
+});
+
+Cypress.Commands.add('openAddPluginModal', () => {
+  cy.get('[data-hook="addPluginFloatingToolbar"]').click();
+  cy.get('[aria-label="Add Plugin"]');
+});
+
+Cypress.Commands.add('openImageSettings', (shouldOpenToolbar = true) => {
+  shouldOpenToolbar && cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE);
+  cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.SETTINGS);
+  cy.get('[data-hook="imageSettings"]');
+});
+
+Cypress.Commands.add('openMapSettings', () => {
+  cy.get(`[data-hook=${PLUGIN_COMPONENT.MAP}]:first`)
+    .parent()
+    .click();
+  cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.SETTINGS);
+  cy.get('[data-hook="mapSettings"]');
+});
+
+Cypress.Commands.add('openGalleryAdvancedSettings', () => {
+  cy.get(`[data-hook=${PLUGIN_COMPONENT.GALLERY}]:first`)
+    .parent()
+    .click();
+  cy.get(`[data-hook=${PLUGIN_TOOLBAR_BUTTONS.ADV_SETTINGS}]:first`).click();
+});
+
+Cypress.Commands.add('shrinkPlugin', () => {
+  cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.SMALL_CENTER);
+});
+
+Cypress.Commands.add('pluginSizeBestFit', () => {
+  cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.BEST_FIT);
+});
+
+Cypress.Commands.add('pluginSizeFullWidth', () => {
+  cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.FULL_WIDTH);
+});
+
+Cypress.Commands.add('pluginSizeOriginal', () => {
+  cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.ORIGINAL);
+});
+
+Cypress.Commands.add('clickToolbarButton', buttonName => {
+  cy.get(`button[data-hook=${buttonName}][tabindex=0]`).click({
+    force: true, //fixes element getting detached from dom and not clicking (maybe because of click scroll strategy)
+  });
+});
+
+Cypress.Commands.add('openGallerySettings', () => {
+  cy.get('[data-hook="manage_media_Tab"]').click();
+});
+
+Cypress.Commands.add('openGalleryImageSettings', () => {
+  cy.get(`[data-hook=${GALLERY_SETTINGS.IMAGE}]:first`).click();
+  cy.get(`[data-hook=${GALLERY_SETTINGS.EDIT_IMAGE}]`).click();
+});
+
+Cypress.Commands.add('addImageTitle', () => {
+  cy.get(`[data-hook=${IMAGE_SETTINGS.CAPTION}]`)
+    .click()
+    .type('Title')
+    .get(`[data-hook=${SETTINGS_PANEL.DONE}]`)
+    .click();
+});
+
+Cypress.Commands.add('editImageTitle', () => {
+  cy.get(`[data-hook=${PLUGIN_COMPONENT.IMAGE}]:first`)
+    .find('input')
+    .click()
+    .type(' - In Plugin Editing')
+    .blur();
+});
+
+Cypress.Commands.add('deleteImageTitle', () => {
+  cy.get(`[data-hook=${IMAGE_SETTINGS.CAPTION}]`)
+    .click()
+    .clear()
+    .get(`[data-hook=${SETTINGS_PANEL.DONE}]`)
+    .click();
+});
+
+Cypress.Commands.add('addGalleryImageTitle', (pluginToClick = null) => {
+  cy.get(`[data-hook=${GALLERY_SETTINGS.TITLE}]`).type('Title');
+  cy.get(`[data-hook=${SETTINGS_PANEL.DONE}]:first`).click({ multiple: true });
+  cy.get(`[data-hook=${SETTINGS_PANEL.DONE}]`).click();
+  pluginToClick &&
+    cy
+      .get(`[data-hook=${pluginToClick}]:first`)
+      .parent()
+      .click();
+});
+
+Cypress.Commands.add('checkTitle', () => {
+  cy.get('[data-hook=galleryViewer]:first')
+    .parent()
+    .click();
+  cy.get(`[data-hook=${GALLERY_SETTINGS.VIEWER_IMAGE}]:first`);
+});
+
+Cypress.Commands.add('addImageLink', () => {
+  cy.get(`[data-hook=${IMAGE_SETTINGS.LINK}]`)
+    .click()
+    .type('www.wix.com')
+    .get(`[data-hook=${SETTINGS_PANEL.DONE}]`)
+    .click()
+    .wait(200);
+  // .get('href=www.wix.com');
+});
+
+Cypress.Commands.add('alignImage', alignment => {
+  let button;
+  switch (alignment) {
+    case 'left':
+      button = PLUGIN_TOOLBAR_BUTTONS.SMALL_LEFT;
+      break;
+    case 'center':
+      button = PLUGIN_TOOLBAR_BUTTONS.SMALL_CENTER;
+      break;
+    case 'right':
+    default:
+      button = PLUGIN_TOOLBAR_BUTTONS.SMALL_RIGHT;
+  }
+  cy.get('[data-hook=imageViewer]:first')
+    .parent()
+    .click();
+  cy.clickToolbarButton(button);
+});
+
+Cypress.Commands.add('openPluginToolbar', plugin => {
+  cy.get(`[data-hook*=${plugin}]`)
+    .first()
+    .parent()
+    .click();
+  cy.get('[data-hook*="PluginToolbar"]:first');
+});
+
+Cypress.Commands.add('openDropdownMenu', (selector = '') => {
+  cy.get('button[role=combobox][data-hook=baseToolbarButton_type]').click();
+  if (selector) {
+    cy.get(selector).click();
+  }
+});
+
+Cypress.Commands.add('openVideoUploadModal', () => {
+  cy.get(`[data-hook*=${STATIC_TOOLBAR_BUTTONS.VIDEO}][tabindex!=-1]`).click();
+});
+
+Cypress.Commands.add('openSoundCloudModal', () => {
+  cy.get(`[data-hook*=${STATIC_TOOLBAR_BUTTONS.SOUND_CLOUD}][tabindex!=-1]`).click();
+});
+
+Cypress.Commands.add('openEmbedModal', modalType => {
+  cy.get(`[data-hook*=${modalType}][tabindex!=-1]`).click();
+});
+
+Cypress.Commands.add('addSoundCloud', () => {
+  cy.get(`[data-hook*=${'soundCloudUploadModalInput'}]`).type(
+    'https://soundcloud.com/nlechoppa/camelot'
+  );
+  cy.get(`[data-hook*=${SETTINGS_PANEL.DONE}]`).click();
+  cy.get(`[data-hook=${PLUGIN_COMPONENT.SOUND_CLOUD}]:first`)
+    .parent()
+    .click();
+});
+
+Cypress.Commands.add('addSocialEmbed', url => {
+  cy.get(`[data-hook*=${'socialEmbedUploadModalInput'}]`).type(url);
+  cy.get(`[data-hook*=${SETTINGS_PANEL.DONE}]`).click();
+});
+
+Cypress.Commands.add('addVideoFromURL', () => {
+  cy.get(`[data-hook*=${VIDEO_PLUGIN.INPUT}]`).type('https://youtu.be/BBu5codsO6Y');
+  cy.get(`[data-hook*=${VIDEO_PLUGIN.ADD}]`).click();
+  cy.get(`[data-hook=${PLUGIN_COMPONENT.VIDEO}]:first`)
+    .parent()
+    .click();
+});
+
+Cypress.Commands.add('addHtml', () => {
+  cy.get(`[data-hook*=${HTML_PLUGIN.STATIC_TOOLBAR_BUTTON}][tabindex!=-1]`).click();
+  cy.get(`[data-hook*=${HTML_PLUGIN.INPUT}]`)
+    .click()
+    .clear();
+  cy.get(`[data-hook*=${HTML_PLUGIN.INPUT}]`).typeAllAtOnce(
+    // eslint-disable-next-line max-len
+    '<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">The updates, insights and stories of the engineering challenges we encounter, and our way of solving them. Subscribe to our fresh, monthly newsletter and get these goodies right to your e-mail:<a href="https://t.co/0ziRSJJAxK">https://t.co/0ziRSJJAxK</a> <a href="https://t.co/nTHlsG5z2a">pic.twitter.com/nTHlsG5z2a</a></p>&mdash; Wix Engineering (@WixEng) <a href="https://twitter.com/WixEng/status/1076810144774868992?ref_src=twsrc%5Etfw">December 23, 2018</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>'
+  );
+  cy.get(`[data-hook*=${HTML_PLUGIN.UPDATE}]`).click();
+});
+
+Cypress.Commands.add('addCustomVideo', () => {
+  cy.get(`[data-hook*=${VIDEO_PLUGIN.CUSTOM}]`).click();
+  cy.get(`[data-hook=${PLUGIN_COMPONENT.VIDEO}]:first`)
+    .parent()
+    .click();
+});
+
+Cypress.Commands.add('dragAndDrop', (src, dest, elem = 0) => {
+  cy.get(dest)
+    .eq(elem)
+    .then(target => {
+      const dest = target[0].getBoundingClientRect();
+      cy.get(src)
+        .trigger('mousedown', { which: 1 })
+        .trigger('mousemove', { which: 1, pageX: dest.x + 50, pageY: dest.y + 20 })
+        .trigger('mouseup', { force: true });
+    });
+});
+
+Cypress.Commands.add('dragAndDropPlugin', (src, dest) => {
+  const dataTransfer = new DataTransfer();
+  cy.get(src)
+    .trigger('mousedown')
+    .trigger('dragstart', { dataTransfer })
+    .get(dest)
+    .trigger('dragenter', { dataTransfer })
+    .trigger('dragover', { dataTransfer })
+    .trigger('drop', { dataTransfer });
+});
+
+Cypress.Commands.add('waitForVideoToLoad', { prevSubject: 'optional' }, () => {
+  cy.get('[data-loaded=true]', { timeout: 15000 }).should('have.length', 2);
+});
+
+Cypress.Commands.add('waitForHtmlToLoad', () => {
+  cy.get('iframe', { timeout: 15000 })
+    .each($el => {
+      cy.wrap($el)
+        .its('0.contentDocument.body')
+        .should('not.be.undefined');
+    })
+    .wait(4000);
+});
+
+Cypress.Commands.add('insertLinkAndEnter', url => {
+  cy.focusEditor();
+  cy.moveCursorToEnd()
+    .type(url)
+    .type('{enter}')
+    .wait(100);
+  cy.moveCursorToEnd();
+});
+
+Cypress.Commands.add('triggerLinkPreviewViewerUpdate', () => {
+  cy.moveCursorToEnd();
+  cy.focusEditor();
+});
+
+Cypress.Commands.add('waitForDocumentMutations', () => {
+  cy.document().then(async doc => {
+    await waitForMutations(doc.body);
+  });
+});
+
+function waitForMutations(container, { timeToWaitForMutation = 300 } = {}) {
+  return new Promise(resolve => {
+    let timeoutId = setTimeout(onDone, timeToWaitForMutation);
+
+    const observer = new MutationObserver(() => {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(onDone, timeToWaitForMutation);
+    });
+    observer.observe(container, {
+      subtree: true,
+      childList: true,
+      attributes: true,
+      characterData: true,
+    });
+
+    function onDone() {
+      clearTimeout(timeoutId);
+      observer.disconnect();
+      resolve();
+    }
+  });
+}
+
+// disable screenshots in debug mode. So there is no diffrence to ci.
 if (Cypress.browser.isHeaded) {
   const noop = () => {};
   Cypress.Commands.overwrite('matchImageSnapshot', noop);

@@ -1,6 +1,7 @@
-import { createBasePlugin, mergeStyles } from 'wix-rich-content-common';
+import { mergeStyles } from 'wix-rich-content-common';
+import { createBasePlugin } from 'wix-rich-content-editor-common';
 
-import { DIVIDER_TYPE } from './constants';
+import { DIVIDER_TYPE, DEFAULTS } from './constants';
 import DividerComponent from './components/divider-component';
 import createToolbar from './toolbar';
 import Styles from '../statics/styles/default-styles.scss';
@@ -8,13 +9,16 @@ import Styles from '../statics/styles/default-styles.scss';
 const createDividerPlugin = (config = {}) => {
   const type = DIVIDER_TYPE;
   const { helpers, theme, t, [type]: settings = {}, ...rest } = config;
+
   const styles = mergeStyles({ styles: Styles, theme });
+
   return createBasePlugin({
     component: DividerComponent,
     settings,
     theme,
     type,
     toolbar: createToolbar({
+      settings,
       helpers,
       styles,
       theme,
@@ -22,6 +26,7 @@ const createDividerPlugin = (config = {}) => {
     }),
     helpers,
     t,
+    defaultPluginData: DEFAULTS,
     ...rest,
   });
 };

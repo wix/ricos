@@ -1,0 +1,61 @@
+{
+  "blocks": [
+    {
+      "key": "50k2j",
+      "text": "I am text without alignment",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {
+        "textAlignment": "left"
+      }
+    },
+    {
+      "key": "civd5",
+      "text": "I am text with left alignment",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {
+        "textAlignment": "left"
+      }
+    },
+    {
+      "key": "ehr1q",
+      "text": "I am text with center alignment",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {
+        "textAlignment": "center"
+      }
+    },
+    {
+      "key": "bmg0d",
+      "text": "I am text with right alignment",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {
+        "textAlignment": "right"
+      }
+    },
+    {
+      "key": "e2imv",
+      "text": "I am text with justify alignment",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {
+        "textAlignment": "justify"
+      }
+    }
+  ],
+  "entityMap": {},
+  "VERSION": "6.6.1"
+}
