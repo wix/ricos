@@ -1,12 +1,15 @@
-const shouldCreateNewGroup = (mergedList, groupIndex) => !mergedList[groupIndex];
+const maxPosition = 100;
+const separatorButton = { buttonName: 'Separator' };
 
-const addSeparators = list => {
-  list.forEach((list, i) => {
-    if (i !== list.length - 1) {
-      list.push({ buttonName: 'Separator' });
+const addSeparators = groups => {
+  groups.forEach((group, i) => {
+    if (i !== group.length - 1) {
+      group.push(separatorButton);
     }
   });
 };
+
+const shouldCreateNewGroup = (groups, groupIndex) => !groups[groupIndex];
 
 const compareButtons = (a, b) => {
   if (a.position === b.position && a.isPositioned && !b.isPositioned) {
@@ -17,17 +20,12 @@ const compareButtons = (a, b) => {
   }
   return a.position - b.position;
 };
-/**
- * @param {string[]} sourceList built-in button list
- * @param {Array} positionedList plugin button data { name, position, group } array
- * @param {string} formFactor determines position & group type desktop/mobile
- * @returns {Array} merged button list
- */
-export const mergeButtonLists = (sourceList, positionedList, formFactor = 'desktop') => {
+
+const initializeGroupButtons = (sourceList, positionedList, formFactor) => {
   const groups = [];
   sourceList.forEach((group, groupIndex) => {
-    group.forEach((buttonName, i) => {
-      const button = { buttonName, position: i * 2, groupIndex };
+    group.forEach((buttonName, position) => {
+      const button = { buttonName, position: position * 2, groupIndex };
       if (shouldCreateNewGroup(groups, groupIndex)) {
         groups.push([]);
       }
@@ -36,12 +34,8 @@ export const mergeButtonLists = (sourceList, positionedList, formFactor = 'deskt
   });
 
   positionedList.forEach(buttonData => {
-    const groupIndex =
-      buttonData.group?.[formFactor] !== undefined
-        ? buttonData.group?.[formFactor]
-        : sourceList.length;
-    const position =
-      buttonData.position?.[formFactor] !== undefined ? buttonData.position?.[formFactor] : 100;
+    const groupIndex = buttonData.group?.[formFactor] ?? sourceList.length;
+    const position = buttonData.position?.[formFactor] ?? maxPosition;
     if (shouldCreateNewGroup(groups, groupIndex)) {
       groups.push([]);
     }
@@ -52,7 +46,16 @@ export const mergeButtonLists = (sourceList, positionedList, formFactor = 'deskt
       isPositioned: true,
     });
   });
-
+  return groups;
+};
+/**
+ * @param {string[]} sourceList built-in button list
+ * @param {Array} positionedList plugin button data { name, position, group } array
+ * @param {string} formFactor determines position & group type desktop/mobile
+ * @returns {Array} merged button list
+ */
+export const mergeButtonLists = (sourceList, positionedList, formFactor = 'desktop') => {
+  const groups = initializeGroupButtons(sourceList, positionedList, formFactor);
   groups.forEach(group => group.sort(compareButtons));
   formFactor === 'desktop' && addSeparators(groups);
   let mergedList = [];
