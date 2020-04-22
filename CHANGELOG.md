@@ -15,7 +15,9 @@
     Click to see more.
   </summary>
   
-
+### :house: Internal
+- `editor`
+  - [#936](https://github.com/wix-incubator/rich-content/pull/936) arrangement of inline toolbar buttons
 </details>
 <hr/>
 
