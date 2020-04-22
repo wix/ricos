@@ -1,0 +1,53 @@
+{
+    "blocks": [
+      {
+        "key": "54kjv",
+        "text": "",
+        "type": "unstyled",
+        "depth": 0,
+        "inlineStyleRanges": [],
+        "entityRanges": [],
+        "data": {}
+      },
+      {
+        "key": "6slun",
+        "text": " ",
+        "type": "atomic",
+        "depth": 0,
+        "inlineStyleRanges": [],
+        "entityRanges": [
+          {
+            "offset": 0,
+            "length": 1,
+            "key": 0
+          }
+        ],
+        "data": {}
+      },
+      {
+        "key": "6egs5",
+        "text": "",
+        "type": "unstyled",
+        "depth": 0,
+        "inlineStyleRanges": [],
+        "entityRanges": [],
+        "data": {}
+      }
+    ],
+    "entityMap": {
+      "0": {
+        "type": "wix-draft-plugin-html",
+        "mutability": "IMMUTABLE",
+        "data": {
+          "srcType": "html",
+          "src": "<blockquote class=\"twitter-tweet\"><p lang=\"en\" dir=\"ltr\">John Horton Conway has died.<br><br>Sigh.<br><br>One of the most unique mathematicians and human beings who ever lived.<br><br>Five years ago he was game for this April Fool&#39;s prank<a href=\"https://t.co/sykGARb0FC\">https://t.co/sykGARb0FC</a></p>&mdash; Card Colm Mulcahy (@CardColm) <a href=\"https://twitter.com/CardColm/status/1249038195880341505?ref_src=twsrc%5Etfw\">April 11, 2020</a></blockquote> <script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script>",
+          "config": {
+            "alignment": "center",
+            "width": 350,
+            "height": 615
+          }
+        }
+      }
+    },
+    "VERSION": "7.3.5"
+  }
