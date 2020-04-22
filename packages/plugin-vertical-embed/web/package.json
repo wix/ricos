@@ -23,6 +23,7 @@
   "scripts": {
     "clean": "rm -rf dist/",
     "prebuild": "npm run clean",
+    "postbuild": "node ../../../scripts/esCheck.js && css-modules-flow-types statics/styles --extension scss && css-modules-flow-types src --extension scss",
     "build": "rollup --environment MODULE_NAME:plugin-vertical-embed -c ../../../rollup.config.js",
     "build:dev": "cross-env NODE_ENV=development npm run build",
     "build:analyze": "npm run build -- --environment MODULE_ANALYZE && open stats.html",

@@ -6,5 +6,8 @@ declare module.exports: {|
   +'loaderOverlay': string,
   +'medium': string,
   +'mini': string,
+  +'preview_img': string,
+  +'progress': string,
+  +'small': string,
   +'spinner': string,
 |};
