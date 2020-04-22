@@ -39,7 +39,7 @@ export default class AddPluginMenu extends Component {
           <div className={Styles.searchWrapper}>
             <TextSearchInput
               onClose={hidePopup}
-              placeHolder={t('Side_toolbar_basic_search_placeholder')}
+              placeHolder={t('BlockToolbar_Search_Placeholder')}
               theme={theme}
               onChange={this.onChange}
               value={value}

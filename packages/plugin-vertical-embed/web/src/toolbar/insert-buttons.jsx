@@ -21,7 +21,7 @@ export default ({ helpers, t, settings, isMobile }) => {
       componentData: { ...DEFAULTS, type },
       helpers,
       t,
-      section: 'Side_toolbar_embed_from_wix_section',
+      section: 'BlockToolbar_Section_Embed_Wix',
       modalElement: decorateComponentWithProps(PostSelectionInputModal, settings),
       modalStyles: getModalStyles({
         customStyles: getModalCustomStyles(isMobile),

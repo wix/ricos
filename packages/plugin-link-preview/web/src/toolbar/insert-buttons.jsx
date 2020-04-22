@@ -46,7 +46,7 @@ export default ({ helpers, settings, isMobile, t }) => {
       helpers,
       modalElement: EmbedURLInputModal,
       modalStyles: getModalStyles({ customStyles, fullScreen: false, isMobile }),
-      section: 'Side_toolbar_embed_from_social_section',
+      section: 'BlockToolbar_Section_Embed_Social',
     };
   });
 };

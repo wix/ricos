@@ -1,8 +1,9 @@
 export const getSortedSections = sectionsArr => {
   const sortedSections = [
     'BlockToolbar_Section_Basic',
-    'Side_toolbar_embed_from_wix_section',
-    'Side_toolbar_embed_from_social_section',
+    'BlockToolbar_Section_Embed_Wix',
+    'BlockToolbar_Section_Embed_Social',
+    'BlockToolbar_Section_Tools',
   ];
   return sortedSections
     .map(section => (sectionsArr.includes(section) ? section : false))

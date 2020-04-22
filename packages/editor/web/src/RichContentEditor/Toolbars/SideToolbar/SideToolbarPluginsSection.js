@@ -28,7 +28,9 @@ const SideToolbarPluginsSection = ({
     : structure.filter(({ name }) => pluginsForTag.includes(name));
 
   if (plugins.length === 0) {
-    return <div className={Styles.pluginsSectionEmptyState}>{t('Side_toolbar_empty_state')}</div>;
+    return (
+      <div className={Styles.pluginsSectionEmptyState}>{t('BlockToolbar_Search_EmptyState')}</div>
+    );
   }
 
   const pluginSectionRenderer = section => {
