@@ -534,7 +534,6 @@ const config = {
     //     InsertPluginButtonIcon: MyCustomIcon,
     //   },
     // },
-
     palette: ['#FEFDFD', '#D5D4D4', '#ABCAFF', '#81B0FF', '#0261FF', '#0141AA'],
     selectionBackgroundColor: 'fuchsia',
     selectionBorderColor: '#FFF',
