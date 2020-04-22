@@ -25,9 +25,9 @@ export const STATIC_TOOLBAR_BUTTONS = {
   PINTEREST: 'Pinterest_insert_plugin_button',
   YOUTUBE: 'YouTube_insert_plugin_button',
   INSTAGRAM: 'Instagram_insert_plugin_button',
-  EVENT: 'VerticalEmbed-event_insert_plugin_button',
-  PRODUCT: 'VerticalEmbed-product_insert_plugin_button',
-  BOOKING: 'VerticalEmbed-booking_insert_plugin_button',
+  EVENT: 'Events_insert_plugin_button',
+  PRODUCT: 'Stores_insert_plugin_button',
+  BOOKING: 'Bookings_insert_plugin_button',
   GIPHY: 'GIF_insert_plugin_button',
 };
 

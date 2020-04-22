@@ -227,6 +227,7 @@
   "LinkTo_Modal_Section_Filter_All": "All",
   "Accordion_CollapsedText_Placeholder": "Write text to hide",
   "BlockToolbar_Section_Embed_Social": "Embed from Social",
+  "BlockToolbar_Search_EmptyState": "No blocks found.\nTry another search term.",
   "EmbedURL_Social_Pinterest_Title": "Add a Pinterest Pin",
   "HtmlPlugin_InsertButton_Tooltip": "Inserir código HTML",
   "MapSettings_MapOption_SubHeader": "Exibição do mapa",
