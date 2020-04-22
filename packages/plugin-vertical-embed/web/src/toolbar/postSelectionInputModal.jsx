@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import UrlInputModal from 'wix-rich-content-editor-common/dist/lib/UrlInputModal';
+import { verticalsTypeMap } from '../constants';
 export default class PostSelectionInputModal extends Component {
   state = {
     errorMsg: '',
@@ -17,8 +18,9 @@ export default class PostSelectionInputModal extends Component {
       fetchFunctions,
       componentData: { type },
     } = this.props;
+    const fetchType = verticalsTypeMap[type];
     const abortController = new AbortController();
-    const promise = fetchFunctions[type](query, abortController.signal).then(res => {
+    const promise = fetchFunctions[fetchType](query, abortController.signal).then(res => {
       return res;
     });
     return {
