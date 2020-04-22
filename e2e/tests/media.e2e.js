@@ -138,7 +138,6 @@ describe('plugins', () => {
       cy.waitForDocumentMutations();
       cy.eyesCheckWindow(`${this.test.title} - in view`);
     });
-    });
 
     context('organize media', () => {
       // TODO THIS ONE
@@ -246,7 +245,7 @@ describe('plugins', () => {
       });
     });
 
-    it.only(`add a custom video`, function() {
+    it(`add a custom video`, function() {
       // TODO THIS ONE
       // WRAPPER HAS ERROR
       cy.loadEditorAndViewer('empty');
