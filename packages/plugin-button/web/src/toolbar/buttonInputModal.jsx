@@ -32,6 +32,7 @@ export default class ButtonInputModal extends Component {
       initialComponentData: { ...button },
       isHover: false,
       activeTab: settingsTabValue,
+      isLinkNeeded: !this.props.settings.onClickEvent,
     };
 
     this.setScrollbarRef = element => {
@@ -71,11 +72,11 @@ export default class ButtonInputModal extends Component {
   };
 
   onConfirm = () => {
-    const { validUrl } = this.state;
+    const { validUrl, isLinkNeeded } = this.state;
     const {
       helpers: { closeModal },
     } = this.props;
-    if (validUrl) {
+    if (!isLinkNeeded || validUrl) {
       this.setState({ submitted: true, isOpen: false });
       closeModal();
     } else {
@@ -125,15 +126,18 @@ export default class ButtonInputModal extends Component {
 
   render() {
     const { theme, t, uiSettings, doneLabel, cancelLabel, isMobile } = this.props;
+    const { isLinkNeeded } = this.state;
     const { styles } = this;
     const settingTabLabel = (
       <div className={styles.button_inputModal_settingTab}>
         <div className={styles.button_inputModal_tabTitle}>
           <p className={styles.button_inputModal_tabLabel}>{t('ButtonModal_Settings_Tab')}</p>
         </div>
-        <div className={styles.button_inputModal_errorIcon}>
-          {!this.state.validUrl ? <ErrorIcon width="18" height="18" /> : null}
-        </div>
+        {isLinkNeeded && (
+          <div className={styles.button_inputModal_errorIcon}>
+            {!this.state.validUrl ? <ErrorIcon width="18" height="18" /> : null}
+          </div>
+        )}
       </div>
     );
     const designTabLabel = (
@@ -153,6 +157,7 @@ export default class ButtonInputModal extends Component {
         linkInputRef={ref => {
           this.linkInput = ref;
         }}
+        isLinkNeeded={isLinkNeeded}
       />
     );
     const designComponent = (

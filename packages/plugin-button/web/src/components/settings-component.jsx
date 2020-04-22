@@ -49,7 +49,7 @@ class SettingsComponent extends PureComponent {
   };
 
   render() {
-    const { t, linkInputRef, isMobile } = this.props;
+    const { t, linkInputRef, isMobile, isLinkNeeded } = this.props;
     const { buttonText, url } = this.state;
     const errorTooltip = !this.props.validUrl ? t('ButtonModal_Invalid_Link') : null;
     return (
@@ -73,56 +73,63 @@ class SettingsComponent extends PureComponent {
             />
           </div>
         </div>
-        <div className={this.styles.button_settingsComponent_header_ButtonLink} ref={linkInputRef}>
-          {t('ButtonModal_Button_Link')}
-        </div>
-        <TextInput
-          inputRef={ref => {
-            this.input = ref;
-          }}
-          type="text"
-          onKeyPress={this.handleKeyPress}
-          onChange={this.onLinkChanged}
-          onBlur={this.onBlur}
-          value={url}
-          placeholder={t('ButtonModal_Link_Input_Placeholder')}
-          theme={this.styles}
-          error={errorTooltip}
-          showTooltip={false}
-          data-hook="ButtonInputModal"
-        />
-        {!this.props.validUrl ? (
-          <div className={this.styles.button_settingsComponent_errorMessage}>
-            {t('ButtonModal_InputLink_ErrorMessage')}
-          </div>
-        ) : null}
-        <div
-          style={{
-            paddingTop: !this.props.validUrl
-              ? isMobile
-                ? '21px'
-                : '25px'
-              : isMobile
-              ? '33px'
-              : '34px',
-          }}
-          className={this.styles.button_settingsComponent_checkBoxes}
-        >
-          <Checkbox
-            label={t('LinkPanel_Target_Checkbox')}
-            theme={this.styles}
-            checked={this.state.target}
-            dataHook="linkPanelBlankCheckbox"
-            onChange={this.handleTargetChange}
-          />
-          <Checkbox
-            label={t('LinkPanel_Nofollow_Checkbox')}
-            theme={this.styles}
-            checked={this.state.rel}
-            dataHook="linkPanelRelCheckbox"
-            onChange={this.handleRelChange}
-          />
-        </div>
+        {isLinkNeeded && (
+          <>
+            <div
+              className={this.styles.button_settingsComponent_header_ButtonLink}
+              ref={linkInputRef}
+            >
+              {t('ButtonModal_Button_Link')}
+            </div>
+            <TextInput
+              inputRef={ref => {
+                this.input = ref;
+              }}
+              type="text"
+              onKeyPress={this.handleKeyPress}
+              onChange={this.onLinkChanged}
+              onBlur={this.onBlur}
+              value={url}
+              placeholder={t('ButtonModal_Link_Input_Placeholder')}
+              theme={this.styles}
+              error={errorTooltip}
+              showTooltip={false}
+              data-hook="ButtonInputModal"
+            />
+            {!this.props.validUrl ? (
+              <div className={this.styles.button_settingsComponent_errorMessage}>
+                {t('ButtonModal_InputLink_ErrorMessage')}
+              </div>
+            ) : null}
+            <div
+              style={{
+                paddingTop: !this.props.validUrl
+                  ? isMobile
+                    ? '21px'
+                    : '25px'
+                  : isMobile
+                  ? '33px'
+                  : '34px',
+              }}
+              className={this.styles.button_settingsComponent_checkBoxes}
+            >
+              <Checkbox
+                label={t('LinkPanel_Target_Checkbox')}
+                theme={this.styles}
+                checked={this.state.target}
+                dataHook="linkPanelBlankCheckbox"
+                onChange={this.handleTargetChange}
+              />
+              <Checkbox
+                label={t('LinkPanel_Nofollow_Checkbox')}
+                theme={this.styles}
+                checked={this.state.rel}
+                dataHook="linkPanelRelCheckbox"
+                onChange={this.handleRelChange}
+              />
+            </div>
+          </>
+        )}
       </div>
     );
   }
@@ -140,6 +147,7 @@ SettingsComponent.propTypes = {
   onKeyPress: PropTypes.func,
   linkInputRef: PropTypes.func,
   onBlur: PropTypes.func,
+  isLinkNeeded: PropTypes.bool,
 };
 
 export default SettingsComponent;
