@@ -39,14 +39,14 @@ class InputWithLabel extends Component {
     const { id, label, maxLength, tooltipTextKey } = this.props;
     if (label) {
       return (
-        <div>
-          <label htmlFor={id} className={generalstyles.infoContainer}>
+        <label htmlFor={id}>
+          <div className={generalstyles.infoContainer}>
             <span className={styles.inputWithLabel_label}>{label}</span>
             <InfoIcon iconStyles={styles.infoIcon} tooltipTextKey={tooltipTextKey} />
-          </label>
+          </div>
           {this.renderInput()}
           {maxLength && this.renderCharacterCapacity()}
-        </div>
+        </label>
       );
     } else {
       return this.renderInput();
