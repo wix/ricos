@@ -7,7 +7,7 @@ import {
   IMAGE_SETTINGS,
   GIPHY_PLUGIN,
 } from '../cypress/dataHooks';
-import { DEFAULT_DESKTOP_BROWSERS } from './settings';
+import { DEFAULT_DESKTOP_BROWSERS, apps } from './settings';
 
 const eyesOpen = ({
   test: {
@@ -30,31 +30,33 @@ describe('plugins', () => {
 
     beforeEach('load editor', () => {
       cy.switchToDesktop();
-      cy.loadEditorAndViewer('images');
     });
 
     after(() => cy.eyesClose());
 
-    it('render image toolbar and settings', function() {
-      cy.openImageSettings();
-      cy.get(`[data-hook=${IMAGE_SETTINGS.PREVIEW}]:first`);
-      cy.eyesCheckWindow(this.test.title + ' - settings');
-      cy.addImageTitle();
-      cy.eyesCheckWindow(this.test.title + ' - add image title');
-      cy.editImageTitle();
-      cy.eyesCheckWindow(this.test.title + ' - in plugin editing');
-      cy.openImageSettings(false).deleteImageTitle();
-      cy.eyesCheckWindow(this.test.title + ' - delete image title');
-      cy.openImageSettings(false).addImageLink();
-      cy.eyesCheckWindow(this.test.title + ' - add a link');
-      cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE).pluginSizeOriginal();
-      cy.eyesCheckWindow(this.test.title + '  - plugin original size');
-      cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE).shrinkPlugin();
-      cy.eyesCheckWindow(this.test.title + '  - plugin toolbar');
-      cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE).pluginSizeBestFit();
-      cy.eyesCheckWindow(this.test.title + '  - plugin content size');
-      cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE).pluginSizeFullWidth();
-      cy.eyesCheckWindow(this.test.title + '  - plugin full width size');
+    apps.forEach(app => {
+      it(`render image toolbar and settings [${app.name}]`, function() {
+        cy[app.loadApp]('images');
+        cy.openImageSettings();
+        cy.get(`[data-hook=${IMAGE_SETTINGS.PREVIEW}]:first`);
+        cy.eyesCheckWindow(this.test.title + ' - settings');
+        cy.addImageTitle();
+        cy.eyesCheckWindow(this.test.title + ' - add image title');
+        cy.editImageTitle();
+        cy.eyesCheckWindow(this.test.title + ' - in plugin editing');
+        cy.openImageSettings(false).deleteImageTitle();
+        cy.eyesCheckWindow(this.test.title + ' - delete image title');
+        cy.openImageSettings(false).addImageLink();
+        cy.eyesCheckWindow(this.test.title + ' - add a link');
+        cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE).pluginSizeOriginal();
+        cy.eyesCheckWindow(this.test.title + '  - plugin original size');
+        cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE).shrinkPlugin();
+        cy.eyesCheckWindow(this.test.title + '  - plugin toolbar');
+        cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE).pluginSizeBestFit();
+        cy.eyesCheckWindow(this.test.title + '  - plugin content size');
+        cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE).pluginSizeFullWidth();
+        cy.eyesCheckWindow(this.test.title + '  - plugin full width size');
+      });
     });
   });
 
@@ -66,40 +68,39 @@ describe('plugins', () => {
     after(() => cy.eyesClose());
 
     context('image full screen', () => {
-      beforeEach('load editor', () => cy.loadEditorAndViewer('images'));
-
-      it('expand image on full screen', function() {
-        cy.get(`[data-hook=${PLUGIN_COMPONENT.IMAGE}]:last`)
-          .parent()
-          .click();
-        cy.eyesCheckWindow({ tag: this.test.title, target: 'window', fully: false });
+      apps.forEach(app => {
+        it(`expand image on full screen [${app.name}]`, function() {
+          cy[app.loadApp]('images');
+          cy.get(`[data-hook=${PLUGIN_COMPONENT.IMAGE}]:last`)
+            .parent()
+            .click();
+          cy.eyesCheckWindow({ tag: this.test.title, target: 'window', fully: false });
+        });
       });
     });
 
     context('gallery full screen', () => {
-      beforeEach('load editor', () =>
-        cy
-          .loadEditorAndViewer('gallery')
-          .get(`[data-hook=${'image-item'}]:first`)
-          .get(`[data-hook=${'image-item'}]`)
-          .eq(1)
-      );
-
-      it('expand gallery image on full screen', function() {
-        cy.get(`[data-hook=${'image-item'}]`)
-          .eq(2)
-          .parent()
-          .click();
-        cy.get('#pgi65a6266ba23a8a55da3f469157f15237_0 > div > div > div > a > div > canvas', {
-          timeout: 10000,
-        }).should('be.visible');
-        cy.eyesCheckWindow({ tag: this.test.title, target: 'window', fully: false });
-        cy.get(`[data-hook=${'nav-arrow-next'}]`).click({ force: true });
-        cy.get('#pgiea8ec1609e052b7f196935318316299d_1 > div > div > div > a > div > canvas', {
-          timeout: 10000,
-        }).should('be.visible');
-        cy.get(`[data-hook=${'fullscreen-close-button'}]`).click();
-        // cy.eyesCheckWindow({ tag: 'closed fullscreen', target: 'window', fully: false });
+      apps.forEach(app => {
+        it(`expand gallery image on full screen [${app.name}]`, function() {
+          cy[app.loadApp]('gallery')
+            .get(`[data-hook=${'image-item'}]:first`)
+            .get(`[data-hook=${'image-item'}]`)
+            .eq(1);
+          cy.get(`[data-hook=${'image-item'}]`)
+            .eq(2)
+            .parent()
+            .click();
+          cy.get('#pgi65a6266ba23a8a55da3f469157f15237_0 > div > div > div > a > div > canvas', {
+            timeout: 10000,
+          }).should('be.visible');
+          cy.eyesCheckWindow({ tag: this.test.title, target: 'window', fully: false });
+          cy.get(`[data-hook=${'nav-arrow-next'}]`).click({ force: true });
+          cy.get('#pgiea8ec1609e052b7f196935318316299d_1 > div > div > div > a > div > canvas', {
+            timeout: 10000,
+          }).should('be.visible');
+          cy.get(`[data-hook=${'fullscreen-close-button'}]`).click();
+          // cy.eyesCheckWindow({ tag: 'closed fullscreen', target: 'window', fully: false });
+        });
       });
     });
   });
@@ -116,6 +117,8 @@ describe('plugins', () => {
     after(() => cy.eyesClose());
 
     it('render gallery plugin', function() {
+      // TODO THIS ONE
+      // WRAPPER HAS ERROR
       cy.loadEditorAndViewer('gallery')
         .get(`[data-hook=${'image-item'}]:first`)
         .get(`[data-hook=${'image-item'}]`)
@@ -128,14 +131,18 @@ describe('plugins', () => {
     });
 
     it('render gallery out of view', function() {
+      // TODO THIS ONE
       cy.loadEditorAndViewer('gallery-out-of-view');
       cy.eyesCheckWindow(`${this.test.title} - out of view`);
       cy.scrollTo('bottom');
       cy.waitForDocumentMutations();
       cy.eyesCheckWindow(`${this.test.title} - in view`);
     });
+    });
 
     context('organize media', () => {
+      // TODO THIS ONE
+      // WRAPPER HAS ERROR
       it('allow to manipulate the media items', function() {
         const firstImage = `[data-hook=${GALLERY_SETTINGS.IMAGE}]:first`;
         const anyImage = `[data-hook=${GALLERY_SETTINGS.IMAGE}]`;
@@ -170,6 +177,8 @@ describe('plugins', () => {
     });
 
     context('media settings', () => {
+      // TODO THIS ONE
+      // WRAPPER HAS ERROR
       it('allow to update media content', function() {
         cy.loadEditorAndViewer('gallery')
           .openPluginToolbar(PLUGIN_COMPONENT.GALLERY)
@@ -213,28 +222,34 @@ describe('plugins', () => {
 
     beforeEach('load editor', () => {
       cy.switchToDesktop();
-      cy.loadEditorAndViewer('empty');
     });
 
     after(() => cy.eyesClose());
 
-    it('render upload modal', function() {
-      cy.openVideoUploadModal();
-      cy.eyesCheckWindow(this.test.title);
+    apps.forEach(app => {
+      it(`render upload modal [${app.name}]`, function() {
+        cy[app.loadApp]('empty');
+        cy.openVideoUploadModal();
+        cy.eyesCheckWindow(this.test.title);
+      });
+
+      it(`add a video from URL [${app.name}]`, function() {
+        cy[app.loadApp]('empty');
+        cy.openVideoUploadModal().addVideoFromURL();
+        cy.shrinkPlugin();
+        cy.focusEditor()
+          .type('{uparrow}') //try to fix bug where sometimes it doesn't type
+          .type('{uparrow}')
+          .type('Will this fix the flakiness?');
+        cy.waitForVideoToLoad();
+        cy.eyesCheckWindow(this.test.title);
+      });
     });
 
-    it('add a video from URL', function() {
-      cy.openVideoUploadModal().addVideoFromURL();
-      cy.shrinkPlugin();
-      cy.focusEditor()
-        .type('{uparrow}') //try to fix bug where sometimes it doesn't type
-        .type('{uparrow}')
-        .type('Will this fix the flakiness?');
-      cy.waitForVideoToLoad();
-      cy.eyesCheckWindow(this.test.title);
-    });
-
-    it('add a custom video', function() {
+    it.only(`add a custom video`, function() {
+      // TODO THIS ONE
+      // WRAPPER HAS ERROR
+      cy.loadEditorAndViewer('empty');
       cy.openVideoUploadModal().addCustomVideo();
       cy.shrinkPlugin();
       cy.focusEditor()
@@ -253,25 +268,28 @@ describe('plugins', () => {
 
     beforeEach('load editor', () => {
       cy.switchToDesktop();
-      cy.loadEditorAndViewer('empty');
     });
 
     after(() => cy.eyesClose());
 
-    it('render upload modal', function() {
-      cy.openSoundCloudModal();
-      cy.eyesCheckWindow(this.test.title);
-    });
+    apps.forEach(app => {
+      it(`render upload modal [${app.name}]`, function() {
+        cy[app.loadApp]('empty');
+        cy.openSoundCloudModal();
+        cy.eyesCheckWindow(this.test.title);
+      });
 
-    it('add a soundcloud URL', function() {
-      cy.openSoundCloudModal().addSoundCloud();
-      cy.shrinkPlugin();
-      cy.focusEditor()
-        .type('{uparrow}') //try to fix bug where sometimes it doesn't type
-        .type('{uparrow}')
-        .type('Will this fix the flakiness?');
-      cy.waitForVideoToLoad();
-      cy.eyesCheckWindow(this.test.title);
+      it(`add a soundcloud URL [${app.name}]`, function() {
+        cy[app.loadApp]('empty');
+        cy.openSoundCloudModal().addSoundCloud();
+        cy.shrinkPlugin();
+        cy.focusEditor()
+          .type('{uparrow}') //try to fix bug where sometimes it doesn't type
+          .type('{uparrow}')
+          .type('Will this fix the flakiness?');
+        cy.waitForVideoToLoad();
+        cy.eyesCheckWindow(this.test.title);
+      });
     });
   });
 
@@ -286,23 +304,25 @@ describe('plugins', () => {
 
     after(() => cy.eyesClose());
 
-    it('render giphy plugin toolbar', function() {
-      cy.loadEditorAndViewer('giphy');
-      cy.openPluginToolbar(PLUGIN_COMPONENT.GIPHY).clickToolbarButton(
-        PLUGIN_TOOLBAR_BUTTONS.SMALL_CENTER
-      );
-      cy.get(`button[data-hook=${PLUGIN_TOOLBAR_BUTTONS.REPLACE}][tabindex=0]`).click();
-      cy.get(`[data-hook=${GIPHY_PLUGIN.UPLOAD_MODAL}] img`);
-      cy.eyesCheckWindow(this.test.title);
-    });
-
-    it('should auto focus on add gif', function() {
-      cy.loadEditorAndViewer('empty');
-      cy.addGif().get('[data-hook=giphyPluginToolbar]');
-      cy.window().then(win => {
-        win.__CONTENT_SNAPSHOT__ = { mock: true };
+    apps.forEach(app => {
+      it(`render giphy plugin toolbar [${app.name}]`, function() {
+        cy[app.loadApp]('giphy');
+        cy.openPluginToolbar(PLUGIN_COMPONENT.GIPHY).clickToolbarButton(
+          PLUGIN_TOOLBAR_BUTTONS.SMALL_CENTER
+        );
+        cy.get(`button[data-hook=${PLUGIN_TOOLBAR_BUTTONS.REPLACE}][tabindex=0]`).click();
+        cy.get(`[data-hook=${GIPHY_PLUGIN.UPLOAD_MODAL}] img`);
+        cy.eyesCheckWindow(this.test.title);
       });
-      cy.eyesCheckWindow(this.test.title);
+
+      it(`should auto focus on add gif [${app.name}]`, function() {
+        cy[app.loadApp]('empty');
+        cy.addGif().get('[data-hook=giphyPluginToolbar]');
+        cy.window().then(win => {
+          win.__CONTENT_SNAPSHOT__ = { mock: true };
+        });
+        cy.eyesCheckWindow(this.test.title);
+      });
     });
   });
 
@@ -317,15 +337,17 @@ describe('plugins', () => {
 
     after(() => cy.eyesClose());
 
-    it('render some emojies', function() {
-      cy.loadEditorAndViewer('empty');
-      cy.get(`button[data-hook=${PLUGIN_COMPONENT.EMOJI}]`).click();
-      cy.eyesCheckWindow('render emoji modal');
-      cy.get(`[data-hook=emoji-5]`).click();
-      cy.get(`[data-hook=emoji-group-5]`).click();
-      cy.get(`[data-hook=emoji-95]`).click();
-      cy.get(`[data-hook=emoji-121]`).click();
-      cy.eyesCheckWindow(this.test.title);
+    apps.forEach(app => {
+      it(`render some emojies [${app.name}]`, function() {
+        cy[app.loadApp]('empty');
+        cy.get(`button[data-hook=${PLUGIN_COMPONENT.EMOJI}]`).click();
+        cy.eyesCheckWindow('render emoji modal');
+        cy.get(`[data-hook=emoji-5]`).click();
+        cy.get(`[data-hook=emoji-group-5]`).click();
+        cy.get(`[data-hook=emoji-95]`).click();
+        cy.get(`[data-hook=emoji-121]`).click();
+        cy.eyesCheckWindow(this.test.title);
+      });
     });
   });
 });
