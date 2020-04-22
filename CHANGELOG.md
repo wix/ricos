@@ -15,19 +15,21 @@
     Click to see more.
   </summary>
   
-### :house: Internal
-- `general`
-  - [#927](https://github.com/wix-incubator/rich-content/pull/927) Adding GitHub action that compares and fails if one of the current bundle sizes grows more then 5KB
-### :bug: Bug Fix
-- `plugin-emoji`
-  - [#948](https://github.com/wix-incubator/rich-content/pull/948) manually extract the icons we use from 'react-icons' in plugin emoji. react-icon has **const** in the node module.
-
-### :bug: Bug Fix
-- `map`
-  - [#939](https://github.com/wix-incubator/rich-content/pull/939) Map Settings: dynamic style replaced with theme
 
 </details>
 <hr/>
+
+## 7.3.5 (Apr 21, 2020)
+### :bug: Bug Fix
+- `plugin-emoji`
+  - [#948](https://github.com/wix-incubator/rich-content/pull/948) es5 `const` in react-icons node module. Extract the needed icons and removed the dependency on 'react-icons'
+- `map`
+  - [#939](https://github.com/wix-incubator/rich-content/pull/939) Map Settings: dynamic style replaced with theme
+- `editor`
+  - [#917](https://github.com/wix-incubator/rich-content/pull/917) add tooltips for drop down buttons
+### :house: Internal
+- `general`
+  - [#927](https://github.com/wix-incubator/rich-content/pull/927) Adding GitHub action that compares and fails if one of the current bundle sizes grows more then 5KB
 
 ## 7.3.4 (Apr 21, 2020)
 ### :house: Internal
