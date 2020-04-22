@@ -15,31 +15,29 @@ const compareButtons = (a, b) => {
   return a.position - b.position;
 };
 
-const addButton = (buttonName, position, groupIndex, groups) => {};
+const addButton = (buttonName, position, groupIndex, groups) => {
+  if (shouldCreateNewGroup(groups, groupIndex)) {
+    groups.push([]);
+  }
+  groups[groupIndex].push({
+    buttonName,
+    position,
+    groupIndex,
+  });
+};
 
 const initializeGroupButtons = (defaultButtons, pluginButtons, formFactor) => {
   const groups = [];
   defaultButtons.forEach((group, groupIndex) => {
     group.forEach((buttonName, position) => {
-      const button = { buttonName, position, groupIndex };
-      if (shouldCreateNewGroup(groups, groupIndex)) {
-        groups.push([]);
-      }
-      groups[button.groupIndex].push(button);
+      addButton(buttonName, position, groupIndex, groups);
     });
   });
 
   pluginButtons.forEach(buttonData => {
     const groupIndex = buttonData.group?.[formFactor] ?? defaultButtons.length;
     const position = buttonData.position?.[formFactor] ?? maxPosition;
-    if (shouldCreateNewGroup(groups, groupIndex)) {
-      groups.push([]);
-    }
-    groups[groupIndex].push({
-      buttonName: buttonData.name,
-      position,
-      groupIndex,
-    });
+    addButton(buttonData.name, position, groupIndex, groups);
   });
   return groups;
 };

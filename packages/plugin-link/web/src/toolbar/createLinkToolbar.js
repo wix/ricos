@@ -64,7 +64,7 @@ export default (config, closeInlinePluginToolbar) => ({
         />
       ),
       isMobile: true,
-      position: { mobile: 9 },
+      position: { mobile: 4.1 },
       group: { mobile: 0 },
       keyBindings: [
         {
