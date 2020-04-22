@@ -87,7 +87,7 @@ Cypress.Commands.add('loadIsolatedEditorAndViewer', fixtureName =>
 );
 Cypress.Commands.add('loadWrapperEditorAndViewer', fixtureName => run('wrapper', fixtureName));
 
-Cypress.Commands.add('loadEditorAndViewerOnSsr', (fixtureName, compName) => {
+Cypress.Commands.add('loadTestAppOnSsr', (fixtureName, compName) => {
   cy.request(getUrl(compName, fixtureName))
     .its('body')
     .then(html => {
