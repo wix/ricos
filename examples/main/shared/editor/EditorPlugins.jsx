@@ -146,7 +146,7 @@ let userButtonBorderColors = [...buttonDefaultPalette];
 
 const getLinkPanelDropDownConfig = () => {
   const getItems = () => {
-    casual.define('item', function () {
+    casual.define('item', function() {
       return {
         value: casual.url,
         label: casual.catch_phrase,
@@ -533,6 +533,7 @@ const config = {
     //     InsertPluginButtonIcon: MyCustomIcon,
     //   },
     // },
+
     palette: ['#FEFDFD', '#D5D4D4', '#ABCAFF', '#81B0FF', '#0261FF', '#0141AA'],
     selectionBackgroundColor: 'fuchsia',
     selectionBorderColor: '#FFF',
