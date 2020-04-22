@@ -6,7 +6,7 @@ export const createTextColorToolbar = () => ({
     TextColor: {
       component: TextColorButton,
       isMobile: true,
-      position: { desktop: 3, mobile: 3 },
+      position: { desktop: 5, mobile: 5 },
       group: { desktop: 0, mobile: 0 },
     },
   }),
@@ -17,7 +17,7 @@ export const createTextHighlightToolbar = () => ({
     TextHighlight: {
       component: TextHighlightButton,
       isMobile: true,
-      position: { desktop: 4, mobile: 4 },
+      position: { desktop: 6, mobile: 6 },
       group: { desktop: 0, mobile: 0 },
     },
   }),
