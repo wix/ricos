@@ -135,7 +135,7 @@ const config = {
   },
   uiSettings,
   [BUTTON_TYPE]: {
-    // onClickEvent: () => {},
+    // onClick: () => {},
   },
 };
 

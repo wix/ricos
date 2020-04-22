@@ -49,7 +49,7 @@ class SettingsComponent extends PureComponent {
   };
 
   render() {
-    const { t, linkInputRef, isMobile, isLinkNeeded } = this.props;
+    const { t, linkInputRef, isMobile, shouldShowLink } = this.props;
     const { buttonText, url } = this.state;
     const errorTooltip = !this.props.validUrl ? t('ButtonModal_Invalid_Link') : null;
     return (
@@ -73,7 +73,7 @@ class SettingsComponent extends PureComponent {
             />
           </div>
         </div>
-        {isLinkNeeded && (
+        {shouldShowLink && (
           <>
             <div
               className={this.styles.button_settingsComponent_header_ButtonLink}
@@ -147,7 +147,7 @@ SettingsComponent.propTypes = {
   onKeyPress: PropTypes.func,
   linkInputRef: PropTypes.func,
   onBlur: PropTypes.func,
-  isLinkNeeded: PropTypes.bool,
+  shouldShowLink: PropTypes.bool,
 };
 
 export default SettingsComponent;
