@@ -15,7 +15,9 @@
     Click to see more.
   </summary>
   
-
+### :rocket: New Feature
+- `button`
+  - [#953](https://github.com/wix-incubator/rich-content/pull/953) action button: by passing onClickEvent callback, on click triggers it
 </details>
 <hr/>
 
