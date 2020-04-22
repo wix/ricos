@@ -4,5 +4,10 @@ declare module.exports: {|
   +'alignCenter': string,
   +'alignLeft': string,
   +'alignRight': string,
+  +'flex': string,
+  +'sizeContent': string,
+  +'sizeFullWidth': string,
+  +'sizeSmall': string,
+  +'sizeSmallCenter': string,
   +'textWrapNowrap': string,
 |};

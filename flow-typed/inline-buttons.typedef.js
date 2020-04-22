@@ -21,5 +21,14 @@ declare type InlineButton = {
   desktop?: boolean,
 };
 
-declare type CreateInlineButtons = ({ t: Translate, styles: any, anchorTarget: string, relValue: string, isMobile: boolean, uiSettings: any }) => Array<InlineButton>;
+declare type CreateInlineButtons = ({
+ t: Translate,
+ styles: any,
+ anchorTarget: string,
+ relValue: string,
+ isMobile: boolean,
+ uiSettings: any,
+ settings: any,
+ closeInlinePluginToolbar: () => void,
+}) => Array<InlineButton>;
 */

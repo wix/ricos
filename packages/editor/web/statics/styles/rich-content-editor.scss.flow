@@ -14,11 +14,9 @@ declare module.exports: {|
   +'headerTwo': string,
   +'indent': string,
   +'justify': string,
-  +'orderedList': string,
   +'quote': string,
   +'text': string,
   +'toolbar': string,
   +'transformed': string,
-  +'unorderedList': string,
   +'wrapper': string,
 |};

@@ -3,7 +3,7 @@ import { BUTTONS, getModalStyles } from 'wix-rich-content-editor-common';
 import { Modals } from '../modals';
 import { MediaReplaceIcon } from '../icons';
 
-const createInlineButtons /*: CreateInlineButtons*/ = ({ t, isMobile }) => {
+const createInlineButtons /*: CreateInlineButtons*/ = ({ t, isMobile, settings }) => {
   const icon = settings?.toolbar?.icons?.replace || MediaReplaceIcon;
   return [
     { keyName: 'sizeSmallCenter', type: BUTTONS.SIZE_SMALL_CENTER, mobile: false },

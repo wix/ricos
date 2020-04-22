@@ -33,6 +33,7 @@ declare type TextButtonMappingParams = {
   setEditorState: (editorState: any) => void,
   settings: any,
   uiSettings: any,
+  closeInlinePluginToolbar: () => void
  };
 
  declare type TextButtonMapper = (params: TextButtonMappingParams) => {

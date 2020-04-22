@@ -12,6 +12,10 @@ declare type InsertButton = {
   modalStyles?: any,
 };
 
-declare type CreateInsertButtons = ({ helpers: Helpers, t: Translate }) =>
+declare type CreateInsertButtons = ({ 
+  helpers: Helpers,
+  t: Translate,
+  settings: any
+}) =>
   Array<InsertButton>;
 */

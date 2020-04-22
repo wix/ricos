@@ -45,7 +45,8 @@ declare type BUTTONS = {
   WIDTH: 'width',
   HEIGHT: 'height',
   LINK: 'link',
-  DELETE: 'delete'
+  DELETE: 'delete',
+  CUSTOM: 'custom'
 };
 
 declare type DISPLAY_MODE = {

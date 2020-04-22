@@ -4,7 +4,7 @@ import TextLinkButton from './TextLinkButton';
 import RemoveLinkButton from './RemoveLinkButton';
 import UrlLinkButton from './UrlLinkButton';
 
-export default (config, closeInlinePluginToolbar) => {
+const createInlineButtons /*: CreateInlineButtons */ = config => {
   return [
     {
       keyName: 'url',
@@ -20,7 +20,6 @@ export default (config, closeInlinePluginToolbar) => {
             insertLinkFn={updateLinkAtCurrentSelection}
             icon={EditIcon}
             tooltipText={config.t('LinkTo_Edit_Tooltip')}
-            closeInlinePluginToolbar={closeInlinePluginToolbar}
             {...config}
             {...props}
           />
@@ -33,14 +32,12 @@ export default (config, closeInlinePluginToolbar) => {
       keyName: 'remove',
       component: props => (
         <div style={{ margin: '0 -6px 0 -6px' }}>
-          <RemoveLinkButton
-            closeInlinePluginToolbar={closeInlinePluginToolbar}
-            {...config}
-            {...props}
-          />
+          <RemoveLinkButton {...config} {...props} />
         </div>
       ),
       mobile: true,
     },
   ];
 };
+
+export default createInlineButtons;

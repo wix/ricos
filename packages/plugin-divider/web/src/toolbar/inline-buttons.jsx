@@ -24,7 +24,7 @@ export const createInlineButtons /*: CreateInlineButtons*/ = ({ styles, settings
     { keyName: 'sizeLarge', type: BUTTONS.SIZE_LARGE },
     {
       keyName: 'sizeMobile',
-      type: 'custom',
+      type: BUTTONS.CUSTOM,
       icon: icons.sizeMobile || SizeLargeIcon,
       onClick: changeSizeMobile,
       mobile: true,
@@ -51,7 +51,7 @@ export const createInlineButtons /*: CreateInlineButtons*/ = ({ styles, settings
     },
     {
       keyName: 'alignMobile',
-      type: 'custom',
+      type: BUTTONS.CUSTOM,
       icon: icons.alignMobile || AlignCenterIcon,
       onClick: changeAlignmentMobile,
       mobile: true,
