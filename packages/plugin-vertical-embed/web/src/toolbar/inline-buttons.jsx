@@ -1,13 +1,13 @@
-import { BUTTONS, getModalStyles } from 'wix-rich-content-editor-common';
+import {
+  BUTTONS,
+  getModalStyles,
+  decorateComponentWithProps,
+} from 'wix-rich-content-editor-common';
 import { ReplaceIcon } from '../icons';
-import { Modals } from '../modals';
+import getModalCustomStyles from './ModalCustomStyles';
+import PostSelectionInputModal from './postSelectionInputModal';
 
-export default ({ t, isMobile }) => {
-  const customStyles = {
-    content: {
-      maxHeight: '80%',
-    },
-  };
+export default ({ t, isMobile, settings }) => {
   return [
     { keyName: 'alignLeft', type: BUTTONS.SIZE_SMALL_LEFT, mobile: false },
     { keyName: 'alignCenter', type: BUTTONS.SIZE_CONTENT_CENTER, mobile: false },
@@ -17,8 +17,12 @@ export default ({ t, isMobile }) => {
       keyName: 'replace',
       type: BUTTONS.EXTERNAL_MODAL,
       icon: ReplaceIcon,
-      modalName: Modals.POST_SELECTION_INPUT,
-      modalStyles: getModalStyles({ fullScreen: false, isMobile, customStyles }),
+      modalElement: decorateComponentWithProps(PostSelectionInputModal, settings),
+      modalStyles: getModalStyles({
+        fullScreen: false,
+        isMobile,
+        customStyles: getModalCustomStyles(isMobile),
+      }),
       mobile: true,
       tooltipTextKey: 'Replace product',
       t,

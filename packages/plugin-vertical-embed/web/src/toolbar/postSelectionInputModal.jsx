@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import UrlInputModal from 'wix-rich-content-editor-common/dist/lib/UrlInputModal';
+import { verticalsTypeMap } from '../constants';
 export default class PostSelectionInputModal extends Component {
   state = {
     errorMsg: '',
@@ -17,13 +18,11 @@ export default class PostSelectionInputModal extends Component {
       fetchFunctions,
       componentData: { type },
     } = this.props;
+    const fetchType = verticalsTypeMap[type];
     const abortController = new AbortController();
-    const promise = fetchFunctions[type](query, abortController.signal).then(res => {
-      // if (res.ok)
+    const promise = fetchFunctions[fetchType](query, abortController.signal).then(res => {
       return res;
-      // else throw res.statusText;
     });
-    // .then(res => res.json());
     return {
       abortController,
       promise,
@@ -80,11 +79,12 @@ export default class PostSelectionInputModal extends Component {
         onConfirm={this.onConfirm}
         helpers={helpers}
         t={t}
-        title={`Select embed ${type}`}
+        title={t(`Embed_Vertical_${type}_Title`)}
         subtitle={`Choose a ${type} from your ${type} list`}
-        dataHook={`verticalEmbedModal`}
+        dataHook={'verticalEmbedModal'}
         saveLabel={t('EmbedURL_Common_CTA_Primary')}
         cancelLabel={t('EmbedURL_Common_CTA_Secondary')}
+        placeholder={t(`Embed_Vertical_${type}_Placeholder`)}
         setSelection={selectedProduct => this.setState({ selectedProduct })}
         onCloseRequested={helpers.closeModal}
         dropdownItems={products}

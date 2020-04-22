@@ -15,7 +15,10 @@
     Click to see more.
   </summary>
   
-
+### :bug: Bug Fix
+- `editor`
+  - [#951](https://github.com/wix-incubator/rich-content/pull/951) fix: tooltip opacity
+  
 </details>
 <hr/>
 
