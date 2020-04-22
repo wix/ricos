@@ -117,11 +117,11 @@
     @extend .customColorPicker_saturation;
     height: 112px;
   }
-  
+
   .colorPickerDialog_separator {
     display: none;
   }
-  
+
   .button_designComponent_colorPicker_container {
     height: auto;
     width: 100%;
@@ -132,14 +132,14 @@
       margin-left: -1px;
     }
   }
-  
+
   .customColorPicker_hue {
     @include phone {
       height: 24px;
       margin-top: 12px;
     }
   }
-  
+
   .customColorPicker_editable_input_container {
     @include phone {
       padding-top: 7px;
@@ -253,7 +253,7 @@
   height: auto;
   text-align: right;
   width: 44px;
-  -moz-appearance: textfield; // Mozilla, Disable number input arrow buttons
+  -moz-appearance: textfield;
 }
 
 .sliderWithInput_input:focus {

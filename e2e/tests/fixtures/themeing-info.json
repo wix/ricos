@@ -306,6 +306,39 @@
         }
       ],
       "data": {}
+    },
+    {
+      "key": "32q36",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "4bmiu",
+      "text": " ",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 8
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "2mlk9",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
     }
   ],
   "entityMap": {
@@ -445,7 +478,31 @@
         "description": "Create a free website with Wix.com. Choose a stunning template and customize anything with the Wix website builder—no coding skills needed. Create yours today!",
         "provider_url": "http://wix.com"
       }
+    },
+    "8": {
+      "type": "wix-draft-plugin-map",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "config": {
+          "size": "content",
+          "alignment": "center",
+          "width": 400,
+          "height": 400
+        },
+        "mapSettings": {
+          "address": "Wix HQ, Nemal Tel Aviv Street, Tel Aviv-Yafo, Israel",
+          "locationDisplayName": "Wix HQ, Nemal Tel Aviv Street, Tel Aviv-Yafo, Israel",
+          "lat": 32.097235,
+          "lng": 34.77427,
+          "zoom": 18,
+          "mode": "roadmap",
+          "isMarkerShown": true,
+          "isZoomControlShown": true,
+          "isStreetViewControlShown": true,
+          "isDraggingAllowed": true
+        }
+      }
     }
   },
-  "VERSION": "7.1.5"
+  "VERSION": "7.3.4"
 }

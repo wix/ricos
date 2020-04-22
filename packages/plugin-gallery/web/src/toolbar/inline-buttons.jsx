@@ -31,6 +31,8 @@ const createInlineButtons /*: CreateInlineButtons*/ = ({ t, anchorTarget, relVal
       onChange: switchLayout,
       getValue: getCurrentLayout,
       mobile: true,
+      tooltipTextKey: 'GalleryPlugin_Layout_Select_Tooltip',
+      t,
     },
     { keyName: 'separator1', type: BUTTONS.SEPARATOR, mobile: false },
     { keyName: 'sizeSmallCenter', type: BUTTONS.SIZE_SMALL_CENTER, mobile: false },
