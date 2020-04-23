@@ -10,7 +10,7 @@ async function gitPRComment(message) {
     };
     request.body = message;
     const client = new github.GitHub(REPO_TOKEN);
-    await client.pulls.create(request);
+    await client.issues.create(request);
   }
 }
 
