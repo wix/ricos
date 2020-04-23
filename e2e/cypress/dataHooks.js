@@ -17,8 +17,8 @@ export const INLINE_TOOLBAR_BUTTONS = {
 };
 
 export const STATIC_TOOLBAR_BUTTONS = {
-  VIDEO: 'Video_InsertButton',
-  SOUND_CLOUD: 'SoundCloud_InsertButton',
+  VIDEO: 'VideoPlugin_InsertButton',
+  SOUND_CLOUD: 'SoundcloudPlugin_InsertButton',
   TWITTER: 'Twitter_InsertButton',
   FACEBOOK: 'Facebook_InsertButton',
   TIKTOK: 'TikTok_InsertButton',
@@ -28,7 +28,7 @@ export const STATIC_TOOLBAR_BUTTONS = {
   EVENT: 'Events_InsertButton',
   PRODUCT: 'Stores_InsertButton',
   BOOKING: 'Bookings_InsertButton',
-  GIPHY: 'GIF_InsertButton',
+  GIPHY: 'GIFPlugin_InsertButton',
 };
 
 export const SETTINGS_PANEL = {
