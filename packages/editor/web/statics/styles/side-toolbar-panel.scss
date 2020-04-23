@@ -62,6 +62,10 @@
     .withSections {
       margin-bottom: 12px;
     }
+    &.horizontalMenu {
+      display: flex;
+    }
+
     @media only screen and (max-width: 640px) {
       grid-row-gap: 8px;
       width: 100%;

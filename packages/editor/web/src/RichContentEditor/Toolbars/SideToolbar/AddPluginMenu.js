@@ -11,13 +11,18 @@ export default class AddPluginMenu extends Component {
     this.state = {
       value: '',
     };
-    const { structure, showSearch = structure.length > 8, isMobile } = props;
-    this.showSearch = showSearch && !isMobile;
+    const {
+      structure,
+      showSearch = structure.length > 8,
+      isMobile,
+      horizontalMenu = false,
+    } = props;
+    this.showSearch = showSearch && !isMobile && !horizontalMenu;
     this.wrapperClassName = classNames(Styles.sideToolbarPanelWrapper, {
       [Styles.panelWithSearch]: this.showSearch,
     });
     this.pluginsClassName = classNames(Styles.pluginsWrapper, {
-      [Styles.withSearch]: showSearch && !isMobile,
+      [Styles.withSearch]: this.showSearch && !isMobile,
     });
   }
   onChange = value => this.setState({ value });
@@ -30,6 +35,7 @@ export default class AddPluginMenu extends Component {
       hidePopup,
       t,
       splitToSections,
+      horizontalMenu,
     } = this.props;
     const { showSearch, wrapperClassName, pluginsClassName } = this;
     const { value } = this.state;
@@ -56,7 +62,8 @@ export default class AddPluginMenu extends Component {
             searchTag={value}
             t={t}
             hidePopup={hidePopup}
-            splitToSections={!value && splitToSections}
+            splitToSections={!value && !horizontalMenu && splitToSections}
+            horizontalMenu={horizontalMenu}
           />
         </div>
       </div>
@@ -74,4 +81,5 @@ AddPluginMenu.propTypes = {
   splitToSections: PropTypes.bool,
   isMobile: PropTypes.bool,
   showSearch: PropTypes.bool,
+  horizontalMenu: PropTypes.bool,
 };

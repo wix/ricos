@@ -56,6 +56,7 @@ export default ({
   toolbarDecorationFn,
   config,
   showSearch,
+  horizontalMenu,
   splitToSections,
 }) => {
   const { buttonStyles, ...rest } = theme;
@@ -91,6 +92,7 @@ export default ({
           t={t}
           showSearch={showSearch}
           splitToSections={splitToSections}
+          horizontalMenu={horizontalMenu}
         />
       ),
     ],

@@ -35,14 +35,13 @@ export default class Editor extends PureComponent {
       addPluginMenuConfig: {
         showSearch: true,
         splitToSections: true,
+        horizontalMenu: false,
       },
     };
     const pluginsConfig = Plugins.getConfig(additionalConfig);
-    console.log({ testAppPlugins });
     this.plugins = testAppPlugins
       ? testAppPlugins.map(plugin => Plugins.editorPluginsMap[plugin]).flat()
       : Plugins.editorPlugins;
-    console.log('plugins:', this.plugins);
     this.config = { pluginsConfig: pluginsConfig, toolbarsConfig };
   }
 

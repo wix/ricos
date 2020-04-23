@@ -128,6 +128,7 @@ export default class AddPluginFloatingToolbar extends Component {
       structure,
       t,
       showSearch,
+      horizontalMenu,
       splitToSections,
       isMobile,
     } = this.props;
@@ -168,6 +169,7 @@ export default class AddPluginFloatingToolbar extends Component {
               showSearch={showSearch}
               splitToSections={splitToSections}
               isMobile={isMobile}
+              horizontalMenu={horizontalMenu}
             />
           )}
         </div>
@@ -223,4 +225,5 @@ AddPluginFloatingToolbar.propTypes = {
   t: PropTypes.func,
   showSearch: PropTypes.bool,
   splitToSections: PropTypes.bool,
+  horizontalMenu: PropTypes.bool,
 };

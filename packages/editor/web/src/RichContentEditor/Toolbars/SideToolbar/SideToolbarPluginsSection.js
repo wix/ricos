@@ -21,6 +21,7 @@ const SideToolbarPluginsSection = ({
   t,
   hidePopup,
   splitToSections = shouldSplitByDefault(structure),
+  horizontalMenu,
 }) => {
   const pluginsForTag = searchTag && getPluginsForTag(searchTag, t);
   const plugins = !searchTag
@@ -43,7 +44,10 @@ const SideToolbarPluginsSection = ({
           {t(section)}
         </div>
       ),
-      <div key="pluginsButtons" className={Styles.buttonsWrapper}>
+      <div
+        key="pluginsButtons"
+        className={classNames(Styles.buttonsWrapper, horizontalMenu && Styles.horizontalMenu)}
+      >
         {pluginsToRender.map(({ component: Component }, index) => (
           <div
             key={index}
@@ -53,7 +57,7 @@ const SideToolbarPluginsSection = ({
               getEditorState={getEditorState}
               setEditorState={setEditorState}
               theme={theme}
-              showName
+              showName={!horizontalMenu}
               toolbarName={TOOLBARS.SIDE}
               hidePopup={hidePopup}
             />
@@ -83,6 +87,7 @@ SideToolbarPluginsSection.propTypes = {
   searchTag: PropTypes.string,
   hidePopup: PropTypes.func,
   splitToSections: PropTypes.bool,
+  horizontalMenu: PropTypes.bool,
 };
 
 export default SideToolbarPluginsSection;
