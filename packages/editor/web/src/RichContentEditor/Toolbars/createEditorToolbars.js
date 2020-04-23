@@ -16,7 +16,7 @@ import {
 import { get } from 'lodash';
 
 const createEditorToolbars = ({ buttons, textAlignment, refId, context }) => {
-  const { pluginsConfig = {}, getToolbarSettings = () => [] } = context.config;
+  const { uiSettings = {}, getToolbarSettings = () => [] } = context.config;
   const { pluginButtons, pluginTextButtons } = buttons;
 
   const { isMobile, theme = {} } = context;
@@ -84,7 +84,7 @@ const createEditorToolbars = ({ buttons, textAlignment, refId, context }) => {
           theme: { ...getToolbarTheme(theme, name.toLowerCase()), ...theme },
           defaultTextAlignment: textAlignment,
           pluginButtons,
-          uiSettings: pluginsConfig.uiSettings,
+          uiSettings,
           pubsub,
           refId,
           showSearch,
