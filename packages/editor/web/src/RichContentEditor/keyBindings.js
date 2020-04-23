@@ -54,11 +54,17 @@ const COMMAND_BY_SHORTCUT = [
   },
 ];
 
-const { hasCommandModifier, isOptionKeyCommand } = KeyBindingUtil;
+const {
+  hasCommandModifier,
+  usesMacOSHeuristics,
+  isCtrlKeyCommand,
+  isOptionKeyCommand,
+} = KeyBindingUtil;
 
 function getModifiers(e) {
   return [
     ...(hasCommandModifier(e) ? [MODIFIERS.COMMAND] : []),
+    ...(usesMacOSHeuristics(e) && isCtrlKeyCommand(e) ? [MODIFIERS.CTRL] : []),
     ...(isOptionKeyCommand(e) ? [MODIFIERS.OPTION] : []),
     ...(e.shiftKey ? [MODIFIERS.SHIFT] : []),
   ];

@@ -98,7 +98,6 @@ export const editorPluginsPartialPreset = [
   createMapPlugin,
   createFileUploadPlugin,
   createLinkButtonPlugin,
-  createActionButtonPlugin,
   createTextColorPlugin,
   createEmojiPlugin,
   createTextHighlightPlugin,
