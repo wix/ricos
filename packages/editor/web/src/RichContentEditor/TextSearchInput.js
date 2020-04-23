@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { SearchIcon, ClearIcon } from 'wix-rich-content-editor-common/src/Icons';
+import { SearchIcon, ClearIcon } from './Icons';
 import { mergeStyles } from 'wix-rich-content-common';
 import textInputStyles from '../../statics/styles/text-search-input.scss';
 import { KEYS_CHARCODE } from 'wix-rich-content-editor-common';
