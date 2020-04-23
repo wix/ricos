@@ -12,7 +12,7 @@ let savingBundles = {},
 
 const generatePRComment = () => {
   let message = newBundles
-    ? 'New package found.\nPlease update the baseline file by running locally "npm run analyzeBundles" and push the changes.\n\n'
+    ? 'New packages found.\nPlease update the baseline file by running locally "npm run analyzeBundles" and push the changes.\n\n'
     : '';
   message = message.concat(grewDownMessage ? `Packages that shrank:\n${grewDownMessage}\n` : '');
 

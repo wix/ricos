@@ -95,7 +95,7 @@ function run() {
       });
 
       save(fileName, JSON.stringify(sizesObject, null, 2));
-      /*shouldFail && process.exit(1);*/
+      shouldFail && process.exit(1);
     });
   });
 }
