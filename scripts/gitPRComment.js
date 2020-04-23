@@ -10,7 +10,8 @@ async function gitPRComment(message) {
     };
     request.body = message;
     const client = new github.GitHub(REPO_TOKEN);
-    await client.issues.create(request);
+
+    await client.issues.create({ ...context.repo, title: 'New issue!', body: message });
   }
 }
 
