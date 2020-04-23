@@ -21,9 +21,12 @@
 ### :bug: Bug Fix
 - `editor`
   - [#951](https://github.com/wix-incubator/rich-content/pull/951) fix: tooltip opacity
+  - [#957](https://github.com/wix-incubator/rich-content/pull/957) fix: command+ctrl+j creates code block on mac
 ### :house: Internal
 - `editor`
-  - [#936](https://github.com/wix-incubator/rich-content/pull/936) arrangement of inline toolbar buttons  
+  - [#936](https://github.com/wix-incubator/rich-content/pull/936) arrangement of inline toolbar buttons
+- `wrapper`
+  - [#956](https://github.com/wix-incubator/rich-content/pull/956) bi getData will now contain `forPublish` argument
 
 </details>
 <hr/>
