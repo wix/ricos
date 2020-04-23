@@ -44,7 +44,7 @@ const createInlineButtons /*: CreateInlineButtons*/ = ({ settings = {}, getEdito
     {
       type: BUTTONS.INLINE_PANEL,
       keyName: 'edit',
-      panelContent: translate(String(null))(EditPanel),
+      panelContent: translate()(EditPanel),
       icon: icons.edit || EditIcon,
       mapComponentDataToButtonProps: ({ src, srcType }) => ({
         tooltipTextKey: src ? TOOLTIP_TEXT_BY_SRC_TYPE[srcType] : 'HtmlPlugin_EditEmpty_Tooltip',
