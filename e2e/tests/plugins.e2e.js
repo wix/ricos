@@ -4,6 +4,7 @@ import {
   PLUGIN_TOOLBAR_BUTTONS,
   DIVIDER_DROPDOWN_OPTIONS,
   STATIC_TOOLBAR_BUTTONS,
+  BUTTON_PLUGIN_MODAL,
 } from '../cypress/dataHooks';
 import { DEFAULT_DESKTOP_BROWSERS } from './settings';
 
@@ -280,6 +281,52 @@ describe('plugins', () => {
         cy.eyesCheckWindow(this.test.title);
         cy.get(`[data-hook*=settingPanelFooterCancel][tabindex!=-1]`).click();
       });
+    });
+  });
+
+  context('link button', () => {
+    before(function() {
+      eyesOpen(this);
+    });
+
+    beforeEach('load editor', () => cy.loadEditorAndViewer('link-button'));
+
+    after(() => cy.eyesClose());
+    it('create link button', function() {
+      cy.openPluginToolbar(PLUGIN_COMPONENT.BUTTON)
+        .get(`[data-hook*=${PLUGIN_TOOLBAR_BUTTONS.ADV_SETTINGS}][tabindex!=-1]`)
+        .click()
+        .get(`[data-hook*=ButtonInputModal][placeholder="https://example-link.com/"]`)
+        .type('www.wix.com')
+        .get(`[data-hook*=${BUTTON_PLUGIN_MODAL.DESIGN_TAB}]`)
+        .click()
+        .get(`[data-hook*=${BUTTON_PLUGIN_MODAL.BUTTON_SAMPLE}]`)
+        .click()
+        .get(`[data-hook*=${BUTTON_PLUGIN_MODAL.DONE}]`)
+        .click();
+      cy.eyesCheckWindow(this.test.title);
+    });
+  });
+
+  context('action button', () => {
+    before(function() {
+      eyesOpen(this);
+    });
+
+    beforeEach('load editor', () => cy.loadEditorAndViewer('action-button'));
+
+    after(() => cy.eyesClose());
+    it('create action button', function() {
+      cy.openPluginToolbar(PLUGIN_COMPONENT.BUTTON)
+        .get(`[data-hook*=${PLUGIN_TOOLBAR_BUTTONS.ADV_SETTINGS}][tabindex!=-1]`)
+        .click()
+        .get(`[data-hook*=${BUTTON_PLUGIN_MODAL.DESIGN_TAB}]`)
+        .click()
+        .get(`[data-hook*=${BUTTON_PLUGIN_MODAL.BUTTON_SAMPLE}]`)
+        .click()
+        .get(`[data-hook*=${BUTTON_PLUGIN_MODAL.DONE}]`)
+        .click();
+      cy.eyesCheckWindow(this.test.title);
     });
   });
 });
