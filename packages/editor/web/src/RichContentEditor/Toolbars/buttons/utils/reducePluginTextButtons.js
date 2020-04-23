@@ -34,7 +34,14 @@ export const reducePluginTextButtonNames = (pluginTextButtons, filterButtons = (
       const singlePluginButtonNames = Object.keys(buttonData).reduce((names, key) => {
         if (filterButtons(buttonData[key])) {
           // index appended to avoid cross-plugin name conflicts
-          return [...names, { name: `${key}_${i}`, position: buttonData[key].position }];
+          return [
+            ...names,
+            {
+              name: `${key}_${i}`,
+              position: buttonData[key].position,
+              group: buttonData[key].group,
+            },
+          ];
         }
         return names;
       }, []);

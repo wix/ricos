@@ -5,7 +5,7 @@ import {
 } from 'wix-rich-content-editor-common';
 import { InsertPluginIcon } from '../icons';
 import PostSelectionInputModal from './postSelectionInputModal';
-import { DEFAULTS } from '../constants';
+import { DEFAULTS, verticalEmbedProviders } from '../constants';
 import getModalCustomStyles from './ModalCustomStyles';
 
 export default ({ helpers, t, settings, isMobile }) => {
@@ -30,14 +30,15 @@ export default ({ helpers, t, settings, isMobile }) => {
       }),
     };
   };
+  const { event, booking, product } = verticalEmbedProviders;
 
   const verticalsTypeMap = {
-    event: 'Events',
-    booking: 'Bookings',
-    product: 'Stores',
+    [event]: 'Events',
+    [booking]: 'Bookings',
+    [product]: 'Stores',
   };
 
   const { exposeEmbedButtons = [] } = settings;
 
-  return exposeEmbedButtons.map(type => buttonCreator(verticalsTypeMap[type]));
+  return exposeEmbedButtons.map(verticalType => buttonCreator(verticalsTypeMap[verticalType]));
 };

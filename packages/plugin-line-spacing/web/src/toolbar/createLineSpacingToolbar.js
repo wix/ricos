@@ -6,9 +6,6 @@ export default settings => ({
     LinsSpacing: {
       component: decorateComponentWithProps(LineSpacingButton, settings),
       isMobile: true,
-      position: {
-        mobile: 7,
-      },
     },
   }),
 });

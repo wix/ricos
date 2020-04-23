@@ -14,9 +14,6 @@ export default ({ setEditorState, helpers, t, icon }) => {
       CodeBlock: {
         component: TextCodeBlockButton,
         isMobile: true,
-        position: {
-          mobile: 7,
-        },
         keyBindings: [
           {
             keyCommand: {

@@ -15,19 +15,6 @@ import {
 } from './buttons/utils';
 import { get } from 'lodash';
 
-const appendSeparator = ({ mergedList, sourceList, buttonData, formFactor }) => {
-  if (
-    mergedList.length === sourceList.length &&
-    (!buttonData.position ||
-      buttonData.position[formFactor] === undefined ||
-      buttonData.position[formFactor] < 0 ||
-      buttonData.position[formFactor] > mergedList.length)
-  ) {
-    return [...mergedList, 'Separator'];
-  }
-  return mergedList;
-};
-
 const createEditorToolbars = ({ buttons, textAlignment, refId, context }) => {
   const { pluginsConfig = {}, getToolbarSettings = () => [] } = context.config;
   const { pluginButtons, pluginTextButtons } = buttons;
@@ -40,14 +27,12 @@ const createEditorToolbars = ({ buttons, textAlignment, refId, context }) => {
     mobile: mergeButtonLists(
       MobileTextButtonList,
       reducePluginTextButtonNames(pluginTextButtons, ({ isMobile }) => isMobile !== false),
-      'mobile',
-      appendSeparator
+      'mobile'
     ),
     desktop: mergeButtonLists(
       DesktopTextButtonList,
       reducePluginTextButtonNames(pluginTextButtons),
-      'desktop',
-      appendSeparator
+      'desktop'
     ),
   };
 
