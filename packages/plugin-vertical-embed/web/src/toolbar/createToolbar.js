@@ -3,7 +3,7 @@ import createInsertButtons from './insert-buttons';
 
 export default function createToolbar({ settings, helpers, t, isMobile }) {
   return {
-    InlineButtons: createInlineButtons({ t, isMobile }),
+    InlineButtons: createInlineButtons({ t, isMobile, settings }),
     InsertButtons: createInsertButtons({ helpers, t, settings, isMobile }),
     name: 'vertical-embed',
   };

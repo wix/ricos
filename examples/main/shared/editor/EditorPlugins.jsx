@@ -146,7 +146,7 @@ let userButtonBorderColors = [...buttonDefaultPalette];
 
 const getLinkPanelDropDownConfig = () => {
   const getItems = () => {
-    casual.define('item', function () {
+    casual.define('item', function() {
       return {
         value: casual.url,
         label: casual.catch_phrase,
@@ -272,7 +272,8 @@ const { event, booking, product } = verticalEmbedProviders;
 const { Instagram, Twitter, YouTube, TikTok } = LinkPreviewProviders;
 const config = {
   [LINK_PREVIEW_TYPE]: {
-    enableEmbed: true,
+    enableEmbed: true, // [Twitter, YouTube]
+    enableLinkPreview: true,
     fetchData: mockFetchUrlPreviewData(),
     exposeEmbedButtons: [Instagram, Twitter, YouTube, TikTok],
   },
@@ -533,6 +534,8 @@ const config = {
     //     InsertPluginButtonIcon: MyCustomIcon,
     //   },
     // },
+
+    // onClick: true,
     palette: ['#FEFDFD', '#D5D4D4', '#ABCAFF', '#81B0FF', '#0261FF', '#0141AA'],
     selectionBackgroundColor: 'fuchsia',
     selectionBorderColor: '#FFF',
