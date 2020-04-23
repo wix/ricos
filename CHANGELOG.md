@@ -18,6 +18,8 @@
 ### :rocket: New Feature
 - `button`
   - [#953](https://github.com/wix-incubator/rich-content/pull/953) action button: by passing onClick callback, on click triggers it
+- `map`
+  - [#959](https://github.com/wix-incubator/rich-content/pull/959) modal settings fixed (convention) & made compatible with wrapper palette colors
 ### :bug: Bug Fix
 - `editor`
   - [#951](https://github.com/wix-incubator/rich-content/pull/951) fix: tooltip opacity
