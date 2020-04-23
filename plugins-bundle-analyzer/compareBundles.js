@@ -11,15 +11,21 @@ let savingBundles = {},
   grewDownMessage = '';
 
 const generateMessage = (grewUpMessage, grewDownMessage, newBundles) => {
-  let message = `${newBundles}\n`;
-  message = message.concat(
-    grewDownMessage ? `There are bundle sizes that grew down:\n${grewDownMessage}\n` : ''
-  );
+  let message = newBundles
+    ? 'New package found\nPlease update the baseline file by running locally "npm run analyzeBundles" and push the changes.\n'
+    : '';
+  message = message.concat(grewDownMessage ? `Packages that shrank:\n${grewDownMessage}\n` : '');
+
+  !newBundles &&
+    grewDownMessage &&
+    (message = message.concat(
+      'Please update the baseline file by running locally "npm run analyzeBundles" and push the changes.\n'
+    ));
+
   if (grewUpMessage) {
-    message = message.concat(
-      `Significant differences between the bundle sizes:\n${grewDownMessage}\n`
-    );
+    message = message.concat(`Packages that grew:\n${grewUpMessage}\n`);
   }
+
   return message;
 };
 
