@@ -90,9 +90,9 @@ export default class ModalDialogProvider extends Component<Props, State> {
   getToolbars = () => this.editor.getToolbars();
   focus = () => this.editor.focus();
   blur = () => this.editor.blur();
-  getData = (postId?: string, isForPublish?: boolean) => {
+  getData = (postId?: string, forPublish?: boolean) => {
     const { getContentState } = this.dataInstance;
-    if (postId && isForPublish) {
+    if (postId && forPublish) {
       this.editor.publish(postId); //async
     }
     return {
