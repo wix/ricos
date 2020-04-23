@@ -34,7 +34,7 @@ export default class AddPluginMenu extends Component {
     const { showSearch, wrapperClassName, pluginsClassName } = this;
     const { value } = this.state;
     return (
-      <div className={wrapperClassName}>
+      <div className={wrapperClassName} data-hook="addPluginMenu">
         {showSearch && (
           <div className={Styles.searchWrapper}>
             <TextSearchInput

@@ -12,7 +12,6 @@ class TestApp extends PureComponent {
       localeResource,
       isMobile,
       testAppPlugins,
-      isSSR,
     } = this.props;
     return (
       <Editor
@@ -24,7 +23,6 @@ class TestApp extends PureComponent {
         localeResource={localeResource}
         mockImageIndex={1}
         testAppPlugins={testAppPlugins.split(',')}
-        isSSR={isSSR}
       />
     );
   };
@@ -62,7 +60,6 @@ TestApp.propTypes = {
   onEditorChange: PropTypes.func,
   seoMode: PropTypes.bool,
   testAppPlugins: PropTypes.string,
-  isSSR: PropTypes.bool,
 };
 
 export default windowContentStateHoc(TestApp);

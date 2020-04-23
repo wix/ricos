@@ -38,9 +38,11 @@ export default class Editor extends PureComponent {
       },
     };
     const pluginsConfig = Plugins.getConfig(additionalConfig);
+    console.log({ testAppPlugins });
     this.plugins = testAppPlugins
       ? testAppPlugins.map(plugin => Plugins.editorPluginsMap[plugin]).flat()
       : Plugins.editorPlugins;
+    console.log('plugins:', this.plugins);
     this.config = { pluginsConfig: pluginsConfig, toolbarsConfig };
   }
 
@@ -204,7 +206,6 @@ export default class Editor extends PureComponent {
           config={this.config}
           editorKey="random-editorKey-ssr"
           // siteDomain="https://www.wix.com"
-          isSSR={isSSR}
           {...editorProps}
         />
 
@@ -234,5 +235,4 @@ Editor.propTypes = {
   staticToolbar: PropTypes.bool,
   locale: PropTypes.string,
   localeResource: PropTypes.object,
-  isSSR: PropTypes.bool,
 };

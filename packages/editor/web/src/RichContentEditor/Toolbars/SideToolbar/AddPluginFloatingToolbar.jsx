@@ -154,6 +154,7 @@ export default class AddPluginFloatingToolbar extends Component {
           ref={el => (this.popupRef = el)}
           onClick={e => e.stopPropagation()}
           role="none"
+          data-hook={'floatingAddPluginMenu'}
         >
           {isActive && (
             <AddPluginMenu
