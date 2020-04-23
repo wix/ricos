@@ -12,7 +12,7 @@ let savingBundles = {},
 
 const generateMessage = (grewUpMessage, grewDownMessage, newBundles) => {
   let message = newBundles
-    ? 'New package found\nPlease update the baseline file by running locally "npm run analyzeBundles" and push the changes.\n'
+    ? 'New package found.\nPlease update the baseline file by running locally "npm run analyzeBundles" and push the changes.\n\n'
     : '';
   message = message.concat(grewDownMessage ? `Packages that shrank:\n${grewDownMessage}\n` : '');
 
@@ -29,21 +29,20 @@ const generateMessage = (grewUpMessage, grewDownMessage, newBundles) => {
   return message;
 };
 
-const addNewBundleToBaseline = (key, newSize) => {
+const updateBundleInBaselineAndMessage = ({ key, newSize, diff, isNewBundle }) => {
   savingBundles[key] = newSize;
-  newBundles = newBundles.concat(`${key} is added to the baseline with bundlesize: ${newSize}\n`);
-};
-
-const updateBundleThatGrewDown = (key, diff, newSize) => {
-  savingBundles[key] = newSize;
-  grewDownMessage = grewDownMessage.concat(
-    `The bundle size of ${key} is reduced by ${Math.abs(diff)}KB\n`
-  );
+  isNewBundle
+    ? (newBundles = newBundles.concat(
+        `${key} is added to the baseline with bundlesize: ${newSize}\n`
+      ))
+    : (grewDownMessage = grewDownMessage.concat(
+        `The bundle size of ${key} is reduced by ${Math.abs(diff)}KB\n`
+      ));
 };
 
 const updateGrewUpMessage = (key, oldSize, newSize) => {
   grewUpMessage = grewUpMessage.concat(
-    `${key}: old bundlesize: ${oldSize}KB, current bundlesize: ${newSize}KB\n`
+    `${key}: old bundlesize: ${oldSize}KB => current bundlesize: ${newSize}KB\n`
   );
 };
 
@@ -52,8 +51,7 @@ async function updatePRCommentAndConsole() {
 
   if (grewDownMessage !== '' || newBundles !== '') {
     fs.writeFileSync(`bundlesSizesBaseline.json`, JSON.stringify(savingBundles, null, 2), 'utf8');
-    console.log(grewDownMessage);
-    console.log(newBundles);
+    console.log(`${grewUpMessage}ֿ\n${newBundles}`);
   }
 
   if (grewUpMessage !== '') {
@@ -85,10 +83,10 @@ function compareBundles() {
       if (diff > 5) {
         updateGrewUpMessage(key, oldSize, newSize);
       } else if (diff < 0) {
-        updateBundleThatGrewDown(key, diff, newSize);
+        updateBundleInBaselineAndMessage({ key, newSize, diff });
       }
     } else {
-      addNewBundleToBaseline(key, newSize);
+      updateBundleInBaselineAndMessage({ key, newSize, isNewBundle: true });
     }
   });
   updatePRCommentAndConsole();
