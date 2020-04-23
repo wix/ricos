@@ -1,14 +1,22 @@
-import { createButtonPlugin } from './createButtonPlugin';
-import { BUTTON_TYPE, DEFAULT_CONFIG } from './constants';
+import { createActionButtonPlugin, createLinkButtonPlugin } from './createButtonPlugin';
+import { LINK_BUTTON_TYPE, ACTION_BUTTON_TYPE, DEFAULT_CONFIG } from './constants';
 import { createTheme as theme } from './defaults';
 import { ModalsMap } from './modals';
 
-export const pluginButton = (config = {}) => {
+const pluginButton = (createPlugin, type, config) => {
   return {
     config: { ...DEFAULT_CONFIG, ...config },
-    type: BUTTON_TYPE,
-    createPlugin: createButtonPlugin,
+    type,
+    createPlugin,
     ModalsMap,
     theme,
   };
+};
+
+export const pluginLinkButton = (config = {}) => {
+  return pluginButton(createLinkButtonPlugin, LINK_BUTTON_TYPE, config);
+};
+
+export const pluginActionButton = (config = {}) => {
+  return pluginButton(createActionButtonPlugin, ACTION_BUTTON_TYPE, config);
 };
