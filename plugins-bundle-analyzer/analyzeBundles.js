@@ -58,6 +58,7 @@ function save(fileName, data = []) {
 
 function run() {
   const fileName = process.env.FILE_NAME;
+  let shouldFail = false;
   console.log(chalk.magenta('Analyzing plugins...'));
   getAllPluginsNames(options).then(pkgNames => {
     const bundleResultsPromise = pkgNames.map(pkgName => {
@@ -85,6 +86,7 @@ function run() {
         const prefix = chalk.cyan(`[${name}]`);
         if (error) {
           console.log(prefix, chalk.red(`Error! ${error}`));
+          shouldFail = true;
         } else {
           const chlk = size > 500 ? warning : size > 250 ? chalk.yellow : chalk.green;
           console.log(prefix, chlk(`${size}KB`));
@@ -93,6 +95,7 @@ function run() {
       });
 
       save(fileName, JSON.stringify(sizesObject, null, 2));
+      /*shouldFail && process.exit(1);*/
     });
   });
 }
