@@ -167,7 +167,7 @@ export default ({
             styles.button,
             showName ? styles.sideToolbarButton : styles.footerToolbarButton
           )}
-          data-hook={`${name.replace(' ', '_')}_insert_plugin_button`}
+          data-hook={name}
           onClick={this.onClick}
           onMouseDown={this.preventButtonGettingFocus}
           ref={this.buttonRef}

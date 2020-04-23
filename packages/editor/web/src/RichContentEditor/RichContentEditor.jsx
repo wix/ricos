@@ -316,6 +316,7 @@ class RichContentEditor extends Component {
   }
 
   renderToolbars = () => {
+    const { isSSR } = this.props;
     const toolbarsToIgnore = [
       'MobileToolbar',
       'StaticTextToolbar',
@@ -324,7 +325,10 @@ class RichContentEditor extends Component {
     //eslint-disable-next-line array-callback-return
     const toolbars = this.plugins.map((plugin, index) => {
       const Toolbar =
-        plugin.Toolbar || plugin.InlinePluginToolbar || plugin.InlineToolbar || plugin.SideToolbar;
+        plugin.Toolbar ||
+        plugin.InlinePluginToolbar ||
+        plugin.InlineToolbar ||
+        (!isSSR && plugin.SideToolbar);
       if (Toolbar) {
         if (includes(toolbarsToIgnore, plugin.name)) {
           return null;
@@ -530,6 +534,7 @@ RichContentEditor.propTypes = {
   initialIntent: PropTypes.string,
   siteDomain: PropTypes.string,
   onError: PropTypes.func,
+  isSSR: PropTypes.bool,
 };
 
 RichContentEditor.defaultProps = {

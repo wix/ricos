@@ -80,6 +80,7 @@ class RichContentApp extends PureComponent {
         setLocale={this.setLocaleResource}
         seoMode={seoMode}
         testAppPlugins={testAppPlugins}
+        isSSR={isSSR}
       />
     );
   }

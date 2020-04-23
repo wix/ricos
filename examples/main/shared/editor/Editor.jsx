@@ -169,6 +169,7 @@ export default class Editor extends PureComponent {
       locale,
       localeResource,
       onChange,
+      isSSR,
     } = this.props;
     const { MobileToolbar, TextToolbar } = this.state;
     const textToolbarType = staticToolbar && !isMobile ? 'static' : null;
@@ -203,6 +204,7 @@ export default class Editor extends PureComponent {
           config={this.config}
           editorKey="random-editorKey-ssr"
           // siteDomain="https://www.wix.com"
+          isSSR={isSSR}
           {...editorProps}
         />
 
@@ -232,4 +234,5 @@ Editor.propTypes = {
   staticToolbar: PropTypes.bool,
   locale: PropTypes.string,
   localeResource: PropTypes.object,
+  isSSR: PropTypes.bool,
 };
