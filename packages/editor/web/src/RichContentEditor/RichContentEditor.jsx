@@ -32,7 +32,6 @@ import {
   normalizeInitialState,
   getLangDir,
   Version,
-  isSSR,
 } from 'wix-rich-content-common';
 import styles from '../../statics/styles/rich-content-editor.scss';
 import draftStyles from '../../statics/styles/draft.rtlignore.scss';
@@ -325,11 +324,7 @@ class RichContentEditor extends Component {
     //eslint-disable-next-line array-callback-return
     const toolbars = this.plugins.map((plugin, index) => {
       const Toolbar =
-        !isSSR() &&
-        (plugin.Toolbar ||
-          plugin.InlinePluginToolbar ||
-          plugin.InlineToolbar ||
-          plugin.SideToolbar);
+        plugin.Toolbar || plugin.InlinePluginToolbar || plugin.InlineToolbar || plugin.SideToolbar;
       if (Toolbar) {
         if (includes(toolbarsToIgnore, plugin.name)) {
           return null;

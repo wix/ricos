@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { FocusManager, EditorModals, getModalStyles } from 'wix-rich-content-editor-common';
+import { isSSR } from 'wix-rich-content-common';
 import { PlusIcon, PlusActiveIcon } from '../../Icons';
 import Styles from '../../../../statics/styles/side-toolbar.scss';
 import AddPluginMenu from './AddPluginMenu';
@@ -196,14 +197,16 @@ export default class AddPluginFloatingToolbar extends Component {
         >
           {!isActive ? <PlusIcon /> : <PlusActiveIcon />}
         </button>
-        <PopupOffsetnHoc
-          elementHeight={400}
-          elementMarginTop={-20}
-          elementMarginBottom={45}
-          targetElement={this.selectButton}
-        >
-          <SideToolbarPanel />
-        </PopupOffsetnHoc>
+        {!isSSR() && (
+          <PopupOffsetnHoc
+            elementHeight={400}
+            elementMarginTop={-20}
+            elementMarginBottom={45}
+            targetElement={this.selectButton}
+          >
+            <SideToolbarPanel />
+          </PopupOffsetnHoc>
+        )}
       </FocusManager>
     );
   }
