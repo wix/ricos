@@ -8,11 +8,14 @@ async function gitPRComment(message) {
       repo: github.context.repo.repo,
       pull_number: github.context.payload.pull_request.number,
     };
-    request.body = message;
+    request.body = getBody(request.body, message);
     const client = new github.GitHub(REPO_TOKEN);
-
-    await client.issues.create({ ...request, title: 'New issue!', body: message });
+    await client.pulls.update(request);
   }
 }
+
+const getBody = (oldBody, newBody) => {
+  return oldBody.concat(newBody);
+};
 
 module.exports.gitPRComment = gitPRComment;
