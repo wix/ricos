@@ -14,11 +14,17 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
-  
+
+### :rocket: New Feature
+- `button`
+  - [#953](https://github.com/wix-incubator/rich-content/pull/953) action button: by passing onClick callback, on click triggers it
 ### :bug: Bug Fix
 - `editor`
   - [#951](https://github.com/wix-incubator/rich-content/pull/951) fix: tooltip opacity
-  
+### :house: Internal
+- `editor`
+  - [#936](https://github.com/wix-incubator/rich-content/pull/936) arrangement of inline toolbar buttons  
+
 </details>
 <hr/>
 

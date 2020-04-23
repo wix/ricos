@@ -10,16 +10,10 @@ export default function createToolbar({ helpers, t, isMobile, settings, editorSt
           Undo: {
             component: props => <UndoButton pubsub={pubsub} t={t} {...props} />,
             isMobile: true,
-            position: {
-              mobile: 17,
-            },
           },
           Redo: {
             component: props => <RedoButton pubsub={pubsub} t={t} {...props} />,
             isMobile: true,
-            position: {
-              mobile: 18,
-            },
           },
         }
       : {};

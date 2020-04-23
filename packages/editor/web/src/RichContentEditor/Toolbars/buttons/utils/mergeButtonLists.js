@@ -1,36 +1,61 @@
+const maxPosition = 100;
+const separatorButton = { buttonName: 'Separator' };
+
+const addSeparators = groups => {
+  groups.forEach((group, i) => {
+    if (i !== group.length - 1) {
+      group.push(separatorButton);
+    }
+  });
+};
+
+const shouldCreateNewGroup = (groups, groupIndex) => !groups[groupIndex];
+
+const compareButtons = (a, b) => {
+  return a.position - b.position;
+};
+
+const addButton = (buttonName, position, groupIndex, groups) => {
+  if (shouldCreateNewGroup(groups, groupIndex)) {
+    groups.push([]);
+  }
+  groups[groupIndex].push({
+    buttonName,
+    position,
+    groupIndex,
+  });
+};
+
+const initializeGroupButtons = (defaultButtons, pluginButtons, formFactor) => {
+  const groups = [];
+  defaultButtons.forEach((group, groupIndex) => {
+    group.forEach((buttonName, position) => {
+      addButton(buttonName, position, groupIndex, groups);
+    });
+  });
+
+  pluginButtons.forEach(buttonData => {
+    const groupIndex = buttonData.group?.[formFactor] ?? defaultButtons.length;
+    const position = buttonData.position?.[formFactor] ?? maxPosition;
+    addButton(buttonData.name, position, groupIndex, groups);
+  });
+  return groups;
+};
 /**
- *
- * @param {string[]} sourceList built-in button list
- * @param {Array} positionedList plugin button data { name, position } array
- * @param {string} formFactor determines position type desktop/mobile
- * @param {Function} onInsert [optional] callback called before name merged to list
+ * @param {string[]} defaultButtons built-in button list
+ * @param {Array} pluginButtons plugin button data { name, position, group } array
+ * @param {string} formFactor determines position & group type desktop/mobile
  * @returns {Array} merged button list
  */
-export const mergeButtonLists = (
-  sourceList,
-  positionedList,
-  formFactor = 'desktop',
-  onInsert = ({ mergedList }) => mergedList
-) => {
-  return positionedList.reduce(
-    (mergedList, buttonData) => {
-      if (buttonData.name) {
-        if (
-          buttonData.position &&
-          buttonData.position[formFactor] &&
-          buttonData.position[formFactor] > 0 &&
-          buttonData.position[formFactor] < mergedList.length
-        ) {
-          const transformedList = onInsert({ mergedList, sourceList, formFactor, buttonData });
-          transformedList.splice(buttonData.position[formFactor], 0, buttonData.name);
-          return transformedList;
-        }
-        const transformedList = onInsert({ mergedList, sourceList, formFactor, buttonData });
-        const merged = [...transformedList, buttonData.name];
-        return merged;
-      }
-      return mergedList;
-    },
-    [...sourceList]
-  );
+export const mergeButtonLists = (defaultButtons, pluginButtons, formFactor = 'desktop') => {
+  const groups = initializeGroupButtons(defaultButtons, pluginButtons, formFactor);
+  groups.forEach(group => group.sort(compareButtons));
+  formFactor === 'desktop' && addSeparators(groups);
+  let mergedList = [];
+  groups.forEach(group => {
+    group.forEach(button => {
+      mergedList = [...mergedList, button.buttonName];
+    });
+  });
+  return mergedList;
 };
