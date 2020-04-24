@@ -15,9 +15,73 @@
     Click to see more.
   </summary>
 
+### :rocket: New Feature
+- `button`
+  - [#953](https://github.com/wix-incubator/rich-content/pull/953) action button: by passing onClick callback, on click triggers it
+### :bug: Bug Fix
+- `editor`
+  - [#951](https://github.com/wix-incubator/rich-content/pull/951) fix: tooltip opacity
+  - [#957](https://github.com/wix-incubator/rich-content/pull/957) fix: command+ctrl+j creates code block on mac
+- `map`
+  - [#959](https://github.com/wix-incubator/rich-content/pull/959) modal settings fixed (convention) & made compatible with wrapper palette colors
+### :house: Internal
+- `editor`
+  - [#936](https://github.com/wix-incubator/rich-content/pull/936) arrangement of inline toolbar buttons
+- `wrapper`
+  - [#956](https://github.com/wix-incubator/rich-content/pull/956) bi getData will now contain `forPublish` argument
 
 </details>
 <hr/>
+
+## 7.3.5 (Apr 21, 2020)
+### :bug: Bug Fix
+- `plugin-emoji`
+  - [#948](https://github.com/wix-incubator/rich-content/pull/948) es5 `const` in react-icons node module. Extract the needed icons and removed the dependency on 'react-icons'
+- `map`
+  - [#939](https://github.com/wix-incubator/rich-content/pull/939) Map Settings: dynamic style replaced with theme
+- `editor`
+  - [#917](https://github.com/wix-incubator/rich-content/pull/917) add tooltips for drop down buttons
+### :house: Internal
+- `general`
+  - [#927](https://github.com/wix-incubator/rich-content/pull/927) Adding GitHub action that compares and fails if one of the current bundle sizes grows more then 5KB
+
+## 7.3.4 (Apr 21, 2020)
+### :house: Internal
+- `editor`
+  - [#912](https://github.com/wix-incubator/rich-content/pull/912) publish api
+- `wrapper`
+  - [#912](https://github.com/wix-incubator/rich-content/pull/912) onChange handle inside wrapper
+- `editor-common`
+  - [#912](https://github.com/wix-incubator/rich-content/pull/912) getPostContentSummary updated
+
+### :bug: Bug Fix
+- `code-block`
+  - [#943](https://github.com/wix-incubator/rich-content/pull/943) Adding code block with backward direction of selection
+- `giphy`
+  - [#945](https://github.com/wix-incubator/rich-content/pull/945) Restore auto-focus after add giphy
+### :house: Internal
+- `wrapper`
+  - [#931](https://github.com/wix-incubator/rich-content/pull/931) added internal static toolbar support
+
+## 7.3.3 (Apr 20, 2020)
+### :bug: Bug Fix
+- `viewer`
+  - [#929](https://github.com/wix-incubator/rich-content/pull/929) fix: empty lists viewer issues
+
+### :rocket: New Feature
+- `viewer`
+  - [#908](https://github.com/wix-incubator/rich-content/pull/908) Support Viewer predefined anchors
+
+### :house: Internal
+- `vertical-embed`
+  - [#728](https://github.com/wix-incubator/rich-content/pull/728) Vertical Embed Plugin - alpha verison
+- `wrapper`
+  - [#935](https://github.com/wix-incubator/rich-content/pull/935) back-office theme will appear as default theme for now  
+
+## 7.3.2 (Apr 16, 2020)
+### :bug: Bug Fix
+- `link-preview`
+  - [#924](https://github.com/wix-incubator/rich-content/pull/924) disable link preview/embed when entered inside a list
 
 ## 7.3.1 (Apr 15, 2020)
 ### :bug: Bug Fix
@@ -29,6 +93,13 @@
 - `wrapper`
   - [#919](https://github.com/wix-incubator/rich-content/pull/919) added internal mobile support
   - [#920](https://github.com/wix-incubator/rich-content/pull/920) refactor: `FullscreenRenderer.tsx`, `ModalRenderer.tsx`
+  - [#918](https://github.com/wix-incubator/rich-content/pull/918)
+    - viewer is now re-rendered for new initialState prop (fix)
+- `storybook`
+  - [#918](https://github.com/wix-incubator/rich-content/pull/918)
+    - hotfix (`editor` prop replaced with `isEditor`)
+    - live example app (viewer + editor side by side)
+    - live example app in palettes page
 
 ## 7.3.0 (Apr 13, 2020)
 ### :rocket: New Feature

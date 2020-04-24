@@ -1,0 +1,12 @@
+.container {
+  width: 292px;
+  height: 100px;
+  background-color: white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 0 4px 0 rgba(0, 0, 0, 0.1);
+  display: grid;
+  grid-row-gap: 16px;
+  padding: 19px 24px;
+  position: absolute;
+  overflow: auto;
+  grid-auto-rows: max-content;
+}

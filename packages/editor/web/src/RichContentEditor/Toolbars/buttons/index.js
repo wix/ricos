@@ -1,29 +1,23 @@
 export const DesktopTextButtonList = [
-  'Bold',
-  'Italic',
-  'Underline',
-  'Title',
-  'Blockquote',
-  'Separator',
-  'Alignment',
-  'OrderedList',
-  'UnorderedList',
-  // 'Indent',
+  ['Bold', 'Italic', 'Underline', 'Title', 'Blockquote'],
+  ['Alignment', 'OrderedList', 'UnorderedList'],
 ];
 
 export const MobileTextButtonList = [
-  'AddPlugin',
-  'Bold',
-  'Italic',
-  'Underline',
-  'Title',
-  'Blockquote',
-  'AlignLeft',
-  'AlignCenter',
-  'AlignRight',
-  'AlignJustify',
-  'OrderedList',
-  'UnorderedList',
+  [
+    'AddPlugin',
+    'Bold',
+    'Italic',
+    'Underline',
+    'Title',
+    'Blockquote',
+    'AlignLeft',
+    'AlignCenter',
+    'AlignRight',
+    'AlignJustify',
+    'OrderedList',
+    'UnorderedList',
+  ],
 ];
 
 export { default as textAlignmentButton } from './TextAlignmentButton';

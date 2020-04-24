@@ -1,4 +1,5 @@
 import theme from '../theme/theme';
+import { BUTTON_TYPE } from 'wix-rich-content-plugin-button/dist/module.viewer';
 import { VIDEO_TYPE, videoTypeMapper } from 'wix-rich-content-plugin-video/dist/module.viewer';
 import { dividerTypeMapper } from 'wix-rich-content-plugin-divider/dist/module.viewer';
 import { htmlTypeMapper } from 'wix-rich-content-plugin-html/dist/module.viewer';
@@ -17,7 +18,7 @@ import { mapTypeMapper } from 'wix-rich-content-plugin-map/dist/module.viewer';
 import { giphyTypeMapper, GIPHY_TYPE } from 'wix-rich-content-plugin-giphy/dist/module.viewer';
 import { buttonTypeMapper } from 'wix-rich-content-plugin-button/dist/module.viewer';
 import { HashtagDecorator } from 'wix-rich-content-plugin-hashtag/dist/module.viewer';
-
+import { verticalEmbedTypeMapper } from 'wix-rich-content-plugin-vertical-embed/dist/module.viewer';
 import {
   createHeadersMarkdownDecorator,
   HEADERS_MARKDOWN_TYPE,
@@ -88,6 +89,7 @@ export const typeMappers = [
   mapTypeMapper,
   fileUploadTypeMapper,
   giphyTypeMapper,
+  verticalEmbedTypeMapper,
 ];
 
 const uiSettings = {
@@ -132,6 +134,9 @@ const config = {
     getVideoUrl: src => `https://video.wixstatic.com/${src.pathname}`,
   },
   uiSettings,
+  [BUTTON_TYPE]: {
+    // onClick: () => {},
+  },
 };
 
 export const getConfig = (additionalConfig = {}) => {

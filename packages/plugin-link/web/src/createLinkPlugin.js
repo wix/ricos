@@ -38,7 +38,7 @@ const createLinkPlugin = (config = {}) => {
   };
 
   const shouldConvertToLinkPreview = (settings, linkifyData) =>
-    linkifyData && settings.preview?.enable;
+    linkifyData && linkifyData.block?.type === 'unstyled' && settings.preview?.enable;
 
   const getBlockLinkUrl = linkifyData => {
     const { string, block } = linkifyData;

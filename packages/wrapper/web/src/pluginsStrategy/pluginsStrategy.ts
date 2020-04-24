@@ -1,5 +1,6 @@
 import { merge } from 'lodash';
-import { RichContentProps, InitialState } from '../RichContentWrapperTypes';
+import { RichContentProps } from '../RichContentProps';
+import { RawDraftContentState } from 'draft-js';
 
 const getPluginProps = (
   isEditor: boolean,
@@ -37,7 +38,7 @@ function viewerStrategy(
   prev: ViewerPluginsStrategy,
   curr: ViewerPluginConfig,
   theme: object,
-  initialState: InitialState
+  initialState?: RawDraftContentState
 ) {
   const { type, config, typeMapper, decorator, inlineStyleMapper } = curr;
   return {
@@ -56,10 +57,11 @@ function viewerStrategy(
 export default function pluginsStrategy(
   isEditor = false,
   plugins: PluginConfig[] = [],
-  childProps: RichContentProps = {}
+  childProps: RichContentProps = {},
+  theme: Theme
 ): PluginsStrategy {
   // TODO: Should consider initialState to be explicitly required in child props
-  const { theme = {}, initialState } = childProps;
+  const { initialState } = childProps;
   let strategy: EditorPluginsStrategy | ViewerPluginsStrategy;
 
   if (isEditor) {
@@ -73,7 +75,7 @@ export default function pluginsStrategy(
       inlineStyleMappers: [],
     };
     strategy = plugins.reduce(
-      (prev, curr) => viewerStrategy(prev, curr, theme, initialState as InitialState),
+      (prev, curr) => viewerStrategy(prev, curr, theme, initialState as RawDraftContentState),
       emptyStrategy
     );
   }

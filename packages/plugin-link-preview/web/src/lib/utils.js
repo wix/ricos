@@ -1,4 +1,4 @@
-import { DEFAULTS, AUTO_GENERATED_LINK_PREVIEW_PROVIDER } from '../consts';
+import { DEFAULTS } from '../consts';
 import { LINK_PREVIEW_TYPE } from '../types';
 import { SelectionState, EditorState, Modifier, RichUtils } from 'draft-js';
 import {
@@ -10,21 +10,24 @@ import {
 } from 'wix-rich-content-editor-common';
 
 export const addLinkPreview = async (editorState, config, blockKey, url) => {
+  const fixedUrl = url.split('\u21b5').join(''); //remove {enter} char
   const settings = config[LINK_PREVIEW_TYPE];
-  const { fetchData } = settings;
+  const { fetchData, enableEmbed, enableLinkPreview } = settings;
   const { setEditorState } = config;
-  const linkPreviewData = await fetchData(url);
-  const { thumbnail_url, title, description, html, provider_url, provider_name } = linkPreviewData;
-  const embedLink = provider_name !== AUTO_GENERATED_LINK_PREVIEW_PROVIDER && html;
-  if (embedLink || shouldAddLinkPreview(title, thumbnail_url)) {
+  const linkPreviewData = await fetchData(fixedUrl);
+  const { thumbnail_url, title, description, html, provider_url } = linkPreviewData;
+  if (
+    shouldAddEmbed(html, enableEmbed, fixedUrl) ||
+    shouldAddLinkPreview(title, thumbnail_url, enableLinkPreview)
+  ) {
     const withoutLinkBlock = deleteBlockText(editorState, blockKey);
     const { size, alignment } = { ...DEFAULTS, ...(settings || {}) };
     const data = {
-      config: { size, alignment, link: { url, ...DEFAULTS.link }, width: embedLink && 350 },
+      config: { size, alignment, link: { url: fixedUrl, ...DEFAULTS.link }, width: html && 350 },
       thumbnail_url,
       title,
       description,
-      html: embedLink,
+      html,
       provider_url,
     };
     const { newEditorState } = createBlock(withoutLinkBlock, data, LINK_PREVIEW_TYPE);
@@ -45,11 +48,21 @@ const isValidImgSrc = url => {
   });
 };
 
-const shouldAddLinkPreview = (title, thumbnail_url) => {
-  if (title && thumbnail_url) {
+const shouldAddLinkPreview = (enableLinkPreview, title, thumbnail_url) => {
+  if (enableLinkPreview && title && thumbnail_url) {
     return isValidImgSrc(thumbnail_url);
   }
   return false;
+};
+
+const shouldAddEmbed = (html, enableEmbed, url) => {
+  if (Array.isArray(enableEmbed)) {
+    return (
+      enableEmbed.filter(whiteListType => url.toLowerCase().includes(whiteListType.toLowerCase()))
+        .length > 0
+    );
+  }
+  return html && enableEmbed;
 };
 
 export const convertLinkPreviewToLink = editorState => {

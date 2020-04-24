@@ -127,6 +127,7 @@ export default class ToolbarContent extends Component {
                     themedStyle={themedButtonStyle}
                     separatorClassNames={separatorClassNames}
                     tabIndex={tabIndex}
+                    index={index}
                   />
                 ))
               )}

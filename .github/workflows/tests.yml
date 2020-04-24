@@ -12,7 +12,7 @@ jobs:
       - uses: rokroskar/workflow-run-cleanup-action@v0.2.2
         if: "!startsWith(github.ref, 'refs/tags/') && github.ref != 'refs/heads/master'"
         env:
-          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
 
   e2e-visual:
     runs-on: ubuntu-18.04
@@ -66,7 +66,7 @@ jobs:
           name: cypress-videos-visual-${{ job.status }}-${{ matrix.ci_node_index }}
           path: e2e/cypress/videos
 
-  e2e-visual-applitoolsSendComplition:
+  e2e-visual-applitoolsSendCompletion:
     needs: e2e-visual
     if: always()
     runs-on: ubuntu-18.04
@@ -150,3 +150,30 @@ jobs:
       - run: npm run lint
       - run: npm run build
       - run: npm run test:unit
+
+  notify-on-slack:
+    runs-on: ubuntu-18.04
+    needs: [e2e-visual, content-state-tests, lint-and-unit-tests]
+    if: always()
+    steps:
+      - name: Notify fail in Slack
+        uses: voxmedia/github-action-slack-notify-build@v1.1.1
+        if: github.ref == 'refs/heads/master' && (needs.e2e-visual.result == 'failure' || needs.content-state-tests.result == 'failure' || needs.lint-and-unit-tests.result == 'failure')
+        with:
+          channel_id: C0124DH7HHS #rich-content-ci
+          status: FAILED
+          color: danger
+
+      # - name: Get previous commit status
+      #   id: previous-status
+      #   run: |
+      #     echo "::set-output name=status::$(curl -s https://api.github.com/repos/wix-incubator/rich-content/commits/${{ github.event.before }}/status | jq '.state' | sed 's/\"//g')"
+      # - name: Notify recovery in Slack
+      #   uses: voxmedia/github-action-slack-notify-build@v1.1.1
+      #   if: github.ref == 'refs/heads/master' && steps.previous-status.outputs.status != 'success' && (needs.e2e-visual.result == 'success' && needs.content-state-tests.result == 'success' && needs.lint-and-unit-tests.result == 'success')
+      #   with:
+      #     channel_id: C0124DH7HHS #rich-content-ci
+      #     status: RECOVERED
+      #     color: '#28a745'
+    env:
+      SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
