@@ -1,11 +1,26 @@
 :global {
   .LinesEllipsis-ellipsis {
-    font-weight: bold;
+  }
+  .LinesEllipsis--clamped wbr {
+    display: none;
+  }
+  .LinesEllipsis--clamped .LinesEllipsis-unit {
+    display: none;
   }
 }
 
 .readMore {
   color: #000;
+}
+
+.readMore_label {
+  font-weight: normal;
+  text-decoration: none;
+  color: #0261ff;
+  font-size: 14px;
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
 .readMore_wrapper {
