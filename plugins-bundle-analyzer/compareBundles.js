@@ -2,8 +2,9 @@
 /* eslint-disable no-console */
 const chalk = require('chalk');
 const fs = require('fs');
-const { gitPRComment } = require('../scripts/gitPRComment');
+// const { gitPRComment } = require('../scripts/gitPRComment');
 const { analyze } = require('./analyzeBundles');
+const github = require('@actions/github');
 
 let savingBundles = {},
   currentBundles = {},
@@ -12,9 +13,10 @@ let savingBundles = {},
   grewDownMessage = '';
 
 const generatePRComment = () => {
-  let message = newBundles
+  let message = 'Comparison bundles:\n';
+  message += newBundles
     ? 'New packages found.\nPlease update the baseline file by running locally "npm run analyzeBundles" and push the changes.\n\n'
-    : 'Comparison ended successfully';
+    : '';
   message += grewDownMessage ? `Packages that shrank:\n${grewDownMessage}\n` : '';
 
   !newBundles &&
@@ -51,10 +53,27 @@ const updateMessage = (messageType, key, oldSize, newSize) => {
   }
 };
 
+async function gitPRComment(message) {
+  // const message = core.getInput('message');
+  // const github_token = core.getInput('GITHUB_TOKEN');
+  const { REPO_TOKEN } = process.env;
+  if (REPO_TOKEN) {
+    const context = github.context;
+    const pull_request_number = context.payload.pull_request.number;
+
+    const octokit = new github.GitHub(REPO_TOKEN);
+    await octokit.issues.createComment({
+      ...context.repo,
+      issue_number: pull_request_number,
+      body: message,
+    });
+  }
+}
+
 async function updatePRCommentAndConsole() {
   const pr_comment = generatePRComment();
   console.log(pr_comment);
-  await gitPRComment(pr_comment, 'compare');
+  await gitPRComment(pr_comment);
 
   if (grewDownMessage !== '' || newBundles !== '') {
     fs.writeFileSync(`bundlesSizesBaseline.json`, JSON.stringify(savingBundles, null, 2), 'utf8');
