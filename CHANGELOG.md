@@ -21,10 +21,16 @@
 ### :bug: Bug Fix
 - `editor`
   - [#951](https://github.com/wix-incubator/rich-content/pull/951) fix: tooltip opacity
+  - [#957](https://github.com/wix-incubator/rich-content/pull/957) fix: command+ctrl+j creates code block on mac
+- `map`
+  - [#959](https://github.com/wix-incubator/rich-content/pull/959) modal settings fixed (convention) & made compatible with wrapper palette colors
 ### :house: Internal
 - `editor`
-  - [#936](https://github.com/wix-incubator/rich-content/pull/936) arrangement of inline toolbar buttons  
-
+  - [#936](https://github.com/wix-incubator/rich-content/pull/936) arrangement of inline toolbar buttons
+- `wrapper`
+  - [#956](https://github.com/wix-incubator/rich-content/pull/956) bi getData will now contain `forPublish` argument
+- `preview`
+  - [#962](https://github.com/wix-incubator/rich-content/pull/962) interactions improved; read-more displays html
 </details>
 <hr/>
 
