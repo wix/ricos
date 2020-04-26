@@ -104,7 +104,7 @@ jobs:
       - name: build
         run: npm run build:test
       - name: Run http server with the app in the background
-        run: npm run e2e:app:run &
+        run: npm run e2e:app:run & e2e:app:wait
 
       - name: Run tests with Knapsack Pro
         env:
