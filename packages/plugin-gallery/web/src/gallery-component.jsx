@@ -12,7 +12,7 @@ const EMPTY_SMALL_PLACEHOLDER =
 class GalleryComponent extends PureComponent {
   constructor(props) {
     super(props);
-    this.state = { ...this.stateFromProps(props), key: true };
+    this.state = this.stateFromProps(props);
 
     const { block, store, commonPubsub } = this.props;
     this.blockKey = block.getKey();
@@ -33,12 +33,12 @@ class GalleryComponent extends PureComponent {
 
   componentWillReceiveProps(nextProps) {
     const { componentData, componentState } = this.props;
-    const { key } = this.state;
+    // const { key } = this.state;
     if (
       !isEqual(componentData, nextProps.componentData) ||
       !isEqual(componentState, nextProps.componentState)
     ) {
-      this.setState({ key: !key, ...this.stateFromProps(nextProps) });
+      this.setState(this.stateFromProps(nextProps));
     } else if (componentData.items?.length > 0) {
       this.onLoad(false);
     }
@@ -183,8 +183,7 @@ class GalleryComponent extends PureComponent {
   };
 
   onLoad = isLoading => {
-    const { key } = this.state;
-    this.setState({ isLoading, key: !key });
+    this.setState({ isLoading });
   };
 
   render() {
