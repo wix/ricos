@@ -19,7 +19,7 @@ const createLinkPlugin = (config = {}) => {
   const targetBlank = anchorTarget === '_blank';
   const nofollow = relValue === 'nofollow';
   settings.minLinkifyLength = settings.minLinkifyLength || 6;
-  const toolbar = createLinkToolbar(config, closeInlinePluginToolbar);
+  const toolbar = createLinkToolbar({ ...config, closeInlinePluginToolbar });
 
   const decorators = [
     { strategy: linkEntityStrategy, component: props => <Component {...props} theme={theme} /> },

@@ -3,19 +3,69 @@
 const chalk = require('chalk');
 const fs = require('fs');
 const { gitPRComment } = require('../scripts/gitPRComment');
+const { analyze } = require('./analyzeBundles');
 
-const generateMessage = message => {
-  const titleForPRComment = `Significant differences between the bundle sizes:\n`;
-  return titleForPRComment.concat(message);
+let savingBundles = {},
+  currentBundles = {},
+  grewUpMessage = '',
+  newBundles = '',
+  grewDownMessage = '';
+
+const generatePRComment = () => {
+  let message = newBundles
+    ? 'New packages found.\nPlease update the baseline file by running locally "npm run analyzeBundles" and push the changes.\n\n'
+    : '';
+  message += grewDownMessage ? `Packages that shrank:\n${grewDownMessage}\n` : '';
+
+  !newBundles &&
+    grewDownMessage &&
+    (message +=
+      'Please update the baseline file by running locally "npm run analyzeBundles" and push the changes.\n');
+
+  if (grewUpMessage) {
+    message += chalk.red(`Error: Packages that grew:\n${grewUpMessage}\n`);
+  }
+
+  return message;
 };
 
+const updateBundleInBaselineAndMessage = ({ key, oldSize, newSize, isNewBundle }) => {
+  savingBundles[key] = newSize;
+  const messageType = isNewBundle ? 'newBundle' : 'grewDown';
+  updateMessage(messageType, key, oldSize, newSize);
+};
+
+const updateMessage = (messageType, key, oldSize, newSize) => {
+  switch (messageType) {
+    case 'newBundle':
+      newBundles += `${key} is added to the baseline with bundlesize: ${newSize}\n`;
+      break;
+    case 'grewDown':
+      grewDownMessage += `${key}: ${oldSize}KB => ${newSize}KB\n`;
+      break;
+    case 'grewUp':
+      grewUpMessage += `${key}: ${oldSize}KB => ${newSize}KB\n`;
+      break;
+    default:
+      break;
+  }
+};
+
+async function updatePRCommentAndConsole() {
+  const pr_comment = generatePRComment();
+  console.log(pr_comment);
+  await gitPRComment(pr_comment);
+
+  if (grewDownMessage !== '' || newBundles !== '') {
+    fs.writeFileSync(`bundlesSizesBaseline.json`, JSON.stringify(savingBundles, null, 2), 'utf8');
+  }
+  grewUpMessage !== '' ? process.exit(1) : console.log('comparison ended successfully');
+}
+
 async function compareBundles() {
-  let savingBundles = {},
-    currentBundles = {},
-    message = '';
   try {
     savingBundles = JSON.parse(fs.readFileSync('./bundlesSizesBaseline.json'));
-    currentBundles = JSON.parse(fs.readFileSync('./bundleSizes.json'));
+    currentBundles = await analyze();
   } catch (err) {
     console.log(err);
     return;
@@ -24,27 +74,20 @@ async function compareBundles() {
   Object.keys(currentBundles).forEach(key => {
     const oldSize = savingBundles[key];
     const newSize = currentBundles[key];
+
     if (oldSize) {
-      if (newSize !== oldSize && parseInt(newSize) - parseInt(oldSize) > 5) {
-        const diff = `${key}: old bundlesize: ${oldSize}KB, current bundlesize: ${newSize}KB\n`;
-        message = message.concat(diff);
+      const diff = oldSize && parseInt(newSize) - parseInt(oldSize);
+      if (diff > 5) {
+        updateMessage('grewUp', key, oldSize, newSize);
+      } else if (diff < 0) {
+        updateBundleInBaselineAndMessage({ key, newSize, oldSize });
       }
     } else {
-      const warning = `${key} is missing in 'bundlesSizesBaseline.json' (Please add it to this file), current bundlesize: ${newSize}\n`;
-      message = warning.concat(message);
+      updateBundleInBaselineAndMessage({ key, newSize, isNewBundle: true });
     }
   });
-  if (message !== '') {
-    console.error(chalk.bold.red(message));
-    await gitPRComment(generateMessage(message));
-    console.error(
-      chalk.red(`\nError: There are Significant differences between some bundle sizes:\n${message}`)
-    );
-    process.exit(1);
-  } else {
-    await gitPRComment(message);
-    console.log('comparison ended successfully');
-  }
+
+  updatePRCommentAndConsole();
 }
 
 compareBundles();

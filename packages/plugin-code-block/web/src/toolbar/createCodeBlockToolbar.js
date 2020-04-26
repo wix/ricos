@@ -1,10 +1,16 @@
+// @flow
 import { MODIFIERS } from 'wix-rich-content-editor-common';
 import TextCodeBlockButton from './TextCodeBlockButton';
 import { CODE_BLOCK_TYPE } from '../types';
 import { toggleBlockTypeAndEnsureSpaces } from './blockTypeModifiers';
 import createInsertButtons from './codeBlockInsertButtons';
 
-export default ({ setEditorState, helpers, t, icon }) => {
+const codeBlockTexButtontMapper /*: TextButtonMapper */ = ({
+  setEditorState,
+  helpers,
+  t,
+  icon,
+}) => {
   const commandHandler = editorState => {
     setEditorState(toggleBlockTypeAndEnsureSpaces(CODE_BLOCK_TYPE, editorState));
   };
@@ -30,3 +36,5 @@ export default ({ setEditorState, helpers, t, icon }) => {
     name: 'code-block',
   };
 };
+
+export default codeBlockTexButtontMapper;
