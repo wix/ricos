@@ -41,7 +41,7 @@ const getUrl = (componentId, fixtureName = '', plugins = 'partialPreset') =>
 const run = (app, fixtureName, plugins) => {
   cy.visit(getUrl(app, fixtureName, plugins)).then(() => {
     disableTransitions();
-    hideAllTooltips();
+    //hideAllTooltips();
   });
 };
 
