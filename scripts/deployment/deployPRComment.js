@@ -12,7 +12,7 @@ const generateMessage = () => {
 
 async function run() {
   const message = generateMessage();
-  gitPRComment(message);
+  gitPRComment(message, 'deploy');
 }
 
 run();

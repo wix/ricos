@@ -8,7 +8,8 @@
     "save": "FILE_NAME=bundlesSizesBaseline node ./saveBundles.js",
     "start": "node ./analyzeBundles.js",
     "analyze": "node ./analyzePlugin.js",
-    "analyzeAndCompare": "node ./compareBundles.js"
+    "analyzeAndCompare": "node ./compareBundles.js",
+    "createNewPrComment": "node ./createNewComment.js"
   },
   "keywords": [],
   "author": "",
