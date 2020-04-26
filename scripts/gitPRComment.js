@@ -9,6 +9,9 @@ async function gitPRComment(message) {
   };
   request.body = message;
   const client = new github.GitHub(REPO_TOKEN);
+  console.log('client: ' + client);
+  console.log('pulls: ' + client.pulls);
+  console.log('issues: ' + client.issues);
   await client.pulls.update(request);
 }
 
