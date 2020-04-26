@@ -36,13 +36,13 @@ async function compareBundles() {
   });
   if (message !== '') {
     console.error(chalk.bold.red(message));
-    await gitPRComment(generateMessage(message));
+    await gitPRComment(generateMessage(message), 'compare');
     console.error(
       chalk.red(`\nError: There are Significant differences between some bundle sizes:\n${message}`)
     );
     process.exit(1);
   } else {
-    await gitPRComment(message);
+    await gitPRComment(message, 'compare');
     console.log('comparison ended successfully');
   }
 }
