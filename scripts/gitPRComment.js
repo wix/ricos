@@ -1,6 +1,6 @@
 const github = require('@actions/github');
 
-async function gitPRComment(message) {
+function gitPRComment(message) {
   const { REPO_TOKEN } = process.env;
   if (REPO_TOKEN) {
     const request = {
@@ -10,7 +10,7 @@ async function gitPRComment(message) {
     };
     request.body = message;
     const client = new github.GitHub(REPO_TOKEN);
-    await client.pulls.update(request);
+    client.pulls.update(request);
   }
 }
 
