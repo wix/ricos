@@ -40,8 +40,9 @@ const getUrl = (componentId, fixtureName = '', plugins = 'partialPreset') =>
 
 const run = (app, fixtureName, plugins) => {
   cy.visit(getUrl(app, fixtureName, plugins)).then(() => {
+    waitForEditorToLoad(); //.DraftEditor-root
     disableTransitions();
-    //hideAllTooltips();
+    hideAllTooltips();
   });
 };
 
@@ -77,6 +78,10 @@ function disableTransitions() {
 
 function hideAllTooltips() {
   cy.get('[data-id="tooltip"]').invoke('hide'); //uses jquery to set display: none
+}
+
+function waitForEditorToLoad() {
+  cy.get('[data-id=".DraftEditor-root"]', { timeout: 15000 });
 }
 
 Cypress.Commands.add('loadEditorAndViewer', (fixtureName, plugins) =>
