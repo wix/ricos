@@ -1,16 +1,16 @@
-import React, { Component, ReactElement, forwardRef } from 'react';
+import React, { Component, ReactElement, forwardRef, Suspense } from 'react';
 import EngineWrapper from './EngineWrapper';
 import themeStrategy from './themeStrategy/themeStrategy';
 import pluginsStrategy from './pluginsStrategy/pluginsStrategy';
 import localeStrategy from './localeStrategy/localeStrategy';
 import './styles.global.css';
 import { merge } from 'lodash';
-import PropTypes from 'prop-types';
 import { isDefined } from 'ts-is-present';
 import { RichContentProps, ForwardedRef } from './RichContentProps';
 
 export interface RichContentWrapperProps {
-  children: ReactElement;
+  contentState?: ContentState;
+  children?: ReactElement;
   theme?: string | object;
   locale?: string;
   palette?: Palette;
@@ -34,13 +34,11 @@ class RichContentWrapper extends Component<
     };
   }
 
-  static propTypes = { children: PropTypes.element.isRequired };
-
   static defaultProps = { locale: 'en', isMobile: false };
 
   updateLocale = async () => {
     const { locale, children } = this.props;
-    await localeStrategy(children.props.locale || locale).then(localeData => {
+    await localeStrategy(children?.props.locale || locale).then(localeData => {
       this.setState({ localeStrategy: localeData });
     });
   };
@@ -55,17 +53,39 @@ class RichContentWrapper extends Component<
     }
   }
 
+  getChildComponent(): ReactElement<RichContentProps> {
+    const { children, isEditor, contentState } = this.props;
+    if (children) {
+      return children;
+    }
+    const ChildComponent = isEditor
+      ? React.lazy(() =>
+          import('wix-rich-content-editor').then(({ RichContentEditor }) => ({
+            default: RichContentEditor,
+          }))
+        )
+      : React.lazy(() =>
+          import('wix-rich-content-viewer').then(({ RichContentViewer }) => ({
+            default: RichContentViewer,
+          }))
+        );
+    return <ChildComponent initialState={contentState} />;
+  }
+
   render() {
     const {
       theme,
       palette,
       plugins = [],
-      children,
       isEditor = false,
       rcProps,
       forwardedRef,
       ...rest
     } = this.props;
+
+    const child = this.getChildComponent();
+    const { initialState } = child.props;
+
     const { localeStrategy } = this.state;
 
     const themeGenerators: ThemeGeneratorFunction[] = plugins
@@ -77,23 +97,26 @@ class RichContentWrapper extends Component<
       palette,
       themeGenerators,
     });
+
     const mergedRCProps = merge(
       { theme: finalTheme },
-      pluginsStrategy(isEditor, plugins, children.props, finalTheme),
+      pluginsStrategy(isEditor, plugins, child.props, finalTheme, initialState),
       localeStrategy,
       rcProps
     );
 
     return (
-      <EngineWrapper
-        rcProps={mergedRCProps}
-        isEditor={isEditor}
-        key={isEditor ? 'editor' : 'viewer'}
-        ref={forwardedRef}
-        {...rest}
-      >
-        {children}
-      </EngineWrapper>
+      <Suspense fallback={<div />}>
+        <EngineWrapper
+          rcProps={mergedRCProps}
+          isEditor={isEditor}
+          key={isEditor ? 'editor' : 'viewer'}
+          ref={forwardedRef}
+          {...rest}
+        >
+          {child}
+        </EngineWrapper>
+      </Suspense>
     );
   }
 }

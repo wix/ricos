@@ -1,11 +1,11 @@
-import { EditorState, RawDraftContentState } from 'draft-js';
+import { EditorState } from 'draft-js';
 export interface RichContentProps {
   locale?: string;
   localeResource?: object;
   placeholder?: string;
   editorKey?: string;
   onChange?(editorState: EditorState): void;
-  initialState?: RawDraftContentState;
+  initialState?: ContentState;
   theme?: object;
   config?: object;
   plugins?: PluginConfig[];
@@ -15,7 +15,7 @@ export interface RichContentProps {
 }
 
 export interface EditorDataInstance {
-  getContentState: () => RawDraftContentState;
+  getContentState: () => ContentState;
   refresh: (editorState: EditorState) => void;
 }
 

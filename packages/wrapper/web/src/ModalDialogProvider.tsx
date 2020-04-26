@@ -60,8 +60,11 @@ export default class ModalDialogProvider extends Component<Props, State> {
     const EditorModal = React.lazy(() =>
       import(/* webpackChunkName: "rce-EditorModal"  */ `./EditorModal`)
     );
-    const { MobileToolbar, TextToolbar } = this.editor.getToolbars();
-    this.setState({ MobileToolbar, TextToolbar, EditorModal });
+    if (this.editor) {
+      const { MobileToolbar, TextToolbar } = this.editor.getToolbars();
+      this.setState({ MobileToolbar, TextToolbar, EditorModal });
+    }
+    this.setState({ EditorModal });
   }
 
   openModal = data => {
