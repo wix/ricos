@@ -2,7 +2,7 @@
 /* eslint-disable no-console */
 const chalk = require('chalk');
 const fs = require('fs');
-// const { gitPRComment } = require('../scripts/gitPRComment');
+const { gitPRComment } = require('../scripts/gitPRComment');
 const { analyze } = require('./analyzeBundles');
 const github = require('@actions/github');
 
@@ -13,8 +13,7 @@ let savingBundles = {},
   grewDownMessage = '';
 
 const generatePRComment = () => {
-  let message = 'Comparison bundles:\n';
-  message += newBundles
+  let message = newBundles
     ? 'New packages found.\nPlease update the baseline file by running locally "npm run analyzeBundles" and push the changes.\n\n'
     : '';
   message += grewDownMessage ? `Packages that shrank:\n${grewDownMessage}\n` : '';
@@ -53,9 +52,8 @@ const updateMessage = (messageType, key, oldSize, newSize) => {
   }
 };
 
-async function gitPRComment(message) {
-  // const message = core.getInput('message');
-  // const github_token = core.getInput('GITHUB_TOKEN');
+async function createNewPRComment() {
+  const message = 'comparison bundles comment:\n';
   const { REPO_TOKEN } = process.env;
   if (REPO_TOKEN) {
     const context = github.context;
@@ -65,6 +63,7 @@ async function gitPRComment(message) {
     await octokit.issues.createComment({
       ...context.repo,
       issue_number: pull_request_number,
+      comment_id: 'comparison',
       body: message,
     });
   }
@@ -73,7 +72,7 @@ async function gitPRComment(message) {
 async function updatePRCommentAndConsole() {
   const pr_comment = generatePRComment();
   console.log(pr_comment);
-  await gitPRComment(pr_comment);
+  await gitPRComment(pr_comment, 'comparison');
 
   if (grewDownMessage !== '' || newBundles !== '') {
     fs.writeFileSync(`bundlesSizesBaseline.json`, JSON.stringify(savingBundles, null, 2), 'utf8');
@@ -82,6 +81,7 @@ async function updatePRCommentAndConsole() {
 }
 
 async function compareBundles() {
+  await createNewPRComment();
   try {
     savingBundles = JSON.parse(fs.readFileSync('./bundlesSizesBaseline.json'));
     currentBundles = await analyze();
