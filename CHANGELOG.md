@@ -31,6 +31,8 @@
   - [#956](https://github.com/wix-incubator/rich-content/pull/956) bi getData will now contain `forPublish` argument
 - `preview`
   - [#962](https://github.com/wix-incubator/rich-content/pull/962) interactions improved; read-more displays html
+- `general`
+  - [#964](https://github.com/wix-incubator/rich-content/pull/964) Github Action: cancel all previous runs added
 </details>
 <hr/>
 
