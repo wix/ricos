@@ -139,7 +139,9 @@ const config = {
   uiSettings,
   [LINK_BUTTON_TYPE]: {},
   [ACTION_BUTTON_TYPE]: {
-    onClick: () => {},
+    onClick: () => {
+      console.log('onClick event..');
+    },
   },
 };
 
