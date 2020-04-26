@@ -4,3 +4,4 @@ require('./Intro/');
 require('./Plugins/');
 require('./Wrapper/');
 require('./TestCase/');
+require('./Toolbars/');

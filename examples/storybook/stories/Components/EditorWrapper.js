@@ -20,10 +20,17 @@ import { pluginMentions } from 'wix-rich-content-plugin-mentions';
 import { pluginSoundCloud } from 'wix-rich-content-plugin-sound-cloud';
 import { pluginUndoRedo } from 'wix-rich-content-plugin-undo-redo';
 import { pluginVideo } from 'wix-rich-content-plugin-video';
-import { pluginLinkPreview } from 'wix-rich-content-plugin-link-preview';
+import { pluginLinkPreview, LinkPreviewProviders } from 'wix-rich-content-plugin-link-preview';
+import {
+  pluginVerticalEmbed,
+  verticalEmbedProviders,
+} from 'wix-rich-content-plugin-vertical-embed';
 import { mockFetchUrlPreviewData } from '../../../main/shared/utils/linkPreviewUtil';
 import { pluginTextColor, pluginTextHighlight } from 'wix-rich-content-plugin-text-color';
 import '../styles.global.scss';
+
+const { Instagram, Twitter, YouTube, TikTok } = LinkPreviewProviders;
+const { event, booking, product } = verticalEmbedProviders;
 
 const mockData = {
   id: '8b72558253b2502b401bb46e5599f22a',
@@ -67,6 +74,10 @@ const configs = {
   },
   linkPreview: {
     fetchData: mockFetchUrlPreviewData(),
+    exposeEmbedButtons: [Instagram, Twitter, YouTube, TikTok],
+  },
+  verticalEmbed: {
+    exposeEmbedButtons: [product, event, booking],
   },
 };
 
@@ -92,13 +103,14 @@ const plugins = [
   pluginUndoRedo(),
   pluginTextColor(),
   pluginTextHighlight(),
+  pluginVerticalEmbed(configs.verticalEmbed),
 ];
 
-const EditorWrapper = ({ contentState, palette, onChange }) => {
+const EditorWrapper = ({ contentState, palette, onChange, config }) => {
   const editorState = createWithContent(convertFromRaw(contentState));
   const theme = palette ? { theme: 'Palette', palette } : { theme: 'Default' };
   return (
-    <RichContentWrapper plugins={plugins} {...theme} isEditor>
+    <RichContentWrapper plugins={plugins} {...theme} isEditor rcProps={{ config }}>
       <RichContentEditor
         editorState={editorState}
         onChange={onChange}
@@ -112,6 +124,7 @@ EditorWrapper.propTypes = {
   contentState: PropTypes.object,
   palette: PropTypes.arrayOf(PropTypes.object),
   onChange: PropTypes.func,
+  config: PropTypes.object,
 };
 
 export default EditorWrapper;

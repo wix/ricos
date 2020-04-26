@@ -170,7 +170,6 @@ export default class Editor extends PureComponent {
       locale,
       localeResource,
       onChange,
-      isSSR,
     } = this.props;
     const { MobileToolbar, TextToolbar } = this.state;
     const textToolbarType = staticToolbar && !isMobile ? 'static' : null;
