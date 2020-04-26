@@ -1,11 +1,9 @@
 /* eslint-disable no-console */
-
 const chalk = require('chalk');
 const { getPackages } = require('@lerna/project');
 const webpack = require('webpack');
 const { getWebpackConfig } = require('./common');
 const argv = require('yargs').argv;
-const fs = require('fs');
 
 process.on('unhandledRejection', error => {
   throw error;
@@ -50,16 +48,10 @@ if (firstArg) {
   }
 }
 
-function save(fileName, data = []) {
-  fs.writeFile(`${fileName}.json`, data, err => {
-    if (err) throw err;
-  });
-}
-
-function run() {
-  const fileName = process.env.FILE_NAME;
+async function analyze() {
+  const sizesObject = {};
   console.log(chalk.magenta('Analyzing plugins...'));
-  getAllPluginsNames(options).then(pkgNames => {
+  await getAllPluginsNames(options).then(async pkgNames => {
     const bundleResultsPromise = pkgNames.map(pkgName => {
       return new Promise(resolve => {
         webpack(getWebpackConfig(pkgName), (err, stats) => {
@@ -78,23 +70,22 @@ function run() {
       });
     });
 
-    Promise.all(bundleResultsPromise).then(results => {
-      const sizesObject = {};
+    await Promise.all(bundleResultsPromise).then(results => {
       results.forEach(result => {
         const { size, name, error } = result;
         const prefix = chalk.cyan(`[${name}]`);
         if (error) {
           console.log(prefix, chalk.red(`Error! ${error}`));
+          process.exit(1);
         } else {
           const chlk = size > 500 ? warning : size > 250 ? chalk.yellow : chalk.green;
           console.log(prefix, chlk(`${size}KB`));
           sizesObject[name] = size;
         }
       });
-
-      save(fileName, JSON.stringify(sizesObject, null, 2));
     });
   });
+  return sizesObject;
 }
 
-run();
+module.exports = { analyze };
