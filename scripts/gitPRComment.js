@@ -11,10 +11,7 @@ async function gitPRComment(message, id) {
   };
   request.body = message;
   const client = new github.GitHub(REPO_TOKEN);
-  await client.issues.createComment({
-    ...request.repo,
-    ...request,
-  });
+  await client.issues.createComment(request);
 
   // console.log('client: ' + JSON.stringify(client, null, 2));
   // console.log('pulls: ' + JSON.stringify(client.pulls, null, 2));
