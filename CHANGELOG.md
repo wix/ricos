@@ -29,6 +29,7 @@
   - [#936](https://github.com/wix-incubator/rich-content/pull/936) arrangement of inline toolbar buttons
 - `wrapper`
   - [#956](https://github.com/wix-incubator/rich-content/pull/956) bi getData will now contain `forPublish` argument
+  - [#966](https://github.com/wix-incubator/rich-content/pull/966) passing RCE/RCV to wrapper is no longer required
 - `preview`
   - [#962](https://github.com/wix-incubator/rich-content/pull/962) interactions improved; read-more displays html
 </details>
