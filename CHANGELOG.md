@@ -77,7 +77,7 @@
 - `vertical-embed`
   - [#728](https://github.com/wix-incubator/rich-content/pull/728) Vertical Embed Plugin - alpha verison
 - `wrapper`
-  - [#935](https://github.com/wix-incubator/rich-content/pull/935) back-office theme will appear as default theme for now  
+  - [#935](https://github.com/wix-incubator/rich-content/pull/935) back-office theme will appear as default theme for now
 
 ## 7.3.2 (Apr 16, 2020)
 ### :bug: Bug Fix

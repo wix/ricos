@@ -34,7 +34,7 @@ The `Setting` type is defined as follows:
 
 ```javascript
 {
-  name: TOOLBARS.TYPE,
+  name: TOOLBARS,
   shouldCreate: () => {
     desktop: boolean,
     mobile: {
@@ -45,8 +45,8 @@ The `Setting` type is defined as follows:
   getVisibilityFn: () => {
     desktop: editorState => boolean,
     mobile: {
-      ios: editorState => boolean,
-      android: editorState => boolean
+      ios: (editorState: any) => boolean,
+      android: (editorState: any) => boolean
     }
   },
   getPositionOffset: () => {
@@ -71,17 +71,17 @@ The `Setting` type is defined as follows:
     }
   },
   getButtons: () => {
-    desktop: Array<Component> | Array<string>,
+    desktop: Array<any>,
     mobile: {
-      ios: Array<Component> | Array<string>,
-      android: Array<Component> | Array<string>
+      ios: Array<any>,
+      android: Array<any>
     }
   },
-   getTextPluginButtons: () => {
-    desktop: Map<Component>,
+  getTextPluginButtons: () => {
+    desktop: { [key:string]: Component },
     mobile: {
-      ios: Map<Component>,
-      android: Map<Component>
+      ios: { [key:string]: Component },
+      android: { [key:string]: Component }
     }
   }
 }
