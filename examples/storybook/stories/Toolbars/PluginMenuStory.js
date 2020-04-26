@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Section, Page } from '../Components/StoryParts';
 import EditorWrapper from '../Components/EditorWrapper';
 import emptyContentState from '../../../../e2e/tests/fixtures/empty.json';
-import { Box, Dropdown, Button } from 'wix-style-react';
+import { Box, Dropdown } from 'wix-style-react';
 
 const optionsIdMap = {
   0: undefined,
@@ -14,11 +14,12 @@ export default () => {
   class PluginMenuStory extends Component {
     constructor(props) {
       super(props);
-      this.state = {};
+      this.state = { editorKey: 0 };
     }
 
     getCheckbox = () => {
       const configOptions = ['showSearch', 'splitToSections', 'horizontalMenu'];
+      const { editorKey } = this.state;
       return configOptions.map(option => (
         <Box padding="3px" key={option} align="space-between" maxWidth="400px">
           {`${option}: `}
@@ -30,14 +31,16 @@ export default () => {
               { id: 1, value: 'true' },
               { id: 2, value: 'false' },
             ]}
-            onSelect={({ id }) => this.setState({ [option]: optionsIdMap[id], showEditor: false })}
+            onSelect={({ id }) =>
+              this.setState({ [option]: optionsIdMap[id], editorKey: editorKey + 1 })
+            }
           />
         </Box>
       ));
     };
 
     render() {
-      const { showSearch, splitToSections, horizontalMenu, showEditor } = this.state;
+      const { showSearch, splitToSections, horizontalMenu, editorKey } = this.state;
       const config = {
         toolbarsConfig: {
           addPluginMenuConfig: {
@@ -53,15 +56,8 @@ export default () => {
           <Section>
             <h3>Plugin Menu Config:</h3>
             {this.getCheckbox()}
-            <Button
-              priority="secondary"
-              size="small"
-              onClick={() => this.setState({ showEditor: true })}
-            >
-              save
-            </Button>
             <Section>
-              {showEditor && <EditorWrapper contentState={emptyContentState} config={config} />}
+              <EditorWrapper key={editorKey} contentState={emptyContentState} config={config} />
             </Section>
             <p>
               Note: defaults for unset fields are:
