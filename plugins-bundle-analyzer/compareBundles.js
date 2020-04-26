@@ -3,6 +3,7 @@
 const chalk = require('chalk');
 const fs = require('fs');
 const { gitPRComment } = require('../scripts/gitPRComment');
+const { analyze } = require('./analyzeBundles');
 
 let savingBundles = {},
   currentBundles = {},
@@ -14,16 +15,15 @@ const generatePRComment = () => {
   let message = newBundles
     ? 'New packages found.\nPlease update the baseline file by running locally "npm run analyzeBundles" and push the changes.\n\n'
     : '';
-  message = message.concat(grewDownMessage ? `Packages that shrank:\n${grewDownMessage}\n` : '');
+  message += grewDownMessage ? `Packages that shrank:\n${grewDownMessage}\n` : '';
 
   !newBundles &&
     grewDownMessage &&
-    (message = message.concat(
-      'Please update the baseline file by running locally "npm run analyzeBundles" and push the changes.\n'
-    ));
+    (message +=
+      'Please update the baseline file by running locally "npm run analyzeBundles" and push the changes.\n');
 
   if (grewUpMessage) {
-    message = message.concat(chalk.red(`Error: Packages that grew:\n${grewUpMessage}\n`));
+    message += chalk.red(`Error: Packages that grew:\n${grewUpMessage}\n`);
   }
 
   return message;
@@ -38,15 +38,13 @@ const updateBundleInBaselineAndMessage = ({ key, oldSize, newSize, isNewBundle }
 const updateMessage = (messageType, key, oldSize, newSize) => {
   switch (messageType) {
     case 'newBundle':
-      newBundles = newBundles.concat(
-        `${key} is added to the baseline with bundlesize: ${newSize}\n`
-      );
+      newBundles += `${key} is added to the baseline with bundlesize: ${newSize}\n`;
       break;
     case 'grewDown':
-      grewDownMessage = grewDownMessage.concat(`${key}: ${oldSize}KB => ${newSize}KB\n`);
+      grewDownMessage += `${key}: ${oldSize}KB => ${newSize}KB\n`;
       break;
     case 'grewUp':
-      grewUpMessage = grewUpMessage.concat(`${key}: ${oldSize}KB => ${newSize}KB\n`);
+      grewUpMessage += `${key}: ${oldSize}KB => ${newSize}KB\n`;
       break;
     default:
       break;
@@ -64,10 +62,10 @@ async function updatePRCommentAndConsole() {
   grewUpMessage !== '' ? process.exit(1) : console.log('comparison ended successfully');
 }
 
-function compareBundles() {
+async function compareBundles() {
   try {
     savingBundles = JSON.parse(fs.readFileSync('./bundlesSizesBaseline.json'));
-    currentBundles = JSON.parse(fs.readFileSync('./bundleSizes.json'));
+    currentBundles = await analyze();
   } catch (err) {
     console.log(err);
     return;

@@ -5,10 +5,10 @@
   "main": "index.js",
   "private": true,
   "scripts": {
-    "save": "FILE_NAME=bundlesSizesBaseline node ./analyzeBundles.js",
-    "start": "FILE_NAME=bundleSizes node ./analyzeBundles.js",
+    "save": "FILE_NAME=bundlesSizesBaseline node ./saveBundles.js",
+    "start": "node ./analyzeBundles.js",
     "analyze": "node ./analyzePlugin.js",
-    "compare": "node ./compareBundles.js"
+    "analyzeAndCompare": "node ./compareBundles.js"
   },
   "keywords": [],
   "author": "",
