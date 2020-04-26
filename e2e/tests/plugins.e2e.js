@@ -313,7 +313,7 @@ describe('plugins', () => {
       eyesOpen(this);
     });
 
-    beforeEach('load editor', () => cy.loadEditorAndViewer('action-button', 'actionButton'));
+    beforeEach('load editor', () => cy.loadEditorAndViewer('action-button', 'all'));
 
     after(() => cy.eyesClose());
     it('create action button', function() {
