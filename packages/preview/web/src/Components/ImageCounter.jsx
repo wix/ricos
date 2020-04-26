@@ -72,7 +72,7 @@ class ImageCounter extends PureComponent {
     return (
       <Measure onResize={this.onResize}>
         {({ measureRef }) => (
-          <div ref={measureRef}>
+          <div ref={measureRef} className={this.styles.imageCounter_measure}>
             <div ref={this.handleWrapper} onClick={this.onClick}>
               <div ref={this.handleContainer} className={this.styles.imageCounter_overlay} />
               {this.props.children}

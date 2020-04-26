@@ -1,7 +1,7 @@
 @import '~wix-rich-content-common/dist/statics/styles/mixins';
 
 .map_settings_modal_main_content_block {
-  padding: 0px 40px;
+  padding: 0px 24px;
   @include phone {
     padding: 0px 20px;
   }
@@ -19,10 +19,8 @@
 }
 
 .map_settings_modal_title_container {
-  height: 120px;
   flex: none;
-  padding-top: 42px;
-  padding-bottom: 34px;
+  padding: 24px 24px 20px;
   box-sizing: border-box;
 
   @include phone {
@@ -56,33 +54,6 @@
   @include phone {
     margin-bottom: 32px;
   }
-}
-
-.map_settings_modal_footer_button {
-  width: 182px;
-  height: 42px;
-}
-
-.map_settings_modal_footer_cancel_button {
-  @extend .map_settings_modal_footer_button;
-  margin-right: 32px;
-  width: 186px;
-  outline: none;
-  padding: 0px;
-}
-
-.map_settings_modal_footer_save_button {
-  @extend .map_settings_modal_footer_button;
-  border: none;
-}
-
-.map_settings_modal_footer {
-  height: 124px;
-  display: flex;
-  flex: none;
-  padding-top: 40px;
-  padding-bottom: 42px;
-  box-sizing: border-box;
 }
 
 .map_settings_modal_mobile_navbar {
@@ -129,8 +100,9 @@
 }
 
 .map_settings_modal_title {
-  font-size: 30px;
-  line-height: 1.47;
+  font-size: 20px;
+  line-height: 30px;
+  margin: 0px;
 
   @include phone {
     font-size: 20px;
@@ -176,6 +148,9 @@
 
 .map_settings_modal_search_icon_wrapper {
   position: relative;
+  input {
+    padding-right: 40px;
+  }
 }
 
 .map_settings_modal_search_icon {
