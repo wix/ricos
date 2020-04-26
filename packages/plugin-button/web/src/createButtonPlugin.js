@@ -31,7 +31,7 @@ const createButtonPlugin = (type, config) => {
   const styles = mergeStyles({ styles: Styles, theme });
   const rel = relValue === '_nofollow';
   const target = anchorTarget ? anchorTarget === '_blank' : true;
-
+  const customTooltip = settings.insertButtonTooltip;
   return createBasePlugin({
     component: ButtonComponent,
     settings,
@@ -45,7 +45,7 @@ const createButtonPlugin = (type, config) => {
       styles,
       t,
       isMobile,
-      type,
+      customTooltip,
     }),
     helpers,
     t,

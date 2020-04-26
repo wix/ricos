@@ -281,6 +281,7 @@ const buttonConfig = {
   //     InsertPluginButtonIcon: MyCustomIcon,
   //   },
   // },
+  // insertButtonTooltip: 'Custom tooltip',
   palette: ['#FEFDFD', '#D5D4D4', '#ABCAFF', '#81B0FF', '#0261FF', '#0141AA'],
   selectionBackgroundColor: 'fuchsia',
   selectionBorderColor: '#FFF',
@@ -568,6 +569,18 @@ const config = {
   [ACTION_BUTTON_TYPE]: {
     onClick: true,
     ...buttonConfig,
+  },
+  [TEXT_HIGHLIGHT_TYPE]: {
+    // toolbar: {
+    //   icons: {
+    //     InsertPluginButtonIcon: MyCustomIcon,
+    //   },
+    // },
+    colorScheme,
+    styleSelectionPredicate,
+    customStyleFn: customBackgroundStyleFn,
+    onColorAdded: color => (userColors = [...userColors, color]),
+    getUserColors: () => userColors,
   },
   [TEXT_COLOR_TYPE]: {
     // toolbar: {

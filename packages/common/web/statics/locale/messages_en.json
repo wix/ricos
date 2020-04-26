@@ -187,7 +187,6 @@
   "GallerySettings_Image_Ratio": "Image ratio",
   "GallerySettings_Thumbnail_Placement": "Thumbnail placement",
   "ButtonPlugin_InsertButton_Tooltip": "Add a button",
-  "ActionButtonPlugin_InsertButton_Tooltip": "Add an action-on-click",
   "ButtonModal_InputLink_Placeholder": "eg: www.example.com",
   "ButtonModal_InputName_Placeholder": "Add text here",
   "ButtonModal_InputLink_ErrorMessage": "Check the URL and try again",
