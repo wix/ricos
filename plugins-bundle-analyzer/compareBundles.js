@@ -14,7 +14,7 @@ let savingBundles = {},
 const generatePRComment = () => {
   let message = newBundles
     ? 'New packages found.\nPlease update the baseline file by running locally "npm run analyzeBundles" and push the changes.\n\n'
-    : '';
+    : 'Comparison ended successfully';
   message += grewDownMessage ? `Packages that shrank:\n${grewDownMessage}\n` : '';
 
   !newBundles &&
