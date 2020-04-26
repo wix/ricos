@@ -140,7 +140,7 @@ const config = {
   [LINK_BUTTON_TYPE]: {},
   [ACTION_BUTTON_TYPE]: {
     onClick: () => {
-      console.log('onClick event..');
+      window.alert('onClick event..');
     },
   },
 };

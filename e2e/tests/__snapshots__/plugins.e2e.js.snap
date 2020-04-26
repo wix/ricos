@@ -4241,3 +4241,230 @@ exports[`plugins > action button > create action button #0`] =
     }
   }
 };
+
+exports[`plugins > link button > create link button & customize it #0`] =
+{
+  "blocks": [
+    {
+      "data": {
+        "textAlignment": "justify"
+      },
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "button": {
+          "design": {
+            "activeButton": 3,
+            "background": "#81B0FF",
+            "borderColor": "#0261FF",
+            "borderRadius": 10,
+            "borderWidth": 1,
+            "color": "#0261FF",
+            "padding": 12
+          },
+          "settings": {
+            "buttonText": "Click Me",
+            "rel": false,
+            "target": false,
+            "url": "www.wix.com"
+          }
+        },
+        "config": {
+          "alignment": "center",
+          "size": "small",
+          "width": "fit-content"
+        }
+      },
+      "mutability": "IMMUTABLE",
+      "type": "wix-draft-plugin-link-button"
+    }
+  }
+};
+
+exports[`plugins > action button > create action button & customize it #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 3,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "button": {
+          "design": {
+            "activeButton": 3,
+            "background": "#81B0FF",
+            "borderColor": "#0261FF",
+            "borderRadius": 10,
+            "borderWidth": 1,
+            "color": "#0261FF",
+            "padding": 12
+          },
+          "settings": {
+            "buttonText": "Click Me",
+            "rel": false,
+            "target": true,
+            "url": ""
+          }
+        },
+        "config": {
+          "alignment": "center",
+          "size": "small",
+          "width": "fit-content"
+        }
+      },
+      "mutability": "IMMUTABLE",
+      "type": "wix-draft-plugin-action-button"
+    }
+  }
+};
+
+exports[`plugins > action button > create action button & click it #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 3,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "button": {
+          "design": {
+            "activeButton": 0,
+            "background": "#0261FF",
+            "borderColor": "#0261FF",
+            "borderRadius": 0,
+            "borderWidth": 0,
+            "color": "#FFFFFF",
+            "padding": 12
+          },
+          "settings": {
+            "buttonText": "Click Me",
+            "rel": false,
+            "target": true,
+            "url": ""
+          }
+        },
+        "config": {
+          "alignment": "center",
+          "size": "small",
+          "width": "fit-content"
+        }
+      },
+      "mutability": "IMMUTABLE",
+      "type": "wix-draft-plugin-action-button"
+    }
+  }
+};
