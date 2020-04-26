@@ -41,7 +41,7 @@
     "e2e:app": "cd e2e/test-env && npm run build && npm start",
     "e2e:app:run": "cd e2e/test-env && npm start",
     "e2e:app:dev": "cd e2e/test-env && npm run dev",
-    "e2e:app:wait": "wait-on http-get://localhost:3002/ && sleep 120",
+    "e2e:app:wait": "wait-on http-get://localhost:3002/ && sleep 300",
     "test:unit": "lerna run --parallel --stream test",
     "test:flow": "echo 'flow: type checking...' && flow",
     "lint": "lerna run --parallel --stream lint",
