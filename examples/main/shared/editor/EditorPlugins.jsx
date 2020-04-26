@@ -113,6 +113,7 @@ export const editorPluginsEmbedsPreset = [
 export const editorPlugins = [
   createLinkPreviewPlugin,
   createVerticalEmbedPlugin,
+  createActionButtonPlugin,
   ...editorPluginsPartialPreset,
 ];
 
