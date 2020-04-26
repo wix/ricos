@@ -1,7 +1,12 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { mergeStyles } from 'wix-rich-content-common';
-import { SettingsSection, TextInput, Button } from 'wix-rich-content-editor-common';
+import {
+  SettingsSection,
+  SettingsPanelFooter,
+  TextInput,
+  Button,
+} from 'wix-rich-content-editor-common';
 import ReactGoogleMapLoader from 'react-google-maps-loader';
 import ReactGooglePlacesSuggest from 'react-google-places-suggest';
 import styles from '../../statics/styles/map-settings-modal.scss';
@@ -284,7 +289,7 @@ export class MapSettingsModal extends Component {
               this.styles.map_settings_modal_main_content_block
             )}
           >
-            <div className={this.styles.map_settings_modal_title}>{t('MapSettings_Title')}</div>
+            <h3 className={this.styles.map_settings_modal_title}>{t('MapSettings_Title')}</h3>
           </div>
 
           {isMobile
@@ -292,29 +297,13 @@ export class MapSettingsModal extends Component {
             : wrapWithScrollBars(this.renderSettingsSections())}
 
           {!isMobile && (
-            <div
-              className={classNames(
-                this.styles.map_settings_modal_footer,
-                this.styles.map_settings_modal_main_content_block
-              )}
-            >
-              <Button
-                type="secondary"
-                onClick={this.props.helpers.closeModal}
-                theme={this.styles}
-                className={this.styles.map_settings_modal_footer_cancel_button}
-              >
-                Cancel
-              </Button>
-              <Button
-                type="primary"
-                onClick={this.onSaveBtnClick}
-                theme={this.styles}
-                className={this.styles.map_settings_modal_footer_save_button}
-              >
-                Save
-              </Button>
-            </div>
+            <SettingsPanelFooter
+              fixed
+              cancel={this.props.helpers.closeModal}
+              save={this.onSaveBtnClick}
+              theme={this.props.theme}
+              t={t}
+            />
           )}
         </div>
       </div>

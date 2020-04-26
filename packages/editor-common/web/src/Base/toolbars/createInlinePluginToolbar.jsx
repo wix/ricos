@@ -116,14 +116,14 @@ export default function createInlinePluginToolbar({
     }
 
     /*eslint-disable complexity*/
-    PluginToolbarButton = ({ button, key, themedStyle, separatorClassNames }) => {
+    PluginToolbarButton = ({ button, index, themedStyle, separatorClassNames }) => {
       if (button.component) {
         const Button = button.component;
         return <Button t={t} theme={themedStyle} onOverrideContent={this.onOverrideContent} />;
       }
       switch (button.type) {
         case BUTTONS.SEPARATOR:
-          return <Separator className={separatorClassNames} key={key} />;
+          return <Separator className={separatorClassNames} key={index} />;
         default:
           return null;
       }

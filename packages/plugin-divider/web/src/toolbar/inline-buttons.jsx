@@ -1,9 +1,10 @@
+// @flow
 import { BUTTONS, AlignCenterIcon, SizeLargeIcon } from 'wix-rich-content-editor-common';
 import { changeType, changeAlignmentMobile, changeSizeMobile } from './actions';
 import { isAlignmentDisabled, getNextSizeIcon, getNextAlignmentIcon } from './selectors';
 import { getDropdownOptions, createDropdownValueGetter } from './dropdown-options';
 
-export default ({ styles, t, settings }) => {
+export const createInlineButtons /*: CreateInlineButtons*/ = ({ styles, t, settings }) => {
   const dropdownOptions = getDropdownOptions(styles);
   const icons = settings?.toolbar?.icons || {};
   return [
@@ -24,7 +25,7 @@ export default ({ styles, t, settings }) => {
     { keyName: 'sizeLarge', type: BUTTONS.SIZE_LARGE },
     {
       keyName: 'sizeMobile',
-      type: 'custom',
+      type: BUTTONS.CUSTOM,
       icon: icons.sizeMobile || SizeLargeIcon,
       onClick: changeSizeMobile,
       mobile: true,
@@ -51,7 +52,7 @@ export default ({ styles, t, settings }) => {
     },
     {
       keyName: 'alignMobile',
-      type: 'custom',
+      type: BUTTONS.CUSTOM,
       icon: icons.alignMobile || AlignCenterIcon,
       onClick: changeAlignmentMobile,
       mobile: true,

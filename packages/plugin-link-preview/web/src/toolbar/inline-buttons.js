@@ -13,7 +13,7 @@ export default (setEditorState, getEditorState) => {
     },
     {
       keyName: 'replaceToLink',
-      type: 'custom',
+      type: BUTTONS.CUSTOM,
       icon: ConvertToLinkIcon,
       onClick: () => {
         const editorState = getEditorState();

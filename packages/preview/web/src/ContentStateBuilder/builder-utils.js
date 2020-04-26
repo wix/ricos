@@ -60,3 +60,9 @@ export const addPlugin = ({ contentState, data, config }) => {
 };
 
 export const toArray = content => (isArray(content) ? content : [content]);
+
+export const mergeBlockWithEntities = ({ contentState, block, entities }) => ({
+  ...contentState,
+  blocks: [...contentState.blocks, block],
+  entityMap: { ...contentState.entityMap, ...entities },
+});
