@@ -12,7 +12,7 @@ const EMPTY_SMALL_PLACEHOLDER =
 class GalleryComponent extends PureComponent {
   constructor(props) {
     super(props);
-    this.state = this.stateFromProps(props);
+    this.state = { ...this.stateFromProps(props), key: true };
 
     const { block, store, commonPubsub } = this.props;
     this.blockKey = block.getKey();
@@ -33,11 +33,12 @@ class GalleryComponent extends PureComponent {
 
   componentWillReceiveProps(nextProps) {
     const { componentData, componentState } = this.props;
+    const { key } = this.state;
     if (
       !isEqual(componentData, nextProps.componentData) ||
       !isEqual(componentState, nextProps.componentState)
     ) {
-      this.setState(this.stateFromProps(nextProps));
+      this.setState({ key: !key, ...this.stateFromProps(nextProps) });
     } else if (componentData.items?.length > 0) {
       this.onLoad(false);
     }
@@ -76,7 +77,7 @@ class GalleryComponent extends PureComponent {
 
   setItemInGallery = (item, itemPos) => {
     const shouldAdd = typeof itemPos === 'undefined';
-    let { items, styles } = this.state;
+    let { items, styles, key } = this.state;
     let itemIdx;
     if (shouldAdd) {
       itemIdx = items.length;
@@ -95,7 +96,7 @@ class GalleryComponent extends PureComponent {
     const { setData } = this.props.blockProps;
     setData(this.props.componentData);
 
-    this.setState({ items });
+    this.setState({ items, key: !key });
     if (this.props.store) {
       this.props.store.update('componentData', { items, styles, config: {} });
     }
@@ -182,13 +183,15 @@ class GalleryComponent extends PureComponent {
   };
 
   onLoad = isLoading => {
-    this.setState({ isLoading });
+    const { key } = this.state;
+    this.setState({ isLoading, key: !key });
   };
 
   render() {
     return (
       <>
         <GalleryViewer
+          key={this.state.key}
           componentData={this.props.componentData}
           onClick={this.props.onClick}
           className={this.props.className}
