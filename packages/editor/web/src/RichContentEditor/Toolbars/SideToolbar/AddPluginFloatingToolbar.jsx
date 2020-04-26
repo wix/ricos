@@ -149,10 +149,11 @@ export default class AddPluginFloatingToolbar extends Component {
 
     const SideToolbarPanel = ({ top }) => {
       const { isActive } = this.state;
+      const horizontalMenuWidth = structure.length * 36;
       return (
         <div
           className={popoupClassNames}
-          style={{ ...this.state.style, top }}
+          style={{ ...this.state.style, top, width: horizontalMenu ? horizontalMenuWidth : 320 }}
           ref={el => (this.popupRef = el)}
           onClick={e => e.stopPropagation()}
           role="none"
@@ -202,7 +203,7 @@ export default class AddPluginFloatingToolbar extends Component {
         {!isSSR() && (
           <PopupOffsetnHoc
             elementHeight={400}
-            elementMarginTop={-20}
+            elementMarginTop={horizontalMenu ? -15 : -20}
             elementMarginBottom={45}
             targetElement={this.selectButton}
           >
