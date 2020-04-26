@@ -33,7 +33,6 @@ class GalleryComponent extends PureComponent {
 
   componentWillReceiveProps(nextProps) {
     const { componentData, componentState } = this.props;
-    // const { key } = this.state;
     if (
       !isEqual(componentData, nextProps.componentData) ||
       !isEqual(componentState, nextProps.componentState)
