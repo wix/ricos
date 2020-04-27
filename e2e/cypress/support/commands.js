@@ -295,8 +295,10 @@ Cypress.Commands.add('openGalleryAdvancedSettings', () => {
   cy.get(`[data-hook=${PLUGIN_TOOLBAR_BUTTONS.ADV_SETTINGS}]:first`).click();
 });
 
-Cypress.Commands.add('shrinkPlugin', () => {
-  cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.SMALL_CENTER);
+Cypress.Commands.add('shrinkPlugin', dataHook => {
+  cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.SMALL_CENTER)
+    .get(`[data-hook=${dataHook}]:first`)
+    .should('have.css', 'width', '350px');
 });
 
 Cypress.Commands.add('pluginSizeBestFit', () => {
