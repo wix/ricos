@@ -62,6 +62,7 @@
   "BookingsPlugin_InsertButton_Tooltip" : "Embed a service from Wix Bookings",
   "FacebookPlugin_InsertButton_Tooltip" : "Add a Facebook post",
   "InstagramPlugin_InsertButton_Tooltip" : "Add an Instagram post",
+  "YouTubePlugin_InsertButton_Tooltip" : "Add a YouTube video",  
   "TwitterPlugin_InsertButton_Tooltip" : "Add a Twitter post",
   "TikTokPlugin_InsertButton_Tooltip" : "Add a TikTok video",
   "PinterestPlugin_InsertButton_Tooltip" : "Add a Pinterest pin",
