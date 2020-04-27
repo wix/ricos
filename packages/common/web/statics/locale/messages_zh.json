@@ -227,6 +227,7 @@
   "LinkTo_Modal_Section_Filter_All": "所有",
   "Accordion_CollapsedText_Placeholder": "撰寫隱藏文字",
   "BlockToolbar_Section_Embed_Social": "從社群嵌入",
+  "BlockToolbar_Search_EmptyState": "No blocks found.\nTry another search term.",
   "EmbedURL_Social_Pinterest_Title": "新增 Pinterest 圖片",
   "HtmlPlugin_InsertButton_Tooltip": "插入HTML程式碼",
   "MapSettings_MapOption_SubHeader": "地圖行為",
