@@ -28,7 +28,6 @@ export default class AddPluginMenu extends Component {
   onChange = value => this.setState({ value });
   render() {
     const {
-      theme,
       getEditorState,
       setEditorState,
       structure,
@@ -46,7 +45,6 @@ export default class AddPluginMenu extends Component {
             <TextSearchInput
               onClose={hidePopup}
               placeHolder={t('BlockToolbar_Search_Placeholder')}
-              theme={theme}
               onChange={this.onChange}
               value={value}
             />
@@ -55,7 +53,6 @@ export default class AddPluginMenu extends Component {
 
         <div className={pluginsClassName}>
           <SideToolbarPluginsSection
-            theme={theme}
             getEditorState={getEditorState}
             setEditorState={setEditorState}
             structure={structure}
@@ -75,7 +72,6 @@ AddPluginMenu.propTypes = {
   getEditorState: PropTypes.func.isRequired,
   setEditorState: PropTypes.func.isRequired,
   structure: PropTypes.array.isRequired,
-  theme: PropTypes.object.isRequired,
   t: PropTypes.func,
   hidePopup: PropTypes.func,
   splitToSections: PropTypes.bool,

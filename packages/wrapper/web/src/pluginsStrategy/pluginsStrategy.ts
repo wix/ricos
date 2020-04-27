@@ -28,7 +28,7 @@ const getPluginProps = (
 function editorStrategy(prev: EditorPluginsStrategy, curr: EditorPluginConfig) {
   const { type, config, createPlugin, ModalsMap } = curr;
   return {
-    config: { ...prev.config, [type]: config },
+    config: { pluginsConfig: { ...prev.config, [type]: config } },
     plugins: prev.plugins.concat(createPlugin),
     ModalsMap: { ...prev.ModalsMap, ...ModalsMap },
   };
