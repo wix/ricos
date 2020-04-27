@@ -1,8 +1,8 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import LinkPreviewStory from './LinkPreviewStory';
+import LinkPreviewStory from './LinkPreview';
 import GalleryPlugin from './GalleryPlugin';
-import DividerPluginStory from './DividerPluginStory';
+import DividerPluginStory from './Divider';
 import Image from './Image';
 
 storiesOf('Plugins')

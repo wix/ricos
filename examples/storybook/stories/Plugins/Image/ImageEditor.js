@@ -5,7 +5,7 @@ import { pluginImage } from 'wix-rich-content-plugin-image';
 import PropTypes from 'prop-types';
 
 const ImageEditor = ({ editorState, onFilesChange }) => (
-  <RichContentWrapper plugins={[pluginImage()]} editor>
+  <RichContentWrapper plugins={[pluginImage()]} isEditor>
     <RichContentEditor editorState={editorState} helpers={{ onFilesChange }} />
   </RichContentWrapper>
 );
