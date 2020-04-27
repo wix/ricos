@@ -207,7 +207,7 @@
   "ButtonModal_Button_Sample_text": "Click Me",
   "ButtonModal_Background_Color": "Background",
   "ButtonModal_Invalid_Link": "Invalid link",
-  "ButtonModal_Link_Input_Placeholder": "https://example-link.com/",
+  "ButtonModal_Link_Input_Placeholder": "Enter a URL",
   "ButtonModal_Color_Input_Label": "Hex",
   "ButtonModal_Preview_Label": "Preview",
   "ButtonComponent_Error_Overlay": "Enter a valid URL for the button",
