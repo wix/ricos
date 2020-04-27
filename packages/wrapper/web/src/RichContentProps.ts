@@ -11,6 +11,11 @@ export interface RichContentProps {
   plugins?: PluginConfig[];
   ModalsMap?: ModalsMap;
   helpers?: Helpers;
+  textToolbarType?: TextToolbarType;
+  isMobile?: boolean;
+}
+
+export interface ExportedRichContentProps extends RichContentProps {
   [propName: string]: any;
 }
 
@@ -18,5 +23,3 @@ export interface EditorDataInstance {
   getContentState: () => ContentState;
   refresh: (editorState: EditorState) => void;
 }
-
-export type ForwardedRef = any;

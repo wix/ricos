@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, {
   Suspense,
   Children,
@@ -116,7 +117,6 @@ export default class ModalDialogProvider extends Component<Props, State> {
     } = this.props;
 
     const StaticToolbar = MobileToolbar || TextToolbar;
-    const StaticToolbarPortal = this.StaticToolbarPortal;
 
     return (
       <Fragment>
@@ -128,7 +128,6 @@ export default class ModalDialogProvider extends Component<Props, State> {
           React.cloneElement(children, {
             ...this.childProps,
             onChange: this.onChange,
-            textToolbarType: isMobile ? 'inline' : textToolbarType,
             ref: ref => (this.editor = ref),
           })
         )}
@@ -149,16 +148,16 @@ export default class ModalDialogProvider extends Component<Props, State> {
       </Fragment>
     );
   }
-
-  StaticToolbarPortal: FunctionComponent<{
-    StaticToolbar?: ElementType;
-    textToolbarContainer?: HTMLElement;
-  }> = ({ StaticToolbar, textToolbarContainer }) => {
-    if (!StaticToolbar) return null;
-
-    if (textToolbarContainer) {
-      return ReactDOM.createPortal(<StaticToolbar />, textToolbarContainer);
-    }
-    return <StaticToolbar />;
-  };
 }
+
+const StaticToolbarPortal: FunctionComponent<{
+  StaticToolbar?: ElementType;
+  textToolbarContainer?: HTMLElement;
+}> = ({ StaticToolbar, textToolbarContainer }) => {
+  if (!StaticToolbar) return null;
+
+  if (textToolbarContainer) {
+    return ReactDOM.createPortal(<StaticToolbar />, textToolbarContainer);
+  }
+  return <StaticToolbar />;
+};

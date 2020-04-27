@@ -1,4 +1,4 @@
-import React, { Component, ReactElement, forwardRef, Suspense } from 'react';
+import React, { Component, ReactElement, forwardRef, Suspense, Ref } from 'react';
 import EngineWrapper from './EngineWrapper';
 import themeStrategy from './themeStrategy/themeStrategy';
 import pluginsStrategy from './pluginsStrategy/pluginsStrategy';
@@ -6,7 +6,7 @@ import localeStrategy from './localeStrategy/localeStrategy';
 import './styles.global.css';
 import { merge } from 'lodash';
 import { isDefined } from 'ts-is-present';
-import { RichContentProps, ForwardedRef } from './RichContentProps';
+import { RichContentProps } from './RichContentProps';
 
 export interface RichContentWrapperProps {
   contentState?: ContentState;
@@ -20,7 +20,8 @@ export interface RichContentWrapperProps {
   rcProps?: RichContentProps;
   textToolbarType?: TextToolbarType;
   textToolbarContainer?: HTMLElement;
-  forwardedRef?: ForwardedRef;
+  forwardedRef?: Ref<ReactElement>;
+  placeholder?: string;
 }
 
 class RichContentWrapper extends Component<
@@ -54,7 +55,7 @@ class RichContentWrapper extends Component<
   }
 
   getChildComponent(): ReactElement<RichContentProps> {
-    const { children, isEditor, contentState } = this.props;
+    const { children, isEditor } = this.props;
     if (children) {
       return children;
     }
@@ -69,7 +70,7 @@ class RichContentWrapper extends Component<
             default: RichContentViewer,
           }))
         );
-    return <ChildComponent initialState={contentState} />;
+    return <ChildComponent />;
   }
 
   render() {
@@ -78,13 +79,14 @@ class RichContentWrapper extends Component<
       palette,
       plugins = [],
       isEditor = false,
+      contentState,
       rcProps,
       forwardedRef,
       ...rest
     } = this.props;
 
     const child = this.getChildComponent();
-    const { initialState } = child.props;
+    const { initialState = contentState } = child.props;
 
     const { localeStrategy } = this.state;
 
@@ -108,10 +110,11 @@ class RichContentWrapper extends Component<
     return (
       <Suspense fallback={<div />}>
         <EngineWrapper
-          rcProps={mergedRCProps}
-          isEditor={isEditor}
           key={isEditor ? 'editor' : 'viewer'}
           ref={forwardedRef}
+          rcProps={mergedRCProps}
+          isEditor={isEditor}
+          initialState={contentState}
           {...rest}
         >
           {child}
@@ -121,7 +124,7 @@ class RichContentWrapper extends Component<
   }
 }
 
-const exportedComp = forwardRef((props: RichContentWrapperProps, ref: ForwardedRef) => (
+const exportedComp = forwardRef((props: RichContentWrapperProps, ref: Ref<ReactElement>) => (
   <RichContentWrapper {...props} forwardedRef={ref} />
 ));
 
