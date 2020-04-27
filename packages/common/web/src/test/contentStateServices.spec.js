@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 import raw from '../../../../../e2e/tests/fixtures/truncateContentState.json';
 import { truncateContentState } from '../lib/contentStateServices';
-const truncateRaw = {
+const expectedRaw = {
   blocks: [
     {
       key: '50k2j',
@@ -54,7 +54,7 @@ const truncateRaw = {
 
 describe('Test content state services functions', () => {
   it('should check truncateContentState', () => {
-    const newContentState = truncateContentState(raw, 2);
-    expect(newContentState).toEqual(truncateRaw);
+    const newRaw = truncateContentState(raw, 2);
+    expect(newRaw).toEqual(expectedRaw);
   });
 });
