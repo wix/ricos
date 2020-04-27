@@ -18,7 +18,10 @@ export default class VideoSelectionInputModal extends Component {
 
     this.onConfirm = args => {
       this.setError(false);
-      return onConfirm(args);
+      const data = onConfirm(args);
+      if (data?.newBlock) {
+        this.blockKey = data?.newBlock.key;
+      }
     };
   }
 
@@ -80,15 +83,15 @@ export default class VideoSelectionInputModal extends Component {
   };
 
   setError(error) {
-    this.props.pubsub.update('componentState', { error });
+    this.props.pubsub.update('componentState', { error }, this.blockKey);
   }
 
   setComponentData = data => {
-    this.props.pubsub.set('componentData', data);
+    this.props.pubsub.update('componentData', data, this.blockKey);
   };
 
   updateComponentData = data => {
-    this.props.pubsub.update('componentData', data);
+    this.props.pubsub.update('componentData', data, this.blockKey);
   };
 
   handleNativeFileUpload = () => {

@@ -15,6 +15,9 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+- `video`
+  - [#974](https://github.com/wix-incubator/rich-content/pull/960) video file upload not working when block isn't selected
 
 </details>
 <hr/>
