@@ -297,7 +297,7 @@ Cypress.Commands.add('openGalleryAdvancedSettings', () => {
 
 Cypress.Commands.add('shrinkPlugin', dataHook => {
   cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.SMALL_CENTER)
-    .get(`[data-hook=${dataHook}]:first`)
+    .get(`[data-hook=${dataHook}]:first`, { timeout: 15000 })
     .should('have.css', 'width', '350px');
 });
 
