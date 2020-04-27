@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
-import plain from '../../../../../e2e/tests/fixtures/plain.json';
+import raw from '../../../../../e2e/tests/fixtures/truncateContentState.json';
 import { truncateContentState } from '../lib/contentStateServices';
-const plainTop2Blocks = {
+const truncateRaw = {
   blocks: [
     {
       key: '50k2j',
@@ -14,22 +14,47 @@ const plainTop2Blocks = {
       data: {},
     },
     {
-      key: '4qd6h',
-      text:
-        'Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment.',
-      type: 'unstyled',
+      key: '9asvb',
+      text: ' ',
+      type: 'atomic',
       depth: 0,
       inlineStyleRanges: [],
-      entityRanges: [],
+      entityRanges: [
+        {
+          offset: 0,
+          length: 1,
+          key: 0,
+        },
+      ],
       data: {},
     },
   ],
-  entityMap: {},
+  entityMap: {
+    '0': {
+      type: 'wix-draft-plugin-image',
+      mutability: 'IMMUTABLE',
+      data: {
+        config: {
+          alignment: 'center',
+          size: 'content',
+          showTitle: true,
+          showDescription: true,
+        },
+        src: {
+          id: '1dcb3c6098ce8c0253fe118f2b244b72',
+          original_file_name: '8bb438_2b31b324f130433685c160fdba0a66e9.jpg',
+          file_name: '8bb438_2b31b324f130433685c160fdba0a66e9.jpg',
+          width: 2016,
+          height: 3044,
+        },
+      },
+    },
+  },
 };
 
 describe('Test content state services functions', () => {
   it('should check truncateContentState', () => {
-    const newContentState = truncateContentState(plain, 2);
-    expect(newContentState).toEqual(plainTop2Blocks);
+    const newContentState = truncateContentState(raw, 2);
+    expect(newContentState).toEqual(truncateRaw);
   });
 });
