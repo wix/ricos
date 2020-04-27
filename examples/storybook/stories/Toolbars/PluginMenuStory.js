@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Section, Page } from '../Components/StoryParts';
+import { Section, Page, RichContentEditorBox } from '../Components/StoryParts';
 import EditorWrapper from '../Components/EditorWrapper';
 import emptyContentState from '../../../../e2e/tests/fixtures/empty.json';
 import { Box, Dropdown } from 'wix-style-react';
@@ -55,11 +55,13 @@ export default () => {
             <h3>Plugin Menu Config:</h3>
             {this.getCheckbox()}
             <Section>
-              <EditorWrapper
-                key={editorKey}
-                contentState={emptyContentState}
-                rcProps={{ toolbarsConfig }}
-              />
+              <RichContentEditorBox>
+                <EditorWrapper
+                  key={editorKey}
+                  contentState={emptyContentState}
+                  rcProps={{ toolbarsConfig }}
+                />
+              </RichContentEditorBox>
             </Section>
             <div>
               Note: defaults for unset fields are:
