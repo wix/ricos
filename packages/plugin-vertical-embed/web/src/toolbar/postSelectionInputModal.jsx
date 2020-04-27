@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import UrlInputModal from 'wix-rich-content-editor-common/dist/lib/UrlInputModal';
-import { contentTypeMap } from '../constants';
+import { verticalsTypeMap } from '../constants';
 export default class PostSelectionInputModal extends Component {
   state = {
     errorMsg: '',
@@ -17,18 +17,15 @@ export default class PostSelectionInputModal extends Component {
     const {
       fetchFunctions,
       componentData: { type },
-      search,
     } = this.props;
+    const fetchType = verticalsTypeMap[type];
     const abortController = new AbortController();
-    const fetchResutl = fetchFunctions[type](query, abortController.signal).then(res => {
-      return res;
-    });
-    const searchResults = search(type, query, abortController.signal).then(res => {
+    const promise = fetchFunctions[fetchType](query, abortController.signal).then(res => {
       return res;
     });
     return {
       abortController,
-      promise: query ? searchResults : fetchResutl,
+      promise,
     };
   };
 
@@ -77,18 +74,17 @@ export default class PostSelectionInputModal extends Component {
       helpers,
       isMobile,
     } = this.props;
-    const contentType = contentTypeMap[type];
     return (
       <UrlInputModal
         onConfirm={this.onConfirm}
         helpers={helpers}
         t={t}
-        title={t(`Embed_Vertical_${contentType}_Title`)}
-        subtitle={`Choose a ${contentType} from your ${contentType} list`}
+        title={t(`Embed_Vertical_${type}_Title`)}
+        subtitle={`Choose a ${type} from your ${type} list`}
         dataHook={'verticalEmbedModal'}
         saveLabel={t('EmbedURL_Common_CTA_Primary')}
         cancelLabel={t('EmbedURL_Common_CTA_Secondary')}
-        placeholder={t(`Embed_Vertical_${contentType}_Placeholder`)}
+        placeholder={t(`Embed_Vertical_${type}_Placeholder`)}
         setSelection={selectedProduct => this.setState({ selectedProduct })}
         onCloseRequested={helpers.closeModal}
         dropdownItems={products}
@@ -107,5 +103,4 @@ PostSelectionInputModal.propTypes = {
   t: PropTypes.func,
   isMobile: PropTypes.bool,
   fetchFunctions: PropTypes.object.isRequired,
-  search: PropTypes.func,
 };
