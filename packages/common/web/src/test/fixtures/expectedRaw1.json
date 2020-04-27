@@ -1,0 +1,49 @@
+{
+    "blocks": [
+      {
+        "key": "50k2j",
+        "text": "Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition. ",
+        "type": "unstyled",
+        "depth": 0,
+        "inlineStyleRanges": [],
+        "entityRanges": [],
+        "data": {}
+      },
+      {
+        "key": "9asvb",
+        "text": " ",
+        "type": "atomic",
+        "depth": 0,
+        "inlineStyleRanges": [],
+        "entityRanges": [
+          {
+            "offset": 0,
+            "length": 1,
+            "key": 0
+          }
+        ],
+        "data": {}
+      }
+    ],
+    "entityMap": {
+      "0": {
+        "type": "wix-draft-plugin-image",
+        "mutability": "IMMUTABLE",
+        "data": {
+          "config": {
+            "alignment": "center",
+            "size": "content",
+            "showTitle": true,
+            "showDescription": true
+          },
+          "src": {
+            "id": "1dcb3c6098ce8c0253fe118f2b244b72",
+            "original_file_name": "8bb438_2b31b324f130433685c160fdba0a66e9.jpg",
+            "file_name": "8bb438_2b31b324f130433685c160fdba0a66e9.jpg",
+            "width": 2016,
+            "height": 3044
+          }
+        }
+      }
+    }
+  }
