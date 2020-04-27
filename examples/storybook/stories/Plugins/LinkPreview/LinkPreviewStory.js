@@ -1,6 +1,6 @@
 import React from 'react';
 import { convertFromRaw, createWithContent } from 'wix-rich-content-editor';
-import fixtrue from '../../../../e2e/tests/fixtures/linkPreview.json';
+import fixtrue from '../../../../../e2e/tests/fixtures/linkPreview.json';
 import LinkPreviewEditor from './LinkPreviewEditor';
 import LinkPreviewViewer from './LinkPreviewViewer';
 import editorSourcecode from '!!raw-loader!./LinkPreviewEditor.js';
@@ -12,7 +12,7 @@ import {
   ContentState,
   Section,
   Page,
-} from '../Components/StoryParts';
+} from '../../Components/StoryParts';
 
 const editorState = createWithContent(convertFromRaw(fixtrue));
 
