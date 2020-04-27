@@ -8,24 +8,31 @@ import {
 
 import { convertFromRaw, createWithContent } from 'wix-rich-content-editor';
 
-import imageContentState from '../../../../../e2e/tests/fixtures/images.json';
-import ImageEditor from './ImageEditor';
-import editorSourcecode from '!!raw-loader!./ImageEditor.js';
-import ImageViewer from './ImageViewer';
-import viewerSourcecode from '!!raw-loader!./ImageViewer.js';
+import videoContentState from '../../../../../e2e/tests/fixtures/facebook-video.json';
+import VideoEditor from './VideoEditor';
+import editorSourcecode from '!!raw-loader!./VideoEditor.js';
+import VideoViewer from './VideoViewer';
+import viewerSourcecode from '!!raw-loader!./VideoViewer.js';
 import SyntaxHighlighter from '../../Components/SyntaxHighlighter';
 import { createEmpty } from 'wix-rich-content-editor/dist/lib/editorStateConversion';
 
-const editorState = createWithContent(convertFromRaw(imageContentState));
+const editorState = createWithContent(convertFromRaw(videoContentState));
 
 const mockData = {
-  id: '8b72558253b2502b401bb46e5599f22a',
-  original_file_name: '8bb438_1b73a6b067b24175bd087e86613bd00c.jpg', //eslint-disable-line
-  file_name: '8bb438_1b73a6b067b24175bd087e86613bd00c.jpg', //eslint-disable-line
-  width: 1920,
-  height: 1000,
+  config: {
+    size: 'content',
+    alignment: 'center',
+  },
+  src: {
+    pathname: 'video/11062b_a552731f40854d16a91627687fb8d1a6/1080p/mp4/file.mp4',
+    thumbnail: {
+      pathname: 'media/11062b_a552731f40854d16a91627687fb8d1a6f000.jpg',
+      height: 1080,
+      width: 1920,
+    },
+  },
 };
-const onFilesChangeMap = {
+const handleFileUpload = {
   mock: (files, updateEntity) => {
     setTimeout(() => {
       updateEntity({
@@ -41,14 +48,14 @@ const onFilesChangeMap = {
   },
 };
 
-const ImagePluginStory = () => (
-  <Page title="Image Plugin">
+const VideoPluginStory = () => (
+  <Page title="Video Plugin">
     <Section type={Section.Types.COMPARISON}>
-      <RichContentEditorBox sourcecode={editorSourcecode} contentState={imageContentState}>
-        <ImageEditor editorState={editorState} onFilesChange={onFilesChangeMap.mock} />
+      <RichContentEditorBox sourcecode={editorSourcecode} contentState={videoContentState}>
+        <VideoEditor editorState={editorState} handleFileUpload={handleFileUpload.mock} />
       </RichContentEditorBox>
       <RichContentViewerBox sourcecode={viewerSourcecode}>
-        <ImageViewer initialState={imageContentState} />
+        <VideoViewer initialState={videoContentState} />
       </RichContentViewerBox>
     </Section>
 
@@ -58,10 +65,10 @@ const ImagePluginStory = () => (
         code={`onFilesChange = (files, updateEntity) => updateEntity({ data: [], error: { msg: 'file too large' } });`}
       />
       <RichContentEditorBox>
-        <ImageEditor editorState={createEmpty()} onFilesChange={onFilesChangeMap.error} />
+        <VideoEditor editorState={createEmpty()} handleFileUpload={handleFileUpload.error} />
       </RichContentEditorBox>
     </Section>
   </Page>
 );
 
-export default ImagePluginStory;
+export default VideoPluginStory;
