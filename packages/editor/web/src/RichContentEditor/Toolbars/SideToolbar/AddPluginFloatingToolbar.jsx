@@ -149,7 +149,7 @@ export default class AddPluginFloatingToolbar extends Component {
 
     const SideToolbarPanel = ({ top }) => {
       const { isActive } = this.state;
-      const horizontalMenuWidth = structure.length * 36;
+      const horizontalMenuWidth = structure.length * 39;
       return (
         <div
           className={popoupClassNames}

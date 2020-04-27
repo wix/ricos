@@ -235,7 +235,10 @@ export default ({
       return (
         <FileInput
           dataHook={`${button.name}_file_input`}
-          className={classNames(styles.button)}
+          className={classNames(
+            styles.button,
+            showName ? styles.sideToolbarButton : styles.footerToolbarButton
+          )}
           onChange={this.handleNativeFileChange}
           accept={accept}
           multiple={button.multi}
