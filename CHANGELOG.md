@@ -18,6 +18,8 @@
 ### :rocket: New Feature
 - `button`
   - [#953](https://github.com/wix-incubator/rich-content/pull/953) action button: by passing onClick callback, on click triggers it
+- `image` `video`
+  - [#972](https://github.com/wix-incubator/rich-content/pull/972) handle upload error - show message on block
 ### :bug: Bug Fix
 - `editor`
   - [#951](https://github.com/wix-incubator/rich-content/pull/951) fix: tooltip opacity
