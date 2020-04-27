@@ -81,7 +81,7 @@ function hideAllTooltips() {
 }
 
 function waitForEditorToLoad() {
-  cy.get('.DraftEditor-root', { timeout: 15000 });
+  cy.get('.DraftEditor-root', { timeout: 120000 });
 }
 
 Cypress.Commands.add('loadEditorAndViewer', (fixtureName, plugins) =>
