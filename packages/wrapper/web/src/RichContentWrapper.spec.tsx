@@ -67,8 +67,7 @@ describe('Wrapper', () => {
       const renderResult = instance.render();
       const editorProps = renderResult.props.children.props;
       expect(editorProps).toHaveProperty('config');
-      expect(editorProps.config).toHaveProperty('pluginsConfig');
-      expect(editorProps.config.pluginsConfig).toHaveProperty('wix-draft-plugin-hashtag');
+      expect(editorProps.config).toHaveProperty('wix-draft-plugin-hashtag');
     });
     it('should render with themeStrategy output', () => {
       const element = shallow(wrapper({ isEditor: true, theme: 'Default' }).withEditor());

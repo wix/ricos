@@ -42,7 +42,8 @@ export default class Editor extends PureComponent {
     this.plugins = testAppPlugins
       ? testAppPlugins.map(plugin => Plugins.editorPluginsMap[plugin]).flat()
       : Plugins.editorPlugins;
-    this.config = { pluginsConfig: pluginsConfig, toolbarsConfig };
+    this.config = pluginsConfig;
+    this.toolbarsConfig = toolbarsConfig;
   }
 
   initEditorProps() {
@@ -202,6 +203,7 @@ export default class Editor extends PureComponent {
           plugins={this.plugins}
           // config={Plugins.getConfig(additionalConfig)}
           config={this.config}
+          toolbarsConfig={this.toolbarsConfig}
           editorKey="random-editorKey-ssr"
           // siteDomain="https://www.wix.com"
           {...editorProps}

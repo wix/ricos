@@ -41,13 +41,11 @@ export default () => {
 
     render() {
       const { showSearch, splitToSections, horizontalMenu, editorKey } = this.state;
-      const config = {
-        toolbarsConfig: {
-          addPluginMenuConfig: {
-            showSearch,
-            splitToSections,
-            horizontalMenu,
-          },
+      const toolbarsConfig = {
+        addPluginMenuConfig: {
+          showSearch,
+          splitToSections,
+          horizontalMenu,
         },
       };
 
@@ -57,9 +55,13 @@ export default () => {
             <h3>Plugin Menu Config:</h3>
             {this.getCheckbox()}
             <Section>
-              <EditorWrapper key={editorKey} contentState={emptyContentState} config={config} />
+              <EditorWrapper
+                key={editorKey}
+                contentState={emptyContentState}
+                rcProps={{ toolbarsConfig }}
+              />
             </Section>
-            <p>
+            <div>
               Note: defaults for unset fields are:
               <ul>
                 <li>Search - will be included for menus with more than 9 plugins. </li>
@@ -69,7 +71,7 @@ export default () => {
                 </li>
                 <li>horizontal - false by default. </li>
               </ul>
-            </p>
+            </div>
           </Section>
         </Page>
       );

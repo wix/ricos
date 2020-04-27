@@ -52,9 +52,8 @@ class RichContentEditor extends Component {
     };
     this.refId = Math.floor(Math.random() * 9999);
     const {
-      config: { pluginsConfig = {} },
+      config: { uiSettings = {} },
     } = props;
-    const { uiSettings = {} } = pluginsConfig;
     uiSettings.blankTargetToggleVisibilityFn =
       uiSettings.blankTargetToggleVisibilityFn || (anchorTarget => anchorTarget !== '_blank');
     uiSettings.nofollowRelToggleVisibilityFn =
@@ -100,7 +99,8 @@ class RichContentEditor extends Component {
       anchorTarget,
       relValue,
       helpers = {},
-      config: { pluginsConfig, toolbarsConfig = {} },
+      config,
+      toolbarsConfig = {},
       isMobile = false,
       shouldRenderOptimizedImages,
       initialIntent,
@@ -122,7 +122,7 @@ class RichContentEditor extends Component {
         ...helpers,
         onPluginAdd: (...args) => helpers.onPluginAdd?.(...args, Version.currentVersion),
       },
-      config: { ...pluginsConfig, getToolbarSettings },
+      config: { ...config, getToolbarSettings },
       isMobile,
       setEditorState: this.setEditorState,
       getEditorState: this.getEditorState,
@@ -504,6 +504,7 @@ RichContentEditor.propTypes = {
   textToolbarType: PropTypes.oneOf(['inline', 'static']),
   plugins: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.func])),
   config: PropTypes.object,
+  toolbarsConfig: PropTypes.object,
   anchorTarget: PropTypes.string,
   relValue: PropTypes.string,
   style: PropTypes.object,

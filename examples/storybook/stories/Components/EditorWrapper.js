@@ -106,11 +106,11 @@ const plugins = [
   pluginVerticalEmbed(configs.verticalEmbed),
 ];
 
-const EditorWrapper = ({ contentState, palette, onChange, config }) => {
+const EditorWrapper = ({ contentState, palette, onChange, rcProps }) => {
   const editorState = createWithContent(convertFromRaw(contentState));
   const theme = palette ? { theme: 'Palette', palette } : { theme: 'Default' };
   return (
-    <RichContentWrapper plugins={plugins} {...theme} isEditor rcProps={{ config }}>
+    <RichContentWrapper plugins={plugins} {...theme} isEditor rcProps={rcProps}>
       <RichContentEditor
         editorState={editorState}
         onChange={onChange}
@@ -124,7 +124,7 @@ EditorWrapper.propTypes = {
   contentState: PropTypes.object,
   palette: PropTypes.arrayOf(PropTypes.object),
   onChange: PropTypes.func,
-  config: PropTypes.object,
+  rcProps: PropTypes.object,
 };
 
 export default EditorWrapper;
