@@ -13,7 +13,6 @@ const shouldSplitByDefault = structure => {
   return numberOfBasicPlugins > 1 && structure.length - numberOfBasicPlugins > 1;
 };
 const SideToolbarPluginsSection = ({
-  theme,
   getEditorState,
   setEditorState,
   structure,
@@ -56,7 +55,6 @@ const SideToolbarPluginsSection = ({
             <Component
               getEditorState={getEditorState}
               setEditorState={setEditorState}
-              theme={theme}
               showName={!horizontalMenu}
               toolbarName={TOOLBARS.SIDE}
               hidePopup={hidePopup}
@@ -82,7 +80,6 @@ SideToolbarPluginsSection.propTypes = {
   getEditorState: PropTypes.func.isRequired,
   setEditorState: PropTypes.func.isRequired,
   structure: PropTypes.array.isRequired,
-  theme: PropTypes.object.isRequired,
   t: PropTypes.func,
   searchTag: PropTypes.string,
   hidePopup: PropTypes.func,
