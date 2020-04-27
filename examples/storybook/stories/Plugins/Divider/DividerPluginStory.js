@@ -4,11 +4,11 @@ import {
   RichContentViewerBox,
   Section,
   Page,
-} from '../Components/StoryParts';
+} from '../../Components/StoryParts';
 
 import { convertFromRaw, createWithContent } from 'wix-rich-content-editor';
 
-import dividerContentState from '../../../../e2e/tests/fixtures/divider.json';
+import dividerContentState from '../../../../../e2e/tests/fixtures/divider.json';
 import DividerEditor from './DividerEditor';
 import editorSourcecode from '!!raw-loader!./DividerEditor.js';
 import DividerViewer from './DividerViewer';
