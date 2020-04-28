@@ -1,9 +1,14 @@
+import React from 'react';
 import { storiesOf } from '@storybook/react';
-import LinkPreviewStory from './LinkPreviewStory';
-import GalleryPlugin from './GalleryPlugin.js';
-import DividerPluginStory from './DividerPluginStory.js';
+import LinkPreviewStory from './LinkPreview';
+import GalleryPlugin from './GalleryPlugin';
+import DividerPluginStory from './Divider';
+import Image from './Image';
+import Video from './Video';
 
 storiesOf('Plugins')
-  .add('Divider Plugin', DividerPluginStory)
-  .add('Gallery Plugin', GalleryPlugin)
+  .add('Divider', DividerPluginStory)
+  .add('Image', Image)
+  .add('Video', Video)
+  .add('Gallery', GalleryPlugin)
   .add('Link Preview', LinkPreviewStory);

@@ -1,8 +1,9 @@
+// @flow
 import { BUTTONS, getModalStyles } from 'wix-rich-content-editor-common';
 import { Modals } from '../modals';
 import { MediaReplaceIcon } from '../icons';
 
-export default ({ t, isMobile, settings }) => {
+const createInlineButtons /*: CreateInlineButtons*/ = ({ t, isMobile, settings }) => {
   const icon = settings?.toolbar?.icons?.replace || MediaReplaceIcon;
   return [
     { keyName: 'sizeSmallCenter', type: BUTTONS.SIZE_SMALL_CENTER, mobile: false },
@@ -25,3 +26,5 @@ export default ({ t, isMobile, settings }) => {
     { keyName: 'delete', type: BUTTONS.DELETE, mobile: true },
   ];
 };
+
+export default createInlineButtons;

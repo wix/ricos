@@ -1,35 +1,30 @@
 /* eslint-disable max-len */
-import plain from '../../../../../e2e/tests/fixtures/plain.json';
 import { truncateContentState } from '../lib/contentStateServices';
-const plainTop2Blocks = {
-  blocks: [
-    {
-      key: '50k2j',
-      text:
-        'Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition. ',
-      type: 'unstyled',
-      depth: 0,
-      inlineStyleRanges: [],
-      entityRanges: [],
-      data: {},
-    },
-    {
-      key: '4qd6h',
-      text:
-        'Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment.',
-      type: 'unstyled',
-      depth: 0,
-      inlineStyleRanges: [],
-      entityRanges: [],
-      data: {},
-    },
-  ],
-  entityMap: {},
-};
+import { raw, emptyRaw, expectedRaw1, expectedRaw2 } from './index';
 
 describe('Test content state services functions', () => {
-  it('should check truncateContentState', () => {
-    const newContentState = truncateContentState(plain, 2);
-    expect(newContentState).toEqual(plainTop2Blocks);
+  it('case: index = 0, should return empty raw', () => {
+    const newRaw = truncateContentState(raw, 0);
+    expect(newRaw).toEqual(emptyRaw);
+  });
+
+  it('case: valid index, should be equal ', () => {
+    const newRaw = truncateContentState(raw, 2);
+    expect(newRaw).toEqual(expectedRaw1);
+  });
+
+  it('case: valid index, should be equal ', () => {
+    const newRaw = truncateContentState(raw, 5);
+    expect(newRaw).toEqual(expectedRaw2);
+  });
+
+  it('case: index out of bounds, should return the entered raw', () => {
+    const newRaw = truncateContentState(raw, 6);
+    expect(newRaw).toEqual(raw);
+  });
+
+  it('case: index out of bounds, should return the entered raw', () => {
+    const newRaw = truncateContentState(raw, 100);
+    expect(newRaw).toEqual(raw);
   });
 });

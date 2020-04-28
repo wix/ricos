@@ -117,10 +117,10 @@ class GalleryComponent extends PureComponent {
     const item = imageItem(img, String(event.timeStamp));
     const itemIdx = this.setItemInGallery(item, itemPos);
     const { helpers } = this.props;
-    const hasFileChangeHelper = helpers && helpers.onFilesChange;
+    const handleFileUpload = helpers?.handleFileUpload;
 
-    if (hasFileChangeHelper) {
-      helpers.onFilesChange(file, ({ data }) => this.handleFilesAdded({ data, itemIdx }));
+    if (handleFileUpload) {
+      handleFileUpload(file, ({ data }) => this.handleFilesAdded({ data, itemIdx }));
     } else {
       console.warn('Missing upload function'); //eslint-disable-line no-console
     }

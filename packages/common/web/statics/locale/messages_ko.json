@@ -227,6 +227,7 @@
   "LinkTo_Modal_Section_Filter_All": "전체",
   "Accordion_CollapsedText_Placeholder": "비공개할 텍스트를 작성하세요.",
   "BlockToolbar_Section_Embed_Social": "SNS에서 삽입",
+  "BlockToolbar_Search_EmptyState": "No blocks found.\nTry another search term.",
   "EmbedURL_Social_Pinterest_Title": "Pinterest 핀 추가",
   "HtmlPlugin_InsertButton_Tooltip": "HTML 코드 삽입",
   "MapSettings_MapOption_SubHeader": "지도 동작 설정",
