@@ -1,5 +1,5 @@
 /*global cy Cypress*/
-import { fixturesToTestOnSeo, fixtures, apps } from './settings';
+import { fixturesToTestOnSeo, fixtures } from './settings';
 
 const testFixture = fixtureObj => {
   const { fixture, plugins, additionalCommands } =
