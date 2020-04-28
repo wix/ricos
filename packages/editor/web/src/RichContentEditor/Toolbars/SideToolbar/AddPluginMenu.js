@@ -20,6 +20,7 @@ export default class AddPluginMenu extends Component {
     this.showSearch = showSearch && !isMobile && !horizontalMenu;
     this.wrapperClassName = classNames(Styles.sideToolbarPanelWrapper, {
       [Styles.panelWithSearch]: this.showSearch,
+      [Styles.horizontalMenu]: horizontalMenu,
     });
     this.pluginsClassName = classNames(Styles.pluginsWrapper, {
       [Styles.withSearch]: this.showSearch && !isMobile,
