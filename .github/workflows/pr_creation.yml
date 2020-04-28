@@ -1,20 +1,3 @@
-name: prComment
-on:
-  pull_request:
-    types: opened
-jobs:
-  examples-pr-comment:
-    runs-on: ubuntu-18.04
-    steps:
-      - uses: actions/checkout@v2
-      - run: npm run deployPRComment
-        id: deploy_PRComment
-     
-    env:
-      SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
-      SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
-      REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
 name: bundleTests
 on: [pull_request]
 
@@ -23,11 +6,22 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
-      - run: npm install 
+      - run: npm install
       - run: npm run analyzeBundles --silent
         id: bundleSizesPRComment
 
-  comment_pr:
+  examples-pr-comment:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - run: npm run deployPRComment
+        id: deploy_PRComment
+    env:
+      SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
+      SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
+      REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  update_comment_pr:
     name: update PR comment
     runs-on: ubuntu-latest
     steps:
@@ -36,5 +30,5 @@ jobs:
       - run: npm run updatePRComment
     env:
       REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      message: "bla bla"
+      message: 'bla bla'
       # message: '${{ analyze-bundles.steps.bundleSizesPRComment.outputs.bundleSizes_message }}\n ${{ examples-pr-comment.steps.deploy_PRComment.outputs.deploy_message }}'
