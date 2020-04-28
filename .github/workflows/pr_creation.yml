@@ -25,8 +25,8 @@ jobs:
       - name: updateComment
         run: npm run updatePRComment
 
-env:
-  SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
-  SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
-  REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  message: '${{ jobs.analyze-bundles.steps.bundleSizesPRComment.outputs.bundleSizes_message }} ${{ jobs.update_comment_pr.steps.deploy_PRComment.outputs.deploy_message }}'
+  env:
+    SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
+    SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
+    REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    message: '${{ jobs.analyze-bundles.steps.bundleSizesPRComment.outputs.bundleSizes_message }} ${{ jobs.update_comment_pr.steps.deploy_PRComment.outputs.deploy_message }}'
