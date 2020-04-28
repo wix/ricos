@@ -19,6 +19,7 @@
 - `wrapper`
   - [#975](https://github.com/wix-incubator/rich-content/pull/975) ssr fix - render suspense after mount
   - [#977](https://github.com/wix-incubator/rich-content/pull/977) wrapper exports its type declarations
+  - [#980](https://github.com/wix-incubator/rich-content/pull/980) hotfix: createEmpty import
 
 </details>
 <hr/>
