@@ -178,7 +178,6 @@ export default function createAtomicPluginToolbar({
         ...this.mapStoreDataToButtonProps(button, pubsub.store, this.state.componentData),
         settings: button.settings,
         pubsub,
-        blockKey: this.focusedBlock?.key,
       };
       const baseLinkProps = {
         tabIndex,

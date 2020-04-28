@@ -15,7 +15,7 @@ export default class VideoSelectionInputModal extends Component {
     };
     this.id = `VideoUploadModal_FileInput_${Math.floor(Math.random() * 9999)}`;
     const { onConfirm, onReplace } = props;
-    this.blockKey = this.props.blockKey;
+    this.blockKey = this.getFocusedBlockKey();
     this.onConfirm = obj => {
       this.setError(false);
       if (onConfirm) {
@@ -25,6 +25,10 @@ export default class VideoSelectionInputModal extends Component {
         onReplace(obj, this.blockKey);
       }
     };
+  }
+
+  getFocusedBlockKey() {
+    return this.props.pubsub.get('focusedBlock');
   }
 
   onUrlChange = e => {
