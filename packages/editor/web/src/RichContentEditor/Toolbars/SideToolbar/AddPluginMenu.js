@@ -25,7 +25,7 @@ export default class AddPluginMenu extends Component {
       [Styles.withSearch]: this.showSearch && !isMobile,
     });
   }
-  onChange = value => this.setState({ value });
+  onChange = value => this.setState({ value }, () => this.container?.scrollTo(0, 0));
   render() {
     const {
       getEditorState,
@@ -39,7 +39,11 @@ export default class AddPluginMenu extends Component {
     const { showSearch, wrapperClassName, pluginsClassName } = this;
     const { value } = this.state;
     return (
-      <div className={wrapperClassName} data-hook="addPluginMenu">
+      <div
+        className={wrapperClassName}
+        data-hook="addPluginMenu"
+        ref={ref => (this.container = ref)}
+      >
         {showSearch && (
           <div className={Styles.searchWrapper}>
             <TextSearchInput
