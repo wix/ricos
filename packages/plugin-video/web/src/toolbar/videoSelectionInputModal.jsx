@@ -37,7 +37,7 @@ export default class VideoSelectionInputModal extends Component {
       this.setState({ showError: true });
       return;
     }
-    this.onConfirm({ ...componentData, src });
+    this.onConfirm({ ...componentData, tempData: false, src });
 
     helpers?.onVideoSelected?.(src, data => this.updateComponentData({ metadata: { ...data } }));
     this.closeModal();
