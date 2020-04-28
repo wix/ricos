@@ -24,4 +24,4 @@ jobs:
       SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
       SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
       # message: 'bla bla'
-      message: '${{ analyze-bundles.steps.bundleSizesPRComment.outputs.bundleSizes_message }}\n ${{ steps.deploy_PRComment.outputs.deploy_message }}'
+      message: '${{ jobs.analyze-bundles.steps.bundleSizesPRComment.outputs.bundleSizes_message }}\n ${{ steps.deploy_PRComment.outputs.deploy_message }}'
