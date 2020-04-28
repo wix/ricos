@@ -45,7 +45,7 @@ class VideoComponent extends React.Component {
       componentState: { error },
     } = props;
     if (error) {
-      const errorMsg = error?.message || props.t('UploadMediaError');
+      const errorMsg = error?.message;
       return { errorMsg };
     } else if (error === false) {
       return { errorMsg: undefined };
