@@ -73,7 +73,7 @@ export default class VideoSelectionInputModal extends Component {
   updateVideoComponent = ({ data }, componentData, isCustomVideo = false) => {
     const { pathname, thumbnail, url } = data;
     const src = pathname ? { pathname, thumbnail } : url;
-    this.setComponentData({ ...componentData, src, isCustomVideo, tempData: undefined });
+    this.setComponentData({ ...componentData, src, isCustomVideo, tempData: false });
   };
 
   addVideoComponent = ({ data }, componentData, isCustomVideo = false) => {
@@ -87,7 +87,7 @@ export default class VideoSelectionInputModal extends Component {
   }
 
   setComponentData = data => {
-    this.props.pubsub.update('componentData', data, this.blockKey);
+    this.props.pubsub.set('componentData', data, this.blockKey);
   };
 
   updateComponentData = data => {
