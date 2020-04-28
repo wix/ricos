@@ -65,7 +65,6 @@ describe('Wrapper', () => {
         .dive()
         .dive()
         .dive()
-        .dive()
         .instance();
       const renderResult = instance.render();
       const editorProps = renderResult.props.children.props;
@@ -75,7 +74,6 @@ describe('Wrapper', () => {
     it('should render with themeStrategy output', () => {
       const element = shallow(wrapper({ isEditor: true, theme: 'Default' }).withEditor());
       const instance = element
-        .dive()
         .dive()
         .dive()
         .dive()
@@ -97,7 +95,7 @@ describe('Wrapper', () => {
       const instance = element.dive().instance();
       const renderResult = instance.render();
       await instance.updateLocale();
-      const engineProps = renderResult.props.children.props;
+      const engineProps = renderResult.props;
       expect(engineProps).toHaveProperty('rcProps');
       expect(instance.state.localeStrategy).toEqual({ locale: 'he', localeResource: hebResource });
     });
@@ -121,7 +119,6 @@ describe('Wrapper', () => {
         .dive()
         .dive()
         .dive()
-        .dive()
         .instance();
       const renderResult = instance.render();
       const viewerProps = renderResult.props.children.props;
@@ -131,7 +128,6 @@ describe('Wrapper', () => {
     it('should render with themeStrategy output', () => {
       const element = shallow(wrapper({ theme: 'Default' }).withViewer());
       const instance = element
-        .dive()
         .dive()
         .dive()
         .dive()
