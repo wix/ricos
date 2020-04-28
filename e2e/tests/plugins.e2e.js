@@ -5,7 +5,7 @@ import {
   DIVIDER_DROPDOWN_OPTIONS,
   STATIC_TOOLBAR_BUTTONS,
 } from '../cypress/dataHooks';
-import { DEFAULT_DESKTOP_BROWSERS, apps } from './settings';
+import { DEFAULT_DESKTOP_BROWSERS } from './settings';
 
 const eyesOpen = ({
   test: {
@@ -32,16 +32,14 @@ describe('plugins', () => {
 
     after(() => cy.eyesClose());
 
-    apps.forEach(app => {
-      it(`render html plugin toolbar [${app.name}]`, function() {
-        cy[app.loadApp]('empty')
-          .addHtml()
-          .waitForHtmlToLoad();
-        cy.get(`[data-hook*=${PLUGIN_TOOLBAR_BUTTONS.EDIT}]`)
-          .click({ multiple: true })
-          .click();
-        cy.eyesCheckWindow(this.test.title);
-      });
+    it(`render html plugin toolbar`, function() {
+      cy.loadWrapperEditorAndViewer('empty')
+        .addHtml()
+        .waitForHtmlToLoad();
+      cy.get(`[data-hook*=${PLUGIN_TOOLBAR_BUTTONS.EDIT}]`)
+        .click({ multiple: true })
+        .click();
+      cy.eyesCheckWindow(this.test.title);
     });
   });
 
@@ -53,32 +51,30 @@ describe('plugins', () => {
 
     afterEach(() => cy.eyesClose());
 
-    apps.forEach(app => {
-      it(`render plugin toolbar and change styling [${app.name}]`, () => {
-        cy[app.loadApp]('divider')
-          .openPluginToolbar(PLUGIN_COMPONENT.DIVIDER)
-          .openDropdownMenu();
-        cy.eyesCheckWindow('render divider plugin toolbar');
+    it(`render plugin toolbar and change styling`, () => {
+      cy.loadWrapperEditorAndViewer('divider')
+        .openPluginToolbar(PLUGIN_COMPONENT.DIVIDER)
+        .openDropdownMenu();
+      cy.eyesCheckWindow('render divider plugin toolbar');
 
-        cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.SMALL);
-        cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.ALIGN_LEFT);
+      cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.SMALL);
+      cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.ALIGN_LEFT);
 
-        cy.get('[data-hook*="divider-double"]:first')
-          .parent()
-          .click();
-        cy.get('[data-hook*="PluginToolbar"]:first');
+      cy.get('[data-hook*="divider-double"]:first')
+        .parent()
+        .click();
+      cy.get('[data-hook*="PluginToolbar"]:first');
 
-        cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.MEDIUM);
-        cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.ALIGN_RIGHT);
+      cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.MEDIUM);
+      cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.ALIGN_RIGHT);
 
-        cy.get('[data-hook*="divider-dashed"]:first')
-          .parent()
-          .click();
-        cy.get('[data-hook*="PluginToolbar"]:first').openDropdownMenu(
-          `[data-hook=${DIVIDER_DROPDOWN_OPTIONS.DOUBLE}]`
-        );
-        cy.eyesCheckWindow('change divider styling');
-      });
+      cy.get('[data-hook*="divider-dashed"]:first')
+        .parent()
+        .click();
+      cy.get('[data-hook*="PluginToolbar"]:first').openDropdownMenu(
+        `[data-hook=${DIVIDER_DROPDOWN_OPTIONS.DOUBLE}]`
+      );
+      cy.eyesCheckWindow('change divider styling');
     });
   });
 
@@ -90,16 +86,14 @@ describe('plugins', () => {
 
     after(() => cy.eyesClose());
 
-    apps.forEach(app => {
-      it(`render map plugin toolbar and settings [${app.name}]`, () => {
-        cy[app.loadApp]('map');
-        cy.get('.dismissButton').eq(1);
-        cy.openPluginToolbar(PLUGIN_COMPONENT.MAP);
-        cy.eyesCheckWindow('render map plugin toolbar');
-        cy.openMapSettings();
-        cy.get('.gm-style-cc');
-        cy.eyesCheckWindow('render map settings');
-      });
+    it(`render map plugin toolbar and settings`, () => {
+      cy.loadWrapperEditorAndViewer('map');
+      cy.get('.dismissButton').eq(1);
+      cy.openPluginToolbar(PLUGIN_COMPONENT.MAP);
+      cy.eyesCheckWindow('render map plugin toolbar');
+      cy.openMapSettings();
+      cy.get('.gm-style-cc');
+      cy.eyesCheckWindow('render map settings');
     });
   });
 
@@ -111,12 +105,10 @@ describe('plugins', () => {
 
     after(() => cy.eyesClose());
 
-    apps.forEach(app => {
-      it(`render file-upload plugin toolbar [${app.name}]`, function() {
-        cy[app.loadApp]('file-upload');
-        cy.openPluginToolbar(PLUGIN_COMPONENT.FILE_UPLOAD);
-        cy.eyesCheckWindow(this.test.title);
-      });
+    it(`render file-upload plugin toolbar`, function() {
+      cy.loadWrapperEditorAndViewer('file-upload');
+      cy.openPluginToolbar(PLUGIN_COMPONENT.FILE_UPLOAD);
+      cy.eyesCheckWindow(this.test.title);
     });
   });
 
@@ -152,11 +144,9 @@ describe('plugins', () => {
     after(() => cy.eyesClose());
 
     function testAtomicBlockAlignment(align) {
-      apps.forEach(app => {
-        it(`align atomic block ${align} [${app.name}]`, function() {
-          cy[app.loadApp]('images').alignImage(align);
-          cy.eyesCheckWindow(this.test.title);
-        });
+      it(`align atomic block ${align}`, function() {
+        cy.loadWrapperEditorAndViewer('images').alignImage(align);
+        cy.eyesCheckWindow(this.test.title);
       });
     }
 
@@ -171,36 +161,34 @@ describe('plugins', () => {
     });
     afterEach(() => cy.eyesClose());
 
-    apps.forEach(app => {
-      it(`change link preview settings [${app.name}]`, function() {
-        cy[app.loadApp]('link-preview', 'embedsPreset');
-        cy.openPluginToolbar(PLUGIN_COMPONENT.LINK_PREVIEW);
-        cy.setLinkSettings();
-        cy.triggerLinkPreviewViewerUpdate();
-        cy.eyesCheckWindow(this.test.title);
-      });
-      it(`convert link preview to regular link [${app.name}]`, function() {
-        cy[app.loadApp]('link-preview', 'embedsPreset');
-        cy.openPluginToolbar(PLUGIN_COMPONENT.LINK_PREVIEW);
-        cy.clickToolbarButton('baseToolbarButton_replaceToLink');
-        cy.triggerLinkPreviewViewerUpdate();
-        cy.eyesCheckWindow(this.test.title);
-      });
-      it(`backspace key should convert link preview to regular link [${app.name}]`, function() {
-        cy[app.loadApp]('link-preview', 'embedsPreset');
-        cy.focusEditor()
-          .type('{downarrow}{downarrow}')
-          .type('{backspace}');
-        cy.triggerLinkPreviewViewerUpdate();
-        cy.eyesCheckWindow(this.test.title);
-      });
-      it(`delete link preview [${app.name}]`, function() {
-        cy[app.loadApp]('link-preview', 'embedsPreset');
-        cy.openPluginToolbar(PLUGIN_COMPONENT.LINK_PREVIEW).wait(100);
-        cy.clickToolbarButton('blockButton_delete');
-        cy.triggerLinkPreviewViewerUpdate();
-        cy.eyesCheckWindow(this.test.title);
-      });
+    it(`change link preview settings`, function() {
+      cy.loadWrapperEditorAndViewer('link-preview', 'embedsPreset');
+      cy.openPluginToolbar(PLUGIN_COMPONENT.LINK_PREVIEW);
+      cy.setLinkSettings();
+      cy.triggerLinkPreviewViewerUpdate();
+      cy.eyesCheckWindow(this.test.title);
+    });
+    it(`convert link preview to regular link`, function() {
+      cy.loadWrapperEditorAndViewer('link-preview', 'embedsPreset');
+      cy.openPluginToolbar(PLUGIN_COMPONENT.LINK_PREVIEW);
+      cy.clickToolbarButton('baseToolbarButton_replaceToLink');
+      cy.triggerLinkPreviewViewerUpdate();
+      cy.eyesCheckWindow(this.test.title);
+    });
+    it(`backspace key should convert link preview to regular link`, function() {
+      cy.loadWrapperEditorAndViewer('link-preview', 'embedsPreset');
+      cy.focusEditor()
+        .type('{downarrow}{downarrow}')
+        .type('{backspace}');
+      cy.triggerLinkPreviewViewerUpdate();
+      cy.eyesCheckWindow(this.test.title);
+    });
+    it(`delete link preview`, function() {
+      cy.loadWrapperEditorAndViewer('link-preview', 'embedsPreset');
+      cy.openPluginToolbar(PLUGIN_COMPONENT.LINK_PREVIEW).wait(100);
+      cy.clickToolbarButton('blockButton_delete');
+      cy.triggerLinkPreviewViewerUpdate();
+      cy.eyesCheckWindow(this.test.title);
     });
   });
 
@@ -210,18 +198,16 @@ describe('plugins', () => {
     });
     after(() => cy.eyesClose());
 
-    apps.forEach(app => {
-      it(`should create link preview from link after enter key [${app.name}]`, function() {
-        cy[app.loadApp]('empty', 'embedsPreset');
-        cy.insertLinkAndEnter('www.wix.com');
-        cy.eyesCheckWindow(this.test.title);
-      });
+    it(`should create link preview from link after enter key`, function() {
+      cy.loadWrapperEditorAndViewer('empty', 'embedsPreset');
+      cy.insertLinkAndEnter('www.wix.com');
+      cy.eyesCheckWindow(this.test.title);
+    });
 
-      it(`should embed link that supports embed [${app.name}]`, function() {
-        cy[app.loadApp]('empty', 'embedsPreset');
-        cy.insertLinkAndEnter('www.mockUrl.com');
-        cy.eyesCheckWindow(this.test.title);
-      });
+    it(`should embed link that supports embed`, function() {
+      cy.loadWrapperEditorAndViewer('empty', 'embedsPreset');
+      cy.insertLinkAndEnter('www.mockUrl.com');
+      cy.eyesCheckWindow(this.test.title);
     });
   });
 

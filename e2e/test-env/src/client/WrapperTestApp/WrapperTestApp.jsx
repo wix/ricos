@@ -43,7 +43,6 @@ class WrapperTestApp extends PureComponent {
     const { isMobile } = this.props;
     return (
       <div>
-        <h1>Wrapper Test App</h1>
         <div className={`testApp ${isMobile ? 'mobile' : ''}`}>
           <div>
             <h3>Editor</h3>
