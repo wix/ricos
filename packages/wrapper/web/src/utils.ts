@@ -1,15 +1,15 @@
 import { convertToRaw } from 'wix-rich-content-editor-common';
-import { RawDraftContentState, EditorState } from 'draft-js';
+import { EditorState } from 'draft-js';
 import { createEmpty } from 'wix-rich-content-editor/dist/lib/editorStateConversion';
 import { EditorDataInstance } from './RichContentProps';
 import { debounce } from 'lodash';
 
 /* eslint-disable no-console */
 export const assert = (predicate, message) => console.assert(predicate, message);
-export const emptyState: RawDraftContentState = { blocks: [], entityMap: {} };
+export const emptyState: ContentState = { blocks: [], entityMap: {} };
 
 export function createDataConverter(): EditorDataInstance {
-  let currState: RawDraftContentState = emptyState;
+  let currState: ContentState = emptyState;
   let currEditorState: EditorState = createEmpty();
   let isUpdated = false;
   const getContentState = () => {

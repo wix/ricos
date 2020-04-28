@@ -4,6 +4,7 @@ import { Loader } from 'wix-rich-content-editor-common';
 import ImageViewer from './image-viewer';
 import { DEFAULTS } from './consts';
 import { sizeClassName, alignmentClassName } from './classNameStrategies';
+import styles from '../statics/styles/image-component.scss';
 
 const EMPTY_SMALL_PLACEHOLDER =
   'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
@@ -17,7 +18,7 @@ class ImageComponent extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { isMounted: false, ...this.stateFromProps(props) };
+    this.state = this.stateFromProps(props);
 
     const { block, store } = this.props;
     if (store) {
@@ -28,14 +29,6 @@ class ImageComponent extends React.Component {
     }
   }
 
-  componentDidMount() {
-    this.state.isMounted = true; //eslint-disable-line react/no-direct-mutation-state
-  }
-
-  componentWillUnmount() {
-    this.state.isMounted = false; //eslint-disable-line react/no-direct-mutation-state
-  }
-
   componentWillReceiveProps(nextProps) {
     this.setState(this.stateFromProps(nextProps));
   }
@@ -44,71 +37,61 @@ class ImageComponent extends React.Component {
     const componentState = props.componentState || {};
 
     let state = {};
-    const { alreadyLoading, isLoading, userSelectedFiles } = this.getLoadingParams(componentState);
-    if (!alreadyLoading) {
-      if (isLoading !== true && userSelectedFiles) {
-        //lets continue the uploading process
-        if (userSelectedFiles.files && userSelectedFiles.files.length > 0) {
-          state = this.handleFilesSelected(userSelectedFiles.files);
-        }
-        setTimeout(() => {
-          //needs to be async since this function is called during constructor and we do not want the update to call set state on other components
-          this.props.store.update('componentState', { isLoading: true, userSelectedFiles: null });
-        }, 0);
+    const { isLoading, userSelectedFiles } = this.getLoadingParams(componentState);
+    if (!isLoading && userSelectedFiles) {
+      //lets continue the uploading process
+      if (userSelectedFiles.files && userSelectedFiles.files.length > 0) {
+        state = this.handleFilesSelected(userSelectedFiles.files);
       }
+      setTimeout(() => {
+        //needs to be async since this function is called during constructor and we do not want the update to call set state on other components
+        this.props.store.update('componentState', { isLoading: true, userSelectedFiles: null });
+      }, 0);
     }
 
     return state;
   };
 
   resetLoadingState = error => {
-    //no upload function
-    if (this.state.isMounted) {
-      this.setState({ isLoading: false, dataUrl: null, error });
-    } else {
-      //this is async and sometimes called before the component is mounted, so just place it on the state
-      //eslint-disable-next-line react/no-direct-mutation-state
-      this.state = Object.assign(this.state, {
-        isLoading: false,
-        dataUrl: null,
-        fileError: error,
-      });
-    }
-    //mark the external state as not loading
+    const dataUrl = error ? this.state.dataUrl || EMPTY_SMALL_PLACEHOLDER : null;
+    const errorMsg = error?.msg || (error === true && this.props.t('UploadMediaError'));
+    this.setState({ isLoading: false, dataUrl, errorMsg });
     this.props.store.update('componentState', { isLoading: false, userSelectedFiles: null });
   };
 
-  fileLoaded = (fileDataUrl, fileList) => {
-    if (this.state.isMounted) {
-      this.setState({ isLoading: true, dataUrl: fileDataUrl });
-    } else {
-      //this is async and sometimes called before the component is mounted, so just place it on the state
-      //eslint-disable-next-line react/no-direct-mutation-state
-      this.state = Object.assign(this.state, {
-        isLoading: true,
-        dataUrl: fileDataUrl,
-        fileError: null,
-      });
-    }
-    const { helpers } = this.props;
-    const hasFileChangeHelper = helpers && helpers.onFilesChange;
-    if (hasFileChangeHelper && fileList.length > 0) {
-      helpers.onFilesChange(fileList[0], ({ data, error }) =>
-        this.handleFilesAdded({ data, error })
-      );
+  uploadFile = file => {
+    const handleFileUpload = this.props?.helpers?.handleFileUpload;
+    if (handleFileUpload) {
+      handleFileUpload(file, ({ data, error }) => this.handleFilesAdded({ data, error }));
     } else {
       this.resetLoadingState({ msg: 'Missing upload function' });
     }
   };
 
   handleFilesSelected = files => {
-    const reader = new FileReader();
-    reader.onload = e => this.fileLoaded(e.target.result, files);
-    reader.readAsDataURL(files[0]);
+    const file = files[0];
+    if (file) {
+      this.fileReader(file).then(dataUrl => {
+        this.setState({ isLoading: true, dataUrl });
+        this.uploadFile(file);
+      });
+    }
     return { isLoading: true, dataUrl: EMPTY_SMALL_PLACEHOLDER };
   };
 
+  fileReader(file) {
+    return new Promise(resolve => {
+      const fr = new FileReader();
+      fr.onload = e => resolve(e.target.result);
+      fr.readAsDataURL(file);
+    });
+  }
+
   handleFilesAdded = ({ data, error }) => {
+    if (error) {
+      this.resetLoadingState(error);
+      return;
+    }
     const imageData = data.length ? data[0] : data;
     const config = { ...this.props.componentData.config };
     if (!config.alignment) {
@@ -119,7 +102,7 @@ class ImageComponent extends React.Component {
       src: imageData,
     };
     this.props.store.update('componentData', componentData, this.props.block.getKey());
-    this.resetLoadingState(error);
+    this.resetLoadingState();
   };
 
   handleMetadataChange = newMetadata => {
@@ -134,9 +117,8 @@ class ImageComponent extends React.Component {
 
   getLoadingParams = componentState => {
     //check if the file upload is coming on the regular state
-    const alreadyLoading = this.state && this.state.isLoading;
     const { isLoading, userSelectedFiles } = componentState;
-    return { alreadyLoading, isLoading, userSelectedFiles };
+    return { isLoading: this.state?.isLoading || isLoading, userSelectedFiles };
   };
 
   handleCaptionChange = caption => this.handleMetadataChange({ caption });
@@ -161,6 +143,7 @@ class ImageComponent extends React.Component {
       setComponentUrl,
     } = this.props;
 
+    const { errorMsg } = this.state;
     return (
       <>
         <ImageViewer
@@ -184,6 +167,7 @@ class ImageComponent extends React.Component {
         />
 
         {this.state.isLoading && this.renderLoader()}
+        {errorMsg && <div className={styles.error}>{errorMsg}</div>}
       </>
     );
   }

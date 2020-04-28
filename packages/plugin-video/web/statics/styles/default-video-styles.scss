@@ -23,3 +23,20 @@
   color: $primary-text-color-light;
   font-size: 12px;
 }
+
+.error {
+  z-index: 1;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.5);
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  right: 0;
+  top: 0;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  font-weight: normal;
+}

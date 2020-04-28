@@ -20,9 +20,9 @@
   "wix-rich-content-plugin-undo-redo": 178,
   "wix-rich-content-plugin-vertical-embed": 781,
   "wix-rich-content-plugin-video": 298,
-  "viewer-without-wrapper": 198,
-  "viewer-with-wrapper": 524,
-  "editor-with-emoji": 1111,
+  "viewer-without-wrapper": 196,
+  "viewer-with-wrapper": 174,
+  "editor-with-emoji": 927,
   "editor-without-plugins": 837,
-  "editor-with-basic-plugins": 1492
+  "editor-with-basic-plugins": 1277
 }

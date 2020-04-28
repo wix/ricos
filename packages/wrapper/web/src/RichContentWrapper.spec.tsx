@@ -49,7 +49,9 @@ describe('Wrapper', () => {
 
   describe('Editor', () => {
     it('should render locale="en" if unspecified', () => {
-      const element = shallow(wrapper({ isEditor: true }).withEditor()).dive();
+      const element = shallow(wrapper({ isEditor: true }).withEditor())
+        .dive()
+        .dive();
       expect(element.props()).toHaveProperty('locale');
       expect(element.props().locale).toEqual('en');
     });
@@ -63,6 +65,7 @@ describe('Wrapper', () => {
         .dive()
         .dive()
         .dive()
+        .dive()
         .instance();
       const renderResult = instance.render();
       const editorProps = renderResult.props.children.props;
@@ -72,6 +75,7 @@ describe('Wrapper', () => {
     it('should render with themeStrategy output', () => {
       const element = shallow(wrapper({ isEditor: true, theme: 'Default' }).withEditor());
       const instance = element
+        .dive()
         .dive()
         .dive()
         .dive()
@@ -93,7 +97,7 @@ describe('Wrapper', () => {
       const instance = element.dive().instance();
       const renderResult = instance.render();
       await instance.updateLocale();
-      const engineProps = renderResult.props;
+      const engineProps = renderResult.props.children.props;
       expect(engineProps).toHaveProperty('rcProps');
       expect(instance.state.localeStrategy).toEqual({ locale: 'he', localeResource: hebResource });
     });
@@ -101,7 +105,9 @@ describe('Wrapper', () => {
 
   describe('Viewer', () => {
     it('should render locale="en" if unspecified', () => {
-      const element = shallow(wrapper().withViewer()).dive();
+      const element = shallow(wrapper().withViewer())
+        .dive()
+        .dive();
       expect(element.props()).toHaveProperty('locale');
       expect(element.props().locale).toEqual('en');
     });
@@ -115,6 +121,7 @@ describe('Wrapper', () => {
         .dive()
         .dive()
         .dive()
+        .dive()
         .instance();
       const renderResult = instance.render();
       const viewerProps = renderResult.props.children.props;
@@ -124,6 +131,7 @@ describe('Wrapper', () => {
     it('should render with themeStrategy output', () => {
       const element = shallow(wrapper({ theme: 'Default' }).withViewer());
       const instance = element
+        .dive()
         .dive()
         .dive()
         .dive()
