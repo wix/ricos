@@ -11,19 +11,19 @@ jobs:
         id: bundleSizesPRComment
 
   deploy_examples:
-  runs-on: ubuntu-18.04
-  steps:
-    - uses: actions/checkout@v2
-    - run: npm install
-    - name: deploy_PRComment
-      id: deploy_PRComment
-      run: npm run deployPRComment
-    - run: echo "${{ steps.deploy_examples.outputs.deploy_message }}"
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - run: npm install
+      - name: deploy_PRComment
+        id: deploy_PRComment
+        run: npm run deployPRComment
+      - run: echo "${{ steps.deploy_examples.outputs.deploy_message }}"
 
-  env:
-    SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
-    SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
-    REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    env:
+      SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
+      SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
+      REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   update_comment_pr:
     name: update PR comment
