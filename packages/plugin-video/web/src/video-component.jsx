@@ -40,12 +40,12 @@ class VideoComponent extends React.Component {
     this.handlePlayerFocus();
   }
 
-  static getDerivedStateFromProps(props, state) {
+  static getDerivedStateFromProps(props) {
     const {
       componentState: { error },
     } = props;
     if (error) {
-      const errorMsg = error?.message;
+      const errorMsg = error?.msg;
       return { errorMsg };
     } else if (error === false) {
       return { errorMsg: undefined };

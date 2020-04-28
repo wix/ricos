@@ -1,7 +1,5 @@
-import { convertToRaw } from 'wix-rich-content-editor-common';
+import { convertToRaw, createEmpty } from 'wix-rich-content-editor-common';
 import { EditorState } from 'draft-js';
-import { createEmpty } from 'wix-rich-content-editor/dist/lib/editorStateConversion';
-import { EditorDataInstance } from './RichContentProps';
 import { debounce } from 'lodash';
 
 /* eslint-disable no-console */

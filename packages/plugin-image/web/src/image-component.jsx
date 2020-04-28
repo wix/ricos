@@ -72,7 +72,7 @@ class ImageComponent extends React.Component {
     const file = files[0];
     if (file) {
       this.fileReader(file).then(dataUrl => {
-        this.setState({ isLoading: true, dataUrl });
+        this.setState({ isLoading: true, errorMsg: false, dataUrl });
         this.uploadFile(file);
       });
     }

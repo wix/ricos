@@ -226,7 +226,7 @@ const paletteToWixPalette = palette =>
 
 const wixPalettes: any = {};
 // eslint-disable-next-line array-callback-return
-const wixPalette = Object.keys(examples).map(palette => {
+Object.keys(examples).map(palette => {
   wixPalettes[palette] = paletteToWixPalette(examples[palette]);
 });
 
