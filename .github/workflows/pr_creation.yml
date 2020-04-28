@@ -8,7 +8,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-        run: npm run deployPRComment
+      - run: npm run deployPRComment
         id: deployPRComment
       # - uses: actions/checkout@v2
       # - run: npm install
@@ -26,8 +26,8 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
-        run: npm install 
-        run: npm run analyzeBundles --silent
+      - run: npm install 
+      - run: npm run analyzeBundles --silent
         id: bundleSizesPRComment
       # - uses: actions/checkout@v2
       # - run: npm install
@@ -40,9 +40,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Comment PR
-        uses: unsplash/comment-on-pr@master
-        run: npm run updatePRComment
+      - uses: unsplash/comment-on-pr@master
+      - run: npm run updatePRComment
         # uses: thollander/actions-comment-pull-request@master
-        env:
-          REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          message: '${{ analyze-bundles.steps.bundleSizesPRComment.outputs.bundleSizes_message }}\n ${{ examples-pr-comment.steps.deployPRComment.outputs.deploy_message }}'
+      env:
+        REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        message: '${{ analyze-bundles.steps.bundleSizesPRComment.outputs.bundleSizes_message }}\n ${{ examples-pr-comment.steps.deployPRComment.outputs.deploy_message }}'
