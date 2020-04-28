@@ -1,13 +1,16 @@
 /*global cy Cypress*/
-import { fixturesToTestOnSeo, DEFAULT_DESKTOP_BROWSERS, apps } from './settings';
+import { fixturesToTestOnSeo, DEFAULT_DESKTOP_BROWSERS } from './settings';
 
-const testFixtureOnSsr = fixture =>
-  apps.forEach(app => {
-    it(`render ${fixture} in ssr [${app.name}]`, function() {
-      cy.loadTestAppOnSsr(fixture, app.name);
-      cy.eyesCheckWindow(this.test.title);
-    });
+const testFixtureOnSsr = fixture => {
+  it(`render ${fixture} in ssr`, function() {
+    cy.loadTestAppOnSsr(fixture, 'rce');
+    cy.eyesCheckWindow(this.test.title);
   });
+  it(`render ${fixture} in ssr [wrapper]`, function() {
+    cy.loadTestAppOnSsr(fixture, 'wrapper');
+    cy.eyesCheckWindow(this.test.title);
+  });
+};
 
 describe('editor rendering', () => {
   before(function() {
