@@ -9,7 +9,6 @@ import React, {
   FunctionComponent,
 } from 'react';
 import { modalStyles } from './themeStrategy/defaults';
-import { RichContentProps, EditorDataInstance } from './RichContentProps';
 import { RichContentEditor } from 'wix-rich-content-editor';
 import { createDataConverter } from './utils';
 import { EditorState } from 'draft-js';

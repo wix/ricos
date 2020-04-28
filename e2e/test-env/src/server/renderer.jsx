@@ -23,7 +23,7 @@ export default function renderer() {
     const isMobile = req.query.mobile === '';
     const locale = req.query.hebrew === '' ? 'he' : 'en';
     const seoMode = req.query.seoMode === '';
-    const testAppPlugins = req.query.testAppPlugins;
+    const testAppPlugins = req.query.testAppPlugins || 'partialPreset';
     const props = { isMobile, locale, seoMode, testAppPlugins };
 
     try {

@@ -18,6 +18,7 @@
 ### :house: Internal
 - `wrapper`
   - [#975](https://github.com/wix-incubator/rich-content/pull/975) ssr fix - render suspense after mount
+  - [#977](https://github.com/wix-incubator/rich-content/pull/977) wrapper exports its type declarations
 
 </details>
 <hr/>

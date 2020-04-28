@@ -128,6 +128,7 @@ describe('plugins', () => {
     it('render gallery out of view', function() {
       // TODO THIS ONE
       cy.loadEditorAndViewer('gallery-out-of-view');
+      cy.get(`[data-hook=${PLUGIN_COMPONENT.GALLERY}]`).eq(3);
       cy.eyesCheckWindow(`${this.test.title} - out of view`);
       cy.scrollTo('bottom');
       cy.waitForDocumentMutations();
