@@ -14,13 +14,15 @@ export default class VideoSelectionInputModal extends Component {
       url: (!componentData.isCustomVideo && componentData.src) || '',
     };
     this.id = `VideoUploadModal_FileInput_${Math.floor(Math.random() * 9999)}`;
-    const onConfirm = props.onConfirm || props.onReplace;
+    const { onConfirm, onReplace } = props;
 
-    this.onConfirm = args => {
+    this.onConfirm = obj => {
       this.setError(false);
-      const data = onConfirm(args);
-      if (data?.newBlock) {
-        this.blockKey = data?.newBlock.key;
+      if (onConfirm) {
+        const { newBlock } = onConfirm(obj);
+        this.blockKey = newBlock.key;
+      } else {
+        onReplace(obj, this.blockKey);
       }
     };
   }
