@@ -9,13 +9,16 @@ import { isDefined } from 'ts-is-present';
 
 class RichContentWrapper extends Component<
   RichContentWrapperProps,
-  { localeStrategy: RichContentProps }
+  { localeStrategy: RichContentProps; isMounted: boolean }
 > {
+  shouldUseSuspense: boolean;
   constructor(props: RichContentWrapperProps) {
     super(props);
     this.state = {
       localeStrategy: {},
+      isMounted: false,
     };
+    this.shouldUseSuspense = !props.children;
   }
 
   static defaultProps = { locale: 'en', isMobile: false };
@@ -29,6 +32,7 @@ class RichContentWrapper extends Component<
 
   componentDidMount() {
     this.updateLocale();
+    this.setState({ isMounted: true });
   }
 
   componentWillReceiveProps(newProps: RichContentWrapperProps) {
@@ -71,7 +75,7 @@ class RichContentWrapper extends Component<
     const child = this.getChildComponent();
     const { initialState = contentState } = child.props;
 
-    const { localeStrategy } = this.state;
+    const { localeStrategy, isMounted } = this.state;
 
     const themeGenerators: ThemeGeneratorFunction[] = plugins
       .map(plugin => plugin.theme)
@@ -90,20 +94,22 @@ class RichContentWrapper extends Component<
       rcProps
     );
 
-    return (
-      <Suspense fallback={<div />}>
-        <EngineWrapper
-          key={isEditor ? 'editor' : 'viewer'}
-          ref={forwardedRef}
-          rcProps={mergedRCProps}
-          isEditor={isEditor}
-          initialState={contentState}
-          {...rest}
-        >
-          {child}
-        </EngineWrapper>
-      </Suspense>
+    const engineWrapper = (
+      <EngineWrapper
+        key={isEditor ? 'editor' : 'viewer'}
+        ref={forwardedRef}
+        rcProps={mergedRCProps}
+        isEditor={isEditor}
+        initialState={contentState}
+        {...rest}
+      >
+        {child}
+      </EngineWrapper>
     );
+
+    return this.shouldUseSuspense
+      ? isMounted && <Suspense fallback={<div />}>{engineWrapper}</Suspense>
+      : engineWrapper;
   }
 }
 

@@ -15,12 +15,15 @@
     Click to see more.
   </summary>
 
+### :house: Internal
+- `wrapper`
+  - [#975](https://github.com/wix-incubator/rich-content/pull/975) ssr fix - render suspense after mount
 
 </details>
 <hr/>
 
 ## 7.4.3 (Apr 28, 2020)
-- `image` `video` 
+- `image` `video`
   - [9dc32d29](https://github.com/wix-incubator/rich-content/commit/9dc32d29) default error message if error=true
 
 ## 7.4.1 (Apr 28, 2020)
