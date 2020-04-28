@@ -60,7 +60,8 @@
     "react-dom": "16.6.3",
     "rollup": "1.31.1",
     "ts-is-present": "^1.1.1",
-    "ts-jest": "^25.3.1"
+    "ts-jest": "^25.3.1",
+    "wix-rich-content-plugin-hashtag": "^7.4.3"
   },
   "dependencies": {
     "jss": "^10.1.1",

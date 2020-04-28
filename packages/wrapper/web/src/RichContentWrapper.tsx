@@ -6,23 +6,6 @@ import localeStrategy from './localeStrategy/localeStrategy';
 import './styles.global.css';
 import { merge } from 'lodash';
 import { isDefined } from 'ts-is-present';
-import { RichContentProps } from './RichContentProps';
-
-export interface RichContentWrapperProps {
-  contentState?: ContentState;
-  children?: ReactElement;
-  theme?: string | object;
-  locale?: string;
-  palette?: Palette;
-  plugins?: PluginConfig[];
-  isEditor?: boolean;
-  isMobile?: boolean;
-  rcProps?: RichContentProps;
-  textToolbarType?: TextToolbarType;
-  textToolbarContainer?: HTMLElement;
-  forwardedRef?: Ref<ReactElement>;
-  placeholder?: string;
-}
 
 class RichContentWrapper extends Component<
   RichContentWrapperProps,

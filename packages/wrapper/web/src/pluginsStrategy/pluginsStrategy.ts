@@ -1,5 +1,4 @@
 import { merge } from 'lodash';
-import { RichContentProps } from '../RichContentProps';
 
 const getPluginProps = (
   isEditor: boolean,
