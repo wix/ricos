@@ -36,4 +36,5 @@ jobs:
       - run: npm run updatePRComment
     env:
       REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      message: '${{ analyze-bundles.steps.bundleSizesPRComment.outputs.bundleSizes_message }}\n ${{ examples-pr-comment.steps.deploy_PRComment.outputs.deploy_message }}'
+      message: "bla bla"
+      # message: '${{ analyze-bundles.steps.bundleSizesPRComment.outputs.bundleSizes_message }}\n ${{ examples-pr-comment.steps.deploy_PRComment.outputs.deploy_message }}'
