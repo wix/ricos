@@ -199,11 +199,16 @@ export default ({
           modalStyles,
           theme: this.props.theme,
           componentData: button.componentData,
-          onConfirm: this.addBlock,
+          onConfirm: obj => {
+            const data = this.addBlock(obj);
+            this.blockKey = data.newBlock;
+            return data;
+          },
           pubsub,
           helpers,
           t,
           isMobile,
+          blockKey: this.blockKey,
         });
       }
     };
