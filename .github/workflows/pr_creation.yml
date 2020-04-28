@@ -30,4 +30,4 @@ jobs:
       SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
       SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
       REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      message: '${{ needs.analyze-bundles.steps.bundleSizesPRComment.outputs.bundleSizes_message }} ${{ steps.deploy_PRComment.outputs.deploy_message }}'
+      message: '${{ needs.analyze-bundles.steps.bundleSizesPRComment.outputs.bundleSizes_message }} \n'
