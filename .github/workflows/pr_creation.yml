@@ -1,6 +1,11 @@
 name: bundleTests
 on: [pull_request]
 
+env:
+  SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
+  SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
+  REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 jobs:
   analyze-bundles:
     runs-on: ubuntu-18.04
@@ -18,12 +23,7 @@ jobs:
       - name: deploy_PRComment
         id: deploy_PRComment
         run: npm run deployPRComment
-      - run: echo "${{ steps.deploy_examples.outputs.deploy_message }}"
-
-    env:
-      SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
-      SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
-      REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: echo "${{ steps.deploy_PRComment.outputs.deploy_message }}"
 
   update_comment_pr:
     name: update PR comment
@@ -32,9 +32,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: updateComment
-        run: npm run updatePRComment
+      - run: npm install
+      - run: npm run updatePRComment
 
     env:
-      REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       message: '${{ needs.analyze-bundles.steps.bundleSizesPRComment.outputs.bundleSizes_message }} ${{ needs.deploy_examples.steps.deploy_PRComment.outputs.deploy_message }}'
