@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-18.04
 
     steps:
-    - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
         run: npm run deployPRComment
         id: deployPRComment
       # - uses: actions/checkout@v2
