@@ -12,6 +12,7 @@ jobs:
 
   update_comment_pr:
     name: update PR comment
+    needs: analyze-bundles
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -24,4 +25,4 @@ jobs:
       SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
       SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
       # message: 'bla bla'
-      message: '${{ jobs.analyze-bundles.steps.bundleSizesPRComment.outputs.bundleSizes_message }}\n ${{ steps.deploy_PRComment.outputs.deploy_message }}'
+      message: '${{ needs.analyze-bundles.steps.bundleSizesPRComment.outputs.bundleSizes_message }}\n ${{ steps.deploy_PRComment.outputs.deploy_message }}'
