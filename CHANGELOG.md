@@ -15,24 +15,44 @@
     Click to see more.
   </summary>
 
+### :house: Internal
+- `wrapper`
+  - [#975](https://github.com/wix-incubator/rich-content/pull/975) ssr fix - render suspense after mount
+
+</details>
+<hr/>
+
+## 7.4.3 (Apr 28, 2020)
+- `image` `video`
+  - [9dc32d29](https://github.com/wix-incubator/rich-content/commit/9dc32d29) default error message if error=true
+
+## 7.4.1 (Apr 28, 2020)
+### :bug: Bug Fix
+- `video`
+  - [#974](https://github.com/wix-incubator/rich-content/pull/960) video file upload not working when block isn't selected
+
+## 7.4.0 (Apr 27, 2020)
 ### :rocket: New Feature
 - `button`
-  - [#953](https://github.com/wix-incubator/rich-content/pull/953) action button: by passing onClick callback, on click triggers it
+  - [#953](https://github.com/wix-incubator/rich-content/pull/953) action button - button with onClick callback
+- `image` `video`
+  - [#972](https://github.com/wix-incubator/rich-content/pull/972) handle upload error - show message on block
 ### :bug: Bug Fix
 - `editor`
   - [#951](https://github.com/wix-incubator/rich-content/pull/951) fix: tooltip opacity
   - [#957](https://github.com/wix-incubator/rich-content/pull/957) fix: command+ctrl+j creates code block on mac
 - `map`
   - [#959](https://github.com/wix-incubator/rich-content/pull/959) modal settings fixed (convention) & made compatible with wrapper palette colors
+- `emoji`
+  - [#973](https://github.com/wix-incubator/rich-content/pull/973) was using old editor and editor-common dependencies
 ### :house: Internal
 - `editor`
   - [#936](https://github.com/wix-incubator/rich-content/pull/936) arrangement of inline toolbar buttons
 - `wrapper`
   - [#956](https://github.com/wix-incubator/rich-content/pull/956) bi getData will now contain `forPublish` argument
+  - [#966](https://github.com/wix-incubator/rich-content/pull/966) passing RCE/RCV to wrapper is no longer required
 - `preview`
   - [#962](https://github.com/wix-incubator/rich-content/pull/962) interactions improved; read-more displays html
-</details>
-<hr/>
 
 ## 7.3.5 (Apr 21, 2020)
 ### :bug: Bug Fix

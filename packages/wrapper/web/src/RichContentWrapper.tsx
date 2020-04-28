@@ -1,16 +1,16 @@
-import React, { Component, ReactElement, forwardRef } from 'react';
+import React, { Component, ReactElement, forwardRef, Suspense, Ref } from 'react';
 import EngineWrapper from './EngineWrapper';
 import themeStrategy from './themeStrategy/themeStrategy';
 import pluginsStrategy from './pluginsStrategy/pluginsStrategy';
 import localeStrategy from './localeStrategy/localeStrategy';
 import './styles.global.css';
 import { merge } from 'lodash';
-import PropTypes from 'prop-types';
 import { isDefined } from 'ts-is-present';
-import { RichContentProps, ForwardedRef } from './RichContentProps';
+import { RichContentProps } from './RichContentProps';
 
 export interface RichContentWrapperProps {
-  children: ReactElement;
+  contentState?: ContentState;
+  children?: ReactElement;
   theme?: string | object;
   locale?: string;
   palette?: Palette;
@@ -20,33 +20,36 @@ export interface RichContentWrapperProps {
   rcProps?: RichContentProps;
   textToolbarType?: TextToolbarType;
   textToolbarContainer?: HTMLElement;
-  forwardedRef?: ForwardedRef;
+  forwardedRef?: Ref<ReactElement>;
+  placeholder?: string;
 }
 
 class RichContentWrapper extends Component<
   RichContentWrapperProps,
-  { localeStrategy: RichContentProps }
+  { localeStrategy: RichContentProps; isMounted: boolean }
 > {
+  shouldUseSuspense: boolean;
   constructor(props: RichContentWrapperProps) {
     super(props);
     this.state = {
       localeStrategy: {},
+      isMounted: false,
     };
+    this.shouldUseSuspense = !props.children;
   }
-
-  static propTypes = { children: PropTypes.element.isRequired };
 
   static defaultProps = { locale: 'en', isMobile: false };
 
   updateLocale = async () => {
     const { locale, children } = this.props;
-    await localeStrategy(children.props.locale || locale).then(localeData => {
+    await localeStrategy(children?.props.locale || locale).then(localeData => {
       this.setState({ localeStrategy: localeData });
     });
   };
 
   componentDidMount() {
     this.updateLocale();
+    this.setState({ isMounted: true });
   }
 
   componentWillReceiveProps(newProps: RichContentWrapperProps) {
@@ -55,18 +58,41 @@ class RichContentWrapper extends Component<
     }
   }
 
+  getChildComponent(): ReactElement<RichContentProps> {
+    const { children, isEditor } = this.props;
+    if (children) {
+      return children;
+    }
+    const ChildComponent = isEditor
+      ? React.lazy(() =>
+          import('wix-rich-content-editor').then(({ RichContentEditor }) => ({
+            default: RichContentEditor,
+          }))
+        )
+      : React.lazy(() =>
+          import('wix-rich-content-viewer').then(({ RichContentViewer }) => ({
+            default: RichContentViewer,
+          }))
+        );
+    return <ChildComponent />;
+  }
+
   render() {
     const {
       theme,
       palette,
       plugins = [],
-      children,
       isEditor = false,
+      contentState,
       rcProps,
       forwardedRef,
       ...rest
     } = this.props;
-    const { localeStrategy } = this.state;
+
+    const child = this.getChildComponent();
+    const { initialState = contentState } = child.props;
+
+    const { localeStrategy, isMounted } = this.state;
 
     const themeGenerators: ThemeGeneratorFunction[] = plugins
       .map(plugin => plugin.theme)
@@ -77,28 +103,34 @@ class RichContentWrapper extends Component<
       palette,
       themeGenerators,
     });
+
     const mergedRCProps = merge(
       { theme: finalTheme },
-      pluginsStrategy(isEditor, plugins, children.props, finalTheme),
+      pluginsStrategy(isEditor, plugins, child.props, finalTheme, initialState),
       localeStrategy,
       rcProps
     );
 
-    return (
+    const engineWrapper = (
       <EngineWrapper
-        rcProps={mergedRCProps}
-        isEditor={isEditor}
         key={isEditor ? 'editor' : 'viewer'}
         ref={forwardedRef}
+        rcProps={mergedRCProps}
+        isEditor={isEditor}
+        initialState={contentState}
         {...rest}
       >
-        {children}
+        {child}
       </EngineWrapper>
     );
+
+    return this.shouldUseSuspense
+      ? isMounted && <Suspense fallback={<div />}>{engineWrapper}</Suspense>
+      : engineWrapper;
   }
 }
 
-const exportedComp = forwardRef((props: RichContentWrapperProps, ref: ForwardedRef) => (
+const exportedComp = forwardRef((props: RichContentWrapperProps, ref: Ref<ReactElement>) => (
   <RichContentWrapper {...props} forwardedRef={ref} />
 ));
 
