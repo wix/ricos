@@ -1,4 +1,5 @@
-import { convertToRaw, createEmpty } from 'wix-rich-content-editor-common';
+import { convertToRaw } from 'wix-rich-content-editor-common';
+import { createEmpty } from 'wix-rich-content-editor/dist/lib/editorStateConversion';
 import { EditorState } from 'draft-js';
 import { debounce } from 'lodash';
 
