@@ -8,8 +8,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-        run: npm install 
-        run: npm run deployPRComment
+        run: npm install && npm run deployPRComment
         id: deployPRComment
       # - uses: actions/checkout@v2
       # - run: npm install
