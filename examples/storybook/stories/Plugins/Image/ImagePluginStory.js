@@ -36,12 +36,7 @@ const onFilesChangeMap = {
   },
   error: (files, updateEntity) => {
     setTimeout(() => {
-      updateEntity({ data: [], error: { msg: 'file too large' } });
-    }, 2000);
-  },
-  errorNoUI: (files, updateEntity) => {
-    setTimeout(() => {
-      updateEntity({ data: [], error: { msg: 'file too large', displayMessage: false } });
+      updateEntity({ error: { msg: 'Error' } });
     }, 2000);
   },
 };
@@ -64,15 +59,6 @@ const ImagePluginStory = () => (
       />
       <RichContentEditorBox>
         <ImageEditor editorState={createEmpty()} onFilesChange={onFilesChangeMap.error} />
-      </RichContentEditorBox>
-    </Section>
-    <Section title="onFilesChange Error (without UI)">
-      <div>Without Error Message</div>
-      <SyntaxHighlighter
-        code={`onFilesChange = (files, updateEntity) => updateEntity({ data: [], error: { msg: 'file too large', displayMessage: false} });`}
-      />
-      <RichContentEditorBox>
-        <ImageEditor editorState={createEmpty()} onFilesChange={onFilesChangeMap.errorNoUI} />
       </RichContentEditorBox>
     </Section>
   </Page>
