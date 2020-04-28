@@ -238,11 +238,9 @@ describe('plugins', () => {
       eyesOpen(this);
     });
 
-    beforeEach('load editor', () => cy.loadEditorAndViewer());
-
     after(() => cy.eyesClose());
     it('create nested lists using tab & shift-tab', function() {
-      cy.loadEditorAndViewer()
+      cy.loadWrapperEditorAndViewer()
         .enterParagraphs(['1. Hey I am an ordered list in depth 1.'])
         .tab()
         .enterParagraphs(['\n Hey I am an ordered list in depth 2.'])
@@ -274,7 +272,7 @@ describe('plugins', () => {
     after(() => cy.eyesClose());
     // const embedTypes = ['EVENT', 'PRODUCT', 'BOOKING'];
     const embedTypes = ['PRODUCT'];
-    it('render upload modals', function() {
+    it.only('render upload modals', function() {
       embedTypes.forEach(embedType => {
         cy.openEmbedModal(STATIC_TOOLBAR_BUTTONS[embedType]);
         cy.eyesCheckWindow(this.test.title);
