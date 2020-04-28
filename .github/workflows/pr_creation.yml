@@ -25,7 +25,6 @@ jobs:
     name: update PR comment
     runs-on: ubuntu-latest
     steps:
-      - name: Comment PR
       - uses: actions/checkout@v2
       - run: npm run updatePRComment
     env:
