@@ -14,6 +14,7 @@ class WrapperTestApp extends PureComponent {
     return (
       <RichContentWrapper plugins={editorPlugins} isEditor>
         <RichContentEditor
+          placeholder={'Add some text!'}
           onChange={onEditorChange}
           editorState={editorState}
           isMobile={isMobile}
