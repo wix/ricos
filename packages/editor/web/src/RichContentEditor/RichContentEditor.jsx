@@ -205,7 +205,7 @@ class RichContentEditor extends Component {
   }
 
   fixFileHandlersName(helpers) {
-    if (helpers.onFilesChange) {
+    if (helpers?.onFilesChange) {
       // console.warn('helpers.onFilesChange is deprecated. Use helpers.handleFileUpload');
       helpers.handleFileUpload = helpers.onFilesChange;
       // eslint-disable-next-line fp/no-delete

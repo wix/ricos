@@ -14,15 +14,21 @@ export default class VideoSelectionInputModal extends Component {
       url: (!componentData.isCustomVideo && componentData.src) || '',
     };
     this.id = `VideoUploadModal_FileInput_${Math.floor(Math.random() * 9999)}`;
-    const onConfirm = props.onConfirm || props.onReplace;
-
-    this.onConfirm = args => {
+    const { onConfirm, onReplace } = props;
+    this.blockKey = this.getFocusedBlockKey();
+    this.onConfirm = obj => {
       this.setError(false);
-      const data = onConfirm(args);
-      if (data?.newBlock) {
-        this.blockKey = data?.newBlock.key;
+      if (onConfirm) {
+        const { newBlock } = onConfirm(obj);
+        this.blockKey = newBlock.key;
+      } else {
+        onReplace(obj, this.blockKey);
       }
     };
+  }
+
+  getFocusedBlockKey() {
+    return this.props.pubsub.get('focusedBlock');
   }
 
   onUrlChange = e => {
@@ -37,7 +43,7 @@ export default class VideoSelectionInputModal extends Component {
       this.setState({ showError: true });
       return;
     }
-    this.onConfirm({ ...componentData, src });
+    this.onConfirm({ ...componentData, tempData: false, src });
 
     helpers?.onVideoSelected?.(src, data => this.updateComponentData({ metadata: { ...data } }));
     this.closeModal();
@@ -73,7 +79,7 @@ export default class VideoSelectionInputModal extends Component {
   updateVideoComponent = ({ data }, componentData, isCustomVideo = false) => {
     const { pathname, thumbnail, url } = data;
     const src = pathname ? { pathname, thumbnail } : url;
-    this.setComponentData({ ...componentData, src, isCustomVideo, tempData: undefined });
+    this.setComponentData({ ...componentData, src, isCustomVideo, tempData: false });
   };
 
   addVideoComponent = ({ data }, componentData, isCustomVideo = false) => {
@@ -87,7 +93,7 @@ export default class VideoSelectionInputModal extends Component {
   }
 
   setComponentData = data => {
-    this.props.pubsub.update('componentData', data, this.blockKey);
+    this.props.pubsub.set('componentData', data, this.blockKey);
   };
 
   updateComponentData = data => {
@@ -234,4 +240,5 @@ VideoSelectionInputModal.propTypes = {
   enableCustomUploadOnMobile: PropTypes.bool,
   isMobile: PropTypes.bool,
   languageDir: PropTypes.string,
+  blockKey: PropTypes.string,
 };

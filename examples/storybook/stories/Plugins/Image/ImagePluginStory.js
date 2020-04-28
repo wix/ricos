@@ -36,7 +36,7 @@ const onFilesChangeMap = {
   },
   error: (files, updateEntity) => {
     setTimeout(() => {
-      updateEntity({ error: true });
+      updateEntity({ error: { msg: 'Error' } });
     }, 2000);
   },
 };
