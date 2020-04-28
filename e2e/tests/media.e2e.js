@@ -7,7 +7,7 @@ import {
   IMAGE_SETTINGS,
   GIPHY_PLUGIN,
 } from '../cypress/dataHooks';
-import { DEFAULT_DESKTOP_BROWSERS, apps } from './settings';
+import { DEFAULT_DESKTOP_BROWSERS } from './settings';
 
 const eyesOpen = ({
   test: {
