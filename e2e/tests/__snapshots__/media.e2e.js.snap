@@ -1755,7 +1755,8 @@ exports[`plugins > video > add a video from URL #0`] =
           "video_url": "https://youtu.be/BBu5codsO6Y",
           "width": 480
         },
-        "src": "https://youtu.be/BBu5codsO6Y"
+        "src": "https://youtu.be/BBu5codsO6Y",
+        "tempData": false
       },
       "mutability": "IMMUTABLE",
       "type": "wix-draft-plugin-video"
