@@ -5,14 +5,12 @@ const testFixture = fixtureObj => {
   const { fixture, plugins, additionalCommands } =
     typeof fixtureObj === 'string' ? { fixture: fixtureObj } : fixtureObj;
 
-  return apps.forEach(app => {
-    it(`render ${fixture} [${app.name}]`, function() {
-      cy[app.loadApp](fixture, plugins);
-      if (additionalCommands) {
-        additionalCommands(cy);
-      }
-      cy.eyesCheckWindow(this.test.title);
-    });
+  return it(`render ${fixture}`, function() {
+    cy.loadWrapperEditorAndViewer(fixture, plugins);
+    if (additionalCommands) {
+      additionalCommands(cy);
+    }
+    cy.eyesCheckWindow(this.test.title);
   });
 };
 

@@ -272,7 +272,7 @@ describe('plugins', () => {
     after(() => cy.eyesClose());
     // const embedTypes = ['EVENT', 'PRODUCT', 'BOOKING'];
     const embedTypes = ['PRODUCT'];
-    it.only('render upload modals', function() {
+    it('render upload modals', function() {
       embedTypes.forEach(embedType => {
         cy.openEmbedModal(STATIC_TOOLBAR_BUTTONS[embedType]);
         cy.eyesCheckWindow(this.test.title);
