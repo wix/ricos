@@ -399,6 +399,8 @@
   "Poll_Viewer_ShowAllResults_CTA": "See All Results",
   "Poll_Viewer_Visibility_Owner_Footer" : "Only you can see the results.",
   "Poll_Viewer_Multiselect_Footer" : "You can vote for more than one answer.",
+  "Poll_Viewer_Toast_Error_Connection" : "No internet. Check your connection.",
+  "Poll_Viewer_Toast_Error_ServerDown" : "Couldn't connect to server. Try again later.",
   "Accordion_ShownText_Placeholder" : "Write text to show",
   "Accordion_CollapsedText_Placeholder" : "Write text to hide",
   "Embed_Vertical_Stores_Title" : "Add a Product",
