@@ -227,6 +227,7 @@
   "LinkTo_Modal_Section_Filter_All": "Vše",
   "Accordion_CollapsedText_Placeholder": "Napište text pro skrytí",
   "BlockToolbar_Section_Embed_Social": "Vložit ze soc. sítí",
+  "BlockToolbar_Search_EmptyState": "No blocks found.\nTry another search term.",
   "EmbedURL_Social_Pinterest_Title": "Přidat pin z Pinterestu",
   "HtmlPlugin_InsertButton_Tooltip": "Vložení HTML kódu",
   "MapSettings_MapOption_SubHeader": "Vlastnosti mapy",

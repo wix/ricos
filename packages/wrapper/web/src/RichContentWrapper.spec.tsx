@@ -49,7 +49,9 @@ describe('Wrapper', () => {
 
   describe('Editor', () => {
     it('should render locale="en" if unspecified', () => {
-      const element = shallow(wrapper({ isEditor: true }).withEditor()).dive();
+      const element = shallow(wrapper({ isEditor: true }).withEditor())
+        .dive()
+        .dive();
       expect(element.props()).toHaveProperty('locale');
       expect(element.props().locale).toEqual('en');
     });
@@ -101,7 +103,9 @@ describe('Wrapper', () => {
 
   describe('Viewer', () => {
     it('should render locale="en" if unspecified', () => {
-      const element = shallow(wrapper().withViewer()).dive();
+      const element = shallow(wrapper().withViewer())
+        .dive()
+        .dive();
       expect(element.props()).toHaveProperty('locale');
       expect(element.props().locale).toEqual('en');
     });

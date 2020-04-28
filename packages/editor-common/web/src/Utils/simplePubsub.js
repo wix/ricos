@@ -57,11 +57,8 @@ export const simplePubsub = initialState => {
   const set = (...args) => {
     if (args.length === 1) {
       _setBatch(args[0]);
-    } else if (args.length === 2) {
-      _setSingle(args[0], args[1]);
-    } else {
-      console.error('pubsub set invalid args'); // eslint-disable-line no-console
     }
+    _setSingle(...args);
   };
 
   const setBlockHandler = (key, blockKey, item) => {

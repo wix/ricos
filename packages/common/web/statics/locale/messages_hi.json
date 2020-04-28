@@ -227,6 +227,7 @@
   "LinkTo_Modal_Section_Filter_All": "सभी",
   "Accordion_CollapsedText_Placeholder": "छिपाने के लिए पाठ लिखें",
   "BlockToolbar_Section_Embed_Social": "सोशल से एम्बेड करें",
+  "BlockToolbar_Search_EmptyState": "No blocks found.\nTry another search term.",
   "EmbedURL_Social_Pinterest_Title": "एक Pinterest पिन जोड़ें",
   "HtmlPlugin_InsertButton_Tooltip": "HTML कोड सम्मिलित करें",
   "MapSettings_MapOption_SubHeader": "मैप व्यवहार",

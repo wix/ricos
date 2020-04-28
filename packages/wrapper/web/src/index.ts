@@ -1,2 +1,2 @@
 export { RichContentWrapper, RichContentWrapperProps } from './RichContentWrapper';
-export { RichContentProps } from './RichContentProps';
+export { ExportedRichContentProps as RichContentProps } from './RichContentProps';

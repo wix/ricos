@@ -111,6 +111,7 @@ class RichContentEditor extends Component {
       { name: 'SIDE', ...toolbarsConfig.addPluginMenuConfig },
       { name: 'MOBILE', ...toolbarsConfig.addPluginMenuConfig },
     ];
+    this.fixFileHandlersName(helpers);
 
     this.contextualData = {
       theme: theme || {},
@@ -203,6 +204,16 @@ class RichContentEditor extends Component {
     }
     if (this.props.textToolbarType !== nextProps.textToolbarType) {
       this.setState({ textToolbarType: nextProps.textToolbarType });
+    }
+    this.fixFileHandlersName(nextProps.helpers);
+  }
+
+  fixFileHandlersName(helpers) {
+    if (helpers?.onFilesChange) {
+      // console.warn('helpers.onFilesChange is deprecated. Use helpers.handleFileUpload');
+      helpers.handleFileUpload = helpers.onFilesChange;
+      // eslint-disable-next-line fp/no-delete
+      delete helpers.onFilesChange;
     }
   }
 
