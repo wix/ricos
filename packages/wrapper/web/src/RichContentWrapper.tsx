@@ -124,9 +124,15 @@ class RichContentWrapper extends Component<
       </EngineWrapper>
     );
 
-    return this.shouldUseSuspense
-      ? isMounted && <Suspense fallback={<div />}>{engineWrapper}</Suspense>
-      : engineWrapper;
+    return this.shouldUseSuspense ? (
+      isMounted ? (
+        <Suspense fallback={<div />}>{engineWrapper}</Suspense>
+      ) : (
+        <div />
+      )
+    ) : (
+      engineWrapper
+    );
   }
 }
 
