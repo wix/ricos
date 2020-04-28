@@ -10,19 +10,26 @@ jobs:
       - run: npm run analyzeBundles --silent
         id: bundleSizesPRComment
 
-  update_comment_pr:
-    name: update PR comment
-    needs: analyze-bundles
-    runs-on: ubuntu-latest
+  deploy_examples:
+    runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
       - run: npm install
       - run: npm run deployPRComment
         id: deploy_PRComment
+    env:
+      SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
+      SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
+      REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  update_comment_pr:
+    name: update PR comment
+    needs: [analyze-bundles, deploy_examples]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: npm install
       - run: npm run updatePRComment
     env:
       REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
-      SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
-      # message: 'bla bla'
-      message: '${{ needs.analyze-bundles.steps.bundleSizesPRComment.outputs.bundleSizes_message }}\n ${{ steps.deploy_PRComment.outputs.deploy_message }}'
+      message: '${{ needs.analyze-bundles.steps.bundleSizesPRComment.outputs.bundleSizes_message }}\n ${{ needs.deploy_examples.steps.deploy_PRComment.outputs.deploy_message }}'
