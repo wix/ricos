@@ -1,5 +1,5 @@
 /*global cy*/
-import { DEFAULT_DESKTOP_BROWSERS, DEFAULT_MOBILE_BROWSERS, apps } from './settings';
+import { DEFAULT_DESKTOP_BROWSERS, DEFAULT_MOBILE_BROWSERS } from './settings';
 
 describe('rtl', () => {
   beforeEach(() => cy.switchToHebrew());
@@ -19,36 +19,34 @@ describe('rtl', () => {
 
     after(() => cy.eyesClose());
 
-    apps.forEach(app => {
-      it(`render plugin toolbar in rtl [${app.name}]`, function() {
-        cy[app.loadApp]()
-          .focusEditor()
-          .openSideToolbar();
-        cy.eyesCheckWindow(this.test.title);
-      });
+    it(`render plugin toolbar in rtl`, function() {
+      cy.loadWrapperEditorAndViewer()
+        .focusEditor()
+        .openSideToolbar();
+      cy.eyesCheckWindow(this.test.title);
+    });
 
-      it(`render text toolbar in rtl [${app.name}]`, function() {
-        cy[app.loadApp]('plain')
-          .setSelection(0, 8)
-          .get('[data-hook=inlineToolbar]')
-          .should('be.visible')
-          .get('[data-hook=addPluginFloatingToolbar]')
-          .should('be.visible');
-        cy.eyesCheckWindow(this.test.title);
-      });
+    it(`render text toolbar in rtl`, function() {
+      cy.loadWrapperEditorAndViewer('plain')
+        .setSelection(0, 8)
+        .get('[data-hook=inlineToolbar]')
+        .should('be.visible')
+        .get('[data-hook=addPluginFloatingToolbar]')
+        .should('be.visible');
+      cy.eyesCheckWindow(this.test.title);
+    });
 
-      it(`render rtl and ltr text correctly [${app.name}]`, function() {
-        cy[app.loadApp]('hebrew');
-        cy.eyesCheckWindow(this.test.title);
-      });
+    it(`render rtl and ltr text correctly`, function() {
+      cy.loadWrapperEditorAndViewer('hebrew');
+      cy.eyesCheckWindow(this.test.title);
+    });
 
-      it(`render external modal in rtl [${app.name}]`, function() {
-        cy[app.loadApp]('images')
-          .openImageSettings()
-          .get('[data-hook="imageSettingsCaptionInput"]')
-          .blur();
-        cy.eyesCheckWindow(this.test.title);
-      });
+    it(`render external modal in rtl`, function() {
+      cy.loadWrapperEditorAndViewer('images')
+        .openImageSettings()
+        .get('[data-hook="imageSettingsCaptionInput"]')
+        .blur();
+      cy.eyesCheckWindow(this.test.title);
     });
   });
 
@@ -65,26 +63,24 @@ describe('rtl', () => {
 
     after(() => cy.eyesClose());
 
-    apps.forEach(app => {
-      it(`render add plugin modal in rtl [${app.name}]`, function() {
-        cy[app.loadApp]()
-          .focusEditor()
-          .openAddPluginModal();
-        cy.eyesCheckWindow(this.test.title);
-      });
+    it(`render add plugin modal in rtl`, function() {
+      cy.loadWrapperEditorAndViewer()
+        .focusEditor()
+        .openAddPluginModal();
+      cy.eyesCheckWindow(this.test.title);
+    });
 
-      it(`render rtl and ltr text correctly [${app.name}]`, function() {
-        cy[app.loadApp]('hebrew');
-        cy.eyesCheckWindow(this.test.title);
-      });
+    it(`render rtl and ltr text correctly`, function() {
+      cy.loadWrapperEditorAndViewer('hebrew');
+      cy.eyesCheckWindow(this.test.title);
+    });
 
-      it(`render external modal in rtl [${app.name}]`, function() {
-        cy[app.loadApp]('images')
-          .openImageSettings()
-          .get('[aria-label="Cancel"]')
-          .blur();
-        cy.eyesCheckWindow({ tag: this.test.title, target: 'window', fully: false });
-      });
+    it(`render external modal in rtl`, function() {
+      cy.loadWrapperEditorAndViewer('images')
+        .openImageSettings()
+        .get('[aria-label="Cancel"]')
+        .blur();
+      cy.eyesCheckWindow({ tag: this.test.title, target: 'window', fully: false });
     });
   });
 });

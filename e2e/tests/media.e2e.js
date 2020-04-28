@@ -30,12 +30,12 @@ describe('plugins', () => {
 
     beforeEach('load editor', () => {
       cy.switchToDesktop();
+      cy.loadWrapperEditorAndViewer('images');
     });
 
     after(() => cy.eyesClose());
 
     it(`render image toolbar and settings`, function() {
-      cy.loadWrapperEditorAndViewer('images');
       cy.openImageSettings();
       cy.get(`[data-hook=${IMAGE_SETTINGS.PREVIEW}]:first`);
       cy.eyesCheckWindow(this.test.title + ' - settings');
@@ -66,8 +66,9 @@ describe('plugins', () => {
     after(() => cy.eyesClose());
 
     context('image full screen', () => {
+      beforeEach('load editor', () => cy.loadWrapperEditorAndViewer('images'));
+
       it(`expand image on full screen`, function() {
-        cy.loadWrapperEditorAndViewer('images');
         cy.get(`[data-hook=${PLUGIN_COMPONENT.IMAGE}]:last`)
           .parent()
           .click();
