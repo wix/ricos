@@ -162,21 +162,21 @@ describe('plugins', () => {
     afterEach(() => cy.eyesClose());
 
     it(`change link preview settings`, function() {
-      cy.loadWrapperEditorAndViewer('link-preview', 'embedsPreset');
+      cy.loadEditorAndViewer('link-preview', 'embedsPreset');
       cy.openPluginToolbar(PLUGIN_COMPONENT.LINK_PREVIEW);
       cy.setLinkSettings();
       cy.triggerLinkPreviewViewerUpdate();
       cy.eyesCheckWindow(this.test.title);
     });
     it(`convert link preview to regular link`, function() {
-      cy.loadWrapperEditorAndViewer('link-preview', 'embedsPreset');
+      cy.loadEditorAndViewer('link-preview', 'embedsPreset');
       cy.openPluginToolbar(PLUGIN_COMPONENT.LINK_PREVIEW);
       cy.clickToolbarButton('baseToolbarButton_replaceToLink');
       cy.triggerLinkPreviewViewerUpdate();
       cy.eyesCheckWindow(this.test.title);
     });
     it(`backspace key should convert link preview to regular link`, function() {
-      cy.loadWrapperEditorAndViewer('link-preview', 'embedsPreset');
+      cy.loadEditorAndViewer('link-preview', 'embedsPreset');
       cy.focusEditor()
         .type('{downarrow}{downarrow}')
         .type('{backspace}');
@@ -184,7 +184,7 @@ describe('plugins', () => {
       cy.eyesCheckWindow(this.test.title);
     });
     it(`delete link preview`, function() {
-      cy.loadWrapperEditorAndViewer('link-preview', 'embedsPreset');
+      cy.loadEditorAndViewer('link-preview', 'embedsPreset');
       cy.openPluginToolbar(PLUGIN_COMPONENT.LINK_PREVIEW).wait(100);
       cy.clickToolbarButton('blockButton_delete');
       cy.triggerLinkPreviewViewerUpdate();
@@ -199,13 +199,13 @@ describe('plugins', () => {
     after(() => cy.eyesClose());
 
     it(`should create link preview from link after enter key`, function() {
-      cy.loadWrapperEditorAndViewer('empty', 'embedsPreset');
+      cy.loadEditorAndViewer('empty', 'embedsPreset');
       cy.insertLinkAndEnter('www.wix.com');
       cy.eyesCheckWindow(this.test.title);
     });
 
     it(`should embed link that supports embed`, function() {
-      cy.loadWrapperEditorAndViewer('empty', 'embedsPreset');
+      cy.loadEditorAndViewer('empty', 'embedsPreset');
       cy.insertLinkAndEnter('www.mockUrl.com');
       cy.eyesCheckWindow(this.test.title);
     });
