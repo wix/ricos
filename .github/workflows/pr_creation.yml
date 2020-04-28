@@ -41,9 +41,7 @@ jobs:
     steps:
       - name: Comment PR
       - uses: actions/checkout@v2
-      # - uses: unsplash/comment-on-pr@master
       - run: npm run updatePRComment
-      # uses: thollander/actions-comment-pull-request@master
-      env:
-        REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        message: '${{ analyze-bundles.steps.bundleSizesPRComment.outputs.bundleSizes_message }}\n ${{ examples-pr-comment.steps.deployPRComment.outputs.deploy_message }}'
+    env:
+      REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      message: '${{ analyze-bundles.steps.bundleSizesPRComment.outputs.bundleSizes_message }}\n ${{ examples-pr-comment.steps.deployPRComment.outputs.deploy_message }}'
