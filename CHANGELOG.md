@@ -15,6 +15,9 @@
     Click to see more.
   </summary>
 
+### :house: Internal
+- `wrapper`
+  - [#980](https://github.com/wix-incubator/rich-content/pull/980) hotfix: createEmpty import
 
 </details>
 <hr/>
