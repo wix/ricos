@@ -1,12 +1,8 @@
 /* eslint-disable camelcase */
-import { LinkPreviewProviders } from './consts';
-const { Instagram, Twitter, YouTube, TikTok } = LinkPreviewProviders;
-
 export const DEFAULTS = {
   config: {
     enableEmbed: true,
     enableLinkPreview: true,
-    exposeEmbedButtons: [Instagram, Twitter, YouTube, TikTok],
   },
 };
 
