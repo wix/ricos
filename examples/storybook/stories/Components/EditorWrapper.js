@@ -106,11 +106,40 @@ const plugins = [
   pluginVerticalEmbed(configs.verticalEmbed),
 ];
 
-const EditorWrapper = ({ contentState, palette, onChange, rcProps }) => {
+const pluginsMap = {
+  button: pluginButton(),
+  codeBlock: pluginCodeBlock(),
+  divider: pluginDivider(),
+  emoji: pluginEmoji(),
+  fileUpload: pluginFileUpload(configs.fileUpload),
+  gallery: pluginGallery(),
+  gif: pluginGiphy(configs.giphy),
+  hashtag: pluginHashtag(),
+  html: pluginHtml(),
+  image: pluginImage(),
+  headers: pluginHeadersMarkdown(),
+  lineSpacing: pluginLineSpacing(),
+  link: pluginLink(),
+  map: pluginMap({ googleMapApiKey: process.env.GOOGLE_MAPS_API_KEY }),
+  mentions: pluginMentions(),
+  soundCloud: pluginSoundCloud(),
+  video: pluginVideo(),
+  linkPreview: pluginLinkPreview(configs.linkPreview),
+  undoRedo: pluginUndoRedo(),
+  textColor: pluginTextColor(),
+  highlight: pluginTextHighlight(),
+  verticalEmbed: pluginVerticalEmbed(configs.verticalEmbed),
+};
+
+const EditorWrapper = ({ contentState, palette, onChange, rcProps = {} }) => {
+  const { pluginsToDisplay } = rcProps;
+  const editorPlugins = pluginsToDisplay
+    ? pluginsToDisplay.map(plugin => pluginsMap[plugin])
+    : plugins;
   const editorState = createWithContent(convertFromRaw(contentState));
   const theme = palette ? { theme: 'Palette', palette } : { theme: 'Default' };
   return (
-    <RichContentWrapper plugins={plugins} {...theme} isEditor rcProps={rcProps}>
+    <RichContentWrapper plugins={editorPlugins} {...theme} isEditor rcProps={rcProps}>
       <RichContentEditor
         editorState={editorState}
         onChange={onChange}

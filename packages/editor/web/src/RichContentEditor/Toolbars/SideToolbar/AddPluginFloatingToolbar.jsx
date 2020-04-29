@@ -201,7 +201,7 @@ export default class AddPluginFloatingToolbar extends Component {
         </button>
         {!isSSR() && (
           <PopupOffsetnHoc
-            elementHeight={400}
+            elementHeight={this.popupRef?.offsetHeight}
             elementMarginTop={horizontalMenu ? -15 : -20}
             elementMarginBottom={45}
             targetElement={this.selectButton}

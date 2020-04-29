@@ -37,32 +37,27 @@ const SideToolbarPluginsSection = ({
     const pluginsToRender = section
       ? plugins.filter(({ section: pluginSection }) => pluginSection === section)
       : plugins;
-    return [
-      section && (
-        <div key={section} className={Styles.pluginsSection}>
-          {t(section)}
+    return (
+      <div className={classNames(Styles.section, horizontalMenu && Styles.horizontalMenu)}>
+        {section && <div className={Styles.pluginsSection}>{t(section)}</div>}
+        <div className={classNames(Styles.buttonsWrapper, horizontalMenu && Styles.horizontalMenu)}>
+          {pluginsToRender.map(({ component: Component }, index) => (
+            <div
+              key={index}
+              className={classNames(Styles.buttonWrapper, horizontalMenu && Styles.horizontalMenu)}
+            >
+              <Component
+                getEditorState={getEditorState}
+                setEditorState={setEditorState}
+                showName={!horizontalMenu}
+                toolbarName={TOOLBARS.SIDE}
+                hidePopup={hidePopup}
+              />
+            </div>
+          ))}
         </div>
-      ),
-      <div
-        key="pluginsButtons"
-        className={classNames(Styles.buttonsWrapper, horizontalMenu && Styles.horizontalMenu)}
-      >
-        {pluginsToRender.map(({ component: Component }, index) => (
-          <div
-            key={index}
-            className={classNames(Styles.buttonWrapper, splitToSections && Styles.withSections)}
-          >
-            <Component
-              getEditorState={getEditorState}
-              setEditorState={setEditorState}
-              showName={!horizontalMenu}
-              toolbarName={TOOLBARS.SIDE}
-              hidePopup={hidePopup}
-            />
-          </div>
-        ))}
-      </div>,
-    ];
+      </div>
+    );
   };
 
   const sections = [];

@@ -1,15 +1,12 @@
 .sideToolbarPanelWrapper {
   display: flex;
-  padding: 12px 12px;
+  padding: 0px 12px 12px;
   overflow: auto;
   justify-items: center;
   justify-content: center;
   height: max-content;
   max-height: 400px;
 
-  &.panelWithSearch {
-    padding: 0px 12px 12px;
-  }
   &.horizontalMenu {
     padding: 6px;
   }
@@ -40,9 +37,10 @@
     text-align: center;
     white-space: pre;
     letter-spacing: 1px;
+    margin-top: 12px;
   }
   .withSearch {
-    padding-top: 64px;
+    padding-top: 52px;
   }
 
   .pluginsSection {
@@ -53,7 +51,15 @@
     justify-content: center;
     font-size: 14px;
     line-height: 20px;
-    margin-bottom: 12px;
+  }
+
+  .section {
+    display: grid;
+    grid-row-gap: 12px;
+    padding-top: 12px;
+    &.horizontalMenu {
+      padding-top: 0px;
+    }
   }
 
   .buttonsWrapper {
@@ -62,9 +68,7 @@
     grid-row-gap: 12px;
     grid-auto-rows: 72px;
     grid-template-columns: 98px 98px 98px;
-    .withSections {
-      margin-bottom: 12px;
-    }
+    align-items: center;
     &.horizontalMenu {
       display: flex;
     }
@@ -79,11 +83,13 @@
     .buttonWrapper {
       display: flex;
       width: 100%;
-      height: 38px;
+      height: 100%;
       justify-content: center;
       text-align: center;
       cursor: pointer;
-
+      &.horizontalMenu {
+        height: 38px;
+      }
       .pluginName {
         font-size: 12px;
         line-height: 16px;

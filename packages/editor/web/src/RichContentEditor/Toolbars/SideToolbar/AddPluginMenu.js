@@ -19,12 +19,13 @@ export default class AddPluginMenu extends Component {
     } = props;
     this.showSearch = showSearch && !isMobile && !horizontalMenu;
     this.wrapperClassName = classNames(Styles.sideToolbarPanelWrapper, {
-      [Styles.panelWithSearch]: this.showSearch,
       [Styles.horizontalMenu]: horizontalMenu,
     });
-    this.pluginsClassName = classNames(Styles.pluginsWrapper, {
-      [Styles.withSearch]: this.showSearch && !isMobile,
-    });
+    this.pluginsClassName = classNames(
+      Styles.pluginsWrapper,
+      horizontalMenu && Styles.horizontalMenu,
+      this.showSearch && !isMobile && Styles.withSearch
+    );
   }
   onChange = value => this.setState({ value }, () => this.container?.scrollTo(0, 0));
   render() {
