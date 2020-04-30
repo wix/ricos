@@ -21,7 +21,7 @@
 - `general`
   - [#965](https://github.com/wix-incubator/rich-content/pull/965) fix: gitPRComment overrides the content of the PR comment
   - [#985](https://github.com/wix-incubator/rich-content/pull/985) enable publishing with custom npm tag
-
+  - [#988](https://github.com/wix-incubator/rich-content/pull/988) Adding 'build:analyze:viewer' and 'build:analyze:editor' scripts instead of 'build:analyze' script
 </details>
 <hr/>
 
