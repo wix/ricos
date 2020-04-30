@@ -71,13 +71,13 @@ const plugins = [
   pluginMentions(),
   pluginSoundCloud(),
   pluginVideo(),
-  pluginTextColor({
-    styleSelectionPredicate,
-    customStyleFn: viewerCustomForegroundStyleFn,
-  }),
   pluginTextHighlight({
     styleSelectionPredicate,
     customStyleFn: viewerCustomBackgroundStyleFn,
+  }),
+  pluginTextColor({
+    styleSelectionPredicate,
+    customStyleFn: viewerCustomForegroundStyleFn,
   }),
   pluginLinkPreview(),
 ];

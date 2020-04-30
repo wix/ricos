@@ -55,7 +55,6 @@ const configs = {
     fetchData: mockFetchUrlPreviewData(),
   },
 };
-
 const plugins = [
   pluginImage(),
   pluginGallery(),
@@ -76,15 +75,15 @@ const plugins = [
   pluginMentions(),
   pluginLinkPreview(configs.linkPreview),
   pluginUndoRedo(),
-  pluginTextColor({
-    colorScheme,
-    styleSelectionPredicate,
-    customStyleFn: customForegroundStyleFn,
-  }),
   pluginTextHighlight({
     colorScheme,
     styleSelectionPredicate,
     customStyleFn: customBackgroundStyleFn,
+  }),
+  pluginTextColor({
+    colorScheme,
+    styleSelectionPredicate,
+    customStyleFn: customForegroundStyleFn,
   }),
 ];
 
