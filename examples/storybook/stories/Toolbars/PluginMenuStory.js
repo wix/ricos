@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Section, Page, RichContentEditorBox } from '../Components/StoryParts';
 import EditorWrapper from '../Components/EditorWrapper';
 import emptyContentState from '../../../../e2e/tests/fixtures/empty.json';
-import { Box, Dropdown, MultiSelectCheckbox } from 'wix-style-react';
+import { Box, Dropdown, MultiSelectCheckbox, MobilePreviewWidget } from 'wix-style-react';
 
 const optionsIdMap = {
   1: true,
@@ -55,7 +55,7 @@ export default () => {
     getPluginsSelection = () => {
       const { selectedPlugins } = this.state;
       return (
-        <Box padding="3px" align="space-between" maxWidth="400px">
+        <Box padding="3px" align="space-between" maxWidth="440px">
           Plugins to consume:
           <MultiSelectCheckbox
             size="small"
@@ -83,21 +83,29 @@ export default () => {
       );
     };
 
-    render() {
-      const {
-        showSearch,
-        splitToSections,
-        withAddPluginMenuConfig,
-        editorKey,
-        selectedPlugins,
-      } = this.state;
+    getEditor = (key, isMobile = false) => {
+      const { showSearch, splitToSections, withAddPluginMenuConfig, selectedPlugins } = this.state;
       const toolbarsConfig = {
         addPluginMenuConfig: {
           showSearch,
           splitToSections,
         },
       };
+      return (
+        <EditorWrapper
+          key={key}
+          isMobile={isMobile}
+          contentState={emptyContentState}
+          rcProps={{
+            toolbarsConfig: withAddPluginMenuConfig && toolbarsConfig,
+            pluginsToDisplay: !selectedPlugins.includes('all') && selectedPlugins,
+          }}
+        />
+      );
+    };
 
+    render() {
+      const { editorKey } = this.state;
       return (
         <Page title="Plugin Menu">
           <Section>
@@ -105,26 +113,23 @@ export default () => {
             {this.getCheckbox()}
             {this.getPluginsSelection()}
             <Section>
-              <RichContentEditorBox>
-                <EditorWrapper
-                  key={editorKey}
-                  contentState={emptyContentState}
-                  rcProps={{
-                    toolbarsConfig: withAddPluginMenuConfig && toolbarsConfig,
-                    pluginsToDisplay: !selectedPlugins.includes('all') && selectedPlugins,
-                  }}
-                />
-              </RichContentEditorBox>
+              <RichContentEditorBox>{this.getEditor(editorKey)}</RichContentEditorBox>
             </Section>
+            <Section>
+              <MobilePreviewWidget skin="custom">
+                {this.getEditor(editorKey + 1, true)}
+              </MobilePreviewWidget>
+            </Section>
+
             <div>
               Note: defaults for unset fields are:
               <ul>
-                <li>Search - will be included for menus with more than 9 plugins. </li>
                 <li>
-                  Sections - will be presented if there are at least 2 basic plugins and 2 more from
-                  another category.
+                  If addPluginMenuConfig not supplied - you will get horizontal menu without
+                  search/sections.
                 </li>
-                <li>horizontal - false by default. </li>
+                <li>Search - off by default. </li>
+                <li>Sections - on by default.</li>
               </ul>
             </div>
           </Section>

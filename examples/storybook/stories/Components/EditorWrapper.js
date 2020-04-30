@@ -131,7 +131,7 @@ const pluginsMap = {
   verticalEmbed: pluginVerticalEmbed(configs.verticalEmbed),
 };
 
-const EditorWrapper = ({ contentState, palette, onChange, rcProps = {} }) => {
+const EditorWrapper = ({ contentState, palette, onChange, rcProps = {}, isMobile = false }) => {
   const { pluginsToDisplay } = rcProps;
   const editorPlugins = pluginsToDisplay
     ? pluginsToDisplay.map(plugin => pluginsMap[plugin])
@@ -144,6 +144,7 @@ const EditorWrapper = ({ contentState, palette, onChange, rcProps = {} }) => {
         editorState={editorState}
         onChange={onChange}
         helpers={{ onFilesChange }}
+        isMobile={isMobile}
       />
     </RichContentWrapper>
   );
@@ -154,6 +155,7 @@ EditorWrapper.propTypes = {
   palette: PropTypes.arrayOf(PropTypes.object),
   onChange: PropTypes.func,
   rcProps: PropTypes.object,
+  isMobile: PropTypes.bool,
 };
 
 export default EditorWrapper;
