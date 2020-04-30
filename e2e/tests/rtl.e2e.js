@@ -19,16 +19,14 @@ describe('rtl', () => {
 
     after(() => cy.eyesClose());
 
-    it(`render plugin toolbar in rtl`, function() {
-      //cy.loadWrapperEditorAndViewer()
+    it('render plugin toolbar in rtl', function() {
       cy.loadEditorAndViewer()
         .focusEditor()
         .openSideToolbar();
       cy.eyesCheckWindow(this.test.title);
     });
 
-    it(`render text toolbar in rtl`, function() {
-      // cy.loadWrapperEditorAndViewer('plain')
+    it('render text toolbar in rtl', function() {
       cy.loadEditorAndViewer('plain')
         .setSelection(0, 8)
         .get('[data-hook=inlineToolbar]')
@@ -38,14 +36,12 @@ describe('rtl', () => {
       cy.eyesCheckWindow(this.test.title);
     });
 
-    it(`render rtl and ltr text correctly`, function() {
-      // cy.loadWrapperEditorAndViewer('hebrew');
+    it('render rtl and ltr text correctly', function() {
       cy.loadEditorAndViewer('hebrew');
       cy.eyesCheckWindow(this.test.title);
     });
 
-    it(`render external modal in rtl`, function() {
-      // cy.loadWrapperEditorAndViewer('images')
+    it('render external modal in rtl', function() {
       cy.loadEditorAndViewer('images')
         .openImageSettings()
         .get('[data-hook="imageSettingsCaptionInput"]')
@@ -67,22 +63,19 @@ describe('rtl', () => {
 
     after(() => cy.eyesClose());
 
-    it(`render add plugin modal in rtl`, function() {
-      // cy.loadWrapperEditorAndViewer()
+    it('render add plugin modal in rtl', function() {
       cy.loadEditorAndViewer()
         .focusEditor()
         .openAddPluginModal();
       cy.eyesCheckWindow(this.test.title);
     });
 
-    it(`render rtl and ltr text correctly`, function() {
-      // cy.loadWrapperEditorAndViewer('hebrew');
+    it('render rtl and ltr text correctly', function() {
       cy.loadEditorAndViewer('hebrew');
       cy.eyesCheckWindow(this.test.title);
     });
 
-    it(`render external modal in rtl`, function() {
-      // cy.loadWrapperEditorAndViewer('images')
+    it('render external modal in rtl', function() {
       cy.loadEditorAndViewer('images')
         .openImageSettings()
         .get('[aria-label="Cancel"]')

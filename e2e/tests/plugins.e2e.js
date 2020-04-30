@@ -32,7 +32,7 @@ describe('plugins', () => {
 
     after(() => cy.eyesClose());
 
-    it(`render html plugin toolbar`, function() {
+    it('render html plugin toolbar', function() {
       cy.loadEditorAndViewer('empty')
         .addHtml()
         .waitForHtmlToLoad();
@@ -44,15 +44,17 @@ describe('plugins', () => {
   });
 
   context('divider', () => {
-    beforeEach(function() {
+    before(function() {
       eyesOpen(this);
+    });
+
+    beforeEach('load editor', () => {
       cy.switchToDesktop();
     });
 
-    afterEach(() => cy.eyesClose());
+    after(() => cy.eyesClose());
 
-    it(`render plugin toolbar and change styling`, () => {
-      //cy.loadWrapperEditorAndViewer('divider')
+    it('render plugin toolbar and change styling', () => {
       cy.loadEditorAndViewer('divider')
         .openPluginToolbar(PLUGIN_COMPONENT.DIVIDER)
         .openDropdownMenu();
@@ -61,7 +63,7 @@ describe('plugins', () => {
       cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.SMALL);
       cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.ALIGN_LEFT);
 
-      cy.get('[data-hook*="divider-double"]:first')
+      cy.get('.editor [data-hook=divider-double]')
         .parent()
         .click();
       cy.get('[data-hook*="PluginToolbar"]:first');
@@ -69,7 +71,7 @@ describe('plugins', () => {
       cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.MEDIUM);
       cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.ALIGN_RIGHT);
 
-      cy.get('[data-hook*="divider-dashed"]:first')
+      cy.get('.editor [data-hook=divider-dashed]')
         .parent()
         .click();
       cy.get('[data-hook*="PluginToolbar"]:first').openDropdownMenu(
@@ -83,14 +85,13 @@ describe('plugins', () => {
     before('load editor', function() {
       eyesOpen(this);
       cy.switchToDesktop();
+      cy.loadEditorAndViewer('map');
+      cy.get('.dismissButton').eq(1);
     });
 
     after(() => cy.eyesClose());
 
-    it(`render map plugin toolbar and settings`, () => {
-      //cy.loadWrapperEditorAndViewer('map');
-      cy.loadEditorAndViewer('map');
-      cy.get('.dismissButton').eq(1);
+    it('render map plugin toolbar and settings', () => {
       cy.openPluginToolbar(PLUGIN_COMPONENT.MAP);
       cy.eyesCheckWindow('render map plugin toolbar');
       cy.openMapSettings();
@@ -103,13 +104,12 @@ describe('plugins', () => {
     before('load editor', function() {
       eyesOpen(this);
       cy.switchToDesktop();
+      cy.loadEditorAndViewer('file-upload');
     });
 
     after(() => cy.eyesClose());
 
-    it(`render file-upload plugin toolbar`, function() {
-      // cy.loadWrapperEditorAndViewer('file-upload');
-      cy.loadEditorAndViewer('file-upload');
+    it('render file-upload plugin toolbar', function() {
       cy.openPluginToolbar(PLUGIN_COMPONENT.FILE_UPLOAD);
       cy.eyesCheckWindow(this.test.title);
     });
@@ -147,8 +147,7 @@ describe('plugins', () => {
     after(() => cy.eyesClose());
 
     function testAtomicBlockAlignment(align) {
-      it(`align atomic block ${align}`, function() {
-        // cy.loadWrapperEditorAndViewer('images').alignImage(align);
+      it('align atomic block ' + align, function() {
         cy.loadEditorAndViewer('images').alignImage(align);
         cy.eyesCheckWindow(this.test.title);
       });
@@ -160,35 +159,33 @@ describe('plugins', () => {
   });
 
   context('link preview', () => {
-    beforeEach(function() {
+    before(function() {
       eyesOpen(this);
     });
-    afterEach(() => cy.eyesClose());
+    after(() => cy.eyesClose());
 
-    it(`change link preview settings`, function() {
-      cy.loadEditorAndViewer('link-preview', 'embedsPreset');
+    beforeEach('load editor', () => cy.loadEditorAndViewer('link-preview', 'embedsPreset'));
+
+    it('change link preview settings', function() {
       cy.openPluginToolbar(PLUGIN_COMPONENT.LINK_PREVIEW);
       cy.setLinkSettings();
       cy.triggerLinkPreviewViewerUpdate();
       cy.eyesCheckWindow(this.test.title);
     });
-    it(`convert link preview to regular link`, function() {
-      cy.loadEditorAndViewer('link-preview', 'embedsPreset');
+    it('convert link preview to regular link', function() {
       cy.openPluginToolbar(PLUGIN_COMPONENT.LINK_PREVIEW);
       cy.clickToolbarButton('baseToolbarButton_replaceToLink');
       cy.triggerLinkPreviewViewerUpdate();
       cy.eyesCheckWindow(this.test.title);
     });
-    it(`backspace key should convert link preview to regular link`, function() {
-      cy.loadEditorAndViewer('link-preview', 'embedsPreset');
+    it('backspace key should convert link preview to regular link', function() {
       cy.focusEditor()
         .type('{downarrow}{downarrow}')
         .type('{backspace}');
       cy.triggerLinkPreviewViewerUpdate();
       cy.eyesCheckWindow(this.test.title);
     });
-    it(`delete link preview`, function() {
-      cy.loadEditorAndViewer('link-preview', 'embedsPreset');
+    it('delete link preview', function() {
       cy.openPluginToolbar(PLUGIN_COMPONENT.LINK_PREVIEW).wait(100);
       cy.clickToolbarButton('blockButton_delete');
       cy.triggerLinkPreviewViewerUpdate();
@@ -201,15 +198,14 @@ describe('plugins', () => {
       eyesOpen(this);
     });
     after(() => cy.eyesClose());
+    beforeEach('load editor', () => cy.loadEditorAndViewer('empty', 'embedsPreset'));
 
-    it(`should create link preview from link after enter key`, function() {
-      cy.loadEditorAndViewer('empty', 'embedsPreset');
+    it('should create link preview from link after enter key', function() {
       cy.insertLinkAndEnter('www.wix.com');
       cy.eyesCheckWindow(this.test.title);
     });
 
-    it(`should embed link that supports embed`, function() {
-      cy.loadEditorAndViewer('empty', 'embedsPreset');
+    it('should embed link that supports embed', function() {
       cy.insertLinkAndEnter('www.mockUrl.com');
       cy.eyesCheckWindow(this.test.title);
     });
@@ -242,9 +238,10 @@ describe('plugins', () => {
       eyesOpen(this);
     });
 
+    beforeEach('load editor', () => cy.loadEditorAndViewer());
+
     after(() => cy.eyesClose());
     it('create nested lists using tab & shift-tab', function() {
-      // cy.loadWrapperEditorAndViewer()
       cy.loadEditorAndViewer()
         .enterParagraphs(['1. Hey I am an ordered list in depth 1.'])
         .tab()

@@ -35,9 +35,7 @@ describe('plugins', () => {
 
     after(() => cy.eyesClose());
 
-    it(`render image toolbar and settings`, function() {
-      // TODO THIS ONE
-      // WRAPPER HAS ERROR
+    it('render image toolbar and settings', function() {
       cy.openImageSettings();
       cy.get(`[data-hook=${IMAGE_SETTINGS.PREVIEW}]:first`);
       cy.eyesCheckWindow(this.test.title + ' - settings');
@@ -68,10 +66,9 @@ describe('plugins', () => {
     after(() => cy.eyesClose());
 
     context('image full screen', () => {
-      //beforeEach('load editor', () => cy.loadWrapperEditorAndViewer('images'));
       beforeEach('load editor', () => cy.loadEditorAndViewer('images'));
 
-      it(`expand image on full screen`, function() {
+      it('expand image on full screen', function() {
         cy.get(`[data-hook=${PLUGIN_COMPONENT.IMAGE}]:last`)
           .parent()
           .click();
@@ -80,12 +77,15 @@ describe('plugins', () => {
     });
 
     context('gallery full screen', () => {
-      it(`expand gallery image on full screen`, function() {
-        //cy.loadWrapperEditorAndViewer('gallery')
-        cy.loadEditorAndViewer('gallery')
+      beforeEach('load editor', () =>
+        cy
+          .loadEditorAndViewer('gallery')
           .get(`[data-hook=${'image-item'}]:first`)
           .get(`[data-hook=${'image-item'}]`)
-          .eq(1);
+          .eq(1)
+      );
+
+      it('expand gallery image on full screen', function() {
         cy.get(`[data-hook=${'image-item'}]`)
           .eq(2)
           .parent()
@@ -116,8 +116,6 @@ describe('plugins', () => {
     after(() => cy.eyesClose());
 
     it('render gallery plugin', function() {
-      // TODO THIS ONE
-      // WRAPPER HAS ERROR
       cy.loadEditorAndViewer('gallery')
         .get(`[data-hook=${'image-item'}]:first`)
         .get(`[data-hook=${'image-item'}]`)
@@ -130,7 +128,6 @@ describe('plugins', () => {
     });
 
     it('render gallery out of view', function() {
-      // TODO THIS ONE
       cy.loadEditorAndViewer('gallery-out-of-view');
       cy.get(`[data-hook=${PLUGIN_COMPONENT.GALLERY}]`).eq(3);
       cy.eyesCheckWindow(`${this.test.title} - out of view`);
@@ -140,8 +137,6 @@ describe('plugins', () => {
     });
 
     context('organize media', () => {
-      // TODO THIS ONE
-      // WRAPPER HAS ERROR
       it('allow to manipulate the media items', function() {
         const firstImage = `[data-hook=${GALLERY_SETTINGS.IMAGE}]:first`;
         const anyImage = `[data-hook=${GALLERY_SETTINGS.IMAGE}]`;
@@ -176,8 +171,6 @@ describe('plugins', () => {
     });
 
     context('media settings', () => {
-      // TODO THIS ONE
-      // WRAPPER HAS ERROR
       it('allow to update media content', function() {
         cy.loadEditorAndViewer('gallery')
           .openPluginToolbar(PLUGIN_COMPONENT.GALLERY)
@@ -221,18 +214,17 @@ describe('plugins', () => {
 
     beforeEach('load editor', () => {
       cy.switchToDesktop();
+      cy.loadEditorAndViewer('empty');
     });
 
     after(() => cy.eyesClose());
 
-    it(`render upload modal`, function() {
-      cy.loadEditorAndViewer('empty');
+    it('render upload modal', function() {
       cy.openVideoUploadModal();
       cy.eyesCheckWindow(this.test.title);
     });
 
-    it(`add a video from URL`, function() {
-      cy.loadEditorAndViewer('empty');
+    it('add a video from URL', function() {
       cy.openVideoUploadModal().addVideoFromURL();
       cy.shrinkPlugin(PLUGIN_COMPONENT.VIDEO);
       cy.focusEditor()
@@ -243,10 +235,7 @@ describe('plugins', () => {
       cy.eyesCheckWindow(this.test.title);
     });
 
-    it(`add a custom video`, function() {
-      // TODO THIS ONE
-      // WRAPPER HAS ERROR
-      cy.loadEditorAndViewer('empty');
+    it('add a custom video', function() {
       cy.openVideoUploadModal().addCustomVideo();
       cy.shrinkPlugin(PLUGIN_COMPONENT.VIDEO);
       cy.focusEditor()
@@ -265,18 +254,17 @@ describe('plugins', () => {
 
     beforeEach('load editor', () => {
       cy.switchToDesktop();
+      cy.loadEditorAndViewer('empty');
     });
 
     after(() => cy.eyesClose());
 
-    it(`render upload modal`, function() {
-      cy.loadEditorAndViewer('empty');
+    it('render upload modal', function() {
       cy.openSoundCloudModal();
       cy.eyesCheckWindow(this.test.title);
     });
 
-    it(`add a soundcloud URL`, function() {
-      cy.loadEditorAndViewer('empty');
+    it('add a soundcloud URL', function() {
       cy.openSoundCloudModal().addSoundCloud();
       cy.shrinkPlugin(PLUGIN_COMPONENT.SOUND_CLOUD);
       cy.focusEditor()
@@ -299,8 +287,7 @@ describe('plugins', () => {
 
     after(() => cy.eyesClose());
 
-    it(`render giphy plugin toolbar`, function() {
-      //cy.loadWrapperEditorAndViewer('giphy');
+    it('render giphy plugin toolbar', function() {
       cy.loadEditorAndViewer('giphy');
       cy.openPluginToolbar(PLUGIN_COMPONENT.GIPHY).clickToolbarButton(
         PLUGIN_TOOLBAR_BUTTONS.SMALL_CENTER
@@ -310,8 +297,7 @@ describe('plugins', () => {
       cy.eyesCheckWindow(this.test.title);
     });
 
-    it(`should auto focus on add gif`, function() {
-      //cy.loadWrapperEditorAndViewer('empty');
+    it('should auto focus on add gif', function() {
       cy.loadEditorAndViewer('empty');
       cy.addGif().get('[data-hook=giphyPluginToolbar]');
       cy.window().then(win => {
@@ -332,10 +318,7 @@ describe('plugins', () => {
 
     after(() => cy.eyesClose());
 
-    it(`render some emojies`, function() {
-      // TODO THIS ONE
-      // WRAPPER HAS ERROR
-      //cy.loadWrapperEditorAndViewer('empty');
+    it('render some emojies', function() {
       cy.loadEditorAndViewer('empty');
       cy.get(`button[data-hook=${PLUGIN_COMPONENT.EMOJI}]`).click();
       cy.eyesCheckWindow('render emoji modal');
