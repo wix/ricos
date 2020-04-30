@@ -1,7 +1,10 @@
 const github = require('@actions/github');
+const core = require('@actions/core');
 
 function gitPRComment() {
-  const { REPO_TOKEN, message } = process.env;
+  const { REPO_TOKEN } = process.env;
+  const message = core.getInput('message');
+
   if (REPO_TOKEN) {
     const request = {
       owner: github.context.repo.owner,
