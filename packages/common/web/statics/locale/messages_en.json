@@ -393,6 +393,7 @@
   "Poll_PollSettings_Tab_Settings_Section_Results_VoterAnonymous": "Show what each person voted for",
   "Poll_Viewer_VoteCount": "{{number}} votes",
   "Poll_Viewer_VoteCount_Modal_Voters_Header" : "{{number}} people voted for this answer",
+  "Poll_Viewer_VoteCount_Modal_OneVoter_Header" : "1 person voted for this answer",  
   "Poll_Viewer_VoteCount_Modal_Voters_Anonymous" : "+{{anonNumber}} anonymous",
   "Poll_Viewer_VoteCount_Modal_Voters_CTA_Follow" : "Follow",
   "Poll_Viewer_ShowAllOptions_CTA": "See All Options",
