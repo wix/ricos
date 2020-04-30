@@ -406,8 +406,11 @@
   "Accordion_CollapsedText_Placeholder" : "Write text to hide",
   "Embed_Vertical_Stores_Title" : "Add a Product",
   "Embed_Vertical_Stores_Placeholder" : "Select a product from the list",
+  "Embed_Vertical_Stores_Search_Placeholder" : "Search for a product",  
   "Embed_Vertical_Bookings_Title" : "Add a Service",
   "Embed_Vertical_Bookings_Placeholder" : "Select a service from the list",
+  "Embed_Vertical_Bookings_Search_Placeholder" : "Search for a service",  
   "Embed_Vertical_Events_Title" : "Add an Event",
+  "Embed_Vertical_Events_Search_Placeholder" : "Search for an event",  
   "Embed_Vertical_Events_Placeholder" : "Select an event from the list"
 }
