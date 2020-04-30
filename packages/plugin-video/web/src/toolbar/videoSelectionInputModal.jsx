@@ -14,15 +14,21 @@ export default class VideoSelectionInputModal extends Component {
       url: (!componentData.isCustomVideo && componentData.src) || '',
     };
     this.id = `VideoUploadModal_FileInput_${Math.floor(Math.random() * 9999)}`;
-    const onConfirm = props.onConfirm || props.onReplace;
-
-    this.onConfirm = args => {
+    const { onConfirm, onReplace } = props;
+    this.blockKey = this.getFocusedBlockKey();
+    this.onConfirm = obj => {
       this.setError(false);
-      const data = onConfirm(args);
-      if (data?.newBlock) {
-        this.blockKey = data?.newBlock.key;
+      if (onConfirm) {
+        const { newBlock } = onConfirm(obj);
+        this.blockKey = newBlock.key;
+      } else {
+        onReplace(obj, this.blockKey);
       }
     };
+  }
+
+  getFocusedBlockKey() {
+    return this.props.pubsub.get('focusedBlock');
   }
 
   onUrlChange = e => {
@@ -234,4 +240,5 @@ VideoSelectionInputModal.propTypes = {
   enableCustomUploadOnMobile: PropTypes.bool,
   isMobile: PropTypes.bool,
   languageDir: PropTypes.string,
+  blockKey: PropTypes.string,
 };
