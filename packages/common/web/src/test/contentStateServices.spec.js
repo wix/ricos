@@ -2,9 +2,11 @@
 import { truncateContentState } from '../lib/contentStateServices';
 import {
   contentState,
+  contentState2,
   emptyContentState,
   expectedContentState1,
   expectedContentState2,
+  expectedContentState3,
 } from './index';
 
 describe('Test content state services functions', () => {
@@ -20,12 +22,12 @@ describe('Test content state services functions', () => {
     const newContentState = truncateContentState(contentState, 5);
     expect(newContentState).toEqual(expectedContentState2);
   });
-  it('case: index out of bounds, should return the entered contentState', () => {
-    const newContentState = truncateContentState(contentState, 6);
-    expect(newContentState).toEqual(contentState);
+  it('case: valid index with 2 entityRanges, should be equal ', () => {
+    const newContentState = truncateContentState(contentState2, 2);
+    expect(newContentState).toEqual(expectedContentState3);
   });
   it('case: index out of bounds, should return the entered contentState', () => {
-    const newContentState = truncateContentState(contentState, 100);
+    const newContentState = truncateContentState(contentState, 6);
     expect(newContentState).toEqual(contentState);
   });
 });

@@ -5,10 +5,11 @@ export const truncateContentState = (contentState, index) => {
   const newEntityMap = {};
   const newBlocks = [...contentState.blocks.slice(0, index)];
   newBlocks.forEach(block => {
-    if (block.entityRanges?.length > 0) {
-      const key = block.entityRanges[0].key;
-      newEntityMap[key] = contentState.entityMap[key];
-    }
+    block.entityRanges.forEach(entity => {
+      if (entity.key !== undefined) {
+        newEntityMap[entity.key] = contentState.entityMap[entity.key];
+      }
+    });
   });
   return { ...contentState, blocks: newBlocks, entityMap: newEntityMap };
 };
