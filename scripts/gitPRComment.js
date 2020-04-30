@@ -24,7 +24,7 @@ async function gitPRComment(message, header) {
     const pull_request_number = context.payload.pull_request.number;
 
     const octokit = new github.GitHub(REPO_TOKEN);
-    const allComments = octokit.issues.listComments({
+    const allComments = await octokit.issues.listComments({
       owner: github.context.repo.owner,
       repo: github.context.repo.repo,
       issue_number: pull_request_number,
