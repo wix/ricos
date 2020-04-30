@@ -22,7 +22,6 @@
     "release": "node scripts/publishPackages",
     "deploy": "node scripts/deployment/deployExamples",
     "deployPRComment": "node scripts/deployment/deployPRComment",
-    "updatePRComment": "node scripts/gitPRComment",
     "createVersion": "node scripts/createVersion",
     "storybook": "npm run start --prefix examples/storybook",
     "exampleApp": "npm run start --prefix examples/main",

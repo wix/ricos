@@ -3,7 +3,7 @@ const { EXAMPLES_TO_DEPLOY, fqdn, generateSubdomain } = require('./deployUtils')
 // const core = require('@actions/core');
 
 const generateMessage = () => {
-  let message = 'bla blaClick below to open examples:';
+  let message = 'deploy examples (Click below to open examples):';
   EXAMPLES_TO_DEPLOY.map(example => {
     const domain = fqdn(generateSubdomain(example.name, true));
     return (message = message.concat(`\n${example.name}: https://${domain}`));
@@ -13,8 +13,7 @@ const generateMessage = () => {
 
 async function run() {
   const message = generateMessage();
-  // await core.setOutput('deploy_message', message);
-  gitPRComment(message, 'examples');
+  gitPRComment(message, 'deploy examples');
 }
 
 run();

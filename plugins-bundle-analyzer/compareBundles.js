@@ -4,7 +4,6 @@ const chalk = require('chalk');
 const fs = require('fs');
 const { gitPRComment } = require('../scripts/gitPRComment');
 const { analyze } = require('./analyzeBundles');
-// const core = require('@actions/core');
 
 let savingBundles = {},
   currentBundles = {},
@@ -58,7 +57,6 @@ async function updatePRCommentAndConsole() {
   const pr_comment = generatePRComment();
   console.log(pr_comment);
   await gitPRComment(pr_comment, 'comparison bundleSizes');
-  // await core.setOutput('bundleSizes_message', pr_comment);
 
   if (grewDownMessage !== '' || newBundles !== '') {
     fs.writeFileSync(`bundlesSizesBaseline.json`, JSON.stringify(savingBundles, null, 2), 'utf8');
