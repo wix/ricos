@@ -76,7 +76,7 @@ function disableTransitions() {
 }
 
 function hideAllTooltips() {
-  cy.get('[data-id="tooltip"]', { timeout: 180000 }).invoke('hide'); //uses jquery to set display: none
+  cy.get('[data-id="tooltip"]', { timeout: 300000 }).invoke('hide'); //uses jquery to set display: none
 }
 
 Cypress.Commands.add('loadEditorAndViewer', (fixtureName, plugins) =>
