@@ -7,7 +7,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: npm install
-      - run: npm run createNewPrComment --prefix plugins-bundle-analyzer
       - run: npm run analyzeBundles --silent
     env:
       REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
