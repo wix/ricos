@@ -32,10 +32,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: npm install
-      - run: npm run updatePRComment
         with:
           message: '${{ needs.analyze-bundles.steps.bundleSizesPRComment.outputs.bundleSizes_message }} ${{ needs.deploy_examples.steps.deploy_PRComment.outputs.deploy_message }}'
+      - run: npm install
+      - run: npm run updatePRComment
+
     env:
       inputs:
         message:
