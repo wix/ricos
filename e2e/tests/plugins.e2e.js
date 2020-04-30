@@ -109,7 +109,7 @@ describe('plugins', () => {
 
     it(`render file-upload plugin toolbar`, function() {
       // cy.loadWrapperEditorAndViewer('file-upload');
-      cy.loadditorAndViewer('file-upload');
+      cy.loadEditorAndViewer('file-upload');
       cy.openPluginToolbar(PLUGIN_COMPONENT.FILE_UPLOAD);
       cy.eyesCheckWindow(this.test.title);
     });
