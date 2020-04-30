@@ -40,7 +40,7 @@ async function gitPRComment(message, header) {
       await octokit.issues.updateComment({
         ...context.repo,
         issue_number: pull_request_number,
-        comment_id: comment.user.id,
+        comment_id: comment.id,
         body: message,
       });
     } else {
