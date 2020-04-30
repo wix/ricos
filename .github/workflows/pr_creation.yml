@@ -36,7 +36,7 @@ jobs:
       - run: npm run updatePRComment
         with:
           message: '${{ needs.analyze-bundles.steps.bundleSizesPRComment.outputs.bundleSizes_message }} ${{ needs.deploy_examples.steps.deploy_PRComment.outputs.deploy_message }}'
-
+    env:
       inputs:
         message:
           description: 'Number of Octocats'
