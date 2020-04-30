@@ -1,19 +1,11 @@
-import React, { Children, Fragment, ReactElement, forwardRef } from 'react';
-import { RichContentProps, ForwardedRef } from './RichContentProps';
+import React, { Children, Fragment, ReactElement, forwardRef, Ref } from 'react';
 import FullscreenProvider from './FullscreenProvider';
 import ModalDialogProvider from './ModalDialogProvider';
 import { merge } from 'lodash';
 
-interface Props {
-  rcProps?: RichContentProps;
-  plugins?: PluginConfig[];
-  theme?: string | object;
+interface Props extends RichContentWrapperProps {
   children: ReactElement;
-  isEditor?: boolean;
-  isMobile?: boolean;
-  forwardedRef?: ForwardedRef;
-  textToolbarType?: TextToolbarType;
-  textToolbarContainer?: HTMLElement;
+  initialState?: ContentState;
 }
 
 interface State {
@@ -38,20 +30,41 @@ class EngineWrapper extends React.Component<Props, State> {
   }
 
   render() {
-    const { rcProps, children, forwardedRef } = this.props;
+    const {
+      rcProps,
+      children,
+      forwardedRef,
+      isMobile,
+      textToolbarType,
+      textToolbarContainer,
+      placeholder,
+      initialState,
+    } = this.props;
     const { ModalityProvider } = this.state;
 
-    const mergedRCProps = merge(rcProps, children.props);
+    // any of RichContentWrapperProps that should be merged into child
+    const wrapperPropsToMerge: RichContentProps = {
+      isMobile,
+      textToolbarType: isMobile ? 'inline' : textToolbarType, // optimization - don't need static toolbar when isMobile
+      initialState,
+      placeholder,
+    };
+
+    const mergedRCProps = merge(rcProps, wrapperPropsToMerge, children.props);
 
     return (
-      <ModalityProvider {...mergedRCProps} ref={forwardedRef}>
+      <ModalityProvider
+        {...mergedRCProps}
+        ref={forwardedRef}
+        textToolbarContainer={textToolbarContainer}
+      >
         {Children.only(React.cloneElement(children, { ...mergedRCProps }))}
       </ModalityProvider>
     );
   }
 }
 
-export default forwardRef((props: Props, ref: ForwardedRef) => (
+export default forwardRef((props: Props, ref: Ref<ReactElement>) => (
   <EngineWrapper {...props} forwardedRef={ref}>
     {props.children}
   </EngineWrapper>

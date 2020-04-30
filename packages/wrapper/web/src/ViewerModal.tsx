@@ -1,12 +1,10 @@
 import React from 'react';
 import getImagesData from 'wix-rich-content-fullscreen/dist/lib/getImagesData.cjs.js';
 import Fullscreen from 'wix-rich-content-fullscreen';
-import { RawDraftContentState } from 'draft-js';
 
 interface Props {
-  initialState: RawDraftContentState;
+  initialState: ContentState;
   setExpandModeData: (data: any) => any;
-
   isOpen: boolean;
   index: number;
   images: object[];
@@ -16,15 +14,16 @@ interface Props {
 export default class ViewerModal extends React.Component<Props> {
   constructor(props) {
     super(props);
-    this.props.setExpandModeData(getImagesData(this.props.initialState));
+    props.setExpandModeData(getImagesData(props.initialState));
     this.state = {
       disabled: false,
     };
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.initialState !== this.props.initialState) {
-      this.props.setExpandModeData(getImagesData(this.props.initialState));
+    const { initialState } = this.props;
+    if (prevProps.initialState !== initialState) {
+      this.props.setExpandModeData(getImagesData(initialState));
     }
   }
 

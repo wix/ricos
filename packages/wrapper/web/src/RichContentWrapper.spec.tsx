@@ -8,7 +8,6 @@ import introState from '../../../../e2e/tests/fixtures/intro.json';
 import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { default as hebResource } from 'wix-rich-content-common/dist/statics/locale/messages_he.json';
-import { RichContentProps } from './RichContentProps';
 
 Enzyme.configure({ adapter: new Adapter() });
 const { shallow, mount } = Enzyme;
@@ -49,7 +48,9 @@ describe('Wrapper', () => {
 
   describe('Editor', () => {
     it('should render locale="en" if unspecified', () => {
-      const element = shallow(wrapper({ isEditor: true }).withEditor()).dive();
+      const element = shallow(wrapper({ isEditor: true }).withEditor())
+        .dive()
+        .dive();
       expect(element.props()).toHaveProperty('locale');
       expect(element.props().locale).toEqual('en');
     });
@@ -101,7 +102,9 @@ describe('Wrapper', () => {
 
   describe('Viewer', () => {
     it('should render locale="en" if unspecified', () => {
-      const element = shallow(wrapper().withViewer()).dive();
+      const element = shallow(wrapper().withViewer())
+        .dive()
+        .dive();
       expect(element.props()).toHaveProperty('locale');
       expect(element.props().locale).toEqual('en');
     });

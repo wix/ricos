@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-common",
-  "version": "7.3.5",
+  "version": "7.4.5",
   "author": {
     "name": "Jonathan Bachman",
     "email": "jonathanb@wix.com"
@@ -23,10 +23,11 @@
   "scripts": {
     "clean": "rm -rf dist/",
     "build": "rollup --environment MODULE_NAME:common -c ../../../rollup.config.js",
-    "postbuild": "node ../../../scripts/esCheck.js",
     "build:dev": "cross-env NODE_ENV=development npm run build",
     "build:analyze": "npm run build -- --environment MODULE_ANALYZE && open stats.html",
-    "watch": "cross-env NODE_ENV=development MODULE_WATCH=1 npm run build -- --watch.chokidar",
+    "watch:dev": "cross-env NODE_ENV=development MODULE_WATCH=1 npm run build -- --watch.chokidar",
+    "watch:flow": "css-modules-flow-types statics/styles -e scss && css-modules-flow-types statics/styles -e scss -w -s",
+    "watch": "npm run watch:dev & npm run watch:flow &",
     "lint": "eslint 'src/**/*.{js,jsx}'",
     "test": "jest --verbose"
   },
@@ -57,7 +58,8 @@
     "jsonschema": "~1.2.4",
     "linkify-it": "~2.1.0",
     "react-i18next": "^7.0.0",
-    "react-intersection-observer": "~8.24.1"
+    "react-intersection-observer": "~8.24.1",
+    "wix-rich-content-editor-common": "7.4.5"
   },
   "unpkg": true,
   "publishConfig": {

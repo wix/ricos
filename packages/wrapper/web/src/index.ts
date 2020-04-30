@@ -1,2 +1,4 @@
-export { RichContentWrapper, RichContentWrapperProps } from './RichContentWrapper';
-export { RichContentProps } from './RichContentProps';
+export { RichContentWrapper } from './RichContentWrapper';
+import './pluginsStrategy/pluginTypes';
+import './themeStrategy/themeTypes';
+import './RichContentTypes';

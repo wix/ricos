@@ -150,8 +150,8 @@ class BaseToolbarButton extends React.Component {
           uiSettings,
           modalStyles: appliedModalStyles,
           buttonRef: event.target,
-          onReplace: data => {
-            pubsub.update('componentData', data);
+          onReplace: (data, blockKey) => {
+            pubsub.update('componentData', data, blockKey);
           },
           ...otherProps,
         };
