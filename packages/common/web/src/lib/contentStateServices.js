@@ -6,9 +6,7 @@ export const truncateContentState = (contentState, index) => {
   const newBlocks = [...contentState.blocks.slice(0, index)];
   newBlocks.forEach(block => {
     block.entityRanges.forEach(entity => {
-      if (entity.key !== undefined) {
-        newEntityMap[entity.key] = contentState.entityMap[entity.key];
-      }
+      newEntityMap[entity.key] = contentState.entityMap[entity.key];
     });
   });
   return { ...contentState, blocks: newBlocks, entityMap: newEntityMap };
