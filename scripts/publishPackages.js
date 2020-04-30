@@ -37,6 +37,11 @@ function shouldPublishPackage(pkg) {
 }
 
 function getTag(pkg) {
+  const { NPM_TAG } = process.env;
+  if (NPM_TAG) {
+    return NPM_TAG;
+  }
+
   const latestVersion = getLatestVersion(pkg);
 
   const isLessThanLatest = () => latestVersion && semver.lt(pkg.version, latestVersion);

@@ -12,20 +12,22 @@ let savingBundles = {},
   grewDownMessage = '';
 
 const generatePRComment = () => {
-  let message = newBundles
-    ? 'New packages found.\nPlease update the baseline file by running locally "npm run analyzeBundles" and push the changes.\n\n'
-    : '';
-  message += grewDownMessage ? `Packages that shrank:\n${grewDownMessage}\n` : '';
+  let message = 'Comparison bundleSizes:\n';
+  if (!grewUpMessage && !grewDownMessage && !newBundles) {
+    message += 'No changes in Bundles sizes.\n';
+  } else {
+    message += newBundles
+      ? 'New packages found.\nPlease update the baseline file by running locally "npm run analyzeBundles" and push the changes.\n\n'
+      : '';
+    message += grewDownMessage ? `Packages that shrank:\n${grewDownMessage}\n` : '';
 
-  !newBundles &&
-    grewDownMessage &&
-    (message +=
-      'Please update the baseline file by running locally "npm run analyzeBundles" and push the changes.\n');
+    !newBundles &&
+      grewDownMessage &&
+      (message +=
+        'Please update the baseline file by running locally "npm run analyzeBundles" and push the changes.\n');
 
-  if (grewUpMessage) {
-    message += chalk.red(`Error: Packages that grew:\n${grewUpMessage}\n`);
+    message += grewUpMessage ? chalk.red(`Error: Packages that grew:\n${grewUpMessage}\n`) : '';
   }
-
   return message;
 };
 
@@ -54,7 +56,7 @@ const updateMessage = (messageType, key, oldSize, newSize) => {
 async function updatePRCommentAndConsole() {
   const pr_comment = generatePRComment();
   console.log(pr_comment);
-  await gitPRComment(pr_comment);
+  await gitPRComment(pr_comment, 'Comparison bundleSizes');
 
   if (grewDownMessage !== '' || newBundles !== '') {
     fs.writeFileSync(`bundlesSizesBaseline.json`, JSON.stringify(savingBundles, null, 2), 'utf8');
