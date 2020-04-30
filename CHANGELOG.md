@@ -18,6 +18,7 @@
 ### :house: Internal
 - `wrapper`
   - [#980](https://github.com/wix-incubator/rich-content/pull/980) hotfix: createEmpty import
+  - [#983](https://github.com/wix-incubator/rich-content/pull/983) fix custome inlineStyleMappers (viewer)
 
 </details>
 <hr/>
