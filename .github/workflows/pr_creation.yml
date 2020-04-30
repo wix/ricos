@@ -39,9 +39,4 @@ jobs:
 
     env:
       inputs:
-        message:
-          description: 'Number of Octocats'
-          required: false
-          default: '1'
-      # - with:
-      #     message: '${{ needs.analyze-bundles.steps.bundleSizesPRComment.outputs.bundleSizes_message }} ${{ needs.deploy_examples.steps.deploy_PRComment.outputs.deploy_message }}'
+        message: '${{ needs.analyze-bundles.steps.bundleSizesPRComment.outputs.bundleSizes_message }} ${{ needs.deploy_examples.steps.deploy_PRComment.outputs.deploy_message }}'
