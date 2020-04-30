@@ -151,6 +151,7 @@ class LinkPanel extends Component {
               dataHook="linkPanelRelCheckbox"
               onChange={this.handleNofollowChange}
               tooltipTextKey={'LinkPanel_Nofollow_Checkbox_Tooltip'}
+              t={t}
             />
           )}
         </div>

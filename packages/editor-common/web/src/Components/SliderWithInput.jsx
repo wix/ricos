@@ -49,6 +49,7 @@ class SliderWithInput extends Component {
       sliderDataHook,
       inputDataHook,
       tooltipTextKey,
+      t,
     } = this.props;
     let ariaProps = label ? { 'aria-labelledby': `${this.id}_lbl` } : {};
     ariaProps = {
@@ -67,7 +68,7 @@ class SliderWithInput extends Component {
               {label}
             </span>
           ) : null}
-          <InfoIcon tooltipTextKey={tooltipTextKey} />
+          <InfoIcon tooltipTextKey={tooltipTextKey} t={t} />
         </div>
         <div className={this.styles.sliderWithInput_content}>
           <Slider
@@ -115,6 +116,7 @@ SliderWithInput.propTypes = {
   sliderDataHook: PropTypes.string,
   inputDataHook: PropTypes.string,
   tooltipTextKey: PropTypes.string,
+  t: PropTypes.func,
 };
 
 SliderWithInput.defaultProps = {

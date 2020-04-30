@@ -127,6 +127,7 @@ class SettingsComponent extends PureComponent {
                 dataHook="linkPanelRelCheckbox"
                 onChange={this.handleRelChange}
                 tooltipTextKey={'LinkPanel_Nofollow_Checkbox_Tooltip'}
+                t={t}
               />
             </div>
           </>

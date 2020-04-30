@@ -15,7 +15,7 @@ class RadioGroupHorizontal extends Component {
   }
 
   render() {
-    const { label, inline, tooltipTextKey, ...props } = this.props;
+    const { label, inline, tooltipTextKey, t, ...props } = this.props;
     const { styles } = this;
     const groupClassName = classNames(
       styles.radioGroupHorizontal_group,
@@ -30,7 +30,7 @@ class RadioGroupHorizontal extends Component {
               {label}
             </span>
           ) : null}
-          <InfoIcon tooltipTextKey={tooltipTextKey} />
+          <InfoIcon tooltipTextKey={tooltipTextKey} t={t} />
         </div>
         <RadioGroup ariaLabelledBy={`${this.id}_label`} {...props} className={groupClassName} />
       </div>
@@ -47,6 +47,7 @@ RadioGroupHorizontal.propTypes = {
   value: PropTypes.string.isRequired,
   inline: PropTypes.bool,
   tooltipTextKey: PropTypes.string,
+  t: PropTypes.func,
 };
 
 export default RadioGroupHorizontal;

@@ -38,6 +38,7 @@ export const Spacing = props => {
       sliderDataHook="spacingSlider"
       inputDataHook="spacingInput"
       tooltipTextKey={'GallerySettings_Spacing_Between_Items_Tooltip'}
+      t={t}
       {...props}
     />
   );

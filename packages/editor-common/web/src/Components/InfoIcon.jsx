@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import { withI18n } from 'wix-rich-content-common';
-import englishResources from 'wix-rich-content-common/dist/statics/locale/messages_en.json';
 import PropTypes from 'prop-types';
 import generalstyles from '../../statics/styles/general.scss';
 import Tooltip from './Tooltip';
@@ -25,4 +23,4 @@ class InfoIcon extends Component {
   };
 }
 
-export default withI18n(InfoIcon, englishResources);
+export default InfoIcon;

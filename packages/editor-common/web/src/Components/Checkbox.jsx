@@ -15,6 +15,7 @@ export default class Checkbox extends React.Component {
     checked: PropTypes.bool,
     dataHook: PropTypes.string,
     tooltipTextKey: PropTypes.string,
+    t: PropTypes.func,
   };
 
   static defaultProps = {
@@ -39,7 +40,7 @@ export default class Checkbox extends React.Component {
 
   render() {
     const { styles, generalStyles } = this;
-    const { onChange, label, checked, dataHook, tooltipTextKey } = this.props;
+    const { onChange, label, checked, dataHook, tooltipTextKey, t } = this.props;
     const isChecked = checked ? { defaultChecked: 'checked' } : {};
     const a11yProps = {
       'aria-label': label,
@@ -78,7 +79,7 @@ export default class Checkbox extends React.Component {
           </i>
           <span className={styles.checkbox_label}>{label}</span>
         </div>
-        <InfoIcon tooltipTextKey={tooltipTextKey} />
+        <InfoIcon tooltipTextKey={tooltipTextKey} t={t} />
       </label>
     );
   }

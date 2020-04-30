@@ -204,6 +204,7 @@ class ImageSettings extends Component {
               label={this.altLabel}
               placeholder={this.altInputPlaceholder}
               tooltipTextKey={this.altTooltip}
+              t={t}
               value={metadata.alt || ''}
               onChange={event => this.metadataUpdated(metadata, { alt: event.target.value })}
               dataHook="imageSettingsAltInput"
