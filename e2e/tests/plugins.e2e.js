@@ -332,9 +332,7 @@ describe('plugins', () => {
 
     it('create action button & click it', function() {
       const stub = cy.stub();
-
       cy.on('window:alert', stub);
-
       cy.get(`[data-hook*=${PLUGIN_COMPONENT.BUTTON}]`)
         .last()
         .click()
