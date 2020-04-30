@@ -8,7 +8,7 @@ import {
 } from './index';
 
 describe('Test content state services functions', () => {
-  it('case: index = 0, should return empty ContentState', () => {
+  it('case: index = 0, should return empty contentState', () => {
     const newContentState = truncateContentState(contentState, 0);
     expect(newContentState).toEqual(emptyContentState);
   });
@@ -20,11 +20,11 @@ describe('Test content state services functions', () => {
     const newContentState = truncateContentState(contentState, 5);
     expect(newContentState).toEqual(expectedContentState2);
   });
-  it('case: index out of bounds, should return the entered ContentState', () => {
+  it('case: index out of bounds, should return the entered contentState', () => {
     const newContentState = truncateContentState(contentState, 6);
     expect(newContentState).toEqual(contentState);
   });
-  it('case: index out of bounds, should return the entered ContentState', () => {
+  it('case: index out of bounds, should return the entered contentState', () => {
     const newContentState = truncateContentState(contentState, 100);
     expect(newContentState).toEqual(contentState);
   });
