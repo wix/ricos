@@ -31,10 +31,8 @@ async function gitPRComment(message, header) {
     });
 
     const allComments = response.data;
-    console.log('allComments: ' + allComments);
-    const comment = allComments.find(
-      com => com.user.login === 'github-actions[bot]' && com.body.includes(header)
-    );
+    console.log('allComments: ' + JSON.stringify(allComments, null, 2));
+    const comment = allComments.find(com => com.body.includes(header));
 
     console.log('comment: ' + comment);
 
@@ -55,5 +53,5 @@ async function gitPRComment(message, header) {
   }
 }
 
-gitPRComment();
-// module.exports.gitPRComment = gitPRComment;
+// gitPRComment();
+module.exports.gitPRComment = gitPRComment;
