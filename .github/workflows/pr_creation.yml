@@ -30,12 +30,14 @@ jobs:
     needs: [analyze-bundles, deploy_examples]
     if: always()
     runs-on: ubuntu-latest
-    inputs:
-      message:
-        description: Message for PR comment
-        default: '${{ needs.analyze-bundles.steps.bundleSizesPRComment.outputs.bundleSizes_message }} ${{ needs.deploy_examples.steps.deploy_PRComment.outputs.deploy_message }}'
-
+    # inputs:
+    #   message:
+    #     description: Message for PR comment
+    #     default: '${{ needs.analyze-bundles.steps.bundleSizesPRComment.outputs.bundleSizes_message }} ${{ needs.deploy_examples.steps.deploy_PRComment.outputs.deploy_message }}'
     steps:
       - uses: actions/checkout@v2
       - run: npm install
       - run: npm run updatePRComment
+
+    env:
+      MESSAGE: '${{ needs.analyze-bundles.steps.bundleSizesPRComment.outputs.bundleSizes_message }} ${{ needs.deploy_examples.steps.deploy_PRComment.outputs.deploy_message }}'
