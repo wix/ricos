@@ -20,6 +20,11 @@ import {
   pluginTextColor,
   pluginTextHighlight,
 } from 'wix-rich-content-plugin-text-color/dist/module.viewer';
+import {
+  viewerCustomForegroundStyleFn,
+  styleSelectionPredicate,
+  viewerCustomBackgroundStyleFn,
+} from '../../../../../examples/main/src/text-color-style-fn';
 
 const configs = {
   fileUpload: {
@@ -66,8 +71,14 @@ const plugins = [
   pluginMentions(),
   pluginSoundCloud(),
   pluginVideo(),
-  pluginTextColor(),
-  pluginTextHighlight(),
+  pluginTextColor({
+    styleSelectionPredicate,
+    customStyleFn: viewerCustomForegroundStyleFn,
+  }),
+  pluginTextHighlight({
+    styleSelectionPredicate,
+    customStyleFn: viewerCustomBackgroundStyleFn,
+  }),
   pluginLinkPreview(),
 ];
 
