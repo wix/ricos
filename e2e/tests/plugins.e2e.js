@@ -297,7 +297,7 @@ describe('plugins', () => {
       cy.openPluginToolbar(PLUGIN_COMPONENT.BUTTON)
         .get(`[data-hook*=${PLUGIN_TOOLBAR_BUTTONS.ADV_SETTINGS}][tabindex!=-1]`)
         .click()
-        .get(`[data-hook*=ButtonInputModal][placeholder="https://example-link.com/"]`)
+        .get(`[data-hook*=ButtonInputModal][placeholder="Enter a URL"]`)
         .type('www.wix.com')
         .get(`[data-hook*=${BUTTON_PLUGIN_MODAL.DESIGN_TAB}]`)
         .click()
