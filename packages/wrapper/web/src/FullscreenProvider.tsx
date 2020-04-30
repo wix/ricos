@@ -1,11 +1,10 @@
 import React, { Component, Fragment, Suspense, Children, ReactElement } from 'react';
 import { emptyState } from './utils';
-import { RawDraftContentState } from 'draft-js';
 
 interface Props {
   children: ReactElement;
   helpers?: Helpers;
-  initialState: RawDraftContentState;
+  initialState?: ContentState;
 }
 
 interface State {

@@ -76,7 +76,7 @@ class GalleryComponent extends PureComponent {
 
   setItemInGallery = (item, itemPos) => {
     const shouldAdd = typeof itemPos === 'undefined';
-    let { items, styles } = this.state;
+    let { items, styles, key } = this.state;
     let itemIdx;
     if (shouldAdd) {
       itemIdx = items.length;
@@ -95,7 +95,7 @@ class GalleryComponent extends PureComponent {
     const { setData } = this.props.blockProps;
     setData(this.props.componentData);
 
-    this.setState({ items });
+    this.setState({ items, key: !key });
     if (this.props.store) {
       this.props.store.update('componentData', { items, styles, config: {} });
     }
@@ -117,10 +117,10 @@ class GalleryComponent extends PureComponent {
     const item = imageItem(img, String(event.timeStamp));
     const itemIdx = this.setItemInGallery(item, itemPos);
     const { helpers } = this.props;
-    const hasFileChangeHelper = helpers && helpers.onFilesChange;
+    const handleFileUpload = helpers?.handleFileUpload;
 
-    if (hasFileChangeHelper) {
-      helpers.onFilesChange(file, ({ data }) => this.handleFilesAdded({ data, itemIdx }));
+    if (handleFileUpload) {
+      handleFileUpload(file, ({ data }) => this.handleFilesAdded({ data, itemIdx }));
     } else {
       console.warn('Missing upload function'); //eslint-disable-line no-console
     }
@@ -189,6 +189,7 @@ class GalleryComponent extends PureComponent {
     return (
       <>
         <GalleryViewer
+          key={this.state.key}
           componentData={this.props.componentData}
           onClick={this.props.onClick}
           className={this.props.className}

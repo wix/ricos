@@ -37,7 +37,7 @@ module.exports = env => ({
         test: /\.js$/,
         use: ['source-map-loader'],
         enforce: 'pre',
-        include: [/\*wix-rich-content-*/],
+        include: [/wix-rich-content-*/],
       },
       {
         test: /\.css$/,

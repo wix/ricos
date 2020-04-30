@@ -107,6 +107,8 @@ class RichContentEditor extends Component {
       siteDomain,
     } = this.props;
 
+    this.fixFileHandlersName(helpers);
+
     this.contextualData = {
       theme: theme || {},
       t,
@@ -198,6 +200,16 @@ class RichContentEditor extends Component {
     }
     if (this.props.textToolbarType !== nextProps.textToolbarType) {
       this.setState({ textToolbarType: nextProps.textToolbarType });
+    }
+    this.fixFileHandlersName(nextProps.helpers);
+  }
+
+  fixFileHandlersName(helpers) {
+    if (helpers?.onFilesChange) {
+      // console.warn('helpers.onFilesChange is deprecated. Use helpers.handleFileUpload');
+      helpers.handleFileUpload = helpers.onFilesChange;
+      // eslint-disable-next-line fp/no-delete
+      delete helpers.onFilesChange;
     }
   }
 
@@ -482,6 +494,11 @@ class RichContentEditor extends Component {
     }
   }
 }
+
+RichContentEditor.publish = async (postId, editorState = {}, callBack = () => true) => {
+  const postSummary = getPostContentSummary(editorState);
+  callBack({ postId, ...postSummary });
+};
 
 RichContentEditor.propTypes = {
   editorKey: PropTypes.string,

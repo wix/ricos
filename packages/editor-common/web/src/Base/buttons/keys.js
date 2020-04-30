@@ -1,4 +1,5 @@
 export default {
+  CUSTOM: 'custom',
   FILES: 'file',
   TOGGLE: 'toggle',
   PANEL: 'panel',

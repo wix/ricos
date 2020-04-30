@@ -4,9 +4,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-
-import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import SyntaxHighlighter from './SyntaxHighlighter';
 
 import styles from './SourceCode.scss';
 
@@ -37,9 +35,7 @@ class SourceCode extends React.Component {
       <div>
         {toggleButton}
         <div className={cx(styles.sourcecode, { [styles.open]: open })}>
-          <SyntaxHighlighter language="javascript" style={atomDark}>
-            {code}
-          </SyntaxHighlighter>
+          <SyntaxHighlighter code={code} />
         </div>
       </div>
     );

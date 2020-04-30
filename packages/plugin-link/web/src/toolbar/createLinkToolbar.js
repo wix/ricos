@@ -1,3 +1,4 @@
+//@flow
 import React from 'react';
 import {
   MODIFIERS,
@@ -10,20 +11,18 @@ import {
 import createInlineButtons from './inline-buttons';
 import TextLinkButton from './TextLinkButton';
 
-const openLinkModal = (
-  {
-    helpers,
-    isMobile,
-    anchorTarget,
-    relValue,
-    t,
-    theme,
-    getEditorState,
-    setEditorState,
-    uiSettings,
-  },
-  closeInlinePluginToolbar
-) => {
+const openLinkModal = ({
+  helpers,
+  isMobile,
+  anchorTarget,
+  relValue,
+  t,
+  theme,
+  getEditorState,
+  setEditorState,
+  uiSettings,
+  closeInlinePluginToolbar,
+}) => {
   const modalStyles = getModalStyles({ fullScreen: false, isMobile });
   if (helpers && helpers.openModal) {
     const modalProps = {
@@ -51,14 +50,14 @@ const openLinkModal = (
   }
 };
 
-export default (config, closeInlinePluginToolbar) => ({
+const linkTextButtonMapper /*: TextButtonMapper */ = config => ({
   TextButtonMapper: () => ({
     Link: {
       component: props => (
         <TextLinkButton
           insertLinkFn={insertLinkAtCurrentSelection}
           isActive={hasLinksInSelection(config.getEditorState())}
-          closeInlinePluginToolbar={closeInlinePluginToolbar}
+          closeInlinePluginToolbar={config.closeInlinePluginToolbar}
           tooltipText={config.t('TextLinkButton_Tooltip')}
           {...props}
         />
@@ -75,16 +74,18 @@ export default (config, closeInlinePluginToolbar) => ({
           },
           commandHandler: editorState => {
             if (hasLinksInSelection(editorState)) {
-              closeInlinePluginToolbar();
+              config.closeInlinePluginToolbar();
               return removeLinksInSelection(editorState);
             } else {
-              openLinkModal(config, closeInlinePluginToolbar);
+              openLinkModal(config);
             }
           },
         },
       ],
     },
   }),
-  InlinePluginToolbarButtons: createInlineButtons(config, closeInlinePluginToolbar),
+  InlinePluginToolbarButtons: createInlineButtons(config),
   name: 'link',
 });
+
+export default linkTextButtonMapper;

@@ -71,6 +71,7 @@ const getMobileTheme = theme => {
   const buttonMergeStyles = mergeStyles({ styles: buttonStyles, theme: buttonTheme });
   const separatorMergeStyles = mergeStyles({ styles: separatorStyles, theme: separatorTheme });
 
+  /* eslint-disable @typescript-eslint/camelcase, camelcase*/
   return {
     toolbarStyles: {
       toolbar: classNames(toolbarMergeStyles.mobileToolbar, toolbarMergeStyles.mobileToolbar_fixed),
@@ -81,16 +82,12 @@ const getMobileTheme = theme => {
       responsiveArrow: toolbarMergeStyles.mobileToolbar_responsiveArrow,
       responsiveArrowStart: toolbarMergeStyles.mobileToolbar_responsiveArrowStart,
       responsiveArrowEnd: toolbarMergeStyles.mobileToolbar_responsiveArrowEnd,
-      //eslint-disable-next-line camelcase
       responsiveArrowStart_icon: toolbarMergeStyles.mobileToolbar_responsiveArrowStart_icon,
-      //eslint-disable-next-line camelcase
       responsiveArrowEnd_icon: toolbarMergeStyles.mobileToolbar_responsiveArrowEnd_icon,
     },
     buttonStyles: {
-      //eslint-disable-next-line camelcase
       inlineToolbarButton_wrapper: buttonMergeStyles.mobileToolbarButton_wrapper,
       inlineToolbarButton: buttonMergeStyles.mobileToolbarButton,
-      //eslint-disable-next-line camelcase
       inlineToolbarButton_icon: buttonMergeStyles.mobileToolbarButton_icon,
     },
     separatorStyles: {

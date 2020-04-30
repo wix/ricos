@@ -1,8 +1,8 @@
 import React, { PureComponent, Fragment } from 'react';
+import ReactDOMServer from 'react-dom/server';
 import PropTypes from 'prop-types';
 import { mergeStyles } from 'wix-rich-content-common';
-import LinesEllipsis from 'react-lines-ellipsis';
-import { getChildrenText } from '../utils';
+import HTMLEllipsis from 'react-lines-ellipsis/lib/html';
 import styles from '../../statics/styles/read-more.scss';
 
 class ReadMore extends PureComponent {
@@ -11,9 +11,6 @@ class ReadMore extends PureComponent {
     label: PropTypes.string,
     lines: PropTypes.number,
     children: PropTypes.node.isRequired,
-    onPreviewExpand: PropTypes.func.isRequired,
-    onClick: PropTypes.func,
-    text: PropTypes.string,
     theme: PropTypes.object.isRequired,
     t: PropTypes.func.isRequired,
   };
@@ -21,40 +18,66 @@ class ReadMore extends PureComponent {
   static defaultProps = {
     ellipsis: '…',
     lines: 3,
-    onClick: () => {},
   };
+
+  constructor(props) {
+    super(props);
+    this.state = { clamped: false, expanded: false };
+  }
 
   onClick = e => {
-    const { onClick, onPreviewExpand } = this.props;
     e.preventDefault();
-    onClick();
-    onPreviewExpand();
+    this.setState(prevState => ({ expanded: !prevState.expanded }));
   };
 
-  /* eslint-disable */
+  renderChildren(children) {
+    const html = ReactDOMServer.renderToString(children);
+    return html;
+  }
+
+  onReflow = ({ clamped }) => {
+    this.setState({ clamped });
+  };
+
+  /* eslint-disable jsx-a11y/anchor-is-valid */
   render() {
+    const { clamped, expanded } = this.state;
+    if (expanded) {
+      return (
+        <>
+          {this.props.children}
+          {clamped && (
+            <a href="#" role="button" onClick={this.onClick} className={this.styles.readMore_label}>
+              {'See less'}
+            </a>
+          )}
+        </>
+      );
+    }
     this.styles = this.styles || mergeStyles({ styles, theme: this.props.theme });
     const {
       lines,
       label = this.props.t('Preview_ReadMore_Label'),
       ellipsis,
       children,
-      text,
     } = this.props;
-    const textToCollapse = text || getChildrenText(children);
     return (
       <Fragment>
-        <div className={this.styles.readMore_wrapper} onClick={this.onClick} />
-        <LinesEllipsis
-          text={textToCollapse}
+        <HTMLEllipsis
+          unsafeHTML={this.renderChildren(children)}
           className={this.styles.readMore}
           maxLine={lines}
-          ellipsis={`${ellipsis} ${label}`}
+          ellipsis={ellipsis}
+          onReflow={this.onReflow}
         />
+        {clamped && (
+          <a href="#" role="button" onClick={this.onClick} className={this.styles.readMore_label}>
+            {label}
+          </a>
+        )}
       </Fragment>
     );
   }
-  /* eslint-enable */
 }
 
 export default ReadMore;
