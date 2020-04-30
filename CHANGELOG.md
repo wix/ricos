@@ -20,6 +20,8 @@
   - [#980](https://github.com/wix-incubator/rich-content/pull/980) hotfix: createEmpty import
 - `general`
   - [#965](https://github.com/wix-incubator/rich-content/pull/965) fix: gitPRComment overrides the content of the PR comment
+  - [#985](https://github.com/wix-incubator/rich-content/pull/985) enable publishing with custom npm tag
+
 </details>
 <hr/>
 
