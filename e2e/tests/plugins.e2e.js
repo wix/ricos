@@ -314,7 +314,7 @@ describe('plugins', () => {
       eyesOpen(this);
     });
 
-    beforeEach('load editor', () => cy.loadEditorAndViewer('action-button', 'all'));
+    beforeEach('load editor', () => cy.loadEditorAndViewer('action-button', 'actionButton'));
 
     after(() => cy.eyesClose());
     it('create action button & customize it', function() {
