@@ -83,7 +83,7 @@ export default () => {
       );
     };
 
-    getEditor = (key, isMobile = false) => {
+    getEditor = ({ key, isMobile = false }) => {
       const { showSearch, splitToSections, withAddPluginMenuConfig, selectedPlugins } = this.state;
       const toolbarsConfig = {
         addPluginMenuConfig: {
@@ -91,17 +91,18 @@ export default () => {
           splitToSections,
         },
       };
-      return (
-        <EditorWrapper
-          key={key}
-          isMobile={isMobile}
-          contentState={emptyContentState}
-          rcProps={{
-            toolbarsConfig: withAddPluginMenuConfig && toolbarsConfig,
-            pluginsToDisplay: !selectedPlugins.includes('all') && selectedPlugins,
-          }}
-        />
-      );
+      const editorWrapperProps = {
+        isMobile,
+        contentState: emptyContentState,
+        rcProps: {
+          toolbarsConfig: withAddPluginMenuConfig && toolbarsConfig,
+          pluginsToDisplay: !selectedPlugins.includes('all') && selectedPlugins,
+        },
+      };
+      if (key) {
+        editorWrapperProps.key = key;
+      }
+      return <EditorWrapper {...editorWrapperProps} />;
     };
 
     render() {
@@ -113,11 +114,11 @@ export default () => {
             {this.getCheckbox()}
             {this.getPluginsSelection()}
             <Section>
-              <RichContentEditorBox>{this.getEditor(editorKey)}</RichContentEditorBox>
+              <RichContentEditorBox>{this.getEditor({ key: editorKey })}</RichContentEditorBox>
             </Section>
             <Section>
               <MobilePreviewWidget skin="custom">
-                {this.getEditor(editorKey + 1, true)}
+                {this.getEditor({ isMobile: true })}
               </MobilePreviewWidget>
             </Section>
 
