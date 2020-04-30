@@ -45,6 +45,7 @@ export default class AddPluginMenu extends Component {
         className={wrapperClassName}
         data-hook="addPluginMenu"
         ref={ref => (this.container = ref)}
+        style={{ height: this.container?.offsetHeight }}
       >
         {showSearch && (
           <div className={Styles.searchWrapper}>
