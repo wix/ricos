@@ -1,6 +1,6 @@
-// const { gitPRComment } = require('../gitPRComment');
+const { gitPRComment } = require('../gitPRComment');
 const { EXAMPLES_TO_DEPLOY, fqdn, generateSubdomain } = require('./deployUtils');
-const core = require('@actions/core');
+// const core = require('@actions/core');
 
 const generateMessage = () => {
   let message = 'Click below to open examples:';
@@ -13,8 +13,8 @@ const generateMessage = () => {
 
 async function run() {
   const message = generateMessage();
-  await core.setOutput('deploy_message', message);
-  // gitPRComment(message);
+  // await core.setOutput('deploy_message', message);
+  gitPRComment(message, 'examples');
 }
 
 run();
