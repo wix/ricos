@@ -18,6 +18,8 @@
 ### :house: Internal
 - `wrapper`
   - [#980](https://github.com/wix-incubator/rich-content/pull/980) hotfix: createEmpty import
+- `general`
+  - [#985](https://github.com/wix-incubator/rich-content/pull/985) enable publishing with custom npm tag
 
 </details>
 <hr/>
