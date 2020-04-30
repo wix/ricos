@@ -1,7 +1,5 @@
 name: prComment
-on:
-  pull_request:
-    types: opened
+on: [pull_request]
 
 jobs:
   examples-pr-comment:

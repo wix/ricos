@@ -24,24 +24,34 @@ async function gitPRComment(message, header) {
     const pull_request_number = context.payload.pull_request.number;
 
     const octokit = new github.GitHub(REPO_TOKEN);
-    const allComments = await octokit.issues.listComments({
+    const response = await octokit.issues.listComments({
       owner: github.context.repo.owner,
       repo: github.context.repo.repo,
       issue_number: pull_request_number,
     });
 
+    const allComments = response.data;
+    console.log('allComments: ' + allComments);
     const comment = allComments.find(
       com => com.user.login === 'github-actions[bot]' && com.body.includes(header)
     );
 
     console.log('comment: ' + comment);
-    console.log('allComments: ' + allComments);
 
-    await octokit.issues.createComment({
-      ...context.repo,
-      issue_number: pull_request_number,
-      body: message,
-    });
+    if (comment) {
+      await octokit.issues.updateComment({
+        ...context.repo,
+        issue_number: pull_request_number,
+        comment_id: comment.user.id,
+        body: message,
+      });
+    } else {
+      await octokit.issues.createComment({
+        ...context.repo,
+        issue_number: pull_request_number,
+        body: message,
+      });
+    }
   }
 }
 
