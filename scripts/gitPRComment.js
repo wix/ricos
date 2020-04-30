@@ -16,7 +16,6 @@ function gitPRComment() {
     client.pulls.update(request);
   }
   console.log('message: ' + MESSAGE);
-  console.log('INPUT_MESSAGE: ' + INPUT_MESSAGE);
 }
 
 gitPRComment();
