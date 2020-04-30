@@ -14,7 +14,7 @@ let savingBundles = {},
 const generatePRComment = () => {
   let message = 'Comparison bundleSizes:\n';
   if (!grewUpMessage && !grewDownMessage && !newBundles) {
-    message += 'Comparison ended successfully.\n';
+    message += 'No changes in Bundles sizes.\n';
   } else {
     message += newBundles
       ? 'New packages found.\nPlease update the baseline file by running locally "npm run analyzeBundles" and push the changes.\n\n'
