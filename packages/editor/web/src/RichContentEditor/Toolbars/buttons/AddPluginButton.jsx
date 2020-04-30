@@ -16,8 +16,7 @@ export default class AddPluginButton extends Component {
       theme,
       t,
       isMobile,
-      showSearch,
-      splitToSections,
+      addPluginMenuConfig,
     } = this.props;
     this.props.openModal({
       modalName: EditorModals.MOBILE_ADD_PLUGIN,
@@ -34,8 +33,7 @@ export default class AddPluginButton extends Component {
       pubsub,
       t,
       isMobile,
-      showSearch,
-      splitToSections,
+      addPluginMenuConfig,
     });
   };
 
@@ -62,6 +60,5 @@ AddPluginButton.propTypes = {
   theme: PropTypes.object.isRequired,
   t: PropTypes.func,
   isMobile: PropTypes.bool,
-  showSearch: PropTypes.bool,
-  splitToSections: PropTypes.bool,
+  addPluginMenuConfig: PropTypes.object,
 };

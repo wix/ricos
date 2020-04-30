@@ -27,8 +27,7 @@ const createMobileToolbar = ({
   toolbarDecorationFn,
   config,
   locale,
-  showSearch,
-  splitToSections,
+  addPluginMenuConfig,
 }) => {
   const mobileTheme = getMobileTheme(theme);
   return createStaticToolbar({
@@ -48,8 +47,7 @@ const createMobileToolbar = ({
       t,
       uiSettings,
       config,
-      showSearch,
-      splitToSections,
+      addPluginMenuConfig,
     }),
     anchorTarget,
     relValue,
@@ -113,8 +111,7 @@ const getMobileButtons = ({
   t,
   uiSettings,
   config,
-  showSearch,
-  splitToSections,
+  addPluginMenuConfig,
 }) => {
   const addPluginIndex = buttons.findIndex(b => b === 'AddPlugin');
   if (addPluginIndex !== -1) {
@@ -150,8 +147,7 @@ const getMobileButtons = ({
           pubsub,
           t,
           theme: mobileTheme,
-          showSearch,
-          splitToSections,
+          addPluginMenuConfig,
         })
       );
     }

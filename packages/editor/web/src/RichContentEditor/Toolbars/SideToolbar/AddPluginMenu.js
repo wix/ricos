@@ -11,20 +11,16 @@ export default class AddPluginMenu extends Component {
     this.state = {
       value: '',
     };
-    const {
-      structure,
-      showSearch = structure.length > 8,
-      isMobile,
-      horizontalMenu = false,
-    } = props;
-    this.showSearch = showSearch && !isMobile && !horizontalMenu;
+    const { addPluginMenuConfig, isMobile } = props;
+    this.showSearch = addPluginMenuConfig?.showSearch && !isMobile;
+    this.horizontalMenu = !addPluginMenuConfig && !isMobile;
     this.wrapperClassName = classNames(Styles.sideToolbarPanelWrapper, {
-      [Styles.horizontalMenu]: horizontalMenu,
+      [Styles.horizontalMenu]: this.horizontalMenu,
     });
     this.pluginsClassName = classNames(
       Styles.pluginsWrapper,
-      horizontalMenu && Styles.horizontalMenu,
-      this.showSearch && !isMobile && Styles.withSearch
+      this.horizontalMenu && Styles.horizontalMenu,
+      this.showSearch && Styles.withSearch
     );
   }
   onChange = value => this.setState({ value }, () => this.container?.scrollTo(0, 0));
@@ -35,10 +31,10 @@ export default class AddPluginMenu extends Component {
       structure,
       hidePopup,
       t,
-      splitToSections,
-      horizontalMenu,
+      addPluginMenuConfig,
+      isMobile,
     } = this.props;
-    const { showSearch, wrapperClassName, pluginsClassName } = this;
+    const { showSearch, wrapperClassName, pluginsClassName, horizontalMenu } = this;
     const { value } = this.state;
     return (
       <div
@@ -66,7 +62,7 @@ export default class AddPluginMenu extends Component {
             searchTag={value}
             t={t}
             hidePopup={hidePopup}
-            splitToSections={!value && !horizontalMenu && splitToSections}
+            splitToSections={!value && addPluginMenuConfig?.splitToSections}
             horizontalMenu={horizontalMenu}
           />
         </div>
@@ -81,8 +77,6 @@ AddPluginMenu.propTypes = {
   structure: PropTypes.array.isRequired,
   t: PropTypes.func,
   hidePopup: PropTypes.func,
-  splitToSections: PropTypes.bool,
   isMobile: PropTypes.bool,
-  showSearch: PropTypes.bool,
-  horizontalMenu: PropTypes.bool,
+  addPluginMenuConfig: PropTypes.object,
 };

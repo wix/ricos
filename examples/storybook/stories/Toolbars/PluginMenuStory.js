@@ -5,7 +5,6 @@ import emptyContentState from '../../../../e2e/tests/fixtures/empty.json';
 import { Box, Dropdown, MultiSelectCheckbox } from 'wix-style-react';
 
 const optionsIdMap = {
-  0: undefined,
   1: true,
   2: false,
 };
@@ -14,11 +13,11 @@ export default () => {
   class PluginMenuStory extends Component {
     constructor(props) {
       super(props);
-      this.state = { editorKey: 0, selectedPlugins: ['all'] };
+      this.state = { editorKey: 0, selectedPlugins: ['all'], withAddPluginMenuConfig: true };
     }
 
     getCheckbox = () => {
-      const configOptions = ['showSearch', 'splitToSections', 'horizontalMenu'];
+      const configOptions = ['showSearch', 'splitToSections', 'withAddPluginMenuConfig'];
       const { editorKey } = this.state;
       return configOptions.map(option => (
         <Box padding="3px" key={option} align="space-between" maxWidth="400px">
@@ -27,7 +26,6 @@ export default () => {
             size="small"
             placeholder="Select an option"
             options={[
-              { id: 0, value: 'unset' },
               { id: 1, value: 'true' },
               { id: 2, value: 'false' },
             ]}
@@ -90,7 +88,7 @@ export default () => {
       const {
         showSearch,
         splitToSections,
-        horizontalMenu,
+        withAddPluginMenuConfig,
         editorKey,
         selectedPlugins,
       } = this.state;
@@ -98,7 +96,6 @@ export default () => {
         addPluginMenuConfig: {
           showSearch,
           splitToSections,
-          horizontalMenu,
         },
       };
 
@@ -114,7 +111,7 @@ export default () => {
                   key={editorKey}
                   contentState={emptyContentState}
                   rcProps={{
-                    toolbarsConfig,
+                    toolbarsConfig: withAddPluginMenuConfig && toolbarsConfig,
                     pluginsToDisplay: !selectedPlugins.includes('all') && selectedPlugins,
                   }}
                 />

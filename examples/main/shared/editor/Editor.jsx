@@ -34,7 +34,6 @@ export default class Editor extends PureComponent {
       addPluginMenuConfig: {
         showSearch: true,
         splitToSections: true,
-        horizontalMenu: false,
       },
     };
     const pluginsConfig = Plugins.getConfig(additionalConfig);

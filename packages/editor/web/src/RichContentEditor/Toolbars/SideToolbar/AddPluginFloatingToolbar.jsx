@@ -41,6 +41,7 @@ export default class AddPluginFloatingToolbar extends Component {
       helpers,
       t,
       isMobile,
+      addPluginMenuConfig,
     } = this.props;
     helpers.openModal({
       modalName: EditorModals.MOBILE_ADD_PLUGIN,
@@ -53,6 +54,7 @@ export default class AddPluginFloatingToolbar extends Component {
       pubsub,
       t,
       isMobile,
+      addPluginMenuConfig,
     });
   };
 
@@ -127,9 +129,7 @@ export default class AddPluginFloatingToolbar extends Component {
       setEditorState,
       structure,
       t,
-      showSearch,
-      horizontalMenu,
-      splitToSections,
+      addPluginMenuConfig,
       isMobile,
     } = this.props;
     const { isActive } = this.state;
@@ -153,7 +153,11 @@ export default class AddPluginFloatingToolbar extends Component {
       return (
         <div
           className={popoupClassNames}
-          style={{ ...this.state.style, top, width: horizontalMenu ? horizontalMenuWidth : 320 }}
+          style={{
+            ...this.state.style,
+            top,
+            width: addPluginMenuConfig ? 320 : horizontalMenuWidth,
+          }}
           ref={el => (this.popupRef = el)}
           onClick={e => e.stopPropagation()}
           role="none"
@@ -166,10 +170,8 @@ export default class AddPluginFloatingToolbar extends Component {
               setEditorState={setEditorState}
               structure={structure}
               hidePopup={this.hidePopup}
-              showSearch={showSearch}
-              splitToSections={splitToSections}
+              addPluginMenuConfig={addPluginMenuConfig}
               isMobile={isMobile}
-              horizontalMenu={horizontalMenu}
             />
           )}
         </div>
@@ -202,7 +204,7 @@ export default class AddPluginFloatingToolbar extends Component {
         {!isSSR() && (
           <PopupOffsetnHoc
             elementHeight={this.popupRef?.offsetHeight}
-            elementMarginTop={horizontalMenu ? -15 : -20}
+            elementMarginTop={addPluginMenuConfig ? -20 : -15}
             elementMarginBottom={45}
             targetElement={this.selectButton}
           >
@@ -223,7 +225,5 @@ AddPluginFloatingToolbar.propTypes = {
   isMobile: PropTypes.bool,
   helpers: PropTypes.object,
   t: PropTypes.func,
-  showSearch: PropTypes.bool,
-  splitToSections: PropTypes.bool,
-  horizontalMenu: PropTypes.bool,
+  addPluginMenuConfig: PropTypes.object,
 };

@@ -107,9 +107,11 @@ class RichContentEditor extends Component {
       siteDomain,
     } = this.props;
 
+    const { addPluginMenuConfig } = toolbarsConfig;
+
     const getToolbarSettings = () => [
-      { name: 'SIDE', ...toolbarsConfig.addPluginMenuConfig },
-      { name: 'MOBILE', ...toolbarsConfig.addPluginMenuConfig },
+      { name: 'SIDE', addPluginMenuConfig },
+      { name: 'MOBILE', addPluginMenuConfig },
     ];
     this.fixFileHandlersName(helpers);
 

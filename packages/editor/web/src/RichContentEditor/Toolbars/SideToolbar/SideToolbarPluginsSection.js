@@ -6,12 +6,6 @@ import { TOOLBARS } from 'wix-rich-content-editor-common';
 import { getSortedSections } from './utils';
 import classNames from 'classnames';
 
-const shouldSplitByDefault = structure => {
-  const numberOfBasicPlugins = structure.filter(
-    ({ section }) => section === 'BlockToolbar_Section_Basic'
-  ).length;
-  return numberOfBasicPlugins > 1 && structure.length - numberOfBasicPlugins > 1;
-};
 const SideToolbarPluginsSection = ({
   getEditorState,
   setEditorState,
@@ -19,7 +13,7 @@ const SideToolbarPluginsSection = ({
   searchTag,
   t,
   hidePopup,
-  splitToSections = shouldSplitByDefault(structure),
+  splitToSections,
   horizontalMenu,
 }) => {
   const pluginsForTag = searchTag && getPluginsForTag(searchTag, t);
