@@ -26,7 +26,7 @@ const generatePRComment = () => {
       (message +=
         'Please update the baseline file by running locally "npm run analyzeBundles" and push the changes.\n');
 
-    message += grewUpMessage && chalk.red(`Error: Packages that grew:\n${grewUpMessage}\n`);
+    message += grewUpMessage ? chalk.red(`Error: Packages that grew:\n${grewUpMessage}\n`) : '';
   }
   return message;
 };

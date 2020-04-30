@@ -1,6 +1,5 @@
 const { gitPRComment } = require('../gitPRComment');
 const { EXAMPLES_TO_DEPLOY, fqdn, generateSubdomain } = require('./deployUtils');
-// const core = require('@actions/core');
 
 const generateMessage = () => {
   let message = 'Deploy examples (Click below to open examples):';
