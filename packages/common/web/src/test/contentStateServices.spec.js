@@ -26,7 +26,7 @@ describe('Test content state services functions', () => {
     const newContentState = truncateContentState(contentState2, 2);
     expect(newContentState).toEqual(expectedContentState3);
   });
-  it('case: index out of bounds, should return the entered contentState', () => {
+  it('case: index is bigger than blocks length, should return the entered contentState', () => {
     const newContentState = truncateContentState(contentState, 6);
     expect(newContentState).toEqual(contentState);
   });
