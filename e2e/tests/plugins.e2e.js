@@ -33,7 +33,7 @@ describe('plugins', () => {
     after(() => cy.eyesClose());
 
     it(`render html plugin toolbar`, function() {
-      cy.loadWrapperEditorAndViewer('empty')
+      cy.loadEditorAndViewer('empty')
         .addHtml()
         .waitForHtmlToLoad();
       cy.get(`[data-hook*=${PLUGIN_TOOLBAR_BUTTONS.EDIT}]`)

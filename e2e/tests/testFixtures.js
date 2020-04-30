@@ -6,7 +6,7 @@ const testFixture = fixtureObj => {
     typeof fixtureObj === 'string' ? { fixture: fixtureObj } : fixtureObj;
 
   return it(`render ${fixture}`, function() {
-    cy.loadWrapperEditorAndViewer(fixture, plugins);
+    cy.loadEditorAndViewer(fixture, plugins);
     if (additionalCommands) {
       additionalCommands(cy);
     }

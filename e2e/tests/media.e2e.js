@@ -224,14 +224,12 @@ describe('plugins', () => {
     after(() => cy.eyesClose());
 
     it(`render upload modal`, function() {
-      cy.loadWrapperEditorAndViewer('empty');
+      cy.loadEditorAndViewer('empty');
       cy.openVideoUploadModal();
       cy.eyesCheckWindow(this.test.title);
     });
 
     it(`add a video from URL`, function() {
-      // TODO THIS ONE
-      // WRAPPER HAS ERROR
       cy.loadEditorAndViewer('empty');
       cy.openVideoUploadModal().addVideoFromURL();
       cy.shrinkPlugin(PLUGIN_COMPONENT.VIDEO);
@@ -270,14 +268,12 @@ describe('plugins', () => {
     after(() => cy.eyesClose());
 
     it(`render upload modal`, function() {
-      cy.loadWrapperEditorAndViewer('empty');
+      cy.loadEditorAndViewer('empty');
       cy.openSoundCloudModal();
       cy.eyesCheckWindow(this.test.title);
     });
 
     it(`add a soundcloud URL`, function() {
-      // TODO THIS ONE
-      // WRAPPER HAS ERROR
       cy.loadEditorAndViewer('empty');
       cy.openSoundCloudModal().addSoundCloud();
       cy.shrinkPlugin(PLUGIN_COMPONENT.SOUND_CLOUD);
