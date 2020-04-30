@@ -23,7 +23,6 @@ jobs:
       - name: deploy_PRComment
         id: deploy_PRComment
         run: npm run deployPRComment
-      - run: echo "${{ steps.deploy_PRComment.outputs.deploy_message }}"
 
   update_comment_pr:
     name: update PR comment
@@ -34,5 +33,5 @@ jobs:
       - uses: actions/checkout@v2
       - run: npm install
       - run: npm run updatePRComment
-        with:
+        inputs:
           message: '${{ needs.analyze-bundles.steps.bundleSizesPRComment.outputs.bundleSizes_message }} ${{ needs.deploy_examples.steps.deploy_PRComment.outputs.deploy_message }}'

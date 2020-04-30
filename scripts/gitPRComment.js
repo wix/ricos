@@ -15,7 +15,7 @@ function gitPRComment() {
     const client = new github.GitHub(REPO_TOKEN);
     client.pulls.update(request);
   }
-  console.log(message);
+  console.log('message: ' + message);
 }
 
 gitPRComment();
