@@ -1,0 +1,39 @@
+{
+	"name": "wix-rich-content-docs",
+	"version": "0.0.0",
+	"private": true,
+	"scripts": {
+		"start": "docusaurus start",
+		"build": "docusaurus build",
+		"swizzle": "docusaurus swizzle",
+		"deploy": "GIT_USER=mharsat USE_SSH=true docusaurus deploy"
+	},
+	"dependencies": {
+		"@docusaurus/core": "^2.0.0-alpha.50",
+		"@docusaurus/preset-classic": "^2.0.0-alpha.50",
+		"@docusaurus/theme-live-codeblock": "^2.0.0-alpha.39",
+		"classnames": "^2.2.6",
+		"docusaurus-plugin-sass": "^0.1.8",
+		"react": "^16.8.4",
+		"react-dom": "^16.8.4",
+		"wix-rich-content-editor": "^7.3.5",
+		"wix-rich-content-plugin-divider": "^7.3.5",
+		"wix-rich-content-plugin-video": "^7.3.5",
+		"wix-rich-content-wrapper": "^7.3.5"
+	},
+	"browserslist": {
+		"production": [
+			">0.2%",
+			"not dead",
+			"not op_mini all"
+		],
+		"development": [
+			"last 1 chrome version",
+			"last 1 firefox version",
+			"last 1 safari version"
+		]
+	},
+	"resolutions": {
+		"babel-plugin-dynamic-import-node": "2.3.0"
+	}
+}

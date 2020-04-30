@@ -1,3 +1,9 @@
+---
+id: RichContentEditorAPI
+title: RichContentEditor API
+sidebar_label: RichContentEditor API
+---
+
 # RichContentEditor API
 
 ## Introduction

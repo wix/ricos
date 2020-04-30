@@ -1,3 +1,9 @@
+---
+id: E2E
+title: E2E Tests
+sidebar_label: E2E Tests
+---
+
 # E2E Tests
 
 ## Running E2E tests

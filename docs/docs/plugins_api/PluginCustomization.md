@@ -1,3 +1,9 @@
+---
+id: PluginCustomization
+title: Plugin Customization
+sidebar_label: Plugin Customization
+---
+
 # Plugin Customization
 
 ## Motivation
