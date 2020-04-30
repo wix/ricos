@@ -2,7 +2,7 @@ const github = require('@actions/github');
 const core = require('@actions/core');
 
 function gitPRComment() {
-  const { REPO_TOKEN } = process.env;
+  const { REPO_TOKEN, INPUT_MESSAGE } = process.env;
   const message = core.getInput('message');
 
   if (REPO_TOKEN) {
@@ -16,6 +16,7 @@ function gitPRComment() {
     client.pulls.update(request);
   }
   console.log('message: ' + message);
+  console.log('INPUT_MESSAGE: ' + INPUT_MESSAGE);
 }
 
 gitPRComment();
