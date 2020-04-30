@@ -34,7 +34,7 @@ async function gitPRComment(message, header) {
     console.log('allComments: ' + JSON.stringify(allComments, null, 2));
     const comment = allComments.find(com => com.body.includes(header));
 
-    console.log('comment: ' + comment);
+    console.log('comment: ' + JSON.stringify(comment, null, 2));
 
     if (comment) {
       await octokit.issues.updateComment({
