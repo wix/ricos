@@ -1,30 +1,31 @@
 /* eslint-disable max-len */
 import { truncateContentState } from '../lib/contentStateServices';
-import { raw, emptyRaw, expectedRaw1, expectedRaw2 } from './index';
+import {
+  contentState,
+  emptyContentState,
+  expectedContentState1,
+  expectedContentState2,
+} from './index';
 
 describe('Test content state services functions', () => {
-  it('case: index = 0, should return empty raw', () => {
-    const newRaw = truncateContentState(raw, 0);
-    expect(newRaw).toEqual(emptyRaw);
+  it('case: index = 0, should return empty ContentState', () => {
+    const newContentState = truncateContentState(contentState, 0);
+    expect(newContentState).toEqual(emptyContentState);
   });
-
   it('case: valid index, should be equal ', () => {
-    const newRaw = truncateContentState(raw, 2);
-    expect(newRaw).toEqual(expectedRaw1);
+    const newContentState = truncateContentState(contentState, 2);
+    expect(newContentState).toEqual(expectedContentState1);
   });
-
   it('case: valid index, should be equal ', () => {
-    const newRaw = truncateContentState(raw, 5);
-    expect(newRaw).toEqual(expectedRaw2);
+    const newContentState = truncateContentState(contentState, 5);
+    expect(newContentState).toEqual(expectedContentState2);
   });
-
-  it('case: index out of bounds, should return the entered raw', () => {
-    const newRaw = truncateContentState(raw, 6);
-    expect(newRaw).toEqual(raw);
+  it('case: index out of bounds, should return the entered ContentState', () => {
+    const newContentState = truncateContentState(contentState, 6);
+    expect(newContentState).toEqual(contentState);
   });
-
-  it('case: index out of bounds, should return the entered raw', () => {
-    const newRaw = truncateContentState(raw, 100);
-    expect(newRaw).toEqual(raw);
+  it('case: index out of bounds, should return the entered ContentState', () => {
+    const newContentState = truncateContentState(contentState, 100);
+    expect(newContentState).toEqual(contentState);
   });
 });

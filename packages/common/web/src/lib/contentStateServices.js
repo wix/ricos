@@ -1,13 +1,14 @@
-import { convertFromRaw, convertToRaw, ContentState } from 'wix-rich-content-editor-common';
-
-export const truncateContentState = (raw, index) => {
-  const contentState = convertFromRaw(raw);
-  const blocks = contentState.getBlocksAsArray();
-  if (index < 0 || index > blocks.length) {
-    return raw;
+export const truncateContentState = (contentState, index) => {
+  if (index < 0 || index > contentState.blocks.length) {
+    return contentState;
   }
-  const truncateBlocks = blocks.slice(0, index);
-  const newContentState = ContentState.createFromBlockArray(truncateBlocks);
-  const newRaw = convertToRaw(newContentState);
-  return newRaw;
+  const newEntityMap = {};
+  const newBlocks = [...contentState.blocks.slice(0, index)];
+  newBlocks.forEach(block => {
+    if (block.entityRanges?.length > 0) {
+      const key = block.entityRanges[0].key;
+      newEntityMap[key] = contentState.entityMap[key];
+    }
+  });
+  return { ...contentState, blocks: newBlocks, entityMap: newEntityMap };
 };

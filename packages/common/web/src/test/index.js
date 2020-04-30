@@ -1,6 +1,6 @@
-import raw from './fixtures/raw.json';
-import emptyRaw from './fixtures/emptyRaw.json';
-import expectedRaw1 from './fixtures/expectedRaw1.json';
-import expectedRaw2 from './fixtures/expectedRaw2.json';
+import contentState from './fixtures/contentState.json';
+import emptyContentState from './fixtures/emptyContentState.json';
+import expectedContentState1 from './fixtures/expectedContentState1.json';
+import expectedContentState2 from './fixtures/expectedContentState2.json';
 
-export { raw, emptyRaw, expectedRaw1, expectedRaw2 };
+export { contentState, emptyContentState, expectedContentState1, expectedContentState2 };
