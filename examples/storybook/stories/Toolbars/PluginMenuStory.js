@@ -69,11 +69,10 @@ export default () => {
               { value: 'gif', id: 'gif' },
               { value: 'html', id: 'html' },
               { value: 'image', id: 'image' },
-              { value: 'link', id: 'link' },
               { value: 'map', id: 'map' },
               { value: 'soundCloud', id: 'soundCloud' },
               { value: 'video', id: 'video' },
-              { value: 'linkPreview', id: 'linkPreview' },
+              { value: 'socialEmbed', id: 'socialEmbed' },
               { value: 'verticalEmbed', id: 'verticalEmbed' },
             ]}
             selectedOptions={selectedPlugins}

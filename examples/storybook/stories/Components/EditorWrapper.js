@@ -124,7 +124,7 @@ const pluginsMap = {
   mentions: pluginMentions(),
   soundCloud: pluginSoundCloud(),
   video: pluginVideo(),
-  linkPreview: pluginLinkPreview(configs.linkPreview),
+  socialEmbed: pluginLinkPreview(configs.linkPreview),
   undoRedo: pluginUndoRedo(),
   textColor: pluginTextColor(),
   highlight: pluginTextHighlight(),
