@@ -20,7 +20,7 @@ export default () => {
       const configOptions = ['showSearch', 'splitToSections', 'withAddPluginMenuConfig'];
       const { editorKey } = this.state;
       return configOptions.map(option => (
-        <Box padding="3px" key={option} align="space-between" maxWidth="400px">
+        <Box padding="3px" key={option} align="space-between" maxWidth="440px">
           {`${option}: `}
           <Dropdown
             size="small"
