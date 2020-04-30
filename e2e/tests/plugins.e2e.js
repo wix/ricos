@@ -104,7 +104,7 @@ describe('plugins', () => {
     before('load editor', function() {
       eyesOpen(this);
       cy.switchToDesktop();
-      cy.loadEditorAndViewer('file-upload');
+      cy.loadWrapperEditorAndViewer('file-upload');
     });
 
     after(() => cy.eyesClose());
