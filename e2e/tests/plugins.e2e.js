@@ -52,7 +52,8 @@ describe('plugins', () => {
     afterEach(() => cy.eyesClose());
 
     it(`render plugin toolbar and change styling`, () => {
-      cy.loadWrapperEditorAndViewer('divider')
+      //cy.loadWrapperEditorAndViewer('divider')
+      cy.loadEditorAndViewer('divider')
         .openPluginToolbar(PLUGIN_COMPONENT.DIVIDER)
         .openDropdownMenu();
       cy.eyesCheckWindow('render divider plugin toolbar');
@@ -87,7 +88,8 @@ describe('plugins', () => {
     after(() => cy.eyesClose());
 
     it(`render map plugin toolbar and settings`, () => {
-      cy.loadWrapperEditorAndViewer('map');
+      //cy.loadWrapperEditorAndViewer('map');
+      cy.loadEditorAndViewer('map');
       cy.get('.dismissButton').eq(1);
       cy.openPluginToolbar(PLUGIN_COMPONENT.MAP);
       cy.eyesCheckWindow('render map plugin toolbar');
@@ -106,7 +108,8 @@ describe('plugins', () => {
     after(() => cy.eyesClose());
 
     it(`render file-upload plugin toolbar`, function() {
-      cy.loadWrapperEditorAndViewer('file-upload');
+      // cy.loadWrapperEditorAndViewer('file-upload');
+      cy.loadditorAndViewer('file-upload');
       cy.openPluginToolbar(PLUGIN_COMPONENT.FILE_UPLOAD);
       cy.eyesCheckWindow(this.test.title);
     });
@@ -145,7 +148,8 @@ describe('plugins', () => {
 
     function testAtomicBlockAlignment(align) {
       it(`align atomic block ${align}`, function() {
-        cy.loadWrapperEditorAndViewer('images').alignImage(align);
+        // cy.loadWrapperEditorAndViewer('images').alignImage(align);
+        cy.loadEditorAndViewer('images').alignImage(align);
         cy.eyesCheckWindow(this.test.title);
       });
     }
@@ -240,7 +244,8 @@ describe('plugins', () => {
 
     after(() => cy.eyesClose());
     it('create nested lists using tab & shift-tab', function() {
-      cy.loadWrapperEditorAndViewer()
+      // cy.loadWrapperEditorAndViewer()
+      cy.loadEditorAndViewer()
         .enterParagraphs(['1. Hey I am an ordered list in depth 1.'])
         .tab()
         .enterParagraphs(['\n Hey I am an ordered list in depth 2.'])

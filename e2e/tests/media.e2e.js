@@ -68,7 +68,8 @@ describe('plugins', () => {
     after(() => cy.eyesClose());
 
     context('image full screen', () => {
-      beforeEach('load editor', () => cy.loadWrapperEditorAndViewer('images'));
+      //beforeEach('load editor', () => cy.loadWrapperEditorAndViewer('images'));
+      beforeEach('load editor', () => cy.loadEditorAndViewer('images'));
 
       it(`expand image on full screen`, function() {
         cy.get(`[data-hook=${PLUGIN_COMPONENT.IMAGE}]:last`)
@@ -80,7 +81,8 @@ describe('plugins', () => {
 
     context('gallery full screen', () => {
       it(`expand gallery image on full screen`, function() {
-        cy.loadWrapperEditorAndViewer('gallery')
+        //cy.loadWrapperEditorAndViewer('gallery')
+        cy.loadEditorAndViewer('gallery')
           .get(`[data-hook=${'image-item'}]:first`)
           .get(`[data-hook=${'image-item'}]`)
           .eq(1);
@@ -298,7 +300,8 @@ describe('plugins', () => {
     after(() => cy.eyesClose());
 
     it(`render giphy plugin toolbar`, function() {
-      cy.loadWrapperEditorAndViewer('giphy');
+      //cy.loadWrapperEditorAndViewer('giphy');
+      cy.loadEditorAndViewer('giphy');
       cy.openPluginToolbar(PLUGIN_COMPONENT.GIPHY).clickToolbarButton(
         PLUGIN_TOOLBAR_BUTTONS.SMALL_CENTER
       );
@@ -308,7 +311,8 @@ describe('plugins', () => {
     });
 
     it(`should auto focus on add gif`, function() {
-      cy.loadWrapperEditorAndViewer('empty');
+      //cy.loadWrapperEditorAndViewer('empty');
+      cy.loadEditorAndViewer('empty');
       cy.addGif().get('[data-hook=giphyPluginToolbar]');
       cy.window().then(win => {
         win.__CONTENT_SNAPSHOT__ = { mock: true };
@@ -331,7 +335,8 @@ describe('plugins', () => {
     it(`render some emojies`, function() {
       // TODO THIS ONE
       // WRAPPER HAS ERROR
-      cy.loadWrapperEditorAndViewer('empty');
+      //cy.loadWrapperEditorAndViewer('empty');
+      cy.loadEditorAndViewer('empty');
       cy.get(`button[data-hook=${PLUGIN_COMPONENT.EMOJI}]`).click();
       cy.eyesCheckWindow('render emoji modal');
       cy.get(`[data-hook=emoji-5]`).click();
