@@ -46,7 +46,7 @@ const babel = () => {
 
 const typescript = () => {
   const typescript = require('rollup-plugin-typescript2');
-  return typescript({ useTsconfigDeclarationDir: true });
+  return typescript({ useTsconfigDeclarationDir: true, clean: true });
 };
 
 const commonjs = () => {
@@ -165,7 +165,7 @@ if (!IS_DEV_ENV) {
   _plugins = [..._plugins, replace(), uglify()];
 }
 
-if (process.env.MODULE_ANALYZE) {
+if (process.env.MODULE_ANALYZE_EDITOR || process.env.MODULE_ANALYZE_VIEWER) {
   _plugins = [..._plugins, visualizer()];
 }
 

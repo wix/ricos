@@ -76,10 +76,9 @@ $opacityTransition: opacity 0.8s ease;
 }
 
 .imageHighres {
-  position: relative;
+  position: absolute;
   top: 0;
   left: 0;
-  position: absolute;
   opacity: 0;
   transition: $opacityTransition;
 

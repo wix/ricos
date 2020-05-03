@@ -51,6 +51,7 @@ const getBlocks = (contentState, mergedStyles, textDirection, context, addAnchor
       getBlockStyleClasses,
       blockDataToStyle,
       contentState,
+      context,
     };
     return <List {...props} />;
   };

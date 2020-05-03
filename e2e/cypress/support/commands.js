@@ -76,7 +76,7 @@ function disableTransitions() {
 }
 
 function hideAllTooltips() {
-  cy.get('[data-id="tooltip"]').invoke('hide'); //uses jquery to set display: none
+  cy.get('[data-id="tooltip"]', { timeout: 90000 }).invoke('hide'); //uses jquery to set display: none
 }
 
 Cypress.Commands.add('loadEditorAndViewer', (fixtureName, plugins) =>
@@ -295,8 +295,10 @@ Cypress.Commands.add('openGalleryAdvancedSettings', () => {
   cy.get(`[data-hook=${PLUGIN_TOOLBAR_BUTTONS.ADV_SETTINGS}]:first`).click();
 });
 
-Cypress.Commands.add('shrinkPlugin', () => {
-  cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.SMALL_CENTER);
+Cypress.Commands.add('shrinkPlugin', dataHook => {
+  cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.SMALL_CENTER)
+    .get(`[data-hook=${dataHook}]:first`, { timeout: 15000 })
+    .should('have.css', 'width', '350px');
 });
 
 Cypress.Commands.add('pluginSizeBestFit', () => {
@@ -516,8 +518,8 @@ Cypress.Commands.add('insertLinkAndEnter', url => {
   cy.moveCursorToEnd()
     .type(url)
     .type('{enter}')
-    .wait(100);
-  cy.moveCursorToEnd();
+    .moveCursorToEnd()
+    .wait(200);
 });
 
 Cypress.Commands.add('triggerLinkPreviewViewerUpdate', () => {

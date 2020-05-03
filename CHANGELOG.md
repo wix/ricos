@@ -15,18 +15,52 @@
     Click to see more.
   </summary>
 
-### :rocket: New Feature
-- `button`
-  - [#953](https://github.com/wix-incubator/rich-content/pull/953) action button: by passing onClick callback, on click triggers it
-### :bug: Bug Fix
-- `editor`
-  - [#951](https://github.com/wix-incubator/rich-content/pull/951) fix: tooltip opacity
-### :house: Internal
-- `editor`
-  - [#936](https://github.com/wix-incubator/rich-content/pull/936) arrangement of inline toolbar buttons  
 
 </details>
 <hr/>
+
+## 7.4.6 (May 3, 2020)
+### :bug: Bug Fix
+- `editor-common`
+  - [#994](https://github.com/wix-incubator/rich-content/pull/994) cursor doesn't disappear when adding plugin
+- `gallery`
+  - [#990](https://github.com/wix-incubator/rich-content/pull/990) height not updating when changing width
+### :house: Internal
+- `wrapper`
+  - [#980](https://github.com/wix-incubator/rich-content/pull/980) createEmpty import
+- `general`
+  - [#965](https://github.com/wix-incubator/rich-content/pull/965) fix: gitPRComment overrides the content of the PR comment
+  - [#985](https://github.com/wix-incubator/rich-content/pull/985) enable publishing with custom npm tag
+  - [#988](https://github.com/wix-incubator/rich-content/pull/988) Adding 'build:analyze:viewer' and 'build:analyze:editor' scripts instead of 'build:analyze' script
+
+## 7.4.5 (Apr 28, 2020)
+### :rocket: New Feature
+- `button`
+  - [#953](https://github.com/wix-incubator/rich-content/pull/953) action button - button with onClick callback
+- `image` `video`
+  - [#972](https://github.com/wix-incubator/rich-content/pull/972) handle upload error - show message on block
+### :bug: Bug Fix
+- `editor`
+  - [#951](https://github.com/wix-incubator/rich-content/pull/951) fix: tooltip opacity
+  - [#957](https://github.com/wix-incubator/rich-content/pull/957) fix: command+ctrl+j creates code block on mac
+- `map`
+  - [#959](https://github.com/wix-incubator/rich-content/pull/959) modal settings fixed (convention) & made compatible with wrapper palette colors
+- `emoji`
+  - [#973](https://github.com/wix-incubator/rich-content/pull/973) was using old editor and editor-common dependencies
+- `video`
+  - [#974](https://github.com/wix-incubator/rich-content/pull/960) video file upload not working when block isn't selected
+- `gallery`
+  - [#963](https://github.com/wix-incubator/rich-content/pull/963) fix:Gallery doesn't show more then 3 images on load 
+### :house: Internal
+- `editor`
+  - [#936](https://github.com/wix-incubator/rich-content/pull/936) arrangement of inline toolbar buttons
+- `wrapper`
+  - [#956](https://github.com/wix-incubator/rich-content/pull/956) bi getData will now contain `forPublish` argument
+  - [#966](https://github.com/wix-incubator/rich-content/pull/966) passing RCE/RCV to wrapper is no longer required
+  - [#975](https://github.com/wix-incubator/rich-content/pull/975) ssr fix - render suspense after mount
+  - [#977](https://github.com/wix-incubator/rich-content/pull/977) wrapper exports its type declarations
+- `preview`
+  - [#962](https://github.com/wix-incubator/rich-content/pull/962) interactions improved; read-more displays html
 
 ## 7.3.5 (Apr 21, 2020)
 ### :bug: Bug Fix
@@ -71,7 +105,7 @@
 - `vertical-embed`
   - [#728](https://github.com/wix-incubator/rich-content/pull/728) Vertical Embed Plugin - alpha verison
 - `wrapper`
-  - [#935](https://github.com/wix-incubator/rich-content/pull/935) back-office theme will appear as default theme for now  
+  - [#935](https://github.com/wix-incubator/rich-content/pull/935) back-office theme will appear as default theme for now
 
 ## 7.3.2 (Apr 16, 2020)
 ### :bug: Bug Fix

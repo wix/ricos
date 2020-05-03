@@ -1,4 +1,5 @@
 import { DEFAULTS } from '../video-component';
+// @flow
 import {
   getModalStyles,
   TOOLBARS,
@@ -11,7 +12,7 @@ import {
   ExtendedSelectionModalCustomStyle,
 } from './selectionModalCustomStyles';
 
-export default ({ helpers, t, settings, isMobile }) => {
+const createInsertButtons /*: CreateInsertButtons */ = ({ helpers, t, settings, isMobile }) => {
   //apply the extended input modal styles if handleFileSelection is avilable in plugin config
   //& on mobile if enableCustomUploadOnMobile is set to true, otherwise the normal modal styles is applied
   const icon = settings?.toolbar?.icons?.InsertPluginButtonIcon || InsertPluginIcon;
@@ -38,3 +39,5 @@ export default ({ helpers, t, settings, isMobile }) => {
     },
   ];
 };
+
+export default createInsertButtons;

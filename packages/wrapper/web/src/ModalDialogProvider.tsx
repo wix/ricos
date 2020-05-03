@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, {
   Suspense,
   Children,
@@ -8,7 +9,6 @@ import React, {
   FunctionComponent,
 } from 'react';
 import { modalStyles } from './themeStrategy/defaults';
-import { RichContentProps, EditorDataInstance } from './RichContentProps';
 import { RichContentEditor } from 'wix-rich-content-editor';
 import { createDataConverter } from './utils';
 import { EditorState } from 'draft-js';
@@ -60,8 +60,11 @@ export default class ModalDialogProvider extends Component<Props, State> {
     const EditorModal = React.lazy(() =>
       import(/* webpackChunkName: "rce-EditorModal"  */ `./EditorModal`)
     );
-    const { MobileToolbar, TextToolbar } = this.editor.getToolbars();
-    this.setState({ MobileToolbar, TextToolbar, EditorModal });
+    if (this.editor) {
+      const { MobileToolbar, TextToolbar } = this.editor.getToolbars();
+      this.setState({ MobileToolbar, TextToolbar, EditorModal });
+    }
+    this.setState({ EditorModal });
   }
 
   openModal = data => {
@@ -90,9 +93,9 @@ export default class ModalDialogProvider extends Component<Props, State> {
   getToolbars = () => this.editor.getToolbars();
   focus = () => this.editor.focus();
   blur = () => this.editor.blur();
-  getData = (postId: string) => {
+  getData = (postId?: string, forPublish?: boolean) => {
     const { getContentState } = this.dataInstance;
-    if (postId) {
+    if (postId && forPublish) {
       this.editor.publish(postId); //async
     }
     return {
@@ -113,7 +116,6 @@ export default class ModalDialogProvider extends Component<Props, State> {
     } = this.props;
 
     const StaticToolbar = MobileToolbar || TextToolbar;
-    const StaticToolbarPortal = this.StaticToolbarPortal;
 
     return (
       <Fragment>
@@ -125,7 +127,6 @@ export default class ModalDialogProvider extends Component<Props, State> {
           React.cloneElement(children, {
             ...this.childProps,
             onChange: this.onChange,
-            textToolbarType: isMobile ? 'inline' : textToolbarType,
             ref: ref => (this.editor = ref),
           })
         )}
@@ -146,16 +147,16 @@ export default class ModalDialogProvider extends Component<Props, State> {
       </Fragment>
     );
   }
-
-  StaticToolbarPortal: FunctionComponent<{
-    StaticToolbar?: ElementType;
-    textToolbarContainer?: HTMLElement;
-  }> = ({ StaticToolbar, textToolbarContainer }) => {
-    if (!StaticToolbar) return null;
-
-    if (textToolbarContainer) {
-      return ReactDOM.createPortal(<StaticToolbar />, textToolbarContainer);
-    }
-    return <StaticToolbar />;
-  };
 }
+
+const StaticToolbarPortal: FunctionComponent<{
+  StaticToolbar?: ElementType;
+  textToolbarContainer?: HTMLElement;
+}> = ({ StaticToolbar, textToolbarContainer }) => {
+  if (!StaticToolbar) return null;
+
+  if (textToolbarContainer) {
+    return ReactDOM.createPortal(<StaticToolbar />, textToolbarContainer);
+  }
+  return <StaticToolbar />;
+};

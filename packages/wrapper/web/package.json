@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-wrapper",
-  "version": "7.3.5",
+  "version": "7.4.6",
   "author": {
     "name": "Alex Greenstein",
     "email": "alexgr@wix.com"
@@ -26,8 +26,11 @@
     "prebuild": "npm run clean",
     "build": "rollup --environment MODULE_NAME:wrapper -c ../../../rollup.config.wrapper.js",
     "build:dev": "cross-env NODE_ENV=development npm run build",
-    "build:analyze": "npm run build -- --environment MODULE_ANALYZE && open stats.html",
-    "watch": "cross-env NODE_ENV=development MODULE_WATCH=1 npm run build -- --watch.chokidar",
+    "build:analyze:editor": "npm run build -- --environment MODULE_ANALYZE_EDITOR  && open stats.html",
+    "build:analyze:viewer": "npm run build -- --environment MODULE_ANALYZE_VIEWER && open stats.html",
+    "watch:dev": "cross-env NODE_ENV=development MODULE_WATCH=1 npm run build -- --watch.chokidar",
+    "watch:flow": "css-modules-flow-types statics/styles -e scss && css-modules-flow-types statics/styles -e scss -w -s",
+    "watch": "npm run watch:dev & npm run watch:flow &",
     "lint": "eslint 'src/**/*.{js,jsx,ts,tsx,d.ts}'",
     "test": "jest --verbose",
     "test:watchAll": "jest --verbose --watchAll"
@@ -37,7 +40,6 @@
     "@types/react": "^16.9.29",
     "classnames": "^2.0.0",
     "lodash": "^4.0.0",
-    "prop-types": "^15.0.0",
     "react": "^16.6.3",
     "react-dom": "^16.6.3"
   },
@@ -46,7 +48,6 @@
     "@types/draft-js": "^0.10.38",
     "@types/jest": "^25.2.1",
     "@types/lodash": "^4.14.149",
-    "@types/prop-types": "^15.7.3",
     "@types/react-modal": "^3.10.5",
     "babel-jest": "^25.1.0",
     "classnames": "^2.0.0",
@@ -60,19 +61,19 @@
     "react-dom": "16.6.3",
     "rollup": "1.31.1",
     "ts-is-present": "^1.1.1",
-    "ts-jest": "^25.3.1"
+    "ts-jest": "^25.3.1",
+    "wix-rich-content-plugin-hashtag": "7.4.6"
   },
   "dependencies": {
     "jss": "^10.1.1",
     "jss-plugin-camel-case": "^10.1.1",
     "jss-preset-default": "^10.1.1",
-    "prop-types": "^15.6.2",
     "react-modal": "~3.4.1",
-    "wix-rich-content-common": "7.3.5",
-    "wix-rich-content-editor": "7.3.5",
-    "wix-rich-content-editor-common": "7.3.5",
-    "wix-rich-content-fullscreen": "7.3.5",
-    "wix-rich-content-viewer": "7.3.5"
+    "wix-rich-content-common": "7.4.6",
+    "wix-rich-content-editor": "7.4.6",
+    "wix-rich-content-editor-common": "7.4.6",
+    "wix-rich-content-fullscreen": "7.4.6",
+    "wix-rich-content-viewer": "7.4.6"
   },
   "jest": {
     "globals": {

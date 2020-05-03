@@ -168,7 +168,7 @@ export default function createAtomicPluginToolbar({
     }
 
     /*eslint-disable complexity*/
-    PluginToolbarButton = ({ button, key, themedStyle, separatorClassNames, tabIndex }) => {
+    PluginToolbarButton = ({ button, index, themedStyle, separatorClassNames, tabIndex }) => {
       const { alignment, size } = this.state.componentData.config || {};
       const icons = settings?.toolbar?.icons || {};
       const buttonByKey = BUTTONS_BY_KEY[button.type];
@@ -184,7 +184,7 @@ export default function createAtomicPluginToolbar({
         pubsub,
         onOverrideContent: this.onOverrideContent,
         theme: themedStyle,
-        key,
+        key: index,
         helpers,
         isMobile,
         componentState: this.state.componentState,
@@ -205,7 +205,7 @@ export default function createAtomicPluginToolbar({
               setLayoutProps={this.setLayoutProps}
               theme={themedStyle}
               isMobile={isMobile}
-              key={key}
+              key={index}
               t={t}
               tabIndex={tabIndex}
               {...buttonProps}
@@ -220,7 +220,7 @@ export default function createAtomicPluginToolbar({
               setLayoutProps={this.setLayoutProps}
               theme={themedStyle}
               isMobile={isMobile}
-              key={key}
+              key={index}
               t={t}
               tabIndex={tabIndex}
               {...buttonProps}
@@ -242,16 +242,16 @@ export default function createAtomicPluginToolbar({
               alignment={alignment}
               setLayoutProps={this.setLayoutProps}
               theme={themedStyle}
-              key={key}
+              key={index}
               t={t}
               tabIndex={tabIndex}
               {...buttonProps}
             />
           );
         case BUTTONS.SEPARATOR:
-          return <Separator className={separatorClassNames} key={key} />;
+          return <Separator className={separatorClassNames} key={index} />;
         case BUTTONS.HORIZONTAL_SEPARATOR:
-          return <Separator className={separatorClassNames} horizontal key={key} />;
+          return <Separator className={separatorClassNames} horizontal key={index} />;
         case BUTTONS.LINK:
           return <BlockLinkButton {...baseLinkProps} tooltipText={t('TextLinkButton_Tooltip')} />;
         case BUTTONS.LINK_PREVIEW: {
@@ -271,7 +271,7 @@ export default function createAtomicPluginToolbar({
               tabIndex={tabIndex}
               onClick={pubsub.get('deleteBlock')}
               theme={themedStyle}
-              key={key}
+              key={index}
               t={t}
               icon={icons.delete}
               {...buttonProps}
@@ -287,7 +287,7 @@ export default function createAtomicPluginToolbar({
               componentState={this.state.componentState}
               pubsub={pubsub}
               helpers={helpers}
-              key={key}
+              key={index}
               t={t}
               isMobile={isMobile}
               displayPanel={this.displayPanel}

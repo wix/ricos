@@ -12,11 +12,23 @@ export default class VideoSelectionInputModal extends Component {
     const { componentData } = this.props;
     this.state = {
       url: (!componentData.isCustomVideo && componentData.src) || '',
-      errorMsg: '',
     };
     this.id = `VideoUploadModal_FileInput_${Math.floor(Math.random() * 9999)}`;
-    const { onConfirm, onReplace } = this.props;
-    this.onConfirm = onConfirm || onReplace;
+    const { onConfirm, onReplace } = props;
+    this.blockKey = this.getFocusedBlockKey();
+    this.onConfirm = obj => {
+      this.setError(false);
+      if (onConfirm) {
+        const { newBlock } = onConfirm(obj);
+        this.blockKey = newBlock.key;
+      } else {
+        onReplace(obj, this.blockKey);
+      }
+    };
+  }
+
+  getFocusedBlockKey() {
+    return this.props.pubsub.get('focusedBlock');
   }
 
   onUrlChange = e => {
@@ -31,7 +43,7 @@ export default class VideoSelectionInputModal extends Component {
       this.setState({ showError: true });
       return;
     }
-    this.onConfirm({ ...componentData, src });
+    this.onConfirm({ ...componentData, tempData: false, src });
 
     helpers?.onVideoSelected?.(src, data => this.updateComponentData({ metadata: { ...data } }));
     this.closeModal();
@@ -67,7 +79,7 @@ export default class VideoSelectionInputModal extends Component {
   updateVideoComponent = ({ data }, componentData, isCustomVideo = false) => {
     const { pathname, thumbnail, url } = data;
     const src = pathname ? { pathname, thumbnail } : url;
-    this.setComponentData({ ...componentData, src, isCustomVideo, tempData: undefined });
+    this.setComponentData({ ...componentData, src, isCustomVideo, tempData: false });
   };
 
   addVideoComponent = ({ data }, componentData, isCustomVideo = false) => {
@@ -76,26 +88,34 @@ export default class VideoSelectionInputModal extends Component {
     this.onConfirm({ ...componentData, src, isCustomVideo });
   };
 
+  setError(error) {
+    this.props.pubsub.update('componentState', { error }, this.blockKey);
+  }
+
   setComponentData = data => {
-    this.props.pubsub.set('componentData', data);
+    this.props.pubsub.set('componentData', data, this.blockKey);
   };
 
   updateComponentData = data => {
-    this.props.pubsub.update('componentData', data);
+    this.props.pubsub.update('componentData', data, this.blockKey);
   };
 
   handleNativeFileUpload = () => {
     const { componentData, handleFileUpload: consumerHandleFileUpload } = this.props;
     const file = this.inputFile.files[0];
     this.loadLocalVideo(file);
-    consumerHandleFileUpload(file, ({ data, error }) =>
-      this.updateVideoComponent({ data, error }, componentData, true)
-    );
+    consumerHandleFileUpload(file, ({ data, error }) => {
+      if (error) {
+        this.setError(error);
+      } else {
+        this.updateVideoComponent({ data }, componentData, true);
+      }
+    });
     this.closeModal();
   };
 
   render() {
-    const { url, showError, errorMsg } = this.state;
+    const { url, showError } = this.state;
     const {
       t,
       handleFileSelection,
@@ -142,7 +162,6 @@ export default class VideoSelectionInputModal extends Component {
           >
             + {t('VideoUploadModal_CustomVideoClickText')}
           </label>
-          {errorMsg.length > 0 && <div className={styles.video_modal_error_msg}>{errorMsg}</div>}
         </div>
       </div>
     );
@@ -221,4 +240,5 @@ VideoSelectionInputModal.propTypes = {
   enableCustomUploadOnMobile: PropTypes.bool,
   isMobile: PropTypes.bool,
   languageDir: PropTypes.string,
+  blockKey: PropTypes.string,
 };
