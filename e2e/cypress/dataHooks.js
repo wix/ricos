@@ -5,10 +5,10 @@ export const INLINE_TOOLBAR_BUTTONS = {
   COLOR: 'TextColorButton',
   TITLE: 'textBlockStyleButton_Title',
   QUOTE: 'textBlockStyleButton_Quote',
-  ORDERED_LIST: 'textBlockStyleButton_Numbering',
-  UNORDERED_LIST: 'textBlockStyleButton_Bullets',
   PREV_INDENT: 'PrevIndentButton',
   NEXT_INDENT: 'NextIndentButton',
+  ORDERED_LIST: 'textBlockStyleButton_Numberedlist',
+  UNORDERED_LIST: 'textBlockStyleButton_Bulletedlist',
   ALIGNMENT: 'textDropDownButton_Alignment',
   TEXT_ALIGN_CENTER: 'textAlignmentButton_center',
   TEXT_ALIGN_LEFT: 'textAlignmentButton_left',
@@ -27,6 +27,10 @@ export const STATIC_TOOLBAR_BUTTONS = {
   PINTEREST: 'Pinterest_insert_plugin_button',
   YOUTUBE: 'YouTube_insert_plugin_button',
   INSTAGRAM: 'Instagram_insert_plugin_button',
+  EVENT: 'Events_insert_plugin_button',
+  PRODUCT: 'Stores_insert_plugin_button',
+  BOOKING: 'Bookings_insert_plugin_button',
+  GIPHY: 'GIF_insert_plugin_button',
 };
 
 export const SETTINGS_PANEL = {

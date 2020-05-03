@@ -1,36 +1,40 @@
-import { get, isEmpty } from 'lodash';
+// @flow
+import { isEmpty, get } from 'lodash';
 import { BUTTONS, PluginSettingsIcon, getModalStyles } from 'wix-rich-content-editor-common';
 import { Modals } from '../modals';
 import { MediaReplaceIcon, ImageEditorIcon } from '../icons';
 
-const removeEmpty = list => list.filter(item => !!item);
-
-export default ({ t, anchorTarget, relValue, uiSettings, isMobile, settings = {} }) => {
+const createInlineButtons /*: CreateInlineButtons*/ = ({
+  t,
+  anchorTarget,
+  relValue,
+  uiSettings,
+  isMobile,
+  settings = {},
+}) => {
   const icons = get(settings, 'toolbar.icons', {});
   const modalStyles = getModalStyles({ isMobile });
   const imageEditorStyles = getModalStyles({
     customStyles: { content: { maxWidth: '100%', background: 'transparent' } },
   });
   const { imageEditorWixSettings, onImageEditorOpen } = settings;
-  const imageEditorButton = imageEditorWixSettings
-    ? {
-        keyName: 'imageEditor',
-        type: BUTTONS.EXTERNAL_MODAL,
-        icon: icons.imageEditor || ImageEditorIcon,
-        modalName: Modals.IMAGE_EDITOR,
-        modalStyles: imageEditorStyles,
-        t,
-        imageEditorWixSettings,
-        onImageEditorOpen,
-        mobile: false,
-        tooltipTextKey: 'ImageEditorButton_Tooltip',
-        mapComponentDataToButtonProps: componentData => ({
-          disabled: isEmpty(componentData.src),
-        }),
-      }
-    : null;
+  const imageEditorButton = {
+    keyName: 'imageEditor',
+    type: BUTTONS.EXTERNAL_MODAL,
+    icon: icons.imageEditor || ImageEditorIcon,
+    modalName: Modals.IMAGE_EDITOR,
+    modalStyles: imageEditorStyles,
+    t,
+    imageEditorWixSettings,
+    onImageEditorOpen,
+    mobile: false,
+    tooltipTextKey: 'ImageEditorButton_Tooltip',
+    mapComponentDataToButtonProps: componentData => ({
+      disabled: isEmpty(componentData.src),
+    }),
+  };
 
-  const buttons = [
+  return [
     { keyName: 'sizeOriginal', type: BUTTONS.SIZE_ORIGINAL, mobile: false },
     { keyName: 'sizeSmallCenter', type: BUTTONS.SIZE_SMALL_CENTER, mobile: false },
     { keyName: 'sizeContent', type: BUTTONS.SIZE_CONTENT, mobile: false },
@@ -41,7 +45,7 @@ export default ({ t, anchorTarget, relValue, uiSettings, isMobile, settings = {}
     { keyName: 'alignRight', type: BUTTONS.SIZE_SMALL_RIGHT, mobile: false },
     { keyName: 'separator2', type: BUTTONS.SEPARATOR, mobile: false },
     { keyName: 'link', type: BUTTONS.LINK, mobile: false },
-    imageEditorButton,
+    ...(imageEditorWixSettings ? [imageEditorButton] : []),
     {
       keyName: 'settings',
       type: BUTTONS.EXTERNAL_MODAL,
@@ -70,6 +74,6 @@ export default ({ t, anchorTarget, relValue, uiSettings, isMobile, settings = {}
     },
     { keyName: 'delete', type: BUTTONS.DELETE, mobile: true },
   ];
-
-  return removeEmpty(buttons);
 };
+
+export default createInlineButtons;

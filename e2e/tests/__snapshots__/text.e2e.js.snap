@@ -822,33 +822,24 @@ exports[`text > allow to enter tab character #0`] =
   "entityMap": {}
 };
 
-exports[`text > allow to apply indent #0`] =
+exports[`text > allow to create link and open link toolbar (InlinePluginToolbar) #0`] =
 {
   "blocks": [
     {
       "data": {},
-      "depth": 4,
-      "entityRanges": [],
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 10,
+          "offset": 0
+        }
+      ],
       "inlineStyleRanges": [
         {
-          "length": 5,
-          "offset": 10,
-          "style": "UNDERLINE"
-        },
-        {
-          "length": 5,
-          "offset": 20,
-          "style": "ITALIC"
-        },
-        {
-          "length": 5,
-          "offset": 30,
-          "style": "BOLD"
-        },
-        {
           "length": 10,
-          "offset": 40,
-          "style": "BOLD"
+          "offset": 0,
+          "style": "UNDERLINE"
         }
       ],
       "key": 0,
@@ -916,6 +907,32 @@ exports[`text > allow to apply indent #0`] =
       "inlineStyleRanges": [],
       "key": 7,
       "text": "Nanotechnology immersion along the information highway will close the loop on focusing solely on the bottom line.",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "rel": "noopener",
+        "target": "_blank",
+        "url": "https://www.wix.com/"
+      },
+      "mutability": "MUTABLE",
+      "type": "LINK"
+    }
+  }
+};
+
+exports[`text > should paste plain text #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "This is pasted text",
       "type": "unstyled"
     }
   ],

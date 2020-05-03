@@ -15,4 +15,3 @@ export const LinkPreviewProviders = {
   YouTube: 'YouTube',
   TikTok: 'TikTok',
 };
-export const AUTO_GENERATED_LINK_PREVIEW_PROVIDER = 'wix';

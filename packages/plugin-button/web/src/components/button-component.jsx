@@ -14,6 +14,7 @@ class ButtonComponent extends PureComponent {
   render() {
     const {
       componentData: { button },
+      settings: { onClick },
     } = this.props;
     const { theme } = this.props;
     const buttonText = button.settings.buttonText;
@@ -33,6 +34,7 @@ class ButtonComponent extends PureComponent {
         rel={rel}
         buttonText={buttonText}
         theme={theme}
+        onClick={onClick}
       />
     );
   }

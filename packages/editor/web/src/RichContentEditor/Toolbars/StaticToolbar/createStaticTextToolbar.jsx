@@ -14,6 +14,7 @@ const getStaticTextTheme = theme => {
     ...rest
   } = theme || {};
 
+  /* eslint-disable @typescript-eslint/camelcase, camelcase*/
   return {
     toolbarStyles: {
       toolbar: classNames(toolbarStyles.textToolbar, toolbarTheme && toolbarTheme.textToolbar),
@@ -42,21 +43,19 @@ const getStaticTextTheme = theme => {
         toolbarStyles.textToolbar_responsiveArrowEnd,
         toolbarTheme && toolbarTheme.textToolbar_responsiveArrowEnd
       ),
-      //eslint-disable-next-line camelcase
       responsiveArrowStart_icon: classNames(
         toolbarStyles.textToolbar_responsiveArrowStart_icon,
         toolbarTheme && toolbarTheme.textToolbar_responsiveArrowStart_icon
       ),
-      //eslint-disable-next-line camelcase
       responsiveArrowEnd_icon: classNames(
         toolbarStyles.textToolbar_responsiveArrowEnd_icon,
         toolbarTheme && toolbarTheme.textToolbar_responsiveArrowEnd_icon
       ),
     },
     buttonStyles: {
-      inlineToolbarButton_wrapper: buttonTheme && buttonTheme.textToolbarButton_wrapper, //eslint-disable-line camelcase
-      inlineToolbarButton: buttonTheme && buttonTheme.textToolbarButton, //eslint-disable-line camelcase
-      inlineToolbarButton_icon: buttonTheme && buttonTheme.textToolbarButton_icon, //eslint-disable-line camelcase
+      inlineToolbarButton_wrapper: buttonTheme && buttonTheme.textToolbarButton_wrapper,
+      inlineToolbarButton: buttonTheme && buttonTheme.textToolbarButton,
+      inlineToolbarButton_icon: buttonTheme && buttonTheme.textToolbarButton_icon,
     },
     separatorStyles: {
       separator: classNames(

@@ -15,6 +15,11 @@ import { createVideoPlugin, VIDEO_TYPE } from 'wix-rich-content-plugin-video';
 import { createHtmlPlugin, HTML_TYPE } from 'wix-rich-content-plugin-html';
 import { createDividerPlugin, DIVIDER_TYPE } from 'wix-rich-content-plugin-divider';
 import {
+  createVerticalEmbedPlugin,
+  VERTICAL_EMBED_TYPE,
+  verticalEmbedProviders,
+} from 'wix-rich-content-plugin-vertical-embed';
+import {
   createExternalMentionsPlugin,
   EXTERNAL_MENTIONS_TYPE,
 } from 'wix-rich-content-plugin-mentions';
@@ -70,6 +75,7 @@ import { TOOLBARS, BUTTONS, DISPLAY_MODE } from 'wix-rich-content-editor-common'
 // import StaticToolbarDecoration from './Components/StaticToolbarDecoration';
 // import SideToolbarDecoration from './Components/SideToolbarDecoration';
 // import PluginToolbarDecoration from './Components/PluginToolbarDecoration';
+import { mockFetchVerticalEmbedFunc } from './Utils/verticalEmbedUtil';
 
 export const editorPluginsPartialPreset = [
   createImagePlugin,
@@ -94,8 +100,15 @@ export const editorPluginsPartialPreset = [
   createUndoRedoPlugin,
 ];
 
+export const editorPluginsEmbedsPreset = [
+  createLinkPlugin,
+  createLinkPreviewPlugin,
+  createVerticalEmbedPlugin,
+];
+
 export const editorPlugins = [
   createLinkPreviewPlugin,
+  createVerticalEmbedPlugin,
   createIndentPlugin,
   ...editorPluginsPartialPreset,
 ];
@@ -123,19 +136,10 @@ export const editorPluginsMap = {
   emoji: createEmojiPlugin,
   highlight: createTextHighlightPlugin,
   undoRedo: createUndoRedoPlugin,
+  verticalEmbed: createVerticalEmbedPlugin,
   partialPreset: editorPluginsPartialPreset,
+  embedsPreset: editorPluginsEmbedsPreset,
   all: editorPlugins,
-};
-
-const themeColors = {
-  color1: '#ffffff',
-  color2: '#303030',
-  color3: '#3a54b4',
-  color4: '#bfad80',
-  color5: '#bf695c',
-  color6: '#f7f7f7',
-  color7: '#000000',
-  color8: '#9a87ce',
 };
 
 const buttonDefaultPalette = ['#FEFDFD', '#D5D4D4', '#ABCAFF', '#81B0FF', '#0261FF', '#0141AA'];
@@ -204,7 +208,6 @@ const getLinkPanelDropDownConfig = () => {
 let userColors = [];
 
 const uiSettings = {
-  themeColors,
   linkPanel: {
     blankTargetToggleVisibilityFn: () => true,
     nofollowRelToggleVisibilityFn: () => true,
@@ -235,7 +238,6 @@ const videoHandlers = {
     const videoToUpload = videoWithRelativeUrl;
     setTimeout(() => {
       updateEntity({ data: videoToUpload });
-      //updateEntity({ error: { msg: 'Upload Failed' } });
       console.log('consumer uploaded ', videoToUpload);
     }, 500);
   },
@@ -260,17 +262,19 @@ const videoHandlers = {
     // If relative URL is provided, a function 'getVideoUrl' will be invoked to form a full URL.
     const videoToUpload = videoWithRelativeUrl;
     setTimeout(() => {
-      updateEntity({ data: videoToUpload });
-      //updateEntity({ error: { msg: 'Upload Failed' } });
+      updateEntity({ data: videoToUpload /*, error: { msg: 'upload failed' }*/ });
       console.log('consumer uploaded ', videoToUpload);
-    }, 1200000);
+    }, 2000);
   },
 };
+
+const { event, booking, product } = verticalEmbedProviders;
 
 const { Instagram, Twitter, YouTube, TikTok } = LinkPreviewProviders;
 const config = {
   [LINK_PREVIEW_TYPE]: {
-    enableEmbed: true,
+    enableEmbed: true, // [Twitter, YouTube]
+    enableLinkPreview: true,
     fetchData: mockFetchUrlPreviewData(),
     exposeEmbedButtons: [Instagram, Twitter, YouTube, TikTok],
   },
@@ -436,6 +440,15 @@ const config = {
     //   },
     // },
   },
+  [VERTICAL_EMBED_TYPE]: {
+    fetchFunctions: {
+      [product]: mockFetchVerticalEmbedFunc(product),
+      [event]: mockFetchVerticalEmbedFunc(event),
+      [booking]: mockFetchVerticalEmbedFunc(booking),
+    },
+    // exposeEmbedButtons: [product, event, booking],
+    exposeEmbedButtons: [product],
+  },
   // [EXTERNAL_EMOJI_TYPE]: {},
   [VIDEO_TYPE]: {
     toolbar: {
@@ -529,6 +542,8 @@ const config = {
     //     InsertPluginButtonIcon: MyCustomIcon,
     //   },
     // },
+
+    // onClick: true,
     palette: ['#FEFDFD', '#D5D4D4', '#ABCAFF', '#81B0FF', '#0261FF', '#0141AA'],
     selectionBackgroundColor: 'fuchsia',
     selectionBorderColor: '#FFF',

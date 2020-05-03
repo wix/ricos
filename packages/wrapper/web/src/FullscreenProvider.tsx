@@ -1,10 +1,10 @@
 import React, { Component, Fragment, Suspense, Children, ReactElement } from 'react';
-import { InitialState, RichContentProps } from './RichContentWrapperTypes';
+import { emptyState } from './utils';
 
 interface Props {
   children: ReactElement;
-  helpers?: RichContentProps['helpers'];
-  initialState: InitialState;
+  helpers?: Helpers;
+  initialState?: ContentState;
 }
 
 interface State {
@@ -14,7 +14,7 @@ interface State {
   Fullscreen?: any;
 }
 
-export default class FullscreenRenderer extends Component<Props, State> {
+export default class FullscreenProvider extends Component<Props, State> {
   constructor(props) {
     super(props);
     this.state = {
@@ -39,7 +39,7 @@ export default class FullscreenRenderer extends Component<Props, State> {
 
   setData = data => this.setState({ data });
 
-  addExpand = (helpers: object) => ({ ...helpers, onExpand: this.onExpand });
+  addExpand = (helpers: Helpers) => ({ ...helpers, onExpand: this.onExpand });
 
   render() {
     const { isExpanded, index, data, Fullscreen } = this.state;
@@ -52,7 +52,7 @@ export default class FullscreenRenderer extends Component<Props, State> {
           <Suspense fallback={<div />}>
             <Fullscreen
               dataHook={'WrapperFullScreen'}
-              initialState={initialState || { entityMap: {} }}
+              initialState={initialState || emptyState}
               isOpen={isExpanded}
               images={data?.images || []}
               onClose={this.onClose}

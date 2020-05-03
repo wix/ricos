@@ -91,6 +91,7 @@ export {
   setForceSelection,
   deleteBlockText,
   insertString,
+  createLinkEntityData,
 } from './Utils/draftUtils';
 export { isiOS } from './Utils/isiOS';
 export { getSelectionStyles } from './Utils/inlineStyleUtils';

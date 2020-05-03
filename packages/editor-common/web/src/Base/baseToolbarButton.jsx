@@ -150,8 +150,8 @@ class BaseToolbarButton extends React.Component {
           uiSettings,
           modalStyles: appliedModalStyles,
           buttonRef: event.target,
-          onReplace: data => {
-            pubsub.update('componentData', data);
+          onReplace: (data, blockKey) => {
+            pubsub.update('componentData', data, blockKey);
           },
           ...otherProps,
         };
@@ -258,13 +258,26 @@ class BaseToolbarButton extends React.Component {
   };
 
   renderDropdownButton = (buttonWrapperClassNames, buttonClassNames) => {
-    const { pubsub, componentData, onChange, getValue, t, tabIndex, ...props } = this.props;
+    const {
+      pubsub,
+      componentData,
+      theme,
+      onChange,
+      getValue,
+      t,
+      tabIndex,
+      tooltipTextKey,
+      isMobile,
+      ...props
+    } = this.props;
 
+    const tooltipText = t(tooltipTextKey);
     const decoratedOnChange = value => onChange(value, componentData, pubsub.store);
     const decoratedGetValue = () => getValue(pubsub.store, t);
+    const showTooltip = !isMobile && !isEmpty(tooltipText);
 
     /* eslint-disable jsx-a11y/no-static-element-interactions */
-    return (
+    const dropDownButton = (
       <div className={buttonWrapperClassNames}>
         <Dropdown
           className={buttonClassNames}
@@ -277,6 +290,14 @@ class BaseToolbarButton extends React.Component {
       </div>
     );
     /* eslint-enable jsx-a11y/no-static-element-interactions */
+    return (
+      <ToolbarButton
+        theme={theme}
+        showTooltip={showTooltip}
+        tooltipText={tooltipText}
+        button={dropDownButton}
+      />
+    );
   };
 
   render = () => {

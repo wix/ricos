@@ -107,6 +107,8 @@ class RichContentEditor extends Component {
       siteDomain,
     } = this.props;
 
+    this.fixFileHandlersName(helpers);
+
     this.contextualData = {
       theme: theme || {},
       t,
@@ -199,6 +201,16 @@ class RichContentEditor extends Component {
     if (this.props.textToolbarType !== nextProps.textToolbarType) {
       this.setState({ textToolbarType: nextProps.textToolbarType });
     }
+    this.fixFileHandlersName(nextProps.helpers);
+  }
+
+  fixFileHandlersName(helpers) {
+    if (helpers?.onFilesChange) {
+      // console.warn('helpers.onFilesChange is deprecated. Use helpers.handleFileUpload');
+      helpers.handleFileUpload = helpers.onFilesChange;
+      // eslint-disable-next-line fp/no-delete
+      delete helpers.onFilesChange;
+    }
   }
 
   // TODO: get rid of this ASAP!
@@ -278,6 +290,14 @@ class RichContentEditor extends Component {
   focus = () => setTimeout(this.editor.focus);
 
   blur = () => this.editor.blur();
+
+  publish = async postId => {
+    if (!this.props.helpers?.onPublish) {
+      return;
+    }
+    const { pluginsCount, pluginsDetails } = getPostContentSummary(this.state.editorState);
+    this.props.helpers.onPublish(postId, pluginsCount, pluginsDetails, Version.currentVersion);
+  };
 
   setEditor = ref => (this.editor = get(ref, 'editor', ref));
 

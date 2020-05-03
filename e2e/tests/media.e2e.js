@@ -49,7 +49,7 @@ describe('plugins', () => {
       cy.eyesCheckWindow(this.test.title + ' - add a link');
       cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE).pluginSizeOriginal();
       cy.eyesCheckWindow(this.test.title + '  - plugin original size');
-      cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE).shrinkPlugin();
+      cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE).shrinkPlugin(PLUGIN_COMPONENT.IMAGE);
       cy.eyesCheckWindow(this.test.title + '  - plugin toolbar');
       cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE).pluginSizeBestFit();
       cy.eyesCheckWindow(this.test.title + '  - plugin content size');
@@ -120,7 +120,7 @@ describe('plugins', () => {
         .get(`[data-hook=${'image-item'}]:first`)
         .get(`[data-hook=${'image-item'}]`)
         .eq(1);
-      cy.openPluginToolbar(PLUGIN_COMPONENT.GALLERY).shrinkPlugin();
+      cy.openPluginToolbar(PLUGIN_COMPONENT.GALLERY).shrinkPlugin(PLUGIN_COMPONENT.GALLERY);
       cy.waitForDocumentMutations();
       cy.eyesCheckWindow(this.test.title + ' toolbar');
       cy.openGalleryAdvancedSettings();
@@ -129,6 +129,7 @@ describe('plugins', () => {
 
     it('render gallery out of view', function() {
       cy.loadEditorAndViewer('gallery-out-of-view');
+      cy.get(`[data-hook=${PLUGIN_COMPONENT.GALLERY}]`).eq(3);
       cy.eyesCheckWindow(`${this.test.title} - out of view`);
       cy.scrollTo('bottom');
       cy.waitForDocumentMutations();
@@ -141,7 +142,7 @@ describe('plugins', () => {
         const anyImage = `[data-hook=${GALLERY_SETTINGS.IMAGE}]`;
         cy.loadEditorAndViewer('gallery')
           .openPluginToolbar(PLUGIN_COMPONENT.GALLERY)
-          .shrinkPlugin()
+          .shrinkPlugin(PLUGIN_COMPONENT.GALLERY)
           .get(`[data-hook=${'image-item'}]:first`)
           .get(`[data-hook=${'image-item'}]`)
           .eq(1)
@@ -173,7 +174,7 @@ describe('plugins', () => {
       it('allow to update media content', function() {
         cy.loadEditorAndViewer('gallery')
           .openPluginToolbar(PLUGIN_COMPONENT.GALLERY)
-          .shrinkPlugin()
+          .shrinkPlugin(PLUGIN_COMPONENT.GALLERY)
           .get(`[data-hook=${'image-item'}]:first`)
           .get(`[data-hook=${'image-item'}]`)
           .eq(1)
@@ -225,7 +226,7 @@ describe('plugins', () => {
 
     it('add a video from URL', function() {
       cy.openVideoUploadModal().addVideoFromURL();
-      cy.shrinkPlugin();
+      cy.shrinkPlugin(PLUGIN_COMPONENT.VIDEO);
       cy.focusEditor()
         .type('{uparrow}') //try to fix bug where sometimes it doesn't type
         .type('{uparrow}')
@@ -236,7 +237,7 @@ describe('plugins', () => {
 
     it('add a custom video', function() {
       cy.openVideoUploadModal().addCustomVideo();
-      cy.shrinkPlugin();
+      cy.shrinkPlugin(PLUGIN_COMPONENT.VIDEO);
       cy.focusEditor()
         .type('{uparrow}') //try to fix bug where sometimes it doesn't type
         .type('{uparrow}')
@@ -265,7 +266,7 @@ describe('plugins', () => {
 
     it('add a soundcloud URL', function() {
       cy.openSoundCloudModal().addSoundCloud();
-      cy.shrinkPlugin();
+      cy.shrinkPlugin(PLUGIN_COMPONENT.SOUND_CLOUD);
       cy.focusEditor()
         .type('{uparrow}') //try to fix bug where sometimes it doesn't type
         .type('{uparrow}')
@@ -293,6 +294,15 @@ describe('plugins', () => {
       );
       cy.get(`button[data-hook=${PLUGIN_TOOLBAR_BUTTONS.REPLACE}][tabindex=0]`).click();
       cy.get(`[data-hook=${GIPHY_PLUGIN.UPLOAD_MODAL}] img`);
+      cy.eyesCheckWindow(this.test.title);
+    });
+
+    it('should auto focus on add gif', function() {
+      cy.loadEditorAndViewer('empty');
+      cy.addGif().get('[data-hook=giphyPluginToolbar]');
+      cy.window().then(win => {
+        win.__CONTENT_SNAPSHOT__ = { mock: true };
+      });
       cy.eyesCheckWindow(this.test.title);
     });
   });

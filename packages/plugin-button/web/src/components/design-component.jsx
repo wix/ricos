@@ -176,7 +176,8 @@ class DesignComponent extends PureComponent {
           active={active}
           i={i}
           onClick={this.onButtonSampleClick.bind(this)}
-          {...this.props}
+          t={t}
+          theme={theme}
           style={style}
           buttonObj={design}
         />

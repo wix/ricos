@@ -1,7 +1,8 @@
-import styles from '../statics/styles/video-viewer.scss';
+// @flow
 import { mergeStyles } from 'wix-rich-content-common';
+import styles from '../statics/styles/video-viewer.scss';
 
-export const containerClassName = theme => {
+export const containerClassName /*: ClassNameStrategy*/ = theme => {
   const mergedStyles = mergeStyles({ styles, theme });
   return mergedStyles.video_container;
 };

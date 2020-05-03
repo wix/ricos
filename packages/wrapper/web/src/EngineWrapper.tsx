@@ -1,87 +1,71 @@
-import React, { Children, Fragment, ReactElement } from 'react';
-import FullscreenRenderer from './FullscreenRenderer';
-import ModalRenderer from './ModalRenderer';
+import React, { Children, Fragment, ReactElement, forwardRef, Ref } from 'react';
+import FullscreenProvider from './FullscreenProvider';
+import ModalDialogProvider from './ModalDialogProvider';
 import { merge } from 'lodash';
-import { EditorState } from 'draft-js';
-import { RichContentProps } from './RichContentWrapperTypes';
-import { RichContentEditor } from 'wix-rich-content-editor';
 
-interface Props {
-  rcProps?: RichContentProps;
-  plugins?: PluginConfig[];
-  theme?: string | object;
+interface Props extends RichContentWrapperProps {
   children: ReactElement;
-  isEditor?: boolean;
-  isMobile?: boolean;
+  initialState?: ContentState;
 }
 
 interface State {
-  ModalityProvider: typeof Fragment | typeof ModalRenderer | typeof FullscreenRenderer;
-  editorState?: EditorState;
-  MobileToolbar?: React.ElementType;
+  ModalityProvider: typeof Fragment | typeof ModalDialogProvider | typeof FullscreenProvider;
 }
 
 class EngineWrapper extends React.Component<Props, State> {
-  editor: typeof RichContentEditor;
-
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
     this.state = this.stateFromProps(props);
-    if (props.isEditor) {
-      import(
-        // eslint-disable-next-line max-len
-        /* webpackChunkName: "rce-editorStateConversion"  */ `wix-rich-content-editor/dist/lib/editorStateConversion`
-      ).then(module => this.setState({ editorState: module.createEmpty() }));
-    }
   }
 
-  stateFromProps(props) {
+  stateFromProps(props: Props) {
     const { isEditor, children } = props;
     const { closeModal, openModal, onExpand } = children.props?.helpers || {};
     if (isEditor && !closeModal && !openModal) {
-      return { ModalityProvider: ModalRenderer };
+      return { ModalityProvider: ModalDialogProvider };
     } else if (!isEditor && !onExpand) {
-      return { ModalityProvider: FullscreenRenderer };
+      return { ModalityProvider: FullscreenProvider };
     }
     return { ModalityProvider: Fragment };
   }
 
-  componentDidMount() {
-    const { isMobile, isEditor } = this.props;
-    if (isMobile && isEditor) {
-      const { MobileToolbar } = this.editor.getToolbars();
-      this.setState({ MobileToolbar });
-    }
-  }
-
-  handleChange = editorState => {
-    this.setState({ editorState });
-  };
-
   render() {
-    const { rcProps, children, isEditor, isMobile } = this.props;
-    const { ModalityProvider, MobileToolbar } = this.state;
+    const {
+      rcProps,
+      children,
+      forwardedRef,
+      isMobile,
+      textToolbarType,
+      textToolbarContainer,
+      placeholder,
+      initialState,
+    } = this.props;
+    const { ModalityProvider } = this.state;
 
-    const mergedRCProps = merge(rcProps, { isMobile }, children.props);
+    // any of RichContentWrapperProps that should be merged into child
+    const wrapperPropsToMerge: RichContentProps = {
+      isMobile,
+      textToolbarType: isMobile ? 'inline' : textToolbarType, // optimization - don't need static toolbar when isMobile
+      initialState,
+      placeholder,
+    };
 
-    if (isEditor) {
-      const { onChange } = mergedRCProps;
-      mergedRCProps.onChange = editorState => {
-        onChange?.(editorState);
-        this.handleChange(editorState);
-      };
-    }
+    const mergedRCProps = merge(rcProps, wrapperPropsToMerge, children.props);
 
     return (
-      <Fragment>
-        {MobileToolbar && <MobileToolbar />}
-        <ModalityProvider {...mergedRCProps}>
-          {Children.only(
-            React.cloneElement(children, { ...mergedRCProps, ref: ref => (this.editor = ref) })
-          )}
-        </ModalityProvider>
-      </Fragment>
+      <ModalityProvider
+        {...mergedRCProps}
+        ref={forwardedRef}
+        textToolbarContainer={textToolbarContainer}
+      >
+        {Children.only(React.cloneElement(children, { ...mergedRCProps }))}
+      </ModalityProvider>
     );
   }
 }
-export default EngineWrapper;
+
+export default forwardRef((props: Props, ref: Ref<ReactElement>) => (
+  <EngineWrapper {...props} forwardedRef={ref}>
+    {props.children}
+  </EngineWrapper>
+));

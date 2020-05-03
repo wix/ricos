@@ -190,7 +190,7 @@ export default ({ config, store }) => WrappedComponent =>
         horizontal,
         style,
         // using destructuring to make sure unused props are not passed down to the block
-        resizeSteps, // eslint-disable-line no-unused-vars
+        resizeSteps, // eslint-disable-line no-unused-vars, @typescript-eslint/no-unused-vars
         ...elementProps
       } = this.props;
       const { size, alignment } = this.getDataConfig();

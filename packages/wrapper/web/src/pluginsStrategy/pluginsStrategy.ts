@@ -1,6 +1,4 @@
-import { FinalTheme } from './../RichContentWrapperTypes';
 import { merge } from 'lodash';
-import { RichContentProps, InitialState } from '../RichContentWrapperTypes';
 
 const getPluginProps = (
   isEditor: boolean,
@@ -12,8 +10,8 @@ const getPluginProps = (
     decorators = [],
     inlineStyleMappers = [],
     theme = {},
-    initialState,
-  }: any
+  }: any,
+  contentState?: ContentState
 ): EditorPluginsStrategy | ViewerPluginsStrategy =>
   isEditor
     ? { config, plugins, ModalsMap }
@@ -22,7 +20,7 @@ const getPluginProps = (
         typeMappers,
         decorators: decorators.map(decorator => decorator(theme, config)),
         inlineStyleMappers:
-          initialState && inlineStyleMappers.map(mapper => mapper(config, initialState)),
+          contentState && inlineStyleMappers.map(mapper => mapper(config, contentState)),
       };
 
 function editorStrategy(prev: EditorPluginsStrategy, curr: EditorPluginConfig) {
@@ -38,7 +36,7 @@ function viewerStrategy(
   prev: ViewerPluginsStrategy,
   curr: ViewerPluginConfig,
   theme: object,
-  initialState?: InitialState
+  contentState?: ContentState
 ) {
   const { type, config, typeMapper, decorator, inlineStyleMapper } = curr;
   return {
@@ -48,8 +46,8 @@ function viewerStrategy(
       (decorator && prev.decorators.concat([decorator(theme, config)])) || prev.decorators,
     inlineStyleMappers:
       (inlineStyleMapper &&
-        initialState &&
-        prev.inlineStyleMappers.concat([inlineStyleMapper?.(config, initialState)])) ||
+        contentState &&
+        prev.inlineStyleMappers.concat([inlineStyleMapper?.(config, contentState)])) ||
       prev.inlineStyleMappers,
   };
 }
@@ -58,10 +56,9 @@ export default function pluginsStrategy(
   isEditor = false,
   plugins: PluginConfig[] = [],
   childProps: RichContentProps = {},
-  theme: FinalTheme['theme']
+  theme: Theme,
+  contentState?: ContentState
 ): PluginsStrategy {
-  // TODO: Should consider initialState to be explicitly required in child props
-  const { initialState } = childProps;
   let strategy: EditorPluginsStrategy | ViewerPluginsStrategy;
 
   if (isEditor) {
@@ -75,12 +72,12 @@ export default function pluginsStrategy(
       inlineStyleMappers: [],
     };
     strategy = plugins.reduce(
-      (prev, curr) => viewerStrategy(prev, curr, theme, initialState as InitialState),
+      (prev, curr) => viewerStrategy(prev, curr, theme, contentState),
       emptyStrategy
     );
   }
 
-  const childPluginProps = getPluginProps(isEditor, childProps) as PluginsStrategy;
+  const childPluginProps = getPluginProps(isEditor, childProps, contentState) as PluginsStrategy;
 
   return merge(strategy, childPluginProps);
 }

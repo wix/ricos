@@ -1,3 +1,4 @@
+// @flow
 import { translate } from 'react-i18next';
 import {
   BUTTONS,
@@ -19,7 +20,7 @@ import {
 import EditPanel from './HtmlEditPanel';
 
 const getAlignmentButtonPropsFn = getEditorBounds => ({ componentData }) => {
-  const editorBounds = getEditorBounds();
+  const editorBounds = getEditorBounds?.();
   const maxAlignmentWidth = editorBounds ? editorBounds.width - 1 : MAX_ALIGNMENT_WIDTH;
   return {
     disabled: (componentData?.config?.width || 0) > maxAlignmentWidth,
@@ -31,10 +32,7 @@ const TOOLTIP_TEXT_BY_SRC_TYPE = {
   [SRC_TYPE_URL]: 'HtmlPlugin_EditUrl_Tooltip',
 };
 
-/**
- * createInlineButtons
- */
-export default ({ settings = {}, getEditorBounds }) => {
+const createInlineButtons /*: CreateInlineButtons*/ = ({ settings = {}, getEditorBounds }) => {
   const {
     maxWidth,
     minWidth = MIN_WIDTH,
@@ -46,7 +44,7 @@ export default ({ settings = {}, getEditorBounds }) => {
     {
       type: BUTTONS.INLINE_PANEL,
       keyName: 'edit',
-      panelContent: translate(null)(EditPanel),
+      panelContent: translate()(EditPanel),
       icon: icons.edit || EditIcon,
       mapComponentDataToButtonProps: ({ src, srcType }) => ({
         tooltipTextKey: src ? TOOLTIP_TEXT_BY_SRC_TYPE[srcType] : 'HtmlPlugin_EditEmpty_Tooltip',
@@ -59,7 +57,7 @@ export default ({ settings = {}, getEditorBounds }) => {
       keyName: 'width',
       min: minWidth,
       mapStoreDataToPanelProps: () => {
-        const bounds = getEditorBounds();
+        const bounds = getEditorBounds?.();
         if (bounds && bounds.width) {
           return { max: maxWidth ? Math.min(maxWidth, bounds.width) : bounds.width };
         } else {
@@ -96,3 +94,5 @@ export default ({ settings = {}, getEditorBounds }) => {
     { type: BUTTONS.DELETE, keyName: 'delete', mobile: true },
   ];
 };
+
+export default createInlineButtons;
