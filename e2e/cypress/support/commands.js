@@ -518,8 +518,8 @@ Cypress.Commands.add('insertLinkAndEnter', url => {
   cy.moveCursorToEnd()
     .type(url)
     .type('{enter}')
-    .wait(100);
-  cy.moveCursorToEnd();
+    .moveCursorToEnd()
+    .wait(200);
 });
 
 Cypress.Commands.add('triggerLinkPreviewViewerUpdate', () => {
