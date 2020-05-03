@@ -565,7 +565,6 @@ const config = {
   },
   [LINK_BUTTON_TYPE]: { ...buttonConfig },
   [ACTION_BUTTON_TYPE]: {
-    onClick: true,
     insertButtonTooltip: 'Add an action button',
     ...buttonConfig,
   },

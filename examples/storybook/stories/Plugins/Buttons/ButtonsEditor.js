@@ -5,7 +5,6 @@ import { pluginLinkButton, pluginActionButton } from 'wix-rich-content-plugin-bu
 import PropTypes from 'prop-types';
 
 const config = {
-  onClick: true,
   insertButtonTooltip: 'Custom action tooltip',
 };
 
