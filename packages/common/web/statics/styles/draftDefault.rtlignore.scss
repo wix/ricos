@@ -12,55 +12,21 @@
     text-align: right;
     /*!rtl:end:ignore*/
   }
-  .public-DraftStyleDefault-block-depth0 .public-DraftStyleDefault-ltr,
-  .public-DraftStyleDefault-block-depth0.public-DraftStyleDefault-ltr{
-    
-  }
+  @mixin indent($depth, $indent) {
+    .public-DraftStyleDefault-block-depth#{$depth} {
+    &.public-DraftStyleDefault-ltr, & .public-DraftStyleDefault-ltr{
+      margin-left: #{$indent}em !important;
+    }}
   
-  .public-DraftStyleDefault-block-depth1 .public-DraftStyleDefault-ltr,
-  .public-DraftStyleDefault-block-depth1.public-DraftStyleDefault-ltr{
-    margin-left: 1.5em !important;
+    .public-DraftStyleDefault-block-depth#{$depth} {
+    &.public-DraftStyleDefault-rtl, & .public-DraftStyleDefault-rtl{
+      margin-left: #{$indent}em !important;
+    }}
   }
-  
-  .public-DraftStyleDefault-block-depth2 .public-DraftStyleDefault-ltr,
-  .public-DraftStyleDefault-block-depth2.public-DraftStyleDefault-ltr{
-    margin-left: 3em !important;
-  }
-  
-  .public-DraftStyleDefault-block-depth3 .public-DraftStyleDefault-ltr,
-  .public-DraftStyleDefault-block-depth3.public-DraftStyleDefault-ltr{
-    margin-left: 4.5em !important;
-  }
-  
-  .public-DraftStyleDefault-block-depth4 .public-DraftStyleDefault-ltr,
-  .public-DraftStyleDefault-block-depth4.public-DraftStyleDefault-ltr{
-    margin-left: 6em !important;
-  }
-
-  .public-DraftStyleDefault-block-depth0 .public-DraftStyleDefault-rtl,
-  .public-DraftStyleDefault-block-depth0.public-DraftStyleDefault-rtl{
-    margin-right: 0em !important;
-  }
-  
-  .public-DraftStyleDefault-block-depth1 .public-DraftStyleDefault-rtl,
-  .public-DraftStyleDefault-block-depth1.public-DraftStyleDefault-rtl{
-    margin-right: 1.5em !important;
-  }
-  
-  .public-DraftStyleDefault-block-depth2 .public-DraftStyleDefault-rtl,
-  .public-DraftStyleDefault-block-depth2.public-DraftStyleDefault-rtl{
-    margin-right: 3em !important;
-  }
-  
-  .public-DraftStyleDefault-block-depth3 .public-DraftStyleDefault-rtl,
-  .public-DraftStyleDefault-block-depth3.public-DraftStyleDefault-rtl{
-    margin-right: 4.5em !important;
-  }
-  
-  .public-DraftStyleDefault-block-depth4 .public-DraftStyleDefault-rtl,
-  .public-DraftStyleDefault-block-depth4.public-DraftStyleDefault-rtl{
-    margin-right: 6em !important;
-  }
+  @include indent(1, 1.5);
+  @include indent(2, 3);
+  @include indent(3, 4.5);
+  @include indent(4, 6);
   //End Text block class Names
 
 
