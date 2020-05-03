@@ -113,6 +113,7 @@ export const editorPluginsEmbedsPreset = [
 export const editorPlugins = [
   createLinkPreviewPlugin,
   createVerticalEmbedPlugin,
+  createActionButtonPlugin,
   ...editorPluginsPartialPreset,
 ];
 
@@ -565,6 +566,7 @@ const config = {
   [LINK_BUTTON_TYPE]: { ...buttonConfig },
   [ACTION_BUTTON_TYPE]: {
     onClick: true,
+    insertButtonTooltip: 'Add an action button',
     ...buttonConfig,
   },
   [TEXT_HIGHLIGHT_TYPE]: {
