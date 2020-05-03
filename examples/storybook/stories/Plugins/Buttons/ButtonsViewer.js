@@ -10,6 +10,7 @@ const typeMappers = [buttonTypeMapper];
 const viewerConfig = {
   [ACTION_BUTTON_TYPE]: {
     onClick: () => {
+      // eslint-disable-next-line no-alert
       window.alert('pass `onClick` prop callback to customize action');
     },
   },
