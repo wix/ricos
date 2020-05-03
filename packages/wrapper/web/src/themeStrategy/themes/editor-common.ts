@@ -12,7 +12,10 @@ export default function editorCommon(colors: PaletteColors) {
   return {
     //block focus
     hasFocus: blockActionColorSettings,
-    pluginContainer: { '&:hover': blockActionColorSettings },
+    pluginContainer: {
+      '&:hover': blockActionColorSettings,
+      '&$hasFocus': blockActionColorSettings,
+    },
 
     //selection-list.scss
     selectionListOption: {
