@@ -1,6 +1,4 @@
 import React, { Children, Fragment, ReactElement, forwardRef, Ref } from 'react';
-import { RichContentWrapperProps } from './RichContentWrapper';
-import { RichContentProps } from './RichContentProps';
 import FullscreenProvider from './FullscreenProvider';
 import ModalDialogProvider from './ModalDialogProvider';
 import { merge } from 'lodash';
