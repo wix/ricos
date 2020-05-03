@@ -2,5 +2,6 @@
     "blocks": [
     ],
     "entityMap": {
-    }
+    },
+    "VERSION": "7.3.5"
   }
