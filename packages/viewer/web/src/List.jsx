@@ -26,8 +26,8 @@ const List = ({
   getBlockStyleClasses,
   blockDataToStyle,
   contentState,
-  context,
   getBlockDepth,
+  context,
 }) => {
   const Component = ordered ? 'ol' : 'ul';
   const listType = ordered ? 'ordered' : 'unordered';
@@ -92,6 +92,7 @@ List.propTypes = {
   ordered: PropTypes.bool,
   textDirection: PropTypes.oneOf(['rtl', 'ltr']),
   contentState: PropTypes.object,
+  getBlockDepth: PropTypes.func,
   context: PropTypes.shape({
     theme: PropTypes.object.isRequired,
     anchorTarget: PropTypes.string.isRequired,
@@ -106,7 +107,6 @@ List.propTypes = {
     siteDomain: PropTypes.string,
     disableRightClick: PropTypes.bool,
   }).isRequired,
-  getBlockDepth: PropTypes.func,
 };
 
 export default List;
