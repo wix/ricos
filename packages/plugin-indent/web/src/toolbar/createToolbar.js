@@ -1,21 +1,23 @@
-import PrevIndentButton from './PrevIndentButton';
-import NextIndentButton from './NextIndentButton';
+import DecreaseIndentButton from './DecreaseIndentButton';
+import IncreaseIndentButton from './IncreaseIndentButton';
 
 export default function createToolbar({ isMobile }) {
   return {
     TextButtonMapper: () => ({
-      PrevIndent: {
-        component: PrevIndentButton,
+      decreaseIndent: {
+        component: DecreaseIndentButton,
         isMobile,
-        position: {
-          desktop: 10,
+        group: {
+          desktop: 1,
+          mobile: 1,
         },
       },
-      NextIndent: {
-        component: NextIndentButton,
+      increaseIndent: {
+        component: IncreaseIndentButton,
         isMobile,
-        position: {
-          desktop: 11,
+        group: {
+          desktop: 1,
+          mobile: 1,
         },
       },
     }),

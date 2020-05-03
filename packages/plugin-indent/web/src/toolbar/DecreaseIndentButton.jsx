@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { InlineToolbarButton, onIndent } from 'wix-rich-content-editor-common';
-import { INDENT_TYPE } from '../types';
-import PrevIndentPluginIcon from '../icons/PrevIndentPluginIcon.svg';
+import decreaseIndentPluginIcon from '../icons/decreaseIndentPluginIcon.svg';
 
-export default class PrevIndentButton extends Component {
+export default class DecreaseIndentButton extends Component {
   render() {
-    const { theme, isMobile, t, tabIndex, setEditorState, getEditorState, config } = this.props;
-    const icon =
-      config?.[INDENT_TYPE]?.toolbar?.icons?.InsertPluginButtonIcon || PrevIndentPluginIcon;
+    const { theme, isMobile, t, tabIndex, setEditorState, getEditorState } = this.props;
     return (
       <InlineToolbarButton
         onClick={() => {
@@ -20,16 +17,16 @@ export default class PrevIndentButton extends Component {
         }}
         theme={theme}
         isMobile={isMobile}
-        tooltipText={t('PrevIndentButton_Tooltip')}
-        dataHook={'PrevIndentButton'}
+        tooltipText={t('decreaseIndentButton_Tooltip')}
+        dataHook={'decreaseIndentButton'}
         tabIndex={tabIndex}
-        icon={icon}
+        icon={decreaseIndentPluginIcon}
       />
     );
   }
 }
 
-PrevIndentButton.propTypes = {
+DecreaseIndentButton.propTypes = {
   getEditorState: PropTypes.func.isRequired,
   setEditorState: PropTypes.func.isRequired,
   theme: PropTypes.object.isRequired,
