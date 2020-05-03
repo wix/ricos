@@ -3,52 +3,24 @@ import React, { Component } from 'react';
 import UrlInputModal from 'wix-rich-content-editor-common/dist/lib/UrlInputModal';
 import { contentTypeMap } from '../constants';
 export default class PostSelectionInputModal extends Component {
+  constructor(props) {
+    super(props);
+    const {
+      fetchFunctions,
+      componentData: { type },
+    } = props;
+    this.fetcher = fetchFunctions[type];
+    this.fetcher.get().then(products => this.setState({ products }));
+  }
   state = {
     errorMsg: '',
     products: [],
     selectedProduct: null,
   };
 
-  componentDidMount() {
-    this.search();
-  }
-
-  searchProducts = query => {
-    const {
-      fetchFunctions,
-      componentData: { type },
-      search,
-    } = this.props;
-    const abortController = new AbortController();
-    const fetchResutl = fetchFunctions[type](query, abortController.signal).then(res => {
-      return res;
-    });
-    const searchResults = search(type, query, abortController.signal).then(res => {
-      return res;
-    });
-    return {
-      abortController,
-      promise: query ? searchResults : fetchResutl,
-    };
-  };
-
-  currentAbortController = null;
-  async search(query) {
-    const { abortController, promise } = this.searchProducts(query);
-    if (this.currentAbortController) {
-      this.currentAbortController.abort();
-    }
-    this.currentAbortController = abortController;
-
-    try {
-      const products = await promise;
-      this.setState({ products });
-    } catch (e) {
-      if (e?.name === 'AbortError') {
-        return;
-      }
-      throw e;
-    }
+  async search(query = '') {
+    const products = await this.fetcher.search(query);
+    this.setState({ products });
   }
 
   onInputChange = inputString => {
@@ -107,5 +79,4 @@ PostSelectionInputModal.propTypes = {
   t: PropTypes.func,
   isMobile: PropTypes.bool,
   fetchFunctions: PropTypes.object.isRequired,
-  search: PropTypes.func,
 };
