@@ -15,6 +15,9 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+- `editor-common`
+  - [#994](https://github.com/wix-incubator/rich-content/pull/994) fix:When a plugin is created, the selection is on the plugin but you still have the curser in the text
 ### :house: Internal
 - `wrapper`
   - [#980](https://github.com/wix-incubator/rich-content/pull/980) hotfix: createEmpty import
