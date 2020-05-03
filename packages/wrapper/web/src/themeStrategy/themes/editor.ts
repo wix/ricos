@@ -33,7 +33,7 @@ export default function editor(colors: PaletteColors, utils: ThemeUtils) {
     },
     inlineToolbarDropdownButton: {
       '&:hover svg': {
-        fill: `${adaptedActionColor} !important`,
+        fill: adaptedActionColor,
       },
     },
   };
