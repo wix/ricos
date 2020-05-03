@@ -27,10 +27,7 @@ const createButtonPlugin = (type, config) => {
     [type]: settings = {},
     ...rest
   } = config;
-  if (type === ACTION_BUTTON_TYPE) {
-    settings.isActionButtonType = true;
-  }
-
+  settings.isActionButton = type === ACTION_BUTTON_TYPE;
   const styles = mergeStyles({ styles: Styles, theme });
   const rel = relValue === '_nofollow';
   const target = anchorTarget ? anchorTarget === '_blank' : true;
