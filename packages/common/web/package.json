@@ -58,8 +58,7 @@
     "jsonschema": "~1.2.4",
     "linkify-it": "~2.1.0",
     "react-i18next": "^7.0.0",
-    "react-intersection-observer": "~8.24.1",
-    "wix-rich-content-editor-common": "7.4.5"
+    "react-intersection-observer": "~8.24.1"
   },
   "unpkg": true,
   "publishConfig": {
