@@ -18,7 +18,7 @@ const PopupOffsetnHoc = ({
 
 PopupOffsetnHoc.propTypes = {
   children: PropTypes.any,
-  elementHeight: PropTypes.number.isRequired,
+  elementHeight: PropTypes.number,
   elementMarginTop: PropTypes.number.isRequired,
   elementMarginBottom: PropTypes.number.isRequired,
   targetElement: PropTypes.any,

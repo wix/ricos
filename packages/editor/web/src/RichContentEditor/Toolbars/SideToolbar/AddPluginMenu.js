@@ -32,7 +32,7 @@ export default class AddPluginMenu extends Component {
       hidePopup,
       t,
       addPluginMenuConfig,
-      isMobile,
+      isActive,
     } = this.props;
     const { showSearch, wrapperClassName, pluginsClassName, horizontalMenu } = this;
     const { value } = this.state;
@@ -43,7 +43,7 @@ export default class AddPluginMenu extends Component {
         ref={ref => (this.container = ref)}
         style={{ height: this.container?.offsetHeight }}
       >
-        {showSearch && (
+        {showSearch && isActive && (
           <div className={Styles.searchWrapper}>
             <TextSearchInput
               onClose={hidePopup}
@@ -79,4 +79,5 @@ AddPluginMenu.propTypes = {
   hidePopup: PropTypes.func,
   isMobile: PropTypes.bool,
   addPluginMenuConfig: PropTypes.object,
+  isActive: PropTypes.bool,
 };

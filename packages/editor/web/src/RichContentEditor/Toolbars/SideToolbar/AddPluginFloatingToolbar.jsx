@@ -163,17 +163,16 @@ export default class AddPluginFloatingToolbar extends Component {
           role="none"
           data-hook={'floatingAddPluginMenu'}
         >
-          {isActive && (
-            <AddPluginMenu
-              t={t}
-              getEditorState={getEditorState}
-              setEditorState={setEditorState}
-              structure={structure}
-              hidePopup={this.hidePopup}
-              addPluginMenuConfig={addPluginMenuConfig}
-              isMobile={isMobile}
-            />
-          )}
+          <AddPluginMenu
+            t={t}
+            getEditorState={getEditorState}
+            setEditorState={setEditorState}
+            structure={structure}
+            hidePopup={this.hidePopup}
+            addPluginMenuConfig={addPluginMenuConfig}
+            isMobile={isMobile}
+            isActive={isActive}
+          />
         </div>
       );
     };
