@@ -339,7 +339,6 @@ describe('plugins', () => {
         .then(() => {
           expect(stub.getCall(0)).to.be.calledWith('onClick event..');
         });
-
       cy.eyesCheckWindow(this.test.title);
     });
   });
