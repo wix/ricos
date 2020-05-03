@@ -14,8 +14,13 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
-
-
+  
+### :rocket: New Feature
+- `button`
+  - [#958](https://github.com/wix-incubator/rich-content/pull/958) action button plugin - button with onClick callback
+### :house: Internal
+- `storybook`
+  - [#958](https://github.com/wix-incubator/rich-content/pull/958) Buttons story added (Action & Link buttons)
 </details>
 <hr/>
 
@@ -35,8 +40,6 @@
 
 ## 7.4.5 (Apr 28, 2020)
 ### :rocket: New Feature
-- `button`
-  - [#953](https://github.com/wix-incubator/rich-content/pull/953) action button - button with onClick callback
 - `image` `video`
   - [#972](https://github.com/wix-incubator/rich-content/pull/972) handle upload error - show message on block
 ### :bug: Bug Fix

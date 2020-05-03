@@ -32,7 +32,7 @@ export default class ButtonInputModal extends Component {
       initialComponentData: { ...button },
       isHover: false,
       activeTab: settingsTabValue,
-      shouldShowLink: !this.props.settings.onClick,
+      shouldShowLink: !this.props.settings.isActionButton,
     };
 
     this.setScrollbarRef = element => {

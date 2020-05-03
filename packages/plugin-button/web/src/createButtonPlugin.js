@@ -2,14 +2,21 @@ import createToolbar from './toolbar';
 import { mergeStyles } from 'wix-rich-content-common';
 import { createBasePlugin } from 'wix-rich-content-editor-common';
 
-import { BUTTON_TYPE } from './constants';
+import { LINK_BUTTON_TYPE, ACTION_BUTTON_TYPE } from './constants';
 import { getDefaultComponentData } from './defaults';
 
 import Styles from '../statics/styles/default-styles.scss';
 import ButtonComponent from './components/button-component';
 
-const createButtonPlugin = (config = {}) => {
-  const type = BUTTON_TYPE;
+const createLinkButtonPlugin = (config = {}) => {
+  return createButtonPlugin(LINK_BUTTON_TYPE, config);
+};
+
+const createActionButtonPlugin = (config = {}) => {
+  return createButtonPlugin(ACTION_BUTTON_TYPE, config);
+};
+
+const createButtonPlugin = (type, config) => {
   const {
     helpers,
     theme,
@@ -20,27 +27,25 @@ const createButtonPlugin = (config = {}) => {
     [type]: settings = {},
     ...rest
   } = config;
-
+  settings.isActionButton = type === ACTION_BUTTON_TYPE;
   const styles = mergeStyles({ styles: Styles, theme });
   const rel = relValue === '_nofollow';
   const target = anchorTarget ? anchorTarget === '_blank' : true;
-
+  const customTooltip = settings.insertButtonTooltip;
   return createBasePlugin({
     component: ButtonComponent,
     settings,
     theme,
-    type: BUTTON_TYPE,
+    type,
     anchorTarget,
     relValue,
     toolbar: createToolbar({
+      settings,
       helpers,
       styles,
-      settings,
-      anchorTarget,
-      relValue,
-      isMobile,
-      theme,
       t,
+      isMobile,
+      customTooltip,
     }),
     helpers,
     t,
@@ -49,4 +54,4 @@ const createButtonPlugin = (config = {}) => {
   });
 };
 
-export { createButtonPlugin, BUTTON_TYPE };
+export { createLinkButtonPlugin, createActionButtonPlugin, LINK_BUTTON_TYPE, ACTION_BUTTON_TYPE };

@@ -113,6 +113,7 @@ export const PLUGIN_COMPONENT = {
   FILE_UPLOAD: 'fileUploadViewer',
   EMOJI: 'EmojiPlugin_InsertButton',
   LINK_PREVIEW: 'linkPreviewViewer',
+  BUTTON: 'buttonViewer',
 };
 
 export const DIVIDER_DROPDOWN_OPTIONS = {
@@ -120,4 +121,10 @@ export const DIVIDER_DROPDOWN_OPTIONS = {
   DOUBLE: 'double_dropdown_option',
   DASHED: 'dashed_dropdown_option',
   DOTTED: 'dotted_dropdown_option',
+};
+
+export const BUTTON_PLUGIN_MODAL = {
+  DESIGN_TAB: 'design_Tab',
+  BUTTON_SAMPLE: 'buttonSample_3',
+  DONE: SETTINGS_PANEL.DONE,
 };

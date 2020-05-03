@@ -1,5 +1,5 @@
-export { createButtonPlugin } from './createButtonPlugin';
+export { createActionButtonPlugin, createLinkButtonPlugin } from './createButtonPlugin';
 export { typeMapper as buttonTypeMapper } from './typeMapper';
-export { BUTTON_TYPE } from './constants';
+export { LINK_BUTTON_TYPE, ACTION_BUTTON_TYPE } from './constants';
 export { Modals, ModalsMap } from './modals';
-export { pluginButton } from './editor';
+export { pluginActionButton, pluginLinkButton } from './editor';
