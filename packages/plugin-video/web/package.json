@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-plugin-video",
-  "version": "7.4.5",
+  "version": "7.4.6",
   "author": {
     "name": "Jonathan Bachman",
     "email": "jonathanb@wix.com"
@@ -25,7 +25,8 @@
     "prebuild": "npm run clean",
     "build": "rollup --environment MODULE_NAME:plugin-video -c ../../../rollup.config.js",
     "build:dev": "cross-env NODE_ENV=development npm run build",
-    "build:analyze": "npm run build -- --environment MODULE_ANALYZE && open stats.html",
+    "build:analyze:editor": "npm run build -- --environment MODULE_ANALYZE_EDITOR  && open stats.html",
+    "build:analyze:viewer": "npm run build -- --environment MODULE_ANALYZE_VIEWER && open stats.html",
     "watch:dev": "cross-env NODE_ENV=development MODULE_WATCH=1 npm run build -- --watch.chokidar",
     "watch:flow": "css-modules-flow-types statics/styles -e scss && css-modules-flow-types statics/styles -e scss -w -s",
     "watch": "npm run watch:dev & npm run watch:flow &",
@@ -52,8 +53,8 @@
   },
   "dependencies": {
     "react-player": "~1.14.0",
-    "wix-rich-content-common": "7.4.5",
-    "wix-rich-content-editor-common": "7.4.5"
+    "wix-rich-content-common": "7.4.6",
+    "wix-rich-content-editor-common": "7.4.6"
   },
   "unpkg": true,
   "publishConfig": {

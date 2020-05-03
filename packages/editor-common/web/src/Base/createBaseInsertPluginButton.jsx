@@ -56,6 +56,7 @@ export default ({
         data,
         blockType
       );
+      window.getSelection().removeAllRanges();
       setEditorState(EditorState.forceSelection(newEditorState, newSelection));
       return { newBlock, newSelection, newEditorState };
     };
@@ -118,6 +119,7 @@ export default ({
           ? this.createBlocksFromFiles([files], galleryData, galleryType, updateEntity)
           : this.createBlocksFromFiles(files, button.componentData, blockType, updateEntity);
 
+        window.getSelection().removeAllRanges();
         this.props.setEditorState(EditorState.forceSelection(newEditorState, newSelection));
       }
     };
