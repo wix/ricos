@@ -28,8 +28,8 @@ export default function editor(colors: PaletteColors, utils: ThemeUtils) {
     },
     //inline-toolbar-dropdown-button.scss
     inlineToolbarButton_active: {
-      backgroundColor: `${adaptedActionColor} !important`,
-      fill: `${adaptedActionColor} !important`,
+      color: adaptedActionColor,
+      fill: adaptedActionColor,
     },
     inlineToolbarDropdownButton: {
       '&:hover svg': {
