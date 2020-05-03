@@ -37,7 +37,10 @@ class GalleryComponent extends PureComponent {
       !isEqual(componentData, nextProps.componentData) ||
       !isEqual(componentState, nextProps.componentState)
     ) {
-      this.setState(this.stateFromProps(nextProps));
+      this.setState(
+        { ...this.stateFromProps(nextProps) },
+        () => this.setState({ key: !this.state.key }) //fixes gallery height not updating correctly
+      );
     } else if (componentData.items?.length > 0) {
       this.onLoad(false);
     }
