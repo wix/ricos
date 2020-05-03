@@ -13,8 +13,11 @@ export default function editor(colors: PaletteColors, utils: ThemeUtils) {
       },
     },
     footerToolbar: {
-      background: `${bgColor} !important`,
+      '&$staticToolbar': {
+        background: bgColor,
+      },
     },
+    staticToolbar: {},
     footerToolbarButton_icon: {
       color: textColor,
     },
