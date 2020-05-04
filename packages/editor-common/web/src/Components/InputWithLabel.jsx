@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { omit } from 'lodash';
+import { omit, isEmpty } from 'lodash';
 import classNames from 'classnames';
 import InfoIcon from './InfoIcon';
 import { mergeStyles } from 'wix-rich-content-common';
@@ -15,7 +16,16 @@ class InputWithLabel extends Component {
 
   renderInput = () => {
     const { styles } = this;
-    const { id, isTextArea, isFullHeight, dataHook, ...otherProps } = this.props;
+    const {
+      id,
+      isTextArea,
+      isFullHeight,
+      dataHook,
+      isMobile,
+      tooltipTextKey,
+      t,
+      ...otherProps
+    } = this.props;
     const inputProps = omit(otherProps, ['theme']);
     const inputClassName = classNames(styles.inputWithLabel_input, {
       [styles.inputWithLabel_textArea]: isTextArea,
@@ -36,13 +46,20 @@ class InputWithLabel extends Component {
 
   render() {
     const { styles } = this;
-    const { id, label, maxLength, tooltipTextKey, t } = this.props;
+    const { id, label, maxLength, tooltipTextKey, t, isMobile } = this.props;
+    const showTooltip = !isMobile && !isEmpty(tooltipTextKey);
+
     if (label) {
       return (
         <label htmlFor={id}>
           <div className={generalstyles.infoContainer}>
             <span className={styles.inputWithLabel_label}>{label}</span>
-            <InfoIcon iconStyles={styles.infoIcon} tooltipTextKey={tooltipTextKey} t={t} />
+            <InfoIcon
+              iconStyles={styles.infoIcon}
+              tooltipTextKey={tooltipTextKey}
+              t={t}
+              showTooltip={showTooltip}
+            />
           </div>
           {this.renderInput()}
           {maxLength && this.renderCharacterCapacity()}
@@ -65,10 +82,12 @@ InputWithLabel.propTypes = {
   maxLength: PropTypes.number,
   tooltipTextKey: PropTypes.string,
   t: PropTypes.func,
+  isMobile: PropTypes.bool,
 };
 
 InputWithLabel.defaultProps = {
   value: '',
+  isMobile: false,
 };
 
 export default InputWithLabel;

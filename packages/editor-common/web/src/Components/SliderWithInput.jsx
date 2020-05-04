@@ -68,7 +68,7 @@ class SliderWithInput extends Component {
               {label}
             </span>
           ) : null}
-          <InfoIcon tooltipTextKey={tooltipTextKey} t={t} />
+          <InfoIcon tooltipTextKey={tooltipTextKey} t={t} showTooltip />
         </div>
         <div className={this.styles.sliderWithInput_content}>
           <Slider

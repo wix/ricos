@@ -30,7 +30,7 @@ class RadioGroupHorizontal extends Component {
               {label}
             </span>
           ) : null}
-          <InfoIcon tooltipTextKey={tooltipTextKey} t={t} />
+          <InfoIcon tooltipTextKey={tooltipTextKey} t={t} showTooltip />
         </div>
         <RadioGroup ariaLabelledBy={`${this.id}_label`} {...props} className={groupClassName} />
       </div>

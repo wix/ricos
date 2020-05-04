@@ -208,6 +208,7 @@ class ImageSettings extends Component {
               value={metadata.alt || ''}
               onChange={event => this.metadataUpdated(metadata, { alt: event.target.value })}
               dataHook="imageSettingsAltInput"
+              isMobile={isMobile}
             />
           </SettingsSection>
           <SettingsSection
