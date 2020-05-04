@@ -454,7 +454,7 @@ Cypress.Commands.add('addVideoFromURL', () => {
 });
 
 Cypress.Commands.add('clickOnStaticButton', dataHook =>
-  cy.get(`[data-hook*=${dataHook}][tabindex!=-1]`).click()
+  cy.get(`[data-hook*=footerToolbar] [data-hook*=${dataHook}]`).click()
 );
 
 Cypress.Commands.add('addHtml', () => {
