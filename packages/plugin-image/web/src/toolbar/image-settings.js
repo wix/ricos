@@ -228,6 +228,7 @@ class ImageSettings extends Component {
               ariaProps={{ 'aria-labelledby': 'image_settings_link_lbl' }}
               languageDir={languageDir}
               placeholder={placeholder}
+              isMobile={isMobile}
             />
           </SettingsSection>
         </div>

@@ -6,11 +6,12 @@ import Icon from '../Icons/InfoIcon.svg';
 
 class InfoIcon extends Component {
   render() {
-    const { tooltipTextKey, t, iconStyles, showTooltip = true } = this.props;
+    const { tooltipTextKey, t, iconStyles, showTooltip = false } = this.props;
     const style = iconStyles || generalstyles.infoIcon;
+    const tooltipText = tooltipTextKey && t ? t(tooltipTextKey) : false;
 
-    return tooltipTextKey && showTooltip ? (
-      <Tooltip content={t(tooltipTextKey)}>
+    return tooltipText && showTooltip ? (
+      <Tooltip content={tooltipText}>
         <Icon className={style} />
       </Tooltip>
     ) : null;
