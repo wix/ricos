@@ -159,7 +159,7 @@ jobs:
       - name: Get commit author
         id: commit-author
         run: |
-          echo "::set-output name=commit-author::$(curl -s https://api.github.com/repos/wix-incubator/rich-content/commits/d143f72fb52721b99b7d2a8f69f33ccfe5b7eaa0 | jq '.author.login' | sed 's/\"//g')"
+          echo "::set-output name=commit-author::$(curl -s https://api.github.com/repos/wix-incubator/rich-content/commits/c0f3e06803721f70e6cd2c3a9ba1c601d91f6c97 | jq '.author.login' | sed 's/\"//g')"
       - name: Get PR number
         id: pr-number
         run: |
