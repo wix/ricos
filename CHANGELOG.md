@@ -23,6 +23,10 @@
   - [#982](https://github.com/wix-incubator/rich-content/pull/982) `npm run watch` fixed to work concurrently with `flow` + `npm run e2e:debug` fixed to wait on serve ready
 - `storybook`
   - [#958](https://github.com/wix-incubator/rich-content/pull/958) Buttons story added (Action & Link buttons)
+### :bug: Bug Fix
+- `editor`
+  - [#941](https://github.com/wix-incubator/rich-content/pull/941) add tooltips for settings panels
+
 </details>
 <hr/>
 
@@ -75,7 +79,6 @@
   - [#939](https://github.com/wix-incubator/rich-content/pull/939) Map Settings: dynamic style replaced with theme
 - `editor`
   - [#917](https://github.com/wix-incubator/rich-content/pull/917) add tooltips for drop down buttons
-  - [#941](https://github.com/wix-incubator/rich-content/pull/941) add tooltips for settings panels
 ### :house: Internal
 - `general`
   - [#927](https://github.com/wix-incubator/rich-content/pull/927) Adding GitHub action that compares and fails if one of the current bundle sizes grows more then 5KB

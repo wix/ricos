@@ -83,7 +83,7 @@ export default class Checkbox extends React.Component {
           </i>
           <span className={styles.checkbox_label}>{label}</span>
         </div>
-        <InfoIcon tooltipTextKey={tooltipTextKey} t={t} showTooltip={showTooltip} />
+        {showTooltip && <InfoIcon tooltipText={t(tooltipTextKey)} />}
       </label>
     );
   }
