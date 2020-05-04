@@ -22,7 +22,7 @@
 - `editor`
   - [#941](https://github.com/wix-incubator/rich-content/pull/941) add tooltips for settings panels
 - `preview`
-  - giphy metadata is handled correctly by image and gallery mergers
+  - [#999](https://github.com/wix-incubator/rich-content/pull/999) giphy metadata is handled correctly by image and gallery mergers
 ### :house: Internal
 - `general`
   - [#982](https://github.com/wix-incubator/rich-content/pull/982) `npm run watch` fixed to work concurrently with `flow` + `npm run e2e:debug` fixed to wait on serve ready
