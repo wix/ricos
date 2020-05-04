@@ -6,7 +6,6 @@ import InfoIcon from './InfoIcon';
 import { mergeStyles } from 'wix-rich-content-common';
 import styles from '../../statics/styles/radio-group-horizontal.scss';
 import generalstyles from '../../statics/styles/general.scss';
-import { isEmpty } from 'lodash';
 
 class RadioGroupHorizontal extends Component {
   constructor(props) {
@@ -23,7 +22,6 @@ class RadioGroupHorizontal extends Component {
       inline && styles.radioGroupHorizontal_groupInline,
       !inline && styles.radioGroupHorizontal_groupTwoColumns
     );
-    const showTooltip = !isEmpty(tooltipTextKey);
 
     return (
       <div>
@@ -33,7 +31,7 @@ class RadioGroupHorizontal extends Component {
               {label}
             </span>
           ) : null}
-          {showTooltip && <InfoIcon tooltipText={t(tooltipTextKey)} />}
+          {tooltipTextKey && <InfoIcon tooltipText={t(tooltipTextKey)} />}
         </div>
         <RadioGroup ariaLabelledBy={`${this.id}_label`} {...props} className={groupClassName} />
       </div>

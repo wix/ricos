@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { debounce, isNumber, isEmpty } from 'lodash';
+import { debounce, isNumber } from 'lodash';
 import InfoIcon from './InfoIcon';
 import { mergeStyles } from 'wix-rich-content-common';
 import Slider from './Slider';
@@ -58,8 +58,6 @@ class SliderWithInput extends Component {
       'aria-valuemax': max,
       'aria-valuenow': value,
     };
-    const showTooltip = !isEmpty(tooltipTextKey);
-
     /* eslint-disable jsx-a11y/role-has-required-aria-props */
     return (
       <div>
@@ -69,7 +67,7 @@ class SliderWithInput extends Component {
               {label}
             </span>
           ) : null}
-          {showTooltip && <InfoIcon tooltipText={t(tooltipTextKey)} />}
+          {tooltipTextKey && <InfoIcon tooltipText={t(tooltipTextKey)} />}
         </div>
         <div className={this.styles.sliderWithInput_content}>
           <Slider

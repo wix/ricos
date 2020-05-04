@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { omit, isEmpty } from 'lodash';
+import { omit } from 'lodash';
 import classNames from 'classnames';
 import InfoIcon from './InfoIcon';
 import { mergeStyles } from 'wix-rich-content-common';
@@ -47,7 +47,7 @@ class InputWithLabel extends Component {
   render() {
     const { styles } = this;
     const { id, label, maxLength, tooltipTextKey, t, isMobile } = this.props;
-    const showTooltip = !isMobile && !isEmpty(tooltipTextKey);
+    const showTooltip = !isMobile && tooltipTextKey;
 
     if (label) {
       return (

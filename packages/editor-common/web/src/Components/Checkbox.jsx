@@ -6,7 +6,6 @@ import { CheckIcon } from '../Icons';
 import styles from '../../statics/styles/checkbox.scss';
 import generalStyles from '../../statics/styles/general.scss';
 import InfoIcon from './InfoIcon';
-import { isEmpty } from 'lodash';
 
 export default class Checkbox extends React.Component {
   static propTypes = {
@@ -50,7 +49,7 @@ export default class Checkbox extends React.Component {
       'aria-checked': checked,
       role: 'checkbox',
     };
-    const showTooltip = !isMobile && !isEmpty(tooltipTextKey);
+    const showTooltip = !isMobile && tooltipTextKey;
 
     return (
       <label
