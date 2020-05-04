@@ -27,6 +27,7 @@
 - `editor`
   - [#941](https://github.com/wix-incubator/rich-content/pull/941) add tooltips for settings panels
 
+
 </details>
 <hr/>
 
