@@ -518,8 +518,8 @@ Cypress.Commands.add('insertLinkAndEnter', url => {
   cy.moveCursorToEnd()
     .type(url)
     .type('{enter}')
-    .wait(100);
-  cy.moveCursorToEnd();
+    .moveCursorToEnd()
+    .wait(200);
 });
 
 Cypress.Commands.add('triggerLinkPreviewViewerUpdate', () => {
@@ -555,6 +555,19 @@ function waitForMutations(container, { timeToWaitForMutation = 300 } = {}) {
     }
   });
 }
+
+Cypress.Commands.add('paste', (pastePayload, pasteType = 'text') => {
+  cy.getEditor().then($destination => {
+    const pasteEvent = Object.assign(new Event('paste', { bubbles: true, cancelable: true }), {
+      clipboardData: {
+        getData: (type = pasteType) => {
+          return pastePayload;
+        },
+      },
+    });
+    $destination[0].dispatchEvent(pasteEvent);
+  });
+});
 
 // disable screenshots in debug mode. So there is no diffrence to ci.
 if (Cypress.browser.isHeaded) {
