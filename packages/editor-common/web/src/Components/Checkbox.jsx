@@ -6,6 +6,7 @@ import { CheckIcon } from '../Icons';
 import styles from '../../statics/styles/checkbox.scss';
 import generalStyles from '../../statics/styles/general.scss';
 import InfoIcon from './InfoIcon';
+import { isEmpty } from 'lodash';
 
 export default class Checkbox extends React.Component {
   static propTypes = {
@@ -16,10 +17,12 @@ export default class Checkbox extends React.Component {
     dataHook: PropTypes.string,
     tooltipTextKey: PropTypes.string,
     t: PropTypes.func,
+    isMobile: PropTypes.bool,
   };
 
   static defaultProps = {
     checked: false,
+    isMobile: false,
   };
 
   constructor(props) {
@@ -40,13 +43,14 @@ export default class Checkbox extends React.Component {
 
   render() {
     const { styles, generalStyles } = this;
-    const { onChange, label, checked, dataHook, tooltipTextKey, t } = this.props;
+    const { onChange, label, checked, dataHook, tooltipTextKey, t, isMobile } = this.props;
     const isChecked = checked ? { defaultChecked: 'checked' } : {};
     const a11yProps = {
       'aria-label': label,
       'aria-checked': checked,
       role: 'checkbox',
     };
+    const showTooltip = !isMobile && !isEmpty(tooltipTextKey);
 
     return (
       <label
@@ -79,7 +83,7 @@ export default class Checkbox extends React.Component {
           </i>
           <span className={styles.checkbox_label}>{label}</span>
         </div>
-        <InfoIcon tooltipTextKey={tooltipTextKey} t={t} />
+        <InfoIcon tooltipTextKey={tooltipTextKey} t={t} showTooltip={showTooltip} />
       </label>
     );
   }
