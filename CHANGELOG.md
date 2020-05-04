@@ -18,15 +18,16 @@
 ### :rocket: New Feature
 - `button`
   - [#958](https://github.com/wix-incubator/rich-content/pull/958) action button plugin - button with onClick callback
+### :bug: Bug Fix
+- `editor`
+  - [#941](https://github.com/wix-incubator/rich-content/pull/941) add tooltips for settings panels
+- `preview`
+  - [#999](https://github.com/wix-incubator/rich-content/pull/999) giphy metadata is handled correctly by image and gallery data mergers
 ### :house: Internal
 - `general`
   - [#982](https://github.com/wix-incubator/rich-content/pull/982) `npm run watch` fixed to work concurrently with `flow` + `npm run e2e:debug` fixed to wait on serve ready
 - `storybook`
   - [#958](https://github.com/wix-incubator/rich-content/pull/958) Buttons story added (Action & Link buttons)
-### :bug: Bug Fix
-- `editor`
-  - [#941](https://github.com/wix-incubator/rich-content/pull/941) add tooltips for settings panels
-
 
 </details>
 <hr/>

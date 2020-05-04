@@ -7,7 +7,11 @@ const WIX_MEDIA_BASE_URL = 'https://static.wixstatic.com/media/';
 const getWixFilename = url => url.replace(WIX_MEDIA_BASE_URL, '');
 
 const getImageAbsoluteUrl = imageUrl =>
-  imageUrl.indexOf(WIX_MEDIA_BASE_URL) === -1 ? WIX_MEDIA_BASE_URL + imageUrl : imageUrl;
+  !isAbsoluteUrl(imageUrl) && !imageUrl.startsWith(WIX_MEDIA_BASE_URL)
+    ? WIX_MEDIA_BASE_URL + imageUrl
+    : imageUrl;
+
+const isAbsoluteUrl = url => url.startsWith('http://') || url.startsWith('https://');
 
 const getResizedImageUrl = (
   item,
