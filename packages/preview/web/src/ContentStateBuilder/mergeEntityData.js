@@ -6,7 +6,7 @@ const defaultMerger = (mediaInfo, entity) => ({
   },
 });
 
-const imageMerger = ({ url, width, height, metadata, link }, entity) => ({
+const imageMerger = ({ url, width, height, metadata, link, source = null }, entity) => ({
   ...entity,
   data: {
     ...entity.data,
@@ -18,7 +18,7 @@ const imageMerger = ({ url, width, height, metadata, link }, entity) => ({
     src: {
       width,
       height,
-      file_name: url, // eslint-disable-line
+      ...(source === 'static' ? { url, source } : { file_name: url }), // eslint-disable-line
     },
   },
 });
@@ -32,7 +32,7 @@ const galleryMerger = (items, entity) => ({
         width: item.width,
         height: item.height,
       },
-      url: item.url,
+      url: item.type.includes('gif') ? item.thumbnail : item.url,
       itemId: item.id || item.url,
     })),
   },
