@@ -89,6 +89,7 @@ export const METHOD_PLUGIN_DATA_MAP = Object.freeze({
         galleryImageRatio: 2,
         galleryType: 'Columns',
         minItemSize: 50,
+        videoPlay: 'auto',
       },
     },
   },
