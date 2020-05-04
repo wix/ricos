@@ -226,10 +226,12 @@ describe('plugins', () => {
     const embedTypes = ['TWITTER', 'INSTAGRAM', 'YOUTUBE'];
     it('render upload modals', function() {
       embedTypes.forEach(embedType => {
+        const testKey = embedType + ': ' + this.test.title;
         cy.openEmbedModal(STATIC_TOOLBAR_BUTTONS[embedType]);
-        cy.eyesCheckWindow(this.test.title);
+        cy.eyesCheckWindow(testKey + ' modal');
         cy.addSocialEmbed('www.mockUrl.com');
-        cy.eyesCheckWindow(this.test.title);
+        cy.get(`#rich-content-viewer [data-hook=HtmlComponent]`).wait(200);
+        cy.eyesCheckWindow(testKey + ' added');
       });
     });
   });
