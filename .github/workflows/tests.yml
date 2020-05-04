@@ -156,13 +156,24 @@ jobs:
     # needs: [lint-and-unit-tests]
     if: always()
     steps:
+      - name: Get commit author
+        id: commit-author
+        run: |
+          echo "::set-output name=commit-author::$(curl -s https://api.github.com/repos/wix-incubator/rich-content/commits/d143f72fb52721b99b7d2a8f69f33ccfe5b7eaa0 | jq '.author.login' | sed 's/\"//g')"
+      - name: Get PR number
+        id: pr-number
+        run: |
+          echo "::set-output name=pr-number::$(curl -s https://api.github.com/repos/wix-incubator/rich-content/commits/${{ github.sha }} | jq '.commit.message' | sed 's/.*(#//g' | sed 's/)"//g')"
+      - name: Get PR author
+        id: pr-author
+        run: |
+          echo "::set-output name=pr-author::$(curl -s https://api.github.com/repos/wix-incubator/rich-content/pulls/${{ steps.pr-number.outputs.pr-number }} | jq '.merged_by.login' | sed 's/\"//g')"
       - name: Notify fail in Slack
         uses: voxmedia/github-action-slack-notify-build@v1.1.1
         # if: github.ref == 'refs/heads/mention-build-fail' && (needs.e2e-visual.result == 'failure' || needs.content-state-tests.result == 'failure' || needs.lint-and-unit-tests.result == 'failure')
         with:
           channel_id: G011R1YVCRG #rich-content-ci
-          status: FAILED <@U0MN7A3H8>
-
+          status: FAILED <@${{ env.${{ steps.commit-author.outputs.commit-author }}}}>
           color: danger
 
       # - name: Get previous commit status
@@ -178,3 +189,4 @@ jobs:
       #     color: '#28a745'
     env:
       SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+      mharsat: U0MN7A3H8
