@@ -1,0 +1,129 @@
+{
+  "blocks": [
+    {
+      "key": "92stb",
+      "text": "",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "fltie",
+      "text": " ",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 0
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "c0un5",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "dm0jq",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "864qn",
+      "text": " ",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 1
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "4i8f5",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "type": "wix-draft-plugin-action-button",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "config": {
+          "alignment": "center",
+          "size": "small",
+          "width": "fit-content"
+        },
+        "button": {
+          "settings": {
+            "buttonText": "Action Button",
+            "url": "",
+            "rel": false,
+            "target": true
+          },
+          "design": {
+            "activeButton": 3,
+            "borderRadius": 10,
+            "borderWidth": 1,
+            "padding": 12,
+            "background": "#81B0FF",
+            "color": "#0261FF",
+            "borderColor": "#0261FF"
+          }
+        }
+      }
+    },
+    "1": {
+      "type": "wix-draft-plugin-link-button",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "config": {
+          "alignment": "center",
+          "size": "small",
+          "width": "fit-content"
+        },
+        "button": {
+          "settings": {
+            "buttonText": "Link Button",
+            "url": "www.wix.com",
+            "rel": false,
+            "target": true
+          },
+          "design": {
+            "activeButton": 0,
+            "borderRadius": 0,
+            "borderWidth": 0,
+            "padding": 12,
+            "background": "#0261FF",
+            "color": "#FFFFFF",
+            "borderColor": "#0261FF"
+          }
+        }
+      }
+    }
+  },
+  "VERSION": "7.4.5"
+}

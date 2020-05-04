@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { RichContentEditor, convertFromRaw, createWithContent } from 'wix-rich-content-editor';
 import { RichContentWrapper } from 'wix-rich-content-wrapper';
-import { pluginButton } from 'wix-rich-content-plugin-button';
+import { pluginLinkButton, pluginActionButton } from 'wix-rich-content-plugin-button';
 import { pluginCodeBlock } from 'wix-rich-content-plugin-code-block';
 import { pluginDivider } from 'wix-rich-content-plugin-divider';
 import { pluginEmoji } from 'wix-rich-content-plugin-emoji';
@@ -71,7 +71,8 @@ const configs = {
 };
 
 const plugins = [
-  pluginButton(),
+  pluginLinkButton(),
+  pluginActionButton(),
   pluginCodeBlock(),
   pluginDivider(),
   pluginEmoji(),

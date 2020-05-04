@@ -105,7 +105,8 @@ const mergers = {
   LINK: defaultMerger,
   LINK_PREVIEW: linkPreviewMerger,
   'wix-draft-plugin-headers-markdown': defaultMerger,
-  'wix-draft-plugin-button': defaultMerger,
+  'wix-draft-plugin-link-button': defaultMerger,
+  'wix-draft-plugin-action-button': defaultMerger,
   'wix-draft-plugin-html': defaultMerger,
 };
 
