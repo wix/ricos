@@ -15,6 +15,9 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+- `preview`
+  - giphy metadata is handled correctly by image and gallery mergers
 ### :house: Internal
 - `wrapper`
   - [#980](https://github.com/wix-incubator/rich-content/pull/980) hotfix: createEmpty import
