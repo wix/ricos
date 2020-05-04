@@ -23,6 +23,8 @@ export const ThumbnailResize = props => {
         { value: 'fill', labelText: cropLabel, dataHook: 'radioGroupFill' },
         { value: 'fit', labelText: fitLabel, dataHook: 'radioGroupFit' },
       ]}
+      tooltipTextKey={'GallerySettings_Radios_Thumbnail_Resize_Tooltip'}
+      t={t}
       {...props}
     />
   );
@@ -65,6 +67,8 @@ export const ImageOrientation = props => {
           dataHook: 'radioGroupImageOrientationHorizontal',
         },
       ]}
+      tooltipTextKey={'GallerySettings_Radios_Image_Orientation_Tooltip'}
+      t={t}
       {...props}
     />
   );
@@ -92,6 +96,8 @@ export const ScrollDirection = props => {
           dataHook: 'radioGroupScrollDirectionHorizontal',
         },
       ]}
+      tooltipTextKey={'GallerySettings_Radios_Scroll_Direction_Tooltip'}
+      t={t}
       {...props}
     />
   );
