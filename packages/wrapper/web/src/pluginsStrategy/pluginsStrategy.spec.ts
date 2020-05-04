@@ -4,8 +4,8 @@ import getType from 'jest-get-type';
 // eslint-disable-next-line mocha/no-skipped-tests
 describe('PluginsStrategy', () => {
   const driver = {
-    runStrategy: (isEditor?: boolean, plugins: PluginConfig[] = []) =>
-      pluginsStrategy(isEditor, plugins, {}, { modalTheme: { content: {} } }),
+    runStrategy: (isViewer?: boolean, plugins: PluginConfig[] = []) =>
+      pluginsStrategy(isViewer, plugins, {}, { modalTheme: { content: {} } }),
   };
 
   it('should create an object', () => {
@@ -23,14 +23,14 @@ describe('PluginsStrategy', () => {
   });
 
   it('should supply editor props', () => {
-    const result = driver.runStrategy(true);
+    const result = driver.runStrategy(false);
     expect(result.config).toBeTruthy();
     expect(result.plugins).toBeTruthy();
     expect(result.ModalsMap).toBeTruthy();
   });
 
   it('should supply viewer props', () => {
-    const result = driver.runStrategy(false);
+    const result = driver.runStrategy(true);
     expect(result.config).toBeTruthy();
     expect(result.typeMappers).toBeTruthy();
     expect(result.decorators).toBeTruthy();

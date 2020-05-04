@@ -20,18 +20,18 @@ const ACTION_COLOR = 18;
 const COLOR7 = 17;
 
 export default class ThemeGenerator {
-  isEditor: boolean;
+  isViewer: boolean;
   themeGenerators: ThemeGeneratorFunction[];
   _theme: string;
   palette: Palette;
 
   constructor(
-    isEditor: boolean,
+    isViewer: boolean,
     { theme = THEMES.DEFAULT, palette, themeGenerators = [] }: StringThemeProperties
   ) {
     this.setTheme(theme, palette);
     this.themeGenerators = themeGenerators;
-    this.isEditor = isEditor;
+    this.isViewer = isViewer;
   }
 
   setTheme(theme: string, palette?: Palette) {
@@ -74,7 +74,7 @@ export default class ThemeGenerator {
         {}
       );
 
-      const appStyles = (this.isEditor && {
+      const appStyles = (!this.isViewer && {
         ...getEditorCommonTheme(colors),
         ...getEditorTheme(colors, utils),
       }) || {

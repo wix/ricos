@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 import React from 'react';
-import { RichContentWrapper } from './RichContentWrapper';
+import { WixRichContentEditor, WixRichContentViewer } from './index';
 import { RichContentEditor } from 'wix-rich-content-editor';
 import { RichContentViewer } from 'wix-rich-content-viewer';
 import { pluginHashtag } from '../../../plugin-hashtag/web/src/editor';
@@ -10,23 +10,33 @@ import Adapter from 'enzyme-adapter-react-16';
 import { default as hebResource } from 'wix-rich-content-common/dist/statics/locale/messages_he.json';
 
 Enzyme.configure({ adapter: new Adapter() });
-const { shallow, mount } = Enzyme;
+const { shallow } = Enzyme;
 
 const wrapper = (wrapperProps?: any) => ({
   withEditor: (editorProps?: RichContentProps) => (
-    <RichContentWrapper {...(wrapperProps || {})} isEditor>
+    <WixRichContentEditor {...(wrapperProps || {})}>
       <RichContentEditor {...(editorProps || {})} />
-    </RichContentWrapper>
+    </WixRichContentEditor>
   ),
   withViewer: (viewerProps?: RichContentProps) => (
-    <RichContentWrapper {...(wrapperProps || {})}>
+    <WixRichContentViewer {...(wrapperProps || {})}>
       <RichContentViewer {...(viewerProps || { initialState: introState })} />
-    </RichContentWrapper>
+    </WixRichContentViewer>
   ),
 });
 
 // eslint-disable-next-line no-unused-vars
 const plugins = [pluginHashtag()];
+
+const getEditorWrapperElement = wrapper =>
+  shallow(wrapper)
+    .children()
+    .last();
+const getViewerWrapperElement = wrapper => shallow(wrapper);
+
+const getChildElement = wrapperElement => wrapperElement.dive().children();
+const getEditorWrapperChildElement = wrapper => getChildElement(getEditorWrapperElement(wrapper));
+const getViewerWrapperChildElement = wrapper => getChildElement(getViewerWrapperElement(wrapper));
 
 // eslint-disable-next-line mocha/no-skipped-tests
 describe('Wrapper', () => {
@@ -48,94 +58,73 @@ describe('Wrapper', () => {
 
   describe('Editor', () => {
     it('should render locale="en" if unspecified', () => {
-      const element = shallow(wrapper({ isEditor: true }).withEditor())
-        .dive()
-        .dive();
-      expect(element.props()).toHaveProperty('locale');
-      expect(element.props().locale).toEqual('en');
+      const wrapperElementProps = getEditorWrapperElement(wrapper().withEditor()).props();
+      expect(wrapperElementProps).toHaveProperty('locale');
+      expect(wrapperElementProps.locale).toEqual('en');
     });
     it('should render editor child if provided', () => {
-      const element = shallow(wrapper({ isEditor: true }).withEditor());
-      expect(element.props()).toHaveProperty('children');
+      const wrapperElementProps = getEditorWrapperElement(wrapper().withEditor()).props();
+      expect(wrapperElementProps).toHaveProperty('children');
+      expect(wrapperElementProps.children.type.displayName).toEqual('RichContentEditor');
     });
     it('should render with pluginsStrategy output', () => {
-      const element = shallow(wrapper({ isEditor: true, plugins }).withEditor());
-      const instance = element
-        .dive()
-        .dive()
-        .dive()
-        .instance();
-      const renderResult = instance.render();
-      const editorProps = renderResult.props.children.props;
-      expect(editorProps).toHaveProperty('config');
-      expect(editorProps.config).toHaveProperty('wix-draft-plugin-hashtag');
+      const wrapperChildElementProps = getEditorWrapperChildElement(
+        wrapper({ plugins }).withEditor()
+      ).props();
+      expect(wrapperChildElementProps).toHaveProperty('config');
+      expect(wrapperChildElementProps.config).toHaveProperty('wix-draft-plugin-hashtag');
     });
     it('should render with themeStrategy output', () => {
-      const element = shallow(wrapper({ isEditor: true, theme: 'Default' }).withEditor());
-      const instance = element
-        .dive()
-        .dive()
-        .dive()
-        .instance();
-      const renderResult = instance.render();
-      const editorProps = renderResult.props.children.props;
-      expect(editorProps).toHaveProperty('theme');
-      expect(editorProps.theme).toHaveProperty('modalTheme');
+      const wrapperChildElementProps = getEditorWrapperChildElement(
+        wrapper({ theme: 'Default' }).withEditor()
+      ).props();
+      expect(wrapperChildElementProps).toHaveProperty('theme');
+      expect(wrapperChildElementProps.theme).toHaveProperty('modalTheme');
     });
     it('should call updateLocale on componentDidMount', () => {
-      const element = shallow(wrapper({ isEditor: true, locale: 'en' }).withEditor());
-      const instance = element.dive().instance();
+      const wrapperElement = getEditorWrapperElement(wrapper().withEditor());
+      const instance = wrapperElement.dive().instance();
       const spyUpdate = spyOn(instance, 'updateLocale');
       instance.componentDidMount();
       expect(spyUpdate.calls.count()).toEqual(1);
     });
     it('should render localeStrategy in strategies', async () => {
-      const element = shallow(wrapper({ isEditor: true, locale: 'he' }).withEditor());
-      const instance = element.dive().instance();
-      const renderResult = instance.render();
+      const wrapperElement = getEditorWrapperElement(wrapper({ locale: 'he' }).withEditor());
+      const instance = wrapperElement.dive().instance();
       await instance.updateLocale();
-      const engineProps = renderResult.props;
-      expect(engineProps).toHaveProperty('rcProps');
-      expect(instance.state.localeStrategy).toEqual({ locale: 'he', localeResource: hebResource });
+      const renderResult = instance.render();
+      expect(renderResult.props).toMatchObject({
+        locale: 'he',
+        localeResource: hebResource,
+      });
     });
   });
 
   describe('Viewer', () => {
     it('should render locale="en" if unspecified', () => {
-      const element = shallow(wrapper().withViewer())
-        .dive()
-        .dive();
-      expect(element.props()).toHaveProperty('locale');
-      expect(element.props().locale).toEqual('en');
+      const wrapperElementProps = getViewerWrapperElement(wrapper().withViewer()).props();
+      expect(wrapperElementProps).toHaveProperty('locale');
+      expect(wrapperElementProps.locale).toEqual('en');
     });
     it('should render viewer child if provided', () => {
-      const element = mount(wrapper().withViewer());
-      expect(element.props()).toHaveProperty('children');
+      const wrapperElementProps = getViewerWrapperElement(wrapper().withViewer()).props();
+      expect(wrapperElementProps).toHaveProperty('children');
+      expect(wrapperElementProps.children.type.displayName).toEqual('RichContentViewer');
     });
     it('should render with pluginsStrategy output', () => {
-      const element = shallow(wrapper({ plugins }).withViewer());
-      const instance = element
-        .dive()
-        .dive()
-        .dive()
-        .instance();
-      const renderResult = instance.render();
-      const viewerProps = renderResult.props.children.props;
-      expect(viewerProps).toHaveProperty('config');
-      expect(viewerProps.config).toHaveProperty('wix-draft-plugin-hashtag');
+      const wrapperChildElementProps = getViewerWrapperChildElement(
+        wrapper({ plugins }).withViewer()
+      ).props();
+      expect(wrapperChildElementProps).toHaveProperty('config');
+      expect(wrapperChildElementProps.config).toHaveProperty('wix-draft-plugin-hashtag');
     });
     it('should render with themeStrategy output', () => {
-      const element = shallow(wrapper({ theme: 'Default' }).withViewer());
-      const instance = element
-        .dive()
-        .dive()
-        .dive()
-        .instance();
-      const renderResult = instance.render();
-      const viewerProps = renderResult.props.children.props;
-      expect(viewerProps).toHaveProperty('theme');
-      expect(viewerProps).toHaveProperty('decorators');
-      expect(viewerProps.theme).toHaveProperty('modalTheme');
+      const wrapperChildElementProps = getViewerWrapperChildElement(
+        wrapper({ theme: 'Default' }).withViewer()
+      ).props();
+      expect(wrapperChildElementProps).toHaveProperty('theme');
+      expect(wrapperChildElementProps).toHaveProperty('decorators');
+      expect(wrapperChildElementProps.theme).toHaveProperty('modalTheme');
     });
   });
 });

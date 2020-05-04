@@ -10,7 +10,7 @@ interface Props {
 interface State {
   isExpanded: boolean;
   index?: number;
-  data?: any;
+  expandModeData?: any;
   Fullscreen?: any;
 }
 
@@ -32,17 +32,17 @@ export default class FullscreenProvider extends Component<Props, State> {
   onExpand = (entityIndex, innerIndex = 0) =>
     this.setState({
       isExpanded: true,
-      index: this.state.data?.imageMap[entityIndex] + innerIndex,
+      index: this.state.expandModeData?.imageMap[entityIndex] + innerIndex,
     });
 
   onClose = () => this.setState({ isExpanded: false });
 
-  setData = data => this.setState({ data });
+  setExpandModeData = expandModeData => this.setState({ expandModeData });
 
   addExpand = (helpers: Helpers) => ({ ...helpers, onExpand: this.onExpand });
 
   render() {
-    const { isExpanded, index, data, Fullscreen } = this.state;
+    const { isExpanded, index, expandModeData, Fullscreen } = this.state;
     const { children, helpers: viewerHelpers = {}, initialState } = this.props;
     const helpers = this.addExpand(viewerHelpers);
     return (
@@ -54,10 +54,10 @@ export default class FullscreenProvider extends Component<Props, State> {
               dataHook={'WrapperFullScreen'}
               initialState={initialState || emptyState}
               isOpen={isExpanded}
-              images={data?.images || []}
+              images={expandModeData?.images || []}
               onClose={this.onClose}
               index={index}
-              setExpandModeData={this.setData}
+              setExpandModeData={this.setExpandModeData}
             />
           </Suspense>
         )}

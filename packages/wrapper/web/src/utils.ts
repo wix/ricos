@@ -2,6 +2,7 @@ import { convertToRaw } from 'wix-rich-content-editor-common';
 import { createEmpty } from 'wix-rich-content-editor/dist/lib/editorStateConversion';
 import { EditorState } from 'draft-js';
 import { debounce } from 'lodash';
+import { Children, ReactElement, ComponentClass } from 'react';
 
 /* eslint-disable no-console */
 export const assert = (predicate, message) => console.assert(predicate, message);
@@ -28,3 +29,10 @@ export function createDataConverter(): EditorDataInstance {
     },
   };
 }
+
+export const shouldRenderChild = (isViewer: boolean, children: RichContentChild): boolean => {
+  const expectedChildName = isViewer ? 'RichContentViewer' : 'RichContentEditor';
+  const child = Children.only(children) as ReactElement<ExportedRichContentProps, ComponentClass>; // RichContentChild with type ComponentClass has a displayName
+  const childName = child?.type.displayName;
+  return !!children && childName === expectedChildName;
+};

@@ -4,7 +4,7 @@ import { RichContentViewer } from 'wix-rich-content-viewer';
 
 import { galleryTypeMapper } from 'wix-rich-content-plugin-gallery/dist/module.viewer';
 import { pluginGallery as pluginGalleryEditor } from 'wix-rich-content-plugin-gallery';
-import { RichContentWrapper } from 'wix-rich-content-wrapper';
+import { WixRichContentEditor, WixRichContentViewer } from 'wix-rich-content-wrapper';
 
 import fixtrue from '../../../../e2e/tests/fixtures/gallery-with-title-and-link.json';
 
@@ -38,14 +38,14 @@ export default () => {
 
           <Section type={Section.Types.COMPARISON}>
             <RichContentEditorBox preset="blog-preset">
-              <RichContentWrapper plugins={editorPlugins} isEditor>
+              <WixRichContentEditor plugins={editorPlugins}>
                 <RichContentEditor editorState={editorStateV6} />
-              </RichContentWrapper>
+              </WixRichContentEditor>
             </RichContentEditorBox>
             <RichContentViewerBox preset="blog-preset">
-              <RichContentWrapper>
+              <WixRichContentViewer>
                 <RichContentViewer initialState={fixtrueV6} typeMappers={typeMappers} />
-              </RichContentWrapper>
+              </WixRichContentViewer>
             </RichContentViewerBox>
           </Section>
 
@@ -56,14 +56,14 @@ export default () => {
           <h3>With v5 contentState:</h3>
           <Section type={Section.Types.COMPARISON}>
             <RichContentEditorBox preset="blog-preset">
-              <RichContentWrapper plugins={editorPlugins} isEditor>
+              <WixRichContentEditor plugins={editorPlugins}>
                 <RichContentEditor editorState={editorStateV5} />
-              </RichContentWrapper>
+              </WixRichContentEditor>
             </RichContentEditorBox>
             <RichContentViewerBox preset="blog-preset">
-              <RichContentWrapper>
+              <WixRichContentViewer>
                 <RichContentViewer initialState={fixtrueV5} typeMappers={typeMappers} />
-              </RichContentWrapper>
+              </WixRichContentViewer>
             </RichContentViewerBox>
           </Section>
           <Section title="Content State">

@@ -3,7 +3,7 @@ interface RichContentProps {
   localeResource?: object;
   placeholder?: string;
   editorKey?: string;
-  onChange?(editorState: import('draft-js').EditorState): void;
+  onChange?: OnChangeFunction;
   initialState?: ContentState;
   theme?: object;
   config?: object;
@@ -19,20 +19,26 @@ interface ExportedRichContentProps extends RichContentProps {
 }
 
 interface RichContentWrapperProps {
+  children?: RichContentChild;
   contentState?: ContentState;
-  children?: import('react').ReactElement<ExportedRichContentProps>;
-  theme?: string | object;
+  isMobile?: boolean;
   locale?: string;
   palette?: Palette;
   plugins?: PluginConfig[];
-  isEditor?: boolean;
-  isMobile?: boolean;
   rcProps?: RichContentProps;
-  textToolbarType?: TextToolbarType;
-  textToolbarContainer?: HTMLElement;
+  theme?: string | object;
+}
+
+type RichContentChild = import('react').ReactElement<ExportedRichContentProps>;
+
+interface WixRichContentEditorProps extends RichContentWrapperProps {
   forwardedRef?: import('react').Ref<import('react').ReactElement>;
   placeholder?: string;
+  textToolbarContainer?: HTMLElement;
+  textToolbarType?: TextToolbarType;
 }
+
+type WixRichContentViewerProps = RichContentWrapperProps;
 
 type TextToolbarType = 'inline' | 'static';
 
@@ -48,3 +54,5 @@ interface EditorDataInstance {
   getContentState: () => ContentState;
   refresh: (editorState: import('draft-js').EditorState) => void;
 }
+
+type OnChangeFunction = (editorState: import('draft-js').EditorState) => void;

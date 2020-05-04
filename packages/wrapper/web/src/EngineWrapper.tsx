@@ -1,71 +1,108 @@
-import React, { Children, Fragment, ReactElement, forwardRef, Ref } from 'react';
+import React, { Component, Children, Fragment } from 'react';
+import themeStrategy from './themeStrategy/themeStrategy';
+import pluginsStrategy from './pluginsStrategy/pluginsStrategy';
+import localeStrategy from './localeStrategy/localeStrategy';
+import './styles.global.css';
 import FullscreenProvider from './FullscreenProvider';
 import ModalDialogProvider from './ModalDialogProvider';
 import { merge } from 'lodash';
+import { isDefined } from 'ts-is-present';
 
-interface Props extends RichContentWrapperProps {
-  children: ReactElement;
-  initialState?: ContentState;
+interface Props extends WixRichContentEditorProps, WixRichContentViewerProps {
+  children: RichContentChild;
+  isViewer: boolean;
 }
 
 interface State {
   ModalityProvider: typeof Fragment | typeof ModalDialogProvider | typeof FullscreenProvider;
+  localeStrategy: RichContentProps;
 }
 
-class EngineWrapper extends React.Component<Props, State> {
+export default class EngineWrapper extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
-    this.state = this.stateFromProps(props);
+    this.state = { ModalityProvider: this.getModalityPropvider(props), localeStrategy: {} };
   }
 
-  stateFromProps(props: Props) {
-    const { isEditor, children } = props;
+  getModalityPropvider(props: Props) {
+    const { isViewer, children } = props;
     const { closeModal, openModal, onExpand } = children.props?.helpers || {};
-    if (isEditor && !closeModal && !openModal) {
-      return { ModalityProvider: ModalDialogProvider };
-    } else if (!isEditor && !onExpand) {
-      return { ModalityProvider: FullscreenProvider };
+    if (!isViewer && !closeModal && !openModal) {
+      return ModalDialogProvider;
+    } else if (isViewer && !onExpand) {
+      return FullscreenProvider;
     }
-    return { ModalityProvider: Fragment };
+    return Fragment;
+  }
+
+  static defaultProps = { locale: 'en', isMobile: false };
+
+  updateLocale = async () => {
+    const { locale, children } = this.props;
+    await localeStrategy(children?.props.locale || locale).then(localeData => {
+      this.setState({ localeStrategy: localeData });
+    });
+  };
+
+  componentDidMount() {
+    this.updateLocale();
+  }
+
+  componentWillReceiveProps(newProps: RichContentWrapperProps) {
+    if (newProps.locale !== this.props.locale) {
+      this.updateLocale();
+    }
+  }
+
+  runStrategies() {
+    const { theme, palette, plugins = [], isViewer = false, contentState, children } = this.props;
+    const { localeStrategy } = this.state;
+
+    const themeGenerators: ThemeGeneratorFunction[] = plugins
+      .map(plugin => plugin.theme)
+      .filter(isDefined);
+
+    const { theme: finalTheme } = themeStrategy(isViewer, {
+      theme,
+      palette,
+      themeGenerators,
+    });
+
+    return merge(
+      { theme: finalTheme },
+      pluginsStrategy(isViewer, plugins, children.props, finalTheme, contentState),
+      localeStrategy
+    );
   }
 
   render() {
     const {
       rcProps,
       children,
-      forwardedRef,
       isMobile,
       textToolbarType,
       textToolbarContainer,
       placeholder,
-      initialState,
+      contentState,
     } = this.props;
     const { ModalityProvider } = this.state;
 
-    // any of RichContentWrapperProps that should be merged into child
+    const strategyProps = this.runStrategies();
+
+    // any of wrapper props that should be merged into child
     const wrapperPropsToMerge: RichContentProps = {
       isMobile,
       textToolbarType: isMobile ? 'inline' : textToolbarType, // optimization - don't need static toolbar when isMobile
-      initialState,
+      initialState: contentState,
       placeholder,
     };
 
-    const mergedRCProps = merge(rcProps, wrapperPropsToMerge, children.props);
+    const mergedRCProps = merge(strategyProps, rcProps, wrapperPropsToMerge, children.props);
 
     return (
-      <ModalityProvider
-        {...mergedRCProps}
-        ref={forwardedRef}
-        textToolbarContainer={textToolbarContainer}
-      >
+      <ModalityProvider {...mergedRCProps} textToolbarContainer={textToolbarContainer}>
         {Children.only(React.cloneElement(children, { ...mergedRCProps }))}
       </ModalityProvider>
     );
   }
 }
-
-export default forwardRef((props: Props, ref: Ref<ReactElement>) => (
-  <EngineWrapper {...props} forwardedRef={ref}>
-    {props.children}
-  </EngineWrapper>
-));

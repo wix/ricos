@@ -1,7 +1,7 @@
 import { merge } from 'lodash';
 
 const getPluginProps = (
-  isEditor: boolean,
+  isViewer: boolean,
   {
     config = {},
     plugins = [],
@@ -13,15 +13,15 @@ const getPluginProps = (
   }: any,
   contentState?: ContentState
 ): EditorPluginsStrategy | ViewerPluginsStrategy =>
-  isEditor
-    ? { config, plugins, ModalsMap }
-    : {
+  isViewer
+    ? {
         config,
         typeMappers,
         decorators: decorators.map(decorator => decorator(theme, config)),
         inlineStyleMappers:
           contentState && inlineStyleMappers.map(mapper => mapper(config, contentState)),
-      };
+      }
+    : { config, plugins, ModalsMap };
 
 function editorStrategy(prev: EditorPluginsStrategy, curr: EditorPluginConfig) {
   const { type, config, createPlugin, ModalsMap } = curr;
@@ -53,7 +53,7 @@ function viewerStrategy(
 }
 
 export default function pluginsStrategy(
-  isEditor = false,
+  isViewer,
   plugins: PluginConfig[] = [],
   childProps: RichContentProps = {},
   theme: Theme,
@@ -61,10 +61,7 @@ export default function pluginsStrategy(
 ): PluginsStrategy {
   let strategy: EditorPluginsStrategy | ViewerPluginsStrategy;
 
-  if (isEditor) {
-    const emptyStrategy: EditorPluginsStrategy = { config: {}, plugins: [], ModalsMap: {} };
-    strategy = plugins.reduce((prev, curr) => editorStrategy(prev, curr), emptyStrategy);
-  } else {
+  if (isViewer) {
     const emptyStrategy: ViewerPluginsStrategy = {
       config: {},
       typeMappers: [],
@@ -75,9 +72,12 @@ export default function pluginsStrategy(
       (prev, curr) => viewerStrategy(prev, curr, theme, contentState),
       emptyStrategy
     );
+  } else {
+    const emptyStrategy: EditorPluginsStrategy = { config: {}, plugins: [], ModalsMap: {} };
+    strategy = plugins.reduce((prev, curr) => editorStrategy(prev, curr), emptyStrategy);
   }
 
-  const childPluginProps = getPluginProps(isEditor, childProps, contentState) as PluginsStrategy;
+  const childPluginProps = getPluginProps(isViewer, childProps, contentState) as PluginsStrategy;
 
   return merge(strategy, childPluginProps);
 }
