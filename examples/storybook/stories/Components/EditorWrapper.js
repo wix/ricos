@@ -108,7 +108,7 @@ const plugins = [
 ];
 
 const pluginsMap = {
-  button: pluginButton(),
+  button: pluginLinkButton(),
   codeBlock: pluginCodeBlock(),
   divider: pluginDivider(),
   emoji: pluginEmoji(),
