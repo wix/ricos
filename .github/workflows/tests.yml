@@ -163,7 +163,7 @@ jobs:
       - name: Get PR number
         id: pr-number
         run: |
-          echo "::set-output name=pr-number::$(curl -s https://api.github.com/repos/wix-incubator/rich-content/commits/${{ github.sha }} | jq '.commit.message' | sed 's/.*(#//g' | sed 's/)"//g')"
+          echo "::set-output name=pr-number::$(curl -s https://api.github.com/repos/wix-incubator/rich-content/commits/c0f3e06803721f70e6cd2c3a9ba1c601d91f6c97 | jq '.commit.message' | sed 's/.*(#//g' | sed 's/)"//g')"
       - name: Get PR author
         id: pr-author
         run: |
