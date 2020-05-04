@@ -22,7 +22,7 @@ class ButtonSample extends PureComponent {
   };
 
   render() {
-    const { buttonObj, style, active, t } = this.props;
+    const { buttonObj, style, active, t, i } = this.props;
     const { styles } = this;
     const { buttonStyle } = this.state;
     const propsStyle = {
@@ -41,7 +41,7 @@ class ButtonSample extends PureComponent {
     };
     const onStyleChanged = isEqual(propsStyle, stateStyle);
     return (
-      <div className={styles.button_sample_container}>
+      <div className={styles.button_sample_container} data-hook={`buttonSample_${i}`}>
         {active && onStyleChanged && <PickedIcon className={styles.button_picked} />}
         <button onClick={this.onClick} style={{ ...style }} className={styles.button_sample}>
           {t('ButtonModal_Button_Sample_text')}

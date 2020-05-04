@@ -1,12 +1,21 @@
 import { typeMapper } from './typeMapper';
-import { BUTTON_TYPE, DEFAULT_CONFIG } from './constants';
+import { LINK_BUTTON_TYPE, ACTION_BUTTON_TYPE, DEFAULT_CONFIG } from './constants';
 import { createTheme as theme } from './defaults';
-export { typeMapper as buttonTypeMapper, BUTTON_TYPE };
-export const pluginButton = (config = {}) => {
+export { typeMapper as buttonTypeMapper, LINK_BUTTON_TYPE, ACTION_BUTTON_TYPE };
+
+const pluginButton = (type, config) => {
   return {
     config: { ...DEFAULT_CONFIG, ...config },
-    type: BUTTON_TYPE,
+    type,
     typeMapper,
     theme,
   };
+};
+
+export const pluginLinkButton = (config = {}) => {
+  return pluginButton(LINK_BUTTON_TYPE, config);
+};
+
+export const pluginActionButton = (config = {}) => {
+  return pluginButton(ACTION_BUTTON_TYPE, config);
 };

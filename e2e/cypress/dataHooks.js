@@ -5,8 +5,8 @@ export const INLINE_TOOLBAR_BUTTONS = {
   COLOR: 'TextColorButton',
   TITLE: 'textBlockStyleButton_Title',
   QUOTE: 'textBlockStyleButton_Quote',
-  ORDERED_LIST: 'textBlockStyleButton_Numbering',
-  UNORDERED_LIST: 'textBlockStyleButton_Bullets',
+  ORDERED_LIST: 'textBlockStyleButton_Numberedlist',
+  UNORDERED_LIST: 'textBlockStyleButton_Bulletedlist',
   ALIGNMENT: 'textDropDownButton_Alignment',
   TEXT_ALIGN_CENTER: 'textAlignmentButton_center',
   TEXT_ALIGN_LEFT: 'textAlignmentButton_left',
@@ -113,6 +113,7 @@ export const PLUGIN_COMPONENT = {
   FILE_UPLOAD: 'fileUploadViewer',
   EMOJI: 'EMOJI_insert_plugin_button',
   LINK_PREVIEW: 'linkPreviewViewer',
+  BUTTON: 'buttonViewer',
 };
 
 export const DIVIDER_DROPDOWN_OPTIONS = {
@@ -120,4 +121,10 @@ export const DIVIDER_DROPDOWN_OPTIONS = {
   DOUBLE: 'double_dropdown_option',
   DASHED: 'dashed_dropdown_option',
   DOTTED: 'dotted_dropdown_option',
+};
+
+export const BUTTON_PLUGIN_MODAL = {
+  DESIGN_TAB: 'design_Tab',
+  BUTTON_SAMPLE: 'buttonSample_3',
+  DONE: SETTINGS_PANEL.DONE,
 };

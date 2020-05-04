@@ -22,7 +22,9 @@ export const BLOCK_TYPES = Object.freeze([
   'unstyled',
 ]);
 
-export const BUTTON_TYPE = 'wix-draft-plugin-button';
+/* eslint-disable camelcase */
+export const LINK_BUTTON_TYPE = 'wix-draft-plugin-link-button';
+export const ACTION_BUTTON_TYPE = 'wix-draft-plugin-action-button';
 export const CODE_BLOCK_TYPE = 'code-block';
 export const DIVIDER_TYPE = 'wix-draft-plugin-divider';
 export const EMOJI_TYPE = 'wix-draft-plugin-emoji';
