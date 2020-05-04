@@ -13,25 +13,31 @@ interface Props {
   [propName: string]: any;
 }
 
-export default function EditorModal({
-  isOpen,
-  contentLabel,
-  style,
-  role,
-  onRequestClose,
-  ModalsMap,
-  locale,
-  ...modalProps
-}: Props) {
-  return (
-    <ReactModal
-      isOpen={isOpen}
-      contentLabel={contentLabel}
-      style={style}
-      role={role}
-      onRequestClose={onRequestClose}
-    >
-      <RichContentEditorModal modalsMap={ModalsMap} locale={locale} {...modalProps} />
-    </ReactModal>
-  );
+export default class EditorModal extends React.Component<Props, {}> {
+  componentDidMount() {
+    ReactModal.setAppElement('body');
+  }
+  render() {
+    const {
+      isOpen,
+      contentLabel,
+      style,
+      role,
+      onRequestClose,
+      ModalsMap,
+      locale,
+      ...modalProps
+    } = this.props;
+    return (
+      <ReactModal
+        isOpen={isOpen}
+        contentLabel={contentLabel}
+        style={style}
+        role={role}
+        onRequestClose={onRequestClose}
+      >
+        <RichContentEditorModal modalsMap={ModalsMap} locale={locale} {...modalProps} />
+      </ReactModal>
+    );
+  }
 }

@@ -6,7 +6,7 @@ export default ({ helpers, t, settings }) => {
   const icon = settings?.toolbar?.icons?.InsertPluginButtonIcon || InsertPluginIcon;
   return [
     {
-      name: 'Map',
+      name: 'MapPlugin_InsertButton',
       tooltipText: t('MapPlugin_InsertButton_Tooltip'),
       toolbars: [TOOLBARS.FOOTER, TOOLBARS.SIDE],
       Icon: icon,

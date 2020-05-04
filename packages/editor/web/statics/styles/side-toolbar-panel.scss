@@ -1,0 +1,104 @@
+.sideToolbarPanelWrapper {
+  display: flex;
+  padding: 0px 12px;
+  overflow: auto;
+  justify-items: center;
+  justify-content: center;
+  height: max-content;
+  max-height: 400px;
+
+  &.horizontalMenu {
+    padding: 6px;
+  }
+  .pluginsWrapper {
+    width: 100%;
+  }
+
+  .searchWrapper {
+    position: fixed;
+    width: 296px;
+    align-self: start;
+    background-color: white;
+    z-index: 3;
+    padding-top: 12px;
+    @media only screen and (max-width: 640px) {
+      padding: 0;
+    }
+  }
+
+  .pluginsSectionEmptyState,
+  .pluginsSection {
+    color: #000000;
+  }
+
+  .pluginsSectionEmptyState {
+    line-height: 16px;
+    font-size: 12px;
+    text-align: center;
+    white-space: pre;
+    letter-spacing: 1px;
+    margin-top: 12px;
+  }
+  .withSearch {
+    padding-top: 52px;
+  }
+
+  .pluginsSection {
+    height: 28px;
+    background-color: rgba(0, 0, 0, 0.06);
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .section {
+    display: grid;
+    grid-row-gap: 12px;
+    padding-top: 12px;
+    &.horizontalMenu {
+      padding-top: 0px;
+    }
+  }
+
+  .buttonsWrapper {
+    display: grid;
+    justify-items: center;
+    grid-row-gap: 12px;
+    grid-auto-rows: 72px;
+    grid-template-columns: 98px 98px 98px;
+    align-items: center;
+    &.horizontalMenu {
+      display: flex;
+    }
+
+    @media only screen and (max-width: 640px) {
+      grid-row-gap: 8px;
+      width: 100%;
+      grid-template-columns: repeat(3, 1fr);
+      margin-top: 0;
+    }
+
+    .buttonWrapper {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      justify-content: center;
+      text-align: center;
+      cursor: pointer;
+      &.horizontalMenu {
+        height: 38px;
+      }
+      .pluginName {
+        font-size: 12px;
+        line-height: 16px;
+        color: #000000;
+      }
+
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.06);
+      }
+    }
+  }
+}

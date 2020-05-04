@@ -3,6 +3,7 @@ import { storiesOf } from '@storybook/react';
 import LinkPreviewStory from './LinkPreview';
 import GalleryPlugin from './GalleryPlugin';
 import DividerPluginStory from './Divider';
+import ButtonsPluginStory from './Buttons';
 import Image from './Image';
 import Video from './Video';
 
@@ -11,4 +12,5 @@ storiesOf('Plugins')
   .add('Image', Image)
   .add('Video', Video)
   .add('Gallery', GalleryPlugin)
-  .add('Link Preview', LinkPreviewStory);
+  .add('Link Preview', LinkPreviewStory)
+  .add('Buttons', ButtonsPluginStory);

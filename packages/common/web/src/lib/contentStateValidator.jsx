@@ -13,7 +13,8 @@ import mentionsSchema from '../../statics/schemas/plugin-mentions.schema.json';
 import soundCloudSchema from '../../statics/schemas/plugin-sound-cloud.schema.json';
 import videoSchema from '../../statics/schemas/plugin-video.schema.json';
 import {
-  BUTTON_TYPE,
+  LINK_BUTTON_TYPE,
+  ACTION_BUTTON_TYPE,
   DIVIDER_TYPE,
   GALLERY_TYPE,
   FILE_UPLOAD_TYPE,
@@ -37,7 +38,8 @@ export const isValidEditorData = payload => {
     [FILE_UPLOAD_TYPE]: fileUploadSchema,
     [SOUND_CLOUD_TYPE]: soundCloudSchema,
     [MAP_TYPE]: mapSchema,
-    [BUTTON_TYPE]: buttonSchema,
+    [LINK_BUTTON_TYPE]: buttonSchema,
+    [ACTION_BUTTON_TYPE]: buttonSchema,
     [HTML_TYPE]: htmlSchema,
     [LINK_TYPE]: linkSchema,
     [LINK_PREVIEW_TYPE]: linkPreviewSchema,

@@ -16,7 +16,7 @@ import {
 import { get } from 'lodash';
 
 const createEditorToolbars = ({ buttons, textAlignment, refId, context }) => {
-  const { uiSettings, getToolbarSettings = () => [] } = context.config;
+  const { uiSettings = {}, getToolbarSettings = () => [] } = context.config;
   const { pluginButtons, pluginTextButtons } = buttons;
 
   const { isMobile, theme = {} } = context;
@@ -68,6 +68,7 @@ const createEditorToolbars = ({ buttons, textAlignment, refId, context }) => {
         getInstance,
         getDisplayOptions,
         getToolbarDecorationFn,
+        addPluginMenuConfig,
       }) => {
         toolbars[name] = getInstance({
           ...context,
@@ -85,6 +86,7 @@ const createEditorToolbars = ({ buttons, textAlignment, refId, context }) => {
           uiSettings,
           pubsub,
           refId,
+          addPluginMenuConfig,
         });
       }
     );
