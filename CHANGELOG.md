@@ -18,6 +18,8 @@
 ### :rocket: New Feature
 - `button`
   - [#958](https://github.com/wix-incubator/rich-content/pull/958) action button plugin - button with onClick callback
+- `plugin menu`
+  - [#739](https://github.com/wix-incubator/rich-content/pull/739) plugin menu configuration for advanced menu - search plugins and divide to sections options
 ### :bug: Bug Fix
 - `editor`
   - [#941](https://github.com/wix-incubator/rich-content/pull/941) add tooltips for settings panels
