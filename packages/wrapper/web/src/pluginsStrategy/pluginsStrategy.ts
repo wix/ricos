@@ -39,15 +39,16 @@ function viewerStrategy(
   contentState?: ContentState
 ) {
   const { type, config, typeMapper, decorator, inlineStyleMapper } = curr;
+  const finalConfig = { ...prev.config, [type]: config };
   return {
-    config: { ...prev.config, [type]: config },
+    config: finalConfig,
     typeMappers: (typeMapper && prev.typeMappers.concat([typeMapper])) || prev.typeMappers,
     decorators:
       (decorator && prev.decorators.concat([decorator(theme, config)])) || prev.decorators,
     inlineStyleMappers:
       (inlineStyleMapper &&
         contentState &&
-        prev.inlineStyleMappers.concat([inlineStyleMapper?.(config, contentState)])) ||
+        prev.inlineStyleMappers.concat([inlineStyleMapper?.(finalConfig, contentState)])) ||
       prev.inlineStyleMappers,
   };
 }
