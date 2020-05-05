@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Section, Page, RichContentEditorBox } from '../Components/StoryParts';
 import EditorWrapper from '../Components/EditorWrapper';
 import emptyContentState from '../../../../e2e/tests/fixtures/empty.json';
-import { Box, Dropdown, MultiSelectCheckbox, MobilePreviewWidget } from 'wix-style-react';
+import { Box, Dropdown, MultiSelectCheckbox } from 'wix-style-react';
 
 const optionsIdMap = {
   1: true,
@@ -116,12 +116,6 @@ export default () => {
             <Section>
               <RichContentEditorBox>{this.getEditor({ key: editorKey })}</RichContentEditorBox>
             </Section>
-            <Section>
-              <MobilePreviewWidget skin="custom">
-                {this.getEditor({ isMobile: true })}
-              </MobilePreviewWidget>
-            </Section>
-
             <div>
               Note: defaults for unset fields are:
               <ul>
