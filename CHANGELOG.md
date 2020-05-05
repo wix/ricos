@@ -15,14 +15,14 @@
     Click to see more.
   </summary>
 
-
-</details>
-<hr/>
-
-## 7.5.0 (May 5, 2020)
 ### :rocket: New Feature
 - `viewer`
   - [#1005](https://github.com/wix-incubator/rich-content/pull/1005) add viewMode SEO to ProGallery
+- `wrapper`
+  - [#1003](https://github.com/wix-incubator/rich-content/pull/1003) RichContentWrapper was split into RicosEditor & RicosViewer
+### :house: Internal
+- `storybook`
+  - [#1003](https://github.com/wix-incubator/rich-content/pull/1003) added story for wrapper handling of static text toolbar
 
 </details>
 <hr/>
