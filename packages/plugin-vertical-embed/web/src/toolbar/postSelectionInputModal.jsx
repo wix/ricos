@@ -10,7 +10,7 @@ export default class PostSelectionInputModal extends Component {
       componentData: { type },
     } = props;
     this.fetcher = fetchFunctions[type];
-    this.fetcher.get().then(products => this.setState({ products }));
+    this.fetcher.search('').then(products => this.setState({ products }));
   }
   state = {
     errorMsg: '',
@@ -18,7 +18,7 @@ export default class PostSelectionInputModal extends Component {
     selectedProduct: null,
   };
 
-  onInputChange = inputString => {
+  onInputChange = (inputString = '') => {
     this.fetcher.search(inputString).then(products => this.setState({ products }));
     this.setState({ inputString });
   };
