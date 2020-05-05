@@ -26,6 +26,7 @@ class ImageSettings extends Component {
     this.captionLabel = t('ImageSettings_Caption_Label');
     this.captionInputPlaceholder = t('ImageSettings_Caption_Input_Placeholder');
     this.altLabel = t('ImageSettings_Alt_Label');
+    this.altTooltip = 'ImageSettings_Alt_Label_Tooltip';
     this.altInputPlaceholder = t('ImageSettings_Alt_Input_Placeholder');
     this.linkLabel = t('ImageSettings_Link_Label');
   }
@@ -202,9 +203,12 @@ class ImageSettings extends Component {
               id="imageSettingsAltInput"
               label={this.altLabel}
               placeholder={this.altInputPlaceholder}
+              tooltipTextKey={this.altTooltip}
+              t={t}
               value={metadata.alt || ''}
               onChange={event => this.metadataUpdated(metadata, { alt: event.target.value })}
               dataHook="imageSettingsAltInput"
+              isMobile={isMobile}
             />
           </SettingsSection>
           <SettingsSection
@@ -225,6 +229,7 @@ class ImageSettings extends Component {
               ariaProps={{ 'aria-labelledby': 'image_settings_link_lbl' }}
               languageDir={languageDir}
               placeholder={placeholder}
+              isMobile={isMobile}
             />
           </SettingsSection>
         </div>

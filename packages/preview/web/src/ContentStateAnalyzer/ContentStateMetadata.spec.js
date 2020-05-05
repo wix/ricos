@@ -1045,7 +1045,8 @@ describe('content state media metadata', () => {
     {
       height: 270,
       thumbnail: 'https://media3.giphy.com/media/uL0lBBzFn98eQ/giphy_s.gif',
-      type: 'image',
+      type: 'image/gif',
+      source: 'static',
       url: 'https://media3.giphy.com/media/uL0lBBzFn98eQ/giphy.gif',
       width: 360,
     },
@@ -1068,7 +1069,7 @@ describe('content state media metadata', () => {
   ];
 
   it('should return all the image data', () => {
-    expect(metadata.images).toEqual(mediaData.filter(({ type }) => type === 'image'));
+    expect(metadata.images).toEqual(mediaData.filter(({ type }) => type.includes('image')));
   });
 
   it('should return all the video data', () => {

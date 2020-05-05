@@ -24,7 +24,7 @@ const createInsertButtons /*: CreateInsertButtons */ = ({ helpers, t, settings, 
   return [
     {
       type: 'modal',
-      name: 'Video',
+      name: 'VideoPlugin_InsertButton',
       tooltipText: t('VideoPlugin_InsertButton_Tooltip'),
       Icon: icon,
       componentData: DEFAULTS,

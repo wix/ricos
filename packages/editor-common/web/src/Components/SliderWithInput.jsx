@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { debounce, isNumber } from 'lodash';
-
+import InfoIcon from './InfoIcon';
 import { mergeStyles } from 'wix-rich-content-common';
 import Slider from './Slider';
 import styles from '../../statics/styles/slider-with-input.scss';
+import generalstyles from '../../statics/styles/general.scss';
 
 class SliderWithInput extends Component {
   styles = mergeStyles({ styles, theme: this.props.theme });
@@ -38,7 +39,18 @@ class SliderWithInput extends Component {
   normalizeInputValue = value => Math.min(Math.max(this.getInputMin(), value), this.getInputMax());
 
   render() {
-    const { label, value, min, max, onChange, theme, sliderDataHook, inputDataHook } = this.props;
+    const {
+      label,
+      value,
+      min,
+      max,
+      onChange,
+      theme,
+      sliderDataHook,
+      inputDataHook,
+      tooltipTextKey,
+      t,
+    } = this.props;
     let ariaProps = label ? { 'aria-labelledby': `${this.id}_lbl` } : {};
     ariaProps = {
       ...ariaProps,
@@ -46,15 +58,17 @@ class SliderWithInput extends Component {
       'aria-valuemax': max,
       'aria-valuenow': value,
     };
-
     /* eslint-disable jsx-a11y/role-has-required-aria-props */
     return (
       <div>
-        {label ? (
-          <span id={`${this.id}_lbl`} className={this.styles.sliderWithInput_label}>
-            {label}
-          </span>
-        ) : null}
+        <div className={generalstyles.infoContainer}>
+          {label ? (
+            <span id={`${this.id}_lbl`} className={this.styles.sliderWithInput_label}>
+              {label}
+            </span>
+          ) : null}
+          {tooltipTextKey && <InfoIcon tooltipText={t(tooltipTextKey)} />}
+        </div>
         <div className={this.styles.sliderWithInput_content}>
           <Slider
             theme={theme}
@@ -100,6 +114,8 @@ SliderWithInput.propTypes = {
   onChange: PropTypes.func.isRequired,
   sliderDataHook: PropTypes.string,
   inputDataHook: PropTypes.string,
+  tooltipTextKey: PropTypes.string,
+  t: PropTypes.func,
 };
 
 SliderWithInput.defaultProps = {
