@@ -18,13 +18,8 @@ export default class PostSelectionInputModal extends Component {
     selectedProduct: null,
   };
 
-  async search(query = '') {
-    const products = await this.fetcher.search(query);
-    this.setState({ products });
-  }
-
   onInputChange = inputString => {
-    this.search(inputString);
+    this.fetcher.search(inputString).then(products => this.setState({ products }));
     this.setState({ inputString });
   };
 
