@@ -6,11 +6,11 @@ export default class PostSelectionInputModal extends Component {
   constructor(props) {
     super(props);
     const {
-      fetchFunctions,
+      verticalsApi,
       componentData: { type },
     } = props;
-    this.fetcher = fetchFunctions[type];
-    this.fetcher.search('').then(products => this.setState({ products }));
+    this.verticalApi = verticalsApi[type];
+    this.verticalApi.search('').then(products => this.setState({ products }));
   }
   state = {
     errorMsg: '',
@@ -19,7 +19,7 @@ export default class PostSelectionInputModal extends Component {
   };
 
   onInputChange = (inputString = '') => {
-    this.fetcher.search(inputString).then(products => this.setState({ products }));
+    this.verticalApi.search(inputString).then(products => this.setState({ products }));
     this.setState({ inputString });
   };
 
@@ -73,5 +73,5 @@ PostSelectionInputModal.propTypes = {
   componentData: PropTypes.object.isRequired,
   t: PropTypes.func,
   isMobile: PropTypes.bool,
-  fetchFunctions: PropTypes.object.isRequired,
+  verticalsApi: PropTypes.object.isRequired,
 };

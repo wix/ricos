@@ -468,7 +468,7 @@ const config = {
     // },
   },
   [VERTICAL_EMBED_TYPE]: {
-    fetchFunctions: {
+    verticalsApi: {
       [product]: new MockVerticalSearchModule(product),
       [event]: new MockVerticalSearchModule(event),
       [booking]: new MockVerticalSearchModule(booking),
