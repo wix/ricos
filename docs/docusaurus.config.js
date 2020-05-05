@@ -28,7 +28,7 @@ module.exports = {
           position: 'left',
         },
         {
-          to: 'docs/plugins_api/PluginCustomization',
+          to: 'docs/plugin-development-guidelines/general',
           activeBasePath: 'docs',
           label: 'For Developers',
           position: 'left',

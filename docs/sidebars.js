@@ -33,6 +33,18 @@ module.exports = {
           'rcv_api/addAnchors',
         ],
       },
+      {
+        type: 'category',
+        label: 'Plugin API',
+        items: ['plugins_api/PluginCustomization'],
+      },
+    ],
+  },
+  devs: {
+    'Plugin Development Guidelines': [
+      'plugin-development-guidelines/general',
+      'plugin-development-guidelines/modals',
+      'plugin-development-guidelines/theming',
     ],
   },
 };
