@@ -1,4 +1,4 @@
-import { pluginButton } from 'wix-rich-content-plugin-button/dist/module.viewer';
+import { pluginLinkButton } from 'wix-rich-content-plugin-button/dist/module.viewer';
 import { pluginCodeBlock } from 'wix-rich-content-plugin-code-block/dist/module.viewer';
 import { pluginDivider } from 'wix-rich-content-plugin-divider/dist/module.viewer';
 import { pluginEmoji } from 'wix-rich-content-plugin-emoji/dist/module.viewer';
@@ -54,7 +54,7 @@ const configs = {
 };
 
 const plugins = [
-  pluginButton(),
+  pluginLinkButton(),
   pluginCodeBlock(),
   pluginDivider(),
   pluginEmoji(),

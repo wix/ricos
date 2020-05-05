@@ -1,4 +1,4 @@
-import { pluginButton } from 'wix-rich-content-plugin-button';
+import { pluginLinkButton } from 'wix-rich-content-plugin-button';
 import { pluginCodeBlock } from 'wix-rich-content-plugin-code-block';
 import { pluginDivider } from 'wix-rich-content-plugin-divider';
 import { pluginEmoji } from 'wix-rich-content-plugin-emoji';
@@ -66,7 +66,7 @@ const plugins = [
   pluginGiphy(configs.giphy),
   pluginMap({ googleMapApiKey: process.env.GOOGLE_MAPS_API_KEY }),
   pluginFileUpload(configs.fileUpload),
-  pluginButton(),
+  pluginLinkButton(),
   pluginEmoji(),
   pluginHashtag(),
   pluginHeadersMarkdown(),
