@@ -8,9 +8,9 @@ export default ({ helpers, t, settings, UndoButton, RedoButton }) => {
   return [
     {
       type: 'undo-redo',
-      name: 'Undo',
+      name: 'UndoPlugin_InsertButton',
       tooltipText: t('Undo Button'),
-      toolbars: [TOOLBARS.FOOTER, TOOLBARS.SIDE],
+      toolbars: [TOOLBARS.FOOTER],
       Icon: undoIcon,
       componentData: {},
       wrappingComponent: UndoButton,
@@ -19,9 +19,9 @@ export default ({ helpers, t, settings, UndoButton, RedoButton }) => {
     },
     {
       type: 'undo-redo',
-      name: 'Redo',
+      name: 'RedoPlugin_InsertButton',
       tooltipText: t('Redo Button'),
-      toolbars: [TOOLBARS.FOOTER, TOOLBARS.SIDE],
+      toolbars: [TOOLBARS.FOOTER],
       Icon: redoIcon,
       componentData: {},
       wrappingComponent: RedoButton,

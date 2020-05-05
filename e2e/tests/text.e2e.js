@@ -122,4 +122,10 @@ describe('text', () => {
       .blurEditor();
     cy.eyesCheckWindow(this.test.title);
   });
+
+  it('should paste plain text', () => {
+    cy.loadEditorAndViewer()
+      .focusEditor()
+      .paste('This is pasted text');
+  });
 });

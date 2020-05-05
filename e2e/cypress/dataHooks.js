@@ -17,18 +17,18 @@ export const INLINE_TOOLBAR_BUTTONS = {
 };
 
 export const STATIC_TOOLBAR_BUTTONS = {
-  VIDEO: 'Video_insert_plugin_button',
-  SOUND_CLOUD: 'SoundCloud_insert_plugin_button',
-  TWITTER: 'Twitter_insert_plugin_button',
-  FACEBOOK: 'Facebook_insert_plugin_button',
-  TIKTOK: 'TikTok_insert_plugin_button',
-  PINTEREST: 'Pinterest_insert_plugin_button',
-  YOUTUBE: 'YouTube_insert_plugin_button',
-  INSTAGRAM: 'Instagram_insert_plugin_button',
-  EVENT: 'Events_insert_plugin_button',
-  PRODUCT: 'Stores_insert_plugin_button',
-  BOOKING: 'Bookings_insert_plugin_button',
-  GIPHY: 'GIF_insert_plugin_button',
+  VIDEO: 'VideoPlugin_InsertButton',
+  SOUND_CLOUD: 'SoundcloudPlugin_InsertButton',
+  TWITTER: 'Twitter_InsertButton',
+  FACEBOOK: 'Facebook_InsertButton',
+  TIKTOK: 'TikTok_InsertButton',
+  PINTEREST: 'Pinterest_InsertButton',
+  YOUTUBE: 'YouTube_InsertButton',
+  INSTAGRAM: 'Instagram_InsertButton',
+  EVENT: 'Events_InsertButton',
+  PRODUCT: 'Stores_InsertButton',
+  BOOKING: 'Bookings_InsertButton',
+  GIPHY: 'GIFPlugin_InsertButton',
 };
 
 export const SETTINGS_PANEL = {
@@ -91,7 +91,7 @@ export const VIDEO_PLUGIN = {
 };
 
 export const HTML_PLUGIN = {
-  STATIC_TOOLBAR_BUTTON: 'HTML_insert_plugin_button',
+  STATIC_TOOLBAR_BUTTON: 'HTMLCodePlugin_InsertButton',
   INPUT: 'htmlEditPanel_htmlInput',
   UPDATE: 'htmlEditPanel_Update',
 };
@@ -111,8 +111,9 @@ export const PLUGIN_COMPONENT = {
   SOUND_CLOUD: 'soundCloudPlayer',
   MAP: 'mapViewer',
   FILE_UPLOAD: 'fileUploadViewer',
-  EMOJI: 'EMOJI_insert_plugin_button',
+  EMOJI: 'EmojiPlugin_InsertButton',
   LINK_PREVIEW: 'linkPreviewViewer',
+  BUTTON: 'buttonViewer',
 };
 
 export const DIVIDER_DROPDOWN_OPTIONS = {
@@ -120,4 +121,10 @@ export const DIVIDER_DROPDOWN_OPTIONS = {
   DOUBLE: 'double_dropdown_option',
   DASHED: 'dashed_dropdown_option',
   DOTTED: 'dotted_dropdown_option',
+};
+
+export const BUTTON_PLUGIN_MODAL = {
+  DESIGN_TAB: 'design_Tab',
+  BUTTON_SAMPLE: 'buttonSample_3',
+  DONE: SETTINGS_PANEL.DONE,
 };

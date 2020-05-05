@@ -922,3 +922,19 @@ exports[`text > allow to create link and open link toolbar (InlinePluginToolbar)
     }
   }
 };
+
+exports[`text > should paste plain text #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "This is pasted text",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {}
+};

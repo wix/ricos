@@ -10,13 +10,22 @@ const createLinkPreviewPlugin = (config = {}) => {
   if (!config[LINK_PREVIEW_TYPE]) {
     config[LINK_PREVIEW_TYPE] = {};
   }
-  const { [type]: settings, setEditorState, getEditorState, helpers, isMobile, ...rest } = config;
+  const {
+    [type]: settings,
+    setEditorState,
+    getEditorState,
+    helpers,
+    isMobile,
+    t,
+    ...rest
+  } = config;
   const toolbar = createLinkPreviewToolbar({
     settings,
     setEditorState,
     getEditorState,
     helpers,
     isMobile,
+    t,
   });
 
   const keyBindingFn = (event, { getEditorState }) => {
@@ -49,6 +58,7 @@ const createLinkPreviewPlugin = (config = {}) => {
       settings,
       helpers,
       isMobile,
+      t,
       ...rest,
     },
     underlyingPlugin

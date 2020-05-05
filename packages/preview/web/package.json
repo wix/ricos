@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-preview",
-  "version": "7.4.5",
+  "version": "7.5.0",
   "author": {
     "name": "Alex Greenstein",
     "email": "alexgr@wix.com"
@@ -16,10 +16,11 @@
     "prebuild": "npm run clean",
     "build": "rollup --environment MODULE_NAME:preview -c ../../../rollup.config.js",
     "build:dev": "cross-env NODE_ENV=development npm run build",
-    "build:analyze": "npm run build -- --environment MODULE_ANALYZE && open stats.html",
+    "build:analyze:editor": "npm run build -- --environment MODULE_ANALYZE_EDITOR  && open stats.html",
+    "build:analyze:viewer": "npm run build -- --environment MODULE_ANALYZE_VIEWER && open stats.html",
     "watch:dev": "cross-env NODE_ENV=development MODULE_WATCH=1 npm run build -- --watch.chokidar",
     "watch:flow": "css-modules-flow-types statics/styles -e scss && css-modules-flow-types statics/styles -e scss -w -s",
-    "watch": "npm run watch:dev & npm run watch:flow &",
+    "watch": "concurrently \"npm run watch:dev\" \"npm run watch:flow\"",
     "lint": "eslint 'src/**/*.{js,jsx}'",
     "test": "jest --verbose"
   },
@@ -38,9 +39,9 @@
   "dependencies": {
     "react-lines-ellipsis": "0.14.1",
     "react-measure": "~2.3.0",
-    "wix-rich-content-common": "7.4.5",
-    "wix-rich-content-editor-common": "7.4.5",
-    "wix-rich-content-viewer": "7.4.5"
+    "wix-rich-content-common": "7.5.0",
+    "wix-rich-content-editor-common": "7.5.0",
+    "wix-rich-content-viewer": "7.5.0"
   },
   "peerDependencies": {
     "@babel/runtime": "7.2.0",
@@ -54,6 +55,7 @@
     "@babel/runtime": "7.2.0",
     "babel-jest": "^25.1.0",
     "classnames": "^2.0.0",
+    "concurrently": "^5.2.0",
     "cross-env": "^5.2.0",
     "deep-freeze": "0.0.1",
     "eslint": "^6.1.0",

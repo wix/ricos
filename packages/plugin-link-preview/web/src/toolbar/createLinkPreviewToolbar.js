@@ -7,10 +7,11 @@ export default function createToolbar({
   getEditorState,
   helpers,
   isMobile,
+  t,
 }) {
   const buttons = {
     InlineButtons: createInlineButtons(setEditorState, getEditorState),
-    InsertButtons: createInsertButtons({ helpers, settings, isMobile }),
+    InsertButtons: createInsertButtons({ helpers, settings, isMobile, t }),
   };
 
   return {
