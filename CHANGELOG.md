@@ -15,20 +15,39 @@
     Click to see more.
   </summary>
 
+### :rocket: New Feature
+- `button`
+  - [#958](https://github.com/wix-incubator/rich-content/pull/958) action button plugin - button with onClick callback
+### :bug: Bug Fix
+- `editor`
+  - [#941](https://github.com/wix-incubator/rich-content/pull/941) add tooltips for settings panels
+- `preview`
+  - [#999](https://github.com/wix-incubator/rich-content/pull/999) giphy metadata is handled correctly by image and gallery data mergers
 ### :house: Internal
-- `wrapper`
-  - [#980](https://github.com/wix-incubator/rich-content/pull/980) hotfix: createEmpty import
 - `general`
-  - [#965](https://github.com/wix-incubator/rich-content/pull/965) fix: gitPRComment overrides the content of the PR comment
-  - [#985](https://github.com/wix-incubator/rich-content/pull/985) enable publishing with custom npm tag
+  - [#982](https://github.com/wix-incubator/rich-content/pull/982) `npm run watch` fixed to work concurrently with `flow` + `npm run e2e:debug` fixed to wait on serve ready
+- `storybook`
+  - [#958](https://github.com/wix-incubator/rich-content/pull/958) Buttons story added (Action & Link buttons)
 
 </details>
 <hr/>
 
+## 7.4.6 (May 3, 2020)
+### :bug: Bug Fix
+- `editor-common`
+  - [#994](https://github.com/wix-incubator/rich-content/pull/994) cursor doesn't disappear when adding plugin
+- `gallery`
+  - [#990](https://github.com/wix-incubator/rich-content/pull/990) height not updating when changing width
+### :house: Internal
+- `wrapper`
+  - [#980](https://github.com/wix-incubator/rich-content/pull/980) createEmpty import
+- `general`
+  - [#965](https://github.com/wix-incubator/rich-content/pull/965) fix: gitPRComment overrides the content of the PR comment
+  - [#985](https://github.com/wix-incubator/rich-content/pull/985) enable publishing with custom npm tag
+  - [#988](https://github.com/wix-incubator/rich-content/pull/988) Adding 'build:analyze:viewer' and 'build:analyze:editor' scripts instead of 'build:analyze' script
+
 ## 7.4.5 (Apr 28, 2020)
 ### :rocket: New Feature
-- `button`
-  - [#953](https://github.com/wix-incubator/rich-content/pull/953) action button - button with onClick callback
 - `image` `video`
   - [#972](https://github.com/wix-incubator/rich-content/pull/972) handle upload error - show message on block
 ### :bug: Bug Fix
@@ -42,7 +61,7 @@
 - `video`
   - [#974](https://github.com/wix-incubator/rich-content/pull/960) video file upload not working when block isn't selected
 - `gallery`
-  - [#963](https://github.com/wix-incubator/rich-content/pull/963) fix:Gallery doesn't show more then 3 images on load 
+  - [#963](https://github.com/wix-incubator/rich-content/pull/963) fix:Gallery doesn't show more then 3 images on load
 ### :house: Internal
 - `editor`
   - [#936](https://github.com/wix-incubator/rich-content/pull/936) arrangement of inline toolbar buttons

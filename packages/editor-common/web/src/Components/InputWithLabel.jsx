@@ -1,9 +1,12 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { omit } from 'lodash';
 import classNames from 'classnames';
+import InfoIcon from './InfoIcon';
 import { mergeStyles } from 'wix-rich-content-common';
 import styles from '../../statics/styles/input-with-label.scss';
+import generalstyles from '../../statics/styles/general.scss';
 
 class InputWithLabel extends Component {
   constructor(props) {
@@ -13,7 +16,16 @@ class InputWithLabel extends Component {
 
   renderInput = () => {
     const { styles } = this;
-    const { id, isTextArea, isFullHeight, dataHook, ...otherProps } = this.props;
+    const {
+      id,
+      isTextArea,
+      isFullHeight,
+      dataHook,
+      isMobile,
+      tooltipTextKey,
+      t,
+      ...otherProps
+    } = this.props;
     const inputProps = omit(otherProps, ['theme']);
     const inputClassName = classNames(styles.inputWithLabel_input, {
       [styles.inputWithLabel_textArea]: isTextArea,
@@ -34,11 +46,18 @@ class InputWithLabel extends Component {
 
   render() {
     const { styles } = this;
-    const { id, label, maxLength } = this.props;
+    const { id, label, maxLength, tooltipTextKey, t, isMobile } = this.props;
+    const showTooltip = !isMobile && tooltipTextKey;
+
     if (label) {
       return (
         <label htmlFor={id}>
-          <span className={styles.inputWithLabel_label}>{label}</span>
+          <div className={generalstyles.infoContainer}>
+            <span className={styles.inputWithLabel_label}>{label}</span>
+            {showTooltip && (
+              <InfoIcon iconStyles={styles.infoIcon} tooltipText={t(tooltipTextKey)} />
+            )}
+          </div>
           {this.renderInput()}
           {maxLength && this.renderCharacterCapacity()}
         </label>
@@ -58,10 +77,14 @@ InputWithLabel.propTypes = {
   dataHook: PropTypes.string,
   value: PropTypes.string,
   maxLength: PropTypes.number,
+  tooltipTextKey: PropTypes.string,
+  t: PropTypes.func,
+  isMobile: PropTypes.bool,
 };
 
 InputWithLabel.defaultProps = {
   value: '',
+  isMobile: false,
 };
 
 export default InputWithLabel;

@@ -15,13 +15,14 @@ export default ({ helpers, t, settings, isMobile }) => {
     const contentType = contentTypeMap[type];
     return {
       type: 'modal',
-      name: t(`${contentType}_InsertButton`),
+      name: `${contentType}_InsertButton`,
       tooltipText: t(`${contentType}Plugin_InsertButton_Tooltip`),
       toolbars: [TOOLBARS.FOOTER, TOOLBARS.SIDE],
       Icon: icon,
       componentData: { ...DEFAULTS, type },
       helpers,
       t,
+      section: 'BlockToolbar_Section_Embed_Wix',
       modalElement: decorateComponentWithProps(PostSelectionInputModal, settings),
       modalStyles: getModalStyles({
         customStyles: getModalCustomStyles(isMobile),

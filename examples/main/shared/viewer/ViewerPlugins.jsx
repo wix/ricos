@@ -1,5 +1,5 @@
 import theme from '../theme/theme';
-import { BUTTON_TYPE } from 'wix-rich-content-plugin-button/dist/module.viewer';
+import { ACTION_BUTTON_TYPE } from 'wix-rich-content-plugin-button/dist/module.viewer';
 import { VIDEO_TYPE, videoTypeMapper } from 'wix-rich-content-plugin-video/dist/module.viewer';
 import { dividerTypeMapper } from 'wix-rich-content-plugin-divider/dist/module.viewer';
 import { htmlTypeMapper } from 'wix-rich-content-plugin-html/dist/module.viewer';
@@ -134,8 +134,10 @@ const config = {
     getVideoUrl: src => `https://video.wixstatic.com/${src.pathname}`,
   },
   uiSettings,
-  [BUTTON_TYPE]: {
-    // onClick: () => {},
+  [ACTION_BUTTON_TYPE]: {
+    onClick: () => {
+      window.alert('onClick event..');
+    },
   },
 };
 
