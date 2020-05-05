@@ -1,4 +1,4 @@
-import { validate, getContentStateSchema } from '../Utils/data-schema-validator';
+import { checkValidity, getContentStateSchema } from '../Utils/data-schema-validator';
 import buttonSchema from '../../statics/schemas/plugin-button.schema.json';
 import dividerSchema from '../../statics/schemas/plugin-divider.schema.json';
 import gallerySchema from '../../statics/schemas/plugin-gallery.schema.json';
@@ -46,5 +46,5 @@ export const isValidEditorData = payload => {
     [GALLERY_TYPE]: gallerySchema,
     [MENTION_TYPE]: mentionsSchema,
   });
-  return validate(payload, schema);
+  return checkValidity(payload, schema);
 };
