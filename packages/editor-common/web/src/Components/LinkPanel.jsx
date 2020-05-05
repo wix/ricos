@@ -15,6 +15,7 @@ class LinkPanel extends Component {
     targetBlank: true,
     showTargetBlankCheckbox: true,
     showRelValueCheckbox: true,
+    isMobile: false,
   };
   styles = mergeStyles({ styles, theme: this.props.theme });
 
@@ -110,6 +111,7 @@ class LinkPanel extends Component {
       t,
       linkValues,
       unchangedUrl,
+      isMobile,
     } = this.props;
 
     const { isValid, targetBlank, nofollow } = linkValues;
@@ -150,7 +152,9 @@ class LinkPanel extends Component {
               checked={nofollow}
               dataHook="linkPanelRelCheckbox"
               onChange={this.handleNofollowChange}
-              contentForInfoIcon={t('LinkPanel_Nofollow_Checkbox_Tooltip')}
+              tooltipTextKey={'LinkPanel_Nofollow_Checkbox_Tooltip'}
+              t={t}
+              isMobile={isMobile}
             />
           )}
         </div>
@@ -177,5 +181,6 @@ LinkPanel.propTypes = {
   onEscape: PropTypes.func,
   placeholder: PropTypes.string,
   unchangedUrl: PropTypes.bool,
+  isMobile: PropTypes.bool,
 };
 export default LinkPanel;

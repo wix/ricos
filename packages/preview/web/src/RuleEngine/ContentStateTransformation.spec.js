@@ -64,6 +64,7 @@ describe('Content State Transformation', () => {
         thumbnailSize: 120,
         thumbnailSpacings: 0,
         titlePlacement: 'SHOW_ON_HOVER',
+        videoPlay: 'auto',
       },
     },
     mutability: 'IMMUTABLE',

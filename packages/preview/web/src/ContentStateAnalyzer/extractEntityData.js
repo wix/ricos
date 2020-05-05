@@ -48,11 +48,13 @@ const galleryConverter = entity =>
 
 const giphyConverter = entity => [
   {
-    type: 'image',
+    type: 'image/gif',
     url: entity.data.gif.originalUrl,
+    mp4: entity.data.gif.downsizedSmallMp4,
     thumbnail: entity.data.gif.stillUrl,
     width: entity.data.gif.width,
     height: entity.data.gif.height,
+    source: 'static',
   },
 ];
 
@@ -108,7 +110,8 @@ const converters = {
   'wix-draft-plugin-map': mapConverter,
   mention: defaultEntityConverter,
   'wix-draft-plugin-headers-markdown': defaultEntityConverter,
-  'wix-draft-plugin-button': defaultEntityConverter,
+  'wix-draft-plugin-link-button': defaultEntityConverter,
+  'wix-draft-plugin-action-button': defaultEntityConverter,
   LINK: linkConverter,
   LINK_PREVIEW: linkConverter,
   'wix-draft-plugin-html': defaultEntityConverter,

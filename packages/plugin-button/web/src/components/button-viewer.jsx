@@ -20,7 +20,7 @@ class ButtonViewer extends PureComponent {
           ...props,
         };
     return (
-      <Component {...props}>
+      <Component {...props} data-hook="buttonViewer">
         <div className={this.styles.button_text}>{buttonText}</div>
       </Component>
     );

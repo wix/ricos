@@ -29,7 +29,7 @@ import { HTML_TYPE } from 'wix-rich-content-plugin-html';
 import { LINK_TYPE } from 'wix-rich-content-plugin-link';
 import { MENTION_TYPE } from 'wix-rich-content-plugin-mentions';
 import { GALLERY_TYPE } from 'wix-rich-content-plugin-gallery';
-import { BUTTON_TYPE } from 'wix-rich-content-plugin-button';
+import { LINK_BUTTON_TYPE, ACTION_BUTTON_TYPE } from 'wix-rich-content-plugin-button';
 import { VERTICAL_EMBED_TYPE } from 'wix-rich-content-plugin-vertical-embed';
 import { LINK_PREVIEW_TYPE } from 'wix-rich-content-plugin-link-preview';
 import MonacoEditor from 'react-monaco-editor';
@@ -76,7 +76,8 @@ class ContentStateEditor extends PureComponent {
             [LINK_TYPE]: linkSchema,
             [MENTION_TYPE]: mentionSchema,
             [GALLERY_TYPE]: gallerySchema,
-            [BUTTON_TYPE]: buttonSchema,
+            [LINK_BUTTON_TYPE]: buttonSchema,
+            [ACTION_BUTTON_TYPE]: buttonSchema,
             [VERTICAL_EMBED_TYPE]: verticalEmbedSchema,
             [LINK_PREVIEW_TYPE]: linkPreviewSchema,
           }),
