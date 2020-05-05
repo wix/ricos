@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { RicosViewer } from 'wix-rich-content-wrapper';
+import { RicosViewer } from 'wix-rich-content-wrapper/dist/cjs/viewer';
 import { RichContentViewer } from 'wix-rich-content-viewer';
 import {
   pluginLinkButton,

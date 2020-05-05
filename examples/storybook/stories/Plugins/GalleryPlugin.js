@@ -4,7 +4,8 @@ import { RichContentViewer } from 'wix-rich-content-viewer';
 
 import { galleryTypeMapper } from 'wix-rich-content-plugin-gallery/dist/module.viewer';
 import { pluginGallery as pluginGalleryEditor } from 'wix-rich-content-plugin-gallery';
-import { RicosEditor, RicosViewer } from 'wix-rich-content-wrapper';
+import { RicosEditor } from 'wix-rich-content-wrapper';
+import { RicosViewer } from 'wix-rich-content-wrapper/dist/cjs/viewer';
 
 import fixtrue from '../../../../e2e/tests/fixtures/gallery-with-title-and-link.json';
 
