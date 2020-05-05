@@ -18,7 +18,7 @@ interface ExportedRichContentProps extends RichContentProps {
   [propName: string]: any;
 }
 
-interface RichContentWrapperProps {
+interface RicosProps {
   children?: RichContentChild;
   contentState?: ContentState;
   isMobile?: boolean;
@@ -31,14 +31,14 @@ interface RichContentWrapperProps {
 
 type RichContentChild = import('react').ReactElement<ExportedRichContentProps>;
 
-interface WixRichContentEditorProps extends RichContentWrapperProps {
+interface RicosEditorProps extends RicosProps {
   forwardedRef?: import('react').Ref<import('react').ReactElement>;
   placeholder?: string;
   textToolbarContainer?: HTMLElement;
   textToolbarType?: TextToolbarType;
 }
 
-type WixRichContentViewerProps = RichContentWrapperProps;
+type RicosViewerProps = RicosProps;
 
 type TextToolbarType = 'inline' | 'static';
 

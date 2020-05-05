@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { RichContentEditor, convertFromRaw, createWithContent } from 'wix-rich-content-editor';
-import { WixRichContentEditor } from 'wix-rich-content-wrapper';
+import { RicosEditor } from 'wix-rich-content-wrapper';
 import { pluginLinkButton, pluginActionButton } from 'wix-rich-content-plugin-button';
 import { pluginCodeBlock } from 'wix-rich-content-plugin-code-block';
 import { pluginDivider } from 'wix-rich-content-plugin-divider';
@@ -140,14 +140,14 @@ const EditorWrapper = ({ contentState, palette, onChange, rcProps = {}, isMobile
   const editorState = createWithContent(convertFromRaw(contentState));
   const theme = palette ? { theme: 'Palette', palette } : { theme: 'Default' };
   return (
-    <WixRichContentEditor plugins={editorPlugins} {...theme} rcProps={rcProps}>
+    <RicosEditor plugins={editorPlugins} {...theme} rcProps={rcProps}>
       <RichContentEditor
         editorState={editorState}
         onChange={onChange}
         helpers={{ onFilesChange }}
         isMobile={isMobile}
       />
-    </WixRichContentEditor>
+    </RicosEditor>
   );
 };
 

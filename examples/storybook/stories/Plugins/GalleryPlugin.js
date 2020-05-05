@@ -4,7 +4,7 @@ import { RichContentViewer } from 'wix-rich-content-viewer';
 
 import { galleryTypeMapper } from 'wix-rich-content-plugin-gallery/dist/module.viewer';
 import { pluginGallery as pluginGalleryEditor } from 'wix-rich-content-plugin-gallery';
-import { WixRichContentEditor, WixRichContentViewer } from 'wix-rich-content-wrapper';
+import { RicosEditor, RicosViewer } from 'wix-rich-content-wrapper';
 
 import fixtrue from '../../../../e2e/tests/fixtures/gallery-with-title-and-link.json';
 
@@ -38,14 +38,14 @@ export default () => {
 
           <Section type={Section.Types.COMPARISON}>
             <RichContentEditorBox preset="blog-preset">
-              <WixRichContentEditor plugins={editorPlugins}>
+              <RicosEditor plugins={editorPlugins}>
                 <RichContentEditor editorState={editorStateV6} />
-              </WixRichContentEditor>
+              </RicosEditor>
             </RichContentEditorBox>
             <RichContentViewerBox preset="blog-preset">
-              <WixRichContentViewer>
+              <RicosViewer>
                 <RichContentViewer initialState={fixtrueV6} typeMappers={typeMappers} />
-              </WixRichContentViewer>
+              </RicosViewer>
             </RichContentViewerBox>
           </Section>
 
@@ -56,14 +56,14 @@ export default () => {
           <h3>With v5 contentState:</h3>
           <Section type={Section.Types.COMPARISON}>
             <RichContentEditorBox preset="blog-preset">
-              <WixRichContentEditor plugins={editorPlugins}>
+              <RicosEditor plugins={editorPlugins}>
                 <RichContentEditor editorState={editorStateV5} />
-              </WixRichContentEditor>
+              </RicosEditor>
             </RichContentEditorBox>
             <RichContentViewerBox preset="blog-preset">
-              <WixRichContentViewer>
+              <RicosViewer>
                 <RichContentViewer initialState={fixtrueV5} typeMappers={typeMappers} />
-              </WixRichContentViewer>
+              </RicosViewer>
             </RichContentViewerBox>
           </Section>
           <Section title="Content State">

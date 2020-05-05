@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { WixRichContentViewer } from 'wix-rich-content-wrapper';
+import { RicosViewer } from 'wix-rich-content-wrapper';
 import { RichContentViewer } from 'wix-rich-content-viewer';
 import {
   pluginLinkButton,
@@ -82,9 +82,9 @@ const plugins = [
 const ViewerWrapper = ({ contentState, palette, isMobile, addAnchors }) => {
   const theme = palette ? { theme: 'Palette', palette } : { theme: 'Default' };
   return (
-    <WixRichContentViewer plugins={plugins} {...theme}>
+    <RicosViewer plugins={plugins} {...theme}>
       <RichContentViewer initialState={contentState} isMobile={isMobile} addAnchors={addAnchors} />
-    </WixRichContentViewer>
+    </RicosViewer>
   );
 };
 

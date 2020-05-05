@@ -8,7 +8,7 @@ import ModalDialogProvider from './ModalDialogProvider';
 import { merge } from 'lodash';
 import { isDefined } from 'ts-is-present';
 
-interface Props extends WixRichContentEditorProps, WixRichContentViewerProps {
+interface Props extends RicosEditorProps, RicosViewerProps {
   children: RichContentChild;
   isViewer: boolean;
 }
@@ -48,7 +48,7 @@ export default class EngineWrapper extends Component<Props, State> {
     this.updateLocale();
   }
 
-  componentWillReceiveProps(newProps: RichContentWrapperProps) {
+  componentWillReceiveProps(newProps: RicosProps) {
     if (newProps.locale !== this.props.locale) {
       this.updateLocale();
     }

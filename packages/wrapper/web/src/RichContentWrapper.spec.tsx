@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 import React from 'react';
-import { WixRichContentEditor, WixRichContentViewer } from './index';
+import { RicosEditor, RicosViewer } from './index';
 import { RichContentEditor } from 'wix-rich-content-editor';
 import { RichContentViewer } from 'wix-rich-content-viewer';
 import { pluginHashtag } from '../../../plugin-hashtag/web/src/editor';
@@ -14,14 +14,14 @@ const { shallow } = Enzyme;
 
 const wrapper = (wrapperProps?: any) => ({
   withEditor: (editorProps?: RichContentProps) => (
-    <WixRichContentEditor {...(wrapperProps || {})}>
+    <RicosEditor {...(wrapperProps || {})}>
       <RichContentEditor {...(editorProps || {})} />
-    </WixRichContentEditor>
+    </RicosEditor>
   ),
   withViewer: (viewerProps?: RichContentProps) => (
-    <WixRichContentViewer {...(wrapperProps || {})}>
+    <RicosViewer {...(wrapperProps || {})}>
       <RichContentViewer {...(viewerProps || { initialState: introState })} />
-    </WixRichContentViewer>
+    </RicosViewer>
   ),
 });
 

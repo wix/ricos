@@ -3,7 +3,7 @@ import EngineWrapper from './EngineWrapper';
 import { RichContentViewer } from 'wix-rich-content-viewer';
 import { shouldRenderChild } from './utils';
 
-export class WixRichContentViewer extends Component<WixRichContentViewerProps> {
+export class RicosViewer extends Component<RicosViewerProps> {
   render() {
     const { children, ...props } = this.props;
     const child = children && shouldRenderChild(true, children) ? children : <RichContentViewer />;

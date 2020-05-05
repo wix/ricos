@@ -1,5 +1,5 @@
 import React from 'react';
-import { RichContentWrapper } from 'wix-rich-content-wrapper';
+import { RicosEditor } from 'wix-rich-content-wrapper';
 import { RichContentEditor } from 'wix-rich-content-editor';
 import { pluginLinkButton, pluginActionButton } from 'wix-rich-content-plugin-button';
 import PropTypes from 'prop-types';
@@ -9,9 +9,9 @@ const config = {
 };
 
 const ButtonsEditor = ({ editorState }) => (
-  <RichContentWrapper plugins={[pluginActionButton(config), pluginLinkButton()]} isEditor>
+  <RicosEditor plugins={[pluginActionButton(config), pluginLinkButton()]}>
     <RichContentEditor editorState={editorState} />
-  </RichContentWrapper>
+  </RicosEditor>
 );
 
 ButtonsEditor.propTypes = {

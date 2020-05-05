@@ -10,7 +10,7 @@ interface State {
   StaticToolbar?: ElementType;
 }
 
-export class WixRichContentEditor extends Component<WixRichContentEditorProps, State> {
+export class RicosEditor extends Component<RicosEditorProps, State> {
   editor: typeof RichContentEditor;
   dataInstance: EditorDataInstance;
 
