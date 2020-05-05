@@ -21,6 +21,14 @@
 
 ## 7.5.0 (May 5, 2020)
 ### :rocket: New Feature
+- `viewer`
+  - [#1005](https://github.com/wix-incubator/rich-content/pull/1005) add viewMode SEO to ProGallery
+
+</details>
+<hr/>
+
+## 7.5.0 (May 5, 2020)
+### :rocket: New Feature
 - `button`
   - [#958](https://github.com/wix-incubator/rich-content/pull/958) action button plugin - button with onClick callback
 - `plugin menu`

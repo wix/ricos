@@ -183,7 +183,7 @@ jobs:
       - name: Get previous commit status
         id: previous-status
         run: |
-          echo "::set-output name=previous-status::$(echo $(curl -s https://api.github.com/repos/wix-incubator/rich-content/commits/${{ steps.previous-commit.outputs.previous-commit }}/check-suites\?app_id\=15368 -H "Accept: application/vnd.github.antiope-preview+json" | jq '.check_suites | .[] | select( .head_branch == "master") | .conclusion' | sed 's/\"//g'))"
+          echo "::set-output name=previous-status::$(echo $(curl -s https://api.github.com/repos/wix-incubator/rich-content/commits/${{ steps.previous-commit.outputs.previous-commit }}/check-suites\?app_id\=15368 -H "Accept: application/vnd.github.antiope-preview+json" | jq '.check_suites | [.[] | select( .head_branch == "master") | .conclusion] | .[:2] | .[]' | sed 's/\"//g'))"
       - name: Notify recovery in Slack
         uses: voxmedia/github-action-slack-notify-build@v1.1.1
         if: github.ref == 'refs/heads/master' && steps.previous-status.outputs.previous-status != 'success success' && (needs.e2e-visual.result == 'success' && needs.content-state-tests.result == 'success' && needs.lint-and-unit-tests.result == 'success')
