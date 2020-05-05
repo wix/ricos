@@ -27,6 +27,7 @@ const createMobileToolbar = ({
   toolbarDecorationFn,
   config,
   locale,
+  addPluginMenuConfig,
 }) => {
   const mobileTheme = getMobileTheme(theme);
   return createStaticToolbar({
@@ -46,6 +47,7 @@ const createMobileToolbar = ({
       t,
       uiSettings,
       config,
+      addPluginMenuConfig,
     }),
     anchorTarget,
     relValue,
@@ -109,6 +111,7 @@ const getMobileButtons = ({
   t,
   uiSettings,
   config,
+  addPluginMenuConfig,
 }) => {
   const addPluginIndex = buttons.findIndex(b => b === 'AddPlugin');
   if (addPluginIndex !== -1) {
@@ -134,12 +137,17 @@ const getMobileButtons = ({
         decorateComponentWithProps(AddPluginButton, {
           openModal: helpers.openModal,
           closeModal: helpers.closeModal,
-          pluginButtons,
+          structure: pluginButtons.filter(
+            ({ buttonSettings }) =>
+              buttonSettings.name !== 'UndoPlugin_InsertButton' &&
+              buttonSettings.name !== 'RedoPlugin_InsertButton'
+          ),
           getEditorState,
           setEditorState,
           pubsub,
           t,
           theme: mobileTheme,
+          addPluginMenuConfig,
         })
       );
     }

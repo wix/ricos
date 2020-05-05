@@ -673,6 +673,7 @@ export const contentState = deepFreeze({
           galleryImageRatio: 2,
           galleryType: 'Columns',
           minItemSize: 50,
+          videoPlay: 'auto',
         },
         config: {
           alignment: 'center',

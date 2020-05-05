@@ -9,7 +9,7 @@ const createInsertButtons /*: CreateInsertButtons */ = ({ helpers, t, settings }
     {
       type: 'file',
       multi: true,
-      name: 'Gallery',
+      name: 'GalleryPlugin_InsertButton',
       tooltipText: t('GalleryPlugin_InsertButton_Tooltip'),
       Icon: icon,
       componentData: DEFAULTS,
