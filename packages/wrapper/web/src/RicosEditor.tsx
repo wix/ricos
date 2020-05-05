@@ -2,7 +2,8 @@
 import React, { Component, Fragment, ElementType, FunctionComponent } from 'react';
 import EngineWrapper from './EngineWrapper';
 import { RichContentEditor } from 'wix-rich-content-editor';
-import { shouldRenderChild, createDataConverter } from './utils';
+import { createDataConverter } from './editorUtils';
+import { shouldRenderChild } from './utils';
 import ReactDOM from 'react-dom';
 import { EditorState } from 'draft-js';
 

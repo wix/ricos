@@ -60,14 +60,21 @@ export default (output, shouldExtractCss) => {
   let viewerEntry;
   try {
     let viewerPath = 'src/viewer.js';
-    fs.accessSync(`./${viewerPath}`);
-    viewerEntry = {
-      input: viewerPath,
-      output: cloneDeep(output).map(o => {
+    let viewerOutput;
+    if (process.env.MODULE_NAME === 'wrapper') {
+      viewerPath = 'src/viewer.ts';
+      viewerOutput = cloneDeep(output);
+    } else {
+      viewerOutput = cloneDeep(output).map(o => {
         const anchor = o.file.indexOf('.');
         o.file = addPartToFilename(o.file, 'viewer');
         return o;
-      }),
+      });
+    }
+    fs.accessSync(`./${viewerPath}`);
+    viewerEntry = {
+      input: viewerPath,
+      output: viewerOutput,
       plugins,
       external,
       watch,
