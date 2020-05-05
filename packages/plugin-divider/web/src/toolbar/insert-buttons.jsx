@@ -7,7 +7,7 @@ export const createInsertButtons /*: CreateInsertButtons */ = ({ helpers, t, set
   const icon = settings?.toolbar?.icons?.InsertPluginButtonIcon || InsertPluginIcon;
   return [
     {
-      name: 'Divider',
+      name: 'DividerPlugin_InsertButton',
       tooltipText: t('DividerPlugin_InsertButton_Tooltip'),
       toolbars: [TOOLBARS.FOOTER, TOOLBARS.SIDE],
       Icon: icon,

@@ -26,13 +26,16 @@
 
 .sideToolbar {
   position: absolute;
-  top: -15px;
   transform: translate(-50%);
-  color: $secondary-text-color;
   border: 1px solid #ededed;
   background: #fff;
-  border-radius: 6px;
-  padding: 9px 19px;
+  border-radius: 2px;
   box-sizing: border-box;
   white-space: nowrap;
+  width: 320px;
+  max-height: 400px;
+  display: grid;
+  box-shadow: 0 4px 8px 0 rgba(123, 99, 99, 0.1), 0 0 4px 0 rgba(0, 0, 0, 0.1);
+  pointer-events: auto;
+  overflow: hidden;
 }

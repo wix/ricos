@@ -165,8 +165,11 @@ export default ({
         <WrappingComponent
           aria-label={`Add ${name}`}
           tabIndex={tabIndex}
-          className={classNames(styles.button, button.type === 'file' && styles.fileUploadButton)}
-          data-hook={`${name.replace(' ', '_')}_insert_plugin_button`}
+          className={classNames(
+            styles.button,
+            showName ? styles.sideToolbarButton : styles.footerToolbarButton
+          )}
+          data-hook={name}
           onClick={this.onClick}
           onMouseDown={this.preventButtonGettingFocus}
           ref={this.buttonRef}
@@ -177,7 +180,7 @@ export default ({
           </div>
           {showName && (
             <span key="1" className={styles.label}>
-              {name}
+              {t(name)}
             </span>
           )}
         </WrappingComponent>
@@ -239,7 +242,10 @@ export default ({
       return (
         <FileInput
           dataHook={`${button.name}_file_input`}
-          className={classNames(styles.button, styles.fileUploadButton)}
+          className={classNames(
+            styles.button,
+            showName ? styles.sideToolbarButton : styles.footerToolbarButton
+          )}
           onChange={this.handleNativeFileChange}
           accept={accept}
           multiple={button.multi}
@@ -251,7 +257,7 @@ export default ({
           </div>
           {showName && (
             <span key="1" className={styles.label}>
-              {name}
+              {t(name)}
             </span>
           )}
         </FileInput>

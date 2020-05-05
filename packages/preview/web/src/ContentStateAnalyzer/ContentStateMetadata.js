@@ -75,7 +75,7 @@ const getContentStateMetadata = raw => {
   });
 
   const media = extractMedia(raw);
-  metadata.images = media.filter(({ type }) => type === 'image');
+  metadata.images = media.filter(({ type }) => type.includes('image'));
   metadata.videos = media.filter(({ type }) => type === 'video');
   metadata.files = media.filter(({ type }) => type === 'file');
   metadata.maps = media.filter(({ type }) => type === 'map');

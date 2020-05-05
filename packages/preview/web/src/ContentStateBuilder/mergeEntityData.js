@@ -6,7 +6,7 @@ const defaultMerger = (mediaInfo, entity) => ({
   },
 });
 
-const imageMerger = ({ url, width, height, metadata, link }, entity) => ({
+const imageMerger = ({ url, width, height, metadata, link, source = null }, entity) => ({
   ...entity,
   data: {
     ...entity.data,
@@ -18,7 +18,7 @@ const imageMerger = ({ url, width, height, metadata, link }, entity) => ({
     src: {
       width,
       height,
-      file_name: url, // eslint-disable-line
+      ...(source === 'static' ? { url, source } : { file_name: url }), // eslint-disable-line
     },
   },
 });
@@ -27,14 +27,29 @@ const galleryMerger = (items, entity) => ({
   ...entity,
   data: {
     ...entity.data,
-    items: items.map(item => ({
-      metadata: {
-        width: item.width,
-        height: item.height,
-      },
-      url: item.url,
-      itemId: item.id || item.url,
-    })),
+    items: items.map(item =>
+      item.type === 'image/gif'
+        ? {
+            itemId: item.url,
+            url: item.url,
+            metadata: {
+              type: 'video',
+              videoUrl: item.mp4,
+              videoId: item.url,
+              source: 'giphy',
+              width: item.width || 600,
+              height: item.height || 480,
+            },
+          }
+        : {
+            metadata: {
+              width: item.width,
+              height: item.height,
+            },
+            url: item.url,
+            itemId: item.id || item.url,
+          }
+    ),
   },
 });
 
