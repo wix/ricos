@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-viewer",
-  "version": "7.4.6",
+  "version": "7.4.7-alpha.0",
   "author": {
     "name": "Jonathan Bachman",
     "email": "jonathanb@wix.com"
@@ -39,7 +39,7 @@
   "dependencies": {
     "classnames": "^2.0.0",
     "wix-redraft": "1.1.1",
-    "wix-rich-content-common": "7.4.6"
+    "wix-rich-content-common": "7.4.7-alpha.0"
   },
   "peerDependencies": {
     "@babel/runtime": "7.2.0",
@@ -48,8 +48,8 @@
     "react-dom": "^16.6.3"
   },
   "devDependencies": {
-    "concurrently": "^5.2.0",
     "@babel/runtime": "7.2.0",
+    "concurrently": "^5.2.0",
     "cross-env": "^5.2.0",
     "eslint": "^6.1.0",
     "jest": "^25.1.0",
