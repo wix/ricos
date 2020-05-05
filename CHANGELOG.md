@@ -26,6 +26,9 @@
 - `preview`
   - [#999](https://github.com/wix-incubator/rich-content/pull/999) giphy metadata is handled correctly by image and gallery data mergers
 ### :house: Internal
+- `wrapper`
+  - [#980](https://github.com/wix-incubator/rich-content/pull/980) hotfix: createEmpty import
+  - [#983](https://github.com/wix-incubator/rich-content/pull/983) fix custom inlineStyleMappers (viewer)
 - `general`
   - [#982](https://github.com/wix-incubator/rich-content/pull/982) `npm run watch` fixed to work concurrently with `flow` + `npm run e2e:debug` fixed to wait on serve ready
 - `storybook`
