@@ -1,10 +1,8 @@
 ---
 id: RichContentPreviewAPI
 title: rich-content-preview
-sidebar_label: rich-content-preview
+sidebar_label: Rich Content Preview
 ---
-
-# rich-content-preview
 
 ## Introduction
 

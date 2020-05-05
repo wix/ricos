@@ -1,5 +1,5 @@
 module.exports = {
-  title: 'Wix Rich Content',
+  title: 'RiCoS',
   tagline: 'A super charged rich text editor with an extensible plugin system',
   url: 'https://wix-incubator.github.io/',
   baseUrl: '/rich-content/',
@@ -8,7 +8,7 @@ module.exports = {
   projectName: 'rich-content',
   themeConfig: {
     navbar: {
-      title: 'Wix Rich Content',
+      title: 'RiCoS',
       logo: {
         alt: 'Wix Rich Content Logo',
         src: 'img/rce.svg',
@@ -18,13 +18,19 @@ module.exports = {
         {
           to: 'docs/intro',
           activeBasePath: 'docs',
-          label: 'Docs',
+          label: 'Getting Started',
           position: 'left',
         },
         {
           to: 'docs/rce_api/RichContentEditorApi',
           activeBasePath: 'docs',
           label: 'API',
+          position: 'left',
+        },
+        {
+          to: 'docs/plugins_api/PluginCustomization',
+          activeBasePath: 'docs',
+          label: 'For Developers',
           position: 'left',
         },
         {
@@ -45,10 +51,10 @@ module.exports = {
               label: 'Introduction',
               to: 'docs/intro',
             },
-            {
-              label: 'Quick Start',
-              to: 'docs/quick-start',
-            },
+            //{
+            //label: 'Quick Start',
+            //to: 'docs/quick-start',
+            //},
           ],
         },
         {
@@ -84,7 +90,7 @@ module.exports = {
       ],
       copyright: `Copyright © ${new Date().getFullYear()} Wix`,
     },
-    defaultDarkMode: true,
+    defaultDarkMode: false,
   },
   presets: [
     [

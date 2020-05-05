@@ -4,8 +4,6 @@ title: Plugin Customization
 sidebar_label: Plugin Customization
 ---
 
-# Plugin Customization
-
 ## Motivation
 
 As it turns out, various `RichContentEditor` consumers have different customization needs. On other hand, it is important to keep the public API clean, while providing the desired customability. In order to meet these requirements, the `RichContentEditor` exposes `config` object prop.

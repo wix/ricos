@@ -109,6 +109,7 @@
 }
 
 .pluginToolbar_scrollableContainer {
+  box-sizing: content-box;
   display: flex;
   align-items: center;
   height: 100%;
