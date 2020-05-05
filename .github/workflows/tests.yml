@@ -154,7 +154,7 @@ jobs:
   notify-on-slack:
     runs-on: ubuntu-18.04
     needs: [e2e-visual, content-state-tests, lint-and-unit-tests]
-    if: always()
+    if: github.ref == 'refs/heads/master'
     steps:
       - name: Get commit author
         id: commit-author
@@ -170,7 +170,7 @@ jobs:
           echo "::set-output name=pr-author::$(curl -s https://api.github.com/repos/wix-incubator/rich-content/pulls/${{ steps.pr-number.outputs.pr-number }} | jq '.merged_by.login' | sed 's/\"//g')"
       - name: Notify fail in Slack
         uses: voxmedia/github-action-slack-notify-build@v1.1.1
-        if: github.ref == 'refs/heads/master' && (needs.e2e-visual.result == 'failure' || needs.content-state-tests.result == 'failure' || needs.lint-and-unit-tests.result == 'failure')
+        if: needs.e2e-visual.result == 'failure' || needs.content-state-tests.result == 'failure' || needs.lint-and-unit-tests.result == 'failure'
         with:
           channel_id: C0124DH7HHS #rich-content-ci
           status: FAILED ${{ env[steps.commit-author.outputs.commit-author] }} ${{ env[steps.pr-author.outputs.pr-author] }}
@@ -186,7 +186,7 @@ jobs:
           echo "::set-output name=previous-status::$(curl -s https://api.github.com/repos/wix-incubator/rich-content/commits/${{ steps.previous-commit.outputs.previous-commit }}/check-suites\?app_id\=15368 -H "Accept: application/vnd.github.antiope-preview+json" | jq '.check_suites | .[] | select( .head_branch == "master") | .conclusion' | sed 's/\"//g')"
       - name: Notify recovery in Slack
         uses: voxmedia/github-action-slack-notify-build@v1.1.1
-        if: github.ref == 'refs/heads/master' && steps.previous-status.outputs.previous-status != 'success success' && (needs.e2e-visual.result == 'success' && needs.content-state-tests.result == 'success' && needs.lint-and-unit-tests.result == 'success')
+        if: steps.previous-status.outputs.previous-status != 'success success' && (needs.e2e-visual.result == 'success' && needs.content-state-tests.result == 'success' && needs.lint-and-unit-tests.result == 'success')
         with:
           channel_id: C0124DH7HHS #rich-content-ci
           status: RECOVERED
