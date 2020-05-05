@@ -5,8 +5,7 @@ import { mergeStyles } from 'wix-rich-content-common';
 import { CheckIcon } from '../Icons';
 import styles from '../../statics/styles/checkbox.scss';
 import generalStyles from '../../statics/styles/general.scss';
-import Tooltip from './Tooltip';
-import InfoIcon from '../Icons/InfoIcon.svg';
+import InfoIcon from './InfoIcon';
 
 export default class Checkbox extends React.Component {
   static propTypes = {
@@ -15,11 +14,14 @@ export default class Checkbox extends React.Component {
     label: PropTypes.string.isRequired,
     checked: PropTypes.bool,
     dataHook: PropTypes.string,
-    contentForInfoIcon: PropTypes.string,
+    tooltipTextKey: PropTypes.string,
+    t: PropTypes.func,
+    isMobile: PropTypes.bool,
   };
 
   static defaultProps = {
     checked: false,
+    isMobile: false,
   };
 
   constructor(props) {
@@ -40,13 +42,14 @@ export default class Checkbox extends React.Component {
 
   render() {
     const { styles, generalStyles } = this;
-    const { onChange, label, checked, dataHook, contentForInfoIcon } = this.props;
+    const { onChange, label, checked, dataHook, tooltipTextKey, t, isMobile } = this.props;
     const isChecked = checked ? { defaultChecked: 'checked' } : {};
     const a11yProps = {
       'aria-label': label,
       'aria-checked': checked,
       role: 'checkbox',
     };
+    const showTooltip = !isMobile && tooltipTextKey;
 
     return (
       <label
@@ -79,15 +82,7 @@ export default class Checkbox extends React.Component {
           </i>
           <span className={styles.checkbox_label}>{label}</span>
         </div>
-        {contentForInfoIcon && (
-          <Tooltip
-            shouldRebuildOnUpdate={() => true}
-            content={contentForInfoIcon}
-            theme={styles.theme}
-          >
-            <InfoIcon className={styles.checkbox_infoIcon} />
-          </Tooltip>
-        )}
+        {showTooltip && <InfoIcon tooltipText={t(tooltipTextKey)} />}
       </label>
     );
   }

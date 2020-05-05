@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import {
-  FocusManager,
-  EditorModals,
-  getModalStyles,
-  TOOLBARS,
-} from 'wix-rich-content-editor-common';
+import { FocusManager, EditorModals, getModalStyles } from 'wix-rich-content-editor-common';
+import { isSSR } from 'wix-rich-content-common';
 import { PlusIcon, PlusActiveIcon } from '../../Icons';
 import Styles from '../../../../statics/styles/side-toolbar.scss';
+import AddPluginMenu from './AddPluginMenu';
+import PopupOffsetnHoc from './PopupOffsetnHoc';
 
 export default class AddPluginFloatingToolbar extends Component {
   state = {
@@ -18,8 +16,6 @@ export default class AddPluginFloatingToolbar extends Component {
       transform: 'translate(-50%) scale(0)',
     },
   };
-
-  id = 'side_bar';
 
   componentDidMount() {
     window.addEventListener('click', this.onWindowClick);
@@ -45,17 +41,20 @@ export default class AddPluginFloatingToolbar extends Component {
       helpers,
       t,
       isMobile,
+      addPluginMenuConfig,
     } = this.props;
     helpers.openModal({
       modalName: EditorModals.MOBILE_ADD_PLUGIN,
-      modalStyles: getModalStyles({ fullScreen: false, isMobile }),
-      structure: structure.map(Button => ({ component: Button })),
+      modalStyles: getModalStyles({ fullScreen: false, isMobile, stickyButtomMobile: true }),
+      structure,
       theme,
       hidePopup: helpers.closeModal,
       getEditorState,
       setEditorState,
       pubsub,
       t,
+      isMobile,
+      addPluginMenuConfig,
     });
   };
 
@@ -94,7 +93,7 @@ export default class AddPluginFloatingToolbar extends Component {
         ...this.getPopupOffset(),
         transform: 'translate(-50%) scale(1)',
         transition: 'transform 0.15s cubic-bezier(.3,1.2,.2,1)',
-        width: this.popup.offsetWidth,
+        width: this.popupRef.offsetWidth,
       },
       isActive: true,
       tabIndex: 0,
@@ -113,11 +112,10 @@ export default class AddPluginFloatingToolbar extends Component {
 
   getPopupOffset = () => {
     if (!this.popupOffset) {
-      if (this.popup) {
+      if (this.popupRef) {
         this.popupOffset = {
-          left: this.popup.offsetWidth / 2 + 30,
-          right: -this.popup.offsetWidth / 2 + 30,
-          top: -this.popup.offsetHeight / 4,
+          left: this.popupRef.offsetWidth / 2 + 30,
+          right: -this.popupRef.offsetWidth / 2 + 30,
         };
       }
     }
@@ -125,7 +123,16 @@ export default class AddPluginFloatingToolbar extends Component {
   };
 
   render() {
-    const { theme, getEditorState, setEditorState } = this.props;
+    const {
+      theme,
+      getEditorState,
+      setEditorState,
+      structure,
+      t,
+      addPluginMenuConfig,
+      isMobile,
+    } = this.props;
+    const { isActive } = this.state;
     const { toolbarStyles } = theme || {};
     const floatingContainerClassNames = classNames(
       Styles.sideToolbar_floatingContainer,
@@ -139,54 +146,72 @@ export default class AddPluginFloatingToolbar extends Component {
       Styles.sideToolbar,
       toolbarStyles && toolbarStyles.sideToolbar
     );
+
+    const SideToolbarPanel = ({ top }) => {
+      const { isActive } = this.state;
+      const horizontalMenuWidth = structure.length * 39;
+      return (
+        <div
+          className={popoupClassNames}
+          style={{
+            ...this.state.style,
+            top,
+            width: addPluginMenuConfig ? 320 : horizontalMenuWidth,
+          }}
+          ref={el => (this.popupRef = el)}
+          onClick={e => e.stopPropagation()}
+          role="none"
+          data-hook={'floatingAddPluginMenu'}
+        >
+          <AddPluginMenu
+            t={t}
+            getEditorState={getEditorState}
+            setEditorState={setEditorState}
+            structure={structure}
+            hidePopup={this.hidePopup}
+            addPluginMenuConfig={addPluginMenuConfig}
+            isMobile={isMobile}
+            isActive={isActive}
+          />
+        </div>
+      );
+    };
+
     return (
       <FocusManager
         role="toolbar"
-        active={this.state.isActive}
+        active={isActive}
         aria-orientation="horizontal"
         focusTrapOptions={{
           escapeDeactivates: false,
           clickOutsideDeactivates: true,
-          initialFocus: this.getFirstFocusableChildSelector(this.id),
         }}
         className={floatingContainerClassNames}
         onKeyDown={e => this.onKeyDown(e)}
       >
         <button
           aria-label={'Plugin Toolbar'}
-          aria-pressed={this.state.isActive}
+          aria-pressed={isActive}
           tabIndex="0"
           className={floatingIconClassNames}
-          data-hook="addPluginFloatingToolbar"
+          data-hook={'addPluginFloatingToolbar'}
           onClick={this.onClick}
           ref={el => (this.selectButton = el)}
         >
-          {!this.state.isActive ? <PlusIcon /> : <PlusActiveIcon />}
+          {!isActive ? <PlusIcon /> : <PlusActiveIcon />}
         </button>
-        <div
-          id={this.id}
-          className={popoupClassNames}
-          style={this.state.style}
-          ref={el => (this.popup = el)}
-        >
-          {this.props.structure.map((Component, index) => (
-            <Component
-              tabIndex={this.state.tabIndex}
-              key={index}
-              getEditorState={getEditorState}
-              setEditorState={setEditorState}
-              theme={theme}
-              hidePopup={this.hidePopup}
-              toolbarName={TOOLBARS.SIDE}
-            />
-          ))}
-        </div>
+        {!isSSR() && (
+          <PopupOffsetnHoc
+            elementHeight={this.popupRef?.offsetHeight}
+            elementMarginTop={addPluginMenuConfig ? -20 : -15}
+            elementMarginBottom={45}
+            targetElement={this.selectButton}
+          >
+            <SideToolbarPanel />
+          </PopupOffsetnHoc>
+        )}
       </FocusManager>
     );
-  }
-
-  getFirstFocusableChildSelector(id) {
-    return `#${id} *[tabindex="0"]`;
   }
 }
 
@@ -199,4 +224,5 @@ AddPluginFloatingToolbar.propTypes = {
   isMobile: PropTypes.bool,
   helpers: PropTypes.object,
   t: PropTypes.func,
+  addPluginMenuConfig: PropTypes.object,
 };

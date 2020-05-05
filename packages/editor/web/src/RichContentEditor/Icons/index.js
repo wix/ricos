@@ -11,3 +11,5 @@ export { default as TitleOneIcon } from './TitleOneIcon';
 export { default as TitleTwoIcon } from './TitleTwoIcon';
 export { default as UnderlineIcon } from './UnderlineIcon';
 export { default as UnorderedListIcon } from './UnorderedListIcon';
+export { default as SearchIcon } from './SearchIcon.svg';
+export { default as ClearIcon } from './ClearIcon.svg';

@@ -8,17 +8,32 @@ export default class AddPluginButton extends Component {
   handleClick = () => this.openAddPluginModal();
 
   openAddPluginModal = () => {
-    const { getEditorState, setEditorState, pluginButtons, pubsub, theme, t } = this.props;
+    const {
+      getEditorState,
+      setEditorState,
+      structure,
+      pubsub,
+      theme,
+      t,
+      isMobile,
+      addPluginMenuConfig,
+    } = this.props;
     this.props.openModal({
       modalName: EditorModals.MOBILE_ADD_PLUGIN,
-      modalStyles: getModalStyles({ fullScreen: false, isMobile: true }),
-      structure: pluginButtons,
+      modalStyles: getModalStyles({ fullScreen: false, isMobile: true, stickyButtomMobile: true }),
+      structure: structure.map(({ component, buttonSettings: { name, section } }) => ({
+        component,
+        name,
+        section: section || 'BlockToolbar_Section_Basic',
+      })),
       theme,
       hidePopup: this.props.closeModal,
       getEditorState,
       setEditorState,
       pubsub,
       t,
+      isMobile,
+      addPluginMenuConfig,
     });
   };
 
@@ -41,7 +56,9 @@ AddPluginButton.propTypes = {
   closeModal: PropTypes.func.isRequired,
   getEditorState: PropTypes.func.isRequired,
   setEditorState: PropTypes.func.isRequired,
-  pluginButtons: PropTypes.array,
+  structure: PropTypes.array,
   theme: PropTypes.object.isRequired,
   t: PropTypes.func,
+  isMobile: PropTypes.bool,
+  addPluginMenuConfig: PropTypes.object,
 };

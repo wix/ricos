@@ -1,0 +1,77 @@
+{
+  "blocks": [
+    {
+      "key": "50k2j",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "11o7j",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "36k46",
+      "text": " ",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 0
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "dimvk",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "type": "wix-draft-plugin-action-button",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "config": {
+          "alignment": "center",
+          "size": "small",
+          "width": "fit-content"
+        },
+        "button": {
+          "settings": {
+            "buttonText": "Click Me",
+            "url": "",
+            "rel": false,
+            "target": true
+          },
+          "design": {
+            "activeButton": 0,
+            "borderRadius": 0,
+            "borderWidth": 0,
+            "padding": 12,
+            "background": "#0261FF",
+            "color": "#FFFFFF",
+            "borderColor": "#0261FF"
+          }
+        }
+      }
+    }
+  },
+  "VERSION": "7.3.5"
+}

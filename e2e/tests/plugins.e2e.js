@@ -4,6 +4,7 @@ import {
   PLUGIN_TOOLBAR_BUTTONS,
   DIVIDER_DROPDOWN_OPTIONS,
   STATIC_TOOLBAR_BUTTONS,
+  BUTTON_PLUGIN_MODAL,
 } from '../cypress/dataHooks';
 import { DEFAULT_DESKTOP_BROWSERS } from './settings';
 
@@ -225,10 +226,12 @@ describe('plugins', () => {
     const embedTypes = ['TWITTER', 'INSTAGRAM', 'YOUTUBE'];
     it('render upload modals', function() {
       embedTypes.forEach(embedType => {
+        const testKey = embedType + ': ' + this.test.title;
         cy.openEmbedModal(STATIC_TOOLBAR_BUTTONS[embedType]);
-        cy.eyesCheckWindow(this.test.title);
+        cy.eyesCheckWindow(testKey + ' modal');
         cy.addSocialEmbed('www.mockUrl.com');
-        cy.eyesCheckWindow(this.test.title);
+        cy.get(`#rich-content-viewer [data-hook=HtmlComponent]`).wait(200);
+        cy.eyesCheckWindow(testKey + ' added');
       });
     });
   });
@@ -280,6 +283,65 @@ describe('plugins', () => {
         cy.eyesCheckWindow(this.test.title);
         cy.get(`[data-hook*=settingPanelFooterCancel][tabindex!=-1]`).click();
       });
+    });
+  });
+
+  context('link button', () => {
+    before(function() {
+      eyesOpen(this);
+    });
+
+    beforeEach('load editor', () => cy.loadEditorAndViewer('link-button'));
+
+    after(() => cy.eyesClose());
+
+    it('create link button & customize it', function() {
+      cy.openPluginToolbar(PLUGIN_COMPONENT.BUTTON)
+        .get(`[data-hook*=${PLUGIN_TOOLBAR_BUTTONS.ADV_SETTINGS}][tabindex!=-1]`)
+        .click()
+        .get(`[data-hook*=ButtonInputModal][placeholder="Enter a URL"]`)
+        .type('www.wix.com')
+        .get(`[data-hook*=${BUTTON_PLUGIN_MODAL.DESIGN_TAB}]`)
+        .click()
+        .get(`[data-hook*=${BUTTON_PLUGIN_MODAL.BUTTON_SAMPLE}]`)
+        .click()
+        .get(`[data-hook*=${BUTTON_PLUGIN_MODAL.DONE}]`)
+        .click();
+      cy.eyesCheckWindow(this.test.title);
+    });
+  });
+
+  context('action button', () => {
+    before(function() {
+      eyesOpen(this);
+    });
+
+    beforeEach('load editor', () => cy.loadEditorAndViewer('action-button', 'actionButton'));
+
+    after(() => cy.eyesClose());
+    it('create action button & customize it', function() {
+      cy.openPluginToolbar(PLUGIN_COMPONENT.BUTTON)
+        .get(`[data-hook*=${PLUGIN_TOOLBAR_BUTTONS.ADV_SETTINGS}][tabindex!=-1]`)
+        .click()
+        .get(`[data-hook*=${BUTTON_PLUGIN_MODAL.DESIGN_TAB}]`)
+        .click()
+        .get(`[data-hook*=${BUTTON_PLUGIN_MODAL.BUTTON_SAMPLE}]`)
+        .click()
+        .get(`[data-hook*=${BUTTON_PLUGIN_MODAL.DONE}]`)
+        .click();
+      cy.eyesCheckWindow(this.test.title);
+    });
+
+    it('create action button & click it', function() {
+      const stub = cy.stub();
+      cy.on('window:alert', stub);
+      cy.get(`[data-hook*=${PLUGIN_COMPONENT.BUTTON}]`)
+        .last()
+        .click()
+        .then(() => {
+          expect(stub.getCall(0)).to.be.calledWith('onClick event..');
+        });
+      cy.eyesCheckWindow(this.test.title);
     });
   });
 });

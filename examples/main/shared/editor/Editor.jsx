@@ -30,10 +30,18 @@ export default class Editor extends PureComponent {
     this.initEditorProps();
     const { scrollingElementFn, testAppPlugins } = props;
     const additionalConfig = { [GALLERY_TYPE]: { scrollingElement: scrollingElementFn } };
-    this.pluginsConfig = Plugins.getConfig(additionalConfig);
+    const toolbarsConfig = {
+      addPluginMenuConfig: {
+        showSearch: true,
+        splitToSections: true,
+      },
+    };
+    const pluginsConfig = Plugins.getConfig(additionalConfig);
     this.plugins = testAppPlugins
       ? testAppPlugins.map(plugin => Plugins.editorPluginsMap[plugin]).flat()
       : Plugins.editorPlugins;
+    this.config = pluginsConfig;
+    this.toolbarsConfig = toolbarsConfig;
   }
 
   initEditorProps() {
@@ -86,12 +94,13 @@ export default class Editor extends PureComponent {
       },
       onVideoSelected: (url, updateEntity) => {
         //todo should be moved to videoConfig (breaking change)
+        const mockTimout = isNaN(this.props.mockImageIndex) ? null : 1;
         setTimeout(() => {
           const mockVideoIndex =
             this.props.mockImageIndex || Math.floor(Math.random() * testVideos.length);
           const testVideo = testVideos[mockVideoIndex];
           updateEntity(testVideo);
-        }, this.props.mockImageIndex || 500);
+        }, mockTimout || 500);
       },
       openModal: data => {
         const { modalStyles, ...modalProps } = data;
@@ -193,7 +202,8 @@ export default class Editor extends PureComponent {
           helpers={this.helpers}
           plugins={this.plugins}
           // config={Plugins.getConfig(additionalConfig)}
-          config={this.pluginsConfig}
+          config={this.config}
+          toolbarsConfig={this.toolbarsConfig}
           editorKey="random-editorKey-ssr"
           // siteDomain="https://www.wix.com"
           {...editorProps}

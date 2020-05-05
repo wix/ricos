@@ -165,7 +165,7 @@ if (!IS_DEV_ENV) {
   _plugins = [..._plugins, replace(), uglify()];
 }
 
-if (process.env.MODULE_ANALYZE) {
+if (process.env.MODULE_ANALYZE_EDITOR || process.env.MODULE_ANALYZE_VIEWER) {
   _plugins = [..._plugins, visualizer()];
 }
 
