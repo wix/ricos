@@ -1,0 +1,15 @@
+name: commitAfterMerge
+on:
+  push:
+    branches:
+      - master
+jobs:
+  analyze-bundles:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - run: echo " Step 2"
+      # - run: npm install
+      # - run: npm run analyzeBundles --silent
+    env:
+      REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
