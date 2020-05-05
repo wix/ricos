@@ -21,6 +21,8 @@
 - `plugin menu`
   - [#739](https://github.com/wix-incubator/rich-content/pull/739) plugin menu configuration for advanced menu - search plugins and divide to sections options
 ### :bug: Bug Fix
+- `video`
+  - [#1004](https://github.com/wix-incubator/rich-content/pull/1004) fix external video metadata
 - `editor`
   - [#941](https://github.com/wix-incubator/rich-content/pull/941) add tooltips for settings panels
 - `preview`
