@@ -94,12 +94,13 @@ export default class Editor extends PureComponent {
       },
       onVideoSelected: (url, updateEntity) => {
         //todo should be moved to videoConfig (breaking change)
+        const mockTimout = isNaN(this.props.mockImageIndex) ? null : 1;
         setTimeout(() => {
           const mockVideoIndex =
             this.props.mockImageIndex || Math.floor(Math.random() * testVideos.length);
           const testVideo = testVideos[mockVideoIndex];
           updateEntity(testVideo);
-        }, this.props.mockImageIndex || 500);
+        }, mockTimout || 500);
       },
       openModal: data => {
         const { modalStyles, ...modalProps } = data;

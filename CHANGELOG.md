@@ -23,6 +23,8 @@
 - `viewer`
   - [#1005](https://github.com/wix-incubator/rich-content/pull/1005) add viewMode SEO to ProGallery
 ### :bug: Bug Fix
+- `video`
+  - [#1004](https://github.com/wix-incubator/rich-content/pull/1004) fix external video metadata
 - `editor`
   - [#941](https://github.com/wix-incubator/rich-content/pull/941) add tooltips for settings panels
 - `preview`
