@@ -189,13 +189,12 @@ class GalleryViewer extends React.Component {
     ) : null;
   };
 
-  hoverElement = itemProps =>
-    this.state.galleryHover && (
-      <Fragment>
-        {this.renderExpandIcon(itemProps)}
-        {this.renderTitle(itemProps.title)}
-      </Fragment>
-    );
+  hoverElement = itemProps => (
+    <Fragment>
+      {this.renderExpandIcon(itemProps)}
+      {this.renderTitle(itemProps.title)}
+    </Fragment>
+  );
 
   handleContextMenu = e => this.props.disableRightClick && e.preventDefault();
 
@@ -211,8 +210,6 @@ class GalleryViewer extends React.Component {
         data-hook={'galleryViewer'}
         role="none"
         onContextMenu={this.handleContextMenu}
-        onMouseEnter={() => this.setState({ galleryHover: true })}
-        onMouseLeave={() => this.setState({ galleryHover: false })}
       >
         <ProGallery
           domId={this.domId}
