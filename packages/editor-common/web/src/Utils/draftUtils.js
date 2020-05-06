@@ -1,5 +1,6 @@
 import { EditorState, Modifier, RichUtils, SelectionState, AtomicBlockUtils } from '@wix/draft-js';
 import { cloneDeep, flatMap, findIndex, findLastIndex, countBy, debounce, times } from 'lodash';
+import { TEXT_TYPES } from '../consts';
 
 export function createSelection({ blockKey, anchorOffset, focusOffset }) {
   return SelectionState.createEmpty(blockKey).merge({
@@ -537,48 +538,40 @@ export function setSelection(editorState, selection) {
   return EditorState.acceptSelection(editorState, selection);
 }
 
-function adjustBlockDepthForContentState(contentState, selectionState, adjustment, maxDepth) {
-  const startKey = selectionState.getStartKey();
-  const endKey = selectionState.getEndKey();
-  let blockMap = contentState.getBlockMap();
-  const blocks = blockMap
+export const isTypeText = blockType => {
+  return TEXT_TYPES.some(type => type === blockType);
+};
+
+const getBlocksInSelection = (blockMap, startKey, endKey) =>
+  blockMap
     .toSeq()
     .skipUntil((_, k) => k === startKey)
     .takeUntil((_, k) => k === endKey)
-    .concat([[endKey, blockMap.get(endKey)]])
-    .map(block => {
-      let depth = block.getDepth() + adjustment;
-      depth = Math.max(0, Math.min(depth, maxDepth));
-      return block.set('depth', depth);
-    });
+    .concat([[endKey, blockMap.get(endKey)]]);
 
-  blockMap = blockMap.merge(blocks);
-
-  return contentState.merge({
-    blockMap,
-    selectionBefore: selectionState,
-    selectionAfter: selectionState,
-  });
-}
-
-export function indentSelectedBlock(editorState, direction) {
+export function indentSelectedBlocks(editorState, adjustment) {
   const maxDepth = 4;
   const selection = editorState.getSelection();
-  const key = selection.getAnchorKey();
-
-  if (key !== selection.getFocusKey()) {
+  const contentState = editorState.getCurrentContent();
+  const startKey = selection.getStartKey();
+  const endKey = selection.getEndKey();
+  const blockMap = contentState.getBlockMap();
+  let blocks = getBlocksInSelection(blockMap, startKey, endKey);
+  const isTextTypeBlocks = blocks.every(block => isTypeText(block.getType()));
+  if (!isTextTypeBlocks) {
     return editorState;
   }
 
-  const content = editorState.getCurrentContent();
-  const block = content.getBlockForKey(key);
-  const depth = block.getDepth();
-
-  if (direction === 1 && depth === maxDepth) {
-    return editorState;
-  }
-
-  const withAdjustment = adjustBlockDepthForContentState(content, selection, direction, maxDepth);
+  blocks = blocks.map(block => {
+    let depth = block.getDepth() + adjustment;
+    depth = Math.max(0, Math.min(depth, maxDepth));
+    return block.set('depth', depth);
+  });
+  const withAdjustment = contentState.merge({
+    blockMap: blockMap.merge(blocks),
+    selectionBefore: selection,
+    selectionAfter: selection,
+  });
   return EditorState.push(editorState, withAdjustment, 'adjust-depth');
 }
 
