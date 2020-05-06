@@ -51,7 +51,11 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
     const { StaticToolbar } = this.state;
 
     const child: RichContentChild =
-      children && shouldRenderChild('RichContentEditor', children) ? children : <RichContentEditor />;
+      children && shouldRenderChild('RichContentEditor', children) ? (
+        children
+      ) : (
+        <RichContentEditor />
+      );
 
     return (
       <Fragment>

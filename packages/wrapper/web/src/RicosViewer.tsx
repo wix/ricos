@@ -6,7 +6,12 @@ import { shouldRenderChild } from './utils';
 export class RicosViewer extends Component<RicosViewerProps> {
   render() {
     const { children, ...props } = this.props;
-    const child = children && shouldRenderChild('RichContentViewer', children) ? children : <RichContentViewer />;
+    const child =
+      children && shouldRenderChild('RichContentViewer', children) ? (
+        children
+      ) : (
+        <RichContentViewer />
+      );
 
     return (
       <EngineWrapper isViewer key={'viewer'} {...props}>
