@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-plugin-map",
-  "version": "7.4.6",
+  "version": "7.5.0",
   "author": {
     "name": "Ehab Sharif",
     "email": "ehabs@wix.com"
@@ -29,7 +29,7 @@
     "build:analyze:viewer": "npm run build -- --environment MODULE_ANALYZE_VIEWER && open stats.html",
     "watch:dev": "cross-env NODE_ENV=development MODULE_WATCH=1 npm run build -- --watch.chokidar",
     "watch:flow": "css-modules-flow-types statics/styles -e scss && css-modules-flow-types statics/styles -e scss -w -s",
-    "watch": "npm run watch:dev & npm run watch:flow &",
+    "watch": "concurrently \"npm run watch:dev\" \"npm run watch:flow\"",
     "release": "wnpm-release --no-shrinkwrap",
     "lint": "eslint 'src/**/*.{js,jsx}'"
   },
@@ -44,6 +44,7 @@
   "devDependencies": {
     "@babel/runtime": "7.2.0",
     "classnames": "^2.0.0",
+    "concurrently": "^5.2.0",
     "cross-env": "^5.2.0",
     "eslint": "^6.1.0",
     "eslint-import-resolver-lerna": "^1.0.0",
@@ -60,8 +61,8 @@
     "react-google-maps-loader": "~4.2.5",
     "react-google-places-suggest": "~3.8.0",
     "uuid": "~3.3.2",
-    "wix-rich-content-common": "7.4.6",
-    "wix-rich-content-editor-common": "7.4.6"
+    "wix-rich-content-common": "7.5.0",
+    "wix-rich-content-editor-common": "7.5.0"
   },
   "unpkg": true,
   "publishConfig": {

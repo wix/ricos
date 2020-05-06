@@ -41,7 +41,7 @@ export const defaultTransformation = new ContentStateTransformation({
               thumbnailSize: 120,
               gotStyleParams: true,
               showVideoPlayButton: true,
-              videoPlay: 'onClick',
+              videoPlay: 'auto',
               numberOfImagesPerRow: 2,
             },
           },

@@ -274,12 +274,12 @@ Cypress.Commands.add('setLineSpacing', (buttonIndex = 3, selection) => {
 
 Cypress.Commands.add('openSideToolbar', () => {
   cy.get('[aria-label="Plugin Toolbar"]').click();
-  cy.get('#side_bar');
+  cy.get('[data-hook="floatingAddPluginMenu"]');
 });
 
 Cypress.Commands.add('openAddPluginModal', () => {
-  cy.get('[data-hook="addPluginFloatingToolbar"]').click();
-  cy.get('[aria-label="Add Plugin"]');
+  cy.get('[data-hook="addPluginButton"]').click();
+  cy.get('[data-hook="addPluginMenu"]');
 });
 
 Cypress.Commands.add('openImageSettings', (shouldOpenToolbar = true) => {
@@ -462,7 +462,7 @@ Cypress.Commands.add('addVideoFromURL', () => {
 });
 
 Cypress.Commands.add('clickOnStaticButton', dataHook =>
-  cy.get(`[data-hook*=${dataHook}][tabindex!=-1]`).click()
+  cy.get(`[data-hook*=footerToolbar] [data-hook*=${dataHook}]`).click()
 );
 
 Cypress.Commands.add('addHtml', () => {
