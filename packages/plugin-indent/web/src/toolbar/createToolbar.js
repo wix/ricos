@@ -1,5 +1,4 @@
-import DecreaseIndentButton from './DecreaseIndentButton';
-import IncreaseIndentButton from './IncreaseIndentButton';
+import { DecreaseIndentButton, IncreaseIndentButton } from './IndentButtons';
 
 export default function createToolbar({ isMobile }) {
   return {
