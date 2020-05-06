@@ -12,6 +12,7 @@ interface RichContentProps {
   helpers?: Helpers;
   textToolbarType?: TextToolbarType;
   isMobile?: boolean;
+  toolbarsConfig?: ToolbarsConfig;
 }
 
 interface ExportedRichContentProps extends RichContentProps {
@@ -27,6 +28,7 @@ interface RicosProps {
   plugins?: PluginConfig[];
   rcProps?: RichContentProps;
   theme?: string | object;
+  toolbarsConfig?: ToolbarsConfig;
 }
 
 type RichContentChild = import('react').ReactElement<ExportedRichContentProps>;
@@ -56,3 +58,10 @@ interface EditorDataInstance {
 }
 
 type OnChangeFunction = (editorState: import('draft-js').EditorState) => void;
+
+type ToolbarsConfig = {
+  addPluginMenuConfig: {
+    showSearch: boolean;
+    splitToSections: boolean;
+  };
+};

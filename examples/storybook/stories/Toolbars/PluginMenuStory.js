@@ -94,10 +94,8 @@ export default () => {
       const editorWrapperProps = {
         isMobile,
         contentState: emptyContentState,
-        rcProps: {
-          toolbarsConfig: withAddPluginMenuConfig && toolbarsConfig,
-          pluginsToDisplay: !selectedPlugins.includes('all') && selectedPlugins,
-        },
+        toolbarsConfig: withAddPluginMenuConfig && toolbarsConfig,
+        pluginsToDisplay: !selectedPlugins.includes('all') ? [] : selectedPlugins,
       };
       if (key) {
         editorWrapperProps.key = key;

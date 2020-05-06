@@ -132,21 +132,27 @@ const pluginsMap = {
   verticalEmbed: pluginVerticalEmbed(configs.verticalEmbed),
 };
 
-const EditorWrapper = ({ contentState, palette, onChange, rcProps = {}, isMobile = false }) => {
-  const { pluginsToDisplay } = rcProps;
+const EditorWrapper = ({
+  contentState,
+  palette,
+  onChange,
+  isMobile = false,
+  toolbarsConfig,
+  pluginsToDisplay,
+}) => {
   const editorPlugins = pluginsToDisplay
     ? pluginsToDisplay.map(plugin => pluginsMap[plugin])
     : plugins;
-  const editorState = createWithContent(convertFromRaw(contentState));
   const theme = palette ? { theme: 'Palette', palette } : { theme: 'Default' };
   return (
-    <RicosEditor plugins={editorPlugins} {...theme} rcProps={rcProps}>
-      <RichContentEditor
-        editorState={editorState}
-        onChange={onChange}
-        helpers={{ onFilesChange }}
-        isMobile={isMobile}
-      />
+    <RicosEditor
+      plugins={editorPlugins}
+      {...theme}
+      contentState={contentState}
+      isMobile={isMobile}
+      toolbarsConfig={toolbarsConfig}
+    >
+      <RichContentEditor helpers={{ onFilesChange }} onChange={onChange} />
     </RicosEditor>
   );
 };
@@ -155,8 +161,9 @@ EditorWrapper.propTypes = {
   contentState: PropTypes.object,
   palette: PropTypes.arrayOf(PropTypes.object),
   onChange: PropTypes.func,
-  rcProps: PropTypes.object,
   isMobile: PropTypes.bool,
+  toolbarsConfig: PropTypes.object,
+  pluginsToDisplay: PropTypes.arrayOf(PropTypes.string),
 };
 
 export default EditorWrapper;
