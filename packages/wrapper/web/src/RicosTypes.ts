@@ -20,18 +20,17 @@ interface ExportedRichContentProps extends RichContentProps {
 }
 
 interface RicosProps {
+  _rcProps?: RichContentProps;
   children?: RichContentChild;
   contentState?: ContentState;
   isMobile?: boolean;
   locale?: string;
   palette?: Palette;
   plugins?: PluginConfig[];
-  rcProps?: RichContentProps;
   theme?: string | object;
 }
 
 interface RicosEditorProps extends RicosProps {
-  forwardedRef?: import('react').Ref<import('react').ReactElement>;
   placeholder?: string;
   textToolbarContainer?: HTMLElement;
   textToolbarType?: TextToolbarType;

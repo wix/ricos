@@ -48,7 +48,7 @@ export default class EngineWrapper extends Component<Props, State> {
     this.updateLocale();
   }
 
-  componentWillReceiveProps(newProps: RicosProps) {
+  componentWillReceiveProps(newProps: Props) {
     if (newProps.locale !== this.props.locale) {
       this.updateLocale();
     }
@@ -77,13 +77,14 @@ export default class EngineWrapper extends Component<Props, State> {
 
   render() {
     const {
-      rcProps,
+      _rcProps,
       children,
       isMobile,
       textToolbarType,
       textToolbarContainer,
       placeholder,
       contentState,
+      toolbarsConfig,
     } = this.props;
     const { ModalityProvider } = this.state;
 
@@ -95,9 +96,10 @@ export default class EngineWrapper extends Component<Props, State> {
       textToolbarType: isMobile ? 'inline' : textToolbarType, // optimization - don't need static toolbar when isMobile
       initialState: contentState,
       placeholder,
+      toolbarsConfig,
     };
 
-    const mergedRCProps = merge(strategyProps, rcProps, wrapperPropsToMerge, children.props);
+    const mergedRCProps = merge(strategyProps, _rcProps, wrapperPropsToMerge, children.props);
 
     return (
       <ModalityProvider {...mergedRCProps} textToolbarContainer={textToolbarContainer}>
