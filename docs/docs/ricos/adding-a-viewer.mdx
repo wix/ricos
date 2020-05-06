@@ -1,0 +1,68 @@
+---
+id: adding-a-viewer
+title: Introducing the rich content viewer
+sidebar_label: Add a viewer
+---
+
+import { RichContentWrapper } from "wix-rich-content-wrapper";
+import { RichContentViewer } from "wix-rich-content-viewer";
+import { pluginDivider } from "wix-rich-content-plugin-divider/dist/module.viewer.cjs";
+import { pluginVideo } from "wix-rich-content-plugin-video/dist/module.viewer.cjs";
+import "../src/css/rich-content-editor.css";
+import "wix-rich-content-plugin-video/dist/styles.min.css";
+import "wix-rich-content-plugin-divider/dist/styles.min.css";
+import "wix-rich-content-wrapper/dist/styles.min.css";
+
+Now that you have an editor, let's add a viewer to display the content it creates.
+
+```jsx
+import { WixRichContent } from "@wix/rich-content";
+import { RichContentEditor } from "wix-rich-content-editor";
+
+<WixRichContent consumer={"your app name for BI"} isEditor>
+	<RichContentEditor placeholder={"Type here!"} />
+</WixRichContent>;
+```
+
+<div class="docsEditor">
+	<RichContentWrapper consumer={"your app name for BI"} isEditor>
+		<RichContentEditor placeholder={"Type here!"} />
+	</RichContentWrapper>
+</div>
+
+Now let's add some plugins. This is how you can add videos and dividers.
+
+```bash
+npm i wix-rich-content-plugin-video wix-rich-content-plugin-divider
+```
+
+```jsx
+import { WixRichContent } from "@wix/rich-content";
+import { RichContentEditor } from "wix-rich-content-editor";
+
+import { pluginVideo } from "wix-rich-content-plugin-video";
+import "wix-rich-content-plugin-video/dist/styles.min.css";
+
+import { pluginDivider } from "wix-rich-content-plugin-divider";
+import "wix-rich-content-plugin-divider/dist/styles.min.css";
+
+<WixRichContent
+	consumer={"your app name for BI"}
+	isEditor
+	plugins={[pluginDivider(), pluginVideo()]}
+>
+	<RichContentEditor placeholder={"Type here!"} />
+</WixRichContent>;
+```
+
+<div class="docsEditor">
+	<RichContentWrapper
+		consumer={"your app name for BI"}
+		isEditor
+		plugins={[pluginDivider(), pluginVideo()]}
+	>
+		<RichContentEditor placeholder={"Type here!"} />
+	</RichContentWrapper>
+</div>
+
+There you go! A rich text editor
