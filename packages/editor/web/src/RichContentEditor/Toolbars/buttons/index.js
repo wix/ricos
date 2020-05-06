@@ -26,7 +26,6 @@ export {
   boldButton,
   italicButton,
   underlineButton,
-  indentButton,
   titleButton,
   blockquoteButton,
   alignTextLeftButton,

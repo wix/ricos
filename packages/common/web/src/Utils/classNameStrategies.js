@@ -29,3 +29,5 @@ export const textWrapClassName /*: ClassNameStrategy*/ = (componentData, theme, 
   const key = `textWrap${upperFirst(camelCase(textWrap))}`;
   return classNames(styles[key], theme[key]);
 };
+
+export const depthClassName = depth => `public-DraftStyleDefault-block-depth${depth}`;

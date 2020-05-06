@@ -537,6 +537,51 @@ export function setSelection(editorState, selection) {
   return EditorState.acceptSelection(editorState, selection);
 }
 
+function adjustBlockDepthForContentState(contentState, selectionState, adjustment, maxDepth) {
+  const startKey = selectionState.getStartKey();
+  const endKey = selectionState.getEndKey();
+  let blockMap = contentState.getBlockMap();
+  const blocks = blockMap
+    .toSeq()
+    .skipUntil((_, k) => k === startKey)
+    .takeUntil((_, k) => k === endKey)
+    .concat([[endKey, blockMap.get(endKey)]])
+    .map(block => {
+      let depth = block.getDepth() + adjustment;
+      depth = Math.max(0, Math.min(depth, maxDepth));
+      return block.set('depth', depth);
+    });
+
+  blockMap = blockMap.merge(blocks);
+
+  return contentState.merge({
+    blockMap,
+    selectionBefore: selectionState,
+    selectionAfter: selectionState,
+  });
+}
+
+export function indentSelectedBlock(editorState, direction) {
+  const maxDepth = 4;
+  const selection = editorState.getSelection();
+  const key = selection.getAnchorKey();
+
+  if (key !== selection.getFocusKey()) {
+    return editorState;
+  }
+
+  const content = editorState.getCurrentContent();
+  const block = content.getBlockForKey(key);
+  const depth = block.getDepth();
+
+  if (direction === 1 && depth === maxDepth) {
+    return editorState;
+  }
+
+  const withAdjustment = adjustBlockDepthForContentState(content, selection, direction, maxDepth);
+  return EditorState.push(editorState, withAdjustment, 'adjust-depth');
+}
+
 export function setForceSelection(editorState, selection) {
   return EditorState.forceSelection(editorState, selection);
 }

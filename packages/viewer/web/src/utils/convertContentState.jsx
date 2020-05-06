@@ -1,6 +1,6 @@
 import React from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
-import { BLOCK_TYPES } from 'wix-rich-content-common';
+import { BLOCK_TYPES, depthClassName } from 'wix-rich-content-common';
 import redraft from 'wix-redraft';
 import classNames from 'classnames';
 import { endsWith } from 'lodash';
@@ -18,6 +18,9 @@ const isEmptyContentState = raw =>
   (raw.blocks.length === 1 && raw.blocks[0].text === '' && raw.blocks[0].type === 'unstyled');
 
 const isEmptyBlock = ([_, data]) => data && data.length === 0; //eslint-disable-line no-unused-vars
+
+const getBlockDepth = (contentState, key) =>
+  contentState.blocks.find(block => block.key === key).depth || 0;
 
 const getBlockStyleClasses = (data, mergedStyles, textDirection, classes) => {
   const rtl = textDirection === 'rtl' || data.textDirection === 'rtl';
@@ -51,6 +54,7 @@ const getBlocks = (contentState, mergedStyles, textDirection, context, addAnchor
       getBlockStyleClasses,
       blockDataToStyle,
       contentState,
+      getBlockDepth,
       context,
     };
     return <List {...props} />;
@@ -59,6 +63,9 @@ const getBlocks = (contentState, mergedStyles, textDirection, context, addAnchor
   const blockFactory = (type, style, withDiv) => {
     return (children, blockProps) =>
       children.map((child, i) => {
+        const depth = getBlockDepth(contentState, blockProps.keys[i]);
+        const direction = blockProps.data[0]?.textDirection || 'ltr';
+        const directionClassName = `public-DraftStyleDefault-${direction}`;
         const ChildTag = typeof type === 'string' ? type : type(child);
 
         const { interactions } = blockProps.data[i];
@@ -69,11 +76,15 @@ const getBlocks = (contentState, mergedStyles, textDirection, context, addAnchor
         const _child = isEmptyBlock(child) ? <br /> : withDiv ? <div>{child}</div> : child;
         const inner = (
           <ChildTag
-            className={getBlockStyleClasses(
-              blockProps.data[i],
-              mergedStyles,
-              textDirection,
-              mergedStyles[style]
+            className={classNames(
+              getBlockStyleClasses(
+                blockProps.data[i],
+                mergedStyles,
+                textDirection,
+                mergedStyles[style]
+              ),
+              depthClassName(depth),
+              directionClassName
             )}
             style={blockDataToStyle(blockProps.data[i])}
             key={blockProps.keys[i]}

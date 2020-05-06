@@ -1,6 +1,7 @@
 import ThemeGenerator, { THEMES } from './ThemeGenerator';
 import { wixPalettes } from '../../tests/palettesExample';
 import { pluginHashtag } from '../../../../plugin-hashtag/web/src/editor';
+import '../types';
 
 describe('ThemeGenerator', () => {
   const createTheme = (isViewer, { theme, palette, themeGenerators }: StringThemeProperties) =>

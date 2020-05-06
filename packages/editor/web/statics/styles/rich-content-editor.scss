@@ -128,11 +128,6 @@
   line-height: $headerThreeHeight;
 }
 
-.indent {
-  composes: elementSpacing;
-  text-indent: 5%;
-}
-
 .code,
 .codeBlock {
   composes: blockStyleSpacing;
