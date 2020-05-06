@@ -4,8 +4,6 @@ export const DEFAULTS = Object.freeze({
   config: {},
 });
 
-//@colors is defined in 'ThemeGenerator.js'
-// eslint-disable-next-line no-unused-vars
-export const THEME = colors => {
+export const THEME = () => {
   return {};
 };
