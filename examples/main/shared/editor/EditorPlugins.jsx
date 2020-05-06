@@ -43,7 +43,7 @@ import { createTextHighlightPlugin, TEXT_HIGHLIGHT_TYPE } from 'wix-rich-content
 import Highlighter from 'react-highlight-words';
 import casual from 'casual-browserify';
 import { mockFetchUrlPreviewData } from '../utils/linkPreviewUtil';
-import { createIndentPlugin, INDENT_TYPE } from 'wix-rich-content-plugin-indent';
+import { createIndentPlugin } from 'wix-rich-content-plugin-indent';
 
 import 'wix-rich-content-editor-common/dist/styles.min.css';
 import 'wix-rich-content-common/dist/styles.min.css';
@@ -457,13 +457,6 @@ const config = {
     // },
   },
   [CODE_BLOCK_TYPE]: {
-    // toolbar: {
-    //   icons: {
-    //     InsertPluginButtonIcon: MyCustomIcon,
-    //   },
-    // },
-  },
-  [INDENT_TYPE]: {
     // toolbar: {
     //   icons: {
     //     InsertPluginButtonIcon: MyCustomIcon,
