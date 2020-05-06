@@ -25,7 +25,8 @@ export default (updateEditorState, customHandlers, blockType) => (command, edito
     if (isTab(command)) {
       if (isList(blockType)) {
         // eslint-disable-next-line no-restricted-globals
-        newState = indentSelectedBlock(editorState, !event.shiftKey ? 1 : -1);
+        const direction = !event.shiftKey ? 1 : -1;
+        newState = indentSelectedBlock(editorState, direction);
       } else if (isText(blockType)) {
         newState = insertString(editorState, CHARACTERS.TAB);
       } else if (!isCodeBlock(blockType)) {

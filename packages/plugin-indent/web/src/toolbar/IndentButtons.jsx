@@ -4,8 +4,19 @@ import { InlineToolbarButton, indentSelectedBlock } from 'wix-rich-content-edito
 import decreaseIndentPluginIcon from '../icons/decreaseIndentPluginIcon.svg';
 import increaseIndentPluginIcon from '../icons/increaseIndentPluginIcon.svg';
 
-function indentButton(props, direction, tooltipKey, dataHook, icon) {
-  const { theme, isMobile, t, tabIndex, setEditorState, getEditorState } = props;
+function indentButton(props) {
+  const {
+    theme,
+    isMobile,
+    t,
+    tabIndex,
+    setEditorState,
+    getEditorState,
+    direction,
+    tooltipKey,
+    dataHook,
+    icon,
+  } = props;
   return (
     <InlineToolbarButton
       onClick={() => {
@@ -26,23 +37,23 @@ function indentButton(props, direction, tooltipKey, dataHook, icon) {
 }
 
 export function DecreaseIndentButton(props) {
-  return indentButton(
-    props,
-    -1,
-    'decreaseIndentButton_Tooltip',
-    'decreaseIndentButton',
-    decreaseIndentPluginIcon
-  );
+  return indentButton({
+    ...props,
+    direction: -1,
+    tooltipKey: 'decreaseIndentButton_Tooltip',
+    dataHook: 'decreaseIndentButton',
+    icon: decreaseIndentPluginIcon,
+  });
 }
 
 export function IncreaseIndentButton(props) {
-  return indentButton(
-    props,
-    1,
-    'increaseIndentButton_Tooltip',
-    'increaseIndentButton',
-    increaseIndentPluginIcon
-  );
+  return indentButton({
+    ...props,
+    direction: 1,
+    tooltipKey: 'increaseIndentButton_Tooltip',
+    dataHook: 'increaseIndentButton',
+    icon: increaseIndentPluginIcon,
+  });
 }
 
 indentButton.propTypes = {
@@ -53,4 +64,8 @@ indentButton.propTypes = {
   t: PropTypes.func,
   tabIndex: PropTypes.number,
   config: PropTypes.object,
+  direction: PropTypes.number,
+  tooltipKey: PropTypes.string,
+  dataHook: PropTypes.string,
+  icon: PropTypes.object,
 };
