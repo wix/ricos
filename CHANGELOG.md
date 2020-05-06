@@ -35,6 +35,8 @@
   - [#941](https://github.com/wix-incubator/rich-content/pull/941) add tooltips for settings panels
 - `preview`
   - [#999](https://github.com/wix-incubator/rich-content/pull/999) giphy metadata is handled correctly by image and gallery data mergers
+- `gallery`
+  - [#1006](https://github.com/wix-incubator/rich-content/pull/1006) expand icon appears only on hovered image
 ### :house: Internal
 - `wrapper`
   - [#980](https://github.com/wix-incubator/rich-content/pull/980) createEmpty import
