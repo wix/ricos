@@ -13,11 +13,11 @@ export default () => {
   class PluginMenuStory extends Component {
     constructor(props) {
       super(props);
-      this.state = { editorKey: 0, selectedPlugins: ['all'], withAddPluginMenuConfig: true };
+      this.state = { editorKey: 0, selectedPlugins: ['all'] };
     }
 
     getCheckbox = () => {
-      const configOptions = ['showSearch', 'splitToSections', 'withAddPluginMenuConfig'];
+      const configOptions = ['showSearch', 'splitToSections'];
       const { editorKey } = this.state;
       return configOptions.map(option => (
         <Box padding="3px" key={option} align="space-between" maxWidth="440px">
@@ -83,8 +83,8 @@ export default () => {
       );
     };
 
-    getEditor = ({ key, isMobile = false }) => {
-      const { showSearch, splitToSections, withAddPluginMenuConfig, selectedPlugins } = this.state;
+    getEditor = ({ key, isMobile = false, withPluginMenuConfig = false }) => {
+      const { showSearch, splitToSections, selectedPlugins } = this.state;
       const toolbarsConfig = {
         addPluginMenuConfig: {
           showSearch,
@@ -95,7 +95,7 @@ export default () => {
         isMobile,
         contentState: emptyContentState,
         rcProps: {
-          toolbarsConfig: withAddPluginMenuConfig && toolbarsConfig,
+          toolbarsConfig: withPluginMenuConfig && toolbarsConfig,
           pluginsToDisplay: !selectedPlugins.includes('all') && selectedPlugins,
         },
       };
@@ -110,19 +110,22 @@ export default () => {
       return (
         <Page title="Plugin Menu">
           <Section>
-            <h3>Plugin Menu Config:</h3>
-            {this.getCheckbox()}
             {this.getPluginsSelection()}
+            <h3>Advanced Plugin Menu With Config:</h3>
+            {this.getCheckbox()}
             <Section>
-              <RichContentEditorBox>{this.getEditor({ key: editorKey })}</RichContentEditorBox>
+              <RichContentEditorBox>
+                {this.getEditor({ key: editorKey, withPluginMenuConfig: true })}
+              </RichContentEditorBox>
+            </Section>
+            <h3>Simple Plugin Menu Without Config:</h3>
+            <Section>
+              <RichContentEditorBox>{this.getEditor({ key: editorKey + 1 })}</RichContentEditorBox>
             </Section>
             <div>
               Note: defaults for unset fields are:
               <ul>
-                <li>
-                  If addPluginMenuConfig not supplied - you will get horizontal menu without
-                  search/sections.
-                </li>
+                <li>If addPluginMenuConfig not supplied - you will get the simple menu.</li>
                 <li>Search - off by default. </li>
                 <li>Sections - on by default.</li>
               </ul>
