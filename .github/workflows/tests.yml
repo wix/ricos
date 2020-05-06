@@ -193,7 +193,7 @@ jobs:
         if: github.ref == 'refs/heads/master' && (steps.previous-status.outputs.previous-status != 'success success' || steps.current-status.outputs.current-status != 'success success' && !contains(steps.current-status.outputs.current-status, 'null')) && (needs.e2e-visual.result == 'success' && needs.content-state-tests.result == 'success' && needs.lint-and-unit-tests.result == 'success') # master branch && (previous commit failed || rerunning a failed commit) && all tests passed
         with:
           channel_id: C0124DH7HHS #rich-content-ci
-          status: RECOVERED
+          status: 'RECOVERED :celebrate:'
           color: '#28a745'
     env:
       SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
