@@ -13,7 +13,6 @@ const typeMappers = [imageTypeMapper, linkTypeMapper, htmlTypeMapper];
 export default () => {
   return (
     <RicosViewer
-      withFullscreen={false}
       //plugins={[pluginButton(), pluginDivider(), pluginGallery(), pluginHtml(), pluginImage()]}
       theme={'Default'}
     >
