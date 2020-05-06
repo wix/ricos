@@ -5,7 +5,12 @@ export { default as ViewportRenderer } from './Components/ViewportRenderer';
 // Utils
 export { default as withI18n } from './Utils/withI18n';
 export { default as createHocName } from './Utils/createHocName';
-export { sizeClassName, alignmentClassName, textWrapClassName } from './Utils/classNameStrategies';
+export {
+  sizeClassName,
+  alignmentClassName,
+  textWrapClassName,
+  depthClassName,
+} from './Utils/classNameStrategies';
 export {
   isValidUrl,
   normalizeUrl,

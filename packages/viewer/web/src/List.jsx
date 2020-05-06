@@ -17,9 +17,6 @@ const getBlockClassName = (isNewList, dataEntry, textDirection, listType, depth)
   return className;
 };
 
-const getBlockDepth = (contentState, key) =>
-  contentState.blocks.find(block => block.key === key).depth;
-
 const List = ({
   ordered,
   items,
@@ -29,6 +26,7 @@ const List = ({
   getBlockStyleClasses,
   blockDataToStyle,
   contentState,
+  getBlockDepth,
   context,
 }) => {
   const Component = ordered ? 'ol' : 'ul';
@@ -94,6 +92,7 @@ List.propTypes = {
   ordered: PropTypes.bool,
   textDirection: PropTypes.oneOf(['rtl', 'ltr']),
   contentState: PropTypes.object,
+  getBlockDepth: PropTypes.func,
   context: PropTypes.shape({
     theme: PropTypes.object.isRequired,
     anchorTarget: PropTypes.string.isRequired,

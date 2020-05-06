@@ -24,6 +24,11 @@
   &:hover path {
     opacity: 1;
   }
+
+  display: none;
+  .gallery_container:hover & {
+    display: block;
+  }
 }
 
 .imageTitle {
@@ -40,6 +45,7 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  
 }
 
 .imageTitleContainer {
@@ -48,6 +54,11 @@
   background-color: rgba(0, 0, 0, 0.6);
   height: 35%;
   bottom: 0;
+
+  display: none;
+  .gallery_container:hover & {
+    display: block;
+  }
 }
 
 :global {
