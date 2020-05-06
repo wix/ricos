@@ -4,14 +4,14 @@ import { RichContentEditor } from 'wix-rich-content-editor';
 import { pluginImage } from 'wix-rich-content-plugin-image';
 import PropTypes from 'prop-types';
 
-const ImageEditor = ({ editorState, onFilesChange }) => (
-  <RicosEditor plugins={[pluginImage()]}>
-    <RichContentEditor editorState={editorState} helpers={{ onFilesChange }} />
+const ImageEditor = ({ contentState, onFilesChange }) => (
+  <RicosEditor plugins={[pluginImage()]} contentState={contentState}>
+    <RichContentEditor helpers={{ onFilesChange }} />
   </RicosEditor>
 );
 
 ImageEditor.propTypes = {
-  editorState: PropTypes.object,
+  contentState: PropTypes.object,
   onFilesChange: PropTypes.func,
 };
 

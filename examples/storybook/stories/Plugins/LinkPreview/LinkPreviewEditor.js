@@ -1,6 +1,5 @@
 import React from 'react';
 import { RicosEditor } from 'wix-rich-content-wrapper';
-import { RichContentEditor } from 'wix-rich-content-editor';
 import { pluginLinkPreview } from 'wix-rich-content-plugin-link-preview';
 import { pluginLink } from 'wix-rich-content-plugin-link';
 import { pluginHtml } from 'wix-rich-content-plugin-html';
@@ -13,14 +12,12 @@ const plugins = [
   pluginHtml(),
 ];
 
-const DividerEditor = ({ editorState }) => (
-  <RicosEditor plugins={plugins}>
-    <RichContentEditor editorState={editorState} />
-  </RicosEditor>
+const DividerEditor = ({ contentState }) => (
+  <RicosEditor plugins={plugins} contentState={contentState} />
 );
 
 DividerEditor.propTypes = {
-  editorState: PropTypes.object,
+  contentState: PropTypes.object,
 };
 
 export default DividerEditor;

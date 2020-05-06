@@ -6,8 +6,6 @@ import {
   Page,
 } from '../../Components/StoryParts';
 
-import { convertFromRaw, createWithContent } from 'wix-rich-content-editor';
-
 import videoContentState from '../../../../../e2e/tests/fixtures/facebook-video.json';
 import VideoEditor from './VideoEditor';
 import editorSourcecode from '!!raw-loader!./VideoEditor.js';
@@ -15,8 +13,6 @@ import VideoViewer from './VideoViewer';
 import viewerSourcecode from '!!raw-loader!./VideoViewer.js';
 import SyntaxHighlighter from '../../Components/SyntaxHighlighter';
 import { createEmpty } from 'wix-rich-content-editor/dist/lib/editorStateConversion';
-
-const editorState = createWithContent(convertFromRaw(videoContentState));
 
 const mockData = {
   url: 'https://www.youtube.com/watch?v=vzKryaN44ss',
@@ -40,10 +36,10 @@ const VideoPluginStory = () => (
   <Page title="Video Plugin">
     <Section type={Section.Types.COMPARISON}>
       <RichContentEditorBox sourcecode={editorSourcecode} contentState={videoContentState}>
-        <VideoEditor editorState={editorState} handleFileUpload={handleFileUpload.mock} />
+        <VideoEditor contentState={videoContentState} handleFileUpload={handleFileUpload.mock} />
       </RichContentEditorBox>
       <RichContentViewerBox sourcecode={viewerSourcecode}>
-        <VideoViewer initialState={videoContentState} />
+        <VideoViewer contentState={videoContentState} />
       </RichContentViewerBox>
     </Section>
 
@@ -53,7 +49,7 @@ const VideoPluginStory = () => (
         code={`handleFileUpload = (files, updateEntity) => updateEntity({ data: [], error: { msg: 'file too large' } });`}
       />
       <RichContentEditorBox>
-        <VideoEditor editorState={createEmpty()} handleFileUpload={handleFileUpload.error} />
+        <VideoEditor handleFileUpload={handleFileUpload.error} />
       </RichContentEditorBox>
     </Section>
   </Page>

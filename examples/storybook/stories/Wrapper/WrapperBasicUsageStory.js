@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { RichContentViewer } from 'wix-rich-content-viewer';
+import { RicosViewer } from 'wix-rich-content-wrapper/dist/es/viewer';
 import {
   RichContentEditorBox,
   RichContentViewerBox,
@@ -8,23 +8,21 @@ import {
   Page,
 } from '../Components/StoryParts';
 
-import { dividerTypeMapper } from 'wix-rich-content-plugin-divider/dist/module.viewer';
-import { convertFromRaw, createWithContent } from 'wix-rich-content-editor';
+import { pluginDivider } from 'wix-rich-content-plugin-divider/dist/module.viewer';
 
 import dividerContentState from '../../../../e2e/tests/fixtures/divider.json';
 import DividerEditor from './WrapperBasicUsage';
 import sourcecode from '!!raw-loader!./WrapperBasicUsage.js';
 
-const editorState = createWithContent(convertFromRaw(dividerContentState));
 export default () => {
   return (
     <Page title="Wrapper Basic Usage">
       <Section type={Section.Types.COMPARISON}>
         <RichContentEditorBox sourcecode={sourcecode} contentState={dividerContentState}>
-          <DividerEditor editorState={editorState} />
+          <DividerEditor contentState={dividerContentState} />
         </RichContentEditorBox>
         <RichContentViewerBox>
-          <RichContentViewer initialState={dividerContentState} typeMappers={[dividerTypeMapper]} />
+          <RicosViewer contentState={dividerContentState} plugins={[pluginDivider()]} />
         </RichContentViewerBox>
       </Section>
     </Page>

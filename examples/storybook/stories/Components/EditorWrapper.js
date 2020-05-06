@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { RichContentEditor, convertFromRaw, createWithContent } from 'wix-rich-content-editor';
+import { RichContentEditor } from 'wix-rich-content-editor';
 import { RicosEditor } from 'wix-rich-content-wrapper';
 import { pluginLinkButton, pluginActionButton } from 'wix-rich-content-plugin-button';
 import { pluginCodeBlock } from 'wix-rich-content-plugin-code-block';

@@ -1,5 +1,4 @@
 import React from 'react';
-import { convertFromRaw, createWithContent } from 'wix-rich-content-editor';
 import fixtrue from '../../../../../e2e/tests/fixtures/linkPreview.json';
 import LinkPreviewEditor from './LinkPreviewEditor';
 import LinkPreviewViewer from './LinkPreviewViewer';
@@ -14,8 +13,6 @@ import {
   Page,
 } from '../../Components/StoryParts';
 
-const editorState = createWithContent(convertFromRaw(fixtrue));
-
 export default () => {
   return (
     <Page title="Link Preview">
@@ -25,10 +22,10 @@ export default () => {
           contentState={fixtrue}
           preset="blog-preset"
         >
-          <LinkPreviewEditor editorState={editorState} />
+          <LinkPreviewEditor contentState={fixtrue} />
         </RichContentEditorBox>
         <RichContentViewerBox preset="blog-preset" sourcecode={viewerSourcecode}>
-          <LinkPreviewViewer initialState={fixtrue} />
+          <LinkPreviewViewer contentState={fixtrue} />
         </RichContentViewerBox>
       </Section>
 

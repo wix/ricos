@@ -1,27 +1,23 @@
 import React from 'react';
-import { RichContentViewer } from 'wix-rich-content-viewer';
-import {
-  buttonTypeMapper,
-  ACTION_BUTTON_TYPE,
-} from 'wix-rich-content-plugin-button/dist/module.viewer';
+import { RicosViewer } from 'wix-rich-content-wrapper/dist/es/viewer';
+import { pluginActionButton } from 'wix-rich-content-plugin-button/dist/module.viewer';
 import PropTypes from 'prop-types';
 
-const typeMappers = [buttonTypeMapper];
-const viewerConfig = {
-  [ACTION_BUTTON_TYPE]: {
-    onClick: () => {
-      // eslint-disable-next-line no-alert
-      window.alert('pass `onClick` prop callback to customize action');
-    },
+const buttonConfig = {
+  onClick: () => {
+    // eslint-disable-next-line no-alert
+    window.alert('pass `onClick` prop callback to customize action');
   },
 };
 
-const ButtonsViewer = ({ initialState }) => (
-  <RichContentViewer initialState={initialState} typeMappers={typeMappers} config={viewerConfig} />
+const plugins = [pluginActionButton(buttonConfig)];
+
+const ButtonsViewer = ({ contentState }) => (
+  <RicosViewer contentState={contentState} plugins={plugins} />
 );
 
 ButtonsViewer.propTypes = {
-  initialState: PropTypes.object,
+  contentState: PropTypes.object,
 };
 
 export default ButtonsViewer;

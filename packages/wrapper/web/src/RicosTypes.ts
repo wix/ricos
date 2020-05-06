@@ -28,19 +28,19 @@ interface RicosProps {
   plugins?: PluginConfig[];
   rcProps?: RichContentProps;
   theme?: string | object;
-  toolbarsConfig?: ToolbarsConfig;
 }
-
-type RichContentChild = import('react').ReactElement<ExportedRichContentProps>;
 
 interface RicosEditorProps extends RicosProps {
   forwardedRef?: import('react').Ref<import('react').ReactElement>;
   placeholder?: string;
   textToolbarContainer?: HTMLElement;
   textToolbarType?: TextToolbarType;
+  toolbarsConfig?: ToolbarsConfig;
 }
 
 type RicosViewerProps = RicosProps;
+
+type RichContentChild = import('react').ReactElement<ExportedRichContentProps>;
 
 type TextToolbarType = 'inline' | 'static';
 

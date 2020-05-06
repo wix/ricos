@@ -1,23 +1,17 @@
 import React from 'react';
-import { RichContentViewer } from 'wix-rich-content-viewer';
+import { RicosViewer } from 'wix-rich-content-wrapper/dist/es/viewer';
 import PropTypes from 'prop-types';
-import {
-  linkPreviewTypeMapper,
-  LINK_PREVIEW_TYPE,
-} from 'wix-rich-content-plugin-link-preview/dist/module.viewer';
-import { linkTypeMapper } from 'wix-rich-content-plugin-link/dist/module.viewer';
+import { pluginLinkPreview } from 'wix-rich-content-plugin-link-preview/dist/module.viewer';
+import { pluginLink } from 'wix-rich-content-plugin-link/dist/module.viewer';
 
-const typeMappers = [linkPreviewTypeMapper, linkTypeMapper];
-const viewerConfig = {
-  [LINK_PREVIEW_TYPE]: { enableEmbed: true },
-};
+const plugins = [pluginLinkPreview({ enableEmbed: true }), pluginLink()];
 
-const DividerViewer = ({ initialState }) => (
-  <RichContentViewer initialState={initialState} typeMappers={typeMappers} config={viewerConfig} />
+const DividerViewer = ({ contentState }) => (
+  <RicosViewer contentState={contentState} plugins={plugins} />
 );
 
 DividerViewer.propTypes = {
-  initialState: PropTypes.object,
+  contentState: PropTypes.object,
 };
 
 export default DividerViewer;

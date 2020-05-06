@@ -6,17 +6,12 @@ import {
   Page,
 } from '../../Components/StoryParts';
 
-import { convertFromRaw, createWithContent } from 'wix-rich-content-editor';
-
 import imageContentState from '../../../../../e2e/tests/fixtures/images.json';
 import ImageEditor from './ImageEditor';
 import editorSourcecode from '!!raw-loader!./ImageEditor.js';
 import ImageViewer from './ImageViewer';
 import viewerSourcecode from '!!raw-loader!./ImageViewer.js';
 import SyntaxHighlighter from '../../Components/SyntaxHighlighter';
-import { createEmpty } from 'wix-rich-content-editor/dist/lib/editorStateConversion';
-
-const editorState = createWithContent(convertFromRaw(imageContentState));
 
 const mockData = {
   id: '8b72558253b2502b401bb46e5599f22a',
@@ -45,10 +40,10 @@ const ImagePluginStory = () => (
   <Page title="Image Plugin">
     <Section type={Section.Types.COMPARISON}>
       <RichContentEditorBox sourcecode={editorSourcecode} contentState={imageContentState}>
-        <ImageEditor editorState={editorState} onFilesChange={onFilesChangeMap.mock} />
+        <ImageEditor contentState={imageContentState} onFilesChange={onFilesChangeMap.mock} />
       </RichContentEditorBox>
       <RichContentViewerBox sourcecode={viewerSourcecode}>
-        <ImageViewer initialState={imageContentState} />
+        <ImageViewer contentState={imageContentState} />
       </RichContentViewerBox>
     </Section>
 
@@ -58,7 +53,7 @@ const ImagePluginStory = () => (
         code={`onFilesChange = (files, updateEntity) => updateEntity({ data: [], error: { msg: 'file too large' } });`}
       />
       <RichContentEditorBox>
-        <ImageEditor editorState={createEmpty()} onFilesChange={onFilesChangeMap.error} />
+        <ImageEditor onFilesChange={onFilesChangeMap.error} />
       </RichContentEditorBox>
     </Section>
   </Page>

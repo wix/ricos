@@ -95,7 +95,7 @@ export default () => {
         isMobile,
         contentState: emptyContentState,
         toolbarsConfig: withAddPluginMenuConfig && toolbarsConfig,
-        pluginsToDisplay: !selectedPlugins.includes('all') ? [] : selectedPlugins,
+        pluginsToDisplay: selectedPlugins.includes('all') ? null : selectedPlugins,
       };
       if (key) {
         editorWrapperProps.key = key;
