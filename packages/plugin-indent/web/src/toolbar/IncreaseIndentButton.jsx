@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { InlineToolbarButton, onIndent } from 'wix-rich-content-editor-common';
+import { InlineToolbarButton, indentSelectedBlock } from 'wix-rich-content-editor-common';
 import increaseIndentPluginIcon from '../icons/increaseIndentPluginIcon.svg';
 
 export default class IncreaseIndentButton extends Component {
@@ -10,7 +10,7 @@ export default class IncreaseIndentButton extends Component {
       <InlineToolbarButton
         onClick={() => {
           const editorState = getEditorState();
-          const newState = onIndent(true, editorState);
+          const newState = indentSelectedBlock(editorState, 1);
           if (newState !== editorState) {
             setEditorState(newState);
           }

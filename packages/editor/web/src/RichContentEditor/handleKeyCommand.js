@@ -2,7 +2,7 @@ import {
   COMMANDS,
   mergeBlockData,
   RichUtils,
-  onTab,
+  indentSelectedBlock,
   insertString,
   TEXT_TYPES,
   CHARACTERS,
@@ -25,7 +25,7 @@ export default (updateEditorState, customHandlers, blockType) => (command, edito
     if (isTab(command)) {
       if (isList(blockType)) {
         // eslint-disable-next-line no-restricted-globals
-        newState = onTab(event, editorState);
+        newState = indentSelectedBlock(editorState, !event.shiftKey ? 1 : -1);
       } else if (isText(blockType)) {
         newState = insertString(editorState, CHARACTERS.TAB);
       } else if (!isCodeBlock(blockType)) {

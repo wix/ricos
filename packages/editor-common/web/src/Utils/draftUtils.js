@@ -561,13 +561,7 @@ function adjustBlockDepthForContentState(contentState, selectionState, adjustmen
   });
 }
 
-export function onTab(event, editorState) {
-  event.preventDefault();
-  const isDirectionNext = !event.shiftKey;
-  return onIndent(isDirectionNext, editorState);
-}
-
-export function onIndent(isDirectionNext, editorState) {
+export function indentSelectedBlock(editorState, direction) {
   const maxDepth = 4;
   const selection = editorState.getSelection();
   const key = selection.getAnchorKey();
@@ -580,16 +574,11 @@ export function onIndent(isDirectionNext, editorState) {
   const block = content.getBlockForKey(key);
   const depth = block.getDepth();
 
-  if (isDirectionNext && depth === maxDepth) {
+  if (direction === 1 && depth === maxDepth) {
     return editorState;
   }
 
-  const withAdjustment = adjustBlockDepthForContentState(
-    content,
-    selection,
-    isDirectionNext ? 1 : -1,
-    maxDepth
-  );
+  const withAdjustment = adjustBlockDepthForContentState(content, selection, direction, maxDepth);
   return EditorState.push(editorState, withAdjustment, 'adjust-depth');
 }
 
