@@ -12,12 +12,12 @@ const viewerConfig = {
   [LINK_PREVIEW_TYPE]: { enableEmbed: true },
 };
 
-const DividerViewer = ({ initialState }) => (
+const LinkPreviewViewer = ({ initialState }) => (
   <RichContentViewer initialState={initialState} typeMappers={typeMappers} config={viewerConfig} />
 );
 
-DividerViewer.propTypes = {
+LinkPreviewViewer.propTypes = {
   initialState: PropTypes.object,
 };
 
-export default DividerViewer;
+export default LinkPreviewViewer;
