@@ -44,7 +44,7 @@ export default class FullscreenProvider extends Component<Props, State> {
       <Fragment>
         {Children.only(React.cloneElement(children, { helpers }))}
         <Fullscreen
-          dataHook={'WrapperFullScreen'}
+          dataHook={'RicosFullScreen'}
           initialState={initialState || emptyState}
           isOpen={isExpanded}
           images={expandModeData?.images || []}

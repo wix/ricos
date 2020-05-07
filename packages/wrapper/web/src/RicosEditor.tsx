@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React, { Component, Fragment, ElementType, FunctionComponent } from 'react';
-import EngineWrapper from './EngineWrapper';
+import RicosEngine from './RicosEngine';
 import { RichContentEditor } from 'wix-rich-content-editor';
 import { createDataConverter } from './editorUtils';
 import { shouldRenderChild } from './utils';
@@ -67,17 +67,12 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
           StaticToolbar={StaticToolbar}
           textToolbarContainer={textToolbarContainer}
         />
-        <EngineWrapper
-          isViewer={false}
-          key={'editor'}
-          {...props}
-          modalityProvider={modalityProvider}
-        >
+        <RicosEngine isViewer={false} key={'editor'} {...props} modalityProvider={modalityProvider}>
           {React.cloneElement(child, {
             onChange: this.onChange(child.props.onChange),
             ref: ref => (this.editor = ref),
           })}
-        </EngineWrapper>
+        </RicosEngine>
       </Fragment>
     );
   }

@@ -62,7 +62,7 @@ export default class ModalDialogProvider extends Component<Props, State> {
         {Children.only(React.cloneElement(children, { ...this.childProps }))}
 
         <EditorModal
-          dataHook={'WrapperEditorModal'}
+          dataHook={'RicosEditorModal'}
           isOpen={showModal}
           style={modalStyles(this.state, theme)}
           role="dialog"

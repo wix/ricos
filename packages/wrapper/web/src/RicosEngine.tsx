@@ -16,7 +16,7 @@ interface State {
   localeStrategy: RichContentProps;
 }
 
-export default class EngineWrapper extends Component<Props, State> {
+export default class RicosEngine extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = { localeStrategy: {} };
@@ -76,8 +76,8 @@ export default class EngineWrapper extends Component<Props, State> {
 
     const strategyProps = this.runStrategies();
 
-    // any of wrapper props that should be merged into child
-    const wrapperPropsToMerge: RichContentProps = {
+    // any of ricos props that should be merged into child
+    const ricosPropsToMerge: RichContentProps = {
       isMobile,
       textToolbarType: isMobile ? 'inline' : textToolbarType, // optimization - don't need static toolbar when isMobile
       initialState: contentState,
@@ -85,7 +85,7 @@ export default class EngineWrapper extends Component<Props, State> {
       toolbarsConfig,
     };
 
-    const mergedRCProps = merge(strategyProps, _rcProps, wrapperPropsToMerge, children.props);
+    const mergedRCProps = merge(strategyProps, _rcProps, ricosPropsToMerge, children.props);
 
     return (
       <ModalityProvider {...mergedRCProps}>
