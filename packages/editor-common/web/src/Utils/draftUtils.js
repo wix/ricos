@@ -550,19 +550,23 @@ export function indentSelectedBlocks(editorState, adjustment) {
   const endKey = selection.getEndKey();
   const blockMap = contentState.getBlockMap();
 
-  const blocks = blockMap
-    .toSeq()
-    .skipUntil((_, k) => k === startKey)
-    .takeUntil((_, k) => k === endKey)
-    .concat([[endKey, blockMap.get(endKey)]])
-    .map(block => {
-      if (!isTypeText(block.getType())) {
-        return block;
-      }
-      let depth = block.getDepth() + adjustment;
-      depth = Math.max(0, Math.min(depth, maxDepth));
-      return block.set('depth', depth);
-    });
+  const adjustBlockDepth = (block, adjustment) => {
+    let depth = block.getDepth() + adjustment;
+    depth = Math.max(0, Math.min(depth, maxDepth));
+    return block.set('depth', depth);
+  };
+
+  const getBlocks = () => {
+    blockMap
+      .toSeq()
+      .skipUntil((_, k) => k === startKey)
+      .takeUntil((_, k) => k === endKey)
+      .concat([[endKey, blockMap.get(endKey)]]);
+  };
+
+  const blocks = getBlocks(blockMap, startKey, endKey)
+    .filter(block => isTypeText(block.getType()))
+    .map(block => adjustBlockDepth(block, adjustment));
 
   const withAdjustment = contentState.merge({
     blockMap: blockMap.merge(blocks),
