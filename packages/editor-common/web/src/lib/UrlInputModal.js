@@ -95,6 +95,7 @@ export default class UrlInputModal extends Component {
             placeholder={placeholder}
             theme={styles}
             data-hook={`${dataHook}Input`}
+            autoComplete="off"
           />
           {dropdownItems && isDropdownOpen && (
             <ItemsDropdown items={dropdownItems} onItemClick={item => onConfirm(item)} />
