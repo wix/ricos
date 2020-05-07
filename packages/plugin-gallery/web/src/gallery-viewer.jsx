@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import PropTypes from 'prop-types';
+import PropTypes, { instanceOf } from 'prop-types';
 import { validate, mergeStyles, pluginGallerySchema } from 'wix-rich-content-common';
 import { isEqual, debounce } from 'lodash';
 import { convertItemData } from './lib/convert-item-data';
@@ -8,6 +8,8 @@ import resizeMediaUrl from './lib/resize-media-url';
 import styles from '../statics/styles/viewer.scss';
 import 'pro-gallery/dist/statics/main.min.css';
 import ExpandIcon from './icons/expand.svg';
+// import { GALLERY_CONSTS } from 'pro-gallery'; will work on version 1.10.1
+import VIEW_MODE from 'pro-gallery/dist/es/src/common/constants/viewMode';
 
 const { ProGallery } = process.env.SANTA ? {} : require('pro-gallery');
 
@@ -43,8 +45,11 @@ class GalleryViewer extends React.Component {
       );
       scrollingElement = document.body;
     }
-    const contentElement =
+    let contentElement =
       typeof scrollingElement === 'function' ? scrollingElement() : scrollingElement;
+    if (contentElement?.nodeType !== 1) {
+      contentElement = document.body;
+    }
     if (contentElement) {
       this.observer = new MutationObserver(() => {
         if (contentElement.clientHeight !== this.oldContentElementHeight) {
@@ -203,6 +208,9 @@ class GalleryViewer extends React.Component {
     const { scrollingElement, ...settings } = this.props.settings;
     const { styleParams, size = { width: 300 } } = this.state;
     const items = this.getItems();
+    // const viewMode = this.props.seoMode === true ? GALLERY_CONSTS.viewMode.SEO : undefined; will work on version 1.10.1
+    const viewMode = this.props.seoMode === true ? VIEW_MODE.SEO : undefined;
+
     return (
       <div
         ref={elem => (this.container = elem)}
@@ -221,6 +229,7 @@ class GalleryViewer extends React.Component {
           eventsListener={this.handleGalleryEvents}
           resizeMediaUrl={resizeMediaUrl}
           customHoverRenderer={this.hoverElement}
+          viewMode={viewMode}
         />
       </div>
     );
@@ -240,6 +249,7 @@ GalleryViewer.propTypes = {
   helpers: PropTypes.object.isRequired,
   anchorTarget: PropTypes.string.isRequired,
   relValue: PropTypes.string.isRequired,
+  seoMode: PropTypes.bool,
 };
 
 export default GalleryViewer;

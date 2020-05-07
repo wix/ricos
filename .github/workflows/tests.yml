@@ -176,6 +176,10 @@ jobs:
           status: FAILED ${{ env[steps.commit-author.outputs.commit-author] }} ${{ env[steps.pr-author.outputs.pr-author] }}
           color: danger
 
+      - name: Get current commit status
+        id: current-status
+        run: |
+          echo "::set-output name=current-status::$(echo $(curl -s https://api.github.com/repos/wix-incubator/rich-content/commits/${{ github.sha }}/check-suites\?app_id\=15368 -H "Accept: application/vnd.github.antiope-preview+json" | jq '.check_suites | [.[] | select( .head_branch == "master") | .conclusion] | .[:2] | .[]' | sed 's/\"//g'))"
       - name: Get previous commit
         id: previous-commit
         run: |
@@ -186,10 +190,10 @@ jobs:
           echo "::set-output name=previous-status::$(echo $(curl -s https://api.github.com/repos/wix-incubator/rich-content/commits/${{ steps.previous-commit.outputs.previous-commit }}/check-suites\?app_id\=15368 -H "Accept: application/vnd.github.antiope-preview+json" | jq '.check_suites | [.[] | select( .head_branch == "master") | .conclusion] | .[:2] | .[]' | sed 's/\"//g'))"
       - name: Notify recovery in Slack
         uses: voxmedia/github-action-slack-notify-build@v1.1.1
-        if: github.ref == 'refs/heads/master' && steps.previous-status.outputs.previous-status != 'success success' && (needs.e2e-visual.result == 'success' && needs.content-state-tests.result == 'success' && needs.lint-and-unit-tests.result == 'success')
+        if: github.ref == 'refs/heads/master' && (steps.previous-status.outputs.previous-status != 'success success' || steps.current-status.outputs.current-status != 'success success' && !contains(steps.current-status.outputs.current-status, 'null')) && (needs.e2e-visual.result == 'success' && needs.content-state-tests.result == 'success' && needs.lint-and-unit-tests.result == 'success') # master branch && (previous commit failed || rerunning a failed commit) && all tests passed
         with:
           channel_id: C0124DH7HHS #rich-content-ci
-          status: RECOVERED
+          status: 'RECOVERED :celebrate:'
           color: '#28a745'
     env:
       SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
@@ -204,5 +208,5 @@ jobs:
       ShamaySapir: <@UM48FG657>
       shaulgo: <@U0SDJ5S30>
       talevy17: <@UM24QHHAR>
-      michael-wix: (Michael added translations)
-      wix-babel-ng: (bot commit - new translations)
+      michael-wix: ' - Michael just added translations'
+      wix-babel-ng: " - Michael's bot added new translations :pokesquirtlewalk:"

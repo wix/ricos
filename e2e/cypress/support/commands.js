@@ -229,6 +229,14 @@ Cypress.Commands.add('setTextStyle', (buttonSelector, selection) => {
   cy.get(`[data-hook=inlineToolbar] [data-hook=${buttonSelector}]`).click();
 });
 
+Cypress.Commands.add('increaseIndent', selection => {
+  cy.setTextStyle(INLINE_TOOLBAR_BUTTONS.INCREASE_INDENT, selection);
+});
+
+Cypress.Commands.add('decreaseIndent', selection => {
+  cy.setTextStyle(INLINE_TOOLBAR_BUTTONS.DECREASE_INDENT, selection);
+});
+
 Cypress.Commands.add('setLink', (selection, link) => {
   cy.setTextStyle(INLINE_TOOLBAR_BUTTONS.LINK, selection)
     .get(`[data-hook=linkPanelContainer] [data-hook=linkPanelInput]`)

@@ -86,6 +86,7 @@ export {
   getPostContentSummary,
   createSelection,
   getBlockType,
+  indentSelectedBlock,
   setForceSelection,
   deleteBlockText,
   insertString,
