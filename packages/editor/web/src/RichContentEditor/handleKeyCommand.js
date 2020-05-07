@@ -1,4 +1,5 @@
 /* eslint-disable no-restricted-globals */
+
 import {
   COMMANDS,
   mergeBlockData,
