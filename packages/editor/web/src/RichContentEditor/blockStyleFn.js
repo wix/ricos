@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import editorStyles from '../../statics/styles/rich-content-editor.scss';
 import alignmentStyles from '../../statics/styles/rich-content-editor-alignment.rtlignore.scss';
+import { depthClassName } from 'wix-rich-content-common';
 
 const styles = { ...editorStyles, ...alignmentStyles };
 const types = {
@@ -11,17 +12,20 @@ const types = {
   'header-four': 'headerFour',
   'header-five': 'headerFive',
   'header-six': 'headerSix',
-  indent: 'indent',
   atomic: 'atomic',
   'code-block': 'codeBlock',
   'ordered-list-item': 'orderedList',
   'unordered-list-item': 'unorderedList',
+};
+const isList = type => {
+  return type === 'ordered-list-item' || type === 'unordered-list-item';
 };
 
 export default (theme, styleToClass) => {
   return contentBlock => {
     const {
       type,
+      depth,
       data: { textAlignment, dynamicStyles = {} },
     } = contentBlock.toJS();
 
@@ -30,7 +34,11 @@ export default (theme, styleToClass) => {
     const classList = [styles[key], theme[key]];
 
     if (type !== 'atomic') {
-      classList.push(styles[textAlignment], theme[textAlignment]);
+      classList.push(
+        styles[textAlignment],
+        theme[textAlignment],
+        !isList(type) && depthClassName(depth)
+      );
     }
 
     const dynamicClasses = Object.entries(dynamicStyles).map(styleToClass);

@@ -2,6 +2,7 @@ import {
   COMMANDS,
   mergeBlockData,
   RichUtils,
+  indentSelectedBlock,
   insertString,
   TEXT_TYPES,
   CHARACTERS,
@@ -21,12 +22,17 @@ export default (updateEditorState, customHandlers, blockType) => (command, edito
   let newState;
 
   if (customHandlers[command]) {
-    if (isTab(command) && isList(blockType)) {
-      // eslint-disable-next-line no-restricted-globals
-      newState = RichUtils.onTab(event, editorState, 2);
-    } else if (isText(blockType)) {
-      newState = insertString(editorState, CHARACTERS.TAB);
-    } else if (!isCodeBlock(blockType)) {
+    if (isTab(command)) {
+      if (isList(blockType)) {
+        // eslint-disable-next-line no-restricted-globals
+        const direction = !event.shiftKey ? 1 : -1;
+        newState = indentSelectedBlock(editorState, direction);
+      } else if (isText(blockType)) {
+        newState = insertString(editorState, CHARACTERS.TAB);
+      } else if (!isCodeBlock(blockType)) {
+        newState = customHandlers[command](editorState);
+      }
+    } else {
       newState = customHandlers[command](editorState);
     }
   } else {

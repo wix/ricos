@@ -140,6 +140,24 @@ describe('text', () => {
     cy.eyesCheckWindow(this.test.title);
   });
 
+  it('allow to apply indent', function() {
+    cy.loadEditorAndViewer('plain', 'all')
+      .setTextStyle(INLINE_TOOLBAR_BUTTONS.BOLD, [40, 10])
+      .setTextStyle(INLINE_TOOLBAR_BUTTONS.UNDERLINE, [10, 5])
+      .setTextStyle(INLINE_TOOLBAR_BUTTONS.ITALIC, [20, 5])
+      .setTextStyle(INLINE_TOOLBAR_BUTTONS.BOLD, [30, 5])
+      .increaseIndent([40, 10])
+      .increaseIndent([40, 10])
+      .increaseIndent([40, 10])
+      .increaseIndent([40, 10])
+      .increaseIndent([200, 10])
+      .increaseIndent([200, 10])
+      .decreaseIndent([200, 10])
+      .decreaseIndent([200, 10])
+      .blurEditor();
+    cy.eyesCheckWindow(this.test.title);
+  });
+
   it('should paste plain text', () => {
     cy.loadEditorAndViewer()
       .focusEditor()

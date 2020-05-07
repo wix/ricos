@@ -16,6 +16,8 @@
   </summary>
 
 ### :rocket: New Feature
+- `indent`
+  - [#898](https://github.com/wix-incubator/rich-content/pull/898) text indentation
 - `viewer`
   - [#1005](https://github.com/wix-incubator/rich-content/pull/1005) add viewMode SEO to ProGallery
 

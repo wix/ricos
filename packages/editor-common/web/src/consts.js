@@ -24,6 +24,8 @@ export const TEXT_TYPES = Object.freeze([
   'header-four',
   'header-five',
   'header-six',
+  'ordered-list-item',
+  'unordered-list-item',
 ]);
 
 export const CHARACTERS = Object.freeze({

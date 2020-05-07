@@ -1,4 +1,5 @@
 :global {
+  //Start Text block class Names
   .public-DraftStyleDefault-ltr {
     /*!rtl:begin:ignore*/
     direction: ltr;
@@ -11,6 +12,24 @@
     text-align: right;
     /*!rtl:end:ignore*/
   }
+  @mixin indent($depth, $indent) {
+    .public-DraftStyleDefault-block-depth#{$depth} {
+    &.public-DraftStyleDefault-ltr, & .public-DraftStyleDefault-ltr{
+      margin-left: #{$indent}em !important;
+    }}
+  
+    .public-DraftStyleDefault-block-depth#{$depth} {
+    &.public-DraftStyleDefault-rtl, & .public-DraftStyleDefault-rtl{
+      margin-left: #{$indent}em !important;
+    }}
+  }
+  @include indent(1, 1.5);
+  @include indent(2, 3);
+  @include indent(3, 4.5);
+  @include indent(4, 6);
+  //End Text block class Names
+
+  //Start Lists class Names
   .public-DraftStyleDefault-listLTR {
     /*!rtl:begin:ignore*/
     direction: ltr;
@@ -171,4 +190,5 @@
     padding: 0;
     /*!rtl:end:ignore*/
   }
+  //End Lists class Names
 }

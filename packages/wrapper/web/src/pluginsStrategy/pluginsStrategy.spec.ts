@@ -1,5 +1,6 @@
 import pluginsStrategy from './pluginsStrategy';
 import getType from 'jest-get-type';
+import '../types';
 
 // eslint-disable-next-line mocha/no-skipped-tests
 describe('PluginsStrategy', () => {
