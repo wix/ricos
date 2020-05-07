@@ -68,7 +68,6 @@ export default class EngineWrapper extends Component<Props, State> {
       children,
       isMobile,
       textToolbarType,
-      textToolbarContainer,
       placeholder,
       contentState,
       toolbarsConfig,
@@ -89,7 +88,7 @@ export default class EngineWrapper extends Component<Props, State> {
     const mergedRCProps = merge(strategyProps, _rcProps, wrapperPropsToMerge, children.props);
 
     return (
-      <ModalityProvider {...mergedRCProps} textToolbarContainer={textToolbarContainer}>
+      <ModalityProvider {...mergedRCProps}>
         {Children.only(React.cloneElement(children, { ...mergedRCProps }))}
       </ModalityProvider>
     );

@@ -2,8 +2,6 @@
 import React from 'react';
 import { RicosEditor } from './index';
 import { RicosViewer } from './viewer';
-import { RichContentEditor } from 'wix-rich-content-editor';
-import { RichContentViewer } from 'wix-rich-content-viewer';
 import { pluginHashtag } from '../../../plugin-hashtag/web/src/editor';
 import introState from '../../../../e2e/tests/fixtures/intro.json';
 import Enzyme from 'enzyme';
@@ -16,14 +14,10 @@ const { shallow } = Enzyme;
 
 const wrapper = (wrapperProps?: any) => ({
   withEditor: (editorProps?: RichContentProps) => (
-    <RicosEditor {...(wrapperProps || {})}>
-      <RichContentEditor {...(editorProps || {})} />
-    </RicosEditor>
+    <RicosEditor {...(wrapperProps || {})} {...(editorProps || {})} />
   ),
   withViewer: (viewerProps?: RichContentProps) => (
-    <RicosViewer {...(wrapperProps || {})}>
-      <RichContentViewer {...(viewerProps || { initialState: introState })} />
-    </RicosViewer>
+    <RicosViewer {...(wrapperProps || {})} {...(viewerProps || { contentState: introState })} />
   ),
 });
 
