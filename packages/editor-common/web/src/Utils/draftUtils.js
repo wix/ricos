@@ -588,7 +588,32 @@ export function setForceSelection(editorState, selection) {
 
 export function insertString(editorState, string) {
   const contentState = editorState.getCurrentContent();
-  const selection = editorState.getSelection();
-  const newContentState = Modifier.replaceText(contentState, selection, string);
+  const selectionState = editorState.getSelection();
+  const newContentState = Modifier.replaceText(contentState, selectionState, string);
   return EditorState.push(editorState, newContentState, 'insert-string');
+}
+
+export function deleteString(editorState, string) {
+  const contentState = editorState.getCurrentContent();
+  const selectionState = editorState.getSelection();
+  const anchorKey = selectionState.getAnchorKey();
+  const currentContentBlock = contentState.getBlockForKey(anchorKey);
+  const start = selectionState.getStartOffset() - string.length;
+  const end = selectionState.getEndOffset() - string.length;
+
+  if (start < 0) {
+    return null;
+  }
+
+  const selectedText = currentContentBlock
+    .getText()
+    .slice(start, Math.max(start + string.length, end));
+
+  if (selectedText === string) {
+    const newSelection = selectionState.set('anchorOffset', start);
+    const newContentState = Modifier.replaceText(contentState, newSelection, '');
+    return EditorState.push(editorState, newContentState, 'delete-string');
+  }
+
+  return null;
 }

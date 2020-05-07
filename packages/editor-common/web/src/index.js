@@ -90,6 +90,7 @@ export {
   setForceSelection,
   deleteBlockText,
   insertString,
+  deleteString,
   createLinkEntityData,
 } from './Utils/draftUtils';
 export { isiOS } from './Utils/isiOS';

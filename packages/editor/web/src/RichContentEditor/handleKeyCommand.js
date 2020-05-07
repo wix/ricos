@@ -1,9 +1,11 @@
+/* eslint-disable no-restricted-globals */
 import {
   COMMANDS,
   mergeBlockData,
   RichUtils,
   indentSelectedBlock,
   insertString,
+  deleteString,
   TEXT_TYPES,
   CHARACTERS,
 } from 'wix-rich-content-editor-common';
@@ -18,20 +20,29 @@ const isText = blockType => {
   return TEXT_TYPES.some(type => type === blockType);
 };
 
+const handleTabCommand = (editorState, blockType, customHandlers, command) => {
+  let newState;
+  if (isList(blockType)) {
+    const direction = !event.shiftKey ? 1 : -1;
+    newState = indentSelectedBlock(editorState, direction);
+  } else if (isText(blockType)) {
+    if (!event.shiftKey) {
+      newState = insertString(editorState, CHARACTERS.TAB);
+    } else {
+      newState = deleteString(editorState, CHARACTERS.TAB);
+    }
+  } else if (!isCodeBlock(blockType)) {
+    newState = customHandlers[command](editorState);
+  }
+  return newState;
+};
+
 export default (updateEditorState, customHandlers, blockType) => (command, editorState) => {
   let newState;
 
   if (customHandlers[command]) {
     if (isTab(command)) {
-      if (isList(blockType)) {
-        // eslint-disable-next-line no-restricted-globals
-        const direction = !event.shiftKey ? 1 : -1;
-        newState = indentSelectedBlock(editorState, direction);
-      } else if (isText(blockType)) {
-        newState = insertString(editorState, CHARACTERS.TAB);
-      } else if (!isCodeBlock(blockType)) {
-        newState = customHandlers[command](editorState);
-      }
+      newState = handleTabCommand(editorState, blockType, customHandlers, command);
     } else {
       newState = customHandlers[command](editorState);
     }
