@@ -8,6 +8,8 @@ import resizeMediaUrl from './lib/resize-media-url';
 import styles from '../statics/styles/viewer.scss';
 import 'pro-gallery/dist/statics/main.min.css';
 import ExpandIcon from './icons/expand.svg';
+// import { GALLERY_CONSTS } from 'pro-gallery'; will work on version 1.10.1
+import VIEW_MODE from 'pro-gallery/dist/es/src/common/constants/viewMode';
 
 const { ProGallery } = process.env.SANTA ? {} : require('pro-gallery');
 
@@ -203,6 +205,9 @@ class GalleryViewer extends React.Component {
     const { scrollingElement, ...settings } = this.props.settings;
     const { styleParams, size = { width: 300 } } = this.state;
     const items = this.getItems();
+    // const viewMode = this.props.seoMode === true ? GALLERY_CONSTS.viewMode.SEO : undefined; will work on version 1.10.1
+    const viewMode = this.props.seoMode === true ? VIEW_MODE.SEO : undefined;
+
     return (
       <div
         ref={elem => (this.container = elem)}
@@ -221,6 +226,7 @@ class GalleryViewer extends React.Component {
           eventsListener={this.handleGalleryEvents}
           resizeMediaUrl={resizeMediaUrl}
           customHoverRenderer={this.hoverElement}
+          viewMode={viewMode}
         />
       </div>
     );
@@ -240,6 +246,7 @@ GalleryViewer.propTypes = {
   helpers: PropTypes.object.isRequired,
   anchorTarget: PropTypes.string.isRequired,
   relValue: PropTypes.string.isRequired,
+  seoMode: PropTypes.bool,
 };
 
 export default GalleryViewer;

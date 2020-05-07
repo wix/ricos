@@ -9,7 +9,6 @@ import {
   BoldIcon,
   ItalicIcon,
   UnderlineIcon,
-  IndentIcon,
   BlockQuoteIcon,
   TitleIcon,
   TitleOneIcon,
@@ -40,13 +39,6 @@ export const underlineButton = icon =>
     style: 'UNDERLINE',
     Icon: icon || UnderlineIcon,
     tooltipTextKey: 'UnderlineButton_Tooltip',
-  });
-
-export const indentButton = icon =>
-  createTextBlockStyleButton({
-    blockTypes: ['indent'],
-    Icons: [icon || IndentIcon],
-    tooltipTextKey: 'IndentButton_Tooltip',
   });
 
 export const titleButton = (inactiveIconTitle, iconForTitleOne, iconForTitleTwo) =>

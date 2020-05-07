@@ -105,13 +105,30 @@ describe('text', () => {
     cy.eyesCheckWindow(this.test.title);
   });
 
-  it('allow to create link and open link toolbar (InlinePluginToolbar)', function() {
+  it('open link toolbar (InlinePluginToolbar)', function() {
+    // set link
     cy.loadEditorAndViewer('plain')
       .setLink([0, 10], 'https://www.wix.com/')
+      // set cursor on link
       .setSelection(5, 0)
-      .wait(200)
-      .blurEditor();
+      .wait(200);
+    // take snapshot of the toolbar
     cy.eyesCheckWindow(this.test.title);
+    // edit link
+    cy.get(`[data-hook=linkPluginToolbar] [data-hook=LinkButton]`)
+      .click()
+      .get(`[data-hook=linkPanelContainer] [data-hook=linkPanelInput]`)
+      .type('https://www.google.com/')
+      .get(`[data-hook=linkPanelContainerDone]`)
+      .click();
+    // check url button
+    cy.get(`[data-hook=linkPluginToolbar] a`).should(
+      'have.attr',
+      'href',
+      'https://www.google.com/'
+    );
+    // remove link
+    cy.get(`[data-hook=linkPluginToolbar] [data-hook=RemoveLinkButton]`).click();
   });
 
   it('allow to enter tab character', function() {
@@ -119,6 +136,24 @@ describe('text', () => {
       .focusEditor()
       .tab()
       .enterParagraphs(['How to eat healthy is a good question.'])
+      .blurEditor();
+    cy.eyesCheckWindow(this.test.title);
+  });
+
+  it('allow to apply indent', function() {
+    cy.loadEditorAndViewer('plain', 'all')
+      .setTextStyle(INLINE_TOOLBAR_BUTTONS.BOLD, [40, 10])
+      .setTextStyle(INLINE_TOOLBAR_BUTTONS.UNDERLINE, [10, 5])
+      .setTextStyle(INLINE_TOOLBAR_BUTTONS.ITALIC, [20, 5])
+      .setTextStyle(INLINE_TOOLBAR_BUTTONS.BOLD, [30, 5])
+      .increaseIndent([40, 10])
+      .increaseIndent([40, 10])
+      .increaseIndent([40, 10])
+      .increaseIndent([40, 10])
+      .increaseIndent([200, 10])
+      .increaseIndent([200, 10])
+      .decreaseIndent([200, 10])
+      .decreaseIndent([200, 10])
       .blurEditor();
     cy.eyesCheckWindow(this.test.title);
   });
