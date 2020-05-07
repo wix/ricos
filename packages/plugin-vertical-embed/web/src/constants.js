@@ -6,8 +6,8 @@ export const DEFAULTS = {
 
 export const verticalEmbedProviders = { event: 'event', booking: 'booking', product: 'product' };
 
-export const verticalsTypeMap = {
-  Events: 'events',
-  Bookings: 'bookings',
-  Stores: 'product',
+export const contentTypeMap = {
+  event: 'Events',
+  booking: 'Bookings',
+  product: 'Stores',
 };

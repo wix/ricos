@@ -2,14 +2,9 @@ import React, { Component } from 'react';
 import { Section, Page, RichContentEditorBox } from '../Components/StoryParts';
 import EditorWrapper from '../Components/EditorWrapper';
 import emptyContentState from '../../../../e2e/tests/fixtures/empty.json';
-import { Box, Dropdown, MultiSelectCheckbox } from 'wix-style-react';
+import { Box, MultiSelectCheckbox, Checkbox } from 'wix-style-react';
 
-const optionsIdMap = {
-  1: true,
-  2: false,
-};
-
-export default () => {
+export default (isMobile = false) => {
   class PluginMenuStory extends Component {
     constructor(props) {
       super(props);
@@ -17,22 +12,19 @@ export default () => {
     }
 
     getCheckbox = () => {
-      const configOptions = ['showSearch', 'splitToSections'];
+      const configOptions = ['splitToSections'];
+      !isMobile && configOptions.push('showSearch');
       const { editorKey } = this.state;
       return configOptions.map(option => (
-        <Box padding="3px" key={option} align="space-between" maxWidth="440px">
-          {`${option}: `}
-          <Dropdown
-            size="small"
-            placeholder="Select an option"
-            options={[
-              { id: 1, value: 'true' },
-              { id: 2, value: 'false' },
-            ]}
-            onSelect={({ id }) =>
-              this.setState({ [option]: optionsIdMap[id], editorKey: editorKey + 1 })
+        <Box padding="3px" key={option}>
+          <Checkbox
+            checked={this.state[option]}
+            onChange={() =>
+              this.setState({ [option]: !this.state[option], editorKey: editorKey + 1 })
             }
-          />
+          >
+            {option}
+          </Checkbox>
         </Box>
       ));
     };
@@ -83,7 +75,7 @@ export default () => {
       );
     };
 
-    getEditor = ({ key, isMobile = false, withPluginMenuConfig = false }) => {
+    getEditor = ({ key, withPluginMenuConfig = false }) => {
       const { showSearch, splitToSections, selectedPlugins } = this.state;
       const toolbarsConfig = {
         addPluginMenuConfig: {
@@ -118,18 +110,24 @@ export default () => {
                 {this.getEditor({ key: editorKey, withPluginMenuConfig: true })}
               </RichContentEditorBox>
             </Section>
-            <h3>Horizontal Plugin Menu Without Config:</h3>
-            <Section>
-              <RichContentEditorBox>{this.getEditor({ key: editorKey + 1 })}</RichContentEditorBox>
-            </Section>
-            <div>
-              Note: defaults for unset fields are:
-              <ul>
-                <li>If addPluginMenuConfig not supplied - you will get the horizontal menu.</li>
-                <li>Search - off by default. </li>
-                <li>Sections - on by default.</li>
-              </ul>
-            </div>
+            {!isMobile && (
+              <div>
+                <h3>Horizontal Plugin Menu Without Config:</h3>
+                <Section>
+                  <RichContentEditorBox>
+                    {this.getEditor({ key: editorKey + 1 })}
+                  </RichContentEditorBox>
+                </Section>
+                <div>
+                  Note: defaults for unset fields are:
+                  <ul>
+                    <li>If addPluginMenuConfig not supplied - you will get the horizontal menu.</li>
+                    <li>Search - off by default. </li>
+                    <li>Sections - on by default.</li>
+                  </ul>
+                </div>
+              </div>
+            )}
           </Section>
         </Page>
       );
