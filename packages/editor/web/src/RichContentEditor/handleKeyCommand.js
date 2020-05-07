@@ -1,13 +1,12 @@
 /* eslint-disable no-restricted-globals */
-
 import {
   COMMANDS,
   mergeBlockData,
   RichUtils,
-  indentSelectedBlock,
+  indentSelectedBlocks,
   insertString,
   deleteString,
-  TEXT_TYPES,
+  isTypeText,
   CHARACTERS,
 } from 'wix-rich-content-editor-common';
 import handleBackspaceCommand from './handleBackspaceCommand';
@@ -17,16 +16,13 @@ const isList = blockType =>
   blockType === 'ordered-list-item' || blockType === 'unordered-list-item';
 const isTab = command => command === COMMANDS.TAB || command === COMMANDS.SHIFT_TAB;
 const isCodeBlock = blockType => blockType === 'code-block';
-const isText = blockType => {
-  return TEXT_TYPES.some(type => type === blockType);
-};
 
 const handleTabCommand = (editorState, blockType, customHandlers, command) => {
   let newState;
   if (isList(blockType)) {
     const direction = !event.shiftKey ? 1 : -1;
-    newState = indentSelectedBlock(editorState, direction);
-  } else if (isText(blockType)) {
+    newState = indentSelectedBlocks(editorState, direction);
+  } else if (isTypeText(blockType)) {
     if (!event.shiftKey) {
       newState = insertString(editorState, CHARACTERS.TAB);
     } else {

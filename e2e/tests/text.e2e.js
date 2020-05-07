@@ -152,20 +152,41 @@ describe('text', () => {
     cy.eyesCheckWindow(this.test.title);
   });
 
-  it('allow to apply indent', function() {
+  it('allow to apply indent on a single block with inline styling', function() {
     cy.loadEditorAndViewer('plain', 'all')
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.BOLD, [40, 10])
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.UNDERLINE, [10, 5])
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.ITALIC, [20, 5])
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.BOLD, [30, 5])
-      .increaseIndent([40, 10])
-      .increaseIndent([40, 10])
-      .increaseIndent([40, 10])
-      .increaseIndent([40, 10])
-      .increaseIndent([200, 10])
-      .increaseIndent([200, 10])
-      .decreaseIndent([200, 10])
-      .decreaseIndent([200, 10])
+      .increaseIndent([0, 100])
+      .increaseIndent([0, 100])
+      .increaseIndent([0, 100])
+      .increaseIndent([0, 100])
+      .increaseIndent([200, 100])
+      .increaseIndent([200, 100])
+      .decreaseIndent([200, 100])
+      .decreaseIndent([200, 100])
+      .blurEditor();
+    cy.eyesCheckWindow(this.test.title);
+  });
+
+  it('allow to apply indent on multiple text blocks', function() {
+    cy.loadEditorAndViewer('text-blocks', 'all')
+      .increaseIndent([0, 550])
+      .increaseIndent([0, 550])
+      .increaseIndent([0, 550])
+      .decreaseIndent([0, 550])
+      .moveCursorToStart()
+      .blurEditor();
+    cy.eyesCheckWindow(this.test.title);
+  });
+
+  it('allow to apply indent only on text blocks', function() {
+    cy.loadEditorAndViewer('non-text-only-blocks', 'all')
+      .increaseIndent([0, 550])
+      .increaseIndent([0, 550])
+      .increaseIndent([0, 550])
+      .moveCursorToStart()
       .blurEditor();
     cy.eyesCheckWindow(this.test.title);
   });
