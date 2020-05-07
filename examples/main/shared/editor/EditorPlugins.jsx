@@ -80,7 +80,7 @@ import { TOOLBARS, BUTTONS, DISPLAY_MODE } from 'wix-rich-content-editor-common'
 // import StaticToolbarDecoration from './Components/StaticToolbarDecoration';
 // import SideToolbarDecoration from './Components/SideToolbarDecoration';
 // import PluginToolbarDecoration from './Components/PluginToolbarDecoration';
-import { mockFetchVerticalEmbedFunc } from './Utils/verticalEmbedUtil';
+import MockVerticalSearchModule from './Utils/verticalEmbedUtil';
 
 export const editorPluginsPartialPreset = [
   createImagePlugin,
@@ -471,10 +471,10 @@ const config = {
     // },
   },
   [VERTICAL_EMBED_TYPE]: {
-    fetchFunctions: {
-      [product]: mockFetchVerticalEmbedFunc(product),
-      [event]: mockFetchVerticalEmbedFunc(event),
-      [booking]: mockFetchVerticalEmbedFunc(booking),
+    verticalsApi: {
+      [product]: new MockVerticalSearchModule(product),
+      [event]: new MockVerticalSearchModule(event),
+      [booking]: new MockVerticalSearchModule(booking),
     },
     // exposeEmbedButtons: [product, event, booking],
     exposeEmbedButtons: [product],
