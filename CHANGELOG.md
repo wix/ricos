@@ -21,6 +21,10 @@
 - `viewer`
   - [#1005](https://github.com/wix-incubator/rich-content/pull/1005) add viewMode SEO to ProGallery
 
+### :house: Internal
+- `wrapper`
+  - [#1031](https://github.com/wix-incubator/rich-content/pull/1031) fixed build warning - "punycode" library
+
 </details>
 <hr/>
 
