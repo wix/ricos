@@ -172,6 +172,7 @@ export default class AddPluginFloatingToolbar extends Component {
             addPluginMenuConfig={addPluginMenuConfig}
             isMobile={isMobile}
             isActive={isActive}
+            theme={theme}
           />
         </div>
       );
