@@ -5,7 +5,7 @@ import {
   RichUtils,
   indentSelectedBlocks,
   insertString,
-  deleteString,
+  deleteTabCharacter,
   isTypeText,
   CHARACTERS,
 } from 'wix-rich-content-editor-common';
@@ -26,7 +26,7 @@ const handleTabCommand = (editorState, blockType, customHandlers, command) => {
     if (!event.shiftKey) {
       newState = insertString(editorState, CHARACTERS.TAB);
     } else {
-      newState = deleteString(editorState, CHARACTERS.TAB);
+      newState = deleteTabCharacter(editorState);
     }
   } else if (!isCodeBlock(blockType)) {
     newState = customHandlers[command](editorState);

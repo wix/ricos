@@ -586,23 +586,20 @@ export function insertString(editorState, string) {
   return EditorState.push(editorState, newContentState, 'insert-string');
 }
 
-export function deleteString(editorState, string) {
+export function deleteTabCharacter(editorState) {
   const contentState = editorState.getCurrentContent();
   const selectionState = editorState.getSelection();
   const anchorKey = selectionState.getAnchorKey();
   const currentContentBlock = contentState.getBlockForKey(anchorKey);
-  const start = selectionState.getStartOffset() - string.length;
-  const end = selectionState.getEndOffset() - string.length;
+  const start = selectionState.getStartOffset() - 1;
 
   if (start < 0) {
     return null;
   }
 
-  const selectedText = currentContentBlock
-    .getText()
-    .slice(start, Math.max(start + string.length, end));
+  const selectedText = currentContentBlock.getText().slice(start, start + 1);
 
-  if (selectedText === string) {
+  if (selectedText === '\t') {
     const newSelection = selectionState.set('anchorOffset', start);
     const newContentState = Modifier.replaceText(contentState, newSelection, '');
     return EditorState.push(editorState, newContentState, 'delete-string');

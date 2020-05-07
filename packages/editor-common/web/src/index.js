@@ -91,7 +91,7 @@ export {
   setForceSelection,
   deleteBlockText,
   insertString,
-  deleteString,
+  deleteTabCharacter,
   createLinkEntityData,
 } from './Utils/draftUtils';
 export { isiOS } from './Utils/isiOS';
