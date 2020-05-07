@@ -20,11 +20,13 @@
   - [#898](https://github.com/wix-incubator/rich-content/pull/898) text indentation
 - `viewer`
   - [#1005](https://github.com/wix-incubator/rich-content/pull/1005) add viewMode SEO to ProGallery
-
 ### :bug: Bug Fix
+- `social-modals`
+  - [#1037](https://github.com/wix-incubator/rich-content/pull/1037) disable text input autocomplete
+- `vertical embed`
+  - [#1036](https://github.com/wix-incubator/rich-content/pull/1036) dropdown for search opens automaticly when typing text for search
 - `gallery`
   - [#1020](https://github.com/wix-incubator/rich-content/pull/1020) gallery accepts window as scrollingElement
-
 </details>
 <hr/>
 
