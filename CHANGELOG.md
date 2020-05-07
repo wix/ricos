@@ -25,7 +25,13 @@
 ### :house: Internal
 - `storybook`
   - [#1003](https://github.com/wix-incubator/rich-content/pull/1003) added story for wrapper handling of static text toolbar
-
+### :bug: Bug Fix
+- `social-modals`
+  - [#1037](https://github.com/wix-incubator/rich-content/pull/1037) disable text input autocomplete
+- `vertical embed`
+  - [#1036](https://github.com/wix-incubator/rich-content/pull/1036) dropdown for search opens automaticly when typing text for search
+- `gallery`
+  - [#1020](https://github.com/wix-incubator/rich-content/pull/1020) gallery accepts window as scrollingElement
 </details>
 <hr/>
 
