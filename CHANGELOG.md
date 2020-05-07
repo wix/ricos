@@ -23,6 +23,8 @@
 ### :bug: Bug Fix
 - `vertical embed`
   - [#1036](https://github.com/wix-incubator/rich-content/pull/1036) dropdown for search opens automaticly when typing text for search
+- `gallery`
+  - [#1020](https://github.com/wix-incubator/rich-content/pull/1020) gallery accepts window as scrollingElement
 </details>
 <hr/>
 
