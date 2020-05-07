@@ -20,7 +20,9 @@
   - [#898](https://github.com/wix-incubator/rich-content/pull/898) text indentation
 - `viewer`
   - [#1005](https://github.com/wix-incubator/rich-content/pull/1005) add viewMode SEO to ProGallery
-
+### :bug: Bug Fix
+- `vertical embed`
+  - [#1036](https://github.com/wix-incubator/rich-content/pull/1036) dropdown for search opens automaticly when typing text for search
 </details>
 <hr/>
 
