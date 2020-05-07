@@ -21,11 +21,12 @@ export default function editor(colors: PaletteColors, utils: ThemeUtils) {
     footerToolbarButton_icon: {
       color: textColor,
     },
-    footerToolbarButton: {
-      '&:hover:not([disabled]) $footerToolbarButton_icon': {
+    footerToolbarButton_wrapper: {
+      '& $footerToolbarButton:hover:not([disabled]) $footerToolbarButton_icon': {
         color: actionColor,
       },
     },
+    footerToolbarButton: {},
     //inline-toolbar-dropdown-button.scss
     inlineToolbarButton_active: {
       color: adaptedActionColor,
