@@ -9,7 +9,7 @@ import {
   deleteBlockText,
 } from 'wix-rich-content-editor-common';
 
-export const addLinkPreview = async (editorState, config, blockKey, url) => {
+const addLinkPreview = async (editorState, config, blockKey, url) => {
   const fixedUrl = url.split('\u21b5').join(''); //remove {enter} char
   const settings = config[LINK_PREVIEW_TYPE];
   const { fetchData, enableEmbed, enableLinkPreview } = settings;
@@ -114,3 +114,5 @@ const changePlainTextUrlToLinkUrl = (editorState, blockKey, url) => {
     }
   );
 };
+
+export { LINK_PREVIEW_TYPE, addLinkPreview };
