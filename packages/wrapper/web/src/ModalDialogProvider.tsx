@@ -1,5 +1,6 @@
-import React, { Suspense, Children, Component, Fragment, ReactElement } from 'react';
+import React, { Children, Component, Fragment, ReactElement } from 'react';
 import { modalStyles } from './themeStrategy/defaults';
+import EditorModal from './EditorModal';
 
 interface Props {
   children: ReactElement;
@@ -34,13 +35,6 @@ export default class ModalDialogProvider extends Component<Props, State> {
     };
   }
 
-  componentDidMount() {
-    const EditorModal = React.lazy(() =>
-      import(/* webpackChunkName: "rce-EditorModal"  */ `./EditorModal`)
-    );
-    this.setState({ EditorModal });
-  }
-
   openModal = data => {
     const { modalStyles, ...modalProps } = data;
     this.setState({
@@ -60,26 +54,23 @@ export default class ModalDialogProvider extends Component<Props, State> {
   };
 
   render() {
-    const { EditorModal, showModal, modalProps } = this.state;
+    const { showModal, modalProps } = this.state;
     const { children, ModalsMap, locale, theme } = this.props;
 
     return (
       <Fragment>
         {Children.only(React.cloneElement(children, { ...this.childProps }))}
-        {EditorModal && (
-          <Suspense fallback={<div />}>
-            <EditorModal
-              dataHook={'WrapperEditorModal'}
-              isOpen={showModal}
-              style={modalStyles(this.state, theme)}
-              role="dialog"
-              onRequestClose={modalProps?.onRequestClose || this.closeModal}
-              modalsMap={ModalsMap}
-              locale={locale}
-              {...modalProps}
-            />
-          </Suspense>
-        )}
+
+        <EditorModal
+          dataHook={'WrapperEditorModal'}
+          isOpen={showModal}
+          style={modalStyles(this.state, theme)}
+          role="dialog"
+          onRequestClose={modalProps?.onRequestClose || this.closeModal}
+          modalsMap={ModalsMap}
+          locale={locale}
+          {...modalProps}
+        />
       </Fragment>
     );
   }

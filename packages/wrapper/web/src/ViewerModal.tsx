@@ -9,6 +9,7 @@ interface Props {
   index: number;
   images: object[];
   onClose: () => void;
+  dataHook: string;
 }
 
 export default class ViewerModal extends React.Component<Props> {

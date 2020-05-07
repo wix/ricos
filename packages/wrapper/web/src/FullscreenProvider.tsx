@@ -1,5 +1,6 @@
-import React, { Component, Fragment, Suspense, Children, ReactElement } from 'react';
+import React, { Component, Fragment, Children, ReactElement } from 'react';
 import { emptyState } from './utils';
+import Fullscreen from './ViewerModal';
 
 interface Props {
   children: ReactElement;
@@ -9,7 +10,7 @@ interface Props {
 
 interface State {
   isExpanded: boolean;
-  index?: number;
+  index: number;
   expandModeData?: any;
   Fullscreen?: any;
 }
@@ -19,14 +20,8 @@ export default class FullscreenProvider extends Component<Props, State> {
     super(props);
     this.state = {
       isExpanded: false,
+      index: 0,
     };
-  }
-
-  componentDidMount() {
-    const Fullscreen = React.lazy(() =>
-      import(/* webpackChunkName: "rce-ViewerModal"  */ './ViewerModal')
-    );
-    this.setState({ Fullscreen });
   }
 
   onExpand = (entityIndex, innerIndex = 0) =>
@@ -42,25 +37,21 @@ export default class FullscreenProvider extends Component<Props, State> {
   addExpand = (helpers: Helpers) => ({ ...helpers, onExpand: this.onExpand });
 
   render() {
-    const { isExpanded, index, expandModeData, Fullscreen } = this.state;
+    const { isExpanded, index, expandModeData } = this.state;
     const { children, helpers: viewerHelpers = {}, initialState } = this.props;
     const helpers = this.addExpand(viewerHelpers);
     return (
       <Fragment>
         {Children.only(React.cloneElement(children, { helpers }))}
-        {Fullscreen && (
-          <Suspense fallback={<div />}>
-            <Fullscreen
-              dataHook={'WrapperFullScreen'}
-              initialState={initialState || emptyState}
-              isOpen={isExpanded}
-              images={expandModeData?.images || []}
-              onClose={this.onClose}
-              index={index}
-              setExpandModeData={this.setExpandModeData}
-            />
-          </Suspense>
-        )}
+        <Fullscreen
+          dataHook={'WrapperFullScreen'}
+          initialState={initialState || emptyState}
+          isOpen={isExpanded}
+          images={expandModeData?.images || []}
+          onClose={this.onClose}
+          index={index}
+          setExpandModeData={this.setExpandModeData}
+        />
       </Fragment>
     );
   }

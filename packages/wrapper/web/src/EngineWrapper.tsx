@@ -1,38 +1,25 @@
-import React, { Component, Children, Fragment } from 'react';
+import React, { Component, Children } from 'react';
 import themeStrategy from './themeStrategy/themeStrategy';
 import pluginsStrategy from './pluginsStrategy/pluginsStrategy';
 import localeStrategy from './localeStrategy/localeStrategy';
 import './styles.global.css';
-import FullscreenProvider from './FullscreenProvider';
-import ModalDialogProvider from './ModalDialogProvider';
 import { merge } from 'lodash';
 import { isDefined } from 'ts-is-present';
 
 interface Props extends RicosEditorProps, RicosViewerProps {
   children: RichContentChild;
   isViewer: boolean;
+  modalityProvider: any;
 }
 
 interface State {
-  ModalityProvider: typeof Fragment | typeof ModalDialogProvider | typeof FullscreenProvider;
   localeStrategy: RichContentProps;
 }
 
 export default class EngineWrapper extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
-    this.state = { ModalityProvider: this.getModalityPropvider(props), localeStrategy: {} };
-  }
-
-  getModalityPropvider(props: Props) {
-    const { isViewer, children } = props;
-    const { closeModal, openModal, onExpand } = children.props?.helpers || {};
-    if (!isViewer && !closeModal && !openModal) {
-      return ModalDialogProvider;
-    } else if (isViewer && !onExpand) {
-      return FullscreenProvider;
-    }
-    return Fragment;
+    this.state = { localeStrategy: {} };
   }
 
   static defaultProps = { locale: 'en', isMobile: false };
@@ -85,8 +72,8 @@ export default class EngineWrapper extends Component<Props, State> {
       placeholder,
       contentState,
       toolbarsConfig,
+      modalityProvider: ModalityProvider,
     } = this.props;
-    const { ModalityProvider } = this.state;
 
     const strategyProps = this.runStrategies();
 
