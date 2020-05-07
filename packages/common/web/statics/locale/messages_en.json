@@ -130,6 +130,7 @@
   "MapSettings_Location_Input_Label": "Location",
   "MapSettings_Location_Input_Placeholder": "Address",
   "MapSettings_Location_Display_Name": "Location Display Name",
+  "MapSettings_Location_Display_Name_Placeholder": "Give this location a name",
   "MapSettings_MapOption_SubHeader": "Map Behavior",
   "MapSettings_MapOption_Show_Marker_Label": "Show marker",
   "MapSettings_MapOption_Show_Zoom_Label": "Show zoom",

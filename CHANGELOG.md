@@ -21,6 +21,10 @@
 - `viewer`
   - [#1005](https://github.com/wix-incubator/rich-content/pull/1005) add viewMode SEO to ProGallery
 
+### :bug: Bug Fix
+- `gallery`
+  - [#1020](https://github.com/wix-incubator/rich-content/pull/1020) gallery accepts window as scrollingElement
+
 </details>
 <hr/>
 
