@@ -556,13 +556,12 @@ export function indentSelectedBlocks(editorState, adjustment) {
     return block.set('depth', depth);
   };
 
-  const getBlocks = () => {
+  const getBlocks = () =>
     blockMap
       .toSeq()
       .skipUntil((_, k) => k === startKey)
       .takeUntil((_, k) => k === endKey)
       .concat([[endKey, blockMap.get(endKey)]]);
-  };
 
   const blocks = getBlocks(blockMap, startKey, endKey)
     .filter(block => isTypeText(block.getType()))
