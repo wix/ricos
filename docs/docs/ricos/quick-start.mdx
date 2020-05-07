@@ -4,47 +4,46 @@ title: Quick Start
 sidebar_label: Quick Start
 ---
 
-/* import { RichContentWrapper } from "wix-rich-content-wrapper"; */
+import { RichContentWrapper } from "wix-rich-content-wrapper";
 import { RichContentEditor } from "wix-rich-content-editor";
 import { pluginDivider } from "wix-rich-content-plugin-divider";
 import { pluginVideo } from "wix-rich-content-plugin-video";
-import "../src/css/rich-content-editor.css";
+import "../../src/css/rich-content-editor.css";
 import "wix-rich-content-plugin-video/dist/styles.min.css";
 import "wix-rich-content-plugin-divider/dist/styles.min.css";
 import "wix-rich-content-wrapper/dist/styles.min.css";
 
-Start from installing `WixRichContent` and it's open-source counterpart.
+Start from installing the packages
 
 ```bash
-npm i @wix/rich-content wix-rich-content-wrapper
+npm i ricos-editor // TODO: complete the required package list
 ```
 
-Then add a basic rich text editor to your app. Try typing, and add some styling to your text.
+Then add a basic rich text editor to your app. Try typing, and add some formatting to your text.
 
 ```jsx
-import { WixRichContent } from "@wix/rich-content";
-import { RichContentEditor } from "wix-rich-content-editor";
+import { RicosEditor } from "ricos-editor";
 
-<WixRichContent consumer={"your app name for BI"} isEditor>
-	<RichContentEditor placeholder={"Type here!"} />
-</WixRichContent>;
+<RicosEditor placeholder={'Type here!'} />
 ```
 
+// TODO: update when RicosEditor is merged
 <div class="docsEditor">
-	<RichContentWrapper consumer={"your app name for BI"} isEditor>
+	<RichContentWrapper isEditor>
 		<RichContentEditor placeholder={"Type here!"} />
 	</RichContentWrapper>
 </div>
 
-Now let's add some plugins. This is how you can add videos and dividers.
+Now let's add some plugins.
 
 ```bash
 npm i wix-rich-content-plugin-video wix-rich-content-plugin-divider
 ```
 
+This is how you can add videos and dividers.
+
 ```jsx
-import { WixRichContent } from "@wix/rich-content";
-import { RichContentEditor } from "wix-rich-content-editor";
+import { RicosEditor } from "ricos-editor";
 
 import { pluginVideo } from "wix-rich-content-plugin-video";
 import "wix-rich-content-plugin-video/dist/styles.min.css";
@@ -52,18 +51,11 @@ import "wix-rich-content-plugin-video/dist/styles.min.css";
 import { pluginDivider } from "wix-rich-content-plugin-divider";
 import "wix-rich-content-plugin-divider/dist/styles.min.css";
 
-<WixRichContent
-	consumer={"your app name for BI"}
-	isEditor
-	plugins={[pluginDivider(), pluginVideo()]}
->
-	<RichContentEditor placeholder={"Type here!"} />
-</WixRichContent>;
+<RicosEditor plugins={[pluginDivider(), pluginVideo()]} placeholder={'Type here!'} />
 ```
 
 <div class="docsEditor">
 	<RichContentWrapper
-		consumer={"your app name for BI"}
 		isEditor
 		plugins={[pluginDivider(), pluginVideo()]}
 	>

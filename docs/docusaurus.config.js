@@ -16,7 +16,7 @@ module.exports = {
       },
       links: [
         {
-          to: 'docs/intro',
+          to: 'docs/ricos/quick-start',
           activeBasePath: 'docs',
           label: 'Getting Started',
           position: 'left',
@@ -48,13 +48,9 @@ module.exports = {
           title: 'Learn',
           items: [
             {
-              label: 'Introduction',
-              to: 'docs/intro',
+              label: 'Quick Start',
+              to: 'docs/quick-start',
             },
-            //{
-            //label: 'Quick Start',
-            //to: 'docs/quick-start',
-            //},
           ],
         },
         {

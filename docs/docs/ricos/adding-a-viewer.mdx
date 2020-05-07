@@ -8,29 +8,48 @@ import { RichContentWrapper } from "wix-rich-content-wrapper";
 import { RichContentViewer } from "wix-rich-content-viewer";
 import { pluginDivider } from "wix-rich-content-plugin-divider/dist/module.viewer.cjs";
 import { pluginVideo } from "wix-rich-content-plugin-video/dist/module.viewer.cjs";
-import "../src/css/rich-content-editor.css";
+import "../../src/css/rich-content-editor.css";
 import "wix-rich-content-plugin-video/dist/styles.min.css";
 import "wix-rich-content-plugin-divider/dist/styles.min.css";
 import "wix-rich-content-wrapper/dist/styles.min.css";
+import content from "../../infra/editor/content/intro.json";
+import withPlugins from "../../infra/editor/content/viewer-with-plugins.json";
 
 Now that you have an editor, let's add a viewer to display the content it creates.
 
-```jsx
-import { WixRichContent } from "@wix/rich-content";
-import { RichContentEditor } from "wix-rich-content-editor";
-
-<WixRichContent consumer={"your app name for BI"} isEditor>
-	<RichContentEditor placeholder={"Type here!"} />
-</WixRichContent>;
+```bash
+npm i ricos-viewer // TODO: complete the required package list
 ```
 
-<div class="docsEditor">
-	<RichContentWrapper consumer={"your app name for BI"} isEditor>
-		<RichContentEditor placeholder={"Type here!"} />
-	</RichContentWrapper>
+
+```jsx
+import { RicosViewer } from "ricos-viewer";
+
+const content = {
+  blocks: [
+    {
+      key: "d79aa",
+      text: "Hi there! I'm Ricos, your rich content framework. 👾",
+      type: "header-two",
+      depth: 0,
+      inlineStyleRanges: [],
+      entityRanges: [],
+      data: {}
+    }
+  ],
+  entityMap: {},
+  VERSION: "7.5.0"
+};
+
+<RicosViewer initialState={content} />
+```
+<div className="docsEditor">
+  <RichContentWrapper>
+		<RichContentViewer initialState={content} />
+  </RichContentWrapper>
 </div>
 
-Now let's add some plugins. This is how you can add videos and dividers.
+Now let's add some plugins to add ability of displaying plugin content.
 
 ```bash
 npm i wix-rich-content-plugin-video wix-rich-content-plugin-divider
@@ -40,29 +59,22 @@ npm i wix-rich-content-plugin-video wix-rich-content-plugin-divider
 import { WixRichContent } from "@wix/rich-content";
 import { RichContentEditor } from "wix-rich-content-editor";
 
-import { pluginVideo } from "wix-rich-content-plugin-video";
+import { pluginVideo } from "wix-rich-content-plugin-video/dist/module.viewer.cjs";
 import "wix-rich-content-plugin-video/dist/styles.min.css";
 
-import { pluginDivider } from "wix-rich-content-plugin-divider";
+import { pluginDivider } from "wix-rich-content-plugin-divider/dist/module.viewer.cjs";
 import "wix-rich-content-plugin-divider/dist/styles.min.css";
 
-<WixRichContent
-	consumer={"your app name for BI"}
-	isEditor
-	plugins={[pluginDivider(), pluginVideo()]}
->
-	<RichContentEditor placeholder={"Type here!"} />
-</WixRichContent>;
+<RicosViewer
+  initialState={contentWithPlugins}
+  plugins={[pluginDivider(), pluginVideo()]}
+/>
 ```
-
-<div class="docsEditor">
-	<RichContentWrapper
-		consumer={"your app name for BI"}
-		isEditor
-		plugins={[pluginDivider(), pluginVideo()]}
-	>
-		<RichContentEditor placeholder={"Type here!"} />
-	</RichContentWrapper>
+<div className="docsEditor">
+  <RichContentWrapper plugins={[pluginDivider(), pluginVideo()]}>
+		<RichContentViewer initialState={withPlugins} />
+  </RichContentWrapper>
 </div>
 
-There you go! A rich text editor
+
+

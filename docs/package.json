@@ -42,7 +42,8 @@
 		"wix-rich-content-plugin-vertical-embed": "latest",
 		"wix-rich-content-plugin-video": "latest",
 		"wix-rich-content-preview": "latest",
-		"wix-rich-content-viewer": "latest"
+		"wix-rich-content-viewer": "latest",
+		"wix-rich-content-wrapper": "latest"
 	},
 	"browserslist": {
 		"production": [

@@ -64,4 +64,7 @@ module.exports = {
       'plugin-development-guidelines/theming',
     ],
   },
+  ricos: {
+    RiCoS: ['ricos/quick-start', 'ricos/adding-a-viewer', 'ricos/migrating-from-rich-content'],
+  },
 };
