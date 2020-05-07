@@ -14,15 +14,17 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
-
-
+  
+### :bug: Bug Fix
+- `editor-common`
+  - [#1046](https://github.com/wix-incubator/rich-content/pull/1046) fix: cursor jumps to start of editor on close modal
 </details>
 <hr/>
 
 ## 7.6.0 (May 5, 2020)
 ### :rocket: New Feature
 - `indent`
-  - [#898](https://github.com/wix-incubator/rich-content/pull/898) alpha text indentation
+  - [#898](https://github.com/wix-incubator/rich-content/pull/898) text indentation
 - `viewer`
   - [#1005](https://github.com/wix-incubator/rich-content/pull/1005) add viewMode SEO to ProGallery
 ### :bug: Bug Fix
