@@ -44,6 +44,13 @@ export default class UrlInputModal extends Component {
       );
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (this.props.input !== nextProps.input) {
+      const isDropdownOpen = nextProps.input !== '';
+      this.setState({ isDropdownOpen });
+    }
+  }
+
   render() {
     const {
       t,
