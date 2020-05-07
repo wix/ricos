@@ -1218,12 +1218,12 @@ exports[`text > allow to apply indent on multiple text blocks #0`] =
   "entityMap": {}
 };
 
-exports[`text > should not allow to apply indent on multiple non-text-only blocks #0`] =
+exports[`text > allow to apply indent only on text blocks #0`] =
 {
   "blocks": [
     {
       "data": {},
-      "depth": 0,
+      "depth": 3,
       "entityRanges": [],
       "inlineStyleRanges": [],
       "key": 0,
@@ -1232,7 +1232,7 @@ exports[`text > should not allow to apply indent on multiple non-text-only block
     },
     {
       "data": {},
-      "depth": 0,
+      "depth": 3,
       "entityRanges": [],
       "inlineStyleRanges": [],
       "key": 1,
@@ -1241,7 +1241,7 @@ exports[`text > should not allow to apply indent on multiple non-text-only block
     },
     {
       "data": {},
-      "depth": 0,
+      "depth": 3,
       "entityRanges": [],
       "inlineStyleRanges": [],
       "key": 2,
@@ -1265,7 +1265,7 @@ exports[`text > should not allow to apply indent on multiple non-text-only block
     },
     {
       "data": {},
-      "depth": 0,
+      "depth": 3,
       "entityRanges": [],
       "inlineStyleRanges": [],
       "key": 4,
@@ -1274,7 +1274,7 @@ exports[`text > should not allow to apply indent on multiple non-text-only block
     },
     {
       "data": {},
-      "depth": 0,
+      "depth": 3,
       "entityRanges": [],
       "inlineStyleRanges": [],
       "key": 5,
@@ -1283,7 +1283,7 @@ exports[`text > should not allow to apply indent on multiple non-text-only block
     },
     {
       "data": {},
-      "depth": 0,
+      "depth": 3,
       "entityRanges": [],
       "inlineStyleRanges": [],
       "key": 6,
@@ -1292,7 +1292,7 @@ exports[`text > should not allow to apply indent on multiple non-text-only block
     },
     {
       "data": {},
-      "depth": 0,
+      "depth": 3,
       "entityRanges": [],
       "inlineStyleRanges": [],
       "key": 7,

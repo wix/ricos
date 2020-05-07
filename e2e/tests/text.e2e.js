@@ -169,7 +169,7 @@ describe('text', () => {
     cy.eyesCheckWindow(this.test.title);
   });
 
-  it('should not allow to apply indent on multiple non-text-only blocks', function() {
+  it('allow to apply indent only on text blocks', function() {
     cy.loadEditorAndViewer('non-text-only-blocks', 'all')
       .increaseIndent([0, 550])
       .increaseIndent([0, 550])

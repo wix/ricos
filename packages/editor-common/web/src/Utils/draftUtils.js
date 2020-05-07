@@ -542,13 +542,6 @@ export const isTypeText = blockType => {
   return TEXT_TYPES.some(type => type === blockType);
 };
 
-const getBlocksInSelection = (blockMap, startKey, endKey) =>
-  blockMap
-    .toSeq()
-    .skipUntil((_, k) => k === startKey)
-    .takeUntil((_, k) => k === endKey)
-    .concat([[endKey, blockMap.get(endKey)]]);
-
 export function indentSelectedBlocks(editorState, adjustment) {
   const maxDepth = 4;
   const selection = editorState.getSelection();
@@ -556,17 +549,21 @@ export function indentSelectedBlocks(editorState, adjustment) {
   const startKey = selection.getStartKey();
   const endKey = selection.getEndKey();
   const blockMap = contentState.getBlockMap();
-  let blocks = getBlocksInSelection(blockMap, startKey, endKey);
-  const isTextTypeBlocks = blocks.every(block => isTypeText(block.getType()));
-  if (!isTextTypeBlocks) {
-    return editorState;
-  }
 
-  blocks = blocks.map(block => {
-    let depth = block.getDepth() + adjustment;
-    depth = Math.max(0, Math.min(depth, maxDepth));
-    return block.set('depth', depth);
-  });
+  const blocks = blockMap
+    .toSeq()
+    .skipUntil((_, k) => k === startKey)
+    .takeUntil((_, k) => k === endKey)
+    .concat([[endKey, blockMap.get(endKey)]])
+    .map(block => {
+      if (!isTypeText(block.getType())) {
+        return block;
+      }
+      let depth = block.getDepth() + adjustment;
+      depth = Math.max(0, Math.min(depth, maxDepth));
+      return block.set('depth', depth);
+    });
+
   const withAdjustment = contentState.merge({
     blockMap: blockMap.merge(blocks),
     selectionBefore: selection,
