@@ -6,12 +6,12 @@ import { pluginLink } from 'wix-rich-content-plugin-link/dist/module.viewer';
 
 const plugins = [pluginLinkPreview({ enableEmbed: true }), pluginLink()];
 
-const DividerViewer = ({ contentState }) => (
+const LinkPreviewViewer = ({ contentState }) => (
   <RicosViewer contentState={contentState} plugins={plugins} />
 );
 
-DividerViewer.propTypes = {
+LinkPreviewViewer.propTypes = {
   contentState: PropTypes.object,
 };
 
-export default DividerViewer;
+export default LinkPreviewViewer;
