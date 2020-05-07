@@ -51,17 +51,21 @@ class RichContentEditor extends Component {
       editorBounds: {},
     };
     this.refId = Math.floor(Math.random() * 9999);
-    const {
-      config: { uiSettings = {} },
-    } = props;
+    const { config, plugins } = props;
+    const { uiSettings = {} } = config;
     uiSettings.blankTargetToggleVisibilityFn =
       uiSettings.blankTargetToggleVisibilityFn || (anchorTarget => anchorTarget !== '_blank');
     uiSettings.nofollowRelToggleVisibilityFn =
       uiSettings.nofollowRelToggleVisibilityFn || (relValue => relValue !== 'nofollow');
-
     this.calculateDiff = createCalcContentDiff(this.state.editorState);
     this.initContext();
     this.initPlugins();
+    const isConsumeLinkPreview =
+      plugins && plugins.filter(plugin => plugin.name === 'createLinkPreviewPlugin').length > 0;
+
+    if (config.LINK_PREVIEW && !isConsumeLinkPreview) {
+      console.warn('supply link preview config without consume link preview plugin'); // eslint-disable-line no-console
+    }
   }
 
   componentDidUpdate() {

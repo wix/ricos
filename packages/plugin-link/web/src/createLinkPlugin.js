@@ -5,7 +5,10 @@ import {
   hasLinksInSelection,
   getVisibleSelectionRect,
 } from 'wix-rich-content-editor-common';
-import { addLinkPreview } from 'wix-rich-content-plugin-link-preview/dist/lib/utils';
+import {
+  addLinkPreview,
+  LINK_PREVIEW_TYPE,
+} from 'wix-rich-content-plugin-link-preview/dist/lib/utils';
 import { isValidUrl } from 'wix-rich-content-common';
 import React from 'react';
 import { LINK_TYPE } from './types';
@@ -38,7 +41,7 @@ const createLinkPlugin = (config = {}) => {
   };
 
   const shouldConvertToLinkPreview = (settings, linkifyData) =>
-    linkifyData && linkifyData.block?.type === 'unstyled' && settings.preview?.enable;
+    linkifyData && linkifyData.block?.type === 'unstyled' && config[LINK_PREVIEW_TYPE];
 
   const getBlockLinkUrl = linkifyData => {
     const { string, block } = linkifyData;
