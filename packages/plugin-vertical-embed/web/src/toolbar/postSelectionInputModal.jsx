@@ -1,55 +1,25 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import UrlInputModal from 'wix-rich-content-editor-common/dist/lib/UrlInputModal';
-import { verticalsTypeMap } from '../constants';
+import { contentTypeMap } from '../constants';
 export default class PostSelectionInputModal extends Component {
+  constructor(props) {
+    super(props);
+    const {
+      verticalsApi,
+      componentData: { type },
+    } = props;
+    this.verticalApi = verticalsApi[type];
+    this.verticalApi.search('').then(products => this.setState({ products }));
+  }
   state = {
     errorMsg: '',
     products: [],
     selectedProduct: null,
   };
 
-  componentDidMount() {
-    this.search();
-  }
-
-  searchProducts = query => {
-    const {
-      fetchFunctions,
-      componentData: { type },
-    } = this.props;
-    const fetchType = verticalsTypeMap[type];
-    const abortController = new AbortController();
-    const promise = fetchFunctions[fetchType](query, abortController.signal).then(res => {
-      return res;
-    });
-    return {
-      abortController,
-      promise,
-    };
-  };
-
-  currentAbortController = null;
-  async search(query) {
-    const { abortController, promise } = this.searchProducts(query);
-    if (this.currentAbortController) {
-      this.currentAbortController.abort();
-    }
-    this.currentAbortController = abortController;
-
-    try {
-      const products = await promise;
-      this.setState({ products });
-    } catch (e) {
-      if (e?.name === 'AbortError') {
-        return;
-      }
-      throw e;
-    }
-  }
-
-  onInputChange = inputString => {
-    this.search(inputString);
+  onInputChange = (inputString = '') => {
+    this.verticalApi.search(inputString).then(products => this.setState({ products }));
     this.setState({ inputString });
   };
 
@@ -74,17 +44,18 @@ export default class PostSelectionInputModal extends Component {
       helpers,
       isMobile,
     } = this.props;
+    const contentType = contentTypeMap[type];
     return (
       <UrlInputModal
         onConfirm={this.onConfirm}
         helpers={helpers}
         t={t}
-        title={t(`Embed_Vertical_${type}_Title`)}
-        subtitle={`Choose a ${type} from your ${type} list`}
+        title={t(`Embed_Vertical_${contentType}_Title`)}
+        subtitle={`Choose a ${contentType} from your ${contentType} list`}
         dataHook={'verticalEmbedModal'}
         saveLabel={t('EmbedURL_Common_CTA_Primary')}
         cancelLabel={t('EmbedURL_Common_CTA_Secondary')}
-        placeholder={t(`Embed_Vertical_${type}_Placeholder`)}
+        placeholder={t(`Embed_Vertical_${contentType}_Placeholder`)}
         setSelection={selectedProduct => this.setState({ selectedProduct })}
         onCloseRequested={helpers.closeModal}
         dropdownItems={products}
@@ -102,5 +73,5 @@ PostSelectionInputModal.propTypes = {
   componentData: PropTypes.object.isRequired,
   t: PropTypes.func,
   isMobile: PropTypes.bool,
-  fetchFunctions: PropTypes.object.isRequired,
+  verticalsApi: PropTypes.object.isRequired,
 };
