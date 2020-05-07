@@ -14,7 +14,10 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
-  
+
+### :rocket: New Feature
+- `editor`
+  - [#1041](https://github.com/wix-incubator/rich-content/pull/1041) feat: shift+tab deletes tab character ('\t')
 ### :bug: Bug Fix
 - `editor-common`
   - [#1046](https://github.com/wix-incubator/rich-content/pull/1046) fix: cursor jumps to start of editor on close modal
@@ -27,8 +30,6 @@
   - [#898](https://github.com/wix-incubator/rich-content/pull/898) text indentation
 - `viewer`
   - [#1005](https://github.com/wix-incubator/rich-content/pull/1005) add viewMode SEO to ProGallery
-- `editor`
-  - [#1041](https://github.com/wix-incubator/rich-content/pull/1041) feat: shift+tab deletes tab character ('\t')
 ### :bug: Bug Fix
 - `social-modals`
   - [#1037](https://github.com/wix-incubator/rich-content/pull/1037) disable text input autocomplete
