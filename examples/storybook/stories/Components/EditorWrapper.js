@@ -13,6 +13,7 @@ import { pluginHashtag } from 'wix-rich-content-plugin-hashtag';
 import { pluginHeadersMarkdown } from 'wix-rich-content-plugin-headers-markdown';
 import { pluginHtml } from 'wix-rich-content-plugin-html';
 import { pluginImage } from 'wix-rich-content-plugin-image';
+import { pluginIndent } from 'wix-rich-content-plugin-indent';
 import { pluginLineSpacing } from 'wix-rich-content-plugin-line-spacing';
 import { pluginLink } from 'wix-rich-content-plugin-link';
 import { pluginMap } from 'wix-rich-content-plugin-map';
@@ -93,6 +94,7 @@ const plugins = [
   pluginHashtag(),
   pluginHtml(),
   pluginImage(),
+  pluginIndent(),
   pluginHeadersMarkdown(),
   pluginLineSpacing(),
   pluginLink(),
@@ -118,6 +120,7 @@ const pluginsMap = {
   hashtag: pluginHashtag(),
   html: pluginHtml(),
   image: pluginImage(),
+  indent: pluginIndent(),
   headers: pluginHeadersMarkdown(),
   lineSpacing: pluginLineSpacing(),
   link: pluginLink(),
