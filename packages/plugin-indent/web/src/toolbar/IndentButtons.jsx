@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { InlineToolbarButton, indentSelectedBlock } from 'wix-rich-content-editor-common';
+import { InlineToolbarButton, indentSelectedBlocks } from 'wix-rich-content-editor-common';
 import decreaseIndentPluginIcon from '../icons/decreaseIndentPluginIcon.svg';
 import increaseIndentPluginIcon from '../icons/increaseIndentPluginIcon.svg';
 
@@ -12,7 +12,7 @@ function indentButton(props) {
     tabIndex,
     setEditorState,
     getEditorState,
-    direction,
+    adjustment,
     tooltipKey,
     dataHook,
     icon,
@@ -21,7 +21,7 @@ function indentButton(props) {
     <InlineToolbarButton
       onClick={() => {
         const editorState = getEditorState();
-        const newState = indentSelectedBlock(editorState, direction);
+        const newState = indentSelectedBlocks(editorState, adjustment);
         if (newState !== editorState) {
           setEditorState(newState);
         }
@@ -39,7 +39,7 @@ function indentButton(props) {
 export function DecreaseIndentButton(props) {
   return indentButton({
     ...props,
-    direction: -1,
+    adjustment: -1,
     tooltipKey: 'decreaseIndentButton_Tooltip',
     dataHook: 'decreaseIndentButton',
     icon: decreaseIndentPluginIcon,
@@ -49,7 +49,7 @@ export function DecreaseIndentButton(props) {
 export function IncreaseIndentButton(props) {
   return indentButton({
     ...props,
-    direction: 1,
+    adjustment: 1,
     tooltipKey: 'increaseIndentButton_Tooltip',
     dataHook: 'increaseIndentButton',
     icon: increaseIndentPluginIcon,
@@ -64,7 +64,7 @@ indentButton.propTypes = {
   t: PropTypes.func,
   tabIndex: PropTypes.number,
   config: PropTypes.object,
-  direction: PropTypes.number,
+  adjustment: PropTypes.number,
   tooltipKey: PropTypes.string,
   dataHook: PropTypes.string,
   icon: PropTypes.object,
