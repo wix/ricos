@@ -17,6 +17,7 @@ export default class UrlInputModal extends Component {
   onUrlChange = event => {
     const url = event.target.value;
     this.props.onInputChange(url);
+    this.setState({ isDropdownOpen: url !== '' });
   };
 
   handleKeyPress = event => {
@@ -42,13 +43,6 @@ export default class UrlInputModal extends Component {
         },
         false
       );
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (this.props.input !== nextProps.input) {
-      const isDropdownOpen = nextProps.input !== '';
-      this.setState({ isDropdownOpen });
-    }
   }
 
   render() {
