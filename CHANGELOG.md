@@ -27,6 +27,8 @@
   - [#1036](https://github.com/wix-incubator/rich-content/pull/1036) dropdown for search opens automaticly when typing text for search
 - `gallery`
   - [#1020](https://github.com/wix-incubator/rich-content/pull/1020) gallery accepts window as scrollingElement
+- `editor-common`
+  - [#1046](https://github.com/wix-incubator/rich-content/pull/1046) fix: cursor jumps to start of editor on close modal
 </details>
 <hr/>
 
