@@ -7,7 +7,7 @@ export default function editorCommon(colors: PaletteColors) {
     cursor: 'default',
     boxShadow: `0 0 0 3px ${colors.actionColor}`,
   };
-  const sliderTrack = { background: `${actionColor} !important` };
+  const sliderTrack = { background: actionColor };
   const thumb = { ...sliderTrack, border: `4px solid ${actionColor}` };
   //button.scss
   const buttonsFooterStyle = {
@@ -102,10 +102,11 @@ export default function editorCommon(colors: PaletteColors) {
     video_modal_container_small: buttonsFooterStyle, //video plugin
 
     //slider.scss
-    wrapperSlider: {
-      '&::-webkit-slider-runnable-track': sliderTrack,
-      '&::-webkit-slider-thumb': thumb,
+    sliderWithInput_content: {
+      '& $slider::-webkit-slider-runnable-track': sliderTrack,
+      '& $slider::-webkit-slider-thumb': thumb,
     },
+    slider: {},
 
     //radio-group.scss
     radioGroup_button: {},
