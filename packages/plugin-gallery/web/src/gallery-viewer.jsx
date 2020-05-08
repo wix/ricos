@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import PropTypes from 'prop-types';
+import PropTypes, { instanceOf } from 'prop-types';
 import { validate, mergeStyles, pluginGallerySchema } from 'wix-rich-content-common';
 import { isEqual, debounce } from 'lodash';
 import { convertItemData } from './lib/convert-item-data';
@@ -45,8 +45,11 @@ class GalleryViewer extends React.Component {
       );
       scrollingElement = document.body;
     }
-    const contentElement =
+    let contentElement =
       typeof scrollingElement === 'function' ? scrollingElement() : scrollingElement;
+    if (contentElement?.nodeType !== 1) {
+      contentElement = document.body;
+    }
     if (contentElement) {
       this.observer = new MutationObserver(() => {
         if (contentElement.clientHeight !== this.oldContentElementHeight) {
