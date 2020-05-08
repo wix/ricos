@@ -5,7 +5,7 @@ export default function editorCommon(colors: PaletteColors) {
   const actionColor = adaptForeground(colors.actionColor);
   const blockActionColorSettings = {
     cursor: 'default',
-    boxShadow: `0 0 0 3px ${colors.actionColor} !important`,
+    boxShadow: `0 0 0 3px ${colors.actionColor}`,
   };
   const sliderTrack = { background: `${actionColor} !important` };
   const thumb = { ...sliderTrack, border: `4px solid ${actionColor}` };
@@ -35,9 +35,10 @@ export default function editorCommon(colors: PaletteColors) {
   return {
     //block focus
     hasFocus: blockActionColorSettings,
-    pluginContainer: {
-      '&:hover': blockActionColorSettings,
-      '&$hasFocus': blockActionColorSettings,
+    pluginContainer: {},
+    pluginContainerWrapper: {
+      '&$pluginContainer:hover': blockActionColorSettings,
+      '&$pluginContainer&$hasFocus': blockActionColorSettings,
     },
 
     //selection-list.scss
@@ -55,25 +56,27 @@ export default function editorCommon(colors: PaletteColors) {
     },
 
     //checkbox.scss
-    checkbox_icon: {
-      border: `solid 1px ${actionColor} !important`,
-      '&:hover': {
-        color: `${hexToRgbA(actionColor, 0.1)} !important`,
+    checkbox_wrapper: {
+      '& $checkbox_icon': {
+        border: `solid 1px ${actionColor}`,
+      },
+      '& $checkbox_icon:hover': {
+        color: hexToRgbA(actionColor, 0.1),
+      },
+      '& $checkbox_infoIcon:hover': {
+        color: actionColor,
+      },
+      '& $checkbox_inputLabel:hover $checkbox_icon_unchecked': {
+        backgroundColor: hexToRgbA(actionColor, 0.1),
+      },
+      '& $checkbox_icon_checked': {
+        backgroundColor: actionColor,
       },
     },
-    checkbox_infoIcon: {
-      '&:hover': {
-        color: `${actionColor} !important`,
-      },
-    },
-    checkbox_icon_checked: {
-      backgroundColor: `${actionColor} !important`,
-    },
-    checkbox_inputLabel: {
-      '&:hover $checkbox_icon_unchecked': {
-        backgroundColor: `${hexToRgbA(actionColor, 0.1)} !important`,
-      },
-    },
+    checkbox_icon: {},
+    checkbox_infoIcon: {},
+    checkbox_icon_checked: {},
+    checkbox_inputLabel: {},
     checkbox_icon_unchecked: {},
 
     //tabs.scss
@@ -99,7 +102,7 @@ export default function editorCommon(colors: PaletteColors) {
     video_modal_container_small: buttonsFooterStyle, //video plugin
 
     //slider.scss
-    slider: {
+    wrapperSlider: {
       '&::-webkit-slider-runnable-track': sliderTrack,
       '&::-webkit-slider-thumb': thumb,
     },
