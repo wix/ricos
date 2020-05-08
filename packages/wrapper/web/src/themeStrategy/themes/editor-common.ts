@@ -54,34 +54,44 @@ export default function editorCommon(colors: PaletteColors) {
     checkbox_icon_unchecked: {},
 
     //tabs.scss
-    tabs_panel: {
-      padding: '24px 24px 30px !important',
+    tabs_panel: {},
+    tabs: {
+      '& $tabs_panel': {
+        padding: '24px 24px 30px',
+      },
     },
-    tabs_headers_option_selected: {
-      borderBottom: `solid 3px ${actionColor} !important`,
+    tabs_headers_option_selected: {},
+    tabs_headers: {
+      '& $tabs_headers_option_selected': {
+        borderBottom: `solid 3px ${actionColor}`,
+      },
     },
 
     //button.scss
-    button_primary: {
-      backgroundColor: `${actionColor} !important`,
-      '&:hover:not([disabled])': {
-        backgroundColor: `${hexToRgbA(actionColor, 0.8)} !important`,
+    settingsPanel_footer_fixed: {
+      '& $button_primary': {
+        backgroundColor: actionColor,
       },
-      '&:disabled': {
-        backgroundColor: 'rgba(0, 0, 0, 0.4) !important',
+      '& $button_primary:hover:not([disabled])': {
+        backgroundColor: hexToRgbA(actionColor, 0.8),
       },
-    },
-    button_secondary: {
-      color: actionColor,
-      borderColor: `${actionColor} !important`,
-      '&:hover': {
+      '& $button_primary:disabled': {
+        backgroundColor: 'rgba(0, 0, 0, 0.4)',
+      },
+      '& $button_secondary': {
+        color: actionColor,
+        borderColor: actionColor,
+      },
+      '& $button_secondary:hover': {
         color: hexToRgbA(actionColor, 0.6),
-        borderColor: `${hexToRgbA(actionColor, 0.6)} !important`,
+        borderColor: hexToRgbA(actionColor, 0.6),
       },
-      '&:disabled': {
-        backgroundColor: 'rgba(0, 0, 0, 0.4) !important',
+      '& $button_secondary:disabled': {
+        backgroundColor: 'rgba(0, 0, 0, 0.4)',
       },
     },
+    button_primary: {},
+    button_secondary: {},
 
     //slider.scss
     slider: {
