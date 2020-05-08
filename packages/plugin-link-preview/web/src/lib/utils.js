@@ -12,7 +12,7 @@ import {
 const addLinkPreview = async (editorState, config, blockKey, url) => {
   const fixedUrl = url.split('\u21b5').join(''); //remove {enter} char
   const settings = config[LINK_PREVIEW_TYPE];
-  const { fetchData, enableEmbed, enableLinkPreview } = settings;
+  const { fetchData, enableEmbed = true, enableLinkPreview = true } = settings;
   const { setEditorState } = config;
   const linkPreviewData = await fetchData(fixedUrl);
   const { thumbnail_url, title, description, html, provider_url } = linkPreviewData;
@@ -48,7 +48,7 @@ const isValidImgSrc = url => {
   });
 };
 
-const shouldAddLinkPreview = (enableLinkPreview, title, thumbnail_url) => {
+const shouldAddLinkPreview = (title, thumbnail_url, enableLinkPreview) => {
   if (enableLinkPreview && title && thumbnail_url) {
     return isValidImgSrc(thumbnail_url);
   }
