@@ -9,6 +9,29 @@ export default function editorCommon(colors: PaletteColors) {
   };
   const sliderTrack = { background: `${actionColor} !important` };
   const thumb = { ...sliderTrack, border: `4px solid ${actionColor}` };
+  //button.scss
+  const buttonsFooterStyle = {
+    '& $button_primary': {
+      backgroundColor: actionColor,
+    },
+    '& $button_primary:hover:not([disabled])': {
+      backgroundColor: hexToRgbA(actionColor, 0.8),
+    },
+    '& $button_primary:disabled': {
+      backgroundColor: 'rgba(0, 0, 0, 0.4)',
+    },
+    '& $button_secondary': {
+      color: actionColor,
+      borderColor: actionColor,
+    },
+    '& $button_secondary:hover': {
+      color: hexToRgbA(actionColor, 0.6),
+      borderColor: hexToRgbA(actionColor, 0.6),
+    },
+    '& $button_secondary:disabled': {
+      backgroundColor: 'rgba(0, 0, 0, 0.4)',
+    },
+  };
   return {
     //block focus
     hasFocus: blockActionColorSettings,
@@ -68,30 +91,12 @@ export default function editorCommon(colors: PaletteColors) {
     },
 
     //button.scss
-    settingsPanel_footer_fixed: {
-      '& $button_primary': {
-        backgroundColor: actionColor,
-      },
-      '& $button_primary:hover:not([disabled])': {
-        backgroundColor: hexToRgbA(actionColor, 0.8),
-      },
-      '& $button_primary:disabled': {
-        backgroundColor: 'rgba(0, 0, 0, 0.4)',
-      },
-      '& $button_secondary': {
-        color: actionColor,
-        borderColor: actionColor,
-      },
-      '& $button_secondary:hover': {
-        color: hexToRgbA(actionColor, 0.6),
-        borderColor: hexToRgbA(actionColor, 0.6),
-      },
-      '& $button_secondary:disabled': {
-        backgroundColor: 'rgba(0, 0, 0, 0.4)',
-      },
-    },
     button_primary: {},
     button_secondary: {},
+    settingsPanel_footer_fixed: buttonsFooterStyle, //gallery, map...
+    button_inputModal_modal_footer: buttonsFooterStyle, //button plugin
+    video_modal_container_big: buttonsFooterStyle, //video plugin
+    video_modal_container_small: buttonsFooterStyle, //video plugin
 
     //slider.scss
     slider: {
@@ -101,11 +106,10 @@ export default function editorCommon(colors: PaletteColors) {
 
     //radio-group.scss
     radioGroup_button: {},
-    radioGroup_input: {
-      '&:checked + $radioGroup_button': {
-        '&::after': {
-          backgroundColor: `${actionColor} !important`,
-        },
+    radioGroup_input: {},
+    radioGroup: {
+      '& $radioGroup_input:checked + $radioGroup_button::after': {
+        backgroundColor: actionColor,
       },
     },
 
