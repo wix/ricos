@@ -26,7 +26,7 @@
 - `indent`
   - [#898](https://github.com/wix-incubator/rich-content/pull/898) text indentation
 - `viewer`
-  - [#1005](https://github.com/wix-incubator/rich-content/pull/1005) add viewMode SEO to ProGallery
+  - [#1005](https://github.com/wix-incubator/rich-content/pull/1005) add seoMode to ProGallery
 ### :bug: Bug Fix
 - `social-modals`
   - [#1037](https://github.com/wix-incubator/rich-content/pull/1037) disable text input autocomplete
