@@ -78,25 +78,23 @@ class LinkPreviewViewer extends Component {
       return <HtmlComponent {...htmlCompProps} />;
     } else {
       return (
-        <div className={linkPreviewWrapper}>
-          <figure className={linkPreview} data-hook="linkPreviewViewer">
-            <div
-              style={{
-                width: imageHeight,
-                height: imageHeight,
-                backgroundImage: `url(${thumbnail_url})`,
-              }}
-              className={linkPreviewImage}
-              alt={title}
-              ref={ref => (this.image = ref)}
-            />
-            <section className={linkPreviewInfo}>
-              <div className={linkPreviewUrl}>{this.getUrlForDisplay(provider_url || url)}</div>
-              <figcaption className={linkPreviewTitle}>{title}</figcaption>
-              {description && <div className={linkPreviewDescription}>{description}</div>}
-            </section>
-          </figure>
-        </div>
+        <figure className={linkPreview} data-hook="linkPreviewViewer">
+          <div
+            style={{
+              width: imageHeight,
+              height: imageHeight,
+              backgroundImage: `url(${thumbnail_url})`,
+            }}
+            className={linkPreviewImage}
+            alt={title}
+            ref={ref => (this.image = ref)}
+          />
+          <section className={linkPreviewInfo}>
+            <div className={linkPreviewUrl}>{this.getUrlForDisplay(provider_url || url)}</div>
+            <figcaption className={linkPreviewTitle}>{title}</figcaption>
+            {description && <div className={linkPreviewDescription}>{description}</div>}
+          </section>
+        </figure>
       );
     }
   }

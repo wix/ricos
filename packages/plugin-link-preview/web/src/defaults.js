@@ -8,7 +8,7 @@ export const DEFAULTS = {
 export const THEME = colors => {
   const { textColor, bgColor, secondaryColor } = colors;
   return {
-    linkPreviewWrapper: {
+    pluginContainerWrapper: {
       '& $linkPreview': {
         borderColor: secondaryColor,
         backgroundColor: bgColor,
