@@ -56,8 +56,8 @@ const configs = {
   },
 };
 const plugins = [
-  pluginImage(),
-  pluginGallery(),
+  pluginImage({ handleFileSelection: () => true }),
+  pluginGallery({ handleFileSelection: () => true }),
   pluginVideo(),
   pluginHtml(),
   pluginDivider(),
