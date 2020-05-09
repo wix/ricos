@@ -1,4 +1,8 @@
-# UI Settings
+---
+id: UiSettings
+title: UI Settings
+sidebar_label: UI Settings
+---
 
 ## Motivation
 

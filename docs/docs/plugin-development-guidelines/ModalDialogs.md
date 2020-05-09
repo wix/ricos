@@ -1,4 +1,9 @@
-# Modal Dialogs
+---
+id: modals
+title: Modal Dialogs
+sidebar_label: Modal Dialogs
+
+---
 
 ## Motivation
 

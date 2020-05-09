@@ -1,4 +1,8 @@
-# rich-content-preview
+---
+id: RichContentPreviewAPI
+title: rich-content-preview
+sidebar_label: Rich Content Preview
+---
 
 ## Introduction
 

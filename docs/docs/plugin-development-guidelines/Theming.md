@@ -1,4 +1,8 @@
-# Theming Guidelines
+---
+id: theming
+title: Theming Guidelines
+sidebar_label: Theming Guidelines
+---
 
 ## Motivation
 

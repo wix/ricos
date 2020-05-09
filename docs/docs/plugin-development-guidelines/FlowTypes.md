@@ -1,3 +1,9 @@
+---
+id: FlowTypes
+title: Flow Types
+sidebar_label: Flow Types
+---
+
 # Flow Types
 
 ## Motivation

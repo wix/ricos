@@ -1,4 +1,8 @@
-# Toolbar Customization
+---
+id: ToolbarCustomization
+title: Toolbar Customization
+sidebar_label: Toolbar Customization
+---
 
 ## Motivation
 
