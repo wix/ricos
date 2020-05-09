@@ -1,4 +1,8 @@
-# RichContentEditor API
+---
+id: RichContentEditorAPI
+title: RichContentEditor API
+sidebar_label: RichContentEditor API
+---
 
 ## Introduction
 
@@ -10,7 +14,7 @@ The `handleReturn` prop determines editor behavior upon Enter key press.
 
 The prop value is expected to be a function with the following signature:
 
-```javascript
+```ts
 
 (updateEditorStateCallback: Function) =>
   (e: SyntheticKeyboardEvent, editorState: EditorState) => 'handled' | 'not-handled'
@@ -28,3 +32,4 @@ The `config` prop allow to customize various aspects of the `RichContentEditor`,
 ## `shouldRenderOptimizedImages`
 
 When true, images will be rendered in high resolution. Useful for forcing high resolution rendering for crawlers relevant to SEO.
+
