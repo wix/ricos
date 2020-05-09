@@ -7,6 +7,10 @@ export default function editorCommon(colors: PaletteColors) {
     cursor: 'default',
     boxShadow: `0 0 0 3px ${colors.actionColor}`,
   };
+  const toolbarButtonStyle = {
+    color: actionColor,
+    fill: actionColor,
+  };
   const sliderTrack = { background: actionColor };
   const thumb = { ...sliderTrack, border: `4px solid ${actionColor}` };
   //button.scss
@@ -118,22 +122,28 @@ export default function editorCommon(colors: PaletteColors) {
     },
 
     //color-picker.scss
-    colorPicker_add_color_label: {
-      color: `${actionColor} !important`,
+    colorPicker_add_color_button: {
+      '& $colorPicker_add_color_label': {
+        color: actionColor,
+      },
     },
+    colorPicker_add_color_label: {},
+    colorPicker_reset_color_button: {
+      '& $colorPicker_reset_color_label': {
+        color: actionColor,
+      },
+    },
+    colorPicker_reset_color_label: {},
 
     //side-toolbar.scss + toolbar-button.scss
     //editor + editor-common
-    sideToolbar: {
-      '& button:hover:not([disabled]) svg, button:focus:not([disabled]) svg': {
-        color: `${actionColor} !important`,
-        fill: `${actionColor} !important`,
-      },
-      '& label:hover:not([disabled]) svg, label:focus:not([disabled]) svg': {
-        color: `${actionColor} !important`,
-        fill: `${actionColor} !important`,
-      },
+    buttonsWrapper: {
+      '& $buttonWrapper:hover button:not([disabled]) svg': toolbarButtonStyle,
+      '& $buttonWrapper:focus button:not([disabled]) svg': toolbarButtonStyle,
+      '& $buttonWrapper:hover label:not([disabled]) svg': toolbarButtonStyle,
+      '& $buttonWrapper:focus label:not([disabled]) svg': toolbarButtonStyle,
     },
+    buttonWrapper: {},
 
     //inline-toolbar-button.scss
     inlineToolbarButton_icon: {
