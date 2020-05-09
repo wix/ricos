@@ -34,7 +34,7 @@ export default `
     <script>
       var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
       (function fixInstagramWidth() {
-        // This is a fallback for the styles above. Because inline styles can't be overridden in ios.
+        /* This is a fallback for the styles above. Because inline styles can't be overridden in ios. */
         var callback = function() {
           try {
             if (document.body.firstChild.className.indexOf('instagram') >= 0) {
@@ -62,7 +62,7 @@ export default `
           }
 
           var img = event.srcElement;
-          // Remove image from loading stack
+          /* Remove image from loading stack */
           var imageIndex = images.indexOf(img);
           if (imageIndex !== -1) {
             images.splice(imageIndex, 1);
@@ -90,7 +90,7 @@ export default `
           var imgs = document.querySelectorAll('img');
           for (var i = 0; i < imgs.length; i++) {
             var image = imgs[i];
-            // Do nothing if image is already loaded
+            /* Do nothing if image is already loaded */
             if (
               image.nodeName === 'IMG' &&
               image.src &&
@@ -118,7 +118,6 @@ export default `
           if (isIOS) {
             iframe.onload = function() {
               var src = iframe.src;
-              console.log('reload iframe');
               if (src.indexOf('reloadMe') > -1) {
                 return;
               }
@@ -170,7 +169,7 @@ export default `
           observer.observe(target, config);
         }
 
-        window.addEventListener('resize', handleResize); //this handles width change
+        window.addEventListener('resize', handleResize); /* this handles width change */
         setupMutationObserver();
         handleResize();
       }

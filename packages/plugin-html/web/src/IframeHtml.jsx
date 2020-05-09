@@ -16,16 +16,6 @@ class IframeHtml extends Component {
     !isSSR && window.addEventListener('message', this.handleIframeMessage);
   }
 
-  writeToIframe = iframeElement => {
-    this.iframe = iframeElement;
-    const iframeDocument = iframeElement?.contentWindow?.document;
-    if (iframeDocument) {
-      iframeDocument.open('text/html', 'replace');
-      iframeDocument.write(htmlIframeSrc);
-      iframeDocument.close();
-    }
-  };
-
   componentWillUnmount() {
     !isSSR && window.removeEventListener('message', this.handleIframeMessage);
   }
@@ -63,7 +53,8 @@ class IframeHtml extends Component {
     return this.state.shouldRender ? (
       <iframe
         className={styles.iframe}
-        ref={this.writeToIframe}
+        ref={this.setIframe}
+        src={'data:text/html;charset=utf-8,' + encodeURI(htmlIframeSrc)}
         title="remote content"
         style={{ backgroundColor: 'transparent' }}
         onLoad={this.handleIframeLoad}
