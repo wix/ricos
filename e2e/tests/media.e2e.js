@@ -298,7 +298,7 @@ describe('plugins', () => {
     });
 
     it('should auto focus on add gif', function() {
-      cy.loadEditorAndViewer('empty');
+      cy.loadEditorAndViewer('empty').focusEditor();
       cy.addGif().get('[data-hook=giphyPluginToolbar]');
       cy.window().then(win => {
         win.__CONTENT_SNAPSHOT__ = { mock: true };

@@ -56,8 +56,10 @@ export default ({
         data,
         blockType
       );
-      window.getSelection().removeAllRanges();
-      setEditorState(EditorState.forceSelection(newEditorState, newSelection));
+      setTimeout(() => {
+        window.getSelection().removeAllRanges();
+        setEditorState(EditorState.forceSelection(newEditorState, newSelection));
+      });
       return { newBlock, newSelection, newEditorState };
     };
 
