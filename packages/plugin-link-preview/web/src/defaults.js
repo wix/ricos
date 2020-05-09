@@ -8,10 +8,13 @@ export const DEFAULTS = {
 export const THEME = colors => {
   const { textColor, bgColor, secondaryColor } = colors;
   return {
-    linkPreview: {
-      borderColor: `${secondaryColor} !important`,
-      backgroundColor: bgColor,
+    linkPreviewWrapper: {
+      '& $linkPreview': {
+        borderColor: secondaryColor,
+        backgroundColor: bgColor,
+      },
     },
+    linkPreview: {},
     linkPreviewTitle: {
       color: textColor,
     },
