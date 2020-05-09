@@ -146,14 +146,15 @@ export default function editorCommon(colors: PaletteColors) {
     buttonWrapper: {},
 
     //inline-toolbar-button.scss
-    inlineToolbarButton_icon: {
-      '&:hover': {
-        color: `${actionColor} !important`,
-        '& svg': {
-          fill: `${actionColor} !important`,
-        },
+    inlineToolbarButton_wrapper: {
+      '& $inlineToolbarButton_icon:hover': {
+        color: actionColor,
+      },
+      '& $inlineToolbarButton_icon:hover svg': {
+        fill: actionColor,
       },
     },
+    inlineToolbarButton_icon: {},
 
     //plugin-toolbar-button.scss
     pluginToolbarButton_disabled: {},

@@ -3,12 +3,14 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { isEmpty } from 'lodash';
 import ToolbarButton from './ToolbarButton';
-import styles from '../../statics/styles/inline-toolbar-button.scss';
+import Styles from '../../statics/styles/inline-toolbar-button.scss';
+import { mergeStyles } from 'wix-rich-content-common';
 
 class InlineToolbarButton extends Component {
   constructor(props) {
     super(props);
     const { buttonStyles } = props.theme || {};
+    const styles = mergeStyles({ styles: Styles, theme: props.theme });
 
     this.styles = {
       button: classNames(styles.inlineToolbarButton, {
