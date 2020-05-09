@@ -181,6 +181,7 @@ export default function editorCommon(colors: PaletteColors) {
       '& $Dropdown-option:hover': {
         color: actionColor,
       },
+      '& $Dropdown-option:hover svg': toolbarButtonStyle,
     },
   };
 }
