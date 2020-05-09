@@ -60,6 +60,10 @@ class RichContentEditor extends Component {
       uiSettings.nofollowRelToggleVisibilityFn || (relValue => relValue !== 'nofollow');
 
     this.calculateDiff = createCalcContentDiff(this.state.editorState);
+    this.pluginEventHandler = ({ pluginsDeleted = [] }) =>
+      pluginsDeleted.forEach(type => {
+        props.helpers?.onPluginDelete?.(type, Version.currentVersion);
+      });
     this.initContext();
     this.initPlugins();
   }
@@ -227,9 +231,8 @@ class RichContentEditor extends Component {
   }
 
   updateEditorState = editorState => {
-    const onPluginDelete = this.props.helpers?.onPluginDelete;
-    if (onPluginDelete) {
-      this.calculateDiff(editorState, (...args) => onPluginDelete(...args, Version.currentVersion));
+    if (this.props.helpers?.onPluginDelete) {
+      this.calculateDiff(editorState, this.pluginEventHandler);
     }
     this.setEditorState(editorState);
     this.props.onChange?.(editorState);
