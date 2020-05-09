@@ -6,7 +6,7 @@ module.exports = {
     'API Reference': [
       {
         type: 'category',
-        label: 'RiCos',
+        label: 'RiCoS',
         items: ['ricos/ricos_api'],
       },
       {
