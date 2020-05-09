@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { mergeStyles } from 'wix-rich-content-common';
 import styles from '../../statics/styles/slider.scss';
@@ -55,7 +56,7 @@ class Slider extends Component {
         {...ariaProps}
         tabIndex={0}
         type={'range'}
-        className={this.styles.slider}
+        className={classNames(this.styles.slider, this.styles.wrapperSlider)}
         data-hook={dataHook}
         onChange={e => this.onChange(e.target.valueAsNumber)}
         value={this.state.value}

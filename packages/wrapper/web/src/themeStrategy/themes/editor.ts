@@ -13,24 +13,28 @@ export default function editor(colors: PaletteColors, utils: ThemeUtils) {
       },
     },
     footerToolbar: {
-      background: `${bgColor} !important`,
+      '&$staticToolbar': {
+        background: bgColor,
+      },
     },
+    staticToolbar: {},
     footerToolbarButton_icon: {
       color: textColor,
     },
-    footerToolbarButton: {
-      '&:hover:not([disabled]) $footerToolbarButton_icon': {
+    footerToolbarButton_wrapper: {
+      '& $footerToolbarButton:hover:not([disabled]) $footerToolbarButton_icon': {
         color: actionColor,
       },
     },
+    footerToolbarButton: {},
     //inline-toolbar-dropdown-button.scss
     inlineToolbarButton_active: {
-      backgroundColor: `${adaptedActionColor} !important`,
-      fill: `${adaptedActionColor} !important`,
+      color: adaptedActionColor,
+      fill: adaptedActionColor,
     },
     inlineToolbarDropdownButton: {
       '&:hover svg': {
-        fill: `${adaptedActionColor} !important`,
+        fill: adaptedActionColor,
       },
     },
   };
