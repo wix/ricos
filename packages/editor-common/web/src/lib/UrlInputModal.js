@@ -17,6 +17,7 @@ export default class UrlInputModal extends Component {
   onUrlChange = event => {
     const url = event.target.value;
     this.props.onInputChange(url);
+    this.setState({ isDropdownOpen: url !== '' });
   };
 
   handleKeyPress = event => {
@@ -95,6 +96,7 @@ export default class UrlInputModal extends Component {
             placeholder={placeholder}
             theme={styles}
             data-hook={`${dataHook}Input`}
+            autoComplete="off"
           />
           {dropdownItems && isDropdownOpen && (
             <ItemsDropdown items={dropdownItems} onItemClick={item => onConfirm(item)} />

@@ -1,6 +1,5 @@
 export { default as BlockQuoteIcon } from './BlockQuoteIcon';
 export { default as BoldIcon } from './BoldIcon';
-export { default as IndentIcon } from './IndentIcon';
 export { default as ItalicIcon } from './ItalicIcon';
 export { default as LinkIcon } from './LinkIcon';
 export { default as OrderedListIcon } from './OrderedListIcon';

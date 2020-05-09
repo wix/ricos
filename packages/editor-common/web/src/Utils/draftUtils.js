@@ -1,5 +1,6 @@
 import { EditorState, Modifier, RichUtils, SelectionState, AtomicBlockUtils } from '@wix/draft-js';
 import { cloneDeep, flatMap, findIndex, findLastIndex, countBy, debounce, times } from 'lodash';
+import { TEXT_TYPES } from '../consts';
 
 export function createSelection({ blockKey, anchorOffset, focusOffset }) {
   return SelectionState.createEmpty(blockKey).merge({
@@ -535,6 +536,43 @@ export function getBlockType(editorState) {
 
 export function setSelection(editorState, selection) {
   return EditorState.acceptSelection(editorState, selection);
+}
+
+export const isTypeText = blockType => {
+  return TEXT_TYPES.some(type => type === blockType);
+};
+
+export function indentSelectedBlocks(editorState, adjustment) {
+  const maxDepth = 4;
+  const selection = editorState.getSelection();
+  const contentState = editorState.getCurrentContent();
+  const startKey = selection.getStartKey();
+  const endKey = selection.getEndKey();
+  const blockMap = contentState.getBlockMap();
+
+  const adjustBlockDepth = (block, adjustment) => {
+    let depth = block.getDepth() + adjustment;
+    depth = Math.max(0, Math.min(depth, maxDepth));
+    return block.set('depth', depth);
+  };
+
+  const getBlocks = () =>
+    blockMap
+      .toSeq()
+      .skipUntil((_, k) => k === startKey)
+      .takeUntil((_, k) => k === endKey)
+      .concat([[endKey, blockMap.get(endKey)]]);
+
+  const blocks = getBlocks(blockMap, startKey, endKey)
+    .filter(block => isTypeText(block.getType()))
+    .map(block => adjustBlockDepth(block, adjustment));
+
+  const withAdjustment = contentState.merge({
+    blockMap: blockMap.merge(blocks),
+    selectionBefore: selection,
+    selectionAfter: selection,
+  });
+  return EditorState.push(editorState, withAdjustment, 'adjust-depth');
 }
 
 export function setForceSelection(editorState, selection) {

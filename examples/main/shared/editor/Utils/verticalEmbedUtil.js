@@ -10,6 +10,17 @@ const mockDataMap = {
   [product]: mockProductsData,
 };
 
-export const mockFetchVerticalEmbedFunc = vertical => {
-  return () => Promise.resolve(mockDataMap[vertical]);
+const mockFetchVerticalEmbed = vertical => {
+  return Promise.resolve(mockDataMap[vertical]);
 };
+
+export default class MockVerticalSearchModule {
+  constructor(verticalType, instance) {
+    this.items = mockFetchVerticalEmbed(verticalType);
+  }
+  search(searchInput) {
+    return this.items.then(res =>
+      res.filter(item => item.name.toLowerCase().includes(searchInput.toLowerCase()))
+    );
+  }
+}
