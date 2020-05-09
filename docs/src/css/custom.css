@@ -47,39 +47,11 @@ html[data-theme="dark"] .docusaurus-highlight-code-line {
 	background-color: white;
 	margin-bottom: var(--ifm-leading);
 	padding: var(--ifm-card-vertical-spacing) 47px;
-
-	h3 {
-		color: rgb(28, 30, 33);
-	}
-
-	* {
-		box-sizing: unset;
-	}
+  overflow: visible;
 }
 
 .ReactModalPortal h2,
 .ReactModalPortal h3 {
 	box-sizing: unset;
 	color: initial;
-}
-
-.markdown {
-	h1 {
-		--ifm-h1-font-size: unset;
-	}
-	h2 {
-		--ifm-h2-font-size: unset;
-	}
-	h3 {
-		--ifm-h3-font-size: unset;
-	}
-	h4 {
-		--ifm-h4-font-size: unset;
-	}
-	h5 {
-		--ifm-h5-font-size: unset;
-	}
-	h6 {
-		--ifm-h6-font-size: unset;
-	}
 }
