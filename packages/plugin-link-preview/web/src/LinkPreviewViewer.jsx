@@ -58,7 +58,6 @@ class LinkPreviewViewer extends Component {
       linkPreviewInfo,
       linkPreviewTitle,
       linkPreviewImage,
-      linkPreviewWrapper,
       linkPreviewDescription,
     } = this.styles;
 
