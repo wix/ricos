@@ -8,7 +8,6 @@ import { RichContentWrapper } from "wix-rich-content-wrapper";
 import { RichContentViewer } from "wix-rich-content-viewer";
 import { pluginDivider } from "wix-rich-content-plugin-divider/dist/module.viewer.cjs";
 import { pluginVideo } from "wix-rich-content-plugin-video/dist/module.viewer.cjs";
-import "../../src/css/rich-content-editor.css";
 import "wix-rich-content-plugin-video/dist/styles.min.css";
 import "wix-rich-content-plugin-divider/dist/styles.min.css";
 import "wix-rich-content-wrapper/dist/styles.min.css";
@@ -43,7 +42,7 @@ const content = {
 
 <RicosViewer initialState={content} />
 ```
-<div className="docsEditor">
+<div className="card">
   <RichContentWrapper>
 		<RichContentViewer initialState={content} />
   </RichContentWrapper>
@@ -70,7 +69,7 @@ import "wix-rich-content-plugin-divider/dist/styles.min.css";
   plugins={[pluginDivider(), pluginVideo()]}
 />
 ```
-<div className="docsEditor">
+<div className="card">
   <RichContentWrapper plugins={[pluginDivider(), pluginVideo()]}>
 		<RichContentViewer initialState={withPlugins} />
   </RichContentWrapper>

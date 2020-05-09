@@ -8,7 +8,6 @@ import { RichContentWrapper } from "wix-rich-content-wrapper";
 import { RichContentEditor } from "wix-rich-content-editor";
 import { pluginDivider } from "wix-rich-content-plugin-divider";
 import { pluginVideo } from "wix-rich-content-plugin-video";
-import "../../src/css/rich-content-editor.css";
 import "wix-rich-content-plugin-video/dist/styles.min.css";
 import "wix-rich-content-plugin-divider/dist/styles.min.css";
 import "wix-rich-content-wrapper/dist/styles.min.css";
@@ -28,7 +27,7 @@ import { RicosEditor } from "ricos-editor";
 ```
 
 // TODO: update when RicosEditor is merged
-<div class="docsEditor">
+<div className="card">
 	<RichContentWrapper isEditor>
 		<RichContentEditor placeholder={"Type here!"} />
 	</RichContentWrapper>
@@ -54,7 +53,7 @@ import "wix-rich-content-plugin-divider/dist/styles.min.css";
 <RicosEditor plugins={[pluginDivider(), pluginVideo()]} placeholder={'Type here!'} />
 ```
 
-<div class="docsEditor">
+<div className="card">
 	<RichContentWrapper
 		isEditor
 		plugins={[pluginDivider(), pluginVideo()]}
