@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable @typescript-eslint/camelcase */
 import { adaptForeground, hexToRgbA } from './utils';
 
@@ -143,7 +144,12 @@ export default function editorCommon(colors: PaletteColors) {
       '& $buttonWrapper:hover label:not([disabled]) svg': toolbarButtonStyle,
       '& $buttonWrapper:focus label:not([disabled]) svg': toolbarButtonStyle,
     },
-    buttonWrapper: {},
+    buttonWrapper: {
+      //plugin-toolbar-button.scss
+      '& $pluginToolbarButton:not($pluginToolbarButton_disabled)$pluginToolbarButton_active': toolbarButtonStyle,
+      '& $pluginToolbarButton:not($pluginToolbarButton_disabled):focus svg': toolbarButtonStyle,
+      '& $pluginToolbarButton:not($pluginToolbarButton_disabled):hover': toolbarButtonStyle,
+    },
 
     //inline-toolbar-button.scss
     inlineToolbarButton_wrapper: {
@@ -158,37 +164,23 @@ export default function editorCommon(colors: PaletteColors) {
 
     //plugin-toolbar-button.scss
     pluginToolbarButton_disabled: {},
-    pluginToolbarButton_active: {
-      color: `${actionColor} !important`,
-      fill: `${actionColor} !important`,
-    },
+    pluginToolbarButton_active: {},
     pluginToolbarButton: {
       '&:not($pluginToolbarButton_disabled):hover >:not($Dropdown-root) svg': {
-        color: `${actionColor} !important`,
-        fill: `${actionColor} !important`,
+        fill: actionColor,
       },
-      '&:not($pluginToolbarButton_disabled):focus svg': {
-        color: `${actionColor} !important`,
-        fill: `${actionColor} !important`,
-      },
-      '&:not($pluginToolbarButton_disabled)$pluginToolbarButton_active svg': {
-        color: `${actionColor} !important`,
-        fill: `${actionColor} !important`,
-      },
-      '&:not($pluginToolbarButton_disabled):hover': {},
     },
 
     //dropdown.scss
-    'Dropdown-control': {
-      '&:hover': {
-        color: `${actionColor} !important`,
+    'Dropdown-control': {},
+    'Dropdown-option': {},
+    'Dropdown-root': {
+      '& $Dropdown-control:hover': {
+        color: actionColor,
+      },
+      '& $Dropdown-option:hover': {
+        color: actionColor,
       },
     },
-    'Dropdown-option': {
-      '&:hover': {
-        color: `${actionColor} !important`,
-      },
-    },
-    'Dropdown-root': {},
   };
 }
