@@ -47,18 +47,20 @@ export default function editorCommon(colors: PaletteColors) {
     },
 
     //selection-list.scss
-    selectionListOption: {
-      '&:hover': {
-        backgroundColor: `${hexToRgbA(actionColor, 0.05)} !important`,
+    selectionList: {
+      '& $selectionListOption:hover': {
+        backgroundColor: hexToRgbA(actionColor, 0.05),
       },
-    },
-    selectionListOption_selected: {
-      color: actionColor,
-      backgroundColor: `${hexToRgbA(actionColor, 0.1)} !important`,
-      '&$selectionListOption:hover': {
+      '& $selectionListOption$selectionListOption_selected': {
+        color: actionColor,
+        backgroundColor: hexToRgbA(actionColor, 0.1),
+      },
+      '& $selectionListOption_selected$selectionListOption:hover': {
         backgroundColor: hexToRgbA(actionColor, 0.1),
       },
     },
+    selectionListOption: {},
+    selectionListOption_selected: {},
 
     //checkbox.scss
     checkbox_wrapper: {
