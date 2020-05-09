@@ -33,21 +33,33 @@ export const DEFAULTS = Object.freeze({
 
 /* eslint-disable camelcase, @typescript-eslint/camelcase */
 // ../statics/styles/map-settings-modal.scss
-export const THEME = colors => ({
-  map_settings_modal_mobile_navbar: {
-    backgroundColor: `${colors.actionColor} !important`,
-    color: `${colors.bgColor} !important`,
-  },
-  map_settings_modal_divider: {
-    backgroundColor: `${colors.textColor} !important`,
-  },
-  labeled_toggle_track: {
-    backgroundColor: `${colors.textColor} !important`,
-  },
-  labeled_toggle_track_checked: {
-    backgroundColor: `${colors.actionColor} !important`,
-  },
-  labeled_toggle_slider: {
-    backgroundColor: `${colors.bgColor} !important`,
-  },
-});
+export const THEME = (colors, utils) => {
+  const { textColor, bgColor } = colors;
+  const actionColor = utils.adaptForeground(colors.actionColor);
+  return {
+    map_settings_modal_mobile_navbar_wrapper: {
+      backgroundColor: actionColor,
+      color: bgColor,
+    },
+    map_settings_modal_divider_wrapper: {
+      '& $map_settings_modal_divider': {
+        backgroundColor: textColor,
+      },
+    },
+    map_settings_modal_divider: {},
+    labeled_toggle_input_container: {
+      '& $labeled_toggle_switch $labeled_toggle_track': {
+        backgroundColor: textColor,
+      },
+      '& $labeled_toggle_switch $labeled_toggle_track_checked': {
+        backgroundColor: actionColor,
+      },
+      '& $labeled_toggle_switch $labeled_toggle_slider': {
+        backgroundColor: utils.fallbackColorBright,
+      },
+    },
+    labeled_toggle_switch: {},
+    labeled_toggle_track_checked: {},
+    labeled_toggle_slider: {},
+  };
+};
