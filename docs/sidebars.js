@@ -6,7 +6,17 @@ module.exports = {
     'API Reference': [
       {
         type: 'category',
-        label: 'Rich Content Editor',
+        label: 'RiCos',
+        items: ['ricos/ricos_api'],
+      },
+      {
+        type: 'category',
+        label: 'Plugins',
+        items: ['plugins_api/PluginCustomization'],
+      },
+      {
+        type: 'category',
+        label: 'Rich Content Editor [legacy]',
         items: [
           'rce_api/RichContentEditorAPI',
           'rce_api/ToolbarCustomization',
@@ -32,7 +42,7 @@ module.exports = {
       },
       {
         type: 'category',
-        label: 'Rich Content Viewer',
+        label: 'Rich Content Viewer [legacy]',
         items: [
           'rcv_api/initialState',
           'rcv_api/typeMappers_config',
@@ -49,11 +59,6 @@ module.exports = {
           'rcv_api/textDirection',
           'rcv_api/addAnchors',
         ],
-      },
-      {
-        type: 'category',
-        label: 'Plugin API',
-        items: ['plugins_api/PluginCustomization'],
       },
     ],
   },

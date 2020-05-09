@@ -22,7 +22,7 @@ module.exports = {
           position: 'left',
         },
         {
-          to: 'docs/rce_api/RichContentEditorApi',
+          to: 'docs/ricos/ricos_api',
           activeBasePath: 'docs',
           label: 'API',
           position: 'left',
