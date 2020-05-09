@@ -109,7 +109,12 @@
 }
 
 .checkbox_wrapper {
-  display: flex;
+  display: inherit;
+}
+
+.checkbox_inputLabel:hover .checkbox_icon_unchecked{
+  background-color: #fff;
+  color: #0261ff;
 }
 
 .checkbox_infoIcon {
