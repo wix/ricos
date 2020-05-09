@@ -18,6 +18,10 @@
 ### :bug: Bug Fix
 - `editor-common`
   - [#1046](https://github.com/wix-incubator/rich-content/pull/1046) fix: cursor jumps to start of editor on close modal
+
+### :house: Internal
+- `wrapper`
+  - [#993](https://github.com/wix-incubator/rich-content/pull/993) remove `!important` usage + deep merge jss styles
 </details>
 <hr/>
 
