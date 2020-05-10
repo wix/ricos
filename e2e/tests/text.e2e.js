@@ -1,6 +1,7 @@
 /*global cy*/
 import { INLINE_TOOLBAR_BUTTONS } from '../cypress/dataHooks';
 import { DEFAULT_DESKTOP_BROWSERS } from './settings';
+import { usePlugins, plugins } from '../cypress/testAppConfig';
 
 describe('text', () => {
   before(function() {
@@ -153,7 +154,7 @@ describe('text', () => {
   });
 
   it('allow to apply indent on a single block with inline styling', function() {
-    cy.loadEditorAndViewer('plain', 'all')
+    cy.loadEditorAndViewer('plain', usePlugins(plugins.all))
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.BOLD, [40, 10])
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.UNDERLINE, [10, 5])
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.ITALIC, [20, 5])
@@ -171,7 +172,7 @@ describe('text', () => {
   });
 
   it('allow to apply indent on multiple text blocks', function() {
-    cy.loadEditorAndViewer('text-blocks', 'all')
+    cy.loadEditorAndViewer('text-blocks', usePlugins(plugins.all))
       .increaseIndent([0, 550])
       .increaseIndent([0, 550])
       .increaseIndent([0, 550])
@@ -182,7 +183,7 @@ describe('text', () => {
   });
 
   it('allow to apply indent only on text blocks', function() {
-    cy.loadEditorAndViewer('non-text-only-blocks', 'all')
+    cy.loadEditorAndViewer('non-text-only-blocks', usePlugins(plugins.all))
       .increaseIndent([0, 550])
       .increaseIndent([0, 550])
       .increaseIndent([0, 550])

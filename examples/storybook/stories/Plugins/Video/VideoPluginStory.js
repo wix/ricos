@@ -15,6 +15,8 @@ import VideoViewer from './VideoViewer';
 import viewerSourcecode from '!!raw-loader!./VideoViewer.js';
 import SyntaxHighlighter from '../../Components/SyntaxHighlighter';
 import { createEmpty } from 'wix-rich-content-editor/dist/lib/editorStateConversion';
+import TabsWrapper from '../../Components/TabsWrapper';
+import apiData from '../apiData';
 
 const editorState = createWithContent(convertFromRaw(videoContentState));
 
@@ -37,26 +39,28 @@ const handleFileUpload = {
 };
 
 const VideoPluginStory = () => (
-  <Page title="Video Plugin">
-    <Section type={Section.Types.COMPARISON}>
-      <RichContentEditorBox sourcecode={editorSourcecode} contentState={videoContentState}>
-        <VideoEditor editorState={editorState} handleFileUpload={handleFileUpload.mock} />
-      </RichContentEditorBox>
-      <RichContentViewerBox sourcecode={viewerSourcecode}>
-        <VideoViewer initialState={videoContentState} />
-      </RichContentViewerBox>
-    </Section>
+  <TabsWrapper apiData={apiData.VIDEO}>
+    <Page title="Video Plugin">
+      <Section type={Section.Types.COMPARISON}>
+        <RichContentEditorBox sourcecode={editorSourcecode} contentState={videoContentState}>
+          <VideoEditor editorState={editorState} handleFileUpload={handleFileUpload.mock} />
+        </RichContentEditorBox>
+        <RichContentViewerBox sourcecode={viewerSourcecode}>
+          <VideoViewer initialState={videoContentState} />
+        </RichContentViewerBox>
+      </Section>
 
-    <Section title="onFilesChange Error (with UI)">
-      <div>With Error Message:</div>
-      <SyntaxHighlighter
-        code={`handleFileUpload = (files, updateEntity) => updateEntity({ data: [], error: { msg: 'file too large' } });`}
-      />
-      <RichContentEditorBox>
-        <VideoEditor editorState={createEmpty()} handleFileUpload={handleFileUpload.error} />
-      </RichContentEditorBox>
-    </Section>
-  </Page>
+      <Section title="onFilesChange Error (with UI)">
+        <div>With Error Message:</div>
+        <SyntaxHighlighter
+          code={`handleFileUpload = (files, updateEntity) => updateEntity({ data: [], error: { msg: 'file too large' } });`}
+        />
+        <RichContentEditorBox>
+          <VideoEditor editorState={createEmpty()} handleFileUpload={handleFileUpload.error} />
+        </RichContentEditorBox>
+      </Section>
+    </Page>
+  </TabsWrapper>
 );
 
 export default VideoPluginStory;

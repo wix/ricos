@@ -7,6 +7,7 @@ import {
   BUTTON_PLUGIN_MODAL,
 } from '../cypress/dataHooks';
 import { DEFAULT_DESKTOP_BROWSERS } from './settings';
+import { usePlugins, plugins } from '../cypress/testAppConfig';
 
 const eyesOpen = ({
   test: {
@@ -165,7 +166,9 @@ describe('plugins', () => {
     });
     after(() => cy.eyesClose());
 
-    beforeEach('load editor', () => cy.loadEditorAndViewer('link-preview', 'embedsPreset'));
+    beforeEach('load editor', () =>
+      cy.loadEditorAndViewer('link-preview', usePlugins(plugins.embedsPreset))
+    );
 
     it('change link preview settings', function() {
       cy.openPluginToolbar(PLUGIN_COMPONENT.LINK_PREVIEW);
@@ -199,7 +202,9 @@ describe('plugins', () => {
       eyesOpen(this);
     });
     after(() => cy.eyesClose());
-    beforeEach('load editor', () => cy.loadEditorAndViewer('empty', 'embedsPreset'));
+    beforeEach('load editor', () =>
+      cy.loadEditorAndViewer('empty', usePlugins(plugins.embedsPreset))
+    );
 
     it('should create link preview from link after enter key', function() {
       cy.insertLinkAndEnter('www.wix.com');
@@ -219,7 +224,7 @@ describe('plugins', () => {
 
     beforeEach('load editor', () => {
       cy.switchToDesktop();
-      cy.loadEditorAndViewer('empty', 'linkPreview');
+      cy.loadEditorAndViewer('empty', usePlugins(plugins.linkPreview));
     });
 
     after(() => cy.eyesClose());
@@ -271,7 +276,7 @@ describe('plugins', () => {
 
     beforeEach('load editor', () => {
       cy.switchToDesktop();
-      cy.loadEditorAndViewer('empty', 'verticalEmbed');
+      cy.loadEditorAndViewer('empty', usePlugins(plugins.verticalEmbed));
     });
 
     after(() => cy.eyesClose());
@@ -316,7 +321,9 @@ describe('plugins', () => {
       eyesOpen(this);
     });
 
-    beforeEach('load editor', () => cy.loadEditorAndViewer('action-button', 'actionButton'));
+    beforeEach('load editor', () =>
+      cy.loadEditorAndViewer('action-button', usePlugins(plugins.actionButton))
+    );
 
     after(() => cy.eyesClose());
     it('create action button & customize it', function() {
