@@ -1,8 +1,7 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import RicosEngine from './RicosEngine';
 import { RichContentViewer } from 'wix-rich-content-viewer';
 import { shouldRenderChild } from './utils';
-import FullscreenProvider from './FullscreenProvider';
 
 export class RicosViewer extends Component<RicosViewerProps> {
   render() {
@@ -14,10 +13,8 @@ export class RicosViewer extends Component<RicosViewerProps> {
         <RichContentViewer />
       );
 
-    const modalityProvider = !child.props.onExpand ? FullscreenProvider : Fragment;
-
     return (
-      <RicosEngine isViewer key={'viewer'} {...props} modalityProvider={modalityProvider}>
+      <RicosEngine isViewer key={'viewer'} {...props}>
         {child}
       </RicosEngine>
     );

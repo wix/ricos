@@ -6,7 +6,6 @@ import { createDataConverter } from './editorUtils';
 import { shouldRenderChild } from './utils';
 import ReactDOM from 'react-dom';
 import { EditorState } from 'draft-js';
-import ModalDialogProvider from './ModalDialogProvider';
 
 interface State {
   StaticToolbar?: ElementType;
@@ -58,16 +57,13 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
         <RichContentEditor />
       );
 
-    const { openModal, closeModal } = child.props;
-    const modalityProvider = !closeModal && !openModal ? ModalDialogProvider : Fragment;
-
     return (
       <Fragment>
         <StaticToolbarPortal
           StaticToolbar={StaticToolbar}
           textToolbarContainer={textToolbarContainer}
         />
-        <RicosEngine isViewer={false} key={'editor'} {...props} modalityProvider={modalityProvider}>
+        <RicosEngine isViewer={false} key={'editor'} {...props}>
           {React.cloneElement(child, {
             onChange: this.onChange(child.props.onChange),
             ref: ref => (this.editor = ref),

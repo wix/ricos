@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { RichContentEditorModal } from 'wix-rich-content-editor';
 import ReactModal from 'react-modal';
 
@@ -13,7 +13,7 @@ interface Props {
   [propName: string]: any;
 }
 
-export default class EditorModal extends React.Component<Props, {}> {
+export default class EditorModal extends Component<Props, {}> {
   componentDidMount() {
     ReactModal.setAppElement('body');
   }

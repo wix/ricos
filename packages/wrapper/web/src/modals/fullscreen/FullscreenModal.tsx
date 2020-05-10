@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import getImagesData from 'wix-rich-content-fullscreen/dist/lib/getImagesData.cjs.js';
 import Fullscreen from 'wix-rich-content-fullscreen';
 
@@ -12,7 +12,7 @@ interface Props {
   dataHook: string;
 }
 
-export default class ViewerModal extends React.Component<Props> {
+export default class ViewerModal extends Component<Props> {
   constructor(props) {
     super(props);
     props.setExpandModeData(getImagesData(props.initialState));

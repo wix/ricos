@@ -1,6 +1,6 @@
-import React, { Component, Fragment, Children, ReactElement } from 'react';
-import { emptyState } from './utils';
-import Fullscreen from './ViewerModal';
+import React, { Component, Fragment, Children, ReactElement, Suspense } from 'react';
+import { emptyState } from '../../utils';
+import Fullscreen from './FullscreenModal';
 
 interface Props {
   children: ReactElement;
@@ -12,7 +12,6 @@ interface State {
   isExpanded: boolean;
   index: number;
   expandModeData?: any;
-  Fullscreen?: any;
 }
 
 export default class FullscreenProvider extends Component<Props, State> {
@@ -40,18 +39,21 @@ export default class FullscreenProvider extends Component<Props, State> {
     const { isExpanded, index, expandModeData } = this.state;
     const { children, helpers: viewerHelpers = {}, initialState } = this.props;
     const helpers = this.addExpand(viewerHelpers);
+
     return (
       <Fragment>
         {Children.only(React.cloneElement(children, { helpers }))}
-        <Fullscreen
-          dataHook={'RicosFullScreen'}
-          initialState={initialState || emptyState}
-          isOpen={isExpanded}
-          images={expandModeData?.images || []}
-          onClose={this.onClose}
-          index={index}
-          setExpandModeData={this.setExpandModeData}
-        />
+        <Suspense fallback={<div />}>
+          <Fullscreen
+            dataHook={'RicosFullScreen'}
+            initialState={initialState || emptyState}
+            isOpen={isExpanded}
+            images={expandModeData?.images || []}
+            onClose={this.onClose}
+            index={index}
+            setExpandModeData={this.setExpandModeData}
+          />
+        </Suspense>
       </Fragment>
     );
   }

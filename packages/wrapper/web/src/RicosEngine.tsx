@@ -5,19 +5,19 @@ import localeStrategy from './localeStrategy/localeStrategy';
 import './styles.global.css';
 import { merge } from 'lodash';
 import { isDefined } from 'ts-is-present';
+import RicosModal from './modals/RicosModal';
 
-interface Props extends RicosEditorProps, RicosViewerProps {
+export interface EngineProps extends RicosEditorProps, RicosViewerProps {
   children: RichContentChild;
   isViewer: boolean;
-  modalityProvider: any;
 }
 
-interface State {
+interface EngineState {
   localeStrategy: RichContentProps;
 }
 
-export default class RicosEngine extends Component<Props, State> {
-  constructor(props: Props) {
+export default class RicosEngine extends Component<EngineProps, EngineState> {
+  constructor(props: EngineProps) {
     super(props);
     this.state = { localeStrategy: {} };
   }
@@ -35,7 +35,7 @@ export default class RicosEngine extends Component<Props, State> {
     this.updateLocale();
   }
 
-  componentWillReceiveProps(newProps: Props) {
+  componentWillReceiveProps(newProps: EngineProps) {
     if (newProps.locale !== this.props.locale) {
       this.updateLocale();
     }
@@ -63,15 +63,7 @@ export default class RicosEngine extends Component<Props, State> {
   }
 
   render() {
-    const {
-      _rcProps,
-      children,
-      isMobile,
-      textToolbarType,
-      placeholder,
-      contentState,
-      modalityProvider: ModalityProvider,
-    } = this.props;
+    const { _rcProps, children, isMobile, textToolbarType, placeholder, contentState } = this.props;
 
     const strategyProps = this.runStrategies();
 
@@ -86,9 +78,9 @@ export default class RicosEngine extends Component<Props, State> {
     const mergedRCProps = merge(strategyProps, _rcProps, ricosPropsToMerge, children.props);
 
     return (
-      <ModalityProvider {...mergedRCProps}>
+      <RicosModal {...mergedRCProps}>
         {Children.only(React.cloneElement(children, { ...mergedRCProps }))}
-      </ModalityProvider>
+      </RicosModal>
     );
   }
 }

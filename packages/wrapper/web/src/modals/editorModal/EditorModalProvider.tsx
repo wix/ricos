@@ -1,5 +1,5 @@
 import React, { Children, Component, Fragment, ReactElement } from 'react';
-import { modalStyles } from './themeStrategy/defaults';
+import { modalStyles } from '../../themeStrategy/defaults';
 import EditorModal from './EditorModal';
 
 interface Props {
@@ -10,14 +10,13 @@ interface Props {
 }
 
 interface State {
-  EditorModal?: any;
   showModal: boolean;
   modalProps?: any;
   modalStyles?: any;
   modalContent?: any;
 }
 
-export default class ModalDialogProvider extends Component<Props, State> {
+export default class EditorModalProvider extends Component<Props, State> {
   childProps: RichContentProps;
 
   constructor(props: Props) {
@@ -60,7 +59,6 @@ export default class ModalDialogProvider extends Component<Props, State> {
     return (
       <Fragment>
         {Children.only(React.cloneElement(children, { ...this.childProps }))}
-
         <EditorModal
           dataHook={'RicosEditorModal'}
           isOpen={showModal}
