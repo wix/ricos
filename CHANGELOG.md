@@ -23,6 +23,8 @@
 ### :bug: Bug Fix
 - `editor-common`
   - [#1046](https://github.com/wix-incubator/rich-content/pull/1046) fix: cursor jumps to start of editor on close modal
+- `link-preview`
+  - [#1048](https://github.com/wix-incubator/rich-content/pull/1048) fix: enable link preview and link embed by default
 
 ### :house: Internal
 - `wrapper`
