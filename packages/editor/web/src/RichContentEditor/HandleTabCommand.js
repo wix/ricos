@@ -5,6 +5,7 @@ import {
   deleteTabCharacter,
   isTypeText,
   CHARACTERS,
+  getCharacterBeforeSelection,
 } from 'wix-rich-content-editor-common';
 
 const isList = blockType =>
@@ -23,7 +24,10 @@ export default function handleTabCommand(editorState, blockType, customHandlers,
       if (!event.shiftKey) {
         newState = insertString(editorState, CHARACTERS.TAB);
       } else {
-        newState = deleteTabCharacter(editorState);
+        const character = getCharacterBeforeSelection(editorState);
+        if (character === '\t') {
+          newState = deleteTabCharacter(editorState);
+        }
       }
     } else {
       newState = indentSelectedBlocks(editorState, getAdjustment());
