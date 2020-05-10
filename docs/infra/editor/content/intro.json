@@ -1,0 +1,15 @@
+{
+  "blocks": [
+    {
+      "key": "d79aa",
+      "text": "Hi there! I'm Ricos, your rich content framework. 👾",
+      "type": "header-two",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    }
+  ],
+  "entityMap": {},
+  "VERSION": "7.5.0"
+}

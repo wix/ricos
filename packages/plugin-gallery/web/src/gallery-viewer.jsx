@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import PropTypes, { instanceOf } from 'prop-types';
+import PropTypes from 'prop-types';
 import { validate, mergeStyles, pluginGallerySchema } from 'wix-rich-content-common';
 import { isEqual, debounce } from 'lodash';
 import { convertItemData } from './lib/convert-item-data';

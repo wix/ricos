@@ -10,6 +10,7 @@ const getFooterTheme = theme => {
   return {
     toolbarStyles: {
       toolbar: classNames(toolbarStyles.footerToolbar, toolbarTheme && toolbarTheme.footerToolbar),
+      staticToolbar: theme.staticToolbar,
       scrollableContainer: classNames(
         toolbarStyles.footerToolbar_scrollableContainer,
         toolbarTheme && toolbarTheme.footerToolbar_scrollableContainer

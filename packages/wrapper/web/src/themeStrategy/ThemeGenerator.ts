@@ -3,6 +3,7 @@ import getEditorCommonTheme from './themes/editor-common';
 import getEditorTheme from './themes/editor';
 import getViewerTheme from './themes/viewer';
 import getCommonStyles from './themes/common';
+import { merge } from 'lodash';
 
 /* eslint-disable camelcase */
 const THEMES = {
@@ -66,26 +67,12 @@ export default class ThemeGenerator {
         color4: this.getColorValue(COLOR4),
       };
 
-      const pluginThemes = this.themeGenerators.reduce(
-        (acc, curr) => ({
-          ...acc,
-          ...curr(colors, utils),
-        }),
-        {}
-      );
+      const pluginThemes = this.themeGenerators.map(themeGen => themeGen(colors, utils));
+      const appStyles = !this.isViewer
+        ? merge(getEditorCommonTheme(colors), getEditorTheme(colors, utils))
+        : getViewerTheme(colors);
 
-      const appStyles = (!this.isViewer && {
-        ...getEditorCommonTheme(colors),
-        ...getEditorTheme(colors, utils),
-      }) || {
-        ...getViewerTheme(colors),
-      };
-
-      return {
-        ...getCommonStyles(colors),
-        ...appStyles,
-        ...pluginThemes,
-      };
+      return merge(getCommonStyles(colors), appStyles, ...pluginThemes);
     }
   }
 }

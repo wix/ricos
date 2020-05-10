@@ -19,6 +19,7 @@ class InfoIcon extends Component {
   static propTypes = {
     tooltipText: PropTypes.string,
     iconStyles: PropTypes.string,
+    theme: PropTypes.object.isRequired,
   };
 }
 

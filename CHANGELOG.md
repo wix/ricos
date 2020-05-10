@@ -13,27 +13,40 @@
   <summary>
     Changes that have landed in master but are not yet released.
     Click to see more.
+
+### :rocket: New Feature
+- `wrapper`
+  - [#1003](https://github.com/wix-incubator/rich-content/pull/1003) RichContentWrapper was split into RicosEditor & RicosViewer
+### :house: Internal
+- `wrapper`
+  - [#1031](https://github.com/wix-incubator/rich-content/pull/1031) fixed build warning - "punycode" library
+- `storybook`
+  - [#1003](https://github.com/wix-incubator/rich-content/pull/1003) added story for wrapper handling of static text toolbar
   </summary>
 
+### :bug: Bug Fix
+- `editor-common`
+  - [#1046](https://github.com/wix-incubator/rich-content/pull/1046) fix: cursor jumps to start of editor on close modal
+
+### :house: Internal
+- `wrapper`
+  - [#993](https://github.com/wix-incubator/rich-content/pull/993) remove `!important` usage + deep merge jss styles
+</details>
+<hr/>
+
+## 7.6.0 (May 5, 2020)
 ### :rocket: New Feature
 - `indent`
   - [#898](https://github.com/wix-incubator/rich-content/pull/898) text indentation
 - `viewer`
   - [#1005](https://github.com/wix-incubator/rich-content/pull/1005) add viewMode SEO to ProGallery
-- `wrapper`
-  - [#1003](https://github.com/wix-incubator/rich-content/pull/1003) RichContentWrapper was split into RicosEditor & RicosViewer
-### :house: Internal
-- `storybook`
-  - [#1003](https://github.com/wix-incubator/rich-content/pull/1003) added story for wrapper handling of static text toolbar
 ### :bug: Bug Fix
 - `social-modals`
   - [#1037](https://github.com/wix-incubator/rich-content/pull/1037) disable text input autocomplete
 - `vertical embed`
-  - [#1036](https://github.com/wix-incubator/rich-content/pull/1036) dropdown for search opens automaticly when typing text for search
+  - [#1036](https://github.com/wix-incubator/rich-content/pull/1036) dropdown for search opens automatically when typing text for search
 - `gallery`
   - [#1020](https://github.com/wix-incubator/rich-content/pull/1020) gallery accepts window as scrollingElement
-</details>
-<hr/>
 
 ## 7.5.0 (May 5, 2020)
 ### :rocket: New Feature

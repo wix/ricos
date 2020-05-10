@@ -26,8 +26,11 @@ export const THEME = colors => {
     file_upload_icon: {
       color: textColor,
     },
-    file_upload_container: {
-      borderColor: `${secondaryColor} !important`,
+    pluginContainerWrapper: {
+      '& $file_upload_container': {
+        borderColor: secondaryColor,
+      },
     },
+    file_upload_container: {},
   };
 };
