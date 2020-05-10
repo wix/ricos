@@ -16,34 +16,37 @@ class WrapperTestApp extends PureComponent {
         splitToSections: true,
       },
     };
-    const { editorState, onEditorChange, locale, localeResource, isMobile } = this.props;
+    const { editorState, onEditorChange, locale, isMobile } = this.props;
+    const rcProps = {
+      onChange: onEditorChange,
+      editorState,
+      toolbarsConfig,
+    };
     return (
-      <RichContentWrapper plugins={editorPlugins} isEditor>
-        <RichContentEditor
-          placeholder={'Add some text!'}
-          onChange={onEditorChange}
-          editorState={editorState}
-          isMobile={isMobile}
-          locale={locale}
-          toolbarsConfig={toolbarsConfig}
-          localeResource={localeResource}
-        />
-      </RichContentWrapper>
+      <RichContentWrapper
+        plugins={editorPlugins}
+        locale={locale}
+        isMobile={isMobile}
+        placeholder={'Add some text!'}
+        isEditor
+        rcProps={rcProps}
+      />
     );
   };
 
   renderViewer = () => {
     const { isMobile, contentState, locale, seoMode } = this.props;
-
+    const rcProps = {
+      seoMode,
+    };
     return (
-      <RichContentWrapper plugins={viewerPlugins}>
-        <RichContentViewer
-          initialState={contentState}
-          isMobile={isMobile}
-          locale={locale}
-          seoMode={seoMode}
-        />
-      </RichContentWrapper>
+      <RichContentWrapper
+        plugins={viewerPlugins}
+        contentState={contentState}
+        locale={locale}
+        isMobile={isMobile}
+        rcProps={rcProps}
+      />
     );
   };
 
