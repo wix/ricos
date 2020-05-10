@@ -589,14 +589,15 @@ export function insertString(editorState, string) {
 export function deleteTabCharacter(editorState) {
   const contentState = editorState.getCurrentContent();
   const selectionState = editorState.getSelection();
-  const anchorKey = selectionState.getAnchorKey();
-  const currentContentBlock = contentState.getBlockForKey(anchorKey);
+  //start offset of last character before cursor
   const start = selectionState.getStartOffset() - 1;
 
   if (start < 0) {
     return null;
   }
 
+  const anchorKey = selectionState.getAnchorKey();
+  const currentContentBlock = contentState.getBlockForKey(anchorKey);
   const selectedText = currentContentBlock.getText().slice(start, start + 1);
 
   if (selectedText === '\t') {
