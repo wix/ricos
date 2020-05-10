@@ -1,3 +1,5 @@
+import { usePlugins, plugins } from '../cypress/testAppConfig';
+
 // eslint-disable-next-line prettier/prettier
 export const fixtures = [
   'headers',
@@ -34,7 +36,7 @@ export const fixtures = [
   'images-original-size',
   {
     fixture: 'link-preview',
-    plugins: 'all',
+    config: usePlugins(plugins.all),
     additionalCommands: cy => {
       cy.waitForHtmlToLoad();
     },
