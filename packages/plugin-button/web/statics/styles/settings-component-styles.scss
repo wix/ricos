@@ -108,6 +108,19 @@
   background-color: #fff;
 }
 
+.checkbox_wrapper {
+  display: inherit;
+}
+
+.checkbox_inputLabel:hover .checkbox_icon_unchecked{
+  background-color: #fff;
+  color: #0261ff;
+}
+
+.checkbox_infoIcon {
+  padding-top: 2px;
+}
+
 .checkbox_icon {
   border-radius: 1px;
   background-color: #fff;

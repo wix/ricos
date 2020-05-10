@@ -54,11 +54,11 @@ class LinkPreviewViewer extends Component {
 
     const {
       linkPreview,
+      linkPreviewUrl,
       linkPreviewInfo,
       linkPreviewTitle,
       linkPreviewImage,
       linkPreviewDescription,
-      linkPreviewUrl,
     } = this.styles;
 
     if (settings.enableEmbed && html) {

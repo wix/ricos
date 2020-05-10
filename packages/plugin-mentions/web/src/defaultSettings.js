@@ -50,12 +50,15 @@ export const THEME = colors => {
     textDecoration: 'underline',
   };
   return {
-    mention: {
-      color: `${colors.actionColor} !important`,
-      background: 'transparent !important',
-      '&:hover': themeHoverFocus,
-      '&:focus': themeHoverFocus,
-      '&:active': { color: colors.actionColor, background: 'transparent' },
+    mentionWrapper: {
+      '& $mention': {
+        background: 'transparent',
+        color: colors.actionColor,
+        '&:hover': themeHoverFocus,
+        '&:focus': themeHoverFocus,
+        '&:active': { color: colors.actionColor, background: 'transparent' },
+      },
     },
+    mention: {},
   };
 };

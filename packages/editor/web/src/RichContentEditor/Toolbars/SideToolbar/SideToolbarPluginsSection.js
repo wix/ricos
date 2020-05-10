@@ -5,6 +5,7 @@ import { getPluginsForTag } from '../../pluginsSearchTags';
 import { TOOLBARS } from 'wix-rich-content-editor-common';
 import { getSortedSections } from './utils';
 import classNames from 'classnames';
+import { mergeStyles } from 'wix-rich-content-common';
 
 const SideToolbarPluginsSection = ({
   getEditorState,
@@ -17,6 +18,7 @@ const SideToolbarPluginsSection = ({
   horizontalMenu,
   theme,
 }) => {
+  const styles = mergeStyles({ styles: Styles, theme });
   const pluginsForTag = searchTag && getPluginsForTag(searchTag, t);
   const plugins = !searchTag
     ? structure
@@ -24,7 +26,7 @@ const SideToolbarPluginsSection = ({
 
   if (plugins.length === 0) {
     return (
-      <div className={Styles.pluginsSectionEmptyState}>{t('BlockToolbar_Search_EmptyState')}</div>
+      <div className={styles.pluginsSectionEmptyState}>{t('BlockToolbar_Search_EmptyState')}</div>
     );
   }
 
@@ -33,13 +35,13 @@ const SideToolbarPluginsSection = ({
       ? plugins.filter(({ section: pluginSection }) => pluginSection === section)
       : plugins;
     return (
-      <div className={classNames(Styles.section, horizontalMenu && Styles.horizontalMenu)}>
-        {section && <div className={Styles.pluginsSection}>{t(section)}</div>}
-        <div className={classNames(Styles.buttonsWrapper, horizontalMenu && Styles.horizontalMenu)}>
+      <div className={classNames(styles.section, horizontalMenu && styles.horizontalMenu)}>
+        {section && <div className={styles.pluginsSection}>{t(section)}</div>}
+        <div className={classNames(styles.buttonsWrapper, horizontalMenu && styles.horizontalMenu)}>
           {pluginsToRender.map(({ component: Component }, index) => (
             <div
               key={index}
-              className={classNames(Styles.buttonWrapper, horizontalMenu && Styles.horizontalMenu)}
+              className={classNames(styles.buttonWrapper, horizontalMenu && styles.horizontalMenu)}
             >
               <Component
                 getEditorState={getEditorState}

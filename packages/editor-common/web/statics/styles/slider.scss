@@ -49,6 +49,9 @@ $contrast: 0 !default;
   width: $thumb-width;
 }
 
+.wrapperSlider {
+  -webkit-appearance: none;
+}
 .slider {
   -webkit-appearance: none;
   margin: $thumb-height / 2 0;

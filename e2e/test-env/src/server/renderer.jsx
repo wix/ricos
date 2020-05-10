@@ -5,11 +5,17 @@ import serialize from 'serialize-javascript';
 import TestApp from '../client/TestApp';
 import PreviewTestApp from '../client/PreviewTestApp';
 import IsolatedTestApp from '../client/IsolatedTestApp';
+import WrapperTestApp from '../client/WrapperTestApp';
 
 export default function renderer() {
   return (req, res) => {
     const [componentId, fixtureName = 'empty'] = req.path.replace(/^\/|\/$/g, '').split('/');
-    const compMap = { rce: TestApp, 'rce-isolated': IsolatedTestApp, rcp: PreviewTestApp };
+    const compMap = {
+      rce: TestApp,
+      'rce-isolated': IsolatedTestApp,
+      rcp: PreviewTestApp,
+      wrapper: WrapperTestApp,
+    };
     if (Object.keys(compMap).indexOf(componentId) === -1) {
       return res.status(404).send(`Component for ${componentId} not found`);
     }
