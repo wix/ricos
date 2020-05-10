@@ -3,7 +3,7 @@ import { fixturesToTestOnSeo, DEFAULT_DESKTOP_BROWSERS } from './settings';
 
 const testFixtureOnSsr = fixture =>
   it(`render ${fixture} in ssr`, function() {
-    cy.loadEditorAndViewerOnSsr(fixture, 'rce');
+    cy.loadTestAppOnSsr(fixture, 'rce');
     cy.eyesCheckWindow(this.test.title);
   });
 

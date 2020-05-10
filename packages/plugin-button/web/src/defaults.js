@@ -48,7 +48,7 @@ export function createTheme(colors, utils) {
   return {
     checkbox: {
       '&:hover $checkbox_icon_unchecked': {
-        backgroundColor: `${utils.hexToRgbA(actionColor, 0.1)} !important`,
+        backgroundColor: utils.hexToRgbA(actionColor, 0.1),
       },
     },
   };

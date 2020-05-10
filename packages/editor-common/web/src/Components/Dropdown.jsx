@@ -203,9 +203,8 @@ class Dropdown extends Component {
       </div>
     ) : null;
 
-    const dropdownClass = classNames({
-      [styles['Dropdown-root']]: true,
-      [styles['Dropdown-root-isOpen']]: this.state.isOpen,
+    const dropdownClass = classNames(this.styles['Dropdown-root'], {
+      [this.styles['Dropdown-root-isOpen']]: this.state.isOpen,
     });
     const { dataHook } = this.props;
     return (
@@ -216,7 +215,7 @@ class Dropdown extends Component {
             aria-controls={isSSR ? undefined : `${this.id}_menu`}
             aria-expanded={this.state.isOpen}
             className={classNames(
-              styles['Dropdown-control'],
+              this.styles['Dropdown-control'],
               this.props.controlClassName,
               disabledClass
             )}
@@ -226,8 +225,8 @@ class Dropdown extends Component {
           >
             {value}
             <span
-              className={classNames(styles['Dropdown-arrow'], {
-                [styles['Dropdown-arrow-isOpen']]: this.state.isOpen,
+              className={classNames(this.styles['Dropdown-arrow'], {
+                [this.styles['Dropdown-arrow-isOpen']]: this.state.isOpen,
               })}
             >
               <DropdownArrowIcon />

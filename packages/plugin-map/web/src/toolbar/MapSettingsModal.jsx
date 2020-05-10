@@ -1,12 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { mergeStyles } from 'wix-rich-content-common';
-import {
-  SettingsSection,
-  SettingsPanelFooter,
-  TextInput,
-  Button,
-} from 'wix-rich-content-editor-common';
+import { SettingsSection, SettingsPanelFooter, TextInput } from 'wix-rich-content-editor-common';
 import ReactGoogleMapLoader from 'react-google-maps-loader';
 import ReactGooglePlacesSuggest from 'react-google-places-suggest';
 import styles from '../../statics/styles/map-settings-modal.scss';
@@ -106,7 +101,12 @@ export class MapSettingsModal extends Component {
     );
 
     return (
-      <div className={this.styles.map_settings_modal_mobile_navbar}>
+      <div
+        className={classNames(
+          this.styles.map_settings_modal_mobile_navbar,
+          this.styles.map_settings_modal_mobile_navbar_wrapper
+        )}
+      >
         {mobileCancelButton}
         {mobileSaveButton}
       </div>
