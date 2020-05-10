@@ -604,9 +604,8 @@ export function deleteTabCharacter(editorState) {
   let newState;
   const contentState = editorState.getCurrentContent();
   const selectionState = editorState.getSelection();
-  const character = getCharacterBeforeSelection(editorState);
 
-  if (selectionState.isCollapsed() && character === '\t') {
+  if (selectionState.isCollapsed()) {
     const start = selectionState.getStartOffset() - 1;
     const newSelection = selectionState.set('anchorOffset', start);
     const newContentState = Modifier.replaceText(contentState, newSelection, '');
