@@ -19,7 +19,7 @@ import {
   TOOLBARS,
   getBlockInfo,
   getFocusedBlockKey,
-  createCalcContentDiff,
+  createPluginCallbacksHandler,
   getPostContentSummary,
   Modifier,
   getBlockType,
@@ -59,11 +59,10 @@ class RichContentEditor extends Component {
     uiSettings.nofollowRelToggleVisibilityFn =
       uiSettings.nofollowRelToggleVisibilityFn || (relValue => relValue !== 'nofollow');
 
-    this.calculateDiff = createCalcContentDiff(this.state.editorState);
-    this.pluginEventHandler = ({ pluginsDeleted = [] }) =>
-      pluginsDeleted.forEach(type => {
-        props.helpers?.onPluginDelete?.(type, Version.currentVersion);
-      });
+    this.handleCallbacks = createPluginCallbacksHandler(
+      this.state.editorState,
+      Version.currentVersion
+    );
     this.initContext();
     this.initPlugins();
   }
@@ -231,9 +230,7 @@ class RichContentEditor extends Component {
   }
 
   updateEditorState = editorState => {
-    if (this.props.helpers?.onPluginDelete) {
-      this.calculateDiff(editorState, this.pluginEventHandler);
-    }
+    this.handleCallbacks(editorState, this.props.helpers);
     this.setEditorState(editorState);
     this.props.onChange?.(editorState);
   };

@@ -448,13 +448,13 @@ export function getPostContentSummary(editorState) {
   };
 }
 
-//ATM, looks for deleted plugins.
+//ATM, it only looks for deleted plugins.
 //onChanges - for phase 2?
 //Added Plugins - checked elsewhere via toolbar clicks
-export const createCalcContentDiff = editorState => {
+const createCalcContentDiff = editorState => {
   let prevState = editorState;
-  return debounce((newState, onFinishCalc) => {
-    if (!onFinishCalc) return;
+  return debounce((newState, { shouldCalculate, onCallbacks }) => {
+    if (!shouldCalculate) return;
     const countByType = obj => countBy(obj, x => x.type);
     const prevEntities = countByType(getEntities(prevState));
     const currEntities = countByType(getEntities(newState));
@@ -472,17 +472,23 @@ export const createCalcContentDiff = editorState => {
       times(deletedCount, () => pluginsDeleted.push(type));
     });
 
-    // onPluginChange -> for Phase 2
-    //else {
-    // const before = beforePlugins[key];
-    // const after = afterPlugins[key];
-    // if (JSON.stringify(before) !== JSON.stringify(after))
-    //   onPluginChange(type, { from: before, to: after });
-    //}
-    onFinishCalc({ pluginsDeleted });
+    onCallbacks({ pluginsDeleted });
     prevState = newState;
   }, 300);
 };
+
+export function createPluginCallbacksHandler(initialEditorState, version) {
+  const calculate = createCalcContentDiff(initialEditorState);
+  return (newState, { onPluginDelete } = {}) =>
+    calculate(newState, {
+      shouldCalculate: !!onPluginDelete,
+      onCallbacks: ({ pluginsDeleted }) => {
+        pluginsDeleted.forEach(type => {
+          onPluginDelete?.(type, version);
+        });
+      },
+    });
+}
 
 // a selection of the new content from the last change
 function createLastChangeSelection(editorState) {

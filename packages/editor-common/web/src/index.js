@@ -82,7 +82,7 @@ export {
   createBlock,
   getBlockInfo,
   getFocusedBlockKey,
-  createCalcContentDiff,
+  createPluginCallbacksHandler,
   getPostContentSummary,
   createSelection,
   getBlockType,
