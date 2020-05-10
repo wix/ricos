@@ -28,7 +28,6 @@ export default ({
   class InsertPluginButton extends React.PureComponent {
     constructor(props) {
       super(props);
-      this.state = {};
       const { buttonStyles } = props.theme || {};
       this.styles = mergeStyles({ styles, theme: buttonStyles });
       this.buttonRef = React.createRef();
