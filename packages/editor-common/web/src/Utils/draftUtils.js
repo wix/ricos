@@ -586,25 +586,34 @@ export function insertString(editorState, string) {
   return EditorState.push(editorState, newContentState, 'insert-string');
 }
 
-export function deleteTabCharacter(editorState) {
-  const contentState = editorState.getCurrentContent();
+export function getLastCharacterFromSelection(editorState) {
+  let character;
   const selectionState = editorState.getSelection();
-  //start offset of last character before cursor
   const start = selectionState.getStartOffset() - 1;
 
-  if (start < 0) {
-    return null;
+  if (start >= 0) {
+    const anchorKey = selectionState.getAnchorKey();
+    const contentState = editorState.getCurrentContent();
+    const currentContentBlock = contentState.getBlockForKey(anchorKey);
+    character = currentContentBlock.getText().slice(start, start + 1);
   }
+  return character;
+}
 
-  const anchorKey = selectionState.getAnchorKey();
-  const currentContentBlock = contentState.getBlockForKey(anchorKey);
-  const selectedText = currentContentBlock.getText().slice(start, start + 1);
+export function deleteTabCharacter(editorState) {
+  let newState;
+  const contentState = editorState.getCurrentContent();
+  const selectionState = editorState.getSelection();
+  if (selectionState.isCollapsed()) {
+    //start offset of last character before cursor
+    const start = selectionState.getStartOffset() - 1;
+    const character = getLastCharacterFromSelection(editorState);
 
-  if (selectedText === '\t') {
-    const newSelection = selectionState.set('anchorOffset', start);
-    const newContentState = Modifier.replaceText(contentState, newSelection, '');
-    return EditorState.push(editorState, newContentState, 'delete-string');
+    if (character === '\t') {
+      const newSelection = selectionState.set('anchorOffset', start);
+      const newContentState = Modifier.replaceText(contentState, newSelection, '');
+      newState = EditorState.push(editorState, newContentState, 'delete-string');
+    }
   }
-
-  return null;
+  return newState;
 }
