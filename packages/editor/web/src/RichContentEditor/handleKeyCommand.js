@@ -14,6 +14,8 @@ const isList = blockType =>
   blockType === 'ordered-list-item' || blockType === 'unordered-list-item';
 const isTab = command => command === COMMANDS.TAB || command === COMMANDS.SHIFT_TAB;
 const isCodeBlock = blockType => blockType === 'code-block';
+// eslint-disable-next-line no-restricted-globals
+const getAdjustment = () => (!event.shiftKey ? 1 : -1);
 
 export default (updateEditorState, customHandlers, blockType) => (command, editorState) => {
   let newState;
@@ -21,11 +23,14 @@ export default (updateEditorState, customHandlers, blockType) => (command, edito
   if (customHandlers[command]) {
     if (isTab(command)) {
       if (isList(blockType)) {
-        // eslint-disable-next-line no-restricted-globals
-        const adjustment = !event.shiftKey ? 1 : -1;
-        newState = indentSelectedBlocks(editorState, adjustment);
+        newState = indentSelectedBlocks(editorState, getAdjustment());
       } else if (isTypeText(blockType)) {
-        newState = insertString(editorState, CHARACTERS.TAB);
+        const selectionState = editorState.getSelection();
+        if (selectionState.isCollapsed()) {
+          newState = insertString(editorState, CHARACTERS.TAB);
+        } else {
+          newState = indentSelectedBlocks(editorState, getAdjustment());
+        }
       } else if (!isCodeBlock(blockType)) {
         newState = customHandlers[command](editorState);
       }
