@@ -23,6 +23,8 @@
 ### :bug: Bug Fix
 - `editor-common`
   - [#1046](https://github.com/wix-incubator/rich-content/pull/1046) fix: cursor jumps to start of editor on close modal
+- `editor`
+  - [#1059](https://github.com/wix-incubator/rich-content/pull/1059) fix: fix getToolbarSettings Api to work
 
 ### :house: Internal
 - `wrapper`
