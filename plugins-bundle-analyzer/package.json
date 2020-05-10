@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "save": "FILE_NAME=bundlesSizesBaseline node ./saveBundles.js",
-    "start": "node ./analyzeBundles.js",
+    "start": "node ./runAnalyzeBundles.js",
     "analyze": "node ./analyzePlugin.js",
     "analyzeAndCompare": "node ./compareBundles.js"
   },
