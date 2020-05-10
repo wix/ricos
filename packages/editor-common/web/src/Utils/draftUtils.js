@@ -586,7 +586,7 @@ export function insertString(editorState, string) {
   return EditorState.push(editorState, newContentState, 'insert-string');
 }
 
-export function getLastCharacterFromSelection(editorState) {
+export function getCharacterBeforeSelection(editorState) {
   let character;
   const selectionState = editorState.getSelection();
   const start = selectionState.getStartOffset() - 1;
@@ -604,16 +604,14 @@ export function deleteTabCharacter(editorState) {
   let newState;
   const contentState = editorState.getCurrentContent();
   const selectionState = editorState.getSelection();
-  if (selectionState.isCollapsed()) {
-    //start offset of last character before cursor
-    const start = selectionState.getStartOffset() - 1;
-    const character = getLastCharacterFromSelection(editorState);
+  const character = getCharacterBeforeSelection(editorState);
 
-    if (character === '\t') {
-      const newSelection = selectionState.set('anchorOffset', start);
-      const newContentState = Modifier.replaceText(contentState, newSelection, '');
-      newState = EditorState.push(editorState, newContentState, 'delete-string');
-    }
+  if (selectionState.isCollapsed() && character === '\t') {
+    const start = selectionState.getStartOffset() - 1;
+    const newSelection = selectionState.set('anchorOffset', start);
+    const newContentState = Modifier.replaceText(contentState, newSelection, '');
+    newState = EditorState.push(editorState, newContentState, 'delete-string');
   }
+
   return newState;
 }

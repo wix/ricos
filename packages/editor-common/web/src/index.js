@@ -93,7 +93,7 @@ export {
   insertString,
   deleteTabCharacter,
   createLinkEntityData,
-  getLastCharacterFromSelection,
+  getCharacterBeforeSelection,
 } from './Utils/draftUtils';
 export { isiOS } from './Utils/isiOS';
 export { getSelectionStyles } from './Utils/inlineStyleUtils';
