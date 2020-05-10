@@ -29,7 +29,10 @@ export default class Editor extends PureComponent {
     // ReactModal.setAppElement('#root');
     this.initEditorProps();
     const { scrollingElementFn, testAppConfig = {} } = props;
-    const additionalConfig = { [GALLERY_TYPE]: { scrollingElement: scrollingElementFn } };
+    const additionalConfig = {
+      [GALLERY_TYPE]: { scrollingElement: scrollingElementFn },
+      ...(testAppConfig.pluginsConfig || {}),
+    };
     const pluginsConfig = Plugins.getConfig(additionalConfig);
     this.plugins = testAppConfig.plugins
       ? testAppConfig.plugins.map(plugin => Plugins.editorPluginsMap[plugin]).flat()

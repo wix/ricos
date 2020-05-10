@@ -4468,3 +4468,216 @@ exports[`plugins > action button > create action button & click it #0`] =
     }
   }
 };
+
+exports[`plugins > convert link to preview > with default config > should create link preview from link after enter key #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "\n",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "link": {
+            "rel": "noopener",
+            "target": "_blank",
+            "url": "www.wix.com"
+          },
+          "size": "content"
+        },
+        "description": "A mock description",
+        "provider_url": "www.mockUrl.com",
+        "thumbnail_url": "https://image.insider.com/5de5784979d757159d0b6838?width=1100&format=jpeg&auto=webp",
+        "title": "A mock title"
+      },
+      "mutability": "IMMUTABLE",
+      "type": "LINK_PREVIEW"
+    }
+  }
+};
+
+exports[`plugins > convert link to preview > with default config > should embed link that supports embed #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "\n",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "link": {
+            "rel": "noopener",
+            "target": "_blank",
+            "url": "www.mockUrl.com"
+          },
+          "size": "content",
+          "width": 350
+        },
+        "html": "<div style=\"background-color: black; border: 10px solid pink; height: 400px; text-align: center; color: white;\">This is a mock embed</div>",
+        "title": "I am a mock html"
+      },
+      "mutability": "IMMUTABLE",
+      "type": "LINK_PREVIEW"
+    }
+  }
+};
+
+exports[`plugins > convert link to preview > with custom config > should not create link preview when enableLinkPreview is off #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 11,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [
+        {
+          "length": 11,
+          "offset": 0,
+          "style": "UNDERLINE"
+        }
+      ],
+      "key": 0,
+      "text": "www.wix.com ",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "rel": "noopener",
+        "target": "_blank",
+        "url": "www.wix.com"
+      },
+      "mutability": "MUTABLE",
+      "type": "LINK"
+    }
+  }
+};
+
+exports[`plugins > convert link to preview > with custom config > should not embed link when enableEmbed is off #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 15,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [
+        {
+          "length": 15,
+          "offset": 0,
+          "style": "UNDERLINE"
+        }
+      ],
+      "key": 0,
+      "text": "www.mockUrl.com ",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "rel": "noopener",
+        "target": "_blank",
+        "url": "www.mockUrl.com"
+      },
+      "mutability": "MUTABLE",
+      "type": "LINK"
+    }
+  }
+};
