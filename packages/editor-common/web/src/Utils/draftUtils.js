@@ -611,6 +611,5 @@ export function deleteTabCharacter(editorState) {
     const newContentState = Modifier.replaceText(contentState, newSelection, '');
     newState = EditorState.push(editorState, newContentState, 'delete-string');
   }
-
   return newState;
 }
