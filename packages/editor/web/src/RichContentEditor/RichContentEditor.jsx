@@ -103,7 +103,6 @@ class RichContentEditor extends Component {
       toolbarsConfig = {},
       isMobile = false,
       shouldRenderOptimizedImages,
-      initialIntent,
       siteDomain,
     } = this.props;
 
@@ -132,7 +131,6 @@ class RichContentEditor extends Component {
       getEditorBounds: this.getEditorBounds,
       languageDir: getLangDir(locale),
       shouldRenderOptimizedImages,
-      initialIntent,
       siteDomain,
       setInPluginEditingMode: this.setInPluginEditingMode,
       getInPluginEditingMode: this.getInPluginEditingMode,
@@ -546,7 +544,6 @@ RichContentEditor.propTypes = {
   locale: PropTypes.string.isRequired,
   shouldRenderOptimizedImages: PropTypes.bool,
   onAtomicBlockFocus: PropTypes.func,
-  initialIntent: PropTypes.string,
   siteDomain: PropTypes.string,
   onError: PropTypes.func,
   isSSR: PropTypes.bool,

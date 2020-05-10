@@ -22,7 +22,6 @@ export default ({
   commonPubsub,
   settings,
   t,
-  initialIntent,
   isMobile,
   pluginDefaults,
 }) => {
@@ -37,17 +36,6 @@ export default ({
     }
 
     onPluginAdd = name => helpers?.onPluginAdd?.(blockType, name || this.toolbarName);
-
-    componentDidMount() {
-      this.initialIntent();
-    }
-
-    initialIntent = () => {
-      if (initialIntent === blockType) {
-        const { buttonRef } = this;
-        buttonRef && buttonRef.current && buttonRef.current.click();
-      }
-    };
 
     addBlock = data => {
       const { getEditorState, setEditorState } = this.props;
