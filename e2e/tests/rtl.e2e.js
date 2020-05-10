@@ -50,7 +50,7 @@ describe('rtl', () => {
     });
   });
 
-  context('mobile', () => {
+  context.only('mobile', () => {
     before(function() {
       cy.eyesOpen({
         appName: 'RTL',
