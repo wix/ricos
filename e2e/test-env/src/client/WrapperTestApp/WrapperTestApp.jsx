@@ -10,6 +10,12 @@ import './styles.global.scss';
 
 class WrapperTestApp extends PureComponent {
   renderEditor = () => {
+    const toolbarsConfig = {
+      addPluginMenuConfig: {
+        showSearch: true,
+        splitToSections: true,
+      },
+    };
     const { editorState, onEditorChange, locale, localeResource, isMobile } = this.props;
     return (
       <RichContentWrapper plugins={editorPlugins} isEditor>
@@ -19,6 +25,7 @@ class WrapperTestApp extends PureComponent {
           editorState={editorState}
           isMobile={isMobile}
           locale={locale}
+          toolbarsConfig={toolbarsConfig}
           localeResource={localeResource}
         />
       </RichContentWrapper>
