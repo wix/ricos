@@ -77,17 +77,17 @@ export default (isMobile = false) => {
 
     getEditor = ({ key, withPluginMenuConfig = false }) => {
       const { showSearch, splitToSections, selectedPlugins } = this.state;
-      const toolbarsConfig = {
-        addPluginMenuConfig: {
-          showSearch,
-          splitToSections,
-        },
-      };
+      const addPluginMenuConfig = { showSearch, splitToSections };
+
+      const getToolbarSettings = () => [
+        { name: 'SIDE', addPluginMenuConfig },
+        { name: 'MOBILE', addPluginMenuConfig },
+      ];
       const editorWrapperProps = {
         isMobile,
         contentState: emptyContentState,
         rcProps: {
-          toolbarsConfig: withPluginMenuConfig && toolbarsConfig,
+          config: withPluginMenuConfig && { getToolbarSettings },
           pluginsToDisplay: !selectedPlugins.includes('all') && selectedPlugins,
         },
       };
