@@ -8,6 +8,7 @@ import {
   deleteTabCharacter,
   isTypeText,
   CHARACTERS,
+  getCharacterBeforeSelection,
 } from 'wix-rich-content-editor-common';
 import handleBackspaceCommand from './handleBackspaceCommand';
 import handleDeleteCommand from './handleDeleteCommand';
@@ -26,7 +27,10 @@ const handleTabCommand = (editorState, blockType, customHandlers, command) => {
     if (!event.shiftKey) {
       newState = insertString(editorState, CHARACTERS.TAB);
     } else {
-      newState = deleteTabCharacter(editorState);
+      const character = getCharacterBeforeSelection(editorState);
+      if (character === '\t') {
+        newState = deleteTabCharacter(editorState);
+      }
     }
   } else if (!isCodeBlock(blockType)) {
     newState = customHandlers[command](editorState);
