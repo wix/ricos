@@ -16,24 +16,24 @@ import apiData from '../apiData';
 
 export default () => {
   return (
-<TabsWrapper apiData={apiData.LINK_PREVIEW}>
-    <Page title="Link Preview">
-      <Section type={Section.Types.COMPARISON}>
-        <RichContentEditorBox
-          sourcecode={editorSourcecode}
-          contentState={fixtrue}
-          preset="blog-preset"
-        >
-          <LinkPreviewEditor contentState={fixtrue} />
-        </RichContentEditorBox>
-        <RichContentViewerBox preset="blog-preset" sourcecode={viewerSourcecode}>
-          <LinkPreviewViewer contentState={fixtrue} />
-        </RichContentViewerBox>
-      </Section>
-      <Section title="Content State">
-        <ContentState json={fixtrue} />
-      </Section>
-    </Page>
-    <TabsWrapper/>
+    <TabsWrapper apiData={apiData.LINK_PREVIEW}>
+      <Page title="Link Preview">
+        <Section type={Section.Types.COMPARISON}>
+          <RichContentEditorBox
+            sourcecode={editorSourcecode}
+            contentState={fixtrue}
+            preset="blog-preset"
+          >
+            <LinkPreviewEditor contentState={fixtrue} />
+          </RichContentEditorBox>
+          <RichContentViewerBox preset="blog-preset" sourcecode={viewerSourcecode}>
+            <LinkPreviewViewer contentState={fixtrue} />
+          </RichContentViewerBox>
+        </Section>
+        <Section title="Content State">
+          <ContentState json={fixtrue} />
+        </Section>
+      </Page>
+    </TabsWrapper>
   );
 };

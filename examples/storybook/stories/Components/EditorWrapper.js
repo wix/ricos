@@ -140,7 +140,6 @@ const EditorWrapper = ({
   palette,
   onChange,
   isMobile = false,
-  toolbarsConfig,
   pluginsToDisplay,
   _rcProps,
 }) => {
@@ -154,7 +153,6 @@ const EditorWrapper = ({
       {...theme}
       contentState={contentState}
       isMobile={isMobile}
-      toolbarsConfig={toolbarsConfig}
       _rcProps={_rcProps}
     >
       <RichContentEditor helpers={{ onFilesChange }} onChange={onChange} />
@@ -167,7 +165,6 @@ EditorWrapper.propTypes = {
   palette: PropTypes.arrayOf(PropTypes.object),
   onChange: PropTypes.func,
   isMobile: PropTypes.bool,
-  toolbarsConfig: PropTypes.object,
   pluginsToDisplay: PropTypes.arrayOf(PropTypes.string),
   _rcProps: PropTypes.object,
 };

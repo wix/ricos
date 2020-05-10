@@ -70,7 +70,6 @@ export default class RicosEngine extends Component<Props, State> {
       textToolbarType,
       placeholder,
       contentState,
-      toolbarsConfig,
       modalityProvider: ModalityProvider,
     } = this.props;
 
@@ -82,7 +81,6 @@ export default class RicosEngine extends Component<Props, State> {
       textToolbarType: isMobile ? 'inline' : textToolbarType, // optimization - don't need static toolbar when isMobile
       initialState: contentState,
       placeholder,
-      toolbarsConfig,
     };
 
     const mergedRCProps = merge(strategyProps, _rcProps, ricosPropsToMerge, children.props);
