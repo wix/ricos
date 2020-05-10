@@ -142,6 +142,7 @@ const EditorWrapper = ({
   isMobile = false,
   toolbarsConfig,
   pluginsToDisplay,
+  _rcProps,
 }) => {
   const editorPlugins = pluginsToDisplay
     ? pluginsToDisplay.map(plugin => pluginsMap[plugin])
@@ -154,6 +155,7 @@ const EditorWrapper = ({
       contentState={contentState}
       isMobile={isMobile}
       toolbarsConfig={toolbarsConfig}
+      _rcProps={_rcProps}
     >
       <RichContentEditor helpers={{ onFilesChange }} onChange={onChange} />
     </RicosEditor>
@@ -167,6 +169,7 @@ EditorWrapper.propTypes = {
   isMobile: PropTypes.bool,
   toolbarsConfig: PropTypes.object,
   pluginsToDisplay: PropTypes.arrayOf(PropTypes.string),
+  _rcProps: PropTypes.object,
 };
 
 export default EditorWrapper;
